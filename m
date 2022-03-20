@@ -2,63 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 974FF4E869B
-	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 09:44:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB3B84E86A2
+	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 09:44:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1DD1710E0CB;
-	Sun, 27 Mar 2022 07:44:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 123C610E1A4;
+	Sun, 27 Mar 2022 07:44:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from pegase2.c-s.fr (pegase2.c-s.fr [93.17.235.10])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8569210F3C3;
- Sat, 19 Mar 2022 10:28:12 +0000 (UTC)
-Received: from localhost (mailhub3.si.c-s.fr [172.26.127.67])
- by localhost (Postfix) with ESMTP id 4KLHCG2thjz9sSW;
- Sat, 19 Mar 2022 11:28:10 +0100 (CET)
-X-Virus-Scanned: amavisd-new at c-s.fr
-Received: from pegase2.c-s.fr ([172.26.127.65])
- by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id mm8j_WRInuZR; Sat, 19 Mar 2022 11:28:10 +0100 (CET)
-Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase2.c-s.fr (Postfix) with ESMTP id 4KLHCG1bXGz9sSP;
- Sat, 19 Mar 2022 11:28:10 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 18F288B76C;
- Sat, 19 Mar 2022 11:28:10 +0100 (CET)
-X-Virus-Scanned: amavisd-new at c-s.fr
-Received: from messagerie.si.c-s.fr ([127.0.0.1])
- by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id a17gy9YEoaHD; Sat, 19 Mar 2022 11:28:09 +0100 (CET)
-Received: from PO20335.IDSI0.si.c-s.fr (unknown [192.168.202.222])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id C04188B765;
- Sat, 19 Mar 2022 11:28:09 +0100 (CET)
-Received: from PO20335.IDSI0.si.c-s.fr (localhost [127.0.0.1])
- by PO20335.IDSI0.si.c-s.fr (8.17.1/8.16.1) with ESMTPS id 22JARwNd456602
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Sat, 19 Mar 2022 11:27:58 +0100
-Received: (from chleroy@localhost)
- by PO20335.IDSI0.si.c-s.fr (8.17.1/8.17.1/Submit) id 22JARuTD456594;
- Sat, 19 Mar 2022 11:27:56 +0100
-X-Authentication-Warning: PO20335.IDSI0.si.c-s.fr: chleroy set sender to
- christophe.leroy@csgroup.eu using -f
-From: Christophe Leroy <christophe.leroy@csgroup.eu>
-To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>
-Date: Sat, 19 Mar 2022 11:27:51 +0100
-Message-Id: <7e0612b61511ec8030e3b2dcbfaa7751781c8b91.1647684507.git.christophe.leroy@csgroup.eu>
-X-Mailer: git-send-email 2.35.1
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9B05988735
+ for <nouveau@lists.freedesktop.org>; Sun, 20 Mar 2022 12:04:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1647777854;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=9OfrrvJ+JSNxjBs8qAJPKPxz/pmLtZ2ITjpHEArPw5E=;
+ b=RNM2hDPx/BuydcEGMaDPuIaI2BD33giuOYfEV6AIYnkPJcwIUzDFtdoLqcM196GMiiYXie
+ fsR6ecLotW6stPnE40yLWRCsxB7cM4329NQ3ELfBZ8aegmWwpK/MHPjtLxIoZyzQfrKLEv
+ OVS4dIDn/qxWT1EUxoErDFf8VqEPKc0=
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-483-w3eYX4zDNIGrwpecmJf0Jw-1; Sun, 20 Mar 2022 08:04:12 -0400
+X-MC-Unique: w3eYX4zDNIGrwpecmJf0Jw-1
+Received: by mail-ej1-f70.google.com with SMTP id
+ hr26-20020a1709073f9a00b006d6d1ee8cf8so5894164ejc.19
+ for <nouveau@lists.freedesktop.org>; Sun, 20 Mar 2022 05:04:12 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=9OfrrvJ+JSNxjBs8qAJPKPxz/pmLtZ2ITjpHEArPw5E=;
+ b=cWorCU1gKiE4iGJaszih4bwMbmeRrPaLhw4sQBtrWwtbPvKGDZz1yyOcy8k2mRKBFv
+ jdMcAogTh4DJuBWxl6NctSG7eEXmk3PSCuBvv1FA5t/kf+oGXQylH2B45wQS+gx9pb60
+ X72oC4TRoOsbVgxfzNQzOX0SwYpeofo+09Pph2tKn2WPkrb5EOVKkhJHiINQUHjnsy/j
+ MSe7VxifW+IGO8EXT4eESPNEuTNQErahqYzj6lmWV9+8LqbAqMFK1G5ALh1ug4qqUKbX
+ pUftQ+/iIZ4AShoH5S7fpRAp7cfQtCQtDxVh+GzlMDq3PqtmvF3ix+clYmHLQtjnI1lW
+ T7tQ==
+X-Gm-Message-State: AOAM533hiC4AAcmjAu6VvtekUin1ANkE33bFYDCSohRP+Z9V7+1hvdjT
+ nV86NKTc0eJCI1jvkQjjozf4xEGRu0mSjI4y98WBddMbien4A3kd2rU8cHrQ+3lG+R8HZSMQPSJ
+ Y0S1HS3Ga5hskwbPvPgdjyAGYVQ==
+X-Received: by 2002:a17:907:7e88:b0:6db:ad88:2294 with SMTP id
+ qb8-20020a1709077e8800b006dbad882294mr16017783ejc.371.1647777851459; 
+ Sun, 20 Mar 2022 05:04:11 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJybuaY3RTwLFhNmn8ph3qfEMlXOeFvtOmTr+FUYne4h/XgSMGx9RwM3ZmeWDHdWHYLvNIiqSA==
+X-Received: by 2002:a17:907:7e88:b0:6db:ad88:2294 with SMTP id
+ qb8-20020a1709077e8800b006dbad882294mr16017754ejc.371.1647777851178; 
+ Sun, 20 Mar 2022 05:04:11 -0700 (PDT)
+Received: from redhat.com ([2.55.132.0]) by smtp.gmail.com with ESMTPSA id
+ hb6-20020a170907160600b006dff6a979fdsm856220ejc.51.2022.03.20.05.04.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 20 Mar 2022 05:04:10 -0700 (PDT)
+Date: Sun, 20 Mar 2022 08:04:00 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Randy Dunlap <rdunlap@infradead.org>
+Message-ID: <20220320080242-mutt-send-email-mst@kernel.org>
+References: <20220316192010.19001-1-rdunlap@infradead.org>
+ <20220316192010.19001-2-rdunlap@infradead.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1647685669; l=3722; s=20211009;
- h=from:subject:message-id; bh=y5DQYDGAWf+okMg9sN/L7lksMPfKpXX0wlcMvN+TCx8=;
- b=BT0h00TI+fMGlEX6pCDLyjtx88LkgtnMe1L7kFbayDTiEZXd6XQy/COY5UB6n29i40apuruO6pqn
- hs/Pbx4tCwp2V2DyWFRrCMSLctLldhri/vsSKggV7Xx2XGdvLBsE
-X-Developer-Key: i=christophe.leroy@csgroup.eu; a=ed25519;
- pk=HIzTzUj91asvincQGOFx6+ZF5AoUuP9GdOtQChs7Mm0=
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20220316192010.19001-2-rdunlap@infradead.org>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-Mailman-Approved-At: Sun, 27 Mar 2022 07:44:03 +0000
-Subject: [Nouveau] [PATCH v2] drm/nouveau/bios: Rename prom_init() and
- friends functions
+Subject: Re: [Nouveau] [PATCH 1/9] virtio_blk: eliminate anonymous
+ module_init & module_exit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,106 +83,109 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Christophe Leroy <christophe.leroy@csgroup.eu>, linux-kernel@vger.kernel.org
+Cc: x86@kernel.org, Andy Lutomirski <luto@kernel.org>,
+ Peter Zijlstra <peterz@infradead.org>, nouveau@lists.freedesktop.org,
+ Jason Wang <jasowang@redhat.com>, Dave Hansen <dave.hansen@linux.intel.com>,
+ Valentina Manea <valentina.manea.m@gmail.com>,
+ Krzysztof Opasiak <k.opasiak@samsung.com>, Eli Cohen <eli@mellanox.com>,
+ netdev@vger.kernel.org, Shuah Khan <shuah@kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>, "H. Peter Anvin" <hpa@zytor.com>,
+ Arnd Bergmann <arnd@arndb.de>, Leon Romanovsky <leon@kernel.org>,
+ linux-rdma@vger.kernel.org, Ingo Molnar <mingo@kernel.org>,
+ Jozsef Kadlecsik <kadlec@netfilter.org>, coreteam@netfilter.org,
+ Jakub Kicinski <kuba@kernel.org>,
+ Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+ Pablo Neira Ayuso <pablo@netfilter.org>,
+ Joachim Fritschi <jfritschi@freenet.de>,
+ Felipe Balbi <felipe.balbi@linux.intel.com>, Amit Shah <amit@kernel.org>,
+ "James E.J. Bottomley" <jejb@linux.ibm.com>,
+ Steven Rostedt <rostedt@goodmis.org>,
+ =?utf-8?B?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>,
+ linux-block@vger.kernel.org, Pekka Paalanen <ppaalanen@gmail.com>,
+ Borislav Petkov <bp@alien8.de>, Stefan Hajnoczi <stefanha@redhat.com>,
+ Shuah Khan <skhan@linuxfoundation.org>,
+ Jussi Kivilinna <jussi.kivilinna@mbnet.fi>,
+ virtualization@lists.linux-foundation.org,
+ Herbert Xu <herbert@gondor.apana.org.au>, Jens Axboe <axboe@kernel.dk>,
+ linux-scsi@vger.kernel.org, "Martin K. Petersen" <martin.petersen@oracle.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-usb@vger.kernel.org,
+ Florian Westphal <fw@strlen.de>, linux-kernel@vger.kernel.org,
+ netfilter-devel@vger.kernel.org, linux-crypto@vger.kernel.org,
+ Igor Kotrasinski <i.kotrasinsk@samsung.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Saeed Mahameed <saeedm@nvidia.com>,
+ "David S. Miller" <davem@davemloft.net>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-While working at fixing powerpc headers, I ended up with the
-following error.
+On Wed, Mar 16, 2022 at 12:20:02PM -0700, Randy Dunlap wrote:
+> Eliminate anonymous module_init() and module_exit(), which can lead to
+> confusion or ambiguity when reading System.map, crashes/oops/bugs,
+> or an initcall_debug log.
+> 
+> Give each of these init and exit functions unique driver-specific
+> names to eliminate the anonymous names.
+> 
+> Example 1: (System.map)
+>  ffffffff832fc78c t init
+>  ffffffff832fc79e t init
+>  ffffffff832fc8f8 t init
+> 
+> Example 2: (initcall_debug log)
+>  calling  init+0x0/0x12 @ 1
+>  initcall init+0x0/0x12 returned 0 after 15 usecs
+>  calling  init+0x0/0x60 @ 1
+>  initcall init+0x0/0x60 returned 0 after 2 usecs
+>  calling  init+0x0/0x9a @ 1
+>  initcall init+0x0/0x9a returned 0 after 74 usecs
+> 
+> Fixes: e467cde23818 ("Block driver using virtio.")
+> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+> Cc: "Michael S. Tsirkin" <mst@redhat.com>
+> Cc: Jason Wang <jasowang@redhat.com>
+> Cc: Paolo Bonzini <pbonzini@redhat.com>
+> Cc: Stefan Hajnoczi <stefanha@redhat.com>
+> Cc: virtualization@lists.linux-foundation.org
+> Cc: Jens Axboe <axboe@kernel.dk>
+> Cc: linux-block@vger.kernel.org
 
-	drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c:48:1: error: conflicting types for 'prom_init'; have 'void *(struct nvkm_bios *, const char *)'
-	make[5]: *** [scripts/Makefile.build:288: drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.o] Error 1
 
-powerpc and a few other architectures have a prom_init() global function.
-One day or another it will conflict with the one in shadowrom.c
+If this is done tree-wide, it's ok to do it for virtio too.
 
-Those being static, they can easily be renamed. Do it.
+Acked-by: Michael S. Tsirkin <mst@redhat.com>
 
-While at it, also rename the ops structure as 'nvbios_prom' instead of
-'nvbios_rom' in order to make it clear that it refers to the
-NV_PROM device.
+No real opinion on whether it's a good idea.
 
-Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
----
-v2: using nvbios_prom prefix instead of nvbios_rom. Changed structure name to keep things consistant.
-
- drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h    |  2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c  |  2 +-
- .../gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c   | 14 +++++++-------
- 3 files changed, 9 insertions(+), 9 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
-index fac1bff1311b..cfa8a0c356dd 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
-@@ -19,7 +19,7 @@ struct nvbios_source {
- int nvbios_extend(struct nvkm_bios *, u32 length);
- int nvbios_shadow(struct nvkm_bios *);
- 
--extern const struct nvbios_source nvbios_rom;
-+extern const struct nvbios_source nvbios_prom;
- extern const struct nvbios_source nvbios_ramin;
- extern const struct nvbios_source nvbios_acpi_fast;
- extern const struct nvbios_source nvbios_acpi_slow;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
-index 4b571cc6bc70..19188683c8fc 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
-@@ -171,7 +171,7 @@ nvbios_shadow(struct nvkm_bios *bios)
- 	struct shadow mthds[] = {
- 		{ 0, &nvbios_of },
- 		{ 0, &nvbios_ramin },
--		{ 0, &nvbios_rom },
-+		{ 0, &nvbios_prom },
- 		{ 0, &nvbios_acpi_fast },
- 		{ 4, &nvbios_acpi_slow },
- 		{ 1, &nvbios_pcirom },
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
-index ffa4b395220a..39144ceb117b 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
-@@ -25,7 +25,7 @@
- #include <subdev/pci.h>
- 
- static u32
--prom_read(void *data, u32 offset, u32 length, struct nvkm_bios *bios)
-+nvbios_prom_read(void *data, u32 offset, u32 length, struct nvkm_bios *bios)
- {
- 	struct nvkm_device *device = data;
- 	u32 i;
-@@ -38,14 +38,14 @@ prom_read(void *data, u32 offset, u32 length, struct nvkm_bios *bios)
- }
- 
- static void
--prom_fini(void *data)
-+nvbios_prom_fini(void *data)
- {
- 	struct nvkm_device *device = data;
- 	nvkm_pci_rom_shadow(device->pci, true);
- }
- 
- static void *
--prom_init(struct nvkm_bios *bios, const char *name)
-+nvbios_prom_init(struct nvkm_bios *bios, const char *name)
- {
- 	struct nvkm_device *device = bios->subdev.device;
- 	if (device->card_type == NV_40 && device->chipset >= 0x4c)
-@@ -55,10 +55,10 @@ prom_init(struct nvkm_bios *bios, const char *name)
- }
- 
- const struct nvbios_source
--nvbios_rom = {
-+nvbios_prom = {
- 	.name = "PROM",
--	.init = prom_init,
--	.fini = prom_fini,
--	.read = prom_read,
-+	.init = nvbios_prom_init,
-+	.fini = nvbios_prom_fini,
-+	.read = nvbios_prom_read,
- 	.rw = false,
- };
--- 
-2.35.1
+> ---
+>  drivers/block/virtio_blk.c |    8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+> 
+> --- lnx-517-rc8.orig/drivers/block/virtio_blk.c
+> +++ lnx-517-rc8/drivers/block/virtio_blk.c
+> @@ -1058,7 +1058,7 @@ static struct virtio_driver virtio_blk =
+>  #endif
+>  };
+>  
+> -static int __init init(void)
+> +static int __init virtio_blk_init(void)
+>  {
+>  	int error;
+>  
+> @@ -1084,14 +1084,14 @@ out_destroy_workqueue:
+>  	return error;
+>  }
+>  
+> -static void __exit fini(void)
+> +static void __exit virtio_blk_fini(void)
+>  {
+>  	unregister_virtio_driver(&virtio_blk);
+>  	unregister_blkdev(major, "virtblk");
+>  	destroy_workqueue(virtblk_wq);
+>  }
+> -module_init(init);
+> -module_exit(fini);
+> +module_init(virtio_blk_init);
+> +module_exit(virtio_blk_fini);
+>  
+>  MODULE_DEVICE_TABLE(virtio, id_table);
+>  MODULE_DESCRIPTION("Virtio block driver");
 
