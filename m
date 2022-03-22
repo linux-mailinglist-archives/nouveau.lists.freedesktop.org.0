@@ -2,74 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE4B74E3EC0
-	for <lists+nouveau@lfdr.de>; Tue, 22 Mar 2022 13:48:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1690C4E45EB
+	for <lists+nouveau@lfdr.de>; Tue, 22 Mar 2022 19:25:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C2E2510E55F;
-	Tue, 22 Mar 2022 12:48:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9EF4310E0AD;
+	Tue, 22 Mar 2022 18:25:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1CF8910E2D5
- for <nouveau@lists.freedesktop.org>; Tue, 22 Mar 2022 12:48:05 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A6B9A10E0AD
+ for <nouveau@lists.freedesktop.org>; Tue, 22 Mar 2022 18:25:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1647953284;
+ s=mimecast20190719; t=1647973527;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=u9yrNlkYpunaRytWgUY4ikU4zuFUDmjdz1rHYai2Yfg=;
- b=LrUbzTqA78uqUxQ8Tvk/oJ43s1iQsvKBHLk6tkVzhpZO2MXeqTfYuGoq4So4dOpgzvwznL
- az0PSlcgMdFM7/ZzrWxXD9BSqkCzuBib4rcr7P5/ZZK9WjsHsyAuZtqLgt3DZhEueWgZPj
- jGi7W9KvqO8x4iArEN4SvylwZ73/gI4=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=rXgow+Fz8VabLqwfX1YnqBgMgAP8Ti50IVG/j8LoHic=;
+ b=IuV/wIVN70hk/ql4WzWrrM11mjj8ZKkgjsRcu+C5TLjWehVyfVZUxLmLapNWpL7yPl4U2b
+ WKVODo31YOOTNbypeuWRZO1sOcUteV2wec+SNuvy2o9uVVZ01OZAPuFmiMTGtkLOJc5atN
+ uuE1V6tGYbtS/E/uHDyu/A4J2jWwavI=
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-414-JjUGsb2dNuKeXCfW---IZw-1; Tue, 22 Mar 2022 08:48:03 -0400
-X-MC-Unique: JjUGsb2dNuKeXCfW---IZw-1
-Received: by mail-wm1-f69.google.com with SMTP id
- r9-20020a1c4409000000b0038c15a1ed8cso1182946wma.7
- for <nouveau@lists.freedesktop.org>; Tue, 22 Mar 2022 05:48:03 -0700 (PDT)
+ us-mta-34-lTA_P4y4O4a8Ckm46qaAIA-1; Tue, 22 Mar 2022 14:25:26 -0400
+X-MC-Unique: lTA_P4y4O4a8Ckm46qaAIA-1
+Received: by mail-qv1-f70.google.com with SMTP id
+ d11-20020a0cffab000000b00440f965f77cso10312842qvv.4
+ for <nouveau@lists.freedesktop.org>; Tue, 22 Mar 2022 11:25:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+ :references:organization:user-agent:mime-version
  :content-transfer-encoding;
- bh=u9yrNlkYpunaRytWgUY4ikU4zuFUDmjdz1rHYai2Yfg=;
- b=rlg9j1H2OGiyfR+SyeiGOwJZHP/JNt80OPjA15Kpf8nzJ4XJJDTCfzSsY6RSwE2+K1
- uWs7Lw01Nj41czn6Sv9yT8zGHfL/Nbresfk8BcRbMPzsNNLAyPHEvE8SGaIf3PEFdccq
- DT2dNthzz/qexPOvW1nem4NwnbybXKyAA/hlnRzYK/n6UuLSq/bqg9owgQDB6cwGrq/K
- SzEIOIKq39i9W93RI8DdEINSqkDvCS7fiAxOcThTlHS4bO8jGxZOyxxMrZ5gV4294HI0
- mLBZSWj4vcL7ZLH6t7xOOFux1a2DyGJJvS4Ujkd50GVfmAB6zqlbBEcaFLbvO0o7P0mM
- fSzg==
-X-Gm-Message-State: AOAM531XpvQYtih+yWZmTscOFwHUyXhkTeIGUtWN4LZtYLKs+4zXH9Xn
- fIWbwgpWS9M2rR5jD6C/G3HqPq/mZkZ14fIFQ4WaJYU1r1Ia1LcTh5xWPlIoUHXF/3AQgki073T
- OsxjTtDPv+kAo3iIVgKRUgukwvg==
-X-Received: by 2002:a05:600c:5021:b0:38c:70c0:80e9 with SMTP id
- n33-20020a05600c502100b0038c70c080e9mr3610560wmr.91.1647953282574; 
- Tue, 22 Mar 2022 05:48:02 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyb73Jj3kArrdOmr4xNJ2g6A2tODfvNxCiROA57ukRjloP9coQ4ogSvUIco5W02naEshguG4A==
-X-Received: by 2002:a05:600c:5021:b0:38c:70c0:80e9 with SMTP id
- n33-20020a05600c502100b0038c70c080e9mr3610550wmr.91.1647953282389; 
- Tue, 22 Mar 2022 05:48:02 -0700 (PDT)
-Received: from kherbst.pingu.com ([31.16.187.72])
- by smtp.gmail.com with ESMTPSA id
- s17-20020adfdb11000000b001f02d5fea43sm16823291wri.98.2022.03.22.05.48.01
+ bh=rXgow+Fz8VabLqwfX1YnqBgMgAP8Ti50IVG/j8LoHic=;
+ b=1YXCeNDgEZRLExzcZm5ZdkmMBKTPEkyGk4j5U0CpTlUKzIX/kJZN4KKqQ+qV3BFGnh
+ NNRA98be7gDdxZh8NlLqkE9j9TIwcUtPvGDDDcIaFIwAzxrFlWQDWubsywykKGj8rHbL
+ SbWwcd3gqEGNxukP5QWSXXxgvWrIw7/B9KTPdRcb/JP2Flgm+I5Ly+CPWAJPwy0YY4gY
+ qZm2xYvrFzkfk1L7arQ3ihSkkIhB2n/C6CBTKfdj+JO/bBAvfJWTGuFAuQPAJeqFh+Xa
+ PV+rqgXE2NM5DzSldtYBJxBCK2cp1yrS5+XlEehCYspcWi9SI9XvHiemu3A35BVm/rih
+ C68w==
+X-Gm-Message-State: AOAM5318P9dEULjt+iLOO3lGQhkfLnBl74i8WxsDqKyKZiWspoa2Q+N/
+ kpnN6Qebm87ot20r+A9gM+3yiuBm2boNjusEw5OXitvn17zfcoZkhCFkx66fLxUyG3QcyBZ4AMV
+ n5INanjwT7ZUZbfCPoqLrYBSKIg==
+X-Received: by 2002:a05:6214:29ef:b0:441:4a7a:4c9e with SMTP id
+ jv15-20020a05621429ef00b004414a7a4c9emr2654881qvb.119.1647973525204; 
+ Tue, 22 Mar 2022 11:25:25 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJy6T8sOKqIqpt6ZuCZug9+YoVTnq3+e/xMkvpjYvSkbwVcTedcsYTtRt1S+tnn4xKVvozA1LQ==
+X-Received: by 2002:a05:6214:29ef:b0:441:4a7a:4c9e with SMTP id
+ jv15-20020a05621429ef00b004414a7a4c9emr2654861qvb.119.1647973524924; 
+ Tue, 22 Mar 2022 11:25:24 -0700 (PDT)
+Received: from [192.168.8.138] (pool-96-230-100-15.bstnma.fios.verizon.net.
+ [96.230.100.15]) by smtp.gmail.com with ESMTPSA id
+ i7-20020ac85e47000000b002e22bad4717sm525995qtx.1.2022.03.22.11.25.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Mar 2022 05:48:01 -0700 (PDT)
-From: Karol Herbst <kherbst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Date: Tue, 22 Mar 2022 13:48:00 +0100
-Message-Id: <20220322124800.2605463-1-kherbst@redhat.com>
-X-Mailer: git-send-email 2.35.1
+ Tue, 22 Mar 2022 11:25:24 -0700 (PDT)
+Message-ID: <f6e72c6e6d9ae9019ad675081493372f745cbbf5.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Christophe Leroy <christophe.leroy@csgroup.eu>, Ben Skeggs
+ <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>, David Airlie
+ <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>
+Date: Tue, 22 Mar 2022 14:25:22 -0400
+In-Reply-To: <7e0612b61511ec8030e3b2dcbfaa7751781c8b91.1647684507.git.christophe.leroy@csgroup.eu>
+References: <7e0612b61511ec8030e3b2dcbfaa7751781c8b91.1647684507.git.christophe.leroy@csgroup.eu>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.42.4 (3.42.4-1.fc35)
 MIME-Version: 1.0
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"
-Subject: [Nouveau] [PATCH] drm/nouveau/pmu: Add missing callbacks for Tegra
- devices
+Subject: Re: [Nouveau] [PATCH v2] drm/nouveau/bios: Rename prom_init() and
+ friends functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,76 +88,123 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- stable@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Fixes a crash booting on those platforms with nouveau.
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-Fixes: 4cdd2450bf73 ("drm/nouveau/pmu/gm200-: use alternate falcon reset sequence")
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Karol Herbst <kherbst@redhat.com>
-Cc: dri-devel@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org
-Cc: <stable@vger.kernel.org> # v5.17+
-Signed-off-by: Karol Herbst <kherbst@redhat.com>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gm20b.c | 1 +
- drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp102.c | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c | 1 +
- drivers/gpu/drm/nouveau/nvkm/subdev/pmu/priv.h  | 1 +
- 4 files changed, 4 insertions(+), 1 deletion(-)
+Will push to drm-misc-next
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gm20b.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gm20b.c
-index e1772211b0a4..612310d5d481 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gm20b.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gm20b.c
-@@ -216,6 +216,7 @@ gm20b_pmu = {
- 	.intr = gt215_pmu_intr,
- 	.recv = gm20b_pmu_recv,
- 	.initmsg = gm20b_pmu_initmsg,
-+	.reset = gf100_pmu_reset,
- };
- 
- #if IS_ENABLED(CONFIG_ARCH_TEGRA_210_SOC)
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp102.c
-index 6bf7fc1bd1e3..1a6f9c3af5ec 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp102.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp102.c
-@@ -23,7 +23,7 @@
-  */
- #include "priv.h"
- 
--static void
-+void
- gp102_pmu_reset(struct nvkm_pmu *pmu)
- {
- 	struct nvkm_device *device = pmu->subdev.device;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c
-index ba1583bb618b..94cfb1791af6 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/gp10b.c
-@@ -83,6 +83,7 @@ gp10b_pmu = {
- 	.intr = gt215_pmu_intr,
- 	.recv = gm20b_pmu_recv,
- 	.initmsg = gm20b_pmu_initmsg,
-+	.reset = gp102_pmu_reset,
- };
- 
- #if IS_ENABLED(CONFIG_ARCH_TEGRA_210_SOC)
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/priv.h
-index bcaade758ff7..21abf31f4442 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/priv.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/priv.h
-@@ -41,6 +41,7 @@ int gt215_pmu_send(struct nvkm_pmu *, u32[2], u32, u32, u32, u32);
- 
- bool gf100_pmu_enabled(struct nvkm_pmu *);
- void gf100_pmu_reset(struct nvkm_pmu *);
-+void gp102_pmu_reset(struct nvkm_pmu *pmu);
- 
- void gk110_pmu_pgob(struct nvkm_pmu *, bool);
- 
+On Sat, 2022-03-19 at 11:27 +0100, Christophe Leroy wrote:
+> While working at fixing powerpc headers, I ended up with the
+> following error.
+> 
+>         drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c:48:1: error:
+> conflicting types for 'prom_init'; have 'void *(struct nvkm_bios *, const
+> char *)'
+>         make[5]: *** [scripts/Makefile.build:288:
+> drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.o] Error 1
+> 
+> powerpc and a few other architectures have a prom_init() global function.
+> One day or another it will conflict with the one in shadowrom.c
+> 
+> Those being static, they can easily be renamed. Do it.
+> 
+> While at it, also rename the ops structure as 'nvbios_prom' instead of
+> 'nvbios_rom' in order to make it clear that it refers to the
+> NV_PROM device.
+> 
+> Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
+> ---
+> v2: using nvbios_prom prefix instead of nvbios_rom. Changed structure name
+> to keep things consistant.
+> 
+>  drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h    |  2 +-
+>  drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c  |  2 +-
+>  .../gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c   | 14 +++++++-------
+>  3 files changed, 9 insertions(+), 9 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
+> b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
+> index fac1bff1311b..cfa8a0c356dd 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
+> @@ -19,7 +19,7 @@ struct nvbios_source {
+>  int nvbios_extend(struct nvkm_bios *, u32 length);
+>  int nvbios_shadow(struct nvkm_bios *);
+>  
+> -extern const struct nvbios_source nvbios_rom;
+> +extern const struct nvbios_source nvbios_prom;
+>  extern const struct nvbios_source nvbios_ramin;
+>  extern const struct nvbios_source nvbios_acpi_fast;
+>  extern const struct nvbios_source nvbios_acpi_slow;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
+> b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
+> index 4b571cc6bc70..19188683c8fc 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
+> @@ -171,7 +171,7 @@ nvbios_shadow(struct nvkm_bios *bios)
+>         struct shadow mthds[] = {
+>                 { 0, &nvbios_of },
+>                 { 0, &nvbios_ramin },
+> -               { 0, &nvbios_rom },
+> +               { 0, &nvbios_prom },
+>                 { 0, &nvbios_acpi_fast },
+>                 { 4, &nvbios_acpi_slow },
+>                 { 1, &nvbios_pcirom },
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
+> b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
+> index ffa4b395220a..39144ceb117b 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
+> @@ -25,7 +25,7 @@
+>  #include <subdev/pci.h>
+>  
+>  static u32
+> -prom_read(void *data, u32 offset, u32 length, struct nvkm_bios *bios)
+> +nvbios_prom_read(void *data, u32 offset, u32 length, struct nvkm_bios
+> *bios)
+>  {
+>         struct nvkm_device *device = data;
+>         u32 i;
+> @@ -38,14 +38,14 @@ prom_read(void *data, u32 offset, u32 length, struct
+> nvkm_bios *bios)
+>  }
+>  
+>  static void
+> -prom_fini(void *data)
+> +nvbios_prom_fini(void *data)
+>  {
+>         struct nvkm_device *device = data;
+>         nvkm_pci_rom_shadow(device->pci, true);
+>  }
+>  
+>  static void *
+> -prom_init(struct nvkm_bios *bios, const char *name)
+> +nvbios_prom_init(struct nvkm_bios *bios, const char *name)
+>  {
+>         struct nvkm_device *device = bios->subdev.device;
+>         if (device->card_type == NV_40 && device->chipset >= 0x4c)
+> @@ -55,10 +55,10 @@ prom_init(struct nvkm_bios *bios, const char *name)
+>  }
+>  
+>  const struct nvbios_source
+> -nvbios_rom = {
+> +nvbios_prom = {
+>         .name = "PROM",
+> -       .init = prom_init,
+> -       .fini = prom_fini,
+> -       .read = prom_read,
+> +       .init = nvbios_prom_init,
+> +       .fini = nvbios_prom_fini,
+> +       .read = nvbios_prom_read,
+>         .rw = false,
+>  };
+
 -- 
-2.35.1
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
