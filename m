@@ -2,56 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AE884EABC7
-	for <lists+nouveau@lfdr.de>; Tue, 29 Mar 2022 12:59:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D39C24F03EC
+	for <lists+nouveau@lfdr.de>; Sat,  2 Apr 2022 16:26:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D401D10EFDE;
-	Tue, 29 Mar 2022 10:59:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4CA3010E299;
+	Sat,  2 Apr 2022 14:25:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5153010EFDC;
- Tue, 29 Mar 2022 10:59:19 +0000 (UTC)
-Received: by mail-qk1-x736.google.com with SMTP id 85so13686433qkm.9;
- Tue, 29 Mar 2022 03:59:19 -0700 (PDT)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6DBDE10E028;
+ Sun, 27 Mar 2022 07:58:37 +0000 (UTC)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ o68-20020a17090a0a4a00b001c686a48263so9757544pjo.1; 
+ Sun, 27 Mar 2022 00:58:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=WeHHguGPowcDvWMr7blgBmwq0GWd0bNHBYB846nmBBc=;
- b=R7CuH78vDiYCJvedJaROsJPEXMamwU/N6ut1asPh8lNtVeQ9xie9A2Ck2ZDyCRvwMU
- uzfEsvjCK7IFPpXPluuxrdrunYczj8sdNfT6qCG81bsOmvPDIg82DT1zGFk9FArYB+WR
- XSXgy03C+Bf+1ksfXj8/gqu4dd1Oe0kNaOZ37INj1DE9zjrQwbNVWwjval2REUDLt9lE
- qunnvuK6B0vLkMTUL7QN0Vga8qZiD77UAmhmc+hHt1sDdUHCE1Zsn9ajGIEZHh0x69uH
- 9dfUabQggu7sz3o3gwJibuHG8rmWNTvOfLeSvsZgkSAVVA2ak+oOUxClmbDqt6RYvbwR
- 13BA==
+ h=from:to:cc:subject:date:message-id;
+ bh=UT8NRfVPaniG62r1LWTa4ALoqhuyMOXc7nycNB8eTOA=;
+ b=IiWm+MaVGSQWcTvPQHJw9oeiSuEafCApIsYcgLT9PcPKaKjO5U0l46UqswBFE7S4FM
+ pTuWRpmyp/QUprWVEaZHaKqExU+zPaHnFcNINrjNWUbjef38YetTqjFCz3QeIwUxuaTg
+ 1Xlga1UqkyoFt+H0OQUp8Gdzw3HtqU5IGQl8Try+03ohb9NQqB4Nm4vG8F1lXCJQDOE0
+ WFwxJ5taH2lOSTknX0C0Fvl8XXo7ueYxTyfUTDjtHqmKLsj3kPgyefk7soFmVO47vhH4
+ RugDLjc6whGtUDvAkwhBQIIJN4CJv2D11lF/OjFdivACDcK8vMk1hReH4AsLSPA3+RDz
+ LVHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=WeHHguGPowcDvWMr7blgBmwq0GWd0bNHBYB846nmBBc=;
- b=nALNhUgabra84CUo5GUwYCfisvE80UTTRjdo3F9G4+iM1yRmZV2mSW5otUJMRdWJm7
- 4wHNOevkWSFh7wRewXoV1SNvdKACnsdXJc2W0pZ9HmqHj7VmlK+NtZHqUPPqj6+YVobo
- neoov5i/+j2VqorfCKvSI+XJmJwNVxeqfbruGeeynV0N+GfxjKHyc6BJ88jCM/CSbmiT
- CYuVVV3q4K9cqbhILF8FLq/97w14FV5dwA7/EUNurGjunADg+PpJOg8LopyngOgNPenR
- Z/aafnOPSJvSWGPl0ffYv2es66uTyA+6WOZUBSJSQOMR2ShOgXner331s2qUf3Xm0lR6
- rS7g==
-X-Gm-Message-State: AOAM532IEji7nBn4iEqQDXW2bKK5avIExjfLO14ulG20xt8bSAuOkQDu
- cPlzlkBUg9up36ReHshBYWanoZGzl6EsgZfqT/U=
-X-Google-Smtp-Source: ABdhPJwqoYi0XNT2COlvQmgCNj2NZw3NxFJuyzWhrMjioYDWM7gCjvABPKquYY1SZkpt4YqN7g6vw9+QeilGXieqBvY=
-X-Received: by 2002:a37:a644:0:b0:680:9e24:6583 with SMTP id
- p65-20020a37a644000000b006809e246583mr18903701qke.366.1648551558094; Tue, 29
- Mar 2022 03:59:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <CACvgo50pK3rr5UH_FyfR1pADmPRjEawi43cAecoaz7nM5AFgBg@mail.gmail.com>
- <20220328020902.19369-1-xiam0nd.tong@gmail.com>
-In-Reply-To: <20220328020902.19369-1-xiam0nd.tong@gmail.com>
-From: Emil Velikov <emil.l.velikov@gmail.com>
-Date: Tue, 29 Mar 2022 11:59:06 +0100
-Message-ID: <CACvgo5342xQHb07FVK4beXWgFexZR0LyODEqemE3y1subnEw1Q@mail.gmail.com>
-To: Xiaomeng Tong <xiam0nd.tong@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH] dispnv50: atom: fix an incorrect NULL check
- on list iterator
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=UT8NRfVPaniG62r1LWTa4ALoqhuyMOXc7nycNB8eTOA=;
+ b=WHZI5rWG5Ip5N9U4CbGgxm1rdV/PExBdHBhBHB6Ajg7YIqDm4PIit92OhpdylO5Mcw
+ KQSQO0YfvYzXRJpvgky82w17i4735TkvEdPKzZAYxYOflyAp/YdiujdKg0nABCm27L6H
+ 6xK3YyaU0eYQWa7pZFhGEct6BOonbK+JcureFRica5xDzL3adBxPeTnAM1RssX/DYgCV
+ V1nPOVNIAsD3KbzTMMNjH7oVKlShHWmTvESBCo22CJKZJZGk211dcj2NNgsgzH2aVmNK
+ WpsRaTDESmoG6C/6hX2gG2oKpTPZjdC1AXAQ6pmPSEdkKKnIgNmA8NeP4k1XQVK3Pp6Y
+ Sv6w==
+X-Gm-Message-State: AOAM532A1u+tPZ2dmVH2/KX2Jg3azncSF+jjeK4vOL8qKPwQjkrT1ImO
+ eK9D6w+RW9e5gYNltYZL4s4=
+X-Google-Smtp-Source: ABdhPJyhzeqXeHB5NEFBpmEy8HKFAwwTzpPRxKd7M8ALdpLmqrObhT2u1f8FqSk0MuM5Zd5KZoyd6Q==
+X-Received: by 2002:a17:90b:17c5:b0:1c6:3639:7daf with SMTP id
+ me5-20020a17090b17c500b001c636397dafmr22491743pjb.105.1648367917077; 
+ Sun, 27 Mar 2022 00:58:37 -0700 (PDT)
+Received: from localhost ([115.220.243.108]) by smtp.gmail.com with ESMTPSA id
+ d8-20020a056a00198800b004fab740dbe6sm11846197pfl.15.2022.03.27.00.58.35
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Sun, 27 Mar 2022 00:58:36 -0700 (PDT)
+From: Xiaomeng Tong <xiam0nd.tong@gmail.com>
+To: bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com, airlied@linux.ie,
+ daniel@ffwll.ch
+Date: Sun, 27 Mar 2022 15:58:24 +0800
+Message-Id: <20220327075824.11806-1-xiam0nd.tong@gmail.com>
+X-Mailer: git-send-email 2.17.1
+X-Mailman-Approved-At: Sat, 02 Apr 2022 14:25:58 +0000
+Subject: [Nouveau] [PATCH] clk: base: fix an incorrect NULL check on list
+ iterator
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,52 +65,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dave Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- "Linux-Kernel@Vger. Kernel. Org" <linux-kernel@vger.kernel.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- yangyingliang@huawei.com, "# 3.13+" <stable@vger.kernel.org>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org, Xiaomeng Tong <xiam0nd.tong@gmail.com>,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, 28 Mar 2022 at 03:09, Xiaomeng Tong <xiam0nd.tong@gmail.com> wrote:
->
-> on Sun, 27 Mar 2022 16:59:28 +0100, Emil Velikov wrote:
-> > On Sun, 27 Mar 2022 at 08:39, Xiaomeng Tong <xiam0nd.tong@gmail.com> wrote:
-> > >
-> > > The bug is here:
-> > >         return encoder;
-> > >
-> > > The list iterator value 'encoder' will *always* be set and non-NULL
-> > > by drm_for_each_encoder_mask(), so it is incorrect to assume that the
-> > > iterator value will be NULL if the list is empty or no element found.
-> > > Otherwise it will bypass some NULL checks and lead to invalid memory
-> > > access passing the check.
-> > >
-> > > To fix this bug, just return 'encoder' when found, otherwise return
-> > > NULL.
-> > >
-> >
-> > Isn't this covered by the upcoming list* iterator rework [1] or is
-> > this another iterator glitch?
->
-> Actually, it is a part of the upcoming work.
->
-> > IMHO we should be looking at fixing the implementation and not the
-> > hundreds of users through the kernel.
-> >
-> > HTH
-> > -Emil
-> > [1] https://lwn.net/Articles/887097/
->
-> Yes, you are right. This has also been taken into account by the upcoming
-> list iterator rework to avoid a lot uesr' changes as much as possible.
->
-> However, this patch is fixing a potential bug caused by incorrect use of
-> list iterator outside the loop, which can not be fixed by the implementation
-> itself.
->
+The bug is here:
+	if (nvkm_cstate_valid(clk, cstate, max_volt, clk->temp))
+		return cstate;
 
-I see, thanks for the information o/
+The list iterator value 'cstate' will *always* be set and non-NULL
+by list_for_each_entry_from_reverse(), so it is incorrect to assume
+that the iterator value will be unchanged if the list is empty or no
+element is found (In fact, it will be a bogus pointer to an invalid
+structure object containing the HEAD). Also it missed a NULL check
+at callsite and may lead to invalid memory access after that.
 
--Emil
+To fix this bug, just return 'encoder' when found, otherwise return
+NULL. And add the NULL check.
+
+Cc: stable@vger.kernel.org
+Fixes: 1f7f3d91ad38a ("drm/nouveau/clk: Respect voltage limits in nvkm_cstate_prog")
+Signed-off-by: Xiaomeng Tong <xiam0nd.tong@gmail.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c
+index 57199be082fd..c2b5cc5f97ed 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c
+@@ -135,10 +135,10 @@ nvkm_cstate_find_best(struct nvkm_clk *clk, struct nvkm_pstate *pstate,
+ 
+ 	list_for_each_entry_from_reverse(cstate, &pstate->list, head) {
+ 		if (nvkm_cstate_valid(clk, cstate, max_volt, clk->temp))
+-			break;
++			return cstate;
+ 	}
+ 
+-	return cstate;
++	return NULL;
+ }
+ 
+ static struct nvkm_cstate *
+@@ -169,6 +169,8 @@ nvkm_cstate_prog(struct nvkm_clk *clk, struct nvkm_pstate *pstate, int cstatei)
+ 	if (!list_empty(&pstate->list)) {
+ 		cstate = nvkm_cstate_get(clk, pstate, cstatei);
+ 		cstate = nvkm_cstate_find_best(clk, pstate, cstate);
++		if (!cstate)
++			return -EINVAL;
+ 	} else {
+ 		cstate = &pstate->base;
+ 	}
+-- 
+2.17.1
+
