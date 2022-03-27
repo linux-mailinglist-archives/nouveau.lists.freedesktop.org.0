@@ -1,79 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EFB94E883C
-	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 16:47:34 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C3D44E889F
+	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 17:59:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8178410E1B0;
-	Sun, 27 Mar 2022 14:47:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9A92110E3A1;
+	Sun, 27 Mar 2022 15:59:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 1371 seconds by postgrey-1.36 at gabe;
- Sun, 27 Mar 2022 14:47:28 UTC
-Received: from gateway24.websitewelcome.com (gateway24.websitewelcome.com
- [192.185.51.172])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 062C610E1B0
- for <nouveau@lists.freedesktop.org>; Sun, 27 Mar 2022 14:47:28 +0000 (UTC)
-Received: from cm14.websitewelcome.com (cm14.websitewelcome.com [100.42.49.7])
- by gateway24.websitewelcome.com (Postfix) with ESMTP id 61B472133CF
- for <nouveau@lists.freedesktop.org>;
- Sun, 27 Mar 2022 09:22:29 -0500 (CDT)
-Received: from 162-215-252-75.unifiedlayer.com ([208.91.199.152])
- by cmsmtp with SMTP
- id YTmnnIXenHnotYTmnnEpY0; Sun, 27 Mar 2022 09:22:29 -0500
-X-Authority-Reason: nr=8
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=roeck-us.net; s=default; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
- :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=G/veNDzCNS5/sUVFJGizo3guRLL8pkQ0CB/O7gGvVxs=; b=EmL8qGcra7Wt23Kn0RbrN6quHi
- J9CWPtYJEhIPgJRb0guYbe+vH7gLtxbxdq5KxZR1SEeb/j1WKvTUVEa/0ifN69o8yjv+4QVKhKcps
- 1aNwkwqofgKirE16tEjtE6h4A4XcLxRQhWKRJmArD9fE8Ts0ZAtSZBn9dFiU3k5B4mbLK0q3vEkA1
- iIBgjiYyJ0aOC/aHbDTZY3Q4DUWDMbQi56BtouuRTeEJm9dkf/8UXQwGb2zZaer7PPJUmotpipCWk
- Et5tlgfFS1ipzFrDJyH1XwWC9NXuEjV/5GYgihu8DzqTBPXj6HFRbBoozuLZy4+8Kb+TkLBeJcMSS
- whTuAXMQ==;
-Received: from 108-223-40-66.lightspeed.sntcca.sbcglobal.net
- ([108.223.40.66]:54514)
- by bh-25.webhostbox.net with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <linux@roeck-us.net>)
- id 1nYTmm-001lFq-Md; Sun, 27 Mar 2022 14:22:28 +0000
-Message-ID: <10cdb7dc-c210-8439-dacc-4338d3070f7f@roeck-us.net>
-Date: Sun, 27 Mar 2022 07:22:27 -0700
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AA65710E397;
+ Sun, 27 Mar 2022 15:59:40 +0000 (UTC)
+Received: by mail-qk1-x736.google.com with SMTP id r127so9635231qke.13;
+ Sun, 27 Mar 2022 08:59:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=3ZnzCFRByXntSU7k5TRZSgVAD599ZPHNRY98L+OsrQw=;
+ b=DqBfb5jIk2ktmkrV+knoXXQmcfSvVoQoTGiplm8hYemtLvRyRO0gCc9VF/3i6MWNEh
+ P3Kg5/MCveBJhKIZ5HfuscK8u1hQP20FZslvKQNhbYKkjqUjRfBbEZhOZCR5UsCZKb4I
+ rwHgIioqNxZEzAQn8z7BLR8cSQQS4WT/b+mcXAljKFnjXpWFhVWYTkHXYfaMJ/zHfbjI
+ wchaEKOaK1D0lz/vzsjvJ5vhjNm7ylxVJzdDbKcd8w+PzS4KRNTO9L2JHmoqOl+1gV8O
+ KBSFOj0Z5ThEMhqbqT/h3lX1mE96yhGdAkHgM2j5JKiKDeplMIsG77RHO7dUaOXTtZsP
+ Jmuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=3ZnzCFRByXntSU7k5TRZSgVAD599ZPHNRY98L+OsrQw=;
+ b=NTVll7oMKXtI/cJOXB3CRwRJ5R/FuiSwRM9ouJupuG1NOrF6C5esVYrE+52gx4YHqn
+ qLkmClCs735nAcy02ItH4WziNBh8JhT7Oxo9wDQ1hRIMLLBuw3rduiqx0wUi7rdgR+qg
+ IEGTgKLYh4GRJfGO8O+5+NeikGhAJCTi9HKk7sDPNphH7kujkia49oUlXQRKIHFZWh6/
+ a3uS7BMYB/fK+rjUb05SRiX+yU9nlIHiAFFgCOME5EgghZQxQvwL6T+oFWKzSLpUG4ax
+ hG+uS2pytKOutdNb9YZhvvvGNRsMFnLod2+nUxVWBr8fiH8y0GQl5gtsUSUNjnxeT9wr
+ X0nQ==
+X-Gm-Message-State: AOAM532qj4IY8+MFVmfkYKZGm0TbNCsmZpsIKPcWkQKo4osaYhLIiex2
+ X8Cv3wiwWy0IhSs2ftWgGrnu9Wt6Y7LcIMxRc8E=
+X-Google-Smtp-Source: ABdhPJxdniX0MXVep0Yv4bjS9+PKe9AQZapJOFcqCjRTA5QaiGCa9suZ8apvfMlweJa5b3areRFbKMEWvgqcTmDfwtQ=
+X-Received: by 2002:a05:620a:1a87:b0:680:cba9:ed5c with SMTP id
+ bl7-20020a05620a1a8700b00680cba9ed5cmr2151933qkb.482.1648396779731; Sun, 27
+ Mar 2022 08:59:39 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Content-Language: en-US
+References: <20220327073925.11121-1-xiam0nd.tong@gmail.com>
+In-Reply-To: <20220327073925.11121-1-xiam0nd.tong@gmail.com>
+From: Emil Velikov <emil.l.velikov@gmail.com>
+Date: Sun, 27 Mar 2022 16:59:28 +0100
+Message-ID: <CACvgo50pK3rr5UH_FyfR1pADmPRjEawi43cAecoaz7nM5AFgBg@mail.gmail.com>
 To: Xiaomeng Tong <xiam0nd.tong@gmail.com>
-References: <80429172-37c6-c9ce-4df7-259bb90338a8@roeck-us.net>
- <20220327065950.7886-1-xiam0nd.tong@gmail.com>
-From: Guenter Roeck <linux@roeck-us.net>
-In-Reply-To: <20220327065950.7886-1-xiam0nd.tong@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - bh-25.webhostbox.net
-X-AntiAbuse: Original Domain - lists.freedesktop.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - roeck-us.net
-X-BWhitelist: no
-X-Source-IP: 108.223.40.66
-X-Source-L: No
-X-Exim-ID: 1nYTmm-001lFq-Md
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: 108-223-40-66.lightspeed.sntcca.sbcglobal.net
- [108.223.40.66]:54514
-X-Source-Auth: linux@roeck-us.net
-X-Email-Count: 2
-X-Source-Cap: cm9lY2s7YWN0aXZzdG07YmgtMjUud2ViaG9zdGJveC5uZXQ=
-X-Local-Domain: yes
-Subject: Re: [Nouveau] [PATCH] device: fix missing check on list iterator
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH] dispnv50: atom: fix an incorrect NULL check
+ on list iterator
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,37 +62,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- bskeggs@redhat.com, daniel@ffwll.ch, stable@vger.kernel.org
+Cc: Dave Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
+ "Linux-Kernel@Vger. Kernel. Org" <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ yangyingliang@huawei.com, "# 3.13+" <stable@vger.kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 3/26/22 23:59, Xiaomeng Tong wrote:
-> On Sat, 26 Mar 2022 22:38:05 -0700, Guenter Roeck <linux@roeck-us.net> wrote:
->>> @@ -103,11 +103,16 @@ nvkm_control_mthd_pstate_attr(struct nvkm_control *ctrl, void *data, u32 size)
->>>    		return -EINVAL;
->>>    
->>>    	if (args->v0.state != NVIF_CONTROL_PSTATE_ATTR_V0_STATE_CURRENT) {
->>> -		list_for_each_entry(pstate, &clk->states, head) {
->>> -			if (i++ == args->v0.state)
->>> +		list_for_each_entry(iter, &clk->states, head) {
->>> +			if (i++ == args->v0.state) {
->>> +				pstate = iter;
->>
->> Is iter and the assignment really necessary ? Unless I am missing something,
->> list_for_each_entry() always assigns pos (pstate/iter), even if the list is
->> empty. If nothing is found, pstate would be NULL at the end, so
-> 
-> the pstate will not be NULL at the end! so the assignment is necessary!
-> #define list_for_each_entry(pos, head, member)                          \
->      for (pos = __container_of((head)->next, pos, member);               \
->           &pos->member != (head);                                        \
->           pos = __container_of(pos->member.next, pos, member))
-> 
+On Sun, 27 Mar 2022 at 08:39, Xiaomeng Tong <xiam0nd.tong@gmail.com> wrote:
+>
+> The bug is here:
+>         return encoder;
+>
+> The list iterator value 'encoder' will *always* be set and non-NULL
+> by drm_for_each_encoder_mask(), so it is incorrect to assume that the
+> iterator value will be NULL if the list is empty or no element found.
+> Otherwise it will bypass some NULL checks and lead to invalid memory
+> access passing the check.
+>
+> To fix this bug, just return 'encoder' when found, otherwise return
+> NULL.
+>
 
+Isn't this covered by the upcoming list* iterator rework [1] or is
+this another iterator glitch?
+IMHO we should be looking at fixing the implementation and not the
+hundreds of users through the kernel.
 
-Uuh, yes, you are correct. Sorry for the noise.
-
-Guenter
-
+HTH
+-Emil
+[1] https://lwn.net/Articles/887097/
