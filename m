@@ -2,81 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1690C4E45EB
-	for <lists+nouveau@lfdr.de>; Tue, 22 Mar 2022 19:25:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D054C4E862C
+	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 08:01:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9EF4310E0AD;
-	Tue, 22 Mar 2022 18:25:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 10A7910EBC2;
+	Sun, 27 Mar 2022 06:01:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A6B9A10E0AD
- for <nouveau@lists.freedesktop.org>; Tue, 22 Mar 2022 18:25:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1647973527;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=rXgow+Fz8VabLqwfX1YnqBgMgAP8Ti50IVG/j8LoHic=;
- b=IuV/wIVN70hk/ql4WzWrrM11mjj8ZKkgjsRcu+C5TLjWehVyfVZUxLmLapNWpL7yPl4U2b
- WKVODo31YOOTNbypeuWRZO1sOcUteV2wec+SNuvy2o9uVVZ01OZAPuFmiMTGtkLOJc5atN
- uuE1V6tGYbtS/E/uHDyu/A4J2jWwavI=
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-34-lTA_P4y4O4a8Ckm46qaAIA-1; Tue, 22 Mar 2022 14:25:26 -0400
-X-MC-Unique: lTA_P4y4O4a8Ckm46qaAIA-1
-Received: by mail-qv1-f70.google.com with SMTP id
- d11-20020a0cffab000000b00440f965f77cso10312842qvv.4
- for <nouveau@lists.freedesktop.org>; Tue, 22 Mar 2022 11:25:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=rXgow+Fz8VabLqwfX1YnqBgMgAP8Ti50IVG/j8LoHic=;
- b=1YXCeNDgEZRLExzcZm5ZdkmMBKTPEkyGk4j5U0CpTlUKzIX/kJZN4KKqQ+qV3BFGnh
- NNRA98be7gDdxZh8NlLqkE9j9TIwcUtPvGDDDcIaFIwAzxrFlWQDWubsywykKGj8rHbL
- SbWwcd3gqEGNxukP5QWSXXxgvWrIw7/B9KTPdRcb/JP2Flgm+I5Ly+CPWAJPwy0YY4gY
- qZm2xYvrFzkfk1L7arQ3ihSkkIhB2n/C6CBTKfdj+JO/bBAvfJWTGuFAuQPAJeqFh+Xa
- PV+rqgXE2NM5DzSldtYBJxBCK2cp1yrS5+XlEehCYspcWi9SI9XvHiemu3A35BVm/rih
- C68w==
-X-Gm-Message-State: AOAM5318P9dEULjt+iLOO3lGQhkfLnBl74i8WxsDqKyKZiWspoa2Q+N/
- kpnN6Qebm87ot20r+A9gM+3yiuBm2boNjusEw5OXitvn17zfcoZkhCFkx66fLxUyG3QcyBZ4AMV
- n5INanjwT7ZUZbfCPoqLrYBSKIg==
-X-Received: by 2002:a05:6214:29ef:b0:441:4a7a:4c9e with SMTP id
- jv15-20020a05621429ef00b004414a7a4c9emr2654881qvb.119.1647973525204; 
- Tue, 22 Mar 2022 11:25:25 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJy6T8sOKqIqpt6ZuCZug9+YoVTnq3+e/xMkvpjYvSkbwVcTedcsYTtRt1S+tnn4xKVvozA1LQ==
-X-Received: by 2002:a05:6214:29ef:b0:441:4a7a:4c9e with SMTP id
- jv15-20020a05621429ef00b004414a7a4c9emr2654861qvb.119.1647973524924; 
- Tue, 22 Mar 2022 11:25:24 -0700 (PDT)
-Received: from [192.168.8.138] (pool-96-230-100-15.bstnma.fios.verizon.net.
- [96.230.100.15]) by smtp.gmail.com with ESMTPSA id
- i7-20020ac85e47000000b002e22bad4717sm525995qtx.1.2022.03.22.11.25.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Mar 2022 11:25:24 -0700 (PDT)
-Message-ID: <f6e72c6e6d9ae9019ad675081493372f745cbbf5.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Christophe Leroy <christophe.leroy@csgroup.eu>, Ben Skeggs
- <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>, David Airlie
- <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>
-Date: Tue, 22 Mar 2022 14:25:22 -0400
-In-Reply-To: <7e0612b61511ec8030e3b2dcbfaa7751781c8b91.1647684507.git.christophe.leroy@csgroup.eu>
-References: <7e0612b61511ec8030e3b2dcbfaa7751781c8b91.1647684507.git.christophe.leroy@csgroup.eu>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.42.4 (3.42.4-1.fc35)
+X-Greylist: delayed 1401 seconds by postgrey-1.36 at gabe;
+ Sun, 27 Mar 2022 06:01:31 UTC
+Received: from gateway23.websitewelcome.com (gateway23.websitewelcome.com
+ [192.185.49.219])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 715A510EBC2
+ for <nouveau@lists.freedesktop.org>; Sun, 27 Mar 2022 06:01:31 +0000 (UTC)
+Received: from cm12.websitewelcome.com (cm12.websitewelcome.com [100.42.49.8])
+ by gateway23.websitewelcome.com (Postfix) with ESMTP id EA04127E6
+ for <nouveau@lists.freedesktop.org>; Sun, 27 Mar 2022 00:38:07 -0500 (CDT)
+Received: from 162-215-252-75.unifiedlayer.com ([208.91.199.152])
+ by cmsmtp with SMTP
+ id YLbLnSUAe9AGSYLbLnHjUR; Sun, 27 Mar 2022 00:38:07 -0500
+X-Authority-Reason: nr=8
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=roeck-us.net; s=default; h=Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=BoZuv/9DcRoaynINRpapPayPOCj/UW/KOGZtheWpl6g=; b=nsbzF968mDXRHlfCjmCfVCzcXs
+ boxwI0gpNVWTaETOXxvOQz4jrYIHqbzH3Ly2qTDmULePGx7yzAUPzH8w4zi/WUd6t7HVhN7yPqr9g
+ jrGP4nLezsuHdUEAc/7khJ7k8ov7TKuVgQdvoDa016BqCTXozTwGD3qZ7XsFsJuimmkObCCK4z/BK
+ fTD189BnS4epLA84i8B04dihsc6BvR6BQD5IPSDn8Wzl15Ja0cMVkDOAoDU3k5OK/9Jyqcib7DKHl
+ IkDiCPnbAdxJDzgkzvg/Ln7oEYyeHg27ykTNQxbAAo1trrWsvG5VwotosQiKunMNAkjS1w7NbPuqQ
+ p6s0oyiA==;
+Received: from 108-223-40-66.lightspeed.sntcca.sbcglobal.net
+ ([108.223.40.66]:54512)
+ by bh-25.webhostbox.net with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <linux@roeck-us.net>)
+ id 1nYLbL-004H8z-7i; Sun, 27 Mar 2022 05:38:07 +0000
+Message-ID: <80429172-37c6-c9ce-4df7-259bb90338a8@roeck-us.net>
+Date: Sat, 26 Mar 2022 22:38:05 -0700
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v2] drm/nouveau/bios: Rename prom_init() and
- friends functions
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Content-Language: en-US
+To: Xiaomeng Tong <xiam0nd.tong@gmail.com>, bskeggs@redhat.com
+References: <20220327053139.2572-1-xiam0nd.tong@gmail.com>
+From: Guenter Roeck <linux@roeck-us.net>
+In-Reply-To: <20220327053139.2572-1-xiam0nd.tong@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - bh-25.webhostbox.net
+X-AntiAbuse: Original Domain - lists.freedesktop.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - roeck-us.net
+X-BWhitelist: no
+X-Source-IP: 108.223.40.66
+X-Source-L: No
+X-Exim-ID: 1nYLbL-004H8z-7i
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: 108-223-40-66.lightspeed.sntcca.sbcglobal.net
+ [108.223.40.66]:54512
+X-Source-Auth: linux@roeck-us.net
+X-Email-Count: 3
+X-Source-Cap: cm9lY2s7YWN0aXZzdG07YmgtMjUud2ViaG9zdGJveC5uZXQ=
+X-Local-Domain: yes
+Subject: Re: [Nouveau] [PATCH] device: fix missing check on list iterator
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,123 +83,73 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ stable@vger.kernel.org, daniel@ffwll.ch
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reviewed-by: Lyude Paul <lyude@redhat.com>
-
-Will push to drm-misc-next
-
-On Sat, 2022-03-19 at 11:27 +0100, Christophe Leroy wrote:
-> While working at fixing powerpc headers, I ended up with the
-> following error.
+On 3/26/22 22:31, Xiaomeng Tong wrote:
+> The bug is here:
+> 	lo = pstate->base.domain[domain->name];
 > 
->         drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c:48:1: error:
-> conflicting types for 'prom_init'; have 'void *(struct nvkm_bios *, const
-> char *)'
->         make[5]: *** [scripts/Makefile.build:288:
-> drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.o] Error 1
+> The list iterator 'pstate' will point to a bogus position containing
+> HEAD if the list is empty or no element is found. This case should
+> be checked before any use of the iterator, otherwise it will lead
+> to a invalid memory access.
 > 
-> powerpc and a few other architectures have a prom_init() global function.
-> One day or another it will conflict with the one in shadowrom.c
+> To fix this bug, add an check. Use a new value 'iter' as the list
+> iterator, while use the old value 'pstate' as a dedicated variable
+> to point to the found element.
 > 
-> Those being static, they can easily be renamed. Do it.
-> 
-> While at it, also rename the ops structure as 'nvbios_prom' instead of
-> 'nvbios_rom' in order to make it clear that it refers to the
-> NV_PROM device.
-> 
-> Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
+> Cc: stable@vger.kernel.org
+> Fixes: 9838366c1597d ("drm/nouveau/device: initial control object class, with pstate control methods")
+> Signed-off-by: Xiaomeng Tong <xiam0nd.tong@gmail.com>
 > ---
-> v2: using nvbios_prom prefix instead of nvbios_rom. Changed structure name
-> to keep things consistant.
+>   drivers/gpu/drm/nouveau/nvkm/engine/device/ctrl.c | 11 ++++++++---
+>   1 file changed, 8 insertions(+), 3 deletions(-)
 > 
->  drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h    |  2 +-
->  drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c  |  2 +-
->  .../gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c   | 14 +++++++-------
->  3 files changed, 9 insertions(+), 9 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
-> b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
-> index fac1bff1311b..cfa8a0c356dd 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
-> @@ -19,7 +19,7 @@ struct nvbios_source {
->  int nvbios_extend(struct nvkm_bios *, u32 length);
->  int nvbios_shadow(struct nvkm_bios *);
->  
-> -extern const struct nvbios_source nvbios_rom;
-> +extern const struct nvbios_source nvbios_prom;
->  extern const struct nvbios_source nvbios_ramin;
->  extern const struct nvbios_source nvbios_acpi_fast;
->  extern const struct nvbios_source nvbios_acpi_slow;
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
-> b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
-> index 4b571cc6bc70..19188683c8fc 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
-> @@ -171,7 +171,7 @@ nvbios_shadow(struct nvkm_bios *bios)
->         struct shadow mthds[] = {
->                 { 0, &nvbios_of },
->                 { 0, &nvbios_ramin },
-> -               { 0, &nvbios_rom },
-> +               { 0, &nvbios_prom },
->                 { 0, &nvbios_acpi_fast },
->                 { 4, &nvbios_acpi_slow },
->                 { 1, &nvbios_pcirom },
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
-> b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
-> index ffa4b395220a..39144ceb117b 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
-> @@ -25,7 +25,7 @@
->  #include <subdev/pci.h>
->  
->  static u32
-> -prom_read(void *data, u32 offset, u32 length, struct nvkm_bios *bios)
-> +nvbios_prom_read(void *data, u32 offset, u32 length, struct nvkm_bios
-> *bios)
->  {
->         struct nvkm_device *device = data;
->         u32 i;
-> @@ -38,14 +38,14 @@ prom_read(void *data, u32 offset, u32 length, struct
-> nvkm_bios *bios)
->  }
->  
->  static void
-> -prom_fini(void *data)
-> +nvbios_prom_fini(void *data)
->  {
->         struct nvkm_device *device = data;
->         nvkm_pci_rom_shadow(device->pci, true);
->  }
->  
->  static void *
-> -prom_init(struct nvkm_bios *bios, const char *name)
-> +nvbios_prom_init(struct nvkm_bios *bios, const char *name)
->  {
->         struct nvkm_device *device = bios->subdev.device;
->         if (device->card_type == NV_40 && device->chipset >= 0x4c)
-> @@ -55,10 +55,10 @@ prom_init(struct nvkm_bios *bios, const char *name)
->  }
->  
->  const struct nvbios_source
-> -nvbios_rom = {
-> +nvbios_prom = {
->         .name = "PROM",
-> -       .init = prom_init,
-> -       .fini = prom_fini,
-> -       .read = prom_read,
-> +       .init = nvbios_prom_init,
-> +       .fini = nvbios_prom_fini,
-> +       .read = nvbios_prom_read,
->         .rw = false,
->  };
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/ctrl.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/ctrl.c
+> index ce774579c89d..6b768635e8ba 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/ctrl.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/ctrl.c
+> @@ -72,7 +72,7 @@ nvkm_control_mthd_pstate_attr(struct nvkm_control *ctrl, void *data, u32 size)
+>   	} *args = data;
+>   	struct nvkm_clk *clk = ctrl->device->clk;
+>   	const struct nvkm_domain *domain;
+> -	struct nvkm_pstate *pstate;
+> +	struct nvkm_pstate *pstate = NULL, *iter;
+>   	struct nvkm_cstate *cstate;
+>   	int i = 0, j = -1;
+>   	u32 lo, hi;
+> @@ -103,11 +103,16 @@ nvkm_control_mthd_pstate_attr(struct nvkm_control *ctrl, void *data, u32 size)
+>   		return -EINVAL;
+>   
+>   	if (args->v0.state != NVIF_CONTROL_PSTATE_ATTR_V0_STATE_CURRENT) {
+> -		list_for_each_entry(pstate, &clk->states, head) {
+> -			if (i++ == args->v0.state)
+> +		list_for_each_entry(iter, &clk->states, head) {
+> +			if (i++ == args->v0.state) {
+> +				pstate = iter;
 
--- 
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+Is iter and the assignment really necessary ? Unless I am missing something,
+list_for_each_entry() always assigns pos (pstate/iter), even if the list is
+empty. If nothing is found, pstate would be NULL at the end, so
+
+>   				break;
+> +			}
+>   		}
+>   
+> +		if (!pstate)
+> +			return -EINVAL;
+> +
+... just this check should do to cover both the "not found" and "list empty"
+cases.
+
+Thanks,
+Guenter
+
+>   		lo = pstate->base.domain[domain->name];
+>   		hi = lo;
+>   		list_for_each_entry(cstate, &pstate->list, head) {
 
