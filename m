@@ -2,69 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC7944EA24F
-	for <lists+nouveau@lfdr.de>; Mon, 28 Mar 2022 23:18:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 035E14EA25B
+	for <lists+nouveau@lfdr.de>; Mon, 28 Mar 2022 23:21:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D4C5410EAEE;
-	Mon, 28 Mar 2022 21:18:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5F49710ED97;
+	Mon, 28 Mar 2022 21:21:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1C72B10EAEE
- for <nouveau@lists.freedesktop.org>; Mon, 28 Mar 2022 21:18:37 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3C87910ED97
+ for <nouveau@lists.freedesktop.org>; Mon, 28 Mar 2022 21:21:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1648502316;
+ s=mimecast20190719; t=1648502476;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=o/20j76lcDPeDTIfcY54M2M3yeP1hzS1Frzdk4vK99I=;
- b=OFLBoBS/3HdKJlmkE9GZ+x3nfkj1sQkGBWizbDquIgBu0A3jLmVRGFfO9XeR011XraKVKn
- cAXBoGQ4NE8+6xZDiLNEINMoLj+Nfu45pmQhujhtYQUl0zCGiJMwfWyWLKuf6E2ORuBa0Q
- G40hU0WB6gASUYC2JAJ59RlRDz9zBcY=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Ovb2abZLdPXIpDXoFNTL/ZfMzAu8x+Cb7oB/ww9JfYA=;
+ b=Lu2gDTSk9Itt07wViwpjPKeg+lSEkxa07hRL6KHkqsdoQp7Czzl8ImFZ1X1Sf7WGkg0ENR
+ e4Y3m+aXHFi54kZGTDelhhvdwPyBWCL0VxS8YCAN1rVHWkoLrESn04+Fb3/1LlEVRK69rP
+ bDgr/a0f6Em2vWlRb1xxUoXBYYx9rFM=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-392-qGuI8ofiMJm3Rakg6pE79Q-1; Mon, 28 Mar 2022 17:18:29 -0400
-X-MC-Unique: qGuI8ofiMJm3Rakg6pE79Q-1
-Received: by mail-qt1-f200.google.com with SMTP id
- h11-20020ac87d4b000000b002e1c9a3ae51so13266462qtb.0
- for <nouveau@lists.freedesktop.org>; Mon, 28 Mar 2022 14:18:29 -0700 (PDT)
+ us-mta-103-wqSleiT5O9qumvTuY2K8Cw-1; Mon, 28 Mar 2022 17:21:05 -0400
+X-MC-Unique: wqSleiT5O9qumvTuY2K8Cw-1
+Received: by mail-qt1-f198.google.com with SMTP id
+ h11-20020ac87d4b000000b002e1c9a3ae51so13270401qtb.0
+ for <nouveau@lists.freedesktop.org>; Mon, 28 Mar 2022 14:20:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:organization
- :user-agent:mime-version:content-transfer-encoding;
- bh=o/20j76lcDPeDTIfcY54M2M3yeP1hzS1Frzdk4vK99I=;
- b=xwMzjnlqz3K0JSfm6dK5HdKmA8Tg7S+/0V1bxj6jgaLq/RZHbhcdpEndJsefcgJLKo
- sPRXGtOu/+IFr2i6U8pZ/JBS2/AkzlFpYxNK9MuB0qzVsHxtatiLUljZAHNt4iNeF1pj
- Ckxq0vCiSryqDc705amTjcyDedEbLno5k41eiweAr3ijXxuy9NIvE48xR2SLL4M92/za
- /uHakNuzlxg2IlfFsg4JtPYPc0QCFnASebdBPflvjTlaycE2WxP4rTaUSkrfqx1qonfL
- h3myoNMDEFbyoFAftn0cHpnHGzyZaUB+EevGrkZsdUEWdY+wcO0F7KO7hiHE2MVo8adA
- 0t6g==
-X-Gm-Message-State: AOAM533EKtypuAc5Be+ojDrMZcZ/XoRYOBKnr+6bZPai94SP8p2TZKwq
- V8sc/aXSm2pAT114DPwvRBmAwcnZdNsh+7xoIfDE2UxEZx78cKokgmOX4Li0KlIzMn/hKjHURM/
- NvXbfTKh30lj2ren9Qxa9LCJZzg==
-X-Received: by 2002:a05:6214:29c8:b0:440:fac2:a6c with SMTP id
- gh8-20020a05621429c800b00440fac20a6cmr23153268qvb.96.1648502308562; 
- Mon, 28 Mar 2022 14:18:28 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJx80FvxqgxoMsKHifZxJPlSaASMzEtm2PCjdcW91NHHki6CRsyrlYXzQuiJUFDSkSZnID/Qgg==
-X-Received: by 2002:a05:6214:29c8:b0:440:fac2:a6c with SMTP id
- gh8-20020a05621429c800b00440fac20a6cmr23153243qvb.96.1648502308333; 
- Mon, 28 Mar 2022 14:18:28 -0700 (PDT)
+ h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+ :references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=Ovb2abZLdPXIpDXoFNTL/ZfMzAu8x+Cb7oB/ww9JfYA=;
+ b=OLZXnedOtitdSwJeag9j3Q/0wwjzLHgqKSunS089iSlQu/Hjjc3s9cirjfJ3xp4JC5
+ wcoRQ11xi7wMYP2vWYJWuzf4/d89JyPbDaA41bRnGsrzQqca8skRoqMjG44uhdyaJqlK
+ J1X/NGu+WHPYJy8wbkH+dZLPBMn2MRxoUyZ/9YYOpxlOAUeivNiB8HPgDiyA00cES5UI
+ YK3Q3hFfmg3kIXr2Hk5/5Am03CdOl3DqdGlO/l15RwA67hP33PXX0QXG9Bixye7MglTK
+ VyTSkSgYnxlZQbzicillUgA3RIbNA4E1QYRWsNEyshxwuv/PKYNMex+0XBX6z/DFs3+C
+ 8ceQ==
+X-Gm-Message-State: AOAM532VnRPcL4ISxEimHZbQET/DvB+dnPumF24VYhMBm4FkhlOGpuYi
+ Y/Xw7FWP0Aw40RdpfRic15sXat63e4rASQpjjXtdWKbJDWiKSfYb7U2vMJUIp0+hF2evgXK/PD2
+ yF1H8PIbdibdJPXfGNHI8DQyRGg==
+X-Received: by 2002:ac8:7d84:0:b0:2e2:1ef6:94bb with SMTP id
+ c4-20020ac87d84000000b002e21ef694bbmr24837161qtd.348.1648502442442; 
+ Mon, 28 Mar 2022 14:20:42 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxr/xaDRnoX5KQggdrvWhRc+vYS5yUpsvIM+b2oehs7B0Lt4/tR1Ebdv6ok0NtajQHNvYUffQ==
+X-Received: by 2002:ac8:7d84:0:b0:2e2:1ef6:94bb with SMTP id
+ c4-20020ac87d84000000b002e21ef694bbmr24837135qtd.348.1648502442222; 
+ Mon, 28 Mar 2022 14:20:42 -0700 (PDT)
 Received: from [192.168.8.138] (pool-71-126-244-162.bstnma.fios.verizon.net.
  [71.126.244.162]) by smtp.gmail.com with ESMTPSA id
- br13-20020a05620a460d00b00680d020b4cbsm2856816qkb.10.2022.03.28.14.18.27
+ w17-20020ac857d1000000b002e19feda592sm13392465qta.85.2022.03.28.14.20.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Mar 2022 14:18:27 -0700 (PDT)
-Message-ID: <dc0ead0da30d0ccf8c4c57a2548d293c57407080.camel@redhat.com>
+ Mon, 28 Mar 2022 14:20:41 -0700 (PDT)
+Message-ID: <30057caf791dd789fe715715d1c1973994a91953.camel@redhat.com>
 From: Lyude Paul <lyude@redhat.com>
-To: events@lists.x.org, xorg-devel@lists.freedesktop.org, 
- wayland-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
- mesa-dev@lists.freedesktop.org, amd-gfx@lists.freedesktop.org, 
- etnaviv@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
- libre-soc-dev@lists.libre-soc.org
-Date: Mon, 28 Mar 2022 17:18:21 -0400
+To: Xiaomeng Tong <xiam0nd.tong@gmail.com>, bskeggs@redhat.com, 
+ kherbst@redhat.com, airlied@linux.ie, daniel@ffwll.ch
+Date: Mon, 28 Mar 2022 17:20:40 -0400
+In-Reply-To: <20220327073925.11121-1-xiam0nd.tong@gmail.com>
+References: <20220327073925.11121-1-xiam0nd.tong@gmail.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.42.4 (3.42.4-2.DarkModeFix.fc35)
 MIME-Version: 1.0
@@ -73,8 +73,9 @@ Authentication-Results: relay.mimecast.com;
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-Subject: [Nouveau] 2022 X.org Foundation Election Candidates
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH] dispnv50: atom: fix an incorrect NULL check
+ on list iterator
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,35 +87,113 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: board@foundation.x.org
+Cc: nouveau@lists.freedesktop.org, yangyingliang@huawei.com,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ stable@vger.kernel.org, contact@emersion.fr
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-To all X.Org Foundation Members:
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-The election for the X.Org Foundation Board of Directors will begin on 04 April
-2022. We have 6 candidates who are running for 4 seats. They are:
+Will push this to the appropriate repository shortly.
 
-    Emma Anholt
-    Shashank Sharma
-    Ricardo Garcia
-    Mark Filion
-    Lucas Stach
-    Alyssa Rosenzweig
+On Sun, 2022-03-27 at 15:39 +0800, Xiaomeng Tong wrote:
+> The bug is here:
+>         return encoder;
+> 
+> The list iterator value 'encoder' will *always* be set and non-NULL
+> by drm_for_each_encoder_mask(), so it is incorrect to assume that the
+> iterator value will be NULL if the list is empty or no element found.
+> Otherwise it will bypass some NULL checks and lead to invalid memory
+> access passing the check.
+> 
+> To fix this bug, just return 'encoder' when found, otherwise return
+> NULL.
+> 
+> Cc: stable@vger.kernel.org
+> Fixes: 12885ecbfe62d ("drm/nouveau/kms/nvd9-: Add CRC support")
+> Signed-off-by: Xiaomeng Tong <xiam0nd.tong@gmail.com>
+> ---
+>  drivers/gpu/drm/nouveau/dispnv50/atom.h |  6 +++---
+>  drivers/gpu/drm/nouveau/dispnv50/crc.c  | 27 ++++++++++++++++++++-----
+>  2 files changed, 25 insertions(+), 8 deletions(-)
+> (also 
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/atom.h
+> b/drivers/gpu/drm/nouveau/dispnv50/atom.h
+> index 3d82b3c67dec..93f8f4f64578 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/atom.h
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/atom.h
+> @@ -160,14 +160,14 @@ nv50_head_atom_get(struct drm_atomic_state *state,
+> struct drm_crtc *crtc)
+>  static inline struct drm_encoder *
+>  nv50_head_atom_get_encoder(struct nv50_head_atom *atom)
+>  {
+> -       struct drm_encoder *encoder = NULL;
+> +       struct drm_encoder *encoder;
+>  
+>         /* We only ever have a single encoder */
+>         drm_for_each_encoder_mask(encoder, atom->state.crtc->dev,
+>                                   atom->state.encoder_mask)
+> -               break;
+> +               return encoder;
+>  
+> -       return encoder;
+> +       return NULL;
+>  }
+>  
+>  #define nv50_wndw_atom(p) container_of((p), struct nv50_wndw_atom, state)
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/crc.c
+> b/drivers/gpu/drm/nouveau/dispnv50/crc.c
+> index 29428e770f14..b834e8a9ae77 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/crc.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/crc.c
+> @@ -390,9 +390,18 @@ void nv50_crc_atomic_check_outp(struct nv50_atom *atom)
+>                 struct nv50_head_atom *armh =
+> nv50_head_atom(old_crtc_state);
+>                 struct nv50_head_atom *asyh =
+> nv50_head_atom(new_crtc_state);
+>                 struct nv50_outp_atom *outp_atom;
+> -               struct nouveau_encoder *outp =
+> -                       nv50_real_outp(nv50_head_atom_get_encoder(armh));
+> -               struct drm_encoder *encoder = &outp->base.base;
+> +               struct nouveau_encoder *outp;
+> +               struct drm_encoder *encoder, *enc;
+> +
+> +               enc = nv50_head_atom_get_encoder(armh);
+> +               if (!enc)
+> +                       continue;
+> +
+> +               outp = nv50_real_outp(enc);
+> +               if (!outp)
+> +                       continue;
+> +
+> +               encoder = &outp->base.base;
+>  
+>                 if (!asyh->clr.crc)
+>                         continue;
+> @@ -443,8 +452,16 @@ void nv50_crc_atomic_set(struct nv50_head *head,
+>         struct drm_device *dev = crtc->dev;
+>         struct nv50_crc *crc = &head->crc;
+>         const struct nv50_crc_func *func = nv50_disp(dev)->core->func->crc;
+> -       struct nouveau_encoder *outp =
+> -               nv50_real_outp(nv50_head_atom_get_encoder(asyh));
+> +       struct nouveau_encoder *outp;
+> +       struct drm_encoder *encoder;
+> +
+> +       encoder = nv50_head_atom_get_encoder(asyh);
+> +       if (!encoder)
+> +               return;
+> +
+> +       outp = nv50_real_outp(encoder);
+> +       if (!outp)
+> +               return;
+>  
+>         func->set_src(head, outp->or, nv50_crc_source_type(outp, asyh-
+> >crc.src),
+>                       &crc->ctx[crc->ctx_idx]);
 
-To be found in the link below below are the Personal Statements each candidate
-submitted for your consideration along with their Statements of Contribution
-that they submitted with the membership application. Please review each of the
-candidates' statements to help you decide whom to vote for during the upcoming
-election.
-
-    https://www.x.org/wiki/BoardOfDirectors/Elections/2022/
-
-If you have questions of the candidates, you should feel free to ask them here
-on the mailing list.
-
-The election committee will provide detailed instructions on how the voting
-system will work when the voting period begins.
-
-Lyude Paul, on behalf of the X.Org elections committee
+-- 
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
