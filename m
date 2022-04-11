@@ -2,43 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB8E14FB761
-	for <lists+nouveau@lfdr.de>; Mon, 11 Apr 2022 11:25:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57E244FB76D
+	for <lists+nouveau@lfdr.de>; Mon, 11 Apr 2022 11:26:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2E14010F7A6;
-	Mon, 11 Apr 2022 09:25:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B2ED910F7BA;
+	Mon, 11 Apr 2022 09:25:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 644B910F7AC;
- Mon, 11 Apr 2022 09:25:35 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A8A3610F7BA;
+ Mon, 11 Apr 2022 09:25:58 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 10B3FB81134;
- Mon, 11 Apr 2022 09:25:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 582FAC385A4;
- Mon, 11 Apr 2022 09:25:32 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 0DF666102C;
+ Mon, 11 Apr 2022 09:25:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E42EC385A4;
+ Mon, 11 Apr 2022 09:25:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1649669132;
- bh=xGCmVCrCQsH+YPDi73tUh+YkBtsdj91S133EZ7c1Kk0=;
+ s=korg; t=1649669157;
+ bh=9q/3pfBzzKlGEcFzK2gf7su8xfLCGSAf5nXEXKSv6Us=;
  h=Subject:To:Cc:From:Date:From;
- b=BIRyNwT5GhS9YGCCHaXArbnUVDhBcfA3okXmsw3P4f2bOf4H492ee52/2CbpfblCM
- kru7DevkgSmH/ThxscyUAsAfWL593utWzattIZgtLaM/qrldHRS0dzxddf9uG3agDL
- MbgJ7Xl+umlVsa0zGjvcvseMmGNRJ5gMu1zw01ZI=
+ b=AxQm32DQF/M8aEN4nRAwz8c/X60ULEo7RwIgCwPAJATO7X+QzOXnJHwynFKuO2ax7
+ bJUgC5hD9Zz1Q3/wcLPgIo+2/3ULXyAC20IUtOOW90WPjM5AqcytfSbEsRcqWjbcvt
+ sknbcxdsacsO39m7TcqRQ663ZC+jURXMHc7nrfYo=
 To: bskeggs@redhat.com, dri-devel@lists.freedesktop.org,
  gregkh@linuxfoundation.org, kherbst@redhat.com, lyude@redhat.com,
  nouveau@lists.freedesktop.org
 From: <gregkh@linuxfoundation.org>
-Date: Mon, 11 Apr 2022 11:25:14 +0200
-Message-ID: <164966911415249@kroah.com>
+Date: Mon, 11 Apr 2022 11:25:19 +0200
+Message-ID: <16496691198795@kroah.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=ANSI_X3.4-1968
 Content-Transfer-Encoding: 8bit
 X-stable: commit
 X-Patchwork-Hint: ignore 
 Subject: [Nouveau] Patch "drm/nouveau/pmu: Add missing callbacks for Tegra
- devices" has been added to the 5.15-stable tree
+ devices" has been added to the 5.16-stable tree
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,12 +59,12 @@ This is a note to let you know that I've just added the patch titled
 
     drm/nouveau/pmu: Add missing callbacks for Tegra devices
 
-to the 5.15-stable tree which can be found at:
+to the 5.16-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      drm-nouveau-pmu-add-missing-callbacks-for-tegra-devices.patch
-and it can be found in the queue-5.15 subdirectory.
+and it can be found in the queue-5.16 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
@@ -143,4 +143,4 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from kherbst@redhat.com are
 
-queue-5.15/drm-nouveau-pmu-add-missing-callbacks-for-tegra-devices.patch
+queue-5.16/drm-nouveau-pmu-add-missing-callbacks-for-tegra-devices.patch
