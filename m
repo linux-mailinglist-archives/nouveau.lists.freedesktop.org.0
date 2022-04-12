@@ -2,43 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACFD94FD0D8
-	for <lists+nouveau@lfdr.de>; Tue, 12 Apr 2022 08:52:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 055824FD1BF
+	for <lists+nouveau@lfdr.de>; Tue, 12 Apr 2022 09:05:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7A17910FCA5;
-	Tue, 12 Apr 2022 06:52:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 65C3310FEBC;
+	Tue, 12 Apr 2022 07:05:36 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from dfw.source.kernel.org (dfw.source.kernel.org
  [IPv6:2604:1380:4641:c500::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2FC1910FCA5;
- Tue, 12 Apr 2022 06:52:15 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A975A10FEBB;
+ Tue, 12 Apr 2022 07:05:34 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id B05D26149D;
- Tue, 12 Apr 2022 06:52:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9C81C385A6;
- Tue, 12 Apr 2022 06:52:13 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1AB12615F7;
+ Tue, 12 Apr 2022 07:05:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 293B9C385A6;
+ Tue, 12 Apr 2022 07:05:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1649746334;
+ s=korg; t=1649747133;
  bh=qVZQZO1froVUTZ6TwlksDchw3cHLrw0uS/UZVNIs+5k=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=YM7rCiqBaAo5MMHhBIp2pXescf6KKq1lNp7Fj8Smnd0J23+jbJO7gwHZzfUn5LMmq
- wcTHwKg/xTbK1gw39Zs7KUIRtGHjR/1rknkuuR13Is7cbR8waOwWPCJSRCjhzLNSPO
- G6v+ygLSgRK0vmC0vA9nFhiozdxihnaVcY447tgo=
+ b=vrNMr9muHEC+CxZbM1H8mNNiqpHplYua50Y7dOSd7WWi2wiQhHF5rt4owBuLlyL3a
+ 8FMg3VhakrAhIQXK5Bvz4bZhgw5xOMBWYbY3N+0WA7HekVRUMbLSf7yyXm7zeg0b4T
+ oYIY7EHYpX6VHteJg7V+tpwDuv6X/JC8aLOur/lI=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
-Date: Tue, 12 Apr 2022 08:30:48 +0200
-Message-Id: <20220412062949.132045062@linuxfoundation.org>
+Date: Tue, 12 Apr 2022 08:31:53 +0200
+Message-Id: <20220412062951.049355968@linuxfoundation.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220412062942.022903016@linuxfoundation.org>
-References: <20220412062942.022903016@linuxfoundation.org>
+In-Reply-To: <20220412062943.670770901@linuxfoundation.org>
+References: <20220412062943.670770901@linuxfoundation.org>
 User-Agent: quilt/0.66
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 5.15 245/277] drm/nouveau/pmu: Add missing
+Subject: [Nouveau] [PATCH 5.16 256/285] drm/nouveau/pmu: Add missing
  callbacks for Tegra devices
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
