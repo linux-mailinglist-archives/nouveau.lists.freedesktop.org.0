@@ -1,67 +1,67 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DEA0B51EB52
-	for <lists+nouveau@lfdr.de>; Sun,  8 May 2022 05:50:02 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B03551EB50
+	for <lists+nouveau@lfdr.de>; Sun,  8 May 2022 05:49:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5BAD510F6B7;
-	Sun,  8 May 2022 03:49:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EEF9810F6B1;
+	Sun,  8 May 2022 03:49:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B4D0210E452
- for <nouveau@lists.freedesktop.org>; Mon, 25 Apr 2022 13:01:04 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 26D9610E25E
+ for <nouveau@lists.freedesktop.org>; Mon, 25 Apr 2022 13:13:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1650891663;
+ s=mimecast20190719; t=1650892405;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding;
- bh=rTys+erDRBI/RIRvGMImXOuLh5EmnDonu4B+GkyDP0E=;
- b=djaEgvJKnzGh+hUrgaCMgh9xtH8CDFhea22QqCHV+7/vgdOwuBHXL6ilRMDIrKDFzbryTV
- 1NjARy/bDt6RURT8lOnkwQO14b0lNrPzFxMX1NnEprm5pPMsga1nLNyX+9HqmMkwA050l2
- mjKTtOhc0EQyhA3DxZ7OASPXp+Tk8zo=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=OV5M88ExrHBJLlDEVqDhMiG8Kzj0MFYt6DBHZT5ejGQ=;
+ b=OgPqQWJC45XVV6F6RBvLOpH87b0v0rEKbu+C6SQC7IAgE1nXT5j9Mbwab62BV/7lIBhk8v
+ sM2ub9jqzUuteWzoMFZfafmirpRmecfckKfKg1yR9fGGrjAOiq0j3komsjQy2gTwFn9crR
+ lbCRrdvUQ9s/dG/FqtfNuDRfCRPHLT0=
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-655-DC9p6IdRMmefBjn7w4E4aA-1; Mon, 25 Apr 2022 09:00:59 -0400
-X-MC-Unique: DC9p6IdRMmefBjn7w4E4aA-1
-Received: by mail-qt1-f198.google.com with SMTP id
- o2-20020ac86982000000b002f1d71c97b8so7867665qtq.2
- for <nouveau@lists.freedesktop.org>; Mon, 25 Apr 2022 06:00:59 -0700 (PDT)
+ us-mta-61-hXKIu4T5Pua9N1yRTxdPAg-1; Mon, 25 Apr 2022 09:13:17 -0400
+X-MC-Unique: hXKIu4T5Pua9N1yRTxdPAg-1
+Received: by mail-qk1-f200.google.com with SMTP id
+ t3-20020a05620a034300b0069e60a0760cso9634601qkm.20
+ for <nouveau@lists.freedesktop.org>; Mon, 25 Apr 2022 06:13:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=rTys+erDRBI/RIRvGMImXOuLh5EmnDonu4B+GkyDP0E=;
- b=pYbemAM3WsownQzdm+MibmMxtu0ZsBwgsnJ7BF/p5V3whEySe+jFalfbu1IpIQ2Efc
- hEXLcWt6PEsCT0iEpiTJ2N/XbS8JsElXiG1eBdXtELTMw13wh0R8/zHuvpw+fBrFTxCT
- HoAiPd+LwDp4bV64l+jQjaHGPK6cOoXVlZFWKtWJFHDemb5Eikp3c5XB7uu714flkGAA
- S6HLhKF6deDj5o59UBJ0yOT37G3dDPOBfwPETVW+IKWC+88nQJFJzs/iEfILLNnjRsEJ
- s4z6CS4FatsZb8ye+jNYEbMRMRD/1bn6IDv5yMcbvOk8P45L/vq3Ti2pZP05rQRDc0cp
- IltA==
-X-Gm-Message-State: AOAM530dHP59rMpXZX31LOCXWGAlZo82iYvSMz3FVjqykNvgERk34n+D
- Nacj4Zpnd0naa7ii5Ujdv7+NfEIEbGulpvY1kcf5Jd+FaPrQKAq7Pz1BgnLl8lAv31mE3/f/AF7
- YAeiZmEUIxW5hXuJ8FM4MhOW2Rg==
-X-Received: by 2002:ac8:5fc1:0:b0:2f3:6731:241c with SMTP id
- k1-20020ac85fc1000000b002f36731241cmr3572755qta.675.1650891658657; 
- Mon, 25 Apr 2022 06:00:58 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyrNZbxLMQwnrHy53N0H2O7nNxhHG7BzBXBhpXYmwsVimEqJHWZzXb7khbqE1uBB1FI/T3+Pg==
-X-Received: by 2002:ac8:5fc1:0:b0:2f3:6731:241c with SMTP id
- k1-20020ac85fc1000000b002f36731241cmr3572656qta.675.1650891657748; 
- Mon, 25 Apr 2022 06:00:57 -0700 (PDT)
+ bh=OV5M88ExrHBJLlDEVqDhMiG8Kzj0MFYt6DBHZT5ejGQ=;
+ b=0v9uD1J0ltfQsYis+YPLvTnMZCGdYcreyBjCm7gLUWtzvbX6LaleF1NiOa05ELIKkA
+ 2ZhABGMxUuTY0mPZAspsHFqBiWSfvO1xFs9TgcPcgAWPoGiK8atJVxam8O3VadqT/fic
+ 2rD0ejUXgzQKof6jZAIehH+aYNrcPuiRTQuV6PcFN0bosalCswwt1yEaxjGiQskwfHYe
+ gmEvDhYaynkCoTRROYgp/TdYxqj1x5yeTOO3y+KYh2HpDF5wqAIJX42hraNQRXWGsM1I
+ 3uuAhDD3HMJj/lOPejVYNVzDQn9qB2PqS6SjJuFTrBTiXc9qJ9W8I2TDFG7S9E+3qCOO
+ IgOw==
+X-Gm-Message-State: AOAM5319E6UQv8uEmLaal8uRdZwqo33Dt65+GBb9uW540gC5LgRc0e2N
+ DvnhHMaUdL3emCBONMKR/5h4yWzSO7U6QbkkTwrD2iPIr8PRmux942ZxTKp/rQ/lS0ccbJT3CY2
+ lsHo7jKyQyD8TfJcAmeRNEzU0Eg==
+X-Received: by 2002:a05:6214:1c87:b0:42d:20cb:e484 with SMTP id
+ ib7-20020a0562141c8700b0042d20cbe484mr12145222qvb.10.1650892396730; 
+ Mon, 25 Apr 2022 06:13:16 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzPOqTD8cO+BzlbfrXGx8bSpW2fXt9dKS1tp8Lcv1B7tS2bEgBAUJkY4Q26CjFWa0jOYCeRbQ==
+X-Received: by 2002:a05:6214:1c87:b0:42d:20cb:e484 with SMTP id
+ ib7-20020a0562141c8700b0042d20cbe484mr12145207qvb.10.1650892396506; 
+ Mon, 25 Apr 2022 06:13:16 -0700 (PDT)
 Received: from dell-per740-01.7a2m.lab.eng.bos.redhat.com
  (nat-pool-bos-t.redhat.com. [66.187.233.206])
  by smtp.gmail.com with ESMTPSA id
- x129-20020a376387000000b0069f2aaaf734sm3830995qkb.20.2022.04.25.06.00.56
+ s195-20020a37a9cc000000b0069ca29ab6f4sm4961900qke.26.2022.04.25.06.13.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Apr 2022 06:00:57 -0700 (PDT)
+ Mon, 25 Apr 2022 06:13:16 -0700 (PDT)
 From: Tom Rix <trix@redhat.com>
 To: bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com, airlied@linux.ie,
  daniel@ffwll.ch
-Date: Mon, 25 Apr 2022 09:00:50 -0400
-Message-Id: <20220425130050.1643103-1-trix@redhat.com>
+Date: Mon, 25 Apr 2022 09:13:08 -0400
+Message-Id: <20220425131308.158635-1-trix@redhat.com>
 X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 Authentication-Results: relay.mimecast.com;
@@ -71,8 +71,8 @@ X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"; x-default=true
 X-Mailman-Approved-At: Sun, 08 May 2022 03:49:54 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/disp/gv100: make gv100_disp_wimm
- static
+Subject: [Nouveau] [PATCH] drm/nouveau/disp/gv100: make gv100_disp_wndw and
+ gv100_disp_wndw_mthd static
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,28 +89,38 @@ Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Sparse reports this issue
-wimmgv100.c:39:1: warning: symbol 'gv100_disp_wimm' was not declared. Should it be static?
+Sparse reports these issues
+wndwgv100.c:120:1: warning: symbol 'gv100_disp_wndw_mthd' was not declared. Should it be static?
+wndwgv100.c:140:1: warning: symbol 'gv100_disp_wndw' was not declared. Should it be static?
 
-This variable is only used in wimmgv100.c.  Single file variables should be static.
-So use static as its storage-class specifier.
+These variable are only used in wndwgv100.c.  Single file variables should be static.
+So use static as their storage-class specifiers.
 
 Signed-off-by: Tom Rix <trix@redhat.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/engine/disp/wimmgv100.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/nvkm/engine/disp/wndwgv100.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/wimmgv100.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/wimmgv100.c
-index 89d783368b4f..bb4db6351ddf 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/wimmgv100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/wimmgv100.c
-@@ -35,7 +35,7 @@ gv100_disp_wimm_intr(struct nv50_disp_chan *chan, bool en)
- 	nvkm_mask(device, 0x611da8, mask, data);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/wndwgv100.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/wndwgv100.c
+index 5d3b641dbb14..e635247d794f 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/wndwgv100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/wndwgv100.c
+@@ -116,7 +116,7 @@ gv100_disp_wndw_mthd_base = {
+ 	}
+ };
+ 
+-const struct nv50_disp_chan_mthd
++static const struct nv50_disp_chan_mthd
+ gv100_disp_wndw_mthd = {
+ 	.name = "Window",
+ 	.addr = 0x001000,
+@@ -136,7 +136,7 @@ gv100_disp_wndw_intr(struct nv50_disp_chan *chan, bool en)
+ 	nvkm_mask(device, 0x611da4, mask, data);
  }
  
 -const struct nv50_disp_chan_func
 +static const struct nv50_disp_chan_func
- gv100_disp_wimm = {
+ gv100_disp_wndw = {
  	.init = gv100_disp_dmac_init,
  	.fini = gv100_disp_dmac_fini,
 -- 
