@@ -1,83 +1,116 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBB1F51E128
-	for <lists+nouveau@lfdr.de>; Fri,  6 May 2022 23:32:50 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 514EF51EB54
+	for <lists+nouveau@lfdr.de>; Sun,  8 May 2022 05:50:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B641210EB56;
-	Fri,  6 May 2022 21:32:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B122E10F6B9;
+	Sun,  8 May 2022 03:49:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C59AB10EB56
- for <nouveau@lists.freedesktop.org>; Fri,  6 May 2022 21:32:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1651872765;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dJbJbWsoyM+Ik6q37wpw5Oa4Nh86YRow8ddVHHmJk08=;
- b=JK5FwrLry48xN+2TqybW4GjhX2pOCgz2U1HcaIrFukFni3wSBzGaLxnvSdCioSo+K9Pmex
- wrxB7D5YpfxGbQsGxnXcd3UsKw8bQ+VxrFquU7FiJoiVQIUcb+ACUxOIsEIw+wR9c5ESSh
- Q/3fcZAnCKYfsEyLziiKXVLb5xkH4G0=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-156-BzZXGHJpOOWPAKfotmVEUw-1; Fri, 06 May 2022 17:32:44 -0400
-X-MC-Unique: BzZXGHJpOOWPAKfotmVEUw-1
-Received: by mail-qt1-f197.google.com with SMTP id
- d4-20020a05622a15c400b002f3bd4b80f7so4699304qty.3
- for <nouveau@lists.freedesktop.org>; Fri, 06 May 2022 14:32:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=dJbJbWsoyM+Ik6q37wpw5Oa4Nh86YRow8ddVHHmJk08=;
- b=Z4/vCozWF7m3y4qeHiV6BxPsMYn3rpdU22AEAZoUl8UqARbqRh21Egh8zJnpELzUtx
- vSlGtnkjox2376aetN2LGsJlfvuIaysxU0YeJoalDdzCF8vGww58wxSsUMVT2ADjfC29
- ClKAfG6fbMMJpRXzbCO4l/lu6nIjEP9Hw6EVCjTC+Zww91UcL+FdlMOD9bGHueRwMWcN
- Hn5gJ4sXPWp56MEKeHZidGGz7Qx/rqru6Qy/ELY5Nk9ZqFt5l8kWJ2dMwdtaM7KFo2IX
- VICyt/LVE+ckgvhgRjBsymVU8T8yTMZZPIookOFVAlzcLsoMSMop1Uarm8rrNd+T5GXD
- DeYg==
-X-Gm-Message-State: AOAM533IiEgLql/PdJdJdVRUtd8XQR/Wdi+hq5Dsl7Wg3FyGjR9iAKeh
- JUYafuBkSl0kHgXux1k6oGahqpE5LLd1BD6d5sHLbMAwzWU4SQUp6HjZohOMuD+r+2XmJPuoktB
- lSN+3NHpfA2qMDOEwMPedsnXiRQ==
-X-Received: by 2002:a0c:ab09:0:b0:443:95d9:140c with SMTP id
- h9-20020a0cab09000000b0044395d9140cmr4170803qvb.84.1651872764249; 
- Fri, 06 May 2022 14:32:44 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwK5FWqqA+iA50nH6ppws5HNXmaCdaMsh8I0itmM43LaQ06P84wOxCI5Gl5CmLPygLNpGGy8Q==
-X-Received: by 2002:a0c:ab09:0:b0:443:95d9:140c with SMTP id
- h9-20020a0cab09000000b0044395d9140cmr4170789qvb.84.1651872763988; 
- Fri, 06 May 2022 14:32:43 -0700 (PDT)
-Received: from [192.168.8.138] (static-71-184-137-158.bstnma.ftas.verizon.net.
- [71.184.137.158]) by smtp.gmail.com with ESMTPSA id
- b3-20020ac85403000000b002f39b99f6adsm3164237qtq.71.2022.05.06.14.32.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 May 2022 14:32:43 -0700 (PDT)
-Message-ID: <9b7eab5df5e63e3fe899bca9ea35f4be8bbff98c.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Christophe JAILLET <christophe.jaillet@wanadoo.fr>, Ben Skeggs
- <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>, David Airlie
- <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Pierre Moreau
- <pierre.morrow@free.fr>
-Date: Fri, 06 May 2022 17:32:42 -0400
-In-Reply-To: <9ba85bca59df6813dc029e743a836451d5173221.1644386541.git.christophe.jaillet@wanadoo.fr>
-References: <9ba85bca59df6813dc029e743a836451d5173221.1644386541.git.christophe.jaillet@wanadoo.fr>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
-MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
+Received: from APC01-PSA-obe.outbound.protection.outlook.com
+ (mail-psaapc01on2095.outbound.protection.outlook.com [40.107.255.95])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4966B10E5BC;
+ Mon, 25 Apr 2022 11:47:33 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=F+oOjNPqshV9oVkxM7aq9fB4irrlTPw19URxbDFT+SynuSVS5IP+b8kM0AYUaMJeqJ8HleUnk75tq9phBMT++YnzKcbbi7n7kAGJW/lLunNnqifgnsph1A4JJ85uScP0n/2Xh7CURmJhiiIis9aCqTFQVMW41mO99Xjok2Y7pvGmBuKZpCst6yz4puhx5ceT27fEqUzjQM62DkmFHCveI2cXiU9te/GnM/83x+wcu3uDV73KtJrz6gUKwVRXaSynAEz7g/cPi7qsPKzscbRYF+FHjcSIDS3pembWUZwqHtkR3mM51pgBnLqgtvtFR/tnyQmZ4e5iMT/G0F7cdCwGew==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+RNMZvti6cF9BF0twlYEMXrEGkQGfoSnG7++LAnMN94=;
+ b=d5O/0+sXoZ4k7qmJANgswY/TJz/GiQ218BPBNqddrNWGigUfESHxfsq6mr/ZjqZzvfMx8AxBaqyqqK+MnXCG89N84lAPniftpkwY3i6uqZHMPrASuxyOvSFH7TFZy6DQsrTuiFcaXCUg8SLcV5/kyEt4XL6Li8Ags64WDV3XTIwxjfZVDnuXcPa94r+v/Kihnzec3caoNSgmSvyTPgUNs40b5gc0CNX/WtsgKsnPnT+hUQM0KowKV7BDFgRfsaG3W5/sKIgy2a/y84DKsYEZo62TTzc/4h3KV+Z2HPtswGVIdGKOq64Kkv8d/lmV2/qeFJpC4BmDQXNOhrdiEgVq1w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo0.onmicrosoft.com; 
+ s=selector2-vivo0-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+RNMZvti6cF9BF0twlYEMXrEGkQGfoSnG7++LAnMN94=;
+ b=fJ7Xma+qUxXfoxk6ThJfFSE/wcgUWAMP/IZauyeIqP3CAPItX/06Nbzx6iN+ZG/Ci6GcRR6No8/Vg/8YIpgPOfCCZ+jxx57CVuBFEybrgLW5Yx/kAM/E2n/QIrioEAybR8MuDtLjYv2NRbAU2QfVs4J+9F+Aux6IyxYwM16X4P8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from HK2PR06MB3492.apcprd06.prod.outlook.com (2603:1096:202:2f::10)
+ by SG2PR06MB5155.apcprd06.prod.outlook.com (2603:1096:4:1ce::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.13; Mon, 25 Apr
+ 2022 11:47:28 +0000
+Received: from HK2PR06MB3492.apcprd06.prod.outlook.com
+ ([fe80::88e1:dc04:6851:ad08]) by HK2PR06MB3492.apcprd06.prod.outlook.com
+ ([fe80::88e1:dc04:6851:ad08%7]) with mapi id 15.20.5186.021; Mon, 25 Apr 2022
+ 11:47:27 +0000
+From: Guo Zhengkui <guozhengkui@vivo.com>
+To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>, Guo Zhengkui <guozhengkui@vivo.com>,
+ dri-devel@lists.freedesktop.org (open list:DRM DRIVER FOR NVIDIA
+ GEFORCE/QUADRO GPUS), 
+ nouveau@lists.freedesktop.org (open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO
+ GPUS), linux-kernel@vger.kernel.org (open list)
+Date: Mon, 25 Apr 2022 19:47:00 +0800
+Message-Id: <20220425114701.7182-1-guozhengkui@vivo.com>
+X-Mailer: git-send-email 2.20.1
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: Fix a potential theorical leak
- in nouveau_get_backlight_name()
+Content-Type: text/plain
+X-ClientProxiedBy: HK2PR0302CA0005.apcprd03.prod.outlook.com
+ (2603:1096:202::15) To HK2PR06MB3492.apcprd06.prod.outlook.com
+ (2603:1096:202:2f::10)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 5aab1f2c-7b6b-4b87-6c05-08da26b15f3d
+X-MS-TrafficTypeDiagnostic: SG2PR06MB5155:EE_
+X-Microsoft-Antispam-PRVS: <SG2PR06MB5155D3C57EA9EFA6F28099F0C7F89@SG2PR06MB5155.apcprd06.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: ySKUDP62RLL6m/W6i0C/O9JP5fMDLFsmJxgEfgxcmTWvY29xrL1CzGZZdCQxZI5VgWNzqkOgLLIhtcH6beEDyoLpgzNvaVr0wbSEbfG34Cu/i9+po2y54Bg6mGzMmil8v1wdf4VG53owQP5OrjCLIoNJiJlr5Zk41cQwbcFyWtTMG3Zg3YZ1v+p0dWvNX5Nkeq8NTby+yNNcL+h10F2jlRMsWyW2ugjXh5stKAmVj47u4L/9SXFOesID1CO6Hyzi3ARXNp3pQW9+B4Djf0Vu2Cj+PlXz2YvZ8BG/A9wR+pvWNopPeuV20387yq66oG89SIQAAM6X/1zOXls7E+waXRMmVXJmdYPfE6wP+N2iyu5YUShQ3G7xgJwFF4ahJwYu+YZtr+Zq6nBOael6g+h0sNBgUtas1VgLRyLw6A1As53WllLx6z/H96BCSsTrP5F256s+SVOAdHe8UhpSoq9kmQFmy6M/4jIj0En9yMbiwAvBsprxM2DGXfkusblrX3V012mbFy1b5aJZOlVBemmLpQJtKyz1ZYG1CcyVCwlho7D+NF94f6MyMBe75W7ydO6T5M4CkG8t9MCninoby7J4D533nzLJ8phePL+U5GXArf1IA44bqB1Qrv1K2ctjks65n2t1LX4X7voBEQ0aKnw5Y1D+bvK6uD/9xVAGD2o4q+WroDBKO+8J/X167caMPOdcQ73lRuccWEa4w8BiRiQKTdjtY6Slmn444oVrpWSEUqEinPIM0hiSfU2PFKq/ztzh
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:HK2PR06MB3492.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230001)(4636009)(366004)(2906002)(86362001)(316002)(4326008)(8676002)(66946007)(5660300002)(8936002)(36756003)(66476007)(66556008)(110136005)(6506007)(52116002)(6486002)(1076003)(6666004)(6512007)(26005)(2616005)(38350700002)(38100700002)(83380400001)(186003)(508600001);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?cfIrVGigaq7GebUFvWelIhFcoVEBszu+EuFgMve87Hvag+eUOujL9kbPX5BP?=
+ =?us-ascii?Q?B6XbKbnLjiv/ejN1aCNk3tVVWi5ILiTXeQJEl+wuhWIKDr4Q3787GVRyMlMh?=
+ =?us-ascii?Q?PUi9vxKgWUqo3t3vrEKLnsFqYS++1KXH9ew27UpZuOgJqFpLJ6dKAl6dUVZK?=
+ =?us-ascii?Q?O21P0SM/b8rNETy80LAKuaXBheDOe4NQgcrj/lUU2Ut4zuvxbVX1Qj+VcIG0?=
+ =?us-ascii?Q?tOhTgMz8swFKcGNp1LXgammwZJMRFLZOPY+w9Tpi/VoUCndMbaKbeH12RIfh?=
+ =?us-ascii?Q?XrUNlOaA5uoBOxKFXlr3c4r40QmcQGGpHllY5Bj7icn9dExzrpz9J/pyw1D3?=
+ =?us-ascii?Q?5jPjQLRUTgeZZIGMdoo9O1GnGq+5PCshrZ5CBTn9REfCqV4Yp24HQ1n8Qh+d?=
+ =?us-ascii?Q?Sp6qu5WI2MCyjYYrpFt5ZOQWmTH1NuOPv4hNFhy7b8dbKmxlwG0rbhku2XAV?=
+ =?us-ascii?Q?ljWHUUU+/rXwh0XjRkPYNFqhNy+Qyt0TOjuG+mr7ps+fEPbhyugthOsazhxg?=
+ =?us-ascii?Q?dsefec+Ui3gaBsbmOeodbQvva2JwMM4uZOx5XSIbIZf4X/ei+O5ECm4iwLwi?=
+ =?us-ascii?Q?GGD5rfKAv51XEhlhKuo8KhN8l3plCA7aYbFO7y5lbqsNX5Vu3AWRr8g1BhBX?=
+ =?us-ascii?Q?bJHmk601fCVkmk23Vk1skfTcy4QBEOzkKVC4W27X3an3Kyhg+uLJt7FAePNE?=
+ =?us-ascii?Q?dlMG5E9WdOxat27bhOeaN5Ij+43F7OXiWA5kcpF/1at6ANFKv+XAcKvLJf32?=
+ =?us-ascii?Q?NpAyThMWryvGePHfsaUJBbENRhlJd8ub+WR47TLR8eAzho83XCmZ2F2z3n9i?=
+ =?us-ascii?Q?tuFcBIJknSJuRLbeNoL7bvjsCWtD/d4jyhXsAQdSRT5U3V7h+ShAPlj5Xh6m?=
+ =?us-ascii?Q?PHraFId79J+juWegp+g2WI2unq7FPg0spApHb1OLspuLxGtkvUk57fov9Prk?=
+ =?us-ascii?Q?c6ZkeZ5p8BoYtQJ5CJnFrqFLyIamnUVa3lPD2F1DuBmLXpA/tYODwtEMHwWH?=
+ =?us-ascii?Q?HNnec1JlHEc6X/o3qpI/kXOjH6HBGL3wfzfmD8M9HhJDMientDoLOSXcykF+?=
+ =?us-ascii?Q?ubeKNzLbfZqVljtXvwLYKP6SMPTqAn8yQ0t/o7A3+H2VCcigLwUXtsAzefEi?=
+ =?us-ascii?Q?8UaNQA2+c4d9N7TEKItYjU9co8oaAB45ryTToAWBjyC1TZhZQFRHTJKMndWm?=
+ =?us-ascii?Q?oRepntc557Y5lZJ+k+8y2a1WLwxu8AniUoN0X+4TH7HVuShvlbTljmrKXXRu?=
+ =?us-ascii?Q?UTQPVvG/LFZHnqqeTh/jB05hj19sVyOVUkGqaPjz9/X4jDZKA+A9YHco2BFK?=
+ =?us-ascii?Q?lNwqn5YtRVeM7aHJdKDEy3AQN55wHCj2pzJ2AiyD7EWIf/2lh4a5YNBp+pS3?=
+ =?us-ascii?Q?dz6ntFZbCcYOZXxBp37qDxC4hjlpUm/PT7ZYOctnNZteCko8/3Cp69m64GtP?=
+ =?us-ascii?Q?Qmx13sDsJMrdqvVejYe5fzCObbBnO3jiUJmz/0io6Lf96FREwRXAQcM/y02l?=
+ =?us-ascii?Q?iJurqS9BJmgPkP/m9V7mkgpI1lg/3+OQGUWoa3l7Rij3neaLVlyWaqb6x/dy?=
+ =?us-ascii?Q?VDevL5y3sqxiDHOfo/JzudLtDEA6vXxKanMC7hDR5XapY3uO3pV6t7wyd2yB?=
+ =?us-ascii?Q?y560Bqqd/+DkuuZRHUtai/B475VIIpji0bG6BP7GRjW0GmC+5LM31X0fEArI?=
+ =?us-ascii?Q?bWcA9FlXe290nO7rFdx4Y0jP1YO6p43rybdLlphqMgLBIWYkH/iJqrn288pK?=
+ =?us-ascii?Q?mjLDOLJi5A=3D=3D?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5aab1f2c-7b6b-4b87-6c05-08da26b15f3d
+X-MS-Exchange-CrossTenant-AuthSource: HK2PR06MB3492.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2022 11:47:27.7305 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: O2b5iMpYHldlwWUrz5n3dQR7AsH2o9w5hJKZ18LYXQbD9067kMH9hyUHzVxCnLO4JAIP9dtbXsHTZss1s8L/KA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2PR06MB5155
+X-Mailman-Approved-At: Sun, 08 May 2022 03:49:55 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau: fix returnvar.cocci warning
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,92 +122,40 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, kernel-janitors@vger.kernel.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org
+Cc: zhengkui_guo@outlook.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Sorry I totally missed this patch up until now, noticed it while going through
-unread emails today. This is:
+Fix the following coccicheck warning:
+drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gt215.c:71:5-12:
+Unneeded variable: "disable". Return "0ULL" on line 85.
 
-Reviewed-by: Lyude Paul <lyude@redhat.com>
+Signed-off-by: Guo Zhengkui <guozhengkui@vivo.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gt215.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-FWIW, if there's something you need reviews on that hasn't gotten looked at
-after a few weeks feel free to poke the nouveau list/me.
-
-Anyway, I will go ahead and push this to drm-misc-fixes in a moment. Thanks!
-
-On Wed, 2022-02-09 at 07:03 +0100, Christophe JAILLET wrote:
-> If successful ida_simple_get() calls are not undone when needed, some
-> additional memory may be allocated and wasted.
-> 
-> Here, an ID between 0 and MAX_INT is required. If this ID is >=100, it is
-> not taken into account and is wasted. It should be released.
-> 
-> Instead of calling ida_simple_remove(), take advantage of the 'max'
-> parameter to require the ID not to be too big. Should it be too big, it
-> is not allocated and don't need to be freed.
-> 
-> While at it, use ida_alloc_xxx()/ida_free() instead to
-> ida_simple_get()/ida_simple_remove().
-> The latter is deprecated and more verbose.
-> 
-> Fixes: db1a0ae21461 ("drm/nouveau/bl: Assign different names to interfaces")
-> Signed-off-by: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
-> ---
-> This patch is more a clean-up than a fix.
-> It is unlikely than >= 100 backlight devices will be registered, and the
-> over allocation would occur even much later when the underlying xarray is
-> full.
-> 
-> I also think that the 'if (bl->id >= 0)' before the ida_simple_remove()
-> calls are useless. We don't store the id if a negative (i.e. error) is
-> returned by ida_simple_get().
-> 
-> Finally, having a '#define BL_MAX_MINORS 99' could be better than a
-> magic number in the code.
-> ---
->  drivers/gpu/drm/nouveau/nouveau_backlight.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_backlight.c
-> b/drivers/gpu/drm/nouveau/nouveau_backlight.c
-> index ae2f2abc8f5a..ccd080ba30bf 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_backlight.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_backlight.c
-> @@ -46,8 +46,8 @@ static bool
->  nouveau_get_backlight_name(char backlight_name[BL_NAME_SIZE],
->                            struct nouveau_backlight *bl)
->  {
-> -       const int nb = ida_simple_get(&bl_ida, 0, 0, GFP_KERNEL);
-> -       if (nb < 0 || nb >= 100)
-> +       const int nb = ida_alloc_max(&bl_ida, 99, GFP_KERNEL);
-> +       if (nb < 0)
->                 return false;
->         if (nb > 0)
->                 snprintf(backlight_name, BL_NAME_SIZE, "nv_backlight%d",
-> nb);
-> @@ -414,7 +414,7 @@ nouveau_backlight_init(struct drm_connector *connector)
->                                             nv_encoder, ops, &props);
->         if (IS_ERR(bl->dev)) {
->                 if (bl->id >= 0)
-> -                       ida_simple_remove(&bl_ida, bl->id);
-> +                       ida_free(&bl_ida, bl->id);
->                 ret = PTR_ERR(bl->dev);
->                 goto fail_alloc;
->         }
-> @@ -442,7 +442,7 @@ nouveau_backlight_fini(struct drm_connector *connector)
->                 return;
->  
->         if (bl->id >= 0)
-> -               ida_simple_remove(&bl_ida, bl->id);
-> +               ida_free(&bl_ida, bl->id);
->  
->         backlight_device_unregister(bl->dev);
->         nv_conn->backlight = NULL;
-
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gt215.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gt215.c
+index dc026ac1b595..3d0ab86c3115 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gt215.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gt215.c
+@@ -68,7 +68,6 @@ gt215_devinit_disable(struct nvkm_devinit *init)
+ 	struct nvkm_device *device = init->subdev.device;
+ 	u32 r001540 = nvkm_rd32(device, 0x001540);
+ 	u32 r00154c = nvkm_rd32(device, 0x00154c);
+-	u64 disable = 0ULL;
+ 
+ 	if (!(r001540 & 0x40000000)) {
+ 		nvkm_subdev_disable(device, NVKM_ENGINE_MSPDEC, 0);
+@@ -82,7 +81,7 @@ gt215_devinit_disable(struct nvkm_devinit *init)
+ 	if (!(r00154c & 0x00000200))
+ 		nvkm_subdev_disable(device, NVKM_ENGINE_CE, 0);
+ 
+-	return disable;
++	return 0ULL;
+ }
+ 
+ static u32
 -- 
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+2.20.1
 
