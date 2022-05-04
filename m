@@ -2,70 +2,73 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D27395190CE
-	for <lists+nouveau@lfdr.de>; Wed,  4 May 2022 00:04:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0651751A9DE
+	for <lists+nouveau@lfdr.de>; Wed,  4 May 2022 19:19:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0167610E61E;
-	Tue,  3 May 2022 22:04:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 236FB10F1F6;
+	Wed,  4 May 2022 17:19:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5B41B10F4AD
- for <nouveau@lists.freedesktop.org>; Tue,  3 May 2022 22:04:26 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0C95E10F1F6
+ for <nouveau@lists.freedesktop.org>; Wed,  4 May 2022 17:18:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1651615465;
+ s=mimecast20190719; t=1651684739;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=NCw2YbW2b06vdpfX9KTc0Sz/4kzxAVFUC7Z0+7uCYMw=;
- b=SriKKk+74tj4YFH4Lun4AMYfZTNyVTCSgAEB0yc7NU6DRol43aJXANkdGy/o+vMDetHzg7
- BwYk8sA9vrJlL0XbBbM4+7ZDsMb1ZPbj4EhkgGuvUXXoPmKJ8A6jyZQALIFXXZ//EyUNCl
- jwQKswFygNtvL5bZYIwyIDb2G+4SU1w=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding;
+ bh=3t8epFEjcxVGinupv1KfUngZ1NH7mCjOSa22VqDXFR0=;
+ b=TT0SRnuCQfIV4xoudazdAtQ0QCazkEyeypRBznxd0DMBOBDyWIuAUtoIPJgiVtgl603m1a
+ x0cglTTGTE5b0KZs9BAp5eEjR62nfeGxZ7zfwEScZeOODU/m7V3xPkq+cG7bOzzsyqomw5
+ QZdrINplIITeXdfGeeAbtQYg56ONjPU=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-608-bCFX18WQPC6FmidK7F7k4w-1; Tue, 03 May 2022 18:01:52 -0400
-X-MC-Unique: bCFX18WQPC6FmidK7F7k4w-1
-Received: by mail-wm1-f71.google.com with SMTP id
- p13-20020a05600c358d00b00394586f6959so190022wmq.1
- for <nouveau@lists.freedesktop.org>; Tue, 03 May 2022 15:01:47 -0700 (PDT)
+ us-mta-623-TMMhYwGLP8mgBSqmcmpHVA-1; Wed, 04 May 2022 13:18:56 -0400
+X-MC-Unique: TMMhYwGLP8mgBSqmcmpHVA-1
+Received: by mail-ed1-f71.google.com with SMTP id
+ z20-20020a50f154000000b0042815e3008cso1082694edl.15
+ for <nouveau@lists.freedesktop.org>; Wed, 04 May 2022 10:18:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=NCw2YbW2b06vdpfX9KTc0Sz/4kzxAVFUC7Z0+7uCYMw=;
- b=x5jpOgMGnU1rqUAcyp1PA/pc6AKqpe1p4oXwCfBv4sKyynH/I8ra+C3aIW92hhu5jz
- 6AsOFg882iGLzlmeyrYIkoHYnbqIlfFy2GEDvsJTnqcVv1Li4QuU2h0bCJc3aH77iziw
- DkGe465GSeaMAOaJi1q2eHiMKWRHCFekgx6BoreNAW+o7zhUw1RJuDDfuMgVC3jSCxzj
- bm54ZgBV4wfO1HaojnTYLa5AouNnEss58NJaMbMyrAnb6gIIVD9pxiw41ZKGnLsJJAOv
- XRpJg4XjPw/jF6N5cVWuLWDp9IF952cNgqsO6JntTUt7CsAEyrgrJGMVC6PL2SyJc/34
- oYsQ==
-X-Gm-Message-State: AOAM533QgrHSU7lIBECRwwpY4k8i+rEzgh3VJhQh3/FmyvhQ8ksfGb86
- am1qN3YyhMc4gqLvTKUh2zoiyrlzNSMjRhhRJt/BYXmmh+pyShl7bAVfm+4KzZrM3dpyEnTDUe/
- 87rmMWxLM9o6Rcl73/jww7LmB5DRnT8yRiSEA07/Wdw==
-X-Received: by 2002:a5d:4a81:0:b0:207:9abe:2908 with SMTP id
- o1-20020a5d4a81000000b002079abe2908mr14084330wrq.341.1651615305548; 
- Tue, 03 May 2022 15:01:45 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzDZF5QtU8eWm5iH5MBr3nBAiPSuIRf8s8hX0zAE2sJW3Opo+sznt5voV5+vjORprV7H4visxp4de0FdVUYT74=
-X-Received: by 2002:a5d:4a81:0:b0:207:9abe:2908 with SMTP id
- o1-20020a5d4a81000000b002079abe2908mr14084317wrq.341.1651615305322; Tue, 03
- May 2022 15:01:45 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=3t8epFEjcxVGinupv1KfUngZ1NH7mCjOSa22VqDXFR0=;
+ b=5OXVdSnAJ9QlhpZcp+oTbzhE7AkYuoSxgc1Kwuef2EAC9sgJv1WYmFjuEpHo4ClFe8
+ 1jQN38O4VEQeXYsbxIWvGT4/oVWNV/VK9Fu4RS+BkfvdhCC53JA8FBJs798RGuvg6dfQ
+ yxsD792HsVFwAAopqXBiVMg5Zwubqdc2AKZRU+zODNl2/WaNoItNQqMe8Tc1rsWvTUm3
+ McZB/A1FbLgOpr1W7EEg7hmASIdTQp8I8HRO7xCpE/sCXTwPzEFFNIzNJZGbEZudDdbc
+ BWc673wcwqTswBJ2va8ZaVCdKotf9pCsN/JKi43zMf/GcuRdR4kBl1bsUeicHFmfKae9
+ NNBA==
+X-Gm-Message-State: AOAM530ZbBjYoo2Y7XyNIAlZ2b2ZZxytIuo2K3pkfNU1A31YJ8U4loIE
+ 1BxPyIHEq3KXTciti4uzUbknSLuYyvkZ6JjTMVHLIqobEucnfZeaiAK8j9foZTjCNuOn0As18A5
+ ApyasYu/+k9MQo7SpF6ycNNzKjQ==
+X-Received: by 2002:a17:907:a407:b0:6f4:3f14:7707 with SMTP id
+ sg7-20020a170907a40700b006f43f147707mr16222524ejc.351.1651684734990; 
+ Wed, 04 May 2022 10:18:54 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxeNLSEO6aMZEJmeSDZvOrdtsRQbX4QDRaEAbooQf77kraL3riqlGTEh69XjibmoSyspABsDQ==
+X-Received: by 2002:a17:907:a407:b0:6f4:3f14:7707 with SMTP id
+ sg7-20020a170907a40700b006f43f147707mr16222496ejc.351.1651684734772; 
+ Wed, 04 May 2022 10:18:54 -0700 (PDT)
+Received: from fedora.nat2.vcit.vutbr.net (nat2.vcit.vutbr.net.
+ [185.62.108.68]) by smtp.gmail.com with ESMTPSA id
+ bf16-20020a0564021a5000b0042617ba63aesm9492598edb.56.2022.05.04.10.18.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 May 2022 10:18:54 -0700 (PDT)
+From: Mark Menzynski <mmenzyns@redhat.com>
+To: linux-kernel@vger.kernel.org
+Date: Wed,  4 May 2022 19:18:51 +0200
+Message-Id: <20220504171851.17188-1-mmenzyns@redhat.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-References: <20220429195350.85620-1-lyude@redhat.com>
- <CACO55ttsBxe6V88CTtGZgUj8k+gT+ne+FD_9FD_OxowF1XG5Bg@mail.gmail.com>
-In-Reply-To: <CACO55ttsBxe6V88CTtGZgUj8k+gT+ne+FD_9FD_OxowF1XG5Bg@mail.gmail.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Wed, 4 May 2022 00:01:34 +0200
-Message-ID: <CACO55tv=u+HNKS9tH-ggy_O0YRiZQvAyb48gxRVqrz-fmWcvwA@mail.gmail.com>
-To: Lyude Paul <lyude@redhat.com>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mmenzyns@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/subdev/bus: Ratelimit logging for
- fault errors
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Nouveau] [PATCH] drm/nouveau: reorder nouveau_drm_device_fini
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,121 +80,89 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Daniel Vetter <daniel@ffwll.ch>, nouveau <nouveau@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, dri-devel <dri-devel@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ linaro-mm-sig@lists.linaro.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>,
+ linux-media@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Actually, there is another place we have to put this, we can spam
-"SCHED_ERROR" things which are triggered within multiple
-drivers/gpu/drm/nouveau/nvkm/engine/fifo/ files.
+Resources needed for output poll workers are destroyed in
+nouveau_fbcon_fini() before output poll workers are cleared in
+nouveau_display_fini(). This means there is a time between fbcon_fini
+and display_fini, where if output poll happens, it crashes.
 
-On Tue, May 3, 2022 at 9:23 PM Karol Herbst <kherbst@redhat.com> wrote:
->
-> not able to hit any error on my machine, but regardless:
->
-> Reviewed-by: Karol Herbst <kherbst@redhat.com>
->
-> I suspect there are more places where we could put it, but we can add
-> those later.
->
-> Anyway, I think it's valuable to push it through fixes, not sure how
-> far back we want to CC stable though.
->
-> On Fri, Apr 29, 2022 at 9:54 PM Lyude Paul <lyude@redhat.com> wrote:
-> >
-> > There's plenty of ways to fudge the GPU when developing on nouveau by
-> > mistake, some of which can result in nouveau seriously spamming dmesg with
-> > fault errors. This can be somewhat annoying, as it can quickly overrun the
-> > message buffer (or your terminal emulator's buffer) and get rid of actually
-> > useful feedback from the driver. While working on my new atomic only MST
-> > branch, I ran into this issue a couple of times.
-> >
-> > So, let's fix this by adding nvkm_error_ratelimited(), and using it to
-> > ratelimit errors from faults. This should be fine for developers, since
-> > it's nearly always only the first few faults that we care about seeing.
-> > Plus, you can turn off rate limiting in the kernel if you really need to.
-> >
-> > Signed-off-by: Lyude Paul <lyude@redhat.com>
-> > ---
-> >  drivers/gpu/drm/nouveau/include/nvkm/core/subdev.h |  2 ++
-> >  drivers/gpu/drm/nouveau/nvkm/subdev/bus/gf100.c    | 14 +++++++-------
-> >  drivers/gpu/drm/nouveau/nvkm/subdev/bus/nv31.c     |  6 +++---
-> >  drivers/gpu/drm/nouveau/nvkm/subdev/bus/nv50.c     |  6 +++---
-> >  4 files changed, 15 insertions(+), 13 deletions(-)
-> >
-> > diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/subdev.h b/drivers/gpu/drm/nouveau/include/nvkm/core/subdev.h
-> > index 1665738948fb..96113c8bee8c 100644
-> > --- a/drivers/gpu/drm/nouveau/include/nvkm/core/subdev.h
-> > +++ b/drivers/gpu/drm/nouveau/include/nvkm/core/subdev.h
-> > @@ -62,4 +62,6 @@ void nvkm_subdev_intr(struct nvkm_subdev *);
-> >  #define nvkm_debug(s,f,a...) nvkm_printk((s), DEBUG,   info, f, ##a)
-> >  #define nvkm_trace(s,f,a...) nvkm_printk((s), TRACE,   info, f, ##a)
-> >  #define nvkm_spam(s,f,a...)  nvkm_printk((s),  SPAM,    dbg, f, ##a)
-> > +
-> > +#define nvkm_error_ratelimited(s,f,a...) nvkm_printk((s), ERROR, err_ratelimited, f, ##a)
-> >  #endif
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bus/gf100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bus/gf100.c
-> > index 53a6651ac225..80b5aaceeaad 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/bus/gf100.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bus/gf100.c
-> > @@ -35,13 +35,13 @@ gf100_bus_intr(struct nvkm_bus *bus)
-> >                 u32 addr = nvkm_rd32(device, 0x009084);
-> >                 u32 data = nvkm_rd32(device, 0x009088);
-> >
-> > -               nvkm_error(subdev,
-> > -                          "MMIO %s of %08x FAULT at %06x [ %s%s%s]\n",
-> > -                          (addr & 0x00000002) ? "write" : "read", data,
-> > -                          (addr & 0x00fffffc),
-> > -                          (stat & 0x00000002) ? "!ENGINE " : "",
-> > -                          (stat & 0x00000004) ? "PRIVRING " : "",
-> > -                          (stat & 0x00000008) ? "TIMEOUT " : "");
-> > +               nvkm_error_ratelimited(subdev,
-> > +                                      "MMIO %s of %08x FAULT at %06x [ %s%s%s]\n",
-> > +                                      (addr & 0x00000002) ? "write" : "read", data,
-> > +                                      (addr & 0x00fffffc),
-> > +                                      (stat & 0x00000002) ? "!ENGINE " : "",
-> > +                                      (stat & 0x00000004) ? "PRIVRING " : "",
-> > +                                      (stat & 0x00000008) ? "TIMEOUT " : "");
-> >
-> >                 nvkm_wr32(device, 0x009084, 0x00000000);
-> >                 nvkm_wr32(device, 0x001100, (stat & 0x0000000e));
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bus/nv31.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bus/nv31.c
-> > index ad8da523bb22..c75e463f3501 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/bus/nv31.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bus/nv31.c
-> > @@ -45,9 +45,9 @@ nv31_bus_intr(struct nvkm_bus *bus)
-> >                 u32 addr = nvkm_rd32(device, 0x009084);
-> >                 u32 data = nvkm_rd32(device, 0x009088);
-> >
-> > -               nvkm_error(subdev, "MMIO %s of %08x FAULT at %06x\n",
-> > -                          (addr & 0x00000002) ? "write" : "read", data,
-> > -                          (addr & 0x00fffffc));
-> > +               nvkm_error_ratelimited(subdev, "MMIO %s of %08x FAULT at %06x\n",
-> > +                                      (addr & 0x00000002) ? "write" : "read", data,
-> > +                                      (addr & 0x00fffffc));
-> >
-> >                 stat &= ~0x00000008;
-> >                 nvkm_wr32(device, 0x001100, 0x00000008);
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bus/nv50.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bus/nv50.c
-> > index 3a1e45adeedc..2055d0b100d3 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/bus/nv50.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bus/nv50.c
-> > @@ -60,9 +60,9 @@ nv50_bus_intr(struct nvkm_bus *bus)
-> >                 u32 addr = nvkm_rd32(device, 0x009084);
-> >                 u32 data = nvkm_rd32(device, 0x009088);
-> >
-> > -               nvkm_error(subdev, "MMIO %s of %08x FAULT at %06x\n",
-> > -                          (addr & 0x00000002) ? "write" : "read", data,
-> > -                          (addr & 0x00fffffc));
-> > +               nvkm_error_ratelimited(subdev, "MMIO %s of %08x FAULT at %06x\n",
-> > +                                      (addr & 0x00000002) ? "write" : "read", data,
-> > +                                      (addr & 0x00fffffc));
-> >
-> >                 stat &= ~0x00000008;
-> >                 nvkm_wr32(device, 0x001100, 0x00000008);
-> > --
-> > 2.35.1
-> >
+BUG: KASAN: use-after-free in
+__drm_fb_helper_initial_config_and_unlock.cold+0x1f3/0x291
+[drm_kms_helper]
+
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: David Airlie <airlied@linux.ie>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: Sumit Semwal <sumit.semwal@linaro.org>
+Cc: "Christian König" <christian.koenig@amd.com>
+Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-media@vger.kernel.org
+Cc: linaro-mm-sig@lists.linaro.org
+Signed-off-by: Mark Menzynski <mmenzyns@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_drm.c | 17 ++++++++---------
+ 1 file changed, 8 insertions(+), 9 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+index 561309d447e0..773efdd20d2f 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_drm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+@@ -588,12 +588,6 @@ nouveau_drm_device_init(struct drm_device *dev)
+ 	if (ret)
+ 		goto fail_dispctor;
+ 
+-	if (dev->mode_config.num_crtc) {
+-		ret = nouveau_display_init(dev, false, false);
+-		if (ret)
+-			goto fail_dispinit;
+-	}
+-
+ 	nouveau_debugfs_init(drm);
+ 	nouveau_hwmon_init(dev);
+ 	nouveau_svm_init(drm);
+@@ -601,6 +595,12 @@ nouveau_drm_device_init(struct drm_device *dev)
+ 	nouveau_fbcon_init(dev);
+ 	nouveau_led_init(dev);
+ 
++	if (dev->mode_config.num_crtc) {
++		ret = nouveau_display_init(dev, false, false);
++		if (ret)
++			goto fail_dispinit;
++	}
++
+ 	if (nouveau_pmops_runtime()) {
+ 		pm_runtime_use_autosuspend(dev->dev);
+ 		pm_runtime_set_autosuspend_delay(dev->dev, 5000);
+@@ -641,15 +641,14 @@ nouveau_drm_device_fini(struct drm_device *dev)
+ 		pm_runtime_forbid(dev->dev);
+ 	}
+ 
++	if (dev->mode_config.num_crtc)
++		nouveau_display_fini(dev, false, false);
+ 	nouveau_led_fini(dev);
+ 	nouveau_fbcon_fini(dev);
+ 	nouveau_dmem_fini(drm);
+ 	nouveau_svm_fini(drm);
+ 	nouveau_hwmon_fini(dev);
+ 	nouveau_debugfs_fini(drm);
+-
+-	if (dev->mode_config.num_crtc)
+-		nouveau_display_fini(dev, false, false);
+ 	nouveau_display_destroy(dev);
+ 
+ 	nouveau_accel_fini(drm);
+-- 
+2.32.0
 
