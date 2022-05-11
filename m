@@ -2,81 +2,97 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2ECD1520463
-	for <lists+nouveau@lfdr.de>; Mon,  9 May 2022 20:19:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ACA23523A71
+	for <lists+nouveau@lfdr.de>; Wed, 11 May 2022 18:37:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6E3E010E3D6;
-	Mon,  9 May 2022 18:19:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2D76710FED4;
+	Wed, 11 May 2022 16:37:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 54F7F10E3D6
- for <nouveau@lists.freedesktop.org>; Mon,  9 May 2022 18:19:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1652120383;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=PDFIEGAmMkYI3lcSgWTP/D9Zx+5IJKr94HLnqcFoXoI=;
- b=JbkIx0gcvx3iZGAwdftphW2Z3cWIeQjcYZBbAdYcn670P275YxucVpr2hCIcRaSWw/UOrS
- XlYRFKEm5pMx2VL/y7tMCdYfAsTclyjvw8/cm5urj8HOYh9MbjNrSsTR9U3RjKMhZsrdUA
- 7KuXUbzlVtZ7rjAQ3mTSH3l0m0kIuPY=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-573-5IPLnRPUNUeZmErOEY3GpA-1; Mon, 09 May 2022 14:19:42 -0400
-X-MC-Unique: 5IPLnRPUNUeZmErOEY3GpA-1
-Received: by mail-qt1-f200.google.com with SMTP id
- j18-20020ac806d2000000b002f354e9bc9eso12785336qth.10
- for <nouveau@lists.freedesktop.org>; Mon, 09 May 2022 11:19:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=PDFIEGAmMkYI3lcSgWTP/D9Zx+5IJKr94HLnqcFoXoI=;
- b=s5Z4ZKlhjffY4UUfoaJGYuIz6XXL1JkuclvRdKw3V+D5i0DeerQdB1YFG0MSOunNip
- 1HKzwT5Pyu7OvdH2VzqekMUNg123RhR8ib6oso09FuLsfYScshL4qkexiKhE4M6czp0v
- db94x5anUsPDfk7P450n9Wvm3871h9WTtCPI9AufLKQar/uXZ1uEQyeUJRRslTYQg2TB
- hUC/VGDeXvqu0mHr4t///YUN0xIB8ZP6vU7LsD7QSdSrBukFlsmvVEZC+A2tH2Pxs383
- HHAPF3U9/kP/Fqsohj8uKnndjOQps5BJZo7EetqSjMhJ0AZUF5Lwn//RiKqwgAkc6FiR
- 3nOA==
-X-Gm-Message-State: AOAM530kv3/gbiQJULYizJhEKPpMLYb+HlPduEC8RmKH3lSs+AcShrWt
- mpr7Mzl6QRd7lTKOyEyd5Wzv983X/oqGXOJfzO5lQwZH3t0aFgsu2o29emQfSno0zUU0YYcWs0V
- vK3P/Pz/WMPOpdiUy4EIY15mFQA==
-X-Received: by 2002:ad4:594b:0:b0:45a:9692:14a3 with SMTP id
- eo11-20020ad4594b000000b0045a969214a3mr14821466qvb.107.1652120381817; 
- Mon, 09 May 2022 11:19:41 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxTKWoBx8hf4aO9oeLuMx3Wy5UIKOWsPo4PTItAkI7mNq7lPxt1S1WQ+QbyFWj4uh2wXeAczA==
-X-Received: by 2002:ad4:594b:0:b0:45a:9692:14a3 with SMTP id
- eo11-20020ad4594b000000b0045a969214a3mr14821445qvb.107.1652120381597; 
- Mon, 09 May 2022 11:19:41 -0700 (PDT)
-Received: from [192.168.8.138] (static-71-184-137-158.bstnma.ftas.verizon.net.
- [71.184.137.158]) by smtp.gmail.com with ESMTPSA id
- y7-20020ac87c87000000b002f39b99f67csm8127235qtv.22.2022.05.09.11.19.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 May 2022 11:19:41 -0700 (PDT)
-Message-ID: <1deeebc415c188c35f090048f32d7dacd93b14b1.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Mark Menzynski <mmenzyns@redhat.com>
-Date: Mon, 09 May 2022 14:19:39 -0400
-In-Reply-To: <82c9b246bcbe544036d2fc0873f15f8483947a57.camel@redhat.com>
-References: <20220504171851.17188-1-mmenzyns@redhat.com>
- <7574d491866ffa7c1a4607885b76140ba4206477.camel@redhat.com>
- <CA+i2r=uKq=CWts-6wXh2qqy6=vEVHLY0vRBxzcA-mg0P8wXOZg@mail.gmail.com>
- <82c9b246bcbe544036d2fc0873f15f8483947a57.camel@redhat.com>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2064.outbound.protection.outlook.com [40.107.220.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1F75210FED4
+ for <nouveau@lists.freedesktop.org>; Wed, 11 May 2022 16:37:27 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=l5ia5Gw3SZgexukBHGkuqnA2wLg/KHrr5GDAqDkoQOT5PlZ29MJOBU9WlYeUwu/Va/OLAGRnHYdsPTnkSC2n3oAkUaqYZoXvqFAUV8xZeOgc6II0rXY7hbNLDc89/yNyl4TTxCfe+v0zzhKUYIzjM8eFGBFRs2NLprm5Hjm7DHc67I9f8S/t51rPyBy9WnTSw7ya9DYie8MOJ1EzyDC1SDdESOaZMLviYF2/4GKxD0loLSL2oLZHsWdWvFaFkDBa7oe7WoeEgcXxYnpMLXH5swYvUwc1/gWolXQPTKoqpdODAybubbkT5jMMt1ax6EpKcyZOnUpatheunsjMm4GPrw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5Kqm5MxEvEAo/ZdB9TUyDCbo9xshQj+6BAHDlbBBZ3E=;
+ b=M5nGlNRAi819LAIhOaKeNQzDcL21ee1tRFBNDzH4X2Lod1vlC73SJ8DvAyN5g11JPxjD5N1JONnvClInmm6DNQA2vJjcgyO9WjpBLHbtj8Cu8uTn+wDBDhcvyHBdS2W952O6Kf/TJ8uIv91/0lSPaCbHY0DMX2pxWJr1UUcrE7gX+31AS9xlWDdh+zhoOXUSHv42pZqdgCBrqBHLqNWxBOCkgZo7kLwQFD3gaTJ6cojydxXGXSuim+ZXYSHC7JXYzWZzBJRJUZjpNwryCT/JqUHtYLEjgRqT7gn36LwkqlJN08efqjpSH8QGqeMRQtNvZtYfZYKJ91ppWRI3AvxdkQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 12.22.5.236) smtp.rcpttodomain=glowingmonkey.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5Kqm5MxEvEAo/ZdB9TUyDCbo9xshQj+6BAHDlbBBZ3E=;
+ b=Y8YvDMUiKBxtgIePgQPRKlF2HOrWowY00TUNXJiDQ+nXrV6c0LrK/OswiXhcfYKmelE9plEE0nvx/maI9dC9I8tdU1z5srPaVGvtZs2mcr9tc7/tq1oduApJAD5osWm+5TQWNb+M4E8PoGVFoNhHGjaVuWJVVK3CIqur1eeft1vbpp45ZdDNnb7WXjDzdcfpEmk4zgh0pJ9X44jNaqq61op+I5/qAouUaeToU7EqfLSRHONkQFsb0u8WNC1hMKhO7fo685OdLB9rOGtKqAKxVieLv6BR3d18UlpIhSUDufLJms5axejCGlOp3F+qs8cmqSA5nIaMmUynkzGQmolGxA==
+Received: from DM6PR07CA0120.namprd07.prod.outlook.com (2603:10b6:5:330::10)
+ by CH2PR12MB4165.namprd12.prod.outlook.com (2603:10b6:610:a4::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5227.21; Wed, 11 May
+ 2022 16:37:25 +0000
+Received: from DM6NAM11FT042.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:5:330:cafe::4) by DM6PR07CA0120.outlook.office365.com
+ (2603:10b6:5:330::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5250.13 via Frontend
+ Transport; Wed, 11 May 2022 16:37:25 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 12.22.5.236)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 12.22.5.236 as permitted sender) receiver=protection.outlook.com;
+ client-ip=12.22.5.236; helo=mail.nvidia.com;
+Received: from mail.nvidia.com (12.22.5.236) by
+ DM6NAM11FT042.mail.protection.outlook.com (10.13.173.165) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.5250.13 via Frontend Transport; Wed, 11 May 2022 16:37:25 +0000
+Received: from drhqmail203.nvidia.com (10.126.190.182) by
+ DRHQMAIL109.nvidia.com (10.27.9.19) with Microsoft SMTP Server (TLS) id
+ 15.0.1497.32; Wed, 11 May 2022 16:37:24 +0000
+Received: from drhqmail203.nvidia.com (10.126.190.182) by
+ drhqmail203.nvidia.com (10.126.190.182) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.22; Wed, 11 May 2022 09:37:24 -0700
+Received: from ttabi.nvidia.com (10.127.8.14) by mail.nvidia.com
+ (10.126.190.182) with Microsoft SMTP Server id 15.2.986.22 via Frontend
+ Transport; Wed, 11 May 2022 09:37:23 -0700
+From: Timur Tabi <ttabi@nvidia.com>
+To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>, "Nick
+ Lopez" <github@glowingmonkey.org>, <nouveau@lists.freedesktop.org>
+Date: Wed, 11 May 2022 11:37:16 -0500
+Message-ID: <20220511163716.3520591-1-ttabi@nvidia.com>
+X-Mailer: git-send-email 2.36.0
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
+X-NVConfidentiality: public
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: reorder nouveau_drm_device_fini
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 56849ac6-6d4b-4d93-6ec9-08da336c87a7
+X-MS-TrafficTypeDiagnostic: CH2PR12MB4165:EE_
+X-Microsoft-Antispam-PRVS: <CH2PR12MB41656343FA9F87346C83E4CDC2C89@CH2PR12MB4165.namprd12.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 5Pzq4Je0HLNBXAm5UPNYQZFfZ6UORsYcCVCKmFvnbTZCDOveygvLmFCov207k8CVaOq06UWvuwOQIAJ3j7160KbjBtxnQLXI6VlHfyvqB8/wMYuiYYd6zSYUI+Qvi+5ZOeUh6s8hvO32dQxUqKon9CgqoWTJaLj7+vwyi/3FSL0C3ziX/K7+7KcSxaqmkmNZy97fZ99H12I99mrxywDb9cygUpwpetrWgczWyfT1Sqfxf4JSnMJ/rn+OhtAq1aqVjo6kcwyh/qRGOM2H/24ivWqWW/5hiSi0itZvG7+sbdoAg6L9YvxCIwC8vfGKq1b5kmO02sZPGH5qhOCIvoYurVTS4E1at0AoQyFcoe7cXeruMiw2Fwrir1fzSj4R3toxZITP5UGolluhxC/aMVN3s6EfU49cTLne+haDND+E7ShsI/55IB0UFRg6tUk2Q65ORz6wY4biQ88RVmu4ADg1l1R63oqLjxIuOJyh9x7+IiSGyIJHjj2gF73FipjACQVf6ZnxswAas+SLS3XA/TYwdnV7Soh4ffWGIfTVsmFZJO9fRnauKSPS2FDDz4ZVQEzPGZ5nJzBGJCV0BZnUQki5zOVJ85b8MBJ925crWRRuRdHf3fCdwKMdE1YknnULNmly20a6NTohzILuhbbuVRQSY4oRZZdpn0Njk9lioW0c9aqO+CE30xyd8McEFxbZpN3ndH1JGQ33ECXWr2lAJjQ3gQ==
+X-Forefront-Antispam-Report: CIP:12.22.5.236; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:InfoNoRecords; CAT:NONE;
+ SFS:(13230001)(4636009)(46966006)(40470700004)(36840700001)(81166007)(8936002)(40460700003)(36756003)(2906002)(336012)(4744005)(36860700001)(356005)(426003)(5660300002)(508600001)(47076005)(1076003)(83380400001)(70206006)(186003)(70586007)(8676002)(2616005)(82310400005)(316002)(110136005)(7696005)(6666004)(86362001)(26005)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2022 16:37:25.0478 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 56849ac6-6d4b-4d93-6ec9-08da336c87a7
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[12.22.5.236];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT042.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4165
+Subject: [Nouveau] [PATCH] drm/nouveau: fix another off-by-one in nvbios_addr
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,155 +104,32 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Also JFYI Mark - I just realized that your email client is defaulting to
-sending HTML mail when you reply to me, that doesn't really make it onto the
-mailing list at all so you probably want to fix that.
+This check determines whether a given address is part of
+image 0 or image 1.  Image 1 starts at offset image0_size,
+so that address should be included.
 
-Also - I misspoke here again, I think it should actually be a call to
-drm_kms_helper_poll_fini() instead since that will both cancel the output poll
-worker and update dev->mode_config.poll_enabled to prevent the output poll
-worker from starting up again. The documentation doesn't say it's fine to call
-drm_kms_helper_poll_disable() after that, but it seems to be safe from looking
-at the code - and I think someone just generally forgot to write docs for
-drm_kms_helper_poll_fini()…
+Fixes: 4d4e9907ff572 ("drm/nouveau/bios: guard against out-of-bounds accesses to image")
+Signed-off-by: Timur Tabi <ttabi@nvidia.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Mon, 2022-05-09 at 13:59 -0400, Lyude Paul wrote:
-> On Mon, 2022-05-09 at 15:13 +0200, Mark Menzynski wrote:
-> > I think there are no direct issues with initialization in the state how it
-> > is now. I suspect it's because "drm_kms_helper_poll_enable()" starts the
-> > first worker thread with a delay, which gives enough time to initialize
-> > required resources. I changed the initialization part to keep it
-> > consistent with the finish part, which is the one causing troubles.
-> 
-> I think I may have misspoke on what the issue was here since I was about to
-> leave work. The MST bit might not actually be an issue, however I think
-> nouveau_fbcon_init() being called before nouveau_display_init() would be an
-> issue since nouveau_fbcon_init() can trigger a modeset - and we can't
-> perform modesets before nouveau_display_init() has set things up.
-> 
-> Looking at the docs for drm_kms_helper_poll_disable() - I think the actual
-> fix here (to ensure that we still call drm_kms_helper_poll_disable() at the
-> right time during suspend) would be to actually add another call to
-> drm_kms_helper_poll_disable() into nouveau_fbcon_fini() before we call
-> nouveau_fbcon_accel_fini() and everything after. This should make sure that
-> we stop the output polling work early on driver unload, and since the docs
-> mention that it's OK to disable polling more then once with
-> drm_kms_helper_poll_disable() I don't see any issues with that.
-> 
-> 
-> > 
-> > I am not sure where I could move "drm_kms_helper_poll_enable/disable()",
-> > since it is defined in "drm/drm_probe_helper.c", which is only included in
-> > "nouveau_display.c" and "nouveau_connector.c". Both creating a new
-> > function in "nouveau_display.c", and including "probe_helper.h" and using
-> > poll_enable in a different file like "nouveau_fbcon.c" seem like too big
-> > changes for such small fix. I don't know.
-> > 
-> > Can this new proposed order break something in the finish part as well?
-> > Maybe it would be just better to change the order of "nouveau_drm_finish"
-> > and keep the current order of "noueau_drm_init"?
-> > 
-> > On Thu, May 5, 2022 at 9:57 PM Lyude Paul <lyude@redhat.com> wrote:
-> > > Hmm, I think we might just need to move the drm_kms_helper_poll_enable()
-> > > call
-> > > to the end here instead of all of nouveau_display_init(). I realized
-> > > this
-> > > because in nouveau_display_init() it seems that we actually rely on
-> > > nouveau_display_init() to setup hotplug interrupts - which we do
-> > > actually need
-> > > this early on in the driver probe process.
-> > > 
-> > > That being said though, drm_kms_helper_poll_enable() shouldn't be
-> > > required for
-> > > MST short HPD IRQs from working so moving that instead should work.
-> > > 
-> > > On Wed, 2022-05-04 at 19:18 +0200, Mark Menzynski wrote:
-> > > > Resources needed for output poll workers are destroyed in
-> > > > nouveau_fbcon_fini() before output poll workers are cleared in
-> > > > nouveau_display_fini(). This means there is a time between fbcon_fini
-> > > > and display_fini, where if output poll happens, it crashes.
-> > > > 
-> > > > BUG: KASAN: use-after-free in
-> > > > __drm_fb_helper_initial_config_and_unlock.cold+0x1f3/0x291
-> > > > [drm_kms_helper]
-> > > > 
-> > > > Cc: Ben Skeggs <bskeggs@redhat.com>
-> > > > Cc: Karol Herbst <kherbst@redhat.com>
-> > > > Cc: Lyude Paul <lyude@redhat.com>
-> > > > Cc: David Airlie <airlied@linux.ie>
-> > > > Cc: Daniel Vetter <daniel@ffwll.ch>
-> > > > Cc: Sumit Semwal <sumit.semwal@linaro.org>
-> > > > Cc: "Christian König" <christian.koenig@amd.com>
-> > > > Cc: dri-devel@lists.freedesktop.org
-> > > > Cc: nouveau@lists.freedesktop.org
-> > > > Cc: linux-kernel@vger.kernel.org
-> > > > Cc: linux-media@vger.kernel.org
-> > > > Cc: linaro-mm-sig@lists.linaro.org
-> > > > Signed-off-by: Mark Menzynski <mmenzyns@redhat.com>
-> > > > ---
-> > > >  drivers/gpu/drm/nouveau/nouveau_drm.c | 17 ++++++++---------
-> > > >  1 file changed, 8 insertions(+), 9 deletions(-)
-> > > > 
-> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c
-> > > > b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> > > > index 561309d447e0..773efdd20d2f 100644
-> > > > --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> > > > @@ -588,12 +588,6 @@ nouveau_drm_device_init(struct drm_device *dev)
-> > > >         if (ret)
-> > > >                 goto fail_dispctor;
-> > > >  
-> > > > -       if (dev->mode_config.num_crtc) {
-> > > > -               ret = nouveau_display_init(dev, false, false);
-> > > > -               if (ret)
-> > > > -                       goto fail_dispinit;
-> > > > -       }
-> > > > -
-> > > >         nouveau_debugfs_init(drm);
-> > > >         nouveau_hwmon_init(dev);
-> > > >         nouveau_svm_init(drm);
-> > > > @@ -601,6 +595,12 @@ nouveau_drm_device_init(struct drm_device *dev)
-> > > >         nouveau_fbcon_init(dev);
-> > > >         nouveau_led_init(dev);
-> > > >  
-> > > > +       if (dev->mode_config.num_crtc) {
-> > > > +               ret = nouveau_display_init(dev, false, false);
-> > > > +               if (ret)
-> > > > +                       goto fail_dispinit;
-> > > > +       }
-> > > > +
-> > > >         if (nouveau_pmops_runtime()) {
-> > > >                 pm_runtime_use_autosuspend(dev->dev);
-> > > >                 pm_runtime_set_autosuspend_delay(dev->dev, 5000);
-> > > > @@ -641,15 +641,14 @@ nouveau_drm_device_fini(struct drm_device *dev)
-> > > >                 pm_runtime_forbid(dev->dev);
-> > > >         }
-> > > >  
-> > > > +       if (dev->mode_config.num_crtc)
-> > > > +               nouveau_display_fini(dev, false, false);
-> > > >         nouveau_led_fini(dev);
-> > > >         nouveau_fbcon_fini(dev);
-> > > >         nouveau_dmem_fini(drm);
-> > > >         nouveau_svm_fini(drm);
-> > > >         nouveau_hwmon_fini(dev);
-> > > >         nouveau_debugfs_fini(drm);
-> > > > -
-> > > > -       if (dev->mode_config.num_crtc)
-> > > > -               nouveau_display_fini(dev, false, false);
-> > > >         nouveau_display_destroy(dev);
-> > > >  
-> > > >         nouveau_accel_fini(drm);
-> > > 
-> 
-
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c
+index 64e423dddd9e..6c318e41bde0 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c
+@@ -33,7 +33,7 @@ nvbios_addr(struct nvkm_bios *bios, u32 *addr, u8 size)
+ {
+ 	u32 p = *addr;
+ 
+-	if (*addr > bios->image0_size && bios->imaged_addr) {
++	if (*addr >= bios->image0_size && bios->imaged_addr) {
+ 		*addr -= bios->image0_size;
+ 		*addr += bios->imaged_addr;
+ 	}
 -- 
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+2.36.0
 
