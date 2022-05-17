@@ -2,66 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F78B52AE35
-	for <lists+nouveau@lfdr.de>; Wed, 18 May 2022 00:33:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E777952AE37
+	for <lists+nouveau@lfdr.de>; Wed, 18 May 2022 00:33:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3D37310E409;
-	Tue, 17 May 2022 22:33:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BDCB910FA0C;
+	Tue, 17 May 2022 22:33:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E977A10E409
- for <nouveau@lists.freedesktop.org>; Tue, 17 May 2022 22:33:31 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4F08F1125D7
+ for <nouveau@lists.freedesktop.org>; Tue, 17 May 2022 22:33:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1652826810;
+ s=mimecast20190719; t=1652826821;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
  bh=xsgZD2xN95jcvNsVYdiJpz1wstzqtrmwvWpl/rt8mrs=;
- b=VpZFVvbt3O4fIZvOUSYD7q1K6NrEwz7MpD7ZhjeIzkhRgrtGBeVdgLH0ihBeM96blUK0GA
- ek9cUOKok8Do6jObbE8jhiGKaInmpSc2O7mL5yj9Vh/Etgup3ZzdmNCEXI/Phw+0nZNNJh
- QCa1hyA8lvpKqQ4UB5wZ376qJF6PMzs=
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ b=Js7VkRPvMV+8h8BvFZkIWA8fL+QpIRmFtzMGbFF2kJ9C10qfnE7qupz7k40TC2opmf826f
+ xVXlD3XofEG0mXu1Iy77i37jAqYHAgk8kkl9DFv/l2trd1QhzPd7iGTMYw5FMW7flp2Mzw
+ SJ2SpCbt/jwvmqsrT8hHqZ1Mbw/7m6E=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-222-1HGduiNjMjSvDcRRnBGipA-1; Tue, 17 May 2022 18:33:29 -0400
-X-MC-Unique: 1HGduiNjMjSvDcRRnBGipA-1
-Received: by mail-qv1-f71.google.com with SMTP id
- t10-20020a0cd40a000000b00461c0375015so285617qvh.0
- for <nouveau@lists.freedesktop.org>; Tue, 17 May 2022 15:33:29 -0700 (PDT)
+ us-mta-240-iEk4T0eIM7-2sMPZiqYYbQ-1; Tue, 17 May 2022 18:33:40 -0400
+X-MC-Unique: iEk4T0eIM7-2sMPZiqYYbQ-1
+Received: by mail-qv1-f72.google.com with SMTP id
+ cf3-20020a05621403e300b00461d0bc91c3so202983qvb.22
+ for <nouveau@lists.freedesktop.org>; Tue, 17 May 2022 15:33:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
  :references:organization:user-agent:mime-version
  :content-transfer-encoding;
  bh=xsgZD2xN95jcvNsVYdiJpz1wstzqtrmwvWpl/rt8mrs=;
- b=33MFbWyI082SU8fGUujBAq3RMKKG2eA0Ri2drK8Tk5MmSWltuiKwBcz0Xpm6mnEQe+
- p+WrW1gDfbZ/zPtx5c9MD1lAyAR0wvvwmxbTZqGPtLGvVuJbIAWeWLdYtFAlcYDsA4TC
- hyvlRd2Q2x7+qPooA4nfbkcMFJ3EyYim1b9jcOnw8KhScx0x3UQrAB+ZgonZp9/n4qn8
- F0otbX0g2/4gpG365H6PnYPcvQsnG/qE1FrzNyRE4O38aXoS6dwCnYpNOspITiRo3lFR
- U3vJKC3c/qhmvRrEfdSb5/ORDh2PVaGCCsZX00zfyp+jP0l3jDN9tpSY6Qp4nvvdtha7
- 4oAw==
-X-Gm-Message-State: AOAM531ui3UE8/V8FnBq4bN3U6sZY2yqxHF9B+yQSNVQoJckGWFz6f0d
- AETnTdOy32lXfkTvijGNKI3TSE+2Iw3xtU4NiTWkhYU79rxzEjwx2vXKQjYO06+v1YC6dyuIg21
- 8zT07+AWdAnurkYuzlI2D2sClew==
-X-Received: by 2002:a05:620a:4727:b0:6a0:3036:8bfe with SMTP id
- bs39-20020a05620a472700b006a030368bfemr18258019qkb.239.1652826809401; 
- Tue, 17 May 2022 15:33:29 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJz1rJobn4JcdOWoAqeK93N2MhQ5S8q1IuwRVLFycp/5h0rBE3NqehxIR7DkNsuosW/5+564Lw==
-X-Received: by 2002:a05:620a:4727:b0:6a0:3036:8bfe with SMTP id
- bs39-20020a05620a472700b006a030368bfemr18258006qkb.239.1652826809198; 
- Tue, 17 May 2022 15:33:29 -0700 (PDT)
+ b=ndwSTbFvLPN41ztV3w+jhWi5yNm0tJF2lMA+z1BRAawj46Ox7WNh9JjM111w5i1jh5
+ wbLVYQ4LBZ2j3k0G4tCoDbyp9nHqxV7QRGMxR4LFKHc2PazMjQwNvG/rUCnMpb9twh1B
+ QyKSueUfOJFgoBD0DzBWFsBbkiVRTrrYyyYTIKJ9TpWRkbNkEphoPr1uTbO7JXSwvTEK
+ tGkrj8klAaG9ai97I0LkOgabpaWaJMIe2g7c5lSttTbOpmAMhGX/D1ZKpQOyfLQ3RVOK
+ UDGxIj8DI/MNipWIBFz+Ci1omSHGrELd7KYg2aRSsw0K/uDCCiBDf7vBUFlk0P7PISOC
+ b1nQ==
+X-Gm-Message-State: AOAM5322fb4N0UO+23pqSxSuSB9Q0q2BaiyiwPHqpk3PGZ7r3BhiOW9X
+ 98cazOScpq0GoL800pQfj48GXXPBFYTrDIzNfG8yUeXIDj+RmHS54LiJeM98fhyhtRYJLhDrTkU
+ 8RlTjdgW1Kcrys5qfc5S4vwyXpQ==
+X-Received: by 2002:a05:622a:4d4:b0:2f3:c529:5f89 with SMTP id
+ q20-20020a05622a04d400b002f3c5295f89mr22472719qtx.158.1652826820080; 
+ Tue, 17 May 2022 15:33:40 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxNH3lIfhXQ3QcRjAYZSIHBy4cUOe+o8UjX9lacQqYYbq3FNnSKIvDUgOrGldFFWLAX52lxvw==
+X-Received: by 2002:a05:622a:4d4:b0:2f3:c529:5f89 with SMTP id
+ q20-20020a05622a04d400b002f3c5295f89mr22472711qtx.158.1652826819889; 
+ Tue, 17 May 2022 15:33:39 -0700 (PDT)
 Received: from [192.168.8.138] (static-71-184-137-158.bstnma.ftas.verizon.net.
  [71.184.137.158]) by smtp.gmail.com with ESMTPSA id
- z197-20020a3765ce000000b0069fc13ce212sm276480qkb.67.2022.05.17.15.31.11
+ g12-20020ac8070c000000b002f39b99f69csm114858qth.54.2022.05.17.15.33.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 May 2022 15:31:56 -0700 (PDT)
-Message-ID: <aed19bec63ddcb63bf87582754c96d7fbe2c06b3.camel@redhat.com>
+ Tue, 17 May 2022 15:33:39 -0700 (PDT)
+Message-ID: <4382925e2e4174598214f3a9f74b373a5fca40fd.camel@redhat.com>
 From: Lyude Paul <lyude@redhat.com>
 To: Mark Menzynski <mmenzyns@redhat.com>, linux-kernel@vger.kernel.org
-Date: Tue, 17 May 2022 18:31:03 -0400
+Date: Tue, 17 May 2022 18:33:38 -0400
 In-Reply-To: <20220516133103.324365-1-mmenzyns@redhat.com>
 References: <20220516133103.324365-1-mmenzyns@redhat.com>
 Organization: Red Hat Inc.
