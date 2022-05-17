@@ -2,41 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 508CF52A62D
-	for <lists+nouveau@lfdr.de>; Tue, 17 May 2022 17:24:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 10DC152A62E
+	for <lists+nouveau@lfdr.de>; Tue, 17 May 2022 17:24:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EDDA710E8E7;
-	Tue, 17 May 2022 15:23:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B601B11206D;
+	Tue, 17 May 2022 15:23:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 44D16112043
- for <nouveau@lists.freedesktop.org>; Tue, 17 May 2022 15:23:54 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BDECF112B7F
+ for <nouveau@lists.freedesktop.org>; Tue, 17 May 2022 15:23:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1652801033;
+ s=mimecast20190719; t=1652801035;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=uYXEw23QaybZczrEyMlwByxGA3gLwXOpa6JX6bmKDxI=;
- b=L070wv6HqXWegBLSiIJ85/KbElc42xwLOvE1g/LoMwiFrs8k0TGSYwHsHo9/93ZNTvYSbJ
- Kdt1WTk4LroOtP/Qlq7QjLvrXlLWg6OWn7pLToc2qaZQ7stwqomPwhEpoGW/egQGlhn2ZU
- uwTP6Su5cpDqpBQSFmswxDx/UQ6laMw=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=nrgaigmhtT/c3yNhuGBcztXKchf7HdgOC/zOZ1F01Vw=;
+ b=VDwnzCgYmBLy7Hh0gAS8Wwn7C3EPGPq6VpATo/JdCqn0RAqCK4Eg6psWTcVNu+P/P8sid8
+ I0gAVpsL4+CgmRjOf3GroVbNivCaZu0Zk+CdcYPkY7pO4FrOo+nULWSIlUkPPU9aUc/Trb
+ VLAr2/pvBlj3jhlHJmS5BYBMdRqW9fk=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-157-iQdxcSsTO2GfeSk7xvwBTQ-1; Tue, 17 May 2022 11:23:49 -0400
-X-MC-Unique: iQdxcSsTO2GfeSk7xvwBTQ-1
+ us-mta-596-m8jAcUa4PfG3b5nOVxKb1g-1; Tue, 17 May 2022 11:23:52 -0400
+X-MC-Unique: m8jAcUa4PfG3b5nOVxKb1g-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id C2BFC2999B24;
- Tue, 17 May 2022 15:23:47 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 7B0AD10665A4;
+ Tue, 17 May 2022 15:23:51 +0000 (UTC)
 Received: from localhost.localdomain (unknown [10.39.192.162])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 48CBFC15D75;
- Tue, 17 May 2022 15:23:44 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 03F98C15D70;
+ Tue, 17 May 2022 15:23:47 +0000 (UTC)
 From: Hans de Goede <hdegoede@redhat.com>
 To: Ben Skeggs <bskeggs@redhat.com>,
 	Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
@@ -54,14 +54,14 @@ To: Ben Skeggs <bskeggs@redhat.com>,
 	"Rafael J . Wysocki" <rafael@kernel.org>,
 	Mika Westerberg <mika.westerberg@linux.intel.com>,
 	Mark Gross <markgross@kernel.org>, Andy Shevchenko <andy@kernel.org>
-Date: Tue, 17 May 2022 17:23:19 +0200
-Message-Id: <20220517152331.16217-3-hdegoede@redhat.com>
+Date: Tue, 17 May 2022 17:23:20 +0200
+Message-Id: <20220517152331.16217-4-hdegoede@redhat.com>
 In-Reply-To: <20220517152331.16217-1-hdegoede@redhat.com>
 References: <20220517152331.16217-1-hdegoede@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 2.85 on 10.11.54.8
-Subject: [Nouveau] [PATCH 02/14] drm/i915: Don't register backlight when
+Subject: [Nouveau] [PATCH 03/14] drm/amdgpu: Don't register backlight when
  another backlight should be used
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -93,34 +93,73 @@ another backlight device should be used.
 
 Signed-off-by: Hans de Goede <hdegoede@redhat.com>
 ---
- drivers/gpu/drm/i915/display/intel_backlight.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ drivers/gpu/drm/Kconfig                           | 1 +
+ drivers/gpu/drm/amd/amdgpu/atombios_encoders.c    | 7 +++++++
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c | 7 +++++++
+ 3 files changed, 15 insertions(+)
 
-diff --git a/drivers/gpu/drm/i915/display/intel_backlight.c b/drivers/gpu/drm/i915/display/intel_backlight.c
-index 98f7ea44042f..582d7f48575d 100644
---- a/drivers/gpu/drm/i915/display/intel_backlight.c
-+++ b/drivers/gpu/drm/i915/display/intel_backlight.c
-@@ -6,6 +6,8 @@
- #include <linux/kernel.h>
- #include <linux/pwm.h>
+diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
+index f1422bee3dcc..ddbeb2124df7 100644
+--- a/drivers/gpu/drm/Kconfig
++++ b/drivers/gpu/drm/Kconfig
+@@ -280,6 +280,7 @@ config DRM_AMDGPU
+ 	select HWMON
+ 	select BACKLIGHT_CLASS_DEVICE
+ 	select INTERVAL_TREE
++	select ACPI_VIDEO if ACPI && X86 && INPUT
+ 	help
+ 	  Choose this option if you have a recent AMD Radeon graphics card.
+ 
+diff --git a/drivers/gpu/drm/amd/amdgpu/atombios_encoders.c b/drivers/gpu/drm/amd/amdgpu/atombios_encoders.c
+index a92d86e12718..f9c62cd84a18 100644
+--- a/drivers/gpu/drm/amd/amdgpu/atombios_encoders.c
++++ b/drivers/gpu/drm/amd/amdgpu/atombios_encoders.c
+@@ -26,6 +26,8 @@
+ 
+ #include <linux/pci.h>
  
 +#include <acpi/video.h>
 +
- #include "intel_backlight.h"
- #include "intel_connector.h"
- #include "intel_de.h"
-@@ -948,6 +950,11 @@ int intel_backlight_device_register(struct intel_connector *connector)
- 
- 	WARN_ON(panel->backlight.max == 0);
+ #include <drm/drm_crtc_helper.h>
+ #include <drm/amdgpu_drm.h>
+ #include "amdgpu.h"
+@@ -186,6 +188,11 @@ void amdgpu_atombios_encoder_init_backlight(struct amdgpu_encoder *amdgpu_encode
+ 	if (!(adev->mode_info.firmware_flags & ATOM_BIOS_INFO_BL_CONTROLLED_BY_GPU))
+ 		return;
  
 +	if (acpi_video_get_backlight_type(true) != acpi_backlight_native) {
-+		DRM_INFO("Skipping intel_backlight registration\n");
-+		return 0;
++		DRM_INFO("Skipping amdgpu atom DIG backlight registration\n");
++		return;
 +	}
 +
- 	memset(&props, 0, sizeof(props));
- 	props.type = BACKLIGHT_RAW;
+ 	pdata = kmalloc(sizeof(struct amdgpu_backlight_privdata), GFP_KERNEL);
+ 	if (!pdata) {
+ 		DRM_ERROR("Memory allocation failed\n");
+diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+index 62139ff35476..a838c7b5d942 100644
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+@@ -83,6 +83,8 @@
+ #include <drm/drm_vblank.h>
+ #include <drm/drm_audio_component.h>
  
++#include <acpi/video.h>
++
+ #if defined(CONFIG_DRM_AMD_DC_DCN)
+ #include "ivsrcid/dcn/irqsrcs_dcn_1_0.h"
+ 
+@@ -4079,6 +4081,11 @@ amdgpu_dm_register_backlight_device(struct amdgpu_display_manager *dm)
+ 	amdgpu_dm_update_backlight_caps(dm, dm->num_of_edps);
+ 	dm->brightness[dm->num_of_edps] = AMDGPU_MAX_BL_LEVEL;
+ 
++	if (acpi_video_get_backlight_type(true) != acpi_backlight_native) {
++		DRM_INFO("Skipping amdgpu DM backlight registration\n");
++		return;
++	}
++
+ 	props.max_brightness = AMDGPU_MAX_BL_LEVEL;
+ 	props.brightness = AMDGPU_MAX_BL_LEVEL;
+ 	props.type = BACKLIGHT_RAW;
 -- 
 2.36.0
 
