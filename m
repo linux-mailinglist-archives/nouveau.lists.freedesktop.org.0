@@ -2,67 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA77752A679
-	for <lists+nouveau@lfdr.de>; Tue, 17 May 2022 17:25:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7F0252AE12
+	for <lists+nouveau@lfdr.de>; Wed, 18 May 2022 00:25:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1DCDC112F4E;
-	Tue, 17 May 2022 15:24:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 48CF1112AA3;
+	Tue, 17 May 2022 22:25:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4ECC2112F4E
- for <nouveau@lists.freedesktop.org>; Tue, 17 May 2022 15:24:39 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E666B112AA3
+ for <nouveau@lists.freedesktop.org>; Tue, 17 May 2022 22:25:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1652801078;
+ s=mimecast20190719; t=1652826301;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=hMV/pO71tp7Tnmw0apJUjOC22eI0KpMfGNgJNZ8mGcM=;
- b=Xg/Ty+/suU9LmIIUhC5l4HegRQIvUn5/TTew7PcwOnFn1yYX+9vH97+ZOH94SMvwJz3gqy
- e1jIdsgWNHAZ47aTyDUZbiBvZNfbySDa6M3HOl8bP/QQcUWQEWKC3WhqERx7L9jaXD8nz5
- /L+rxa/cCdnZSoDHG+oTJyBKU/VoTg8=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=GDitkohmrRAtIYlNxb61J4+su9MWn+qVxcNEE5lRZNY=;
+ b=QEbSiEjIu2ejF4ZcXOwrFZ0MQt0QMLxDhSTiE1W0i8ojWKwe3MEkWvAI1nWX4WCoaQyw7L
+ hjGTVKEpFr0Gl7SaVhjBS9enwQh2OUJnooI7azB0iZJJEdngZb62n8wjNs+wOcI9dOcfsO
+ euaZjRmT4X+F6vba5NuMB4z8D6KQBOk=
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-319-XN_9o3srMm2CwS02pjP2vw-1; Tue, 17 May 2022 11:24:34 -0400
-X-MC-Unique: XN_9o3srMm2CwS02pjP2vw-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id C029F1857F02;
- Tue, 17 May 2022 15:24:32 +0000 (UTC)
-Received: from localhost.localdomain (unknown [10.39.192.162])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 41153C15D70;
- Tue, 17 May 2022 15:24:29 +0000 (UTC)
-From: Hans de Goede <hdegoede@redhat.com>
-To: Ben Skeggs <bskeggs@redhat.com>,
-	Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
-	Daniel Dadap <ddadap@nvidia.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	Pan@freedesktop.org, Xinhui <Xinhui.Pan@amd.com>,
-	"Rafael J . Wysocki" <rafael@kernel.org>,
-	Mika Westerberg <mika.westerberg@linux.intel.com>,
-	Mark Gross <markgross@kernel.org>, Andy Shevchenko <andy@kernel.org>
-Date: Tue, 17 May 2022 17:23:31 +0200
-Message-Id: <20220517152331.16217-15-hdegoede@redhat.com>
-In-Reply-To: <20220517152331.16217-1-hdegoede@redhat.com>
-References: <20220517152331.16217-1-hdegoede@redhat.com>
+ us-mta-208-V7pSNubDNpiMJCiFevrACA-1; Tue, 17 May 2022 18:24:57 -0400
+X-MC-Unique: V7pSNubDNpiMJCiFevrACA-1
+Received: by mail-qv1-f69.google.com with SMTP id
+ q36-20020a0c9127000000b00461e3828064so217461qvq.12
+ for <nouveau@lists.freedesktop.org>; Tue, 17 May 2022 15:24:57 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+ :references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=GDitkohmrRAtIYlNxb61J4+su9MWn+qVxcNEE5lRZNY=;
+ b=4Shl8A+7oFvtptTMXWZt+jEISKj5PbvX2ETH9P+Zbf2u0QBpShiBP/f/aNa+nj9g/D
+ EbB0xx/Z9nvp7LRqMRKyReEmJwkCT9DWQv7H+8iQWDIgTpS/VYHI1wv+x2ed1jkHLzgZ
+ JPlIhE2KR4wLweucgE3EYuRa5C33LJWNZxZhG75Lm8NTTBxj5xjB007oF6FTNTCKLRiO
+ 94C4ED65zW4gF37UYTcEGH5C4wtv7XQBVJVw3X3FpJnTpLJ/lhKdoKTgVX0Tg2f8DiPK
+ ty33EN0R05SNnesqYG+Ro7D8cVUpWvR84yu1LtqaRYQAiNoHv+LjhFrT5HvPYawAEKFv
+ sapg==
+X-Gm-Message-State: AOAM5322QG/gqN3QOg+LBPImFId5O2kAroQwLnXI9VbTA71smveBq5bf
+ vuSA3YaUUHW/74jHJa5HSSbvGz5OmZp6Kk0mfrvNnydu9I0u011boEQ+aHxHDVlZP12KNT/ibkO
+ qYCRffUARWpfo3KyFgoVB5oW3Yw==
+X-Received: by 2002:a37:a504:0:b0:69f:d12a:3414 with SMTP id
+ o4-20020a37a504000000b0069fd12a3414mr18155034qke.213.1652826297368; 
+ Tue, 17 May 2022 15:24:57 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyjkwJo+V5WPoHD9BBcBprrOlsjB8IAC300o1XbHedytkjyGurpAMYu9kKhI5i8CjmVvg9GRg==
+X-Received: by 2002:a37:a504:0:b0:69f:d12a:3414 with SMTP id
+ o4-20020a37a504000000b0069fd12a3414mr18155020qke.213.1652826297072; 
+ Tue, 17 May 2022 15:24:57 -0700 (PDT)
+Received: from [192.168.8.138] (static-71-184-137-158.bstnma.ftas.verizon.net.
+ [71.184.137.158]) by smtp.gmail.com with ESMTPSA id
+ d3-20020ac85443000000b002f39b99f68asm140595qtq.36.2022.05.17.15.24.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 May 2022 15:24:56 -0700 (PDT)
+Message-ID: <1cfc459d038a3499ead4ce7c3619829263231a53.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Hans de Goede <hdegoede@redhat.com>, Ben Skeggs <bskeggs@redhat.com>, 
+ Karol Herbst <kherbst@redhat.com>
+Date: Tue, 17 May 2022 18:24:55 -0400
+In-Reply-To: <ac39455b-b85c-4cf7-8cd0-089325c9514a@redhat.com>
+References: <ac39455b-b85c-4cf7-8cd0-089325c9514a@redhat.com>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
 MIME-Version: 1.0
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.8
-Subject: [Nouveau] [PATCH 14/14] drm/radeon: Register ACPI video backlight
- when skipping radeon backlight registration
+Subject: Re: [Nouveau] nouveau lockdep deadlock report with 5.18-rc6
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,77 +86,158 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-acpi@vger.kernel.org, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, intel-gfx <intel-gfx@lists.freedesktop.org>,
- dri-devel@lists.freedesktop.org, platform-driver-x86@vger.kernel.org,
- Hans de Goede <hdegoede@redhat.com>, amd-gfx@lists.freedesktop.org,
- Daniel Vetter <daniel@ffwll.ch>, Len Brown <lenb@kernel.org>
+Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Typically the acpi_video driver will initialize before radeon, which
-used to cause /sys/class/backlight/acpi_video0 to get registered and then
-radeon would register its own radeon_bl# device later. After which
-the drivers/acpi/video_detect.c code unregistered the acpi_video0 device
-to avoid there being 2 backlight devices.
+YEah I saw this as well, will try to bisect soon
 
-This means that userspace used to briefly see 2 devices and the
-disappearing of acpi_video0 after a brief time confuses the systemd
-backlight level save/restore code, see e.g.:
-https://bbs.archlinux.org/viewtopic.php?id=269920
+On Tue, 2022-05-17 at 13:10 +0200, Hans de Goede wrote:
+> Hi All,
+> 
+> I just noticed the below lockdep possible deadlock report with a 5.18-rc6
+> kernel on a Dell Latitude E6430 laptop with the following nvidia GPU:
+> 
+> 01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GF108GLM [NVS
+> 5200M] [10de:0dfc] (rev a1)
+> 01:00.1 Audio device [0403]: NVIDIA Corporation GF108 High Definition Audio
+> Controller [10de:0bea] (rev a1)
+> 
+> This is with the laptop in Optimus mode, so with the Intel integrated
+> gfx from the i5-3320M CPU driving the LCD panel and with nothing connected
+> to the HDMI connector, which is always routed to the NVIDIA GPU on this
+> laptop.
+> 
+> The lockdep possible deadlock warning seems to happen when the NVIDIA GPU
+> is runtime suspended shortly after gdm has loaded:
+> 
+> [   24.859171] ======================================================
+> [   24.859173] WARNING: possible circular locking dependency detected
+> [   24.859175] 5.18.0-rc6+ #34 Tainted: G            E    
+> [   24.859178] ------------------------------------------------------
+> [   24.859179] kworker/1:1/46 is trying to acquire lock:
+> [   24.859181] ffff92b0c0ee0518 (&cli->mutex){+.+.}-{3:3}, at:
+> nouveau_vga_lastclose+0x910/0x1030 [nouveau]
+> [   24.859231] 
+>                but task is already holding lock:
+> [   24.859233] ffff92b0c4bf35a0 (reservation_ww_class_mutex){+.+.}-{3:3},
+> at: ttm_bo_wait+0x7d/0x140 [ttm]
+> [   24.859243] 
+>                which lock already depends on the new lock.
+> 
+> [   24.859244] 
+>                the existing dependency chain (in reverse order) is:
+> [   24.859246] 
+>                -> #1 (reservation_ww_class_mutex){+.+.}-{3:3}:
+> [   24.859249]        __ww_mutex_lock.constprop.0+0xb3/0xfb0
+> [   24.859256]        ww_mutex_lock+0x38/0xa0
+> [   24.859259]        nouveau_bo_pin+0x30/0x380 [nouveau]
+> [   24.859297]        nouveau_channel_del+0x1d7/0x3e0 [nouveau]
+> [   24.859328]        nouveau_channel_new+0x48/0x730 [nouveau]
+> [   24.859358]        nouveau_abi16_ioctl_channel_alloc+0x113/0x360
+> [nouveau]
+> [   24.859389]        drm_ioctl_kernel+0xa1/0x150
+> [   24.859392]        drm_ioctl+0x21c/0x410
+> [   24.859395]        nouveau_drm_ioctl+0x56/0x1820 [nouveau]
+> [   24.859431]        __x64_sys_ioctl+0x8d/0xc0
+> [   24.859436]        do_syscall_64+0x5b/0x80
+> [   24.859440]        entry_SYSCALL_64_after_hwframe+0x44/0xae
+> [   24.859443] 
+>                -> #0 (&cli->mutex){+.+.}-{3:3}:
+> [   24.859446]        __lock_acquire+0x12e2/0x1f90
+> [   24.859450]        lock_acquire+0xad/0x290
+> [   24.859453]        __mutex_lock+0x90/0x830
+> [   24.859456]        nouveau_vga_lastclose+0x910/0x1030 [nouveau]
+> [   24.859493]        ttm_bo_move_to_lru_tail+0x32c/0x980 [ttm]
+> [   24.859498]        ttm_mem_evict_first+0x25c/0x4b0 [ttm]
+> [   24.859503]        ttm_resource_manager_evict_all+0x93/0x1b0 [ttm]
+> [   24.859509]        nouveau_debugfs_fini+0x161/0x260 [nouveau]
+> [   24.859545]        nouveau_drm_ioctl+0xa4a/0x1820 [nouveau]
+> [   24.859582]        pci_pm_runtime_suspend+0x5c/0x180
+> [   24.859585]        __rpm_callback+0x48/0x1b0
+> [   24.859589]        rpm_callback+0x5a/0x70
+> [   24.859591]        rpm_suspend+0x10a/0x6f0
+> [   24.859594]        pm_runtime_work+0xa0/0xb0
+> [   24.859596]        process_one_work+0x254/0x560
+> [   24.859601]        worker_thread+0x4f/0x390
+> [   24.859604]        kthread+0xe6/0x110
+> [   24.859607]        ret_from_fork+0x22/0x30
+> [   24.859611] 
+>                other info that might help us debug this:
+> 
+> [   24.859612]  Possible unsafe locking scenario:
+> 
+> [   24.859613]        CPU0                    CPU1
+> [   24.859615]        ----                    ----
+> [   24.859616]   lock(reservation_ww_class_mutex);
+> [   24.859618]                                lock(&cli->mutex);
+> [   24.859620]                               
+> lock(reservation_ww_class_mutex);
+> [   24.859622]   lock(&cli->mutex);
+> [   24.859624] 
+>                 *** DEADLOCK ***
+> 
+> [   24.859625] 3 locks held by kworker/1:1/46:
+> [   24.859627]  #0: ffff92b0c0bb4338 ((wq_completion)pm){+.+.}-{0:0}, at:
+> process_one_work+0x1d0/0x560
+> [   24.859634]  #1: ffffa8ffc02dfe80 ((work_completion)(&dev-
+> >power.work)){+.+.}-{0:0}, at: process_one_work+0x1d0/0x560
+> [   24.859641]  #2: ffff92b0c4bf35a0 (reservation_ww_class_mutex){+.+.}-
+> {3:3}, at: ttm_bo_wait+0x7d/0x140 [ttm]
+> [   24.859649] 
+>                stack backtrace:
+> [   24.859651] CPU: 1 PID: 46 Comm: kworker/1:1 Tainted: G            E    
+> 5.18.0-rc6+ #34
+> [   24.859654] Hardware name: Dell Inc. Latitude E6430/0H3MT5, BIOS A21
+> 05/08/2017
+> [   24.859656] Workqueue: pm pm_runtime_work
+> [   24.859660] Call Trace:
+> [   24.859662]  <TASK>
+> [   24.859665]  dump_stack_lvl+0x5b/0x74
+> [   24.859669]  check_noncircular+0xdf/0x100
+> [   24.859672]  ? register_lock_class+0x38/0x470
+> [   24.859678]  __lock_acquire+0x12e2/0x1f90
+> [   24.859683]  lock_acquire+0xad/0x290
+> [   24.859686]  ? nouveau_vga_lastclose+0x910/0x1030 [nouveau]
+> [   24.859724]  ? lock_is_held_type+0xa6/0x120
+> [   24.859730]  __mutex_lock+0x90/0x830
+> [   24.859733]  ? nouveau_vga_lastclose+0x910/0x1030 [nouveau]
+> [   24.859770]  ? nvif_vmm_map+0x114/0x130 [nouveau]
+> [   24.859791]  ? nouveau_vga_lastclose+0x910/0x1030 [nouveau]
+> [   24.859829]  ? nouveau_vga_lastclose+0x910/0x1030 [nouveau]
+> [   24.859866]  nouveau_vga_lastclose+0x910/0x1030 [nouveau]
+> [   24.859905]  ttm_bo_move_to_lru_tail+0x32c/0x980 [ttm]
+> [   24.859912]  ttm_mem_evict_first+0x25c/0x4b0 [ttm]
+> [   24.859919]  ? lock_release+0x20/0x2a0
+> [   24.859923]  ttm_resource_manager_evict_all+0x93/0x1b0 [ttm]
+> [   24.859930]  nouveau_debugfs_fini+0x161/0x260 [nouveau]
+> [   24.859968]  nouveau_drm_ioctl+0xa4a/0x1820 [nouveau]
+> [   24.860005]  pci_pm_runtime_suspend+0x5c/0x180
+> [   24.860008]  ? pci_dev_put+0x20/0x20
+> [   24.860011]  __rpm_callback+0x48/0x1b0
+> [   24.860014]  ? pci_dev_put+0x20/0x20
+> [   24.860018]  rpm_callback+0x5a/0x70
+> [   24.860020]  ? pci_dev_put+0x20/0x20
+> [   24.860023]  rpm_suspend+0x10a/0x6f0
+> [   24.860025]  ? process_one_work+0x1d0/0x560
+> [   24.860031]  pm_runtime_work+0xa0/0xb0
+> [   24.860034]  process_one_work+0x254/0x560
+> [   24.860039]  worker_thread+0x4f/0x390
+> [   24.860043]  ? process_one_work+0x560/0x560
+> [   24.860046]  kthread+0xe6/0x110
+> [   24.860049]  ? kthread_complete_and_exit+0x20/0x20
+> [   24.860053]  ret_from_fork+0x22/0x30
+> [   24.860059]  </TASK>
+> 
+> Regards,
+> 
+> Hans
+> 
+> 
 
-To fix this the ACPI video code has been modified to make backlight class
-device registration a separate step, relying on the drm/kms driver to
-ask for the acpi_video backlight registration after it is done setting up
-its native backlight device.
-
-Add a call to the new acpi_video_register_backlight() when radeon skips
-registering its own backlight device because of e.g. the firmware_flags
-or the acpi_video_get_backlight_type() return value. This ensures that
-if the acpi_video backlight device should be used, it will be available
-before the radeon drm_device gets registered with userspace.
-
-Signed-off-by: Hans de Goede <hdegoede@redhat.com>
----
- drivers/gpu/drm/radeon/radeon_encoders.c | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/radeon/radeon_encoders.c b/drivers/gpu/drm/radeon/radeon_encoders.c
-index 46549d5179ee..c1cbebb51be1 100644
---- a/drivers/gpu/drm/radeon/radeon_encoders.c
-+++ b/drivers/gpu/drm/radeon/radeon_encoders.c
-@@ -30,6 +30,8 @@
- #include <drm/drm_device.h>
- #include <drm/radeon_drm.h>
- 
-+#include <acpi/video.h>
-+
- #include "radeon.h"
- #include "radeon_atombios.h"
- #include "radeon_legacy_encoders.h"
-@@ -167,7 +169,7 @@ static void radeon_encoder_add_backlight(struct radeon_encoder *radeon_encoder,
- 		return;
- 
- 	if (radeon_backlight == 0) {
--		return;
-+		use_bl = false;
- 	} else if (radeon_backlight == 1) {
- 		use_bl = true;
- 	} else if (radeon_backlight == -1) {
-@@ -193,6 +195,13 @@ static void radeon_encoder_add_backlight(struct radeon_encoder *radeon_encoder,
- 		else
- 			radeon_legacy_backlight_init(radeon_encoder, connector);
- 	}
-+
-+	/*
-+	 * If there is no native backlight device (which may happen even when
-+	 * use_bl==true) try registering an ACPI video backlight device instead.
-+	 */
-+	if (!rdev->mode_info.bl_encoder)
-+		acpi_video_register_backlight();
- }
- 
- void
 -- 
-2.36.0
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
