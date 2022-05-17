@@ -1,70 +1,69 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7F0252AE12
-	for <lists+nouveau@lfdr.de>; Wed, 18 May 2022 00:25:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F78B52AE35
+	for <lists+nouveau@lfdr.de>; Wed, 18 May 2022 00:33:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 48CF1112AA3;
-	Tue, 17 May 2022 22:25:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3D37310E409;
+	Tue, 17 May 2022 22:33:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E666B112AA3
- for <nouveau@lists.freedesktop.org>; Tue, 17 May 2022 22:25:01 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E977A10E409
+ for <nouveau@lists.freedesktop.org>; Tue, 17 May 2022 22:33:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1652826301;
+ s=mimecast20190719; t=1652826810;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GDitkohmrRAtIYlNxb61J4+su9MWn+qVxcNEE5lRZNY=;
- b=QEbSiEjIu2ejF4ZcXOwrFZ0MQt0QMLxDhSTiE1W0i8ojWKwe3MEkWvAI1nWX4WCoaQyw7L
- hjGTVKEpFr0Gl7SaVhjBS9enwQh2OUJnooI7azB0iZJJEdngZb62n8wjNs+wOcI9dOcfsO
- euaZjRmT4X+F6vba5NuMB4z8D6KQBOk=
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=xsgZD2xN95jcvNsVYdiJpz1wstzqtrmwvWpl/rt8mrs=;
+ b=VpZFVvbt3O4fIZvOUSYD7q1K6NrEwz7MpD7ZhjeIzkhRgrtGBeVdgLH0ihBeM96blUK0GA
+ ek9cUOKok8Do6jObbE8jhiGKaInmpSc2O7mL5yj9Vh/Etgup3ZzdmNCEXI/Phw+0nZNNJh
+ QCa1hyA8lvpKqQ4UB5wZ376qJF6PMzs=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-208-V7pSNubDNpiMJCiFevrACA-1; Tue, 17 May 2022 18:24:57 -0400
-X-MC-Unique: V7pSNubDNpiMJCiFevrACA-1
-Received: by mail-qv1-f69.google.com with SMTP id
- q36-20020a0c9127000000b00461e3828064so217461qvq.12
- for <nouveau@lists.freedesktop.org>; Tue, 17 May 2022 15:24:57 -0700 (PDT)
+ us-mta-222-1HGduiNjMjSvDcRRnBGipA-1; Tue, 17 May 2022 18:33:29 -0400
+X-MC-Unique: 1HGduiNjMjSvDcRRnBGipA-1
+Received: by mail-qv1-f71.google.com with SMTP id
+ t10-20020a0cd40a000000b00461c0375015so285617qvh.0
+ for <nouveau@lists.freedesktop.org>; Tue, 17 May 2022 15:33:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
  :references:organization:user-agent:mime-version
  :content-transfer-encoding;
- bh=GDitkohmrRAtIYlNxb61J4+su9MWn+qVxcNEE5lRZNY=;
- b=4Shl8A+7oFvtptTMXWZt+jEISKj5PbvX2ETH9P+Zbf2u0QBpShiBP/f/aNa+nj9g/D
- EbB0xx/Z9nvp7LRqMRKyReEmJwkCT9DWQv7H+8iQWDIgTpS/VYHI1wv+x2ed1jkHLzgZ
- JPlIhE2KR4wLweucgE3EYuRa5C33LJWNZxZhG75Lm8NTTBxj5xjB007oF6FTNTCKLRiO
- 94C4ED65zW4gF37UYTcEGH5C4wtv7XQBVJVw3X3FpJnTpLJ/lhKdoKTgVX0Tg2f8DiPK
- ty33EN0R05SNnesqYG+Ro7D8cVUpWvR84yu1LtqaRYQAiNoHv+LjhFrT5HvPYawAEKFv
- sapg==
-X-Gm-Message-State: AOAM5322QG/gqN3QOg+LBPImFId5O2kAroQwLnXI9VbTA71smveBq5bf
- vuSA3YaUUHW/74jHJa5HSSbvGz5OmZp6Kk0mfrvNnydu9I0u011boEQ+aHxHDVlZP12KNT/ibkO
- qYCRffUARWpfo3KyFgoVB5oW3Yw==
-X-Received: by 2002:a37:a504:0:b0:69f:d12a:3414 with SMTP id
- o4-20020a37a504000000b0069fd12a3414mr18155034qke.213.1652826297368; 
- Tue, 17 May 2022 15:24:57 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyjkwJo+V5WPoHD9BBcBprrOlsjB8IAC300o1XbHedytkjyGurpAMYu9kKhI5i8CjmVvg9GRg==
-X-Received: by 2002:a37:a504:0:b0:69f:d12a:3414 with SMTP id
- o4-20020a37a504000000b0069fd12a3414mr18155020qke.213.1652826297072; 
- Tue, 17 May 2022 15:24:57 -0700 (PDT)
+ bh=xsgZD2xN95jcvNsVYdiJpz1wstzqtrmwvWpl/rt8mrs=;
+ b=33MFbWyI082SU8fGUujBAq3RMKKG2eA0Ri2drK8Tk5MmSWltuiKwBcz0Xpm6mnEQe+
+ p+WrW1gDfbZ/zPtx5c9MD1lAyAR0wvvwmxbTZqGPtLGvVuJbIAWeWLdYtFAlcYDsA4TC
+ hyvlRd2Q2x7+qPooA4nfbkcMFJ3EyYim1b9jcOnw8KhScx0x3UQrAB+ZgonZp9/n4qn8
+ F0otbX0g2/4gpG365H6PnYPcvQsnG/qE1FrzNyRE4O38aXoS6dwCnYpNOspITiRo3lFR
+ U3vJKC3c/qhmvRrEfdSb5/ORDh2PVaGCCsZX00zfyp+jP0l3jDN9tpSY6Qp4nvvdtha7
+ 4oAw==
+X-Gm-Message-State: AOAM531ui3UE8/V8FnBq4bN3U6sZY2yqxHF9B+yQSNVQoJckGWFz6f0d
+ AETnTdOy32lXfkTvijGNKI3TSE+2Iw3xtU4NiTWkhYU79rxzEjwx2vXKQjYO06+v1YC6dyuIg21
+ 8zT07+AWdAnurkYuzlI2D2sClew==
+X-Received: by 2002:a05:620a:4727:b0:6a0:3036:8bfe with SMTP id
+ bs39-20020a05620a472700b006a030368bfemr18258019qkb.239.1652826809401; 
+ Tue, 17 May 2022 15:33:29 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJz1rJobn4JcdOWoAqeK93N2MhQ5S8q1IuwRVLFycp/5h0rBE3NqehxIR7DkNsuosW/5+564Lw==
+X-Received: by 2002:a05:620a:4727:b0:6a0:3036:8bfe with SMTP id
+ bs39-20020a05620a472700b006a030368bfemr18258006qkb.239.1652826809198; 
+ Tue, 17 May 2022 15:33:29 -0700 (PDT)
 Received: from [192.168.8.138] (static-71-184-137-158.bstnma.ftas.verizon.net.
  [71.184.137.158]) by smtp.gmail.com with ESMTPSA id
- d3-20020ac85443000000b002f39b99f68asm140595qtq.36.2022.05.17.15.24.56
+ z197-20020a3765ce000000b0069fc13ce212sm276480qkb.67.2022.05.17.15.31.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 May 2022 15:24:56 -0700 (PDT)
-Message-ID: <1cfc459d038a3499ead4ce7c3619829263231a53.camel@redhat.com>
+ Tue, 17 May 2022 15:31:56 -0700 (PDT)
+Message-ID: <aed19bec63ddcb63bf87582754c96d7fbe2c06b3.camel@redhat.com>
 From: Lyude Paul <lyude@redhat.com>
-To: Hans de Goede <hdegoede@redhat.com>, Ben Skeggs <bskeggs@redhat.com>, 
- Karol Herbst <kherbst@redhat.com>
-Date: Tue, 17 May 2022 18:24:55 -0400
-In-Reply-To: <ac39455b-b85c-4cf7-8cd0-089325c9514a@redhat.com>
-References: <ac39455b-b85c-4cf7-8cd0-089325c9514a@redhat.com>
+To: Mark Menzynski <mmenzyns@redhat.com>, linux-kernel@vger.kernel.org
+Date: Tue, 17 May 2022 18:31:03 -0400
+In-Reply-To: <20220516133103.324365-1-mmenzyns@redhat.com>
+References: <20220516133103.324365-1-mmenzyns@redhat.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
 MIME-Version: 1.0
@@ -74,7 +73,8 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] nouveau lockdep deadlock report with 5.18-rc6
+Subject: Re: [Nouveau] [PATCH v2] drm/nouveau: reorder
+ nouveau_drm_device_fini
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,155 +86,66 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-YEah I saw this as well, will try to bisect soon
+So I think you forgot to update the subject of the patch. If you can send a
+respin of this patch with a corrected patch title, then you can consider this:
 
-On Tue, 2022-05-17 at 13:10 +0200, Hans de Goede wrote:
-> Hi All,
+Reviewed-by: Lyude Paul <lyude@redhat.com>
+
+I'll push once you get the respin out
+
+On Mon, 2022-05-16 at 15:31 +0200, Mark Menzynski wrote:
+> Resources needed for output poll workers are destroyed in
+> nouveau_fbcon_fini() before output poll workers are cleared in
+> nouveau_display_fini(). This means there is a time between fbcon_fini()
+> and display_fini(), where if output poll happens, it crashes.
 > 
-> I just noticed the below lockdep possible deadlock report with a 5.18-rc6
-> kernel on a Dell Latitude E6430 laptop with the following nvidia GPU:
+> This makes output poll workers cleared right before fbcon resources are
+> destroyed.
 > 
-> 01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GF108GLM [NVS
-> 5200M] [10de:0dfc] (rev a1)
-> 01:00.1 Audio device [0403]: NVIDIA Corporation GF108 High Definition Audio
-> Controller [10de:0bea] (rev a1)
+> BUG: KASAN: use-after-free in
+> __drm_fb_helper_initial_config_and_unlock.cold+0x1f3/0x291
+> [drm_kms_helper]
 > 
-> This is with the laptop in Optimus mode, so with the Intel integrated
-> gfx from the i5-3320M CPU driving the LCD panel and with nothing connected
-> to the HDMI connector, which is always routed to the NVIDIA GPU on this
-> laptop.
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: Karol Herbst <kherbst@redhat.com>
+> Cc: Lyude Paul <lyude@redhat.com>
+> Cc: David Airlie <airlied@linux.ie>
+> Cc: Daniel Vetter <daniel@ffwll.ch>
+> Cc: dri-devel@lists.freedesktop.org
+> Cc: nouveau@lists.freedesktop.org
+> Cc: linux-kernel@vger.kernel.org
+> Signed-off-by: Mark Menzynski <mmenzyns@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_fbcon.c | 2 ++
+>  1 file changed, 2 insertions(+)
 > 
-> The lockdep possible deadlock warning seems to happen when the NVIDIA GPU
-> is runtime suspended shortly after gdm has loaded:
-> 
-> [   24.859171] ======================================================
-> [   24.859173] WARNING: possible circular locking dependency detected
-> [   24.859175] 5.18.0-rc6+ #34 Tainted: G            E    
-> [   24.859178] ------------------------------------------------------
-> [   24.859179] kworker/1:1/46 is trying to acquire lock:
-> [   24.859181] ffff92b0c0ee0518 (&cli->mutex){+.+.}-{3:3}, at:
-> nouveau_vga_lastclose+0x910/0x1030 [nouveau]
-> [   24.859231] 
->                but task is already holding lock:
-> [   24.859233] ffff92b0c4bf35a0 (reservation_ww_class_mutex){+.+.}-{3:3},
-> at: ttm_bo_wait+0x7d/0x140 [ttm]
-> [   24.859243] 
->                which lock already depends on the new lock.
-> 
-> [   24.859244] 
->                the existing dependency chain (in reverse order) is:
-> [   24.859246] 
->                -> #1 (reservation_ww_class_mutex){+.+.}-{3:3}:
-> [   24.859249]        __ww_mutex_lock.constprop.0+0xb3/0xfb0
-> [   24.859256]        ww_mutex_lock+0x38/0xa0
-> [   24.859259]        nouveau_bo_pin+0x30/0x380 [nouveau]
-> [   24.859297]        nouveau_channel_del+0x1d7/0x3e0 [nouveau]
-> [   24.859328]        nouveau_channel_new+0x48/0x730 [nouveau]
-> [   24.859358]        nouveau_abi16_ioctl_channel_alloc+0x113/0x360
-> [nouveau]
-> [   24.859389]        drm_ioctl_kernel+0xa1/0x150
-> [   24.859392]        drm_ioctl+0x21c/0x410
-> [   24.859395]        nouveau_drm_ioctl+0x56/0x1820 [nouveau]
-> [   24.859431]        __x64_sys_ioctl+0x8d/0xc0
-> [   24.859436]        do_syscall_64+0x5b/0x80
-> [   24.859440]        entry_SYSCALL_64_after_hwframe+0x44/0xae
-> [   24.859443] 
->                -> #0 (&cli->mutex){+.+.}-{3:3}:
-> [   24.859446]        __lock_acquire+0x12e2/0x1f90
-> [   24.859450]        lock_acquire+0xad/0x290
-> [   24.859453]        __mutex_lock+0x90/0x830
-> [   24.859456]        nouveau_vga_lastclose+0x910/0x1030 [nouveau]
-> [   24.859493]        ttm_bo_move_to_lru_tail+0x32c/0x980 [ttm]
-> [   24.859498]        ttm_mem_evict_first+0x25c/0x4b0 [ttm]
-> [   24.859503]        ttm_resource_manager_evict_all+0x93/0x1b0 [ttm]
-> [   24.859509]        nouveau_debugfs_fini+0x161/0x260 [nouveau]
-> [   24.859545]        nouveau_drm_ioctl+0xa4a/0x1820 [nouveau]
-> [   24.859582]        pci_pm_runtime_suspend+0x5c/0x180
-> [   24.859585]        __rpm_callback+0x48/0x1b0
-> [   24.859589]        rpm_callback+0x5a/0x70
-> [   24.859591]        rpm_suspend+0x10a/0x6f0
-> [   24.859594]        pm_runtime_work+0xa0/0xb0
-> [   24.859596]        process_one_work+0x254/0x560
-> [   24.859601]        worker_thread+0x4f/0x390
-> [   24.859604]        kthread+0xe6/0x110
-> [   24.859607]        ret_from_fork+0x22/0x30
-> [   24.859611] 
->                other info that might help us debug this:
-> 
-> [   24.859612]  Possible unsafe locking scenario:
-> 
-> [   24.859613]        CPU0                    CPU1
-> [   24.859615]        ----                    ----
-> [   24.859616]   lock(reservation_ww_class_mutex);
-> [   24.859618]                                lock(&cli->mutex);
-> [   24.859620]                               
-> lock(reservation_ww_class_mutex);
-> [   24.859622]   lock(&cli->mutex);
-> [   24.859624] 
->                 *** DEADLOCK ***
-> 
-> [   24.859625] 3 locks held by kworker/1:1/46:
-> [   24.859627]  #0: ffff92b0c0bb4338 ((wq_completion)pm){+.+.}-{0:0}, at:
-> process_one_work+0x1d0/0x560
-> [   24.859634]  #1: ffffa8ffc02dfe80 ((work_completion)(&dev-
-> >power.work)){+.+.}-{0:0}, at: process_one_work+0x1d0/0x560
-> [   24.859641]  #2: ffff92b0c4bf35a0 (reservation_ww_class_mutex){+.+.}-
-> {3:3}, at: ttm_bo_wait+0x7d/0x140 [ttm]
-> [   24.859649] 
->                stack backtrace:
-> [   24.859651] CPU: 1 PID: 46 Comm: kworker/1:1 Tainted: G            E    
-> 5.18.0-rc6+ #34
-> [   24.859654] Hardware name: Dell Inc. Latitude E6430/0H3MT5, BIOS A21
-> 05/08/2017
-> [   24.859656] Workqueue: pm pm_runtime_work
-> [   24.859660] Call Trace:
-> [   24.859662]  <TASK>
-> [   24.859665]  dump_stack_lvl+0x5b/0x74
-> [   24.859669]  check_noncircular+0xdf/0x100
-> [   24.859672]  ? register_lock_class+0x38/0x470
-> [   24.859678]  __lock_acquire+0x12e2/0x1f90
-> [   24.859683]  lock_acquire+0xad/0x290
-> [   24.859686]  ? nouveau_vga_lastclose+0x910/0x1030 [nouveau]
-> [   24.859724]  ? lock_is_held_type+0xa6/0x120
-> [   24.859730]  __mutex_lock+0x90/0x830
-> [   24.859733]  ? nouveau_vga_lastclose+0x910/0x1030 [nouveau]
-> [   24.859770]  ? nvif_vmm_map+0x114/0x130 [nouveau]
-> [   24.859791]  ? nouveau_vga_lastclose+0x910/0x1030 [nouveau]
-> [   24.859829]  ? nouveau_vga_lastclose+0x910/0x1030 [nouveau]
-> [   24.859866]  nouveau_vga_lastclose+0x910/0x1030 [nouveau]
-> [   24.859905]  ttm_bo_move_to_lru_tail+0x32c/0x980 [ttm]
-> [   24.859912]  ttm_mem_evict_first+0x25c/0x4b0 [ttm]
-> [   24.859919]  ? lock_release+0x20/0x2a0
-> [   24.859923]  ttm_resource_manager_evict_all+0x93/0x1b0 [ttm]
-> [   24.859930]  nouveau_debugfs_fini+0x161/0x260 [nouveau]
-> [   24.859968]  nouveau_drm_ioctl+0xa4a/0x1820 [nouveau]
-> [   24.860005]  pci_pm_runtime_suspend+0x5c/0x180
-> [   24.860008]  ? pci_dev_put+0x20/0x20
-> [   24.860011]  __rpm_callback+0x48/0x1b0
-> [   24.860014]  ? pci_dev_put+0x20/0x20
-> [   24.860018]  rpm_callback+0x5a/0x70
-> [   24.860020]  ? pci_dev_put+0x20/0x20
-> [   24.860023]  rpm_suspend+0x10a/0x6f0
-> [   24.860025]  ? process_one_work+0x1d0/0x560
-> [   24.860031]  pm_runtime_work+0xa0/0xb0
-> [   24.860034]  process_one_work+0x254/0x560
-> [   24.860039]  worker_thread+0x4f/0x390
-> [   24.860043]  ? process_one_work+0x560/0x560
-> [   24.860046]  kthread+0xe6/0x110
-> [   24.860049]  ? kthread_complete_and_exit+0x20/0x20
-> [   24.860053]  ret_from_fork+0x22/0x30
-> [   24.860059]  </TASK>
-> 
-> Regards,
-> 
-> Hans
-> 
-> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_fbcon.c
+> b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
+> index 4f9b3aa5deda..5226323e55d3 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_fbcon.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
+> @@ -39,6 +39,7 @@
+>  
+>  #include <drm/drm_crtc.h>
+>  #include <drm/drm_crtc_helper.h>
+> +#include <drm/drm_probe_helper.h>
+>  #include <drm/drm_fb_helper.h>
+>  #include <drm/drm_fourcc.h>
+>  #include <drm/drm_atomic.h>
+> @@ -605,6 +606,7 @@ nouveau_fbcon_fini(struct drm_device *dev)
+>         if (!drm->fbcon)
+>                 return;
+>  
+> +       drm_kms_helper_poll_fini(dev);
+>         nouveau_fbcon_accel_fini(dev);
+>         nouveau_fbcon_destroy(dev, drm->fbcon);
+>         kfree(drm->fbcon);
 
 -- 
 Cheers,
