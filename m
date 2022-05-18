@@ -2,61 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71D0452B52D
-	for <lists+nouveau@lfdr.de>; Wed, 18 May 2022 10:55:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D038F52B660
+	for <lists+nouveau@lfdr.de>; Wed, 18 May 2022 11:31:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A567C10E656;
-	Wed, 18 May 2022 08:55:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 143EE10E772;
+	Wed, 18 May 2022 09:31:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F153A10E2CA;
- Wed, 18 May 2022 08:55:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1652864148; x=1684400148;
- h=from:to:cc:subject:in-reply-to:references:date:
- message-id:mime-version;
- bh=C57//7ylgGo/HSVGnaIk0RKSXtsb/KUCW24SV/5qRTc=;
- b=X2pYq/e283qa74s4b4JG0fHnJIzqf1/QMAIoLXmpKOIlcOSA7+oMRKFz
- /SMH/nr+UjtwXJDmgl9Kxhggaz7pv9g44u19PMDeRnNkUAHrtVNBCrX+Q
- KMGJNvgznYg5DKF+jQOwrgGLuvoMwcsnE1uGRITlbE7o+xFz9nbN5Kt0R
- oVasbuwl7CZkVU7L67h5k7Mqtjut4Tk7dybuosaxeesYgGO91vsvsDHC9
- jQ+t54tV1l51u/Lnhh6p5nLlgh9lSPgKoXKr68YhWRUTJ8AbHUGQGbl2v
- khGjx9xunKv/lrQVk4CV1dGHuKVV4ZmQ3V7eud2j/NbIOe1EBrPY/Z0LA A==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10350"; a="270390520"
-X-IronPort-AV: E=Sophos;i="5.91,234,1647327600"; d="scan'208";a="270390520"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
- by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 May 2022 01:55:47 -0700
-X-IronPort-AV: E=Sophos;i="5.91,234,1647327600"; d="scan'208";a="597666716"
-Received: from ksobisz-mobl.ger.corp.intel.com (HELO localhost)
- ([10.249.132.195])
- by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 May 2022 01:55:38 -0700
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Hans de Goede <hdegoede@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
- Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>, Daniel Dadap
- <ddadap@nvidia.com>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, Joonas Lahtinen
- <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Alex Deucher
- <alexander.deucher@amd.com>, Christian =?utf-8?Q?K=C3=B6nig?=
- <christian.koenig@amd.com>,
- "Pan, Xinhui" <Xinhui.Pan@amd.com>, "Rafael J . Wysocki"
- <rafael@kernel.org>, Mika Westerberg <mika.westerberg@linux.intel.com>,
- Mark Gross <markgross@kernel.org>, Andy Shevchenko <andy@kernel.org>
-In-Reply-To: <20220517152331.16217-2-hdegoede@redhat.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20220517152331.16217-1-hdegoede@redhat.com>
- <20220517152331.16217-2-hdegoede@redhat.com>
-Date: Wed, 18 May 2022 11:55:35 +0300
-Message-ID: <87y1yzdxtk.fsf@intel.com>
+Received: from mailincloud.com (proxy.mailincloud.com [217.182.87.46])
+ by gabe.freedesktop.org (Postfix) with ESMTP id B15D710E772
+ for <nouveau@lists.freedesktop.org>; Wed, 18 May 2022 09:31:01 +0000 (UTC)
+Received: from [10.0.0.11] (91-166-155-32.subs.proxad.net [91.166.155.32])
+ by mailincloud.com (Postfix) with ESMTPSA id 73F0421E6F
+ for <nouveau@lists.freedesktop.org>; Wed, 18 May 2022 11:31:00 +0200 (CEST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailincloud.com 73F0421E6F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mailincloud.com;
+ s=mail; t=1652866260;
+ bh=aJoAhi3QBLpod4oWuYi7dswmAVo2VbSYnBnA8O8MyQo=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=rb4fpJ5lfAw5MbQKVDkhXsdl/OcqUYoNtNs5NEUc7rGFo+96k2AHntH5kCzZAUESA
+ Kn1Id9KhWHfDTv6OLV9tdln/71JzhvtT1+Cm0ujDFivRHlXOM15F82eR0IDx3Omp8M
+ bHIyyAB/txs8gOTdPMo4nbUhcuBJosyqx+c7vqOhNF2tRz6O/G/UIejyiqW8+1C2hY
+ kqZT9L2lL5OWXK9HAA7PC0KZEfkAkfa6+Omod+yT+wT4Hdq5esh+yefP3lJd/A+BCI
+ Eq+roMob3WDbNPX6HkjMrA/yGGfN2AoZv/o2bOfAAhVP32Mylk8TFRxO80OlhE/lEC
+ LYVef6Bv+g7pw==
+Message-ID: <f9aaaaf0-8ad2-79a3-3bda-a2812e5748ea@le-bars.net>
+Date: Wed, 18 May 2022 11:30:55 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
-Subject: Re: [Nouveau] [PATCH 01/14] ACPI: video: Add a native function
- parameter to acpi_video_get_backlight_type()
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.0
+Content-Language: en-GB
+To: nouveau <nouveau@lists.freedesktop.org>
+References: <bdc569d7-ea37-809c-74ab-b34158ca645c@le-bars.net>
+ <CACO55tuAvanHF87xaC8WRiyO5BnHPVn3bxAc+Pix4+yOGv++Rg@mail.gmail.com>
+From: Yoann LE BARS <yoann@le-bars.net>
+In-Reply-To: <CACO55tuAvanHF87xaC8WRiyO5BnHPVn3bxAc+Pix4+yOGv++Rg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] nVidia has freed some modules,
+ what to expect for Nouveau
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,75 +52,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-acpi@vger.kernel.org, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, intel-gfx <intel-gfx@lists.freedesktop.org>,
- dri-devel@lists.freedesktop.org, platform-driver-x86@vger.kernel.org,
- Hans de Goede <hdegoede@redhat.com>, amd-gfx@lists.freedesktop.org,
- Daniel Vetter <daniel@ffwll.ch>, Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 17 May 2022, Hans de Goede <hdegoede@redhat.com> wrote:
-> ATM on x86 laptops where we want userspace to use the acpi_video backlight
-> device we often register both the GPU's native backlight device and
-> acpi_video's firmware acpi_video# backlight device. This relies on
-> userspace preferring firmware type backlight devices over native ones, but
-> registering 2 backlight devices for a single display really is undesirable.
->
-> On x86 laptops where the native GPU backlight device should be used,
-> the registering of other backlight devices is avoided by their drivers
-> using acpi_video_get_backlight_type() and only registering their backlight
-> if the return value matches their type.
->
-> acpi_video_get_backlight_type() uses
-> backlight_device_get_by_type(BACKLIGHT_RAW) to determine if a native
-> driver is available and will never return native if this returns
-> false. This means that the GPU's native backlight registering code
-> cannot just call acpi_video_get_backlight_type() to determine if it
-> should register its backlight, since acpi_video_get_backlight_type() will
-> never return native until the native backlight has already registered.
->
-> To fix this add a native function parameter to
-> acpi_video_get_backlight_type(), which when set to true will make
-> acpi_video_get_backlight_type() behave as if a native backlight has
-> already been registered.
->
-> Note that all current callers are updated to pass false for the new
-> parameter, so this change in itself causes no functional changes.
 
+Hello, everybody out there!
 
-> diff --git a/drivers/acpi/video_detect.c b/drivers/acpi/video_detect.c
-> index becc198e4c22..0a06f0edd298 100644
-> --- a/drivers/acpi/video_detect.c
-> +++ b/drivers/acpi/video_detect.c
-> @@ -17,12 +17,14 @@
->   * Otherwise vendor specific drivers like thinkpad_acpi, asus-laptop,
->   * sony_acpi,... can take care about backlight brightness.
->   *
-> - * Backlight drivers can use acpi_video_get_backlight_type() to determine
-> - * which driver should handle the backlight.
-> + * Backlight drivers can use acpi_video_get_backlight_type() to determine which
-> + * driver should handle the backlight. RAW/GPU-driver backlight drivers must
-> + * pass true for the native function argument, other drivers must pass false.
->   *
->   * If CONFIG_ACPI_VIDEO is neither set as "compiled in" (y) nor as a module (m)
->   * this file will not be compiled and acpi_video_get_backlight_type() will
-> - * always return acpi_backlight_vendor.
-> + * return acpi_backlight_native when its native argument is true and
-> + * acpi_backlight_vendor when it is false.
->   */
+On 2022/05/12 2:08 PM, Karol Herbst wrote:
+> all the code can be used to figure out the more annoying bugs inside
+> the driver. And the firmware is redistributable, so we can make use of
+> it for performance and the likes.
 
-Frankly, I think the boolean native parameter here, and at the call
-sites, is confusing, and the slightly different explanations in the
-commit message and comment here aren't helping.
+	Good! Thank you for this information.
 
-I suggest adding a separate function that the native backlight drivers
-should use. I think it's more obvious all around, and easier to document
-too.
+	I have also found this, which is quite explanatory:
 
+https://blogs.gnome.org/uraeus/2022/05/11/why-is-the-open-source-driver-release-from-nvidia-so-important-for-linux/
 
-BR,
-Jani.
+	Best regards.
 
 -- 
-Jani Nikula, Intel Open Source Graphics Center
+Yoann LE BARS
+https://le-bars.net/yoann/
