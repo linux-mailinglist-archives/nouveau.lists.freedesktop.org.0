@@ -1,44 +1,75 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51D6C5383BF
-	for <lists+nouveau@lfdr.de>; Mon, 30 May 2022 16:47:03 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 39D64530E93
+	for <lists+nouveau@lfdr.de>; Mon, 23 May 2022 13:35:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5F6DC10E95A;
-	Mon, 30 May 2022 14:46:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8DB1D10EDF5;
+	Mon, 23 May 2022 11:35:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 428 seconds by postgrey-1.36 at gabe;
- Sat, 21 May 2022 11:19:10 UTC
-Received: from mail3-relais-sop.national.inria.fr
- (mail3-relais-sop.national.inria.fr [192.134.164.104])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AF04910E055
- for <nouveau@lists.freedesktop.org>; Sat, 21 May 2022 11:19:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=inria.fr; s=dc;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=9tnuHSBQjVBU2e2Ow85bDHqPS4HDRuu3ASTrqzZC4Ic=;
- b=qH1MiJKlYojzoNEW1uuAP8YqCZ0Xx+YPVGCRDYmGBTP/xeMYcv3gkW6G
- sf56jp43t+xJrjQylm0ggAdyqow78lQMVvyZ0xMNYpiSVcZNCrLo4rw/y
- z/eKfkof9qWFXa2Hj2teoZzOeilXISidsdEnd0Xitlu+In606Jnss6V0T 4=;
-Authentication-Results: mail3-relais-sop.national.inria.fr;
- dkim=none (message not signed) header.i=none;
- spf=SoftFail smtp.mailfrom=Julia.Lawall@inria.fr;
- dmarc=fail (p=none dis=none) d=inria.fr
-X-IronPort-AV: E=Sophos;i="5.91,242,1647298800"; d="scan'208";a="14727960"
-Received: from i80.paris.inria.fr (HELO i80.paris.inria.fr.) ([128.93.90.48])
- by mail3-relais-sop.national.inria.fr with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 May 2022 13:12:02 +0200
-From: Julia Lawall <Julia.Lawall@inria.fr>
-To: Ben Skeggs <bskeggs@redhat.com>
-Date: Sat, 21 May 2022 13:11:07 +0200
-Message-Id: <20220521111145.81697-57-Julia.Lawall@inria.fr>
-X-Mailer: git-send-email 2.20.1
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5A6B710EDF5
+ for <nouveau@lists.freedesktop.org>; Mon, 23 May 2022 11:35:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1653305746;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=esB4CG60KOiYCNvFLfupKrK3na9cJg7bNU5W1vo473k=;
+ b=Kun5GbgpkhrLRVEsO3yRFjS4qwSCWZFhUg3dq1ulyL2cEA8jnwgHdEE5xkzpIDqSanQz9x
+ doPefvL6Q+Kt4l9BjrqjuKqGazhcCx+7wfDycCJKV+YxpDfQqFcZ8MYG66VM/psfw7D1Qq
+ VRpgCcDLoY8D7YvP/1vTTQYy99gb1js=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-93-fl2ZXhojN-KPDjneBE7XbA-1; Mon, 23 May 2022 07:35:45 -0400
+X-MC-Unique: fl2ZXhojN-KPDjneBE7XbA-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ h133-20020a1c218b000000b003972dbb1066so7030881wmh.4
+ for <nouveau@lists.freedesktop.org>; Mon, 23 May 2022 04:35:44 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=esB4CG60KOiYCNvFLfupKrK3na9cJg7bNU5W1vo473k=;
+ b=KJAI+e7DJWjZb8rBD9IbaN5A72Qp75EIEasADjrHFHQGMsXslDzidGaw1FSB7fzY89
+ Ntk88bW7QM1musesIFyk1sOi9PUE7I9h84TPSUneC31Ol6gasQIy0hm8Ko5Emn4vEPVq
+ NHbDvN485A5O06cYHr+foGcH9tXodGLjSg6IerCZiw208hCi53pSsbdbqpidpGpMmvxq
+ Uig09hBGDoXp+QrKVi1xroj4RrAu3Du7b1Flhu+FHPYaXI6ssH0mjx7YHCwotvBzSRZk
+ 1YCuf/1L/aPCAHdXpSGvNJaerFqY2MNFiKkxIOSY+CcGOUzqnydfE7AFLEUPkCiKzxu+
+ 2c8g==
+X-Gm-Message-State: AOAM530CBLPyWE2LeKQTwFb4st0MoII0V6qNb0+/+isNpJH6SgYBLkqx
+ Puvr+sQWfvgr9EfWeMPKDnk9fulPUCWsZskVPYgeUvsjR+4e1EHqMQyjMFP0PXixw00sHvk1qys
+ Y9ASipC4EauzCE7CT1Xv80hZtdQ==
+X-Received: by 2002:a05:6000:1562:b0:20f:c999:fda7 with SMTP id
+ 2-20020a056000156200b0020fc999fda7mr8843859wrz.65.1653305743921; 
+ Mon, 23 May 2022 04:35:43 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwVT0wpZjAWWuYWqm00EefJbbozZgIflACNx9uqBlH4bB19uD4jcj1iQ0owk08/zmUDeBF02A==
+X-Received: by 2002:a05:6000:1562:b0:20f:c999:fda7 with SMTP id
+ 2-20020a056000156200b0020fc999fda7mr8843843wrz.65.1653305743764; 
+ Mon, 23 May 2022 04:35:43 -0700 (PDT)
+Received: from fedora.redhat.com (nat-pool-brq-t.redhat.com. [213.175.37.10])
+ by smtp.gmail.com with ESMTPSA id
+ o16-20020adf8b90000000b0020fc3e24041sm7577841wra.106.2022.05.23.04.35.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 May 2022 04:35:43 -0700 (PDT)
+From: Mark Menzynski <mmenzyns@redhat.com>
+To: linux-kernel@vger.kernel.org
+Date: Mon, 23 May 2022 13:35:41 +0200
+Message-Id: <20220523113541.10562-1-mmenzyns@redhat.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mmenzyns@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 30 May 2022 14:46:51 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/mmu: fix typo in comment
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
+Subject: [Nouveau] [PATCH v3] drm/nouveau: clear output poll workers before
+ nouveau_fbcon_destroy()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,31 +82,56 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Spelling mistake (triple letters) in comment.
-Detected with the help of Coccinelle.
+Resources needed for output poll workers are destroyed in
+nouveau_fbcon_fini() before output poll workers are cleared in
+nouveau_display_fini(). This means there is a time between fbcon_fini()
+and display_fini(), where if output poll happens, it crashes.
 
-Signed-off-by: Julia Lawall <Julia.Lawall@inria.fr>
+This patch introduces another output poll clearing before fbcon
+resources are destroyed.
 
+BUG: KASAN: use-after-free in
+__drm_fb_helper_initial_config_and_unlock.cold+0x1f3/0x291
+[drm_kms_helper]
+
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: David Airlie <airlied@linux.ie>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Cc: linux-kernel@vger.kernel.org
+Signed-off-by: Mark Menzynski <mmenzyns@redhat.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/nouveau_fbcon.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-index 8bf00b396ec1..8b11dfa0998d 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-@@ -280,7 +280,7 @@ nvkm_vmm_unref_ptes(struct nvkm_vmm_iter *it, bool pfn, u32 ptei, u32 ptes)
- 	if (desc->type == SPT && (pgt->refs[0] || pgt->refs[1]))
- 		nvkm_vmm_unref_sptes(it, pgt, desc, ptei, ptes);
+diff --git a/drivers/gpu/drm/nouveau/nouveau_fbcon.c b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
+index 4f9b3aa5deda..5226323e55d3 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_fbcon.c
++++ b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
+@@ -39,6 +39,7 @@
  
--	/* PT no longer neeed?  Destroy it. */
-+	/* PT no longer needed?  Destroy it. */
- 	if (!pgt->refs[type]) {
- 		it->lvl++;
- 		TRA(it, "%s empty", nvkm_vmm_desc_type(desc));
+ #include <drm/drm_crtc.h>
+ #include <drm/drm_crtc_helper.h>
++#include <drm/drm_probe_helper.h>
+ #include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_atomic.h>
+@@ -605,6 +606,7 @@ nouveau_fbcon_fini(struct drm_device *dev)
+ 	if (!drm->fbcon)
+ 		return;
+ 
++	drm_kms_helper_poll_fini(dev);
+ 	nouveau_fbcon_accel_fini(dev);
+ 	nouveau_fbcon_destroy(dev, drm->fbcon);
+ 	kfree(drm->fbcon);
+-- 
+2.32.0
 
