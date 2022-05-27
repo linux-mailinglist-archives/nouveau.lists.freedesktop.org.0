@@ -1,53 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A1D3535506
-	for <lists+nouveau@lfdr.de>; Thu, 26 May 2022 22:47:57 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 39A7E5383BB
+	for <lists+nouveau@lfdr.de>; Mon, 30 May 2022 16:46:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1811510EC2A;
-	Thu, 26 May 2022 20:47:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8E0D710E132;
+	Mon, 30 May 2022 14:46:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C075710EC2A
- for <nouveau@lists.freedesktop.org>; Thu, 26 May 2022 20:47:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1653598071;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=SY0RUurSRwuYkFp5Br4T7o+bRxgU1bmYAiSCEYlf2MY=;
- b=XH/RpsYB1ZaLDglZNCKp3lOsOInDgxHy9K1j16tMps2GIj/gbk31YtAM9ObDdz9YdUynpx
- T2ddW2rxeIrOJhRAVTJj+aba0lRFhAoQ+s/+xrTERuFPOx5dl2C9jO8gu/ljVn0IcND4Ai
- MrJZhhob5kFNUJPgZHTLYCQnu8xDKRs=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-638-LveylXj7MlygAX64zTYprQ-1; Thu, 26 May 2022 16:47:48 -0400
-X-MC-Unique: LveylXj7MlygAX64zTYprQ-1
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 43BB6801E6B;
- Thu, 26 May 2022 20:47:48 +0000 (UTC)
-Received: from emerald.redhat.com (unknown [10.22.34.115])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E1FB2400F36;
- Thu, 26 May 2022 20:47:47 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org
-Date: Thu, 26 May 2022 16:47:32 -0400
-Message-Id: <20220526204732.660069-3-lyude@redhat.com>
-In-Reply-To: <20220526204732.660069-1-lyude@redhat.com>
-References: <20220526204732.660069-1-lyude@redhat.com>
+X-Greylist: delayed 916 seconds by postgrey-1.36 at gabe;
+ Fri, 27 May 2022 04:38:09 UTC
+Received: from out162-62-57-64.mail.qq.com (out162-62-57-64.mail.qq.com
+ [162.62.57.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B858610E324
+ for <nouveau@lists.freedesktop.org>; Fri, 27 May 2022 04:38:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1653626286; bh=lVrj+B/OXD3/d9PND/gW3vEGIbfEhk331+xQfhE35V8=;
+ h=From:To:Cc:Subject:Date;
+ b=crGSBPWE2+wVdeTSSKAwCWx5JH3tnKKqaUYCM39GUvQEzx6csCbeDT/twCNoY76mY
+ dh8BJuGnUrMIkZUkyFVYmOv4ayfXB98bkYIndDT6lZcQtozQsdHT2eUaOw/8v0OBgz
+ P2MMvjH8uT15adieP4PuZF6IpYOriE7ZRnZpf16o=
+Received: from localhost.localdomain ([116.128.244.169])
+ by newxmesmtplogicsvrszc7.qq.com (NewEsmtp) with SMTP
+ id 5AEBC498; Fri, 27 May 2022 12:22:46 +0800
+X-QQ-mid: xmsmtpt1653625366tnj5gygud
+Message-ID: <tencent_655C23622640268A069B49A6A5ADDEECB508@qq.com>
+X-QQ-XMAILINFO: MK5U7QanZrCwqCwSYwSirFlzWFG5zIgOyTkGd65Vft9mgbp5DdonQm/3PwkaOP
+ SYRJX5dTFxkoCB5E+yvhAumKkQtTuTrmfQQVwBXCfZn53K40Kv8JjrnXeGvf/oF7nB8yupW++14c
+ ppWtWH4CpwhrJAn6gA0fTV5sda3SjqQTDYeMRjI0Y9QKNzQzmwfYlOnXgU/JqwuiJaXSt6MO977W
+ ATXoarLSv43QYqrXqdjaV4CDmejRWHMpDaTPLv0j8Q0kylSNC+KjWVwwcRIZRJm6Kf89hEnz+zH7
+ 1TMLyJOWfienc5irCgKeFcOACRisOURYrUCr2v9yKQ6ODRaJbk5eEpL/APumk0bjdT0Yl3AGBW70
+ RLEMR94FW4EZi9NnFRK4EqmLuO3zr7C0BODS4D0J6j10vLQHbDq7R9K3NocEjT4tY0DPD/Y3fNhV
+ 83wOqwUGWTpxHr0TOY6dldb2y8af8iWpljVEJ6oYCL/DaiGMYWqokFg7p4iGBZAhSiO5GxGdF+xz
+ za/T/QSFHo5HWjFKy7kWYYqMlZuwB9XPAUapZGAIQzTEn9cm1ZkUCC9Oyq8O0OaM1Iu+kIUEND7S
+ pV3lT9UDIFROtrgEcYdbKIFKbbxtrhNlDeTrILQaS6WTDVGwOCUqoLxSNDXalQCwromacjY9mZyH
+ /99BbTYgD+OQFSAMPD/nQufvHCkEWi/JSe4lALIJARnCMLBh2nsIYD/8DrIkpt8HaN0sV7a2kt5J
+ PEAufnqL8ETZy7aKqwaYDKQAS4KgA/W7BWaL8fzMpqOWYCV1KVgmQ1xwJQQHFO9gLmrLA5YdpI8I
+ cX3FeJE/Qk2gMM7QDKeec2pGnRcBDjvhEmTJ4lhWLdgzWG+LsIlOnG5rXMwMSazQGdxmPlX4HFlh
+ JAHPG2MTlAvgavR3VroC8ALqu4SAckpToqm8stTgtC7eXfvNj4WkFXYYlo3RhI1A==
+From: 1064094935@qq.com
+To: Ben Skeggs <bskeggs@redhat.com>
+Date: Fri, 27 May 2022 12:22:24 +0800
+X-OQ-MSGID: <20220527042224.1205232-1-1064094935@qq.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
-Subject: [Nouveau] [PATCH 2/2] drm/nouveau: Don't pm_runtime_put_sync(),
- only pm_runtime_put_autosuspend()
+X-Mailman-Approved-At: Mon, 30 May 2022 14:46:50 +0000
+Subject: [Nouveau] [PATCH 5/5] drm/nouveau: Fix spelling typo in comments
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,53 +59,48 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ pengfuyuan <pengfuyuan@kylinos.cn>, Daniel Vetter <daniel@ffwll.ch>,
+ k2ci <kernel-bot@kylinos.cn>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-While trying to fix another issue, it occurred to me that I don't actually
-think there is any situation where we want pm_runtime_put() in nouveau to
-be synchronous. In fact, this kind of just seems like it would cause
-issues where we may unexpectedly block a thread we don't expect to be
-blocked.
+From: pengfuyuan <pengfuyuan@kylinos.cn>
 
-So, let's only use pm_runtime_put_autosuspend().
+Fix spelling typo in comments.
 
-Signed-off-by: Lyude Paul <lyude@redhat.com>
+Reported-by: k2ci <kernel-bot@kylinos.cn>
+Signed-off-by: pengfuyuan <pengfuyuan@kylinos.cn>
 ---
- drivers/gpu/drm/nouveau/nouveau_display.c | 2 +-
- drivers/gpu/drm/nouveau/nouveau_fbcon.c   | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/nouveau/include/nvhw/drf.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-index 9f5a45f24e5b..103bfb11acb9 100644
---- a/drivers/gpu/drm/nouveau/nouveau_display.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-@@ -515,7 +515,7 @@ nouveau_display_hpd_work(struct work_struct *work)
+diff --git a/drivers/gpu/drm/nouveau/include/nvhw/drf.h b/drivers/gpu/drm/nouveau/include/nvhw/drf.h
+index bd0fc41446e2..d6969c0e2f29 100644
+--- a/drivers/gpu/drm/nouveau/include/nvhw/drf.h
++++ b/drivers/gpu/drm/nouveau/include/nvhw/drf.h
+@@ -190,7 +190,7 @@
+ #define DRF_MD_(X,_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,IMPL,...) IMPL
+ #define DRF_MD(A...) DRF_MD_(X, ##A, DRF_MD_I, DRF_MD_N)(X, ##A)
  
- 	pm_runtime_mark_last_busy(drm->dev->dev);
- noop:
--	pm_runtime_put_sync(drm->dev->dev);
-+	pm_runtime_put(drm->dev->dev);
- }
+-/* Helper for testing against field value in aribtrary object */
++/* Helper for testing against field value in arbitrary object */
+ #define DRF_TV_N(X,e,p,o,d,r,  f,cmp,v)                                          \
+ 	NVVAL_TEST_X(DRF_RD_X(e, (p), (o), d##_##r   ), d##_##r##_##f, cmp, (v))
+ #define DRF_TV_I(X,e,p,o,d,r,i,f,cmp,v)                                          \
+@@ -198,7 +198,7 @@
+ #define DRF_TV_(X,_1,_2,_3,_4,_5,_6,_7,_8,_9,IMPL,...) IMPL
+ #define DRF_TV(A...) DRF_TV_(X, ##A, DRF_TV_I, DRF_TV_N)(X, ##A)
  
- #ifdef CONFIG_ACPI
-diff --git a/drivers/gpu/drm/nouveau/nouveau_fbcon.c b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
-index 4f9b3aa5deda..20ac1ce2c0f1 100644
---- a/drivers/gpu/drm/nouveau/nouveau_fbcon.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
-@@ -466,7 +466,7 @@ nouveau_fbcon_set_suspend_work(struct work_struct *work)
- 	if (state == FBINFO_STATE_RUNNING) {
- 		nouveau_fbcon_hotplug_resume(drm->fbcon);
- 		pm_runtime_mark_last_busy(drm->dev->dev);
--		pm_runtime_put_sync(drm->dev->dev);
-+		pm_runtime_put_autosuspend(drm->dev->dev);
- 	}
- }
- 
+-/* Helper for testing against field definition in aribtrary object */
++/* Helper for testing against field definition in arbitrary object */
+ #define DRF_TD_N(X,e,p,o,d,r,  f,cmp,v)                                                          \
+ 	NVVAL_TEST_X(DRF_RD_X(e, (p), (o), d##_##r   ), d##_##r##_##f, cmp, d##_##r##_##f##_##v)
+ #define DRF_TD_I(X,e,p,o,d,r,i,f,cmp,v)                                                          \
 -- 
-2.35.3
+2.25.1
 
+
+No virus found
+		Checked by Hillstone Network AntiVirus
