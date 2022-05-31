@@ -2,80 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B46B0539690
-	for <lists+nouveau@lfdr.de>; Tue, 31 May 2022 20:52:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 328E9539938
+	for <lists+nouveau@lfdr.de>; Wed,  1 Jun 2022 00:01:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 588BD10E09B;
-	Tue, 31 May 2022 18:52:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 69CAF10ED09;
+	Tue, 31 May 2022 22:01:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 63C4C10E00E
- for <nouveau@lists.freedesktop.org>; Tue, 31 May 2022 18:52:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1654023120;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=sZAMyRELxB7F9um/lFWtV+zzG8SAX14QHBVnpeIBNDs=;
- b=Me/kolUCFohOO9SmbEx6FrJHiuvpZzq2YaV0ks44Mdh2QX9sb81kIVZXnN129t4yTEu62V
- aXgkNfWy14+Qsb0Rxo2OLQRbcuMmEP9KV6lF9zNH3Xn9RKhLxZdSvAnWVFDvs5tY/P07xo
- azAphis5lPmGIW8x9GXQGOiLnsANNfw=
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-639-jBxCaEoOM3ynjR0l422NMQ-1; Tue, 31 May 2022 14:51:59 -0400
-X-MC-Unique: jBxCaEoOM3ynjR0l422NMQ-1
-Received: by mail-qv1-f70.google.com with SMTP id
- kl23-20020a056214519700b0046200065604so10730252qvb.19
- for <nouveau@lists.freedesktop.org>; Tue, 31 May 2022 11:51:59 -0700 (PDT)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0507310ECFF;
+ Tue, 31 May 2022 22:01:04 +0000 (UTC)
+Received: by mail-ot1-x329.google.com with SMTP id
+ h9-20020a056830400900b0060b03bfe792so10482433ots.12; 
+ Tue, 31 May 2022 15:01:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=1kcpHZfon90bWFf3C0opWYOsOsDgVYWIWfKF1sbIHOg=;
+ b=PzDb+I+odIVJv+v3SJAjJiieVhfK9TLxSG7HEepT0URrxw1QQp7kRmiwJBPWRRavIc
+ 4OMfjNbouVwJ9QQpQgLBXk6+QrfrsPci7ETu9MqS7ke/cmB5AaDwyt0mTTrETEI0nla8
+ ZoLP0cqrGh6Dw6Q5ps0yJtVdbye1Xjh4O23j3NOeVtWJfStBz4VKNrCPsD2YUn78wnbi
+ Ukl+m69RJ4e1Q6zPLsNeTDpLPDG05ZQrka2NfxXfSb0vOdwt0Bvb0jIKeCOCB3zfJalh
+ 4mvF/uQXHPN8cAyYKnxmvof/pxdnJb1AtX2kW5llJ/84g0tUGQEq+0RBuVEWhFw0MnUm
+ /27Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=sZAMyRELxB7F9um/lFWtV+zzG8SAX14QHBVnpeIBNDs=;
- b=y2dXHRtzXh0Zt94Hi2oyb0nDIP7+seDrZNXqPgVQTHa1T8bAWSfAtYHX8aHOzSiRhB
- wkfI7t7lLCWx61YgANTyUoSgKAmyVruQQCUDXJgdTSDjuKVoYDblV+qC0sz6AOLWEF36
- KT4iqPAC6KcOPxu+h6fXgzyj4jQp2ScowOkG6oSrUvHK+OfEuzTaeW+wLlFZimISTTKG
- 29weg07ROwhm2L904Qlx8BBFjl0E0kR96CQ23jmWqyw0yqjxaqr60OQBqL3nyAJe+4K0
- eWRbS15zOKSroRxLjSEJK8/MTEk+2g5bQD4JIpQXGjdV+RIo60IKnDY4b3UlpD6Xnn/z
- np3Q==
-X-Gm-Message-State: AOAM53301AE9WeXRN6DR+dscCf1qHHuR+E4TrhYjVqCb777YXw9QO7zY
- BSQCyfHmfJ47MJW1abtkEEpNofJK2zqPtoKyR5u96yCuE9b/+FP18Mwse/N1828ezjSAl+kufJV
- TD1YUFz1F+9xh9pMCwsKRAE7m9A==
-X-Received: by 2002:a05:6214:629:b0:45b:c82:e5f2 with SMTP id
- a9-20020a056214062900b0045b0c82e5f2mr51162983qvx.89.1654023118892; 
- Tue, 31 May 2022 11:51:58 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzodGyqn8Bmz6b43p2yNc0fAAzKr06KKy5cRAHwm0CUS2cAXLIS7Tt/3JKcEHC+x2wOBUDH4A==
-X-Received: by 2002:a05:6214:629:b0:45b:c82:e5f2 with SMTP id
- a9-20020a056214062900b0045b0c82e5f2mr51162963qvx.89.1654023118669; 
- Tue, 31 May 2022 11:51:58 -0700 (PDT)
-Received: from [192.168.8.138] (static-71-184-137-158.bstnma.ftas.verizon.net.
- [71.184.137.158]) by smtp.gmail.com with ESMTPSA id
- q11-20020a37a70b000000b0069fc13ce211sm9787136qke.66.2022.05.31.11.51.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 May 2022 11:51:58 -0700 (PDT)
-Message-ID: <ffaf5842daad97fb6c9a522551b7d00aac86c306.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Tom Rix <trix@redhat.com>, bskeggs@redhat.com, kherbst@redhat.com, 
- airlied@linux.ie, daniel@ffwll.ch
-Date: Tue, 31 May 2022 14:51:57 -0400
-In-Reply-To: <20220528141836.4155970-1-trix@redhat.com>
-References: <20220528141836.4155970-1-trix@redhat.com>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=1kcpHZfon90bWFf3C0opWYOsOsDgVYWIWfKF1sbIHOg=;
+ b=Uhwi9Kw0W/1aDFPqx1IPUjm8W2iiObrgojU01KCTrf/O2GHSK6+dRGmXlo7t46uSsy
+ NImPT7WlF1RzxIc/9qhWezQwGVjEPDyNTOanOlc1W2jyPYzCCxjZFtigYFwLNpF3w2ei
+ Z5cgdcYGd2ByUb0szQ4rtmwW4zIzqZHgGPIt27qrDtzF6ZIGeC/qhiHDFJQdGPAGNmkO
+ R6NCZiGVDK6RlJHHF9rK52gWWaEQVunCixSRM49rl+Afk+v/6LDtAggpuqzmFD2vR8/E
+ iPmRDeav2vn6cX8vNLZ+JV3zB+EKnzna62EuUy3yyk9vTSvm3PQbqIuUF7AuVZneKb2q
+ jlbA==
+X-Gm-Message-State: AOAM533LMvJArGMLfnGVAXbdUOHkg3g8YCfl1VyIV/Pm86w8SETH+Zxh
+ gciPAcLUgiiGr3QlTsDW/gWbdngrLGjMoi77jbs=
+X-Google-Smtp-Source: ABdhPJyKVYOkJ1d9Y7SW5ELtHTlhTKMcjbccQa1ILmaqZpJll1OzACOy0Pf6i7ZX6i42bY3GxbQOusF+tYcIkZKsQbg=
+X-Received: by 2002:a9d:6b98:0:b0:60b:c54:e22b with SMTP id
+ b24-20020a9d6b98000000b0060b0c54e22bmr18226057otq.357.1654034462389; Tue, 31
+ May 2022 15:01:02 -0700 (PDT)
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+References: <20220531100007.174649-1-christian.koenig@amd.com>
+In-Reply-To: <20220531100007.174649-1-christian.koenig@amd.com>
+From: Alex Deucher <alexdeucher@gmail.com>
+Date: Tue, 31 May 2022 18:00:51 -0400
+Message-ID: <CADnq5_Ng7oe_NMSb6GdL=_T_zw22Gk0B6ePDXRiU7Ljind6Gww@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>, 
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/fifo/gv100-: set
- gv100_fifo_runlist storage-class to static
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] Per file OOM badness
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,44 +65,91 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
+ linux-mm <linux-mm@kvack.org>, nouveau <nouveau@lists.freedesktop.org>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ Hugh Dickens <hughd@google.com>, LKML <linux-kernel@vger.kernel.org>,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>,
+ Linux-Fsdevel <linux-fsdevel@vger.kernel.org>,
+ Alexander Viro <viro@zeniv.linux.org.uk>, Daniel Vetter <daniel@ffwll.ch>,
+ linux-tegra@vger.kernel.org, "Deucher, Alexander" <alexander.deucher@amd.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Christian Koenig <christian.koenig@amd.com>,
+ linux-media <linux-media@vger.kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reviewed-by: Lyude Paul <lyude@redhat.com>
++ dri-devel
 
-Will push to the appropriate branch in a moment
-
-On Sat, 2022-05-28 at 10:18 -0400, Tom Rix wrote:
-> sparse reports
-> drivers/gpu/drm/nouveau/nvkm/engine/fifo/gv100.c:56:1: warning: symbol
-> 'gv100_fifo_runlist' was not declared. Should it be static?
-> 
-> gv100_fifo_runlist is only used in gv100.c, so change it to static.
-> 
-> Signed-off-by: Tom Rix <trix@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/nvkm/engine/fifo/gv100.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gv100.c
-> b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gv100.c
-> index 70e16a91ac12..faf0fe9f704c 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gv100.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gv100.c
-> @@ -52,7 +52,7 @@ gv100_fifo_runlist_cgrp(struct nvkm_fifo_cgrp *cgrp,
->         nvkm_wo32(memory, offset + 0xc, 0x00000000);
->  }
->  
-> -const struct gk104_fifo_runlist_func
-> +static const struct gk104_fifo_runlist_func
->  gv100_fifo_runlist = {
->         .size = 16,
->         .cgrp = gv100_fifo_runlist_cgrp,
-
--- 
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
-
+On Tue, May 31, 2022 at 6:00 AM Christian K=C3=B6nig
+<ckoenig.leichtzumerken@gmail.com> wrote:
+>
+> Hello everyone,
+>
+> To summarize the issue I'm trying to address here: Processes can allocate
+> resources through a file descriptor without being held responsible for it=
+.
+>
+> Especially for the DRM graphics driver subsystem this is rather
+> problematic. Modern games tend to allocate huge amounts of system memory
+> through the DRM drivers to make it accessible to GPU rendering.
+>
+> But even outside of the DRM subsystem this problem exists and it is
+> trivial to exploit. See the following simple example of
+> using memfd_create():
+>
+>          fd =3D memfd_create("test", 0);
+>          while (1)
+>                  write(fd, page, 4096);
+>
+> Compile this and you can bring down any standard desktop system within
+> seconds.
+>
+> The background is that the OOM killer will kill every processes in the
+> system, but just not the one which holds the only reference to the memory
+> allocated by the memfd.
+>
+> Those problems where brought up on the mailing list multiple times now
+> [1][2][3], but without any final conclusion how to address them. Since
+> file descriptors are considered shared the process can not directly held
+> accountable for allocations made through them. Additional to that file
+> descriptors can also easily move between processes as well.
+>
+> So what this patch set does is to instead of trying to account the
+> allocated memory to a specific process it adds a callback to struct
+> file_operations which the OOM killer can use to query the specific OOM
+> badness of this file reference. This badness is then divided by the
+> file_count, so that every process using a shmem file, DMA-buf or DRM
+> driver will get it's equal amount of OOM badness.
+>
+> Callbacks are then implemented for the two core users (memfd and DMA-buf)
+> as well as 72 DRM based graphics drivers.
+>
+> The result is that the OOM killer can now much better judge if a process
+> is worth killing to free up memory. Resulting a quite a bit better system
+> stability in OOM situations, especially while running games.
+>
+> The only other possibility I can see would be to change the accounting of
+> resources whenever references to the file structure change, but this woul=
+d
+> mean quite some additional overhead for a rather common operation.
+>
+> Additionally I think trying to limit device driver allocations using
+> cgroups is orthogonal to this effort. While cgroups is very useful, it
+> works on per process limits and tries to enforce a collaborative model on
+> memory management while the OOM killer enforces a competitive model.
+>
+> Please comment and/or review, we have that problem flying around for year=
+s
+> now and are not at a point where we finally need to find a solution for
+> this.
+>
+> Regards,
+> Christian.
+>
+> [1] https://lists.freedesktop.org/archives/dri-devel/2015-September/08977=
+8.html
+> [2] https://lkml.org/lkml/2018/1/18/543
+> [3] https://lkml.org/lkml/2021/2/4/799
+>
+>
