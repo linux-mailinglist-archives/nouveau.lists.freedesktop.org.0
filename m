@@ -2,38 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 012AD58A217
-	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:39:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C73B458A204
+	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:38:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A92A1A6F49;
-	Thu,  4 Aug 2022 20:37:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4E832A6F42;
+	Thu,  4 Aug 2022 20:37:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8A30010F0FE;
- Mon, 13 Jun 2022 07:45:05 +0000 (UTC)
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out1.suse.de (Postfix) with ESMTP id 2E50D21A93;
- Mon, 13 Jun 2022 07:45:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1655106304; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
+X-Greylist: delayed 347 seconds by postgrey-1.36 at gabe;
+ Mon, 13 Jun 2022 09:14:45 UTC
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C704A10E0EC;
+ Mon, 13 Jun 2022 09:14:45 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4LM5N73Srsz9sZR;
+ Mon, 13 Jun 2022 11:08:55 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1655111335;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=5WMle8KoXV0j63rwJ5QZ4pysRjmykK+gll6/m96aiCQ=;
- b=FuLo+VOBBkI+oWNStM4seHkoiyK0Hr+aHMOvDiwt9GGELjWedVV4eVmmgJbe872jPvORqJ
- Vc5aqY4498GBGJEsynJOBtP7uacBYTxS6Qceg9YAfnVQkKLxppmCRYRI6VnRd0Ehidw6e7
- VkwY4jb2uXaKjgqii9bZJVgtGLmxSos=
-Received: from suse.cz (unknown [10.100.201.86])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id B0E0C2C141;
- Mon, 13 Jun 2022 07:45:03 +0000 (UTC)
-Date: Mon, 13 Jun 2022 09:45:01 +0200
-From: Michal Hocko <mhocko@suse.com>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <Yqbq/Q5jz2ou87Jx@dhcp22.suse.cz>
-References: <YqHuH5brYFQUfW8l@dhcp22.suse.cz>
+ bh=/diBHTT7FJGtxv9Ix4yOBCZ8RnU/aeUMZMRq1jZWVd0=;
+ b=Znxifht26gApX39S8dBdMlCkItNVWLXnXVPMEVWY3AG9zAT6gRrWMY9rhTZyANLJTCXA+T
+ /Py+ybJGqRWT/5GkeLRhJZiWzDalGM3ZvZadEpQEYyYCU21C9ACURqw1LrNyUVHsOxWjvx
+ 1p9izA8OmzrQ5cxuRmCiyhEfNhVce3b+LqtSrMJHG1exvU+qFVCJb9AZGKmxkawe7s4w+F
+ /Xrajo+QQRwLwU5ACiJOqV5anBx0ps2Y2wIrqp32YeXJCOeBwJm20EiuG6GVGM12Bl5Dy4
+ ebLpFyJ47wP6J1/GG07XltI+NvUdJKpT2sZ8ndEXg24vYNlBTBRianCdqohCbA==
+Message-ID: <51536e97-ca5f-abe4-b46c-ee3eb57f891e@mailbox.org>
+Date: Mon, 13 Jun 2022 11:08:52 +0200
+MIME-Version: 1.0
+Content-Language: en-CA
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ Michal Hocko <mhocko@suse.com>, =?UTF-8?Q?Christian_K=c3=b6nig?=
+ <christian.koenig@amd.com>
+References: <YqG67sox6L64E6wV@dhcp22.suse.cz>
+ <77b99722-fc13-e5c5-c9be-7d4f3830859c@amd.com>
+ <YqHuH5brYFQUfW8l@dhcp22.suse.cz>
  <26d3e1c7-d73c-cc95-54ef-58b2c9055f0c@gmail.com>
  <YqIB0bavUeU8Abwl@dhcp22.suse.cz>
  <d4a19481-7a9f-19bf-c270-d89baa0970fc@amd.com>
@@ -43,12 +53,14 @@ References: <YqHuH5brYFQUfW8l@dhcp22.suse.cz>
  <2e7e050e-04eb-0c0a-0675-d7f1c3ae7aed@amd.com>
  <YqNSSFQELx/LeEHR@dhcp22.suse.cz>
  <288528c3-411e-fb25-2f08-92d4bb9f1f13@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+From: =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel.daenzer@mailbox.org>
 In-Reply-To: <288528c3-411e-fb25-2f08-92d4bb9f1f13@gmail.com>
-X-Mailman-Approved-At: Thu, 04 Aug 2022 20:34:56 +0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 577iphbxb4bs3945taqe58kkqzbs8imi
+X-MBO-RS-ID: 72e59480f2d70ddaf00
+X-Rspamd-Queue-Id: 4LM5N73Srsz9sZR
+X-Mailman-Approved-At: Thu, 04 Aug 2022 20:35:18 +0000
 Subject: Re: [Nouveau] [PATCH 03/13] mm: shmem: provide oom badness for
  shmem files
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -62,66 +74,36 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: andrey.grodzovsky@amd.com, linux-mm@kvack.org,
+Cc: andrey.grodzovsky@amd.com, linux-tegra@vger.kernel.org,
  nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  hughd@google.com, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- linux-fsdevel@vger.kernel.org, viro@zeniv.linux.org.uk, daniel@ffwll.ch,
- linux-tegra@vger.kernel.org, alexander.deucher@amd.com,
- akpm@linux-foundation.org,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- linux-media@vger.kernel.org
+ linux-mm@kvack.org, viro@zeniv.linux.org.uk, daniel@ffwll.ch,
+ linux-fsdevel@vger.kernel.org, alexander.deucher@amd.com,
+ akpm@linux-foundation.org, linux-media@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat 11-06-22 10:06:18, Christian K�nig wrote:
+On 2022-06-11 10:06, Christian König wrote:
 > Am 10.06.22 um 16:16 schrieb Michal Hocko:
-[...]
-> > > So what happens when a games over allocates texture resources is that your
-> > > whole desktop restarts because the compositor is killed. This obviously also
-> > > kills the game, but it would be much nice if we would be more selective
-> > > here.
-> > > 
-> > > For hardware rendering DMA-buf and GPU drivers are used, but for the
-> > > software fallback shmem files is what is used under the hood as far as I
-> > > know. And the underlying problem is the same for both.
-> > For shmem files the end user of the buffer can preallocate and so own
-> > the buffer and be accounted for it.
+>> [...]
+>>>> Just consider the above mentioned memcg driven model. It doesn't really
+>>>> require to chase specific files and do some arbitrary math to share the
+>>>> responsibility. It has a clear accounting and responsibility model.
+>>> Ok, how does that work then?
+>> The memory is accounted to whoever faults that memory in or to the
+>> allocating context if that is a kernel memory (in most situations).
 > 
-> The problem is just that it can easily happen that one process is allocating
-> the resource and a different one freeing it.
+> That's what I had in mind as well. Problem with this approach is that file descriptors are currently not informed that they are shared between processes.
 > 
-> So just imaging the following example: Process opens X window, get reference
-> to the handle of the buffer backing this window for drawing, tells X to
-> close the window again and then a bit later closes the buffer handle.
+> So to make this work we would need something like attach/detach to process in struct file_operations.
 > 
-> In this example the X server would be charged allocating the buffer and the
-> client (which is most likely in a different memcg group) is charged freeing
-> it.
+> And as I noted, this happens rather often. For example a game which renders 120 frames per second needs to transfer 120 buffers per second between client and X.
 
-Thanks for the clarification.
+FWIW, in the steady state, the game will cycle between a small (generally 2-5) set of buffers. The game will not cause new buffers to be exported & imported for every frame.
 
-> I could of course add something to struct page to track which memcg (or
-> process) it was charged against, but extending struct page is most likely a
-> no-go.
+In general, I'd expect dma-buf export & import to happen relatively rarely, e.g. when a window is opened or resized.
 
-Struct page already maintains is memcg. The one which has charged it and
-it will stay constatnt throughout of the allocation lifetime (cgroup v1
-has a concept of the charge migration but this hasn't been adopted in
-v2).
 
-We have a concept of active_memcg which allows to charge against a
-different memcg than the allocating context. From your example above I
-do not think this is really usable for the described usecase as the X is
-not aware where the request comes from?
-
-> Alternative I could try to track the "owner" of a buffer (e.g. a shmem
-> file), but then it can happen that one processes creates the object and
-> another one is writing to it and actually allocating the memory.
-
-If you can enforce that the owner is really responsible for the
-allocation then all should be fine. That would require MAP_POPULATE like
-semantic and I suspect this is not really feasible with the existing
-userspace. It would be certainly hard to enforce for bad players.
 -- 
-Michal Hocko
-SUSE Labs
+Earthling Michel Dänzer            |                  https://redhat.com
+Libre software enthusiast          |         Mesa and Xwayland developer
