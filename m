@@ -1,53 +1,62 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51DAE5484FA
-	for <lists+nouveau@lfdr.de>; Mon, 13 Jun 2022 13:50:44 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D52F1548553
+	for <lists+nouveau@lfdr.de>; Mon, 13 Jun 2022 14:56:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 76D9D10E3E4;
-	Mon, 13 Jun 2022 11:50:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C405B10E4B2;
+	Mon, 13 Jun 2022 12:55:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2071.outbound.protection.outlook.com [40.107.223.71])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DB43210E3E4;
- Mon, 13 Jun 2022 11:50:41 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WNpyXwXhGGrBIaNRpxb0o7f7PJIILiXXDyQyvQkw8G829OorY7DNj+M/VDV/utddoivc5sJLxs/D5zmkuz5x9///KlVhxvot7vqMwAofpKk2AMROXyJHP5hkGanJ8/o1keiZqdm9sDmSC/2i0RP5u88vUy2P8fOxayvIuXdz6EXxpPFSxNrz7Xcvinbxg51IC+P9f08ZbKxc34Wn2oq/zSGnXPcw0HnE7R30CPDJ7WgNbNc+jitY+PYWOw48XWYLMYokgab8MvfZLY6S/51eff47kFmhFYvf3t9siZ1ns0C584XPbaosnOgr7eOeo8QQDVRd3OElrsR6wFD0+DHIwA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zIz7+06G+8Too1uS7gtSGTR2zn2LrH7bHEs7qr5PVOk=;
- b=CHzfuGuf3zA48rRok3n8tX7ONnxn6C9eoXTL6BGFDpYbH5sWqklsXUuOkKPHXpqK/JgJ4PqrsderBSmXSf2wfuobNLXg4GLDZSXtGLo6nWQ5EZpmLPsGniOhCVPyz9Ie6F+Rm4bZgLbQ760h+TXJjCrImEILUQYC3IsvM0oPB9Gclwq50hxIu//c+dUXY+zqAbNUNbU7YCdQ7d6cthTowTUyi9yjJuXxyFJLp1505+tWRCyRqTWR9ZfciXHWwe6YBgQQcRWEulebVBxD41mhRgjjEMEKmhMp3pZj/zSsyszv4SLe5mDXJ+PxP76t3ZZRMPo/A7K4ForPzDlh0PthFg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zIz7+06G+8Too1uS7gtSGTR2zn2LrH7bHEs7qr5PVOk=;
- b=Am/mT1NSiYAQwxPnX3vFQbUsZqqObWDUKiitktOWaQfSfXf11IuMlb/Y0shGiG3XSZ7q3gALyHtzir5WD/5ymWXuw6kSdQuI8U4+ZK/7CEY+FjGe1zEblz+spz4VJJGtqEEXyOFB4KBUkfPDPwWdNbVW9z+Hbw+kduQS/0D/qeo=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by MW2PR12MB2347.namprd12.prod.outlook.com (2603:10b6:907:7::30) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5332.16; Mon, 13 Jun
- 2022 11:50:37 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::e0fd:45cf:c701:2731]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::e0fd:45cf:c701:2731%6]) with mapi id 15.20.5332.019; Mon, 13 Jun 2022
- 11:50:37 +0000
-Message-ID: <b8b9aba5-575e-8a34-e627-79bef4ed7f97@amd.com>
-Date: Mon, 13 Jun 2022 13:50:28 +0200
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EE5C810E13E;
+ Mon, 13 Jun 2022 12:55:58 +0000 (UTC)
+Received: by mail-ed1-x536.google.com with SMTP id g7so7023911eda.3;
+ Mon, 13 Jun 2022 05:55:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=message-id:date:mime-version:user-agent:subject:content-language:to
+ :cc:references:from:in-reply-to:content-transfer-encoding;
+ bh=eTQgrOtNKXeuE24E4z1BZTvFXtuq4jZXbc2fnCBYhC4=;
+ b=Nj4MPAUCb8OsNfEZnsGGbUCGhFTknfSsE2F2y/SD3ys8pENJtRCBqv0QGE5MeJqZKf
+ 4ujqAiYBhiFAQIIMPaygZHU0/g+3YknfQZZNi4Zk1JY22jEvvgIxbsyGHQl/L5VMCTv+
+ PhibmZ6Q8zOwiyhaUUxlLced1et9/+osLVbICikxeqZICFXFHZtDonOd+BrKN251SWnv
+ dxbwERu7dgYthvRMX8FfmxERfODU787Zqp6sW7mpxaFLu2txINVkCxHxdrUWAlAktt3B
+ 5jBGTrYKi//rCcqiMtbP1tfziE+slRshLlGSrrgWkutmG5+D2MFut4UwQ9MF72FkL5M7
+ IRPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=eTQgrOtNKXeuE24E4z1BZTvFXtuq4jZXbc2fnCBYhC4=;
+ b=EXR+QT8EY1kFSIAdtVaCWXYDCQ0ByJ4Nz1Eutvw8c9y/XRYogrWtPpQ4JMkhfjBKx/
+ Kkzbst5K9E42UwLk7bmr9bV6Odm+W2jRYH+QuRq/iy9zBJNO7yddk4xQO4BP4RsCmEZF
+ ozCJd8A7S1NDd6r7hANzoa8gggDh2tJMlW22gvZc3bIKzWPZFJLcKsV3h1895s3hHAis
+ nnBBf8FySER3xoYq644TwWvLdswUBBQUswgvqgagAI69wA7A7uNTc4x46uVAkpvd0G00
+ jlka6ajSDtnmJYWAg3JrmbuARVr+6BrP57fr0DEVsfo1OzUxYVXoJfM4EjZFc46Wkb0L
+ itTQ==
+X-Gm-Message-State: AOAM530nHDdLpn3hFdRSex8eq0Y283PZCHNgkq52RlijpExVtd1QJPKr
+ MjCrHacGumeayN4W4w43K7b2Vk5Wfa0=
+X-Google-Smtp-Source: ABdhPJyT0uwBN5ukf/MuNShwizt1LoZp0+Oby2zBTUXp3fSO81I8QLT2dBcsK6cZgTnu+DBQ4P/AYA==
+X-Received: by 2002:a05:6402:1e92:b0:42d:dc34:e233 with SMTP id
+ f18-20020a0564021e9200b0042ddc34e233mr65598749edf.386.1655124957390; 
+ Mon, 13 Jun 2022 05:55:57 -0700 (PDT)
+Received: from [192.168.178.21] (p57b0b659.dip0.t-ipconnect.de.
+ [87.176.182.89]) by smtp.gmail.com with ESMTPSA id
+ v20-20020a1709060b5400b0070662b3b792sm3765548ejg.222.2022.06.13.05.55.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 13 Jun 2022 05:55:56 -0700 (PDT)
+Message-ID: <34daa8ab-a9f4-8f7b-0ea7-821bc36b9497@gmail.com>
+Date: Mon, 13 Jun 2022 14:55:54 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.9.1
 Content-Language: en-US
-To: Michal Hocko <mhocko@suse.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-References: <YqHuH5brYFQUfW8l@dhcp22.suse.cz>
- <26d3e1c7-d73c-cc95-54ef-58b2c9055f0c@gmail.com>
- <YqIB0bavUeU8Abwl@dhcp22.suse.cz>
+To: Michal Hocko <mhocko@suse.com>, =?UTF-8?Q?Christian_K=c3=b6nig?=
+ <christian.koenig@amd.com>
+References: <YqIB0bavUeU8Abwl@dhcp22.suse.cz>
  <d4a19481-7a9f-19bf-c270-d89baa0970fc@amd.com>
  <YqIMmK18mb/+s5de@dhcp22.suse.cz>
  <3f7d3d96-0858-fb6d-07a3-4c18964f888e@gmail.com>
@@ -56,76 +65,12 @@ References: <YqHuH5brYFQUfW8l@dhcp22.suse.cz>
  <YqNSSFQELx/LeEHR@dhcp22.suse.cz>
  <288528c3-411e-fb25-2f08-92d4bb9f1f13@gmail.com>
  <Yqbq/Q5jz2ou87Jx@dhcp22.suse.cz>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <Yqbq/Q5jz2ou87Jx@dhcp22.suse.cz>
+ <b8b9aba5-575e-8a34-e627-79bef4ed7f97@amd.com>
+ <YqcpZY3Xx7Mk2ROH@dhcp22.suse.cz>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+In-Reply-To: <YqcpZY3Xx7Mk2ROH@dhcp22.suse.cz>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AS8P250CA0016.EURP250.PROD.OUTLOOK.COM
- (2603:10a6:20b:330::21) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3a6ea1b8-4ba2-40d8-1f86-08da4d32ee86
-X-MS-TrafficTypeDiagnostic: MW2PR12MB2347:EE_
-X-Microsoft-Antispam-PRVS: <MW2PR12MB2347E91FD8857E13DA8E452583AB9@MW2PR12MB2347.namprd12.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: dMpvz95+kZGCgEvFGwsy19S/+NL7tLzp0SSDHEoGe7OwM7/cJw6CsAluBVjtOBKPQV6mhzYuzWTV9ehO84ij+4yajzpbZ/RoYZyD2wagks/B86X4SP/Q/9d9Pay4NOuuibJVA9AHcvbcTssxXpXytoiwf/x01Pyd8/7XcgmN2iKs8MbaVo0/EtlivQZDUcTlRfG7Eqi5IR1SP/YBJs924E5HC9xAZOs/21mW5u+LPCnR7I6shsxhyWpsBu0P8fti9X9kJ7xMUfTFIQYYY6sIbusQy7XVtl2AEamcsqdXCaJes7Gj6vm21BXKOOcUc93Zg7KJqUo6nifURlwRgNxLubb8Z3SA0nTjJP3rVZqqZJ13g68biia6aAaHUbaVO6jM+zROxRk6cR3oueOMiFPo9zOqcJir2rWxoTJN5xC+xbPrNBq5OyN2/0uAcmqObdO8AKu5RrL95xEoirnWCzsoQ5N/7RnBsqJPvDbvS2QR1R+S0B1DEfHiLQzdZhZJgsz5DEmU12CBIg9wEGMHgHIYnUCNbBYMsllCpolH1moM0is8k56j0klN3zJQXEXvqvog1+JSdCIRSmrVMFDH1AVHHYNU3ww8uNvI/Lgc8DKlIT71C/1/82eTw+A90q/E8dm/VdH6ryiAmAWIZGwQGwGYU+JXct3LoX2ntuMLGoKfgHyeTDPCKqLP38bf+P2FaiHFWSTnGmMPz26tbiyDeaHt9tGxeOaXPZhqqAZC08GOnfPw6rV4YD0WhB4qEIv2oPQH
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230016)(4636009)(366004)(4326008)(8676002)(31686004)(86362001)(36756003)(5660300002)(7416002)(110136005)(8936002)(66476007)(66556008)(66946007)(6486002)(316002)(2906002)(186003)(26005)(2616005)(508600001)(6666004)(6506007)(31696002)(6512007)(83380400001)(38100700002)(66574015)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eTFIZEdOcFNxUUQvT0REcjFQaTZjcVdWUldqTisyYzNQYWlYMWsxbTFqMGw4?=
- =?utf-8?B?Smg2WHRNQzJDQ3NQMjhwVk9NanV3N0FTNVQvejhDS01zZ3MySVZhSkJHUHYx?=
- =?utf-8?B?K0NqamR2MXZxblM3TzVQMms3WWpNdG9xK055ck1YQkFqY2JlNElQazNBK1hT?=
- =?utf-8?B?NjlkVzNLY2xQSWhicHZqY21FWmpZdUlkcWhBcHA4OE9NQ043bmR5cU93OHN4?=
- =?utf-8?B?QlZldW9BcnorNFhlUWdkcGY4WktMMFNtTUxvTDVsWlhMWDljcDg1UHpQMk1M?=
- =?utf-8?B?d0pIaDc1YndPbVlMalRzaEFzb1BCSnZZZXlnYjVoZ3orMFphcFN1eHlRUjVF?=
- =?utf-8?B?N3JEUzR0aWYzUGw1KzlLUGhLUFhoNHhVMXNKcEFjc2hIL3BDVGgzQ3lqRlQx?=
- =?utf-8?B?dnNpbjNwbGk3alJQcUlVUVYzbWFselpqNlZaSVZIMlhhTXEwd0FsdFFOL1Nx?=
- =?utf-8?B?TWR2ajVnSGRVRUdBb24rN1dVWVRBNDBhN3E4WW1yYXZ6dEM0TjdjejVxUVRD?=
- =?utf-8?B?MGU1QklCdSszUW9PaE5XWFhlVW5oZUJmZTdzZWRJOHdJQjcxZWZjVUpEd3FZ?=
- =?utf-8?B?cjlUd3lxeGlTNWNuczRsZjB5N2lOaDdQWlI5RkMvNEM3WnhDQ1hXZ3BoQ2xi?=
- =?utf-8?B?WDFmRXY3c3RCRkxBaXhOeFpIVkVTYVQvdkdjMzYvZitEVERWUXd4SGRmZ3ZZ?=
- =?utf-8?B?YmYwc0Z3ZTRHWDBIRnIraEd3d1JqelVadkRsRXRxRlMvT2R2VWU1eVJzd2Vn?=
- =?utf-8?B?Y2drbTBZT0VFZ0g5VlFQbEFmVjFKbDQ5bUswSG9HVVRtYWxHY1BVTCtPU1RK?=
- =?utf-8?B?NCtRQlc5YzFwYzVyRzJ4SzYvd0grRW14MGpMc2Y2TTBWVE9RM3NsOVBaeGly?=
- =?utf-8?B?enFTd2hMVmIwZmJ4NUUzL0prQ3gvdTd3MVdVUGtQTmNHZWlaZkNUcTIyOTA1?=
- =?utf-8?B?dUQyVE02c2Z4cm1JeW1ZZlFUYkZNQzlKWXJFd1Iyb3l4SVYyd1pvd3plSVIy?=
- =?utf-8?B?QUNLekRWV293MEpPTnovbG9PZmFPMEhSUG45ZTd2a1NnN2VJYlBrQ0JxOUt3?=
- =?utf-8?B?b2hmU09IeG9TVURjbzVJQTVOU1k1NXhBbVYzRm5YakdkeVZFYlJoajc1TkVz?=
- =?utf-8?B?bGxkR1cvYTZJZnpIY3dERGdSR1hJUXZoeGthc2ZaVUlvbnpSUjlMNm45M0Fr?=
- =?utf-8?B?VUtvM1N4aTdEKzNoaHlaY0xHUGkyUnRFVUV6UGpMdm55TFdDM0NxenRqOWYv?=
- =?utf-8?B?QWxTNTdtWU90R0NIWDdwazBPRWVIS1QvRGFhZlJlVGN3MnpiY3ljV1U1blZY?=
- =?utf-8?B?L2dXMmdaS2hreVBhWXhTY3JnRjZ0STNkTms3a1pHWEpISWtEUUljM0VMWkVN?=
- =?utf-8?B?cnFSU1dVSDhNcG1ZS2JNSHRucGFnWTBrYnovVDJtZ0pHY0g2NjhYVWNrR2hS?=
- =?utf-8?B?dWc1eDZHY3F0ckNaeFFwMVdHRVcvTmNIblFMaTRIaGgrSTVVNCtpRjRONW1t?=
- =?utf-8?B?Lyt5YXY3MVRQcHBzUWh3WDhCWTN6NXl5bm8zdFc0Q3NEYXp5amxHYkpwZVlQ?=
- =?utf-8?B?RTZLN2pDYUd1UDZwTTBHUW0wbkxQUkpwYXVCa0lCelFLWDhEcHRaQ09lejFr?=
- =?utf-8?B?SkFkaU0wYUNSdkdqNTVjVi9lQlJLL0x0MkQ5SG93VnRqenI5ejBnVWVHODBB?=
- =?utf-8?B?VWkrZEVpWUZaSCtOSkFBZXdWMDVQSmZWMmR2Uy9TQVBvU3RXY1NMd2hWTS9o?=
- =?utf-8?B?eThpYWlEejRqQjBVMFllSHB2UDd1b204Tm82RWJLQW42bHh6ejI3dUhMZWxj?=
- =?utf-8?B?ZGZCV2gvZFFHRlE1dGh2VW12UlpiWGRqUHRrbVhnUXluV3pSbXpOemU2NWxY?=
- =?utf-8?B?QlRpVFVwcWFxTDgzWlFtMk00akZnL1RaRDVmR3BVTHpwYlhzYWJxY0RrWWc2?=
- =?utf-8?B?YzdCTUM0UzRWTFVOQlI3aFVYS1VDMkdJR2x2ZVFMcWMwejBrZjhZT0ZkRnFq?=
- =?utf-8?B?UTRkR3JDK2N4cWNRdFlsUTBpQjNDbUJQZmxqSWlQVCtvdm5tRnphU2VobFQ2?=
- =?utf-8?B?dTFrL2xBRHRYR3FwcUgwYlV3ZlJZZUpCSEQ5OTZKRzdGQ2pmT0JKZGI1Y1Ay?=
- =?utf-8?B?d2NlTUwyRVJiYUd2bVJhbEdQenlKdFRZemgwTU9VaWFqMmZGRHNCODFyWmxL?=
- =?utf-8?B?OXBmUUFtZGFZaHM1ZUZLSnNXdjdYT1krSEZ0bGlNUGVaZElCam56MzdDNWZh?=
- =?utf-8?B?K1ErdjZaS29sdjZZc1RKOHpZMEZqTERJeDFmTXlmM2RwaWZCNHZQS216Vm5r?=
- =?utf-8?B?dTVRNTNqbDhjWnBXMHg2d0NlMENVMkovWENvbDZ4NFVUeklNL2s1QT09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3a6ea1b8-4ba2-40d8-1f86-08da4d32ee86
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jun 2022 11:50:37.4473 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WE/TMEX/aN6YSmK1QXWb93UJZ327wus5/rdTndnfOgqg6Yj8DX4ymzLrKDVocXqa
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW2PR12MB2347
 Subject: Re: [Nouveau] [PATCH 03/13] mm: shmem: provide oom badness for
  shmem files
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -148,53 +93,40 @@ Cc: andrey.grodzovsky@amd.com, linux-mm@kvack.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 13.06.22 um 09:45 schrieb Michal Hocko:
-> On Sat 11-06-22 10:06:18, Christian König wrote:
->> Am 10.06.22 um 16:16 schrieb Michal Hocko:
-> [...]
->> I could of course add something to struct page to track which memcg (or
->> process) it was charged against, but extending struct page is most likely a
->> no-go.
-> Struct page already maintains is memcg. The one which has charged it and
-> it will stay constatnt throughout of the allocation lifetime (cgroup v1
-> has a concept of the charge migration but this hasn't been adopted in
-> v2).
->
-> We have a concept of active_memcg which allows to charge against a
-> different memcg than the allocating context. From your example above I
-> do not think this is really usable for the described usecase as the X is
-> not aware where the request comes from?
+Am 13.06.22 um 14:11 schrieb Michal Hocko:
+> [SNIP]
+>>>> Alternative I could try to track the "owner" of a buffer (e.g. a shmem
+>>>> file), but then it can happen that one processes creates the object and
+>>>> another one is writing to it and actually allocating the memory.
+>>> If you can enforce that the owner is really responsible for the
+>>> allocation then all should be fine. That would require MAP_POPULATE like
+>>> semantic and I suspect this is not really feasible with the existing
+>>> userspace. It would be certainly hard to enforce for bad players.
+>> I've tried this today and the result was: "BUG: Bad rss-counter state
+>> mm:000000008751d9ff type:MM_FILEPAGES val:-571286".
+>>
+>> The problem is once more that files are not informed when the process
+>> clones. So what happened is that somebody called fork() with an mm_struct
+>> I've accounted my pages to. The result is just that we messed up the
+>> rss_stats and  the the "BUG..." above.
+>>
+>> The key difference between normal allocated pages and the resources here is
+>> just that we are not bound to an mm_struct in any way.
+> It is not really clear to me what exactly you have tried.
 
-Well X/Wayland is aware, but not the underlying kernel drivers.
+I've tried to track the "owner" of a driver connection by keeping a 
+reference to the mm_struct who created this connection inside our file 
+private and then use add_mm_counter() to account all the allocations of 
+the driver to this mm_struct.
 
-When X/Wayland would want to forward this information to the kernel we 
-would need to extend the existing UAPI quite a bit. And that of course 
-doesn't help us at all with existing desktops.
+This works to the extend that now the right process is killed in an OOM 
+situation. The problem with this approach is that the driver is not 
+informed about operations like fork() or clone(), so what happens is 
+that after a fork()/clone() we have an unbalanced rss-counter.
 
->> Alternative I could try to track the "owner" of a buffer (e.g. a shmem
->> file), but then it can happen that one processes creates the object and
->> another one is writing to it and actually allocating the memory.
-> If you can enforce that the owner is really responsible for the
-> allocation then all should be fine. That would require MAP_POPULATE like
-> semantic and I suspect this is not really feasible with the existing
-> userspace. It would be certainly hard to enforce for bad players.
+Let me maybe get back to the initial question: We have resources which 
+are not related to the virtual address space of a process, how should we 
+tell the OOM killer about them?
 
-I've tried this today and the result was: "BUG: Bad rss-counter state 
-mm:000000008751d9ff type:MM_FILEPAGES val:-571286".
-
-The problem is once more that files are not informed when the process 
-clones. So what happened is that somebody called fork() with an 
-mm_struct I've accounted my pages to. The result is just that we messed 
-up the rss_stats and  the the "BUG..." above.
-
-The key difference between normal allocated pages and the resources here 
-is just that we are not bound to an mm_struct in any way.
-
-I could just potentially add a dummy VMA to the mm_struct, but to be 
-honest I think that this would just be an absolutely hack.
-
-So I'm running out of ideas how to fix this, except for adding this per 
-file oom badness like I proposed.
-
-Regards,
+Thanks for all the input so far,
 Christian.
