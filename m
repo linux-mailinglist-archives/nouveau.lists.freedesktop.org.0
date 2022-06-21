@@ -1,51 +1,42 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70B7658A235
-	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:41:21 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B03F858A21C
+	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:39:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 73714A6F2E;
-	Thu,  4 Aug 2022 20:37:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1740DA6F33;
+	Thu,  4 Aug 2022 20:37:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from out162-62-57-210.mail.qq.com (out162-62-57-210.mail.qq.com
- [162.62.57.210])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 113D310F0E4;
- Thu, 16 Jun 2022 07:01:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1655362865; bh=lVrj+B/OXD3/d9PND/gW3vEGIbfEhk331+xQfhE35V8=;
- h=From:To:Cc:Subject:Date;
- b=MoZxhzB9Jey/z0o3o+nSlP1odTpGcs/FHNXrPwVGyUem0dCWcqK5kQAjA1mtFE7AX
- Tpvhv0LO6L5YSLlzbRytAqdRtes/lhnL+Wl129CMn+xWxhD0MLPXssYlaql7ATY5ap
- tmcY2KqVU4GferPyXwAVdE0fu4APHow+jSg0QL1M=
-Received: from localhost.localdomain ([116.128.244.169])
- by newxmesmtplogicsvrsza5.qq.com (NewEsmtp) with SMTP
- id 4223CE7; Thu, 16 Jun 2022 15:01:02 +0800
-X-QQ-mid: xmsmtpt1655362862tdbwc04hu
-Message-ID: <tencent_C15AFFD9BBB862C56280A415C336F94C3909@qq.com>
-X-QQ-XMAILINFO: NvH2zBBgt3uTI/YdeasDRx/1uWuyqlrk9Ifq5WHzvh7sI2nGAjl+B3/H2hZDri
- J1LRkEL9UVgbC8cmB1g6ofcSciDWcsDAYGvmRVAQEqN+PEJ3XXYO0jnivhMda1z34Q4VtocvpknB
- xhTYLtVihrsXPTsHAQxKQYVG9VNy3X3nPddy6D9wwuCRaRB+fxnh76ytujlbSgy6Z0T9mN8FGdx7
- tLP73/0jm6OXULFgQCLxANahstvi2gt1ix8p/Z26au417ARPyBGAEOGL2b7u0qmsHolDGaEZN+kw
- whgmIb6/hkLOn7H27ScGiIFg5w2upZhzDys4qEqRFLOYoDJbiksrGXcOtCFOYvfxkpkjOvj+JZP9
- YOK9dCwI8JIvTikmlpyszHhsg6JXmbYOAf1ANde6BAwL3PgrHL7wc1kf1yYxln+HjoSqE4zevyjx
- DdcxZITBqh3IwiKk6+qIN//Ig7SKaY0gPuGRHC17pRQ+BwQHQvTtq1H5TimMXFfIsS78w/a4taAF
- xXTe/xcHZ6ZyUKwDsZafSkjTQ/CTZOZLL+mzFbeUsI7pPAi5CljR7UIQAbpsQfiewBhK5AQzvbmN
- tWMDGUW0GuCMgCNJqq4dFflxvOkl1LksGagIldR0VZeQzPdPmDjPzgTGEZ/U6bOQD1zN6d0r4oFx
- RkdK4VfTTs8p8KKxI6NbqDE3b3+D566Me2NqCXRu98xHsifHiQkVWanm7ooDo1/DXd1Z1ZyUuakT
- pLF0A9N544btcttTG6B8yvmk3DH2FFB2smp4yNhIznAzckRvkLbF9g4ZO8h8sRhfAfsynjGdoPxl
- 3p2hQEsBwXIbijFlltr9uUyhECnhvwzPnj6ldSUtneSmtn7iZKd0o4FGQWLL/11QBsbhHmSfsYhw
- ==
-From: 1064094935@qq.com
-To: Lyude Paul <lyude@redhat.com>
-Date: Thu, 16 Jun 2022 15:01:01 +0800
-X-OQ-MSGID: <20220616070101.105308-1-1064094935@qq.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 04 Aug 2022 20:34:36 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau: Fix spelling typo in comments
+X-Greylist: delayed 447 seconds by postgrey-1.36 at gabe;
+ Tue, 21 Jun 2022 13:47:59 UTC
+Received: from smtpbg.qq.com (smtpbg139.qq.com [175.27.65.136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9631410E749
+ for <nouveau@lists.freedesktop.org>; Tue, 21 Jun 2022 13:47:59 +0000 (UTC)
+X-QQ-mid: bizesmtp65t1655818767tu45ejch
+Received: from ubuntu.localdomain ( [106.117.99.68])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 21 Jun 2022 21:39:22 +0800 (CST)
+X-QQ-SSF: 0100000000700060B000D00A0000000
+X-QQ-FEAT: FXvDfBZI5O6DgV0I3s0IakLWZaVbIOeZptt8jkiqdC1X/yUp5ELNdn8Vvimqw
+ kdqB7vxeV000srLFqPrzmvpRv3xMNGqY/WTZykt2a5+hrZU2ouG6aJY0FwkNxIcz91BpQfG
+ VqR06qnanaOXzeMMt3XsO3ofR/u0v1o+Xuvjmy/MwCxeN2KgF90IWZySikkpVqMJ8bHPXsH
+ NRdlOMeNA03XnMjqUcn+s0TupNOs31NxK4wghTnvYQSVuCs/aZAMQLbyUfXO3/oIHKhjpYk
+ JiuqbONKtHaOpWVxC5aL0UXAns7l7YBvcX5cguXNa3+mnNVAM1JO3eagNC3l7urNzzhZOa9
+ rm3F+l7prWovBsId6MgNgmymtknZw==
+X-QQ-GoodBg: 0
+From: Jiang Jian <jiangjian@cdjrlc.com>
+To: airlied@linux.ie,
+	daniel@ffwll.ch
+Date: Tue, 21 Jun 2022 21:39:20 +0800
+Message-Id: <20220621133920.8112-1-jiangjian@cdjrlc.com>
+X-Mailer: git-send-email 2.17.1
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:cdjrlc.com:qybgspam:qybgspam6
+X-Mailman-Approved-At: Thu, 04 Aug 2022 20:34:51 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau/mmu: drop unexpected word "the" in
+ the comments
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,48 +48,38 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- pengfuyuan <pengfuyuan@kylinos.cn>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, k2ci <kernel-bot@kylinos.cn>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Julia.Lawall@inria.fr, jiangjian@cdjrlc.com,
+ bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: pengfuyuan <pengfuyuan@kylinos.cn>
+there is an unexpected word "the" in the comments that need to be dropped
 
-Fix spelling typo in comments.
+file: drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
+line: 1051
+ * have the the deepest nesting of page tables.
+changed to
+ * have the deepest nesting of page tables.
 
-Reported-by: k2ci <kernel-bot@kylinos.cn>
-Signed-off-by: pengfuyuan <pengfuyuan@kylinos.cn>
+Signed-off-by: Jiang Jian <jiangjian@cdjrlc.com>
 ---
- drivers/gpu/drm/nouveau/include/nvhw/drf.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvhw/drf.h b/drivers/gpu/drm/nouveau/include/nvhw/drf.h
-index bd0fc41446e2..d6969c0e2f29 100644
---- a/drivers/gpu/drm/nouveau/include/nvhw/drf.h
-+++ b/drivers/gpu/drm/nouveau/include/nvhw/drf.h
-@@ -190,7 +190,7 @@
- #define DRF_MD_(X,_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,IMPL,...) IMPL
- #define DRF_MD(A...) DRF_MD_(X, ##A, DRF_MD_I, DRF_MD_N)(X, ##A)
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
+index ca74775834dd..ae793f400ba1 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
+@@ -1048,7 +1048,7 @@ nvkm_vmm_ctor(const struct nvkm_vmm_func *func, struct nvkm_mmu *mmu,
+ 	__mutex_init(&vmm->mutex, "&vmm->mutex", key ? key : &_key);
  
--/* Helper for testing against field value in aribtrary object */
-+/* Helper for testing against field value in arbitrary object */
- #define DRF_TV_N(X,e,p,o,d,r,  f,cmp,v)                                          \
- 	NVVAL_TEST_X(DRF_RD_X(e, (p), (o), d##_##r   ), d##_##r##_##f, cmp, (v))
- #define DRF_TV_I(X,e,p,o,d,r,i,f,cmp,v)                                          \
-@@ -198,7 +198,7 @@
- #define DRF_TV_(X,_1,_2,_3,_4,_5,_6,_7,_8,_9,IMPL,...) IMPL
- #define DRF_TV(A...) DRF_TV_(X, ##A, DRF_TV_I, DRF_TV_N)(X, ##A)
- 
--/* Helper for testing against field definition in aribtrary object */
-+/* Helper for testing against field definition in arbitrary object */
- #define DRF_TD_N(X,e,p,o,d,r,  f,cmp,v)                                                          \
- 	NVVAL_TEST_X(DRF_RD_X(e, (p), (o), d##_##r   ), d##_##r##_##f, cmp, d##_##r##_##f##_##v)
- #define DRF_TD_I(X,e,p,o,d,r,i,f,cmp,v)                                                          \
+ 	/* Locate the smallest page size supported by the backend, it will
+-	 * have the the deepest nesting of page tables.
++	 * have the deepest nesting of page tables.
+ 	 */
+ 	while (page[1].shift)
+ 		page++;
 -- 
-2.25.1
+2.17.1
 
-
-No virus found
-		Checked by Hillstone Network AntiVirus
