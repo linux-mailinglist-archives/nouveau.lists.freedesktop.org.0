@@ -2,84 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52906557816
-	for <lists+nouveau@lfdr.de>; Thu, 23 Jun 2022 12:46:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87F2F55948D
+	for <lists+nouveau@lfdr.de>; Fri, 24 Jun 2022 10:04:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 70F5C10E111;
-	Thu, 23 Jun 2022 10:46:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C879410F2C7;
+	Fri, 24 Jun 2022 08:04:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 69CE010E0E3
- for <nouveau@lists.freedesktop.org>; Thu, 23 Jun 2022 10:46:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1655981184;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Wvp4c8ma6q+0nmczjb+eMGTpk4qCAW2Qq2qJF/kNVDA=;
- b=abDuqiyP34St/9sJ9iAQl2kPDkH51DkMyX9vCEzjnBi2btJowRxs2geV+vY3/oBfg9FVh/
- 2UJLCk0lQBPoPq8iH+zD3ax/9QCTxqSEGfyX7pdY1jut3hSU8ibQMmwDhIvB/6wdT1avAR
- P/Tk6tWjIbMw/qZ/57+mbcQcRzU32NI=
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-663-zeBC5G2oNTSKM1AkOn0J0w-1; Thu, 23 Jun 2022 06:46:23 -0400
-X-MC-Unique: zeBC5G2oNTSKM1AkOn0J0w-1
-Received: by mail-ej1-f72.google.com with SMTP id
- hp8-20020a1709073e0800b0072629757566so473361ejc.0
- for <nouveau@lists.freedesktop.org>; Thu, 23 Jun 2022 03:46:23 -0700 (PDT)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 61AFD10F2C7;
+ Fri, 24 Jun 2022 08:04:49 +0000 (UTC)
+Received: by mail-ed1-x531.google.com with SMTP id c13so2291698eds.10;
+ Fri, 24 Jun 2022 01:04:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=LhrZ1UxjIpVC2XBdksQBTmD7BAYYNmGWhWbEjzEkz2c=;
+ b=IT/2QY1S3wcM8FS/v0FfdNQ+N0HXcgQBGNh20MRJf8eVnqxcRW0P4dlyNLO+vVZ8g/
+ 6Q+9dkqSDlXiGXgDpZQ0Bpt/FxnTiQwhmLrYF2pPF4xCysoOJkrd6xdjVCkn+Uvy+ffB
+ quJO025nVRDKuN9elrZ48yacmrwHG6j8fQ5ySbuBDjbc6A7DHjXpkjjTouvrDvdQmO8c
+ ms0eTCTSdv2gdgpHBUxImXnUGSIc33A3tu+afJmcDei235oxk6m1CWDn/CTQ5PlKsxAC
+ SPK5To3d1dYAUUDB5YpwfCNc5A+uFc9Q9nF0XhuNgx0cPr6s4OJUdGvNRl1Rtwlr7tA1
+ Xb0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=Wvp4c8ma6q+0nmczjb+eMGTpk4qCAW2Qq2qJF/kNVDA=;
- b=mawBRILusngIoSsuGzMlU5wGYsM72+Om/yDeaPcA+AnHkDEi5RwWkyglRnFZMPl0Um
- vSqmbG4qIh1oKobmDWm+QZn7vw0rTb7B11wXwN/wfn8c53/wK44ZGMqpMAy92NjiIgui
- Mt8UdKLjb2ayzLgw23OHD9NDoGxhRoYpuvSxdqNAc/c9An04ll5AbF5+8YPU4p2dMLPf
- yAc/DheGpXOLIk0gYqc1IP3f36g1ZelM1uqdfPqdhP4Y0pHUtFwRRsmJt+uM9lZ9ZgTT
- XwMsSQ+f58aLGHcVA+Iu80yzcA5OJDOwH4u9JQuKPjynXTIwt8e8EAjYVgqKed9aiRQP
- nOsg==
-X-Gm-Message-State: AJIora9JX0TedXzDHpKldIAMmWZHjAnouySX3eHNOWCzmXrQtxOZLhY5
- zBR3BO54K3wWdc357bliz1hiCfdlU2AR9va5hBHb9l5KxcyHpxM8ogCLVCA5YTi1gQhLysJnFFL
- 3vuqw1vTaxfYLWnQBGKkQvexqJw==
-X-Received: by 2002:a05:6402:21a:b0:431:5c52:82bb with SMTP id
- t26-20020a056402021a00b004315c5282bbmr10109186edv.70.1655981182274; 
- Thu, 23 Jun 2022 03:46:22 -0700 (PDT)
-X-Google-Smtp-Source: AGRyM1tjt++oOvFx/5E7Gp7jK8UO2JpIA50Cx1YCtKCpEKeOTZijLz0SEbeKL+o3STwwczsrWERh3Q==
-X-Received: by 2002:a05:6402:21a:b0:431:5c52:82bb with SMTP id
- t26-20020a056402021a00b004315c5282bbmr10109165edv.70.1655981182073; 
- Thu, 23 Jun 2022 03:46:22 -0700 (PDT)
-Received: from ?IPV6:2001:1c00:c1e:bf00:d69d:5353:dba5:ee81?
- (2001-1c00-0c1e-bf00-d69d-5353-dba5-ee81.cable.dynamic.v6.ziggo.nl.
- [2001:1c00:c1e:bf00:d69d:5353:dba5:ee81])
+ bh=LhrZ1UxjIpVC2XBdksQBTmD7BAYYNmGWhWbEjzEkz2c=;
+ b=FbKWmQfOlmBLGVCt9NzwaEbDVI6LxX+pyozkVFZzD5faWxBydP+y0oPiieM8s+npUr
+ IGaKxMneWZXhqZpNuFNdLz/6ED7P0vigWgqYbWpq8pY7aiR+sxYcRvffo/v9YIaeh76C
+ THR1A9Ql0Ns2pIEt4BbK0S3oggjoxxj5Vz8yKD4bFkTJiEKeg4cC8K/D+WYFMZsRDprp
+ EB+SOOvMr5hNSssLq+LVmksTW39f3a6npljJ+zyTUTIlQZ8pokvQM3JB3UDgRNVKTB/7
+ gcbxxs3upqOfinlVuCJaNtax56pSsaAIljBBZa9LXhVldXccCvazBXLeV6u+x03tnMhV
+ Jv+g==
+X-Gm-Message-State: AJIora/yzKJp9jBTBgSKIAhLCHeoYILROKH5HX34aj9q9Hanb/DozfR7
+ b+XnPuyPRNCyK5wAreOss4s=
+X-Google-Smtp-Source: AGRyM1vntYWPcpiFR2W5uxDMzVDamojnDeNXHGRVhdRGjoQWJzpXxx+4TF3fYwBFNAdDWENhklW23w==
+X-Received: by 2002:aa7:d29a:0:b0:435:705f:1319 with SMTP id
+ w26-20020aa7d29a000000b00435705f1319mr15758286edq.54.1656057887845; 
+ Fri, 24 Jun 2022 01:04:47 -0700 (PDT)
+Received: from able.fritz.box (p57b0bd9f.dip0.t-ipconnect.de. [87.176.189.159])
  by smtp.gmail.com with ESMTPSA id
- la12-20020a170907780c00b007081282cbd8sm10468360ejc.76.2022.06.23.03.46.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jun 2022 03:46:21 -0700 (PDT)
-Message-ID: <3591bbb1-8f11-cb00-742a-da0f9c12deb3@redhat.com>
-Date: Thu, 23 Jun 2022 12:46:20 +0200
+ c19-20020a170906155300b006fea43db5c1sm697779ejd.21.2022.06.24.01.04.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Jun 2022 01:04:47 -0700 (PDT)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
+ <christian.koenig@amd.com>
+To: linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-tegra@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+ dri-devel@lists.freedesktop.org
+Date: Fri, 24 Jun 2022 10:04:30 +0200
+Message-Id: <20220624080444.7619-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-To: Lyude Paul <lyude@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
- Karol Herbst <kherbst@redhat.com>
-References: <20220620094627.9730-1-hdegoede@redhat.com>
- <58bc64d81295092de0a9cab9c16dfae5600fc821.camel@redhat.com>
-From: Hans de Goede <hdegoede@redhat.com>
-In-Reply-To: <58bc64d81295092de0a9cab9c16dfae5600fc821.camel@redhat.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=hdegoede@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/Kconfig: Drop duplicate "select
- ACPI_VIDEO"
+Subject: [Nouveau] [RFC] Per file OOM-badness / RSS once more
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,53 +73,52 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Cc: mhocko@suse.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Lyude,
+Hello everyone,
 
-On 6/21/22 22:08, Lyude Paul wrote:
-> Reviewed-by: Lyude Paul <lyude@redhat.com>
-> 
-> Also, you have my permission to push this to drm-misc-next.
+To summarize the issue I'm trying to address here: Processes can allocate
+resources through a file descriptor without being held responsible for it.
 
-Thanks, I've pushed this to drm-misc-next now.
+I'm not explaining all the details again. See here for a more deeply
+description of the problem: https://lwn.net/ml/linux-kernel/20220531100007.174649-1-christian.koenig@amd.com/
 
-Regards,
+With this iteration I'm trying to address a bunch of the comments Michal Hocko
+(thanks a lot for that) gave as well as giving some new ideas.
 
-Hans
+Changes made so far:
+1. Renamed the callback into file_rss(). This is at least a start to better
+   describe what this is all about. I've been going back and forth over the
+   naming here, if you have any better idea please speak up.
 
+2. Cleanups, e.g. now providing a helper function in the fs layer to sum up
+   all the pages allocated by the files in a file descriptor table.
 
-> 
-> On Mon, 2022-06-20 at 11:46 +0200, Hans de Goede wrote:
->> Before this change nouveau's Kconfig section had 2 "select ACPI_VIDEO"
->> statements:
->>
->> select ACPI_VIDEO if ACPI && X86 && BACKLIGHT_CLASS_DEVICE && INPUT
->> select ACPI_VIDEO if ACPI && X86
->>
->> Drop the one with the extra conditions, if the conditions for that
->> one are true then the second statement will always select ACPI_VIDEO
->> already.
->>
->> Signed-off-by: Hans de Goede <hdegoede@redhat.com>
->> ---
->>  drivers/gpu/drm/nouveau/Kconfig | 1 -
->>  1 file changed, 1 deletion(-)
->>
->> diff --git a/drivers/gpu/drm/nouveau/Kconfig
->> b/drivers/gpu/drm/nouveau/Kconfig
->> index 34760164c271..03d12caf9e26 100644
->> --- a/drivers/gpu/drm/nouveau/Kconfig
->> +++ b/drivers/gpu/drm/nouveau/Kconfig
->> @@ -11,7 +11,6 @@ config DRM_NOUVEAU
->>         select DRM_TTM
->>         select DRM_TTM_HELPER
->>         select BACKLIGHT_CLASS_DEVICE if DRM_NOUVEAU_BACKLIGHT
->> -       select ACPI_VIDEO if ACPI && X86 && BACKLIGHT_CLASS_DEVICE && INPUT
->>         select X86_PLATFORM_DEVICES if ACPI && X86
->>         select ACPI_WMI if ACPI && X86
->>         select MXM_WMI if ACPI && X86
-> 
+3. Using the actual number of allocated pages for the shmem implementation
+   instead of just the size. I also tried to ignore shmem files which are part
+   of tmpfs, cause that has a separate accounting/limitation approach.
+
+4. The OOM killer now prints the memory of the killed process including the per
+   file pages which makes the whole things much more comprehensible.
+
+5. I've added the per file pages to the different reports in RSS in procfs.
+   This has the interesting effect that tools like top suddenly give a much
+   more accurate overview of the memory use as well. This of course increases
+   the overhead of gathering those information quite a bit and I'm not sure how
+   feasible that is for up-streaming. On the other hand this once more clearly
+   shows that we need to do something about this issue.
+
+Another rather interesting observation is that multiple subsystems (shmem,
+tmpfs, ttm) came up with the same workaround of limiting the memory which can
+be allocated through them to 50% of the whole system memory. Unfortunately
+that isn't the same 50% and it doesn't apply everywhere, so you can still
+easily crash the box.
+
+Ideas and/or comments are really welcome.
+
+Thanks,
+Christian.
+
 
