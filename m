@@ -1,46 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CDE858A229
-	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:40:24 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F48158A257
+	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:43:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0FD65A6F8F;
-	Thu,  4 Aug 2022 20:38:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 05220A6FF0;
+	Thu,  4 Aug 2022 20:38:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7F0E710E378;
- Fri, 24 Jun 2022 09:59:12 +0000 (UTC)
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out1.suse.de (Postfix) with ESMTP id 29BB821A74;
- Fri, 24 Jun 2022 09:59:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1656064751; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1D5E911AAB8;
+ Tue, 28 Jun 2022 10:34:56 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4LXLZL2bFCz9sbl;
+ Tue, 28 Jun 2022 12:34:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1656412490;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YRx5MsPC3bOKBussEAACbRbCrT13pUlZg+D3y9hzeFQ=;
- b=k1jLteFpvAGft+ORFG/tzqlURXKLRNicj7+oUgUIuX8osjH4+RjNVm62/jfqHf/FKhN7zD
- JkM1/iDo+UtWtCT89LSvKZPXJRE/SPVqpxUdXuUhXgeFakRbgDUpIRPPRwwC/o9HRxOK/+
- gqzcjpY9QSRIzgUY++eA0/TlwRk7dss=
-Received: from suse.cz (unknown [10.100.201.86])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id D56122C1E2;
- Fri, 24 Jun 2022 09:59:10 +0000 (UTC)
-Date: Fri, 24 Jun 2022 11:59:10 +0200
-From: Michal Hocko <mhocko@suse.com>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YrWK7pwZP3K2vbye@dhcp22.suse.cz>
-References: <20220624080444.7619-1-christian.koenig@amd.com>
+ bh=GCsmhwxPKBHJ46dWmiVRWHiUT3ks2E1dAcyONJ6hmBo=;
+ b=osKoUFpDaV9Xn6/YR52+bC3Tp28nCtNfV1JX5uc6mV+dvDRWGRuKf/MHczF+HeCF4rqvR7
+ mezcwxwPkJRVbqBszbnVuriVCGDFFqb56FfwdDKZl6ybcE1cZhXjAEVbKEzu/c9i+avuJy
+ lLhvsIRSB4qRpw7QlHM89oMr1xADNSThQcLNaR0vCS79jfevUDcDgd+uYUamRsUMkX+xHh
+ T58dZSzAHkXHgmwp1SyMUhnYq7ZVj6wokc/STn8FlrgS1dFtokX/XxUiId1/ylmbG7yicV
+ CTJOo7cvhVVQ+tSZZmZsMfvlZhAuTHjdcj6XiuHiWgfBRE7IdRMx6quP7QoJ/w==
+Message-ID: <9d02d901-8015-dc02-250b-97ed1cfa16c2@mailbox.org>
+Date: Tue, 28 Jun 2022 12:34:48 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+Content-Language: en-CA
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-tegra@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+ dri-devel@lists.freedesktop.org
+References: <20220624080444.7619-1-christian.koenig@amd.com>
+ <20220624080444.7619-10-christian.koenig@amd.com>
+From: =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel.daenzer@mailbox.org>
+In-Reply-To: <20220624080444.7619-10-christian.koenig@amd.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20220624080444.7619-1-christian.koenig@amd.com>
-X-Mailman-Approved-At: Thu, 04 Aug 2022 20:34:57 +0000
-Subject: Re: [Nouveau] [RFC] Per file OOM-badness / RSS once more
+X-MBO-RS-META: cutc5b13i4ckkykp1cme1mpqiajc1ikh
+X-MBO-RS-ID: dec7526ba758fff16cd
+X-Rspamd-Queue-Id: 4LXLZL2bFCz9sbl
+X-Mailman-Approved-At: Thu, 04 Aug 2022 20:35:18 +0000
+Subject: Re: [Nouveau] [PATCH 09/14] drm/radeon: use drm_oom_badness
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,72 +64,35 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-mm@kvack.org, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, linux-fsdevel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-tegra@vger.kernel.org,
- linux-media@vger.kernel.org
+Cc: mhocko@suse.com,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri 24-06-22 10:04:30, Christian K�nig wrote:
-> Hello everyone,
+On 2022-06-24 10:04, Christian König wrote:
+> This allows the OOM killer to make a better decision which process to reap.
 > 
-> To summarize the issue I'm trying to address here: Processes can allocate
-> resources through a file descriptor without being held responsible for it.
+> Signed-off-by: Christian König <christian.koenig@amd.com>
+> ---
+>  drivers/gpu/drm/radeon/radeon_drv.c | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> I'm not explaining all the details again. See here for a more deeply
-> description of the problem: https://lwn.net/ml/linux-kernel/20220531100007.174649-1-christian.koenig@amd.com/
-> 
-> With this iteration I'm trying to address a bunch of the comments Michal Hocko
-> (thanks a lot for that) gave as well as giving some new ideas.
-> 
-> Changes made so far:
-> 1. Renamed the callback into file_rss(). This is at least a start to better
->    describe what this is all about. I've been going back and forth over the
->    naming here, if you have any better idea please speak up.
-> 
-> 2. Cleanups, e.g. now providing a helper function in the fs layer to sum up
->    all the pages allocated by the files in a file descriptor table.
-> 
-> 3. Using the actual number of allocated pages for the shmem implementation
->    instead of just the size. I also tried to ignore shmem files which are part
->    of tmpfs, cause that has a separate accounting/limitation approach.
+> diff --git a/drivers/gpu/drm/radeon/radeon_drv.c b/drivers/gpu/drm/radeon/radeon_drv.c
+> index 956c72b5aa33..11d310cdd2e8 100644
+> --- a/drivers/gpu/drm/radeon/radeon_drv.c
+> +++ b/drivers/gpu/drm/radeon/radeon_drv.c
+> @@ -550,6 +550,7 @@ static const struct file_operations radeon_driver_kms_fops = {
+>  #ifdef CONFIG_COMPAT
+>  	.compat_ioctl = radeon_kms_compat_ioctl,
+>  #endif
+> +	.file_rss = drm_file_rss,
+>  };
+>  
+>  static const struct drm_ioctl_desc radeon_ioctls_kms[] = {
 
-OK, this is better than the original approach there are still holes
-there though I am afraid. I am not sure your i_count hack is correct
-but that would be mostly an implementation detail.  The scheme will
-over-account memory mapped files (including memfd).  How much that
-matters will really differ.
+Shortlog should now say "use drm_file_rss", right?
 
-For the global OOM situations it is very likely that there will be
-barely any disk based page cache as it would be reclaimed by the time
-the oom killer is invoked. So this should be OK. Swap backed page cache
-(shmem and its users) is more tricky. It is swap bound and processes
-which map it will get "charged" in the form of swap entries while those
-which rely on read/write will just escape from the sight of the oom
-killer no matter how much memory they own via their shmem backed fd.
-This sounds rather serious to me and I hope I haven't missed anything
-subtle here that would keep those pages somehow visible. Anyway
-something to very carefully document.
 
-For the memcg OOM this gets even more tricky. Files can be shared among
-tasks accross memcgs. Something that is not really straightforward from
-the userspace POV because this is not strictly deterministic as
-first-one-first-charged logic is applied so a lot might depend on timing.
-This could also easily mean that a large part of the in memory state of
-the file is outside of the reclaim and therefore OOM scope of the memcg
-which is hitting the hard limit. This could result in tasks being killed
-just because they (co)operate on a large file outside of their memcg
-domain. To be honest I am not sure how big of a problem this would be in
-practice and the existing behavior has its own cons so to me it sounds
-like changing one set of deficiency with other.
-
-As we have discussed previously, there is unlikely a great solution but
-you a) need to document most prominent downsides so that people can at
-least see this is understood and documented behavior and b) think of the
-runaway situation wrt non mapped shmems memtioned above and see whether
-there is something we can do about that.
 -- 
-Michal Hocko
-SUSE Labs
+Earthling Michel Dänzer            |                  https://redhat.com
+Libre software enthusiast          |         Mesa and Xwayland developer
