@@ -1,46 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B062B58A205
-	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:38:31 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 652C558A210
+	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:39:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DA176A6F38;
-	Thu,  4 Aug 2022 20:37:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 45966A1ED4;
+	Thu,  4 Aug 2022 20:37:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 910 seconds by postgrey-1.36 at gabe;
- Tue, 05 Jul 2022 09:58:33 UTC
-Received: from mail-m973.mail.163.com (mail-m973.mail.163.com [123.126.97.3])
- by gabe.freedesktop.org (Postfix) with ESMTP id 759C910E021
- for <nouveau@lists.freedesktop.org>; Tue,  5 Jul 2022 09:58:33 +0000 (UTC)
+Received: from mail-m975.mail.163.com (mail-m975.mail.163.com [123.126.97.5])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 92358113C3F;
+ Tue,  5 Jul 2022 13:26:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=vctMm
- aZ2jCBteIBCD7D0uyHlHM+0VSnNr88RsGWlQb4=; b=pUITOL14hlFwwm209DVEZ
- EUktxKrGXxmWZ1GZm5R9a1j1W2kOWuTw6/BBujYn5+40cpltEYBD4Cc14Ws9q9IQ
- Coe8A2wi/6vAoMH6xrHnKV9od0RRf7+9O963QFsLwR2qSqI2tZ/UhHwKippcZero
- O2L6FDEPcFYLL5EFcDQA7A=
+ s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=gXy/Y
+ z4KCId8SFCAfrVNi5PuBJCfR9XEK9tE4hr3UMk=; b=fp/zwUlITCGkn7mKyHq76
+ 3krFugiAzVymSNKB6opO8r/aqqAyx0KMRPca+hoLlf7cD0vyKh3WvQixS6wt7Hu+
+ StnA0YOMVgm4NIf7pn3PqgsfLAKdAvoeYNclnWAJcPpN8OpiIDc1U5AImG+CbnyU
+ x6VAsFgL4FQSIbf8K3VHRQ=
 Received: from localhost.localdomain (unknown [123.112.69.106])
- by smtp3 (Coremail) with SMTP id G9xpCgAn4GmrB8Ri0an9NQ--.2574S4;
- Tue, 05 Jul 2022 17:43:16 +0800 (CST)
+ by smtp5 (Coremail) with SMTP id HdxpCgBXgTLcO8RiQtNIMg--.52057S4;
+ Tue, 05 Jul 2022 21:25:55 +0800 (CST)
 From: Jianglei Nie <niejianglei2021@163.com>
 To: bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com, airlied@linux.ie,
  daniel@ffwll.ch
-Date: Tue,  5 Jul 2022 17:43:06 +0800
-Message-Id: <20220705094306.2244103-1-niejianglei2021@163.com>
+Date: Tue,  5 Jul 2022 21:25:46 +0800
+Message-Id: <20220705132546.2247677-1-niejianglei2021@163.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: G9xpCgAn4GmrB8Ri0an9NQ--.2574S4
-X-Coremail-Antispam: 1Uf129KBjvdXoWrZw1kXrWDJF17Xw4DZr13Jwb_yoWDtrg_uF
- 4IqF17Wr9Ykrs8tw4qyw1jvFWSkw4kuFWkZF95ta4SqrW7Jw13Wr4UXry3Wry7AFWjgr9x
- ZanYvFyakwnFgjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUvcSsGvfC2KfnxnUUI43ZEXa7xREs2-3UUUUU==
+X-CM-TRANSID: HdxpCgBXgTLcO8RiQtNIMg--.52057S4
+X-Coremail-Antispam: 1Uf129KBjvdXoWrKFy7tFy5KFyfJFWrJF47urg_yoWkXwb_ur
+ yxZFnxWw1kKFs8ArsFy34UAFy29ay8XrWkuas2qF95t39xJr1ruFW7Zr18u34kurWIgr9x
+ G3Wqvas0krn7WjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUvcSsGvfC2KfnxnUUI43ZEXa7xRGsj8UUUUUU==
 X-Originating-IP: [123.112.69.106]
-X-CM-SenderInfo: xqlhyxxdqjzvrlsqjii6rwjhhfrp/xtbB0RQ1jFzIBxqqrgAAsx
+X-CM-SenderInfo: xqlhyxxdqjzvrlsqjii6rwjhhfrp/xtbBOQM1jF-POWd5wwAAs3
 X-Mailman-Approved-At: Thu, 04 Aug 2022 20:34:15 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/nouveau_bo: fix potential memory leak
- in nouveau_bo_alloc()
+Subject: [Nouveau] [PATCH] drm/nouveau: fix a use-after-free in
+ nouveau_gem_prime_import_sg_table()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,39 +50,36 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, ri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Jianglei Nie <niejianglei2021@163.com>
+Cc: nouveau@lists.freedesktop.org, Jianglei Nie <niejianglei2021@163.com>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-nouveau_bo_alloc() allocates a memory chunk for "nvbo" with kzalloc().
-When some error occurs, "nvbo" should be released. But when
-WARN_ON(pi < 0)) equals true, the function return ERR_PTR without
-releasing the "nvbo", which will lead to a memory leak.
+nouveau_bo_init() is backed by ttm_bo_init() and ferries its return code
+back to the caller. On failures, ttm will call nouveau_bo_del_ttm() and
+free the memory.Thus, when nouveau_bo_init() returns an error, the gem
+object has already been released. Then the call to nouveau_bo_ref() will
+use the freed "nvbo->bo" and lead to a use-after-free bug.
 
-We should release the "nvbo" with kfree() if WARN_ON(pi < 0)) equals true.
+We should delete the call to nouveau_bo_ref() to avoid the use-after-free.
 
 Signed-off-by: Jianglei Nie <niejianglei2021@163.com>
 ---
- drivers/gpu/drm/nouveau/nouveau_bo.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/nouveau_prime.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
-index 05076e530e7d..d0887438b07e 100644
---- a/drivers/gpu/drm/nouveau/nouveau_bo.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
-@@ -281,8 +281,10 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size, int *align, u32 domain,
- 			break;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_prime.c b/drivers/gpu/drm/nouveau/nouveau_prime.c
+index 347488685f74..9608121e49b7 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_prime.c
++++ b/drivers/gpu/drm/nouveau/nouveau_prime.c
+@@ -71,7 +71,6 @@ struct drm_gem_object *nouveau_gem_prime_import_sg_table(struct drm_device *dev,
+ 	ret = nouveau_bo_init(nvbo, size, align, NOUVEAU_GEM_DOMAIN_GART,
+ 			      sg, robj);
+ 	if (ret) {
+-		nouveau_bo_ref(NULL, &nvbo);
+ 		obj = ERR_PTR(ret);
+ 		goto unlock;
  	}
- 
--	if (WARN_ON(pi < 0))
-+	if (WARN_ON(pi < 0)) {
-+		kfree(nvbo);
- 		return ERR_PTR(-EINVAL);
-+	}
- 
- 	/* Disable compression if suitable settings couldn't be found. */
- 	if (nvbo->comp && !vmm->page[pi].comp) {
 -- 
 2.25.1
 
