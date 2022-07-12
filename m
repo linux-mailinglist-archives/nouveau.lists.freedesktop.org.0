@@ -2,41 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 829525725E9
-	for <lists+nouveau@lfdr.de>; Tue, 12 Jul 2022 21:40:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E6CB5725F0
+	for <lists+nouveau@lfdr.de>; Tue, 12 Jul 2022 21:41:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 22CDE9648E;
-	Tue, 12 Jul 2022 19:40:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A118096494;
+	Tue, 12 Jul 2022 19:40:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6220896496
- for <nouveau@lists.freedesktop.org>; Tue, 12 Jul 2022 19:40:34 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6626596492
+ for <nouveau@lists.freedesktop.org>; Tue, 12 Jul 2022 19:40:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1657654833;
+ s=mimecast20190719; t=1657654843;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DR4mSK2p22rr7gE6zCBqXxHxM86J5JcnORbiwFUpKks=;
- b=B0tcA5FcnKzumnKmZhZJkIw7zchi564wWFCa8omPkdGIEKE/mTRVCoG9zFl111Swbcz1rd
- ShchaBL3JlahqW3n2LK25Ecmc4IT22nm/K8pQaovofy6ignK4QbTYrsjxtTz80nSg/0LN3
- 9F8+9AqXyS5MxDeewC+a6ueKH/pvj7Y=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=SBQuRUzegKqA+W5YQgL+vgZng6Sb/WjnyND3quMMHNQ=;
+ b=TEEah16Ov1NiMLv0FcQXSnet7pDGCZT5KdVdKdUA6T0vW+aMelCX1gMbECoDThOPZ5xqiT
+ 1d/cv4GW42uS/cDWczFbVoWe3akpWhhYiTM1OEhsiilwcSxYA6bOTBiuYo7K65x07j7wpp
+ TKzAqcj7q+fjk1G+Bix++icRbHEY3hc=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-653-zgPx-jsEMeOhiwhQImEOhA-1; Tue, 12 Jul 2022 15:40:31 -0400
-X-MC-Unique: zgPx-jsEMeOhiwhQImEOhA-1
+ us-mta-283-aeFBJaHOO3yzWU33S9jaBQ-1; Tue, 12 Jul 2022 15:40:37 -0400
+X-MC-Unique: aeFBJaHOO3yzWU33S9jaBQ-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
  [10.11.54.2])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 57E241C0CE66;
- Tue, 12 Jul 2022 19:40:30 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 45A0F8037AE;
+ Tue, 12 Jul 2022 19:40:35 +0000 (UTC)
 Received: from localhost.localdomain (unknown [10.39.192.30])
- by smtp.corp.redhat.com (Postfix) with ESMTP id A184940E80E0;
- Tue, 12 Jul 2022 19:40:26 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 90CA440E80E0;
+ Tue, 12 Jul 2022 19:40:30 +0000 (UTC)
 From: Hans de Goede <hdegoede@redhat.com>
 To: Ben Skeggs <bskeggs@redhat.com>,
 	Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
@@ -55,15 +55,15 @@ To: Ben Skeggs <bskeggs@redhat.com>,
 	Mika Westerberg <mika.westerberg@linux.intel.com>,
 	Lukas Wunner <lukas@wunner.de>, Mark Gross <markgross@kernel.org>,
 	Andy Shevchenko <andy@kernel.org>
-Date: Tue, 12 Jul 2022 21:38:58 +0200
-Message-Id: <20220712193910.439171-18-hdegoede@redhat.com>
+Date: Tue, 12 Jul 2022 21:38:59 +0200
+Message-Id: <20220712193910.439171-19-hdegoede@redhat.com>
 In-Reply-To: <20220712193910.439171-1-hdegoede@redhat.com>
 References: <20220712193910.439171-1-hdegoede@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 2.84 on 10.11.54.2
-Subject: [Nouveau] [PATCH v2 17/29] ACPI: video: Add Apple GMUX brightness
- control detection
+Subject: [Nouveau] [PATCH v2 18/29] platform/x86: apple-gmux: Stop calling
+ acpi/video.h functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,58 +83,45 @@ Cc: linux-acpi@vger.kernel.org, David Airlie <airlied@linux.ie>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Apple laptops with an Apple GMUX using this for brightness control,
-should take precedence of any other brightness control methods.
+Now that acpi_video_get_backlight_type() has apple-gmux detection (using
+apple_gmux_present()), it is no longer necessary for the apple-gmux code
+to manually remove possibly conflicting drivers.
 
-Add apple-gmux detection to acpi_video_get_backlight_type() using
-the already existing apple_gmux_present() helper function.
-
-This will allow removig the (ab)use of:
-
-	acpi_video_set_dmi_backlight_type(acpi_backlight_vendor);
-
-Inside the apple-gmux driver.
+So remove the handling for this from the apple-gmux driver.
 
 Signed-off-by: Hans de Goede <hdegoede@redhat.com>
 ---
- drivers/acpi/video_detect.c | 4 ++++
- include/acpi/video.h        | 1 +
- 2 files changed, 5 insertions(+)
+ drivers/platform/x86/apple-gmux.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/drivers/acpi/video_detect.c b/drivers/acpi/video_detect.c
-index 7b89dc9a04a2..ce96cd7abe0b 100644
---- a/drivers/acpi/video_detect.c
-+++ b/drivers/acpi/video_detect.c
-@@ -28,6 +28,7 @@
+diff --git a/drivers/platform/x86/apple-gmux.c b/drivers/platform/x86/apple-gmux.c
+index 57553f9b4d1d..071a5ffcb2b7 100644
+--- a/drivers/platform/x86/apple-gmux.c
++++ b/drivers/platform/x86/apple-gmux.c
+@@ -21,7 +21,6 @@
+ #include <linux/delay.h>
+ #include <linux/pci.h>
+ #include <linux/vga_switcheroo.h>
+-#include <acpi/video.h>
+ #include <asm/io.h>
  
- #include <linux/export.h>
- #include <linux/acpi.h>
-+#include <linux/apple-gmux.h>
- #include <linux/backlight.h>
- #include <linux/dmi.h>
- #include <linux/module.h>
-@@ -582,6 +583,9 @@ static enum acpi_backlight_type __acpi_video_get_backlight_type(bool native)
- 	if (nvidia_wmi_ec_present)
- 		return acpi_backlight_nvidia_wmi_ec;
+ /**
+@@ -697,7 +696,6 @@ static int gmux_probe(struct pnp_dev *pnp, const struct pnp_device_id *id)
+ 	 * backlight control and supports more levels than other options.
+ 	 * Disable the other backlight choices.
+ 	 */
+-	acpi_video_set_dmi_backlight_type(acpi_backlight_vendor);
+ 	apple_bl_unregister();
  
-+	if (apple_gmux_present())
-+		return acpi_backlight_apple_gmux;
-+
- 	/* On systems with ACPI video use either native or ACPI video. */
- 	if (video_caps & ACPI_VIDEO_BACKLIGHT) {
- 		/*
-diff --git a/include/acpi/video.h b/include/acpi/video.h
-index 91578e77ac4e..dbd48cb8bd23 100644
---- a/include/acpi/video.h
-+++ b/include/acpi/video.h
-@@ -49,6 +49,7 @@ enum acpi_backlight_type {
- 	acpi_backlight_vendor,
- 	acpi_backlight_native,
- 	acpi_backlight_nvidia_wmi_ec,
-+	acpi_backlight_apple_gmux,
- };
+ 	gmux_data->power_state = VGA_SWITCHEROO_ON;
+@@ -807,7 +805,6 @@ static void gmux_remove(struct pnp_dev *pnp)
+ 	apple_gmux_data = NULL;
+ 	kfree(gmux_data);
  
- #if IS_ENABLED(CONFIG_ACPI_VIDEO)
+-	acpi_video_register();
+ 	apple_bl_register();
+ }
+ 
 -- 
 2.36.0
 
