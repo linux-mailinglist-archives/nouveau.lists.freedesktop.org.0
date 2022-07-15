@@ -2,91 +2,97 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E381D57579E
-	for <lists+nouveau@lfdr.de>; Fri, 15 Jul 2022 00:28:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D413F5760FD
+	for <lists+nouveau@lfdr.de>; Fri, 15 Jul 2022 13:59:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CB3EC10E142;
-	Thu, 14 Jul 2022 22:28:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C2D2C11B8DC;
+	Fri, 15 Jul 2022 11:59:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5109589057
- for <nouveau@lists.freedesktop.org>; Thu, 14 Jul 2022 21:49:09 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5D6B011B8DC
+ for <nouveau@lists.freedesktop.org>; Fri, 15 Jul 2022 11:59:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1657835348;
+ s=mimecast20190719; t=1657886348;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GEygyms7zlOuAkql49qmkvrHjnMin5vM9GXZnCkdn/I=;
- b=BPmWoHklyY+9zX6gSz8v4rvWxiY7uKy+f3zcmV4G6MwfIqeSK91XWXfr1XEVI1El8FzbnC
- kAzFaixXisn3NC3c8zG7iaS5xfe/hxFUeDQIIKMn7PQqkFyJ8TUQAv4z+/etwJ8Rhdqrxp
- GrIGDgezpC7vxQnIjoZpChum10G+I9w=
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=ipk0rInR6PpoEbtYSvbGfZMpXE8YP5h3KoGHvT2niAs=;
+ b=PWxme6RxJEl5JvLwiZdF2RRHoImMWJwgNh80x0+GaQVFFrabEFFd4cUls+5uO7JgkdzZ3A
+ 1TjDdVcRDZHC6vLbBHDNO2xB6PeVShsz0bQ75IMacRVuRizFZ79fjssT5llPurkjg26IXi
+ 8k2tWSXH4LBnOds97zdT8i+pnf6tNrk=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-562-hwR5mQ3kODm5Scjg_bFLag-1; Thu, 14 Jul 2022 17:49:07 -0400
-X-MC-Unique: hwR5mQ3kODm5Scjg_bFLag-1
-Received: by mail-qv1-f69.google.com with SMTP id
- li2-20020a0562145e0200b0047350bbed70so2027940qvb.19
- for <nouveau@lists.freedesktop.org>; Thu, 14 Jul 2022 14:49:07 -0700 (PDT)
+ us-mta-369--CL7UKG0P-iG7JDfTyJClQ-1; Fri, 15 Jul 2022 07:59:05 -0400
+X-MC-Unique: -CL7UKG0P-iG7JDfTyJClQ-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ bs1-20020a056402304100b0043ad1e84611so3356387edb.15
+ for <nouveau@lists.freedesktop.org>; Fri, 15 Jul 2022 04:59:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
  :content-transfer-encoding;
- bh=GEygyms7zlOuAkql49qmkvrHjnMin5vM9GXZnCkdn/I=;
- b=8Dfss7nMOZCwJ/u7oKDLWPn1J/sjxvqalbMcAR3tbRO4Olexv9XroLQPykerzXL86p
- 7+6v6B8nM8xkU1csSqroBJ+GFsVNaAJnzt9qsQHA1jKAfnehaIgExFFPoFqHsjYbvdFR
- K0pBfczz9/9HWwBVwbayT7tj0D/n7a4Drc+XEOyIWYNNw99EHzsKuTzkKFuW83DqwE7H
- wPNxLQikwZOtXvzfc1g9/5SA6AYmqAPxHwPm7oFRUjTlXaIGiAF7iFoq5AOEzVhkmNh3
- 1y0mFkm1LYn3efkwe5Ss55CluL0EpPjYyPBYkGMNW1aGBfrfB2Jh95sDsSBFIgJ91s40
- S6fw==
-X-Gm-Message-State: AJIora82M5FEew35dNg4SZa22M8OxhusdWfIdc5jkSdf5Y2xioxZrkZ7
- jDbjPXI4dqbAS5q5etZIA5lFs/MKPqzrAvITV1e/cuFANmS1B6LrmbZZ7LDBymk68FUxKo4+TdV
- X0AWNRMtjgo5YwyOREuskhF7OYg==
-X-Received: by 2002:a05:622a:348:b0:31e:b0a2:d69f with SMTP id
- r8-20020a05622a034800b0031eb0a2d69fmr10047564qtw.159.1657835346712; 
- Thu, 14 Jul 2022 14:49:06 -0700 (PDT)
-X-Google-Smtp-Source: AGRyM1tTDXt6vz+uk1u0IuFP9ZmteyZ2SIZZt8HyHxQyDYrCvqdskYmGr0Tx/0jncWIDnUhd/woGWw==
-X-Received: by 2002:a05:622a:348:b0:31e:b0a2:d69f with SMTP id
- r8-20020a05622a034800b0031eb0a2d69fmr10047546qtw.159.1657835346460; 
- Thu, 14 Jul 2022 14:49:06 -0700 (PDT)
-Received: from [192.168.8.138] ([141.154.49.182])
+ bh=ipk0rInR6PpoEbtYSvbGfZMpXE8YP5h3KoGHvT2niAs=;
+ b=IFoNYBljnUh2YfO6Wxc882hijns/zgcwpYBso5Dv5zyz8kCTR0VgGUUgsY9XUzafId
+ jolxh5v0qBKh2z2YPJrsTp3NBXYJuZZKlL2Q5ZaNB1Cv76tASC166TI+hznpVg1HNDKG
+ ZQikth7SvY6Fi1m7cvqwPIyoPv6DE9pV83e6Nx9kbz7S2xAWy7SCbZiuPZ2Hbh/quobG
+ QHs+aaeOSgVbovSUpUGPR27K6DNPsPHL2tX7CWICLp4rnuQt1uBHj14qWK46MljXPkdv
+ swI0E0ndIoKAI/tfuNR4HrSbH0C84OfWxyQSNVA1BdSUul//fkPXJHXDivZJbw9kXwIm
+ wZcg==
+X-Gm-Message-State: AJIora+XkMcI+AnhTlZNeL3tHt9aiGdGW/gU7eyZ7AeQ4zu6iLMZdDYQ
+ JI13jI6Q3MhzKbUJ6unRmpnznCQ/074SLW2or9WZly/z+mGN5dGw3+I/bjj6i1SgDrUxjGUUaeH
+ mQWpsvGd7K0X15ROYkfFvuSbwPg==
+X-Received: by 2002:a05:6402:194d:b0:43a:82da:b0f3 with SMTP id
+ f13-20020a056402194d00b0043a82dab0f3mr18337837edz.104.1657886344221; 
+ Fri, 15 Jul 2022 04:59:04 -0700 (PDT)
+X-Google-Smtp-Source: AGRyM1sKUN+xW1o1Y3Cg3T0W5Ya3JCPJPj6A79DKEbu7gJ3sSLeED10PQjfOsQ7WOfuXCQZdedn+Dw==
+X-Received: by 2002:a05:6402:194d:b0:43a:82da:b0f3 with SMTP id
+ f13-20020a056402194d00b0043a82dab0f3mr18337793edz.104.1657886343963; 
+ Fri, 15 Jul 2022 04:59:03 -0700 (PDT)
+Received: from ?IPV6:2001:1c00:c1e:bf00:d69d:5353:dba5:ee81?
+ (2001-1c00-0c1e-bf00-d69d-5353-dba5-ee81.cable.dynamic.v6.ziggo.nl.
+ [2001:1c00:c1e:bf00:d69d:5353:dba5:ee81])
  by smtp.gmail.com with ESMTPSA id
- p26-20020ac8461a000000b003051f450049sm2175597qtn.8.2022.07.14.14.49.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Jul 2022 14:49:05 -0700 (PDT)
-Message-ID: <995cf5846d7ecdc02a4b38ab106e93fc58a7c037.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Hans de Goede <hdegoede@redhat.com>, Ben Skeggs <bskeggs@redhat.com>, 
- Karol Herbst <kherbst@redhat.com>, Daniel Dadap <ddadap@nvidia.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
- <mripard@kernel.org>,  Thomas Zimmermann <tzimmermann@suse.de>, Jani Nikula
- <jani.nikula@linux.intel.com>, Joonas Lahtinen
- <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, 
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Alex Deucher
- <alexander.deucher@amd.com>, Christian =?ISO-8859-1?Q?K=F6nig?=
- <christian.koenig@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>, Xinhui
- <Xinhui.Pan@amd.com>, "Rafael J . Wysocki" <rafael@kernel.org>, Mika
- Westerberg <mika.westerberg@linux.intel.com>, Lukas Wunner
- <lukas@wunner.de>, Mark Gross <markgross@kernel.org>, Andy Shevchenko
- <andy@kernel.org>
-Date: Thu, 14 Jul 2022 17:49:04 -0400
-In-Reply-To: <20220712193910.439171-1-hdegoede@redhat.com>
-References: <20220712193910.439171-1-hdegoede@redhat.com>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
+ qx21-20020a170906fcd500b0072abb95c9f4sm1932771ejb.193.2022.07.15.04.59.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 15 Jul 2022 04:59:03 -0700 (PDT)
+Message-ID: <f68353f9-fb4c-b5fe-f7f8-69b97865c720@redhat.com>
+Date: Fri, 15 Jul 2022 13:59:02 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.0
+To: Daniel Dadap <ddadap@nvidia.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Xinhui <Xinhui.Pan@amd.com>, "Rafael J . Wysocki" <rafael@kernel.org>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>,
+ Lukas Wunner <lukas@wunner.de>, Mark Gross <markgross@kernel.org>,
+ Andy Shevchenko <andy@kernel.org>
+References: <20220712193910.439171-1-hdegoede@redhat.com>
+ <20220712193910.439171-17-hdegoede@redhat.com>
+ <8cde70e6-1115-9b7f-d550-52b9e3623c85@nvidia.com>
+From: Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <8cde70e6-1115-9b7f-d550-52b9e3623c85@nvidia.com>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=hdegoede@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v2 00/29] drm/kms: Stop registering multiple
- /sys/class/backlight devs for a single display
+Subject: Re: [Nouveau] [PATCH v2 16/29] ACPI: video: Add Nvidia WMI EC
+ brightness control detection
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -106,116 +112,232 @@ Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I assume you're probably good on review for the non-nouveau stuff, but if you
-end up needing any help with that feel free to poke me!
+Hi Daniel,
 
-On Tue, 2022-07-12 at 21:38 +0200, Hans de Goede wrote:
-> Hi All,
+On 7/12/22 22:13, Daniel Dadap wrote:
+> Thanks, Hans:
 > 
-> As mentioned in my RFC titled "drm/kms: control display brightness through
-> drm_connector properties":
-> https://lore.kernel.org/dri-devel/0d188965-d809-81b5-74ce-7d30c49fee2d@redhat.com/
+> On 7/12/22 14:38, Hans de Goede wrote:
+>> On some new laptop designs a new Nvidia specific WMI interface is present
+>> which gives info about panel brightness control and may allow controlling
+>> the brightness through this interface when the embedded controller is used
+>> for brightness control.
+>>
+>> When this WMI interface is present and indicates that the EC is used,
+>> then this interface should be used for brightness control.
+>>
+>> Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+>> ---
+>>   drivers/acpi/Kconfig           |  1 +
+>>   drivers/acpi/video_detect.c    | 35 ++++++++++++++++++++++++++++++++++
+>>   drivers/gpu/drm/gma500/Kconfig |  2 ++
+>>   drivers/gpu/drm/i915/Kconfig   |  2 ++
+>>   include/acpi/video.h           |  1 +
+>>   5 files changed, 41 insertions(+)
+>>
+>> diff --git a/drivers/acpi/Kconfig b/drivers/acpi/Kconfig
+>> index 1e34f846508f..c372385cfc3f 100644
+>> --- a/drivers/acpi/Kconfig
+>> +++ b/drivers/acpi/Kconfig
+>> @@ -212,6 +212,7 @@ config ACPI_VIDEO
+>>       tristate "Video"
+>>       depends on X86 && BACKLIGHT_CLASS_DEVICE
+>>       depends on INPUT
+>> +    depends on ACPI_WMI
+>>       select THERMAL
+>>       help
+>>         This driver implements the ACPI Extensions For Display Adapters
+>> diff --git a/drivers/acpi/video_detect.c b/drivers/acpi/video_detect.c
+>> index 8c2863403040..7b89dc9a04a2 100644
+>> --- a/drivers/acpi/video_detect.c
+>> +++ b/drivers/acpi/video_detect.c
+>> @@ -75,6 +75,35 @@ find_video(acpi_handle handle, u32 lvl, void *context, void **rv)
+>>       return AE_OK;
+>>   }
+>>   +#define WMI_BRIGHTNESS_METHOD_SOURCE            2
+>> +#define WMI_BRIGHTNESS_MODE_GET                0
+>> +#define WMI_BRIGHTNESS_SOURCE_EC            2
+>> +
+>> +struct wmi_brightness_args {
+>> +    u32 mode;
+>> +    u32 val;
+>> +    u32 ret;
+>> +    u32 ignored[3];
+>> +};
+>> +
+>> +static bool nvidia_wmi_ec_supported(void)
+>> +{
+>> +    struct wmi_brightness_args args = {
+>> +        .mode = WMI_BRIGHTNESS_MODE_GET,
+>> +        .val = 0,
+>> +        .ret = 0,
+>> +    };
+>> +    struct acpi_buffer buf = { (acpi_size)sizeof(args), &args };
+>> +    acpi_status status;
+>> +
+>> +    status = wmi_evaluate_method("603E9613-EF25-4338-A3D0-C46177516DB7", 0,
+>> +                     WMI_BRIGHTNESS_METHOD_SOURCE, &buf, &buf);
+>> +    if (ACPI_FAILURE(status))
+>> +        return false;
+>> +
+>> +    return args.ret == WMI_BRIGHTNESS_SOURCE_EC;
+>> +}
+>> +
 > 
-> The first step towards this is to deal with some existing technical debt
-> in backlight handling on x86/ACPI boards, specifically we need to stop
-> registering multiple /sys/class/backlight devs for a single display.
 > 
-> This series implements my RFC describing my plan for these cleanups:
-> https://lore.kernel.org/dri-devel/98519ba0-7f18-201a-ea34-652f50343158@redhat.com/
-> 
-> This new version addresses the few small remarks made on version 1 (mainly
-> changing patch 1/29) and more importantly this finishes the refactoring by
-> else addressing all the bits from the "Other issues" section of
-> the refactor RFC (resulting in patches 15-29 which are new in v2).
-> 
-> Please review and test! I hope to be able to make an immutable branch
-> based on 5.20-rc1 + this series available for merging into the various
-> touched subsystems once 5.20-rc2 is out.
-> 
-> Regards,
-> 
-> Hans
-> 
-> 
-> Hans de Goede (29):
->   ACPI: video: Add acpi_video_backlight_use_native() helper
->   drm/i915: Don't register backlight when another backlight should be
->     used
->   drm/amdgpu: Don't register backlight when another backlight should be
->     used
->   drm/radeon: Don't register backlight when another backlight should be
->     used
->   drm/nouveau: Don't register backlight when another backlight should be
->     used
->   ACPI: video: Drop backlight_device_get_by_type() call from
->     acpi_video_get_backlight_type()
->   ACPI: video: Remove acpi_video_bus from list before tearing it down
->   ACPI: video: Simplify acpi_video_unregister_backlight()
->   ACPI: video: Make backlight class device registration a separate step
->   ACPI: video: Remove code to unregister acpi_video backlight when a
->     native backlight registers
->   drm/i915: Call acpi_video_register_backlight() (v2)
->   drm/nouveau: Register ACPI video backlight when nv_backlight
->     registration fails
->   drm/amdgpu: Register ACPI video backlight when skipping amdgpu
->     backlight registration
->   drm/radeon: Register ACPI video backlight when skipping radeon
->     backlight registration
->   ACPI: video: Refactor acpi_video_get_backlight_type() a bit
->   ACPI: video: Add Nvidia WMI EC brightness control detection
->   ACPI: video: Add Apple GMUX brightness control detection
->   platform/x86: apple-gmux: Stop calling acpi/video.h functions
->   platform/x86: toshiba_acpi: Stop using
->     acpi_video_set_dmi_backlight_type()
->   platform/x86: acer-wmi: Move backlight DMI quirks to
->     acpi/video_detect.c
->   platform/x86: asus-wmi: Drop DMI chassis-type check from backlight
->     handling
->   platform/x86: asus-wmi: Move acpi_backlight=vendor quirks to ACPI
->     video_detect.c
->   platform/x86: asus-wmi: Move acpi_backlight=native quirks to ACPI
->     video_detect.c
->   platform/x86: samsung-laptop: Move acpi_backlight=[vendor|native]
->     quirks to ACPI video_detect.c
->   ACPI: video: Remove acpi_video_set_dmi_backlight_type()
->   ACPI: video: Drop "Samsung X360" acpi_backlight=native quirk
->   ACPI: video: Drop Clevo/TUXEDO NL5xRU and NL5xNU acpi_backlight=native
->     quirks
->   ACPI: video: Fix indentation of video_detect_dmi_table[] entries
->   drm/todo: Add entry about dealing with brightness control on devices
->     with > 1 panel
-> 
->  Documentation/gpu/todo.rst                    |  68 +++
->  drivers/acpi/Kconfig                          |   1 +
->  drivers/acpi/acpi_video.c                     |  59 ++-
->  drivers/acpi/video_detect.c                   | 415 +++++++++++-------
->  drivers/gpu/drm/Kconfig                       |  12 +
->  .../gpu/drm/amd/amdgpu/atombios_encoders.c    |  14 +-
->  .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c |   9 +
->  drivers/gpu/drm/gma500/Kconfig                |   2 +
->  drivers/gpu/drm/i915/Kconfig                  |   2 +
->  .../gpu/drm/i915/display/intel_backlight.c    |   7 +
->  drivers/gpu/drm/i915/display/intel_display.c  |   8 +
->  drivers/gpu/drm/i915/display/intel_panel.c    |   3 +
->  drivers/gpu/drm/i915/i915_drv.h               |   2 +
->  drivers/gpu/drm/nouveau/nouveau_backlight.c   |  14 +
->  drivers/gpu/drm/radeon/atombios_encoders.c    |   7 +
->  drivers/gpu/drm/radeon/radeon_encoders.c      |  11 +-
->  .../gpu/drm/radeon/radeon_legacy_encoders.c   |   7 +
->  drivers/platform/x86/acer-wmi.c               |  66 ---
->  drivers/platform/x86/apple-gmux.c             |   3 -
->  drivers/platform/x86/asus-nb-wmi.c            |  21 -
->  drivers/platform/x86/asus-wmi.c               |  13 -
->  drivers/platform/x86/asus-wmi.h               |   2 -
->  drivers/platform/x86/eeepc-wmi.c              |  25 +-
->  drivers/platform/x86/samsung-laptop.c         |  87 ----
->  drivers/platform/x86/toshiba_acpi.c           |  16 -
->  include/acpi/video.h                          |   9 +-
->  26 files changed, 468 insertions(+), 415 deletions(-)
-> 
+> The code duplication here with nvidia-wmi-ec-backlight.c is a little unfortunate. Can we move the constants, struct definition, and WMI GUID from that file to a header file that's used both by the EC backlight driver and the ACPI video driver?
 
--- 
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+Yes that is a good idea. I suggest using include/linux/platform_data/x86/nvidia-wmi-ec-backlight.h
+to move the shared definitions there.
+
+If you can submit 2 patches on top of this series:
+
+1. Moving the definitions from drivers/platform/x86/nvidia-wmi-ec-backlight.c to
+   include/linux/platform_data/x86/nvidia-wmi-ec-backlight.h
+
+2. Switching the code from this patch over to using the new nvidia-wmi-ec-backlight.h
+
+Then for the next version I'll add patch 1. to the series and squash patch 2.
+into this one.
+
+> I was thinking it might be nice to add a wrapper around wmi_brightness_notify() in nvidia-wmi-ec-backlight.c that does this source == WMI_BRIGHTNESS_SOURCE_EC test, and then export it so that it can be called both here and in the EC backlight driver's probe routine, but then I guess that would make video.ko depend on nvidia-wmi-ec-backlight.ko, which seems wrong. It also seems wrong to implement the WMI plumbing in the ACPI video driver, and export it so that the EC backlight driver can use it, so I guess I can live with the duplication of the relatively simple WMI stuff here, it would just be nice to not have to define all of the API constants, structure, and GUID twice.
+
+Agreed.
+
+> 
+> 
+>>   /* Force to use vendor driver when the ACPI device is known to be
+>>    * buggy */
+>>   static int video_detect_force_vendor(const struct dmi_system_id *d)
+>> @@ -518,6 +547,7 @@ static const struct dmi_system_id video_detect_dmi_table[] = {
+>>   static enum acpi_backlight_type __acpi_video_get_backlight_type(bool native)
+>>   {
+>>       static DEFINE_MUTEX(init_mutex);
+>> +    static bool nvidia_wmi_ec_present;
+>>       static bool native_available;
+>>       static bool init_done;
+>>       static long video_caps;
+>> @@ -530,6 +560,7 @@ static enum acpi_backlight_type __acpi_video_get_backlight_type(bool native)
+>>           acpi_walk_namespace(ACPI_TYPE_DEVICE, ACPI_ROOT_OBJECT,
+>>                       ACPI_UINT32_MAX, find_video, NULL,
+>>                       &video_caps, NULL);
+>> +        nvidia_wmi_ec_present = nvidia_wmi_ec_supported();
+>>           init_done = true;
+>>       }
+>>       if (native)
+>> @@ -547,6 +578,10 @@ static enum acpi_backlight_type __acpi_video_get_backlight_type(bool native)
+>>       if (acpi_backlight_dmi != acpi_backlight_undef)
+>>           return acpi_backlight_dmi;
+>>   +    /* Special cases such as nvidia_wmi_ec and apple gmux. */
+>> +    if (nvidia_wmi_ec_present)
+>> +        return acpi_backlight_nvidia_wmi_ec;
+> 
+> 
+> Should there also be a change to the EC backlight driver to call acpi_video_get_backlight_type() and make sure we get acpi_backlight_nvidia_wmi_ec? I don't see such a change in this patch series; I could implement it (and test it) against your patch if there's some reason you didn't do so with the current patchset.
+
+I was thinking about this myself too and I decided it was not necessary since
+acpi_video_get_backlight_type() will always return acpi_backlight_nvidia_wmi_ec.
+
+But thinking more about this, that is not true, a user might try to force
+using a different backlight firmware interface by e.g. adding:
+acpi_backlight=video on the kernel commandline.
+
+So yes a patch adding something like this:
+
+	if (acpi_video_get_backlight_type() != acpi_backlight_nvidia_wmi_ec)
+		return -ENODEV;
+
+to the EC backlight driver would be very welcome.
+
+> 
+> 
+>> +
+>>       /* On systems with ACPI video use either native or ACPI video. */
+>>       if (video_caps & ACPI_VIDEO_BACKLIGHT) {
+>>           /*
+>> diff --git a/drivers/gpu/drm/gma500/Kconfig b/drivers/gpu/drm/gma500/Kconfig
+>> index 0cff20265f97..807b989e3c77 100644
+>> --- a/drivers/gpu/drm/gma500/Kconfig
+>> +++ b/drivers/gpu/drm/gma500/Kconfig
+>> @@ -7,6 +7,8 @@ config DRM_GMA500
+>>       select ACPI_VIDEO if ACPI
+>>       select BACKLIGHT_CLASS_DEVICE if ACPI
+>>       select INPUT if ACPI
+>> +    select X86_PLATFORM_DEVICES if ACPI
+>> +    select ACPI_WMI if ACPI
+> 
+> 
+> I'm not sure I understand why the Intel DRM drivers pick up the additional platform/x86 and WMI dependencies here. ACPI_VIDEO already depends on these, doesn't it?
+
+It does.
+
+> If Kconfig doesn't otherwise automatically pull in an option's dependencies when selecting that option
+
+Right that is the reason why this is done, for select the Kconfig block must also select all deps
+
+> then shouldn't Nouveau's Kconfig get updated as well?
+> It selects ACPI_VIDEO in some configuration cases.
+
+nouveau's Kconfig block already selects ACPI_WMI:
+
+config DRM_NOUVEAU
+	tristate "Nouveau (NVIDIA) cards"
+	...
+	select X86_PLATFORM_DEVICES if ACPI && X86
+	select ACPI_WMI if ACPI && X86
+	...
+	select ACPI_VIDEO if ACPI && X86
+
+That is why this patch does not add this.
+
+> (It looks like amdgpu doesn't currently select ACPI_VIDEO, maybe because it doesn't depend on it the way the Intel drivers do: there are several AMD+NVIDIA iGPU/dGPU designs out there which use this backlight interface.)
+
+Correct, but with this series amdgpu/radeon also start using ACPI_VIDEO
+functions so these patches:
+
+https://patchwork.freedesktop.org/patch/493650/
+https://patchwork.freedesktop.org/patch/493653/
+
+Add the necessary selects and I cheated a bit and also made
+them select ACPI_WMI already even though that is only
+necessary after this patch (which comes later in the series).
+
+I hope this answers al your questions...
+
+Regards,
+
+Hans
+
+
+
+> 
+> 
+>>       help
+>>         Say yes for an experimental 2D KMS framebuffer driver for the
+>>         Intel GMA500 (Poulsbo), Intel GMA600 (Moorestown/Oak Trail) and
+>> diff --git a/drivers/gpu/drm/i915/Kconfig b/drivers/gpu/drm/i915/Kconfig
+>> index 7ae3b7d67fcf..3efce05d7b57 100644
+>> --- a/drivers/gpu/drm/i915/Kconfig
+>> +++ b/drivers/gpu/drm/i915/Kconfig
+>> @@ -23,6 +23,8 @@ config DRM_I915
+>>       # but for select to work, need to select ACPI_VIDEO's dependencies, ick
+>>       select BACKLIGHT_CLASS_DEVICE if ACPI
+>>       select INPUT if ACPI
+>> +    select X86_PLATFORM_DEVICES if ACPI
+>> +    select ACPI_WMI if ACPI
+>>       select ACPI_VIDEO if ACPI
+>>       select ACPI_BUTTON if ACPI
+>>       select SYNC_FILE
+>> diff --git a/include/acpi/video.h b/include/acpi/video.h
+>> index 0625806d3bbd..91578e77ac4e 100644
+>> --- a/include/acpi/video.h
+>> +++ b/include/acpi/video.h
+>> @@ -48,6 +48,7 @@ enum acpi_backlight_type {
+>>       acpi_backlight_video,
+>>       acpi_backlight_vendor,
+>>       acpi_backlight_native,
+>> +    acpi_backlight_nvidia_wmi_ec,
+>>   };
+>>     #if IS_ENABLED(CONFIG_ACPI_VIDEO)
+> 
 
