@@ -1,58 +1,57 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9877657BBC3
-	for <lists+nouveau@lfdr.de>; Wed, 20 Jul 2022 18:47:20 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id EA97A57BBE3
+	for <lists+nouveau@lfdr.de>; Wed, 20 Jul 2022 18:50:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4D3068F0C2;
-	Wed, 20 Jul 2022 16:47:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5040114A3E6;
+	Wed, 20 Jul 2022 16:50:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8B4448EF4D;
- Wed, 20 Jul 2022 16:47:09 +0000 (UTC)
-Received: by mail-ed1-x52e.google.com with SMTP id t3so24550713edd.0;
- Wed, 20 Jul 2022 09:47:09 -0700 (PDT)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0C09589B4D;
+ Wed, 20 Jul 2022 16:50:34 +0000 (UTC)
+Received: by mail-ed1-x530.google.com with SMTP id y4so24510012edc.4;
+ Wed, 20 Jul 2022 09:50:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=5XCT0o17GMDblpR9Pbg+NJaveF0ZZPvkCisYI9b/1j8=;
- b=O9R9u8g6h6vocI/Wfkp1tCFaBUm4RmwQYD8vkmidf9SuuSct8/Lp0hpvperlsrvGzp
- aUStI6ETHfb+neC0q/qRkddBhdVwodN45xbNP6QKKku5YgmtDHki/MlqJpqiGuJMuM71
- 522KqsQ9VXg9bcMn4xuhCkpmNS8WO7v/BwmNNuHa4oYE/+obguHfeZtOnwQoAzoO8gzd
- WnDAbKBC7Zngbng5ohUiZUJQBGI2qnUOOZK9HU9L+fFUQPFQVcA44ZnnBfkNQpfTIuad
- +bH5dEdn/RqLO9WmVb0rb0d0MabIX7aN/u91WI/14KvZtOowAtknMh4O6m1PosbQxY7M
- NSsQ==
+ :cc; bh=GWwm2vwY0mPc83AQwb60Ft68A5hUQCaRBAq697Ik0tk=;
+ b=G8FF83lDzwo2o9hXc6yBF5FjoExYKyA556Pe6419Ga75J1r4C+crFprz4fxer17c+G
+ CIWQa8c4CT6apvfpUyZ6Cg5hPA+UB3n1hKx8swYvo1dSLx9T8elfho5sv39QGXjp4nEY
+ NbyfXu+j/Vj/cifNgE+GinBnuEOD3aRiwPHFBhoCtPvdVqxiszzuXz3ZccFZJ1Xa4gep
+ /P1mhxoT+bw+834tCu9bY1lAV01KnpVlxHBwBghKbZv7zGTdT+KJGmS1wceNOsdn6NuP
+ RNfUU6xHe8barzl+/4Iyd85IYr4/K2mpXm1iR5cphB2CxyZ/09JTcFua8LTxGvF8DR+0
+ XfZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=5XCT0o17GMDblpR9Pbg+NJaveF0ZZPvkCisYI9b/1j8=;
- b=NU5fedIqYkvzIg0Hw+dl+5JXJ5B16BidwzpfwQoieqfviCrTiZ3kJ8CYbsacrP8DhO
- malhSvnO6AJVQmTSTqpHfQfQl6Gdx6Ps32RK99CU6vrt3uwyK+BFX5IpR7Q34uTM6l1c
- qJxhCFn/mydmzgmG7PwaODaDxbMLDaClqcSCmNUk02t/AXhe5DF5B8VxYOcKvYydBKvP
- fwXUdSpLVcFyLcaKaqfI5ymIv8fh9bEUZbJ5JxgQ8QR5FKSmHWVUhhqFOFG+z8OGdScx
- lQLm44Cqo7cb9tQGVdEUZ9STQLp7oCxwTmpLrvh3Phq9lliznYzDfmM6ttxEs7t5f5dF
- 2Ihg==
-X-Gm-Message-State: AJIora/cOSMS+QOSK/XfL13RfMP8GdMTp2IU9oLz8gudGin/sbOw9Idv
- At6IBuIU4H/6phgkLdGInNkWo4UrVeVuXRhdV98=
-X-Google-Smtp-Source: AGRyM1uoh0m5ZH9dPysY5DMlbzAWbeTiYqabk8SMziqSf1ZuAV9ox2PXXQdsytYKtbEjO+o+xgYCqCxghHy8GfN6sCg=
-X-Received: by 2002:a05:6402:248d:b0:437:dd4c:e70e with SMTP id
- q13-20020a056402248d00b00437dd4ce70emr51143924eda.75.1658335628067; Wed, 20
- Jul 2022 09:47:08 -0700 (PDT)
+ bh=GWwm2vwY0mPc83AQwb60Ft68A5hUQCaRBAq697Ik0tk=;
+ b=ZcfJRNqwkKABUEwPlb4MWZ3QGtLglDclzDWmKagg0QArPAe+RildaZF+k083NRIqbt
+ 12hsANOATTHY3TmQKy8LXgacktn1PiXGSMw7AKZfVH5JO/NzTDtRjULYSW7L4BDQqC/C
+ hYmTR+WWcUl/Nog/ceN2q/EI+W2h1k3r5slhgd8joD24vp01r7hsGOLBjHgywVovPI0v
+ 1kfMzYIYQuEFoYx7C8kjpkzwDmVuTy/GiN+13f96xO5ErNLJn9xCKoHHXUz5AdNTmEVG
+ nyjKzhJuqfl5GIHe+HGB/EL31/TOgHk2FjAhpSwkGSNVI3oA1rUFOPlT6bjUYyeIjGMK
+ 6vtg==
+X-Gm-Message-State: AJIora8lt2emi9gIOmoe1E63gl4Mwxq3EVggPx4V4aSFPUKFm7SVlnpu
+ bNlTRar+KwDwt7zU16gjTIim+xC2il9pbKaPtlc=
+X-Google-Smtp-Source: AGRyM1v1VHeMTHXHTQjAgGPHdg9YyLFCckQivVVr4VVsXYz/2qVZT3OxGu2vW3tT9LaHT/A5LbPQNFGs9LkDPsqh0nE=
+X-Received: by 2002:a05:6402:f12:b0:43a:7eac:296e with SMTP id
+ i18-20020a0564020f1200b0043a7eac296emr52187605eda.115.1658335832497; Wed, 20
+ Jul 2022 09:50:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220712193910.439171-1-hdegoede@redhat.com>
- <20220712193910.439171-4-hdegoede@redhat.com>
- <CADnq5_PcpwtgdBrn7_1B4Fq5CNGbkSO94c5Qzf8NfbnpwBqHAw@mail.gmail.com>
-In-Reply-To: <CADnq5_PcpwtgdBrn7_1B4Fq5CNGbkSO94c5Qzf8NfbnpwBqHAw@mail.gmail.com>
+ <20220712193910.439171-10-hdegoede@redhat.com>
+In-Reply-To: <20220712193910.439171-10-hdegoede@redhat.com>
 From: Alex Deucher <alexdeucher@gmail.com>
-Date: Wed, 20 Jul 2022 12:46:55 -0400
-Message-ID: <CADnq5_PBMtshPza9yRAZCEtwVSiHAs6AY8B8CttHF8ZyLuiX6w@mail.gmail.com>
+Date: Wed, 20 Jul 2022 12:50:20 -0400
+Message-ID: <CADnq5_Pp+trT8F1StcMa2Kc9x1QV8=W_s_+JDjLXcqhGderw=Q@mail.gmail.com>
 To: Hans de Goede <hdegoede@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH v2 03/29] drm/amdgpu: Don't register backlight
- when another backlight should be used
+Subject: Re: [Nouveau] [PATCH v2 09/29] ACPI: video: Make backlight class
+ device registration a separate step
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,108 +81,165 @@ Cc: Pan@freedesktop.org, "Rafael J . Wysocki" <rafael@kernel.org>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jul 20, 2022 at 12:44 PM Alex Deucher <alexdeucher@gmail.com> wrote:
+On Tue, Jul 12, 2022 at 3:40 PM Hans de Goede <hdegoede@redhat.com> wrote:
 >
-> On Tue, Jul 12, 2022 at 3:39 PM Hans de Goede <hdegoede@redhat.com> wrote:
-> >
-> > Before this commit when we want userspace to use the acpi_video backlight
-> > device we register both the GPU's native backlight device and acpi_video's
-> > firmware acpi_video# backlight device. This relies on userspace preferring
-> > firmware type backlight devices over native ones.
-> >
-> > Registering 2 backlight devices for a single display really is
-> > undesirable, don't register the GPU's native backlight device when
-> > another backlight device should be used.
-> >
-> > Changes in v2:
-> > - To avoid linker errors when amdgpu is builtin and video_detect.c is in
-> >   a module, select ACPI_VIDEO and its deps if ACPI && X86 are enabled.
-> >   When these are not set, ACPI_VIDEO is disabled, ensuring the stubs
-> >   from acpi/video.h will be used.
-> >
-> > Signed-off-by: Hans de Goede <hdegoede@redhat.com>
->
-> Acked-by: Alex Deucher <alexander.deucher@amd.com>
+> On x86/ACPI boards the acpi_video driver will usually initializing before
 
-Actually, can you use dev_info for the messages below rather than
-DRM_INFO?  That makes it easier to tell which GPU is affected in a
-multi-GPU system.  With that changed,
-Acked-by: Alex Deucher <alexander.deucher@amd.com>
+initializing -> initialize
 
+> the kms driver (except i915). This causes /sys/class/backlight/acpi_video0
+> to show up and then the kms driver registers its own native backlight
+> device after which the drivers/acpi/video_detect.c code unregisters
+> the acpi_video0 device (when acpi_video_get_backlight_type()==native).
 >
-> > ---
-> >  drivers/gpu/drm/Kconfig                           | 6 ++++++
-> >  drivers/gpu/drm/amd/amdgpu/atombios_encoders.c    | 7 +++++++
-> >  drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c | 7 +++++++
-> >  3 files changed, 20 insertions(+)
-> >
-> > diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
-> > index aaa7ad1f0614..d65119860760 100644
-> > --- a/drivers/gpu/drm/Kconfig
-> > +++ b/drivers/gpu/drm/Kconfig
-> > @@ -258,6 +258,12 @@ config DRM_AMDGPU
-> >         select HWMON
-> >         select BACKLIGHT_CLASS_DEVICE
-> >         select INTERVAL_TREE
-> > +       # amdgpu depends on ACPI_VIDEO when X86 and ACPI are both enabled
-> > +       # for select to work, ACPI_VIDEO's dependencies must also be selected
-> > +       select INPUT if ACPI && X86
-> > +       select X86_PLATFORM_DEVICES if ACPI && X86
-> > +       select ACPI_WMI if ACPI && X86
-> > +       select ACPI_VIDEO if ACPI && X86
-> >         help
-> >           Choose this option if you have a recent AMD Radeon graphics card.
-> >
-> > diff --git a/drivers/gpu/drm/amd/amdgpu/atombios_encoders.c b/drivers/gpu/drm/amd/amdgpu/atombios_encoders.c
-> > index fa7421afb9a6..abf209e36fca 100644
-> > --- a/drivers/gpu/drm/amd/amdgpu/atombios_encoders.c
-> > +++ b/drivers/gpu/drm/amd/amdgpu/atombios_encoders.c
-> > @@ -26,6 +26,8 @@
-> >
-> >  #include <linux/pci.h>
-> >
-> > +#include <acpi/video.h>
-> > +
-> >  #include <drm/drm_crtc_helper.h>
-> >  #include <drm/amdgpu_drm.h>
-> >  #include "amdgpu.h"
-> > @@ -184,6 +186,11 @@ void amdgpu_atombios_encoder_init_backlight(struct amdgpu_encoder *amdgpu_encode
-> >         if (!(adev->mode_info.firmware_flags & ATOM_BIOS_INFO_BL_CONTROLLED_BY_GPU))
-> >                 return;
-> >
-> > +       if (!acpi_video_backlight_use_native()) {
-> > +               DRM_INFO("Skipping amdgpu atom DIG backlight registration\n");
-> > +               return;
-> > +       }
-> > +
-> >         pdata = kmalloc(sizeof(struct amdgpu_backlight_privdata), GFP_KERNEL);
-> >         if (!pdata) {
-> >                 DRM_ERROR("Memory allocation failed\n");
-> > diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-> > index 5eb111d35793..3b03a95e59a8 100644
-> > --- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-> > +++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-> > @@ -86,6 +86,8 @@
-> >  #include <drm/drm_audio_component.h>
-> >  #include <drm/drm_gem_atomic_helper.h>
-> >
-> > +#include <acpi/video.h>
-> > +
-> >  #include "ivsrcid/dcn/irqsrcs_dcn_1_0.h"
-> >
-> >  #include "dcn/dcn_1_0_offset.h"
-> > @@ -4050,6 +4052,11 @@ amdgpu_dm_register_backlight_device(struct amdgpu_display_manager *dm)
-> >         amdgpu_dm_update_backlight_caps(dm, dm->num_of_edps);
-> >         dm->brightness[dm->num_of_edps] = AMDGPU_MAX_BL_LEVEL;
-> >
-> > +       if (!acpi_video_backlight_use_native()) {
-> > +               DRM_INFO("Skipping amdgpu DM backlight registration\n");
-> > +               return;
-> > +       }
-> > +
-> >         props.max_brightness = AMDGPU_MAX_BL_LEVEL;
-> >         props.brightness = AMDGPU_MAX_BL_LEVEL;
-> >         props.type = BACKLIGHT_RAW;
-> > --
-> > 2.36.0
-> >
+> This means that userspace briefly sees 2 devices and the disappearing of
+> acpi_video0 after a brief time confuses the systemd backlight level
+> save/restore code, see e.g.:
+> https://bbs.archlinux.org/viewtopic.php?id=269920
+>
+> To fix this make backlight class device registration a separate step
+> done by a new acpi_video_register_backlight() function. The intend is for
+> this to be called by the drm/kms driver *after* it is done setting up its
+> own native backlight device. So that acpi_video_get_backlight_type() knows
+> if a native backlight will be available or not at acpi_video backlight
+> registration time, avoiding the add + remove dance.
+>
+> Note the new acpi_video_register_backlight() function is also called from
+> a delayed work to ensure that the acpi_video backlight devices does get
+> registered if necessary even if there is no drm/kms driver or when it is
+> disabled.
+>
+> Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+> ---
+>  drivers/acpi/acpi_video.c | 45 ++++++++++++++++++++++++++++++++++++---
+>  include/acpi/video.h      |  2 ++
+>  2 files changed, 44 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/acpi/acpi_video.c b/drivers/acpi/acpi_video.c
+> index 6944794797a5..c4c3a9e7ce69 100644
+> --- a/drivers/acpi/acpi_video.c
+> +++ b/drivers/acpi/acpi_video.c
+> @@ -31,6 +31,12 @@
+>  #define ACPI_VIDEO_BUS_NAME            "Video Bus"
+>  #define ACPI_VIDEO_DEVICE_NAME         "Video Device"
+>
+> +/*
+> + * Display probing is known to take up to 5 seconds, so delay the fallback
+> + * backlight registration by 5 seconds + 3 seconds for some extra margin.
+> + */
+> +#define ACPI_VIDEO_REGISTER_BACKLIGHT_DELAY    (8 * HZ)
+> +
+>  #define MAX_NAME_LEN   20
+>
+>  MODULE_AUTHOR("Bruno Ducrot");
+> @@ -81,6 +87,9 @@ static LIST_HEAD(video_bus_head);
+>  static int acpi_video_bus_add(struct acpi_device *device);
+>  static int acpi_video_bus_remove(struct acpi_device *device);
+>  static void acpi_video_bus_notify(struct acpi_device *device, u32 event);
+> +static void acpi_video_bus_register_backlight_work(struct work_struct *ignored);
+> +static DECLARE_DELAYED_WORK(video_bus_register_backlight_work,
+> +                           acpi_video_bus_register_backlight_work);
+>  void acpi_video_detect_exit(void);
+>
+>  /*
+> @@ -1865,8 +1874,6 @@ static int acpi_video_bus_register_backlight(struct acpi_video_bus *video)
+>         if (video->backlight_registered)
+>                 return 0;
+>
+> -       acpi_video_run_bcl_for_osi(video);
+> -
+>         if (acpi_video_get_backlight_type() != acpi_backlight_video)
+>                 return 0;
+>
+> @@ -2092,7 +2099,11 @@ static int acpi_video_bus_add(struct acpi_device *device)
+>         list_add_tail(&video->entry, &video_bus_head);
+>         mutex_unlock(&video_list_lock);
+>
+> -       acpi_video_bus_register_backlight(video);
+> +       /*
+> +        * The userspace visible backlight_device gets registered separately
+> +        * from acpi_video_register_backlight().
+> +        */
+> +       acpi_video_run_bcl_for_osi(video);
+>         acpi_video_bus_add_notify_handler(video);
+>
+>         return 0;
+> @@ -2131,6 +2142,11 @@ static int acpi_video_bus_remove(struct acpi_device *device)
+>         return 0;
+>  }
+>
+> +static void acpi_video_bus_register_backlight_work(struct work_struct *ignored)
+> +{
+> +       acpi_video_register_backlight();
+> +}
+> +
+>  static int __init is_i740(struct pci_dev *dev)
+>  {
+>         if (dev->device == 0x00D1)
+> @@ -2241,6 +2257,17 @@ int acpi_video_register(void)
+>          */
+>         register_count = 1;
+>
+> +       /*
+> +        * acpi_video_bus_add() skips registering the userspace visible
+> +        * backlight_device. The intend is for this to be registered by the
+> +        * drm/kms driver calling acpi_video_register_backlight() *after* it is
+> +        * done setting up its own native backlight device. The delayed work
+> +        * ensures that acpi_video_register_backlight() always gets called
+> +        * eventually, in case there is no drm/kms driver or it is disabled.
+> +        */
+> +       schedule_delayed_work(&video_bus_register_backlight_work,
+> +                             ACPI_VIDEO_REGISTER_BACKLIGHT_DELAY);
+> +
+>  leave:
+>         mutex_unlock(&register_count_mutex);
+>         return ret;
+> @@ -2251,6 +2278,7 @@ void acpi_video_unregister(void)
+>  {
+>         mutex_lock(&register_count_mutex);
+>         if (register_count) {
+> +               cancel_delayed_work_sync(&video_bus_register_backlight_work);
+>                 acpi_bus_unregister_driver(&acpi_video_bus);
+>                 register_count = 0;
+>                 has_backlight = false;
+> @@ -2259,6 +2287,17 @@ void acpi_video_unregister(void)
+>  }
+>  EXPORT_SYMBOL(acpi_video_unregister);
+>
+> +void acpi_video_register_backlight(void)
+> +{
+> +       struct acpi_video_bus *video;
+> +
+> +       mutex_lock(&video_list_lock);
+> +       list_for_each_entry(video, &video_bus_head, entry)
+> +               acpi_video_bus_register_backlight(video);
+> +       mutex_unlock(&video_list_lock);
+> +}
+> +EXPORT_SYMBOL(acpi_video_register_backlight);
+> +
+>  void acpi_video_unregister_backlight(void)
+>  {
+>         struct acpi_video_bus *video;
+> diff --git a/include/acpi/video.h b/include/acpi/video.h
+> index 4705e339c252..0625806d3bbd 100644
+> --- a/include/acpi/video.h
+> +++ b/include/acpi/video.h
+> @@ -53,6 +53,7 @@ enum acpi_backlight_type {
+>  #if IS_ENABLED(CONFIG_ACPI_VIDEO)
+>  extern int acpi_video_register(void);
+>  extern void acpi_video_unregister(void);
+> +extern void acpi_video_register_backlight(void);
+>  extern int acpi_video_get_edid(struct acpi_device *device, int type,
+>                                int device_id, void **edid);
+>  extern enum acpi_backlight_type acpi_video_get_backlight_type(void);
+> @@ -69,6 +70,7 @@ extern int acpi_video_get_levels(struct acpi_device *device,
+>  #else
+>  static inline int acpi_video_register(void) { return -ENODEV; }
+>  static inline void acpi_video_unregister(void) { return; }
+> +static inline void acpi_video_register_backlight(void) { return; }
+>  static inline int acpi_video_get_edid(struct acpi_device *device, int type,
+>                                       int device_id, void **edid)
+>  {
+> --
+> 2.36.0
+>
