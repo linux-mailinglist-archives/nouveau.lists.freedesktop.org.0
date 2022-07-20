@@ -2,53 +2,105 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CC5A5780E8
-	for <lists+nouveau@lfdr.de>; Mon, 18 Jul 2022 13:37:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 242DF57B115
+	for <lists+nouveau@lfdr.de>; Wed, 20 Jul 2022 08:28:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F37A699378;
-	Mon, 18 Jul 2022 11:37:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0957B14B619;
+	Wed, 20 Jul 2022 06:28:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DF10699377;
- Mon, 18 Jul 2022 11:37:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1658144223; x=1689680223;
- h=message-id:date:mime-version:subject:to:cc:references:
- from:in-reply-to:content-transfer-encoding;
- bh=/TOoxU+a0Q0WlWXmx9lahsQlI3SkWPXIx7AujtPA5uk=;
- b=drJr3vnjdhSg9LmEgXDlb/i2Ho/thhu5JkRp6u/F7mIgSJbZ2mh10hnV
- VJSNMF4mCzvbwRMk6EswUjN/CJBUUpIDeeFf9ez5AGZh9L7cziCIiR8ag
- KvigVce3KDD3CQw6iiTy38J57+PYu3Nd0AoSh9fNDxgPf2kAVBfIu8hZI
- lk5kf8C36qQFIhamYX2s8rgB4PdDEviyDYntr4dqhZWSXwb7guxMxNP+K
- Sg6Je9Snlge2zhd58A7HaGPAqp1prTwCicR1aJzpIOAb9EG4rL+TRAbMd
- a7dbJzLmD2YYao2QvpWIbmbj10KqPjFVqWv7l/o+JG8NxgMuOXPuneadm g==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10411"; a="350159513"
-X-IronPort-AV: E=Sophos;i="5.92,281,1650956400"; d="scan'208";a="350159513"
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
- by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Jul 2022 04:37:03 -0700
-X-IronPort-AV: E=Sophos;i="5.92,281,1650956400"; d="scan'208";a="723828947"
-Received: from smyint-mobl1.amr.corp.intel.com (HELO [10.212.107.15])
- ([10.212.107.15])
- by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Jul 2022 04:37:00 -0700
-Message-ID: <46938a7a-0b89-0bd3-d137-851a037b644f@linux.intel.com>
-Date: Mon, 18 Jul 2022 12:36:59 +0100
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2050.outbound.protection.outlook.com [40.107.223.50])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A701014B5E3;
+ Wed, 20 Jul 2022 06:28:07 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=O2xn20AWXrH9ETRak62cLh35uHtCl+LQSmMFOJyOMHHUIvP7160xVYAbZBRIv76RZNreeCzt4BvHgyVQLv87FEJtC1tWuPFs7/NHU1P0OSkhJfXDVL1FrnG6yWj/Gw0qAEfLlQoBhk7ldWN/t2KPGkg4dm6PMPvQFu10FxVLQqj12aL/m5ns45lYFFy6MfAY//6DYVX4VPGGx9nTg1SOCXy5tj01Q7bhbAd7CmyEnZ+LY2C7jzjrQvOtJ91ifbFZDBQvaYfw2+3pkh/pql3VOE9lvqQKK+mQMR/7hw5QyKvf7G97NLZKto9CaUbjU1z2qzWKcTEKqpHW5/duMIfQnA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=h1LmgiealGYwNmxDY0ba9KJZOV7BhQ7yJvUDAgepQog=;
+ b=HNmCIGNz1K2N7NN6kyyTt66ZzMHcwKbj+XyMiIOZh8DlZQocsu0kxrXOB4Hvntf801qCv8YgvuholmQwvmNoSfraftuOxBe54wB0S5/JResRkeyPYFP4mcU6GLXs0FpLuAlF1ASxxDFojDRz1HOczEggti8smUuQ4ImiZP+TV0HaOWVtahpb07xcv0IO2pScloP2e0nrqxTm9NJ1jXlFWh+zFUqyUGtKBJ0H0ANKz0VerVNyjJN20+R7m/cBUQj/lbp/2rk7W/g9FbAWQbKa0l2EpSGREV1ARnRNo3zwzlYZPrclLZUY16pGnMNBuNOaqGJdNdcqrupCD7YiOFHKcA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=h1LmgiealGYwNmxDY0ba9KJZOV7BhQ7yJvUDAgepQog=;
+ b=JnHgspnto8brEU5d194Bkz9ANSi1tYajMLBtD5TVmUksVXcJWxOj0hlwpVuPS7z0q9ePrvYwVUg0Ip5HWakDJyytnpEFxE9Yg8zlr1h2kB81ItlVqcVdoniBKEdJOrlOtjo24aYv3zqA/YzmR9PwQsPP180XAC0fac52cnrS/Zj3uuryMwO/PfxG6YNw/dCS/ORed5a9O2ReQlYBW84flod4L1/wybDSbEAPrvTIf5ETATPKkJKqUuXLZTZ+n/OEerFpm/CySv70XaoG8knlSQHRm7yI+ZYEU5sBn4xTrxpRQOWDnvmLgVIcdvBbyAmEKLoA2rTmcaFVIa6vQX/Ttw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from BYAPR12MB3176.namprd12.prod.outlook.com (2603:10b6:a03:134::26)
+ by BL0PR12MB4753.namprd12.prod.outlook.com (2603:10b6:208:89::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5438.13; Wed, 20 Jul
+ 2022 06:28:04 +0000
+Received: from BYAPR12MB3176.namprd12.prod.outlook.com
+ ([fe80::eca6:a4a7:e2b2:27e7]) by BYAPR12MB3176.namprd12.prod.outlook.com
+ ([fe80::eca6:a4a7:e2b2:27e7%5]) with mapi id 15.20.5438.023; Wed, 20 Jul 2022
+ 06:28:04 +0000
+From: Alistair Popple <apopple@nvidia.com>
+To: bskeggs@redhat.com,
+	rcampbell@nvidia.com
+Date: Wed, 20 Jul 2022 16:27:45 +1000
+Message-Id: <20220720062745.960701-1-apopple@nvidia.com>
+X-Mailer: git-send-email 2.35.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR05CA0171.namprd05.prod.outlook.com
+ (2603:10b6:a03:339::26) To BYAPR12MB3176.namprd12.prod.outlook.com
+ (2603:10b6:a03:134::26)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.10.0
-Content-Language: en-US
-To: Christoph Hellwig <hch@lst.de>, Rodrigo Vivi <rodrigo.vivi@intel.com>
-References: <20220711082614.GA29487@lst.de> <YsyItfiuccW7iQln@intel.com>
- <20220712050055.GA4727@lst.de>
-From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-Organization: Intel Corporation UK Plc
-In-Reply-To: <20220712050055.GA4727@lst.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] susetting the remaining swioltb couplin in DRM
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 56d01757-4cae-4745-ef24-08da6a1900a8
+X-MS-TrafficTypeDiagnostic: BL0PR12MB4753:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: VfBJLKzg9jIYhZwkZeQHh5I3ET0R0uXDGrxZchFKfaDEDdgQGV/oYVWjT7+P3hBuNh6o2Kp+6WY3MQ9Bj29ZLsWBNzVevnSjR/4HTDNTnHqeSzwDNMwsVayZK/gGGQd/WLlhMGDe0xj8/GTIR2xFGBmvRhChXdwahyJDEs0108neHocEPdCXi+5OtXqv8FCSMcKbGq/bVjUfclzLET+SgUOxqzNPe5Jv6Blq0KHFvayMXLvBxQOC0BPTviw3JYUT22vmbXFUq+eh2T9fRJG287KVdms9PeA8GptVCdBh8F+zGqbUePyU++rFfSBUtXgGAC9BKXcyB7R5jBgzgwGdZlA683q3Haj0FAzKM+DviEtbrwcbT1grEnLDkyOTzvAdpSaZzcZaknUBWkkdiKkWPLh8DW4CpRH5ZXAbffyrnp0oFlocZfGVmqIByy73wjLeL/ukqeQufct8mvkB14jR0aQfhnBAg45cKN+R0iWNZLYOBGSbFuH/p0DaZnV4N0ijHrxV1Z5Kd1r1lwO8+R40JPMWUYwEYBfdUyZdRNkKj9xPxIuNqzeHdUUiwChMlPbNq0FLZQ/WiR7JsYDZvWGwH9d438+NzPszyg7kLlNjHRiY2jb8dJkxg9NiNVqJVDbEfJdCaj9RKo8qnomR5hRaz1rrbxfg8gEQwJBzWts7Bpgf+95bDCr7450TcRmx0wjnY3jfxD5VNWeFHl/1F5EJReG/pYY8HjNlhrkHYG6/YlWf7R1h3IbOiqMI6bJPIbBp
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BYAPR12MB3176.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230016)(4636009)(366004)(396003)(376002)(346002)(136003)(39860400002)(186003)(6512007)(6636002)(66556008)(316002)(86362001)(2616005)(107886003)(1076003)(66946007)(66476007)(4326008)(478600001)(38100700002)(8676002)(6486002)(83380400001)(26005)(6666004)(6506007)(41300700001)(5660300002)(8936002)(36756003)(2906002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?8fSAOjDnphMfm2W/I0mF3qKzpuO6e07McDCeMpYXDwFctRJPFzfXZqCyiTdE?=
+ =?us-ascii?Q?4oL+XSLyH0ceZRgArTLOMf+hXN7oTT+Rd5+jvOZMTLQbhU4HuViOAmpPRl3c?=
+ =?us-ascii?Q?8SpoiJX3ax+Y7MVBR27p56jgHSPECphDLwG0HL6yQ5Ex6hHVaxV0k7i6zRja?=
+ =?us-ascii?Q?oqVF4CtcuxWVyaC9uXHgdgENpcBBviP6dIqcI+fDDepEQn3MxHggcqtiUSWS?=
+ =?us-ascii?Q?ir1MqYOs5zbEHiIUTu5/iYiTtBlSiOg0YBsot3KIBmC8R1Zpwb7hIYhTuMqc?=
+ =?us-ascii?Q?yLkmh3Kj/WEPGBWw16w2Fk784Xz9UJVWLR7p5J4aWrNdBVzj9bgIfjnwwYMh?=
+ =?us-ascii?Q?PyPHPFZET1uXBTR1bCB1YwPfIIY5k1dnpd//R7qx02zZHuM9E0arxckptgjO?=
+ =?us-ascii?Q?/OlleyFZ/Lu/ecJUFrR45pX775H6NGFrl6D7QIaDp01laHy0ElVj7uOvn0Go?=
+ =?us-ascii?Q?DOif5UCxHkOmRJWx6mM6vWyaRo2c0WU016VIa4CJQNjfKQXZfoGYreTpYCkF?=
+ =?us-ascii?Q?lvbX2tEqcJIw1PNUhKpHe8+AgxRx+Qd3IFP3HNuSA13IYJxeoOi+Dhb7Llu5?=
+ =?us-ascii?Q?zEzDDIkBp8vTkFyQbxGlqUXsh0dpX+zOA68llgJAcYXwyfDHAwLE3kseF4l0?=
+ =?us-ascii?Q?/DFmcK7ili5+WacHPkwY/2toNHxWSJr+aQ7UMfxJHpvdVLqQcfFe9oiDqWlc?=
+ =?us-ascii?Q?kdp54lQW5829YeJ8yN0XMR5yJedCWj83E0Fi8EfVMYXT05mxY8gOPZ+xGvV1?=
+ =?us-ascii?Q?YUHuwm0BcqQDATkLsSgaAPWSXlkMKYG7cuT7WHe0ale8+eAh4heVyrwz2pMw?=
+ =?us-ascii?Q?6gtSsrx7QknHKNOt0O3bv52OyAf5qaCwBhiCPCX4QBXb+nK/J7Xdp4RFx3Vk?=
+ =?us-ascii?Q?kY2RJY22dhXeAMKEqRrzuupfOo9O+hrSqzF+sFHE3mCbmdSytKonWkP1qtGT?=
+ =?us-ascii?Q?CLQnxJD9lo5iGF4mdJh1WOG8V4r7rtQQmJN4USoy8I2xMy/4GFJ7oB8UEfPx?=
+ =?us-ascii?Q?BXNJw5FQLifHh2ySGOJsGZpm0rOaEFwAOBA22cmxDA7M75VcmEODdI+YViWp?=
+ =?us-ascii?Q?C3yvSp7ILKv1Kjuu3aztdwioGiijn0k7C+um9WIw2VrtZJwRAAdKtPE1f4gq?=
+ =?us-ascii?Q?ZHvKkLYaiLWm4JdWflC6LYjRNpiOb/c6s3dGKVRYrEKKedIdpLs7y534vkzr?=
+ =?us-ascii?Q?33D14PIzDf+32U6xX45hQATHs7gOFJhZzW1GP6ZIeCUE9P6M4Wtb6rTQp0fW?=
+ =?us-ascii?Q?Qp+4WeaWMlAxkIAmM2KVGWVRoTMqWzcjMIJRS+hEVVoXkc7pjaFktYmxyPoA?=
+ =?us-ascii?Q?aPix/LnHe1Bl4ElZbSLMekMTgNQzppHs7gT+H0Z3UwJl4aN9k5BOWaCD0OVW?=
+ =?us-ascii?Q?k58TkpW2Ku8RRgMgp+qAt6jtjk8YTvVtqzrVeB3OEmYDTFvC2FCmw/24Yyud?=
+ =?us-ascii?Q?C1/SlM5u9YOKkWuFGxnfTWi9ABMeEDmlKyICO9KgfYB6WMuoFGxwAQZLe05v?=
+ =?us-ascii?Q?I9pQ/o1UGKmJUtuQAF7IBTQsUotQLAUFbGFJkiZr+nZUpCEt+sNV/foIL9WU?=
+ =?us-ascii?Q?EXV3NM6FW6/DXv7lXxP6CAlE06/qLUuxw60HFvxx?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 56d01757-4cae-4745-ef24-08da6a1900a8
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB3176.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2022 06:28:04.5081 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: l+LRQweV1wN+X5L3BJPbxZmmpngMaDtECHkXXyanXVLf3erN370CV2tWuYW9A8SObeMFjVKUoEiYY56DdGpJBw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB4753
+Subject: [Nouveau] [PATCH] nouveau/svm: Fix to migrate all requested pages
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,56 +112,45 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Robert Beckett <bob.beckett@collabora.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Thomas Hellstrom <thomas.hellstrom@intel.com>, Ben Skeggs <bskeggs@redhat.com>,
- Matthew Auld <matthew.auld@intel.com>
+Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
+ Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, daniel@ffwll.ch
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Users may request that pages from an OpenCL SVM allocation be migrated
+to the GPU with clEnqueueSVMMigrateMem(). In Nouveau this will call into
+nouveau_dmem_migrate_vma() to do the migration. If the total range to be
+migrated exceeds SG_MAX_SINGLE_ALLOC the pages will be migrated in
+chunks of size SG_MAX_SINGLE_ALLOC. However a typo in updating the
+starting address means that only the first chunk will get migrated.
 
-Hi,
+Fix the calculation so that the entire range will get migrated if
+possible.
 
-On 12/07/2022 06:00, Christoph Hellwig wrote:
-> On Mon, Jul 11, 2022 at 04:31:49PM -0400, Rodrigo Vivi wrote:
->> On Mon, Jul 11, 2022 at 10:26:14AM +0200, Christoph Hellwig wrote:
->>> Hi i915 and nouveau maintainers,
->>>
->>> any chance I could get some help to remove the remaining direct
->>> driver calls into swiotlb, namely swiotlb_max_segment and
->>> is_swiotlb_active.  Either should not matter to a driver as they
->>> should be written to the DMA API.
->>
->> Hi Christoph,
->>
->> while we take a look here, could you please share the reasons
->> behind sunsetting this calls?
-> 
-> Because they are a completely broken layering violation.  A driver has
-> absolutely no business knowing the dma-mapping violation.  The DMA
-> API reports what we think is all useful constraints (e.g.
-> dma_max_mapping_size()), and provides useful APIs to (e.g.
-> dma_alloc_noncoherent or dma_alloc_noncontiguous) to allocate pages
-> that can be mapped without bounce buffering and drivers should use
-> the proper API instead of poking into one particular implementation
-> and restrict it from changing.
-> 
-> swiotlb_max_segment in particular returns a value that isn't actually
-> correct (a driver can't just use all of swiotlb) AND actually doesn't
-> work as is in various scenarious that are becoming more common,
-> most notably host with memory encryption schemes that always require
-> bounce buffering.
+Signed-off-by: Alistair Popple <apopple@nvidia.com>
+Fixes: e3d8b0890469 ("drm/nouveau/svm: map pages after migration")
+---
+ drivers/gpu/drm/nouveau/nouveau_dmem.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-All these are either in the internal backend or in the old shmem 
-backend. I understand both are soon to be retired or deprecated. I think.
+diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+index 7ba66ad68a8a..16356611b5b9 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+@@ -680,7 +680,11 @@ nouveau_dmem_migrate_vma(struct nouveau_drm *drm,
+ 		goto out_free_dma;
+ 
+ 	for (i = 0; i < npages; i += max) {
+-		args.end = start + (max << PAGE_SHIFT);
++		if (args.start + (max << PAGE_SHIFT) > end)
++			args.end = end;
++		else
++			args.end = args.start + (max << PAGE_SHIFT);
++
+ 		ret = migrate_vma_setup(&args);
+ 		if (ret)
+ 			goto out_free_pfns;
+-- 
+2.35.1
 
-+ Matt & Thomas, and Bob actually as well, as I think authorities in the 
-shmem, TTM and internal backend at the moment. Could you guys please 
-have look if and how the TTM backend needs to handle this and what is 
-the timeline of retirement if relevant?
-
-Regards,
-
-Tvrtko
