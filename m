@@ -2,139 +2,132 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BE4657D0C9
-	for <lists+nouveau@lfdr.de>; Thu, 21 Jul 2022 18:11:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B44A357D5E3
+	for <lists+nouveau@lfdr.de>; Thu, 21 Jul 2022 23:25:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2898710E968;
-	Thu, 21 Jul 2022 16:11:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3432B8ED81;
+	Thu, 21 Jul 2022 21:25:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 84AC610ECF5;
- Thu, 21 Jul 2022 16:11:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1658419861; x=1689955861;
- h=date:from:to:cc:subject:message-id:references:
- in-reply-to:mime-version;
- bh=HFGQo6bXWJCXw0EpOTHYnpRm5F1M1SL/xABPhG6kXTM=;
- b=iY550n1hqgZdmVdNYokTVIVYP+yW4VBxap2fn5vD7VwBdNptEmj5stXX
- /WJ3KP5ufHn4y/4mebriulzALbAowxfUgjYMlvZCSuUL6SSNP0m14w9g6
- Y0IB5mWqN8V31AKisrbmDr03LymBYbEsnVp8XLDMyMdlP1mf0GvYo3oxb
- +Zp2PmeTTx06VDxYLcrrbyUl9dn0smK/AIp0ur/NeoXDcvzM2nGml50Tf
- sFvepbPkJ8xICIuTjSXtWeaZfKco8VxcAdrgBMjVnbddkg4s5cJIYwN5P
- xEceE2Iq1NpEpZiUdYXq9BYWndHJ9g9jxxU/hs5/aAtOQdZnivm6qSTCI Q==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10415"; a="284647172"
-X-IronPort-AV: E=Sophos;i="5.93,183,1654585200"; d="scan'208";a="284647172"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
- by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 21 Jul 2022 09:11:00 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.93,183,1654585200"; d="scan'208";a="626179467"
-Received: from orsmsx604.amr.corp.intel.com ([10.22.229.17])
- by orsmga008.jf.intel.com with ESMTP; 21 Jul 2022 09:11:00 -0700
-Received: from orsmsx607.amr.corp.intel.com (10.22.229.20) by
- ORSMSX604.amr.corp.intel.com (10.22.229.17) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.28; Thu, 21 Jul 2022 09:11:00 -0700
-Received: from orsmsx607.amr.corp.intel.com (10.22.229.20) by
- ORSMSX607.amr.corp.intel.com (10.22.229.20) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.28; Thu, 21 Jul 2022 09:10:59 -0700
-Received: from ORSEDG601.ED.cps.intel.com (10.7.248.6) by
- orsmsx607.amr.corp.intel.com (10.22.229.20) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.28 via Frontend Transport; Thu, 21 Jul 2022 09:10:59 -0700
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com (104.47.73.48) by
- edgegateway.intel.com (134.134.137.102) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2308.27; Thu, 21 Jul 2022 09:10:59 -0700
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2072.outbound.protection.outlook.com [40.107.244.72])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2068A8EBB5;
+ Thu, 21 Jul 2022 21:25:02 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=eIqRisxHE2/+6qJEx4355afkwgu6URATyqDgQi/dLjBWY81whxJNzphFTkqooQvXFTy7YVkCSHGK5mGoEq1jFgrZUDBYZSywNoPyWaaEqDcHjdwiNtxTKW1RvyFUZGvMxfgfRGvRyHEnZdJ7cvMkw0+Ey2fwgfmuxBuneli92WeEmCybSnQ/T3K8nHOdZq/nCmFzW+d4w4a9d8G4X2GTbtSpvVFcCHfoD4zZ8C8kdi0WK0YTRfMVC4ezlimnWrbzui1cUv1SAN5D9szVC0IEanlMN8RJh9TzAsQOh3wZlsBahoV1h2nNjj6QStcjn9oMCJzLgMZchba4FfQqCiSSag==
+ b=j5QzQ+DD6tVQrBul2FdieqLYfGaZ1Rd3LVjBEgf8Dy5NbCkOernOvYBMtr2lEy7KUg1X6Araj8RhdcnmUmLk6q1+Bd6wpZSGmsdEpd1lLJJeUkxDZR61uEi7Ad1aIKA0PUrOT3Rfu7V+/v0emRM/niOfAHBWBt9OqDy73Ebjnx4N/ObwgOZluHtH7E32NYL8BO9Wj3VayJtn5emohrYLbWnasCKSkAay8Avw+bzyldUMYWIaqvh6g69NTlaHLj1T0BR7IDs7YXsq/G4wO2TgMmyRxKB8YumaZPmPvCVX8gP9Q8KPfJS+/P5s09Y5Q7IPUsWPH8Ivx0jlZMFNrY+F7A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=R1QE/VC0qpZsPug/0MfXEM+D7DodZ1qGf8bzJIVa/78=;
- b=oEepKVmavo6TmzF07+oYWxos/QnDI/5PX7Hg0kD4fyayeG+FHlwJBEyb7ImPu8pgTu7RwRw4lOPMyLOWofn/rTSxmOFLwL2+H9X9mOk82haEBTvXIQPhVY06Sg3/USEtwbwyByMjiLKpbusZgN4uv2M33oCHP4v2pdFPHbRgFgVCyXcPryvMnvW9hfPTur8GFdO5JuqpJsiv5eAMEquu+w59xKeff98tfao/1KYW9pAAJMkxYYBb5ot0IJH1zCQ584ZLq+whgpdKsr/nFhQry2Az6uw7wTal7OfykxToOUvNni7n4e3WXs7YKoKLj/agMw0ekd8o2heHrZ/iY8NthQ==
+ bh=M1C/0oNIsNZe/4LQMZJj3woOuUc+3we2d2WVgPqvFEo=;
+ b=iheCL+8nnNv+R7jZ5m0AFc32aAMfhPxoIVk4AKSBuh8O7knOeYW7R+xTXpCF+S4X6oxi8c12A+a6PdnCLLs6nb01/2NxL0ezj9WYJSXHThb582sH+HGJRcBn3HYa9kxffJ7zZTAxadvfV0L0Kxdhhqy18+4XPfs1A5G3ALJsJierO1PiHudPT7wu0y14Ve89OEX3y1hufaiKxpLb7Xy/NoYqeZLkvx5fCZVCXT0FCkKBNRwHxPgZaU36iAh53veTLCj2rLX8g3Zu0/XGIVO9EADxdPyAAi3jB/Ri40G4GBLVvKiz74xLyvN/a0VM7rod8eQPw3BLg1t7nE20yZ7/xA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=M1C/0oNIsNZe/4LQMZJj3woOuUc+3we2d2WVgPqvFEo=;
+ b=lUpd7drc82vh1YbPK4dP7dsYKiSKzKU+1oVFhXNlWUI7PoIaYaOPflpCukSWcyYUjST64aagtakPDQvEPHCl2VuPIql+ggq1yEvWeeQqHLOp6opZznIOTb2HHriL1HvQChoSMi+zNSSoCCC1itps1b3ql87ACtnoUIxmf4afuAxWDXbm9/cUcTC5W3+ApBOAG8DIbVfeYG3pKajy71wjfWnp0++8vyo50XbcJ3YyJxJy/JwdyG73eExTDnagh0yMdqktquUtcW2qo4H8qsQo3pYYq3rgi/6NHOh7nhthfnIOCfLwaFku0P+2jq0SwoZBD5FO63IsaJ0CQiEMzaJdfQ==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-Received: from MWHPR1101MB2126.namprd11.prod.outlook.com
- (2603:10b6:301:50::20) by MWHPR11MB0014.namprd11.prod.outlook.com
- (2603:10b6:301:64::31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5438.15; Thu, 21 Jul
- 2022 16:10:52 +0000
-Received: from MWHPR1101MB2126.namprd11.prod.outlook.com
- ([fe80::6466:20a6:57b4:1edf]) by MWHPR1101MB2126.namprd11.prod.outlook.com
- ([fe80::6466:20a6:57b4:1edf%11]) with mapi id 15.20.5458.019; Thu, 21 Jul
- 2022 16:10:52 +0000
-Date: Thu, 21 Jul 2022 09:10:49 -0700
-From: Dan Williams <dan.j.williams@intel.com>
-To: Jason Gunthorpe <jgg@nvidia.com>, Christoph Hellwig <hch@lst.de>
-Message-ID: <62d97a89d66a1_17f3e82949e@dwillia2-xfh.jf.intel.com.notmuch>
-References: <165784324066.1758207.15025479284039479071.stgit@dwillia2-xfh.jf.intel.com>
- <165784333333.1758207.13703329337805274043.stgit@dwillia2-xfh.jf.intel.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <165784333333.1758207.13703329337805274043.stgit@dwillia2-xfh.jf.intel.com>
-X-ClientProxiedBy: SJ0PR03CA0053.namprd03.prod.outlook.com
- (2603:10b6:a03:33e::28) To MWHPR1101MB2126.namprd11.prod.outlook.com
- (2603:10b6:301:50::20)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from DM6PR12MB2763.namprd12.prod.outlook.com (2603:10b6:5:48::16) by
+ MN2PR12MB4287.namprd12.prod.outlook.com (2603:10b6:208:1dd::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5458.18; Thu, 21 Jul
+ 2022 21:24:57 +0000
+Received: from DM6PR12MB2763.namprd12.prod.outlook.com
+ ([fe80::d043:c95a:cf42:cff4]) by DM6PR12MB2763.namprd12.prod.outlook.com
+ ([fe80::d043:c95a:cf42:cff4%7]) with mapi id 15.20.5438.023; Thu, 21 Jul 2022
+ 21:24:57 +0000
+Message-ID: <641cb059-48f5-5f05-5ec2-610f1215391c@nvidia.com>
+Date: Thu, 21 Jul 2022 16:24:53 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To: Hans de Goede <hdegoede@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Xinhui <Xinhui.Pan@amd.com>, "Rafael J . Wysocki" <rafael@kernel.org>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>,
+ Lukas Wunner <lukas@wunner.de>, Mark Gross <markgross@kernel.org>,
+ Andy Shevchenko <andy@kernel.org>
+References: <20220712193910.439171-1-hdegoede@redhat.com>
+ <20220712193910.439171-2-hdegoede@redhat.com>
+From: Daniel Dadap <ddadap@nvidia.com>
+In-Reply-To: <20220712193910.439171-2-hdegoede@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: DM6PR11CA0067.namprd11.prod.outlook.com
+ (2603:10b6:5:14c::44) To DM6PR12MB2763.namprd12.prod.outlook.com
+ (2603:10b6:5:48::16)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: c978c002-a318-44b0-8925-08da6b33953c
-X-MS-TrafficTypeDiagnostic: MWHPR11MB0014:EE_
+X-MS-Office365-Filtering-Correlation-Id: a4664dbb-b980-40bb-f23e-08da6b5f7617
+X-MS-TrafficTypeDiagnostic: MN2PR12MB4287:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: sp+2va/NQ2K8XOkmbDU9NA9H3KvGKCaLCfDwQhcZXLHeYY7vnqB/TxzaI2Gy1BMTz9g0VE3twAgKuXAPNqkk3K9ocgK7RbRa/b5pm0jQ1BbU4JGImJqtaDrYdIAur6HGZLWXJgHxOeudf6vqiD1VZi2KzW+OS+6hOnqjO4JBmH+JcBBgIYbTq0UuNHD6fBlge9rCn0Y5/27V5EZZ57XOX6n5fHKW3WAuZ/3H2GVquibU6khnq6l3/EY7b90ztvD3waXvf9IsqBw1cD0NIX/yLBUp9OIGQE4/gDQVKqmm6flRER26WZdH3FwGRHFw2a0FMAK5Pz2BqmDebDS7/qfkhw1I5Z1omQa7ZDsRoOPHLCdQK7iE2JqqxaGGKu+EuZgcX8CIy+3pKKVBG9jrBg+EU48NHM/fYNbgFm5SytGXMxWVspLxWtXfXERDB3/zoKqsOffAbSaDrkNd9dn8PjukeobtNRN2XExCRmxtTKbW9+M3/+f2FL2LNnJZc/eIL1xVe7vrgWcVPj9XZOTgBhXM6cnAKN3UTrNSJigty2L86fGqm3gzmqq2bjbN1eEBuy0PeYccgSUTQuuqhYENR4YOGnLTH+fuWqirW/+pz90CFf3KL5Q4itrQyFbOmVlwNst8rVRZqOJqo5vX3WtOgeowUTJ85GYXM+iK9RbKex9DH/aQ1bnEdZ49z1HmWI1XQgDEP4OdllmpVe9i1cQkoenWl2P2qMC2gd2iVCvO2ESJlCojET4HEC8rNd144kLdxkGK5lTt1LX5w3GRYPUNAGJuKg==
+X-Microsoft-Antispam-Message-Info: 5a3faq4CSzsDftecNffk4fkjH07GO7rmYSCqVs+qIu0xMxGHahE1/+Hd0rlN7nAA6N96DD96szvxnGb4h8TdF+OfVwEcmvV/M2t3+E2lEbGho79uwpg+sEhyAwkjmaV+Ah2pV8IxL4sQ0hQlxxNUxmbXrmmRk+w19uQG0ZK80mnAlY7qiat7g9b5gKu3vmyJlqwG/GP6XhNtSztHmFNx68l8KraN5Uah6M40W87UXpQ/lldfj3qjSYuw4GspqFDv2yPXyj0oD7a8dTk/Bs8AiUV88cHwptjaSryNwhiiz4DJ5SWZk18WCBXp8rMBDYeegNITXreT21lpq3rKdBX3YideNw2Twih+G0yajUAdqqJGEFNrWJK2QBkVQyji7EKhpJ2W9Qn1MY9v+uKoZIFiWt/Kh62DDsxZzOTstsTP6o3FipokW0RFcCVyIr4gOaLxM6ARfUvJOX3jiDcij60vjRjyzIuW8Y7x0ZcDkxeCzWaOjnGsoKcj1yenfVgGkc2c1xzKsebMRfq8EGi3uNfrEnqlf/CnMlEz86R1PFmtL+DDjqK87ugu01eVheqav9ayeXjpwjdqNFMJ21lpYYm8Li9v939KYhiqhPqukm+Lc+iEqdZciU/mEn6k/kTxxGJHJV+/f28J/SUkqTGMSxRgN1r1Q+odgjZf4WX/UE1iurb2z7tug3hueKdDE3yCmD5lnMNHK3tlzzSjt9WIcyjm+mYUqSsFY0N1MEgvlDR7U8Rydf3b0BqJjzo0Tvwijl1yGpYKk0ObVkVECUarvof2BvRy0nuhqXaDPyVg9UyfgYfsE32DH3PC5DWr5NopGPHfFaSMjO0O8EUFWoT64sB6g5pK3wavE8A/FXD0bPXFUV0=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MWHPR1101MB2126.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230016)(376002)(346002)(366004)(396003)(136003)(39860400002)(478600001)(41300700001)(5660300002)(2906002)(8936002)(6486002)(110136005)(4326008)(8676002)(30864003)(66946007)(82960400001)(66476007)(66556008)(38100700002)(316002)(966005)(6506007)(83380400001)(186003)(9686003)(6512007)(26005)(86362001)(6666004);
- DIR:OUT; SFP:1102; 
+ IPV:NLI; SFV:NSPM; H:DM6PR12MB2763.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230016)(4636009)(396003)(136003)(366004)(376002)(346002)(39860400002)(8936002)(36756003)(921005)(31696002)(5660300002)(54906003)(31686004)(7416002)(478600001)(186003)(2616005)(110136005)(83380400001)(316002)(41300700001)(6666004)(6506007)(8676002)(38100700002)(86362001)(6486002)(2906002)(6512007)(26005)(53546011)(66556008)(66476007)(4326008)(66946007)(45980500001)(43740500002);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?QnBEZyo7Fp9JsKa84HwPLhhEEgPvR6PAtLZtJDIHmIyn3nVjcYJ0j0O625ED?=
- =?us-ascii?Q?ascCXOgVEz/HpTRgiSp3LGk28xtN+xGyZoehCnsPZeOAevZTgiy3CVqQTKfu?=
- =?us-ascii?Q?SOvIY5/HTfKIzOP+AoXH1Z2TKolSN4C34FvFu1tfmHgRHduOmeTDWhsVU0Dc?=
- =?us-ascii?Q?bKfisjS8v9lfki6Op4gtVBUN1TUEkc7ts7oWVOU+KB95hs0bLsmgMoEC48rO?=
- =?us-ascii?Q?gSaviHJipbhsVmkiU3TOx8wiztMh5jTHOSAE1yF/2y/8y8sb9Id4CcAihnSO?=
- =?us-ascii?Q?hFc27yRf0oQBdD2MsG6XTAxf/Gq71ZQGd2Jpq2SwWrzKtMctcf6U41ll+AgX?=
- =?us-ascii?Q?bSJyVRre9W2gZcZPn2xZkclRANqeRxn0cu3JZF1QV8TfFOuz17oX0Nuu1/yf?=
- =?us-ascii?Q?QUDOaD/AaVj/0ztZBekuevX0Ud9a5Ku0+8Sf47Bkf7yfpfjIoT+4pmWjg6jP?=
- =?us-ascii?Q?aIWkVpBTpg1umdeHbsmDmMpxnemWAvS8RJeFf9X0lK9iQTbc5YJF4rr+ImgK?=
- =?us-ascii?Q?vlsDkQbPuJeIYm8eNeNgkG/aHer0LoD+EpdB0+Bi5G8RwKmNRukfYA4VaCr/?=
- =?us-ascii?Q?19WdRtB3efFPRkkYxVAX3IcFRprIL7dhr8wUnvyRhhRzuYWbwrZfbFyEhvnQ?=
- =?us-ascii?Q?Pg9auQpN911A9Be/5pa8i1sd49vGq1tXuXO/ZQPNI38RabZI1+zu6DSV/GBK?=
- =?us-ascii?Q?rO2NQQLhZdYjSgPfr80KSxHe4B2KiE4MsTmqr/wCvT5Oc+LDF0vvhtlrlPr9?=
- =?us-ascii?Q?x83rhz4u6EXG6GvNvvS8uOGlQuD2lj0FaQya0e51Eci/LV5FgygKe6871CT0?=
- =?us-ascii?Q?RwSN5/V1qNa4QznK9gj66l/Q3fy4CxLZReY77o1gbhNs7KBcmL2LK9q/N/9B?=
- =?us-ascii?Q?VnCfxIWNHPhVszuqV4tkOW9aPe/6unyWwMBuexN0/Gp4rBGJa0toVi7Bf7Qi?=
- =?us-ascii?Q?GVhPm5x2h+s2AlxYeNctDopivNV0ARQ9y0TbSErfharMbYETkoxrmxIBqhzS?=
- =?us-ascii?Q?TSYp6yIRAODoflZScA3D7ARlBVqi8BWrJZD4uYAWXctLJOOhGFVv2YJhX5k3?=
- =?us-ascii?Q?rN4r0Pf/hzq/yy6/g/EKuxUlBNDh76iHilpVmeYNPyfVYsVngJRiUtpqtU0U?=
- =?us-ascii?Q?qcWViT2tRoNuOmct5UkYR4BRv2JtkI3aULQ89UDmuNYQP9hFPTx8aqRGSOIU?=
- =?us-ascii?Q?tXUpgFUtTuZlxU+8ohwPb/PwQfEEYINBRHF8qDUULN2oqznsTgHP2LmSQ596?=
- =?us-ascii?Q?BY6ZExSXhSIGw0wcAPURCRR00cEbyA45AEyziNK3iNr7AOCmZD44wsJVBxh/?=
- =?us-ascii?Q?/U48p2ckDYsgQb2P5xdmTUh5BYq0SOP9doBUwIvYWmR68eAdbDmzUKHMnFdt?=
- =?us-ascii?Q?nx0UswufbQXvcw7JJ3IEHHBOlpXvxZ13GXHnLda+0Z1OXmhImBBrn1Woc15o?=
- =?us-ascii?Q?FplyVOneoXpqeog1Qwc/96onbJywO2DoM3SuiLsV2GiBkbBy+6q7yOe0quM7?=
- =?us-ascii?Q?f1T8cETuALka9TLF9UoQRqZcKTQRp2FgU1jN+ly1Ceg3Bod4vMjURSGs4IJD?=
- =?us-ascii?Q?4rSO6E/fyJpk8HG95i4OAy+sHqIDvAuFzfZ52t93NeBkH2B/dhdt3Nko+dHI?=
- =?us-ascii?Q?jg=3D=3D?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: c978c002-a318-44b0-8925-08da6b33953c
-X-MS-Exchange-CrossTenant-AuthSource: MWHPR1101MB2126.namprd11.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dEhDVUNEQnFPSEZnc3kwdi80d2Y5SUlBUU14TGJaYlRXU09EZlg5NXkydTVv?=
+ =?utf-8?B?a0FvNFZBZG45MmhnV3M4b2tacW9NVmZmMkR4TTh1YnRpTnNPaEVNZEJIRjR5?=
+ =?utf-8?B?ZldDMGVkVklRV1NyNVA4UGloeEcrVVA1SlBNWXMwQmkvK2ptaWN1djVFSk9S?=
+ =?utf-8?B?NXZmaW1LUzF1ZTVMMFRtUGVUaTV1OE1adWZmRU5leE1zT0ZrdDNMeTVHOGJj?=
+ =?utf-8?B?VU8zYlZyU2pUT0FhbklpLzJtUDdHekU3d3JIVVBCaDc5cHIwbytySGdxSUZ4?=
+ =?utf-8?B?UzFpaDYwUGdDZktpMnhpWSt2VFVJcnpoUFR3N3BLYXozczBKM2NKc1dka2I5?=
+ =?utf-8?B?TCtKZGJYZW4yNm01dkxvOHdpOWVhaW1xdGl5eGdCTVZ2Y0xSR0lLYlh6VE1z?=
+ =?utf-8?B?VXNuNEQxSDZsNFl3M1lBcllQaFNNbjdiMnF0M0piS05XV1FXOGxQWFJPa1Rr?=
+ =?utf-8?B?UjhFZk03UFZzSTJMWmJmSldqK0J1cEdHMW0yL1BUL0tHT1RIZVFRRTZERlBu?=
+ =?utf-8?B?cEtPMkliSEtLY0M3M3lYRzF0UUI3dWJFMG5RMFN2SUZ6KytIbW52OEdDdk9M?=
+ =?utf-8?B?TW1BU2tXT0I3dHd3VVpvWWZzR0xWamg2MHBVczBqUFVQYWhwaXBXdkNNbHYx?=
+ =?utf-8?B?dWIxRXQwYXpLQ09KMW9YRjdDNllLV0dGM0d3Wkc1UmN4c0RnaDVaTExZcFk0?=
+ =?utf-8?B?UUVvcDVsRm82akZodmdYcXRVT3NuRjJOTEVxQ1VHMi9uZUtpUzJVTTJrcXdh?=
+ =?utf-8?B?VXRUS1ZmeGh5NE90SG5RTEt0djZKa2pUZHp3OUZvWnY0SkUwK1dPRFRXc0pL?=
+ =?utf-8?B?a2VqQlc1aWF6a0xjRTR1cm1WcTh0cHZFOGxkUnp1U3NJR2pzQjZheXY1TjRP?=
+ =?utf-8?B?aDU1TWJ5ZmltSDZJWkZnOXF4M2dwUEZYMVpKL2ZzNlZQc1cvUEl3aVdKUUc1?=
+ =?utf-8?B?Q2NBWE9TOE4xUUNYUVgyTkFFU2hsQ1ZOam1UVjl6MThPYmR1cThlZks1REVz?=
+ =?utf-8?B?SXYyM3V1NHd5R1N4dnNXWXJ3amxXMlFiMnpKNlkzdzRpbU1BUTVVK2h5OG12?=
+ =?utf-8?B?SHE2NmxkRnFCU2JnVkhlRVZ1dEFnK0N5ZTFuVDVmR3AwM2kyQjVWWWJnL1BR?=
+ =?utf-8?B?dEo3RHl2V1VpQnFSTnlYcmhDOWY1RHc5N1p2bE91azVxTnBMYmwvR2pZcUUy?=
+ =?utf-8?B?NzZpMG01QUc4Vy8wMlI4VTRzcXJiRE9mZUpwYm0xekl2cllPOHBLVTNPaDdt?=
+ =?utf-8?B?aUtWdlF6VzRHczV4b3hWc05NL1A1NGJMZnhpOG5ySitEVHAySkgxZlAvcitJ?=
+ =?utf-8?B?cDFzYWlMZG4yMHJtQWlKUnQ4T2ltR2c1VUtOT2l3dHFHb0VXSWpzOVZLOThN?=
+ =?utf-8?B?Q1dnMFEwVGZZemZUa0twSGVmN3lvU2ViNW5ZbnpwNSt4WkhMbmhVS0xKU0Qz?=
+ =?utf-8?B?clFqTUlEaDltL296aFd4YmY1bHp4eC90dW1iM3hCVkJIQnpoT0xxVWxtRTUr?=
+ =?utf-8?B?NXlZTnNkZ05KSFhQYW5zQWYzL05LT3ZVUkFDWVIzeWVBUlprMTJ6bTh5ZGp6?=
+ =?utf-8?B?M3ZiVmRVWU9hQ1BwZFZjSmxsLytVTk4vRVdCbXZPemJXZ3grWlh2TVBFcnBy?=
+ =?utf-8?B?T1RyNVdZNTUyWHlWb0crNWJoRTFlc1pSMzhZT1NYaGNJbHZTbjZpaTdTc081?=
+ =?utf-8?B?U2hsR0R5cDRqRjRBTExYclZwU21HaW84SDhQQXAyS2hONVJnaFhiOU43dTNk?=
+ =?utf-8?B?VlhEY1JIR2RKSklTQUpGMVhLTmlMWldjUWFRUnVtbVFSd1R0RXJjc0gvUkx5?=
+ =?utf-8?B?ME5xTmtob1AzRUQxektVRzNhQnI0SHUrbTZwblcvMlVvNGh0TlBIa0kwdEha?=
+ =?utf-8?B?dnpLWDc2b1FWbXFwd25VRkw1MWZHTnlSYWFYSlJ3dkg0V1VHWUQ0NjFYVHUy?=
+ =?utf-8?B?YmQyb2JPTTJBZE00cEtDMTZJNTBxTEZ1WnV6UlZVNVlTUjlzamV0YTY4VWgw?=
+ =?utf-8?B?WnBDU1Z2eTkzdCtFU0txR2JXR0JrUnpaY3BEbEJVZTBwcFE1VFVMZTFvdzhq?=
+ =?utf-8?B?Ulg1VW9HVzlESHhrem9CTzNhdHZhSUczVUNXbEVDZGI2cCtsU2NtbHFnakVT?=
+ =?utf-8?Q?Kbgmbf+ELgIXhwhBFjf9tlcCf?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a4664dbb-b980-40bb-f23e-08da6b5f7617
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB2763.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2022 16:10:52.0435 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2022 21:24:57.6504 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ep5rf5b44yYdElGY0hQdaw2afcci1towvLxYK3TYHx3kgN83u4G3DZitIJqVsBpGmsxP7ot4AoKXxyti/LNqYXC8Nau65xQfQJZqfVv9dz8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR11MB0014
-X-OriginatorOrg: intel.com
-Subject: Re: [Nouveau] [PATCH v2 16/28] resource: Introduce
- alloc_free_mem_region()
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7GKNVLwwbOCoWqCgtE2BSiW3jSQmYYdcT4r/t0cGVIA/XrPMSU3eL8W/03fog/1uzqwErYaBK2JXoAw68m7iyQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4287
+Subject: Re: [Nouveau] [PATCH v2 01/29] ACPI: video: Add
+ acpi_video_backlight_use_native() helper
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -146,349 +139,166 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nvdimm@lists.linux.dev, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Matthew Wilcox <willy@infradead.org>,
- linux-cxl@vger.kernel.org, linux-pci@vger.kernel.org
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ intel-gfx <intel-gfx@lists.freedesktop.org>, amd-gfx@lists.freedesktop.org,
+ platform-driver-x86@vger.kernel.org, linux-acpi@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
+ Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-[ add dri-devel and nouveau ]
 
-Dan Williams wrote:
-> The core of devm_request_free_mem_region() is a helper that searches for
-> free space in iomem_resource and performs __request_region_locked() on
-> the result of that search. The policy choices of the implementation
-> conform to what CONFIG_DEVICE_PRIVATE users want which is memory that is
-> immediately marked busy, and a preference to search for the first-fit
-> free range in descending order from the top of the physical address
-> space.
-> 
-> CXL has a need for a similar allocator, but with the following tweaks:
-> 
-> 1/ Search for free space in ascending order
-> 
-> 2/ Search for free space relative to a given CXL window
-> 
-> 3/ 'insert' rather than 'request' the new resource given downstream
->    drivers from the CXL Region driver (like the pmem or dax drivers) are
->    responsible for request_mem_region() when they activate the memory
->    range.
-> 
-> Rework __request_free_mem_region() into get_free_mem_region() which
-> takes a set of GFR_* (Get Free Region) flags to control the allocation
-> policy (ascending vs descending), and "busy" policy (insert_resource()
-> vs request_region()).
-> 
-> As part of the consolidation of the legacy GFR_REQUEST_REGION case with
-> the new default of just inserting a new resource into the free space
-> some minor cleanups like not checking for NULL before calling
-> devres_free() (which does its own check) is included.
-> 
-> Suggested-by: Jason Gunthorpe <jgg@nvidia.com>
-> Link: https://lore.kernel.org/linux-cxl/20220420143406.GY2120790@nvidia.com/
-> Cc: Matthew Wilcox <willy@infradead.org>
-> Cc: Christoph Hellwig <hch@lst.de>
-
-Jason, Christoph, anyone else that depends on CONFIG_DEVICE_PRIVATE,
-
-Just a heads up that with Jonathan's review I am going to proceed with
-pushing this change to linux-next. Please holler if
-CONFIG_DEVICE_PRIVATE starts misbehaving, or if you have other feedback,
-and I will get it fixed up.
-
-> Signed-off-by: Dan Williams <dan.j.williams@intel.com>
+On 7/12/22 14:38, Hans de Goede wrote:
+> ATM on x86 laptops where we want userspace to use the acpi_video backlight
+> device we often register both the GPU's native backlight device and
+> acpi_video's firmware acpi_video# backlight device. This relies on
+> userspace preferring firmware type backlight devices over native ones, but
+> registering 2 backlight devices for a single display really is undesirable.
+>
+> On x86 laptops where the native GPU backlight device should be used,
+> the registering of other backlight devices is avoided by their drivers
+> using acpi_video_get_backlight_type() and only registering their backlight
+> if the return value matches their type.
+>
+> acpi_video_get_backlight_type() uses
+> backlight_device_get_by_type(BACKLIGHT_RAW) to determine if a native
+> driver is available and will never return native if this returns
+> false. This means that the GPU's native backlight registering code
+> cannot just call acpi_video_get_backlight_type() to determine if it
+> should register its backlight, since acpi_video_get_backlight_type() will
+> never return native until the native backlight has already registered.
+>
+> To fix this add a new internal native function parameter to
+> acpi_video_get_backlight_type(), which when set to true will make
+> acpi_video_get_backlight_type() behave as if a native backlight has
+> already been registered.
+>
+> And add a new acpi_video_backlight_use_native() helper, which sets this
+> to true, for use in native GPU backlight code.
+>
+> Changes in v2:
+> - Replace adding a native parameter to acpi_video_get_backlight_type() with
+>    adding a new acpi_video_backlight_use_native() helper.
+>
+> Signed-off-by: Hans de Goede <hdegoede@redhat.com>
 > ---
->  include/linux/ioport.h |    2 +
->  kernel/resource.c      |  178 +++++++++++++++++++++++++++++++++++++++---------
->  mm/Kconfig             |    5 +
->  3 files changed, 150 insertions(+), 35 deletions(-)
-> 
-> diff --git a/include/linux/ioport.h b/include/linux/ioport.h
-> index 79d1ad6d6275..616b683563a9 100644
-> --- a/include/linux/ioport.h
-> +++ b/include/linux/ioport.h
-> @@ -330,6 +330,8 @@ struct resource *devm_request_free_mem_region(struct device *dev,
->  		struct resource *base, unsigned long size);
->  struct resource *request_free_mem_region(struct resource *base,
->  		unsigned long size, const char *name);
-> +struct resource *alloc_free_mem_region(struct resource *base,
-> +		unsigned long size, unsigned long align, const char *name);
->  
->  static inline void irqresource_disabled(struct resource *res, u32 irq)
->  {
-> diff --git a/kernel/resource.c b/kernel/resource.c
-> index 53a534db350e..4c5e80b92f2f 100644
-> --- a/kernel/resource.c
-> +++ b/kernel/resource.c
-> @@ -489,8 +489,9 @@ int __weak page_is_ram(unsigned long pfn)
->  }
->  EXPORT_SYMBOL_GPL(page_is_ram);
->  
-> -static int __region_intersects(resource_size_t start, size_t size,
-> -			unsigned long flags, unsigned long desc)
-> +static int __region_intersects(struct resource *parent, resource_size_t start,
-> +			       size_t size, unsigned long flags,
-> +			       unsigned long desc)
->  {
->  	struct resource res;
->  	int type = 0; int other = 0;
-> @@ -499,7 +500,7 @@ static int __region_intersects(resource_size_t start, size_t size,
->  	res.start = start;
->  	res.end = start + size - 1;
->  
-> -	for (p = iomem_resource.child; p ; p = p->sibling) {
-> +	for (p = parent->child; p ; p = p->sibling) {
->  		bool is_type = (((p->flags & flags) == flags) &&
->  				((desc == IORES_DESC_NONE) ||
->  				 (desc == p->desc)));
-> @@ -543,7 +544,7 @@ int region_intersects(resource_size_t start, size_t size, unsigned long flags,
->  	int ret;
->  
->  	read_lock(&resource_lock);
-> -	ret = __region_intersects(start, size, flags, desc);
-> +	ret = __region_intersects(&iomem_resource, start, size, flags, desc);
->  	read_unlock(&resource_lock);
->  
->  	return ret;
-> @@ -1780,62 +1781,139 @@ void resource_list_free(struct list_head *head)
->  }
->  EXPORT_SYMBOL(resource_list_free);
->  
-> -#ifdef CONFIG_DEVICE_PRIVATE
-> -static struct resource *__request_free_mem_region(struct device *dev,
-> -		struct resource *base, unsigned long size, const char *name)
-> +#ifdef CONFIG_GET_FREE_REGION
-> +#define GFR_DESCENDING		(1UL << 0)
-> +#define GFR_REQUEST_REGION	(1UL << 1)
-> +#define GFR_DEFAULT_ALIGN (1UL << PA_SECTION_SHIFT)
-> +
-> +static resource_size_t gfr_start(struct resource *base, resource_size_t size,
-> +				 resource_size_t align, unsigned long flags)
-> +{
-> +	if (flags & GFR_DESCENDING) {
-> +		resource_size_t end;
-> +
-> +		end = min_t(resource_size_t, base->end,
-> +			    (1ULL << MAX_PHYSMEM_BITS) - 1);
-> +		return end - size + 1;
-> +	}
-> +
-> +	return ALIGN(base->start, align);
-> +}
-> +
-> +static bool gfr_continue(struct resource *base, resource_size_t addr,
-> +			 resource_size_t size, unsigned long flags)
-> +{
-> +	if (flags & GFR_DESCENDING)
-> +		return addr > size && addr >= base->start;
-> +	/*
-> +	 * In the ascend case be careful that the last increment by
-> +	 * @size did not wrap 0.
-> +	 */
-> +	return addr > addr - size &&
-> +	       addr <= min_t(resource_size_t, base->end,
-> +			     (1ULL << MAX_PHYSMEM_BITS) - 1);
-> +}
-> +
-> +static resource_size_t gfr_next(resource_size_t addr, resource_size_t size,
-> +				unsigned long flags)
-> +{
-> +	if (flags & GFR_DESCENDING)
-> +		return addr - size;
-> +	return addr + size;
-> +}
-> +
-> +static void remove_free_mem_region(void *_res)
-> +{
-> +	struct resource *res = _res;
-> +
-> +	if (res->parent)
-> +		remove_resource(res);
-> +	free_resource(res);
-> +}
-> +
-> +static struct resource *
-> +get_free_mem_region(struct device *dev, struct resource *base,
-> +		    resource_size_t size, const unsigned long align,
-> +		    const char *name, const unsigned long desc,
-> +		    const unsigned long flags)
->  {
-> -	resource_size_t end, addr;
-> +	resource_size_t addr;
->  	struct resource *res;
->  	struct region_devres *dr = NULL;
->  
-> -	size = ALIGN(size, 1UL << PA_SECTION_SHIFT);
-> -	end = min_t(unsigned long, base->end, (1UL << MAX_PHYSMEM_BITS) - 1);
-> -	addr = end - size + 1UL;
-> +	size = ALIGN(size, align);
->  
->  	res = alloc_resource(GFP_KERNEL);
->  	if (!res)
->  		return ERR_PTR(-ENOMEM);
->  
-> -	if (dev) {
-> +	if (dev && (flags & GFR_REQUEST_REGION)) {
->  		dr = devres_alloc(devm_region_release,
->  				sizeof(struct region_devres), GFP_KERNEL);
->  		if (!dr) {
->  			free_resource(res);
->  			return ERR_PTR(-ENOMEM);
->  		}
-> +	} else if (dev) {
-> +		if (devm_add_action_or_reset(dev, remove_free_mem_region, res))
-> +			return ERR_PTR(-ENOMEM);
->  	}
->  
->  	write_lock(&resource_lock);
-> -	for (; addr > size && addr >= base->start; addr -= size) {
-> -		if (__region_intersects(addr, size, 0, IORES_DESC_NONE) !=
-> -				REGION_DISJOINT)
-> +	for (addr = gfr_start(base, size, align, flags);
-> +	     gfr_continue(base, addr, size, flags);
-> +	     addr = gfr_next(addr, size, flags)) {
-> +		if (__region_intersects(base, addr, size, 0, IORES_DESC_NONE) !=
-> +		    REGION_DISJOINT)
->  			continue;
->  
-> -		if (__request_region_locked(res, &iomem_resource, addr, size,
-> -						name, 0))
-> -			break;
-> +		if (flags & GFR_REQUEST_REGION) {
-> +			if (__request_region_locked(res, &iomem_resource, addr,
-> +						    size, name, 0))
-> +				break;
->  
-> -		if (dev) {
-> -			dr->parent = &iomem_resource;
-> -			dr->start = addr;
-> -			dr->n = size;
-> -			devres_add(dev, dr);
-> -		}
-> +			if (dev) {
-> +				dr->parent = &iomem_resource;
-> +				dr->start = addr;
-> +				dr->n = size;
-> +				devres_add(dev, dr);
-> +			}
->  
-> -		res->desc = IORES_DESC_DEVICE_PRIVATE_MEMORY;
-> -		write_unlock(&resource_lock);
-> +			res->desc = desc;
-> +			write_unlock(&resource_lock);
-> +
-> +
-> +			/*
-> +			 * A driver is claiming this region so revoke any
-> +			 * mappings.
-> +			 */
-> +			revoke_iomem(res);
-> +		} else {
-> +			res->start = addr;
-> +			res->end = addr + size - 1;
-> +			res->name = name;
-> +			res->desc = desc;
-> +			res->flags = IORESOURCE_MEM;
-> +
-> +			/*
-> +			 * Only succeed if the resource hosts an exclusive
-> +			 * range after the insert
-> +			 */
-> +			if (__insert_resource(base, res) || res->child)
-> +				break;
-> +
-> +			write_unlock(&resource_lock);
-> +		}
->  
-> -		/*
-> -		 * A driver is claiming this region so revoke any mappings.
-> -		 */
-> -		revoke_iomem(res);
->  		return res;
->  	}
->  	write_unlock(&resource_lock);
->  
-> -	free_resource(res);
-> -	if (dr)
-> +	if (flags & GFR_REQUEST_REGION) {
-> +		free_resource(res);
->  		devres_free(dr);
-> +	} else if (dev)
-> +		devm_release_action(dev, remove_free_mem_region, res);
->  
->  	return ERR_PTR(-ERANGE);
->  }
-> @@ -1854,18 +1932,48 @@ static struct resource *__request_free_mem_region(struct device *dev,
->  struct resource *devm_request_free_mem_region(struct device *dev,
->  		struct resource *base, unsigned long size)
->  {
-> -	return __request_free_mem_region(dev, base, size, dev_name(dev));
-> +	unsigned long flags = GFR_DESCENDING | GFR_REQUEST_REGION;
-> +
-> +	return get_free_mem_region(dev, base, size, GFR_DEFAULT_ALIGN,
-> +				   dev_name(dev),
-> +				   IORES_DESC_DEVICE_PRIVATE_MEMORY, flags);
->  }
->  EXPORT_SYMBOL_GPL(devm_request_free_mem_region);
->  
->  struct resource *request_free_mem_region(struct resource *base,
->  		unsigned long size, const char *name)
->  {
-> -	return __request_free_mem_region(NULL, base, size, name);
-> +	unsigned long flags = GFR_DESCENDING | GFR_REQUEST_REGION;
-> +
-> +	return get_free_mem_region(NULL, base, size, GFR_DEFAULT_ALIGN, name,
-> +				   IORES_DESC_DEVICE_PRIVATE_MEMORY, flags);
->  }
->  EXPORT_SYMBOL_GPL(request_free_mem_region);
->  
-> -#endif /* CONFIG_DEVICE_PRIVATE */
-> +/**
-> + * alloc_free_mem_region - find a free region relative to @base
-> + * @base: resource that will parent the new resource
-> + * @size: size in bytes of memory to allocate from @base
-> + * @align: alignment requirements for the allocation
-> + * @name: resource name
-> + *
-> + * Buses like CXL, that can dynamically instantiate new memory regions,
-> + * need a method to allocate physical address space for those regions.
-> + * Allocate and insert a new resource to cover a free, unclaimed by a
-> + * descendant of @base, range in the span of @base.
-> + */
-> +struct resource *alloc_free_mem_region(struct resource *base,
-> +				       unsigned long size, unsigned long align,
-> +				       const char *name)
-> +{
-> +	/* Default of ascending direction and insert resource */
-> +	unsigned long flags = 0;
-> +
-> +	return get_free_mem_region(NULL, base, size, align, name,
-> +				   IORES_DESC_NONE, flags);
-> +}
-> +EXPORT_SYMBOL_NS_GPL(alloc_free_mem_region, CXL);
-> +#endif /* CONFIG_GET_FREE_REGION */
->  
->  static int __init strict_iomem(char *str)
->  {
-> diff --git a/mm/Kconfig b/mm/Kconfig
-> index 169e64192e48..a5b4fee2e3fd 100644
-> --- a/mm/Kconfig
-> +++ b/mm/Kconfig
-> @@ -994,9 +994,14 @@ config HMM_MIRROR
->  	bool
->  	depends on MMU
->  
-> +config GET_FREE_REGION
-> +	depends on SPARSEMEM
-> +	bool
-> +
->  config DEVICE_PRIVATE
->  	bool "Unaddressable device memory (GPU memory, ...)"
->  	depends on ZONE_DEVICE
-> +	select GET_FREE_REGION
->  
->  	help
->  	  Allows creation of struct pages to represent unaddressable device
-> 
+>   drivers/acpi/video_detect.c | 24 ++++++++++++++++++++----
+>   include/acpi/video.h        |  5 +++++
+>   2 files changed, 25 insertions(+), 4 deletions(-)
+>
+> diff --git a/drivers/acpi/video_detect.c b/drivers/acpi/video_detect.c
+> index becc198e4c22..4346c990022d 100644
+> --- a/drivers/acpi/video_detect.c
+> +++ b/drivers/acpi/video_detect.c
+> @@ -17,8 +17,9 @@
+>    * Otherwise vendor specific drivers like thinkpad_acpi, asus-laptop,
+>    * sony_acpi,... can take care about backlight brightness.
+>    *
+> - * Backlight drivers can use acpi_video_get_backlight_type() to determine
+> - * which driver should handle the backlight.
+> + * Backlight drivers can use acpi_video_get_backlight_type() to determine which
+> + * driver should handle the backlight. RAW/GPU-driver backlight drivers must
+> + * use the acpi_video_backlight_use_native() helper for this.
+>    *
+>    * If CONFIG_ACPI_VIDEO is neither set as "compiled in" (y) nor as a module (m)
+>    * this file will not be compiled and acpi_video_get_backlight_type() will
+> @@ -548,9 +549,10 @@ static int acpi_video_backlight_notify(struct notifier_block *nb,
+>    * Arguably the native on win8 check should be done first, but that would
+>    * be a behavior change, which may causes issues.
+>    */
+> -enum acpi_backlight_type acpi_video_get_backlight_type(void)
+> +static enum acpi_backlight_type __acpi_video_get_backlight_type(bool native)
+>   {
+>   	static DEFINE_MUTEX(init_mutex);
+> +	static bool native_available;
+>   	static bool init_done;
+>   	static long video_caps;
+>   
+> @@ -570,6 +572,8 @@ enum acpi_backlight_type acpi_video_get_backlight_type(void)
+>   			backlight_notifier_registered = true;
+>   		init_done = true;
+>   	}
+> +	if (native)
+> +		native_available = true;
+>   	mutex_unlock(&init_mutex);
+>   
+>   	if (acpi_backlight_cmdline != acpi_backlight_undef)
+> @@ -581,13 +585,25 @@ enum acpi_backlight_type acpi_video_get_backlight_type(void)
+>   	if (!(video_caps & ACPI_VIDEO_BACKLIGHT))
+>   		return acpi_backlight_vendor;
+>   
+> -	if (acpi_osi_is_win8() && backlight_device_get_by_type(BACKLIGHT_RAW))
+> +	if (acpi_osi_is_win8() &&
+> +	    (native_available || backlight_device_get_by_type(BACKLIGHT_RAW)))
+>   		return acpi_backlight_native;
+>   
+>   	return acpi_backlight_video;
 
 
+So I ran into a minor problem when testing the NVIDIA proprietary driver 
+against this change set, after checking 
+acpi_video_backlight_use_native() before registering the NVIDIA 
+proprietary driver's backlight handler. Namely, for the case where a 
+user installs the NVIDIA proprietary driver after the video.ko has 
+already registered its backlight handler, we end up with both the 
+firmware and native handlers registered simultaneously, since the ACPI 
+video driver no longer unregisters its backlight handler. In this state, 
+desktop environments end up preferring the registered but non-functional 
+firmware handler from video.ko. (Manually twiddling the sysfs interface 
+for the native NVIDIA handler works fine.) When rebooting the system 
+after installing the NVIDIA proprietary driver, it is able to register 
+its native handler before the delayed work to register the ACPI video 
+backlight handler fires, so we end up with only one (native) handler, 
+and userspace is happy.
+
+Maybe this will be moot later on, when the existing sysfs interface is 
+deprecated, and it probably isn't a huge deal, since a reboot fixes 
+things (I imagine installing an in-tree DRM/KMS driver on an already 
+running kernel isn't really a thing, which is why this isn't a problem 
+with the in-tree drivers), but would it make sense to unregister the 
+ACPI video backlight handler here before returning 
+acpi_backlight_native? That way, we'll briefly end up with zero 
+backlight handlers rather than briefly ending up with two of them. Not 
+sure if that's really any better, though.
+
+
+>   }
+> +
+> +enum acpi_backlight_type acpi_video_get_backlight_type(void)
+> +{
+> +	return __acpi_video_get_backlight_type(false);
+> +}
+>   EXPORT_SYMBOL(acpi_video_get_backlight_type);
+>   
+> +bool acpi_video_backlight_use_native(void)
+> +{
+> +	return __acpi_video_get_backlight_type(true) == acpi_backlight_native;
+> +}
+> +EXPORT_SYMBOL(acpi_video_backlight_use_native);
+> +
+>   /*
+>    * Set the preferred backlight interface type based on DMI info.
+>    * This function allows DMI blacklists to be implemented by external
+> diff --git a/include/acpi/video.h b/include/acpi/video.h
+> index db8548ff03ce..4705e339c252 100644
+> --- a/include/acpi/video.h
+> +++ b/include/acpi/video.h
+> @@ -56,6 +56,7 @@ extern void acpi_video_unregister(void);
+>   extern int acpi_video_get_edid(struct acpi_device *device, int type,
+>   			       int device_id, void **edid);
+>   extern enum acpi_backlight_type acpi_video_get_backlight_type(void);
+> +extern bool acpi_video_backlight_use_native(void);
+>   extern void acpi_video_set_dmi_backlight_type(enum acpi_backlight_type type);
+>   /*
+>    * Note: The value returned by acpi_video_handles_brightness_key_presses()
+> @@ -77,6 +78,10 @@ static inline enum acpi_backlight_type acpi_video_get_backlight_type(void)
+>   {
+>   	return acpi_backlight_vendor;
+>   }
+> +static inline bool acpi_video_backlight_use_native(void)
+> +{
+> +	return true;
+> +}
+>   static inline void acpi_video_set_dmi_backlight_type(enum acpi_backlight_type type)
+>   {
+>   }
