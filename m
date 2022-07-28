@@ -1,55 +1,120 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BCB7581C69
-	for <lists+nouveau@lfdr.de>; Wed, 27 Jul 2022 01:31:17 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C616584632
+	for <lists+nouveau@lfdr.de>; Thu, 28 Jul 2022 21:27:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C5B3010F55D;
-	Tue, 26 Jul 2022 23:31:13 +0000 (UTC)
-X-Original-To: Nouveau@lists.freedesktop.org
-Delivered-To: Nouveau@lists.freedesktop.org
-Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
- [IPv6:2607:f8b0:4864:20::e35])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B215611A6BC;
- Tue, 26 Jul 2022 23:31:11 +0000 (UTC)
-Received: by mail-vs1-xe35.google.com with SMTP id 66so12309684vse.4;
- Tue, 26 Jul 2022 16:31:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=to:subject:message-id:date:from:mime-version:from:to:cc;
- bh=tbh/X7Ht4Dx204/45EXibcskG7KG366458+3TR9yAn0=;
- b=ZHaRqJhclgp8g+mJJ1ZmPN4jMxZLul658/RFSgwSX5XGmHVNbvckthTLnz548ruTzp
- 89/60uqqvuJujhUsfmHx/moY6QedUcjAliBthGo1TGeJWoOMQKpU0Ws0XaxmcOHEZ03M
- SiuFmL9ughIShNHyBFAJjXaSn8vDpJHi7u2VJQ0dr8Gc68O2jC+52tSrr/pkF4QliG4h
- dhx/4U18vRL5ljiL9Ic+Z2kIgyK0P0A0tgpfX6zh+yeyeZHgCM9WJU9n/GDWkSSEPqtW
- Io8Oc7wj3SQzhaOf2M+MtPktr7BrOBae8/+dBkNlvRCitVTc5VDJYZ0qH341z5n1Os44
- 6KwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc;
- bh=tbh/X7Ht4Dx204/45EXibcskG7KG366458+3TR9yAn0=;
- b=7bA/BWnYe1/vi6vUB4XHS0ksmfSf5utOtxAQakKRw8wJAvLLjnegUv5ZZ7OhpXTClD
- bYzjCARWhMTDG5aeh7b5XRzLPlODkK4cRyO3lttWiJY0NJPHLB5qIBQk+hQ0GEETXUuA
- dwoqctUv5PTx8dotCaiqgGl/htobTke7UT1iFDb0XGW+Ay111n1Y+pYzYikjSxmNjOnw
- MK+komxf2UDuZC9zx/doDSMcTYQsDZIyRGlSHgOmc3zjR0hMVU+9frrkdOf9xWGOoVZA
- ht/yhVTJp8f3ImXobnnxZV3qKpDrf07xPoDtjYfXjOj8EzYYlvkKojsZezBNzuj4OecL
- jbBg==
-X-Gm-Message-State: AJIora9fCous4jCZGjcBlR1zpkg68V85Y2zCm/U2vVtUGN1yx0EItDHg
- nnD57FM3VOQwS91/Hy4FaQDpqAOiGBUEtM8qq7pzvUFJldA=
-X-Google-Smtp-Source: AGRyM1s1H0u3nJFZ6XwMRyiiKa0jXD9vGarWKkES/dzsgA6n+1JGubF4i9n0yoEoBM9QyfAdo1FxV6eL52QbON8jOQQ=
-X-Received: by 2002:a67:eb83:0:b0:358:7772:c5a5 with SMTP id
- e3-20020a67eb83000000b003587772c5a5mr1619256vso.75.1658878270106; Tue, 26 Jul
- 2022 16:31:10 -0700 (PDT)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BF99310F191;
+	Thu, 28 Jul 2022 19:27:51 +0000 (UTC)
+X-Original-To: nouveau@lists.freedesktop.org
+Delivered-To: nouveau@lists.freedesktop.org
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2075.outbound.protection.outlook.com [40.107.94.75])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 815BE10F191;
+ Thu, 28 Jul 2022 19:27:50 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=LmD2EG5vmWAU6o0H6ntJQidaWPGa/oSHBfXkj7JdRie+LtN+i+R5bqQgRhFupmxivujpfDowobNTGC6V9Jc+cz6/0/ogjB12tj/CCBjlPrmws4ecv/YkmU2ahG2yW8uJclKfVhJ83wht23snmjK4L3UAt8PB9vq/5PmIvKeEPmX1Rsul4lEM7qGSGvSSeXgWaP98/FkCHTD2SlJmJa+xs55YdTlIoWz+0AkVgcDM3TR50XcW2lxWTaiubZIHPVX+XMd7myg494qvGhGe++MOidbqg5h8oGsWw0Q3qf3Vj/k9xZjp4Te6UjAHi8843JGUeZhS0LysiADsiUVZT6N2PQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2DbCus2YGHJ2qkQsfhKA+NOKscO5ZDR3eblmwZ8EuxQ=;
+ b=TkkvaBjoROW0KtCF0sJdIZsXQJ37WH2arJg06zprvXWAVRF1uB7JIadPbxke5wZ4qOJGxvPNsafCleISuBls2YY6KQWe8FVphc1ZwMQ0yqUF/eLClbmC4FzbpvFZuP2LKgq2YvdhECPKehHiAHCG0C9Ti3wTztsRuu86e3TjsA0IDXMj0GwAJqz7hBym0H7q2YK+vHpTugkqewI+IlludYNGLvP77nAV/PVNRl0bN0klzTQXqiSt6S4weQRQuXcEnI2WDHRWg/4LPkbsWMTsWVTnjN7YEQg/iCNQ33u1DRMwbcDsxUUDgazrB2KYvXI8hzBVhSA0ngxDTVgBVHhTzw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2DbCus2YGHJ2qkQsfhKA+NOKscO5ZDR3eblmwZ8EuxQ=;
+ b=dfH/XTTLvrDBsmvyHopp/Rb+BHreEiDV2Vqu1MXOG8s1+5lW19H0XFfSUvb8A332Iij7UC2fxrYS9+XyRMuMivDkkhIVhr1mS+Zon0+bCg7DA2PZhyH2FIhNkYS6z/k3IXkrEVVx0zW71f+sAWrMZ1wAzQY2g1DZe059ADkNOnyO9Bs7H6mUjUCfI0c0gzZbkrKzXCf1iu+6saMukk22UGjSk7UlrhSzVpnHrzmlG6B6+lUlLHRGL7fn2X4mvgXw/tjFpl2xRf5MIQFNjjZTCcrthrq5B00A/AvLWZEMhPqxc2+bHh47qQ4ODCcs1ftnI9EicyZ5wvxfmjE2nU0cGw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from MN0PR12MB6150.namprd12.prod.outlook.com (2603:10b6:208:3c6::11)
+ by BN6PR12MB1764.namprd12.prod.outlook.com (2603:10b6:404:105::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5482.11; Thu, 28 Jul
+ 2022 19:27:48 +0000
+Received: from MN0PR12MB6150.namprd12.prod.outlook.com
+ ([fe80::30b4:54b4:c046:2e14]) by MN0PR12MB6150.namprd12.prod.outlook.com
+ ([fe80::30b4:54b4:c046:2e14%3]) with mapi id 15.20.5482.006; Thu, 28 Jul 2022
+ 19:27:48 +0000
+Message-ID: <84ec4ad5-a580-1a43-27ed-d47dbdf7d1bc@nvidia.com>
+Date: Thu, 28 Jul 2022 12:27:45 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To: Alistair Popple <apopple@nvidia.com>, bskeggs@redhat.com
+References: <20220720062745.960701-1-apopple@nvidia.com>
+From: Ralph Campbell <rcampbell@nvidia.com>
+In-Reply-To: <20220720062745.960701-1-apopple@nvidia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BYAPR02CA0021.namprd02.prod.outlook.com
+ (2603:10b6:a02:ee::34) To MN0PR12MB6150.namprd12.prod.outlook.com
+ (2603:10b6:208:3c6::11)
 MIME-Version: 1.0
-From: Dave Airlie <airlied@gmail.com>
-Date: Wed, 27 Jul 2022 09:30:58 +1000
-Message-ID: <CAPM=9ty0R37q0mohBr_CegpYLXK2=fAH54QfAsMhHfPygTsdQA@mail.gmail.com>
-To: dri-devel <dri-devel@lists.freedesktop.org>, 
- nouveau <Nouveau@lists.freedesktop.org>, Ben Skeggs <skeggsb@gmail.com>, 
- Lyude Paul <lyude@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: [Nouveau] [git pull] nouveau display patches
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: d281fe8d-bf19-4256-e4fb-08da70cf4165
+X-MS-TrafficTypeDiagnostic: BN6PR12MB1764:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: yN9pQ+OPGzYZ8T1JrsiyNZi7gTiUDI7OYl5Vc5AMnosSjODh7TPTWnWzcRjSimnJ3Ik6AtLE7barBcafrnOLJUh0RT2n6qC/EgZ+SJ4e8LNgyY+lalyATJV98JLiFMxz5TJgGcLq+95u8KtHYDvqltOZg4oYF3GUpDkkwO6mYVr0mn2hXNxcvCvjZ1TKiMjl9vtRZM2Fa1figqzIBor3wKTcO+Sz6gWoQmx7eZUV9hMZ73CqTBhbM2iEo8GVEpaxvRbKtxZFJQdVCIHHTyDFYWmSpehceVfHuG9gCs/n84pz+zI7iGiKWcFLea5mCmIfOqLdkRaLahewnN/kmYV3GN91LyFQPeSXd19aiedDYgx3qswiOf9C44Rh4kJDh52QqWOqF1Sle2RR5bccq7Z89p1hfR+MJhlZoEhjf+ayUC6Dj40fvTRgd5CW8Mcyan5IsFBc64ixBazmsR3vC4Eo+PkfvkFpwLqoBAXHB6brQLiCxAYEulqMkpbd2/Qc1UWgiMqqh3LblpWn9jfjhAlslW4EwyBTNcC6xlf0p0z2hkrwammBEqUVMJuL1t2i6H2gl+3AQL/OMKUD5H+3B3BqfVrVrhAIKdWdgerfjibpECMcfqU+Ry11JgMlAMHKajolShyxnS0ur0F6Sqv80FXYVpB4IIgY3VZ1zNe4KDh/jMbA29j0u57e3k0kihqXviovUEaqrjINGeWJAwyW50hEIIyUrg9bD8Ba29jDCUIw3/tdd42b0my39MZdeyaX9sZfLug8YmQdhJ18UpvMVDOWb4tqyReMk8kLwTpy8XXU/a8czFSof8NwkV4SDBpEpcwI8KYOjsg/Ehl2QmlQIuSsUOnnthjC7P7MlhNU+xDVV3ulQPX3Ct2tSv1NXENb8HTQ
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MN0PR12MB6150.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230016)(4636009)(346002)(376002)(39860400002)(366004)(396003)(136003)(4326008)(66556008)(66946007)(8676002)(53546011)(478600001)(2906002)(83380400001)(6506007)(66476007)(86362001)(6666004)(41300700001)(4744005)(6486002)(5660300002)(6512007)(107886003)(31696002)(2616005)(8936002)(316002)(31686004)(186003)(36756003)(38100700002)(43740500002)(45980500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aFRvVUlSZ1J0MzgwVFhQTjk4ZHEzemhxSDlFOGxuZWp0cmhLUlVUR3lqYWcr?=
+ =?utf-8?B?UXVNTlNqMFdRbVNCZ0VTTVF2WmVFdGZNcHNvK0JJRTRvempVYS9abG9qVm1k?=
+ =?utf-8?B?NDVTdW53dXFCVHRlaWMzMEtxREhZaFBua1M0bGExeUhNTWw1VjNBUktrUkZM?=
+ =?utf-8?B?NFBNd1JpaFJOUlQxUUpobFFtTSs5a1JnQnZBdFhTL0ZGUytmdzlkakZvWXhF?=
+ =?utf-8?B?cUtDMjZUVUJQZnZvaHhHRitpV0t4Q1RJV2xXVS9UYkNJNkdESVVpQXlpWVBj?=
+ =?utf-8?B?b0w4T0NMNmlPamt4SDZDTzVyL1VlbUNjRlNnYnkrZ0oxOE8ydm9lREZHTFpY?=
+ =?utf-8?B?ZGtJajJ6allSRGJ5R3N1RjZuOUdvQ2h4SGtVcG0rSDMweTViREw2RjA5OE1y?=
+ =?utf-8?B?ejZVOE5adnRwKzdFMEovZ2hrVjF0Y3pUSWlaVGN4blFZNERvMzIxNlM5c0FY?=
+ =?utf-8?B?czE2QUtoYkhpNyt6OFBLdThnbkEyMFBHZGtuUWYvUy9QbXYyclNuZjZOdzNQ?=
+ =?utf-8?B?cnZHbW9BaGx4bzNMdDAvdkgzSnhuT0MwYW1xN2JsZzFTRHFjVTc2VEN2c1My?=
+ =?utf-8?B?Z2JDRmRyV3VxM05hU0t2QTdQVFV2aUVrWUZOUjl6U3E3ei9wVWtFZXdhSk9o?=
+ =?utf-8?B?bU55U3JnWEdraFBCY2ROeFZsVE1oTWh6NUV4M0pqdzhMU0xFOWZNTks5amFx?=
+ =?utf-8?B?a2F4aVVYWWhPNTlUSlUwQk9CVk4vZGU4N2EwUm5VUlRZMXpQbEl6MkpFeU5T?=
+ =?utf-8?B?L1dKNzZUZjVTTmNKVStqQ3RBOFpDNHBheXo4T3F5WUd3bDlxYTE1M05zSkFZ?=
+ =?utf-8?B?RzA2NWhXYk9QSHdBN0pBaGY3azFTY1hENGo1L3VsMG4vNXIxK2tFeWhlMTk0?=
+ =?utf-8?B?S2N6eFJnZUZqejFrazdaOVU4Z3MySGd0V1haanlTdjFQMVlIWnd1NE52cXBo?=
+ =?utf-8?B?dVVrZHAwWXJVb2Z1NDg5LzA1UGlRWFZUQVlIdHFJMElEQzRsYnBka0FaYWQ3?=
+ =?utf-8?B?WVRMVTA2TUpOeW40ZnBWMW1QME9ZWjl4eHZsa2FXaUZaYkxJQzN6aktLR3lU?=
+ =?utf-8?B?Z3FQenV1ZFoxbjdrdmdEVmxwTklRVjJBSkNiU3B1NU1YbzRhOG01NGpRWjBh?=
+ =?utf-8?B?K0Z4LzhFakFLVmFic1IrcWdhRW9wbmdjd05jYkVLb2xRQjliWTJSRnQzOW5v?=
+ =?utf-8?B?em1lRC9KOWhQNUpDRVNQbVRkT2pJbTUrMzJJbG96MmZ1TWc3eUIwOTdoQXZv?=
+ =?utf-8?B?eVVNeDVwUGpidy9YelZYWkF6QmczOXBMUnhFVEpTOE94NStySmN2RGozSUw4?=
+ =?utf-8?B?ZlZXVkhZZi8xV1hLVndhWG51TzNKRkJ5VTNtdjhtaXAvTDhQdEpsSW4zZUIz?=
+ =?utf-8?B?VWlOa3c0WWJqNHRWVThPaGU5VThUekY3QURBTGRIa2cwV0ZaalRQeDBBSFNz?=
+ =?utf-8?B?RVEwcTFGNDc1djhZQXZzejVPNGRQY1lwWUZmdlNvSktEOTRZYTcvL0pIbUxo?=
+ =?utf-8?B?dlpWblI1dWhXMjhLVko2RTVFMTVEWmxOSDlqZVVGV0t3NURSbkhXYUZpRTBv?=
+ =?utf-8?B?T1hTd1ZId21LRkJkSDdZMzYyYmhjSFA5ZXd1dTk2WlFvOHdkOVpLNExXMzMw?=
+ =?utf-8?B?Mlp4OHlXY3VNdzEyNE1FbEI5KzVTVW1VaUp5ZU5iK2FkaTM2SFBpazdPS04r?=
+ =?utf-8?B?UFl0R1BLUzIyQUVpNGx4RlJzU0FrNDFTM0Q1SUxnVUpPeEdQTVpEZ3ovNFNT?=
+ =?utf-8?B?SWZVS2ZYRWRtOWUvdUlGT21WOHVqRFJyTlk3Q3pmNmxzU0Jad0o4WGJVaEk5?=
+ =?utf-8?B?eWE0RXNMeFZuSmdKS01LWkV5bmsyemo5OVpLdGFLcWk0VVRBQ3pKNzByU0hF?=
+ =?utf-8?B?M1hXQzVxUnMwQnZTVVJGbHhoTnhHT0I4OU1VTnp3WXgvT2JndjN5aS9EaTVL?=
+ =?utf-8?B?dFZnK3RqQXE3MzVlczArbkFJOEVCcDNNZ2Y5Q2FMSGo0K2txUW9xRlB0S3d6?=
+ =?utf-8?B?UTBMSTdXTmhZaW5aWlVPK045WUw1Sm90Uy96cE1ER2JuaXB5YzcxRkxsNU9z?=
+ =?utf-8?B?OFpwV2Y0a1dUdmxnZFBIRWpZUnkrNHRIY2drbVVBVDJxdzkzcXZNZVU4UUhH?=
+ =?utf-8?B?QzlQYmYzN2t5NXRVRzZrUkpMb2svVDRMV2pwYldIdjU3SmV4MEFjUEgzMkZL?=
+ =?utf-8?Q?he+vMQaHG91soJF5Z2LDhmM=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d281fe8d-bf19-4256-e4fb-08da70cf4165
+X-MS-Exchange-CrossTenant-AuthSource: MN0PR12MB6150.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2022 19:27:48.6116 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: crNsEkYIQ3RNY0/LxMHSEkgC5zr2wL4W54/MTIzb2vcgRkAQW8VC3D10D55WrqPkMQod1NtAFfKJOHGF0GuYuA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR12MB1764
+Subject: Re: [Nouveau] [PATCH] nouveau/svm: Fix to migrate all requested
+ pages
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,316 +126,26 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, daniel@ffwll.ch
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Just to work in the process, I've pulled a bunch of patches Lyude
-tested, that rework some of the nouveau display code.
+On 7/19/22 23:27, Alistair Popple wrote:
 
-Dave.
+> Users may request that pages from an OpenCL SVM allocation be migrated
+> to the GPU with clEnqueueSVMMigrateMem(). In Nouveau this will call into
+> nouveau_dmem_migrate_vma() to do the migration. If the total range to be
+> migrated exceeds SG_MAX_SINGLE_ALLOC the pages will be migrated in
+> chunks of size SG_MAX_SINGLE_ALLOC. However a typo in updating the
+> starting address means that only the first chunk will get migrated.
+>
+> Fix the calculation so that the entire range will get migrated if
+> possible.
+>
+> Signed-off-by: Alistair Popple <apopple@nvidia.com>
+> Fixes: e3d8b0890469 ("drm/nouveau/svm: map pages after migration")
 
-topic/nouveau-misc-2022-07-27:
-drm/nouveau-misc: display patches.
+Thanks for fixing this!
+Reviewed-by: Ralph Campbell <rcampbell@nvidia.com>
 
-These are just some precursor and cleanup display patches from Ben,
-tested by Lyude.
-The following changes since commit 89ed996b888faaf11c69bb4cbc19f21475c9050e:
-
-  drm/nouveau/kms/nv50-: remove unused functions (2022-07-13 13:57:15 +1000)
-
-are available in the Git repository at:
-
-  git://anongit.freedesktop.org/drm/drm tags/topic/nouveau-misc-2022-07-27
-
-for you to fetch changes up to dfc4005f8c172eea359f9db08c3b2b0ff0153699:
-
-  drm/nouveau/disp: move DAC load detection method (2022-07-27 09:05:49 +1000)
-
-----------------------------------------------------------------
-drm/nouveau-misc: display patches.
-
-These are just some precursor and cleanup display patches from Ben,
-tested by Lyude.
-
-----------------------------------------------------------------
-Ben Skeggs (17):
-      drm/nouveau/disp: collapse nvkm_dp into nvkm_outp
-      drm/nouveau/disp: clean up nvkm_outp constructors
-      drm/nouveau/disp: collapse nv50_disp_func into nvkm_disp_func
-      drm/nouveau/disp: collapse nv50_disp into nvkm_disp
-      drm/nouveau/disp: add common class handling between <nv50 and >=nv50
-      drm/nouveau/disp: merge head/outp/ior code into chipset files
-      drm/nouveau/disp: group supervisor-related struct members
-      drm/nouveau/disp: merge nv50_disp_new_() and nvkm_disp_new()
-      drm/nouveau/disp: replace hda func pointer check with flag
-      drm/nouveau/disp: split sor dp funcs out to their own struct
-      drm/nouveau/disp: split sor hda funcs out to their own struct
-      drm/nouveau/disp: add common channel class handling
-      drm/nouveau/disp: add connector class
-      drm/nouveau/disp: add conn method to query HPD pin status
-      drm/nouveau/disp: add supervisor mutex
-      drm/nouveau/disp: add output class
-      drm/nouveau/disp: move DAC load detection method
-
- drivers/gpu/drm/nouveau/dispnv50/base507c.c        |   17 +-
- drivers/gpu/drm/nouveau/dispnv50/core507d.c        |    4 +-
- drivers/gpu/drm/nouveau/dispnv50/curs507a.c        |    6 +-
- drivers/gpu/drm/nouveau/dispnv50/disp.c            |   43 +-
- drivers/gpu/drm/nouveau/dispnv50/oimm507b.c        |    6 +-
- drivers/gpu/drm/nouveau/dispnv50/ovly507e.c        |   17 +-
- drivers/gpu/drm/nouveau/dispnv50/wimmc37b.c        |    7 +-
- drivers/gpu/drm/nouveau/dispnv50/wndw.c            |    9 -
- drivers/gpu/drm/nouveau/dispnv50/wndw.h            |    3 -
- drivers/gpu/drm/nouveau/dispnv50/wndwc37e.c        |    7 +-
- drivers/gpu/drm/nouveau/dispnv50/wndwc57e.c        |    1 -
- drivers/gpu/drm/nouveau/include/nvif/cl5070.h      |    8 -
- drivers/gpu/drm/nouveau/include/nvif/cl507a.h      |   12 -
- drivers/gpu/drm/nouveau/include/nvif/cl507b.h      |   12 -
- drivers/gpu/drm/nouveau/include/nvif/cl507c.h      |   13 -
- drivers/gpu/drm/nouveau/include/nvif/cl507d.h      |   12 -
- drivers/gpu/drm/nouveau/include/nvif/cl507e.h      |   13 -
- drivers/gpu/drm/nouveau/include/nvif/class.h       |  141 +--
- drivers/gpu/drm/nouveau/include/nvif/clc37b.h      |   11 -
- drivers/gpu/drm/nouveau/include/nvif/clc37e.h      |   13 -
- drivers/gpu/drm/nouveau/include/nvif/conn.h        |   18 +
- drivers/gpu/drm/nouveau/include/nvif/disp.h        |    2 +
- drivers/gpu/drm/nouveau/include/nvif/if0010.h      |   13 +
- drivers/gpu/drm/nouveau/include/nvif/if0011.h      |   23 +
- drivers/gpu/drm/nouveau/include/nvif/if0012.h      |   23 +
- drivers/gpu/drm/nouveau/include/nvif/if0014.h      |   13 +
- drivers/gpu/drm/nouveau/include/nvif/outp.h        |   14 +
- drivers/gpu/drm/nouveau/include/nvif/printf.h      |    9 +
- drivers/gpu/drm/nouveau/include/nvkm/engine/disp.h |   43 +-
- .../gpu/drm/nouveau/include/nvkm/subdev/bios/dcb.h |    1 +
- drivers/gpu/drm/nouveau/nouveau_bios.c             |    2 +
- drivers/gpu/drm/nouveau/nouveau_connector.c        |   10 +
- drivers/gpu/drm/nouveau/nouveau_connector.h        |    3 +-
- drivers/gpu/drm/nouveau/nouveau_dp.c               |   12 +-
- drivers/gpu/drm/nouveau/nouveau_encoder.h          |    3 +-
- drivers/gpu/drm/nouveau/nvif/Kbuild                |    2 +
- .../{nvkm/engine/disp/rootga102.c => nvif/conn.c}  |   60 +-
- drivers/gpu/drm/nouveau/nvif/disp.c                |   61 +-
- .../{nvkm/engine/disp/rootg94.c => nvif/outp.c}    |   65 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild    |  115 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/base.c    |  139 ++-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/baseg84.c |   74 --
- .../gpu/drm/nouveau/nvkm/engine/disp/basegf119.c   |  108 --
- .../gpu/drm/nouveau/nvkm/engine/disp/basegp102.c   |   32 -
- .../gpu/drm/nouveau/nvkm/engine/disp/basenv50.c    |  119 --
- .../gpu/drm/nouveau/nvkm/engine/disp/capsgv100.c   |   60 -
- drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.c    |  275 +++++
- drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.h    |  135 +++
- .../gpu/drm/nouveau/nvkm/engine/disp/changf119.c   |   62 --
- .../gpu/drm/nouveau/nvkm/engine/disp/changv100.c   |   34 -
- .../gpu/drm/nouveau/nvkm/engine/disp/channv50.c    |  364 ------
- .../gpu/drm/nouveau/nvkm/engine/disp/channv50.h    |  193 ----
- drivers/gpu/drm/nouveau/nvkm/engine/disp/conn.c    |    6 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/conn.h    |    4 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/coreg84.c |  111 --
- drivers/gpu/drm/nouveau/nvkm/engine/disp/coreg94.c |   57 -
- .../gpu/drm/nouveau/nvkm/engine/disp/coregf119.c   |  231 ----
- .../gpu/drm/nouveau/nvkm/engine/disp/coregk104.c   |  126 ---
- .../gpu/drm/nouveau/nvkm/engine/disp/coregp102.c   |   70 --
- .../gpu/drm/nouveau/nvkm/engine/disp/coregv100.c   |  207 ----
- .../gpu/drm/nouveau/nvkm/engine/disp/corenv50.c    |  234 ----
- .../gpu/drm/nouveau/nvkm/engine/disp/cursgf119.c   |   32 -
- .../gpu/drm/nouveau/nvkm/engine/disp/cursgp102.c   |   32 -
- .../gpu/drm/nouveau/nvkm/engine/disp/cursgv100.c   |   81 --
- .../gpu/drm/nouveau/nvkm/engine/disp/cursnv50.c    |   64 --
- .../gpu/drm/nouveau/nvkm/engine/disp/dacgf119.c    |   70 --
- drivers/gpu/drm/nouveau/nvkm/engine/disp/dacnv50.c |  121 --
- .../gpu/drm/nouveau/nvkm/engine/disp/dmacgf119.c   |   96 --
- .../gpu/drm/nouveau/nvkm/engine/disp/dmacgp102.c   |   64 --
- .../gpu/drm/nouveau/nvkm/engine/disp/dmacgv100.c   |   79 --
- .../gpu/drm/nouveau/nvkm/engine/disp/dmacnv50.c    |  137 ---
- drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c      |  457 ++++----
- drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.h      |   33 -
- drivers/gpu/drm/nouveau/nvkm/engine/disp/g84.c     |  291 ++++-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c     |  341 +++++-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/ga102.c   |  120 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/gf119.c   | 1041 +++++++++++++++++-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/gk104.c   |  275 ++++-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/gk110.c   |   23 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/gm107.c   |   78 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/gm200.c   |  146 ++-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/gp100.c   |   52 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/gp102.c   |  144 ++-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/gt200.c   |   73 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/gt215.c   |  172 ++-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c   |  883 ++++++++++++++-
- .../gpu/drm/nouveau/nvkm/engine/disp/hdagf119.c    |   62 --
- .../gpu/drm/nouveau/nvkm/engine/disp/hdagt215.c    |   51 -
- .../gpu/drm/nouveau/nvkm/engine/disp/hdagv100.c    |   30 -
- drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmig84.c |   91 --
- .../gpu/drm/nouveau/nvkm/engine/disp/hdmigf119.c   |   82 --
- .../gpu/drm/nouveau/nvkm/engine/disp/hdmigk104.c   |   82 --
- .../gpu/drm/nouveau/nvkm/engine/disp/hdmigm200.c   |   36 -
- .../gpu/drm/nouveau/nvkm/engine/disp/hdmigt215.c   |   91 --
- .../gpu/drm/nouveau/nvkm/engine/disp/hdmigv100.c   |   84 --
- drivers/gpu/drm/nouveau/nvkm/engine/disp/head.c    |    4 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/head.h    |   19 +-
- .../gpu/drm/nouveau/nvkm/engine/disp/headgf119.c   |  104 --
- .../gpu/drm/nouveau/nvkm/engine/disp/headgv100.c   |  105 --
- .../gpu/drm/nouveau/nvkm/engine/disp/headnv04.c    |   74 --
- .../gpu/drm/nouveau/nvkm/engine/disp/headnv50.c    |   99 --
- drivers/gpu/drm/nouveau/nvkm/engine/disp/ior.c     |   10 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/ior.h     |   95 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c   |   40 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp89.c   |   54 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/nv04.c    |   55 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.c    | 1159 +++++++++++++++++---
- drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.h    |  102 --
- .../gpu/drm/nouveau/nvkm/engine/disp/oimmgf119.c   |   32 -
- .../gpu/drm/nouveau/nvkm/engine/disp/oimmgp102.c   |   32 -
- .../gpu/drm/nouveau/nvkm/engine/disp/oimmnv50.c    |   64 --
- drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.c    |   28 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.h    |   41 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/ovlyg84.c |   71 --
- .../gpu/drm/nouveau/nvkm/engine/disp/ovlygf119.c   |   95 --
- .../gpu/drm/nouveau/nvkm/engine/disp/ovlygk104.c   |   97 --
- .../gpu/drm/nouveau/nvkm/engine/disp/ovlygp102.c   |   32 -
- .../gpu/drm/nouveau/nvkm/engine/disp/ovlygt200.c   |   74 --
- .../gpu/drm/nouveau/nvkm/engine/disp/ovlynv50.c    |  107 --
- .../gpu/drm/nouveau/nvkm/engine/disp/piocgf119.c   |   78 --
- .../gpu/drm/nouveau/nvkm/engine/disp/piocnv50.c    |   87 --
- .../gpu/drm/nouveau/nvkm/engine/disp/piornv50.c    |  139 ---
- drivers/gpu/drm/nouveau/nvkm/engine/disp/priv.h    |   75 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/rootg84.c |   55 -
- .../gpu/drm/nouveau/nvkm/engine/disp/rootgf119.c   |   55 -
- .../gpu/drm/nouveau/nvkm/engine/disp/rootgk104.c   |   55 -
- .../gpu/drm/nouveau/nvkm/engine/disp/rootgk110.c   |   55 -
- .../gpu/drm/nouveau/nvkm/engine/disp/rootgm107.c   |   55 -
- .../gpu/drm/nouveau/nvkm/engine/disp/rootgm200.c   |   55 -
- .../gpu/drm/nouveau/nvkm/engine/disp/rootgp100.c   |   55 -
- .../gpu/drm/nouveau/nvkm/engine/disp/rootgp102.c   |   55 -
- .../gpu/drm/nouveau/nvkm/engine/disp/rootgt200.c   |   55 -
- .../gpu/drm/nouveau/nvkm/engine/disp/rootgt215.c   |   55 -
- .../gpu/drm/nouveau/nvkm/engine/disp/rootgv100.c   |   53 -
- .../gpu/drm/nouveau/nvkm/engine/disp/rootnv04.c    |   42 +-
- .../gpu/drm/nouveau/nvkm/engine/disp/rootnv50.c    |  140 +--
- .../gpu/drm/nouveau/nvkm/engine/disp/rootnv50.h    |   45 -
- .../gpu/drm/nouveau/nvkm/engine/disp/roottu102.c   |   53 -
- drivers/gpu/drm/nouveau/nvkm/engine/disp/sorg84.c  |   38 -
- drivers/gpu/drm/nouveau/nvkm/engine/disp/sorg94.c  |  302 -----
- .../gpu/drm/nouveau/nvkm/engine/disp/sorga102.c    |  144 ---
- .../gpu/drm/nouveau/nvkm/engine/disp/sorgf119.c    |  208 ----
- .../gpu/drm/nouveau/nvkm/engine/disp/sorgk104.c    |   54 -
- .../gpu/drm/nouveau/nvkm/engine/disp/sorgm107.c    |   80 --
- .../gpu/drm/nouveau/nvkm/engine/disp/sorgm200.c    |  160 ---
- .../gpu/drm/nouveau/nvkm/engine/disp/sorgp100.c    |   93 --
- .../gpu/drm/nouveau/nvkm/engine/disp/sorgt215.c    |   69 --
- .../gpu/drm/nouveau/nvkm/engine/disp/sorgv100.c    |  155 ---
- .../gpu/drm/nouveau/nvkm/engine/disp/sormcp77.c    |   48 -
- .../gpu/drm/nouveau/nvkm/engine/disp/sormcp89.c    |   53 -
- drivers/gpu/drm/nouveau/nvkm/engine/disp/sornv50.c |  106 --
- .../gpu/drm/nouveau/nvkm/engine/disp/sortu102.c    |  129 ---
- drivers/gpu/drm/nouveau/nvkm/engine/disp/tu102.c   |  108 +-
- drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c   |  117 ++
- drivers/gpu/drm/nouveau/nvkm/engine/disp/udisp.c   |  115 ++
- drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c   |  129 +++
- .../gpu/drm/nouveau/nvkm/engine/disp/wimmgv100.c   |   82 --
- .../gpu/drm/nouveau/nvkm/engine/disp/wndwgv100.c   |  184 ----
- 158 files changed, 6386 insertions(+), 8845 deletions(-)
- delete mode 100644 drivers/gpu/drm/nouveau/include/nvif/cl507a.h
- delete mode 100644 drivers/gpu/drm/nouveau/include/nvif/cl507b.h
- delete mode 100644 drivers/gpu/drm/nouveau/include/nvif/cl507c.h
- delete mode 100644 drivers/gpu/drm/nouveau/include/nvif/cl507d.h
- delete mode 100644 drivers/gpu/drm/nouveau/include/nvif/cl507e.h
- delete mode 100644 drivers/gpu/drm/nouveau/include/nvif/clc37b.h
- delete mode 100644 drivers/gpu/drm/nouveau/include/nvif/clc37e.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvif/conn.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvif/if0010.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvif/if0011.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvif/if0012.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvif/if0014.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvif/outp.h
- rename drivers/gpu/drm/nouveau/{nvkm/engine/disp/rootga102.c =>
-nvif/conn.c} (56%)
- rename drivers/gpu/drm/nouveau/{nvkm/engine/disp/rootg94.c =>
-nvif/outp.c} (54%)
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/baseg84.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/basegf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/basegp102.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/basenv50.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/capsgv100.c
- create mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.c
- create mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.h
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/changf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/changv100.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.h
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/coreg84.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/coreg94.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/coregf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/coregk104.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/coregp102.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/coregv100.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/corenv50.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/cursgf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/cursgp102.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/cursgv100.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/cursnv50.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/dacgf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/dacnv50.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/dmacgf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/dmacgp102.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/dmacgv100.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/dmacnv50.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/hdagf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/hdagt215.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/hdagv100.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmig84.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigk104.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigm200.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigt215.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigv100.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/headgf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/headgv100.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/headnv04.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/headnv50.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.h
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/oimmgf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/oimmgp102.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/oimmnv50.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/ovlyg84.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/ovlygf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/ovlygk104.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/ovlygp102.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/ovlygt200.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/ovlynv50.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/piocgf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/piocnv50.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/piornv50.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/rootg84.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/rootgf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/rootgk104.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/rootgk110.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/rootgm107.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/rootgm200.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/rootgp100.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/rootgp102.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/rootgt200.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/rootgt215.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/rootgv100.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/rootnv50.h
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/roottu102.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sorg84.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sorg94.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sorga102.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sorgf119.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sorgk104.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sorgm107.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sorgm200.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sorgp100.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sorgt215.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sorgv100.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sormcp77.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sormcp89.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sornv50.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/sortu102.c
- create mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
- create mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/udisp.c
- create mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/wimmgv100.c
- delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/wndwgv100.c
