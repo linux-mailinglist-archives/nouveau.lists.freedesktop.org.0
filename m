@@ -1,41 +1,41 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A28CB58A266
-	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:44:24 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 43FFF58A26C
+	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:44:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1AA8B12BD6A;
-	Thu,  4 Aug 2022 20:38:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 707B8A700E;
+	Thu,  4 Aug 2022 20:39:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3482C10E21C;
- Thu, 28 Jul 2022 15:27:44 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6215010F044;
+ Thu, 28 Jul 2022 15:38:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1659022064; x=1690558064;
+ t=1659022681; x=1690558681;
  h=message-id:date:mime-version:subject:to:cc:references:
  from:in-reply-to:content-transfer-encoding;
- bh=JzwWzdcMH/oBvl3ZNQC7sRzcLavjBfk1xagrxukoPMI=;
- b=iChbUaxwh5Jyfc1fsqANvHc7J/mNpHQdrix70uhkp4K++PKwfWpKwvtY
- AHn/wxsi5HRKeGP6+7AozhEagpMc+zsRU3a3RAJ4YZNOo3mGb4M98j1YI
- L3cufrPYrLnyFOZP+n28chJ578sQD3c07fu2vUfwClDEN2A1lbWk50obw
- IinIiJbZ82+ErI/RyYZ1R0yvStuZ0Rru4XiJRjczvURcRplzXZgU0vevH
- az5s9GLiFmhNkrqrqwGrZhOKKDAPC5Wr+lhdTh8GeEz/DidCl8JNuNiZ3
- 6jEFyvgPK1droggz8URtskJPJucncVu+JEVozpjS18TfyjfAsLNunMTtn w==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10422"; a="275421541"
-X-IronPort-AV: E=Sophos;i="5.93,198,1654585200"; d="scan'208";a="275421541"
+ bh=e2Fg2wgdrgtQR1FPI42cvDM2MSyGsQEEZ5q8gG6CwMg=;
+ b=Z0/InApaa/HkEW1L928ZK8NW2g1+xnhnR5kwHkhA3Mh3IiSOWEbR2nOs
+ AA45O3EerrXISJrSRu9tg6hK9gyl0vUKuyhVyyNevr8RpmJO6NurHjrRo
+ +z+nsHzLaj8X/AeDAJKl4KobR6Cldc5Crmw9vPVllMUC8bk6sB7uW9YPg
+ ZEArZIZaOMlYnLJoj3W5R8pFyPFRlsxIjrVHFUwA9LICKdFPWqLHKva0x
+ 6bDNSDvBmv8pRktYMQ42HfrlVUJbKeq6hWJp0nkGx/Xvpj0/tAkBdTqFJ
+ 2iGxDJF1F6nLqCl1J56Sp4qr+xFH+crKuvnf9Ov4UDd40To3FytG2YEpQ g==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10422"; a="275424204"
+X-IronPort-AV: E=Sophos;i="5.93,198,1654585200"; d="scan'208";a="275424204"
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Jul 2022 08:27:43 -0700
-X-IronPort-AV: E=Sophos;i="5.93,198,1654585200"; d="scan'208";a="846749291"
+ 28 Jul 2022 08:38:00 -0700
+X-IronPort-AV: E=Sophos;i="5.93,198,1654585200"; d="scan'208";a="846753316"
 Received: from abernota-mobl.ger.corp.intel.com (HELO [10.213.218.28])
  ([10.213.218.28])
  by fmsmga006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Jul 2022 08:27:40 -0700
-Message-ID: <b2dc0312-2f4d-a593-30e4-68971c6cbca5@intel.com>
-Date: Thu, 28 Jul 2022 16:27:38 +0100
+ 28 Jul 2022 08:37:58 -0700
+Message-ID: <d8933a0b-8891-a075-cafe-85edfa3aab57@intel.com>
+Date: Thu, 28 Jul 2022 16:37:56 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Firefox/91.0 Thunderbird/91.11.0
@@ -44,14 +44,14 @@ To: Arunpravin Paneer Selvam <Arunpravin.PaneerSelvam@amd.com>,
  dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org
 References: <20220728143315.968590-1-Arunpravin.PaneerSelvam@amd.com>
- <20220728143315.968590-4-Arunpravin.PaneerSelvam@amd.com>
+ <20220728143315.968590-6-Arunpravin.PaneerSelvam@amd.com>
 From: Matthew Auld <matthew.auld@intel.com>
-In-Reply-To: <20220728143315.968590-4-Arunpravin.PaneerSelvam@amd.com>
+In-Reply-To: <20220728143315.968590-6-Arunpravin.PaneerSelvam@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 04 Aug 2022 20:34:26 +0000
-Subject: Re: [Nouveau] [PATCH v3 4/6] drm/i915: Implement
- intersect/compatible functions
+Subject: Re: [Nouveau] [PATCH v3 6/6] drm/ttm: Switch to using the new res
+ callback
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,176 +68,145 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On 28/07/2022 15:33, Arunpravin Paneer Selvam wrote:
-> Implemented a new intersect and compatible callback function
-> fetching start offset from drm buddy allocator.
+> Apply new intersect and compatible callback instead
+> of having a generic placement range verfications.
 > 
-> v2: move the bits that are specific to buddy_man (Matthew)
+> v2: Added a separate callback for compatiblilty
+>      checks (Christian)
 > 
 > Signed-off-by: Christian König <christian.koenig@amd.com>
 > Signed-off-by: Arunpravin Paneer Selvam <Arunpravin.PaneerSelvam@amd.com>
+
+There is also some code at the bottom of i915_ttm_buddy_man_alloc() 
+playing games with res->start, which I think can be safely deleted with 
+this series (now that we have proper ->compatible() hook).
+
+Also, is the plan to remove res->start completely, or does that still 
+have a use?
+
 > ---
->   drivers/gpu/drm/i915/gem/i915_gem_ttm.c       | 39 +-----------
->   drivers/gpu/drm/i915/i915_ttm_buddy_manager.c | 62 +++++++++++++++++++
->   2 files changed, 64 insertions(+), 37 deletions(-)
+>   drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c | 45 +++++++------------------
+>   drivers/gpu/drm/ttm/ttm_bo.c            |  9 +++--
+>   drivers/gpu/drm/ttm/ttm_resource.c      |  5 +--
+>   3 files changed, 20 insertions(+), 39 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_ttm.c b/drivers/gpu/drm/i915/gem/i915_gem_ttm.c
-> index 70e2ed4e99df..54eead15d74b 100644
-> --- a/drivers/gpu/drm/i915/gem/i915_gem_ttm.c
-> +++ b/drivers/gpu/drm/i915/gem/i915_gem_ttm.c
-> @@ -396,43 +396,8 @@ static bool i915_ttm_eviction_valuable(struct ttm_buffer_object *bo,
->   	if (!i915_gem_object_evictable(obj))
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> index 170935c294f5..7d25a10395c0 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> @@ -1328,11 +1328,12 @@ uint64_t amdgpu_ttm_tt_pte_flags(struct amdgpu_device *adev, struct ttm_tt *ttm,
+>   static bool amdgpu_ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
+>   					    const struct ttm_place *place)
+>   {
+> -	unsigned long num_pages = bo->resource->num_pages;
+>   	struct dma_resv_iter resv_cursor;
+> -	struct amdgpu_res_cursor cursor;
+>   	struct dma_fence *f;
+>   
+> +	if (!amdgpu_bo_is_amdgpu_bo(bo))
+> +		return ttm_bo_eviction_valuable(bo, place);
+> +
+>   	/* Swapout? */
+>   	if (bo->resource->mem_type == TTM_PL_SYSTEM)
+>   		return true;
+> @@ -1351,40 +1352,20 @@ static bool amdgpu_ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
+>   			return false;
+>   	}
+>   
+> -	switch (bo->resource->mem_type) {
+> -	case AMDGPU_PL_PREEMPT:
+> -		/* Preemptible BOs don't own system resources managed by the
+> -		 * driver (pages, VRAM, GART space). They point to resources
+> -		 * owned by someone else (e.g. pageable memory in user mode
+> -		 * or a DMABuf). They are used in a preemptible context so we
+> -		 * can guarantee no deadlocks and good QoS in case of MMU
+> -		 * notifiers or DMABuf move notifiers from the resource owner.
+> -		 */
+> +	/* Preemptible BOs don't own system resources managed by the
+> +	 * driver (pages, VRAM, GART space). They point to resources
+> +	 * owned by someone else (e.g. pageable memory in user mode
+> +	 * or a DMABuf). They are used in a preemptible context so we
+> +	 * can guarantee no deadlocks and good QoS in case of MMU
+> +	 * notifiers or DMABuf move notifiers from the resource owner.
+> +	 */
+> +	if (bo->resource->mem_type == AMDGPU_PL_PREEMPT)
+>   		return false;
+> -	case TTM_PL_TT:
+> -		if (amdgpu_bo_is_amdgpu_bo(bo) &&
+> -		    amdgpu_bo_encrypted(ttm_to_amdgpu_bo(bo)))
+> -			return false;
+> -		return true;
+>   
+> -	case TTM_PL_VRAM:
+> -		/* Check each drm MM node individually */
+> -		amdgpu_res_first(bo->resource, 0, (u64)num_pages << PAGE_SHIFT,
+> -				 &cursor);
+> -		while (cursor.remaining) {
+> -			if (place->fpfn < PFN_DOWN(cursor.start + cursor.size)
+> -			    && !(place->lpfn &&
+> -				 place->lpfn <= PFN_DOWN(cursor.start)))
+> -				return true;
+> -
+> -			amdgpu_res_next(&cursor, cursor.size);
+> -		}
+> +	if (bo->resource->mem_type == TTM_PL_TT &&
+> +	    amdgpu_bo_encrypted(ttm_to_amdgpu_bo(bo)))
 >   		return false;
 >   
-> -	switch (res->mem_type) {
-> -	case I915_PL_LMEM0: {
-> -		struct ttm_resource_manager *man =
-> -			ttm_manager_type(bo->bdev, res->mem_type);
-> -		struct i915_ttm_buddy_resource *bman_res =
-> -			to_ttm_buddy_resource(res);
-> -		struct drm_buddy *mm = bman_res->mm;
-> -		struct drm_buddy_block *block;
-> -
-> -		if (!place->fpfn && !place->lpfn)
-> -			return true;
-> -
-> -		GEM_BUG_ON(!place->lpfn);
-> -
-> -		/*
-> -		 * If we just want something mappable then we can quickly check
-> -		 * if the current victim resource is using any of the CPU
-> -		 * visible portion.
-> -		 */
-> -		if (!place->fpfn &&
-> -		    place->lpfn == i915_ttm_buddy_man_visible_size(man))
-> -			return bman_res->used_visible_size > 0;
-> -
-> -		/* Real range allocation */
-> -		list_for_each_entry(block, &bman_res->blocks, link) {
-> -			unsigned long fpfn =
-> -				drm_buddy_block_offset(block) >> PAGE_SHIFT;
-> -			unsigned long lpfn = fpfn +
-> -				(drm_buddy_block_size(mm, block) >> PAGE_SHIFT);
-> -
-> -			if (place->fpfn < lpfn && place->lpfn > fpfn)
-> -				return true;
-> -		}
-> -		return false;
-> -	} default:
+> -	default:
 > -		break;
 > -	}
-> +	if (res->mem_type == I915_PL_LMEM0)
-> +		return ttm_bo_eviction_valuable(bo, place);
-
-We should be able to drop the mem_type == I915_PL_LMEM0 check here I 
-think, and just unconditionally do:
-
-return ttm_bo_eviction_valuable(bo, place);
-
->   
->   	return true;
->   }
-> diff --git a/drivers/gpu/drm/i915/i915_ttm_buddy_manager.c b/drivers/gpu/drm/i915/i915_ttm_buddy_manager.c
-> index a5109548abc0..9d2a31154d58 100644
-> --- a/drivers/gpu/drm/i915/i915_ttm_buddy_manager.c
-> +++ b/drivers/gpu/drm/i915/i915_ttm_buddy_manager.c
-> @@ -178,6 +178,66 @@ static void i915_ttm_buddy_man_free(struct ttm_resource_manager *man,
->   	kfree(bman_res);
+> -
+>   	return ttm_bo_eviction_valuable(bo, place);
 >   }
 >   
-> +static bool i915_ttm_buddy_man_intersect(struct ttm_resource_manager *man,
-
-Nit: intersects
-
-> +					 struct ttm_resource *res,
-> +					 const struct ttm_place *place,
-> +					 size_t size)
-> +{
-> +	struct i915_ttm_buddy_resource *bman_res = to_ttm_buddy_resource(res);
-> +	u32 start, num_pages = PFN_UP(size);
-> +	struct drm_buddy_block *block;
-> +
-> +	if (!place->fpfn && !place->lpfn)
-> +		return true;
-> +
-> +	/*
-> +	 * If we just want something mappable then we can quickly check
-> +	 * if the current victim resource is using any of the CP
-> +	 * visible portion.
-> +	 */
-> +	if (!place->fpfn &&
-> +	    place->lpfn == i915_ttm_buddy_man_visible_size(man))
-> +		return bman_res->used_visible_size > 0;
-> +
-> +	/* Check each drm buddy block individually */
-> +	list_for_each_entry(block, &bman_res->blocks, link) {
-> +		start = drm_buddy_block_offset(block) >> PAGE_SHIFT;
-> +		/* Don't evict BOs outside of the requested placement range */
-> +		if (place->fpfn >= (start + num_pages) ||
-> +		    (place->lpfn && place->lpfn <= start))
-> +			return false;
-> +	}
-> +
-> +	return true;
-
-We need to account for the block size somewhere. Also same bug in the 
-amdgpu patch it seems. We also need to do this the other way around and 
-keep checking until we find something that overlaps, for example if the 
-first block doesn't intersect/overlap we will incorrectly return false 
-here, even if one of the other blocks does intersect.
-
-list_for_each_entry() {
-     fpfn = drm_buddy_block_size(mm, block) >> PAGE_SHIFT;
-     lpfn = fpfn + drm_buddy_block_size(mm, block) >> PAGE_SHIFT);
-
-     if (place->fpfn < lpfn && place->lpfn > fpfn)
-         return true;
-}
-
-return false;
-
-> +}
-> +
-> +static bool i915_ttm_buddy_man_compatible(struct ttm_resource_manager *man,
-> +					  struct ttm_resource *res,
-> +					  const struct ttm_place *place,
-> +					  size_t size)
-> +{
-> +	struct i915_ttm_buddy_resource *bman_res = to_ttm_buddy_resource(res);
-> +	u32 start, num_pages = PFN_UP(size);
-> +	struct drm_buddy_block *block;
-> +
-> +	if (!place->fpfn && !place->lpfn)
-> +		return true;
-> +
-> +	if (!place->fpfn &&
-> +	    place->lpfn == i915_ttm_buddy_man_visible_size(man))
-> +		return bman_res->used_visible_size == res->num_pages;
-> +
-> +	/* Check each drm buddy block individually */
-> +	list_for_each_entry(block, &bman_res->blocks, link) {
-> +		start = drm_buddy_block_offset(block) >> PAGE_SHIFT;
-> +		if (start < place->fpfn ||
-> +		    (place->lpfn && (start + num_pages) > place->lpfn))
-
-Same here. We need to consider the block size/range.
-
-Otherwise I think looks good.
-
-> +			return false;
-> +	}
-> +
-> +	return true;
-> +}
-> +
->   static void i915_ttm_buddy_man_debug(struct ttm_resource_manager *man,
->   				     struct drm_printer *printer)
+> diff --git a/drivers/gpu/drm/ttm/ttm_bo.c b/drivers/gpu/drm/ttm/ttm_bo.c
+> index c1bd006a5525..03409409e43e 100644
+> --- a/drivers/gpu/drm/ttm/ttm_bo.c
+> +++ b/drivers/gpu/drm/ttm/ttm_bo.c
+> @@ -518,6 +518,9 @@ static int ttm_bo_evict(struct ttm_buffer_object *bo,
+>   bool ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
+>   			      const struct ttm_place *place)
 >   {
-> @@ -205,6 +265,8 @@ static void i915_ttm_buddy_man_debug(struct ttm_resource_manager *man,
->   static const struct ttm_resource_manager_func i915_ttm_buddy_manager_func = {
->   	.alloc = i915_ttm_buddy_man_alloc,
->   	.free = i915_ttm_buddy_man_free,
-> +	.intersects = i915_ttm_buddy_man_intersect,
-> +	.compatible = i915_ttm_buddy_man_compatible,
->   	.debug = i915_ttm_buddy_man_debug,
->   };
+> +	struct ttm_resource *res = bo->resource;
+> +	struct ttm_device *bdev = bo->bdev;
+> +
+>   	dma_resv_assert_held(bo->base.resv);
+>   	if (bo->resource->mem_type == TTM_PL_SYSTEM)
+>   		return true;
+> @@ -525,11 +528,7 @@ bool ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
+>   	/* Don't evict this BO if it's outside of the
+>   	 * requested placement range
+>   	 */
+> -	if (place->fpfn >= (bo->resource->start + bo->resource->num_pages) ||
+> -	    (place->lpfn && place->lpfn <= bo->resource->start))
+> -		return false;
+> -
+> -	return true;
+> +	return ttm_resource_intersect(bdev, res, place, bo->base.size);
+>   }
+>   EXPORT_SYMBOL(ttm_bo_eviction_valuable);
 >   
+> diff --git a/drivers/gpu/drm/ttm/ttm_resource.c b/drivers/gpu/drm/ttm/ttm_resource.c
+> index 84a6fe9e976e..c745faf72b1a 100644
+> --- a/drivers/gpu/drm/ttm/ttm_resource.c
+> +++ b/drivers/gpu/drm/ttm/ttm_resource.c
+> @@ -316,6 +316,8 @@ static bool ttm_resource_places_compat(struct ttm_resource *res,
+>   				       const struct ttm_place *places,
+>   				       unsigned num_placement)
+>   {
+> +	struct ttm_buffer_object *bo = res->bo;
+> +	struct ttm_device *bdev = bo->bdev;
+>   	unsigned i;
+>   
+>   	if (res->placement & TTM_PL_FLAG_TEMPORARY)
+> @@ -324,8 +326,7 @@ static bool ttm_resource_places_compat(struct ttm_resource *res,
+>   	for (i = 0; i < num_placement; i++) {
+>   		const struct ttm_place *heap = &places[i];
+>   
+> -		if (res->start < heap->fpfn || (heap->lpfn &&
+> -		    (res->start + res->num_pages) > heap->lpfn))
+> +		if (!ttm_resource_compatible(bdev, res, heap, bo->base.size))
+>   			continue;
+>   
+>   		if ((res->mem_type == heap->mem_type) &&
