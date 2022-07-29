@@ -2,44 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D3CC58A270
-	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:45:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9850658A222
+	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:40:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DA5B9A703C;
-	Thu,  4 Aug 2022 20:39:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8771A12BD5E;
+	Thu,  4 Aug 2022 20:37:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2070.outbound.protection.outlook.com [40.107.93.70])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E5F4010E2CF;
- Fri, 29 Jul 2022 06:11:12 +0000 (UTC)
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam04on2067.outbound.protection.outlook.com [40.107.100.67])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0CF7810E151;
+ Fri, 29 Jul 2022 06:33:41 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XAzveqO7rRMexrU5z95PZzXKuIwgGCnrMU+xDDmTNPEz0dAAv2rxnnFwe0AW6Mjcp84rsW2+Ldi1rJ8Jhlajo2ab4oXxdMxfqcBHpohz8TiWn53r7fs1o2idySUj1vCwksRaiG8eWlSAzAaBL3XP4btfHHG7nh6vQvdbyNoPA4ZwOobp06oleaCVbZYVmHTAfrmy/9Mthnp717B7kfu5CxRKn9hCC3Kuc5AYJOqTQn8mTmECzMGL1sR46+Qx7XUHQz7p8FAs07XrtfJdlSBRAumhJn+l7TPsu9iB6aaA2GCV8UpB++vUzpAV3xhmdz/MNXDSq92d/rWanHm+TOaRjA==
+ b=bEUmwsdR9EUm+m7o4Fd8oGnUlUgWeig6uJElOMjsUc08C7Gtd0nTJQuW6myrlT7vUNZmYWN30YXXVtjo4kWLvtbSk5CaLtI4IFpMpDw/XX9UQp77lioFaipB7Y6TuzHguhlOp5erzmTydT6p7gd5ddWcpcxIXhhvXtp0u/5n+NJ1Y9xNjAhjJhldF8ub2YCou2AaIlvZ0/1HoB3af/LbxGtkrj2wtz8UtPCdoj0bOvDDaGktyRNHcecKDeagjVtVtc0tTyUeJoL+Lfyo6hTKLIC07MmUxITKil6mXVOOtE0oEdIFeOl+PXS7XCYRkY+gejRnliTly2ixTnZhI+CZjQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JLChjpw0JTcvOSEUGDo24K4rOFdGuCuyIINOPclIO9E=;
- b=SxkUKDPgTCim8bMBv4hS/UrDJFlcG5+HKslxXLlIP/x4JLqy/3arlRpjUjPyhaNkpwLA/Y//lLd+zTmhiiV395R14ubg0MQPacU93oPuhdtZ5i0MpLbtKLaNn99iJRsKSzuN0EvUwXotrvEWAr5aaduqV5VisIBUMEyuSFkqejDH908mWdkono6GSaVvkVFTkTmz9ASisa3JLEM8iVUsxAs5nc34hwYUebnQpERDWbs/cZCLgYylK2mA3imBH61jn14eyAiwWaADIIX1g87df3A3XR3X6b1/XhCdEu/Sj0uCxCrgfAui2lUzfGC3eiwIwTSlg1zHcpRjHakPS9zA5A==
+ bh=kR33NTSAd1ojaQKUaR7Isi0pPeGqQZNJo8MjwRYCYwE=;
+ b=JxiEqiafuWPY0u1bJfXnCrUD6Dk4Go0AewhcmgV1BlVQb+pZUfsHchlZYgl3hi/W0Zzi8EqyihpA/6IYOVU3Ely6lGp91Nw2Cx1Z73W51OpSImtagBhIi+KrSy+8LBY/f80ZIchsf1bX4oPf62dkcTZfIEUkS2czyTceXieU9u4bSElDINnrYlQkRUz354CCJHdqlqk8zO8DHD0utF7DZx+b685NrFdeCG2mnLkcKbdDeG7jC5wp/6xfiS/zeAFwdhGKDmDGIMj6O20+JcqCfWLla+azsfA0EZCwt6r/6jBJWqY3WnRWa9InP42zx9EVO/Kl5YYIE1MpgAQAteJnpg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JLChjpw0JTcvOSEUGDo24K4rOFdGuCuyIINOPclIO9E=;
- b=GXUns2z/vfGOBLwHNV9vpHaFibXjskxfhCYF42eLbWo+4oZNA8hTqTaQdLGJ9gZJTr43kk5fNPceyVxhnoJ8YJpjxN0JcJL2WxS3r/j4LbyY/c9yGgF2h57qxf0wuCyStYW8RZFSvUgcoHIK/IhurspROqQZRlFURAiwmulZFWU=
+ bh=kR33NTSAd1ojaQKUaR7Isi0pPeGqQZNJo8MjwRYCYwE=;
+ b=MoarX1umx6ZoaCujaUjeO3vJFI1w6zti2BY/uNW9laDViFFjk1aQM0GgBtwbo4AC2U7Qh3EyLJ+8Mik2uLYuM1OJaLY9yvg40J2krO4yh+HQvud/5s8sPjs/IP5mr4WsJZAwh0zdf2mOTWTU7ximrPy0FEq48AESL1+fOBtGxzY=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from MN2PR12MB4342.namprd12.prod.outlook.com (2603:10b6:208:264::7)
- by BYAPR12MB2677.namprd12.prod.outlook.com (2603:10b6:a03:69::26)
+ by MN0PR12MB6198.namprd12.prod.outlook.com (2603:10b6:208:3c5::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5482.11; Fri, 29 Jul
- 2022 06:11:10 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5458.25; Fri, 29 Jul
+ 2022 06:33:38 +0000
 Received: from MN2PR12MB4342.namprd12.prod.outlook.com
  ([fe80::a1d8:6a71:213b:6e14]) by MN2PR12MB4342.namprd12.prod.outlook.com
  ([fe80::a1d8:6a71:213b:6e14%9]) with mapi id 15.20.5458.025; Fri, 29 Jul 2022
- 06:11:09 +0000
-Message-ID: <e26eb1d4-8758-b949-aa1b-767bb20a282d@amd.com>
-Date: Fri, 29 Jul 2022 11:40:58 +0530
+ 06:33:38 +0000
+Message-ID: <50a773c8-e69f-19eb-719d-36eead82d084@amd.com>
+Date: Fri, 29 Jul 2022 12:03:27 +0530
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.9.0
 Content-Language: en-US
@@ -47,77 +47,77 @@ To: Matthew Auld <matthew.auld@intel.com>, dri-devel@lists.freedesktop.org,
  amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
 References: <20220728143315.968590-1-Arunpravin.PaneerSelvam@amd.com>
- <20220728143315.968590-4-Arunpravin.PaneerSelvam@amd.com>
- <b2dc0312-2f4d-a593-30e4-68971c6cbca5@intel.com>
+ <20220728143315.968590-6-Arunpravin.PaneerSelvam@amd.com>
+ <d8933a0b-8891-a075-cafe-85edfa3aab57@intel.com>
 From: Arunpravin Paneer Selvam <arunpravin.paneerselvam@amd.com>
-In-Reply-To: <b2dc0312-2f4d-a593-30e4-68971c6cbca5@intel.com>
+In-Reply-To: <d8933a0b-8891-a075-cafe-85edfa3aab57@intel.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: PN3PR01CA0111.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:96::10) To MN2PR12MB4342.namprd12.prod.outlook.com
+X-ClientProxiedBy: PN3PR01CA0186.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c01:be::7) To MN2PR12MB4342.namprd12.prod.outlook.com
  (2603:10b6:208:264::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: ea638451-12dd-43f4-35b9-08da71292168
-X-MS-TrafficTypeDiagnostic: BYAPR12MB2677:EE_
+X-MS-Office365-Filtering-Correlation-Id: ad6ecf5f-c297-43a3-7c50-08da712c456c
+X-MS-TrafficTypeDiagnostic: MN0PR12MB6198:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: IySYEsx6WF8cOdm6dPNEsZtGKZScaFt322CC1IKEHx6xGwkoSSTUAaVHleCpp4A5qEjYj2htbJ4YmGpQTZR+s15niFURhUEn3VqZR50Gp05M4KUXLlTLkU4xu/ncoSIm5ABmrhkaznk7cCgOowPbbmPB7tfNlOfsnAsK/80QCX8zuCB3Hzi8FANTGSZwmOW2uotC6DfEKMgajpv92QNHFgKWJNm0TvWdZQcP3fih989YyldKmSPRg5LXGI2Ggaf8ajFkOttGhG3zPCzE+2fto16fuexE53r01lMykhXu/GHvhQ2lH42OFdFBqovludKm7L903OllsbucQHKFMigw1NFLw+EGopRWfAfgCVWlplCU6Noyir4cw1An75E6eiSQAdc3MQWL+6+i+2hMHcu+zePfDWdBwIFNqfKnmOHmaSyrRHSFm3Bg/QxceniNySyml9jQCfdOkTQdJcdwU5KLqq3mGCCVLbqYj9MxleeOhGPFxAYycer0o8MhJ5nGOP3p0zKkr/iTmxfWPUoB2Uzfm4pz5j7ugQ0OnNLLLHktcJqKGLSfF4vi6D908tAhMQlusGnOiDuStr0CGvv+gzSgSUy8k5s+NaE11FfPhtiGIdUi4DCgotk1pT/uEFm9t2OuF7xYCmeD97NjuuFbIRJMketcm/cu07z/3FYLJD8r9hliN5GnLh4LTFB1cK73zeBWEVoEiu8vqIHcGjHt3TPJmUeJ5ovQk5LxwOrHbIiOINSeE86kFsg5JtkbfZhyqQHxj41Hd1TSlgUD1tVBYg875vrr3e+k6NSrJJ6YGiF9T1uwBJqdPuxWFtEvNOwQ7ouS
+X-Microsoft-Antispam-Message-Info: 3nNhUDtBB8rhvZ806Wg2MnGuQNk8VrzAg2LPyrxgGqVIaIp3lne1VAulhKkTeAC2ED3uQtgJ/dGkbdD7YZV5OXlePYKoKq2NVRqF67czjNK0TLY0RjgSCuaOHjavawQujj4rXUXYwWgI68fEmoKepiCbXXKYUIVeltK3rs9XfH18tu1w2msWNu+o03e5OA/Fk0WERj9y9gHxYoNpBMzDjOMAD7ZyoPzHHseItrHExIRSzKEs+y1EbmoWdNrmdC5O8Jk3ERZoAI/MCs2GQbLgGZVc9qlG3iccV+YO2mk42OEBgHWtnUN2mTM+k1Mm0ChO0Lofd+7pPobe4MSZ69aluraQKbBYnQvXmwzKpdBLNATQ8jAD/jqMrzkfYYYVjNHWuCCmssuoXQ2ANJC7Bpz0e3VcrwQFEhejUFqcTx/iGCoIBVrlIBY+iPhJE4wm2MdAs0spHAjs9sm90uM8eS0vyfjvqXxuyaAh8oMWwSP9/eRoKwAZkmix8jgiR8Amx6NnLQ2sMhtNDw12AwRnnBIp5ZXcBF9po7vbHFCOespWW/zZ++i8WT93S+3ArgxKUme8lcczv8nSzGVmN6QLeaicksJCb/N/JKF2iKjPRHN8QOVWFDjfdIjrhtK+EuY7QWWekGwh4GfFh3gt3qJeEwrjJ8kjRZS4wLoldcQkVmw2Eo4p6+BZ1GmAugeX6qUIUfS4EflxSVB9sb3coOVsDqyghDdvepImFAky1fABq6C5eij+aXH+MomhPlXfC+9zTqXEI1tufw/DYbzVo9q48Ch1Ez/m4oWzfAvoVDwS7RnlOUFAa2M7pEpyTIvdHvp3WVCH
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:MN2PR12MB4342.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230016)(4636009)(136003)(376002)(346002)(39860400002)(396003)(366004)(6666004)(6506007)(66574015)(53546011)(2616005)(186003)(2906002)(36756003)(86362001)(31686004)(6512007)(26005)(31696002)(41300700001)(38100700002)(8676002)(66556008)(66476007)(4326008)(66946007)(83380400001)(316002)(5660300002)(8936002)(6486002)(478600001)(43740500002)(45980500001);
+ SFS:(13230016)(4636009)(39860400002)(396003)(136003)(366004)(376002)(346002)(8676002)(186003)(6666004)(83380400001)(6506007)(8936002)(41300700001)(6512007)(6486002)(86362001)(66574015)(31696002)(53546011)(2906002)(478600001)(26005)(66476007)(66556008)(5660300002)(316002)(36756003)(66946007)(4326008)(31686004)(38100700002)(2616005)(43740500002)(45980500001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aUdOdUZ1cFNuc2MyOTA4QzRUVGZOUmtkclRSaXI3K1lXWFY4Mkk2Qzk4QTJW?=
- =?utf-8?B?UkI4ZmNGY2RuTHBYZFdqem52ZEpKZWg5eVdyVnVhazE4MG1mY1FtRlhmUDJh?=
- =?utf-8?B?YUZwOG42VkErZ01rUy9scUdOcXh0MVFoekRpdnZrblVHelUrTSs1SnMxaUx1?=
- =?utf-8?B?UmJublFBRnlKWm91Y0ZhdnpyUmZmb2JxMjZvS1VXNit5bHdDaHcrR1lPWm5j?=
- =?utf-8?B?YlJNQk1hWWFnMXhEckkvRXpTTThIWHdMa2tYSGJWaVp0MExoN0ZHdW9RTUJR?=
- =?utf-8?B?eW9rVkN2MnRJRjFMdm9GRlM4NDZLYUhnWUc1Ly9lL2ExZVVFVldLRE9acnl0?=
- =?utf-8?B?WWJXRFhDUkVFVEQxRElpUmRKalFNWFdhMEdFM0E1TjFaVWVtQk1DazA4dDhO?=
- =?utf-8?B?OWZDaW9Wb2s4emlUb0VtK2RSYW5MMnp0YW1CZVRUcGRndVVVb3hpaHlQVFQ5?=
- =?utf-8?B?T3pzL2RqRC9KVmRIK2luSzVaK0krMG5wYTBnOHVSVExQT2NMV0lhWmdFZkxO?=
- =?utf-8?B?VjJ5YjFlbU5ZTWtzZTZGZFJGdjZ3SjlGa2Mzc1NZWHJGYXgwL1hlVngvbSs4?=
- =?utf-8?B?TU5UMm5xdUlKZTJHWlBKaDJJQVlNM3dVK3dBcDlEQUllYVBodHd2WC9YNlN1?=
- =?utf-8?B?YnJMZ2RGNDRGR3VHVVFJOTBlVEtPNmdFZ2NUTUFyaE9nazc2U2FWWG1nbnhk?=
- =?utf-8?B?ZWNtWnQ5Ky9PbGlaNjE5cVcwdlM1Z0ZXR3IzT0NyaHNoQlJQUU4vdFVJbnlV?=
- =?utf-8?B?dmd6Q2hXZ2JkT0dHWldPTittYk91NzQ3THZ4SVRySHNGZWhVazA1aGRhV0Ft?=
- =?utf-8?B?eXRSREppN0ZVY25yTkVNTWt0VU9qckY2TUtyUmdPVzR6dUh6TzA4aHM2V1cw?=
- =?utf-8?B?WCtQR3NKV3o4VkNITEhTMlhrdFc3bFcyT3ltSjVXa2lQRkZiMTdqbnUrcHVm?=
- =?utf-8?B?cHBOcm9KSkVQazZoYU1CckUrcWVWNHM2Wnl5RVlhcDFPckFidW5ndFlrY0tv?=
- =?utf-8?B?MnhsSS9yQTRqMG5OcHF5MDVBbjdKTkEyYlNZazd1aFR4UzJLbklqZk9YcUg5?=
- =?utf-8?B?RG5LbWxiUWthZXA4UW5rWmQwU0J6ZUZLZFJKd3ZLbTVUaEd5clFyWU1sZFho?=
- =?utf-8?B?RCtBTzhkV0VZS3dwZlRneE5WczhpWnpDQU5TMUw2VUUzSEQ3UEZ3emNSSG10?=
- =?utf-8?B?V0dFWDhWdVZVaCtCYU9oZmdHTE1paDlNL1d1Y2d3czZhT0oyK2kxcjFsM3dl?=
- =?utf-8?B?cm9lNDZuWVk0RkhSREYyZFJvaTFYS3RGa1pFTjY0N2szYlk3SlQvZ3NUVUJj?=
- =?utf-8?B?K0NlVVNacmlxMzk0S0pMT0t2ZUM4TjhMaS82c2VuVjMvL1VzdnVzNEpEeHow?=
- =?utf-8?B?RU96TkJaWkZRM3dSMktwTGdlODFtbnkrOVdjSEw3VWx0REt0S3VrTm1CZ0R2?=
- =?utf-8?B?aXNCWktabU4rUlBEbUZ3c2N0T2tHU0wzWERTWEFJaUt1MHduNTNObjN1ejU5?=
- =?utf-8?B?YnhFRDY2bHNNVzZaR0prWXUzSjVzU0Nna2wxeUkydG1XUGtyZkl4d2lYRWg4?=
- =?utf-8?B?MmdXNHRSTmVUcjJtMmEwdlRrOWxwRlRnWHdTVy8rMUhVR3JsazlESTRrL0Jo?=
- =?utf-8?B?U1lYcXZXbG9FY2ZGTmoxR0ZTMU9EeHh4TDNYU2JOcjVsbnpQdGp2SlFnN1JB?=
- =?utf-8?B?QTF0Ung3OUJYTmxZb3k5bzhuTmxUTm5MRUhHc1QrR3JBQ3ZHT21aU2NHbGc1?=
- =?utf-8?B?RjRkNUd2c0luWkplcDlzdHFaYTczODVsakFmSzFXYWpRVDFrMWZTZFZ1eFNa?=
- =?utf-8?B?NDczcC8venlLa1hhYWZrNGIxYW53ZXFYMHdRUEVqZ2E0RWFSTjdKbDNIRGx3?=
- =?utf-8?B?dDdXd2NUWE9PN2RWdlVoMHJjdW92OWZrajM3WVE1dnVzTyt2N2RWRy9IV3Za?=
- =?utf-8?B?NVdYL3JBMHN4WDRMM3Y0OVlvQ2V5VjV4OVZVa1JyaFRvTTc5amZRMDJFZEcr?=
- =?utf-8?B?OUU1NXZxck50cXQ1Wlo5eW5hdmM4cEVlaU51SU5jb2tDSVZYS1k0d24wVk16?=
- =?utf-8?B?bDVIcjNOejRqVlJpaUdJNlErbDh1R24ycktXM2NwQ25CRDZYbUVLalVkeUo3?=
- =?utf-8?Q?0qf6d5BMeUuqDVEWozPBs20Lm?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y2dyVXZKY21IMlUza3NjYmI5YStibmxRQ2NLVzVtTHN6UHV0bC9GRE9qUEEv?=
+ =?utf-8?B?bC9CTmlxbkJwRjhUNHlWREN6YkRRdjNSRTNTdzhLc0dkM0NOOE12Rk5Ic3gz?=
+ =?utf-8?B?UzF0U0FUaS9yNGNiaDAzZm1TWE1xbjJLZkJTeXdXSk5ZQ2xZREVNMnUyUDBP?=
+ =?utf-8?B?Tk5GNjEvWFZ0eXM2emdYSHJOMjZINTRxa2xvaHY4YWU1MkhLNmhNYlRtSzlx?=
+ =?utf-8?B?QlFQS0JYV1ZpQWl6RUhxUkM0QUpsUzZoVGJGY0piMkFoc1d3R1NDMC9YenIr?=
+ =?utf-8?B?d0g0Y2NkSnpYTXhnNHhEczM2QjZtNDUxbDZQL0xZWnlwTThvL1RZcUdiUnV0?=
+ =?utf-8?B?L0dNajVPSC9lSktUNmY5bllGWlArMU56WFVFNjVKS0RIV3k1dVB6NW1JWjBH?=
+ =?utf-8?B?Z1Y1RlNUWlo2a3UyOHZUYkxrVHpMeDVtT3psUDAxdlV5TU1zeGs4aThzOExS?=
+ =?utf-8?B?V2o2Mm5hWGFvS1ZlUXZCSjdML21CQW5xTjZVNzByRWdrVHhQOUhYY0hqRldH?=
+ =?utf-8?B?aTYwSkFPSkJQR0ljdmFmOENrV014UE0wOUxaWVRRZWtxRkJuc25FK3NhTk4z?=
+ =?utf-8?B?cEE3UTNlcHRrdEhHZTZoNTBCN1dXTmhOVE12MWlNRlpMUm1XK3JSRWlLbDB5?=
+ =?utf-8?B?THFNbTRpamlDQXpZSDZ0b0JzbC9zVlVuS1dlZ0RxM1MvTnFIZW1NYk80cXlo?=
+ =?utf-8?B?V3lOUG9tQkxVblZRWjZnWWdOR0s4R1VBSUwvQVdIQitwekxWa0piNmhsL3hl?=
+ =?utf-8?B?SEFJVTVnRTlXK0g2WnFOblFxeTJUdmxIaDBaSW5TTU1uT3d3a0Rpb3liWmll?=
+ =?utf-8?B?K3krb2M4OUZ6Y2hKcklibVY0djJ1cVdCVkUxalRxQ01ZSHVOendPNWZCaXRT?=
+ =?utf-8?B?Y2tqWXFYUkJ4RzRxQXV6azI0em0xSnM1WmJRcmZHU3Z1bjhMT0NEc2hrRFhL?=
+ =?utf-8?B?MEJZVGoxd09ScWZzbDFDNmpOMzJsY1k5SUNWUDhPMzdwZ2ZUV0l4Q2ZYYTdO?=
+ =?utf-8?B?TVNrNkRxN2d3T3F0MkJjK3dvMFRweCszb3FDUHg1Tk1wZkZWRS9GajNPaEpS?=
+ =?utf-8?B?MTNnVTJZdmtxN0RPSlI5YXB6c2lGTU9LTkpQMVlyMkFaNU9jbmxVQ3VudmxH?=
+ =?utf-8?B?VGZGaDBCSjNrUkZxYXJHUmpPWFg3STN3bWIwbTJPbFdGTHhETjFXa2lGaU1j?=
+ =?utf-8?B?cmpYcTczWHJuR1JjWXRYeGUvd1FuSFZOSVptSVRXOEszWU9ibjUwUUFMejhw?=
+ =?utf-8?B?Rk5FcUhhck9LOWIzT2NTL2IrMHl3Ykk2UjhCanNEMnYxSHhuM056ZzFlSXlV?=
+ =?utf-8?B?am9RSVVFNEk5c1p1YUNsMHNoZ1N3akRtcFdvUU83S1pzUGxqdU5JN1NoWmZn?=
+ =?utf-8?B?b3gvaUJtOTVGeC9GeUJlazJwZXgxaXNSRjd5NlNybXp5OUx4emd1YUZqR01s?=
+ =?utf-8?B?bjd4bjRJQVcyTlpSeDVSMnFXZDBMMmNBS3YzTUp2VEREZXZ4TUxvUG16ZmxF?=
+ =?utf-8?B?VUZORWlCbzRsWWNZSkxWOU5waU9EZGwwV0NRK1RuK0p5OXh1bVhzQWMxZWwr?=
+ =?utf-8?B?VGxIYm82bVp4Zmtwdm1kN1ZEN1BLbnAwRHVMS1FqSDZGWldGbGVHZjVwL0Vp?=
+ =?utf-8?B?dStHdjhFSjByRUljcXNxR0NZRzNkeUc4cW8vR3JyL3dxd3FJblBIRjlxSHpM?=
+ =?utf-8?B?WWJHRnV5NXQzd2xCUlFEY1I4UTEyTVlWTmN3MHVybnpBYW5FSEROdnFYZEFH?=
+ =?utf-8?B?cnI0Zlp2SG81M0dlcVVlVVlaTmdGeU9BaWUyUi9pVzR3eUVNT3RMWGNxRHph?=
+ =?utf-8?B?clVQNVJRaGxxMytobUc1Y1NPZzJnV3FYVmxMcjBhWXJ3QWJLL1BvaVIvNkoy?=
+ =?utf-8?B?OSs4VFdaVjlGUUhCVm5MY2w0QkF0c3NXUlZuVXlSbmhUbUxoRzRIazFUdGJO?=
+ =?utf-8?B?WGMwOXkwTGNyeFBFVzZVTmJrREpNbTlJZ1pMejhXOFprUEdqb240OFlSV2lK?=
+ =?utf-8?B?dHN6Q3ZMcDZKTjgwdFZkNzhLd3RNMndqd3Q3d01uZUl4MXZyaGVVL1FNZ05u?=
+ =?utf-8?B?WEI5ODlibG5hMHZKQTZ1L0g5bHZ1Rm1CWEl3ZndIWGZvNFZLL3RmcGJGZzhQ?=
+ =?utf-8?Q?nInyM42xIgQLqpIZJVE0SLCFX?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ea638451-12dd-43f4-35b9-08da71292168
+X-MS-Exchange-CrossTenant-Network-Message-Id: ad6ecf5f-c297-43a3-7c50-08da712c456c
 X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB4342.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jul 2022 06:11:09.7102 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jul 2022 06:33:38.6239 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7Hgn4Wvmxw55b5ieKDYiBKrhZOa6h+ubTF/X6UUlIH5OeaPKxoZnUbv7npMLlCJDWYtxt6XQMUNmxxK87nQlBQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR12MB2677
+X-MS-Exchange-CrossTenant-UserPrincipalName: xdPnVWQRRZgmcP7JWFnXkOaBgr9sabXNmrZMPXdcBsCo9YisduMBf892+NWkBvuR4uYaHv6aL8UHascsuKD9JQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6198
 X-Mailman-Approved-At: Thu, 04 Aug 2022 20:35:10 +0000
-Subject: Re: [Nouveau] [PATCH v3 4/6] drm/i915: Implement
- intersect/compatible functions
+Subject: Re: [Nouveau] [PATCH v3 6/6] drm/ttm: Switch to using the new res
+ callback
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -135,218 +135,159 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
 
-On 7/28/2022 8:57 PM, Matthew Auld wrote:
+On 7/28/2022 9:07 PM, Matthew Auld wrote:
 > On 28/07/2022 15:33, Arunpravin Paneer Selvam wrote:
->> Implemented a new intersect and compatible callback function
->> fetching start offset from drm buddy allocator.
+>> Apply new intersect and compatible callback instead
+>> of having a generic placement range verfications.
 >>
->> v2: move the bits that are specific to buddy_man (Matthew)
+>> v2: Added a separate callback for compatiblilty
+>>      checks (Christian)
 >>
 >> Signed-off-by: Christian König <christian.koenig@amd.com>
 >> Signed-off-by: Arunpravin Paneer Selvam 
 >> <Arunpravin.PaneerSelvam@amd.com>
+>
+> There is also some code at the bottom of i915_ttm_buddy_man_alloc() 
+> playing games with res->start, which I think can be safely deleted 
+> with this series (now that we have proper ->compatible() hook).
+>
+> Also, is the plan to remove res->start completely, or does that still 
+> have a use?
+yes we should remove res->start completely, I am working on it, planning 
+to send in a separate series as amdgpu uses it in many places, and in 
+some places we set res->start to AMDGPU_BO_INVALID_OFFSET,
+I should find an alternative to indicate the invalid offset BO. Also, 
+res->start used in drm/drm_gem_vram_helper.c at drm_gem_vram_pg_offset() 
+function. I am removing all the dependencies, I will send the
+patches in a separate series. I think i915 doesn't use res->start in its 
+own driver code.
+>
 >> ---
->>   drivers/gpu/drm/i915/gem/i915_gem_ttm.c       | 39 +-----------
->>   drivers/gpu/drm/i915/i915_ttm_buddy_manager.c | 62 +++++++++++++++++++
->>   2 files changed, 64 insertions(+), 37 deletions(-)
+>>   drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c | 45 +++++++------------------
+>>   drivers/gpu/drm/ttm/ttm_bo.c            |  9 +++--
+>>   drivers/gpu/drm/ttm/ttm_resource.c      |  5 +--
+>>   3 files changed, 20 insertions(+), 39 deletions(-)
 >>
->> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_ttm.c 
->> b/drivers/gpu/drm/i915/gem/i915_gem_ttm.c
->> index 70e2ed4e99df..54eead15d74b 100644
->> --- a/drivers/gpu/drm/i915/gem/i915_gem_ttm.c
->> +++ b/drivers/gpu/drm/i915/gem/i915_gem_ttm.c
->> @@ -396,43 +396,8 @@ static bool i915_ttm_eviction_valuable(struct 
+>> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c 
+>> b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+>> index 170935c294f5..7d25a10395c0 100644
+>> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+>> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+>> @@ -1328,11 +1328,12 @@ uint64_t amdgpu_ttm_tt_pte_flags(struct 
+>> amdgpu_device *adev, struct ttm_tt *ttm,
+>>   static bool amdgpu_ttm_bo_eviction_valuable(struct 
 >> ttm_buffer_object *bo,
->>       if (!i915_gem_object_evictable(obj))
->>           return false;
->>   -    switch (res->mem_type) {
->> -    case I915_PL_LMEM0: {
->> -        struct ttm_resource_manager *man =
->> -            ttm_manager_type(bo->bdev, res->mem_type);
->> -        struct i915_ttm_buddy_resource *bman_res =
->> -            to_ttm_buddy_resource(res);
->> -        struct drm_buddy *mm = bman_res->mm;
->> -        struct drm_buddy_block *block;
->> -
->> -        if (!place->fpfn && !place->lpfn)
->> -            return true;
->> -
->> -        GEM_BUG_ON(!place->lpfn);
->> -
->> -        /*
->> -         * If we just want something mappable then we can quickly check
->> -         * if the current victim resource is using any of the CPU
->> -         * visible portion.
+>>                           const struct ttm_place *place)
+>>   {
+>> -    unsigned long num_pages = bo->resource->num_pages;
+>>       struct dma_resv_iter resv_cursor;
+>> -    struct amdgpu_res_cursor cursor;
+>>       struct dma_fence *f;
+>>   +    if (!amdgpu_bo_is_amdgpu_bo(bo))
+>> +        return ttm_bo_eviction_valuable(bo, place);
+>> +
+>>       /* Swapout? */
+>>       if (bo->resource->mem_type == TTM_PL_SYSTEM)
+>>           return true;
+>> @@ -1351,40 +1352,20 @@ static bool 
+>> amdgpu_ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
+>>               return false;
+>>       }
+>>   -    switch (bo->resource->mem_type) {
+>> -    case AMDGPU_PL_PREEMPT:
+>> -        /* Preemptible BOs don't own system resources managed by the
+>> -         * driver (pages, VRAM, GART space). They point to resources
+>> -         * owned by someone else (e.g. pageable memory in user mode
+>> -         * or a DMABuf). They are used in a preemptible context so we
+>> -         * can guarantee no deadlocks and good QoS in case of MMU
+>> -         * notifiers or DMABuf move notifiers from the resource owner.
 >> -         */
->> -        if (!place->fpfn &&
->> -            place->lpfn == i915_ttm_buddy_man_visible_size(man))
->> -            return bman_res->used_visible_size > 0;
->> -
->> -        /* Real range allocation */
->> -        list_for_each_entry(block, &bman_res->blocks, link) {
->> -            unsigned long fpfn =
->> -                drm_buddy_block_offset(block) >> PAGE_SHIFT;
->> -            unsigned long lpfn = fpfn +
->> -                (drm_buddy_block_size(mm, block) >> PAGE_SHIFT);
->> -
->> -            if (place->fpfn < lpfn && place->lpfn > fpfn)
+>> +    /* Preemptible BOs don't own system resources managed by the
+>> +     * driver (pages, VRAM, GART space). They point to resources
+>> +     * owned by someone else (e.g. pageable memory in user mode
+>> +     * or a DMABuf). They are used in a preemptible context so we
+>> +     * can guarantee no deadlocks and good QoS in case of MMU
+>> +     * notifiers or DMABuf move notifiers from the resource owner.
+>> +     */
+>> +    if (bo->resource->mem_type == AMDGPU_PL_PREEMPT)
+>>           return false;
+>> -    case TTM_PL_TT:
+>> -        if (amdgpu_bo_is_amdgpu_bo(bo) &&
+>> -            amdgpu_bo_encrypted(ttm_to_amdgpu_bo(bo)))
+>> -            return false;
+>> -        return true;
+>>   -    case TTM_PL_VRAM:
+>> -        /* Check each drm MM node individually */
+>> -        amdgpu_res_first(bo->resource, 0, (u64)num_pages << PAGE_SHIFT,
+>> -                 &cursor);
+>> -        while (cursor.remaining) {
+>> -            if (place->fpfn < PFN_DOWN(cursor.start + cursor.size)
+>> -                && !(place->lpfn &&
+>> -                 place->lpfn <= PFN_DOWN(cursor.start)))
 >> -                return true;
+>> -
+>> -            amdgpu_res_next(&cursor, cursor.size);
 >> -        }
->> -        return false;
->> -    } default:
+>> +    if (bo->resource->mem_type == TTM_PL_TT &&
+>> +        amdgpu_bo_encrypted(ttm_to_amdgpu_bo(bo)))
+>>           return false;
+>>   -    default:
 >> -        break;
 >> -    }
->> +    if (res->mem_type == I915_PL_LMEM0)
->> +        return ttm_bo_eviction_valuable(bo, place);
->
-> We should be able to drop the mem_type == I915_PL_LMEM0 check here I 
-> think, and just unconditionally do:
->
-> return ttm_bo_eviction_valuable(bo, place);
-okay
->
->>         return true;
+>> -
+>>       return ttm_bo_eviction_valuable(bo, place);
 >>   }
->> diff --git a/drivers/gpu/drm/i915/i915_ttm_buddy_manager.c 
->> b/drivers/gpu/drm/i915/i915_ttm_buddy_manager.c
->> index a5109548abc0..9d2a31154d58 100644
->> --- a/drivers/gpu/drm/i915/i915_ttm_buddy_manager.c
->> +++ b/drivers/gpu/drm/i915/i915_ttm_buddy_manager.c
->> @@ -178,6 +178,66 @@ static void i915_ttm_buddy_man_free(struct 
->> ttm_resource_manager *man,
->>       kfree(bman_res);
->>   }
->>   +static bool i915_ttm_buddy_man_intersect(struct 
->> ttm_resource_manager *man,
->
-> Nit: intersects
-ok
->
->> +                     struct ttm_resource *res,
->> +                     const struct ttm_place *place,
->> +                     size_t size)
->> +{
->> +    struct i915_ttm_buddy_resource *bman_res = 
->> to_ttm_buddy_resource(res);
->> +    u32 start, num_pages = PFN_UP(size);
->> +    struct drm_buddy_block *block;
->> +
->> +    if (!place->fpfn && !place->lpfn)
->> +        return true;
-I place bug_on check here
-GEM_BUG_ON(!place->lpfn);
->> +
->> +    /*
->> +     * If we just want something mappable then we can quickly check
->> +     * if the current victim resource is using any of the CP
->> +     * visible portion.
->> +     */
->> +    if (!place->fpfn &&
->> +        place->lpfn == i915_ttm_buddy_man_visible_size(man))
->> +        return bman_res->used_visible_size > 0;
->> +
->> +    /* Check each drm buddy block individually */
->> +    list_for_each_entry(block, &bman_res->blocks, link) {
->> +        start = drm_buddy_block_offset(block) >> PAGE_SHIFT;
->> +        /* Don't evict BOs outside of the requested placement range */
->> +        if (place->fpfn >= (start + num_pages) ||
->> +            (place->lpfn && place->lpfn <= start))
->> +            return false;
->> +    }
->> +
->> +    return true;
->
-> We need to account for the block size somewhere. Also same bug in the 
-> amdgpu patch it seems. We also need to do this the other way around 
-> and keep checking until we find something that overlaps, for example 
-> if the first block doesn't intersect/overlap we will incorrectly 
-> return false here, even if one of the other blocks does intersect.
->
-> list_for_each_entry() {
->     fpfn = drm_buddy_block_size(mm, block) >> PAGE_SHIFT;
->     lpfn = fpfn + drm_buddy_block_size(mm, block) >> PAGE_SHIFT);
->
->     if (place->fpfn < lpfn && place->lpfn > fpfn)
->         return true;
-> }
->
-> return false;
-yes, here the final code looks like,
-list_for_each_entry(block, &bman_res->blocks, link) {
-                 unsigned long fpfn =
-                         drm_buddy_block_offset(block) >> PAGE_SHIFT;
-                 unsigned long lpfn = fpfn +
-                         (drm_buddy_block_size(mm, block) >> PAGE_SHIFT);
-                 /* Don't evict BOs outside of the requested placement 
-range */
-                 if (place->fpfn < lpfn && place->lpfn > fpfn)
-                         return true;
-         }
-
-return false;
-
->
->> +}
->> +
->> +static bool i915_ttm_buddy_man_compatible(struct 
->> ttm_resource_manager *man,
->> +                      struct ttm_resource *res,
->> +                      const struct ttm_place *place,
->> +                      size_t size)
->> +{
->> +    struct i915_ttm_buddy_resource *bman_res = 
->> to_ttm_buddy_resource(res);
->> +    u32 start, num_pages = PFN_UP(size);
->> +    struct drm_buddy_block *block;
->> +
->> +    if (!place->fpfn && !place->lpfn)
->> +        return true;
-I place bug_on check here
-GEM_BUG_ON(!place->lpfn);
->> +
->> +    if (!place->fpfn &&
->> +        place->lpfn == i915_ttm_buddy_man_visible_size(man))
->> +        return bman_res->used_visible_size == res->num_pages;
->> +
->> +    /* Check each drm buddy block individually */
->> +    list_for_each_entry(block, &bman_res->blocks, link) {
->> +        start = drm_buddy_block_offset(block) >> PAGE_SHIFT;
->> +        if (start < place->fpfn ||
->> +            (place->lpfn && (start + num_pages) > place->lpfn))
->
-> Same here. We need to consider the block size/range.
-ahh somehow missed the block size, here the final code looks like,
-
-/* Check each drm buddy block individually */
-     list_for_each_entry(block, &bman_res->blocks, link) {
-                 unsigned long fpfn =
-                         drm_buddy_block_offset(block) >> PAGE_SHIFT;
-                 unsigned long lpfn = fpfn +
-                         (drm_buddy_block_size(mm, block) >> PAGE_SHIFT);
-                 if (fpfn < place->fpfn || lpfn > place->lpfn)
-                         return false;
-         }
-return true;
->
-> Otherwise I think looks good.
->
->> +            return false;
->> +    }
->> +
->> +    return true;
->> +}
->> +
->>   static void i915_ttm_buddy_man_debug(struct ttm_resource_manager *man,
->>                        struct drm_printer *printer)
+>>   diff --git a/drivers/gpu/drm/ttm/ttm_bo.c 
+>> b/drivers/gpu/drm/ttm/ttm_bo.c
+>> index c1bd006a5525..03409409e43e 100644
+>> --- a/drivers/gpu/drm/ttm/ttm_bo.c
+>> +++ b/drivers/gpu/drm/ttm/ttm_bo.c
+>> @@ -518,6 +518,9 @@ static int ttm_bo_evict(struct ttm_buffer_object 
+>> *bo,
+>>   bool ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
+>>                     const struct ttm_place *place)
 >>   {
->> @@ -205,6 +265,8 @@ static void i915_ttm_buddy_man_debug(struct 
->> ttm_resource_manager *man,
->>   static const struct ttm_resource_manager_func 
->> i915_ttm_buddy_manager_func = {
->>       .alloc = i915_ttm_buddy_man_alloc,
->>       .free = i915_ttm_buddy_man_free,
->> +    .intersects = i915_ttm_buddy_man_intersect,
->> +    .compatible = i915_ttm_buddy_man_compatible,
->>       .debug = i915_ttm_buddy_man_debug,
->>   };
+>> +    struct ttm_resource *res = bo->resource;
+>> +    struct ttm_device *bdev = bo->bdev;
+>> +
+>>       dma_resv_assert_held(bo->base.resv);
+>>       if (bo->resource->mem_type == TTM_PL_SYSTEM)
+>>           return true;
+>> @@ -525,11 +528,7 @@ bool ttm_bo_eviction_valuable(struct 
+>> ttm_buffer_object *bo,
+>>       /* Don't evict this BO if it's outside of the
+>>        * requested placement range
+>>        */
+>> -    if (place->fpfn >= (bo->resource->start + 
+>> bo->resource->num_pages) ||
+>> -        (place->lpfn && place->lpfn <= bo->resource->start))
+>> -        return false;
+>> -
+>> -    return true;
+>> +    return ttm_resource_intersect(bdev, res, place, bo->base.size);
+>>   }
+>>   EXPORT_SYMBOL(ttm_bo_eviction_valuable);
+>>   diff --git a/drivers/gpu/drm/ttm/ttm_resource.c 
+>> b/drivers/gpu/drm/ttm/ttm_resource.c
+>> index 84a6fe9e976e..c745faf72b1a 100644
+>> --- a/drivers/gpu/drm/ttm/ttm_resource.c
+>> +++ b/drivers/gpu/drm/ttm/ttm_resource.c
+>> @@ -316,6 +316,8 @@ static bool ttm_resource_places_compat(struct 
+>> ttm_resource *res,
+>>                          const struct ttm_place *places,
+>>                          unsigned num_placement)
+>>   {
+>> +    struct ttm_buffer_object *bo = res->bo;
+>> +    struct ttm_device *bdev = bo->bdev;
+>>       unsigned i;
+>>         if (res->placement & TTM_PL_FLAG_TEMPORARY)
+>> @@ -324,8 +326,7 @@ static bool ttm_resource_places_compat(struct 
+>> ttm_resource *res,
+>>       for (i = 0; i < num_placement; i++) {
+>>           const struct ttm_place *heap = &places[i];
+>>   -        if (res->start < heap->fpfn || (heap->lpfn &&
+>> -            (res->start + res->num_pages) > heap->lpfn))
+>> +        if (!ttm_resource_compatible(bdev, res, heap, bo->base.size))
+>>               continue;
+>>             if ((res->mem_type == heap->mem_type) &&
 
