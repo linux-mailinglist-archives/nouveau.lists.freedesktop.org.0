@@ -1,83 +1,72 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB9765883EA
-	for <lists+nouveau@lfdr.de>; Wed,  3 Aug 2022 00:12:53 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 000C4588EAB
+	for <lists+nouveau@lfdr.de>; Wed,  3 Aug 2022 16:28:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 315B6113129;
-	Tue,  2 Aug 2022 22:12:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 71C0F1124BB;
+	Wed,  3 Aug 2022 14:28:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1AFCB95207
- for <nouveau@lists.freedesktop.org>; Tue,  2 Aug 2022 22:12:32 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 56AD72AAD1
+ for <nouveau@lists.freedesktop.org>; Wed,  3 Aug 2022 14:27:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1659478352;
+ s=mimecast20190719; t=1659536870;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8Y0WynJgJNSfh9M8m5gL0/rvOhxBadhWnHgYusmFFV8=;
- b=L6Q/8cvv9m6vr9N4WIC+ZZeD16b5u+uGuTEFi5uwTvho5I8M/iFNgHwuGraEqTJqVZqNm4
- VAEmx5kZrTjlVqP99bG3nhIjwkW+3RRMMWP+Soyvj8dH9+PxA+ZN1D1dRjbWKtJjesY/Tg
- zbQJTp5WIaxVKaw7HlfSUYbCYhceEyo=
+ content-transfer-encoding:content-transfer-encoding;
+ bh=jMDeq5W3wuzFQptZuNbKzVBS/9VCgpXFXC4FBRH7hbo=;
+ b=CXwXvNBwqdYndp9zxiXWL7Ns//ec1REC5amZ2YuJi4W9qifH0SDg9TWfpboTKpJop48+PB
+ 3hU9SD5SZ9MTsBhRNYBA7xJv8w3HNmJXJiUMgv5UQ9J/HLZzs8zTEkrotMKFWeDf44dYxh
+ 3H24EIKNIWbrtdpxeqX2TrlKzCTZVX4=
 Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
  [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-278-AyUFUowVOGO_tzFW-AFROg-1; Tue, 02 Aug 2022 18:12:31 -0400
-X-MC-Unique: AyUFUowVOGO_tzFW-AFROg-1
+ us-mta-520-_282KRDbMBKxspsCpafpfg-1; Wed, 03 Aug 2022 10:27:49 -0400
+X-MC-Unique: _282KRDbMBKxspsCpafpfg-1
 Received: by mail-qt1-f199.google.com with SMTP id
- l16-20020ac848d0000000b00339ccb6ef6bso1996401qtr.6
- for <nouveau@lists.freedesktop.org>; Tue, 02 Aug 2022 15:12:31 -0700 (PDT)
+ k3-20020ac86043000000b0033cab47c483so2155450qtm.4
+ for <nouveau@lists.freedesktop.org>; Wed, 03 Aug 2022 07:27:49 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=8Y0WynJgJNSfh9M8m5gL0/rvOhxBadhWnHgYusmFFV8=;
- b=eczr0sbJJp6yPKzg1KYPlkCxQNeDKeqXf7IH39L/cd7h7D71Fb4O0efMoh0o7kfV+4
- guXWm8Ed3dEYOFgfxHTTqkQak8TXfCOf9t5XanIaqIW/oknvrD+JihRDvW7s2DyA3eip
- B53/20tG6n8FbyPa/EDGmk7PnmeRWD/co8uR02UrqHBlFH4g0g+8Gcm6RxfJBZQpMPpZ
- r+hxoT/Ax1+4nxNIosmV/RO8qSG7DpkFsgqhJrz5lmIfbp3zJlMmxmhAEqSlwJMe8GLN
- owceqPivGRvHXcysUh7b1knAG38SJToVlWZ8tVp8h+uXU1ruy/eXUSnj9WqYtsKvbIjK
- 7FKA==
-X-Gm-Message-State: AJIora8O6qiyNrZwUA4rioxZMce+E5jgM8icrnV8r/r8RcsT+2ED9Ins
- 1yBUEEGmEydxhweyynCx54tRWff4a3DOvZgkx9d/uex/zcOag2/wVhd1Z+pHiwB3kZrtlNz9lPH
- qJ4F6JpDjUR5EGNsV9TnUJSZxAQ==
-X-Received: by 2002:a05:620a:c52:b0:6b5:467f:4f6d with SMTP id
- u18-20020a05620a0c5200b006b5467f4f6dmr17268476qki.503.1659478350654; 
- Tue, 02 Aug 2022 15:12:30 -0700 (PDT)
-X-Google-Smtp-Source: AGRyM1vVi4NYTvyopJmtP9Nw2sj+ZJUYf1nCNfIK7eICNG5FUBO+EPj7/KKC2dY5Fub85vgbFtL4GQ==
-X-Received: by 2002:a05:620a:c52:b0:6b5:467f:4f6d with SMTP id
- u18-20020a05620a0c5200b006b5467f4f6dmr17268453qki.503.1659478350366; 
- Tue, 02 Aug 2022 15:12:30 -0700 (PDT)
-Received: from [192.168.8.138] (pool-100-0-245-4.bstnma.fios.verizon.net.
- [100.0.245.4]) by smtp.gmail.com with ESMTPSA id
- o20-20020ac87c54000000b0033a5048464fsm1898043qtv.11.2022.08.02.15.12.29
+ bh=jMDeq5W3wuzFQptZuNbKzVBS/9VCgpXFXC4FBRH7hbo=;
+ b=QUKCFZXkMHTM5WcIKLsZHraftVaVTKWFiNcPEEmmhI++gtEgnwaB2FXwWz+9mGo9Yt
+ Z2Uan/Kckw1TznPuaW1NYbzNmMuSEP/Ioe7NuBOOO2u1wnrUbOh83/OWA55/hydVRDIw
+ dA0hT1cMqItqfyAGVvpeA1nM3lpdqeZc/bn+f9dLfT3nWkgB7u+acPqiaqPLCu9TrPs/
+ k9+MpZpcaY6fFkghYVPoR42D1KfQPIrcLleNobvcIyP/6oO2lDXNPz/vA0qldO8IZX2u
+ 7bR7ubUnYqJ6WtWN/M8D3jQTr6WpUUMdrcAmZSn9KChkdpDti0O+tmJJjXaOowS2FfLG
+ O7gQ==
+X-Gm-Message-State: ACgBeo0dGOwFYT09XRROyfQ8/a1u9f/z3k4srR4dHXKATLVZeaDdoweP
+ 14Di3DhJl0XmrE79kXUfHvkKyC7MOqPimxy/seALpQ9p64gTAav0xFQ+Zn3kEA6fl8UaBXfDWv3
+ Dj87lPaAmXaR/QSS2cmrJRkWfQQ==
+X-Received: by 2002:a05:6214:b6c:b0:476:8321:db81 with SMTP id
+ ey12-20020a0562140b6c00b004768321db81mr12651659qvb.100.1659536868576; 
+ Wed, 03 Aug 2022 07:27:48 -0700 (PDT)
+X-Google-Smtp-Source: AA6agR7IlwlhOPpAaKuzndenntMKIemsZndWQNZCHgv70HCa/VmiEGcfUdUOkdlm30gAkODQ8TtTAg==
+X-Received: by 2002:a05:6214:b6c:b0:476:8321:db81 with SMTP id
+ ey12-20020a0562140b6c00b004768321db81mr12651642qvb.100.1659536868321; 
+ Wed, 03 Aug 2022 07:27:48 -0700 (PDT)
+Received: from kherbst.pingu.com (ip1f10bb48.dynamic.kabel-deutschland.de.
+ [31.16.187.72]) by smtp.gmail.com with ESMTPSA id
+ q31-20020a05620a2a5f00b006b8e8c657ccsm1121040qkp.117.2022.08.03.07.27.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Aug 2022 15:12:29 -0700 (PDT)
-Message-ID: <31d47373883e9aabe5bfa7b172e21b84cc6a164d.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: "Lin, Wayne" <Wayne.Lin@amd.com>, "dri-devel@lists.freedesktop.org"
- <dri-devel@lists.freedesktop.org>, "nouveau@lists.freedesktop.org"
- <nouveau@lists.freedesktop.org>, "amd-gfx@lists.freedesktop.org"
- <amd-gfx@lists.freedesktop.org>
-Date: Tue, 02 Aug 2022 18:12:28 -0400
-In-Reply-To: <CO6PR12MB54890BFD954BBF578E2ADA67FC819@CO6PR12MB5489.namprd12.prod.outlook.com>
-References: <20220607192933.1333228-1-lyude@redhat.com>
- <20220607192933.1333228-16-lyude@redhat.com>
- <CO6PR12MB54890BFD954BBF578E2ADA67FC819@CO6PR12MB5489.namprd12.prod.outlook.com>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
+ Wed, 03 Aug 2022 07:27:47 -0700 (PDT)
+From: Karol Herbst <kherbst@redhat.com>
+To: linux-kernel@vger.kernel.org
+Date: Wed,  3 Aug 2022 16:27:45 +0200
+Message-Id: <20220803142745.2679510-1-kherbst@redhat.com>
+X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [RESEND RFC 15/18] drm/display/dp_mst: Skip releasing
- payloads if last connected port isn't connected
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
+Subject: [Nouveau] [PATCH] drm/nouveau: recognise GA103
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,303 +78,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jani Nikula <jani.nikula@intel.com>, Imre Deak <imre.deak@intel.com>,
- open list <linux-kernel@vger.kernel.org>, "Lakha, 
- Bhawanpreet" <Bhawanpreet.Lakha@amd.com>, David Airlie <airlied@linux.ie>, "Zuo,
- Jerry" <Jerry.Zuo@amd.com>, Daniel Vetter <daniel@ffwll.ch>,
- Sean Paul <sean@poorly.run>,
- Ville =?ISO-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+Cc: nouveau@lists.freedesktop.org, stable@vger.kernel.org,
+ Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 2022-07-05 at 08:45 +0000, Lin, Wayne wrote:
-> [Public]
-> 
-> 
-> 
-> > -----Original Message-----
-> > From: Lyude Paul <lyude@redhat.com>
-> > Sent: Wednesday, June 8, 2022 3:30 AM
-> > To: dri-devel@lists.freedesktop.org; nouveau@lists.freedesktop.org; amd-
-> > gfx@lists.freedesktop.org
-> > Cc: Lin, Wayne <Wayne.Lin@amd.com>; Ville Syrjälä
-> > <ville.syrjala@linux.intel.com>; Zuo, Jerry <Jerry.Zuo@amd.com>; Jani
-> > Nikula
-> > <jani.nikula@intel.com>; Imre Deak <imre.deak@intel.com>; Daniel Vetter
-> > <daniel.vetter@ffwll.ch>; Sean Paul <sean@poorly.run>; David Airlie
-> > <airlied@linux.ie>; Daniel Vetter <daniel@ffwll.ch>; Thomas Zimmermann
-> > <tzimmermann@suse.de>; Lakha, Bhawanpreet
-> > <Bhawanpreet.Lakha@amd.com>; open list <linux-kernel@vger.kernel.org>
-> > Subject: [RESEND RFC 15/18] drm/display/dp_mst: Skip releasing payloads if
-> > last connected port isn't connected
-> > 
-> > In the past, we've ran into strange issues regarding errors in response to
-> > trying to destroy payloads after a port has been unplugged. We fixed this
-> > back in:
-> > 
-> > This is intended to replace the workaround that was added here:
-> > 
-> > commit 3769e4c0af5b ("drm/dp_mst: Avoid to mess up payload table by
-> > ports in stale topology")
-> > 
-> > which was intended fix to some of the payload leaks that were observed
-> > before, where we would attempt to determine if the port was still
-> > connected to the topology before updating payloads using
-> > drm_dp_mst_port_downstream_of_branch. This wasn't a particularly good
-> > solution, since one of the points of still having port and mstb validation
-> > is to
-> > avoid sending messages to newly disconnected branches wherever possible
-> > - thus the required use of drm_dp_mst_port_downstream_of_branch
-> > would indicate something may be wrong with said validation.
-> > 
-> > It seems like it may have just been races and luck that made
-> > drm_dp_mst_port_downstream_of_branch work however, as while I was
-> > trying to figure out the true cause of this issue when removing the legacy
-> > MST code - I discovered an important excerpt in section 2.14.2.3.3.6 of
-> > the DP
-> > 2.0
-> > specs:
-> > 
-> > "BAD_PARAM - This reply is transmitted when a Message Transaction
-> > parameter is in error; for example, the next port number is invalid or /no
-> > device is connected/ to the port associated with the port number."
-> > 
-> > Sure enough - removing the calls to
-> > drm_dp_mst_port_downstream_of_branch()
-> > and instead checking the ->ddps field of the parent port to see whether we
-> > should release a given payload or not seems to totally fix the issue. This
-> > does
-> > actually make sense to me, as it seems the implication is that given a
-> > topology where an MSTB is removed, the payload for the MST parent's port
-> > will be released automatically if that port is also marked as
-> > disconnected.
-> > However, if there's another parent in the chain after that which is
-> > connected
-> > - payloads must be released there with an ALLOCATE_PAYLOAD message.
-> > 
-> > So, let's do that!
-> > 
-> > Signed-off-by: Lyude Paul <lyude@redhat.com>
-> > Cc: Wayne Lin <Wayne.Lin@amd.com>
-> > Cc: Ville Syrjälä <ville.syrjala@linux.intel.com>
-> > Cc: Fangzhi Zuo <Jerry.Zuo@amd.com>
-> > Cc: Jani Nikula <jani.nikula@intel.com>
-> > Cc: Imre Deak <imre.deak@intel.com>
-> > Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
-> > Cc: Sean Paul <sean@poorly.run>
-> > ---
-> >  drivers/gpu/drm/display/drm_dp_mst_topology.c | 51 +++++++------------
-> >  1 file changed, 17 insertions(+), 34 deletions(-)
-> > 
-> > diff --git a/drivers/gpu/drm/display/drm_dp_mst_topology.c
-> > b/drivers/gpu/drm/display/drm_dp_mst_topology.c
-> > index dd314586bac3..70adb8db4335 100644
-> > --- a/drivers/gpu/drm/display/drm_dp_mst_topology.c
-> > +++ b/drivers/gpu/drm/display/drm_dp_mst_topology.c
-> > @@ -3137,7 +3137,7 @@ static struct drm_dp_mst_port
-> > *drm_dp_get_last_connected_port_to_mstb(struct drm  static struct
-> > drm_dp_mst_branch *  drm_dp_get_last_connected_port_and_mstb(struct
-> > drm_dp_mst_topology_mgr *mgr,
-> >                                         struct drm_dp_mst_branch *mstb,
-> > -                                       int *port_num)
-> > +                                       struct drm_dp_mst_port
-> > **last_port)
-> >  {
-> >         struct drm_dp_mst_branch *rmstb = NULL;
-> >         struct drm_dp_mst_port *found_port;
-> > @@ -3153,7 +3153,8 @@
-> > drm_dp_get_last_connected_port_and_mstb(struct
-> > drm_dp_mst_topology_mgr *mgr,
-> > 
-> >                 if (drm_dp_mst_topology_try_get_mstb(found_port-
-> > > parent)) {
-> >                         rmstb = found_port->parent;
-> > -                       *port_num = found_port->port_num;
-> > +                       *last_port = found_port;
-> > +                       drm_dp_mst_get_port_malloc(found_port);
-> >                 } else {
-> >                         /* Search again, starting from this parent */
-> >                         mstb = found_port->parent;
-> > @@ -3170,7 +3171,7 @@ static int drm_dp_payload_send_msg(struct
-> > drm_dp_mst_topology_mgr *mgr,
-> >                                    int pbn)
-> >  {
-> >         struct drm_dp_sideband_msg_tx *txmsg;
-> > -       struct drm_dp_mst_branch *mstb;
-> > +       struct drm_dp_mst_branch *mstb = NULL;
-> >         int ret, port_num;
-> >         u8 sinks[DRM_DP_MAX_SDP_STREAMS];
-> >         int i;
-> > @@ -3178,12 +3179,22 @@ static int drm_dp_payload_send_msg(struct
-> > drm_dp_mst_topology_mgr *mgr,
-> >         port_num = port->port_num;
-> >         mstb = drm_dp_mst_topology_get_mstb_validated(mgr, port-
-> > > parent);
-> >         if (!mstb) {
-> > -               mstb = drm_dp_get_last_connected_port_and_mstb(mgr,
-> > -                                                              port-
-> > >parent,
-> > -                                                              &port_num);
-> > +               struct drm_dp_mst_port *rport = NULL;
-> > +               bool ddps;
-> > 
-> > +               mstb = drm_dp_get_last_connected_port_and_mstb(mgr,
-> > port->parent,
-> > +&rport);
-> >                 if (!mstb)
-> >                         return -EINVAL;
-> > +
-> > +               ddps = rport->ddps;
-> > +               port_num = rport->port_num;
-> > +               drm_dp_mst_put_port_malloc(rport);
-> > +
-> > +               /* If the port is currently marked as disconnected, don't
-> > send
-> > a payload message */
-> > +               if (!ddps) {
-> Hi Lyude,
-> 
-> Thanks for driving this!
-> Shouldn't we still send ALLOCATE_PAYLOAD with PBN 0 to the last connected 
-> Port even its peer device is disconnected? We rely on this "path msg" to
-> update
-> all payload ID tables along the virtual payload channel.
-> 
+Appears to be ok with general GA10x code.
 
-Do you know if there's any devices that break with this change, btw? Would be
-super useful to know imho, and if so I might be alright with dropping it
-depending on what the answer to the next paragraph is.
+Signed-off-by: Karol Herbst <kherbst@redhat.com>
+Cc: <stable@vger.kernel.org> # v5.15+
+---
+ .../gpu/drm/nouveau/nvkm/engine/device/base.c | 22 +++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
-> commit 3769e4c0af5b ("drm/dp_mst: Avoid to mess up payload table by
-> ports in stale topology") was trying to skip updating payload for a target
-> which is
-> no longer existing in the current topology rooted at mgr->mst_primary. I
-> passed
-> "mgr->mst_primary" to drm_dp_mst_port_downstream_of_branch() previously.
-> Sorry, I might not fully understand the issue you've seen. Could you
-> elaborate on
-> this more please?
-> 
-> Thanks!
-
-I will have to double check this since it's been a month, but basically - the
-idea of having the topology references in the first place was to be the one
-check for figuring out whether something's in a topology or not. I've been
-thinking of maybe trying to replace it at some point, but I think we'd want to
-do it all over the helpers instead of just in certain spots.
-
-The other thing I noticed was that when I was rewriting this code, I noticed
-it seemed a lot like we had misunderstood the issue that was causing leaks in
-the first place. The BAD_PARAM we noticed indicates the payload we're trying
-to remove on the other end doesn't exist anymore, meaning the branch device in
-question got rid of any payloads it had active in response to the CSN. In
-testing though I found that payloads would be automatically released in
-situations where the last reachable port was marked as disconnected via a
-previous CSN, but was still reachable otherwise, and not in any other
-situation. This also seemed to match up with the excerpts in the DP spec that
-I found, so I assumed it was probably correct.
-
-Also, I think using the DDPS field instead of trying to traverse the topology
-state (which might not have been fully updated yet in response to CSNs) might
-be a slightly better idea since DDPS may end up being updated before the port
-has been removed from our in-memory topology, which is kind of one of the
-reasons I've been considering trying to come up with a better solution then
-topology references someday (unfortunately it works 'good enough' for the most
-part, so definitely not a priority). This is 100% a guess on my part though.
-
-> > +                       ret = -EINVAL;
-> > +                       goto fail_put;
-> > +               }
-> >         }
-> > 
-> >         txmsg = kzalloc(sizeof(*txmsg), GFP_KERNEL); @@ -3384,7 +3395,6
-> > @@ int drm_dp_update_payload_part1(struct drm_dp_mst_topology_mgr
-> > *mgr, int start_s
-> >         struct drm_dp_mst_port *port;
-> >         int i, j;
-> >         int cur_slots = start_slot;
-> > -       bool skip;
-> > 
-> >         mutex_lock(&mgr->payload_lock);
-> >         for (i = 0; i < mgr->max_payloads; i++) { @@ -3399,16 +3409,6 @@
-> > int
-> > drm_dp_update_payload_part1(struct drm_dp_mst_topology_mgr *mgr,
-> > int start_s
-> >                         port = container_of(vcpi, struct drm_dp_mst_port,
-> >                                             vcpi);
-> > 
-> > -                       mutex_lock(&mgr->lock);
-> > -                       skip
-> > = !drm_dp_mst_port_downstream_of_branch(port, mgr->mst_primary);
-> > -                       mutex_unlock(&mgr->lock);
-> > -
-> > -                       if (skip) {
-> > -                               drm_dbg_kms(mgr->dev,
-> > -                                           "Virtual channel %d is not in
-> > current
-> > topology\n",
-> > -                                           i);
-> > -                               continue;
-> > -                       }
-> >                         /* Validated ports don't matter if we're releasing
-> >                          * VCPI
-> >                          */
-> > @@ -3509,7 +3509,6 @@ int drm_dp_update_payload_part2(struct
-> > drm_dp_mst_topology_mgr *mgr)
-> >         struct drm_dp_mst_port *port;
-> >         int i;
-> >         int ret = 0;
-> > -       bool skip;
-> > 
-> >         mutex_lock(&mgr->payload_lock);
-> >         for (i = 0; i < mgr->max_payloads; i++) { @@ -3519,13 +3518,6 @@
-> > int
-> > drm_dp_update_payload_part2(struct drm_dp_mst_topology_mgr *mgr)
-> > 
-> >                 port = container_of(mgr->proposed_vcpis[i], struct
-> > drm_dp_mst_port, vcpi);
-> > 
-> > -               mutex_lock(&mgr->lock);
-> > -               skip = !drm_dp_mst_port_downstream_of_branch(port,
-> > mgr->mst_primary);
-> > -               mutex_unlock(&mgr->lock);
-> > -
-> > -               if (skip)
-> > -                       continue;
-> > -
-> >                 drm_dbg_kms(mgr->dev, "payload %d %d\n", i, mgr-
-> > > payloads[i].payload_state);
-> >                 if (mgr->payloads[i].payload_state == DP_PAYLOAD_LOCAL)
-> > {
-> >                         ret = drm_dp_create_payload_step2(mgr, port, mgr-
-> > > proposed_vcpis[i]->vcpi, &mgr->payloads[i]); @@ -4780,18 +4772,9 @@
-> > EXPORT_SYMBOL(drm_dp_mst_reset_vcpi_slots);
-> >  void drm_dp_mst_deallocate_vcpi(struct drm_dp_mst_topology_mgr *mgr,
-> >                                 struct drm_dp_mst_port *port)
-> >  {
-> > -       bool skip;
-> > -
-> >         if (!port->vcpi.vcpi)
-> >                 return;
-> > 
-> > -       mutex_lock(&mgr->lock);
-> > -       skip = !drm_dp_mst_port_downstream_of_branch(port, mgr-
-> > > mst_primary);
-> > -       mutex_unlock(&mgr->lock);
-> > -
-> > -       if (skip)
-> > -               return;
-> > -
-> >         drm_dp_mst_put_payload_id(mgr, port->vcpi.vcpi);
-> >         port->vcpi.num_slots = 0;
-> >         port->vcpi.pbn = 0;
-> > --
-> > 2.35.3
-> --
-> Wayne Lin
-
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
+index 62efbd0f3846..b7246b146e51 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
+@@ -2605,6 +2605,27 @@ nv172_chipset = {
+ 	.fifo     = { 0x00000001, ga102_fifo_new },
+ };
+ 
++static const struct nvkm_device_chip
++nv173_chipset = {
++	.name = "GA103",
++	.bar      = { 0x00000001, tu102_bar_new },
++	.bios     = { 0x00000001, nvkm_bios_new },
++	.devinit  = { 0x00000001, ga100_devinit_new },
++	.fb       = { 0x00000001, ga102_fb_new },
++	.gpio     = { 0x00000001, ga102_gpio_new },
++	.i2c      = { 0x00000001, gm200_i2c_new },
++	.imem     = { 0x00000001, nv50_instmem_new },
++	.mc       = { 0x00000001, ga100_mc_new },
++	.mmu      = { 0x00000001, tu102_mmu_new },
++	.pci      = { 0x00000001, gp100_pci_new },
++	.privring = { 0x00000001, gm200_privring_new },
++	.timer    = { 0x00000001, gk20a_timer_new },
++	.top      = { 0x00000001, ga100_top_new },
++	.disp     = { 0x00000001, ga102_disp_new },
++	.dma      = { 0x00000001, gv100_dma_new },
++	.fifo     = { 0x00000001, ga102_fifo_new },
++};
++
+ static const struct nvkm_device_chip
+ nv174_chipset = {
+ 	.name = "GA104",
+@@ -3092,6 +3113,7 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
+ 		case 0x167: device->chip = &nv167_chipset; break;
+ 		case 0x168: device->chip = &nv168_chipset; break;
+ 		case 0x172: device->chip = &nv172_chipset; break;
++		case 0x173: device->chip = &nv173_chipset; break;
+ 		case 0x174: device->chip = &nv174_chipset; break;
+ 		case 0x176: device->chip = &nv176_chipset; break;
+ 		case 0x177: device->chip = &nv177_chipset; break;
 -- 
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+2.37.1
 
