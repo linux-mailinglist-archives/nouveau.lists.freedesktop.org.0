@@ -1,84 +1,93 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D67F958A202
-	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:38:18 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 58E0758A234
+	for <lists+nouveau@lfdr.de>; Thu,  4 Aug 2022 22:41:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AA794A6F2B;
-	Thu,  4 Aug 2022 20:37:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 51B9CA6F7F;
+	Thu,  4 Aug 2022 20:37:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0F0BE18A7EA
- for <nouveau@lists.freedesktop.org>; Wed,  3 Aug 2022 20:27:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1659558476;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=oVq6qfh71Z4eyfH2Jr7IUkThH+5zHyp5mI30K20IkZo=;
- b=RCWuYes8YlKC3Edz4Y9HXW/tUad8qH59UFhrTvnNoAiJyZ35WEmr8z59XXedH63AMwO24t
- yUvFClOrNlRoievoQ2VOz9GGN0+33b1i/tH/qs6o687lQkCqaneNjRtwhWaKjAoJU5lgoc
- HBY3Xx6wqhXhtL5GmDXwO+l8JmmxY5Y=
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-619-wT8Jx27HNCm-0y7SgdQQVw-1; Wed, 03 Aug 2022 16:27:55 -0400
-X-MC-Unique: wT8Jx27HNCm-0y7SgdQQVw-1
-Received: by mail-qk1-f197.google.com with SMTP id
- br36-20020a05620a462400b006b5fa8e5dd5so14185088qkb.1
- for <nouveau@lists.freedesktop.org>; Wed, 03 Aug 2022 13:27:55 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=oVq6qfh71Z4eyfH2Jr7IUkThH+5zHyp5mI30K20IkZo=;
- b=6JAqjmwtTWpGuDUUMMiOonWPfMKH9gn10fIsPakw8KgIWcfpZGxnl6LbQ2BAd0q3gv
- k4poEwKtosQtbfK4ykHMNCJTz49QEndWW5rgsqyP1kprO6bAT4AJCmvFcrKuNHUqly+O
- 0Uet5aoUUF1zkDjgX3mExMtwZ/iKBZ/fQeptILJ3XbXqNKmtqrZbFjdIs8XW8XfQRKZH
- zcEFgQyphy0/eZPJu79H+IzKzCaWr0/fvsCnqD4rRXNyuDPzzbCoMrcv65lzlllK5ODh
- LgtMBOhlQKWxijx2tIs1trilODsWxYBYfBO7HujHDfoVp5aBqeAVlN7auPobObnpe5jY
- rAuA==
-X-Gm-Message-State: AJIora94rnJYhhNuRGW0aXuxfKNiDvFAlEulRxJ8ZUJVxUyd8w3tkABv
- smkefJSSL6d9DXVzOdOyUr9Z9Z5Y67arSJP5Ig8QvtdkulqX0zSeiotPuFNWlGxXdf8wXFzA8qv
- QELKqrFUe6+mWOgEEt0OygY9TJA==
-X-Received: by 2002:a05:620a:1a20:b0:6b5:fb66:c0ed with SMTP id
- bk32-20020a05620a1a2000b006b5fb66c0edmr20320468qkb.582.1659558475274; 
- Wed, 03 Aug 2022 13:27:55 -0700 (PDT)
-X-Google-Smtp-Source: AGRyM1sYkLbaReZU3W97WVBuS4zUUlBeI7W8a0WinyCLm13NPrWmXKMpW3LlStpLdb0upC3LPX+pRA==
-X-Received: by 2002:a05:620a:1a20:b0:6b5:fb66:c0ed with SMTP id
- bk32-20020a05620a1a2000b006b5fb66c0edmr20320447qkb.582.1659558474989; 
- Wed, 03 Aug 2022 13:27:54 -0700 (PDT)
-Received: from [192.168.8.138] (pool-100-0-245-4.bstnma.fios.verizon.net.
- [100.0.245.4]) by smtp.gmail.com with ESMTPSA id
- r4-20020ae9d604000000b006b614fe291bsm12931459qkk.28.2022.08.03.13.27.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Aug 2022 13:27:54 -0700 (PDT)
-Message-ID: <848f35a693b26bfd15b3c6539eacd3e313dcd3a7.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: "Lin, Wayne" <Wayne.Lin@amd.com>, "dri-devel@lists.freedesktop.org"
- <dri-devel@lists.freedesktop.org>, "nouveau@lists.freedesktop.org"
- <nouveau@lists.freedesktop.org>, "amd-gfx@lists.freedesktop.org"
- <amd-gfx@lists.freedesktop.org>
-Date: Wed, 03 Aug 2022 16:27:51 -0400
-In-Reply-To: <CO6PR12MB5489BAFF2DDCD67F8BDCD827FC819@CO6PR12MB5489.namprd12.prod.outlook.com>
-References: <20220607192933.1333228-1-lyude@redhat.com>
- <20220607192933.1333228-19-lyude@redhat.com>
- <CO6PR12MB5489BAFF2DDCD67F8BDCD827FC819@CO6PR12MB5489.namprd12.prod.outlook.com>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2079.outbound.protection.outlook.com [40.107.244.79])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 912F692608;
+ Thu,  4 Aug 2022 09:00:19 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Y9BK+EyVHY7G10AuyP15ZMmU1bBLkLkBzg7vNG+HwqpeWxo39VNVu39UgnDdGsYt0ypJbj9K5UyNFnKuDLQ8lvj73eYHgbYghGnX3MY/y3o0HIhQBaocMBVnitZqMKBUAwOAHKiLVSBW+l9cOhMY5r57QOb9TnZr9zorrKo48jnd5tgVqqu+fWTYf5zJtE8PvJliK0Yk5BfsSEznndMJplQokkmOKqYD/twRYoseEXmfKyQSbv+gwS+nAixdlx3cSpCUuZ0JWJgxSr2aq2SO6BpOkmhbNWVbF8wcl1WrBfvdjXYn/1VxAyhG9cYnFkf9GQpp2zekpzJkUndUKlEs4w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YKcYfIjPH1bDveC/pE2ZMqfsiZ6xzDVHGvJ/z8LHemM=;
+ b=KHud8ed7FEkBbbGOyZ+jo6v/psTewjGZxOSQcpj3d51Crd3YAHTVGJw/SXOCYIyRMCCvv7+FLsY75JYbTck8JNjASey9nDFKCnWnjIn9QHJX28muRKc8YMGZdNHbaLA68+pZgbtQFTKIOgAIEEx10LH698fbQdg890SHRrLBxik/3FPaFhVLRkxFSO7zO5kHdCWTAYBI9n4CL7rBQzysjYYJEBI+C1iJUkj96lBqvmWMqyfawu8JyRkwTYCFqeZv9cI0A8THVi2DTD54vz3zWRzDjDAodcuO0d/Mze00aEXcj+AtU13hlUQgD6Ti7avIP8viwWaiFgd3UE5qImqYng==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.freedesktop.org smtp.mailfrom=amd.com; 
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YKcYfIjPH1bDveC/pE2ZMqfsiZ6xzDVHGvJ/z8LHemM=;
+ b=yM4BI/FH9LvZVpKtGwdQ1u21lTOrmCNfpzlbbBtPchKADvn5zLRxyRwzTe4pQwmVFpeF5ZCeZ4Y+Sr3ZkbYNb597kFdpjJ7rg21XDigguRX0ENDsLev8xeH74oiAGgXT68R+1Z7a9q0pu2JDdgGKAggU69paZCnNcNQcniD+5cM=
+Received: from DM5PR07CA0068.namprd07.prod.outlook.com (2603:10b6:4:ad::33) by
+ DS7PR12MB5887.namprd12.prod.outlook.com (2603:10b6:8:7a::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5504.14; Thu, 4 Aug 2022 09:00:15 +0000
+Received: from DM6NAM11FT039.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:4:ad:cafe::67) by DM5PR07CA0068.outlook.office365.com
+ (2603:10b6:4:ad::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5504.16 via Frontend
+ Transport; Thu, 4 Aug 2022 09:00:15 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DM6NAM11FT039.mail.protection.outlook.com (10.13.172.83) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.5504.14 via Frontend Transport; Thu, 4 Aug 2022 09:00:15 +0000
+Received: from amd-X570-AORUS-ELITE.amd.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.28; Thu, 4 Aug 2022 04:00:11 -0500
+From: Arunpravin Paneer Selvam <Arunpravin.PaneerSelvam@amd.com>
+To: <dri-devel@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>,
+ <intel-gfx@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>
+Date: Thu, 4 Aug 2022 01:59:47 -0700
+Message-ID: <20220804085952.6137-1-Arunpravin.PaneerSelvam@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 04 Aug 2022 20:34:27 +0000
-Subject: Re: [Nouveau] [RESEND RFC 18/18] drm/display/dp_mst: Move all
- payload info into the atomic state
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: de31f468-9d6c-4f7b-4e03-08da75f7bf49
+X-MS-TrafficTypeDiagnostic: DS7PR12MB5887:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 0x+8Zej/ot3o3oVzVMxUKOjiD1Ecoq/Kjy6EdzcAvlbMHpa/diINbOWj7yuRCUROpLpyvGhNT44SCgeiX8X9CZylUP++NPL4e034R5SHP2G5atW1t6NXyWdtSmd2ql+X+jUWSB2abPeMu6HHggBIIZKrANQhtFvtYbSAWv1zQaBxYvj22kkHanf2nsocDe4XdhTnSVgI3wQXApYgek1fBSJNu2ViE/+pUk0/24n9hvNvbKjmH9YadzUXlVmUgPWfkTYUPc9hoknzSbtTwltD71oJyNZErSbtnl+DtX6hIXZJtz+OP9EUOjmstjerYxsKEnosY6lGMhmImV+pI9uLix2kixJNgHV6s4x1hwhj9zH2oU6lVrpftAAQW98qt7L1QUyZ++pP4u6hkInmwkoosvv1EUs6oz2EqvHD+Smdbc9lmy4sTgqwFlK67MIj3QKzm6YHC6ijUU+XBPdehJQjCihDSq+Mo9sdkTkldHAzwBNR0xioH9fsUpGkyg5ZffJQFsN7VGRo/mpPNYXueCUg3eSbjcxxEiufQe5xZ+kXQ52fyPbD01Jsi49yrC7mCp/GI6CCuQf61Nbgxx/1F+ibNF08xWIOTNUZACT3ygG2Uvg0HztgsnakEZO9Pxf5Ho2s9i5yQ/PxgY1LXcgmL7p3qnmC+YExnFu9YfC3jNTPURicKpgrvO/RujAOKDYpRQk3FaZT/7IrCXjOv+Ub8qTYnIQ/XGIrsp49ZDCaJny74TjMuAygQzzQXrbEha4UaFiea+jiq9YMhuXxmahJzPIFdkwkRPv/yHQXiE57wvHzT6kSNsnln6bs19pDNniaooTtaP/1uF6iRwnGkfOg7QQV4A==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230016)(4636009)(346002)(39860400002)(396003)(136003)(376002)(36840700001)(46966006)(40470700004)(41300700001)(2616005)(6666004)(8936002)(1076003)(5660300002)(16526019)(186003)(26005)(40460700003)(4326008)(70206006)(2906002)(7696005)(8676002)(70586007)(478600001)(86362001)(36860700001)(82310400005)(81166007)(36756003)(356005)(110136005)(336012)(82740400003)(54906003)(47076005)(40480700001)(426003)(316002)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2022 09:00:15.1877 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: de31f468-9d6c-4f7b-4e03-08da75f7bf49
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT039.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5887
+X-Mailman-Approved-At: Thu, 04 Aug 2022 20:35:10 +0000
+Subject: [Nouveau] [PATCH v4 1/6] drm/ttm: Add new callbacks to ttm res mgr
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,78 +99,154 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Chen, Ian" <Ian.Chen@amd.com>, David Airlie <airlied@linux.ie>,
- Imre Deak <imre.deak@intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- =?ISO-8859-1?Q?Jos=E9?= Roberto de Souza <jose.souza@intel.com>,
- open list <linux-kernel@vger.kernel.org>, "Lei, Jun" <Jun.Lei@amd.com>,
- Ville =?ISO-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>, "Lakha, 
- Bhawanpreet" <Bhawanpreet.Lakha@amd.com>, "Siqueira,
- Rodrigo" <Rodrigo.Siqueira@amd.com>,
- Javier Martinez Canillas <javierm@redhat.com>, "Li, 
- Sun peng \(Leo\)" <Sunpeng.Li@amd.com>, "Zuo, Jerry" <Jerry.Zuo@amd.com>, "Shih,
- Jude" <Jude.Shih@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
- Andi Shyti <andi.shyti@linux.intel.com>, "Strauss,
- Michael" <Michael.Strauss@amd.com>, "Wentland, Harry" <Harry.Wentland@amd.com>,
- Juston Li <juston.li@intel.com>, Jani Nikula <jani.nikula@intel.com>,
- Anshuman Gupta <anshuman.gupta@intel.com>,
- "open list:INTEL DRM DRIVERS" <intel-gfx@lists.freedesktop.org>,
- Luo Jiaxing <luojiaxing@huawei.com>, Jani Nikula <jani.nikula@linux.intel.com>,
- "Liu, Wenjing" <Wenjing.Liu@amd.com>, "Wu, Hersen" <hersenxs.wu@amd.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, "Ma, Leo" <Hanghong.Ma@amd.com>,
- Mikita Lipski <mikita.lipski@amd.com>, Sean Paul <sean@poorly.run>,
- He Ying <heying24@huawei.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Simon Ser <contact@emersion.fr>, "Pan, Xinhui" <Xinhui.Pan@amd.com>, "Li,
- Roman" <Roman.Li@amd.com>, "Koenig, Christian" <Christian.Koenig@amd.com>,
- Ashutosh Dixit <ashutosh.dixit@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
- "Deucher, Alexander" <Alexander.Deucher@amd.com>,
- Sean Paul <seanpaul@chromium.org>, Colin Ian King <colin.king@intel.com>,
- "Kazlauskas, 
- Nicholas" <Nicholas.Kazlauskas@amd.com>, Fernando Ramos <greenfoo@u92.eu>
+Cc: alexander.deucher@amd.com,
+ Arunpravin Paneer Selvam <Arunpravin.PaneerSelvam@amd.com>,
+ luben.tuikov@amd.com, christian.koenig@amd.com, matthew.auld@intel.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 2022-07-05 at 09:10 +0000, Lin, Wayne wrote:
-> > +struct drm_dp_mst_port;
-> > +
-> >   /* DP MST stream allocation (payload bandwidth number) */
-> >   struct dc_dp_mst_stream_allocation {
-> >    uint8_t vcp_id;
-> >    /* number of slots required for the DP stream in
-> >    * transport packet */
-> >    uint8_t slot_count;
-> > + /* The MST port this is on, this is used to associate DC MST payloads
-> > with their
-> > + * respective DRM payloads allocations, and can be ignored on non-
-> > Linux.
-> > + */
-> 
-> Is it necessary for adding this new member? Since this is for setting the DC
-> HW and not relating to drm.
+We are adding two new callbacks to ttm resource manager
+function to handle intersection and compatibility of
+placement and resources.
 
-I don't entirely know, honestly. The reasons I did it:
+v2: move the amdgpu and ttm_range_manager changes to
+    separate patches (Christian)
+v3: rename "intersect" to "intersects" (Matthew)
 
- * Mapping things from DRM to DC and from DC to DRM is really confusing for
-   outside contributors like myself, so it wasn't even really clear to me if
-   there was another way to reconstruct the DRM context from the spots where
-   we call from DC up to DM (not a typo, see next point).
- * These DC structs for MST are already layer mixing as far as I can tell,
-   just not in an immediately obvious way. While this struct itself is for DC,
-   there's multiple spots where we pass the DC payload structs down from DM to
-   DC, then pass them back up from DC to DM and have to figure out how to
-   reconstruct the DRM context that we actually need to use the MST helpers
-   from that. So, that kind of further complicates the confusion of where
-   layers should be separated.
- * As far as I'm aware with C there shouldn't be any issue with adding a
-   pointer to a struct whose contents are undefined. IMHO, this is also
-   preferable to just using void* because then at least you get some hint as
-   to the actual type of the data and avoid the possibility of casting it to
-   the wrong type. So tl;dr, on any platform even outside of Linux with a
-   reasonably compliant compiler this should still build just fine. It'll even
-   give you the added bonus of warning people if they try to access the
-   contents of this member in DC on non-Linux platforms. If void* is preferred
-   though I'm fine with switching it to that.
+Signed-off-by: Christian König <christian.koenig@amd.com>
+Signed-off-by: Arunpravin Paneer Selvam <Arunpravin.PaneerSelvam@amd.com>
+---
+ drivers/gpu/drm/ttm/ttm_resource.c | 59 ++++++++++++++++++++++++++++++
+ include/drm/ttm/ttm_resource.h     | 39 ++++++++++++++++++++
+ 2 files changed, 98 insertions(+)
 
+diff --git a/drivers/gpu/drm/ttm/ttm_resource.c b/drivers/gpu/drm/ttm/ttm_resource.c
+index 20f9adcc3235..357249630c37 100644
+--- a/drivers/gpu/drm/ttm/ttm_resource.c
++++ b/drivers/gpu/drm/ttm/ttm_resource.c
+@@ -253,6 +253,65 @@ void ttm_resource_free(struct ttm_buffer_object *bo, struct ttm_resource **res)
+ }
+ EXPORT_SYMBOL(ttm_resource_free);
+ 
++/**
++ * ttm_resource_intersects - test for intersection
++ *
++ * @bdev: TTM device structure
++ * @res: The resource to test
++ * @place: The placement to test
++ * @size: How many bytes the new allocation needs.
++ *
++ * Test if @res intersects with @place and @size. Used for testing if evictions
++ * are valueable or not.
++ *
++ * Returns true if the res placement intersects with @place and @size.
++ */
++bool ttm_resource_intersects(struct ttm_device *bdev,
++			     struct ttm_resource *res,
++			     const struct ttm_place *place,
++			     size_t size)
++{
++	struct ttm_resource_manager *man;
++
++	if (!res)
++		return false;
++
++	man = ttm_manager_type(bdev, res->mem_type);
++	if (!place || !man->func->intersects)
++		return true;
++
++	return man->func->intersects(man, res, place, size);
++}
++
++/**
++ * ttm_resource_compatible - test for compatibility
++ *
++ * @bdev: TTM device structure
++ * @res: The resource to test
++ * @place: The placement to test
++ * @size: How many bytes the new allocation needs.
++ *
++ * Test if @res compatible with @place and @size.
++ *
++ * Returns true if the res placement compatible with @place and @size.
++ */
++bool ttm_resource_compatible(struct ttm_device *bdev,
++			     struct ttm_resource *res,
++			     const struct ttm_place *place,
++			     size_t size)
++{
++	struct ttm_resource_manager *man;
++
++	if (!res)
++		return false;
++
++	man = ttm_manager_type(bdev, res->mem_type);
++	if (!place || !man->func->compatible)
++		return true;
++
++	return man->func->compatible(man, res, place, size);
++}
++
+ static bool ttm_resource_places_compat(struct ttm_resource *res,
+ 				       const struct ttm_place *places,
+ 				       unsigned num_placement)
+diff --git a/include/drm/ttm/ttm_resource.h b/include/drm/ttm/ttm_resource.h
+index ca89a48c2460..b4914ca75230 100644
+--- a/include/drm/ttm/ttm_resource.h
++++ b/include/drm/ttm/ttm_resource.h
+@@ -88,6 +88,37 @@ struct ttm_resource_manager_func {
+ 	void (*free)(struct ttm_resource_manager *man,
+ 		     struct ttm_resource *res);
+ 
++	/**
++	 * struct ttm_resource_manager_func member intersects
++	 *
++	 * @man: Pointer to a memory type manager.
++	 * @res: Pointer to a struct ttm_resource to be checked.
++	 * @place: Placement to check against.
++	 * @size: Size of the check.
++	 *
++	 * Test if @res intersects with @place + @size. Used to judge if
++	 * evictions are valueable or not.
++	 */
++	bool (*intersects)(struct ttm_resource_manager *man,
++			   struct ttm_resource *res,
++			   const struct ttm_place *place,
++			   size_t size);
++
++	/**
++	 * struct ttm_resource_manager_func member compatible
++	 *
++	 * @man: Pointer to a memory type manager.
++	 * @res: Pointer to a struct ttm_resource to be checked.
++	 * @place: Placement to check against.
++	 * @size: Size of the check.
++	 *
++	 * Test if @res compatible with @place + @size.
++	 */
++	bool (*compatible)(struct ttm_resource_manager *man,
++			   struct ttm_resource *res,
++			   const struct ttm_place *place,
++			   size_t size);
++
+ 	/**
+ 	 * struct ttm_resource_manager_func member debug
+ 	 *
+@@ -329,6 +360,14 @@ int ttm_resource_alloc(struct ttm_buffer_object *bo,
+ 		       const struct ttm_place *place,
+ 		       struct ttm_resource **res);
+ void ttm_resource_free(struct ttm_buffer_object *bo, struct ttm_resource **res);
++bool ttm_resource_intersects(struct ttm_device *bdev,
++			     struct ttm_resource *res,
++			     const struct ttm_place *place,
++			     size_t size);
++bool ttm_resource_compatible(struct ttm_device *bdev,
++			     struct ttm_resource *res,
++			     const struct ttm_place *place,
++			     size_t size);
+ bool ttm_resource_compat(struct ttm_resource *res,
+ 			 struct ttm_placement *placement);
+ void ttm_resource_set_bo(struct ttm_resource *res,
 -- 
-Cheers, Lyude Paul (she/her) Software Engineer at Red Hat
+2.25.1
 
