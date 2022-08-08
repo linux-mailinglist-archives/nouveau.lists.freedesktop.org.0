@@ -2,70 +2,29 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A893D58C7A5
-	for <lists+nouveau@lfdr.de>; Mon,  8 Aug 2022 13:38:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E357F58CF74
+	for <lists+nouveau@lfdr.de>; Mon,  8 Aug 2022 22:58:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 33E8799200;
-	Mon,  8 Aug 2022 11:31:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 285A811B283;
+	Mon,  8 Aug 2022 20:58:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AFCF499187;
- Mon,  8 Aug 2022 11:30:55 +0000 (UTC)
-Received: by mail-ej1-x633.google.com with SMTP id a7so16050584ejp.2;
- Mon, 08 Aug 2022 04:30:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc; bh=dAEB+ltJy92aHJia4rkluIFFluTtwX5Z1gYtEjy8D4Y=;
- b=BogbkyhW0jpxu8TZ2/FZ6IImPEXkk0ZXX7XIcE0Dz9n+YhTS8cg9RU2rnrvh/2RAqd
- 3ah3WYJGwt47hbstjEyPyJeUg+XTLNXZTAngQgpyobPBkEQ71TiUxpcMGjSGkIqmsUZq
- GlEgzZI5zwdNCamT3uBoDXIV3IEq2yCaVWWo2EqYIRIHcqF608yDyqV8G0L+n5ydRHC1
- IEQZotoAlYPaCxpQHRF0zGq8+kb8KBKrwI5r8DPzB1ZWBVJArAEAZnFOIMhcJxuUEhC7
- UJXrd+Pd4HG/+4BMI7H1xf4IZMc+i9BD6AF9SNkE6+Xqd2ECeIFDenuE7CHmGYf7XN0a
- X79g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc;
- bh=dAEB+ltJy92aHJia4rkluIFFluTtwX5Z1gYtEjy8D4Y=;
- b=IxS2tABHPhHjt3xgXFlqCEGYyIUT4iv2pNLRGQd92CNDD8+nhWusWE0KOKqZ9fpmmi
- 5Dq7+StrTQ1OLlzgPpJrUeiaPLj74xPJGosJYOgjjktZlyT78OtrNT+oe5QO0wBGk4U5
- PnnASUmgIk8oMpHOWma//Zhg3N//5+pCohm6btq9rz/hrvvLpzL2Uyns1TEy/JV7Mce1
- xgOF28bSmHBxKvN0Ft0ZArOENEP+HCFFDyCsGRSvor0mLBZvRN91g5XTpq6fPHK/n7Ms
- Pe3R+mKncc4EiMD9OaUx9nkcYHUXM8BD1iFjR7rzGB/SXd7lhoqElMtwRXR/vwxG7iYg
- mhQw==
-X-Gm-Message-State: ACgBeo2rEtZgG1/9yrvs2cQXl3rymnZ4i+XhlLljin45Q6cqUjug09Mc
- j6OfbTktpG0Xs9gvzcBTfw4=
-X-Google-Smtp-Source: AA6agR6EWxK4X/LpXbejTAc6NOFR/jRq0fCwafMfgJ/wtJ/x0PwvL5uZHd+pzB3sAkDzRUmOGLf/GQ==
-X-Received: by 2002:a17:906:7303:b0:730:a4e8:27f1 with SMTP id
- di3-20020a170906730300b00730a4e827f1mr13593548ejc.474.1659958254273; 
- Mon, 08 Aug 2022 04:30:54 -0700 (PDT)
-Received: from ?IPV6:2a02:908:1256:79a0:2de9:6498:3b4e:7aeb?
- ([2a02:908:1256:79a0:2de9:6498:3b4e:7aeb])
- by smtp.gmail.com with ESMTPSA id
- e12-20020a50fb8c000000b0043a78236cd2sm4442087edq.89.2022.08.08.04.30.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Aug 2022 04:30:53 -0700 (PDT)
-Message-ID: <8398d805-a749-dac6-9bf8-6f93935dd2ec@gmail.com>
-Date: Mon, 8 Aug 2022 13:30:52 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
-To: Arunpravin Paneer Selvam <Arunpravin.PaneerSelvam@amd.com>,
- dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org
-References: <20220725114240.4844-1-Arunpravin.PaneerSelvam@amd.com>
- <20220725114240.4844-2-Arunpravin.PaneerSelvam@amd.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <20220725114240.4844-2-Arunpravin.PaneerSelvam@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v2 2/6] drm/ttm: Implement
- intersect/compatible functions
+Received: from gregdf.com (gregdf.com [152.228.171.180])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C233411B1D7
+ for <nouveau@lists.freedesktop.org>; Mon,  8 Aug 2022 20:58:12 +0000 (UTC)
+Received: by gregdf.com (Postfix, from userid 1000)
+ id 8C1DC7DE6C6; Mon,  8 Aug 2022 22:57:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gregdf.com; s=mail;
+ t=1659992277; bh=1bCluPfieUWR62aFW9+HiYHfaLVI1ToZ1MwhWWY/azY=;
+ h=Subject:From:To:Date;
+ b=pgJc/BhFDSXGati1tONbIrRal4JeyHW39GtGfSDy5DTqvZ7qiAWqRbICydbB0P3+b
+ 5veowuZ/JYHP3xmnXhRC3Vq8O88bOFlBOk8hc17Ijxvw8shHfqQyXewk6vh7DrdW9U
+ UnUZWNptvn/63RL9aZ8KmMTiiJUTDkFOp7MvThh0=
+From: Greg Depoire--Ferrer <greg@gregdf.com>
+To: nouveau@lists.freedesktop.org
+Message-Id: <20220808205757.8C1DC7DE6C6@gregdf.com>
+Date: Mon,  8 Aug 2022 22:57:30 +0200 (CEST)
+Subject: [Nouveau] Busy poll during commit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,79 +36,79 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alexander.deucher@amd.com, luben.tuikov@amd.com, christian.koenig@amd.com,
- matthew.auld@intel.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi,
 
+Moving the cursor in circles on Linux 5.18 with a GTX 1070 mobile and a 120 Hz
+display uses ~30% CPU.
 
-Am 25.07.22 um 13:42 schrieb Arunpravin Paneer Selvam:
-> Implemented a new intersect and compatible callback functions
-> to ttm range manager fetching start offset from drm mm range
-> allocator.
->
-> Signed-off-by: Christian König <christian.koenig@amd.com>
-> Signed-off-by: Arunpravin Paneer Selvam <Arunpravin.PaneerSelvam@amd.com>
-> ---
->   drivers/gpu/drm/ttm/ttm_range_manager.c | 33 +++++++++++++++++++++++++
->   1 file changed, 33 insertions(+)
->
-> diff --git a/drivers/gpu/drm/ttm/ttm_range_manager.c b/drivers/gpu/drm/ttm/ttm_range_manager.c
-> index d91666721dc6..12b8d9b36fe6 100644
-> --- a/drivers/gpu/drm/ttm/ttm_range_manager.c
-> +++ b/drivers/gpu/drm/ttm/ttm_range_manager.c
-> @@ -113,6 +113,37 @@ static void ttm_range_man_free(struct ttm_resource_manager *man,
->   	kfree(node);
->   }
->   
-> +static bool ttm_range_man_intersect(struct ttm_resource_manager *man,
-> +				    struct ttm_resource *res,
-> +				    const struct ttm_place *place,
-> +				    size_t size)
-> +{
-> +	struct drm_mm_node *node = &to_ttm_range_mgr_node(res)->mm_nodes[0];
-> +	u32 num_pages = PFN_UP(size);
-> +
-> +	/* Don't evict BOs outside of the requested placement range */
-> +	if (place->fpfn >= (node->start + num_pages) ||
-> +	    (place->lpfn && place->lpfn <= node->start))
-> +		return false;
-> +
-> +	return true;
-> +}
-> +
-> +static bool ttm_range_man_compatible(struct ttm_resource_manager *man,
-> +				     struct ttm_resource *res,
-> +				     const struct ttm_place *place,
-> +				     size_t size)
-> +{
-> +	struct drm_mm_node *node = &to_ttm_range_mgr_node(res)->mm_nodes[0];
-> +	u32 num_pages = PFN_UP(size);
-> +
-> +	if (node->start < place->fpfn ||
+Using perf shows most of the instructions are spent polling in
+base507c_ntfy_wait_begun in drivers/gpu/drm/nouveau/dispnv50/base507c.c:
 
-This should probably be "<=".
+int
+base507c_ntfy_wait_begun(struct nouveau_bo *bo, u32 offset,
+			 struct nvif_device *device)
+{
+	s64 time = nvif_msec(device, 2000ULL,
+		if (NVBO_TD32(bo, offset, NV_DISP_BASE_NOTIFIER_1, _0, STATUS, ==, BEGUN))
+			break;
+		usleep_range(1, 2);
+	);
+	return time < 0 ? time : 0;
+}
+
+That function is called from drivers/gpu/drm/nouveau/dispnv50/wndw.c:
+
+int
+nv50_wndw_wait_armed(struct nv50_wndw *wndw, struct nv50_wndw_atom *asyw)
+{
+	struct nv50_disp *disp = nv50_disp(wndw->plane.dev);
+	if (asyw->set.ntfy) {
+		return wndw->func->ntfy_wait_begun(disp->sync,
+						   asyw->ntfy.offset,
+						   wndw->wndw.base.device);
+	}
+	return 0;
+}
+
+Which in turn is called from nv50_disp_atomic_commit_tail in
+drivers/gpu/drm/nouveau/dispnv50/disp.c:
+
+	/* Wait for HW to signal completion. */
+	for_each_new_plane_in_state(state, plane, new_plane_state, i) {
+		struct nv50_wndw_atom *asyw = nv50_wndw_atom(new_plane_state);
+		struct nv50_wndw *wndw = nv50_wndw(plane);
+		int ret = nv50_wndw_wait_armed(wndw, asyw);
+		if (ret)
+			NV_ERROR(drm, "%s: timeout\n", plane->name);
+	}
+
+I haven't found many resources on how commits work. Could busy polling be
+replaced by something else?
+
+Additional information that might be helpful: with printks I found that
+nv50_head_vblank_handler in drivers/gpu/drm/nouveau/dispnv50/head.c is always
+called right before base507c_ntfy_wait_begun finished.
+
+So for instance this patch drops the CPU usage by making sure that
+base507c_ntfy_wait_begun does not even enter the loop using
+drm_atomic_helper_wait_for_vblanks to wait for the vblank.
+
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+index 5863a689818c..f535ded86b2f 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+@@ -2186,6 +2186,8 @@ nv50_disp_atomic_commit_tail(struct drm_atomic_state *state)
+	if (atom->lock_core)
+		mutex_unlock(&disp->mutex);
+
++	drm_atomic_helper_wait_for_vblanks(dev, state);
++
+	/* Wait for HW to signal completion. */
+	for_each_new_plane_in_state(state, plane, new_plane_state, i) {
+		struct nv50_wndw_atom *asyw = nv50_wndw_atom(new_plane_state);
 
 Regards,
-Christian.
-
-> +	    (place->lpfn && (node->start + num_pages) > place->lpfn))
-> +		return false;
-> +
-> +	return true;
-> +}
-> +
->   static void ttm_range_man_debug(struct ttm_resource_manager *man,
->   				struct drm_printer *printer)
->   {
-> @@ -126,6 +157,8 @@ static void ttm_range_man_debug(struct ttm_resource_manager *man,
->   static const struct ttm_resource_manager_func ttm_range_manager_func = {
->   	.alloc = ttm_range_man_alloc,
->   	.free = ttm_range_man_free,
-> +	.intersect = ttm_range_man_intersect,
-> +	.compatible = ttm_range_man_compatible,
->   	.debug = ttm_range_man_debug
->   };
->   
-
+Greg
