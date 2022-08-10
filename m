@@ -2,65 +2,106 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B186858F34E
-	for <lists+nouveau@lfdr.de>; Wed, 10 Aug 2022 21:44:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FC2958F3B9
+	for <lists+nouveau@lfdr.de>; Wed, 10 Aug 2022 23:08:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8C3C0112638;
-	Wed, 10 Aug 2022 19:44:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BA98B14A216;
+	Wed, 10 Aug 2022 21:08:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F2EFE112638
- for <nouveau@lists.freedesktop.org>; Wed, 10 Aug 2022 19:44:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1660160682;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=5uURM5RVClVdgYkUwaTQs9EA4eW/bn0a77bicPB71ok=;
- b=M/3gXY9RFEU7gO/KoOMPzO697p6kuXcGCnUK4P54qjP1UV3DqrIFB5kMCa8AQQbRbC98he
- VdB3Hyt+F+bqpHMCcfvG/X4/R5g921TBTfjzGO1i/2XQxR65Tae3X00iuJkcDKjywPQJTU
- ASNmoLy+pshXqD5952KaqZ7GB7e3ad4=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-26-X958l3JEMlS-IsG8cUyK9w-1; Wed, 10 Aug 2022 15:44:40 -0400
-X-MC-Unique: X958l3JEMlS-IsG8cUyK9w-1
-Received: by mail-qt1-f199.google.com with SMTP id
- q8-20020ac87348000000b003435f7f4d4bso1104015qtp.10
- for <nouveau@lists.freedesktop.org>; Wed, 10 Aug 2022 12:44:40 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc;
- bh=5uURM5RVClVdgYkUwaTQs9EA4eW/bn0a77bicPB71ok=;
- b=iFu5p0Kt+O6hC6g1hdQcZmjHdC7vbtwtIOZH1REQKjbIbK2IrVercZsWvKONgWLRgb
- 2HMgr6OapbkEp3KvDClzochgrnI2g4KncQCjJnTCx2rWkdq/u62WVvssSkc5TRErT8WN
- KWL0xYG8/AEV984aQPp+Tumbclk6Mpv19R40cKWy8f0ME7RQdm76gB6KbvJqnnpNEzA5
- D4KzoXuO+WF5cYKgnUJnH5ggdOtn0DcjS1l9QZEDP87JW5gfB/1U72WbmKB9YQHB0d2y
- FPaUYWa2caQhkhU6eO8lM7+oHibClgwfkfgYb/6m0H4jWE3pdShWCC7L9LEJfHYdPWRu
- vlPg==
-X-Gm-Message-State: ACgBeo1LOas56ic3YKtc8GnnPZzNouCq3zzvDC15p6r9YsNXFxjPfVT4
- ecIgtxn+SdORZRsJtpuDXMr7NAhApG0+CEUSRd4A9drRpgAsxrN1q4GtbFg5dKFDp0ctjtKSPu5
- 28PsGytEgr7C8L+qpGy40CXBzxCZrsIfkEmNipAqJsA==
-X-Received: by 2002:a05:6214:2588:b0:477:22bd:e1e6 with SMTP id
- fq8-20020a056214258800b0047722bde1e6mr25088135qvb.105.1660160680373; 
- Wed, 10 Aug 2022 12:44:40 -0700 (PDT)
-X-Google-Smtp-Source: AA6agR6TRQ8IAsvlNHmHemMEOzyutzYlaUXmQ81j6BwNx07toLRsXJZUvcaveD8g1sBmZsXLbBJvzV97qMXPMMyHaqU=
-X-Received: by 2002:a05:6214:2588:b0:477:22bd:e1e6 with SMTP id
- fq8-20020a056214258800b0047722bde1e6mr25088113qvb.105.1660160679997; Wed, 10
- Aug 2022 12:44:39 -0700 (PDT)
+Received: from EUR02-AM5-obe.outbound.protection.outlook.com
+ (mail-eopbgr00102.outbound.protection.outlook.com [40.107.0.102])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5A6DC8FA10
+ for <nouveau@lists.freedesktop.org>; Wed, 10 Aug 2022 21:08:14 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=KTXizp/BJO8TYdQeo+a0fBIDgOPC4pAUtZbaqwMXXIgBvNViRcV1GDVrwJnKQIdAwYn4R1R2yMJtNyYlULM5zx1hR34RZVgftyn5sjf77VUmACYAN9Vu1/xAiMiKV38xluSqkzS9UkryuMbKtmA8eVhgkRMH9HxhyIY+JDRnAlfurASA5LleQgdR4tYp+Q1F++iNdA0yR5XcTM3P112zVk40mylu8rHYX8fInafQ3vAfVzUc0R/ZF0L/E+TJlLA5NGMbPryNTsPwm466uLaCGorgYq+9r1LDKU4czYiLt8XUDCiYLOqzKsETd0Gfo/3CdMFQ0IscrhWn7c9r/b+uxA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OTEllMxYC3pw+2KtAs8Y2w5SBFcRh79za5P8mD5kp+Q=;
+ b=WVwrZe9iwN7vPRm1pG30b6Q3CMJ21SZQ1lpDmT7jzIjfeLh/OZd6hyByo3dtCyhC6HBNomzf6RFtWC7O4KyDPsU1YS3F+ecNBAyd3D2ubNjNjEAIgbyLUjDPkCTIi/BLTmbIm4+BikrqT3fdlmXgmX5rrMGtsDL7zvKyfNvQWqi37ezGp0diXToF3TKJ4xcDNDCPfclZvRoq7AMgJ7pAwN3M10QNHgK20UqniDJoS3BO+iuNdWWdHFkRIjjBRJ62rwZCGsJaCalXLcKPsbQOwFBOpiPM9jC0YiavLEYKpRoBX6EHzmgMwkr6cNjGhzEsKxIW8bOWTISYP4Nb5P8Xag==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 192.38.125.140) smtp.rcpttodomain=lists.freedesktop.org
+ smtp.mailfrom=di.ku.dk; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=di.ku.dk; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=di.ku.dk; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OTEllMxYC3pw+2KtAs8Y2w5SBFcRh79za5P8mD5kp+Q=;
+ b=oJYdLwJUZaHw4isLuVK/ISSljbTrdY1ia0rlxDi5zDRQlw2HBK4GSFd3+Xqc8yiuyq/m3k6bmYbJ9qOT9Qu1uE5o/EFAYsnPklY1XHoJEI1RTsfRy25RQ6DQw453cN/4joW7qEXuBsjf6TZkoaBf7gz/o6sh0MsSFo9EVa4+J9U=
+Received: from AM6PR05CA0004.eurprd05.prod.outlook.com (2603:10a6:20b:2e::17)
+ by DB7PR04MB4281.eurprd04.prod.outlook.com (2603:10a6:5:22::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5504.21; Wed, 10 Aug
+ 2022 21:08:11 +0000
+Received: from VE1EUR02FT075.eop-EUR02.prod.protection.outlook.com
+ (2603:10a6:20b:2e:cafe::5b) by AM6PR05CA0004.outlook.office365.com
+ (2603:10a6:20b:2e::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5525.10 via Frontend
+ Transport; Wed, 10 Aug 2022 21:08:11 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 192.38.125.140)
+ smtp.mailfrom=di.ku.dk; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=di.ku.dk;
+Received-SPF: Pass (protection.outlook.com: domain of di.ku.dk designates
+ 192.38.125.140 as permitted sender) receiver=protection.outlook.com;
+ client-ip=192.38.125.140; helo=mailedg02pw.ku.dk; pr=C
+Received: from mailedg02pw.ku.dk (192.38.125.140) by
+ VE1EUR02FT075.mail.protection.outlook.com (10.152.13.36) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5525.11 via Frontend Transport; Wed, 10 Aug 2022 21:08:10 +0000
+Received: from mailsepo01.ku.dk (10.78.10.24) by MAILEDG02PW.unicph.domain
+ (192.38.125.140) with Microsoft SMTP Server id 15.1.2507.12; Wed, 10 Aug 2022
+ 23:08:10 +0200
+Received: from 10.78.10.21 ([10.78.10.21])
+ by mailsepo01.ku.dk (JAMES SMTP Server 2.3.2-1) with SMTP ID 859
+ for <nouveau@lists.freedesktop.org>;
+ Wed, 10 Aug 2022 23:08:08 +0200 (CEST)
+Received: from MAILMBX06PW.unicph.domain (10.77.128.235) by
+ MAILMBX16PW.unicph.domain (10.77.128.240) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.12; Wed, 10 Aug 2022 23:08:08 +0200
+Received: from MAILMBX06PW.unicph.domain ([fe80::3084:b730:74d:d55f]) by
+ MAILMBX06PW.unicph.domain ([fe80::3084:b730:74d:d55f%6]) with mapi id
+ 15.01.2507.012; Wed, 10 Aug 2022 23:08:08 +0200
+From: Klaus Ebbe Grue <grue@di.ku.dk>
+To: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
+Thread-Topic: [Nouveau] Blank screen after upgrade Fedora 34/XFCE -> Fedora
+ 36/XFCE
+Thread-Index: AQHYrMFgIZYFo0ADCked/RHKYtfsV62oaCuAgAAyzxY=
+Date: Wed, 10 Aug 2022 21:08:08 +0000
+Message-ID: <6958563693124d4aa07c6db66783a54a@di.ku.dk>
+References: <908f64116d46466da1aef164ec30f939@di.ku.dk>,
+ <CACO55tuSGMUP7Bpr+=i78CnHPR7sxZKTAUewADsUhiR5qBhg2w@mail.gmail.com>
+In-Reply-To: <CACO55tuSGMUP7Bpr+=i78CnHPR7sxZKTAUewADsUhiR5qBhg2w@mail.gmail.com>
+Accept-Language: da-DK, en-US
+Content-Language: da-DK
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.78.10.24]
+Content-Type: multipart/alternative;
+ boundary="_000_6958563693124d4aa07c6db66783a54adikudk_"
 MIME-Version: 1.0
-References: <908f64116d46466da1aef164ec30f939@di.ku.dk>
-In-Reply-To: <908f64116d46466da1aef164ec30f939@di.ku.dk>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Wed, 10 Aug 2022 21:44:29 +0200
-Message-ID: <CACO55tuSGMUP7Bpr+=i78CnHPR7sxZKTAUewADsUhiR5qBhg2w@mail.gmail.com>
-To: Klaus Ebbe Grue <grue@di.ku.dk>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="0000000000009a09a005e5e8478d"
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 3d73511c-0f6d-4b80-21be-08da7b146e6e
+X-MS-TrafficTypeDiagnostic: DB7PR04MB4281:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: MjemnPQ730EsoH9qsHlQGAPNt234M0E9TjOf14nM5jodtHXPn3pktjfIV61b9SK1pQBqwrLO/cvVRPCO++LtQYBVM4FGK3BMNUajohBXzoWeCFcIaJB9M1Xh2mtXZHp/rehAGg58nzL4NO5GLuzROsgiWDY7IQRp06CwZOz+Ynhe57wn5Ra0inqeiMzqkNAvLy58jJzgTmHay2C3bS5zXr1lZOFnVl6AsUDsCM4EVLnBxoAYj+1grpGWdoALrdy8qJy9g9qU1yMogjm/wL3DEPQNpUmFONUCRSzBEowC6CraLlwVPyT+Odwbqff0K1ES3K2W3uGbNjgZGx9MwadagBBCzCskp84fELppoPBSDwqXzhXWsRmiCbi40giDEEjbdLzNM16OdfbVnpDj4sfx22uQENoGFlDFL+tabF8aX8h9DCrr46D8G/fAcJIgHpfr4nzLmanqIM+fPlFjrcDNGqKNpGhkXcH4uJ75WNTjGhvDNG18vNkbaol7yllHMGewIgj1poYwfium+ci/ss4nZ1hh2BA6JBtBcsQjczw4peNXftBospiSdjPevNY7QVDGvk1O9+YlER/QOSB8CLzgEiHbePUi06w9f/BRfGTEG6Dwz5fOMEK8Z31US0DLj6As/WL38NdlKUnP2IQnXOa0njUbxGOws5FdBmUMFc+jct16n6QygEUEQeHlbeXvDHDZ0zk8E++M9MAMR2uutvRDRxop0u7BKoF72F5stEEV/G6AHVlqTTSJwAKFmQMv2fgmrjKXlZmxMQlrC7xnSdf5ADPD26PG+IlNCU25I8cFRoDU8T3mktXRUqxsxJab5bafg3ENgdFQXj2J5iC0Sld52g==
+X-Forefront-Antispam-Report: CIP:192.38.125.140; CTRY:DK; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mailedg02pw.ku.dk; PTR:mailedg02pw.ku.dk; CAT:NONE;
+ SFS:(13230016)(4636009)(376002)(346002)(396003)(39860400002)(136003)(40470700004)(36840700001)(46966006)(26005)(41300700001)(24736004)(86362001)(108616005)(7636003)(7596003)(82740400003)(356005)(336012)(47076005)(83380400001)(40460700003)(2616005)(186003)(36860700001)(8936002)(5660300002)(8676002)(70206006)(166002)(41320700001)(2906002)(70586007)(40480700001)(19627405001)(1015004)(82310400005)(36756003)(786003)(6916009)(316002)(478600001)(966005);
+ DIR:OUT; SFP:1102; 
+X-OriginatorOrg: di.ku.dk
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Aug 2022 21:08:10.3620 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3d73511c-0f6d-4b80-21be-08da7b146e6e
+X-MS-Exchange-CrossTenant-Id: a3927f91-cda1-4696-af89-8c9f1ceffa91
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=a3927f91-cda1-4696-af89-8c9f1ceffa91; Ip=[192.38.125.140];
+ Helo=[mailedg02pw.ku.dk]
+X-MS-Exchange-CrossTenant-AuthSource: VE1EUR02FT075.eop-EUR02.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR04MB4281
 Subject: Re: [Nouveau] Blank screen after upgrade Fedora 34/XFCE -> Fedora
  36/XFCE
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -74,172 +115,148 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---0000000000009a09a005e5e8478d
-Content-Type: text/plain; charset="UTF-8"
-
-On Wed, Aug 10, 2022 at 9:04 PM Klaus Ebbe Grue <grue@di.ku.dk> wrote:
->
-> Hi nouveau@lists.freedesktop.org,
->
->
-> I hope someone on this list can point me in some useful direction
-concerning the following problem:
->
->
-> After upgrade from Fedora 34/XFCE to Fedora 36/XFCE, I experience a black
-screen instead of a login prompt, unless I make a file named
-/etc/X11/xorg.conf.d/90-monitor.conf which contains eg
->
->
-> Section "Monitor"
->         Identifier "DP-1"
->         Option "PreferredMode" "720x480"
-> EndSection
->
-> Before the upgrade from Fedora 34 to 36, everything worked if the file
-looked like this:
->
-> Section "Monitor"
->         Identifier "DP-1"
->         Modeline "3840x2160" 533.25 3840 3888 3920 4000 2160 2163 2168
-2222 +hsync -vsync
->         Option "PreferredMode" "3840x2160"
-> EndSection
->
-> But that does not work on my Fedora 36.
->
-
-did you try not using any custom Xorg config, because I don't see why you
-are even trying that?
-
-
-> I use XFCE instead of Gnome. XFCE seems to use X as opposed to Fedora in
-general and Gnome in particular who use Wayland.
->
-> If I hand compile the EDID from the screen, I find the following
-resolutions: Established timings: 800x600, 800x600, 800x600, 800x600,
-832x624, 1024x768, 1024x768, 1024x768, 1280x1024. Standard timings:
-1920x1080, 1680x1050, 1440x900, 1280x1024, 1280x960, 1280x720. Detailed
-timings: 3840x2160, 2560x1440, 1280x720, 720x480, 720x576, 1920x2160. The
-EDID looks fine as far as I can see.
->
-> I have tried all standard and detailed timings and three established
-timings (boot at runlevel 3, modify 90-monitor.conf, telinit 5, repeat).
-All resolutions except 3840x2160, 2560x1440 and 1920x1080 work acceptably.
-3840x2160 and 2560x1440 give a black screen and a monitor poweroff.
-1920x1080 gives a noisy, psychedelic screen which remotely resembles a
-login screen.
->
-> If I boot with no 90-monitor.conf at all then /var/log/Xorg.0.log seems
-to be in conflict with itself. First, all resolutions including 3840x2160
-are recognized and agree with what I got out of reading the EDID. But then
-Xorg.0.log says:
->
-> [    38.974] (II) modeset(0): Not using default mode "2560x1440" (bad
-mode clock/interlace/doublescan)
->
-> But 3840x2160 is the default mode. 3840x2160 is the first detailed timing
-record. So it seems that first 3840x2160 is recognized, then ignored, then
-2560x1440 is frowned upon, then used anyways.
->
-> I have attached /var/log/messages and /var/log/Xorg.0.log from a Fedora
-36 and a Fedora 34 boot. I do not yet have a kernel log, but I hope I can
-get one by doing an ssh into the box after the monitor goes blank.
->
-> By the way, when I boot Fedora 36 to runlevel 3 then the monitor switches
-to a resolution of 3840x2160 and I get a tiny command line. It is when I
-then do telinit 5 that the screen goes blank.
->
->
-> In preparation of asking a question on the present list, I have run
-through https://nouveau.freedesktop.org/TroubleShooting.html in general and
-the section "Are you clear of other kernel drivers that break Nouveau" in
-particular. I think I have no other video drivers than Nouveau, but I have
-done this:
->
->
-> sudo find /usr -type f -iname "*nvidia*" -print > stdout 2>stderr
->
->
-> I can see some nvidia stuff in stdout. In particular, I can see a file
-named typec_nvidia.ko.xz, and TroubleShooting.html warns about a file named
-nvidia.ko. Can anyone on the list tell if there is something suspicious in
-the attached search-nvidia-stdout?
->
->
-> Cheers,
->
-> Klaus
->
->
-
---0000000000009a09a005e5e8478d
-Content-Type: text/html; charset="UTF-8"
+--_000_6958563693124d4aa07c6db66783a54adikudk_
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><br><br>On Wed, Aug 10, 2022 at 9:04 PM Klaus Ebbe Grue &l=
-t;<a href=3D"mailto:grue@di.ku.dk">grue@di.ku.dk</a>&gt; wrote:<br>&gt;<br>=
-&gt; Hi <a href=3D"mailto:nouveau@lists.freedesktop.org">nouveau@lists.free=
-desktop.org</a>,<br>&gt;<br>&gt;<br>&gt; I hope someone on this list can po=
-int me in some useful direction concerning the following problem:<br>&gt;<b=
-r>&gt;<br>&gt; After upgrade from Fedora 34/XFCE to Fedora 36/XFCE, I exper=
-ience a black screen instead of a login prompt, unless I make a file named =
-/etc/X11/xorg.conf.d/90-monitor.conf which contains eg<br>&gt;<br>&gt;<br>&=
-gt; Section &quot;Monitor&quot;<br>&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 Identif=
-ier &quot;DP-1&quot;<br>&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 Option &quot;Prefe=
-rredMode&quot; &quot;720x480&quot;<br>&gt; EndSection<br>&gt;<br>&gt; Befor=
-e the upgrade from Fedora 34 to 36, everything worked if the file looked li=
-ke this:<br>&gt;<br>&gt; Section &quot;Monitor&quot;<br>&gt; =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 Identifier &quot;DP-1&quot;<br>&gt; =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 Modeline &quot;3840x2160&quot; 533.25 3840 3888 3920 4000 2160 2163 216=
-8 2222 +hsync -vsync<br>&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 Option &quot;Prefe=
-rredMode&quot; &quot;3840x2160&quot;<br>&gt; EndSection<br>&gt;<br>&gt; But=
- that does not work on my Fedora 36.<br>&gt;<div><br></div><div><div class=
-=3D"gmail_default" style=3D"font-family:arial,sans-serif">did you try not u=
-sing any custom Xorg config, because I don&#39;t see why you are even tryin=
-g that?</div><br></div><div><br>&gt; I use XFCE instead of Gnome. XFCE seem=
-s to use X as opposed to Fedora in general and Gnome in particular who use =
-Wayland.<br>&gt;<br>&gt; If I hand compile the EDID from the screen, I find=
- the following resolutions: Established timings: 800x600, 800x600, 800x600,=
- 800x600, 832x624, 1024x768, 1024x768, 1024x768, 1280x1024. Standard timing=
-s: 1920x1080, 1680x1050, 1440x900, 1280x1024, 1280x960, 1280x720. Detailed =
-timings: 3840x2160, 2560x1440, 1280x720, 720x480, 720x576, 1920x2160. The E=
-DID looks fine as far as I can see.<br>&gt;<br>&gt; I have tried all standa=
-rd and detailed timings and three established timings (boot at runlevel 3, =
-modify 90-monitor.conf, telinit 5, repeat). All resolutions except 3840x216=
-0, 2560x1440 and 1920x1080 work acceptably. 3840x2160 and 2560x1440 give a =
-black screen and a monitor poweroff. 1920x1080 gives a noisy, psychedelic s=
-creen which remotely resembles a login screen.<br>&gt;<br>&gt; If I boot wi=
-th no 90-monitor.conf at all then /var/log/Xorg.0.log seems to be in confli=
-ct with itself. First, all resolutions including 3840x2160 are recognized a=
-nd agree with what I got out of reading the EDID. But then Xorg.0.log says:=
-<br>&gt;<br>&gt; [ =C2=A0 =C2=A038.974] (II) modeset(0): Not using default =
-mode &quot;2560x1440&quot; (bad mode clock/interlace/doublescan)<br>&gt;<br=
->&gt; But 3840x2160 is the default mode. 3840x2160 is the first detailed ti=
-ming record. So it seems that first 3840x2160 is recognized, then ignored, =
-then 2560x1440 is frowned upon, then used anyways.<br>&gt;<br>&gt; I have a=
-ttached /var/log/messages and /var/log/Xorg.0.log from a Fedora 36 and a Fe=
-dora 34 boot. I do not yet have a kernel log, but I hope I can get one by d=
-oing an ssh into the box after the monitor goes blank.<br>&gt;<br>&gt; By t=
-he way, when I boot Fedora 36 to runlevel 3 then the monitor switches to a =
-resolution of 3840x2160 and I get a tiny command line. It is when I then do=
- telinit 5 that the screen goes blank.<br>&gt;<br>&gt;<br>&gt; In preparati=
-on of asking a question on the present list, I have run through <a href=3D"=
-https://nouveau.freedesktop.org/TroubleShooting.html">https://nouveau.freed=
-esktop.org/TroubleShooting.html</a> in general and the section &quot;Are yo=
-u clear of other kernel drivers that break Nouveau&quot; in particular. I t=
-hink I have no other video drivers than Nouveau, but I have done this:<br>&=
-gt;<br>&gt;<br>&gt; sudo find /usr -type f -iname &quot;*nvidia*&quot; -pri=
-nt &gt; stdout 2&gt;stderr<br>&gt;<br>&gt;<br>&gt; I can see some nvidia st=
-uff in stdout. In particular, I can see a file named typec_nvidia.ko.xz, an=
-d TroubleShooting.html warns about a file named nvidia.ko. Can anyone on th=
-e list tell if there is something suspicious in the attached search-nvidia-=
-stdout?<br>&gt;<br>&gt;<br>&gt; Cheers,<br>&gt;<br>&gt; Klaus<br>&gt;<br>&g=
-t;<br></div></div>
+Hi Karol,
 
---0000000000009a09a005e5e8478d--
 
+> > After upgrade from Fedora 34/XFCE to Fedora 36/XFCE, I experience a bla=
+ck screen instead of a login prompt, unless I make a file named /etc/X11/xo=
+rg.conf.d/90-monitor.conf which contains eg
+
+> >
+> >
+> > Section "Monitor"
+> >         Identifier "DP-1"
+> >         Option "PreferredMode" "720x480"
+> > EndSection
+> >
+> > Before the upgrade from Fedora 34 to 36, everything worked if the file =
+looked like this:
+> >
+> > Section "Monitor"
+> >         Identifier "DP-1"
+> >         Modeline "3840x2160" 533.25 3840 3888 3920 4000 2160 2163 2168 =
+2222 +hsync -vsync
+> >         Option "PreferredMode" "3840x2160"
+> > EndSection
+> >
+> > But that does not work on my Fedora 36.
+> >
+
+> did you try not using any custom Xorg config, because I don't see why you=
+ are even trying that?
+
+Yes, I have tried not using any custom Xorg config. That gives me a blank s=
+creen under both Fedora 34 and Fedora 36.
+
+Or, more precisely: My /etc/X11 contains no xorg.conf. My /etc/X11/xorg.con=
+f.d only contains a file named 00-keyboard.conf which is written by systemd=
+-localed(8). If I do not add an /etc/X11/xorg.conf.d/90-monitor.conf then I=
+ get a blank screen instead of a login screen.
+
+My screen went blank first time at upgrade from 5.8.18-300.fc33.x86_64 to 5=
+.9.9-200.fc33.x86_64, cf https://ask.fedoraproject.org/t/no-login-screen-af=
+ter-upgrade/10618 . It was after that upgrade I added an /etc/X11/xorg.conf=
+.d/90-monitor.conf. Now my screen has gone blank a second time at upgrade f=
+rom Fedora 34 to 36, and I am a bit short of ideas what to do from here.
+
+Cheers,
+Klaus
+
+
+--_000_6958563693124d4aa07c6db66783a54adikudk_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
+n-bottom:0;} --></style>
+</head>
+<body dir=3D"ltr">
+<div id=3D"divtagdefaultwrapper" style=3D"font-size:12pt;color:#000000;font=
+-family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
+<p>Hi Karol,</p>
+<p><br>
+</p>
+<p>&gt; &gt; After upgrade from Fedora 34/XFCE to Fedora 36/XFCE, I experie=
+nce a black screen instead of a login prompt, unless I make a file named /e=
+tc/X11/xorg.conf.d/90-monitor.conf which contains eg<br>
+</p>
+<div style=3D"color: rgb(0, 0, 0);">
+<div>
+<div dir=3D"ltr"><span>&gt; </span>&gt;<br>
+<span>&gt; </span>&gt;<br>
+<span>&gt; </span>&gt; Section &quot;Monitor&quot;<br>
+<span>&gt; </span>&gt; &nbsp; &nbsp; &nbsp; &nbsp; Identifier &quot;DP-1&qu=
+ot;<br>
+<span>&gt; </span>&gt; &nbsp; &nbsp; &nbsp; &nbsp; Option &quot;PreferredMo=
+de&quot; &quot;720x480&quot;<br>
+<span>&gt; </span>&gt; EndSection<br>
+<span>&gt; </span>&gt;<br>
+<span>&gt; </span>&gt; Before the upgrade from Fedora 34 to 36, everything =
+worked if the file looked like this:<br>
+<span>&gt; </span>&gt;<br>
+<span>&gt; </span>&gt; Section &quot;Monitor&quot;<br>
+<span>&gt; </span>&gt; &nbsp; &nbsp; &nbsp; &nbsp; Identifier &quot;DP-1&qu=
+ot;<br>
+<span>&gt; </span>&gt; &nbsp; &nbsp; &nbsp; &nbsp; Modeline &quot;3840x2160=
+&quot; 533.25 3840 3888 3920 4000 2160 2163 2168 2222 &#43;hsync -vsync<br>
+<span>&gt; </span>&gt; &nbsp; &nbsp; &nbsp; &nbsp; Option &quot;PreferredMo=
+de&quot; &quot;3840x2160&quot;<br>
+<span>&gt; </span>&gt; EndSection<br>
+<span>&gt; </span>&gt;<br>
+<span>&gt; </span>&gt; But that does not work on my Fedora 36.<br>
+<span>&gt; </span>&gt;
+<div><br>
+</div>
+<div>
+<div class=3D"gmail_default" style=3D"font-family:arial,sans-serif"><span>&=
+gt; </span>did you try not using any custom Xorg config, because I don't se=
+e why you are even trying that?</div>
+<br>
+</div>
+<div>Yes, I have tried not using any custom Xorg config. That gives me a bl=
+ank screen under both Fedora 34 and Fedora 36.</div>
+<div><br>
+</div>
+<div>Or, more precisely: My /etc/X11 contains no xorg.conf. My /etc/X11/xor=
+g.conf.d only contains a file named
+<span>00-keyboard.conf</span> which is written by <span>systemd-localed(8)<=
+/span>. If I do not add an
+<span>/etc/X11/xorg.conf.d<span>/90-monitor.conf then I get a blank screen =
+instead of a login screen.</span></span></div>
+<div><br>
+</div>
+<div>My screen went blank first time at upgrade from <span>5.8.18-300.fc33.=
+x86_64 to 5.9.9-200.fc33.x86_64</span>, cf
+<a href=3D"https://ask.fedoraproject.org/t/no-login-screen-after-upgrade/10=
+618" class=3D"OWAAutoLink" id=3D"LPlnk722601" previewremoved=3D"true">
+https://ask.fedoraproject.org/t/no-login-screen-after-upgrade/10618</a> . I=
+t was after that upgrade I added an
+<span>/etc/X11/xorg.conf.d<span>/90-monitor.conf. Now my screen has gone bl=
+ank a second time at upgrade from Fedora 34 to 36, and I am a bit short of =
+ideas what to do from here.</span></span><br>
+</div>
+<div><br>
+</div>
+<div>Cheers,</div>
+<div>Klaus</div>
+<div><br>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+--_000_6958563693124d4aa07c6db66783a54adikudk_--
