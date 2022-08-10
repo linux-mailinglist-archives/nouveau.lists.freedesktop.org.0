@@ -1,109 +1,85 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FC2958F3B9
-	for <lists+nouveau@lfdr.de>; Wed, 10 Aug 2022 23:08:32 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id DE51D58F3E5
+	for <lists+nouveau@lfdr.de>; Wed, 10 Aug 2022 23:36:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BA98B14A216;
-	Wed, 10 Aug 2022 21:08:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3DD018D215;
+	Wed, 10 Aug 2022 21:36:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR02-AM5-obe.outbound.protection.outlook.com
- (mail-eopbgr00102.outbound.protection.outlook.com [40.107.0.102])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5A6DC8FA10
- for <nouveau@lists.freedesktop.org>; Wed, 10 Aug 2022 21:08:14 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=KTXizp/BJO8TYdQeo+a0fBIDgOPC4pAUtZbaqwMXXIgBvNViRcV1GDVrwJnKQIdAwYn4R1R2yMJtNyYlULM5zx1hR34RZVgftyn5sjf77VUmACYAN9Vu1/xAiMiKV38xluSqkzS9UkryuMbKtmA8eVhgkRMH9HxhyIY+JDRnAlfurASA5LleQgdR4tYp+Q1F++iNdA0yR5XcTM3P112zVk40mylu8rHYX8fInafQ3vAfVzUc0R/ZF0L/E+TJlLA5NGMbPryNTsPwm466uLaCGorgYq+9r1LDKU4czYiLt8XUDCiYLOqzKsETd0Gfo/3CdMFQ0IscrhWn7c9r/b+uxA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OTEllMxYC3pw+2KtAs8Y2w5SBFcRh79za5P8mD5kp+Q=;
- b=WVwrZe9iwN7vPRm1pG30b6Q3CMJ21SZQ1lpDmT7jzIjfeLh/OZd6hyByo3dtCyhC6HBNomzf6RFtWC7O4KyDPsU1YS3F+ecNBAyd3D2ubNjNjEAIgbyLUjDPkCTIi/BLTmbIm4+BikrqT3fdlmXgmX5rrMGtsDL7zvKyfNvQWqi37ezGp0diXToF3TKJ4xcDNDCPfclZvRoq7AMgJ7pAwN3M10QNHgK20UqniDJoS3BO+iuNdWWdHFkRIjjBRJ62rwZCGsJaCalXLcKPsbQOwFBOpiPM9jC0YiavLEYKpRoBX6EHzmgMwkr6cNjGhzEsKxIW8bOWTISYP4Nb5P8Xag==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 192.38.125.140) smtp.rcpttodomain=lists.freedesktop.org
- smtp.mailfrom=di.ku.dk; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=di.ku.dk; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=di.ku.dk; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OTEllMxYC3pw+2KtAs8Y2w5SBFcRh79za5P8mD5kp+Q=;
- b=oJYdLwJUZaHw4isLuVK/ISSljbTrdY1ia0rlxDi5zDRQlw2HBK4GSFd3+Xqc8yiuyq/m3k6bmYbJ9qOT9Qu1uE5o/EFAYsnPklY1XHoJEI1RTsfRy25RQ6DQw453cN/4joW7qEXuBsjf6TZkoaBf7gz/o6sh0MsSFo9EVa4+J9U=
-Received: from AM6PR05CA0004.eurprd05.prod.outlook.com (2603:10a6:20b:2e::17)
- by DB7PR04MB4281.eurprd04.prod.outlook.com (2603:10a6:5:22::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5504.21; Wed, 10 Aug
- 2022 21:08:11 +0000
-Received: from VE1EUR02FT075.eop-EUR02.prod.protection.outlook.com
- (2603:10a6:20b:2e:cafe::5b) by AM6PR05CA0004.outlook.office365.com
- (2603:10a6:20b:2e::17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5525.10 via Frontend
- Transport; Wed, 10 Aug 2022 21:08:11 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 192.38.125.140)
- smtp.mailfrom=di.ku.dk; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=di.ku.dk;
-Received-SPF: Pass (protection.outlook.com: domain of di.ku.dk designates
- 192.38.125.140 as permitted sender) receiver=protection.outlook.com;
- client-ip=192.38.125.140; helo=mailedg02pw.ku.dk; pr=C
-Received: from mailedg02pw.ku.dk (192.38.125.140) by
- VE1EUR02FT075.mail.protection.outlook.com (10.152.13.36) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5525.11 via Frontend Transport; Wed, 10 Aug 2022 21:08:10 +0000
-Received: from mailsepo01.ku.dk (10.78.10.24) by MAILEDG02PW.unicph.domain
- (192.38.125.140) with Microsoft SMTP Server id 15.1.2507.12; Wed, 10 Aug 2022
- 23:08:10 +0200
-Received: from 10.78.10.21 ([10.78.10.21])
- by mailsepo01.ku.dk (JAMES SMTP Server 2.3.2-1) with SMTP ID 859
- for <nouveau@lists.freedesktop.org>;
- Wed, 10 Aug 2022 23:08:08 +0200 (CEST)
-Received: from MAILMBX06PW.unicph.domain (10.77.128.235) by
- MAILMBX16PW.unicph.domain (10.77.128.240) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.12; Wed, 10 Aug 2022 23:08:08 +0200
-Received: from MAILMBX06PW.unicph.domain ([fe80::3084:b730:74d:d55f]) by
- MAILMBX06PW.unicph.domain ([fe80::3084:b730:74d:d55f%6]) with mapi id
- 15.01.2507.012; Wed, 10 Aug 2022 23:08:08 +0200
-From: Klaus Ebbe Grue <grue@di.ku.dk>
-To: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
-Thread-Topic: [Nouveau] Blank screen after upgrade Fedora 34/XFCE -> Fedora
- 36/XFCE
-Thread-Index: AQHYrMFgIZYFo0ADCked/RHKYtfsV62oaCuAgAAyzxY=
-Date: Wed, 10 Aug 2022 21:08:08 +0000
-Message-ID: <6958563693124d4aa07c6db66783a54a@di.ku.dk>
-References: <908f64116d46466da1aef164ec30f939@di.ku.dk>,
- <CACO55tuSGMUP7Bpr+=i78CnHPR7sxZKTAUewADsUhiR5qBhg2w@mail.gmail.com>
-In-Reply-To: <CACO55tuSGMUP7Bpr+=i78CnHPR7sxZKTAUewADsUhiR5qBhg2w@mail.gmail.com>
-Accept-Language: da-DK, en-US
-Content-Language: da-DK
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.78.10.24]
-Content-Type: multipart/alternative;
- boundary="_000_6958563693124d4aa07c6db66783a54adikudk_"
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 556A5914DC
+ for <nouveau@lists.freedesktop.org>; Wed, 10 Aug 2022 21:35:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1660167356;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=5ay9tk8uTy+hvyllGM1M62hdAGJQ9c5LICkWxYSMzls=;
+ b=PXko1LJJTTz3IIsGVXIfI3XN5F9EP/N6z0gJG3WH+d6j0QTgVv6MZcxuPNOnC06etSxypF
+ VkxKZDCVuLl/2dR2vo+wJohJwhQsw19Rllf9WyrGoJpEfT437U2ihGmV9sJ9blN4GCYzb1
+ zt/e2o2KL6l5Oiuetid5mlUVvjW2v+U=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-299-zlMp3k-YOZOpC2sNL5qGYQ-1; Wed, 10 Aug 2022 17:35:55 -0400
+X-MC-Unique: zlMp3k-YOZOpC2sNL5qGYQ-1
+Received: by mail-qt1-f197.google.com with SMTP id
+ e30-20020ac8011e000000b00342f61e67aeso8082379qtg.3
+ for <nouveau@lists.freedesktop.org>; Wed, 10 Aug 2022 14:35:55 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:user-agent:organization
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc;
+ bh=5ay9tk8uTy+hvyllGM1M62hdAGJQ9c5LICkWxYSMzls=;
+ b=n16xXZXya01OTtfhejUytomuM6e0hgkkecyvEu7KaYxJNLQiWS9+EQu+0uym+QwDuC
+ IUTHbOL1aZQlon5KZheklrp+mrKnSXC74BAG85zYdEUUy/1BhtETFZvBkvXI3f0a6Qxt
+ zQlh5LCzVitDqOCWpDlDZvW+1cDiv7yBtyBm9kfCLPQFBRUA7r4/L96mD7uC45DCEpIP
+ 3dkM8W7Tc4bb2EOM/jJzZFq/lwo5K/XgBxMVXlIPBeWJ/CNVsU1US3M9v8AeRGzQ4DSl
+ e6hhbVxMZJtoJz/WCowca+IzPewxyz2zz5LjfS/yvxld/xNmj9apxMoRn4oB6z+LRGae
+ FOIg==
+X-Gm-Message-State: ACgBeo2r39AK1ef3YZc7d+oc1NMAJS9RpAcpS4KALs/Xitq1AK7eE18a
+ t59BhEk2sWDBohn25uPentr7FZdy+RbmLMdKqqfq/KlvR7uYaj4Jd0UgVwlLVdjDWdRufX/Q1Tv
+ DCOy6FpcZ1DSan2epsOnfgPNtwQ==
+X-Received: by 2002:a05:620a:2451:b0:6b9:ab33:64c3 with SMTP id
+ h17-20020a05620a245100b006b9ab3364c3mr2970538qkn.565.1660167354539; 
+ Wed, 10 Aug 2022 14:35:54 -0700 (PDT)
+X-Google-Smtp-Source: AA6agR7gf+8EEumm/WsRQd3xkMo11EIyiVDmHrzM6TKJGbD5VgUYpQ3viKhgUf5ZePo7pTk45Cr2nA==
+X-Received: by 2002:a05:620a:2451:b0:6b9:ab33:64c3 with SMTP id
+ h17-20020a05620a245100b006b9ab3364c3mr2970518qkn.565.1660167354299; 
+ Wed, 10 Aug 2022 14:35:54 -0700 (PDT)
+Received: from [192.168.8.138] (pool-100-0-245-4.bstnma.fios.verizon.net.
+ [100.0.245.4]) by smtp.gmail.com with ESMTPSA id
+ t25-20020ac87399000000b00342f80223adsm496932qtp.89.2022.08.10.14.35.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Aug 2022 14:35:53 -0700 (PDT)
+Message-ID: <071b71819660d61d9b5caa368f683189a192754f.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Karol Herbst <kherbst@redhat.com>, Computer Enthusiastic
+ <computer.enthusiastic@gmail.com>
+Date: Wed, 10 Aug 2022 17:35:52 -0400
+In-Reply-To: <CACO55tsJCPLw+UH6ADyHy62CfQKTtAwskoP86as2pwKnO7-NwQ@mail.gmail.com>
+References: <CAHSpYy3G7EPhLBAiy4MgngKRqFgs1cTC-pnJb662vxxmkmxPXA@mail.gmail.com>
+ <CAKb7UvhBekZhHhq=aD+hLCfOWe33whi_bScbLiDhXDwvEvbzfA@mail.gmail.com>
+ <YWhgFZPqx3qKqr0C@debian.fritz.box>
+ <CAKb7UviFVRe7hbtEXF6hUQh2TuZPthu+bt90h+8haf3A1FYt7g@mail.gmail.com>
+ <2296778.YFyOdMMpyM@debian>
+ <CAHSpYy1HJzY5kNoxk36yGRsKhmxQYP7FVM=Orn7RyKCtZc293w@mail.gmail.com>
+ <CACO55tsJCPLw+UH6ADyHy62CfQKTtAwskoP86as2pwKnO7-NwQ@mail.gmail.com>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3d73511c-0f6d-4b80-21be-08da7b146e6e
-X-MS-TrafficTypeDiagnostic: DB7PR04MB4281:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: MjemnPQ730EsoH9qsHlQGAPNt234M0E9TjOf14nM5jodtHXPn3pktjfIV61b9SK1pQBqwrLO/cvVRPCO++LtQYBVM4FGK3BMNUajohBXzoWeCFcIaJB9M1Xh2mtXZHp/rehAGg58nzL4NO5GLuzROsgiWDY7IQRp06CwZOz+Ynhe57wn5Ra0inqeiMzqkNAvLy58jJzgTmHay2C3bS5zXr1lZOFnVl6AsUDsCM4EVLnBxoAYj+1grpGWdoALrdy8qJy9g9qU1yMogjm/wL3DEPQNpUmFONUCRSzBEowC6CraLlwVPyT+Odwbqff0K1ES3K2W3uGbNjgZGx9MwadagBBCzCskp84fELppoPBSDwqXzhXWsRmiCbi40giDEEjbdLzNM16OdfbVnpDj4sfx22uQENoGFlDFL+tabF8aX8h9DCrr46D8G/fAcJIgHpfr4nzLmanqIM+fPlFjrcDNGqKNpGhkXcH4uJ75WNTjGhvDNG18vNkbaol7yllHMGewIgj1poYwfium+ci/ss4nZ1hh2BA6JBtBcsQjczw4peNXftBospiSdjPevNY7QVDGvk1O9+YlER/QOSB8CLzgEiHbePUi06w9f/BRfGTEG6Dwz5fOMEK8Z31US0DLj6As/WL38NdlKUnP2IQnXOa0njUbxGOws5FdBmUMFc+jct16n6QygEUEQeHlbeXvDHDZ0zk8E++M9MAMR2uutvRDRxop0u7BKoF72F5stEEV/G6AHVlqTTSJwAKFmQMv2fgmrjKXlZmxMQlrC7xnSdf5ADPD26PG+IlNCU25I8cFRoDU8T3mktXRUqxsxJab5bafg3ENgdFQXj2J5iC0Sld52g==
-X-Forefront-Antispam-Report: CIP:192.38.125.140; CTRY:DK; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mailedg02pw.ku.dk; PTR:mailedg02pw.ku.dk; CAT:NONE;
- SFS:(13230016)(4636009)(376002)(346002)(396003)(39860400002)(136003)(40470700004)(36840700001)(46966006)(26005)(41300700001)(24736004)(86362001)(108616005)(7636003)(7596003)(82740400003)(356005)(336012)(47076005)(83380400001)(40460700003)(2616005)(186003)(36860700001)(8936002)(5660300002)(8676002)(70206006)(166002)(41320700001)(2906002)(70586007)(40480700001)(19627405001)(1015004)(82310400005)(36756003)(786003)(6916009)(316002)(478600001)(966005);
- DIR:OUT; SFP:1102; 
-X-OriginatorOrg: di.ku.dk
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Aug 2022 21:08:10.3620 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3d73511c-0f6d-4b80-21be-08da7b146e6e
-X-MS-Exchange-CrossTenant-Id: a3927f91-cda1-4696-af89-8c9f1ceffa91
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=a3927f91-cda1-4696-af89-8c9f1ceffa91; Ip=[192.38.125.140];
- Helo=[mailedg02pw.ku.dk]
-X-MS-Exchange-CrossTenant-AuthSource: VE1EUR02FT075.eop-EUR02.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR04MB4281
-Subject: Re: [Nouveau] Blank screen after upgrade Fedora 34/XFCE -> Fedora
- 36/XFCE
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] Advice about debugging nouveau driver suspend issue
+ (init_on_alloc=1 and init_on_free=1)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -115,148 +91,95 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---_000_6958563693124d4aa07c6db66783a54adikudk_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+On Wed, 2022-08-10 at 13:59 +0200, Karol Herbst wrote:
+> On Wed, Aug 10, 2022 at 12:42 PM Computer Enthusiastic
+> <computer.enthusiastic@gmail.com> wrote:
+> > 
+> > Hello,
+> > 
+> > The "supend to ram" issue (system freeze when resuming after suspend
+> > to ram or disk hibernation) is still affecting the nouveau kernel
+> > module from linux version 5 and above with nvidia GeForce 9600M GT and
+> > other nvidia graphic card with the same chipset [1][2][3].
+> > 
+> > I've been successfully using the "work in progress" patch by Karol
+> > Herbst [4] to solve the "supend to ram" issue since it was proposed
+> > for an apparent different issue ("[GT216][Linux 5.16.4] Long stalls in
+> > dma_fence_default_wait") [5] whose root cause is probably the same.
+> > 
+> > I send this message to bring to your attention the aforementioned
+> > patch [4] (below in the message as text) to evaluate it for  the next
+> > steps for possible inclusion  in the upstream kernel version.
+> > 
+> 
+> I think it might be better to CC Ben and Lyude, who _might_ have a
+> good idea on what's the proper patch, but maybe the patch is fine as
+> it is?
 
-Hi Karol,
+When the GPU starts going into suspend, TTM migrates all of the active bos in
+vram over to system ram so they aren't lost. Based on what's described here
+and the fact that a fence wait seems to fix it, it sounds like to me that TTM
+may still be migrating bos (buffer objects) from the GPU over to system RAM
+when the suspend process starts. Of course this causes those operations to get
+interrupted and lose access to VRAM unexpectedly, which likely causes the
+world to go boom.
 
+So, I'm not 100% sure but I think this patch is potentially overkill since it
+looks like it would fix this issue by just making all m2mf bo moves
+synchronous. Thisis something we probably(?) don't want to do since if my
+theory is correct, the only time we should need to do a fence wait is before
+suspending the GPU in order to ensure that all m2mf operations have been
+completed before continuing suspend. I think Ben would likely need to weigh
+in, or you might be able to figure out the answer to this just by seeing how
+we handle this with the newer method of vram blitting - the CE (copy engine).
+Let me know if you need any more input, or are able to come up with a patch
+that more or less does what I just described.
 
-> > After upgrade from Fedora 34/XFCE to Fedora 36/XFCE, I experience a bla=
-ck screen instead of a login prompt, unless I make a file named /etc/X11/xo=
-rg.conf.d/90-monitor.conf which contains eg
+> 
+> > Thanks.
+> > 
+> > [1] https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/-/issues/547
+> > [2] https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=989705#5
+> > [3] https://bugzilla.kernel.org/show_bug.cgi?id=213617
+> > [4] https://gitlab.freedesktop.org/drm/nouveau/-/issues/156#note_1385770
+> > [5] https://gitlab.freedesktop.org/drm/nouveau/-/issues/156
+> > 
+> > ----- %= ----- %= ----- %=
+> > 
+> > From 70271cb0aa30e4523d39c3942e84b16fe18338f5 Mon Sep 17 00:00:00 2001
+> > From: Karol Herbst <kherbst@redhat.com>
+> > Date: Mon, 16 May 2022 17:40:20 +0200
+> > Subject: [PATCH] nouveau WIP
+> > 
+> > ---
+> >  drivers/gpu/drm/nouveau/nouveau_bo.c | 1 +
+> >  1 file changed, 1 insertion(+)
+> > 
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > index 05076e530e7d..b6343741eda6 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > @@ -820,6 +820,7 @@ nouveau_bo_move_m2mf(struct ttm_buffer_object *bo,
+> > int evict,
+> >   if (ret == 0) {
+> >   ret = nouveau_fence_new(chan, false, &fence);
+> >   if (ret == 0) {
+> > + nouveau_fence_wait(fence, false, false);
+> >   ret = ttm_bo_move_accel_cleanup(bo,
+> >   &fence->base,
+> >   evict, false,
+> > --
+> > 2.35.3
+> > 
+> 
 
-> >
-> >
-> > Section "Monitor"
-> >         Identifier "DP-1"
-> >         Option "PreferredMode" "720x480"
-> > EndSection
-> >
-> > Before the upgrade from Fedora 34 to 36, everything worked if the file =
-looked like this:
-> >
-> > Section "Monitor"
-> >         Identifier "DP-1"
-> >         Modeline "3840x2160" 533.25 3840 3888 3920 4000 2160 2163 2168 =
-2222 +hsync -vsync
-> >         Option "PreferredMode" "3840x2160"
-> > EndSection
-> >
-> > But that does not work on my Fedora 36.
-> >
-
-> did you try not using any custom Xorg config, because I don't see why you=
- are even trying that?
-
-Yes, I have tried not using any custom Xorg config. That gives me a blank s=
-creen under both Fedora 34 and Fedora 36.
-
-Or, more precisely: My /etc/X11 contains no xorg.conf. My /etc/X11/xorg.con=
-f.d only contains a file named 00-keyboard.conf which is written by systemd=
--localed(8). If I do not add an /etc/X11/xorg.conf.d/90-monitor.conf then I=
- get a blank screen instead of a login screen.
-
-My screen went blank first time at upgrade from 5.8.18-300.fc33.x86_64 to 5=
-.9.9-200.fc33.x86_64, cf https://ask.fedoraproject.org/t/no-login-screen-af=
-ter-upgrade/10618 . It was after that upgrade I added an /etc/X11/xorg.conf=
-.d/90-monitor.conf. Now my screen has gone blank a second time at upgrade f=
-rom Fedora 34 to 36, and I am a bit short of ideas what to do from here.
-
+-- 
 Cheers,
-Klaus
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
-
---_000_6958563693124d4aa07c6db66783a54adikudk_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
-n-bottom:0;} --></style>
-</head>
-<body dir=3D"ltr">
-<div id=3D"divtagdefaultwrapper" style=3D"font-size:12pt;color:#000000;font=
--family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
-<p>Hi Karol,</p>
-<p><br>
-</p>
-<p>&gt; &gt; After upgrade from Fedora 34/XFCE to Fedora 36/XFCE, I experie=
-nce a black screen instead of a login prompt, unless I make a file named /e=
-tc/X11/xorg.conf.d/90-monitor.conf which contains eg<br>
-</p>
-<div style=3D"color: rgb(0, 0, 0);">
-<div>
-<div dir=3D"ltr"><span>&gt; </span>&gt;<br>
-<span>&gt; </span>&gt;<br>
-<span>&gt; </span>&gt; Section &quot;Monitor&quot;<br>
-<span>&gt; </span>&gt; &nbsp; &nbsp; &nbsp; &nbsp; Identifier &quot;DP-1&qu=
-ot;<br>
-<span>&gt; </span>&gt; &nbsp; &nbsp; &nbsp; &nbsp; Option &quot;PreferredMo=
-de&quot; &quot;720x480&quot;<br>
-<span>&gt; </span>&gt; EndSection<br>
-<span>&gt; </span>&gt;<br>
-<span>&gt; </span>&gt; Before the upgrade from Fedora 34 to 36, everything =
-worked if the file looked like this:<br>
-<span>&gt; </span>&gt;<br>
-<span>&gt; </span>&gt; Section &quot;Monitor&quot;<br>
-<span>&gt; </span>&gt; &nbsp; &nbsp; &nbsp; &nbsp; Identifier &quot;DP-1&qu=
-ot;<br>
-<span>&gt; </span>&gt; &nbsp; &nbsp; &nbsp; &nbsp; Modeline &quot;3840x2160=
-&quot; 533.25 3840 3888 3920 4000 2160 2163 2168 2222 &#43;hsync -vsync<br>
-<span>&gt; </span>&gt; &nbsp; &nbsp; &nbsp; &nbsp; Option &quot;PreferredMo=
-de&quot; &quot;3840x2160&quot;<br>
-<span>&gt; </span>&gt; EndSection<br>
-<span>&gt; </span>&gt;<br>
-<span>&gt; </span>&gt; But that does not work on my Fedora 36.<br>
-<span>&gt; </span>&gt;
-<div><br>
-</div>
-<div>
-<div class=3D"gmail_default" style=3D"font-family:arial,sans-serif"><span>&=
-gt; </span>did you try not using any custom Xorg config, because I don't se=
-e why you are even trying that?</div>
-<br>
-</div>
-<div>Yes, I have tried not using any custom Xorg config. That gives me a bl=
-ank screen under both Fedora 34 and Fedora 36.</div>
-<div><br>
-</div>
-<div>Or, more precisely: My /etc/X11 contains no xorg.conf. My /etc/X11/xor=
-g.conf.d only contains a file named
-<span>00-keyboard.conf</span> which is written by <span>systemd-localed(8)<=
-/span>. If I do not add an
-<span>/etc/X11/xorg.conf.d<span>/90-monitor.conf then I get a blank screen =
-instead of a login screen.</span></span></div>
-<div><br>
-</div>
-<div>My screen went blank first time at upgrade from <span>5.8.18-300.fc33.=
-x86_64 to 5.9.9-200.fc33.x86_64</span>, cf
-<a href=3D"https://ask.fedoraproject.org/t/no-login-screen-after-upgrade/10=
-618" class=3D"OWAAutoLink" id=3D"LPlnk722601" previewremoved=3D"true">
-https://ask.fedoraproject.org/t/no-login-screen-after-upgrade/10618</a> . I=
-t was after that upgrade I added an
-<span>/etc/X11/xorg.conf.d<span>/90-monitor.conf. Now my screen has gone bl=
-ank a second time at upgrade from Fedora 34 to 36, and I am a bit short of =
-ideas what to do from here.</span></span><br>
-</div>
-<div><br>
-</div>
-<div>Cheers,</div>
-<div>Klaus</div>
-<div><br>
-</div>
-</div>
-</div>
-</div>
-</div>
-</body>
-</html>
-
---_000_6958563693124d4aa07c6db66783a54adikudk_--
