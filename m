@@ -2,47 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6166590260
-	for <lists+nouveau@lfdr.de>; Thu, 11 Aug 2022 18:09:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A83E590273
+	for <lists+nouveau@lfdr.de>; Thu, 11 Aug 2022 18:10:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D6AFD14ACB1;
-	Thu, 11 Aug 2022 16:09:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 20B2618B03B;
+	Thu, 11 Aug 2022 16:10:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C564F113E5F;
- Thu, 11 Aug 2022 16:09:04 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B287510F2E1;
+ Thu, 11 Aug 2022 16:10:26 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 5085361426;
- Thu, 11 Aug 2022 16:09:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8AAB6C433C1;
- Thu, 11 Aug 2022 16:09:02 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id A574D6141C;
+ Thu, 11 Aug 2022 16:10:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 07E60C433C1;
+ Thu, 11 Aug 2022 16:10:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1660234143;
+ s=k20201202; t=1660234221;
  bh=BlKBMOH6o2j7WE88oomjY+BnlOaiVoPJIpUyChZ8a3s=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Vwj5zc422+HgIR24zlz4AZyx1A0EbgOnosyvilDO8C+YeU12B3DlutDDj8nTLAt8C
- 9W1E0cMyrXJR2i73DpjPI1fR4hh8G/9RbXrhbmH2x4WXxPuNbRc/oLbf+dhXSjIele
- IFlbJe3EgAM3pD8/Ml1boqTRxTCVc7jFqIJoUDvZuR+YbYHKam6VgQC6WjvNJpZ+gZ
- Lh+kpMpvEXIb2jxAKBMvgJmyYPmmwhC2BehKuB7n1/8WV9+63Q3L9TWt5uF8GcmUDi
- QwnF0vnQWtKLDrH1yGY0g92yooy2oWNzkNXiHPNclaUy2Vy2Pxegddb9ZZP2eUf17n
- LXr7M3G+BPM5w==
+ b=pX8703UfMDeRjSCn199oWi7qDwrN3OiG4psNN53sNYWiac+FetAZoNKcWdtszJWFx
+ +VfUnHYCQC0nFNUODp58A44CJMl/BpfWwmPD+CZtoFrhLMOzXNvDifD7wvP5FZ0xNC
+ 24ssME9y4UH8AViAWEQ5NFmFN/L2ZvBz8ibKrNhKE4d30adP7c11hfz3RxBp1MooRC
+ Qy+Prbpy469LSdLT+NQZwxktV7t9IYGA05+4unLJWnUQ6qA/Gu6ZpGjGTkTcy19BQZ
+ ZP2vgnjzngYUDMqwdyNyvWt0zJ3yAgejFUyqjjMUh+DuBbqIZuQOUBYCaVsJkxtna1
+ KzjuJhYUKJXQA==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu, 11 Aug 2022 12:08:11 -0400
-Message-Id: <20220811160826.1541971-16-sashal@kernel.org>
+Date: Thu, 11 Aug 2022 12:09:37 -0400
+Message-Id: <20220811160948.1542842-9-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220811160826.1541971-1-sashal@kernel.org>
-References: <20220811160826.1541971-1-sashal@kernel.org>
+In-Reply-To: <20220811160948.1542842-1-sashal@kernel.org>
+References: <20220811160948.1542842-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH AUTOSEL 5.4 16/25] drm/nouveau/nvkm: use
+Subject: [Nouveau] [PATCH AUTOSEL 4.19 09/14] drm/nouveau/nvkm: use
  list_add_tail() when building object tree
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
