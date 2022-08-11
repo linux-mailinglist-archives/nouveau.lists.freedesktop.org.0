@@ -1,47 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A83E590273
-	for <lists+nouveau@lfdr.de>; Thu, 11 Aug 2022 18:10:55 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 97DEB59027B
+	for <lists+nouveau@lfdr.de>; Thu, 11 Aug 2022 18:11:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 20B2618B03B;
-	Thu, 11 Aug 2022 16:10:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E57B78ECCA;
+	Thu, 11 Aug 2022 16:11:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B287510F2E1;
- Thu, 11 Aug 2022 16:10:26 +0000 (UTC)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CB3CE113D09;
+ Thu, 11 Aug 2022 16:11:22 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id A574D6141C;
- Thu, 11 Aug 2022 16:10:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 07E60C433C1;
- Thu, 11 Aug 2022 16:10:19 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 5F12BB82123;
+ Thu, 11 Aug 2022 16:11:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6825C433C1;
+ Thu, 11 Aug 2022 16:11:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1660234221;
- bh=BlKBMOH6o2j7WE88oomjY+BnlOaiVoPJIpUyChZ8a3s=;
+ s=k20201202; t=1660234280;
+ bh=+wEY6MyJpAk+oWZwmhBzn9A3V3W1GM+AX+a4XqCu/mI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=pX8703UfMDeRjSCn199oWi7qDwrN3OiG4psNN53sNYWiac+FetAZoNKcWdtszJWFx
- +VfUnHYCQC0nFNUODp58A44CJMl/BpfWwmPD+CZtoFrhLMOzXNvDifD7wvP5FZ0xNC
- 24ssME9y4UH8AViAWEQ5NFmFN/L2ZvBz8ibKrNhKE4d30adP7c11hfz3RxBp1MooRC
- Qy+Prbpy469LSdLT+NQZwxktV7t9IYGA05+4unLJWnUQ6qA/Gu6ZpGjGTkTcy19BQZ
- ZP2vgnjzngYUDMqwdyNyvWt0zJ3yAgejFUyqjjMUh+DuBbqIZuQOUBYCaVsJkxtna1
- KzjuJhYUKJXQA==
+ b=rMAv2lc3f2BRszjCtt4qa0C/7D2uk04C+Psci1xZaCGRBJYET0FQAuggGi4QbkcgJ
+ OeLtd1jPViXqT8GQGnh0OypIpnmPoLm6iiu3ZdWGIYvVyYi+B8UzzAtJFjIKfTuKyC
+ /+bYwbtUoTxRqrbvhBN2DEXIFHuREY1zrUd8mBwonIYeW1eD+d5mckprlPlSPGu5kO
+ Aq6JAhj4UFQxt3uVbk1zIN5ECu/hZtfTmV2T8mVzfZDXgVtD9M+hyHvDSt1kWr62pK
+ Q4t8dqfZF0RvPMRvfwwgRFRT+Ca34qJ3MAkOqvp40sc41Y0Yqpt2LwSHgdqRZrAMWZ
+ i2+gcMXXCX29g==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu, 11 Aug 2022 12:09:37 -0400
-Message-Id: <20220811160948.1542842-9-sashal@kernel.org>
+Date: Thu, 11 Aug 2022 12:10:38 -0400
+Message-Id: <20220811161050.1543183-9-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220811160948.1542842-1-sashal@kernel.org>
-References: <20220811160948.1542842-1-sashal@kernel.org>
+In-Reply-To: <20220811161050.1543183-1-sashal@kernel.org>
+References: <20220811161050.1543183-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH AUTOSEL 4.19 09/14] drm/nouveau/nvkm: use
+Subject: [Nouveau] [PATCH AUTOSEL 4.14 09/14] drm/nouveau/nvkm: use
  list_add_tail() when building object tree
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -80,7 +81,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-index d777df5a64e6..2aa0d6fed580 100644
+index be19bbe56bba..bb57df290f63 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
 @@ -128,7 +128,7 @@ nvkm_ioctl_new(struct nvkm_client *client,
