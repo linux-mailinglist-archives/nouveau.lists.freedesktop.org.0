@@ -1,85 +1,164 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F53E58F437
-	for <lists+nouveau@lfdr.de>; Thu, 11 Aug 2022 00:14:01 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 26B1258F7C9
+	for <lists+nouveau@lfdr.de>; Thu, 11 Aug 2022 08:40:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 36E05931E8;
-	Wed, 10 Aug 2022 22:13:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 45A3DA3DD7;
+	Thu, 11 Aug 2022 06:40:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1CFD0931AF
- for <nouveau@lists.freedesktop.org>; Wed, 10 Aug 2022 22:13:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1660169604;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=e2F3QmD0SrLKIJ8LZX9kCYhDOznEePDhSMJ1nhI5zKw=;
- b=TigBFT6d0E2oM7nEUYdIVmk1Y/KdCyf8ux8+maMiWEyh3y62+IEAAESkL4dDgMUVoMCaBA
- KcC9X0Upslg3eX+2uUyXaCNiGOm+De5C2YL/s1fPAkGWrrQx8XLU33WmqLV922nbZPiF/5
- Z4l7LQRyug6cgkwSvLXt2QGXUvru6vo=
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-421-Vqz-1M9_PVqOaALQmYeHaA-1; Wed, 10 Aug 2022 18:13:21 -0400
-X-MC-Unique: Vqz-1M9_PVqOaALQmYeHaA-1
-Received: by mail-qk1-f197.google.com with SMTP id
- bl27-20020a05620a1a9b00b0069994eeb30cso13481682qkb.11
- for <nouveau@lists.freedesktop.org>; Wed, 10 Aug 2022 15:13:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:user-agent:organization
- :references:in-reply-to:date:cc:to:from:subject:message-id
- :x-gm-message-state:from:to:cc;
- bh=e2F3QmD0SrLKIJ8LZX9kCYhDOznEePDhSMJ1nhI5zKw=;
- b=VY9qMEY3v/edOsGL3LQtMtb8V2kRGJKwh6JDnGa+bas3WO9Im8GfjSE77vcWzkxbEf
- kB2rMu/BA1Ki5fNcNHvqREVotgyhBVk0WSN+y7vckc4745WF9JoS3w+m2RZBXt6QM6GW
- IjGPzW6hCV4u9FpPeO4b0bJYUJ3TMeShvg5Mwm3Zx/edYq34U5J4kn5lJpQPNBOT34er
- Upz2vpgCNTD4uUg/TPzoK8hKjLatB1pJZS1bJUvC+BOVRRtLozSF7g+4Nne0A26oUyDG
- ioy9MDm/KFpzzZs10kDZE6d5jAN4raxapGWlF6hb+sAmWkonTn1UhYODZlXByXKUUTt3
- wGgg==
-X-Gm-Message-State: ACgBeo1BXH3d0cqlGm7cXKKtRPUscBj0SGdZQrNQFW5gO+5SR4Iwr3mx
- A3P+tyr5Mo3iQb2gPAmuQe7BDSQg9hhDkCLtYJZ+Gjt1dJlz/8ECyuC/UOxbNKg4D3xOjXQAgPa
- 1vIEEixg9CswJgWJgEXrrXL7nlg==
-X-Received: by 2002:ad4:5f08:0:b0:476:bf01:ffd8 with SMTP id
- fo8-20020ad45f08000000b00476bf01ffd8mr25039816qvb.14.1660169601327; 
- Wed, 10 Aug 2022 15:13:21 -0700 (PDT)
-X-Google-Smtp-Source: AA6agR5N/U457+LKyJIZm5Nt/pvduBY+SmUoBTF6bD0CRA3yXSBptcJbDuSLmXnlIBFmpcZlT5iduQ==
-X-Received: by 2002:ad4:5f08:0:b0:476:bf01:ffd8 with SMTP id
- fo8-20020ad45f08000000b00476bf01ffd8mr25039804qvb.14.1660169601042; 
- Wed, 10 Aug 2022 15:13:21 -0700 (PDT)
-Received: from [192.168.8.138] (pool-100-0-245-4.bstnma.fios.verizon.net.
- [100.0.245.4]) by smtp.gmail.com with ESMTPSA id
- br19-20020a05620a461300b006b99975ad62sm750360qkb.48.2022.08.10.15.13.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Aug 2022 15:13:20 -0700 (PDT)
-Message-ID: <ef681a8e89c2f4740141d66dd4a3fcb0ad71ab37.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: "Lin, Wayne" <Wayne.Lin@amd.com>, "dri-devel@lists.freedesktop.org"
- <dri-devel@lists.freedesktop.org>, "nouveau@lists.freedesktop.org"
- <nouveau@lists.freedesktop.org>, "amd-gfx@lists.freedesktop.org"
- <amd-gfx@lists.freedesktop.org>
-Date: Wed, 10 Aug 2022 18:13:18 -0400
-In-Reply-To: <SJ0PR12MB5504B1917F4933F1C696FCACFC659@SJ0PR12MB5504.namprd12.prod.outlook.com>
-References: <20220607192933.1333228-1-lyude@redhat.com>
- <20220607192933.1333228-16-lyude@redhat.com>
- <CO6PR12MB54890BFD954BBF578E2ADA67FC819@CO6PR12MB5489.namprd12.prod.outlook.com>
- <31d47373883e9aabe5bfa7b172e21b84cc6a164d.camel@redhat.com>
- <SJ0PR12MB5504B1917F4933F1C696FCACFC659@SJ0PR12MB5504.namprd12.prod.outlook.com>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
+ [205.220.177.32])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CED99A3D71;
+ Thu, 11 Aug 2022 06:39:54 +0000 (UTC)
+Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 27B0hxFK022339;
+ Thu, 11 Aug 2022 06:39:52 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : content-type : mime-version; s=corp-2022-7-12;
+ bh=ZK4FStUiMT4hzpuut74tMcRd1cDwbQi5zpVCz1fN8uA=;
+ b=qEelI0QVhKX4hZ6Eh4AS64ve+yjDmiMQUdZW0XI+u81XJC+vaYElGLhQcoASnIaqi+ak
+ U7ByuiMMsSTBN1FYc3c9hSbRUBKICfLBSq4MHvocNig2uz8mLE+XW3FTnwvtWLM6Q45e
+ KvpyvQn3ireupROMIXbXOpzejG74SQhMGPatus5XJRpoNfJz5tK0cbz2sYcFZFt0HD0H
+ nPF7RRC6BSniLDuw38eZzCBq1S8ncdP5G2HGDS0GAb8faShWAORdi/Bj4Ym7IKYwvfuu
+ AacSywfujXOLLaX7ljetvolFZmh55HpPIwEiD52xjyWul6g0/jVImEuHgL9shVjthLSu 4g== 
+Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta01.appoci.oracle.com [138.1.114.2])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3huwqbkynu-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 11 Aug 2022 06:39:52 +0000
+Received: from pps.filterd
+ (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
+ with ESMTP id 27B57VnD019052; Thu, 11 Aug 2022 06:39:51 GMT
+Received: from nam12-bn8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12lp2174.outbound.protection.outlook.com [104.47.55.174])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
+ 3huwqjtqk5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 11 Aug 2022 06:39:51 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=m/Mb/+0Lowoq8RFiK1ybzkLpHfSaQmldTaqlh7nyhTMeNEs2mTtbW++5gCfcbXn8YUz66QD2+2CAk5XuasWa9haVOIpOLlRhPL9OH26eCtd7dBb+5rg1aZUyPvl962CemGHruRnI7cTqnANUakfBqrvWgk2pLFN2rOcd+Yvo/qr52UJ4r/lb1jvJnQ9ya/FiKpSX/T4dSW62b4EopgnRO9mw4dKOF9qb5Z7hPkfhNC+7biGzBAHDz6l1A/JkBar/vzsvZQyqz++wahQiLaSNHRkKNxv22erLUtJ4G7l30NRvxd6ifSzDQ8FURktli0H52gJy0VBBcNhr59tm5TUiZw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZK4FStUiMT4hzpuut74tMcRd1cDwbQi5zpVCz1fN8uA=;
+ b=UFYx9I4t/gnWbMBJho9OfKgnT5Z0JvkbELk6rvmt8qQQ1EHCjjKlcIHF1LGjIUQTCLvsea6lvoOdfvlAN3ZUHfk9uVvu5JJdMMxQ+HydP2vn/4ZJ8RaYonS+8/JGLGBRSB9+nn5CyKKTaVMUAeM1TICimdmz5ir4b//87w0x3nDSnqJi+is56q4YbZE04CG8G0YQSTxNBOCH0rQ75j2mtJ3aQeyCtIzafvWHzMTI64ezkIgXGj9BLPfLmaFhFaOW7meGnKnqOdG2A977B1Ii5u+fS0+iegLiJwilvmCaV6a7vSQdvsx+d46LLtnZipAlD6FrbTZDIAoKMpHLwq/uJQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZK4FStUiMT4hzpuut74tMcRd1cDwbQi5zpVCz1fN8uA=;
+ b=jfxU6wyBjigkVv5m/gq4NacC4P9N9DKZmPjtfwOpcHj0YG8UMkFmycFkBuarUbk+7kuBxrwLXD6GA4KhWErell6CnYRBUTceIxl5w7/UvM5uhONrjd2V5+QwK26AcaozF88wCEVuNNbxy1Y6OdMIKbDX27VyCbwa5YjBY5akGqs=
+Received: from MWHPR1001MB2365.namprd10.prod.outlook.com
+ (2603:10b6:301:2d::28) by BN8PR10MB3267.namprd10.prod.outlook.com
+ (2603:10b6:408:ca::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5525.10; Thu, 11 Aug
+ 2022 06:39:49 +0000
+Received: from MWHPR1001MB2365.namprd10.prod.outlook.com
+ ([fe80::209e:de4d:68ea:c026]) by MWHPR1001MB2365.namprd10.prod.outlook.com
+ ([fe80::209e:de4d:68ea:c026%3]) with mapi id 15.20.5504.020; Thu, 11 Aug 2022
+ 06:39:47 +0000
+Date: Thu, 11 Aug 2022 09:39:36 +0300
+From: Dan Carpenter <dan.carpenter@oracle.com>
+To: Ben Skeggs <bskeggs@redhat.com>
+Message-ID: <YvSkKAdk8Pe0g2K9@kili>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Mailer: git-send-email haha only kidding
+X-ClientProxiedBy: ZR0P278CA0053.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:1d::22) To MWHPR1001MB2365.namprd10.prod.outlook.com
+ (2603:10b6:301:2d::28)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [RESEND RFC 15/18] drm/display/dp_mst: Skip releasing
- payloads if last connected port isn't connected
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: fd882a3c-4ac8-47b4-f73d-08da7b6448f3
+X-MS-TrafficTypeDiagnostic: BN8PR10MB3267:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: VWvIZyf9APwxzOaAA3YjhqAWrntCVB+ZnmHHsmbHXfKUhUNd0wv9hAf93tqdI50O7fV87Ek9KU/7aUogMkNSPGs78GZCuFSWTFfDpoY/CNz7Z3V4y+ySHYSNFvc7HjWco8qj5s+ASa9DXt+mPWEIbjIirBu8nhwqhoJyRRA3lCmlSibnSe+80LcIZeqhmP3PBuxjZexbnCaE2ZGB/75yjrrhG42w9jiU+0z045heiyye6lGfkM5P0fK82wOOb4NUbFw+EgXzvBIp4i1I7oD3KsiI3MQtXX/t8lA683UR8kKoqVrq4m06PVywXpYvt3Np8Ch8L78WRfri20toFMZDmWG4egP70V/PBbGfE1jL/3hkxOhVmXa1SmXZ2X5PG9ohkqep1e5hHABvmuFmD/lkycmLpEKbQ4dL/P56Cq56tNzuyaqG54RqJrQcsjynZyCj+KdIb/XCAs9qulPwYb8GCofFr8RaXXPJTKmfWZ38nrDMzLHQfGaR2kcqN4fgvuIbJc99uGtQ+NA5qx5Fd00IejFD6Wn7DbI3WjsVLhES/n76QhedypC1RPdP7702h0JWwV43GqXofBiV8FmtG/YXMJClheA7NS08CDQrvZtS5r3Dx+1AuJvXjF9PyXu1PGAYCH87HM0EKpU0k1hRS5/YNQ3PnvjuAp3PrCNisML+izJRwsiLIMBGMojnfpfR6bDOzSwLaYSUnNzki4hIiJLzg6IrFzEQxeoeIut3LeESn3Jt9Qt8MCxPU/VNvKgWZrGuEvtHHmJ8shf8QA6xeqHTj6ajoA+TxOKM7nXcax69fYU=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MWHPR1001MB2365.namprd10.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230016)(7916004)(346002)(39860400002)(396003)(376002)(366004)(136003)(38350700002)(38100700002)(6666004)(6512007)(26005)(52116002)(66946007)(66556008)(8676002)(4326008)(66476007)(6506007)(6486002)(478600001)(316002)(41300700001)(9686003)(6916009)(54906003)(2906002)(33716001)(186003)(5660300002)(7416002)(8936002)(44832011)(86362001)(83380400001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?AeL7c86IgqfLAoHvE4SNgchggfggZ4JMNuycRZF4ikOAtBfSbmJ+TjM8M4yF?=
+ =?us-ascii?Q?EKcuaVpto/ekpzZHAKvop6SsnK6rYCggQjz89VSmhgn7rfDYP7l+owkcSo94?=
+ =?us-ascii?Q?129Y/1ogpw35974WqMsV4Wsz3RTHqIe+OBnhQj1ts7nC8GsBPwS5U/ravqni?=
+ =?us-ascii?Q?yfz9cTissBaO893FyTtsFr8x242/7hJCUboN/fI0VqV8gs2o3o9L4RgY+93B?=
+ =?us-ascii?Q?sliB7PqOA7zKb1nImETZvBm+/x4iwl5TSlyg8OVl0rcn0oRo2l449Y5sY0Kv?=
+ =?us-ascii?Q?/RaGlmkS6JKzbOrADhzofTvMH7q6UlSs48ONinINHd2EbJu5M+4QXJP1mR5g?=
+ =?us-ascii?Q?nexzfLtK1mk7sPnUKXudrsJInSfgU0meLzgAyRFiHOUFL+WpeJH9+tqYDdDh?=
+ =?us-ascii?Q?fEotx7Lwt3LPdex4gSYHEXQSFCNXN6adesj2pnujZ99RY/U/fHZvqowMlBkI?=
+ =?us-ascii?Q?r1dtM3KgoK8c3vrAohxny01xduQDpgdqWtxDA/64aXQC1vBCT4pD6LkFTkgf?=
+ =?us-ascii?Q?C7SZppJi3DWL+5LQr209tw3PfHwRFPFLuIHeNT5EkFqXOTizsmdcdAv/cwAZ?=
+ =?us-ascii?Q?6/t06Wt1SLIcqQw5RCyFBKCyo4chtbRlmtEIVLO+Fh4E+bZe4tsfpT8qRANT?=
+ =?us-ascii?Q?BrqQfPkcuMtI+o5XVCqf+cnB8QuX+8SRcUV2mAU75+//eVSxOJLpZ6yJ5pfV?=
+ =?us-ascii?Q?Yf/v6R948kGRQsVeKVbGVfaJdEf2BOhpkg6z07SGkvKF6trS9NmMbdn/PFso?=
+ =?us-ascii?Q?uKagQ+em/hygmpga2UYFyy784Z5Ririv/pjaLClSVb9aRlY2A8bt6L1F6PZw?=
+ =?us-ascii?Q?4Q7TEA1UXk68lGxC6h0KKisQ2eer/BJajbeGASwHrdpQnY8yV56yXgDOLCqO?=
+ =?us-ascii?Q?VJmK0w80/aSxgrUUoE8YUN3VFqx2pmd6/VO46PD/WYhjgumGHryK0z+ogO9y?=
+ =?us-ascii?Q?J6mWpzLabOkcElXaSMvhPhuBk6HV+pRHBFY6j774k808jhoMEF63ZPU9WKaF?=
+ =?us-ascii?Q?ISNs/KtRiegWF5ncDMczx3Ax/c5faVi6DrnRQa5Yns4JN/SE1wgz6dAlg2Wx?=
+ =?us-ascii?Q?PLorLh9EKE/iWr6EQnQ2AZlGAriO536+II1Qkt5J84oyHeLuiXB3VfDjKjVc?=
+ =?us-ascii?Q?tvvRTGVnns/l3O67RxnGlBokcawxVYXQMqti3d6zKLtATx1bNJZWJ61BF8h6?=
+ =?us-ascii?Q?8/KKcwhZ7Ah4m2pBkT5TsTkeNW9HSYhJ8kYf6nwXMM+DRH0cDdMWIOBZjxGk?=
+ =?us-ascii?Q?MlKliGMEklB7/4zQqoko97BGcEC4IAvdtzsJ+o4oEVY2Xuo1630iuFrsSP+M?=
+ =?us-ascii?Q?ClYtYELP95OjWpLyhXJeNRt/QymbrtRGaMuT4BUtLxHFkbFb0q1jprNiDHu1?=
+ =?us-ascii?Q?j364Xu/urrPVkzqA7PCSTO4fyaXOqgX9s3duICTGJ0aEPKQI1zhrXuF7bW8J?=
+ =?us-ascii?Q?ciS455ke3nUi73coSphzVlS73dOggFmhgaGHFi+DhpvBRpohQumYR0RnPlEj?=
+ =?us-ascii?Q?8SW44RcdOY6ugDeynDldqJ262Ki21L1doyJiyGXTsDzWLUJSqWWIqZIjC2vk?=
+ =?us-ascii?Q?fP0v6WdgPcNQxPENhXn70BgU1UtgReD4DWnjGl1K?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: =?us-ascii?Q?qX91ARD5NPY1GnKq3BbRhydbdmazRsJ5UJc8T3WSQ2OwCVEfOH+mtezDwgQR?=
+ =?us-ascii?Q?W94cgfpcQan+pJoCoCUhvrLDzbJf/unioZKu4M6ZTaYJJVn164Iusn2c1T8b?=
+ =?us-ascii?Q?b0G+WBmiGXPHTjQE1xc+M37pgM+i+EDyMdwBjZfR1TQljrZvLQAHV61oAw/2?=
+ =?us-ascii?Q?fNDVHgv93+uHTmpkcm9R+CUmtV9fCdjYlySBrsGRieCHM4h3jA5snLrYAM+H?=
+ =?us-ascii?Q?sXZQYe+10U5M34S5MwqLdeqTnbgNC8XuNU8KzaAUIV9aFc1UaPayP75wSBSr?=
+ =?us-ascii?Q?FHq7gHmHLgKmN8fPxvSlAV3nUAw3Y7Z8FeraSJjVEahEZoBXBs3Q+dGuA5j1?=
+ =?us-ascii?Q?0KfY2cbToKKrTvPNumw9DpjF7HMrygze+J0VUMPZSQQynM0hbKC9emvCRbxm?=
+ =?us-ascii?Q?PoQePADqDn4dEjCtLB/NmFz216R9lAiYECseJpNHS1pIgYBFDwzO4i90PtdM?=
+ =?us-ascii?Q?c4nI54+nv6kH5goWjm1I+etYjme5ad5Wgsvyg7xQmwZZZtNYa6XN0qbEZoKg?=
+ =?us-ascii?Q?WajTG/z73NW818Zi3NYHk3FzJFxoAFubZ9qdmgrpQLE4WQOLsl1b2hzmBUpn?=
+ =?us-ascii?Q?gf/lVVrzlEOYCLhWh75bP7HqmlQzjLzPHdvCVh2ZuT0iv20HNO215dADt/+B?=
+ =?us-ascii?Q?Qae1HhScabOeou/x/9AW0geiKStIRobmkq+7oDzKbUr2zeQQTG/r56u1j7Di?=
+ =?us-ascii?Q?7OrY0tH7oNb/AyxWJy/gIf/aZYfUn64407iwItITRfhuIvLuGja+DdSJPv+G?=
+ =?us-ascii?Q?DY3hj+U+A8OpkvWrL6GNBK07cl3AncRovHrkoUP+xOX27lBH7y44vdBkdZ+b?=
+ =?us-ascii?Q?eW0DhfDdauXcGb9Q/pItHdMQB2UWPXss+AIGcXhERHID7eTzCMOKHa0XCgMq?=
+ =?us-ascii?Q?+hLMjET58EQ9dNrn3/L9D5BaWuk+i0Ezg6zU0rkkmY9qAOzJFeoEDhz4YzVN?=
+ =?us-ascii?Q?l5Dp4aggVcFFTA9wOs0CVrGLup+PwqKi+KNUTeNbtkI/0gKEIL+D/+IHL5Cv?=
+ =?us-ascii?Q?sK5nq8WmaWdJ7a7T1nw6IP2HAAfDzqDZ4tiqMVEZrgJxDi8JbIWmEhoQbhMx?=
+ =?us-ascii?Q?G8mtdCgFdsevJBR9i62ot97k8aoTv9rq+Q15OcHoScwYFlYVLK1xlT8zzq4D?=
+ =?us-ascii?Q?t8szfTCBYhzri6nlQbKA0waM8mA5Fv9sSn/sVyxMHw/nhug+xSQebD7wE2gU?=
+ =?us-ascii?Q?edLklH0BwbUaY9BkIbNkIW+eaTK5oSnvHFgaOxXS+8NlnMSPPJYjO6aAIVw?=
+ =?us-ascii?Q?=3D?=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fd882a3c-4ac8-47b4-f73d-08da7b6448f3
+X-MS-Exchange-CrossTenant-AuthSource: MWHPR1001MB2365.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2022 06:39:47.8646 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: YXpGUI+TZa4vtKWdVmfVRI5v8QDN2GqBYStj8TQKI7VfeZrlVu4AfTF9WENO1GtRG7uWJVolB27FWz1DW/A4t1rEMtZWpZtex38lD7L2jQ8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR10MB3267
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
+ definitions=2022-08-11_03,2022-08-10_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999
+ suspectscore=0
+ spamscore=0 phishscore=0 adultscore=0 mlxscore=0 malwarescore=0
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2207270000 definitions=main-2208110017
+X-Proofpoint-GUID: H0Ml8X_SU5dTKrmARFfIyO4f2KsnitNv
+X-Proofpoint-ORIG-GUID: H0Ml8X_SU5dTKrmARFfIyO4f2KsnitNv
+Subject: [Nouveau] [PATCH] drm/nouveau/clk: fix end of loop test in
+ nvkm_clk_ustate_update()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,123 +170,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jani Nikula <jani.nikula@intel.com>, Imre Deak <imre.deak@intel.com>,
- open list <linux-kernel@vger.kernel.org>, "Lakha, 
- Bhawanpreet" <Bhawanpreet.Lakha@amd.com>, David Airlie <airlied@linux.ie>, "Zuo,
- Jerry" <Jerry.Zuo@amd.com>, Daniel Vetter <daniel@ffwll.ch>,
- Sean Paul <sean@poorly.run>,
- Ville =?ISO-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ kernel-janitors@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Xiaomeng Tong <xiam0nd.tong@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 2022-08-10 at 03:28 +0000, Lin, Wayne wrote:
-> Hi Lyude,
-> Thanks for your time and sorry for late response!
-> 
-> It's described in 5.6.1.3 of DP spec 2.0: 
-> "MST branch device, in addition to waiting for the ACK from its immediate 
-> Upstream device, should either wait for the ALLOCATE_PAYLOAD message
-> transaction with a PBN value equal to 0 from the MST Source device for 
-> de-allocating the time slot assigned to the VC Payload that is routed to the
-> unplugged DFP or for 2 seconds, whichever occurs first."
+If list_for_each_entry() exits without hitting a break then "pstate"
+is not a valid pstate pointer.  Introduce a "found" variable instead.
 
-oooh! Thank you for posting this, I totally missed the bit that says "or for 2
-seconds, whichever occurs first." That certainly explains a lot.
+Fixes: 7c8565220697 ("drm/nouveau/clk: implement power state and engine clock control in core")
+Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+---
+There were a couple other places where there is no error handling which
+also led to similar warnings.  It wasn't clear why the error handling
+was not needed there.
 
-> 
-> > > commit 3769e4c0af5b ("drm/dp_mst: Avoid to mess up payload table by
-> > > ports in stale topology") was trying to skip updating payload for a
-> > > target which is no longer existing in the current topology rooted at
-> > > mgr->mst_primary. I passed "mgr->mst_primary" to
-> > > drm_dp_mst_port_downstream_of_branch() previously.
-> > > Sorry, I might not fully understand the issue you've seen. Could you
-> > > elaborate on this more please?
-> > > 
-> > > Thanks!
-> > 
-> > I will have to double check this since it's been a month, but basically - the idea
-> > of having the topology references in the first place was to be the one check
-> > for figuring out whether something's in a topology or not. I've been thinking
-> > of maybe trying to replace it at some point, but I think we'd want to do it all
-> > over the helpers instead of just in certain spots.
-> > 
-> > The other thing I noticed was that when I was rewriting this code, I noticed it
-> > seemed a lot like we had misunderstood the issue that was causing leaks in
-> > the first place. The BAD_PARAM we noticed indicates the payload we're
-> > trying to remove on the other end doesn't exist anymore, meaning the
-> > branch device in question got rid of any payloads it had active in response to
-> > the CSN. In testing though I found that payloads would be automatically
-> > released in situations where the last reachable port was marked as
-> > disconnected via a previous CSN, but was still reachable otherwise, and not in
-> > any other situation. This also seemed to match up with the excerpts in the DP
-> > spec that I found, so I assumed it was probably correct.
-> 
-> IMHO, the main root cause with the commit 3769e4c0af5b ("drm/dp_mst: Avoid
->  to mess up payload table by ports in stale topology") is like what described in the
-> commit message. The problem I encountered was when I unplugged the primary
-> mst branch device from the system, upper layer didn't try to  release stale streams
-> immediately. Instead, it started to gradually release stale streams when I plugged the
-> mst hub back to the system. In that case, if we didn't do the check to see whether
-> the current request for deallocating payload is for this time topology instance, 
-> i.e. might be for the stale topology before I unplug, this deallocation will mess up
-> payload allocation for new topology instance.
-> 
-> As for the CSN, it's a node broadcast request message and not a path message.
-> Referring to 2.14.6.1 of DP 2.0 spec: 
-> "If the broadcast message is a node request, only the end devices, DP MST
-> Source or Sink devices (or DP MST Branch device if Source/Sink are not plugged),
-> process the request."
-> IMHO, payload should be controlled by source only, by ALLOCATE_PAYLOAD or
-> CLEAR_PAYLAOD_ID_TABLE message.
-> 
-> > 
-> > Also, I think using the DDPS field instead of trying to traverse the topology
-> > state (which might not have been fully updated yet in response to CSNs)
-> > might be a slightly better idea since DDPS may end up being updated before
-> > the port has been removed from our in-memory topology, which is kind of
-> 
-> Thank you Lyude! Just want to confirm with you the below idea to see if I
-> understand it correctly. 
-> The flow I thought would be (from Source perspective):
-> Receive CSN for notifying disconnection event => update physical topology
-> connection status (e.g. DDPS, put topology krefcount..) => send hotplug event to
-> userspace => userspace asks deallocating payloads for disconnected stream
-> sinks =>  put malloc krefcount of disconnected ports/mstbs  => remove ports/mstb
-> from in-memory topology.
-> I suppose physical topology connection status is updated before sending hotplug
-> event to userspace and the in-memory topology still can be referred for stale 
-> connection status before payload deallocation completes, i.e. which will put 
-> malloc krefcount to eventually destroy disconnected devices in topology in-memory.
-> I mean, ideally, sounds like the topology in-memory should be reliable when
-> we send ALLOCATE_PAYLOAD as PBN=0. But I understand it definitely is not the
-> case if we have krefcount leak.
+drivers/gpu/drm/nouveau/nvkm/engine/device/ctrl.c:111 nvkm_control_mthd_pstate_attr() warn: iterator used outside loop: 'pstate'
+drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c:283 nvkm_pstate_prog() warn: iterator used outside loop: 'pstate'
 
-mhm, I think you made me realize I'm overthinking this a bit now that I've
-seen the excerpt you mentioned above, along with the other excerpt about only
-the end devices being involved. The main reason I originally foresaw an issue
-with this is because the delay with updating the in-memory topology structure
-might put us slightly out of sync with the state of the hub on the other end -
-causing the hub to spit out an error.
+net/xfrm/xfrm_ipcomp.c:246 ipcomp_free_tfms() warn: iterator used outside loop: 'pos'
+ drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-However - based on the excerpts you mentioned I think what I was seeing was
-mainly just the 2 second timeout causing things to be released properly - not
-specific behavior based on the location in the topology of the branch that was
-just unplugged like I originally assumed. I think in that case it probably
-does make more sense to go with your fix, so I'll likely drop this and rework
-the topology checks you had into this.
-
-> 
-> Appreciate for your time and help Lyude!
-> 
-
-no, thank you for your help! :) There aren't a whole ton of people who are
-this involved with MST so it's very useful to finally have another pair of
-eyes looking at all of this. 
-
->   
-
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c
+index da07a2fbef06..33f073ab3c49 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c
+@@ -473,6 +473,7 @@ static int
+ nvkm_clk_ustate_update(struct nvkm_clk *clk, int req)
+ {
+ 	struct nvkm_pstate *pstate;
++	bool found = false;
+ 	int i = 0;
+ 
+ 	if (!clk->allow_reclock)
+@@ -480,12 +481,14 @@ nvkm_clk_ustate_update(struct nvkm_clk *clk, int req)
+ 
+ 	if (req != -1 && req != -2) {
+ 		list_for_each_entry(pstate, &clk->states, head) {
+-			if (pstate->pstate == req)
++			if (pstate->pstate == req) {
++				found = true;
+ 				break;
++			}
+ 			i++;
+ 		}
+ 
+-		if (pstate->pstate != req)
++		if (!found)
+ 			return -EINVAL;
+ 		req = i;
+ 	}
 -- 
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+2.35.1
 
