@@ -1,48 +1,49 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B53B6590236
-	for <lists+nouveau@lfdr.de>; Thu, 11 Aug 2022 18:07:20 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9462959024D
+	for <lists+nouveau@lfdr.de>; Thu, 11 Aug 2022 18:08:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DBFE711202A;
-	Thu, 11 Aug 2022 16:07:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BF95411AAB7;
+	Thu, 11 Aug 2022 16:08:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0551A11AEF4;
- Thu, 11 Aug 2022 16:07:06 +0000 (UTC)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2891810EC1D;
+ Thu, 11 Aug 2022 16:08:38 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 7697461314;
- Thu, 11 Aug 2022 16:07:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7D75C433D7;
- Thu, 11 Aug 2022 16:07:03 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id C867EB821AE;
+ Thu, 11 Aug 2022 16:08:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 53195C433D7;
+ Thu, 11 Aug 2022 16:08:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1660234024;
- bh=BlKBMOH6o2j7WE88oomjY+BnlOaiVoPJIpUyChZ8a3s=;
+ s=k20201202; t=1660234115;
+ bh=mhmmrxvoPKeUkYHK58yY41A1Tx/UfD+/vmZ4vBHX+pU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=rP5SJ/cg25cC8rbjsKAFenYxWGJOMEAVFtbiJfcE7BmSD6KqRlqpKkEjmOE0d3Zdx
- 3+JfFnDL9zOz7VMjuWnDAUqRsJHjT0YeQ0SOz/Mg1X5nO0cBGD2DkTKAmG9u33IelJ
- QNV9UxG17Nlmh2VlsnAfuGjb5RPPpPb9J6ui1LIoCB7GVjU+lz1ue62wxuPWsZhj/W
- DGu9PItfMUXcesFHEzm83KFXwFbon1wZp5Wpof2VkxNz35SuOMzfX07xU7BuDPFnbQ
- 6NvZYw5PgCLGZVG5xY/P5uCUU/834WOGtLJ6UsMRK3Ei5zaZaNuiFmkVI2mTxWS/0b
- A6SZcobPOIKKw==
+ b=acV4VjEtMZcyUjdS/Ga5GV5Ugnqr5m9NM5C2TbLM5t5gLwxn5OMWjACzPjDLssAwH
+ FWPgzqFeIy+n14NO1Um5bLF047MRTFlFMDURqaMOn2x75G02bIwD0Evo+sbNgpT5ve
+ SQ5NeL9iEysia+a8g6J0pD7O5HTTqE07+ZMKQ04p7PR9hRSTbY6ePvUY/lme0CgSGI
+ yvxzmj4kdbMkYOEmDFhozQ9AW3rPZoNucZKoFX1nTPdUQFa4NpRI8xKN8BioMsNA68
+ C4ObfabW7Evc8yW/PWmPQBB28HX0DuOTVoM0DZoRPfUC+/7Mbuj4vkBOsNG6gCwKdW
+ CoJ5aUDm/3ziA==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu, 11 Aug 2022 12:03:55 -0400
-Message-Id: <20220811160421.1539956-31-sashal@kernel.org>
+Date: Thu, 11 Aug 2022 12:07:59 -0400
+Message-Id: <20220811160826.1541971-4-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220811160421.1539956-1-sashal@kernel.org>
-References: <20220811160421.1539956-1-sashal@kernel.org>
+In-Reply-To: <20220811160826.1541971-1-sashal@kernel.org>
+References: <20220811160826.1541971-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH AUTOSEL 5.10 31/46] drm/nouveau/nvkm: use
- list_add_tail() when building object tree
+Subject: [Nouveau] [PATCH AUTOSEL 5.4 04/25] drm/nouveau: clear output poll
+ workers before nouveau_fbcon_destroy()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,44 +55,65 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, airlied@linux.ie,
+Cc: Sasha Levin <sashal@kernel.org>, David Airlie <airlied@linux.ie>,
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, daniel@ffwll.ch,
- Dave Airlie <airlied@redhat.com>
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Ben Skeggs <bskeggs@redhat.com>
+From: Mark Menzynski <mmenzyns@redhat.com>
 
-[ Upstream commit 61c1f340bc809a1ca1e3c8794207a91cde1a7c78 ]
+[ Upstream commit 6b03816f869529393b37d03e5d75b68f7365a7a4 ]
 
-Fixes resume from hibernate failing on (at least) TU102, where cursor
-channel init failed due to being performed before the core channel.
+Resources needed for output poll workers are destroyed in
+nouveau_fbcon_fini() before output poll workers are cleared in
+nouveau_display_fini(). This means there is a time between fbcon_fini()
+and display_fini(), where if output poll happens, it crashes.
 
-Not solid idea why suspend-to-ram worked, but, presumably HW being in
-an entirely clean state has something to do with it.
+This patch introduces another output poll clearing before fbcon
+resources are destroyed.
 
-Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
-Reviewed-by: Dave Airlie <airlied@redhat.com>
-Signed-off-by: Dave Airlie <airlied@redhat.com>
+BUG: KASAN: use-after-free in
+__drm_fb_helper_initial_config_and_unlock.cold+0x1f3/0x291
+[drm_kms_helper]
+
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: David Airlie <airlied@linux.ie>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Cc: linux-kernel@vger.kernel.org
+Signed-off-by: Mark Menzynski <mmenzyns@redhat.com>
+Reviewed-by: Lyude Paul <lyude@redhat.com>
+Signed-off-by: Lyude Paul <lyude@redhat.com>
+Link: https://patchwork.freedesktop.org/patch/msgid/20220523113541.10562-1-mmenzyns@redhat.com
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/gpu/drm/nouveau/nvkm/core/ioctl.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/nouveau_fbcon.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-index d777df5a64e6..2aa0d6fed580 100644
---- a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-@@ -128,7 +128,7 @@ nvkm_ioctl_new(struct nvkm_client *client,
- 	if (ret == 0) {
- 		ret = nvkm_object_init(object);
- 		if (ret == 0) {
--			list_add(&object->head, &parent->tree);
-+			list_add_tail(&object->head, &parent->tree);
- 			if (nvkm_object_insert(object)) {
- 				client->data = object;
- 				return 0;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_fbcon.c b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
+index c09ea357e88f..325fc94791c6 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_fbcon.c
++++ b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
+@@ -39,6 +39,7 @@
+ 
+ #include <drm/drm_crtc.h>
+ #include <drm/drm_crtc_helper.h>
++#include <drm/drm_probe_helper.h>
+ #include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_atomic.h>
+@@ -606,6 +607,7 @@ nouveau_fbcon_fini(struct drm_device *dev)
+ 	if (!drm->fbcon)
+ 		return;
+ 
++	drm_kms_helper_poll_fini(dev);
+ 	nouveau_fbcon_accel_fini(dev);
+ 	nouveau_fbcon_destroy(dev, drm->fbcon);
+ 	kfree(drm->fbcon);
 -- 
 2.35.1
 
