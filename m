@@ -1,71 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1733598AD8
-	for <lists+nouveau@lfdr.de>; Thu, 18 Aug 2022 20:03:38 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 34CC8598B59
+	for <lists+nouveau@lfdr.de>; Thu, 18 Aug 2022 20:43:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 84D1910EACE;
-	Thu, 18 Aug 2022 18:03:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 003D210E10E;
+	Thu, 18 Aug 2022 18:43:38 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sonic309-21.consmr.mail.gq1.yahoo.com
- (sonic309-21.consmr.mail.gq1.yahoo.com [98.137.65.147])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 068A610E7F2
- for <nouveau@lists.freedesktop.org>; Thu, 18 Aug 2022 18:02:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048;
- t=1660845774; bh=D8Hh20Zw+PiObqilhH14cQE/y8S0smmKWiR//h9tOhI=;
- h=Date:From:Reply-To:To:Subject:References:From:Subject:Reply-To;
- b=ObhwMzI96QCRaKhowAPXehLp2ao7rXyrUi5u1/ViR23TFhOUNwwf4NIB3qGDDkXispTAz+3l8e9LIJBJzzEL5hTRAB+Sr9vi2l2CYrlF9vKmC/wOvKBXlDyHyYHsKMht79p0niexpSos/e35UkvCVxiogwd53X8Lb4x/+3wk73CRVkJsLS2RsxOZSn1wEAcDzek6o0wuRDsL33sNgceLUnEQu3md/h4JXtXu9fWlXgVRi2Q/W6ZtnHPmOdeZK6DhyK3o+8dlOQ+TN0iX39/mJcUnrjbMS+jvkAhV+ZpP0oRJAXJy1y4i98onsLeuWFH2UZ6BFusji7NMY/eXNCkQjQ==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1660845774; bh=OQtpdrX7vAcc6Lj9wMMQqKeLuAzmVMxZZdHGoV60mLT=;
- h=X-Sonic-MF:Date:From:To:Subject:From:Subject;
- b=baSCgN2tW4MJhlylMYcsaUbMMtFYYrSwwHmBKuoGqzuKEp7bfkOYnuXjXENsJE7nmJ+6wnL64u7M+3SDBu3DjDKykN88X2bdSimSScP+dE87k8exxNQ8+y1dIv0VzpNF3NMfsxdo5yARAQn4F/J3otjbhieiU3vGo6MHig8s1vtsui2r2YE5KO0I2Zd8J0F7AxlP5+dqKSxWBP4bxGj83gS79IeuLWLsUxQjZQsHMPM3GWpX9ScWW0a1cuO3Yo02mIugNel5uRcCUt8zir7NLyploqieK0GEMmF3t1y/8webnfQEadf8OjOkncwUWBhRSkC+4hsjNTsurNAey06t8Q==
-X-YMail-OSG: pzBER84VM1mC_s8S9w9FiTjRdGkiIBEgkGLl.lYMl_0feywt0EdrD1mmIFKlu7d
- KO4lyc8QQ5TBlNTdV_SQggdcBn.weQULjhtWHBHTcD5QbSQSOjc8FtrnWxLOGuQSVCVgFk9eA6pN
- 5jAMC_DfY92l.ZLkGh..gan6Hcc3u1ahQzREkQRm3g4PDpvQt6X2dgXiPofu5Tar9Uobx28o8fRH
- 9fOGWSX8px.P9J8cCUGHSeGAboUlSj2T5cgS6i.RS.ltLM3CvFnQ5vXPE.L8GgoZt.iyN9qcb8SP
- GNhCO4_kVNr35GJ9ysLczEmq4jk4JGkfqRcpyszIY_lJB68_N_Ib4SNlq4FkuNgyJE2muTm__8zI
- .RMf1K0TWImb377ADDDgdyGgqCalzRynXewTkyYbCixCdWXSvFYjqmX_oUTs_oVUS9P9h7a83zj7
- lgzLJElg4zVNXt8L2eF2Sfazp_e2rJjdVk1vxyfewGxgyMvmKRRf51iSR517snq9YyktQvLAOYzS
- 6xYrurKwD6ZLpavpuCRyoA3bDd9nnbrZ51pwA8uUE6XQk5v2K9YPw.6j4_NnBn1BbdMjb8AUW_Rn
- aLSXPppYkN.qaTkwipwlDf5bD6J3hxjjLoWb7_Tv7REUaduboc_k5uycv_W1cjXkWpZShUKyagmO
- KKdhWuMfux.2jQcOJyx9DrfGd6DDSB3GjJKDWETdTVhXcsIqYR2N2NL1phFkEv1wxO2G.LBdRHx4
- GQFAuJZ4.6Zp3nRTo57OkIzbItM0LHGSMA_2vfP0MIzXrpU7RXucWsW0w1t.4N1imQDAKMuc99Nj
- LalmbOpZpnxPJtfLASMYdk7VcD.ufXIoH8WfS0YouJkZA6v8OJTrpbKwnFbnkbqAZkOg00jIRGgW
- yipNbyqy.EOep6.q8KZndJajXV8bWZ4oHIDB_zyl542eiEgV4kxtMQTicQ0HCnkscZ.6pePyU8bG
- 0areEG24.p499hjnQ4hS8b3HVfoX.FWeiTkjVdxY.ptXs0VTEkA7B3b.UEk86rYhqum4l3_W6Py1
- tEf6Dl.AyBw4rKWX7GybCAYhxrYtagGYu3KEp5Pt.a9Z65yGBgCZfHGexIXhS5KAd4JKpTOfEY5b
- 2xvrS0S9Wf6veoklTEhoBInKVHd0.m5Rg4Uh0rtJJX8ddR8HOoG9nYhUSqH7u8vmCOAc6aYdafdb
- gaw9lGRUmMyz7Sm44Vo0.MTTeaEFTLcaKnp6ZH.TpVDXG_czBZaofyCZUyD0Fp6cZhcWEouaHUGb
- Iw1Ce6YUd7BYEBYLm5uq7TCH4.jxbzUxTTL9wfQgHCv2LK1190N.FgAgiIv.LpJni3TGV5FnoemB
- a1HcRpz0aY2DMGs1vXTfYPqtVQ96BTWNLmm5guA2l6EIdm2PLWEUw4pXjo2iD3FtSdZSYJObI__l
- gvv6N3LfREBk0jWGOxc3qyp8OG51FH7On1epTGFuBUBHWAsVYjCEQNan9YRUYdRA.qBkVYvBiMmC
- hSohcs.wciOogWLDf8yFb0O40qilhDp0VQ3bw6WnILC7pxi4_oQ84udVJpe.fMltW5qEX_7hCvXU
- 9r7fHhebH7MrIkbXq1CXzZOsJai0gdkhw_7N5dYXUcpXh9ZGlL3tmmf8Hq6txD.08V5xycvVfl_Q
- .JJzGz3J1flDPWrcWmDPtDKV.owXeXfngp7kfg1f_SqVhvSB0EVsDdh5lP23ajCEigJcCpuB37ea
- mKhEN.f2_rfFKq266WPx1ynHs80g_P3h58aTJpw73n3._UqDGjXqLtcXfxuwPjYMcoWKZUJGJfng
- SN3vsTqEOuCksKca8mq6XWrJM3QgXrcI536LyopptYv3zSHW_05dERXwNsCYWQa08u8aVHMDJVlc
- U8._VlbMrRIMhQSHfOErPR8yMkdbbdtIbqv5fZaZqGEWf9ZHO77jIORRywzg5ysqFIV7nhRHVGT3
- cgdC0_pLEiMTAaul5a2zmbZ7_NhagKVqi6jVOlCyXgc1tbAIws6X2H0fN8YAFPzPBpi.i1o7BlBx
- hccKulK.FYvmGEAlhAZTxKH6ESpiqeCj2bgTt2uwqVMxPMOeovE3eBK0NIDvz.yEQcndqU4LwEhf
- hhrCFpEINEvIq0yFlm.2gGrOig.UNJG0jDxRKrStTlSW1yfTNmI4.MShw3MeswAyYqmml3J55oSU
- W5XG8USaUdOVOiTmC_u1aaxAy2sxnb440k2qBhJ7EzsE2kI_bTrwgyCWQ_crTOUGFaBJUVfCennq
- fX0BJYTEtXzmlv7_Vdg--
-X-Sonic-MF: <dgpickett@aol.com>
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic309.consmr.mail.gq1.yahoo.com with HTTP; Thu, 18 Aug 2022 18:02:54 +0000
-Date: Thu, 18 Aug 2022 18:02:50 +0000 (UTC)
-From: "David G. Pickett" <dgpickett@aol.com>
-To: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
-Message-ID: <459852889.305460.1660845770242@mail.yahoo.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 935CB10E1FE
+ for <nouveau@lists.freedesktop.org>; Thu, 18 Aug 2022 18:43:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1660848199;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=QuD0T38mCQIoMv0q55V0GlDvkSOa6yGPd14s7hak4HE=;
+ b=dtzMsBh7SvReFvtTyrmWx6nvV04C0M/iM7hUNr9l6CNwstGUSiVr4gGdkEZb5hjKDopVhJ
+ hnZrU32Gd1/7PnM0WSK0YliJGWor0VLW4ZOTfeo1THDwfDYoI2ym60ma95yteWj3AN5yld
+ zwogPBee8TKAWJGbE9D/8Ar0rAVJJf8=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-269-qZQLpR7vMSaCHp5rE1xLKA-1; Thu, 18 Aug 2022 14:43:16 -0400
+X-MC-Unique: qZQLpR7vMSaCHp5rE1xLKA-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 237E43C01DE9;
+ Thu, 18 Aug 2022 18:43:15 +0000 (UTC)
+Received: from localhost.localdomain (unknown [10.39.192.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id BB54B492C3B;
+ Thu, 18 Aug 2022 18:43:10 +0000 (UTC)
+From: Hans de Goede <hdegoede@redhat.com>
+To: Ben Skeggs <bskeggs@redhat.com>,
+	Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
+	Daniel Dadap <ddadap@nvidia.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	Pan@freedesktop.org, Xinhui <Xinhui.Pan@amd.com>,
+	"Rafael J . Wysocki" <rafael@kernel.org>,
+	Mika Westerberg <mika.westerberg@linux.intel.com>,
+	Lukas Wunner <lukas@wunner.de>, Mark Gross <markgross@kernel.org>,
+	Andy Shevchenko <andy@kernel.org>
+Date: Thu, 18 Aug 2022 20:42:31 +0200
+Message-Id: <20220818184302.10051-1-hdegoede@redhat.com>
 MIME-Version: 1.0
-Content-Type: multipart/alternative; 
- boundary="----=_Part_305459_1770749147.1660845770241"
-References: <459852889.305460.1660845770242.ref@mail.yahoo.com>
-X-Mailer: WebService/1.1.20531 aolwebmail
-Subject: [Nouveau] Ubuntu 22.04 LTS system freezes 5 minutes then unlocks on
- nouveau, was stable on 20.04 w/nvidia
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
+Subject: [Nouveau] [PATCH v3 00/31] drm/kms: Stop registering multiple
+ /sys/class/backlight devs for a single display
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,73 +72,139 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: "David G. Pickett" <dgpickett@aol.com>
+Cc: linux-acpi@vger.kernel.org, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org, intel-gfx <intel-gfx@lists.freedesktop.org>,
+ dri-devel@lists.freedesktop.org, platform-driver-x86@vger.kernel.org,
+ Hans de Goede <hdegoede@redhat.com>, amd-gfx@lists.freedesktop.org,
+ Daniel Vetter <daniel@ffwll.ch>, Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-------=_Part_305459_1770749147.1660845770241
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hi All,
 
-When I chose to upgrade from Ubuntu 20.04 LTS to Ubuntu 22.04 LTS (Long Ter=
-m Stable now seems a bit unrealistic), for some reason they removed my nvid=
-ia drivers and installed nouveau.=C2=A0 My system freezes intermittently fo=
-r about 5 minutes when graphically active apps like Firefox, Chrome, GNUCas=
-h are running.=C2=A0 I am limping along with Chrome set to not use hardware=
- acceleration, a setting both sad and amazingly odd!=C2=A0 I recall having =
-a similar problem in 20.04 until I switched to nvidia proprietary drivers.=
-=C2=A0 I might do that again, but the controls to do that successfully seem=
- to be harder to find, and maybe 22.04 thinks that they are incompatible.=
-=C2=A0 I destroyed my bootability trying to install using the nvidia 340 ru=
-n file when it failed to make a kernel, and had to reload the whole OS.=C2=
-=A0 My GPU is an nVidia GT218 [GeForce 210], NVA8, rather old, now nominall=
-y supported by the nvidia 340 series libraries.=C2=A0 My system is an=C2=A0=
-Hewlett-Packard p6803w, AMD=C2=AE Athlon(tm) ii x2 220 processor =C3=97 2, =
-with SSD and 16 GB RAM.=C2=A0 Ubuntu 22.04.1, Gnome 42.2, Wayland, with all=
- current updates.
+As mentioned in my RFC titled "drm/kms: control display brightness through
+drm_connector properties":
+https://lore.kernel.org/dri-devel/0d188965-d809-81b5-74ce-7d30c49fee2d@redhat.com/
 
-How can I help you find the bug?=C2=A0 Being both a 20 year hardware and 25=
- year software computer veteran, I can follow requests pretty well.
+The first step towards this is to deal with some existing technical debt
+in backlight handling on x86/ACPI boards, specifically we need to stop
+registering multiple /sys/class/backlight devs for a single display.
 
-BTW, nouveau does not allow BOINC apps to run on the GPU, which nvidia supp=
-orted under 20.04.
+This series implements my RFC describing my plan for these cleanups:
+https://lore.kernel.org/dri-devel/98519ba0-7f18-201a-ea34-652f50343158@redhat.com/
 
-I'd hate to have to remove my GPU (the motherboard has a primitive one), or=
- replace the GPU if any compatible ones are still available, or replace my =
-computer to get a stable system.
+Changes in version 3:
+- ACPI_VIDEO can now be enabled on non X86 too, adjust various Kconfig changes
+- Make the delay before doing fallback acpi_video backlight registration
+  a module option (patch 9)
+- Move the nvidia-wmi-ec-backlight fw API definitions to a shared header
+- Add a "acpi_video_get_backlight_type() == acpi_backlight_nvidia_wmi_ec"
+  check to the nvidia-wmi-ec-backlight driver (patch 19)
 
-------=_Part_305459_1770749147.1660845770241
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Changes in version 2:
+- Introduce acpi_video_backlight_use_native() helper
+- Finishes the refactoring, addressing all the bits from the "Other issues"
+  section of the refactor RFC
+
+The i915 patches (patch 2 and 12 still need a review/ack), all the
+other patches have already been acked. This series as submitted is
+based on drm-tip for CI purposes. I also have an immutable branch
+based on 6.0-rc1 with these same patches available here:
+https://git.kernel.org/pub/scm/linux/kernel/git/pdx86/platform-drivers-x86.git/log/?h=backlight-detect-refactor-v3
+assuming the i915 patches also pass review I hope to send out
+a pull-request to all involved subsystems based on this branch soon.
+
+Regards,
+
+Hans
 
 
-<div style=3D"color:black;font: 12pt Verdana, Arial, Helvetica, sans-serif;=
-">When I chose to upgrade from Ubuntu 20.04 LTS to Ubuntu 22.04 LTS (Long T=
-erm Stable now seems a bit unrealistic), for some reason they removed my nv=
-idia drivers and installed nouveau.&nbsp; My system freezes intermittently =
-for about 5 minutes when graphically active apps like Firefox, Chrome, GNUC=
-ash are running.&nbsp; I am limping along with Chrome set to not use hardwa=
-re acceleration, a setting both sad and amazingly odd!&nbsp; I recall havin=
-g a similar problem in 20.04 until I switched to nvidia proprietary drivers=
-.&nbsp; I might do that again, but the controls to do that successfully see=
-m to be harder to find, and maybe 22.04 thinks that they are incompatible.&=
-nbsp; I destroyed my bootability trying to install using the nvidia 340 run=
- file when it failed to make a kernel, and had to reload the whole OS.&nbsp=
-; My GPU is an nVidia GT218 [GeForce 210], NVA8, rather old, now nominally =
-supported by the nvidia 340 series libraries.&nbsp; My system is an&nbsp;He=
-wlett-Packard p6803w, AMD=C2=AE Athlon(tm) ii x2 220 processor =C3=97 2, wi=
-th SSD and 16 GB RAM.&nbsp; Ubuntu 22.04.1, Gnome 42.2, Wayland, with all c=
-urrent updates.<br>
-<br>
-How can I help you find the bug?&nbsp; Being both a 20 year hardware and 25=
- year software computer veteran, I can follow requests pretty well.<br>
-<br>
-BTW, nouveau does not allow BOINC apps to run on the GPU, which nvidia supp=
-orted under 20.04.<br>
-<br>
-I'd hate to have to remove my GPU (the motherboard has a primitive one), or=
- replace the GPU if any compatible ones are still available, or replace my =
-computer to get a stable system.<br>
-</div>
+Hans de Goede (31):
+  ACPI: video: Add acpi_video_backlight_use_native() helper
+  drm/i915: Don't register backlight when another backlight should be
+    used
+  drm/amdgpu: Don't register backlight when another backlight should be
+    used (v3)
+  drm/radeon: Don't register backlight when another backlight should be
+    used (v3)
+  drm/nouveau: Don't register backlight when another backlight should be
+    used
+  ACPI: video: Drop backlight_device_get_by_type() call from
+    acpi_video_get_backlight_type()
+  ACPI: video: Remove acpi_video_bus from list before tearing it down
+  ACPI: video: Simplify acpi_video_unregister_backlight()
+  ACPI: video: Make backlight class device registration a separate step
+    (v2)
+  ACPI: video: Remove code to unregister acpi_video backlight when a
+    native backlight registers
+  drm/i915: Call acpi_video_register_backlight() (v2)
+  drm/nouveau: Register ACPI video backlight when nv_backlight
+    registration fails
+  drm/amdgpu: Register ACPI video backlight when skipping amdgpu
+    backlight registration
+  drm/radeon: Register ACPI video backlight when skipping radeon
+    backlight registration
+  platform/x86: nvidia-wmi-ec-backlight: Move fw interface definitions
+    to a header
+  ACPI: video: Refactor acpi_video_get_backlight_type() a bit
+  ACPI: video: Add Nvidia WMI EC brightness control detection (v2)
+  ACPI: video: Add Apple GMUX brightness control detection
+  platform/x86: nvidia-wmi-ec-backlight: Use
+    acpi_video_get_backlight_type()
+  platform/x86: apple-gmux: Stop calling acpi/video.h functions
+  platform/x86: toshiba_acpi: Stop using
+    acpi_video_set_dmi_backlight_type()
+  platform/x86: acer-wmi: Move backlight DMI quirks to
+    acpi/video_detect.c
+  platform/x86: asus-wmi: Drop DMI chassis-type check from backlight
+    handling
+  platform/x86: asus-wmi: Move acpi_backlight=vendor quirks to ACPI
+    video_detect.c
+  platform/x86: asus-wmi: Move acpi_backlight=native quirks to ACPI
+    video_detect.c
+  platform/x86: samsung-laptop: Move acpi_backlight=[vendor|native]
+    quirks to ACPI video_detect.c
+  ACPI: video: Remove acpi_video_set_dmi_backlight_type()
+  ACPI: video: Drop "Samsung X360" acpi_backlight=native quirk
+  ACPI: video: Drop NL5x?U, PF4NU1F and PF5?U?? acpi_backlight=native
+    quirks
+  ACPI: video: Fix indentation of video_detect_dmi_table[] entries
+  drm/todo: Add entry about dealing with brightness control on devices
+    with > 1 panel
 
-------=_Part_305459_1770749147.1660845770241--
+ Documentation/gpu/todo.rst                    |  68 +++
+ MAINTAINERS                                   |   1 +
+ drivers/acpi/Kconfig                          |   1 +
+ drivers/acpi/acpi_video.c                     |  64 ++-
+ drivers/acpi/video_detect.c                   | 428 +++++++++++-------
+ drivers/gpu/drm/Kconfig                       |  14 +
+ .../gpu/drm/amd/amdgpu/atombios_encoders.c    |  14 +-
+ .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c |   9 +
+ drivers/gpu/drm/gma500/Kconfig                |   2 +
+ drivers/gpu/drm/i915/Kconfig                  |   2 +
+ .../gpu/drm/i915/display/intel_backlight.c    |   7 +
+ drivers/gpu/drm/i915/display/intel_display.c  |   8 +
+ drivers/gpu/drm/i915/display/intel_panel.c    |   3 +
+ drivers/gpu/drm/i915/i915_drv.h               |   2 +
+ drivers/gpu/drm/nouveau/nouveau_backlight.c   |  14 +
+ drivers/gpu/drm/radeon/atombios_encoders.c    |   7 +
+ drivers/gpu/drm/radeon/radeon_encoders.c      |  11 +-
+ .../gpu/drm/radeon/radeon_legacy_encoders.c   |   7 +
+ drivers/platform/x86/Kconfig                  |   1 +
+ drivers/platform/x86/acer-wmi.c               |  66 ---
+ drivers/platform/x86/apple-gmux.c             |   3 -
+ drivers/platform/x86/asus-nb-wmi.c            |  21 -
+ drivers/platform/x86/asus-wmi.c               |  13 -
+ drivers/platform/x86/asus-wmi.h               |   2 -
+ drivers/platform/x86/eeepc-wmi.c              |  25 +-
+ .../platform/x86/nvidia-wmi-ec-backlight.c    |  80 +---
+ drivers/platform/x86/samsung-laptop.c         |  87 ----
+ drivers/platform/x86/toshiba_acpi.c           |  16 -
+ include/acpi/video.h                          |   9 +-
+ .../x86/nvidia-wmi-ec-backlight.h             |  70 +++
+ 30 files changed, 551 insertions(+), 504 deletions(-)
+ create mode 100644 include/linux/platform_data/x86/nvidia-wmi-ec-backlight.h
+
+-- 
+2.37.2
+
