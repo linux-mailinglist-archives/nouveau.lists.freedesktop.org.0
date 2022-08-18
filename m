@@ -1,55 +1,69 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B8945A016F
-	for <lists+nouveau@lfdr.de>; Wed, 24 Aug 2022 20:38:24 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1036C5A01D3
+	for <lists+nouveau@lfdr.de>; Wed, 24 Aug 2022 21:13:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0E216B9090;
-	Wed, 24 Aug 2022 18:36:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 32DEDC35A5;
+	Wed, 24 Aug 2022 19:12:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 06C61891AD
- for <nouveau@lists.freedesktop.org>; Wed, 17 Aug 2022 19:40:10 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9418B10E970
+ for <nouveau@lists.freedesktop.org>; Thu, 18 Aug 2022 18:44:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1660765210;
+ s=mimecast20190719; t=1660848286;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=BJVKAzmgNUXTIvg/7aYeVKWu2KFXiCXUYfttouOpl9Y=;
- b=K5oOKyfRj37FMDAYwCJylSOXs9EVSLkr8xT2T+6umU3sOC7NQLjJIoa6NZjHWCCgjIr5zF
- y5JPzZ+4bP89m+1vyOIH1YudMT3RnA7mm99tvi82gcmznfKZlBIOB9YHt9fe4Fg3mUgNof
- NVrAT4Js2+FsGufF5GfpKnqwxZsjTLs=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=3phrIYfyXSPAlAieQwX3BjY7MsP4c4tlCKy3HCMlajo=;
+ b=cRCdW2DwlP+LqPBeco9109HwzhEraTfBAzig6Dp0XyMU+8lBTAckYCqvEq3ji5R0LYhAmj
+ ykdpixyeFYABetN+WKzu7p6QNjrUFjQyYSvOTCmlhgj6yVxM6cYS/+Xv8+MSnYrex0QW2O
+ BCBh54ljiK0+IKAMrZin5r2Vup0Wtvk=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-390-yMwjXZ5RP0ub9eiYeukMgQ-1; Wed, 17 Aug 2022 15:40:08 -0400
-X-MC-Unique: yMwjXZ5RP0ub9eiYeukMgQ-1
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
- [10.11.54.9])
+ us-mta-147-r-gKo4i9PdyqahinY1YINg-1; Thu, 18 Aug 2022 14:44:43 -0400
+X-MC-Unique: r-gKo4i9PdyqahinY1YINg-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 79B84180F6DF;
- Wed, 17 Aug 2022 19:40:07 +0000 (UTC)
-Received: from emerald.redhat.com (unknown [10.22.18.168])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 30F98492C3B;
- Wed, 17 Aug 2022 19:40:06 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org
-Date: Wed, 17 Aug 2022 15:38:37 -0400
-Message-Id: <20220817193847.557945-9-lyude@redhat.com>
-In-Reply-To: <20220817193847.557945-1-lyude@redhat.com>
-References: <20220817193847.557945-1-lyude@redhat.com>
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 396E93815D2A;
+ Thu, 18 Aug 2022 18:44:42 +0000 (UTC)
+Received: from localhost.localdomain (unknown [10.39.192.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 79F03492C3B;
+ Thu, 18 Aug 2022 18:44:38 +0000 (UTC)
+From: Hans de Goede <hdegoede@redhat.com>
+To: Ben Skeggs <bskeggs@redhat.com>,
+	Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
+	Daniel Dadap <ddadap@nvidia.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	Pan@freedesktop.org, Xinhui <Xinhui.Pan@amd.com>,
+	"Rafael J . Wysocki" <rafael@kernel.org>,
+	Mika Westerberg <mika.westerberg@linux.intel.com>,
+	Lukas Wunner <lukas@wunner.de>, Mark Gross <markgross@kernel.org>,
+	Andy Shevchenko <andy@kernel.org>
+Date: Thu, 18 Aug 2022 20:42:53 +0200
+Message-Id: <20220818184302.10051-23-hdegoede@redhat.com>
+In-Reply-To: <20220818184302.10051-1-hdegoede@redhat.com>
+References: <20220818184302.10051-1-hdegoede@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.9
-Subject: [Nouveau] [RFC v4 08/17] drm/display/dp_mst: Add nonblocking
- helpers for DP MST
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
+Subject: [Nouveau] [PATCH v3 22/31] platform/x86: acer-wmi: Move backlight
+ DMI quirks to acpi/video_detect.c
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,348 +75,217 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, Imre Deak <imre.deak@intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- =?UTF-8?q?Jos=C3=A9=20Roberto=20de=20Souza?= <jose.souza@intel.com>,
- open list <linux-kernel@vger.kernel.org>,
- =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
- Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
- Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
- Javier Martinez Canillas <javierm@redhat.com>, Leo Li <sunpeng.li@amd.com>,
- Fangzhi Zuo <Jerry.Zuo@amd.com>, Aurabindo Pillai <aurabindo.pillai@amd.com>,
- Ben Skeggs <bskeggs@redhat.com>, Dave Airlie <airlied@redhat.com>,
- Harry Wentland <harry.wentland@amd.com>, Jani Nikula <jani.nikula@intel.com>,
- Luo Jiaxing <luojiaxing@huawei.com>, Jani Nikula <jani.nikula@linux.intel.com>,
- Sean Paul <seanpaul@chromium.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Sean Paul <sean@poorly.run>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Jude Shih <shenshih@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
- Roman Li <roman.li@amd.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- Manasi Navare <manasi.d.navare@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
- Wayne Lin <Wayne.Lin@amd.com>, Alex Deucher <alexander.deucher@amd.com>,
- Nicholas Kazlauskas <nicholas.kazlauskas@amd.com>,
- Fernando Ramos <greenfoo@u92.eu>
+Cc: linux-acpi@vger.kernel.org, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org, intel-gfx <intel-gfx@lists.freedesktop.org>,
+ "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+ dri-devel@lists.freedesktop.org, platform-driver-x86@vger.kernel.org,
+ Hans de Goede <hdegoede@redhat.com>, amd-gfx@lists.freedesktop.org,
+ Daniel Vetter <daniel@ffwll.ch>, Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-As Daniel Vetter pointed out, if we only use the atomic modesetting locks
-with MST it's technically possible for a driver with non-blocking modesets
-to race when it comes to MST displays - as we make the mistake of not doing
-our own CRTC commit tracking in the topology_state object.
+Move the backlight DMI quirks to acpi/video_detect.c, so that
+the driver no longer needs to call acpi_video_set_dmi_backlight_type().
 
-This could potentially cause problems if something like this happens:
+acpi_video_set_dmi_backlight_type() is troublesome because it may end up
+getting called after other backlight drivers have already called
+acpi_video_get_backlight_type() resulting in the other drivers
+already being registered even though they should not.
 
-* User starts non-blocking commit to disable CRTC-1 on MST topology 1
-* User starts non-blocking commit to enable CRTC-2 on MST topology 1
+Note that even though the DMI quirk table name was video_vendor_dmi_table,
+5/6 quirks were actually quirks to use the GPU native backlight.
 
-There's no guarantee here that the commit for disabling CRTC-2 will only
-occur after CRTC-1 has finished, since neither commit shares a CRTC - only
-the private modesetting object for MST. Keep in mind this likely isn't a
-problem for blocking modesets, only non-blocking.
+These 5 quirks also had a callback in their dmi_system_id entry which
+disabled the acer-wmi vendor driver; and any DMI match resulted in:
 
-So, begin fixing this by keeping track of which CRTCs on a topology have
-changed by keeping track of which CRTCs we release or allocate timeslots
-on. As well, add some helpers for:
+	acpi_video_set_dmi_backlight_type(acpi_backlight_vendor);
 
-* Setting up the drm_crtc_commit structs in the ->commit_setup hook
-* Waiting for any CRTC dependencies from the previous topology state
+which disabled the acpi_video driver, so only the native driver was left.
+The new entries for these 5/6 devices correctly marks these as needing
+the native backlight driver.
 
-v2:
-* Use drm_dp_mst_atomic_setup_commit() directly - Jani
+Also note that other changes in this series change the native backlight
+drivers to no longer unconditionally register their backlight. Instead
+these drivers now do this check:
 
-Signed-off-by: Lyude Paul <lyude@redhat.com>
-Cc: Wayne Lin <Wayne.Lin@amd.com>
-Cc: Ville Syrjälä <ville.syrjala@linux.intel.com>
-Cc: Fangzhi Zuo <Jerry.Zuo@amd.com>
-Cc: Jani Nikula <jani.nikula@intel.com>
-Cc: Imre Deak <imre.deak@intel.com>
-Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
-Cc: Sean Paul <sean@poorly.run>
-Acked-by: Jani Nikula <jani.nikula@intel.com>
+	if (acpi_video_get_backlight_type(false) != acpi_backlight_native)
+		return 0; /* bail */
+
+which without this patch would have broken these 5/6 "special" quirks.
+
+Since I had to look at all the commits adding the quirks anyways, to make
+sure that I understood the code correctly, I've also added links to
+the various original bugzillas for these quirks to the new entries.
+
+Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+Signed-off-by: Hans de Goede <hdegoede@redhat.com>
 ---
- .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c |  5 +-
- drivers/gpu/drm/display/drm_dp_mst_topology.c | 93 +++++++++++++++++++
- drivers/gpu/drm/i915/display/intel_display.c  |  6 ++
- drivers/gpu/drm/nouveau/dispnv50/disp.c       |  7 ++
- include/drm/display/drm_dp_mst_helper.h       | 15 +++
- 5 files changed, 124 insertions(+), 2 deletions(-)
+ drivers/acpi/video_detect.c     | 53 ++++++++++++++++++++++++++
+ drivers/platform/x86/acer-wmi.c | 66 ---------------------------------
+ 2 files changed, 53 insertions(+), 66 deletions(-)
 
-diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-index cd30b02af8ee..c97a4d759b94 100644
---- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-+++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-@@ -2808,7 +2808,8 @@ static const struct drm_mode_config_funcs amdgpu_dm_mode_funcs = {
+diff --git a/drivers/acpi/video_detect.c b/drivers/acpi/video_detect.c
+index 891138d47def..4545f9f1a5b1 100644
+--- a/drivers/acpi/video_detect.c
++++ b/drivers/acpi/video_detect.c
+@@ -149,6 +149,15 @@ static const struct dmi_system_id video_detect_dmi_table[] = {
+ 		DMI_MATCH(DMI_BOARD_NAME, "X360"),
+ 		},
+ 	},
++	{
++	 /* https://bugzilla.redhat.com/show_bug.cgi?id=1128309 */
++	 .callback = video_detect_force_vendor,
++	 /* Acer KAV80 */
++	 .matches = {
++		DMI_MATCH(DMI_SYS_VENDOR, "Acer"),
++		DMI_MATCH(DMI_PRODUCT_NAME, "KAV80"),
++		},
++	},
+ 	{
+ 	.callback = video_detect_force_vendor,
+ 	/* Asus UL30VT */
+@@ -437,6 +446,41 @@ static const struct dmi_system_id video_detect_dmi_table[] = {
+ 		DMI_MATCH(DMI_BOARD_NAME, "JV50"),
+ 		},
+ 	},
++	{
++	 /* https://bugzilla.redhat.com/show_bug.cgi?id=1012674 */
++	 .callback = video_detect_force_native,
++	 /* Acer Aspire 5741 */
++	 .matches = {
++		DMI_MATCH(DMI_BOARD_VENDOR, "Acer"),
++		DMI_MATCH(DMI_PRODUCT_NAME, "Aspire 5741"),
++		},
++	},
++	{
++	 /* https://bugzilla.kernel.org/show_bug.cgi?id=42993 */
++	 .callback = video_detect_force_native,
++	 /* Acer Aspire 5750 */
++	 .matches = {
++		DMI_MATCH(DMI_BOARD_VENDOR, "Acer"),
++		DMI_MATCH(DMI_PRODUCT_NAME, "Aspire 5750"),
++		},
++	},
++	{
++	 /* https://bugzilla.kernel.org/show_bug.cgi?id=42833 */
++	 .callback = video_detect_force_native,
++	 /* Acer Extensa 5235 */
++	 .matches = {
++		DMI_MATCH(DMI_BOARD_VENDOR, "Acer"),
++		DMI_MATCH(DMI_PRODUCT_NAME, "Extensa 5235"),
++		},
++	},
++	{
++	 .callback = video_detect_force_native,
++	 /* Acer TravelMate 4750 */
++	 .matches = {
++		DMI_MATCH(DMI_BOARD_VENDOR, "Acer"),
++		DMI_MATCH(DMI_PRODUCT_NAME, "TravelMate 4750"),
++		},
++	},
+ 	{
+ 	 /* https://bugzilla.kernel.org/show_bug.cgi?id=207835 */
+ 	 .callback = video_detect_force_native,
+@@ -447,6 +491,15 @@ static const struct dmi_system_id video_detect_dmi_table[] = {
+ 		DMI_MATCH(DMI_BOARD_NAME, "BA51_MV"),
+ 		},
+ 	},
++	{
++	 /* https://bugzilla.kernel.org/show_bug.cgi?id=36322 */
++	 .callback = video_detect_force_native,
++	 /* Acer TravelMate 5760 */
++	 .matches = {
++		DMI_MATCH(DMI_BOARD_VENDOR, "Acer"),
++		DMI_MATCH(DMI_PRODUCT_NAME, "TravelMate 5760"),
++		},
++	},
+ 	{
+ 	.callback = video_detect_force_native,
+ 	/* ASUSTeK COMPUTER INC. GA401 */
+diff --git a/drivers/platform/x86/acer-wmi.c b/drivers/platform/x86/acer-wmi.c
+index e0230ea0cb7e..b933a5165edb 100644
+--- a/drivers/platform/x86/acer-wmi.c
++++ b/drivers/platform/x86/acer-wmi.c
+@@ -643,69 +643,6 @@ static const struct dmi_system_id non_acer_quirks[] __initconst = {
+ 	{}
  };
  
- static struct drm_mode_config_helper_funcs amdgpu_dm_mode_config_helperfuncs = {
--	.atomic_commit_tail = amdgpu_dm_atomic_commit_tail
-+	.atomic_commit_tail = amdgpu_dm_atomic_commit_tail,
-+	.atomic_commit_setup = drm_dp_mst_atomic_setup_commit,
- };
- 
- static void update_connector_ext_caps(struct amdgpu_dm_connector *aconnector)
-@@ -7959,6 +7960,7 @@ static void amdgpu_dm_atomic_commit_tail(struct drm_atomic_state *state)
- 		DRM_ERROR("Waiting for fences timed out!");
- 
- 	drm_atomic_helper_update_legacy_modeset_state(dev, state);
-+	drm_dp_mst_atomic_wait_for_dependencies(state);
- 
- 	dm_state = dm_atomic_get_new_state(state);
- 	if (dm_state && dm_state->context) {
-@@ -8357,7 +8359,6 @@ static void amdgpu_dm_atomic_commit_tail(struct drm_atomic_state *state)
- 		dc_release_state(dc_state_temp);
- }
- 
+-static int __init
+-video_set_backlight_video_vendor(const struct dmi_system_id *d)
+-{
+-	interface->capability &= ~ACER_CAP_BRIGHTNESS;
+-	pr_info("Brightness must be controlled by generic video driver\n");
+-	return 0;
+-}
 -
- static int dm_force_atomic_commit(struct drm_connector *connector)
+-static const struct dmi_system_id video_vendor_dmi_table[] __initconst = {
+-	{
+-		.callback = video_set_backlight_video_vendor,
+-		.ident = "Acer TravelMate 4750",
+-		.matches = {
+-			DMI_MATCH(DMI_BOARD_VENDOR, "Acer"),
+-			DMI_MATCH(DMI_PRODUCT_NAME, "TravelMate 4750"),
+-		},
+-	},
+-	{
+-		.callback = video_set_backlight_video_vendor,
+-		.ident = "Acer Extensa 5235",
+-		.matches = {
+-			DMI_MATCH(DMI_BOARD_VENDOR, "Acer"),
+-			DMI_MATCH(DMI_PRODUCT_NAME, "Extensa 5235"),
+-		},
+-	},
+-	{
+-		.callback = video_set_backlight_video_vendor,
+-		.ident = "Acer TravelMate 5760",
+-		.matches = {
+-			DMI_MATCH(DMI_BOARD_VENDOR, "Acer"),
+-			DMI_MATCH(DMI_PRODUCT_NAME, "TravelMate 5760"),
+-		},
+-	},
+-	{
+-		.callback = video_set_backlight_video_vendor,
+-		.ident = "Acer Aspire 5750",
+-		.matches = {
+-			DMI_MATCH(DMI_BOARD_VENDOR, "Acer"),
+-			DMI_MATCH(DMI_PRODUCT_NAME, "Aspire 5750"),
+-		},
+-	},
+-	{
+-		.callback = video_set_backlight_video_vendor,
+-		.ident = "Acer Aspire 5741",
+-		.matches = {
+-			DMI_MATCH(DMI_BOARD_VENDOR, "Acer"),
+-			DMI_MATCH(DMI_PRODUCT_NAME, "Aspire 5741"),
+-		},
+-	},
+-	{
+-		/*
+-		 * Note no video_set_backlight_video_vendor, we must use the
+-		 * acer interface, as there is no native backlight interface.
+-		 */
+-		.ident = "Acer KAV80",
+-		.matches = {
+-			DMI_MATCH(DMI_SYS_VENDOR, "Acer"),
+-			DMI_MATCH(DMI_PRODUCT_NAME, "KAV80"),
+-		},
+-	},
+-	{}
+-};
+-
+ /* Find which quirks are needed for a particular vendor/ model pair */
+ static void __init find_quirks(void)
  {
- 	int ret = 0;
-diff --git a/drivers/gpu/drm/display/drm_dp_mst_topology.c b/drivers/gpu/drm/display/drm_dp_mst_topology.c
-index 1c054a5e2e77..d701e5b819b8 100644
---- a/drivers/gpu/drm/display/drm_dp_mst_topology.c
-+++ b/drivers/gpu/drm/display/drm_dp_mst_topology.c
-@@ -4384,12 +4384,16 @@ int drm_dp_atomic_find_time_slots(struct drm_atomic_state *state,
- {
- 	struct drm_dp_mst_topology_state *topology_state;
- 	struct drm_dp_mst_atomic_payload *payload = NULL;
-+	struct drm_connector_state *conn_state;
- 	int prev_slots = 0, prev_bw = 0, req_slots;
+@@ -2477,9 +2414,6 @@ static int __init acer_wmi_init(void)
  
- 	topology_state = drm_atomic_get_mst_topology_state(state, mgr);
- 	if (IS_ERR(topology_state))
- 		return PTR_ERR(topology_state);
+ 	set_quirks();
  
-+	conn_state = drm_atomic_get_new_connector_state(state, port->connector);
-+	topology_state->pending_crtc_mask |= drm_crtc_mask(conn_state->crtc);
-+
- 	/* Find the current allocation for this port, if any */
- 	payload = drm_atomic_get_mst_payload_state(topology_state, port);
- 	if (payload) {
-@@ -4469,11 +4473,15 @@ int drm_dp_atomic_release_time_slots(struct drm_atomic_state *state,
- {
- 	struct drm_dp_mst_topology_state *topology_state;
- 	struct drm_dp_mst_atomic_payload *payload;
-+	struct drm_connector_state *conn_state;
+-	if (dmi_check_system(video_vendor_dmi_table))
+-		acpi_video_set_dmi_backlight_type(acpi_backlight_vendor);
+-
+ 	if (acpi_video_get_backlight_type() != acpi_backlight_vendor)
+ 		interface->capability &= ~ACER_CAP_BRIGHTNESS;
  
- 	topology_state = drm_atomic_get_mst_topology_state(state, mgr);
- 	if (IS_ERR(topology_state))
- 		return PTR_ERR(topology_state);
- 
-+	conn_state = drm_atomic_get_old_connector_state(state, port->connector);
-+	topology_state->pending_crtc_mask |= drm_crtc_mask(conn_state->crtc);
-+
- 	payload = drm_atomic_get_mst_payload_state(topology_state, port);
- 	if (WARN_ON(!payload)) {
- 		drm_err(mgr->dev, "No payload for [MST PORT:%p] found in mst state %p\n",
-@@ -4492,6 +4500,83 @@ int drm_dp_atomic_release_time_slots(struct drm_atomic_state *state,
- }
- EXPORT_SYMBOL(drm_dp_atomic_release_time_slots);
- 
-+/**
-+ * drm_dp_mst_atomic_setup_commit() - setup_commit hook for MST helpers
-+ * @state: global atomic state
-+ *
-+ * This function saves all of the &drm_crtc_commit structs in an atomic state that touch any CRTCs
-+ * currently assigned to an MST topology. Drivers must call this hook from their
-+ * &drm_mode_config_helper_funcs.atomic_commit_setup hook.
-+ *
-+ * Returns:
-+ * 0 if all CRTC commits were retrieved successfully, negative error code otherwise
-+ */
-+int drm_dp_mst_atomic_setup_commit(struct drm_atomic_state *state)
-+{
-+	struct drm_dp_mst_topology_mgr *mgr;
-+	struct drm_dp_mst_topology_state *mst_state;
-+	struct drm_crtc *crtc;
-+	struct drm_crtc_state *crtc_state;
-+	int i, j, commit_idx, num_commit_deps;
-+
-+	for_each_new_mst_mgr_in_state(state, mgr, mst_state, i) {
-+		if (!mst_state->pending_crtc_mask)
-+			continue;
-+
-+		num_commit_deps = hweight32(mst_state->pending_crtc_mask);
-+		mst_state->commit_deps = kmalloc_array(num_commit_deps,
-+						       sizeof(*mst_state->commit_deps), GFP_KERNEL);
-+		if (!mst_state->commit_deps)
-+			return -ENOMEM;
-+		mst_state->num_commit_deps = num_commit_deps;
-+
-+		commit_idx = 0;
-+		for_each_new_crtc_in_state(state, crtc, crtc_state, j) {
-+			if (mst_state->pending_crtc_mask & drm_crtc_mask(crtc)) {
-+				mst_state->commit_deps[commit_idx++] =
-+					drm_crtc_commit_get(crtc_state->commit);
-+			}
-+		}
-+	}
-+
-+	return 0;
-+}
-+EXPORT_SYMBOL(drm_dp_mst_atomic_setup_commit);
-+
-+/**
-+ * drm_dp_mst_atomic_wait_for_dependencies() - Wait for all pending commits on MST topologies
-+ * @state: global atomic state
-+ *
-+ * Goes through any MST topologies in this atomic state, and waits for any pending commits which
-+ * touched CRTCs that were/are on an MST topology to be programmed to hardware and flipped to before
-+ * returning. This is to prevent multiple non-blocking commits affecting an MST topology from racing
-+ * with eachother by forcing them to be executed sequentially in situations where the only resources
-+ * the modeset objects in these commits share are an MST topology.
-+ *
-+ * This function also prepares the new MST state for commit by performing some state preparation
-+ * which can't be done until this point, such as reading back the final VC start slots (which are
-+ * determined at commit-time) from the previous state.
-+ *
-+ * All MST drivers must call this function after calling drm_atomic_helper_wait_for_dependencies(),
-+ * or whatever their equivalent of that is.
-+ */
-+void drm_dp_mst_atomic_wait_for_dependencies(struct drm_atomic_state *state)
-+{
-+	struct drm_dp_mst_topology_state *old_mst_state;
-+	struct drm_dp_mst_topology_mgr *mgr;
-+	int i, j, ret;
-+
-+	for_each_old_mst_mgr_in_state(state, mgr, old_mst_state, i) {
-+		for (j = 0; j < old_mst_state->num_commit_deps; j++) {
-+			ret = drm_crtc_commit_wait(old_mst_state->commit_deps[j]);
-+			if (ret < 0)
-+				drm_err(state->dev, "Failed to wait for %s: %d\n",
-+					old_mst_state->commit_deps[j]->crtc->name, ret);
-+		}
-+	}
-+}
-+EXPORT_SYMBOL(drm_dp_mst_atomic_wait_for_dependencies);
-+
- /**
-  * drm_dp_mst_update_slots() - updates the slot info depending on the DP ecoding format
-  * @mst_state: mst_state to update
-@@ -5067,6 +5152,9 @@ drm_dp_mst_duplicate_state(struct drm_private_obj *obj)
- 	__drm_atomic_helper_private_obj_duplicate_state(obj, &state->base);
- 
- 	INIT_LIST_HEAD(&state->payloads);
-+	state->commit_deps = NULL;
-+	state->num_commit_deps = 0;
-+	state->pending_crtc_mask = 0;
- 
- 	list_for_each_entry(pos, &old_state->payloads, next) {
- 		/* Prune leftover freed timeslot allocations */
-@@ -5099,6 +5187,7 @@ static void drm_dp_mst_destroy_state(struct drm_private_obj *obj,
- 	struct drm_dp_mst_topology_state *mst_state =
- 		to_dp_mst_topology_state(state);
- 	struct drm_dp_mst_atomic_payload *pos, *tmp;
-+	int i;
- 
- 	list_for_each_entry_safe(pos, tmp, &mst_state->payloads, next) {
- 		/* We only keep references to ports with non-zero VCPIs */
-@@ -5107,6 +5196,10 @@ static void drm_dp_mst_destroy_state(struct drm_private_obj *obj,
- 		kfree(pos);
- 	}
- 
-+	for (i = 0; i < mst_state->num_commit_deps; i++)
-+		drm_crtc_commit_put(mst_state->commit_deps[i]);
-+
-+	kfree(mst_state->commit_deps);
- 	kfree(mst_state);
- }
- 
-diff --git a/drivers/gpu/drm/i915/display/intel_display.c b/drivers/gpu/drm/i915/display/intel_display.c
-index 533fff79aeda..6103b02c081f 100644
---- a/drivers/gpu/drm/i915/display/intel_display.c
-+++ b/drivers/gpu/drm/i915/display/intel_display.c
-@@ -7529,6 +7529,7 @@ static void intel_atomic_commit_tail(struct intel_atomic_state *state)
- 	intel_atomic_commit_fence_wait(state);
- 
- 	drm_atomic_helper_wait_for_dependencies(&state->base);
-+	drm_dp_mst_atomic_wait_for_dependencies(&state->base);
- 
- 	if (state->modeset)
- 		wakeref = intel_display_power_get(dev_priv, POWER_DOMAIN_MODESET);
-@@ -8597,6 +8598,10 @@ static int intel_initial_commit(struct drm_device *dev)
- 	return ret;
- }
- 
-+static const struct drm_mode_config_helper_funcs intel_mode_config_funcs = {
-+	.atomic_commit_setup = drm_dp_mst_atomic_setup_commit,
-+};
-+
- static void intel_mode_config_init(struct drm_i915_private *i915)
- {
- 	struct drm_mode_config *mode_config = &i915->drm.mode_config;
-@@ -8611,6 +8616,7 @@ static void intel_mode_config_init(struct drm_i915_private *i915)
- 	mode_config->prefer_shadow = 1;
- 
- 	mode_config->funcs = &intel_mode_funcs;
-+	mode_config->helper_private = &intel_mode_config_funcs;
- 
- 	mode_config->async_page_flip = HAS_ASYNC_FLIPS(i915);
- 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 1d54f2cd38b2..c55af5d78ea2 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -2136,6 +2136,7 @@ nv50_disp_atomic_commit_tail(struct drm_atomic_state *state)
- 	nv50_crc_atomic_stop_reporting(state);
- 	drm_atomic_helper_wait_for_fences(dev, state, false);
- 	drm_atomic_helper_wait_for_dependencies(state);
-+	drm_dp_mst_atomic_wait_for_dependencies(state);
- 	drm_atomic_helper_update_legacy_modeset_state(dev, state);
- 	drm_atomic_helper_calc_timestamping_constants(state);
- 
-@@ -2616,6 +2617,11 @@ nv50_disp_func = {
- 	.atomic_state_free = nv50_disp_atomic_state_free,
- };
- 
-+static const struct drm_mode_config_helper_funcs
-+nv50_disp_helper_func = {
-+	.atomic_commit_setup = drm_dp_mst_atomic_setup_commit,
-+};
-+
- /******************************************************************************
-  * Init
-  *****************************************************************************/
-@@ -2699,6 +2705,7 @@ nv50_display_create(struct drm_device *dev)
- 	nouveau_display(dev)->fini = nv50_display_fini;
- 	disp->disp = &nouveau_display(dev)->disp;
- 	dev->mode_config.funcs = &nv50_disp_func;
-+	dev->mode_config.helper_private = &nv50_disp_helper_func;
- 	dev->mode_config.quirk_addfb_prefer_xbgr_30bpp = true;
- 	dev->mode_config.normalize_zpos = true;
- 
-diff --git a/include/drm/display/drm_dp_mst_helper.h b/include/drm/display/drm_dp_mst_helper.h
-index 3b155ad3eee4..0ef7d0e6cf0c 100644
---- a/include/drm/display/drm_dp_mst_helper.h
-+++ b/include/drm/display/drm_dp_mst_helper.h
-@@ -581,6 +581,19 @@ struct drm_dp_mst_topology_state {
- 	/** @mgr: The topology manager */
- 	struct drm_dp_mst_topology_mgr *mgr;
- 
-+	/**
-+	 * @pending_crtc_mask: A bitmask of all CRTCs this topology state touches, drivers may
-+	 * modify this to add additional dependencies if needed.
-+	 */
-+	u32 pending_crtc_mask;
-+	/**
-+	 * @commit_deps: A list of all CRTC commits affecting this topology, this field isn't
-+	 * populated until drm_dp_mst_atomic_wait_for_dependencies() is called.
-+	 */
-+	struct drm_crtc_commit **commit_deps;
-+	/** @num_commit_deps: The number of CRTC commits in @commit_deps */
-+	size_t num_commit_deps;
-+
- 	/** @total_avail_slots: The total number of slots this topology can handle (63 or 64) */
- 	u8 total_avail_slots;
- 	/** @start_slot: The first usable time slot in this topology (1 or 0) */
-@@ -890,6 +903,8 @@ int __must_check
- drm_dp_atomic_release_time_slots(struct drm_atomic_state *state,
- 				 struct drm_dp_mst_topology_mgr *mgr,
- 				 struct drm_dp_mst_port *port);
-+void drm_dp_mst_atomic_wait_for_dependencies(struct drm_atomic_state *state);
-+int __must_check drm_dp_mst_atomic_setup_commit(struct drm_atomic_state *state);
- int drm_dp_send_power_updown_phy(struct drm_dp_mst_topology_mgr *mgr,
- 				 struct drm_dp_mst_port *port, bool power_up);
- int drm_dp_send_query_stream_enc_status(struct drm_dp_mst_topology_mgr *mgr,
 -- 
-2.37.1
+2.37.2
 
