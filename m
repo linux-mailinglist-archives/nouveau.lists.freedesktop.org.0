@@ -1,94 +1,34 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48BE5599D6C
-	for <lists+nouveau@lfdr.de>; Fri, 19 Aug 2022 16:25:38 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id AB19D599E21
+	for <lists+nouveau@lfdr.de>; Fri, 19 Aug 2022 17:30:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 767FC10E066;
-	Fri, 19 Aug 2022 14:25:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A856A10F0C1;
+	Fri, 19 Aug 2022 15:30:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2044.outbound.protection.outlook.com [40.107.93.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 31D4D10E066
- for <nouveau@lists.freedesktop.org>; Fri, 19 Aug 2022 14:25:29 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XoeCnETxMHiDor9FS/gUMaOx6kFwTup9aP8hlXikIIhtWSJ98DJe4mR52RTFHXa+gbjT9vyAGSfz7t1/n9BR0r5NyDdSH3uZOUwgxuHcbdfN54+BvJPiGfGzdV9KexKlWnpX1SFLijRpGtmkGxGX+L8vM+1dwycJYyUrnKu3quAwN9G0X7ekzF1nRWfrIB1kGdj0mMVYjdzGqQS99IpvQn/XauIA8qhBA21OYQDhrRu2iupvi1DDHsV8rxqBRVB9yn3skT3KcrvyZN4KKjfq0hXmHfMjRmxtb8bhPIJwouBQWwucfk/BcTbqccxDyABWz7bj3ji9IttAjGh4Mx9zNA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ooLROBHiS6KoHewByiEnTleKMdarIbLcRyBNTCcHaHg=;
- b=WxGN610tZFlsyOP1HGKEnXvgkMeTj5iYBhAv6wtvoNapVm9rvlJcgzqy0Rts0gVgoN/O6TFLUzEwSp/IZDO8G9i6NyeAo2DFDKE+8gRxdWVxJkNc8axlx06+DRqLu3kLQMmAMP1z0Mi8pGqYN2sC63W0noFbeQceMI3t80E/NCDDxlw3K6zavwFB/HAjK/fdPVGqioIfsKEvJXDbeTGOxcL22wANxhOEOsfFYtSaL0ftNWT3OSXZ1wkTUHABQOh81MQYTbi+3bSk6Ea+cCa0UW8f0tvFZWXzPtBkp5SP4lnnKra3KJvjmjt85zck8fANqnyrC3a7ATgmAYA+yxzkqQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=vger.kernel.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ooLROBHiS6KoHewByiEnTleKMdarIbLcRyBNTCcHaHg=;
- b=aTlnszmwdyMo25sNYmfSFL21PrHvaLi9yOYeky4h89PzRnNTKWQ/SPbEEeyaikbZGUmiqSz477axySMCr27WQzET6zC/9XCQ0TRYKl604GuuG/xDdULcq978iFFIh/1PvnHqoNULzeCKE9kso91q+xGhNPZRPs2saamu0g2LTJQ=
-Received: from BN0PR04CA0202.namprd04.prod.outlook.com (2603:10b6:408:e9::27)
- by DM6PR12MB4123.namprd12.prod.outlook.com (2603:10b6:5:21f::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5546.18; Fri, 19 Aug
- 2022 14:25:25 +0000
-Received: from BN8NAM11FT105.eop-nam11.prod.protection.outlook.com
- (2603:10b6:408:e9:cafe::77) by BN0PR04CA0202.outlook.office365.com
- (2603:10b6:408:e9::27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5546.16 via Frontend
- Transport; Fri, 19 Aug 2022 14:25:25 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN8NAM11FT105.mail.protection.outlook.com (10.13.176.183) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5546.7 via Frontend Transport; Fri, 19 Aug 2022 14:25:25 +0000
-Received: from AUS-LX-MLIMONCI.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Fri, 19 Aug
- 2022 09:25:24 -0500
-From: Mario Limonciello <mario.limonciello@amd.com>
-To: <linux-kernel@vger.kernel.org>, <linux-acpi@vger.kernel.org>,
- <rafael@kernel.org>, Len Brown <lenb@kernel.org>
-Date: Fri, 19 Aug 2022 09:25:19 -0500
-Message-ID: <20220819142519.5684-3-mario.limonciello@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220819142519.5684-1-mario.limonciello@amd.com>
-References: <20220819142519.5684-1-mario.limonciello@amd.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: facf9baa-81dc-406d-d222-08da81eea858
-X-MS-TrafficTypeDiagnostic: DM6PR12MB4123:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: t4kjWwnDYL8sT3B1/fw6Ajt1hdkLzdqHeZxZRwoqlnKO16kmebzp7Np4BVCLId+4coSg3JivihZhul0wiVA8QKUiVJhoqCfxdCzM8PHbzuj5kiyl4K3COxhEWdv5vTgsVZ3YdFccZHSahSbB0Uo4le/3kWdFlHh2Ohesrb0RFP/Vvx8dcYTFaIIVaqrs9A0PXs5gCTa85oDrh0AKVxYxeFrL0Ld3aF0A5wnf3jeG2Bj2cHiEC8+1X71qyCjGSnHyZwMyLLKxqRaVye6zhU/Tkshu1rPT5eZh2b+a5qXLMquRKfdbRAY2AnIOhi/pxkzv3AaG0fTjjo/B6dBWYMITrqTMi/QlZGpNIhBfDJajNq+DOC6pw+xKZkffTPxjYrycyyzE0b4PwnSPr4+CggOcqPk70dHqm+vjM2HFGS5egPHjAARrcPzpmlMNbh2zGccbIjVvNoCKjKgBwx4SVMcfgAuVbiYrfWJWfp2L1AHgyVdSiU2qOVZucqiUZSYwh78PFJQe30Q8gnPQB2MoakESJvNXBjocw0a/Dkw0FSsieu57k/kvS2KR0wTaYklopHuzOilfSNbl6fJ35dCfegdpe9miScMh9duW2L9KqTwVFTV+PVj2NUqS272HkIGmtsVsTpwqYno0vvzvx+xU+768aRiJ0UULtmpbEEluPnFroE6Q/KsXRNgsWPVjFX5viFsKS40IxHDGP1RweH7CHxpEjY9Zp3psAQDIt6aC1428nopw7jAPyduGQT891t5Pj/n3vUkyqZMRhIGbv1D8NkIMySjN+Xp/8fnQ/v+ZzfWq7LkNsuzUURGfL2YmlOArmVTN
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230016)(4636009)(376002)(396003)(136003)(346002)(39860400002)(46966006)(40470700004)(36840700001)(7416002)(70206006)(4326008)(44832011)(110136005)(54906003)(316002)(5660300002)(8936002)(36756003)(2906002)(82310400005)(478600001)(8676002)(41300700001)(7696005)(6666004)(40480700001)(26005)(2616005)(81166007)(356005)(82740400003)(86362001)(83380400001)(70586007)(1076003)(40460700003)(36860700001)(336012)(186003)(426003)(47076005)(16526019)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2022 14:25:25.2158 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: facf9baa-81dc-406d-d222-08da81eea858
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT105.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4123
-Subject: [Nouveau] [RFC 2/2] ACPI: OSI: Deprecate some abused _OSI strings
+X-Greylist: delayed 302 seconds by postgrey-1.36 at gabe;
+ Fri, 19 Aug 2022 15:30:06 UTC
+Received: from ciao.gmane.io (ciao.gmane.io [116.202.254.214])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4EC8C10F0C1
+ for <nouveau@lists.freedesktop.org>; Fri, 19 Aug 2022 15:30:06 +0000 (UTC)
+Received: from list by ciao.gmane.io with local (Exim 4.92)
+ (envelope-from <gcfxn-nouveau@m.gmane-mx.org>) id 1oP3rq-0008mc-3g
+ for nouveau@lists.freedesktop.org; Fri, 19 Aug 2022 17:25:02 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: nouveau@lists.freedesktop.org
+From: Timothy Madden <terminatorul@gmail.com>
+Date: Fri, 19 Aug 2022 18:24:08 +0300
+Message-ID: <tdo9up$t3e$1@ciao.gmane.io>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.12.0
+Content-Language: en-US
+Subject: [Nouveau] Quadro GPU shows as UNCLAIMED
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,142 +40,114 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: ddadap@nvidia.com, nouveau@lists.freedesktop.org, hdegoede@redhat.com,
- kai.heng.feng@canonical.com, Mario Limonciello <mario.limonciello@amd.com>,
- Dell.Client.Kernel@dell.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The Linux-Lenovo-NV-HDMI-Audio and Linux-HPI-Hybrid-Graphics have
-been seen in the wild being abused by other vendors.  If these use
-cases are still needed for modern laptops, they should be done via
-kernel drivers instead.
+Hello
 
-As we can't have nice things, mark these strings to only be applied
-to laptops from 2022 or earlier.  This should avoid breaking any
-older laptops.  In the future if the kernel drivers need to call
-Linux-only ASL for any reason, it could be a custom _DSM used only
-for Linux or something similar. This approach allows kernel developers
-to control whether to stop calling the ASL when the deficiency by
-the kernel is resolved.
+I have a Quadro T2000 Mobile that shows up as TU117GLM in lspci and as 
+UNCLAIMED in lshw.
 
-Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
----
- Documentation/firmware-guide/acpi/osi.rst | 24 ++++++++++-------------
- drivers/acpi/osi.c                        | 22 +++++++++++++++------
- 2 files changed, 26 insertions(+), 20 deletions(-)
+I can get display output, but for the primary display only (laptop LVDS 
+display).
 
-diff --git a/Documentation/firmware-guide/acpi/osi.rst b/Documentation/firmware-guide/acpi/osi.rst
-index 05869c0045d7..392b982741fe 100644
---- a/Documentation/firmware-guide/acpi/osi.rst
-+++ b/Documentation/firmware-guide/acpi/osi.rst
-@@ -41,26 +41,22 @@ But it is likely that they will all eventually be added.
- What should an OEM do if they want to support Linux and Windows
- using the same BIOS image?  Often they need to do something different
- for Linux to deal with how Linux is different from Windows.
--Here the BIOS should ask exactly what it wants to know:
- 
-+In this case, the OEM should create custom ASL to be executed by the
-+Linux kernel and changes to Linux kernel drivers to execute this custom
-+ASL.  The easiest way to accomplish this is to introduce a device specific
-+method (_DSM) that is called from the Linux kernel.
-+
-+In the past the kernel used to support something like:
- _OSI("Linux-OEM-my_interface_name")
- where 'OEM' is needed if this is an OEM-specific hook,
- and 'my_interface_name' describes the hook, which could be a
- quirk, a bug, or a bug-fix.
- 
--In addition, the OEM should send a patch to upstream Linux
--via the linux-acpi@vger.kernel.org mailing list.  When that patch
--is checked into Linux, the OS will answer "YES" when the BIOS
--on the OEM's system uses _OSI to ask if the interface is supported
--by the OS.  Linux distributors can back-port that patch for Linux
--pre-installs, and it will be included by all distributions that
--re-base to upstream.  If the distribution can not update the kernel binary,
--they can also add an acpi_osi=Linux-OEM-my_interface_name
--cmdline parameter to the boot loader, as needed.
--
--If the string refers to a feature where the upstream kernel
--eventually grows support, a patch should be sent to remove
--the string when that support is added to the kernel.
-+However this was discovered to be abused by other BIOS vendors to change
-+completely unrelated code on completely unrelated systems.  As such it's
-+been deprecated and any old hooks will not be activated on systems from
-+2023 or later.
- 
- That was easy.  Read on, to find out how to do it wrong.
- 
-diff --git a/drivers/acpi/osi.c b/drivers/acpi/osi.c
-index c2f6b2f553d9..18c339c3f277 100644
---- a/drivers/acpi/osi.c
-+++ b/drivers/acpi/osi.c
-@@ -25,6 +25,7 @@
- struct acpi_osi_entry {
- 	char string[OSI_STRING_LENGTH_MAX];
- 	bool enable;
-+	unsigned int max_bios_year;
- };
- 
- static struct acpi_osi_config {
-@@ -40,25 +41,29 @@ static struct acpi_osi_config {
- static struct acpi_osi_config osi_config;
- static struct acpi_osi_entry
- osi_setup_entries[OSI_STRING_ENTRIES_MAX] __initdata = {
--	{"Module Device", true},
--	{"Processor Device", true},
--	{"3.0 _SCP Extensions", true},
--	{"Processor Aggregator Device", true},
-+	{"Module Device", true, 0},
-+	{"Processor Device", true, 0},
-+	{"3.0 _SCP Extensions", true, 0},
-+	{"Processor Aggregator Device", true, 0},
- 	/*
- 	 * Linux-Lenovo-NV-HDMI-Audio is used by BIOS to power on NVidia's HDMI
- 	 * audio device which is turned off for power-saving in Windows OS.
- 	 * This power management feature observed on some Lenovo Thinkpad
- 	 * systems which will not be able to output audio via HDMI without
- 	 * a BIOS workaround.
-+	 *
-+	 * This _OSI string is only applied to systems from 2022 or earlier.
- 	 */
--	{"Linux-Lenovo-NV-HDMI-Audio", true},
-+	{"Linux-Lenovo-NV-HDMI-Audio", true, 2022},
- 	/*
- 	 * Linux-HPI-Hybrid-Graphics is used by BIOS to enable dGPU to
- 	 * output video directly to external monitors on HP Inc. mobile
- 	 * workstations as Nvidia and AMD VGA drivers provide limited
- 	 * hybrid graphics supports.
-+	 *
-+	 * This _OSI string is only applied to systems from 2022 or earlier.
- 	 */
--	{"Linux-HPI-Hybrid-Graphics", true},
-+	{"Linux-HPI-Hybrid-Graphics", true, 2022},
- };
- 
- static u32 acpi_osi_handler(acpi_string interface, u32 supported)
-@@ -122,9 +127,11 @@ void __init acpi_osi_setup(char *str)
- 		osi = &osi_setup_entries[i];
- 		if (!strcmp(osi->string, str)) {
- 			osi->enable = enable;
-+			osi->max_bios_year = 0;
- 			break;
- 		} else if (osi->string[0] == '\0') {
- 			osi->enable = enable;
-+			osi->max_bios_year = 0;
- 			strncpy(osi->string, str, OSI_STRING_LENGTH_MAX);
- 			break;
- 		}
-@@ -225,6 +232,9 @@ static void __init acpi_osi_setup_late(void)
- 		str = osi->string;
- 		if (*str == '\0')
- 			break;
-+		if (osi->max_bios_year &&
-+		    dmi_get_bios_year() > osi->max_bios_year)
-+			continue;
- 		if (osi->enable) {
- 			status = acpi_install_interface(str);
- 			if (ACPI_SUCCESS(status))
--- 
-2.34.1
+Is this expected, is this card unsupported please ? Is there something I 
+can do ?
+
+I have nothing about nouveau or NVIDIA in my dmesg output, except for 
+audio HDA NVIDIA. Xorg log shows it is loading nouveau, but says "Failed 
+to open drm device". nouveau lists no support for NV160 / TUxxx chips in 
+Xorg startup log file (nothing above GPxxx).
+
+nouveau shows up in the output of lsmod, with a count of 0.
+
+Thank you,
+Timothy Madden
+
+
+Fedora release 36, kernel 5.18.17
+xorg-x11-drv-nouveau 1.0.17 (3.fc36), Mesa 22.1.6
+
+[timothy@fedora ~]$ lspci | grep VGA
+01:00.0 VGA compatible controller: NVIDIA Corporation TU117GLM [Quadro 
+T2000 Mobile / Max-Q] (rev a1)
+
+
+[timothy@fedora ~]$ sudo lshw -c video
+[sudo] password for timothy:
+   *-display UNCLAIMED
+        description: VGA compatible controller
+        product: TU117GLM [Quadro T2000 Mobile / Max-Q]
+        vendor: NVIDIA Corporation
+        physical id: 0
+        bus info: pci@0000:01:00.0
+        version: a1
+        width: 64 bits
+        clock: 33MHz
+        capabilities: pm msi pciexpress vga_controller bus_master cap_list
+        configuration: latency=0
+        resources: memory:b3000000-b3ffffff memory:70000000-7fffffff 
+memory:80000000-81ffffff ioport:3000(size=128) memory:c0000-dffff
+
+
+[timothy@fedora ~]$ lsmod | grep -i nouveau
+nouveau              2416640  0
+drm_ttm_helper         16384  1 nouveau
+ttm                    86016  2 drm_ttm_helper,nouveau
+mxm_wmi                16384  1 nouveau
+drm_dp_helper         159744  1 nouveau
+video                  57344  3 dell_wmi,dell_laptop,nouveau
+wmi                    32768  8 
+dell_wmi_sysman,intel_wmi_thunderbolt,dell_wmi,wmi_bmof,dell_smbios,dell_wmi_descriptor,mxm_wmi,nouveau
+
+
+[timothy@fedora ~]$ uname -a
+Linux fedora 5.18.17-200.fc36.x86_64 #1 SMP PREEMPT_DYNAMIC Thu Aug 11 
+14:36:06 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+[
+
+Xorg.0.log:
+...
+[    26.673] (==) Matched nouveau as autoconfigured driver 0
+[    26.673] (==) Matched nv as autoconfigured driver 1
+[    26.673] (==) Matched modesetting as autoconfigured driver 2
+[    26.673] (==) Matched fbdev as autoconfigured driver 3
+[    26.673] (==) Matched vesa as autoconfigured driver 4
+[    26.673] (==) Assigned the driver to the xf86ConfigLayout
+[    26.673] (II) LoadModule: "nouveau"
+[    26.673] (II) Loading /usr/lib64/xorg/modules/drivers/nouveau_drv.so
+[    26.681] (II) Module nouveau: vendor="X.Org Foundation"
+[    26.681] 	compiled for 1.20.14, module version = 1.0.17
+[    26.681] 	Module class: X.Org Video Driver
+[    26.681] 	ABI class: X.Org Video Driver, version 24.1
+[    26.681] (II) LoadModule: "nv"
+[    26.681] (WW) Warning, couldn't open module nv
+[    26.681] (EE) Failed to load module "nv" (module does not exist, 0)
+...
+[    26.682] (II) NOUVEAU driver
+[    26.682] (II) NOUVEAU driver for NVIDIA chipset families :
+[    26.682] 	RIVA TNT            (NV04)
+[    26.682] 	RIVA TNT2           (NV05)
+[    26.682] 	GeForce 256         (NV10)
+[    26.682] 	GeForce 2           (NV11, NV15)
+[    26.682] 	GeForce 4MX         (NV17, NV18)
+[    26.682] 	GeForce 3           (NV20)
+[    26.682] 	GeForce 4Ti         (NV25, NV28)
+[    26.682] 	GeForce FX          (NV3x)
+[    26.682] 	GeForce 6           (NV4x)
+[    26.682] 	GeForce 7           (G7x)
+[    26.682] 	GeForce 8           (G8x)
+[    26.682] 	GeForce 9           (G9x)
+[    26.682] 	GeForce GTX 2xx/3xx (GT2xx)
+[    26.682] 	GeForce GTX 4xx/5xx (GFxxx)
+[    26.682] 	GeForce GTX 6xx/7xx (GKxxx)
+[    26.682] 	GeForce GTX 9xx     (GMxxx)
+[    26.682] 	GeForce GTX 10xx    (GPxxx)
+[    26.682] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    26.682] (II) FBDEV: driver for framebuffer: fbdev
+[    26.682] (II) VESA: driver for VESA chipsets: vesa
+[    26.685] (EE) [drm] Failed to open DRM device for (null): -22
+[    26.798] (EE) [drm] Failed to open DRM device for pci:0000:01:00.0: -19
+[    26.801] (II) modeset(0): using drv /dev/dri/card0
+...
 
