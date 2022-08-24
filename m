@@ -2,68 +2,138 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 749B05A02FA
-	for <lists+nouveau@lfdr.de>; Wed, 24 Aug 2022 22:49:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE9B95A096D
+	for <lists+nouveau@lfdr.de>; Thu, 25 Aug 2022 09:03:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BCA98C8CC9;
-	Wed, 24 Aug 2022 20:48:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0148FD8CCC;
+	Thu, 25 Aug 2022 07:03:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F153B96CAD
- for <nouveau@lists.freedesktop.org>; Wed, 24 Aug 2022 12:17:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1661343449;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=O8vOYnkiU2VpVJJrSie2Bpbws6unYJ4RX9V9UgH6EGU=;
- b=WGmlBjnpZ3ESeuBUJnYPVAWZZnfgztC3qYwD/x8cBOOJ9f0reUyGsd8DpTsMS5sTLvkHxE
- Z4hsXAIXkrea2Zm0wC6ylt4uO63NG1urfmFJCAE+U1xnooFoZkjT3zqE+XKAyX6WeTWAKz
- A9BEm2tLSQJb5ae/J3uu7EbAqPydqP4=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-537-RHDl5nfPOzuJWAWVTVcBDQ-1; Wed, 24 Aug 2022 08:17:25 -0400
-X-MC-Unique: RHDl5nfPOzuJWAWVTVcBDQ-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 6864D80418F;
- Wed, 24 Aug 2022 12:17:24 +0000 (UTC)
-Received: from localhost.localdomain (unknown [10.39.193.103])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 87D27C15BB3;
- Wed, 24 Aug 2022 12:17:20 +0000 (UTC)
-From: Hans de Goede <hdegoede@redhat.com>
-To: Ben Skeggs <bskeggs@redhat.com>,
-	Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
-	Daniel Dadap <ddadap@nvidia.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	Pan@freedesktop.org, Xinhui <Xinhui.Pan@amd.com>,
-	"Rafael J . Wysocki" <rafael@kernel.org>,
-	Mika Westerberg <mika.westerberg@linux.intel.com>,
-	Lukas Wunner <lukas@wunner.de>, Mark Gross <markgross@kernel.org>,
-	Andy Shevchenko <andy@kernel.org>
-Date: Wed, 24 Aug 2022 14:15:18 +0200
-Message-Id: <20220824121523.1291269-27-hdegoede@redhat.com>
-In-Reply-To: <20220824121523.1291269-1-hdegoede@redhat.com>
-References: <20220824121523.1291269-1-hdegoede@redhat.com>
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2040.outbound.protection.outlook.com [40.107.236.40])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7B4C6D8CC2
+ for <nouveau@lists.freedesktop.org>; Thu, 25 Aug 2022 07:03:21 +0000 (UTC)
+Received: from MWHPR12MB1934.namprd12.prod.outlook.com (2603:10b6:300:109::23)
+ by CY4PR12MB1928.namprd12.prod.outlook.com (2603:10b6:903:128::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5566.14; Thu, 25 Aug
+ 2022 06:29:51 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=igdxrXGRRxxeqh430KL6SkMyZOoJtmuNmaWa1+Ms6gjIzBj75FlLEcnwfs8OLvqodlX+P3DGqeZ7ZhaDjkHUSbCgEFv+10kIAmyu7p5bwRSLNAUoAaBnmUeUL/Th6WnxFVkjoqax1EVufgwkRWpbbe04pLptEVzbCW9Chn/FBB3DN1ecjDoC2aHiszezBw0/f3mtetf+ssDjwlh7/yI0laxkvS+fmmLqbO8qwznxrxnDgPTfSrgKNMPY0aXiLwwySf5EA/xNX69AtjW9OnfUbupkndgc5suxwyI2hstOw3njhZ6ErNIeG4Sh2BGDQvpePQxBZo+cZQ5c2aOOZKCzYg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KqxP5q2sl8cKl2k+ErNz2busewqZVf9C15OzVp+H3+8=;
+ b=hpRH9/dmpMPW9nrVQPQu8s9gASAXcluaJil4+k8z55qkjHpV5lq9mweQicpB3ZWM2idY96pg21q8Sry0EnIJQSxRZfIK/uEjw5yUbnhfm3SEKKoIS3K1kujFSkA1CcyFWlFfbPV5wNA1GwgTvIOl5pMqCXAi3TtQ8Rn9OcBgcVhKYjycmqIg7FQTlXWB6HuVtsCsGJvWf5TB83HBUL+GW9JdKDzgHxs5HcSpKlVrp/YTEh2iNhZ2Sav8qjB+7UUhX0yhE+qeIwaJ8B414i7lrIvy3lVtXgi7lHdWV973WUAaBoCZR0+t7sdTiw+T36MZMNTQKOovtcfukeI7XpQBow==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KqxP5q2sl8cKl2k+ErNz2busewqZVf9C15OzVp+H3+8=;
+ b=LtJ9rm4TFe5kXbJ155Xi0T4N9V/KtpjhPN/lV2KSbG+rrLNc8PIptqXcvPVgKbDLIf1zNNuurfD4CQsl23wOEpurOfcvHyg2KRKbVkkFVKdycQ9Z+ezgHPgtnxim13DHIyQiQEchKWil1cdiW4JIUEayWee9/gFLbg84d+ELBJo=
+Received: from MN0PR12MB6101.namprd12.prod.outlook.com (2603:10b6:208:3cb::10)
+ by MWHPR12MB1934.namprd12.prod.outlook.com (2603:10b6:300:109::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5546.22; Wed, 24 Aug
+ 2022 18:28:24 +0000
+Received: from MN0PR12MB6101.namprd12.prod.outlook.com
+ ([fe80::e00a:1f8c:dcd1:afc3]) by MN0PR12MB6101.namprd12.prod.outlook.com
+ ([fe80::e00a:1f8c:dcd1:afc3%5]) with mapi id 15.20.5546.022; Wed, 24 Aug 2022
+ 18:28:24 +0000
+From: "Limonciello, Mario" <Mario.Limonciello@amd.com>
+To: Kai-Heng Feng <kai.heng.feng@canonical.com>
+Thread-Topic: [PATCH 1/4] ACPI: OSI: Remove Linux-Dell-Video _OSI string
+Thread-Index: AQHYtyFZfNzjOU9+kk2bcaYvhyYRi62+GfMAgABGL8A=
+Date: Wed, 24 Aug 2022 18:28:24 +0000
+Message-ID: <MN0PR12MB6101DE7A18DC0343AEBE89C5E2739@MN0PR12MB6101.namprd12.prod.outlook.com>
+References: <20220823185134.14464-1-mario.limonciello@amd.com>
+ <20220823185134.14464-2-mario.limonciello@amd.com>
+ <CAAd53p6MfBaRTTNJ5mAFU6XfDndLFJihLHKdrbq8Nq-27LArjg@mail.gmail.com>
+In-Reply-To: <CAAd53p6MfBaRTTNJ5mAFU6XfDndLFJihLHKdrbq8Nq-27LArjg@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_Enabled=true;
+ MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_SetDate=2022-08-24T18:27:44Z; 
+ MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_Method=Privileged;
+ MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_Name=Public-AIP 2.0;
+ MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;
+ MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_ActionId=18d52fc4-9488-4118-ae8a-8d0307cca939;
+ MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_ContentBits=1
+msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_enabled: true
+msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_setdate: 2022-08-24T18:28:22Z
+msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_method: Privileged
+msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_name: Public-AIP 2.0
+msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_siteid: 3dd8961f-e488-4e60-8e11-a82d994e183d
+msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_actionid: 66855645-3d59-4542-ae57-cebaa595db46
+msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_contentbits: 0
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 72f28990-38f2-4069-f802-08da85fe6e3c
+x-ms-traffictypediagnostic: MWHPR12MB1934:EE_|CY4PR12MB1928:EE_
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: yJShZc46PmItsXJb0QWSAqRoXeRREU19IJdm9IMX38B4D91l2m/gRtn7Eb+AzGeSJfOa2vZ3HqYtape2Ye1sfiayOB0FGJ0s4bu02RNc5AgRfmjEiUD63F+2L3Mti7d446l6cBoD7vr4t2LbJSms7mYjhTR50U5aCr0EcEi2xE+qECiftl8XNKBgQPcQpRkFtXecfXxiSqVT7VoYZddMOfL+Gpnc6Xs1ZGvuIRKJms+nr/W+mv00ocyk23A5otxPQpNGKLGfZH2VoEvYzLH4WJaDw17wZSQ76pH/AVk/Gb8rQ1ALL5OJf4K54RJjF9YHxkh627wWa3NESzl+V7xrAEh9znWK6BcKn5MUAghies5uwy+JR83KFMumsdsA0oKURiwg6fQ6c3bZMlNNgiSF9MjuRRx9jh2evwAdU1Q5+7m7F5HwlIYnXDwUlECfcKwneO/fq9loZcLQKVjAxSWmb+eq/7aKXkT2dmqu/CS7Ynmk1iufx+MqeTw/HgTsfEJjr4shIJ3+ujGvC5J/JiHrFyy9z72KVMm0t38SXa9soeOmG4QVNh7+XcmsIxx8pP33vR8UL1k9t60cM0GMaEVMj75Actna/CJ36TRA7gqVyFaOzwnvyweM9OWa9tlMIqJxAiLhO370jIi08sazhKjce36a/b5Qjud7gEbeZHCva9gplIjWDD3TOEsJk6/hvLeijvCByjwHna5keetkB++zTih1msu9NQpwchQvTSi+WjmcIHB+x6CtOlbNsa1sWok4JJG1APPmIm7dq//Iyt0mmQ==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MN0PR12MB6101.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230016)(4636009)(366004)(396003)(136003)(376002)(346002)(39860400002)(83380400001)(186003)(122000001)(38100700002)(76116006)(54906003)(64756008)(66476007)(66556008)(6916009)(66446008)(66946007)(4326008)(8676002)(316002)(8936002)(86362001)(2906002)(7696005)(26005)(9686003)(6506007)(52536014)(5660300002)(53546011)(33656002)(71200400001)(41300700001)(55016003)(478600001)(38070700005)(7416002);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?ekkyN2JwZzVSRFVHY1RNM2RoYjZYdnZCa05PdWlXbFlFbmFDcmc0TnhCQVBU?=
+ =?utf-8?B?UTBrM3QzTnRNc2JsQ2Ivd3VvVlhPMlZqR09QSG9mdlhnMkozek5USkFobkZP?=
+ =?utf-8?B?TXVIMDQyZFlCc0Jyc0pMUzg2cVZRcFNLNzc2WmJmZXZWMUJVRzBwSVlNSHBy?=
+ =?utf-8?B?d3VWWkJuVDlqZ3BZMFJFdG85SVpqV1BTbnVRcDZ0VWUwRkhYdzRaMnBSUFhQ?=
+ =?utf-8?B?eHRiMk9aQkJZR2RERkRzK0Qzc1RJUVhrKzh0V2pvUnpVaFNidHN4cDRZRjEw?=
+ =?utf-8?B?VUFoT0l3YmQwaTJpSjNIWW1PTzJwNXNPSG5wZkQ4RlBFZmowL29uNFNtQ2tk?=
+ =?utf-8?B?OHhtM285NHJBVTAxLytIaFkyU0hmRzJSSWxYZjJHd0JpU0RQbU9GdkxWbDk1?=
+ =?utf-8?B?dlZLWmd3Z1BtTkNHTGtSRDVjVzVJbjBOWjl2VHlkN012Q3lNVWkvMDBEdmps?=
+ =?utf-8?B?ME9vNDExa25pQ090K2YyejZwUGJ5UWVmcDllQTlsR05rUEtPanlkbUhlT011?=
+ =?utf-8?B?V3JJWmlkNjVpWDdqM3dNb09HSUpta092V1VrbW9mS1lCT2dsTHZ0dUxxd1VI?=
+ =?utf-8?B?V0Noc3dyVmgwUkxTMGdwYVhIQ2ZSNDdrNlg0TzgyU1VERWlJZ01hdm9FaW5Z?=
+ =?utf-8?B?Z1dQSFQ3bE1yNzRGNmdWNWgvSWs4WmpWakp6ckpJemt4U2ppMkhaR3FNUEtU?=
+ =?utf-8?B?ZTNJQnBwVENVSWplL1Y3WVJQNExtL2g1TEFjTUxYUnRtcGVjb3dYRXZ4VWpH?=
+ =?utf-8?B?U0RJUXQ3eExwZDZNYXdPVGZtRVJwOWFvckhZUHlWUHYwcUlUbWZ4WHVmTlpk?=
+ =?utf-8?B?Y0NYeXNaSUpyUytRSTN3TE9YTzREaHdQKzVaalRGd2p0bk9UVjU3Q0w0ZWZr?=
+ =?utf-8?B?VkpKejNaa1lySTBwTzBOUW5ZTVpVNzlpU2lLUzNDa0xrYythMTNIRGRTV2tq?=
+ =?utf-8?B?R0pSeC9Tb3lLWkZHL0Z5RHlRekh0c3NHYTN0SFNyd0NHdmh6NXFYWmhXa090?=
+ =?utf-8?B?dkpFdEk2VXNsZlYrZkJzUDJLTUhDSEZtZ2ErRWdnRVd2ZHljZVlUSUU4bEVi?=
+ =?utf-8?B?YnFOVkpKaFJ1NHdGN0xZdlZtcDdKV3dQZHBMQitjY2lnZTllalpBQmQwVkdU?=
+ =?utf-8?B?eVJlUWRyR3g0ZjkwVmdySlFlam4wUTh5WlY0a0lZbFlLbVcycm5RUEZEeW56?=
+ =?utf-8?B?OWs4b0tHTjRHQ2c5TWNkRjRFdjkvKzdvM2dsWkpOZ2Q1VFZvQ3ZHMS9PbnVz?=
+ =?utf-8?B?c01WaXdOY1J6b3oxTTZzOXZvRTcxWHdtbHdGZjN2RzhUT0lrV3Fnekg5K0sv?=
+ =?utf-8?B?UVFJbXVMMGlQSXI0dGp2dlFNQUdtTHVxbFhNa0h0cjhmZ0N3c2Z0R1BaQmVz?=
+ =?utf-8?B?NjlIR3c4eW4xQzl2clZTVC9Ka01MQ1A1QTE4MG9iaXlIQTY4T2cxbmhYMjZ1?=
+ =?utf-8?B?QytQYlk4di85dzdUYVlEc2pFcEJ2clVpaWlEUlF2M1pKQjdMRXdIUS9ZZGo4?=
+ =?utf-8?B?c0IxTVZKS1RPWjdNK2o5d1JkUVQ0THVGcFdmcnlsajZ1Wm1iWnNYdHBDMkM3?=
+ =?utf-8?B?SUFXTU1GeVVYcDRzQ3FhQlZEZ3RlR1QvTXNGZWptRjgwb1F2VlJmQ1NNNjB0?=
+ =?utf-8?B?SDFFaFRqZWFLaExudCtUeUFYcVFwcDBoU2NFM2l1R0lFSnRYeFFZeXQrUHJ1?=
+ =?utf-8?B?YU9vZXF1U2UrQnZITngzNXBtUitaS3lMd3p6VTlseHYzelZFRVUwWlFCdjJV?=
+ =?utf-8?B?ZjY3dTJETFBlc3JHWVMvNTYxVDRIUlR3NThvVFpzRllDakJEVVZzWVlra0lJ?=
+ =?utf-8?B?S2ZscTZ0QjVLZUlCVFc3WFBnRmwxSFJ1RzE3N1BFV0dVSHBEZEYxZ3hZbGpp?=
+ =?utf-8?B?b01aOHBncEZSOGxNMnhMUHFIVllhNHorN1dFVU5oYWdLbjJjVDJnR244NWtL?=
+ =?utf-8?B?QXJRQnpjdU9aSVFwNy9sT0o1eWhqRVpkQU5zUU5LRDY2M1l3Y1pHTUNoK2oz?=
+ =?utf-8?B?aVBabTNaZVRBYzlKUFV1cC9QQkZQRkhCTHF1akFKaHZmazA5NUgzREd5c0hM?=
+ =?utf-8?B?Q1kyL25ybzdld0trSTV4cFNDUzgxUG53YnFaN0pLOHMxQUpPZzdGKzl5ZUJ1?=
+ =?utf-8?Q?P3ws=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.8
-Subject: [Nouveau] [PATCH v4 26/31] platform/x86: samsung-laptop: Move
- acpi_backlight=[vendor|native] quirks to ACPI video_detect.c
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MN0PR12MB6101.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 72f28990-38f2-4069-f802-08da85fe6e3c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Aug 2022 18:28:24.3398 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 3Qkbyshn2IKxAN82AWauGwYD/kWTbF9yuxUvh7APms5mP6eL/q+ehIqMG9/tXHVO0DzXXNHKF+u7FkhBLBuwFA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR12MB1934
+X-OriginatorOrg: amd.com
+Subject: Re: [Nouveau] [PATCH 1/4] ACPI: OSI: Remove Linux-Dell-Video _OSI
+ string
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,226 +145,67 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-acpi@vger.kernel.org, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, intel-gfx <intel-gfx@lists.freedesktop.org>,
- "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
- dri-devel@lists.freedesktop.org, platform-driver-x86@vger.kernel.org,
- Hans de Goede <hdegoede@redhat.com>, amd-gfx@lists.freedesktop.org,
- Daniel Vetter <daniel@ffwll.ch>, Len Brown <lenb@kernel.org>
+Cc: "ddadap@nvidia.com" <ddadap@nvidia.com>,
+ "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
+ "rafael@kernel.org" <rafael@kernel.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "hdegoede@redhat.com" <hdegoede@redhat.com>,
+ "Dell.Client.Kernel@dell.com" <Dell.Client.Kernel@dell.com>,
+ Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-acpi_video_set_dmi_backlight_type() is troublesome because it may end up
-getting called after other backlight drivers have already called
-acpi_video_get_backlight_type() resulting in the other drivers
-already being registered even though they should not.
-
-Move all the acpi_backlight=[vendor|native] quirks from samsung-laptop to
-drivers/acpi/video_detect.c .
-
-Note the X360 -> acpi_backlight=native quirk is not moved because that
-already was present in drivers/acpi/video_detect.c .
-
-Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-Signed-off-by: Hans de Goede <hdegoede@redhat.com>
----
- drivers/acpi/video_detect.c           | 54 +++++++++++++++++
- drivers/platform/x86/samsung-laptop.c | 87 ---------------------------
- 2 files changed, 54 insertions(+), 87 deletions(-)
-
-diff --git a/drivers/acpi/video_detect.c b/drivers/acpi/video_detect.c
-index a09089e7fada..3861d4121172 100644
---- a/drivers/acpi/video_detect.c
-+++ b/drivers/acpi/video_detect.c
-@@ -222,6 +222,33 @@ static const struct dmi_system_id video_detect_dmi_table[] = {
- 		DMI_MATCH(DMI_PRODUCT_NAME, "GB-BXBT-2807"),
- 		},
- 	},
-+	{
-+	 .callback = video_detect_force_vendor,
-+	 /* Samsung N150/N210/N220 */
-+	 .matches = {
-+		DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
-+		DMI_MATCH(DMI_PRODUCT_NAME, "N150/N210/N220"),
-+		DMI_MATCH(DMI_BOARD_NAME, "N150/N210/N220"),
-+		},
-+	},
-+	{
-+	 .callback = video_detect_force_vendor,
-+	 /* Samsung NF110/NF210/NF310 */
-+	 .matches = {
-+		DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
-+		DMI_MATCH(DMI_PRODUCT_NAME, "NF110/NF210/NF310"),
-+		DMI_MATCH(DMI_BOARD_NAME, "NF110/NF210/NF310"),
-+		},
-+	},
-+	{
-+	 .callback = video_detect_force_vendor,
-+	 /* Samsung NC210 */
-+	 .matches = {
-+		DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
-+		DMI_MATCH(DMI_PRODUCT_NAME, "NC210/NC110"),
-+		DMI_MATCH(DMI_BOARD_NAME, "NC210/NC110"),
-+		},
-+	},
- 	{
- 	.callback = video_detect_force_vendor,
- 	/* Sony VPCEH3U1E */
-@@ -572,6 +599,33 @@ static const struct dmi_system_id video_detect_dmi_table[] = {
- 		DMI_MATCH(DMI_PRODUCT_NAME, "UX303UB"),
- 		},
- 	},
-+	{
-+	 .callback = video_detect_force_native,
-+	 /* Samsung N150P */
-+	 .matches = {
-+		DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
-+		DMI_MATCH(DMI_PRODUCT_NAME, "N150P"),
-+		DMI_MATCH(DMI_BOARD_NAME, "N150P"),
-+		},
-+	},
-+	{
-+	 .callback = video_detect_force_native,
-+	 /* Samsung N145P/N250P/N260P */
-+	 .matches = {
-+		DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
-+		DMI_MATCH(DMI_PRODUCT_NAME, "N145P/N250P/N260P"),
-+		DMI_MATCH(DMI_BOARD_NAME, "N145P/N250P/N260P"),
-+		},
-+	},
-+	{
-+	 .callback = video_detect_force_native,
-+	 /* Samsung N250P */
-+	 .matches = {
-+		DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
-+		DMI_MATCH(DMI_PRODUCT_NAME, "N250P"),
-+		DMI_MATCH(DMI_BOARD_NAME, "N250P"),
-+		},
-+	},
- 	/*
- 	 * Clevo NL5xRU and NL5xNU/TUXEDO Aura 15 Gen1 and Gen2 have both a
- 	 * working native and video interface. However the default detection
-diff --git a/drivers/platform/x86/samsung-laptop.c b/drivers/platform/x86/samsung-laptop.c
-index c187dcdf82f0..cc30cf08f32d 100644
---- a/drivers/platform/x86/samsung-laptop.c
-+++ b/drivers/platform/x86/samsung-laptop.c
-@@ -356,23 +356,13 @@ struct samsung_laptop {
- };
- 
- struct samsung_quirks {
--	bool broken_acpi_video;
- 	bool four_kbd_backlight_levels;
- 	bool enable_kbd_backlight;
--	bool use_native_backlight;
- 	bool lid_handling;
- };
- 
- static struct samsung_quirks samsung_unknown = {};
- 
--static struct samsung_quirks samsung_broken_acpi_video = {
--	.broken_acpi_video = true,
--};
--
--static struct samsung_quirks samsung_use_native_backlight = {
--	.use_native_backlight = true,
--};
--
- static struct samsung_quirks samsung_np740u3e = {
- 	.four_kbd_backlight_levels = true,
- 	.enable_kbd_backlight = true,
-@@ -1540,76 +1530,6 @@ static const struct dmi_system_id samsung_dmi_table[] __initconst = {
- 		},
- 	},
- 	/* Specific DMI ids for laptop with quirks */
--	{
--	 .callback = samsung_dmi_matched,
--	 .ident = "N150P",
--	 .matches = {
--		DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
--		DMI_MATCH(DMI_PRODUCT_NAME, "N150P"),
--		DMI_MATCH(DMI_BOARD_NAME, "N150P"),
--		},
--	 .driver_data = &samsung_use_native_backlight,
--	},
--	{
--	 .callback = samsung_dmi_matched,
--	 .ident = "N145P/N250P/N260P",
--	 .matches = {
--		DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
--		DMI_MATCH(DMI_PRODUCT_NAME, "N145P/N250P/N260P"),
--		DMI_MATCH(DMI_BOARD_NAME, "N145P/N250P/N260P"),
--		},
--	 .driver_data = &samsung_use_native_backlight,
--	},
--	{
--	 .callback = samsung_dmi_matched,
--	 .ident = "N150/N210/N220",
--	 .matches = {
--		DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
--		DMI_MATCH(DMI_PRODUCT_NAME, "N150/N210/N220"),
--		DMI_MATCH(DMI_BOARD_NAME, "N150/N210/N220"),
--		},
--	 .driver_data = &samsung_broken_acpi_video,
--	},
--	{
--	 .callback = samsung_dmi_matched,
--	 .ident = "NF110/NF210/NF310",
--	 .matches = {
--		DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
--		DMI_MATCH(DMI_PRODUCT_NAME, "NF110/NF210/NF310"),
--		DMI_MATCH(DMI_BOARD_NAME, "NF110/NF210/NF310"),
--		},
--	 .driver_data = &samsung_broken_acpi_video,
--	},
--	{
--	 .callback = samsung_dmi_matched,
--	 .ident = "X360",
--	 .matches = {
--		DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
--		DMI_MATCH(DMI_PRODUCT_NAME, "X360"),
--		DMI_MATCH(DMI_BOARD_NAME, "X360"),
--		},
--	 .driver_data = &samsung_broken_acpi_video,
--	},
--	{
--	 .callback = samsung_dmi_matched,
--	 .ident = "N250P",
--	 .matches = {
--		DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
--		DMI_MATCH(DMI_PRODUCT_NAME, "N250P"),
--		DMI_MATCH(DMI_BOARD_NAME, "N250P"),
--		},
--	 .driver_data = &samsung_use_native_backlight,
--	},
--	{
--	 .callback = samsung_dmi_matched,
--	 .ident = "NC210",
--	 .matches = {
--		DMI_MATCH(DMI_SYS_VENDOR, "SAMSUNG ELECTRONICS CO., LTD."),
--		DMI_MATCH(DMI_PRODUCT_NAME, "NC210/NC110"),
--		DMI_MATCH(DMI_BOARD_NAME, "NC210/NC110"),
--		},
--	 .driver_data = &samsung_broken_acpi_video,
--	},
- 	{
- 	 .callback = samsung_dmi_matched,
- 	 .ident = "730U3E/740U3E",
-@@ -1654,15 +1574,8 @@ static int __init samsung_init(void)
- 	samsung->handle_backlight = true;
- 	samsung->quirks = quirks;
- 
--#ifdef CONFIG_ACPI
--	if (samsung->quirks->broken_acpi_video)
--		acpi_video_set_dmi_backlight_type(acpi_backlight_vendor);
--	if (samsung->quirks->use_native_backlight)
--		acpi_video_set_dmi_backlight_type(acpi_backlight_native);
--
- 	if (acpi_video_get_backlight_type() != acpi_backlight_vendor)
- 		samsung->handle_backlight = false;
--#endif
- 
- 	ret = samsung_platform_init(samsung);
- 	if (ret)
--- 
-2.37.2
-
+W1B1YmxpY10NCg0KDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogS2Fp
+LUhlbmcgRmVuZyA8a2FpLmhlbmcuZmVuZ0BjYW5vbmljYWwuY29tPg0KPiBTZW50OiBXZWRuZXNk
+YXksIEF1Z3VzdCAyNCwgMjAyMiAwOToxNw0KPiBUbzogTGltb25jaWVsbG8sIE1hcmlvIDxNYXJp
+by5MaW1vbmNpZWxsb0BhbWQuY29tPg0KPiBDYzogcmFmYWVsQGtlcm5lbC5vcmc7IExlbiBCcm93
+biA8bGVuYkBrZXJuZWwub3JnPjsNCj4gbm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmc7IGhk
+ZWdvZWRlQHJlZGhhdC5jb207DQo+IGRkYWRhcEBudmlkaWEuY29tOyBEZWxsLkNsaWVudC5LZXJu
+ZWxAZGVsbC5jb207IGtoZXJic3RAcmVkaGF0LmNvbTsNCj4gTHl1ZGUgUGF1bCA8bHl1ZGVAcmVk
+aGF0LmNvbT47IGxpbnV4LWFjcGlAdmdlci5rZXJuZWwub3JnOyBsaW51eC0NCj4ga2VybmVsQHZn
+ZXIua2VybmVsLm9yZw0KPiBTdWJqZWN0OiBSZTogW1BBVENIIDEvNF0gQUNQSTogT1NJOiBSZW1v
+dmUgTGludXgtRGVsbC1WaWRlbyBfT1NJIHN0cmluZw0KPiANCj4gT24gV2VkLCBBdWcgMjQsIDIw
+MjIgYXQgMjo1MSBBTSBNYXJpbyBMaW1vbmNpZWxsbw0KPiA8bWFyaW8ubGltb25jaWVsbG9AYW1k
+LmNvbT4gd3JvdGU6DQo+ID4NCj4gPiBUaGlzIHN0cmluZyB3YXMgaW50cm9kdWNlZCBiZWNhdXNl
+IGRyaXZlcnMgZm9yIE5WSURJQSBoYXJkd2FyZQ0KPiA+IGhhZCBidWdzIHN1cHBvcnRpbmcgUlRE
+MyBpbiB0aGUgcGFzdC4gIFRob2VzIGJ1Z3MgaGF2ZSBiZWVuIGZpeGVkDQo+ID4gYnkgY29tbWl0
+IDU3NzViODQzYTYxOSAoIlBDSTogUmVzdG9yZSBjb25maWcgc3BhY2Ugb24gcnVudGltZSByZXN1
+bWUNCj4gPiBkZXNwaXRlIGJlaW5nIHVuYm91bmQiKS4gc28gdmVuZG9ycyBzaG91bGRuJ3QgYmUg
+dXNpbmcgdGhpcyBzdHJpbmcNCj4gPiB0byBtb2RpZnkgQVNMIGFueW1vcmUuDQo+IA0KPiBBZGQg
+c29tZSBiYWNrZ3JvdW5kcyBvbiB3aGF0IGhhcHBlbmVkLg0KPiANCj4gQmVmb3JlIHByb3ByaWV0
+YXJ5IE5WSURJQSBkcml2ZXIgc3VwcG9ydHMgUlREMywgVWJ1bnR1IGhhcyBhIG1lY2hhbmlzbQ0K
+PiB0aGF0IGNhbiBzd2l0Y2ggUFJJTUUgb24gYW5kIG9mZiwgdGhvdWdoIGl0IHJlcXVpcmVzIHRv
+IGxvZ291dC9sb2dpbg0KPiB0byBtYWtlIHRoZSBsaWJyYXJ5IHN3aXRjaCBoYXBwZW4uDQo+IFdo
+ZW4gdGhlIFBSSU1FIGlzIG9mZiwgdGhlIG1lY2hhbmlzbSB1bmxvYWQgTlZJRElBIGRyaXZlciBh
+bmQgcHV0IHRoZQ0KPiBkZXZpY2UgdG8gRDNjb2xkLCBidXQgR1BVIG5ldmVyIGNhbWUgYmFjayB0
+byBEMCBhZ2Fpbi4gU28gT0RNIHVzZSB0aGUNCj4gX09TSSB0byBleHBvc2UgYW4gb2xkIF9EU00g
+bWV0aG9kIHRvIHN3aXRjaCB0aGUgcG93ZXIgb24vb2ZmLg0KPiANCj4gVGhlIGlzc3VlIGlzIGZp
+eGVkIGJ5IHRoZSBzYWlkIGNvbW1pdCBzbyB3ZSBjYW4gZGlzY2FyZCB0aGUgd29ya2Fyb3VuZCBu
+b3cuDQo+IA0KDQpUaGFua3MgZm9yIHRoYXQuICBJZiB0aGlzIHNlcmllcyBuZWVkcyB0byBzcGlu
+IEknbGwgcm9sbCB0aGF0IGludG8gdGhlIGNvbW1pdCBtZXNzYWdlLg0KT3RoZXJ3aXNlIHBlcmhh
+cHMgUmFmYWVsIGNhbiBwaWNrIHVwIHNvbWUgb2YgaXQgaWYgaGUgdGhpbmtzIGl0IG1ha2VzIHNl
+bnNlIHRvIGluY2x1ZGUuDQoNCj4gS2FpLUhlbmcNCj4gDQo+ID4NCj4gPiBSZXZpZXdlZC1ieTog
+THl1ZGUgUGF1bCA8bHl1ZGVAcmVkaGF0LmNvbT4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBNYXJpbyBM
+aW1vbmNpZWxsbyA8bWFyaW8ubGltb25jaWVsbG9AYW1kLmNvbT4NCj4gPiAtLS0NCj4gPiAgZHJp
+dmVycy9hY3BpL29zaS5jIHwgOSAtLS0tLS0tLS0NCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDkgZGVs
+ZXRpb25zKC0pDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9hY3BpL29zaS5jIGIvZHJp
+dmVycy9hY3BpL29zaS5jDQo+ID4gaW5kZXggOWY2ODUzODA5MTM4Li5jMmY2YjJmNTUzZDkgMTAw
+NjQ0DQo+ID4gLS0tIGEvZHJpdmVycy9hY3BpL29zaS5jDQo+ID4gKysrIGIvZHJpdmVycy9hY3Bp
+L29zaS5jDQo+ID4gQEAgLTQ0LDE1ICs0NCw2IEBAIG9zaV9zZXR1cF9lbnRyaWVzW09TSV9TVFJJ
+TkdfRU5UUklFU19NQVhdDQo+IF9faW5pdGRhdGEgPSB7DQo+ID4gICAgICAgICB7IlByb2Nlc3Nv
+ciBEZXZpY2UiLCB0cnVlfSwNCj4gPiAgICAgICAgIHsiMy4wIF9TQ1AgRXh0ZW5zaW9ucyIsIHRy
+dWV9LA0KPiA+ICAgICAgICAgeyJQcm9jZXNzb3IgQWdncmVnYXRvciBEZXZpY2UiLCB0cnVlfSwN
+Cj4gPiAtICAgICAgIC8qDQo+ID4gLSAgICAgICAgKiBMaW51eC1EZWxsLVZpZGVvIGlzIHVzZWQg
+YnkgQklPUyB0byBkaXNhYmxlIFJURDMgZm9yIE5WaWRpYSBncmFwaGljcw0KPiA+IC0gICAgICAg
+ICogY2FyZHMgYXMgUlREMyBpcyBub3Qgc3VwcG9ydGVkIGJ5IGRyaXZlcnMgbm93LiAgU3lzdGVt
+cyB3aXRoIE5WaWRpYQ0KPiA+IC0gICAgICAgICogY2FyZHMgd2lsbCBoYW5nIHdpdGhvdXQgUlRE
+MyBkaXNhYmxlZC4NCj4gPiAtICAgICAgICAqDQo+ID4gLSAgICAgICAgKiBPbmNlIE5WaWRpYSBk
+cml2ZXJzIG9mZmljaWFsbHkgc3VwcG9ydCBSVEQzLCB0aGlzIF9PU0kgc3RyaW5ncyBjYW4NCj4g
+PiAtICAgICAgICAqIGJlIHJlbW92ZWQgaWYgYm90aCBuZXcgYW5kIG9sZCBncmFwaGljcyBjYXJk
+cyBhcmUgc3VwcG9ydGVkLg0KPiA+IC0gICAgICAgICovDQo+ID4gLSAgICAgICB7IkxpbnV4LURl
+bGwtVmlkZW8iLCB0cnVlfSwNCj4gPiAgICAgICAgIC8qDQo+ID4gICAgICAgICAgKiBMaW51eC1M
+ZW5vdm8tTlYtSERNSS1BdWRpbyBpcyB1c2VkIGJ5IEJJT1MgdG8gcG93ZXIgb24gTlZpZGlhJ3MN
+Cj4gSERNSQ0KPiA+ICAgICAgICAgICogYXVkaW8gZGV2aWNlIHdoaWNoIGlzIHR1cm5lZCBvZmYg
+Zm9yIHBvd2VyLXNhdmluZyBpbiBXaW5kb3dzIE9TLg0KPiA+IC0tDQo+ID4gMi4zNC4xDQo+ID4N
+Cg==
