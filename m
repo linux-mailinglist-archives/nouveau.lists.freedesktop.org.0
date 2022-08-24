@@ -2,77 +2,100 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6035E59F7CA
-	for <lists+nouveau@lfdr.de>; Wed, 24 Aug 2022 12:32:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B921859F862
+	for <lists+nouveau@lfdr.de>; Wed, 24 Aug 2022 13:09:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A845710E2CA;
-	Wed, 24 Aug 2022 10:32:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 84A24A8AEB;
+	Wed, 24 Aug 2022 11:09:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B7D4010E1B1
- for <nouveau@lists.freedesktop.org>; Wed, 24 Aug 2022 10:31:59 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A388714B681
+ for <nouveau@lists.freedesktop.org>; Wed, 24 Aug 2022 11:08:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1661337118;
+ s=mimecast20190719; t=1661339309;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=UlcbDkRsbrYM78mAh3aiQrEPy8DVYsbqCH24GNpBqNU=;
- b=dA1qffggcJCxBj8w9zDfomzjf21xl3k349mliZ8nWDageJNH+DNsChxYf0rqnIDLDsxiu4
- g5t2HQztYbQ2Q4Yo37eCpsAYBirUD3znsKYznKG0xYslqJA35uuJ3TfpDtVwF7TDbhZOA+
- Wa7GgcGvVC8Fvp/L19+EIhdfop4jY/w=
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=cGfpUpDxvFpN6r02THk4JBCx3yQFLweaGRDNLoZQA9o=;
+ b=Wh17cc89dAKmI4/DJZ/IG2YMkLZHPG1Wa7ylZKsVjbT0k6OUQSceoxV/OPEXG0Iq6qKFX6
+ 92G0ABI3ypPi/PRk89nbV3OP44jJj8gb0ZG1Sv2Bd2vPrB9UW8weGRs5rshaR8vrdb4yFe
+ cChfzm+mAd7663Bjr0yFqJ2bO8KOKlU=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-596-kKbb7eZtNS6Lr1wUxwN75w-1; Wed, 24 Aug 2022 06:31:57 -0400
-X-MC-Unique: kKbb7eZtNS6Lr1wUxwN75w-1
-Received: by mail-ej1-f70.google.com with SMTP id
- gn32-20020a1709070d2000b0073d7a2dbc62so2850220ejc.14
- for <nouveau@lists.freedesktop.org>; Wed, 24 Aug 2022 03:31:57 -0700 (PDT)
+ us-mta-368-nhf2WlIsN4CZHq4HPQjhpA-1; Wed, 24 Aug 2022 07:08:28 -0400
+X-MC-Unique: nhf2WlIsN4CZHq4HPQjhpA-1
+Received: by mail-ed1-f71.google.com with SMTP id
+ q32-20020a05640224a000b004462f105fa9so9521387eda.4
+ for <nouveau@lists.freedesktop.org>; Wed, 24 Aug 2022 04:08:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc; bh=UlcbDkRsbrYM78mAh3aiQrEPy8DVYsbqCH24GNpBqNU=;
- b=1R7prXWW6SoYzXM2Exbu5wqTBeFIHif7qvN0Hni50frSp6R9fZnKfIipClyQ1PHsB8
- qQWaajqvyHQZQMjaBJQTD46BcF10faagCl8pNxDp9m7Ni5v9Tpg+yHwe7n3BJO5+VeiK
- YIrMH/xhS+rW3O3BWQnjpvSbFCCBGooImyqUKsVR80wCdbYTPxPVGj29GEPXjLUrflCq
- 4KiOrEA3XMm5Am51W9JDfniN50SlOkuV2lYVoMzp3HfE4IipnKpICclcUb0rcgaZXVZQ
- XrhlzdmO/bZVhhjXnkyTrGzKiB3G37jF+Ra3KnHXRC+HQeSHYKf+Qr3l6p+wCYI7lVhx
- CUOg==
-X-Gm-Message-State: ACgBeo0JVn5C+rYfGKHPb4Id/HtmRfFoSG4lJDd6v8EG6nIHO7J0SvK/
- a/ALm57kOebuhZ6WCBX09AuYYFxBa7CrX9XLNY4OVdrA/Im74jScECk8dZnYC8Sr67Bp3f2g2WG
- yeDTBhZYpIGW8lv6fEiJD0zpjig==
-X-Received: by 2002:a17:906:505:b0:73d:b188:17d9 with SMTP id
- j5-20020a170906050500b0073db18817d9mr2363715eja.97.1661337116261; 
- Wed, 24 Aug 2022 03:31:56 -0700 (PDT)
-X-Google-Smtp-Source: AA6agR4SB95cO3waA1C06t6rp3/pVG9CaQ3bT04tbtrPXnZGVEhmtFt56VEQ9hxlV/iJt5m79kjjHQ==
-X-Received: by 2002:a17:906:505:b0:73d:b188:17d9 with SMTP id
- j5-20020a170906050500b0073db18817d9mr2363680eja.97.1661337115486; 
- Wed, 24 Aug 2022 03:31:55 -0700 (PDT)
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc;
+ bh=cGfpUpDxvFpN6r02THk4JBCx3yQFLweaGRDNLoZQA9o=;
+ b=tMrDtl75Dyl8zs5Qhl64V0ZRleeRlmPV2FXdd7D4UHG8eDgLxhV3l7SKe13MDwVISS
+ ZWSNf8WknUtupDKJjSOWgJGHtEL95xAfPWgIIH/FoyHK8czpwK7CLHaAK2UM12bH/Pui
+ uVGvFGiUl4w4hr3qg91CmXb53dg/Db5G7DOXn3wnVibPQX4TstNBKbaFBnQjeq190aKZ
+ tD8m1e5jLZtO2xRW8W2qZtz2r3/zq6IBTDPAddzlWXSCI+8Y28SVmUT6r3yESZY1KE5e
+ fZgn7ceUE9C8MS4p0POmADW+tsfEZXC8NOwCglRnSEKE/XCTgEJ0DK+aHq1jQGPCG0tf
+ CGbA==
+X-Gm-Message-State: ACgBeo1ST5HH8tJScmIoMdTLOXve+s/IO43/a9g4CDUKW9JhzzJBdcM2
+ +vodzVyCQEEu+bYDlnoE4pGncfyu3OwQahitOd1vLsBtfmKBtgYyzUtCTNCuGWGpm0qrazNY8+A
+ PMU/cgmt4FjQ3MRcac5L//AtcWQ==
+X-Received: by 2002:a05:6402:e98:b0:441:a982:45bc with SMTP id
+ h24-20020a0564020e9800b00441a98245bcmr6950967eda.239.1661339306799; 
+ Wed, 24 Aug 2022 04:08:26 -0700 (PDT)
+X-Google-Smtp-Source: AA6agR6P/7PaITtSTdw1wLLBypj9uj/nk0N3QwkS9w0y+K1RLj+BScs0w2Xc3OndqaOvHU7KZQ6oZg==
+X-Received: by 2002:a05:6402:e98:b0:441:a982:45bc with SMTP id
+ h24-20020a0564020e9800b00441a98245bcmr6950924eda.239.1661339306456; 
+ Wed, 24 Aug 2022 04:08:26 -0700 (PDT)
 Received: from ?IPV6:2001:1c00:c1e:bf00:d69d:5353:dba5:ee81?
  (2001-1c00-0c1e-bf00-d69d-5353-dba5-ee81.cable.dynamic.v6.ziggo.nl.
  [2001:1c00:c1e:bf00:d69d:5353:dba5:ee81])
  by smtp.gmail.com with ESMTPSA id
- 14-20020a170906308e00b007314a01766asm944151ejv.211.2022.08.24.03.31.54
+ kv22-20020a17090778d600b00730560156b0sm1047279ejc.50.2022.08.24.04.08.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Aug 2022 03:31:54 -0700 (PDT)
-Message-ID: <d65ba52b-4e1f-507c-187c-032d6155588e@redhat.com>
-Date: Wed, 24 Aug 2022 12:31:54 +0200
+ Wed, 24 Aug 2022 04:08:24 -0700 (PDT)
+Message-ID: <e56d7379-5f6f-9ae0-cd74-f570df990c1d@redhat.com>
+Date: Wed, 24 Aug 2022 13:08:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.12.0
-To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude <lyude@redhat.com>
+To: Daniel Dadap <ddadap@nvidia.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Xinhui <Xinhui.Pan@amd.com>, "Rafael J . Wysocki" <rafael@kernel.org>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>,
+ Lukas Wunner <lukas@wunner.de>, Mark Gross <markgross@kernel.org>,
+ Andy Shevchenko <andy@kernel.org>
+References: <20220712193910.439171-1-hdegoede@redhat.com>
+ <20220712193910.439171-2-hdegoede@redhat.com>
+ <641cb059-48f5-5f05-5ec2-610f1215391c@nvidia.com>
+ <20e4ffcf-2a3a-e671-5f98-1602b78df3cb@nvidia.com>
+ <331ebd23-d2a4-bb33-5462-b9bd3284ab69@redhat.com>
+ <5cfb26a2-ec7b-578e-dc01-79776dc7e0c9@nvidia.com>
+ <94c69af4-5a30-0b80-fce1-64d01858d79b@redhat.com>
+ <98cb14c9-6b9a-9410-98e3-24c31950597d@nvidia.com>
 From: Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <98cb14c9-6b9a-9410-98e3-24c31950597d@nvidia.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-Subject: [Nouveau] Question about selecting ACPI_VIDEO for nouveau on non
- X86 platforms
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v2 01/29] ACPI: video: Add
+ acpi_video_backlight_use_native() helper
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,146 +107,89 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ intel-gfx <intel-gfx@lists.freedesktop.org>, amd-gfx@lists.freedesktop.org,
+ platform-driver-x86@vger.kernel.org, linux-acpi@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
+ Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi All,
+Hi Daniel,
 
-Since 6.0-rc1 it is possible for ACPI_VIDEO to be enabled on non X86
-platforms. I already send an email about this being a possible problem
-for nouveau, when nouveau is builtin and apci_video is a module:
+On 8/17/22 22:18, Daniel Dadap wrote:
+> On 8/17/22 10:05 AM, Hans de Goede wrote:
 
-https://lore.kernel.org/linux-acpi/a385b626-217f-25be-f076-7478da3d1147@redhat.com/
+<snip>
 
-"""
-I just noticed this change:
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=038275d227841d4978ceceb397b584b4b39f2b50
+>>> One further potential difficulty that I anticipate is that not all dynamic mux systems use the EC backlight driver (or a similar, GPU-agnostic driver), and rather have whichever GPU happens to be connected at the time be responsible for the backlight. I had initially thought that supporting the EC backlight interface was a requirement for OEMs to implement dynamic mux support, but I recently learned this is not true in all cases. On Windows, this requires coordinating the backlight controls of the two GPU drivers across a mux switch, to load the state of the switched-away-from GPU and set it on the switched-to GPU. I imagine for these systems we may need to do some similar save/restore, probably managed by vga-switcheroo, but it would require having both GPU drivers register their own native backlight handlers (and possibly while one of them is not connected to the panel).
+>> Right, systems where the backlight control basically gets muxed from one GPU to the other GPU together with the panel's video-data lines exist. Currently Linux already register both native GPU backlight handlers in this case. e.g. /sys/class/backlight/intel_backlight and /sys/class/backlight/nouveau_bl.
+>>
+>> Userspace (atleast GNOME) has code which checks which GPU is actually connected to the panel using the panel's drm connector's status on each GPU (only one of which should report connected) and then uses the backlight interface associated with the connected connector.
+>>
+>>> Dynamic mux switching isn't actually supported on Linux, yet, so we should be able to kick this particular can a little further down the road, but in the meantime we should probably start planning for how best to handle this sort of system under the "only one backlight handler per panel" model. Maybe the vga-switcheroo handler can register its own backlight handler, that then negotiates the actual backlight settings between the relevant GPU drivers, possibly through a new vga-switcheroo client callback. I'll have to think about this a bit more.
+>> The "only one backlight handler per panel" model is actualy "only one backlight handler per panel"-connector since the new API uses drm properties on the drm connector object. With 2 GPUs both using their native backlight control there will be 2 connectors and userspace will/must use the one which is actually reporting that it is connected to the panel so this will work fine.
+> 
+> 
+> That is a useful distinction. Would it fall under userspace's reponsibility, then, to keep the brightness level synchronized across drm_connectors that share a panel via a mux when performing a switch?
 
---- a/drivers/acpi/Kconfig
-+++ b/drivers/acpi/Kconfig
-@@ -210,7 +210,7 @@ config ACPI_TINY_POWER_BUTTON_SIGNAL
- 
- config ACPI_VIDEO
- 	tristate "Video"
--	depends on X86 && BACKLIGHT_CLASS_DEVICE
-+	depends on BACKLIGHT_CLASS_DEVICE
- 	depends on INPUT
- 	select THERMAL
- 	help
+Yes typically the 2 different GPU drivers know nothing about the other GPU and I think it would be good to keep things that way. When switching userspace will see a disconnect on the panel connector on one GPU and then a connect on the connector on the other GPU at which point it knows that it should set the brightness on the now connected connector instead of on the old one.
 
-I think this is going to cause random-config build errors because
-at the nouveau driver calls acpi_video functions and it expects
-those functions to either be there or to get the stubs.
+> I suppose it's a cleaner design to leave it up to userspace to select which backlight interface to manipulate.
 
-This is an issue when acpi_video is build as a module and the
-i915 / nouveau code is builtin.
+Ack.
 
-To avoid this issue nouveau does a select on ACPI_VIDEO,
-here is the code from drivers/gpu/drm/nouveau/Kconfig
+> That is a harder decision for userspace to make with the existing design, which doesn't cleanly map sysfs backlight interfaces to individual connectors, but if the UAPI is going to change to a drm_connector property, backlight interfaces are obviously strongly correlated with the connectors.
 
-        # Similar to i915, we need to select ACPI_VIDEO and it's dependencies
-        select BACKLIGHT_CLASS_DEVICE if ACPI && X86
-        select INPUT if ACPI && X86
-        select THERMAL if ACPI && X86
-        select ACPI_VIDEO if ACPI && X86
+Right.
 
-notice the if ACPI && X86, since ACPI_VIDEO can now be selected
-on ARM, this can lead to ACPI_VIDEO being enabled as
-module (so no stubs) while nouveau can be builtin which will
-lead to unresolved symbol errors in nouveau when building the zImage.
+>  I'm not sure how easy it is for userspace to solve the problem of maintaining consistent brightness levels across a mux switch for an OLED panel, where there really isn't a concept of a "backlight" to speak of, but I suppose it wouldn't be any easier to do that in the kernel (e.g. with vga-switcheroo).
 
-I believe that to fix this the conditions after the select must
-be changed from "if ACPI && X86" to just "if ACPI"
-"""
+The OLED brightness is send over DP-aux to the panel AFAIK, so as long as both drivers export the raw range of the panel's setting and don't try to get smart and scale or whatever then their should be a 1:1 mapping. Ideally for something like this both drivers would be using some shared drm-helper code / library to talk to the backlight, thus guaranteeing that both drivers interpret the scale the same.
 
-I was looking at a lkp warning in my backlight refactor series
-which is explained by the above today:
 
-https://lore.kernel.org/lkml/202208231625.icHjRXDI-lkp@intel.com/
+>> If anything the nvidia-wmi-ec-backlight case is a but more tricky, the "only one backlight handler per panel" thing is actually more of a "only one backlight handler per laptop" rule which is intended for (to be written) drm helpers for the new properties to be able to get the handler from the backlight class in the non native case by just taking the first registered backlight handler.
+>>
+>> This means that in a dual GPU setup with nvidia-wmi-ec-backlight both GPU's panel connector objects will have their brightness properties pointing to / proxying the same backlight class device. Userspace should really be only writing to the one which is actually connected though. I guess we could even enforce this
+>> in the kernel and reject brightness property writes on unconnected connectors.
+>>
+>>>> Please let me know if the proposed solution works for you and
+>>>> if you want me to make ACPI_VIDEO_REGISTER_BACKLIGHT_DELAY a
+>>>> module-option for the next version.
+>>>
+>>> I do think it should be workable, apart from the concern I mentioned above about knowing when to set the module option to disable the ACPI video backlight driver.
+>> Note the option does not disable the ACPI video backlight driver. It disables the acpi_video code timing out and deciding to go ahead and register its backlight itself (providing that at the moment of timeout acpi_video_get_backlight_type() returns acpi_backlight_video). Any code (e.g. the nvidia binary driver) can still call acpi_video_register_backlight() itself to try and register even if the timeout handling has been disabled.
+>>
+>> The idea is that without the timeout the probe order looks like this:
+>>
+>> 1. acpi_video initializes, does not register backlight
+>> 2. GPU driver initalizes, it either registers a native backlight handler;
+>>     or it calls acpi_video_register_backlight()
+>> 3. acpi_video_register_backlight() runs (if called) and calls:
+>>     acpi_video_get_backlight_type()
+>> 4.1 if acpi_video_get_backlight_type() returns acpi_backlight_video
+>>     /sys/class/backlight/acpi_video# is/are registered
+>> 4.2 if acpi_video_get_backlight_type() returns somerthing else, e.g.
+>>     acpi_backlight_nvidia_wmi_ec, acpi_video_register_backlight()
+>>     does nothing
+>>
+>>
+>> The timeout is to ensure that 3. still happens, even if
+>> there is no native GPU driver, because of e.g.
+>> nomodeset on the kernel cmdline.
+>>
+>> With the nvidia binary driver, that driver can call
+>> acpi_video_register_backlight() if necessary so the timeout
+>> is not necessary.
+>>
+>> I'm currently preparing v3 of this patchset. I'll modify the
+>> patch introducing the timeout to make it configurable
+>> (with 0 disabling it completely).
+> 
+> 
+> Okay. That clarification makes sense. Would it be reasonable to disable the timeout by default on systems with Win8 or later _OSI?
 
-and while working on fixing this I noticed that nouveau not
-only assumes ACPI[_VIDEO] is only available on X86 in its Kconfig
-but also in other places:
-
-drivers/gpu/drm/nouveau/Kbuild:
-
-ifdef CONFIG_X86
-nouveau-$(CONFIG_ACPI) += nouveau_acpi.o
-endif
-
-drivers/gpu/drm/nouveau/nouveau_acpi.h:
-
-#if defined(CONFIG_ACPI) && defined(CONFIG_X86)
-bool nouveau_is_optimus(void);
-...
-#else
-static inline bool nouveau_is_optimus(void) { return false; };
-...
-#endif
-
-Since currently the only nouveau dep on acpi_video is
-inside nouveau_acpi.c the not building + stubbing of
-nouveau_acpi.c is saving us from the problem which I expected
-in my mail quoted above.
-
-The backlight refactor series breaks this though, because
-it adds calls to:
-acpi_video_backlight_use_native()
-acpi_video_register_backlight()
-
-to nouveau outside of the drivers/gpu/drm/nouveau/nouveau_acpi.c
-file.
-
-To fix this for the next version of the backlight refactor series
-I have added wrappers for:
-acpi_video_backlight_use_native()
-acpi_video_register_backlight()
-to nouveau_acpi.?
-
-After thinking about this a bit this seemed by far the cleanest
-and consistent with how the current nouveau code is abstracting
-other ACPI use, so this makes the backlight changes consistent
-with existing nouveau practices.
-
-Lyude, because of these changes I've dropped your Reviewed-by.
-I'll send out a new version 4 series sometime today, can you
-please re-review the 2 nouveau patches?
-
-###
-
-My first instinct to fix this, was to adjust the nouveau Kconfig bits
-selecting ACPI_VIDEO to take into account that it now is available
-on non X86 too:
-
-diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kconfig
-index 03d12caf9e26..26b895a49b9c 100644
---- a/drivers/gpu/drm/nouveau/Kconfig
-+++ b/drivers/gpu/drm/nouveau/Kconfig
-@@ -16,10 +16,10 @@ config DRM_NOUVEAU
- 	select MXM_WMI if ACPI && X86
- 	select POWER_SUPPLY
- 	# Similar to i915, we need to select ACPI_VIDEO and it's dependencies
--	select BACKLIGHT_CLASS_DEVICE if ACPI && X86
--	select INPUT if ACPI && X86
--	select THERMAL if ACPI && X86
--	select ACPI_VIDEO if ACPI && X86
-+	select BACKLIGHT_CLASS_DEVICE if ACPI
-+	select INPUT if ACPI
-+	select THERMAL if ACPI
-+	select ACPI_VIDEO if ACPI
- 	select SND_HDA_COMPONENT if SND_HDA_CORE
- 	help
- 	  Choose this option for open-source NVIDIA support.
-
-We could still make this change together with Kbuild +
-nouveau_acpi.h to build on non x86 too. This might be good to
-prepare for some aarch64 devices which may use some of the
-ACPI bits, they may need e.g. acpi_video_get_edid().
-
-OTOH this might cause unexpected issue so it might be better
-to wait with making such a change until it is actually
-necessary.
+Hmm, there are Win8 or later systems which actually need acpi_video because the other method(s) to control the backlight don't work (we have a list of quirks for those) and more importantly there are Win8 or later systems where the video bios tables say: "Don't use the GPU for backlight control". We do need the acpi_video_register_backlight() call to happen on both those cases eventually. Also this will lead to 2 different code-paths making things more complicated, so no I don't think that that is a good idea.
 
 Regards,
 
