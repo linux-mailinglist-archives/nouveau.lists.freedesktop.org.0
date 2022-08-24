@@ -2,68 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0F1259F9D4
-	for <lists+nouveau@lfdr.de>; Wed, 24 Aug 2022 14:21:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 844BB59FA45
+	for <lists+nouveau@lfdr.de>; Wed, 24 Aug 2022 14:47:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AEBF8B385B;
-	Wed, 24 Aug 2022 12:18:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 23C3A10E2FB;
+	Wed, 24 Aug 2022 12:47:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4BFCDB0F6E
- for <nouveau@lists.freedesktop.org>; Wed, 24 Aug 2022 12:17:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1661343471;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=3SH44BXwktH40KCcDZ9+emR32b1FaNxTyVmnyphrNZ0=;
- b=EdrT0ZDQV7iuA1B8bBkqBP6HeChdcAeWym63QV+BAXp0A4uJTs55BX0ykBz8NKrLLtZ+xc
- vzbpHaQm9trugz86IzkJ096ZAT6N56UMNuUrddCWvFvhyfJSDSXnexcAefsuDQRBvNJrOd
- nl3zyhHZUxpdEjwOdbftlG590RmKehs=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-467-IKvpAhDKN6GmZ58lZ6bPGA-1; Wed, 24 Aug 2022 08:17:48 -0400
-X-MC-Unique: IKvpAhDKN6GmZ58lZ6bPGA-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9E1C4811E83;
- Wed, 24 Aug 2022 12:17:45 +0000 (UTC)
-Received: from localhost.localdomain (unknown [10.39.193.103])
- by smtp.corp.redhat.com (Postfix) with ESMTP id CF5DCC15BBA;
- Wed, 24 Aug 2022 12:17:41 +0000 (UTC)
-From: Hans de Goede <hdegoede@redhat.com>
-To: Ben Skeggs <bskeggs@redhat.com>,
-	Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
-	Daniel Dadap <ddadap@nvidia.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	Pan@freedesktop.org, Xinhui <Xinhui.Pan@amd.com>,
-	"Rafael J . Wysocki" <rafael@kernel.org>,
-	Mika Westerberg <mika.westerberg@linux.intel.com>,
-	Lukas Wunner <lukas@wunner.de>, Mark Gross <markgross@kernel.org>,
-	Andy Shevchenko <andy@kernel.org>
-Date: Wed, 24 Aug 2022 14:15:23 +0200
-Message-Id: <20220824121523.1291269-32-hdegoede@redhat.com>
-In-Reply-To: <20220824121523.1291269-1-hdegoede@redhat.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9693D2AD5E;
+ Wed, 24 Aug 2022 12:47:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1661345238; x=1692881238;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version;
+ bh=svJpu/aAhxTW7SBWGKYeIaIuCtBuBU2tQ9RclprRDV0=;
+ b=VVK2SzlrQPDQzeit8jDQM3MMolSE5ep0ab9xnJ1+ZYVEvfgZiVleaI1p
+ MwGjiqttohc9mNt4wwOaebV6nSZQbRZXbqoci7VJy8JjjEoZVh5tNtvzK
+ /SMQEDmlce2/Wg9UOMAlhTRbPZSx+uHbxAwdBIj6I3PDiUekZmFp6mLv5
+ xJo625j/866ickh37uRM0LbpFCLKwKR2fWAUMbKRSDHa69C7oIL6YPvke
+ OkQCuq3f2F+GUMvQ0Y5BPtuemoeZlLipEvdfzN/3U+QRyQS2NffyhvUcf
+ Fgzkf458YMaf7rc3nx7+g27HWBC2ChStiqQZrHaJFiaGRbcLO/fT0itKU g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10448"; a="293952683"
+X-IronPort-AV: E=Sophos;i="5.93,260,1654585200"; d="scan'208";a="293952683"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 24 Aug 2022 05:47:15 -0700
+X-IronPort-AV: E=Sophos;i="5.93,260,1654585200"; d="scan'208";a="639103382"
+Received: from zlim2-mobl.gar.corp.intel.com (HELO localhost) ([10.252.52.23])
+ by orsmga008-auth.jf.intel.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Aug 2022 05:47:08 -0700
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: Hans de Goede <hdegoede@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>, Daniel Dadap
+ <ddadap@nvidia.com>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Joonas Lahtinen
+ <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Alex Deucher
+ <alexander.deucher@amd.com>, Christian =?utf-8?Q?K=C3=B6nig?=
+ <christian.koenig@amd.com>, "Pan,
+ Xinhui" <Xinhui.Pan@amd.com>, "Rafael J . Wysocki" <rafael@kernel.org>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>, Lukas Wunner
+ <lukas@wunner.de>, Mark Gross <markgross@kernel.org>, Andy Shevchenko
+ <andy@kernel.org>
+In-Reply-To: <20220824121523.1291269-12-hdegoede@redhat.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 References: <20220824121523.1291269-1-hdegoede@redhat.com>
+ <20220824121523.1291269-12-hdegoede@redhat.com>
+Date: Wed, 24 Aug 2022 15:47:05 +0300
+Message-ID: <87y1vdizau.fsf@intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.8
-Subject: [Nouveau] [PATCH v4 31/31] drm/todo: Add entry about dealing with
- brightness control on devices with > 1 panel
+Content-Type: text/plain
+Subject: Re: [Nouveau] [PATCH v4 11/31] drm/i915: Call
+ acpi_video_register_backlight() (v2)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,96 +76,102 @@ Cc: linux-acpi@vger.kernel.org, David Airlie <airlied@linux.ie>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Add an entry summarizing the discussion about dealing with brightness
-control on devices with more then 1 internal panel.
+On Wed, 24 Aug 2022, Hans de Goede <hdegoede@redhat.com> wrote:
+> On machins without an i915 opregion the acpi_video driver immediately
+> probes the ACPI video bus and used to also immediately register
+> acpi_video# backlight devices when supported.
+>
+> Once the drm/kms driver then loaded later and possibly registered
+> a native backlight device then the drivers/acpi/video_detect.c code
+> unregistered the acpi_video0 device to avoid there being 2 backlight
+> devices (when acpi_video_get_backlight_type()==native).
+>
+> This means that userspace used to briefly see 2 devices and the
+> disappearing of acpi_video0 after a brief time confuses the systemd
+> backlight level save/restore code, see e.g.:
+> https://bbs.archlinux.org/viewtopic.php?id=269920
+>
+> To fix this the ACPI video code has been modified to make backlight class
+> device registration a separate step, relying on the drm/kms driver to
+> ask for the acpi_video backlight registration after it is done setting up
+> its native backlight device.
+>
+> Add a call to the new acpi_video_register_backlight() after the i915 calls
+> acpi_video_register() (after setting up the i915 opregion) so that the
+> acpi_video backlight devices get registered on systems where the i915
+> native backlight device is not registered.
+>
+> Changes in v2:
+> -Only call acpi_video_register_backlight() when a panel is detected
+>
+> Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+> ---
+>  drivers/gpu/drm/i915/display/intel_display.c | 8 ++++++++
+>  drivers/gpu/drm/i915/display/intel_panel.c   | 3 +++
+>  drivers/gpu/drm/i915/i915_drv.h              | 2 ++
+>  3 files changed, 13 insertions(+)
+>
+> diff --git a/drivers/gpu/drm/i915/display/intel_display.c b/drivers/gpu/drm/i915/display/intel_display.c
+> index 6103b02c081f..2bb53efdb149 100644
+> --- a/drivers/gpu/drm/i915/display/intel_display.c
+> +++ b/drivers/gpu/drm/i915/display/intel_display.c
+> @@ -9088,6 +9088,14 @@ void intel_display_driver_register(struct drm_i915_private *i915)
+>  	/* Must be done after probing outputs */
+>  	intel_opregion_register(i915);
+>  	acpi_video_register();
+> +	/*
+> +	 * Only call this if i915 is driving the internal panel. If the internal
+> +	 * panel is not driven by i915 then another GPU driver may still register
+> +	 * a native backlight driver later and this should only be called after
+> +	 * any native backlights have been registered.
+> +	 */
+> +	if (i915->have_panel)
+> +		acpi_video_register_backlight();
 
-The original discussion can be found here:
-https://lore.kernel.org/dri-devel/20220517152331.16217-1-hdegoede@redhat.com/
+Apologies for procrastinating the review.
 
-Signed-off-by: Hans de Goede <hdegoede@redhat.com>
----
- Documentation/gpu/todo.rst | 68 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 68 insertions(+)
+Please let's not add new flags like have_panel to i915; we're trying to
+clean it up instead.
 
-diff --git a/Documentation/gpu/todo.rst b/Documentation/gpu/todo.rst
-index 7634c27ac562..393d218e4a0c 100644
---- a/Documentation/gpu/todo.rst
-+++ b/Documentation/gpu/todo.rst
-@@ -679,6 +679,74 @@ Contact: Sam Ravnborg
- 
- Level: Advanced
- 
-+Brightness handling on devices with multiple internal panels
-+============================================================
-+
-+On x86/ACPI devices there can be multiple backlight firmware interfaces:
-+(ACPI) video, vendor specific and others. As well as direct/native (PWM)
-+register programming by the KMS driver.
-+
-+To deal with this backlight drivers used on x86/ACPI call
-+acpi_video_get_backlight_type() which has heuristics (+quirks) to select
-+which backlight interface to use; and backlight drivers which do not match
-+the returned type will not register themselves, so that only one backlight
-+device gets registered (in a single GPU setup, see below).
-+
-+At the moment this more or less assumes that there will only
-+be 1 (internal) panel on a system.
-+
-+On systems with 2 panels this may be a problem, depending on
-+what interface acpi_video_get_backlight_type() selects:
-+
-+1. native: in this case the KMS driver is expected to know which backlight
-+   device belongs to which output so everything should just work.
-+2. video: this does support controlling multiple backlights, but some work
-+   will need to be done to get the output <-> backlight device mapping
-+
-+The above assumes both panels will require the same backlight interface type.
-+Things will break on systems with multiple panels where the 2 panels need
-+a different type of control. E.g. one panel needs ACPI video backlight control,
-+where as the other is using native backlight control. Currently in this case
-+only one of the 2 required backlight devices will get registered, based on
-+the acpi_video_get_backlight_type() return value.
-+
-+If this (theoretical) case ever shows up, then supporting this will need some
-+work. A possible solution here would be to pass a device and connector-name
-+to acpi_video_get_backlight_type() so that it can deal with this.
-+
-+Note in a way we already have a case where userspace sees 2 panels,
-+in dual GPU laptop setups with a mux. On those systems we may see
-+either 2 native backlight devices; or 2 native backlight devices.
-+
-+Userspace already has code to deal with this by detecting if the related
-+panel is active (iow which way the mux between the GPU and the panels
-+points) and then uses that backlight device. Userspace here very much
-+assumes a single panel though. It picks only 1 of the 2 backlight devices
-+and then only uses that one.
-+
-+Note that all userspace code (that I know off) is currently hardcoded
-+to assume a single panel.
-+
-+Before the recent changes to not register multiple (e.g. video + native)
-+/sys/class/backlight devices for a single panel (on a single GPU laptop),
-+userspace would see multiple backlight devices all controlling the same
-+backlight.
-+
-+To deal with this userspace had to always picks one preferred device under
-+/sys/class/backlight and will ignore the others. So to support brightness
-+control on multiple panels userspace will need to be updated too.
-+
-+There are plans to allow brightness control through the KMS API by adding
-+a "display brightness" property to drm_connector objects for panels. This
-+solves a number of issues with the /sys/class/backlight API, including not
-+being able to map a sysfs backlight device to a specific connector. Any
-+userspace changes to add support for brightness control on devices with
-+multiple panels really should build on top of this new KMS property.
-+
-+Contact: Hans de Goede
-+
-+Level: Advanced
-+
- Outside DRM
- ===========
- 
+The code here needs to iterate over the connectors to decide. Maybe
+better abstracted a function.
+
+BR,
+Jani.
+
+
+>  
+>  	intel_audio_init(i915);
+>  
+> diff --git a/drivers/gpu/drm/i915/display/intel_panel.c b/drivers/gpu/drm/i915/display/intel_panel.c
+> index 237a40623dd7..4536c527f50c 100644
+> --- a/drivers/gpu/drm/i915/display/intel_panel.c
+> +++ b/drivers/gpu/drm/i915/display/intel_panel.c
+> @@ -646,8 +646,11 @@ intel_panel_mode_valid(struct intel_connector *connector,
+>  
+>  int intel_panel_init(struct intel_connector *connector)
+>  {
+> +	struct drm_i915_private *dev_priv = to_i915(connector->base.dev);
+>  	struct intel_panel *panel = &connector->panel;
+>  
+> +	dev_priv->have_panel = true;
+> +
+>  	intel_backlight_init_funcs(panel);
+>  
+>  	drm_dbg_kms(connector->base.dev,
+> diff --git a/drivers/gpu/drm/i915/i915_drv.h b/drivers/gpu/drm/i915/i915_drv.h
+> index 69ce6db6a7c1..14b0dcaf25c2 100644
+> --- a/drivers/gpu/drm/i915/i915_drv.h
+> +++ b/drivers/gpu/drm/i915/i915_drv.h
+> @@ -756,6 +756,8 @@ struct drm_i915_private {
+>  
+>  	bool ipc_enabled;
+>  
+> +	bool have_panel;
+> +
+>  	struct intel_audio_private audio;
+>  
+>  	struct i915_pmu pmu;
+
 -- 
-2.37.2
-
+Jani Nikula, Intel Open Source Graphics Center
