@@ -1,104 +1,94 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 996B25A3D2B
-	for <lists+nouveau@lfdr.de>; Sun, 28 Aug 2022 12:23:27 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 773C15A4A8D
+	for <lists+nouveau@lfdr.de>; Mon, 29 Aug 2022 13:42:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EAC8610E6D6;
-	Sun, 28 Aug 2022 10:23:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9CE4710F153;
+	Mon, 29 Aug 2022 11:41:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2102.outbound.protection.outlook.com [40.107.22.102])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D25A810E6D6
- for <nouveau@lists.freedesktop.org>; Sun, 28 Aug 2022 10:23:19 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=V4Uqqdqf71yqqxbfQkC4KHL0vfLMZV0KvcNdU4adzfEQA8akaMoaUiR89gfoDOCPRPQfbaRt0f/KYqlyOfzxomBlSs2IxW3nGAU2Lss/Pwx/+Y7YsCvWim8tkBnY0MwTc5ZQkTD3KbYVdoIfHWFTekUrI/wR1I2FNUiOnTJtFoXB7SchkfFtOJNNgtAMsPOgq1dVMYbOSpasDQoalx4g5yQrK+rESOJ73+zgDkt30tDMxeke1cugqySxSNY3mOvXfXtO6EZ0RDxelrq0oAYR1FQmc6Z/04jkE2SDVvCYQXdzwoWUdq+G7sdbjiYWVmyGlwhkKiIQSKnN/hZ5vzEMjA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AnDAaAvujRbRZDYkTA9Icj5LcN+JKjnF3u3dxyAJLf0=;
- b=cGEFySXw4I4j4gUObYmZ2wLINWkqSmHhGZ5LyFMroWSF6QXH5LYjfxOTj62l6n5H9I24BgFV/swQxPm682nqeqcn3VtdDt1mVWgTXqCTaS6bZ9c3cHaLfE4TmGKAxVqyZIIF8B36cuFLprMnwHWopaxpdx77D942EBGWRUgoqjMD2dPpCQYislIeT9LAU+JgUvk03j1/aY36T435poifEepOF3Kbl88CVlWj4qBSk0/fiQ8zhbdqLXoSYDjoW/a4H4p4jMWBnlEvliEr+mXplV15nWV+53yA5oq1c2IrUt7IU9DihgFXzAYPiJCkPy3vbRd2gSKu3d9InwuLYMyKDQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 192.38.125.140) smtp.rcpttodomain=lists.freedesktop.org
- smtp.mailfrom=di.ku.dk; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=di.ku.dk; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=di.ku.dk; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AnDAaAvujRbRZDYkTA9Icj5LcN+JKjnF3u3dxyAJLf0=;
- b=ceULxTFKHaqo0cPouI6mAPUdoGhgHu1jzJsbvwCV5zUFUBz0U5ffOYM7TmzEXHwLkZ46TZ5RWSEWZEz4uxTa8i1LUNVl8Dh3fqHfoNsm20Va16ZHo2EA0o0cDgyEOJ+Dlr6g+CSC+gtbqhZ4GxAMEHylNPtt17qvL2qfLjeCa70=
-Received: from AM6P191CA0029.EURP191.PROD.OUTLOOK.COM (2603:10a6:209:8b::42)
- by DB7PR04MB4330.eurprd04.prod.outlook.com (2603:10a6:5:19::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5566.21; Sun, 28 Aug
- 2022 10:23:16 +0000
-Received: from VE1EUR02FT018.eop-EUR02.prod.protection.outlook.com
- (2603:10a6:209:8b:cafe::9b) by AM6P191CA0029.outlook.office365.com
- (2603:10a6:209:8b::42) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5566.15 via Frontend
- Transport; Sun, 28 Aug 2022 10:23:16 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 192.38.125.140)
- smtp.mailfrom=di.ku.dk; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=di.ku.dk;
-Received-SPF: Pass (protection.outlook.com: domain of di.ku.dk designates
- 192.38.125.140 as permitted sender) receiver=protection.outlook.com;
- client-ip=192.38.125.140; helo=mailedg02pw.ku.dk; pr=C
-Received: from mailedg02pw.ku.dk (192.38.125.140) by
- VE1EUR02FT018.mail.protection.outlook.com (10.152.12.67) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5566.15 via Frontend Transport; Sun, 28 Aug 2022 10:23:16 +0000
-Received: from mailsepo01.ku.dk (10.78.10.24) by MAILEDG02PW.unicph.domain
- (192.38.125.140) with Microsoft SMTP Server id 15.1.2507.12; Sun, 28 Aug 2022
- 12:23:15 +0200
-Received: from 10.78.10.5 ([10.78.10.5])
- by mailsepo01.ku.dk (JAMES SMTP Server 2.3.2-1) with SMTP ID 263
- for <nouveau@lists.freedesktop.org>;
- Sun, 28 Aug 2022 12:23:14 +0200 (CEST)
-Received: from MAILMBX06PW.unicph.domain (10.77.128.235) by
- MAILMBX09PW.unicph.domain (10.77.0.237) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.12; Sun, 28 Aug 2022 12:23:14 +0200
-Received: from MAILMBX06PW.unicph.domain ([fe80::2871:26e7:5dea:a154]) by
- MAILMBX06PW.unicph.domain ([fe80::2871:26e7:5dea:a154%6]) with mapi id
- 15.01.2507.012; Sun, 28 Aug 2022 12:23:14 +0200
-From: Klaus Ebbe Grue <grue@di.ku.dk>
-To: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
-Thread-Topic: Patch to TroubleShooting.html
-Thread-Index: AQHYusWQNyW5Hsp4QUCOjnVYKCB58Q==
-Date: Sun, 28 Aug 2022 10:23:14 +0000
-Message-ID: <615912a3d56e4330923d9b42802e8b09@di.ku.dk>
-Accept-Language: da-DK, en-US
-Content-Language: da-DK
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.78.10.24]
-Content-Type: multipart/alternative;
- boundary="_000_615912a3d56e4330923d9b42802e8b09dikudk_"
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 26DD410F153
+ for <nouveau@lists.freedesktop.org>; Mon, 29 Aug 2022 11:41:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1661773314;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=3l2HRNkVfIlxa2ShqNnx3ZVFXVGd+8W6TGzJQVH9z/E=;
+ b=NX4Uqn/FhhpshzHLNfN2A67Ns35g/gWpppzc97ebUaPVcN23fY0Hne6TVvE1PhN7J2I95M
+ PKpkCpJsuOH1lzt5jixWCgZXxJmcQgYEYoxvh99qYJBrqkUwXEZZyvnh1zukqC9Vy7sytB
+ Xd3EgtyNdAjOUXe1IjOU/r1QblSXmeU=
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-244-aGhD7OkoMK-8_E0UwbqmjQ-1; Mon, 29 Aug 2022 07:41:42 -0400
+X-MC-Unique: aGhD7OkoMK-8_E0UwbqmjQ-1
+Received: by mail-ej1-f69.google.com with SMTP id
+ qk37-20020a1709077fa500b00730c2d975a0so2168169ejc.13
+ for <nouveau@lists.freedesktop.org>; Mon, 29 Aug 2022 04:41:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc;
+ bh=3l2HRNkVfIlxa2ShqNnx3ZVFXVGd+8W6TGzJQVH9z/E=;
+ b=R96FCHldehTMhtpgDhJx6bfPkedrrEBfCvUelNcSfPSI3a7Pwqu8M6npDhzUKHVNJc
+ K2Rp/0YnJuye2ypJypPLUcL63FtQ+11yFXza4nTzMRbD9eCF8vMFVBbiMLhTgVfqv0ff
+ QMmdbmak9Stf7zm3TmeQV4n24jZSbwIiFua1ERN/jxCJrwg/m8PnaFzI0nVzsszFdqGj
+ i30GT/5NF4CpuHQ2i8xQTwL3S5AWwnwg7oZ0ipom1qT90LMyneL0HcTCZMHz1i4+PLz1
+ 3ZnGDA24EW5jORjLLH7bhamnL3hZzBKKZfxDluJDPo5ijDizwzru4W7Ro29a2kmEj+kV
+ hpNg==
+X-Gm-Message-State: ACgBeo38UZ96DEca36gP4b9/dvjTShHI0/HlpPnw+xh4X9CwqnavSdfQ
+ c6TBxVuf6S45HYMacwYcYYf//pX22SiCEkn63YUT7ccAK737lFv9uMdNADEA2x4QOElTMuI0DtZ
+ S00tB8PkUMFQQeT4hdc8JVpatvA==
+X-Received: by 2002:a17:907:75c1:b0:72f:248d:5259 with SMTP id
+ jl1-20020a17090775c100b0072f248d5259mr13677752ejc.227.1661773301035; 
+ Mon, 29 Aug 2022 04:41:41 -0700 (PDT)
+X-Google-Smtp-Source: AA6agR4EiH7klPrajd4w6phluOAxxP5+QSPfK7S4vRyR/vwmU8/fqFSjch/glWZJuzPXXquQHg2DRA==
+X-Received: by 2002:a17:907:75c1:b0:72f:248d:5259 with SMTP id
+ jl1-20020a17090775c100b0072f248d5259mr13677719ejc.227.1661773300758; 
+ Mon, 29 Aug 2022 04:41:40 -0700 (PDT)
+Received: from [10.40.98.142] ([78.108.130.194])
+ by smtp.gmail.com with ESMTPSA id
+ og4-20020a1709071dc400b0073ddfe1ea69sm4355852ejc.111.2022.08.29.04.41.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 29 Aug 2022 04:41:40 -0700 (PDT)
+Message-ID: <cbbaee7f-8ac3-0a37-9c71-3667e832a6ec@redhat.com>
+Date: Mon, 29 Aug 2022 13:41:38 +0200
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 9bd87323-c996-4b08-377b-08da88df522f
-X-MS-TrafficTypeDiagnostic: DB7PR04MB4330:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: BLYOmJmcUc3jEpgzqhD96GWklJWI02H51kk6jLLw19PTdxLikxDI+DAVRAfHLkuN9l88sIHRpXJU99v3oUv11PRBJZx9ZpmLrfzkYDOgGM8OccNp/8vQUV8O5N2s9Vn0/R2TWSpxYEFfTfU2bzTEsTAx1WhXNJAHeU2lWNK1oUxjbF1VIW8qR4IJ1ySLEkkvj7aFutUhHwjm+qZMy3u0v0Uz6fkgPZiMFkzCtEHaZOTTLsDZbrhmw5oZ1UM/+i8NUaBOYeSttqtC+F/NbGvEWyIi5pdRRabDmhuhTmxEJQIS7AVgiFYZa2etCw6BwVk9Hx4ZGkK1ZH29uE+Fbmc+AoI+nuHZQYPZDkY45lQ7SM8Hr8GvBx9eHwMSveXoTtPA4WRcdooTgXrlPSayhKaPRcRUsBaY3nixWQO0a4qjoAmNt/OGAb0udUDuQS14+STG0mcIf9A/izTG5uMEpz6+LGUYPF1hsO97zXCoQ0EIR5A4GAMOCKbDh3G/CYjyAQk2wAJRQw5PUuQo09KQ7/USMHU8Y4fURy7lwneOpmjNYDOG7xUhrXN8akx3aLdgxGwogc4TcDezxLoTAnRKL6hl/0C8HZLzch02Jq17ExUmqWmPZ1rZQcrXOFoiEdtPuqUcV9CVlTKsmXSsJTyQr+lHjK2btYdXaHMdoU8T/IDJBzjobazqLY5b5/nhIPSLirkNBmIgkC5A/uOPwap6m+zg9I7tVmiHn9tlYDQD56sZvLY=
-X-Forefront-Antispam-Report: CIP:192.38.125.140; CTRY:DK; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mailedg02pw.ku.dk; PTR:mailedg02pw.ku.dk; CAT:NONE;
- SFS:(13230016)(4636009)(346002)(136003)(396003)(376002)(39850400004)(46966006)(40470700004)(36840700001)(316002)(166002)(356005)(26005)(82310400005)(7596003)(7636003)(82740400003)(41300700001)(8936002)(5660300002)(40460700003)(478600001)(86362001)(41320700001)(6916009)(966005)(8676002)(2906002)(24736004)(108616005)(70206006)(70586007)(2616005)(21615005)(3480700007)(40480700001)(47076005)(336012)(186003)(83380400001)(1015004)(36756003)(19627405001)(36860700001)(786003);
- DIR:OUT; SFP:1102; 
-X-OriginatorOrg: di.ku.dk
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2022 10:23:16.3163 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9bd87323-c996-4b08-377b-08da88df522f
-X-MS-Exchange-CrossTenant-Id: a3927f91-cda1-4696-af89-8c9f1ceffa91
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=a3927f91-cda1-4696-af89-8c9f1ceffa91; Ip=[192.38.125.140];
- Helo=[mailedg02pw.ku.dk]
-X-MS-Exchange-CrossTenant-AuthSource: VE1EUR02FT018.eop-EUR02.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR04MB4330
-Subject: [Nouveau] Patch to TroubleShooting.html
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.10.0
+To: Daniel Dadap <ddadap@nvidia.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Xinhui <Xinhui.Pan@amd.com>, "Rafael J . Wysocki" <rafael@kernel.org>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>,
+ Lukas Wunner <lukas@wunner.de>, Mark Gross <markgross@kernel.org>,
+ Andy Shevchenko <andy@kernel.org>
+References: <20220825143726.269890-1-hdegoede@redhat.com>
+ <20220825143726.269890-18-hdegoede@redhat.com>
+ <a4d786a2-f2a2-fec7-df9d-18418c583301@nvidia.com>
+From: Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <a4d786a2-f2a2-fec7-df9d-18418c583301@nvidia.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v5 17/31] ACPI: video: Add Nvidia WMI EC
+ brightness control detection (v3)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -110,107 +100,198 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: nouveau@lists.freedesktop.org, intel-gfx <intel-gfx@lists.freedesktop.org>,
+ "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+ amd-gfx@lists.freedesktop.org, platform-driver-x86@vger.kernel.org,
+ linux-acpi@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@redhat.com>,
+ Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---_000_615912a3d56e4330923d9b42802e8b09dikudk_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Hi Nouveau
+On 8/26/22 00:21, Daniel Dadap wrote:
+> On 8/25/22 9:37 AM, Hans de Goede wrote:
+>> On some new laptop designs a new Nvidia specific WMI interface is present
+>> which gives info about panel brightness control and may allow controlling
+>> the brightness through this interface when the embedded controller is used
+>> for brightness control.
+>>
+>> When this WMI interface is present and indicates that the EC is used,
+>> then this interface should be used for brightness control.
+>>
+>> Changes in v2:
+>> - Use the new shared nvidia-wmi-ec-backlight.h header for the
+>>    WMI firmware API definitions
+>> - ACPI_VIDEO can now be enabled on non X86 too,
+>>    adjust the Kconfig changes to match this.
+>>
+>> Changes in v3:
+>> - Use WMI_BRIGHTNESS_GUID define
+>>
+>> Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+>> Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+>> ---
+>>   drivers/acpi/Kconfig           |  1 +
+>>   drivers/acpi/video_detect.c    | 37 ++++++++++++++++++++++++++++++++++
+>>   drivers/gpu/drm/gma500/Kconfig |  2 ++
+>>   drivers/gpu/drm/i915/Kconfig   |  2 ++
+>>   include/acpi/video.h           |  1 +
+>>   5 files changed, 43 insertions(+)
+>>
+>> diff --git a/drivers/acpi/Kconfig b/drivers/acpi/Kconfig
+>> index 7802d8846a8d..44ad4b6bd234 100644
+>> --- a/drivers/acpi/Kconfig
+>> +++ b/drivers/acpi/Kconfig
+>> @@ -212,6 +212,7 @@ config ACPI_VIDEO
+>>       tristate "Video"
+>>       depends on BACKLIGHT_CLASS_DEVICE
+>>       depends on INPUT
+>> +    depends on ACPI_WMI || !X86
+>>       select THERMAL
+>>       help
+>>         This driver implements the ACPI Extensions For Display Adapters
+>> diff --git a/drivers/acpi/video_detect.c b/drivers/acpi/video_detect.c
+>> index cc9d0d91e268..4dc7fb865083 100644
+>> --- a/drivers/acpi/video_detect.c
+>> +++ b/drivers/acpi/video_detect.c
+>> @@ -32,6 +32,7 @@
+>>   #include <linux/dmi.h>
+>>   #include <linux/module.h>
+>>   #include <linux/pci.h>
+>> +#include <linux/platform_data/x86/nvidia-wmi-ec-backlight.h>
+>>   #include <linux/types.h>
+>>   #include <linux/workqueue.h>
+>>   #include <acpi/video.h>
+>> @@ -75,6 +76,36 @@ find_video(acpi_handle handle, u32 lvl, void *context, void **rv)
+>>       return AE_OK;
+>>   }
+>>   +/* This depends on ACPI_WMI which is X86 only */
+>> +#ifdef CONFIG_X86
+> 
+> 
+> This could probably also provide the { return false; } stub which you have for non-x86 if the kernel is built without nvidia-wmi-ec-backight, e.g.:
+> 
+> #if defined(CONFIG_X86) && (defined(CONFIG_NVIDIA_WMI_EC_BACKLIGHT) || defined(CONFIG_NVIDIA_WMI_EC_BACKLIGHT_MODULE))
+> 
+> Although I suppose that would break things if somebody has a kernel that originally had NVIDIA_WMI_EC_BACKLIGHT=n in Kconfig, and then builds the nvidia-wmi-ec-backlight driver out-of-tree later. I don't know whether that's intended to be a supported use case, so I guess it is fine either way.
 
-Whoever is in charge of the web-pages, could I persuade you to make a minor=
- update of
+The video-detect code is about detecting what interface should be used.
+So far it does this independently of the driver implementing that interface
+actually being enabled or not.
 
-https://nouveau.freedesktop.org/TroubleShooting.html
+If someone has a system which needs the nvidia-wmi-ec-backlight driver,
+but it is disabled then they / their distro should enable that driver,
+rather then trying to fallback on e.g. acpi_video.
 
-It says (among others)
+Taking which drivers are enabled into account would both make
+the code more complicated and would also explode the test matrix.
 
-One option is to provide a custom EDID. You can do this by adding drm_kms_h=
-elper.edid_firmware=3DVGA-1:edid/your_edid.bin to the kernel command line.
+All of this is already somewhat fragile, so lets not make it
+extra complicated :)
 
-But drm_kms_helper.edid_firmware is deprecated. Furthermore, there is no me=
-ntion that the custom edid should be placed in /lib/firmware. And now we ar=
-e at it, one can supply more than one edid. So I would suggest to change th=
-e above to eg
+Regards,
 
-
-One option is to provide a custom EDID. You can do this by creating the dir=
-ectory /lib/firmware/edid (if it does not exist) and placing your custom ed=
-id file(s) there. Then add drm.edid_firmware=3Dconnector1:edid/your_edid_1.=
-bin,connector2:edid/your_edid_2.bin,... to the kernel command line. That wi=
-ll make the system use your_edid_1 for whatever is attached to connector1 a=
-nd so on. As an example, drm.edid_firmware=3DDP-1:edid/foo.bin will use /li=
-b/firmware/edid/foo.bin for whatever is attached to DisplayPort 1.
+Hans
 
 
-Cheers,
 
-Klaus
+> 
+> 
+>> +static bool nvidia_wmi_ec_supported(void)
+>> +{
+>> +    struct wmi_brightness_args args = {
+>> +        .mode = WMI_BRIGHTNESS_MODE_GET,
+>> +        .val = 0,
+>> +        .ret = 0,
+>> +    };
+>> +    struct acpi_buffer buf = { (acpi_size)sizeof(args), &args };
+>> +    acpi_status status;
+>> +
+>> +    status = wmi_evaluate_method(WMI_BRIGHTNESS_GUID, 0,
+>> +                     WMI_BRIGHTNESS_METHOD_SOURCE, &buf, &buf);
+>> +    if (ACPI_FAILURE(status))
+>> +        return false;
+>> +
+>> +    /*
+>> +     * If brightness is handled by the EC then nvidia-wmi-ec-backlight
+>> +     * should be used, else the GPU driver(s) should be used.
+>> +     */
+>> +    return args.ret == WMI_BRIGHTNESS_SOURCE_EC;
+>> +}
+>> +#else
+>> +static bool nvidia_wmi_ec_supported(void)
+>> +{
+>> +    return false;
+>> +}
+>> +#endif
+>> +
+>>   /* Force to use vendor driver when the ACPI device is known to be
+>>    * buggy */
+>>   static int video_detect_force_vendor(const struct dmi_system_id *d)
+>> @@ -541,6 +572,7 @@ static const struct dmi_system_id video_detect_dmi_table[] = {
+>>   static enum acpi_backlight_type __acpi_video_get_backlight_type(bool native)
+>>   {
+>>       static DEFINE_MUTEX(init_mutex);
+>> +    static bool nvidia_wmi_ec_present;
+>>       static bool native_available;
+>>       static bool init_done;
+>>       static long video_caps;
+>> @@ -553,6 +585,7 @@ static enum acpi_backlight_type __acpi_video_get_backlight_type(bool native)
+>>           acpi_walk_namespace(ACPI_TYPE_DEVICE, ACPI_ROOT_OBJECT,
+>>                       ACPI_UINT32_MAX, find_video, NULL,
+>>                       &video_caps, NULL);
+>> +        nvidia_wmi_ec_present = nvidia_wmi_ec_supported();
+>>           init_done = true;
+>>       }
+>>       if (native)
+>> @@ -570,6 +603,10 @@ static enum acpi_backlight_type __acpi_video_get_backlight_type(bool native)
+>>       if (acpi_backlight_dmi != acpi_backlight_undef)
+>>           return acpi_backlight_dmi;
+>>   +    /* Special cases such as nvidia_wmi_ec and apple gmux. */
+>> +    if (nvidia_wmi_ec_present)
+>> +        return acpi_backlight_nvidia_wmi_ec;
+>> +
+>>       /* On systems with ACPI video use either native or ACPI video. */
+>>       if (video_caps & ACPI_VIDEO_BACKLIGHT) {
+>>           /*
+>> diff --git a/drivers/gpu/drm/gma500/Kconfig b/drivers/gpu/drm/gma500/Kconfig
+>> index 0cff20265f97..807b989e3c77 100644
+>> --- a/drivers/gpu/drm/gma500/Kconfig
+>> +++ b/drivers/gpu/drm/gma500/Kconfig
+>> @@ -7,6 +7,8 @@ config DRM_GMA500
+>>       select ACPI_VIDEO if ACPI
+>>       select BACKLIGHT_CLASS_DEVICE if ACPI
+>>       select INPUT if ACPI
+>> +    select X86_PLATFORM_DEVICES if ACPI
+>> +    select ACPI_WMI if ACPI
+>>       help
+>>         Say yes for an experimental 2D KMS framebuffer driver for the
+>>         Intel GMA500 (Poulsbo), Intel GMA600 (Moorestown/Oak Trail) and
+>> diff --git a/drivers/gpu/drm/i915/Kconfig b/drivers/gpu/drm/i915/Kconfig
+>> index 7ae3b7d67fcf..3efce05d7b57 100644
+>> --- a/drivers/gpu/drm/i915/Kconfig
+>> +++ b/drivers/gpu/drm/i915/Kconfig
+>> @@ -23,6 +23,8 @@ config DRM_I915
+>>       # but for select to work, need to select ACPI_VIDEO's dependencies, ick
+>>       select BACKLIGHT_CLASS_DEVICE if ACPI
+>>       select INPUT if ACPI
+>> +    select X86_PLATFORM_DEVICES if ACPI
+>> +    select ACPI_WMI if ACPI
+>>       select ACPI_VIDEO if ACPI
+>>       select ACPI_BUTTON if ACPI
+>>       select SYNC_FILE
+>> diff --git a/include/acpi/video.h b/include/acpi/video.h
+>> index 0625806d3bbd..91578e77ac4e 100644
+>> --- a/include/acpi/video.h
+>> +++ b/include/acpi/video.h
+>> @@ -48,6 +48,7 @@ enum acpi_backlight_type {
+>>       acpi_backlight_video,
+>>       acpi_backlight_vendor,
+>>       acpi_backlight_native,
+>> +    acpi_backlight_nvidia_wmi_ec,
+>>   };
+>>     #if IS_ENABLED(CONFIG_ACPI_VIDEO)
+> 
 
-
---_000_615912a3d56e4330923d9b42802e8b09dikudk_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
-n-bottom:0;} --></style>
-</head>
-<body dir=3D"ltr">
-<div id=3D"divtagdefaultwrapper" style=3D"font-size:12pt;color:#000000;font=
--family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
-<p></p>
-<div>Hi Nouveau</div>
-<div><br>
-</div>
-<div>Whoever is in charge of the web-pages, could I persuade you to make a =
-minor update of<br>
-</div>
-<div><br>
-</div>
-<div><a href=3D"https://nouveau.freedesktop.org/TroubleShooting.html" class=
-=3D"OWAAutoLink" id=3D"LPlnk579623" previewremoved=3D"true">https://nouveau=
-.freedesktop.org/TroubleShooting.html</a></div>
-<div><br>
-</div>
-<div>It says (among others)<br>
-</div>
-<div><br>
-</div>
-<div>One option is to provide a custom EDID. You can do this by adding <cod=
-e>drm_kms_helper.edid_firmware=3DVGA-1:edid/your_edid.bin</code> to the ker=
-nel command line.</div>
-<div><br>
-</div>
-<div>But drm_kms_helper.edid_firmware is deprecated. Furthermore, there is =
-no mention that the custom edid should be placed in /lib/firmware. And now =
-we are at it, one can supply more than one edid. So I would suggest to chan=
-ge the above to eg<br>
-</div>
-<p></p>
-<p><br>
-</p>
-<p>One option is to provide a custom EDID. You can do this by creating the =
-directory /lib/firmware/edid (if it does not exist) and placing your custom=
- edid file(s) there. Then add drm.edid_firmware=3Dconnector1:edid/your_edid=
-_1.bin,connector2:edid/your_edid_2.bin,...
- to the kernel command line. That will make the system use your_edid_1 for =
-whatever is attached to connector1 and so on. As an example,
-<span>drm.edid_firmware=3D</span>DP-1:edid/foo.bin will use /lib/firmware/e=
-did/foo.bin for whatever is attached to DisplayPort 1.<br>
-</p>
-<p><br>
-</p>
-<p>Cheers,</p>
-<p>Klaus</p>
-<p><br>
-</p>
-</div>
-</body>
-</html>
-
---_000_615912a3d56e4330923d9b42802e8b09dikudk_--
