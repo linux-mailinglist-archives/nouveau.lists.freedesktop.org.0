@@ -1,18 +1,18 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C76895A67A4
-	for <lists+nouveau@lfdr.de>; Tue, 30 Aug 2022 17:45:57 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 362675A6BFB
+	for <lists+nouveau@lfdr.de>; Tue, 30 Aug 2022 20:21:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4CBB110E14E;
-	Tue, 30 Aug 2022 15:45:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 848C310E346;
+	Tue, 30 Aug 2022 18:21:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp.domeneshop.no (smtp.domeneshop.no
  [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6AF0210E151;
- Tue, 30 Aug 2022 15:45:35 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D6C6F10E36A;
+ Tue, 30 Aug 2022 18:20:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  ; s=ds202112;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
@@ -20,18 +20,18 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8Ocmq31Puja4OESZlCsLhCSEzQOMmNoJhX4heKRiwq4=; b=tns5VaTmz03kuJUTzM0RUHOLB4
- +ngDm3NvgS2S0bDwolvt+98eMyESiJrpMoVKNkOMRbz5xHnOiiq+0S8yotNYtN540yDjriQZa+l17
- yhCd5NvwPEJWb3nfx5mYhV8QVFFBdFedj2MV4I6fNxIAq1oPk2o0msMWHU0aa4HD/Um6wC/uAmGmM
- D7+QEUH4yxGGZ4n3ObU7SKMy3tDgS7iP8DsbBimqI+FhGsS2AITUct9vEkRsQ0WbAEqWqqFv+BgkF
- ShctodeiRqxbQO8mPwlbBB6xMNkr/kKKJPRudae4kcUBrVMIHZzJEcywm7y8QiYbMlv0UhUF+nn9/
- eEdWx1yA==;
-Received: from [2a01:799:961:d200:cca0:57ac:c55d:a485] (port=58133)
+ bh=J1JZQcvKgA7lqnC1zwDyfC5XswUSFV4j/hkox9IMNxU=; b=SLAl25bSUMxhZSABv7eYL4woup
+ SHG1vSly0sBpCrWYTQXjzaGG4enyIsWithcRKI0Rbk8CYoW2vISvghtgi5uAhg7Xk2KFCgtXqBVP8
+ BEJTo2CYFcvi3gZxqHC4j27RJEmFCQjGYHeqTENlaH9l8lcz9ny63arhCUiIyN29ao1PcdX/b0y1U
+ KO80Eeu3MT6fiRgf/d5TVYsmrHMLArEcOTo/72Cbmc4YOYPY38LwIST0gedVgnetrGZ6myBk4iuqG
+ XezaLcfqf3IJ+bVrMebTogQzt25Tz4/Grci/a7XoC7hj0hzsA5Y2xDKJbOp0ff6UDDUTcu23VeGJ2
+ WwqPydBQ==;
+Received: from [2a01:799:961:d200:cca0:57ac:c55d:a485] (port=61892)
  by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1oT3Qi-00029u-8W; Tue, 30 Aug 2022 17:45:32 +0200
-Message-ID: <daa74061-a11c-dc26-cd41-b64db17fb989@tronnes.org>
-Date: Tue, 30 Aug 2022 17:45:26 +0200
+ id 1oT5r5-0005oB-HF; Tue, 30 Aug 2022 20:20:55 +0200
+Message-ID: <36be3681-6278-aec9-4e8c-3d9fa1f89c74@tronnes.org>
+Date: Tue, 30 Aug 2022 20:20:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.13.0
@@ -48,13 +48,13 @@ To: Maxime Ripard <maxime@cerno.tech>, Maxime Ripard <mripard@kernel.org>,
  Emma Anholt <emma@anholt.net>, Daniel Vetter <daniel@ffwll.ch>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-27-459522d653a7@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v2-28-459522d653a7@cerno.tech>
 From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v2-27-459522d653a7@cerno.tech>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v2-28-459522d653a7@cerno.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v2 27/41] drm/vc4: vec: Remove redundant
- atomic_mode_set
+Subject: Re: [Nouveau] [PATCH v2 28/41] drm/vc4: vec: Fix timings for VEC
+ modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,9 +84,19 @@ Den 29.08.2022 15.11, skrev Maxime Ripard:
 > 
 > 
 > 
-> Let's remove the superfluous tv_mode field, which was redundant with the
+> This commit fixes vertical timings of the VEC (composite output) modes
 > 
-> mode field in struct drm_tv_connector_state.
+> to accurately represent the 525-line ("NTSC") and 625-line ("PAL") ITU-R
+> 
+> standards.
+> 
+> 
+> 
+> Previous timings were actually defined as 502 and 601 lines, resulting
+> 
+> in non-standard 62.69 Hz and 52 Hz signals being generated,
+> 
+> respectively.
 > 
 > 
 > 
@@ -95,168 +105,5 @@ Den 29.08.2022 15.11, skrev Maxime Ripard:
 > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 > 
 > 
-> 
-> diff --git a/drivers/gpu/drm/vc4/vc4_vec.c b/drivers/gpu/drm/vc4/vc4_vec.c
-> 
-> index 9a37c3fcc295..4d7bc7c20704 100644
-> 
-> --- a/drivers/gpu/drm/vc4/vc4_vec.c
-> 
-> +++ b/drivers/gpu/drm/vc4/vc4_vec.c
-> 
-> @@ -171,8 +171,6 @@ struct vc4_vec {
-> 
->  
-> 
->  	struct clk *clock;
-> 
->  
-> 
-> -	const struct vc4_vec_tv_mode *tv_mode;
-> 
-> -
-> 
->  	struct debugfs_regset32 regset;
-> 
->  };
-> 
->  
-> 
-> @@ -316,7 +314,6 @@ static int vc4_vec_connector_init(struct drm_device *dev, struct vc4_vec *vec)
-> 
->  	drm_object_attach_property(&connector->base,
-> 
->  				   dev->mode_config.legacy_tv_mode_property,
-> 
->  				   VC4_VEC_TV_MODE_NTSC);
-> 
-> -	vec->tv_mode = &vc4_vec_tv_modes[VC4_VEC_TV_MODE_NTSC];
-> 
->  
-> 
->  	drm_connector_attach_encoder(connector, &vec->encoder.base);
-> 
->  
-> 
-> @@ -360,6 +357,11 @@ static void vc4_vec_encoder_enable(struct drm_encoder *encoder,
-> 
->  {
-> 
->  	struct drm_device *drm = encoder->dev;
-> 
->  	struct vc4_vec *vec = encoder_to_vc4_vec(encoder);
-> 
-> +	struct drm_connector *connector = &vec->connector;
-> 
-> +	struct drm_connector_state *conn_state =
-> 
-> +		drm_atomic_get_new_connector_state(state, connector);
-> 
-> +	const struct vc4_vec_tv_mode *tv_mode =
-> 
-> +		&vc4_vec_tv_modes[conn_state->tv.mode];
-> 
->  	int idx, ret;
-> 
->  
-> 
->  	if (!drm_dev_enter(drm, &idx))
-> 
-> @@ -418,15 +420,14 @@ static void vc4_vec_encoder_enable(struct drm_encoder *encoder,
-> 
->  	/* Mask all interrupts. */
-> 
->  	VEC_WRITE(VEC_MASK0, 0);
-> 
->  
-> 
-> -	VEC_WRITE(VEC_CONFIG0, vec->tv_mode->config0);
-> 
-> -	VEC_WRITE(VEC_CONFIG1, vec->tv_mode->config1);
-> 
-> +	VEC_WRITE(VEC_CONFIG0, tv_mode->config0);
-> 
-> +	VEC_WRITE(VEC_CONFIG1, tv_mode->config1);
-> 
->  
-> 
-> -	if (vec->tv_mode->custom_freq != 0) {
-> 
-> +	if (tv_mode->custom_freq != 0) {
-> 
->  		VEC_WRITE(VEC_FREQ3_2,
-> 
-> -			  (vec->tv_mode->custom_freq >> 16) &
-> 
-> -			  0xffff);
-> 
-> +			  (tv_mode->custom_freq >> 16) & 0xffff);
-> 
->  		VEC_WRITE(VEC_FREQ1_0,
-> 
-> -			  vec->tv_mode->custom_freq & 0xffff);
-> 
-> +			  tv_mode->custom_freq & 0xffff);
-> 
 
-Nit: This patch will be smaller if you add the tv_mode variable to the
-previous patch.
-
-Reviewed-by: Noralf Trønnes <noralf@tronnes.org>
-
->  	}
-> 
->  
-> 
->  	VEC_WRITE(VEC_DAC_MISC,
-> 
-> @@ -442,15 +443,6 @@ static void vc4_vec_encoder_enable(struct drm_encoder *encoder,
-> 
->  	drm_dev_exit(idx);
-> 
->  }
-> 
->  
-> 
-> -static void vc4_vec_encoder_atomic_mode_set(struct drm_encoder *encoder,
-> 
-> -					struct drm_crtc_state *crtc_state,
-> 
-> -					struct drm_connector_state *conn_state)
-> 
-> -{
-> 
-> -	struct vc4_vec *vec = encoder_to_vc4_vec(encoder);
-> 
-> -
-> 
-> -	vec->tv_mode = &vc4_vec_tv_modes[conn_state->tv.mode];
-> 
-> -}
-> 
-> -
-> 
->  static int vc4_vec_encoder_atomic_check(struct drm_encoder *encoder,
-> 
->  					struct drm_crtc_state *crtc_state,
-> 
->  					struct drm_connector_state *conn_state)
-> 
-> @@ -470,7 +462,6 @@ static const struct drm_encoder_helper_funcs vc4_vec_encoder_helper_funcs = {
-> 
->  	.atomic_check = vc4_vec_encoder_atomic_check,
-> 
->  	.atomic_disable = vc4_vec_encoder_disable,
-> 
->  	.atomic_enable = vc4_vec_encoder_enable,
-> 
-> -	.atomic_mode_set = vc4_vec_encoder_atomic_mode_set,
-> 
->  };
-> 
->  
-> 
->  static int vc4_vec_late_register(struct drm_encoder *encoder)
-> 
-> 
-> 
+Acked-by: Noralf Trønnes <noralf@tronnes.org>
