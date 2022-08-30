@@ -1,82 +1,82 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C7FE5AF611
-	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:32:50 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B65775AF602
+	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:32:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A8CE210EAB9;
-	Tue,  6 Sep 2022 20:31:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3116410EABD;
+	Tue,  6 Sep 2022 20:31:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 432 seconds by postgrey-1.36 at gabe;
- Tue, 30 Aug 2022 08:37:49 UTC
-Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com
- [66.111.4.230])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CD32610ECA6;
- Tue, 30 Aug 2022 08:37:49 +0000 (UTC)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailnew.nyi.internal (Postfix) with ESMTP id 463805802C7;
- Tue, 30 Aug 2022 04:30:34 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute1.internal (MEProxy); Tue, 30 Aug 2022 04:30:34 -0400
+Received: from new1-smtp.messagingengine.com (new1-smtp.messagingengine.com
+ [66.111.4.221])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 21B9E10E073;
+ Tue, 30 Aug 2022 12:03:38 +0000 (UTC)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailnew.nyi.internal (Postfix) with ESMTP id 7213D5802D9;
+ Tue, 30 Aug 2022 08:03:36 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute5.internal (MEProxy); Tue, 30 Aug 2022 08:03:36 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm3; t=1661848234; x=1661855434; bh=4FUstz1Bdi
- VLP6X4LQhEKrnrrNlVhEnXxEPj4uh/Uzc=; b=IwLeeCxHNRnnHplBJu0uEHdvBM
- aTXoBi+yXbvI1LRc1fjNBjfcVSdO/hdeATXGukUSmaY+CVsFuj+TL0LGx9JwwH6X
- ruDV2qvOwgNN8CaCjJVUnhzSXPtsF4mYoU32TF1G1zEDrUMstky99Zls/qtiRLlp
- vv3qb3dV+dXuSuvOR+mGjWCUEBSf++O3L+VjhmGmvOPZOvqNztvcAto4U+DwvJHN
- tqvHCuUjkPNExJKVizhc+vfaOLhrQfzbayzK0rS3VENI1jv8wSyTrFHDfanT7Mea
- KA9iUR1eMVX1uYIE6eNmLRV9OZGrCkdu1Rsjl+6UlDPhKg81hscFVpwnytSg==
+ :cc:content-transfer-encoding:content-type:date:date:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:sender:subject:subject:to:to; s=fm3; t=1661861016; x=
+ 1661868216; bh=Un4EFnpmCrjF0op+CQJbf6xj3KV7/HPMuOuXK7AEo2I=; b=D
+ tvEwgKsQqnUenjfacp4PZwK0ZhaN/HT87mq75are5HFk0XfZglYSMRXUP2aNVpdO
+ tabv3AyDoz4CT5k++l9c3y9JHGnsYqDVm7cgR/iWQye24reLcluU/RRGezMHMa3o
+ 26lJD1g9RgnfgW/OANYyo9K4c6vWlN71CduB2tRPAJqZq16cgjpZieIr87H4Jlg7
+ CMhS9/azps7Am17rwoqUK1Uzi2DSu+b8JpaWS9CO4G+HZmfnAPs/5HNsjBkwTnzN
+ ipQSgsrTKotKvLM9y8XxkH7d+I9Z2kpDV/7B7h5Pj3SpiRe4LvYuUnsxAp9CyoMZ
+ AwL0Hm7CQETZv9e626ipQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
- :feedback-id:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:sender:subject:subject:to:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm1; t=1661848234; x=1661855434; bh=4FUstz1BdiVLP6X4LQhEKrnrrNlV
- hEnXxEPj4uh/Uzc=; b=VY1TwponrynsBGb2Snb/BnT4rJ9pJQhDKxd78cdIbUX9
- 6AxFqi7dRDzyAYcvj5HtMBKVhKUvl4W0TexfsYxn8V+xFBtHJEslz2LNvzttkFsH
- /6Pi1kWvB/2gY8+kKcCJSWFDnJHk6Zj9joSEwfldwv6IXEAlxNcDSwdZRYZVd/Oj
- M1AxJ4MSE7H5rO+anPZH6Ipafz8iUxQkpOvd6l+++sRSrZ3/ceLVQQZKZ1Wqjgko
- adCpQ1ir2EaVLWlhLSipPArFb+2WFsyCv9OcH7VGySo7bMxpXRCHyEYkte5mO9FM
- 9OZRQ8OpQbv/buBYNMxNNd8RpDdUm8cctKGuGh3tuQ==
-X-ME-Sender: <xms:qcoNYwawP1IXm3fK0yP5jIgva-SrXuCVr3NTEC2ugz4C-wkPIv8FfA>
- <xme:qcoNY7Zywf4imp57iJHNpz4v_t0D_ZueD5CSc5PgrSSbZqN1ONdHebkTTWsbLMLy9
- L0MDFC0F7OPrQhXUTA>
-X-ME-Received: <xmr:qcoNY6-zldDE4xfplIzn_iqdhrG2YgeLzyJhQ7dwPHpiWJ-XAu50dlBMJek>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdekfedgtdegucetufdoteggodetrfdotf
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:date:date:feedback-id:feedback-id:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1661861016; x=
+ 1661868216; bh=Un4EFnpmCrjF0op+CQJbf6xj3KV7/HPMuOuXK7AEo2I=; b=3
+ 6dbXYWyKPwm/+6hbuyU/giI2uQ63drNFQSePRhBlilQ67WGUWjcWLI1p+LqEK73g
+ fs0NRJU95nYgN8bDHN8FFYkRwp8xIREz5mPdBI26UdsvXS/065X+RwB5GxhnS7De
+ rKK6aH8bgofjNfDGB4pg6ieTA8OIAtlPiMqiN5aA38ZA7g7KDM7sUn9DyxZVOCOe
+ vrAeQ7vrwxvCPu8swnYxmAZY1Ax1Ud1UUMQ8fqiDPb28jmFFKhi09+a0LWmcu3Xn
+ 7E4+8+7+U/xAMvq+LZ7fMjdTdaqwxfwhcecTw/1UJu+ZPvkslXODYswUAoZdUdOo
+ vaJgClnI41QuGh/kzRTgA==
+X-ME-Sender: <xms:l_wNY6oGFCuPrXLu_lICDTdCbSEu35J3iVJVjDE6nUcPvveRoHEZiw>
+ <xme:l_wNY4quMS5CXVM1erpTf7cw2djyVbwpuQRrcz2Jhxok1vKHyOF8yaKwhraLbbSse
+ sSXcX3CLE88lmpFNxA>
+X-ME-Received: <xmr:l_wNY_Okj9gTra9L6Fm8reAM8HlENdzUrpVeFZ0H_Ckc2Ky9DkU-Uuh76b0>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdekfedggeelucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
- mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeeftdejhfekgfduvddvgeevffeiveffteehgedtjeelfeduueeuhfekjefh
- hffgffenucffohhmrghinhepmhgrgidrlhhotggrlhenucevlhhushhtvghrufhiiigvpe
- dtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:qcoNY6onZPviIhwSYvBeRKcG6o_HyOB_7VUs5qJTBcvfqTsSqHPaTQ>
- <xmx:qcoNY7pjQz4HVW1I7ePRGqWGCYVFV3KY73QTcSDGxsxn40UVXX7KLQ>
- <xmx:qcoNY4QuqcqbOIu9G-PHQ8wW9uvJ6fihdnYWwavt2xeqOYSWkXDrjg>
- <xmx:qsoNY-XFNnJ7L38ytACCjp3Se_yk12cV6NtY0McxE-kxiWUyyTmSTA>
+ cujfgurhepfffhvfevuffkfhggtggugfgjsehtqhertddttddvnecuhfhrohhmpeforgig
+ ihhmvgcutfhiphgrrhguuceomhgrgihimhgvsegtvghrnhhordhtvggthheqnecuggftrf
+ grthhtvghrnheptefgleeggfegkeekgffgleduieduffejffegveevkeejudektdduueet
+ feetfefgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomh
+ epmhgrgihimhgvsegtvghrnhhordhtvggthh
+X-ME-Proxy: <xmx:l_wNY575QlKLJhE0dUITZhr1Y2xjKtL3jvcKcW6f6p2TbHDxlpTffA>
+ <xmx:l_wNY54AtJBpBRMzVSilS5LlYoWV0xW1oilUo4CAO7DJ4OoEQbFw9A>
+ <xmx:l_wNY5jTwGvBb8C8tqMpNARDm_YnrE5LfgJuayPRMJOXWiSvsec9ig>
+ <xmx:mPwNY16sLANYyD2X2vgc2p_03AS9Unm3tT13yoQ8vkPx2iJxXj6aNQ>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 30 Aug 2022 04:30:32 -0400 (EDT)
-Date: Tue, 30 Aug 2022 10:30:27 +0200
+ 30 Aug 2022 08:03:34 -0400 (EDT)
+Date: Tue, 30 Aug 2022 14:03:30 +0200
 From: Maxime Ripard <maxime@cerno.tech>
-To: Konstantin Ryabitsev <konstantin@linuxfoundation.org>
-Message-ID: <20220830083027.4iyi2s5r5bto4h2e@houat>
+To: Jani Nikula <jani.nikula@linux.intel.com>
+Message-ID: <20220830120330.6f5f22d35gu7cbr3@houat>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-1-459522d653a7@cerno.tech>
- <f6289e5d-98e3-1a0d-f514-136e2b7978c1@tronnes.org>
- <20220829190242.tk2hinttzzmzhnaj@meerkat.local>
+ <20220728-rpi-analog-tv-properties-v2-14-459522d653a7@cerno.tech>
+ <CAMuHMdV9wVgHFfwHoqtBoYzJDnjDmKTfaZkAKvTVKh1Y-2x1pA@mail.gmail.com>
+ <87czcidnb8.fsf@intel.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="d3pufob2ilu477zw"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220829190242.tk2hinttzzmzhnaj@meerkat.local>
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <87czcidnb8.fsf@intel.com>
 X-Mailman-Approved-At: Tue, 06 Sep 2022 20:31:04 +0000
-Subject: Re: [Nouveau] [PATCH v2 01/41] drm/tests: Order Kunit tests in
- Makefile
+Subject: Re: [Nouveau] [PATCH v2 14/41] drm/modes: Move named modes parsing
+ to a separate function
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,224 +88,61 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+Cc: David Airlie <airlied@linux.ie>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
+ Samuel Holland <samuel@sholland.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
+ linux-sunxi@lists.linux.dev,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
- linux-arm-kernel@lists.infradead.org,
+ Hans de Goede <hdegoede@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
+ Dom Cobley <dom@raspberrypi.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
  Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
  Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi,
 
---d3pufob2ilu477zw
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi Konstantin,
-
-On Mon, Aug 29, 2022 at 03:02:42PM -0400, Konstantin Ryabitsev wrote:
-> On Mon, Aug 29, 2022 at 08:46:42PM +0200, Noralf Tr=F8nnes wrote:
-> > Something has gone wrong with this patchset, there are double line endi=
-ngs.
+On Tue, Aug 30, 2022 at 01:43:07PM +0300, Jani Nikula wrote:
+> On Tue, 30 Aug 2022, Geert Uytterhoeven <geert@linux-m68k.org> wrote:
+> > On Mon, Aug 29, 2022 at 3:13 PM Maxime Ripard <maxime@cerno.tech> wrote:
+> >> +#define STR_STRICT_EQ(str, len, cmp) \
+> >> +       ((strlen(cmp) =3D=3D len) && !strncmp(str, cmp, len))
+> >
+> > This is not part of the move, but newly added.
 >=20
-> I noticed this, too, and I think the reason is because these patches were
-> generated with "b4 send -o", but actually sent using git-send-email. It's=
- not
-> a use-case I've considered (or tested) and the breakage is because when b4
-> generates patches with "-o", they are written with CRLF line endings, whi=
-ch is
-> not something git-send-email expects.
+> The same construct is also duplicated elsewhere in the series, and I
+> kept being confused by it.
 
-You're right
+I'm not sure what is confusing, but I can add a comment if needed.
 
-> Maxime, any reason you went this direction instead of just letting b4 send
-> these patches directly?
+> The above is precisely the same as:
+>=20
+> 	str_has_prefix(str, cmp) =3D=3D len
 
-For some reason, b4 send doesn't work for my setup and I haven't had the
-time to look into why and let you know.
+Here, it's used to make sure we don't have a named mode starting with
+either e, d, or D.
 
-Whenever I used b4 send (on this series for example) I get:
+If I understood str_has_prefix() right, str_has_prefix("DUMB-MODE", "D")
+=3D=3D strlen("DUMB-MODE") would return true, while it's actually what we
+want to avoid.
 
-$ b4 send
-Converted the branch to 41 patches
-Populating the To: and Cc: fields with automatically collected addresses
-Invoking get_maintainer.pl for To: addresses
-Invoking get_maintainer.pl for Cc: addresses
-Will send the following messages:
----
-To: David Airlie <airlied@linux.ie>
-    Daniel Vetter <daniel@ffwll.ch>
-    Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-    Maxime Ripard <mripard@kernel.org>
-    Thomas Zimmermann <tzimmermann@suse.de>
-    Noralf Tr=F8nnes <noralf@tronnes.org>
-    Emma Anholt <emma@anholt.net>
-    Ben Skeggs <bskeggs@redhat.com>
-    Karol Herbst <kherbst@redhat.com>
-    Lyude Paul <lyude@redhat.com>
-    Jani Nikula <jani.nikula@linux.intel.com>
-    Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
-    Rodrigo Vivi <rodrigo.vivi@intel.com>
-    Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-    Chen-Yu Tsai <wens@csie.org>
-    Jernej Skrabec <jernej.skrabec@gmail.com>
-    Samuel Holland <samuel@sholland.org>
-    Philipp Zabel <p.zabel@pengutronix.de>
-Cc: dri-devel@lists.freedesktop.org
-    linux-kernel@vger.kernel.org
-    nouveau@lists.freedesktop.org
-    intel-gfx@lists.freedesktop.org
-    linux-arm-kernel@lists.infradead.org
-    linux-sunxi@lists.linux.dev
-    Dom Cobley <dom@raspberrypi.com>
-    Maxime Ripard <maxime@cerno.tech>
-    Geert Uytterhoeven <geert@linux-m68k.org>
-    Hans de Goede <hdegoede@redhat.com>
-    Dave Stevenson <dave.stevenson@raspberrypi.com>
-    Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
-    Phil Elwell <phil@raspberrypi.com>
----
-  [PATCH v2 00/41] drm: Analog TV Improvements
-  [PATCH v2 01/41] drm/tests: Order Kunit tests in Makefile
-  [PATCH v2 02/41] drm/tests: Add Kunit Helpers
-  [PATCH v2 03/41] drm/atomic-helper: Rename drm_atomic_helper_connector_tv=
-_reset to avoid ambiguity
-  [PATCH v2 04/41] drm/connector: Rename subconnector state variable
-  [PATCH v2 05/41] drm/atomic: Add TV subconnector property to get/set_prop=
-erty
-  [PATCH v2 06/41] drm/connector: Rename legacy TV property
-  [PATCH v2 07/41] drm/connector: Only register TV mode property if present
-  [PATCH v2 08/41] drm/connector: Rename drm_mode_create_tv_properties
-  [PATCH v2 09/41] drm/connector: Add TV standard property
-  [PATCH v2 10/41] drm/modes: Add a function to generate analog display mod=
-es
-  [PATCH v2 11/41] drm/modes: Only consider bpp and refresh before options
-  [PATCH v2 12/41] drm/modes: parse_cmdline: Add support for named modes co=
-ntaining dashes
-  [PATCH v2 13/41] drm/client: Add some tests for drm_connector_pick_cmdlin=
-e_mode()
-  [PATCH v2 14/41] drm/modes: Move named modes parsing to a separate functi=
-on
-  [PATCH v2 15/41] drm/modes: Switch to named mode descriptors
-  [PATCH v2 16/41] drm/modes: Fill drm_cmdline mode from named modes
-  [PATCH v2 17/41] drm/connector: Add pixel clock to cmdline mode
-  [PATCH v2 18/41] drm/connector: Add a function to lookup a TV mode by its=
- name
-  [PATCH v2 19/41] drm/modes: Introduce the tv_mode property as a command-l=
-ine option
-  [PATCH v2 20/41] drm/modes: Properly generate a drm_display_mode from a n=
-amed mode
-  [PATCH v2 21/41] drm/modes: Introduce more named modes
-  [PATCH v2 22/41] drm/atomic-helper: Add a TV properties reset helper
-  [PATCH v2 23/41] drm/atomic-helper: Add an analog TV atomic_check impleme=
-ntation
-  [PATCH v2 24/41] drm/vc4: vec: Remove empty mode_fixup
-  [PATCH v2 25/41] drm/vc4: vec: Convert to atomic helpers
-  [PATCH v2 26/41] drm/vc4: vec: Refactor VEC TV mode setting
-  [PATCH v2 27/41] drm/vc4: vec: Remove redundant atomic_mode_set
-  [PATCH v2 28/41] drm/vc4: vec: Fix timings for VEC modes
-  [PATCH v2 29/41] drm/vc4: vec: Switch for common modes
-  [PATCH v2 30/41] drm/vc4: vec: Fix definition of PAL-M mode
-  [PATCH v2 31/41] drm/vc4: vec: Use TV Reset implementation
-  [PATCH v2 32/41] drm/vc4: vec: Convert to the new TV mode property
-  [PATCH v2 33/41] drm/vc4: vec: Add support for more analog TV standards
-  [PATCH v2 34/41] drm/sun4i: tv: Remove unused mode_valid
-  [PATCH v2 35/41] drm/sun4i: tv: Convert to atomic hooks
-  [PATCH v2 36/41] drm/sun4i: tv: Merge mode_set into atomic_enable
-  [PATCH v2 37/41] drm/sun4i: tv: Remove useless function
-  [PATCH v2 38/41] drm/sun4i: tv: Remove useless destroy function
-  [PATCH v2 39/41] drm/sun4i: tv: Rename error label
-  [PATCH v2 40/41] drm/sun4i: tv: Add missing reset assertion
-  [PATCH v2 41/41] drm/sun4i: tv: Convert to the new TV mode property
----
-Press Enter to send or Ctrl-C to abort
-  [PATCH v2 00/41] drm: Analog TV Improvements
-  [PATCH v2 01/41] drm/tests: Order Kunit tests in Makefile
-  [PATCH v2 02/41] drm/tests: Add Kunit Helpers
-  [PATCH v2 03/41] drm/atomic-helper: Rename drm_atomic_helper_connector_tv=
-_reset to avoid ambiguity
-  [PATCH v2 04/41] drm/connector: Rename subconnector state variable
-  [PATCH v2 05/41] drm/atomic: Add TV subconnector property to get/set_prop=
-erty
-  [PATCH v2 06/41] drm/connector: Rename legacy TV property
-  [PATCH v2 07/41] drm/connector: Only register TV mode property if present
-  [PATCH v2 08/41] drm/connector: Rename drm_mode_create_tv_properties
-  [PATCH v2 09/41] drm/connector: Add TV standard property
-  [PATCH v2 10/41] drm/modes: Add a function to generate analog display mod=
-es
-  [PATCH v2 11/41] drm/modes: Only consider bpp and refresh before options
-  [PATCH v2 12/41] drm/modes: parse_cmdline: Add support for named modes co=
-ntaining dashes
-  [PATCH v2 13/41] drm/client: Add some tests for drm_connector_pick_cmdlin=
-e_mode()
-  [PATCH v2 14/41] drm/modes: Move named modes parsing to a separate functi=
-on
-  [PATCH v2 15/41] drm/modes: Switch to named mode descriptors
-  [PATCH v2 16/41] drm/modes: Fill drm_cmdline mode from named modes
-  [PATCH v2 17/41] drm/connector: Add pixel clock to cmdline mode
-  [PATCH v2 18/41] drm/connector: Add a function to lookup a TV mode by its=
- name
-  [PATCH v2 19/41] drm/modes: Introduce the tv_mode property as a command-l=
-ine option
-  [PATCH v2 20/41] drm/modes: Properly generate a drm_display_mode from a n=
-amed mode
-  [PATCH v2 21/41] drm/modes: Introduce more named modes
-  [PATCH v2 22/41] drm/atomic-helper: Add a TV properties reset helper
-  [PATCH v2 23/41] drm/atomic-helper: Add an analog TV atomic_check impleme=
-ntation
-  [PATCH v2 24/41] drm/vc4: vec: Remove empty mode_fixup
-  [PATCH v2 25/41] drm/vc4: vec: Convert to atomic helpers
-  [PATCH v2 26/41] drm/vc4: vec: Refactor VEC TV mode setting
-  [PATCH v2 27/41] drm/vc4: vec: Remove redundant atomic_mode_set
-  [PATCH v2 28/41] drm/vc4: vec: Fix timings for VEC modes
-  [PATCH v2 29/41] drm/vc4: vec: Switch for common modes
-  [PATCH v2 30/41] drm/vc4: vec: Fix definition of PAL-M mode
-  [PATCH v2 31/41] drm/vc4: vec: Use TV Reset implementation
-  [PATCH v2 32/41] drm/vc4: vec: Convert to the new TV mode property
-  [PATCH v2 33/41] drm/vc4: vec: Add support for more analog TV standards
-  [PATCH v2 34/41] drm/sun4i: tv: Remove unused mode_valid
-  [PATCH v2 35/41] drm/sun4i: tv: Convert to atomic hooks
-  [PATCH v2 36/41] drm/sun4i: tv: Merge mode_set into atomic_enable
-  [PATCH v2 37/41] drm/sun4i: tv: Remove useless function
-  [PATCH v2 38/41] drm/sun4i: tv: Remove useless destroy function
-  [PATCH v2 39/41] drm/sun4i: tv: Rename error label
-  [PATCH v2 40/41] drm/sun4i: tv: Add missing reset assertion
-  [PATCH v2 41/41] drm/sun4i: tv: Convert to the new TV mode property
-Connecting to /home/max/.local/bin/msmtpq:0
-Failed to configure the smtp connection:
-[Errno -2] Name or service not known
+It's also used indeed in drm_get_tv_mode_from_name(), where we try to
+match a list of names with one passed as argument.
 
-msmtpq is basically a sendmail-like tool to queue the mails if the
-machine is offline. It is setup in my git config as
-sendemail.smtpserver.
-
-git-send-email works just fine, but somehow b4 send fails. I think it's
-due to cmd_send calling b4.get_smtp() and expecting to get some
-credentials out of it?
+With drm_get_tv_mode_from_name("NSTC", strlen("NTSC")), we would end up
+calling str_has_prefix("NTSC-J", "NTSC") =3D=3D strlen("NTSC-J") which would
+work. However, we end up calling prefix not a prefix, but an entire
+string we want to match against, which is very confusing to me too.
 
 Maxime
-
---d3pufob2ilu477zw
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYw3KowAKCRDj7w1vZxhR
-xaIZAP42+l/5+Eqvr3A62fk6KM1Kbbg5h0I1Z6ZpYaKL2WMNSwEAs+r4YZvtTzHT
-3urI7OZ931zTG5k+e3FRpMF2caXz1ws=
-=nwvM
------END PGP SIGNATURE-----
-
---d3pufob2ilu477zw--
