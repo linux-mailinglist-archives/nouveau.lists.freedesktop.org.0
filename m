@@ -2,43 +2,37 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C6B45AF5F5
-	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:32:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AE4E5AF5FE
+	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:32:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2B1FD10EAA4;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 96AFC10EA9F;
 	Tue,  6 Sep 2022 20:31:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mx1.riseup.net (mx1.riseup.net [198.252.153.129])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6402810E0A4;
- Tue, 30 Aug 2022 12:35:09 +0000 (UTC)
-Received: from mx0.riseup.net (mx0-pn.riseup.net [10.0.1.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
- client-signature RSA-PSS (2048 bits) client-digest SHA256)
- (Client CN "mx0.riseup.net", Issuer "R3" (not verified))
- by mx1.riseup.net (Postfix) with ESMTPS id 4MH6G50WpdzDq8C;
- Tue, 30 Aug 2022 12:35:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
- t=1661862909; bh=OW5Si2V5toqtmIHNaREVvGMPB0YJovcvgLjrqBDWMP0=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=sJOov+GcghC5q+15B3FrvUZskz5FApsWVHg7UzpSfpgIIbvhL+9oYgrrxpClm3Zpw
- bQYu8mtcM4BYG+d0oOsmcx6neeuoVkueagRNKoAyQKVPJbS9GNatruZnTk3NVfxeuJ
- bwPhCGooiKAkIjBIvcNElk0jyFZ5onYpFiEiZsyY=
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4CA2C10E0AB;
+ Tue, 30 Aug 2022 12:44:16 +0000 (UTC)
 Received: from fews1.riseup.net (fews1-pn.riseup.net [10.0.1.83])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
  client-signature RSA-PSS (2048 bits) client-digest SHA256)
  (Client CN "mail.riseup.net", Issuer "R3" (not verified))
- by mx0.riseup.net (Postfix) with ESMTPS id 4MH6G33z0Jz9spH;
- Tue, 30 Aug 2022 12:35:07 +0000 (UTC)
-X-Riseup-User-ID: BBFF72A898285B82B5AA53FEBBD26A988533D0558A62D62D26F14A98968C09B5
+ by mx1.riseup.net (Postfix) with ESMTPS id 4MH6SZ4KNnzDqYX;
+ Tue, 30 Aug 2022 12:44:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
+ t=1661863455; bh=uZMlrgjdtYHPfnYgaoLEQXYNDFmWqkQNUlugxV7e01Y=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=nn107C3HMKJ3EWboC9fBpeFAH3y/uZ1KjPZ08ApweCMS5qqRUGsyCU4sj4TPMD4V2
+ FXAIjjOhdjbHG+ioenblciw6poCAjWfiza/YFNCFS8O2MJGpolad6x7SZAwuOVzG46
+ wyq78GJSkRl5qnfSCdVdIs3k6a+QiliQYkFs/kZc=
+X-Riseup-User-ID: F5CCEA00DF4334D3899ABC01531EBEE332C82C80DFBDDAC361B7E3BA0D8BEA06
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by fews1.riseup.net (Postfix) with ESMTPSA id 4MH6Fs35Yvz5vP3;
- Tue, 30 Aug 2022 12:34:57 +0000 (UTC)
-Message-ID: <1109a3f0-3b07-e354-91dc-b786370f5ccf@riseup.net>
-Date: Tue, 30 Aug 2022 09:34:53 -0300
+ by fews1.riseup.net (Postfix) with ESMTPSA id 4MH6SP4gKBz5vXJ;
+ Tue, 30 Aug 2022 12:44:05 +0000 (UTC)
+Message-ID: <89ae0eb2-7838-6bb0-65b8-02ec0a6bb564@riseup.net>
+Date: Tue, 30 Aug 2022 09:44:03 -0300
 MIME-Version: 1.0
+Content-Language: en-US
 To: Maxime Ripard <maxime@cerno.tech>, Maxime Ripard <mripard@kernel.org>,
  Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
  Chen-Yu Tsai <wens@csie.org>, Thomas Zimmermann <tzimmermann@suse.de>,
@@ -81,8 +75,6 @@ Cc: Dom Cobley <dom@raspberrypi.com>, Phil Elwell <phil@raspberrypi.com>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Maxime,
-
 On 8/29/22 10:11, Maxime Ripard wrote:
 > Our new tv mode option allows to specify the TV mode from a property.
 > However, it can still be useful, for example to avoid any boot time
@@ -105,18 +97,6 @@ On 8/29/22 10:11, Maxime Ripard wrote:
 > +{
 > +	const char *value;
 > +	unsigned int len;
-
-Looks like this variable len is not being used and is producing the
-following warning:
-
-../drivers/gpu/drm/drm_modes.c:2122:15: warning: unused variable 'len'
-[-Wunused-variable]
-        unsigned int len;
-                     ^
-
-Best Regards,
-- Maíra Canal
-
 > +	int ret;
 > +
 > +	if (*delim != '=')
@@ -367,6 +347,13 @@ Best Regards,
 > +				    drm_mode_analog_pal_576i(NULL),
 > +				    DRM_MODE_TV_MODE_SECAM_L);
 > +}
+
+Instead of creating a function to each drm_cmdline_test_tv_options test,
+you can create a parameterized test [1] for this function. This will
+help the readability of the tests.
+
+[1] https://docs.kernel.org/dev-tools/kunit/usage.html#parameterized-testing
+
 > +
 > +static void drm_cmdline_test_tv_option_invalid(struct kunit *test)
 > +{
@@ -386,6 +373,17 @@ Best Regards,
 > +									   &no_connector, &mode));
 > +}
 > +
+
+I guess this tests can be incorporated in the future to the negative
+tests from Michał Winiarski [2]. I don't know which one will be merged
+first.
+
+[2]
+https://lore.kernel.org/dri-devel/20220817211236.252091-1-michal.winiarski@intel.com/
+
+Best Regards,
+- Maíra Canal
+
 >  static void drm_cmdline_test_invalid_option(struct kunit *test)
 >  {
 >  	struct drm_cmdline_mode mode = { };
