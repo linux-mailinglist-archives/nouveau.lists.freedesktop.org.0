@@ -1,62 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D14A45A5438
-	for <lists+nouveau@lfdr.de>; Mon, 29 Aug 2022 20:53:08 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4752A5A6049
+	for <lists+nouveau@lfdr.de>; Tue, 30 Aug 2022 12:07:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4AE9C10E5B2;
-	Mon, 29 Aug 2022 18:53:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8CFCD10E02E;
+	Tue, 30 Aug 2022 10:07:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 364 seconds by postgrey-1.36 at gabe;
- Mon, 29 Aug 2022 18:53:00 UTC
-Received: from smtp.domeneshop.no (smtp.domeneshop.no
- [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4047410E5B2;
- Mon, 29 Aug 2022 18:53:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
- ; s=ds202112;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LIXwPXe6uDCw8puUWwXJwlt9Qctgfa7237R9Ay9Rr94=; b=lEkiEUddmC83T3gPlX9iC1HPqE
- SNqV0HNvj3WohDUJb3awRux40lCfk6tyQB/y/P0NkxAmJvnLotHmUwjl8aOOgP7Mq2i6NQQK+Qfzy
- aGX/MisxWkzuPdRvBFUrgVFV5Pp5E73ZOuHT2POkj46RBMOqXiYPFKcqFeqYAz83p2JMvS2jO7pEf
- 1Nfovc1pcY/rW+YbwdLiXSg03RCMaci4y5cXg2twznwbCvQHEeFLKuqBYsK06/LVq5t3DUgZOvADK
- 7zf9RrPQcFL/TgKO86KFtdoAnMH8IPBBc/k4+dp4YbP4PPdWhQGbwwkVcLgx7cXqgK+UELGvisvi2
- nlmQP40g==;
-Received: from [2a01:799:961:d200:cca0:57ac:c55d:a485] (port=60573)
- by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1oSjme-00079u-AJ; Mon, 29 Aug 2022 20:46:52 +0200
-Message-ID: <f6289e5d-98e3-1a0d-f514-136e2b7978c1@tronnes.org>
-Date: Mon, 29 Aug 2022 20:46:42 +0200
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
+ [209.85.160.174])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 01FC210E00C;
+ Tue, 30 Aug 2022 10:07:09 +0000 (UTC)
+Received: by mail-qt1-f174.google.com with SMTP id c20so8094973qtw.8;
+ Tue, 30 Aug 2022 03:07:09 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc;
+ bh=B6sPmfOEwPF2h7f07mGfudT4aQe+F6kN6ETICFIZHMY=;
+ b=o4+XEGitnnYqoqgpcZSIvG7RMttE7byKzwJfldKa3rgmfRywsHWOGZFZwmR2Gys3GK
+ NtKbFA4Ho3GdaYUwo1PZp0O5x+Ew5maD9izZYp0K3w5A+S+o3xxRmpJLw1ZDaxSO+Opu
+ ZIitImslMx8RuWP9OEpkuQXeILQVLpe4ZzS210YKI1eSqoK0Hm/Op/33kMjkZ2QEgBZa
+ iB3YzwubfFebxXwhtqPNBYhJSH1Sib+OUA59igCYBo+Q2rL6gK4Mgl68Cf16R8co5pmg
+ /pjeR7ohR8Zgp3Hp+DyoQndiNBvDVXbMZvo7swgW+BGcGusDvHsKPjfU8iJP/uHesJJu
+ xOWw==
+X-Gm-Message-State: ACgBeo0ssKdgqMiDSPPeZ6qKYLi2evRqxWnKGweBCspI4XCBekPqnvi/
+ QBjMt8x+kFOxEx+EbSZRe/Nvr/zLpz8l8g==
+X-Google-Smtp-Source: AA6agR7HTStCAJjuMUvrtkPAuP1jQedksE3tAKTXBMgTCKhbb2AQh+bPCaiA2m4ZBWoTGlm8li0dLA==
+X-Received: by 2002:a05:622a:1788:b0:344:7c86:f9a1 with SMTP id
+ s8-20020a05622a178800b003447c86f9a1mr13617175qtk.22.1661854028519; 
+ Tue, 30 Aug 2022 03:07:08 -0700 (PDT)
+Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com.
+ [209.85.128.169]) by smtp.gmail.com with ESMTPSA id
+ az11-20020a05620a170b00b006bbd0ae9c05sm8039630qkb.130.2022.08.30.03.07.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 30 Aug 2022 03:07:07 -0700 (PDT)
+Received: by mail-yw1-f169.google.com with SMTP id
+ 00721157ae682-3321c2a8d4cso260683937b3.5; 
+ Tue, 30 Aug 2022 03:07:07 -0700 (PDT)
+X-Received: by 2002:a25:8e84:0:b0:696:466c:baa with SMTP id
+ q4-20020a258e84000000b00696466c0baamr10033148ybl.604.1661854027231; Tue, 30
+ Aug 2022 03:07:07 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.0
-To: Maxime Ripard <maxime@cerno.tech>, Maxime Ripard <mripard@kernel.org>,
- Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Chen-Yu Tsai <wens@csie.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Jani Nikula <jani.nikula@linux.intel.com>, Lyude Paul <lyude@redhat.com>,
- Philipp Zabel <p.zabel@pengutronix.de>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>, Karol Herbst <kherbst@redhat.com>,
- Emma Anholt <emma@anholt.net>, Daniel Vetter <daniel@ffwll.ch>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-1-459522d653a7@cerno.tech>
-From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v2-1-459522d653a7@cerno.tech>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH v2 01/41] drm/tests: Order Kunit tests in
- Makefile
+ <20220728-rpi-analog-tv-properties-v2-14-459522d653a7@cerno.tech>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v2-14-459522d653a7@cerno.tech>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Tue, 30 Aug 2022 12:06:55 +0200
+X-Gmail-Original-Message-ID: <CAMuHMdV9wVgHFfwHoqtBoYzJDnjDmKTfaZkAKvTVKh1Y-2x1pA@mail.gmail.com>
+Message-ID: <CAMuHMdV9wVgHFfwHoqtBoYzJDnjDmKTfaZkAKvTVKh1Y-2x1pA@mail.gmail.com>
+To: Maxime Ripard <maxime@cerno.tech>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH v2 14/41] drm/modes: Move named modes parsing
+ to a separate function
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,106 +66,163 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
- Hans de Goede <hdegoede@redhat.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>,
+Cc: David Airlie <airlied@linux.ie>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Dom Cobley <dom@raspberrypi.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
+ =?UTF-8?Q?Noralf_Tr=C3=B8nnes?= <noralf@tronnes.org>,
+ Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi Maxime,
 
-
-Den 29.08.2022 15.11, skrev Maxime Ripard:
-> Since we've recently added a ton of tests, the list starts to be a bit
-> 
-> of a mess and creates unneeded conflicts.
-> 
-> 
-> 
-> Let's order it alphabetically.
-> 
-> 
-> 
+On Mon, Aug 29, 2022 at 3:13 PM Maxime Ripard <maxime@cerno.tech> wrote:
+> The current construction of the named mode parsing doesn't allow to extend
+> it easily. Let's move it to a separate function so we can add more
+> parameters and modes.
+>
 > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> 
-> 
-> 
 
-Something has gone wrong with this patchset, there are double line endings.
+Thanks for your patch!
 
-I looked at the patchwork version and it look all right there so I
-figured it might have fixed up the patches, but it failed:
+> --- a/drivers/gpu/drm/drm_modes.c
+> +++ b/drivers/gpu/drm/drm_modes.c
+> @@ -1909,6 +1909,9 @@ void drm_connector_list_update(struct drm_connector *connector)
+>  }
+>  EXPORT_SYMBOL(drm_connector_list_update);
+>
+> +#define STR_STRICT_EQ(str, len, cmp) \
+> +       ((strlen(cmp) == len) && !strncmp(str, cmp, len))
 
-git apply -v --check
-/home/pi/tinydrm.gud-gadget/workdirs/tv_norm_gadget/500003.patch
-Checking patch drivers/gpu/drm/tests/Makefile...
-error: while searching for:
-# SPDX-License-Identifier: GPL-2.0?
-?
-obj-$(CONFIG_DRM_KUNIT_TEST) += drm_format_helper_test.o
-drm_damage_helper_test.o \?
-        drm_cmdline_parser_test.o drm_rect_test.o drm_format_test.o
-drm_plane_helper_test.o \?
-        drm_dp_mst_helper_test.o drm_framebuffer_test.o drm_buddy_test.o
-drm_mm_test.o?
+This is not part of the move, but newly added.
 
-error: patch failed: drivers/gpu/drm/tests/Makefile:1
-error: drivers/gpu/drm/tests/Makefile: patch does not apply
+> +
+>  static int drm_mode_parse_cmdline_bpp(const char *str, char **end_ptr,
+>                                       struct drm_cmdline_mode *mode)
+>  {
+> @@ -2208,6 +2211,52 @@ static const char * const drm_named_modes_whitelist[] = {
+>         "PAL",
+>  };
+>
+> +static int drm_mode_parse_cmdline_named_mode(const char *name,
+> +                                            unsigned int name_end,
+> +                                            struct drm_cmdline_mode *cmdline_mode)
+> +{
+> +       unsigned int i;
+> +
+> +       if (!name_end)
+> +               return 0;
 
-ERROR: Failed check apply patch
+This is already checked by the caller.
 
-pi@build-server:~/tinydrm.gud-gadget$ file
-workdirs/tv_norm_gadget/500003.patch
-workdirs/tv_norm_gadget/500003.patch: unified diff output, ASCII text,
-with CRLF, LF line terminators
+> +
+> +       /* If the name starts with a digit, it's not a named mode */
+> +       if (isdigit(name[0]))
+> +               return 0;
+> +
+> +       /*
+> +        * If there's an equal sign in the name, the command-line
+> +        * contains only an option and no mode.
+> +        */
+> +       if (strnchr(name, name_end, '='))
+> +               return 0;
+> +
+> +       /* The connection status extras can be set without a mode. */
+> +       if (STR_STRICT_EQ(name, name_end, "d") ||
+> +           STR_STRICT_EQ(name, name_end, "D") ||
+> +           STR_STRICT_EQ(name, name_end, "e"))
+> +               return 0;
 
-Noralf.
+These checks are not part of the move, and should probably be added
+in a separate patch.
 
-> diff --git a/drivers/gpu/drm/tests/Makefile b/drivers/gpu/drm/tests/Makefile
-> 
-> index 91b70f7d2769..2d9f49b62ecb 100644
-> 
-> --- a/drivers/gpu/drm/tests/Makefile
-> 
-> +++ b/drivers/gpu/drm/tests/Makefile
-> 
-> @@ -1,5 +1,13 @@
-> 
->  # SPDX-License-Identifier: GPL-2.0
-> 
->  
-> 
-> -obj-$(CONFIG_DRM_KUNIT_TEST) += drm_format_helper_test.o drm_damage_helper_test.o \
-> 
-> -	drm_cmdline_parser_test.o drm_rect_test.o drm_format_test.o drm_plane_helper_test.o \
-> 
-> -	drm_dp_mst_helper_test.o drm_framebuffer_test.o drm_buddy_test.o drm_mm_test.o
-> 
-> +obj-$(CONFIG_DRM_KUNIT_TEST) += \
-> 
-> +	drm_buddy_test.o \
-> 
-> +	drm_cmdline_parser_test.o \
-> 
-> +	drm_damage_helper_test.o \
-> 
-> +	drm_dp_mst_helper_test.o \
-> 
-> +	drm_format_helper_test.o \
-> 
-> +	drm_format_test.o \
-> 
-> +	drm_framebuffer_test.o \
-> 
-> +	drm_mm_test.o \
-> 
-> +	drm_plane_helper_test.o \
-> 
-> +	drm_rect_test.o
-> 
-> 
-> 
+> +
+> +       /*
+> +        * We're sure we're a named mode at that point, iterate over the
+> +        * list of modes we're aware of.
+> +        */
+> +       for (i = 0; i < ARRAY_SIZE(drm_named_modes_whitelist); i++) {
+> +               int ret;
+> +
+> +               ret = str_has_prefix(name, drm_named_modes_whitelist[i]);
+> +               if (ret != name_end)
+> +                       continue;
+> +
+> +               strcpy(cmdline_mode->name, drm_named_modes_whitelist[i]);
+> +               cmdline_mode->specified = true;
+> +
+> +               return 1;
+> +       }
+> +
+> +       return -EINVAL;
+> +}
+> +
+>  /**
+>   * drm_mode_parse_command_line_for_connector - parse command line modeline for connector
+>   * @mode_option: optional per connector mode option
+> @@ -2244,7 +2293,7 @@ bool drm_mode_parse_command_line_for_connector(const char *mode_option,
+>         const char *bpp_ptr = NULL, *refresh_ptr = NULL, *extra_ptr = NULL;
+>         const char *options_ptr = NULL;
+>         char *bpp_end_ptr = NULL, *refresh_end_ptr = NULL;
+> -       int i, len, ret;
+> +       int len, ret;
+>
+>         memset(mode, 0, sizeof(*mode));
+>         mode->panel_orientation = DRM_MODE_PANEL_ORIENTATION_UNKNOWN;
+> @@ -2285,17 +2334,19 @@ bool drm_mode_parse_command_line_for_connector(const char *mode_option,
+>                 parse_extras = true;
+>         }
+>
+> -       /* First check for a named mode */
+> -       for (i = 0; i < ARRAY_SIZE(drm_named_modes_whitelist); i++) {
+> -               ret = str_has_prefix(name, drm_named_modes_whitelist[i]);
+> -               if (ret == mode_end) {
+> -                       if (refresh_ptr)
+> -                               return false; /* named + refresh is invalid */
+>
+> -                       strcpy(mode->name, drm_named_modes_whitelist[i]);
+> -                       mode->specified = true;
+> -                       break;
+> -               }
+> +       if (mode_end) {
+> +               ret = drm_mode_parse_cmdline_named_mode(name, mode_end, mode);
+> +               if (ret < 0)
+> +                       return false;
+> +
+> +               /*
+> +                * Having a mode that starts by a letter (and thus is named)
+> +                * and an at-sign (used to specify a refresh rate) is
+> +                * disallowed.
+> +                */
+> +               if (ret && refresh_ptr)
+> +                       return false;
+>         }
+>
+>         /* No named mode? Check for a normal mode argument, e.g. 1024x768 */
+>
+
+Gr{oetje,eeting}s,
+
+                        Geert
+
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
