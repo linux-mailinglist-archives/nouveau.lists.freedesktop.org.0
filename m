@@ -2,52 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E6FA5A64E3
-	for <lists+nouveau@lfdr.de>; Tue, 30 Aug 2022 15:36:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FFE75A6742
+	for <lists+nouveau@lfdr.de>; Tue, 30 Aug 2022 17:23:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CC47510E0E2;
-	Tue, 30 Aug 2022 13:36:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A362510E129;
+	Tue, 30 Aug 2022 15:23:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0679C10E0E1;
- Tue, 30 Aug 2022 13:36:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1661866599; x=1693402599;
- h=from:to:cc:subject:in-reply-to:references:date:
- message-id:mime-version;
- bh=O9CgTkDBOczWNsw6xgnL7AlVgHCVygWfHTMUKa/QgD8=;
- b=d8YuDrvsUXU2NT992PGZ3eotpCrktdhojJf8pVMRj+fcwKWLbe0GZZtm
- jIBdjYv2oBkMDZIFCGt0iwkkk+w3bWFoJQMIJbJcuzWe+hJ2ghHT98L4i
- OMusSZaWd7GqULYvF89gQeXFn4tQxEDnoT1jX4trc5g8wxt9atYHYqTpw
- 6F4yJsF+gDuDjh7aPBm2xnpL6W2GHTa+xsIr4QOmKae71qY0PTx6HzO56
- QmD6PPInon52r0u7HIqpLW0eLTI54DM2sDmukr+j+/wrnWS/qNSAgIYBx
- uTnL1+dOqEX7tnhE1iHeTHce9nEtcN5FjQRoHFnYqerJvY/6Uv8pJFc2O w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10455"; a="295176323"
-X-IronPort-AV: E=Sophos;i="5.93,275,1654585200"; d="scan'208";a="295176323"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Aug 2022 06:36:38 -0700
-X-IronPort-AV: E=Sophos;i="5.93,275,1654585200"; d="scan'208";a="672867819"
-Received: from amrabet-mobl.ger.corp.intel.com (HELO localhost)
- ([10.252.41.211])
- by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Aug 2022 06:36:31 -0700
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Maxime Ripard <maxime@cerno.tech>
-In-Reply-To: <20220830120330.6f5f22d35gu7cbr3@houat>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-14-459522d653a7@cerno.tech>
- <CAMuHMdV9wVgHFfwHoqtBoYzJDnjDmKTfaZkAKvTVKh1Y-2x1pA@mail.gmail.com>
- <87czcidnb8.fsf@intel.com> <20220830120330.6f5f22d35gu7cbr3@houat>
-Date: Tue, 30 Aug 2022 16:36:23 +0300
-Message-ID: <875yi9etuw.fsf@intel.com>
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 918FE10E126;
+ Tue, 30 Aug 2022 15:23:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=ZcvUU1EAXtTJzWhX0QKcblQnfz8rCARTSjamaFHiCSU=; b=K1pOL/7VuwXIcKrFnYe4r1r4tz
+ VcgJ5EA7GXFLnj1vXLCdZOGTds1+FYeb1zAO+mIDcwJJr5QfAJY7wXWfydGN18tmUCWtdepYk07XN
+ aVFSXq9tl8E9tl0i083anWFytp3zGwGPqXvtYp3gaPqZIruNMFZC6weAdPbrOSRFNrfmXR3mZc2N/
+ ucgNyZETk1Wn5WxBd/an71gTr54Ss8Y9RQp1wgzXjxSgd8Wv7+HsWh8Tei2XEiXelz2mktoDfEO5r
+ pEeW7DefxVWBgl+9h1m5KQRod3GYS/GVs2c4vWosuxGcTDjPU7/1H/TllOI9sEEbFkAHusLxgWHbz
+ E5G8PuCw==;
+Received: from [2a01:799:961:d200:cca0:57ac:c55d:a485] (port=57591)
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1oT355-0006ei-4d; Tue, 30 Aug 2022 17:23:11 +0200
+Message-ID: <fbad203b-a508-f328-b43e-5a6012525794@tronnes.org>
+Date: Tue, 30 Aug 2022 17:23:02 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
-Subject: Re: [Nouveau] [PATCH v2 14/41] drm/modes: Move named modes parsing
- to a separate function
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.13.0
+To: Maxime Ripard <maxime@cerno.tech>, Maxime Ripard <mripard@kernel.org>,
+ Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
+ Chen-Yu Tsai <wens@csie.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Lyude Paul <lyude@redhat.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Samuel Holland <samuel@sholland.org>, Karol Herbst <kherbst@redhat.com>,
+ Emma Anholt <emma@anholt.net>, Daniel Vetter <daniel@ffwll.ch>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
+References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v2-24-459522d653a7@cerno.tech>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v2-24-459522d653a7@cerno.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v2 24/41] drm/vc4: vec: Remove empty mode_fixup
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,84 +65,27 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Nouveau Dev <nouveau@lists.freedesktop.org>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
- Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Hans de Goede <hdegoede@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Daniel Vetter <daniel@ffwll.ch>,
- Linux ARM <linux-arm-kernel@lists.infradead.org>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
- Philipp Zabel <p.zabel@pengutronix.de>
+ Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 30 Aug 2022, Maxime Ripard <maxime@cerno.tech> wrote:
-> Hi,
->
-> On Tue, Aug 30, 2022 at 01:43:07PM +0300, Jani Nikula wrote:
->> On Tue, 30 Aug 2022, Geert Uytterhoeven <geert@linux-m68k.org> wrote:
->> > On Mon, Aug 29, 2022 at 3:13 PM Maxime Ripard <maxime@cerno.tech> wrote:
->> >> +#define STR_STRICT_EQ(str, len, cmp) \
->> >> +       ((strlen(cmp) == len) && !strncmp(str, cmp, len))
->> >
->> > This is not part of the move, but newly added.
->> 
->> The same construct is also duplicated elsewhere in the series, and I
->> kept being confused by it.
->
-> I'm not sure what is confusing, but I can add a comment if needed.
-
-STR_STRICT_EQ() is what's confusing. I have to look at the
-implementation to understand what it means. What does "strict" string
-equality mean?
-
->
->> The above is precisely the same as:
->> 
->> 	str_has_prefix(str, cmp) == len
->
-> Here, it's used to make sure we don't have a named mode starting with
-> either e, d, or D.
->
-> If I understood str_has_prefix() right, str_has_prefix("DUMB-MODE", "D")
-> == strlen("DUMB-MODE") would return true, while it's actually what we
-> want to avoid.
-
-That's not true, str_has_prefix("DUMB-MODE", "D") == strlen("D") is.
-
-> It's also used indeed in drm_get_tv_mode_from_name(), where we try to
-> match a list of names with one passed as argument.
->
-> With drm_get_tv_mode_from_name("NSTC", strlen("NTSC")), we would end up
-> calling str_has_prefix("NTSC-J", "NTSC") == strlen("NTSC-J") which would
-> work. However, we end up calling prefix not a prefix, but an entire
-> string we want to match against, which is very confusing to me too.
-
-If I get this right, you have a string and you want to check if that has
-a certain prefix. Additionally, you want to check the prefix is a
-certain length.
-
-Sure, that the prefix is a certain length is more of a property of the
-string, which is NUL terminated later than at length, but that's doesn't
-really matter.
-
-That condition is simply str_has_prefix(string, prefix) == length.
-
-BR,
-Jani.
 
 
--- 
-Jani Nikula, Intel Open Source Graphics Center
+Den 29.08.2022 15.11, skrev Maxime Ripard:
+> The mode_fixup hooks are deprecated, and the behaviour we implement is the
+> 
+> default one anyway. Let's remove it.
+> 
+> 
+> 
+> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> 
+
+Reviewed-by: Noralf Trønnes <noralf@tronnes.org>
