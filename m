@@ -2,46 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35A285A7488
-	for <lists+nouveau@lfdr.de>; Wed, 31 Aug 2022 05:37:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DE9B5A78E8
+	for <lists+nouveau@lfdr.de>; Wed, 31 Aug 2022 10:22:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A2B7E10E1A1;
-	Wed, 31 Aug 2022 03:37:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5D6BF10E258;
+	Wed, 31 Aug 2022 08:22:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EA76F10E1A1
- for <nouveau@lists.freedesktop.org>; Wed, 31 Aug 2022 03:37:16 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4MHVGv50zTz9sSX;
- Wed, 31 Aug 2022 05:37:11 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=owenh.net; s=MBO0001; 
- t=1661917031;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7W+sZnOuOECJWwvhoYf1S54YCB2usWWL+MyIBaCV4T4=;
- b=JoQ8DVCCh3myhjtDARL5eL91cbs3o33QtD06jffhHxvrz4pADU9uThm/UXHevU7dSyMdsf
- oFqwhZzLZKdBYM/sTJCJsAcIcc4e2oeIZ14oh/vKWZrKPFRud8yqPq3dYg8v7lRokKmZgP
- 5kTPzy4p41ePq4+Z7Y6OmoKh9b5/rAua9NKTnEnfd01iJ17G/KtTC1iKWX+L0a6GoiecpQ
- bNrmSLPTeKQgK8SV0h4zN4tPt7pu+FGXpApQ51VssuLH5CU8kUnk6lj03fad8j3LqIXwvt
- RyE0+121icXObserEC1w/HYPMV/W0jfQsAwiNUegcF8RiPuTu6fQwoXTD0RDQQ==
-Message-ID: <39dfb25d-2eff-23da-ada2-7d5de1f14861@owenh.net>
-Date: Tue, 30 Aug 2022 22:37:07 -0500
+Received: from mail-vk1-f177.google.com (mail-vk1-f177.google.com
+ [209.85.221.177])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 50FA710E263;
+ Wed, 31 Aug 2022 08:21:56 +0000 (UTC)
+Received: by mail-vk1-f177.google.com with SMTP id t82so4196505vkb.6;
+ Wed, 31 Aug 2022 01:21:56 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc;
+ bh=tL3Pu80GajPbXIuFp2pntr8ejcDbNLFHN+ltW3MDRBA=;
+ b=Q6MwXirQAYjlOHFQ1NAHITS6yND0ik73xEkk5GaRK1To8hWUaQ7QYHgbWpy4x/mfTZ
+ Yj0QrRVX6JpqPHwPFOBAx+RqxAxoAZhHbpaX5PUYs36puNA5971gXOm54jPIGpzNuR8z
+ To3g8kT+2Iw0jzNa8EOJOtj3Ruawse03xA81fen+DT7MAKWZsgUO3YnyC7NQuLDSZ/ma
+ DXbPWuZHzITDrxsPBZvJBkfSMTi7u9MPKSizDB50EQXXZKi0mtRNoMLWyBy+6wxitA+O
+ dTk8UqOnu6XRqT/jRGd3yTij8wg81o0/ervVzQpA9s59Y2+BajTb31iFCZTl3ma2ip5k
+ 2S1w==
+X-Gm-Message-State: ACgBeo3EAqAWAH4H5lNS56sVMD8erKDOUjEXvMp6UYGWEabU7MipRdZO
+ VTy+BLeaWbKilf61Ml3PKT3JiTNRSyhwwg==
+X-Google-Smtp-Source: AA6agR6GW/U9Q7LX0WKGY4rPPbL7wGDVR0A9uQO0xcpyLKMnSYRF5qsqhayku0SNewg4aaQnil8mLQ==
+X-Received: by 2002:a1f:9b57:0:b0:379:1632:8dda with SMTP id
+ d84-20020a1f9b57000000b0037916328ddamr6100661vke.15.1661934115152; 
+ Wed, 31 Aug 2022 01:21:55 -0700 (PDT)
+Received: from mail-ua1-f54.google.com (mail-ua1-f54.google.com.
+ [209.85.222.54]) by smtp.gmail.com with ESMTPSA id
+ x204-20020a1f31d5000000b0038ca654efa6sm2202663vkx.19.2022.08.31.01.21.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 31 Aug 2022 01:21:55 -0700 (PDT)
+Received: by mail-ua1-f54.google.com with SMTP id q21so5168121uam.13;
+ Wed, 31 Aug 2022 01:21:55 -0700 (PDT)
+X-Received: by 2002:a25:24b:0:b0:696:4e87:7cec with SMTP id
+ 72-20020a25024b000000b006964e877cecmr14439821ybc.202.1661933679611; Wed, 31
+ Aug 2022 01:14:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Language: en-US
-To: nouveau@lists.freedesktop.org
-References: <615912a3d56e4330923d9b42802e8b09@di.ku.dk>
-From: "Owen T. Heisler" <writer@owenh.net>
-In-Reply-To: <615912a3d56e4330923d9b42802e8b09@di.ku.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] Patch to TroubleShooting.html
+References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v2-10-459522d653a7@cerno.tech>
+ <242d272b-5b79-986c-9aaf-64e62f6b37ff@gmail.com>
+In-Reply-To: <242d272b-5b79-986c-9aaf-64e62f6b37ff@gmail.com>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Wed, 31 Aug 2022 10:14:28 +0200
+X-Gmail-Original-Message-ID: <CAMuHMdWq3aOO4-2AReDeaC2VBJb=QJF2dTMZP=DGmwCg6ZOffA@mail.gmail.com>
+Message-ID: <CAMuHMdWq3aOO4-2AReDeaC2VBJb=QJF2dTMZP=DGmwCg6ZOffA@mail.gmail.com>
+To: Mateusz Kwiatkowski <kfyatek@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH v2 10/41] drm/modes: Add a function to
+ generate analog display modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,27 +66,76 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: David Airlie <airlied@linux.ie>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
+ Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Dom Cobley <dom@raspberrypi.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ =?UTF-8?Q?Noralf_Tr=C3=B8nnes?= <noralf@tronnes.org>,
+ Philipp Zabel <p.zabel@pengutronix.de>, Maxime Ripard <maxime@cerno.tech>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2022-08-28 05:23, Klaus Ebbe Grue wrote:
-> Whoever is in charge of the web-pages, could I persuade you to make a 
-> minor update of
-> 
-> https://nouveau.freedesktop.org/TroubleShooting.html 
+Hi Mateusz,
 
+On Wed, Aug 31, 2022 at 3:44 AM Mateusz Kwiatkowski <kfyatek@gmail.com> wrote:
+> Wow. That's an enormous amount of effort put into this patch.
+>
+> But I'm tempted to say that this is actually overengineered quite a bit :D
+> Considering that there's no way to access all these calculations from user
+> space, and I can't imagine anybody using anything else than those standard
+> 480i/576i (and maybe 240p/288p) modes at 13.5 MHz any time soon... I'm not
+> sure if we actually need all this.
 
-Hi Klaus,
+We'll need it when we get an Amiga DRM driver, which will use
+7/14/28 MHz pixel clocks.
 
-The edit buttons on the wiki link to the source repository on GitLab. I 
-asked about developer access on 2022-08-05 and never received a reply:
+> But anyway, I'm not the maintainer of this subsystem, so I'm not the one to
+> decide.
+>
+> > +enum drm_mode_analog {
+> > +    DRM_MODE_ANALOG_NTSC,
+> > +    DRM_MODE_ANALOG_PAL,
+> > +};
+>
+> Using "NTSC" and "PAL" to describe the 50Hz and 60Hz analog TV modes is common,
+> but strictly speaking a misnomer. Those are color encoding systems, and your
+> patchset fully supports lesser used, but standard encodings for those (e.g.
+> PAL-M for 60Hz and SECAM for 50Hz). I'd propose switching to some more neutral
+> naming scheme. Some ideas:
+>
+> - DRM_MODE_ANALOG_60_HZ / DRM_MODE_ANALOG_50_HZ (after standard refresh rate)
+> - DRM_MODE_ANALOG_525_LINES / DRM_MODE_ANALOG_625_LINES (after standard line
+>   count)
 
-https://lists.freedesktop.org/archives/nouveau/2022-August/040616.html
+IMHO these are bad names, as e.g. VGA640x480@60 is also analog, using
+60 Hz and 525 lines.  Add "TV" to the name?
 
-I haven't tried asking on IRC (#nouveau on OFTC).
+> - DRM_MODE_ANALOG_JM / DRM_MODE_ANALOG_BDGHIKLN (after corresponding ITU System
+>   Letter Designations)
 
-(It looks like the <https://nouveau.freedesktop.org/InstallNouveau.html> 
-page needs some updates too.)
+Or DRM_MODE_ITU_*?
+But given the long list of letters, this looks fragile to me.
 
-Good luck,
-Owen
+Gr{oetje,eeting}s,
+
+                        Geert
+
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
