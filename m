@@ -1,59 +1,80 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8504F5AA01A
-	for <lists+nouveau@lfdr.de>; Thu,  1 Sep 2022 21:35:42 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 552AC5AA0C6
+	for <lists+nouveau@lfdr.de>; Thu,  1 Sep 2022 22:16:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1EB9D10E1A8;
-	Thu,  1 Sep 2022 19:35:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1404C10E2DA;
+	Thu,  1 Sep 2022 20:16:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp.domeneshop.no (smtp.domeneshop.no
- [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5E6ED10E1A8;
- Thu,  1 Sep 2022 19:35:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
- ; s=ds202112;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HSmU8cbfTMrBaPDEft9ugvcLZ7df9DZiQiiVlzQT0Tw=; b=qLjy/48/HybrCZXhucwMbBtKJp
- 3TQbxLtZYMvSPYnBIV1FP4YMZdeVxZdeb8IrBeAhyjcHbR48eZ3cqwaUyKSRMM6DOQ9iZfJ2XCPD6
- av7PC77mmiFG6qUN0YW2TLxNBmhG/OHSuD5qut6FTgE9i/x1rSJzTI8Sc2eAma98W6N4XxH64KZyD
- nX//akYOhh3zihSmyGBz7pNFVaeuP5f+pGW5j4s9zWcQ2RNqzSMRDsGMOSZkpxU2nUJWqrKaD0MyS
- K6gTTOv8Lx+Cv8ibktpYIIY5h542j1BJDWvYwCzIYBQPXPj6+c9B6PKY4gZZIneg3dathxMx/k1tv
- 4FK26vCQ==;
-Received: from [2a01:799:961:d200:cca0:57ac:c55d:a485] (port=52634)
- by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1oTpyL-0002UR-US; Thu, 01 Sep 2022 21:35:29 +0200
-Message-ID: <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
-Date: Thu, 1 Sep 2022 21:35:23 +0200
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AAA0410E20D
+ for <nouveau@lists.freedesktop.org>; Thu,  1 Sep 2022 20:16:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1662063387;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ShxcPF4Eq/4VuhK0YuLPN2dIglWIe3dTsSJxTWOrspQ=;
+ b=RUL2FUJFiRVdFABhzSQ++8T5JHXq2ZTaTjKAT22CK04/XjFqW0oAqnPEArqGe1MnICvi8f
+ +Np6YKTUUGfPZLPvbw/It/7dQhNG068LT/jes2MWhYij1uNHei32lNHJfA7y809RKY8uu0
+ ED1hBLWFC+K62ptN246AbL7vAh26Nps=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-526-uF3kYfa8OKigyxR9romJug-1; Thu, 01 Sep 2022 16:16:26 -0400
+X-MC-Unique: uF3kYfa8OKigyxR9romJug-1
+Received: by mail-qv1-f71.google.com with SMTP id
+ y5-20020a056214016500b004992ae3b0c2so2134272qvs.22
+ for <nouveau@lists.freedesktop.org>; Thu, 01 Sep 2022 13:16:26 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:user-agent:organization
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date;
+ bh=ShxcPF4Eq/4VuhK0YuLPN2dIglWIe3dTsSJxTWOrspQ=;
+ b=frW2pEVejhqeDFlVsbQOGKmkUg48JxZlhKqgRl3d2ZXlySHqDFPZx3G0cyrWdbuLE9
+ v2Kar7sRtp+0X4YKzMVtMOFu235aQfDdcUEsZ2k9kVYq0rwKC/DaItxIIFEdjY6kXcAc
+ pz2/Tr0dKzuqDASwOnsiu9ckiulXZq9qtLr9e3VUAe1WaQ/X9i8pGLMc3wPbCQHw1i2n
+ KlulgEmlN0nYpIQEBV5GoGWZZx6sC1vfm/gfrRxl2M9GRU+YYFlCctJQJDr3kqLatNYg
+ pRmndC9QrycLB4kR1awWqdvLo0ICtn04BsikHDa6OWQv0xBehvyOlkpn2+3waHDuWc6I
+ bfvw==
+X-Gm-Message-State: ACgBeo1e46o9LzxGB0YjxlSNc05PvYc/23ewqXfNNCRupFASQXqKPKT5
+ J1WsbzISVYsBJV02otPGrZ/f64oc5uYEzy50/v9mfN8vnPQJSznU/gwbAEy6ydsB+ARdqIVyd8e
+ sanspvDsQ44vGEUlJnh7sUDgrxA==
+X-Received: by 2002:a05:620a:4553:b0:6bb:1dd0:e44c with SMTP id
+ u19-20020a05620a455300b006bb1dd0e44cmr21170561qkp.543.1662063386417; 
+ Thu, 01 Sep 2022 13:16:26 -0700 (PDT)
+X-Google-Smtp-Source: AA6agR4SXoUZt30A0xKlvUByAmirOD7wWDVTeEB40+CkCT1+zPJotJQ/iOqWav7vFUEdmX088i/ZHA==
+X-Received: by 2002:a05:620a:4553:b0:6bb:1dd0:e44c with SMTP id
+ u19-20020a05620a455300b006bb1dd0e44cmr21170540qkp.543.1662063386195; 
+ Thu, 01 Sep 2022 13:16:26 -0700 (PDT)
+Received: from ?IPv6:2600:4040:5c48:e00:e786:1aff:4f5c:c549?
+ ([2600:4040:5c48:e00:e786:1aff:4f5c:c549])
+ by smtp.gmail.com with ESMTPSA id
+ l1-20020a05620a28c100b006b5e1aeb777sm12671930qkp.43.2022.09.01.13.16.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Sep 2022 13:16:25 -0700 (PDT)
+Message-ID: <4a44b0d4511e20fc32a9d9de8e6d12ec62c9f51b.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Jani Nikula <jani.nikula@intel.com>, dri-devel@lists.freedesktop.org
+Date: Thu, 01 Sep 2022 16:16:24 -0400
+In-Reply-To: <e2fa3e97b0989a50b9050d0518844d1f403385ea.1662036058.git.jani.nikula@intel.com>
+References: <cover.1662036058.git.jani.nikula@intel.com>
+ <e2fa3e97b0989a50b9050d0518844d1f403385ea.1662036058.git.jani.nikula@intel.com>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.0
-To: Maxime Ripard <maxime@cerno.tech>, Maxime Ripard <mripard@kernel.org>,
- Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Chen-Yu Tsai <wens@csie.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Jani Nikula <jani.nikula@linux.intel.com>, Lyude Paul <lyude@redhat.com>,
- Philipp Zabel <p.zabel@pengutronix.de>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>, Karol Herbst <kherbst@redhat.com>,
- Emma Anholt <emma@anholt.net>, Daniel Vetter <daniel@ffwll.ch>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>
-References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
-From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
-Content-Type: text/plain; charset=UTF-8
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH v2 00/41] drm: Analog TV Improvements
+Subject: Re: [Nouveau] [PATCH 2/9] drm/nouveau: convert to using is_hdmi and
+ has_audio from display info
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,164 +87,117 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-sunxi@lists.linux.dev, Hans de Goede <hdegoede@redhat.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
+Also, went ahead and tested this for you on one of my machines:
 
-Den 29.08.2022 15.11, skrev Maxime Ripard:
-> Hi,
-> 
-> 
-> 
-> Here's a series aiming at improving the command line named modes support,
-> 
-> and more importantly how we deal with all the analog TV variants.
-> 
-> 
-> 
-> The named modes support were initially introduced to allow to specify the
-> 
-> analog TV mode to be used.
-> 
-> 
-> 
-> However, this was causing multiple issues:
-> 
-> 
-> 
->   * The mode name parsed on the command line was passed directly to the
-> 
->     driver, which had to figure out which mode it was suppose to match;
-> 
-> 
-> 
->   * Figuring that out wasn't really easy, since the video= argument or what
-> 
->     the userspace might not even have a name in the first place, but
-> 
->     instead could have passed a mode with the same timings;
-> 
-> 
-> 
->   * The fallback to matching on the timings was mostly working as long as
-> 
->     we were supporting one 525 lines (most likely NSTC) and one 625 lines
-> 
->     (PAL), but couldn't differentiate between two modes with the same
-> 
->     timings (NTSC vs PAL-M vs NSTC-J for example);
-> 
-> 
-> 
->   * There was also some overlap with the tv mode property registered by
-> 
->     drm_mode_create_tv_properties(), but named modes weren't interacting
-> 
->     with that property at all.
-> 
-> 
-> 
->   * Even though that property was generic, its possible values were
-> 
->     specific to each drivers, which made some generic support difficult.
-> 
-> 
-> 
-> Thus, I chose to tackle in multiple steps:
-> 
-> 
-> 
->   * A new TV norm property was introduced, with generic values, each driver
-> 
->     reporting through a bitmask what standard it supports to the userspace;
-> 
-> 
-> 
->   * This option was added to the command line parsing code to be able to
-> 
->     specify it on the kernel command line, and new atomic_check and reset
-> 
->     helpers were created to integrate properly into atomic KMS;
-> 
-> 
-> 
->   * The named mode parsing code is now creating a proper display mode for
-> 
->     the given named mode, and the TV standard will thus be part of the
-> 
->     connector state;
-> 
-> 
-> 
->   * Two drivers were converted and tested for now (vc4 and sun4i), with
-> 
->     some backward compatibility code to translate the old TV mode to the
-> 
->     new TV mode;
-> 
-> 
-> 
-> Unit tests were created along the way.
-> 
-> 
-> 
-> One can switch from NTSC to PAL now using (on vc4)
-> 
-> 
-> 
-> modetest -M vc4  -s 53:720x480i -w 53:'tv norm':0
-> 
-> 
-> 
-> modetest -M vc4 -s 53:720x480i -w 53:'tv norm':4
-> 
+Tested-by: Lyude Paul <lyude@redhat.com>
 
-The property name has changed, this gives me PAL:
+On Thu, 2022-09-01 at 15:47 +0300, Jani Nikula wrote:
+> Prefer the parsed results for is_hdmi and has_audio in display info over
+> calling drm_detect_hdmi_monitor() and drm_detect_monitor_audio(),
+> respectively.
+> 
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: Karol Herbst <kherbst@redhat.com>
+> Cc: Lyude Paul <lyude@redhat.com>
+> Cc: nouveau@lists.freedesktop.org
+> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+> ---
+>  drivers/gpu/drm/nouveau/dispnv50/disp.c     | 8 ++++----
+>  drivers/gpu/drm/nouveau/dispnv50/head.c     | 8 +-------
+>  drivers/gpu/drm/nouveau/nouveau_connector.c | 2 +-
+>  3 files changed, 6 insertions(+), 12 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> index 33c97d510999..d0d9494b729c 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> @@ -769,7 +769,7 @@ nv50_audio_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
+>  				     (0x0100 << nv_crtc->index),
+>  	};
+>  
+> -	if (!drm_detect_monitor_audio(nv_connector->edid))
+> +	if (!nv_connector->base.display_info.has_audio)
+>  		return;
+>  
+>  	mutex_lock(&drm->audio.lock);
+> @@ -839,7 +839,7 @@ nv50_hdmi_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
+>  	int ret;
+>  	int size;
+>  
+> -	if (!drm_detect_hdmi_monitor(nv_connector->edid))
+> +	if (!nv_connector->base.display_info.is_hdmi)
+>  		return;
+>  
+>  	hdmi = &nv_connector->base.display_info.hdmi;
+> @@ -1705,7 +1705,7 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
+>  
+>  	if ((disp->disp->object.oclass == GT214_DISP ||
+>  	     disp->disp->object.oclass >= GF110_DISP) &&
+> -	    drm_detect_monitor_audio(nv_connector->edid))
+> +	    nv_connector->base.display_info.has_audio)
+>  		hda = true;
+>  	nv50_outp_acquire(nv_encoder, hda);
+>  
+> @@ -1721,7 +1721,7 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
+>  			 */
+>  			if (mode->clock >= 165000 &&
+>  			    nv_encoder->dcb->duallink_possible &&
+> -			    !drm_detect_hdmi_monitor(nv_connector->edid))
+> +			    !nv_connector->base.display_info.is_hdmi)
+>  				proto = NV507D_SOR_SET_CONTROL_PROTOCOL_DUAL_TMDS;
+>  		} else {
+>  			proto = NV507D_SOR_SET_CONTROL_PROTOCOL_SINGLE_TMDS_B;
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
+> index c3c57be54e1c..8b5bc834f1b3 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/head.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
+> @@ -127,14 +127,8 @@ nv50_head_atomic_check_view(struct nv50_head_atom *armh,
+>  	struct drm_display_mode *omode = &asyh->state.adjusted_mode;
+>  	struct drm_display_mode *umode = &asyh->state.mode;
+>  	int mode = asyc->scaler.mode;
+> -	struct edid *edid;
+>  	int umode_vdisplay, omode_hdisplay, omode_vdisplay;
+>  
+> -	if (connector->edid_blob_ptr)
+> -		edid = (struct edid *)connector->edid_blob_ptr->data;
+> -	else
+> -		edid = NULL;
+> -
+>  	if (!asyc->scaler.full) {
+>  		if (mode == DRM_MODE_SCALE_NONE)
+>  			omode = umode;
+> @@ -162,7 +156,7 @@ nv50_head_atomic_check_view(struct nv50_head_atom *armh,
+>  	 */
+>  	if ((asyc->scaler.underscan.mode == UNDERSCAN_ON ||
+>  	    (asyc->scaler.underscan.mode == UNDERSCAN_AUTO &&
+> -	     drm_detect_hdmi_monitor(edid)))) {
+> +	     connector->display_info.is_hdmi))) {
+>  		u32 bX = asyc->scaler.underscan.hborder;
+>  		u32 bY = asyc->scaler.underscan.vborder;
+>  		u32 r = (asyh->view.oH << 19) / asyh->view.oW;
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> index 1991bbb1d05c..2ef5fb8df4ed 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> @@ -1012,7 +1012,7 @@ get_tmds_link_bandwidth(struct drm_connector *connector)
+>  	unsigned duallink_scale =
+>  		nouveau_duallink && nv_encoder->dcb->duallink_possible ? 2 : 1;
+>  
+> -	if (drm_detect_hdmi_monitor(nv_connector->edid)) {
+> +	if (nv_connector->base.display_info.is_hdmi) {
+>  		info = &nv_connector->base.display_info;
+>  		duallink_scale = 1;
+>  	}
 
-$ modetest -M vc4 -s 45:720x576i -w 45:'TV mode':4
+-- 
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
-
-I have finally found a workaround for my kernel hangs.
-
-Dom had a look at my kernel and found that the VideoCore was fine, and
-he said this:
-
-> That suggests cause of lockup was on arm side rather than VC side.
->
-> But it's hard to diagnose further. Once you've had a peripheral not
-> respond, the AXI bus locks up and no further operations are possible.
-> Usual causes of this are required clocks being stopped or domains
-> disabled and then trying to access the hardware.
->
-
-So when I got this on my 64-bit build:
-
-[  166.702171] SError Interrupt on CPU1, code 0x00000000bf000002 -- SError
-[  166.702187] CPU: 1 PID: 8 Comm: kworker/u8:0 Tainted: G        W
-    5.19.0-rc6-00096-gba7973977976-dirty #1
-[  166.702200] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
-[  166.702206] Workqueue: events_freezable_power_ thermal_zone_device_check
-[  166.702231] pstate: 200000c5 (nzCv daIF -PAN -UAO -TCO -DIT -SSBS
-BTYPE=--)
-[  166.702242] pc : regmap_mmio_read32le+0x10/0x28
-[  166.702261] lr : regmap_mmio_read+0x44/0x70
-...
-[  166.702606]  bcm2711_get_temp+0x58/0xb0 [bcm2711_thermal]
-
-I wondered if that reg read was stalled due to a clock being stopped.
-
-Lo and behold, disabling runtime pm and keeping the vec clock running
-all the time fixed it[1].
-
-I don't know what the problem is, but at least I can now test this patchset.
-
-[1] https://gist.github.com/notro/23b984e7fa05cfbda2db50a421cac065
-
-Noralf.
