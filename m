@@ -2,58 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 280AD5AF5FD
-	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:32:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D3655AF603
+	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:32:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 777C110EAA8;
-	Tue,  6 Sep 2022 20:31:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E3CC210EAB5;
+	Tue,  6 Sep 2022 20:31:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 758A010E15B;
- Wed, 31 Aug 2022 02:23:26 +0000 (UTC)
-Received: by mail-lf1-x12b.google.com with SMTP id g7so1072507lfe.11;
- Tue, 30 Aug 2022 19:23:26 -0700 (PDT)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2DDD610E33B;
+ Thu,  1 Sep 2022 22:00:39 +0000 (UTC)
+Received: by mail-lf1-x129.google.com with SMTP id bt10so724051lfb.1;
+ Thu, 01 Sep 2022 15:00:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:in-reply-to:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:from:to:cc;
- bh=D594wEp0LEmyYOAx7Tirjq3SGwda2pe5svLBID/NRVI=;
- b=eyXn8XNL5R+c7skqJd2CXAmkkmv+PO53H99rqyOH87xBrXhsqaRc9Cafy09+sKEMJA
- iijHh/Vgr/N8ms8DrRs7ZsyH/kfkPXSLcSAHRoh1+w4hJSgtLHkhgFqawSk+ZXu7vLVu
- etWsQ2c8F5mlpD6pXL4Jnwu7reEvEQPvt2Kcq7iIfhsfn4Yu0eFb5/ZnRE0d433DYCkK
- cdghwZHl1psSvBmHBmPiKQam64a3GgKwsjlObk+WtdqaHxXkPRZOKXlEsDxfpMbOFJ+F
- qvawNpaI/5HTMI7FX7pKKny6H0CoBufGQKBaV+h3B0J6ooncWt1iyUW0Dhc0OQr52xk/
- Icrg==
+ bh=9ZOA/uLVkdbadD8sl+x2FgrUVnWNaT54IH6CMV7M0qU=;
+ b=LHm7XQKmoioehKLe+x8wv4sg51dxY3iK7GBIf0ie+fcfdWHmpj8uhKVo1qfStRYUDt
+ hYYwKyXLa6F8Vss8qsGXnhsSbaWjrIFZiJWH0w+6WT1drr8SW/5N5uWQUY13CtCu8RT7
+ XFGF/pp/ZAdp6alq7wI37+qWMkMsD15jW9A1A3zaqPv8x1Ugm06xru39RntLJn/t21Zd
+ Io+z1YLdKsVMwCmBwJgUdIXcFGDcNDdzsiH8DINgDlhluHlE98GV0dVvSpde0N5jFpG/
+ 4M6RwAzfFXYpV1BXP/VnjdTCqnFT6/utQ9dJtdN/u84FrH7SItMET/4Tm6x8CjaYhOPO
+ 0DtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:x-gm-message-state:from:to:cc;
- bh=D594wEp0LEmyYOAx7Tirjq3SGwda2pe5svLBID/NRVI=;
- b=ONsodCQJDYGLAzmir2o5yxXoNw+Csqxt2vulJxJk3aNqmZmDXH4sxAuK7ITh3DddZj
- GOURpw3Sz7//7Ipg25hgxH6qcI3u2Jc2zqgch9rG0lC1QmYXO/tyT7x8UzEK0BGDeg7m
- 7N0ZiLVFqF3Rk9vMS/7h6OWQgPcRRva4Sxq1zik1DTc/PXB+9Bj2xl94hFWJJIhg7gbl
- Re7JKKPdZbWi/RGNHZaMCYYj8qHAux5sxjfbfA16PBeTeZq3KSYp1NIpxGuj0IbSo5Mk
- mgvOu7XcYte4oeUkvC0f8cCYxPF4SFlQ0pTUOZfJogw8xnBJIhX2/XvqVNI9fy/tweOi
- RGmQ==
-X-Gm-Message-State: ACgBeo2eAjWedWz0Cs9xKe4AwX4VNlZyuqZH+ylp+UnB6GbcS7BxMNdO
- J4N+DgJiXWg/nLdOqAA5Xe8=
-X-Google-Smtp-Source: AA6agR5RnfuFyIONMTqsPbIII5CYS1rbgB3cSxzqkqMVekfKEnddXN6p9IGLZ6Lzgilorerw0vcwmQ==
-X-Received: by 2002:a05:6512:1054:b0:494:8ce3:24c8 with SMTP id
- c20-20020a056512105400b004948ce324c8mr235583lfb.360.1661912604645; 
- Tue, 30 Aug 2022 19:23:24 -0700 (PDT)
-Received: from ?IPV6:2a02:a31a:a240:1700:d40b:b088:5bfe:3b81?
- ([2a02:a31a:a240:1700:d40b:b088:5bfe:3b81])
+ bh=9ZOA/uLVkdbadD8sl+x2FgrUVnWNaT54IH6CMV7M0qU=;
+ b=gGQkfy3UtYK3mMTYfQWTCfVx/9Ze79mtVuNrVg+SoLNrcMtv/qC+b8FnzACzQWXN7/
+ dYn/jSOEjEhtJKRACSgXtD4gJmDPRweYdOoF04dE16pZo9oNKjTPN+h6u+OK200/lqcX
+ bYhkmhtDZVrj13FbTyKF5ZXWHu25uSLN0evBGsITjvAoXZMdI9hICrFj7hTzHARIdfQh
+ BWwV+g+mjBXG12WKto286WtTk9tN8vCCvmvlHaY0PJNf9g6VmPVWAPwu75KJiKyOyUxV
+ bEoWOcboL7fxkpEQ9mFTDh3gkg+SVBYtZBnr/r7dzHlYuC0+yNhFGQPE4ef6OE5Gg1TU
+ iC1A==
+X-Gm-Message-State: ACgBeo0jx+LmuBto2+1P/FjTOn/FoQa3M4YNG6cGBEPtpgj2lUfssZJd
+ Wyil5+G/0GV6hmi3FcFmN1s=
+X-Google-Smtp-Source: AA6agR4a/l8hP1u0P8WpD1zmFedHFbGPzszs2HMqNR8fDJ9LD3T/K1IWhmRhwuymqEvOv4w8sp3YdA==
+X-Received: by 2002:a05:6512:3503:b0:481:4470:4134 with SMTP id
+ h3-20020a056512350300b0048144704134mr11024002lfs.42.1662069637088; 
+ Thu, 01 Sep 2022 15:00:37 -0700 (PDT)
+Received: from ?IPV6:2a02:a31a:a240:1700:9c45:8fa1:8ce7:8852?
+ ([2a02:a31a:a240:1700:9c45:8fa1:8ce7:8852])
  by smtp.googlemail.com with ESMTPSA id
- k9-20020a2eb749000000b00261eb75fa5dsm1960508ljo.41.2022.08.30.19.23.22
+ w15-20020a2e160f000000b0025e4e7c016dsm25477ljd.16.2022.09.01.15.00.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Aug 2022 19:23:24 -0700 (PDT)
+ Thu, 01 Sep 2022 15:00:36 -0700 (PDT)
 From: Mateusz Kwiatkowski <kfyatek@gmail.com>
 X-Google-Original-From: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
-Message-ID: <c8f8015a-75da-afa8-ca7f-b2b134cacd16@gmail.com>
-Date: Wed, 31 Aug 2022 04:23:21 +0200
+Message-ID: <30a9d7cd-d9ff-3177-ac6c-e7c1f966d89a@gmail.com>
+Date: Fri, 2 Sep 2022 00:00:33 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.2.0
@@ -72,13 +72,13 @@ To: Maxime Ripard <maxime@cerno.tech>, Maxime Ripard <mripard@kernel.org>,
  Emma Anholt <emma@anholt.net>, Daniel Vetter <daniel@ffwll.ch>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-32-459522d653a7@cerno.tech>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v2-32-459522d653a7@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v2-9-459522d653a7@cerno.tech>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v2-9-459522d653a7@cerno.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 06 Sep 2022 20:31:03 +0000
-Subject: Re: [Nouveau] [PATCH v2 32/41] drm/vc4: vec: Convert to the new TV
- mode property
+Subject: Re: [Nouveau] [PATCH v2 09/41] drm/connector: Add TV standard
+ property
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,98 +100,107 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Hi Maxime,
 
-I tested your patchset on my Pi and it mostly works. Good work! However,
-I noticed a couple of issues.
+W dniu 29.08.2022 o 15:11, Maxime Ripard pisze:
+> The TV mode property has been around for a while now to select and get the
+> current TV mode output on an analog TV connector.
+>
+> Despite that property name being generic, its content isn't and has been
+> driver-specific which makes it hard to build any generic behaviour on top
+> of it, both in kernel and user-space.
+>
+> Let's create a new bitmask tv norm property, that can contain any of the
+> analog TV standards currently supported by kernel drivers. Each driver can
+> then pass in a bitmask of the modes it supports.
 
-> -static int vc4_vec_encoder_atomic_check(struct drm_encoder *encoder,
-> -                    struct drm_crtc_state *crtc_state,
-> -                    struct drm_connector_state *conn_state)
-> -{
-> -    const struct vc4_vec_tv_mode *vec_mode;
-> -
-> -    vec_mode = &vc4_vec_tv_modes[conn_state->tv.mode];
-> -
-> -    if (conn_state->crtc &&
-> -        !drm_mode_equal(vec_mode->mode, &crtc_state->adjusted_mode))
-> -        return -EINVAL;
-> -
-> -    return 0;
-> -}
+This is not a bitmask property anymore, you've just changed it to an enum.
+The commit message is now misleading.
 
-I may have said it myself that we should allow custom modelines without too
-much validation. The VC4 and VEC, however, have some considerable limitations
-when it comes to the modelines that they can reliably output.
+> +static const struct drm_prop_enum_list drm_tv_mode_enum_list[] = {
+> +    { DRM_MODE_TV_MODE_NTSC_443, "NTSC-443" },
+> +    { DRM_MODE_TV_MODE_NTSC_J, "NTSC-J" },
+> +    { DRM_MODE_TV_MODE_NTSC_M, "NTSC-M" },
+> +    { DRM_MODE_TV_MODE_PAL_60, "PAL-60" },
+> +    { DRM_MODE_TV_MODE_PAL_B, "PAL-B" },
+> +    { DRM_MODE_TV_MODE_PAL_D, "PAL-D" },
+> +    { DRM_MODE_TV_MODE_PAL_G, "PAL-G" },
+> +    { DRM_MODE_TV_MODE_PAL_H, "PAL-H" },
+> +    { DRM_MODE_TV_MODE_PAL_I, "PAL-I" },
+> +    { DRM_MODE_TV_MODE_PAL_M, "PAL-M" },
+> +    { DRM_MODE_TV_MODE_PAL_N, "PAL-N" },
+> +    { DRM_MODE_TV_MODE_PAL_NC, "PAL-Nc" },
+> +    { DRM_MODE_TV_MODE_SECAM_60, "SECAM-60" },
+> +    { DRM_MODE_TV_MODE_SECAM_B, "SECAM-B" },
+> +    { DRM_MODE_TV_MODE_SECAM_D, "SECAM-D" },
+> +    { DRM_MODE_TV_MODE_SECAM_G, "SECAM-G" },
+> +    { DRM_MODE_TV_MODE_SECAM_K, "SECAM-K" },
+> +    { DRM_MODE_TV_MODE_SECAM_K1, "SECAM-K1" },
+> +    { DRM_MODE_TV_MODE_SECAM_L, "SECAM-L" },
+> +};
 
-In particular, attempting to use "50 Hz" timings in NTSC/PAL-M modes (or
-"60 Hz" in PAL/SECAM modes) results in a weirdly skewed image. Here's how it
-may look like:
-https://user-images.githubusercontent.com/4499762/187575940-736e7262-c82d-42f3-a2d8-f309cbd51139.png
+I did not comment on it the last time, but this list looks a little bit random.
 
-This is because if the CRTC does not trigger the sync pulses within an
-acceptable time window, the VEC apparently generates them itself. This causes
-the VEC sync pulses (which go onto the wire) not quite line up with the ones
-from the modeline, which results in what you see on the screenshot.
+Compared to the standards defined by V4L2, you also define SECAM-60 (a good
+thing to define, because why not), but don't define PAL-B1, PAL-D1, PAL-K,
+SECAM-H, SECAM-LC (whatever that is - probably just another name for SECAM-L,
+see my comment about PAL-Nc below), or NTSC-M-KR (a Korean variant of NTSC).
 
-I once wrote a validation function based on extensive testing of what
-produces a sensible output and what doesn't. You can find it here:
-https://github.com/raspberrypi/linux/pull/4406/commits/15c0c51. I think it
-might be a good idea to include something like that - even though I know it's
-somewhat ugly.
+Like I mentioned previously, I'm personally not a fan of including all those
+CCIR/ITU system variants, as they don't mean any difference to the output unless
+there is an RF modulator involved. But I get it that they have already been used
+and regressing probably wouldn't be a very good idea. But in that case keeping
+it consistent with the set of values used by V4L2 would be wise, I think.
 
-(BTW, those %2 checks on vertical timings in that linked commit can be ignored;
-those values are divided by 2 for interlaced modes anyway. Those checks were
-intended to ensure proper odd-first or even-first timings; I'm not sure if your
-code calculates those in the same way)
-
->  static int vc4_vec_connector_get_modes(struct drm_connector *connector)
->  {
-> -    struct drm_connector_state *state = connector->state;
->      struct drm_display_mode *mode;
-> +    int count = 0;
->  
-> -    mode = drm_mode_duplicate(connector->dev,
-> -                  vc4_vec_tv_modes[state->tv.mode].mode);
-> +    mode = drm_mode_analog_ntsc_480i(connector->dev);
->      if (!mode) {
->          DRM_ERROR("Failed to create a new display mode\n");
->          return -ENOMEM;
->      }
->  
->      drm_mode_probed_add(connector, mode);
-> +    count += 1;
->  
-> -    return 1;
-> +    mode = drm_mode_analog_pal_576i(connector->dev);
-> +    if (!mode) {
-> +        DRM_ERROR("Failed to create a new display mode\n");
-> +        return -ENOMEM;
-> +    }
+> +/**
+> + * drm_mode_create_tv_properties - create TV specific connector properties
+> + * @dev: DRM device
+> + * @supported_tv_modes: Bitmask of TV modes supported (See DRM_MODE_TV_MODE_*)
 > +
-> +    drm_mode_probed_add(connector, mode);
-> +    count += 1;
+> + * Called by a driver's TV initialization routine, this function creates
+> + * the TV specific connector properties for a given device.  Caller is
+> + * responsible for allocating a list of format names and passing them to
+> + * this routine.
+> + *
+> + * Returns:
+> + * 0 on success or a negative error code on failure.
+> + */
+> +int drm_mode_create_tv_properties(struct drm_device *dev,
+> +                  unsigned int supported_tv_modes)
+
+supported_tv_modes is supposed to be a bitmask of BIT(DRM_MODE_TV_MODE_*)
+(or (1<<DRM_MODE_TV_MODE_*)) rather than DRM_MODE_TV_MODE_* directly, but this
+is not said explicitly anywhere in this doc comment.
+
+> +    /**
+> +     * @DRM_MODE_TV_MODE_PAL_NC: Seems equivalent to
+> +     * @DRM_MODE_TV_MODE_PAL_N.
+> +     */
+> +    DRM_MODE_TV_MODE_PAL_NC,
+
+AFAIK, the entire reason that "PAL-Nc" is ever mentioned as something separate
+from PAL-N is a result of a misunderstanding or misreading of the CCIR/ITU
+documents. See also the posting signed as Alchaemist here:
+https://en.wikipedia.org/wiki/Talk:PAL#PAL-N_versus_PAL-Nc
+
+That being said, we probably want to keep it if we want to remaing compatible
+with the loads of software and drivers which enumerate those as separate
+systems. But from a technical standpoint, PAL-N and PAL-Nc (and N/PAL, PAL-CN
+etc.) are just different "spellings" referring to exactly the same system.
+
+> +    /**
+> +     * @DRM_MODE_TV_MODE_SECAM_K: CCIR System G together with the
+> +     * SECAM color system. Similar to @DRM_MODE_TV_MODE_SECAM_G but
+> +     * with different channels.
+> +     */
+> +    DRM_MODE_TV_MODE_SECAM_K,
 > +
-> +    return count;
-> +}
+> +    /**
+> +     * @DRM_MODE_TV_MODE_SECAM_K1: CCIR System G together with the
+> +     * SECAM color system. Similar to @DRM_MODE_TV_MODE_SECAM_G and
+> +     * @DRM_MODE_TV_MODE_SECAM_K but with different channels.
+> +     */
+> +    DRM_MODE_TV_MODE_SECAM_K1,
 
-Xorg is pretty confused by these modes being reported like that. The 576i mode
-is *always* preferred, presumably because of the higher resolution. If the NTSC
-mode is set (via the kernel cmdline or just due to it being the default), this
-results in a mess on the screen - exactly the same thing as on the screenshot
-linked above.
-
-Note that drm_helper_probe_add_cmdline_mode() *does* add the
-DRM_MODE_TYPE_USERDEF flag to the 480i mode, having detected it as preferred
-on the command line - but Xorg does not seem to care about that.
-
-I remember Noralf suggesting setting DRM_MODE_TYPE_PREFERRED for the mode that
-corresponds to the currently chosen tv_mode - that would fix the problem.
-An alternative would be to _not_ add the "opposite" mode at all, like the
-current default Raspberry Pi OS kernel behaves.
-
-Note that if you decide to add the modeline validation like I suggested in the
-comment above, then without setting the preferred mode properly, Xorg will just
-give up and sit on a blank screen until you run xrandr from another terminal
-if tv_mode incompatible with 576i is selected.
+Typos: you meant CCIR Systems K and K1, not System G.
 
 Best regards,
 Mateusz Kwiatkowski
