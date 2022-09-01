@@ -2,17 +2,17 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6EAC5A9F99
-	for <lists+nouveau@lfdr.de>; Thu,  1 Sep 2022 21:10:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8504F5AA01A
+	for <lists+nouveau@lfdr.de>; Thu,  1 Sep 2022 21:35:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 504DB10E0C5;
-	Thu,  1 Sep 2022 19:10:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1EB9D10E1A8;
+	Thu,  1 Sep 2022 19:35:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp.domeneshop.no (smtp.domeneshop.no
  [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 89BBD10E0C5;
- Thu,  1 Sep 2022 19:10:07 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5E6ED10E1A8;
+ Thu,  1 Sep 2022 19:35:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  ; s=ds202112;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
@@ -20,18 +20,18 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rhtT+Sp0vnxRpNP0XY9ZvDI6DsH8ZajxXNPr63C7SlI=; b=LttpzivC3NSHhWeg3Re8l/llhP
- wan5/B9sFOajMVmEqto29kJYIXKu0rCD5fNcU4t4bb+NFAHhEsv2gPbe0DwjD18+niwwF6IYTptay
- +0D1M3hPbz/arkPbQDHU1IGIlt8HDLH4YrWX3d2tvEV28zE7SaauVdjtUC9cI51yfK52tlmx6xiNY
- 3vknyOIgFocH9z9HwMX7qOK6vNyvTBpq0+NMu9VP2RbcD/RxCi0dcsSqhqWiwNsB3qsRYIpK2Ooyw
- qHy+rW/jxYlyS39UKbLiVx4tdh7cwmIibN9rTam/TFM3P+qiwfZOXTqJHe/o79MWzW+5UQOf+HhYH
- qRdLRkKA==;
-Received: from [2a01:799:961:d200:cca0:57ac:c55d:a485] (port=51554)
+ bh=HSmU8cbfTMrBaPDEft9ugvcLZ7df9DZiQiiVlzQT0Tw=; b=qLjy/48/HybrCZXhucwMbBtKJp
+ 3TQbxLtZYMvSPYnBIV1FP4YMZdeVxZdeb8IrBeAhyjcHbR48eZ3cqwaUyKSRMM6DOQ9iZfJ2XCPD6
+ av7PC77mmiFG6qUN0YW2TLxNBmhG/OHSuD5qut6FTgE9i/x1rSJzTI8Sc2eAma98W6N4XxH64KZyD
+ nX//akYOhh3zihSmyGBz7pNFVaeuP5f+pGW5j4s9zWcQ2RNqzSMRDsGMOSZkpxU2nUJWqrKaD0MyS
+ K6gTTOv8Lx+Cv8ibktpYIIY5h542j1BJDWvYwCzIYBQPXPj6+c9B6PKY4gZZIneg3dathxMx/k1tv
+ 4FK26vCQ==;
+Received: from [2a01:799:961:d200:cca0:57ac:c55d:a485] (port=52634)
  by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1oTpZj-0004zo-Nc; Thu, 01 Sep 2022 21:10:03 +0200
-Message-ID: <6bbd14d3-74df-57f5-c8b1-d559f53f9248@tronnes.org>
-Date: Thu, 1 Sep 2022 21:09:55 +0200
+ id 1oTpyL-0002UR-US; Thu, 01 Sep 2022 21:35:29 +0200
+Message-ID: <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
+Date: Thu, 1 Sep 2022 21:35:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.13.0
@@ -46,15 +46,14 @@ To: Maxime Ripard <maxime@cerno.tech>, Maxime Ripard <mripard@kernel.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>,
  Samuel Holland <samuel@sholland.org>, Karol Herbst <kherbst@redhat.com>,
  Emma Anholt <emma@anholt.net>, Daniel Vetter <daniel@ffwll.ch>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Dom Cobley <dom@raspberrypi.com>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-10-459522d653a7@cerno.tech>
 From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v2-10-459522d653a7@cerno.tech>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH v2 10/41] drm/modes: Add a function to
- generate analog display modes
+Subject: Re: [Nouveau] [PATCH v2 00/41] drm: Analog TV Improvements
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,10 +65,9 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
- Hans de Goede <hdegoede@redhat.com>,
+Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-sunxi@lists.linux.dev, Hans de Goede <hdegoede@redhat.com>,
  =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
  Geert Uytterhoeven <geert@linux-m68k.org>,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
@@ -80,1335 +78,152 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
 Den 29.08.2022 15.11, skrev Maxime Ripard:
-> Multiple drivers (meson, vc4, sun4i) define analog TV 525-lines and
-> 
-> 625-lines modes in their drivers.
+> Hi,
 > 
 > 
 > 
-> Since those modes are fairly standard, and that we'll need to use them
+> Here's a series aiming at improving the command line named modes support,
 > 
-> in more places in the future, it makes sense to move their definition
-> 
-> into the core framework.
+> and more importantly how we deal with all the analog TV variants.
 > 
 > 
 > 
-> However, analog display usually have fairly loose timings requirements,
+> The named modes support were initially introduced to allow to specify the
 > 
-> the only discrete parameters being the total number of lines and pixel
-> 
-> clock frequency. Thus, we created a function that will create a display
-> 
-> mode from the standard, the pixel frequency and the active area.
+> analog TV mode to be used.
 > 
 > 
 > 
-> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> However, this was causing multiple issues:
+> 
+> 
+> 
+>   * The mode name parsed on the command line was passed directly to the
+> 
+>     driver, which had to figure out which mode it was suppose to match;
+> 
+> 
+> 
+>   * Figuring that out wasn't really easy, since the video= argument or what
+> 
+>     the userspace might not even have a name in the first place, but
+> 
+>     instead could have passed a mode with the same timings;
+> 
+> 
+> 
+>   * The fallback to matching on the timings was mostly working as long as
+> 
+>     we were supporting one 525 lines (most likely NSTC) and one 625 lines
+> 
+>     (PAL), but couldn't differentiate between two modes with the same
+> 
+>     timings (NTSC vs PAL-M vs NSTC-J for example);
+> 
+> 
+> 
+>   * There was also some overlap with the tv mode property registered by
+> 
+>     drm_mode_create_tv_properties(), but named modes weren't interacting
+> 
+>     with that property at all.
+> 
+> 
+> 
+>   * Even though that property was generic, its possible values were
+> 
+>     specific to each drivers, which made some generic support difficult.
+> 
+> 
+> 
+> Thus, I chose to tackle in multiple steps:
+> 
+> 
+> 
+>   * A new TV norm property was introduced, with generic values, each driver
+> 
+>     reporting through a bitmask what standard it supports to the userspace;
+> 
+> 
+> 
+>   * This option was added to the command line parsing code to be able to
+> 
+>     specify it on the kernel command line, and new atomic_check and reset
+> 
+>     helpers were created to integrate properly into atomic KMS;
+> 
+> 
+> 
+>   * The named mode parsing code is now creating a proper display mode for
+> 
+>     the given named mode, and the TV standard will thus be part of the
+> 
+>     connector state;
+> 
+> 
+> 
+>   * Two drivers were converted and tested for now (vc4 and sun4i), with
+> 
+>     some backward compatibility code to translate the old TV mode to the
+> 
+>     new TV mode;
+> 
+> 
+> 
+> Unit tests were created along the way.
+> 
+> 
+> 
+> One can switch from NTSC to PAL now using (on vc4)
+> 
+> 
+> 
+> modetest -M vc4  -s 53:720x480i -w 53:'tv norm':0
+> 
+> 
+> 
+> modetest -M vc4 -s 53:720x480i -w 53:'tv norm':4
 > 
 
-On a 32-bit build I'm getting bogus modes:
+The property name has changed, this gives me PAL:
 
-[  249.599997] [drm:drm_helper_probe_single_connector_modes]
-[CONNECTOR:45:Composite-1]
-[  249.600198] [drm:drm_mode_debug_printmodeline] Modeline "720x480i":
-17143 13500 720 308 372 3 480 499 505 525 0x40 0x1a
-[  249.600292] [drm:drm_mode_prune_invalid] Not using 720x480i mode:
-H_ILLEGAL
-[  249.600317] [drm:drm_mode_debug_printmodeline] Modeline "720x576i": 0
-13500 720 302 366 0 576 597 603 625 0x40 0x1a
-[  249.600349] [drm:drm_mode_prune_invalid] Not using 720x576i mode:
-H_ILLEGAL
-[  249.600374] [drm:drm_helper_probe_single_connector_modes]
-[CONNECTOR:45:Composite-1] probed modes :
-[  249.600453] [drm:drm_mode_debug_printmodeline] Modeline "720x240i":
-60 27800 720 736 808 896 240 241 244 516 0x20 0x6
+$ modetest -M vc4 -s 45:720x576i -w 45:'TV mode':4
 
-It's fine on 64-bit.
+
+I have finally found a workaround for my kernel hangs.
+
+Dom had a look at my kernel and found that the VideoCore was fine, and
+he said this:
+
+> That suggests cause of lockup was on arm side rather than VC side.
+>
+> But it's hard to diagnose further. Once you've had a peripheral not
+> respond, the AXI bus locks up and no further operations are possible.
+> Usual causes of this are required clocks being stopped or domains
+> disabled and then trying to access the hardware.
+>
+
+So when I got this on my 64-bit build:
+
+[  166.702171] SError Interrupt on CPU1, code 0x00000000bf000002 -- SError
+[  166.702187] CPU: 1 PID: 8 Comm: kworker/u8:0 Tainted: G        W
+    5.19.0-rc6-00096-gba7973977976-dirty #1
+[  166.702200] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
+[  166.702206] Workqueue: events_freezable_power_ thermal_zone_device_check
+[  166.702231] pstate: 200000c5 (nzCv daIF -PAN -UAO -TCO -DIT -SSBS
+BTYPE=--)
+[  166.702242] pc : regmap_mmio_read32le+0x10/0x28
+[  166.702261] lr : regmap_mmio_read+0x44/0x70
+...
+[  166.702606]  bcm2711_get_temp+0x58/0xb0 [bcm2711_thermal]
+
+I wondered if that reg read was stalled due to a clock being stopped.
+
+Lo and behold, disabling runtime pm and keeping the vec clock running
+all the time fixed it[1].
+
+I don't know what the problem is, but at least I can now test this patchset.
+
+[1] https://gist.github.com/notro/23b984e7fa05cfbda2db50a421cac065
 
 Noralf.
-
-> 
-> 
-> diff --git a/drivers/gpu/drm/drm_modes.c b/drivers/gpu/drm/drm_modes.c
-> 
-> index 304004fb80aa..ee581ee17171 100644
-> 
-> --- a/drivers/gpu/drm/drm_modes.c
-> 
-> +++ b/drivers/gpu/drm/drm_modes.c
-> 
-> @@ -116,6 +116,459 @@ void drm_mode_probed_add(struct drm_connector *connector,
-> 
->  }
-> 
->  EXPORT_SYMBOL(drm_mode_probed_add);
-> 
->  
-> 
-> +enum drm_mode_analog {
-> 
-> +	DRM_MODE_ANALOG_NTSC,
-> 
-> +	DRM_MODE_ANALOG_PAL,
-> 
-> +};
-> 
-> +
-> 
-> +/*
-> 
-> + * The timings come from:
-> 
-> + * - https://web.archive.org/web/20220406232708/http://www.kolumbus.fi/pami1/video/pal_ntsc.html
-> 
-> + * - https://web.archive.org/web/20220406124914/http://martin.hinner.info/vga/pal.html
-> 
-> + * - https://web.archive.org/web/20220609202433/http://www.batsocks.co.uk/readme/video_timing.htm
-> 
-> + */
-> 
-> +#define NTSC_LINE_DURATION_NS		63556U
-> 
-> +#define NTSC_LINES_NUMBER		525
-> 
-> +
-> 
-> +#define NTSC_HBLK_DURATION_TYP_NS	10900U
-> 
-> +#define NTSC_HBLK_DURATION_MIN_NS	(NTSC_HBLK_DURATION_TYP_NS - 200)
-> 
-> +#define NTSC_HBLK_DURATION_MAX_NS	(NTSC_HBLK_DURATION_TYP_NS + 200)
-> 
-> +
-> 
-> +#define NTSC_HACT_DURATION_TYP_NS	(NTSC_LINE_DURATION_NS - NTSC_HBLK_DURATION_TYP_NS)
-> 
-> +#define NTSC_HACT_DURATION_MIN_NS	(NTSC_LINE_DURATION_NS - NTSC_HBLK_DURATION_MAX_NS)
-> 
-> +#define NTSC_HACT_DURATION_MAX_NS	(NTSC_LINE_DURATION_NS - NTSC_HBLK_DURATION_MIN_NS)
-> 
-> +
-> 
-> +#define NTSC_HFP_DURATION_TYP_NS	1500
-> 
-> +#define NTSC_HFP_DURATION_MIN_NS	1270
-> 
-> +#define NTSC_HFP_DURATION_MAX_NS	2220
-> 
-> +
-> 
-> +#define NTSC_HSLEN_DURATION_TYP_NS	4700
-> 
-> +#define NTSC_HSLEN_DURATION_MIN_NS	(NTSC_HSLEN_DURATION_TYP_NS - 100)
-> 
-> +#define NTSC_HSLEN_DURATION_MAX_NS	(NTSC_HSLEN_DURATION_TYP_NS + 100)
-> 
-> +
-> 
-> +#define NTSC_HBP_DURATION_TYP_NS	4700
-> 
-> +
-> 
-> +/*
-> 
-> + * I couldn't find the actual tolerance for the back porch, so let's
-> 
-> + * just reuse the sync length ones.
-> 
-> + */
-> 
-> +#define NTSC_HBP_DURATION_MIN_NS	(NTSC_HBP_DURATION_TYP_NS - 100)
-> 
-> +#define NTSC_HBP_DURATION_MAX_NS	(NTSC_HBP_DURATION_TYP_NS + 100)
-> 
-> +
-> 
-> +#define PAL_LINE_DURATION_NS		64000U
-> 
-> +#define PAL_LINES_NUMBER		625
-> 
-> +
-> 
-> +#define PAL_HACT_DURATION_TYP_NS	51950U
-> 
-> +#define PAL_HACT_DURATION_MIN_NS	(PAL_HACT_DURATION_TYP_NS - 100)
-> 
-> +#define PAL_HACT_DURATION_MAX_NS	(PAL_HACT_DURATION_TYP_NS + 400)
-> 
-> +
-> 
-> +#define PAL_HBLK_DURATION_TYP_NS	(PAL_LINE_DURATION_NS - PAL_HACT_DURATION_TYP_NS)
-> 
-> +#define PAL_HBLK_DURATION_MIN_NS	(PAL_LINE_DURATION_NS - PAL_HACT_DURATION_MAX_NS)
-> 
-> +#define PAL_HBLK_DURATION_MAX_NS	(PAL_LINE_DURATION_NS - PAL_HACT_DURATION_MIN_NS)
-> 
-> +
-> 
-> +#define PAL_HFP_DURATION_TYP_NS		1650
-> 
-> +#define PAL_HFP_DURATION_MIN_NS		(PAL_HFP_DURATION_TYP_NS - 100)
-> 
-> +#define PAL_HFP_DURATION_MAX_NS		(PAL_HFP_DURATION_TYP_NS + 400)
-> 
-> +
-> 
-> +#define PAL_HSLEN_DURATION_TYP_NS	4700
-> 
-> +#define PAL_HSLEN_DURATION_MIN_NS	(PAL_HSLEN_DURATION_TYP_NS - 200)
-> 
-> +#define PAL_HSLEN_DURATION_MAX_NS	(PAL_HSLEN_DURATION_TYP_NS + 200)
-> 
-> +
-> 
-> +#define PAL_HBP_DURATION_TYP_NS		5700
-> 
-> +#define PAL_HBP_DURATION_MIN_NS		(PAL_HBP_DURATION_TYP_NS - 200)
-> 
-> +#define PAL_HBP_DURATION_MAX_NS		(PAL_HBP_DURATION_TYP_NS + 200)
-> 
-> +
-> 
-> +#define PAL_VFP_INTERLACE_LINES		5
-> 
-> +#define PAL_VSLEN_INTERLACE_LINES	5
-> 
-> +
-> 
-> +#define PAL_SHORT_SYNC_DURATION_NS	((2 + 30) * NSEC_PER_USEC)
-> 
-> +#define PAL_LONG_SYNC_DURATION_NS	((30 + 2) * NSEC_PER_USEC)
-> 
-> +
-> 
-> +struct analog_param_field {
-> 
-> +	unsigned int even, odd;
-> 
-> +};
-> 
-> +
-> 
-> +#define PARAM_FIELD(_odd, _even)		\
-> 
-> +	{ .even = _even, .odd = _odd }
-> 
-> +
-> 
-> +struct analog_param_range {
-> 
-> +	unsigned int	min, typ, max;
-> 
-> +};
-> 
-> +
-> 
-> +#define PARAM_RANGE(_min, _typ, _max)		\
-> 
-> +	{ .min = _min, .typ = _typ, .max = _max }
-> 
-> +
-> 
-> +struct analog_parameters {
-> 
-> +	unsigned int			num_lines;
-> 
-> +	unsigned int			line_duration_ns;
-> 
-> +
-> 
-> +	struct analog_param_range	hact_ns;
-> 
-> +	struct analog_param_range	hfp_ns;
-> 
-> +	struct analog_param_range	hslen_ns;
-> 
-> +	struct analog_param_range	hbp_ns;
-> 
-> +	struct analog_param_range	hblk_ns;
-> 
-> +
-> 
-> +	struct analog_param_field	vfp_lines;
-> 
-> +	struct analog_param_field	vslen_lines;
-> 
-> +	struct analog_param_field	vbp_lines;
-> 
-> +};
-> 
-> +
-> 
-> +#define TV_MODE_PARAMETER(_mode, _lines, _line_dur, _hact, _hfp, _hslen, _hbp, _hblk, _vfp, _vslen, _vbp) \
-> 
-> +	[_mode] = {							\
-> 
-> +		.num_lines = _lines,					\
-> 
-> +		.line_duration_ns = _line_dur,				\
-> 
-> +		.hact_ns = _hact,					\
-> 
-> +		.hfp_ns = _hfp,						\
-> 
-> +		.hslen_ns = _hslen,					\
-> 
-> +		.hbp_ns = _hbp,						\
-> 
-> +		.hblk_ns = _hblk,					\
-> 
-> +		.vfp_lines = _vfp,					\
-> 
-> +		.vslen_lines = _vslen,					\
-> 
-> +		.vbp_lines = _vbp,					\
-> 
-> +	}
-> 
-> +
-> 
-> +const static struct analog_parameters tv_modes_parameters[] = {
-> 
-> +	TV_MODE_PARAMETER(DRM_MODE_ANALOG_NTSC,
-> 
-> +			  NTSC_LINES_NUMBER,
-> 
-> +			  NTSC_LINE_DURATION_NS,
-> 
-> +			  PARAM_RANGE(NTSC_HACT_DURATION_MIN_NS,
-> 
-> +				      NTSC_HACT_DURATION_TYP_NS,
-> 
-> +				      NTSC_HACT_DURATION_MAX_NS),
-> 
-> +			  PARAM_RANGE(NTSC_HFP_DURATION_MIN_NS,
-> 
-> +				      NTSC_HFP_DURATION_TYP_NS,
-> 
-> +				      NTSC_HFP_DURATION_MAX_NS),
-> 
-> +			  PARAM_RANGE(NTSC_HSLEN_DURATION_MIN_NS,
-> 
-> +				      NTSC_HSLEN_DURATION_TYP_NS,
-> 
-> +				      NTSC_HSLEN_DURATION_MAX_NS),
-> 
-> +			  PARAM_RANGE(NTSC_HBP_DURATION_MIN_NS,
-> 
-> +				      NTSC_HBP_DURATION_TYP_NS,
-> 
-> +				      NTSC_HBP_DURATION_MAX_NS),
-> 
-> +			  PARAM_RANGE(NTSC_HBLK_DURATION_MIN_NS,
-> 
-> +				      NTSC_HBLK_DURATION_TYP_NS,
-> 
-> +				      NTSC_HBLK_DURATION_MAX_NS),
-> 
-> +			  PARAM_FIELD(3, 3),
-> 
-> +			  PARAM_FIELD(3, 3),
-> 
-> +			  PARAM_FIELD(3, 3)),
-> 
-> +	TV_MODE_PARAMETER(DRM_MODE_ANALOG_PAL,
-> 
-> +			  PAL_LINES_NUMBER,
-> 
-> +			  PAL_LINE_DURATION_NS,
-> 
-> +			  PARAM_RANGE(PAL_HACT_DURATION_MIN_NS,
-> 
-> +				      PAL_HACT_DURATION_TYP_NS,
-> 
-> +				      PAL_HACT_DURATION_MAX_NS),
-> 
-> +			  PARAM_RANGE(PAL_HFP_DURATION_MIN_NS,
-> 
-> +				      PAL_HFP_DURATION_TYP_NS,
-> 
-> +				      PAL_HFP_DURATION_MAX_NS),
-> 
-> +			  PARAM_RANGE(PAL_HSLEN_DURATION_MIN_NS,
-> 
-> +				      PAL_HSLEN_DURATION_TYP_NS,
-> 
-> +				      PAL_HSLEN_DURATION_MAX_NS),
-> 
-> +			  PARAM_RANGE(PAL_HBP_DURATION_MIN_NS,
-> 
-> +				      PAL_HBP_DURATION_TYP_NS,
-> 
-> +				      PAL_HBP_DURATION_MAX_NS),
-> 
-> +			  PARAM_RANGE(PAL_HBLK_DURATION_MIN_NS,
-> 
-> +				      PAL_HBLK_DURATION_TYP_NS,
-> 
-> +				      PAL_HBLK_DURATION_MAX_NS),
-> 
-> +
-> 
-> +			  /*
-> 
-> +			   * The front porch is actually 6 short sync
-> 
-> +			   * pulses for the even field, and 5 for the
-> 
-> +			   * odd field. Each sync takes half a life so
-> 
-> +			   * the odd field front porch is shorter by
-> 
-> +			   * half a line.
-> 
-> +			   *
-> 
-> +			   * In progressive, we're supposed to use 6
-> 
-> +			   * pulses, so we're fine there
-> 
-> +			   */
-> 
-> +			  PARAM_FIELD(3, 2),
-> 
-> +
-> 
-> +			  /*
-> 
-> +			   * The vsync length is 5 long sync pulses,
-> 
-> +			   * each field taking half a line. We're
-> 
-> +			   * shorter for both fields by half a line.
-> 
-> +			   *
-> 
-> +			   * In progressive, we're supposed to use 5
-> 
-> +			   * pulses, so we're off by half
-> 
-> +			   * a line.
-> 
-> +			   *
-> 
-> +			   * In interlace, we're now off by half a line
-> 
-> +			   * for the even field and one line for the odd
-> 
-> +			   * field.
-> 
-> +			   */
-> 
-> +			  PARAM_FIELD(3, 3),
-> 
-> +
-> 
-> +			  /*
-> 
-> +			   * The back porch is actually 5 short sync
-> 
-> +			   * pulses for the even field, 4 for the odd
-> 
-> +			   * field. In progressive, it's 5 short syncs.
-> 
-> +			   *
-> 
-> +			   * In progressive, we thus have 2.5 lines,
-> 
-> +			   * plus the 0.5 line we were missing
-> 
-> +			   * previously, so we should use 3 lines.
-> 
-> +			   *
-> 
-> +			   * In interlace, the even field is in the
-> 
-> +			   * exact same case than progressive. For the
-> 
-> +			   * odd field, we should be using 2 lines but
-> 
-> +			   * we're one line short, so we'll make up for
-> 
-> +			   * it here by using 3.
-> 
-> +			   */
-> 
-> +			  PARAM_FIELD(3, 3)),
-> 
-> +};
-> 
-> +
-> 
-> +static int fill_analog_mode(struct drm_display_mode *mode,
-> 
-> +			    const struct analog_parameters *params,
-> 
-> +			    unsigned long pixel_clock_hz,
-> 
-> +			    unsigned int hactive,
-> 
-> +			    unsigned int vactive,
-> 
-> +			    bool interlace)
-> 
-> +{
-> 
-> +	unsigned long pixel_duration_ns = NSEC_PER_SEC / pixel_clock_hz;
-> 
-> +	unsigned long long htotal;
-> 
-> +	unsigned int vtotal;
-> 
-> +	unsigned int max_hact, hact_duration_ns;
-> 
-> +	unsigned int hblk, hblk_duration_ns;
-> 
-> +	unsigned int hfp, hfp_min, hfp_duration_ns;
-> 
-> +	unsigned int hslen, hslen_duration_ns;
-> 
-> +	unsigned int hbp, hbp_min, hbp_duration_ns;
-> 
-> +	unsigned int porches, porches_duration_ns;
-> 
-> +	unsigned int vfp, vfp_min;
-> 
-> +	unsigned int vbp, vbp_min;
-> 
-> +	unsigned int vslen;
-> 
-> +	int porches_rem;
-> 
-> +	bool strict = true;
-> 
-> +
-> 
-> +	max_hact = params->hact_ns.max / pixel_duration_ns;
-> 
-> +	if (pixel_clock_hz == 13500000 && hactive > max_hact && hactive <= 720)
-> 
-> +		strict = false;
-> 
-> +
-> 
-> +	/*
-> 
-> +	 * Our pixel duration is going to be round down by the division,
-> 
-> +	 * so rounding up is probably going to introduce even more
-> 
-> +	 * deviation.
-> 
-> +	 */
-> 
-> +	htotal = params->line_duration_ns * pixel_clock_hz / NSEC_PER_SEC;
-> 
-> +
-> 
-> +	hact_duration_ns = hactive * pixel_duration_ns;
-> 
-> +	if (strict &&
-> 
-> +	    (hact_duration_ns < params->hact_ns.min ||
-> 
-> +	     hact_duration_ns > params->hact_ns.max)) {
-> 
-> +		DRM_ERROR("Invalid horizontal active area duration: %uns (min: %u, max %u)\n",
-> 
-> +			  hact_duration_ns, params->hact_ns.min, params->hact_ns.max);
-> 
-> +		return -EINVAL;
-> 
-> +	}
-> 
-> +
-> 
-> +	hblk = htotal - hactive;
-> 
-> +	hblk_duration_ns = hblk * pixel_duration_ns;
-> 
-> +	if (strict &&
-> 
-> +	    (hblk_duration_ns < params->hblk_ns.min ||
-> 
-> +	     hblk_duration_ns > params->hblk_ns.max)) {
-> 
-> +		DRM_ERROR("Invalid horizontal blanking duration: %uns (min: %u, max %u)\n",
-> 
-> +			  hblk_duration_ns, params->hblk_ns.min, params->hblk_ns.max);
-> 
-> +		return -EINVAL;
-> 
-> +	}
-> 
-> +
-> 
-> +	hslen = DIV_ROUND_UP(params->hslen_ns.typ, pixel_duration_ns);
-> 
-> +	hslen_duration_ns = hslen * pixel_duration_ns;
-> 
-> +	if (strict &&
-> 
-> +	    (hslen_duration_ns < params->hslen_ns.min ||
-> 
-> +	     hslen_duration_ns > params->hslen_ns.max)) {
-> 
-> +		DRM_ERROR("Invalid horizontal sync duration: %uns (min: %u, max %u)\n",
-> 
-> +			  hslen_duration_ns, params->hslen_ns.min, params->hslen_ns.max);
-> 
-> +		return -EINVAL;
-> 
-> +	}
-> 
-> +
-> 
-> +	porches = hblk - hslen;
-> 
-> +	porches_duration_ns = porches * pixel_duration_ns;
-> 
-> +	if (strict &&
-> 
-> +	    (porches_duration_ns > (params->hfp_ns.max + params->hbp_ns.max) ||
-> 
-> +	     porches_duration_ns < (params->hfp_ns.min + params->hbp_ns.min))) {
-> 
-> +		DRM_ERROR("Invalid horizontal porches duration: %uns\n", porches_duration_ns);
-> 
-> +		return -EINVAL;
-> 
-> +	}
-> 
-> +
-> 
-> +	hfp_min = DIV_ROUND_UP(params->hfp_ns.min, pixel_duration_ns);
-> 
-> +	hbp_min = DIV_ROUND_UP(params->hbp_ns.min, pixel_duration_ns);
-> 
-> +	porches_rem = porches - hfp_min - hbp_min;
-> 
-> +
-> 
-> +	hfp = hfp_min + DIV_ROUND_UP(porches_rem, 2);
-> 
-> +	hfp_duration_ns = hfp * pixel_duration_ns;
-> 
-> +	if (strict &&
-> 
-> +	    (hfp_duration_ns < params->hfp_ns.min ||
-> 
-> +	     hfp_duration_ns > params->hfp_ns.max)) {
-> 
-> +		DRM_ERROR("Invalid horizontal front porch duration: %uns (min: %u, max %u)\n",
-> 
-> +			  hfp_duration_ns, params->hfp_ns.min, params->hfp_ns.max);
-> 
-> +		return -EINVAL;
-> 
-> +	}
-> 
-> +
-> 
-> +	hbp = porches - hfp;
-> 
-> +	hbp_duration_ns = hbp * pixel_duration_ns;
-> 
-> +	if (strict &&
-> 
-> +	    (hbp_duration_ns < params->hbp_ns.min ||
-> 
-> +	     hbp_duration_ns > params->hbp_ns.max)) {
-> 
-> +		DRM_ERROR("Invalid horizontal back porch duration: %uns (min: %u, max %u)\n",
-> 
-> +			  hbp_duration_ns, params->hbp_ns.min, params->hbp_ns.max);
-> 
-> +		return -EINVAL;
-> 
-> +	}
-> 
-> +
-> 
-> +	if (htotal != (hactive + hfp + hslen + hbp))
-> 
-> +		return -EINVAL;
-> 
-> +
-> 
-> +	mode->clock = pixel_clock_hz / 1000;
-> 
-> +	mode->hdisplay = hactive;
-> 
-> +	mode->hsync_start = hactive + hfp;
-> 
-> +	mode->hsync_end = hactive + hfp + hslen;
-> 
-> +	mode->htotal = hactive + hfp + hslen + hbp;
-> 
-> +
-> 
-> +	if (interlace) {
-> 
-> +		vfp_min = params->vfp_lines.even + params->vfp_lines.odd;
-> 
-> +		vbp_min = params->vbp_lines.even + params->vbp_lines.odd;
-> 
-> +		vslen = params->vslen_lines.even + params->vslen_lines.odd;
-> 
-> +	} else {
-> 
-> +		/*
-> 
-> +		 * By convention, NSTC (aka 525/60) systems start with
-> 
-> +		 * the even field, but PAL (aka 625/50) systems start
-> 
-> +		 * with the odd one.
-> 
-> +		 *
-> 
-> +		 * PAL systems also have asymetric timings between the
-> 
-> +		 * even and odd field, while NTSC is symetric.
-> 
-> +		 *
-> 
-> +		 * Moreover, if we want to create a progressive mode for
-> 
-> +		 * PAL, we need to use the odd field timings.
-> 
-> +		 *
-> 
-> +		 * Since odd == even for NTSC, we can just use the odd
-> 
-> +		 * one all the time to simplify the code a bit.
-> 
-> +		 */
-> 
-> +		vfp_min = params->vfp_lines.odd;
-> 
-> +		vbp_min = params->vbp_lines.odd;
-> 
-> +		vslen = params->vslen_lines.odd;
-> 
-> +	}
-> 
-> +
-> 
-> +	porches = params->num_lines - vactive - vslen;
-> 
-> +	porches_rem = porches - vfp_min - vbp_min;
-> 
-> +
-> 
-> +	vfp = vfp_min + (porches_rem / 2);
-> 
-> +	vbp = porches - vfp;
-> 
-> +
-> 
-> +	vtotal = vactive + vfp + vslen + vbp;
-> 
-> +	if (params->num_lines != vtotal) {
-> 
-> +		DRM_ERROR("Invalid vertical total: %upx (expected %upx)\n",
-> 
-> +			  vtotal, params->num_lines);
-> 
-> +		return -EINVAL;
-> 
-> +	}
-> 
-> +
-> 
-> +	mode->vdisplay = vactive;
-> 
-> +	mode->vsync_start = vactive + vfp;
-> 
-> +	mode->vsync_end = vactive + vfp + vslen;
-> 
-> +	mode->vtotal = vactive + vfp + vslen + vbp;
-> 
-> +
-> 
-> +	mode->type = DRM_MODE_TYPE_DRIVER;
-> 
-> +	mode->flags = DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC;
-> 
-> +	if (interlace)
-> 
-> +		mode->flags |= DRM_MODE_FLAG_INTERLACE;
-> 
-> +
-> 
-> +	drm_mode_set_name(mode);
-> 
-> +
-> 
-> +	if (mode->vtotal != params->num_lines)
-> 
-> +		return -EINVAL;
-> 
-> +
-> 
-> +	return 0;
-> 
-> +}
-> 
-> +
-> 
-> +/**
-> 
-> + * drm_analog_tv_mode - create a display mode for an analog TV
-> 
-> + * @dev: drm device
-> 
-> + * @tv_mode: TV Mode standard to create a mode for. See DRM_MODE_TV_MODE_*.
-> 
-> + * @pixel_clock_hz: Pixel Clock Frequency, in Hertz
-> 
-> + * @hdisplay: hdisplay size
-> 
-> + * @vdisplay: vdisplay size
-> 
-> + * @interlace: whether to compute an interlaced mode
-> 
-> + *
-> 
-> + * This function creates a struct drm_display_mode instance suited for
-> 
-> + * an analog TV output, for one of the usual analog TV mode.
-> 
-> + *
-> 
-> + * Note that @hdisplay is larger than the usual constraints for the PAL
-> 
-> + * and NTSC timings, and we'll choose to ignore most timings constraints
-> 
-> + * to reach those resolutions.
-> 
-> + *
-> 
-> + * Returns:
-> 
-> + *
-> 
-> + * A pointer to the mode, allocated with drm_mode_create(). Returns NULL
-> 
-> + * on error.
-> 
-> + */
-> 
-> +struct drm_display_mode *drm_analog_tv_mode(struct drm_device *dev,
-> 
-> +					    enum drm_connector_tv_mode tv_mode,
-> 
-> +					    unsigned long pixel_clock_hz,
-> 
-> +					    unsigned int hdisplay,
-> 
-> +					    unsigned int vdisplay,
-> 
-> +					    bool interlace)
-> 
-> +{
-> 
-> +	struct drm_display_mode *mode;
-> 
-> +	enum drm_mode_analog analog;
-> 
-> +	int ret;
-> 
-> +
-> 
-> +	switch (tv_mode) {
-> 
-> +	case DRM_MODE_TV_MODE_NTSC_443:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_NTSC_J:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_NTSC_M:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_PAL_60:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_PAL_M:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_SECAM_60:
-> 
-> +		analog = DRM_MODE_ANALOG_NTSC;
-> 
-> +		break;
-> 
-> +
-> 
-> +	case DRM_MODE_TV_MODE_PAL_B:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_PAL_D:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_PAL_G:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_PAL_H:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_PAL_I:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_PAL_N:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_PAL_NC:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_SECAM_B:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_SECAM_D:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_SECAM_G:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_SECAM_K:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_SECAM_K1:
-> 
-> +		fallthrough;
-> 
-> +	case DRM_MODE_TV_MODE_SECAM_L:
-> 
-> +		analog = DRM_MODE_ANALOG_PAL;
-> 
-> +		break;
-> 
-> +
-> 
-> +	default:
-> 
-> +		return NULL;
-> 
-> +	}
-> 
-> +
-> 
-> +	mode = drm_mode_create(dev);
-> 
-> +	if (!mode)
-> 
-> +		return NULL;
-> 
-> +
-> 
-> +	ret = fill_analog_mode(mode,
-> 
-> +			       &tv_modes_parameters[analog],
-> 
-> +			       pixel_clock_hz, hdisplay, vdisplay, interlace);
-> 
-> +	if (ret)
-> 
-> +		goto err_free_mode;
-> 
-> +
-> 
-> +	return mode;
-> 
-> +
-> 
-> +err_free_mode:
-> 
-> +	drm_mode_destroy(dev, mode);
-> 
-> +	return NULL;
-> 
-> +}
-> 
-> +EXPORT_SYMBOL(drm_analog_tv_mode);
-> 
-> +
-> 
->  /**
-> 
->   * drm_cvt_mode -create a modeline based on the CVT algorithm
-> 
->   * @dev: drm device
-> 
-> diff --git a/drivers/gpu/drm/tests/Makefile b/drivers/gpu/drm/tests/Makefile
-> 
-> index b29ef1085cad..b22ac96fdd65 100644
-> 
-> --- a/drivers/gpu/drm/tests/Makefile
-> 
-> +++ b/drivers/gpu/drm/tests/Makefile
-> 
-> @@ -10,5 +10,6 @@ obj-$(CONFIG_DRM_KUNIT_TEST) += \
-> 
->  	drm_framebuffer_test.o \
-> 
->  	drm_kunit_helpers.o \
-> 
->  	drm_mm_test.o \
-> 
-> +	drm_modes_test.o \
-> 
->  	drm_plane_helper_test.o \
-> 
->  	drm_rect_test.o
-> 
-> diff --git a/drivers/gpu/drm/tests/drm_modes_test.c b/drivers/gpu/drm/tests/drm_modes_test.c
-> 
-> new file mode 100644
-> 
-> index 000000000000..87d398fcb99e
-> 
-> --- /dev/null
-> 
-> +++ b/drivers/gpu/drm/tests/drm_modes_test.c
-> 
-> @@ -0,0 +1,131 @@
-> 
-> +// SPDX-License-Identifier: GPL-2.0
-> 
-> +/*
-> 
-> + * Kunit test for drm_modes functions
-> 
-> + */
-> 
-> +
-> 
-> +#include <kunit/test.h>
-> 
-> +
-> 
-> +#include <drm/drm_modes.h>
-> 
-> +
-> 
-> +#include "drm_kunit_helpers.h"
-> 
-> +
-> 
-> +struct drm_modes_test_priv {
-> 
-> +	struct drm_device *drm;
-> 
-> +};
-> 
-> +
-> 
-> +static int drm_modes_test_init(struct kunit *test)
-> 
-> +{
-> 
-> +	struct drm_modes_test_priv *priv;
-> 
-> +
-> 
-> +	priv = kunit_kzalloc(test, sizeof(*priv), GFP_KERNEL);
-> 
-> +	if (!priv)
-> 
-> +		return -ENOMEM;
-> 
-> +	test->priv = priv;
-> 
-> +
-> 
-> +	priv->drm = drm_kunit_device_init("drm-modes-test");
-> 
-> +	if (IS_ERR(priv->drm))
-> 
-> +		return PTR_ERR(priv->drm);
-> 
-> +
-> 
-> +	return 0;
-> 
-> +}
-> 
-> +
-> 
-> +static void drm_modes_test_exit(struct kunit *test)
-> 
-> +{
-> 
-> +	struct drm_modes_test_priv *priv = test->priv;
-> 
-> +
-> 
-> +	drm_kunit_device_exit(priv->drm);
-> 
-> +}
-> 
-> +
-> 
-> +static void drm_modes_analog_tv_ntsc_480i(struct kunit *test)
-> 
-> +{
-> 
-> +	struct drm_modes_test_priv *priv = test->priv;
-> 
-> +	struct drm_display_mode *mode;
-> 
-> +
-> 
-> +	mode = drm_analog_tv_mode(priv->drm,
-> 
-> +				  DRM_MODE_TV_MODE_NTSC_M,
-> 
-> +				  13500 * 1000, 720, 480,
-> 
-> +				  true);
-> 
-> +	KUNIT_ASSERT_NOT_NULL(test, mode);
-> 
-> +
-> 
-> +	KUNIT_EXPECT_EQ(test, drm_mode_vrefresh(mode), 60);
-> 
-> +	KUNIT_EXPECT_EQ(test, mode->hdisplay, 720);
-> 
-> +
-> 
-> +	/* 63.556us * 13.5MHz = 858 pixels */
-> 
-> +	KUNIT_EXPECT_EQ(test, mode->htotal, 858);
-> 
-> +	KUNIT_EXPECT_EQ(test, mode->vdisplay, 480);
-> 
-> +	KUNIT_EXPECT_EQ(test, mode->vtotal, 525);
-> 
-> +}
-> 
-> +
-> 
-> +static void drm_modes_analog_tv_ntsc_480i_inlined(struct kunit *test)
-> 
-> +{
-> 
-> +	struct drm_modes_test_priv *priv = test->priv;
-> 
-> +	struct drm_display_mode *expected, *mode;
-> 
-> +
-> 
-> +	expected = drm_analog_tv_mode(priv->drm,
-> 
-> +				      DRM_MODE_TV_MODE_NTSC_M,
-> 
-> +				      13500 * 1000, 720, 480,
-> 
-> +				      true);
-> 
-> +	KUNIT_ASSERT_NOT_NULL(test, expected);
-> 
-> +
-> 
-> +	mode = drm_mode_analog_ntsc_480i(priv->drm);
-> 
-> +	KUNIT_ASSERT_NOT_NULL(test, mode);
-> 
-> +
-> 
-> +	KUNIT_EXPECT_TRUE(test, drm_mode_equal(expected, mode));
-> 
-> +}
-> 
-> +
-> 
-> +static void drm_modes_analog_tv_pal_576i(struct kunit *test)
-> 
-> +{
-> 
-> +	struct drm_modes_test_priv *priv = test->priv;
-> 
-> +	struct drm_display_mode *mode;
-> 
-> +
-> 
-> +	mode = drm_analog_tv_mode(priv->drm,
-> 
-> +				  DRM_MODE_TV_MODE_PAL_B,
-> 
-> +				  13500 * 1000, 720, 576,
-> 
-> +				  true);
-> 
-> +	KUNIT_ASSERT_NOT_NULL(test, mode);
-> 
-> +
-> 
-> +	KUNIT_EXPECT_EQ(test, drm_mode_vrefresh(mode), 50);
-> 
-> +	KUNIT_EXPECT_EQ(test, mode->hdisplay, 720);
-> 
-> +
-> 
-> +	/* 64us * 13.5MHz = 864 pixels */
-> 
-> +	KUNIT_EXPECT_EQ(test, mode->htotal, 864);
-> 
-> +	KUNIT_EXPECT_EQ(test, mode->vdisplay, 576);
-> 
-> +	KUNIT_EXPECT_EQ(test, mode->vtotal, 625);
-> 
-> +}
-> 
-> +
-> 
-> +static void drm_modes_analog_tv_pal_576i_inlined(struct kunit *test)
-> 
-> +{
-> 
-> +	struct drm_modes_test_priv *priv = test->priv;
-> 
-> +	struct drm_display_mode *expected, *mode;
-> 
-> +
-> 
-> +	expected = drm_analog_tv_mode(priv->drm,
-> 
-> +				      DRM_MODE_TV_MODE_PAL_B,
-> 
-> +				      13500 * 1000, 720, 576,
-> 
-> +				      true);
-> 
-> +	KUNIT_ASSERT_NOT_NULL(test, expected);
-> 
-> +
-> 
-> +	mode = drm_mode_analog_pal_576i(priv->drm);
-> 
-> +	KUNIT_ASSERT_NOT_NULL(test, mode);
-> 
-> +
-> 
-> +	KUNIT_EXPECT_TRUE(test, drm_mode_equal(expected, mode));
-> 
-> +}
-> 
-> +
-> 
-> +static struct kunit_case drm_modes_analog_tv_tests[] = {
-> 
-> +	KUNIT_CASE(drm_modes_analog_tv_ntsc_480i),
-> 
-> +	KUNIT_CASE(drm_modes_analog_tv_ntsc_480i_inlined),
-> 
-> +	KUNIT_CASE(drm_modes_analog_tv_pal_576i),
-> 
-> +	KUNIT_CASE(drm_modes_analog_tv_pal_576i_inlined),
-> 
-> +	{ }
-> 
-> +};
-> 
-> +
-> 
-> +static struct kunit_suite drm_modes_analog_tv_test_suite = {
-> 
-> +	.name = "drm_modes_analog_tv",
-> 
-> +	.init = drm_modes_test_init,
-> 
-> +	.exit = drm_modes_test_exit,
-> 
-> +	.test_cases = drm_modes_analog_tv_tests,
-> 
-> +};
-> 
-> +
-> 
-> +kunit_test_suites(
-> 
-> +	&drm_modes_analog_tv_test_suite
-> 
-> +);
-> 
-> +MODULE_LICENSE("GPL v2");
-> 
-> diff --git a/include/drm/drm_modes.h b/include/drm/drm_modes.h
-> 
-> index a80ae9639e96..5ccf3d51d313 100644
-> 
-> --- a/include/drm/drm_modes.h
-> 
-> +++ b/include/drm/drm_modes.h
-> 
-> @@ -443,6 +443,23 @@ bool drm_mode_is_420_also(const struct drm_display_info *display,
-> 
->  bool drm_mode_is_420(const struct drm_display_info *display,
-> 
->  		     const struct drm_display_mode *mode);
-> 
->  
-> 
-> +struct drm_display_mode *drm_analog_tv_mode(struct drm_device *dev,
-> 
-> +					    enum drm_connector_tv_mode mode,
-> 
-> +					    unsigned long pixel_clock_hz,
-> 
-> +					    unsigned int hdisplay,
-> 
-> +					    unsigned int vdisplay,
-> 
-> +					    bool interlace);
-> 
-> +
-> 
-> +static inline struct drm_display_mode *drm_mode_analog_ntsc_480i(struct drm_device *dev)
-> 
-> +{
-> 
-> +	return drm_analog_tv_mode(dev, DRM_MODE_TV_MODE_NTSC_M, 13500000, 720, 480, true);
-> 
-> +}
-> 
-> +
-> 
-> +static inline struct drm_display_mode *drm_mode_analog_pal_576i(struct drm_device *dev)
-> 
-> +{
-> 
-> +	return drm_analog_tv_mode(dev, DRM_MODE_TV_MODE_PAL_B, 13500000, 720, 576, true);
-> 
-> +}
-> 
-> +
-> 
->  struct drm_display_mode *drm_cvt_mode(struct drm_device *dev,
-> 
->  				      int hdisplay, int vdisplay, int vrefresh,
-> 
->  				      bool reduced, bool interlaced,
-> 
-> 
-> 
