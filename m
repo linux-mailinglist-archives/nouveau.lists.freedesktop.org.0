@@ -2,59 +2,62 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E6295AAD9A
-	for <lists+nouveau@lfdr.de>; Fri,  2 Sep 2022 13:28:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4678B5AB14F
+	for <lists+nouveau@lfdr.de>; Fri,  2 Sep 2022 15:20:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 498E110E418;
-	Fri,  2 Sep 2022 11:28:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7C04C10E83D;
+	Fri,  2 Sep 2022 13:20:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp.domeneshop.no (smtp.domeneshop.no
- [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 52FBC10E7DA;
- Fri,  2 Sep 2022 11:28:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
- ; s=ds202112;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3P4G0s8jHHnMDuhy8+v0Q+ixmj390VbhdMQwj5y5Wjc=; b=bZtQWi7EyAVPLA42Rzf8cb5JdM
- G/3PyoSsE4+TzQ45xyyuvyIG/+TEOpTWEC9Otb+gWl6o0joUn+Fb2soBCKyda0m/awdEZrUKc7uak
- z51s4DGVhtB++KNaE9LcvK41LZ+PM5S/HiBly41wGr52SLb4ElQBdb5IssVAsOaMMzlyCEgKM7B4P
- wiVGMqooxE9e6urqnga+WXRKxxZVYoGuxulJw2ZV1V29cJpJe+yW0s0LvhhpPHIehl5vgWFClYJI4
- xk9vQt5rQTEuzB79xm1Vd+fefkG8uvdSATf2/klQmygxH9N0KRAJEPTZEgVWsKx0Q385qyG2Lyz62
- t3IxvyDQ==;
-Received: from [2a01:799:961:d200:cca0:57ac:c55d:a485] (port=64065)
- by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1oU4qX-0004pl-Pv; Fri, 02 Sep 2022 13:28:25 +0200
-Message-ID: <020d44e6-884b-a817-8265-3461638cac71@tronnes.org>
-Date: Fri, 2 Sep 2022 13:28:16 +0200
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A8E2F10E83B;
+ Fri,  2 Sep 2022 13:20:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1662124840; x=1693660840;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version;
+ bh=/NRcLs2FH7Yj/TRPNvW19fp4y9VVTFA7hNnEtx6+aXw=;
+ b=CDIZFaQnDR8iY4WNVng2uF87OcVcLCiilr2XMzxnivar5v8zSw6VuxoR
+ +DJFOC0LW0cZxvYdGKXF1EsbfNn1UxFN3ABZ16PgQPKXlfVd0B573XPxk
+ 5ajTRqqShZxYkRmxzmr5PiNMpA0bOnjjlfHuJfeBidGC182rKoqJH5naD
+ fgQ5rhCwC1vWLm186xQH9XrPEdhh49Jfzlhe+yG72NCu7kE9LW9vVd2up
+ jxT+XPnoJTkBuTzDtk4GrDChyUll5ltzWLc8vXHSEqO4GW1lWY564FyiH
+ Fm2M6RzfXGuN6N5WyO1ccYOUfVbUI6qq9i7O2s20tNewlk8QP21QWH+9t g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10457"; a="322137241"
+X-IronPort-AV: E=Sophos;i="5.93,283,1654585200"; d="scan'208";a="322137241"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+ by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Sep 2022 06:20:39 -0700
+X-IronPort-AV: E=Sophos;i="5.93,283,1654585200"; d="scan'208";a="674351857"
+Received: from svandene-mobl.ger.corp.intel.com (HELO localhost)
+ ([10.252.55.245])
+ by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Sep 2022 06:20:32 -0700
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: Hans de Goede <hdegoede@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>, Daniel Dadap
+ <ddadap@nvidia.com>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Joonas Lahtinen
+ <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Alex Deucher
+ <alexander.deucher@amd.com>, Christian =?utf-8?Q?K=C3=B6nig?=
+ <christian.koenig@amd.com>, "Pan,
+ Xinhui" <Xinhui.Pan@amd.com>, "Rafael J . Wysocki" <rafael@kernel.org>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>, Lukas Wunner
+ <lukas@wunner.de>, Mark Gross <markgross@kernel.org>, Andy Shevchenko
+ <andy@kernel.org>
+In-Reply-To: <20220825143726.269890-12-hdegoede@redhat.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20220825143726.269890-1-hdegoede@redhat.com>
+ <20220825143726.269890-12-hdegoede@redhat.com>
+Date: Fri, 02 Sep 2022 16:20:21 +0300
+Message-ID: <87k06lewve.fsf@intel.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.0
-To: Maxime Ripard <maxime@cerno.tech>, Maxime Ripard <mripard@kernel.org>,
- Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Chen-Yu Tsai <wens@csie.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Jani Nikula <jani.nikula@linux.intel.com>, Lyude Paul <lyude@redhat.com>,
- Philipp Zabel <p.zabel@pengutronix.de>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>, Karol Herbst <kherbst@redhat.com>,
- Emma Anholt <emma@anholt.net>, Daniel Vetter <daniel@ffwll.ch>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>
-References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
-From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v2 00/41] drm: Analog TV Improvements
+Content-Type: text/plain
+Subject: Re: [Nouveau] [PATCH v5 11/31] drm/i915: Call
+ acpi_video_register_backlight() (v3)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,59 +69,137 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-sunxi@lists.linux.dev, Hans de Goede <hdegoede@redhat.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
+Cc: linux-acpi@vger.kernel.org, nouveau@lists.freedesktop.org,
+ intel-gfx <intel-gfx@lists.freedesktop.org>, dri-devel@lists.freedesktop.org,
+ platform-driver-x86@vger.kernel.org, Hans de Goede <hdegoede@redhat.com>,
+ amd-gfx@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
+ David Airlie <airlied@redhat.com>, Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Thu, 25 Aug 2022, Hans de Goede <hdegoede@redhat.com> wrote:
+> On machins without an i915 opregion the acpi_video driver immediately
+> probes the ACPI video bus and used to also immediately register
+> acpi_video# backlight devices when supported.
+>
+> Once the drm/kms driver then loaded later and possibly registered
+> a native backlight device then the drivers/acpi/video_detect.c code
+> unregistered the acpi_video0 device to avoid there being 2 backlight
+> devices (when acpi_video_get_backlight_type()==native).
+>
+> This means that userspace used to briefly see 2 devices and the
+> disappearing of acpi_video0 after a brief time confuses the systemd
+> backlight level save/restore code, see e.g.:
+> https://bbs.archlinux.org/viewtopic.php?id=269920
+>
+> To fix this the ACPI video code has been modified to make backlight class
+> device registration a separate step, relying on the drm/kms driver to
+> ask for the acpi_video backlight registration after it is done setting up
+> its native backlight device.
+>
+> Add a call to the new acpi_video_register_backlight() after the i915 calls
+> acpi_video_register() (after setting up the i915 opregion) so that the
+> acpi_video backlight devices get registered on systems where the i915
+> native backlight device is not registered.
+>
+> Changes in v2:
+> -Only call acpi_video_register_backlight() when a panel is detected
+>
+> Changes in v3:
+> -Add a new intel_acpi_video_register() helper which checks if a panel
+>  is present and then calls acpi_video_register_backlight()
+>
+> Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+
+Apologies for the delay. I truly appreciate the effort you've put into
+this series, and I'm looking forward to seeing the next steps in drm!
+
+Reviewed-by: Jani Nikula <jani.nikula@intel.com>
+
+And ack for merging via whichever tree you think best.
 
 
-Den 01.09.2022 21.35, skrev Noralf Trønnes:
-> 
-> 
-> I have finally found a workaround for my kernel hangs.
-> 
-> Dom had a look at my kernel and found that the VideoCore was fine, and
-> he said this:
-> 
->> That suggests cause of lockup was on arm side rather than VC side.
->>
->> But it's hard to diagnose further. Once you've had a peripheral not
->> respond, the AXI bus locks up and no further operations are possible.
->> Usual causes of this are required clocks being stopped or domains
->> disabled and then trying to access the hardware.
->>
-> 
-> So when I got this on my 64-bit build:
-> 
-> [  166.702171] SError Interrupt on CPU1, code 0x00000000bf000002 -- SError
-> [  166.702187] CPU: 1 PID: 8 Comm: kworker/u8:0 Tainted: G        W
->     5.19.0-rc6-00096-gba7973977976-dirty #1
-> [  166.702200] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
-> [  166.702206] Workqueue: events_freezable_power_ thermal_zone_device_check
-> [  166.702231] pstate: 200000c5 (nzCv daIF -PAN -UAO -TCO -DIT -SSBS
-> BTYPE=--)
-> [  166.702242] pc : regmap_mmio_read32le+0x10/0x28
-> [  166.702261] lr : regmap_mmio_read+0x44/0x70
-> ...
-> [  166.702606]  bcm2711_get_temp+0x58/0xb0 [bcm2711_thermal]
-> 
-> I wondered if that reg read was stalled due to a clock being stopped.
-> 
-> Lo and behold, disabling runtime pm and keeping the vec clock running
-> all the time fixed it[1].
-> 
-> I don't know what the problem is, but at least I can now test this patchset.
-> 
-> [1] https://gist.github.com/notro/23b984e7fa05cfbda2db50a421cac065
-> 
+> ---
+>  drivers/gpu/drm/i915/display/intel_acpi.c    | 27 ++++++++++++++++++++
+>  drivers/gpu/drm/i915/display/intel_acpi.h    |  3 +++
+>  drivers/gpu/drm/i915/display/intel_display.c |  2 +-
+>  3 files changed, 31 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/i915/display/intel_acpi.c b/drivers/gpu/drm/i915/display/intel_acpi.c
+> index e78430001f07..9df78e7caa2b 100644
+> --- a/drivers/gpu/drm/i915/display/intel_acpi.c
+> +++ b/drivers/gpu/drm/i915/display/intel_acpi.c
+> @@ -7,6 +7,7 @@
+>  
+>  #include <linux/pci.h>
+>  #include <linux/acpi.h>
+> +#include <acpi/video.h>
+>  
+>  #include "i915_drv.h"
+>  #include "intel_acpi.h"
+> @@ -331,3 +332,29 @@ void intel_acpi_assign_connector_fwnodes(struct drm_i915_private *i915)
+>  	 */
+>  	fwnode_handle_put(fwnode);
+>  }
+> +
+> +void intel_acpi_video_register(struct drm_i915_private *i915)
+> +{
+> +	struct drm_connector_list_iter conn_iter;
+> +	struct drm_connector *connector;
+> +
+> +	acpi_video_register();
+> +
+> +	/*
+> +	 * If i915 is driving an internal panel without registering its native
+> +	 * backlight handler try to register the acpi_video backlight.
+> +	 * For panels not driven by i915 another GPU driver may still register
+> +	 * a native backlight later and acpi_video_register_backlight() should
+> +	 * only be called after any native backlights have been registered.
+> +	 */
+> +	drm_connector_list_iter_begin(&i915->drm, &conn_iter);
+> +	drm_for_each_connector_iter(connector, &conn_iter) {
+> +		struct intel_panel *panel = &to_intel_connector(connector)->panel;
+> +
+> +		if (panel->backlight.funcs && !panel->backlight.device) {
+> +			acpi_video_register_backlight();
+> +			break;
+> +		}
+> +	}
+> +	drm_connector_list_iter_end(&conn_iter);
+> +}
+> diff --git a/drivers/gpu/drm/i915/display/intel_acpi.h b/drivers/gpu/drm/i915/display/intel_acpi.h
+> index 4a760a2baed9..6a0007452f95 100644
+> --- a/drivers/gpu/drm/i915/display/intel_acpi.h
+> +++ b/drivers/gpu/drm/i915/display/intel_acpi.h
+> @@ -14,6 +14,7 @@ void intel_unregister_dsm_handler(void);
+>  void intel_dsm_get_bios_data_funcs_supported(struct drm_i915_private *i915);
+>  void intel_acpi_device_id_update(struct drm_i915_private *i915);
+>  void intel_acpi_assign_connector_fwnodes(struct drm_i915_private *i915);
+> +void intel_acpi_video_register(struct drm_i915_private *i915);
+>  #else
+>  static inline void intel_register_dsm_handler(void) { return; }
+>  static inline void intel_unregister_dsm_handler(void) { return; }
+> @@ -23,6 +24,8 @@ static inline
+>  void intel_acpi_device_id_update(struct drm_i915_private *i915) { return; }
+>  static inline
+>  void intel_acpi_assign_connector_fwnodes(struct drm_i915_private *i915) { return; }
+> +static inline
+> +void intel_acpi_video_register(struct drm_i915_private *i915) { return; }
+>  #endif /* CONFIG_ACPI */
+>  
+>  #endif /* __INTEL_ACPI_H__ */
+> diff --git a/drivers/gpu/drm/i915/display/intel_display.c b/drivers/gpu/drm/i915/display/intel_display.c
+> index 6103b02c081f..129a13375101 100644
+> --- a/drivers/gpu/drm/i915/display/intel_display.c
+> +++ b/drivers/gpu/drm/i915/display/intel_display.c
+> @@ -9087,7 +9087,7 @@ void intel_display_driver_register(struct drm_i915_private *i915)
+>  
+>  	/* Must be done after probing outputs */
+>  	intel_opregion_register(i915);
+> -	acpi_video_register();
+> +	intel_acpi_video_register(i915);
+>  
+>  	intel_audio_init(i915);
 
-It turns out I didn't have to disable runtime pm:
-https://gist.github.com/notro/0adcfcb12460b54e54458afe11dc8ea2
-
-Noralf.
+-- 
+Jani Nikula, Intel Open Source Graphics Center
