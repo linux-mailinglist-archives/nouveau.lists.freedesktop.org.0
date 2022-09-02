@@ -1,80 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 552AC5AA0C6
-	for <lists+nouveau@lfdr.de>; Thu,  1 Sep 2022 22:16:54 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 90BDF5AA8E3
+	for <lists+nouveau@lfdr.de>; Fri,  2 Sep 2022 09:41:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1404C10E2DA;
-	Thu,  1 Sep 2022 20:16:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 35D2810E79A;
+	Fri,  2 Sep 2022 07:41:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AAA0410E20D
- for <nouveau@lists.freedesktop.org>; Thu,  1 Sep 2022 20:16:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1662063387;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ShxcPF4Eq/4VuhK0YuLPN2dIglWIe3dTsSJxTWOrspQ=;
- b=RUL2FUJFiRVdFABhzSQ++8T5JHXq2ZTaTjKAT22CK04/XjFqW0oAqnPEArqGe1MnICvi8f
- +Np6YKTUUGfPZLPvbw/It/7dQhNG068LT/jes2MWhYij1uNHei32lNHJfA7y809RKY8uu0
- ED1hBLWFC+K62ptN246AbL7vAh26Nps=
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-526-uF3kYfa8OKigyxR9romJug-1; Thu, 01 Sep 2022 16:16:26 -0400
-X-MC-Unique: uF3kYfa8OKigyxR9romJug-1
-Received: by mail-qv1-f71.google.com with SMTP id
- y5-20020a056214016500b004992ae3b0c2so2134272qvs.22
- for <nouveau@lists.freedesktop.org>; Thu, 01 Sep 2022 13:16:26 -0700 (PDT)
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
+ [209.85.160.176])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C938F10E798;
+ Fri,  2 Sep 2022 07:41:32 +0000 (UTC)
+Received: by mail-qt1-f176.google.com with SMTP id cb8so929017qtb.0;
+ Fri, 02 Sep 2022 00:41:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:user-agent:organization
- :references:in-reply-to:date:cc:to:from:subject:message-id
- :x-gm-message-state:from:to:cc:subject:date;
- bh=ShxcPF4Eq/4VuhK0YuLPN2dIglWIe3dTsSJxTWOrspQ=;
- b=frW2pEVejhqeDFlVsbQOGKmkUg48JxZlhKqgRl3d2ZXlySHqDFPZx3G0cyrWdbuLE9
- v2Kar7sRtp+0X4YKzMVtMOFu235aQfDdcUEsZ2k9kVYq0rwKC/DaItxIIFEdjY6kXcAc
- pz2/Tr0dKzuqDASwOnsiu9ckiulXZq9qtLr9e3VUAe1WaQ/X9i8pGLMc3wPbCQHw1i2n
- KlulgEmlN0nYpIQEBV5GoGWZZx6sC1vfm/gfrRxl2M9GRU+YYFlCctJQJDr3kqLatNYg
- pRmndC9QrycLB4kR1awWqdvLo0ICtn04BsikHDa6OWQv0xBehvyOlkpn2+3waHDuWc6I
- bfvw==
-X-Gm-Message-State: ACgBeo1e46o9LzxGB0YjxlSNc05PvYc/23ewqXfNNCRupFASQXqKPKT5
- J1WsbzISVYsBJV02otPGrZ/f64oc5uYEzy50/v9mfN8vnPQJSznU/gwbAEy6ydsB+ARdqIVyd8e
- sanspvDsQ44vGEUlJnh7sUDgrxA==
-X-Received: by 2002:a05:620a:4553:b0:6bb:1dd0:e44c with SMTP id
- u19-20020a05620a455300b006bb1dd0e44cmr21170561qkp.543.1662063386417; 
- Thu, 01 Sep 2022 13:16:26 -0700 (PDT)
-X-Google-Smtp-Source: AA6agR4SXoUZt30A0xKlvUByAmirOD7wWDVTeEB40+CkCT1+zPJotJQ/iOqWav7vFUEdmX088i/ZHA==
-X-Received: by 2002:a05:620a:4553:b0:6bb:1dd0:e44c with SMTP id
- u19-20020a05620a455300b006bb1dd0e44cmr21170540qkp.543.1662063386195; 
- Thu, 01 Sep 2022 13:16:26 -0700 (PDT)
-Received: from ?IPv6:2600:4040:5c48:e00:e786:1aff:4f5c:c549?
- ([2600:4040:5c48:e00:e786:1aff:4f5c:c549])
- by smtp.gmail.com with ESMTPSA id
- l1-20020a05620a28c100b006b5e1aeb777sm12671930qkp.43.2022.09.01.13.16.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Sep 2022 13:16:25 -0700 (PDT)
-Message-ID: <4a44b0d4511e20fc32a9d9de8e6d12ec62c9f51b.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Jani Nikula <jani.nikula@intel.com>, dri-devel@lists.freedesktop.org
-Date: Thu, 01 Sep 2022 16:16:24 -0400
-In-Reply-To: <e2fa3e97b0989a50b9050d0518844d1f403385ea.1662036058.git.jani.nikula@intel.com>
-References: <cover.1662036058.git.jani.nikula@intel.com>
- <e2fa3e97b0989a50b9050d0518844d1f403385ea.1662036058.git.jani.nikula@intel.com>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date;
+ bh=I0BzN+oySEF5bQ4YY03gLnpAlLeJEFGcm1NmTucRGdY=;
+ b=KiUYQvJfwOGkrlXys8zaKcKzrXfK/hNdWehXu4SMjrlralSbOJZXYX2MDrtAzFhpZo
+ AjMpMZcwhWPFEKoOyB0gGZC2Qnn5nfhHsEbLiqwLWkOSSEgBSAwdk/2DymABUoDn/OSY
+ /ij9m1wAvT+pAJGDF++Ky7Mq0GNRgqeLgJogFVJRyj2ihkEfZWkiSNPy9tI2rl+7tysh
+ w7/tS8INSsQlQUgeqVG4cvBdfAtqYjPkP5OEZysOnZ+J157mRBbaLikL2JUGIQgaJ5qV
+ VPVJyDnnQsbxUBEL8tzOazOHvFF+jGWGOibW7zwIMmp/XrkJ3TK7H7W5cBtt3kveX+jE
+ t+yw==
+X-Gm-Message-State: ACgBeo0TVYVheIRBw2X/cNB84XpoU1onEzm7PTollz342kTfQTQbZVMK
+ yeWZpXH/S24Yx3lDpd+Lxn5grpbQhiRiTQ==
+X-Google-Smtp-Source: AA6agR7O5CON4AQ4e9nIUYhcf/XTd2qv00X1f/5WbvImB2Ux8rytNROk3LgNPTkDn5gglsx55MXEtw==
+X-Received: by 2002:a05:622a:653:b0:344:88fd:1f9a with SMTP id
+ a19-20020a05622a065300b0034488fd1f9amr27655537qtb.183.1662104491689; 
+ Fri, 02 Sep 2022 00:41:31 -0700 (PDT)
+Received: from mail-yb1-f178.google.com (mail-yb1-f178.google.com.
+ [209.85.219.178]) by smtp.gmail.com with ESMTPSA id
+ bm39-20020a05620a19a700b006b97151d2b3sm837819qkb.67.2022.09.02.00.41.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 02 Sep 2022 00:41:31 -0700 (PDT)
+Received: by mail-yb1-f178.google.com with SMTP id p204so2031862yba.3;
+ Fri, 02 Sep 2022 00:41:31 -0700 (PDT)
+X-Received: by 2002:a81:750b:0:b0:341:10ef:2c37 with SMTP id
+ q11-20020a81750b000000b0034110ef2c37mr20502429ywc.316.1662104131692; Fri, 02
+ Sep 2022 00:35:31 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v2-9-459522d653a7@cerno.tech>
+ <30a9d7cd-d9ff-3177-ac6c-e7c1f966d89a@gmail.com>
+In-Reply-To: <30a9d7cd-d9ff-3177-ac6c-e7c1f966d89a@gmail.com>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Fri, 2 Sep 2022 09:35:20 +0200
+X-Gmail-Original-Message-ID: <CAMuHMdU_yfr1ybNM9Dyk6n34Cqv5WJv1wZxQ_ZGJ_T8JCOeB2g@mail.gmail.com>
+Message-ID: <CAMuHMdU_yfr1ybNM9Dyk6n34Cqv5WJv1wZxQ_ZGJ_T8JCOeB2g@mail.gmail.com>
+To: Mateusz Kwiatkowski <kfyatek@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH 2/9] drm/nouveau: convert to using is_hdmi and
- has_audio from display info
+Subject: Re: [Nouveau] [PATCH v2 09/41] drm/connector: Add TV standard
+ property
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,118 +66,101 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Ben Skeggs <bskeggs@redhat.com>
+Cc: David Airlie <airlied@linux.ie>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
+ Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Dom Cobley <dom@raspberrypi.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ =?UTF-8?Q?Noralf_Tr=C3=B8nnes?= <noralf@tronnes.org>,
+ Philipp Zabel <p.zabel@pengutronix.de>, Maxime Ripard <maxime@cerno.tech>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reviewed-by: Lyude Paul <lyude@redhat.com>
+Hi Mateusz,
 
-Also, went ahead and tested this for you on one of my machines:
+On Fri, Sep 2, 2022 at 12:00 AM Mateusz Kwiatkowski <kfyatek@gmail.com> wrote:
+> W dniu 29.08.2022 o 15:11, Maxime Ripard pisze:
+> > The TV mode property has been around for a while now to select and get the
+> > current TV mode output on an analog TV connector.
+> >
+> > Despite that property name being generic, its content isn't and has been
+> > driver-specific which makes it hard to build any generic behaviour on top
+> > of it, both in kernel and user-space.
+> >
+> > Let's create a new bitmask tv norm property, that can contain any of the
+> > analog TV standards currently supported by kernel drivers. Each driver can
+> > then pass in a bitmask of the modes it supports.
+>
+> This is not a bitmask property anymore, you've just changed it to an enum.
+> The commit message is now misleading.
+>
+> > +static const struct drm_prop_enum_list drm_tv_mode_enum_list[] = {
+> > +    { DRM_MODE_TV_MODE_NTSC_443, "NTSC-443" },
+> > +    { DRM_MODE_TV_MODE_NTSC_J, "NTSC-J" },
+> > +    { DRM_MODE_TV_MODE_NTSC_M, "NTSC-M" },
+> > +    { DRM_MODE_TV_MODE_PAL_60, "PAL-60" },
+> > +    { DRM_MODE_TV_MODE_PAL_B, "PAL-B" },
+> > +    { DRM_MODE_TV_MODE_PAL_D, "PAL-D" },
+> > +    { DRM_MODE_TV_MODE_PAL_G, "PAL-G" },
+> > +    { DRM_MODE_TV_MODE_PAL_H, "PAL-H" },
+> > +    { DRM_MODE_TV_MODE_PAL_I, "PAL-I" },
+> > +    { DRM_MODE_TV_MODE_PAL_M, "PAL-M" },
+> > +    { DRM_MODE_TV_MODE_PAL_N, "PAL-N" },
+> > +    { DRM_MODE_TV_MODE_PAL_NC, "PAL-Nc" },
+> > +    { DRM_MODE_TV_MODE_SECAM_60, "SECAM-60" },
+> > +    { DRM_MODE_TV_MODE_SECAM_B, "SECAM-B" },
+> > +    { DRM_MODE_TV_MODE_SECAM_D, "SECAM-D" },
+> > +    { DRM_MODE_TV_MODE_SECAM_G, "SECAM-G" },
+> > +    { DRM_MODE_TV_MODE_SECAM_K, "SECAM-K" },
+> > +    { DRM_MODE_TV_MODE_SECAM_K1, "SECAM-K1" },
+> > +    { DRM_MODE_TV_MODE_SECAM_L, "SECAM-L" },
+> > +};
+>
+> I did not comment on it the last time, but this list looks a little bit random.
+>
+> Compared to the standards defined by V4L2, you also define SECAM-60 (a good
+> thing to define, because why not), but don't define PAL-B1, PAL-D1, PAL-K,
+> SECAM-H, SECAM-LC (whatever that is - probably just another name for SECAM-L,
+> see my comment about PAL-Nc below), or NTSC-M-KR (a Korean variant of NTSC).
+>
+> Like I mentioned previously, I'm personally not a fan of including all those
+> CCIR/ITU system variants, as they don't mean any difference to the output unless
+> there is an RF modulator involved. But I get it that they have already been used
+> and regressing probably wouldn't be a very good idea. But in that case keeping
+> it consistent with the set of values used by V4L2 would be wise, I think.
 
-Tested-by: Lyude Paul <lyude@redhat.com>
+Exactly. Anything outputting RGB (e.g. through a SCART or VGA connector)
+doesn't care about the color subcarrier or modulator parts.  Likewise,
+anything outputting CVBS doesn't care about the modulator part.
 
-On Thu, 2022-09-01 at 15:47 +0300, Jani Nikula wrote:
-> Prefer the parsed results for is_hdmi and has_audio in display info over
-> calling drm_detect_hdmi_monitor() and drm_detect_monitor_audio(),
-> respectively.
-> 
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> Cc: Karol Herbst <kherbst@redhat.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: nouveau@lists.freedesktop.org
-> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
-> ---
->  drivers/gpu/drm/nouveau/dispnv50/disp.c     | 8 ++++----
->  drivers/gpu/drm/nouveau/dispnv50/head.c     | 8 +-------
->  drivers/gpu/drm/nouveau/nouveau_connector.c | 2 +-
->  3 files changed, 6 insertions(+), 12 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> index 33c97d510999..d0d9494b729c 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> @@ -769,7 +769,7 @@ nv50_audio_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
->  				     (0x0100 << nv_crtc->index),
->  	};
->  
-> -	if (!drm_detect_monitor_audio(nv_connector->edid))
-> +	if (!nv_connector->base.display_info.has_audio)
->  		return;
->  
->  	mutex_lock(&drm->audio.lock);
-> @@ -839,7 +839,7 @@ nv50_hdmi_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
->  	int ret;
->  	int size;
->  
-> -	if (!drm_detect_hdmi_monitor(nv_connector->edid))
-> +	if (!nv_connector->base.display_info.is_hdmi)
->  		return;
->  
->  	hdmi = &nv_connector->base.display_info.hdmi;
-> @@ -1705,7 +1705,7 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
->  
->  	if ((disp->disp->object.oclass == GT214_DISP ||
->  	     disp->disp->object.oclass >= GF110_DISP) &&
-> -	    drm_detect_monitor_audio(nv_connector->edid))
-> +	    nv_connector->base.display_info.has_audio)
->  		hda = true;
->  	nv50_outp_acquire(nv_encoder, hda);
->  
-> @@ -1721,7 +1721,7 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
->  			 */
->  			if (mode->clock >= 165000 &&
->  			    nv_encoder->dcb->duallink_possible &&
-> -			    !drm_detect_hdmi_monitor(nv_connector->edid))
-> +			    !nv_connector->base.display_info.is_hdmi)
->  				proto = NV507D_SOR_SET_CONTROL_PROTOCOL_DUAL_TMDS;
->  		} else {
->  			proto = NV507D_SOR_SET_CONTROL_PROTOCOL_SINGLE_TMDS_B;
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
-> index c3c57be54e1c..8b5bc834f1b3 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/head.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
-> @@ -127,14 +127,8 @@ nv50_head_atomic_check_view(struct nv50_head_atom *armh,
->  	struct drm_display_mode *omode = &asyh->state.adjusted_mode;
->  	struct drm_display_mode *umode = &asyh->state.mode;
->  	int mode = asyc->scaler.mode;
-> -	struct edid *edid;
->  	int umode_vdisplay, omode_hdisplay, omode_vdisplay;
->  
-> -	if (connector->edid_blob_ptr)
-> -		edid = (struct edid *)connector->edid_blob_ptr->data;
-> -	else
-> -		edid = NULL;
-> -
->  	if (!asyc->scaler.full) {
->  		if (mode == DRM_MODE_SCALE_NONE)
->  			omode = umode;
-> @@ -162,7 +156,7 @@ nv50_head_atomic_check_view(struct nv50_head_atom *armh,
->  	 */
->  	if ((asyc->scaler.underscan.mode == UNDERSCAN_ON ||
->  	    (asyc->scaler.underscan.mode == UNDERSCAN_AUTO &&
-> -	     drm_detect_hdmi_monitor(edid)))) {
-> +	     connector->display_info.is_hdmi))) {
->  		u32 bX = asyc->scaler.underscan.hborder;
->  		u32 bY = asyc->scaler.underscan.vborder;
->  		u32 r = (asyh->view.oH << 19) / asyh->view.oW;
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
-> index 1991bbb1d05c..2ef5fb8df4ed 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
-> @@ -1012,7 +1012,7 @@ get_tmds_link_bandwidth(struct drm_connector *connector)
->  	unsigned duallink_scale =
->  		nouveau_duallink && nv_encoder->dcb->duallink_possible ? 2 : 1;
->  
-> -	if (drm_detect_hdmi_monitor(nv_connector->edid)) {
-> +	if (nv_connector->base.display_info.is_hdmi) {
->  		info = &nv_connector->base.display_info;
->  		duallink_scale = 1;
->  	}
+Perhaps "generic" variants of NSTC and PAL/SECAM should be added, which
+would really just mean 525/60 resp. 625/50.
 
--- 
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+Alternatively, the tv_mode field could be split in two parts (either
+two separate fields, or bitwise), to maintain a clear separation between
+lines/fields versus color encoding and RF modulation (with zero for the
+latter meaning a generic version)? That would also keep the door open
+for TV_MODE_405_50, TV_MODE_819_50, TV_MODE_750_50, TV_MODE_750_60, ...
 
+Gr{oetje,eeting}s,
+
+                        Geert
+
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
