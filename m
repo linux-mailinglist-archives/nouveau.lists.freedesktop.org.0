@@ -2,59 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90BDF5AA8E3
-	for <lists+nouveau@lfdr.de>; Fri,  2 Sep 2022 09:41:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E6295AAD9A
+	for <lists+nouveau@lfdr.de>; Fri,  2 Sep 2022 13:28:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 35D2810E79A;
-	Fri,  2 Sep 2022 07:41:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 498E110E418;
+	Fri,  2 Sep 2022 11:28:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
- [209.85.160.176])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C938F10E798;
- Fri,  2 Sep 2022 07:41:32 +0000 (UTC)
-Received: by mail-qt1-f176.google.com with SMTP id cb8so929017qtb.0;
- Fri, 02 Sep 2022 00:41:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=I0BzN+oySEF5bQ4YY03gLnpAlLeJEFGcm1NmTucRGdY=;
- b=KiUYQvJfwOGkrlXys8zaKcKzrXfK/hNdWehXu4SMjrlralSbOJZXYX2MDrtAzFhpZo
- AjMpMZcwhWPFEKoOyB0gGZC2Qnn5nfhHsEbLiqwLWkOSSEgBSAwdk/2DymABUoDn/OSY
- /ij9m1wAvT+pAJGDF++Ky7Mq0GNRgqeLgJogFVJRyj2ihkEfZWkiSNPy9tI2rl+7tysh
- w7/tS8INSsQlQUgeqVG4cvBdfAtqYjPkP5OEZysOnZ+J157mRBbaLikL2JUGIQgaJ5qV
- VPVJyDnnQsbxUBEL8tzOazOHvFF+jGWGOibW7zwIMmp/XrkJ3TK7H7W5cBtt3kveX+jE
- t+yw==
-X-Gm-Message-State: ACgBeo0TVYVheIRBw2X/cNB84XpoU1onEzm7PTollz342kTfQTQbZVMK
- yeWZpXH/S24Yx3lDpd+Lxn5grpbQhiRiTQ==
-X-Google-Smtp-Source: AA6agR7O5CON4AQ4e9nIUYhcf/XTd2qv00X1f/5WbvImB2Ux8rytNROk3LgNPTkDn5gglsx55MXEtw==
-X-Received: by 2002:a05:622a:653:b0:344:88fd:1f9a with SMTP id
- a19-20020a05622a065300b0034488fd1f9amr27655537qtb.183.1662104491689; 
- Fri, 02 Sep 2022 00:41:31 -0700 (PDT)
-Received: from mail-yb1-f178.google.com (mail-yb1-f178.google.com.
- [209.85.219.178]) by smtp.gmail.com with ESMTPSA id
- bm39-20020a05620a19a700b006b97151d2b3sm837819qkb.67.2022.09.02.00.41.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 Sep 2022 00:41:31 -0700 (PDT)
-Received: by mail-yb1-f178.google.com with SMTP id p204so2031862yba.3;
- Fri, 02 Sep 2022 00:41:31 -0700 (PDT)
-X-Received: by 2002:a81:750b:0:b0:341:10ef:2c37 with SMTP id
- q11-20020a81750b000000b0034110ef2c37mr20502429ywc.316.1662104131692; Fri, 02
- Sep 2022 00:35:31 -0700 (PDT)
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 52FBC10E7DA;
+ Fri,  2 Sep 2022 11:28:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=3P4G0s8jHHnMDuhy8+v0Q+ixmj390VbhdMQwj5y5Wjc=; b=bZtQWi7EyAVPLA42Rzf8cb5JdM
+ G/3PyoSsE4+TzQ45xyyuvyIG/+TEOpTWEC9Otb+gWl6o0joUn+Fb2soBCKyda0m/awdEZrUKc7uak
+ z51s4DGVhtB++KNaE9LcvK41LZ+PM5S/HiBly41wGr52SLb4ElQBdb5IssVAsOaMMzlyCEgKM7B4P
+ wiVGMqooxE9e6urqnga+WXRKxxZVYoGuxulJw2ZV1V29cJpJe+yW0s0LvhhpPHIehl5vgWFClYJI4
+ xk9vQt5rQTEuzB79xm1Vd+fefkG8uvdSATf2/klQmygxH9N0KRAJEPTZEgVWsKx0Q385qyG2Lyz62
+ t3IxvyDQ==;
+Received: from [2a01:799:961:d200:cca0:57ac:c55d:a485] (port=64065)
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1oU4qX-0004pl-Pv; Fri, 02 Sep 2022 13:28:25 +0200
+Message-ID: <020d44e6-884b-a817-8265-3461638cac71@tronnes.org>
+Date: Fri, 2 Sep 2022 13:28:16 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.13.0
+To: Maxime Ripard <maxime@cerno.tech>, Maxime Ripard <mripard@kernel.org>,
+ Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
+ Chen-Yu Tsai <wens@csie.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Lyude Paul <lyude@redhat.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Samuel Holland <samuel@sholland.org>, Karol Herbst <kherbst@redhat.com>,
+ Emma Anholt <emma@anholt.net>, Daniel Vetter <daniel@ffwll.ch>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Dom Cobley <dom@raspberrypi.com>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-9-459522d653a7@cerno.tech>
- <30a9d7cd-d9ff-3177-ac6c-e7c1f966d89a@gmail.com>
-In-Reply-To: <30a9d7cd-d9ff-3177-ac6c-e7c1f966d89a@gmail.com>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Fri, 2 Sep 2022 09:35:20 +0200
-X-Gmail-Original-Message-ID: <CAMuHMdU_yfr1ybNM9Dyk6n34Cqv5WJv1wZxQ_ZGJ_T8JCOeB2g@mail.gmail.com>
-Message-ID: <CAMuHMdU_yfr1ybNM9Dyk6n34Cqv5WJv1wZxQ_ZGJ_T8JCOeB2g@mail.gmail.com>
-To: Mateusz Kwiatkowski <kfyatek@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH v2 09/41] drm/connector: Add TV standard
- property
+ <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v2 00/41] drm: Analog TV Improvements
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,101 +66,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Nouveau Dev <nouveau@lists.freedesktop.org>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
- Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
- Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Daniel Vetter <daniel@ffwll.ch>,
- Linux ARM <linux-arm-kernel@lists.infradead.org>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- =?UTF-8?Q?Noralf_Tr=C3=B8nnes?= <noralf@tronnes.org>,
- Philipp Zabel <p.zabel@pengutronix.de>, Maxime Ripard <maxime@cerno.tech>
+Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-sunxi@lists.linux.dev, Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Mateusz,
 
-On Fri, Sep 2, 2022 at 12:00 AM Mateusz Kwiatkowski <kfyatek@gmail.com> wrote:
-> W dniu 29.08.2022 o 15:11, Maxime Ripard pisze:
-> > The TV mode property has been around for a while now to select and get the
-> > current TV mode output on an analog TV connector.
-> >
-> > Despite that property name being generic, its content isn't and has been
-> > driver-specific which makes it hard to build any generic behaviour on top
-> > of it, both in kernel and user-space.
-> >
-> > Let's create a new bitmask tv norm property, that can contain any of the
-> > analog TV standards currently supported by kernel drivers. Each driver can
-> > then pass in a bitmask of the modes it supports.
->
-> This is not a bitmask property anymore, you've just changed it to an enum.
-> The commit message is now misleading.
->
-> > +static const struct drm_prop_enum_list drm_tv_mode_enum_list[] = {
-> > +    { DRM_MODE_TV_MODE_NTSC_443, "NTSC-443" },
-> > +    { DRM_MODE_TV_MODE_NTSC_J, "NTSC-J" },
-> > +    { DRM_MODE_TV_MODE_NTSC_M, "NTSC-M" },
-> > +    { DRM_MODE_TV_MODE_PAL_60, "PAL-60" },
-> > +    { DRM_MODE_TV_MODE_PAL_B, "PAL-B" },
-> > +    { DRM_MODE_TV_MODE_PAL_D, "PAL-D" },
-> > +    { DRM_MODE_TV_MODE_PAL_G, "PAL-G" },
-> > +    { DRM_MODE_TV_MODE_PAL_H, "PAL-H" },
-> > +    { DRM_MODE_TV_MODE_PAL_I, "PAL-I" },
-> > +    { DRM_MODE_TV_MODE_PAL_M, "PAL-M" },
-> > +    { DRM_MODE_TV_MODE_PAL_N, "PAL-N" },
-> > +    { DRM_MODE_TV_MODE_PAL_NC, "PAL-Nc" },
-> > +    { DRM_MODE_TV_MODE_SECAM_60, "SECAM-60" },
-> > +    { DRM_MODE_TV_MODE_SECAM_B, "SECAM-B" },
-> > +    { DRM_MODE_TV_MODE_SECAM_D, "SECAM-D" },
-> > +    { DRM_MODE_TV_MODE_SECAM_G, "SECAM-G" },
-> > +    { DRM_MODE_TV_MODE_SECAM_K, "SECAM-K" },
-> > +    { DRM_MODE_TV_MODE_SECAM_K1, "SECAM-K1" },
-> > +    { DRM_MODE_TV_MODE_SECAM_L, "SECAM-L" },
-> > +};
->
-> I did not comment on it the last time, but this list looks a little bit random.
->
-> Compared to the standards defined by V4L2, you also define SECAM-60 (a good
-> thing to define, because why not), but don't define PAL-B1, PAL-D1, PAL-K,
-> SECAM-H, SECAM-LC (whatever that is - probably just another name for SECAM-L,
-> see my comment about PAL-Nc below), or NTSC-M-KR (a Korean variant of NTSC).
->
-> Like I mentioned previously, I'm personally not a fan of including all those
-> CCIR/ITU system variants, as they don't mean any difference to the output unless
-> there is an RF modulator involved. But I get it that they have already been used
-> and regressing probably wouldn't be a very good idea. But in that case keeping
-> it consistent with the set of values used by V4L2 would be wise, I think.
 
-Exactly. Anything outputting RGB (e.g. through a SCART or VGA connector)
-doesn't care about the color subcarrier or modulator parts.  Likewise,
-anything outputting CVBS doesn't care about the modulator part.
+Den 01.09.2022 21.35, skrev Noralf Trønnes:
+> 
+> 
+> I have finally found a workaround for my kernel hangs.
+> 
+> Dom had a look at my kernel and found that the VideoCore was fine, and
+> he said this:
+> 
+>> That suggests cause of lockup was on arm side rather than VC side.
+>>
+>> But it's hard to diagnose further. Once you've had a peripheral not
+>> respond, the AXI bus locks up and no further operations are possible.
+>> Usual causes of this are required clocks being stopped or domains
+>> disabled and then trying to access the hardware.
+>>
+> 
+> So when I got this on my 64-bit build:
+> 
+> [  166.702171] SError Interrupt on CPU1, code 0x00000000bf000002 -- SError
+> [  166.702187] CPU: 1 PID: 8 Comm: kworker/u8:0 Tainted: G        W
+>     5.19.0-rc6-00096-gba7973977976-dirty #1
+> [  166.702200] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
+> [  166.702206] Workqueue: events_freezable_power_ thermal_zone_device_check
+> [  166.702231] pstate: 200000c5 (nzCv daIF -PAN -UAO -TCO -DIT -SSBS
+> BTYPE=--)
+> [  166.702242] pc : regmap_mmio_read32le+0x10/0x28
+> [  166.702261] lr : regmap_mmio_read+0x44/0x70
+> ...
+> [  166.702606]  bcm2711_get_temp+0x58/0xb0 [bcm2711_thermal]
+> 
+> I wondered if that reg read was stalled due to a clock being stopped.
+> 
+> Lo and behold, disabling runtime pm and keeping the vec clock running
+> all the time fixed it[1].
+> 
+> I don't know what the problem is, but at least I can now test this patchset.
+> 
+> [1] https://gist.github.com/notro/23b984e7fa05cfbda2db50a421cac065
+> 
 
-Perhaps "generic" variants of NSTC and PAL/SECAM should be added, which
-would really just mean 525/60 resp. 625/50.
+It turns out I didn't have to disable runtime pm:
+https://gist.github.com/notro/0adcfcb12460b54e54458afe11dc8ea2
 
-Alternatively, the tv_mode field could be split in two parts (either
-two separate fields, or bitwise), to maintain a clear separation between
-lines/fields versus color encoding and RF modulation (with zero for the
-latter meaning a generic version)? That would also keep the door open
-for TV_MODE_405_50, TV_MODE_819_50, TV_MODE_750_50, TV_MODE_750_60, ...
-
-Gr{oetje,eeting}s,
-
-                        Geert
-
---
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
-
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
+Noralf.
