@@ -1,50 +1,50 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DCBC5AF624
-	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:33:26 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id AC3755AF613
+	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:32:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 593B310EAD7;
-	Tue,  6 Sep 2022 20:33:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 13D8710EAB2;
+	Tue,  6 Sep 2022 20:32:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com
  [66.111.4.230])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AADC410E3A5;
- Mon,  5 Sep 2022 13:37:58 +0000 (UTC)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailnew.nyi.internal (Postfix) with ESMTP id 0AAC7580281;
- Mon,  5 Sep 2022 09:37:58 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute2.internal (MEProxy); Mon, 05 Sep 2022 09:37:58 -0400
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9988710E3F3;
+ Mon,  5 Sep 2022 14:28:49 +0000 (UTC)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailnew.nyi.internal (Postfix) with ESMTP id BD5585801E7;
+ Mon,  5 Sep 2022 10:28:48 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute4.internal (MEProxy); Mon, 05 Sep 2022 10:28:48 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
  :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm3; t=1662385078; x=1662392278; bh=0O41lIsAoQ
- E7Npc7joN//WSwmuH7s7KunBYUx8/vABE=; b=X7HWNhyjGfDlsQRlHJm0m7wprr
- 6MFfZlhumCRQ3p4goinni3jIkeUQf4wueWlUdIWrJ4uEKSLLsgDihlVS7h8NI0So
- W3IBZU0nCWqt6lcprZaMfQt+MdhJHQnb/fikIDm3i2mWEKS1+83DLroJ5FL8rtla
- Zsg8ziSEc1AfokXUmnhpFS5GYU80ZBOAND76jLKH2U115nexXrrE6xPnki3ot+v2
- auZcnuSPcKaQd2WIhOUsvlmmO2uAQbXQaFNLN3V38gg6kejHXtkWIpGetN5hW1sF
- 3LSBVWWAshMasYkAzu3JsB75wgKmKhgFC++sTAEg98VImAOXbJogQmUo59Xg==
+ :subject:to:to; s=fm3; t=1662388128; x=1662395328; bh=vefUy4dRsZ
+ VWF0YIrw3msOYzL5sGqxLnWRwOjKgBDrQ=; b=K2XS8PGlr2rLCbhGAhNKVV1mKa
+ oE5a/DxS0PxYT09GHAoeKfQb2EbQCJ9mu4w58MqnAKA1v9KKxxsiYAxH7YOsy1BN
+ 33JRgsa8h4OHegIECgAC9cSpyUMc/Lo2C5mNrEChFfPna0d7iS4gIrwUted9CHx7
+ qbnimRJOdwi2we5OgCLd/60A+k3wyzn4j3TdiHlGFcBFcI08cKnqIx93lEL+bLCT
+ CqAKbzWub2maQ+RaEAZeMK1h2/Od9syCt1Oc4Z5nD1+HayHeRoUYskPKsrsmSzCh
+ e3N7WD2rFsuM/GYBLynULlDETMkMlutJu524iww9KxGAYCF5MtrBhwWigXQg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
  :feedback-id:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:sender:subject:subject:to:to
  :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm1; t=1662385078; x=1662392278; bh=0O41lIsAoQE7Npc7joN//WSwmuH7
- s7KunBYUx8/vABE=; b=GVlBEYLqTO4rnteutkIbGoa1BxOG7P5pOdaf/SCczvni
- Rfs3e+UBVE6kP/hQvryAZs7xMI5vGrFmlmuLiwiBg06SBrWrAtKgDFwQEegEY8D+
- XUhaOOa8h1gGUUhCGMBRWQCsmOyo2Wcf3SdsqA+75+dpPtpyB3RJX9rqDf3RvsA7
- mflQjKITUnKFVg+NQVrIWR3UMuI36HLsgJxlJfUyj+UIRyImf1t+7SxiehvdEK19
- uCDv9GLBNMj4EhFJzFnis+tcFRCZzh7bhq0C7f9eGtBhJf/nf4+Lm/Trd0k7m21h
- bNCLgGwUYSP+DcrhHzxPLYy+eQ7DPmqfrWfXZ3Y6uw==
-X-ME-Sender: <xms:tfsVY8b0Kl6Ra5AnJ4dKw2JaW5T35FCq4jufnrR541SQPq3_pl7PLQ>
- <xme:tfsVY3Y4slKtxcZft9QOhBcaVSxasUXNI-SNEqtsWilOxLPalbRFyAzGkMr4FFPpJ
- nj9L4X6jjO-Ybs_bok>
-X-ME-Received: <xmr:tfsVY29mxKw0OakVqKVQU4WbRe3SXGMYOXjsLA2ZG1YhBY3YUjLFhNueEvw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdeliedgieekucetufdoteggodetrfdotf
+ fm1; t=1662388128; x=1662395328; bh=vefUy4dRsZVWF0YIrw3msOYzL5sG
+ qxLnWRwOjKgBDrQ=; b=YSGrRmXY76fbUtPERuSV+9e6lsEx56hA5vrGlNt2Qpgs
+ zOPKczGZQJsxK88Md2RogOECuW5zwHOeJnPTijXakF/dmAlb5LGVud5m+mQe5Sl7
+ Nx+dNIsVXROz/pUj6cCxv3K2uWryMWKWKGA87vjkcV2kZd3PrAyjrivRHG//4Cy0
+ 8npyhIOZIK0GH7J2zQzX6NbvhdhETzfHNoxutJTlJzbT/hn62C0tzHeBHUXEmf+L
+ nIWXmDFc1kwRBghV8udUcYftvhHn+v2vzmUQ7nlzQb7ok4/4d57hANxyRbucnqdL
+ hJAerM1Ql35aS0OaCNwHAOYgRUdk2HE+fkLZivJ7tw==
+X-ME-Sender: <xms:nwcWY7093cdWfRq1oL7PNGQ3QbK4j2DgD8slA2vtr3StBwgGGw142A>
+ <xme:nwcWY6Ez3fbf7mpeixDFWX2eEq9xironQYCF1CjLV_Vykb9d2mW3Nq5tK_mX90nBc
+ ToYcAdDkoXzgclW77E>
+X-ME-Received: <xmr:nwcWY775XQbKfjcX_e98PD2zWRbESjZF_sRzppZfjrunik7KbWARapTpHMI>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdeliedgjeelucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
@@ -52,28 +52,28 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdeliedgieekucetufdoteggod
  htthgvrhhnpeejveefheefkeeiffegveelveetgffffeektdefuefhtedtgeejhefggedu
  ffffudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
  hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:tfsVY2rD3viHBtzbhj594zPV9bmkEUUK7yOUcbvgaugvOkJGSwXIqg>
- <xmx:tfsVY3o0ZmiIRr9Omgyv00mK4GPuoifoE87tADOUFvaDAbczazTmcA>
- <xmx:tfsVY0SQCPSmnmkPUS0J6DYFUboV1uF0JCC3rrxYIVhnds-z0q032A>
- <xmx:tvsVYwovTK2UsDiFCbTKDlmUEEVG_54Vq2mKbf3iP2ZX11gGa7md4A>
+X-ME-Proxy: <xmx:nwcWYw12b2jj41_bSVOi0TppjyxIf8LchC1b24hD7MOItMAE-N9bDQ>
+ <xmx:nwcWY-G1xPGMeuA36sQ6S2FIufVxVxSWprdiwbTGxYuMmpu4v35syw>
+ <xmx:nwcWYx8zfPZgx1nEtBKLuqnYkkH7Y6J0qlXcYHDdVgjRUegS2oJLNw>
+ <xmx:oAcWY2VbCYUlEte486NIa6WhcoO6WH8JGlPVm3Js638-GMARhcFlug>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 5 Sep 2022 09:37:56 -0400 (EDT)
-Date: Mon, 5 Sep 2022 15:37:55 +0200
+ 5 Sep 2022 10:28:46 -0400 (EDT)
+Date: Mon, 5 Sep 2022 16:28:42 +0200
 From: Maxime Ripard <maxime@cerno.tech>
 To: Mateusz Kwiatkowski <kfyatek@gmail.com>
-Message-ID: <20220905133755.gcmmntg3wnecyqjq@houat>
+Message-ID: <20220905142842.c3rvtupggdmavq7z@houat>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-10-459522d653a7@cerno.tech>
- <242d272b-5b79-986c-9aaf-64e62f6b37ff@gmail.com>
+ <20220728-rpi-analog-tv-properties-v2-19-459522d653a7@cerno.tech>
+ <2f607c7d-6da1-c8df-1c02-8dd344a92343@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="duymfdwojjs2xq73"
+ protocol="application/pgp-signature"; boundary="a666jub4kxs6fn4h"
 Content-Disposition: inline
-In-Reply-To: <242d272b-5b79-986c-9aaf-64e62f6b37ff@gmail.com>
+In-Reply-To: <2f607c7d-6da1-c8df-1c02-8dd344a92343@gmail.com>
 X-Mailman-Approved-At: Tue, 06 Sep 2022 20:31:04 +0000
-Subject: Re: [Nouveau] [PATCH v2 10/41] drm/modes: Add a function to
- generate analog display modes
+Subject: Re: [Nouveau] [PATCH v2 19/41] drm/modes: Introduce the tv_mode
+ property as a command-line option
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -104,77 +104,68 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---duymfdwojjs2xq73
+--a666jub4kxs6fn4h
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-
-On Wed, Aug 31, 2022 at 03:44:52AM +0200, Mateusz Kwiatkowski wrote:
-> > +#define NTSC_HFP_DURATION_TYP_NS=A0=A0 =A01500
-> > +#define NTSC_HFP_DURATION_MIN_NS=A0=A0 =A01270
-> > +#define NTSC_HFP_DURATION_MAX_NS=A0=A0 =A02220
+On Fri, Sep 02, 2022 at 12:46:29AM +0200, Mateusz Kwiatkowski wrote:
+> > @@ -2212,20 +2239,22 @@ struct drm_named_mode {
+> > =A0=A0=A0 =A0unsigned int xres;
+> > =A0=A0=A0 =A0unsigned int yres;
+> > =A0=A0=A0 =A0unsigned int flags;
+> > +=A0=A0 =A0unsigned int tv_mode;
+> >=A0 };
 >=20
-> You've defined those min/typ/max ranges, but you're not using the "typ" f=
-ield
-> for anything other than hslen.
+> Are _all_ named modes supposed to be about analog TV?
+>
+> If so, then probably this structure should be renamed drm_named_analog_tv=
+_mode
+> or something.
 
-Yeah... I've left most of them because it was so hard to find most of
-them, it's useful at least for documentation purposes. And it's a define
-so there's pretty much no downside to it as far as the final binary is
-involved.
+I don't think they need to, but it's the only use case we've had so far.
+We could also imagine using UHD for 3840x2160 for example, so I wouldn't
+say it's limited to analog tv.
 
-> The actual "typical" value is thus always the midpoint, which isn't
-> necessarily the best choice.
+> If not, then including tv_mode in all of them sounds almost dangrous. 0 i=
+s a
+> valid value for enum drm_connector_tv_mode, corresponding to
+> DRM_MODE_TV_MODE_NTSC_443. This is a very weird default (maybe it shouldn=
+'t be
+> the one that has a numeric value of 0?) and if there ever is a named mode=
+ that
+> is not related to analog TV, it looks that it will refer to NTSC-443.
 >=20
-> In particular, for the standard 720px wide modes at 13.5 MHz, hsync_start
-> ends up being 735 for 480i and 734 for 576i, instead of 736 and 732 reque=
-sted
-> by BT.601. That's all obviously within tolerances, but the image ends up
-> noticeably off-center (at least on modern TVs), especially in the 576i ca=
-se.
+> Not sure where could that actually propagate, and maybe what I'm saying c=
+an't
+> happen, but I'm imagining weird scenarios where a GPU that has both a
+> VGA/HDMI/whatever output, and a composite output, switches to NTSC-443 on=
+ the
+> composite output by default because a named mode for the modern output is
+> selected.
 
-I'll try to fix that up.
+So, named modes are per-connector so the fact that there's another
+output doesn't really matter. Then, the answer is quite simple actually,
+the HDMI driver wouldn't register and use the TV mode property at all,
+so it would completely ignore it, no matter what value it has.
 
-> > +=A0=A0 =A0htotal =3D params->line_duration_ns * pixel_clock_hz / NSEC_=
-PER_SEC;
->=20
-> You're multiplying an unsigned int and an unsigned long - both types are =
-only
-> required to be 32 bit, so this is likely to overflow. You need to use a c=
-ast to
-> unsigned long long, and then call do_div() for 64-bit division.
->=20
-> This actually overflowed on me on my Pi running ARM32 kernel, resulting in
-> negative horizontal porch lengths, and drm_helper_probe_add_cmdline_mode()
-> taking over the mode generation (badly), and a horrible mess on screen.
+So it's not really a concern.
 
-Indeed, that's bad.
+> Maybe something like DRM_MODE_TV_MODE_NONE =3D 0 would make sense?
 
-> > +=A0=A0 =A0vfp =3D vfp_min + (porches_rem / 2);
-> > +=A0=A0 =A0vbp =3D porches - vfp;
->=20
-> Relative position of the vertical sync within the VBI effectively moves t=
-he
-> image up and down. Adding that (porches_rem / 2) moves the image up off c=
-enter
-> by that many pixels. I'd keep the VFP always at minimum to keep the image
-> centered.
-
-And you would increase the back porch only then?
+But I guess we can add it still.
 
 Maxime
 
---duymfdwojjs2xq73
+--a666jub4kxs6fn4h
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxX7swAKCRDj7w1vZxhR
-xYNaAP9smEnRh5n1ZGmEenQrzOJSe2qrC45ne/SGvv82vvsHOAD/S1/3mpdTYjRp
-q9UQRTTfatktAcjCnUHE0eBICMwRtA4=
-=w772
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxYHmgAKCRDj7w1vZxhR
+xTGUAP9bRX6FEHBUM7XR2y0SEv7Im5MOyJ9Xu+nxahCL5Zr27gEAtUuO35mNsB/a
+iZZfvcVDyPB/1iJJ1p/8F2uKg1G0pQI=
+=y2zk
 -----END PGP SIGNATURE-----
 
---duymfdwojjs2xq73--
+--a666jub4kxs6fn4h--
