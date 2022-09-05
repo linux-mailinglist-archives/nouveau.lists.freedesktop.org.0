@@ -2,78 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D870B5AF619
-	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:33:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B5F815AF600
+	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:32:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8958110EAA0;
-	Tue,  6 Sep 2022 20:32:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DB68810EAB4;
+	Tue,  6 Sep 2022 20:31:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com
- [66.111.4.230])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B032D10E3EF;
- Mon,  5 Sep 2022 14:57:35 +0000 (UTC)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailnew.nyi.internal (Postfix) with ESMTP id 5A39E580222;
- Mon,  5 Sep 2022 10:57:33 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute1.internal (MEProxy); Mon, 05 Sep 2022 10:57:33 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm3; t=1662389853; x=1662397053; bh=8QpD9QHWJ3
- ZAcUP/Du443zVv5hbNZSb8ty9lWaa/wGU=; b=lXM2P4WcRuf2ASsUJZF7RCJkH6
- Ylyv1uOXjUelst3OGCJ40g1RO9cicrzW0DqHtFx67qOZQepycOt7YODaS+Z3UCYU
- xiUPjSX+t7Za0NcWq3NcKWcgr7XHoRHPOkVrpkAaK9xqXD5Zgxq1foaua3jyn6b7
- 0eyaPuCXIONCQMeka19bc7gavaKm7QF1uedVc/PdcQ6jwHF+aLi3pHsE253hFhqy
- EyD7BJb5w0faD7aDun6hDK9IKeDBA+AvggdMB52XffsrDNVrH8RSVaZVjphTLlM5
- i1Whk8kNZP7VMTZwHCjzwFUJ7wEm+xrlPVTUNsBErjzBZ9t3Wa0f+D3iSX7g==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
- :feedback-id:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:sender:subject:subject:to:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm1; t=1662389853; x=1662397053; bh=8QpD9QHWJ3ZAcUP/Du443zVv5hbN
- ZSb8ty9lWaa/wGU=; b=eJLuR+KUme8o4FRaICwZbGRxSjB3xBftb4Gb7nWDUB7U
- pv0r3P3krh6wz+XI/1n1JeQhUha+e0DnnieItY6gT2/1hAfhqeEAb5xQzjw7tOhm
- p20Evv6rotQicrPL8uugGearEiwZRoZv9qWmM8cgP2sQeK/Ik2l2DFFtBvXMXFTi
- 8C9putitPMtDKOfGpGhtY9FkL7TYMVXdIkMkk3vyoypSETZDe9I5Z/tRVd+GzrGs
- fHEvHNzFhOu3/x+JSU/blWXyLOlVWvOMeSeDxsTt1yBbjlJQK7DhPbHIZ3k9weXd
- KarSty3ixWH8DcV4u6stghnOewWvxAQ1JwGFbyWWsg==
-X-ME-Sender: <xms:XA4WY1fiBU1ECfDf7wmaBkisGTWTvm7s8Ies8w1PtVwZ1L5mbrQ8Fg>
- <xme:XA4WYzOlBXenNXjKDVayk8WfQRF-pGVRHZjdD5yUuhOozYNWUMIzSPZJ9cbsqMn64
- uuJQMDWlS14Mcixgjw>
-X-ME-Received: <xmr:XA4WY-iANzxwUTMWFgq-LsGvxR8KKEHoPP9JzTnmgX7lfJfZ6fDaSPaiyxY>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdeliedgkeegucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
- mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeevuddthffgfeeiffejgfeghfeludegkedtgefgffejtdegtddvleduvdfh
- teehveenucffohhmrghinhepghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivg
- eptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegtvghrnhhordhtvggt
- hh
-X-ME-Proxy: <xmx:XA4WY---Ncx0ZtdxgQEbadw4u4oWLWaa-7P65288auVolghcPBvPqg>
- <xmx:XA4WYxvKBL8vyFG3nWU1jEibhAPGnTExbgYL-TwX_LWRS97WjEKaHQ>
- <xmx:XA4WY9HraN7M_qm-dwOKPjrqnwiQ1TNB6MxGXaTCeKryw8hkBIhprw>
- <xmx:XQ4WYxdVilKmghQfD17Zzl66x1m1EWhGFxB48Aw90XtbjJoW3D6Qfw>
-Feedback-ID: i8771445c:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 5 Sep 2022 10:57:32 -0400 (EDT)
-Date: Mon, 5 Sep 2022 16:57:29 +0200
-From: Maxime Ripard <maxime@cerno.tech>
-To: Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
-Message-ID: <20220905145729.ln675jko3aw6sgzs@houat>
-References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
- <020d44e6-884b-a817-8265-3461638cac71@tronnes.org>
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BD7B710E44F;
+ Mon,  5 Sep 2022 16:32:18 +0000 (UTC)
+Received: by mail-lj1-x22d.google.com with SMTP id by6so9717067ljb.11;
+ Mon, 05 Sep 2022 09:32:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:in-reply-to:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:from:to:cc:subject:date;
+ bh=8JQHR0mNkkvaucEp4HNFvrtWVwipxgdCyYirWkcxCuc=;
+ b=Ee8/zXiC17K5Rmn0dM8r0JytBnfg1FnzFfKZcmoJMYt08MtgAEUEjpKH7+0UHsqlkK
+ BZrCCHBnA1Je5o+/sxNlA3yrl0TxM37U7XpZXjbsaVxHKMl2x7PzYQchiiwPobO+z7V/
+ tYJCFJd1YCvEbeeLM6BvAS/M1DUr6tpSFJVdgoRwA8WStFNY9E6PPHdk4RZZCOrggakT
+ xyQ8/6DOwLr6S51gainQauwtIl7r4PsEHnn/94yga+F5jpf0cp7C0OxDPl+JWqQDMoGv
+ UZySK3bX2kiLPPNYAc06FY4U1q0dxZf5LlWu/claShZQeiMPrvC2bab0MTV9I+5YA40i
+ L12g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:x-gm-message-state:from:to:cc:subject:date;
+ bh=8JQHR0mNkkvaucEp4HNFvrtWVwipxgdCyYirWkcxCuc=;
+ b=EE4eyaTrT0YQ5eN2QI+aVkhSCvGriBL7Kr/8sPd5LUHF2br+9OTfonZPfwxDxAVCJm
+ Ou+fkmKti7Sl8VWRdlmvWzMBQQ40JPCgZhwg5rfrFrVMxm3lpeqQIoRFbM/O3wMzFqOh
+ Vmt9Cj1AAVFTD2UQ3N+lWH7hg3CgGmRRakbD4THiXGrOWClIying5TkVd1E1l30Q0DIK
+ iwypk5HinwUNQQgjK5NUYHNrqeNwm+QR95UTKZVSojZfpLlsTl6wrqjRphpkwXVInUxY
+ uUsgjjMLb+peTkl0EWHXHaCjHe7660+9i80xzuhgNN0bzBziyl1T0lTquxYU/IvDKioJ
+ 11IA==
+X-Gm-Message-State: ACgBeo0+JGE2T9EPArA2/pYbDW2rCj0iDc2LbDFEAAc4IY/yYfK4imyc
+ NU07X8EDG/nrN+IqipiwiEz15JwPPcrdbg==
+X-Google-Smtp-Source: AA6agR47yvdHHgnlIjy9Ip2njnz0g5/SwgXMzTGVjcmNgzpxzvtvdxNNmmfmzBYcTnu1KYoufiDMaA==
+X-Received: by 2002:a2e:88d2:0:b0:263:2c63:d784 with SMTP id
+ a18-20020a2e88d2000000b002632c63d784mr11481762ljk.12.1662395536908; 
+ Mon, 05 Sep 2022 09:32:16 -0700 (PDT)
+Received: from ?IPV6:2a02:a31a:a240:1700:9c45:8fa1:8ce7:8852?
+ ([2a02:a31a:a240:1700:9c45:8fa1:8ce7:8852])
+ by smtp.googlemail.com with ESMTPSA id
+ q13-20020a056512210d00b004946a758d21sm1235189lfr.161.2022.09.05.09.32.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 05 Sep 2022 09:32:16 -0700 (PDT)
+From: Mateusz Kwiatkowski <kfyatek@gmail.com>
+X-Google-Original-From: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
+Message-ID: <6ac67d1f-e5b5-2687-372f-4146eed5cc5d@gmail.com>
+Date: Mon, 5 Sep 2022 18:32:14 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fq3utlr2k6iltjfz"
-Content-Disposition: inline
-In-Reply-To: <020d44e6-884b-a817-8265-3461638cac71@tronnes.org>
-X-Mailman-Approved-At: Tue, 06 Sep 2022 20:31:04 +0000
-Subject: Re: [Nouveau] [PATCH v2 00/41] drm: Analog TV Improvements
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.2.1
+Content-Language: pl
+To: Maxime Ripard <maxime@cerno.tech>,
+ Geert Uytterhoeven <geert@linux-m68k.org>
+References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v2-10-459522d653a7@cerno.tech>
+ <242d272b-5b79-986c-9aaf-64e62f6b37ff@gmail.com>
+ <CAMuHMdWq3aOO4-2AReDeaC2VBJb=QJF2dTMZP=DGmwCg6ZOffA@mail.gmail.com>
+ <20220905133251.js26hxdosibx4r4i@houat>
+In-Reply-To: <20220905133251.js26hxdosibx4r4i@houat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 06 Sep 2022 20:31:03 +0000
+Subject: Re: [Nouveau] [PATCH v2 10/41] drm/modes: Add a function to
+ generate analog display modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,94 +82,64 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+Cc: David Airlie <airlied@linux.ie>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
+ Samuel Holland <samuel@sholland.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
- linux-arm-kernel@lists.infradead.org,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ Dom Cobley <dom@raspberrypi.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
  Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi Maxime,
 
---fq3utlr2k6iltjfz
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+W dniu 5.09.2022 o 15:32, Maxime Ripard pisze:
+> Hi,
+>
+> On Wed, Aug 31, 2022 at 10:14:28AM +0200, Geert Uytterhoeven wrote:
+>>>> +enum drm_mode_analog {
+>>>> +    DRM_MODE_ANALOG_NTSC,
+>>>> +    DRM_MODE_ANALOG_PAL,
+>>>> +};
+>>>
+>>> Using "NTSC" and "PAL" to describe the 50Hz and 60Hz analog TV modes is common,
+>>> but strictly speaking a misnomer. Those are color encoding systems, and your
+>>> patchset fully supports lesser used, but standard encodings for those (e.g.
+>>> PAL-M for 60Hz and SECAM for 50Hz). I'd propose switching to some more neutral
+>>> naming scheme. Some ideas:
+>>>
+>>> - DRM_MODE_ANALOG_60_HZ / DRM_MODE_ANALOG_50_HZ (after standard refresh rate)
+>>> - DRM_MODE_ANALOG_525_LINES / DRM_MODE_ANALOG_625_LINES (after standard line
+>>>   count)
+>>
+>> IMHO these are bad names, as e.g. VGA640x480@60 is also analog, using
+>> 60 Hz and 525 lines.  Add "TV" to the name?
+>>
+>>> - DRM_MODE_ANALOG_JM / DRM_MODE_ANALOG_BDGHIKLN (after corresponding ITU System
+>>>   Letter Designations)
+>>
+>> Or DRM_MODE_ITU_*?
+>> But given the long list of letters, this looks fragile to me.
+>
+> Does it matter at all? It's an internal API that isn't exposed at all.
+> I'd rather have a common name that everyone can understand in this case
+> rather than a *perfect* name where most will scratch their head
+> wondering what it's about.
 
-On Fri, Sep 02, 2022 at 01:28:16PM +0200, Noralf Tr=F8nnes wrote:
->=20
->=20
-> Den 01.09.2022 21.35, skrev Noralf Tr=F8nnes:
-> >=20
-> >=20
-> > I have finally found a workaround for my kernel hangs.
-> >=20
-> > Dom had a look at my kernel and found that the VideoCore was fine, and
-> > he said this:
-> >=20
-> >> That suggests cause of lockup was on arm side rather than VC side.
-> >>
-> >> But it's hard to diagnose further. Once you've had a peripheral not
-> >> respond, the AXI bus locks up and no further operations are possible.
-> >> Usual causes of this are required clocks being stopped or domains
-> >> disabled and then trying to access the hardware.
-> >>
-> >=20
-> > So when I got this on my 64-bit build:
-> >=20
-> > [  166.702171] SError Interrupt on CPU1, code 0x00000000bf000002 -- SEr=
-ror
-> > [  166.702187] CPU: 1 PID: 8 Comm: kworker/u8:0 Tainted: G        W
-> >     5.19.0-rc6-00096-gba7973977976-dirty #1
-> > [  166.702200] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
-> > [  166.702206] Workqueue: events_freezable_power_ thermal_zone_device_c=
-heck
-> > [  166.702231] pstate: 200000c5 (nzCv daIF -PAN -UAO -TCO -DIT -SSBS
-> > BTYPE=3D--)
-> > [  166.702242] pc : regmap_mmio_read32le+0x10/0x28
-> > [  166.702261] lr : regmap_mmio_read+0x44/0x70
-> > ...
-> > [  166.702606]  bcm2711_get_temp+0x58/0xb0 [bcm2711_thermal]
-> >=20
-> > I wondered if that reg read was stalled due to a clock being stopped.
-> >=20
-> > Lo and behold, disabling runtime pm and keeping the vec clock running
-> > all the time fixed it[1].
-> >=20
-> > I don't know what the problem is, but at least I can now test this patc=
-hset.
-> >=20
-> > [1] https://gist.github.com/notro/23b984e7fa05cfbda2db50a421cac065
-> >=20
->=20
-> It turns out I didn't have to disable runtime pm:
-> https://gist.github.com/notro/0adcfcb12460b54e54458afe11dc8ea2
+You may have a point. But in that case, maybe it'd make sense to at least add
+a short comment explaining what do you mean by "NTSC" and "PAL" in this context?
 
-If the bcm2711_thermal IP needs that clock to be enabled, it should grab
-a reference itself, but it looks like even the device tree binding
-doesn't ask for one.
-
-Maxime
-
---fq3utlr2k6iltjfz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxYOWQAKCRDj7w1vZxhR
-xZXhAP94pqs+pj7lGSsjwlmP/UEuFHEg9U2CXHj8wPM/2qMMIgEAnt6LqzGRnWKu
-1s/dJJP8pFIF3pOYAXRfYltS8OWIzAs=
-=ha9g
------END PGP SIGNATURE-----
-
---fq3utlr2k6iltjfz--
+Best regards,
+Mateusz Kwiatkowski
