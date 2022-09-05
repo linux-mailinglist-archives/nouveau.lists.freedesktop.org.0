@@ -1,77 +1,76 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DA365AF620
-	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:33:23 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DCBC5AF624
+	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:33:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5C99810EACD;
-	Tue,  6 Sep 2022 20:33:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 593B310EAD7;
+	Tue,  6 Sep 2022 20:33:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com
  [66.111.4.230])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A2C5810E37C;
- Mon,  5 Sep 2022 13:32:58 +0000 (UTC)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailnew.nyi.internal (Postfix) with ESMTP id 052A0580222;
- Mon,  5 Sep 2022 09:32:56 -0400 (EDT)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AADC410E3A5;
+ Mon,  5 Sep 2022 13:37:58 +0000 (UTC)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailnew.nyi.internal (Postfix) with ESMTP id 0AAC7580281;
+ Mon,  5 Sep 2022 09:37:58 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute1.internal (MEProxy); Mon, 05 Sep 2022 09:32:56 -0400
+ by compute2.internal (MEProxy); Mon, 05 Sep 2022 09:37:58 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
  :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm3; t=1662384775; x=1662391975; bh=BndZD3o0f1
- E/yy3CgHU6/gGUoZque82OSFD4UL+mJ2w=; b=EO51DpMNeWzuyeJKd9el0Z+cLH
- NUdELGUgfHmAmQwc9bO1eHIsyTCjVb6fKeXAsOOP0ooT7ZtS2CvRU3B6PonShX5s
- uR1ZZJCbH9yQLk6K7VKSGB0tZzBOR3Jlv5eAjhNha5mscFH185qRmHsoEf9c+4uo
- Wklciyf30h9oq+Q1YRb7azkX0Ij2Pu+51iPcbqca2LJUTAXwKgwvEM1lPI8x3QbT
- YGUgQzEKtEgQEHFNV8Q99Xoh3iP8e2e1GWifyq6iCSJ9pG5v9BLg9b9zwlXEz+uz
- 4cffC29v8jg8wdVkqY0Mm42LGPU8Bl0mUMLOg3+sgCmCurF2BMm7Lcx0DkFA==
+ :subject:to:to; s=fm3; t=1662385078; x=1662392278; bh=0O41lIsAoQ
+ E7Npc7joN//WSwmuH7s7KunBYUx8/vABE=; b=X7HWNhyjGfDlsQRlHJm0m7wprr
+ 6MFfZlhumCRQ3p4goinni3jIkeUQf4wueWlUdIWrJ4uEKSLLsgDihlVS7h8NI0So
+ W3IBZU0nCWqt6lcprZaMfQt+MdhJHQnb/fikIDm3i2mWEKS1+83DLroJ5FL8rtla
+ Zsg8ziSEc1AfokXUmnhpFS5GYU80ZBOAND76jLKH2U115nexXrrE6xPnki3ot+v2
+ auZcnuSPcKaQd2WIhOUsvlmmO2uAQbXQaFNLN3V38gg6kejHXtkWIpGetN5hW1sF
+ 3LSBVWWAshMasYkAzu3JsB75wgKmKhgFC++sTAEg98VImAOXbJogQmUo59Xg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
  :feedback-id:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:sender:subject:subject:to:to
  :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm1; t=1662384775; x=1662391975; bh=BndZD3o0f1E/yy3CgHU6/gGUoZqu
- e82OSFD4UL+mJ2w=; b=eU6yw1G07vynu4cue4gKD5m5vvy2eoMhdBh/KSUVFtrn
- OUHh1USV2SgljBW7GMgHjMVt1pViT9lTam3HwIj+hEA+6zBGFGRYdXyQzNUaR+P1
- s+Vw/H5yGqPzR8nsRpmlqTwvnfOcemY9NIcLfzzj4uy5i7AUbqZXWLxdQkOLY7Po
- ajXvr2CJAnU3Nw8C28s5CvVrLWnyOlrg1GnRLgKn0ODjH1LwOVW5d1gYYexnKnWr
- wiB1smyxmMIORDxbolYI3+7smjffMX8HE/C8SGJlp29qtKsYk0QXBdYWxLGiK/hN
- yUZG8hJ6HVustSYeynQVK7Ceq0Tcxc0erG6EqlYr6A==
-X-ME-Sender: <xms:h_oVY3ntSP4q_zNMDo5xX_moISXZo_3a78JIoPIkWjpzZtplMSiF6A>
- <xme:h_oVY63u6evuIVUF6Y36KuJoCroqVm1wNJGkDxHFkFsgAGgkTY_pBB26geJa1KOQM
- OiVcTfteeITkIwmKAU>
-X-ME-Received: <xmr:h_oVY9pl5qN70CXGDREiRUgiL9wEzYSC0SEmuWMrKPJ-jErkIkktumflK6E>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdeliedgieejucetufdoteggodetrfdotf
+ fm1; t=1662385078; x=1662392278; bh=0O41lIsAoQE7Npc7joN//WSwmuH7
+ s7KunBYUx8/vABE=; b=GVlBEYLqTO4rnteutkIbGoa1BxOG7P5pOdaf/SCczvni
+ Rfs3e+UBVE6kP/hQvryAZs7xMI5vGrFmlmuLiwiBg06SBrWrAtKgDFwQEegEY8D+
+ XUhaOOa8h1gGUUhCGMBRWQCsmOyo2Wcf3SdsqA+75+dpPtpyB3RJX9rqDf3RvsA7
+ mflQjKITUnKFVg+NQVrIWR3UMuI36HLsgJxlJfUyj+UIRyImf1t+7SxiehvdEK19
+ uCDv9GLBNMj4EhFJzFnis+tcFRCZzh7bhq0C7f9eGtBhJf/nf4+Lm/Trd0k7m21h
+ bNCLgGwUYSP+DcrhHzxPLYy+eQ7DPmqfrWfXZ3Y6uw==
+X-ME-Sender: <xms:tfsVY8b0Kl6Ra5AnJ4dKw2JaW5T35FCq4jufnrR541SQPq3_pl7PLQ>
+ <xme:tfsVY3Y4slKtxcZft9QOhBcaVSxasUXNI-SNEqtsWilOxLPalbRFyAzGkMr4FFPpJ
+ nj9L4X6jjO-Ybs_bok>
+X-ME-Received: <xmr:tfsVY29mxKw0OakVqKVQU4WbRe3SXGMYOXjsLA2ZG1YhBY3YUjLFhNueEvw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdeliedgieekucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
+ cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
  mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeetfefffefgkedtfefgledugfdtjeefjedvtddtkeetieffjedvgfehheff
- hfevudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+ htthgvrhhnpeejveefheefkeeiffegveelveetgffffeektdefuefhtedtgeejhefggedu
+ ffffudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
  hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:h_oVY_mldv5lSIFtb7mKoEW2f0hlNSlAc-J18EeAua7zN2oMUkSQVw>
- <xmx:h_oVY10lch1CZ3LlXmV-mLsgR6-5czKaO49jNv1oc1WXeW4MSawITw>
- <xmx:h_oVY-sSzq_ImTLpiuqqa5s1CXxjawZc82_NlD6orN-th3Uf9_2_yw>
- <xmx:h_oVYzERo3S5Dd--_eLY6ZmpwGdnUPC48g_gkuWxbcQVfLpC5gZLnw>
+X-ME-Proxy: <xmx:tfsVY2rD3viHBtzbhj594zPV9bmkEUUK7yOUcbvgaugvOkJGSwXIqg>
+ <xmx:tfsVY3o0ZmiIRr9Omgyv00mK4GPuoifoE87tADOUFvaDAbczazTmcA>
+ <xmx:tfsVY0SQCPSmnmkPUS0J6DYFUboV1uF0JCC3rrxYIVhnds-z0q032A>
+ <xmx:tvsVYwovTK2UsDiFCbTKDlmUEEVG_54Vq2mKbf3iP2ZX11gGa7md4A>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 5 Sep 2022 09:32:54 -0400 (EDT)
-Date: Mon, 5 Sep 2022 15:32:51 +0200
+ 5 Sep 2022 09:37:56 -0400 (EDT)
+Date: Mon, 5 Sep 2022 15:37:55 +0200
 From: Maxime Ripard <maxime@cerno.tech>
-To: Geert Uytterhoeven <geert@linux-m68k.org>
-Message-ID: <20220905133251.js26hxdosibx4r4i@houat>
+To: Mateusz Kwiatkowski <kfyatek@gmail.com>
+Message-ID: <20220905133755.gcmmntg3wnecyqjq@houat>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
  <20220728-rpi-analog-tv-properties-v2-10-459522d653a7@cerno.tech>
  <242d272b-5b79-986c-9aaf-64e62f6b37ff@gmail.com>
- <CAMuHMdWq3aOO4-2AReDeaC2VBJb=QJF2dTMZP=DGmwCg6ZOffA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="33jm6ubzzouafw3w"
+ protocol="application/pgp-signature"; boundary="duymfdwojjs2xq73"
 Content-Disposition: inline
-In-Reply-To: <CAMuHMdWq3aOO4-2AReDeaC2VBJb=QJF2dTMZP=DGmwCg6ZOffA@mail.gmail.com>
+In-Reply-To: <242d272b-5b79-986c-9aaf-64e62f6b37ff@gmail.com>
 X-Mailman-Approved-At: Tue, 06 Sep 2022 20:31:04 +0000
 Subject: Re: [Nouveau] [PATCH v2 10/41] drm/modes: Add a function to
  generate analog display modes
@@ -86,84 +85,96 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Nouveau Dev <nouveau@lists.freedesktop.org>,
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
- Samuel Holland <samuel@sholland.org>,
+ dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
+ Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
- Mateusz Kwiatkowski <kfyatek@gmail.com>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
- Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
  Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
  Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---33jm6ubzzouafw3w
-Content-Type: text/plain; charset=us-ascii
+--duymfdwojjs2xq73
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Wed, Aug 31, 2022 at 10:14:28AM +0200, Geert Uytterhoeven wrote:
-> > > +enum drm_mode_analog {
-> > > +    DRM_MODE_ANALOG_NTSC,
-> > > +    DRM_MODE_ANALOG_PAL,
-> > > +};
-> >
-> > Using "NTSC" and "PAL" to describe the 50Hz and 60Hz analog TV modes is=
- common,
-> > but strictly speaking a misnomer. Those are color encoding systems, and=
- your
-> > patchset fully supports lesser used, but standard encodings for those (=
-e.g.
-> > PAL-M for 60Hz and SECAM for 50Hz). I'd propose switching to some more =
-neutral
-> > naming scheme. Some ideas:
-> >
-> > - DRM_MODE_ANALOG_60_HZ / DRM_MODE_ANALOG_50_HZ (after standard refresh=
- rate)
-> > - DRM_MODE_ANALOG_525_LINES / DRM_MODE_ANALOG_625_LINES (after standard=
- line
-> >   count)
+On Wed, Aug 31, 2022 at 03:44:52AM +0200, Mateusz Kwiatkowski wrote:
+> > +#define NTSC_HFP_DURATION_TYP_NS=A0=A0 =A01500
+> > +#define NTSC_HFP_DURATION_MIN_NS=A0=A0 =A01270
+> > +#define NTSC_HFP_DURATION_MAX_NS=A0=A0 =A02220
 >=20
-> IMHO these are bad names, as e.g. VGA640x480@60 is also analog, using
-> 60 Hz and 525 lines.  Add "TV" to the name?
->=20
-> > - DRM_MODE_ANALOG_JM / DRM_MODE_ANALOG_BDGHIKLN (after corresponding IT=
-U System
-> >   Letter Designations)
->=20
-> Or DRM_MODE_ITU_*?
-> But given the long list of letters, this looks fragile to me.
+> You've defined those min/typ/max ranges, but you're not using the "typ" f=
+ield
+> for anything other than hslen.
 
-Does it matter at all? It's an internal API that isn't exposed at all.
-I'd rather have a common name that everyone can understand in this case
-rather than a *perfect* name where most will scratch their head
-wondering what it's about.
+Yeah... I've left most of them because it was so hard to find most of
+them, it's useful at least for documentation purposes. And it's a define
+so there's pretty much no downside to it as far as the final binary is
+involved.
+
+> The actual "typical" value is thus always the midpoint, which isn't
+> necessarily the best choice.
+>=20
+> In particular, for the standard 720px wide modes at 13.5 MHz, hsync_start
+> ends up being 735 for 480i and 734 for 576i, instead of 736 and 732 reque=
+sted
+> by BT.601. That's all obviously within tolerances, but the image ends up
+> noticeably off-center (at least on modern TVs), especially in the 576i ca=
+se.
+
+I'll try to fix that up.
+
+> > +=A0=A0 =A0htotal =3D params->line_duration_ns * pixel_clock_hz / NSEC_=
+PER_SEC;
+>=20
+> You're multiplying an unsigned int and an unsigned long - both types are =
+only
+> required to be 32 bit, so this is likely to overflow. You need to use a c=
+ast to
+> unsigned long long, and then call do_div() for 64-bit division.
+>=20
+> This actually overflowed on me on my Pi running ARM32 kernel, resulting in
+> negative horizontal porch lengths, and drm_helper_probe_add_cmdline_mode()
+> taking over the mode generation (badly), and a horrible mess on screen.
+
+Indeed, that's bad.
+
+> > +=A0=A0 =A0vfp =3D vfp_min + (porches_rem / 2);
+> > +=A0=A0 =A0vbp =3D porches - vfp;
+>=20
+> Relative position of the vertical sync within the VBI effectively moves t=
+he
+> image up and down. Adding that (porches_rem / 2) moves the image up off c=
+enter
+> by that many pixels. I'd keep the VFP always at minimum to keep the image
+> centered.
+
+And you would increase the back porch only then?
 
 Maxime
 
---33jm6ubzzouafw3w
+--duymfdwojjs2xq73
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxX6gwAKCRDj7w1vZxhR
-xRY+APwO4YqnioLJFYdWxGYCqIG80ImumXUFbL0Tx5/LHpbRnAD9GcSO3ME950qT
-a6PSCUqylWFq013v3epQ49LG4896+QQ=
-=dwqa
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxX7swAKCRDj7w1vZxhR
+xYNaAP9smEnRh5n1ZGmEenQrzOJSe2qrC45ne/SGvv82vvsHOAD/S1/3mpdTYjRp
+q9UQRTTfatktAcjCnUHE0eBICMwRtA4=
+=w772
 -----END PGP SIGNATURE-----
 
---33jm6ubzzouafw3w--
+--duymfdwojjs2xq73--
