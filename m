@@ -1,79 +1,79 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC3755AF613
-	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:32:53 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D870B5AF619
+	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:33:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 13D8710EAB2;
-	Tue,  6 Sep 2022 20:32:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8958110EAA0;
+	Tue,  6 Sep 2022 20:32:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com
  [66.111.4.230])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9988710E3F3;
- Mon,  5 Sep 2022 14:28:49 +0000 (UTC)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailnew.nyi.internal (Postfix) with ESMTP id BD5585801E7;
- Mon,  5 Sep 2022 10:28:48 -0400 (EDT)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B032D10E3EF;
+ Mon,  5 Sep 2022 14:57:35 +0000 (UTC)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailnew.nyi.internal (Postfix) with ESMTP id 5A39E580222;
+ Mon,  5 Sep 2022 10:57:33 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Mon, 05 Sep 2022 10:28:48 -0400
+ by compute1.internal (MEProxy); Mon, 05 Sep 2022 10:57:33 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
  :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm3; t=1662388128; x=1662395328; bh=vefUy4dRsZ
- VWF0YIrw3msOYzL5sGqxLnWRwOjKgBDrQ=; b=K2XS8PGlr2rLCbhGAhNKVV1mKa
- oE5a/DxS0PxYT09GHAoeKfQb2EbQCJ9mu4w58MqnAKA1v9KKxxsiYAxH7YOsy1BN
- 33JRgsa8h4OHegIECgAC9cSpyUMc/Lo2C5mNrEChFfPna0d7iS4gIrwUted9CHx7
- qbnimRJOdwi2we5OgCLd/60A+k3wyzn4j3TdiHlGFcBFcI08cKnqIx93lEL+bLCT
- CqAKbzWub2maQ+RaEAZeMK1h2/Od9syCt1Oc4Z5nD1+HayHeRoUYskPKsrsmSzCh
- e3N7WD2rFsuM/GYBLynULlDETMkMlutJu524iww9KxGAYCF5MtrBhwWigXQg==
+ :subject:to:to; s=fm3; t=1662389853; x=1662397053; bh=8QpD9QHWJ3
+ ZAcUP/Du443zVv5hbNZSb8ty9lWaa/wGU=; b=lXM2P4WcRuf2ASsUJZF7RCJkH6
+ Ylyv1uOXjUelst3OGCJ40g1RO9cicrzW0DqHtFx67qOZQepycOt7YODaS+Z3UCYU
+ xiUPjSX+t7Za0NcWq3NcKWcgr7XHoRHPOkVrpkAaK9xqXD5Zgxq1foaua3jyn6b7
+ 0eyaPuCXIONCQMeka19bc7gavaKm7QF1uedVc/PdcQ6jwHF+aLi3pHsE253hFhqy
+ EyD7BJb5w0faD7aDun6hDK9IKeDBA+AvggdMB52XffsrDNVrH8RSVaZVjphTLlM5
+ i1Whk8kNZP7VMTZwHCjzwFUJ7wEm+xrlPVTUNsBErjzBZ9t3Wa0f+D3iSX7g==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
  :feedback-id:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:sender:subject:subject:to:to
  :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm1; t=1662388128; x=1662395328; bh=vefUy4dRsZVWF0YIrw3msOYzL5sG
- qxLnWRwOjKgBDrQ=; b=YSGrRmXY76fbUtPERuSV+9e6lsEx56hA5vrGlNt2Qpgs
- zOPKczGZQJsxK88Md2RogOECuW5zwHOeJnPTijXakF/dmAlb5LGVud5m+mQe5Sl7
- Nx+dNIsVXROz/pUj6cCxv3K2uWryMWKWKGA87vjkcV2kZd3PrAyjrivRHG//4Cy0
- 8npyhIOZIK0GH7J2zQzX6NbvhdhETzfHNoxutJTlJzbT/hn62C0tzHeBHUXEmf+L
- nIWXmDFc1kwRBghV8udUcYftvhHn+v2vzmUQ7nlzQb7ok4/4d57hANxyRbucnqdL
- hJAerM1Ql35aS0OaCNwHAOYgRUdk2HE+fkLZivJ7tw==
-X-ME-Sender: <xms:nwcWY7093cdWfRq1oL7PNGQ3QbK4j2DgD8slA2vtr3StBwgGGw142A>
- <xme:nwcWY6Ez3fbf7mpeixDFWX2eEq9xironQYCF1CjLV_Vykb9d2mW3Nq5tK_mX90nBc
- ToYcAdDkoXzgclW77E>
-X-ME-Received: <xmr:nwcWY775XQbKfjcX_e98PD2zWRbESjZF_sRzppZfjrunik7KbWARapTpHMI>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdeliedgjeelucetufdoteggodetrfdotf
+ fm1; t=1662389853; x=1662397053; bh=8QpD9QHWJ3ZAcUP/Du443zVv5hbN
+ ZSb8ty9lWaa/wGU=; b=eJLuR+KUme8o4FRaICwZbGRxSjB3xBftb4Gb7nWDUB7U
+ pv0r3P3krh6wz+XI/1n1JeQhUha+e0DnnieItY6gT2/1hAfhqeEAb5xQzjw7tOhm
+ p20Evv6rotQicrPL8uugGearEiwZRoZv9qWmM8cgP2sQeK/Ik2l2DFFtBvXMXFTi
+ 8C9putitPMtDKOfGpGhtY9FkL7TYMVXdIkMkk3vyoypSETZDe9I5Z/tRVd+GzrGs
+ fHEvHNzFhOu3/x+JSU/blWXyLOlVWvOMeSeDxsTt1yBbjlJQK7DhPbHIZ3k9weXd
+ KarSty3ixWH8DcV4u6stghnOewWvxAQ1JwGFbyWWsg==
+X-ME-Sender: <xms:XA4WY1fiBU1ECfDf7wmaBkisGTWTvm7s8Ies8w1PtVwZ1L5mbrQ8Fg>
+ <xme:XA4WYzOlBXenNXjKDVayk8WfQRF-pGVRHZjdD5yUuhOozYNWUMIzSPZJ9cbsqMn64
+ uuJQMDWlS14Mcixgjw>
+X-ME-Received: <xmr:XA4WY-iANzxwUTMWFgq-LsGvxR8KKEHoPP9JzTnmgX7lfJfZ6fDaSPaiyxY>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdeliedgkeegucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
  mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeejveefheefkeeiffegveelveetgffffeektdefuefhtedtgeejhefggedu
- ffffudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
- hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:nwcWYw12b2jj41_bSVOi0TppjyxIf8LchC1b24hD7MOItMAE-N9bDQ>
- <xmx:nwcWY-G1xPGMeuA36sQ6S2FIufVxVxSWprdiwbTGxYuMmpu4v35syw>
- <xmx:nwcWYx8zfPZgx1nEtBKLuqnYkkH7Y6J0qlXcYHDdVgjRUegS2oJLNw>
- <xmx:oAcWY2VbCYUlEte486NIa6WhcoO6WH8JGlPVm3Js638-GMARhcFlug>
+ htthgvrhhnpeevuddthffgfeeiffejgfeghfeludegkedtgefgffejtdegtddvleduvdfh
+ teehveenucffohhmrghinhepghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivg
+ eptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegtvghrnhhordhtvggt
+ hh
+X-ME-Proxy: <xmx:XA4WY---Ncx0ZtdxgQEbadw4u4oWLWaa-7P65288auVolghcPBvPqg>
+ <xmx:XA4WYxvKBL8vyFG3nWU1jEibhAPGnTExbgYL-TwX_LWRS97WjEKaHQ>
+ <xmx:XA4WY9HraN7M_qm-dwOKPjrqnwiQ1TNB6MxGXaTCeKryw8hkBIhprw>
+ <xmx:XQ4WYxdVilKmghQfD17Zzl66x1m1EWhGFxB48Aw90XtbjJoW3D6Qfw>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 5 Sep 2022 10:28:46 -0400 (EDT)
-Date: Mon, 5 Sep 2022 16:28:42 +0200
+ 5 Sep 2022 10:57:32 -0400 (EDT)
+Date: Mon, 5 Sep 2022 16:57:29 +0200
 From: Maxime Ripard <maxime@cerno.tech>
-To: Mateusz Kwiatkowski <kfyatek@gmail.com>
-Message-ID: <20220905142842.c3rvtupggdmavq7z@houat>
+To: Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
+Message-ID: <20220905145729.ln675jko3aw6sgzs@houat>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-19-459522d653a7@cerno.tech>
- <2f607c7d-6da1-c8df-1c02-8dd344a92343@gmail.com>
+ <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
+ <020d44e6-884b-a817-8265-3461638cac71@tronnes.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="a666jub4kxs6fn4h"
+ protocol="application/pgp-signature"; boundary="fq3utlr2k6iltjfz"
 Content-Disposition: inline
-In-Reply-To: <2f607c7d-6da1-c8df-1c02-8dd344a92343@gmail.com>
+In-Reply-To: <020d44e6-884b-a817-8265-3461638cac71@tronnes.org>
 X-Mailman-Approved-At: Tue, 06 Sep 2022 20:31:04 +0000
-Subject: Re: [Nouveau] [PATCH v2 19/41] drm/modes: Introduce the tv_mode
- property as a command-line option
+Subject: Re: [Nouveau] [PATCH v2 00/41] drm: Analog TV Improvements
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,74 +98,81 @@ Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
  Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---a666jub4kxs6fn4h
+--fq3utlr2k6iltjfz
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 02, 2022 at 12:46:29AM +0200, Mateusz Kwiatkowski wrote:
-> > @@ -2212,20 +2239,22 @@ struct drm_named_mode {
-> > =A0=A0=A0 =A0unsigned int xres;
-> > =A0=A0=A0 =A0unsigned int yres;
-> > =A0=A0=A0 =A0unsigned int flags;
-> > +=A0=A0 =A0unsigned int tv_mode;
-> >=A0 };
+On Fri, Sep 02, 2022 at 01:28:16PM +0200, Noralf Tr=F8nnes wrote:
 >=20
-> Are _all_ named modes supposed to be about analog TV?
->
-> If so, then probably this structure should be renamed drm_named_analog_tv=
-_mode
-> or something.
-
-I don't think they need to, but it's the only use case we've had so far.
-We could also imagine using UHD for 3840x2160 for example, so I wouldn't
-say it's limited to analog tv.
-
-> If not, then including tv_mode in all of them sounds almost dangrous. 0 i=
-s a
-> valid value for enum drm_connector_tv_mode, corresponding to
-> DRM_MODE_TV_MODE_NTSC_443. This is a very weird default (maybe it shouldn=
-'t be
-> the one that has a numeric value of 0?) and if there ever is a named mode=
- that
-> is not related to analog TV, it looks that it will refer to NTSC-443.
 >=20
-> Not sure where could that actually propagate, and maybe what I'm saying c=
-an't
-> happen, but I'm imagining weird scenarios where a GPU that has both a
-> VGA/HDMI/whatever output, and a composite output, switches to NTSC-443 on=
- the
-> composite output by default because a named mode for the modern output is
-> selected.
+> Den 01.09.2022 21.35, skrev Noralf Tr=F8nnes:
+> >=20
+> >=20
+> > I have finally found a workaround for my kernel hangs.
+> >=20
+> > Dom had a look at my kernel and found that the VideoCore was fine, and
+> > he said this:
+> >=20
+> >> That suggests cause of lockup was on arm side rather than VC side.
+> >>
+> >> But it's hard to diagnose further. Once you've had a peripheral not
+> >> respond, the AXI bus locks up and no further operations are possible.
+> >> Usual causes of this are required clocks being stopped or domains
+> >> disabled and then trying to access the hardware.
+> >>
+> >=20
+> > So when I got this on my 64-bit build:
+> >=20
+> > [  166.702171] SError Interrupt on CPU1, code 0x00000000bf000002 -- SEr=
+ror
+> > [  166.702187] CPU: 1 PID: 8 Comm: kworker/u8:0 Tainted: G        W
+> >     5.19.0-rc6-00096-gba7973977976-dirty #1
+> > [  166.702200] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
+> > [  166.702206] Workqueue: events_freezable_power_ thermal_zone_device_c=
+heck
+> > [  166.702231] pstate: 200000c5 (nzCv daIF -PAN -UAO -TCO -DIT -SSBS
+> > BTYPE=3D--)
+> > [  166.702242] pc : regmap_mmio_read32le+0x10/0x28
+> > [  166.702261] lr : regmap_mmio_read+0x44/0x70
+> > ...
+> > [  166.702606]  bcm2711_get_temp+0x58/0xb0 [bcm2711_thermal]
+> >=20
+> > I wondered if that reg read was stalled due to a clock being stopped.
+> >=20
+> > Lo and behold, disabling runtime pm and keeping the vec clock running
+> > all the time fixed it[1].
+> >=20
+> > I don't know what the problem is, but at least I can now test this patc=
+hset.
+> >=20
+> > [1] https://gist.github.com/notro/23b984e7fa05cfbda2db50a421cac065
+> >=20
+>=20
+> It turns out I didn't have to disable runtime pm:
+> https://gist.github.com/notro/0adcfcb12460b54e54458afe11dc8ea2
 
-So, named modes are per-connector so the fact that there's another
-output doesn't really matter. Then, the answer is quite simple actually,
-the HDMI driver wouldn't register and use the TV mode property at all,
-so it would completely ignore it, no matter what value it has.
-
-So it's not really a concern.
-
-> Maybe something like DRM_MODE_TV_MODE_NONE =3D 0 would make sense?
-
-But I guess we can add it still.
+If the bcm2711_thermal IP needs that clock to be enabled, it should grab
+a reference itself, but it looks like even the device tree binding
+doesn't ask for one.
 
 Maxime
 
---a666jub4kxs6fn4h
+--fq3utlr2k6iltjfz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxYHmgAKCRDj7w1vZxhR
-xTGUAP9bRX6FEHBUM7XR2y0SEv7Im5MOyJ9Xu+nxahCL5Zr27gEAtUuO35mNsB/a
-iZZfvcVDyPB/1iJJ1p/8F2uKg1G0pQI=
-=y2zk
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxYOWQAKCRDj7w1vZxhR
+xZXhAP94pqs+pj7lGSsjwlmP/UEuFHEg9U2CXHj8wPM/2qMMIgEAnt6LqzGRnWKu
+1s/dJJP8pFIF3pOYAXRfYltS8OWIzAs=
+=ha9g
 -----END PGP SIGNATURE-----
 
---a666jub4kxs6fn4h--
+--fq3utlr2k6iltjfz--
