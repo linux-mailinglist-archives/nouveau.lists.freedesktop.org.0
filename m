@@ -2,83 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93DC05AF5F8
-	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:32:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4DA365AF620
+	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:33:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 911D510EAA6;
-	Tue,  6 Sep 2022 20:31:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5C99810EACD;
+	Tue,  6 Sep 2022 20:33:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 43E2510E37B;
- Thu,  1 Sep 2022 22:52:11 +0000 (UTC)
-Received: by mail-lj1-x233.google.com with SMTP id bn9so574973ljb.6;
- Thu, 01 Sep 2022 15:52:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:from:to:cc;
- bh=Dhwd+COjDW5ThjQ0eGNlcg2FwWXLsRihwwituLHXIZw=;
- b=Qg20bj9HVOA0O2Dv7pbgLFpIerRd3OpfYftDq4iLQONPRjHm8OE5FicN0K1WL1v+S3
- bISpN5k4Xg9gTk37HMqAreo6nvuLyU3JTBpgQLIjzDvBJIqAXMP5MfRK4NHoGkdf8jpo
- 3glN34VMEDD6Gh+Zf1murR+o5lg06tWVopJIiQgpwbgHGnSUZUKhfMxhxUfv/PKpvsCf
- qwtgF3sgpUqP0AbUb+d/a1esSHZ+I5KHKcW+5WE2OKOtNa+X+J/AAtNMS15RdoIDBSEy
- T+m/BQNhtbsQ6WmcJD2FSngsG3cTf0OyGVh/5RtK7l/wyzsThnJPsLTNCVmQ7lejIS6h
- shRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:x-gm-message-state:from:to:cc;
- bh=Dhwd+COjDW5ThjQ0eGNlcg2FwWXLsRihwwituLHXIZw=;
- b=Fd99hL1u+xo4KfogEckDrFppovOpq2htnG7hmysVP0dlV01lJjiWjUYuNGF0QlrtKB
- CLP16JJUEg1jdcI4Kqx0mkk67JFzDp3qwecfs/w8ITXqpxJ112WLKmvUGhMjfSMjX1oU
- q500eDp2jNCZGbZEln3nGh/wa3QEYjCBQmfQu2LrOamr5Xsci27L8qMavSs1OqV0BOe6
- kB+jbIyV7yMIT/mtOxaZ0e5WtwMPXcPlLZSifBzD3nXFco6GLOHdrZHfk8NoRHJv82Bt
- /kEGheXDwjMmKk5/J1iqN2hd4zecE7Txbwr8fyiiju8QqsFto5PmmvmSwoMJElOldUQE
- qOjQ==
-X-Gm-Message-State: ACgBeo2IgvLFYuE+Zd+6FGvB4X5oxPh6fTGVFoYrI22c6L8pDDtseE9p
- 8+GcWoZay2IpeamjalNsIYE=
-X-Google-Smtp-Source: AA6agR5VyqkvxxIZF1flgFAUFyuS1vlvIP1xurquBEUnw5mRA/4PMLSVlwqN/Hy1Kir2419wd9jhSA==
-X-Received: by 2002:a2e:bd0e:0:b0:268:c03b:cf56 with SMTP id
- n14-20020a2ebd0e000000b00268c03bcf56mr1277850ljq.393.1662072729392; 
- Thu, 01 Sep 2022 15:52:09 -0700 (PDT)
-Received: from ?IPV6:2a02:a31a:a240:1700:9c45:8fa1:8ce7:8852?
- ([2a02:a31a:a240:1700:9c45:8fa1:8ce7:8852])
- by smtp.googlemail.com with ESMTPSA id
- w9-20020a2e1609000000b0025e15fe421bsm29224ljd.17.2022.09.01.15.52.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Sep 2022 15:52:08 -0700 (PDT)
-From: Mateusz Kwiatkowski <kfyatek@gmail.com>
-X-Google-Original-From: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
-Message-ID: <768daa58-d1cd-7e9d-4f6e-722f2b0afab9@gmail.com>
-Date: Fri, 2 Sep 2022 00:52:06 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.2.0
-Content-Language: pl
-To: Maxime Ripard <maxime@cerno.tech>, Maxime Ripard <mripard@kernel.org>,
- Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Chen-Yu Tsai <wens@csie.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Jani Nikula <jani.nikula@linux.intel.com>, Lyude Paul <lyude@redhat.com>,
- Philipp Zabel <p.zabel@pengutronix.de>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>, Karol Herbst <kherbst@redhat.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
- Emma Anholt <emma@anholt.net>, Daniel Vetter <daniel@ffwll.ch>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
+Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com
+ [66.111.4.230])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A2C5810E37C;
+ Mon,  5 Sep 2022 13:32:58 +0000 (UTC)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailnew.nyi.internal (Postfix) with ESMTP id 052A0580222;
+ Mon,  5 Sep 2022 09:32:56 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute1.internal (MEProxy); Mon, 05 Sep 2022 09:32:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
+ :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to; s=fm3; t=1662384775; x=1662391975; bh=BndZD3o0f1
+ E/yy3CgHU6/gGUoZque82OSFD4UL+mJ2w=; b=EO51DpMNeWzuyeJKd9el0Z+cLH
+ NUdELGUgfHmAmQwc9bO1eHIsyTCjVb6fKeXAsOOP0ooT7ZtS2CvRU3B6PonShX5s
+ uR1ZZJCbH9yQLk6K7VKSGB0tZzBOR3Jlv5eAjhNha5mscFH185qRmHsoEf9c+4uo
+ Wklciyf30h9oq+Q1YRb7azkX0Ij2Pu+51iPcbqca2LJUTAXwKgwvEM1lPI8x3QbT
+ YGUgQzEKtEgQEHFNV8Q99Xoh3iP8e2e1GWifyq6iCSJ9pG5v9BLg9b9zwlXEz+uz
+ 4cffC29v8jg8wdVkqY0Mm42LGPU8Bl0mUMLOg3+sgCmCurF2BMm7Lcx0DkFA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
+ :feedback-id:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:sender:subject:subject:to:to
+ :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm1; t=1662384775; x=1662391975; bh=BndZD3o0f1E/yy3CgHU6/gGUoZqu
+ e82OSFD4UL+mJ2w=; b=eU6yw1G07vynu4cue4gKD5m5vvy2eoMhdBh/KSUVFtrn
+ OUHh1USV2SgljBW7GMgHjMVt1pViT9lTam3HwIj+hEA+6zBGFGRYdXyQzNUaR+P1
+ s+Vw/H5yGqPzR8nsRpmlqTwvnfOcemY9NIcLfzzj4uy5i7AUbqZXWLxdQkOLY7Po
+ ajXvr2CJAnU3Nw8C28s5CvVrLWnyOlrg1GnRLgKn0ODjH1LwOVW5d1gYYexnKnWr
+ wiB1smyxmMIORDxbolYI3+7smjffMX8HE/C8SGJlp29qtKsYk0QXBdYWxLGiK/hN
+ yUZG8hJ6HVustSYeynQVK7Ceq0Tcxc0erG6EqlYr6A==
+X-ME-Sender: <xms:h_oVY3ntSP4q_zNMDo5xX_moISXZo_3a78JIoPIkWjpzZtplMSiF6A>
+ <xme:h_oVY63u6evuIVUF6Y36KuJoCroqVm1wNJGkDxHFkFsgAGgkTY_pBB26geJa1KOQM
+ OiVcTfteeITkIwmKAU>
+X-ME-Received: <xmr:h_oVY9pl5qN70CXGDREiRUgiL9wEzYSC0SEmuWMrKPJ-jErkIkktumflK6E>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdeliedgieejucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
+ mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
+ htthgvrhhnpeetfefffefgkedtfefgledugfdtjeefjedvtddtkeetieffjedvgfehheff
+ hfevudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+ hmrgigihhmvgestggvrhhnohdrthgvtghh
+X-ME-Proxy: <xmx:h_oVY_mldv5lSIFtb7mKoEW2f0hlNSlAc-J18EeAua7zN2oMUkSQVw>
+ <xmx:h_oVY10lch1CZ3LlXmV-mLsgR6-5czKaO49jNv1oc1WXeW4MSawITw>
+ <xmx:h_oVY-sSzq_ImTLpiuqqa5s1CXxjawZc82_NlD6orN-th3Uf9_2_yw>
+ <xmx:h_oVYzERo3S5Dd--_eLY6ZmpwGdnUPC48g_gkuWxbcQVfLpC5gZLnw>
+Feedback-ID: i8771445c:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 5 Sep 2022 09:32:54 -0400 (EDT)
+Date: Mon, 5 Sep 2022 15:32:51 +0200
+From: Maxime Ripard <maxime@cerno.tech>
+To: Geert Uytterhoeven <geert@linux-m68k.org>
+Message-ID: <20220905133251.js26hxdosibx4r4i@houat>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-20-459522d653a7@cerno.tech>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v2-20-459522d653a7@cerno.tech>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 06 Sep 2022 20:31:03 +0000
-Subject: Re: [Nouveau] [PATCH v2 20/41] drm/modes: Properly generate a
- drm_display_mode from a named mode
+ <20220728-rpi-analog-tv-properties-v2-10-459522d653a7@cerno.tech>
+ <242d272b-5b79-986c-9aaf-64e62f6b37ff@gmail.com>
+ <CAMuHMdWq3aOO4-2AReDeaC2VBJb=QJF2dTMZP=DGmwCg6ZOffA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="33jm6ubzzouafw3w"
+Content-Disposition: inline
+In-Reply-To: <CAMuHMdWq3aOO4-2AReDeaC2VBJb=QJF2dTMZP=DGmwCg6ZOffA@mail.gmail.com>
+X-Mailman-Approved-At: Tue, 06 Sep 2022 20:31:04 +0000
+Subject: Re: [Nouveau] [PATCH v2 10/41] drm/modes: Add a function to
+ generate analog display modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,22 +86,84 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
- Hans de Goede <hdegoede@redhat.com>, Geert Uytterhoeven <geert@linux-m68k.org>,
- Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
+Cc: David Airlie <airlied@linux.ie>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
+ Mateusz Kwiatkowski <kfyatek@gmail.com>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Dom Cobley <dom@raspberrypi.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
+ Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Maxime,
 
-> +        if (!named_mode->tv_mode)
-> +            continue;
+--33jm6ubzzouafw3w
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-As mentioned in the previous email replying to 19/41, this makes it impossible
-to specify DRM_MODE_TV_MODE_NTSC_443 as currently defined in the named mode
-successfully.
+Hi,
 
-Best regards,
-Mateusz Kwiatkowski
+On Wed, Aug 31, 2022 at 10:14:28AM +0200, Geert Uytterhoeven wrote:
+> > > +enum drm_mode_analog {
+> > > +    DRM_MODE_ANALOG_NTSC,
+> > > +    DRM_MODE_ANALOG_PAL,
+> > > +};
+> >
+> > Using "NTSC" and "PAL" to describe the 50Hz and 60Hz analog TV modes is=
+ common,
+> > but strictly speaking a misnomer. Those are color encoding systems, and=
+ your
+> > patchset fully supports lesser used, but standard encodings for those (=
+e.g.
+> > PAL-M for 60Hz and SECAM for 50Hz). I'd propose switching to some more =
+neutral
+> > naming scheme. Some ideas:
+> >
+> > - DRM_MODE_ANALOG_60_HZ / DRM_MODE_ANALOG_50_HZ (after standard refresh=
+ rate)
+> > - DRM_MODE_ANALOG_525_LINES / DRM_MODE_ANALOG_625_LINES (after standard=
+ line
+> >   count)
+>=20
+> IMHO these are bad names, as e.g. VGA640x480@60 is also analog, using
+> 60 Hz and 525 lines.  Add "TV" to the name?
+>=20
+> > - DRM_MODE_ANALOG_JM / DRM_MODE_ANALOG_BDGHIKLN (after corresponding IT=
+U System
+> >   Letter Designations)
+>=20
+> Or DRM_MODE_ITU_*?
+> But given the long list of letters, this looks fragile to me.
+
+Does it matter at all? It's an internal API that isn't exposed at all.
+I'd rather have a common name that everyone can understand in this case
+rather than a *perfect* name where most will scratch their head
+wondering what it's about.
+
+Maxime
+
+--33jm6ubzzouafw3w
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxX6gwAKCRDj7w1vZxhR
+xRY+APwO4YqnioLJFYdWxGYCqIG80ImumXUFbL0Tx5/LHpbRnAD9GcSO3ME950qT
+a6PSCUqylWFq013v3epQ49LG4896+QQ=
+=dwqa
+-----END PGP SIGNATURE-----
+
+--33jm6ubzzouafw3w--
