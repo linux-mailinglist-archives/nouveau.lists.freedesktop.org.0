@@ -2,72 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 572D25B0D7F
-	for <lists+nouveau@lfdr.de>; Wed,  7 Sep 2022 21:52:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D5135B0F2A
+	for <lists+nouveau@lfdr.de>; Wed,  7 Sep 2022 23:31:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9DE0B10E862;
-	Wed,  7 Sep 2022 19:52:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 842E610E8CF;
+	Wed,  7 Sep 2022 21:31:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CCA6710E85F;
- Wed,  7 Sep 2022 19:52:14 +0000 (UTC)
-Received: by mail-lj1-x232.google.com with SMTP id x10so17260593ljq.4;
- Wed, 07 Sep 2022 12:52:14 -0700 (PDT)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1ABDF10E8CE;
+ Wed,  7 Sep 2022 21:31:26 +0000 (UTC)
+Received: by mail-lj1-x236.google.com with SMTP id z23so17561543ljk.1;
+ Wed, 07 Sep 2022 14:31:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:in-reply-to:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:from:to:cc:subject:date;
- bh=yUwzU/FoG+85Ns4JdKII1z4ExnjRnKZlkKN2lB94FG4=;
- b=EKndYRdVlHtxdl+2W2aMAnRcArmaEjb20S8XowRXOt1VLMMDtTJdYqxKxAlBBZXyWd
- beiU3DVPCWge6/5Jg6qPhE0a+1616foGXx6ccgD5um3vyJVgdOypvwX3Alfwmn0OMEv6
- osBKtnVrz3Tqxmnij9JYHOmyhHrATbkkWaGS1Nd40b8MWyBfRTvw/MjsD1piSslcskUZ
- NRYgTDsApqjZ8j1gq4VKOeOhsZtRXmWkF7W30sVhfK9lr0b7H5IgxBJWFO7zJ5vka5fs
- XJpXg6LAG3ogXAWMfihP+jmbQNxYhsPHDAC71b5pHhwLgnlh9O2gkRzz2MPrwhkjteEM
- Axag==
+ bh=ZfOYfQtThYd/KyFSNNpcBedgaTk1E4F3yRLEgfbAULY=;
+ b=VRxQGzqTWKt5NLlk4/wdj2oLSzWbBr8RLMvN8dSsLKXanZhEt7wkBCuhODX+wBxFOB
+ YTpixeZ69A3ll346PHc6UjYp+sEzIa6jvWfNAroxoqXtG5fVeMQheB6W+g903B1RFpz1
+ Cq3FJ1B6nb2XHFOxcTYykeMACstiOgC0BbqUGmbqeBL8KimqxYHmULsWon3QTQym9BKH
+ 4tn2ZzTYfcyZoD58/obnR57g9KQEGRzIJEUkqSJhjiK++7tIBUFFCrIZUPnUwja+oNgc
+ CcQHsGOjipzC9jRFhpGz7LhorgQnalnrEH6Qtdhj0qE1s727C/8tslBuXXnbF6Tutr9I
+ 97Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:x-gm-message-state:from:to:cc:subject:date;
- bh=yUwzU/FoG+85Ns4JdKII1z4ExnjRnKZlkKN2lB94FG4=;
- b=lU0qswS8EVCyOOsO5y3GosNIzQtlA0OYiYqO3go/wO2EmvKo2JDOG61AZyruNOMUYy
- E+aX+IOsU0z4VqkIQViYew7ptVqqrKvCe/gBhKY6dbfeiEKZy3+oySQC2o+vZpEF3cOR
- k0axqx/UrOsrMU/eTtlSPI7vV7JLBU0nuymj9tySJFrnkbCBkH0kjwWwEwxBMimg1Yd9
- WR8zadEdytl110+zKvVYEJcbKkjBkAuUyA4DihlGBACG6/TNPw5f+tDFdCZL8tYxFyVV
- Y+ODxxLPad0Wcdm8OKX12g1GXNkoN6/Bqqqyvyz/VaBb5sByC1C5oCBpm++5gcjKgXMf
- Wdew==
-X-Gm-Message-State: ACgBeo0lOlNQo0bLQCQQB8KhtGQdufkH/+R7vnhUaCW0DzgItzx/jOiY
- EFA9Oa4bTz2ypxSc44ax2Tk=
-X-Google-Smtp-Source: AA6agR7prye+anBkusQWIezcT9fPSQhdu5CxUaHX1aDvTKI8jdwbC5l35BglvHJ8rPbpT1REMeLQag==
-X-Received: by 2002:a05:651c:110d:b0:269:f9c0:d155 with SMTP id
- e13-20020a05651c110d00b00269f9c0d155mr1430507ljo.493.1662580332833; 
- Wed, 07 Sep 2022 12:52:12 -0700 (PDT)
+ bh=ZfOYfQtThYd/KyFSNNpcBedgaTk1E4F3yRLEgfbAULY=;
+ b=z9EcWzkgZH2pvKXKPCA4hLhdXiOiZHkB4iVgY79Xc4/wawnlAqGvJeZzy13NEbJouM
+ v55jzfYhNNCiHA+iiuH+6+m2PxkRcWqpFYzkuHhqyxfv6tnSieLrmaEJoCEihqjIwCHe
+ k5fXWt1PVrzE67iP9pq1WySTW94dvtY+mgA7+lSgDX2HaRTcYY7e74zS8bt//ZN/Xr06
+ C3a9ziGlwqwAEFrl1kTGJTiVoyq+ZWQ4JhU+EXPNaGbdPgd5193Jq1xDPlMbz4Z1pMvQ
+ aFoZKsrtulrTDkL8a5fYmauv1Xuu+T4vpU1gtCPfHl9fKJdAsD5Hk/Mq0oNrvwV7G1nk
+ 6hjQ==
+X-Gm-Message-State: ACgBeo0jC/+qqE+O1Dirt+LdJJJlo3/P+JUEo8y5Hbk1ln0+rbkjkSel
+ 6LP6Zc6waUZbhTmkDcuxUdE=
+X-Google-Smtp-Source: AA6agR63jg/DfvolpHhSn3tY0Cl+lM71H7YGuQTXytiA5QL42uEm7EIa+ryHFFQxZzUJpplqg82nJg==
+X-Received: by 2002:a2e:804a:0:b0:26b:66d3:4d51 with SMTP id
+ p10-20020a2e804a000000b0026b66d34d51mr172137ljg.293.1662586284210; 
+ Wed, 07 Sep 2022 14:31:24 -0700 (PDT)
 Received: from ?IPV6:2a02:a31a:a240:1700:e929:c054:a46d:3844?
  ([2a02:a31a:a240:1700:e929:c054:a46d:3844])
  by smtp.googlemail.com with ESMTPSA id
- m2-20020a056512358200b004947c4dfde8sm2693435lfr.129.2022.09.07.12.52.10
+ p20-20020a2e9a94000000b0026acfe1b3b4sm549047lji.17.2022.09.07.14.31.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 07 Sep 2022 12:52:12 -0700 (PDT)
+ Wed, 07 Sep 2022 14:31:23 -0700 (PDT)
 From: Mateusz Kwiatkowski <kfyatek@gmail.com>
 X-Google-Original-From: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
-Message-ID: <6639fb8f-e16c-1ef5-5978-c522f76c8ded@gmail.com>
-Date: Wed, 7 Sep 2022 21:52:09 +0200
+Message-ID: <dc1d9499-d4d5-1032-f39f-d4ac4cbb8412@gmail.com>
+Date: Wed, 7 Sep 2022 23:31:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.2.1
 Content-Language: pl
 To: Maxime Ripard <maxime@cerno.tech>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-9-459522d653a7@cerno.tech>
- <30a9d7cd-d9ff-3177-ac6c-e7c1f966d89a@gmail.com>
- <20220907121009.toizfolruuazcrns@houat>
-In-Reply-To: <20220907121009.toizfolruuazcrns@houat>
+ <20220728-rpi-analog-tv-properties-v2-10-459522d653a7@cerno.tech>
+ <242d272b-5b79-986c-9aaf-64e62f6b37ff@gmail.com>
+ <20220905133755.gcmmntg3wnecyqjq@houat>
+ <10ce686a-d7c8-9ce4-3979-735ad8eab3b5@gmail.com>
+ <20220907143421.4iopqwhp3yfircsh@houat>
+In-Reply-To: <20220907143421.4iopqwhp3yfircsh@houat>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v2 09/41] drm/connector: Add TV standard
- property
+Subject: Re: [Nouveau] [PATCH v2 10/41] drm/modes: Add a function to
+ generate analog display modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,123 +101,99 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Hi Maxime,
 
-W dniu 7.09.2022 o 14:10, Maxime Ripard pisze:
-> Hi,
->
-> On Fri, Sep 02, 2022 at 12:00:33AM +0200, Mateusz Kwiatkowski wrote:
->> W dniu 29.08.2022 o 15:11, Maxime Ripard pisze:
->>> The TV mode property has been around for a while now to select and get the
->>> current TV mode output on an analog TV connector.
+W dniu 7.09.2022 o 16:34, Maxime Ripard pisze:
+> On Mon, Sep 05, 2022 at 06:44:42PM +0200, Mateusz Kwiatkowski wrote:
+>> Hi Maxime,
+>>
+>> W dniu 5.09.2022 o 15:37, Maxime Ripard pisze:
+>>>>> +    vfp = vfp_min + (porches_rem / 2);
+>>>>> +    vbp = porches - vfp;
+>>>>
+>>>> Relative position of the vertical sync within the VBI effectively moves the
+>>>> image up and down. Adding that (porches_rem / 2) moves the image up off center
+>>>> by that many pixels. I'd keep the VFP always at minimum to keep the image
+>>>> centered.
 >>>
->>> Despite that property name being generic, its content isn't and has been
->>> driver-specific which makes it hard to build any generic behaviour on top
->>> of it, both in kernel and user-space.
->>>
->>> Let's create a new bitmask tv norm property, that can contain any of the
->>> analog TV standards currently supported by kernel drivers. Each driver can
->>> then pass in a bitmask of the modes it supports.
+>>> And you would increase the back porch only then?
 >>
->> This is not a bitmask property anymore, you've just changed it to an enum.
->> The commit message is now misleading.
+>> Well, increasing vbp only gives a centered image with the default 480i/576i
+>> resolutions. However, only ever changing vbp will cause the image to be always
+>> at the bottom of the screen when the active line count is decreased (e.g.
+>> setting the resolution to 720x480 but for 50Hz "PAL" - like many game consoles
+>> did back in the day).
 >>
->>> +static const struct drm_prop_enum_list drm_tv_mode_enum_list[] = {
->>> +    { DRM_MODE_TV_MODE_NTSC_443, "NTSC-443" },
->>> +    { DRM_MODE_TV_MODE_NTSC_J, "NTSC-J" },
->>> +    { DRM_MODE_TV_MODE_NTSC_M, "NTSC-M" },
->>> +    { DRM_MODE_TV_MODE_PAL_60, "PAL-60" },
->>> +    { DRM_MODE_TV_MODE_PAL_B, "PAL-B" },
->>> +    { DRM_MODE_TV_MODE_PAL_D, "PAL-D" },
->>> +    { DRM_MODE_TV_MODE_PAL_G, "PAL-G" },
->>> +    { DRM_MODE_TV_MODE_PAL_H, "PAL-H" },
->>> +    { DRM_MODE_TV_MODE_PAL_I, "PAL-I" },
->>> +    { DRM_MODE_TV_MODE_PAL_M, "PAL-M" },
->>> +    { DRM_MODE_TV_MODE_PAL_N, "PAL-N" },
->>> +    { DRM_MODE_TV_MODE_PAL_NC, "PAL-Nc" },
->>> +    { DRM_MODE_TV_MODE_SECAM_60, "SECAM-60" },
->>> +    { DRM_MODE_TV_MODE_SECAM_B, "SECAM-B" },
->>> +    { DRM_MODE_TV_MODE_SECAM_D, "SECAM-D" },
->>> +    { DRM_MODE_TV_MODE_SECAM_G, "SECAM-G" },
->>> +    { DRM_MODE_TV_MODE_SECAM_K, "SECAM-K" },
->>> +    { DRM_MODE_TV_MODE_SECAM_K1, "SECAM-K1" },
->>> +    { DRM_MODE_TV_MODE_SECAM_L, "SECAM-L" },
->>> +};
+>> I believe that the perfect solution would:
 >>
->> I did not comment on it the last time, but this list looks a little bit random.
->>
->> Compared to the standards defined by V4L2, you also define SECAM-60 (a good
->> thing to define, because why not), but don't define PAL-B1, PAL-D1, PAL-K,
->> SECAM-H, SECAM-LC (whatever that is - probably just another name for SECAM-L,
->> see my comment about PAL-Nc below), or NTSC-M-KR (a Korean variant of NTSC).
->>
->> Like I mentioned previously, I'm personally not a fan of including all those
->> CCIR/ITU system variants, as they don't mean any difference to the output unless
->> there is an RF modulator involved. But I get it that they have already been used
->> and regressing probably wouldn't be a very good idea. But in that case keeping
->> it consistent with the set of values used by V4L2 would be wise, I think.
+>> - Use the canonical / standard-defined blanking line counts for the standard
+>>   vertical resolutions (480/486/576)
+>> - Increase vfp and vbp from there by the same number if a smaller number of
+>>   active lines is specified, so that the resulting image is centered
+>> - Likewise, decrease vfp and vbp by the same number if the active line number
+>>   is larger and there is still leeway (this should allow for seamless handling
+>>   of 480i vs. 486i for 60 Hz "NTSC")
 >
-> Ack. What would be the list of standards we'd absolutely need? NSTC-M,
-> NTSC-J, PAL-60, PAL-B, PAL-M, SECAM-60 and SECAM-B?
-
-The "essential list" IMO is NTSC, NTSC-J, NTSC-443, PAL, PAL-M, PAL-N and SECAM.
-Note that:
-
-- I intentionally propose "NTSC", "PAL" and "SECAM" without an ITU system
-  designation. If we only consider composite signals, there's no difference
-  between e.g. PAL-B, PAL-D and PAL-I, so it's better to label it as a generic
-  mode, IMO.
-
-  * PAL-M and PAL-N are different, because those unique color encodings were
-    only ever used with Systems M and N, respectively.
-
-  * NTSC-J is also different, because "System J" doesn't exist anywhere in ITU
-    documents. Japan technically uses System M with a non-standard black level.
-    But "NTSC-J" stuck as a universally recognized name for that variant.
-
-- I intentionally did not list PAL-60 or SECAM-60. TBH... PAL-60 is just
-  regular PAL paired with 480i60 modeline. Most if not all displays that
-  accept PAL-60 input will just label it as "PAL". If we are not introducing
-  strict modeline validation, then maybe separating PAL and PAL-60 isn't really
-  necessary? Same goes for SECAM vs. SECAM-60.
- 
-  ...and same goes for NTSC vs. NTSC-50 a.k.a NTSC-N, which is a very exotic
-  mode, but known to exist at least in the Atari ST world, see also:
-  https://en.wikipedia.org/wiki/NTSC#NTSC-N/NTSC50
-
-Combining PAL and PAL-60 into a single setting would complicate the vc4 driver
-a little bit, though, as the registers need to be set up differently for those.
-
-My feelings about the PAL-60 issue are not that strong, though. Merging PAL
-and PAL-60 in this context is just a loose suggestion, I won't even try to
-argue if you disagree.
-
->>> +/**
->>> + * drm_mode_create_tv_properties - create TV specific connector properties
->>> + * @dev: DRM device
->>> + * @supported_tv_modes: Bitmask of TV modes supported (See DRM_MODE_TV_MODE_*)
->>> +
->>> + * Called by a driver's TV initialization routine, this function creates
->>> + * the TV specific connector properties for a given device.  Caller is
->>> + * responsible for allocating a list of format names and passing them to
->>> + * this routine.
->>> + *
->>> + * Returns:
->>> + * 0 on success or a negative error code on failure.
->>> + */
->>> +int drm_mode_create_tv_properties(struct drm_device *dev,
->>> +                  unsigned int supported_tv_modes)
->>
->> supported_tv_modes is supposed to be a bitmask of BIT(DRM_MODE_TV_MODE_*)
->> (or (1<<DRM_MODE_TV_MODE_*)) rather than DRM_MODE_TV_MODE_* directly, but this
->> is not said explicitly anywhere in this doc comment.
+> I'm not sure I understand how that's any different than the code you
+> initially commented on.
 >
-> The argument doc mentions that it's a "Bitmask of TV modes supported
-> (See DRM_MODE_TV_MODE_*)", how would you improve it?
+> I would start by taking the entire blanking area, remove the sync
+> period. We only have the two porches now, and I'm starting from the
+> minimum, adding as many pixels in both (unless it's not an even number,
+> in which case the backporch will have the extra pixel).
+>
+> Isn't it the same thing?
+> [...]
+> Unless you only want me to consider the front porch maximum?
 
-Maybe something like "Bitwise OR of BIT(DRM_MODE_TV_MODE_*) values"? Or maybe
-just add a little usage example?
+I think you're confusing the "post-equalizing pulses" with the "vertical back
+porch" a little bit. The "vertical back porch" includes both the post-equalizing
+pulses and the entire rest of the VBI period, for the standard resolutions at
+least.
 
-> Thanks!
-> Maxime
+The "canonical" modelines (at least for vc4's VEC, see the notes below):
+
+- (vfp==4, vsync==6, vbp==39) for 576i
+- (vfp==7, vsync==6, vbp==32) for 480i
+- (vfp==5, vsync==6, vbp==28) for 486i (full frame NTSC as originally specified)
+
+The numbers for vfp don't exactly match the theoretical values, because:
+
+- VEC actually adds a half-line pulse on top of VFP_ODD, and in the 625-line
+  mode also on top of VFP_EVEN (not always, but let's not dwell too much)
+- Conversely, VEC subtracts the half-line pulse from VSYNC_ODD and VSYNC_EVEN
+  in the 625-line mode
+- SMPTE S170M (see https://www.itu.int/rec/R-REC-BT.1700-0-200502-I/en) defines
+  that active picture for NTSC is on lines 21-263 and 283-525; 263 and 283 are
+  half-lines that are represented as full lines in the "486i" spec
+- SMPTE 314M, which is the spec for DV, defines the 480 active lines as lines
+  23-262 and 285-524; see Table 20 on page 26 in
+  https://last.hit.bme.hu/download/firtha/video/SMPTE/SMPTE-314M%20DV25-50.pdf;
+  this means that the standard 480i frame shaves off four topmost and two
+  bottommost lines (2 and 1 per field) of the 486i full frame
+
+Note that the half-line pulses in vfp/vsync may be generated in a different way
+on encoders other than vc4's VEC. Maybe we should define some concrete
+semantics for vfp/vsync in analog TV modes, and compensate for that in the
+drivers. But anyway, that's a separate issue.
+
+My point is that, to get a centered image, you can then proportionately add
+values to those "canonical" vfp/vbp values. For example if someone specifies
+720x480 frame, but 50 Hz PAL, you should set (vfp==52, vsync==6, vbp==87).
+Those extra vbp lines will be treated as a black bar at the top of the frame,
+and extra vfp lines will be at the bottom of the frame.
+
+However if someone specifies e.g. 720x604, there's nothing more you could
+remove from vfp, so your only option is to reduce vbp compared to the standard
+mode, so you'll end up with (vfp==4, vsync==6, vbp==11). The image will not be
+centered, the topmost lines will get cropped out, but that's the best we can do
+and if someone is requesting such resolution, they most likely want to actually
+access the VBI to e.g. emit teletext.
+
+Your current code always starts at (vfp==5 or 6, vsync=6, vbp==6) and then
+increases both vfp and vbp proportionately. This puts vsync dead center in the
+VBI, which is not how it's supposed to be - and that in turn causes the image
+to be significantly shifted upwards.
+
+I hope this makes more sense to you now.
 
 Best regards,
 Mateusz Kwiatkowski
