@@ -1,51 +1,73 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B20D15B0A72
-	for <lists+nouveau@lfdr.de>; Wed,  7 Sep 2022 18:45:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 572D25B0D7F
+	for <lists+nouveau@lfdr.de>; Wed,  7 Sep 2022 21:52:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E5BB710E7D3;
-	Wed,  7 Sep 2022 16:45:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9DE0B10E862;
+	Wed,  7 Sep 2022 19:52:20 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp.domeneshop.no (smtp.domeneshop.no
- [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 11E8A10E7D3;
- Wed,  7 Sep 2022 16:45:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
- ; s=ds202112;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9N6URuex089GHLCqcq5OwqFtSiBdOniUj0H5n1oTE7U=; b=CJU1sQi7bpE3/vdL5WN6zgzECp
- HHbmXjaIPD3FMzb3sar3e+/e26bryRNwv1KdQp0IoqozvMQr2DTCs0jssE29RdyuEJv/rK8lX2WJK
- w2o8NMpLEUrJk30eOPVkwTn6wxVW0kBbnnB7MtXliQTOvmqSHodwkDV+uwCs5gbOmF0eJBvZUDQ2z
- e2JcgdbF+68jArc56Os1nj6UK+Y6uy14uY/Jul33K5WJlLdVPkusBSWmxB8/5J+Jivi1yAAY2SqaJ
- uYShCgxeLJVticyfntOzrgiAdo8jbBv692avVuEnjNwP7CDEGvsUfDGMPAMFYNmIHjp8I7qWEiYf6
- MKMfxSqg==;
-Received: from [2a01:799:961:d200:cca0:57ac:c55d:a485] (port=53589)
- by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1oVyAf-0000KB-VO; Wed, 07 Sep 2022 18:45:01 +0200
-Message-ID: <eb06337b-d501-3ca7-0e50-eda3aec75683@tronnes.org>
-Date: Wed, 7 Sep 2022 18:44:53 +0200
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CCA6710E85F;
+ Wed,  7 Sep 2022 19:52:14 +0000 (UTC)
+Received: by mail-lj1-x232.google.com with SMTP id x10so17260593ljq.4;
+ Wed, 07 Sep 2022 12:52:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:in-reply-to:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:from:to:cc:subject:date;
+ bh=yUwzU/FoG+85Ns4JdKII1z4ExnjRnKZlkKN2lB94FG4=;
+ b=EKndYRdVlHtxdl+2W2aMAnRcArmaEjb20S8XowRXOt1VLMMDtTJdYqxKxAlBBZXyWd
+ beiU3DVPCWge6/5Jg6qPhE0a+1616foGXx6ccgD5um3vyJVgdOypvwX3Alfwmn0OMEv6
+ osBKtnVrz3Tqxmnij9JYHOmyhHrATbkkWaGS1Nd40b8MWyBfRTvw/MjsD1piSslcskUZ
+ NRYgTDsApqjZ8j1gq4VKOeOhsZtRXmWkF7W30sVhfK9lr0b7H5IgxBJWFO7zJ5vka5fs
+ XJpXg6LAG3ogXAWMfihP+jmbQNxYhsPHDAC71b5pHhwLgnlh9O2gkRzz2MPrwhkjteEM
+ Axag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:x-gm-message-state:from:to:cc:subject:date;
+ bh=yUwzU/FoG+85Ns4JdKII1z4ExnjRnKZlkKN2lB94FG4=;
+ b=lU0qswS8EVCyOOsO5y3GosNIzQtlA0OYiYqO3go/wO2EmvKo2JDOG61AZyruNOMUYy
+ E+aX+IOsU0z4VqkIQViYew7ptVqqrKvCe/gBhKY6dbfeiEKZy3+oySQC2o+vZpEF3cOR
+ k0axqx/UrOsrMU/eTtlSPI7vV7JLBU0nuymj9tySJFrnkbCBkH0kjwWwEwxBMimg1Yd9
+ WR8zadEdytl110+zKvVYEJcbKkjBkAuUyA4DihlGBACG6/TNPw5f+tDFdCZL8tYxFyVV
+ Y+ODxxLPad0Wcdm8OKX12g1GXNkoN6/Bqqqyvyz/VaBb5sByC1C5oCBpm++5gcjKgXMf
+ Wdew==
+X-Gm-Message-State: ACgBeo0lOlNQo0bLQCQQB8KhtGQdufkH/+R7vnhUaCW0DzgItzx/jOiY
+ EFA9Oa4bTz2ypxSc44ax2Tk=
+X-Google-Smtp-Source: AA6agR7prye+anBkusQWIezcT9fPSQhdu5CxUaHX1aDvTKI8jdwbC5l35BglvHJ8rPbpT1REMeLQag==
+X-Received: by 2002:a05:651c:110d:b0:269:f9c0:d155 with SMTP id
+ e13-20020a05651c110d00b00269f9c0d155mr1430507ljo.493.1662580332833; 
+ Wed, 07 Sep 2022 12:52:12 -0700 (PDT)
+Received: from ?IPV6:2a02:a31a:a240:1700:e929:c054:a46d:3844?
+ ([2a02:a31a:a240:1700:e929:c054:a46d:3844])
+ by smtp.googlemail.com with ESMTPSA id
+ m2-20020a056512358200b004947c4dfde8sm2693435lfr.129.2022.09.07.12.52.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 07 Sep 2022 12:52:12 -0700 (PDT)
+From: Mateusz Kwiatkowski <kfyatek@gmail.com>
+X-Google-Original-From: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
+Message-ID: <6639fb8f-e16c-1ef5-5978-c522f76c8ded@gmail.com>
+Date: Wed, 7 Sep 2022 21:52:09 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.0
-To: Stefan Wahren <stefan.wahren@i2se.com>, Maxime Ripard <maxime@cerno.tech>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.2.1
+Content-Language: pl
+To: Maxime Ripard <maxime@cerno.tech>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
- <020d44e6-884b-a817-8265-3461638cac71@tronnes.org>
- <20220905145729.ln675jko3aw6sgzs@houat>
- <965de5c0-bc6a-7210-c946-b916ae2219fc@i2se.com>
-From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <965de5c0-bc6a-7210-c946-b916ae2219fc@i2se.com>
+ <20220728-rpi-analog-tv-properties-v2-9-459522d653a7@cerno.tech>
+ <30a9d7cd-d9ff-3177-ac6c-e7c1f966d89a@gmail.com>
+ <20220907121009.toizfolruuazcrns@houat>
+In-Reply-To: <20220907121009.toizfolruuazcrns@houat>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v2 00/41] drm: Analog TV Improvements
+Subject: Re: [Nouveau] [PATCH v2 09/41] drm/connector: Add TV standard
+ property
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,83 +92,130 @@ Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
  =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
  Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi Maxime,
 
-
-Den 07.09.2022 12.36, skrev Stefan Wahren:
-> Hi Maxime,
-> 
-> Am 05.09.22 um 16:57 schrieb Maxime Ripard:
->> On Fri, Sep 02, 2022 at 01:28:16PM +0200, Noralf Trønnes wrote:
+W dniu 7.09.2022 o 14:10, Maxime Ripard pisze:
+> Hi,
+>
+> On Fri, Sep 02, 2022 at 12:00:33AM +0200, Mateusz Kwiatkowski wrote:
+>> W dniu 29.08.2022 o 15:11, Maxime Ripard pisze:
+>>> The TV mode property has been around for a while now to select and get the
+>>> current TV mode output on an analog TV connector.
 >>>
->>> Den 01.09.2022 21.35, skrev Noralf Trønnes:
->>>>
->>>> I have finally found a workaround for my kernel hangs.
->>>>
->>>> Dom had a look at my kernel and found that the VideoCore was fine, and
->>>> he said this:
->>>>
->>>>> That suggests cause of lockup was on arm side rather than VC side.
->>>>>
->>>>> But it's hard to diagnose further. Once you've had a peripheral not
->>>>> respond, the AXI bus locks up and no further operations are possible.
->>>>> Usual causes of this are required clocks being stopped or domains
->>>>> disabled and then trying to access the hardware.
->>>>>
->>>> So when I got this on my 64-bit build:
->>>>
->>>> [  166.702171] SError Interrupt on CPU1, code 0x00000000bf000002 --
->>>> SError
->>>> [  166.702187] CPU: 1 PID: 8 Comm: kworker/u8:0 Tainted: G        W
->>>>      5.19.0-rc6-00096-gba7973977976-dirty #1
->>>> [  166.702200] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
->>>> [  166.702206] Workqueue: events_freezable_power_
->>>> thermal_zone_device_check
->>>> [  166.702231] pstate: 200000c5 (nzCv daIF -PAN -UAO -TCO -DIT -SSBS
->>>> BTYPE=--)
->>>> [  166.702242] pc : regmap_mmio_read32le+0x10/0x28
->>>> [  166.702261] lr : regmap_mmio_read+0x44/0x70
->>>> ...
->>>> [  166.702606]  bcm2711_get_temp+0x58/0xb0 [bcm2711_thermal]
->>>>
->>>> I wondered if that reg read was stalled due to a clock being stopped.
->>>>
->>>> Lo and behold, disabling runtime pm and keeping the vec clock running
->>>> all the time fixed it[1].
->>>>
->>>> I don't know what the problem is, but at least I can now test this
->>>> patchset.
->>>>
->>>> [1] https://gist.github.com/notro/23b984e7fa05cfbda2db50a421cac065
->>>>
->>> It turns out I didn't have to disable runtime pm:
->>> https://gist.github.com/notro/0adcfcb12460b54e54458afe11dc8ea2
->> If the bcm2711_thermal IP needs that clock to be enabled, it should grab
->> a reference itself, but it looks like even the device tree binding
->> doesn't ask for one.
-> The missing clock in the device tree binding is expected, because
-> despite of the code there is not much information about the BCM2711
-> clock tree. But i'm skeptical that the AVS IP actually needs the VEC
-> clock, i think it's more likely that the VEC clock parent is changed and
-> that cause this issue. I could take care of the bcm2711 binding & driver
-> if i know which clock is really necessary.
+>>> Despite that property name being generic, its content isn't and has been
+>>> driver-specific which makes it hard to build any generic behaviour on top
+>>> of it, both in kernel and user-space.
+>>>
+>>> Let's create a new bitmask tv norm property, that can contain any of the
+>>> analog TV standards currently supported by kernel drivers. Each driver can
+>>> then pass in a bitmask of the modes it supports.
+>>
+>> This is not a bitmask property anymore, you've just changed it to an enum.
+>> The commit message is now misleading.
+>>
+>>> +static const struct drm_prop_enum_list drm_tv_mode_enum_list[] = {
+>>> +    { DRM_MODE_TV_MODE_NTSC_443, "NTSC-443" },
+>>> +    { DRM_MODE_TV_MODE_NTSC_J, "NTSC-J" },
+>>> +    { DRM_MODE_TV_MODE_NTSC_M, "NTSC-M" },
+>>> +    { DRM_MODE_TV_MODE_PAL_60, "PAL-60" },
+>>> +    { DRM_MODE_TV_MODE_PAL_B, "PAL-B" },
+>>> +    { DRM_MODE_TV_MODE_PAL_D, "PAL-D" },
+>>> +    { DRM_MODE_TV_MODE_PAL_G, "PAL-G" },
+>>> +    { DRM_MODE_TV_MODE_PAL_H, "PAL-H" },
+>>> +    { DRM_MODE_TV_MODE_PAL_I, "PAL-I" },
+>>> +    { DRM_MODE_TV_MODE_PAL_M, "PAL-M" },
+>>> +    { DRM_MODE_TV_MODE_PAL_N, "PAL-N" },
+>>> +    { DRM_MODE_TV_MODE_PAL_NC, "PAL-Nc" },
+>>> +    { DRM_MODE_TV_MODE_SECAM_60, "SECAM-60" },
+>>> +    { DRM_MODE_TV_MODE_SECAM_B, "SECAM-B" },
+>>> +    { DRM_MODE_TV_MODE_SECAM_D, "SECAM-D" },
+>>> +    { DRM_MODE_TV_MODE_SECAM_G, "SECAM-G" },
+>>> +    { DRM_MODE_TV_MODE_SECAM_K, "SECAM-K" },
+>>> +    { DRM_MODE_TV_MODE_SECAM_K1, "SECAM-K1" },
+>>> +    { DRM_MODE_TV_MODE_SECAM_L, "SECAM-L" },
+>>> +};
+>>
+>> I did not comment on it the last time, but this list looks a little bit random.
+>>
+>> Compared to the standards defined by V4L2, you also define SECAM-60 (a good
+>> thing to define, because why not), but don't define PAL-B1, PAL-D1, PAL-K,
+>> SECAM-H, SECAM-LC (whatever that is - probably just another name for SECAM-L,
+>> see my comment about PAL-Nc below), or NTSC-M-KR (a Korean variant of NTSC).
+>>
+>> Like I mentioned previously, I'm personally not a fan of including all those
+>> CCIR/ITU system variants, as they don't mean any difference to the output unless
+>> there is an RF modulator involved. But I get it that they have already been used
+>> and regressing probably wouldn't be a very good idea. But in that case keeping
+>> it consistent with the set of values used by V4L2 would be wise, I think.
+>
+> Ack. What would be the list of standards we'd absolutely need? NSTC-M,
+> NTSC-J, PAL-60, PAL-B, PAL-M, SECAM-60 and SECAM-B?
 
-Seems you're right, keeping the parent always enabled is enough:
+The "essential list" IMO is NTSC, NTSC-J, NTSC-443, PAL, PAL-M, PAL-N and SECAM.
+Note that:
 
-	clk_prepare_enable(clk_get_parent(vec->clock)); // pllc_per
+- I intentionally propose "NTSC", "PAL" and "SECAM" without an ITU system
+  designation. If we only consider composite signals, there's no difference
+  between e.g. PAL-B, PAL-D and PAL-I, so it's better to label it as a generic
+  mode, IMO.
 
-I tried enabling just the grandparent clock as well, but that didn't help.
+  * PAL-M and PAL-N are different, because those unique color encodings were
+    only ever used with Systems M and N, respectively.
 
-Without the clock hack it seems the hang occurs when switching between
-NTSC and PAL, at most I've been able to do that 4-5 times before it hangs.
+  * NTSC-J is also different, because "System J" doesn't exist anywhere in ITU
+    documents. Japan technically uses System M with a non-standard black level.
+    But "NTSC-J" stuck as a universally recognized name for that variant.
 
-For a while it looked like fbdev/fbcon had a play in this, but then I
-realised that it just gave me a NTSC mode to start from and to go back
-to when qutting modetest.
+- I intentionally did not list PAL-60 or SECAM-60. TBH... PAL-60 is just
+  regular PAL paired with 480i60 modeline. Most if not all displays that
+  accept PAL-60 input will just label it as "PAL". If we are not introducing
+  strict modeline validation, then maybe separating PAL and PAL-60 isn't really
+  necessary? Same goes for SECAM vs. SECAM-60.
+ 
+  ...and same goes for NTSC vs. NTSC-50 a.k.a NTSC-N, which is a very exotic
+  mode, but known to exist at least in the Atari ST world, see also:
+  https://en.wikipedia.org/wiki/NTSC#NTSC-N/NTSC50
 
-Noralf.
+Combining PAL and PAL-60 into a single setting would complicate the vc4 driver
+a little bit, though, as the registers need to be set up differently for those.
+
+My feelings about the PAL-60 issue are not that strong, though. Merging PAL
+and PAL-60 in this context is just a loose suggestion, I won't even try to
+argue if you disagree.
+
+>>> +/**
+>>> + * drm_mode_create_tv_properties - create TV specific connector properties
+>>> + * @dev: DRM device
+>>> + * @supported_tv_modes: Bitmask of TV modes supported (See DRM_MODE_TV_MODE_*)
+>>> +
+>>> + * Called by a driver's TV initialization routine, this function creates
+>>> + * the TV specific connector properties for a given device.  Caller is
+>>> + * responsible for allocating a list of format names and passing them to
+>>> + * this routine.
+>>> + *
+>>> + * Returns:
+>>> + * 0 on success or a negative error code on failure.
+>>> + */
+>>> +int drm_mode_create_tv_properties(struct drm_device *dev,
+>>> +                  unsigned int supported_tv_modes)
+>>
+>> supported_tv_modes is supposed to be a bitmask of BIT(DRM_MODE_TV_MODE_*)
+>> (or (1<<DRM_MODE_TV_MODE_*)) rather than DRM_MODE_TV_MODE_* directly, but this
+>> is not said explicitly anywhere in this doc comment.
+>
+> The argument doc mentions that it's a "Bitmask of TV modes supported
+> (See DRM_MODE_TV_MODE_*)", how would you improve it?
+
+Maybe something like "Bitwise OR of BIT(DRM_MODE_TV_MODE_*) values"? Or maybe
+just add a little usage example?
+
+> Thanks!
+> Maxime
+
+Best regards,
+Mateusz Kwiatkowski
