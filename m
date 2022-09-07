@@ -2,78 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 550795AFDBA
-	for <lists+nouveau@lfdr.de>; Wed,  7 Sep 2022 09:42:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6062B5AFF13
+	for <lists+nouveau@lfdr.de>; Wed,  7 Sep 2022 10:35:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7061310E3DC;
-	Wed,  7 Sep 2022 07:41:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BE46810E437;
+	Wed,  7 Sep 2022 08:35:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from wnew1-smtp.messagingengine.com (wnew1-smtp.messagingengine.com
  [64.147.123.26])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 27F8110E3D6;
- Wed,  7 Sep 2022 07:41:45 +0000 (UTC)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailnew.west.internal (Postfix) with ESMTP id D52402B05879;
- Wed,  7 Sep 2022 03:41:39 -0400 (EDT)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 84CE510E437;
+ Wed,  7 Sep 2022 08:35:20 +0000 (UTC)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailnew.west.internal (Postfix) with ESMTP id 5074F2B058ED;
+ Wed,  7 Sep 2022 04:35:16 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Wed, 07 Sep 2022 03:41:42 -0400
+ by compute3.internal (MEProxy); Wed, 07 Sep 2022 04:35:19 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1662536499; x=1662543699; bh=y/msntKdqi
- pj+ejDnjeq3oXEB7xQmRBAGIlH51MmHWE=; b=0ASl9C6mR2JMJ57u2qgHquxhFK
- iVA9dUYYNSoFW3HVkNKZTO+8uwr9a6Fj/JbJcHJ3sW/n4A+fv3twntq80py1N6BE
- TpdZw+aiJmEkIHDX78ZTWAaJl6+A/0AIkRL5jt5lHLxZCRuVNN9az3kImEy7bjDu
- e9cIkIQnKAeGumwknFXlG5Zw0pz7R0jRuRT48BBz6Q0nNJmpyFDXyy2ZX+NIRq1G
- ROApjkaFKXrWyLKH14m6Y5qp6EGXB8IaImBNbHd/uCeTEordLWBhom6z4Ri6itQM
- 7fG5hj2twZnUtCscGT2JLGiszHJg8h9XBHn+VznC3VJR+b8azpY3jOft/5Ew==
+ :cc:content-transfer-encoding:content-type:date:date:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:sender:subject:subject:to:to; s=fm2; t=1662539715; x=
+ 1662546915; bh=igr6qV0Eap7xUGhc2oop9vyUXnwE0FGWJSHkINHCAhI=; b=q
+ /5Cpz5wmf1mwzJktQrLqiRJNbE7FRpX5OQ9rnZKjEoNjOTcODD6+ZhKiu8tQOzZB
+ rSQlX15NnPEovbWp8NMQKTuvlQT3Sop7RIqzbvKRIFPVZfGmTGG9SpBfUuljPzDs
+ EXwg+xlIN3mwm5YMDk7cdUphSv3OYYUFLjh272Zd6JrXUNHUAp7MX8gOs0Rxlf1J
+ DPff3VAZmv6ipflX74mSUzdKbDZle4Q1m1LXku19YZwumEcHT1pgorDdsDhRdWl7
+ Q+wKdOGX/HfGRo5O+2tnBOADgjfTZ0Oc8HHEhkU7VSpmSZ9qtYaZGk1rBAyLVIZb
+ wnSA/DtNHyImh+pgetFKg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
- :feedback-id:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:sender:subject:subject:to:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1662536499; x=1662543699; bh=y/msntKdqipj+ejDnjeq3oXEB7xQ
- mRBAGIlH51MmHWE=; b=L7sJEzcOhJLtRU29J81qbMFqhlCjRJ78s+lS4UkTN35I
- mJ0ztQLKKLJsrVEmIs48j/0LyEA3sCSpi72I0BuU7xVK0Or+3uS6y7/jgdaf59j+
- MoNvxjgy/YvUIeaJJ2Sh3OD/opeWrHcGakOpugY5VhbxAw1NrljjLYlVdBz9POHR
- FUr/Slrji681XDD7wpxX1Myr7vbMNpJcQxhMq2ZMdPAWMSBXIgFI2HPFZnydsmnx
- WRR3+gtE8IQn7MZqb0OHDYsSVsRGIt1n5LChPQEIzjlhI2/keF07pgA+UektVb7b
- I82sQwfu8yD9/o2Qvfb+cT5mzadzvWwcovM18ENhTQ==
-X-ME-Sender: <xms:MksYYwVncUW7PiRwsQFP8Pl6tYZ1h8QmNxnjxyY4ozlLumGybwZpvQ>
- <xme:MksYY0l3aQpfy5ttitwFK-w0hMvekCDHdDZ5VaoZNQ_Yt_LAoMf2bjR7jARKOUAnP
- uPV-d3sgR8SCM3HbIw>
-X-ME-Received: <xmr:MksYY0a4v2y0W68OkCY4zBJrOjgZ0zB4oLEn029t2UKbqg2ue_ilVwrMYIE>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdelledguddvgecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforgig
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:date:date:feedback-id:feedback-id:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1662539715; x=
+ 1662546915; bh=igr6qV0Eap7xUGhc2oop9vyUXnwE0FGWJSHkINHCAhI=; b=g
+ 5nMgFf4L+SbZW5HRS12/t7VBHgbkL/z+rbOvxjR/VCekvNEF73oked/eSz7PMgov
+ f+Pi2IpkNA9cgYKx7RN7Ns0p/L0GhxDZtmT7bk66JSYXUP7BdjTSSlC6HNA8mlWY
+ MOcQ+I/+JYOEmcaqiakd4+tGo/9M3R/Dpv7Qop9bJzD4nYcdwIrvIJHOhXPPZCd/
+ gGU2xS6hYhOOWmObEBzZL+89OFSHQ8QpaW1FkKsEpIXx4aPkbtn1FCNIH0bSa12s
+ aIQ04+40fq8yS+VXPenRq5RgSczs4SkVBb8Y7tZgf1VjmtG8ARCgRGQe2ZXeBuPN
+ 6Hx6kFAxRHAXJXBPX3D5Q==
+X-ME-Sender: <xms:wlcYYyA5D20iK0dkKl3xZV0Zr0xtX9Cl-s4qTNz0mNEPiZ-Szt_lVw>
+ <xme:wlcYY8guRM42Vsz4FMirJ5nd3gTsWFtW8PZAJAcnEA6eSm0Q56zggl7-qtZXTO-7P
+ gH5ODvk8DRGDCjMRFg>
+X-ME-Received: <xmr:wlcYY1nzz5wnA5jZVnNGqyZJHxlGX7l18PgNy3b6J3zMZUWWsOHKWbonAPA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfedttddgtdegucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforgig
  ihhmvgcutfhiphgrrhguuceomhgrgihimhgvsegtvghrnhhordhtvggthheqnecuggftrf
- grthhtvghrnhepheeuudefieehudeludevuefgtddvgffggefhleffvddvvdfgudeilefh
- heeiiefgnecuffhomhgrihhnpegsohhothhlihhnrdgtohhmnecuvehluhhsthgvrhfuih
- iivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegtvghrnhhordht
- vggthh
-X-ME-Proxy: <xmx:MksYY_XFm2aTYEbFlm97pwKepkddGu_vuJOTn8OXbiLuYiAynDx7yw>
- <xmx:MksYY6krTdQCeRcWWqpLiNfwWtdXBIOctTEM-1jU4em_YlNGFbTMoA>
- <xmx:MksYY0cJyAjD2i8fl7D5nwp3Qo4cV5yRVJfXU12_PTIfe6NTPLT7Jw>
- <xmx:M0sYY41lA31tNqmg20VQfh6esnzeLlCyNcIb8YWnzI4_LJFDLNpmDWSz62A>
+ grthhtvghrnhepueeigefghfffffeifeehudeiuedvteegueefffevgfetvdffheehkeff
+ vedufeeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomh
+ epmhgrgihimhgvsegtvghrnhhordhtvggthh
+X-ME-Proxy: <xmx:wlcYYwz_G2L-cl3Ll3DtPNYWBQ7-RrX9uURvSRH_BQlJTN7iSsT9Zg>
+ <xmx:wlcYY3QkZLAgjj7B9kCtDPo0QY2REcE_Db0Xp8IzisSWmScHi7ro4w>
+ <xmx:wlcYY7ZZOsebrukJK5WuKsVzXZvvJHznw38uGNDBnEQrHiWiagEQmA>
+ <xmx:w1cYY7LvDbHLfmef9qCFQIGfOnFAsRRpVRNR4HQ1DbDGwqvJOEUo30-zx8c>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 7 Sep 2022 03:41:37 -0400 (EDT)
-Date: Wed, 7 Sep 2022 09:41:34 +0200
+ 7 Sep 2022 04:35:13 -0400 (EDT)
 From: Maxime Ripard <maxime@cerno.tech>
-To: Jernej =?utf-8?Q?=C5=A0krabec?= <jernej.skrabec@gmail.com>
-Message-ID: <20220907074134.36yysxrnnpty4ngw@houat>
+To: David Airlie <airlied@linux.ie>, Samuel Holland <samuel@sholland.org>,
+ Daniel Vetter <daniel@ffwll.ch>, Chen-Yu Tsai <wens@csie.org>,
+ Maxime Ripard <mripard@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Emma Anholt <emma@anholt.net>,
+ =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Lyude Paul <lyude@redhat.com>,
+ Karol Herbst <kherbst@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Maxime Ripard <maxime@cerno.tech>
+Date: Wed,  7 Sep 2022 10:34:59 +0200
+Message-Id: <166253967461.2236193.9388419483041463666.b4-ty@cerno.tech>
+X-Mailer: git-send-email 2.37.1
+In-Reply-To: <20220728-rpi-analog-tv-properties-v2-24-459522d653a7@cerno.tech>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-36-459522d653a7@cerno.tech>
- <10138422.nUPlyArG6x@kista>
+ <20220728-rpi-analog-tv-properties-v2-24-459522d653a7@cerno.tech>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hs4qhyrj3xkup6mv"
-Content-Disposition: inline
-In-Reply-To: <10138422.nUPlyArG6x@kista>
-Subject: Re: [Nouveau] [PATCH v2 36/41] drm/sun4i: tv: Merge mode_set into
- atomic_enable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] (subset) [PATCH v2 24/41] drm/vc4: vec: Remove empty
+ mode_fixup
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,67 +97,22 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
- Chen-Yu Tsai <wens@csie.org>, Geert Uytterhoeven <geert@linux-m68k.org>,
- Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
- linux-arm-kernel@lists.infradead.org,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
+Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
+ Hans de Goede <hdegoede@redhat.com>, Geert Uytterhoeven <geert@linux-m68k.org>,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
- Philipp Zabel <p.zabel@pengutronix.de>
+ Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Mon, 29 Aug 2022 15:11:38 +0200, Maxime Ripard wrote:
+> The mode_fixup hooks are deprecated, and the behaviour we implement is the
+> default one anyway. Let's remove it.
+> 
+> 
 
---hs4qhyrj3xkup6mv
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Applied to drm/drm-misc (drm-misc-next).
 
-On Tue, Sep 06, 2022 at 10:04:32PM +0200, Jernej =C5=A0krabec wrote:
-> Dne ponedeljek, 29. avgust 2022 ob 15:11:50 CEST je Maxime Ripard napisal=
-(a):
-> > Our mode_set implementation can be merged into our atomic_enable
-> > implementation to simplify things, so let's do this.
->=20
-> Are you sure this is a good thing in long term? What if user wants to cha=
-nge=20
-> mode? Unlikely, but why not.
-
-It doesn't change anything feature-wise: whenever the mode is changed on
-the CRTC, the encoder is going to be disabled and enabled.
-
-It's disabled here:
-https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/drm_atomic_h=
-elper.c#L1064
-
-And enabled here:
-https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/drm_atomic_h=
-elper.c#L1403
-
-With drm_atomic_crtc_needs_modeset() being defined here:
-https://elixir.bootlin.com/linux/latest/source/include/drm/drm_atomic.h#L10=
-49
-
+Thanks!
 Maxime
-
---hs4qhyrj3xkup6mv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxhLLgAKCRDj7w1vZxhR
-xc3fAQCln8DK77u9XIhbZwrlXlxRZD8r9dSaa/Wm+6VIuvo9WAEA/N2B7TOwCRYY
-WZhwLuKago4QDcoZHalP5O1dmFuJ9wE=
-=RBGO
------END PGP SIGNATURE-----
-
---hs4qhyrj3xkup6mv--
