@@ -1,79 +1,80 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4425A5B03A7
-	for <lists+nouveau@lfdr.de>; Wed,  7 Sep 2022 14:11:34 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B3D925B0707
+	for <lists+nouveau@lfdr.de>; Wed,  7 Sep 2022 16:34:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A6BF110E665;
-	Wed,  7 Sep 2022 12:11:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4EB5110E786;
+	Wed,  7 Sep 2022 14:34:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from new2-smtp.messagingengine.com (new2-smtp.messagingengine.com
- [66.111.4.224])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B3B8B10E73D;
- Wed,  7 Sep 2022 12:11:27 +0000 (UTC)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailnew.nyi.internal (Postfix) with ESMTP id 11B2E5802B9;
- Wed,  7 Sep 2022 08:11:27 -0400 (EDT)
+Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com
+ [66.111.4.230])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 05FC110E786;
+ Wed,  7 Sep 2022 14:34:29 +0000 (UTC)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailnew.nyi.internal (Postfix) with ESMTP id 1F2A25804F0;
+ Wed,  7 Sep 2022 10:34:27 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Wed, 07 Sep 2022 08:11:27 -0400
+ by compute3.internal (MEProxy); Wed, 07 Sep 2022 10:34:27 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
  :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1662552687; x=1662559887; bh=zDA579AoIY
- dDNR4aP7II6WOb5N9Vc2GJf+UG4mhMuI8=; b=xh83Sji/S5fGlHvvO0M89p4G7z
- yG9qqosL/cAMPjQTYP5c1hRx1uW8yt0ygT6kAvWkZkOEW1VNLR4R3bqktiOB8J2X
- 8rntACPKJHtPlw6gpkg488CmWrvp4PVFIIy0fDtjy7BDQGLMcQeLF4CM1kBNsF3r
- DvKvkwlEqhmyXyF7Njw/mV/MND8XaIeQojBIXmzhrdwNpFiS3MHAbsB1HjCw+luf
- mOhaCose89yP0EzYqLBzlHb5rF68sqojmq7+wuCSuwSTNJLsXxAYzkPkStIyC7lw
- gRSE9ILnQWIeS5E22BNrIKUAEo1pYsDVYfAUxhUvDJHsThVFjnA1ecDQW8wQ==
+ :subject:to:to; s=fm2; t=1662561267; x=1662568467; bh=JgmI+KGSUN
+ 45Wie/3+bjGkbyz5oOCqNiJe6kdug5myc=; b=fEOSeRjgEOD6B/j91iz7LAm2nV
+ zm9is7Er/ViHIxBpgpZb6lwibFClewD+iIDcvBDRp+1lmhPCyaLqGg7IA7cP8Xoc
+ wuPl4RWLG7DFN/l8Ef3DsxfT1cd2zQLRfIYCirzpNWoWvJn1u1DHeJKGdSUDI28z
+ 1jY0sVontbTSiey/BmEiACSSDUwkweDEP8Y88zWm/rexWHXi4G8cMuE0k+2Ubav8
+ yVcnkHbvjTtEanw7DdeSQbMbBEQZUlGAaHFddXqW8+k9yjnOhCF7l9h878Ua8DYW
+ sgayo4HxqN7j7DCzmcPR4NNETP7WQrV7L9DlqdV2OvKcqO+2mZ+6pYjLKaNA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
  :feedback-id:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:sender:subject:subject:to:to
  :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1662552687; x=1662559887; bh=zDA579AoIYdDNR4aP7II6WOb5N9V
- c2GJf+UG4mhMuI8=; b=XWKXdivSs5OwDPMC03jM59LWg7OoVGgkfw1rpP4G1+wj
- CvJA+0a/K6XnT1+OfeuMnI17fkt9iogRzJo9+3bs3KsaAE1RqrdjzQ/VZll8Ndo2
- ENsLeYX3OSQTgV/E9UzvY0BFyp8h0Qjw+slxi6pjCz1waqDhOO7cDt2IGQmFUfmY
- rNz/9vsDDHVqxl7Uo6YhDKkqEu3qcNp4UZq2U5QJgYxaU2XDvVDMCsbhwz8JjGWm
- oC6klcFem4SP63dlTJfTio9soptONAMrqJptc5VyKKwuOF025lJrUJ5l4MtLjnaG
- bVl0r5BmThoza/j3xGHDlklJdyhZqQd6xFQ/Xr3qLQ==
-X-ME-Sender: <xms:booYY7dJ7yBzajhFMtzryKFMxL-OIGY_JF2pLc-8u8r--HnYDY8IGA>
- <xme:booYYxPpxvCF8ayHSogxvXBBIH3zoIb98cDJBMSWTU7FuAK6YXDOcW7MyoaqFW4NC
- qQ7N7O6OGxU9KXZycY>
-X-ME-Received: <xmr:booYY0in_Ih4XWleTLyHUyosOGDjEgIEV34Cp_mENm1sEnF-H7vYMEzVuw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfedttddggeejucetufdoteggodetrfdotf
+ fm2; t=1662561267; x=1662568467; bh=JgmI+KGSUN45Wie/3+bjGkbyz5oO
+ CqNiJe6kdug5myc=; b=QZsve74EP24R9KWs9WZsCIVkxBNujxPG60TN9puqze3c
+ o6aNhrxKdPVbGh09EQgmTIu30mCjSkY9oBqwNWg3cRbVT9CSGDTSlxglGLwGruZV
+ vARWixq4SBADNaeBNbJTGCIG9odD6/9WAWxTk4aOKFPICop9IO3pcwWu9wND5de0
+ WZ78qWyg0sbruHsLAn0/vTLXw7MuMI08liDizfiz6oJ2b/8T5ZAp2EpYm9J/sOJe
+ 0O49dbliLK8gjn2pXV+ferzud7lC4N6BLE7ZvbYFTFT4O8aQGL1u1rHr3lvb7iPF
+ JbqQ9W8hlaP3qBDs1foUJk1yTi+UzY3FpobNfifkdg==
+X-ME-Sender: <xms:8asYY4UgApzFGk9lMU7_nB2tWkGa-AKoUUX0oWcDTS3CdqsvjWxehQ>
+ <xme:8asYY8lyse5NlxOdtYZKWaUhjBYfIlgc_PNXrFKciTAfjC7Qq3BrGgdaXexQF6IP4
+ _6htb6-rtuvaukNo78>
+X-ME-Received: <xmr:8asYY8bNWiVMW6b0ICPcNAd1PBwNiJxeN_uWlug667bo_bseyV1obT25lA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfedttddgjeejucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
+ cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
  mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeetfefffefgkedtfefgledugfdtjeefjedvtddtkeetieffjedvgfehheff
- hfevudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+ htthgvrhhnpeejveefheefkeeiffegveelveetgffffeektdefuefhtedtgeejhefggedu
+ ffffudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
  hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:booYY89VIT0sfe1JmDAaiGrD-5W8xJMEW06_9y7sLRI55IOF2lY6Ow>
- <xmx:booYY3tHYdMP2Ikq69ajiY1kRzD__mju6J0w8X_oB-FoJ4bE4XendQ>
- <xmx:booYY7GN7nZ8v7joHwkVmpB0hxr0n1xZXUEnhUYjF5G9lIVhjbvCeA>
- <xmx:b4oYY_dm5jryjGI9aYWnwWzUP3b5YHJM27gV33h2zOrTVnVQ9N-3Vg>
+X-ME-Proxy: <xmx:8asYY3Xt9CeqTnWDGGVrJ5rcfLCxdynDN_Tuorur4XGq8TurhI9oRQ>
+ <xmx:8asYYyn9v6pcPCPNk57ZF5sdNBvLCg3Mk5yuVjBTh0eo0nyrpqcTzA>
+ <xmx:8asYY8c85KGolaoPe5xQ-55tOyvH3qzMK8bWQUHa7IIVjNag736Oyg>
+ <xmx:86sYYw1Zv4Xn3p-SugSX5mxaWqbdQ2rTIZf99SeXJOpnlS5zi1wgMQ>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 7 Sep 2022 08:11:26 -0400 (EDT)
-Date: Wed, 7 Sep 2022 14:11:24 +0200
+ 7 Sep 2022 10:34:24 -0400 (EDT)
+Date: Wed, 7 Sep 2022 16:34:21 +0200
 From: Maxime Ripard <maxime@cerno.tech>
-To: Geert Uytterhoeven <geert@linux-m68k.org>
-Message-ID: <20220907121124.kda7wi33b5cmwhcr@houat>
+To: Mateusz Kwiatkowski <kfyatek@gmail.com>
+Message-ID: <20220907143421.4iopqwhp3yfircsh@houat>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-9-459522d653a7@cerno.tech>
- <30a9d7cd-d9ff-3177-ac6c-e7c1f966d89a@gmail.com>
- <CAMuHMdU_yfr1ybNM9Dyk6n34Cqv5WJv1wZxQ_ZGJ_T8JCOeB2g@mail.gmail.com>
+ <20220728-rpi-analog-tv-properties-v2-10-459522d653a7@cerno.tech>
+ <242d272b-5b79-986c-9aaf-64e62f6b37ff@gmail.com>
+ <20220905133755.gcmmntg3wnecyqjq@houat>
+ <10ce686a-d7c8-9ce4-3979-735ad8eab3b5@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zkn4o5drgepunzyl"
+ protocol="application/pgp-signature"; boundary="xs3njf2uogpsrjq3"
 Content-Disposition: inline
-In-Reply-To: <CAMuHMdU_yfr1ybNM9Dyk6n34Cqv5WJv1wZxQ_ZGJ_T8JCOeB2g@mail.gmail.com>
-Subject: Re: [Nouveau] [PATCH v2 09/41] drm/connector: Add TV standard
- property
+In-Reply-To: <10ce686a-d7c8-9ce4-3979-735ad8eab3b5@gmail.com>
+Subject: Re: [Nouveau] [PATCH v2 10/41] drm/modes: Add a function to
+ generate analog display modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,131 +86,99 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Nouveau Dev <nouveau@lists.freedesktop.org>,
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
- Samuel Holland <samuel@sholland.org>,
+ dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
+ Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
- Mateusz Kwiatkowski <kfyatek@gmail.com>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
- Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
  Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
  Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---zkn4o5drgepunzyl
-Content-Type: text/plain; charset=us-ascii
+--xs3njf2uogpsrjq3
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 02, 2022 at 09:35:20AM +0200, Geert Uytterhoeven wrote:
-> On Fri, Sep 2, 2022 at 12:00 AM Mateusz Kwiatkowski <kfyatek@gmail.com> w=
-rote:
-> > W dniu 29.08.2022 o 15:11, Maxime Ripard pisze:
-> > > The TV mode property has been around for a while now to select and ge=
-t the
-> > > current TV mode output on an analog TV connector.
-> > >
-> > > Despite that property name being generic, its content isn't and has b=
-een
-> > > driver-specific which makes it hard to build any generic behaviour on=
- top
-> > > of it, both in kernel and user-space.
-> > >
-> > > Let's create a new bitmask tv norm property, that can contain any of =
-the
-> > > analog TV standards currently supported by kernel drivers. Each drive=
-r can
-> > > then pass in a bitmask of the modes it supports.
-> >
-> > This is not a bitmask property anymore, you've just changed it to an en=
-um.
-> > The commit message is now misleading.
-> >
-> > > +static const struct drm_prop_enum_list drm_tv_mode_enum_list[] =3D {
-> > > +    { DRM_MODE_TV_MODE_NTSC_443, "NTSC-443" },
-> > > +    { DRM_MODE_TV_MODE_NTSC_J, "NTSC-J" },
-> > > +    { DRM_MODE_TV_MODE_NTSC_M, "NTSC-M" },
-> > > +    { DRM_MODE_TV_MODE_PAL_60, "PAL-60" },
-> > > +    { DRM_MODE_TV_MODE_PAL_B, "PAL-B" },
-> > > +    { DRM_MODE_TV_MODE_PAL_D, "PAL-D" },
-> > > +    { DRM_MODE_TV_MODE_PAL_G, "PAL-G" },
-> > > +    { DRM_MODE_TV_MODE_PAL_H, "PAL-H" },
-> > > +    { DRM_MODE_TV_MODE_PAL_I, "PAL-I" },
-> > > +    { DRM_MODE_TV_MODE_PAL_M, "PAL-M" },
-> > > +    { DRM_MODE_TV_MODE_PAL_N, "PAL-N" },
-> > > +    { DRM_MODE_TV_MODE_PAL_NC, "PAL-Nc" },
-> > > +    { DRM_MODE_TV_MODE_SECAM_60, "SECAM-60" },
-> > > +    { DRM_MODE_TV_MODE_SECAM_B, "SECAM-B" },
-> > > +    { DRM_MODE_TV_MODE_SECAM_D, "SECAM-D" },
-> > > +    { DRM_MODE_TV_MODE_SECAM_G, "SECAM-G" },
-> > > +    { DRM_MODE_TV_MODE_SECAM_K, "SECAM-K" },
-> > > +    { DRM_MODE_TV_MODE_SECAM_K1, "SECAM-K1" },
-> > > +    { DRM_MODE_TV_MODE_SECAM_L, "SECAM-L" },
-> > > +};
-> >
-> > I did not comment on it the last time, but this list looks a little bit=
- random.
-> >
-> > Compared to the standards defined by V4L2, you also define SECAM-60 (a =
-good
-> > thing to define, because why not), but don't define PAL-B1, PAL-D1, PAL=
--K,
-> > SECAM-H, SECAM-LC (whatever that is - probably just another name for SE=
-CAM-L,
-> > see my comment about PAL-Nc below), or NTSC-M-KR (a Korean variant of N=
-TSC).
-> >
-> > Like I mentioned previously, I'm personally not a fan of including all =
-those
-> > CCIR/ITU system variants, as they don't mean any difference to the outp=
-ut unless
-> > there is an RF modulator involved. But I get it that they have already =
-been used
-> > and regressing probably wouldn't be a very good idea. But in that case =
-keeping
-> > it consistent with the set of values used by V4L2 would be wise, I thin=
-k.
+On Mon, Sep 05, 2022 at 06:44:42PM +0200, Mateusz Kwiatkowski wrote:
+> Hi Maxime,
 >=20
-> Exactly. Anything outputting RGB (e.g. through a SCART or VGA connector)
-> doesn't care about the color subcarrier or modulator parts.  Likewise,
-> anything outputting CVBS doesn't care about the modulator part.
+> W dniu 5.09.2022 o 15:37, Maxime Ripard pisze:
+> >>> +=A0=A0=A0 vfp =3D vfp_min + (porches_rem / 2);
+> >>> +=A0=A0=A0 vbp =3D porches - vfp;
+> >>
+> >> Relative position of the vertical sync within the VBI effectively move=
+s the
+> >> image up and down. Adding that (porches_rem / 2) moves the image up of=
+f center
+> >> by that many pixels. I'd keep the VFP always at minimum to keep the im=
+age
+> >> centered.
+> >
+> > And you would increase the back porch only then?
 >=20
-> Perhaps "generic" variants of NSTC and PAL/SECAM should be added, which
-> would really just mean 525/60 resp. 625/50.
+> Well, increasing vbp only gives a centered image with the default 480i/57=
+6i
+> resolutions. However, only ever changing vbp will cause the image to be a=
+lways
+> at the bottom of the screen when the active line count is decreased (e.g.
+> setting the resolution to 720x480 but for 50Hz "PAL" - like many game con=
+soles
+> did back in the day).
 >=20
-> Alternatively, the tv_mode field could be split in two parts (either
-> two separate fields, or bitwise), to maintain a clear separation between
-> lines/fields versus color encoding and RF modulation (with zero for the
-> latter meaning a generic version)? That would also keep the door open
-> for TV_MODE_405_50, TV_MODE_819_50, TV_MODE_750_50, TV_MODE_750_60, ...
+> I believe that the perfect solution would:
+>=20
+> - Use the canonical / standard-defined blanking line counts for the stand=
+ard
+> =A0 vertical resolutions (480/486/576)
+> - Increase vfp and vbp from there by the same number if a smaller number =
+of
+> =A0 active lines is specified, so that the resulting image is centered
+> - Likewise, decrease vfp and vbp by the same number if the active line nu=
+mber
+> =A0 is larger and there is still leeway (this should allow for seamless h=
+andling
+> =A0 of 480i vs. 486i for 60 Hz "NTSC")
 
-Again, that property is only about color encoding and RF modulation. The
-lines numbers and whether it's interlaced or not is encoded in the mode,
-not here. So what you suggest is totally doable today.
+I'm not sure I understand how that's any different than the code you
+initially commented on.
+
+I would start by taking the entire blanking area, remove the sync
+period. We only have the two porches now, and I'm starting from the
+minimum, adding as many pixels in both (unless it's not an even number,
+in which case the backporch will have the extra pixel).
+
+Isn't it the same thing?
+
+> - If even more active lines are specified, once the limit for vfp is hit,=
+ then
+> =A0 decrease vbp only - the resulting image will definitely be off-center=
+, but
+> =A0 there's no other way
+
+Unless you only want me to consider the front porch maximum?
 
 Maxime
 
---zkn4o5drgepunzyl
+--xs3njf2uogpsrjq3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxiKbAAKCRDj7w1vZxhR
-xd9CAP475gMVc9bgPfZRsSpr9ZicWPbCcdtwwB+SIZjyjWZwrgEAipAda0DdLowI
-RCIVTz/4+0X5TsSdP1wzG4wph1ePCQY=
-=iVLu
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxir7QAKCRDj7w1vZxhR
+xYnUAQDKFDkrZV/fLpjtD+btaCpKvPKkEUm37bnBk3TyD3SBTAD+I0kVAytjVinQ
+y5KTIrc3dKg0llXX1SWgrvw0OE2vMAI=
+=QW9g
 -----END PGP SIGNATURE-----
 
---zkn4o5drgepunzyl--
+--xs3njf2uogpsrjq3--
