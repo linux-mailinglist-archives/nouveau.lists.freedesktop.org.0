@@ -2,64 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 742645B080E
-	for <lists+nouveau@lfdr.de>; Wed,  7 Sep 2022 17:09:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B20D15B0A72
+	for <lists+nouveau@lfdr.de>; Wed,  7 Sep 2022 18:45:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0F50610E7A4;
-	Wed,  7 Sep 2022 15:09:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E5BB710E7D3;
+	Wed,  7 Sep 2022 16:45:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BBF4010E7A7;
- Wed,  7 Sep 2022 15:09:08 +0000 (UTC)
-Received: by mail-ej1-x62f.google.com with SMTP id u9so31109874ejy.5;
- Wed, 07 Sep 2022 08:09:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
- bh=q+70v53buIxQaWBchIFk8shCKU1WJV1DdLwWTP+ddeI=;
- b=PsSk7c5ChVk3DJTul0PslXYL3Ii3rxu7S+9k3ZdWO7J5+Rg3SJKW/GHR+l1IdCcqbD
- QzOSg+X20xKhDWwzVNp1EVZBeuM2og/eiCkM9VRatVBVuKtFUtC1IFd6TnphWbjqABrV
- lPI8ekc2MCGq7SaNBqXRHV/YntEXs/I2px8KM7Uiih87ZHZU+6OWWEzoS4qPY0Dysev9
- Kf1PW1ximX/Nir+q+GFzRH9fkY+Yz9NccxBJ97dIkXFYKX6Fbwdx2rSEm5fgP9TwN8TP
- Yn0/K6m8BPkKDGCZQYLjYFkzq7AqD2/EwCvermdk+S+d7m7gCF9XDJd4z+oxXRFK59CM
- CsMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date;
- bh=q+70v53buIxQaWBchIFk8shCKU1WJV1DdLwWTP+ddeI=;
- b=I/kCHXxfRBGEPyaz5IeFZPqXIoVuZYzsc6rXxxYpKvS7iQFjap2j0JuBePDa0EZMe8
- m67qRwnG4VEeU/iLQy/y5+kBZiXWCNIAk17IvdUswIKqmC7viihFqSlaolJ1oK0kg088
- oItWZ470qiq9brjOjLIPb+zlTqCOZaVuxnwYEcoPKrA4qyZFxHgBxl8ZCgyJ8hIgTJpM
- iR/3Mv9ZglaEo48QG4O4YDKHmTjscqxkO0cTPnpslojDX29wtvcRHtUWkJz5XWl6YHAq
- yt0Z7AEo0XZqJ/Z8jCvfdz3fpaVp9ie71BOUdveXZJJ7qoyCiUE/BMt5Bipc1gy4tjXa
- u6XQ==
-X-Gm-Message-State: ACgBeo0THWwmEqoLcSHQeca4+EZ0iFkk3vNIW0eipxxU3glmWslvBNu3
- brNgFhsrUL6t/E90Vg5mTLI=
-X-Google-Smtp-Source: AA6agR7+yo4NVJ1b3xBSrgRyiVKs02kmJQtjtA3mve9GOkmdtQU6KrWKBuLTC8Uj3eslmjookwi2Eg==
-X-Received: by 2002:a17:907:7d8e:b0:742:8ea0:686c with SMTP id
- oz14-20020a1709077d8e00b007428ea0686cmr2603244ejc.591.1662563347199; 
- Wed, 07 Sep 2022 08:09:07 -0700 (PDT)
-Received: from kista.localnet (82-149-1-172.dynamic.telemach.net.
- [82.149.1.172]) by smtp.gmail.com with ESMTPSA id
- p23-20020a056402501700b0043ba7df7a42sm10858179eda.26.2022.09.07.08.09.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Sep 2022 08:09:06 -0700 (PDT)
-From: Jernej =?utf-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: Maxime Ripard <maxime@cerno.tech>
-Date: Wed, 07 Sep 2022 17:09:04 +0200
-Message-ID: <4210281.ejJDZkT8p0@kista>
-In-Reply-To: <20220907074134.36yysxrnnpty4ngw@houat>
-References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <10138422.nUPlyArG6x@kista> <20220907074134.36yysxrnnpty4ngw@houat>
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 11E8A10E7D3;
+ Wed,  7 Sep 2022 16:45:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=9N6URuex089GHLCqcq5OwqFtSiBdOniUj0H5n1oTE7U=; b=CJU1sQi7bpE3/vdL5WN6zgzECp
+ HHbmXjaIPD3FMzb3sar3e+/e26bryRNwv1KdQp0IoqozvMQr2DTCs0jssE29RdyuEJv/rK8lX2WJK
+ w2o8NMpLEUrJk30eOPVkwTn6wxVW0kBbnnB7MtXliQTOvmqSHodwkDV+uwCs5gbOmF0eJBvZUDQ2z
+ e2JcgdbF+68jArc56Os1nj6UK+Y6uy14uY/Jul33K5WJlLdVPkusBSWmxB8/5J+Jivi1yAAY2SqaJ
+ uYShCgxeLJVticyfntOzrgiAdo8jbBv692avVuEnjNwP7CDEGvsUfDGMPAMFYNmIHjp8I7qWEiYf6
+ MKMfxSqg==;
+Received: from [2a01:799:961:d200:cca0:57ac:c55d:a485] (port=53589)
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1oVyAf-0000KB-VO; Wed, 07 Sep 2022 18:45:01 +0200
+Message-ID: <eb06337b-d501-3ca7-0e50-eda3aec75683@tronnes.org>
+Date: Wed, 7 Sep 2022 18:44:53 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH v2 36/41] drm/sun4i: tv: Merge mode_set into
- atomic_enable
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.13.0
+To: Stefan Wahren <stefan.wahren@i2se.com>, Maxime Ripard <maxime@cerno.tech>
+References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
+ <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
+ <020d44e6-884b-a817-8265-3461638cac71@tronnes.org>
+ <20220905145729.ln675jko3aw6sgzs@houat>
+ <965de5c0-bc6a-7210-c946-b916ae2219fc@i2se.com>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <965de5c0-bc6a-7210-c946-b916ae2219fc@i2se.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v2 00/41] drm: Analog TV Improvements
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,9 +61,9 @@ Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
  dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
  Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
- Chen-Yu Tsai <wens@csie.org>, Geert Uytterhoeven <geert@linux-m68k.org>,
- Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
- intel-gfx@lists.freedesktop.org,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
@@ -85,44 +71,82 @@ Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- =?UTF-8?Q?Noralf_Tr=C3=B8nnes?= <noralf@tronnes.org>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
  Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Dne sreda, 07. september 2022 ob 09:41:34 CEST je Maxime Ripard napisal(a):
-> On Tue, Sep 06, 2022 at 10:04:32PM +0200, Jernej =C5=A0krabec wrote:
-> > Dne ponedeljek, 29. avgust 2022 ob 15:11:50 CEST je Maxime Ripard=20
-napisal(a):
-> > > Our mode_set implementation can be merged into our atomic_enable
-> > > implementation to simplify things, so let's do this.
-> >=20
-> > Are you sure this is a good thing in long term? What if user wants to
-> > change mode? Unlikely, but why not.
->=20
-> It doesn't change anything feature-wise: whenever the mode is changed on
-> the CRTC, the encoder is going to be disabled and enabled.
->=20
-> It's disabled here:
-> https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/drm_atomic=
-_he
-> lper.c#L1064
->=20
-> And enabled here:
-> https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/drm_atomic=
-_he
-> lper.c#L1403
->=20
-> With drm_atomic_crtc_needs_modeset() being defined here:
-> https://elixir.bootlin.com/linux/latest/source/include/drm/drm_atomic.h#L=
-104
-> 9
-
-Right.
-
-Acked-by: Jernej Skrabec <jernej.skrabec@gmail.com>
-
-Best regards,
-Jernej
 
 
+Den 07.09.2022 12.36, skrev Stefan Wahren:
+> Hi Maxime,
+> 
+> Am 05.09.22 um 16:57 schrieb Maxime Ripard:
+>> On Fri, Sep 02, 2022 at 01:28:16PM +0200, Noralf Trønnes wrote:
+>>>
+>>> Den 01.09.2022 21.35, skrev Noralf Trønnes:
+>>>>
+>>>> I have finally found a workaround for my kernel hangs.
+>>>>
+>>>> Dom had a look at my kernel and found that the VideoCore was fine, and
+>>>> he said this:
+>>>>
+>>>>> That suggests cause of lockup was on arm side rather than VC side.
+>>>>>
+>>>>> But it's hard to diagnose further. Once you've had a peripheral not
+>>>>> respond, the AXI bus locks up and no further operations are possible.
+>>>>> Usual causes of this are required clocks being stopped or domains
+>>>>> disabled and then trying to access the hardware.
+>>>>>
+>>>> So when I got this on my 64-bit build:
+>>>>
+>>>> [  166.702171] SError Interrupt on CPU1, code 0x00000000bf000002 --
+>>>> SError
+>>>> [  166.702187] CPU: 1 PID: 8 Comm: kworker/u8:0 Tainted: G        W
+>>>>      5.19.0-rc6-00096-gba7973977976-dirty #1
+>>>> [  166.702200] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
+>>>> [  166.702206] Workqueue: events_freezable_power_
+>>>> thermal_zone_device_check
+>>>> [  166.702231] pstate: 200000c5 (nzCv daIF -PAN -UAO -TCO -DIT -SSBS
+>>>> BTYPE=--)
+>>>> [  166.702242] pc : regmap_mmio_read32le+0x10/0x28
+>>>> [  166.702261] lr : regmap_mmio_read+0x44/0x70
+>>>> ...
+>>>> [  166.702606]  bcm2711_get_temp+0x58/0xb0 [bcm2711_thermal]
+>>>>
+>>>> I wondered if that reg read was stalled due to a clock being stopped.
+>>>>
+>>>> Lo and behold, disabling runtime pm and keeping the vec clock running
+>>>> all the time fixed it[1].
+>>>>
+>>>> I don't know what the problem is, but at least I can now test this
+>>>> patchset.
+>>>>
+>>>> [1] https://gist.github.com/notro/23b984e7fa05cfbda2db50a421cac065
+>>>>
+>>> It turns out I didn't have to disable runtime pm:
+>>> https://gist.github.com/notro/0adcfcb12460b54e54458afe11dc8ea2
+>> If the bcm2711_thermal IP needs that clock to be enabled, it should grab
+>> a reference itself, but it looks like even the device tree binding
+>> doesn't ask for one.
+> The missing clock in the device tree binding is expected, because
+> despite of the code there is not much information about the BCM2711
+> clock tree. But i'm skeptical that the AVS IP actually needs the VEC
+> clock, i think it's more likely that the VEC clock parent is changed and
+> that cause this issue. I could take care of the bcm2711 binding & driver
+> if i know which clock is really necessary.
+
+Seems you're right, keeping the parent always enabled is enough:
+
+	clk_prepare_enable(clk_get_parent(vec->clock)); // pllc_per
+
+I tried enabling just the grandparent clock as well, but that didn't help.
+
+Without the clock hack it seems the hang occurs when switching between
+NTSC and PAL, at most I've been able to do that 4-5 times before it hangs.
+
+For a while it looked like fbdev/fbcon had a play in this, but then I
+realised that it just gave me a NTSC mode to start from and to go back
+to when qutting modetest.
+
+Noralf.
