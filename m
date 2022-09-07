@@ -2,79 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC4255AFF51
-	for <lists+nouveau@lfdr.de>; Wed,  7 Sep 2022 10:40:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B6DD5B0115
+	for <lists+nouveau@lfdr.de>; Wed,  7 Sep 2022 11:59:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EAAA010E459;
-	Wed,  7 Sep 2022 08:39:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E132510E4DD;
+	Wed,  7 Sep 2022 09:59:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wnew1-smtp.messagingengine.com (wnew1-smtp.messagingengine.com
- [64.147.123.26])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 68E4210E466;
- Wed,  7 Sep 2022 08:39:53 +0000 (UTC)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailnew.west.internal (Postfix) with ESMTP id 320A72B058ED;
- Wed,  7 Sep 2022 04:39:50 -0400 (EDT)
+Received: from wnew3-smtp.messagingengine.com (wnew3-smtp.messagingengine.com
+ [64.147.123.17])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EC2C410E4D6;
+ Wed,  7 Sep 2022 09:58:59 +0000 (UTC)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailnew.west.internal (Postfix) with ESMTP id 5EA2F2B059D4;
+ Wed,  7 Sep 2022 05:58:53 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Wed, 07 Sep 2022 04:39:52 -0400
+ by compute4.internal (MEProxy); Wed, 07 Sep 2022 05:58:56 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
  :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1662539989; x=1662547189; bh=rHnQqoPJFb
- fCoyXvlScJxF/2TX4ozlRbjwh/s/ZcTXY=; b=rlqCba81GDVgmFo9BLO/+vxElt
- 00saXH5K4+1wgARPrortKc3X6tNhaIagHxtFq9FX3QmW3eYm/dcZ/Xd4W+DrIVIq
- q0ZxCwyGbK8ynlgCZPdKYsO6989NICVWzfThhQB+swIE/SocQxL0blVkHOFtYt2a
- +2+eIDIfs+YcNgfST8S5UY09pFJI0qh1RWs4gmUb3i2JerXi6IRhUpSQtzv5IYsh
- 1R00Oxsydc4sydZCByQlMfEFKKC8TlhHoFWg6uhtxDCJ6cXS1GbN/TN7SCCOMP3q
- 4NhkrIyfgxjadagzbyrTdMplcJk1ooyf72O8s6MEfTM5H43N/6TUUkM/iTMg==
+ :subject:to:to; s=fm2; t=1662544732; x=1662551932; bh=LDbKEsPtEf
+ o0fSrPBtti05cmeMd5jnUlKEOcotKaSo4=; b=EXe+ynfe6vqHN43swOtykOC2Ct
+ uBkougsWyb9Gz9Yz4t6xtOXI72Iy/O5yYrXo+DBTDGNXxul0ebfkTVZMiYl+Kt/C
+ RtpN5Lozu8dtEN4O8yx0EK4S4KNFAsjLumNAC2ObZ/IM6gHiaCKGMIb0sRaOh8de
+ MnRVw8qAcAY2oGvUQSZ4IMLVehnSaNQNGItvETIULd/aEK7fWFBQPms2DsbU0XQp
+ ErTC1E2CGjFAV0Fj4vwOnwwjw7Whw3zyd8lgoBcRK+x6tjCXEvMZ7Ng2+Oet3ALh
+ qzKOWW02KFjsDosfRoB/u2/Ux7V+Ho/gemKefjzU75NX7Fk8asA5RNOcVEUw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
  :feedback-id:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:sender:subject:subject:to:to
  :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1662539989; x=1662547189; bh=rHnQqoPJFbfCoyXvlScJxF/2TX4o
- zlRbjwh/s/ZcTXY=; b=Ft2HiBtALvBCzHSoyFouoM2RlHha3pW36vRYiiF/Aj9p
- jgB1+hT9SxJN781aapotSR/nkYu/nTdv1O9qZsnJ5VQJfDsXDF2E1tN+Vf4mRiWm
- G3SR4pPvfJAXEDu2a05LRJ6/2dgvjxxBVBsk9pwViUxDpoVGiuqZtFXraPe+syba
- nVKdja+C+91rr9ysqLwQhbdr720KzsCw9Fz/J/VUWbcfg/4nkWZiYcuLP+R0Pc0C
- HA3z5f5hC4bLUng7cKExSmOjYAXPw/PxIhiALmfh/1nzPMTG1+X572MR4zmCPVA9
- ibD0tPdUx+IXQ3o/2bEzZzCONQqNRDoUM4Iv38uutA==
-X-ME-Sender: <xms:1VgYY9PFmBkjp0A7V2bAvop2SdEyXbVH_QNWffffyTGZZlmvW9zTOg>
- <xme:1VgYY__oQcg990U2Ytw0kb6kVkiaTRlq3gCt6yktxijiRju56YzaqVM5TpIr3LCLa
- m8uXyfwKPsq_TBiKeM>
-X-ME-Received: <xmr:1VgYY8Sm2V9A-f-DlbfvRBXYrF873-ZITm50jnaOpA1ZX4ooWEOKRX9mZ5I>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfedttddgtdegucetufdoteggodetrfdotf
+ fm2; t=1662544732; x=1662551932; bh=LDbKEsPtEfo0fSrPBtti05cmeMd5
+ jnUlKEOcotKaSo4=; b=W7FoYKQ4vh4JAjO+VVj2d/KTm16IiJZNZdq9LXTgqgtQ
+ t9Rbizu4VEj/S4fOxiSbz6+Z2tpIQd8wC8qQq5TWtVj28LKmgl3ifAhYru/r6eci
+ z1M7ATIVb3UlgdYN8Kwmxq6QbLuzIHQrXBf+5yxpv33Yg4JEldWISKcPYKbgrDUQ
+ 3WZuWBIT4XwBMJzeX0GnJd4QVcXPmJsMoxsr1NiQl2SyZORrtCJAIFAYjhomNmJ5
+ JkP8dSJs/6WFRM0y/aBAgzyCSKm/0F0fJYNGaMB4ie6rQ1PjPSLe0aFuITGBmcyD
+ 1SCGLo3ZAqJ88e0nvhG0Sd2uczq8k08Dj/jrWCvoZg==
+X-ME-Sender: <xms:XGsYY6S6Unf05Ux7EeXWosbmBCQrWexsEhLyFWerP7--z65MfWhekg>
+ <xme:XGsYY_zrDrGlPY7_tG5XsdLoI5rl2Mph9Icxow7udrBgcSPA1LDHZNdApaoAW3e0r
+ dNZCBel3OfArF_XCXM>
+X-ME-Received: <xmr:XGsYY306D9dvzKGYL5VBDkFegfjmi41hvSTbO7IYVRbsRBLwk4ykAtH3xxg->
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfedttddgvddtucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
+ cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
  mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeetfefffefgkedtfefgledugfdtjeefjedvtddtkeetieffjedvgfehheff
- hfevudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
- hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:1VgYY5uFE1WbjoOrw3Lre0EoafBbvnBB2ypQ4HWQOs-it5Cdl6-FHw>
- <xmx:1VgYY1fpgJSwUcfS6TGnANh5IEL_p7D07vbwqnvWXJKXepArMPGHHQ>
- <xmx:1VgYY10gohsFHOuwqMe2C54wVRArFsMFtgg869v4JlHnNkmOqGq3bw>
- <xmx:1VgYY6O_FMI7-UBHsQNAFH9El9UhTIjZAXjM7SKD_8RFiBosm1XRCs5wey8>
+ htthgvrhhnpeevuddthffgfeeiffejgfeghfeludegkedtgefgffejtdegtddvleduvdfh
+ teehveenucffohhmrghinhepghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivg
+ eptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegtvghrnhhordhtvggt
+ hh
+X-ME-Proxy: <xmx:XGsYY2ChJ9bThNgL4kEeg1WjPtnTGDuEfX0G6vrd4LNllKgcAaW6Hg>
+ <xmx:XGsYYzi6nwq4Mwx4T3SErnV9u--G-Z-E2nghFzehs8FPRRT4kkz1_Q>
+ <xmx:XGsYYyo218MlI5Wiu1MgPmnxLYxtVwMOe6ydE6LUHZTCYG3D1fCnIw>
+ <xmx:XGsYY_C_UZtCfR0nP5pwZsMq51PV4Gu8iNV88j3038cccoGHrGgJOdrQSJ0>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 7 Sep 2022 04:39:48 -0400 (EDT)
-Date: Wed, 7 Sep 2022 10:39:45 +0200
+ 7 Sep 2022 05:58:51 -0400 (EDT)
+Date: Wed, 7 Sep 2022 11:58:49 +0200
 From: Maxime Ripard <maxime@cerno.tech>
-To: Jani Nikula <jani.nikula@linux.intel.com>
-Message-ID: <20220907083945.3cqmz765vmnjt3ol@houat>
+To: Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
+Message-ID: <20220907095849.5v72atwuedl5iiva@houat>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-14-459522d653a7@cerno.tech>
- <CAMuHMdV9wVgHFfwHoqtBoYzJDnjDmKTfaZkAKvTVKh1Y-2x1pA@mail.gmail.com>
- <87czcidnb8.fsf@intel.com> <20220830120330.6f5f22d35gu7cbr3@houat>
- <875yi9etuw.fsf@intel.com>
+ <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
+ <020d44e6-884b-a817-8265-3461638cac71@tronnes.org>
+ <20220905145729.ln675jko3aw6sgzs@houat>
+ <74c10e51-4034-a284-1a26-b7ba7fe45fbe@tronnes.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qxovco4c3ldtue3z"
+ protocol="application/pgp-signature"; boundary="g7pwsshhuvzfcxhg"
 Content-Disposition: inline
-In-Reply-To: <875yi9etuw.fsf@intel.com>
-Subject: Re: [Nouveau] [PATCH v2 14/41] drm/modes: Move named modes parsing
- to a separate function
+In-Reply-To: <74c10e51-4034-a284-1a26-b7ba7fe45fbe@tronnes.org>
+Subject: Re: [Nouveau] [PATCH v2 00/41] drm: Analog TV Improvements
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,111 +86,103 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Nouveau Dev <nouveau@lists.freedesktop.org>,
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
- Samuel Holland <samuel@sholland.org>,
+ dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
+ Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Hans de Goede <hdegoede@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Daniel Vetter <daniel@ffwll.ch>,
- Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
  Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---qxovco4c3ldtue3z
-Content-Type: text/plain; charset=us-ascii
+--g7pwsshhuvzfcxhg
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Mon, Sep 05, 2022 at 05:17:18PM +0200, Noralf Tr=F8nnes wrote:
+> Den 05.09.2022 16.57, skrev Maxime Ripard:
+> > On Fri, Sep 02, 2022 at 01:28:16PM +0200, Noralf Tr=F8nnes wrote:
+> >>
+> >>
+> >> Den 01.09.2022 21.35, skrev Noralf Tr=F8nnes:
+> >>>
+> >>>
+> >>> I have finally found a workaround for my kernel hangs.
+> >>>
+> >>> Dom had a look at my kernel and found that the VideoCore was fine, and
+> >>> he said this:
+> >>>
+> >>>> That suggests cause of lockup was on arm side rather than VC side.
+> >>>>
+> >>>> But it's hard to diagnose further. Once you've had a peripheral not
+> >>>> respond, the AXI bus locks up and no further operations are possible.
+> >>>> Usual causes of this are required clocks being stopped or domains
+> >>>> disabled and then trying to access the hardware.
+> >>>>
+> >>>
+> >>> So when I got this on my 64-bit build:
+> >>>
+> >>> [  166.702171] SError Interrupt on CPU1, code 0x00000000bf000002 -- S=
+Error
+> >>> [  166.702187] CPU: 1 PID: 8 Comm: kworker/u8:0 Tainted: G        W
+> >>>     5.19.0-rc6-00096-gba7973977976-dirty #1
+> >>> [  166.702200] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
+> >>> [  166.702206] Workqueue: events_freezable_power_ thermal_zone_device=
+_check
+> >>> [  166.702231] pstate: 200000c5 (nzCv daIF -PAN -UAO -TCO -DIT -SSBS
+> >>> BTYPE=3D--)
+> >>> [  166.702242] pc : regmap_mmio_read32le+0x10/0x28
+> >>> [  166.702261] lr : regmap_mmio_read+0x44/0x70
+> >>> ...
+> >>> [  166.702606]  bcm2711_get_temp+0x58/0xb0 [bcm2711_thermal]
+> >>>
+> >>> I wondered if that reg read was stalled due to a clock being stopped.
+> >>>
+> >>> Lo and behold, disabling runtime pm and keeping the vec clock running
+> >>> all the time fixed it[1].
+> >>>
+> >>> I don't know what the problem is, but at least I can now test this pa=
+tchset.
+> >>>
+> >>> [1] https://gist.github.com/notro/23b984e7fa05cfbda2db50a421cac065
+> >>>
+> >>
+> >> It turns out I didn't have to disable runtime pm:
+> >> https://gist.github.com/notro/0adcfcb12460b54e54458afe11dc8ea2
+> >=20
+> > If the bcm2711_thermal IP needs that clock to be enabled, it should grab
+> > a reference itself, but it looks like even the device tree binding
+> > doesn't ask for one.
+> >=20
+>=20
+> The first thing I tried was to unload the bcm2711_thermal module before
+> running modeset and it still hung, so I don't think that's the problem.
 
-On Tue, Aug 30, 2022 at 04:36:23PM +0300, Jani Nikula wrote:
-> On Tue, 30 Aug 2022, Maxime Ripard <maxime@cerno.tech> wrote:
-> > Hi,
-> >
-> > On Tue, Aug 30, 2022 at 01:43:07PM +0300, Jani Nikula wrote:
-> >> On Tue, 30 Aug 2022, Geert Uytterhoeven <geert@linux-m68k.org> wrote:
-> >> > On Mon, Aug 29, 2022 at 3:13 PM Maxime Ripard <maxime@cerno.tech> wr=
-ote:
-> >> >> +#define STR_STRICT_EQ(str, len, cmp) \
-> >> >> +       ((strlen(cmp) =3D=3D len) && !strncmp(str, cmp, len))
-> >> >
-> >> > This is not part of the move, but newly added.
-> >>=20
-> >> The same construct is also duplicated elsewhere in the series, and I
-> >> kept being confused by it.
-> >
-> > I'm not sure what is confusing, but I can add a comment if needed.
->=20
-> STR_STRICT_EQ() is what's confusing. I have to look at the
-> implementation to understand what it means. What does "strict" string
-> equality mean?
+Ack. Just to confirm, is this happening on mainline or on the downstream tr=
+ee?
 
-Same length, same sequence of characters
-
-> >
-> >> The above is precisely the same as:
-> >>=20
-> >> 	str_has_prefix(str, cmp) =3D=3D len
-> >
-> > Here, it's used to make sure we don't have a named mode starting with
-> > either e, d, or D.
-> >
-> > If I understood str_has_prefix() right, str_has_prefix("DUMB-MODE", "D")
-> > =3D=3D strlen("DUMB-MODE") would return true, while it's actually what =
-we
-> > want to avoid.
->=20
-> That's not true, str_has_prefix("DUMB-MODE", "D") =3D=3D strlen("D") is.
->=20
-> > It's also used indeed in drm_get_tv_mode_from_name(), where we try to
-> > match a list of names with one passed as argument.
-> >
-> > With drm_get_tv_mode_from_name("NSTC", strlen("NTSC")), we would end up
-> > calling str_has_prefix("NTSC-J", "NTSC") =3D=3D strlen("NTSC-J") which =
-would
-> > work. However, we end up calling prefix not a prefix, but an entire
-> > string we want to match against, which is very confusing to me too.
->=20
-> If I get this right, you have a string and you want to check if that has
-> a certain prefix. Additionally, you want to check the prefix is a
-> certain length.
->=20
-> Sure, that the prefix is a certain length is more of a property of the
-> string, which is NUL terminated later than at length, but that's doesn't
-> really matter.
->=20
-> That condition is simply str_has_prefix(string, prefix) =3D=3D length.
-
-Ack. I'm ok with the implementation being done that way, but I'd really
-prefer to still have some macro to make the name less confusing. Would
-that work for you? What name would be better in your opinion?
-
-Thanks!
 Maxime
 
---qxovco4c3ldtue3z
+--g7pwsshhuvzfcxhg
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxhY0QAKCRDj7w1vZxhR
-xa5XAP9sWfv5tHnxQJpN3hRmX3ErZIQ33tjnxBrnbPX7t8NAjwD/emsxhT5EFzpt
-Y/lLUUTztSaE0qu2ofT3EG9ZeOf9fw8=
-=dNn8
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxhrWQAKCRDj7w1vZxhR
+xWOGAQDamcTrLkeNib2/AJ9OVJ5kvT4+VK4EmtvGcxdtuZTUhQD/SHMi1WIJ+4PA
+xhpQO1fhUdfbEHo8tJ554frAHeuSGgA=
+=e7c7
 -----END PGP SIGNATURE-----
 
---qxovco4c3ldtue3z--
+--g7pwsshhuvzfcxhg--
