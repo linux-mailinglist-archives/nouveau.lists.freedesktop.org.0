@@ -1,78 +1,79 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBD1D5AF5F7
-	for <lists+nouveau@lfdr.de>; Tue,  6 Sep 2022 22:32:10 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 550795AFDBA
+	for <lists+nouveau@lfdr.de>; Wed,  7 Sep 2022 09:42:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CE65610EAA3;
-	Tue,  6 Sep 2022 20:31:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7061310E3DC;
+	Wed,  7 Sep 2022 07:41:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8A46C10E173;
- Tue,  6 Sep 2022 20:06:14 +0000 (UTC)
-Received: by mail-ed1-x536.google.com with SMTP id a70so472036edf.10;
- Tue, 06 Sep 2022 13:06:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
- bh=Ck2CZ63xlROKRuum+VYM3RwNiQt6GcNFVn5yjUBlhbU=;
- b=ga9QR8QkKm4EnEDibK+a4UuClq5Nes777nVtiyAuRinh0/Ie7mM1tSBVCLqEH1ugiO
- IlouNRGGlGMh8PAy0X4s9054Xim8TCwe/VTCAwjrlTZXNA3deVSy1W+0kPuHUKF5mEwa
- VTWo3H/ib5eNxXgdPa14jDUVTGHJ2tK67OXVAXeaI/dAT1e8V0IliyVBcbFMyNqRUK8J
- Nl9Ll59iDrM4I1zhPVWBkq3EN3RcA+ihfnEWg5akxMCg2CZM9H0H54FiZ+VU7vHQEVyq
- o1TomSxBabXQ1G2qK6IA+bOsodqiGTNWSOoMkVt0Vubj6i/Ya4sZOl9R2Aq5jCViRSCd
- ZuHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date;
- bh=Ck2CZ63xlROKRuum+VYM3RwNiQt6GcNFVn5yjUBlhbU=;
- b=hr3tRtNkjrpztCc/LxaL2A007hkvE5oF411ymyNWlXPsJmnKj37Cef+5xsMiqxodUP
- tTvCh0Y6oDpuUiTWNfF1BWvTrGIpUkefwrpNYREScYiqBii+ZztdbJ6knAgBMuZ9jv/K
- yt24N/6KeND76rTukE3tprV/xcglMRbpd2cQQNUZ5Kk2ApUwmp/XUJLT4DpbV+sm5iuE
- 9SnuYCpWzybC/r1+Cm3Pj3OYT4zAf5+6EQmsbjH5udKvLR4hlW7iwpbZ0L8HtsPhN+ql
- jyiIVG3QqmPggybGYAd3cDnFLx9+yU5RhzIXFIygn4iU55fkgP5JpBNfr5/dnZPuWSuW
- utIQ==
-X-Gm-Message-State: ACgBeo02rxhxuxHbYJw4ms/XlAasiMLQpCfBJPsDGzrbi/vLzdeqKPYG
- bwwP/MtCXbeWVDlfQUN2hlo=
-X-Google-Smtp-Source: AA6agR7CUAhPy+9MFPuH6DzgDy2S60+/E2h57c49ihYMLFNyPbmAh/8ehJuHA/jwsSZISEkVJfO+GA==
-X-Received: by 2002:aa7:d803:0:b0:44e:af34:e47e with SMTP id
- v3-20020aa7d803000000b0044eaf34e47emr233791edq.310.1662494773089; 
- Tue, 06 Sep 2022 13:06:13 -0700 (PDT)
-Received: from kista.localnet (82-149-1-172.dynamic.telemach.net.
- [82.149.1.172]) by smtp.gmail.com with ESMTPSA id
- wl23-20020a170907311700b0073d645e6dd8sm7123443ejb.223.2022.09.06.13.06.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Sep 2022 13:06:12 -0700 (PDT)
-From: Jernej =?utf-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: Maxime Ripard <mripard@kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
- David Airlie <airlied@linux.ie>, Chen-Yu Tsai <wens@csie.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Jani Nikula <jani.nikula@linux.intel.com>, Lyude Paul <lyude@redhat.com>,
- Philipp Zabel <p.zabel@pengutronix.de>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Samuel Holland <samuel@sholland.org>, Karol Herbst <kherbst@redhat.com>,
- Noralf =?ISO-8859-1?Q?Tr=F8nnes?= <noralf@tronnes.org>,
- Emma Anholt <emma@anholt.net>, Daniel Vetter <daniel@ffwll.ch>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Maxime Ripard <maxime@cerno.tech>
-Date: Tue, 06 Sep 2022 22:06:10 +0200
-Message-ID: <1903427.PYKUYFuaPT@kista>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v2-37-459522d653a7@cerno.tech>
+Received: from wnew1-smtp.messagingengine.com (wnew1-smtp.messagingengine.com
+ [64.147.123.26])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 27F8110E3D6;
+ Wed,  7 Sep 2022 07:41:45 +0000 (UTC)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailnew.west.internal (Postfix) with ESMTP id D52402B05879;
+ Wed,  7 Sep 2022 03:41:39 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute2.internal (MEProxy); Wed, 07 Sep 2022 03:41:42 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
+ :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to; s=fm2; t=1662536499; x=1662543699; bh=y/msntKdqi
+ pj+ejDnjeq3oXEB7xQmRBAGIlH51MmHWE=; b=0ASl9C6mR2JMJ57u2qgHquxhFK
+ iVA9dUYYNSoFW3HVkNKZTO+8uwr9a6Fj/JbJcHJ3sW/n4A+fv3twntq80py1N6BE
+ TpdZw+aiJmEkIHDX78ZTWAaJl6+A/0AIkRL5jt5lHLxZCRuVNN9az3kImEy7bjDu
+ e9cIkIQnKAeGumwknFXlG5Zw0pz7R0jRuRT48BBz6Q0nNJmpyFDXyy2ZX+NIRq1G
+ ROApjkaFKXrWyLKH14m6Y5qp6EGXB8IaImBNbHd/uCeTEordLWBhom6z4Ri6itQM
+ 7fG5hj2twZnUtCscGT2JLGiszHJg8h9XBHn+VznC3VJR+b8azpY3jOft/5Ew==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
+ :feedback-id:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:sender:subject:subject:to:to
+ :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; t=1662536499; x=1662543699; bh=y/msntKdqipj+ejDnjeq3oXEB7xQ
+ mRBAGIlH51MmHWE=; b=L7sJEzcOhJLtRU29J81qbMFqhlCjRJ78s+lS4UkTN35I
+ mJ0ztQLKKLJsrVEmIs48j/0LyEA3sCSpi72I0BuU7xVK0Or+3uS6y7/jgdaf59j+
+ MoNvxjgy/YvUIeaJJ2Sh3OD/opeWrHcGakOpugY5VhbxAw1NrljjLYlVdBz9POHR
+ FUr/Slrji681XDD7wpxX1Myr7vbMNpJcQxhMq2ZMdPAWMSBXIgFI2HPFZnydsmnx
+ WRR3+gtE8IQn7MZqb0OHDYsSVsRGIt1n5LChPQEIzjlhI2/keF07pgA+UektVb7b
+ I82sQwfu8yD9/o2Qvfb+cT5mzadzvWwcovM18ENhTQ==
+X-ME-Sender: <xms:MksYYwVncUW7PiRwsQFP8Pl6tYZ1h8QmNxnjxyY4ozlLumGybwZpvQ>
+ <xme:MksYY0l3aQpfy5ttitwFK-w0hMvekCDHdDZ5VaoZNQ_Yt_LAoMf2bjR7jARKOUAnP
+ uPV-d3sgR8SCM3HbIw>
+X-ME-Received: <xmr:MksYY0a4v2y0W68OkCY4zBJrOjgZ0zB4oLEn029t2UKbqg2ue_ilVwrMYIE>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdelledguddvgecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+ necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+ enucfjughrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforgig
+ ihhmvgcutfhiphgrrhguuceomhgrgihimhgvsegtvghrnhhordhtvggthheqnecuggftrf
+ grthhtvghrnhepheeuudefieehudeludevuefgtddvgffggefhleffvddvvdfgudeilefh
+ heeiiefgnecuffhomhgrihhnpegsohhothhlihhnrdgtohhmnecuvehluhhsthgvrhfuih
+ iivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegtvghrnhhordht
+ vggthh
+X-ME-Proxy: <xmx:MksYY_XFm2aTYEbFlm97pwKepkddGu_vuJOTn8OXbiLuYiAynDx7yw>
+ <xmx:MksYY6krTdQCeRcWWqpLiNfwWtdXBIOctTEM-1jU4em_YlNGFbTMoA>
+ <xmx:MksYY0cJyAjD2i8fl7D5nwp3Qo4cV5yRVJfXU12_PTIfe6NTPLT7Jw>
+ <xmx:M0sYY41lA31tNqmg20VQfh6esnzeLlCyNcIb8YWnzI4_LJFDLNpmDWSz62A>
+Feedback-ID: i8771445c:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 7 Sep 2022 03:41:37 -0400 (EDT)
+Date: Wed, 7 Sep 2022 09:41:34 +0200
+From: Maxime Ripard <maxime@cerno.tech>
+To: Jernej =?utf-8?Q?=C5=A0krabec?= <jernej.skrabec@gmail.com>
+Message-ID: <20220907074134.36yysxrnnpty4ngw@houat>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-37-459522d653a7@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v2-36-459522d653a7@cerno.tech>
+ <10138422.nUPlyArG6x@kista>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
-X-Mailman-Approved-At: Tue, 06 Sep 2022 20:31:03 +0000
-Subject: Re: [Nouveau] [PATCH v2 37/41] drm/sun4i: tv: Remove useless
- function
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="hs4qhyrj3xkup6mv"
+Content-Disposition: inline
+In-Reply-To: <10138422.nUPlyArG6x@kista>
+Subject: Re: [Nouveau] [PATCH v2 36/41] drm/sun4i: tv: Merge mode_set into
+ atomic_enable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,25 +85,67 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
- Hans de Goede <hdegoede@redhat.com>, Geert Uytterhoeven <geert@linux-m68k.org>,
- Maxime Ripard <maxime@cerno.tech>,
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
+ Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
+ Chen-Yu Tsai <wens@csie.org>, Geert Uytterhoeven <geert@linux-m68k.org>,
+ Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
+ intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ linux-arm-kernel@lists.infradead.org,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
+ Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
+ Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Dne ponedeljek, 29. avgust 2022 ob 15:11:51 CEST je Maxime Ripard napisal(a):
-> The drm_connector_to_sun4i_tv() function isn't used anywhere in the driver,
-> so let's remove it.
-> 
-> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 
-Acked-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+--hs4qhyrj3xkup6mv
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Best regards,
-Jernej
+On Tue, Sep 06, 2022 at 10:04:32PM +0200, Jernej =C5=A0krabec wrote:
+> Dne ponedeljek, 29. avgust 2022 ob 15:11:50 CEST je Maxime Ripard napisal=
+(a):
+> > Our mode_set implementation can be merged into our atomic_enable
+> > implementation to simplify things, so let's do this.
+>=20
+> Are you sure this is a good thing in long term? What if user wants to cha=
+nge=20
+> mode? Unlikely, but why not.
 
+It doesn't change anything feature-wise: whenever the mode is changed on
+the CRTC, the encoder is going to be disabled and enabled.
 
+It's disabled here:
+https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/drm_atomic_h=
+elper.c#L1064
+
+And enabled here:
+https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/drm_atomic_h=
+elper.c#L1403
+
+With drm_atomic_crtc_needs_modeset() being defined here:
+https://elixir.bootlin.com/linux/latest/source/include/drm/drm_atomic.h#L10=
+49
+
+Maxime
+
+--hs4qhyrj3xkup6mv
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxhLLgAKCRDj7w1vZxhR
+xc3fAQCln8DK77u9XIhbZwrlXlxRZD8r9dSaa/Wm+6VIuvo9WAEA/N2B7TOwCRYY
+WZhwLuKago4QDcoZHalP5O1dmFuJ9wE=
+=RBGO
+-----END PGP SIGNATURE-----
+
+--hs4qhyrj3xkup6mv--
