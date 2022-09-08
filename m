@@ -2,78 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37FF15B1C8E
-	for <lists+nouveau@lfdr.de>; Thu,  8 Sep 2022 14:16:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E35ED5B1E80
+	for <lists+nouveau@lfdr.de>; Thu,  8 Sep 2022 15:18:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 98D3210E67F;
-	Thu,  8 Sep 2022 12:16:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5AAD710EAEA;
+	Thu,  8 Sep 2022 13:18:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wnew3-smtp.messagingengine.com (wnew3-smtp.messagingengine.com
- [64.147.123.17])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9B78610E67F;
- Thu,  8 Sep 2022 12:16:30 +0000 (UTC)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailnew.west.internal (Postfix) with ESMTP id EA3332B05A0A;
- Thu,  8 Sep 2022 08:16:26 -0400 (EDT)
+Received: from wnew4-smtp.messagingengine.com (wnew4-smtp.messagingengine.com
+ [64.147.123.18])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0FF0B10EAE4;
+ Thu,  8 Sep 2022 13:18:33 +0000 (UTC)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailnew.west.internal (Postfix) with ESMTP id 3FFCB2B05BBA;
+ Thu,  8 Sep 2022 09:18:30 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Thu, 08 Sep 2022 08:16:29 -0400
+ by compute5.internal (MEProxy); Thu, 08 Sep 2022 09:18:32 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
  :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1662639386; x=1662646586; bh=KrUSQEGonb
- AlAjJjGy+o4W945brRN+Avg2umBhBnQI0=; b=FDJ+i06umqUPBluRJ7zeRUbZGi
- N7jURhZXBmo5/S/Usa0N7J90mrtZzUzd9Nnaqc/FSn/y2WncCNW0R/moHpGLsUYL
- C5HWH/06WmYBIrzd3wE8FfKvD0KP4va0BIHvH8EF3nQZlPPz05ZBTb7yXqScAKuO
- 2cUl3GXynvvp+pozPGU+71VCeJvYCtvKDI5tFdQJ+tdXHAMzBJCwHKqsE0lKu/Pr
- A8ao6EFdwHVEEFLchW5crqmZTnlYgKcXUd/7CLSB+FPVSiwYJTLsjONLCGGyUb5y
- BFn+4WlR1jtVnr0gwwa1yiUURtwxTD5yuFucnCU7kZFiAss3Xjxn5XHd3GhA==
+ :subject:to:to; s=fm2; t=1662643109; x=1662650309; bh=peZAPoe3RK
+ R6LaA58j2Tow8y68g/d3BSYQ3Pc87XUGY=; b=HqeaMgrK3xJVh8ppUvrDkhcU1g
+ lTVZG4zsSYvHWV7l0tEzslAnqCrVydvWGWhl2Crw/3itbwiFPLkJvkVYASYEZ4ym
+ DWqrY7+YD7G1iFbpMjNbsXLoEbp8NSZyi42R4+9GdgIvwBUjFtzrXf+aAiY6CXpv
+ NvSF7bYFOhu27KXlYOOf9vZ9K1RDfBw5HVV1gMD7FmUxA30svYp/XSrDwZtfq/q+
+ Yn2Y3ywNcBO7zVvq5wNRN/Qy25584MRc8Mf8k8ArYBhYlNGMemIFE7j3u7hQ9ikn
+ o9a3EGvyt3jSChl44qwm9IbkkthHKIY48L8H1/nSCBvoa7q6d1Sp9ykKIGvg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
  :feedback-id:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:sender:subject:subject:to:to
  :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1662639386; x=1662646586; bh=KrUSQEGonbAlAjJjGy+o4W945brR
- N+Avg2umBhBnQI0=; b=qSbjZbSSlScqRRb2KD+nkNMWqkO7dm28pU786LY/qda/
- 20Ta+Fxd1Nfb9NVVgPzUZ5oXSwIVH75WHvntED+kLxclil5DY0Pe1OLJHK/OlyA0
- gpWzwt0FgxfMKod2+RxptaSG392n33NPqK/rCJPfYeu9E9KTI49qaIpha15PJwFe
- n2fe8C/IedfcplqCjGsd87uRarm6rQxfP3WAZPBWsXbWbMkI3xxUOfRjmg/XKIdV
- wfYk/382pZzKgJ+qRyqYgkzd+uFzaBZ1CidqctyDK7PR+nulsm3G8tT4B47TdQdK
- yfTTbwtCbOcgqMJqt0PLyEhVSx/hdOjbLulLGn2KOQ==
-X-ME-Sender: <xms:Gd0ZYx-VJ_n8fwhNzqeinW9zRoOJIB3yBBBoJyfyI0tFQTcYQ_FvOg>
- <xme:Gd0ZY1t0XkgJ6p7z-6oK4s3Ru034OpDPdtxoRb1VE7LajPBjrkGKfmnncnLXy9nN8
- 7Ck7iK31cV8Qbo7GtE>
-X-ME-Received: <xmr:Gd0ZY_CkBdJCltHOl2jashFOaN-V8z3B7N42MUSuy5gtYWjK0NmyFuSuXw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfedtvddgheduucetufdoteggodetrfdotf
+ fm2; t=1662643109; x=1662650309; bh=peZAPoe3RKR6LaA58j2Tow8y68g/
+ d3BSYQ3Pc87XUGY=; b=TdtDcZ7aisUC788WDuwkYn8KgU9dtcIC8lnHZ+ill3kl
+ MQQydSx0N7PadO5GA0H6p3cEIICW/uDgUCIxzt+BiFwybjl4dPhcdqnKwG7Er4wD
+ S6NtPDC7xt4qTX/+HQCLj7CpFeh9rDbNc7wPUsQ0d3fuOYqOuI9k6OVJANDz0GLf
+ hsldkfyH9Jm9EhRGPXvDK6vvhAAvTPz5yiATXuU72kO9bfhhK/OBN18YWp9WVf14
+ go/4SIqEfwPTSnaEvT1GYoqJnYKMd1REBRpog6EaQ/P3Br2w4NxEpXRkRMixEcHa
+ CrAPIH9ZWiWEhSJb2kvjggQm86GiTAVKzHw31lKH3A==
+X-ME-Sender: <xms:pOsZYwNWrPj2mLeJObYMt6YSnGkcD8Xe8wrtrhS8Gumrb9XsTF6TQg>
+ <xme:pOsZY29tYePljP6cmi0tgOUXt3zN1GBt6_BhWrkxnk6SE-xGtyY21M3eEPJ_FO79C
+ C1V4biIp_EluQWmcn0>
+X-ME-Received: <xmr:pOsZY3SqgXSYaY3LP-7droYRi5CoXBVWSSh4FTHwyFqM1HGFGTXA3RTN4A>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfedtfedgtdegucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
  cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
  mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeetudffhfdtieeuleeivdevgeefvdfggfejuefhtdekueetfeduhfejfeej
- veegueenucffohhmrghinhepmhhouggvrdhimhdpghhithhhuhgsrdgtohhmnecuvehluh
- hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegt
- vghrnhhordhtvggthh
-X-ME-Proxy: <xmx:Gd0ZY1dGuvC2jLOJEshGqp-NA3ciXfOKnk7LWOZHvBKJlbHTDeS6kw>
- <xmx:Gd0ZY2Ph-WCqb7jAUhuUX7FJ_U8LaQhIzBiUa8BIUZN0-z70FI8IZA>
- <xmx:Gd0ZY3mFDu01G1S9U0_8Ss8uXVSawJwGIIWaxxMzuTa6inA22MpeFA>
- <xmx:Gt0ZY7ZmPog5GvP-mfXxmuJC3nvvPwh0VCe2U2NDnNmf_Ik9E6bz7qwRem4>
+ htthgvrhhnpeeflefgheeuheelueegveefkedtgefgfeevkefggeevteefgefhkeetgeeg
+ hfdtgeenucffohhmrghinhepghhithhhuhgsuhhsvghrtghonhhtvghnthdrtghomhdpgh
+ hithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghi
+ lhhfrhhomhepmhgrgihimhgvsegtvghrnhhordhtvggthh
+X-ME-Proxy: <xmx:pesZY4s3LRqSUcrFAmNQ1HgBQvX5sgpPjGON7SC8Mvc_3wFIv5sXHA>
+ <xmx:pesZY4dMj78RnwKJdrCTlc6wYbs5qWt_INAFQrmEk9-BTaCeK90svQ>
+ <xmx:pesZY817H27Fc7Zo_5vHAauR5wo8vXoNImMTM-OT6pM9Z3UGl0A3nw>
+ <xmx:pesZYxOTFCWxesckTdcpa5a3R7c8JvOdfP-Kw6T-XEt0C3Ix8KyAFQxacZ8>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 8 Sep 2022 08:16:25 -0400 (EDT)
-Date: Thu, 8 Sep 2022 14:16:23 +0200
+ 8 Sep 2022 09:18:28 -0400 (EDT)
+Date: Thu, 8 Sep 2022 15:18:24 +0200
 From: Maxime Ripard <maxime@cerno.tech>
 To: Mateusz Kwiatkowski <kfyatek@gmail.com>
-Message-ID: <20220908121623.m6n2zyk3aratb6ag@houat>
+Message-ID: <20220908131824.jjbnh2wzhj3gkutz@houat>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
  <20220728-rpi-analog-tv-properties-v2-32-459522d653a7@cerno.tech>
- <199cf4b3-8ace-e047-3050-b810cf0c6b63@tronnes.org>
- <20220908112312.hlb7mzneuxnethhr@houat>
- <aa510ec2-a72d-364b-424e-816872ab6923@gmail.com>
+ <c8f8015a-75da-afa8-ca7f-b2b134cacd16@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tdggbbxhdgn6r5uy"
+ protocol="application/pgp-signature"; boundary="oe4rmkonoj7og4p4"
 Content-Disposition: inline
-In-Reply-To: <aa510ec2-a72d-364b-424e-816872ab6923@gmail.com>
+In-Reply-To: <c8f8015a-75da-afa8-ca7f-b2b134cacd16@gmail.com>
 Subject: Re: [Nouveau] [PATCH v2 32/41] drm/vc4: vec: Convert to the new TV
  mode property
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -100,78 +98,150 @@ Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
  Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
  Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---tdggbbxhdgn6r5uy
+--oe4rmkonoj7og4p4
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 08, 2022 at 01:31:34PM +0200, Mateusz Kwiatkowski wrote:
-> W dniu 08.09.2022 o 13:23, Maxime Ripard pisze:
-> > Hi Noralf,
-> >
-> > On Tue, Aug 30, 2022 at 09:01:08PM +0200, Noralf Tr=F8nnes wrote:
-> >>> +static const struct drm_prop_enum_list tv_mode_names[] =3D {
-> >>
-> >> Maybe call it legacy_tv_mode_enums?
-> >>
-> >>>
-> >>> +=A0=A0 =A0{ VC4_VEC_TV_MODE_NTSC, "NTSC", },
-> >>>
-> >>> +=A0=A0 =A0{ VC4_VEC_TV_MODE_NTSC_J, "NTSC-J", },
-> >>>
-> >>> +=A0=A0 =A0{ VC4_VEC_TV_MODE_PAL, "PAL", },
-> >>>
-> >>> +=A0=A0 =A0{ VC4_VEC_TV_MODE_PAL_M, "PAL-M", },
-> >>
-> >> If you use DRM_MODE_TV_MODE_* here you don't need to translate the val=
-ue
-> >> using the switch statement in get/set property, you can use the value
-> >> directly to get/set tv.mode.
-> >
-> > I'm sorry, I'm not quite sure what you mean by that. If we expose the
-> > DRM_MODE_TV_MODE_* properties there, won't that change the values the
-> > userspace will need to use to set that property?
+On Wed, Aug 31, 2022 at 04:23:21AM +0200, Mateusz Kwiatkowski wrote:
+> I tested your patchset on my Pi and it mostly works. Good work! However,
+> I noticed a couple of issues.
 >=20
-> I'd just like to point out that if numerical values of these enums are yo=
-ur
-> concern, then you're (or perhaps I am ;) already breaking this by adding =
-new
-> modes in patch 33/41 in this series.
+> > -static int vc4_vec_encoder_atomic_check(struct drm_encoder *encoder,
+> > -=A0=A0 =A0=A0=A0 =A0=A0=A0 =A0=A0=A0 =A0=A0=A0 =A0struct drm_crtc_stat=
+e *crtc_state,
+> > -=A0=A0 =A0=A0=A0 =A0=A0=A0 =A0=A0=A0 =A0=A0=A0 =A0struct drm_connector=
+_state *conn_state)
+> > -{
+> > -=A0=A0 =A0const struct vc4_vec_tv_mode *vec_mode;
+> > -
+> > -=A0=A0 =A0vec_mode =3D &vc4_vec_tv_modes[conn_state->tv.mode];
+> > -
+> > -=A0=A0 =A0if (conn_state->crtc &&
+> > -=A0=A0 =A0=A0=A0=A0 !drm_mode_equal(vec_mode->mode, &crtc_state->adjus=
+ted_mode))
+> > -=A0=A0 =A0=A0=A0 =A0return -EINVAL;
+> > -
+> > -=A0=A0 =A0return 0;
+> > -}
 >=20
-> And the values (and names!) added by that patch (33/41) don't match those
-> currently used by the downstream version
-> (https://github.com/raspberrypi/linux/blob/rpi-5.15.y/drivers/gpu/drm/vc4=
-/vc4_vec.c).
-> If any userspace software is manipulating this property, it's most likely
-> targeting the downstream code. But since you're not aiming for consistenc=
-y with
-> that, I was under the impression that compatibility isn't a concern.
+> I may have said it myself that we should allow custom modelines without t=
+oo
+> much validation. The VC4 and VEC, however, have some considerable limitat=
+ions
+> when it comes to the modelines that they can reliably output.
+>=20
+> In particular, attempting to use "50 Hz" timings in NTSC/PAL-M modes (or
+> "60 Hz" in PAL/SECAM modes) results in a weirdly skewed image. Here's how=
+ it
+> may look like:
+> https://user-images.githubusercontent.com/4499762/187575940-736e7262-c82d=
+-42f3-a2d8-f309cbd51139.png
+>=20
+> This is because if the CRTC does not trigger the sync pulses within an
+> acceptable time window, the VEC apparently generates them itself. This ca=
+uses
+> the VEC sync pulses (which go onto the wire) not quite line up with the o=
+nes
+> from the modeline, which results in what you see on the screenshot.
+>=20
+> I once wrote a validation function based on extensive testing of what
+> produces a sensible output and what doesn't. You can find it here:
+> https://github.com/raspberrypi/linux/pull/4406/commits/15c0c51. I think it
+> might be a good idea to include something like that - even though I know =
+it's
+> somewhat ugly.
 
-I'm not really concerned about the compatibility with the downstream
-tree, if only because you already broke that compatibility with your
-patch :)
+I've reworked that code a bit, and it will be part of my next version.
 
-So you're right, I'll reorganize that patch to keep the backward
-compatibility.
+> (BTW, those %2 checks on vertical timings in that linked commit can be ig=
+nored;
+> those values are divided by 2 for interlaced modes anyway. Those checks w=
+ere
+> intended to ensure proper odd-first or even-first timings; I'm not sure i=
+f your
+> code calculates those in the same way)
+
+Ack, I've removed them.
+
+> >=A0 static int vc4_vec_connector_get_modes(struct drm_connector *connect=
+or)
+> >=A0 {
+> > -=A0=A0 =A0struct drm_connector_state *state =3D connector->state;
+> > =A0=A0=A0 =A0struct drm_display_mode *mode;
+> > +=A0=A0 =A0int count =3D 0;
+> > =A0
+> > -=A0=A0 =A0mode =3D drm_mode_duplicate(connector->dev,
+> > -=A0=A0 =A0=A0=A0 =A0=A0=A0 =A0=A0=A0 =A0=A0 vc4_vec_tv_modes[state->tv=
+=2Emode].mode);
+> > +=A0=A0 =A0mode =3D drm_mode_analog_ntsc_480i(connector->dev);
+> > =A0=A0=A0 =A0if (!mode) {
+> > =A0=A0=A0 =A0=A0=A0 =A0DRM_ERROR("Failed to create a new display mode\n=
+");
+> > =A0=A0=A0 =A0=A0=A0 =A0return -ENOMEM;
+> > =A0=A0=A0 =A0}
+> > =A0
+> > =A0=A0=A0 =A0drm_mode_probed_add(connector, mode);
+> > +=A0=A0 =A0count +=3D 1;
+> > =A0
+> > -=A0=A0 =A0return 1;
+> > +=A0=A0 =A0mode =3D drm_mode_analog_pal_576i(connector->dev);
+> > +=A0=A0 =A0if (!mode) {
+> > +=A0=A0 =A0=A0=A0 =A0DRM_ERROR("Failed to create a new display mode\n");
+> > +=A0=A0 =A0=A0=A0 =A0return -ENOMEM;
+> > +=A0=A0 =A0}
+> > +
+> > +=A0=A0 =A0drm_mode_probed_add(connector, mode);
+> > +=A0=A0 =A0count +=3D 1;
+> > +
+> > +=A0=A0 =A0return count;
+> > +}
+>=20
+> Xorg is pretty confused by these modes being reported like that. The 576i=
+ mode
+> is *always* preferred, presumably because of the higher resolution. If th=
+e NTSC
+> mode is set (via the kernel cmdline or just due to it being the default),=
+ this
+> results in a mess on the screen - exactly the same thing as on the screen=
+shot
+> linked above.
+>=20
+> Note that drm_helper_probe_add_cmdline_mode() *does* add the
+> DRM_MODE_TYPE_USERDEF flag to the 480i mode, having detected it as prefer=
+red
+> on the command line - but Xorg does not seem to care about that.
+
+I'm not quite sure why that would be the case. The usual logic to pick
+the preferred mode is to use either the mode with the flag or the first
+one.
+
+> I remember Noralf suggesting setting DRM_MODE_TYPE_PREFERRED for the mode=
+ that
+> corresponds to the currently chosen tv_mode - that would fix the problem.
+> An alternative would be to _not_ add the "opposite" mode at all, like the
+> current default Raspberry Pi OS kernel behaves.
+
+I'll add it the PREFERRED flag then, switching the modes have other
+challenges.
 
 Maxime
 
---tdggbbxhdgn6r5uy
+--oe4rmkonoj7og4p4
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxndFwAKCRDj7w1vZxhR
-xZzpAQDu6178QjxcwYvkevzAeo7PrIc0OnYrnwJMv32MTXR4eQEAk5vzF3oEW4ES
-B3YR/wi67B2CLlhZDDEHOYE/bL80EQ8=
-=fmem
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxnroAAKCRDj7w1vZxhR
+xdi7AQCzv8VgoLgusukooavi5uzzw2ozZ+Tftp0NswFipI6XtAEAxsDX9XhrvZAd
+1mdv6bmwrkQ6l0bFk912Wm89BuSHnAc=
+=vZff
 -----END PGP SIGNATURE-----
 
---tdggbbxhdgn6r5uy--
+--oe4rmkonoj7og4p4--
