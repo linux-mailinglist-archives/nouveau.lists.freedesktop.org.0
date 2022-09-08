@@ -2,48 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF1BD5B1B8A
-	for <lists+nouveau@lfdr.de>; Thu,  8 Sep 2022 13:34:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37FF15B1C8E
+	for <lists+nouveau@lfdr.de>; Thu,  8 Sep 2022 14:16:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7E97810EAA4;
-	Thu,  8 Sep 2022 11:34:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 98D3210E67F;
+	Thu,  8 Sep 2022 12:16:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp.domeneshop.no (smtp.domeneshop.no
- [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3747E10EAA4;
- Thu,  8 Sep 2022 11:34:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
- ; s=ds202112;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KYa/QVI6flq5lHnbp60VYWrYz3i2rBG7tpmdjbr7GZo=; b=GrcJ6yChNMl/rreZ16fGX+KLwn
- GFVb0Zw06qxRhOiTb+mf/0H71iJoRWlPa46/6OVe5vWf2kdgll6709VqoX+K1R8YB7/gyrYPobz3V
- JzCdNscyqgCXvumP4sFMyqb0pZqvlsNP5nYRXe5s14TPZ4tvRtavYU3jbWhEAQ6rYRdYGmQy7oGie
- HExkAsdTKp3hnJM0Ao/DTsVcygRVWsLVuBD9sBT5/Q9ggX6/Rdd8mB9lH7AiB+JgUcU6lgcT+jdiR
- I1SbdI754aUsyUV4yjCBOISLC9wcu4A1N8dVTW+n73EpmvEUNoG/HAwACaFUJgeOIrisfQO3bTsGt
- yh6BCRIw==;
-Received: from [2a01:799:961:d200:cca0:57ac:c55d:a485] (port=62929)
- by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1oWFnx-0005DR-KV; Thu, 08 Sep 2022 13:34:45 +0200
-Message-ID: <c6ef022d-1714-b0dd-472c-938614aefc06@tronnes.org>
-Date: Thu, 8 Sep 2022 13:34:38 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.0
-To: Maxime Ripard <maxime@cerno.tech>
+Received: from wnew3-smtp.messagingengine.com (wnew3-smtp.messagingengine.com
+ [64.147.123.17])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9B78610E67F;
+ Thu,  8 Sep 2022 12:16:30 +0000 (UTC)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailnew.west.internal (Postfix) with ESMTP id EA3332B05A0A;
+ Thu,  8 Sep 2022 08:16:26 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute2.internal (MEProxy); Thu, 08 Sep 2022 08:16:29 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
+ :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to; s=fm2; t=1662639386; x=1662646586; bh=KrUSQEGonb
+ AlAjJjGy+o4W945brRN+Avg2umBhBnQI0=; b=FDJ+i06umqUPBluRJ7zeRUbZGi
+ N7jURhZXBmo5/S/Usa0N7J90mrtZzUzd9Nnaqc/FSn/y2WncCNW0R/moHpGLsUYL
+ C5HWH/06WmYBIrzd3wE8FfKvD0KP4va0BIHvH8EF3nQZlPPz05ZBTb7yXqScAKuO
+ 2cUl3GXynvvp+pozPGU+71VCeJvYCtvKDI5tFdQJ+tdXHAMzBJCwHKqsE0lKu/Pr
+ A8ao6EFdwHVEEFLchW5crqmZTnlYgKcXUd/7CLSB+FPVSiwYJTLsjONLCGGyUb5y
+ BFn+4WlR1jtVnr0gwwa1yiUURtwxTD5yuFucnCU7kZFiAss3Xjxn5XHd3GhA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
+ :feedback-id:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:sender:subject:subject:to:to
+ :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; t=1662639386; x=1662646586; bh=KrUSQEGonbAlAjJjGy+o4W945brR
+ N+Avg2umBhBnQI0=; b=qSbjZbSSlScqRRb2KD+nkNMWqkO7dm28pU786LY/qda/
+ 20Ta+Fxd1Nfb9NVVgPzUZ5oXSwIVH75WHvntED+kLxclil5DY0Pe1OLJHK/OlyA0
+ gpWzwt0FgxfMKod2+RxptaSG392n33NPqK/rCJPfYeu9E9KTI49qaIpha15PJwFe
+ n2fe8C/IedfcplqCjGsd87uRarm6rQxfP3WAZPBWsXbWbMkI3xxUOfRjmg/XKIdV
+ wfYk/382pZzKgJ+qRyqYgkzd+uFzaBZ1CidqctyDK7PR+nulsm3G8tT4B47TdQdK
+ yfTTbwtCbOcgqMJqt0PLyEhVSx/hdOjbLulLGn2KOQ==
+X-ME-Sender: <xms:Gd0ZYx-VJ_n8fwhNzqeinW9zRoOJIB3yBBBoJyfyI0tFQTcYQ_FvOg>
+ <xme:Gd0ZY1t0XkgJ6p7z-6oK4s3Ru034OpDPdtxoRb1VE7LajPBjrkGKfmnncnLXy9nN8
+ 7Ck7iK31cV8Qbo7GtE>
+X-ME-Received: <xmr:Gd0ZY_CkBdJCltHOl2jashFOaN-V8z3B7N42MUSuy5gtYWjK0NmyFuSuXw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfedtvddgheduucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
+ mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
+ htthgvrhhnpeetudffhfdtieeuleeivdevgeefvdfggfejuefhtdekueetfeduhfejfeej
+ veegueenucffohhmrghinhepmhhouggvrdhimhdpghhithhhuhgsrdgtohhmnecuvehluh
+ hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegt
+ vghrnhhordhtvggthh
+X-ME-Proxy: <xmx:Gd0ZY1dGuvC2jLOJEshGqp-NA3ciXfOKnk7LWOZHvBKJlbHTDeS6kw>
+ <xmx:Gd0ZY2Ph-WCqb7jAUhuUX7FJ_U8LaQhIzBiUa8BIUZN0-z70FI8IZA>
+ <xmx:Gd0ZY3mFDu01G1S9U0_8Ss8uXVSawJwGIIWaxxMzuTa6inA22MpeFA>
+ <xmx:Gt0ZY7ZmPog5GvP-mfXxmuJC3nvvPwh0VCe2U2NDnNmf_Ik9E6bz7qwRem4>
+Feedback-ID: i8771445c:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 8 Sep 2022 08:16:25 -0400 (EDT)
+Date: Thu, 8 Sep 2022 14:16:23 +0200
+From: Maxime Ripard <maxime@cerno.tech>
+To: Mateusz Kwiatkowski <kfyatek@gmail.com>
+Message-ID: <20220908121623.m6n2zyk3aratb6ag@houat>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
  <20220728-rpi-analog-tv-properties-v2-32-459522d653a7@cerno.tech>
  <199cf4b3-8ace-e047-3050-b810cf0c6b63@tronnes.org>
  <20220908112312.hlb7mzneuxnethhr@houat>
-From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20220908112312.hlb7mzneuxnethhr@houat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+ <aa510ec2-a72d-364b-424e-816872ab6923@gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="tdggbbxhdgn6r5uy"
+Content-Disposition: inline
+In-Reply-To: <aa510ec2-a72d-364b-424e-816872ab6923@gmail.com>
 Subject: Re: [Nouveau] [PATCH v2 32/41] drm/vc4: vec: Convert to the new TV
  mode property
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -71,39 +101,77 @@ Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
  Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
+--tdggbbxhdgn6r5uy
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Den 08.09.2022 13.23, skrev Maxime Ripard:
-> Hi Noralf,
-> 
-> On Tue, Aug 30, 2022 at 09:01:08PM +0200, Noralf Trønnes wrote:
->>> +static const struct drm_prop_enum_list tv_mode_names[] = {
->>
->> Maybe call it legacy_tv_mode_enums?
->>
->>>
->>> +	{ VC4_VEC_TV_MODE_NTSC, "NTSC", },
->>>
->>> +	{ VC4_VEC_TV_MODE_NTSC_J, "NTSC-J", },
->>>
->>> +	{ VC4_VEC_TV_MODE_PAL, "PAL", },
->>>
->>> +	{ VC4_VEC_TV_MODE_PAL_M, "PAL-M", },
->>
->> If you use DRM_MODE_TV_MODE_* here you don't need to translate the value
->> using the switch statement in get/set property, you can use the value
->> directly to get/set tv.mode.
-> 
-> I'm sorry, I'm not quite sure what you mean by that. If we expose the
-> DRM_MODE_TV_MODE_* properties there, won't that change the values the
-> userspace will need to use to set that property?
-> 
+On Thu, Sep 08, 2022 at 01:31:34PM +0200, Mateusz Kwiatkowski wrote:
+> W dniu 08.09.2022 o 13:23, Maxime Ripard pisze:
+> > Hi Noralf,
+> >
+> > On Tue, Aug 30, 2022 at 09:01:08PM +0200, Noralf Tr=F8nnes wrote:
+> >>> +static const struct drm_prop_enum_list tv_mode_names[] =3D {
+> >>
+> >> Maybe call it legacy_tv_mode_enums?
+> >>
+> >>>
+> >>> +=A0=A0 =A0{ VC4_VEC_TV_MODE_NTSC, "NTSC", },
+> >>>
+> >>> +=A0=A0 =A0{ VC4_VEC_TV_MODE_NTSC_J, "NTSC-J", },
+> >>>
+> >>> +=A0=A0 =A0{ VC4_VEC_TV_MODE_PAL, "PAL", },
+> >>>
+> >>> +=A0=A0 =A0{ VC4_VEC_TV_MODE_PAL_M, "PAL-M", },
+> >>
+> >> If you use DRM_MODE_TV_MODE_* here you don't need to translate the val=
+ue
+> >> using the switch statement in get/set property, you can use the value
+> >> directly to get/set tv.mode.
+> >
+> > I'm sorry, I'm not quite sure what you mean by that. If we expose the
+> > DRM_MODE_TV_MODE_* properties there, won't that change the values the
+> > userspace will need to use to set that property?
+>=20
+> I'd just like to point out that if numerical values of these enums are yo=
+ur
+> concern, then you're (or perhaps I am ;) already breaking this by adding =
+new
+> modes in patch 33/41 in this series.
+>=20
+> And the values (and names!) added by that patch (33/41) don't match those
+> currently used by the downstream version
+> (https://github.com/raspberrypi/linux/blob/rpi-5.15.y/drivers/gpu/drm/vc4=
+/vc4_vec.c).
+> If any userspace software is manipulating this property, it's most likely
+> targeting the downstream code. But since you're not aiming for consistenc=
+y with
+> that, I was under the impression that compatibility isn't a concern.
 
-You're right ofc, I forgot that the enum values are also UABI.
+I'm not really concerned about the compatibility with the downstream
+tree, if only because you already broke that compatibility with your
+patch :)
 
-Noralf.
+So you're right, I'll reorganize that patch to keep the backward
+compatibility.
+
+Maxime
+
+--tdggbbxhdgn6r5uy
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxndFwAKCRDj7w1vZxhR
+xZzpAQDu6178QjxcwYvkevzAeo7PrIc0OnYrnwJMv32MTXR4eQEAk5vzF3oEW4ES
+B3YR/wi67B2CLlhZDDEHOYE/bL80EQ8=
+=fmem
+-----END PGP SIGNATURE-----
+
+--tdggbbxhdgn6r5uy--
