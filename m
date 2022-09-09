@@ -1,82 +1,82 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDCCC5B3A01
-	for <lists+nouveau@lfdr.de>; Fri,  9 Sep 2022 16:01:26 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 799105B3EC7
+	for <lists+nouveau@lfdr.de>; Fri,  9 Sep 2022 20:25:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A3ED310ED7F;
-	Fri,  9 Sep 2022 14:01:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0D52910ED90;
+	Fri,  9 Sep 2022 18:25:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wnew4-smtp.messagingengine.com (wnew4-smtp.messagingengine.com
- [64.147.123.18])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 379CE10ED7E;
- Fri,  9 Sep 2022 14:01:13 +0000 (UTC)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailnew.west.internal (Postfix) with ESMTP id B0EA22B0591B;
- Fri,  9 Sep 2022 10:01:09 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Fri, 09 Sep 2022 10:01:12 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1662732069; x=1662739269; bh=m8uWKdPqim
- TWOzbuWW9LjUIAMA5qm4azX49SLBOts+k=; b=YnzdqFanu76LTppWsnIK8yLtaw
- lPA9imn+DZMPpvmB+I+7lJ6Jtp5+Hpp/Tok4Syo0TZ+GIWgrmrIbPdzEP4csf+60
- UpEKybV/LKbOlJdebq8NtpHOX+q7UOoX+sClEWg/wr6povq2rrWI+ugq/sOCi5sZ
- xXq4KnkJMjk8hfkCCos2ghiXoM12HoF0kloEOtYmIVJ6ltnGXUKNF564vpDCPNZ8
- s3ORSfM8MEpwoQU39DDpbNTFwB5Y6PTP2jBZlZSeNbsxTCVjtqfLM5MdZpTnhTm0
- 1aNFaQE+vAnk+ZlPCXOLfH3n3kaTBYCY1K1ZgQJMdDQ0emXorULHJv6IpDTg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
- :feedback-id:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:sender:subject:subject:to:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1662732069; x=1662739269; bh=m8uWKdPqimTWOzbuWW9LjUIAMA5q
- m4azX49SLBOts+k=; b=UytRIGBeAIK3cYsdpEIIrN8FMBS+DdyAfw8Linj+rJgL
- g9vqVDLzMqf7z+Zq8GuX6nB76z8BX3FKfH+w0cZYcxf5Vz1m0pmqpzc3QIz1lW3i
- +qcJUgH8UYU/JZkQyJ+J0ILb8T/3YoB894efCxXtrvJD63y7GfgcmlpZQaGweQGA
- 3eQ73GeIApaHjQjnZeXMJ6l+v13ZgTzTWY7kfviqp+zfyuG5zITuOFrJ7DO7a31p
- LGTFP167QAdPLgsgxgQNe88zlb9eOnmg96qLVG2u074AnI7rabwwsuOPnUoohp3d
- BjaoBlxQzhdosblojNXzRuwyvhSKAM638mnzlx7/7w==
-X-ME-Sender: <xms:HUcbY1qT4kf-mTq2fLzQRaYzl9AUayFOIl0kpRAPDPE4ezb1dL-L8w>
- <xme:HUcbY3q1yVbTY68aHnr8xWgLWQ2NifWxNpAv2F6FOlAMWgmXE5VamBILHxPMGXevN
- _IGnIPLwdFJ29d9c7o>
-X-ME-Received: <xmr:HUcbYyM5xjzmO3e3dtMoonVbYC1ch27-ZEspCcDtsSMffAErxYBzJgCFtjCs>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfedthedgjeefucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
- mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeetfefffefgkedtfefgledugfdtjeefjedvtddtkeetieffjedvgfehheff
- hfevudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
- hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:HkcbYw4y40JUDqNYJ2TTJTgsJ4f-o9o3EZPSRODX5u_vtjccrEFEtg>
- <xmx:HkcbY06o4B69hhN80GOqN_IEEzN6bZfUaP6ctsZrDz9l9eV09pSOOw>
- <xmx:HkcbY4hZrEnQSH_qfGbJ9HkdECI_If740JoappUZ-WA_oiQJHLK6Cg>
- <xmx:JUcbY07qgZzJA_p9otXIwoarGt3HNeaPn6bgdqRlPR-XGkX3B4ktoodc5Z8>
-Feedback-ID: i8771445c:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 9 Sep 2022 10:01:01 -0400 (EDT)
-Date: Fri, 9 Sep 2022 16:00:59 +0200
-From: Maxime Ripard <maxime@cerno.tech>
-To: Mateusz Kwiatkowski <kfyatek@gmail.com>
-Message-ID: <20220909140059.g57oihcmhuym62ei@houat>
-References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-10-459522d653a7@cerno.tech>
- <242d272b-5b79-986c-9aaf-64e62f6b37ff@gmail.com>
- <20220905133755.gcmmntg3wnecyqjq@houat>
- <10ce686a-d7c8-9ce4-3979-735ad8eab3b5@gmail.com>
- <20220907143421.4iopqwhp3yfircsh@houat>
- <dc1d9499-d4d5-1032-f39f-d4ac4cbb8412@gmail.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 94E0010ED8C
+ for <nouveau@lists.freedesktop.org>; Fri,  9 Sep 2022 18:24:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1662747896;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=vKgo9kNM9lmshPVUg8AZgq6yhDB1kDXUMjrFxdhRiKI=;
+ b=Jsuh4ox/O8h34SeoTAaBh/fnu+AhFyECUApDet8blbRVMItF1GVtpMoG6GNOfy5Aw/IT4I
+ 5LcLVnlpEnmPG/7y2JQq8agsBDp6CKHwIgcmcthGGW9yrhOcM24bCtuPUEfKNa8F8QSwID
+ fVqOWevdcR0mYGQ1rAxyiFMCe5Z1XCY=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-638-FQaWhtEWMUm8Kd2NzhC8Jw-1; Fri, 09 Sep 2022 14:24:55 -0400
+X-MC-Unique: FQaWhtEWMUm8Kd2NzhC8Jw-1
+Received: by mail-qv1-f72.google.com with SMTP id
+ e19-20020ad44433000000b004aaa7d00846so1798515qvt.0
+ for <nouveau@lists.freedesktop.org>; Fri, 09 Sep 2022 11:24:55 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:user-agent:organization
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date;
+ bh=vKgo9kNM9lmshPVUg8AZgq6yhDB1kDXUMjrFxdhRiKI=;
+ b=AXeLTL/+vCsS5Avv/Aw2kmudnz1Rj0qssc3t5AzBuWfG9JyA3cF8DXnetQhAbqLnJJ
+ 5L31atbtW5CBuL1nszbSmcDc+IkfDTY35qk64GiMAfB3WaOJ5wcZuaSGPxzy1FYyHHYg
+ XWRF5P6PMHkV6jGue9LbYVK3EHHDEAy7KAhi6VG1R456CTnUxzFLOYcnpiZHRpNzfKcS
+ razW/K6syyU4+9GpBj/clf55J+ii8xq2hZKv8xVR54arhmaNQzuYtxs3uN6nq54CEYht
+ ICNKYyyCb1AAunk8Ev4pIPVdEchNC5KT8dbMpzhioxjuMr2td2SGM9fCyIVsJ9pA9kK3
+ 86tA==
+X-Gm-Message-State: ACgBeo30Yu3hNRU1xRT3s41JGbYakYhcvi2O7BcQpmOfcotAVSHclAc7
+ T2Ob5YcN9eKrUjZxX1aBJpcNZZQJVedbaHwQr5lxBSwnM77L89/d+N0SVbxiboDp5CD5gOSibq0
+ Dy4GO4g66RdU6OhdPaCdvQsZq+A==
+X-Received: by 2002:a05:6214:29c7:b0:499:1500:4e3 with SMTP id
+ gh7-20020a05621429c700b00499150004e3mr13309425qvb.26.1662747892184; 
+ Fri, 09 Sep 2022 11:24:52 -0700 (PDT)
+X-Google-Smtp-Source: AA6agR7cVG6TZNwwhy926yFDbk2krn0djleQ/6MP15a8oPipRlK43GgxnwTDMH7Q9LinSgE91f7WoA==
+X-Received: by 2002:a05:6214:29c7:b0:499:1500:4e3 with SMTP id
+ gh7-20020a05621429c700b00499150004e3mr13309402qvb.26.1662747891925; 
+ Fri, 09 Sep 2022 11:24:51 -0700 (PDT)
+Received: from ?IPv6:2600:4040:5c48:e00::9e6? ([2600:4040:5c48:e00::9e6])
+ by smtp.gmail.com with ESMTPSA id
+ bk38-20020a05620a1a2600b006b5d9a1d326sm884388qkb.83.2022.09.09.11.24.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 Sep 2022 11:24:51 -0700 (PDT)
+Message-ID: <38f7cab30c2a7efb9eb324fee0ae3ba7e806ba0a.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>, 
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie, 
+ daniel@ffwll.ch, bskeggs@redhat.com, kherbst@redhat.com, 
+ laurent.pinchart@ideasonboard.com, kieran.bingham+renesas@ideasonboard.com,
+ jyri.sarha@iki.fi, tomba@kernel.org, sam@ravnborg.org
+Date: Fri, 09 Sep 2022 14:24:50 -0400
+In-Reply-To: <20220909105947.6487-2-tzimmermann@suse.de>
+References: <20220909105947.6487-1-tzimmermann@suse.de>
+ <20220909105947.6487-2-tzimmermann@suse.de>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kc2bu6zgime3t2ko"
-Content-Disposition: inline
-In-Reply-To: <dc1d9499-d4d5-1032-f39f-d4ac4cbb8412@gmail.com>
-Subject: Re: [Nouveau] [PATCH v2 10/41] drm/modes: Add a function to
- generate analog display modes
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH 1/4] drm/plane: Remove drm_plane_init()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,51 +88,184 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
- linux-arm-kernel@lists.infradead.org,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
- Philipp Zabel <p.zabel@pengutronix.de>
+Cc: linux-renesas-soc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Reviewed-by: Lyude Paul <lyude@redhat.com>
+for common and nouveau bits
 
---kc2bu6zgime3t2ko
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, 2022-09-09 at 12:59 +0200, Thomas Zimmermann wrote:
+> Open-code drm_plane_init() and remove the function from DRM. The
+> implementation of drm_plane_init() is a simple wrapper around a call
+> to drm_universal_plane_init(), so drivers can just use that instead.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
+>  drivers/gpu/drm/drm_modeset_helper.c       |  3 +-
+>  drivers/gpu/drm/drm_plane.c                | 32 ----------------------
+>  drivers/gpu/drm/nouveau/dispnv04/overlay.c | 13 +++++----
+>  drivers/gpu/drm/shmobile/shmob_drm_plane.c |  7 +++--
+>  drivers/gpu/drm/tilcdc/tilcdc_plane.c      |  9 +++---
+>  include/drm/drm_plane.h                    |  8 +-----
+>  6 files changed, 17 insertions(+), 55 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/drm_modeset_helper.c b/drivers/gpu/drm/drm_modeset_helper.c
+> index bd609a978848..611dd01fb604 100644
+> --- a/drivers/gpu/drm/drm_modeset_helper.c
+> +++ b/drivers/gpu/drm/drm_modeset_helper.c
+> @@ -100,8 +100,7 @@ EXPORT_SYMBOL(drm_helper_mode_fill_fb_struct);
+>   * This is the minimal list of formats that seem to be safe for modeset use
+>   * with all current DRM drivers.  Most hardware can actually support more
+>   * formats than this and drivers may specify a more accurate list when
+> - * creating the primary plane.  However drivers that still call
+> - * drm_plane_init() will use this minimal format list as the default.
+> + * creating the primary plane.
+>   */
+>  static const uint32_t safe_modeset_formats[] = {
+>  	DRM_FORMAT_XRGB8888,
+> diff --git a/drivers/gpu/drm/drm_plane.c b/drivers/gpu/drm/drm_plane.c
+> index 726f2f163c26..0f14b4d3bb10 100644
+> --- a/drivers/gpu/drm/drm_plane.c
+> +++ b/drivers/gpu/drm/drm_plane.c
+> @@ -482,38 +482,6 @@ void drm_plane_unregister_all(struct drm_device *dev)
+>  	}
+>  }
+>  
+> -/**
+> - * drm_plane_init - Initialize a legacy plane
+> - * @dev: DRM device
+> - * @plane: plane object to init
+> - * @possible_crtcs: bitmask of possible CRTCs
+> - * @funcs: callbacks for the new plane
+> - * @formats: array of supported formats (DRM_FORMAT\_\*)
+> - * @format_count: number of elements in @formats
+> - * @is_primary: plane type (primary vs overlay)
+> - *
+> - * Legacy API to initialize a DRM plane.
+> - *
+> - * New drivers should call drm_universal_plane_init() instead.
+> - *
+> - * Returns:
+> - * Zero on success, error code on failure.
+> - */
+> -int drm_plane_init(struct drm_device *dev, struct drm_plane *plane,
+> -		   uint32_t possible_crtcs,
+> -		   const struct drm_plane_funcs *funcs,
+> -		   const uint32_t *formats, unsigned int format_count,
+> -		   bool is_primary)
+> -{
+> -	enum drm_plane_type type;
+> -
+> -	type = is_primary ? DRM_PLANE_TYPE_PRIMARY : DRM_PLANE_TYPE_OVERLAY;
+> -	return drm_universal_plane_init(dev, plane, possible_crtcs, funcs,
+> -					formats, format_count,
+> -					NULL, type, NULL);
+> -}
+> -EXPORT_SYMBOL(drm_plane_init);
+> -
+>  /**
+>   * drm_plane_cleanup - Clean up the core plane usage
+>   * @plane: plane to cleanup
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/overlay.c b/drivers/gpu/drm/nouveau/dispnv04/overlay.c
+> index 37e63e98cd08..33f29736024a 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv04/overlay.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/overlay.c
+> @@ -296,9 +296,10 @@ nv10_overlay_init(struct drm_device *device)
+>  		break;
+>  	}
+>  
+> -	ret = drm_plane_init(device, &plane->base, 3 /* both crtc's */,
+> -			     &nv10_plane_funcs,
+> -			     formats, num_formats, false);
+> +	ret = drm_universal_plane_init(device, &plane->base, 3 /* both crtc's */,
+> +				       &nv10_plane_funcs,
+> +				       formats, num_formats, NULL,
+> +				       DRM_PLANE_TYPE_OVERLAY, NULL);
+>  	if (ret)
+>  		goto err;
+>  
+> @@ -475,9 +476,9 @@ nv04_overlay_init(struct drm_device *device)
+>  	if (!plane)
+>  		return;
+>  
+> -	ret = drm_plane_init(device, &plane->base, 1 /* single crtc */,
+> -			     &nv04_plane_funcs,
+> -			     formats, 2, false);
+> +	ret = drm_universal_plane_init(device, &plane->base, 1 /* single crtc */,
+> +				       &nv04_plane_funcs, formats, 2, NULL,
+> +				       DRM_PLANE_TYPE_OVERLAY, NULL);
+>  	if (ret)
+>  		goto err;
+>  
+> diff --git a/drivers/gpu/drm/shmobile/shmob_drm_plane.c b/drivers/gpu/drm/shmobile/shmob_drm_plane.c
+> index 54228424793a..6c5f0cbe7d95 100644
+> --- a/drivers/gpu/drm/shmobile/shmob_drm_plane.c
+> +++ b/drivers/gpu/drm/shmobile/shmob_drm_plane.c
+> @@ -252,9 +252,10 @@ int shmob_drm_plane_create(struct shmob_drm_device *sdev, unsigned int index)
+>  	splane->index = index;
+>  	splane->alpha = 255;
+>  
+> -	ret = drm_plane_init(sdev->ddev, &splane->plane, 1,
+> -			     &shmob_drm_plane_funcs, formats,
+> -			     ARRAY_SIZE(formats), false);
+> +	ret = drm_universal_plane_init(sdev->ddev, &splane->plane, 1,
+> +				       &shmob_drm_plane_funcs,
+> +				       formats, ARRAY_SIZE(formats), NULL,
+> +				       DRM_PLANE_TYPE_OVERLAY, NULL);
+>  
+>  	return ret;
+>  }
+> diff --git a/drivers/gpu/drm/tilcdc/tilcdc_plane.c b/drivers/gpu/drm/tilcdc/tilcdc_plane.c
+> index 0ccf791301cb..cf77a8ce7398 100644
+> --- a/drivers/gpu/drm/tilcdc/tilcdc_plane.c
+> +++ b/drivers/gpu/drm/tilcdc/tilcdc_plane.c
+> @@ -105,11 +105,10 @@ int tilcdc_plane_init(struct drm_device *dev,
+>  	struct tilcdc_drm_private *priv = dev->dev_private;
+>  	int ret;
+>  
+> -	ret = drm_plane_init(dev, plane, 1,
+> -			     &tilcdc_plane_funcs,
+> -			     priv->pixelformats,
+> -			     priv->num_pixelformats,
+> -			     true);
+> +	ret = drm_universal_plane_init(dev, plane, 1, &tilcdc_plane_funcs,
+> +				       priv->pixelformats,
+> +				       priv->num_pixelformats,
+> +				       NULL, DRM_PLANE_TYPE_PRIMARY, NULL);
+>  	if (ret) {
+>  		dev_err(dev->dev, "Failed to initialize plane: %d\n", ret);
+>  		return ret;
+> diff --git a/include/drm/drm_plane.h b/include/drm/drm_plane.h
+> index 89ea54652e87..910cb941f3d5 100644
+> --- a/include/drm/drm_plane.h
+> +++ b/include/drm/drm_plane.h
+> @@ -631,7 +631,7 @@ struct drm_plane {
+>  	unsigned int format_count;
+>  	/**
+>  	 * @format_default: driver hasn't supplied supported formats for the
+> -	 * plane. Used by the drm_plane_init compatibility wrapper only.
+> +	 * plane. Used by the non-atomic driver compatibility wrapper only.
+>  	 */
+>  	bool format_default;
+>  
+> @@ -762,12 +762,6 @@ int drm_universal_plane_init(struct drm_device *dev,
+>  			     const uint64_t *format_modifiers,
+>  			     enum drm_plane_type type,
+>  			     const char *name, ...);
+> -int drm_plane_init(struct drm_device *dev,
+> -		   struct drm_plane *plane,
+> -		   uint32_t possible_crtcs,
+> -		   const struct drm_plane_funcs *funcs,
+> -		   const uint32_t *formats, unsigned int format_count,
+> -		   bool is_primary);
+>  void drm_plane_cleanup(struct drm_plane *plane);
+>  
+>  __printf(10, 11)
 
-On Wed, Sep 07, 2022 at 11:31:21PM +0200, Mateusz Kwiatkowski wrote:
-> The "canonical" modelines (at least for vc4's VEC, see the notes below):
->=20
-> - (vfp=3D=3D4, vsync=3D=3D6, vbp=3D=3D39) for 576i
-> - (vfp=3D=3D7, vsync=3D=3D6, vbp=3D=3D32) for 480i
-> - (vfp=3D=3D5, vsync=3D=3D6, vbp=3D=3D28) for 486i (full frame NTSC as or=
-iginally specified)
+-- 
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
-It's not clear to me either how you come up with those timings?
-
-Maxime
-
---kc2bu6zgime3t2ko
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYxtHGwAKCRDj7w1vZxhR
-xYMtAQC2BqS997PQeLRZyCLXvTlUXGBvB07pmDNLHPWzQICluwD9FWnB9aaQ3tLC
-/OsNpUuYwh9XQJfUVrt4RcFvukTzXgc=
-=jc5S
------END PGP SIGNATURE-----
-
---kc2bu6zgime3t2ko--
