@@ -1,82 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7861D5B3EEF
-	for <lists+nouveau@lfdr.de>; Fri,  9 Sep 2022 20:39:26 +0200 (CEST)
+Received: from gabe.freedesktop.org (unknown [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 601805B474D
+	for <lists+nouveau@lfdr.de>; Sat, 10 Sep 2022 17:34:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 72D6010EDAD;
-	Fri,  9 Sep 2022 18:39:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D052C10E203;
+	Sat, 10 Sep 2022 15:34:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D9C8910EDAD
- for <nouveau@lists.freedesktop.org>; Fri,  9 Sep 2022 18:39:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1662748756;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=EdLhczu0CMi+mDnVz/QrauXucQKKVCzqETWjwaQHd38=;
- b=DyBMsWysP1OzVl2/wyG1BXtM+Qg24+0DfugbTooXAnYJi4VPLhGCDCXbUPbmVcjq97JgYi
- vMiz2kmn0lgTgX5cSEXoPLTBdg8BS1FYF4qRyXn72lel7PQIC9tXjmkDGz7EJ9yumJKaLt
- p6VwGqAlm6vEwb9uGYSuKXW7vcQB+sI=
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-388-lGhWZHBeO1u0kmsAy_gasA-1; Fri, 09 Sep 2022 14:39:14 -0400
-X-MC-Unique: lGhWZHBeO1u0kmsAy_gasA-1
-Received: by mail-qk1-f199.google.com with SMTP id
- h8-20020a05620a284800b006b5c98f09fbso2183834qkp.21
- for <nouveau@lists.freedesktop.org>; Fri, 09 Sep 2022 11:39:14 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:user-agent:organization
- :references:in-reply-to:date:cc:to:from:subject:message-id
- :x-gm-message-state:from:to:cc:subject:date;
- bh=EdLhczu0CMi+mDnVz/QrauXucQKKVCzqETWjwaQHd38=;
- b=tqqIi6PThjMw2n+aLT/YeTPpwBlqvNuEplI1m6fXx46Pau09Z1VnY+RWEcTKheHYfa
- akAHBdC0xdykGjE7YELEvLpnrIf4MjEi1LllqVDUb6ahW4DFwW5CC+bq+qWTOCa/v7PQ
- dDtg2I7ogJY5k7ci/RKvz+JvH76W7g/qW01qNvyU4MUKyQPtEesYxb6RHdyeLJ+nhjMu
- sZJ01K+tyMlnqXBGidyJZinVipmwF52tQJOUnRii/aG/w+W6FN0TqIv1F3ZPMbkTfD08
- 8VNSOT2rBOr3KjFuqDum4ZC/9mnXhxi5K8nHHMIsd0Xql7DJ8I96mEOGc/fgojq99c3d
- JwWQ==
-X-Gm-Message-State: ACgBeo3xBZkbv2IkuEXyyAZ+lO/YXQ1j7JvCBGhiVXDb+vITrwsktteb
- QmZb+TlPDNPsejeDO4y2FMw93DyTbd59K24OcBjgGzCivbcGbvFgDsqytVnrOgQX06MlzGFvzmo
- OSRmjswSggH4wzzS0VWDaaYk1wg==
-X-Received: by 2002:a05:620a:2409:b0:6bb:d417:c8b6 with SMTP id
- d9-20020a05620a240900b006bbd417c8b6mr11021740qkn.304.1662748754346; 
- Fri, 09 Sep 2022 11:39:14 -0700 (PDT)
-X-Google-Smtp-Source: AA6agR6hJkqeVfTbw7cuxek5gomVvLkSerw4ZzxC0N7zAg5c4TbdTJmbRg/kK4DEJejexdZcRhNvDg==
-X-Received: by 2002:a05:620a:2409:b0:6bb:d417:c8b6 with SMTP id
- d9-20020a05620a240900b006bbd417c8b6mr11021713qkn.304.1662748754013; 
- Fri, 09 Sep 2022 11:39:14 -0700 (PDT)
-Received: from ?IPv6:2600:4040:5c48:e00::9e6? ([2600:4040:5c48:e00::9e6])
- by smtp.gmail.com with ESMTPSA id
- 64-20020a370543000000b006bb619a6a85sm965016qkf.48.2022.09.09.11.39.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Sep 2022 11:39:11 -0700 (PDT)
-Message-ID: <1fb0323d201ef2d9b00fe9bdb65efa97e5bd1e8f.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>, 
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie, 
- daniel@ffwll.ch, bskeggs@redhat.com, kherbst@redhat.com, 
- laurent.pinchart@ideasonboard.com, kieran.bingham+renesas@ideasonboard.com,
- jyri.sarha@iki.fi, tomba@kernel.org, sam@ravnborg.org
-Date: Fri, 09 Sep 2022 14:39:10 -0400
-In-Reply-To: <20220909105947.6487-1-tzimmermann@suse.de>
-References: <20220909105947.6487-1-tzimmermann@suse.de>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0710210E1F0;
+ Sat, 10 Sep 2022 15:34:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Z+umsEgE+0BVdH31f6mmvIugV/Oo08OxjxooJr5Ldk0=; b=oOkKlFJg/widSzLx1kmtByViA7
+ iOPPJVXzhj9kBu4SsHbdIuC8ZvEUEWVuF7wtWK9NY1wDz3/5meiB92klu0LVN4Bm3K6+oo2Rbflxi
+ xuhDbB9wgCuLMFKmNs4ZX3jsa8mX2XqIiqnuyGGBl4H6OSaQkIj1E6xZyyLBmYZurLWb31WizyZN+
+ O1jWvr/yubX+SzsqQLAKgCgR+wLUiayc0HOm6lizgh1Gaac2vu0rqaQKPtH1p4tEG0/zz8AByiMgj
+ D4a4FsKWEWTK3jJgeBqj7gHvccozD0WQKEeJ7+NlQMxDBWJ/bcK/RIwj9La/k/u+OIFQRI7btv70F
+ 1Ec0jrnA==;
+Received: from [2a01:799:961:d200:4519:292a:25da:963a] (port=63245)
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1oX2Uo-0006Kf-1D; Sat, 10 Sep 2022 17:34:14 +0200
+Message-ID: <03d5a161-9bc9-3d04-acda-2e5ca5a19d71@tronnes.org>
+Date: Sat, 10 Sep 2022 17:34:04 +0200
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH 0/4] drm/plane: Remove drm_plane_init(),
- plus other cleanups
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.13.0
+To: Stefan Wahren <stefan.wahren@i2se.com>, Maxime Ripard
+ <maxime@cerno.tech>, Dom Cobley <dom@raspberrypi.com>
+References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
+ <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
+ <020d44e6-884b-a817-8265-3461638cac71@tronnes.org>
+ <20220905145729.ln675jko3aw6sgzs@houat>
+ <965de5c0-bc6a-7210-c946-b916ae2219fc@i2se.com>
+ <eb06337b-d501-3ca7-0e50-eda3aec75683@tronnes.org>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <eb06337b-d501-3ca7-0e50-eda3aec75683@tronnes.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v2 00/41] drm: Analog TV Improvements
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,59 +59,146 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-renesas-soc@vger.kernel.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
+ Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ linux-arm-kernel@lists.infradead.org,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, linux-kernel@vger.kernel.org,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-For the nouveau bits on 1, 2 and 4:
 
-Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-On Fri, 2022-09-09 at 12:59 +0200, Thomas Zimmermann wrote:
-> This patchset does cleanups to the plane code, most noteably it removes
-> drm_plane_init(). The function is a small wrapper, which can easily be
-> inlined into the few callers. Patch #1 fixes this.
-> 
-> The other clean-up patches #2 to #4 affect plane creation. Modesetting
-> helpers and nouveau share some plane-allocation code that can be shared as
-> helper function. While the function is already outdated, it's now at least
-> well documented. As suggested by Daniel, patch #3 adds a warning to
-> non-atomic plane helpers when they are being called from atomic drivers.
-> Patch #4 adds an initializer macro for non-atomic plane functions. It
-> should not be used in new drivers, but at least documents the current
-> practice.
-> 
-> Tested with nouveau on Nvidia G72 hardware.
-> 
-> A possible next step would be the inlining of drm_crtc_init() and the
-> removal of drm_plane.format_default.
-> 
-> Thomas Zimmermann (4):
->   drm/plane: Remove drm_plane_init()
->   drm/plane: Allocate planes with drm_universal_plane_alloc()
->   drm/plane-helper: Warn if atomic drivers call non-atomic helpers
->   drm/plane-helper: Provide DRM_PLANE_NON_ATOMIC_FUNCS initializer macro
-> 
->  drivers/gpu/drm/drm_modeset_helper.c       | 68 +++++++++------------
->  drivers/gpu/drm/drm_plane.c                | 70 ++++++++++++----------
->  drivers/gpu/drm/drm_plane_helper.c         | 10 ++++
->  drivers/gpu/drm/nouveau/dispnv04/crtc.c    | 45 +++++---------
->  drivers/gpu/drm/nouveau/dispnv04/overlay.c | 13 ++--
->  drivers/gpu/drm/shmobile/shmob_drm_plane.c |  7 ++-
->  drivers/gpu/drm/tilcdc/tilcdc_plane.c      |  9 ++-
->  include/drm/drm_plane.h                    | 52 +++++++++++++---
->  include/drm/drm_plane_helper.h             | 12 ++++
->  9 files changed, 162 insertions(+), 124 deletions(-)
+Den 07.09.2022 18.44, skrev Noralf Trønnes:
 > 
 > 
-> base-commit: f2c3a05d33693ad51996fa7d12d3b2d4b0f372eb
-> prerequisite-patch-id: c2b2f08f0eccc9f5df0c0da49fa1d36267deb11d
-> prerequisite-patch-id: c67e5d886a47b7d0266d81100837557fda34cb24
-> prerequisite-patch-id: 3f204510fcbf9530d6540bd8e6128cce598988b6
+> Den 07.09.2022 12.36, skrev Stefan Wahren:
+>> Hi Maxime,
+>>
+>> Am 05.09.22 um 16:57 schrieb Maxime Ripard:
+>>> On Fri, Sep 02, 2022 at 01:28:16PM +0200, Noralf Trønnes wrote:
+>>>>
+>>>> Den 01.09.2022 21.35, skrev Noralf Trønnes:
+>>>>>
+>>>>> I have finally found a workaround for my kernel hangs.
+>>>>>
+>>>>> Dom had a look at my kernel and found that the VideoCore was fine, and
+>>>>> he said this:
+>>>>>
+>>>>>> That suggests cause of lockup was on arm side rather than VC side.
+>>>>>>
+>>>>>> But it's hard to diagnose further. Once you've had a peripheral not
+>>>>>> respond, the AXI bus locks up and no further operations are possible.
+>>>>>> Usual causes of this are required clocks being stopped or domains
+>>>>>> disabled and then trying to access the hardware.
+>>>>>>
+>>>>> So when I got this on my 64-bit build:
+>>>>>
+>>>>> [  166.702171] SError Interrupt on CPU1, code 0x00000000bf000002 --
+>>>>> SError
+>>>>> [  166.702187] CPU: 1 PID: 8 Comm: kworker/u8:0 Tainted: G        W
+>>>>>      5.19.0-rc6-00096-gba7973977976-dirty #1
+>>>>> [  166.702200] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
+>>>>> [  166.702206] Workqueue: events_freezable_power_
+>>>>> thermal_zone_device_check
+>>>>> [  166.702231] pstate: 200000c5 (nzCv daIF -PAN -UAO -TCO -DIT -SSBS
+>>>>> BTYPE=--)
+>>>>> [  166.702242] pc : regmap_mmio_read32le+0x10/0x28
+>>>>> [  166.702261] lr : regmap_mmio_read+0x44/0x70
+>>>>> ...
+>>>>> [  166.702606]  bcm2711_get_temp+0x58/0xb0 [bcm2711_thermal]
+>>>>>
+>>>>> I wondered if that reg read was stalled due to a clock being stopped.
+>>>>>
+>>>>> Lo and behold, disabling runtime pm and keeping the vec clock running
+>>>>> all the time fixed it[1].
+>>>>>
+>>>>> I don't know what the problem is, but at least I can now test this
+>>>>> patchset.
+>>>>>
+>>>>> [1] https://gist.github.com/notro/23b984e7fa05cfbda2db50a421cac065
+>>>>>
+>>>> It turns out I didn't have to disable runtime pm:
+>>>> https://gist.github.com/notro/0adcfcb12460b54e54458afe11dc8ea2
+>>> If the bcm2711_thermal IP needs that clock to be enabled, it should grab
+>>> a reference itself, but it looks like even the device tree binding
+>>> doesn't ask for one.
+>> The missing clock in the device tree binding is expected, because
+>> despite of the code there is not much information about the BCM2711
+>> clock tree. But i'm skeptical that the AVS IP actually needs the VEC
+>> clock, i think it's more likely that the VEC clock parent is changed and
+>> that cause this issue. I could take care of the bcm2711 binding & driver
+>> if i know which clock is really necessary.
+> 
+> Seems you're right, keeping the parent always enabled is enough:
+> 
+> 	clk_prepare_enable(clk_get_parent(vec->clock)); // pllc_per
+> 
+> I tried enabling just the grandparent clock as well, but that didn't help.
+> 
+> Without the clock hack it seems the hang occurs when switching between
+> NTSC and PAL, at most I've been able to do that 4-5 times before it hangs.
+> 
+> For a while it looked like fbdev/fbcon had a play in this, but then I
+> realised that it just gave me a NTSC mode to start from and to go back
+> to when qutting modetest.
+> 
 
--- 
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+I've looked some more into this problem and I see that downstream is
+using a firmware clock for vec:
 
+clk: Move vec clock to clk-raspberrypi
+https://github.com/raspberrypi/linux/pull/4639
+
+If I do the same my problem goes away.
+
+It's interesting to note that on downstream 5.10.103-v7l+ #1530,
+pllc_per is enabled even if tvout is not enabled:
+
+$ sudo cat /sys/kernel/debug/clk/pllc_per/regdump
+cm = 0x00000000
+a2w = 0x00000004 (disable bit(8) is not set)
+
+It's when mainline vc4_vec disables this vec parent clock that the crash
+occurs.
+
+Sidenote: Another downstream fw clock change with a vec reference[1]:
+
+
+Another issue not related to the clock crash problem:
+
+I assumed that unloading the vc4 module would release the clocks, but
+this didn't happen.
+
+When I looked at it I remembered that there's a catch in the DRM unplug
+machinery when it comes to unloading a driver and the DRM disable hooks.
+
+static void vc4_drm_unbind(struct device *dev)
+{
+	struct drm_device *drm = dev_get_drvdata(dev);
+
+	drm_dev_unplug(drm);
+	drm_atomic_helper_shutdown(drm);
+}
+
+Here the drm_device is first marked as unplugged and then the pipeline
+is disabled. Since vc4_vec_encoder_disable() is protected by
+drm_dev_enter() the VEC is not disabled, clocks are not released and PM
+is left on.
+
+In the drivers that I have written where the hardware is not expected to
+have gone away on device unbind (SPI), I've just left out the
+drm_dev_enter() check in the disable hook.
+
+Noralf.
+
+[1] https://github.com/raspberrypi/linux/pull/4706
