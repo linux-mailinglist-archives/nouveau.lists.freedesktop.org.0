@@ -1,74 +1,78 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF61F5B8748
-	for <lists+nouveau@lfdr.de>; Wed, 14 Sep 2022 13:29:50 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 723415B8DA8
+	for <lists+nouveau@lfdr.de>; Wed, 14 Sep 2022 18:59:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8D2ED10E179;
-	Wed, 14 Sep 2022 11:29:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1966210E996;
+	Wed, 14 Sep 2022 16:59:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
- [66.111.4.29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0F8C310E179;
- Wed, 14 Sep 2022 11:29:38 +0000 (UTC)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.nyi.internal (Postfix) with ESMTP id 151235C002F;
- Wed, 14 Sep 2022 07:29:36 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute3.internal (MEProxy); Wed, 14 Sep 2022 07:29:36 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1663154976; x=1663241376; bh=nQu2SC9skj
- 3zvKgRAY+OE/EsK7UjSaSgeju0QfEt0Cs=; b=sI6+pKkRrFiyWe0Di0vUI4Elub
- WU2WZ16qg5NsAIf4cYxne5RPHmLNkNbOnTap31OE31Ikj6KyXkxyRBvzyARaAhH1
- 4WaF17Vp33VyqXlgHWVeTnX5TE8blIAtgT28busRsPYDhgksEk1HjeCc08Wvga+t
- bskfWscIPId4Ly552s6iPRxZIfV693nUdEISY1m1C6cuM/CBHr2clsj2w6waZpUc
- kcNd7KZM3nEz3ZczPhAysdEw9m6h8AG4IDnT16cTpd7wxRGIT51rselgZprVkbNo
- cV2i7Zr6x+DVMwNNIE9IhKXuFhnjxru5j7vvcHFaD2a37X7XKXbzwbCoWkvw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
- :feedback-id:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:sender:subject:subject:to:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1663154976; x=1663241376; bh=nQu2SC9skj3zvKgRAY+OE/EsK7Uj
- SaSgeju0QfEt0Cs=; b=tB/hgMgRkBvvDe2Larr5g2Xf2i8pcNlw8zMWLcyXqMtz
- RB6o4uF3NQfWxsrTx4foH9n8N0buQUyc78NvdvGkG4UlhuwObb4DLW7+hBTGHLOI
- lz+e2Q5CLfsdCvSDgB0+WnUG5qLcyw1qIvyWSVO2MWJgapsJp1mP+Gu2aPma6Ict
- WXXqlCMcwpPIUC+xd91w/xzze6dFXsOtXBwdztItwSbghsQjRH2NPHQVRhFBnZ6q
- dY908u0Y4DOR5UQPGpXG3/WuBqpOiYl5lrcVVme9qasVWakJqRmTomu16NE1d1XL
- GnsoGxdlzWy+uNseiD8/XdR6ysJ9+BdoSF2XaJiEiw==
-X-ME-Sender: <xms:H7shYy-z-Sy-s0CYkYhiWGEo-Fk_sa4yzpFsShmbVmcw8NKVEim-Ow>
- <xme:H7shYyuhl7apl0uzCWtoXaLVdsY3vIuHlVJPZVfymPsr4NqTL0cxTJskRvonuk2hn
- j43Mbjcps8eNMsiwoQ>
-X-ME-Received: <xmr:H7shY4CZYM4ETUI7hJOe8i-3Bo9XlCMwvu1ooLO0z2Jo5DxvZAi390_OMsGo>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeduiedggeduucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
- mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeetfefffefgkedtfefgledugfdtjeefjedvtddtkeetieffjedvgfehheff
- hfevudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
- hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:H7shY6fH7W_BVuQc_Pv1wOCbe0JZZwDcqIOQjR9ElV0d0XyvT8FDFA>
- <xmx:H7shY3PQ1WXtryglSTdW3rrdTj3tpcFZXxBJFYoc6JJb0xJRVeA8nQ>
- <xmx:H7shY0mvO9oKdlpqejxArcWaOLnY7GbsVZO4bMdJEo1YmlDQ9Owr_w>
- <xmx:ILshY6hp7U4y67xd1z7aW61uMylQ-NOWf_PLrKUGCD3bAJEil6TFPg>
-Feedback-ID: i8771445c:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 14 Sep 2022 07:29:34 -0400 (EDT)
-Date: Wed, 14 Sep 2022 12:29:33 +0100
-From: Maxime Ripard <maxime@cerno.tech>
-To: Hans de Goede <hdegoede@redhat.com>
-Message-ID: <20220914112933.64ovljgsrv2l25rs@penduick>
-References: <261afe3d-7790-e945-adf6-a2c96c9b1eff@redhat.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8616610E996
+ for <nouveau@lists.freedesktop.org>; Wed, 14 Sep 2022 16:59:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1663174743;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=8eAE9HpKpIVvmOEFXUeeAc8cv8ndkWqJta1h5pXlw4I=;
+ b=JRX6sNjmMfJzkxfv3BjTG4v7rsCEzoac8YmwIjYVahEWu5LGrqQf2/FVacGIj2XG7Zy5Ht
+ ZOB2mNBz7l7CCE013tTg80x4NNm65wmjWIykX7MlP7R8UE2RmDhvIp7u/ddf6IHSFVGILJ
+ QCqY0+OG+mkK0gOJIBH9m9MsYsyIIB8=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-449-ckk_Ay7lPH2WtdVDEV8Pug-1; Wed, 14 Sep 2022 12:59:02 -0400
+X-MC-Unique: ckk_Ay7lPH2WtdVDEV8Pug-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ i129-20020a1c3b87000000b003b33e6160bdso9597273wma.7
+ for <nouveau@lists.freedesktop.org>; Wed, 14 Sep 2022 09:59:01 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date;
+ bh=8eAE9HpKpIVvmOEFXUeeAc8cv8ndkWqJta1h5pXlw4I=;
+ b=fA9193qtjJcWjqLyohyjWJdrzpCzjLMIAXpN+YdawVmWtFhAim8QkrfQ/0anYSt5eO
+ hlPavcq9ZHLiS5ZN3QSHwTYzz1NNuMixiQfVqVDGXR4cpcRy5AUcfEHcqV3VOOaGslCA
+ jQlf83bDJuT4L+Jm6wfXqjQtoZFwkJrpphtQ4tYVBWp27tc8A7XapXv3WbyQr1q5T3Rn
+ U9WDJugOQbZKA+H4HSD2BibEYXomDglusr0v/ajFCQg/TfiKFiJcr/84+A9OYRSXCfl6
+ kUwON3Axjd02LkmX8Q0VYIyeSyoc8A+HAyV83fVYjLDfOgvUvAeySWF/FHp80j6UfdUB
+ CKaQ==
+X-Gm-Message-State: ACgBeo0Wjlj3D0eEWNZd2W+Tpylh1zqCF5kd3ONfKdnmLGHShrJYmhzE
+ e5vfSipK6Wu4Pvwpt1IN6GO6By8rDu6d3C52JZzZmVbxILodP5cpeOWyZRp+Qj/Obq6FI/2P690
+ qF7ffoQ0fz5DhWdR0tvGxKdRsKQ==
+X-Received: by 2002:adf:f211:0:b0:228:d6a4:3510 with SMTP id
+ p17-20020adff211000000b00228d6a43510mr21648613wro.448.1663174741065; 
+ Wed, 14 Sep 2022 09:59:01 -0700 (PDT)
+X-Google-Smtp-Source: AA6agR4/hMrbSSVrICYCjqMv7OHktLT/ShhknRc4TABv3IGMoKgXGV5RhWzuT4s56YrRzLlwdjxauA==
+X-Received: by 2002:adf:f211:0:b0:228:d6a4:3510 with SMTP id
+ p17-20020adff211000000b00228d6a43510mr21648581wro.448.1663174740767; 
+ Wed, 14 Sep 2022 09:59:00 -0700 (PDT)
+Received: from [172.16.38.152] ([185.122.133.20])
+ by smtp.gmail.com with ESMTPSA id
+ m23-20020a05600c3b1700b003b477532e66sm6954615wms.2.2022.09.14.09.58.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 14 Sep 2022 09:58:59 -0700 (PDT)
+Message-ID: <2b7693c4-b04e-425a-2f87-c4b12fa2f63b@redhat.com>
+Date: Wed, 14 Sep 2022 17:58:58 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="hy5cszh57lz34buf"
-Content-Disposition: inline
-In-Reply-To: <261afe3d-7790-e945-adf6-a2c96c9b1eff@redhat.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.1
+To: Maxime Ripard <maxime@cerno.tech>
+References: <261afe3d-7790-e945-adf6-a2c96c9b1eff@redhat.com>
+ <20220914112933.64ovljgsrv2l25rs@penduick>
+From: Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <20220914112933.64ovljgsrv2l25rs@penduick>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 Subject: Re: [Nouveau] [GIT PULL] Immutable backlight-detect-refactor branch
  between acpi, drm-* and pdx86
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -96,47 +100,33 @@ Cc: "Rafael J . Wysocki" <rafael@kernel.org>, nouveau@lists.freedesktop.org,
  Andy Shevchenko <andy@kernel.org>,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Xinhui <Xinhui.Pan@amd.com>,
  Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi,
 
---hy5cszh57lz34buf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 9/14/22 12:29, Maxime Ripard wrote:
+> Hi Hans,
+> 
+> On Mon, Sep 05, 2022 at 10:35:47AM +0200, Hans de Goede wrote:
+>> Hi All,
+>>
+>> Now that all patches have been reviewed/acked here is an immutable backlight-detect-refactor
+>> branch with 6.0-rc1 + the v5 patch-set, for merging into the relevant (acpi, drm-* and pdx86)
+>> subsystems.
+>>
+>> Please pull this branch into the relevant subsystems.
+>>
+>> I will merge this into the review-hans branch of the pdx86 git tree today and
+>> from there it will move to for-next once the builders have successfully build-tested
+>> the merge.
+> 
+> I merged it into drm-misc-next, thanks!
 
-Hi Hans,
+Great, thank you!
 
-On Mon, Sep 05, 2022 at 10:35:47AM +0200, Hans de Goede wrote:
-> Hi All,
->=20
-> Now that all patches have been reviewed/acked here is an immutable backli=
-ght-detect-refactor
-> branch with 6.0-rc1 + the v5 patch-set, for merging into the relevant (ac=
-pi, drm-* and pdx86)
-> subsystems.
->=20
-> Please pull this branch into the relevant subsystems.
->=20
-> I will merge this into the review-hans branch of the pdx86 git tree today=
- and
-> from there it will move to for-next once the builders have successfully b=
-uild-tested
-> the merge.
+Regards,
 
-I merged it into drm-misc-next, thanks!
-Maxime
+Hans
 
---hy5cszh57lz34buf
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABMIAB0WIQTXEe0+DlZaRlgM8LOIQ8rmN6G3ywUCYyG7HQAKCRCIQ8rmN6G3
-yxexAQD6R+v7rkQb0GeB4b/P6qIJ8gkrhQhlZLrmcPYoUuwldAD/fLehBZhVa7TE
-ohzG1kghzg7S8i2Op8YPG+18dMDqoTU=
-=37BB
------END PGP SIGNATURE-----
-
---hy5cszh57lz34buf--
