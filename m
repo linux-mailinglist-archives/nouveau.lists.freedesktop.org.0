@@ -2,46 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BF705B535F
-	for <lists+nouveau@lfdr.de>; Mon, 12 Sep 2022 07:21:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF61F5B8748
+	for <lists+nouveau@lfdr.de>; Wed, 14 Sep 2022 13:29:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 031DE10E08E;
-	Mon, 12 Sep 2022 05:20:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8D2ED10E179;
+	Wed, 14 Sep 2022 11:29:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BCBC110E08E
- for <nouveau@lists.freedesktop.org>; Mon, 12 Sep 2022 05:20:52 +0000 (UTC)
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4MQw0x1z2dz9sQf
- for <nouveau@lists.freedesktop.org>; Mon, 12 Sep 2022 07:20:49 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=owenh.net; s=MBO0001; 
- t=1662960049;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=GxXLTN7vGVgXPZ/ARP4jzpEAh741PVkhd/k85qVVrzI=;
- b=EvgwIWPEc9AMG828C6dBPIeMk7WxNcxO3XmPOF9CUjQA/O7p8ufUZO6jYgVJAMXlvqtrFq
- CsWoXMsoD0IvaNGWgo+yK9u6MdNrpDjHOgliEm4PL43uOGFrOYcGJJEQjO2yGu0pQbp1e+
- CjVtN+MPB/xhZVnJFFMey3bZeEBQVZ8CnhbgIjTW1FtgWNlkcOu+6+iATvfZlEvZFgFpQx
- AD88nVGM9J8pVgRm6U4dKd2vFFfBxf9cf6FrT9z78qQzI2fMPGSlqeNnqEuNUz07oKzeWT
- ha+zJOfIUMGzV/mBW/tRNVhLNawJA8VUZxrdd1JyH5Ax+hNxqQInKPzmz7QnXQ==
-Message-ID: <8497dcf1-2def-28db-f11d-2e24e041855b@owenh.net>
-Date: Mon, 12 Sep 2022 00:20:44 -0500
+Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
+ [66.111.4.29])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0F8C310E179;
+ Wed, 14 Sep 2022 11:29:38 +0000 (UTC)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailout.nyi.internal (Postfix) with ESMTP id 151235C002F;
+ Wed, 14 Sep 2022 07:29:36 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute3.internal (MEProxy); Wed, 14 Sep 2022 07:29:36 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
+ :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to; s=fm2; t=1663154976; x=1663241376; bh=nQu2SC9skj
+ 3zvKgRAY+OE/EsK7UjSaSgeju0QfEt0Cs=; b=sI6+pKkRrFiyWe0Di0vUI4Elub
+ WU2WZ16qg5NsAIf4cYxne5RPHmLNkNbOnTap31OE31Ikj6KyXkxyRBvzyARaAhH1
+ 4WaF17Vp33VyqXlgHWVeTnX5TE8blIAtgT28busRsPYDhgksEk1HjeCc08Wvga+t
+ bskfWscIPId4Ly552s6iPRxZIfV693nUdEISY1m1C6cuM/CBHr2clsj2w6waZpUc
+ kcNd7KZM3nEz3ZczPhAysdEw9m6h8AG4IDnT16cTpd7wxRGIT51rselgZprVkbNo
+ cV2i7Zr6x+DVMwNNIE9IhKXuFhnjxru5j7vvcHFaD2a37X7XKXbzwbCoWkvw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
+ :feedback-id:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:sender:subject:subject:to:to
+ :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; t=1663154976; x=1663241376; bh=nQu2SC9skj3zvKgRAY+OE/EsK7Uj
+ SaSgeju0QfEt0Cs=; b=tB/hgMgRkBvvDe2Larr5g2Xf2i8pcNlw8zMWLcyXqMtz
+ RB6o4uF3NQfWxsrTx4foH9n8N0buQUyc78NvdvGkG4UlhuwObb4DLW7+hBTGHLOI
+ lz+e2Q5CLfsdCvSDgB0+WnUG5qLcyw1qIvyWSVO2MWJgapsJp1mP+Gu2aPma6Ict
+ WXXqlCMcwpPIUC+xd91w/xzze6dFXsOtXBwdztItwSbghsQjRH2NPHQVRhFBnZ6q
+ dY908u0Y4DOR5UQPGpXG3/WuBqpOiYl5lrcVVme9qasVWakJqRmTomu16NE1d1XL
+ GnsoGxdlzWy+uNseiD8/XdR6ysJ9+BdoSF2XaJiEiw==
+X-ME-Sender: <xms:H7shYy-z-Sy-s0CYkYhiWGEo-Fk_sa4yzpFsShmbVmcw8NKVEim-Ow>
+ <xme:H7shYyuhl7apl0uzCWtoXaLVdsY3vIuHlVJPZVfymPsr4NqTL0cxTJskRvonuk2hn
+ j43Mbjcps8eNMsiwoQ>
+X-ME-Received: <xmr:H7shY4CZYM4ETUI7hJOe8i-3Bo9XlCMwvu1ooLO0z2Jo5DxvZAi390_OMsGo>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeduiedggeduucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
+ mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
+ htthgvrhhnpeetfefffefgkedtfefgledugfdtjeefjedvtddtkeetieffjedvgfehheff
+ hfevudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+ hmrgigihhmvgestggvrhhnohdrthgvtghh
+X-ME-Proxy: <xmx:H7shY6fH7W_BVuQc_Pv1wOCbe0JZZwDcqIOQjR9ElV0d0XyvT8FDFA>
+ <xmx:H7shY3PQ1WXtryglSTdW3rrdTj3tpcFZXxBJFYoc6JJb0xJRVeA8nQ>
+ <xmx:H7shY0mvO9oKdlpqejxArcWaOLnY7GbsVZO4bMdJEo1YmlDQ9Owr_w>
+ <xmx:ILshY6hp7U4y67xd1z7aW61uMylQ-NOWf_PLrKUGCD3bAJEil6TFPg>
+Feedback-ID: i8771445c:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 14 Sep 2022 07:29:34 -0400 (EDT)
+Date: Wed, 14 Sep 2022 12:29:33 +0100
+From: Maxime Ripard <maxime@cerno.tech>
+To: Hans de Goede <hdegoede@redhat.com>
+Message-ID: <20220914112933.64ovljgsrv2l25rs@penduick>
+References: <261afe3d-7790-e945-adf6-a2c96c9b1eff@redhat.com>
 MIME-Version: 1.0
-Content-Language: en-US
-To: nouveau@lists.freedesktop.org
-From: "Owen T. Heisler" <writer@owenh.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 4MQw0x1z2dz9sQf
-Subject: [Nouveau] Regression: Kernel/GPU crash with "Asynchronous wait on
- fence"
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="hy5cszh57lz34buf"
+Content-Disposition: inline
+In-Reply-To: <261afe3d-7790-e945-adf6-a2c96c9b1eff@redhat.com>
+Subject: Re: [Nouveau] [GIT PULL] Immutable backlight-detect-refactor branch
+ between acpi, drm-* and pdx86
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,37 +82,61 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: "Rafael J . Wysocki" <rafael@kernel.org>, nouveau@lists.freedesktop.org,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, platform-driver-x86@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, linux-acpi@vger.kernel.org,
+ Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@redhat.com>,
+ Len Brown <lenb@kernel.org>, Daniel Dadap <ddadap@nvidia.com>,
+ intel-gfx <intel-gfx@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Mark Gross <markgross@kernel.org>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>,
+ Andy Shevchenko <andy@kernel.org>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Xinhui <Xinhui.Pan@amd.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
 
-I am experiencing a kernel/GPU crash once every few days on an Nvidia 
-Optimus system with a secondary display connected to an Nvidia output. 
-The secondary display turns off suddenly, X freezes, and in most cases 
-the kernel hangs.
+--hy5cszh57lz34buf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Module parameter `nouveau.config=NvClkMode=15` is in use, but I get the 
-same behavior without it.
+Hi Hans,
 
-I have captured a variety of log data, but I find these two errors 
-consistently:
+On Mon, Sep 05, 2022 at 10:35:47AM +0200, Hans de Goede wrote:
+> Hi All,
+>=20
+> Now that all patches have been reviewed/acked here is an immutable backli=
+ght-detect-refactor
+> branch with 6.0-rc1 + the v5 patch-set, for merging into the relevant (ac=
+pi, drm-* and pdx86)
+> subsystems.
+>=20
+> Please pull this branch into the relevant subsystems.
+>=20
+> I will merge this into the review-hans branch of the pdx86 git tree today=
+ and
+> from there it will move to for-next once the builders have successfully b=
+uild-tested
+> the merge.
 
-- Asynchronous wait on fence nouveau:systemd-logind
-- nouveau 0000:01:00.0: tmr: stalled at ffffffffffffffff
-- Fixing recursive fault but reboot is needed!
+I merged it into drm-misc-next, thanks!
+Maxime
 
-This is a regression; nouveau was stable with Debian 10 buster (Linux 
-v4.19). The crashes started after upgrading to Debian 11 bullseye. I 
-have tested Linux v4.14.290, v4.19.255, and the latest nouveau-next 
-commit 9622bcb7c72b230d64b7f7d2f9505e17214f3597; all exhibit the same 
-behavior (with some variation in log output).
+--hy5cszh57lz34buf
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Is a userspace change causing a kernel crash? Do I need to try different 
-versions of libdrm and xf86-video-nouveau userspace components?
+-----BEGIN PGP SIGNATURE-----
 
-I posted more information and log data at:
-<https://gitlab.freedesktop.org/drm/nouveau/-/issues/180>
+iHUEABMIAB0WIQTXEe0+DlZaRlgM8LOIQ8rmN6G3ywUCYyG7HQAKCRCIQ8rmN6G3
+yxexAQD6R+v7rkQb0GeB4b/P6qIJ8gkrhQhlZLrmcPYoUuwldAD/fLehBZhVa7TE
+ohzG1kghzg7S8i2Op8YPG+18dMDqoTU=
+=37BB
+-----END PGP SIGNATURE-----
 
-Thanks,
-Owen
+--hy5cszh57lz34buf--
