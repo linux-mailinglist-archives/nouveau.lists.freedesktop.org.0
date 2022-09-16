@@ -1,80 +1,39 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 723415B8DA8
-	for <lists+nouveau@lfdr.de>; Wed, 14 Sep 2022 18:59:12 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E7B85BABF7
+	for <lists+nouveau@lfdr.de>; Fri, 16 Sep 2022 13:05:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1966210E996;
-	Wed, 14 Sep 2022 16:59:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4F8D810E3E6;
+	Fri, 16 Sep 2022 11:05:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8616610E996
- for <nouveau@lists.freedesktop.org>; Wed, 14 Sep 2022 16:59:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1663174743;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8eAE9HpKpIVvmOEFXUeeAc8cv8ndkWqJta1h5pXlw4I=;
- b=JRX6sNjmMfJzkxfv3BjTG4v7rsCEzoac8YmwIjYVahEWu5LGrqQf2/FVacGIj2XG7Zy5Ht
- ZOB2mNBz7l7CCE013tTg80x4NNm65wmjWIykX7MlP7R8UE2RmDhvIp7u/ddf6IHSFVGILJ
- QCqY0+OG+mkK0gOJIBH9m9MsYsyIIB8=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-449-ckk_Ay7lPH2WtdVDEV8Pug-1; Wed, 14 Sep 2022 12:59:02 -0400
-X-MC-Unique: ckk_Ay7lPH2WtdVDEV8Pug-1
-Received: by mail-wm1-f69.google.com with SMTP id
- i129-20020a1c3b87000000b003b33e6160bdso9597273wma.7
- for <nouveau@lists.freedesktop.org>; Wed, 14 Sep 2022 09:59:01 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date;
- bh=8eAE9HpKpIVvmOEFXUeeAc8cv8ndkWqJta1h5pXlw4I=;
- b=fA9193qtjJcWjqLyohyjWJdrzpCzjLMIAXpN+YdawVmWtFhAim8QkrfQ/0anYSt5eO
- hlPavcq9ZHLiS5ZN3QSHwTYzz1NNuMixiQfVqVDGXR4cpcRy5AUcfEHcqV3VOOaGslCA
- jQlf83bDJuT4L+Jm6wfXqjQtoZFwkJrpphtQ4tYVBWp27tc8A7XapXv3WbyQr1q5T3Rn
- U9WDJugOQbZKA+H4HSD2BibEYXomDglusr0v/ajFCQg/TfiKFiJcr/84+A9OYRSXCfl6
- kUwON3Axjd02LkmX8Q0VYIyeSyoc8A+HAyV83fVYjLDfOgvUvAeySWF/FHp80j6UfdUB
- CKaQ==
-X-Gm-Message-State: ACgBeo0Wjlj3D0eEWNZd2W+Tpylh1zqCF5kd3ONfKdnmLGHShrJYmhzE
- e5vfSipK6Wu4Pvwpt1IN6GO6By8rDu6d3C52JZzZmVbxILodP5cpeOWyZRp+Qj/Obq6FI/2P690
- qF7ffoQ0fz5DhWdR0tvGxKdRsKQ==
-X-Received: by 2002:adf:f211:0:b0:228:d6a4:3510 with SMTP id
- p17-20020adff211000000b00228d6a43510mr21648613wro.448.1663174741065; 
- Wed, 14 Sep 2022 09:59:01 -0700 (PDT)
-X-Google-Smtp-Source: AA6agR4/hMrbSSVrICYCjqMv7OHktLT/ShhknRc4TABv3IGMoKgXGV5RhWzuT4s56YrRzLlwdjxauA==
-X-Received: by 2002:adf:f211:0:b0:228:d6a4:3510 with SMTP id
- p17-20020adff211000000b00228d6a43510mr21648581wro.448.1663174740767; 
- Wed, 14 Sep 2022 09:59:00 -0700 (PDT)
-Received: from [172.16.38.152] ([185.122.133.20])
- by smtp.gmail.com with ESMTPSA id
- m23-20020a05600c3b1700b003b477532e66sm6954615wms.2.2022.09.14.09.58.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Sep 2022 09:58:59 -0700 (PDT)
-Message-ID: <2b7693c4-b04e-425a-2f87-c4b12fa2f63b@redhat.com>
-Date: Wed, 14 Sep 2022 17:58:58 +0100
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A463B10E3B4;
+ Fri, 16 Sep 2022 11:05:36 +0000 (UTC)
+Received: from pendragon.ideasonboard.com (unknown [89.101.193.71])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 4BA0947C;
+ Fri, 16 Sep 2022 13:05:34 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1663326334;
+ bh=3T6MoexJyOD88d7xj/tAA1mkTFvHksDffKxl69kCWNA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=brSlJObbxqd9HCyCjJTNya2vligZYruZcRQ/NiwfTmL5mWZKzwmhHGNXs9sukaiVn
+ Uu3UKJEjhfCOFtT4pw3NFvNCvHPJE0DsQ5rM1tYzSvh/nvnsUg4jHzLMNiOCqob11z
+ E5ak9SSZWQgQQBlOfZstgUKKL1KCVpznlBKwJHtk=
+Date: Fri, 16 Sep 2022 14:05:19 +0300
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <YyRYbzxG2VB4jxKR@pendragon.ideasonboard.com>
+References: <20220909105947.6487-1-tzimmermann@suse.de>
+ <20220909105947.6487-2-tzimmermann@suse.de>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.1
-To: Maxime Ripard <maxime@cerno.tech>
-References: <261afe3d-7790-e945-adf6-a2c96c9b1eff@redhat.com>
- <20220914112933.64ovljgsrv2l25rs@penduick>
-From: Hans de Goede <hdegoede@redhat.com>
-In-Reply-To: <20220914112933.64ovljgsrv2l25rs@penduick>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [GIT PULL] Immutable backlight-detect-refactor branch
- between acpi, drm-* and pdx86
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20220909105947.6487-2-tzimmermann@suse.de>
+Subject: Re: [Nouveau] [PATCH 1/4] drm/plane: Remove drm_plane_init()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,47 +45,190 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Rafael J . Wysocki" <rafael@kernel.org>, nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, platform-driver-x86@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, linux-acpi@vger.kernel.org,
- Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@redhat.com>,
- Len Brown <lenb@kernel.org>, Daniel Dadap <ddadap@nvidia.com>,
- intel-gfx <intel-gfx@lists.freedesktop.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Mark Gross <markgross@kernel.org>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Mika Westerberg <mika.westerberg@linux.intel.com>,
- Andy Shevchenko <andy@kernel.org>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Xinhui <Xinhui.Pan@amd.com>,
- Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+Cc: tomba@kernel.org, airlied@linux.ie, sam@ravnborg.org,
+ dri-devel@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, linux-renesas-soc@vger.kernel.org,
+ kieran.bingham+renesas@ideasonboard.com, bskeggs@redhat.com, daniel@ffwll.ch,
+ nouveau@lists.freedesktop.org, jyri.sarha@iki.fi
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+Hi Thomas,
 
-On 9/14/22 12:29, Maxime Ripard wrote:
-> Hi Hans,
+Thank you for the patch.
+
+On Fri, Sep 09, 2022 at 12:59:44PM +0200, Thomas Zimmermann wrote:
+> Open-code drm_plane_init() and remove the function from DRM. The
+> implementation of drm_plane_init() is a simple wrapper around a call
+> to drm_universal_plane_init(), so drivers can just use that instead.
 > 
-> On Mon, Sep 05, 2022 at 10:35:47AM +0200, Hans de Goede wrote:
->> Hi All,
->>
->> Now that all patches have been reviewed/acked here is an immutable backlight-detect-refactor
->> branch with 6.0-rc1 + the v5 patch-set, for merging into the relevant (acpi, drm-* and pdx86)
->> subsystems.
->>
->> Please pull this branch into the relevant subsystems.
->>
->> I will merge this into the review-hans branch of the pdx86 git tree today and
->> from there it will move to for-next once the builders have successfully build-tested
->> the merge.
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+
+Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+
+> ---
+>  drivers/gpu/drm/drm_modeset_helper.c       |  3 +-
+>  drivers/gpu/drm/drm_plane.c                | 32 ----------------------
+>  drivers/gpu/drm/nouveau/dispnv04/overlay.c | 13 +++++----
+>  drivers/gpu/drm/shmobile/shmob_drm_plane.c |  7 +++--
+>  drivers/gpu/drm/tilcdc/tilcdc_plane.c      |  9 +++---
+>  include/drm/drm_plane.h                    |  8 +-----
+>  6 files changed, 17 insertions(+), 55 deletions(-)
 > 
-> I merged it into drm-misc-next, thanks!
+> diff --git a/drivers/gpu/drm/drm_modeset_helper.c b/drivers/gpu/drm/drm_modeset_helper.c
+> index bd609a978848..611dd01fb604 100644
+> --- a/drivers/gpu/drm/drm_modeset_helper.c
+> +++ b/drivers/gpu/drm/drm_modeset_helper.c
+> @@ -100,8 +100,7 @@ EXPORT_SYMBOL(drm_helper_mode_fill_fb_struct);
+>   * This is the minimal list of formats that seem to be safe for modeset use
+>   * with all current DRM drivers.  Most hardware can actually support more
+>   * formats than this and drivers may specify a more accurate list when
+> - * creating the primary plane.  However drivers that still call
+> - * drm_plane_init() will use this minimal format list as the default.
+> + * creating the primary plane.
+>   */
+>  static const uint32_t safe_modeset_formats[] = {
+>  	DRM_FORMAT_XRGB8888,
+> diff --git a/drivers/gpu/drm/drm_plane.c b/drivers/gpu/drm/drm_plane.c
+> index 726f2f163c26..0f14b4d3bb10 100644
+> --- a/drivers/gpu/drm/drm_plane.c
+> +++ b/drivers/gpu/drm/drm_plane.c
+> @@ -482,38 +482,6 @@ void drm_plane_unregister_all(struct drm_device *dev)
+>  	}
+>  }
+>  
+> -/**
+> - * drm_plane_init - Initialize a legacy plane
+> - * @dev: DRM device
+> - * @plane: plane object to init
+> - * @possible_crtcs: bitmask of possible CRTCs
+> - * @funcs: callbacks for the new plane
+> - * @formats: array of supported formats (DRM_FORMAT\_\*)
+> - * @format_count: number of elements in @formats
+> - * @is_primary: plane type (primary vs overlay)
+> - *
+> - * Legacy API to initialize a DRM plane.
+> - *
+> - * New drivers should call drm_universal_plane_init() instead.
+> - *
+> - * Returns:
+> - * Zero on success, error code on failure.
+> - */
+> -int drm_plane_init(struct drm_device *dev, struct drm_plane *plane,
+> -		   uint32_t possible_crtcs,
+> -		   const struct drm_plane_funcs *funcs,
+> -		   const uint32_t *formats, unsigned int format_count,
+> -		   bool is_primary)
+> -{
+> -	enum drm_plane_type type;
+> -
+> -	type = is_primary ? DRM_PLANE_TYPE_PRIMARY : DRM_PLANE_TYPE_OVERLAY;
+> -	return drm_universal_plane_init(dev, plane, possible_crtcs, funcs,
+> -					formats, format_count,
+> -					NULL, type, NULL);
+> -}
+> -EXPORT_SYMBOL(drm_plane_init);
+> -
+>  /**
+>   * drm_plane_cleanup - Clean up the core plane usage
+>   * @plane: plane to cleanup
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/overlay.c b/drivers/gpu/drm/nouveau/dispnv04/overlay.c
+> index 37e63e98cd08..33f29736024a 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv04/overlay.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/overlay.c
+> @@ -296,9 +296,10 @@ nv10_overlay_init(struct drm_device *device)
+>  		break;
+>  	}
+>  
+> -	ret = drm_plane_init(device, &plane->base, 3 /* both crtc's */,
+> -			     &nv10_plane_funcs,
+> -			     formats, num_formats, false);
+> +	ret = drm_universal_plane_init(device, &plane->base, 3 /* both crtc's */,
+> +				       &nv10_plane_funcs,
+> +				       formats, num_formats, NULL,
+> +				       DRM_PLANE_TYPE_OVERLAY, NULL);
+>  	if (ret)
+>  		goto err;
+>  
+> @@ -475,9 +476,9 @@ nv04_overlay_init(struct drm_device *device)
+>  	if (!plane)
+>  		return;
+>  
+> -	ret = drm_plane_init(device, &plane->base, 1 /* single crtc */,
+> -			     &nv04_plane_funcs,
+> -			     formats, 2, false);
+> +	ret = drm_universal_plane_init(device, &plane->base, 1 /* single crtc */,
+> +				       &nv04_plane_funcs, formats, 2, NULL,
+> +				       DRM_PLANE_TYPE_OVERLAY, NULL);
+>  	if (ret)
+>  		goto err;
+>  
+> diff --git a/drivers/gpu/drm/shmobile/shmob_drm_plane.c b/drivers/gpu/drm/shmobile/shmob_drm_plane.c
+> index 54228424793a..6c5f0cbe7d95 100644
+> --- a/drivers/gpu/drm/shmobile/shmob_drm_plane.c
+> +++ b/drivers/gpu/drm/shmobile/shmob_drm_plane.c
+> @@ -252,9 +252,10 @@ int shmob_drm_plane_create(struct shmob_drm_device *sdev, unsigned int index)
+>  	splane->index = index;
+>  	splane->alpha = 255;
+>  
+> -	ret = drm_plane_init(sdev->ddev, &splane->plane, 1,
+> -			     &shmob_drm_plane_funcs, formats,
+> -			     ARRAY_SIZE(formats), false);
+> +	ret = drm_universal_plane_init(sdev->ddev, &splane->plane, 1,
+> +				       &shmob_drm_plane_funcs,
+> +				       formats, ARRAY_SIZE(formats), NULL,
+> +				       DRM_PLANE_TYPE_OVERLAY, NULL);
+>  
+>  	return ret;
+>  }
+> diff --git a/drivers/gpu/drm/tilcdc/tilcdc_plane.c b/drivers/gpu/drm/tilcdc/tilcdc_plane.c
+> index 0ccf791301cb..cf77a8ce7398 100644
+> --- a/drivers/gpu/drm/tilcdc/tilcdc_plane.c
+> +++ b/drivers/gpu/drm/tilcdc/tilcdc_plane.c
+> @@ -105,11 +105,10 @@ int tilcdc_plane_init(struct drm_device *dev,
+>  	struct tilcdc_drm_private *priv = dev->dev_private;
+>  	int ret;
+>  
+> -	ret = drm_plane_init(dev, plane, 1,
+> -			     &tilcdc_plane_funcs,
+> -			     priv->pixelformats,
+> -			     priv->num_pixelformats,
+> -			     true);
+> +	ret = drm_universal_plane_init(dev, plane, 1, &tilcdc_plane_funcs,
+> +				       priv->pixelformats,
+> +				       priv->num_pixelformats,
+> +				       NULL, DRM_PLANE_TYPE_PRIMARY, NULL);
+>  	if (ret) {
+>  		dev_err(dev->dev, "Failed to initialize plane: %d\n", ret);
+>  		return ret;
+> diff --git a/include/drm/drm_plane.h b/include/drm/drm_plane.h
+> index 89ea54652e87..910cb941f3d5 100644
+> --- a/include/drm/drm_plane.h
+> +++ b/include/drm/drm_plane.h
+> @@ -631,7 +631,7 @@ struct drm_plane {
+>  	unsigned int format_count;
+>  	/**
+>  	 * @format_default: driver hasn't supplied supported formats for the
+> -	 * plane. Used by the drm_plane_init compatibility wrapper only.
+> +	 * plane. Used by the non-atomic driver compatibility wrapper only.
+>  	 */
+>  	bool format_default;
+>  
+> @@ -762,12 +762,6 @@ int drm_universal_plane_init(struct drm_device *dev,
+>  			     const uint64_t *format_modifiers,
+>  			     enum drm_plane_type type,
+>  			     const char *name, ...);
+> -int drm_plane_init(struct drm_device *dev,
+> -		   struct drm_plane *plane,
+> -		   uint32_t possible_crtcs,
+> -		   const struct drm_plane_funcs *funcs,
+> -		   const uint32_t *formats, unsigned int format_count,
+> -		   bool is_primary);
+>  void drm_plane_cleanup(struct drm_plane *plane);
+>  
+>  __printf(10, 11)
 
-Great, thank you!
-
+-- 
 Regards,
 
-Hans
-
+Laurent Pinchart
