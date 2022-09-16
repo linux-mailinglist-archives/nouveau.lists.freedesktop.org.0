@@ -2,61 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C92B5BEF1C
-	for <lists+nouveau@lfdr.de>; Tue, 20 Sep 2022 23:24:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 277A55BEF19
+	for <lists+nouveau@lfdr.de>; Tue, 20 Sep 2022 23:24:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A9B2410E7A8;
-	Tue, 20 Sep 2022 21:24:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D52C810E7A4;
+	Tue, 20 Sep 2022 21:24:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-x642.google.com (mail-pl1-x642.google.com
- [IPv6:2607:f8b0:4864:20::642])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F0A7910E422;
- Wed, 14 Sep 2022 07:11:00 +0000 (UTC)
-Received: by mail-pl1-x642.google.com with SMTP id p18so14217116plr.8;
- Wed, 14 Sep 2022 00:11:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date;
- bh=AU4dxVt2EZAwAafSPDdpJ60cBcN1PRUQqw+/acHisPM=;
- b=ik+MeS4ugOup3HBtZTVSS5/0wdLMPXxMvOk2AgInP8jvjMAeU3zysTsW6v4FjAlcko
- MBsFiQj1RPbj8SCNpCZsAuYveLCJMJ2IUhs4GQdddwY5HuDk0mafoLIrOqrrHb8uft4w
- h1uC/TpbMe/2iMuxa508eRbW1d/IaloCrgzg6e+Y4Ht7H5bBKGZsyKOc93muJkcPGrHy
- 55/I8Nwdvv5yX/XAjKfWLxOwtdZuWkU/7Uo0eLbN9vK26Um8Rr7YSQwNv1wbt8ExQPPN
- kgfVr8MG9xHFtiho2G589cprKn0xZmBd3R25OZtIiWXLCMSdDDUDwr5Ef3+619/wTkHg
- KwZw==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F13FB10E380
+ for <nouveau@lists.freedesktop.org>; Fri, 16 Sep 2022 11:00:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1663326049;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=2ZbmxGQFx5NUyXDI3oRsG3PEO6C5R/qvXpxefqzSfSQ=;
+ b=GcWnRw3qPRyiFG+esrgCK6Srz4waAS+YpfrwCDDSHZiSGfKeiJL9NeOSzQydbLtBtA2TSV
+ Q6jcQMlI/7yxh1w7v+sgU0oVQ13S6qO4lCnC7+UQHVGLynuwJTS/LiOqLubZJe3RMguRnZ
+ EOKlTYcAPMO0pNVtpcPtffk+tOiRpyA=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-110-F4Uzr5SONras9gb_jn29sw-1; Fri, 16 Sep 2022 07:00:45 -0400
+X-MC-Unique: F4Uzr5SONras9gb_jn29sw-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ f14-20020a1c6a0e000000b003b46dafde71so6630643wmc.3
+ for <nouveau@lists.freedesktop.org>; Fri, 16 Sep 2022 04:00:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date;
- bh=AU4dxVt2EZAwAafSPDdpJ60cBcN1PRUQqw+/acHisPM=;
- b=34TBLfJpNfemc7VXwC3JfS5TfdUpX7HcrPW7Tu9A7ujIt+2yefAO29zbW7rQcP6gpX
- xdxCcsQDWglf+h14NH8aMTtwItTM4pTreU96SUrV8lWlpdi+pny6jDDNyYyTYSCqLc5q
- RKdGlRG3s6dLG5ErZ4tI205Zgq3HMKgCebLhqI/2/5e6Vg8ChMnMcTKJw5+tqmEXCE8r
- h9645DCxPWq4oNs6hxv6ZP4LSuCYed6ygteoDDgeMaCq3+VhjQEnReL+QLO/w3me2E3v
- WCbxoc+os0A22l2PQsCnPuIabXNnAzaD9K+OK6qwUkCcmYUi0F4ueRrRQ5YA0998qt/+
- AvoA==
-X-Gm-Message-State: ACrzQf1Ojk/BT1se++hHjgiUq4dhla8jdUJo0Pogl7qV58ObfXZecjGL
- xFWRy484iMYDfiNij9wUfBw=
-X-Google-Smtp-Source: AMsMyM4/hZ0xpGlMz6cxwGj5nfP51rRTcZW+ZUMZXe4Q/71GdlLYxy+VH14c7/MMVh32/oK797/6JQ==
-X-Received: by 2002:a17:90a:e586:b0:1fa:d28b:ab9b with SMTP id
- g6-20020a17090ae58600b001fad28bab9bmr3357604pjz.47.1663139460468; 
- Wed, 14 Sep 2022 00:11:00 -0700 (PDT)
-Received: from hbh25y.. ([129.227.150.140]) by smtp.gmail.com with ESMTPSA id
- w37-20020a631625000000b0041bfa382dfesm8837396pgl.67.2022.09.14.00.10.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Sep 2022 00:11:00 -0700 (PDT)
-From: Hangyu Hua <hbh25y@gmail.com>
-To: bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com, airlied@linux.ie,
- daniel@ffwll.ch
-Date: Wed, 14 Sep 2022 15:10:50 +0800
-Message-Id: <20220914071050.21823-1-hbh25y@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date;
+ bh=2ZbmxGQFx5NUyXDI3oRsG3PEO6C5R/qvXpxefqzSfSQ=;
+ b=fJTtu/YEFYux/QanEkZVHOsfM/DgmKc7FvgHMeEsaFzYlP5FO58ilCbylqJVgRhoQy
+ Fuh+EMQP0ySdxBeiB6kct9Cr62R20MVgPHzAiddF0XuvSFvpEYZ12QHvx9OFZZohpfRG
+ 9uL46zLAPi1oCY035kd9USfPoprq8Rs0izFCWQsbn+NX8F4a44LBAbbZxkwwjs12cU87
+ JCxnaB1j3hlw6SzG29AqmZTPe5d1uhfcHfkIx9BlIqDwwrHxRXKx3GSNM7L52D9bCSvt
+ v3IE/svIl3dSUKxOtJ9Yk2PZFAxxSzAlaZDjvdchuKJpdJ/NnV3FN96urfZ5nhhx1BQu
+ whww==
+X-Gm-Message-State: ACrzQf2m9hSyrnNEJPgbgrOJ62sYa+4g/cMwXOAHm/NTiEISY9IaD9LJ
+ bj1pqIWbjjSvNjQn8wguVBfWVhzZ2IBR/3HTf56VdVuCnwC9v5tKujCZw+pBdezFFTJk8JS4zDF
+ WysvophMvDZL8/pogoLM6bJ3bjg==
+X-Received: by 2002:a5d:5848:0:b0:22a:c104:c2f1 with SMTP id
+ i8-20020a5d5848000000b0022ac104c2f1mr2519350wrf.699.1663326044858; 
+ Fri, 16 Sep 2022 04:00:44 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM43fBOdh9afnK2x5mvyniWJnGPpavwwlgRXAzXhit5u76P4eHdYTeO9LfpPvGZhI/+XXh73Tw==
+X-Received: by 2002:a5d:5848:0:b0:22a:c104:c2f1 with SMTP id
+ i8-20020a5d5848000000b0022ac104c2f1mr2519331wrf.699.1663326044582; 
+ Fri, 16 Sep 2022 04:00:44 -0700 (PDT)
+Received: from [192.168.1.130] (205.pool92-176-231.dynamic.orange.es.
+ [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
+ b14-20020adff90e000000b00225307f43fbsm4772079wrr.44.2022.09.16.04.00.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 16 Sep 2022 04:00:43 -0700 (PDT)
+Message-ID: <e15772ac-5ad5-37a1-9957-0b1f2fc5284c@redhat.com>
+Date: Fri, 16 Sep 2022 13:00:42 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.0
+To: Thomas Zimmermann <tzimmermann@suse.de>,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
+ daniel@ffwll.ch, bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com,
+ laurent.pinchart@ideasonboard.com, kieran.bingham+renesas@ideasonboard.com,
+ jyri.sarha@iki.fi, tomba@kernel.org, sam@ravnborg.org
+References: <20220909105947.6487-1-tzimmermann@suse.de>
+ <20220909105947.6487-2-tzimmermann@suse.de>
+From: Javier Martinez Canillas <javierm@redhat.com>
+In-Reply-To: <20220909105947.6487-2-tzimmermann@suse.de>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Tue, 20 Sep 2022 21:24:04 +0000
-Subject: [Nouveau] [PATCH] drm: nouveau: move bounds checking to the front
- in nouveau_svm_fault_buffer_dtor()
+Subject: Re: [Nouveau] [PATCH 1/4] drm/plane: Remove drm_plane_init()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,32 +90,49 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Hangyu Hua <hbh25y@gmail.com>
+Cc: linux-renesas-soc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-It is better to check i before use it in array to avoid potential out of
-bound access.
+Hello Thomas,
 
-Signed-off-by: Hangyu Hua <hbh25y@gmail.com>
----
- drivers/gpu/drm/nouveau/nouveau_svm.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 9/9/22 12:59, Thomas Zimmermann wrote:
+> Open-code drm_plane_init() and remove the function from DRM. The
+> implementation of drm_plane_init() is a simple wrapper around a call
+> to drm_universal_plane_init(), so drivers can just use that instead.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
-index 31a5b81ee9fc..5c49a8eaf593 100644
---- a/drivers/gpu/drm/nouveau/nouveau_svm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
-@@ -957,7 +957,7 @@ nouveau_svm_fault_buffer_dtor(struct nouveau_svm *svm, int id)
- 	int i;
- 
- 	if (buffer->fault) {
--		for (i = 0; buffer->fault[i] && i < buffer->entries; i++)
-+		for (i = 0; i < buffer->entries && buffer->fault[i]; i++)
- 			kfree(buffer->fault[i]);
- 		kvfree(buffer->fault);
- 	}
+[...]
+
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/overlay.c b/drivers/gpu/drm/nouveau/dispnv04/overlay.c
+> index 37e63e98cd08..33f29736024a 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv04/overlay.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/overlay.c
+> @@ -296,9 +296,10 @@ nv10_overlay_init(struct drm_device *device)
+>  		break;
+>  	}
+>  
+> -	ret = drm_plane_init(device, &plane->base, 3 /* both crtc's */,
+> -			     &nv10_plane_funcs,
+> -			     formats, num_formats, false);
+> +	ret = drm_universal_plane_init(device, &plane->base, 3 /* both crtc's */,
+> +				       &nv10_plane_funcs,
+> +				       formats, num_formats, NULL,
+> +				       DRM_PLANE_TYPE_OVERLAY, NULL);
+
+Not only drm_plane_init() doesn't add much value but makes the code
+harder to read. Since by calling drm_universal_plane_init() instead,
+it's explicit whether the initialized plane is primary or an overlay.
+
+Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
+
 -- 
-2.34.1
+Best regards,
+
+Javier Martinez Canillas
+Core Platforms
+Red Hat
 
