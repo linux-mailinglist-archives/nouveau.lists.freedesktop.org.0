@@ -1,67 +1,41 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 891A25BACA1
-	for <lists+nouveau@lfdr.de>; Fri, 16 Sep 2022 13:41:26 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 292535BCF73
+	for <lists+nouveau@lfdr.de>; Mon, 19 Sep 2022 16:46:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 05C6B10EC7F;
-	Fri, 16 Sep 2022 11:41:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E6B5410E066;
+	Mon, 19 Sep 2022 14:46:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 32C4310EC6A
- for <nouveau@lists.freedesktop.org>; Fri, 16 Sep 2022 11:41:15 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id D0D2733B9E;
- Fri, 16 Sep 2022 11:41:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1663328471; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=IfCdOgTRAwubn+gLxm93UyLUiTJwlFDUCtBJO5qYkDI=;
- b=p7LbuVTZ5gTUlJl5naottk08HhnJRDSSW1YiBwy1US3xVfG5b8cT002GAlqJkDcQPHPO3L
- bUYvD3uB4l6IYO0L4QH/bQXQRrSUgTvi82mQ2ALUoOvt2NU9X8OsuzRZXF4nOXuRy8nRLC
- aNXxu2SiIvCA7Rd2EPGDweMZZoWhWDU=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1663328471;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=IfCdOgTRAwubn+gLxm93UyLUiTJwlFDUCtBJO5qYkDI=;
- b=3sXIxExi4XPCA5HS7O792RXwdsMhFsSzCRSMhRapthdVF9S6T5nYZiH4vrOIZTpqlT50zG
- ubGVdKfPU8GHGNCA==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7C4A21332E;
- Fri, 16 Sep 2022 11:41:11 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id ZeY3HddgJGP4EwAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Fri, 16 Sep 2022 11:41:11 +0000
-Message-ID: <7013378e-9434-d6c6-b777-67af945cb0f8@suse.de>
-Date: Fri, 16 Sep 2022 13:41:11 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Content-Language: en-US
-To: Javier Martinez Canillas <javierm@redhat.com>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
- daniel@ffwll.ch, bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com,
- laurent.pinchart@ideasonboard.com, kieran.bingham+renesas@ideasonboard.com,
- jyri.sarha@iki.fi, tomba@kernel.org, sam@ravnborg.org
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 32BBB10E664;
+ Mon, 19 Sep 2022 14:45:57 +0000 (UTC)
+Received: from pendragon.ideasonboard.com (62-78-145-57.bb.dnainternet.fi
+ [62.78.145.57])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id CC12A499;
+ Mon, 19 Sep 2022 16:45:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1663598755;
+ bh=aabepc7nb0ngyChlkM6UJlwgKnZ9OU5G0U7VXy3ehjU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=nScVJsapKy+O4QEW0uqFnYQ4do05LXITXiWk5S3og/+DBPerGPce88+x0hGYR1CDJ
+ gafEsAayXMejbQe380YouukosvV8M0q1A3zmrNI2rOm9mSB/3emrWI6qmEaTHng+ch
+ XEFLtjWIfOTeZ7WWnLpH7Z7uZSTaI30LWQr2iPmE=
+Date: Mon, 19 Sep 2022 17:45:41 +0300
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <YyiAlRETd92wGxLn@pendragon.ideasonboard.com>
 References: <20220909105947.6487-1-tzimmermann@suse.de>
  <20220909105947.6487-3-tzimmermann@suse.de>
- <7080a54e-9e0d-93f4-ecba-150d3af03226@redhat.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-In-Reply-To: <7080a54e-9e0d-93f4-ecba-150d3af03226@redhat.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------sz8Hpvm9dmnp3pcEHy0EE8jI"
+ <YyRYzpyjpmtOKnIW@pendragon.ideasonboard.com>
+ <8de43ecf-530e-0661-b4d3-60712b31e8c8@suse.de>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <8de43ecf-530e-0661-b4d3-60712b31e8c8@suse.de>
 Subject: Re: [Nouveau] [PATCH 2/4] drm/plane: Allocate planes with
  drm_universal_plane_alloc()
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -75,119 +49,303 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-renesas-soc@vger.kernel.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
+Cc: tomba@kernel.org, airlied@linux.ie, nouveau@lists.freedesktop.org,
+ jyri.sarha@iki.fi, dri-devel@lists.freedesktop.org,
+ linux-renesas-soc@vger.kernel.org, kieran.bingham+renesas@ideasonboard.com,
+ bskeggs@redhat.com, sam@ravnborg.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------sz8Hpvm9dmnp3pcEHy0EE8jI
-Content-Type: multipart/mixed; boundary="------------GXNgJ0054PeTy7eJU6ufLHGn";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Javier Martinez Canillas <javierm@redhat.com>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
- daniel@ffwll.ch, bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com,
- laurent.pinchart@ideasonboard.com, kieran.bingham+renesas@ideasonboard.com,
- jyri.sarha@iki.fi, tomba@kernel.org, sam@ravnborg.org
-Cc: linux-renesas-soc@vger.kernel.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
-Message-ID: <7013378e-9434-d6c6-b777-67af945cb0f8@suse.de>
-Subject: Re: [PATCH 2/4] drm/plane: Allocate planes with
- drm_universal_plane_alloc()
-References: <20220909105947.6487-1-tzimmermann@suse.de>
- <20220909105947.6487-3-tzimmermann@suse.de>
- <7080a54e-9e0d-93f4-ecba-150d3af03226@redhat.com>
-In-Reply-To: <7080a54e-9e0d-93f4-ecba-150d3af03226@redhat.com>
+Hi Thomas,
 
---------------GXNgJ0054PeTy7eJU6ufLHGn
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+On Fri, Sep 16, 2022 at 01:31:25PM +0200, Thomas Zimmermann wrote:
+> Am 16.09.22 um 13:06 schrieb Laurent Pinchart:
+> > On Fri, Sep 09, 2022 at 12:59:45PM +0200, Thomas Zimmermann wrote:
+> >> Provide drm_univeral_plane_alloc(), which allocated an initializes a
+> >> plane. Code for non-atomic drivers uses this pattern. Convert it to
+> >> the new function. The modeset helpers contain a quirk for handling their
+> >> color formats differently. Set the flag outside plane allocation.
+> >>
+> >> The new function is already deprecated to some extend. Drivers should
+> >> rather use drmm_univeral_plane_alloc() or drm_universal_plane_init().
+> > 
+> > If this is already deprecated and used by a single driver, what is the
+> > point ?
+> 
+> It's used by nouveau and drm_modeset_helper.c. Since the code is 
+> duplicated, it seems generally better to have it located and documented 
+> in a central place.
+> 
+> Although it may look somewhat pointless now, the helper will get useful 
+> in the future. The affected code in drm_modeset_helper is in 
+> drm_crtc_init(), which is also a deprecated interface; only used by 
+> non-atomic drivers. The function is a good candidate to be inlined into 
+> calling drivers. Getting drm_crtc_init() removed will allow us to 
+> correct these drivers' color-format handling. Once that happened, 
+> several more drivers will call drm_univeral_plane_alloc().
 
-SGkNCg0KQW0gMTYuMDkuMjIgdW0gMTM6MjIgc2NocmllYiBKYXZpZXIgTWFydGluZXogQ2Fu
-aWxsYXM6DQo+IE9uIDkvOS8yMiAxMjo1OSwgVGhvbWFzIFppbW1lcm1hbm4gd3JvdGU6DQo+
-PiBQcm92aWRlIGRybV91bml2ZXJhbF9wbGFuZV9hbGxvYygpLCB3aGljaCBhbGxvY2F0ZWQg
-YW4gaW5pdGlhbGl6ZXMgYQ0KPj4gcGxhbmUuIENvZGUgZm9yIG5vbi1hdG9taWMgZHJpdmVy
-cyB1c2VzIHRoaXMgcGF0dGVybi4gQ29udmVydCBpdCB0bw0KPj4gdGhlIG5ldyBmdW5jdGlv
-bi4gVGhlIG1vZGVzZXQgaGVscGVycyBjb250YWluIGEgcXVpcmsgZm9yIGhhbmRsaW5nIHRo
-ZWlyDQo+PiBjb2xvciBmb3JtYXRzIGRpZmZlcmVudGx5LiBTZXQgdGhlIGZsYWcgb3V0c2lk
-ZSBwbGFuZSBhbGxvY2F0aW9uLg0KPj4NCj4+IFRoZSBuZXcgZnVuY3Rpb24gaXMgYWxyZWFk
-eSBkZXByZWNhdGVkIHRvIHNvbWUgZXh0ZW5kLiBEcml2ZXJzIHNob3VsZA0KPj4gcmF0aGVy
-IHVzZSBkcm1tX3VuaXZlcmFsX3BsYW5lX2FsbG9jKCkgb3IgZHJtX3VuaXZlcnNhbF9wbGFu
-ZV9pbml0KCkuDQo+Pg0KPj4gU2lnbmVkLW9mZi1ieTogVGhvbWFzIFppbW1lcm1hbm4gPHR6
-aW1tZXJtYW5uQHN1c2UuZGU+DQo+PiAtLS0NCj4gDQo+IFsuLi5dDQo+IA0KPj4gICANCj4+
-ICtfX3ByaW50ZigxMCwgMTEpDQo+PiArdm9pZCAqX19kcm1fdW5pdmVyc2FsX3BsYW5lX2Fs
-bG9jKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsDQo+PiArCQkJCSAgc2l6ZV90IHNpemUsIHNp
-emVfdCBvZmZzZXQsDQo+PiArCQkJCSAgdWludDMyX3QgcG9zc2libGVfY3J0Y3MsDQo+PiAr
-CQkJCSAgY29uc3Qgc3RydWN0IGRybV9wbGFuZV9mdW5jcyAqZnVuY3MsDQo+PiArCQkJCSAg
-Y29uc3QgdWludDMyX3QgKmZvcm1hdHMsDQo+PiArCQkJCSAgdW5zaWduZWQgaW50IGZvcm1h
-dF9jb3VudCwNCj4+ICsJCQkJICBjb25zdCB1aW50NjRfdCAqZm9ybWF0X21vZGlmaWVycywN
-Cj4+ICsJCQkJICBlbnVtIGRybV9wbGFuZV90eXBlIHBsYW5lX3R5cGUsDQo+PiArCQkJCSAg
-Y29uc3QgY2hhciAqbmFtZSwgLi4uKTsNCj4+ICsNCj4+ICsvKioNCj4+ICsgKiBkcm1fdW5p
-dmVyc2FsX3BsYW5lX2FsbG9jIC0gQWxsb2NhdGUgYW5kIGluaXRpYWxpemUgYW4gdW5pdmVy
-c2FsIHBsYW5lIG9iamVjdA0KPiANCj4gU2hvdWxkIGZ1bmN0aW9ucyBrZXJuZWwtZG9jIGRl
-ZmluaXRpb25zIHVzZSBwYXJlbnRoZXNpcyBvciBub3Q/IEkgc2VlIGluDQo+IGh0dHBzOi8v
-ZWxpeGlyLmJvb3RsaW4uY29tL2xpbnV4L2xhdGVzdC9zb3VyY2UvRG9jdW1lbnRhdGlvbi9k
-b2MtZ3VpZGUva2VybmVsLWRvYy5yc3QjTDU5DQo+IHRoYXQgdGhlIGV4YW1wbGUgaGFzIGl0
-IGJ1dCBub3RpY2UgdGhhdCB0aGVyZSBpcyBub3QgY29uc2lzdGVuY3kgaW4gRFJNDQo+IGFi
-b3V0IHRoaXMuDQoNCkEgd2Fzbid0IGF3YXJlIG9mIHRoaXMgY29udmVudGlvbi4NCg0KPiAN
-Cj4+ICsgKiBAZGV2OiBEUk0gZGV2aWNlDQo+PiArICogQHR5cGU6IHRoZSB0eXBlIG9mIHRo
-ZSBzdHJ1Y3Qgd2hpY2ggY29udGFpbnMgc3RydWN0ICZkcm1fcGxhbmUNCj4+ICsgKiBAbWVt
-YmVyOiB0aGUgbmFtZSBvZiB0aGUgJmRybV9wbGFuZSB3aXRoaW4gQHR5cGUNCj4+ICsgKiBA
-cG9zc2libGVfY3J0Y3M6IGJpdG1hc2sgb2YgcG9zc2libGUgQ1JUQ3MNCj4+ICsgKiBAZnVu
-Y3M6IGNhbGxiYWNrcyBmb3IgdGhlIG5ldyBwbGFuZQ0KPj4gKyAqIEBmb3JtYXRzOiBhcnJh
-eSBvZiBzdXBwb3J0ZWQgZm9ybWF0cyAoRFJNX0ZPUk1BVFxfXCopDQo+PiArICogQGZvcm1h
-dF9jb3VudDogbnVtYmVyIG9mIGVsZW1lbnRzIGluIEBmb3JtYXRzDQo+PiArICogQGZvcm1h
-dF9tb2RpZmllcnM6IGFycmF5IG9mIHN0cnVjdCBkcm1fZm9ybWF0IG1vZGlmaWVycyB0ZXJt
-aW5hdGVkIGJ5DQo+PiArICogICAgICAgICAgICAgICAgICAgIERSTV9GT1JNQVRfTU9EX0lO
-VkFMSUQNCj4+ICsgKiBAcGxhbmVfdHlwZTogdHlwZSBvZiBwbGFuZSAob3ZlcmxheSwgcHJp
-bWFyeSwgY3Vyc29yKQ0KPj4gKyAqIEBuYW1lOiBwcmludGYgc3R5bGUgZm9ybWF0IHN0cmlu
-ZyBmb3IgdGhlIHBsYW5lIG5hbWUsIG9yIE5VTEwgZm9yIGRlZmF1bHQgbmFtZQ0KPj4gKyAq
-DQo+PiArICogQWxsb2NhdGVzIGFuZCBpbml0aWFsaXplcyBhIHBsYW5lIG9iamVjdCBvZiB0
-eXBlIEB0eXBlLiBUaGUgY2FsbGVyDQo+PiArICogaXMgcmVzcG9uc2libGUgZm9yIHJlbGVh
-c2luZyB0aGUgYWxsb2NhdGVkIG1lbW9yeSB3aXRoIGtmcmVlKCkuDQo+PiArICoNCj4gDQo+
-IEkgdGhvdWdodCB0aGF0IGFsbCB0aGUgZHJtbV8qX2FsbG9jKCkgbWFuYWdlZCBpbnRlcmZh
-Y2VzIHNob3VsZCB1c2UgdGhlDQo+IGRybW1fa3t6LG19YWxsb2MoKSBoZWxwZXJzLCBzbyB0
-aGF0IHRoZSBtZW1vcnkgaXMgYXV0b21hdGljYWxseSBmcmVlZA0KPiBvbiB0aGUgbGFzdCBk
-cm1fZGV2X3B1dCgpIGNhbGwgPw0KDQpGb3IgbmV3IGRyaXZlcnMsIG1hbmFnZWQgY2xlYW51
-cCBpcyBwcmVmZXJyZWQuIEJ1dCB0aGlzIGlzIGFuIGV4aXN0aW5nIA0KdW5tYW5hZ2VkIGNs
-ZWFudXAuDQoNCkkgZG9uJ3Qga25vdyBpZiBkcm1tXyBjaGFuZ2VzIHRoZSBzZW1hbnRpY3Mg
-aW4gdW5leHBlY3RlZCB3YXlzICh3ZWxsLCANCnByb2JhYmx5IG5vdCkuIFdpdGggbWFuYWdl
-ZCBtZW1vcnkgcmVsZWFzZXMsIEkgd2FzIHdvcnJpZWQgdGhhdCBwbGFuZSANCm1lbW9yeSBt
-aWdodCBzdGF5IGFyb3VuZCBsb25nZXIgdGhhbiBleHBlY3RlZC4gQW5kIHdlJ2QgaGF2ZSB0
-byBmaXggdGhlIA0KcGxhbmUtZGVzdHJveSBmdW5jdGlvbiBpbiBlYWNoIHVzZXIgYXMgd2Vs
-bC4NCg0KQWRkaW5nIHRoZSBleGlzdGluZyBjb2RlIGFzIGEgbmV3IGZ1bmN0aW9uIGlzIHRo
-ZSB0cml2aWFsIHNvbHV0aW9uIGFuZCANCmFsbG93cyB0byBhZGRyZXNzIGVhY2ggZHJpdmVy
-IGluZGl2aWR1YWxseS4gQWxzbyBzZWUgbXkgcmVwbHkgdG8gDQpMYXVyZW50J3MgcXVlc3Rp
-b24gb24gdGhhdCB0b3BpYy4NCg0KQmVzdCByZWdhcmRzDQpUaG9tYXMNCg0KPiANCj4gT3Ro
-ZXIgdGhhbiB0aG9zZSB0d28gbml0cywgdGhlIHBhdGNoIGxvb2tzIGdvb2QgdG8gbWUuDQo+
-IA0KPiBSZXZpZXdlZC1ieTogSmF2aWVyIE1hcnRpbmV6IENhbmlsbGFzIDxqYXZpZXJtQHJl
-ZGhhdC5jb20+DQo+IA0KDQotLSANClRob21hcyBaaW1tZXJtYW5uDQpHcmFwaGljcyBEcml2
-ZXIgRGV2ZWxvcGVyDQpTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgNCk1h
-eGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQ0KKEhSQiAzNjgwOSwgQUcg
-TsO8cm5iZXJnKQ0KR2VzY2jDpGZ0c2bDvGhyZXI6IEl2byBUb3Rldg0K
+OK, works for me.
 
---------------GXNgJ0054PeTy7eJU6ufLHGn--
+> >> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> >> ---
+> >>   drivers/gpu/drm/drm_modeset_helper.c    | 61 +++++++++++--------------
+> >>   drivers/gpu/drm/drm_plane.c             | 38 +++++++++++++++
+> >>   drivers/gpu/drm/nouveau/dispnv04/crtc.c | 41 ++++++-----------
+> >>   include/drm/drm_plane.h                 | 44 ++++++++++++++++++
+> >>   4 files changed, 121 insertions(+), 63 deletions(-)
+> >>
+> >> diff --git a/drivers/gpu/drm/drm_modeset_helper.c b/drivers/gpu/drm/drm_modeset_helper.c
+> >> index 611dd01fb604..38040eebfa16 100644
+> >> --- a/drivers/gpu/drm/drm_modeset_helper.c
+> >> +++ b/drivers/gpu/drm/drm_modeset_helper.c
+> >> @@ -113,38 +113,6 @@ static const struct drm_plane_funcs primary_plane_funcs = {
+> >>   	.destroy = drm_plane_helper_destroy,
+> >>   };
+> >>   
+> >> -static struct drm_plane *create_primary_plane(struct drm_device *dev)
+> >> -{
+> >> -	struct drm_plane *primary;
+> >> -	int ret;
+> >> -
+> >> -	primary = kzalloc(sizeof(*primary), GFP_KERNEL);
+> >> -	if (primary == NULL) {
+> >> -		DRM_DEBUG_KMS("Failed to allocate primary plane\n");
+> >> -		return NULL;
+> >> -	}
+> >> -
+> >> -	/*
+> >> -	 * Remove the format_default field from drm_plane when dropping
+> >> -	 * this helper.
+> >> -	 */
+> >> -	primary->format_default = true;
+> >> -
+> >> -	/* possible_crtc's will be filled in later by crtc_init */
+> >> -	ret = drm_universal_plane_init(dev, primary, 0,
+> >> -				       &primary_plane_funcs,
+> >> -				       safe_modeset_formats,
+> >> -				       ARRAY_SIZE(safe_modeset_formats),
+> >> -				       NULL,
+> >> -				       DRM_PLANE_TYPE_PRIMARY, NULL);
+> >> -	if (ret) {
+> >> -		kfree(primary);
+> >> -		primary = NULL;
+> >> -	}
+> >> -
+> >> -	return primary;
+> >> -}
+> >> -
+> >>   /**
+> >>    * drm_crtc_init - Legacy CRTC initialization function
+> >>    * @dev: DRM device
+> >> @@ -176,10 +144,33 @@ int drm_crtc_init(struct drm_device *dev, struct drm_crtc *crtc,
+> >>   		  const struct drm_crtc_funcs *funcs)
+> >>   {
+> >>   	struct drm_plane *primary;
+> >> +	int ret;
+> >> +
+> >> +	/* possible_crtc's will be filled in later by crtc_init */
+> >> +	primary = __drm_universal_plane_alloc(dev, sizeof(*primary), 0, 0,
+> >> +					      &primary_plane_funcs,
+> >> +					      safe_modeset_formats,
+> >> +					      ARRAY_SIZE(safe_modeset_formats),
+> >> +					      NULL, DRM_PLANE_TYPE_PRIMARY, NULL);
+> >> +	if (IS_ERR(primary))
+> >> +		return PTR_ERR(primary);
+> >>   
+> >> -	primary = create_primary_plane(dev);
+> >> -	return drm_crtc_init_with_planes(dev, crtc, primary, NULL, funcs,
+> >> -					 NULL);
+> >> +	/*
+> >> +	 * Remove the format_default field from drm_plane when dropping
+> >> +	 * this helper.
+> >> +	 */
+> >> +	primary->format_default = true;
+> >> +
+> >> +	ret = drm_crtc_init_with_planes(dev, crtc, primary, NULL, funcs, NULL);
+> >> +	if (ret)
+> >> +		goto err_drm_plane_cleanup;
+> >> +
+> >> +	return 0;
+> >> +
+> >> +err_drm_plane_cleanup:
+> >> +	drm_plane_cleanup(primary);
+> >> +	kfree(primary);
+> >> +	return ret;
+> >>   }
+> >>   EXPORT_SYMBOL(drm_crtc_init);
+> >>   
+> >> diff --git a/drivers/gpu/drm/drm_plane.c b/drivers/gpu/drm/drm_plane.c
+> >> index 0f14b4d3bb10..33357629a7f5 100644
+> >> --- a/drivers/gpu/drm/drm_plane.c
+> >> +++ b/drivers/gpu/drm/drm_plane.c
+> >> @@ -448,6 +448,44 @@ void *__drmm_universal_plane_alloc(struct drm_device *dev, size_t size,
+> >>   }
+> >>   EXPORT_SYMBOL(__drmm_universal_plane_alloc);
+> >>   
+> >> +void *__drm_universal_plane_alloc(struct drm_device *dev, size_t size,
+> >> +				  size_t offset, uint32_t possible_crtcs,
+> >> +				  const struct drm_plane_funcs *funcs,
+> >> +				  const uint32_t *formats, unsigned int format_count,
+> >> +				  const uint64_t *format_modifiers,
+> >> +				  enum drm_plane_type type,
+> >> +				  const char *name, ...)
+> >> +{
+> >> +	void *container;
+> >> +	struct drm_plane *plane;
+> >> +	va_list ap;
+> >> +	int ret;
+> >> +
+> >> +	if (drm_WARN_ON(dev, !funcs))
+> >> +		return ERR_PTR(-EINVAL);
+> >> +
+> >> +	container = kzalloc(size, GFP_KERNEL);
+> >> +	if (!container)
+> >> +		return ERR_PTR(-ENOMEM);
+> >> +
+> >> +	plane = container + offset;
+> >> +
+> >> +	va_start(ap, name);
+> >> +	ret = __drm_universal_plane_init(dev, plane, possible_crtcs, funcs,
+> >> +					 formats, format_count, format_modifiers,
+> >> +					 type, name, ap);
+> >> +	va_end(ap);
+> >> +	if (ret)
+> >> +		goto err_kfree;
+> >> +
+> >> +	return container;
+> >> +
+> >> +err_kfree:
+> >> +	kfree(container);
+> >> +	return ERR_PTR(ret);
+> >> +}
+> >> +EXPORT_SYMBOL(__drm_universal_plane_alloc);
+> >> +
+> >>   int drm_plane_register_all(struct drm_device *dev)
+> >>   {
+> >>   	unsigned int num_planes = 0;
+> >> diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+> >> index 660c4cbc0b3d..6b8a014b5e97 100644
+> >> --- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+> >> +++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+> >> @@ -1281,32 +1281,6 @@ static const struct drm_plane_funcs nv04_primary_plane_funcs = {
+> >>   	.destroy = drm_plane_helper_destroy,
+> >>   };
+> >>   
+> >> -static struct drm_plane *
+> >> -create_primary_plane(struct drm_device *dev)
+> >> -{
+> >> -        struct drm_plane *primary;
+> >> -        int ret;
+> >> -
+> >> -        primary = kzalloc(sizeof(*primary), GFP_KERNEL);
+> >> -        if (primary == NULL) {
+> >> -                DRM_DEBUG_KMS("Failed to allocate primary plane\n");
+> >> -                return NULL;
+> >> -        }
+> >> -
+> >> -        /* possible_crtc's will be filled in later by crtc_init */
+> >> -        ret = drm_universal_plane_init(dev, primary, 0,
+> >> -				       &nv04_primary_plane_funcs,
+> >> -                                       modeset_formats,
+> >> -                                       ARRAY_SIZE(modeset_formats), NULL,
+> >> -                                       DRM_PLANE_TYPE_PRIMARY, NULL);
+> >> -        if (ret) {
+> >> -                kfree(primary);
+> >> -                primary = NULL;
+> >> -        }
+> >> -
+> >> -        return primary;
+> >> -}
+> >> -
+> >>   static int nv04_crtc_vblank_handler(struct nvif_notify *notify)
+> >>   {
+> >>   	struct nouveau_crtc *nv_crtc =
+> >> @@ -1321,6 +1295,7 @@ nv04_crtc_create(struct drm_device *dev, int crtc_num)
+> >>   {
+> >>   	struct nouveau_display *disp = nouveau_display(dev);
+> >>   	struct nouveau_crtc *nv_crtc;
+> >> +	struct drm_plane *primary;
+> >>   	int ret;
+> >>   
+> >>   	nv_crtc = kzalloc(sizeof(*nv_crtc), GFP_KERNEL);
+> >> @@ -1335,8 +1310,18 @@ nv04_crtc_create(struct drm_device *dev, int crtc_num)
+> >>   	nv_crtc->save = nv_crtc_save;
+> >>   	nv_crtc->restore = nv_crtc_restore;
+> >>   
+> >> -	drm_crtc_init_with_planes(dev, &nv_crtc->base,
+> >> -                                  create_primary_plane(dev), NULL,
+> >> +	primary = __drm_universal_plane_alloc(dev, sizeof(*primary), 0, 0,
+> >> +					      &nv04_primary_plane_funcs,
+> >> +					      modeset_formats,
+> >> +					      ARRAY_SIZE(modeset_formats), NULL,
+> >> +					      DRM_PLANE_TYPE_PRIMARY, NULL);
+> >> +	if (IS_ERR(primary)) {
+> >> +		ret = PTR_ERR(primary);
+> >> +		kfree(nv_crtc);
+> >> +		return ret;
+> >> +	}
+> >> +
+> >> +	drm_crtc_init_with_planes(dev, &nv_crtc->base, primary, NULL,
+> >>                                     &nv04_crtc_funcs, NULL);
+> >>   	drm_crtc_helper_add(&nv_crtc->base, &nv04_crtc_helper_funcs);
+> >>   	drm_mode_crtc_set_gamma_size(&nv_crtc->base, 256);
+> >> diff --git a/include/drm/drm_plane.h b/include/drm/drm_plane.h
+> >> index 910cb941f3d5..21dfa7f97948 100644
+> >> --- a/include/drm/drm_plane.h
+> >> +++ b/include/drm/drm_plane.h
+> >> @@ -809,6 +809,50 @@ void *__drmm_universal_plane_alloc(struct drm_device *dev,
+> >>   					      format_count, format_modifiers, \
+> >>   					      plane_type, name, ##__VA_ARGS__))
+> >>   
+> >> +__printf(10, 11)
+> >> +void *__drm_universal_plane_alloc(struct drm_device *dev,
+> >> +				  size_t size, size_t offset,
+> >> +				  uint32_t possible_crtcs,
+> >> +				  const struct drm_plane_funcs *funcs,
+> >> +				  const uint32_t *formats,
+> >> +				  unsigned int format_count,
+> >> +				  const uint64_t *format_modifiers,
+> >> +				  enum drm_plane_type plane_type,
+> >> +				  const char *name, ...);
+> >> +
+> >> +/**
+> >> + * drm_universal_plane_alloc - Allocate and initialize an universal plane object
+> >> + * @dev: DRM device
+> >> + * @type: the type of the struct which contains struct &drm_plane
+> >> + * @member: the name of the &drm_plane within @type
+> >> + * @possible_crtcs: bitmask of possible CRTCs
+> >> + * @funcs: callbacks for the new plane
+> >> + * @formats: array of supported formats (DRM_FORMAT\_\*)
+> >> + * @format_count: number of elements in @formats
+> >> + * @format_modifiers: array of struct drm_format modifiers terminated by
+> >> + *                    DRM_FORMAT_MOD_INVALID
+> >> + * @plane_type: type of plane (overlay, primary, cursor)
+> >> + * @name: printf style format string for the plane name, or NULL for default name
+> >> + *
+> >> + * Allocates and initializes a plane object of type @type. The caller
+> >> + * is responsible for releasing the allocated memory with kfree().
+> >> + *
+> >> + * Drivers are encouraged to use drmm_universal_plane_alloc() instead.
+> >> + *
+> >> + * Drivers that only support the DRM_FORMAT_MOD_LINEAR modifier support may set
+> >> + * @format_modifiers to NULL. The plane will advertise the linear modifier.
+> >> + *
+> >> + * Returns:
+> >> + * Pointer to new plane, or ERR_PTR on failure.
+> >> + */
+> >> +#define drm_universal_plane_alloc(dev, type, member, possible_crtcs, funcs, formats, \
+> >> +				   format_count, format_modifiers, plane_type, name, ...) \
+> >> +	((type *)__drm_universal_plane_alloc(dev, sizeof(type), \
+> >> +					     offsetof(type, member), \
+> >> +					     possible_crtcs, funcs, formats, \
+> >> +					     format_count, format_modifiers, \
+> >> +					     plane_type, name, ##__VA_ARGS__))
+> >> +
+> >>   /**
+> >>    * drm_plane_index - find the index of a registered plane
+> >>    * @plane: plane to find index for
 
---------------sz8Hpvm9dmnp3pcEHy0EE8jI
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+-- 
+Regards,
 
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmMkYNcFAwAAAAAACgkQlh/E3EQov+AY
-fRAAgEXIcFjN8UyLHbSJGcAXKGf65KQbTCgh5VVqtCK2vKyJl3Z4aMiLePdDfXemsNNbBZ6Qy2AB
-uYd5W91bmiGF607D4qZb/00DZBYEtABsiSgqSIUUZord1jN2jkz3GDzgw2xaN5GO/CtpsiWnFFC/
-hs2wgL/AcjyeSRn72J2McP3gOqArPe3oncYfXlcsLV7+yQRApkFlkV9duuT3IRDFW7UEetw69R3+
-Tfg6CjLjK9ONXhgP7SsmpuOq/zSi99FdZA3HyvDkeEoGHzETiv86JAajv+5hojXgYQU7KS/xhAgz
-gOkRGv3z/7MNWhZ2FHXxY3IAPva+17h9TMU54aufvchXE7RgHlQtNw/ecNV6+vz9zfbbAel/0znw
-wFtfpJ7Cnw6IKOcIba0F5Wcj6YMu83C3scNz/2N59f+t3Fq8E8t2pcJfuMOZqakvkVvb3jswx5Wp
-gUFBXLZ5MJ8x/vW3/iWlXs9On79r6fEfiwhOlhsgzap+tHHu6T0CWmanquPEPW/Ap4ZXEcQqyXkW
-rAUX2H4Bbw+hRO8GqjfaV5CcyIYPYL23+eGhff0j06asvxSQLXHvV7fUZrx26HAcWiJQfWyI4R/P
-pKDhLZrHjPF/vuEamHsfVnXvyz4Q7Fz2XOD74rMnP4h+oV/9N21zhAYRU2ypwduw9ZvyC9wEVzin
-cEA=
-=BxKb
------END PGP SIGNATURE-----
-
---------------sz8Hpvm9dmnp3pcEHy0EE8jI--
+Laurent Pinchart
