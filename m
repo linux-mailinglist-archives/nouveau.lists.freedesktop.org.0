@@ -1,50 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12B005BDCF9
-	for <lists+nouveau@lfdr.de>; Tue, 20 Sep 2022 08:15:47 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A8585BE381
+	for <lists+nouveau@lfdr.de>; Tue, 20 Sep 2022 12:42:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DE48710E29E;
-	Tue, 20 Sep 2022 06:15:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 21CD310E4CF;
+	Tue, 20 Sep 2022 10:42:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 65B9110E29E
- for <nouveau@lists.freedesktop.org>; Tue, 20 Sep 2022 06:15:36 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4MWrrL5nvnz9sTS;
- Tue, 20 Sep 2022 08:15:30 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=owenh.net; s=MBO0001; 
- t=1663654530;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8DC6Hx/+oy2DHbXkWg4hFJ6HCo5SiUWt7+0IEF/EtUE=;
- b=mGM9sp2BJk8/2TyNPHA1ZJ9rSz3e4Esz0YZL6d6Qf86eXlWlqz967BTrKyYI+hQNIBSWsy
- SYlDcDmaMqYHpCpTwFoPIYQL74+boIwSxTHhlvpZNQjIcn5k6B1fQJd7MIH2sd7O60gkHu
- zvQyG31wYae6ACbpdsNJJ6vvn/RCajXTOmZ+/63/E6do0qrwfVX1Vs/gvxrd7uGMm8/CY5
- /zHF3RAOa9L+v6hVCcMn2pH7Z4Y7Rqc8Xv5rOL6CDETSiOelfZ1kTo3PzYjLLOm7Et90e5
- qeoeKo1EIRmSB3rnY1pmHQsnK0mnTeQ0KG6NROYXZX7kt9vwTmun3JW2Azobzw==
-Message-ID: <67c138e6-3f6c-bc57-d95f-3010749b53de@owenh.net>
-Date: Tue, 20 Sep 2022 01:15:25 -0500
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7968D10E15C;
+ Tue, 20 Sep 2022 10:42:06 +0000 (UTC)
+Received: by mail-ej1-x62e.google.com with SMTP id u9so5113888ejy.5;
+ Tue, 20 Sep 2022 03:42:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:sender:from:to:cc:subject:date;
+ bh=uuydgXOSSksfr9Wyq7NKGaPAiF6c3Reu1UAxFxmEiTQ=;
+ b=X4DfW+U+f0cZYYYqTcRT72yreLfwGmRHWSB++4/8buUAuPgoP6yq/yT+uUKlHoIzsM
+ en3a/qzodvYR4u+LZX3AThvtnHGZAEpRaQrdZyi5FzVCetBjBSQ/hlxABmLmdqZlMhut
+ SQxYbg6dsrUiObFIOZnurBBxD0eksZBXWy2r+HnH3/fiVmK2zbwA0Xd1wztBrhuqJ+1R
+ yvk+jKdz9BnCEha10h7Gac34Z+I2bc+NhWhe15WTDM7YpDmaeQeDYuPI4SLl2dcFHA2q
+ PUCyyg1ZZPmgwP//6LTBjJsOSVVzp9cXBDeedh3KCFipRMpjIdlANC9YElnuskkHyvHV
+ XM4A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
+ :subject:date;
+ bh=uuydgXOSSksfr9Wyq7NKGaPAiF6c3Reu1UAxFxmEiTQ=;
+ b=2ML78lGqX0B7kwVQC8YhM4F3HrHOd2hvDVSmUfbDY8yKf6Pi3jffJ6cUMsLMcvCjVU
+ nnek+hH3BPC2F6JC7SHqldeGRZSFbKmtIENN4VY8WCdzBqrkwwJVuVuyrbSYl24m5W+M
+ TEf2OrFVrlc7wZiq3co7WrhZvQuPwBSY9bjE/+yUV4ARcD+kPLuKlyzTv+RtK0mOUmNO
+ SbMjTwMub1CXjN/ymqhgRqzz3ySwiUZXXFDepKsoCmK9clVHdrJiOfzOdQ2+NrsJzOKA
+ 8a6qFj1NZmkwhHukI4NIm+RGTwJq4OsmIgKc6LX2Kw0PpWaZVZLdDwLgpWrFXSEaHcFs
+ /sIQ==
+X-Gm-Message-State: ACrzQf0FMMafIKulFzpCEjRsfp77NYX6GP+Hp4RmfKCebIZAp9lPw7R5
+ H3yVm0Nt+ZaVRmNCdFMYp1s=
+X-Google-Smtp-Source: AMsMyM5M+QXEiRZTgdDrT2fyRm961CHm+K4bmMwaUe7vgkqriTlvJfhJvJG0blTD66q8ok8QlE3KKA==
+X-Received: by 2002:a17:907:2d2a:b0:77e:def7:65e9 with SMTP id
+ gs42-20020a1709072d2a00b0077edef765e9mr16196840ejc.85.1663670524165; 
+ Tue, 20 Sep 2022 03:42:04 -0700 (PDT)
+Received: from eldamar.lan (c-82-192-242-114.customer.ggaweb.ch.
+ [82.192.242.114]) by smtp.gmail.com with ESMTPSA id
+ q16-20020a1709060f9000b0077f15e98256sm606055ejj.203.2022.09.20.03.42.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Sep 2022 03:42:03 -0700 (PDT)
+Received: by eldamar.lan (Postfix, from userid 1000)
+ id 0B006BE356D; Tue, 20 Sep 2022 12:42:03 +0200 (CEST)
+Date: Tue, 20 Sep 2022 12:42:03 +0200
+From: Salvatore Bonaccorso <carnil@debian.org>
+To: Karol Herbst <kherbst@redhat.com>
+Message-ID: <YymY+3+C2aI7T3GU@eldamar.lan>
+References: <20220819200928.401416-1-kherbst@redhat.com>
 MIME-Version: 1.0
-Content-Language: en-US
-From: "Owen T. Heisler" <writer@owenh.net>
-To: nouveau@lists.freedesktop.org
-References: <615912a3d56e4330923d9b42802e8b09@di.ku.dk>
- <39dfb25d-2eff-23da-ada2-7d5de1f14861@owenh.net>
- <56ad0ca76d2942b8ab2ebe4f212b771d@di.ku.dk>
- <967f752c-3508-1151-d245-44f83c372826@owenh.net>
-In-Reply-To: <967f752c-3508-1151-d245-44f83c372826@owenh.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] Patch to TroubleShooting.html
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220819200928.401416-1-kherbst@redhat.com>
+Subject: Re: [Nouveau] [PATCH] nouveau: explicitly wait on the fence in
+ nouveau_bo_move_m2mf
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,27 +72,57 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2022-09-08 00:08, Owen T. Heisler wrote:
-> You could open a new issue for the wiki (registration required) here:
+Hi,
+
+On Fri, Aug 19, 2022 at 10:09:28PM +0200, Karol Herbst wrote:
+> It is a bit unlcear to us why that's helping, but it does and unbreaks
+> suspend/resume on a lot of GPUs without any known drawbacks.
 > 
-> https://gitlab.freedesktop.org/nouveau/wiki/-/issues/new
+> Cc: stable@vger.kernel.org # v5.15+
+> Closes: https://gitlab.freedesktop.org/drm/nouveau/-/issues/156
+> Signed-off-by: Karol Herbst <kherbst@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_bo.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
 > 
-> Or I can open an issue for you, using the body of your original message.
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> index 35bb0bb3fe61..126b3c6e12f9 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> @@ -822,6 +822,15 @@ nouveau_bo_move_m2mf(struct ttm_buffer_object *bo, int evict,
+>  		if (ret == 0) {
+>  			ret = nouveau_fence_new(chan, false, &fence);
+>  			if (ret == 0) {
+> +				/* TODO: figure out a better solution here
+> +				 *
+> +				 * wait on the fence here explicitly as going through
+> +				 * ttm_bo_move_accel_cleanup somehow doesn't seem to do it.
+> +				 *
+> +				 * Without this the operation can timeout and we'll fallback to a
+> +				 * software copy, which might take several minutes to finish.
+> +				 */
+> +				nouveau_fence_wait(fence, false, false);
+>  				ret = ttm_bo_move_accel_cleanup(bo,
+>  								&fence->base,
+>  								evict, false,
+> -- 
+> 2.37.1
+> 
+> 
 
+While this is marked for 5.15+ only, a user in Debian was seeing the
+suspend issue as well on 5.10.y and did confirm the commit fixes the
+issue as well in the 5.10.y series:
 
-Hi Klaus,
+https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=989705#69
 
-I opened an issue and merge request with your suggested change. See 
-<https://gitlab.freedesktop.org/nouveau/wiki/-/issues/12> and 
-<https://gitlab.freedesktop.org/nouveau/wiki/-/merge_requests/25>.
+Karol, Lyude, should that as well be picked for 5.10.y?
 
-You can preview the change at 
-<https://owenh.pages.freedesktop.org/-/nouveau-wiki/-/jobs/28612539/artifacts/public/TroubleShooting.html#kernelmodesettingorxsetsabadornon-nativedisplaymode>.
-
-If anyone can review this change, please do.
-
-Thanks,
-Owen
+Regards,
+Salvatore
