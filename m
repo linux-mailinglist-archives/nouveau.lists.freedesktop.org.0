@@ -2,86 +2,80 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90CF45BEF18
-	for <lists+nouveau@lfdr.de>; Tue, 20 Sep 2022 23:24:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E67135BFF7C
+	for <lists+nouveau@lfdr.de>; Wed, 21 Sep 2022 16:03:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0635110E797;
-	Tue, 20 Sep 2022 21:24:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6476810E96A;
+	Wed, 21 Sep 2022 14:03:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4DD4C10ECBF
- for <nouveau@lists.freedesktop.org>; Fri, 16 Sep 2022 11:51:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1663329103;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=bU7kCXLJSgLZrxOeLHX/KqgOsD8qkxHVpVMYeFKVWKA=;
- b=UKdsOL/Fh7D1f2/9TV4SYLgGzLVU6zXEViAmoGpMELILhqGQeJ6UfSaeGxqhp68NHcX3Gc
- 31t9UZdxJ5omcXs/ertGhOBdszv5l6NRrOn7+HqSYVXSwCa6d4NyCBUSl4vUARSFlZo1RG
- LAQCF4VH0W74hqEnM2yIjUBTPgdcFUg=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-176-3RsspqFsPvGgMe-yQ_f4mw-1; Fri, 16 Sep 2022 07:51:42 -0400
-X-MC-Unique: 3RsspqFsPvGgMe-yQ_f4mw-1
-Received: by mail-wm1-f69.google.com with SMTP id
- c5-20020a7bc005000000b003a63a3570f2so7648898wmb.8
- for <nouveau@lists.freedesktop.org>; Fri, 16 Sep 2022 04:51:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date;
- bh=bU7kCXLJSgLZrxOeLHX/KqgOsD8qkxHVpVMYeFKVWKA=;
- b=rOU1EDZQ47UZYHKBzS9HOk/Ga1yrPTWfqBZjKvTtNYUcCA4rrKpp95duWU/Len1xUY
- 588B4rD/+jAc39QUd4zEpsnah+IIku2m+4QdS2zg6cnL8Q+9ezbZTco2itAcmAtW4nWK
- Tb6hV2eh7IjkrFwijRcHxj0oyH2I+9+eIXQHteOyiZpjAxfnyWyCgsrVOR0CzCRnCKAu
- 5f3sDUt59ApXrQP1E90F/83T/Vi8Ll6JGExsL6uBwJPWfWetHtepAAKf3k9p5gfAYTHt
- YwgW63umcrwFtsDr2Tos7MKcA7dJPQEuxEmP0OR4n4ny/Rzu/+4Pyd8yauLSM/JH/V/E
- 8gnQ==
-X-Gm-Message-State: ACrzQf3qeSB9Hp1I5cVspnfJibvFGmpWctS6srE3Td6RV1fTBbr5Esig
- 6oYJMK1Z8TI9CUzM3BjeSH1gjUlQuVHM6IuTuql7cF4SEfvU/Lp7Yux1el8zkrbQsr6EkeJVF2C
- CQmp3qXu+e63AeoZ+ISeL1Kfr4w==
-X-Received: by 2002:a05:600c:1e24:b0:3b4:6c1e:8bb7 with SMTP id
- ay36-20020a05600c1e2400b003b46c1e8bb7mr3211910wmb.1.1663329101264; 
- Fri, 16 Sep 2022 04:51:41 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM7aRBJ75LlLwOGHdB7wI38p8BMKPnM0FH/WgnmHmp9FOfuZcOJAWAz1q0E6oPTsuUXGYrcnbg==
-X-Received: by 2002:a05:600c:1e24:b0:3b4:6c1e:8bb7 with SMTP id
- ay36-20020a05600c1e2400b003b46c1e8bb7mr3211892wmb.1.1663329101076; 
- Fri, 16 Sep 2022 04:51:41 -0700 (PDT)
-Received: from [192.168.1.130] (205.pool92-176-231.dynamic.orange.es.
- [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
- n1-20020a1c2701000000b003b3307fb98fsm1973286wmn.24.2022.09.16.04.51.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Sep 2022 04:51:40 -0700 (PDT)
-Message-ID: <1bc734be-91e8-9845-66a0-d693d62c9297@redhat.com>
-Date: Fri, 16 Sep 2022 13:51:39 +0200
+Received: from new1-smtp.messagingengine.com (new1-smtp.messagingengine.com
+ [66.111.4.221])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0F6BB10E46A;
+ Wed, 21 Sep 2022 14:03:33 +0000 (UTC)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailnew.nyi.internal (Postfix) with ESMTP id B35C3581D3E;
+ Wed, 21 Sep 2022 10:03:30 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute4.internal (MEProxy); Wed, 21 Sep 2022 10:03:30 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
+ :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to; s=fm2; t=1663769010; x=1663776210; bh=SjCV1aL+n8
+ mn4MalH4ZLXgXlFA2w5RWP6Yn0pmJfmvo=; b=f34NjqNDiMXQlvOtdR+IEK/N60
+ M8qCLSQ1LNbCdB8Kg0iWuG8e6JMGZAws9tXdbB/hfBTKuJzqox3UQ3PKSWcng5im
+ LyjQtwLbEyDfzqt8b8RPOm1EjECy98daoKd9HmvCFtaKlRGxZbNU2nlvxydTdXDm
+ k/elnCmCxGYV5BcOjqP58PAHQIJ/vP/xX0GAb560tuw0hAE7gTJ0OHQP3PfwdBl5
+ IGxGH5nyCYAY0+Nb8Zv+XfCzbGT+/zx8mlkfIXvG50ILvs0spro1yVtet1ETHxGc
+ hS0vaRMPf+M+1KiVR6KWrqtE+jgrHJIvU/2B+paJ9AJqGCbSEaZMeSDCgRDw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
+ :feedback-id:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:sender:subject:subject:to:to
+ :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; t=1663769010; x=1663776210; bh=SjCV1aL+n8mn4MalH4ZLXgXlFA2w
+ 5RWP6Yn0pmJfmvo=; b=0+pEkgbdgqPT7ximSdQZLog67+grue8Hi6koY6gk8/U8
+ fCrktc1/JQNviSaxMUEdSAQnSf/HndJbgnH5QXZ0rOunwYbjeYB15JGbvxWmxvGg
+ VjAxwEaJd7b5Qw1ijt1cJjKKnb9K/VJLdXnSdLrNV3O1Dbq5xoe5LqdliA/w6UiX
+ pcHWQXjQTz6D1Wd1C10ma63C/DBdp6aZ1XW7Qi1q9sIoS6hKzxRXIZCC9EOtt+rY
+ fe000jaaNNkQQMwdjb+ohHvKIJ1s4VFcJsPUYqSygaqncCDjAyaBlCMAGO/Rsdm/
+ Tw72vi5wtdGIjONUed4cVTX0N5bCqGp5QsHJ/zQnuw==
+X-ME-Sender: <xms:sBkrY3Zc2mmCQZ3F3STmdk-hWC79v--7_MlCdg57msasm3hrnKj6Gg>
+ <xme:sBkrY2Z-yRmrAmBFpOOeX8m4FJjz3LzjVQ_jk7yv0esDt84iQVVPOHj19Sk_PDzQJ
+ cMShLmFklZda1FEzKE>
+X-ME-Received: <xmr:sBkrY5_NwvOKk7lJMPBMaCjJSkOMm3qbytB9pxoVtJWqUDrFlIV8W-saGe0>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeefuddgjedvucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
+ mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
+ htthgvrhhnpeevuddthffgfeeiffejgfeghfeludegkedtgefgffejtdegtddvleduvdfh
+ teehveenucffohhmrghinhepghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivg
+ eptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegtvghrnhhordhtvggt
+ hh
+X-ME-Proxy: <xmx:sBkrY9rSJYSj8MuT99VnZo31roZHnay2y67VJzgcjetJ7tspID5EIQ>
+ <xmx:sBkrYypnxugNjzejH0MRV8gb-0_g-eWne_PJrQcIIbnNd6CpSXEHhg>
+ <xmx:sBkrYzRFyGQSlCHebOYmVx5k5a8GwAMUV6CAiictE0goKTb_gJD20g>
+ <xmx:shkrY6GJGnVQrhQG_9cv0ekwJ1qgNXTe0U_zdr_SwRKKPt4rxbuA9w>
+Feedback-ID: i8771445c:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 21 Sep 2022 10:03:27 -0400 (EDT)
+Date: Wed, 21 Sep 2022 16:03:24 +0200
+From: Maxime Ripard <maxime@cerno.tech>
+To: Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
+Message-ID: <20220921140324.sbeadfr7kz4avqcr@houat>
+References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
+ <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
+ <020d44e6-884b-a817-8265-3461638cac71@tronnes.org>
+ <20220905145729.ln675jko3aw6sgzs@houat>
+ <965de5c0-bc6a-7210-c946-b916ae2219fc@i2se.com>
+ <eb06337b-d501-3ca7-0e50-eda3aec75683@tronnes.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.0
-To: Thomas Zimmermann <tzimmermann@suse.de>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
- daniel@ffwll.ch, bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com,
- laurent.pinchart@ideasonboard.com, kieran.bingham+renesas@ideasonboard.com,
- jyri.sarha@iki.fi, tomba@kernel.org, sam@ravnborg.org
-References: <20220909105947.6487-1-tzimmermann@suse.de>
- <20220909105947.6487-3-tzimmermann@suse.de>
- <7080a54e-9e0d-93f4-ecba-150d3af03226@redhat.com>
- <7013378e-9434-d6c6-b777-67af945cb0f8@suse.de>
-From: Javier Martinez Canillas <javierm@redhat.com>
-In-Reply-To: <7013378e-9434-d6c6-b777-67af945cb0f8@suse.de>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Tue, 20 Sep 2022 21:24:04 +0000
-Subject: Re: [Nouveau] [PATCH 2/4] drm/plane: Allocate planes with
- drm_universal_plane_alloc()
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6coko5gqdpzknuh6"
+Content-Disposition: inline
+In-Reply-To: <eb06337b-d501-3ca7-0e50-eda3aec75683@tronnes.org>
+Subject: Re: [Nouveau] [PATCH v2 00/41] drm: Analog TV Improvements
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,57 +87,160 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-renesas-soc@vger.kernel.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
+ Stefan Wahren <stefan.wahren@i2se.com>, Emma Anholt <emma@anholt.net>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ linux-arm-kernel@lists.infradead.org,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 9/16/22 13:41, Thomas Zimmermann wrote:
 
-[...]
+--6coko5gqdpzknuh6
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->>
->>> + * @dev: DRM device
->>> + * @type: the type of the struct which contains struct &drm_plane
->>> + * @member: the name of the &drm_plane within @type
->>> + * @possible_crtcs: bitmask of possible CRTCs
->>> + * @funcs: callbacks for the new plane
->>> + * @formats: array of supported formats (DRM_FORMAT\_\*)
->>> + * @format_count: number of elements in @formats
->>> + * @format_modifiers: array of struct drm_format modifiers terminated by
->>> + *                    DRM_FORMAT_MOD_INVALID
->>> + * @plane_type: type of plane (overlay, primary, cursor)
->>> + * @name: printf style format string for the plane name, or NULL for default name
->>> + *
->>> + * Allocates and initializes a plane object of type @type. The caller
->>> + * is responsible for releasing the allocated memory with kfree().
->>> + *
->>
->> I thought that all the drmm_*_alloc() managed interfaces should use the
->> drmm_k{z,m}alloc() helpers, so that the memory is automatically freed
->> on the last drm_dev_put() call ?
-> 
-> For new drivers, managed cleanup is preferred. But this is an existing 
-> unmanaged cleanup.
-> 
-> I don't know if drmm_ changes the semantics in unexpected ways (well, 
-> probably not). With managed memory releases, I was worried that plane 
-> memory might stay around longer than expected. And we'd have to fix the 
-> plane-destroy function in each user as well.
-> 
-> Adding the existing code as a new function is the trivial solution and 
-> allows to address each driver individually. Also see my reply to 
-> Laurent's question on that topic.
->
+On Wed, Sep 07, 2022 at 06:44:53PM +0200, Noralf Tr=F8nnes wrote:
+>=20
+>=20
+> Den 07.09.2022 12.36, skrev Stefan Wahren:
+> > Hi Maxime,
+> >=20
+> > Am 05.09.22 um 16:57 schrieb Maxime Ripard:
+> >> On Fri, Sep 02, 2022 at 01:28:16PM +0200, Noralf Tr=F8nnes wrote:
+> >>>
+> >>> Den 01.09.2022 21.35, skrev Noralf Tr=F8nnes:
+> >>>>
+> >>>> I have finally found a workaround for my kernel hangs.
+> >>>>
+> >>>> Dom had a look at my kernel and found that the VideoCore was fine, a=
+nd
+> >>>> he said this:
+> >>>>
+> >>>>> That suggests cause of lockup was on arm side rather than VC side.
+> >>>>>
+> >>>>> But it's hard to diagnose further. Once you've had a peripheral not
+> >>>>> respond, the AXI bus locks up and no further operations are possibl=
+e.
+> >>>>> Usual causes of this are required clocks being stopped or domains
+> >>>>> disabled and then trying to access the hardware.
+> >>>>>
+> >>>> So when I got this on my 64-bit build:
+> >>>>
+> >>>> [=A0 166.702171] SError Interrupt on CPU1, code 0x00000000bf000002 --
+> >>>> SError
+> >>>> [=A0 166.702187] CPU: 1 PID: 8 Comm: kworker/u8:0 Tainted: G=A0=A0=
+=A0=A0=A0=A0=A0 W
+> >>>> =A0=A0=A0=A0 5.19.0-rc6-00096-gba7973977976-dirty #1
+> >>>> [=A0 166.702200] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
+> >>>> [=A0 166.702206] Workqueue: events_freezable_power_
+> >>>> thermal_zone_device_check
+> >>>> [=A0 166.702231] pstate: 200000c5 (nzCv daIF -PAN -UAO -TCO -DIT -SS=
+BS
+> >>>> BTYPE=3D--)
+> >>>> [=A0 166.702242] pc : regmap_mmio_read32le+0x10/0x28
+> >>>> [=A0 166.702261] lr : regmap_mmio_read+0x44/0x70
+> >>>> ...
+> >>>> [=A0 166.702606]=A0 bcm2711_get_temp+0x58/0xb0 [bcm2711_thermal]
+> >>>>
+> >>>> I wondered if that reg read was stalled due to a clock being stopped.
+> >>>>
+> >>>> Lo and behold, disabling runtime pm and keeping the vec clock running
+> >>>> all the time fixed it[1].
+> >>>>
+> >>>> I don't know what the problem is, but at least I can now test this
+> >>>> patchset.
+> >>>>
+> >>>> [1] https://gist.github.com/notro/23b984e7fa05cfbda2db50a421cac065
+> >>>>
+> >>> It turns out I didn't have to disable runtime pm:
+> >>> https://gist.github.com/notro/0adcfcb12460b54e54458afe11dc8ea2
+> >> If the bcm2711_thermal IP needs that clock to be enabled, it should gr=
+ab
+> >> a reference itself, but it looks like even the device tree binding
+> >> doesn't ask for one.
+> > The missing clock in the device tree binding is expected, because
+> > despite of the code there is not much information about the BCM2711
+> > clock tree. But i'm skeptical that the AVS IP actually needs the VEC
+> > clock, i think it's more likely that the VEC clock parent is changed and
+> > that cause this issue. I could take care of the bcm2711 binding & driver
+> > if i know which clock is really necessary.
+>=20
+> Seems you're right, keeping the parent always enabled is enough:
+>=20
+> 	clk_prepare_enable(clk_get_parent(vec->clock)); // pllc_per
+>=20
+> I tried enabling just the grandparent clock as well, but that didn't help.
 
-Ah, never mind. I misread the function name definition and thought that
-you had a drmm_ suffix but, now on second read I see that is only drm_
-so just ignore my comment about using managed memory alloc / release.
+Yeah, adding tracing to the clock framework shows that it indeed
+disables PLLC_PER. So there's probably some other device that depends on
+it but doesn't take a reference to it.
 
--- 
-Best regards,
+I had a look, but it's not really obvious what that might be.
 
-Javier Martinez Canillas
-Core Platforms
-Red Hat
+This patch makes sure that the PLL*_PER are never disabled, could you
+test it? It seems to work for me.
 
+
+diff --git a/drivers/clk/bcm/clk-bcm2835.c b/drivers/clk/bcm/clk-bcm2835.c
+index 48a1eb9f2d55..3839261ee419 100644
+--- a/drivers/clk/bcm/clk-bcm2835.c
++++ b/drivers/clk/bcm/clk-bcm2835.c
+@@ -1675,7 +1675,7 @@ static const struct bcm2835_clk_desc clk_desc_array[]=
+ =3D {
+ 		.load_mask =3D CM_PLLA_LOADPER,
+ 		.hold_mask =3D CM_PLLA_HOLDPER,
+ 		.fixed_divider =3D 1,
+-		.flags =3D CLK_SET_RATE_PARENT),
++		.flags =3D CLK_IS_CRITICAL | CLK_SET_RATE_PARENT),
+ 	[BCM2835_PLLA_DSI0]	=3D REGISTER_PLL_DIV(
+ 		SOC_ALL,
+ 		.name =3D "plla_dsi0",
+@@ -1784,7 +1784,7 @@ static const struct bcm2835_clk_desc clk_desc_array[]=
+ =3D {
+ 		.load_mask =3D CM_PLLC_LOADPER,
+ 		.hold_mask =3D CM_PLLC_HOLDPER,
+ 		.fixed_divider =3D 1,
+-		.flags =3D CLK_SET_RATE_PARENT),
++		.flags =3D CLK_IS_CRITICAL | CLK_SET_RATE_PARENT),
+
+ 	/*
+ 	 * PLLD is the display PLL, used to drive DSI display panels.
+@@ -1891,7 +1891,7 @@ static const struct bcm2835_clk_desc clk_desc_array[]=
+ =3D {
+ 		.load_mask =3D CM_PLLH_LOADAUX,
+ 		.hold_mask =3D 0,
+ 		.fixed_divider =3D 1,
+-		.flags =3D CLK_SET_RATE_PARENT),
++		.flags =3D CLK_IS_CRITICAL | CLK_SET_RATE_PARENT),
+ 	[BCM2835_PLLH_PIX]	=3D REGISTER_PLL_DIV(
+ 		SOC_BCM2835,
+ 		.name =3D "pllh_pix",
+
+
+Maxime
+
+--6coko5gqdpzknuh6
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYysZrAAKCRDj7w1vZxhR
+xYouAQCzedVE8SevoxP631JtGSdk1hKiDSM7W5u5fI6bk8XEbwEAiGbnl7UDk3zF
+vgobikzXCdP494qgxQLaLW/GmvhxFAQ=
+=/MQ7
+-----END PGP SIGNATURE-----
+
+--6coko5gqdpzknuh6--
