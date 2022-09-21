@@ -2,80 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E67135BFF7C
-	for <lists+nouveau@lfdr.de>; Wed, 21 Sep 2022 16:03:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BDAAA5BFFDC
+	for <lists+nouveau@lfdr.de>; Wed, 21 Sep 2022 16:26:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6476810E96A;
-	Wed, 21 Sep 2022 14:03:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 359FA10E99A;
+	Wed, 21 Sep 2022 14:26:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from new1-smtp.messagingengine.com (new1-smtp.messagingengine.com
  [66.111.4.221])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0F6BB10E46A;
- Wed, 21 Sep 2022 14:03:33 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8718810E986;
+ Wed, 21 Sep 2022 14:26:36 +0000 (UTC)
 Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailnew.nyi.internal (Postfix) with ESMTP id B35C3581D3E;
- Wed, 21 Sep 2022 10:03:30 -0400 (EDT)
+ by mailnew.nyi.internal (Postfix) with ESMTP id DBB21580161;
+ Wed, 21 Sep 2022 10:26:35 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Wed, 21 Sep 2022 10:03:30 -0400
+ by compute4.internal (MEProxy); Wed, 21 Sep 2022 10:26:35 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
  :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1663769010; x=1663776210; bh=SjCV1aL+n8
- mn4MalH4ZLXgXlFA2w5RWP6Yn0pmJfmvo=; b=f34NjqNDiMXQlvOtdR+IEK/N60
- M8qCLSQ1LNbCdB8Kg0iWuG8e6JMGZAws9tXdbB/hfBTKuJzqox3UQ3PKSWcng5im
- LyjQtwLbEyDfzqt8b8RPOm1EjECy98daoKd9HmvCFtaKlRGxZbNU2nlvxydTdXDm
- k/elnCmCxGYV5BcOjqP58PAHQIJ/vP/xX0GAb560tuw0hAE7gTJ0OHQP3PfwdBl5
- IGxGH5nyCYAY0+Nb8Zv+XfCzbGT+/zx8mlkfIXvG50ILvs0spro1yVtet1ETHxGc
- hS0vaRMPf+M+1KiVR6KWrqtE+jgrHJIvU/2B+paJ9AJqGCbSEaZMeSDCgRDw==
+ :subject:to:to; s=fm2; t=1663770395; x=1663777595; bh=XChTmHpAeE
+ 5M9c5np/GRs73V9CNgry5h5aIpGIs+YS8=; b=cjkhT//iZYy++krKE5xY9gEZsg
+ dkNBF36nGCgq126inEPJ0N+tmoZyWwOJxw+KrWj3agesR/gXzNpyv8ZxejZaWuJW
+ g5ElUE0ltUEv51f/HHD3+zNv5QD6GGKXkFK3vgXVxOVsGT96Msf199nS2lLEqDKk
+ Zhmdnd2UmyoyXjkdxCENrjBJ2jKJS/xM9Z5KVRiWejn0MkybCLklDYUO5MrBYKfZ
+ UHe6h/lDeoW5KDc0iEeUDP9u5EdgLs7Vyr+2BeYMyUM6EYDWbHDw2y/Xut0SJbUw
+ JjU7Xsq/7MUMbskPrygrfWjpJPOZYAQIgWmGb0s1d+VBO7+r6wCP9BEB1AGw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
  :feedback-id:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:sender:subject:subject:to:to
  :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1663769010; x=1663776210; bh=SjCV1aL+n8mn4MalH4ZLXgXlFA2w
- 5RWP6Yn0pmJfmvo=; b=0+pEkgbdgqPT7ximSdQZLog67+grue8Hi6koY6gk8/U8
- fCrktc1/JQNviSaxMUEdSAQnSf/HndJbgnH5QXZ0rOunwYbjeYB15JGbvxWmxvGg
- VjAxwEaJd7b5Qw1ijt1cJjKKnb9K/VJLdXnSdLrNV3O1Dbq5xoe5LqdliA/w6UiX
- pcHWQXjQTz6D1Wd1C10ma63C/DBdp6aZ1XW7Qi1q9sIoS6hKzxRXIZCC9EOtt+rY
- fe000jaaNNkQQMwdjb+ohHvKIJ1s4VFcJsPUYqSygaqncCDjAyaBlCMAGO/Rsdm/
- Tw72vi5wtdGIjONUed4cVTX0N5bCqGp5QsHJ/zQnuw==
-X-ME-Sender: <xms:sBkrY3Zc2mmCQZ3F3STmdk-hWC79v--7_MlCdg57msasm3hrnKj6Gg>
- <xme:sBkrY2Z-yRmrAmBFpOOeX8m4FJjz3LzjVQ_jk7yv0esDt84iQVVPOHj19Sk_PDzQJ
- cMShLmFklZda1FEzKE>
-X-ME-Received: <xmr:sBkrY5_NwvOKk7lJMPBMaCjJSkOMm3qbytB9pxoVtJWqUDrFlIV8W-saGe0>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeefuddgjedvucetufdoteggodetrfdotf
+ fm2; t=1663770395; x=1663777595; bh=XChTmHpAeE5M9c5np/GRs73V9CNg
+ ry5h5aIpGIs+YS8=; b=vGVr0XpHhcoe0eDF2NLj1oLwQ98S5Tu62DUYBY1smZYS
+ m5Gj6M2/cpxVMI94QKptQUGjmuVCsPctMuORNbPiThj2earsmcCGzmydLWpX+K1s
+ aC5puJdy1uCIauJihvofHDmgQvIf+kYcBYnvQocPw2s/aDxflIDh55AymQOxtzdB
+ +SHRYtfMp0JWFWL3SM3FB5x7ETh52ytToWTTfZFP2sw3YhlUlO1CAxrnNW/M7OmI
+ hr5qb73094dLk39loyQHDJ63zrpGMdomgMbNtCCgRphZgAto5yQjElm3JM+YbupI
+ LZ0XeJfVs3gXXm7zgmWpdI5mPOKDjl0iAKCothPbFg==
+X-ME-Sender: <xms:Gx8rY5zc6S-07LyRNNl3T2dn21T4aofE4myVdSepDzCOYbKFMzNcgg>
+ <xme:Gx8rY5QyjXLI6W_Np2Dp9zKBOpTUjUqLmWLqLBVBc0dd_rkS7BVdzthgTMK0s1nO7
+ m9gIuLtrrNo2GH97vU>
+X-ME-Received: <xmr:Gx8rYzXZX5EkUJhPwWHKxSFnt6nRZa6gwILHo3Vt9nTYBdPoRBUaNhkfq1A>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeefuddgjeeiucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
+ cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
  mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeevuddthffgfeeiffejgfeghfeludegkedtgefgffejtdegtddvleduvdfh
- teehveenucffohhmrghinhepghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivg
- eptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegtvghrnhhordhtvggt
- hh
-X-ME-Proxy: <xmx:sBkrY9rSJYSj8MuT99VnZo31roZHnay2y67VJzgcjetJ7tspID5EIQ>
- <xmx:sBkrYypnxugNjzejH0MRV8gb-0_g-eWne_PJrQcIIbnNd6CpSXEHhg>
- <xmx:sBkrYzRFyGQSlCHebOYmVx5k5a8GwAMUV6CAiictE0goKTb_gJD20g>
- <xmx:shkrY6GJGnVQrhQG_9cv0ekwJ1qgNXTe0U_zdr_SwRKKPt4rxbuA9w>
+ htthgvrhhnpeetfefffefgkedtfefgledugfdtjeefjedvtddtkeetieffjedvgfehheff
+ hfevudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+ hmrgigihhmvgestggvrhhnohdrthgvtghh
+X-ME-Proxy: <xmx:Gx8rY7iFtHqOIKygGJNJ5PWzDAnrkDB1y_Vo2b1mxNhupXMk72GRpA>
+ <xmx:Gx8rY7AD5IAq5KwdqbwtEnUKs21RqL9gQ0-AXE4YdI2KHCk-WmRBIg>
+ <xmx:Gx8rY0JOjEPxH3SWi4xIujyhLRXvKWNFnI4T3Hn9aNei9FRwuCv1hA>
+ <xmx:Gx8rY-Zh4TQS-qgwfPMAPuikjeHcF7psfWZdTv8JFlZKjYevIlifQw>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 21 Sep 2022 10:03:27 -0400 (EDT)
-Date: Wed, 21 Sep 2022 16:03:24 +0200
+ 21 Sep 2022 10:26:34 -0400 (EDT)
+Date: Wed, 21 Sep 2022 16:26:32 +0200
 From: Maxime Ripard <maxime@cerno.tech>
-To: Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
-Message-ID: <20220921140324.sbeadfr7kz4avqcr@houat>
+To: kFYatek <kfyatek@gmail.com>
+Message-ID: <20220921142632.4r5ua7hlb2znhwl2@houat>
 References: <20220728-rpi-analog-tv-properties-v2-0-459522d653a7@cerno.tech>
- <24e09a29-6d04-3b1e-63ce-cd3c31d350e2@tronnes.org>
- <020d44e6-884b-a817-8265-3461638cac71@tronnes.org>
- <20220905145729.ln675jko3aw6sgzs@houat>
- <965de5c0-bc6a-7210-c946-b916ae2219fc@i2se.com>
- <eb06337b-d501-3ca7-0e50-eda3aec75683@tronnes.org>
+ <20220728-rpi-analog-tv-properties-v2-10-459522d653a7@cerno.tech>
+ <242d272b-5b79-986c-9aaf-64e62f6b37ff@gmail.com>
+ <20220905133755.gcmmntg3wnecyqjq@houat>
+ <10ce686a-d7c8-9ce4-3979-735ad8eab3b5@gmail.com>
+ <20220907143421.4iopqwhp3yfircsh@houat>
+ <dc1d9499-d4d5-1032-f39f-d4ac4cbb8412@gmail.com>
+ <20220909140059.g57oihcmhuym62ei@houat>
+ <411ebe0f-f398-8e32-ad0e-b42732aa880f@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6coko5gqdpzknuh6"
+ protocol="application/pgp-signature"; boundary="w2pwivnclkct2aox"
 Content-Disposition: inline
-In-Reply-To: <eb06337b-d501-3ca7-0e50-eda3aec75683@tronnes.org>
-Subject: Re: [Nouveau] [PATCH v2 00/41] drm: Analog TV Improvements
+In-Reply-To: <411ebe0f-f398-8e32-ad0e-b42732aa880f@gmail.com>
+Subject: Re: [Nouveau] [PATCH v2 10/41] drm/modes: Add a function to
+ generate analog display modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,8 +93,7 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
  dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Stefan Wahren <stefan.wahren@i2se.com>, Emma Anholt <emma@anholt.net>,
- Samuel Holland <samuel@sholland.org>,
+ Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
  linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
@@ -101,146 +103,80 @@ Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
  Philipp Zabel <p.zabel@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---6coko5gqdpzknuh6
-Content-Type: text/plain; charset=iso-8859-1
+--w2pwivnclkct2aox
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 07, 2022 at 06:44:53PM +0200, Noralf Tr=F8nnes wrote:
+Hi,
+
+Thanks again for your help
+
+On Sun, Sep 11, 2022 at 06:30:39AM +0200, kFYatek wrote:
+> W dniu 9.09.2022 o 16:00, Maxime Ripard pisze:
+> > On Wed, Sep 07, 2022 at 11:31:21PM +0200, Mateusz Kwiatkowski wrote:
+> >> The "canonical" modelines (at least for vc4's VEC, see the notes below=
+):
+> >>
+> >> - (vfp=3D=3D4, vsync=3D=3D6, vbp=3D=3D39) for 576i
+> >> - (vfp=3D=3D7, vsync=3D=3D6, vbp=3D=3D32) for 480i
+> >> - (vfp=3D=3D5, vsync=3D=3D6, vbp=3D=3D28) for 486i (full frame NTSC as=
+ originally specified)
+> >
+> > It's not clear to me either how you come up with those timings?
 >=20
+> Well, experimentally ;)
 >=20
-> Den 07.09.2022 12.36, skrev Stefan Wahren:
-> > Hi Maxime,
-> >=20
-> > Am 05.09.22 um 16:57 schrieb Maxime Ripard:
-> >> On Fri, Sep 02, 2022 at 01:28:16PM +0200, Noralf Tr=F8nnes wrote:
-> >>>
-> >>> Den 01.09.2022 21.35, skrev Noralf Tr=F8nnes:
-> >>>>
-> >>>> I have finally found a workaround for my kernel hangs.
-> >>>>
-> >>>> Dom had a look at my kernel and found that the VideoCore was fine, a=
-nd
-> >>>> he said this:
-> >>>>
-> >>>>> That suggests cause of lockup was on arm side rather than VC side.
-> >>>>>
-> >>>>> But it's hard to diagnose further. Once you've had a peripheral not
-> >>>>> respond, the AXI bus locks up and no further operations are possibl=
-e.
-> >>>>> Usual causes of this are required clocks being stopped or domains
-> >>>>> disabled and then trying to access the hardware.
-> >>>>>
-> >>>> So when I got this on my 64-bit build:
-> >>>>
-> >>>> [=A0 166.702171] SError Interrupt on CPU1, code 0x00000000bf000002 --
-> >>>> SError
-> >>>> [=A0 166.702187] CPU: 1 PID: 8 Comm: kworker/u8:0 Tainted: G=A0=A0=
-=A0=A0=A0=A0=A0 W
-> >>>> =A0=A0=A0=A0 5.19.0-rc6-00096-gba7973977976-dirty #1
-> >>>> [=A0 166.702200] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
-> >>>> [=A0 166.702206] Workqueue: events_freezable_power_
-> >>>> thermal_zone_device_check
-> >>>> [=A0 166.702231] pstate: 200000c5 (nzCv daIF -PAN -UAO -TCO -DIT -SS=
-BS
-> >>>> BTYPE=3D--)
-> >>>> [=A0 166.702242] pc : regmap_mmio_read32le+0x10/0x28
-> >>>> [=A0 166.702261] lr : regmap_mmio_read+0x44/0x70
-> >>>> ...
-> >>>> [=A0 166.702606]=A0 bcm2711_get_temp+0x58/0xb0 [bcm2711_thermal]
-> >>>>
-> >>>> I wondered if that reg read was stalled due to a clock being stopped.
-> >>>>
-> >>>> Lo and behold, disabling runtime pm and keeping the vec clock running
-> >>>> all the time fixed it[1].
-> >>>>
-> >>>> I don't know what the problem is, but at least I can now test this
-> >>>> patchset.
-> >>>>
-> >>>> [1] https://gist.github.com/notro/23b984e7fa05cfbda2db50a421cac065
-> >>>>
-> >>> It turns out I didn't have to disable runtime pm:
-> >>> https://gist.github.com/notro/0adcfcb12460b54e54458afe11dc8ea2
-> >> If the bcm2711_thermal IP needs that clock to be enabled, it should gr=
-ab
-> >> a reference itself, but it looks like even the device tree binding
-> >> doesn't ask for one.
-> > The missing clock in the device tree binding is expected, because
-> > despite of the code there is not much information about the BCM2711
-> > clock tree. But i'm skeptical that the AVS IP actually needs the VEC
-> > clock, i think it's more likely that the VEC clock parent is changed and
-> > that cause this issue. I could take care of the bcm2711 binding & driver
-> > if i know which clock is really necessary.
+> The values for 480i and 576i are the values currently used by the downstr=
+eam
+> kernel, and those in turn has been copied from the firmware (or more prec=
+isely,
+> I chose them so that the PV registers end up the same as the values set b=
+y the
+> firmware).
 >=20
-> Seems you're right, keeping the parent always enabled is enough:
+> I also checked with an oscilloscope that the waveforms look as they shoul=
+d.
+> VEC doesn't exactly handle the half-lines at the start and end of the odd=
+ field
+> right, but otherwise, the blanking and sync pulses are where they should =
+be.
 >=20
-> 	clk_prepare_enable(clk_get_parent(vec->clock)); // pllc_per
+> The 486i values has been constructed from the 480i ones according to the
+> calculations from cross-referencing SMPTE documents, see my previous e-ma=
+il.
 >=20
-> I tried enabling just the grandparent clock as well, but that didn't help.
+> I know this is perhaps unsatisfactory ;) I don't have access to the VC4
+> documentation, so this was _almost_ reverse engineering for me.
 
-Yeah, adding tracing to the clock framework shows that it indeed
-disables PLLC_PER. So there's probably some other device that depends on
-it but doesn't take a reference to it.
+It's not really that it's unsatisfactory, but the function here is
+supposed to be generic and thus generate a mode that is supposed to be a
+somewhat reasonable for a given set of parameters.
 
-I had a look, but it's not really obvious what that might be.
+If the vc4 driver needs some adjustments, then it needs to be out of
+that function and into the vc4 driver. And this is pretty much what I
+struggle with: I have a hard time (on top of everything else) figuring
+out what is supposed to be specific to vc4, and what isn't.
 
-This patch makes sure that the PLL*_PER are never disabled, could you
-test it? It seems to work for me.
-
-
-diff --git a/drivers/clk/bcm/clk-bcm2835.c b/drivers/clk/bcm/clk-bcm2835.c
-index 48a1eb9f2d55..3839261ee419 100644
---- a/drivers/clk/bcm/clk-bcm2835.c
-+++ b/drivers/clk/bcm/clk-bcm2835.c
-@@ -1675,7 +1675,7 @@ static const struct bcm2835_clk_desc clk_desc_array[]=
- =3D {
- 		.load_mask =3D CM_PLLA_LOADPER,
- 		.hold_mask =3D CM_PLLA_HOLDPER,
- 		.fixed_divider =3D 1,
--		.flags =3D CLK_SET_RATE_PARENT),
-+		.flags =3D CLK_IS_CRITICAL | CLK_SET_RATE_PARENT),
- 	[BCM2835_PLLA_DSI0]	=3D REGISTER_PLL_DIV(
- 		SOC_ALL,
- 		.name =3D "plla_dsi0",
-@@ -1784,7 +1784,7 @@ static const struct bcm2835_clk_desc clk_desc_array[]=
- =3D {
- 		.load_mask =3D CM_PLLC_LOADPER,
- 		.hold_mask =3D CM_PLLC_HOLDPER,
- 		.fixed_divider =3D 1,
--		.flags =3D CLK_SET_RATE_PARENT),
-+		.flags =3D CLK_IS_CRITICAL | CLK_SET_RATE_PARENT),
-
- 	/*
- 	 * PLLD is the display PLL, used to drive DSI display panels.
-@@ -1891,7 +1891,7 @@ static const struct bcm2835_clk_desc clk_desc_array[]=
- =3D {
- 		.load_mask =3D CM_PLLH_LOADAUX,
- 		.hold_mask =3D 0,
- 		.fixed_divider =3D 1,
--		.flags =3D CLK_SET_RATE_PARENT),
-+		.flags =3D CLK_IS_CRITICAL | CLK_SET_RATE_PARENT),
- 	[BCM2835_PLLH_PIX]	=3D REGISTER_PLL_DIV(
- 		SOC_BCM2835,
- 		.name =3D "pllh_pix",
-
-
+I guess your 480i example, since it follows the spec, is fine, but I'm
+not sure for 576i.
 Maxime
 
---6coko5gqdpzknuh6
+--w2pwivnclkct2aox
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYysZrAAKCRDj7w1vZxhR
-xYouAQCzedVE8SevoxP631JtGSdk1hKiDSM7W5u5fI6bk8XEbwEAiGbnl7UDk3zF
-vgobikzXCdP494qgxQLaLW/GmvhxFAQ=
-=/MQ7
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYysfGAAKCRDj7w1vZxhR
+xbiwAQDutVhiO12pDVyzStv7qufUZgUU/Gmhl8GpF5Q8FwaX7wD6A+IVCty0oNde
+HmrV2wLQgKOhGseektDM0vSrVjJjoQE=
+=GhKi
 -----END PGP SIGNATURE-----
 
---6coko5gqdpzknuh6--
+--w2pwivnclkct2aox--
