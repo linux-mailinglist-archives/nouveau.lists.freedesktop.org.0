@@ -1,78 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F9245E7931
-	for <lists+nouveau@lfdr.de>; Fri, 23 Sep 2022 13:14:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 403195E7A14
+	for <lists+nouveau@lfdr.de>; Fri, 23 Sep 2022 14:00:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E730610E88F;
-	Fri, 23 Sep 2022 11:14:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6866210E90E;
+	Fri, 23 Sep 2022 11:59:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from new2-smtp.messagingengine.com (new2-smtp.messagingengine.com
- [66.111.4.224])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A3A6310E84E;
- Fri, 23 Sep 2022 11:14:12 +0000 (UTC)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailnew.nyi.internal (Postfix) with ESMTP id EC446580219;
- Fri, 23 Sep 2022 07:14:09 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Fri, 23 Sep 2022 07:14:09 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1663931649; x=1663938849; bh=U8iCHLFAXA
- 03KunxPFzc62aKiSEd/kuLZlf3yHGCKvs=; b=KnfxfY7Xan2R/4k1btc8AOnQ76
- iapL04VVpwC3mc47Xy7W1ybrnD1B+GsvXIFtI8NCivc/3NvvFhKrGjyRSf8zqmBz
- h3oyGPndxWxRVfRDpUbc14sX5bSTJRat1pJNcdLKnFL5W5nTaYifVgElOvGp3KI+
- E9ax4ZkmVl6Z6BzFFIWjoZCeiSLc9HbAPr4f2xBDj7sW2WlZXAdybWq89LsngniV
- qDW59Qe5U4EnPdR3A+qAJI23fz97G00Jv7VBIbTDTaUawwJ0ohiBcYjqLlWgjgLf
- PnkoBElktz7rXP6uSVg98fzU5ETzORxC1FsOl1x+Qro/sgqAXssRV57flcgw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
- :feedback-id:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:sender:subject:subject:to:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1663931649; x=1663938849; bh=U8iCHLFAXA03KunxPFzc62aKiSEd
- /kuLZlf3yHGCKvs=; b=1GhdtXSmXpYbKvsFs9JbbeWnAKG2XGmX2scD84UrYBfi
- 5xsixll0/LQ9aZAnSFbrIUAh7jhK+uHTI2CUCZOfTgeCNwOKTg9k62U1eUCB2DBh
- kacuKD6ef9jZMedV6A7BDHPVujQQTga5+oQ/4ZNh3DZwP6OZvlR6gXGtRyU41V7t
- MoRZY8CdMqeG8L/U7N/B5MHYo7cFlxftdjPOjHJlb8wEaf3aprvkdwwO7Dcz4zEJ
- O6ybqeci288KeYjzCMFo1kPDOc0XickXrQo5fe1K9Jgh3uYx09LFELjFkvhhqBLp
- sc62E8aLibgzZhAMlGZX/8msotG7GTWkc7tjH8aPxg==
-X-ME-Sender: <xms:AJUtY2xa1bk34l1pHTeeFyZSFR8XYGpS7RdYpivk6bGt8sXGIUQKmQ>
- <xme:AJUtYySkmhrE-td8_OS9SiOXKFpmkp0d18bkdwfgU5peHQl4FZm0ZvHTCDN8hua2E
- mI-QBptmV0YNwLF6vE>
-X-ME-Received: <xmr:AJUtY4WT4MMS2L2fAvGxxlscWcbfOugjTcLumFJcpH419COuvEs87YYldelb79iSjqU6JfA-swpSmwhFHj6aBWiVOmXbhsZaa7c2>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeefiedgfeelucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
- mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeelueejheffvdetueeugfelteeigedtgfejvdfhffegjeehffekjeetgfef
- jeektdenucffohhmrghinhepkhhunhhithdruggvvhenucevlhhushhtvghrufhiiigvpe
- dtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:AJUtY8i5p8Q5oDGyONfpJLocht4JJhZ0PDzuusO_NVh92D0XYWzYkg>
- <xmx:AJUtY4CO91y_-5wYfQ_-_V8bkgJPZ0qEQKMUuAuLUEtpMSneTEqMhA>
- <xmx:AJUtY9JIVd5aB0BLzvgr8rgJ9V52lbKx4HlFqJY9XHgQKAaSKJSjng>
- <xmx:AZUtYzbsLKdxOqkUmwsdNIJnDd-kHhg8D6i48JoU6mPEj3lD_CN6Uw>
-Feedback-ID: i8771445c:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 23 Sep 2022 07:14:08 -0400 (EDT)
-Date: Fri, 23 Sep 2022 13:14:05 +0200
-From: Maxime Ripard <maxime@cerno.tech>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20220923111405.mnspcuiwfzxyxix6@houat>
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CD08510E8E2;
+ Fri, 23 Sep 2022 11:59:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1663934389; x=1695470389;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version;
+ bh=YaUg750lJnggz6KWmfaPEF4rvlW5TvJZSCMSaU800rA=;
+ b=bGKLUAv3RM4CScRs6oCBRHN7KODcnxOd2jUtFFqUv279OEUGdxLcDqM/
+ KZfDymiO9tWURARsrTmmx3vS/6JVko00U8VHF9WigBuryKp06FYuWJREg
+ kMlQFj9q2uoxMXvafgAubSRNZGbIzp/RBzK4BohtYHlRccI6XpcRCVPJZ
+ 8lSvbuD+UEVxCGvyQpxfKDit3N9mrUWl5mLib17gnm4PDGLEmSHtzqRUT
+ MMAPZGzVNNrmG1khXPFNu2VM+HgBRUsmZt1LD/931VQ2f7bRcXY7S92W/
+ pt/D4s3W1W9APQPbUq+jrSegZUucWtmEku9AckZDbeR9NdGHMGTTdSzTm Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10478"; a="386865705"
+X-IronPort-AV: E=Sophos;i="5.93,339,1654585200"; d="scan'208";a="386865705"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 23 Sep 2022 04:59:49 -0700
+X-IronPort-AV: E=Sophos;i="5.93,339,1654585200"; d="scan'208";a="865270599"
+Received: from armannov-mobl1.ger.corp.intel.com (HELO localhost)
+ ([10.252.61.93])
+ by fmsmga006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 23 Sep 2022 04:59:42 -0700
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: Maxime Ripard <maxime@cerno.tech>, Jernej Skrabec
+ <jernej.skrabec@gmail.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Ben
+ Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>, Maxime
+ Ripard <mripard@kernel.org>, Joonas Lahtinen
+ <joonas.lahtinen@linux.intel.com>, Emma Anholt <emma@anholt.net>, Karol
+ Herbst <kherbst@redhat.com>, Samuel Holland <samuel@sholland.org>, Thomas
+ Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Lyude
+ Paul <lyude@redhat.com>, Maarten Lankhorst
+ <maarten.lankhorst@linux.intel.com>, Tvrtko Ursulin
+ <tvrtko.ursulin@linux.intel.com>, Chen-Yu Tsai <wens@csie.org>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v2-13-f733a0ed9f90@cerno.tech>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
  <20220728-rpi-analog-tv-properties-v2-13-f733a0ed9f90@cerno.tech>
- <49ea7c7c-7d4c-8348-ea75-e0f376111e4c@suse.de>
- <b3c4ee65-fc56-f54c-3946-b6524fb36f72@redhat.com>
- <93969920-b5ed-ff15-48d4-02e2f9c23505@suse.de>
+Date: Fri, 23 Sep 2022 14:59:23 +0300
+Message-ID: <875yhe47z8.fsf@intel.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4cwm4b5gx3ebmiqr"
-Content-Disposition: inline
-In-Reply-To: <93969920-b5ed-ff15-48d4-02e2f9c23505@suse.de>
+Content-Type: text/plain
 Subject: Re: [Nouveau] [PATCH v2 13/33] drm/client: Add some tests for
  drm_connector_pick_cmdline_mode()
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -86,135 +66,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
+ Hans de Goede <hdegoede@redhat.com>,
  Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
- Daniel Vetter <daniel@ffwll.ch>
+ Geert Uytterhoeven <geert@linux-m68k.org>, Maxime Ripard <maxime@cerno.tech>,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Thu, 22 Sep 2022, Maxime Ripard <maxime@cerno.tech> wrote:
+> drm_connector_pick_cmdline_mode() is in charge of finding a proper
+> drm_display_mode from the definition we got in the video= command line
+> argument.
+>
+> Let's add some unit tests to make sure we're not getting any regressions
+> there.
+>
+> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+>
+> diff --git a/drivers/gpu/drm/drm_client_modeset.c b/drivers/gpu/drm/drm_client_modeset.c
+> index bbc535cc50dd..d553e793e673 100644
+> --- a/drivers/gpu/drm/drm_client_modeset.c
+> +++ b/drivers/gpu/drm/drm_client_modeset.c
+> @@ -1237,3 +1237,7 @@ int drm_client_modeset_dpms(struct drm_client_dev *client, int mode)
+>  	return ret;
+>  }
+>  EXPORT_SYMBOL(drm_client_modeset_dpms);
+> +
+> +#ifdef CONFIG_DRM_KUNIT_TEST
+> +#include "tests/drm_client_modeset_test.c"
+> +#endif
+> diff --git a/drivers/gpu/drm/tests/drm_client_modeset_test.c b/drivers/gpu/drm/tests/drm_client_modeset_test.c
+> new file mode 100644
+> index 000000000000..46335de7bc6b
+> --- /dev/null
+> +++ b/drivers/gpu/drm/tests/drm_client_modeset_test.c
 
---4cwm4b5gx3ebmiqr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+[snip]
 
-On Fri, Sep 23, 2022 at 12:30:09PM +0200, Thomas Zimmermann wrote:
-> Am 23.09.22 um 11:26 schrieb Javier Martinez Canillas:
-> > On 9/23/22 11:15, Thomas Zimmermann wrote:
-> > > Hi
-> > >=20
-> > > Am 22.09.22 um 16:25 schrieb Maxime Ripard:
-> > > > drm_connector_pick_cmdline_mode() is in charge of finding a proper
-> > > > drm_display_mode from the definition we got in the video=3D command=
- line
-> > > > argument.
-> > > >=20
-> > > > Let's add some unit tests to make sure we're not getting any regres=
-sions
-> > > > there.
-> > > >=20
-> > > > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> > > >=20
-> > > > diff --git a/drivers/gpu/drm/drm_client_modeset.c b/drivers/gpu/drm=
-/drm_client_modeset.c
-> > > > index bbc535cc50dd..d553e793e673 100644
-> > > > --- a/drivers/gpu/drm/drm_client_modeset.c
-> > > > +++ b/drivers/gpu/drm/drm_client_modeset.c
-> > > > @@ -1237,3 +1237,7 @@ int drm_client_modeset_dpms(struct drm_client=
-_dev *client, int mode)
-> > > >    	return ret;
-> > > >    }
-> > > >    EXPORT_SYMBOL(drm_client_modeset_dpms);
-> > > > +
-> > > > +#ifdef CONFIG_DRM_KUNIT_TEST
-> > > > +#include "tests/drm_client_modeset_test.c"
-> > > > +#endif
-> > >=20
-> > > I strongly dislike this style of including source files in each other.
-> > > It's a recipe for all kind of build errors. Can you do something else?
-> > >=20
-> >=20
-> > This seems to be the convention used to test static functions and what's
-> > documented in the Kunit docs: https://kunit.dev/third_party/kernel/docs=
-/tips.html#testing-static-functions
->=20
-> That document says "...one option is to conditionally #include the test
-> file...". This doesn't sound like a strong requirement.
+> +MODULE_AUTHOR("Maxime Ripard <mripard@kernel.org>");
+> +MODULE_LICENSE("GPL");
 
-No, but this is the only option documented, which still indicates a very
-strong preference.
+I think these annotations are incompatible with including the unit test,
+and, in this case, affect drm.ko.
 
-> > I agree with you that's not ideal but I think that consistency with how
-> > it is done by other subsystems is also important.
-> > > As the tested function is an internal interface, maybe export a wrapp=
-er
-> > > if tests are enabled, like this:
-> > >=20
-> > > #ifdef CONFIG_DRM_KUNIT_TEST
-> > > struct drm_display_mode *
-> > > drm_connector_pick_cmdline_mode_kunit(drm_conenctor)
-> > > {
-> > >     return drm_connector_pick_cmdline_mode(connector)
-> > > }
-> > > EXPORT_SYMBOL(drm_connector_pick_cmdline_mode_kunit)
-> > > #endif
-> > >=20
-> > > The wrapper's declaration can be located in the kunit test file.
+And we'll have two kinds of tests, those that get built via
+tests/Makefile, and those that get included, like this one, which should
+not be mentioned in tests/Makefile.
 
-And I'm afraid this just doesn't scale. If we start testing more and
-more static functions, do we really want to have that wrapper for each
-of them?
+BR,
+Jani.
 
-> > But that's also not nice since we are artificially exposing these only
-> > to allow the static functions to be called from unit tests. And would
-> > be a different approach than the one used by all other subsystems...
-> >=20
->=20
-> There's the problem of interference between the source files when building
-> the code. It's also not the same source code after including the test fil=
-e.
-> At a minimum, including the tests' source file further includes more file=
-s.
-> <kunit/tests.h> also includes quite a few of Linux header files.
->=20
-> IMHO the current convention (if any) is far from optimal and we should
-> consider breaking it.
-
-I mean... this is a discussion about theoretical issues. If there is
-indeed some regular build errors on this, then sure, we can change it.
-
-I'm confident that will affect pretty much every one using kunit equally
-though, so I'm fairly sure the documentation itself will have changed.
-
-But right now we're discussing an alternative because of a problem we
-never experienced. I don't see the point of breaking the consistency
-provided by the documentation for something not backed by any actual
-problem.
-
-Maxime
-
---4cwm4b5gx3ebmiqr
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYy2U/QAKCRDj7w1vZxhR
-xbjnAQDguqVberZj4t3P9J7J+oQg19WB9p14JwDj9eYuF79RiAEAjgZAHDUtrTKk
-vCbaI/ojPoO94K+YindeHthKWzTZrwo=
-=uI0t
------END PGP SIGNATURE-----
-
---4cwm4b5gx3ebmiqr--
+-- 
+Jani Nikula, Intel Open Source Graphics Center
