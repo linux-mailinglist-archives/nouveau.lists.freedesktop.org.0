@@ -2,57 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90FA25E9425
-	for <lists+nouveau@lfdr.de>; Sun, 25 Sep 2022 17:59:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA2765E96F3
+	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 01:40:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9A7CC10E1EE;
-	Sun, 25 Sep 2022 15:59:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3420E10E467;
+	Sun, 25 Sep 2022 23:39:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp.domeneshop.no (smtp.domeneshop.no
- [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7462F10E1E4;
- Sun, 25 Sep 2022 15:58:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
- ; s=ds202112;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sDUzqos38NTHKjqKIbjlgYCo7KMd6hyJQ5kwVtvn2uY=; b=aUOU3kpP1xZAGZ3dK/FPnPmN44
- IFB5fkqB+7/gDaDlxHDtUFNwExLm2Y82UixoykTgQQFV7UJ6zCaI0TRAb016BK+MWPxFKYT87rEuu
- A1bemkbLrV1sxM+2rSTYFVMhsHyHGsq8Rf5UKYL8o5L/v38Oko/QwO4yL+3vCtNEhQg8MU+JZMiPA
- EVy0sNCfGvxloaFKqVVe04oxeKvT4KDyGC/4SyyWNp2P84LU3a9mSkwuvbNZUIkVWdQ0IQJa+7xOQ
- D6+Uxr3m1gcVDNPJI6COfxOM261GO67oHOOTfGyHSXgD0+10bhAg/cDRWDQBl5062iEgkhFEBsL6J
- km1Dw7Vw==;
-Received: from [2a01:799:961:d200:f09d:f08a:eb68:87b1] (port=49636)
- by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1ocU1u-0001pc-49; Sun, 25 Sep 2022 17:58:54 +0200
-Message-ID: <b5fcb40b-fe9a-c634-902f-35808adfca68@tronnes.org>
-Date: Sun, 25 Sep 2022 17:58:45 +0200
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3943E10E2EF;
+ Sun, 25 Sep 2022 23:39:54 +0000 (UTC)
+Received: by mail-lf1-x129.google.com with SMTP id k10so8345807lfm.4;
+ Sun, 25 Sep 2022 16:39:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date;
+ bh=st3O2pRGPWK1FLJTPBGRuCniY8P/u6abQYJb/fEYuJQ=;
+ b=W3K2NP/a6+oTI8gFEGt5nGGS9enU+0KpjF9MSWpto/y/e8Pqkyk3KdNROeq1VReuw3
+ 4tbDUQNzhEsLSU0JCkjVpzqYzoF9pZhg9SvgEiWunM5yC5N0DLguvjWHMxFYGtncW+mc
+ vOragtuGv5wtfYTpeKmAEjfsXd4V6tTTTzaNGi8+qtE32bmF4JD4wQ6frMIJoh9GGTge
+ RAD/AaBmrSAOC5LqiVErhUkwhGjVz5+qH/Z27UJUyGp+GEOEmwJRfc1RTbiWoQbzjL5M
+ mtmY0fn16PQvkz4jleVY/+noMI6YznIJxGIP6waxvJ+sh1wleUqUblTSTP3nNWAH+jkr
+ pZZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date;
+ bh=st3O2pRGPWK1FLJTPBGRuCniY8P/u6abQYJb/fEYuJQ=;
+ b=WwphXFysj+atz4I9xMY5vGxD4BppJEQZcwGMzhwCXK8XtZFxFSifg+J8JccFXfq6Es
+ PKzltgZZIPqxAloQbkQ/HqjSREYSmRpjHmM+DVkdAUU1g2msxn+pbWALn1/BuMjcUM3y
+ lEqJfCRRJ4KFTODfG8uavzIFPNAXcKRQ/0MPlxTFqw0D9T/W+EKVmk0PQqI3f8QgeMzK
+ 7OZNZDwapHbiMASMELJFfkX2bd3p8mJxM6R5wyQIuQ1d0/2VBpYDR/NHjoKa017SNYXi
+ PM0JVUF1/vGAW9s05V1KAThkJ6d3/9U47Vic4kcMJ2mMli6ZuoHLOG7K/tMitqteUACH
+ AMGg==
+X-Gm-Message-State: ACrzQf22dU2VeDc36Nb/rYKAIhXAOOeU8U/a1WGj4gLp26W4fuLcNhhX
+ iKuPlUUnV2OKTEgE8H/ynXQ=
+X-Google-Smtp-Source: AMsMyM5aDKQS2b/KY3xFf9M+RoiDx1qfHHYGi1ptQgxDMi9xIzklVjEJFzIiBqGLPRgxtbvB3OmxiQ==
+X-Received: by 2002:a05:6512:2215:b0:49e:ac45:22e1 with SMTP id
+ h21-20020a056512221500b0049eac4522e1mr8247070lfu.33.1664149192424; 
+ Sun, 25 Sep 2022 16:39:52 -0700 (PDT)
+Received: from [192.168.2.145] (109-252-124-206.nat.spd-mgts.ru.
+ [109.252.124.206]) by smtp.googlemail.com with ESMTPSA id
+ i11-20020ac2522b000000b0048a921664e8sm2351312lfl.37.2022.09.25.16.39.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 25 Sep 2022 16:39:51 -0700 (PDT)
+Message-ID: <f914ceb3-94bd-743c-f8b6-0334086e731a@gmail.com>
+Date: Mon, 26 Sep 2022 02:39:50 +0300
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.1
-To: Maxime Ripard <maxime@cerno.tech>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Ben Skeggs <bskeggs@redhat.com>,
- David Airlie <airlied@linux.ie>, Maxime Ripard <mripard@kernel.org>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Emma Anholt <emma@anholt.net>, Karol Herbst <kherbst@redhat.com>,
- Samuel Holland <samuel@sholland.org>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>,
- Lyude Paul <lyude@redhat.com>,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.12.0
+Content-Language: en-US
+To: Hans de Goede <hdegoede@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
+ Daniel Dadap <ddadap@nvidia.com>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Chen-Yu Tsai <wens@csie.org>
-References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
-From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Pan@freedesktop.org, Xinhui <Xinhui.Pan@amd.com>,
+ "Rafael J . Wysocki" <rafael@kernel.org>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>,
+ Lukas Wunner <lukas@wunner.de>, Mark Gross <markgross@kernel.org>,
+ Andy Shevchenko <andy@kernel.org>
+References: <20220825143726.269890-1-hdegoede@redhat.com>
+ <20220825143726.269890-3-hdegoede@redhat.com>
+From: Dmitry Osipenko <digetx@gmail.com>
+In-Reply-To: <20220825143726.269890-3-hdegoede@redhat.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH v2 00/33] drm: Analog TV Improvements
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v5 02/31] drm/i915: Don't register backlight
+ when another backlight should be used (v2)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,104 +90,58 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
- Hans de Goede <hdegoede@redhat.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
+Cc: Jani Nikula <jani.nikula@intel.com>, nouveau@lists.freedesktop.org,
+ intel-gfx <intel-gfx@lists.freedesktop.org>, dri-devel@lists.freedesktop.org,
+ platform-driver-x86@vger.kernel.org, linux-acpi@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, David Airlie <airlied@redhat.com>,
+ Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+25.08.2022 17:36, Hans de Goede пишет:
+> Before this commit when we want userspace to use the acpi_video backlight
+> device we register both the GPU's native backlight device and acpi_video's
+> firmware acpi_video# backlight device. This relies on userspace preferring
+> firmware type backlight devices over native ones.
+> 
+> Registering 2 backlight devices for a single display really is
+> undesirable, don't register the GPU's native backlight device when
+> another backlight device should be used.
+> 
+> Changes in v2:
+> - Use drm_info(drm_dev,  ...) for log messages
+> 
+> Reviewed-by: Jani Nikula <jani.nikula@intel.com>
+> Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+> ---
+>  drivers/gpu/drm/i915/display/intel_backlight.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/i915/display/intel_backlight.c b/drivers/gpu/drm/i915/display/intel_backlight.c
+> index 681ebcda97ad..03c7966f68d6 100644
+> --- a/drivers/gpu/drm/i915/display/intel_backlight.c
+> +++ b/drivers/gpu/drm/i915/display/intel_backlight.c
+> @@ -8,6 +8,8 @@
+>  #include <linux/pwm.h>
+>  #include <linux/string_helpers.h>
+>  
+> +#include <acpi/video.h>
+> +
+>  #include "intel_backlight.h"
+>  #include "intel_backlight_regs.h"
+>  #include "intel_connector.h"
+> @@ -952,6 +954,11 @@ int intel_backlight_device_register(struct intel_connector *connector)
+>  
+>  	WARN_ON(panel->backlight.max == 0);
+>  
+> +	if (!acpi_video_backlight_use_native()) {
+> +		drm_info(&i915->drm, "Skipping intel_backlight registration\n");
+> +		return 0;
+> +	}
+> +
+>  	memset(&props, 0, sizeof(props));
+>  	props.type = BACKLIGHT_RAW;
+>  
 
-
-Den 22.09.2022 16.25, skrev Maxime Ripard:
-> Hi,
-> 
-> Here's a series aiming at improving the command line named modes support,
-> and more importantly how we deal with all the analog TV variants.
-> 
-> The named modes support were initially introduced to allow to specify the
-> analog TV mode to be used.
-> 
-> However, this was causing multiple issues:
-> 
->   * The mode name parsed on the command line was passed directly to the
->     driver, which had to figure out which mode it was suppose to match;
-> 
->   * Figuring that out wasn't really easy, since the video= argument or what
->     the userspace might not even have a name in the first place, but
->     instead could have passed a mode with the same timings;
-> 
->   * The fallback to matching on the timings was mostly working as long as
->     we were supporting one 525 lines (most likely NSTC) and one 625 lines
->     (PAL), but couldn't differentiate between two modes with the same
->     timings (NTSC vs PAL-M vs NSTC-J for example);
-> 
->   * There was also some overlap with the tv mode property registered by
->     drm_mode_create_tv_properties(), but named modes weren't interacting
->     with that property at all.
-> 
->   * Even though that property was generic, its possible values were
->     specific to each drivers, which made some generic support difficult.
-> 
-> Thus, I chose to tackle in multiple steps:
-> 
->   * A new TV mode property was introduced, with generic values, each driver
->     reporting through a bitmask what standard it supports to the userspace;
-> 
->   * This option was added to the command line parsing code to be able to
->     specify it on the kernel command line, and new atomic_check and reset
->     helpers were created to integrate properly into atomic KMS;
-> 
->   * The named mode parsing code is now creating a proper display mode for
->     the given named mode, and the TV standard will thus be part of the
->     connector state;
-> 
->   * Two drivers were converted and tested for now (vc4 and sun4i), with
->     some backward compatibility code to translate the old TV mode to the
->     new TV mode;
-> 
-> Unit tests were created along the way.
-> 
-> One can switch from NTSC to PAL now using (on vc4)
-> 
-> modetest -M vc4  -s 53:720x480i -w 53:'TV mode':1 # NTSC
-> modetest -M vc4  -s 53:720x576i -w 53:'TV mode':4 # PAL
-> 
-> Let me know what you think,
-> Maxime
-
-<snip>
-
->  drivers/gpu/drm/drm_atomic_state_helper.c       | 128 ++++-
->  drivers/gpu/drm/drm_atomic_uapi.c               |   8 +
->  drivers/gpu/drm/drm_client_modeset.c            |   4 +
->  drivers/gpu/drm/drm_connector.c                 | 111 +++-
->  drivers/gpu/drm/drm_modes.c                     | 658 +++++++++++++++++++++++-
->  drivers/gpu/drm/gud/gud_connector.c             |  12 +-
->  drivers/gpu/drm/i2c/ch7006_drv.c                |   6 +-
->  drivers/gpu/drm/i915/display/intel_tv.c         |   5 +-
->  drivers/gpu/drm/nouveau/dispnv04/tvnv17.c       |   6 +-
->  drivers/gpu/drm/sun4i/sun4i_tv.c                | 148 ++----
->  drivers/gpu/drm/tests/Makefile                  |  16 +-
->  drivers/gpu/drm/tests/drm_client_modeset_test.c | 239 +++++++++
->  drivers/gpu/drm/tests/drm_cmdline_parser_test.c |  67 +++
->  drivers/gpu/drm/tests/drm_kunit_helpers.c       |  54 ++
->  drivers/gpu/drm/tests/drm_kunit_helpers.h       |   9 +
->  drivers/gpu/drm/tests/drm_modes_test.c          | 136 +++++
->  drivers/gpu/drm/vc4/vc4_hdmi.c                  |   2 +-
->  drivers/gpu/drm/vc4/vc4_vec.c                   | 339 ++++++++++--
->  include/drm/drm_atomic_state_helper.h           |   4 +
->  include/drm/drm_connector.h                     |  92 +++-
->  include/drm/drm_mode_config.h                   |  12 +-
->  include/drm/drm_modes.h                         |  17 +
-
-These also needs updating:
-
-Documentation/gpu/kms-properties.csv
-Documentation/fb/modedb.rst
-
-Noralf.
+This breaks backlight on Acer Chromebook Spin 713 because backlight
+isn't registered anymore. Any ideas how to fix it?
