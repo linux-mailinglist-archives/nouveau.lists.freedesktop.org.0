@@ -2,50 +2,65 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 778E85EA5C2
-	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 14:16:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 772825EA63E
+	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 14:34:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A636D10E68E;
-	Mon, 26 Sep 2022 12:16:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BFD8810E69F;
+	Mon, 26 Sep 2022 12:34:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp.domeneshop.no (smtp.domeneshop.no
- [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D03FB10E68B;
- Mon, 26 Sep 2022 12:15:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
- ; s=ds202112;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VqqSqbLQ5CcNULSIxBrajieA3dWYiSKrZmW1RRtf2jA=; b=FMxfkov+yeLnAgQjafE8g9To1P
- clmuv1NwmM/GT/7KQvLpa2fgLvgElGaDMSjVapH/NX57xOh5Cfd1Tsa2tvazzp1xbT34/sWFZSsxf
- G+33Mez91WAezNG7jxhrzQJi1HJ4RMSbrEt/NhffiULFzLJkf0DT+Dy3y/PhaE6Mj51uSvpE8Q02X
- +Wg8OyhF/H9EumsY/eHK7iQo7QkDFQZMEHfp3Lnk5V1ZMMtekj/ajQLAvH6ws+wESFiM4pzDtspPW
- +H7msO0IVHArxJVz7tWFGwWvpRY3610HctqslpxOAPUco0dGkVPpdoTrG4RbBtVSg5vlQAtpJbMBK
- a6MHbVJw==;
-Received: from [2a01:799:961:d200:3946:6b45:3eef:d112] (port=65380)
- by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1ocn1g-0001Me-Bi; Mon, 26 Sep 2022 14:15:56 +0200
-Message-ID: <8eab2fc7-92de-fcc9-150b-ac3e7f293267@tronnes.org>
-Date: Mon, 26 Sep 2022 14:15:48 +0200
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7A4F210E694;
+ Mon, 26 Sep 2022 12:34:38 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 20D151F38A;
+ Mon, 26 Sep 2022 12:34:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1664195677; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=pZfEVr0F+eDUbTKMwdgidKtFX7VuirmYGY1O7jfs79E=;
+ b=ZJt6LzVTk7uUgNb/3+RfQS4n9gNmyE/Ndw3OtVGcUh3bb79rZhzJBODRYZZZq2QquYCc6L
+ RGqHr/EYJ6i3xOcwjiqpcU2ER9d6O9MRZgcYPOxOy1WDZXKyxVglBUKF4Mb4Afa7xVLS+Y
+ cqOAvXYCKS7IIiST8MsIPbwyJBZwvu4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1664195677;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=pZfEVr0F+eDUbTKMwdgidKtFX7VuirmYGY1O7jfs79E=;
+ b=mJY48elw8wJdWrhw2pCkaIypPsM43sG83ftl2OiftxYeqqyzno2SX0o3lzuEzQ12eeEVcO
+ NDbVNGZjP0yMZ3DA==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AA48A13486;
+ Mon, 26 Sep 2022 12:34:36 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id E1ijKFycMWOWUwAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Mon, 26 Sep 2022 12:34:36 +0000
+Message-ID: <d50ed519-ba89-70e2-0f0c-b58593a3c060@suse.de>
+Date: Mon, 26 Sep 2022 14:34:36 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+Content-Language: en-US
 To: Maxime Ripard <maxime@cerno.tech>
 References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-2-f733a0ed9f90@cerno.tech>
- <3f7000ab-b845-a7e8-f215-02121da779b7@tronnes.org>
- <c7bd9bcb-77a1-9f2d-fe93-afefac5e6def@tronnes.org>
- <20220926093612.wvbou2srbo3uinar@houat>
-From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20220926093612.wvbou2srbo3uinar@houat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v2 02/33] drm/tests: Add Kunit Helpers
+ <20220728-rpi-analog-tv-properties-v2-6-f733a0ed9f90@cerno.tech>
+ <fa71ae1c-f9ca-167c-7993-b698ea3473a0@suse.de>
+ <20220926095031.vlwsw7willi36yd4@houat>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <20220926095031.vlwsw7willi36yd4@houat>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------mwjZHgn1Ll4ReHR00ksHLHNN"
+Subject: Re: [Nouveau] [PATCH v2 06/33] drm/connector: Rename legacy TV
+ property
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,16 +73,13 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
  dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
  Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
+ linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
+ Hans de Goede <hdegoede@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
@@ -75,87 +87,87 @@ Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------mwjZHgn1Ll4ReHR00ksHLHNN
+Content-Type: multipart/mixed; boundary="------------4FsZ219AqM5Fd5bD304l2D0A";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Maxime Ripard <maxime@cerno.tech>
+Cc: Karol Herbst <kherbst@redhat.com>, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
+ Hans de Goede <hdegoede@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ linux-arm-kernel@lists.infradead.org,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Dom Cobley <dom@raspberrypi.com>,
+ Dave Stevenson <dave.stevenson@raspberrypi.com>,
+ linux-kernel@vger.kernel.org,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+Message-ID: <d50ed519-ba89-70e2-0f0c-b58593a3c060@suse.de>
+Subject: Re: [PATCH v2 06/33] drm/connector: Rename legacy TV property
+References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v2-6-f733a0ed9f90@cerno.tech>
+ <fa71ae1c-f9ca-167c-7993-b698ea3473a0@suse.de>
+ <20220926095031.vlwsw7willi36yd4@houat>
+In-Reply-To: <20220926095031.vlwsw7willi36yd4@houat>
 
+--------------4FsZ219AqM5Fd5bD304l2D0A
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Den 26.09.2022 11.36, skrev Maxime Ripard:
-> Hi Noralf,
-> 
-> On Sat, Sep 24, 2022 at 08:06:17PM +0200, Noralf Trønnes wrote:
->> Den 24.09.2022 19.56, skrev Noralf Trønnes:
->>>
->>>
->>> Den 22.09.2022 16.25, skrev Maxime Ripard:
->>>> As the number of kunit tests in KMS grows further, we start to have
->>>> multiple test suites that, for example, need to register a mock DRM
->>>> driver to interact with the KMS function they are supposed to test.
->>>>
->>>> Let's add a file meant to provide those kind of helpers to avoid
->>>> duplication.
->>>>
->>>> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
->>>>
->>>> diff --git a/drivers/gpu/drm/tests/Makefile b/drivers/gpu/drm/tests/Makefile
->>>> index 2d9f49b62ecb..b29ef1085cad 100644
->>>> --- a/drivers/gpu/drm/tests/Makefile
->>>> +++ b/drivers/gpu/drm/tests/Makefile
->>>> @@ -8,6 +8,7 @@ obj-$(CONFIG_DRM_KUNIT_TEST) += \
->>>>  	drm_format_helper_test.o \
->>>>  	drm_format_test.o \
->>>>  	drm_framebuffer_test.o \
->>>> +	drm_kunit_helpers.o \
->>>>  	drm_mm_test.o \
->>>>  	drm_plane_helper_test.o \
->>>>  	drm_rect_test.o
->>>> diff --git a/drivers/gpu/drm/tests/drm_kunit_helpers.c b/drivers/gpu/drm/tests/drm_kunit_helpers.c
->>>> new file mode 100644
->>>> index 000000000000..7ebd620481c1
->>>> --- /dev/null
->>>> +++ b/drivers/gpu/drm/tests/drm_kunit_helpers.c
->>>> @@ -0,0 +1,54 @@
->>>> +#include <drm/drm_drv.h>
->>>> +#include <drm/drm_managed.h>
->>>> +
->>>> +#include <linux/device.h>
->>>> +
->>>> +static const struct drm_mode_config_funcs drm_mode_config_funcs = {
->>>> +};
->>>> +
->>>> +static const struct drm_driver drm_mode_driver = {
->>>> +};
->>>> +
->>>> +static void drm_kunit_free_device(struct drm_device *drm, void *ptr)
->>>> +{
->>>> +	struct device *dev = ptr;
->>>> +
->>>> +	root_device_unregister(dev);
->>>> +}
->>>> +
->>>> +struct drm_device *drm_kunit_device_init(const char *name)
->>>> +{
->>>> +	struct drm_device *drm;
->>>> +	struct device *dev;
->>>> +	int ret;
->>>> +
->>>> +	dev = root_device_register(name);
->>>> +	if (IS_ERR(dev))
->>>> +		return ERR_CAST(dev);
->>>> +
->>>> +	drm = drm_dev_alloc(&drm_mode_driver, dev);
->>>
->>> I can't find drm being freed anywhere?
->>> Maybe you could assign it to drm->managed.final_kfree.
-> 
-> There's a drm_dev_put in the test_exit hook which should free it.
-> 
+SGkNCg0KQW0gMjYuMDkuMjIgdW0gMTE6NTAgc2NocmllYiBNYXhpbWUgUmlwYXJkOg0KPiBI
+aSBUaG9tYXMsDQo+IA0KPiBPbiBGcmksIFNlcCAyMywgMjAyMiBhdCAxMDoxOTowOEFNICsw
+MjAwLCBUaG9tYXMgWmltbWVybWFubiB3cm90ZToNCj4+IEhpDQo+Pg0KPj4gQW0gMjIuMDku
+MjIgdW0gMTY6MjUgc2NocmllYiBNYXhpbWUgUmlwYXJkOg0KPj4+IFRoZSBjdXJyZW50IHR2
+X21vZGUgaGFzIGRyaXZlci1zcGVjaWZpYyB2YWx1ZXMgdGhhdCBkb24ndCBhbGxvdyB0bw0K
+Pj4+IGVhc2lseSBzaGFyZSBjb2RlIHVzaW5nIGl0LCBlaXRoZXIgYXQgdGhlIHVzZXJzcGFj
+ZSBvciBrZXJuZWwgbGV2ZWwuDQo+Pj4NCj4+PiBTaW5jZSB3ZSdyZSBnb2luZyB0byBpbnRy
+b2R1Y2UgYSBuZXcsIGdlbmVyaWMsIHByb3BlcnR5IHRoYXQgZml0IHRoZQ0KPj4+IHNhbWUg
+cHVycG9zZSwgbGV0J3MgcmVuYW1lIHRoaXMgb25lIHRvIGxlZ2FjeV90dl9tb2RlIHRvIG1h
+a2UgaXQNCj4+PiBvYnZpb3VzIHdlIHNob3VsZCBtb3ZlIGF3YXkgZnJvbSBpdC4NCj4+Pg0K
+Pj4+IFNpZ25lZC1vZmYtYnk6IE1heGltZSBSaXBhcmQgPG1heGltZUBjZXJuby50ZWNoPg0K
+Pj4NCj4+IEl0J3Mgbm90IHdyb25nLCBidXQgJ2xlZ2FjeScgaXMgYWxyZWFkeSBvdmVybG9h
+ZGVkIHdpdGggbWVhbmluZy4gSWYgeW91IGNhbiwNCj4+IG1heWJlIG5hbWUgaXQgJ2RyaXZl
+cl90dl9tb2RlX3Byb3BlcnR5JyBvciAnY3VzdG9tX3R2X21vZGVfcHJvcGVydHknDQo+PiBp
+bnN0ZWFkLg0KPj4NCj4+IEFja2VkLWJ5OiBUaG9tYXMgWmltbWVybWFubiA8dHppbW1lcm1h
+bm5Ac3VzZS5kZT4NCj4gDQo+IEknZCByZWFsbHkgbGlrZSB0byBwb2ludCBvdXQgdGhhdCBu
+ZXcgZHJpdmVycyBzaG91bGRuJ3QgYmUgdXNpbmcgdGhpcy4NCj4gSWYgd2UncmUgdXNpbmcg
+ZWl0aGVyIG9mIHlvdXIgcHJvcG9zYWxzIHRoZW4gd3JpdGVycyBtaWdodCBnZXQgdGhlDQo+
+IGltcHJlc3Npb24gdGhhdCB0aGlzIGlzIG9rIHRvIHVzLg0KPiANCj4gV291bGQgeW91IHBy
+ZWZlciBkZXByZWNhdGVkIHRvIGxlZ2FjeT8NCg0KSSdtIG1lcmVseSBzdWdnZXN0aW5nLiBD
+YWxsIGl0IGxlZ2FjeSB0aGVuLCBzbyB5b3UgZG9uJ3QgaGF2ZSB0byByZXdvcmsgDQphbGwg
+b2YgdGhlIHBhdGNoZXMuDQoNCkJlc3QgcmVnYXJkcw0KVGhvbWFzDQoNCj4gDQo+IE1heGlt
+ZQ0KDQotLSANClRob21hcyBaaW1tZXJtYW5uDQpHcmFwaGljcyBEcml2ZXIgRGV2ZWxvcGVy
+DQpTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgNCk1heGZlbGRzdHIuIDUs
+IDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQ0KKEhSQiAzNjgwOSwgQUcgTsO8cm5iZXJnKQ0K
+R2VzY2jDpGZ0c2bDvGhyZXI6IEl2byBUb3Rldg0K
 
-I see now, there's a drmm_add_final_kfree() in drm_dev_alloc().
+--------------4FsZ219AqM5Fd5bD304l2D0A--
 
-Noralf.
+--------------mwjZHgn1Ll4ReHR00ksHLHNN
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
->> Perhaps a better solution would be to use devm_drm_dev_alloc() and
->> unregister the root device on exit. That avoids reaching into the drm
->> managed internals and it looks more like a regular driver.
-> 
-> But yeah, this is a good idea, I'll do it.
-> 
-> Maxime
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmMxnFwFAwAAAAAACgkQlh/E3EQov+D5
+zxAApQncNTLl8QQvDR6j0KdUkawbSYKn0KSQRRJLEGBKoyje7U6mn4lVguZtodiDY7fz6EhuTR2S
+XPEbpcZaFmf1Y8hKEV8/zGry8ocN8Jy8cgF2frUr58KgkmDj0UUaD3m77Ee8NIs+r5oHtxSGbMI6
+8UoBjUIg+Q2gDNiBADBKQgo4D7pNXHLCT7KzKPs2tANKpUKegg4y6yUhBJ53G9LITKhHnkzlHiF8
+GjYfshimY0ockScV2lY3nFyPLLV3nrwGjgUM+B6owo76gHffD/qpMxZ+r3+Pd40hZAFwjlSypXe5
+XNtmKlDHbfXxlnR1td+sX3pqXAV42B8KHy3alsOji/DR2UGkXQrwWH/uXlr/K1iO+weuaK6ouX/5
+jXOnf1LCurNu/vLyt8fyWZqHmTcUwEGxXT6kQ7sNMoEMJk7v5rsjpa8Fvvyw9KHioil5bbj/wR4J
+MtiXhb/DRWMvUg0X95fYwgp55C++EGarVtwa7cPsFLYZLAdt2J8BmxFa8o3i1tvtpuVo44mMZ6EG
+7NiR1AQO7HA45dYWqlA/Z7PunFdaR0RfKrOyJFNTyG5EpZFCWWJDKMqBLP0mPWvfWr813jABNf+H
+RG4HrDn4MN3a9t5TZWt70qWeq7gGoIrJ0rKrPOf8hF00DPnWqN2UDGerPXOvHdSWqpbhULvcspRc
+amE=
+=qscO
+-----END PGP SIGNATURE-----
+
+--------------mwjZHgn1Ll4ReHR00ksHLHNN--
