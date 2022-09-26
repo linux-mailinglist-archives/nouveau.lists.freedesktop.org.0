@@ -1,108 +1,78 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC2C05E9933
-	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 08:05:06 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 755105E9DC9
+	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 11:36:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 04FBB10E531;
-	Mon, 26 Sep 2022 06:05:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5436110E65D;
+	Mon, 26 Sep 2022 09:36:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2056.outbound.protection.outlook.com [40.107.244.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F04FA10E52B;
- Mon, 26 Sep 2022 06:04:51 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=N79IaMp/5YqfeJHTlwvj5hqhXNw5jbWt49zEiYAVo6e2BYO6p+c7OgjPvuVY2TAutJpinniAyJUQA54pUEJgtWV+d9Q9UophHEoyMwPw63FyFnzskubLBuYZ4IqyL72dIxDzOEjiBFFyk/iMa12HWZiDtPdhL+Rlt3TUm5TczBAlo4tya7zZ10GlFPc9rffuF3o96pzH+4SCV72LbaNwEi0aznX6LtpM5H5sQj+SFQFhVEJwwru9B7ErXSSsB0nzruJ6dWlr+WRnxOJ6aiUZaoufIzLFAQ01h0TdZTJHMd2NmAqCouwLmXhK5GqLmcjK3RBuy/71ynV7BbRHVoUerQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DHYA/CXw0YUE97JGCWBIjFBFZ/6GK4DksH8Yc5dW8q8=;
- b=DI8YH9PX5RkJHVGFmb9QzmuHsjDu5oPNI+BlgFdX4AAnUT/XQFtkbKT95ggqDQEuW51EHcor5neM3qZ+P6wu8WqaX0sc8XBNuRL2L3cIN4VUyk6JDodSgcMf5EJWgqJFcFnY4P4yVfTZwaXxy51VcCUus8zbb1dis4L9WZv/5cFx7kCwFsnB5x64V92EDoDgf1+DsXEyGcBWjNHtryBqdBe9J6hxFHlY66gwoHCElLs5jDL43PBXpdgyEO45ooXnmjtcYoh3gYWRhsyTPA9IeYf5jIjAXmYgdnkYx6dAblMTDO4s50qd/9SXcRbUbZXqEEhMDILotyrbvE13o5fDNg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DHYA/CXw0YUE97JGCWBIjFBFZ/6GK4DksH8Yc5dW8q8=;
- b=AjoY3aFXE+4uvtGIVtcFsBPuKoI1JoqsENPrnQ4puUoxkVAjhxavRJmKRQynZy6dKrhWRf6s3H/ajKXp/rZ2ILXmDqhBDxUkLCuvmkl56gZr/U7SSJG/FuKthkPc6PGB5Bri+JOTeocqD6EdfhpQHdZgABtiGIdMRifxKDf+AxlGo33bYQbr3YExvp4HO1OhXL1mMdeuzPYwqChsuBguNWgAg9AvstnRjlmswoJrnunHPgN6d5d6X0fcKy0i27LnK5ut/UzSiF00d+NLHXgjuGI5VAkUkPhrxlO3gIrrnm7ZNWJ9AtViHO8xjbjTtDkTM510L9La3snYpb5B/85H5g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from BYAPR12MB3176.namprd12.prod.outlook.com (2603:10b6:a03:134::26)
- by MN0PR12MB6030.namprd12.prod.outlook.com (2603:10b6:208:3ce::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.24; Mon, 26 Sep
- 2022 06:04:50 +0000
-Received: from BYAPR12MB3176.namprd12.prod.outlook.com
- ([fe80::ed0:a520:ac8e:9966]) by BYAPR12MB3176.namprd12.prod.outlook.com
- ([fe80::ed0:a520:ac8e:9966%6]) with mapi id 15.20.5654.025; Mon, 26 Sep 2022
- 06:04:50 +0000
-From: Alistair Popple <apopple@nvidia.com>
-To: linux-mm@kvack.org,
-	Andrew Morton <akpm@linux-foundation.org>
-Date: Mon, 26 Sep 2022 16:03:11 +1000
-Message-Id: <749b224f6a35bcaa733733ab35dd8593bd555546.1664171943.git-series.apopple@nvidia.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <cover.f15b25597fc3afd45b144df863eeca3b2c13f9f4.1664171943.git-series.apopple@nvidia.com>
-References: <cover.f15b25597fc3afd45b144df863eeca3b2c13f9f4.1664171943.git-series.apopple@nvidia.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SYBPR01CA0110.ausprd01.prod.outlook.com
- (2603:10c6:10:1::26) To BYAPR12MB3176.namprd12.prod.outlook.com
- (2603:10b6:a03:134::26)
+Received: from wnew3-smtp.messagingengine.com (wnew3-smtp.messagingengine.com
+ [64.147.123.17])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3B7DA10E3B5;
+ Mon, 26 Sep 2022 09:36:25 +0000 (UTC)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailnew.west.internal (Postfix) with ESMTP id A27792B0689B;
+ Mon, 26 Sep 2022 05:36:16 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute1.internal (MEProxy); Mon, 26 Sep 2022 05:36:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
+ :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to; s=fm2; t=1664184976; x=1664192176; bh=iMhV2MQCYE
+ l08x7MCNwj+bMXhT0kipZzBnwNpIfB8gg=; b=nJeRGFALZvB203VwJ3MiqZV0H9
+ SgOgeQdWX4BuXqw5zho/RS25xCKP8KzdQRqm2mCuyRCuOyNsg99A+lAMh76HqDOD
+ x+eTg6WYdZgrHKS0zSICLvO8j/3SJP13HCCOJDkPl0uPhzva8dlItg1Ao8XIGumK
+ Vbx9nh+ELeMIBIDKskokk2eSRhBBTy+Ebrn/rCkgwq5UieGaMJkByqoK+baIJH2C
+ 5/HTEUfuOUF0Aewimr0CqDc5o4qad0/cuXBZvtQDDPTeP6obnNVGzbrPy1O7EYyt
+ KA2581CvfZVH/CjRitmTgJKzFxhYz6lW5pJezzh6VmVJ0W1Vk1jK/Rf7r3oA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
+ :feedback-id:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:sender:subject:subject:to:to
+ :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; t=1664184976; x=1664192176; bh=iMhV2MQCYEl08x7MCNwj+bMXhT0k
+ ipZzBnwNpIfB8gg=; b=SvSPhEi02+Ihox7kOmDVhX4pbeqMyi4CJjvjX99cbEyr
+ +Smb2FJx3Ykc2JdeOsoir0jS89/4SjDKcOp0VS69YroKe5ZScShh/wzbeal++grP
+ T3kz/sLVTtvTxyWcC7amFT8p0IQ7unvvIhjLZMctMR9p2aebfl5O2flACUCM2iCZ
+ 2P5b3wXbgjghbYrR6Kyohv5VMzKI7Yp0WJKOOxliNMEAlU2NYmH7nDfcOatZJmwA
+ R60diWPuTdqMHff6/EjwHJOUIq8bKG5D5uiy2lrUcwW+cHnxd0gbHlloPbAiVSxw
+ 3+0du3C5VZZ06FibJPIilHWQYsr44TrJRhrXkcRR1Q==
+X-ME-Sender: <xms:j3IxY2-QhYgO74s3trfwff3DryeNTqQlmXsu9yGRCxphn4GACYCIvw>
+ <xme:j3IxY2tV7NB_e-mau1S7WaAft2UEAesKgySU0wjigMGs7JoPvAF_XnZv8xyRwLir7
+ 96x3L2BZSiZ3G5aD1o>
+X-ME-Received: <xmr:j3IxY8DYYskkI72wKJw06xyNYUTiZjyG07uxoj73uLs5P24I9NFaDGqbqIho>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeegvddgudelucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
+ mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
+ htthgvrhhnpeejveefheefkeeiffegveelveetgffffeektdefuefhtedtgeejhefggedu
+ ffffudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+ hmrgigihhmvgestggvrhhnohdrthgvtghh
+X-ME-Proxy: <xmx:j3IxY-c1tiNct3gIbQHjSvEYT5Xb3k1T-pot_aoZBis1vo7mxgBG4A>
+ <xmx:j3IxY7NBOijxM_Ba2H7o24TnGSFShkp4aYK8hhYtoN3RnR8bUq6Ebw>
+ <xmx:j3IxY4lnv8PCJVU1vCHuVIUJ7mwiGoNPkRCtxB_VBaxHfk_3O1upOg>
+ <xmx:kHIxY0ttx0rynzRFEyFoPEdNc13wMnnQR88F_DEk4Ml1iNEFAY-Kynb_HoE>
+Feedback-ID: i8771445c:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 26 Sep 2022 05:36:14 -0400 (EDT)
+Date: Mon, 26 Sep 2022 11:36:12 +0200
+From: Maxime Ripard <maxime@cerno.tech>
+To: Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
+Message-ID: <20220926093612.wvbou2srbo3uinar@houat>
+References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v2-2-f733a0ed9f90@cerno.tech>
+ <3f7000ab-b845-a7e8-f215-02121da779b7@tronnes.org>
+ <c7bd9bcb-77a1-9f2d-fe93-afefac5e6def@tronnes.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB3176:EE_|MN0PR12MB6030:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6b018b42-c47e-42dd-4a9a-08da9f850561
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Yg+OKHnIhqV4Vs26gpIVLEc7G8GDWx8wUpxOZK+DMmnN8B5GEQYGQr2gg4qtF2jbQEN7AB5Yhq8gbF0BEJDUGjqVDChQx9CapCgXmGNvkVEhG9vxwBDwFvwOKPTXHrx1b2nYoEMewEkrFsLXQ1kZ3jcfVb4LuXzB72ZlB2yIkXAfOqZqSq711zWzAStYzzMqVR3LiAOpHdcCmE7RB+/dgfNeWkq/pcvJjsy4Wn8pYI6tLJaAM1/ZSjeZoPWMyy0+3GgcFiXuYDKyD0EcsSDR0UZfJomglcn1YKG3TtXh6tiXQ4Y+Qs06fbA96oxLBFBSMERPOczd2ulKHUqKxby10Zl74mXYcfjef7fRY6ztp9Lf6bW80XNwnMeZP2HpeVxW0pddIxgS0CS0isdtDOaOJqyu+fW02i86JCZmbWL+kUTIYJdmBaopf7b8r1ZEiXKEKMnt7PHD4CtCijfUORnSpoT2IUbLS9nwjt7x/OS3WVTE2ju0cOtlmon+ieN+HKmV34JRIyZhlRDmq7teIX7/m53MCiJtl/5W5Hp+yMrDN14LqD12/7oIb0IwpP9N8kjohsjhU0wFxc6SvaziIHT8+sY6Bk3+PMijhLCHFSkAH2urAJWHdCqFlchNyAIOOQ/XyYv9XPG6KUZwHUfzKFZFeCIoOs2Ve7pcUCFGkkYOMlES1MhNaymrvOyNXI5sVvoVD48hydbbn5uBm92TOlePaA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR12MB3176.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(346002)(366004)(396003)(376002)(136003)(39860400002)(451199015)(316002)(54906003)(6916009)(6486002)(66946007)(66556008)(36756003)(8676002)(66476007)(5660300002)(4326008)(38100700002)(6666004)(8936002)(26005)(6506007)(7416002)(478600001)(107886003)(6512007)(2906002)(41300700001)(86362001)(2616005)(186003)(83380400001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?vbGmegRP5P3JT1hk3ZJiMdlRnludFVCC1R5YhEO7Argk0zoYaU3J8SKuR75F?=
- =?us-ascii?Q?NzbBIZEYX/749TbKx9YmBdC7Ll3hUsjOST/7b5KppNIpD/se04JD5VNCa7tH?=
- =?us-ascii?Q?9gQpmy5X9aVgKrfG0prSCS6khNtNSVUx4FiEVwywKbyZrAyG96LQ9lHdLsMg?=
- =?us-ascii?Q?gVMUwjvj+aqz9lgALfeCXlj1L7ofABRp3UfHXHH/hIN0iKdudVwcr93pFHad?=
- =?us-ascii?Q?twmuV93hxsk8Zl9QzSIykD7zO8plcGcaMK4VM9qzDlAhz49J9DcQBtGX6uSa?=
- =?us-ascii?Q?EfaJZj5kXxRLCNQ+HpNCcIU3wrg+quiZfDyf4iyRXmJq8xaTnZYYGdxeKczC?=
- =?us-ascii?Q?u93v2ubieBchTPp+7DYnNUX8OGI/SEk3jNVRZh2izYdIQJcW2t9yNHhKo5YB?=
- =?us-ascii?Q?gGCLMTnDlKsFnzbYbUmGPPqBK+E93XPBTlT9bE0hoCX6RYTtaCTIb5o+Dn7X?=
- =?us-ascii?Q?0KNbHxeJB1a/xkXTtlEg0lqmPvk8J2novGcOJZ0pQ0o4AG8ZcDyczRL/CYWG?=
- =?us-ascii?Q?NNn37PbnkdND+MLZRjIiWF6BUzt/OeTqhP7Hvj8ftGaWoBGj2iH6kn3pcdfL?=
- =?us-ascii?Q?2T+nI1lhM+myywn7paWTiVYd4QZMn3EkexND1dF1TJRUnEwDhXgcq+aRyYZY?=
- =?us-ascii?Q?Jp6JKfUtCRCmxGfckulieFN0PCr8seZV6/sK8fiN8LLKlTXPkCYKh9UmEE2t?=
- =?us-ascii?Q?GFJzVzs1yzyVaDIYzf76HZEw9uZVB7grSO2pn3RNCsv4Bv1jxqEdT0gIn4zO?=
- =?us-ascii?Q?OZdoSzXkzflbFj1ohyTEQF3dDSZT8Nr59q5B+SaP4+D4M1MtT7QLBwpr/gm0?=
- =?us-ascii?Q?QJ3ylCIIhIW1QjDMIMOUXRKjl8OPD+cLBhxp8Nev2PbbATCb2EtaOb5Ee5XI?=
- =?us-ascii?Q?84PNATt5f/phk5XY2uUlBxDDE/M2HU8rcRqABDLb8aySFItOzmNiciA6u8Mj?=
- =?us-ascii?Q?3OFWVflG4uuhaRJe9t8dCObJatJ/4GaJxVx1AvVA+BAfZbacU8k0+5m0TE3d?=
- =?us-ascii?Q?j9oHctEBojVnZlLXQeGQGyWKSI25LM475OMDp3tiaV0irk78D5tnHVXgjS3I?=
- =?us-ascii?Q?SbisInMxZvCzVSBqSGxP/9OabTWIEuCnN95ASgX2GC6eW/Zx/AtZhl/LKBUz?=
- =?us-ascii?Q?zeOK9qxrpJT0u7s7VC6JefC7K9EKo/Y+Z/MGfwJPJl9vey25AfhgvNi5fVj0?=
- =?us-ascii?Q?0/ZNHIcCF4kj4DXIjKI/7jVR45k3abwKrxYdnuBHt4KFw1SH5wg6tZUpdBZu?=
- =?us-ascii?Q?A7YvEF61tffr3nokQRlvUQsJdYVnArlzme09A1QcleXgYwBka8Fu+DqLV/CB?=
- =?us-ascii?Q?3F5OtT8fmutsu9lLD+ct0psu1rxV5mswjC/TRDEDGZKM2NDvG9E5eP9sMpRx?=
- =?us-ascii?Q?78lryZRXSUwjf0oaBkmYNY7kFGvjWZ+3vO5wvi9YprduFYAePdpNI7W33qpJ?=
- =?us-ascii?Q?BS/2bCeP5+sEcL2Xqrv+hhj+3J+BjJvx435le0X/T6z+KuwkE3t/59hxjTRd?=
- =?us-ascii?Q?Ud0vMrlyCkPDgU9jLXGCODuEO96RLR8cKDvxLxKawXHJNYrJ7t2T6o5dBQky?=
- =?us-ascii?Q?BeiciPIM+nKZaHoVLmBitBkgm7NjYdOOX93YRsgU?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6b018b42-c47e-42dd-4a9a-08da9f850561
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB3176.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Sep 2022 06:04:49.9356 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: brq4MZNIz0qDiJ17ixz/hBuAgVCpTsSkUaXlvdqj2tAezYDOyw+2D26L43shRScH8NW43kibiOb8bsPSuTHTMg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6030
-Subject: [Nouveau] [PATCH 7/7] hmm-tests: Add test for migrate_device_range()
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="wdbx6g5pylyw5se6"
+Content-Disposition: inline
+In-Reply-To: <c7bd9bcb-77a1-9f2d-fe93-afefac5e6def@tronnes.org>
+Subject: Re: [Nouveau] [PATCH v2 02/33] drm/tests: Add Kunit Helpers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -114,267 +84,117 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Alex Sierra <alex.sierra@amd.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org, Michael Ellerman <mpe@ellerman.id.au>,
- Alistair Popple <apopple@nvidia.com>,
- "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
- Ben Skeggs <bskeggs@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>,
- Ralph Campbell <rcampbell@nvidia.com>, Nicholas Piggin <npiggin@gmail.com>,
- Dan Williams <dan.j.williams@intel.com>,
- Felix Kuehling <Felix.Kuehling@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
- linux-kernel@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
- Alex Deucher <alexander.deucher@amd.com>, linuxppc-dev@lists.ozlabs.org,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
+ Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-sunxi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
+ intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Signed-off-by: Alistair Popple <apopple@nvidia.com>
----
- lib/test_hmm.c                         | 119 +++++++++++++++++++++-----
- lib/test_hmm_uapi.h                    |   1 +-
- tools/testing/selftests/vm/hmm-tests.c |  49 +++++++++++-
- 3 files changed, 148 insertions(+), 21 deletions(-)
 
-diff --git a/lib/test_hmm.c b/lib/test_hmm.c
-index 2bd3a67..d2821dd 100644
---- a/lib/test_hmm.c
-+++ b/lib/test_hmm.c
-@@ -100,6 +100,7 @@ struct dmirror {
- struct dmirror_chunk {
- 	struct dev_pagemap	pagemap;
- 	struct dmirror_device	*mdevice;
-+	bool remove;
- };
- 
- /*
-@@ -192,11 +193,15 @@ static int dmirror_fops_release(struct inode *inode, struct file *filp)
- 	return 0;
- }
- 
-+static struct dmirror_chunk *dmirror_page_to_chunk(struct page *page)
-+{
-+	return container_of(page->pgmap, struct dmirror_chunk, pagemap);
-+}
-+
- static struct dmirror_device *dmirror_page_to_device(struct page *page)
- 
- {
--	return container_of(page->pgmap, struct dmirror_chunk,
--			    pagemap)->mdevice;
-+	return dmirror_page_to_chunk(page)->mdevice;
- }
- 
- static int dmirror_do_fault(struct dmirror *dmirror, struct hmm_range *range)
-@@ -1219,6 +1224,84 @@ static int dmirror_snapshot(struct dmirror *dmirror,
- 	return ret;
- }
- 
-+static void dmirror_device_evict_chunk(struct dmirror_chunk *chunk)
-+{
-+	unsigned long start_pfn = chunk->pagemap.range.start >> PAGE_SHIFT;
-+	unsigned long end_pfn = chunk->pagemap.range.end >> PAGE_SHIFT;
-+	unsigned long npages = end_pfn - start_pfn + 1;
-+	unsigned long i;
-+	unsigned long *src_pfns;
-+	unsigned long *dst_pfns;
-+
-+	src_pfns = kcalloc(npages, sizeof(*src_pfns), GFP_KERNEL);
-+	dst_pfns = kcalloc(npages, sizeof(*dst_pfns), GFP_KERNEL);
-+
-+	migrate_device_range(src_pfns, start_pfn, npages);
-+	for (i = 0; i < npages; i++) {
-+		struct page *dpage, *spage;
-+
-+		spage = migrate_pfn_to_page(src_pfns[i]);
-+		if (!spage || !(src_pfns[i] & MIGRATE_PFN_MIGRATE))
-+			continue;
-+
-+		if (WARN_ON(!is_device_private_page(spage) &&
-+			    !is_device_coherent_page(spage)))
-+			continue;
-+		spage = BACKING_PAGE(spage);
-+		dpage = alloc_page(GFP_HIGHUSER_MOVABLE | __GFP_NOFAIL);
-+		lock_page(dpage);
-+		copy_highpage(dpage, spage);
-+		dst_pfns[i] = migrate_pfn(page_to_pfn(dpage));
-+		if (src_pfns[i] & MIGRATE_PFN_WRITE)
-+			dst_pfns[i] |= MIGRATE_PFN_WRITE;
-+	}
-+	migrate_device_pages(src_pfns, dst_pfns, npages);
-+	migrate_device_finalize(src_pfns, dst_pfns, npages);
-+	kfree(src_pfns);
-+	kfree(dst_pfns);
-+}
-+
-+/* Removes free pages from the free list so they can't be re-allocated */
-+static void dmirror_remove_free_pages(struct dmirror_chunk *devmem)
-+{
-+	struct dmirror_device *mdevice = devmem->mdevice;
-+	struct page *page;
-+
-+	for (page = mdevice->free_pages; page; page = page->zone_device_data)
-+		if (dmirror_page_to_chunk(page) == devmem)
-+			mdevice->free_pages = page->zone_device_data;
-+}
-+
-+static void dmirror_device_remove_chunks(struct dmirror_device *mdevice)
-+{
-+	unsigned int i;
-+
-+	mutex_lock(&mdevice->devmem_lock);
-+	if (mdevice->devmem_chunks) {
-+		for (i = 0; i < mdevice->devmem_count; i++) {
-+			struct dmirror_chunk *devmem =
-+				mdevice->devmem_chunks[i];
-+
-+			spin_lock(&mdevice->lock);
-+			devmem->remove = true;
-+			dmirror_remove_free_pages(devmem);
-+			spin_unlock(&mdevice->lock);
-+
-+			dmirror_device_evict_chunk(devmem);
-+			memunmap_pages(&devmem->pagemap);
-+			if (devmem->pagemap.type == MEMORY_DEVICE_PRIVATE)
-+				release_mem_region(devmem->pagemap.range.start,
-+						   range_len(&devmem->pagemap.range));
-+			kfree(devmem);
-+		}
-+		mdevice->devmem_count = 0;
-+		mdevice->devmem_capacity = 0;
-+		mdevice->free_pages = NULL;
-+		kfree(mdevice->devmem_chunks);
-+	}
-+	mutex_unlock(&mdevice->devmem_lock);
-+}
-+
- static long dmirror_fops_unlocked_ioctl(struct file *filp,
- 					unsigned int command,
- 					unsigned long arg)
-@@ -1273,6 +1356,11 @@ static long dmirror_fops_unlocked_ioctl(struct file *filp,
- 		ret = dmirror_snapshot(dmirror, &cmd);
- 		break;
- 
-+	case HMM_DMIRROR_RELEASE:
-+		dmirror_device_remove_chunks(dmirror->mdevice);
-+		ret = 0;
-+		break;
-+
- 	default:
- 		return -EINVAL;
- 	}
-@@ -1327,9 +1415,13 @@ static void dmirror_devmem_free(struct page *page)
- 
- 	mdevice = dmirror_page_to_device(page);
- 	spin_lock(&mdevice->lock);
--	mdevice->cfree++;
--	page->zone_device_data = mdevice->free_pages;
--	mdevice->free_pages = page;
-+
-+	/* Return page to our allocator if not freeing the chunk */
-+	if (!dmirror_page_to_chunk(page)->remove) {
-+		mdevice->cfree++;
-+		page->zone_device_data = mdevice->free_pages;
-+		mdevice->free_pages = page;
-+	}
- 	spin_unlock(&mdevice->lock);
- }
- 
-@@ -1402,22 +1494,7 @@ static int dmirror_device_init(struct dmirror_device *mdevice, int id)
- 
- static void dmirror_device_remove(struct dmirror_device *mdevice)
- {
--	unsigned int i;
--
--	if (mdevice->devmem_chunks) {
--		for (i = 0; i < mdevice->devmem_count; i++) {
--			struct dmirror_chunk *devmem =
--				mdevice->devmem_chunks[i];
--
--			memunmap_pages(&devmem->pagemap);
--			if (devmem->pagemap.type == MEMORY_DEVICE_PRIVATE)
--				release_mem_region(devmem->pagemap.range.start,
--						   range_len(&devmem->pagemap.range));
--			kfree(devmem);
--		}
--		kfree(mdevice->devmem_chunks);
--	}
--
-+	dmirror_device_remove_chunks(mdevice);
- 	cdev_del(&mdevice->cdevice);
- }
- 
-diff --git a/lib/test_hmm_uapi.h b/lib/test_hmm_uapi.h
-index e31d58c..8c818a2 100644
---- a/lib/test_hmm_uapi.h
-+++ b/lib/test_hmm_uapi.h
-@@ -36,6 +36,7 @@ struct hmm_dmirror_cmd {
- #define HMM_DMIRROR_SNAPSHOT		_IOWR('H', 0x04, struct hmm_dmirror_cmd)
- #define HMM_DMIRROR_EXCLUSIVE		_IOWR('H', 0x05, struct hmm_dmirror_cmd)
- #define HMM_DMIRROR_CHECK_EXCLUSIVE	_IOWR('H', 0x06, struct hmm_dmirror_cmd)
-+#define HMM_DMIRROR_RELEASE		_IOWR('H', 0x07, struct hmm_dmirror_cmd)
- 
- /*
-  * Values returned in hmm_dmirror_cmd.ptr for HMM_DMIRROR_SNAPSHOT.
-diff --git a/tools/testing/selftests/vm/hmm-tests.c b/tools/testing/selftests/vm/hmm-tests.c
-index f2c2c97..28232ad 100644
---- a/tools/testing/selftests/vm/hmm-tests.c
-+++ b/tools/testing/selftests/vm/hmm-tests.c
-@@ -1054,6 +1054,55 @@ TEST_F(hmm, migrate_fault)
- 	hmm_buffer_free(buffer);
- }
- 
-+TEST_F(hmm, migrate_release)
-+{
-+	struct hmm_buffer *buffer;
-+	unsigned long npages;
-+	unsigned long size;
-+	unsigned long i;
-+	int *ptr;
-+	int ret;
-+
-+	npages = ALIGN(HMM_BUFFER_SIZE, self->page_size) >> self->page_shift;
-+	ASSERT_NE(npages, 0);
-+	size = npages << self->page_shift;
-+
-+	buffer = malloc(sizeof(*buffer));
-+	ASSERT_NE(buffer, NULL);
-+
-+	buffer->fd = -1;
-+	buffer->size = size;
-+	buffer->mirror = malloc(size);
-+	ASSERT_NE(buffer->mirror, NULL);
-+
-+	buffer->ptr = mmap(NULL, size, PROT_READ | PROT_WRITE,
-+			   MAP_PRIVATE | MAP_ANONYMOUS, buffer->fd, 0);
-+	ASSERT_NE(buffer->ptr, MAP_FAILED);
-+
-+	/* Initialize buffer in system memory. */
-+	for (i = 0, ptr = buffer->ptr; i < size / sizeof(*ptr); ++i)
-+		ptr[i] = i;
-+
-+	/* Migrate memory to device. */
-+	ret = hmm_migrate_sys_to_dev(self->fd, buffer, npages);
-+	ASSERT_EQ(ret, 0);
-+	ASSERT_EQ(buffer->cpages, npages);
-+
-+	/* Check what the device read. */
-+	for (i = 0, ptr = buffer->mirror; i < size / sizeof(*ptr); ++i)
-+		ASSERT_EQ(ptr[i], i);
-+
-+	/* Release device memory. */
-+	ret = hmm_dmirror_cmd(self->fd, HMM_DMIRROR_RELEASE, buffer, npages);
-+	ASSERT_EQ(ret, 0);
-+
-+	/* Fault pages back to system memory and check them. */
-+	for (i = 0, ptr = buffer->ptr; i < size / (2 * sizeof(*ptr)); ++i)
-+		ASSERT_EQ(ptr[i], i);
-+
-+	hmm_buffer_free(buffer);
-+}
-+
- /*
-  * Migrate anonymous shared memory to device private memory.
-  */
--- 
-git-series 0.9.1
+--wdbx6g5pylyw5se6
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi Noralf,
+
+On Sat, Sep 24, 2022 at 08:06:17PM +0200, Noralf Tr=F8nnes wrote:
+> Den 24.09.2022 19.56, skrev Noralf Tr=F8nnes:
+> >=20
+> >=20
+> > Den 22.09.2022 16.25, skrev Maxime Ripard:
+> >> As the number of kunit tests in KMS grows further, we start to have
+> >> multiple test suites that, for example, need to register a mock DRM
+> >> driver to interact with the KMS function they are supposed to test.
+> >>
+> >> Let's add a file meant to provide those kind of helpers to avoid
+> >> duplication.
+> >>
+> >> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> >>
+> >> diff --git a/drivers/gpu/drm/tests/Makefile b/drivers/gpu/drm/tests/Ma=
+kefile
+> >> index 2d9f49b62ecb..b29ef1085cad 100644
+> >> --- a/drivers/gpu/drm/tests/Makefile
+> >> +++ b/drivers/gpu/drm/tests/Makefile
+> >> @@ -8,6 +8,7 @@ obj-$(CONFIG_DRM_KUNIT_TEST) +=3D \
+> >>  	drm_format_helper_test.o \
+> >>  	drm_format_test.o \
+> >>  	drm_framebuffer_test.o \
+> >> +	drm_kunit_helpers.o \
+> >>  	drm_mm_test.o \
+> >>  	drm_plane_helper_test.o \
+> >>  	drm_rect_test.o
+> >> diff --git a/drivers/gpu/drm/tests/drm_kunit_helpers.c b/drivers/gpu/d=
+rm/tests/drm_kunit_helpers.c
+> >> new file mode 100644
+> >> index 000000000000..7ebd620481c1
+> >> --- /dev/null
+> >> +++ b/drivers/gpu/drm/tests/drm_kunit_helpers.c
+> >> @@ -0,0 +1,54 @@
+> >> +#include <drm/drm_drv.h>
+> >> +#include <drm/drm_managed.h>
+> >> +
+> >> +#include <linux/device.h>
+> >> +
+> >> +static const struct drm_mode_config_funcs drm_mode_config_funcs =3D {
+> >> +};
+> >> +
+> >> +static const struct drm_driver drm_mode_driver =3D {
+> >> +};
+> >> +
+> >> +static void drm_kunit_free_device(struct drm_device *drm, void *ptr)
+> >> +{
+> >> +	struct device *dev =3D ptr;
+> >> +
+> >> +	root_device_unregister(dev);
+> >> +}
+> >> +
+> >> +struct drm_device *drm_kunit_device_init(const char *name)
+> >> +{
+> >> +	struct drm_device *drm;
+> >> +	struct device *dev;
+> >> +	int ret;
+> >> +
+> >> +	dev =3D root_device_register(name);
+> >> +	if (IS_ERR(dev))
+> >> +		return ERR_CAST(dev);
+> >> +
+> >> +	drm =3D drm_dev_alloc(&drm_mode_driver, dev);
+> >=20
+> > I can't find drm being freed anywhere?
+> > Maybe you could assign it to drm->managed.final_kfree.
+
+There's a drm_dev_put in the test_exit hook which should free it.
+
+> Perhaps a better solution would be to use devm_drm_dev_alloc() and
+> unregister the root device on exit. That avoids reaching into the drm
+> managed internals and it looks more like a regular driver.
+
+But yeah, this is a good idea, I'll do it.
+
+Maxime
+
+--wdbx6g5pylyw5se6
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYzFyjAAKCRDj7w1vZxhR
+xfL5AP9r8SOCVdiPcnR+tkP1VdDT4xdxvsJmgcz60MJ5iuvezwEAwp/UpYjOSXCb
+YrQ0Vm/0KNnlKIDIInbF28eMSo1bSw0=
+=31r4
+-----END PGP SIGNATURE-----
+
+--wdbx6g5pylyw5se6--
