@@ -1,69 +1,108 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78A6E5EA6C3
-	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 15:03:19 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id CE9145EA88A
+	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 16:36:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E9F6E10E6A9;
-	Mon, 26 Sep 2022 13:03:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1544710E6CA;
+	Mon, 26 Sep 2022 14:36:20 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2DCA610E6A3;
- Mon, 26 Sep 2022 13:02:59 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id B958321E33;
- Mon, 26 Sep 2022 13:02:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1664197377; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=MT2Be4s7H7Cf1iKKuGB5u2tX1z99wlvHFDw8JE0Ktgs=;
- b=UgN9+wXm5InDVAppBXWjV5XDPyX73h/bzd/K8pof6d0qkqqPdL8B+n5gN2lwvqYTCek4Q7
- yoyGvZ3Ruu94Nt4Ik5/eGKVhhagnvZfFBi1CZj5K6+gvU29r0nLMNdEJCga6GtesKRlOQx
- IJ7B3fZsMnJMwSKi8+TDHRyZtkt8zBQ=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1664197377;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=MT2Be4s7H7Cf1iKKuGB5u2tX1z99wlvHFDw8JE0Ktgs=;
- b=xkhoRsvEK9y2ZToD8jzmFvb8V7/TitPaSiZDZCE6tZG3l7W9WvP2m/1XHxJZjL6Rayq4pG
- DWIM0AixbK2WCiCg==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E8F9713486;
- Mon, 26 Sep 2022 13:02:56 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id gKkYNwCjMWN5YAAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Mon, 26 Sep 2022 13:02:56 +0000
-Message-ID: <fb2dcbdd-057b-c3e6-0be7-3a8ee5822d4d@suse.de>
-Date: Mon, 26 Sep 2022 15:02:56 +0200
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam07on2059.outbound.protection.outlook.com [40.107.212.59])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8ECCB10E6CA;
+ Mon, 26 Sep 2022 14:36:15 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=UTeOR7XaHuClWpgW35y78LNOnYC3VOkdlebOo0qAV+uJHk6mBAxWKy+vMY31WAUD/f7ST9+mz2MGTqtrddpQpz/tR8x2YOybaD2C039DpHkor5wtRWvCe7TsKvg1HirTfAfSoI1QvZ9hDLxHLFp6E9t5tmMB7xRkpfCfSD/p0zJcQ3mXtSr0LPcBVaz57Fq27mUb2x4u8FcuV2MZqv5hXUmXO9nt64skEwXIc1D4+YfZxLdbpq+ynmfiCjKMj5jzxk55rK0zRq9wYblg7FmKWT9HFKe0BqevKJs7mo1XJQxc4RDYYnG1HFaW/VOH4I1KbFlzwovFYALYW7w3wrbBWA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=uMmBKbfeNs1hw9UZQVm/pUxCUYFzVOLZ4v7rOEjbTbA=;
+ b=Irbu91I+PJn13l5552pOlSIq53VnyvVnmdbPo1Yin6+SCMX+ZWQV+6nnDYr84ndNnZ840owyJ0Db7mYFEjoPqTgShculJmprPNH2+310lyxozdpgO2azpZT4fZra5SYxntRdFv2jD40Hz4qilK4re3HokwGF/k6adKijBggWIeDuxRTlm1uWulU+9wgvPwRVB+kK7EsNpio+IaZG+InEUozCNZmlxrJNxGSBzIo2JnBgmXRjrd08+DEklHJjyzBNWwMxjcCGbH0aZCgLkEHhUsEvGJfmyVJ+TTByeSGQXYT85ab9pZTnKIBpPPJ5KTQDOu8gdtJhtOCs3JHMdWq5uA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=uMmBKbfeNs1hw9UZQVm/pUxCUYFzVOLZ4v7rOEjbTbA=;
+ b=SkpdPRNPl1tE+kFJsFGZUE62vfXCdpfIiEVK2Qsp1MHsCw+ch3y/M7k1MvIxUIS1hG/aVHcd3E8cr8qeqlEzfvVZEvmA5pUii8x4hYublFui3yUFtCmQpzfVNdeTlsCw+BLPF3rHKlmn4LoRoiOCBOlAGGdW+hT8LHG5URIZajuX4lbdO6rx3PkAd/enbJaODPraiYC+y/wZfXE4d12StF9jrEfZfGXXTx+rz+jlexsLtCRZXh7kbLcA6zyZhA6oFvudkcdsS36uaH1uFtDqncSdgU2CiCX4iQLIVNjDRyuaXIMU6rq2RXYp/HkgGkom6/ptdQ8IxcJNXe9+4jjwvw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from MN2PR12MB4192.namprd12.prod.outlook.com (2603:10b6:208:1d5::15)
+ by SJ0PR12MB6735.namprd12.prod.outlook.com (2603:10b6:a03:479::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.19; Mon, 26 Sep
+ 2022 14:36:12 +0000
+Received: from MN2PR12MB4192.namprd12.prod.outlook.com
+ ([fe80::462:7fe:f04f:d0d5]) by MN2PR12MB4192.namprd12.prod.outlook.com
+ ([fe80::462:7fe:f04f:d0d5%8]) with mapi id 15.20.5654.025; Mon, 26 Sep 2022
+ 14:36:12 +0000
+Date: Mon, 26 Sep 2022 11:36:11 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Alistair Popple <apopple@nvidia.com>
+Message-ID: <YzG42766BJSxro0R@nvidia.com>
+References: <cover.f15b25597fc3afd45b144df863eeca3b2c13f9f4.1664171943.git-series.apopple@nvidia.com>
+ <3d74bb439723c7e46cbe47d1711795308aee4ae3.1664171943.git-series.apopple@nvidia.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3d74bb439723c7e46cbe47d1711795308aee4ae3.1664171943.git-series.apopple@nvidia.com>
+X-ClientProxiedBy: MN2PR02CA0011.namprd02.prod.outlook.com
+ (2603:10b6:208:fc::24) To MN2PR12MB4192.namprd12.prod.outlook.com
+ (2603:10b6:208:1d5::15)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Content-Language: en-US
-To: Maxime Ripard <maxime@cerno.tech>
-References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-10-f733a0ed9f90@cerno.tech>
- <72a8c3ce-ed03-0a77-fb92-eaa992eb86fe@suse.de>
- <20220926101716.urehomr2lzv5pqln@houat>
- <CAMuHMdXonxXiw4x2PvnQ=xedOQO1y=K0O8g1+ixeSvXmzcOOVw@mail.gmail.com>
- <c714b53d-8e18-9105-9e27-8b783f246082@suse.de>
- <20220926124259.o6fcfnxjy7gyzqz2@houat>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-In-Reply-To: <20220926124259.o6fcfnxjy7gyzqz2@houat>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------VIX17lF7ne9Z5J5x4Xtg52tI"
-Subject: Re: [Nouveau] [PATCH v2 10/33] drm/modes: Add a function to
- generate analog display modes
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN2PR12MB4192:EE_|SJ0PR12MB6735:EE_
+X-MS-Office365-Filtering-Correlation-Id: 43ed8a99-ce9b-4a18-8b18-08da9fcc758f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: +4aaWTLp/K4X8/bI5mRxDcgM05Ut3ixbT8NtsngRDPL0x31c4JnWqcrHY1xm3PFKC3syAVeJzd+hEOOjubjKe+Sf3FO1AAJqUkxqzchPng7fWgzyZsyPg6iqJFvkFXjGTfFBvHuMOuY+nKUZshuw+iQgkByK1SQ3oifLZZJVvn8Q+Og+9EO96lSuXINOvB2xJEO1yy09jLu4NuCURPtN5vnKgIEV4iryJfXKEHZ8jcSMhVRALmjT8r8LEwVUNQ93weYN19NapEfuw0Rn2p/TFQ5bC69pbdhAeGp3IkK9DJp45oueU2t39mtiRgPFkiMDCV+3wg00CJSeFEvoP+zs3I+Zx+MDRzXDtkGr7M/fEQOtwzSUIjvNhyDD6OusFrInScL4T7hdVSODWofne5RztJBdX9JGvPRQV/amxiaPlkK9OCg54kROgX/lSl/iv4BP0IMv8z9myi7cXBEm1iDcuXJgyndosuzGDW1Mvx66HdAiZASLuJiGH9/z8PInO07zQ9/SQMWo6tM/X1V//gEzAlrEBY3rOWCyzyT9GeF00Q9Bfybww+Av3eYbwKukqh9S3Pizti0nkn0nUaH1Bg23UWnkiJCVFj9EeX23JF9LP913dsWLGiMdTWn/7VSsBuPI8iBAIgQaUxK/ISdoXw+ZOSBbWeSBgZp+Ojs9eNissJKANcFTi4YOQY1/3MH7U2eFXeIbDSqLOb2BFprDQ8+nVA==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MN2PR12MB4192.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230022)(4636009)(396003)(39860400002)(366004)(346002)(376002)(136003)(451199015)(41300700001)(6862004)(478600001)(6486002)(8676002)(26005)(66556008)(66476007)(6506007)(4326008)(6512007)(66946007)(2616005)(36756003)(7416002)(37006003)(5660300002)(8936002)(186003)(2906002)(6636002)(54906003)(86362001)(38100700002)(316002)(83380400001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?IAJYxzUDh7DbemX32432fEqn4dU79g2DXhTItTTZTv7dAbzsOFPP90H2ul7R?=
+ =?us-ascii?Q?bMj0AluIoeasduIl48eCwPqgp6JIZlNhL06lfWaoRVJi1OIB6sM9NeF5REbD?=
+ =?us-ascii?Q?SXiSyVQS9iVuzPoCTo3AXQVdqO1NkU5XLQiNItbh0AE4sQzVAH2JfMGjqt11?=
+ =?us-ascii?Q?lrWy0tukTfGF3BFCLEf4kRSpX9MZfeLhP/CFUdYG4/IK//dn4kA2JJCVkyoP?=
+ =?us-ascii?Q?p6JPuRsNBvOvKNCoJq9iIvMlsowwj0pXYQ80lMnctFmATp0nolaG49rDkcit?=
+ =?us-ascii?Q?o38U0VRjxHHwWupooVf3XlXy8zj12mutn7DHkJr3KrgarzxS0iT2C137LyKt?=
+ =?us-ascii?Q?wwi2tjERg9OYDkiiWA91E4ug9Ppq8iZsv9fIHsM48v25Q+AhhJprQY5VvF03?=
+ =?us-ascii?Q?LCG93QGDCm/AI/+RxDe7thUbjCHzQJN48OxJ1MH+OD8KqmJpInsMs52q0ztE?=
+ =?us-ascii?Q?J3PxHti42ZihVwzBl2tJ7P4x9aA4IbQq9i+S4tsLQB7n2OqOzwxwJ34/zoqc?=
+ =?us-ascii?Q?GLpTLlR3ZnWF3obrGRbB2jWbrmn4DS3bR7NeTR6cOzxKxgDMzvIlq3GhR7mW?=
+ =?us-ascii?Q?uaTCFJcQ5USBOFuQ3om1ohM23YE50ICRJHGm4FjOxVJUR/Ncq+PZAKIKQbq5?=
+ =?us-ascii?Q?UmRizvXTRTkvSYQAokwymIAHcd8ufpUVI7S2X4u/Yqe011MfaooagG5Imgiz?=
+ =?us-ascii?Q?ULe0pvYuMFquv2I2Q+dQcCrlK/eOCvw176w60FsEuVNuXRJL/q6tO48/9bMa?=
+ =?us-ascii?Q?tjqs+CdZNVLNIkuyDIpFlstBasFS5Zn8S0q3LuziFJbsswDrN3nniZLJAJqz?=
+ =?us-ascii?Q?/IALsswOej/ShcrlOJGdWjln5euUS9tZG+Hukj9WutPl7WsCaLIfOQj6gdVo?=
+ =?us-ascii?Q?FOcxFBJyN92ac0pTuZjBm0YnyyVIPV//1CpR4+T7AtJuW5o05Lnep5Ogfgq5?=
+ =?us-ascii?Q?UkiOhwpFrzoLS8SjDGsCb9iEj5f6p1aWenLIqW4kQ+/joy8+lZRtpASuFIO2?=
+ =?us-ascii?Q?g6WPIyNc1YZflFhkmj7talbrH/ZZ2yOG9KE/NBhh/z9QqaUaSn1zIaXJoDQu?=
+ =?us-ascii?Q?EbJasYXcJQ5hk5XGq/dodGFwIiF0xFNx7KyHNmU00NDCJxPhzJmP18AOqGF4?=
+ =?us-ascii?Q?vAGAd6b0hvJRsNCCz4E/GGq6bJX9wr+mrPocJ5T6yr2598Z3JVncOq2R+4W9?=
+ =?us-ascii?Q?aehRe1GmAo0yPz+wWiOTHsLKX1XcWrSehZuS0/kQWCdisM4cKZ+K3c/u9UYz?=
+ =?us-ascii?Q?gVC0SLInVfuNtlpS/FXSkW1UWgOKsVp2IX1D3Wymw9JHmZvyQRHad0KzvTTH?=
+ =?us-ascii?Q?Nde+IoBaQE+oij/7ZMDRdbVFxI8+xNemL3eL1bosyUIRBlBcBpciQCE4V6TO?=
+ =?us-ascii?Q?egAheHkUkeywZduPKr9JBz7fa1tMcnpcO5/2HBs1a85c+WZkRTJDW7sYHGtk?=
+ =?us-ascii?Q?7uYJIgNcUnhLl3i2ZDb18ExmLstqcIDaA0y2EvW4X/N5Z2D71D/r+zuLQAwo?=
+ =?us-ascii?Q?qTncLVM/B1jy5JaiSoIb5cDztEMNkY/KoO7n6UAHrmr0mFdAXCgZFAeCjlKu?=
+ =?us-ascii?Q?aFbDvxSpbHN/Up7Cn6Q=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 43ed8a99-ce9b-4a18-8b18-08da9fcc758f
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB4192.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Sep 2022 14:36:12.2395 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: cCC/PDeNxAXtrHoF+y1GcJJpfmsjfQz8q1qAz8WsBg74f9SPoCYsuerBN10Vmvj2
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6735
+Subject: Re: [Nouveau] [PATCH 2/7] mm: Free device private pages have zero
+ refcount
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,126 +114,45 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
+Cc: Alex Sierra <alex.sierra@amd.com>, David Airlie <airlied@linux.ie>,
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Phil Elwell <phil@raspberrypi.com>, Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
- Hans de Goede <hdegoede@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- linux-arm-kernel@lists.infradead.org,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+ linux-mm@kvack.org, amd-gfx@lists.freedesktop.org,
+ Michael Ellerman <mpe@ellerman.id.au>,
+ "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Ralph Campbell <rcampbell@nvidia.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Dan Williams <dan.j.williams@intel.com>,
+ Felix Kuehling <Felix.Kuehling@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ linux-kernel@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------VIX17lF7ne9Z5J5x4Xtg52tI
-Content-Type: multipart/mixed; boundary="------------lTRY2DgwgxL7uejtpBvwWUwq";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Maxime Ripard <maxime@cerno.tech>
-Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
- Karol Herbst <kherbst@redhat.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
- Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
- intel-gfx@lists.freedesktop.org, Hans de Goede <hdegoede@redhat.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>,
- Dave Stevenson <dave.stevenson@raspberrypi.com>,
- linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-Message-ID: <fb2dcbdd-057b-c3e6-0be7-3a8ee5822d4d@suse.de>
-Subject: Re: [PATCH v2 10/33] drm/modes: Add a function to generate analog
- display modes
-References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-10-f733a0ed9f90@cerno.tech>
- <72a8c3ce-ed03-0a77-fb92-eaa992eb86fe@suse.de>
- <20220926101716.urehomr2lzv5pqln@houat>
- <CAMuHMdXonxXiw4x2PvnQ=xedOQO1y=K0O8g1+ixeSvXmzcOOVw@mail.gmail.com>
- <c714b53d-8e18-9105-9e27-8b783f246082@suse.de>
- <20220926124259.o6fcfnxjy7gyzqz2@houat>
-In-Reply-To: <20220926124259.o6fcfnxjy7gyzqz2@houat>
+On Mon, Sep 26, 2022 at 04:03:06PM +1000, Alistair Popple wrote:
+> Since 27674ef6c73f ("mm: remove the extra ZONE_DEVICE struct page
+> refcount") device private pages have no longer had an extra reference
+> count when the page is in use. However before handing them back to the
+> owning device driver we add an extra reference count such that free
+> pages have a reference count of one.
+> 
+> This makes it difficult to tell if a page is free or not because both
+> free and in use pages will have a non-zero refcount. Instead we should
+> return pages to the drivers page allocator with a zero reference count.
+> Kernel code can then safely use kernel functions such as
+> get_page_unless_zero().
+> 
+> Signed-off-by: Alistair Popple <apopple@nvidia.com>
+> ---
+>  arch/powerpc/kvm/book3s_hv_uvmem.c       | 1 +
+>  drivers/gpu/drm/amd/amdkfd/kfd_migrate.c | 1 +
+>  drivers/gpu/drm/nouveau/nouveau_dmem.c   | 1 +
+>  lib/test_hmm.c                           | 1 +
+>  mm/memremap.c                            | 5 -----
+>  mm/page_alloc.c                          | 6 ++++++
+>  6 files changed, 10 insertions(+), 5 deletions(-)
 
---------------lTRY2DgwgxL7uejtpBvwWUwq
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+I think this is a great idea, but I'm surprised no dax stuff is
+touched here?
 
-SGkNCg0KQW0gMjYuMDkuMjIgdW0gMTQ6NDIgc2NocmllYiBNYXhpbWUgUmlwYXJkOg0KPiBP
-biBNb24sIFNlcCAyNiwgMjAyMiBhdCAwMToxNzo1MlBNICswMjAwLCBUaG9tYXMgWmltbWVy
-bWFubiB3cm90ZToNCj4+IEhpDQo+Pg0KPj4gQW0gMjYuMDkuMjIgdW0gMTI6MzQgc2Nocmll
-YiBHZWVydCBVeXR0ZXJob2V2ZW46DQo+Pj4gSGkgTWF4aW1lLA0KPj4+DQo+Pj4gT24gTW9u
-LCBTZXAgMjYsIDIwMjIgYXQgMTI6MTcgUE0gTWF4aW1lIFJpcGFyZCA8bWF4aW1lQGNlcm5v
-LnRlY2g+IHdyb3RlOg0KPj4+PiBPbiBGcmksIFNlcCAyMywgMjAyMiBhdCAxMTowNTo0OEFN
-ICswMjAwLCBUaG9tYXMgWmltbWVybWFubiB3cm90ZToNCj4+Pj4+PiArICAgLyogNjMuNTU2
-dXMgKiAxMy41TUh6ID0gODU4IHBpeGVscyAqLw0KPj4+Pj4NCj4+Pj4+IEkga2luZCBvZiBn
-ZXQgd2hhdCB0aGUgY29tbWVudCB3YW50cyB0byB0ZWxsIG1lLCBidXQgdGhlIHVuaXRzIGRv
-bid0IGFkZCB1cC4NCj4+Pj4NCj4+Pj4gSSdtIG5vdCBzdXJlIGhvdyBpdCBkb2Vzbid0IGFk
-ZCB1cD8NCj4+Pj4NCj4+Pj4gV2UgaGF2ZSBhIGZyZXF1ZW5jeSBpbiBIeiAoZXF1aXZhbGVu
-dCB0byBzXi0xKSBhbmQgYSBkdXJhdGlvbiBpbiBzLCBzbw0KPj4+PiB0aGUgcmVzdWx0IGVu
-ZHMgdXAgd2l0aCBubyBkaW1lbnNpb24sIHdoaWNoIGlzIHRvIGJlIGV4cGVjdGVkIGZvciBh
-DQo+Pj4+IG51bWJlciBvZiBwZXJpb2RzPw0KPj4+DQo+Pj4gVG8gbWFrZSB0aGUgdW5pdHMg
-YWRkIHVwLCBpdCBzaG91bGQgYmUgMTMuNSBNcGl4ZWwvcw0KPj4+ICh3aGljaCBpcyB3aGF0
-IGEgcGl4ZWwgY2xvY2sgb2YgMTMuNSBNSHogcmVhbGx5IG1lYW5zIDstKQ0KPj4NCj4+IFNv
-cnQgb2YuIEl0IGxlYXZlcyB0aGUgdGltZSB2YWx1ZSBhcyBhIG1hZ2ljIG51bWJlciwgd2hp
-Y2ggb2JmdXNjYXRlcyB3aGF0J3MNCj4+IGhhcHBlbmluZy4NCj4+DQo+PiBUaGUgdW5pdCBm
-b3IgaHRvdGFsIGlzIHBpeGVscy9zY2FubGluZSBiZWNhdXNlIGlmIHlvdSBtdWx0aXBseSBp
-dCB3aXRoIHRoZQ0KPj4gbnVtYmVyIG9mIHNjYW5saW5lcyBwZXIgZnJhbWUgKHdoaWNoIGlz
-IGluIHZ0b3RhbCksIHlvdSBnZXQgcGl4ZWxzL2ZyYW1lLg0KPj4gTXVsdGlwbHlpbmcgd2l0
-aCB0aGUgZnJhbWVzIHBlciBzZWNvbmQgcmVzdWx0cyBpbiB0aGUgcGl4ZWwgY2xvY2sgaW4N
-Cj4+IHBpeGVscy9zZWNvbmQuDQo+IA0KPiBUaGF0J3MgdHJ1ZSwgYnV0IGJvdGggYXJlIHRy
-dWU/DQoNCkknbSBub3QgcXVpdGUgc3VyZSB3aGF0IHlvdSBtZWFuLiBJIHRyaWVkIHRvIHNh
-eSB0aGF0IHRoaXMgbWFnaWMgdGltZSANCnZhbHVlIG1ha2VzIGFsbCB0aGlzIGhhcmQgdG8g
-c2VlLg0KDQo+IA0KPj4gVGhhdCdzIGEgYml0IG11Y2ggZm9yIHRoaXMgY29tbWVudC4gSGVu
-Y2UsIEkgc3VnZ2VzdGVkIHRvIHJlbW92ZSB0aGVzZQ0KPj4gY29tbWVudHMgZW50aXJlbHkg
-YW5kIGRvY3VtZW50IHRoZSByZWxhdGlvbiBhbW9uZyB0aGUgbnVtYmVycyBpbiBhIG1vcmUN
-Cj4+IHByb21pbmVudCBsb2NhdGlvbi4gVGhlIGRvY3VtZW50YXRpb24gZm9yIGRybV9kaXNw
-bGF5X21vZGUgd291bGQgYmUgYSBnb29kDQo+PiBwbGFjZSwgSSBndWVzcy4NCj4gDQo+IEkn
-bSBub3Qgc3VyZSBJIHVuZGVyc3RhbmQgd2hhdCBpdCdzIGFib3V0LiBJdCdzIGFuIGV4cGxp
-Y2l0IHJlcXVpcmVtZW50DQo+IG9mIFBBTCBhbmQgTlRTQywgd2h5IHdvdWxkIHNvbWV0aGlu
-ZyBzbyBzcGVjaWZpYyBiZSBpbiB0aGUgZ2VuZXJpYw0KPiBkZWZpbml0aW9uIG9mIGRybV9k
-aXNwbGF5X21vZGU/DQoNCk5vdCBqdXN0IFRWIHNpZ25hbHMsIGl0J3MgdGhlIGNhc2UgZm9y
-IGFsbCBkaXNwbGF5cyB3ZXJlIHdlIGNvbnRyb2wgdGhlIA0KZWxlY3Ryb24gYmVhbSBpbiBz
-b21lIHdheSAoVkdBKS4gU3VjaCBkb2N1bWVudGF0aW9uIGNvdWxkIHRoZXJlZm9yZSBiZSAN
-CmFkZGVkIHRvIERSTSBpbiBhbiBhcHByb3ByaWF0ZSBwbGFjZS4gVGhhdCBtYWtlcyBpdCBl
-YXNpZXIgZm9yIG5ld2NvbWVycyANCnRvIHNlZSB3aHkgY2VydGFpbiBtb2RlcyBhcmUgZGVm
-aW5lZCB0aGUgd2F5IHRoZXkgYXJlLiAoQXQgZmlyc3QsIA0KZGlzcGxheSBtb2RlcyBjYW4g
-bG9vayBsaWtlIHRoZXkgYXJlIG1hZGUgdXAgcmFuZG9tbHkuKQ0KDQpGb3IgeW91ciB0ZXN0
-IGNhc2VzLCBtYXliZSBzaW1wbHkgcmVmZXIgdG8gdGhlIHJlbGV2YW50IHN0YW5kYXJkIGRv
-Y3VtZW50cy4NCg0KQmVzdCByZWdhcmRzDQpUaG9tYXMNCg0KPiANCj4gTWF4aW1lDQoNCi0t
-IA0KVGhvbWFzIFppbW1lcm1hbm4NCkdyYXBoaWNzIERyaXZlciBEZXZlbG9wZXINClNVU0Ug
-U29mdHdhcmUgU29sdXRpb25zIEdlcm1hbnkgR21iSA0KTWF4ZmVsZHN0ci4gNSwgOTA0MDkg
-TsO8cm5iZXJnLCBHZXJtYW55DQooSFJCIDM2ODA5LCBBRyBOw7xybmJlcmcpDQpHZXNjaMOk
-ZnRzZsO8aHJlcjogSXZvIFRvdGV2DQo=
-
---------------lTRY2DgwgxL7uejtpBvwWUwq--
-
---------------VIX17lF7ne9Z5J5x4Xtg52tI
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmMxowAFAwAAAAAACgkQlh/E3EQov+Dp
-2A/9FTzIBdYwbm4jm+v2I6UH+a+l8ZxwlaEV5t7dSN6faOFpdI+hTsdMxbxF16xyUqyle3KcWzvs
-2BV5jFLa+SeZLktkzfvIunf9xZ6T+wgH2l5HvGPJJv+7BWwxaVLtFPD9Vhs4vYh7IFsU7Uk3Uvcl
-RTkscFgaYXrQTUtaK98ckUR7V7J0wNnoZc57rvZk8kaJWxRI0g8tTN4mQrXXM6kMl4votVOFKWXr
-OgMBSKGjIqHBO2jmxdLCsOPE4SijlxFDYuUcM5RUk1N67CEjbG2oImO5SRJa5P5utJ7iSZdNt2jA
-TnUfQ8Cu23FjT94hvYfM4gNWWtTQsSpKcQq9UHVatnSoN0ybjzmIjkWOA/MkeQLRqwVWUMn7R6eQ
-c++m3vx5CD5VVzgRVZpcv2Y7b0K76EBTxa8WYW4PxQFNsL/f9QOkvJVh2Y8y0VnBpGQ+co5m+iv+
-W2PY6lmelCjcdxcgYTSwwPR6bxjfgjDhmcHIn4mI9LOoKqlt7DjMQNjpqiqRlE9YG2raIXPrWcv8
-k4rSyUtGXGUEebhnGkpH91RVelBl7QYl+PGio3aqM2A21pCuK2WFJ4bmSwO2uR+b7RtlUgaTLuj7
-tiPZVRE6h+jXRsuiGy41jkP07nv2EAHNIyeNhh1Q9E+H4fR6bMKK54wlTxcVxLa+k387fwwPNiO0
-ltM=
-=Kwqm
------END PGP SIGNATURE-----
-
---------------VIX17lF7ne9Z5J5x4Xtg52tI--
+Jason
