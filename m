@@ -1,66 +1,81 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 772825EA63E
-	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 14:34:55 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E4575EA664
+	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 14:43:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BFD8810E69F;
-	Mon, 26 Sep 2022 12:34:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8FA9810E6A0;
+	Mon, 26 Sep 2022 12:43:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7A4F210E694;
- Mon, 26 Sep 2022 12:34:38 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 20D151F38A;
- Mon, 26 Sep 2022 12:34:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1664195677; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=pZfEVr0F+eDUbTKMwdgidKtFX7VuirmYGY1O7jfs79E=;
- b=ZJt6LzVTk7uUgNb/3+RfQS4n9gNmyE/Ndw3OtVGcUh3bb79rZhzJBODRYZZZq2QquYCc6L
- RGqHr/EYJ6i3xOcwjiqpcU2ER9d6O9MRZgcYPOxOy1WDZXKyxVglBUKF4Mb4Afa7xVLS+Y
- cqOAvXYCKS7IIiST8MsIPbwyJBZwvu4=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1664195677;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=pZfEVr0F+eDUbTKMwdgidKtFX7VuirmYGY1O7jfs79E=;
- b=mJY48elw8wJdWrhw2pCkaIypPsM43sG83ftl2OiftxYeqqyzno2SX0o3lzuEzQ12eeEVcO
- NDbVNGZjP0yMZ3DA==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AA48A13486;
- Mon, 26 Sep 2022 12:34:36 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id E1ijKFycMWOWUwAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Mon, 26 Sep 2022 12:34:36 +0000
-Message-ID: <d50ed519-ba89-70e2-0f0c-b58593a3c060@suse.de>
-Date: Mon, 26 Sep 2022 14:34:36 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Content-Language: en-US
-To: Maxime Ripard <maxime@cerno.tech>
+Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com
+ [66.111.4.230])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 889AD89864;
+ Mon, 26 Sep 2022 12:43:06 +0000 (UTC)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailnew.nyi.internal (Postfix) with ESMTP id E376F58AE2F;
+ Mon, 26 Sep 2022 08:43:02 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute2.internal (MEProxy); Mon, 26 Sep 2022 08:43:02 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
+ :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to; s=fm2; t=1664196182; x=1664203382; bh=i4gXX7cMD1
+ +PjoZvTs+9A2oUnU38ddYmRKsQkQVxiMs=; b=utTKiHScIMKiv0MpVyZ4lYRSxq
+ IdIfp7iVLBBmx2S2eOAO53gfMKyfiFzEuir61MIGPNtwTE7wHXJHK7BGuOXHrQ+C
+ 6X4WAl58F/xpl6BNrq0gnmF1iHRRK/dZjj6RZarM+rsvG+kwaBM11YzBKwU2fK+J
+ aYMxKD/57VEDUbQAprlFh6MyepwhDcYUwbQ2YQpPw2K0aafj9t8XvbE4bATWnjnG
+ 9zsJZcovK2yYprsEajU1fQdq98AwZ1JXxZJxIQKfQR6JVyM9iGlnbc33dbmnjjBh
+ Jq564dxEOi7Rhb74/fPZNrDBmsyqdjHxdfYtEO3M+Nvo2uClDa6pcwPXODtw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
+ :feedback-id:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:sender:subject:subject:to:to
+ :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; t=1664196182; x=1664203382; bh=i4gXX7cMD1+PjoZvTs+9A2oUnU38
+ ddYmRKsQkQVxiMs=; b=Exp0lmhEFcQQlHZBqhBkTbZV5eb7+Y9htD6qSb+s/hgK
+ oVFKHN8HJq9Urzj4VJy3PyLbWdJ9n1dKgyqxCE+05OCGD885OoKYLqQi+Ud55+zy
+ RnwkhD9xF274QiLfb+kMpRK/hXxkE9RLFRllQKr3UShCwH4VfQDIuL3LsgnoaHQA
+ aVYCrQFwMjwEmcbRluRGExOFwQ8sOeZZH/cEMPHNks5Vb6dhw8s6eQ1AuRig0GOV
+ eAD6u45d6IWsbNVjU7bRobP+NZQt8a1kQwa+/rGROqgNf2+R5zIPDdLfDHmTtRPc
+ SbQXmxra9Viq7gcGHn5blSVPsVIwNbMy7sQ3vGMMeA==
+X-ME-Sender: <xms:Vp4xY35t1RrPNaALSMHuh1B7j94uji_FDc0WF_zgf44oMTSpfpclbA>
+ <xme:Vp4xY87uXKmLp9ZsVPzW4LKLiBZi2Qtf7Id_KCsiNFUVqwiERIq89SKC8Z9K9VD1X
+ pSqU4vHHxKHDrsaiwQ>
+X-ME-Received: <xmr:Vp4xY-cZZ1wFeWgO57h01Q7WFAblva8uy_54RuhC02BABgmJvfEOFmnQw5n9NjuVU-XBPrQKB16mWXK-lHGIiEg4NBmioW1bYckL>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeegvddgheeiucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
+ mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
+ htthgvrhhnpeetfefffefgkedtfefgledugfdtjeefjedvtddtkeetieffjedvgfehheff
+ hfevudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+ hmrgigihhmvgestggvrhhnohdrthgvtghh
+X-ME-Proxy: <xmx:Vp4xY4L9AnEzzujabPzhsNgmzGczwxE5aCo-hgxyNFIM0zd-bd6AJQ>
+ <xmx:Vp4xY7KAJHokA38AoKvWik_cMIoXMQP0yZRl6yvN-iMXL7wV1b-Y-Q>
+ <xmx:Vp4xYxxUKU4-qvMnxN_ooEXC7nxV7xQuaa8m_z0yvZwsa4OkyikzBg>
+ <xmx:Vp4xY5ksBfiDGqIvX384MVdKlM8qOdvR5mmTsN5k9EWbuVI4_0PHdA>
+Feedback-ID: i8771445c:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 26 Sep 2022 08:43:01 -0400 (EDT)
+Date: Mon, 26 Sep 2022 14:42:59 +0200
+From: Maxime Ripard <maxime@cerno.tech>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20220926124259.o6fcfnxjy7gyzqz2@houat>
 References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-6-f733a0ed9f90@cerno.tech>
- <fa71ae1c-f9ca-167c-7993-b698ea3473a0@suse.de>
- <20220926095031.vlwsw7willi36yd4@houat>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-In-Reply-To: <20220926095031.vlwsw7willi36yd4@houat>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------mwjZHgn1Ll4ReHR00ksHLHNN"
-Subject: Re: [Nouveau] [PATCH v2 06/33] drm/connector: Rename legacy TV
- property
+ <20220728-rpi-analog-tv-properties-v2-10-f733a0ed9f90@cerno.tech>
+ <72a8c3ce-ed03-0a77-fb92-eaa992eb86fe@suse.de>
+ <20220926101716.urehomr2lzv5pqln@houat>
+ <CAMuHMdXonxXiw4x2PvnQ=xedOQO1y=K0O8g1+ixeSvXmzcOOVw@mail.gmail.com>
+ <c714b53d-8e18-9105-9e27-8b783f246082@suse.de>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zlfwclqmvthsubza"
+Content-Disposition: inline
+In-Reply-To: <c714b53d-8e18-9105-9e27-8b783f246082@suse.de>
+Subject: Re: [Nouveau] [PATCH v2 10/33] drm/modes: Add a function to
+ generate analog display modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,9 +87,9 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
+Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Phil Elwell <phil@raspberrypi.com>, Samuel Holland <samuel@sholland.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
  linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
@@ -83,91 +98,70 @@ Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+ Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------mwjZHgn1Ll4ReHR00ksHLHNN
-Content-Type: multipart/mixed; boundary="------------4FsZ219AqM5Fd5bD304l2D0A";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Maxime Ripard <maxime@cerno.tech>
-Cc: Karol Herbst <kherbst@redhat.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
- Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
- Hans de Goede <hdegoede@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- linux-arm-kernel@lists.infradead.org,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>,
- Dave Stevenson <dave.stevenson@raspberrypi.com>,
- linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-Message-ID: <d50ed519-ba89-70e2-0f0c-b58593a3c060@suse.de>
-Subject: Re: [PATCH v2 06/33] drm/connector: Rename legacy TV property
-References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-6-f733a0ed9f90@cerno.tech>
- <fa71ae1c-f9ca-167c-7993-b698ea3473a0@suse.de>
- <20220926095031.vlwsw7willi36yd4@houat>
-In-Reply-To: <20220926095031.vlwsw7willi36yd4@houat>
 
---------------4FsZ219AqM5Fd5bD304l2D0A
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+--zlfwclqmvthsubza
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-SGkNCg0KQW0gMjYuMDkuMjIgdW0gMTE6NTAgc2NocmllYiBNYXhpbWUgUmlwYXJkOg0KPiBI
-aSBUaG9tYXMsDQo+IA0KPiBPbiBGcmksIFNlcCAyMywgMjAyMiBhdCAxMDoxOTowOEFNICsw
-MjAwLCBUaG9tYXMgWmltbWVybWFubiB3cm90ZToNCj4+IEhpDQo+Pg0KPj4gQW0gMjIuMDku
-MjIgdW0gMTY6MjUgc2NocmllYiBNYXhpbWUgUmlwYXJkOg0KPj4+IFRoZSBjdXJyZW50IHR2
-X21vZGUgaGFzIGRyaXZlci1zcGVjaWZpYyB2YWx1ZXMgdGhhdCBkb24ndCBhbGxvdyB0bw0K
-Pj4+IGVhc2lseSBzaGFyZSBjb2RlIHVzaW5nIGl0LCBlaXRoZXIgYXQgdGhlIHVzZXJzcGFj
-ZSBvciBrZXJuZWwgbGV2ZWwuDQo+Pj4NCj4+PiBTaW5jZSB3ZSdyZSBnb2luZyB0byBpbnRy
-b2R1Y2UgYSBuZXcsIGdlbmVyaWMsIHByb3BlcnR5IHRoYXQgZml0IHRoZQ0KPj4+IHNhbWUg
-cHVycG9zZSwgbGV0J3MgcmVuYW1lIHRoaXMgb25lIHRvIGxlZ2FjeV90dl9tb2RlIHRvIG1h
-a2UgaXQNCj4+PiBvYnZpb3VzIHdlIHNob3VsZCBtb3ZlIGF3YXkgZnJvbSBpdC4NCj4+Pg0K
-Pj4+IFNpZ25lZC1vZmYtYnk6IE1heGltZSBSaXBhcmQgPG1heGltZUBjZXJuby50ZWNoPg0K
-Pj4NCj4+IEl0J3Mgbm90IHdyb25nLCBidXQgJ2xlZ2FjeScgaXMgYWxyZWFkeSBvdmVybG9h
-ZGVkIHdpdGggbWVhbmluZy4gSWYgeW91IGNhbiwNCj4+IG1heWJlIG5hbWUgaXQgJ2RyaXZl
-cl90dl9tb2RlX3Byb3BlcnR5JyBvciAnY3VzdG9tX3R2X21vZGVfcHJvcGVydHknDQo+PiBp
-bnN0ZWFkLg0KPj4NCj4+IEFja2VkLWJ5OiBUaG9tYXMgWmltbWVybWFubiA8dHppbW1lcm1h
-bm5Ac3VzZS5kZT4NCj4gDQo+IEknZCByZWFsbHkgbGlrZSB0byBwb2ludCBvdXQgdGhhdCBu
-ZXcgZHJpdmVycyBzaG91bGRuJ3QgYmUgdXNpbmcgdGhpcy4NCj4gSWYgd2UncmUgdXNpbmcg
-ZWl0aGVyIG9mIHlvdXIgcHJvcG9zYWxzIHRoZW4gd3JpdGVycyBtaWdodCBnZXQgdGhlDQo+
-IGltcHJlc3Npb24gdGhhdCB0aGlzIGlzIG9rIHRvIHVzLg0KPiANCj4gV291bGQgeW91IHBy
-ZWZlciBkZXByZWNhdGVkIHRvIGxlZ2FjeT8NCg0KSSdtIG1lcmVseSBzdWdnZXN0aW5nLiBD
-YWxsIGl0IGxlZ2FjeSB0aGVuLCBzbyB5b3UgZG9uJ3QgaGF2ZSB0byByZXdvcmsgDQphbGwg
-b2YgdGhlIHBhdGNoZXMuDQoNCkJlc3QgcmVnYXJkcw0KVGhvbWFzDQoNCj4gDQo+IE1heGlt
-ZQ0KDQotLSANClRob21hcyBaaW1tZXJtYW5uDQpHcmFwaGljcyBEcml2ZXIgRGV2ZWxvcGVy
-DQpTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgNCk1heGZlbGRzdHIuIDUs
-IDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQ0KKEhSQiAzNjgwOSwgQUcgTsO8cm5iZXJnKQ0K
-R2VzY2jDpGZ0c2bDvGhyZXI6IEl2byBUb3Rldg0K
+On Mon, Sep 26, 2022 at 01:17:52PM +0200, Thomas Zimmermann wrote:
+> Hi
+>=20
+> Am 26.09.22 um 12:34 schrieb Geert Uytterhoeven:
+> > Hi Maxime,
+> >=20
+> > On Mon, Sep 26, 2022 at 12:17 PM Maxime Ripard <maxime@cerno.tech> wrot=
+e:
+> > > On Fri, Sep 23, 2022 at 11:05:48AM +0200, Thomas Zimmermann wrote:
+> > > > > +   /* 63.556us * 13.5MHz =3D 858 pixels */
+> > > >=20
+> > > > I kind of get what the comment wants to tell me, but the units don'=
+t add up.
+> > >=20
+> > > I'm not sure how it doesn't add up?
+> > >=20
+> > > We have a frequency in Hz (equivalent to s^-1) and a duration in s, so
+> > > the result ends up with no dimension, which is to be expected for a
+> > > number of periods?
+> >=20
+> > To make the units add up, it should be 13.5 Mpixel/s
+> > (which is what a pixel clock of 13.5 MHz really means ;-)
+>=20
+> Sort of. It leaves the time value as a magic number, which obfuscates wha=
+t's
+> happening.
+>=20
+> The unit for htotal is pixels/scanline because if you multiply it with the
+> number of scanlines per frame (which is in vtotal), you get pixels/frame.
+> Multiplying with the frames per second results in the pixel clock in
+> pixels/second.
 
---------------4FsZ219AqM5Fd5bD304l2D0A--
+That's true, but both are true?
 
---------------mwjZHgn1Ll4ReHR00ksHLHNN
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+> That's a bit much for this comment. Hence, I suggested to remove these
+> comments entirely and document the relation among the numbers in a more
+> prominent location. The documentation for drm_display_mode would be a good
+> place, I guess.
+
+I'm not sure I understand what it's about. It's an explicit requirement
+of PAL and NTSC, why would something so specific be in the generic
+definition of drm_display_mode?
+
+Maxime
+
+--zlfwclqmvthsubza
+Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmMxnFwFAwAAAAAACgkQlh/E3EQov+D5
-zxAApQncNTLl8QQvDR6j0KdUkawbSYKn0KSQRRJLEGBKoyje7U6mn4lVguZtodiDY7fz6EhuTR2S
-XPEbpcZaFmf1Y8hKEV8/zGry8ocN8Jy8cgF2frUr58KgkmDj0UUaD3m77Ee8NIs+r5oHtxSGbMI6
-8UoBjUIg+Q2gDNiBADBKQgo4D7pNXHLCT7KzKPs2tANKpUKegg4y6yUhBJ53G9LITKhHnkzlHiF8
-GjYfshimY0ockScV2lY3nFyPLLV3nrwGjgUM+B6owo76gHffD/qpMxZ+r3+Pd40hZAFwjlSypXe5
-XNtmKlDHbfXxlnR1td+sX3pqXAV42B8KHy3alsOji/DR2UGkXQrwWH/uXlr/K1iO+weuaK6ouX/5
-jXOnf1LCurNu/vLyt8fyWZqHmTcUwEGxXT6kQ7sNMoEMJk7v5rsjpa8Fvvyw9KHioil5bbj/wR4J
-MtiXhb/DRWMvUg0X95fYwgp55C++EGarVtwa7cPsFLYZLAdt2J8BmxFa8o3i1tvtpuVo44mMZ6EG
-7NiR1AQO7HA45dYWqlA/Z7PunFdaR0RfKrOyJFNTyG5EpZFCWWJDKMqBLP0mPWvfWr813jABNf+H
-RG4HrDn4MN3a9t5TZWt70qWeq7gGoIrJ0rKrPOf8hF00DPnWqN2UDGerPXOvHdSWqpbhULvcspRc
-amE=
-=qscO
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYzGeUwAKCRDj7w1vZxhR
+xY5tAP9KJjA2OGdWz1GFAUwsCyA+v6gay+4c8P+X8ZcLHAES9QEAx6aTDtrTd2Yz
+yzAZ6N+Br4689AWFKhh40XQtNNC5JQE=
+=nm5h
 -----END PGP SIGNATURE-----
 
---------------mwjZHgn1Ll4ReHR00ksHLHNN--
+--zlfwclqmvthsubza--
