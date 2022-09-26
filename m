@@ -1,81 +1,51 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E4575EA664
-	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 14:43:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id BAFE75EA6B9
+	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 14:59:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8FA9810E6A0;
-	Mon, 26 Sep 2022 12:43:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D198010E6A2;
+	Mon, 26 Sep 2022 12:59:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com
- [66.111.4.230])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 889AD89864;
- Mon, 26 Sep 2022 12:43:06 +0000 (UTC)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailnew.nyi.internal (Postfix) with ESMTP id E376F58AE2F;
- Mon, 26 Sep 2022 08:43:02 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Mon, 26 Sep 2022 08:43:02 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1664196182; x=1664203382; bh=i4gXX7cMD1
- +PjoZvTs+9A2oUnU38ddYmRKsQkQVxiMs=; b=utTKiHScIMKiv0MpVyZ4lYRSxq
- IdIfp7iVLBBmx2S2eOAO53gfMKyfiFzEuir61MIGPNtwTE7wHXJHK7BGuOXHrQ+C
- 6X4WAl58F/xpl6BNrq0gnmF1iHRRK/dZjj6RZarM+rsvG+kwaBM11YzBKwU2fK+J
- aYMxKD/57VEDUbQAprlFh6MyepwhDcYUwbQ2YQpPw2K0aafj9t8XvbE4bATWnjnG
- 9zsJZcovK2yYprsEajU1fQdq98AwZ1JXxZJxIQKfQR6JVyM9iGlnbc33dbmnjjBh
- Jq564dxEOi7Rhb74/fPZNrDBmsyqdjHxdfYtEO3M+Nvo2uClDa6pcwPXODtw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
- :feedback-id:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:sender:subject:subject:to:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1664196182; x=1664203382; bh=i4gXX7cMD1+PjoZvTs+9A2oUnU38
- ddYmRKsQkQVxiMs=; b=Exp0lmhEFcQQlHZBqhBkTbZV5eb7+Y9htD6qSb+s/hgK
- oVFKHN8HJq9Urzj4VJy3PyLbWdJ9n1dKgyqxCE+05OCGD885OoKYLqQi+Ud55+zy
- RnwkhD9xF274QiLfb+kMpRK/hXxkE9RLFRllQKr3UShCwH4VfQDIuL3LsgnoaHQA
- aVYCrQFwMjwEmcbRluRGExOFwQ8sOeZZH/cEMPHNks5Vb6dhw8s6eQ1AuRig0GOV
- eAD6u45d6IWsbNVjU7bRobP+NZQt8a1kQwa+/rGROqgNf2+R5zIPDdLfDHmTtRPc
- SbQXmxra9Viq7gcGHn5blSVPsVIwNbMy7sQ3vGMMeA==
-X-ME-Sender: <xms:Vp4xY35t1RrPNaALSMHuh1B7j94uji_FDc0WF_zgf44oMTSpfpclbA>
- <xme:Vp4xY87uXKmLp9ZsVPzW4LKLiBZi2Qtf7Id_KCsiNFUVqwiERIq89SKC8Z9K9VD1X
- pSqU4vHHxKHDrsaiwQ>
-X-ME-Received: <xmr:Vp4xY-cZZ1wFeWgO57h01Q7WFAblva8uy_54RuhC02BABgmJvfEOFmnQw5n9NjuVU-XBPrQKB16mWXK-lHGIiEg4NBmioW1bYckL>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeegvddgheeiucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
- mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeetfefffefgkedtfefgledugfdtjeefjedvtddtkeetieffjedvgfehheff
- hfevudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
- hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:Vp4xY4L9AnEzzujabPzhsNgmzGczwxE5aCo-hgxyNFIM0zd-bd6AJQ>
- <xmx:Vp4xY7KAJHokA38AoKvWik_cMIoXMQP0yZRl6yvN-iMXL7wV1b-Y-Q>
- <xmx:Vp4xYxxUKU4-qvMnxN_ooEXC7nxV7xQuaa8m_z0yvZwsa4OkyikzBg>
- <xmx:Vp4xY5ksBfiDGqIvX384MVdKlM8qOdvR5mmTsN5k9EWbuVI4_0PHdA>
-Feedback-ID: i8771445c:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 26 Sep 2022 08:43:01 -0400 (EDT)
-Date: Mon, 26 Sep 2022 14:42:59 +0200
-From: Maxime Ripard <maxime@cerno.tech>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20220926124259.o6fcfnxjy7gyzqz2@houat>
-References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-10-f733a0ed9f90@cerno.tech>
- <72a8c3ce-ed03-0a77-fb92-eaa992eb86fe@suse.de>
- <20220926101716.urehomr2lzv5pqln@houat>
- <CAMuHMdXonxXiw4x2PvnQ=xedOQO1y=K0O8g1+ixeSvXmzcOOVw@mail.gmail.com>
- <c714b53d-8e18-9105-9e27-8b783f246082@suse.de>
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 82DC010E6A2;
+ Mon, 26 Sep 2022 12:59:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=paSIeytrKVUKIdWtCr2iVXrX78NgEHAeJ/ebnvP/I5A=; b=DNnQx2i1Fsgi46OxyGTNlnrluZ
+ 1bcdQl6hc35k8Si8qWu33BIneSuLs7M/2RISFtmx55NX/kGpS+H/myA76uZC3ai7O6GP1Abwgu7g6
+ Gm3wXS81BrRu2HPClJrAFG60fgL/cJCxyaosoT9G0711kDeWDv1DB3c1/kwhfguCyqwP6XAh1In2X
+ k6kbTFaMQkJ3DqWc+jPhaBM/r2ncL+O1PkijQcCDCG1R1zCDlzJqtH7p11Y56Vn64OI32dv17x4id
+ Ed9N5rdZ5of/7KpiKBR2U3XKzFXE7wZrH9zS+RYdOOl5s/NJNVqfBJOyug6R1j6QImo7z5oynyuS0
+ K3IDPZLA==;
+Received: from [2a01:799:961:d200:3946:6b45:3eef:d112] (port=51628)
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1ocnhy-0004vD-H1; Mon, 26 Sep 2022 14:59:38 +0200
+Message-ID: <9e76a508-f469-a54d-ecd7-b5868ca99af4@tronnes.org>
+Date: Mon, 26 Sep 2022 14:59:33 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zlfwclqmvthsubza"
-Content-Disposition: inline
-In-Reply-To: <c714b53d-8e18-9105-9e27-8b783f246082@suse.de>
-Subject: Re: [Nouveau] [PATCH v2 10/33] drm/modes: Add a function to
- generate analog display modes
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.13.1
+To: Maxime Ripard <maxime@cerno.tech>
+References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v2-9-f733a0ed9f90@cerno.tech>
+ <80138f62-faec-5f7e-a8bd-235318a4e4c2@tronnes.org>
+ <20220926100131.o5xtslzcmez5z2r3@houat>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <20220926100131.o5xtslzcmez5z2r3@houat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v2 09/33] drm/connector: Add TV standard
+ property
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,81 +57,99 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Phil Elwell <phil@raspberrypi.com>, Samuel Holland <samuel@sholland.org>,
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
+ Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
- Hans de Goede <hdegoede@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- linux-arm-kernel@lists.infradead.org,
+ linux-sunxi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
+ intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---zlfwclqmvthsubza
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 26, 2022 at 01:17:52PM +0200, Thomas Zimmermann wrote:
-> Hi
->=20
-> Am 26.09.22 um 12:34 schrieb Geert Uytterhoeven:
-> > Hi Maxime,
-> >=20
-> > On Mon, Sep 26, 2022 at 12:17 PM Maxime Ripard <maxime@cerno.tech> wrot=
-e:
-> > > On Fri, Sep 23, 2022 at 11:05:48AM +0200, Thomas Zimmermann wrote:
-> > > > > +   /* 63.556us * 13.5MHz =3D 858 pixels */
-> > > >=20
-> > > > I kind of get what the comment wants to tell me, but the units don'=
-t add up.
-> > >=20
-> > > I'm not sure how it doesn't add up?
-> > >=20
-> > > We have a frequency in Hz (equivalent to s^-1) and a duration in s, so
-> > > the result ends up with no dimension, which is to be expected for a
-> > > number of periods?
-> >=20
-> > To make the units add up, it should be 13.5 Mpixel/s
-> > (which is what a pixel clock of 13.5 MHz really means ;-)
->=20
-> Sort of. It leaves the time value as a magic number, which obfuscates wha=
-t's
-> happening.
->=20
-> The unit for htotal is pixels/scanline because if you multiply it with the
-> number of scanlines per frame (which is in vtotal), you get pixels/frame.
-> Multiplying with the frames per second results in the pixel clock in
-> pixels/second.
+Den 26.09.2022 12.01, skrev Maxime Ripard:
+> On Sat, Sep 24, 2022 at 05:52:29PM +0200, Noralf Trønnes wrote:
+>> Den 22.09.2022 16.25, skrev Maxime Ripard:
+>>> The TV mode property has been around for a while now to select and get the
+>>> current TV mode output on an analog TV connector.
+>>>
+>>> Despite that property name being generic, its content isn't and has been
+>>> driver-specific which makes it hard to build any generic behaviour on top
+>>> of it, both in kernel and user-space.
+>>>
+>>> Let's create a new enum tv norm property, that can contain any of the
+>>> analog TV standards currently supported by kernel drivers. Each driver can
+>>> then pass in a bitmask of the modes it supports, and the property
+>>> creation function will filter out the modes not supported.
+>>>
+>>> We'll then be able to phase out the older tv mode property.
+>>>
+>>> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+>>
+>> Please can you add per patch changelogs, it's hard to review when I have
+>> to recall what might have happened with each patch. If you do it drm
+>> style and put in the commit message it should be easy enough to do.
+> 
+> I certainly don't want to start that discussion, but I'm really not a
+> fan of that format either. I'll do it for that series if you prefer.
+> 
 
-That's true, but both are true?
+The format isn't important, but especially a big series like this and
+being weeks between each iteration it's difficult to follow and see
+which review comments that you have chosen to implement and how. It's
+almost a full review each time. Even if I see that I have acked/rewieved
+a patch, if I don't remember, I have to go back to the previous version
+and see if I had any comments and if you followed up on that.
 
-> That's a bit much for this comment. Hence, I suggested to remove these
-> comments entirely and document the relation among the numbers in a more
-> prominent location. The documentation for drm_display_mode would be a good
-> place, I guess.
+>>> +/**
+>>> + * enum drm_connector_tv_mode - Analog TV output mode
+>>> + *
+>>> + * This enum is used to indicate the TV output mode used on an analog TV
+>>> + * connector.
+>>> + *
+>>> + * WARNING: The values of this enum is uABI since they're exposed in the
+>>> + * "TV mode" connector property.
+>>> + */
+>>> +enum drm_connector_tv_mode {
+>>> +	/**
+>>> +	 * @DRM_MODE_TV_MODE_NONE: Placeholder to not default on one
+>>> +	 * variant or the other when nothing is set.
+>>> +	 */
+>>> +	DRM_MODE_TV_MODE_NONE = 0,
+>>
+>> How is this supposed to be used?
+> 
+> It's not supposed to be used. It was a suggestion from Mateusz to avoid
+> to default to any standard when we don't initialize something. I don't
+> have any strong feeling about it, so I can drop it if you prefer.
+> 
 
-I'm not sure I understand what it's about. It's an explicit requirement
-of PAL and NTSC, why would something so specific be in the generic
-definition of drm_display_mode?
+The confusing thing to me is that "None" is part of the property enum
+list, so the idea is that it can end up in userspace if there's a driver
+error? Hmm, that won't work since TV_MODE_NONE won't be part of the
+bitmask that the driver sets. So userspace reading the property ends up
+with a value for which there's no enum name to match.
 
-Maxime
+So usespace should be trained to know that zero for this property is a
+driver error? No, not a good idea.
 
---zlfwclqmvthsubza
-Content-Type: application/pgp-signature; name="signature.asc"
+I think to catch a bug like this drm_atomic_connector_get_property()
+should check the tv.mode value and see if it's a legal enum value and if
+not it has to just pick a legal one and print an error. But I'm not sure
+it's worth it to catch a bug like this. And I don't see any other enum
+properties being checked for validity either before being returned to
+userspace.
 
------BEGIN PGP SIGNATURE-----
+Based on this reasoning I think you should drop the NONE value.
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYzGeUwAKCRDj7w1vZxhR
-xY5tAP9KJjA2OGdWz1GFAUwsCyA+v6gay+4c8P+X8ZcLHAES9QEAx6aTDtrTd2Yz
-yzAZ6N+Br4689AWFKhh40XQtNNC5JQE=
-=nm5h
------END PGP SIGNATURE-----
-
---zlfwclqmvthsubza--
+Noralf.
