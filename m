@@ -1,78 +1,78 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B40F65E9E84
-	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 12:01:56 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 500CB5E9EFF
+	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 12:17:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BDB5F10E667;
-	Mon, 26 Sep 2022 10:01:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5D0CB10E66E;
+	Mon, 26 Sep 2022 10:17:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from wnew3-smtp.messagingengine.com (wnew3-smtp.messagingengine.com
  [64.147.123.17])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7D6E510E3CE;
- Mon, 26 Sep 2022 10:01:40 +0000 (UTC)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailnew.west.internal (Postfix) with ESMTP id EF96E2B0682F;
- Mon, 26 Sep 2022 06:01:34 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute1.internal (MEProxy); Mon, 26 Sep 2022 06:01:39 -0400
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 68A4E10E66A;
+ Mon, 26 Sep 2022 10:17:25 +0000 (UTC)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailnew.west.internal (Postfix) with ESMTP id 509A82B06A11;
+ Mon, 26 Sep 2022 06:17:19 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute5.internal (MEProxy); Mon, 26 Sep 2022 06:17:24 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
  :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1664186494; x=1664193694; bh=WCZmCAbKUP
- B8V/dy4D1u2e0awoL+XJkcSsRkdm6+wHI=; b=uDRU/N4HsyiNDw98y2Q/Bs1VP2
- iOm0QEY2ULuXESBq9q3/5ONB1kS6wfCiJ/KH+LB8sfBv4eWmQpndHAtPXPt9zD1x
- Jja1TbCtTQxJ3OCS6ZGu5+4zjjM8PLEe9xiY6RUNybMVub51j6B2tVm10glcJGmh
- ZGZlWP9gRQ66Ix5LW3YDsGSSrzGw25Y7A7uO5IMGl4qGlWkcsulLZiA4zSFmnmLh
- H9XIs8clIgTyhTwNQyv7L58dL/dSPHZphfWYMuvf9twjotVoraSj7ha02dMZeRlB
- w8JqVMt8DnnBq6jqC03xuKsglLxT+0fU47uv73psQdGu4O3QUHdXKnga5y3Q==
+ :subject:to:to; s=fm2; t=1664187438; x=1664194638; bh=rl9YQRMrLQ
+ Jn6n80xCv8aYOf+VIHpMfcgzt7f7zjMaU=; b=iiiaYcTZ9qp70c+RGtu3oMk2bQ
+ WP19OHHjsm9H+9BdRB7BKF/l+t2LpvuC9aA2U4r2rIXXTDcRi+VrBAgHkJciICSN
+ Bnkx4HOz6KPeFUCRwNTxSXqZyDdqgG5iVc4j3m9Sk/8CIWlqV71w5kS3j4ZK52+2
+ KNLUZwjhkMb6eEt3jjoNtTG7+PU/H6526hXP6bQ+PEgNOsd5JYKiMOwN9XDg5zqB
+ oTDDAaiaOXFTyHa5ooZkgmRnBVeriZIb0vLZWTqgCOMejt9rt8JTAmEoYZz/ELIw
+ VtgDrUlpCIgvNpvEU5v08/5g6xJDPoyfAjMfcdFOy+RobY/5E5tcDd/p+7hg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
  :feedback-id:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:sender:subject:subject:to:to
  :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1664186494; x=1664193694; bh=WCZmCAbKUPB8V/dy4D1u2e0awoL+
- XJkcSsRkdm6+wHI=; b=Rug80Q+sMwxGaCBKoR9jTq3KVEOUjZqyG8wmAbICk/8y
- U7Qb8l9mipmoRtWHRpu0jk4KbgeqcepH/6cUBcLB6zIMAriAWceG9e9XlLkJhrzc
- Udv/NMuUXR8Gvwdy/qNx8l91X5rkvipJeG4B7qcJefayRPw/Oqfwtm2G5gsX7WD/
- Y3ioIKmJxSdjbc+Nyu65ipugqKeKiSxPbOLx0sO0e2s8GqX0y7NSG+JP1xXtipkq
- KvIdr6w49jjsBz7ZjFEqVzW4qUmRsffLEgBm1x36UHBKLIqivB+7B1+tOch6xZ11
- FNaGncWvlEeQIhpj5wNxgI3rJlPdut6hR3ytFwbqQw==
-X-ME-Sender: <xms:fXgxY5mdo2kfVTZ0H8K4RmkdAQruihfTdqZxFowQpanMMgUwrX6kvg>
- <xme:fXgxY02sQzkLx6OD4lOEA4Nwem9HZs-4LKtXRBRzaDzV5_pMOowktPimCtlvN2FOQ
- LvM5CFR5oj_5PEZ1oc>
-X-ME-Received: <xmr:fXgxY_ri-cIGor6hHugV8NJuzVelHO76BQLl3z6gcwf2qY9YDTu288EVpZkY>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeegvddgvdegucetufdoteggodetrfdotf
+ fm2; t=1664187438; x=1664194638; bh=rl9YQRMrLQJn6n80xCv8aYOf+VIH
+ pMfcgzt7f7zjMaU=; b=r5zUfGaaAw67Am5QZUwRH9tW4S+orq5guCn5NBSQ2DFZ
+ 5R7CaDZdg1/bA/tvdX1mU0+byqe+H7OSwtHcRY8gc3+I4ctgoD6A5N9zMXFP6C7H
+ Oy+MPxzU6TlBZ08XZf2t6XSowTTDpY48Eg/TvGiOkKDb1cbVarh82NXsK/DAT0c9
+ NzbzwI8T0hqKexErAay6q4BS9TjT57OeiBnrkAI0+QUdBj2G7r9BDDMeS3+bHZPN
+ 4ytBRePtCHl4mTWfUPyJb4HQ8pXXI/RMGfFd72t7p+g4yKSrTFt/pjNBXKtCKWjv
+ BGdTFT9mwT91ri6qZJegiLMBzN1JHvXDztyZDfkR1Q==
+X-ME-Sender: <xms:LnwxYzgNEmlWSI-iRsLHKIz4RDfxDCN95Lg0eL-TBa-kica_ueMtrw>
+ <xme:LnwxYwANJvypltOLJRxmn6KA3HTC6PqV6xGjd80tGPuewYSi7JUswggsxlUBVa5fl
+ wzzidljZOx2NwpfFPM>
+X-ME-Received: <xmr:LnwxYzHhQX_dk01wS-DnCS0tqvcLRpTPvOt7cSjErYwNexn3NtBtty1wZpCb>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeegvddgvdejucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
+ cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
  mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeejveefheefkeeiffegveelveetgffffeektdefuefhtedtgeejhefggedu
- ffffudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+ htthgvrhhnpeetfefffefgkedtfefgledugfdtjeefjedvtddtkeetieffjedvgfehheff
+ hfevudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
  hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:fngxY5msrdWHVg1xIxjHF0u1zUZ5tvrhkwkubF0xshtSnCE_jn7QtQ>
- <xmx:fngxY323Uwtoh6YXZp8h4kBfOVCjEMI5VDk0aj3DPY3x6YFgbEetlA>
- <xmx:fngxY4sKohdqqPpob5hg3AExMcSGYS0P-dUl7R1gi0usdP2LhToMCQ>
- <xmx:fngxY3W09_EJXTf_SxnejTQX4auzwNfKkrHlS3B8ypz-DpseAPV0A6-F9YQ>
+X-ME-Proxy: <xmx:LnwxYwRUbrtzrvWyCAcSHposR4ZzgYU4nuOQoCW7hsSUN6S2deRXmg>
+ <xmx:LnwxYwwiaRV9Yvlxpej_I2Fl6e4FHx7h2SnAJfsaERfQJIt_xqzFnA>
+ <xmx:LnwxY27jUN7CWecX-f0oAUW-abJHdxLwmcNx7iw4z3dQynAbgviV1Q>
+ <xmx:LnwxYxRbcCHjLPEee4BWMO5EAhVXZuHSZlrKQPQhZJ5lD8uRXCQ0JNaIy_Y>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 26 Sep 2022 06:01:33 -0400 (EDT)
-Date: Mon, 26 Sep 2022 12:01:31 +0200
+ 26 Sep 2022 06:17:17 -0400 (EDT)
+Date: Mon, 26 Sep 2022 12:17:16 +0200
 From: Maxime Ripard <maxime@cerno.tech>
-To: Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
-Message-ID: <20220926100131.o5xtslzcmez5z2r3@houat>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20220926101716.urehomr2lzv5pqln@houat>
 References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
- <20220728-rpi-analog-tv-properties-v2-9-f733a0ed9f90@cerno.tech>
- <80138f62-faec-5f7e-a8bd-235318a4e4c2@tronnes.org>
+ <20220728-rpi-analog-tv-properties-v2-10-f733a0ed9f90@cerno.tech>
+ <72a8c3ce-ed03-0a77-fb92-eaa992eb86fe@suse.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gulwpck2gltavjpu"
+ protocol="application/pgp-signature"; boundary="k7oktdtvp3ipcm7k"
 Content-Disposition: inline
-In-Reply-To: <80138f62-faec-5f7e-a8bd-235318a4e4c2@tronnes.org>
-Subject: Re: [Nouveau] [PATCH v2 09/33] drm/connector: Add TV standard
- property
+In-Reply-To: <72a8c3ce-ed03-0a77-fb92-eaa992eb86fe@suse.de>
+Subject: Re: [Nouveau] [PATCH v2 10/33] drm/modes: Add a function to
+ generate analog display modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,86 +90,67 @@ Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
- intel-gfx@lists.freedesktop.org,
+ linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
+ Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---gulwpck2gltavjpu
-Content-Type: text/plain; charset=iso-8859-1
+--k7oktdtvp3ipcm7k
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Sep 24, 2022 at 05:52:29PM +0200, Noralf Tr=F8nnes wrote:
-> Den 22.09.2022 16.25, skrev Maxime Ripard:
-> > The TV mode property has been around for a while now to select and get =
-the
-> > current TV mode output on an analog TV connector.
-> >=20
-> > Despite that property name being generic, its content isn't and has been
-> > driver-specific which makes it hard to build any generic behaviour on t=
-op
-> > of it, both in kernel and user-space.
-> >=20
-> > Let's create a new enum tv norm property, that can contain any of the
-> > analog TV standards currently supported by kernel drivers. Each driver =
-can
-> > then pass in a bitmask of the modes it supports, and the property
-> > creation function will filter out the modes not supported.
-> >=20
-> > We'll then be able to phase out the older tv mode property.
-> >=20
-> > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
->
-> Please can you add per patch changelogs, it's hard to review when I have
-> to recall what might have happened with each patch. If you do it drm
-> style and put in the commit message it should be easy enough to do.
+Hi,
 
-I certainly don't want to start that discussion, but I'm really not a
-fan of that format either. I'll do it for that series if you prefer.
-
-> > +/**
-> > + * enum drm_connector_tv_mode - Analog TV output mode
-> > + *
-> > + * This enum is used to indicate the TV output mode used on an analog =
-TV
-> > + * connector.
-> > + *
-> > + * WARNING: The values of this enum is uABI since they're exposed in t=
-he
-> > + * "TV mode" connector property.
-> > + */
-> > +enum drm_connector_tv_mode {
-> > +	/**
-> > +	 * @DRM_MODE_TV_MODE_NONE: Placeholder to not default on one
-> > +	 * variant or the other when nothing is set.
-> > +	 */
-> > +	DRM_MODE_TV_MODE_NONE =3D 0,
+On Fri, Sep 23, 2022 at 11:05:48AM +0200, Thomas Zimmermann wrote:
+> > +	/* 63.556us * 13.5MHz =3D 858 pixels */
 >=20
-> How is this supposed to be used?
+> I kind of get what the comment wants to tell me, but the units don't add =
+up.
 
-It's not supposed to be used. It was a suggestion from Mateusz to avoid
-to default to any standard when we don't initialize something. I don't
-have any strong feeling about it, so I can drop it if you prefer.
+I'm not sure how it doesn't add up?
+
+We have a frequency in Hz (equivalent to s^-1) and a duration in s, so
+the result ends up with no dimension, which is to be expected for a
+number of periods?
+
+If you're talking about the comment itself, then NTSC mandates that a
+line is 63.556us long. If we're using a pixel clock at 13.5 MHz, it
+means that the period (=3D=3D pixel) is ~74ns, so we get 63556 / 74 =3D 858
+pixels / line.
+
+> I think you want to end up with 858 pixels/line =3D
+>=20
+>   13,5 pixels/second / (60/2I frame/second * 525 lines/frame)
+>=20
+> I: interlaced
+>=20
+> Maybe just remove the short comments and document that in a more meaningf=
+ul
+> place.
+
+I guess this is where it's meaningful, we really want to hit that
+target. BT601 also mandates it.
 
 Maxime
 
---gulwpck2gltavjpu
+--k7oktdtvp3ipcm7k
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYzF4ewAKCRDj7w1vZxhR
-xbZ+AP4xTTgpQpCXWXC6q7QOdRlNGR0Mnjaq7VCWTRYpDjbKxAD9F8HZA9VHM/b9
-pZlXPcfdA5JuIglRNfLb9ooPZ9hiAw8=
-=vOcp
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYzF8KwAKCRDj7w1vZxhR
+xV9fAQDnxZyqz39vGg64Oqr+zhaZZobk1gPiciVJ4v0EI/nzOgD/VaWQoS8Orsjk
+80pHjJdXIU06FcXOaBvhX/eYS4k7mAo=
+=RnOU
 -----END PGP SIGNATURE-----
 
---gulwpck2gltavjpu--
+--k7oktdtvp3ipcm7k--
