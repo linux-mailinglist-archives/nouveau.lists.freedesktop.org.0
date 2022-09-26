@@ -2,59 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CC5F5EA018
-	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 12:34:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BFDB65EA1B9
+	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 12:55:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3C74210E67D;
-	Mon, 26 Sep 2022 10:34:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0909710E3BD;
+	Mon, 26 Sep 2022 10:55:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
- [209.85.160.172])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5921E10E692;
- Mon, 26 Sep 2022 10:34:15 +0000 (UTC)
-Received: by mail-qt1-f172.google.com with SMTP id cj27so3780111qtb.7;
- Mon, 26 Sep 2022 03:34:15 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=Lmh1Xq7Cw51uqBYTm5xf2C78YKt/PjveAkuJS0FQxk4=;
- b=0e2GSgKN7eTAPsI6i+5AujgSNbvhqRLBZ9y3psx2VRGTNh36lo1SX4Ig3PxZZWX3q+
- 1YCILiKwF6WmH4msP0K6mH0YM2/XlN31aY30k9mr/dQWVgyGdCyW/EqaaMKrPGVQscl1
- HG00ZiupOnuC7FbyyAR6UkpjY+SmN0OBd+96/huc1N2Rh0x+hOIzs+qatOpT66C2zfCf
- qiH89tpKhzGxxTBqc0Pg58qeV99kevRdANQkKjrPvtSQGSAMP2fex/S0QcqoJn/WA96j
- F/7yW+BdHz32Wi2HNH2EC1+vUI7y8ML6m7UBNbeITc+OmfKsUjFqz1qgTmMBncHWszx+
- zBuw==
-X-Gm-Message-State: ACrzQf0BPgeb5cwdSD7hbBW8UaxZQBGeA0wLyv87oYfJgcGnm5LlTLft
- QSQ7mS8dyVQCYzqqqgfwY2XhwYNE9Nj4UQ==
-X-Google-Smtp-Source: AMsMyM50M6OqXRUDwTJUSCCJC4Kfv2TkR2FsENiZAyAhOAwGbsUZDS0i+m76ySyGhqu3jCiddjMa0g==
-X-Received: by 2002:a05:622a:1451:b0:35c:c676:1471 with SMTP id
- v17-20020a05622a145100b0035cc6761471mr16802710qtx.634.1664188454185; 
- Mon, 26 Sep 2022 03:34:14 -0700 (PDT)
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com.
- [209.85.128.170]) by smtp.gmail.com with ESMTPSA id
- b4-20020ac86bc4000000b0035c1e18762csm10685719qtt.84.2022.09.26.03.34.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Sep 2022 03:34:13 -0700 (PDT)
-Received: by mail-yw1-f170.google.com with SMTP id
- 00721157ae682-349c4310cf7so63866947b3.3; 
- Mon, 26 Sep 2022 03:34:12 -0700 (PDT)
-X-Received: by 2002:a81:758a:0:b0:345:450b:6668 with SMTP id
- q132-20020a81758a000000b00345450b6668mr19133647ywc.316.1664188452440; Mon, 26
- Sep 2022 03:34:12 -0700 (PDT)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9D9FF10E2CE;
+ Mon, 26 Sep 2022 10:55:26 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 220FF21EB6;
+ Mon, 26 Sep 2022 10:55:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1664189725; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=awuoa00c/zFKYrk4TkkPEqL+aFMAJslAQCViiDFZeBw=;
+ b=QA6dcXG+cDXz2zQxEUuwn9DPBFbTykhOd3xpEnu5fs8i6ST34mv2QGmnj3oaO/eKaCgibO
+ HPgPqyabcyRfu2W8HcBYBQMBeoHe44+if91y4GeWmnM2bEnevL7R7q0H86ZVEyvnbsWEoe
+ uDnPlQMrSUimLyXIKSd/9pQ06epaQj4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1664189725;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=awuoa00c/zFKYrk4TkkPEqL+aFMAJslAQCViiDFZeBw=;
+ b=l18A59Kc2oBBrw11GwZxl8oSDL+zn6/HgdixSomlVX7g9VsRFi9LUSOzdXq9IitDlOlljv
+ X+HURmTI9pMFviBA==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AC46813486;
+ Mon, 26 Sep 2022 10:55:24 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id OWsVKRyFMWMMIwAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Mon, 26 Sep 2022 10:55:24 +0000
+Message-ID: <6d073586-0962-48b8-1ccf-ba9d8652be26@suse.de>
+Date: Mon, 26 Sep 2022 12:55:24 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+Content-Language: en-US
+To: Maxime Ripard <maxime@cerno.tech>
 References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
  <20220728-rpi-analog-tv-properties-v2-10-f733a0ed9f90@cerno.tech>
- <72a8c3ce-ed03-0a77-fb92-eaa992eb86fe@suse.de>
- <20220926101716.urehomr2lzv5pqln@houat>
-In-Reply-To: <20220926101716.urehomr2lzv5pqln@houat>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Mon, 26 Sep 2022 12:34:00 +0200
-X-Gmail-Original-Message-ID: <CAMuHMdXonxXiw4x2PvnQ=xedOQO1y=K0O8g1+ixeSvXmzcOOVw@mail.gmail.com>
-Message-ID: <CAMuHMdXonxXiw4x2PvnQ=xedOQO1y=K0O8g1+ixeSvXmzcOOVw@mail.gmail.com>
-To: Maxime Ripard <maxime@cerno.tech>
-Content-Type: text/plain; charset="UTF-8"
+ <72a8c3ce-ed03-0a77-fb92-eaa992eb86fe@suse.de> <87h70y4ffb.fsf@intel.com>
+ <f17b239c-715a-7c9c-fb56-477daed28009@suse.de>
+ <20220926101849.uiyc7zhgkgz4wy46@houat>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <20220926101849.uiyc7zhgkgz4wy46@houat>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------Eh5fPpvnuSpDpm0VAZYIAG4S"
 Subject: Re: [Nouveau] [PATCH v2 10/33] drm/modes: Add a function to
  generate analog display modes
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -69,46 +74,105 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
  dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
  Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
- Daniel Vetter <daniel@ffwll.ch>, intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
+ Hans de Goede <hdegoede@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- =?UTF-8?Q?Noralf_Tr=C3=B8nnes?= <noralf@tronnes.org>
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Maxime,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------Eh5fPpvnuSpDpm0VAZYIAG4S
+Content-Type: multipart/mixed; boundary="------------nLRW0fdZeS13F20fT0F7VzGt";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Maxime Ripard <maxime@cerno.tech>
+Cc: Karol Herbst <kherbst@redhat.com>, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Phil Elwell <phil@raspberrypi.com>, Emma Anholt <emma@anholt.net>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-sunxi@lists.linux.dev, intel-gfx@lists.freedesktop.org,
+ Hans de Goede <hdegoede@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ linux-arm-kernel@lists.infradead.org,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Dom Cobley <dom@raspberrypi.com>,
+ Dave Stevenson <dave.stevenson@raspberrypi.com>,
+ linux-kernel@vger.kernel.org,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+Message-ID: <6d073586-0962-48b8-1ccf-ba9d8652be26@suse.de>
+Subject: Re: [PATCH v2 10/33] drm/modes: Add a function to generate analog
+ display modes
+References: <20220728-rpi-analog-tv-properties-v2-0-f733a0ed9f90@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v2-10-f733a0ed9f90@cerno.tech>
+ <72a8c3ce-ed03-0a77-fb92-eaa992eb86fe@suse.de> <87h70y4ffb.fsf@intel.com>
+ <f17b239c-715a-7c9c-fb56-477daed28009@suse.de>
+ <20220926101849.uiyc7zhgkgz4wy46@houat>
+In-Reply-To: <20220926101849.uiyc7zhgkgz4wy46@houat>
 
-On Mon, Sep 26, 2022 at 12:17 PM Maxime Ripard <maxime@cerno.tech> wrote:
-> On Fri, Sep 23, 2022 at 11:05:48AM +0200, Thomas Zimmermann wrote:
-> > > +   /* 63.556us * 13.5MHz = 858 pixels */
-> >
-> > I kind of get what the comment wants to tell me, but the units don't add up.
->
-> I'm not sure how it doesn't add up?
->
-> We have a frequency in Hz (equivalent to s^-1) and a duration in s, so
-> the result ends up with no dimension, which is to be expected for a
-> number of periods?
+--------------nLRW0fdZeS13F20fT0F7VzGt
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-To make the units add up, it should be 13.5 Mpixel/s
-(which is what a pixel clock of 13.5 MHz really means ;-)
+SGkNCg0KQW0gMjYuMDkuMjIgdW0gMTI6MTggc2NocmllYiBNYXhpbWUgUmlwYXJkOg0KPiBP
+biBGcmksIFNlcCAyMywgMjAyMiBhdCAxMjoxNjoxM1BNICswMjAwLCBUaG9tYXMgWmltbWVy
+bWFubiB3cm90ZToNCj4+IEhpDQo+Pg0KPj4gQW0gMjMuMDkuMjIgdW0gMTE6MTggc2Nocmll
+YiBKYW5pIE5pa3VsYToNCj4+PiBPbiBGcmksIDIzIFNlcCAyMDIyLCBUaG9tYXMgWmltbWVy
+bWFubiA8dHppbW1lcm1hbm5Ac3VzZS5kZT4gd3JvdGU6DQo+Pj4+IEFtIDIyLjA5LjIyIHVt
+IDE2OjI1IHNjaHJpZWIgTWF4aW1lIFJpcGFyZDoNCj4+Pj4+ICsJZHJtX2RiZ19rbXMoZGV2
+LA0KPj4+Pj4gKwkJICAgICJHZW5lcmF0aW5nIGEgJXV4JXUlYywgJXUtbGluZSBtb2RlIHdp
+dGggYSAlbHUga0h6IGNsb2NrXG4iLA0KPj4+Pj4gKwkJICAgIGhhY3RpdmUsIHZhY3RpdmUs
+DQo+Pj4+PiArCQkgICAgaW50ZXJsYWNlID8gJ2knIDogJ3AnLA0KPj4+Pj4gKwkJICAgIHBh
+cmFtcy0+bnVtX2xpbmVzLA0KPj4+Pj4gKwkJICAgIHBpeGVsX2Nsb2NrX2h6IC8gMTAwMCk7
+DQo+Pj4+DQo+Pj4+IERpdmlkZSBieSBIWl9QRVJfS0haIGhlcmUgYW5kIGluIG90aGVyIHBs
+YWNlcy4NCj4+Pj4NCj4+Pj4gICAgICBodHRwczovL2VsaXhpci5ib290bGluLmNvbS9saW51
+eC9sYXRlc3Qvc291cmNlL2luY2x1ZGUvbGludXgvdW5pdHMuaCNMMjMNCj4+Pg0KPj4+ICAg
+RnJvbSB0aGUgRGVwYXJ0bWVudCBvZiBCaWtlc2hlZGRpbmc6DQo+Pj4NCj4+PiBJIGZpbmQg
+InBpeGVsX2Nsb2NrX2h6IC8gMTAwMCIgaGFzIG11Y2ggbW9yZSBjbGFyaXR5IHRoYW4NCj4+
+PiAicGl4ZWxfY2xvY2tfaHogLyBIWl9QRVJfS0haIi4NCj4+DQo+PiBUaGlzIG9uZSdzIGVh
+c3kgdG8gc2VlIGJlY2F1c2UgaXQgdGVsbHMgeW91IHdpdGggdGhlIF9oeiBwb3N0Zml4LiBN
+YW55DQo+PiBwbGFjZXMgZG9uJ3QgYW5kIHRoZW4gaXQgcXVpY2tseSBnZXRzIGNvbmZ1c2lu
+ZyB3aGF0IHVuaXRzIHRoZSBjb2RlJ3MNCj4+IGNvbnZlcnRpbmcuDQo+IA0KPiBTbyBpZiBJ
+IGFkZCBpdCB0byBwbGFjZXMgdGhhdCBkb24ndCBoYXZlIGl0IGV4cGxpY2l0bHkgKGllLCB0
+ZXN0cykgd291bGQNCj4gdGhhdCBiZSBhY2NlcHRhYmxlIHRvIGJvdGggb2YgeW91Pw0KDQpJ
+J20gT0sgd2l0aCBlaXRoZXIuIE9yIGp1c3QgbGVhdmUgaXQgYXMtaXMuDQoNCkEgSFpfVE9f
+S0haIG1hY3JvIHdvdWxkIGJlIG5pY2UsIGJ1dCB0aGF0J3MgYmV5b25kIHRoaXMgcGF0Y2hz
+ZXQuDQoNCkJlc3QgcmVnYXJkcw0KVGhvbWFzDQoNCj4gDQo+IE1heGltZQ0KDQotLSANClRo
+b21hcyBaaW1tZXJtYW5uDQpHcmFwaGljcyBEcml2ZXIgRGV2ZWxvcGVyDQpTVVNFIFNvZnR3
+YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgNCk1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJu
+YmVyZywgR2VybWFueQ0KKEhSQiAzNjgwOSwgQUcgTsO8cm5iZXJnKQ0KR2VzY2jDpGZ0c2bD
+vGhyZXI6IEl2byBUb3Rldg0K
 
-Gr{oetje,eeting}s,
+--------------nLRW0fdZeS13F20fT0F7VzGt--
 
-                        Geert
+--------------Eh5fPpvnuSpDpm0VAZYIAG4S
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
---
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+-----BEGIN PGP SIGNATURE-----
 
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmMxhRwFAwAAAAAACgkQlh/E3EQov+CC
+LhAAueruhpwqOuABLNSgIxssP4CHA5YeIPHJtcgQsVCJ/YkZMWYogfGLQ5LvjmRKP7zOmj0eh097
+Jl+Mhu65w5/8Kvc2xPuGJK7QnemQ4pIBwgR8T7EP4lo7Qc2juh4jew9eUqZx55RyUHixvouyhgqn
+BzgGTsyoYwd1+9qRBhIDWDCtxENHGwO0JGWPFgF7Uwlqgwt+T7BWO8givua8hE6kOuQujT96ovBg
+dOZ1AsqeGASwTjr1g9TB5WOnVeLpg+mqf+ZZRwWKGqQy9zVb3Wn8bmrBW53vPKwCkKpDLJ1FBRKc
+O2ug8SeIsHBrZ16iz6bexm2E+MlkVeLrtd72ZqcI2/DhzgUV1ibVq0cFEn/kk2gYS6oINTQHHMN1
+rA6wmftGfJ7iBDoRZmO++gTtrWzIzXbjB8vn7kZBdL9899qMWlCyCFVa1KL7nLqyruYf+KfqlKLU
+wHoLu9JI/8pfAlk21Pa46ICmwGHKxq0THKuX7cJPzPFwGd14NnLWe2gvpUf52fk3Rclbh6KQO+FI
+9Tb7FqXeRRLhkN1qJWHlFNZQH3dFW0Oi6K+iH7XMypQfqGvwoYaaBAtyDXVwC3ZbyluU/CcZdvhR
+T9ONl6Lvq0qYg5hOT1DKKf//OoahDG12LqTY+2lmZ4J2zIFAlL92nE7PwWGwfXEB8lkluttN1f6r
+oHs=
+=u9by
+-----END PGP SIGNATURE-----
+
+--------------Eh5fPpvnuSpDpm0VAZYIAG4S--
