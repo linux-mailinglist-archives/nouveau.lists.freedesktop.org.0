@@ -2,83 +2,106 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA2765E96F3
-	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 01:40:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC91D5E9924
+	for <lists+nouveau@lfdr.de>; Mon, 26 Sep 2022 08:04:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3420E10E467;
-	Sun, 25 Sep 2022 23:39:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 30C5F10E36F;
+	Mon, 26 Sep 2022 06:04:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3943E10E2EF;
- Sun, 25 Sep 2022 23:39:54 +0000 (UTC)
-Received: by mail-lf1-x129.google.com with SMTP id k10so8345807lfm.4;
- Sun, 25 Sep 2022 16:39:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date;
- bh=st3O2pRGPWK1FLJTPBGRuCniY8P/u6abQYJb/fEYuJQ=;
- b=W3K2NP/a6+oTI8gFEGt5nGGS9enU+0KpjF9MSWpto/y/e8Pqkyk3KdNROeq1VReuw3
- 4tbDUQNzhEsLSU0JCkjVpzqYzoF9pZhg9SvgEiWunM5yC5N0DLguvjWHMxFYGtncW+mc
- vOragtuGv5wtfYTpeKmAEjfsXd4V6tTTTzaNGi8+qtE32bmF4JD4wQ6frMIJoh9GGTge
- RAD/AaBmrSAOC5LqiVErhUkwhGjVz5+qH/Z27UJUyGp+GEOEmwJRfc1RTbiWoQbzjL5M
- mtmY0fn16PQvkz4jleVY/+noMI6YznIJxGIP6waxvJ+sh1wleUqUblTSTP3nNWAH+jkr
- pZZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date;
- bh=st3O2pRGPWK1FLJTPBGRuCniY8P/u6abQYJb/fEYuJQ=;
- b=WwphXFysj+atz4I9xMY5vGxD4BppJEQZcwGMzhwCXK8XtZFxFSifg+J8JccFXfq6Es
- PKzltgZZIPqxAloQbkQ/HqjSREYSmRpjHmM+DVkdAUU1g2msxn+pbWALn1/BuMjcUM3y
- lEqJfCRRJ4KFTODfG8uavzIFPNAXcKRQ/0MPlxTFqw0D9T/W+EKVmk0PQqI3f8QgeMzK
- 7OZNZDwapHbiMASMELJFfkX2bd3p8mJxM6R5wyQIuQ1d0/2VBpYDR/NHjoKa017SNYXi
- PM0JVUF1/vGAW9s05V1KAThkJ6d3/9U47Vic4kcMJ2mMli6ZuoHLOG7K/tMitqteUACH
- AMGg==
-X-Gm-Message-State: ACrzQf22dU2VeDc36Nb/rYKAIhXAOOeU8U/a1WGj4gLp26W4fuLcNhhX
- iKuPlUUnV2OKTEgE8H/ynXQ=
-X-Google-Smtp-Source: AMsMyM5aDKQS2b/KY3xFf9M+RoiDx1qfHHYGi1ptQgxDMi9xIzklVjEJFzIiBqGLPRgxtbvB3OmxiQ==
-X-Received: by 2002:a05:6512:2215:b0:49e:ac45:22e1 with SMTP id
- h21-20020a056512221500b0049eac4522e1mr8247070lfu.33.1664149192424; 
- Sun, 25 Sep 2022 16:39:52 -0700 (PDT)
-Received: from [192.168.2.145] (109-252-124-206.nat.spd-mgts.ru.
- [109.252.124.206]) by smtp.googlemail.com with ESMTPSA id
- i11-20020ac2522b000000b0048a921664e8sm2351312lfl.37.2022.09.25.16.39.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 25 Sep 2022 16:39:51 -0700 (PDT)
-Message-ID: <f914ceb3-94bd-743c-f8b6-0334086e731a@gmail.com>
-Date: Mon, 26 Sep 2022 02:39:50 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.12.0
-Content-Language: en-US
-To: Hans de Goede <hdegoede@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
- Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
- Daniel Dadap <ddadap@nvidia.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Pan@freedesktop.org, Xinhui <Xinhui.Pan@amd.com>,
- "Rafael J . Wysocki" <rafael@kernel.org>,
- Mika Westerberg <mika.westerberg@linux.intel.com>,
- Lukas Wunner <lukas@wunner.de>, Mark Gross <markgross@kernel.org>,
- Andy Shevchenko <andy@kernel.org>
-References: <20220825143726.269890-1-hdegoede@redhat.com>
- <20220825143726.269890-3-hdegoede@redhat.com>
-From: Dmitry Osipenko <digetx@gmail.com>
-In-Reply-To: <20220825143726.269890-3-hdegoede@redhat.com>
-Content-Type: text/plain; charset=UTF-8
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2085.outbound.protection.outlook.com [40.107.94.85])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5C77110E369;
+ Mon, 26 Sep 2022 06:04:04 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Bre8wUXq5My0xV1jJH6Okk5DVuFclJHskAM4QqIMfyc7+YXt4NHKONldPm6cnvN/xQFxKcyLRcHf3ry9EfFJT5SiTvm5HZEZxSC3806ChLI7/k+FRfw6QMkxyxsARZpvK1YxmYYR1lCKLwgH8zdIIfrElJY3ihjZ+839Q8d9spR9tKi4yHpQcg4cnsANLoMRpWZBrYMCnaf077d8OmN2htdzOXEcrmimRtc7C8QOvOQ9kvTLCqzOKgKyyxZfbahB9OhmeGoj+DIM4YUjg+Ujj6a790/xw+vFArC8QQ2CgHp4lt3ztdcflfZA4gefyRj6PEiz0opynXoQuUkXWD+TIg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PfmayBrPzfm2vBjXB22ucTPOdvFdJZResjuDJxpiP8g=;
+ b=OKFs5+NWq2/jxw78tsZNzbiZrgVbbrbVKOmlSbjj10fV+QKQEp8h0EpOYv1wEUDSnQM9NCjih4JPqdu/NrXwgD6Q4Y08xJ7XnQG7z2PUgOXWCnNWLtnze1Gjm1REd4o3JqI+jZjf6ZVvCfiPPZPVge0Omdbp741ANohwkLqjFCRUnpPm1eIwrD8w0d2/ieof7Vjzgs/dyxDE40Lj6+560l3prGglA1OcKbtZrEVj4Co/EXkQ8Knw5f2PhU6xOpa0o4ZhkXfy5UIHsjpbRPu+VzNXSH1jwE6LajFHDvoy7QrBtpzkgt/VL2yx+LYVDDBcMt9GYrdLKM02nAe2hga8qA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PfmayBrPzfm2vBjXB22ucTPOdvFdJZResjuDJxpiP8g=;
+ b=fd2Dddpo1N85HeTWDORuq/73A4a5FMsc3WWXE62IgKWT7teV9TPJwnyTqC1YCYZNyWRcDD2+XqUEvFDHdkIjku57sNfsDQEvxTBYedUGugwc9016/7CL/kow5gUO3lgqiXsOm77whXuxOpfhd+lBpEr1N4CGn3fVwVkFnoVTO6H38VKvqnEU7mk2gdt/irHYX2BITp8kbtsZ5CRPaDCZrVkcSYCzWiMaNBwLvlaGDL5mYVI4Tnnuui7lND0P9MMmFNL0aZyAc2hG7KWOZi/CmHdQyTWhKxBHuXp2Ytwt9JZEPRJ00l/46hvSaNPSzxyOh7FfKP0FWUaXc7y3o3rOtg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from BYAPR12MB3176.namprd12.prod.outlook.com (2603:10b6:a03:134::26)
+ by MW4PR12MB7359.namprd12.prod.outlook.com (2603:10b6:303:219::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.25; Mon, 26 Sep
+ 2022 06:04:02 +0000
+Received: from BYAPR12MB3176.namprd12.prod.outlook.com
+ ([fe80::ed0:a520:ac8e:9966]) by BYAPR12MB3176.namprd12.prod.outlook.com
+ ([fe80::ed0:a520:ac8e:9966%6]) with mapi id 15.20.5654.025; Mon, 26 Sep 2022
+ 06:04:02 +0000
+From: Alistair Popple <apopple@nvidia.com>
+To: linux-mm@kvack.org,
+	Andrew Morton <akpm@linux-foundation.org>
+Date: Mon, 26 Sep 2022 16:03:04 +1000
+Message-Id: <cover.f15b25597fc3afd45b144df863eeca3b2c13f9f4.1664171943.git-series.apopple@nvidia.com>
+X-Mailer: git-send-email 2.35.1
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v5 02/31] drm/i915: Don't register backlight
- when another backlight should be used (v2)
+Content-Type: text/plain
+X-ClientProxiedBy: SYBPR01CA0081.ausprd01.prod.outlook.com
+ (2603:10c6:10:3::21) To BYAPR12MB3176.namprd12.prod.outlook.com
+ (2603:10b6:a03:134::26)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BYAPR12MB3176:EE_|MW4PR12MB7359:EE_
+X-MS-Office365-Filtering-Correlation-Id: a8188633-15e9-447f-bc83-08da9f84e948
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: wQhPdV8aIOxcEItEidRJGYOmT8fzCVW/4ZZtD7pBxbJ1pa1ydhqTQ8ba3VhIFqPIhORVhPt0jkL5VOHd9T9RowjNIJltmXJFifdd0bdHsSsWaRGgGFIK5ke1kUpo64mdR4DVhd//7Ecrkakv6iD/p1ARzbIuC0L+3sMmMfOC+L1dipCIzzGhisFZ6xiwZtDfMieXiskQG99az0kn/ATCLI/Y3lZEKJQS2i6rVyDE35aRCHhQ0dVcWlI3iNe+c2zKQQ0Z/+WhtDj5dldOlGKmo3dI2DLg7Qi2bXMr5rkTZYKVKM8pNrfVzLitBH09BsrujtbECgbZkkWoputrU7wL5B370TnlNBcfFIyHCrc0uqeOV8B1apOG72AhvFVCp7xdD14u8EhiooQvveoe1f7K0fpNaGqA07jn989Tp1vm+cocXPcwwZLz3siuQMKXilC+fd/UeEqx+d60gTeYB1FPcOA/LzRP0qp7eQayIcsvS2v936wNtB0KkIXZ39AJbfYIM8+Ikv0LOhM8cqRb/boUANxPes3UlpyyM0uctESS549JYVtXkDFmWH1Xouoq2XgPUtiGFDlMB5NZI/kSs76e7Z3myoNJgnDOAslTHltVt2ZTMlgs6WFkqCFrlnmtv6+owgbXFgUDD/txzoRv8DwNc+vN7SMqQTorM6N2X+XmRdgI9/sm5hmP0OqAIaKuzFqYW81sArRYNs6a5meNalZwkbi4x8XAddsgZkIDhdw2vDZu4SJR9OHxoBHhpuVWsAGH
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BYAPR12MB3176.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230022)(4636009)(39860400002)(136003)(366004)(376002)(396003)(346002)(451199015)(8936002)(86362001)(7416002)(2906002)(5660300002)(83380400001)(41300700001)(6512007)(186003)(107886003)(26005)(6506007)(478600001)(6486002)(2616005)(6916009)(66946007)(4326008)(66556008)(66476007)(8676002)(316002)(38100700002)(54906003)(66899012)(36756003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ldHX+lBNsRQv00bMOrK9LeQSmyDnWEnltLSm2tpfQ+du12JZTtzMdeRX3+rY?=
+ =?us-ascii?Q?CEPSVV40z5ox3aUfMbVtKyEFwIJdkiLdpvZuYw1HLdBeBbB1ePFIsp2xTUiE?=
+ =?us-ascii?Q?SJJKEMDe4KHIOqojBXl1HuueahdrSdzPV5EXSFGwjGuzNzJpE+miOsl7NXHi?=
+ =?us-ascii?Q?06DdtJ2gKh1w6/reJDquCeI3OYcQmdxYqMq+EKOdReOVtXTd8Dty22jFurvJ?=
+ =?us-ascii?Q?nAiCsW5oXf48bzAgS6gVDG/2SDPD3e7ZVKEQUEdZhPvhD4jhEDTCErTwPHVA?=
+ =?us-ascii?Q?rW0jT41z/Rwx2jBKdophPFWyl2KCFxwt044H7iaXD28HFPGiZp4hQu1UttjB?=
+ =?us-ascii?Q?hT6g6YKkTHxWL1Ym/OLQRdVFoCcWFjjbgpAnNhEoxVuJf4yU4XZA7fcSlP0b?=
+ =?us-ascii?Q?09uPfb2ZROYr9Qx9ZZn8U9SsTGcRUYIWjkRqMlwThqjGuGrEIgstxvNOMJKw?=
+ =?us-ascii?Q?MO1nFYawhHR3VBODHZ6+dJObc53Iy0nn9P5FlhqLVMT+RyuUBbrLuaSmKQZV?=
+ =?us-ascii?Q?W13zRX43a5eRsyrDrp0j5so73cWXtdNAPnvjZ0a3hhfkG9/kW/wJpq5NkPNd?=
+ =?us-ascii?Q?Tx2DNT8WMquCsE3mzIvdcHiOOOUS6Y18+1eSLrT7JnnqzSuV5DA37RBKKxaC?=
+ =?us-ascii?Q?pogWPEX7WNqJP+NHIVk1+kETq5Mj8fQP4o+0yLFdgdoQl+tzgFeqh1dl31yN?=
+ =?us-ascii?Q?O0i71qYkZLTtL96llz5DE5x7ylxJ/CnQUa+Gc75Dea4Jrqb1+mW995Uatvm6?=
+ =?us-ascii?Q?Iq4ox3JV8ivO68l77eDMqmfQpJnJo2cj2HpSprVbihs3No0KjepqkOHwUAc8?=
+ =?us-ascii?Q?dxqwgx2zCAOuhUYHeTNVCpNf719AbgUk+pK7lPagIa4rivlCsjiEgDj/t3WA?=
+ =?us-ascii?Q?E9/j12Pgjq9Xl4ah5NgeE+/beHjy+czCGUIrMZJwrTX3sY7WeTDgAETdmEXR?=
+ =?us-ascii?Q?ndC44aybctmLArRmPIqGymzeEOxeucdJNh6M6JfcGis095GkMx4sYX3FI2No?=
+ =?us-ascii?Q?99yVgt0Shc+xth+GHWisxTPkORJZe3erTNrLTUudaT6N27TiJk6IWgmZH1Fh?=
+ =?us-ascii?Q?16YLyaLgGVYMnXFi2vEbN2Pptc8vgHlzQeHaBQ5TnIhgJtnkrNQ2w+7j30oP?=
+ =?us-ascii?Q?DwONl9jERKsIktOtbOl1v+oCo07CIWyZpHvxnt3d5+YW8tNxa2zeMR7sU1sZ?=
+ =?us-ascii?Q?zrfcqC2hj+mC5Y/IIns7cpZ866cxZQml/6EdIJZ/mIDDvxoML2PC6aOw62rE?=
+ =?us-ascii?Q?Sa5UA4C6edBNCNPtM2Q8zKAFs8zGTHmUNaoUUT2Sxx7yk9kJWOmNl0al3K9d?=
+ =?us-ascii?Q?0lyOd29SNoNBXWL1jfc8Yqw7nUcRgEl4Kag6VlZguNsP5LXmLRLps8MbrDFR?=
+ =?us-ascii?Q?kH6tK2e3JkHOAPKcaZUMbWGuqrIOkAGfTT73s/172dJF9F+K9BSL4cdXqH/w?=
+ =?us-ascii?Q?y5ZGkl07xwi+iW0r0h5VWOSyOI7x6QUyNlh8z/9L6NsZ/hBaDMYdr6zSITcA?=
+ =?us-ascii?Q?cCAOC3LUGA2pZmCHf9P9G62MN7NesbzyIJG1Z/Kpb2QjnPQiaPBjsyj01+DT?=
+ =?us-ascii?Q?O/qIRq3IFs1GbbrF24sVju1V3f+mrdRUyT0PKFFJ?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a8188633-15e9-447f-bc83-08da9f84e948
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB3176.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Sep 2022 06:04:02.6735 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: JlMuqxxESz5Ri4xo8ffb3tWmdbNbE/xMGtpq0/4LDMq5bPk+MJM9zpQOXsYI0fu7ZnvVkuwL/qmJ14kzPxEKnQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7359
+Subject: [Nouveau] [PATCH 0/7] Fix several device private page reference
+ counting issues
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,58 +113,64 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jani Nikula <jani.nikula@intel.com>, nouveau@lists.freedesktop.org,
- intel-gfx <intel-gfx@lists.freedesktop.org>, dri-devel@lists.freedesktop.org,
- platform-driver-x86@vger.kernel.org, linux-acpi@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, David Airlie <airlied@redhat.com>,
- Len Brown <lenb@kernel.org>
+Cc: Alex Sierra <alex.sierra@amd.com>, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, Michael Ellerman <mpe@ellerman.id.au>,
+ Alistair Popple <apopple@nvidia.com>,
+ "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>,
+ Ralph Campbell <rcampbell@nvidia.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Dan Williams <dan.j.williams@intel.com>,
+ Felix Kuehling <Felix.Kuehling@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ linux-kernel@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
+ Alex Deucher <alexander.deucher@amd.com>, linuxppc-dev@lists.ozlabs.org,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-25.08.2022 17:36, Hans de Goede пишет:
-> Before this commit when we want userspace to use the acpi_video backlight
-> device we register both the GPU's native backlight device and acpi_video's
-> firmware acpi_video# backlight device. This relies on userspace preferring
-> firmware type backlight devices over native ones.
-> 
-> Registering 2 backlight devices for a single display really is
-> undesirable, don't register the GPU's native backlight device when
-> another backlight device should be used.
-> 
-> Changes in v2:
-> - Use drm_info(drm_dev,  ...) for log messages
-> 
-> Reviewed-by: Jani Nikula <jani.nikula@intel.com>
-> Signed-off-by: Hans de Goede <hdegoede@redhat.com>
-> ---
->  drivers/gpu/drm/i915/display/intel_backlight.c | 7 +++++++
->  1 file changed, 7 insertions(+)
-> 
-> diff --git a/drivers/gpu/drm/i915/display/intel_backlight.c b/drivers/gpu/drm/i915/display/intel_backlight.c
-> index 681ebcda97ad..03c7966f68d6 100644
-> --- a/drivers/gpu/drm/i915/display/intel_backlight.c
-> +++ b/drivers/gpu/drm/i915/display/intel_backlight.c
-> @@ -8,6 +8,8 @@
->  #include <linux/pwm.h>
->  #include <linux/string_helpers.h>
->  
-> +#include <acpi/video.h>
-> +
->  #include "intel_backlight.h"
->  #include "intel_backlight_regs.h"
->  #include "intel_connector.h"
-> @@ -952,6 +954,11 @@ int intel_backlight_device_register(struct intel_connector *connector)
->  
->  	WARN_ON(panel->backlight.max == 0);
->  
-> +	if (!acpi_video_backlight_use_native()) {
-> +		drm_info(&i915->drm, "Skipping intel_backlight registration\n");
-> +		return 0;
-> +	}
-> +
->  	memset(&props, 0, sizeof(props));
->  	props.type = BACKLIGHT_RAW;
->  
+This series aims to fix a number of page reference counting issues in drivers
+dealing with device private ZONE_DEVICE pages. These result in use-after-free
+type bugs, either from accessing a struct page which no longer exists because it
+has been removed or accessing fields within the struct page which are no longer
+valid because the page has been freed.
 
-This breaks backlight on Acer Chromebook Spin 713 because backlight
-isn't registered anymore. Any ideas how to fix it?
+During normal usage it is unlikely these will cause any problems. However
+without these fixes it is possible to crash the kernel from userspace. These
+crashes can be triggered either by unloading the kernel module or unbinding the
+device from the driver prior to a userspace task exiting. In modules such as
+Nouveau it is also possible to trigger some of these issues by explicitly
+closing the device file-descriptor prior to the task exiting and then accessing
+device private memory.
+
+This involves changes to both PowerPC and AMD GPU code. Unfortunately I lack the
+hardware to test on either of these so would appreciate it if someone with
+access could test those.
+
+Alistair Popple (7):
+  mm/memory.c: Fix race when faulting a device private page
+  mm: Free device private pages have zero refcount
+  mm/migrate_device.c: Refactor migrate_vma and migrate_deivce_coherent_page()
+  mm/migrate_device.c: Add migrate_device_range()
+  nouveau/dmem: Refactor nouveau_dmem_fault_copy_one()
+  nouveau/dmem: Evict device private memory during release
+  hmm-tests: Add test for migrate_device_range()
+
+ arch/powerpc/kvm/book3s_hv_uvmem.c       |  16 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_migrate.c |  18 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_migrate.h |   2 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_svm.c     |  11 +-
+ drivers/gpu/drm/nouveau/nouveau_dmem.c   | 108 +++++++----
+ include/linux/migrate.h                  |  15 ++-
+ lib/test_hmm.c                           | 127 ++++++++++---
+ lib/test_hmm_uapi.h                      |   1 +-
+ mm/memory.c                              |  16 +-
+ mm/memremap.c                            |   5 +-
+ mm/migrate.c                             |  34 +--
+ mm/migrate_device.c                      | 239 +++++++++++++++++-------
+ mm/page_alloc.c                          |   6 +-
+ tools/testing/selftests/vm/hmm-tests.c   |  49 +++++-
+ 14 files changed, 487 insertions(+), 160 deletions(-)
+
+base-commit: 088b8aa537c2c767765f1c19b555f21ffe555786
+-- 
+git-series 0.9.1
