@@ -1,109 +1,98 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9644B5EB787
-	for <lists+nouveau@lfdr.de>; Tue, 27 Sep 2022 04:20:44 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 049315EC06E
+	for <lists+nouveau@lfdr.de>; Tue, 27 Sep 2022 13:05:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7189010E889;
-	Tue, 27 Sep 2022 02:20:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B5F9B10E8D9;
+	Tue, 27 Sep 2022 11:05:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2065.outbound.protection.outlook.com [40.107.243.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6732110E885;
- Tue, 27 Sep 2022 02:20:38 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iAy0loKVbnta/nmEIJHJ3r0a7+V8AGvCaTi3BS0wf9tH8oh6AEq+da/mDjdeH1IrWNEIS8A2/S0IUfgnDQVynfu809SQFzzUJkyVrrkmRWk3tvIpabDzAHItuA69m7cVJL4/32AMVE/C+A2rlB45fqRT6TyfT2fdVCc0MNB0JiPTHSrWjrx0K1xHGhy2tmmlF1IZsJHmGLuDRlGRPeFKJCndoVRa8muSmVG6D5fWSJuK824J+O3XiYz/Qfzgyci1lDwBR586dkghsfUte0efWITUWPwIhjr6NZA1vgJIh9BIg5OHpiaeGhySUAekeRX4s2dw9ci1x9iQNfWiicjXfA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/0fNFP1t6ElIZwUU3+jJl9kcQFnQvMD2kRwfBjGRoTQ=;
- b=imSdVc57U0HKg8hFOc3M7sSyfdwqOZdDky5UiaxAIxGBmJsPV4yUXG2HX3Qkb7EcE/bbnXvC6c6FMBRVngOvObsNe4JV5vrciGmgWXfnnUfJcbSFy8SlllSu0+/piFsJ7AbBaIktQPtnn1N34zgdJLXf7YhW5ljtYpUAnC+y4rHl3TeDks9cYDKD2iLhYyVB7PtcHRGz08Noz/C5C06sdNhE98pgZbJm5/DFa6jDM0RoK58bvQEAFhlDh048GX/cxpQMtFzPXOpwzrkEB2KUOFPPdyUXddDtx9MFVVeIUrlfPdczNXw010Vyl9XFIFFs7SPPhgb8AtevVVdLZbAYsA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/0fNFP1t6ElIZwUU3+jJl9kcQFnQvMD2kRwfBjGRoTQ=;
- b=KgODYrgcPLCPHRc4HfIuzi/HWoEkGsX0Fd/VqPGxaiGPf+01qyzQDZaWXdBG0Zr93CIEYD7MLCmE48hRKlUjTTdeyw11KCy8A/jkxZmPNOX+qilCO71/HVSRdAA3ansOSnaVRIxbpJzT9fjOkl2KU1+qGXdJuJ4+CEcnBoTTBLJQKzSujRYnj9d6H5miUrx3raVc0w2XErofU7Kin3K4/XsoADp/F1PIr7kvk2TZrrUwiloxorZzoymU+XLkWs5rdoapGuS8wP8GVK4u6gLT58VlnqslhRuSo1QrYDMNzjIEzj2gS8q+WmveFdn8nSiok9iRRQ4hbQpPPjLkSYpgTQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from BYAPR12MB3176.namprd12.prod.outlook.com (2603:10b6:a03:134::26)
- by BL1PR12MB5994.namprd12.prod.outlook.com (2603:10b6:208:39a::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.25; Tue, 27 Sep
- 2022 02:20:35 +0000
-Received: from BYAPR12MB3176.namprd12.prod.outlook.com
- ([fe80::4064:6c13:72e5:a936]) by BYAPR12MB3176.namprd12.prod.outlook.com
- ([fe80::4064:6c13:72e5:a936%5]) with mapi id 15.20.5654.026; Tue, 27 Sep 2022
- 02:20:35 +0000
-References: <cover.f15b25597fc3afd45b144df863eeca3b2c13f9f4.1664171943.git-series.apopple@nvidia.com>
- <3d74bb439723c7e46cbe47d1711795308aee4ae3.1664171943.git-series.apopple@nvidia.com>
- <YzG42766BJSxro0R@nvidia.com>
-User-agent: mu4e 1.6.9; emacs 27.1
-From: Alistair Popple <apopple@nvidia.com>
-To: Jason Gunthorpe <jgg@nvidia.com>
-Date: Tue, 27 Sep 2022 12:06:24 +1000
-In-reply-to: <YzG42766BJSxro0R@nvidia.com>
-Message-ID: <877d1plfrm.fsf@nvdebian.thelocal>
-Content-Type: text/plain
-X-ClientProxiedBy: SYXPR01CA0124.ausprd01.prod.outlook.com
- (2603:10c6:0:2d::33) To BYAPR12MB3176.namprd12.prod.outlook.com
- (2603:10b6:a03:134::26)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 10A1B10E8E0
+ for <nouveau@lists.freedesktop.org>; Tue, 27 Sep 2022 11:04:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1664276698;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=l/JllRVsLXk1mVK18+Kbna9TAwN4318CnjejoNa5Zl0=;
+ b=gZAjk6H8gWJECoBIIhNiwqXc5KCVo90F51v+Rw5bgK7hfqSDrULB+l3Y2XAPNwRVVYBaj3
+ 01+oivgd7dHOkn1sc8xQGb+cZbb2eIiRxV0S8HxJDQufNkegA3/uV8ByzRjHGk114AWHdd
+ ur8VagvaLIrkUA/It12FuQqgYIhScUI=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-263-Rpk1NdmWNfePdKlIwRLGNg-1; Tue, 27 Sep 2022 07:04:56 -0400
+X-MC-Unique: Rpk1NdmWNfePdKlIwRLGNg-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ i17-20020a05640242d100b0044f18a5379aso7635964edc.21
+ for <nouveau@lists.freedesktop.org>; Tue, 27 Sep 2022 04:04:56 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date;
+ bh=l/JllRVsLXk1mVK18+Kbna9TAwN4318CnjejoNa5Zl0=;
+ b=owdub8OJrMF+HNpblSCmxbrUOyxNt973PlSJvTXdnZpE5kugyHMYZIFgttabQsGsVc
+ VDoOKkwVlHuEz2kGirDjOhYys6HDZHPcPNbcRXFIWVOoPrfFMxBgsViWqlasHbvmEDYA
+ gJD2MCS/7istJ01V/3NJmSIg1G/jBSz+Dj1KZXk3yXP8h4JfgPeLUnuYPbU7J0HiCuhJ
+ iVtU6NlkH/VFPeuV+GodPCeCdDJJpaVXWvdysCwK9m97ghgpcTpuMyE08ejEkN5mKfCm
+ 6yJitK9MVMrJ6rhPLJGxe53T7CQA8gkfwxhICh6vwVjoGNr5PqSJ0SDk5tO3UuL/WXso
+ Hzpw==
+X-Gm-Message-State: ACrzQf0uB+aVH0M3Efrp2IuUHKRWk2Gcr7udsHdT+Bz30b2WBEWjkjOD
+ p3MeTMz05upXWio8rE1oKoRaAT70JyBQ4hIQgeybyLgdJmD4XRw8m03h1SetKbwqKSsXH+kdSZr
+ 2PHvEkybhKYl6C7vqPJ3M9XgXOg==
+X-Received: by 2002:a17:906:eecb:b0:73c:5bcb:8eb3 with SMTP id
+ wu11-20020a170906eecb00b0073c5bcb8eb3mr22169287ejb.284.1664276695667; 
+ Tue, 27 Sep 2022 04:04:55 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM7D5QZjU/upOCee7GoUO2AdF8ylwZyk3AjCM/1ND7XlQnca3IxNEAVjdAeeHSEga9s+yI8OrQ==
+X-Received: by 2002:a17:906:eecb:b0:73c:5bcb:8eb3 with SMTP id
+ wu11-20020a170906eecb00b0073c5bcb8eb3mr22169235ejb.284.1664276695270; 
+ Tue, 27 Sep 2022 04:04:55 -0700 (PDT)
+Received: from ?IPV6:2001:1c00:c1e:bf00:d69d:5353:dba5:ee81?
+ (2001-1c00-0c1e-bf00-d69d-5353-dba5-ee81.cable.dynamic.v6.ziggo.nl.
+ [2001:1c00:c1e:bf00:d69d:5353:dba5:ee81])
+ by smtp.gmail.com with ESMTPSA id
+ a3-20020a50e703000000b0044657ecfbb5sm1058230edn.13.2022.09.27.04.04.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 27 Sep 2022 04:04:54 -0700 (PDT)
+Message-ID: <42a5f2c9-a1dc-8fc0-7334-fe6c390ecfbb@redhat.com>
+Date: Tue, 27 Sep 2022 13:04:52 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB3176:EE_|BL1PR12MB5994:EE_
-X-MS-Office365-Filtering-Correlation-Id: a38e010b-54fa-419f-962e-08daa02edc3e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: FuZxz3pjuBqeq09mPlJcg3ApcX7R+crmtv9/yFmOIAq5cDifyAaE8Pb3pEONMo8wxzw9Fk1ytNr0Q3gkHkEPb2W/hmWaOmwjn/4tK8oYt0v2io9xYcN3XHdQ2q2bjoFLbjH4Lz7uZN0GgUyVq65Q0vpNuLbB0JNfNUtlM3CRVTURYLea+KSIl/TSeHK7noqIv8TJ2KyiVICMY3qR6qS5nF/YBddk4t+9kuxeLEatcO5fk9huG0asttelUmwZ9L5ukj+EydUPO/VmKJGdqmmtWRoDjuvo8HAXMeQytwX8Hk3aY/ts25jIbJz+QWWBzNLdkjRNJa1DbGOAukhvP2BaGyEfdjwh3UlDZZunqpWAFsAfSYUQ5Dir2EXZ4zL13Dvo6In/a73jYzEtNQ/ywjm9j9jM9fepWRxcz1F3wi+7e+P2uZZPyOF5N/q9uLCjrCH/offlIRXOyfxm4fHEP4sbFvW/bxrNKzqz+HmJOpaQK3sIdntccc+k/rB/ndnbsPgS3UwqUdogrk9/vrljqUqlUSKfp8oVEygoq1gwmkvdT3Qpq5LVWsIPmsFinklzEKxtoF/HyOmPXISm5qe1zsaGqJg9iyjTv50/29cZx4M1+Fmr+6VqJEvL4uFPmTjxKQmF4iTjaHHkzSn1O+zhpbVyi5syBKTko2PhBOiY3wd1CeNjbmZ132N8r14GY8u1PSznqh+vSsvj35URULfRKkLhTQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR12MB3176.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(396003)(136003)(376002)(39860400002)(366004)(346002)(451199015)(86362001)(38100700002)(2906002)(7416002)(186003)(6666004)(9686003)(5660300002)(6486002)(41300700001)(6506007)(26005)(83380400001)(478600001)(6512007)(316002)(6636002)(54906003)(66556008)(8676002)(6862004)(4326008)(8936002)(66946007)(66476007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?nvLEt30MP1i0pkcCWXovXrYkCFXY+DWN1bNo+BNGrjO/AeVGADHaYoRcBHFg?=
- =?us-ascii?Q?pljoy5XPHPwYP8lE9Mh2LJgso5ZTKT/Nblo5UpvGzVej2IkWE89WAhdSE7UG?=
- =?us-ascii?Q?LXkT+zvucjNivw8JGKx80j/EKsQ1yXp0o1mGMNsRZOx+oYytRYk54YabO8Nk?=
- =?us-ascii?Q?9gaspqHtQkBfz2Ob6+Iq9yz8ifpwpUcqaumBztUQ1CUtXc2jZ/YwK3Qwao7A?=
- =?us-ascii?Q?J7TeDvjGT52RZmjmXwabxUaHu8+/qmDCwhBG3GNVl3cgAUvJF2Nv4cmrBK88?=
- =?us-ascii?Q?285Ji5lIPJ52JircKGW1gd7McT8KaBsA4OSNxISPQJBgJz2uJW/txcRJDrSX?=
- =?us-ascii?Q?lnzcAZcodQ2zyP5Kiy+ucyPMDBeSkMXvqZEh+d0hKnojax3YBvcik4VlIxml?=
- =?us-ascii?Q?iO3hieOI+Yg9ZbZNkLfQVVUAvndXgUFCPw87xl2JvgNIG2Aeewe6lRy6RmYl?=
- =?us-ascii?Q?PQ72BWtdSJm5kUkQ208+2EgW3WjYUogFU+tYtJfqX9azJmnBkaI4a2K9wXjG?=
- =?us-ascii?Q?DipMl2D3AsnLm7xtjZiqM5kUvp8/aAkn83U9E63HXv9aDuIQzCm9KME9ptnk?=
- =?us-ascii?Q?2jYmACPqkrtsq18NM8a+kNrySvISr41NxxMmF/Q4SSZRgtn9dVloDeODk8LT?=
- =?us-ascii?Q?LHKeptRHmz/sr5RQ5JWZUng8u90Tk75LLSt+1iUekiYmSaF4XJSlut3AnWpF?=
- =?us-ascii?Q?rygrBo5SiAA5/0uGlorqvwFVbKM/dstTqvfJtaBYp30/K8odVz9cwSxTDtLk?=
- =?us-ascii?Q?gCs8NYnq5xGnotFLj/udkUCd06SCehMg7eg64r8Cbo6Tr/4xikKGtv2PXl7O?=
- =?us-ascii?Q?rfQiYtJblUwHfl1wakhmxwlG/Crpqjfp0sk54XshOZPTC+Zic703bchiT8rf?=
- =?us-ascii?Q?PsmwKuC/LVaFqoy67snaKYpcMbEtj+9qQDtX5vT3p2by1TSvKFO3JSp+EyeC?=
- =?us-ascii?Q?b/+adB/sTxsJfOtZi8NBjgVm0ev3dNN82UNkEC9/IE0+sBEF1xr8493vN3CW?=
- =?us-ascii?Q?+sibQEaOOlEXFgEMOhS1VSbaA2UlzwvWY331RiNhLajH0E5JV+pFextvYt5N?=
- =?us-ascii?Q?Lyo+fzmp/jF0iM8aHkjMSEe2VwuCzLjy4ek/u0epZxL1g/SPrcTj1Sz3ctNP?=
- =?us-ascii?Q?b8AFBhBrzNBuk3G+ianVwT8WzjGm5fuqUlwsPeDhhX8AE7sKPQAvEnt4NKfj?=
- =?us-ascii?Q?+u/Zrg7gQn59481EMJfEG34nB5i1Lwa6F4KVRqSLGqBbgi4EicrH20o3lMW2?=
- =?us-ascii?Q?21pN3HpGEwauckU7xYOZBdukA+GsQYdcVtg14IKrua0i0L/rVXB6vnyUYPOP?=
- =?us-ascii?Q?139LAqXxnG53F6W/oBBWotZy7w3Ye2XPICcwmB0F7zzw/ujLOnlf0+R2iSRu?=
- =?us-ascii?Q?jqquEd9MSi60kcYjvKUATk28F26LVhmGHfukB+FR72+hvzLLCf7lMeTqaU2h?=
- =?us-ascii?Q?Xd0AC/my2h06BHpRk8W35XzZFMwUIN8wpvk3mmE7O8fdZz9v9fddqHsfry9m?=
- =?us-ascii?Q?vtnO+al574qSUhmsdkqMh2fQhs3HCMWbHgGu+CtqK4ugiPb3NvVoVHUyKm3J?=
- =?us-ascii?Q?ZGCs9Pm+hFTXsNWUm6U8LhSIrlitbSx9FMngkRcg?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a38e010b-54fa-419f-962e-08daa02edc3e
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB3176.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2022 02:20:35.1625 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: d9HgsWVPSBNfUn4iByaqyzDIT/EN0tRXfmKhDQlIc36I2iwjG4sCVHHzAmJzsR0GHWsbdNeZiX8CD94p4CGZgA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5994
-Subject: Re: [Nouveau] [PATCH 2/7] mm: Free device private pages have zero
- refcount
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.1
+To: Dmitry Osipenko <digetx@gmail.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude <lyude@redhat.com>,
+ Daniel Dadap <ddadap@nvidia.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Pan@freedesktop.org, Xinhui <Xinhui.Pan@amd.com>,
+ "Rafael J . Wysocki" <rafael@kernel.org>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>,
+ Lukas Wunner <lukas@wunner.de>, Mark Gross <markgross@kernel.org>,
+ Andy Shevchenko <andy@kernel.org>
+References: <20220825143726.269890-1-hdegoede@redhat.com>
+ <20220825143726.269890-3-hdegoede@redhat.com>
+ <f914ceb3-94bd-743c-f8b6-0334086e731a@gmail.com>
+From: Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <f914ceb3-94bd-743c-f8b6-0334086e731a@gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v5 02/31] drm/i915: Don't register backlight
+ when another backlight should be used (v2)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -115,61 +104,197 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Alex Sierra <alex.sierra@amd.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, amd-gfx@lists.freedesktop.org,
- Michael Ellerman <mpe@ellerman.id.au>,
- "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
- Ben Skeggs <bskeggs@redhat.com>, Ralph Campbell <rcampbell@nvidia.com>,
- Nicholas Piggin <npiggin@gmail.com>, Dan Williams <dan.j.williams@intel.com>,
- Felix Kuehling <Felix.Kuehling@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
- linux-kernel@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
- Alex Deucher <alexander.deucher@amd.com>,
- Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
- Christian =?utf-8?Q?K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: Jani Nikula <jani.nikula@intel.com>, nouveau@lists.freedesktop.org,
+ intel-gfx <intel-gfx@lists.freedesktop.org>, dri-devel@lists.freedesktop.org,
+ platform-driver-x86@vger.kernel.org, linux-acpi@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, David Airlie <airlied@redhat.com>,
+ Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi Dmitry,
 
-Jason Gunthorpe <jgg@nvidia.com> writes:
-
-> On Mon, Sep 26, 2022 at 04:03:06PM +1000, Alistair Popple wrote:
->> Since 27674ef6c73f ("mm: remove the extra ZONE_DEVICE struct page
->> refcount") device private pages have no longer had an extra reference
->> count when the page is in use. However before handing them back to the
->> owning device driver we add an extra reference count such that free
->> pages have a reference count of one.
+On 9/26/22 01:39, Dmitry Osipenko wrote:
+> 25.08.2022 17:36, Hans de Goede пишет:
+>> Before this commit when we want userspace to use the acpi_video backlight
+>> device we register both the GPU's native backlight device and acpi_video's
+>> firmware acpi_video# backlight device. This relies on userspace preferring
+>> firmware type backlight devices over native ones.
 >>
->> This makes it difficult to tell if a page is free or not because both
->> free and in use pages will have a non-zero refcount. Instead we should
->> return pages to the drivers page allocator with a zero reference count.
->> Kernel code can then safely use kernel functions such as
->> get_page_unless_zero().
+>> Registering 2 backlight devices for a single display really is
+>> undesirable, don't register the GPU's native backlight device when
+>> another backlight device should be used.
 >>
->> Signed-off-by: Alistair Popple <apopple@nvidia.com>
+>> Changes in v2:
+>> - Use drm_info(drm_dev,  ...) for log messages
+>>
+>> Reviewed-by: Jani Nikula <jani.nikula@intel.com>
+>> Signed-off-by: Hans de Goede <hdegoede@redhat.com>
 >> ---
->>  arch/powerpc/kvm/book3s_hv_uvmem.c       | 1 +
->>  drivers/gpu/drm/amd/amdkfd/kfd_migrate.c | 1 +
->>  drivers/gpu/drm/nouveau/nouveau_dmem.c   | 1 +
->>  lib/test_hmm.c                           | 1 +
->>  mm/memremap.c                            | 5 -----
->>  mm/page_alloc.c                          | 6 ++++++
->>  6 files changed, 10 insertions(+), 5 deletions(-)
->
-> I think this is a great idea, but I'm surprised no dax stuff is
-> touched here?
+>>  drivers/gpu/drm/i915/display/intel_backlight.c | 7 +++++++
+>>  1 file changed, 7 insertions(+)
+>>
+>> diff --git a/drivers/gpu/drm/i915/display/intel_backlight.c b/drivers/gpu/drm/i915/display/intel_backlight.c
+>> index 681ebcda97ad..03c7966f68d6 100644
+>> --- a/drivers/gpu/drm/i915/display/intel_backlight.c
+>> +++ b/drivers/gpu/drm/i915/display/intel_backlight.c
+>> @@ -8,6 +8,8 @@
+>>  #include <linux/pwm.h>
+>>  #include <linux/string_helpers.h>
+>>  
+>> +#include <acpi/video.h>
+>> +
+>>  #include "intel_backlight.h"
+>>  #include "intel_backlight_regs.h"
+>>  #include "intel_connector.h"
+>> @@ -952,6 +954,11 @@ int intel_backlight_device_register(struct intel_connector *connector)
+>>  
+>>  	WARN_ON(panel->backlight.max == 0);
+>>  
+>> +	if (!acpi_video_backlight_use_native()) {
+>> +		drm_info(&i915->drm, "Skipping intel_backlight registration\n");
+>> +		return 0;
+>> +	}
+>> +
+>>  	memset(&props, 0, sizeof(props));
+>>  	props.type = BACKLIGHT_RAW;
+>>  
+> 
+> This breaks backlight on Acer Chromebook Spin 713 because backlight
+> isn't registered anymore. Any ideas how to fix it?
 
-free_zone_device_page() shouldn't be called for pgmap->type ==
-MEMORY_DEVICE_FS_DAX so I don't think we should have to worry about DAX
-there. Except that the folio code looks like it might have introduced a
-bug. AFAICT put_page() always calls
-put_devmap_managed_page(&folio->page) but folio_put() does not (although
-folios_put() does!). So it seems folio_put() won't end up calling
-__put_devmap_managed_page_refs() as I think it should.
+Thank you for reporting this.
 
-I think you're right about the change to __init_zone_device_page() - I
-should limit it to DEVICE_PRIVATE/COHERENT pages only. But I need to
-look at Dan's patch series more closely as I suspect it might be better
-to rebase this patch on top of that.
+Let me start with some background info on this change:
 
-> Jason
+As you may have noticed sometimes on laptops there are multiple
+backlights registered under /sys/class/backlight and we just let
+userspace figure out which one to use, which is quite bad.
+
+This patch is part of a series fixing this, this is also preparation
+for adding a new display brightness control API where the brightness is
+a property on the drm_connector object for the panel/display, which
+of course requires the kernel to know which backlight control method
+to use.
+
+If you are want to know more about the new userspace API see:
+https://lore.kernel.org/dri-devel/b61d3eeb-6213-afac-2e70-7b9791c86d2e@redhat.com/
+
+What this series does is on x86/ACPI platforms make all the possible
+/sys/class/backlight providers call: acpi_video_get_backlight_type()
+(acpi_video_backlight_use_native() is a special wrapper) and only if
+that returns their type then have them register their backlight device.
+
+So to fix this we need to make acpi_video_get_backlight_type()
+return native on the Acer Chromebook Spin 713.
+
+The heuristics used in acpi_video_get_backlight_type() is
+explained by comments in the function:
+
+        /*
+         * The below heuristics / detection steps are in order of descending
+         * presedence. The commandline takes presedence over anything else.
+         */
+        /* DMI quirks override any autodetection. */
+        /* Special cases such as nvidia_wmi_ec and apple gmux. */
+
+None of these apply here, so we end up in the core of this function:
+
+        /* On systems with ACPI video use either native or ACPI video. */
+        if (video_caps & ACPI_VIDEO_BACKLIGHT) {
+                /*
+                 * Windows 8 and newer no longer use the ACPI video interface,
+                 * so it often does not work. If the ACPI tables are written
+                 * for win8 and native brightness ctl is available, use that.
+                 *
+                 * The native check deliberately is inside the if acpi-video
+                 * block on older devices without acpi-video support native
+                 * is usually not the best choice.
+                 */
+                if (acpi_osi_is_win8() && native_available)
+                        return acpi_backlight_native;
+                else
+                        return acpi_backlight_video;
+        }
+
+        /* No ACPI video (old hw), use vendor specific fw methods. */
+        return acpi_backlight_vendor;
+
+
+The acpi_video_backlight_use_native() wrappers causes native_available to
+be true, so one or both of these 2 conditions fail:
+
+1.      if (video_caps & ACPI_VIDEO_BACKLIGHT)
+2.	if (acpi_osi_is_win8())
+
+I assume that 2. will actually likely fail on quite a few chromebooks.
+So to fix this you could do something like this:
+
+diff --git a/drivers/acpi/video_detect.c b/drivers/acpi/video_detect.c
+index 0d9064a9804c..660ea46fbee8 100644
+--- a/drivers/acpi/video_detect.c
++++ b/drivers/acpi/video_detect.c
+@@ -75,6 +75,12 @@ find_video(acpi_handle handle, u32 lvl, void *context, void **rv)
+ 	return AE_OK;
+ }
+ 
++static bool is_chromebook(void)
++{
++	// FIXME return true when running under ChromeOS (coreboot) firmware
++	return false;
++}
++
+ /* This depends on ACPI_WMI which is X86 only */
+ #ifdef CONFIG_X86
+ static bool nvidia_wmi_ec_supported(void)
+@@ -724,7 +730,7 @@ static enum acpi_backlight_type __acpi_video_get_backlight_type(bool native)
+ 		 * block on older devices without acpi-video support native
+ 		 * is usually not the best choice.
+ 		 */
+-		if (acpi_osi_is_win8() && native_available)
++		if (native_available && (acpi_osi_is_win8() || is_chromebook()))
+ 			return acpi_backlight_native;
+ 		else
+ 			return acpi_backlight_video;
+
+The ACPI video bus is a pretty standard thing (and part of the ACPI standard),
+still I would not be surprised if it is missing from the ACPI tables on some
+Chromebooks, so a slightly bigger hammer approach would be:
+
+diff --git a/drivers/acpi/video_detect.c b/drivers/acpi/video_detect.c
+index 0d9064a9804c..ff950be472a7 100644
+--- a/drivers/acpi/video_detect.c
++++ b/drivers/acpi/video_detect.c
+@@ -75,6 +75,12 @@ find_video(acpi_handle handle, u32 lvl, void *context, void **rv)
+ 	return AE_OK;
+ }
+ 
++static bool is_chromeos_firmware(void)
++{
++	// FIXME return true when running under ChromeOS (coreboot) firmware
++	return false;
++}
++
+ /* This depends on ACPI_WMI which is X86 only */
+ #ifdef CONFIG_X86
+ static bool nvidia_wmi_ec_supported(void)
+@@ -713,6 +719,10 @@ static enum acpi_backlight_type __acpi_video_get_backlight_type(bool native)
+ 	if (apple_gmux_present())
+ 		return acpi_backlight_apple_gmux;
+ 
++	/* On Chromebooks always use native if available */
++	if (is_chromeos_firmware() && native_available)
++		return acpi_backlight_native;
++
+ 	/* On systems with ACPI video use either native or ACPI video. */
+ 	if (video_caps & ACPI_VIDEO_BACKLIGHT) {
+ 		/*
+
+I assume you are more familiar with Chromebooks ACPI tables (or at least
+are better capable to sample a couple of them) so I will leave which
+approach to take is best up to you.
+
+Regards,
+
+Hans
+
