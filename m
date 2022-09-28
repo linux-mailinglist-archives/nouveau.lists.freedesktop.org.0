@@ -2,107 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2ACA95EDC3C
-	for <lists+nouveau@lfdr.de>; Wed, 28 Sep 2022 14:02:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 12C585EDFCE
+	for <lists+nouveau@lfdr.de>; Wed, 28 Sep 2022 17:10:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7C6C110E4B6;
-	Wed, 28 Sep 2022 12:02:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7E1E710E9E0;
+	Wed, 28 Sep 2022 15:10:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2058.outbound.protection.outlook.com [40.107.237.58])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 80D9310E4BC;
- Wed, 28 Sep 2022 12:02:33 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GQ6S5e9J+i3jZoQy4RXoB8Nw7OQf2skPrq2mNm4btBuoUhWhwxV89SGZxCQ73GMQ7CJqeJS8lIVaIwZO4HUdAkcTqNe3oNebfZghIzzHMt3/+Ut5QukxBUOQyJq0vYGPTdMzu+edA1aAjCLaM9XshbmQqC6vTxDXbxsCE0khgfOGC2IxlLYwLFpEdED2T+Fkhz+5Gt2ncrw9i1+6+SxtSBOzCjige2xdYUshdSMzyTplpcRABqmGcpx3r1ugBhtMPb3NVU5yxGd8qtQC4nHDT4hLqK3tjc51RnBqBhZgMuAfgzBEpplUjH6ROnjQpc3bAAt0hV5/qJscfYUvLihaYg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oRhRQafIcKra+fUPgEOB67JM02ZDkkxp+B6p8U4ee3Y=;
- b=m/2bwa99LeXlmQgo/2TKnRrwfIitvAat83ock/h/KZqE1SKijrcB/Eal6q4p8h4m7rOXw6lA3Va/eDL3/74VwjqZg79KBypNlKI2LOKLOw7DYDdTsNeBdO9CRA1hjFhPlmbDtBxIg164RVOjFj+31cSIvQP5jAqM7fP2Rt9ome0IZ/z66plFbFR/u/P9zHLdP8nPjyPsTSI+0gAQl/9WL9NY/WJhYzRX4fnvmN0sRKpUPmZ5bVpNVmh4MMjPmAy6JS4xOkJKSO0uiNBqSchNCHffdDpYFSNfLp7/ldSFH5NJcDArbRhWGp4OeCo92kUYy/AgfRUcyLdwMGy+Bj7qtQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oRhRQafIcKra+fUPgEOB67JM02ZDkkxp+B6p8U4ee3Y=;
- b=BihgRa5GoQT00am0ZUBK3GuEv7X8rChjYUn1xm+Rlg+PYGpNc6G9iioXqmplvx5LCQJqKl6clboaOhqfP0xrn6Epz8f80PLacA1f3AEm8wVXqUaSBe21z9RMds52XDD6ptOv2d09ffmmGSeZekxDyignvUQLtz+EooiCu8sINPymr/Er7yrkKNCqjPbY1lNyeolwnqpldDU56jLjr97d19ENTACwmHktIH2tRLiOV0QR/QFCqgVGNuUCTU33ZiiaY5iTLopVjrmardmdbjHfVXEA0cCV8+jrEH/gCq3h+B98dpMwEkPGDi+9OztUMgqgFsGw4AMlBnCUrDTU9aP73A==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from BYAPR12MB3176.namprd12.prod.outlook.com (2603:10b6:a03:134::26)
- by IA0PR12MB7604.namprd12.prod.outlook.com (2603:10b6:208:438::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.17; Wed, 28 Sep
- 2022 12:02:31 +0000
-Received: from BYAPR12MB3176.namprd12.prod.outlook.com
- ([fe80::4064:6c13:72e5:a936]) by BYAPR12MB3176.namprd12.prod.outlook.com
- ([fe80::4064:6c13:72e5:a936%5]) with mapi id 15.20.5654.026; Wed, 28 Sep 2022
- 12:02:31 +0000
-From: Alistair Popple <apopple@nvidia.com>
-To: Andrew Morton <akpm@linux-foundation.org>,
-	linux-mm@kvack.org
-Date: Wed, 28 Sep 2022 22:01:22 +1000
-Message-Id: <a73cf109de0224cfd118d22be58ddebac3ae2897.1664366292.git-series.apopple@nvidia.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <cover.60659b549d8509ddecafad4f498ee7f03bb23c69.1664366292.git-series.apopple@nvidia.com>
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 547A610E9FA;
+ Wed, 28 Sep 2022 15:10:29 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id B0924B81FA2;
+ Wed, 28 Sep 2022 15:10:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55C69C433D6;
+ Wed, 28 Sep 2022 15:10:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
+ s=korg; t=1664377826;
+ bh=+HOKwcbw1B0WEYgcZtf8z/9nr2ZbysRiKOhYfv9YVTE=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=IS5sTNnyxfit75fuP9+CKivhPVfr5MuCYX5xkSMvaIHcwj3YlHPHGiuReVZRtFCkO
+ k/7JXAzqhj8lkEcOv3/FuRDU4yiHUhnPML+lIIGP/0mxsk6qSXMxUXyYBHHEAPpFJk
+ OVh6CdYsxMDrs090m2k5tYCYUY4q6QAKNz+LjBGQ=
+Date: Wed, 28 Sep 2022 08:10:17 -0700
+From: Andrew Morton <akpm@linux-foundation.org>
+To: Alistair Popple <apopple@nvidia.com>
+Message-Id: <20220928081017.3bf0b67d34a674b0a6df6b0d@linux-foundation.org>
+In-Reply-To: <a73cf109de0224cfd118d22be58ddebac3ae2897.1664366292.git-series.apopple@nvidia.com>
 References: <cover.60659b549d8509ddecafad4f498ee7f03bb23c69.1664366292.git-series.apopple@nvidia.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SY6PR01CA0146.ausprd01.prod.outlook.com
- (2603:10c6:10:1ba::7) To BYAPR12MB3176.namprd12.prod.outlook.com
- (2603:10b6:a03:134::26)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB3176:EE_|IA0PR12MB7604:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2176ab3b-85b1-4509-a7b1-08daa14951ed
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Gf9hHGrXIXjLPkDXQWGoEow++8JQh1DarCwXDGV/EUOS4k+fvvEDBI0/SsLn/8WRwMHZZfbatPmU/fM8+dWe68+g/zRep8jxPwBmWcZHTnmZlpSc/aavRWRta/8DfCU90gYQ+84sGcN9jWsKQGH/HNiPcbXTw4zH3VcLiQZj7vkAYdK46Upz11QB8IBSAe/1v9YRKTe4ph9s+cNtmgCIpYVVaoVhPQ++DB4s2Pz2QU9J8dopHoGMQYm3Obt4ogMINM+AGMa3tG9vc7YHIzZb2+ZNj7qR8GVSwIGU/JLmqJb4xnZJdINkwwX6Va2hONaTtKBZPcjPZQIqRfphyNHcsRrQdcrxqaQ9FaG3gVk5iCVGVaJOKatWlUfQKdcWgeenVu95Vut8PzedFsc4to/M3z1B0w//cmDoKtlKBk0UnGSUoV+1l3arg2HHocZ/OfXgZzVOu2wHSTyTHvJSFmEFCoMhXsT/SVee9/o+AbFv+LkYbbWK05Vzod9FBobJad06CKvAgHPVWto0NIrtxmG+W7ZppJEx5HYcT/RCeLNG6HkLGPs6ZB2z9fr2tY4K6+nFuB0sSFOe7v2KAhBWlLRdfnWCMvL7dzWJxTNbvLdTHqKtPSgOfE7ZmEaiTycyK3rJ4bpTw/tnuIfVa09k3sUTpQ5maEjkjJuaXf+OvxT/RFSsz5LPKgOzFLih+e7y/ZgJ15zPm9r+m4kJTD27VIMXlA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR12MB3176.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(366004)(346002)(376002)(39860400002)(136003)(396003)(451199015)(8936002)(478600001)(316002)(5660300002)(83380400001)(36756003)(6506007)(6666004)(41300700001)(54906003)(6486002)(2906002)(66946007)(186003)(66556008)(2616005)(66476007)(4326008)(8676002)(26005)(86362001)(6512007)(38100700002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?2gRZ9HT8PsPayD20j9AeSiDsh7IYJOYoKxt8cVniEcoXXkSBYuX8Il/I2i2Z?=
- =?us-ascii?Q?BxxsQKLbe13fMX7YWdBKKfdobN4o+GqWEklBF43I9S0k8HkXj52/KXp+0N8e?=
- =?us-ascii?Q?4vjKJZ8n2O5O6CGrHYfkK3etAl9T0JF08x+wBkdKhazoZeBYtQm087v50OsO?=
- =?us-ascii?Q?cN7kOwEgXD3YIIYgOQvFNUASPIYZ03+G9N83lWJCQY5yIhcyxQkvJ8ftBGsY?=
- =?us-ascii?Q?zYE9wYrPEdBKTbTaOMhneMcbvlE2RZGMfm20q+ZJEHRv7BPMtEb5hEyLpv7l?=
- =?us-ascii?Q?gj0cfXpuwzYrRwnT97DCfAQfbbDxxp+P++sqA6JjQ4IZuTTgFisZsv7fY17k?=
- =?us-ascii?Q?KqX/jfcIyVL+O+Cwv4TFf/ThdJkawQ8Jvy+oHPUB8Tc2AozUELK5M45mQC/B?=
- =?us-ascii?Q?VueYZFkFYlnnrIVx0Km2Uhoxm8k9Cr7GIPHCpGf2aE0kSsLbCz+qkCaEbzjV?=
- =?us-ascii?Q?gmk08L61vcCwBC9Kdusxqmh+k8rgpkoKjJwhrAkYRBF0Mx7vuHQis8rgB9ZA?=
- =?us-ascii?Q?FoZ1b97UlEL7NmzIT5uYgBCPEfm0K01w2sodlifSARQ+JkTmKC4J61t0l9g5?=
- =?us-ascii?Q?X0J7fX2LzfbRytBu9nZMgG8fZSiwTYLO0FEyGi+VuG8aRRiPE8l98UkztfJ4?=
- =?us-ascii?Q?iPGb7o9dRiaVk7KvsJef0RJKB7Np+nGDE4wB1ljPZuIJF+9qx0hOANCx3Vca?=
- =?us-ascii?Q?2VBJ8Eyi8cZw0DRWlX2V+UAJwSbiUmG7rO7is9oXPd0ibgUjFP75FB6Wcnos?=
- =?us-ascii?Q?2yjJOuHfgzCh3OSX2hdrMxWDKeKq/bjYriSafMOwdX16QI9+RNUAC+u64M2q?=
- =?us-ascii?Q?JewfuJn9AdUZmmj45JM2f0Y3JBexlrrG3XXSogy2XgD85c+jOf/yIxPXwJ+T?=
- =?us-ascii?Q?R5SWU2hduE5PyhXTC9BbNTbYZ1AThtBs2hxhDBH+pA1pXb5aZcGkgMZpNrU3?=
- =?us-ascii?Q?3kZ0Vg5hKlimfsvFzhk039b1YTRV3UvFu6PbwaysSua8Y3S2smEONIQDh49i?=
- =?us-ascii?Q?HpcktBHPatq0wWLTqsn0AEq5coEDTDpP+QPQFhU5xO+zii/rlboD5F8n+YY9?=
- =?us-ascii?Q?p4WDtFqYxqf9nxcxkqSleIobuEjX98CkrlfAekIJ1JkvjI7myDVy+8seYNMQ?=
- =?us-ascii?Q?f4gJ343QwiXgKqZgsl2I6fyChwI1niGveHYqVsM0dIHqCViT+cyoZkTJcdxL?=
- =?us-ascii?Q?Ug8GfNHYoHiMqq+fEv2FrsLjtOKfrI1b0H3DisVVpaKQgAwuo5bJ577uwsip?=
- =?us-ascii?Q?KS5KRao4Ezne8zQWY/FBMyjUjgOrDqnNcjKdr/lqe3/FNaKVmCx4kH7D8New?=
- =?us-ascii?Q?LV0Cy8uQ00O4ZIewceNZafrs/ejGJbpUvSMCmtQUHDJSiGqGR8FB6xDDMvNb?=
- =?us-ascii?Q?YJdsN8YM7jPvNCNKSTE43lac861sv7IuyV01y6cc49RA85v8h1s7KqYgdWJR?=
- =?us-ascii?Q?jbY+iFgJu/aaq1rVT+x4aIL8qhvq6Z1F0C1wKVOwa+fPZEsvK6C9jvWUVEG3?=
- =?us-ascii?Q?OeTo0e68XzJmaAy51IzZL4x/25xIPkFiqM+VN3m0vjm0/wyGn0XEr9/Y/psV?=
- =?us-ascii?Q?yf3IVmQqPOZZYkEEWZgUpQfuzwsyQ5aODQanxEVA?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2176ab3b-85b1-4509-a7b1-08daa14951ed
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB3176.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2022 12:02:30.8997 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3vDKmaLc7wdzRcq8tXEnNuCbsgg3HIpqjh4Uw8EW98KDjBno2PXjjDeTTK0146Y0bo4k4ZBCzjTwmKEKKDLp1A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7604
-Subject: [Nouveau] [PATCH v2 8/8] hmm-tests: Add test for
+ <a73cf109de0224cfd118d22be58ddebac3ae2897.1664366292.git-series.apopple@nvidia.com>
+X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH v2 8/8] hmm-tests: Add test for
  migrate_device_range()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -117,28 +53,45 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Alex Sierra <alex.sierra@amd.com>, Ralph Campbell <rcampbell@nvidia.com>,
  nouveau@lists.freedesktop.org, Felix Kuehling <Felix.Kuehling@amd.com>,
- Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, amd-gfx@lists.freedesktop.org,
  Jason Gunthorpe <jgg@nvidia.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Signed-off-by: Alistair Popple <apopple@nvidia.com>
-Cc: Jason Gunthorpe <jgg@nvidia.com>
-Cc: Ralph Campbell <rcampbell@nvidia.com>
-Cc: John Hubbard <jhubbard@nvidia.com>
-Cc: Alex Sierra <alex.sierra@amd.com>
-Cc: Felix Kuehling <Felix.Kuehling@amd.com>
----
- lib/test_hmm.c                         | 120 +++++++++++++++++++++-----
- lib/test_hmm_uapi.h                    |   1 +-
- tools/testing/selftests/vm/hmm-tests.c |  49 +++++++++++-
- 3 files changed, 149 insertions(+), 21 deletions(-)
+On Wed, 28 Sep 2022 22:01:22 +1000 Alistair Popple <apopple@nvidia.com> wrote:
 
-diff --git a/lib/test_hmm.c b/lib/test_hmm.c
-index 688c15d..6c2fc85 100644
---- a/lib/test_hmm.c
-+++ b/lib/test_hmm.c
+> @@ -1401,22 +1494,7 @@ static int dmirror_device_init(struct dmirror_device *mdevice, int id)
+>  
+>  static void dmirror_device_remove(struct dmirror_device *mdevice)
+>  {
+> -	unsigned int i;
+> -
+> -	if (mdevice->devmem_chunks) {
+> -		for (i = 0; i < mdevice->devmem_count; i++) {
+> -			struct dmirror_chunk *devmem =
+> -				mdevice->devmem_chunks[i];
+> -
+> -			memunmap_pages(&devmem->pagemap);
+> -			if (devmem->pagemap.type == MEMORY_DEVICE_PRIVATE)
+> -				release_mem_region(devmem->pagemap.range.start,
+> -						   range_len(&devmem->pagemap.range));
+> -			kfree(devmem);
+> -		}
+> -		kfree(mdevice->devmem_chunks);
+> -	}
+> -
+> +	dmirror_device_remove_chunks(mdevice);
+>  	cdev_del(&mdevice->cdevice);
+>  }
+
+Needed a bit or rework due to
+https://lkml.kernel.org/r/20220826050631.25771-1-mpenttil@redhat.com. 
+Please check my resolution.
+
+
+--- a/lib/test_hmm.c~hmm-tests-add-test-for-migrate_device_range
++++ a/lib/test_hmm.c
 @@ -100,6 +100,7 @@ struct dmirror {
  struct dmirror_chunk {
  	struct dev_pagemap	pagemap;
@@ -147,7 +100,7 @@ index 688c15d..6c2fc85 100644
  };
  
  /*
-@@ -192,11 +193,15 @@ static int dmirror_fops_release(struct inode *inode, struct file *filp)
+@@ -192,11 +193,15 @@ static int dmirror_fops_release(struct i
  	return 0;
  }
  
@@ -165,7 +118,7 @@ index 688c15d..6c2fc85 100644
  }
  
  static int dmirror_do_fault(struct dmirror *dmirror, struct hmm_range *range)
-@@ -1218,6 +1223,85 @@ static int dmirror_snapshot(struct dmirror *dmirror,
+@@ -1218,6 +1223,85 @@ static int dmirror_snapshot(struct dmirr
  	return ret;
  }
  
@@ -251,7 +204,7 @@ index 688c15d..6c2fc85 100644
  static long dmirror_fops_unlocked_ioctl(struct file *filp,
  					unsigned int command,
  					unsigned long arg)
-@@ -1272,6 +1356,11 @@ static long dmirror_fops_unlocked_ioctl(struct file *filp,
+@@ -1272,6 +1356,11 @@ static long dmirror_fops_unlocked_ioctl(
  		ret = dmirror_snapshot(dmirror, &cmd);
  		break;
  
@@ -263,7 +216,7 @@ index 688c15d..6c2fc85 100644
  	default:
  		return -EINVAL;
  	}
-@@ -1326,9 +1415,13 @@ static void dmirror_devmem_free(struct page *page)
+@@ -1326,9 +1415,13 @@ static void dmirror_devmem_free(struct p
  
  	mdevice = dmirror_page_to_device(page);
  	spin_lock(&mdevice->lock);
@@ -280,7 +233,7 @@ index 688c15d..6c2fc85 100644
  	spin_unlock(&mdevice->lock);
  }
  
-@@ -1401,22 +1494,7 @@ static int dmirror_device_init(struct dmirror_device *mdevice, int id)
+@@ -1408,22 +1501,7 @@ static int dmirror_device_init(struct dm
  
  static void dmirror_device_remove(struct dmirror_device *mdevice)
  {
@@ -301,13 +254,11 @@ index 688c15d..6c2fc85 100644
 -	}
 -
 +	dmirror_device_remove_chunks(mdevice);
- 	cdev_del(&mdevice->cdevice);
+ 	cdev_device_del(&mdevice->cdevice, &mdevice->device);
  }
  
-diff --git a/lib/test_hmm_uapi.h b/lib/test_hmm_uapi.h
-index e31d58c..8c818a2 100644
---- a/lib/test_hmm_uapi.h
-+++ b/lib/test_hmm_uapi.h
+--- a/lib/test_hmm_uapi.h~hmm-tests-add-test-for-migrate_device_range
++++ a/lib/test_hmm_uapi.h
 @@ -36,6 +36,7 @@ struct hmm_dmirror_cmd {
  #define HMM_DMIRROR_SNAPSHOT		_IOWR('H', 0x04, struct hmm_dmirror_cmd)
  #define HMM_DMIRROR_EXCLUSIVE		_IOWR('H', 0x05, struct hmm_dmirror_cmd)
@@ -316,10 +267,8 @@ index e31d58c..8c818a2 100644
  
  /*
   * Values returned in hmm_dmirror_cmd.ptr for HMM_DMIRROR_SNAPSHOT.
-diff --git a/tools/testing/selftests/vm/hmm-tests.c b/tools/testing/selftests/vm/hmm-tests.c
-index f2c2c97..28232ad 100644
---- a/tools/testing/selftests/vm/hmm-tests.c
-+++ b/tools/testing/selftests/vm/hmm-tests.c
+--- a/tools/testing/selftests/vm/hmm-tests.c~hmm-tests-add-test-for-migrate_device_range
++++ a/tools/testing/selftests/vm/hmm-tests.c
 @@ -1054,6 +1054,55 @@ TEST_F(hmm, migrate_fault)
  	hmm_buffer_free(buffer);
  }
@@ -376,5 +325,5 @@ index f2c2c97..28232ad 100644
  /*
   * Migrate anonymous shared memory to device private memory.
   */
--- 
-git-series 0.9.1
+_
+
