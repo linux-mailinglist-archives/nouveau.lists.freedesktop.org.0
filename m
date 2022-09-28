@@ -2,108 +2,106 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36FD55EDBCF
-	for <lists+nouveau@lfdr.de>; Wed, 28 Sep 2022 13:32:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE3225EDC24
+	for <lists+nouveau@lfdr.de>; Wed, 28 Sep 2022 14:01:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1D98E10E46D;
-	Wed, 28 Sep 2022 11:32:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1F36F10E476;
+	Wed, 28 Sep 2022 12:01:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2053.outbound.protection.outlook.com [40.107.223.53])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 09E4E10E466;
- Wed, 28 Sep 2022 11:32:07 +0000 (UTC)
+ (mail-dm6nam11on2059.outbound.protection.outlook.com [40.107.223.59])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6742710E46D;
+ Wed, 28 Sep 2022 12:01:39 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=O7Ueh1K/fbzASTKGt96uk9snauPZ7rRoERM/cbTZl4y3PgRoASCIFY09LWfmDqP2EjEyp1UZEltE7J/W48cfeMLtNqvDHxhhB8InQn9Q9iWraavYehF7vShfk7nn0ruWerGloCDVmEkOVSwlqcN9fzHfMDh+kPe79wBUn1KHLSIdKiFGNDOvzVgevflq7XBcoNh9t6qSyQYVVKKhdjzDUDr3tewDCz65nfDAl74irxryx4DkAWl8QxRWml3RQTzbTM1F9n+7s9Zne3EEETlwUuLeIhVoopFXtt0no97Z7J3xC5hq2vjg8/m/ayIxftPwQRCrBflNJaX6QuP6lHRYaA==
+ b=VLxFvSKSD0id8acJ54cUN5MJn4nxq4pitzLhztWnxIdhO7qyKnBOcEQtJWfOh9ceHqnfp59SyAArcEJ/JHurcGRgViKgM6kZukhC3knpYaHFZK/j8wVwvRr818I75DmE7M0+1Em/ZvZxSoP87U56ZS7ZL92ytH+IKSXAFAdqWpia/T1PpywNLhYTBdQEvbaxGqJQjftFiNjN4Qqhx0O4Cu0YFZYYEWhWKN8e8CLsoe4oKibOGspYeiHcgxVB0yAmXTa54t/fHFwSsOLBzYU6lM7+8e6tQ97n/raDxytSrG+qVh3SXaT2t5jEanAynavMWXm1W0tMo0RX8mUZ1fOMgQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=to8CWe3DpOILEdqvd0CkWpSDlh4LPqjI2W24vj2NZOU=;
- b=aTIQjKusl6xmwaV1i1QutoF/AapiopVCPjlPrh7Ubn9EWNM62dFjtwJdptCapo/yIVGx6vkgxdb577QgWsGS+3xOpoiRj+aukQCzJk2Q//BsGHBM6jX+DIFHro/B2sntWu7TPDhnUy537BBctsYt8reDXOYMDJEWFvwwoZqGsmZkICCQpZ0LYnzadWNYpw/nxL638AqZJ+NNzHigDk+rqlW0kk2PQ4DOs40duhatoifJGRsj+poVpcY8dZixnd54/l167dLstJCka3o+mj44EC36EHEFdFrS4fi3vGmJMSYltQLfnOI/fXk4zqcgUcVeCxaGtH0aetEUP+QIPSau0g==
+ bh=tGnMifly1thb8m52sgwmDkmosPQv+vSp0P3aT9+aLdI=;
+ b=LWcQa0RKTarqnhajd5k+Q25yqreYZlMInEBAkHM50L5g1ac0u14+eioJyqePsJ9N4D7OJqNr5GLicVDYT7g4xwz/svYdAZHNT9ruXPyRbhDKO0Y8au9nN1W5w3b6J510vhefUKE0aaEmKChF94eccRnU91V5JzE5+gB3r8+/xfxYDOP889/JYY3EZ9OS/Qj0e/+zeEJyFketc3JsOLeSN+QFbL1jbcc/E0jldXoqvOt5FoNG+7NJ11VBBWv4+1XgiRjvmwfqGlYQA9gkbviOADdR2au/za2ssl2xjjtXpPqS2+toSpT246JDbzIkwZ5x48cyzpF2VOgmtegISWGnhw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=to8CWe3DpOILEdqvd0CkWpSDlh4LPqjI2W24vj2NZOU=;
- b=PWLcTa+6qJp35SD43kp1RzBX02p5QsfvbRDtM7cwfmDCAtnlXwoW6ovoAbv1Hcocklf6fEgEXILznSmV1SvRyVgvLPJ8KPXg0YSiDV9YeNAyAIZUhAPxXUw7nccUmFhtQ+7hFZGMTjKGbMhYv/GuPJqFSsTXlvnbOnDbYuW/cmz+WbsxIs233O/uoZhGuQAvDTv8LV39RkZPjsczc+zJaIVBoSqBVCrVRQyx8+61INKBrI59eLSKyT6+GWdWnJFzNFEzcFJVVnCZKfDTtinStIzfYWFBe3vma+z1K7Qg+glKQAY+JeVlyPQqzZ1nBovSXrx+stFuCp8Ew4u3bD9SZA==
+ bh=tGnMifly1thb8m52sgwmDkmosPQv+vSp0P3aT9+aLdI=;
+ b=t1ecQQ0KEbHmrArb9KyPf/k7VLSHm2vq3LQYpaq44HkKWVvK9bLQyMuDQQt7wRaLZlgyPAAGtE3z510zIzCZ31KAmlYdTAV8YEf8T6/AH8z64X2iugVzcu80vaBFLnZzPgc2qLhUPsGh5DqaU5LGWS166ZDPQM/gYW4j9SAjzvOGj5CEJLntHUwz+trWKwhg1/GOwKqxwiEuSzp7SQ1Mh9LoYgs2rnjPb/eJNsTFN7+zNYQwcWJ7s5wGtcPSTdys+qd8GO6z7d4JOPLPKz8zTzRhoCINe/fVqQUVPvEkcIZhCCJVeQt/SZcSEZAG1UfGXamu+WgfCPTkrHpseKw3YA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from BYAPR12MB3176.namprd12.prod.outlook.com (2603:10b6:a03:134::26)
- by DM4PR12MB6469.namprd12.prod.outlook.com (2603:10b6:8:b6::6) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5654.24; Wed, 28 Sep 2022 11:32:05 +0000
+ by DM6PR12MB4337.namprd12.prod.outlook.com (2603:10b6:5:2a9::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.17; Wed, 28 Sep
+ 2022 12:01:37 +0000
 Received: from BYAPR12MB3176.namprd12.prod.outlook.com
  ([fe80::4064:6c13:72e5:a936]) by BYAPR12MB3176.namprd12.prod.outlook.com
  ([fe80::4064:6c13:72e5:a936%5]) with mapi id 15.20.5654.026; Wed, 28 Sep 2022
- 11:32:04 +0000
-References: <cover.f15b25597fc3afd45b144df863eeca3b2c13f9f4.1664171943.git-series.apopple@nvidia.com>
- <ea208905d853a0fdc277c2b5e74742593e53f767.1664171943.git-series.apopple@nvidia.com>
- <d839ead12d782a184ca104d6b5f62184c0f178dd.camel@redhat.com>
-User-agent: mu4e 1.6.9; emacs 27.1
+ 12:01:37 +0000
 From: Alistair Popple <apopple@nvidia.com>
-To: Lyude Paul <lyude@redhat.com>
-Date: Wed, 28 Sep 2022 21:30:18 +1000
-In-reply-to: <d839ead12d782a184ca104d6b5f62184c0f178dd.camel@redhat.com>
-Message-ID: <87a66jpweq.fsf@nvdebian.thelocal>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	linux-mm@kvack.org
+Date: Wed, 28 Sep 2022 22:01:14 +1000
+Message-Id: <cover.60659b549d8509ddecafad4f498ee7f03bb23c69.1664366292.git-series.apopple@nvidia.com>
+X-Mailer: git-send-email 2.35.1
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SYXPR01CA0081.ausprd01.prod.outlook.com
- (2603:10c6:0:2e::14) To BYAPR12MB3176.namprd12.prod.outlook.com
+X-ClientProxiedBy: SYBPR01CA0093.ausprd01.prod.outlook.com
+ (2603:10c6:10:3::33) To BYAPR12MB3176.namprd12.prod.outlook.com
  (2603:10b6:a03:134::26)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB3176:EE_|DM4PR12MB6469:EE_
-X-MS-Office365-Filtering-Correlation-Id: 78eef31f-0652-49bf-9ee5-08daa1451157
+X-MS-TrafficTypeDiagnostic: BYAPR12MB3176:EE_|DM6PR12MB4337:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4c562cd0-c8b3-4a15-818d-08daa149323a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Yu5RUUOtnzpq7r/F2K05vkaQCqBFprbWtRh+8ACpScPcGrL/WpH3aHDjnWGsSs8t9aLJaWNSfSHrtJ4B3RXxI0y9DZMOEJUQgRMibBHl9bs4rtWKmrBWwzhRd11mkSelLxRi91Dsx8o07WQCkdPhydc9TcZU3rOqRoNCBaPbcGII2PSv4HwwAbWtQmOb2Rz5hE0wPqf1J6J7r3I8G01hD2UMvX/0ZhbtE0bk9voHqsILW9vYg9X4WEZtAxrDt2rIuGAOXCP0Hjj8+GwiEVCxjvU0uHC24LQe7bdGf/LZsevRDoPJ2Vd3wahp/WkchliQNJeag+sP42qBWn63XXNKXxkLIu3/dazutaRL9+uQ9zWFLQjNe2nkYpjRsJQDq19zBBQbCxp8zLnkpahEwmlJIwCqJcXdr3g5ADYXHuHID/0qYMcrj4GgnHyZt6vg37YMWY0m13f8G976qH5QYzfIJpHPKwp1Z35SjchVWOSzzMvaCNDHLoRrybtIuRGm9DH1N8IoPPX3FqiCPjNEkGXoKNxvqXDeUxyORZEbQ7kGAedoRp4+GtG95f0hXOYcSnsQLdXhwh9VGILhwMg4E4V5Bx+EK0fkoHfmfUhXxw7dxcuLgtxaPF4CvtGJ3pwLCvZ6oqFYQSGirUvYasge9KCK34chLl9VHRwOSAAcVbWwsAWSnq7T6hhpAi/SumrvocHVrddokaebBbhqWp0Htd95Lg==
+X-Microsoft-Antispam-Message-Info: mcrrfz8bWphLYhzkb9o3HttdN2RaQIrRR/NkalLmlzHirUCi9yknwUFudRwvdWBRiXGOk70W1euO7JsMSbMrdKonSLUXLZ3CiPZpCL6bivvd3p9LqIDT+C4FzhwM/cOxViDGMfOUzf7NfDIzUvTWDuLZ4ePzQQ2S0K9sLXTS5uSMHOzSmEpWus1GATiOlqYo7BE3oncde/6bUKW0Qs386npylddWAxDoNu4P1jZpLnjEUfgLIdFY3/GV+Ga1ENcIyixkUz2/TcuMzXZzyUNh/MNVC730baxSvXn+jq0BGCqTtDBmvb4thWOuslFg70jp1gipyLOK4sWHMcO9SxDbwK7pVrqdgck6ZR0zkDvH0oX35CMnbyMR5rIT2WS88lS247Mn9RT3BHCM4WMBmH/0UokLAPtHEtu937Zvy1Dc7VM+oC5h+Md2vqoNj5YRZ40inUKr1A3jjjEhuoE2sUkXyvqagLnREgFzYtE69Mi0BkrViVQDJN/4gwt/aWZdTAsVypxo52uNJ1FVxIH2VlKoxyzjF//DYIKS1rQ88+kcEkLyWlLBpcjBBVEAEoAGUQh309wjYmGa1FlikyyLAPAXyKKdoCmjkAL88Wz0JPMSEApZv57+fvHNS+52aUnnJcyEmvz6apXvzuMn+luSxcUKMdfZU7+LY8zTOlhUh1ni31b1IyutHb9fePWr1nlkUVHMbcqr8h80kfbSO3Nbkw5WJg==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BYAPR12MB3176.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(396003)(136003)(39860400002)(376002)(346002)(366004)(451199015)(38100700002)(316002)(86362001)(54906003)(6916009)(6486002)(5660300002)(66946007)(186003)(83380400001)(7416002)(8936002)(478600001)(4326008)(66476007)(8676002)(66556008)(9686003)(2906002)(41300700001)(6512007)(26005)(6506007)(6666004);
+ SFS:(13230022)(4636009)(136003)(366004)(376002)(346002)(396003)(39860400002)(451199015)(86362001)(36756003)(2906002)(2616005)(6506007)(6666004)(6512007)(26005)(38100700002)(66899015)(83380400001)(316002)(186003)(8936002)(5660300002)(4326008)(66556008)(8676002)(66946007)(66476007)(6486002)(478600001)(41300700001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?NIc0Poe3/aWkjXaUJSxUZAbRLdTB5s+3kNF7FiSP2KI/cWrbdRf2ZT6dVPhd?=
- =?us-ascii?Q?Lb+5ZScGZqf20xbWIM7q2bzn7lkSugNMLw32S06e7wsaZTOSf3Jvzl4+/Iai?=
- =?us-ascii?Q?22uDJigA0iova9qInRvC4P2rCa82hgjxGz1J/gDzcJSLJ6lkfA5193JpI7Bf?=
- =?us-ascii?Q?xT03bvJLrtPbUYdwDUTO6qlrV+GgzP/2TXiA81+E2OYjsnhS5CPZHviKdBZb?=
- =?us-ascii?Q?mIv11qbMYfUri7Wx31Nm3R9mJJj1BfUR+B6RyNg7D08biZePffoOIFvtgRIY?=
- =?us-ascii?Q?mZLQAx+vNDHdHS5GO89J6BXIw7fbUNidiChIVc/DF9AgFxL6impqd5QFPCwn?=
- =?us-ascii?Q?Q1YHRtRgg6J6dAYKHhk/FW7Ntp+Gbk91D6ok+suk8bZ6qTE59v9TURDKTbis?=
- =?us-ascii?Q?LXtR/c9uYUHq1GZes7SaevdOM4dBhPP1SorhWx/mryLgIov5xuvF0+LThkw8?=
- =?us-ascii?Q?jwvBQzMIPC+bBZJ6dZMEA7fv2OVjKrjVcWaw6Hv6RbOEtxUZrXLxj0uKkRq3?=
- =?us-ascii?Q?4APZzOpUT8A77hqH9fcMjQvpETdVurZVOkyShMs93zj3z0SNzQX9Kx+mCdeO?=
- =?us-ascii?Q?okeTR+NAA03lAYgZ8lMZa+1g8BhkTL8ZElw0QKd7k2d11nGazWEYtYOOwmcr?=
- =?us-ascii?Q?Hlfl34Gtrm8Pt8o1F4cVio3+po9DlfZDSaIVXvmBs+HtzHDhooSfgLMWBM7V?=
- =?us-ascii?Q?Edmi8MTuYL+YGTP1KadOsXAut23aU0iFWtlbBZgDCvC9bYs3givn+tJEuuWr?=
- =?us-ascii?Q?UqQCEUDMKKjRot467RvISlML9rgCjiDL17NyUgBESgPbAFmDKRnEsw46dcFK?=
- =?us-ascii?Q?Lop6gk0arQfgmanVL65N+P8dI8Cd4N52qa/qqzQmflPbuOjpgr1ASsJUoe3k?=
- =?us-ascii?Q?pMaM2b2j1ybCIN+xQgC4UtSpKQtm4zRUvvh9A+EDnknn+JZam9ZdJVJaoVyc?=
- =?us-ascii?Q?1eXt6j9/dymYLJ/CtmInL+P/O7+ejeZPUDG1AqwXtchp/Vi86zJMuWneyuZS?=
- =?us-ascii?Q?bAjjdaPd5ehNjyvGF6dU1hKT5Uk6so4iy0Kny31doXjWOpsAJechdGIC6WsO?=
- =?us-ascii?Q?QjRWGavYqOM6QplEJUwqoitqANHy6q1HfY/rV3IlvvOgMRR//Xqwjqb5wuiI?=
- =?us-ascii?Q?Pyp5ebGln2nDNhwNc+NgQ9W5zC/F7x1+yyjMZt8G5wp6Vr7uYmgAG2VWs/Rk?=
- =?us-ascii?Q?EaTiYAvcntZeDs7d7X6yyhp3hfy+7J+MxL+MlXm7W/jjcq88si2P2Wu9UKnk?=
- =?us-ascii?Q?OTaGoJsLgcr+90avC6kp6l+sX0Mx2N9Ss7rIKJNKBZElWZtqDuJ0+bpbmQzR?=
- =?us-ascii?Q?yGEh2o+N2yfjz21kEwYNFCfu7VVMdP4cyL+Kna10SKI4Tg8qZNOMdedJJ65v?=
- =?us-ascii?Q?3WSjz0FHsra2+L+jZymqs7+7NwHQiTRYxaxmaIQYHIw896DfWURgjsV2jlDW?=
- =?us-ascii?Q?EhRIUvkyAhOGwOGEY+rNd78mvjYDdEG46jT0ijTS3B10Rjj3sLRgBwNElWlR?=
- =?us-ascii?Q?gNpP83f0QnjexGCbvcvw6RvNQwx137EDUz5k0pXZF3iKyWP6jEuXGwKYg7JQ?=
- =?us-ascii?Q?MY7Bx62eEu9TksSKHh0eGW4Gpx9lBrRcG9Wna0cB?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?PLWKoTvxOP1BJW9TQDgpUM5D6+LwxFnCdu39roXgbd+xShyg04r0+CP9rYfo?=
+ =?us-ascii?Q?fFLMvH7jJ+w4U+WEugMNirGEUQACZ422/xwsSs+/ptYE0kl8N9C6liYQ+mrM?=
+ =?us-ascii?Q?kS2IdXHVwKu68p4NcN3PcGAqYWhQVm6CaK0S7lcWKNDkdqHyTn66YF5g5Eg3?=
+ =?us-ascii?Q?cq+1bjdCRhXBUl7pSzAKID3HY8IOgROfkflHLuoHZ5vaIVBqVLzRiUxY78d0?=
+ =?us-ascii?Q?cj0EWSg/cKeNvrdVVREZrP89BxmjWGsHPIocdRZjt/XvJLdwMUisztumEg0h?=
+ =?us-ascii?Q?h6KLfswD/oj3D6Eooj2qo80MKAbmu3A13HYkiQsSpBI6LWGqJX1fbav2PfFF?=
+ =?us-ascii?Q?vcnhXCxLogt6RuALLTgt44sc9EpWz0OH6ChOggDqZuY/O06HB6o6mtToeDVd?=
+ =?us-ascii?Q?j17vH+kYBrxuNfTwvaSY/DMsH1PX3ZUb0puEnJJc932K+CAV5p4GhrqpAJbE?=
+ =?us-ascii?Q?hYoo6aMdwO3DC57qFInfkHZSBOMF7mYn6a06H/wPsD7vqkNQgUUILHjk5o4x?=
+ =?us-ascii?Q?KyQ9yGbocwYPH+LO10vmEChXIJYes+fZE1y9jhhnRmFt9O9PdqhG/eB1WIS6?=
+ =?us-ascii?Q?oiLFV11d2NHVdQsRxWr1m6qPRVtO1Lc1RKkF4EFehrbSv4sOrI2SkQ3t4b/2?=
+ =?us-ascii?Q?0WwCQ8YPB9c7p0PRwFvsCOvUsTvblmDVGDUGNjNzZljBX/xoqIRF+P2WwW0e?=
+ =?us-ascii?Q?4sT1bvJLQeYcuAYQW3O/5klnKJlUlwq2WoUX6pYy5hmQNoeyvU5GEyBC0rkN?=
+ =?us-ascii?Q?h9CS+UA8vmotYgrZVJILJlYycVtzOuXySmvMsurvkklmZqQlXUwLvS4JYtzp?=
+ =?us-ascii?Q?PqthrLMZoWO9LHICxs3G4tVVPdRgMAH4ACfG33HIoZ54go/5yBgQrIlszIDf?=
+ =?us-ascii?Q?RJjkOlPurPiA36We8Sv1Cf2Qg9arh+664YRkUozEEk766zk7hPbUy731x3ws?=
+ =?us-ascii?Q?7AWbfrCWjYYEQ/r9iabKWaSoerNw95zF7Ar25FFjplLdkF+KcLyf4HOO4+Qi?=
+ =?us-ascii?Q?bmagk/8r/mdB2+SveWEaLYUyyNO6sRVYT4fzOqkEWozs3qQqIL79PHdd3RPd?=
+ =?us-ascii?Q?MbZYW9g66axumQPocuSzoxb12oioTePg20Gd467mmHQnodmA5PUY80bXutIT?=
+ =?us-ascii?Q?6phRh8g1dPHTll7xDT62eLejFaXZKdWx3XDd/UkACDYhebikgq4Y1zA9yJG0?=
+ =?us-ascii?Q?+iY9bmrTFVKbbvTZj3XK8AWSZWXUk55iJx4k5biWZ1Kkf/jUD9fjw8x91egf?=
+ =?us-ascii?Q?Zw2QjkVLWIt9IsmvlQr1AbXeODtGA+JLjpTtc3qxKzLY1yqTvFVPFvn+rdPZ?=
+ =?us-ascii?Q?Vf3MJroFz0pVCQsEVIz1tVmUdo/rnF93E+sSIyIedavi6oTiMY1Nj72EnhvN?=
+ =?us-ascii?Q?VCuMn0LOqRXwUWB9Y7ZvbBEWzhsMfxEqw1+/ajX5gj+D9xUN0QS8KuOtsAGJ?=
+ =?us-ascii?Q?HpOp1plITH/m/+Qipjod/EQAtxQ+PHPcWFvKt22kAQ7dkYgFWB21AbhaprYj?=
+ =?us-ascii?Q?wCNfUk648lQDiwb6mOsoY1o9wE6JhRGS37EGRec/iBunAclZLRfh9wuevK6u?=
+ =?us-ascii?Q?cw+L6dE8iEJqjTLo//FHVpsMus/3Hn6xB/0m++ub?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 78eef31f-0652-49bf-9ee5-08daa1451157
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4c562cd0-c8b3-4a15-818d-08daa149323a
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB3176.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2022 11:32:04.6647 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2022 12:01:37.5132 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NyO3P1hBMXZujEc4N5yYHFkfYuzOE9I0U2QkUZ3yN0afLoYqoa89V1KCqCC9Kz8p0nhFBK9n9Pmp+ilO64M/kQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6469
-Subject: Re: [Nouveau] [PATCH 5/7] nouveau/dmem: Refactor
- nouveau_dmem_fault_copy_one()
+X-MS-Exchange-CrossTenant-UserPrincipalName: uZi/s1HjdWnW3zEUj7PsH8K8vgHTWSTlo/G+JAaJpNcYka6G/TBx0MIkos+rSdn3ycyVBY92ReeG97esEEOpbA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4337
+Subject: [Nouveau] [PATCH v2 0/8] Fix several device private page reference
+ counting issues
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -115,149 +113,65 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Alex Sierra <alex.sierra@amd.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, amd-gfx@lists.freedesktop.org,
- Michael Ellerman <mpe@ellerman.id.au>,
- "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
- Ben Skeggs <bskeggs@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>,
- Ralph Campbell <rcampbell@nvidia.com>, Nicholas Piggin <npiggin@gmail.com>,
- Dan Williams <dan.j.williams@intel.com>,
- Felix Kuehling <Felix.Kuehling@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
- linux-kernel@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
- Alex Deucher <alexander.deucher@amd.com>,
- Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
- Christian =?utf-8?Q?K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+This series aims to fix a number of page reference counting issues in
+drivers dealing with device private ZONE_DEVICE pages. These result in
+use-after-free type bugs, either from accessing a struct page which no
+longer exists because it has been removed or accessing fields within the
+struct page which are no longer valid because the page has been freed.
 
-Lyude Paul <lyude@redhat.com> writes:
+During normal usage it is unlikely these will cause any problems. However
+without these fixes it is possible to crash the kernel from userspace.
+These crashes can be triggered either by unloading the kernel module or
+unbinding the device from the driver prior to a userspace task exiting. In
+modules such as Nouveau it is also possible to trigger some of these issues
+by explicitly closing the device file-descriptor prior to the task exiting
+and then accessing device private memory.
 
-> On Mon, 2022-09-26 at 16:03 +1000, Alistair Popple wrote:
->> nouveau_dmem_fault_copy_one() is used during handling of CPU faults via
->> the migrate_to_ram() callback and is used to copy data from GPU to CPU
->> memory. It is currently specific to fault handling, however a future
->> patch implementing eviction of data during teardown needs similar
->> functionality.
->>
->> Refactor out the core functionality so that it is not specific to fault
->> handling.
->>
->> Signed-off-by: Alistair Popple <apopple@nvidia.com>
->> ---
->>  drivers/gpu/drm/nouveau/nouveau_dmem.c | 59 +++++++++++++--------------
->>  1 file changed, 29 insertions(+), 30 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
->> index f9234ed..66ebbd4 100644
->> --- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
->> +++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
->> @@ -139,44 +139,25 @@ static void nouveau_dmem_fence_done(struct nouveau_fence **fence)
->>  	}
->>  }
->>
->> -static vm_fault_t nouveau_dmem_fault_copy_one(struct nouveau_drm *drm,
->> -		struct vm_fault *vmf, struct migrate_vma *args,
->> -		dma_addr_t *dma_addr)
->> +static int nouveau_dmem_copy_one(struct nouveau_drm *drm, struct page *spage,
->> +				struct page *dpage, dma_addr_t *dma_addr)
->>  {
->>  	struct device *dev = drm->dev->dev;
->> -	struct page *dpage, *spage;
->> -	struct nouveau_svmm *svmm;
->> -
->> -	spage = migrate_pfn_to_page(args->src[0]);
->> -	if (!spage || !(args->src[0] & MIGRATE_PFN_MIGRATE))
->> -		return 0;
->>
->> -	dpage = alloc_page_vma(GFP_HIGHUSER, vmf->vma, vmf->address);
->> -	if (!dpage)
->> -		return VM_FAULT_SIGBUS;
->>  	lock_page(dpage);
->>
->>  	*dma_addr = dma_map_page(dev, dpage, 0, PAGE_SIZE, DMA_BIDIRECTIONAL);
->>  	if (dma_mapping_error(dev, *dma_addr))
->> -		goto error_free_page;
->> +		return -EIO;
->>
->> -	svmm = spage->zone_device_data;
->> -	mutex_lock(&svmm->mutex);
->> -	nouveau_svmm_invalidate(svmm, args->start, args->end);
->>  	if (drm->dmem->migrate.copy_func(drm, 1, NOUVEAU_APER_HOST, *dma_addr,
->> -			NOUVEAU_APER_VRAM, nouveau_dmem_page_addr(spage)))
->> -		goto error_dma_unmap;
->> -	mutex_unlock(&svmm->mutex);
->> +					 NOUVEAU_APER_VRAM,
->> +					 nouveau_dmem_page_addr(spage))) {
->> +		dma_unmap_page(dev, *dma_addr, PAGE_SIZE, DMA_BIDIRECTIONAL);
->> +		return -EIO;
->> +	}
->
-> Feel free to just align this with the starting (, as long as it doesn't go
-> above 100 characters it doesn't really matter imho and would look nicer that
-> way.
->
-> Otherwise:
->
-> Reviewed-by: Lyude Paul <lyude@redhat.com>
+This involves some minor changes to both PowerPC and AMD GPU code.
+Unfortunately I lack hardware to test either of those so any help there
+would be appreciated. The changes mimic what is done in for both Nouveau
+and hmm-tests though so I doubt they will cause problems.
 
-Thanks! I'm not sure I precisely understood your alignment comment above
-but feel free to let me know if I got it wrong in v2.
+To: Andrew Morton <akpm@linux-foundation.org>
+To: linux-mm@kvack.org
+Cc: linux-kernel@vger.kernel.org
+Cc: amd-gfx@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Cc: dri-devel@lists.freedesktop.org
 
-> Will look at the other patch in a moment
->
->>
->> -	args->dst[0] = migrate_pfn(page_to_pfn(dpage));
->>  	return 0;
->> -
->> -error_dma_unmap:
->> -	mutex_unlock(&svmm->mutex);
->> -	dma_unmap_page(dev, *dma_addr, PAGE_SIZE, DMA_BIDIRECTIONAL);
->> -error_free_page:
->> -	__free_page(dpage);
->> -	return VM_FAULT_SIGBUS;
->>  }
->>
->>  static vm_fault_t nouveau_dmem_migrate_to_ram(struct vm_fault *vmf)
->> @@ -184,9 +165,11 @@ static vm_fault_t nouveau_dmem_migrate_to_ram(struct vm_fault *vmf)
->>  	struct nouveau_drm *drm = page_to_drm(vmf->page);
->>  	struct nouveau_dmem *dmem = drm->dmem;
->>  	struct nouveau_fence *fence;
->> +	struct nouveau_svmm *svmm;
->> +	struct page *spage, *dpage;
->>  	unsigned long src = 0, dst = 0;
->>  	dma_addr_t dma_addr = 0;
->> -	vm_fault_t ret;
->> +	vm_fault_t ret = 0;
->>  	struct migrate_vma args = {
->>  		.vma		= vmf->vma,
->>  		.start		= vmf->address,
->> @@ -207,9 +190,25 @@ static vm_fault_t nouveau_dmem_migrate_to_ram(struct vm_fault *vmf)
->>  	if (!args.cpages)
->>  		return 0;
->>
->> -	ret = nouveau_dmem_fault_copy_one(drm, vmf, &args, &dma_addr);
->> -	if (ret || dst == 0)
->> +	spage = migrate_pfn_to_page(src);
->> +	if (!spage || !(src & MIGRATE_PFN_MIGRATE))
->> +		goto done;
->> +
->> +	dpage = alloc_page_vma(GFP_HIGHUSER, vmf->vma, vmf->address);
->> +	if (!dpage)
->> +		goto done;
->> +
->> +	dst = migrate_pfn(page_to_pfn(dpage));
->> +
->> +	svmm = spage->zone_device_data;
->> +	mutex_lock(&svmm->mutex);
->> +	nouveau_svmm_invalidate(svmm, args.start, args.end);
->> +	ret = nouveau_dmem_copy_one(drm, spage, dpage, &dma_addr);
->> +	mutex_unlock(&svmm->mutex);
->> +	if (ret) {
->> +		ret = VM_FAULT_SIGBUS;
->>  		goto done;
->> +	}
->>
->>  	nouveau_fence_new(dmem->migrate.chan, false, &fence);
->>  	migrate_vma_pages(&args);
+Alistair Popple (8):
+  mm/memory.c: Fix race when faulting a device private page
+  mm: Free device private pages have zero refcount
+  mm/memremap.c: Take a pgmap reference on page allocation
+  mm/migrate_device.c: Refactor migrate_vma and migrate_deivce_coherent_page()
+  mm/migrate_device.c: Add migrate_device_range()
+  nouveau/dmem: Refactor nouveau_dmem_fault_copy_one()
+  nouveau/dmem: Evict device private memory during release
+  hmm-tests: Add test for migrate_device_range()
+
+ arch/powerpc/kvm/book3s_hv_uvmem.c       |  17 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_migrate.c |  19 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_migrate.h |   2 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_svm.c     |  11 +-
+ drivers/gpu/drm/nouveau/nouveau_dmem.c   | 108 +++++++----
+ include/linux/memremap.h                 |   1 +-
+ include/linux/migrate.h                  |  15 ++-
+ lib/test_hmm.c                           | 129 ++++++++++---
+ lib/test_hmm_uapi.h                      |   1 +-
+ mm/memory.c                              |  16 +-
+ mm/memremap.c                            |  30 ++-
+ mm/migrate.c                             |  34 +--
+ mm/migrate_device.c                      | 239 +++++++++++++++++-------
+ mm/page_alloc.c                          |   8 +-
+ tools/testing/selftests/vm/hmm-tests.c   |  49 +++++-
+ 15 files changed, 516 insertions(+), 163 deletions(-)
+
+base-commit: 088b8aa537c2c767765f1c19b555f21ffe555786
+-- 
+git-series 0.9.1
