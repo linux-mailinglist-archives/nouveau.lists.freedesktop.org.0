@@ -2,44 +2,82 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12C585EDFCE
-	for <lists+nouveau@lfdr.de>; Wed, 28 Sep 2022 17:10:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E0245EE841
+	for <lists+nouveau@lfdr.de>; Wed, 28 Sep 2022 23:23:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7E1E710E9E0;
-	Wed, 28 Sep 2022 15:10:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8BF7110EA2B;
+	Wed, 28 Sep 2022 21:23:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 547A610E9FA;
- Wed, 28 Sep 2022 15:10:29 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id B0924B81FA2;
- Wed, 28 Sep 2022 15:10:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55C69C433D6;
- Wed, 28 Sep 2022 15:10:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
- s=korg; t=1664377826;
- bh=+HOKwcbw1B0WEYgcZtf8z/9nr2ZbysRiKOhYfv9YVTE=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=IS5sTNnyxfit75fuP9+CKivhPVfr5MuCYX5xkSMvaIHcwj3YlHPHGiuReVZRtFCkO
- k/7JXAzqhj8lkEcOv3/FuRDU4yiHUhnPML+lIIGP/0mxsk6qSXMxUXyYBHHEAPpFJk
- OVh6CdYsxMDrs090m2k5tYCYUY4q6QAKNz+LjBGQ=
-Date: Wed, 28 Sep 2022 08:10:17 -0700
-From: Andrew Morton <akpm@linux-foundation.org>
-To: Alistair Popple <apopple@nvidia.com>
-Message-Id: <20220928081017.3bf0b67d34a674b0a6df6b0d@linux-foundation.org>
-In-Reply-To: <a73cf109de0224cfd118d22be58ddebac3ae2897.1664366292.git-series.apopple@nvidia.com>
-References: <cover.60659b549d8509ddecafad4f498ee7f03bb23c69.1664366292.git-series.apopple@nvidia.com>
- <a73cf109de0224cfd118d22be58ddebac3ae2897.1664366292.git-series.apopple@nvidia.com>
-X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH v2 8/8] hmm-tests: Add test for
- migrate_device_range()
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 631A510EA35
+ for <nouveau@lists.freedesktop.org>; Wed, 28 Sep 2022 21:23:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1664400186;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=QZ4t2UB2lqqb9ZXGA9il9zfkqpEc6E78sSJodDNan7Y=;
+ b=Psmvm7pdER3/ndjd5hNBHBE+MieQjq6wQzdxsKhtnSdAR/ga5lB/drznss3yalLl3QVXDI
+ 6Q24loxVhVsb3cgT43e9GCkUdtTYzT6NXReeJ6kXhT8TOtWo+RfvE/DN6EWH7uYw7y+Fd3
+ CrxFGFU1yqT2fPmZ+VPg8FiJGflE4sU=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-164-Iml02fMYOGOR0fRw_ang6g-1; Wed, 28 Sep 2022 17:23:05 -0400
+X-MC-Unique: Iml02fMYOGOR0fRw_ang6g-1
+Received: by mail-qv1-f71.google.com with SMTP id
+ lq8-20020a0562145b8800b004ad7229e4e9so8606635qvb.6
+ for <nouveau@lists.freedesktop.org>; Wed, 28 Sep 2022 14:23:05 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:user-agent:organization
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date;
+ bh=QZ4t2UB2lqqb9ZXGA9il9zfkqpEc6E78sSJodDNan7Y=;
+ b=lW5ANmiUDZFw2hNqNvODZHUG84ikuWkya2aFt7UFkM+IPXerFjnY4vkFgyKhHPfI9M
+ 45fCIR9EKJYLUe2bTlBcCkvcd56L8iumixrEITTbMhMw6EhGY7cC02m+8jLQKfCvfmsD
+ QKEannZWFrfCj20G4/8PfG5CBCdN63VttxdAkloAnZPcZqVL5mE6PvRQaqfyyM1n4HsN
+ Zj9RmZAylGWovQKAKdm1tQVIrtaFCrB/eImlr9AxQGJLdSdifYazS/HHtj3ZqLrQ06VW
+ g7p972EUi81lUMuDGREDd42we8569OgnTwG94ZVBUCfItO01jDhDBNunXfuhpOHe/Y9B
+ m78A==
+X-Gm-Message-State: ACrzQf3+WqgEabYhn0UMf43CZHfZr9vsM5ENVS4rPWyM7cfQEBa1I5Ex
+ YHC+71idBYxKjErVzLqLfPWjbanjKfERsS52EZJHvwxtqnYz17NNHIUA+UW6bfCiR7FXvF0sZu0
+ VCgOwHr/GWz8QuCVbi1fCccGTcg==
+X-Received: by 2002:a05:620a:1103:b0:6ce:a0f6:90da with SMTP id
+ o3-20020a05620a110300b006cea0f690damr38548qkk.101.1664400184953; 
+ Wed, 28 Sep 2022 14:23:04 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM62/QIMjRyMr/gsxyeVxkRAWCYE6jZga2+iTdsErHKnI8Gjuum9cexxu6iDiWDB1hCj2jmE6w==
+X-Received: by 2002:a05:620a:1103:b0:6ce:a0f6:90da with SMTP id
+ o3-20020a05620a110300b006cea0f690damr38505qkk.101.1664400184635; 
+ Wed, 28 Sep 2022 14:23:04 -0700 (PDT)
+Received: from ?IPv6:2600:4040:5c48:e00::feb? ([2600:4040:5c48:e00::feb])
+ by smtp.gmail.com with ESMTPSA id
+ o19-20020a05622a009300b0031eebfcb369sm4431620qtw.97.2022.09.28.14.23.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 Sep 2022 14:23:03 -0700 (PDT)
+Message-ID: <07643305900ee3a1adb7226cc98fa13defcee5a3.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Alistair Popple <apopple@nvidia.com>, Felix Kuehling
+ <felix.kuehling@amd.com>
+Date: Wed, 28 Sep 2022 17:23:00 -0400
+In-Reply-To: <87bkr1lh3a.fsf@nvdebian.thelocal>
+References: <cover.f15b25597fc3afd45b144df863eeca3b2c13f9f4.1664171943.git-series.apopple@nvidia.com>
+ <072e1ce590fe101a4cdbd5e91b1702efebb6d0fd.1664171943.git-series.apopple@nvidia.com>
+ <881735bda9b1ba0ecf3648af201840233508f206.camel@redhat.com>
+ <7ca6ec0c-7e5e-3b24-8f8d-650df357130c@amd.com>
+ <87bkr1lh3a.fsf@nvdebian.thelocal>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
+MIME-Version: 1.0
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH 6/7] nouveau/dmem: Evict device private memory
+ during release
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,279 +89,196 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Alex Sierra <alex.sierra@amd.com>, Ralph Campbell <rcampbell@nvidia.com>,
- nouveau@lists.freedesktop.org, Felix Kuehling <Felix.Kuehling@amd.com>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+Cc: Alex Sierra <alex.sierra@amd.com>, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  linux-mm@kvack.org, amd-gfx@lists.freedesktop.org,
- Jason Gunthorpe <jgg@nvidia.com>
+ Michael Ellerman <mpe@ellerman.id.au>,
+ "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>,
+ Ralph Campbell <rcampbell@nvidia.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Dan Williams <dan.j.williams@intel.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ linux-kernel@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
+ Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 28 Sep 2022 22:01:22 +1000 Alistair Popple <apopple@nvidia.com> wrote:
+On Tue, 2022-09-27 at 11:39 +1000, Alistair Popple wrote:
+> Felix Kuehling <felix.kuehling@amd.com> writes:
+> 
+> > On 2022-09-26 17:35, Lyude Paul wrote:
+> > > On Mon, 2022-09-26 at 16:03 +1000, Alistair Popple wrote:
+> > > > When the module is unloaded or a GPU is unbound from the module it is
+> > > > possible for device private pages to be left mapped in currently running
+> > > > processes. This leads to a kernel crash when the pages are either freed
+> > > > or accessed from the CPU because the GPU and associated data structures
+> > > > and callbacks have all been freed.
+> > > > 
+> > > > Fix this by migrating any mappings back to normal CPU memory prior to
+> > > > freeing the GPU memory chunks and associated device private pages.
+> > > > 
+> > > > Signed-off-by: Alistair Popple <apopple@nvidia.com>
+> > > > 
+> > > > ---
+> > > > 
+> > > > I assume the AMD driver might have a similar issue. However I can't see
+> > > > where device private (or coherent) pages actually get unmapped/freed
+> > > > during teardown as I couldn't find any relevant calls to
+> > > > devm_memunmap(), memunmap(), devm_release_mem_region() or
+> > > > release_mem_region(). So it appears that ZONE_DEVICE pages are not being
+> > > > properly freed during module unload, unless I'm missing something?
+> > > I've got no idea, will poke Ben to see if they know the answer to this
+> > 
+> > I guess we're relying on devm to release the region. Isn't the whole point of
+> > using devm_request_free_mem_region that we don't have to remember to explicitly
+> > release it when the device gets destroyed? I believe we had an explicit free
+> > call at some point by mistake, and that caused a double-free during module
+> > unload. See this commit for reference:
+> 
+> Argh, thanks for that pointer. I was not so familiar with
+> devm_request_free_mem_region()/devm_memremap_pages() as currently
+> Nouveau explicitly manages that itself.
 
-> @@ -1401,22 +1494,7 @@ static int dmirror_device_init(struct dmirror_device *mdevice, int id)
->  
->  static void dmirror_device_remove(struct dmirror_device *mdevice)
->  {
-> -	unsigned int i;
-> -
-> -	if (mdevice->devmem_chunks) {
-> -		for (i = 0; i < mdevice->devmem_count; i++) {
-> -			struct dmirror_chunk *devmem =
-> -				mdevice->devmem_chunks[i];
-> -
-> -			memunmap_pages(&devmem->pagemap);
-> -			if (devmem->pagemap.type == MEMORY_DEVICE_PRIVATE)
-> -				release_mem_region(devmem->pagemap.range.start,
-> -						   range_len(&devmem->pagemap.range));
-> -			kfree(devmem);
-> -		}
-> -		kfree(mdevice->devmem_chunks);
-> -	}
-> -
-> +	dmirror_device_remove_chunks(mdevice);
->  	cdev_del(&mdevice->cdevice);
->  }
+Mhm, TBH I feel like this was going to happen eventually anyway but there's
+another reason for nouveau to start using the managed versions of these
+functions at some point
 
-Needed a bit or rework due to
-https://lkml.kernel.org/r/20220826050631.25771-1-mpenttil@redhat.com. 
-Please check my resolution.
+> 
+> > commit 22f4f4faf337d5fb2d2750aff13215726814273e
+> > Author: Philip Yang <Philip.Yang@amd.com>
+> > Date:   Mon Sep 20 17:25:52 2021 -0400
+> > 
+> >     drm/amdkfd: fix svm_migrate_fini warning
+> >          Device manager releases device-specific resources when a driver
+> >     disconnects from a device, devm_memunmap_pages and
+> >     devm_release_mem_region calls in svm_migrate_fini are redundant.
+> >          It causes below warning trace after patch "drm/amdgpu: Split
+> >     amdgpu_device_fini into early and late", so remove function
+> >     svm_migrate_fini.
+> >          BUG: https://gitlab.freedesktop.org/drm/amd/-/issues/1718
+> >          WARNING: CPU: 1 PID: 3646 at drivers/base/devres.c:795
+> >     devm_release_action+0x51/0x60
+> >     Call Trace:
+> >         ? memunmap_pages+0x360/0x360
+> >         svm_migrate_fini+0x2d/0x60 [amdgpu]
+> >         kgd2kfd_device_exit+0x23/0xa0 [amdgpu]
+> >         amdgpu_amdkfd_device_fini_sw+0x1d/0x30 [amdgpu]
+> >         amdgpu_device_fini_sw+0x45/0x290 [amdgpu]
+> >         amdgpu_driver_release_kms+0x12/0x30 [amdgpu]
+> >         drm_dev_release+0x20/0x40 [drm]
+> >         release_nodes+0x196/0x1e0
+> >         device_release_driver_internal+0x104/0x1d0
+> >         driver_detach+0x47/0x90
+> >         bus_remove_driver+0x7a/0xd0
+> >         pci_unregister_driver+0x3d/0x90
+> >         amdgpu_exit+0x11/0x20 [amdgpu]
+> >          Signed-off-by: Philip Yang <Philip.Yang@amd.com>
+> >     Reviewed-by: Felix Kuehling <Felix.Kuehling@amd.com>
+> >     Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
+> > 
+> > Furthermore, I guess we are assuming that nobody is using the GPU when the
+> > module is unloaded. As long as any processes have /dev/kfd open, you won't be
+> > able to unload the module (except by force-unload). I suppose with ZONE_DEVICE
+> > memory, we can have references to device memory pages even when user mode has
+> > closed /dev/kfd. We do have a cleanup handler that runs in an MMU-free-notifier.
+> > In theory that should run after all the pages in the mm_struct have been freed.
+> > It releases all sorts of other device resources and needs the driver to still be
+> > there. I'm not sure if there is anything preventing a module unload before the
+> > free-notifier runs. I'll look into that.
+> 
+> Right - module unload (or device unbind) is one of the other ways we can
+> hit this issue in Nouveau at least. You can end up with ZONE_DEVICE
+> pages mapped in a running process after the module has unloaded.
+> Although now you mention it that seems a bit wrong - the pgmap refcount
+> should provide some protection against that. Will have to look into
+> that too.
+> 
+> > Regards,
+> >   Felix
+> > 
+> > 
+> > > 
+> > > > ---
+> > > >   drivers/gpu/drm/nouveau/nouveau_dmem.c | 48 +++++++++++++++++++++++++++-
+> > > >   1 file changed, 48 insertions(+)
+> > > > 
+> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> > > > index 66ebbd4..3b247b8 100644
+> > > > --- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> > > > @@ -369,6 +369,52 @@ nouveau_dmem_suspend(struct nouveau_drm *drm)
+> > > >   	mutex_unlock(&drm->dmem->mutex);
+> > > >   }
+> > > >   +/*
+> > > > + * Evict all pages mapping a chunk.
+> > > > + */
+> > > > +void
+> > > > +nouveau_dmem_evict_chunk(struct nouveau_dmem_chunk *chunk)
+> > > > +{
+> > > > +	unsigned long i, npages = range_len(&chunk->pagemap.range) >> PAGE_SHIFT;
+> > > > +	unsigned long *src_pfns, *dst_pfns;
+> > > > +	dma_addr_t *dma_addrs;
+> > > > +	struct nouveau_fence *fence;
+> > > > +
+> > > > +	src_pfns = kcalloc(npages, sizeof(*src_pfns), GFP_KERNEL);
+> > > > +	dst_pfns = kcalloc(npages, sizeof(*dst_pfns), GFP_KERNEL);
+> > > > +	dma_addrs = kcalloc(npages, sizeof(*dma_addrs), GFP_KERNEL);
+> > > > +
+> > > > +	migrate_device_range(src_pfns, chunk->pagemap.range.start >> PAGE_SHIFT,
+> > > > +			npages);
+> > > > +
+> > > > +	for (i = 0; i < npages; i++) {
+> > > > +		if (src_pfns[i] & MIGRATE_PFN_MIGRATE) {
+> > > > +			struct page *dpage;
+> > > > +
+> > > > +			/*
+> > > > +			 * _GFP_NOFAIL because the GPU is going away and there
+> > > > +			 * is nothing sensible we can do if we can't copy the
+> > > > +			 * data back.
+> > > > +			 */
+> > > You'll have to excuse me for a moment since this area of nouveau isn't one of
+> > > my strongpoints, but are we sure about this? IIRC __GFP_NOFAIL means infinite
+> > > retry, in the case of a GPU hotplug event I would assume we would rather just
+> > > stop trying to migrate things to the GPU and just drop the data instead of
+> > > hanging on infinite retries.
+> > > 
+> > > > +			dpage = alloc_page(GFP_HIGHUSER | __GFP_NOFAIL);
+> > > > +			dst_pfns[i] = migrate_pfn(page_to_pfn(dpage));
+> > > > +			nouveau_dmem_copy_one(chunk->drm,
+> > > > +					migrate_pfn_to_page(src_pfns[i]), dpage,
+> > > > +					&dma_addrs[i]);
+> > > > +		}
+> > > > +	}
+> > > > +
+> > > > +	nouveau_fence_new(chunk->drm->dmem->migrate.chan, false, &fence);
+> > > > +	migrate_device_pages(src_pfns, dst_pfns, npages);
+> > > > +	nouveau_dmem_fence_done(&fence);
+> > > > +	migrate_device_finalize(src_pfns, dst_pfns, npages);
+> > > > +	kfree(src_pfns);
+> > > > +	kfree(dst_pfns);
+> > > > +	for (i = 0; i < npages; i++)
+> > > > +		dma_unmap_page(chunk->drm->dev->dev, dma_addrs[i], PAGE_SIZE, DMA_BIDIRECTIONAL);
+> > > > +	kfree(dma_addrs);
+> > > > +}
+> > > > +
+> > > >   void
+> > > >   nouveau_dmem_fini(struct nouveau_drm *drm)
+> > > >   {
+> > > > @@ -380,8 +426,10 @@ nouveau_dmem_fini(struct nouveau_drm *drm)
+> > > >   	mutex_lock(&drm->dmem->mutex);
+> > > >     	list_for_each_entry_safe(chunk, tmp, &drm->dmem->chunks, list) {
+> > > > +		nouveau_dmem_evict_chunk(chunk);
+> > > >   		nouveau_bo_unpin(chunk->bo);
+> > > >   		nouveau_bo_ref(NULL, &chunk->bo);
+> > > > +		WARN_ON(chunk->callocated);
+> > > >   		list_del(&chunk->list);
+> > > >   		memunmap_pages(&chunk->pagemap);
+> > > >   		release_mem_region(chunk->pagemap.range.start,
+> 
 
-
---- a/lib/test_hmm.c~hmm-tests-add-test-for-migrate_device_range
-+++ a/lib/test_hmm.c
-@@ -100,6 +100,7 @@ struct dmirror {
- struct dmirror_chunk {
- 	struct dev_pagemap	pagemap;
- 	struct dmirror_device	*mdevice;
-+	bool remove;
- };
- 
- /*
-@@ -192,11 +193,15 @@ static int dmirror_fops_release(struct i
- 	return 0;
- }
- 
-+static struct dmirror_chunk *dmirror_page_to_chunk(struct page *page)
-+{
-+	return container_of(page->pgmap, struct dmirror_chunk, pagemap);
-+}
-+
- static struct dmirror_device *dmirror_page_to_device(struct page *page)
- 
- {
--	return container_of(page->pgmap, struct dmirror_chunk,
--			    pagemap)->mdevice;
-+	return dmirror_page_to_chunk(page)->mdevice;
- }
- 
- static int dmirror_do_fault(struct dmirror *dmirror, struct hmm_range *range)
-@@ -1218,6 +1223,85 @@ static int dmirror_snapshot(struct dmirr
- 	return ret;
- }
- 
-+static void dmirror_device_evict_chunk(struct dmirror_chunk *chunk)
-+{
-+	unsigned long start_pfn = chunk->pagemap.range.start >> PAGE_SHIFT;
-+	unsigned long end_pfn = chunk->pagemap.range.end >> PAGE_SHIFT;
-+	unsigned long npages = end_pfn - start_pfn + 1;
-+	unsigned long i;
-+	unsigned long *src_pfns;
-+	unsigned long *dst_pfns;
-+
-+	src_pfns = kcalloc(npages, sizeof(*src_pfns), GFP_KERNEL);
-+	dst_pfns = kcalloc(npages, sizeof(*dst_pfns), GFP_KERNEL);
-+
-+	migrate_device_range(src_pfns, start_pfn, npages);
-+	for (i = 0; i < npages; i++) {
-+		struct page *dpage, *spage;
-+
-+		spage = migrate_pfn_to_page(src_pfns[i]);
-+		if (!spage || !(src_pfns[i] & MIGRATE_PFN_MIGRATE))
-+			continue;
-+
-+		if (WARN_ON(!is_device_private_page(spage) &&
-+			    !is_device_coherent_page(spage)))
-+			continue;
-+		spage = BACKING_PAGE(spage);
-+		dpage = alloc_page(GFP_HIGHUSER_MOVABLE | __GFP_NOFAIL);
-+		lock_page(dpage);
-+		copy_highpage(dpage, spage);
-+		dst_pfns[i] = migrate_pfn(page_to_pfn(dpage));
-+		if (src_pfns[i] & MIGRATE_PFN_WRITE)
-+			dst_pfns[i] |= MIGRATE_PFN_WRITE;
-+	}
-+	migrate_device_pages(src_pfns, dst_pfns, npages);
-+	migrate_device_finalize(src_pfns, dst_pfns, npages);
-+	kfree(src_pfns);
-+	kfree(dst_pfns);
-+}
-+
-+/* Removes free pages from the free list so they can't be re-allocated */
-+static void dmirror_remove_free_pages(struct dmirror_chunk *devmem)
-+{
-+	struct dmirror_device *mdevice = devmem->mdevice;
-+	struct page *page;
-+
-+	for (page = mdevice->free_pages; page; page = page->zone_device_data)
-+		if (dmirror_page_to_chunk(page) == devmem)
-+			mdevice->free_pages = page->zone_device_data;
-+}
-+
-+static void dmirror_device_remove_chunks(struct dmirror_device *mdevice)
-+{
-+	unsigned int i;
-+
-+	mutex_lock(&mdevice->devmem_lock);
-+	if (mdevice->devmem_chunks) {
-+		for (i = 0; i < mdevice->devmem_count; i++) {
-+			struct dmirror_chunk *devmem =
-+				mdevice->devmem_chunks[i];
-+
-+			spin_lock(&mdevice->lock);
-+			devmem->remove = true;
-+			dmirror_remove_free_pages(devmem);
-+			spin_unlock(&mdevice->lock);
-+
-+			dmirror_device_evict_chunk(devmem);
-+			memunmap_pages(&devmem->pagemap);
-+			if (devmem->pagemap.type == MEMORY_DEVICE_PRIVATE)
-+				release_mem_region(devmem->pagemap.range.start,
-+						   range_len(&devmem->pagemap.range));
-+			kfree(devmem);
-+		}
-+		mdevice->devmem_count = 0;
-+		mdevice->devmem_capacity = 0;
-+		mdevice->free_pages = NULL;
-+		kfree(mdevice->devmem_chunks);
-+		mdevice->devmem_chunks = NULL;
-+	}
-+	mutex_unlock(&mdevice->devmem_lock);
-+}
-+
- static long dmirror_fops_unlocked_ioctl(struct file *filp,
- 					unsigned int command,
- 					unsigned long arg)
-@@ -1272,6 +1356,11 @@ static long dmirror_fops_unlocked_ioctl(
- 		ret = dmirror_snapshot(dmirror, &cmd);
- 		break;
- 
-+	case HMM_DMIRROR_RELEASE:
-+		dmirror_device_remove_chunks(dmirror->mdevice);
-+		ret = 0;
-+		break;
-+
- 	default:
- 		return -EINVAL;
- 	}
-@@ -1326,9 +1415,13 @@ static void dmirror_devmem_free(struct p
- 
- 	mdevice = dmirror_page_to_device(page);
- 	spin_lock(&mdevice->lock);
--	mdevice->cfree++;
--	page->zone_device_data = mdevice->free_pages;
--	mdevice->free_pages = page;
-+
-+	/* Return page to our allocator if not freeing the chunk */
-+	if (!dmirror_page_to_chunk(page)->remove) {
-+		mdevice->cfree++;
-+		page->zone_device_data = mdevice->free_pages;
-+		mdevice->free_pages = page;
-+	}
- 	spin_unlock(&mdevice->lock);
- }
- 
-@@ -1408,22 +1501,7 @@ static int dmirror_device_init(struct dm
- 
- static void dmirror_device_remove(struct dmirror_device *mdevice)
- {
--	unsigned int i;
--
--	if (mdevice->devmem_chunks) {
--		for (i = 0; i < mdevice->devmem_count; i++) {
--			struct dmirror_chunk *devmem =
--				mdevice->devmem_chunks[i];
--
--			memunmap_pages(&devmem->pagemap);
--			if (devmem->pagemap.type == MEMORY_DEVICE_PRIVATE)
--				release_mem_region(devmem->pagemap.range.start,
--						   range_len(&devmem->pagemap.range));
--			kfree(devmem);
--		}
--		kfree(mdevice->devmem_chunks);
--	}
--
-+	dmirror_device_remove_chunks(mdevice);
- 	cdev_device_del(&mdevice->cdevice, &mdevice->device);
- }
- 
---- a/lib/test_hmm_uapi.h~hmm-tests-add-test-for-migrate_device_range
-+++ a/lib/test_hmm_uapi.h
-@@ -36,6 +36,7 @@ struct hmm_dmirror_cmd {
- #define HMM_DMIRROR_SNAPSHOT		_IOWR('H', 0x04, struct hmm_dmirror_cmd)
- #define HMM_DMIRROR_EXCLUSIVE		_IOWR('H', 0x05, struct hmm_dmirror_cmd)
- #define HMM_DMIRROR_CHECK_EXCLUSIVE	_IOWR('H', 0x06, struct hmm_dmirror_cmd)
-+#define HMM_DMIRROR_RELEASE		_IOWR('H', 0x07, struct hmm_dmirror_cmd)
- 
- /*
-  * Values returned in hmm_dmirror_cmd.ptr for HMM_DMIRROR_SNAPSHOT.
---- a/tools/testing/selftests/vm/hmm-tests.c~hmm-tests-add-test-for-migrate_device_range
-+++ a/tools/testing/selftests/vm/hmm-tests.c
-@@ -1054,6 +1054,55 @@ TEST_F(hmm, migrate_fault)
- 	hmm_buffer_free(buffer);
- }
- 
-+TEST_F(hmm, migrate_release)
-+{
-+	struct hmm_buffer *buffer;
-+	unsigned long npages;
-+	unsigned long size;
-+	unsigned long i;
-+	int *ptr;
-+	int ret;
-+
-+	npages = ALIGN(HMM_BUFFER_SIZE, self->page_size) >> self->page_shift;
-+	ASSERT_NE(npages, 0);
-+	size = npages << self->page_shift;
-+
-+	buffer = malloc(sizeof(*buffer));
-+	ASSERT_NE(buffer, NULL);
-+
-+	buffer->fd = -1;
-+	buffer->size = size;
-+	buffer->mirror = malloc(size);
-+	ASSERT_NE(buffer->mirror, NULL);
-+
-+	buffer->ptr = mmap(NULL, size, PROT_READ | PROT_WRITE,
-+			   MAP_PRIVATE | MAP_ANONYMOUS, buffer->fd, 0);
-+	ASSERT_NE(buffer->ptr, MAP_FAILED);
-+
-+	/* Initialize buffer in system memory. */
-+	for (i = 0, ptr = buffer->ptr; i < size / sizeof(*ptr); ++i)
-+		ptr[i] = i;
-+
-+	/* Migrate memory to device. */
-+	ret = hmm_migrate_sys_to_dev(self->fd, buffer, npages);
-+	ASSERT_EQ(ret, 0);
-+	ASSERT_EQ(buffer->cpages, npages);
-+
-+	/* Check what the device read. */
-+	for (i = 0, ptr = buffer->mirror; i < size / sizeof(*ptr); ++i)
-+		ASSERT_EQ(ptr[i], i);
-+
-+	/* Release device memory. */
-+	ret = hmm_dmirror_cmd(self->fd, HMM_DMIRROR_RELEASE, buffer, npages);
-+	ASSERT_EQ(ret, 0);
-+
-+	/* Fault pages back to system memory and check them. */
-+	for (i = 0, ptr = buffer->ptr; i < size / (2 * sizeof(*ptr)); ++i)
-+		ASSERT_EQ(ptr[i], i);
-+
-+	hmm_buffer_free(buffer);
-+}
-+
- /*
-  * Migrate anonymous shared memory to device private memory.
-  */
-_
+-- 
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
