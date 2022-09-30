@@ -2,17 +2,17 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D9475F0AF5
-	for <lists+nouveau@lfdr.de>; Fri, 30 Sep 2022 13:46:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC9645F0DE0
+	for <lists+nouveau@lfdr.de>; Fri, 30 Sep 2022 16:47:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5678110E222;
-	Fri, 30 Sep 2022 11:46:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 340EC10ED36;
+	Fri, 30 Sep 2022 14:47:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp.domeneshop.no (smtp.domeneshop.no
  [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ED41F10E165;
- Fri, 30 Sep 2022 11:46:25 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D09FB10ED36;
+ Fri, 30 Sep 2022 14:47:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  ; s=ds202112;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
@@ -20,18 +20,18 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IifDSaiSaen7SDFh+4iH9IwPZlddD8Axc+s6Pi1ODoY=; b=OYj/yleDGKQJZnmZIrlEbeP/b/
- DoAf3KiJo708NW1GO9RM8Z0+qA/GZsSTYp623JXFCkgvJEkD7l059APXopLJt3s4dB4BYpBi29rDP
- NI+lAlBtvJE5WCKwt8oBRNksB3aLgmGnEcT32XxqmqSa+FRLo/DpbyhRogW6WUmikYauxGu65WXKu
- AGiTYT3bUNYgYIlD0pNZwY7ND2rRwa0GJMbrjn2bjKkl2T+yzthf3wPj4JShRhiBeCWEntMXdpx5u
- 8NWKpSyVfeG5PDsXJd8qWDfPuX//9GUVhLdFQO691ossfQdYJDnMUYwa6FlsyJ2LNeWm7Vzwk7hW4
- l1wydY+Q==;
-Received: from [2a01:799:961:d200:c807:6849:43f8:dd23] (port=55455)
+ bh=mNNkRRw0Gbq4V+ztYG6L23EmoagwCkTjNrLNxOdS6h0=; b=pJNR3S8cONTj/8h4P2g2LUDXUa
+ P4qz1z/bkXJaUIs7binQsqWk3/AwoR64GRyNbZeAAPKEG3VvG0VqEcUktWPwzbIS2+dyAb3bglkrR
+ Gbp26oZwNi/2R9lfWfSlBtmhJWFxmcgI7a8IAf0g/52W794SXMJJL6jGDr825vE7BQXwjQEyRfFWP
+ Uy9SFNlE4SEEbsM7JDtb3cgFOqTncjGrvOfEEg27A/Pdv0HXPMkV2SSwbECAhxDsIdVOyX3o9TeE3
+ 96jn29a4os1mr+hXMBkJegjmqljW/OW889m7G0N9eIO4FA8PmW8PWAHgCqUfr7qmdT5HDwQG4Mp7P
+ Q5vpA6jg==;
+Received: from [2a01:799:961:d200:c807:6849:43f8:dd23] (port=51305)
  by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1oeETG-0003MV-SM; Fri, 30 Sep 2022 13:46:22 +0200
-Message-ID: <fc7664cc-25f4-ee37-5261-fc6e35259e50@tronnes.org>
-Date: Fri, 30 Sep 2022 13:46:19 +0200
+ id 1oeHIa-0005u3-EX; Fri, 30 Sep 2022 16:47:32 +0200
+Message-ID: <7341c6f0-a6ca-25e5-c246-3665da441069@tronnes.org>
+Date: Fri, 30 Sep 2022 16:47:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.13.1
@@ -48,13 +48,12 @@ To: Maxime Ripard <maxime@cerno.tech>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>
 References: <20220728-rpi-analog-tv-properties-v4-0-60d38873f782@cerno.tech>
- <20220728-rpi-analog-tv-properties-v4-10-60d38873f782@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v4-3-60d38873f782@cerno.tech>
 From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v4-10-60d38873f782@cerno.tech>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v4-3-60d38873f782@cerno.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v4 10/30] drm/connector: Add TV standard
- property
+Subject: Re: [Nouveau] [PATCH v4 03/30] drm/tests: Add Kunit Helpers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,53 +78,15 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
 
-Den 29.09.2022 18.31, skrev Maxime Ripard:
-> The TV mode property has been around for a while now to select and get the
-> current TV mode output on an analog TV connector.
+Den 29.09.2022 18.30, skrev Maxime Ripard:
+> As the number of kunit tests in KMS grows further, we start to have
+> multiple test suites that, for example, need to register a mock DRM
+> driver to interact with the KMS function they are supposed to test.
 > 
-> Despite that property name being generic, its content isn't and has been
-> driver-specific which makes it hard to build any generic behaviour on top
-> of it, both in kernel and user-space.
-> 
-> Let's create a new enum tv norm property, that can contain any of the
-> analog TV standards currently supported by kernel drivers. Each driver can
-> then pass in a bitmask of the modes it supports, and the property
-> creation function will filter out the modes not supported.
-> 
-> We'll then be able to phase out the older tv mode property.
+> Let's add a file meant to provide those kind of helpers to avoid
+> duplication.
 > 
 > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 > 
-> ---
-> Changes in v4:
-> - Add property documentation to kms-properties.csv
-> - Fix documentation
-> ---
->  Documentation/gpu/kms-properties.csv |  1 +
->  drivers/gpu/drm/drm_atomic_uapi.c    |  4 +++
->  drivers/gpu/drm/drm_connector.c      | 57 +++++++++++++++++++++++++++++++-
->  include/drm/drm_connector.h          | 64 ++++++++++++++++++++++++++++++++++++
->  include/drm/drm_mode_config.h        |  8 +++++
->  5 files changed, 133 insertions(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/gpu/kms-properties.csv b/Documentation/gpu/kms-properties.csv
-> index 45c12e3e82f4..3498bd5d5856 100644
-> --- a/Documentation/gpu/kms-properties.csv
-> +++ b/Documentation/gpu/kms-properties.csv
-> @@ -91,6 +91,7 @@ omap,Generic,“zorder”,RANGE,"Min=0, Max=3","CRTC, Plane",TBD
->  qxl,Generic,"“hotplug_mode_update""",RANGE,"Min=0, Max=1",Connector,TBD
->  radeon,DVI-I,“coherent”,RANGE,"Min=0, Max=1",Connector,TBD
->  ,DAC enable load detect,“load detection”,RANGE,"Min=0, Max=1",Connector,TBD
-> +,TV Mode,"""TV Mode""",ENUM,"{ ""NTSC"", ""NTSC-443"", ""NTSC-J"", ""PAL"", ""PAL-M"", ""PAL-N"", ""SECAM"" }",Connector,TBD
->  ,legacy TMDS PLL detect,"""tmds_pll""",ENUM,"{ ""driver"", ""bios"" }",-,TBD
->  ,Underscan,"""underscan""",ENUM,"{ ""off"", ""on"", ""auto"" }",Connector,TBD
->  ,,"""underscan hborder""",RANGE,"Min=0, Max=128",Connector,TBD
 
-Turns out I was wrong about adding the property to this file, Daniel
-says it's deprecated in f0f0657b108c ("drm/doc: Drop "content type" from
-the legacy kms property table").
-
-If you look at the Fixes commit it adds a kernel doc HDMI property
-section and TV should probably have something like that.
-
-Noralf.
+Reviewed-by: Noralf Trønnes <noralf@tronnes.org>
