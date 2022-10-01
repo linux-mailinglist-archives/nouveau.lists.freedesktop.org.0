@@ -1,61 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1AD05F148E
-	for <lists+nouveau@lfdr.de>; Fri, 30 Sep 2022 23:10:19 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 02A905F1C2D
+	for <lists+nouveau@lfdr.de>; Sat,  1 Oct 2022 14:38:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4B2F510EDB0;
-	Fri, 30 Sep 2022 21:10:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9106410E2C2;
+	Sat,  1 Oct 2022 12:37:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8EBEA10EDAF;
- Fri, 30 Sep 2022 21:10:12 +0000 (UTC)
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-357208765adso14771147b3.12; 
- Fri, 30 Sep 2022 14:10:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date;
- bh=M1w1EWPn1vLoOId55Q91gnxn8wS8AwPmtHIhCGOHN0M=;
- b=REbiTCxqzTXXjShheYbGyeOylXALyVd3WWejaZI1kZe1D+P0wnqNuB3hXoSpZfK4Fa
- JnWc8punZ2lcrdDg5a5hNaNxNBTwaLGc75orEzHnYlq9F7mRhGQPJGMswayT9rSgIkk1
- UrzlwX/md/fIxSk48OXrH0uTZc7DhiLOEYA03R8OzCqCIwIEulWd7z737PgqMUaTwmrW
- Ai2H7An1NPeX8HiuDxhKx792lD2bGFalMewrK2z8z8+0Fnp0VMMrX1HmVrDuJ5A8orgF
- 7XdUPCT6pbKngPw9cb8qTXq3yBBY0vFca3wYvqy/WejC6aK/xITzxH/PeCIFFvD4BZxj
- mCLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=M1w1EWPn1vLoOId55Q91gnxn8wS8AwPmtHIhCGOHN0M=;
- b=qr7K/Z8NXpplZDZnBMpNVjLO5X83BXVkG1S0/J/pHxNdUQixmdg1ZiWZwi/HmvY5lt
- kQfTbArNYasVDzx2i23Lctv5IelBrO3epUUPLvaCDN+/TryYuSgXk4mxotsJ1fAewt7+
- D7A32X6ITchl0gmXs3IxTYogkXX338b6JZa4EcVMCJO+/z2bhNgEmdYNb4LJh80ugso6
- kiaYWd6Z6RDJN7nhqWNOygW1zHmW+WIK2uLE++/K+uyWSNkLisKAqOa0rR/ZpzFFmD36
- qHR5cUL4wBrUJcCug+63Z7g0qz09LWv7aJZYVDQ6zUh+LgyyikP+al7PXGbtjT7q6QLH
- +ByQ==
-X-Gm-Message-State: ACrzQf3FD0ZGm1zin64HPb31RByTE21wjig6BJTFIGp2CrxBWBBuJoS6
- BbN/lqcVU1szH+SGhszhVXR6yj6ZQYV6Iz2QdOY=
-X-Google-Smtp-Source: AMsMyM4a+PlK5rozN6GTpMcjF7T3JXqNFGUhpP5HbCOi8rUxczy4AxJq4KL4QkhOwDL95P8jdmXP2Rrw+SQKqI4sgWg=
-X-Received: by 2002:a0d:e581:0:b0:356:cd48:a936 with SMTP id
- o123-20020a0de581000000b00356cd48a936mr2920874ywe.397.1664572211698; Fri, 30
- Sep 2022 14:10:11 -0700 (PDT)
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D3FBC10E2C2;
+ Sat,  1 Oct 2022 12:37:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=6NLjqlmPvPzsTA6vBPevXpCXhWVbqtndMWvi9+f1bGI=; b=jhtbUCYzLQSly2Ci/UfjnGhszW
+ LuUWNd9yhuchnKssqz1rB56YFTNwc0ZVdSNpo3/U5U5zSIrD0mfTxnNKHzij/Scea9YjsSL5RmiJ6
+ H/4F1B8zOfFv0BTvfZj/CUCp4ryGk25X/lHf/WZBglOcR7FB7ENvinvlwD5kQwYdhCLNXkngxHxe8
+ SlCYH3cg1OR9tK6CdLQMJS768k2cxhykDj7HGfQ2MGAGIT9GERvUUB6877copsJ0Zh9+urHznyhNi
+ UK8OTkzzM9M8eKPor3bJ0ECuUdbJHOkIEPTWKq3oKJNmlj1dszewPzuxHaRI2JrMHXuuMZvky+fbb
+ NC2RFcXA==;
+Received: from [2a01:799:961:d200:138:ce02:d9d4:d972] (port=58514)
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1oebkd-00044m-E3; Sat, 01 Oct 2022 14:37:51 +0200
+Message-ID: <415275a6-7b3c-0550-6ed4-01245f385331@tronnes.org>
+Date: Sat, 1 Oct 2022 14:37:43 +0200
 MIME-Version: 1.0
-References: <20220819200928.401416-1-kherbst@redhat.com>
- <YymY+3+C2aI7T3GU@eldamar.lan>
- <CACO55ts7rpbyYv3ovWt1iCfkGsChCUVitmHqtzAwFpfbPEZGYQ@mail.gmail.com>
- <YymrJSfXe4LaXmkA@eldamar.lan>
-In-Reply-To: <YymrJSfXe4LaXmkA@eldamar.lan>
-From: Computer Enthusiastic <computer.enthusiastic@gmail.com>
-Date: Fri, 30 Sep 2022 23:09:59 +0200
-Message-ID: <CAHSpYy1mcTns0JS6eivjK82CZ9_ajSwH-H7gtDwCkNyfvihaAw@mail.gmail.com>
-To: Salvatore Bonaccorso <carnil@debian.org>
-Content-Type: multipart/mixed; boundary="00000000000061ec3805e9eb6b35"
-Subject: Re: [Nouveau] [PATCH] nouveau: explicitly wait on the fence in
- nouveau_bo_move_m2mf
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.13.1
+To: Maxime Ripard <maxime@cerno.tech>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Karol Herbst <kherbst@redhat.com>, Samuel Holland <samuel@sholland.org>,
+ Lyude Paul <lyude@redhat.com>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Emma Anholt <emma@anholt.net>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>
+References: <20220728-rpi-analog-tv-properties-v4-0-60d38873f782@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v4-30-60d38873f782@cerno.tech>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v4-30-60d38873f782@cerno.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v4 30/30] drm/sun4i: tv: Convert to the new TV
+ mode property
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,92 +66,104 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- stable@vger.kernel.org
+Cc: Dom Cobley <dom@raspberrypi.com>, Phil Elwell <phil@raspberrypi.com>,
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, linux-sunxi@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---00000000000061ec3805e9eb6b35
-Content-Type: text/plain; charset="UTF-8"
 
-Hello,
 
-Il giorno mar 20 set 2022 alle ore 13:59 Salvatore Bonaccorso
-<carnil@debian.org> ha scritto:
-[..]
-> Computer Enthusiastic, can you verify the problem as well in a
-> non-Debian patched upstream kernel directly from the 5.10.y series
-> (latest 5.10.144) and verify the fix there?
->
-> Regards,
-> Salvatore
+Den 29.09.2022 18.31, skrev Maxime Ripard:
+> Now that the core can deal fine with analog TV modes, let's convert the
+> sun4i TV driver to leverage those new features.
+> 
+> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> ---
+>  drivers/gpu/drm/sun4i/sun4i_tv.c | 148 ++++++++++++++-------------------------
+>  drivers/gpu/drm/vc4/vc4_vec.c    |   5 +-
+>  2 files changed, 54 insertions(+), 99 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/sun4i/sun4i_tv.c b/drivers/gpu/drm/sun4i/sun4i_tv.c
 
-I've tested the vanilla kernel 5.10.145 (it was the latest one week
-ago) without Debian kernel patches, but using the kernel config file
-from the latest kernel for Debian Stable:
-- without the Karol's patch: it always fails both suspend to ram and
-hibernate to disk with the usual behavior (a very long time to suspend
-or hibernate, then it fails on resume with a garbled screen)
-- with the Karol's patch: it succeeds both suspend and hibernate and
-it correctly resumes afterwards.
+> @@ -467,35 +398,46 @@ static const struct drm_encoder_helper_funcs sun4i_tv_helper_funcs = {
+>  
+>  static int sun4i_tv_comp_get_modes(struct drm_connector *connector)
+>  {
+> -	int i;
+> +	struct drm_display_mode *mode;
+> +	int count = 0;
+>  
+> -	for (i = 0; i < ARRAY_SIZE(tv_modes); i++) {
+> -		struct drm_display_mode *mode;
+> -		const struct tv_mode *tv_mode = &tv_modes[i];
+> -
+> -		mode = drm_mode_create(connector->dev);
+> -		if (!mode) {
+> -			DRM_ERROR("Failed to create a new display mode\n");
+> -			return 0;
+> -		}
+> +	mode = drm_mode_analog_ntsc_480i(connector->dev);
+> +	if (!mode) {
+> +		DRM_ERROR("Failed to create a new display mode\n");
+> +		return -ENOMEM;
+> +	}
+>  
+> -		strcpy(mode->name, tv_mode->name);
+> +	mode->type |= DRM_MODE_TYPE_PREFERRED;
+> +	drm_mode_probed_add(connector, mode);
+> +	count += 1;
+>  
+> -		sun4i_tv_mode_to_drm_mode(tv_mode, mode);
+> -		drm_mode_probed_add(connector, mode);
+> +	mode = drm_mode_analog_pal_576i(connector->dev);
+> +	if (!mode) {
+> +		DRM_ERROR("Failed to create a new display mode\n");
+> +		return -ENOMEM;
+>  	}
+>  
+> -	return i;
+> +	drm_mode_probed_add(connector, mode);
+> +	count += 1;
+> +
+> +	return count;
 
-The kernel was tested using the following graphic adapter:
-Graphics:  Device-1: NVIDIA G96CM [GeForce 9600M GT] driver: nouveau v: kernel
-          Device-2: Suyin Acer HD Crystal Eye webcam type: USB driver:
-uvcvideo
-          Display: x11 server: X.Org 1.20.11 driver: loaded:
-modesetting unloaded: fbdev,vesa
-          resolution: 1280x800~60Hz
-          OpenGL: renderer: NV96 v: 3.3 Mesa 20.3.5
+count is always 2 so you can just return 2.
 
-Therefore, 5.10.y series of the kernel need to be patched to work
-correctly at least with the aforementioned graphic card.
+Acked-by: Noralf Trønnes <noralf@tronnes.org>
 
-The script I used to compile the kernel are attached for further
-reference and verification.
+>  }
 
-Hope that helps.
+This stray hunk belongs to the vc4 TV mode patch I guess:
 
---00000000000061ec3805e9eb6b35
-Content-Type: application/octet-stream; name="vanilla-kernel-build-5.10.145"
-Content-Disposition: attachment; filename="vanilla-kernel-build-5.10.145"
-Content-Transfer-Encoding: base64
-Content-ID: <f_l8oz7w3z0>
-X-Attachment-Id: f_l8oz7w3z0
+> diff --git a/drivers/gpu/drm/vc4/vc4_vec.c b/drivers/gpu/drm/vc4/vc4_vec.c
+> index 8d37d7ba9b2a..88b4330bfa39 100644
+> --- a/drivers/gpu/drm/vc4/vc4_vec.c
+> +++ b/drivers/gpu/drm/vc4/vc4_vec.c
+> @@ -322,7 +322,7 @@ vc4_vec_tv_mode_lookup(unsigned int mode)
+>  	return NULL;
+>  }
+>  
+> -static const struct drm_prop_enum_list tv_mode_names[] = {
+> +static const struct drm_prop_enum_list legacy_tv_mode_names[] = {
+>  	{ VC4_VEC_TV_MODE_NTSC, "NTSC", },
+>  	{ VC4_VEC_TV_MODE_NTSC_443, "NTSC-443", },
+>  	{ VC4_VEC_TV_MODE_NTSC_J, "NTSC-J", },
+> @@ -498,7 +498,8 @@ static int vc4_vec_connector_init(struct drm_device *dev, struct vc4_vec *vec)
+>  				   DRM_MODE_TV_MODE_NTSC);
+>  
+>  	prop = drm_property_create_enum(dev, 0, "mode",
+> -					tv_mode_names, ARRAY_SIZE(tv_mode_names));
+> +					legacy_tv_mode_names,
+> +					ARRAY_SIZE(legacy_tv_mode_names));
+>  	if (!prop)
+>  		return -ENOMEM;
+>  	vec->legacy_tv_mode_property = prop;
+> 
 
-IyBEb3dubG9hZCBzb3VyY2UgY29kZQp3Z2V0IC1uYyBodHRwczovL2Nkbi5rZXJuZWwub3JnL3B1
-Yi9saW51eC9rZXJuZWwvdjUueC9saW51eC01LjEwLjE0NS50YXIueHoKdGFyIHhmIGxpbnV4LTUu
-MTAuMTQ1LnRhci54egoKIyBBdXRvbWF0ZSBzdWJ2ZXJzaW9uIGluZGV4ClNVQlZFUlNJT05fSU5E
-RVg9IjEiCgojIERlbGV0ZSBmcm9tIHByZXZpb3VzIGJ1aWxkcwpjZCBsaW51eC01LjEwLjE0NQpy
-bSAtcmYgLi9kZWJpYW4Kcm0gLXJmIC4uL2xpbnV4Lm9yaWcvCnJtIC1yZiAuLi9saW51eC11cHN0
-cmVhbSoKCmNwIC9ib290L2NvbmZpZy01LjEwLjAtMTgtYW1kNjQgLmNvbmZpZwptYWtlIG9sZGRl
-ZmNvbmZpZwoKc2NyaXB0cy9jb25maWcgLS1kaXNhYmxlIFNZU1RFTV9UUlVTVEVEX0tFWVJJTkcK
-c2NyaXB0cy9jb25maWcgLS1zZXQtc3RyIFNZU1RFTV9UUlVTVEVEX0tFWVMgJycKCiMgQnVpbGQg
-a2VybmVsCnRpbWUgbWFrZSAtaiA4IGRlYi1wa2cgTE9DQUxWRVJTSU9OPS12YW5pbGxhIEtERUJf
-UEtHVkVSU0lPTj0kKG1ha2Uga2VybmVsdmVyc2lvbiktJFNVQlZFUlNJT05fSU5ERVgKCmV4aXQg
-MAo=
---00000000000061ec3805e9eb6b35
-Content-Type: application/octet-stream; 
-	name="vanilla-kernel-build-5.10.145-patched"
-Content-Disposition: attachment; 
-	filename="vanilla-kernel-build-5.10.145-patched"
-Content-Transfer-Encoding: base64
-Content-ID: <f_l8oz7w5a1>
-X-Attachment-Id: f_l8oz7w5a1
-
-IyBEb3dubG9hZCBzb3VyY2UgY29kZQp3Z2V0IC1uYyBodHRwczovL2Nkbi5rZXJuZWwub3JnL3B1
-Yi9saW51eC9rZXJuZWwvdjUueC9saW51eC01LjEwLjE0NS50YXIueHoKdGFyIHhmIGxpbnV4LTUu
-MTAuMTQ1LnRhci54egoKIyBnZXQgcGF0Y2gKd2dldCBuYyAtTyBub3V2ZWF1LnBhdGNoIGh0dHBz
-Oi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJuZWwvZ2l0L3N0YWJsZS9saW51eC5n
-aXQvcGF0Y2gvP2lkPTM2NDBjZGNjYmU3NWI4OTIyZTViZmMwMTkxZGQzN2UzYWFhMjQ4MzMKCiMg
-QXV0b21hdGUgc3VidmVyc2lvbiBpbmRleApTVUJWRVJTSU9OX0lOREVYPSIxIgoKIyBEZWxldGUg
-ZnJvbSBwcmV2aW91cyBidWlsZHMKY2QgbGludXgtNS4xMC4xNDUKcm0gLXJmIC4vZGViaWFuCnJt
-IC1yZiAuLi9saW51eC5vcmlnLwpybSAtcmYgLi4vbGludXgtdXBzdHJlYW0qCgpjcCAvYm9vdC9j
-b25maWctNS4xMC4wLTE4LWFtZDY0IC5jb25maWcKbWFrZSBvbGRkZWZjb25maWcKCnNjcmlwdHMv
-Y29uZmlnIC0tZGlzYWJsZSBTWVNURU1fVFJVU1RFRF9LRVlSSU5HCnNjcmlwdHMvY29uZmlnIC0t
-c2V0LXN0ciBTWVNURU1fVFJVU1RFRF9LRVlTICcnCgojIEFwcGx5IHBhdGNoCnBhdGNoIC1wIDEg
-PCAuLi9ub3V2ZWF1LnBhdGNoIHx8IGV4aXQgMQoKIyBCdWlsZCBrZXJuZWwKdGltZSBtYWtlIC1q
-IDggZGViLXBrZyBMT0NBTFZFUlNJT049LXBhdGNoZWQgS0RFQl9QS0dWRVJTSU9OPSQobWFrZSBr
-ZXJuZWx2ZXJzaW9uKS0kU1VCVkVSU0lPTl9JTkRFWAoKZXhpdCAwCg==
---00000000000061ec3805e9eb6b35--
+Noralf.
