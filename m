@@ -2,45 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B78A5F946D
-	for <lists+nouveau@lfdr.de>; Mon, 10 Oct 2022 01:56:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22ACA5F9482
+	for <lists+nouveau@lfdr.de>; Mon, 10 Oct 2022 01:57:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3F29110E5D7;
-	Sun,  9 Oct 2022 23:56:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DA10C10E5EC;
+	Sun,  9 Oct 2022 23:57:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 68CBE10E5D8;
- Sun,  9 Oct 2022 23:56:11 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A018810E5EC;
+ Sun,  9 Oct 2022 23:57:14 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 1DF79B80DE2;
- Sun,  9 Oct 2022 23:56:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C1A59C433B5;
- Sun,  9 Oct 2022 23:56:07 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 2896B60DC7;
+ Sun,  9 Oct 2022 23:57:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7DE9DC433C1;
+ Sun,  9 Oct 2022 23:57:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1665359768;
- bh=+AaMpEEtbRsAd0445XliC1VO8cMNV1cNMNF7QtsWu+Y=;
+ s=k20201202; t=1665359833;
+ bh=0vd4xZ6Gi6rBTeetuM7DB7G4THSGHgYqtg00cEzXFEk=;
  h=From:To:Cc:Subject:Date:From;
- b=geDk/LcmP/PU1i85xStmOqWaEqcWeKeh/ry5HjqItxtmZhdIB8daZC878ja0PstfE
- dhGWFggVnkNJ66J8AA/dyPtlDD/FhIE3YJ5Jvowzh2n/r/HQZuKTy5o+yc3FF5TAnm
- 9b9wRr9z8ZFEVAVpz48xgL4jLpDzFZyVvLyrr/LNEMf1Jd4DlPFa9pG2kMV5XkvPGR
- F3QYL7cEcMx9y0hTOIJeNMJMoGntRa5pEdFGcI2LmVlyENtCrGTo76S9dLtxSVzkMf
- yo1rM+jMJrywvLnmfLh4rEn05vP3UXzLfptgeH0sXquCFV2KL+0ulSipzcaFpYblkt
- 0vvDDCnioFrVw==
+ b=IBN1Z/dFTVyOhd35I8DjJLBu2pp27XfEmHT+GGobPtfwNZy+vLyjP5XQ0oMcqwy1M
+ Ttj22UPVdbeqegtFWMpeLktRbZg+v1PjO+aKoOrcpOF9EiMk5Rux9R2u6OlR3++UjO
+ BDubuNUz9cdlruMbyvdbl6czTeUGhZKXizizoxAuj3/+HOcH+2kwR7DrO/slEV4xwH
+ lWBfqXzbUJfoIOh2FH3g9dJc44p1gf2SAn0xNzivtKBAntg6O80HrquK/iTRbQaRYP
+ Ys3QmqDmXRSkHx4jf2ltRsat4cZmcUiqczC4TzoaroeUmNjiQXkGxnBQvjJeYioELo
+ A8abNsrz2tnMQ==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sun,  9 Oct 2022 19:55:19 -0400
-Message-Id: <20221009235540.1231640-1-sashal@kernel.org>
+Date: Sun,  9 Oct 2022 19:56:57 -0400
+Message-Id: <20221009235710.1231937-1-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH AUTOSEL 5.10 01/22] drm/nouveau/nouveau_bo: fix
+Subject: [Nouveau] [PATCH AUTOSEL 5.4 01/14] drm/nouveau/nouveau_bo: fix
  potential memory leak in nouveau_bo_alloc()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -80,10 +79,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
-index b4946b595d86..b57dcad8865f 100644
+index f7603be569fc..9f9c70734180 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
 +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
-@@ -279,8 +279,10 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size, int *align, u32 domain,
+@@ -276,8 +276,10 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size, int *align, u32 flags,
  			break;
  	}
  
