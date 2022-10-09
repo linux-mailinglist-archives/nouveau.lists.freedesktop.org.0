@@ -2,45 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8F585F93CF
-	for <lists+nouveau@lfdr.de>; Mon, 10 Oct 2022 01:49:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA6B25F940F
+	for <lists+nouveau@lfdr.de>; Mon, 10 Oct 2022 01:52:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8E17210E1CE;
-	Sun,  9 Oct 2022 23:49:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 801E010E57F;
+	Sun,  9 Oct 2022 23:52:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EC3FC10E101;
- Sun,  9 Oct 2022 23:49:36 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 67DAF10E57A;
+ Sun,  9 Oct 2022 23:52:26 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 16FCE60C27;
- Sun,  9 Oct 2022 23:49:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 37FD0C433D6;
- Sun,  9 Oct 2022 23:49:34 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id E339060D2B;
+ Sun,  9 Oct 2022 23:52:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34F5EC433C1;
+ Sun,  9 Oct 2022 23:52:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1665359375;
+ s=k20201202; t=1665359545;
  bh=Pn90kuPbeK/qdV/mITnz331Ur07Ew6mzmpWUpHOoTiM=;
  h=From:To:Cc:Subject:Date:From;
- b=iqbkVpUBW4ChtfrNACIjriJwpHTJBgxN6AhpWbmKJLK6L822/hsQdSJCyVpsI51nv
- d5GtXsFmd4wdTi6C4uvU795+BryM6UaGpImvxt1yYLF5vYHApjFPb71sX6MaMytzKg
- jd7kGzjMj+ud7biKwf7MzC9j/nVRWaZObqZzL8m/JRAWSGgjIqERYjxTHfEf/7q9Kx
- E4+YFm7mfacryG7EzRT4+bGe63JfCk+ebj4os53KBnvSQDXu+efDIH9/i8+6XUOSiD
- BogCyQMHj3slQVdtQb5CoioNFYIKciqTIDVAOnAikDLIpXZ9yW3s73OianGvuiaA7R
- RYPE37i32rMog==
+ b=BufMkimt5imu4yieV8EFrTrkJ6Kvswbja9j6Cp1+PMp7KlvXUYcygKvuPmldi+Nas
+ f4hlah9v3iVNM3tIjH3V8Sm25WrTIbDNmYv55WG7vD3E0bOauITQTgX1DWSN9wRX2A
+ axvkKZQjGHvN+2uvKxIkuM859dHG7GFW3Qxzq1sJAqy48y5maz2AEXIVNmdfRULKG1
+ yn0HsuB/hKQnGOkPImQSZ1St747k6fqMUW5heoHdQ2tHIDnucjPmaYAY+kNfCE2o9I
+ hpMwxfC8JWjRkfNL0xQ5+VQxwSw2jK8qNzoJ0d7FrMgRpsWe5x8zr/01y3zOsP+VOh
+ UdiVSFUaW6rOQ==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sun,  9 Oct 2022 19:48:49 -0400
-Message-Id: <20221009234932.1230196-1-sashal@kernel.org>
+Date: Sun,  9 Oct 2022 19:51:47 -0400
+Message-Id: <20221009235222.1230786-1-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH AUTOSEL 6.0 01/44] drm/nouveau/nouveau_bo: fix
+Subject: [Nouveau] [PATCH AUTOSEL 5.19 01/36] drm/nouveau/nouveau_bo: fix
  potential memory leak in nouveau_bo_alloc()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
