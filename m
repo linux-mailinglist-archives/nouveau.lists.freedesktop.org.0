@@ -2,45 +2,88 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22ACA5F9482
-	for <lists+nouveau@lfdr.de>; Mon, 10 Oct 2022 01:57:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C2A15F9E64
+	for <lists+nouveau@lfdr.de>; Mon, 10 Oct 2022 14:10:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DA10C10E5EC;
-	Sun,  9 Oct 2022 23:57:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1131B10E4B2;
+	Mon, 10 Oct 2022 12:10:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A018810E5EC;
- Sun,  9 Oct 2022 23:57:14 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2896B60DC7;
- Sun,  9 Oct 2022 23:57:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7DE9DC433C1;
- Sun,  9 Oct 2022 23:57:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1665359833;
- bh=0vd4xZ6Gi6rBTeetuM7DB7G4THSGHgYqtg00cEzXFEk=;
- h=From:To:Cc:Subject:Date:From;
- b=IBN1Z/dFTVyOhd35I8DjJLBu2pp27XfEmHT+GGobPtfwNZy+vLyjP5XQ0oMcqwy1M
- Ttj22UPVdbeqegtFWMpeLktRbZg+v1PjO+aKoOrcpOF9EiMk5Rux9R2u6OlR3++UjO
- BDubuNUz9cdlruMbyvdbl6czTeUGhZKXizizoxAuj3/+HOcH+2kwR7DrO/slEV4xwH
- lWBfqXzbUJfoIOh2FH3g9dJc44p1gf2SAn0xNzivtKBAntg6O80HrquK/iTRbQaRYP
- Ys3QmqDmXRSkHx4jf2ltRsat4cZmcUiqczC4TzoaroeUmNjiQXkGxnBQvjJeYioELo
- A8abNsrz2tnMQ==
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Sun,  9 Oct 2022 19:56:57 -0400
-Message-Id: <20221009235710.1231937-1-sashal@kernel.org>
-X-Mailer: git-send-email 2.35.1
+Received: from wnew2-smtp.messagingengine.com (wnew2-smtp.messagingengine.com
+ [64.147.123.27])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C3A3110E4B2;
+ Mon, 10 Oct 2022 12:10:52 +0000 (UTC)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailnew.west.internal (Postfix) with ESMTP id 9AEDA2B067AA;
+ Mon, 10 Oct 2022 08:10:47 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute5.internal (MEProxy); Mon, 10 Oct 2022 08:10:52 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
+ :cc:content-transfer-encoding:content-type:date:date:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:sender:subject:subject:to:to; s=fm3; t=1665403847; x=
+ 1665411047; bh=h6MDYVkUrCUpK3ETe9fcuN2TM8Pd074coaFYvzfkf3s=; b=X
+ 8TTYRqTCQS2QJhsYN7GvvAJRh7lJ7Anah3pR2RReFaL/R+5luKeopHOSW0w6nJCC
+ wEDZF+lFROGCYFiFLWRbYuNAlFBotirqVeewpXjYbElZQ8E8k5KPJZDpxxL+8o7P
+ m14oe5QNJyBDCN2UhEX41FSQ14j2V2TLtp7O9cFS9aS7GuDs/ejSz3oo9Entho4t
+ gzrvbg4H8gRWrgpJLH0mg8UpA2HgJSvg5Wkf9tidJBKGGP8SFUy3Hzs1uHRVTjel
+ 2mgZhegx/CmyQOCuFz+Nw4kihKjUipqWx2JADrbKtx24XNa0J0gODEpgjc9r/9aX
+ xUe3E87GwsKevIT7iqzbw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:date:date:feedback-id:feedback-id:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1665403847; x=
+ 1665411047; bh=h6MDYVkUrCUpK3ETe9fcuN2TM8Pd074coaFYvzfkf3s=; b=H
+ PpyDxQ+0ZEygAo/SXVkKH7PGtx5TPR0HqlATUtyCUxdQdC3h8ctBbDzxmbHVjc+i
+ nRH3i5GtxCMz2a8oTcpUscBfrrTgP/Dj8pVAlyWSnGakoXRBAmC9Fg6nxGMH2g4a
+ wcw/ZS/oZyxaicAtMS5cohDJOr/37IIqrD1kdQg1kCPOgAkATaNedK/cJLfGDyXD
+ XgHzYdCZ+yAQxJi0zFRJP7+rvjQ290H1l9hzZoa9hCwtp3Q6cFCsanyQ1ItdC3OE
+ 9mBzpBTAxmOCOG5NoebuKEHAaNR9sJUnU6WS/m/VD9vOf3jbdy8vtlcddHawV1Yh
+ UK0qVaRdd2pRBHdt4bviA==
+X-ME-Sender: <xms:xQtEY9ZqrX6ifLo6Uh1Pyk-C6WQKbR6hgrOtvLDxIYYHLxR6cqee6A>
+ <xme:xQtEY0bdEBf3f3gAPzO4ZztjUZCBvdHAFBWPjOgj-vXHoNyowVTfwYGcMEai8OJkG
+ 7IVdpspdyTzVFMgRsM>
+X-ME-Received: <xmr:xQtEY_9y46DdXsGqz3rxNTqtSbPjzoj6tuBxt3QrbtWfwpnhxYvw1gJ-Ma3V>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeejgedggeefucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforgig
+ ihhmvgcutfhiphgrrhguuceomhgrgihimhgvsegtvghrnhhordhtvggthheqnecuggftrf
+ grthhtvghrnhepueeigefghfffffeifeehudeiuedvteegueefffevgfetvdffheehkeff
+ vedufeeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomh
+ epmhgrgihimhgvsegtvghrnhhordhtvggthh
+X-ME-Proxy: <xmx:xQtEY7p8IERGoTKuQJ72GS68rLEkGr8D_8-OhO9De8DfkXIa5vCB2w>
+ <xmx:xQtEY4r7n7X0UTKUO3laEFPGecThTwGQEAZFNiWKWRhvoTEhaQ-weg>
+ <xmx:xQtEYxSyOiGzUuzutWeAtvZioN4TcrsBGPdorJiYKgwBDqZl6fV0lQ>
+ <xmx:xwtEYwF-Dwf_OHKQz8Xh1M1zUNqYz1MchTlaPg-7bWhc07gzqysHGEKu99Q>
+Feedback-ID: i8771445c:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 10 Oct 2022 08:10:44 -0400 (EDT)
+From: Maxime Ripard <maxime@cerno.tech>
+To: Thomas Zimmermann <tzimmermann@suse.de>,
+ Samuel Holland <samuel@sholland.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Chen-Yu Tsai <wens@csie.org>, Daniel Vetter <daniel@ffwll.ch>,
+ David Airlie <airlied@linux.ie>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Emma Anholt <emma@anholt.net>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, Maxime Ripard <maxime@cerno.tech>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
+Date: Mon, 10 Oct 2022 14:10:36 +0200
+Message-Id: <166540374295.183315.10600855236256660249.b4-ty@cerno.tech>
+X-Mailer: git-send-email 2.37.3
+In-Reply-To: <20220728-rpi-analog-tv-properties-v4-2-60d38873f782@cerno.tech>
+References: <20220728-rpi-analog-tv-properties-v4-0-60d38873f782@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v4-2-60d38873f782@cerno.tech>
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH AUTOSEL 5.4 01/14] drm/nouveau/nouveau_bo: fix
- potential memory leak in nouveau_bo_alloc()
+Subject: Re: [Nouveau] (subset) [PATCH v4 02/30] drm/tests: Order Kunit
+ tests in Makefile
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,48 +95,26 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, daniel@ffwll.ch,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- bskeggs@redhat.com, Jianglei Nie <niejianglei2021@163.com>
+Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?q?Noralf=20Tr=EF=BF=BD=EF=BF=BDnnes?= <noralf@tronnes.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, linux-sunxi@lists.linux.dev,
+ Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Jianglei Nie <niejianglei2021@163.com>
+On Thu, 29 Sep 2022 18:30:56 +0200, Maxime Ripard wrote:
+> Since we've recently added a ton of tests, the list starts to be a bit
+> of a mess and creates unneeded conflicts.
+> 
+> Let's order it alphabetically.
+> 
+> 
 
-[ Upstream commit 6dc548745d5b5102e3c53dc5097296ac270b6c69 ]
+Applied to drm/drm-misc (drm-misc-next).
 
-nouveau_bo_alloc() allocates a memory chunk for "nvbo" with kzalloc().
-When some error occurs, "nvbo" should be released. But when
-WARN_ON(pi < 0)) equals true, the function return ERR_PTR without
-releasing the "nvbo", which will lead to a memory leak.
-
-We should release the "nvbo" with kfree() if WARN_ON(pi < 0)) equals true.
-
-Signed-off-by: Jianglei Nie <niejianglei2021@163.com>
-Signed-off-by: Lyude Paul <lyude@redhat.com>
-Reviewed-by: Lyude Paul <lyude@redhat.com>
-Link: https://patchwork.freedesktop.org/patch/msgid/20220705094306.2244103-1-niejianglei2021@163.com
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/gpu/drm/nouveau/nouveau_bo.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
-index f7603be569fc..9f9c70734180 100644
---- a/drivers/gpu/drm/nouveau/nouveau_bo.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
-@@ -276,8 +276,10 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size, int *align, u32 flags,
- 			break;
- 	}
- 
--	if (WARN_ON(pi < 0))
-+	if (WARN_ON(pi < 0)) {
-+		kfree(nvbo);
- 		return ERR_PTR(-EINVAL);
-+	}
- 
- 	/* Disable compression if suitable settings couldn't be found. */
- 	if (nvbo->comp && !vmm->page[pi].comp) {
--- 
-2.35.1
-
+Thanks!
+Maxime
