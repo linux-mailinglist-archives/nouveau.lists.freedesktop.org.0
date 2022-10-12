@@ -2,75 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9EDB15F9E82
-	for <lists+nouveau@lfdr.de>; Mon, 10 Oct 2022 14:12:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A66225FCE91
+	for <lists+nouveau@lfdr.de>; Thu, 13 Oct 2022 00:48:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A635810E701;
-	Mon, 10 Oct 2022 12:11:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 767BD10E1B4;
+	Wed, 12 Oct 2022 22:48:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wnew2-smtp.messagingengine.com (wnew2-smtp.messagingengine.com
- [64.147.123.27])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 89F3F10E144;
- Mon, 10 Oct 2022 12:11:44 +0000 (UTC)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailnew.west.internal (Postfix) with ESMTP id D0D1C2B05E7C;
- Mon, 10 Oct 2022 08:11:39 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute3.internal (MEProxy); Mon, 10 Oct 2022 08:11:43 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm3; t=1665403899; x=1665411099; bh=DyBqLlTati
- P71v0xssFNP/ZJW4ZM9ga+yL599aLXAGs=; b=JHBNpla2tKyffYFyXKYvT37Nb6
- n49ayggr3uMwlFYI6CsBtbAHTv60YvtehqJw2FvvfXI43IoEX2leHnUCwaw2pB/U
- G/t5XfYE5EKBZQFZd9dj51IDaED/UKOcRd4YlYpc9XK51K6H7B2N3Og1/bpHJ7J+
- VTrymxbhz7fmcMMo7gCS+CKKTYrv2J19G+T8fT+xlgf8UW31XMyQ2e13oQMGm3L8
- yvyzi3e7f9ZNY2z/m1MkgJCpu0lyPoMClopLWrx9LmH0hMfCwk+tzIXXR0RbdhCG
- iVyXkKwznsZyxeQcZjXgTiTb+zHmGvxDnQCaCoCr1taT9aX4PN6JSycmQ7rQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
- :feedback-id:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:sender:subject:subject:to:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm3; t=1665403899; x=1665411099; bh=DyBqLlTatiP71v0xssFNP/ZJW4ZM
- 9ga+yL599aLXAGs=; b=EWgIqPFfCd5tKKxSo/vFZa07QQpFj12IHOhsbZS4c1zo
- gjW9xV7rpWeuLyEUuFXrnKzZJVwHie0MZoThjH4RqEkA9Fx/eG113evRQMxZNNSs
- rrGX5HBbteM5HqefpX8SSd2yamYaJaN+ELhq9T/+UDtRTynkRowimbY1tJUmNziF
- 7SQ5VOhXYrzigolMvzludZXv69w8+HGBp1P1Jjf/N0lXljiE/Y1xAwyH7tkT9Osu
- Hr/2tBRtgPNbvDeZcWiFZLUCP+rst6BA6mi5KEtxBCwWzEF54vWKNIFc+SL9CxJg
- dK5ZHj4rKtvzJ19iL2uTUr0nEgLHH0tIjfHcFK4Bpg==
-X-ME-Sender: <xms:-wtEY5GMlkfAIihLh9XjV0WsIlOe72t7RcK6ya_j_w2dio0cPoc5nw>
- <xme:-wtEY-U7BlkWtIg2Q56h0CKvYoPINkbR8aztvjvZRkm_3CHePezmvBnxY7shPujou
- fmhs5z19RUT93ZaQf0>
-X-ME-Received: <xmr:-wtEY7KW80VsAHz3cs7kULZsIdCbpR4Etpx_g1pYM4tdjh__Y-0Zrc6v9plF>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeejgedggeegucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtudenucfhrhhomhepofgrgihi
- mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeejveefheefkeeiffegveelveetgffffeektdefuefhtedtgeejhefggedu
- ffffudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
- hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:-wtEY_GBFi9a_rc7g_YFxHOPZu_Oht3vx_VLNJqATdCxCwR1D_wcAg>
- <xmx:-wtEY_Wdw0lk3LNhtDK7NVoTu5MGxddipjj1aJWJ16EVtQPVmB_Wxw>
- <xmx:-wtEY6P79rzWTI3XcjQIsWH8Oe7LxU5NwRwsj1s6n0cNWMcUSXgCaA>
- <xmx:-wtEY21b_rE1izp8uZhxbuu2qR7COe-Hg2eXi8Zd-drs10b1u4HXOj9HkCA>
-Feedback-ID: i8771445c:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 10 Oct 2022 08:11:38 -0400 (EDT)
-Date: Mon, 10 Oct 2022 14:11:23 +0200
-From: Maxime Ripard <maxime@cerno.tech>
-To: Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
-Message-ID: <20221010121123.sn6rxj3iwubn5tkc@houat>
-References: <20220728-rpi-analog-tv-properties-v4-0-60d38873f782@cerno.tech>
- <0db1c833-eeee-cadd-b050-837d79a3d691@tronnes.org>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 472A310E149
+ for <nouveau@lists.freedesktop.org>; Wed, 12 Oct 2022 22:48:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1665614902;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=6cQbK112G3CBY1iPorRDqAdSJlO6cOwytKNZM4RSxzY=;
+ b=OaHGCLrABgbOCy7ugcQX1bTURhWCB6BGCd16dYjhg6i06vlUnbLYehm3QmRW+0hloS5Zux
+ ir2rYfaVPseFQGJKJztUxvlLMs7DzJRl9+ei8hFWft4MFyiMEWcbsOXBUn353stxEPpwkN
+ l+sDsxWprm0Nt8QlNsKgfL5+QD323kM=
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-193-QqP58IqnN_iQgNvRqysjpw-1; Wed, 12 Oct 2022 18:48:18 -0400
+X-MC-Unique: QqP58IqnN_iQgNvRqysjpw-1
+Received: by mail-qt1-f200.google.com with SMTP id
+ bz12-20020a05622a1e8c00b0039ae6e887ffso20557qtb.8
+ for <nouveau@lists.freedesktop.org>; Wed, 12 Oct 2022 15:48:18 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:user-agent:organization
+ :references:in-reply-to:date:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6cQbK112G3CBY1iPorRDqAdSJlO6cOwytKNZM4RSxzY=;
+ b=BXxatrytNVTgua3qZtR9Lzi1S29Vked5dHt3Z1kmGi4g+LhFmEPrh/J/aB7OVgwgZV
+ s4N1G0OOD6okR+HbkaWxAC4Aq/jQaT+CvQjMcfc4HvbuzlCnIkwJNiBnjn8C7J87OWJu
+ v/Qt75q18ibpnuPzlkIzR4kYFyNUFWaiaoaZZBo+gr4MT+d0VlAelK374axiki/CAmPQ
+ QQ8hxayZ4nf0ScxdtUmuO0Q3ve9iIenNd2MQoNyPhA/R1rpNoYlDh4J0v1XjyOeK3sd5
+ 6caqt06utPm4Kh1srUqNX2FTYlmXfP1FckvRYJAFVQMRxP+qLabK6G0/ZvWVJKPc6T2c
+ rrUA==
+X-Gm-Message-State: ACrzQf1iuT4/wzNwPOqsWrdJwJjKWHAonTvrLJcBU09jtcJzoJIg6PcL
+ 3Lq4zd4DC8+xq/s2FshHKox3g5rwUTl0BwnIPTwSqgJfzyplIQAfCfjKk4tjkZKhSklkN7AFujW
+ SO1Gk5hMloentx3nGNrNKtecjOA==
+X-Received: by 2002:a05:622a:1183:b0:39c:606d:1f7f with SMTP id
+ m3-20020a05622a118300b0039c606d1f7fmr8858882qtk.313.1665614897698; 
+ Wed, 12 Oct 2022 15:48:17 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM5tzPmYPKNIbVp3GJbjJyU2orb8Zq7NMYarr1l6JZruGvyaqWohInpYh6qO0ffWOFde1Yrniw==
+X-Received: by 2002:a05:622a:1183:b0:39c:606d:1f7f with SMTP id
+ m3-20020a05622a118300b0039c606d1f7fmr8858864qtk.313.1665614897486; 
+ Wed, 12 Oct 2022 15:48:17 -0700 (PDT)
+Received: from ?IPv6:2600:4040:5c68:4300:fdba:af4a:bbcd:7e28?
+ ([2600:4040:5c68:4300:fdba:af4a:bbcd:7e28])
+ by smtp.gmail.com with ESMTPSA id
+ x20-20020ac87014000000b0039cb9ef50b5sm3192209qtm.26.2022.10.12.15.48.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 12 Oct 2022 15:48:16 -0700 (PDT)
+Message-ID: <b52dbad5e3c2c5f19c605440de3e4e017e70a2ec.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: ruanjinjie <ruanjinjie@huawei.com>, bskeggs@redhat.com,
+ kherbst@redhat.com,  airlied@linux.ie, linux-kernel@vger.kernel.org,
+ daniel@ffwll.ch,  jani.nikula@intel.com, airlied@redhat.com,
+ tzimmermann@suse.de,  hverkuil-cisco@xs4all.nl, greenfoo@u92.eu,
+ seanpaul@chromium.org,  dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
+Date: Wed, 12 Oct 2022 18:48:15 -0400
+In-Reply-To: <20220924092516.10007-1-ruanjinjie@huawei.com>
+References: <20220924092516.10007-1-ruanjinjie@huawei.com>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dlolvdd7kvjkjbu5"
-Content-Disposition: inline
-In-Reply-To: <0db1c833-eeee-cadd-b050-837d79a3d691@tronnes.org>
-Subject: Re: [Nouveau] [PATCH v4 00/30] drm: Analog TV Improvements
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH -next] drm/nouveau/disp: fix cast removes
+ address space of expression warnings
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,130 +90,52 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Looks good to me (sorry for the slow response! I think this one just got lost
+in the noise). Will push to drm-misc-next in a moment
 
---dlolvdd7kvjkjbu5
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sat, 2022-09-24 at 17:25 +0800, ruanjinjie wrote:
+> When build Linux kernel with 'make C=2', encounter the following warnings:
+> 
+> ./drivers/gpu/drm/nouveau/dispnv50/disp.c:134:34: warning: cast removes address space '__iomem' of expression
+> ./drivers/gpu/drm/nouveau/dispnv50/disp.c:197:34: warning: cast removes address space '__iomem' of expression
+> 
+> The data type of dmac->_push.mem.object.map.ptr is 'void __iomem *', but
+> converted to 'u32 *' directly and cause above warnings, now
+> recover their data types to fix these warnings.
+> 
+> Signed-off-by: ruanjinjie <ruanjinjie@huawei.com>
+> ---
+>  drivers/gpu/drm/nouveau/dispnv50/disp.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> index 33c97d510999..aa94f8e284dd 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> @@ -131,7 +131,7 @@ nv50_dmac_kick(struct nvif_push *push)
+>  {
+>  	struct nv50_dmac *dmac = container_of(push, typeof(*dmac), _push);
+>  
+> -	dmac->cur = push->cur - (u32 *)dmac->_push.mem.object.map.ptr;
+> +	dmac->cur = push->cur - (u32 __iomem *)dmac->_push.mem.object.map.ptr;
+>  	if (dmac->put != dmac->cur) {
+>  		/* Push buffer fetches are not coherent with BAR1, we need to ensure
+>  		 * writes have been flushed right through to VRAM before writing PUT.
+> @@ -194,7 +194,7 @@ nv50_dmac_wait(struct nvif_push *push, u32 size)
+>  	if (WARN_ON(size > dmac->max))
+>  		return -EINVAL;
+>  
+> -	dmac->cur = push->cur - (u32 *)dmac->_push.mem.object.map.ptr;
+> +	dmac->cur = push->cur - (u32 __iomem *)dmac->_push.mem.object.map.ptr;
+>  	if (dmac->cur + size >= dmac->max) {
+>  		int ret = nv50_dmac_wind(dmac);
+>  		if (ret)
 
-On Sat, Oct 01, 2022 at 03:12:06PM +0200, Noralf Tr=F8nnes wrote:
->=20
->=20
-> Den 29.09.2022 18.30, skrev Maxime Ripard:
-> > Hi,
-> >=20
-> > Here's a series aiming at improving the command line named modes suppor=
-t,
-> > and more importantly how we deal with all the analog TV variants.
-> >=20
-> > The named modes support were initially introduced to allow to specify t=
-he
-> > analog TV mode to be used.
-> >=20
-> > However, this was causing multiple issues:
-> >=20
-> >   * The mode name parsed on the command line was passed directly to the
-> >     driver, which had to figure out which mode it was suppose to match;
-> >=20
-> >   * Figuring that out wasn't really easy, since the video=3D argument o=
-r what
-> >     the userspace might not even have a name in the first place, but
-> >     instead could have passed a mode with the same timings;
-> >=20
-> >   * The fallback to matching on the timings was mostly working as long =
-as
-> >     we were supporting one 525 lines (most likely NSTC) and one 625 lin=
-es
-> >     (PAL), but couldn't differentiate between two modes with the same
-> >     timings (NTSC vs PAL-M vs NSTC-J for example);
-> >=20
-> >   * There was also some overlap with the tv mode property registered by
-> >     drm_mode_create_tv_properties(), but named modes weren't interacting
-> >     with that property at all.
-> >=20
-> >   * Even though that property was generic, its possible values were
-> >     specific to each drivers, which made some generic support difficult.
-> >=20
-> > Thus, I chose to tackle in multiple steps:
-> >=20
-> >   * A new TV mode property was introduced, with generic values, each dr=
-iver
-> >     reporting through a bitmask what standard it supports to the usersp=
-ace;
-> >=20
-> >   * This option was added to the command line parsing code to be able to
-> >     specify it on the kernel command line, and new atomic_check and res=
-et
-> >     helpers were created to integrate properly into atomic KMS;
-> >=20
-> >   * The named mode parsing code is now creating a proper display mode f=
-or
-> >     the given named mode, and the TV standard will thus be part of the
-> >     connector state;
-> >=20
-> >   * Two drivers were converted and tested for now (vc4 and sun4i), with
-> >     some backward compatibility code to translate the old TV mode to the
-> >     new TV mode;
-> >=20
-> > Unit tests were created along the way.
-> >=20
-> > One can switch from NTSC to PAL now using (on vc4)
-> >=20
-> > modetest -M vc4  -s 53:720x480i -w 53:'TV mode':1 # NTSC
-> > modetest -M vc4  -s 53:720x576i -w 53:'TV mode':4 # PAL
-> >=20
-> > Let me know what you think,
-> > Maxime
-> >=20
->=20
-> I suggest that you apply the patches that are reviewed, have merrit on
-> their own and are not tied to the TV mode property.
-> This will help in keeping this rather big patchset focused and ease the
-> task for reviewers.
->=20
-> The following seems to be in that group:
->=20
->   drm/tests: Order Kunit tests in Makefile
->   drm/atomic-helper: Rename drm_atomic_helper_connector_tv_reset to
-> avoid ambiguity
->   drm/connector: Rename subconnector state variable
->   drm/atomic: Add TV subconnector property to get/set_property
->   drm/modes: Only consider bpp and refresh before options
->   drm/modes: parse_cmdline: Add support for named modes containing dashes
->   drm/vc4: vec: Fix definition of PAL-M mode
+-- 
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
-Yeah, that was my intention with this series, it's done now, thanks for the=
- reminder :)
-
-Maxime
-
---dlolvdd7kvjkjbu5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCY0QL6wAKCRDj7w1vZxhR
-xRDnAQCxLDoVhFPZlORYkrlxoTezGu1S3AQmL4/t11gdtxozgQD/WRdupXy8iNif
-MB/QIxtk3f/Wt+CP26Ii1CnsJaRGqA0=
-=1Yvq
------END PGP SIGNATURE-----
-
---dlolvdd7kvjkjbu5--
