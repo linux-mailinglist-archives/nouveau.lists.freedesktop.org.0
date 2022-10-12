@@ -2,64 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A66225FCE91
-	for <lists+nouveau@lfdr.de>; Thu, 13 Oct 2022 00:48:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DBA85FCE92
+	for <lists+nouveau@lfdr.de>; Thu, 13 Oct 2022 00:48:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 767BD10E1B4;
-	Wed, 12 Oct 2022 22:48:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5F48710E1CC;
+	Wed, 12 Oct 2022 22:48:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 472A310E149
- for <nouveau@lists.freedesktop.org>; Wed, 12 Oct 2022 22:48:23 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B255510E1CC
+ for <nouveau@lists.freedesktop.org>; Wed, 12 Oct 2022 22:48:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1665614902;
+ s=mimecast20190719; t=1665614930;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6cQbK112G3CBY1iPorRDqAdSJlO6cOwytKNZM4RSxzY=;
- b=OaHGCLrABgbOCy7ugcQX1bTURhWCB6BGCd16dYjhg6i06vlUnbLYehm3QmRW+0hloS5Zux
- ir2rYfaVPseFQGJKJztUxvlLMs7DzJRl9+ei8hFWft4MFyiMEWcbsOXBUn353stxEPpwkN
- l+sDsxWprm0Nt8QlNsKgfL5+QD323kM=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=p5nfuKdPwrQVXi/vnKW1FCyCONTVZtF3Xa0tpdwXNtg=;
+ b=ULnhQPMbjGKdhY5cpzHTtTKonC9hIAcph92D1mAMTgB2PlepfWFbeJPxDqkioRYu4eJM5e
+ bgh9dHdRozEGJgEdvbCWEk/osyXZVf7XKZJU1Job4fNP7yhfIQXkSFcuKavmDSsxnlf9s7
+ 7m8XxYUCfKVrvu7FLFxhY5o65mJRh8Q=
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-193-QqP58IqnN_iQgNvRqysjpw-1; Wed, 12 Oct 2022 18:48:18 -0400
-X-MC-Unique: QqP58IqnN_iQgNvRqysjpw-1
-Received: by mail-qt1-f200.google.com with SMTP id
- bz12-20020a05622a1e8c00b0039ae6e887ffso20557qtb.8
- for <nouveau@lists.freedesktop.org>; Wed, 12 Oct 2022 15:48:18 -0700 (PDT)
+ us-mta-453-A21vjRg2O36sRUIHNkOzsA-1; Wed, 12 Oct 2022 18:48:48 -0400
+X-MC-Unique: A21vjRg2O36sRUIHNkOzsA-1
+Received: by mail-qv1-f70.google.com with SMTP id
+ q20-20020ad44354000000b004afb5a0d33cso208164qvs.12
+ for <nouveau@lists.freedesktop.org>; Wed, 12 Oct 2022 15:48:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:user-agent:organization
  :references:in-reply-to:date:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6cQbK112G3CBY1iPorRDqAdSJlO6cOwytKNZM4RSxzY=;
- b=BXxatrytNVTgua3qZtR9Lzi1S29Vked5dHt3Z1kmGi4g+LhFmEPrh/J/aB7OVgwgZV
- s4N1G0OOD6okR+HbkaWxAC4Aq/jQaT+CvQjMcfc4HvbuzlCnIkwJNiBnjn8C7J87OWJu
- v/Qt75q18ibpnuPzlkIzR4kYFyNUFWaiaoaZZBo+gr4MT+d0VlAelK374axiki/CAmPQ
- QQ8hxayZ4nf0ScxdtUmuO0Q3ve9iIenNd2MQoNyPhA/R1rpNoYlDh4J0v1XjyOeK3sd5
- 6caqt06utPm4Kh1srUqNX2FTYlmXfP1FckvRYJAFVQMRxP+qLabK6G0/ZvWVJKPc6T2c
- rrUA==
-X-Gm-Message-State: ACrzQf1iuT4/wzNwPOqsWrdJwJjKWHAonTvrLJcBU09jtcJzoJIg6PcL
- 3Lq4zd4DC8+xq/s2FshHKox3g5rwUTl0BwnIPTwSqgJfzyplIQAfCfjKk4tjkZKhSklkN7AFujW
- SO1Gk5hMloentx3nGNrNKtecjOA==
-X-Received: by 2002:a05:622a:1183:b0:39c:606d:1f7f with SMTP id
- m3-20020a05622a118300b0039c606d1f7fmr8858882qtk.313.1665614897698; 
- Wed, 12 Oct 2022 15:48:17 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM5tzPmYPKNIbVp3GJbjJyU2orb8Zq7NMYarr1l6JZruGvyaqWohInpYh6qO0ffWOFde1Yrniw==
-X-Received: by 2002:a05:622a:1183:b0:39c:606d:1f7f with SMTP id
- m3-20020a05622a118300b0039c606d1f7fmr8858864qtk.313.1665614897486; 
- Wed, 12 Oct 2022 15:48:17 -0700 (PDT)
+ bh=p5nfuKdPwrQVXi/vnKW1FCyCONTVZtF3Xa0tpdwXNtg=;
+ b=oHbucpCgdPb2DF3yoIbDTpdPIKzu6Op1U/+Y+wZnkEkdEkARs6MDayw2e1B0ALLTk1
+ xo2B6DKg4hR6XG+4J75+KLeSQUUI6QJF2UKgwQSJBA+7tuNaMaAGDrCE35GmvuWpJ07c
+ WosH31KytYZL2kPgZZigz78YfONekxDWCzeVWC7y8E1q4XS0cLGngsgyuGv3BaWauHZh
+ C0N/ts20//GETyGZDKp+8Ph/0JhVffJt6DQY1FOnhrh7RwfWZOzOKLMVLXaPp8tDIQ3M
+ Qg7DG0XvYnPVuBoKHGOg9P3vm0nNxokM0MeAnBtJuSmviPNk8wYonuseP/XAhXhfhJDk
+ o8lg==
+X-Gm-Message-State: ACrzQf2Lv13GZCx2unoeBr3Yi055qEv/ow/NNENsYkWwSUU7rjJhlfVA
+ FCUn+GOZmDm4fy8kT+eMsA/NK7Ue8CHO86KFXJBRbmR/BZ4QffpiG3XD/MzX/KAOd29iOXyiBdx
+ 8CB+lxxTfEpnDlasM22n+1LDe/g==
+X-Received: by 2002:a05:620a:27d2:b0:6cf:b644:f644 with SMTP id
+ i18-20020a05620a27d200b006cfb644f644mr22536277qkp.35.1665614928475; 
+ Wed, 12 Oct 2022 15:48:48 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM72AflosodYNtr/quj11dfW8xw1ovGZzl7sA9B7tx1ZGymI0DOPi1vu4e2bPcM1ZP1Q5MC8dg==
+X-Received: by 2002:a05:620a:27d2:b0:6cf:b644:f644 with SMTP id
+ i18-20020a05620a27d200b006cfb644f644mr22536261qkp.35.1665614928240; 
+ Wed, 12 Oct 2022 15:48:48 -0700 (PDT)
 Received: from ?IPv6:2600:4040:5c68:4300:fdba:af4a:bbcd:7e28?
  ([2600:4040:5c68:4300:fdba:af4a:bbcd:7e28])
  by smtp.gmail.com with ESMTPSA id
- x20-20020ac87014000000b0039cb9ef50b5sm3192209qtm.26.2022.10.12.15.48.16
+ l10-20020ac8148a000000b0039cc47752casm1669626qtj.77.2022.10.12.15.48.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Oct 2022 15:48:16 -0700 (PDT)
-Message-ID: <b52dbad5e3c2c5f19c605440de3e4e017e70a2ec.camel@redhat.com>
+ Wed, 12 Oct 2022 15:48:47 -0700 (PDT)
+Message-ID: <9c36a93654c5aa9c850cd5d42681aa951df9e769.camel@redhat.com>
 From: Lyude Paul <lyude@redhat.com>
 To: ruanjinjie <ruanjinjie@huawei.com>, bskeggs@redhat.com,
  kherbst@redhat.com,  airlied@linux.ie, linux-kernel@vger.kernel.org,
@@ -67,7 +67,7 @@ To: ruanjinjie <ruanjinjie@huawei.com>, bskeggs@redhat.com,
  tzimmermann@suse.de,  hverkuil-cisco@xs4all.nl, greenfoo@u92.eu,
  seanpaul@chromium.org,  dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
-Date: Wed, 12 Oct 2022 18:48:15 -0400
+Date: Wed, 12 Oct 2022 18:48:46 -0400
 In-Reply-To: <20220924092516.10007-1-ruanjinjie@huawei.com>
 References: <20220924092516.10007-1-ruanjinjie@huawei.com>
 Organization: Red Hat Inc.
@@ -93,8 +93,10 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Looks good to me (sorry for the slow response! I think this one just got lost
-in the noise). Will push to drm-misc-next in a moment
+...oops, totally forgot to actually give you the magic tag so patchwork knows
+I reviewed it:
+
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
 On Sat, 2022-09-24 at 17:25 +0800, ruanjinjie wrote:
 > When build Linux kernel with 'make C=2', encounter the following warnings:
