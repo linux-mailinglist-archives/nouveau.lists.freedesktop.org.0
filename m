@@ -2,17 +2,17 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2D385FFABD
-	for <lists+nouveau@lfdr.de>; Sat, 15 Oct 2022 17:07:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88FB55FFB54
+	for <lists+nouveau@lfdr.de>; Sat, 15 Oct 2022 18:58:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 604C210E4E7;
-	Sat, 15 Oct 2022 15:07:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8B0B210E118;
+	Sat, 15 Oct 2022 16:58:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp.domeneshop.no (smtp.domeneshop.no
  [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3D49C10E4DB;
- Sat, 15 Oct 2022 15:06:53 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5268E10E118;
+ Sat, 15 Oct 2022 16:58:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  ; s=ds202112;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
@@ -20,19 +20,19 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=77Lg64p8/R9tZGnndPHn4KfYVzEjBmwCzK3REgaXQZg=; b=WdSHCzhebt6a0zY62k6qLC7maU
- y32Bsd5HeiRDzxYhM4aO3D20oVR3eyk6uPZUUuvR4ktUUodELPeLuQCXC1jANhIdAha0TGvIhTDkm
- SiWTSroNGWy+f1AbcD537ZagDXn02umkC0F2OEHDE5kjFhmm3m+j0Ep17pjG2ha7xsIof2yHv5aA2
- hJEUeoxHfaT0vGQEpZDOlRMqyCQEKm5z600AfoRg6+a1YRPADp4/tk3Pz+vMMBgZ0nSVbPjMosIrY
- qHOLLS8bAYY1G73LAlmjToAX9lZ09pU4pS9vEeFwYn4Yj+PLccK4zZgBEFANtS53qZtq+sEDln8fE
- Tob5zQTg==;
-Received: from 211.81-166-168.customer.lyse.net ([81.166.168.211]:65061
+ bh=gRy1MHYPV0WjU4nMQ/DZ5j9qWrakSMjHmkC1JCQLKKk=; b=G9nlUqcHHVoUyqjchI57Tgoe/d
+ m0lGjU3ZwAjc3YFmnUb6DEBU1fUKAWLFOBaxCcQJhLYc02d8hfd7deQYYai/8RdQK8jEt9nxd6oSI
+ d57mdNzMsoRDprp6M2gwI4UKaHZXKKU2b4ZGt2Q5p4kdC6V9xEiC0TKUy0MuPdTGI3nMaMR1fkDRj
+ 0YPw6ta/NXrolu/c5x9cb4ETDRdQY67UfzMdwdetJCo8ou3OqZX6EpjIHn1UioQaztW25/wG92ADt
+ jP05MU+8u9yN1bmPdqx1lgpm0jS8dOMGJanP0dXqafqWGPQGWtQ0ABLTwpdQcaMusFHsoEqyf5A/B
+ qJcVU25A==;
+Received: from 211.81-166-168.customer.lyse.net ([81.166.168.211]:62527
  helo=[192.168.10.61])
  by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1ojikU-0000is-0q; Sat, 15 Oct 2022 17:06:50 +0200
-Message-ID: <c6a8cac1-c566-af3c-d274-35195964f980@tronnes.org>
-Date: Sat, 15 Oct 2022 17:06:45 +0200
+ id 1ojkUb-0004Ts-Bm; Sat, 15 Oct 2022 18:58:33 +0200
+Message-ID: <61813964-8f3e-87b0-4124-4566a7f9c86e@tronnes.org>
+Date: Sat, 15 Oct 2022 18:58:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.3
@@ -50,12 +50,13 @@ To: Maxime Ripard <maxime@cerno.tech>, Karol Herbst <kherbst@redhat.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Jernej Skrabec <jernej.skrabec@gmail.com>
 References: <20220728-rpi-analog-tv-properties-v5-0-d841cc64fe4b@cerno.tech>
- <20220728-rpi-analog-tv-properties-v5-1-d841cc64fe4b@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v5-7-d841cc64fe4b@cerno.tech>
 From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v5-1-d841cc64fe4b@cerno.tech>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v5-7-d841cc64fe4b@cerno.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v5 01/22] drm/tests: Add Kunit Helpers
+Subject: Re: [Nouveau] [PATCH v5 07/22] drm/client: Add some tests for
+ drm_connector_pick_cmdline_mode()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,15 +82,44 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
 Den 13.10.2022 15.18, skrev Maxime Ripard:
-> As the number of kunit tests in KMS grows further, we start to have
-> multiple test suites that, for example, need to register a mock DRM
-> driver to interact with the KMS function they are supposed to test.
+> drm_connector_pick_cmdline_mode() is in charge of finding a proper
+> drm_display_mode from the definition we got in the video= command line
+> argument.
 > 
-> Let's add a file meant to provide those kind of helpers to avoid
-> duplication.
+> Let's add some unit tests to make sure we're not getting any regressions
+> there.
 > 
 > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 > 
 > ---
+> Changes in v5:
+> - Removed useless (for now) count and modes intermediate variables in
+>   get_modes
+> - Switched to kunit assertions in test init, and to KUNIT_ASSERT_NOT_NULL
+>   instead of KUNIT_ASSERT_PTR_NE(..., NULL)
+> 
+> Changes in v4:
+> - Removed MODULE macros
+> ---
+>  drivers/gpu/drm/drm_client_modeset.c            |  4 +
+>  drivers/gpu/drm/tests/drm_client_modeset_test.c | 99 +++++++++++++++++++++++++
+>  2 files changed, 103 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/drm_client_modeset.c b/drivers/gpu/drm/drm_client_modeset.c
+> index bbc535cc50dd..d553e793e673 100644
+> --- a/drivers/gpu/drm/drm_client_modeset.c
+> +++ b/drivers/gpu/drm/drm_client_modeset.c
+> @@ -1237,3 +1237,7 @@ int drm_client_modeset_dpms(struct drm_client_dev *client, int mode)
+>  	return ret;
+>  }
+>  EXPORT_SYMBOL(drm_client_modeset_dpms);
+> +
+> +#ifdef CONFIG_DRM_KUNIT_TEST
+> +#include "tests/drm_client_modeset_test.c"
+> +#endif
 
-Reviewed-by: Noralf Trønnes <noralf@tronnes.org>
+I can't say I like including the file like this, but exporting the
+static function for testing isn't attractive either and doing it like
+this is shown in the kunit docs, so:
+
+Acked-by: Noralf Trønnes <noralf@tronnes.org>
