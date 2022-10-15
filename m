@@ -2,17 +2,17 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44F465FFAB4
-	for <lists+nouveau@lfdr.de>; Sat, 15 Oct 2022 17:05:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2D385FFABD
+	for <lists+nouveau@lfdr.de>; Sat, 15 Oct 2022 17:07:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B5B6710E4F6;
-	Sat, 15 Oct 2022 15:05:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 604C210E4E7;
+	Sat, 15 Oct 2022 15:07:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp.domeneshop.no (smtp.domeneshop.no
  [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DC5CE10E252;
- Sat, 15 Oct 2022 15:05:02 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3D49C10E4DB;
+ Sat, 15 Oct 2022 15:06:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  ; s=ds202112;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
@@ -20,33 +20,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=P7pRTxq7KYO3k44s3qhhCAVY4oTb2mw2IirE3FSx1ng=; b=GxgJFEJBFZcqMt7jvrGYCAAGvx
- DhywpEK9lBqlpQmTL4JiLK3wR0cIB5uIM7Vt45U6b7uvvqRM17u4wpNFNJ+6HWbBXQB2B8bPvXXcc
- SF6kMCb+eFJkntalEPfxQRkTmvEAT5YSt+VnrxWIv835yQ0c5WBfTxfdeZW3tPWyZRRGZJQj7T8m0
- Nwjnxm9d/Kec3pBZRybCzuqaSZT7YWXxBDldAQ0+bMLTxvqNh/nPKfl9IKbpdXGAnTgVbO6w4Iei4
- xE654Ew2Owk/VskBBICvPXnHWLrbN62n6D61UnEqU0XnG0aVsZ7niE1H3xvX8rAikZ5owhybXqkb3
- 8dPL05TQ==;
-Received: from 211.81-166-168.customer.lyse.net ([81.166.168.211]:64825
+ bh=77Lg64p8/R9tZGnndPHn4KfYVzEjBmwCzK3REgaXQZg=; b=WdSHCzhebt6a0zY62k6qLC7maU
+ y32Bsd5HeiRDzxYhM4aO3D20oVR3eyk6uPZUUuvR4ktUUodELPeLuQCXC1jANhIdAha0TGvIhTDkm
+ SiWTSroNGWy+f1AbcD537ZagDXn02umkC0F2OEHDE5kjFhmm3m+j0Ep17pjG2ha7xsIof2yHv5aA2
+ hJEUeoxHfaT0vGQEpZDOlRMqyCQEKm5z600AfoRg6+a1YRPADp4/tk3Pz+vMMBgZ0nSVbPjMosIrY
+ qHOLLS8bAYY1G73LAlmjToAX9lZ09pU4pS9vEeFwYn4Yj+PLccK4zZgBEFANtS53qZtq+sEDln8fE
+ Tob5zQTg==;
+Received: from 211.81-166-168.customer.lyse.net ([81.166.168.211]:65061
  helo=[192.168.10.61])
  by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1ojiih-0008O3-ML; Sat, 15 Oct 2022 17:04:59 +0200
-Message-ID: <71e53906-ae9b-55b9-7a93-7bb04a891423@tronnes.org>
-Date: Sat, 15 Oct 2022 17:04:50 +0200
+ id 1ojikU-0000is-0q; Sat, 15 Oct 2022 17:06:50 +0200
+Message-ID: <c6a8cac1-c566-af3c-d274-35195964f980@tronnes.org>
+Date: Sat, 15 Oct 2022 17:06:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.3
-To: Maxime Ripard <maxime@cerno.tech>
-References: <20220728-rpi-analog-tv-properties-v4-0-60d38873f782@cerno.tech>
- <20220728-rpi-analog-tv-properties-v4-11-60d38873f782@cerno.tech>
- <0aa690b8-988a-878f-4d4f-d391295bc591@tronnes.org>
- <20221013083638.kloiaxervnhii7ew@houat>
+To: Maxime Ripard <maxime@cerno.tech>, Karol Herbst <kherbst@redhat.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ David Airlie <airlied@linux.ie>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Lyude Paul <lyude@redhat.com>, Maxime Ripard <mripard@kernel.org>,
+ Emma Anholt <emma@anholt.net>, Chen-Yu Tsai <wens@csie.org>,
+ Samuel Holland <samuel@sholland.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>
+References: <20220728-rpi-analog-tv-properties-v5-0-d841cc64fe4b@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v5-1-d841cc64fe4b@cerno.tech>
 From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20221013083638.kloiaxervnhii7ew@houat>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v5-1-d841cc64fe4b@cerno.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v4 11/30] drm/modes: Add a function to
- generate analog display modes
+Subject: Re: [Nouveau] [PATCH v5 01/22] drm/tests: Add Kunit Helpers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,78 +67,29 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
+Cc: Dom Cobley <dom@raspberrypi.com>, Phil Elwell <phil@raspberrypi.com>,
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, linux-sunxi@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
 
-Den 13.10.2022 10.36, skrev Maxime Ripard:
-> Hi Noralf,
+Den 13.10.2022 15.18, skrev Maxime Ripard:
+> As the number of kunit tests in KMS grows further, we start to have
+> multiple test suites that, for example, need to register a mock DRM
+> driver to interact with the KMS function they are supposed to test.
 > 
-> On Sat, Oct 01, 2022 at 02:52:06PM +0200, Noralf Trønnes wrote:
->> Den 29.09.2022 18.31, skrev Maxime Ripard:
->>> Multiple drivers (meson, vc4, sun4i) define analog TV 525-lines and
->>> 625-lines modes in their drivers.
->>>
->>> Since those modes are fairly standard, and that we'll need to use them
->>> in more places in the future, it makes sense to move their definition
->>> into the core framework.
->>>
->>> However, analog display usually have fairly loose timings requirements,
->>> the only discrete parameters being the total number of lines and pixel
->>> clock frequency. Thus, we created a function that will create a display
->>> mode from the standard, the pixel frequency and the active area.
->>>
->>> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
->>>
->>> ---
->>>
->>> Changes in v4:
->>> - Reworded the line length check comment
->>> - Switch to HZ_PER_KHZ in tests
->>> - Use previous timing to fill our mode
->>> - Move the number of lines check earlier
->>> ---
->>>  drivers/gpu/drm/drm_modes.c            | 474 +++++++++++++++++++++++++++++++++
->>>  drivers/gpu/drm/tests/Makefile         |   1 +
->>>  drivers/gpu/drm/tests/drm_modes_test.c | 144 ++++++++++
->>>  include/drm/drm_modes.h                |  17 ++
->>>  4 files changed, 636 insertions(+)
->>>
->>
->> I haven't followed the discussion on this patch, but it seems rather
->> excessive to add over 600 lines of code (including tests) to add 2 fixed
->> modes. And it's very difficult to see from the code what the actual
->> display mode timings really are, which would be useful for other
->> developers down the road wanting to use them.
->>
->> Why not just hardcode the modes?
+> Let's add a file meant to provide those kind of helpers to avoid
+> duplication.
 > 
-> Yeah, I have kind of the same feeling tbh, but it was asked back on the
-> v1 to ease the transition of old fbdev drivers, since they will need
-> such a function:
-> https://lore.kernel.org/dri-devel/CAMuHMdUrwzPYjA0wdR7ADj5Ov6+m03JbnY8fBYzRYyWDuNm5=g@mail.gmail.com/
+> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 > 
+> ---
 
-If that's the case I suggest you just hardcode them for now and leave
-the complexity to the developer doing the actual conversion of the fbdev
-driver. Who knows when that will happen, but that person will have your
-well documented and discussed work to fall back on.
-
-Noralf.
+Reviewed-by: Noralf Trønnes <noralf@tronnes.org>
