@@ -1,66 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D131D5FF94B
-	for <lists+nouveau@lfdr.de>; Sat, 15 Oct 2022 10:59:43 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 44F465FFAB4
+	for <lists+nouveau@lfdr.de>; Sat, 15 Oct 2022 17:05:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8197510E18D;
-	Sat, 15 Oct 2022 08:59:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B5B6710E4F6;
+	Sat, 15 Oct 2022 15:05:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 68ED310E038;
- Sat, 15 Oct 2022 08:59:18 +0000 (UTC)
-Received: by mail-wr1-x42e.google.com with SMTP id j16so10899313wrh.5;
- Sat, 15 Oct 2022 01:59:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VjSRqmWkaFZ0BLuD6MivrAvypkKqaIT8x6LKQIsQKn8=;
- b=gdcg6hXz5wuVSv/KtfFI848qYS7t9NYjUI618ptxzzIpxaqmveySS5BR9QIVwZQznb
- xBp1LMARjJsFgTsfoQXSKdlgOksIgUDgK5K2AKQXk0cNXfVB1iXroI7ut/cD9tGOsURQ
- jm8KdDG1cgj3F2tXB8fsFhaB4Dgqa4STOi2smUvQX0W6V5JuU1fb2T0Jx1olayaXMioH
- qUVlRlUtYIZYW47agdnyqxBUbpxtv8QqHmVCx5PtIwbbxpRu//fPm+9YkMHbweUr6hyr
- GIo4cI3kV/QaK6qCRbfx4UQzBvTvJNtzUUilSXr8/BKEVqoYVnzl8JMOwJPISK3D8rO8
- AGPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VjSRqmWkaFZ0BLuD6MivrAvypkKqaIT8x6LKQIsQKn8=;
- b=uHVDQFEoB8hXmudDp7vw44LWVDJu5EC5YLvrU1KmTuzhkLl8/7yYtGiJrOzaMECDb9
- KfwqVI47+idwao0FOjDSTSLNdki8MHc6LcAYlGISeBa6HT10GuQETgqzY9V6tniytudD
- vref3b7L9rYu6xFhDEMpugCMpTUQwgO/G12TgYZgAOQPeR8mPnm0ZEAQj+D4TRiire8W
- CYiDxYuwbq6UjOhMvNc9ELNLe/yYo91MkqxKzidvxd/tF0jq4wJs/MfMv+HsFOcYrECh
- ANVoYpxVNE7sn8u9OqWDubksWGaXuewiqV8UQody2WXSGGuriE1ycILem5yYxB6+p0bP
- H1+w==
-X-Gm-Message-State: ACrzQf3E9BMGvZPctRr9LAjWGxJXFcAf5DFgmhpAjBgn2ygi56PlX72P
- IFodmWAofbJwxYBkjXjBCLo=
-X-Google-Smtp-Source: AMsMyM6RC+ab/6o3qXAuzwTkjLJWhUo2MRVgXF2cNlp5Etq5q5a0yKzX7Not8qtetRts0yGJHJyAJg==
-X-Received: by 2002:adf:fb0e:0:b0:21a:34a2:5ca9 with SMTP id
- c14-20020adffb0e000000b0021a34a25ca9mr985742wrr.472.1665824356510; 
- Sat, 15 Oct 2022 01:59:16 -0700 (PDT)
-Received: from kista.localnet (82-149-19-102.dynamic.telemach.net.
- [82.149.19.102]) by smtp.gmail.com with ESMTPSA id
- k13-20020adff5cd000000b0022e36c1113fsm3693723wrp.13.2022.10.15.01.59.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Oct 2022 01:59:15 -0700 (PDT)
-From: Jernej =?utf-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: Maxime Ripard <maxime@cerno.tech>
-Date: Sat, 15 Oct 2022 10:59:14 +0200
-Message-ID: <2649653.mvXUDI8C0e@kista>
-In-Reply-To: <20221014073810.akfoyfzxerywnt65@houat>
-References: <20220728-rpi-analog-tv-properties-v5-0-d841cc64fe4b@cerno.tech>
- <6482539.4vTCxPXJkl@kista> <20221014073810.akfoyfzxerywnt65@houat>
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DC5CE10E252;
+ Sat, 15 Oct 2022 15:05:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=P7pRTxq7KYO3k44s3qhhCAVY4oTb2mw2IirE3FSx1ng=; b=GxgJFEJBFZcqMt7jvrGYCAAGvx
+ DhywpEK9lBqlpQmTL4JiLK3wR0cIB5uIM7Vt45U6b7uvvqRM17u4wpNFNJ+6HWbBXQB2B8bPvXXcc
+ SF6kMCb+eFJkntalEPfxQRkTmvEAT5YSt+VnrxWIv835yQ0c5WBfTxfdeZW3tPWyZRRGZJQj7T8m0
+ Nwjnxm9d/Kec3pBZRybCzuqaSZT7YWXxBDldAQ0+bMLTxvqNh/nPKfl9IKbpdXGAnTgVbO6w4Iei4
+ xE654Ew2Owk/VskBBICvPXnHWLrbN62n6D61UnEqU0XnG0aVsZ7niE1H3xvX8rAikZ5owhybXqkb3
+ 8dPL05TQ==;
+Received: from 211.81-166-168.customer.lyse.net ([81.166.168.211]:64825
+ helo=[192.168.10.61])
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1ojiih-0008O3-ML; Sat, 15 Oct 2022 17:04:59 +0200
+Message-ID: <71e53906-ae9b-55b9-7a93-7bb04a891423@tronnes.org>
+Date: Sat, 15 Oct 2022 17:04:50 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH v5 22/22] drm/sun4i: tv: Convert to the new TV
- mode property
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.3
+To: Maxime Ripard <maxime@cerno.tech>
+References: <20220728-rpi-analog-tv-properties-v4-0-60d38873f782@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v4-11-60d38873f782@cerno.tech>
+ <0aa690b8-988a-878f-4d4f-d391295bc591@tronnes.org>
+ <20221013083638.kloiaxervnhii7ew@houat>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <20221013083638.kloiaxervnhii7ew@houat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v4 11/30] drm/modes: Add a function to
+ generate analog display modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,7 +62,8 @@ Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
  nouveau@lists.freedesktop.org,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
  dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Samuel Holland <samuel@sholland.org>, Chen-Yu Tsai <wens@csie.org>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
  linux-sunxi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
  intel-gfx@lists.freedesktop.org,
@@ -86,90 +73,63 @@ Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- =?UTF-8?B?Tm9yYWxmIFRyw4PCuG5uZXM=?= <noralf@tronnes.org>
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Dne petek, 14. oktober 2022 ob 09:38:10 CEST je Maxime Ripard napisal(a):
-> Hi Jernej,
->=20
-> On Thu, Oct 13, 2022 at 08:23:51PM +0200, Jernej =C5=A0krabec wrote:
-> > Dne =C4=8Detrtek, 13. oktober 2022 ob 15:19:06 CEST je Maxime Ripard=20
-napisal(a):
-> > > Now that the core can deal fine with analog TV modes, let's convert t=
-he
-> > > sun4i TV driver to leverage those new features.
-> > >=20
-> > > Acked-by: Noralf Tr=C3=B8nnes <noralf@tronnes.org>
-> > > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> > >=20
-> > > ---
-> > > Changes in v5:
-> > > - Removed the count variable in get_modes
-> > > - Removed spurious vc4 change
-> > > ---
-> > >=20
-> > >  drivers/gpu/drm/sun4i/sun4i_tv.c | 145
-> > >=20
-> > > +++++++++++++-------------------------- 1 file changed, 48
-> > > insertions(+),
-> > > 97 deletions(-)
-> > >=20
-> > > diff --git a/drivers/gpu/drm/sun4i/sun4i_tv.c
-> > > b/drivers/gpu/drm/sun4i/sun4i_tv.c index c65f0a89b6b0..4f07aff11551
-> > > 100644
-> > > --- a/drivers/gpu/drm/sun4i/sun4i_tv.c
-> > > +++ b/drivers/gpu/drm/sun4i/sun4i_tv.c
-> > > @@ -141,23 +141,14 @@ struct resync_parameters {
-> > >=20
-> > >  struct tv_mode {
-> > > =20
-> > >  	char		*name;
-> > >=20
-> > > +	unsigned int	tv_mode;
-> > > +
-> > >=20
-> > >  	u32		mode;
-> > >  	u32		chroma_freq;
-> > >  	u16		back_porch;
-> > >  	u16		front_porch;
-> > >=20
-> > > -	u16		line_number;
-> > >=20
-> > >  	u16		vblank_level;
-> >=20
-> > isn't there a way to get or calculate back_porch, front_porch and
-> > vblank_level from mode? From quick glance over removed values below, I
-> > would say that at least back_porch can be removed too?
->=20
-> I tried actually, but I'm not sure what the front porch and back porch
-> parameters actually are. They are called that way by Allwinner, but it
-> doesn't match the PAL or NTSC timings at all.
->=20
-> For example, back_porch is 118 for NTSC and 138 for PAL. Actual back
-> porches would be around 12 and 16, respectively. Actually, the entire
-> blanking area are 138 and 144. This is close enough for PAL, but pretty
-> far off for NTSC.
->=20
-> Allwinner has the habit of integrating the sync period into one of the
-> porches, but still there's no obvious match.
->=20
-> front_porch is pretty much in the same case.
-
-Ok then.
-
->=20
-> Since it affected the display output quite a lot, I chose to keep it for
-> now unfortunately.
->=20
-> > Otherwise this patch looks ok.
->=20
-> Can I add your Acked-by/Reviewed-by then?
-
-Sure.
-Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
-
-Best regards,
-Jernej
 
 
+Den 13.10.2022 10.36, skrev Maxime Ripard:
+> Hi Noralf,
+> 
+> On Sat, Oct 01, 2022 at 02:52:06PM +0200, Noralf Trønnes wrote:
+>> Den 29.09.2022 18.31, skrev Maxime Ripard:
+>>> Multiple drivers (meson, vc4, sun4i) define analog TV 525-lines and
+>>> 625-lines modes in their drivers.
+>>>
+>>> Since those modes are fairly standard, and that we'll need to use them
+>>> in more places in the future, it makes sense to move their definition
+>>> into the core framework.
+>>>
+>>> However, analog display usually have fairly loose timings requirements,
+>>> the only discrete parameters being the total number of lines and pixel
+>>> clock frequency. Thus, we created a function that will create a display
+>>> mode from the standard, the pixel frequency and the active area.
+>>>
+>>> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+>>>
+>>> ---
+>>>
+>>> Changes in v4:
+>>> - Reworded the line length check comment
+>>> - Switch to HZ_PER_KHZ in tests
+>>> - Use previous timing to fill our mode
+>>> - Move the number of lines check earlier
+>>> ---
+>>>  drivers/gpu/drm/drm_modes.c            | 474 +++++++++++++++++++++++++++++++++
+>>>  drivers/gpu/drm/tests/Makefile         |   1 +
+>>>  drivers/gpu/drm/tests/drm_modes_test.c | 144 ++++++++++
+>>>  include/drm/drm_modes.h                |  17 ++
+>>>  4 files changed, 636 insertions(+)
+>>>
+>>
+>> I haven't followed the discussion on this patch, but it seems rather
+>> excessive to add over 600 lines of code (including tests) to add 2 fixed
+>> modes. And it's very difficult to see from the code what the actual
+>> display mode timings really are, which would be useful for other
+>> developers down the road wanting to use them.
+>>
+>> Why not just hardcode the modes?
+> 
+> Yeah, I have kind of the same feeling tbh, but it was asked back on the
+> v1 to ease the transition of old fbdev drivers, since they will need
+> such a function:
+> https://lore.kernel.org/dri-devel/CAMuHMdUrwzPYjA0wdR7ADj5Ov6+m03JbnY8fBYzRYyWDuNm5=g@mail.gmail.com/
+> 
+
+If that's the case I suggest you just hardcode them for now and leave
+the complexity to the developer doing the actual conversion of the fbdev
+driver. Who knows when that will happen, but that person will have your
+well documented and discussed work to fall back on.
+
+Noralf.
