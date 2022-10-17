@@ -1,64 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id F3EF0600306
-	for <lists+nouveau@lfdr.de>; Sun, 16 Oct 2022 21:47:05 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6FD64600C33
+	for <lists+nouveau@lfdr.de>; Mon, 17 Oct 2022 12:21:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9B29810E860;
-	Sun, 16 Oct 2022 19:46:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A502E10E6DC;
+	Mon, 17 Oct 2022 10:21:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3AA5110E85C;
- Sun, 16 Oct 2022 19:46:54 +0000 (UTC)
-Received: by mail-lj1-x22b.google.com with SMTP id h8so11718522lja.11;
- Sun, 16 Oct 2022 12:46:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:reply-to:subject:user-agent:mime-version:date:message-id:from
- :from:to:cc:subject:date:message-id:reply-to;
- bh=rdVj1UN0o7hBjGsw3GcLX/7HhNhpR9GEsvnCZKA7nWc=;
- b=eVN1P5+2pEF2Kv5B+7kulfpYcRS0ij67wC56op/K7MTJ9oxjts1NiTMiIXhKUDDNWi
- pClfrmUFwjCqFPiUh9t2aylgpS617BHukulA8IRkFt9jDfyhzBKacR80dEuWIW7uIlru
- /7BkEkGFXjpHuS1qNFxkES8QosHRpMbXUy57JWaDtK7v16WG53LkwTEneJfdabTIa/BN
- tiKFs3N7vSqtH+nQdskgF32wMLK/xbHFx7HwRH0BnJoukpb40vsXARUD3MnEbG+bDYhz
- DATYteNjfpgFflZS3rzy15d+9+CYLsfO1pfLasECYyV6UjYiuhHDXbmsrtY0P6dvd6aq
- O6Bw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:reply-to:subject:user-agent:mime-version:date:message-id:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rdVj1UN0o7hBjGsw3GcLX/7HhNhpR9GEsvnCZKA7nWc=;
- b=jHxQk0q+sooBlrRG1DhZPjOrvyMB1v3jY+GyuWkprNcpOsyzcXd4XjgiItxg1+WccL
- UDDI3dLho2O0r169a2dszPQPA+d50X/F/qw+yEfICGVgRhprJUYzZ522gw+sxgV72PzE
- YEgufqmOp7PJBbUVSZTz15CHPNkOScbiUs4Dn3pykS/dzQAgqNA0HMOlcGDMZKwazONb
- q4sppxt3l05FZ/phdD6NPGF45cj8zxNQ1r3zPhNE7ydc0P6XHb/DQtRz9P52VtjH43hC
- 6mJU0JjTntXvW8c42sOUQs97xnWV8M9oCl981rMgr+fOqaihTv+pXQLVvySgy9x9buuQ
- 9feg==
-X-Gm-Message-State: ACrzQf2L0fbLSrb1FiztBZnt481Zt3z8lgFutKGvP0fjJViVE1ep3ZIB
- bd2bv13QnoW5AGvgCdQR+tE=
-X-Google-Smtp-Source: AMsMyM4GQhxxpcYSAKIRWoVA3HWWO1eDjPQvlqSV0CxKc0sMPg+zXfwUuwDFiB7tEbVlutMrJsz5sg==
-X-Received: by 2002:a05:651c:198a:b0:26f:b54d:e239 with SMTP id
- bx10-20020a05651c198a00b0026fb54de239mr2691447ljb.421.1665949612500; 
- Sun, 16 Oct 2022 12:46:52 -0700 (PDT)
-Received: from ?IPV6:2a02:a31a:a240:1700:64bb:87df:aad7:a9f0?
- ([2a02:a31a:a240:1700:64bb:87df:aad7:a9f0])
- by smtp.googlemail.com with ESMTPSA id
- k14-20020ac2456e000000b004948378080csm1141576lfm.290.2022.10.16.12.46.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 16 Oct 2022 12:46:51 -0700 (PDT)
-From: Mateusz Kwiatkowski <kfyatek@gmail.com>
-X-Google-Original-From: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
-Message-ID: <93bf9fcc-c645-b042-011f-8f1fc957af48@gmail.com>
-Date: Sun, 16 Oct 2022 21:46:49 +0200
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1AF3110E6DC;
+ Mon, 17 Oct 2022 10:21:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Y4j7gBOaq+2LeHWeErehnoB7+9tH84EPBKVdDAWDliE=; b=AoVlrX2Ik0FBhZTaqHAgAgXDq3
+ sKgykY/zMoWZvYv/wwlTjx33qQU6S8eKEpaorbc+ZIhkKjRpUwTgiBYGb6GkwlSu4Wf+spNboAz/N
+ 1Q9Dn9Hw7vEb7gaGtICHUG1djD+wwVRu5sx2XYOn1bKxdAxEnkXah3X9mi1EmN69vpTES5V5h/np9
+ deEPLmHaxO1ek7B34SPfN4PmegGOTgOOPdlNFiiADkTT593XYyHN1rj/FmfJbUK8F0ZanLdzV6zOe
+ s46j/eFnXBiSwk6jlRYsduk/ylik9IZzGhZFnxWyZzcYnLDDP9Vk2J6ri4eobHTZgRvvlWgLKtxwV
+ 7DsvpzmQ==;
+Received: from 211.81-166-168.customer.lyse.net ([81.166.168.211]:59672
+ helo=[192.168.10.61])
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1okNFL-0001vj-HG; Mon, 17 Oct 2022 12:21:23 +0200
+Message-ID: <769d2f6e-7fe6-30da-06d8-3c2e9fb9df34@tronnes.org>
+Date: Mon, 17 Oct 2022 12:21:14 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.3.3
-To: Maxime Ripard <maxime@cerno.tech>, Karol Herbst <kherbst@redhat.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.3
+To: kfyatek+publicgit@gmail.com, Maxime Ripard <maxime@cerno.tech>,
+ Karol Herbst <kherbst@redhat.com>, Jani Nikula
+ <jani.nikula@linux.intel.com>,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Daniel Vetter <daniel@ffwll.ch>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
@@ -71,12 +51,14 @@ To: Maxime Ripard <maxime@cerno.tech>, Karol Herbst <kherbst@redhat.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Jernej Skrabec <jernej.skrabec@gmail.com>
 References: <20220728-rpi-analog-tv-properties-v5-0-d841cc64fe4b@cerno.tech>
- <20220728-rpi-analog-tv-properties-v5-21-d841cc64fe4b@cerno.tech>
-Content-Language: pl
-In-Reply-To: <20220728-rpi-analog-tv-properties-v5-21-d841cc64fe4b@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v5-13-d841cc64fe4b@cerno.tech>
+ <fdeadf0d-8f38-8edf-ae92-e2d9c5aa90b4@gmail.com>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <fdeadf0d-8f38-8edf-ae92-e2d9c5aa90b4@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Subject: [Nouveau] [PATCH] drm/vc4: vec: Add support for PAL-60
+Subject: Re: [Nouveau] [PATCH v5 13/22] drm/modes: Introduce the tv_mode
+ property as a command-line option
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,7 +70,6 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: kfyatek+publicgit@gmail.com
 Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
  intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
@@ -99,134 +80,44 @@ Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Add support for the PAL-60 mode. Because there is no separate TV mode
-property value for PAL-60, this requires matching the settings based on
-the modeline in addition to just that property alone.
 
-Signed-off-by: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
----
-This patch depends on patch
-'[PATCH v5 21/22] drm/vc4: vec: Add support for more analog TV standards'
-submitted by Maxime Ripard
-(https://lore.kernel.org/dri-devel/20220728-rpi-analog-tv-properties-v5-21-d841cc64fe4b@cerno.tech/).
 
-To Maxime: if you decide to post v6, feel free to include this in your patchset
-instead if you want.
----
- drivers/gpu/drm/vc4/vc4_vec.c | 27 ++++++++++++++++++++++++---
- 1 file changed, 24 insertions(+), 3 deletions(-)
+Den 16.10.2022 19.51, skrev Mateusz Kwiatkowski:
+> Hi Maxime, Noralf & everyone,
+> 
+> I'd like to address Noralf here in particular, and refer to these discussions
+> from the past:
+> 
+> - https://lore.kernel.org/linux-arm-kernel/2f607c7d-6da1-c8df-1c02-8dd344a92343@gmail.com/
+> - https://lore.kernel.org/linux-arm-kernel/9e76a508-f469-a54d-ecd7-b5868ca99af4@tronnes.org/
+> 
+>> @@ -2230,20 +2256,22 @@ struct drm_named_mode {
+>>  	unsigned int xres;
+>>  	unsigned int yres;
+>>  	unsigned int flags;
+>> +	unsigned int tv_mode;
+>>  };
+> 
+> I saw that you (Noralf) opposed my suggestion about the DRM_MODE_TV_MODE_NONE
+> enum value in enum drm drm_connector_tv_mode. I get your argumentation, and I'm
+> not gonna argue, but I still don't like the fact that struct drm_named_mode now
+> includes a field that is only relevant for analog TV modes, has no "none" value,
+> and yet the type is supposed to be generic enough to be usable for other types
+> of outputs as well.
+> 
+> It's true that it can just be ignored (as Maxime mentioned in his response to
+> my e-mail linked above), and now the value of 0 corresponds to
+> DRM_MODE_TV_MODE_NTSC, which is a rather sane default, but it still feels messy
+> to me.
+> 
+> I'm not gonna force my opinion here, but I wanted to bring your attention to
+> this issue, maybe you have some other solution in mind for this problem. Or if
+> you don't see that as a problem at all, that's fine, too.
+> 
 
-diff --git a/drivers/gpu/drm/vc4/vc4_vec.c b/drivers/gpu/drm/vc4/vc4_vec.c
-index 88b4330bfa39..bbc41e502cc3 100644
---- a/drivers/gpu/drm/vc4/vc4_vec.c
-+++ b/drivers/gpu/drm/vc4/vc4_vec.c
-@@ -235,6 +235,7 @@ enum vc4_vec_tv_mode_id {
- 
- struct vc4_vec_tv_mode {
- 	unsigned int mode;
-+	u16 expected_htotal;
- 	u32 config0;
- 	u32 config1;
- 	u32 custom_freq;
-@@ -270,37 +271,52 @@ static const struct debugfs_reg32 vec_regs[] = {
- static const struct vc4_vec_tv_mode vc4_vec_tv_modes[] = {
- 	{
- 		.mode = DRM_MODE_TV_MODE_NTSC,
-+		.expected_htotal = 858,
- 		.config0 = VEC_CONFIG0_NTSC_STD | VEC_CONFIG0_PDEN,
- 		.config1 = VEC_CONFIG1_C_CVBS_CVBS,
- 	},
- 	{
- 		.mode = DRM_MODE_TV_MODE_NTSC_443,
-+		.expected_htotal = 858,
- 		.config0 = VEC_CONFIG0_NTSC_STD,
- 		.config1 = VEC_CONFIG1_C_CVBS_CVBS | VEC_CONFIG1_CUSTOM_FREQ,
- 		.custom_freq = 0x2a098acb,
- 	},
- 	{
- 		.mode = DRM_MODE_TV_MODE_NTSC_J,
-+		.expected_htotal = 858,
- 		.config0 = VEC_CONFIG0_NTSC_STD,
- 		.config1 = VEC_CONFIG1_C_CVBS_CVBS,
- 	},
- 	{
- 		.mode = DRM_MODE_TV_MODE_PAL,
-+		.expected_htotal = 864,
- 		.config0 = VEC_CONFIG0_PAL_BDGHI_STD,
- 		.config1 = VEC_CONFIG1_C_CVBS_CVBS,
- 	},
-+	{
-+		/* PAL-60 */
-+		.mode = DRM_MODE_TV_MODE_PAL,
-+		.expected_htotal = 858,
-+		.config0 = VEC_CONFIG0_PAL_M_STD,
-+		.config1 = VEC_CONFIG1_C_CVBS_CVBS | VEC_CONFIG1_CUSTOM_FREQ,
-+		.custom_freq = 0x2a098acb,
-+	},
- 	{
- 		.mode = DRM_MODE_TV_MODE_PAL_M,
-+		.expected_htotal = 858,
- 		.config0 = VEC_CONFIG0_PAL_M_STD,
- 		.config1 = VEC_CONFIG1_C_CVBS_CVBS,
- 	},
- 	{
- 		.mode = DRM_MODE_TV_MODE_PAL_N,
-+		.expected_htotal = 864,
- 		.config0 = VEC_CONFIG0_PAL_N_STD,
- 		.config1 = VEC_CONFIG1_C_CVBS_CVBS,
- 	},
- 	{
- 		.mode = DRM_MODE_TV_MODE_SECAM,
-+		.expected_htotal = 864,
- 		.config0 = VEC_CONFIG0_SECAM_STD,
- 		.config1 = VEC_CONFIG1_C_CVBS_CVBS,
- 		.custom_freq = 0x29c71c72,
-@@ -308,14 +324,15 @@ static const struct vc4_vec_tv_mode vc4_vec_tv_modes[] = {
- };
- 
- static inline const struct vc4_vec_tv_mode *
--vc4_vec_tv_mode_lookup(unsigned int mode)
-+vc4_vec_tv_mode_lookup(unsigned int mode, u16 htotal)
- {
- 	unsigned int i;
- 
- 	for (i = 0; i < ARRAY_SIZE(vc4_vec_tv_modes); i++) {
- 		const struct vc4_vec_tv_mode *tv_mode = &vc4_vec_tv_modes[i];
- 
--		if (tv_mode->mode == mode)
-+		if (tv_mode->mode == mode &&
-+		    tv_mode->expected_htotal == htotal)
- 			return tv_mode;
- 	}
- 
-@@ -394,6 +411,7 @@ vc4_vec_connector_set_property(struct drm_connector *connector,
- 		break;
- 
- 	case VC4_VEC_TV_MODE_PAL:
-+	case VC4_VEC_TV_MODE_PAL_60:
- 		state->tv.mode = DRM_MODE_TV_MODE_PAL;
- 		break;
- 
-@@ -551,13 +569,16 @@ static void vc4_vec_encoder_enable(struct drm_encoder *encoder,
- 	struct drm_connector *connector = &vec->connector;
- 	struct drm_connector_state *conn_state =
- 		drm_atomic_get_new_connector_state(state, connector);
-+	struct drm_display_mode *adjusted_mode =
-+		&encoder->crtc->state->adjusted_mode;
- 	const struct vc4_vec_tv_mode *tv_mode;
- 	int idx, ret;
- 
- 	if (!drm_dev_enter(drm, &idx))
- 		return;
- 
--	tv_mode = vc4_vec_tv_mode_lookup(conn_state->tv.mode);
-+	tv_mode = vc4_vec_tv_mode_lookup(conn_state->tv.mode,
-+					 adjusted_mode->htotal);
- 	if (!tv_mode)
- 		goto err_dev_exit;
- 
+I hadn't looked at this patch in detail before, but you're right this,
+together with drm_atomic_helper_connector_tv_reset(), will overwrite
+tv.mode unconditionally regardless of tv_mode being present in video= or
+not. We need a tv_mode_specified flag like we have for bpp and refresh.
 
-base-commit: e16415e3ddae9abb14a00793554a162403f9af6d
--- 
-2.34.1
-
+Noralf.
