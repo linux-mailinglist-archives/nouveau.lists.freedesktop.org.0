@@ -1,18 +1,18 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3D07600CC2
-	for <lists+nouveau@lfdr.de>; Mon, 17 Oct 2022 12:45:01 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 55B9C600DE9
+	for <lists+nouveau@lfdr.de>; Mon, 17 Oct 2022 13:39:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 766AD10E34F;
-	Mon, 17 Oct 2022 10:44:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EE90910E3E7;
+	Mon, 17 Oct 2022 11:39:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp.domeneshop.no (smtp.domeneshop.no
  [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C953010E210;
- Mon, 17 Oct 2022 10:44:52 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0DC0010E3FA;
+ Mon, 17 Oct 2022 11:39:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  ; s=ds202112;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
@@ -20,19 +20,19 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qeYGbN2RwRCxQ6AMeNN4NET15UVb7PUi0OEIs+b6DkY=; b=jaCLyiJIXlOFybxMXHamoKAPkX
- RHSfiMXeX4fvs7LiQKE8Q5e/06tx2cQwr8jIMeCYwO8NUrWL3TOpqtA2uuBb8mjxfcD0MAqHQqqkI
- Oj0+Yj+NMSh0lSKW99AmftyTYxvcUU2ptJHFipdq3DamjRcFZtnVbWv5KRKncuGL/Krgp/IS887/G
- r8Dq6EE2ZunlWE/VAXv2ZEK9A6NSKX4L0v5limK7McDeDp08wbRQGG4IrtApe/df2nrJCJF4LNJ78
- 0Mj+gtIYfPtsmTPGfDKoclxCyXLbsoHiRVtCqON1ffVLz7nhdhmuCaWLHwoRJejNa4R42VHxxPD9I
- rhlfsfCA==;
-Received: from 211.81-166-168.customer.lyse.net ([81.166.168.211]:62495
+ bh=NqoPivWXTQc91lM55scp1TsWM7KYAkZKCYYjTFjLwwA=; b=eP3AtQH8Ft3/1aQU3b50ikl2kh
+ uvnK5IAtJPeRye3apH7rCXI3m1SN4WPI63uFXBNEjPmv4cDphteZ42pnT7TPGmxW5RXz81CHXczTh
+ OzjCvLGsT/gN3QlrIDNHh69a4JM45LViFEJP3NkC5h1OqLxWYzzfv8mI8BJ7DgsVBoXipFtEYGf5K
+ PrXWqugX074d4EkbM0Wpd7NTVwt7SU2Hi6//t2gsOHwfgWzeLcdO6IpR8ghDmzqVbEE6rGt4Z/Sr1
+ 3nf0XARAeZo8X02Q+ULbLP+mjGvrtH4rU4sL9cUAPzXI6gMHmgrwhoIS87WDVJ3AVZDPsTxWdT/bE
+ mCVLwX2g==;
+Received: from 211.81-166-168.customer.lyse.net ([81.166.168.211]:53192
  helo=[192.168.10.61])
  by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1okNc1-0003mn-9T; Mon, 17 Oct 2022 12:44:49 +0200
-Message-ID: <7dcf479c-8ac7-ed47-8587-30268684373c@tronnes.org>
-Date: Mon, 17 Oct 2022 12:44:45 +0200
+ id 1okOSo-0007Ky-Cl; Mon, 17 Oct 2022 13:39:22 +0200
+Message-ID: <a2720899-e93b-6b84-f30b-8d3d28986259@tronnes.org>
+Date: Mon, 17 Oct 2022 13:39:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.3
@@ -50,13 +50,13 @@ To: Maxime Ripard <maxime@cerno.tech>, Karol Herbst <kherbst@redhat.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Jernej Skrabec <jernej.skrabec@gmail.com>
 References: <20220728-rpi-analog-tv-properties-v5-0-d841cc64fe4b@cerno.tech>
- <20220728-rpi-analog-tv-properties-v5-12-d841cc64fe4b@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v5-20-d841cc64fe4b@cerno.tech>
 From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v5-12-d841cc64fe4b@cerno.tech>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v5-20-d841cc64fe4b@cerno.tech>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH v5 12/22] drm/connector: Add a function to
- lookup a TV mode by its name
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v5 20/22] drm/vc4: vec: Convert to the new TV
+ mode property
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,73 +81,235 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
 
-Den 13.10.2022 15.18, skrev Maxime Ripard:
-> As part of the command line parsing rework coming in the next patches,
-> we'll need to lookup drm_connector_tv_mode values by their name, already
-> defined in drm_tv_mode_enum_list.
+Den 13.10.2022 15.19, skrev Maxime Ripard:
+> Now that the core can deal fine with analog TV modes, let's convert the vc4
+> VEC driver to leverage those new features.
 > 
-> In order to avoid any code duplication, let's do a function that will
-> perform a lookup of a TV mode name and return its value.
+> We've added some backward compatibility to support the old TV mode property
+> and translate it into the new TV norm property. We're also making use of
+> the new analog TV atomic_check helper to make sure we trigger a modeset
+> whenever the TV mode is updated.
 > 
+> Acked-by: Noralf Trønnes <noralf@tronnes.org>
 > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> ---
->  drivers/gpu/drm/drm_connector.c | 24 ++++++++++++++++++++++++
->  include/drm/drm_connector.h     |  2 ++
->  2 files changed, 26 insertions(+)
 > 
-> diff --git a/drivers/gpu/drm/drm_connector.c b/drivers/gpu/drm/drm_connector.c
-> index 820f4c730b38..30611c616435 100644
-> --- a/drivers/gpu/drm/drm_connector.c
-> +++ b/drivers/gpu/drm/drm_connector.c
-> @@ -991,6 +991,30 @@ static const struct drm_prop_enum_list drm_tv_mode_enum_list[] = {
->  };
->  DRM_ENUM_NAME_FN(drm_get_tv_mode_name, drm_tv_mode_enum_list)
->  
-> +/**
-> + * drm_get_tv_mode_from_name - Translates a TV mode name into its enum value
-> + * @name: TV Mode name we want to convert
-> + * @len: Length of @name
-> + *
-> + * Translates @name into an enum drm_connector_tv_mode.
-> + *
-> + * Returns: the enum value on success, a negative errno otherwise.
-> + */
-> +int drm_get_tv_mode_from_name(const char *name, size_t len)
+> ---
 
-Do we really need to pass in length here?
-item->name has to always be NUL terminated otherwise things would break
-elsewhere, so it shouldn't be necessary AFAICS.
+> @@ -276,19 +292,96 @@ static void vc4_vec_connector_reset(struct drm_connector *connector)
+>  
+>  static int vc4_vec_connector_get_modes(struct drm_connector *connector)
+>  {
+> -	struct drm_connector_state *state = connector->state;
+>  	struct drm_display_mode *mode;
+>  
+> -	mode = drm_mode_duplicate(connector->dev,
+> -				  vc4_vec_tv_modes[state->tv.legacy_mode].mode);
+> +	mode = drm_mode_analog_ntsc_480i(connector->dev);
+>  	if (!mode) {
+>  		DRM_ERROR("Failed to create a new display mode\n");
+>  		return -ENOMEM;
+>  	}
+>  
+> +	mode->type |= DRM_MODE_TYPE_PREFERRED;
+>  	drm_mode_probed_add(connector, mode);
+>  
+> -	return 1;
+> +	mode = drm_mode_analog_pal_576i(connector->dev);
+> +	if (!mode) {
+> +		DRM_ERROR("Failed to create a new display mode\n");
+> +		return -ENOMEM;
+
+I just remembered that you can't return an error from .get_modes, it
+should only return the number of modes added. From doc:
+
+	 * RETURNS:
+	 *
+	 * The number of modes added by calling drm_mode_probed_add().
+
+See also the use of count in drm_helper_probe_single_connector_modes().
+
+Patch 14 and 22 has the same issue.
 
 Noralf.
 
-> +{
-> +	unsigned int i;
-> +
-> +	for (i = 0; i < ARRAY_SIZE(drm_tv_mode_enum_list); i++) {
-> +		const struct drm_prop_enum_list *item = &drm_tv_mode_enum_list[i];
-> +
-> +		if (strlen(item->name) == len && !strncmp(item->name, name, len))
-> +			return item->type;
 > +	}
 > +
-> +	return -EINVAL;
+> +	drm_mode_probed_add(connector, mode);
+> +
+> +	return 2;
 > +}
-> +EXPORT_SYMBOL(drm_get_tv_mode_from_name);
 > +
->  static const struct drm_prop_enum_list drm_tv_select_enum_list[] = {
->  	{ DRM_MODE_SUBCONNECTOR_Automatic, "Automatic" }, /* DVI-I and TV-out */
->  	{ DRM_MODE_SUBCONNECTOR_Composite, "Composite" }, /* TV-out */
-> diff --git a/include/drm/drm_connector.h b/include/drm/drm_connector.h
-> index a501db7d2222..a33f24a76738 100644
-> --- a/include/drm/drm_connector.h
-> +++ b/include/drm/drm_connector.h
-> @@ -1864,6 +1864,8 @@ const char *drm_get_dp_subconnector_name(int val);
->  const char *drm_get_content_protection_name(int val);
->  const char *drm_get_hdcp_content_type_name(int val);
+> +static int
+> +vc4_vec_connector_set_property(struct drm_connector *connector,
+> +			       struct drm_connector_state *state,
+> +			       struct drm_property *property,
+> +			       uint64_t val)
+> +{
+> +	struct vc4_vec *vec = connector_to_vc4_vec(connector);
+> +
+> +	if (property != vec->legacy_tv_mode_property)
+> +		return -EINVAL;
+> +
+> +	switch (val) {
+> +	case VC4_VEC_TV_MODE_NTSC:
+> +		state->tv.mode = DRM_MODE_TV_MODE_NTSC;
+> +		break;
+> +
+> +	case VC4_VEC_TV_MODE_NTSC_J:
+> +		state->tv.mode = DRM_MODE_TV_MODE_NTSC_J;
+> +		break;
+> +
+> +	case VC4_VEC_TV_MODE_PAL:
+> +		state->tv.mode = DRM_MODE_TV_MODE_PAL;
+> +		break;
+> +
+> +	case VC4_VEC_TV_MODE_PAL_M:
+> +		state->tv.mode = DRM_MODE_TV_MODE_PAL_M;
+> +		break;
+> +
+> +	default:
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int
+> +vc4_vec_connector_get_property(struct drm_connector *connector,
+> +			       const struct drm_connector_state *state,
+> +			       struct drm_property *property,
+> +			       uint64_t *val)
+> +{
+> +	struct vc4_vec *vec = connector_to_vc4_vec(connector);
+> +
+> +	if (property != vec->legacy_tv_mode_property)
+> +		return -EINVAL;
+> +
+> +	switch (state->tv.mode) {
+> +	case DRM_MODE_TV_MODE_NTSC:
+> +		*val = VC4_VEC_TV_MODE_NTSC;
+> +		break;
+> +
+> +	case DRM_MODE_TV_MODE_NTSC_J:
+> +		*val = VC4_VEC_TV_MODE_NTSC_J;
+> +		break;
+> +
+> +	case DRM_MODE_TV_MODE_PAL:
+> +		*val = VC4_VEC_TV_MODE_PAL;
+> +		break;
+> +
+> +	case DRM_MODE_TV_MODE_PAL_M:
+> +		*val = VC4_VEC_TV_MODE_PAL_M;
+> +		break;
+> +
+> +	default:
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+>  }
 >  
-> +int drm_get_tv_mode_from_name(const char *name, size_t len);
+>  static const struct drm_connector_funcs vc4_vec_connector_funcs = {
+> @@ -297,15 +390,19 @@ static const struct drm_connector_funcs vc4_vec_connector_funcs = {
+>  	.reset = vc4_vec_connector_reset,
+>  	.atomic_duplicate_state = drm_atomic_helper_connector_duplicate_state,
+>  	.atomic_destroy_state = drm_atomic_helper_connector_destroy_state,
+> +	.atomic_get_property = vc4_vec_connector_get_property,
+> +	.atomic_set_property = vc4_vec_connector_set_property,
+>  };
+>  
+>  static const struct drm_connector_helper_funcs vc4_vec_connector_helper_funcs = {
+> +	.atomic_check = drm_atomic_helper_connector_tv_check,
+>  	.get_modes = vc4_vec_connector_get_modes,
+>  };
+>  
+>  static int vc4_vec_connector_init(struct drm_device *dev, struct vc4_vec *vec)
+>  {
+>  	struct drm_connector *connector = &vec->connector;
+> +	struct drm_property *prop;
+>  	int ret;
+>  
+>  	connector->interlace_allowed = true;
+> @@ -318,8 +415,17 @@ static int vc4_vec_connector_init(struct drm_device *dev, struct vc4_vec *vec)
+>  	drm_connector_helper_add(connector, &vc4_vec_connector_helper_funcs);
+>  
+>  	drm_object_attach_property(&connector->base,
+> -				   dev->mode_config.legacy_tv_mode_property,
+> -				   VC4_VEC_TV_MODE_NTSC);
+> +				   dev->mode_config.tv_mode_property,
+> +				   DRM_MODE_TV_MODE_NTSC);
 > +
->  int drm_mode_create_dvi_i_properties(struct drm_device *dev);
->  void drm_connector_attach_dp_subconnector_property(struct drm_connector *connector);
+> +	prop = drm_property_create_enum(dev, 0, "mode",
+> +					legacy_tv_mode_names,
+> +					ARRAY_SIZE(legacy_tv_mode_names));
+> +	if (!prop)
+> +		return -ENOMEM;
+> +	vec->legacy_tv_mode_property = prop;
+> +
+> +	drm_object_attach_property(&connector->base, prop, VC4_VEC_TV_MODE_NTSC);
+>  
+>  	drm_connector_attach_encoder(connector, &vec->encoder.base);
+>  
+> @@ -366,13 +472,16 @@ static void vc4_vec_encoder_enable(struct drm_encoder *encoder,
+>  	struct drm_connector *connector = &vec->connector;
+>  	struct drm_connector_state *conn_state =
+>  		drm_atomic_get_new_connector_state(state, connector);
+> -	const struct vc4_vec_tv_mode *tv_mode =
+> -		&vc4_vec_tv_modes[conn_state->tv.legacy_mode];
+> +	const struct vc4_vec_tv_mode *tv_mode;
+>  	int idx, ret;
+>  
+>  	if (!drm_dev_enter(drm, &idx))
+>  		return;
+>  
+> +	tv_mode = vc4_vec_tv_mode_lookup(conn_state->tv.mode);
+> +	if (!tv_mode)
+> +		goto err_dev_exit;
+> +
+>  	ret = pm_runtime_get_sync(&vec->pdev->dev);
+>  	if (ret < 0) {
+>  		DRM_ERROR("Failed to retain power domain: %d\n", ret);
+> @@ -454,13 +563,6 @@ static int vc4_vec_encoder_atomic_check(struct drm_encoder *encoder,
+>  					struct drm_connector_state *conn_state)
+>  {
+>  	const struct drm_display_mode *mode = &crtc_state->adjusted_mode;
+> -	const struct vc4_vec_tv_mode *vec_mode;
+> -
+> -	vec_mode = &vc4_vec_tv_modes[conn_state->tv.legacy_mode];
+> -
+> -	if (conn_state->crtc &&
+> -	    !drm_mode_equal(vec_mode->mode, &crtc_state->adjusted_mode))
+> -		return -EINVAL;
+>  
+>  	if (mode->crtc_hdisplay % 4)
+>  		return -EINVAL;
+> @@ -554,13 +656,6 @@ static const struct of_device_id vc4_vec_dt_match[] = {
+>  	{ /* sentinel */ },
+>  };
+>  
+> -static const char * const tv_mode_names[] = {
+> -	[VC4_VEC_TV_MODE_NTSC] = "NTSC",
+> -	[VC4_VEC_TV_MODE_NTSC_J] = "NTSC-J",
+> -	[VC4_VEC_TV_MODE_PAL] = "PAL",
+> -	[VC4_VEC_TV_MODE_PAL_M] = "PAL-M",
+> -};
+> -
+>  static int vc4_vec_bind(struct device *dev, struct device *master, void *data)
+>  {
+>  	struct platform_device *pdev = to_platform_device(dev);
+> @@ -568,9 +663,11 @@ static int vc4_vec_bind(struct device *dev, struct device *master, void *data)
+>  	struct vc4_vec *vec;
+>  	int ret;
+>  
+> -	ret = drm_mode_create_tv_properties_legacy(drm,
+> -						   ARRAY_SIZE(tv_mode_names),
+> -						   tv_mode_names);
+> +	ret = drm_mode_create_tv_properties(drm,
+> +					    BIT(DRM_MODE_TV_MODE_NTSC) |
+> +					    BIT(DRM_MODE_TV_MODE_NTSC_J) |
+> +					    BIT(DRM_MODE_TV_MODE_PAL) |
+> +					    BIT(DRM_MODE_TV_MODE_PAL_M));
+>  	if (ret)
+>  		return ret;
 >  
 > 
