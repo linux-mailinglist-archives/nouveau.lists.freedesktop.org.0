@@ -2,72 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0AAB6603469
-	for <lists+nouveau@lfdr.de>; Tue, 18 Oct 2022 22:57:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 865986034EC
+	for <lists+nouveau@lfdr.de>; Tue, 18 Oct 2022 23:29:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2F1B710E958;
-	Tue, 18 Oct 2022 20:57:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1F7CD10EEAE;
+	Tue, 18 Oct 2022 21:28:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 55AA810E955;
- Tue, 18 Oct 2022 20:57:11 +0000 (UTC)
-Received: by mail-lf1-x130.google.com with SMTP id r14so24762152lfm.2;
- Tue, 18 Oct 2022 13:57:11 -0700 (PDT)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EE8E410EEAE;
+ Tue, 18 Oct 2022 21:28:42 +0000 (UTC)
+Received: by mail-lj1-x232.google.com with SMTP id r22so19710819ljn.10;
+ Tue, 18 Oct 2022 14:28:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:references:cc:to
- :content-language:subject:reply-to:user-agent:mime-version:date
- :message-id:from:from:to:cc:subject:date:message-id:reply-to;
- bh=4q8+ZZXGKoh6iTQurAmJvf03RKoxifLtlwxrMQru1hE=;
- b=kt8lC+lO4gSY3YG0906oJiNdGLU7GhkVYc9H88KhNuvwjumuuchbdPapkO7dxBf/Qy
- BoDMNcubA39QyDexTULFTiZaU7aDUsPZdwQojRw+xlCeZ2FP/rlSY9fvBGCEeu5NgYE1
- zVoh9LYbcej1ow4N6cLbaE+lDZeOB1v/1BSRHabYjz6zOJf2NcUenT+Ap/6lzQwSiK/I
- mlfYogp/zJo5VBiA1eANhCvnKdKTUeB/E4rMC8r+poPJuWlQldvWIkta/4sPXBwuMnDH
- 8xdUvhBvP4s3zBZV8Ig0pbp7QaiLgQRGGd2Qn8+rLaxzbul2vaXrnjy/QMa5jir9u/45
- pCvg==
+ h=in-reply-to:references:cc:to:content-language:subject:reply-to
+ :user-agent:mime-version:date:message-id:from:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=4OU8Zwxg156QdzrONF2oQZQLMwyWiR7HNUxgsUc5WfY=;
+ b=EOCCw7tePlnV5vQkCJgao9cWevGoLw5Y5Yp5XafKbiY9sn90/ZGdm2Sjh0O4jDQA/4
+ h4Hm189YWdCI59Iy4omABXFHgXA+YkFXlwQyHiawVQorr7m9q4E21r2/KgbJsYwbYhEA
+ Dbxw9T7RySoY//Qzq2p3gwaZRVE3PaJEVUiqCc7zAtxy89FlwRqUoR7ohzbwp2aIB+Gp
+ vYA/wfPqfQXjzaXwVzGtnohIj2dEstFg7f0QcjDCYX5s/tMHv3LqwD/gPjjzGTt/gzkz
+ Ja76YK1fhMaIbPyUrAcxSKOtrAh6SZXlMsgWzCsaEeyE2XH9nkJ2aeUpwqyaeUwQAou9
+ fA0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:references:cc:to
- :content-language:subject:reply-to:user-agent:mime-version:date
- :message-id:from:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4q8+ZZXGKoh6iTQurAmJvf03RKoxifLtlwxrMQru1hE=;
- b=1vqX8vi7mBK2RjjEDhnq5U762kCxNIDUy1bpxACgdq22Q/soboFyE6/5BtE2Sq251O
- 4eWM8fKrdZfFRqfgwlUEzHwvIVUJ7SIhLEvzs1eH9nAw/eppx2WREH7BkxxqP/PoKZTx
- LJQSaE4AtlYKKeDtN3UTaIb+sL+Ovl+NqbTlXpnOEnv5LVvv9NUzgvL7eLldKuvoQNzf
- n/CXzX3pQSR5qla1kl+aJFyshxU1qSBZQ9sp/x7dt4O5jo0J3OzoEbaQI6nBhwazkhPp
- 3by3QN+6mRkOQXcz1b6ML4BRj/LxraYPjX8VkJDt+nSgC5ewmi7wKKgi81h7SkpiuJzT
- Y1Pw==
-X-Gm-Message-State: ACrzQf3lYJMN7K1FaSu6B8q1bDc1C7odEvWCJ1bZgMTYlSvPmw069/2r
- 7fSaU99aELC4LfUEhu6e/h8=
-X-Google-Smtp-Source: AMsMyM43gEnq7ci5pkLxJm4400YhMYoE1+4aaJJ/DU7cyGERdBh2fCJRUyqe3H9D3aDzTea6EsoYiQ==
-X-Received: by 2002:a05:6512:114a:b0:4a2:58a3:95f2 with SMTP id
- m10-20020a056512114a00b004a258a395f2mr1687359lfg.7.1666126629466; 
- Tue, 18 Oct 2022 13:57:09 -0700 (PDT)
+ h=in-reply-to:references:cc:to:content-language:subject:reply-to
+ :user-agent:mime-version:date:message-id:from:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=4OU8Zwxg156QdzrONF2oQZQLMwyWiR7HNUxgsUc5WfY=;
+ b=F6cLqu4Z8jGmVfPzmsPcqNMPiM4NVzeI8fj7bSkSC68D4cls9HPLJ9A9WU2dKgHZqh
+ hw+ws8ivhtt6Kj8vKFGnoJR9YhtrEsr5U2Bxwb8XY8WhHmsSqyGPkiALVv1qWQsXsbsX
+ BKhTB2aco7QNPqj73LkJauhLKrW4E9vGN29OharOpHwdTOCzwZfd/pZTR6Yni+FA1rNI
+ OjZHclzV5EZX/RwaSFwrqRHNRFlXdvVuxzfNwblH9cm4a+gUbCnDGtTNAGpDN77yjm1H
+ SkPlcTRLPr8cB4/M7u3nDcykQ/LJlymPgSx+DWGYE8ACvrRDQ+zQn6dg0nSt8eqFP0yN
+ 5p5g==
+X-Gm-Message-State: ACrzQf08avTYSne+pUncYr1uXYM1BaoHkHNkqGpOnYHkhWi3L48isgB9
+ 3wRJfPa6ZjNXlCmv19SHUDI=
+X-Google-Smtp-Source: AMsMyM6I10XqpMs813GH0q+zs3c5zhpTvkYzCNQjak6KuMq7xMVwM5QeZwoh6ZuDreSMA43MfYe7wQ==
+X-Received: by 2002:a2e:8717:0:b0:26f:c379:677 with SMTP id
+ m23-20020a2e8717000000b0026fc3790677mr1702265lji.445.1666128520627; 
+ Tue, 18 Oct 2022 14:28:40 -0700 (PDT)
 Received: from ?IPV6:2a02:a31a:a240:1700:ade4:dc4:81f3:286b?
  ([2a02:a31a:a240:1700:ade4:dc4:81f3:286b])
  by smtp.googlemail.com with ESMTPSA id
- u13-20020a05651220cd00b0049d83646ce7sm2002435lfr.110.2022.10.18.13.57.06
+ g3-20020a056512118300b004a27d2ea029sm2007903lfr.172.2022.10.18.14.28.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Oct 2022 13:57:08 -0700 (PDT)
+ Tue, 18 Oct 2022 14:28:39 -0700 (PDT)
 From: Mateusz Kwiatkowski <kfyatek@gmail.com>
 X-Google-Original-From: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
-Message-ID: <0afdeda7-558e-647f-ef28-1fcd80807c1b@gmail.com>
-Date: Tue, 18 Oct 2022 22:57:04 +0200
+Content-Type: multipart/alternative;
+ boundary="------------omM0clkR5bRAZrwq1o3dB3sR"
+Message-ID: <da2b4cb4-5d12-3161-64e3-e87a8cc63e81@gmail.com>
+Date: Tue, 18 Oct 2022 23:28:35 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.3.3
 Content-Language: pl
-To: Maxime Ripard <maxime@cerno.tech>
+To: Maxime Ripard <maxime@cerno.tech>, =?UTF-8?Q?Noralf_Tr=c3=b8nnes?=
+ <noralf@tronnes.org>
 References: <20220728-rpi-analog-tv-properties-v5-0-d841cc64fe4b@cerno.tech>
- <20220728-rpi-analog-tv-properties-v5-21-d841cc64fe4b@cerno.tech>
- <93bf9fcc-c645-b042-011f-8f1fc957af48@gmail.com>
- <20221018083153.okkqpd5ccfrnwdj3@houat>
-In-Reply-To: <20221018083153.okkqpd5ccfrnwdj3@houat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH] drm/vc4: vec: Add support for PAL-60
+ <20220728-rpi-analog-tv-properties-v5-20-d841cc64fe4b@cerno.tech>
+ <c1949248-fb40-682c-492e-bafbd915cee3@gmail.com>
+ <81936381-ae37-8c84-4681-9eff19f653b5@tronnes.org>
+ <20221018100033.d2sf7xagyycx5d4p@houat>
+In-Reply-To: <20221018100033.d2sf7xagyycx5d4p@houat>
+Subject: Re: [Nouveau] [PATCH v5 20/22] drm/vc4: vec: Convert to the new TV
+ mode property
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,84 +95,286 @@ Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
  Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+ Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+This is a multi-part message in MIME format.
+--------------omM0clkR5bRAZrwq1o3dB3sR
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
 Hi Maxime,
 
-W dniu 18.10.2022 o 10:31, Maxime Ripard pisze:
-> Hi,
+W dniu 18.10.2022 o 12:00, Maxime Ripard pisze:
+> On Mon, Oct 17, 2022 at 12:31:31PM +0200, Noralf Trønnes wrote:
+>> Den 16.10.2022 20.52, skrev Mateusz Kwiatkowski:
+>>>>  static int vc4_vec_connector_get_modes(struct drm_connector *connector)
+>>>>  {
+>>>> -	struct drm_connector_state *state = connector->state;
+>>>>  	struct drm_display_mode *mode;
+>>>>  
+>>>> -	mode = drm_mode_duplicate(connector->dev,
+>>>> -				  vc4_vec_tv_modes[state->tv.legacy_mode].mode);
+>>>> +	mode = drm_mode_analog_ntsc_480i(connector->dev);
+>>>>  	if (!mode) {
+>>>>  		DRM_ERROR("Failed to create a new display mode\n");
+>>>>  		return -ENOMEM;
+>>>>  	}
+>>>>  
+>>>> +	mode->type |= DRM_MODE_TYPE_PREFERRED;
+>>>>  	drm_mode_probed_add(connector, mode);
+>>>>  
+>>>> -	return 1;
+>>>> +	mode = drm_mode_analog_pal_576i(connector->dev);
+>>>> +	if (!mode) {
+>>>> +		DRM_ERROR("Failed to create a new display mode\n");
+>>>> +		return -ENOMEM;
+>>>> +	}
+>>>> +
+>>>> +	drm_mode_probed_add(connector, mode);
+>>>> +
+>>>> +	return 2;
+>>>> +}
+>>>
+>>> Referencing those previous discussions:
+>>> - https://lore.kernel.org/dri-devel/0255f7c6-0484-6456-350d-cf24f3fee5d6@tronnes.org/
+>>> - https://lore.kernel.org/dri-devel/c8f8015a-75da-afa8-ca7f-b2b134cacd16@gmail.com/
+>>>
+>>> Unconditionally setting the 480i mode as DRM_MODE_TYPE_PREFERRED causes Xorg
+>>> (at least on current Raspberry Pi OS) to display garbage when
+>>> video=Composite1:PAL is specified on the command line, so I'm afraid this won't
+>>> do.
+>>>
+>>> As I see it, there are three viable solutions for this issue:
+>>>
+>>> a) Somehow query the video= command line option from this function, and set
+>>>    DRM_MODE_TYPE_PREFERRED appropriately. This would break the abstraction
+>>>    provided by global DRM code, but should work fine.
+>>>
+>>> b) Modify drm_helper_probe_add_cmdline_mode() so that it sets
+>>>    DRM_MODE_TYPE_PREFERRED in addition to DRM_MODE_TYPE_USERDEF. This seems
+>>>    pretty robust, but affects the entire DRM subsystem, which may break
+>>>    userspace in different ways.
+>>>
+>>>    - Maybe this could be mitigated by adding some additional conditions, e.g.
+>>>      setting the PREFERRED flag only if no modes are already flagged as such
+>>>      and/or only if the cmdline mode is a named one (~= analog TV mode)
+>>>
+>>> c) Forcing userspace (Xorg / Raspberry Pi OS) to get fixed and honor the USERDEF
+>>>    flag.
+>>>
+>>> Either way, hardcoding 480i as PREFERRED does not seem right.
+>>>
+>>
+>> My solution for this is to look at tv.mode to know which mode to mark as
+>> preferred. Maxime didn't like this since it changes things behind
+>> userspace's back. I don't see how that can cause any problems for userspace.
+>>
+>> If userspace uses atomic and sets tv_mode, it has to know which mode to
+>> use before hand, so it doesn't look at the preferreded flag.
+>>
+>> If it uses legacy and sets tv_mode, it can end up with a stale preferred
+>> flag, but no worse than not having the flag or that ntsc is always
+>> preferred.
+>>
+>> If it doesn't change tv_mode, there's no problem, the preferred flag
+>> doesn't change.
 >
-> On Sun, Oct 16, 2022 at 09:46:49PM +0200, Mateusz Kwiatkowski wrote:
->> @@ -308,14 +324,15 @@ static const struct vc4_vec_tv_mode vc4_vec_tv_modes[] = {
->>  };
->>  
->>  static inline const struct vc4_vec_tv_mode *
->> -vc4_vec_tv_mode_lookup(unsigned int mode)
->> +vc4_vec_tv_mode_lookup(unsigned int mode, u16 htotal)
->>  {
->>  	unsigned int i;
->>  
->>  	for (i = 0; i < ARRAY_SIZE(vc4_vec_tv_modes); i++) {
->>  		const struct vc4_vec_tv_mode *tv_mode = &vc4_vec_tv_modes[i];
->>  
->> -		if (tv_mode->mode == mode)
->> +		if (tv_mode->mode == mode &&
->> +		    tv_mode->expected_htotal == htotal)
->>  			return tv_mode;
+> I don't like it because I just see no way to make this reliable. When we
+> set tv_mode, we're not only going to change the preferred flag, but also
+> the order of the modes to make the preferred mode first.
 >
-> Is there any reason we're not using the refresh rate to filter this? It
-> seems more natural to me.
+> Since we just changed the mode lists, we also want to send a hotplug
+> event to userspace so that it gets notified of it. It will pick up the
+> new preferred mode, great.
+>
+> But what if it doesn't? There's no requirement for userspace to handle
+> hotplug events, and Kodi won't for example. So we just changed the TV
+> mode but not the actual mode, and that's it. It's just as broken for
+> Kodi as it is for X11 right now.
+>
+> If we can't get a bullet-proof solution, then I'm not convinced it's
+> worth addressing. Especially since it's already the current state, and
+> it doesn't seem to bother a lot of people.
 
-Let me give you an example first.
+I wouldn't rely on the "doesn't seem to bother a lot of people" bit too much.
+Here's why:
 
-There are actually two ways to configure PAL-60-ish mode on VC4/VEC:
+- Analog TV output is a relatively obscure feature in this day and age in the
+  first place.
 
-a) Modeline 13.5 720 734 798 858 480 487 493 525 Interlace, standard registers
-   set to VEC_CONFIG0_PAL_M_STD, custom frequency enabled and set to 0x2a098acb;
-   Setting the standard registers to "PAL-M" puts the VEC in true 59.94 Hz mode,
-   so the video timings are identical as for NTSC (or PAL-M), and the custom
-   frequency makes the color subcarrier compatible with regular PAL receivers.
-   This is the "true" PAL-60, thanks to the true System M timings.
+- Out of the people interested in using it with VC4/VEC, many are actually using
+  the downstream kernel from https://github.com/raspberrypi/linux instead of the
+  upstream kernel, and/or firmware mode-switching instead of proper KMS.
 
-a) Modeline 13.5 720 740 804 864 480 486 492 525 Interlace, standards registers
-   set to VEC_CONFIG0_PAL with standard frequency; This is a "fake" PAL-60 mode,
-   the refresh rate is actually ~59.524 Hz. Most "NTSC" sets will be able to
-   sync with this mode no problem, but the VEC is actually operating in its
-   50 Hz mode - it's just the "premature" vertical sync signal causes it to
-   output something that is similar to the 525-line system, however strictly
-   speaking non-standard due to lower horizontal sync frequency.
+  - The downstream kernel only reports modes that match the TV mode set at boot
+    either via vc4.tv_norm=, or implied by the resolution set via video=; note
+    that video= is also set appropriately at boot by Pi firmware, based on the
+    value of sdtv_mode set in config.txt. See also the
+    vc4_vec_connector_get_modes() and vc4_vec_get_default_mode() functions in
+    https://github.com/raspberrypi/linux/blob/dbd073e4028580a09b6ee507e0c137441cb52650/drivers/gpu/drm/vc4/vc4_vec.c
 
-This comes down to the fact that:
+  - When firmware mode-switching is used, it sets the appropriate TV mode and
+    resolution based on the sdtv_mode set in config.txt.
 
-- When VEC's standard registers are set to VEC_CONFIG0_NTSC_STD or
-  VEC_CONFIG0_PAL_M_STD, it operates in the "CCIR System M" mode, expects htotal
-  to be exactly 858 pixels (and it will generate horizontal sync pulse every 858
-  pixels on its own regardless of what comes out of the PV - so there will be
-  garbage on screen if you set it to anything else), and vtotal to be 525 lines.
-  It will not accept vtotal that's any higher (it will generate its own vertical
-  sync as demanded by System M if not triggered by the PV), but it can be lower
-  - resulting in modes that are non-standard, but otherwise valid.
+So, all in all, the number of people who would use 1. analog TV out with VC4,
+2. the upstream kernel, 3. full KMS (and thus the vc4_vec.c code) is rather
+small, so the fact that you're not hearing too many complaints doesn't mean that
+the current behavior is OK. If anybody ran into problems and was bothered by
+that, they likely migrated to the downstream kernel and/or firmware
+mode-switching.
 
-- Likewise, when the registers are set to VEC_CONFIG0_PAL_BDGHI_STD,
-  VEC_CONFIG0_PAL_N_STD or VEC_CONFIG0_SECAM_STD (SECAM is a bit special, but
-  that's irrelevant here), it operates in the "CCIR System B/D/G/H/I/N" mode,
-  and likewise, expects htotal to be exactly 864 pixels (garbage on screen
-  otherwise), vtotal limit is 625 lines, etc.
-
-Checking for the refresh rate would only work for standard-compliant modes and
-have the potential of completely breaking on any custom modes. Conversely,
-checking for htotal aligns perfectly with the limitations of the hardware, and
-allows the user to set any modeline that the hardware is able to output with
-any level of sanity.
-
-Footnote: all this information on VEC's behavior comes from my own
-experimentation, messing around with its registers and seeing what happens
-(both on screen and on an oscilloscope). I've never seen any Broadcom docs on
-this chip, so it's by no means official.
+That being said, I completely forgot that there's a cmdline_mode field in
+struct drm_connector, even though I actually added code that examines it inside
+vc4_vec_connector_get_modes() that's in the downstream kernel. So... what do
+you think about just examining connector->cmdline_mode.tv_mode there? It seems
+to solve all the problems.
 
 Best regards,
 Mateusz Kwiatkowski
 
+--------------omM0clkR5bRAZrwq1o3dB3sR
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <pre>Hi Maxime,
+
+W dniu 18.10.2022 o 12:00, Maxime Ripard pisze:
+&gt; On Mon, Oct 17, 2022 at 12:31:31PM +0200, Noralf Trønnes wrote:
+&gt;&gt; Den 16.10.2022 20.52, skrev Mateusz Kwiatkowski:
+&gt;&gt;&gt;&gt;  static int vc4_vec_connector_get_modes(struct drm_connector *connector)
+&gt;&gt;&gt;&gt;  {
+&gt;&gt;&gt;&gt; -	struct drm_connector_state *state = connector-&gt;state;
+&gt;&gt;&gt;&gt;  	struct drm_display_mode *mode;
+&gt;&gt;&gt;&gt;  
+&gt;&gt;&gt;&gt; -	mode = drm_mode_duplicate(connector-&gt;dev,
+&gt;&gt;&gt;&gt; -				  vc4_vec_tv_modes[state-&gt;tv.legacy_mode].mode);
+&gt;&gt;&gt;&gt; +	mode = drm_mode_analog_ntsc_480i(connector-&gt;dev);
+&gt;&gt;&gt;&gt;  	if (!mode) {
+&gt;&gt;&gt;&gt;  		DRM_ERROR("Failed to create a new display mode\n");
+&gt;&gt;&gt;&gt;  		return -ENOMEM;
+&gt;&gt;&gt;&gt;  	}
+&gt;&gt;&gt;&gt;  
+&gt;&gt;&gt;&gt; +	mode-&gt;type |= DRM_MODE_TYPE_PREFERRED;
+&gt;&gt;&gt;&gt;  	drm_mode_probed_add(connector, mode);
+&gt;&gt;&gt;&gt;  
+&gt;&gt;&gt;&gt; -	return 1;
+&gt;&gt;&gt;&gt; +	mode = drm_mode_analog_pal_576i(connector-&gt;dev);
+&gt;&gt;&gt;&gt; +	if (!mode) {
+&gt;&gt;&gt;&gt; +		DRM_ERROR("Failed to create a new display mode\n");
+&gt;&gt;&gt;&gt; +		return -ENOMEM;
+&gt;&gt;&gt;&gt; +	}
+&gt;&gt;&gt;&gt; +
+&gt;&gt;&gt;&gt; +	drm_mode_probed_add(connector, mode);
+&gt;&gt;&gt;&gt; +
+&gt;&gt;&gt;&gt; +	return 2;
+&gt;&gt;&gt;&gt; +}
+&gt;&gt;&gt;
+&gt;&gt;&gt; Referencing those previous discussions:
+&gt;&gt;&gt; - <a class="moz-txt-link-freetext" href="https://lore.kernel.org/dri-devel/0255f7c6-0484-6456-350d-cf24f3fee5d6@tronnes.org/">https://lore.kernel.org/dri-devel/0255f7c6-0484-6456-350d-cf24f3fee5d6@tronnes.org/</a>
+&gt;&gt;&gt; - <a class="moz-txt-link-freetext" href="https://lore.kernel.org/dri-devel/c8f8015a-75da-afa8-ca7f-b2b134cacd16@gmail.com/">https://lore.kernel.org/dri-devel/c8f8015a-75da-afa8-ca7f-b2b134cacd16@gmail.com/</a>
+&gt;&gt;&gt;
+&gt;&gt;&gt; Unconditionally setting the 480i mode as DRM_MODE_TYPE_PREFERRED causes Xorg
+&gt;&gt;&gt; (at least on current Raspberry Pi OS) to display garbage when
+&gt;&gt;&gt; video=Composite1:PAL is specified on the command line, so I'm afraid this won't
+&gt;&gt;&gt; do.
+&gt;&gt;&gt;
+&gt;&gt;&gt; As I see it, there are three viable solutions for this issue:
+&gt;&gt;&gt;
+&gt;&gt;&gt; a) Somehow query the video= command line option from this function, and set
+&gt;&gt;&gt;    DRM_MODE_TYPE_PREFERRED appropriately. This would break the abstraction
+&gt;&gt;&gt;    provided by global DRM code, but should work fine.
+&gt;&gt;&gt;
+&gt;&gt;&gt; b) Modify drm_helper_probe_add_cmdline_mode() so that it sets
+&gt;&gt;&gt;    DRM_MODE_TYPE_PREFERRED in addition to DRM_MODE_TYPE_USERDEF. This seems
+&gt;&gt;&gt;    pretty robust, but affects the entire DRM subsystem, which may break
+&gt;&gt;&gt;    userspace in different ways.
+&gt;&gt;&gt;
+&gt;&gt;&gt;    - Maybe this could be mitigated by adding some additional conditions, e.g.
+&gt;&gt;&gt;      setting the PREFERRED flag only if no modes are already flagged as such
+&gt;&gt;&gt;      and/or only if the cmdline mode is a named one (~= analog TV mode)
+&gt;&gt;&gt;
+&gt;&gt;&gt; c) Forcing userspace (Xorg / Raspberry Pi OS) to get fixed and honor the USERDEF
+&gt;&gt;&gt;    flag.
+&gt;&gt;&gt;
+&gt;&gt;&gt; Either way, hardcoding 480i as PREFERRED does not seem right.
+&gt;&gt;&gt;
+&gt;&gt;
+&gt;&gt; My solution for this is to look at tv.mode to know which mode to mark as
+&gt;&gt; preferred. Maxime didn't like this since it changes things behind
+&gt;&gt; userspace's back. I don't see how that can cause any problems for userspace.
+&gt;&gt;
+&gt;&gt; If userspace uses atomic and sets tv_mode, it has to know which mode to
+&gt;&gt; use before hand, so it doesn't look at the preferreded flag.
+&gt;&gt;
+&gt;&gt; If it uses legacy and sets tv_mode, it can end up with a stale preferred
+&gt;&gt; flag, but no worse than not having the flag or that ntsc is always
+&gt;&gt; preferred.
+&gt;&gt;
+&gt;&gt; If it doesn't change tv_mode, there's no problem, the preferred flag
+&gt;&gt; doesn't change.
+&gt;
+&gt; I don't like it because I just see no way to make this reliable. When we
+&gt; set tv_mode, we're not only going to change the preferred flag, but also
+&gt; the order of the modes to make the preferred mode first.
+&gt;
+&gt; Since we just changed the mode lists, we also want to send a hotplug
+&gt; event to userspace so that it gets notified of it. It will pick up the
+&gt; new preferred mode, great.
+&gt;
+&gt; But what if it doesn't? There's no requirement for userspace to handle
+&gt; hotplug events, and Kodi won't for example. So we just changed the TV
+&gt; mode but not the actual mode, and that's it. It's just as broken for
+&gt; Kodi as it is for X11 right now.
+&gt;
+&gt; If we can't get a bullet-proof solution, then I'm not convinced it's
+&gt; worth addressing. Especially since it's already the current state, and
+&gt; it doesn't seem to bother a lot of people.
+
+I wouldn't rely on the "doesn't seem to bother a lot of people" bit too much.
+Here's why:
+
+- Analog TV output is a relatively obscure feature in this day and age in the
+  first place.
+
+- Out of the people interested in using it with VC4/VEC, many are actually using
+  the downstream kernel from <a class="moz-txt-link-freetext" href="https://github.com/raspberrypi/linux">https://github.com/raspberrypi/linux</a> instead of the
+  upstream kernel, and/or firmware mode-switching instead of proper KMS.
+
+  - The downstream kernel only reports modes that match the TV mode set at boot
+    either via vc4.tv_norm=, or implied by the resolution set via video=; note
+    that video= is also set appropriately at boot by Pi firmware, based on the
+    value of sdtv_mode set in config.txt. See also the
+    vc4_vec_connector_get_modes() and vc4_vec_get_default_mode() functions in
+    <a class="moz-txt-link-freetext" href="https://github.com/raspberrypi/linux/blob/dbd073e4028580a09b6ee507e0c137441cb52650/drivers/gpu/drm/vc4/vc4_vec.c">https://github.com/raspberrypi/linux/blob/dbd073e4028580a09b6ee507e0c137441cb52650/drivers/gpu/drm/vc4/vc4_vec.c</a>
+
+  - When firmware mode-switching is used, it sets the appropriate TV mode and
+    resolution based on the sdtv_mode set in config.txt.
+
+So, all in all, the number of people who would use 1. analog TV out with VC4,
+2. the upstream kernel, 3. full KMS (and thus the vc4_vec.c code) is rather
+small, so the fact that you're not hearing too many complaints doesn't mean that
+the current behavior is OK. If anybody ran into problems and was bothered by
+that, they likely migrated to the downstream kernel and/or firmware
+mode-switching.
+
+That being said, I completely forgot that there's a cmdline_mode field in
+struct drm_connector, even though I actually added code that examines it inside
+vc4_vec_connector_get_modes() that's in the downstream kernel. So... what do
+you think about just examining connector-&gt;cmdline_mode.tv_mode there? It seems
+to solve all the problems.
+
+Best regards,
+Mateusz Kwiatkowski
+</pre>
+  </body>
+</html>
+
+--------------omM0clkR5bRAZrwq1o3dB3sR--
