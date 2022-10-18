@@ -1,83 +1,78 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBD8B6025D5
-	for <lists+nouveau@lfdr.de>; Tue, 18 Oct 2022 09:34:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D5644602641
+	for <lists+nouveau@lfdr.de>; Tue, 18 Oct 2022 09:58:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 42F0510E1DB;
-	Tue, 18 Oct 2022 07:34:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 641CA10EED2;
+	Tue, 18 Oct 2022 07:57:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from wnew2-smtp.messagingengine.com (wnew2-smtp.messagingengine.com
  [64.147.123.27])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ABD2910E1DB;
- Tue, 18 Oct 2022 07:34:24 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2C98010EECC;
+ Tue, 18 Oct 2022 07:57:50 +0000 (UTC)
 Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailnew.west.internal (Postfix) with ESMTP id AFA6D2B06898;
- Tue, 18 Oct 2022 03:34:19 -0400 (EDT)
+ by mailnew.west.internal (Postfix) with ESMTP id 5DF992B06870;
+ Tue, 18 Oct 2022 03:57:45 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Tue, 18 Oct 2022 03:34:23 -0400
+ by compute5.internal (MEProxy); Tue, 18 Oct 2022 03:57:49 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :cc:content-transfer-encoding:content-type:date:date:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to; s=fm3; t=1666078459; x=
- 1666085659; bh=O28Ra42je2l6WzDm/ZO6o7rlbUD0f6okc6FR7gCx5gY=; b=c
- D7GfdBBYv+RNoIJNHU7ZMe6/6FlTZtIgN1EVcdn7q+/E/tX8MUYD6cWK70SP+095
- HIysOx6U4hzAzd9Oxr1+lfRNMsdTrBALP5TJwpaKAdsT441k54XiJefZoNwksmDX
- epJn3K0Zl1gXfWdEG3WyJCO0Gf4YYQgf2AUQhy43zcRtbq4ZG8vbW4fHpJJY6cl7
- 0Q+/7raGCos6wWg5jQEYEg7BQqlsDeJTfOy8H9hEmeU6/YEQZPzEpuEl/LaL/Vj9
- qkVpo76vgbxd82LnIZMcIfpuQG5kuH7S0M4AfuBlXTCRA+4FgLH2GFv3vIhwBUIm
- g/6L/exJNRAJueyn9q0Kw==
+ :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to; s=fm3; t=1666079864; x=1666087064; bh=Lr4o8rmETJ
+ 5sK3ZkYq2gWw8lpC8hs57X7H/NqOJONxM=; b=vKvmy+HSRwwwE00QKORpSvA4Lo
+ m6nq/1xr77nqOg39vFG00W1kaby+7ESVzfOveWTLMqST4HTnbXooc+IMpod42IOx
+ fJGm1AGhRONMZeYRUC8qVcFjrltuSWFUnuGhjO6pk4D0ntIUYw9uBjp0BAxSC5cH
+ j7gEMmUjV9UbEP2TMyPcbOnWjCNafa3T6/ay+St+jZUyEU+tW3z4r9bK5ApRYCPV
+ QJnrQN1luLF7DkKijPPR5+TkCvGldFUPzrT/Dc6GaVBT7HOsrbRUiRo/ro4PYsXD
+ hDtsNGB2GJotlu9Xr1uA6mSZ2koJikNZqtk5tyJhhYAX3t1uAYPjRUKabxxg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1666078459; x=
- 1666085659; bh=O28Ra42je2l6WzDm/ZO6o7rlbUD0f6okc6FR7gCx5gY=; b=K
- AziRhUbnFvkdSTAUOgSQwizWhJotp/ejPbOhWNRWwnOuNmPW89LQCRyji9fSEqPD
- 1U1Vltxi+zQuJhVmX9ufaEWhogLUTRpo42yYA/2OigiBIqfDHRcy99ab9ABS3u1S
- MWPxl+1+f28ZICrHoxJAhEBL+J94+rIw7nBuIcHb7v1ooKaC4Zbinx62GNjEEy6V
- PxLrPZ0nYSx4mS0ZC0abfrisiOcnTxgGTGK+K0Yj2Xqn9Mat/rJmJALyGyi19B1/
- 6whf2Y9wu8Z/7EdAVzlj462ybn51hI35XvXMYfbn7EOh8dHJRLKXFejvqm6ySDRi
- xJDOsXQ3TH3VGqeNPNL0Q==
-X-ME-Sender: <xms:-lZOY2ANOVo_-VHFDC2BsVOUuyO5VW3WiDQ9xO5aOvTmwO6WQXYQxw>
- <xme:-lZOYwgOxYjEsZMPGEguSQiviJKiwhs1S-50MRE0pJCGpMKsWo2PBRIunN_pl-rN5
- 35xj_K3svuXb7EjHnQ>
-X-ME-Received: <xmr:-lZOY5mBQh0qtc_Bbrc-pAUe2L5T5LPNYiTMFtT2v7i-3fhzSAW_G6rXN08f>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeeltddguddvfecutefuodetggdotefrod
+ messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
+ :feedback-id:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:sender:subject:subject:to:to
+ :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm3; t=1666079864; x=1666087064; bh=Lr4o8rmETJ5sK3ZkYq2gWw8lpC8h
+ s57X7H/NqOJONxM=; b=Rd+9e5DFtINlfMc2YYOI0+MKnMYwDD9655rlznh2dgSm
+ SA/RTKgRXAJmxCQyG0mNyg/ehPPGbUW9PvYKwpqeDuWKUWoIaTLXh5LrXn0SgoYZ
+ nGrre6A31fsxquFB7rgEOMQFal70yeQbUFPx1zrABdUaw49LrYPGQMIHXIHdJMPb
+ PLWO1Hq2Cv278LKTd1EFIGyFuMHWpAwX5ZWc+iS2kmiBgMt3rT+GIoYDhM9fI3IQ
+ USNm+HuOZpZUu9mz7gY8B18uk+KB/PWrMtGuIpIR4hXlLigHF+MR+BXYRGHC2HtT
+ ZCPnv4OZLoSFh1TZ89Y/Pl3jCloaTiIG6MfTfd+OjQ==
+X-ME-Sender: <xms:eFxOY4tYe0N7n4oHBdbnTVOOhVkDCJDseBVReSvbhu05j2V5icTOfw>
+ <xme:eFxOY1exK__txeJ3ucTKAAh3PMZF4YNvd7eUb7kHi2WWoq68m7rCgMVW2UqMRL37C
+ hUb0Qd7Z_qfvsOH6To>
+X-ME-Received: <xmr:eFxOYzwEg8yoSZul-Huszm9lfzk3ZZVvktA7asEbvofMnzHsftMzVNAX5A3A>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeeltddguddvkecutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
  necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpeffhffvvefukfhfgggtugfgjgesthhqredttddtudenucfhrhhomhepofgr
- gihimhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtf
- frrghtthgvrhhnpeejvefftdehvedvfeevffffjeektdfgkedviefgfefhfefgtefhjeej
- ieegieeugeenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuih
- iivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegtvghrnhhordht
- vggthh
-X-ME-Proxy: <xmx:-lZOY0wQsKHOedSZNpvC-ut337YUuHIfSe8ADCh2G9hhIAUJz6Ho5A>
- <xmx:-lZOY7T87jDiXPJk9cTa2Wcnzym12ZRSxOTme6T_ESJE1jBCmh6aNw>
- <xmx:-lZOY_bsoRtzVSwxTgox0TAERmVOBddBaC3ItH-FBFBaC2V_L2o1mA>
- <xmx:-1ZOYzzDVwXhCAG5OpWMTYanWa3VUWo4DwXwhLLxzzu4VZfUqiNMi22WE54>
+ enucfjughrpeffhffvvefukfhfgggtuggjsehgtderredttddunecuhfhrohhmpeforgig
+ ihhmvgcutfhiphgrrhguuceomhgrgihimhgvsegtvghrnhhordhtvggthheqnecuggftrf
+ grthhtvghrnhepjeevfeehfeekieffgeevleevtefgffefkedtfeeuhfettdegjeehgfeg
+ udffffdunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomh
+ epmhgrgihimhgvsegtvghrnhhordhtvggthh
+X-ME-Proxy: <xmx:eFxOY7Mhyv3PdEfoHEQDxG63PHDCvZ09uKXpAsXyARpEVsdwgVroog>
+ <xmx:eFxOY4_vnjB7joccgkbFlUNnW32Xt0KLsvyB1Xj2t-83rXS-wAhcxQ>
+ <xmx:eFxOYzUWodm9Qv1bDIg0-xDVme1dTkQXB7oWBBEcP7NL8kZszvOcuQ>
+ <xmx:eFxOY2exmKJm-vn-OQTvnUQLosa1VgJBjnpovYIhjfkaRc-W6Behj_5TCgY>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 18 Oct 2022 03:34:17 -0400 (EDT)
-Date: Tue, 18 Oct 2022 09:34:16 +0200
+ 18 Oct 2022 03:57:43 -0400 (EDT)
+Date: Tue, 18 Oct 2022 09:57:42 +0200
 From: Maxime Ripard <maxime@cerno.tech>
 To: Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
-Message-ID: <20221018073416.7tttm6mnbt2pdrpk@houat>
-References: <20220728-rpi-analog-tv-properties-v4-0-60d38873f782@cerno.tech>
- <20220728-rpi-analog-tv-properties-v4-11-60d38873f782@cerno.tech>
- <0aa690b8-988a-878f-4d4f-d391295bc591@tronnes.org>
- <20221013083638.kloiaxervnhii7ew@houat>
- <71e53906-ae9b-55b9-7a93-7bb04a891423@tronnes.org>
+Message-ID: <20221018075742.7g3sfay3o7wk54kv@houat>
+References: <20220728-rpi-analog-tv-properties-v5-0-d841cc64fe4b@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v5-8-d841cc64fe4b@cerno.tech>
+ <729f849a-0287-a2fb-125f-892b4dd6053f@tronnes.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ah23qdqgdrx2vnp2"
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <71e53906-ae9b-55b9-7a93-7bb04a891423@tronnes.org>
-Subject: Re: [Nouveau] [PATCH v4 11/30] drm/modes: Add a function to
- generate analog display modes
+In-Reply-To: <729f849a-0287-a2fb-125f-892b4dd6053f@tronnes.org>
+Subject: Re: [Nouveau] [PATCH v5 08/22] drm/modes: Move named modes parsing
+ to a separate function
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -107,71 +102,78 @@ Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
 
-On Sat, Oct 15, 2022 at 05:04:50PM +0200, Noralf Tr=F8nnes wrote:
-> Den 13.10.2022 10.36, skrev Maxime Ripard:
-> > On Sat, Oct 01, 2022 at 02:52:06PM +0200, Noralf Tr=F8nnes wrote:
-> >> Den 29.09.2022 18.31, skrev Maxime Ripard:
-> >>> Multiple drivers (meson, vc4, sun4i) define analog TV 525-lines and
-> >>> 625-lines modes in their drivers.
-> >>>
-> >>> Since those modes are fairly standard, and that we'll need to use them
-> >>> in more places in the future, it makes sense to move their definition
-> >>> into the core framework.
-> >>>
-> >>> However, analog display usually have fairly loose timings requirement=
-s,
-> >>> the only discrete parameters being the total number of lines and pixel
-> >>> clock frequency. Thus, we created a function that will create a displ=
-ay
-> >>> mode from the standard, the pixel frequency and the active area.
-> >>>
-> >>> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> >>>
-> >>> ---
-> >>>
-> >>> Changes in v4:
-> >>> - Reworded the line length check comment
-> >>> - Switch to HZ_PER_KHZ in tests
-> >>> - Use previous timing to fill our mode
-> >>> - Move the number of lines check earlier
-> >>> ---
-> >>>  drivers/gpu/drm/drm_modes.c            | 474 +++++++++++++++++++++++=
-++++++++++
-> >>>  drivers/gpu/drm/tests/Makefile         |   1 +
-> >>>  drivers/gpu/drm/tests/drm_modes_test.c | 144 ++++++++++
-> >>>  include/drm/drm_modes.h                |  17 ++
-> >>>  4 files changed, 636 insertions(+)
-> >>>
-> >>
-> >> I haven't followed the discussion on this patch, but it seems rather
-> >> excessive to add over 600 lines of code (including tests) to add 2 fix=
-ed
-> >> modes. And it's very difficult to see from the code what the actual
-> >> display mode timings really are, which would be useful for other
-> >> developers down the road wanting to use them.
-> >>
-> >> Why not just hardcode the modes?
+--ah23qdqgdrx2vnp2
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Oct 16, 2022 at 06:11:21PM +0200, Noralf Tr=F8nnes wrote:
+> Den 13.10.2022 15.18, skrev Maxime Ripard:
+> > The current construction of the named mode parsing doesn't allow to ext=
+end
+> > it easily. Let's move it to a separate function so we can add more
+> > parameters and modes.
 > >=20
-> > Yeah, I have kind of the same feeling tbh, but it was asked back on the
-> > v1 to ease the transition of old fbdev drivers, since they will need
-> > such a function:
-> > https://lore.kernel.org/dri-devel/CAMuHMdUrwzPYjA0wdR7ADj5Ov6+m03JbnY8f=
-BYzRYyWDuNm5=3Dg@mail.gmail.com/
+> > In order for the tests to still pass, some extra checks are needed, so
+> > it's not a 1:1 move.
+> >=20
+> > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 > >=20
 >=20
-> If that's the case I suggest you just hardcode them for now and leave
-> the complexity to the developer doing the actual conversion of the fbdev
-> driver. Who knows when that will happen, but that person will have your
-> well documented and discussed work to fall back on.
+> I was hoping that someone else would step up and review these parser
+> patches since the parser code is rather difficult to read, for me at
+> least. I have studied it now, so I'll give it a try.
+>=20
+> > ---
+> > Changes in v4:
+> > - Fold down all the named mode patches that were split into a single
+> >   patch again to maintain bisectability
+> > ---
+> >  drivers/gpu/drm/drm_modes.c | 73 +++++++++++++++++++++++++++++++++++++=
++-------
+> >  1 file changed, 62 insertions(+), 11 deletions(-)
+> >=20
+> > diff --git a/drivers/gpu/drm/drm_modes.c b/drivers/gpu/drm/drm_modes.c
+> > index c0dceff51cac..2f020ef2ddf2 100644
+> > --- a/drivers/gpu/drm/drm_modes.c
+> > +++ b/drivers/gpu/drm/drm_modes.c
+> > @@ -2229,6 +2229,55 @@ static const char * const drm_named_modes_whitel=
+ist[] =3D {
+> >  	"PAL",
+> >  };
+> > =20
+> > +static int drm_mode_parse_cmdline_named_mode(const char *name,
+> > +					     unsigned int name_end,
+> > +					     struct drm_cmdline_mode *cmdline_mode)
+> > +{
+> > +	unsigned int i;
+> > +
+> > +	if (!name_end)
+> > +		return 0;
+>=20
+> name_end can't be zero since the argument is checked before calling this
+> function.
 
-I'd rather not, tbh. We've collectively spent weeks figuring this out,
-reviewing it and so on, I very much want to avoid doing this all over
-again if it's going to be useful at some point.
+I'd really like to keep it in though. At least, we know by looking at
+this small function that we're going to be safe all the time, no matter
+what the caller does.
 
-Jani also wanted to expose a function and not a raw mode, so this patch
-also addresses that:
-https://lore.kernel.org/dri-devel/8735eeg31e.fsf@intel.com/
+And if the caller wants to check it as well, fine, it's only a simple
+comparison ran once or twice at boot, it's not like it's in a hot-path.
 
+I've addressed your other comments, thanks!
 Maxime
+
+--ah23qdqgdrx2vnp2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCY05cdgAKCRDj7w1vZxhR
+xQM1AP9H4JgsnRShCq6qLr9+GCsm7Uj/MW6Tqyv5ymF9akVodwD+MJH0PS0yUl6U
+Krhepy+KRRj3eEBJ5bua3Ps8acgwCw8=
+=otSH
+-----END PGP SIGNATURE-----
+
+--ah23qdqgdrx2vnp2--
