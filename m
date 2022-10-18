@@ -2,77 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5644602641
-	for <lists+nouveau@lfdr.de>; Tue, 18 Oct 2022 09:58:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6237602677
+	for <lists+nouveau@lfdr.de>; Tue, 18 Oct 2022 10:08:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 641CA10EED2;
-	Tue, 18 Oct 2022 07:57:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9CA9F10EEE4;
+	Tue, 18 Oct 2022 08:08:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from wnew2-smtp.messagingengine.com (wnew2-smtp.messagingengine.com
  [64.147.123.27])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2C98010EECC;
- Tue, 18 Oct 2022 07:57:50 +0000 (UTC)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailnew.west.internal (Postfix) with ESMTP id 5DF992B06870;
- Tue, 18 Oct 2022 03:57:45 -0400 (EDT)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EC2AB10E9F4;
+ Tue, 18 Oct 2022 08:08:14 +0000 (UTC)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailnew.west.internal (Postfix) with ESMTP id 0EDFD2B05993;
+ Tue, 18 Oct 2022 04:08:09 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Tue, 18 Oct 2022 03:57:49 -0400
+ by compute3.internal (MEProxy); Tue, 18 Oct 2022 04:08:14 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
  :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm3; t=1666079864; x=1666087064; bh=Lr4o8rmETJ
- 5sK3ZkYq2gWw8lpC8hs57X7H/NqOJONxM=; b=vKvmy+HSRwwwE00QKORpSvA4Lo
- m6nq/1xr77nqOg39vFG00W1kaby+7ESVzfOveWTLMqST4HTnbXooc+IMpod42IOx
- fJGm1AGhRONMZeYRUC8qVcFjrltuSWFUnuGhjO6pk4D0ntIUYw9uBjp0BAxSC5cH
- j7gEMmUjV9UbEP2TMyPcbOnWjCNafa3T6/ay+St+jZUyEU+tW3z4r9bK5ApRYCPV
- QJnrQN1luLF7DkKijPPR5+TkCvGldFUPzrT/Dc6GaVBT7HOsrbRUiRo/ro4PYsXD
- hDtsNGB2GJotlu9Xr1uA6mSZ2koJikNZqtk5tyJhhYAX3t1uAYPjRUKabxxg==
+ :subject:to:to; s=fm3; t=1666080489; x=1666087689; bh=QyIR2mU70I
+ 1YwkwOLa0CmZ/17qlaxKeUVXrXvltnm30=; b=GFjusIHgj8xz/yi7jFvMKNEQxw
+ HZ7+9YtYcFDKPj4XhMSDNdoNg/sq2vcXZOu9JUJQNrnfSNhv3FzbuQxvyTe7zxv6
+ HNmaCAy+x3F8INAsxCFyjYbN1zyXSznVuvbVd4WvSDSSfB22mp4BjmYOkJmMCop4
+ c1zma+hOzfeHlhisprEz6BF7/WdlcDHPoui4ePgJ9+iTrBn7LuNWHOpfCyU43RMZ
+ 9MWeUivxIiVvXOW+9NvBgpukWnqglECw5oQu01fWdHAZtkMyAEHB6cdf76bEC7Uc
+ fUq5aW+BidlQZg4CgEQ37ngnY/EzqNA1p95Hy5fsAV1QBg65BD9ITLEjG/AQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
  :feedback-id:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:sender:subject:subject:to:to
  :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm3; t=1666079864; x=1666087064; bh=Lr4o8rmETJ5sK3ZkYq2gWw8lpC8h
- s57X7H/NqOJONxM=; b=Rd+9e5DFtINlfMc2YYOI0+MKnMYwDD9655rlznh2dgSm
- SA/RTKgRXAJmxCQyG0mNyg/ehPPGbUW9PvYKwpqeDuWKUWoIaTLXh5LrXn0SgoYZ
- nGrre6A31fsxquFB7rgEOMQFal70yeQbUFPx1zrABdUaw49LrYPGQMIHXIHdJMPb
- PLWO1Hq2Cv278LKTd1EFIGyFuMHWpAwX5ZWc+iS2kmiBgMt3rT+GIoYDhM9fI3IQ
- USNm+HuOZpZUu9mz7gY8B18uk+KB/PWrMtGuIpIR4hXlLigHF+MR+BXYRGHC2HtT
- ZCPnv4OZLoSFh1TZ89Y/Pl3jCloaTiIG6MfTfd+OjQ==
-X-ME-Sender: <xms:eFxOY4tYe0N7n4oHBdbnTVOOhVkDCJDseBVReSvbhu05j2V5icTOfw>
- <xme:eFxOY1exK__txeJ3ucTKAAh3PMZF4YNvd7eUb7kHi2WWoq68m7rCgMVW2UqMRL37C
- hUb0Qd7Z_qfvsOH6To>
-X-ME-Received: <xmr:eFxOYzwEg8yoSZul-Huszm9lfzk3ZZVvktA7asEbvofMnzHsftMzVNAX5A3A>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeeltddguddvkecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpeffhffvvefukfhfgggtuggjsehgtderredttddunecuhfhrohhmpeforgig
- ihhmvgcutfhiphgrrhguuceomhgrgihimhgvsegtvghrnhhordhtvggthheqnecuggftrf
- grthhtvghrnhepjeevfeehfeekieffgeevleevtefgffefkedtfeeuhfettdegjeehgfeg
- udffffdunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomh
- epmhgrgihimhgvsegtvghrnhhordhtvggthh
-X-ME-Proxy: <xmx:eFxOY7Mhyv3PdEfoHEQDxG63PHDCvZ09uKXpAsXyARpEVsdwgVroog>
- <xmx:eFxOY4_vnjB7joccgkbFlUNnW32Xt0KLsvyB1Xj2t-83rXS-wAhcxQ>
- <xmx:eFxOYzUWodm9Qv1bDIg0-xDVme1dTkQXB7oWBBEcP7NL8kZszvOcuQ>
- <xmx:eFxOY2exmKJm-vn-OQTvnUQLosa1VgJBjnpovYIhjfkaRc-W6Behj_5TCgY>
+ fm3; t=1666080489; x=1666087689; bh=QyIR2mU70I1YwkwOLa0CmZ/17qla
+ xKeUVXrXvltnm30=; b=ZH1+1s4aJx7OrygMRTnrhV+LMcQ0Fl5Kp6pyvkYoBkNo
+ GmwWfybSd1z+VI69F79wLXYaoim/Qfyfzn7n/MB2+IRbKrZ+/b0QOLeRsZgAb8Fd
+ 8PqGjo137EOY7CpjWJOeILZb5MjokJbqjUopRfiibgZuUB8FSPF0/jVkgsaLmZG8
+ 6n0wJBtTYqEA+1IaLVqwIbLsA2onk7csRjzUKB8isgB3AEspSi0yKiQX04nzOXNX
+ QiiD4owR9mc4e3meKqg462agLHz3WMQCHWoqPbZ7itzrI8V5rg6/UmHyfqxXmP5G
+ /cd+qux90phW4qVWeCFzCmteS3SOHvJV9HsRIxHA3w==
+X-ME-Sender: <xms:6F5OY6HZgytdMm6Vqyzy8NxLARZpJWI_0b2lwYu5aLlpXTaMlsBOaQ>
+ <xme:6F5OY7VrDINVe0nwa0Y4HWj0xhoc3U-yXZYYH5rqOEMWBepziDr6qryZMpsGL7G0i
+ uwg_8bQZ_ldVY7eD3M>
+X-ME-Received: <xmr:6F5OY0LSSi0uY7NN5F6JAO1Z9rY8338rOwxovMAxprRpD9x04i00D-JrrQI8>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrfeeludcutefuodetggdotefrodftvfcurf
+ hrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecuuegr
+ ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
+ hrpeffhffvvefukfhfgggtuggjsehgtderredttddvnecuhfhrohhmpeforgigihhmvgcu
+ tfhiphgrrhguuceomhgrgihimhgvsegtvghrnhhordhtvggthheqnecuggftrfgrthhtvg
+ hrnhepteefffefgfektdefgfeludfgtdejfeejvddttdekteeiffejvdfgheehfffhvedu
+ necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgi
+ himhgvsegtvghrnhhordhtvggthh
+X-ME-Proxy: <xmx:6F5OY0E-ftftih6cOybLdHtpHMzyczz1Aqr_zQyRxv2j9OIzvIxqUg>
+ <xmx:6F5OYwWs3iqVw9YFSBe8SVI8Gk47k1-kxwFyZmVaKn7vT-3wO295oQ>
+ <xmx:6F5OY3NY3rp3gilKugt8Ne3JrajjqLSGe1BvCkrJkzzq1uqDWjql1A>
+ <xmx:6V5OY304Z5gl1LgvOk3C5up8PynQd6xXAoo8YLHxpnj8yXiTGpcxLIvPyw4>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 18 Oct 2022 03:57:43 -0400 (EDT)
-Date: Tue, 18 Oct 2022 09:57:42 +0200
+ 18 Oct 2022 04:08:08 -0400 (EDT)
+Date: Tue, 18 Oct 2022 10:08:06 +0200
 From: Maxime Ripard <maxime@cerno.tech>
-To: Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
-Message-ID: <20221018075742.7g3sfay3o7wk54kv@houat>
+To: kfyatek+publicgit@gmail.com
+Message-ID: <20221018080806.mkw4zbzchlatxgwq@houat>
 References: <20220728-rpi-analog-tv-properties-v5-0-d841cc64fe4b@cerno.tech>
- <20220728-rpi-analog-tv-properties-v5-8-d841cc64fe4b@cerno.tech>
- <729f849a-0287-a2fb-125f-892b4dd6053f@tronnes.org>
+ <20220728-rpi-analog-tv-properties-v5-6-d841cc64fe4b@cerno.tech>
+ <30dbbcc8-1d14-0fc8-ed7c-0c3f7d094ea3@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ah23qdqgdrx2vnp2"
+ protocol="application/pgp-signature"; boundary="bz2m37ekv7hmvzdb"
 Content-Disposition: inline
-In-Reply-To: <729f849a-0287-a2fb-125f-892b4dd6053f@tronnes.org>
-Subject: Re: [Nouveau] [PATCH v5 08/22] drm/modes: Move named modes parsing
- to a separate function
+In-Reply-To: <30dbbcc8-1d14-0fc8-ed7c-0c3f7d094ea3@gmail.com>
+Subject: Re: [Nouveau] [PATCH v5 06/22] drm/modes: Add a function to
+ generate analog display modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,82 +98,149 @@ Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
+ Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---ah23qdqgdrx2vnp2
-Content-Type: text/plain; charset=iso-8859-1
+--bz2m37ekv7hmvzdb
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Oct 16, 2022 at 06:11:21PM +0200, Noralf Tr=F8nnes wrote:
-> Den 13.10.2022 15.18, skrev Maxime Ripard:
-> > The current construction of the named mode parsing doesn't allow to ext=
-end
-> > it easily. Let's move it to a separate function so we can add more
-> > parameters and modes.
-> >=20
-> > In order for the tests to still pass, some extra checks are needed, so
-> > it's not a 1:1 move.
-> >=20
-> > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> >=20
+Hi,
+
+On Sun, Oct 16, 2022 at 07:34:12PM +0200, Mateusz Kwiatkowski wrote:
+> Hi Maxime & everyone,
 >=20
-> I was hoping that someone else would step up and review these parser
-> patches since the parser code is rather difficult to read, for me at
-> least. I have studied it now, so I'll give it a try.
+> Sorry for being inactive in the discussions about this patchset for the l=
+ast
+> couple of weeks.
 >=20
-> > ---
-> > Changes in v4:
-> > - Fold down all the named mode patches that were split into a single
-> >   patch again to maintain bisectability
-> > ---
-> >  drivers/gpu/drm/drm_modes.c | 73 +++++++++++++++++++++++++++++++++++++=
-+-------
-> >  1 file changed, 62 insertions(+), 11 deletions(-)
-> >=20
-> > diff --git a/drivers/gpu/drm/drm_modes.c b/drivers/gpu/drm/drm_modes.c
-> > index c0dceff51cac..2f020ef2ddf2 100644
-> > --- a/drivers/gpu/drm/drm_modes.c
-> > +++ b/drivers/gpu/drm/drm_modes.c
-> > @@ -2229,6 +2229,55 @@ static const char * const drm_named_modes_whitel=
-ist[] =3D {
-> >  	"PAL",
-> >  };
-> > =20
-> > +static int drm_mode_parse_cmdline_named_mode(const char *name,
-> > +					     unsigned int name_end,
-> > +					     struct drm_cmdline_mode *cmdline_mode)
-> > +{
-> > +	unsigned int i;
+> > +const static struct analog_parameters tv_modes_parameters[] =3D {
+> > +	TV_MODE_PARAMETER(DRM_MODE_ANALOG_NTSC,
+> > +			  NTSC_LINES_NUMBER,
+> > +			  NTSC_LINE_DURATION_NS,
+> > +			  PARAM_RANGE(NTSC_HACT_DURATION_MIN_NS,
+> > +				      NTSC_HACT_DURATION_TYP_NS,
+> > +				      NTSC_HACT_DURATION_MAX_NS),
+> > +			  PARAM_RANGE(NTSC_HFP_DURATION_MIN_NS,
+> > +				      NTSC_HFP_DURATION_TYP_NS,
+> > +				      NTSC_HFP_DURATION_MAX_NS),
+> > +			  PARAM_RANGE(NTSC_HSLEN_DURATION_MIN_NS,
+> > +				      NTSC_HSLEN_DURATION_TYP_NS,
+> > +				      NTSC_HSLEN_DURATION_MAX_NS),
+> > +			  PARAM_RANGE(NTSC_HBP_DURATION_MIN_NS,
+> > +				      NTSC_HBP_DURATION_TYP_NS,
+> > +				      NTSC_HBP_DURATION_MAX_NS),
+> > +			  PARAM_RANGE(NTSC_HBLK_DURATION_MIN_NS,
+> > +				      NTSC_HBLK_DURATION_TYP_NS,
+> > +				      NTSC_HBLK_DURATION_MAX_NS),
+> > +			  16,
+> > +			  PARAM_FIELD(3, 3),
+> > +			  PARAM_FIELD(3, 3),
+> > +			  PARAM_FIELD(16, 17)),
+> > +	TV_MODE_PARAMETER(DRM_MODE_ANALOG_PAL,
+> > +			  PAL_LINES_NUMBER,
+> > +			  PAL_LINE_DURATION_NS,
+> > +			  PARAM_RANGE(PAL_HACT_DURATION_MIN_NS,
+> > +				      PAL_HACT_DURATION_TYP_NS,
+> > +				      PAL_HACT_DURATION_MAX_NS),
+> > +			  PARAM_RANGE(PAL_HFP_DURATION_MIN_NS,
+> > +				      PAL_HFP_DURATION_TYP_NS,
+> > +				      PAL_HFP_DURATION_MAX_NS),
+> > +			  PARAM_RANGE(PAL_HSLEN_DURATION_MIN_NS,
+> > +				      PAL_HSLEN_DURATION_TYP_NS,
+> > +				      PAL_HSLEN_DURATION_MAX_NS),
+> > +			  PARAM_RANGE(PAL_HBP_DURATION_MIN_NS,
+> > +				      PAL_HBP_DURATION_TYP_NS,
+> > +				      PAL_HBP_DURATION_MAX_NS),
+> > +			  PARAM_RANGE(PAL_HBLK_DURATION_MIN_NS,
+> > +				      PAL_HBLK_DURATION_TYP_NS,
+> > +				      PAL_HBLK_DURATION_MAX_NS),
+> > +			  12,
 > > +
-> > +	if (!name_end)
-> > +		return 0;
+> > +			  /*
+> > +			   * The front porch is actually 6 short sync
+> > +			   * pulses for the even field, and 5 for the
+> > +			   * odd field. Each sync takes half a life so
+> > +			   * the odd field front porch is shorter by
+> > +			   * half a line.
+> > +			   *
+> > +			   * In progressive, we're supposed to use 6
+> > +			   * pulses, so we're fine there
+> > +			   */
+> > +			  PARAM_FIELD(3, 2),
+> > +
+> > +			  /*
+> > +			   * The vsync length is 5 long sync pulses,
+> > +			   * each field taking half a line. We're
+> > +			   * shorter for both fields by half a line.
+> > +			   *
+> > +			   * In progressive, we're supposed to use 5
+> > +			   * pulses, so we're off by half
+> > +			   * a line.
+> > +			   *
+> > +			   * In interlace, we're now off by half a line
+> > +			   * for the even field and one line for the odd
+> > +			   * field.
+> > +			   */
+> > +			  PARAM_FIELD(3, 3),
+> > +
+> > +			  /*
+> > +			   * The back porch starts with post-equalizing
+> > +			   * pulses, consisting in 5 short sync pulses
+> > +			   * for the even field, 4 for the odd field. In
+> > +			   * progressive, it's 5 short syncs.
+> > +			   *
+> > +			   * In progressive, we thus have 2.5 lines,
+> > +			   * plus the 0.5 line we were missing
+> > +			   * previously, so we should use 3 lines.
+> > +			   *
+> > +			   * In interlace, the even field is in the
+> > +			   * exact same case than progressive. For the
+> > +			   * odd field, we should be using 2 lines but
+> > +			   * we're one line short, so we'll make up for
+> > +			   * it here by using 3.
+> > +			   *
+> > +			   * The entire blanking area is supposed to
+> > +			   * take 25 lines, so we also need to account
+> > +			   * for the rest of the blanking area that
+> > +			   * can't be in either the front porch or sync
+> > +			   * period.
+> > +			   */
+> > +			  PARAM_FIELD(19, 20)),
+> > +};
 >=20
-> name_end can't be zero since the argument is checked before calling this
-> function.
+> Nit: setting vbp limits like that makes it impossible to use
+> drm_analog_tv_mode() to generate modes that include the VBI for e.g. emit=
+ting
+> teletext.
+>=20
+> This probably doesn't matter, as it can still be created as a custom mode=
+ from
+> userspace, hence I'm mentioning it as a nit.
 
-I'd really like to keep it in though. At least, we know by looking at
-this small function that we're going to be safe all the time, no matter
-what the caller does.
+Yeah, I think it's out of scope at least for now. Also, the compositor
+should probably be aware of the margins being used to put the VBI data,
+so expecting userspace to come up with the mode is probably best?
 
-And if the caller wants to check it as well, fine, it's only a simple
-comparison ran once or twice at boot, it's not like it's in a hot-path.
+> > +		 * By convention, NSTC (aka 525/60) systems start with
+>=20
+> Typo: s/NSTC/NTSC/
 
-I've addressed your other comments, thanks!
+Fixed, thanks
 Maxime
 
---ah23qdqgdrx2vnp2
+--bz2m37ekv7hmvzdb
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCY05cdgAKCRDj7w1vZxhR
-xQM1AP9H4JgsnRShCq6qLr9+GCsm7Uj/MW6Tqyv5ymF9akVodwD+MJH0PS0yUl6U
-Krhepy+KRRj3eEBJ5bua3Ps8acgwCw8=
-=otSH
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCY05e5QAKCRDj7w1vZxhR
+xR8VAQC+375DtcagkAytZVeOEe9aSmsByYFfuLp2Bt0aRSrhEAD/SoTKGvPkbrp3
+DYtTf34PAYs3gXueCuNbfrKzWk9/DgM=
+=IY6U
 -----END PGP SIGNATURE-----
 
---ah23qdqgdrx2vnp2--
+--bz2m37ekv7hmvzdb--
