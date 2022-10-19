@@ -2,104 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FAA7604546
-	for <lists+nouveau@lfdr.de>; Wed, 19 Oct 2022 14:30:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8DB5604DA3
+	for <lists+nouveau@lfdr.de>; Wed, 19 Oct 2022 18:42:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 286BD10E0E3;
-	Wed, 19 Oct 2022 12:30:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 350F610E9AC;
+	Wed, 19 Oct 2022 16:42:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2058.outbound.protection.outlook.com [40.107.237.58])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2577B10E5AB
- for <nouveau@lists.freedesktop.org>; Wed, 19 Oct 2022 12:30:02 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kyUQEP5sR3Zqdby795M4NegxxRpant1I94ZfMkeBbHNPUUdeoUQy6qjK0YlYOfFYuQiPKUW08fugmRqGdYSFGk409OSzQfz6rJ6Gfsh85SiV0U255K0DaUnZcm+9wN7QunsKRQ6sFplzjn61Q4FunJYSKvynXly5DEkCIiSkpV1smv5ihEA7F/DP0igQ2Y+f7yfoPJ20/7MWyFAJv1JC71ym+N0GFV/T42NzJqIeMsEzd/RSizQnEgdNLt8jdu/Q+giAdHPusbeZMgtj37NpujdJl4pL7dO8hoBl2/qqI0M/KGSGeBSlMVD/UuIfujLHaseM1FY7b53WXxD/HoUCXw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NHMsVtzMuJtLpSDQxIGHKYLY9W3uNuVyK4chBymrdaY=;
- b=drdcL726GwGpRRj8r4I+tZKfRINPIEMBDAgzJxCmeYig1NEu7KEzBaIU78DPUCRgnRcq3DJrheuzgptJEgh7zVPQsAIHqBdVLvWEVOrLbNWUUa0U06OLLskYCbyWAtEvmBb8/GH1Vjxk2ItDO+qbWzNfacxB+6yN4fNryDDaQIVvi1Gui6n+wiLpGRmQ3Eg0ioqMMpWL461J9Md39/Nbb2n3JJXQPxmyfbcZxCp2tvnG+X3TPBGHsQ//Tp6vc9ywSvFxvM0KUtloNTUJ9O39A/JEv9zrQZ0RatAuxrTta4f1ZFZHICuSoIuGA7vprCsgY9cOK/GlHsz+WgmhVBdjcw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NHMsVtzMuJtLpSDQxIGHKYLY9W3uNuVyK4chBymrdaY=;
- b=h/AuKusaDsbMSPWuiBWASIMm86JwYjwRAPFnVwjfXCiE+gWqAYEY3gaaTpMjf2o13hsGF3YS3MF27ovRUv+tsRULdByBlee1SNorBLF8MLWmG/660ncTTerLbYNtVrtL7Zds6ZtdG+YLVBcB7uPEAjvbUIIz4yZk/2d4VtNP0OzL8OZbZh6lPtjBQdNHboYxoZlWpCKGvaIHydTeYP0QIESe97+rvUBQiPww8EUcnJohlF25vJkUL7oG6VVda7NU4bMh83/afeITk3OA0fxG8kGNXOUm2S524/x+PtQbH200hpUh9jLQPEGFOk8p52FFq/w9/LpLF0a4do8jWDXsbg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from BYAPR12MB3176.namprd12.prod.outlook.com (2603:10b6:a03:134::26)
- by BL1PR12MB5190.namprd12.prod.outlook.com (2603:10b6:208:31c::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.34; Wed, 19 Oct
- 2022 12:29:59 +0000
-Received: from BYAPR12MB3176.namprd12.prod.outlook.com
- ([fe80::6ed5:b1a6:b935:a4d8]) by BYAPR12MB3176.namprd12.prod.outlook.com
- ([fe80::6ed5:b1a6:b935:a4d8%7]) with mapi id 15.20.5723.034; Wed, 19 Oct 2022
- 12:29:59 +0000
-From: Alistair Popple <apopple@nvidia.com>
-To: Ben Skeggs <bskeggs@redhat.com>, Andrew Morton <akpm@linux-foundation.org>
-Date: Wed, 19 Oct 2022 23:29:34 +1100
-Message-Id: <20221019122934.866205-1-apopple@nvidia.com>
-X-Mailer: git-send-email 2.35.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SY5PR01CA0084.ausprd01.prod.outlook.com
- (2603:10c6:10:1f5::14) To BYAPR12MB3176.namprd12.prod.outlook.com
- (2603:10b6:a03:134::26)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D0F9110E9AC;
+ Wed, 19 Oct 2022 16:42:20 +0000 (UTC)
+Received: by mail-wr1-x42c.google.com with SMTP id v1so815762wrt.11;
+ Wed, 19 Oct 2022 09:42:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=3/Bs6kqrgFABQQtvnbn0RONHCOV7yYxUierShgwEzj0=;
+ b=csninIMN7NpCVdWPdIHu+FWpPJfw99JQQFHm4/LkHBGyBsuuv/HRwVbjzBr0hqUXW1
+ VOMnsqHyflUsWkuJqruYMyUw1ECEX3RD8YrfqUSYDS7lKzmCncZXMefbM4Ohz1ja0e8s
+ zYPa5/5+PQ9eINqUWyxHLD9yiFOPsY9nH6Rj/wRwFNgMr4G3pxlcK9oO6JqSk9aMj5HF
+ dOxe7qXNzD9heP8ZRoIF0KUS9ohf3W9mGfgiQb1XqcFh9s7hJiGVgFHimZU5COaDYV8n
+ AG0BsJVTWwCnMiuyeJG+6RH4fwIF/UiE8efkzOzlSQlJA1/1l+EemgHtP/+buD66n0wp
+ k8/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=3/Bs6kqrgFABQQtvnbn0RONHCOV7yYxUierShgwEzj0=;
+ b=2LgOzAfCmPn/Ilq7/klpWp/u9AQSRPZxkEx/4ZenWEAT4D/XKScjMKtmwTiX2HNn/l
+ pZsCm8fvUm4xteAMt8ROw83zvx4i9PC1+ko/Jzi8frxqnAbfLSMpYOVNfRkB4QbXmDnG
+ uD+wtJxpnqM9gC6Phkbu6gx/kSSSsgEBU1mugXcmgz+LOFXhicAIyI68OshKs6Kq+5pQ
+ /jsp0Rf43H68saYQxX/8m9a1jxyWNMX3zubsyQBoiO7tpmkS1ViiZuB0cmvJ4yFjD5pp
+ 4Hw/RgH/8Gil/9a7602mDNl7/w/FaxIUdQC8isz0HHTVel4kknX8CEVJ+vlO4a6jdxBV
+ vn1g==
+X-Gm-Message-State: ACrzQf1o5YpTdusjq6EY5ga94jViwwUqtlhLdhDZySBOnAUNpJBlq4kH
+ DrwURtgcg9SCXg07gxD3SdY=
+X-Google-Smtp-Source: AMsMyM6FbFe+xgSmtLC0J5g/aLs0PRG5EusmnYk0UBNnzoZXi4WDqQLggbZr7JTO39AzloodIES8ng==
+X-Received: by 2002:a05:6000:15ce:b0:230:a14d:997b with SMTP id
+ y14-20020a05600015ce00b00230a14d997bmr5950739wry.370.1666197739107; 
+ Wed, 19 Oct 2022 09:42:19 -0700 (PDT)
+Received: from ?IPV6:2a02:908:1256:79a0:f4ab:6c74:114:840d?
+ ([2a02:908:1256:79a0:f4ab:6c74:114:840d])
+ by smtp.gmail.com with ESMTPSA id
+ m17-20020a7bca51000000b003c6237e867esm511899wml.0.2022.10.19.09.42.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 19 Oct 2022 09:42:18 -0700 (PDT)
+Message-ID: <be2d7a93-5062-0582-0e6b-e4a3a73fb6d8@gmail.com>
+Date: Wed, 19 Oct 2022 18:42:17 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB3176:EE_|BL1PR12MB5190:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1a142808-3297-431c-7ed0-08dab1cda35d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: f3Smg2jwYOGhfGsx1rAFCtUCo7RJ6tq1bAfLZNgejDOs4ZzheTIGo14/pU3U4M7Y+GlITVhiRpebzY1lFvv4HtDLSOX4cigQkij/od9JRAJq3bg4uDYcmK6ND+N92Q8XmQSVFxwfQVcnOjDHQUAf/9veiLWAnf/nZNg8JwTzdF7/v5a4pumlkU+lk4eBlbWMcTUtmjPdw0ibeoLJzZCEZ0kYvLUU2KBJeBPbc9jeJ59l/CyDioE5Bm8tawBc6bZgKUmQvLSGX512Nim4yBv6ChBkNVmSU7gPK5uSLxcjcEXxRT8zb7vXuVdvZnBiq+uat2q7LLV1mZ+MQuGqQdeYHZOl2pSiiDSR3PVEisuA4j8br03ziBPntcuGAGsLR6PXr/1GDr5tgcDQx8MLiPKJ4/vHy93sEBGLLo6q62kEny57GW7cHgfE7noQ9Vhg6OzEt3jqBJX8Jsq0Y/+IKMBAfQtFCWNyyHIeJ1ddB2GaMugBUV48i3gE3g91rbImOioxkfylsqp4zzyzkp0BenlyeDoFJGE0sua9d+9pd3yyBdlO4GnhRtqS4aVT6vYV/K7dW9lk2TT7uxfBmpW1DhCdO9lOghIl0X/W1T11IHoS9oeBgatpPkHwhUnqNbf3TFLk2WiP5+NE9LUPFdxZ2ySgK3HQYB3F4QWHlMnvIT84SmXrR98NXgAcplBOYhPLkabahDoFVuKfSJ26bvfcDo4HYQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR12MB3176.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(366004)(346002)(396003)(39860400002)(136003)(376002)(451199015)(86362001)(36756003)(38100700002)(2906002)(83380400001)(5660300002)(6506007)(26005)(6666004)(2616005)(186003)(1076003)(6512007)(6486002)(316002)(478600001)(54906003)(110136005)(66946007)(66556008)(66476007)(8676002)(4326008)(41300700001)(8936002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LmTdIS02OkaaYXIcScxcN8Qvur72W/mXvkm6jXH7huO4okn9LnnX2oWYci7t?=
- =?us-ascii?Q?EV8eHq2AF21QrmmQmzSzeKrpVrDet26ZmCOpgzmGGKQhq2jwYOq11XgH1vjU?=
- =?us-ascii?Q?ySX7YjW8eoTlkh+vdpGiKs3rkMYU7KW//mT+StG9f2oYLZh2gJGrDfItSVXq?=
- =?us-ascii?Q?bgT50sOLMhmuuU5dFC/h3/j5+IB0t3rfWqK031gXg5wTaODPXWZp+j1p0y5j?=
- =?us-ascii?Q?ixBswJSqpaQzTpa88lP9M7yUbq7YIea0Fdl7gX2J/g/qSNwIxWzWNOMH75W8?=
- =?us-ascii?Q?6I8TivKTvfVqIMoft/3Wagpfh5eHUCjrT6h8pu+bjh0RC3QHuxmdS/8TYTBi?=
- =?us-ascii?Q?Sgt4q2j66PX63WzuiU4yuzdkRFKsjnDudgmlnwQgh95ZFR5CRB9aFZCYh2ch?=
- =?us-ascii?Q?Ii1W3qLRyTReZiEYqnOCb/R+YUSje7x2b7C0q8MMqs41APnBDgZenC5X08RJ?=
- =?us-ascii?Q?pOTSGFqgGeovZgd6KnQRT15oDW+FX17jgrqjE95YuM2RJuEcbu5q1a327luW?=
- =?us-ascii?Q?UA/E9toJYzF0DS186Mx02dBXed3JsYDU3Vf++3I+2+jIQmyJgmmaVCpvmPcu?=
- =?us-ascii?Q?tjbJF7poRMOHB989O1avB5YZGzs9vL1VFcuay02prZXmvCSfzeZtok+XEKzl?=
- =?us-ascii?Q?ziz04Py0k9QT5qY7isf41jCgzatzfBbiLHxt7eEFbgVAyi2BJ4BalLK1rl63?=
- =?us-ascii?Q?0ifKN7cBaYZgBA5LgDHS5W45C0GVDFBTAYF+6JAOZi735HHGDV+pG/WxNffT?=
- =?us-ascii?Q?t+oQRiEdUqj6n6cRG+kzo65k+JQyqjKUn1yStyH5TAGsg3vtimNqDWTW1t63?=
- =?us-ascii?Q?It5PVSKOXzoAiSk/zxGZoZr3RfN5GZD4aKYEZEkF+iy1/SNU+nGemaK+JQZD?=
- =?us-ascii?Q?qTl4fENtRUuYNyDn9lAmpidaakWThoYdTLsswzyyVBrifhujfvljlmGutcJg?=
- =?us-ascii?Q?wwVKu6wYWO+LpBrmVEc/B3o2fIEnPoi10E9sAN9eExl0vvnGvilea83qGy/O?=
- =?us-ascii?Q?t+a7ClIVEl6Ii5nw+hvxEs8mt8BoPzhzrRNeKQLrMo6dTyF9cS4LfawoFaEd?=
- =?us-ascii?Q?4l+Jp07lEwudQ3GtSTpRgmWeTDIq2qVmJfAEwapq6TL65tfOiV/H6QNm4r8a?=
- =?us-ascii?Q?TLsgTAUlRgcsAuDckujfNWPx5Rr1O85jzeW7mOEoCUECv7ovBQK7/uCdJjpX?=
- =?us-ascii?Q?0CUrph4QFtDO9U9B2hfLIzDIZ6ni7vxYK3J6aYnqqBdKEOXjkspQhil7azoh?=
- =?us-ascii?Q?drabPEaSNks8vMzH2gpN0FYo8kSSS8Il88pF0Fw1UWIU6FOoTv/fHEVIzK0m?=
- =?us-ascii?Q?RK5q1zanOP6qFy8Ghpwd6vTNvFefZg67pXhKndv+CKCI5YvzGISUNSUuAVli?=
- =?us-ascii?Q?MhfOBF3VyZU8UiR9etcaOcpWsRxYyHeSDHz6bRRlfHvr98r+k/diXQglH7I8?=
- =?us-ascii?Q?LfJbTL/DcPhgxi4QlQ1scMFNWwNlZZLOZn1/k1y7pyQ2eYs7v+qi3yjWdENs?=
- =?us-ascii?Q?njHfGtTuOCDaLm2uSCqxJuo5aj/orqC22BykNBjD3EnDY/wxcoqFGMWEmiR6?=
- =?us-ascii?Q?ACcnw2IsIMqkwgn4xZKdks/YUSx22sv3nIpAk37Z?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1a142808-3297-431c-7ed0-08dab1cda35d
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB3176.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2022 12:29:59.4509 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: pvXfQKuDE2dF96vuA+/f/EEi7jUuw5sJBAwgoxGZieCu0HVf+6Dxzz2e4UXXUTY6mveITSz/c1K3Sjw6RIuvRA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5190
-Subject: [Nouveau] [PATCH] nouveau: Fix migrate_to_ram() for faulting page
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>,
+ dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org
+References: <20221019152736.654451-1-Amaranath.Somalapuram@amd.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+In-Reply-To: <20221019152736.654451-1-Amaranath.Somalapuram@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH 1/6] drm/ttm: rework on ttm_resource to use
+ size_t type
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -111,47 +77,177 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ralph Campbell <rcampbell@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
- linux-mm@kvack.org, nouveau@lists.freedesktop.org
+Cc: alexander.deucher@amd.com, shashank.sharma@amd.com,
+ christian.koenig@amd.com, arunpravin.paneerselvam@amd.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Commit 16ce101db85d ("mm/memory.c: fix race when faulting a device private
-page") changed the migrate_to_ram() callback to take a reference on the
-device page to ensure it can't be freed while handling the fault.
-Unfortunately the corresponding update to Nouveau to accommodate this
-change was inadvertently dropped from that patch causing GPU to CPU
-migration to fail so add it here.
+Am 19.10.22 um 17:27 schrieb Somalapuram Amaranath:
+> Change ttm_resource structure from num_pages to size_t size in bytes.
 
-Signed-off-by: Alistair Popple <apopple@nvidia.com>
-Fixes: 16ce101db85d ("mm/memory.c: fix race when faulting a device private page")
-Cc: John Hubbard <jhubbard@nvidia.com>
-Cc: Ralph Campbell <rcampbell@nvidia.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: Ben Skeggs <bskeggs@redhat.com>
+When you remove the num_pages field (instead of adding the size 
+additionally) you need to change all drivers in one patch.
 
----
+Otherwise the build would break in between patches and that's not 
+something we can do.
 
-Hi Andrew/Ben, apologies I must have accidentally dropped this small hunk
-when rebasing prior to sending v2 of the original series. Without this
-migration from GPU to CPU won't work in Nouveau so hopefully one of you can
-take this for v6.1-rcX. Thanks.
----
- drivers/gpu/drm/nouveau/nouveau_dmem.c | 1 +
- 1 file changed, 1 insertion(+)
+>
+> Signed-off-by: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>
+> ---
+>   drivers/gpu/drm/ttm/ttm_bo.c            | 4 ++--
+>   drivers/gpu/drm/ttm/ttm_bo_util.c       | 6 +++---
+>   drivers/gpu/drm/ttm/ttm_bo_vm.c         | 4 ++--
+>   drivers/gpu/drm/ttm/ttm_range_manager.c | 2 +-
+>   drivers/gpu/drm/ttm/ttm_resource.c      | 8 ++++----
+>   include/drm/ttm/ttm_resource.h          | 2 +-
+>   6 files changed, 13 insertions(+), 13 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/ttm/ttm_bo.c b/drivers/gpu/drm/ttm/ttm_bo.c
+> index 7c8e8be774f1..394ccb13eaed 100644
+> --- a/drivers/gpu/drm/ttm/ttm_bo.c
+> +++ b/drivers/gpu/drm/ttm/ttm_bo.c
+> @@ -51,8 +51,8 @@ static void ttm_bo_mem_space_debug(struct ttm_buffer_object *bo,
+>   	struct ttm_resource_manager *man;
+>   	int i, mem_type;
+>   
+> -	drm_printf(&p, "No space for %p (%lu pages, %zuK, %zuM)\n",
+> -		   bo, bo->resource->num_pages, bo->base.size >> 10,
+> +	drm_printf(&p, "No space for %p (%lu size, %zuK, %zuM)\n",
+> +		   bo, bo->resource->size, bo->base.size >> 10,
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-index 5fe209107246..20fe53815b20 100644
---- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-@@ -176,6 +176,7 @@ static vm_fault_t nouveau_dmem_migrate_to_ram(struct vm_fault *vmf)
- 		.src		= &src,
- 		.dst		= &dst,
- 		.pgmap_owner	= drm->dev,
-+		.fault_page	= vmf->page,
- 		.flags		= MIGRATE_VMA_SELECT_DEVICE_PRIVATE,
- 	};
- 
--- 
-2.35.1
+Please just remove printing the resource size completely here.
+
+>   		   bo->base.size >> 20);
+>   	for (i = 0; i < placement->num_placement; i++) {
+>   		mem_type = placement->placement[i].mem_type;
+> diff --git a/drivers/gpu/drm/ttm/ttm_bo_util.c b/drivers/gpu/drm/ttm/ttm_bo_util.c
+> index fa04e62202c1..da5493f789df 100644
+> --- a/drivers/gpu/drm/ttm/ttm_bo_util.c
+> +++ b/drivers/gpu/drm/ttm/ttm_bo_util.c
+> @@ -173,7 +173,7 @@ int ttm_bo_move_memcpy(struct ttm_buffer_object *bo,
+>   
+>   	clear = src_iter->ops->maps_tt && (!ttm || !ttm_tt_is_populated(ttm));
+>   	if (!(clear && ttm && !(ttm->page_flags & TTM_TT_FLAG_ZERO_ALLOC)))
+> -		ttm_move_memcpy(clear, dst_mem->num_pages, dst_iter, src_iter);
+> +		ttm_move_memcpy(clear, PFN_UP(dst_mem->size), dst_iter, src_iter);
+
+Please use ttm->num_pages here (IIRC).
+
+>   
+>   	if (!src_iter->ops->maps_tt)
+>   		ttm_kmap_iter_linear_io_fini(&_src_iter.io, bdev, src_mem);
+> @@ -357,9 +357,9 @@ int ttm_bo_kmap(struct ttm_buffer_object *bo,
+>   
+>   	map->virtual = NULL;
+>   	map->bo = bo;
+> -	if (num_pages > bo->resource->num_pages)
+> +	if (num_pages > PFN_UP(bo->resource->size))
+>   		return -EINVAL;
+> -	if ((start_page + num_pages) > bo->resource->num_pages)
+> +	if ((start_page + num_pages) > PFN_UP(bo->resource->size))
+>   		return -EINVAL;
+>   
+>   	ret = ttm_mem_io_reserve(bo->bdev, bo->resource);
+> diff --git a/drivers/gpu/drm/ttm/ttm_bo_vm.c b/drivers/gpu/drm/ttm/ttm_bo_vm.c
+> index 38119311284d..876e7d07273c 100644
+> --- a/drivers/gpu/drm/ttm/ttm_bo_vm.c
+> +++ b/drivers/gpu/drm/ttm/ttm_bo_vm.c
+> @@ -217,7 +217,7 @@ vm_fault_t ttm_bo_vm_fault_reserved(struct vm_fault *vmf,
+>   	page_last = vma_pages(vma) + vma->vm_pgoff -
+>   		drm_vma_node_start(&bo->base.vma_node);
+>   
+> -	if (unlikely(page_offset >= bo->resource->num_pages))
+> +	if (unlikely(page_offset >= PFN_UP(bo->resource->size)))
+
+Please use bo->base.size here. The resource size can actually be larger 
+than the BO size, but the extra space shouldn't be CPU map-able.
+
+>   		return VM_FAULT_SIGBUS;
+>   
+>   	prot = ttm_io_prot(bo, bo->resource, prot);
+> @@ -412,7 +412,7 @@ int ttm_bo_vm_access(struct vm_area_struct *vma, unsigned long addr,
+>   		 << PAGE_SHIFT);
+>   	int ret;
+>   
+> -	if (len < 1 || (offset + len) >> PAGE_SHIFT > bo->resource->num_pages)
+> +	if (len < 1 || (offset + len) > bo->resource->size)
+
+Same here, please use bo->base.size.
+
+>   		return -EIO;
+>   
+>   	ret = ttm_bo_reserve(bo, true, false, NULL);
+> diff --git a/drivers/gpu/drm/ttm/ttm_range_manager.c b/drivers/gpu/drm/ttm/ttm_range_manager.c
+> index f7c16c46cfbc..0a8bc0b7f380 100644
+> --- a/drivers/gpu/drm/ttm/ttm_range_manager.c
+> +++ b/drivers/gpu/drm/ttm/ttm_range_manager.c
+> @@ -83,7 +83,7 @@ static int ttm_range_man_alloc(struct ttm_resource_manager *man,
+>   
+>   	spin_lock(&rman->lock);
+>   	ret = drm_mm_insert_node_in_range(mm, &node->mm_nodes[0],
+> -					  node->base.num_pages,
+> +					  PFN_UP(node->base.size),
+>   					  bo->page_alignment, 0,
+>   					  place->fpfn, lpfn, mode);
+>   	spin_unlock(&rman->lock);
+> diff --git a/drivers/gpu/drm/ttm/ttm_resource.c b/drivers/gpu/drm/ttm/ttm_resource.c
+> index a729c32a1e48..f9cce0727d40 100644
+> --- a/drivers/gpu/drm/ttm/ttm_resource.c
+> +++ b/drivers/gpu/drm/ttm/ttm_resource.c
+> @@ -177,7 +177,7 @@ void ttm_resource_init(struct ttm_buffer_object *bo,
+>   	struct ttm_resource_manager *man;
+>   
+>   	res->start = 0;
+> -	res->num_pages = PFN_UP(bo->base.size);
+> +	res->size = bo->base.size;
+>   	res->mem_type = place->mem_type;
+>   	res->placement = place->flags;
+>   	res->bus.addr = NULL;
+> @@ -192,7 +192,7 @@ void ttm_resource_init(struct ttm_buffer_object *bo,
+>   		list_add_tail(&res->lru, &bo->bdev->pinned);
+>   	else
+>   		list_add_tail(&res->lru, &man->lru[bo->priority]);
+> -	man->usage += res->num_pages << PAGE_SHIFT;
+> +	man->usage += res->size;
+>   	spin_unlock(&bo->bdev->lru_lock);
+>   }
+>   EXPORT_SYMBOL(ttm_resource_init);
+> @@ -214,7 +214,7 @@ void ttm_resource_fini(struct ttm_resource_manager *man,
+>   
+>   	spin_lock(&bdev->lru_lock);
+>   	list_del_init(&res->lru);
+> -	man->usage -= res->num_pages << PAGE_SHIFT;
+> +	man->usage -= res->size;
+>   	spin_unlock(&bdev->lru_lock);
+>   }
+>   EXPORT_SYMBOL(ttm_resource_fini);
+> @@ -665,7 +665,7 @@ ttm_kmap_iter_linear_io_init(struct ttm_kmap_iter_linear_io *iter_io,
+>   		iosys_map_set_vaddr(&iter_io->dmap, mem->bus.addr);
+>   		iter_io->needs_unmap = false;
+>   	} else {
+> -		size_t bus_size = (size_t)mem->num_pages << PAGE_SHIFT;
+> +		size_t bus_size = (size_t)mem->size;
+
+I think we can remove the local variable now, or is that used in some 
+kind of loop?
+
+Thanks,
+Christian.
+
+>   
+>   		iter_io->needs_unmap = true;
+>   		memset(&iter_io->dmap, 0, sizeof(iter_io->dmap));
+> diff --git a/include/drm/ttm/ttm_resource.h b/include/drm/ttm/ttm_resource.h
+> index 5afc6d664fde..f93c9e52b063 100644
+> --- a/include/drm/ttm/ttm_resource.h
+> +++ b/include/drm/ttm/ttm_resource.h
+> @@ -208,7 +208,7 @@ struct ttm_bus_placement {
+>    */
+>   struct ttm_resource {
+>   	unsigned long start;
+> -	unsigned long num_pages;
+> +	size_t size;
+>   	uint32_t mem_type;
+>   	uint32_t placement;
+>   	struct ttm_bus_placement bus;
 
