@@ -1,78 +1,40 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EA926F6B6E
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:29 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 427526F6B34
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:31:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8010D10E3CF;
-	Thu,  4 May 2023 12:31:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D802210E392;
+	Thu,  4 May 2023 12:31:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 903 seconds by postgrey-1.36 at gabe;
- Thu, 20 Oct 2022 11:10:57 UTC
-Received: from mx01.omp.ru (mx01.omp.ru [90.154.21.10])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 761EC10E1DA;
- Thu, 20 Oct 2022 11:10:57 +0000 (UTC)
-Received: from [192.168.1.103] (31.173.87.29) by msexch01.omp.ru (10.188.4.12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.2.986.14; Thu, 20 Oct
- 2022 13:55:44 +0300
-To: Thomas Zimmermann <tzimmermann@suse.de>, <daniel@ffwll.ch>,
- <airlied@gmail.com>, <sam@ravnborg.org>, <javierm@redhat.com>,
- <mripard@kernel.org>, <maarten.lankhorst@linux.intel.com>
-References: <20221020103755.24058-1-tzimmermann@suse.de>
- <20221020103755.24058-4-tzimmermann@suse.de>
-From: Sergey Shtylyov <s.shtylyov@omp.ru>
-Organization: Open Mobile Platform
-Message-ID: <013ea55b-3d51-c89c-eff8-b8d355ded352@omp.ru>
-Date: Thu, 20 Oct 2022 13:55:44 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+Received: from letterbox.kde.org (letterbox.kde.org [46.43.1.242])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1660E10E275;
+ Fri, 21 Oct 2022 01:07:10 +0000 (UTC)
+Received: from vertex.vmware.com (pool-173-49-113-140.phlapa.fios.verizon.net
+ [173.49.113.140]) (Authenticated sender: zack)
+ by letterbox.kde.org (Postfix) with ESMTPSA id E046B321FBE;
+ Fri, 21 Oct 2022 02:07:05 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kde.org; s=users;
+ t=1666314428; bh=mEZCh6DKMZxYs93u5HYN5AP3T4mH4+XzTxRdxvODvmw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=f+8WwnTl+3Upzwg+ngXQt0iN2WuzWtkNoNapASjI96Li+fZnYuE06m/AkjvfVx9fz
+ wKwI5nSLVtziDl/hAwOn+u3PEbKlwLhlH+AXn789MxamNoe874UrdW1EVoVkUswoLn
+ K+2Uibop1+YSgaf3JJte7NgpUyAQJXKGXsrarKPPzEfSyp0MYQzgRW4f8GpVrfnBZQ
+ EEkD1hAUd/jKBUWLFPcrlbuGudZIv20cDhY4A9SvRHBjs7oh08v5RU7zdjKnscuNdD
+ F+BCCZU3M40Wy8/Q6SQdnwDS0B0ggIn2VtfGYDo5esOlb63uU6RkRHJ5h9InNxgDWY
+ H8sMvUFCaozRg==
+From: Zack Rusin <zack@kde.org>
+To: dri-devel@lists.freedesktop.org
+Date: Thu, 20 Oct 2022 21:07:03 -0400
+Message-Id: <20221021010703.536318-1-zack@kde.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-In-Reply-To: <20221020103755.24058-4-tzimmermann@suse.de>
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [31.173.87.29]
-X-ClientProxiedBy: msexch01.omp.ru (10.188.4.12) To msexch01.omp.ru
- (10.188.4.12)
-X-KSE-ServerInfo: msexch01.omp.ru, 9
-X-KSE-AntiSpam-Interceptor-Info: scan successful
-X-KSE-AntiSpam-Version: 5.9.20, Database issued on: 10/20/2022 10:25:24
-X-KSE-AntiSpam-Status: KAS_STATUS_NOT_DETECTED
-X-KSE-AntiSpam-Method: none
-X-KSE-AntiSpam-Rate: 59
-X-KSE-AntiSpam-Info: Lua profiles 173210 [Oct 20 2022]
-X-KSE-AntiSpam-Info: Version: 5.9.20.0
-X-KSE-AntiSpam-Info: Envelope from: s.shtylyov@omp.ru
-X-KSE-AntiSpam-Info: LuaCore: 502 502 69dee8ef46717dd3cb3eeb129cb7cc8dab9e30f6
-X-KSE-AntiSpam-Info: {rep_avail}
-X-KSE-AntiSpam-Info: {Tracking_from_domain_doesnt_match_to}
-X-KSE-AntiSpam-Info: {relay has no DNS name}
-X-KSE-AntiSpam-Info: {SMTP from is not routable}
-X-KSE-AntiSpam-Info: {Found in DNSBL: 31.173.87.29 in (user)
- b.barracudacentral.org}
-X-KSE-AntiSpam-Info: omp.ru:7.1.1; 127.0.0.199:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1
-X-KSE-AntiSpam-Info: ApMailHostAddress: 31.173.87.29
-X-KSE-AntiSpam-Info: {DNS response errors}
-X-KSE-AntiSpam-Info: Rate: 59
-X-KSE-AntiSpam-Info: Status: not_detected
-X-KSE-AntiSpam-Info: Method: none
-X-KSE-AntiSpam-Info: Auth:dmarc=temperror header.from=omp.ru;spf=temperror
- smtp.mailfrom=omp.ru;dkim=none
-X-KSE-Antiphishing-Info: Clean
-X-KSE-Antiphishing-ScanningType: Heuristic
-X-KSE-Antiphishing-Method: None
-X-KSE-Antiphishing-Bases: 10/20/2022 10:32:00
-X-KSE-AttachmentFiltering-Interceptor-Info: protection disabled
-X-KSE-Antivirus-Interceptor-Info: scan successful
-X-KSE-Antivirus-Info: Clean, bases: 10/20/2022 7:12:00 AM
-X-KSE-BulkMessagesFiltering-Scan-Result: InTheLimit
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:36 +0000
-Subject: Re: [Nouveau] [PATCH 03/21] drm/ingenic: Don't set struct
- drm_driver.lastclose
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:35 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau: Remove unused variable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,35 +46,44 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-hyperv@vger.kernel.org, linux-aspeed@lists.ozlabs.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org,
- linux-stm32@st-md-mailman.stormreply.com, linux-samsung-soc@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
- xen-devel@lists.xenproject.org, linux-sunxi@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- etnaviv@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
- spice-devel@lists.freedesktop.org, linux-tegra@vger.kernel.org,
- linux-amlogic@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- linux-mips@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
- freedreno@lists.freedesktop.org
+Reply-To: Zack Rusin <zackr@vmware.com>
+Cc: Stephen Rothwell <sfr@canb.auug.org.au>,
+ Thomas Zimmermann <tzimemrmann@suse.de>, nouveau@lists.freedesktop.org,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ Zack Rusin <zackr@vmware.com>, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello!
+From: Zack Rusin <zackr@vmware.com>
 
-On 10/20/22 1:37 PM, Thomas Zimmermann wrote:
+Trivial removal of an unused variable. Not sure how it snuck by me and
+build bots in the 7c99616e3fe7.
 
-> Don't set struct drm_mode_config.output_poll_changed. It's used to
-> inform the fbdev console about conncetor changes. But as ingenic
+Fixes: 7c99616e3fe7 ("drm: Remove drm_mode_config::fb_base")
+Reported-by: Stephen Rothwell <sfr@canb.auug.org.au>
+Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Cc: Thomas Zimmermann <tzimemrmann@suse.de>
+Cc: Christian König <christian.koenig@amd.com>
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_display.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-   Connector. :-)
+diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
+index 928fdfa8e8e5..2e97186090c8 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_display.c
++++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+@@ -659,7 +659,6 @@ int
+ nouveau_display_create(struct drm_device *dev)
+ {
+ 	struct nouveau_drm *drm = nouveau_drm(dev);
+-	struct nvkm_device *device = nvxx_device(&drm->client.device);
+ 	struct nouveau_display *disp;
+ 	int ret;
+ 
+-- 
+2.34.1
 
-> uses generic fbdev emulation, the console is being informed by the
-> DRM client helpers already. See the calls to drm_client_dev_hotplug()
-> in drm_probe_helper.c.
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-[...]
-
-MBR, Sergey
