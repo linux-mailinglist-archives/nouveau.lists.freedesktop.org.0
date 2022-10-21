@@ -2,78 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37CC5607F4D
-	for <lists+nouveau@lfdr.de>; Fri, 21 Oct 2022 21:53:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 623AC607F8B
+	for <lists+nouveau@lfdr.de>; Fri, 21 Oct 2022 22:12:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C3F4210E2F7;
-	Fri, 21 Oct 2022 19:53:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8A5B910E65F;
+	Fri, 21 Oct 2022 20:12:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 517DE8825E
- for <nouveau@lists.freedesktop.org>; Fri, 21 Oct 2022 19:53:24 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7DC8E10E67C
+ for <nouveau@lists.freedesktop.org>; Fri, 21 Oct 2022 20:12:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1666382003;
+ s=mimecast20190719; t=1666383133;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=QofnON1pIHgUL11O2ltSs3nNe2gK8qm53Je2KHvPKbo=;
- b=fawTw/TqHS9UVrsMT1SNy8XnlQvDNodu0HQ69tplbMHDnLXzT0uSEgm1jiL4G7C1d6Ydjv
- D0s9GWG2yIHSsjS50aHyW1b7GBkThzLvY2sNpOMizkrn8iJoKkDhC6Vxgbqu2/bNtGcW4q
- BCaUrMmVwEWpkX/SOngp7lAuvuwnwnw=
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=JX/59qgotHOb21DdrG8ALpYMBcH+ITiCC7HbahzreUk=;
+ b=ROGwmcaY6R14+9oR53iMH9wRbM20omIikaA2s4uhJVpEZaDXew2bUWXvb8SkKuKWNUkyyp
+ YKTskWJKYTovACciTaTe74nU9WAUZ9Nb0zQF5SJA9qUq8VsF2wrWDz+d9GT8eG3hgJXwCO
+ HIt88L3BdKHkdturlsxgnkQ7pluUSwk=
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-172-OAKvA6gIM5OVPXHu6qyVEQ-1; Fri, 21 Oct 2022 15:53:22 -0400
-X-MC-Unique: OAKvA6gIM5OVPXHu6qyVEQ-1
-Received: by mail-qv1-f70.google.com with SMTP id
- h1-20020a0ceda1000000b004b899df67a4so2911039qvr.1
- for <nouveau@lists.freedesktop.org>; Fri, 21 Oct 2022 12:53:22 -0700 (PDT)
+ us-mta-16-idMIe8NbO8iiMSRYY7LthA-1; Fri, 21 Oct 2022 16:12:12 -0400
+X-MC-Unique: idMIe8NbO8iiMSRYY7LthA-1
+Received: by mail-qt1-f199.google.com with SMTP id
+ 22-20020ac85756000000b0039cf0d41e2cso3234062qtx.13
+ for <nouveau@lists.freedesktop.org>; Fri, 21 Oct 2022 13:12:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:user-agent:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QofnON1pIHgUL11O2ltSs3nNe2gK8qm53Je2KHvPKbo=;
- b=oFmRhDYUznpPeTZO1NoIHyQ/RnQgEzMMzbwjcGB4YmoxxuqBFdrxP4d7mBJM/sPe1x
- Sa4SwKLyI6/EKN5bOrfzo5crmq+lFjEDXOsL5f2fteSALpWgQgoRILRFeuu2LQ1UWfMx
- 2VrVge0m/caX0BjZex2oyZ1UAjEMTVoNfnMGj4+q7RR1uxmkewvUbT9SuvaZeMwlVyva
- Uwe0oHKjyikL3bfNZQHRup86Auf3u5IEyyqnEuLoHNcW0XSE+qC8YatqpLtziV8CyobM
- C4DFOEdZRE211U0QDz7gLqZqdJ+vNgTbMrQ5c9xQK/3ftCfjUHYQKavXs3cB//jlf1D4
- OkXQ==
-X-Gm-Message-State: ACrzQf0NPd3a++1nOpa1PcYjrVAAmHgQs1J/FAFcOYn02hwYDPi4Zf0b
- nmxZmDXOw1kXzagOL2FoKNwoD5LH1xuATCYohsyoveYR7WDbUDW+VcNIdq2NT7HR3F2mMO0R80Z
- p1Ao8TWQApXq5EuF6hstAtp09Yg==
-X-Received: by 2002:a37:4454:0:b0:6e7:9bd0:bf53 with SMTP id
- r81-20020a374454000000b006e79bd0bf53mr15004520qka.616.1666382001733; 
- Fri, 21 Oct 2022 12:53:21 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM6NdqiJx0bpBbrD3JAIB3bMvmM3hYKDj1n8vHRbhwtYdxet/rga1vQ0/yosOS0ci0f4jXcwdQ==
-X-Received: by 2002:a37:4454:0:b0:6e7:9bd0:bf53 with SMTP id
- r81-20020a374454000000b006e79bd0bf53mr15004509qka.616.1666382001508; 
- Fri, 21 Oct 2022 12:53:21 -0700 (PDT)
+ bh=JX/59qgotHOb21DdrG8ALpYMBcH+ITiCC7HbahzreUk=;
+ b=z+Nb5iOETzRW64WO9e8pmC7n2kbjROH2p0yFhsfUbLH5h86KyI4p8bQZs/NdTPkWQ3
+ hJ7/IwaonPsovsRTswKIEz2NPIwg2t2SBrsAbnnvA/k9OncyjwHY7w3hwpW5dbf+1YHz
+ R3NRfnrn7JkmSm+EQp36b/0924nQIL06vtYQ9olAtz6tZi/c9SOdbLUhbmT9tbWQPgMt
+ 0sK0yG0QXJHaA9jC9wfFR70hjPk3J7zsBIk/+MxvhyHekZTir51O27kicvUK9vVLKiQb
+ 1Gn9NTJDm7IhXjpsBiyfQB0kh0Rs14tOOZ0tQ4IDjQuE+IGr97ag7knKH0dE10b4fRUV
+ ejEg==
+X-Gm-Message-State: ACrzQf2ArU8tnwP70hLJo47TpSznTlHsmn33OlMAI+7JMoKaJLOYuKX3
+ sENyxZuWP6iwePqt1Huq/q8GWJTgr6qV+KP3IAq7bVdahouH29n0fkrEFaPkZjGxtBA9H9KGvw1
+ I6vXIhT5uwO2hD05IX8WAd7dDVw==
+X-Received: by 2002:a05:620a:1112:b0:6ee:94f6:e5eb with SMTP id
+ o18-20020a05620a111200b006ee94f6e5ebmr14293239qkk.720.1666383129109; 
+ Fri, 21 Oct 2022 13:12:09 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM6C1ormDUi1zdnhNjodcWDR9Z43uhN1St5p4w9kOXgVqPC1EaCPUEndFlOGtL55RojMxEFGEw==
+X-Received: by 2002:a05:620a:1112:b0:6ee:94f6:e5eb with SMTP id
+ o18-20020a05620a111200b006ee94f6e5ebmr14293226qkk.720.1666383128909; 
+ Fri, 21 Oct 2022 13:12:08 -0700 (PDT)
 Received: from ?IPv6:2600:4040:5c68:4300::feb? ([2600:4040:5c68:4300::feb])
  by smtp.gmail.com with ESMTPSA id
- u10-20020a05620a0c4a00b006bb2cd2f6d1sm10020328qki.127.2022.10.21.12.53.19
+ bq12-20020a05620a468c00b006ee957439f2sm9992460qkb.133.2022.10.21.13.12.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Oct 2022 12:53:20 -0700 (PDT)
-Message-ID: <bdaca873243ca55de9b286d732c46729f2d96415.camel@redhat.com>
+ Fri, 21 Oct 2022 13:12:08 -0700 (PDT)
+Message-ID: <75ecce4d9c83595aae7589f9065118b401adc92e.camel@redhat.com>
 From: Lyude Paul <lyude@redhat.com>
-To: Alistair Popple <apopple@nvidia.com>, Ben Skeggs <bskeggs@redhat.com>, 
- Andrew Morton <akpm@linux-foundation.org>
-Date: Fri, 21 Oct 2022 15:53:19 -0400
-In-Reply-To: <20221019122934.866205-1-apopple@nvidia.com>
-References: <20221019122934.866205-1-apopple@nvidia.com>
+To: Zack Rusin <zackr@vmware.com>, dri-devel@lists.freedesktop.org
+Date: Fri, 21 Oct 2022 16:12:07 -0400
+In-Reply-To: <20221021010703.536318-1-zack@kde.org>
+References: <20221021010703.536318-1-zack@kde.org>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH] nouveau: Fix migrate_to_ram() for faulting
- page
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Remove unused variable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,54 +83,47 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-mm@kvack.org, Ralph Campbell <rcampbell@nvidia.com>,
- nouveau@lists.freedesktop.org
+Cc: Stephen Rothwell <sfr@canb.auug.org.au>,
+ Thomas Zimmermann <tzimemrmann@suse.de>, nouveau@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>,
+ Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 2022-10-19 at 23:29 +1100, Alistair Popple wrote:
-> Commit 16ce101db85d ("mm/memory.c: fix race when faulting a device private
-> page") changed the migrate_to_ram() callback to take a reference on the
-> device page to ensure it can't be freed while handling the fault.
-> Unfortunately the corresponding update to Nouveau to accommodate this
-> change was inadvertently dropped from that patch causing GPU to CPU
-> migration to fail so add it here.
-> 
-> Signed-off-by: Alistair Popple <apopple@nvidia.com>
-> Fixes: 16ce101db85d ("mm/memory.c: fix race when faulting a device private page")
-> Cc: John Hubbard <jhubbard@nvidia.com>
-> Cc: Ralph Campbell <rcampbell@nvidia.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> 
-> ---
-> 
-> Hi Andrew/Ben, apologies I must have accidentally dropped this small hunk
-> when rebasing prior to sending v2 of the original series. Without this
-> migration from GPU to CPU won't work in Nouveau so hopefully one of you can
-> take this for v6.1-rcX. Thanks.
-
-Hi!
-
 Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-I will push this to drm-misc-next in just a moment, thanks for the patch!
+Will push to drm-misc-next as well
 
-> ---
->  drivers/gpu/drm/nouveau/nouveau_dmem.c | 1 +
->  1 file changed, 1 insertion(+)
+On Thu, 2022-10-20 at 21:07 -0400, Zack Rusin wrote:
+> From: Zack Rusin <zackr@vmware.com>
 > 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-> index 5fe209107246..20fe53815b20 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-> @@ -176,6 +176,7 @@ static vm_fault_t nouveau_dmem_migrate_to_ram(struct vm_fault *vmf)
->  		.src		= &src,
->  		.dst		= &dst,
->  		.pgmap_owner	= drm->dev,
-> +		.fault_page	= vmf->page,
->  		.flags		= MIGRATE_VMA_SELECT_DEVICE_PRIVATE,
->  	};
+> Trivial removal of an unused variable. Not sure how it snuck by me and
+> build bots in the 7c99616e3fe7.
+> 
+> Fixes: 7c99616e3fe7 ("drm: Remove drm_mode_config::fb_base")
+> Reported-by: Stephen Rothwell <sfr@canb.auug.org.au>
+> Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+> Cc: Thomas Zimmermann <tzimemrmann@suse.de>
+> Cc: Christian König <christian.koenig@amd.com>
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: Karol Herbst <kherbst@redhat.com>
+> Cc: Lyude Paul <lyude@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_display.c | 1 -
+>  1 file changed, 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
+> index 928fdfa8e8e5..2e97186090c8 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+> @@ -659,7 +659,6 @@ int
+>  nouveau_display_create(struct drm_device *dev)
+>  {
+>  	struct nouveau_drm *drm = nouveau_drm(dev);
+> -	struct nvkm_device *device = nvxx_device(&drm->client.device);
+>  	struct nouveau_display *disp;
+>  	int ret;
 >  
 
 -- 
