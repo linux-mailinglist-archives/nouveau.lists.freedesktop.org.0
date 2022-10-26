@@ -1,108 +1,91 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0602C60D908
-	for <lists+nouveau@lfdr.de>; Wed, 26 Oct 2022 04:01:26 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C3B7C60DE7B
+	for <lists+nouveau@lfdr.de>; Wed, 26 Oct 2022 11:59:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BA15910E294;
-	Wed, 26 Oct 2022 02:01:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9461510E26A;
+	Wed, 26 Oct 2022 09:59:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam07on2063.outbound.protection.outlook.com [40.107.212.63])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 11F4E10E294;
- Wed, 26 Oct 2022 02:01:20 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=X8qS+10phLnz0xw3pBVWPRFyUF+TXm5pRX/zpeX2rmnTuJyshJZ7gTDfhRzZ42KCrUvONVtgfOVHAaBCPSW2+Hlf+w8Yjg5wZs7/oPjD9nX+PEaHRG8U7pyRenvCPrQFEs+/LiJm51UA68Ys3VN4gozmltNu8QGxbnuhejt33YaaA6e9hXi0kWts0YyQE6NbL9H0zXydm9SP7lDC41/Jq/sVwYl1bQ+lpLNmlbrs0f8pmKhwI0XKHaZMhjLhNkeEnrwZ434jgU5q7BDjbP+1/Hv7KJI1aTpvq6ewf7hah81+zck1+ekkPlqcwmh9wT4hvHjGNX/spHhXr690mgFxnQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FDoiSwBLEep3TlBJT66KM6dL5czo+5Jx8qM4cKOha0U=;
- b=eyCtZmrajB9Ie/SC1uBJAmaj0AP/ZYjV3VN14PnKs16SRTnaeQtlMo874tM80fwKFqaaiqUlBXnGBZ5Zo3Gcsu9JEppuHugvycgZ7+8mSaTuBsxD5t2QMW8xht8euE+WHeZ3sXju2/4Jn4vIOGCHKB1ju8RAXSM5Yc54WK+8IyAWKuzgCe6AsJhgEhYlALSGXvscdNJfQcqJ6OJNNAIHnKg9qj68RLQGAJ3vwud5Og58OZpinsEKqPy/YRyjOFGadjzQwufwQI1N9xX75AV17REbhqkdruVUZURoUi1eUAxZ1ICxJyixevnHvQuRAq/2xOw4urzGiy1Fm41eXLROvQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FDoiSwBLEep3TlBJT66KM6dL5czo+5Jx8qM4cKOha0U=;
- b=AYxkAISNJWd4l5Fxp19mP5U/sgivm1FwTPguywIbBAmHnsjSSYwic372J0NL+73iz9cpX61myKG5UDNPLJQTNTScu54sowZrsBM/y9moMi0kT/XJBRpk7L9fKDRyO9wWW3h+2yk50oib31kkpb23+xFD8sdDBXTNAvGq4EnPU9fqlxxLgeQzP0+eFYu+lOh3M2cZWJ6oy1zyQSvlWsUguPLfIxVVzFgt241J3krCSqManDcj2UFRURxGtrQVwcB4nqFuuLy77jCzEsghWn4qqpKREwcnF/A+FEP25HuqCfO5XnxlTe25XVRKAWm/bZq6+7d56JiBugNs1gNiZHc51Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from BYAPR12MB3176.namprd12.prod.outlook.com (2603:10b6:a03:134::26)
- by PH0PR12MB5449.namprd12.prod.outlook.com (2603:10b6:510:e7::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5746.28; Wed, 26 Oct
- 2022 02:01:17 +0000
-Received: from BYAPR12MB3176.namprd12.prod.outlook.com
- ([fe80::6ed5:b1a6:b935:a4d8]) by BYAPR12MB3176.namprd12.prod.outlook.com
- ([fe80::6ed5:b1a6:b935:a4d8%7]) with mapi id 15.20.5723.034; Wed, 26 Oct 2022
- 02:01:17 +0000
-References: <cover.60659b549d8509ddecafad4f498ee7f03bb23c69.1664366292.git-series.apopple@nvidia.com>
- <f36153fe-214c-2904-e155-ab9cee8a2a2c@kernel.org>
-User-agent: mu4e 1.8.10; emacs 28.2
-From: Alistair Popple <apopple@nvidia.com>
-To: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
-Date: Wed, 26 Oct 2022 12:47:15 +1100
-In-reply-to: <f36153fe-214c-2904-e155-ab9cee8a2a2c@kernel.org>
-Message-ID: <8735bbuyvs.fsf@nvidia.com>
-Content-Type: text/plain
-X-ClientProxiedBy: SYYP282CA0017.AUSP282.PROD.OUTLOOK.COM
- (2603:10c6:10:b4::27) To BYAPR12MB3176.namprd12.prod.outlook.com
- (2603:10b6:a03:134::26)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AFDF110E363
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Oct 2022 09:59:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1666778375;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=88clgiauNntAl3Wz7H3JYTecCEZyzTGGOgZ+LgOj43I=;
+ b=SHStSnM+T8/KaVxgEXv4Rd6TDNzQIcoXvX4HIG347KkARfb5ce9mtFCYVGbRM/RM0et3eI
+ /jSUzSJW3U3n+c57FVM5PKfYv1H3YeUFDEFZi9oE/jPo3xKnGnR22TnyewxPh0tOr9M0nk
+ pn9TLz80bv0fihWnanWm+rSZD0Sek1M=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-561-iDGCutGwPWWCaQ1vKydmdw-1; Wed, 26 Oct 2022 05:59:33 -0400
+X-MC-Unique: iDGCutGwPWWCaQ1vKydmdw-1
+Received: by mail-ed1-f69.google.com with SMTP id
+ f20-20020a0564021e9400b00461ea0ce17cso5618700edf.16
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Oct 2022 02:59:33 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=88clgiauNntAl3Wz7H3JYTecCEZyzTGGOgZ+LgOj43I=;
+ b=aqYeyE9lRaZlXVZkQXqq+PC+i0qbwOExLPxsXSdAQLgW9LZThkv7W1YDF687XSXVXm
+ oEkRmhUrZAVlDqj4AQwedfJesyDEeZ5QuFjTeuyFyd1553ccw0EPPMLR3Rf2vZhx/EIv
+ cqZ3y6IZEOxozUV1WJPrNZz6D2ArgQBbnCw99wwRSJPhaf8unK7FOyqT08jI0dowN7dR
+ 0zm9LZIeZCPFAMH4Ei9AbeOPFUKva837t1ZBT+KeFNvB5YhDjv5JuSHQlIwP1U4QcwoY
+ 192Z7fuhWY7SJrFuICQt3nZMcFd8O9vk6AK1oV7yPphyyyMd3q+2fqUX1VhmYI6k6YCM
+ 1Phw==
+X-Gm-Message-State: ACrzQf21qw2ustJWmlW742RZN4ZBdSq47YdoJ2sj8GqVxQ66crl+rcFi
+ hYJqrw4cLZC1CAI4keBFXLtws1yOzA5dK0i/pJ95FPvGmakWw4YQaG/J0viD4/R6qelh/BoMm52
+ MeJqNmALrvsrtPMAHpGG4hRPdig==
+X-Received: by 2002:a17:906:fe04:b0:777:b13d:30a6 with SMTP id
+ wy4-20020a170906fe0400b00777b13d30a6mr36058287ejb.248.1666778372131; 
+ Wed, 26 Oct 2022 02:59:32 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM778dCSL7x8318qzKenTU6R7Jp/heP0pFWsLg0Zjgt4GfqQod/XgRUMTGVY4TA8QIvtp3pSAg==
+X-Received: by 2002:a17:906:fe04:b0:777:b13d:30a6 with SMTP id
+ wy4-20020a170906fe0400b00777b13d30a6mr36058246ejb.248.1666778371810; 
+ Wed, 26 Oct 2022 02:59:31 -0700 (PDT)
+Received: from ?IPV6:2001:1c00:c1e:bf00:d69d:5353:dba5:ee81?
+ (2001-1c00-0c1e-bf00-d69d-5353-dba5-ee81.cable.dynamic.v6.ziggo.nl.
+ [2001:1c00:c1e:bf00:d69d:5353:dba5:ee81])
+ by smtp.gmail.com with ESMTPSA id
+ x10-20020a1709060eea00b007415f8ffcbbsm2706055eji.98.2022.10.26.02.59.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 26 Oct 2022 02:59:29 -0700 (PDT)
+Message-ID: <fa6cc1d9-6740-b495-2c72-cae18c429ca6@redhat.com>
+Date: Wed, 26 Oct 2022 11:59:28 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB3176:EE_|PH0PR12MB5449:EE_
-X-MS-Office365-Filtering-Correlation-Id: bd0b2f76-67fb-47ca-9222-08dab6f5f83d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: zizsxgbKimTyc6MxHTlDdgT1jxhWy5J5RXCqREvzVnkZyKBPoV10tlRT4y6rHE4pOHqWEU7+MKcaFFblyD0GmEBfLYgnPV6pGYYKfTd01tzifn2uEEiGu1D6muOGKJbbqN5oReoWyZJZuW8orMUWcSvYUvJj63EBMDSNMPOWGq2wMxzTHM4FGlAeARfySXkJhWsAJb2BmchjUYJbNfqn5H1QWQFLyJET6XdMOlD+NfeZ0g+0g+TdSu/XB7DwfXAsM4E+DCZfh3mayDz1ZNzTYReExoIO+5zHB8b4sFnWQpo3eEikGh5S/nrCEOhxBfTyd09RRAP2wo4VgsCP84DGgOPOCV23zvp549eJXiqFv2eoXYcLQpm2VeNSSvoL/83EL+S+MfG8Kv6OmtVyEjvL6ybv/0fQS2d3VU6Cyq6P+UiIg3vQLAw8qo9aCnGIJzuRcxf9Fg2iFAOfRSH1DzF70r9VSLVddQvcYgK/H/jghnwO41KGrf7CQxhb8i+Mg5EZu+Aaz1rxjci0RcUwwU6h18myD4pLjsEv+lpE1FF59+oS2vwXj4BEHiZfBxcTfxmvjgh1OAjZk+R/GnDW89q2lHeArh2B70Dom8deqxCdYiPsuaqmczJWLITrV4Sa8g0UGZsLNC/cTSmjc5mrpXnT9jxB60FCpVBccK/186BbTkAujhvkqyBvjKLFnV6iS5t1cuxJToUMMg+oCmxXcBWnxbhvdoQPQMLj2ECZGW2MVIoeGRj1HrZhPNZy9xhIfuHbMZOcyrTWTUtz8/37QpWM7pNjUU8Wc0mHI/q2DVp0xIU=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR12MB3176.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(346002)(376002)(39860400002)(396003)(366004)(136003)(451199015)(6916009)(5660300002)(8936002)(54906003)(316002)(8676002)(26005)(66946007)(4326008)(66556008)(66476007)(6512007)(41300700001)(36756003)(6506007)(38100700002)(2906002)(2616005)(53546011)(83380400001)(86362001)(478600001)(6486002)(186003)(66899015)(966005);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?W/KvJjU8Xcr3K9y5+iNEFd31gckHzYWsYMxNCUdew/EWdpGTmI6If0kROzhB?=
- =?us-ascii?Q?R3AsQ/0zp9ogDueMXJ/FWrgtbqVskTiX40UNpk/Kpjlik4sruTjvuLBFGiSn?=
- =?us-ascii?Q?FfHnFTBvh5EWGBqQo7NPGsWbl6Q0a/TLKQnf2TiWQRosrAD69iCbKlo1h28m?=
- =?us-ascii?Q?zJJoJjUKW1xEZI5So0bOABqP4lMWYnLlCQaoe5jaSi5OFZ/CLgsOpQ05wQYV?=
- =?us-ascii?Q?a1ZfsVgZbmJbBYN68g7gU2R9gitdS9aa5qcF2YKm0rJlBYUmnb+W3I6E+yh4?=
- =?us-ascii?Q?C1gD06YhdOL11MPBKFuPMQBGu+HBtsUFToIxO6gv5PA/6vQ9FJD8Sy8Dv0qa?=
- =?us-ascii?Q?P4q747BjJm1Uy3rlaCUMCweH6Q5YnLN8xim2HkA5QphSbB1S6U+tjG0/SW68?=
- =?us-ascii?Q?xGgfSWfMnrXce5dcO2cQsCMEA/4OqdnXBRQmDwI2qPRyO1GMWrG0ttRbF3VV?=
- =?us-ascii?Q?zonnzGaqEYqHCQW8n4s1TfHjTxmjgGH1/IiI+6xHy9KqNv81GTy9gt+iCyJj?=
- =?us-ascii?Q?7rp97dr21usS3RfwOQZJ4t6g0fdL/8bINxUutUJ17G+JNU5P2I55442tsDQx?=
- =?us-ascii?Q?b6B8og4QlRvbwpQFY8HH7APChOa17WEgPtpDwgSX1Bj0RoN1e8Judt3he6vE?=
- =?us-ascii?Q?EQvJTZj50uT2zEIXXrhzzusSJg82u9NPKuoMhKZnTJHRTFLz7aJAA7Ogkfxb?=
- =?us-ascii?Q?tR5aqC70eOygkh7DBjZeioHrrPDXIZMOdfZ+3cwYpP9TX7Iv5FHm4qMyb3yZ?=
- =?us-ascii?Q?0OhhRTAFLvKsmUpAfBRvF3wcZkLAaGrb6iEByYvVvuawoS/lXZ+SAgLHNOCE?=
- =?us-ascii?Q?5u8XAlGVDzVkdyg8PQ1a7JNe8CH61AL638FUXqt/DcTNWmyUHl5TJ6fYpFaV?=
- =?us-ascii?Q?UL2xR2n3eav/biNjZRKo0Ko1Kufv0KXAOFQp8HyO1TO9yxhX9W6ziOWKKAeL?=
- =?us-ascii?Q?TxfBRo0tDcWmPI6PrhPBmiCKQtVEuR96/Gt8y8EovMKaGNEF4+4+20FFS2kr?=
- =?us-ascii?Q?MZXhS120rABE7P/uRNMPrx/9e5kl4v9jNviwjOPBBI03XtS3HzsRjTQpzmQz?=
- =?us-ascii?Q?J9LfiK572nWPBw6IFGAQ/fiXfNAwq6WKLIY2t9VEu3d0x1DgjzFmh24TjHnu?=
- =?us-ascii?Q?jDAHe4aj0DQQtgXPp2WhxtmJmulW9TRUqlISmOIQ7k/owpJoRMTE8/HnID90?=
- =?us-ascii?Q?GXEkoMz9WCptFShtBjkj+yb8MTvbujbsvFFo/TIF7674oHGMPZUsn2LfKV4M?=
- =?us-ascii?Q?zZYbCRsDMCR5i9S9aU/uuCmo0BqHgGh1kskHWmwuRgkxTjGk42jJHhnNRjHg?=
- =?us-ascii?Q?TYXAvB2NBTTvTjlRRFfZcAFDrnL9pNsvSw4v5hyvKWgrVh2qi7T9dL2ft0Gp?=
- =?us-ascii?Q?HrTq+ySpaxlAeUTxgFaNaO+pgagM97BVMOLCkE5u8NZnyQj5sKX/y5tbLNJm?=
- =?us-ascii?Q?K6UtqvBuIlg8WiQb/AmtRBn58XCUnP4u4aWcPEKAvI5nsKK7/QEGb+YlL8WC?=
- =?us-ascii?Q?Kxj79ObVRrIzarqnSgHVvmZqUkInqGk9o2M3ncWB4w1A2PIs3/J57s5smd9E?=
- =?us-ascii?Q?roqUFjQjMOyQK/jxcRdrO69aE4A01w2wkpWh3irj?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bd0b2f76-67fb-47ca-9222-08dab6f5f83d
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB3176.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2022 02:01:17.5936 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: t1E0MOgD32ewC5kgOK/uMg5IX5cNHGnXPfKqXFSQd6E2QOn2UIwnVTABKgvKrlX/Sy8og1+WeUyyeUTtaq0LHQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB5449
-Subject: Re: [Nouveau] [PATCH v2 0/8] Fix several device private page
- reference counting issues
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.1
+To: Matthew Garrett <mjg59@srcf.ucam.org>
+References: <20220825143726.269890-1-hdegoede@redhat.com>
+ <20220825143726.269890-3-hdegoede@redhat.com>
+ <f914ceb3-94bd-743c-f8b6-0334086e731a@gmail.com>
+ <42a5f2c9-a1dc-8fc0-7334-fe6c390ecfbb@redhat.com>
+ <20221024203057.GA28675@srcf.ucam.org>
+ <8f53b8b6-ead2-22f5-16f7-65b31f7cc05c@redhat.com>
+ <20221025193248.GA21457@srcf.ucam.org>
+ <144cd47e-42dc-2b84-1a90-ea5e080e08a3@redhat.com>
+ <20221025204043.GA23306@srcf.ucam.org>
+ <cb5add36-c13c-ccd5-1b4b-71b45163a170@redhat.com>
+ <20221025234040.GA27673@srcf.ucam.org>
+From: Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <20221025234040.GA27673@srcf.ucam.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US, nl
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH v5 02/31] drm/i915: Don't register backlight
+ when another backlight should be used (v2)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -114,94 +97,166 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Felix Kuehling <Felix.Kuehling@amd.com>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, amd-gfx@lists.freedesktop.org,
- Andrew Morton <akpm@linux-foundation.org>
+Cc: Pan@freedesktop.org, "Rafael J . Wysocki" <rafael@kernel.org>,
+ nouveau@lists.freedesktop.org,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, platform-driver-x86@vger.kernel.org,
+ Dmitry Osipenko <digetx@gmail.com>, amd-gfx@lists.freedesktop.org,
+ linux-acpi@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>,
+ David Airlie <airlied@redhat.com>, Len Brown <lenb@kernel.org>,
+ Daniel Dadap <ddadap@nvidia.com>, Jani Nikula <jani.nikula@intel.com>,
+ intel-gfx <intel-gfx@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Mark Gross <markgross@kernel.org>,
+ Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>,
+ Andy Shevchenko <andy@kernel.org>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Xinhui <Xinhui.Pan@amd.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi,
 
-"Vlastimil Babka (SUSE)" <vbabka@kernel.org> writes:
-
-> On 9/28/22 14:01, Alistair Popple wrote:
->> This series aims to fix a number of page reference counting issues in
->> drivers dealing with device private ZONE_DEVICE pages. These result in
->> use-after-free type bugs, either from accessing a struct page which no
->> longer exists because it has been removed or accessing fields within the
->> struct page which are no longer valid because the page has been freed.
+On 10/26/22 01:40, Matthew Garrett wrote:
+> On Wed, Oct 26, 2022 at 01:27:25AM +0200, Hans de Goede wrote:
+> 
+>> this code should actually set the ACPI_VIDEO_BACKLIGHT flag:
+>> drivers/acpi/scan.c:
 >>
->> During normal usage it is unlikely these will cause any problems. However
->> without these fixes it is possible to crash the kernel from userspace.
->> These crashes can be triggered either by unloading the kernel module or
->> unbinding the device from the driver prior to a userspace task exiting. In
->> modules such as Nouveau it is also possible to trigger some of these issues
->> by explicitly closing the device file-descriptor prior to the task exiting
->> and then accessing device private memory.
->
-> Hi, as this series was noticed to create a CVE [1], do you think a stable
-> backport is warranted? I think the "It is possible to launch the attack
-> remotely." in [1] is incorrect though, right?
-
-Right, I don't see how this could be exploited remotely. And I'm pretty
-sure you need root as well because in practice the pgmap needs to be
-freed, and for Nouveau at least that only happens on device removal.
-
-> It looks to me that patch 1 would be needed since the CONFIG_DEVICE_PRIVATE
-> introduction, while the following few only to kernels with 27674ef6c73f
-> (probably not so critical as that includes no LTS)?
-
-Patch 3 already has a fixes tag for 27674ef6c73f. Patch 1 would need to
-go back to CONFIG_DEVICE_PRIVATE introduction. I think patches 4-8 would
-also need to go back to introduction of CONFIG_DEVICE_PRIVATE, but there
-isn't as much impact there and they would be harder to backport I think.
-Without them device removal can loop indefinitely in kernel mode (if
-patch 3 is present or the kernel is older than 27674ef6c73f).
-
- - Alistair
-
-> Thanks,
-> Vlastimil
->
-> [1] https://nvd.nist.gov/vuln/detail/CVE-2022-3523
->
->> This involves some minor changes to both PowerPC and AMD GPU code.
->> Unfortunately I lack hardware to test either of those so any help there
->> would be appreciated. The changes mimic what is done in for both Nouveau
->> and hmm-tests though so I doubt they will cause problems.
+>> static acpi_status
+>> acpi_backlight_cap_match(acpi_handle handle, u32 level, void *context,
+>>                           void **return_value)
+>> {
+>>         long *cap = context;
 >>
->> To: Andrew Morton <akpm@linux-foundation.org>
->> To: linux-mm@kvack.org
->> Cc: linux-kernel@vger.kernel.org
->> Cc: amd-gfx@lists.freedesktop.org
->> Cc: nouveau@lists.freedesktop.org
->> Cc: dri-devel@lists.freedesktop.org
->>
->> Alistair Popple (8):
->>   mm/memory.c: Fix race when faulting a device private page
->>   mm: Free device private pages have zero refcount
->>   mm/memremap.c: Take a pgmap reference on page allocation
->>   mm/migrate_device.c: Refactor migrate_vma and migrate_deivce_coherent_page()
->>   mm/migrate_device.c: Add migrate_device_range()
->>   nouveau/dmem: Refactor nouveau_dmem_fault_copy_one()
->>   nouveau/dmem: Evict device private memory during release
->>   hmm-tests: Add test for migrate_device_range()
->>
->>  arch/powerpc/kvm/book3s_hv_uvmem.c       |  17 +-
->>  drivers/gpu/drm/amd/amdkfd/kfd_migrate.c |  19 +-
->>  drivers/gpu/drm/amd/amdkfd/kfd_migrate.h |   2 +-
->>  drivers/gpu/drm/amd/amdkfd/kfd_svm.c     |  11 +-
->>  drivers/gpu/drm/nouveau/nouveau_dmem.c   | 108 +++++++----
->>  include/linux/memremap.h                 |   1 +-
->>  include/linux/migrate.h                  |  15 ++-
->>  lib/test_hmm.c                           | 129 ++++++++++---
->>  lib/test_hmm_uapi.h                      |   1 +-
->>  mm/memory.c                              |  16 +-
->>  mm/memremap.c                            |  30 ++-
->>  mm/migrate.c                             |  34 +--
->>  mm/migrate_device.c                      | 239 +++++++++++++++++-------
->>  mm/page_alloc.c                          |   8 +-
->>  tools/testing/selftests/vm/hmm-tests.c   |  49 +++++-
->>  15 files changed, 516 insertions(+), 163 deletions(-)
->>
->> base-commit: 088b8aa537c2c767765f1c19b555f21ffe555786
+>>         if (acpi_has_method(handle, "_BCM") &&
+>>             acpi_has_method(handle, "_BCL")) {
+>>                 acpi_handle_debug(handle, "Found generic backlight support\n");
+>>                 *cap |= ACPI_VIDEO_BACKLIGHT;
+>>                 /* We have backlight support, no need to scan further */
+>>                 return AE_CTRL_TERMINATE;
+>>         }
+>>         return 0;
+>> }
+> 
+> Ah, yeah, my local tree no longer matches the upstream behaviour because 
+> I've hacked the EC firmware to remove the backlight trigger because it 
+> had an extremely poor brightness curve and also automatically changed it 
+> on AC events - as a result I removed the backlight code from the DSDT 
+> and just fell back to the native control. Like I said I'm a long way 
+> from the normal setup, but this did previously work.
+
+Ok, so this is a local customization to what is already a custom BIOS
+for a custom motherboard. There is a lot of custom in that sentence and
+TBH at some point things might become too custom for them to be expected
+to work OOTB.
+
+Note that you can always just override the choses made by the heuristisc/
+quirks on the kernel commandline by adding:
+
+acpi_backlight=native   (I think you want this one?)
+
+or if you want the old thinkpad_acpi module vendor/EC interface:
+
+acpi_backlight=vendor
+
+Asking you to pass this on the commandline does not seem like a huge
+stretch given the large amount of hw/firmware customization you have done ?
+
+> The "right" logic here seems pretty simple: if ACPI backlight control is 
+> expected to work, use it. If it isn't, but there's a vendor interface, 
+> use it. If there's no vendor interface, use the native interface.
+
+I'm afraid things are not that simple. I assume that with
+"if ACPI backlight control is expected to work" you mean don't
+use ACPI backlight control when (acpi_osi_is_win8() && native_available)
+evaluates to true because it is known to be broken on some of
+those systems because Windows 8 stopped using it ?
+
+Unfortunately something similar applies to vendor interfaces,
+When Windows XP started using (and mandating for certification
+IIRC) ACPI backlight control, vendors still kept their own
+vendor specific EC/smbios/ACPI/WMI backlight interfaces around for
+a long long time, except they were often no longer tested.
+
+So basically we have 3 major backlight control methods:
+
+1. native GPU backlight control, which sometimes does not work
+on older laptops because the backlight is connected to the EC
+rather then the GPU there, yet often still enabled in the
+video-bios-tables so the GPU drivers will still try to use it.
+
+2. ACPI -> known to be always present on recent Windows laptops
+because mandated by the hardware certification requirements
+(even on Windows 8+), but regularly broken on Windows 8+ because
+their backlight control was moved from the core-os to the GPU
+drivers and those typically use the native method.
+
+3. Vendor specific EC/smbios/ACPI/WMI interfaces which work
+on older laptops, but are often present on newer laptops
+despite them no longer working and to get working backlight
+control either 1. or 2. should be used.
+
+So basically non of the 3 main backlight control methods can
+be trusted even if they are present. Which is why need to have
+a combination of heuristics + quirks.
+
+And I have been working on moving all this into a central
+place in drivers/acpi/video_detect.c because having
+the heuristics + quirks spread out all over the place does
+not help.
+
+> The 
+> problem you're dealing with is that the knowledge of whether or not 
+> there's a vendor interface isn't something the core kernel code knows 
+> about. What you're proposing here is effectively for us to expose 
+> additional information about whether or not there's a vendor interface 
+> in the system firmware, but since we're talking in some cases about 
+> hardware that's almost 20 years old, we're not realistically going to 
+> get those old machines fixed.
+
+I don't understand why you keep talking about the old vendor interfaces,
+at least for the chromebook part of this thread the issue is that
+the i915 driver no longer registers the intel_backlight device which
+is a native device type, which is caused by the patch this email
+thread is about (and old vendor interfaces do not come into play
+at all here). So AFAICT this is a native vs acpi backlight control
+issue ?
+
+I really want to resolve your bug, but I still lack a lot of info,
+like what backlight interface you were actually using in 6.0 ?
+
+Can you please provide the following info for your laptop:
+
+1. Output of "ls /sys/class/backlight" with 6.0  (working setup)
+2. Output of "ls /sys/class/backlight" with 6.1  (non-working setup)
+3. dmidecode output, so that I can check if this quirk:
+
+        {
+         .callback = video_detect_force_video,
+         /* ThinkPad X201s */
+         .matches = {
+                DMI_MATCH(DMI_SYS_VENDOR, "LENOVO"),
+                DMI_MATCH(DMI_PRODUCT_VERSION, "ThinkPad X201s"),
+                },
+        },
+
+will trigger.
+
+4. An acpidump. Although you already said that you have removed the
+ACPI video bus bits, so I guess I can just assume that
+the ACPI_VIDEO_BACKLIGHT flag won't get set.
+
+Regards,
+
+Hans
+
+
+p.s.
+
+This thread has made me wonder if the 6.1 changes don't cause
+regressions on other laptops flashed with a CoreOS BIOS, I will
+start a mail-thread asking for testing on the CoreOS mailinglist.
+
