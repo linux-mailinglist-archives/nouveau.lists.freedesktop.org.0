@@ -1,45 +1,68 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C053B6F6B6F
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:29 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4AE386F6BE9
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:34:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C957F10E3E3;
-	Thu,  4 May 2023 12:31:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4506E10E4BE;
+	Thu,  4 May 2023 12:33:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 954 seconds by postgrey-1.36 at gabe;
- Sat, 29 Oct 2022 08:03:06 UTC
-Received: from mail-m973.mail.163.com (mail-m973.mail.163.com [123.126.97.3])
- by gabe.freedesktop.org (Postfix) with ESMTP id 1214110E25A
- for <nouveau@lists.freedesktop.org>; Sat, 29 Oct 2022 08:03:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=K2PKa
- fCEYXHMfQ1Jc/mijsgMNFcp0Mg3fqjNMpvECbI=; b=FMEoRNbDFET3f1Gmh/iC8
- MzOuoi8D2ngIRNibx9WNxR2+HU20n3rDX9YrLVjNmg6aQuahtKhAmMHSnU0ZlekO
- Jz2V1pTeS3Zxa2UGvA3LmLtNkRq9+jA9BCGLWUokmpm/a+PasfqRar473kYDQf5X
- 5enOQWFq/D+ycL3OPXITG0=
-Received: from localhost.localdomain (unknown [111.206.145.21])
- by smtp3 (Coremail) with SMTP id G9xpCgDH1S1w2lxjInYWpQ--.13602S2;
- Sat, 29 Oct 2022 15:46:56 +0800 (CST)
-From: Zheng Wang <zyytlz.wz@163.com>
-To: nouveau@lists.freedesktop.org
-Date: Sat, 29 Oct 2022 15:46:54 +0800
-Message-Id: <20221029074654.203153-1-zyytlz.wz@163.com>
-X-Mailer: git-send-email 2.25.1
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 657C210E0BA;
+ Sun, 30 Oct 2022 13:05:26 +0000 (UTC)
+Received: by mail-pf1-x435.google.com with SMTP id b185so8536845pfb.9;
+ Sun, 30 Oct 2022 06:05:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=WW41LFvv02s6JX5NVuQc7KiMNpSe68lS8g/dJivUNoU=;
+ b=nomg6wFSJ5x/qxj/PihlJa7vo5DnqvOZ39nSi6i5GoFr7DBdT/qdH4Xt+yYWQ1nMnC
+ OHWnTvqHaQQrS/t8WgI4xo0sWstY6LiEFjEYFhdJefKF2AaqdqwAP16syN07opXw1WpY
+ KqRklc2vTGh+vPmDlrkC5EOztZngdDEXtJRSYU0Z9cRLW5lRL6JtAVC215pRq4cZAf57
+ fLhvWjRPGe0RZx8bdij6nbHMX586hHJxa16m7Bsh8seSth5krBSbvqCI7iJncOWmhTxn
+ YjRudbdZk0KPwMWMiCEwn+r6BA3nUNXQ9tJoNFz68lDx4IIEfqwx+xVeeruNKhraGe5T
+ q60A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WW41LFvv02s6JX5NVuQc7KiMNpSe68lS8g/dJivUNoU=;
+ b=HW5Tf7gZNZky53Pt9CMs+xnMQrrBGXAMxwvEDuffchIabzl1SYvR8+Lg+U4UkZQ8FH
+ hpKB4ddCBSoLHtj+ZUaUDaSgOC608SxvSMgEUz2QaClq/y153ITsOT5eazUNilUhgCga
+ ssM3lWh9rmeF2U+HmSQcw4WBES2jcNqbxOzXmuWX0xXbf19w9i927tPia0CfUtj1SuBS
+ RC4XPnX0BuLmuWQ6eOiUuHsk9JdovLSFsQLEXaWgBfdVhy5l1f6uyvCwSb5V9JBZwzMS
+ QQKxBXKf/DN3i1xFmVHr2/Ibdn+gMxRJHdvUgBMQRtYWjczki+90tbTBGAfXeNDmb1XF
+ SmAw==
+X-Gm-Message-State: ACrzQf1CbFMteuntFrIsiDhMp+h0gBlIWRHTONzxE5B5SrwiDJ/NgFtG
+ gtcriL64WH8dm32hoyrBnGg=
+X-Google-Smtp-Source: AMsMyM6Vg1M282U7rq1qWngHa7fThDW+JjuXm6gWpQFPfhnBf3DpRaBvnxRenQF98WH5W3A0TcF/9A==
+X-Received: by 2002:aa7:809a:0:b0:567:6e2c:2e2a with SMTP id
+ v26-20020aa7809a000000b005676e2c2e2amr9201502pff.56.1667135125924; 
+ Sun, 30 Oct 2022 06:05:25 -0700 (PDT)
+Received: from debian.me (subs03-180-214-233-87.three.co.id. [180.214.233.87])
+ by smtp.gmail.com with ESMTPSA id
+ k76-20020a62844f000000b0056bbba4302dsm2589533pfd.119.2022.10.30.06.05.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 30 Oct 2022 06:05:25 -0700 (PDT)
+Received: by debian.me (Postfix, from userid 1000)
+ id 6B927103D98; Sun, 30 Oct 2022 20:05:21 +0700 (WIB)
+Date: Sun, 30 Oct 2022 20:05:21 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: antoniospg <antoniospg100@gmail.com>
+Message-ID: <Y152kbkeIFnz/cbE@debian.me>
+References: <20221029184851.25340-1-antoniospg100@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: G9xpCgDH1S1w2lxjInYWpQ--.13602S2
-X-Coremail-Antispam: 1Uf129KBjvdXoW7Wr1xAr1UXF4kZr4fAw17trb_yoWDGrb_uF
- 1rXrnxWr95CryDWws8ZF43AFy2gan7ZFs2q3WSy3sxtasrXrsxWr9xZrn5W3s8AF1xKFyD
- G3WkXr1FqrnrWjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUvcSsGvfC2KfnxnUUI43ZEXa7xRKVbytUUUUU==
-X-Originating-IP: [111.206.145.21]
-X-CM-SenderInfo: h2113zf2oz6qqrwthudrp/1tbiQhCpU1aEDXIgKgAAsP
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:35 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/mmu: fix use-after-free bug in
- nvkm_vmm_pfn_map
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="zkq+an0wUo19EgpH"
+Content-Disposition: inline
+In-Reply-To: <20221029184851.25340-1-antoniospg100@gmail.com>
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:31 +0000
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Adding support to control
+ backlight using bl_power for nva3.
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,39 +74,48 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alex000young@gmail.com, security@kernel.org, hackerzheng666@gmail.com,
- linux-kernel@vger.kernel.org, Julia.Lawall@inria.fr, bskeggs@redhat.com,
- daniel@ffwll.ch, Zheng Wang <zyytlz.wz@163.com>
+Cc: David Airlie <airlied@linux.ie>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>, linux-kernel@vger.kernel.org,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-If it failed in kzalloc, vma will be freed in nvkm_vmm_node_merge.
-The later use of vma will casue use after free.
 
-Reported-by: Zheng Wang <hackerzheng666@gmail.com>
-Reported-by: Zhuorao Yang <alex000young@gmail.com>
+--zkq+an0wUo19EgpH
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Fix it by returning to upper caller as soon as error occurs.
+On Sat, Oct 29, 2022 at 03:48:50PM -0300, antoniospg wrote:
+> Test plan:
+>=20
+> * Turn off:
+> echo 1 > /sys/class/backlight/nv_backlight/bl_power
+>=20
+> * Turn on:
+> echo 0 > /sys/class/backlight/nv_backlight/bl_power
+>=20
 
-Signed-off-by: Zheng Wang <zyytlz.wz@163.com>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+You sent this patch twice, so I reply to the latest one.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-index ae793f400ba1..04befd28f80b 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-@@ -1272,8 +1272,7 @@ nvkm_vmm_pfn_map(struct nvkm_vmm *vmm, u8 shift, u64 addr, u64 size, u64 *pfn)
- 						       page -
- 						       vmm->func->page, map);
- 			if (WARN_ON(!tmp)) {
--				ret = -ENOMEM;
--				goto next;
-+				return -ENOMEM;
- 			}
- 
- 			if ((tmp->mapped = map))
--- 
-2.25.1
+What is it doing? Please describe the patch. Remember to write the
+description in imperative mood.
 
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--zkq+an0wUo19EgpH
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCY152kQAKCRD2uYlJVVFO
+o8dmAP9B8377yd62wSurH1C9reAvl5ipEFFQbVFG+b2Zayub9QEAlnaK7b5XMN4r
+j9L4LEizVKSH/X8VQj5nEP93wM/Oaw0=
+=hrUz
+-----END PGP SIGNATURE-----
+
+--zkq+an0wUo19EgpH--
