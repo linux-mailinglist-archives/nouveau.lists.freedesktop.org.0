@@ -1,58 +1,71 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A6F96144C3
-	for <lists+nouveau@lfdr.de>; Tue,  1 Nov 2022 07:45:05 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E0E36147D5
+	for <lists+nouveau@lfdr.de>; Tue,  1 Nov 2022 11:41:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3096D10E16C;
-	Tue,  1 Nov 2022 06:45:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D6EFC10E37B;
+	Tue,  1 Nov 2022 10:41:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C169310E16C
- for <nouveau@lists.freedesktop.org>; Tue,  1 Nov 2022 06:44:56 +0000 (UTC)
-Received: by mail-ej1-x62c.google.com with SMTP id sc25so34762686ejc.12
- for <nouveau@lists.freedesktop.org>; Mon, 31 Oct 2022 23:44:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=x4E+vrU+v81EDyYUyN3hvsAswEovIWqU1A9918vvO9U=;
- b=P2BVxCoVeKIiteYzWr9i/BLouF7XVHjOCU6reApDe+7TZF20Fk3KwhiVTt6zZ1TN9z
- pR20/9d0pR7ZfqzWQNNYr9HdoqVxaIkmmm87XPBPjXkL/FT1414IWfv8D1DfHaD9EZs6
- WPWezZwQ48k04pYz566DZSuzC2MWmpBj3je35kwWiWMX4MilMGFVMRqm+izTnvbE8Sha
- ScDdedFUZppGr2/J/LDYkP6+3r6jcUVl8bB3FOjk1p0JCEx64kAxCgbRSv+qalOvi6JX
- OV5w2DvOsFbLYFqSoB7kmoLumIjCbxVnlISP5fpmNiaegnRAXIjrMZiZ6O1uWRiGeMst
- RtoA==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6FA8010E37B
+ for <nouveau@lists.freedesktop.org>; Tue,  1 Nov 2022 10:41:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1667299286;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=5u9PasPjTt25CsZMfj48skRk6lEO/1rAkid6YQ6vA1c=;
+ b=BPogAM6xcbQVZ0BMTp5+G2/VYDbTZ3yTKIvyMkAkBKJf+ZvLc9bfILGKyVVhFcviO420mj
+ 8XYouv+RDA6O9iAzzCgxNXHU+Hsz+T8XvkgfDAXn/KfW36Z+V4ZY24Re3ZOnFCNIUo5ugi
+ jlPBUAMzpkz3RCE7v41CywD9fa3yriw=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-18-XuBDHOahMMKllLoFQJDbTQ-1; Tue, 01 Nov 2022 06:41:25 -0400
+X-MC-Unique: XuBDHOahMMKllLoFQJDbTQ-1
+Received: by mail-qt1-f198.google.com with SMTP id
+ c11-20020ac87dcb000000b0039cdb815f3bso9470991qte.4
+ for <nouveau@lists.freedesktop.org>; Tue, 01 Nov 2022 03:41:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=x4E+vrU+v81EDyYUyN3hvsAswEovIWqU1A9918vvO9U=;
- b=McuMDMYiZfjIIwBU16NJCN0v74XLHOdgHlzGSeG9xKkbQ7j7hBFgVfuMiuJbME+Lw6
- jAExunf+SQEo62LBdyqZ7FU0vdtunQgjG0e1Qjb9tzbjF7nkyYzHZu6dAhOTfhNXyxQ5
- ztdIn/5mVRvmge2zuixTpXwqYNcxlIYJh94fYxNS98KyyNilqB5ogBlg5yEkjjOhqDra
- 0AN+xiDPb8zxQzCgn49sWdJGravPXklpNFP87RVzFFes6K/jqvOLt878zbK8GX8F7g0l
- UrTAB6JzrnU3VZRS48NYpiBqtinHK8i4EuxT9UZbbVEAQXsNnW/HzbExiEI0jIfSH/2O
- laXg==
-X-Gm-Message-State: ACrzQf3jI4eyZZCk8YHW161rApZtY7OkuQiMuV0O1Tt1QBE368VcQrOe
- h5wBgQuj1ZnVZlfE2MNArpOxq2DzIkDYMZVou2w=
-X-Google-Smtp-Source: AMsMyM5fSvln4yOx7FqMtiwYiKourK7UvyDmtbK2bjdT7pIY0PUpQGLAlZgr0LElrfhhk2tjJ3Z6KCiBIhC3VZNjCmQ=
-X-Received: by 2002:a17:906:99c3:b0:78d:9cc9:deda with SMTP id
- s3-20020a17090699c300b0078d9cc9dedamr16941957ejn.712.1667285094511; Mon, 31
- Oct 2022 23:44:54 -0700 (PDT)
+ bh=5u9PasPjTt25CsZMfj48skRk6lEO/1rAkid6YQ6vA1c=;
+ b=bA53GXvrssJG9kOIiLnRqCWYl6B0cnHq8ge0EMz7q0V4Is3ug+xfdHHqZzUv/VJxBR
+ Cg750yzpcKcCGdIfKbJnp4W2IEiMYpJ+1AK9HHRWtw8AJQGdbQvIFh/rrWy5KAegeY9P
+ uFlJkhGnTSuR1scs0Zmb8IY1+Teg/lICmpEUf75dGDe3YK4lAYY1NwbDsMVunJ4RA5Z+
+ LrteIvD+4JHcAjslVclwx9+OVNqy6fd9dTnkxRUZAslHdqCG9pkH20unqcn/DkOXwrKZ
+ AmglXkwrU4FX0XF2KsNwFaaGgjPDlZLbWUYVi+QIFU3Ql0YWReNEDfrNGkSRtLYwAZaS
+ ah8A==
+X-Gm-Message-State: ACrzQf1DJe6DHmoOy5YpAWw7JBL3NqfOIHyfQ5AkLAA4ynMEZSrPm+en
+ gFgjSmfBxgYDStu/9F4w+ZY81xc4L2w0stGNOjV+NBHJY5Q3UX1I63t+KleIhJVJimqOpvOnNgN
+ HS7h6hM2QpaIk2kSu6JxdooqIHlXZ2ADbZJcdwVJufQ==
+X-Received: by 2002:a05:622a:178c:b0:39a:90ba:fc53 with SMTP id
+ s12-20020a05622a178c00b0039a90bafc53mr14552081qtk.673.1667299285058; 
+ Tue, 01 Nov 2022 03:41:25 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM62iAR+fRGZ/RVubHnk2QR9SONHRM8kee9zOi71zcmsh5EAkF8xAyzqTgseid1agxZWpooGIOHc8TBu0ODXOEE=
+X-Received: by 2002:a05:622a:178c:b0:39a:90ba:fc53 with SMTP id
+ s12-20020a05622a178c00b0039a90bafc53mr14552068qtk.673.1667299284830; Tue, 01
+ Nov 2022 03:41:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220819200928.401416-1-kherbst@redhat.com>
-In-Reply-To: <20220819200928.401416-1-kherbst@redhat.com>
-From: Computer Enthusiastic <computer.enthusiastic@gmail.com>
-Date: Tue, 1 Nov 2022 07:44:41 +0100
-Message-ID: <CAHSpYy0HAifr4f+z64h+xFUmMNbB4hCR1r2Z==TsB4WaHatQqg@mail.gmail.com>
-To: Karol Herbst <kherbst@redhat.com>, Ben Skeggs <bskeggs@redhat.com>
+References: <20221029184851.25340-1-antoniospg100@gmail.com>
+ <20221031163211.13228-1-antoniospg100@gmail.com>
+ <5a61ae6a-8a16-8abb-e718-895c41e2e7a8@gmail.com>
+In-Reply-To: <5a61ae6a-8a16-8abb-e718-895c41e2e7a8@gmail.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Tue, 1 Nov 2022 11:41:13 +0100
+Message-ID: <CACO55tuXRU1X7tU3AvOLW3WZnGWYWBa7MTszqFPrwjeNS-TYfA@mail.gmail.com>
+To: Bagas Sanjaya <bagasdotme@gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH] nouveau: explicitly wait on the fence in
- nouveau_bo_move_m2mf
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Add support to control backlight
+ using bl_power for nva3.
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,52 +77,62 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Salvatore Bonaccorso <carnil@debian.org>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ sam@ravnborg.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello,
+On Tue, Nov 1, 2022 at 3:12 AM Bagas Sanjaya <bagasdotme@gmail.com> wrote:
+>
+> On 10/31/22 23:32, antoniospg wrote:
+> > Summary:
+> >
+> > * Add support to turn on/off backlight when changing values in bl_power
+> >   file. This is achieved by using function backlight_get_brightness()
+> >   in nva3_set_intensity to get current brightness.
+> >
+>
+> This is [PATCH v2], right? If so, next time please pass -v <version
+> number> to git-format-patch(1).
+>
+> Also, just say the prose without using bullet list. "Summary:" line
+> is also redundant. And again, please describe why this change be made.
+>
 
-Il giorno ven 19 ago 2022 alle ore 22:09 Karol Herbst
-<kherbst@redhat.com> ha scritto:
+it's right there in the title....
+
+> > Test plan:
+> >
+> > * Turn off:
+> > echo 1 > /sys/class/backlight/nv_backlight/bl_power
+> >
+> > * Turn on:
+> > echo 0 > /sys/class/backlight/nv_backlight/bl_power
+> >
 >
-> It is a bit unlcear to us why that's helping, but it does and unbreaks
-> suspend/resume on a lot of GPUs without any known drawbacks.
+> Shouldn't "test plan" above be documented in Documentation/ instead?
 >
-> Cc: stable@vger.kernel.org # v5.15+
-> Closes: https://gitlab.freedesktop.org/drm/nouveau/-/issues/156
-> Signed-off-by: Karol Herbst <kherbst@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_bo.c | 9 +++++++++
->  1 file changed, 9 insertions(+)
+
+Given that's already existing infrastructure and is actually
+documented already (the existence of `bl_power` I mean), why would
+that be needed? I don't think it's needed to point that out in the
+commit log, but if the contributor chooses to document how the patch
+was tested, then why not?
+
+> Last but not least, is "antoniospg" your real, legal name?
 >
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
-> index 35bb0bb3fe61..126b3c6e12f9 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
-> @@ -822,6 +822,15 @@ nouveau_bo_move_m2mf(struct ttm_buffer_object *bo, int evict,
->                 if (ret == 0) {
->                         ret = nouveau_fence_new(chan, false, &fence);
->                         if (ret == 0) {
-> +                               /* TODO: figure out a better solution here
-> +                                *
-> +                                * wait on the fence here explicitly as going through
-> +                                * ttm_bo_move_accel_cleanup somehow doesn't seem to do it.
-> +                                *
-> +                                * Without this the operation can timeout and we'll fallback to a
-> +                                * software copy, which might take several minutes to finish.
-> +                                */
-> +                               nouveau_fence_wait(fence, false, false);
->                                 ret = ttm_bo_move_accel_cleanup(bo,
->                                                                 &fence->base,
->                                                                 evict, false,
+
+Please leave those discussions to subsystem maintainers.
+
+Saying that, if the contributors prefers to go by this name, this is
+good enough for me, but having a more explicit or detailed name (like
+fore- and surname) is generally prefered.
+
+> Thanks.
+>
 > --
-> 2.37.1
+> An old man doll... just what I always wanted! - Clara
 >
 
-Do you think it could be possible to make the patch land in kernel
-5.10.x in the near future ?
-
-Is there something I can do to help it to happen ?
-
-Thanks.
