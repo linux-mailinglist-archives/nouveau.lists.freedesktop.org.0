@@ -1,44 +1,70 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF3816F6B39
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:31:58 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C32A96F6B68
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A85E110E3B9;
-	Thu,  4 May 2023 12:31:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 74F0E10E419;
+	Thu,  4 May 2023 12:31:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4832A10E1A0;
- Mon, 31 Oct 2022 11:42:35 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 73B37611C0;
- Mon, 31 Oct 2022 11:42:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B1916C433D6;
- Mon, 31 Oct 2022 11:42:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1667216553;
- bh=82Mek9NsJD1mKAuPA30xuCcYkcZNBfTDDhKVt3EFQzM=;
- h=From:To:Cc:Subject:Date:From;
- b=SDGu+350LSd6UUGVfMSjNZXL4nSuHT5WWMERpzyM7O7ULR5S7YNidkx2S3hopmSjr
- //XOykptdauZPLeOwq7PnbNSltLDTCbkq7vJhyIPbMGg190xXTxllB3/qsB8lM85S8
- 9Udzz3scQAW4xn64ls7Q+dSqXKm2US2OQNmWrW4nWo/z0ciNU/30VIFA4l5jwB9rkl
- PwxLxH2DFOFXD/vNJR0gctqycPHO1BnJVkFewJiVXVWpYeWNQYSCNs5USIwfNpgd3S
- P8Ms7ohDrW/ZnPPn9dorWYJRpWx9ZBNI4PUSyNcMvf5GwDUP++f9iZp8ouiiam89Bx
- v24R4dZTt3AXA==
-From: "Jiri Slaby (SUSE)" <jirislaby@kernel.org>
-To: bskeggs@redhat.com
-Date: Mon, 31 Oct 2022 12:42:29 +0100
-Message-Id: <20221031114229.10289-1-jirislaby@kernel.org>
-X-Mailer: git-send-email 2.38.1
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DB98710E02A;
+ Tue,  1 Nov 2022 02:12:01 +0000 (UTC)
+Received: by mail-pg1-x533.google.com with SMTP id q1so12226523pgl.11;
+ Mon, 31 Oct 2022 19:12:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=eLIgCkgfgn5iTxPM1gVk+h8esf5par019LyioMO/CLQ=;
+ b=gU2fp1alF/CfGOz27zUV1tjPYcplNa+O+KfQ2mlTKNBOYkbaz2YHEWSbyw9BTJ1iB9
+ CXJmh50YXtArdV/k5JEmRpQT7DHUB13lbMbIEtMBtOo+wtF6Y1gfdeeoGWJBl62TkAzQ
+ BEfh7yEbZSKS008pEA1eFifU/N7E7UzTdJM7X4nRvegykLKHnXQ+jVyGFPsgg0Ulhl9Q
+ ox24q4Ks2nKRUU2/XPksxf2/D9e6nIWtubBmOjYa3dURJXgXRmFaIpH8cglg/K2hIxIl
+ xX9QGIkiqZjks4prwAhu1OqO7bIYQ0E0+sIiXC75Mn9QhPJTVFgtkV1g77gONuYDTja9
+ vpUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=eLIgCkgfgn5iTxPM1gVk+h8esf5par019LyioMO/CLQ=;
+ b=CtmXHADk1yCTojL0C+iLmc89b2c3AyEpKSkksxkxUfszKClfdoSSMjGU9GITHI5ryj
+ vbxABDklZ5SKrvykRM8vDi055fSFuoUlrjO1CPZ6WnYGzEGiP6wNDtngHaxoD/WIBy09
+ 3n/TFJ9IiqktPATq/caQ1oxteVdMTQ0PZv2cj0jS0zanXuixbW4+pGB5G/5x4mjlowqd
+ tsTF4kVLJnm5Pm+sTbGpa3Jz0mP9PrPPWgniaVqCu14yTAzFXQIZFkoppnUEzHY4N3bq
+ SokfDe6grh5TuATy7dejai1hEGBcKvxzFwRvtHmjZs72Q6DFgpfw3gvcJZuTpSvZAhqX
+ ghMA==
+X-Gm-Message-State: ACrzQf2Qn4LnAZek7eFmWlkqf3aNL1DKprAVnQOSuE3ErpHvPDIr8vCF
+ bm49iqrI/IKr39BPWIvj6Sk=
+X-Google-Smtp-Source: AMsMyM4mI22oj7nqThjTGVGTfQDqYJrZXRbzCHmvjp5TFLMaXojFrrR1id5r7IJQp6VGKrbltoxdnw==
+X-Received: by 2002:a05:6a02:186:b0:431:25fb:f1fe with SMTP id
+ bj6-20020a056a02018600b0043125fbf1femr15584524pgb.130.1667268721265; 
+ Mon, 31 Oct 2022 19:12:01 -0700 (PDT)
+Received: from [192.168.43.80] (subs02-180-214-232-90.three.co.id.
+ [180.214.232.90]) by smtp.gmail.com with ESMTPSA id
+ 11-20020a63134b000000b0043ae1797e2bsm4744655pgt.63.2022.10.31.19.11.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 31 Oct 2022 19:12:00 -0700 (PDT)
+Message-ID: <5a61ae6a-8a16-8abb-e718-895c41e2e7a8@gmail.com>
+Date: Tue, 1 Nov 2022 09:11:54 +0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:37 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/kms/nv50- (gcc13): fix nv50_wndw_new_
- prototype
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.1
+To: antoniospg <antoniospg100@gmail.com>, linux-kernel@vger.kernel.org
+References: <20221029184851.25340-1-antoniospg100@gmail.com>
+ <20221031163211.13228-1-antoniospg100@gmail.com>
+Content-Language: en-US
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+In-Reply-To: <20221031163211.13228-1-antoniospg100@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:31 +0000
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Add support to control backlight
+ using bl_power for nva3.
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,60 +76,41 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Jiri Slaby \(SUSE\)" <jirislaby@kernel.org>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
- nouveau@lists.freedesktop.org, Martin Liska <mliska@suse.cz>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, sam@ravnborg.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-gcc-13 warns about mismatching types for enums. That revealed switched
-arguments of nv50_wndw_new_():
-  drivers/gpu/drm/nouveau/dispnv50/wndw.c:696:1: error: conflicting types for 'nv50_wndw_new_' due to enum/integer mismatch; have 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const u32 *, u32,  enum nv50_disp_interlock_type,  u32,  struct nv50_wndw **)'
-  drivers/gpu/drm/nouveau/dispnv50/wndw.h:36:5: note: previous declaration of 'nv50_wndw_new_' with type 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const u32 *, enum nv50_disp_interlock_type,  u32,  u32,  struct nv50_wndw **)'
+On 10/31/22 23:32, antoniospg wrote:
+> Summary:
+> 
+> * Add support to turn on/off backlight when changing values in bl_power
+>   file. This is achieved by using function backlight_get_brightness()
+>   in nva3_set_intensity to get current brightness.
+> 
 
-It can be barely visible, but the declaration says about the parameters
-in the middle:
-  enum nv50_disp_interlock_type,
-  u32 interlock_data,
-  u32 heads,
+This is [PATCH v2], right? If so, next time please pass -v <version
+number> to git-format-patch(1).
 
-While the definition states differently:
-  u32 heads,
-  enum nv50_disp_interlock_type interlock_type,
-  u32 interlock_data,
+Also, just say the prose without using bullet list. "Summary:" line
+is also redundant. And again, please describe why this change be made.
 
-Unify/fix the declaration to match the definition.
+> Test plan:
+> 
+> * Turn off:
+> echo 1 > /sys/class/backlight/nv_backlight/bl_power
+> 
+> * Turn on:
+> echo 0 > /sys/class/backlight/nv_backlight/bl_power
+> 
 
-Cc: Martin Liska <mliska@suse.cz>
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Karol Herbst <kherbst@redhat.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: David Airlie <airlied@gmail.com>
-Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org
-Cc: linux-kernel@vger.kernel.org
-Signed-off-by: Jiri Slaby (SUSE) <jirislaby@kernel.org>
----
- drivers/gpu/drm/nouveau/dispnv50/wndw.h | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+Shouldn't "test plan" above be documented in Documentation/ instead?
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.h b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
-index 591c852f326b..76a6ae5d5652 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/wndw.h
-+++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
-@@ -35,8 +35,9 @@ struct nv50_wndw {
- 
- int nv50_wndw_new_(const struct nv50_wndw_func *, struct drm_device *,
- 		   enum drm_plane_type, const char *name, int index,
--		   const u32 *format, enum nv50_disp_interlock_type,
--		   u32 interlock_data, u32 heads, struct nv50_wndw **);
-+		   const u32 *format, u32 heads,
-+		   enum nv50_disp_interlock_type, u32 interlock_data,
-+		   struct nv50_wndw **);
- void nv50_wndw_flush_set(struct nv50_wndw *, u32 *interlock,
- 			 struct nv50_wndw_atom *);
- void nv50_wndw_flush_clr(struct nv50_wndw *, u32 *interlock, bool flush,
+Last but not least, is "antoniospg" your real, legal name?
+
+Thanks.
+
 -- 
-2.38.1
+An old man doll... just what I always wanted! - Clara
 
