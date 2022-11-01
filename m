@@ -1,65 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44E8B613B54
-	for <lists+nouveau@lfdr.de>; Mon, 31 Oct 2022 17:32:30 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A6F96144C3
+	for <lists+nouveau@lfdr.de>; Tue,  1 Nov 2022 07:45:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7CF6610E311;
-	Mon, 31 Oct 2022 16:32:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3096D10E16C;
+	Tue,  1 Nov 2022 06:45:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0ED1710E30F;
- Mon, 31 Oct 2022 16:32:25 +0000 (UTC)
-Received: by mail-oi1-x235.google.com with SMTP id c129so1504380oia.0;
- Mon, 31 Oct 2022 09:32:24 -0700 (PDT)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C169310E16C
+ for <nouveau@lists.freedesktop.org>; Tue,  1 Nov 2022 06:44:56 +0000 (UTC)
+Received: by mail-ej1-x62c.google.com with SMTP id sc25so34762686ejc.12
+ for <nouveau@lists.freedesktop.org>; Mon, 31 Oct 2022 23:44:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Wt/WR1Gmjk2D9GnfY1ZcaSEw9Q+GFqctU1oYIXCvdkk=;
- b=QUWIYopeB0UZaW/Dv5KZ2rxinkrGWUERLDC9wEH1krFqq/rXZu+Kj+MAQPmS/sHcq9
- WDgyMC7MgQBzSlm10f8WQ3MtxpthmTHe0DwIlueWPM1HQbPCtuz+mou7XsDwyL2P0Mnz
- D0jx9ZgP/J+OjSijEVyG6du7VE4eI6Gr97Pu8eIKUxw0p+aPhfMLAaAhV+NTXPsHEG9W
- SDYp2Hi7K+Oa6TVJyTP+vWDJ0nNH91JSgUWSNBhwrUrdGc4P/0oNEKeEZGvBFrxuL9YH
- lpzxS7wT/StIJImvUJZ2rfylv0C/yrd7X2ir7umu1HtCMtgWP2Q0fLevcAqTfg6J81va
- di+g==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=x4E+vrU+v81EDyYUyN3hvsAswEovIWqU1A9918vvO9U=;
+ b=P2BVxCoVeKIiteYzWr9i/BLouF7XVHjOCU6reApDe+7TZF20Fk3KwhiVTt6zZ1TN9z
+ pR20/9d0pR7ZfqzWQNNYr9HdoqVxaIkmmm87XPBPjXkL/FT1414IWfv8D1DfHaD9EZs6
+ WPWezZwQ48k04pYz566DZSuzC2MWmpBj3je35kwWiWMX4MilMGFVMRqm+izTnvbE8Sha
+ ScDdedFUZppGr2/J/LDYkP6+3r6jcUVl8bB3FOjk1p0JCEx64kAxCgbRSv+qalOvi6JX
+ OV5w2DvOsFbLYFqSoB7kmoLumIjCbxVnlISP5fpmNiaegnRAXIjrMZiZ6O1uWRiGeMst
+ RtoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Wt/WR1Gmjk2D9GnfY1ZcaSEw9Q+GFqctU1oYIXCvdkk=;
- b=XTN6xFC6ea/cYZjtcyqzNwQU+6NJ5XASuAo0NDhtrTNCvbpmGNnybbyhZdTjtuDwP1
- j+A3TbbQXZSIa9VkOTnakqvgeQK4nmsreHoKjryizK4sJKh0B0tj/zteQA1SFK8BMCdE
- UHLe7EEAI1VBg81kE0JULybNnhax5kciGal/QabZnK9OGM47n1DKerrrAH8SJpWBRGcB
- ZVG4gQtebxiyhOr/7lVj5stK3Aw/G3gvHSYFRVAC/gyLH7RN1Xzc13fVo5OoT8HHMaJk
- JEIb/1KAwOmpHVxyuPiz7Hz7zDkRZlAxwg96kCqpkocHO2ZEGe1DQy4qbQtrhplp6QNc
- Nhkw==
-X-Gm-Message-State: ACrzQf0AW+6XUO3LyFLPlZrYB0ItaQQkemuYc9QdImKaZ4vNvuNK+JJJ
- auI/TBlHwgM008+dnrNWjUw=
-X-Google-Smtp-Source: AMsMyM6vONEEf7VjwL5TUau766cjtN/1V1RvxWagUODwX7I/kWb2Ovz4ymQB4e25WrRPTws8zBMCpg==
-X-Received: by 2002:a05:6808:171b:b0:34d:444a:fc1e with SMTP id
- bc27-20020a056808171b00b0034d444afc1emr15366187oib.85.1667233944276; 
- Mon, 31 Oct 2022 09:32:24 -0700 (PDT)
-Received: from antonio-Lenovo-Legion-5-15IMH05H.multilaserwifi.com.br
- ([45.163.246.1]) by smtp.googlemail.com with ESMTPSA id
- x6-20020a05680801c600b00359ad661d3csm2477558oic.30.2022.10.31.09.32.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Oct 2022 09:32:23 -0700 (PDT)
-From: antoniospg <antoniospg100@gmail.com>
-To: linux-kernel@vger.kernel.org
-Date: Mon, 31 Oct 2022 13:32:11 -0300
-Message-Id: <20221031163211.13228-1-antoniospg100@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221029184851.25340-1-antoniospg100@gmail.com>
-References: <20221029184851.25340-1-antoniospg100@gmail.com>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=x4E+vrU+v81EDyYUyN3hvsAswEovIWqU1A9918vvO9U=;
+ b=McuMDMYiZfjIIwBU16NJCN0v74XLHOdgHlzGSeG9xKkbQ7j7hBFgVfuMiuJbME+Lw6
+ jAExunf+SQEo62LBdyqZ7FU0vdtunQgjG0e1Qjb9tzbjF7nkyYzHZu6dAhOTfhNXyxQ5
+ ztdIn/5mVRvmge2zuixTpXwqYNcxlIYJh94fYxNS98KyyNilqB5ogBlg5yEkjjOhqDra
+ 0AN+xiDPb8zxQzCgn49sWdJGravPXklpNFP87RVzFFes6K/jqvOLt878zbK8GX8F7g0l
+ UrTAB6JzrnU3VZRS48NYpiBqtinHK8i4EuxT9UZbbVEAQXsNnW/HzbExiEI0jIfSH/2O
+ laXg==
+X-Gm-Message-State: ACrzQf3jI4eyZZCk8YHW161rApZtY7OkuQiMuV0O1Tt1QBE368VcQrOe
+ h5wBgQuj1ZnVZlfE2MNArpOxq2DzIkDYMZVou2w=
+X-Google-Smtp-Source: AMsMyM5fSvln4yOx7FqMtiwYiKourK7UvyDmtbK2bjdT7pIY0PUpQGLAlZgr0LElrfhhk2tjJ3Z6KCiBIhC3VZNjCmQ=
+X-Received: by 2002:a17:906:99c3:b0:78d:9cc9:deda with SMTP id
+ s3-20020a17090699c300b0078d9cc9dedamr16941957ejn.712.1667285094511; Mon, 31
+ Oct 2022 23:44:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH] drm/nouveau: Add support to control backlight
- using bl_power for nva3.
+References: <20220819200928.401416-1-kherbst@redhat.com>
+In-Reply-To: <20220819200928.401416-1-kherbst@redhat.com>
+From: Computer Enthusiastic <computer.enthusiastic@gmail.com>
+Date: Tue, 1 Nov 2022 07:44:41 +0100
+Message-ID: <CAHSpYy0HAifr4f+z64h+xFUmMNbB4hCR1r2Z==TsB4WaHatQqg@mail.gmail.com>
+To: Karol Herbst <kherbst@redhat.com>, Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH] nouveau: explicitly wait on the fence in
+ nouveau_bo_move_m2mf
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,48 +64,52 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, bagasdotme@gmail.com, sam@ravnborg.org
+Cc: nouveau@lists.freedesktop.org, Salvatore Bonaccorso <carnil@debian.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Summary:
+Hello,
 
-* Add support to turn on/off backlight when changing values in bl_power
-  file. This is achieved by using function backlight_get_brightness()
-  in nva3_set_intensity to get current brightness.
+Il giorno ven 19 ago 2022 alle ore 22:09 Karol Herbst
+<kherbst@redhat.com> ha scritto:
+>
+> It is a bit unlcear to us why that's helping, but it does and unbreaks
+> suspend/resume on a lot of GPUs without any known drawbacks.
+>
+> Cc: stable@vger.kernel.org # v5.15+
+> Closes: https://gitlab.freedesktop.org/drm/nouveau/-/issues/156
+> Signed-off-by: Karol Herbst <kherbst@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_bo.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> index 35bb0bb3fe61..126b3c6e12f9 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> @@ -822,6 +822,15 @@ nouveau_bo_move_m2mf(struct ttm_buffer_object *bo, int evict,
+>                 if (ret == 0) {
+>                         ret = nouveau_fence_new(chan, false, &fence);
+>                         if (ret == 0) {
+> +                               /* TODO: figure out a better solution here
+> +                                *
+> +                                * wait on the fence here explicitly as going through
+> +                                * ttm_bo_move_accel_cleanup somehow doesn't seem to do it.
+> +                                *
+> +                                * Without this the operation can timeout and we'll fallback to a
+> +                                * software copy, which might take several minutes to finish.
+> +                                */
+> +                               nouveau_fence_wait(fence, false, false);
+>                                 ret = ttm_bo_move_accel_cleanup(bo,
+>                                                                 &fence->base,
+>                                                                 evict, false,
+> --
+> 2.37.1
+>
 
-Test plan:
+Do you think it could be possible to make the patch land in kernel
+5.10.x in the near future ?
 
-* Turn off:
-echo 1 > /sys/class/backlight/nv_backlight/bl_power
+Is there something I can do to help it to happen ?
 
-* Turn on:
-echo 0 > /sys/class/backlight/nv_backlight/bl_power
-
-Signed-off-by: antoniospg <antoniospg100@gmail.com>
----
- drivers/gpu/drm/nouveau/nouveau_backlight.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_backlight.c b/drivers/gpu/drm/nouveau/nouveau_backlight.c
-index a2141d3d9b1d..5c82f5189b79 100644
---- a/drivers/gpu/drm/nouveau/nouveau_backlight.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_backlight.c
-@@ -263,7 +263,11 @@ nva3_set_intensity(struct backlight_device *bd)
- 	u32 div, val;
- 
- 	div = nvif_rd32(device, NV50_PDISP_SOR_PWM_DIV(or));
--	val = (bd->props.brightness * div) / 100;
-+
-+	val = backlight_get_brightness(bd);
-+	if (val)
-+		val = (val * div) / 100;
-+
- 	if (div) {
- 		nvif_wr32(device, NV50_PDISP_SOR_PWM_CTL(or),
- 			  val |
--- 
-2.25.1
-
+Thanks.
