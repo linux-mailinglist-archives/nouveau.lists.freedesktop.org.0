@@ -1,62 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3D1F618243
-	for <lists+nouveau@lfdr.de>; Thu,  3 Nov 2022 16:18:15 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id CEF22618E80
+	for <lists+nouveau@lfdr.de>; Fri,  4 Nov 2022 03:56:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ECAC610E6F2;
-	Thu,  3 Nov 2022 15:15:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B82FC10E78F;
+	Fri,  4 Nov 2022 02:56:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [IPv6:2001:67c:2178:6::1d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 912CD10E621;
- Thu,  3 Nov 2022 15:15:03 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 426EA1F900;
- Thu,  3 Nov 2022 15:15:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1667488502; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=HgxG97nmydzNCVipkHzgPf3aCI1grjy0cqRB+0/Ck74=;
- b=kcgtu9PKiyMKUj8GxwYh+/ORcWz7+UhaRslLpGT/0EYXH4EiaVWbRO1rXX+RnuBF5OjTj2
- Xec3+JBI90xwvAliyOtjTY3B94F0kq3muNjviJe52VZzz9N0Nd9Yc6Mfuv+xD0GBg/lfBm
- F9ORYgDvXcxRapg5A3YBRJRoUxxeEtI=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1667488502;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=HgxG97nmydzNCVipkHzgPf3aCI1grjy0cqRB+0/Ck74=;
- b=BTICG+mmiOcUdGuFYoU4C0nyEBYhfhmngf4Ev9loTA8Jed/wbNJaxvDDbye+EQL4FS5m+K
- t/wO99a1pUjQkKCQ==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B325D13AAF;
- Thu,  3 Nov 2022 15:15:01 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 8LVrKvXaY2PBGgAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Thu, 03 Nov 2022 15:15:01 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch, airlied@gmail.com, sam@ravnborg.org, javierm@redhat.com,
- mripard@kernel.org, maarten.lankhorst@linux.intel.com
-Date: Thu,  3 Nov 2022 16:14:46 +0100
-Message-Id: <20221103151446.2638-24-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.38.0
-In-Reply-To: <20221103151446.2638-1-tzimmermann@suse.de>
-References: <20221103151446.2638-1-tzimmermann@suse.de>
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8930A10E78F
+ for <nouveau@lists.freedesktop.org>; Fri,  4 Nov 2022 02:56:45 +0000 (UTC)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ cn2-20020a056830658200b0066c74617e3dso2042588otb.2
+ for <nouveau@lists.freedesktop.org>; Thu, 03 Nov 2022 19:56:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=j8XLJBcgjNTIkVR2NzJVwfaf5k6oy9u8H2+Wy7zKPPE=;
+ b=algUXXPVSCLjBYiGt83FkiT14Ke4pMWG727ATXgbURLW9yV//ii7pp0v3AL2vuISLz
+ zmf2DIgYjgiN9W3crF3JzE9JR5LeG2Xlq+QrrxzeVuyGgdnlBDwfRpuy6KyUPRqPiqFH
+ PUpz1zgQfMaQq2yU4rl8a11eXYPQiw5N4J22QGq053xlGm7iNnjAP57fT+vpmiCyJrZm
+ t4Z6ut1hUpJsRWNGmv+ZTuYhYilTGfSRkRnebFpYbBD+W+vn7zSIBzYthDZoXt4x43ky
+ 2BddZz3JtUK6cYdoMWYzq+BdKNuyizZKMa/RyMv2qawrabKVj+h1K+IDF79QdmTkd3E3
+ CTNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=j8XLJBcgjNTIkVR2NzJVwfaf5k6oy9u8H2+Wy7zKPPE=;
+ b=mHZEUNr3S6n2Anlqc328NZxDM/NgY1X/NcWm5J+O99WnZugUtUCIcu2b2b+YWs1WQc
+ JXwdBwsv6IlCE4yh2k1Ql2MBc9CWDkIC1bOoJGbWSenndEqb9geXEanzUTCdbxFK3a4G
+ PAv3eTb9bawFSEsg7qskVi9/4+JbGSutE3pgr/9bflVwQfJDzWPQ41kK5h58CoV/7clM
+ G7LEL41tTPhifjmdGtQvueI1fmpNsFWWVDVDCKvRtDajAl8NLZlml0l2ipKxtRgIi8tD
+ 3t6k7Gymwi1GQ9rk4k2+FYGieVW0nfPQH6mxxrtWDcMy/BHwJMb2jK7f9KFuoTkWzqop
+ XIkw==
+X-Gm-Message-State: ACrzQf3q5+9T44NDOlV4Cf7NkZWe7onfVxBI17GuBL4LKdj1kvz3GjEr
+ ZbaO1z76RdlDImFJa8WTJ5pSnMXfG1Q7yJXwFyJLNqHFzrZVWg==
+X-Google-Smtp-Source: AMsMyM4I6vu+DHk5tPSkOSwBJCLocjd0TQrsRRD9iFCMCc5wbrS28v0Eus6MANhSyoIEruqiv5Tx1KV/vvpBZ6gVmqQ=
+X-Received: by 2002:a9d:20e3:0:b0:655:d819:244b with SMTP id
+ x90-20020a9d20e3000000b00655d819244bmr16211594ota.232.1667530603932; Thu, 03
+ Nov 2022 19:56:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH v3 23/23] drm/fb-helper: Clarify use of last_close
- and output_poll_changed
+From: Lukas Satin <luke.satin@gmail.com>
+Date: Fri, 4 Nov 2022 03:56:32 +0100
+Message-ID: <CAEFVmOL+163rX7hEpgKn20RrzMXekw6JcM30rY4AmoHhDV_5Qw@mail.gmail.com>
+To: nouveau@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="0000000000004cafe205ec9c39b3"
+Subject: [Nouveau] TV Out question
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,50 +61,111 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- linux-stm32@st-md-mailman.stormreply.com, linux-samsung-soc@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
- spice-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- etnaviv@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
- xen-devel@lists.xenproject.org, linux-tegra@vger.kernel.org,
- linux-amlogic@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- "linux-hyperv@vger.kernel.orglinux-hyperv"@vger.kernel.org,
- linux-mips@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
- freedreno@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Clarify documentation in the use of struct drm_driver.last_close and
-struct drm_mode_config_funcs.output_poll_changed. Those callbacks should
-not be said for fbdev implementations on top of struct drm_client_funcs.
+--0000000000004cafe205ec9c39b3
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/drm_fb_helper.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+Hi, I am currently testing Batocera Linux for retrogaming with 15KHz output
+on CRT / TV.
 
-diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-index 5eb2f0d4bf8d4..e0384f967c0b3 100644
---- a/drivers/gpu/drm/drm_fb_helper.c
-+++ b/drivers/gpu/drm/drm_fb_helper.c
-@@ -89,11 +89,13 @@ static DEFINE_MUTEX(kernel_fb_helper_lock);
-  * It will automatically set up deferred I/O if the driver requires a shadow
-  * buffer.
-  *
-- * At runtime drivers should restore the fbdev console by using
-+ * Existing fbdev implementations should restore the fbdev console by using
-  * drm_fb_helper_lastclose() as their &drm_driver.lastclose callback.
-  * They should also notify the fb helper code from updates to the output
-  * configuration by using drm_fb_helper_output_poll_changed() as their
-- * &drm_mode_config_funcs.output_poll_changed callback.
-+ * &drm_mode_config_funcs.output_poll_changed callback. New implementations
-+ * of fbdev should be build on top of struct &drm_client_funcs, which handles
-+ * this automatically. Setting the old callbacks should be avoided.
-  *
-  * For suspend/resume consider using drm_mode_config_helper_suspend() and
-  * drm_mode_config_helper_resume() which takes care of fbdev as well.
--- 
-2.38.0
+The machine I discovered is a certified Windows Media Center / Intel ViiV
+machine: Acer iDEA 510
 
+It features:
+RCA component output
+S-Video CVBS output
+S-Video DIN output
+Scart IN / Scart OUT (two DVB-T tuners for realtime playback and recording)
+DVI-I out
+HDMI out
+
+Laptop style components, MXM module Geforce 7 Go 7600 (NVIDIA Curie).
+
+Now, BIOS default output via RCA component is 640x480 NTSC (480i, 60Hz). In
+Windows I can switch between NTSC and PAL (480i or 576i).
+
+As this is EU machine, after BIOS it often defaults to 576i PAL, unless set
+otherwise.
+
+Now your nouveau driver therefore defaults to 576i.
+
+Xrandr looks like this:
+TV-1 connected 640x480+0+0 (normal left inverted right x axis y axis) 0mm x
+0mm
+   720x576       50.00 +
+   1024x768      50.00
+   800x600       50.00
+   720x480       50.00
+   640x480       50.00*
+   400x300       50.00
+   320x240       50.00
+   320x200       50.00
+   768x576       50.00
+   360x200       60.00
+   360x240       60.00
+   640x240       60.00
+
+I tried to add some additional modelines. But look at 640x480. It forces
+50Hz and I am unable to remove it, create new or change it to 60Hz.
+Therefore the TV is always set to 576i and screen output is 640x480,
+therefore it looks like GPU scaled. First I read your troubleshooting which
+mentions scaling, so I tried to disable scaling. Did not help.
+
+Now I read about this:
+https://nvidia.custhelp.com/app/answers/detail/a_id/177/~/linux---configuring-tv-out
+
+And this might be the solution and issue. It would correspond with what can
+be observed in Windows 7.
+
+Does your driver have some options for configuring TV Out and name
+switching from PAL to NTSC or HD480i mode? It should be automatic based on
+480i or 576i or 240p or 288p, but it is not.
+
+Thanks,
+Lukas
+
+--0000000000004cafe205ec9c39b3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi, I am currently testing Batocera Linux for retrogaming =
+with 15KHz output on CRT / TV.<div><br></div><div>The machine I discovered =
+is a certified Windows Media Center / Intel ViiV machine: Acer iDEA 510</di=
+v><div><br></div><div>It features:</div><div>RCA component output</div><div=
+>S-Video CVBS output</div><div>S-Video DIN output</div><div>Scart IN / Scar=
+t OUT (two DVB-T tuners for realtime playback and recording)</div><div>DVI-=
+I out</div><div>HDMI out</div><div><br></div><div>Laptop style components, =
+MXM module Geforce 7 Go 7600 (NVIDIA Curie).</div><div><br></div><div>Now, =
+BIOS default output via RCA component is 640x480 NTSC (480i, 60Hz). In Wind=
+ows I can switch between NTSC and PAL (480i or 576i).</div><div><br></div><=
+div>As this is EU machine, after BIOS it often defaults to 576i PAL, unless=
+ set otherwise.</div><div><br></div><div>Now your nouveau driver therefore =
+defaults to 576i.</div><div><br></div><div>Xrandr looks like this:</div><di=
+v>TV-1 connected 640x480+0+0 (normal left inverted right x axis y axis) 0mm=
+ x 0mm<br>=C2=A0 =C2=A0720x576 =C2=A0 =C2=A0 =C2=A0 50.00 +<br>=C2=A0 =C2=
+=A01024x768 =C2=A0 =C2=A0 =C2=A050.00<br>=C2=A0 =C2=A0800x600 =C2=A0 =C2=A0=
+ =C2=A0 50.00<br>=C2=A0 =C2=A0720x480 =C2=A0 =C2=A0 =C2=A0 50.00<br>=C2=A0 =
+=C2=A0640x480 =C2=A0 =C2=A0 =C2=A0 50.00*<br>=C2=A0 =C2=A0400x300 =C2=A0 =
+=C2=A0 =C2=A0 50.00<br>=C2=A0 =C2=A0320x240 =C2=A0 =C2=A0 =C2=A0 50.00<br>=
+=C2=A0 =C2=A0320x200 =C2=A0 =C2=A0 =C2=A0 50.00<br>=C2=A0 =C2=A0768x576 =C2=
+=A0 =C2=A0 =C2=A0 50.00<br>=C2=A0 =C2=A0360x200 =C2=A0 =C2=A0 =C2=A0 60.00<=
+br>=C2=A0 =C2=A0360x240 =C2=A0 =C2=A0 =C2=A0 60.00<br>=C2=A0 =C2=A0640x240 =
+=C2=A0 =C2=A0 =C2=A0 60.00<br></div><div><br></div><div>I tried to add some=
+ additional modelines. But look at 640x480. It forces 50Hz and I am unable =
+to remove it, create new or change it to 60Hz. Therefore the TV is always s=
+et to 576i and screen output is 640x480, therefore it looks like GPU scaled=
+. First I read your troubleshooting which mentions scaling, so I tried to d=
+isable scaling. Did not help.</div><div><br></div><div>Now I read about thi=
+s:</div><div><a href=3D"https://nvidia.custhelp.com/app/answers/detail/a_id=
+/177/~/linux---configuring-tv-out">https://nvidia.custhelp.com/app/answers/=
+detail/a_id/177/~/linux---configuring-tv-out</a><br></div><div><br></div><d=
+iv>And this might be the solution and issue. It would correspond with what =
+can be observed in Windows 7.</div><div><br></div><div>Does your driver hav=
+e some options for configuring TV Out and name switching from PAL to NTSC o=
+r HD480i mode? It should be automatic based on 480i or 576i or 240p or 288p=
+, but it is not.</div><div><br></div><div>Thanks,</div><div>Lukas</div></di=
+v>
+
+--0000000000004cafe205ec9c39b3--
