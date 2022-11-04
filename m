@@ -2,54 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEF22618E80
-	for <lists+nouveau@lfdr.de>; Fri,  4 Nov 2022 03:56:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E29A619487
+	for <lists+nouveau@lfdr.de>; Fri,  4 Nov 2022 11:37:41 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B82FC10E78F;
-	Fri,  4 Nov 2022 02:56:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E3DAE10E72A;
+	Fri,  4 Nov 2022 10:37:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8930A10E78F
- for <nouveau@lists.freedesktop.org>; Fri,  4 Nov 2022 02:56:45 +0000 (UTC)
-Received: by mail-ot1-x32b.google.com with SMTP id
- cn2-20020a056830658200b0066c74617e3dso2042588otb.2
- for <nouveau@lists.freedesktop.org>; Thu, 03 Nov 2022 19:56:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=j8XLJBcgjNTIkVR2NzJVwfaf5k6oy9u8H2+Wy7zKPPE=;
- b=algUXXPVSCLjBYiGt83FkiT14Ke4pMWG727ATXgbURLW9yV//ii7pp0v3AL2vuISLz
- zmf2DIgYjgiN9W3crF3JzE9JR5LeG2Xlq+QrrxzeVuyGgdnlBDwfRpuy6KyUPRqPiqFH
- PUpz1zgQfMaQq2yU4rl8a11eXYPQiw5N4J22QGq053xlGm7iNnjAP57fT+vpmiCyJrZm
- t4Z6ut1hUpJsRWNGmv+ZTuYhYilTGfSRkRnebFpYbBD+W+vn7zSIBzYthDZoXt4x43ky
- 2BddZz3JtUK6cYdoMWYzq+BdKNuyizZKMa/RyMv2qawrabKVj+h1K+IDF79QdmTkd3E3
- CTNw==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2236310E72E
+ for <nouveau@lists.freedesktop.org>; Fri,  4 Nov 2022 10:37:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1667558242;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=FvcSXdbTIY6j0RtoeMW2Oyvbsf0knEKyh2vmjeJsi+Y=;
+ b=St7D7ehThSDrtLqHdvQnn2WfHBt15iEUoNcK89DkYK6fUJR8Hr1is7IZG9ceODHkA6gFXI
+ ngUo1HBmvkWirq/lO6JHvGOU40Iot1jfIbMob7Gwsquc0rf8q1T4aFuZWoVZqco7SubxdZ
+ Mwahe+YR/tNNRLzxy/M3JVILNmgFBjY=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-538-zKV3cRL9N1WhfzQZUXX5aw-1; Fri, 04 Nov 2022 06:37:21 -0400
+X-MC-Unique: zKV3cRL9N1WhfzQZUXX5aw-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ r187-20020a1c44c4000000b003c41e9ae97dso4041280wma.6
+ for <nouveau@lists.freedesktop.org>; Fri, 04 Nov 2022 03:37:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=j8XLJBcgjNTIkVR2NzJVwfaf5k6oy9u8H2+Wy7zKPPE=;
- b=mHZEUNr3S6n2Anlqc328NZxDM/NgY1X/NcWm5J+O99WnZugUtUCIcu2b2b+YWs1WQc
- JXwdBwsv6IlCE4yh2k1Ql2MBc9CWDkIC1bOoJGbWSenndEqb9geXEanzUTCdbxFK3a4G
- PAv3eTb9bawFSEsg7qskVi9/4+JbGSutE3pgr/9bflVwQfJDzWPQ41kK5h58CoV/7clM
- G7LEL41tTPhifjmdGtQvueI1fmpNsFWWVDVDCKvRtDajAl8NLZlml0l2ipKxtRgIi8tD
- 3t6k7Gymwi1GQ9rk4k2+FYGieVW0nfPQH6mxxrtWDcMy/BHwJMb2jK7f9KFuoTkWzqop
- XIkw==
-X-Gm-Message-State: ACrzQf3q5+9T44NDOlV4Cf7NkZWe7onfVxBI17GuBL4LKdj1kvz3GjEr
- ZbaO1z76RdlDImFJa8WTJ5pSnMXfG1Q7yJXwFyJLNqHFzrZVWg==
-X-Google-Smtp-Source: AMsMyM4I6vu+DHk5tPSkOSwBJCLocjd0TQrsRRD9iFCMCc5wbrS28v0Eus6MANhSyoIEruqiv5Tx1KV/vvpBZ6gVmqQ=
-X-Received: by 2002:a9d:20e3:0:b0:655:d819:244b with SMTP id
- x90-20020a9d20e3000000b00655d819244bmr16211594ota.232.1667530603932; Thu, 03
- Nov 2022 19:56:43 -0700 (PDT)
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=FvcSXdbTIY6j0RtoeMW2Oyvbsf0knEKyh2vmjeJsi+Y=;
+ b=lMuoYRU5mq+0XbaEGQ5H2r2vCL0xXvdWQwqrd9Dnz58ecSB7YlgXScKpRZd4N9rkoi
+ W7dr3QfCefY9yNtsYsDMlNp/UxSg4sy0HifadJ9UZJcnZZJl3oHF4HBxXbGFn2UFEveF
+ 0AslMhHLVJVe1LIf2aligNysMZSPaoimd7sxw7xNl1y5vbi02Kwf+UCq67MZ6L96Xy2O
+ uLra1tFg9J+p6nQWaePOTpJal21aSEO0AYN06uQQ/7SHOqG7ghfBTvTDLz1Dddpoq8Mh
+ gzMiu37eGaMnRQ6YAasz8KXH7dntMnugetA+ZX0DmEiSebLMm3CbrxrSnfgYYx5n49qJ
+ Lzqg==
+X-Gm-Message-State: ACrzQf197XVgwq2Wqy/Se1qwkCZTPWsdCxDe+3vMPC0zC/8Gq6+EzBWX
+ 7kujsdscLNlcjJxyWaLL1jclBkDTOBkF2nc7RynvC8rOyGYZm4vKIHGVVefw3PTas0nIUliOhlT
+ BZkQWavUpl+D2hk4hf9FUCfxUqg==
+X-Received: by 2002:a05:600c:1e2a:b0:3c3:d770:1756 with SMTP id
+ ay42-20020a05600c1e2a00b003c3d7701756mr23539598wmb.134.1667558239645; 
+ Fri, 04 Nov 2022 03:37:19 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM4LKXhwK5qh8ieFEkCSZgi7mblk9sJOfnr0awtpFbS+pIQGNE9IUSRaCOrs9CG3VpGFJY/xjQ==
+X-Received: by 2002:a05:600c:1e2a:b0:3c3:d770:1756 with SMTP id
+ ay42-20020a05600c1e2a00b003c3d7701756mr23539569wmb.134.1667558239379; 
+ Fri, 04 Nov 2022 03:37:19 -0700 (PDT)
+Received: from [192.168.1.130] (205.pool92-176-231.dynamic.orange.es.
+ [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
+ f15-20020a5d50cf000000b0022e36c1113fsm3031008wrt.13.2022.11.04.03.37.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 04 Nov 2022 03:37:18 -0700 (PDT)
+Message-ID: <ab8358a9-8450-0d49-627f-26afe7ba4f9d@redhat.com>
+Date: Fri, 4 Nov 2022 11:37:17 +0100
 MIME-Version: 1.0
-From: Lukas Satin <luke.satin@gmail.com>
-Date: Fri, 4 Nov 2022 03:56:32 +0100
-Message-ID: <CAEFVmOL+163rX7hEpgKn20RrzMXekw6JcM30rY4AmoHhDV_5Qw@mail.gmail.com>
-To: nouveau@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="0000000000004cafe205ec9c39b3"
-Subject: [Nouveau] TV Out question
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.1
+To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
+ airlied@gmail.com, sam@ravnborg.org, mripard@kernel.org,
+ maarten.lankhorst@linux.intel.com
+References: <20221103151446.2638-1-tzimmermann@suse.de>
+ <20221103151446.2638-21-tzimmermann@suse.de>
+From: Javier Martinez Canillas <javierm@redhat.com>
+In-Reply-To: <20221103151446.2638-21-tzimmermann@suse.de>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH v3 20/23] drm/fb-helper: Set flag in struct
+ drm_fb_helper for leaking physical addresses
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,111 +88,35 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: freedreno@lists.freedesktop.org, linux-samsung-soc@vger.kernel.org,
+ linux-aspeed@lists.ozlabs.org, spice-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ etnaviv@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, linux-renesas-soc@vger.kernel.org,
+ linux-rockchip@lists.infradead.org, linux-mediatek@lists.infradead.org,
+ amd-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ linux-tegra@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-amlogic@lists.infradead.org, linux-mips@vger.kernel.org,
+ linux-sunxi@lists.linux.dev, linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---0000000000004cafe205ec9c39b3
-Content-Type: text/plain; charset="UTF-8"
+On 11/3/22 16:14, Thomas Zimmermann wrote:
+> Uncouple the parameter drm_leak_fbdev_smem from the implementation by
+> setting a flag in struct drm_fb_helper. This will help to move the
+> generic fbdev emulation into its own source file, while keeping the
+> parameter in drm_fb_helper.c. No functional changes.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
 
-Hi, I am currently testing Batocera Linux for retrogaming with 15KHz output
-on CRT / TV.
+Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
 
-The machine I discovered is a certified Windows Media Center / Intel ViiV
-machine: Acer iDEA 510
+-- 
+Best regards,
 
-It features:
-RCA component output
-S-Video CVBS output
-S-Video DIN output
-Scart IN / Scart OUT (two DVB-T tuners for realtime playback and recording)
-DVI-I out
-HDMI out
+Javier Martinez Canillas
+Core Platforms
+Red Hat
 
-Laptop style components, MXM module Geforce 7 Go 7600 (NVIDIA Curie).
-
-Now, BIOS default output via RCA component is 640x480 NTSC (480i, 60Hz). In
-Windows I can switch between NTSC and PAL (480i or 576i).
-
-As this is EU machine, after BIOS it often defaults to 576i PAL, unless set
-otherwise.
-
-Now your nouveau driver therefore defaults to 576i.
-
-Xrandr looks like this:
-TV-1 connected 640x480+0+0 (normal left inverted right x axis y axis) 0mm x
-0mm
-   720x576       50.00 +
-   1024x768      50.00
-   800x600       50.00
-   720x480       50.00
-   640x480       50.00*
-   400x300       50.00
-   320x240       50.00
-   320x200       50.00
-   768x576       50.00
-   360x200       60.00
-   360x240       60.00
-   640x240       60.00
-
-I tried to add some additional modelines. But look at 640x480. It forces
-50Hz and I am unable to remove it, create new or change it to 60Hz.
-Therefore the TV is always set to 576i and screen output is 640x480,
-therefore it looks like GPU scaled. First I read your troubleshooting which
-mentions scaling, so I tried to disable scaling. Did not help.
-
-Now I read about this:
-https://nvidia.custhelp.com/app/answers/detail/a_id/177/~/linux---configuring-tv-out
-
-And this might be the solution and issue. It would correspond with what can
-be observed in Windows 7.
-
-Does your driver have some options for configuring TV Out and name
-switching from PAL to NTSC or HD480i mode? It should be automatic based on
-480i or 576i or 240p or 288p, but it is not.
-
-Thanks,
-Lukas
-
---0000000000004cafe205ec9c39b3
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi, I am currently testing Batocera Linux for retrogaming =
-with 15KHz output on CRT / TV.<div><br></div><div>The machine I discovered =
-is a certified Windows Media Center / Intel ViiV machine: Acer iDEA 510</di=
-v><div><br></div><div>It features:</div><div>RCA component output</div><div=
->S-Video CVBS output</div><div>S-Video DIN output</div><div>Scart IN / Scar=
-t OUT (two DVB-T tuners for realtime playback and recording)</div><div>DVI-=
-I out</div><div>HDMI out</div><div><br></div><div>Laptop style components, =
-MXM module Geforce 7 Go 7600 (NVIDIA Curie).</div><div><br></div><div>Now, =
-BIOS default output via RCA component is 640x480 NTSC (480i, 60Hz). In Wind=
-ows I can switch between NTSC and PAL (480i or 576i).</div><div><br></div><=
-div>As this is EU machine, after BIOS it often defaults to 576i PAL, unless=
- set otherwise.</div><div><br></div><div>Now your nouveau driver therefore =
-defaults to 576i.</div><div><br></div><div>Xrandr looks like this:</div><di=
-v>TV-1 connected 640x480+0+0 (normal left inverted right x axis y axis) 0mm=
- x 0mm<br>=C2=A0 =C2=A0720x576 =C2=A0 =C2=A0 =C2=A0 50.00 +<br>=C2=A0 =C2=
-=A01024x768 =C2=A0 =C2=A0 =C2=A050.00<br>=C2=A0 =C2=A0800x600 =C2=A0 =C2=A0=
- =C2=A0 50.00<br>=C2=A0 =C2=A0720x480 =C2=A0 =C2=A0 =C2=A0 50.00<br>=C2=A0 =
-=C2=A0640x480 =C2=A0 =C2=A0 =C2=A0 50.00*<br>=C2=A0 =C2=A0400x300 =C2=A0 =
-=C2=A0 =C2=A0 50.00<br>=C2=A0 =C2=A0320x240 =C2=A0 =C2=A0 =C2=A0 50.00<br>=
-=C2=A0 =C2=A0320x200 =C2=A0 =C2=A0 =C2=A0 50.00<br>=C2=A0 =C2=A0768x576 =C2=
-=A0 =C2=A0 =C2=A0 50.00<br>=C2=A0 =C2=A0360x200 =C2=A0 =C2=A0 =C2=A0 60.00<=
-br>=C2=A0 =C2=A0360x240 =C2=A0 =C2=A0 =C2=A0 60.00<br>=C2=A0 =C2=A0640x240 =
-=C2=A0 =C2=A0 =C2=A0 60.00<br></div><div><br></div><div>I tried to add some=
- additional modelines. But look at 640x480. It forces 50Hz and I am unable =
-to remove it, create new or change it to 60Hz. Therefore the TV is always s=
-et to 576i and screen output is 640x480, therefore it looks like GPU scaled=
-. First I read your troubleshooting which mentions scaling, so I tried to d=
-isable scaling. Did not help.</div><div><br></div><div>Now I read about thi=
-s:</div><div><a href=3D"https://nvidia.custhelp.com/app/answers/detail/a_id=
-/177/~/linux---configuring-tv-out">https://nvidia.custhelp.com/app/answers/=
-detail/a_id/177/~/linux---configuring-tv-out</a><br></div><div><br></div><d=
-iv>And this might be the solution and issue. It would correspond with what =
-can be observed in Windows 7.</div><div><br></div><div>Does your driver hav=
-e some options for configuring TV Out and name switching from PAL to NTSC o=
-r HD480i mode? It should be automatic based on 480i or 576i or 240p or 288p=
-, but it is not.</div><div><br></div><div>Thanks,</div><div>Lukas</div></di=
-v>
-
---0000000000004cafe205ec9c39b3--
