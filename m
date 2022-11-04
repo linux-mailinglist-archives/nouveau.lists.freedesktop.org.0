@@ -1,47 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2287C619D61
-	for <lists+nouveau@lfdr.de>; Fri,  4 Nov 2022 17:36:02 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 29562619D8C
+	for <lists+nouveau@lfdr.de>; Fri,  4 Nov 2022 17:44:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1AF1210E90C;
-	Fri,  4 Nov 2022 16:35:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EEE2810E939;
+	Fri,  4 Nov 2022 16:44:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vs1-f51.google.com (mail-vs1-f51.google.com
- [209.85.217.51])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8F26B10E90B
- for <nouveau@lists.freedesktop.org>; Fri,  4 Nov 2022 16:35:54 +0000 (UTC)
-Received: by mail-vs1-f51.google.com with SMTP id t14so4979806vsr.9
- for <nouveau@lists.freedesktop.org>; Fri, 04 Nov 2022 09:35:54 -0700 (PDT)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A7F3B10E939
+ for <nouveau@lists.freedesktop.org>; Fri,  4 Nov 2022 16:44:09 +0000 (UTC)
+Received: by mail-oi1-x22e.google.com with SMTP id v81so5739695oie.5
+ for <nouveau@lists.freedesktop.org>; Fri, 04 Nov 2022 09:44:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:subject:message-id:date:from:in-reply-to:references:mime-version
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Snme++L3jSPERx2OZU2qHoVeOhv5VLQwCiOHO1Ykhyo=;
+ b=ei3+lpZ9c2h/ZwRiW3PG3HjDPd/S/Aa7aSVOOMRq/KjMXEBfldwyqYGn2w/hRQNmmg
+ rZLVpVLQKR0p6dXA/PD+hJmFzFtMQCWqPUSoiPRFMEOZ2ZxMNe6+UwRi0nm0Ci+xL+yM
+ jnBBLkRUT0ZODwNlf27IJ8/O1NuXOiugaiV9ytA0rw/IB64N8OFideCgIT+RLphKu9lK
+ nfwWFhKxKfgfw8F6yxK5jzPGBwv6a6pfyTh4yJ3CgmiNizP4ySmN4gFblkPVxqZLZ7ba
+ qZbDQFT83Hfm6QEBuUzwUdspCVYz8T6lEKbu1cYvn57bGc4kmxNnaPzrqI/tIlFIsE33
+ bCng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Z7DP79EAe5DeULdmGH89nCSLm48kWsCAT+Anmy0/QCY=;
- b=ZFCYtEZrjjsLDDKP52MbVAMnRPEVclAU5nHqP2LaKGELlo7xhdGe+utzViUua620qC
- YrRGgYkEVw4ZZf2ByGp4o30r2ik0jt0B+pKcm1DMY6rbrEQbLoOZZPna5WmBU3I7vBMp
- Ls56z8OOFySnU8gDo/g8JC4zMR+vC5hBFttVnDEmlZkmRY8EOUB96qJtsqY0e9R5sKCb
- b4qCs3mbMdWml3kqF3X0iVZ3NVCTX5QMLPXLoSjCnWOXunYC725LBz9RTJAomFfYlWSf
- 6mqDLnh7dFuX0sifRvuachuyxAPVSilvlambv3LH6aubvrA5tj9kUaPWhyJgAQHjLUkr
- 8MMA==
-X-Gm-Message-State: ACrzQf2yJ+Nh4kdh50JlDeVe3Kv2MJ+YTiqMxphUPeM9OzL9BNnNaG6E
- Z8A1CdFSDlR4k4JwAdrPTGGF4sgvq0NAXDsYteQ=
-X-Google-Smtp-Source: AMsMyM7tt4pMLe77scPokY2KzFmPcxicDzkB6XoaEBEAv2/0MItkASUHvf/O/8azMBImYy/JpM59qt0erM6y2bcqyIw=
-X-Received: by 2002:a67:b308:0:b0:3ac:74ca:c8ce with SMTP id
- a8-20020a67b308000000b003ac74cac8cemr20031530vsm.18.1667579753017; Fri, 04
- Nov 2022 09:35:53 -0700 (PDT)
+ h=cc:subject:message-id:date:from:in-reply-to:references:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Snme++L3jSPERx2OZU2qHoVeOhv5VLQwCiOHO1Ykhyo=;
+ b=B1mLweIcGEDcv/QrVlIW3X+gpvVhTZ7845WcXtESQa1vHkfE1Bo2B+sQBCCJqhDb8F
+ S/84dfi8RflUWN4w/mhgyp0lHLeOM8mM6205fpGKQQi+lJoyhiJT5L4qFxAPDHtPbcDz
+ cIQSc1X9IEV2dNPoJTrPnkIlr2bS8l3lGXvJ03aMcRlyqjswRbEjY5+4daM/ohd/hAMj
+ +OMGVCSBb+M5Wvtu66tLkno8BphlE1CddevAa+Q48puduae6wsdmb4Gnoz11RRNuqire
+ ZeG7pTHtlSWpILPAed+VTmwLjcwrQ8tBUXP9q7nj1bwyERwqMW9oPR83qwJPOeAD55Dx
+ 27LA==
+X-Gm-Message-State: ACrzQf0bOvvKPVwrIdOuUyTPTVe0ap/t9VHrBdaVLwjb0a7HoV2DxjAv
+ 4586L6lTfsMCIRc1/ZSUjbmp+FPUDV1M4W1yiSfh0CWsoEA=
+X-Google-Smtp-Source: AMsMyM4Pqcg/eikgi/SUmoeJwi4SoHz1P5TSyRFsEGNjOvW3jIpH3yqPYgL5IUoQIv5oIpd3LLRplUX2xrtnyHJGR2s=
+X-Received: by 2002:a54:4587:0:b0:359:c737:b2e8 with SMTP id
+ z7-20020a544587000000b00359c737b2e8mr19668017oib.234.1667580248688; Fri, 04
+ Nov 2022 09:44:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAEFVmOL+163rX7hEpgKn20RrzMXekw6JcM30rY4AmoHhDV_5Qw@mail.gmail.com>
-In-Reply-To: <CAEFVmOL+163rX7hEpgKn20RrzMXekw6JcM30rY4AmoHhDV_5Qw@mail.gmail.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Fri, 4 Nov 2022 12:35:41 -0400
-Message-ID: <CAKb7Uvi79P6skuKgF6Q884TtiC1k0bwrBw7r41TfY1-BBLjTxQ@mail.gmail.com>
-To: Lukas Satin <luke.satin@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAKb7Uvi79P6skuKgF6Q884TtiC1k0bwrBw7r41TfY1-BBLjTxQ@mail.gmail.com>
+In-Reply-To: <CAKb7Uvi79P6skuKgF6Q884TtiC1k0bwrBw7r41TfY1-BBLjTxQ@mail.gmail.com>
+From: Lukas Satin <luke.satin@gmail.com>
+Date: Fri, 4 Nov 2022 17:43:57 +0100
+Message-ID: <CAEFVmO+pbgKQua5oAV6wP19AwyQVgvXT1sV=6pb=ejnq2F9Oog@mail.gmail.com>
+Cc: nouveau@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="0000000000005b8e8305eca7c8b0"
 Subject: Re: [Nouveau] TV Out question
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -54,85 +63,213 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-https://nouveau.freedesktop.org/KernelModuleParameters.html
+--0000000000005b8e8305eca7c8b0
+Content-Type: text/plain; charset="UTF-8"
 
-Perhaps nouveau.tv_norm=3DNTSC-M will help get you the 60hz modes? I
-haven't played with these options much at all, it has always sorta
-Just Worked for me.
+Yes I just figured it out an hour ago. It works same as hd480i.
 
-This should have the validation of new modes, make sure you don't run
-afoul of this:
+Win7 can switch pal and ntsc just by changing desktop tesolution. Wht about
+here?
 
-https://cgit.freedesktop.org/drm/drm/tree/drivers/gpu/drm/nouveau/dispnv04/=
-tvnv17.c#n303
+TV with svideo or component rca supporr 480i and 240p by the spec.
 
-Cheers,
+I hve added modelines for that. It works via dvi to vga to bnc to rca wity
+15khz kernel.
 
-  -ilia
+How to modify ut driver to outtput 240p via tv out?
 
-On Thu, Nov 3, 2022 at 10:56 PM Lukas Satin <luke.satin@gmail.com> wrote:
+Imvon phone sorry fot ttyoos
+
+On Fri 4. 11. 2022 at 17:35, Ilia Mirkin <imirkin@alum.mit.edu> wrote:
+
+> https://nouveau.freedesktop.org/KernelModuleParameters.html
 >
-> Hi, I am currently testing Batocera Linux for retrogaming with 15KHz outp=
-ut on CRT / TV.
+> Perhaps nouveau.tv_norm=NTSC-M will help get you the 60hz modes? I
+> haven't played with these options much at all, it has always sorta
+> Just Worked for me.
 >
-> The machine I discovered is a certified Windows Media Center / Intel ViiV=
- machine: Acer iDEA 510
+> This should have the validation of new modes, make sure you don't run
+> afoul of this:
 >
-> It features:
-> RCA component output
-> S-Video CVBS output
-> S-Video DIN output
-> Scart IN / Scart OUT (two DVB-T tuners for realtime playback and recordin=
-g)
-> DVI-I out
-> HDMI out
 >
-> Laptop style components, MXM module Geforce 7 Go 7600 (NVIDIA Curie).
+> https://cgit.freedesktop.org/drm/drm/tree/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c#n303
 >
-> Now, BIOS default output via RCA component is 640x480 NTSC (480i, 60Hz). =
-In Windows I can switch between NTSC and PAL (480i or 576i).
+> Cheers,
 >
-> As this is EU machine, after BIOS it often defaults to 576i PAL, unless s=
-et otherwise.
+>   -ilia
 >
-> Now your nouveau driver therefore defaults to 576i.
+> On Thu, Nov 3, 2022 at 10:56 PM Lukas Satin <luke.satin@gmail.com> wrote:
+> >
+> > Hi, I am currently testing Batocera Linux for retrogaming with 15KHz
+> output on CRT / TV.
+> >
+> > The machine I discovered is a certified Windows Media Center / Intel
+> ViiV machine: Acer iDEA 510
+> >
+> > It features:
+> > RCA component output
+> > S-Video CVBS output
+> > S-Video DIN output
+> > Scart IN / Scart OUT (two DVB-T tuners for realtime playback and
+> recording)
+> > DVI-I out
+> > HDMI out
+> >
+> > Laptop style components, MXM module Geforce 7 Go 7600 (NVIDIA Curie).
+> >
+> > Now, BIOS default output via RCA component is 640x480 NTSC (480i, 60Hz).
+> In Windows I can switch between NTSC and PAL (480i or 576i).
+> >
+> > As this is EU machine, after BIOS it often defaults to 576i PAL, unless
+> set otherwise.
+> >
+> > Now your nouveau driver therefore defaults to 576i.
+> >
+> > Xrandr looks like this:
+> > TV-1 connected 640x480+0+0 (normal left inverted right x axis y axis)
+> 0mm x 0mm
+> >    720x576       50.00 +
+> >    1024x768      50.00
+> >    800x600       50.00
+> >    720x480       50.00
+> >    640x480       50.00*
+> >    400x300       50.00
+> >    320x240       50.00
+> >    320x200       50.00
+> >    768x576       50.00
+> >    360x200       60.00
+> >    360x240       60.00
+> >    640x240       60.00
+> >
+> > I tried to add some additional modelines. But look at 640x480. It forces
+> 50Hz and I am unable to remove it, create new or change it to 60Hz.
+> Therefore the TV is always set to 576i and screen output is 640x480,
+> therefore it looks like GPU scaled. First I read your troubleshooting which
+> mentions scaling, so I tried to disable scaling. Did not help.
+> >
+> > Now I read about this:
+> >
+> https://nvidia.custhelp.com/app/answers/detail/a_id/177/~/linux---configuring-tv-out
+> >
+> > And this might be the solution and issue. It would correspond with what
+> can be observed in Windows 7.
+> >
+> > Does your driver have some options for configuring TV Out and name
+> switching from PAL to NTSC or HD480i mode? It should be automatic based on
+> 480i or 576i or 240p or 288p, but it is not.
+> >
+> > Thanks,
+> > Lukas
 >
-> Xrandr looks like this:
-> TV-1 connected 640x480+0+0 (normal left inverted right x axis y axis) 0mm=
- x 0mm
->    720x576       50.00 +
->    1024x768      50.00
->    800x600       50.00
->    720x480       50.00
->    640x480       50.00*
->    400x300       50.00
->    320x240       50.00
->    320x200       50.00
->    768x576       50.00
->    360x200       60.00
->    360x240       60.00
->    640x240       60.00
->
-> I tried to add some additional modelines. But look at 640x480. It forces =
-50Hz and I am unable to remove it, create new or change it to 60Hz. Therefo=
-re the TV is always set to 576i and screen output is 640x480, therefore it =
-looks like GPU scaled. First I read your troubleshooting which mentions sca=
-ling, so I tried to disable scaling. Did not help.
->
-> Now I read about this:
-> https://nvidia.custhelp.com/app/answers/detail/a_id/177/~/linux---configu=
-ring-tv-out
->
-> And this might be the solution and issue. It would correspond with what c=
-an be observed in Windows 7.
->
-> Does your driver have some options for configuring TV Out and name switch=
-ing from PAL to NTSC or HD480i mode? It should be automatic based on 480i o=
-r 576i or 240p or 288p, but it is not.
->
-> Thanks,
-> Lukas
+
+--0000000000005b8e8305eca7c8b0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">Yes I just figured it out an hour ago. It works same as h=
+d480i.</div><div dir=3D"auto"><br></div><div dir=3D"auto">Win7 can switch p=
+al and ntsc just by changing desktop tesolution. Wht about here?</div><div =
+dir=3D"auto"><br></div><div dir=3D"auto">TV with svideo or component rca su=
+pporr 480i and 240p by the spec.</div><div dir=3D"auto"><br></div><div dir=
+=3D"auto">I hve added modelines for that. It works via dvi to vga to bnc to=
+ rca wity 15khz kernel.</div><div dir=3D"auto"><br></div><div dir=3D"auto">=
+How to modify ut driver to outtput 240p via tv out?</div><div dir=3D"auto">=
+<br></div><div dir=3D"auto">Imvon phone sorry fot ttyoos</div><div><br><div=
+ class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri 4. 11. =
+2022 at 17:35, Ilia Mirkin &lt;<a href=3D"mailto:imirkin@alum.mit.edu">imir=
+kin@alum.mit.edu</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" =
+style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:s=
+olid;padding-left:1ex;border-left-color:rgb(204,204,204)"><a href=3D"https:=
+//nouveau.freedesktop.org/KernelModuleParameters.html" rel=3D"noreferrer" t=
+arget=3D"_blank">https://nouveau.freedesktop.org/KernelModuleParameters.htm=
+l</a><br>
+<br>
+Perhaps nouveau.tv_norm=3DNTSC-M will help get you the 60hz modes? I<br>
+haven&#39;t played with these options much at all, it has always sorta<br>
+Just Worked for me.<br>
+<br>
+This should have the validation of new modes, make sure you don&#39;t run<b=
+r>
+afoul of this:<br>
+<br>
+<a href=3D"https://cgit.freedesktop.org/drm/drm/tree/drivers/gpu/drm/nouvea=
+u/dispnv04/tvnv17.c#n303" rel=3D"noreferrer" target=3D"_blank">https://cgit=
+.freedesktop.org/drm/drm/tree/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c#n30=
+3</a><br>
+<br>
+Cheers,<br>
+<br>
+=C2=A0 -ilia<br>
+<br>
+On Thu, Nov 3, 2022 at 10:56 PM Lukas Satin &lt;<a href=3D"mailto:luke.sati=
+n@gmail.com" target=3D"_blank">luke.satin@gmail.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; Hi, I am currently testing Batocera Linux for retrogaming with 15KHz o=
+utput on CRT / TV.<br>
+&gt;<br>
+&gt; The machine I discovered is a certified Windows Media Center / Intel V=
+iiV machine: Acer iDEA 510<br>
+&gt;<br>
+&gt; It features:<br>
+&gt; RCA component output<br>
+&gt; S-Video CVBS output<br>
+&gt; S-Video DIN output<br>
+&gt; Scart IN / Scart OUT (two DVB-T tuners for realtime playback and recor=
+ding)<br>
+&gt; DVI-I out<br>
+&gt; HDMI out<br>
+&gt;<br>
+&gt; Laptop style components, MXM module Geforce 7 Go 7600 (NVIDIA Curie).<=
+br>
+&gt;<br>
+&gt; Now, BIOS default output via RCA component is 640x480 NTSC (480i, 60Hz=
+). In Windows I can switch between NTSC and PAL (480i or 576i).<br>
+&gt;<br>
+&gt; As this is EU machine, after BIOS it often defaults to 576i PAL, unles=
+s set otherwise.<br>
+&gt;<br>
+&gt; Now your nouveau driver therefore defaults to 576i.<br>
+&gt;<br>
+&gt; Xrandr looks like this:<br>
+&gt; TV-1 connected 640x480+0+0 (normal left inverted right x axis y axis) =
+0mm x 0mm<br>
+&gt;=C2=A0 =C2=A0 720x576=C2=A0 =C2=A0 =C2=A0 =C2=A050.00 +<br>
+&gt;=C2=A0 =C2=A0 1024x768=C2=A0 =C2=A0 =C2=A0 50.00<br>
+&gt;=C2=A0 =C2=A0 800x600=C2=A0 =C2=A0 =C2=A0 =C2=A050.00<br>
+&gt;=C2=A0 =C2=A0 720x480=C2=A0 =C2=A0 =C2=A0 =C2=A050.00<br>
+&gt;=C2=A0 =C2=A0 640x480=C2=A0 =C2=A0 =C2=A0 =C2=A050.00*<br>
+&gt;=C2=A0 =C2=A0 400x300=C2=A0 =C2=A0 =C2=A0 =C2=A050.00<br>
+&gt;=C2=A0 =C2=A0 320x240=C2=A0 =C2=A0 =C2=A0 =C2=A050.00<br>
+&gt;=C2=A0 =C2=A0 320x200=C2=A0 =C2=A0 =C2=A0 =C2=A050.00<br>
+&gt;=C2=A0 =C2=A0 768x576=C2=A0 =C2=A0 =C2=A0 =C2=A050.00<br>
+&gt;=C2=A0 =C2=A0 360x200=C2=A0 =C2=A0 =C2=A0 =C2=A060.00<br>
+&gt;=C2=A0 =C2=A0 360x240=C2=A0 =C2=A0 =C2=A0 =C2=A060.00<br>
+&gt;=C2=A0 =C2=A0 640x240=C2=A0 =C2=A0 =C2=A0 =C2=A060.00<br>
+&gt;<br>
+&gt; I tried to add some additional modelines. But look at 640x480. It forc=
+es 50Hz and I am unable to remove it, create new or change it to 60Hz. Ther=
+efore the TV is always set to 576i and screen output is 640x480, therefore =
+it looks like GPU scaled. First I read your troubleshooting which mentions =
+scaling, so I tried to disable scaling. Did not help.<br>
+&gt;<br>
+&gt; Now I read about this:<br>
+&gt; <a href=3D"https://nvidia.custhelp.com/app/answers/detail/a_id/177/~/l=
+inux---configuring-tv-out" rel=3D"noreferrer" target=3D"_blank">https://nvi=
+dia.custhelp.com/app/answers/detail/a_id/177/~/linux---configuring-tv-out</=
+a><br>
+&gt;<br>
+&gt; And this might be the solution and issue. It would correspond with wha=
+t can be observed in Windows 7.<br>
+&gt;<br>
+&gt; Does your driver have some options for configuring TV Out and name swi=
+tching from PAL to NTSC or HD480i mode? It should be automatic based on 480=
+i or 576i or 240p or 288p, but it is not.<br>
+&gt;<br>
+&gt; Thanks,<br>
+&gt; Lukas<br>
+</blockquote></div></div>
+
+--0000000000005b8e8305eca7c8b0--
