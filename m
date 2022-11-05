@@ -1,66 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E55A261A3D9
-	for <lists+nouveau@lfdr.de>; Fri,  4 Nov 2022 23:04:49 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF50E61DAB8
+	for <lists+nouveau@lfdr.de>; Sat,  5 Nov 2022 15:03:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4669410E878;
-	Fri,  4 Nov 2022 22:04:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A698610E161;
+	Sat,  5 Nov 2022 14:03:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9350A10E86F;
- Fri,  4 Nov 2022 22:04:38 +0000 (UTC)
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-13b23e29e36so6962614fac.8; 
- Fri, 04 Nov 2022 15:04:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ALGhbLG8IZq1W8PcaxhXQ3scDMznxgngbZP1/w11AsU=;
- b=VZ/Hk9G3u5pceeCziYhHioqASZpJNC6bwgM/0iajEfVr9GofRXC9QdOxQOsNTAeTuA
- vKJ+1aOvuGGQittItBjFIWEzo+I8JsQIgKlk6n5nseRgmLwHhJDpw5Zn0XDN1+bBxp/s
- M1EHxwSvHmwdaKe5uEnZq8mfZdQns8ummi3tqD8bLI/cuEPXjyMY883ONbQzuR5i4pU5
- 2GNffofd6iUxbXL6YpzWzRMG+GKifesz2ZKm7wPPpdHGQTbc1E4NUvEMvmninn+X//GQ
- f+5Q21UJm0ue1HSLIkeGSpT53PKDO0J3Scn7d864m8qShBdfdIUmkVRfgkT8dMoMQt8C
- A3aA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ALGhbLG8IZq1W8PcaxhXQ3scDMznxgngbZP1/w11AsU=;
- b=KevNsfDV7JKQyCHdu9GyBwkzGuWaOEw6/CB0ApA67WQMK9qp4G5xj0/DKKiEJK7Kbu
- ZKmVJDsQTnXL3XdeKQPBoUqevRD+d23+XYOIwWEgLV/k1iWcPeVFve15fMyuXM+1Hj3k
- GB/y/zirEM1V0N9zUNToKNZki9dt9+0k0oO3kpy5WR3K26NLMVr+TuMO2L7ZrHBZi0F3
- ITNLzwQcgFw0Yb6X9tuD9OwyjXQzQ3gG2WGOMPLNDd75mkQP5qakEdq2gl6Pzxl6sywU
- WAnGBXWqgU5S7gG5MrlivxYs1J5b+P3h6MVGz9+wcuPrwGyJhvOK8kBYxsts71evlhCT
- RGVg==
-X-Gm-Message-State: ACrzQf01cdua/rXr37CLsfZ3m9HxrVxFX5lQpn4YaNw672P6LlN/pC8K
- G8qCVufqK78dQxuTalsbCPA/crL9JQtqvr+T
-X-Google-Smtp-Source: AMsMyM5giw3BuJ8bmMJV4n8qLpGdhP4KGHdhrB1i5B+9G4KAWnj9wui4NDYnf6EwsDSuZzzqP0jiPg==
-X-Received: by 2002:a05:6870:8319:b0:13b:1dbe:1943 with SMTP id
- p25-20020a056870831900b0013b1dbe1943mr22331595oae.243.1667599477799; 
- Fri, 04 Nov 2022 15:04:37 -0700 (PDT)
-Received: from antonio-Lenovo-Legion-5-15IMH05H.multilaserwifi.com.br
- ([45.163.246.212]) by smtp.googlemail.com with ESMTPSA id
- n18-20020a056870a45200b00130e66a7644sm98623oal.25.2022.11.04.15.04.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Nov 2022 15:04:37 -0700 (PDT)
-From: Antonio Gomes <antoniospg100@gmail.com>
-To: linux-kernel@vger.kernel.org
-Date: Fri,  4 Nov 2022 19:04:23 -0300
-Message-Id: <20221104220424.41164-1-antoniospg100@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221031163211.13228-1-antoniospg100@gmail.com>
-References: <20221031163211.13228-1-antoniospg100@gmail.com>
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EF18610E15E;
+ Sat,  5 Nov 2022 14:03:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=vkJyUHspYVBI8d4xmQXiYhBB25JJbBz5SwbIECTzjwk=; b=PQ/38iArWF2TvY7aq2dDwtCXIE
+ Sy5HUSeJOc4udUGP7IHPwWf2c96y3qM2hMuPgAmPAnXCjpeNIrsSYwH8lfyfN/Nl6oWl+RmLdDtBO
+ +AitpLQIVu0i1L+4o4RQ03RKHmFDtmzeL6RR8o+12jBVNHpmceCtSdAGqkB4QkL5eFcDD85mZGab0
+ VTTyhaaXVk0GJ18x6ZRfFvoqsCFp4W4QnxKjrLhoVSx9BsBiAnLBiWAdw1CZXPH/OaWlztf8qbP+B
+ mbrAEog9/m7vNN6mz72yqDcI54A4GI8k96PH/iZOi7WqRN7wz+xj0wn7O13VXrG2DlzucfAF++FGO
+ Liwq47ZA==;
+Received: from [2a01:799:95a:cb00:a93e:4a2b:2c13:303] (port=51787)
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1orJlH-0002wy-7A; Sat, 05 Nov 2022 15:03:03 +0100
+Message-ID: <98526e41-a96f-c0b0-1531-ed7c401e094d@tronnes.org>
+Date: Sat, 5 Nov 2022 15:02:54 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.0
+To: maxime@cerno.tech, Karol Herbst <kherbst@redhat.com>,
+ Emma Anholt <emma@anholt.net>, Ben Skeggs <bskeggs@redhat.com>,
+ Chen-Yu Tsai <wens@csie.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, David Airlie <airlied@linux.ie>,
+ Maxime Ripard <mripard@kernel.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Lyude Paul <lyude@redhat.com>
+References: <20220728-rpi-analog-tv-properties-v6-0-e7792734108f@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v6-8-e7792734108f@cerno.tech>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v6-8-e7792734108f@cerno.tech>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH v3] drm/nouveau: Add support to control backlight
- using bl_power for nva3.
+Subject: Re: [Nouveau] [PATCH v6 08/23] drm/modes: Move named modes parsing
+ to a separate function
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,50 +66,29 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
+Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>, linux-sunxi@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: antoniospg <antoniospg100@gmail.com>
 
-Summary:
 
-* Add support to turn on/off backlight when changing values in bl_power
-  file. This is achieved by using function backlight_get_brightness()
-  in nva3_set_intensity to get current brightness.
+Den 26.10.2022 17.33, skrev maxime@cerno.tech:
+> The current construction of the named mode parsing doesn't allow to extend
+> it easily. Let's move it to a separate function so we can add more
+> parameters and modes.
+> 
+> In order for the tests to still pass, some extra checks are needed, so
+> it's not a 1:1 move.
+> 
+> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> 
+> ---
 
-Test plan:
-
-* Turn off:
-echo 1 > /sys/class/backlight/nv_backlight/bl_power
-
-* Turn on:
-echo 0 > /sys/class/backlight/nv_backlight/bl_power
-
-Signed-off-by: antoniospg <antoniospg100@gmail.com>
----
- drivers/gpu/drm/nouveau/nouveau_backlight.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_backlight.c b/drivers/gpu/drm/nouveau/nouveau_backlight.c
-index a2141d3d9b1d..5c82f5189b79 100644
---- a/drivers/gpu/drm/nouveau/nouveau_backlight.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_backlight.c
-@@ -263,7 +263,11 @@ nva3_set_intensity(struct backlight_device *bd)
- 	u32 div, val;
- 
- 	div = nvif_rd32(device, NV50_PDISP_SOR_PWM_DIV(or));
--	val = (bd->props.brightness * div) / 100;
-+
-+	val = backlight_get_brightness(bd);
-+	if (val)
-+		val = (val * div) / 100;
-+
- 	if (div) {
- 		nvif_wr32(device, NV50_PDISP_SOR_PWM_CTL(or),
- 			  val |
--- 
-2.25.1
-
+Reviewed-by: Noralf Trønnes <noralf@tronnes.org>
