@@ -2,59 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5701461E33F
-	for <lists+nouveau@lfdr.de>; Sun,  6 Nov 2022 16:51:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BFBC61E373
+	for <lists+nouveau@lfdr.de>; Sun,  6 Nov 2022 17:34:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3F18510E1A0;
-	Sun,  6 Nov 2022 15:51:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5148C10E1A1;
+	Sun,  6 Nov 2022 16:34:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 93ED210E1A0
- for <nouveau@lists.freedesktop.org>; Sun,  6 Nov 2022 15:51:18 +0000 (UTC)
-Received: by mail-ot1-x32d.google.com with SMTP id
- w26-20020a056830061a00b0066c320f5b49so5276291oti.5
- for <nouveau@lists.freedesktop.org>; Sun, 06 Nov 2022 07:51:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xVoz2e54rwC2Q7L+gsFcV8dQaC/2mzb/YKHqLHnB+XM=;
- b=ep9PVZNRH8zCj6+zytdhMd5jZcOdmw6f3vFe26ulMFZxjl7EbZ1TNZ8QpP2WHvbYVQ
- 73yqu0acoy9/vqBvJ+VzyoLZgNCW5o5wWQjIGztBAy6099xZURyoiP4CrnkJpExLbbHd
- E3mqp72csrgM/hvlEg/0mjQvBx0f1tFCqdB+aziDVK5808tuYe50Nt2D7m11zBXp8Lgi
- M1lsHd7e2Gu9dZKKLx1mBGQMqjO3YzrIeCLLxD27vU742LzlgjlUqWu7VVgI2TfZIZeN
- HvqX4AQh3rLUExvqX7WBv4RlUcQSPPZJdvF0ScQNvoGDq50C1HfSvUn/0P4vualppNGz
- azzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xVoz2e54rwC2Q7L+gsFcV8dQaC/2mzb/YKHqLHnB+XM=;
- b=OMJW1NZWvUOzejkD2rnjQbqS//mkyR673SxjqHTPcOXkc1TybudbqxAfSXe8HBbSGx
- wtN34KWDI16d4LNGAsxUCoUuo/XeD0GAHHUk3PzLDNhmpYRR23j94lX6Y0PuRjdrHk0f
- l0Yi7Y4zoAvBUKiPCKjAzShItrMo7+G4im7V2KDptq30zzaTpcQB40x2OaUgqUN5z/oA
- WwElfJL7vP66JenMm6OwxQppGzFsiQzGzXwtbx/jUEaV1oJOuKlig6tGeYL5LMUHDdys
- jqSHk9OKn1bghJixqPeMhsqR0bvMcyR96GnOR3Pj+uXUBUaZ8d9TXX9niMEpukbX8PD6
- 2lUw==
-X-Gm-Message-State: ACrzQf234XJ4T+lWJC+PiNlWGS8PgQscQJ9QceNE2EA5LEXPzhNhNMYi
- pubs+RUx9rItfa1quWVPOXMlwK7R14hM3II3vcJryEg0Jaj19g==
-X-Google-Smtp-Source: AMsMyM6sK6023gnKwr+yHwjfQ0rUEZcgNl3dvlu1K6hs/weWUJ6qtNeRBKVFQikgaaRzi74z1jpdCJz0I/8MfwdQfW4=
-X-Received: by 2002:a9d:20e3:0:b0:655:d819:244b with SMTP id
- x90-20020a9d20e3000000b00655d819244bmr22201266ota.232.1667749877564; Sun, 06
- Nov 2022 07:51:17 -0800 (PST)
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 19AD310E0A2;
+ Sun,  6 Nov 2022 16:33:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=QvIoHrgTbnCEFp2E+kqwZys718brKkUvKx2E8FVdXAU=; b=R0x9zXTEOsbViJfXz+FCNC4vM3
+ uFqtwGLxzOd05dS01ItMXMP1PPK45WYw0O3lAe0JvWH4jhQd5w7yknQd5EMIzdRq4pWLf0sLQXd3n
+ JfW+NRF49EsvmwA1jx8HJELNOcqT2nm9zpgUEpsEaro8rbYSf1gY+OqXYUpLms78UlIC6lFvBuMgh
+ 9Vxf31BusF+P5+REG7+8UaSW79q1f9bhf8pGPyT3npoch3IMrFxnuBTyN0BDmNSjdIRhJCbuUOA6q
+ /qpAcBNRJyyNF7XLQFEQ/iE8RbIs5xs094+4T8TWzq+HX/IXWpVBiVlAZ2oiQOaMQNRubMHGbVgdN
+ ZHDbPCNA==;
+Received: from [2a01:799:95a:cb00:fd97:29ff:d72a:349e] (port=50711)
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1oriap-0005uQ-6b; Sun, 06 Nov 2022 17:33:55 +0100
+Message-ID: <842076aa-8d7c-96d6-ba46-d0e66dacd2df@tronnes.org>
+Date: Sun, 6 Nov 2022 17:33:48 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+To: maxime@cerno.tech, Karol Herbst <kherbst@redhat.com>,
+ Emma Anholt <emma@anholt.net>, Ben Skeggs <bskeggs@redhat.com>,
+ Chen-Yu Tsai <wens@csie.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, David Airlie <airlied@linux.ie>,
+ Maxime Ripard <mripard@kernel.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Lyude Paul <lyude@redhat.com>
 References: <20220728-rpi-analog-tv-properties-v6-0-e7792734108f@cerno.tech>
- <20220728-rpi-analog-tv-properties-v6-13-e7792734108f@cerno.tech>
- <0d04cc78-148c-4f72-dcbc-3e2344d4f26a@tronnes.org>
-In-Reply-To: <0d04cc78-148c-4f72-dcbc-3e2344d4f26a@tronnes.org>
-From: Lukas Satin <luke.satin@gmail.com>
-Date: Sun, 6 Nov 2022 16:51:06 +0100
-Message-ID: <CAEFVmO+-9h6T7wqMVrNUbe6z6MzreAD3f0825E3dc3gbaDA9Pw@mail.gmail.com>
-To: nouveau@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="00000000000006cadb05eccf47aa"
-Subject: Re: [Nouveau] [PATCH v6 13/23] drm/modes: Introduce the tv_mode
- property as a command-line option
+ <20220728-rpi-analog-tv-properties-v6-16-e7792734108f@cerno.tech>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v6-16-e7792734108f@cerno.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH v6 16/23] drm/probe-helper: Provide a TV
+ get_modes helper
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,91 +66,203 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>, linux-sunxi@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---00000000000006cadb05eccf47aa
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-1) Can we have access to TV chip registers (as nvtv) in order so set
-horizontal / vertical properties in order to set 240p resolution in NTSC or
-288p in PAL?
 
-2) Why the reply to email list is like that and not just
-nouveau@lists.freedesktop.org ? I see a couple of individuals plus four
-mailing lists
+Den 26.10.2022 17.33, skrev maxime@cerno.tech:
+> Most of the TV connectors will need a similar get_modes implementation
+> that will, depending on the drivers' capabilities, register the 480i and
+> 576i modes.
+> 
+> That implementation will also need to set the preferred flag and order
+> the modes based on the driver and users preferrence.
+> 
+> This is especially important to guarantee that a userspace stack such as
+> Xorg can start and pick up the preferred mode while maintaining a
+> working output.
+> 
+> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> 
+> ---
+> Changes in v6:
+> - New patch
+> ---
+>  drivers/gpu/drm/drm_probe_helper.c | 97 ++++++++++++++++++++++++++++++++++++++
+>  include/drm/drm_probe_helper.h     |  1 +
+>  2 files changed, 98 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/drm_probe_helper.c b/drivers/gpu/drm/drm_probe_helper.c
+> index 69b0b2b9cc1c..4a60575f5c66 100644
+> --- a/drivers/gpu/drm/drm_probe_helper.c
+> +++ b/drivers/gpu/drm/drm_probe_helper.c
+> @@ -1147,3 +1147,100 @@ int drm_connector_helper_get_modes(struct drm_connector *connector)
+>  	return count;
+>  }
+>  EXPORT_SYMBOL(drm_connector_helper_get_modes);
+> +
+> +static bool tv_mode_supported(struct drm_connector *connector,
+> +			      enum drm_connector_tv_mode mode)
+> +{
+> +	struct drm_device *dev = connector->dev;
+> +	struct drm_property *property = dev->mode_config.tv_mode_property;
+> +
 
-Lukas
+Superfluous linebreak
 
-On Sun, Nov 6, 2022 at 2:11 PM Noralf Tr=C3=B8nnes <noralf@tronnes.org> wro=
-te:
+> +	unsigned int i;
+> +
+> +	for (i = 0; i < property->num_values; i++)
+> +		if (property->values[i] == mode)
+> +			return true;
+> +
+> +	return false;
+> +}
+> +
+> +/**
+> + * drm_connector_helper_tv_get_modes - Fills the modes availables to a TV connector
 
->
->
-> Den 26.10.2022 17.33, skrev maxime@cerno.tech:
-> > Our new tv mode option allows to specify the TV mode from a property.
-> > However, it can still be useful, for example to avoid any boot time
-> > artifact, to set that property directly from the kernel command line.
-> >
-> > Let's add some code to allow it, and some unit tests to exercise that
-> code.
-> >
-> > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> >
-> > ---
->
-> I would have just squashed the named mode part of this patch together
-> with the 2 other named mode patches and keep just the video=3D option par=
-t
-> here, but up to you:
->
-> Reviewed-by: Noralf Tr=C3=B8nnes <noralf@tronnes.org>
->
+availables -> available
 
---00000000000006cadb05eccf47aa
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+> + * @connector: The connector
+> + *
+> + * Fills the available modes for a TV connector based on the supported
+> + * TV modes, and the default mode expressed by the kernel command line.
+> + *
+> + * This can be used as the default TV connector helper .get_modes() hook
+> + * if the driver does not need any special processing.
+> + *
+> + * Returns:
+> + * The number of modes added to the connector.
+> + */
+> +int drm_connector_helper_tv_get_modes(struct drm_connector *connector)
+> +{
+> +	struct drm_device *dev = connector->dev;
+> +	struct drm_cmdline_mode *cmdline = &connector->cmdline_mode;
+> +	struct drm_display_mode *tv_modes[2] = {};
+> +	struct drm_display_mode *mode;
+> +	unsigned int first_mode_idx;
+> +	unsigned int count = 0;
+> +	uint64_t default_mode;
+> +	int ret;
+> +
+> +	if (!dev->mode_config.tv_mode_property)
+> +		return 0;
+> +
+> +	if (tv_mode_supported(connector, DRM_MODE_TV_MODE_NTSC) ||
+> +	    tv_mode_supported(connector, DRM_MODE_TV_MODE_NTSC_443) ||
+> +	    tv_mode_supported(connector, DRM_MODE_TV_MODE_NTSC_J) ||
+> +	    tv_mode_supported(connector, DRM_MODE_TV_MODE_PAL_M)) {
+> +		mode = drm_mode_analog_ntsc_480i(connector->dev);
 
-<div dir=3D"ltr">1) Can we have access to TV chip registers (as nvtv) in or=
-der so set horizontal / vertical properties in order to set 240p resolution=
- in NTSC or 288p in PAL?<div><br></div><div>2) Why the reply to email list =
-is like that and not just=C2=A0<span style=3D"font-family:&quot;Google Sans=
-&quot;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif;font-size:14px"><a hre=
-f=3D"mailto:nouveau@lists.freedesktop.org">nouveau@lists.freedesktop.org</a=
-> ? I see a couple of individuals plus four mailing lists</span></div><div>=
-<span style=3D"font-family:&quot;Google Sans&quot;,Roboto,RobotoDraft,Helve=
-tica,Arial,sans-serif;font-size:14px"><br></span></div><div><span style=3D"=
-font-family:&quot;Google Sans&quot;,Roboto,RobotoDraft,Helvetica,Arial,sans=
--serif;font-size:14px">Lukas</span></div></div><br><div class=3D"gmail_quot=
-e"><div dir=3D"ltr" class=3D"gmail_attr">On Sun, Nov 6, 2022 at 2:11 PM Nor=
-alf Tr=C3=B8nnes &lt;<a href=3D"mailto:noralf@tronnes.org">noralf@tronnes.o=
-rg</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
-"><br>
-<br>
-Den 26.10.2022 17.33, skrev maxime@cerno.tech:<br>
-&gt; Our new tv mode option allows to specify the TV mode from a property.<=
-br>
-&gt; However, it can still be useful, for example to avoid any boot time<br=
->
-&gt; artifact, to set that property directly from the kernel command line.<=
-br>
-&gt; <br>
-&gt; Let&#39;s add some code to allow it, and some unit tests to exercise t=
-hat code.<br>
-&gt; <br>
-&gt; Signed-off-by: Maxime Ripard &lt;maxime@cerno.tech&gt;<br>
-&gt; <br>
-&gt; ---<br>
-<br>
-I would have just squashed the named mode part of this patch together<br>
-with the 2 other named mode patches and keep just the video=3D option part<=
-br>
-here, but up to you:<br>
-<br>
-Reviewed-by: Noralf Tr=C3=B8nnes &lt;<a href=3D"mailto:noralf@tronnes.org" =
-target=3D"_blank">noralf@tronnes.org</a>&gt;<br>
-</blockquote></div>
+Nit: You can use the dev variable here and below.
 
---00000000000006cadb05eccf47aa--
+> +		if (!mode)
+> +			return 0;
+> +
+> +		tv_modes[count++] = mode;
+> +	}
+> +
+> +	if (tv_mode_supported(connector, DRM_MODE_TV_MODE_PAL) ||
+> +	    tv_mode_supported(connector, DRM_MODE_TV_MODE_PAL_N) ||
+> +	    tv_mode_supported(connector, DRM_MODE_TV_MODE_SECAM)) {
+> +		mode = drm_mode_analog_pal_576i(connector->dev);
+> +		if (!mode)
+> +			return 0;
+
+You leak the ntsc mode when returning (possibly).
+
+> +
+> +		tv_modes[count++] = mode;
+> +	}
+> +
+
+Maybe check for count being zero here?
+
+> +	if (count == 1) {
+> +		mode->type |= DRM_MODE_TYPE_PREFERRED;
+> +		drm_mode_probed_add(connector, mode);
+> +		return count;
+> +	}
+> +
+> +	ret = drm_object_property_get_default_value(&connector->base,
+> +						    dev->mode_config.tv_mode_property,
+> +						    &default_mode);
+> +	if (ret)
+> +		return 0;
+
+You leak both modes when returning here. Maybe move this up before
+allocation to simplify error handling.
+
+> +
+> +	if (cmdline->tv_mode_specified)
+> +		default_mode = cmdline->tv_mode;
+
+I realised that we don't verify tv_mode coming from the command line,
+not here and not in the reset helper. Should we do that? A driver should
+be programmed defensively to handle an illegal/unsupported value, but it
+doesn't feel right to allow an illegal enum value coming through the
+core/helpers.
+
+> +
+> +	if ((default_mode == DRM_MODE_TV_MODE_NTSC) ||
+> +	    (default_mode == DRM_MODE_TV_MODE_NTSC_443) ||
+> +	    (default_mode == DRM_MODE_TV_MODE_NTSC_J) ||
+> +	    (default_mode == DRM_MODE_TV_MODE_PAL_M))
+> +		first_mode_idx = 0;
+> +	else
+> +		first_mode_idx = 1;
+> +
+> +	mode = tv_modes[first_mode_idx];
+> +	mode->type |= DRM_MODE_TYPE_PREFERRED;
+> +	drm_mode_probed_add(connector, mode);
+> +
+> +	mode = first_mode_idx ? tv_modes[0] : tv_modes[1];
+> +	drm_mode_probed_add(connector, mode);
+> +
+> +	return count;
+> +}
+> +EXPORT_SYMBOL(drm_connector_helper_tv_get_modes);
+
+I know this is not expensive, but you're looping over the property
+values 7 times. An alternative solution is to rebuild the supported bitmask:
+
+int drm_connector_helper_tv_get_modes(struct drm_connector *connector)
+{
+...
+	unsigned int ntsc_modes = BIT(DRM_MODE_TV_MODE_NTSC) |
+				  BIT(DRM_MODE_TV_MODE_NTSC_443) |
+				  BIT(DRM_MODE_TV_MODE_NTSC_J) |
+				  BIT(DRM_MODE_TV_MODE_PAL_M);
+	unsigned int pal_modes = BIT(DRM_MODE_TV_MODE_PAL) |
+				 BIT(DRM_MODE_TV_MODE_PAL_N) |
+				 BIT(DRM_MODE_TV_MODE_SECAM);
+	unsigned int supported_tv_modes = 0;
+
+...
+	for (i = 0; i < property->num_values; i++)
+		supported_tv_modes |= BIT(property->values[i]);
+
+	if (supported_tv_modes & ntsc_modes)
+...
+	if (supported_tv_modes & pal_modes)
+...
+
+	if (BIT(default_mode) & ntsc_modes)
+		first_mode_idx = 0;
+	else
+		first_mode_idx = 1;
+
+
+Up to you if you want to do this.
+
+Noralf.
