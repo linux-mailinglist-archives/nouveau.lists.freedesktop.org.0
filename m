@@ -1,32 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 875F161DDD2
-	for <lists+nouveau@lfdr.de>; Sat,  5 Nov 2022 20:36:35 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D8EB361E240
+	for <lists+nouveau@lfdr.de>; Sun,  6 Nov 2022 14:05:20 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1433A10E00E;
-	Sat,  5 Nov 2022 19:36:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D4DE810E0C2;
+	Sun,  6 Nov 2022 13:05:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 301 seconds by postgrey-1.36 at gabe;
- Sat, 05 Nov 2022 19:36:27 UTC
-Received: from ciao.gmane.io (ciao.gmane.io [116.202.254.214])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AB67D10E00E
- for <nouveau@lists.freedesktop.org>; Sat,  5 Nov 2022 19:36:27 +0000 (UTC)
-Received: from list by ciao.gmane.io with local (Exim 4.92)
- (envelope-from <gcfxn-nouveau@m.gmane-mx.org>) id 1orOsw-0006p5-QS
- for nouveau@lists.freedesktop.org; Sat, 05 Nov 2022 20:31:18 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: nouveau@lists.freedesktop.org
-From: Timothy Madden <terminatorul@gmail.com>
-Date: Sat, 5 Nov 2022 19:31:14 -0000 (UTC)
-Message-ID: <tk6dm1$jsm$1@ciao.gmane.io>
-Mime-Version: 1.0
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8961D10E0C2;
+ Sun,  6 Nov 2022 13:05:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Zu9AvI8pVCg+w6/C4cAjAvLV1abDQEDfDf9UUW1vxDg=; b=gB8dUXELYGglrJq7tEcE5QQsRB
+ r+xvFlg6bVTnX5hpcR6TF1milIuxhvFHmOzcTQ+AKlmYmrlp4T7q7grZpuumOnLxEF6vqYKb5gVa2
+ rjqJcnxEGCRUZKvLXrkc5sku+L4Jf6QP3k05QOxJ0n65HXml/Amq2cEEnfx022V37sKMr1NKe3q9i
+ i4UtuSeZ/UdRDUr7jYPs4FhLEL7l2H8lBg7+Hd6HC0oMSf1plM3XLZsHr/aG+8Tiuh+g86RFhOGFY
+ wSUUtbsXJDD/3H0WxMSSP0M3nSGGSxMTzJYZC/Byx7gtbpHht/35mHg1zEXv9kSvRPi3Xh7HkbMiu
+ o/5OseHQ==;
+Received: from [2a01:799:95a:cb00:a93e:4a2b:2c13:303] (port=57940)
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1orfKm-0000YW-K2; Sun, 06 Nov 2022 14:05:08 +0100
+Message-ID: <fa1e7635-ffd6-bf01-77aa-4016f31554e1@tronnes.org>
+Date: Sun, 6 Nov 2022 14:04:56 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+To: maxime@cerno.tech, Karol Herbst <kherbst@redhat.com>,
+ Emma Anholt <emma@anholt.net>, Ben Skeggs <bskeggs@redhat.com>,
+ Chen-Yu Tsai <wens@csie.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, David Airlie <airlied@linux.ie>,
+ Maxime Ripard <mripard@kernel.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Lyude Paul <lyude@redhat.com>
+References: <20220728-rpi-analog-tv-properties-v6-0-e7792734108f@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v6-10-e7792734108f@cerno.tech>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v6-10-e7792734108f@cerno.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-User-Agent: Pan/0.151 (Butcha; a6f6327)
-Subject: [Nouveau] Fans ramping up randomly when idle
+Subject: Re: [Nouveau] [PATCH v6 10/23] drm/modes: Fill drm_cmdline mode
+ from named modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -38,67 +66,78 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>, linux-sunxi@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello
-
-My Msi Gaming X Trio 2080 Ti randomly ramps up the fans with no way to recover
-(I have to reboot) even when the card is idle or is only showing the desktop.
-
-This issue happens even when the card is not connected to a monitor.
-
-My dmesg output from nouveau is included below, I think the last 2 lines are
-the relevant ones:
-[ 9426.768449] nvidia-gpu 0000:0b:00.3: Unable to change power state from D3hot to D0, device inaccessible
-[ 9427.889387] nvidia-gpu 0000:0b:00.3: i2c timeout error ffffffff
 
 
+Den 26.10.2022 17.33, skrev maxime@cerno.tech:
+> The current code to deal with named modes will only set the mode name, and
+> then it's up to drivers to try to match that name to whatever mode or
+> configuration they see fit.
+> 
 
+I couldn't find any driver that does that, all I could find that cares
+about named modes are drm_client. Did I miss something here?
 
-timothy@localhost:~> dmesg | grep -i -e nouveau -e nvidia
-[    6.511064] nouveau 0000:0b:00.0: NVIDIA TU102 (162000a1)
-[    6.594464] nouveau 0000:0b:00.0: bios: version 90.02.42.00.14
-[    6.597756] nouveau 0000:0b:00.0: pmu: firmware unavailable
-[    6.601947] nouveau 0000:0b:00.0: fb: 11264 MiB GDDR6
-[    6.618463] nouveau 0000:0b:00.0: DRM: VRAM: 11264 MiB
-[    6.618465] nouveau 0000:0b:00.0: DRM: GART: 536870912 MiB
-[    6.618466] nouveau 0000:0b:00.0: DRM: BIT table 'A' not found
-[    6.618468] nouveau 0000:0b:00.0: DRM: BIT table 'L' not found
-[    6.618469] nouveau 0000:0b:00.0: DRM: TMDS table version 2.0
-[    6.618470] nouveau 0000:0b:00.0: DRM: DCB version 4.1
-[    6.618471] nouveau 0000:0b:00.0: DRM: DCB outp 00: 02800f66 04600020
-[    6.618473] nouveau 0000:0b:00.0: DRM: DCB outp 01: 02000f62 00020020
-[    6.618474] nouveau 0000:0b:00.0: DRM: DCB outp 03: 02011f52 00020010
-[    6.618475] nouveau 0000:0b:00.0: DRM: DCB outp 04: 04822f76 04600010
-[    6.618476] nouveau 0000:0b:00.0: DRM: DCB outp 05: 04022f72 00020010
-[    6.618477] nouveau 0000:0b:00.0: DRM: DCB outp 08: 01844f36 04600010
-[    6.618478] nouveau 0000:0b:00.0: DRM: DCB outp 09: 01044f32 00020010
-[    6.618479] nouveau 0000:0b:00.0: DRM: DCB outp 10: 04833f86 04600020
-[    6.618481] nouveau 0000:0b:00.0: DRM: DCB conn 00: 00020046
-[    6.618481] nouveau 0000:0b:00.0: DRM: DCB conn 01: 00010161
-[    6.618482] nouveau 0000:0b:00.0: DRM: DCB conn 02: 01000246
-[    6.618483] nouveau 0000:0b:00.0: DRM: DCB conn 03: 02000371
-[    6.618484] nouveau 0000:0b:00.0: DRM: DCB conn 04: 00001446
-[    6.620448] nouveau 0000:0b:00.0: DRM: MM: using COPY for buffer copies
-[    7.062338] nouveau 0000:0b:00.0: [drm] Cannot find any crtc or sizes
-[    7.065331] [drm] Initialized nouveau 1.3.1 20120801 for 0000:0b:00.0 on minor 1
-[    7.254317] nouveau 0000:0b:00.0: [drm] Cannot find any crtc or sizes
-[    7.446318] nouveau 0000:0b:00.0: [drm] Cannot find any crtc or sizes
-[    8.501252] nvidia-gpu 0000:0b:00.3: enabling device (0000 -> 0002)
-[    8.696138] audit: type=1400 audit(1667665884.700:5): apparmor="STATUS" operation="profile_load" profile="unconfined" name="nvidia_modprobe" pid=926 comm="apparmor_parser"
-[    8.696141] audit: type=1400 audit(1667665884.700:6): apparmor="STATUS" operation="profile_load" profile="unconfined" name="nvidia_modprobe//kmod" pid=926 comm="apparmor_parser"
-[    8.704333] snd_hda_intel 0000:0b:00.1: bound 0000:0b:00.0 (ops nv50_audio_component_bind_ops [nouveau])
-[    8.708797] input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:03.2/0000:0b:00.1/sound/card1/input15
-[    8.708903] input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:03.2/0000:0b:00.1/sound/card1/input16
-[    8.708936] input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:03.2/0000:0b:00.1/sound/card1/input17
-[    8.708965] input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:03.2/0000:0b:00.1/sound/card1/input18
-[    8.708994] input: HDA NVidia HDMI/DP,pcm=10 as /devices/pci0000:00/0000:00:03.2/0000:0b:00.1/sound/card1/input19
-[    8.709032] input: HDA NVidia HDMI/DP,pcm=11 as /devices/pci0000:00/0000:00:03.2/0000:0b:00.1/sound/card1/input20
-[    8.709065] input: HDA NVidia HDMI/DP,pcm=12 as /devices/pci0000:00/0000:00:03.2/0000:0b:00.1/sound/card1/input21
-[   10.776280] nouveau 0000:0b:00.0: vgaarb: changed VGA decodes: olddecodes=io+mem,decodes=none:owns=none
-[ 3275.720190] nouveau 0000:0b:00.0: therm: temperature (90 C) hit the 'fanboost' threshold
-[ 9426.768449] nvidia-gpu 0000:0b:00.3: Unable to change power state from D3hot to D0, device inaccessible
-[ 9427.889387] nvidia-gpu 0000:0b:00.3: i2c timeout error ffffffff
-timothy@localhost:~> 
+Apart from that:
 
+Reviewed-by: Noralf Trønnes <noralf@tronnes.org>
+
+> The plan is to remove that need and move the named mode handling out of
+> drivers and into the core, and only rely on modes and properties. Let's
+> start by properly filling drm_cmdline_mode from a named mode.
+> 
+> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> ---
+>  drivers/gpu/drm/drm_modes.c | 18 ++++++++++++++++--
+>  1 file changed, 16 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/drm_modes.c b/drivers/gpu/drm/drm_modes.c
+> index 7594b657f86a..acee23e1a8b7 100644
+> --- a/drivers/gpu/drm/drm_modes.c
+> +++ b/drivers/gpu/drm/drm_modes.c
+> @@ -2226,11 +2226,22 @@ static int drm_mode_parse_cmdline_options(const char *str,
+>  
+>  struct drm_named_mode {
+>  	const char *name;
+> +	unsigned int xres;
+> +	unsigned int yres;
+> +	unsigned int flags;
+>  };
+>  
+> +#define NAMED_MODE(_name, _x, _y, _flags)		\
+> +	{						\
+> +		.name = _name,				\
+> +		.xres = _x,				\
+> +		.yres = _y,				\
+> +		.flags = _flags,			\
+> +	}
+> +
+>  static const struct drm_named_mode drm_named_modes[] = {
+> -	{ "NTSC", },
+> -	{ "PAL", },
+> +	NAMED_MODE("NTSC", 720, 480, DRM_MODE_FLAG_INTERLACE),
+> +	NAMED_MODE("PAL", 720, 576, DRM_MODE_FLAG_INTERLACE),
+>  };
+>  
+>  static int drm_mode_parse_cmdline_named_mode(const char *name,
+> @@ -2271,6 +2282,9 @@ static int drm_mode_parse_cmdline_named_mode(const char *name,
+>  			continue;
+>  
+>  		strcpy(cmdline_mode->name, mode->name);
+> +		cmdline_mode->xres = mode->xres;
+> +		cmdline_mode->yres = mode->yres;
+> +		cmdline_mode->interlace = !!(mode->flags & DRM_MODE_FLAG_INTERLACE);
+>  		cmdline_mode->specified = true;
+>  
+>  		return 1;
+> 
