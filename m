@@ -1,80 +1,79 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20DF161F3A2
-	for <lists+nouveau@lfdr.de>; Mon,  7 Nov 2022 13:46:26 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 09B7861F46D
+	for <lists+nouveau@lfdr.de>; Mon,  7 Nov 2022 14:34:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C137310E306;
-	Mon,  7 Nov 2022 12:46:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B010110E313;
+	Mon,  7 Nov 2022 13:34:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wnew3-smtp.messagingengine.com (wnew3-smtp.messagingengine.com
- [64.147.123.17])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E48D710E303;
- Mon,  7 Nov 2022 12:46:05 +0000 (UTC)
+Received: from wnew2-smtp.messagingengine.com (wnew2-smtp.messagingengine.com
+ [64.147.123.27])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DFA0C10E312;
+ Mon,  7 Nov 2022 13:34:32 +0000 (UTC)
 Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailnew.west.internal (Postfix) with ESMTP id 0478A2B05E55;
- Mon,  7 Nov 2022 07:45:59 -0500 (EST)
+ by mailnew.west.internal (Postfix) with ESMTP id 2E60E2B06702;
+ Mon,  7 Nov 2022 08:34:27 -0500 (EST)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Mon, 07 Nov 2022 07:46:05 -0500
+ by compute2.internal (MEProxy); Mon, 07 Nov 2022 08:34:32 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
  :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1667825159; x=1667832359; bh=aCBuDDCTfo
- ZSnelYeWWd5jAjRGm3SKR/gWkf1WzFlvA=; b=fe7Qh9ENKhkuZt9/GPDNxJ2scx
- spfqCPnmow5kVNVn7V2ZlyYoKqvXQnb5h25X/K6mxkPeTobwsbGdqUauJBjeXsEx
- rTjZZoxdBoWYC9oG0wnuFbBRgAoo/Y7C243KlPg481Cy+LlCwB78WfBjm6eNFjgg
- U+Ir/pdrUbm/OxyzaI22gfdkbc4ctncUR5FXTsqDvTZchDF5l5NNGgOjdEZ16YnN
- tTZao2/Zw8vYM+j3omW0ZUQfaZtI+aoc6CPEFUQFSHdXmSKHAaZrfh4ZhDaU9Poz
- /Qr4QCnghkjW7G3qtuR9dJwX2RmrQLmW7ntQBQJJThHI5Bmmo5NSrVtxoS4g==
+ :subject:to:to; s=fm2; t=1667828066; x=1667835266; bh=euMdwanfMk
+ OYDEpc4wB0uixBbNEYF5sJFd9/UJyNdCY=; b=bkw76/u5ZYZbQahAvsPYoo8IQG
+ LcHGuGHIXi8HCjhw4OYcAWT30Ol0Wn+jYP1l44qbVRmgLwmDnhosZ3uA6uNjhQjL
+ ioJEgtTKYzh1M+2NZq1JoCcj1onDGF0TH5WP7U+0cjtS0kzx+hvVlia8GUf72U0x
+ RvMmk31Q77Uivz75wkgFhyZZj7ohYiKbQZ2hREYhZrAck2nWG1zN5Ru1+EVS5g97
+ LxqEj6CfzUGm3f65dYFQx/JwcNnpdTNQpi+AWw7niXI7QyVGf6ZY38U7zb6EHj4G
+ GBx5vTA5xL45elayXVZ1ZMvRHECSvQwahmDrw23tM/fPWMNrMQsB2AzMrs4A==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
  :feedback-id:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:sender:subject:subject:to:to
  :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm1; t=1667825159; x=1667832359; bh=aCBuDDCTfoZSnelYeWWd5jAjRGm3
- SKR/gWkf1WzFlvA=; b=WDiQgo7382zLJ7uJNNFLZLHgcRrYTi04F+A1Z1aIm60d
- IBxa39Lm0Y3HwsMbX45LSO5jr+II3UEjxpEqShWShLZgzAvnixfeJZVq07ZKkJWQ
- Y23yt/ZUeLIhSdNYJd9d0nlj5yza1LGU6svN6VqOMaJvpGBrLVDXco/u3pmJi7at
- m6WNMu+lUl6ovua3FyeL45ByNoue/i5/f9BBc9pa4BWxd5VsKhFj4cy80ssvIxin
- WTnk4Uc6wxGcVcQ4CKnBxc+r/XlgYR2Si8S5xTvAKnwFuHpAtdovqdT/h5fA1U9D
- 66yluk5/ZPl0/0nNbbAVHJOH8vMAm57K/3cSyCk19A==
-X-ME-Sender: <xms:B_5oYxkTIy0mUMSyflhpl-mdCCNyibVd3eazm0pZBLRP_rPNPov2Vw>
- <xme:B_5oY82zGUwsWi7FzVvIMVn48Y1y3YBjkNcuzAo2t-nJTH-MdmZFEjn4etMl1wuw4
- JV0ObuyEa0xCadNnb0>
-X-ME-Received: <xmr:B_5oY3oU2PyTUy9263HAMn28QauzhYHEhwEZOYdG2hkB3_T4762eKBGZFASoTCi0cYMfqOtiSO3l6_IXQnkbbd4u12T_i5uhX14-u3_3al9iug>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrvdekgdegfecutefuodetggdotefrodftvf
+ fm1; t=1667828066; x=1667835266; bh=euMdwanfMkOYDEpc4wB0uixBbNEY
+ F5sJFd9/UJyNdCY=; b=kid7A/lFEMRYdSlRHUAbP10h3b5B6GqzIFwJ7s6gbB0t
+ WpjUg1oMTN9uu/L46ufdrj+GmDdd9IqH4CvLqUeljmmEBdP+YJhMQVxPUCS2BnpI
+ v4Ru9CamYJCnCPTr3hMquRyY/NJTD+xAHKkQ2W2WFuBatXgmHRCkSTLKmFSd75/2
+ k01ShiWOfm0j3nYPSCuBrawztOfFU2j0A7YozMiucrP1nq/04sJkP45VwqUc5QZW
+ ukdMDjH1cPbLpZpr2mHDntcosTrtF9zvvVRlx/Jj+JmdokRLh6qtGk+yhakRF9C7
+ 8zrz3V0g8NseHrHsKPA6rjSIGYDr71WT7ky/u694rw==
+X-ME-Sender: <xms:YQlpYzqUzcKBEZzDOlDuLDr1DtGvw8gQ6k2wBZQG4mY0RJSCFXjmig>
+ <xme:YQlpY9pUIt5pX-eq0nd61vIYEpSEv-wNJQ9HDG6RxL-38WBzL56eDiEg6sTkGoL8J
+ lrNqgHoGVz4ZpM4DBI>
+X-ME-Received: <xmr:YQlpYwNVMqmNz1TWP4KnWosubFEZ-Wv8n0D8GKRH0ewQ4tv7UFVq1Tuer4U-V06PR9eq0ZCrqJr-1jp6BWsgR42ROjxVwck-2o6zob05dYpVBA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrvdekgdehfecutefuodetggdotefrodftvf
  curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
  uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
  fjughrpeffhffvvefukfhfgggtuggjsehgtderredttddunecuhfhrohhmpeforgigihhm
  vgcutfhiphgrrhguuceomhgrgihimhgvsegtvghrnhhordhtvggthheqnecuggftrfgrth
- htvghrnhepjeevfeehfeekieffgeevleevtefgffefkedtfeeuhfettdegjeehgfegudff
- ffdunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmh
- grgihimhgvsegtvghrnhhordhtvggthh
-X-ME-Proxy: <xmx:B_5oYxnAwbs-rpo9JxYvy04EEIaYKD_7caxej8M_yUIO41NUaNyywg>
- <xmx:B_5oY_0EZQVwlGHQNt4aZsSAPHDFLo9A_TY5aX1zYiwMKX0QEvt5kA>
- <xmx:B_5oYwsKoY7uH4jol05JvJcq3VW9Jm8-yuMzJEbFUYWimjlAWdp2sA>
- <xmx:B_5oY_WpqNFwAF1Lpco9OJA9gAHe8906jiN45KaADSPPMNpCq-06s6BhuSc>
+ htvghrnhepieehffffvefgiedthfeiieeutdfgffekhfehgfehgfeiuddutdfftdekffeh
+ heevnecuffhomhgrihhnpegsohhothhlihhnrdgtohhmnecuvehluhhsthgvrhfuihiivg
+ eptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegtvghrnhhordhtvggt
+ hh
+X-ME-Proxy: <xmx:YQlpY25QdoDReJ-2Q7rlTZUBzKtioyIRdY2alrAOs5RtHY-uXcXXrQ>
+ <xmx:YQlpYy7XTsQ1rEuGWv1PveGlsKDveYqIBrsoZZ4e7mQOpHFCDDCx0g>
+ <xmx:YQlpY-iOMy6q641PnxcV3EM-5ZPmsncNh2HiEz8AB4cNLJ4aPLcVbQ>
+ <xmx:YglpYxa0h_DI8UuAJa5L-oZODorTkrwsRbenBhcQSAdI8QJ9V2n0aTLaY2g>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 7 Nov 2022 07:45:58 -0500 (EST)
-Date: Mon, 7 Nov 2022 13:45:56 +0100
+ 7 Nov 2022 08:34:25 -0500 (EST)
+Date: Mon, 7 Nov 2022 14:34:23 +0100
 From: Maxime Ripard <maxime@cerno.tech>
 To: Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
-Message-ID: <20221107124556.nu6brodxdolh36w2@houat>
+Message-ID: <20221107133423.o344y4cb5zxpyrm4@houat>
 References: <20220728-rpi-analog-tv-properties-v6-0-e7792734108f@cerno.tech>
- <20220728-rpi-analog-tv-properties-v6-16-e7792734108f@cerno.tech>
- <842076aa-8d7c-96d6-ba46-d0e66dacd2df@tronnes.org>
- <20221107102126.klxrvfe34e6uriyx@houat>
- <813ebf68-a7f4-441f-d0d6-f63fd923a479@tronnes.org>
+ <20220728-rpi-analog-tv-properties-v6-14-e7792734108f@cerno.tech>
+ <0a748a39-a387-5bdb-ffc8-6cc6593b56e7@tronnes.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ottaxywmq5yqznvz"
+ protocol="application/pgp-signature"; boundary="skctp4fj6rxepcpb"
 Content-Disposition: inline
-In-Reply-To: <813ebf68-a7f4-441f-d0d6-f63fd923a479@tronnes.org>
-Subject: Re: [Nouveau] [PATCH v6 16/23] drm/probe-helper: Provide a TV
- get_modes helper
+In-Reply-To: <0a748a39-a387-5bdb-ffc8-6cc6593b56e7@tronnes.org>
+Subject: Re: [Nouveau] [PATCH v6 14/23] drm/modes: Properly generate a
+ drm_display_mode from a named mode
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -104,72 +103,156 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---ottaxywmq5yqznvz
+--skctp4fj6rxepcpb
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 07, 2022 at 12:29:28PM +0100, Noralf Tr=F8nnes wrote:
+On Sat, Nov 05, 2022 at 06:50:30PM +0100, Noralf Tr=F8nnes wrote:
+> Den 26.10.2022 17.33, skrev maxime@cerno.tech:
+> > The framework will get the drm_display_mode from the drm_cmdline_mode it
+> > got by parsing the video command line argument by calling
+> > drm_connector_pick_cmdline_mode().
+> >=20
+> > The heavy lifting will then be done by the drm_mode_create_from_cmdline=
+_mode()
+> > function.
+> >=20
+> > In the case of the named modes though, there's no real code to make that
+> > translation and we rely on the drivers to guess which actual display mo=
+de
+> > we meant.
+> >=20
+> > Let's modify drm_mode_create_from_cmdline_mode() to properly generate t=
+he
+> > drm_display_mode we mean when passing a named mode.
+> >=20
+> > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> >=20
+> > ---
+> > Changes in v6:
+> > - Fix get_modes to return 0 instead of an error code
+> > - Rename the tests to follow the DRM test naming convention
+> >=20
+> > Changes in v5:
+> > - Switched to KUNIT_ASSERT_NOT_NULL
+> > ---
+> >  drivers/gpu/drm/drm_modes.c                     | 34 ++++++++++-
+> >  drivers/gpu/drm/tests/drm_client_modeset_test.c | 77 +++++++++++++++++=
++++++++-
+> >  2 files changed, 109 insertions(+), 2 deletions(-)
+> >=20
+> > diff --git a/drivers/gpu/drm/drm_modes.c b/drivers/gpu/drm/drm_modes.c
+> > index dc037f7ceb37..85aa9898c229 100644
+> > --- a/drivers/gpu/drm/drm_modes.c
+> > +++ b/drivers/gpu/drm/drm_modes.c
+> > @@ -2497,6 +2497,36 @@ bool drm_mode_parse_command_line_for_connector(c=
+onst char *mode_option,
+> >  }
+> >  EXPORT_SYMBOL(drm_mode_parse_command_line_for_connector);
+> > =20
+> > +static struct drm_display_mode *drm_named_mode(struct drm_device *dev,
+> > +					       struct drm_cmdline_mode *cmd)
+> > +{
+> > +	struct drm_display_mode *mode;
+> > +	unsigned int i;
+> > +
+> > +	for (i =3D 0; i < ARRAY_SIZE(drm_named_modes); i++) {
+> > +		const struct drm_named_mode *named_mode =3D &drm_named_modes[i];
+> > +
+> > +		if (strcmp(cmd->name, named_mode->name))
+> > +			continue;
+> > +
+> > +		if (!named_mode->tv_mode)
+> > +			continue;
+> > +
+> > +		mode =3D drm_analog_tv_mode(dev,
+> > +					  named_mode->tv_mode,
+> > +					  named_mode->pixel_clock_khz * 1000,
+> > +					  named_mode->xres,
+> > +					  named_mode->yres,
+> > +					  named_mode->flags & DRM_MODE_FLAG_INTERLACE);
+> > +		if (!mode)
+> > +			return NULL;
+> > +
+> > +		return mode;
+> > +	}
+> > +
+> > +	return NULL;
+> > +}
+> > +
+> >  /**
+> >   * drm_mode_create_from_cmdline_mode - convert a command line modeline=
+ into a DRM display mode
+> >   * @dev: DRM device to create the new mode for
+> > @@ -2514,7 +2544,9 @@ drm_mode_create_from_cmdline_mode(struct drm_devi=
+ce *dev,
+> >  	if (cmd->xres =3D=3D 0 || cmd->yres =3D=3D 0)
+> >  		return NULL;
+> > =20
+> > -	if (cmd->cvt)
+> > +	if (strlen(cmd->name))
+> > +		mode =3D drm_named_mode(dev, cmd);
 >=20
->=20
-> Den 07.11.2022 11.21, skrev Maxime Ripard:
-> > Hi Noralf,
-> >=20
-> > I'll leave aside your comments on the code, since we'll use your implem=
-entation.
-> >=20
-> > On Sun, Nov 06, 2022 at 05:33:48PM +0100, Noralf Tr=F8nnes wrote:
-> >> Den 26.10.2022 17.33, skrev maxime@cerno.tech:
-> >>> +
-> >>> +	if (cmdline->tv_mode_specified)
-> >>> +		default_mode =3D cmdline->tv_mode;
-> >>
-> >> I realised that we don't verify tv_mode coming from the command line,
-> >> not here and not in the reset helper. Should we do that? A driver shou=
-ld
-> >> be programmed defensively to handle an illegal/unsupported value, but =
-it
-> >> doesn't feel right to allow an illegal enum value coming through the
-> >> core/helpers.
-> >=20
-> > I don't think we can end up with an invalid value here if it's been
-> > specified.
-> >=20
-> > We parse the command line through drm_mode_parse_tv_mode() (introduced
-> > in patch 13 "drm/modes: Introduce the tv_mode property as a command-line
-> > option") that will pick the tv mode part of the command line, and call
-> > drm_get_tv_mode_from_name() using it.
-> >=20
-> > drm_get_tv_mode_from_name() will return a EINVAL if it's not a value we
-> > expect, and mode->tv_mode is only set on success. And AFAIK, there's no
-> > other path that will set tv_mode.
-> >=20
->=20
-> I see now that illegal was the wrong word, but if the driver only
-> supports ntsc, the user can still set tv_mode=3DPAL right? And that's an
-> unsupported value that the driver can't fulfill, so it errors out. But
-> then again maybe that's just how it is, we can also set a display mode
-> that the driver can't handle, so this is no different in that respect.
-> Yeah, my argument lost some of its strength here :)
+> I'm trying to track how this generated mode fits into to it all and
+> AFAICS if the connector already supports a mode with the same xres/yres
+> as the named mode, the named mode will never be created because of the
+> check at the beginning of drm_helper_probe_add_cmdline_mode(). It will
+> just mark the existing mode with USERDEF and return.
 
-I don't think we can handle this better, really. Falling back to NTSC in
-that case would really be a stretch: it's a different mode, with a
-different TV mode, etc.
+Yep, you're right
 
-It's an even bigger stretch than picking another mode I guess, and like
-you said we're not doing that if the mode isn't supported
+> If the connector doesn't already support a mode with such a resolution
+> it will be created, but should we do that? If the driver supported such
+> a mode it would certainly already have added it to the mode list,
+> wouldn't it? After all it's just 2 variants NTSC and PAL.
+
+I wasn't so sure about this part. I think it's still benefitial because
+some users (Geert at least has expressed that need) might want a smaller
+mode than 480i/576i, whereas the driver is realistically only going to
+register those two.
+
+So creating that mode if it isn't declared seems to have value to some.
+
+> We have this in drm_client_modeset.c:drm_connector_pick_cmdline_mode():
+>=20
+> 	list_for_each_entry(mode, &connector->modes, head) {
+> 		/* Check (optional) mode name first */
+> 		if (!strcmp(mode->name, cmdline_mode->name))
+> 			return mode;
+>=20
+> Here it looks like the named mode thing is a way to choose a mode, not
+> to add one.
+>=20
+> I couldn't find any documentation on how named modes is supposed to
+> work, have you seen any?
+
+Eh, I guess I'm to blame for that :)
+
+Named modes are really only about the command-line name. The way it was
+initially introduced was pretty much to only pass down the name to
+drivers for them to figure it out, like we've been doing in sun4i:
+
+https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/sun4i/sun4i_=
+tv.c#L292
+
+It wasn't really working, especially because the userspace pretty much
+ignores it. One of the point of this series is to create a proper mode
+(and state, really) from the name passed on the command line so that
+drivers don't have to behave any different from usual, and userspace can
+be involved there too.
 
 Maxime
 
---ottaxywmq5yqznvz
+--skctp4fj6rxepcpb
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCY2j+BAAKCRDj7w1vZxhR
-xb/7AQCG07KDDgc9kKjA6n8S2OhuHBoykKN7GTSWoyw+kpRAagEAnEdqeUL2OIq4
-HN0taVCbFlrBNSZhsZTGM0XTfAsy6Qo=
-=S84X
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCY2kJXwAKCRDj7w1vZxhR
+xXK+AQDbZjS2J5WC2ceGRjMPlRP+aZSBzWDC5fwiCGIaR3oGigEA5D4seApvXZv1
+QLznHu/XaZfYUQXUOM6K43F6nknfDQI=
+=HyxE
 -----END PGP SIGNATURE-----
 
---ottaxywmq5yqznvz--
+--skctp4fj6rxepcpb--
