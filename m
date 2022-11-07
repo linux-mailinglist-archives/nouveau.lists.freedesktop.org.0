@@ -2,78 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE1C961EFDA
-	for <lists+nouveau@lfdr.de>; Mon,  7 Nov 2022 11:02:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94DA761EFF3
+	for <lists+nouveau@lfdr.de>; Mon,  7 Nov 2022 11:08:22 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2C95E10E26F;
-	Mon,  7 Nov 2022 10:02:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B7DD610E2C5;
+	Mon,  7 Nov 2022 10:08:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from wnew1-smtp.messagingengine.com (wnew1-smtp.messagingengine.com
  [64.147.123.26])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D79F589A88;
- Mon,  7 Nov 2022 10:02:11 +0000 (UTC)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailnew.west.internal (Postfix) with ESMTP id 5E2002B05B05;
- Mon,  7 Nov 2022 05:02:06 -0500 (EST)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 95F7B10E2BD;
+ Mon,  7 Nov 2022 10:07:59 +0000 (UTC)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailnew.west.internal (Postfix) with ESMTP id 49D4E2B060A4;
+ Mon,  7 Nov 2022 05:07:54 -0500 (EST)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Mon, 07 Nov 2022 05:02:11 -0500
+ by compute4.internal (MEProxy); Mon, 07 Nov 2022 05:07:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
  :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1667815325; x=1667822525; bh=EGvXLw4tRF
- +bUdJCRxzWOerhFrvg00IBqmpmi1s4Rko=; b=kN/K/+W+W/ddU3QqI3ZX6Ox4n7
- hInbfU7nv34ZqYeEP1iavLM2uHeJ6PDDL/mxfMAyR60NSrhSxazmFL47+oYwfek/
- Crq8bE3W7yZMEQVDdiCVyDmAsipb/NDmwdOGN/NyFwDLEZgYkIFlqCU8teEadQhS
- tynepdw72go4ZuzCmcZJXOHwpTPFnjqTQzhJ8HoIiUppJVNUtR+Fb4qouWZBg7Va
- j93rprz/Xqy3t+a4iyJhasrpj+NUD1tSeqJE7tcLTMLj48qG9ZKMZ4swJ/fvRm0s
- 3bkwk32DY9P13xcfwnlqIqUhwsdc6arn7o01ul+dL1eiDRY+DYjdZwSOUrhQ==
+ :subject:to:to; s=fm2; t=1667815673; x=1667822873; bh=H188XHf92e
+ tTDREXnb/OEU+uV1P6JQ1CLPf/Yjdde+M=; b=gEu++7F4AOlflnhqJ5+fnbojCK
+ nkwxbyG1C9qowPqmGKvGXMfSnZd6Na5Cv9NZc9vFSXozr0ESux2jCMak+G2yFE8v
+ MRzjga1u5opjXxwqvSqZfjde5PoujC57ardG3mpdwwQDOxZxwc64AY90SeESm1vN
+ 4gE+nXkcGGxEbSLlyJ731jwgbcpXqQuvjgJub0eB8pwqZAiinUtQ8f2iJmdkVCE4
+ BIxqpv/330HO8THURUc28ZD79L+iHrB19SHbRInPdsvoaHzVbq1AYHReSZLLVc9M
+ KbAB4lzMj2Gmvu/WoqVnAECku015lEjiIwihD8aGuOvH5wanb/d+Ca+VWDtQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
  :feedback-id:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:sender:subject:subject:to:to
  :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm1; t=1667815325; x=1667822525; bh=EGvXLw4tRF+bUdJCRxzWOerhFrvg
- 00IBqmpmi1s4Rko=; b=QhxLDcYjSyGZek0t+w5u2aOw8DT/wHPi6TG8ksD7c2Os
- 7L3aYI0hLCB1J3z7bOFhbhAKRr1XH9YSBmIbbqFOBGTuQicnZsClPwa2PabOgxNa
- 0mCSomQ+JHC1T3VfAjedV7goZjMFRM/EAybIjztr4/YMREwnxiV44TRcDaqABBHW
- L34EF2Joga00w6om+FXHKJcARzSDhwY5hGqYcLxML13C1hrV89tZYWk0MpYFmx4M
- 4bPd7HbeAMF6u//IHTI/EKkGHEUU6CCTRCz0drNymYdIYZ5KLSXzFfPRrBdpq5xv
- wgAduEqlXnVAG2YeiU7F5xosd7FERyBlv35VtKMl7w==
-X-ME-Sender: <xms:nNdoY6W19wdQMLVel4ediy0uouq05huRiSTxdTY4m3_4By5jLHirXQ>
- <xme:nNdoY2mxvMPkxBX_8gJUrwiWEvwSoWkKFyfbtoWeg2DQSgIdFSeVCLAbzpsF-iqTx
- mqpj5QTArkYxWYaSLs>
-X-ME-Received: <xmr:nNdoY-Y36HCri3tXywSVPcXLZFo0LHq6vbTWCg1iZWXFGIUiMc7bECifcFTOadXfmrDvGkPLNSXg8QhZM6oWiMPJPS8AQygXpRaXtKmDo6Hg9w>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrvdekgddutdcutefuodetggdotefrodftvf
+ fm1; t=1667815673; x=1667822873; bh=H188XHf92etTDREXnb/OEU+uV1P6
+ JQ1CLPf/Yjdde+M=; b=GPwBvSEh+VbRha1ATDffxsUxKJoKHXR0U4/4a72EmZ8m
+ cvfOAdBBsFYfn1A+CaJfX0/fipVj7UC9aX9mz+sNlvWy8wC1e31MTWnviAeODQGa
+ EUeHf0O2qXXPjiczR42LfsVeOc6+g3odf0RnzSFQvyG6nNKS8sJAaK9VMrrN7rg1
+ +Gm10gYCJVRLDhFQ9+9nsv1bfInv6kJ0jwf9x44kiYI8V4zI7Rl4fZYTT6LqFhDK
+ emDylnIlbdMhmhT7jsKRpb97XHqH/xiaujF1mXFbix4zBDhEveG4Dm2phwDSx5TL
+ vVEot2nZ2gCC9DfW3n9JGnhQfOqxTr/8e4RSE7WL5g==
+X-ME-Sender: <xms:-dhoYyARoCxVJrmtEvIS0_FmWfcCThrM8hWD7_kymH-uoy_vWS0xhA>
+ <xme:-dhoY8gmAKHH-2SJ6SQcrQN2P971eTRB37opBZnb46FC8CqkapUP0iRX9igmmnE45
+ nR529tZDD9KsccHerI>
+X-ME-Received: <xmr:-dhoY1mLqNcrIR-iY8kn8Sr3xavRV6VyoQE8T8hOFtWm9p4ZwNrBovAe4WksBtEk5rK8s0jJIg_kKmqp6DtLKnZ_Az0m44nEenLBfbtGmL-xOA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrvdekgdduudcutefuodetggdotefrodftvf
  curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
  uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
  fjughrpeffhffvvefukfhfgggtuggjsehgtderredttddunecuhfhrohhmpeforgigihhm
  vgcutfhiphgrrhguuceomhgrgihimhgvsegtvghrnhhordhtvggthheqnecuggftrfgrth
- htvghrnhepieehffffvefgiedthfeiieeutdfgffekhfehgfehgfeiuddutdfftdekffeh
- heevnecuffhomhgrihhnpegsohhothhlihhnrdgtohhmnecuvehluhhsthgvrhfuihiivg
- eptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegtvghrnhhordhtvggt
- hh
-X-ME-Proxy: <xmx:nNdoYxXdA_YniTlEhmDbNZ6WqA-tqPZYWh2Hsq-xSM1ukwLyqRTsuw>
- <xmx:nNdoY0nE5Xm_Mcqm_XyETuxAGcxcZWZTSXzESyTIUzhrVslVCIThng>
- <xmx:nNdoY2fFYBcr9GzyX7PwTDuvlRQno8ijFvdIajzctp2ZNu79oONE-w>
- <xmx:nddoY4G4EHTOkzsJYmUDJIsl9Fx2bs977k7rh4qBmJfYsPrmFTAIHQ0YKys>
+ htvghrnhepjeevfeehfeekieffgeevleevtefgffefkedtfeeuhfettdegjeehgfegudff
+ ffdunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmh
+ grgihimhgvsegtvghrnhhordhtvggthh
+X-ME-Proxy: <xmx:-dhoYwy35CgOY1mfusEKLuDywIwMdZh4S1RlyqVfAtfVe6RM4Do_Pw>
+ <xmx:-dhoY3R8KkmhZLS8NSi4YHFEoTKBj8jDEQBwbtgdE0hbV4S6VmumWg>
+ <xmx:-dhoY7bRvSYaXa8ZhULjpaGyHJFHKsxu144f2Aml4Vu43uds7EFUSQ>
+ <xmx:-dhoY_yGyPAWT16mttzlT_5aevro2ZdJyAl9T3TVozzrbs9R5OR_wQNfK0g>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 7 Nov 2022 05:02:04 -0500 (EST)
-Date: Mon, 7 Nov 2022 11:02:02 +0100
+ 7 Nov 2022 05:07:52 -0500 (EST)
+Date: Mon, 7 Nov 2022 11:07:51 +0100
 From: Maxime Ripard <maxime@cerno.tech>
 To: Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
-Message-ID: <20221107100202.mv6b4uewzgpj2mf4@houat>
+Message-ID: <20221107100751.neijajfrazxloldp@houat>
 References: <20220728-rpi-analog-tv-properties-v6-0-e7792734108f@cerno.tech>
- <20220728-rpi-analog-tv-properties-v6-10-e7792734108f@cerno.tech>
- <fa1e7635-ffd6-bf01-77aa-4016f31554e1@tronnes.org>
+ <20220728-rpi-analog-tv-properties-v6-16-e7792734108f@cerno.tech>
+ <8d0eee22-50f5-5b0a-c1e6-c5f61dd5bbcd@gmail.com>
+ <eb485588-2e7a-8455-7ec4-6a9649d2bef8@tronnes.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="y3igasrhfxn453up"
+ protocol="application/pgp-signature"; boundary="gnrypjdevshxh5ih"
 Content-Disposition: inline
-In-Reply-To: <fa1e7635-ffd6-bf01-77aa-4016f31554e1@tronnes.org>
-Subject: Re: [Nouveau] [PATCH v6 10/23] drm/modes: Fill drm_cmdline mode
- from named modes
+In-Reply-To: <eb485588-2e7a-8455-7ec4-6a9649d2bef8@tronnes.org>
+Subject: Re: [Nouveau] [PATCH v6 16/23] drm/probe-helper: Provide a TV
+ get_modes helper
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,58 +91,64 @@ Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
- intel-gfx@lists.freedesktop.org,
+ linux-sunxi@lists.linux.dev, Mateusz Kwiatkowski <kfyatek@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, intel-gfx@lists.freedesktop.org,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
+ Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---y3igasrhfxn453up
+--gnrypjdevshxh5ih
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Nov 06, 2022 at 02:04:56PM +0100, Noralf Tr=F8nnes wrote:
+Hi Noralf,
+
+On Sun, Nov 06, 2022 at 05:59:23PM +0100, Noralf Tr=F8nnes wrote:
 >=20
 >=20
-> Den 26.10.2022 17.33, skrev maxime@cerno.tech:
-> > The current code to deal with named modes will only set the mode name, =
-and
-> > then it's up to drivers to try to match that name to whatever mode or
-> > configuration they see fit.
+> Den 27.10.2022 00.02, skrev Mateusz Kwiatkowski:
+> > Hi Maxime,
+> >=20
+> > First of all, nice idea with the helper function that can be reused by =
+different
+> > drivers. This is neat!
+> >=20
+> > But looking at this function, it feels a bit overcomplicated. You're cr=
+eating
+> > the two modes, then checking which one is the default, then set the pre=
+ferred
+> > one and possibly reorder them. Maybe it can be simplified somehow?
+> >=20
+> > Although when I tried to refactor it myself, I ended up with something =
+that's
+> > not better at all. Maybe it needs to be complicated, after all :(
 > >=20
 >=20
-> I couldn't find any driver that does that, all I could find that cares
-> about named modes are drm_client. Did I miss something here?
+> I also thought that the function was complicated/difficult to read, in
+> particular the index stuff at the end, but I also failed in finding a
+> "better" solution, just a different one ;)
 
-sun4i at least does it:
-https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/sun4i/sun4i_=
-tv.c#L292
+I think I like yours better still :)
 
-I'm not aware of any other driver relying on named modes though.
+Can I bring it into my series, with your authorship and SoB?
 
-> Apart from that:
->=20
-> Reviewed-by: Noralf Tr=F8nnes <noralf@tronnes.org>
-
-Thanks!
 Maxime
 
---y3igasrhfxn453up
+--gnrypjdevshxh5ih
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCY2jXmgAKCRDj7w1vZxhR
-xbFeAP9qPjF1vwW8JaPeSCTHChhS2FnOIGUmcNPxtQgaD+eqWgD+PuirHPq1OF1i
-g6XJzb8JOxNS7dRxptuSpZXP2iFvPA4=
-=1+Ik
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCY2jY9wAKCRDj7w1vZxhR
+xQwNAP4m8wqBDbHwkCGeLkJY5dnG5iYXcSUpkoA/Zr4bM1OOTgD/fQIl3YCLdhl3
+wENLHmgU8SYR+x7PQD/yXPYL48w/Cgk=
+=0OBV
 -----END PGP SIGNATURE-----
 
---y3igasrhfxn453up--
+--gnrypjdevshxh5ih--
