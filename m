@@ -2,17 +2,17 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49F7C61FBDD
-	for <lists+nouveau@lfdr.de>; Mon,  7 Nov 2022 18:50:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BF2361FCA8
+	for <lists+nouveau@lfdr.de>; Mon,  7 Nov 2022 19:04:02 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BF4A310E857;
-	Mon,  7 Nov 2022 17:50:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 37F2510E50E;
+	Mon,  7 Nov 2022 18:03:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp.domeneshop.no (smtp.domeneshop.no
  [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7474D10E51E;
- Mon,  7 Nov 2022 17:50:11 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0BFF010E1C8;
+ Mon,  7 Nov 2022 18:03:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  ; s=ds202112;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
@@ -20,18 +20,18 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fi5PW2vDddvrBe6sz0jdt+AvkH5pl+li/RlL0LlK+ag=; b=Dn6x3v5Phsq10rSGRGpGtKsfMo
- /IxjpO9DiAWvWeXH+t2Km3OVvBXsBXqztlIde5c+p/J02KS6HMnaXnuCJiA0iDoL6OPBGZneBYZtF
- dSU/71Kw9IElmYJkLisgYrMCCerxmsFJ+nh6IkFTnx+TzmlqSqyj8mh+XXcTmeniZLP7hBKJINceq
- iVEmUrMr5csy1qxFhMlNwU/cIsvL92fAg3iaizmR3o3zd0ts/EJn1MqINkizliL+N+mYUGnkHIuRA
- cjar2EHQTeKlgnukcSshSh+OUVb2DVAUzVM4Mq7HA+ax6zi0F0ktrxtKzSsvvKrY88XkkLUq6iQd2
- bqJr/LXw==;
-Received: from [2a01:799:95a:cb00:cca0:57ac:c55d:a485] (port=63636)
+ bh=3Bf+KcHaW9GVk8+e0qwYG7pDVa7qGqnwKbjfeHC+JJg=; b=J/2pe6qYb5J7p2zVDvNn2y2J2z
+ nOUYFLV3uh28gG/8jdajK+ENWZXy4cnCy5f8yIZZisUtv8a6oX6QYsy6dTBPVZsawqeDDyWnLC5LZ
+ Lj71hcQnXQcJRwdxn2RTEdxJB7vHLhBzj1s97uAqUGTKNH5ch8GbJlqF7VaVAu5245EbIPRx6HQk2
+ KKaLpA1YjAAaRnHSFn3F0iCK/29HrLGAYo17Yxytus4J5ulx5hRzLSEj1SVWyRe7kMnmhOqWFlLQf
+ A/UNuLiiTnbVG+/ePVNcCCZ3GhyHPJ36YAT63jSmGknUWy3cwAIIq0WuJ2NESE+CSNhVwzSAfbtqp
+ Un8MhtCA==;
+Received: from [2a01:799:95a:cb00:cca0:57ac:c55d:a485] (port=63947)
  by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1os6G6-0003ME-Ct; Mon, 07 Nov 2022 18:50:06 +0100
-Message-ID: <9e9a8a48-89f2-35d4-b26f-afa7cc44f2f6@tronnes.org>
-Date: Mon, 7 Nov 2022 18:49:57 +0100
+ id 1os6TP-0001Dd-AZ; Mon, 07 Nov 2022 19:03:51 +0100
+Message-ID: <262f0953-1e05-e68e-3e96-2ac2132a1e57@tronnes.org>
+Date: Mon, 7 Nov 2022 19:03:47 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
@@ -48,13 +48,12 @@ To: Maxime Ripard <maxime@cerno.tech>,
  Lyude Paul <lyude@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>,
  David Airlie <airlied@linux.ie>
 References: <20220728-rpi-analog-tv-properties-v7-0-7072a478c6b3@cerno.tech>
- <20220728-rpi-analog-tv-properties-v7-14-7072a478c6b3@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v7-15-7072a478c6b3@cerno.tech>
 From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v7-14-7072a478c6b3@cerno.tech>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v7-15-7072a478c6b3@cerno.tech>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v7 14/23] drm/modes: Properly generate a
- drm_display_mode from a named mode
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH v7 15/23] drm/modes: Introduce more named modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,153 +79,62 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
 Den 07.11.2022 15.16, skrev Maxime Ripard:
-> The framework will get the drm_display_mode from the drm_cmdline_mode it
-> got by parsing the video command line argument by calling
-> drm_connector_pick_cmdline_mode().
-> 
-> The heavy lifting will then be done by the drm_mode_create_from_cmdline_mode()
-> function.
-> 
-> In the case of the named modes though, there's no real code to make that
-> translation and we rely on the drivers to guess which actual display mode
-> we meant.
-> 
-> Let's modify drm_mode_create_from_cmdline_mode() to properly generate the
-> drm_display_mode we mean when passing a named mode.
+> Now that we can easily extend the named modes list, let's add a few more
+> analog TV modes that were used in the wild, and some unit tests to make
+> sure it works as intended.
 > 
 > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 > 
 > ---
-> Changes in v7:
-> - Use tv_mode_specified in drm_mode_parse_command_line_for_connector
-> 
 > Changes in v6:
-> - Fix get_modes to return 0 instead of an error code
-> - Rename the tests to follow the DRM test naming convention
+> - Renamed the tests to follow DRM test naming convention
 > 
 > Changes in v5:
 > - Switched to KUNIT_ASSERT_NOT_NULL
 > ---
->  drivers/gpu/drm/drm_modes.c                     | 34 ++++++++++-
->  drivers/gpu/drm/tests/drm_client_modeset_test.c | 77 ++++++++++++++++++++++++-
->  2 files changed, 109 insertions(+), 2 deletions(-)
+>  drivers/gpu/drm/drm_modes.c                     |  2 +
+>  drivers/gpu/drm/tests/drm_client_modeset_test.c | 54 +++++++++++++++++++++++++
+>  2 files changed, 56 insertions(+)
 > 
 > diff --git a/drivers/gpu/drm/drm_modes.c b/drivers/gpu/drm/drm_modes.c
-> index dc037f7ceb37..49441cabdd9d 100644
+> index 49441cabdd9d..17c5b6108103 100644
 > --- a/drivers/gpu/drm/drm_modes.c
 > +++ b/drivers/gpu/drm/drm_modes.c
-> @@ -2497,6 +2497,36 @@ bool drm_mode_parse_command_line_for_connector(const char *mode_option,
->  }
->  EXPORT_SYMBOL(drm_mode_parse_command_line_for_connector);
+> @@ -2272,7 +2272,9 @@ struct drm_named_mode {
 >  
-> +static struct drm_display_mode *drm_named_mode(struct drm_device *dev,
-> +					       struct drm_cmdline_mode *cmd)
-> +{
-> +	struct drm_display_mode *mode;
-> +	unsigned int i;
-> +
-> +	for (i = 0; i < ARRAY_SIZE(drm_named_modes); i++) {
-> +		const struct drm_named_mode *named_mode = &drm_named_modes[i];
-> +
-> +		if (strcmp(cmd->name, named_mode->name))
-> +			continue;
-> +
-> +		if (!cmd->tv_mode_specified)
-> +			continue;
+>  static const struct drm_named_mode drm_named_modes[] = {
+>  	NAMED_MODE("NTSC", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_NTSC),
+> +	NAMED_MODE("NTSC-J", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_NTSC_J),
+>  	NAMED_MODE("PAL", 13500, 720, 576, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_PAL),
+> +	NAMED_MODE("PAL-M", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_PAL_M),
+>  };
 
-Only a named mode will set cmd->name, so is this check necessary?
+I'm now having second thoughts about the tv_mode commandline option. Can
+we just add all the variants to this table and drop the tv_mode option?
+IMO this will be more user friendly and less confusing.
 
-> +
-> +		mode = drm_analog_tv_mode(dev,
-> +					  named_mode->tv_mode,
-> +					  named_mode->pixel_clock_khz * 1000,
-> +					  named_mode->xres,
-> +					  named_mode->yres,
-> +					  named_mode->flags & DRM_MODE_FLAG_INTERLACE);
-> +		if (!mode)
-> +			return NULL;
-> +
-> +		return mode;
+The named modes needs to be documented in modedb.rst.
 
-You can just return the result from drm_analog_tv_mode() directly.
+Noralf.
 
-With those considered:
-
-Reviewed-by: Noralf Trønnes <noralf@tronnes.org>
-
-> +	}
-> +
-> +	return NULL;
-> +}
-> +
->  /**
->   * drm_mode_create_from_cmdline_mode - convert a command line modeline into a DRM display mode
->   * @dev: DRM device to create the new mode for
-> @@ -2514,7 +2544,9 @@ drm_mode_create_from_cmdline_mode(struct drm_device *dev,
->  	if (cmd->xres == 0 || cmd->yres == 0)
->  		return NULL;
 >  
-> -	if (cmd->cvt)
-> +	if (strlen(cmd->name))
-> +		mode = drm_named_mode(dev, cmd);
-> +	else if (cmd->cvt)
->  		mode = drm_cvt_mode(dev,
->  				    cmd->xres, cmd->yres,
->  				    cmd->refresh_specified ? cmd->refresh : 60,
+>  static int drm_mode_parse_cmdline_named_mode(const char *name,
 > diff --git a/drivers/gpu/drm/tests/drm_client_modeset_test.c b/drivers/gpu/drm/tests/drm_client_modeset_test.c
-> index 3aa1acfe75df..fdfe9e20702e 100644
+> index fdfe9e20702e..b3820d25beca 100644
 > --- a/drivers/gpu/drm/tests/drm_client_modeset_test.c
 > +++ b/drivers/gpu/drm/tests/drm_client_modeset_test.c
-> @@ -21,7 +21,26 @@ struct drm_client_modeset_test_priv {
->  
->  static int drm_client_modeset_connector_get_modes(struct drm_connector *connector)
->  {
-> -	return drm_add_modes_noedid(connector, 1920, 1200);
-> +	struct drm_display_mode *mode;
-> +	int count;
-> +
-> +	count = drm_add_modes_noedid(connector, 1920, 1200);
-> +
-> +	mode = drm_mode_analog_ntsc_480i(connector->dev);
-> +	if (!mode)
-> +		return count;
-> +
-> +	drm_mode_probed_add(connector, mode);
-> +	count += 1;
-> +
-> +	mode = drm_mode_analog_pal_576i(connector->dev);
-> +	if (!mode)
-> +		return count;
-> +
-> +	drm_mode_probed_add(connector, mode);
-> +	count += 1;
-> +
-> +	return count;
+> @@ -133,6 +133,32 @@ static void drm_test_pick_cmdline_named_ntsc(struct kunit *test)
+>  	KUNIT_EXPECT_TRUE(test, drm_mode_equal(drm_mode_analog_ntsc_480i(drm), mode));
 >  }
 >  
->  static const struct drm_connector_helper_funcs drm_client_modeset_connector_helper_funcs = {
-> @@ -52,6 +71,9 @@ static int drm_client_modeset_test_init(struct kunit *test)
->  
->  	drm_connector_helper_add(&priv->connector, &drm_client_modeset_connector_helper_funcs);
->  
-> +	priv->connector.interlace_allowed = true;
-> +	priv->connector.doublescan_allowed = true;
-> +
->  	return 0;
->  
->  }
-> @@ -85,9 +107,62 @@ static void drm_test_pick_cmdline_res_1920_1080_60(struct kunit *test)
->  	KUNIT_EXPECT_TRUE(test, drm_mode_equal(expected_mode, mode));
->  }
->  
-> +static void drm_test_pick_cmdline_named_ntsc(struct kunit *test)
+> +static void drm_test_pick_cmdline_named_ntsc_j(struct kunit *test)
 > +{
 > +	struct drm_client_modeset_test_priv *priv = test->priv;
 > +	struct drm_device *drm = priv->drm;
 > +	struct drm_connector *connector = &priv->connector;
 > +	struct drm_cmdline_mode *cmdline_mode = &connector->cmdline_mode;
 > +	struct drm_display_mode *mode;
-> +	const char *cmdline = "NTSC";
+> +	const char *cmdline = "NTSC-J";
 > +	int ret;
 > +
 > +	KUNIT_ASSERT_TRUE(test,
@@ -245,14 +153,21 @@ Reviewed-by: Noralf Trønnes <noralf@tronnes.org>
 > +	KUNIT_EXPECT_TRUE(test, drm_mode_equal(drm_mode_analog_ntsc_480i(drm), mode));
 > +}
 > +
-> +static void drm_test_pick_cmdline_named_pal(struct kunit *test)
+>  static void drm_test_pick_cmdline_named_pal(struct kunit *test)
+>  {
+>  	struct drm_client_modeset_test_priv *priv = test->priv;
+> @@ -159,10 +185,38 @@ static void drm_test_pick_cmdline_named_pal(struct kunit *test)
+>  	KUNIT_EXPECT_TRUE(test, drm_mode_equal(drm_mode_analog_pal_576i(drm), mode));
+>  }
+>  
+> +static void drm_test_pick_cmdline_named_pal_m(struct kunit *test)
 > +{
 > +	struct drm_client_modeset_test_priv *priv = test->priv;
 > +	struct drm_device *drm = priv->drm;
 > +	struct drm_connector *connector = &priv->connector;
 > +	struct drm_cmdline_mode *cmdline_mode = &connector->cmdline_mode;
 > +	struct drm_display_mode *mode;
-> +	const char *cmdline = "PAL";
+> +	const char *cmdline = "PAL-M";
 > +	int ret;
 > +
 > +	KUNIT_ASSERT_TRUE(test,
@@ -268,13 +183,15 @@ Reviewed-by: Noralf Trønnes <noralf@tronnes.org>
 > +	mode = drm_connector_pick_cmdline_mode(connector);
 > +	KUNIT_ASSERT_NOT_NULL(test, mode);
 > +
-> +	KUNIT_EXPECT_TRUE(test, drm_mode_equal(drm_mode_analog_pal_576i(drm), mode));
+> +	KUNIT_EXPECT_TRUE(test, drm_mode_equal(drm_mode_analog_ntsc_480i(drm), mode));
 > +}
->  
+> +
 >  static struct kunit_case drm_test_pick_cmdline_tests[] = {
 >  	KUNIT_CASE(drm_test_pick_cmdline_res_1920_1080_60),
-> +	KUNIT_CASE(drm_test_pick_cmdline_named_ntsc),
-> +	KUNIT_CASE(drm_test_pick_cmdline_named_pal),
+>  	KUNIT_CASE(drm_test_pick_cmdline_named_ntsc),
+> +	KUNIT_CASE(drm_test_pick_cmdline_named_ntsc_j),
+>  	KUNIT_CASE(drm_test_pick_cmdline_named_pal),
+> +	KUNIT_CASE(drm_test_pick_cmdline_named_pal_m),
 >  	{}
 >  };
 >  
