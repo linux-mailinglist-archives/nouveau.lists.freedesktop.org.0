@@ -2,59 +2,84 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E87076212C1
-	for <lists+nouveau@lfdr.de>; Tue,  8 Nov 2022 14:42:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6CE8621E8A
+	for <lists+nouveau@lfdr.de>; Tue,  8 Nov 2022 22:27:38 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 51FCA10E29A;
-	Tue,  8 Nov 2022 13:42:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AFACE10E2D2;
+	Tue,  8 Nov 2022 21:27:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-f43.google.com (mail-qv1-f43.google.com
- [209.85.219.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C84D810E289;
- Tue,  8 Nov 2022 13:42:15 +0000 (UTC)
-Received: by mail-qv1-f43.google.com with SMTP id x13so10226225qvn.6;
- Tue, 08 Nov 2022 05:42:15 -0800 (PST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0F10A10E2B8;
+ Tue,  8 Nov 2022 21:27:21 +0000 (UTC)
+Received: by mail-lf1-x132.google.com with SMTP id f37so22966378lfv.8;
+ Tue, 08 Nov 2022 13:27:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:in-reply-to:references:cc:to
+ :content-language:subject:reply-to:user-agent:mime-version:date
+ :message-id:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nNGGMyCOLpmxcwimAd7d1JNDC8irulEDPwNmVkkpOGQ=;
+ b=alX57a0KugSynuS+NdT7MG6vVfPLxJzuDOo8Ufz4tmYpEgZ1rfWCE8waSQWkiKk6oX
+ jrUC9MI8qA1Zg3z9KeAXKZtyLGdhuBst7UVhEFmqEh6kQEBfrYfoAPOy/AL45vDpOMpE
+ RNASkkvH08H+a1LAyz3uk9VuAS6j/WTDKbTHGVfUVo9GGM2Lm3LExqHo6hOeSrumikH1
+ AEt6K1r+oQBgFG+2KtGmb2tHTKz6+ieMIoJUlt7d7aLU6HEh2g7lI3HzHBt0pwPQK393
+ U+yRXD3m72+JE8SrVAQECe4ck979GKs9c4kfyDpiUrLZd6DMAeosTedx31YrUadkknUa
+ M0kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rbRh/ro3AF7kveHByL39OkW+4w9BfWleF28OTQj/Mw0=;
- b=Tx+KySNjKms6ean/xYq1GLjXm6os+bGh9F/xODWCUtIoTGP51KFs7xHn8mvLCpAuN6
- 0cko92PsmDXiJN3OmammhvvWpGf+eOfZtiqR7ll6IHBG5qPipAJgpTJQGGdZ5Vhn6Uah
- zuccGqpBsNOhPcTiZrH1i1MDL1Ate0ThbgI+v7KDQ5Rdyr1wTonlejz5WqIxB5M2Ml5k
- Ole0weEPHR5Tbb8o3VcUlJJkXzVhaBd9wTTG9J7lZiTg0j5IrV7BcWT2PePT7kYUS7oV
- EjCFlgSrayND4Tur7l2A56V8hYnsrYTOu/RQ700q9rkjv4qH8e7/IEPHuQjJo8FaEaxk
- kKRw==
-X-Gm-Message-State: ACrzQf2SSJI8o+6qZdPjolT4kTKUK55rHZRfjqJSgNvlKEsGQso98UTt
- 1Jg7p4e4FYFr4i7hxADxuBV3YB69XcVaoBd4
-X-Google-Smtp-Source: AMsMyM6ZDICZEBb6J5nedchCl3BjtoF8fZxtTqFAV/gLLnCzdQI0Q2SpE5CpZWMSZF9mHGzArkFJwQ==
-X-Received: by 2002:a05:6214:2601:b0:4bb:f5ef:998a with SMTP id
- gu1-20020a056214260100b004bbf5ef998amr43004367qvb.69.1667914934629; 
- Tue, 08 Nov 2022 05:42:14 -0800 (PST)
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com.
- [209.85.128.182]) by smtp.gmail.com with ESMTPSA id
- w27-20020a05620a0e9b00b006ee949b8051sm9040891qkm.51.2022.11.08.05.42.12
+ h=content-transfer-encoding:in-reply-to:references:cc:to
+ :content-language:subject:reply-to:user-agent:mime-version:date
+ :message-id:from:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nNGGMyCOLpmxcwimAd7d1JNDC8irulEDPwNmVkkpOGQ=;
+ b=xetlhqJU7pwUVvK/L7Y3dOcUSyav7ERos8eJSneTPL5K7K9EI5T4XzfSfYluD64Dhh
+ JMRT/Lkpwu8b5V+o6i5TtUl/vSYUVMj6neOkiRAaTC3I2gQluO5rMBA5AlY5P6ogvIf1
+ bvj1INLPWeBJyQZ/h0+b6c2A8crJuPF4Mx0uIn2ExGQJ6YibEKsZi1BMcqNpNXa01O4c
+ Co2f68KbmzrrX5ghn2CZ8kQ3GfvZL0ijCHvPkyjfUPMVP023/Ku5k6KMZ1YU/FFAvr3n
+ nzD6JZxIu8Tc8hNE6I5lCxJZ+/8Q31vn1oMY1XYNOQbqmxtdmMRBE/UpttaGAOZsUmuR
+ 0GFw==
+X-Gm-Message-State: ACrzQf10vjbX/giSlCbhgl5iAojxTLi+iHs6Vgg0LG1S5RSyKmxbP96T
+ EU6Oip9wVB1UwUIDbVYC9X4=
+X-Google-Smtp-Source: AMsMyM72gBxTU06I+Kv2ParcX2IpJ7JL9w+B/WRU3aweEN085ZxOUqTGeN3liwt9VlTcfIO7IOL1/g==
+X-Received: by 2002:a05:6512:33d2:b0:4a2:a44b:a461 with SMTP id
+ d18-20020a05651233d200b004a2a44ba461mr22661082lfg.551.1667942840154; 
+ Tue, 08 Nov 2022 13:27:20 -0800 (PST)
+Received: from ?IPV6:2a02:a31a:a240:1700:c55e:6e7d:cf12:d8b7?
+ ([2a02:a31a:a240:1700:c55e:6e7d:cf12:d8b7])
+ by smtp.googlemail.com with ESMTPSA id
+ t9-20020a05651c204900b0026fc8855c20sm1877755ljo.19.2022.11.08.13.27.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Nov 2022 05:42:13 -0800 (PST)
-Received: by mail-yw1-f182.google.com with SMTP id
- 00721157ae682-369426664f9so133598917b3.12; 
- Tue, 08 Nov 2022 05:42:12 -0800 (PST)
-X-Received: by 2002:a0d:e301:0:b0:374:a8ba:99b0 with SMTP id
- m1-20020a0de301000000b00374a8ba99b0mr7181781ywe.358.1667914932477; Tue, 08
- Nov 2022 05:42:12 -0800 (PST)
+ Tue, 08 Nov 2022 13:27:19 -0800 (PST)
+From: Mateusz Kwiatkowski <kfyatek@gmail.com>
+X-Google-Original-From: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
+Message-ID: <b6b7c689-a50f-cd63-7e48-8739b0d91e61@gmail.com>
+Date: Tue, 8 Nov 2022 22:27:17 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.4.1
+Content-Language: pl
+To: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Maxime Ripard <maxime@cerno.tech>, Jani Nikula
+ <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Emma Anholt <emma@anholt.net>, Karol Herbst <kherbst@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Chen-Yu Tsai <wens@csie.org>,
+ Lyude Paul <lyude@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@linux.ie>
 References: <20220728-rpi-analog-tv-properties-v7-0-7072a478c6b3@cerno.tech>
- <CAEFVmOKCTc_ZrFyCxiSwCmhtjJj_fzr6n99cWtb9aECFzzYVXg@mail.gmail.com>
-In-Reply-To: <CAEFVmOKCTc_ZrFyCxiSwCmhtjJj_fzr6n99cWtb9aECFzzYVXg@mail.gmail.com>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Tue, 8 Nov 2022 14:42:00 +0100
-X-Gmail-Original-Message-ID: <CAMuHMdXDK6-wDjpx27KJd4_gwoXQWcP6qctN-zvG6OrUgYtGAA@mail.gmail.com>
-Message-ID: <CAMuHMdXDK6-wDjpx27KJd4_gwoXQWcP6qctN-zvG6OrUgYtGAA@mail.gmail.com>
-To: Lukas Satin <luke.satin@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH v7 00/23] drm: Analog TV Improvements
+ <20220728-rpi-analog-tv-properties-v7-15-7072a478c6b3@cerno.tech>
+ <262f0953-1e05-e68e-3e96-2ac2132a1e57@tronnes.org>
+ <ba532387-6329-c57a-1fa2-627b2cf40281@tronnes.org>
+In-Reply-To: <ba532387-6329-c57a-1fa2-627b2cf40281@tronnes.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v7 15/23] drm/modes: Introduce more named modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,47 +91,73 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Ben Skeggs <bskeggs@redhat.com>, linux-sunxi@lists.linux.dev,
- Daniel Vetter <daniel@ffwll.ch>, intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- =?UTF-8?Q?Noralf_Tr=C3=B8nnes?= <noralf@tronnes.org>,
- Maxime Ripard <maxime@cerno.tech>
+Reply-To: kfyatek+publicgit@gmail.com
+Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
+ Hans de Goede <hdegoede@redhat.com>, Geert Uytterhoeven <geert@linux-m68k.org>,
+ Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Lukas,
+Hi Noralf,
 
-On Tue, Nov 8, 2022 at 2:20 PM Lukas Satin <luke.satin@gmail.com> wrote:
-> One can switch from NTSC to PAL now using (on vc4)
+W dniu 8.11.2022 o 10:38, Noralf Trønnes pisze:
 >
-> modetest -M vc4  -s 53:720x480i -w 53:'TV mode':1 # NTSC
-> modetest -M vc4  -s 53:720x576i -w 53:'TV mode':4 # PAL
+> Den 07.11.2022 19.03, skrev Noralf Trønnes:
+>>
+>> Den 07.11.2022 15.16, skrev Maxime Ripard:
+>>> Now that we can easily extend the named modes list, let's add a few more
+>>> analog TV modes that were used in the wild, and some unit tests to make
+>>> sure it works as intended.
+>>>
+>>> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+>>>
+>>> ---
+>>> Changes in v6:
+>>> - Renamed the tests to follow DRM test naming convention
+>>>
+>>> Changes in v5:
+>>> - Switched to KUNIT_ASSERT_NOT_NULL
+>>> ---
+>>>  drivers/gpu/drm/drm_modes.c                     |  2 +
+>>>  drivers/gpu/drm/tests/drm_client_modeset_test.c | 54 +++++++++++++++++++++++++
+>>>  2 files changed, 56 insertions(+)
+>>>
+>>> diff --git a/drivers/gpu/drm/drm_modes.c b/drivers/gpu/drm/drm_modes.c
+>>> index 49441cabdd9d..17c5b6108103 100644
+>>> --- a/drivers/gpu/drm/drm_modes.c
+>>> +++ b/drivers/gpu/drm/drm_modes.c
+>>> @@ -2272,7 +2272,9 @@ struct drm_named_mode {
+>>>  
+>>>  static const struct drm_named_mode drm_named_modes[] = {
+>>>  	NAMED_MODE("NTSC", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_NTSC),
+>>> +	NAMED_MODE("NTSC-J", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_NTSC_J),
+>>>  	NAMED_MODE("PAL", 13500, 720, 576, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_PAL),
+>>> +	NAMED_MODE("PAL-M", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_PAL_M),
+>>>  };
+>> I'm now having second thoughts about the tv_mode commandline option. Can
+>> we just add all the variants to this table and drop the tv_mode option?
+>> IMO this will be more user friendly and less confusing.
+>>
+> One downside of this is that it's not possible to force connector status
+> when using named modes, but I think it would be better to have a force
+> option than a tv_mode option. A lot of userspace treats unknown status
+> as disconnected.
 >
-> NTSC should be 640x480i, not 720. It will probably work on most TV's, but NTSC by the spec is 640x480i.
+> Anyone know if it's possible to set the connector status sysfs file
+> using a udev rule?
+>
+> Noralf.
 
-The above are actually the digital ("DVD Video") variants, which have 720
-horizontal pixels (incl. overscan).
-The analog variants do not have a fixed horizontal resolution, except
-for bandwidth limitations.
+I think that leaving named modes only would be a bit limiting. There are use
+cases for custom modes, e.g. we might want progressive 240p "NTSC" (like 80s/90s
+home computers and video game consoles) or the modes with non-13.5MHz pixel
+clock that Geert requested with Amiga in mind.
 
-Gr{oetje,eeting}s,
+I'm not sure if the current cmdline-to-drm_mode conversion is flexible enough
+to meaningfully facilitate those, but we're at least getting the syntax down.
 
-                        Geert
+Best regards,
+Mateusz Kwiatkowski
 
---
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
-
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
