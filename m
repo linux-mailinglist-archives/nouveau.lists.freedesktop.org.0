@@ -2,17 +2,17 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C93161FCF9
-	for <lists+nouveau@lfdr.de>; Mon,  7 Nov 2022 19:11:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B5BD0620C6A
+	for <lists+nouveau@lfdr.de>; Tue,  8 Nov 2022 10:38:33 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4BA1310E8B3;
-	Mon,  7 Nov 2022 18:11:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3453F10E3B2;
+	Tue,  8 Nov 2022 09:38:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp.domeneshop.no (smtp.domeneshop.no
  [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 010F710E549;
- Mon,  7 Nov 2022 18:11:37 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 602C810E0E8;
+ Tue,  8 Nov 2022 09:38:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  ; s=ds202112;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
@@ -20,18 +20,18 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lL1tEZY5rfBShjfX6pL9OQv5DSS6YhPKdPmOr0dqeM0=; b=gfzZC605hL0pZnTv/R8X8B+fLM
- RdcVEVZ7GMsHWTrsYoi3BtBkZwY9B4Kkza9mrjlFGhfZxGBJxLLmqKaXfjxStznD1fNviFTP8nJDk
- tyNx/Bi+wJ9JEuakyocIKrBhNlzAHiuAFqRtxT9TtGOUG8LcMK23KNQytyBU0CiSVTl3BIymWe/Sm
- gt4rzZ9o8TI1tc1p7R/H2yJOKmZRfRO4uYXQevf0Pztms+3wZM3MutI3YAtWPbbzNNo6/pmhxm8Tj
- HwHPmFesDVSsWZi+F0zzjZ+wye1BXzaKeCnJ4huLOtDFZTIVl0I/qCOhfv0185YqcCOsrqDH1pjfX
- YXhTrfuQ==;
-Received: from [2a01:799:95a:cb00:cca0:57ac:c55d:a485] (port=64221)
+ bh=Gn2jtnurXeLoR+JBbYdWEKBeFwgIy7nQqvoCoWdGcMU=; b=Jm48u4quUIM9AnE2eAVOPXlszN
+ dHIUCxlanP3myizyV6x9HL+VzqOJBcIng+jIcCrV+ZPLX2GL3s239g7CE2I26KDmGGx0zkpumAvjA
+ EALkEKyh8Ho0vrR7//I1jF65jvIy8wwm/jayyESeeHlMso6Zu6yM2QoKn9j4hydIZxrtVraX1dJju
+ ItknqiWPduNMuNnrVezLIeZgNrbbgi5Djw/QrHpTXb6ozVvWRQxu6EbXp+RHmjSdNmEqARyimQjcf
+ DksOaOcw0fZ51OKSvj6zbrlcXCFUinsfBUGO2lO/rodVYogF86aGh3Q5y9/zFg8ENVbG/phX+5Kod
+ UAKOOx1A==;
+Received: from [2a01:799:95a:cb00:cca0:57ac:c55d:a485] (port=57639)
  by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1os6ar-0004ho-9w; Mon, 07 Nov 2022 19:11:33 +0100
-Message-ID: <a9c0380a-f538-1a19-fd27-983eea42b1b2@tronnes.org>
-Date: Mon, 7 Nov 2022 19:11:27 +0100
+ id 1osL3l-0008OX-8y; Tue, 08 Nov 2022 10:38:21 +0100
+Message-ID: <ba532387-6329-c57a-1fa2-627b2cf40281@tronnes.org>
+Date: Tue, 8 Nov 2022 10:38:12 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
@@ -48,13 +48,13 @@ To: Maxime Ripard <maxime@cerno.tech>,
  Lyude Paul <lyude@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>,
  David Airlie <airlied@linux.ie>
 References: <20220728-rpi-analog-tv-properties-v7-0-7072a478c6b3@cerno.tech>
- <20220728-rpi-analog-tv-properties-v7-16-7072a478c6b3@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v7-15-7072a478c6b3@cerno.tech>
+ <262f0953-1e05-e68e-3e96-2ac2132a1e57@tronnes.org>
 From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v7-16-7072a478c6b3@cerno.tech>
+In-Reply-To: <262f0953-1e05-e68e-3e96-2ac2132a1e57@tronnes.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v7 16/23] drm/probe-helper: Provide a TV
- get_modes helper
+Subject: Re: [Nouveau] [PATCH v7 15/23] drm/modes: Introduce more named modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,7 +69,9 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
  intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
- Hans de Goede <hdegoede@redhat.com>, Geert Uytterhoeven <geert@linux-m68k.org>,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
  Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
  Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
@@ -77,156 +79,51 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
 
-Den 07.11.2022 15.16, skrev Maxime Ripard:
-> From: Noralf Trønnes <noralf@tronnes.org>
+Den 07.11.2022 19.03, skrev Noralf Trønnes:
 > 
-> Most of the TV connectors will need a similar get_modes implementation
-> that will, depending on the drivers' capabilities, register the 480i and
-> 576i modes.
 > 
-> That implementation will also need to set the preferred flag and order
-> the modes based on the driver and users preferrence.
+> Den 07.11.2022 15.16, skrev Maxime Ripard:
+>> Now that we can easily extend the named modes list, let's add a few more
+>> analog TV modes that were used in the wild, and some unit tests to make
+>> sure it works as intended.
+>>
+>> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+>>
+>> ---
+>> Changes in v6:
+>> - Renamed the tests to follow DRM test naming convention
+>>
+>> Changes in v5:
+>> - Switched to KUNIT_ASSERT_NOT_NULL
+>> ---
+>>  drivers/gpu/drm/drm_modes.c                     |  2 +
+>>  drivers/gpu/drm/tests/drm_client_modeset_test.c | 54 +++++++++++++++++++++++++
+>>  2 files changed, 56 insertions(+)
+>>
+>> diff --git a/drivers/gpu/drm/drm_modes.c b/drivers/gpu/drm/drm_modes.c
+>> index 49441cabdd9d..17c5b6108103 100644
+>> --- a/drivers/gpu/drm/drm_modes.c
+>> +++ b/drivers/gpu/drm/drm_modes.c
+>> @@ -2272,7 +2272,9 @@ struct drm_named_mode {
+>>  
+>>  static const struct drm_named_mode drm_named_modes[] = {
+>>  	NAMED_MODE("NTSC", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_NTSC),
+>> +	NAMED_MODE("NTSC-J", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_NTSC_J),
+>>  	NAMED_MODE("PAL", 13500, 720, 576, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_PAL),
+>> +	NAMED_MODE("PAL-M", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_PAL_M),
+>>  };
 > 
-> This is especially important to guarantee that a userspace stack such as
-> Xorg can start and pick up the preferred mode while maintaining a
-> working output.
+> I'm now having second thoughts about the tv_mode commandline option. Can
+> we just add all the variants to this table and drop the tv_mode option?
+> IMO this will be more user friendly and less confusing.
 > 
-> Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
-> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> 
-> ---
-> Changes in v7:
-> - Used Noralf's implementation
-> 
-> Changes in v6:
-> - New patch
-> ---
->  drivers/gpu/drm/drm_probe_helper.c | 97 ++++++++++++++++++++++++++++++++++++++
->  include/drm/drm_probe_helper.h     |  1 +
->  2 files changed, 98 insertions(+)
-> 
-> diff --git a/drivers/gpu/drm/drm_probe_helper.c b/drivers/gpu/drm/drm_probe_helper.c
-> index 2fc21df709bc..edb2e4c4530a 100644
-> --- a/drivers/gpu/drm/drm_probe_helper.c
-> +++ b/drivers/gpu/drm/drm_probe_helper.c
-> @@ -1147,3 +1147,100 @@ int drm_connector_helper_get_modes(struct drm_connector *connector)
->  	return count;
->  }
->  EXPORT_SYMBOL(drm_connector_helper_get_modes);
-> +
-> +static bool tv_mode_supported(struct drm_connector *connector,
-> +			      enum drm_connector_tv_mode mode)
-> +{
-> +	struct drm_device *dev = connector->dev;
-> +	struct drm_property *property = dev->mode_config.tv_mode_property;
-> +
-> +	unsigned int i;
-> +
-> +	for (i = 0; i < property->num_values; i++)
-> +		if (property->values[i] == mode)
-> +			return true;
-> +
-> +	return false;
-> +}
 
-This function is not used in the new implementation.
+One downside of this is that it's not possible to force connector status
+when using named modes, but I think it would be better to have a force
+option than a tv_mode option. A lot of userspace treats unknown status
+as disconnected.
 
-I hope you have tested this patch since I didn't even compile test my
-implementation (probably should have said so...)
+Anyone know if it's possible to set the connector status sysfs file
+using a udev rule?
 
 Noralf.
-
-> +
-> +/**
-> + * drm_connector_helper_tv_get_modes - Fills the modes availables to a TV connector
-> + * @connector: The connector
-> + *
-> + * Fills the available modes for a TV connector based on the supported
-> + * TV modes, and the default mode expressed by the kernel command line.
-> + *
-> + * This can be used as the default TV connector helper .get_modes() hook
-> + * if the driver does not need any special processing.
-> + *
-> + * Returns:
-> + * The number of modes added to the connector.
-> + */
-> +int drm_connector_helper_tv_get_modes(struct drm_connector *connector)
-> +{
-> +	struct drm_device *dev = connector->dev;
-> +	struct drm_property *tv_mode_property =
-> +		dev->mode_config.tv_mode_property;
-> +	struct drm_cmdline_mode *cmdline = &connector->cmdline_mode;
-> +	unsigned int ntsc_modes = BIT(DRM_MODE_TV_MODE_NTSC) |
-> +		BIT(DRM_MODE_TV_MODE_NTSC_443) |
-> +		BIT(DRM_MODE_TV_MODE_NTSC_J) |
-> +		BIT(DRM_MODE_TV_MODE_PAL_M);
-> +	unsigned int pal_modes = BIT(DRM_MODE_TV_MODE_PAL) |
-> +		BIT(DRM_MODE_TV_MODE_PAL_N) |
-> +		BIT(DRM_MODE_TV_MODE_SECAM);
-> +	unsigned int tv_modes[2] = { UINT_MAX, UINT_MAX };
-> +	unsigned int i, supported_tv_modes = 0;
-> +
-> +	if (!tv_mode_property)
-> +		return 0;
-> +
-> +	for (i = 0; i < tv_mode_property->num_values; i++)
-> +		supported_tv_modes |= BIT(tv_mode_property->values[i]);
-> +
-> +	if ((supported_tv_modes & ntsc_modes) &&
-> +	    (supported_tv_modes & pal_modes)) {
-> +		uint64_t default_mode;
-> +
-> +		if (drm_object_property_get_default_value(&connector->base,
-> +							  tv_mode_property,
-> +							  &default_mode))
-> +			return 0;
-> +
-> +		if (cmdline->tv_mode_specified)
-> +			default_mode = cmdline->tv_mode;
-> +
-> +		if (BIT(default_mode) & ntsc_modes) {
-> +			tv_modes[0] = DRM_MODE_TV_MODE_NTSC;
-> +			tv_modes[1] = DRM_MODE_TV_MODE_PAL;
-> +		} else {
-> +			tv_modes[0] = DRM_MODE_TV_MODE_PAL;
-> +			tv_modes[1] = DRM_MODE_TV_MODE_NTSC;
-> +		}
-> +	} else if (supported_tv_modes & ntsc_modes) {
-> +		tv_modes[0] = DRM_MODE_TV_MODE_NTSC;
-> +	} else if (supported_tv_modes & pal_modes) {
-> +		tv_modes[0] = DRM_MODE_TV_MODE_PAL;
-> +	} else {
-> +		return 0;
-> +	}
-> +
-> +	for (i = 0; i < ARRAY_SIZE(tv_modes); i++) {
-> +		struct drm_display_mode *mode;
-> +
-> +		if (tv_modes[i] == DRM_MODE_TV_MODE_NTSC)
-> +			mode = drm_mode_analog_ntsc_480i(dev);
-> +		else if (tv_modes[i] == DRM_MODE_TV_MODE_PAL)
-> +			mode = drm_mode_analog_pal_576i(dev);
-> +		else
-> +			break;
-> +		if (!mode)
-> +			return i;
-> +		if (!i)
-> +			mode->type |= DRM_MODE_TYPE_PREFERRED;
-> +		drm_mode_probed_add(connector, mode);
-> +	}
-> +
-> +	return i;
-> +}
-> +EXPORT_SYMBOL(drm_connector_helper_tv_get_modes);
-> diff --git a/include/drm/drm_probe_helper.h b/include/drm/drm_probe_helper.h
-> index 5880daa14624..4977e0ab72db 100644
-> --- a/include/drm/drm_probe_helper.h
-> +++ b/include/drm/drm_probe_helper.h
-> @@ -35,5 +35,6 @@ int drm_connector_helper_get_modes_from_ddc(struct drm_connector *connector);
->  int drm_connector_helper_get_modes_fixed(struct drm_connector *connector,
->  					 const struct drm_display_mode *fixed_mode);
->  int drm_connector_helper_get_modes(struct drm_connector *connector);
-> +int drm_connector_helper_tv_get_modes(struct drm_connector *connector);
->  
->  #endif
-> 
