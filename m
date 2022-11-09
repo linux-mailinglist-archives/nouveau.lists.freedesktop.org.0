@@ -2,79 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E20A622A2B
-	for <lists+nouveau@lfdr.de>; Wed,  9 Nov 2022 12:18:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70F5C622D44
+	for <lists+nouveau@lfdr.de>; Wed,  9 Nov 2022 15:13:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9ED9E10E593;
-	Wed,  9 Nov 2022 11:18:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C893910E5DE;
+	Wed,  9 Nov 2022 14:13:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com
- [66.111.4.230])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E8A5410E593;
- Wed,  9 Nov 2022 11:18:47 +0000 (UTC)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailnew.nyi.internal (Postfix) with ESMTP id 49C755803FC;
- Wed,  9 Nov 2022 06:18:47 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute1.internal (MEProxy); Wed, 09 Nov 2022 06:18:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :cc:content-transfer-encoding:content-type:date:date:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to; s=fm2; t=1667992727; x=
- 1667999927; bh=cpSERR+FK9P7ebGFjATnLVrDN6DOeEdblTQYZr4G17o=; b=T
- Fl+QG10PPJjyqbLv7utqEfzNtwLor8oEF2yTMFmRZHKm4urXSwwwtVVoJls3ijLN
- TZGwJSryG3lX2kfJo1LkfWBvNtXl25oDLriO6JyPMx/Zsocv8wuDzRVJB+jqy07g
- QUOSBrMSfrge6LynWHCWE1/lV1yjZbK4yTuD1oMGOnBBq+3FWpOwfmhA2BvIWQpG
- RAos1g98wq13r4iAbQU5ThqHpZt4x8tDRQXVhs20koBVF6zKRbK3XruwKa6T445f
- UPJdRxk9PEJ1mjmw8VS4TxBh1ILLkI+NXFpGCoD5j1H5KRDBJ3PCaJ/0yprraXIE
- ilDIlX626Xe9eToZoG2gA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1667992727; x=
- 1667999927; bh=cpSERR+FK9P7ebGFjATnLVrDN6DOeEdblTQYZr4G17o=; b=d
- uMtVZ+5DS4SQSD5wEMQmNSkiNMJP4Co4dFNFStkseeS8p6I8UchUdcqGmSsvgGxC
- 4RZ6bcMdPuRLTA0BWbDhBAIt51NSpFXgMJ0eanp/yx4/cXLpRy45fJbbaEZ3G/4M
- iyqTG3rDfQMqN7xTZBwZggU2VIS0IBURZBB1lbrHL5jFf6ZZEYfn3gt2dVU3Yeol
- lcGQZL/uLfEmt35zmb9Tderps113BIXOMqQVwSxyL3x8oBdo8StWUaW3xV1L2m4n
- hBePcSN+Xldp9A/ERXwotiMGuXGFHEzOg6uM3w/4xD0dZGkID2FivMHmtWBOPdAk
- Rn/JJK1MJS1fA5u29rNGQ==
-X-ME-Sender: <xms:loxrY9oZHofVYB-XITEGN540BXn7pdvAyb5HkRRVKuV3-_D4Xzj-Hw>
- <xme:loxrY_r5-Lu6Z4t1A-I9XxNLKGKm-cT-eCy5G1dpRG_dPbAjGCTszNZDtepV6wR2y
- SY6pnM7gNlJcvOyxd0>
-X-ME-Received: <xmr:loxrY6Njce8GL4jAYU64mlkMvvlyt7WLUOgcDNj2a1d3upVMYv2KDd3GcN-h64BD9s_pgj3yUaqd_isIGMG4RtWhA7NNcsKwiYBA-tvWILfBmg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrfedvgddvhecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpeffhffvvefukfhfgggtugfgjgesthhqredttddtudenucfhrhhomhepofgrgihi
- mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeelleefieelleetteefvdeikeeffeffvefhtdevgfehveduveehjedvvdei
- ledtieenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
- hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:loxrY45K80tENQh_C6tjaEJy5Ie2cIxYtI6F2TIPDgsBNFBXs67_Bg>
- <xmx:loxrY84Wvga5rc9l7qft3Ey8wYUNXaoQBGxcLU3HE_MljYGRvmVPEw>
- <xmx:loxrYwhmO9Kg4ZdVH8zb01YUd34dgerunTXO7GxTtjsiArzFIAMChQ>
- <xmx:l4xrY7bZZgCF33vaGgYE9or8bPnfheqAYCo2-vxIFb7wkj-JYmjgsg>
-Feedback-ID: i8771445c:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 9 Nov 2022 06:18:45 -0500 (EST)
-Date: Wed, 9 Nov 2022 12:18:43 +0100
-From: Maxime Ripard <maxime@cerno.tech>
-To: kfyatek+publicgit@gmail.com
-Message-ID: <20221109111843.jkufdneexakofa4p@houat>
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7B27F10E5DA;
+ Wed,  9 Nov 2022 14:13:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=uieGFSRlWfEudDPWzmLqa4FntHsQ1l9cOOh88HONQ+I=; b=XSNoEIfzs5COdh7u2/RQYNh5SC
+ gYIomJ7/I61w0V5mrGKK7L2CrQ3Ev26u7S8NOpeMVOdXI4B17U5eXuo3CAodWNX6nTbJfCagJMvv4
+ Dq2yjLybIPLqy87sNXPPFnYuQu8vcZ8qYweBfe9Pawv0uAn8z1JhMK5HcEMSSKg5daPD3qv/t1kED
+ 48XyzrYBUTsNO5ABRfYUUeVbl9Wlr0tkQnn4UTGwve/OR/aOWmbHcqVaGPA/Kyk67Z0Uk2A53X4pG
+ 8Y8elO/1Byq0lJ5AL9fKkmpRHFYXXlG0QzsbhrrtylC3XWbrSJ7XkQ8ii+pw9jwXdKsNb4MSBVFK7
+ mC7xLDFg==;
+Received: from [2a01:799:95a:cb00:81e6:f8f5:7f80:f3bd] (port=60889)
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1oslm9-0004IU-Hy; Wed, 09 Nov 2022 15:09:57 +0100
+Message-ID: <d44f5edb-52d4-851a-9746-5c4d49d603f4@tronnes.org>
+Date: Wed, 9 Nov 2022 15:09:50 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+To: Maxime Ripard <maxime@cerno.tech>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Emma Anholt <emma@anholt.net>, Karol Herbst <kherbst@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Chen-Yu Tsai <wens@csie.org>,
+ Lyude Paul <lyude@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@linux.ie>
 References: <20220728-rpi-analog-tv-properties-v7-0-7072a478c6b3@cerno.tech>
  <20220728-rpi-analog-tv-properties-v7-15-7072a478c6b3@cerno.tech>
- <262f0953-1e05-e68e-3e96-2ac2132a1e57@tronnes.org>
- <ba532387-6329-c57a-1fa2-627b2cf40281@tronnes.org>
- <b6b7c689-a50f-cd63-7e48-8739b0d91e61@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <b6b7c689-a50f-cd63-7e48-8739b0d91e61@gmail.com>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v7-15-7072a478c6b3@cerno.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 Subject: Re: [Nouveau] [PATCH v7 15/23] drm/modes: Introduce more named modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -87,101 +65,134 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
+Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Nov 08, 2022 at 10:27:17PM +0100, Mateusz Kwiatkowski wrote:
-> Hi Noralf,
->=20
-> W dniu 8.11.2022 o 10:38, Noralf Tr=F8nnes pisze:
-> >
-> > Den 07.11.2022 19.03, skrev Noralf Tr=F8nnes:
-> >>
-> >> Den 07.11.2022 15.16, skrev Maxime Ripard:
-> >>> Now that we can easily extend the named modes list, let's add a few m=
-ore
-> >>> analog TV modes that were used in the wild, and some unit tests to ma=
-ke
-> >>> sure it works as intended.
-> >>>
-> >>> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> >>>
-> >>> ---
-> >>> Changes in v6:
-> >>> - Renamed the tests to follow DRM test naming convention
-> >>>
-> >>> Changes in v5:
-> >>> - Switched to KUNIT_ASSERT_NOT_NULL
-> >>> ---
-> >>>  drivers/gpu/drm/drm_modes.c                     |  2 +
-> >>>  drivers/gpu/drm/tests/drm_client_modeset_test.c | 54 +++++++++++++++=
-++++++++++
-> >>>  2 files changed, 56 insertions(+)
-> >>>
-> >>> diff --git a/drivers/gpu/drm/drm_modes.c b/drivers/gpu/drm/drm_modes.c
-> >>> index 49441cabdd9d..17c5b6108103 100644
-> >>> --- a/drivers/gpu/drm/drm_modes.c
-> >>> +++ b/drivers/gpu/drm/drm_modes.c
-> >>> @@ -2272,7 +2272,9 @@ struct drm_named_mode {
-> >>> =20
-> >>>  static const struct drm_named_mode drm_named_modes[] =3D {
-> >>>  	NAMED_MODE("NTSC", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MO=
-DE_TV_MODE_NTSC),
-> >>> +	NAMED_MODE("NTSC-J", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_=
-MODE_TV_MODE_NTSC_J),
-> >>>  	NAMED_MODE("PAL", 13500, 720, 576, DRM_MODE_FLAG_INTERLACE, DRM_MOD=
-E_TV_MODE_PAL),
-> >>> +	NAMED_MODE("PAL-M", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_M=
-ODE_TV_MODE_PAL_M),
-> >>>  };
-> >> I'm now having second thoughts about the tv_mode commandline option. C=
-an
-> >> we just add all the variants to this table and drop the tv_mode option?
-> >> IMO this will be more user friendly and less confusing.
-> >>
-> > One downside of this is that it's not possible to force connector status
-> > when using named modes, but I think it would be better to have a force
-> > option than a tv_mode option. A lot of userspace treats unknown status
-> > as disconnected.
-> >
-> > Anyone know if it's possible to set the connector status sysfs file
-> > using a udev rule?
-> >
-> > Noralf.
->=20
-> I think that leaving named modes only would be a bit limiting. There are =
-use
-> cases for custom modes, e.g. we might want progressive 240p "NTSC" (like =
-80s/90s
-> home computers and video game consoles) or the modes with non-13.5MHz pix=
-el
-> clock that Geert requested with Amiga in mind.
 
-Yeah, it was one of the early requirements that we would be allowed to
-fill in any analog mode on the command line, so just having the named
-modes with the 480i and 576i modes won't really work for that.
 
-> I'm not sure if the current cmdline-to-drm_mode conversion is flexible en=
-ough
-> to meaningfully facilitate those, but we're at least getting the syntax d=
-own.
+Den 07.11.2022 15.16, skrev Maxime Ripard:
+> Now that we can easily extend the named modes list, let's add a few more
+> analog TV modes that were used in the wild, and some unit tests to make
+> sure it works as intended.
+> 
+> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> 
+> ---
+> Changes in v6:
+> - Renamed the tests to follow DRM test naming convention
+> 
+> Changes in v5:
+> - Switched to KUNIT_ASSERT_NOT_NULL
+> ---
+>  drivers/gpu/drm/drm_modes.c                     |  2 +
+>  drivers/gpu/drm/tests/drm_client_modeset_test.c | 54 +++++++++++++++++++++++++
+>  2 files changed, 56 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/drm_modes.c b/drivers/gpu/drm/drm_modes.c
+> index 49441cabdd9d..17c5b6108103 100644
+> --- a/drivers/gpu/drm/drm_modes.c
+> +++ b/drivers/gpu/drm/drm_modes.c
+> @@ -2272,7 +2272,9 @@ struct drm_named_mode {
+>  
+>  static const struct drm_named_mode drm_named_modes[] = {
+>  	NAMED_MODE("NTSC", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_NTSC),
+> +	NAMED_MODE("NTSC-J", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_NTSC_J),
+>  	NAMED_MODE("PAL", 13500, 720, 576, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_PAL),
+> +	NAMED_MODE("PAL-M", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_PAL_M),
+>  };
+>  
+>  static int drm_mode_parse_cmdline_named_mode(const char *name,
+> diff --git a/drivers/gpu/drm/tests/drm_client_modeset_test.c b/drivers/gpu/drm/tests/drm_client_modeset_test.c
+> index fdfe9e20702e..b3820d25beca 100644
+> --- a/drivers/gpu/drm/tests/drm_client_modeset_test.c
+> +++ b/drivers/gpu/drm/tests/drm_client_modeset_test.c
+> @@ -133,6 +133,32 @@ static void drm_test_pick_cmdline_named_ntsc(struct kunit *test)
+>  	KUNIT_EXPECT_TRUE(test, drm_mode_equal(drm_mode_analog_ntsc_480i(drm), mode));
+>  }
+>  
+> +static void drm_test_pick_cmdline_named_ntsc_j(struct kunit *test)
+> +{
+> +	struct drm_client_modeset_test_priv *priv = test->priv;
+> +	struct drm_device *drm = priv->drm;
+> +	struct drm_connector *connector = &priv->connector;
+> +	struct drm_cmdline_mode *cmdline_mode = &connector->cmdline_mode;
+> +	struct drm_display_mode *mode;
+> +	const char *cmdline = "NTSC-J";
+> +	int ret;
+> +
+> +	KUNIT_ASSERT_TRUE(test,
+> +			  drm_mode_parse_command_line_for_connector(cmdline,
+> +								    connector,
+> +								    cmdline_mode));
+> +
+> +	mutex_lock(&drm->mode_config.mutex);
+> +	ret = drm_helper_probe_single_connector_modes(connector, 1920, 1080);
+> +	mutex_unlock(&drm->mode_config.mutex);
+> +	KUNIT_ASSERT_GT(test, ret, 0);
+> +
+> +	mode = drm_connector_pick_cmdline_mode(connector);
+> +	KUNIT_ASSERT_NOT_NULL(test, mode);
+> +
+> +	KUNIT_EXPECT_TRUE(test, drm_mode_equal(drm_mode_analog_ntsc_480i(drm), mode));
+> +}
+> +
+>  static void drm_test_pick_cmdline_named_pal(struct kunit *test)
+>  {
+>  	struct drm_client_modeset_test_priv *priv = test->priv;
+> @@ -159,10 +185,38 @@ static void drm_test_pick_cmdline_named_pal(struct kunit *test)
+>  	KUNIT_EXPECT_TRUE(test, drm_mode_equal(drm_mode_analog_pal_576i(drm), mode));
+>  }
+>  
+> +static void drm_test_pick_cmdline_named_pal_m(struct kunit *test)
+> +{
+> +	struct drm_client_modeset_test_priv *priv = test->priv;
+> +	struct drm_device *drm = priv->drm;
+> +	struct drm_connector *connector = &priv->connector;
+> +	struct drm_cmdline_mode *cmdline_mode = &connector->cmdline_mode;
+> +	struct drm_display_mode *mode;
+> +	const char *cmdline = "PAL-M";
+> +	int ret;
+> +
+> +	KUNIT_ASSERT_TRUE(test,
+> +			  drm_mode_parse_command_line_for_connector(cmdline,
+> +								    connector,
+> +								    cmdline_mode));
+> +
+> +	mutex_lock(&drm->mode_config.mutex);
+> +	ret = drm_helper_probe_single_connector_modes(connector, 1920, 1080);
+> +	mutex_unlock(&drm->mode_config.mutex);
+> +	KUNIT_ASSERT_GT(test, ret, 0);
+> +
+> +	mode = drm_connector_pick_cmdline_mode(connector);
+> +	KUNIT_ASSERT_NOT_NULL(test, mode);
+> +
+> +	KUNIT_EXPECT_TRUE(test, drm_mode_equal(drm_mode_analog_ntsc_480i(drm), mode));
+> +}
+> +
 
-It might require a bit of plumbing to get
-drm_mode_create_from_cmdline_mode() to add the mode if tv_mode_specified
-is set, but it's probably it.
+There are 4 named mode tests that are almost identical, should probably
+use KUNIT_ARRAY_PARAM like in the parser tests.
 
-Maxime
+This patchset has been going on for a long time now so it can be fixed
+later if you don't want to do it now:
+
+Reviewed-by: Noralf Trønnes <noralf@tronnes.org>
+
+>  static struct kunit_case drm_test_pick_cmdline_tests[] = {
+>  	KUNIT_CASE(drm_test_pick_cmdline_res_1920_1080_60),
+>  	KUNIT_CASE(drm_test_pick_cmdline_named_ntsc),
+> +	KUNIT_CASE(drm_test_pick_cmdline_named_ntsc_j),
+>  	KUNIT_CASE(drm_test_pick_cmdline_named_pal),
+> +	KUNIT_CASE(drm_test_pick_cmdline_named_pal_m),
+>  	{}
+>  };
+>  
+> 
