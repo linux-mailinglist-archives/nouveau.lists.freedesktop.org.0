@@ -2,58 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70F5C622D44
-	for <lists+nouveau@lfdr.de>; Wed,  9 Nov 2022 15:13:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC422622F35
+	for <lists+nouveau@lfdr.de>; Wed,  9 Nov 2022 16:41:57 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C893910E5DE;
-	Wed,  9 Nov 2022 14:13:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 58E9610E5EB;
+	Wed,  9 Nov 2022 15:41:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp.domeneshop.no (smtp.domeneshop.no
- [IPv6:2a01:5b40:0:3005::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7B27F10E5DA;
- Wed,  9 Nov 2022 14:13:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
- ; s=ds202112;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uieGFSRlWfEudDPWzmLqa4FntHsQ1l9cOOh88HONQ+I=; b=XSNoEIfzs5COdh7u2/RQYNh5SC
- gYIomJ7/I61w0V5mrGKK7L2CrQ3Ev26u7S8NOpeMVOdXI4B17U5eXuo3CAodWNX6nTbJfCagJMvv4
- Dq2yjLybIPLqy87sNXPPFnYuQu8vcZ8qYweBfe9Pawv0uAn8z1JhMK5HcEMSSKg5daPD3qv/t1kED
- 48XyzrYBUTsNO5ABRfYUUeVbl9Wlr0tkQnn4UTGwve/OR/aOWmbHcqVaGPA/Kyk67Z0Uk2A53X4pG
- 8Y8elO/1Byq0lJ5AL9fKkmpRHFYXXlG0QzsbhrrtylC3XWbrSJ7XkQ8ii+pw9jwXdKsNb4MSBVFK7
- mC7xLDFg==;
-Received: from [2a01:799:95a:cb00:81e6:f8f5:7f80:f3bd] (port=60889)
- by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <noralf@tronnes.org>)
- id 1oslm9-0004IU-Hy; Wed, 09 Nov 2022 15:09:57 +0100
-Message-ID: <d44f5edb-52d4-851a-9746-5c4d49d603f4@tronnes.org>
-Date: Wed, 9 Nov 2022 15:09:50 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-To: Maxime Ripard <maxime@cerno.tech>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Ben Skeggs <bskeggs@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Maxime Ripard <mripard@kernel.org>, Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Emma Anholt <emma@anholt.net>, Karol Herbst <kherbst@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, Chen-Yu Tsai <wens@csie.org>,
- Lyude Paul <lyude@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@linux.ie>
+Received: from wnew2-smtp.messagingengine.com (wnew2-smtp.messagingengine.com
+ [64.147.123.27])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9128E10E5F1;
+ Wed,  9 Nov 2022 15:41:44 +0000 (UTC)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailnew.west.internal (Postfix) with ESMTP id D93F02B05EA7;
+ Wed,  9 Nov 2022 10:41:37 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute1.internal (MEProxy); Wed, 09 Nov 2022 10:41:41 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
+ :cc:content-transfer-encoding:content-type:date:date:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:sender:subject:subject:to:to; s=fm2; t=1668008497; x=
+ 1668015697; bh=RCyshHC41nd39fvXLSqmZArQb870AHZw66GwFRxnroM=; b=m
+ 6M99+0EF+2lM4FWiKahRXCTJ/2TRlz60OSCpfjLh0dwLmJt8UZlGysvW6zVlL2pp
+ Lr+WltoyoR+IUFtxULmpx9V4PwWXUoTK4lT0XrTSj5OvW/EuKUSq5OP7fCPSv/hS
+ wMLhIZFZK8xtnKAD9HRpKE6bFT9+wsAEN69ffr7dSfS1rpaxm7Hu+1woa3Z/o8NN
+ 3pMECxBqnO7uCjXhTY1CIEOjl5zs2PPTo+UtduJ3Rp8RuU/G2ycnUdEQw76dETW2
+ RAZTS2OHN2xECUNb6NdkAEGXy0l0HrmS51YjeCqALxmBWtJmoeNmXqsRuIUWSADN
+ tB1lVQ/av/uRi0fIEh3kw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:date:date:feedback-id:feedback-id:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1668008497; x=
+ 1668015697; bh=RCyshHC41nd39fvXLSqmZArQb870AHZw66GwFRxnroM=; b=Q
+ 1/HqsQB3psOc+96b6isRXoX5C5ybTom2C7vyqoPLqp6JQbF0UAVFZTxbWo+gL3Z7
+ y51qQFpEdFsWqcGqsfn/LvJJEjy0xXvTlIm+jkDjJL7W2PUy0KZtNHaHgAbKSzIo
+ EXABW/A3a68xWi6D9zvPbEuQNITYea4uEAs14se9B4WgqQk7704vEkRSEj1hITqn
+ SuwL1/x4lWuzJktnqdj0yaghQoItbO/N1nJd5FeM4RK1VJ6E2U1ERYVRZjBPJq/o
+ oZgqdBUCMtxCDJJqCd3vUbP8Pj6gYNwNSIoi5BMIwLk53Qg+nZqzgdElZRJPx9/p
+ hSuGxkmOWcv95FeDiejzA==
+X-ME-Sender: <xms:MMprY44s5uzkOROU2zHEfWl9aJUVwCgeTFwkoIaoC8uvSdgvD-Thag>
+ <xme:MMprY56o5iiiBf61_8abJX__s-HAqE4YCR2hlccU8ReACbG0thX7mIhfHRBpDIZSh
+ RKfSUNIqO9Y0bI2vBM>
+X-ME-Received: <xmr:MMprY3cXvBJulNae7ipti96x_ZJvMRoIGjmME7i6lUuPDYyopQlU92K8WrUb829ARuUXjBRc5ketZAEhaS_3g2VgVlsgQnHfFiBzPvuwyPr6bQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrfedvgdejlecutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpeffhffvvefukfhfgggtugfgjgesthhqredttddtudenucfhrhhomhepofgrgihi
+ mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
+ htthgvrhhnpeelleefieelleetteefvdeikeeffeffvefhtdevgfehveduveehjedvvdei
+ ledtieenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+ hmrgigihhmvgestggvrhhnohdrthgvtghh
+X-ME-Proxy: <xmx:MMprY9JTwg_wzFj8EWHTdbjBtWZJHYPCN4V_xLC-bRoRQgnaKQCqIw>
+ <xmx:MMprY8Ig6OqyUH6VsywLi3cQuOIsSc94EBfT82yvHaUlhJfnpliaBA>
+ <xmx:MMprY-zaAoIdjYBBMBRxQowmsI7JmMk3IojZrK3a217hu4nC8Pxobg>
+ <xmx:McprY2rAchrF3eCgdTb_46WNWdcdn_DFIex5hkcfFEYhCf4ui436F9V3VWs>
+Feedback-ID: i8771445c:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 9 Nov 2022 10:41:35 -0500 (EST)
+Date: Wed, 9 Nov 2022 16:41:33 +0100
+From: Maxime Ripard <maxime@cerno.tech>
+To: Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
+Message-ID: <20221109154133.koqhn6upwz6jd2oe@houat>
 References: <20220728-rpi-analog-tv-properties-v7-0-7072a478c6b3@cerno.tech>
- <20220728-rpi-analog-tv-properties-v7-15-7072a478c6b3@cerno.tech>
-From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v7-15-7072a478c6b3@cerno.tech>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v7 15/23] drm/modes: Introduce more named modes
+ <20220728-rpi-analog-tv-properties-v7-16-7072a478c6b3@cerno.tech>
+ <a9c0380a-f538-1a19-fd27-983eea42b1b2@tronnes.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <a9c0380a-f538-1a19-fd27-983eea42b1b2@tronnes.org>
+Subject: Re: [Nouveau] [PATCH v7 16/23] drm/probe-helper: Provide a TV
+ get_modes helper
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,134 +86,93 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
- Hans de Goede <hdegoede@redhat.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
+ Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-sunxi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
+ intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi Noralf,
 
+On Mon, Nov 07, 2022 at 07:11:27PM +0100, Noralf Tr=F8nnes wrote:
+>=20
+>=20
+> Den 07.11.2022 15.16, skrev Maxime Ripard:
+> > From: Noralf Tr=F8nnes <noralf@tronnes.org>
+> >=20
+> > Most of the TV connectors will need a similar get_modes implementation
+> > that will, depending on the drivers' capabilities, register the 480i and
+> > 576i modes.
+> >=20
+> > That implementation will also need to set the preferred flag and order
+> > the modes based on the driver and users preferrence.
+> >=20
+> > This is especially important to guarantee that a userspace stack such as
+> > Xorg can start and pick up the preferred mode while maintaining a
+> > working output.
+> >=20
+> > Signed-off-by: Noralf Tr=F8nnes <noralf@tronnes.org>
+> > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> >=20
+> > ---
+> > Changes in v7:
+> > - Used Noralf's implementation
+> >=20
+> > Changes in v6:
+> > - New patch
+> > ---
+> >  drivers/gpu/drm/drm_probe_helper.c | 97 ++++++++++++++++++++++++++++++=
+++++++++
+> >  include/drm/drm_probe_helper.h     |  1 +
+> >  2 files changed, 98 insertions(+)
+> >=20
+> > diff --git a/drivers/gpu/drm/drm_probe_helper.c b/drivers/gpu/drm/drm_p=
+robe_helper.c
+> > index 2fc21df709bc..edb2e4c4530a 100644
+> > --- a/drivers/gpu/drm/drm_probe_helper.c
+> > +++ b/drivers/gpu/drm/drm_probe_helper.c
+> > @@ -1147,3 +1147,100 @@ int drm_connector_helper_get_modes(struct drm_c=
+onnector *connector)
+> >  	return count;
+> >  }
+> >  EXPORT_SYMBOL(drm_connector_helper_get_modes);
+> > +
+> > +static bool tv_mode_supported(struct drm_connector *connector,
+> > +			      enum drm_connector_tv_mode mode)
+> > +{
+> > +	struct drm_device *dev =3D connector->dev;
+> > +	struct drm_property *property =3D dev->mode_config.tv_mode_property;
+> > +
+> > +	unsigned int i;
+> > +
+> > +	for (i =3D 0; i < property->num_values; i++)
+> > +		if (property->values[i] =3D=3D mode)
+> > +			return true;
+> > +
+> > +	return false;
+> > +}
+>=20
+> This function is not used in the new implementation.
+>
+> I hope you have tested this patch since I didn't even compile test my
+> implementation (probably should have said so...)
 
-Den 07.11.2022 15.16, skrev Maxime Ripard:
-> Now that we can easily extend the named modes list, let's add a few more
-> analog TV modes that were used in the wild, and some unit tests to make
-> sure it works as intended.
-> 
-> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> 
-> ---
-> Changes in v6:
-> - Renamed the tests to follow DRM test naming convention
-> 
-> Changes in v5:
-> - Switched to KUNIT_ASSERT_NOT_NULL
-> ---
->  drivers/gpu/drm/drm_modes.c                     |  2 +
->  drivers/gpu/drm/tests/drm_client_modeset_test.c | 54 +++++++++++++++++++++++++
->  2 files changed, 56 insertions(+)
-> 
-> diff --git a/drivers/gpu/drm/drm_modes.c b/drivers/gpu/drm/drm_modes.c
-> index 49441cabdd9d..17c5b6108103 100644
-> --- a/drivers/gpu/drm/drm_modes.c
-> +++ b/drivers/gpu/drm/drm_modes.c
-> @@ -2272,7 +2272,9 @@ struct drm_named_mode {
->  
->  static const struct drm_named_mode drm_named_modes[] = {
->  	NAMED_MODE("NTSC", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_NTSC),
-> +	NAMED_MODE("NTSC-J", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_NTSC_J),
->  	NAMED_MODE("PAL", 13500, 720, 576, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_PAL),
-> +	NAMED_MODE("PAL-M", 13500, 720, 480, DRM_MODE_FLAG_INTERLACE, DRM_MODE_TV_MODE_PAL_M),
->  };
->  
->  static int drm_mode_parse_cmdline_named_mode(const char *name,
-> diff --git a/drivers/gpu/drm/tests/drm_client_modeset_test.c b/drivers/gpu/drm/tests/drm_client_modeset_test.c
-> index fdfe9e20702e..b3820d25beca 100644
-> --- a/drivers/gpu/drm/tests/drm_client_modeset_test.c
-> +++ b/drivers/gpu/drm/tests/drm_client_modeset_test.c
-> @@ -133,6 +133,32 @@ static void drm_test_pick_cmdline_named_ntsc(struct kunit *test)
->  	KUNIT_EXPECT_TRUE(test, drm_mode_equal(drm_mode_analog_ntsc_480i(drm), mode));
->  }
->  
-> +static void drm_test_pick_cmdline_named_ntsc_j(struct kunit *test)
-> +{
-> +	struct drm_client_modeset_test_priv *priv = test->priv;
-> +	struct drm_device *drm = priv->drm;
-> +	struct drm_connector *connector = &priv->connector;
-> +	struct drm_cmdline_mode *cmdline_mode = &connector->cmdline_mode;
-> +	struct drm_display_mode *mode;
-> +	const char *cmdline = "NTSC-J";
-> +	int ret;
-> +
-> +	KUNIT_ASSERT_TRUE(test,
-> +			  drm_mode_parse_command_line_for_connector(cmdline,
-> +								    connector,
-> +								    cmdline_mode));
-> +
-> +	mutex_lock(&drm->mode_config.mutex);
-> +	ret = drm_helper_probe_single_connector_modes(connector, 1920, 1080);
-> +	mutex_unlock(&drm->mode_config.mutex);
-> +	KUNIT_ASSERT_GT(test, ret, 0);
-> +
-> +	mode = drm_connector_pick_cmdline_mode(connector);
-> +	KUNIT_ASSERT_NOT_NULL(test, mode);
-> +
-> +	KUNIT_EXPECT_TRUE(test, drm_mode_equal(drm_mode_analog_ntsc_480i(drm), mode));
-> +}
-> +
->  static void drm_test_pick_cmdline_named_pal(struct kunit *test)
->  {
->  	struct drm_client_modeset_test_priv *priv = test->priv;
-> @@ -159,10 +185,38 @@ static void drm_test_pick_cmdline_named_pal(struct kunit *test)
->  	KUNIT_EXPECT_TRUE(test, drm_mode_equal(drm_mode_analog_pal_576i(drm), mode));
->  }
->  
-> +static void drm_test_pick_cmdline_named_pal_m(struct kunit *test)
-> +{
-> +	struct drm_client_modeset_test_priv *priv = test->priv;
-> +	struct drm_device *drm = priv->drm;
-> +	struct drm_connector *connector = &priv->connector;
-> +	struct drm_cmdline_mode *cmdline_mode = &connector->cmdline_mode;
-> +	struct drm_display_mode *mode;
-> +	const char *cmdline = "PAL-M";
-> +	int ret;
-> +
-> +	KUNIT_ASSERT_TRUE(test,
-> +			  drm_mode_parse_command_line_for_connector(cmdline,
-> +								    connector,
-> +								    cmdline_mode));
-> +
-> +	mutex_lock(&drm->mode_config.mutex);
-> +	ret = drm_helper_probe_single_connector_modes(connector, 1920, 1080);
-> +	mutex_unlock(&drm->mode_config.mutex);
-> +	KUNIT_ASSERT_GT(test, ret, 0);
-> +
-> +	mode = drm_connector_pick_cmdline_mode(connector);
-> +	KUNIT_ASSERT_NOT_NULL(test, mode);
-> +
-> +	KUNIT_EXPECT_TRUE(test, drm_mode_equal(drm_mode_analog_ntsc_480i(drm), mode));
-> +}
-> +
+You nailed it ;)
 
-There are 4 named mode tests that are almost identical, should probably
-use KUNIT_ARRAY_PARAM like in the parser tests.
+I had tested it (but missed the warning), and added unit tests to make
+sure it was behaving properly, and it did. I'll send the unit tests in
+my next version.
 
-This patchset has been going on for a long time now so it can be fixed
-later if you don't want to do it now:
-
-Reviewed-by: Noralf Trønnes <noralf@tronnes.org>
-
->  static struct kunit_case drm_test_pick_cmdline_tests[] = {
->  	KUNIT_CASE(drm_test_pick_cmdline_res_1920_1080_60),
->  	KUNIT_CASE(drm_test_pick_cmdline_named_ntsc),
-> +	KUNIT_CASE(drm_test_pick_cmdline_named_ntsc_j),
->  	KUNIT_CASE(drm_test_pick_cmdline_named_pal),
-> +	KUNIT_CASE(drm_test_pick_cmdline_named_pal_m),
->  	{}
->  };
->  
-> 
+Thanks
+Maxime
