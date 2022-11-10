@@ -1,119 +1,69 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C4D16F6B67
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:25 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 328776F6B58
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7C2B310E3F6;
-	Thu,  4 May 2023 12:31:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E89D810E3EC;
+	Thu,  4 May 2023 12:31:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2084.outbound.protection.outlook.com [40.107.94.84])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8CC6810E62D
- for <nouveau@lists.freedesktop.org>; Wed,  9 Nov 2022 22:50:31 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=I0ipJlnV/aqwJN+2Qqdshz491ub0OXUXz36siHUGmjhgo7+Ok25ABUTq6eizm3OdXqJpZ7Lp8KHCTp83HKVrMC1kttGldFNGX4xS1C6f2jS1R8Z5aNG7FcxbwDy+/9hif+v71kkeIwIdO7J4+QdjJS/MWVH8dmisIdoz6b/gnDDewEnkMGxq357WqVP1EdippNCB9MwizzmZ9phwcxSYCh99jJzH8yTfaPGnYDm7w6paCsKeQ5h/VpnrvMRrhuH5r0QwSd1+xMoymNbHW49HmeH4JraERyYVS/ulmKOinKUtcSzBAi051N+69FX/DoxooiX+QjQzSdTSZlBaoZV8ww==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FBIoR1dDKDV10W800Ro2xQMKDyin5JmJD4AS9x4AQLc=;
- b=U3cXLwx2qKCCWfvAt+LLLfPZDOG1WUKY0FlDAYCeKFApRgqJJfdfILnhcq9W1brWaAlcdUDkJoF/Mx6JcVwp8I5Yc3ZZeHL/uZlfeEymT4pGh8+gz5MGgIMUZBC1uQLe4dQ9fk0XNkU0lJh4vRMhPl+FfzogS7ZoBQ/b8LsLTI3GgTycRGUhsrWUBlyBG/kMgXoxm9r+9GGQ9n1gWfc+LAL9mk5mYfrNc9ahLzOjKrtFmtBdxbnj5/co/hfHbAlgMp9v/ZXlDs5xrDlUTMZL6d8h58cMKNmvFYZaqDSc3EC1ltrW/zDvA8kTT27yX0OlCWQ1JPVTDHgQzisGAsNhQA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FBIoR1dDKDV10W800Ro2xQMKDyin5JmJD4AS9x4AQLc=;
- b=AvoOlUEEZNxhP2H8qfowmSiZz/7m5ou39nbcqrlC2fx3oHHBfo6VZPsatCtCYyy4njilkrK4F550Xhk/MGY+9aDpWm598+dpjf/M7ajseClRpjrf5UQIKTP9EIzma5oNVTENEBKFAQqTwksrR2pxAwd5RXB/Q5AO+rTqBPAEJS7jqpRLRpRfe116BAeLTBqJvl2O8qPmign25DXyHDlPD15QUvn/YqhzyH2I92rgts17YQdU4KoovqOEiw9MANCQRnQir/esigKBveFTtVCL1EK+WBemchAtZJJBVYcnu+qSuFvFf0JxdjUTdRELr6q8Ia6tYBHc8eUXZAbcBoeEdQ==
-Received: from DM4PR12MB5770.namprd12.prod.outlook.com (2603:10b6:8:61::16) by
- DM4PR12MB5961.namprd12.prod.outlook.com (2603:10b6:8:68::21) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5791.25; Wed, 9 Nov 2022 22:50:30 +0000
-Received: from DM4PR12MB5770.namprd12.prod.outlook.com
- ([fe80::e6a:ec67:57f2:688b]) by DM4PR12MB5770.namprd12.prod.outlook.com
- ([fe80::e6a:ec67:57f2:688b%9]) with mapi id 15.20.5791.027; Wed, 9 Nov 2022
- 22:50:30 +0000
-From: Ajay Gupta <ajayg@nvidia.com>
-To: Karol Herbst <kherbst@redhat.com>, Timothy Madden <terminatorul@gmail.com>
-Thread-Topic: [Nouveau] Fans ramping up randomly when idle
-Thread-Index: AQHY8p34UC3qV6xKPE6y8mEhscsPSK43MZ5Q
-Date: Wed, 9 Nov 2022 22:50:29 +0000
-Message-ID: <DM4PR12MB57708357FD79CF2D7FF02298DC3E9@DM4PR12MB5770.namprd12.prod.outlook.com>
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 66B5D10E876
+ for <nouveau@lists.freedesktop.org>; Thu, 10 Nov 2022 15:22:36 +0000 (UTC)
+Received: by mail-ej1-x634.google.com with SMTP id ud5so5855038ejc.4
+ for <nouveau@lists.freedesktop.org>; Thu, 10 Nov 2022 07:22:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=in-reply-to:from:references:cc:to:content-language:subject
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6d0D2mWc0p6TOs3yjnJ78ySw3xrOX6SYV20k47DqtpQ=;
+ b=ga8FBPk/nBNCLcym6IQmq98rrk8UiX4wPBkn9SRRAU5cn2mGbb857uy0FsS0PDrjHx
+ sJ8GzUWjEiGg7VTyZ0qia7luiAALC/1CF8z9wq51uX8IoRwUQZ+SJgTrbF57CZcaxOrN
+ KB5jchRZglqjNkFbRCDtDILt+8fy80UGUOAsb61nMwCKRP8pyHnDu1crTAGaRS5NeJ1P
+ wyZgZJ6Qg2rtKLXu55peSYCaJHp2LLPhVKIRx/6lFNDgRFj0PY397mgrGV/0L9qKc8kg
+ O+Xn4QGk6EXX40QKopTSLd9RikxLJ6vyrEJqMeQ4xILgrHqVZNGyyUO04cxFWR1lCv1a
+ 8AwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:from:references:cc:to:content-language:subject
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=6d0D2mWc0p6TOs3yjnJ78ySw3xrOX6SYV20k47DqtpQ=;
+ b=FNG1VDjyVGwP+CS72vtprZn7biBNYbB+vdVLxk/15DnR3eJjh7fVTk50XUAWdv4xAK
+ gPnchZtoiGrv8NM/7mSMIOXkjvZcr9AHyn/TNpwnI1z3TT4+VW7uz0OtnPvmdzxg+DXt
+ aF634qNMPf+r7zj7wjGK6DV8FguNVaddz/wUQrAzCmBDKHj+e8UMPSQNApRpxoj8IXpc
+ +XS4z15cclirhsEhZm4Bpyt6LNPvBibom4au8+RMYNo1reoiXg0/9YC0cb6Wd4uWYx/n
+ x9PRMlR8wci6sGWVu79AChjCpU+6bV9IWN6DBneFv6J4vS7q1NzUU1HTs7R7bdJwzxFt
+ 0Vbg==
+X-Gm-Message-State: ACrzQf1vn9QY2duV7aw+atbesVGLfUNISpUA7TrJxBqTdN4SBlfBpDd+
+ g6dw4z/8LdEFbI5S1w9viA==
+X-Google-Smtp-Source: AMsMyM5s9iuAWKwm9s/X5huTIhKPbpaV39w/jTupO0Mw8BuVF5jEUYeJUj5j4KGsoiCDI+FJ04/duA==
+X-Received: by 2002:a17:906:a190:b0:7ad:dc7e:1b8d with SMTP id
+ s16-20020a170906a19000b007addc7e1b8dmr2940759ejy.276.1668093754606; 
+ Thu, 10 Nov 2022 07:22:34 -0800 (PST)
+Received: from ?IPV6:2a02:2f01:740e:c00::2110? ([2a02:2f01:740e:c00::2110])
+ by smtp.gmail.com with ESMTPSA id
+ et19-20020a170907295300b0078df26efb7dsm7252772ejc.107.2022.11.10.07.22.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 10 Nov 2022 07:22:33 -0800 (PST)
+Content-Type: multipart/alternative;
+ boundary="------------ns0XG0mYt3tdyEtA3330u94W"
+Message-ID: <ba834410-641c-0219-711b-aa6136a8fd55@gmail.com>
+Date: Thu, 10 Nov 2022 17:22:32 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.12.0
+Content-Language: en-US
+To: Ajay Gupta <ajayg@nvidia.com>, Karol Herbst <kherbst@redhat.com>
 References: <tk6dm1$jsm$1@ciao.gmane.io>
  <CACO55tt5QTM=Amm560pBoDyKdib+YL77-d3rArhi0AmtLOdPMg@mail.gmail.com>
-In-Reply-To: <CACO55tt5QTM=Amm560pBoDyKdib+YL77-d3rArhi0AmtLOdPMg@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM4PR12MB5770:EE_|DM4PR12MB5961:EE_
-x-ms-office365-filtering-correlation-id: 7c85d7c1-dca2-4615-b225-08dac2a4cd3f
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: gj+4Y6dbjDeE4WdVD2O3sGKUWAEak5mwrjGzCkk7mJHdkaEfXpaxSACJ5RTgHtGb2E51EEIkBsm5qxZxc1IvSc9P7jgZ0Lm6Vc+nFdj9TS8C/XA9PfeAlwu2aO+Yv2jukUN3U2Exv07umbCVJvwehYfA8xg15Vn9+FrCuNJWp4hqCR87fYrj8RVNEs2oascSLMrGc3IPxmMwlZOulXq3iTmacKkIm3a9RW0DwtXqI+lagJUVA50y4eiTq+rVrNMGDkESUCVqy+1+SJ1vQMdJYQsGzgi36lU14TwzLeUhk1GMtxJB6zmAOLILTIrCnulQLrc09wOclk0rev0KMoKb3pHby8M875acSFuP8Kn4j7KXomKbdZRaOW+Ju/5KBR4MzboTlhkLEpAmJgoZabIBc1etr56ls0NqCAWBKnVTiboeZ+nmXEiUHP5lKDlIlCFFEf2iJA1xLAWONXdRjtSVpO0zR1SvhE92cRVRAwav3BQHeIygbrc4prY6Q6G1rdQC5zs6KBAilxDxFEhF4WI2A8gQHHKMQLiG+3doHA09yWwSyCFHReT8y+KbP5eeJMTUsvOBoJjZ713pGD40YVvKkwRMs2tWQrLHng57UMCF2rwYjDYXEgLgu/YuC9Ql19amvh6m3NyOKhBnLqabzHfBUSFG5ejw9WOCefZDSXB3yADQOJnxmm1+R1ZQHqCzfRcrcDFS5DuwzBbz/h0Doo2dC5Grlh3Wsull96oh4PRB2FNtUXMKH5YBlKoxJqUj6jVW+WLeI/JYfZO/IUy2tdkfCg==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM4PR12MB5770.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(366004)(346002)(136003)(39860400002)(376002)(396003)(451199015)(316002)(41300700001)(4326008)(8676002)(8936002)(5660300002)(52536014)(9686003)(66556008)(53546011)(478600001)(26005)(38100700002)(110136005)(2906002)(186003)(71200400001)(7696005)(76116006)(66476007)(6506007)(66946007)(55016003)(33656002)(64756008)(122000001)(66446008)(86362001)(83380400001)(38070700005);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?dkFtV295N0xUL3ZXR2JYTlJuT2Z5alpBOG9wblVvZXI2Z3k5K1h2ZStCQnly?=
- =?utf-8?B?WEhDb04wcEZCS243bVZFSXZsaGRvdi8vNlNWZTRnVm0yRlJsbURqazVEMUZM?=
- =?utf-8?B?bnlBd1ZHUFpzS093T0hJQ2kvdUc3Nm12U3NKdTdHN3pOSUFQODlhcStyeGRD?=
- =?utf-8?B?eS9JZGF4bkhrOXZjNjIzU045cG9Xc3h2V043NTBHcU1WYzFCRGQ3WFplSGtG?=
- =?utf-8?B?eENlcFJ1R0E5RTArZy9XRVhDazhHQys3VDhFNG1KZThHbHB0VmVPVmdIaS9o?=
- =?utf-8?B?TUZwaW5FaDhyMFVzcnFqMkZJRk15VzNrRTVtR0JUTmVOQkNEWkEySVBsV0o0?=
- =?utf-8?B?RnR1alBCbDR3SVU1VCtjUFJnQTVMOTBLK0cvNThnM3ZZU0ROU3YzUEZQVVdj?=
- =?utf-8?B?QlEyTTh5ZmdDWll2WHRwMFhSdUoraXR5OGNWeUlucGRPNVpGYnRXUm8zZjFR?=
- =?utf-8?B?YkRleXhUVnVxNTY5Y0lHdldqVVJHUExjREUyTFQxaTlNeHh2bWpIa0N5VVEr?=
- =?utf-8?B?d3pMOVJyVCtQWGZDbXI1aFE3WW5nZDJnaitNNWZQLzhUSlJlU3VoUUhrK2tI?=
- =?utf-8?B?RU5aVHVMK0NLL3Znckp0cHFiQkxTZ0NKUkpLb0tORFVBOGNkWDJBMGxqVXRo?=
- =?utf-8?B?d2VBTFNNMXhta0JFWUpJeGtlSUNobzNHeHZQempoZk1IcHJzMENIdFpERkxn?=
- =?utf-8?B?ZFErcjhNZFpvZithUFV4eE44TFprK1pCRFA3dkMrU1Fla3QzQVhsVnBnMnZD?=
- =?utf-8?B?SjZyN2czbHJ0SWF0U2VITlk3VGl3NWFFL2RXNGdFdnQ1Z3VlQ2xBaU1GemE2?=
- =?utf-8?B?c2ZqaUdQMjdTVTgveDcydXZDWTlPNnNUcFlhNVZRZ3dwVkNBWWpWY3Q1bGRp?=
- =?utf-8?B?ZnZLekxiRVdESU5LTmpjekJwZFNQNEZHUmhCWEU3b3hYQUhZMzczbXVBdkhj?=
- =?utf-8?B?emkwaGlmWEZrMVJnVHJMNlJQaElWcE9TRXFnTjk0VUw3SWUzRUVmYnZtQVJE?=
- =?utf-8?B?cTI4VktyTHBWcEx5ZEtpQlltUzVoVThUaFdPbytKdmxQV1Y2ZlpCQXpJYjh4?=
- =?utf-8?B?ZTFDVERmMFZTcUcvK3o4WC9sckV6aGJDaE8wald2VytSUFNZNERJajdaRGdY?=
- =?utf-8?B?WExNVmRJM3psek9JS3NRSmFVYWxKVXc4amJtWFQva3dIMmdmM3dsTTU4VlRH?=
- =?utf-8?B?OVp4a1hvR3c4SVMybUZqREt2dlBjY2wyWHNNMERmRDFkNG9zcElYOGgwQlNr?=
- =?utf-8?B?R2dXOHBLUjA2bit4Y1NLZ1lxNmZBbkU2a3FaWmNqL2d3TENZZ3N4Mm9hNDM1?=
- =?utf-8?B?SktpWVB1bzBZSkcvYXJROUhsemtPZmovSi9Ka1dSQXZnSGxIQ2I3UVFkQjN0?=
- =?utf-8?B?REhzOXd3TUxnY0dSeHVHU3FjbjB4eUo0WnpDdVliSVIrcWpHOFhJV2lHYncr?=
- =?utf-8?B?SzdPUzRyWkU5MFhiRnZ1ZC9lVVNMVy9tczBsUk1rOXhXb21DWmxJNkJYcGxF?=
- =?utf-8?B?MlhCRjR5ekVJOW00TVFsRXZzZVZEeXZucTJNTTJXQm5wUmNGczB0d29RK3dm?=
- =?utf-8?B?MFhBb2RiWVhnSVNFN3Z2M2MxbzE4b0RSdk41NHMxdllZL0lpV1hzcU80NmFL?=
- =?utf-8?B?QVA2WVZLM2dQdWlnSm0xOWxQZFFKVFJqaFBycWwrcDN2cHFHei9kV3Urb2gv?=
- =?utf-8?B?STh6dlN5d0Q0QmNVa2dGRFJMUEtKL1lVNXorVmhhcStLa040aEhhRjhZTzds?=
- =?utf-8?B?V1RqQytyUC96dVZ1Ym1kQldzajVwOFNOc0hNQVJYNFBRRkJySkRQTXg0V2o3?=
- =?utf-8?B?TUMvNzIzUldRd3F5bS81QTRDWkxINWdNbHY3TDA1aXcvT1BpdkZ6Ni9GQjdz?=
- =?utf-8?B?dkR6YXBhdHZyK0FlTWY4NnRqMFFxaGFuZHkrWmdKeStyTTlESjh4Ykh2ZHdQ?=
- =?utf-8?B?QTRRMENqUHNJeC9COGZoZ21yaVBHRFFCZlNUMTBhRTMxSzNHYURseEZyNTVX?=
- =?utf-8?B?ZzJDRy9zalVjYTVHai85Um1UN1czanRQVjUxek9YNHNidVNHTEZLNENBeFVH?=
- =?utf-8?B?YU9HMXRCWDN6blZ6M1F5QU5EZWVLZWpiMjdCYkRlMngwdlBYK3hLcGdxSW42?=
- =?utf-8?Q?J6QU=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR12MB5770.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7c85d7c1-dca2-4615-b225-08dac2a4cd3f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Nov 2022 22:50:30.0118 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 6jhDMGGIk9pkwP1IhBUT10xzyOJwkfQqtPHUN2dHCllPN7mxQUBzHH8WomxFPoQ8VSptQHnykjG1pLG9bf9OBw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5961
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:36 +0000
+ <DM4PR12MB57708357FD79CF2D7FF02298DC3E9@DM4PR12MB5770.namprd12.prod.outlook.com>
+From: Timothy Madden <terminatorul@gmail.com>
+In-Reply-To: <DM4PR12MB57708357FD79CF2D7FF02298DC3E9@DM4PR12MB5770.namprd12.prod.outlook.com>
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:33 +0000
 Subject: Re: [Nouveau] Fans ramping up randomly when idle
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -130,110 +80,254 @@ Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGkNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogS2Fyb2wgSGVyYnN0IDxr
-aGVyYnN0QHJlZGhhdC5jb20+DQo+IFNlbnQ6IE1vbmRheSwgTm92ZW1iZXIgNywgMjAyMiAzOjQy
-IEFNDQo+IFRvOiBUaW1vdGh5IE1hZGRlbiA8dGVybWluYXRvcnVsQGdtYWlsLmNvbT4NCj4gQ2M6
-IG5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnOyBBamF5IEd1cHRhIDxhamF5Z0BudmlkaWEu
-Y29tPg0KPiBTdWJqZWN0OiBSZTogW05vdXZlYXVdIEZhbnMgcmFtcGluZyB1cCByYW5kb21seSB3
-aGVuIGlkbGUNCj4gDQo+IEV4dGVybmFsIGVtYWlsOiBVc2UgY2F1dGlvbiBvcGVuaW5nIGxpbmtz
-IG9yIGF0dGFjaG1lbnRzDQo+IA0KPiANCj4gT24gU2F0LCBOb3YgNSwgMjAyMiBhdCA4OjM2IFBN
-IFRpbW90aHkgTWFkZGVuIDx0ZXJtaW5hdG9ydWxAZ21haWwuY29tPg0KPiB3cm90ZToNCj4gPg0K
-PiA+IEhlbGxvDQo+ID4NCj4gPiBNeSBNc2kgR2FtaW5nIFggVHJpbyAyMDgwIFRpIHJhbmRvbWx5
-IHJhbXBzIHVwIHRoZSBmYW5zIHdpdGggbm8gd2F5IHRvDQo+ID4gcmVjb3ZlciAoSSBoYXZlIHRv
-IHJlYm9vdCkgZXZlbiB3aGVuIHRoZSBjYXJkIGlzIGlkbGUgb3IgaXMgb25seSBzaG93aW5nIHRo
-ZQ0KPiBkZXNrdG9wLg0KPiA+DQo+ID4gVGhpcyBpc3N1ZSBoYXBwZW5zIGV2ZW4gd2hlbiB0aGUg
-Y2FyZCBpcyBub3QgY29ubmVjdGVkIHRvIGEgbW9uaXRvci4NCj4gPg0KPiA+IE15IGRtZXNnIG91
-dHB1dCBmcm9tIG5vdXZlYXUgaXMgaW5jbHVkZWQgYmVsb3csIEkgdGhpbmsgdGhlIGxhc3QgMg0K
-PiA+IGxpbmVzIGFyZSB0aGUgcmVsZXZhbnQgb25lczoNCj4gPiBbIDk0MjYuNzY4NDQ5XSBudmlk
-aWEtZ3B1IDAwMDA6MGI6MDAuMzogVW5hYmxlIHRvIGNoYW5nZSBwb3dlciBzdGF0ZQ0KPiA+IGZy
-b20gRDNob3QgdG8gRDAsIGRldmljZSBpbmFjY2Vzc2libGUgWyA5NDI3Ljg4OTM4N10gbnZpZGlh
-LWdwdQ0KPiA+IDAwMDA6MGI6MDAuMzogaTJjIHRpbWVvdXQgZXJyb3IgZmZmZmZmZmYNClRoaXMg
-b25seSBpbXBsaWVzIHRoYXQgdGhlcmUgaXMgbm8gdXNiL3Vjc2kgZGV2aWNlIG9uIHRoZSBjYXJk
-LCBpdCBpcyBleHBlY3RlZCBmcm9tDQpzdWNoIGNhcmRzIGFuZCBzaG91bGQgYmUgc2VlbiBpbiBk
-bWVzZyBldmVuIHdoZW4gaGVhdGluZyBpc3N1ZSBpcyBub3QgdGhlcmUuDQoNClRoYW5rcw0KPm52
-cHVibGljDQo+ID4NCj4gPg0KPiANCj4gdGhhdCdzIGtpbmQgb2Ygb2RkLCBiZWNhdXNlICJudmlk
-aWEtZ3B1IiBpbXBsaWVzIHlvdSBtaWdodCBoYXZlIG11bHRpcGxlDQo+IGRyaXZlcnMgaGVyZT8g
-VGhvdWdoIC4zIHNob3VsZCBiZSBzb21lIFVTQi9VQ1NJIG9yIHNvbWV0aGluZyByZWxhdGVkIHN1
-Yg0KPiBkZXZpY2Ugb24gdGhlIEdQVSBhbmQgTnZpZGlhIG1pZ2h0IGhhdmUgbWVzc2VkIGl0IHVw
-IChhZGRpbmcgdGhlDQo+IG1haW50YWluZXIgb2YgdGhlIGkyYy1udmlkaWEtZ3B1IGRyaXZlciBv
-biBDQykuDQo+IA0KPiBBbnl3YXksIHRoZSBmYW5zIGFyZSBwcm9iYWJseSBjb250cm9sbGVkIGJ5
-IHRoZSBMYXB0b3BzIGZpcm13YXJlIGFuZA0KPiBtYXliZSBzb21ldGhpbmcgZ29lcyB3cm9uZyB3
-aXRoIHRoZSBydW50aW1lIHBvd2VyIG1hbmFnZW1lbnQgZmVhdHVyZQ0KPiBoZXJlLCB3aGljaCBh
-cyBmYXIgYXMgSSBjYW4gdGVsbCB3b3JrcyBvbiB0aGUgTm91dmVhdSBzaWRlLCBidXQgaTJjLW52
-aWRpYS1ncHUNCj4gbWlnaHQgcHJldmVudCB0aGUgR1BVIGZyb20gcG93ZXJpbmcgZG9uZSBhbmQg
-c28gY2F1c2luZyBtb3JlIGhlYXQuIEl0J3MNCj4gYWxzbyBpbnRlcmVzdGluZyB0aGF0IHRoZSBH
-UFUgcnVucyB0aGF0IGhvdCwgYnV0IGdpdmVuIHdlIGRvbid0IHN1cHBvcnQNCj4gY2hhbmdpbmcg
-cG93ZXIgc3RhdGVzIHlldCBpbiBOb3V2ZWF1IChzdGlsbCBXSVAgd2lyaW5nIHVwIHRoZSBuZXcg
-cmVsZWFzZWQNCj4gZmlybXdhcmUgZnJvbSBudmlkaWEpLCBub3QgbXVjaCB3ZSBjYW4gZG8gd2hp
-bGUgdGhlIEdQVSBpcyBhY3R1YWxseSBpbiB1c2UgYXQNCj4gdGhpcyBwb2ludC4NCj4gDQo+ID4N
-Cj4gPg0KPiA+IHRpbW90aHlAbG9jYWxob3N0On4+IGRtZXNnIHwgZ3JlcCAtaSAtZSBub3V2ZWF1
-IC1lIG52aWRpYQ0KPiA+IFsgICAgNi41MTEwNjRdIG5vdXZlYXUgMDAwMDowYjowMC4wOiBOVklE
-SUEgVFUxMDIgKDE2MjAwMGExKQ0KPiA+IFsgICAgNi41OTQ0NjRdIG5vdXZlYXUgMDAwMDowYjow
-MC4wOiBiaW9zOiB2ZXJzaW9uIDkwLjAyLjQyLjAwLjE0DQo+ID4gWyAgICA2LjU5Nzc1Nl0gbm91
-dmVhdSAwMDAwOjBiOjAwLjA6IHBtdTogZmlybXdhcmUgdW5hdmFpbGFibGUNCj4gPiBbICAgIDYu
-NjAxOTQ3XSBub3V2ZWF1IDAwMDA6MGI6MDAuMDogZmI6IDExMjY0IE1pQiBHRERSNg0KPiA+IFsg
-ICAgNi42MTg0NjNdIG5vdXZlYXUgMDAwMDowYjowMC4wOiBEUk06IFZSQU06IDExMjY0IE1pQg0K
-PiA+IFsgICAgNi42MTg0NjVdIG5vdXZlYXUgMDAwMDowYjowMC4wOiBEUk06IEdBUlQ6IDUzNjg3
-MDkxMiBNaUINCj4gPiBbICAgIDYuNjE4NDY2XSBub3V2ZWF1IDAwMDA6MGI6MDAuMDogRFJNOiBC
-SVQgdGFibGUgJ0EnIG5vdCBmb3VuZA0KPiA+IFsgICAgNi42MTg0NjhdIG5vdXZlYXUgMDAwMDow
-YjowMC4wOiBEUk06IEJJVCB0YWJsZSAnTCcgbm90IGZvdW5kDQo+ID4gWyAgICA2LjYxODQ2OV0g
-bm91dmVhdSAwMDAwOjBiOjAwLjA6IERSTTogVE1EUyB0YWJsZSB2ZXJzaW9uIDIuMA0KPiA+IFsg
-ICAgNi42MTg0NzBdIG5vdXZlYXUgMDAwMDowYjowMC4wOiBEUk06IERDQiB2ZXJzaW9uIDQuMQ0K
-PiA+IFsgICAgNi42MTg0NzFdIG5vdXZlYXUgMDAwMDowYjowMC4wOiBEUk06IERDQiBvdXRwIDAw
-OiAwMjgwMGY2NiAwNDYwMDAyMA0KPiA+IFsgICAgNi42MTg0NzNdIG5vdXZlYXUgMDAwMDowYjow
-MC4wOiBEUk06IERDQiBvdXRwIDAxOiAwMjAwMGY2MiAwMDAyMDAyMA0KPiA+IFsgICAgNi42MTg0
-NzRdIG5vdXZlYXUgMDAwMDowYjowMC4wOiBEUk06IERDQiBvdXRwIDAzOiAwMjAxMWY1MiAwMDAy
-MDAxMA0KPiA+IFsgICAgNi42MTg0NzVdIG5vdXZlYXUgMDAwMDowYjowMC4wOiBEUk06IERDQiBv
-dXRwIDA0OiAwNDgyMmY3NiAwNDYwMDAxMA0KPiA+IFsgICAgNi42MTg0NzZdIG5vdXZlYXUgMDAw
-MDowYjowMC4wOiBEUk06IERDQiBvdXRwIDA1OiAwNDAyMmY3MiAwMDAyMDAxMA0KPiA+IFsgICAg
-Ni42MTg0NzddIG5vdXZlYXUgMDAwMDowYjowMC4wOiBEUk06IERDQiBvdXRwIDA4OiAwMTg0NGYz
-NiAwNDYwMDAxMA0KPiA+IFsgICAgNi42MTg0NzhdIG5vdXZlYXUgMDAwMDowYjowMC4wOiBEUk06
-IERDQiBvdXRwIDA5OiAwMTA0NGYzMiAwMDAyMDAxMA0KPiA+IFsgICAgNi42MTg0NzldIG5vdXZl
-YXUgMDAwMDowYjowMC4wOiBEUk06IERDQiBvdXRwIDEwOiAwNDgzM2Y4NiAwNDYwMDAyMA0KPiA+
-IFsgICAgNi42MTg0ODFdIG5vdXZlYXUgMDAwMDowYjowMC4wOiBEUk06IERDQiBjb25uIDAwOiAw
-MDAyMDA0Ng0KPiA+IFsgICAgNi42MTg0ODFdIG5vdXZlYXUgMDAwMDowYjowMC4wOiBEUk06IERD
-QiBjb25uIDAxOiAwMDAxMDE2MQ0KPiA+IFsgICAgNi42MTg0ODJdIG5vdXZlYXUgMDAwMDowYjow
-MC4wOiBEUk06IERDQiBjb25uIDAyOiAwMTAwMDI0Ng0KPiA+IFsgICAgNi42MTg0ODNdIG5vdXZl
-YXUgMDAwMDowYjowMC4wOiBEUk06IERDQiBjb25uIDAzOiAwMjAwMDM3MQ0KPiA+IFsgICAgNi42
-MTg0ODRdIG5vdXZlYXUgMDAwMDowYjowMC4wOiBEUk06IERDQiBjb25uIDA0OiAwMDAwMTQ0Ng0K
-PiA+IFsgICAgNi42MjA0NDhdIG5vdXZlYXUgMDAwMDowYjowMC4wOiBEUk06IE1NOiB1c2luZyBD
-T1BZIGZvciBidWZmZXINCj4gY29waWVzDQo+ID4gWyAgICA3LjA2MjMzOF0gbm91dmVhdSAwMDAw
-OjBiOjAwLjA6IFtkcm1dIENhbm5vdCBmaW5kIGFueSBjcnRjIG9yIHNpemVzDQo+ID4gWyAgICA3
-LjA2NTMzMV0gW2RybV0gSW5pdGlhbGl6ZWQgbm91dmVhdSAxLjMuMSAyMDEyMDgwMSBmb3IgMDAw
-MDowYjowMC4wIG9uDQo+IG1pbm9yIDENCj4gPiBbICAgIDcuMjU0MzE3XSBub3V2ZWF1IDAwMDA6
-MGI6MDAuMDogW2RybV0gQ2Fubm90IGZpbmQgYW55IGNydGMgb3Igc2l6ZXMNCj4gPiBbICAgIDcu
-NDQ2MzE4XSBub3V2ZWF1IDAwMDA6MGI6MDAuMDogW2RybV0gQ2Fubm90IGZpbmQgYW55IGNydGMg
-b3Igc2l6ZXMNCj4gPiBbICAgIDguNTAxMjUyXSBudmlkaWEtZ3B1IDAwMDA6MGI6MDAuMzogZW5h
-YmxpbmcgZGV2aWNlICgwMDAwIC0+IDAwMDIpDQo+ID4gWyAgICA4LjY5NjEzOF0gYXVkaXQ6IHR5
-cGU9MTQwMCBhdWRpdCgxNjY3NjY1ODg0LjcwMDo1KToNCj4gYXBwYXJtb3I9IlNUQVRVUyIgb3Bl
-cmF0aW9uPSJwcm9maWxlX2xvYWQiIHByb2ZpbGU9InVuY29uZmluZWQiDQo+IG5hbWU9Im52aWRp
-YV9tb2Rwcm9iZSIgcGlkPTkyNiBjb21tPSJhcHBhcm1vcl9wYXJzZXIiDQo+ID4gWyAgICA4LjY5
-NjE0MV0gYXVkaXQ6IHR5cGU9MTQwMCBhdWRpdCgxNjY3NjY1ODg0LjcwMDo2KToNCj4gYXBwYXJt
-b3I9IlNUQVRVUyIgb3BlcmF0aW9uPSJwcm9maWxlX2xvYWQiIHByb2ZpbGU9InVuY29uZmluZWQi
-DQo+IG5hbWU9Im52aWRpYV9tb2Rwcm9iZS8va21vZCIgcGlkPTkyNiBjb21tPSJhcHBhcm1vcl9w
-YXJzZXIiDQo+ID4gWyAgICA4LjcwNDMzM10gc25kX2hkYV9pbnRlbCAwMDAwOjBiOjAwLjE6IGJv
-dW5kIDAwMDA6MGI6MDAuMCAob3BzDQo+IG52NTBfYXVkaW9fY29tcG9uZW50X2JpbmRfb3BzIFtu
-b3V2ZWF1XSkNCj4gPiBbICAgIDguNzA4Nzk3XSBpbnB1dDogSERBIE5WaWRpYSBIRE1JL0RQLHBj
-bT0zIGFzDQo+IC9kZXZpY2VzL3BjaTAwMDA6MDAvMDAwMDowMDowMy4yLzAwMDA6MGI6MDAuMS9z
-b3VuZC9jYXJkMS9pbnB1dDE1DQo+ID4gWyAgICA4LjcwODkwM10gaW5wdXQ6IEhEQSBOVmlkaWEg
-SERNSS9EUCxwY209NyBhcw0KPiAvZGV2aWNlcy9wY2kwMDAwOjAwLzAwMDA6MDA6MDMuMi8wMDAw
-OjBiOjAwLjEvc291bmQvY2FyZDEvaW5wdXQxNg0KPiA+IFsgICAgOC43MDg5MzZdIGlucHV0OiBI
-REEgTlZpZGlhIEhETUkvRFAscGNtPTggYXMNCj4gL2RldmljZXMvcGNpMDAwMDowMC8wMDAwOjAw
-OjAzLjIvMDAwMDowYjowMC4xL3NvdW5kL2NhcmQxL2lucHV0MTcNCj4gPiBbICAgIDguNzA4OTY1
-XSBpbnB1dDogSERBIE5WaWRpYSBIRE1JL0RQLHBjbT05IGFzDQo+IC9kZXZpY2VzL3BjaTAwMDA6
-MDAvMDAwMDowMDowMy4yLzAwMDA6MGI6MDAuMS9zb3VuZC9jYXJkMS9pbnB1dDE4DQo+ID4gWyAg
-ICA4LjcwODk5NF0gaW5wdXQ6IEhEQSBOVmlkaWEgSERNSS9EUCxwY209MTAgYXMNCj4gL2Rldmlj
-ZXMvcGNpMDAwMDowMC8wMDAwOjAwOjAzLjIvMDAwMDowYjowMC4xL3NvdW5kL2NhcmQxL2lucHV0
-MTkNCj4gPiBbICAgIDguNzA5MDMyXSBpbnB1dDogSERBIE5WaWRpYSBIRE1JL0RQLHBjbT0xMSBh
-cw0KPiAvZGV2aWNlcy9wY2kwMDAwOjAwLzAwMDA6MDA6MDMuMi8wMDAwOjBiOjAwLjEvc291bmQv
-Y2FyZDEvaW5wdXQyMA0KPiA+IFsgICAgOC43MDkwNjVdIGlucHV0OiBIREEgTlZpZGlhIEhETUkv
-RFAscGNtPTEyIGFzDQo+IC9kZXZpY2VzL3BjaTAwMDA6MDAvMDAwMDowMDowMy4yLzAwMDA6MGI6
-MDAuMS9zb3VuZC9jYXJkMS9pbnB1dDIxDQo+ID4gWyAgIDEwLjc3NjI4MF0gbm91dmVhdSAwMDAw
-OjBiOjAwLjA6IHZnYWFyYjogY2hhbmdlZCBWR0EgZGVjb2RlczoNCj4gb2xkZGVjb2Rlcz1pbytt
-ZW0sZGVjb2Rlcz1ub25lOm93bnM9bm9uZQ0KPiA+IFsgMzI3NS43MjAxOTBdIG5vdXZlYXUgMDAw
-MDowYjowMC4wOiB0aGVybTogdGVtcGVyYXR1cmUgKDkwIEMpIGhpdCB0aGUNCj4gPiAnZmFuYm9v
-c3QnIHRocmVzaG9sZCBbIDk0MjYuNzY4NDQ5XSBudmlkaWEtZ3B1IDAwMDA6MGI6MDAuMzogVW5h
-YmxlIHRvDQo+ID4gY2hhbmdlIHBvd2VyIHN0YXRlIGZyb20gRDNob3QgdG8gRDAsIGRldmljZSBp
-bmFjY2Vzc2libGUgWw0KPiA+IDk0MjcuODg5Mzg3XSBudmlkaWEtZ3B1IDAwMDA6MGI6MDAuMzog
-aTJjIHRpbWVvdXQgZXJyb3IgZmZmZmZmZmYNCj4gPiB0aW1vdGh5QGxvY2FsaG9zdDp+Pg0KPiA+
-DQoNCg==
+This is a multi-part message in MIME format.
+--------------ns0XG0mYt3tdyEtA3330u94W
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+
+On 11/10/22 00:50, Ajay Gupta wrote:
+>
+>>> This issue happens even when the card is not connected to a monitor.
+>>>
+>>> My dmesg output from nouveau is included below, I think the last 2
+>>> lines are the relevant ones:
+>>> [ 9426.768449] nvidia-gpu 0000:0b:00.3: Unable to change power state
+>>> from D3hot to D0, device inaccessible [ 9427.889387] nvidia-gpu
+>>> 0000:0b:00.3: i2c timeout error ffffffff
+> This only implies that there is no usb/ucsi device on the card, it is expected from
+> such cards and should be seen in dmesg even when heating issue is not there.
+>
+> Thanks
+
+The 2080 Ti graphics card has an USB-C output, that works if I connect 
+an USB storage device
+(see the DataTraveler device below).
+
+Should I try the USB port as a video output ? I need to bring in an 
+USB-C monitor first
+from a different location. I also have an USB-C to HDMI adapter, but 
+using such an
+adapter gives a different crash with nouveau driver, that I found on a 
+different machine
+(my work laptop at the time), that I reported before. So I suppose it 
+would not be a
+good test now.
+
+
+localhost:/home/timothy #lsusb
+Bus 008 Device 002: ID 05e3:0616 Genesys Logic, Inc. hub
+Bus 008 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 007 Device 002: ID 05e3:0610 Genesys Logic, Inc. Hub
+Bus 007 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 006 Device 002: ID 0951:176c Kingston Technology DataTraveler Max
+Bus 006 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 005 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 002 Device 003: ID 11b0:5111 ATECH FLASH TECHNOLOGY PRO88 Reader
+Bus 002 Device 002: ID 11b0:0031 ATECH FLASH TECHNOLOGY USB3.1 Hub
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 006: ID 09da:2268 A4Tech Co., Ltd. USB Keyboard
+Bus 001 Device 004: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 001 Device 003: ID 8087:0025 Intel Corp. Wireless-AC 9260 Bluetooth 
+Adapter
+Bus 001 Device 005: ID 046d:c24a Logitech, Inc. G600 Gaming Mouse
+Bus 001 Device 002: ID 11b0:0021 ATECH FLASH TECHNOLOGY USB2.0 Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+localhost:/home/timothy #lsusb --tree
+/:  Bus 08.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/4p, 5000M
+    |__ Port 1: Dev 2, If 0, Class=Hub, Driver=hub/2p, 5000M
+/:  Bus 07.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/4p, 480M
+    |__ Port 1: Dev 2, If 0, Class=Hub, Driver=hub/2p, 480M
+/:  Bus 06.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/4p, 10000M
+    |__ Port 1: Dev 2, If 0, Class=Mass Storage, Driver=uas, 10000M
+/:  Bus 05.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/2p, 480M
+/:  Bus 04.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/2p, 10000M
+/:  Bus 03.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/2p, 480M
+/:  Bus 02.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/8p, 10000M
+    |__ Port 2: Dev 2, If 0, Class=Hub, Driver=hub/4p, 5000M
+        |__ Port 1: Dev 3, If 0, Class=Mass Storage, Driver=usb-storage, 
+5000M
+/:  Bus 01.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/14p, 480M
+    |__ Port 1: Dev 2, If 0, Class=Hub, Driver=hub/4p, 480M
+    |__ Port 2: Dev 3, If 0, Class=Wireless, Driver=btusb, 12M
+    |__ Port 2: Dev 3, If 1, Class=Wireless, Driver=btusb, 12M
+    |__ Port 9: Dev 4, If 0, Class=Hub, Driver=hub/4p, 480M
+        |__ Port 3: Dev 6, If 0, Class=Human Interface Device, 
+Driver=usbhid, 1.5M
+        |__ Port 3: Dev 6, If 1, Class=Human Interface Device, 
+Driver=usbhid, 1.5M
+    |__ Port 10: Dev 5, If 0, Class=Human Interface Device, 
+Driver=usbhid, 12M
+    |__ Port 10: Dev 5, If 1, Class=Human Interface Device, 
+Driver=usbhid, 12M
+localhost:/home/timothy #
+
+
+--------------ns0XG0mYt3tdyEtA3330u94W
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 11/10/22 00:50, Ajay Gupta wrote:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:DM4PR12MB57708357FD79CF2D7FF02298DC3E9@DM4PR12MB5770.namprd12.prod.outlook.com"><br>
+      <blockquote type="cite">
+        <blockquote type="cite">
+          <pre class="moz-quote-pre" wrap="">This issue happens even when the card is not connected to a monitor.
+
+My dmesg output from nouveau is included below, I think the last 2
+lines are the relevant ones:
+[ 9426.768449] nvidia-gpu 0000:0b:00.3: Unable to change power state
+from D3hot to D0, device inaccessible [ 9427.889387] nvidia-gpu
+0000:0b:00.3: i2c timeout error ffffffff
+</pre>
+        </blockquote>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">This only implies that there is no usb/ucsi device on the card, it is expected from
+such cards and should be seen in dmesg even when heating issue is not there.
+
+Thanks
+</pre>
+    </blockquote>
+    <p>The 2080 Ti graphics card has an USB-C output, that works if I
+      connect an USB storage device<br>
+      (see the DataTraveler device below).</p>
+    <p>Should I try the USB port as a video output ? I need to bring in
+      an USB-C monitor first<br>
+      from a different location. I also have an USB-C to HDMI adapter,
+      but using such an<br>
+      adapter gives a different crash with nouveau driver, that I found
+      on a different machine<br>
+      (my work laptop at the time), that I reported before. So I suppose
+      it would not be a<br>
+      good test now.</p>
+    <p><br>
+    </p>
+    <p><span style="font-family:monospace"><span
+          style="font-weight:bold;color:#ff5454;background-color:#ffffff;"><a class="moz-txt-link-freetext" href="localhost:/home/timothy">localhost:/home/timothy</a>
+          #</span><span style="color:#000000;background-color:#ffffff;">
+          lsusb
+        </span><br>
+        Bus 008 Device 002: ID 05e3:0616 Genesys Logic, Inc. hub
+        <br>
+        Bus 008 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+        <br>
+        Bus 007 Device 002: ID 05e3:0610 Genesys Logic, Inc. Hub
+        <br>
+        Bus 007 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+        <br>
+        Bus 006 Device 002: ID 0951:176c Kingston Technology
+        DataTraveler Max
+        <br>
+        Bus 006 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+        <br>
+        Bus 005 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+        <br>
+        Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+        <br>
+        Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+        <br>
+        Bus 002 Device 003: ID 11b0:5111 ATECH FLASH TECHNOLOGY PRO88
+        Reader
+        <br>
+        Bus 002 Device 002: ID 11b0:0031 ATECH FLASH TECHNOLOGY USB3.1
+        Hub
+        <br>
+        Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+        <br>
+        Bus 001 Device 006: ID 09da:2268 A4Tech Co., Ltd. USB Keyboard
+        <br>
+        Bus 001 Device 004: ID 1a40:0101 Terminus Technology Inc. Hub
+        <br>
+        Bus 001 Device 003: ID 8087:0025 Intel Corp. Wireless-AC 9260
+        Bluetooth Adapter
+        <br>
+        Bus 001 Device 005: ID 046d:c24a Logitech, Inc. G600 Gaming
+        Mouse
+        <br>
+        Bus 001 Device 002: ID 11b0:0021 ATECH FLASH TECHNOLOGY USB2.0
+        Hub
+        <br>
+        Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+        <br>
+        <span
+          style="font-weight:bold;color:#ff5454;background-color:#ffffff;"><a class="moz-txt-link-freetext" href="localhost:/home/timothy">localhost:/home/timothy</a>
+          #</span><span style="color:#000000;background-color:#ffffff;">
+          lsusb --tree
+        </span><br>
+        /:  Bus 08.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/4p,
+        5000M
+        <br>
+           |__ Port 1: Dev 2, If 0, Class=Hub, Driver=hub/2p, 5000M
+        <br>
+        /:  Bus 07.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/4p,
+        480M
+        <br>
+           |__ Port 1: Dev 2, If 0, Class=Hub, Driver=hub/2p, 480M
+        <br>
+        /:  Bus 06.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/4p,
+        10000M
+        <br>
+           |__ Port 1: Dev 2, If 0, Class=Mass Storage, Driver=uas,
+        10000M
+        <br>
+        /:  Bus 05.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/2p,
+        480M
+        <br>
+        /:  Bus 04.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/2p,
+        10000M
+        <br>
+        /:  Bus 03.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/2p,
+        480M
+        <br>
+        /:  Bus 02.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/8p,
+        10000M
+        <br>
+           |__ Port 2: Dev 2, If 0, Class=Hub, Driver=hub/4p, 5000M
+        <br>
+               |__ Port 1: Dev 3, If 0, Class=Mass Storage,
+        Driver=usb-storage, 5000M
+        <br>
+        /:  Bus 01.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/14p,
+        480M
+        <br>
+           |__ Port 1: Dev 2, If 0, Class=Hub, Driver=hub/4p, 480M
+        <br>
+           |__ Port 2: Dev 3, If 0, Class=Wireless, Driver=btusb, 12M
+        <br>
+           |__ Port 2: Dev 3, If 1, Class=Wireless, Driver=btusb, 12M
+        <br>
+           |__ Port 9: Dev 4, If 0, Class=Hub, Driver=hub/4p, 480M
+        <br>
+               |__ Port 3: Dev 6, If 0, Class=Human Interface Device,
+        Driver=usbhid, 1.5M
+        <br>
+               |__ Port 3: Dev 6, If 1, Class=Human Interface Device,
+        Driver=usbhid, 1.5M
+        <br>
+           |__ Port 10: Dev 5, If 0, Class=Human Interface Device,
+        Driver=usbhid, 12M
+        <br>
+           |__ Port 10: Dev 5, If 1, Class=Human Interface Device,
+        Driver=usbhid, 12M
+        <br>
+        <span
+          style="font-weight:bold;color:#ff5454;background-color:#ffffff;"><a class="moz-txt-link-freetext" href="localhost:/home/timothy">localhost:/home/timothy</a>
+          #</span><span style="color:#000000;background-color:#ffffff;">
+        </span><br>
+        <br>
+        <br>
+      </span></p>
+  </body>
+</html>
+
+--------------ns0XG0mYt3tdyEtA3330u94W--
