@@ -1,52 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FC15624D15
-	for <lists+nouveau@lfdr.de>; Thu, 10 Nov 2022 22:34:56 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 95A92624E2F
+	for <lists+nouveau@lfdr.de>; Fri, 11 Nov 2022 00:02:10 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1C77A10E179;
-	Thu, 10 Nov 2022 21:34:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3210B10E0D9;
+	Thu, 10 Nov 2022 23:02:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 54A0310E157;
- Thu, 10 Nov 2022 21:34:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1668116084; x=1699652084;
- h=date:from:to:cc:subject:message-id:mime-version:
- content-transfer-encoding;
- bh=aNUQvPldLT7UDcSnLyns2My1ZQw1aBleYnzEk9P0fh0=;
- b=ZYdrQoah9L69YyPZmSGk54musbFCkyJwGsZ+4J+qN7ai7hUzH52eCK/U
- 5XIkDgb/A2MZTH+jM8j3ZUUb/o0yIpPrwf3pEIlrbhDTtV9kgfDLJ6box
- 6h54QY/xaHdyCmYzhRsv89l+NGh7oiAWycF9bp5pTQy89ETcwHjpZoXcf
- 0ClA3rf0FCVbl5C6Q41zvjDpxuvsAAwnrXVxvTVqPqkDboW4h2UMou6al
- pkejz/TkgrlTXWPoW+STMlay5QEXPNNLs/NhGsEZnwUxRf23rSXg9FJEX
- m5Xby6h0j6arjuQMLHZJ6iFllUDH1m7tc34oekf4s1XurJ1AfwZ0FVeyj A==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10527"; a="294802182"
-X-IronPort-AV: E=Sophos;i="5.96,154,1665471600"; d="scan'208";a="294802182"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Nov 2022 13:34:43 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10527"; a="779942138"
-X-IronPort-AV: E=Sophos;i="5.96,154,1665471600"; d="scan'208";a="779942138"
-Received: from lkp-server01.sh.intel.com (HELO e783503266e8) ([10.239.97.150])
- by fmsmga001.fm.intel.com with ESMTP; 10 Nov 2022 13:34:40 -0800
-Received: from kbuild by e783503266e8 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1otFC3-0003Gd-2O;
- Thu, 10 Nov 2022 21:34:39 +0000
-Date: Fri, 11 Nov 2022 05:34:31 +0800
-From: kernel test robot <lkp@intel.com>
-To: Andrew Morton <akpm@linux-foundation.org>
-Message-ID: <636d6e67.HpQqom77xkNYoUGy%lkp@intel.com>
-User-Agent: Heirloom mailx 12.5 6/20/10
+Received: from mx1.riseup.net (mx1.riseup.net [198.252.153.129])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CDB0A10E0D9;
+ Thu, 10 Nov 2022 23:01:56 +0000 (UTC)
+Received: from fews2.riseup.net (fews2-pn.riseup.net [10.0.1.84])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+ client-signature RSA-PSS (2048 bits) client-digest SHA256)
+ (Client CN "mail.riseup.net", Issuer "R3" (not verified))
+ by mx1.riseup.net (Postfix) with ESMTPS id 4N7cm32bpSzDqPP;
+ Thu, 10 Nov 2022 23:01:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
+ t=1668121316; bh=ii9US/7BKMJSswViF5HF5Uy5RI+c/CUVF4WZu52VlbA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=cPHdzSv4GOsGXIr9Eb/R795dEV6YP+Wcvkl6eGsKWdtRgGwoVyMK/BV00Y1wmpt+x
+ VT5C3PbwkiIXp1CbE3h8tiXgWjaLkL2sz5jPGwP6N5FVDgP14RsM71DWbpx3QKM3DZ
+ fIOHgYLoOehEqRAfXsjVCDqO/bPzcTrfbpxvOqTI=
+X-Riseup-User-ID: 659E986C72ED052D274028EE1034DB3275D9FA4A0450B3B0042660F6D26D59E1
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ by fews2.riseup.net (Postfix) with ESMTPSA id 4N7cls13Q1z1xx2;
+ Thu, 10 Nov 2022 23:01:44 +0000 (UTC)
+Message-ID: <28d35094-ac32-e589-274e-76f4b2408aec@riseup.net>
+Date: Thu, 10 Nov 2022 20:01:42 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Subject: [Nouveau] [linux-next:master] BUILD REGRESSION
- 382d2f9e739bc6f151c718b38537ae522ff848cd
+Content-Language: en-US
+To: Maxime Ripard <maxime@cerno.tech>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Chen-Yu Tsai <wens@csie.org>, Maxime Ripard <mripard@kernel.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Karol Herbst
+ <kherbst@redhat.com>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Lyude Paul <lyude@redhat.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Emma Anholt <emma@anholt.net>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ David Airlie <airlied@linux.ie>, Ben Skeggs <bskeggs@redhat.com>
+References: <20220728-rpi-analog-tv-properties-v8-0-09ce1466967c@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v8-6-09ce1466967c@cerno.tech>
+From: =?UTF-8?Q?Ma=c3=adra_Canal?= <mairacanal@riseup.net>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v8-6-09ce1466967c@cerno.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v8 06/24] drm/modes: Add a function to
+ generate analog display modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,208 +64,211 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-efi@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Linux Memory Management List <linux-mm@kvack.org>, coreteam@netfilter.org,
- netfilter-devel@vger.kernel.org, linux-rpi-kernel@lists.infradead.org,
- linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
+Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, linux-sunxi@lists.linux.dev,
+ Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
-branch HEAD: 382d2f9e739bc6f151c718b38537ae522ff848cd  Add linux-next specific files for 20221110
+Hi Maxime,
 
-Error/Warning reports:
+On 11/10/22 08:07, Maxime Ripard wrote:
+> Multiple drivers (meson, vc4, sun4i) define analog TV 525-lines and
+> 625-lines modes in their drivers.
+> 
+> Since those modes are fairly standard, and that we'll need to use them
+> in more places in the future, it makes sense to move their definition
+> into the core framework.
+> 
+> However, analog display usually have fairly loose timings requirements,
+> the only discrete parameters being the total number of lines and pixel
+> clock frequency. Thus, we created a function that will create a display
+> mode from the standard, the pixel frequency and the active area.
+> 
+> Tested-by: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
+> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> 
+> ---
+> Changes in v6:
+> - Fix typo
+> 
+> Changes in v4:
+> - Reworded the line length check comment
+> - Switch to HZ_PER_KHZ in tests
+> - Use previous timing to fill our mode
+> - Move the number of lines check earlier
+> ---
+>  drivers/gpu/drm/drm_modes.c            | 474 +++++++++++++++++++++++++++++++++
+>  drivers/gpu/drm/tests/Makefile         |   1 +
+>  drivers/gpu/drm/tests/drm_modes_test.c | 145 ++++++++++
+>  include/drm/drm_modes.h                |  17 ++
+>  4 files changed, 637 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/tests/drm_modes_test.c b/drivers/gpu/drm/tests/drm_modes_test.c
+> new file mode 100644
+> index 000000000000..afeda9f07859
+> --- /dev/null
+> +++ b/drivers/gpu/drm/tests/drm_modes_test.c
+> @@ -0,0 +1,145 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Kunit test for drm_modes functions
+> + */
+> +
+> +#include <drm/drm_drv.h>
+> +#include <drm/drm_modes.h>
+> +
+> +#include <kunit/test.h>
+> +
+> +#include <linux/units.h>
+> +
+> +#include "drm_kunit_helpers.h"
+> +
+> +struct drm_modes_test_priv {
+> +	struct drm_device *drm;
+> +};
+> +
+> +static int drm_modes_test_init(struct kunit *test)
+> +{
+> +	struct drm_modes_test_priv *priv;
+> +
+> +	priv = kunit_kzalloc(test, sizeof(*priv), GFP_KERNEL);
+> +	KUNIT_ASSERT_NOT_NULL(test, priv);
+> +
+> +	priv->drm = drm_kunit_device_init(test, DRIVER_MODESET, "drm-modes-test");
+> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, priv->drm);
+> +
+> +	test->priv = priv;
+> +
+> +	return 0;
+> +}
+> +
 
-https://lore.kernel.org/linux-mm/202210261404.b6UlzG7H-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202210270637.Q5Y7FiKJ-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211030513.ML6SdpUw-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211052104.11idvQu3-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211090634.RyFKK0WS-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211102047.QP7IThm4-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211102136.g5R1ioFx-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211110007.0ZmHwzMd-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211110149.0ETIfpy6-lkp@intel.com
+As you did on the other tests, it would be nice to use the same naming
+convention as the other DRM tests. So, maybe change the "drm_modes"
+prefix to "drm_test_modes".
 
-Error/Warning: (recently discovered and may have been fixed)
+> +static void drm_modes_analog_tv_ntsc_480i(struct kunit *test)
+> +{
+> +	struct drm_modes_test_priv *priv = test->priv;
+> +	struct drm_display_mode *mode;
+> +
+> +	mode = drm_analog_tv_mode(priv->drm,
+> +				  DRM_MODE_TV_MODE_NTSC,
+> +				  13500 * HZ_PER_KHZ, 720, 480,
+> +				  true);
+> +	KUNIT_ASSERT_NOT_NULL(test, mode);
+> +
+> +	KUNIT_EXPECT_EQ(test, drm_mode_vrefresh(mode), 60);
+> +	KUNIT_EXPECT_EQ(test, mode->hdisplay, 720);
+> +
+> +	/* BT.601 defines hsync_start at 736 for 480i */
+> +	KUNIT_EXPECT_EQ(test, mode->hsync_start, 736);
+> +
+> +	/*
+> +	 * The NTSC standard expects a line to take 63.556us. With a
+> +	 * pixel clock of 13.5 MHz, a pixel takes around 74ns, so we
+> +	 * need to have 63556ns / 74ns = 858.
+> +	 *
+> +	 * This is also mandated by BT.601.
+> +	 */
+> +	KUNIT_EXPECT_EQ(test, mode->htotal, 858);
+> +
+> +	KUNIT_EXPECT_EQ(test, mode->vdisplay, 480);
+> +	KUNIT_EXPECT_EQ(test, mode->vtotal, 525);
+> +}
+> +
+> +static void drm_modes_analog_tv_ntsc_480i_inlined(struct kunit *test)
+> +{
+> +	struct drm_modes_test_priv *priv = test->priv;
+> +	struct drm_display_mode *expected, *mode;
+> +
+> +	expected = drm_analog_tv_mode(priv->drm,
+> +				      DRM_MODE_TV_MODE_NTSC,
+> +				      13500 * HZ_PER_KHZ, 720, 480,
+> +				      true);
+> +	KUNIT_ASSERT_NOT_NULL(test, expected);
+> +
+> +	mode = drm_mode_analog_ntsc_480i(priv->drm);
+> +	KUNIT_ASSERT_NOT_NULL(test, mode);
+> +
+> +	KUNIT_EXPECT_TRUE(test, drm_mode_equal(expected, mode));
+> +}
+> +
+> +static void drm_modes_analog_tv_pal_576i(struct kunit *test)
+> +{
+> +	struct drm_modes_test_priv *priv = test->priv;
+> +	struct drm_display_mode *mode;
+> +
+> +	mode = drm_analog_tv_mode(priv->drm,
+> +				  DRM_MODE_TV_MODE_PAL,
+> +				  13500 * HZ_PER_KHZ, 720, 576,
+> +				  true);
+> +	KUNIT_ASSERT_NOT_NULL(test, mode);
+> +
+> +	KUNIT_EXPECT_EQ(test, drm_mode_vrefresh(mode), 50);
+> +	KUNIT_EXPECT_EQ(test, mode->hdisplay, 720);
+> +
+> +	/* BT.601 defines hsync_start at 732 for 576i */
+> +	KUNIT_EXPECT_EQ(test, mode->hsync_start, 732);
+> +
+> +	/*
+> +	 * The PAL standard expects a line to take 64us. With a pixel
+> +	 * clock of 13.5 MHz, a pixel takes around 74ns, so we need to
+> +	 * have 64000ns / 74ns = 864.
+> +	 *
+> +	 * This is also mandated by BT.601.
+> +	 */
+> +	KUNIT_EXPECT_EQ(test, mode->htotal, 864);
+> +
+> +	KUNIT_EXPECT_EQ(test, mode->vdisplay, 576);
+> +	KUNIT_EXPECT_EQ(test, mode->vtotal, 625);
+> +}
+> +
+> +static void drm_modes_analog_tv_pal_576i_inlined(struct kunit *test)
+> +{
+> +	struct drm_modes_test_priv *priv = test->priv;
+> +	struct drm_display_mode *expected, *mode;
+> +
+> +	expected = drm_analog_tv_mode(priv->drm,
+> +				      DRM_MODE_TV_MODE_PAL,
+> +				      13500 * HZ_PER_KHZ, 720, 576,
+> +				      true);
+> +	KUNIT_ASSERT_NOT_NULL(test, expected);
+> +
+> +	mode = drm_mode_analog_pal_576i(priv->drm);
+> +	KUNIT_ASSERT_NOT_NULL(test, mode);
+> +
+> +	KUNIT_EXPECT_TRUE(test, drm_mode_equal(expected, mode));
+> +}
+> +
+> +static struct kunit_case drm_modes_analog_tv_tests[] = {
+> +	KUNIT_CASE(drm_modes_analog_tv_ntsc_480i),
+> +	KUNIT_CASE(drm_modes_analog_tv_ntsc_480i_inlined),
+> +	KUNIT_CASE(drm_modes_analog_tv_pal_576i),
+> +	KUNIT_CASE(drm_modes_analog_tv_pal_576i_inlined),
+> +	{ }
+> +};
+> +
+> +static struct kunit_suite drm_modes_analog_tv_test_suite = {
+> +	.name = "drm_modes_analog_tv",
+> +	.init = drm_modes_test_init,
+> +	.test_cases = drm_modes_analog_tv_tests,
+> +};
+> +
+> +kunit_test_suites(
+> +	&drm_modes_analog_tv_test_suite
+> +);
 
-arch/arm/mach-s3c/devs.c:32:10: fatal error: linux/platform_data/dma-s3c24xx.h: No such file or directory
-arch/x86/platform/efi/runtime-map.c:138:5: warning: no previous prototype for 'efi_get_runtime_map_size' [-Wmissing-prototypes]
-arch/x86/platform/efi/runtime-map.c:143:5: warning: no previous prototype for 'efi_get_runtime_map_desc_size' [-Wmissing-prototypes]
-arch/x86/platform/efi/runtime-map.c:148:5: warning: no previous prototype for 'efi_runtime_map_copy' [-Wmissing-prototypes]
-drivers/firmware/efi/memmap.c:57:52: warning: suggest braces around empty body in an 'if' statement [-Wempty-body]
-drivers/firmware/efi/memmap.c:60:52: warning: suggest braces around empty body in an 'if' statement [-Wempty-body]
-drivers/gpu/drm/amd/amdgpu/../display/dc/core/dc.c:4887: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
-drivers/gpu/drm/amd/amdgpu/../display/dc/core/dc_link_dp.c:5073:24: warning: implicit conversion from 'enum <anonymous>' to 'enum dc_status' [-Wenum-conversion]
-drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:178:1: warning: no previous prototype for 'gf100_fifo_nonstall_block' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:178:1: warning: no previous prototype for function 'gf100_fifo_nonstall_block' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: warning: no previous prototype for 'gf100_fifo_nonstall_block' [-Wmissing-prototypes]
-drivers/media/platform/mediatek/jpeg/mtk_jpeg_core.c:1474:38: warning: unused variable 'mt8173_jpeg_drvdata' [-Wunused-const-variable]
-drivers/media/platform/mediatek/jpeg/mtk_jpeg_core.c:1489:38: warning: unused variable 'mtk_jpeg_drvdata' [-Wunused-const-variable]
-drivers/media/platform/mediatek/jpeg/mtk_jpeg_core.c:1859:38: warning: unused variable 'mtk8195_jpegdec_drvdata' [-Wunused-const-variable]
-vmlinux.o: warning: objtool: __btrfs_map_block+0x1e22: unreachable instruction
+Considering that there is only one suite, you could use the
+kunit_test_suite macro instead.
 
-Unverified Error/Warning (likely false positive, please contact us if interested):
+Best Regards,
+- Maíra Canal
 
-lib/zstd/compress/../common/zstd_deps.h:34:28: warning: use of NULL '*zc.outBuff' where non-null expected [CWE-476] [-Wanalyzer-null-argument]
-lib/zstd/compress/huf_compress.c:460 HUF_getIndex() warn: the 'RANK_POSITION_LOG_BUCKETS_BEGIN' macro might need parens
-lib/zstd/compress/huf_compress.c:850:18: warning: shift by count ('32') >= precision of type ('32') [-Wanalyzer-shift-count-overflow]
-lib/zstd/decompress/zstd_decompress_block.c:1009 ZSTD_execSequence() warn: inconsistent indenting
-lib/zstd/decompress/zstd_decompress_block.c:894 ZSTD_execSequenceEnd() warn: inconsistent indenting
-lib/zstd/decompress/zstd_decompress_block.c:942 ZSTD_execSequenceEndSplitLitBuffer() warn: inconsistent indenting
-lib/zstd/decompress/zstd_decompress_internal.h:206 ZSTD_DCtx_get_bmi2() warn: inconsistent indenting
-mm/khugepaged.c:2038 collapse_file() warn: iterator used outside loop: 'page'
-
-Error/Warning ids grouped by kconfigs:
-
-gcc_recent_errors
-|-- alpha-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
-|   `-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|-- alpha-buildonly-randconfig-r005-20221110
-|   `-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|-- arc-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
-|   `-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|-- arm-allyesconfig
-|   |-- arch-arm-mach-s3c-devs.c:fatal-error:linux-platform_data-dma-s3c24xx.h:No-such-file-or-directory
-|   `-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
-|-- arm-randconfig-m031-20221109
-|   |-- lib-zstd-compress-huf_compress.c-HUF_getIndex()-warn:the-RANK_POSITION_LOG_BUCKETS_BEGIN-macro-might-need-parens
-|   |-- lib-zstd-decompress-zstd_decompress_block.c-ZSTD_execSequence()-warn:inconsistent-indenting
-|   |-- lib-zstd-decompress-zstd_decompress_block.c-ZSTD_execSequenceEnd()-warn:inconsistent-indenting
-|   |-- lib-zstd-decompress-zstd_decompress_block.c-ZSTD_execSequenceEndSplitLitBuffer()-warn:inconsistent-indenting
-|   `-- lib-zstd-decompress-zstd_decompress_internal.h-ZSTD_DCtx_get_bmi2()-warn:inconsistent-indenting
-|-- arm64-allyesconfig
-|   |-- drivers-firmware-efi-memmap.c:warning:suggest-braces-around-empty-body-in-an-if-statement
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc.c:warning:This-comment-starts-with-but-isn-t-a-kernel-doc-comment.-Refer-Documentation-doc-guide-kernel-doc.rst
-|   `-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
-|-- arm64-randconfig-s042-20221110
-|   |-- drivers-firmware-efi-memmap.c:warning:suggest-braces-around-empty-body-in-an-if-statement
-|   `-- drivers-firmware-raspberrypi.c:sparse:sparse:incorrect-type-in-initializer-(different-base-types)-expected-restricted-__le32-usertype-id-got-unsigned-int-id
-|-- csky-randconfig-p001-20221110
-|   `-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|-- i386-allyesconfig
-|   |-- arch-x86-platform-efi-runtime-map.c:warning:no-previous-prototype-for-efi_get_runtime_map_desc_size
-|   |-- arch-x86-platform-efi-runtime-map.c:warning:no-previous-prototype-for-efi_get_runtime_map_size
-|   |-- arch-x86-platform-efi-runtime-map.c:warning:no-previous-prototype-for-efi_runtime_map_copy
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc.c:warning:This-comment-starts-with-but-isn-t-a-kernel-doc-comment.-Refer-Documentation-doc-guide-kernel-doc.rst
-|   `-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
-|-- i386-randconfig-c001
-|   |-- lib-zstd-compress-..-common-zstd_deps.h:warning:use-of-NULL-zc.outBuff-where-non-null-expected-CWE
-|   `-- lib-zstd-compress-huf_compress.c:warning:shift-by-count-(-)-precision-of-type-(-)
-|-- i386-randconfig-m021
-|   |-- arch-x86-boot-compressed-..-..-..-..-lib-zstd-decompress-zstd_decompress_block.c-ZSTD_execSequence()-warn:inconsistent-indenting
-|   |-- arch-x86-boot-compressed-..-..-..-..-lib-zstd-decompress-zstd_decompress_block.c-ZSTD_execSequenceEnd()-warn:inconsistent-indenting
-|   |-- arch-x86-boot-compressed-..-..-..-..-lib-zstd-decompress-zstd_decompress_block.c-ZSTD_execSequenceEndSplitLitBuffer()-warn:inconsistent-indenting
-|   |-- arch-x86-boot-compressed-..-..-..-..-lib-zstd-decompress-zstd_decompress_internal.h-ZSTD_DCtx_get_bmi2()-warn:inconsistent-indenting
-|   |-- lib-zstd-compress-huf_compress.c-HUF_getIndex()-warn:the-RANK_POSITION_LOG_BUCKETS_BEGIN-macro-might-need-parens
-|   |-- lib-zstd-decompress-zstd_decompress_block.c-ZSTD_execSequence()-warn:inconsistent-indenting
-|   |-- lib-zstd-decompress-zstd_decompress_block.c-ZSTD_execSequenceEnd()-warn:inconsistent-indenting
-|   |-- lib-zstd-decompress-zstd_decompress_block.c-ZSTD_execSequenceEndSplitLitBuffer()-warn:inconsistent-indenting
-|   |-- lib-zstd-decompress-zstd_decompress_internal.h-ZSTD_DCtx_get_bmi2()-warn:inconsistent-indenting
-|   `-- mm-khugepaged.c-collapse_file()-warn:iterator-used-outside-loop:page
-|-- ia64-allmodconfig
-|   |-- drivers-firmware-efi-memmap.c:warning:suggest-braces-around-empty-body-in-an-if-statement
-|   `-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
-|-- ia64-randconfig-c031-20221110
-clang_recent_errors
-|-- hexagon-randconfig-r045-20221110
-|   |-- drivers-media-platform-mediatek-jpeg-mtk_jpeg_core.c:warning:unused-variable-mt8173_jpeg_drvdata
-|   |-- drivers-media-platform-mediatek-jpeg-mtk_jpeg_core.c:warning:unused-variable-mtk8195_jpegdec_drvdata
-|   `-- drivers-media-platform-mediatek-jpeg-mtk_jpeg_core.c:warning:unused-variable-mtk_jpeg_drvdata
-|-- hexagon-randconfig-r045-20221111
-|   |-- drivers-media-platform-mediatek-jpeg-mtk_jpeg_core.c:warning:unused-variable-mt8173_jpeg_drvdata
-|   `-- drivers-media-platform-mediatek-jpeg-mtk_jpeg_core.c:warning:unused-variable-mtk_jpeg_drvdata
-`-- s390-randconfig-r022-20221110
-    `-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-function-gf100_fifo_nonstall_block
-
-elapsed time: 736m
-
-configs tested: 77
-configs skipped: 2
-
-gcc tested configs:
-arm                            xcep_defconfig
-openrisc                         alldefconfig
-arm                               allnoconfig
-sh                        apsh4ad0a_defconfig
-powerpc                    adder875_defconfig
-powerpc                      arches_defconfig
-i386                             alldefconfig
-sh                          lboxre2_defconfig
-m68k                        mvme16x_defconfig
-sh                        edosk7760_defconfig
-powerpc                       holly_defconfig
-arm                             pxa_defconfig
-sh                         ap325rxa_defconfig
-sh                        sh7763rdp_defconfig
-um                             i386_defconfig
-um                           x86_64_defconfig
-arm                            pleb_defconfig
-x86_64                            allnoconfig
-powerpc                      bamboo_defconfig
-x86_64                              defconfig
-i386                          randconfig-a014
-x86_64                           rhel-8.3-kvm
-x86_64                           rhel-8.3-syz
-i386                          randconfig-a012
-arm                       imx_v6_v7_defconfig
-i386                                defconfig
-i386                          randconfig-a016
-ia64                             allmodconfig
-m68k                             allyesconfig
-arm                                 defconfig
-x86_64                         rhel-8.3-kunit
-powerpc                     tqm8541_defconfig
-x86_64                          rhel-8.3-func
-x86_64                               rhel-8.3
-arc                                 defconfig
-x86_64                        randconfig-a002
-x86_64                    rhel-8.3-kselftests
-riscv                          rv32_defconfig
-i386                             allyesconfig
-s390                             allmodconfig
-x86_64                           allyesconfig
-arm                              allyesconfig
-alpha                               defconfig
-i386                          randconfig-a001
-arc                  randconfig-r043-20221110
-x86_64                        randconfig-a004
-i386                          randconfig-a003
-s390                                defconfig
-x86_64                        randconfig-a006
-i386                          randconfig-a005
-powerpc                           allnoconfig
-arm64                            allyesconfig
-i386                          randconfig-c001
-s390                             allyesconfig
-sh                               allmodconfig
-m68k                             allmodconfig
-alpha                            allyesconfig
-arc                              allyesconfig
-mips                             allyesconfig
-powerpc                          allmodconfig
-
-clang tested configs:
-powerpc                    ge_imp3a_defconfig
-powerpc                     ppa8548_defconfig
-mips                        omega2p_defconfig
-powerpc                     kilauea_defconfig
-i386                          randconfig-a013
-i386                          randconfig-a011
-i386                          randconfig-a015
-powerpc                  mpc866_ads_defconfig
-x86_64                        randconfig-a001
-x86_64                        randconfig-a003
-hexagon              randconfig-r041-20221110
-riscv                randconfig-r042-20221110
-x86_64                        randconfig-a005
-i386                          randconfig-a002
-hexagon              randconfig-r045-20221110
-i386                          randconfig-a004
-s390                 randconfig-r044-20221110
-
--- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
+> +MODULE_LICENSE("GPL v2");
