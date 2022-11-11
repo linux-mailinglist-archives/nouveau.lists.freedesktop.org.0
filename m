@@ -1,52 +1,61 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3471626133
-	for <lists+nouveau@lfdr.de>; Fri, 11 Nov 2022 19:34:02 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A50056261CE
+	for <lists+nouveau@lfdr.de>; Fri, 11 Nov 2022 20:21:58 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8C34F8920D;
-	Fri, 11 Nov 2022 18:33:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0C83610E1B0;
+	Fri, 11 Nov 2022 19:21:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5F39C10E109;
- Fri, 11 Nov 2022 18:33:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1668191617; x=1699727617;
- h=date:from:to:cc:subject:message-id:mime-version:
- content-transfer-encoding;
- bh=DXNsdxx3S3JoDsCj2fv5BJWrHxxNABpYOhoARLR8qoY=;
- b=YYfy/Q6x4WTp5PfQX7meKkZFxG2fRNAedtaVCnukRmSLoSpxsrxNMtuo
- OEQZT03bNOkNCSbBRX60qZDYQHUrctJvzOZonHSnd4aGbHaHnQ8YhRJ0Z
- fQEe5E87sg2o8WZeTbKXkT/BHTmNcsIhA5mxlG/o2Zn2wSrgv/MwFksra
- x2vo2YiSnj8Q3PBGuTySwP6VQdZSkQdPSx/RcDi2CfaKunDuM0wPx7nSs
- tVp/5Nmd24VhbO7YkqcIgwJjEW/enx36KoRMSEXHnpKdS0oyc6iDtIJeO
- VumrTDB7ZTER0uN/bdmZ/4dPGIrxkXYODoMD30406lzfeQsjyUfAFKPjb g==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10528"; a="292050080"
-X-IronPort-AV: E=Sophos;i="5.96,157,1665471600"; d="scan'208";a="292050080"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
- by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 11 Nov 2022 10:33:20 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10528"; a="668882729"
-X-IronPort-AV: E=Sophos;i="5.96,157,1665471600"; d="scan'208";a="668882729"
-Received: from lkp-server01.sh.intel.com (HELO e783503266e8) ([10.239.97.150])
- by orsmga008.jf.intel.com with ESMTP; 11 Nov 2022 10:33:17 -0800
-Received: from kbuild by e783503266e8 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1otYq5-0004C1-0L;
- Fri, 11 Nov 2022 18:33:17 +0000
-Date: Sat, 12 Nov 2022 02:32:42 +0800
-From: kernel test robot <lkp@intel.com>
-To: Andrew Morton <akpm@linux-foundation.org>
-Message-ID: <636e954a.VkBZfaeGEL+NAnI6%lkp@intel.com>
-User-Agent: Heirloom mailx 12.5 6/20/10
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7242E10E1B0
+ for <nouveau@lists.freedesktop.org>; Fri, 11 Nov 2022 19:21:51 +0000 (UTC)
+Received: by mail-pl1-x62c.google.com with SMTP id 4so4994230pli.0
+ for <nouveau@lists.freedesktop.org>; Fri, 11 Nov 2022 11:21:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=IHk/WyAgMPc33IOyOTaPaWGnmZhp17CsZbK+KP95Wh8=;
+ b=O6YivlkQdE2NV4Z4tLE02IOQ7YQgIRJrWM80tdZkt5k+XIQtZz7cxKpCMaB7rrfPq7
+ G3XacIpYr2nn6HNsDJtbm6DA3HrV4P+qQd/qmV5UhkMSi3baY1lPJVMFkAstEJzuHUeN
+ DgKOEOliQUckGTg21sefxcOucamEjp7kTw/Qs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IHk/WyAgMPc33IOyOTaPaWGnmZhp17CsZbK+KP95Wh8=;
+ b=In+/Pext8F/A2CRFcwZWuGvA4LdIoWKlQDizIhAxUjpQBuSxG7csYcwIiPzFlV6Nx2
+ TDz52FEGoUMEnPxer/MX4S+bq9fm6WbWFkCYvK0UlNfdrjwvvQVdvy6aLpiMFCWTaElI
+ IWSeioaWqDDD8ptCNS5V1q4RNyTVV1BT45OrLaU6wl/VKSo6lgUuNijP5skUuPwuBAFB
+ 3obPA5Q5P1Vpq8BNyZgSPt6m4ZYsFR72JG4ILzfvRyIXqtNmffLCB5lhtje6mkFllQLs
+ y08/tfppHYyj36aZFynJeZwG1NBmYbsC+BLjwgvR37XoKQEHkSujCCR/EqSghvswqRFU
+ fVaA==
+X-Gm-Message-State: ANoB5plemyM26NHGOMGp4v9MFFCEP6VRE6kbS4Ixcef5vsu0D3vMost9
+ UozSyUoaBzZfGyvw2wKNQ2Up+w==
+X-Google-Smtp-Source: AA0mqf4i77VIhs5qpNyBlVvhpR2s9r/2VBj54xZbpPIy/ryD5gcsls//pP1BrhZB4gM/fwDn5Bz05Q==
+X-Received: by 2002:a17:902:e052:b0:172:f5b1:e73b with SMTP id
+ x18-20020a170902e05200b00172f5b1e73bmr3962831plx.58.1668194510942; 
+ Fri, 11 Nov 2022 11:21:50 -0800 (PST)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+ by smtp.gmail.com with ESMTPSA id
+ c14-20020a62f84e000000b0052d4cb47339sm1907746pfm.151.2022.11.11.11.21.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 11 Nov 2022 11:21:50 -0800 (PST)
+Date: Fri, 11 Nov 2022 11:21:49 -0800
+From: Kees Cook <keescook@chromium.org>
+To: Jani Nikula <jani.nikula@intel.com>
+Message-ID: <202211111110.11B554B@keescook>
+References: <202211100850.7A8DD75@keescook>
+ <87iljl6ehe.fsf@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Subject: [Nouveau] [linux-next:master] BUILD REGRESSION
- f8f60f322f0640c8edda2942ca5f84b7a27c417a
+Content-Disposition: inline
+In-Reply-To: <87iljl6ehe.fsf@intel.com>
+Subject: Re: [Nouveau] Coverity: nouveau_dp_irq(): Null pointer dereferences
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,204 +67,64 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-efi@vger.kernel.org, nouveau@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org,
- Linux Memory Management List <linux-mm@kvack.org>,
- dri-devel@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org
+Cc: "Nathan E. Egge" <unlord@xiph.org>,
+ "Gustavo A. R. Silva" <gustavo@embeddedor.com>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-next@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
+ linux-hardening@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
-branch HEAD: f8f60f322f0640c8edda2942ca5f84b7a27c417a  Add linux-next specific files for 20221111
+On Fri, Nov 11, 2022 at 11:13:17AM +0200, Jani Nikula wrote:
+> On Thu, 10 Nov 2022, coverity-bot <keescook@chromium.org> wrote:
+> > Hello!
+> >
+> > This is an experimental semi-automated report about issues detected by
+> > Coverity from a scan of next-20221110 as part of the linux-next scan project:
+> > https://scan.coverity.com/projects/linux-next-weekly-scan
+> >
+> > You're getting this email because you were associated with the identified
+> > lines of code (noted below) that were touched by commits:
+> >
+> >   Mon Aug 31 19:10:08 2020 -0400
+> >     a0922278f83e ("drm/nouveau/kms/nv50-: Refactor and cleanup DP HPD handling")
+> 
+> Hi Kees, this looks like a good idea, but maybe double check the Cc list
+> generation? I was Cc'd on four mails today that I thought were
+> irrelevant to me.
 
-Error/Warning reports:
+Hi!
 
-https://lore.kernel.org/linux-mm/202210261404.b6UlzG7H-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202210270637.Q5Y7FiKJ-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211090634.RyFKK0WS-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211102047.QP7IThm4-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211111624.1XZTuzHJ-lkp@intel.com
+Heh, I was recently asked to _expand_ the CC list. :)
 
-Error/Warning: (recently discovered and may have been fixed)
+For these last pass of reports, I added a get_maintainers.pl run to the
+identified commit. In this instance, the commit touched:
 
-arch/arm/mach-s3c/devs.c:32:10: fatal error: linux/platform_data/dma-s3c24xx.h: No such file or directory
-arch/x86/platform/efi/runtime-map.c:138:5: warning: no previous prototype for 'efi_get_runtime_map_size' [-Wmissing-prototypes]
-arch/x86/platform/efi/runtime-map.c:143:5: warning: no previous prototype for 'efi_get_runtime_map_desc_size' [-Wmissing-prototypes]
-arch/x86/platform/efi/runtime-map.c:148:5: warning: no previous prototype for 'efi_runtime_map_copy' [-Wmissing-prototypes]
-csky-linux-ld: local_object.c:(.text+0x84): undefined reference to `ipv6_icmp_error'
-drivers/block/zram/zram_drv.c:1857:7: warning: variable 'err' is used uninitialized whenever 'if' condition is true [-Wsometimes-uninitialized]
-drivers/block/zram/zram_drv.c:1857:7: warning: variable 'err' is used uninitialized whenever '||' condition is true [-Wsometimes-uninitialized]
-drivers/firmware/efi/memmap.c:57:52: warning: suggest braces around empty body in an 'if' statement [-Wempty-body]
-drivers/gpu/drm/amd/amdgpu/../display/dc/core/dc.c:4887: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
-drivers/gpu/drm/amd/amdgpu/../display/dc/core/dc_link_dp.c:5073:24: warning: implicit conversion from 'enum <anonymous>' to 'enum dc_status' [-Wenum-conversion]
-drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: warning: no previous prototype for 'gf100_fifo_nonstall_block' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: warning: no previous prototype for function 'gf100_fifo_nonstall_block' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c:34:1: warning: no previous prototype for 'nvkm_engn_cgrp_get' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c:34:1: warning: no previous prototype for function 'nvkm_engn_cgrp_get' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: no previous prototype for 'tu102_gr_load' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: no previous prototype for function 'tu102_gr_load' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c:49:1: warning: no previous prototype for 'wpr_generic_header_dump' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c:49:1: warning: no previous prototype for function 'wpr_generic_header_dump' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:221:21: warning: variable 'loc' set but not used [-Wunused-but-set-variable]
-local_object.c:(.text+0x60): undefined reference to `ipv6_icmp_error'
-vmlinux.o: warning: objtool: __btrfs_map_block+0x1e22: unreachable instruction
+ drivers/gpu/drm/nouveau/dispnv04/disp.c     |    6 +
+ drivers/gpu/drm/nouveau/dispnv50/disp.c     |  192 ++++++++++++++++++++++--------------------------
+ drivers/gpu/drm/nouveau/nouveau_connector.c |   14 ---
+ drivers/gpu/drm/nouveau/nouveau_display.c   |    2 
+ drivers/gpu/drm/nouveau/nouveau_display.h   |    2 
+ drivers/gpu/drm/nouveau/nouveau_dp.c        |  132 ++++++++++++++++++++++++++++-----
+ drivers/gpu/drm/nouveau/nouveau_encoder.h   |   33 +++++++-
+ 7 files changed, 244 insertions(+), 137 deletions(-)
 
-Unverified Error/Warning (likely false positive, please contact us if interested):
+And the get_maintainers.pl rationale was:
 
-drivers/gpu/drm/nouveau/nvkm/subdev/mc/ga100.c:51:1: sparse: sparse: symbol 'ga100_mc_device' was not declared. Should it be static?
-lib/zstd/compress/huf_compress.c:460 HUF_getIndex() warn: the 'RANK_POSITION_LOG_BUCKETS_BEGIN' macro might need parens
-lib/zstd/decompress/zstd_decompress_block.c:1009 ZSTD_execSequence() warn: inconsistent indenting
-lib/zstd/decompress/zstd_decompress_block.c:894 ZSTD_execSequenceEnd() warn: inconsistent indenting
-lib/zstd/decompress/zstd_decompress_block.c:942 ZSTD_execSequenceEndSplitLitBuffer() warn: inconsistent indenting
-lib/zstd/decompress/zstd_decompress_internal.h:206 ZSTD_DCtx_get_bmi2() warn: inconsistent indenting
-mm/khugepaged.c:2038 collapse_file() warn: iterator used outside loop: 'page'
+Ben Skeggs <bskeggs@redhat.com> (supporter:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS,commit_signer:1/1=100%,commit_signer:6/16=38%,authored:4/16=25%,added_lines:23/124=19%,removed_lines:36/152=24%)
+Karol Herbst <kherbst@redhat.com> (supporter:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS,commit_signer:2/1=100%)
+Lyude Paul <lyude@redhat.com> (supporter:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS,commit_signer:9/16=56%,authored:6/16=38%,added_lines:92/124=74%,removed_lines:107/152=70%)
+David Airlie <airlied@gmail.com> (maintainer:DRM DRIVERS)
+Daniel Vetter <daniel@ffwll.ch> (maintainer:DRM DRIVERS)
+Ilia Mirkin <imirkin@alum.mit.edu> (commit_signer:1/1=100%,authored:1/1=100%,added_lines:2/2=100%,removed_lines:2/2=100%)
+"Nathan E. Egge" <unlord@xiph.org> (commit_signer:1/1=100%)
+Jani Nikula <jani.nikula@intel.com> (commit_signer:6/16=38%)
+Dave Airlie <airlied@redhat.com> (commit_signer:5/16=31%)
+Thomas Zimmermann <tzimmermann@suse.de> (commit_signer:4/16=25%,authored:4/16=25%)
+dri-devel@lists.freedesktop.org (open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS)
+nouveau@lists.freedesktop.org (open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS)
 
-Error/Warning ids grouped by kconfigs:
-
-gcc_recent_errors
-|-- alpha-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
-|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
-|-- alpha-randconfig-r003-20221111
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
-|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
-|-- arc-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
-|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
-|-- arc-randconfig-m041-20221111
-|   |-- lib-zstd-compress-huf_compress.c-HUF_getIndex()-warn:the-RANK_POSITION_LOG_BUCKETS_BEGIN-macro-might-need-parens
-|   |-- lib-zstd-decompress-zstd_decompress_block.c-ZSTD_execSequence()-warn:inconsistent-indenting
-|   |-- lib-zstd-decompress-zstd_decompress_block.c-ZSTD_execSequenceEnd()-warn:inconsistent-indenting
-|   |-- lib-zstd-decompress-zstd_decompress_block.c-ZSTD_execSequenceEndSplitLitBuffer()-warn:inconsistent-indenting
-|   `-- lib-zstd-decompress-zstd_decompress_internal.h-ZSTD_DCtx_get_bmi2()-warn:inconsistent-indenting
-|-- arm-allyesconfig
-|   |-- arch-arm-mach-s3c-devs.c:fatal-error:linux-platform_data-dma-s3c24xx.h:No-such-file-or-directory
-|   |-- drivers-firmware-efi-memmap.c:warning:suggest-braces-around-empty-body-in-an-if-statement
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
-|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
-|-- arm-defconfig
-|   |-- drivers-firmware-efi-memmap.c:warning:suggest-braces-around-empty-body-in-an-if-statement
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
-|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
-|-- arm-oxnas_v6_defconfig
-|   `-- drivers-firmware-efi-memmap.c:warning:suggest-braces-around-empty-body-in-an-if-statement
-|-- arm-s3c6400_defconfig
-|   `-- arch-arm-mach-s3c-devs.c:fatal-error:linux-platform_data-dma-s3c24xx.h:No-such-file-or-directory
-|-- arm64-allyesconfig
-|   |-- drivers-firmware-efi-memmap.c:warning:suggest-braces-around-empty-body-in-an-if-statement
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc.c:warning:This-comment-starts-with-but-isn-t-a-kernel-doc-comment.-Refer-Documentation-doc-guide-kernel-doc.rst
-clang_recent_errors
-|-- hexagon-randconfig-r001-20221111
-|   |-- drivers-block-zram-zram_drv.c:warning:variable-err-is-used-uninitialized-whenever-condition-is-true
-|   `-- drivers-block-zram-zram_drv.c:warning:variable-err-is-used-uninitialized-whenever-if-condition-is-true
-`-- riscv-randconfig-r033-20221111
-    |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-function-gf100_fifo_nonstall_block
-    |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-function-nvkm_engn_cgrp_get
-    |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-function-tu102_gr_load
-    `-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-function-wpr_generic_header_dump
-
-elapsed time: 722m
-
-configs tested: 74
-configs skipped: 2
-
-gcc tested configs:
-arc                                 defconfig
-alpha                               defconfig
-um                           x86_64_defconfig
-um                             i386_defconfig
-x86_64                        randconfig-a002
-x86_64                        randconfig-a004
-i386                                defconfig
-x86_64                        randconfig-a013
-x86_64                          rhel-8.3-func
-x86_64                        randconfig-a011
-x86_64                              defconfig
-x86_64                    rhel-8.3-kselftests
-x86_64                        randconfig-a015
-x86_64                        randconfig-a006
-arc                  randconfig-r043-20221111
-s390                                defconfig
-riscv                randconfig-r042-20221111
-s390                 randconfig-r044-20221111
-x86_64                               rhel-8.3
-x86_64                           allyesconfig
-ia64                             allmodconfig
-powerpc                           allnoconfig
-i386                          randconfig-a014
-i386                          randconfig-a001
-i386                          randconfig-a003
-powerpc                          allmodconfig
-i386                          randconfig-a012
-i386                          randconfig-a005
-mips                             allyesconfig
-i386                          randconfig-a016
-sh                               allmodconfig
-arm                        oxnas_v6_defconfig
-arm                         s3c6400_defconfig
-m68k                          atari_defconfig
-x86_64                            allnoconfig
-xtensa                    xip_kc705_defconfig
-s390                             allmodconfig
-arm                        realview_defconfig
-m68k                            q40_defconfig
-arm                          gemini_defconfig
-arc                              allyesconfig
-s390                             allyesconfig
-arm                                 defconfig
-alpha                            allyesconfig
-m68k                             allmodconfig
-i386                             allyesconfig
-m68k                             allyesconfig
-x86_64                           rhel-8.3-syz
-arm                              allyesconfig
-x86_64                         rhel-8.3-kunit
-x86_64                           rhel-8.3-kvm
-arm64                            allyesconfig
-arm                           h5000_defconfig
-csky                                defconfig
-arm                        trizeps4_defconfig
-m68k                       m5275evb_defconfig
-
-clang tested configs:
-x86_64                        randconfig-a005
-x86_64                        randconfig-a001
-x86_64                        randconfig-a003
-x86_64                        randconfig-a014
-x86_64                        randconfig-a016
-x86_64                        randconfig-a012
-hexagon              randconfig-r041-20221111
-i386                          randconfig-a013
-i386                          randconfig-a015
-i386                          randconfig-a011
-i386                          randconfig-a002
-i386                          randconfig-a006
-i386                          randconfig-a004
-powerpc                    mvme5100_defconfig
-x86_64                          rhel-8.3-rust
-powerpc                    ge_imp3a_defconfig
-mips                     loongson2k_defconfig
-arm                       aspeed_g4_defconfig
 
 -- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
+Kees Cook
