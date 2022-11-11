@@ -2,66 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B63F6264AD
-	for <lists+nouveau@lfdr.de>; Fri, 11 Nov 2022 23:36:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 398CD6264B9
+	for <lists+nouveau@lfdr.de>; Fri, 11 Nov 2022 23:46:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5D14510E8E6;
-	Fri, 11 Nov 2022 22:36:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1DECD10E8EA;
+	Fri, 11 Nov 2022 22:46:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 782D410E8E6
- for <nouveau@lists.freedesktop.org>; Fri, 11 Nov 2022 22:35:57 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6585910E8EA
+ for <nouveau@lists.freedesktop.org>; Fri, 11 Nov 2022 22:45:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1668206156;
+ s=mimecast20190719; t=1668206756;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=FhguikNfjP3jJj2Xsd2EMwn1nCtYD4FWU8eudH5AFMc=;
- b=MA25sQIWc0ddhfcddwraC+TGkTSaolZURMyA95vQifXHSXfSnErndfi5RZvFnMsea6JBOt
- KnJQrNSSVS1D5A/I36dag2YGU/DU5ZZeJ0lv9P65K+QpkR861crckkqzW85+bmxe3Hfzsr
- LxmcnKxy8mv7vPkDpb0gteQR3CpU1+w=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=HfoD+yTsgDgyy3DKNtedBkMBeaq/mYuNaScJkhXJDcQ=;
+ b=WfRGDPb65rye87R4KPsiuquAZw87lT2UwqlsNKWG8cZR8V8AsiMga7oXAnApxa+aX+BWag
+ 7SzMLiGrgqI+TCrpRpaIe5u7gPmMFLJzKWp/KAOVjJaEhUvCXzud5R2tI+MLxr1+oDV0vX
+ jvd2675/R8uxVrEmEJmaXlvQYyWcdQ4=
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-567-BjiXoeoFMH24723jF8-OPg-1; Fri, 11 Nov 2022 17:35:55 -0500
-X-MC-Unique: BjiXoeoFMH24723jF8-OPg-1
-Received: by mail-qk1-f198.google.com with SMTP id
- ay43-20020a05620a17ab00b006fa30ed61fdso5774116qkb.5
- for <nouveau@lists.freedesktop.org>; Fri, 11 Nov 2022 14:35:55 -0800 (PST)
+ us-mta-487-kYKf3_T6OxC3iqysYsWL8Q-1; Fri, 11 Nov 2022 17:45:55 -0500
+X-MC-Unique: kYKf3_T6OxC3iqysYsWL8Q-1
+Received: by mail-qk1-f200.google.com with SMTP id
+ br12-20020a05620a460c00b006fa52448320so5845348qkb.0
+ for <nouveau@lists.freedesktop.org>; Fri, 11 Nov 2022 14:45:55 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:user-agent:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FhguikNfjP3jJj2Xsd2EMwn1nCtYD4FWU8eudH5AFMc=;
- b=n/+1HOnRdRnTLCi1UeYkcgQ3I9VmxpIult9oB1JNlECAyqUBB8D32B4IKZO15TpcGo
- guCV6TbA/Lv4JLCJZguqethX4yzVjn9T4BmVyHPLYZJs8aKtaR9aPH+WOSjM/UkAaRQ0
- sguqi/kiWG8wVNAZLGOCHuvuiyEfMQ1a0C3yL73CJ+t1yjM1wPUGgbdbs4DZvrstWyAk
- ScDWLkaHlHJ/Mt0/+Tc4fH88pz/RxJR6DZdEtHgZivo2ZQUdaOyBF/fPTj1QuWVvF42Z
- bJ74UgIrtTjvafcaIlJtPO7Ho9+/MhN8IXRInuvjNow0c2/40ZcfYEuCb87VdDbs/0K1
- j6ww==
-X-Gm-Message-State: ANoB5pkkhDi8zKjoRqKqT78Vit8zh/SanoHbFsxNsd6DeWMmExJbRwj6
- XP0jYqSDdccHNxdu36pgfEjXASUq/HFxgdP/161lyvFnCjaom5MnXqq9UiGJ/z+JgHFTsK0uT9D
- yjhN65toDAy1/id209YjXasMn8A==
-X-Received: by 2002:a05:620a:6c6:b0:6fa:3aa2:3269 with SMTP id
- 6-20020a05620a06c600b006fa3aa23269mr3031012qky.580.1668206154909; 
- Fri, 11 Nov 2022 14:35:54 -0800 (PST)
-X-Google-Smtp-Source: AA0mqf6W/KXwux5rPH6dWDWepLU+USDtFNI5v0KJ6gDMc3Hi176iuyM26xOcvo8FvrRu0zkBEIu9xg==
-X-Received: by 2002:a05:620a:6c6:b0:6fa:3aa2:3269 with SMTP id
- 6-20020a05620a06c600b006fa3aa23269mr3031002qky.580.1668206154708; 
- Fri, 11 Nov 2022 14:35:54 -0800 (PST)
+ bh=HfoD+yTsgDgyy3DKNtedBkMBeaq/mYuNaScJkhXJDcQ=;
+ b=nQ4kyAEOjj6dkaDFkskiPzE+GLJLcWol71S5fbACKeKuhoVAkQz3tTc2OAE5Po3+bE
+ QjGq2Q7lUPu/ZIQOCmXKY6lB0hkWNSeJLn9tMqHvYg2bxCi1rm73OGVeaXx1C0yUdTT8
+ RB4VSB38Gxv2BTvsFGIFCDAvXxD+xx/oZuMHD+ScXdURov2iG3AgXlLhdY11blvETfYW
+ LmcpE884plLiL7iYKU1WVWHwZXP0Fz7FzzidAExpVFHMdnE7LWcvXOGM8cNkcWa3qLe1
+ 7IgcXGVXRbQdmrN1NfAksv/8/cM4HMSmTdzGZb5WF56nlOJwWQbrbslAywFbFqEN9Qk9
+ 8Z0g==
+X-Gm-Message-State: ANoB5pnj6VuI3ca7mYtIM5UKzcwCXuKtGJJ2Q0M0gsdbyKNobnKSqMa6
+ hwJ+ZS0xb8AoZDK63Iq9bxgahlXhKL1EeDkDQzM8Lk5ITOOGXsL/wq7/0G8tYxXA/M5mWJSVyX3
+ Oi51QssuDsbL4noxzedO9qnjfVQ==
+X-Received: by 2002:a37:6887:0:b0:6cd:fd44:d83e with SMTP id
+ d129-20020a376887000000b006cdfd44d83emr2973930qkc.594.1668206755006; 
+ Fri, 11 Nov 2022 14:45:55 -0800 (PST)
+X-Google-Smtp-Source: AA0mqf6SZGZhkL4AowLZ87AFimr5T3hQE6XB4d5J7ZosU46Koto1vL4Amhb0XNjGBjAqUUHeUBXwrQ==
+X-Received: by 2002:a37:6887:0:b0:6cd:fd44:d83e with SMTP id
+ d129-20020a376887000000b006cdfd44d83emr2973910qkc.594.1668206754748; 
+ Fri, 11 Nov 2022 14:45:54 -0800 (PST)
 Received: from ?IPv6:2600:4040:5c6c:9200::feb? ([2600:4040:5c6c:9200::feb])
  by smtp.gmail.com with ESMTPSA id
- q7-20020a05620a0d8700b006fafaac72a6sm2203033qkl.84.2022.11.11.14.35.53
+ f2-20020ac87f02000000b003a4c3c4d2d4sm1948861qtk.49.2022.11.11.14.45.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Nov 2022 14:35:53 -0800 (PST)
-Message-ID: <b4f731226c27150cc776d87a1175859d22acd666.camel@redhat.com>
+ Fri, 11 Nov 2022 14:45:53 -0800 (PST)
+Message-ID: <023708836f1af8302c813e8308c7d406e6fd2310.camel@redhat.com>
 From: Lyude Paul <lyude@redhat.com>
 To: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>, bskeggs@redhat.com
-Date: Fri, 11 Nov 2022 17:35:52 -0500
+Date: Fri, 11 Nov 2022 17:45:52 -0500
 In-Reply-To: <20221111091130.57178-1-jiapeng.chong@linux.alibaba.com>
 References: <20221111091130.57178-1-jiapeng.chong@linux.alibaba.com>
 Organization: Red Hat Inc.
@@ -89,11 +89,9 @@ Cc: nouveau@lists.freedesktop.org, Abaci Robot <abaci@linux.alibaba.com>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-For the whole series:
-
-Reviewed-by: Lyude Paul <lyude@redhat.com>
-
-Will push to drm-misc-next in a bit
+Actually hm, I think ben will need to consider pulling these into his branch
+since these don't seem to apply to drm-misc-next - so presumably they're
+related to some of the work that's been getting pushed recently for GSP prep
 
 On Fri, 2022-11-11 at 17:11 +0800, Jiapeng Chong wrote:
 > This symbol is not used outside of acr.c, so marks it static.
