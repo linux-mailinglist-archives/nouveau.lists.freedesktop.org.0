@@ -1,78 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 398CD6264B9
-	for <lists+nouveau@lfdr.de>; Fri, 11 Nov 2022 23:46:06 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B50B626A92
+	for <lists+nouveau@lfdr.de>; Sat, 12 Nov 2022 17:30:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1DECD10E8EA;
-	Fri, 11 Nov 2022 22:46:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8F0D810E19F;
+	Sat, 12 Nov 2022 16:29:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6585910E8EA
- for <nouveau@lists.freedesktop.org>; Fri, 11 Nov 2022 22:45:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1668206756;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=HfoD+yTsgDgyy3DKNtedBkMBeaq/mYuNaScJkhXJDcQ=;
- b=WfRGDPb65rye87R4KPsiuquAZw87lT2UwqlsNKWG8cZR8V8AsiMga7oXAnApxa+aX+BWag
- 7SzMLiGrgqI+TCrpRpaIe5u7gPmMFLJzKWp/KAOVjJaEhUvCXzud5R2tI+MLxr1+oDV0vX
- jvd2675/R8uxVrEmEJmaXlvQYyWcdQ4=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-487-kYKf3_T6OxC3iqysYsWL8Q-1; Fri, 11 Nov 2022 17:45:55 -0500
-X-MC-Unique: kYKf3_T6OxC3iqysYsWL8Q-1
-Received: by mail-qk1-f200.google.com with SMTP id
- br12-20020a05620a460c00b006fa52448320so5845348qkb.0
- for <nouveau@lists.freedesktop.org>; Fri, 11 Nov 2022 14:45:55 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:user-agent:organization
- :references:in-reply-to:date:cc:to:from:subject:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HfoD+yTsgDgyy3DKNtedBkMBeaq/mYuNaScJkhXJDcQ=;
- b=nQ4kyAEOjj6dkaDFkskiPzE+GLJLcWol71S5fbACKeKuhoVAkQz3tTc2OAE5Po3+bE
- QjGq2Q7lUPu/ZIQOCmXKY6lB0hkWNSeJLn9tMqHvYg2bxCi1rm73OGVeaXx1C0yUdTT8
- RB4VSB38Gxv2BTvsFGIFCDAvXxD+xx/oZuMHD+ScXdURov2iG3AgXlLhdY11blvETfYW
- LmcpE884plLiL7iYKU1WVWHwZXP0Fz7FzzidAExpVFHMdnE7LWcvXOGM8cNkcWa3qLe1
- 7IgcXGVXRbQdmrN1NfAksv/8/cM4HMSmTdzGZb5WF56nlOJwWQbrbslAywFbFqEN9Qk9
- 8Z0g==
-X-Gm-Message-State: ANoB5pnj6VuI3ca7mYtIM5UKzcwCXuKtGJJ2Q0M0gsdbyKNobnKSqMa6
- hwJ+ZS0xb8AoZDK63Iq9bxgahlXhKL1EeDkDQzM8Lk5ITOOGXsL/wq7/0G8tYxXA/M5mWJSVyX3
- Oi51QssuDsbL4noxzedO9qnjfVQ==
-X-Received: by 2002:a37:6887:0:b0:6cd:fd44:d83e with SMTP id
- d129-20020a376887000000b006cdfd44d83emr2973930qkc.594.1668206755006; 
- Fri, 11 Nov 2022 14:45:55 -0800 (PST)
-X-Google-Smtp-Source: AA0mqf6SZGZhkL4AowLZ87AFimr5T3hQE6XB4d5J7ZosU46Koto1vL4Amhb0XNjGBjAqUUHeUBXwrQ==
-X-Received: by 2002:a37:6887:0:b0:6cd:fd44:d83e with SMTP id
- d129-20020a376887000000b006cdfd44d83emr2973910qkc.594.1668206754748; 
- Fri, 11 Nov 2022 14:45:54 -0800 (PST)
-Received: from ?IPv6:2600:4040:5c6c:9200::feb? ([2600:4040:5c6c:9200::feb])
- by smtp.gmail.com with ESMTPSA id
- f2-20020ac87f02000000b003a4c3c4d2d4sm1948861qtk.49.2022.11.11.14.45.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Nov 2022 14:45:53 -0800 (PST)
-Message-ID: <023708836f1af8302c813e8308c7d406e6fd2310.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>, bskeggs@redhat.com
-Date: Fri, 11 Nov 2022 17:45:52 -0500
-In-Reply-To: <20221111091130.57178-1-jiapeng.chong@linux.alibaba.com>
-References: <20221111091130.57178-1-jiapeng.chong@linux.alibaba.com>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4824710E192;
+ Sat, 12 Nov 2022 16:29:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=ItdrEzd/ypbcqe2BCw66feMX7m17nPXFSJOaI27/nkQ=; b=rFsBBXpR5kW0ZTIRro+NqvImhk
+ EhsHq7xGOjgbT5Q0JMV7Rup1oo8niXkDANAAgbHovP46Tc9i2Z0T0+LN9Z0LT7Wf4O0AyERaC7N4I
+ sCC0JKdGDK/DiO/FJfBpqhXQkn3Cg72/KQIBKNoHojAbWzpjvqUNB1Z2Ks94AACK4uc2EI2mDnrLv
+ UAKzvHVCTJwswnGU08vwygQY6vCNXKkQDiHrzyAOVaK52Myy4vxamy7VUC0onDOJmUgsGo/nAgNeV
+ yBGpPCv6RuENflkIaDgPHpx4IAYutqo4ui1Fv38RPkkHgqG/nO2Q3qtS5LJe646/zMqtjDhA2brFp
+ 2x15nfjg==;
+Received: from [2a01:799:95a:cb00:9d29:d4c4:45a0:777e] (port=49700)
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1ottO1-0006e5-Er; Sat, 12 Nov 2022 17:29:41 +0100
+Message-ID: <02747a6a-567a-5a70-4ab5-735eda8ac179@tronnes.org>
+Date: Sat, 12 Nov 2022 17:29:32 +0100
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+To: Maxime Ripard <maxime@cerno.tech>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Chen-Yu Tsai <wens@csie.org>, Maxime Ripard <mripard@kernel.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Karol Herbst
+ <kherbst@redhat.com>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Lyude Paul <lyude@redhat.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Emma Anholt <emma@anholt.net>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ David Airlie <airlied@linux.ie>, Ben Skeggs <bskeggs@redhat.com>
+References: <20220728-rpi-analog-tv-properties-v8-0-09ce1466967c@cerno.tech>
+ <20220728-rpi-analog-tv-properties-v8-14-09ce1466967c@cerno.tech>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v8-14-09ce1466967c@cerno.tech>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH 1/5] drm/nouveau/nvfw/acr: make
- wpr_generic_header_dump() static
+Subject: Re: [Nouveau] [PATCH v8 14/24] drm/modes: Properly generate a
+ drm_display_mode from a named mode
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,43 +66,37 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Abaci Robot <abaci@linux.alibaba.com>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, daniel@ffwll.ch
+Cc: Dom Cobley <dom@raspberrypi.com>, Phil Elwell <phil@raspberrypi.com>,
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, linux-sunxi@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Actually hm, I think ben will need to consider pulling these into his branch
-since these don't seem to apply to drm-misc-next - so presumably they're
-related to some of the work that's been getting pushed recently for GSP prep
 
-On Fri, 2022-11-11 at 17:11 +0800, Jiapeng Chong wrote:
-> This symbol is not used outside of acr.c, so marks it static.
+
+Den 10.11.2022 12.07, skrev Maxime Ripard:
+> The framework will get the drm_display_mode from the drm_cmdline_mode it
+> got by parsing the video command line argument by calling
+> drm_connector_pick_cmdline_mode().
 > 
-> drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c:49:1: warning: no previous prototype for ‘wpr_generic_header_dump’.
+> The heavy lifting will then be done by the drm_mode_create_from_cmdline_mode()
+> function.
 > 
-> Link: https://bugzilla.openanolis.cn/show_bug.cgi?id=3023
-> Reported-by: Abaci Robot <abaci@linux.alibaba.com>
-> Signed-off-by: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
+> In the case of the named modes though, there's no real code to make that
+> translation and we rely on the drivers to guess which actual display mode
+> we meant.
+> 
+> Let's modify drm_mode_create_from_cmdline_mode() to properly generate the
+> drm_display_mode we mean when passing a named mode.
+> 
+> Tested-by: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
+> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> 
 > ---
->  drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c b/drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c
-> index 83a9c48bc58c..7ac90c495737 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c
-> @@ -45,7 +45,7 @@ wpr_header_v1_dump(struct nvkm_subdev *subdev, const struct wpr_header_v1 *hdr)
->  	nvkm_debug(subdev, "\tstatus        : %d\n", hdr->status);
->  }
->  
-> -void
-> +static void
->  wpr_generic_header_dump(struct nvkm_subdev *subdev, const struct wpr_generic_header *hdr)
->  {
->  	nvkm_debug(subdev, "wprGenericHeader\n");
 
--- 
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
-
+Reviewed-by: Noralf Trønnes <noralf@tronnes.org>
