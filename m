@@ -2,34 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48BDB6F6B3D
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 703366F6B6B
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 27B5210E3B6;
-	Thu,  4 May 2023 12:31:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 80F7B10E437;
+	Thu,  4 May 2023 12:31:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from out30-56.freemail.mail.aliyun.com
- (out30-56.freemail.mail.aliyun.com [115.124.30.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3471E10E0CA;
- Fri, 11 Nov 2022 09:48:16 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R691e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
- MF=jiapeng.chong@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
- TI=SMTPD_---0VUX1Y0n_1668160086; 
-Received: from localhost(mailfrom:jiapeng.chong@linux.alibaba.com
- fp:SMTPD_---0VUX1Y0n_1668160086) by smtp.aliyun-inc.com;
- Fri, 11 Nov 2022 17:48:13 +0800
-From: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
-To: bskeggs@redhat.com
-Date: Fri, 11 Nov 2022 17:48:04 +0800
-Message-Id: <20221111094804.103459-1-jiapeng.chong@linux.alibaba.com>
-X-Mailer: git-send-email 2.20.1.7.g153144c
+Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A124910E1AF
+ for <nouveau@lists.freedesktop.org>; Sat, 12 Nov 2022 02:50:00 +0000 (UTC)
+Received: from dggpemm500020.china.huawei.com (unknown [172.30.72.54])
+ by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4N8Kj86LvvzJnZs;
+ Sat, 12 Nov 2022 10:46:52 +0800 (CST)
+Received: from dggpemm500007.china.huawei.com (7.185.36.183) by
+ dggpemm500020.china.huawei.com (7.185.36.49) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Sat, 12 Nov 2022 10:49:57 +0800
+Received: from huawei.com (10.175.103.91) by dggpemm500007.china.huawei.com
+ (7.185.36.183) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Sat, 12 Nov
+ 2022 10:49:56 +0800
+From: Yang Yingliang <yangyingliang@huawei.com>
+To: <nouveau@lists.freedesktop.org>
+Date: Sat, 12 Nov 2022 10:48:28 +0800
+Message-ID: <20221112024828.2740489-1-yangyingliang@huawei.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:36 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/svm: Remove set but unused variable
- 'priority'
+Content-Type: text/plain
+X-Originating-IP: [10.175.103.91]
+X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
+ dggpemm500007.china.huawei.com (7.185.36.183)
+X-CFilter-Loop: Reflected
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:38 +0000
+Subject: [Nouveau] [PATCH -next] drm/nouveau/gr/gv100-: fix missing unlock
+ on error in gf100_gr_chan_new()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -41,46 +49,31 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>,
- nouveau@lists.freedesktop.org, Abaci Robot <abaci@linux.alibaba.com>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, daniel@ffwll.ch
+Cc: bskeggs@redhat.com, yangyingliang@huawei.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Variable priority is not effectively used in the function, so delete it.
+Add the missing unlock before return from function gf100_gr_chan_new()
+in the error handling case.
 
-drivers/gpu/drm/nouveau/nouveau_svm.c:115:24: warning: variable 'priority' set but not used.
-
-Link: https://bugzilla.openanolis.cn/show_bug.cgi?id=3028
-Reported-by: Abaci Robot <abaci@linux.alibaba.com>
-Signed-off-by: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
+Fixes: ca081fff6ecc ("drm/nouveau/gr/gf100-: generate golden context during first object alloc")
+Signed-off-by: Yang Yingliang <yangyingliang@huawei.com>
 ---
- drivers/gpu/drm/nouveau/nouveau_svm.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
-index a74ba8d84ba7..2b1f600ed723 100644
---- a/drivers/gpu/drm/nouveau/nouveau_svm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
-@@ -112,7 +112,7 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
- {
- 	struct nouveau_cli *cli = nouveau_cli(file_priv);
- 	struct drm_nouveau_svm_bind *args = data;
--	unsigned target, cmd, priority;
-+	unsigned int target, cmd;
- 	unsigned long addr, end;
- 	struct mm_struct *mm;
- 
-@@ -136,9 +136,6 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
- 		return -EINVAL;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
+index 5f20079c3660..03389af3b40d 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
+@@ -443,6 +443,7 @@ gf100_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
+ 		ret = gf100_grctx_generate(gr, chan, fifoch->inst);
+ 		if (ret) {
+ 			nvkm_error(&base->engine.subdev, "failed to construct context\n");
++			mutex_unlock(&gr->fecs.mutex);
+ 			return ret;
+ 		}
  	}
- 
--	priority = args->header >> NOUVEAU_SVM_BIND_PRIORITY_SHIFT;
--	priority &= NOUVEAU_SVM_BIND_PRIORITY_MASK;
--
- 	/* FIXME support CPU target ie all target value < GPU_VRAM */
- 	target = args->header >> NOUVEAU_SVM_BIND_TARGET_SHIFT;
- 	target &= NOUVEAU_SVM_BIND_TARGET_MASK;
 -- 
-2.20.1.7.g153144c
+2.25.1
 
