@@ -1,90 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C040A62940B
-	for <lists+nouveau@lfdr.de>; Tue, 15 Nov 2022 10:15:09 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2303462A2EE
+	for <lists+nouveau@lfdr.de>; Tue, 15 Nov 2022 21:30:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 161DC10E106;
-	Tue, 15 Nov 2022 09:15:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0AEA288FB2;
+	Tue, 15 Nov 2022 20:30:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wnew2-smtp.messagingengine.com (wnew2-smtp.messagingengine.com
- [64.147.123.27])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 23E3710E395;
- Tue, 15 Nov 2022 09:14:56 +0000 (UTC)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailnew.west.internal (Postfix) with ESMTP id 48B562B067B9;
- Tue, 15 Nov 2022 04:14:51 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute2.internal (MEProxy); Tue, 15 Nov 2022 04:14:55 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :cc:content-transfer-encoding:content-type:date:date:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to; s=fm2; t=1668503690; x=
- 1668510890; bh=nasadNTIFSQnVJhZ15WImlEOjmdx13wSVUui+IzXtIA=; b=C
- EBCd8/IwgaRBHGCIJYVyt4Qz8rF9U2uAWGbw/asPEZpiTZeoJap9t9yOYsZeTFgz
- koEQRXgGf5K1JMFupoItiKDPIRUm4Xcb6mIi+naBuY6xivRF4NSKUtBLFa96Zaid
- ZRAtOlkuwITpc5oLd8kUPymDhoeR3JmnzH14A0oibNkZyQ85UYzK7CAnMPNPA/Pl
- G9joGglhF6E2iL5UIYUYJXZ/yxoKfWTKd2JzeA4Qv0cBn+WZ7SiVtAuqO661TpFy
- fvlZSsswYkZIzfXhkZ5/ZhsdvzYLFpNowZvUIalx57+JBqczAKYmgYmekrH8j8qV
- JVq6hgqFI1n1Y+2rf/m6g==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1668503690; x=
- 1668510890; bh=nasadNTIFSQnVJhZ15WImlEOjmdx13wSVUui+IzXtIA=; b=h
- /riLX6+bZkRvDvcPC2uQ4xwCKu0D4Y8dKUntqhzO9hgOIZB+o3WOCuXVniciDe+t
- KbH/MDeCPAHcicQVDRKI+vq1pJf5VnyWa4kMmr/9ezkRiT424TL1WUk1sdA7dnJo
- GPmu3cvn16tF461xVYdteoCkCjTd+HsPiPLwPglJLgdyAP0TvC0ngWTHx/5bZsXK
- mHvb/JhiO4qAVfMCH1haPYNdEqmYaNRXkMmyHxafCVkh0I22OD3ATMLSpEjP5hHP
- i28y7oGFlG4Obf/VtfsweoQUfzomxW2UH0xlFncHbH/H2HUuMs0U8CJtqR0IhvXJ
- aHHP6RHG2uAcAvF24r1gQ==
-X-ME-Sender: <xms:ilhzY_Tn6COc1nnLpdK0G7q3xNvmFsTkZY2XIts-tYINmZS78yzt3Q>
- <xme:ilhzYwwXdj_Z0XlJX20hnmX0j77f6xcmDYD-Vd3zuEMM4t-elMA-7ZWJZxo2G7xla
- VvIWK6sVqGAP6syf4M>
-X-ME-Received: <xmr:ilhzY03wbLzmdw2-vU_dYkfZvceK5FNkmiHk81TvdZb4uYB0u-_ZKDxM451T2V6EZCtKOvmY-kqwDkxgyB3YI2Dhvg4gPoWWA7UmyB9KeCAtEA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrgeeggddtvdcutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpefhvfevjghfuffkffggtgfgofesthekredtredtjeenucfhrhhomhepofgrgihi
- mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeeifeeigeelhfehkeeltdetjeetueelteeuveekueevffduhefffefhhfeh
- gfehieenucevlhhushhtvghrufhiiigvpeefnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
- hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:ilhzY_DqJqx3ZHsvWDfTRQWQVAMWykLBoSuG2Sh5eTqQH1oIHQtH1Q>
- <xmx:ilhzY4hsKTV8cQ6jndaz7OG8d9LgG14wjxc_UhA3bm5ef3RG7UqBTQ>
- <xmx:ilhzYzoCbFifuRKW6ylAXC2w0FkiUziuxOJSVEsrYpiQ3beBEXjU7Q>
- <xmx:ilhzY_8c9WrL_Jvf4WPD_En5cxcsHAbWG4xPi7lb_uw9UV_SqO5Wnnew-AA>
-Feedback-ID: i8771445c:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 15 Nov 2022 04:14:50 -0500 (EST)
-From: Maxime Ripard <maxime@cerno.tech>
-To: Maxime Ripard <maxime@cerno.tech>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, 
- Thomas Zimmermann <tzimmermann@suse.de>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Daniel Vetter <daniel@ffwll.ch>, Jani Nikula <jani.nikula@linux.intel.com>,
- Samuel Holland <samuel@sholland.org>, 
- Chen-Yu Tsai <wens@csie.org>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Ben Skeggs <bskeggs@redhat.com>, 
- David Airlie <airlied@linux.ie>, Karol Herbst <kherbst@redhat.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Emma Anholt <emma@anholt.net>, Lyude Paul <lyude@redhat.com>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v9-12-24b168e5bcd5@cerno.tech>
-References: <20220728-rpi-analog-tv-properties-v9-0-24b168e5bcd5@cerno.tech>
- <20220728-rpi-analog-tv-properties-v9-12-24b168e5bcd5@cerno.tech>
-Message-Id: <166850360503.1237314.16656357691430313065.b4-ty@cerno.tech>
-Date: Tue, 15 Nov 2022 10:13:25 +0100
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9758188FB2;
+ Tue, 15 Nov 2022 20:30:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1668544222; x=1700080222;
+ h=date:from:to:cc:subject:message-id:mime-version:
+ content-transfer-encoding;
+ bh=nwVVHGJwYKY5kCjLKGilRmLEBJRYK6W7/9ysp6hMtaQ=;
+ b=d9HHfMeTlUVRnoXO3UiE144L7AMM9YzXa6Qb719N+z5QJ8riwJTBaQIw
+ 1+4CuDfweYnYM1qnv4S5CxBMbn1xBUGm6mJh12vreV9vwuBzxxAxPKFdZ
+ Oy6ZZ6LPt0p4FpDvEJG7iaHXlHuVCTpAaSQC9XNEdREqsFwQNg8kSa89e
+ ZDySZAOOXICcNChgBnkvlpiClcEM/gAXJ/Hzl2+EUYhN1IMam7KCrk8aq
+ vJEdxEY9TnOSv0kTVUNeobefnnoI+EqxzJ+e/BnAjv0EzDuajbDraBcbb
+ TGgmOLRB2iuQnVYyGkHrPc0JGGVbXl1R7cCXdC1049Fij2oG53sHyJ4je g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10532"; a="295728018"
+X-IronPort-AV: E=Sophos;i="5.96,166,1665471600"; d="scan'208";a="295728018"
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+ by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 15 Nov 2022 12:30:21 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10532"; a="813814464"
+X-IronPort-AV: E=Sophos;i="5.96,166,1665471600"; d="scan'208";a="813814464"
+Received: from lkp-server01.sh.intel.com (HELO ebd99836cbe0) ([10.239.97.150])
+ by orsmga005.jf.intel.com with ESMTP; 15 Nov 2022 12:30:18 -0800
+Received: from kbuild by ebd99836cbe0 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1ov2ZV-0001e7-2k;
+ Tue, 15 Nov 2022 20:30:17 +0000
+Date: Wed, 16 Nov 2022 04:30:07 +0800
+From: kernel test robot <lkp@intel.com>
+To: Andrew Morton <akpm@linux-foundation.org>
+Message-ID: <6373f6cf.OhGqx4uDp+acnhuc%lkp@intel.com>
+User-Agent: Heirloom mailx 12.5 6/20/10
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.10.1
-Subject: Re: [Nouveau] (subset) [PATCH v9 12/25] drm/connector: Add pixel
- clock to cmdline mode
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Subject: [Nouveau] [linux-next:master] BUILD REGRESSION
+ 3c1f24109dfc4fb1a3730ed237e50183c6bb26b3
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -96,18 +58,189 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dom Cobley <dom@raspberrypi.com>, nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev, Hans de Goede <hdegoede@redhat.com>, Noralf Tr��nnes <noralf@tronnes.org>, Geert Uytterhoeven <geert@linux-m68k.org>, Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>, Phil Elwell <phil@raspberrypi.com>, linux-arm-kernel@lists.infradead.org
+Cc: linux-pm@vger.kernel.org, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-afs@lists.infradead.org,
+ Linux Memory Management List <linux-mm@kvack.org>,
+ amd-gfx@lists.freedesktop.org, netdev@vger.kernel.org,
+ linux-clk@vger.kernel.org, linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, 14 Nov 2022 14:00:31 +0100, Maxime Ripard wrote:
-> We'll need to get the pixel clock to generate proper display modes for
-> all the current named modes. Let's add it to struct drm_cmdline_mode and
-> fill it when parsing the named mode.
-> 
-> 
+tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
+branch HEAD: 3c1f24109dfc4fb1a3730ed237e50183c6bb26b3  Add linux-next specific files for 20221115
 
-Applied to drm/drm-misc (drm-misc-next).
+Error/Warning reports:
 
-Thanks!
-Maxime
+https://lore.kernel.org/oe-kbuild-all/202211041320.coq8EELJ-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202211090634.RyFKK0WS-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202211130053.Np70VIdn-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202211152134.2APMmViw-lkp@intel.com
+
+Error/Warning: (recently discovered and may have been fixed)
+
+arch/arm/mach-s3c/devs.c:32:10: fatal error: linux/platform_data/dma-s3c24xx.h: No such file or directory
+drivers/clk/clk.c:1022:5: error: redefinition of 'clk_prepare'
+drivers/clk/clk.c:1268:6: error: redefinition of 'clk_is_enabled_when_prepared'
+drivers/clk/clk.c:941:6: error: redefinition of 'clk_unprepare'
+drivers/gpu/drm/amd/amdgpu/../display/dc/core/dc.c:4887: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+drivers/gpu/drm/amd/amdgpu/../display/dc/core/dc_link_dp.c:5073:24: warning: implicit conversion from 'enum <anonymous>' to 'enum dc_status' [-Wenum-conversion]
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: warning: no previous prototype for 'gf100_fifo_nonstall_block' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c:34:1: warning: no previous prototype for 'nvkm_engn_cgrp_get' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: no previous prototype for 'tu102_gr_load' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c:49:1: warning: no previous prototype for 'wpr_generic_header_dump' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:221:21: warning: variable 'loc' set but not used [-Wunused-but-set-variable]
+ld.lld: error: .btf.vmlinux.bin.o: unknown file type
+ld.lld: error: undefined symbol: ipv6_icmp_error
+net/rxrpc/local_object.c:36: undefined reference to `ipv6_icmp_error'
+vmlinux.o: warning: objtool: __btrfs_map_block+0x1e22: unreachable instruction
+
+Unverified Error/Warning (likely false positive, please contact us if interested):
+
+drivers/cpufreq/acpi-cpufreq.c:970 acpi_cpufreq_boost_init() error: uninitialized symbol 'ret'.
+lib/zstd/compress/huf_compress.c:460 HUF_getIndex() warn: the 'RANK_POSITION_LOG_BUCKETS_BEGIN' macro might need parens
+lib/zstd/decompress/zstd_decompress_block.c:1009 ZSTD_execSequence() warn: inconsistent indenting
+lib/zstd/decompress/zstd_decompress_block.c:894 ZSTD_execSequenceEnd() warn: inconsistent indenting
+lib/zstd/decompress/zstd_decompress_block.c:942 ZSTD_execSequenceEndSplitLitBuffer() warn: inconsistent indenting
+lib/zstd/decompress/zstd_decompress_internal.h:206 ZSTD_DCtx_get_bmi2() warn: inconsistent indenting
+mm/khugepaged.c:2038 collapse_file() warn: iterator used outside loop: 'page'
+
+Error/Warning ids grouped by kconfigs:
+
+gcc_recent_errors
+|-- alpha-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- alpha-randconfig-r032-20221114
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arc-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arm-allyesconfig
+|   |-- arch-arm-mach-s3c-devs.c:fatal-error:linux-platform_data-dma-s3c24xx.h:No-such-file-or-directory
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arm-defconfig
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arm64-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc.c:warning:This-comment-starts-with-but-isn-t-a-kernel-doc-comment.-Refer-Documentation-doc-guide-kernel-doc.rst
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- i386-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc.c:warning:This-comment-starts-with-but-isn-t-a-kernel-doc-comment.-Refer-Documentation-doc-guide-kernel-doc.rst
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+clang_recent_errors
+|-- hexagon-randconfig-r041-20221114
+|   `-- ld.lld:error:undefined-symbol:ipv6_icmp_error
+|-- i386-randconfig-a015
+|   `-- ld.lld:error:undefined-symbol:ipv6_icmp_error
+|-- x86_64-randconfig-a005
+|   |-- ld.lld:error:.btf.vmlinux.bin.o:unknown-file-type
+|   `-- ld.lld:error:undefined-symbol:ipv6_icmp_error
+`-- x86_64-randconfig-a012-20221114
+    `-- vmlinux.o:warning:objtool:handle_bug:call-to-kmsan_unpoison_entry_regs()-leaves-.noinstr.text-section
+
+elapsed time: 734m
+
+configs tested: 64
+configs skipped: 2
+
+gcc tested configs:
+i386                                defconfig
+x86_64                        randconfig-a004
+um                             i386_defconfig
+x86_64                        randconfig-a002
+um                           x86_64_defconfig
+powerpc                          allmodconfig
+x86_64                        randconfig-a006
+i386                 randconfig-a001-20221114
+mips                             allyesconfig
+x86_64                              defconfig
+x86_64                           rhel-8.3-syz
+powerpc                           allnoconfig
+i386                 randconfig-a002-20221114
+x86_64                            allnoconfig
+x86_64                         rhel-8.3-kunit
+sh                               allmodconfig
+i386                 randconfig-a005-20221114
+i386                 randconfig-a006-20221114
+arc                  randconfig-r043-20221115
+x86_64                           rhel-8.3-kvm
+arc                                 defconfig
+riscv                randconfig-r042-20221115
+ia64                             allmodconfig
+i386                             allyesconfig
+arm                                 defconfig
+arc                  randconfig-r043-20221114
+i386                 randconfig-a003-20221114
+x86_64                    rhel-8.3-kselftests
+s390                 randconfig-r044-20221115
+x86_64                               rhel-8.3
+x86_64                          rhel-8.3-func
+i386                 randconfig-a004-20221114
+s390                             allmodconfig
+i386                          randconfig-a014
+alpha                               defconfig
+s390                                defconfig
+m68k                             allyesconfig
+m68k                             allmodconfig
+s390                             allyesconfig
+arc                              allyesconfig
+i386                          randconfig-a012
+x86_64                           allyesconfig
+i386                          randconfig-a016
+alpha                            allyesconfig
+arm                              allyesconfig
+arm64                            allyesconfig
+
+clang tested configs:
+x86_64                        randconfig-a005
+x86_64                        randconfig-a001
+x86_64                        randconfig-a003
+x86_64               randconfig-a014-20221114
+x86_64               randconfig-a012-20221114
+x86_64               randconfig-a013-20221114
+x86_64               randconfig-a011-20221114
+x86_64               randconfig-a016-20221114
+x86_64               randconfig-a015-20221114
+hexagon              randconfig-r045-20221114
+hexagon              randconfig-r045-20221115
+hexagon              randconfig-r041-20221114
+i386                          randconfig-a013
+s390                 randconfig-r044-20221114
+hexagon              randconfig-r041-20221115
+riscv                randconfig-r042-20221114
+i386                          randconfig-a011
+i386                          randconfig-a015
+
+-- 
+0-DAY CI Kernel Test Service
+https://01.org/lkp
