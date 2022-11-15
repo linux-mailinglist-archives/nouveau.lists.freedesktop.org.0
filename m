@@ -2,63 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D9726F6BD3
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 228846F6B98
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 981DA10E4FF;
-	Thu,  4 May 2023 12:33:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6950410E41B;
+	Thu,  4 May 2023 12:32:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 591 seconds by postgrey-1.36 at gabe;
- Mon, 14 Nov 2022 03:45:24 UTC
-Received: from mxct.zte.com.cn (mxct.zte.com.cn [58.251.27.85])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6013710E06C;
- Mon, 14 Nov 2022 03:45:24 +0000 (UTC)
-Received: from mxde.zte.com.cn (unknown [10.35.20.121])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mxct.zte.com.cn (FangMail) with ESMTPS id 4N9ZhN0wjhz1DF0;
- Mon, 14 Nov 2022 11:35:32 +0800 (CST)
-Received: from mxus.zte.com.cn (unknown [10.207.168.8])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mxde.zte.com.cn (FangMail) with ESMTPS id 4N9Zh54J8Kz9vSpc;
- Mon, 14 Nov 2022 11:35:17 +0800 (CST)
-Received: from mxhk.zte.com.cn (unknown [192.168.250.138])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mxus.zte.com.cn (FangMail) with ESMTPS id 4N9Zh15f5CzdmYkm;
- Mon, 14 Nov 2022 11:35:13 +0800 (CST)
-Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mxhk.zte.com.cn (FangMail) with ESMTPS id 4N9Zgx2ZR1z4xVnR;
- Mon, 14 Nov 2022 11:35:09 +0800 (CST)
-Received: from szxlzmapp01.zte.com.cn ([10.5.231.85])
- by mse-fl1.zte.com.cn with SMTP id 2AE3Z10W017281;
- Mon, 14 Nov 2022 11:35:01 +0800 (+08)
- (envelope-from yang.yang29@zte.com.cn)
-Received: from mapi (szxlzmapp04[null]) by mapi (Zmail) with MAPI id mid14;
- Mon, 14 Nov 2022 11:35:03 +0800 (CST)
-Date: Mon, 14 Nov 2022 11:35:03 +0800 (CST)
-X-Zmail-TransId: 2b066371b767ffffffffd26f1041
-X-Mailer: Zmail v1.0
-Message-ID: <202211141135031107049@zte.com.cn>
-Mime-Version: 1.0
-From: <yang.yang29@zte.com.cn>
-To: <bskeggs@redhat.com>
-Content-Type: text/plain;
-	charset="UTF-8"
-X-MAIL: mse-fl1.zte.com.cn 2AE3Z10W017281
-X-Fangmail-Gw-Spam-Type: 0
-X-FangMail-Miltered: at cgslv5.04-192.168.251.14.novalocal with ID
- 6371B783.000 by FangMail milter!
-X-FangMail-Envelope: 1668396932/4N9ZhN0wjhz1DF0/6371B783.000/10.35.20.121/[10.35.20.121]/mxde.zte.com.cn/<yang.yang29@zte.com.cn>
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6371B783.000/4N9ZhN0wjhz1DF0
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:34 +0000
-Subject: [Nouveau] =?utf-8?q?=5BPATCH_linux-next=5D_drm/nouveau/fifo=3A_r?=
- =?utf-8?q?emove_duplicated_included_chid=2Eh?=
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CA98310E3C9;
+ Tue, 15 Nov 2022 13:16:04 +0000 (UTC)
+Received: by mail-wr1-x431.google.com with SMTP id cl5so24192541wrb.9;
+ Tue, 15 Nov 2022 05:16:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lDR217x86eHv/O2MIJhnIDN/LEOiRAy9N41xfhJ3Nqk=;
+ b=YyWv9BqEL9CrEcH+u2dhpebWMAeYJ29kCNHj+Rk5fRm4KofEXDKHzUcvg9c2kwkf36
+ dM56gfOKBqDYI2OF8FinIh1qM98PPgztfN6sAJE8INImFZ42TtA/1jo/aPLTGVVhwbHC
+ dYEQbUMJkp47JbH6E5+LvJurNunoxC2uSnMhSkf/L8D0GXeO9ANO2uqYe8RYHOhJR17N
+ Q02RCbKZNnBEu7uNz7ck0GRSDsB5BuvvdHRCznEi8XfYhSshT6lUMiVW7dU7E/FA8aiP
+ /0pwjpAScfINHlPpH3wrCTZzAq6b080jjkPxGKjub1c11yrLO8us9FoP5fXs8WnTLpoD
+ bUew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=lDR217x86eHv/O2MIJhnIDN/LEOiRAy9N41xfhJ3Nqk=;
+ b=SdIK0hTVijPxAgLsM9AUrkAAe9WneZitoSHAqXqR5Yo0s7Mz1lL14XhUgDDkuFyh15
+ Locpm6eNrfqPM/ZRJQnTUPnkslQCWNROQZs590CVcqlZ5rkHwN99NO2ens3vqS6MGBdZ
+ 64YRw7sZBb9LcQwAwZW8ge4jRAGVCGo6/SJOXYq7MDaTMMKB0u4Cv8ic8zHU/JlY3PyN
+ HGKM8ek6vIhFuAR474L7hkfOx4oaU2tGWe3+wRdsutJZO/BHH3qgEGzCxKOK2o+VZNsq
+ 1R6GRm7/cnZ3vtt5rndlgt+hw8sBtMz27bXGtpPOHXk6U6vnOFL0wSUsE6tNNmGgaXvm
+ 82WQ==
+X-Gm-Message-State: ANoB5pm63basHlCiwVuo0smaozVPktSjoEbFYzmQxzTwXWGpFn8ylB9m
+ OX4lQmIODUswdv0Y4/4R1AU=
+X-Google-Smtp-Source: AA0mqf6anvzacpwGbfPmwCJwNcs0zplfHCs35EcuMnktxA5cZzn2SR5okgnQ2mmLJOdidn4tV5o4uA==
+X-Received: by 2002:a05:6000:18c5:b0:23a:cdf5:3676 with SMTP id
+ w5-20020a05600018c500b0023acdf53676mr11416313wrq.336.1668518163349; 
+ Tue, 15 Nov 2022 05:16:03 -0800 (PST)
+Received: from localhost ([102.36.222.112]) by smtp.gmail.com with ESMTPSA id
+ v10-20020adf8b4a000000b00235da296623sm12429028wra.31.2022.11.15.05.16.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Nov 2022 05:16:02 -0800 (PST)
+Date: Tue, 15 Nov 2022 16:16:00 +0300
+From: Dan Carpenter <error27@gmail.com>
+To: Ben Skeggs <bskeggs@redhat.com>
+Message-ID: <Y3JdtQYrWonlhwW0@kili>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:32 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau/fifo: make nvkm_runl_new() return
+ error pointers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,33 +67,42 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, yang.yang29@zte.com.cn, daniel@ffwll.ch,
- xu.panda@zte.com.cn, airlied@redhat.com
+Cc: nouveau@lists.freedesktop.org, kernel-janitors@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Xu Panda <xu.panda@zte.com.cn>
+All six callers expect error pointers instead of NULL so make the
+nvkm_runl_new() return error pointers as expected.
 
-The chid.h is included more than once.
-
-Signed-off-by: Xu Panda <xu.panda@zte.com.cn>
-Signed-off-by: Yang Yang <yang.yang29@zte.com>
+Fixes: d94470e9d150 ("drm/nouveau/fifo: add common runlist/engine topology")
+Signed-off-by: Dan Carpenter <error27@gmail.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
-index b7c9d6115bce..b19a3612b62e 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
-@@ -24,7 +24,6 @@
- #include "chan.h"
- #include "chid.h"
- #include "cgrp.h"
--#include "chid.h"
- #include "runl.h"
- #include "priv.h"
-
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c
+index b5836cbc29aa..adc4a9544ebc 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c
+@@ -399,7 +399,7 @@ nvkm_runl_new(struct nvkm_fifo *fifo, int runi, u32 addr, int id_nr)
+ 	int ret;
+ 
+ 	if (!(runl = kzalloc(sizeof(*runl), GFP_KERNEL)))
+-		return NULL;
++		return ERR_PTR(-ENOMEM);
+ 
+ 	runl->func = fifo->func->runl;
+ 	runl->fifo = fifo;
+@@ -419,7 +419,7 @@ nvkm_runl_new(struct nvkm_fifo *fifo, int runi, u32 addr, int id_nr)
+ 		    (ret = nvkm_chid_new(&nvkm_chan_event, subdev, id_nr, 0, id_nr, &runl->chid))) {
+ 			RUNL_ERROR(runl, "cgid/chid: %d", ret);
+ 			nvkm_runl_del(runl);
+-			return NULL;
++			return ERR_PTR(ret);
+ 		}
+ 	} else {
+ 		runl->cgid = nvkm_chid_ref(fifo->cgid);
 -- 
-2.15.2
+2.35.1
+
