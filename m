@@ -2,78 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8B7262DEB1
-	for <lists+nouveau@lfdr.de>; Thu, 17 Nov 2022 15:53:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F64362E2A8
+	for <lists+nouveau@lfdr.de>; Thu, 17 Nov 2022 18:14:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5830610E61A;
-	Thu, 17 Nov 2022 14:53:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5246A10E1BB;
+	Thu, 17 Nov 2022 17:14:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wnew4-smtp.messagingengine.com (wnew4-smtp.messagingengine.com
- [64.147.123.18])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D417010E616;
- Thu, 17 Nov 2022 14:53:22 +0000 (UTC)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailnew.west.internal (Postfix) with ESMTP id 1D9672B06A0F;
- Thu, 17 Nov 2022 09:53:18 -0500 (EST)
+Received: from wnew1-smtp.messagingengine.com (wnew1-smtp.messagingengine.com
+ [64.147.123.26])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9208110E1BB;
+ Thu, 17 Nov 2022 17:14:10 +0000 (UTC)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailnew.west.internal (Postfix) with ESMTP id 8DB7F2B06A50;
+ Thu, 17 Nov 2022 12:14:04 -0500 (EST)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute5.internal (MEProxy); Thu, 17 Nov 2022 09:53:22 -0500
+ by compute2.internal (MEProxy); Thu, 17 Nov 2022 12:14:09 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
  :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1668696797; x=1668703997; bh=P+Mr1SL559
- jIilm9PEYPnBvDF7YF573nzLUdcJpasyg=; b=U+VbZC5zUyzYvx1yj3a1C54+lx
- jz4fjzVkJUhXoDT82EijIh8V/jDk63l5W/BG90AegA8jJqyYsC0LNHeNIsPat5RR
- /2g3LSkJHgXmfxByw1lWhWN2xl1PqS4l3FlWqrt4UvY93NlGqJhmwLk496YHp8eI
- ABHAALlp7tV7Ij0cbjkNaJrM2iVqTwR0dTwOwaMbr8P67NhyOlb/+wO0mC0QWBRt
- AT4awFlRCBs2LypcLc1tNlI130XWImblKyGkFcubOGzI89S01DIAyaF804xOnas0
- WtDKFv8QJt7rzWHzezwxX5iIqQCfSIN4zA3IMZhHQUKwKEtMIbJ9BVztkP8w==
+ :subject:to:to; s=fm2; t=1668705244; x=1668712444; bh=EPKM98yuI0
+ FafDSpZ4oH9M/3CpWV+m3u8fcRxTeHRuU=; b=IKSCrjRehJXLLAheMi3x1nBBT6
+ xv79+oCuXcYWNZ56lfkM1xLPxqSAtDNNT3XxpSJC6jHP7Vkok/cXYc/Q95YEBpG+
+ ezh5FAEU/QFRRHMU7pCIMZWiaEuhO0x26gZVc/BGSuAHy5m4qU6aEWjP9OzWk5Cf
+ 7y/V0+6av4McswO2nCTSoODDF+vOIcOUhzF9inIWGgUE2fphLHOeDM01YAIZHVuu
+ 6op3/MJ3VV7BmT1MOYTIwx+Fbwwh/wYlU+bcv4kNzWVhRhtS1sqQ7QUSpdXtsDF3
+ jygjVycsZPOEbUmO7CCsQXSFduE2nvV6WgRq+ZD9hm+mSroQWO84l6sQNe3A==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
  :feedback-id:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:sender:subject:subject:to:to
  :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm1; t=1668696797; x=1668703997; bh=P+Mr1SL559jIilm9PEYPnBvDF7YF
- 573nzLUdcJpasyg=; b=xC7sUXofv0fkoCCNv5hAvrZ4E9fMPBoYYK4010kZTguL
- 71FuU3oKPCoEGJl8fmNrPuBRTB9Q+XZTaHSNIHWMP23p7ij/YxyJQSangKNX1BM8
- hSsh0lpG1ytgu4wKRDUzyniJcUPDr5NNamcslrkshtGuj1XFGJi0F1HA4FOA5V29
- I/cGTS/cYUREqoKF0LeRy/30kz6/Yah4l3+ccpiPoul4WTiMWfryoHYusIx4TFf6
- oukzBrD/9v63Pj4SWiAoeTEgg8r9/Ch9GiwhVZrvwK5hwanw34aRHtWurtq44XrT
- sWTmCIY+nrfGqSoYFe8TVd4Ffblx/vIT3O3d2roAYA==
-X-ME-Sender: <xms:3Ep2Y4yGAaPbWy7VQYS-4rEpAlarsPcQhW8iANLjeiBA-NLdRPYTBw>
- <xme:3Ep2Y8Qtjn-EJ-YQJVA5j6gIRQb-5qSdw5WGfjPnGPPf_EhNtfELlPLC67Fi3eRNt
- j9k8oIVeNJQ_2GUWOo>
-X-ME-Received: <xmr:3Ep2Y6Xstyxc9mlXQOBLsiZGSwdo1XI7lXqdxDyhPi_0mCR-1fL7-IRXjOdLq9_Om2qKJ1TTcZQwIr7pfJxGZ1LpY-psTiQJKJW77FfEEwmx6w>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrgeekgdeikecutefuodetggdotefrodftvf
+ fm1; t=1668705244; x=1668712444; bh=EPKM98yuI0FafDSpZ4oH9M/3CpWV
+ +m3u8fcRxTeHRuU=; b=FJ0o9lSTMDJUUNFAeEUAJvhsA4JEtyf0agBRuNaZs/Ax
+ /vKmYa1NT94ktikwdItSLaULxP0rJYkbgBubo/OPC2hiCxDNnIO6FtAxj+/ejJGS
+ iKmzcK9bLoYUzLTB6c7XqPKkxdZbPF4H0feWwbfpJ0BWVbdQePGuBroxY9MueMih
+ 7FT17Z+ie0MmgR4aTVQmXVHXO6zsdMFbjOYNE6tCp0e8Lbm1N/mKRHD2iGxx8Xcb
+ IXPAvjwzB7KOyD9S/fDSePH03flvfPtPB7NrqZXeNUmupz+zQ9RaGmo2KcKRHvbT
+ zwZ7vlVYZEzM0Z1UI08AtAbJrk2HLpqzUu9OF5IoOQ==
+X-ME-Sender: <xms:22t2Y7aq50whuiFoQkEUePGTIQQg6ZfqHjYpnO3ZncSCACAWCnOiMg>
+ <xme:22t2Y6ZPwV0Q-ALL-9E4JiTTYPis500kQYlEddlLdZGekFPHa-FsXpXfxA25fJ3o2
+ gwMU9kLZtOVoGM6TQg>
+X-ME-Received: <xmr:22t2Y99lRvGfydEV4TyGUQvS_xMgz5cYjOuHKny_YDGWhp55onjpyMcwIi6_VHCLq68SvWWLiZglAAmz18UhhoZIzXVeUJL6MkOpgZBxhvpz-Q>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrgeekgdeljecutefuodetggdotefrodftvf
  curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
  uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
  fjughrpeffhffvvefukfhfgggtuggjsehgtderredttddvnecuhfhrohhmpeforgigihhm
  vgcutfhiphgrrhguuceomhgrgihimhgvsegtvghrnhhordhtvggthheqnecuggftrfgrth
- htvghrnhepveefgfejffdvieeffeehueeguddvjeegvefghfdujeffffeiheekvdelhedv
- keefnecuffhomhgrihhnpehithhurdhinhhtpdhkvghrnhgvlhdrohhrghenucevlhhush
- htvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrgigihhmvgestggv
- rhhnohdrthgvtghh
-X-ME-Proxy: <xmx:3Ep2Y2hs68uTtmPm487wkfEovHB0iT55P6W8qN7619f_VFwjmyLPbw>
- <xmx:3Ep2Y6BcxrKz5_NdMSV1ETH07cPXzJJlu2-5gJC8Ku0dGY60SQgEoA>
- <xmx:3Ep2Y3LME_puhtZ05fmu_7R3FjLz76xMvVX20wTspBC_ZLXU1IILIg>
- <xmx:3Up2Y1ZlUsHWZadmHPgc8xRbpG2Urq0g3FRqPqz98KRxnxaKUY750yVVCKo>
+ htvghrnhepteefffefgfektdefgfeludfgtdejfeejvddttdekteeiffejvdfgheehfffh
+ vedunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmh
+ grgihimhgvsegtvghrnhhordhtvggthh
+X-ME-Proxy: <xmx:22t2Yxom94qDjT-BzKQYtjOcEEJ5G_ZpbqblIPWD4ny5xSpnARo47w>
+ <xmx:22t2Y2pZsh_WWZJSX9aXYTEk1HHwKH4A-o6rp_LoVNmwmGmnNPxxGA>
+ <xmx:22t2Y3Tq45VHs9_ipPR4WzxHHa3NojkmAl11WzxKDRL27UL_x3KIdg>
+ <xmx:3Gt2Y5CoJVgET8RSJmOoRJmYWzwp91a6JyV2_DM6wMLHtCwwG3cyUPBYqxc>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 17 Nov 2022 09:53:16 -0500 (EST)
-Date: Thu, 17 Nov 2022 15:53:14 +0100
+ 17 Nov 2022 12:14:02 -0500 (EST)
+Date: Thu, 17 Nov 2022 18:14:01 +0100
 From: Maxime Ripard <maxime@cerno.tech>
 To: Mauro Carvalho Chehab <mauro.chehab@linux.intel.com>
-Message-ID: <20221117145314.veaam3djm6fkh56f@houat>
+Message-ID: <20221117171401.3ogenv6g5nszufmm@houat>
 References: <20220728-rpi-analog-tv-properties-v10-0-256dad125326@cerno.tech>
- <20220728-rpi-analog-tv-properties-v10-5-256dad125326@cerno.tech>
- <20221117153557.75c5dba1@maurocar-mobl2>
+ <20220728-rpi-analog-tv-properties-v10-18-256dad125326@cerno.tech>
+ <20221117164928.200b3a1a@maurocar-mobl2>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oacbmgkrlh2j7rjz"
+ protocol="application/pgp-signature"; boundary="cz56iqciiap5nisp"
 Content-Disposition: inline
-In-Reply-To: <20221117153557.75c5dba1@maurocar-mobl2>
-Subject: Re: [Nouveau] [PATCH v10 05/19] drm/connector: Add TV standard
- property
+In-Reply-To: <20221117164928.200b3a1a@maurocar-mobl2>
+Subject: Re: [Nouveau] [PATCH v10 18/19] drm/vc4: vec: Add support for more
+ analog TV standards
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -104,180 +103,70 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---oacbmgkrlh2j7rjz
+--cz56iqciiap5nisp
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 17, 2022 at 03:35:57PM +0100, Mauro Carvalho Chehab wrote:
-> On Thu, 17 Nov 2022 10:28:48 +0100
+On Thu, Nov 17, 2022 at 04:49:28PM +0100, Mauro Carvalho Chehab wrote:
+> On Thu, 17 Nov 2022 10:29:01 +0100
 > Maxime Ripard <maxime@cerno.tech> wrote:
 >=20
-> > The TV mode property has been around for a while now to select and get =
-the
-> > current TV mode output on an analog TV connector.
+> > From: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
 > >=20
-> > Despite that property name being generic, its content isn't and has been
-> > driver-specific which makes it hard to build any generic behaviour on t=
-op
-> > of it, both in kernel and user-space.
+> > Add support for the following composite output modes (all of them are
+> > somewhat more obscure than the previously defined ones):
 > >=20
-> > Let's create a new enum tv norm property, that can contain any of the
-> > analog TV standards currently supported by kernel drivers. Each driver =
-can
-> > then pass in a bitmask of the modes it supports, and the property
-> > creation function will filter out the modes not supported.
-> >=20
-> > We'll then be able to phase out the older tv mode property.
-> >=20
-> > Tested-by: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
-> > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> >=20
-> > ---
-> > Changes in v10:
-> > - Fix checkpatch warning
-> >=20
-> > Changes in v5:
-> > - Create an analog TV properties documentation section, and document TV
-> >   Mode there instead of the csv file
-> >=20
-> > Changes in v4:
-> > - Add property documentation to kms-properties.csv
-> > - Fix documentation
-> > ---
-> >  Documentation/gpu/drm-kms.rst     |   6 ++
-> >  drivers/gpu/drm/drm_atomic_uapi.c |   4 ++
-> >  drivers/gpu/drm/drm_connector.c   | 122 ++++++++++++++++++++++++++++++=
-+++++++-
-> >  include/drm/drm_connector.h       |  64 ++++++++++++++++++++
-> >  include/drm/drm_mode_config.h     |   8 +++
-> >  5 files changed, 203 insertions(+), 1 deletion(-)
-> >=20
-> > diff --git a/Documentation/gpu/drm-kms.rst b/Documentation/gpu/drm-kms.=
-rst
-> > index b4377a545425..321f2f582c64 100644
-> > --- a/Documentation/gpu/drm-kms.rst
-> > +++ b/Documentation/gpu/drm-kms.rst
-> > @@ -520,6 +520,12 @@ HDMI Specific Connector Properties
-> >  .. kernel-doc:: drivers/gpu/drm/drm_connector.c
-> >     :doc: HDMI connector properties
-> > =20
-> > +Analog TV Specific Connector Properties
-> > +----------------------------------
-> > +
-> > +.. kernel-doc:: drivers/gpu/drm/drm_connector.c
-> > +   :doc: Analog TV Connector Properties
-> > +
-> >  Standard CRTC Properties
-> >  ------------------------
-> > =20
-> > diff --git a/drivers/gpu/drm/drm_atomic_uapi.c b/drivers/gpu/drm/drm_at=
-omic_uapi.c
-> > index 7f2b9a07fbdf..d867e7f9f2cd 100644
-> > --- a/drivers/gpu/drm/drm_atomic_uapi.c
-> > +++ b/drivers/gpu/drm/drm_atomic_uapi.c
-> > @@ -700,6 +700,8 @@ static int drm_atomic_connector_set_property(struct=
- drm_connector *connector,
-> >  		state->tv.margins.bottom =3D val;
-> >  	} else if (property =3D=3D config->legacy_tv_mode_property) {
-> >  		state->tv.legacy_mode =3D val;
-> > +	} else if (property =3D=3D config->tv_mode_property) {
-> > +		state->tv.mode =3D val;
-> >  	} else if (property =3D=3D config->tv_brightness_property) {
-> >  		state->tv.brightness =3D val;
-> >  	} else if (property =3D=3D config->tv_contrast_property) {
-> > @@ -810,6 +812,8 @@ drm_atomic_connector_get_property(struct drm_connec=
-tor *connector,
-> >  		*val =3D state->tv.margins.bottom;
-> >  	} else if (property =3D=3D config->legacy_tv_mode_property) {
-> >  		*val =3D state->tv.legacy_mode;
-> > +	} else if (property =3D=3D config->tv_mode_property) {
-> > +		*val =3D state->tv.mode;
-> >  	} else if (property =3D=3D config->tv_brightness_property) {
-> >  		*val =3D state->tv.brightness;
-> >  	} else if (property =3D=3D config->tv_contrast_property) {
-> > diff --git a/drivers/gpu/drm/drm_connector.c b/drivers/gpu/drm/drm_conn=
-ector.c
-> > index 06e737ed15f5..07d449736956 100644
-> > --- a/drivers/gpu/drm/drm_connector.c
-> > +++ b/drivers/gpu/drm/drm_connector.c
-> > @@ -984,6 +984,17 @@ static const struct drm_prop_enum_list drm_dvi_i_s=
-ubconnector_enum_list[] =3D {
-> >  DRM_ENUM_NAME_FN(drm_get_dvi_i_subconnector_name,
-> >  		 drm_dvi_i_subconnector_enum_list)
-> > =20
-> > +static const struct drm_prop_enum_list drm_tv_mode_enum_list[] =3D {
-> > +	{ DRM_MODE_TV_MODE_NTSC, "NTSC" },
-> > +	{ DRM_MODE_TV_MODE_NTSC_443, "NTSC-443" },
-> > +	{ DRM_MODE_TV_MODE_NTSC_J, "NTSC-J" },
-> > +	{ DRM_MODE_TV_MODE_PAL, "PAL" },
-> > +	{ DRM_MODE_TV_MODE_PAL_M, "PAL-M" },
-> > +	{ DRM_MODE_TV_MODE_PAL_N, "PAL-N" },
-> > +	{ DRM_MODE_TV_MODE_SECAM, "SECAM" },
-> > +};
+> > - NTSC_443 - NTSC-style signal with the chroma subcarrier shifted to
+> >   4.43361875 MHz (the PAL subcarrier frequency). Never used for
+> >   broadcasting, but sometimes used as a hack to play NTSC content in PAL
+> >   regions (e.g. on VCRs).
 >=20
-> Nack. It sounds a very bad idea to have standards as generic as=20
-> NTSC, PAL, SECAM.=20
+> > - PAL_N - PAL with alternative chroma subcarrier frequency,
+> >   3.58205625 MHz. Used as a broadcast standard in Argentina, Paraguay
+> >   and Uruguay to fit 576i50 with colour in 6 MHz channel raster.
 >=20
-> If you take a look at the CCIR/ITU-R specs that define video standards,=
-=20
-> you'll see that the standard has actually two components:
+> That's not right. Argentina uses a different standard than Paraguay and
+> Uruguai.
 >=20
-> 1. the composite color TV signal: PAL, NTSC, SECAM, defined in ITU-R BT17=
-00[1]
+> See, there are two variants of PAL/N. The original one and PAL/N' - also
+> called PAL/NC or PAL/CN (Combination N). Some of the timings are=20
+> different on /NC variant.
 >=20
-> 2. and the conventional analogue TV (the "monochromatic" part),
-> as defined in ITU-R BT.1701[2], which is, basically, a letter from A to N
-> (with some country-specific variants, like Nc). Two of those standards
-> (M and J) are used on Countries with a power grid of 60Hz, as they have
-> a frame rate of either 30fps or 29.997fps.
+> As far as I'm aware, PAL/Nc is used in Argentina, while
+> PAL/N is used in Paraguai and Uruguai, but I may be wrong on that,
+> as it has been a long time since had to touch on this.
 >=20
-> [1] https://www.itu.int/rec/R-REC-BT.1700-0-200502-I/en
-> [2] https://www.itu.int/rec/R-REC-BT.1701-1-200508-I/en
+> > - PAL60 - 480i60 signal with PAL-style color at normal European PAL
+> >   frequency. Another non-standard, non-broadcast mode, used in similar
+> >   contexts as NTSC_443. Some displays support one but not the other.
 >=20
-> The actual combination is defined within Country-specific laws, which
-> selects a conventional analogue signal with a composite color one.
+> > - SECAM - French frequency-modulated analog color standard; also have
+> >   been broadcast in Eastern Europe and various parts of Africa and Asia.
+> >   Uses the same 576i50 timings as PAL.
 >=20
-> So, for instance, US uses NTSC/M (because it uses a 60Hz power grid).
-> There is a 50Hz variant, called NTSC/443 (not used on any Country, but
-> present on some European VCR equipments capable of recording at 25fps,
-> using NTSC).
->=20
-> Btw, some VCR equipments in US may also have PAL/60 with has the
-> same timings as NTSC, but uses PAL instead.
->=20
-> What happens is that, in Europe, different PAL standards got used, but:
->=20
-> - most TV sets and their chipsets were developed to auto-detect and
->   support the differences between different systems PAL/B, PAL/G, PAL/D,.=
-=2E.
-> - several of those standards have a difference only at the audio
->   sub-carriers. So, they look identical for the video decoding part.
-> - standards may have a different inter-channel space (it can vary from
->   5 to 8 MHz) to minimize cross-signal interference.
+> This is also wrong. just like PAL, there are several variants of SECAM,
+> one used in France, and a different one in France overseas and on
+> previous France colonies in Africa and Asia. Eastern Europe also used
+> different variants of SECAM.
 
-We've had that discussion already, at v3:
-https://lore.kernel.org/dri-devel/20220728-rpi-analog-tv-properties-v2-9-45=
-9522d653a7@cerno.tech/
+And that's fine? Everything I did is supposed to be easy to extend if
+and when needed, so if someone has some interest in providing support
+for more standards, they are very welcome to do so.
 
-AFAICS, we can easily add the extra standards to the properties list if
-and when needed.
-
-So unless you can come up with some practical issues that can't be
-addressed by the current design without a major rework, I don't intend
-to change that.
+I won't do it in this series though.
 
 Maxime
 
---oacbmgkrlh2j7rjz
+--cz56iqciiap5nisp
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCY3ZK2gAKCRDj7w1vZxhR
-xctUAPwNSfrXHSxkMcmoX9TMuhDfLNnKYS+AeFk5aGfPpAQA6wEA4sHsEUuqbsiH
-5jCNRnrCKpEoOHX55nQPeJoiF3bmigQ=
-=ZS7W
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCY3Zr2QAKCRDj7w1vZxhR
+xQY3AQC3ODU/A4r/xCJ5Ms7gOYpWhJaSGlaY+jf/qgMPcMmMhAD/VJCODvzEFvlF
+AuxhxZDFClQh1TusZBNOY31fQyzDIAU=
+=f8ne
 -----END PGP SIGNATURE-----
 
---oacbmgkrlh2j7rjz--
+--cz56iqciiap5nisp--
