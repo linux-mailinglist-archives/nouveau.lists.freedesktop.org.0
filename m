@@ -2,77 +2,73 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F64362E2A8
-	for <lists+nouveau@lfdr.de>; Thu, 17 Nov 2022 18:14:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 76BDF62FF33
+	for <lists+nouveau@lfdr.de>; Fri, 18 Nov 2022 22:12:22 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5246A10E1BB;
-	Thu, 17 Nov 2022 17:14:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1655C10E7D5;
+	Fri, 18 Nov 2022 21:12:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wnew1-smtp.messagingengine.com (wnew1-smtp.messagingengine.com
- [64.147.123.26])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9208110E1BB;
- Thu, 17 Nov 2022 17:14:10 +0000 (UTC)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailnew.west.internal (Postfix) with ESMTP id 8DB7F2B06A50;
- Thu, 17 Nov 2022 12:14:04 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Thu, 17 Nov 2022 12:14:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :cc:content-type:date:date:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1668705244; x=1668712444; bh=EPKM98yuI0
- FafDSpZ4oH9M/3CpWV+m3u8fcRxTeHRuU=; b=IKSCrjRehJXLLAheMi3x1nBBT6
- xv79+oCuXcYWNZ56lfkM1xLPxqSAtDNNT3XxpSJC6jHP7Vkok/cXYc/Q95YEBpG+
- ezh5FAEU/QFRRHMU7pCIMZWiaEuhO0x26gZVc/BGSuAHy5m4qU6aEWjP9OzWk5Cf
- 7y/V0+6av4McswO2nCTSoODDF+vOIcOUhzF9inIWGgUE2fphLHOeDM01YAIZHVuu
- 6op3/MJ3VV7BmT1MOYTIwx+Fbwwh/wYlU+bcv4kNzWVhRhtS1sqQ7QUSpdXtsDF3
- jygjVycsZPOEbUmO7CCsQXSFduE2nvV6WgRq+ZD9hm+mSroQWO84l6sQNe3A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
- :feedback-id:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:sender:subject:subject:to:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm1; t=1668705244; x=1668712444; bh=EPKM98yuI0FafDSpZ4oH9M/3CpWV
- +m3u8fcRxTeHRuU=; b=FJ0o9lSTMDJUUNFAeEUAJvhsA4JEtyf0agBRuNaZs/Ax
- /vKmYa1NT94ktikwdItSLaULxP0rJYkbgBubo/OPC2hiCxDNnIO6FtAxj+/ejJGS
- iKmzcK9bLoYUzLTB6c7XqPKkxdZbPF4H0feWwbfpJ0BWVbdQePGuBroxY9MueMih
- 7FT17Z+ie0MmgR4aTVQmXVHXO6zsdMFbjOYNE6tCp0e8Lbm1N/mKRHD2iGxx8Xcb
- IXPAvjwzB7KOyD9S/fDSePH03flvfPtPB7NrqZXeNUmupz+zQ9RaGmo2KcKRHvbT
- zwZ7vlVYZEzM0Z1UI08AtAbJrk2HLpqzUu9OF5IoOQ==
-X-ME-Sender: <xms:22t2Y7aq50whuiFoQkEUePGTIQQg6ZfqHjYpnO3ZncSCACAWCnOiMg>
- <xme:22t2Y6ZPwV0Q-ALL-9E4JiTTYPis500kQYlEddlLdZGekFPHa-FsXpXfxA25fJ3o2
- gwMU9kLZtOVoGM6TQg>
-X-ME-Received: <xmr:22t2Y99lRvGfydEV4TyGUQvS_xMgz5cYjOuHKny_YDGWhp55onjpyMcwIi6_VHCLq68SvWWLiZglAAmz18UhhoZIzXVeUJL6MkOpgZBxhvpz-Q>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrgeekgdeljecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpeffhffvvefukfhfgggtuggjsehgtderredttddvnecuhfhrohhmpeforgigihhm
- vgcutfhiphgrrhguuceomhgrgihimhgvsegtvghrnhhordhtvggthheqnecuggftrfgrth
- htvghrnhepteefffefgfektdefgfeludfgtdejfeejvddttdekteeiffejvdfgheehfffh
- vedunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmh
- grgihimhgvsegtvghrnhhordhtvggthh
-X-ME-Proxy: <xmx:22t2Yxom94qDjT-BzKQYtjOcEEJ5G_ZpbqblIPWD4ny5xSpnARo47w>
- <xmx:22t2Y2pZsh_WWZJSX9aXYTEk1HHwKH4A-o6rp_LoVNmwmGmnNPxxGA>
- <xmx:22t2Y3Tq45VHs9_ipPR4WzxHHa3NojkmAl11WzxKDRL27UL_x3KIdg>
- <xmx:3Gt2Y5CoJVgET8RSJmOoRJmYWzwp91a6JyV2_DM6wMLHtCwwG3cyUPBYqxc>
-Feedback-ID: i8771445c:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 17 Nov 2022 12:14:02 -0500 (EST)
-Date: Thu, 17 Nov 2022 18:14:01 +0100
-From: Maxime Ripard <maxime@cerno.tech>
-To: Mauro Carvalho Chehab <mauro.chehab@linux.intel.com>
-Message-ID: <20221117171401.3ogenv6g5nszufmm@houat>
-References: <20220728-rpi-analog-tv-properties-v10-0-256dad125326@cerno.tech>
- <20220728-rpi-analog-tv-properties-v10-18-256dad125326@cerno.tech>
- <20221117164928.200b3a1a@maurocar-mobl2>
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 44D6810E7D5
+ for <nouveau@lists.freedesktop.org>; Fri, 18 Nov 2022 21:12:11 +0000 (UTC)
+Received: by mail-pf1-x431.google.com with SMTP id b185so6016959pfb.9
+ for <nouveau@lists.freedesktop.org>; Fri, 18 Nov 2022 13:12:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NZy40ckMJK9PstrSORSMVw9LuD5M42HuElen5aK+uEs=;
+ b=YsibLVMHY4zS47SGC2k6c12KtYewhksNOs+sYyriWf5/rkBDw8uC3HDs/f2Wj2L3Gj
+ BVm78lwkUPik7ocGkhAa3Kl4tsNM2qjas5VtByHPDLiqfCZ7H6xt+RUmd0nfLpgVFGa+
+ TGWDzas1X6ndUC9LeJnozesYDmetjh/aAn8Fg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NZy40ckMJK9PstrSORSMVw9LuD5M42HuElen5aK+uEs=;
+ b=q73e4s8IorXBFm8CiJO1mp1anwsQB2QA2TuL/PTOBunn9VpjqJC3loO/dtEi+9ro/z
+ 6thrJeIE81aOfAok++ykHErCp+eetaaqA8ecnrkkwqlQyuucVGNnKlK7oOeb1GsEQktJ
+ bhase3kFHJp/eqbp9LCeTNGz27LURdAmdjBwdid3OgKxoum8CsaAyPD9s8NthBfnIS1y
+ nFihtiTSaUsiXBlj14fNMeDrYW8McuT9U5DqWIREDJRbTn4yA68RTIq3QEBygmpXLSI9
+ Nc6r4JuuKNPBWrIgtsIv9Qev+rdbr3XuON5ehFS9e/ZTcjyOSn4YiObxrPW3W7cxTJV8
+ a+nQ==
+X-Gm-Message-State: ANoB5pkIb1PLGgrknHw0XBoyXuEYwdlXelL/SnTZTzSlXQzJLwpK4dAk
+ FCk1vxkhQffQkFa3sADqIbhOqw==
+X-Google-Smtp-Source: AA0mqf7K8L+3ggQrBqjW5sllCMvwU8TlFsM8+MyfYc4TYEHJRKBuT3Ac3K/jUbWeUkf/xTrdlksb6Q==
+X-Received: by 2002:a63:5c59:0:b0:440:3cc0:c062 with SMTP id
+ n25-20020a635c59000000b004403cc0c062mr8308527pgm.10.1668805930887; 
+ Fri, 18 Nov 2022 13:12:10 -0800 (PST)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+ by smtp.gmail.com with ESMTPSA id
+ o14-20020a170902d4ce00b00186a437f4d7sm4218924plg.147.2022.11.18.13.12.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Nov 2022 13:12:10 -0800 (PST)
+From: Kees Cook <keescook@chromium.org>
+To: Ben Skeggs <bskeggs@redhat.com>
+Date: Fri, 18 Nov 2022 13:12:08 -0800
+Message-Id: <20221118211207.never.039-kees@kernel.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cz56iqciiap5nisp"
-Content-Disposition: inline
-In-Reply-To: <20221117164928.200b3a1a@maurocar-mobl2>
-Subject: Re: [Nouveau] [PATCH v10 18/19] drm/vc4: vec: Add support for more
- analog TV standards
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1422; h=from:subject:message-id;
+ bh=X9HCxkhxMUKHNvL3i6xwv+DIq3QBR7MiLcT0RJeQqIY=;
+ b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBjd/UoT/JDrfBTo/vcofpBixe5bpHWDrFyzZ1EdUlt
+ Es/j9QSJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCY3f1KAAKCRCJcvTf3G3AJhAtEA
+ CYWhughNKE0OapwIXiefhx+jOiRBDaUC8hfzPm33xTb1ARxGJxY9kRrmeToWC8sE1VDug0m8vukcy5
+ QgKz72Po6nwKPbCqifUHhkVlNVW1c4PZxpf03G50RR3ly2UCPVXjBtKPilwvXblNyMMzOLM6aZ2+Uo
+ Y7B+ZnxNP7RDoPiEk6EDqeBuXW0eFpjan4RIoURtXVRTj8cnh5GvN24iwWJiU07GKNSb7rUSMnyc+e
+ TfTLqSbV7JrEuCQ5rtVUG5x+lbqlxzBURXXlz0P6+qZ9YbK+t2cc67oQJNi267V48nMO2KK3pT3rjz
+ wAuqSiMoJAxtvJSd2O5qlCNiMTPE07V0aAecujkq+mm26kIvR9Enpvh5ZxDPUUy35TQeezQmq6jn/i
+ F4CtMYWFkfD5lS40SBlR+47zlf9gvQHLkTJ9APICVfRmI2OurXDqtsz0OEoXv9hlsGEopLnYW39TWZ
+ CYF0mAo/DMBgUMx6PnJ7SGyfsPnqjD4vhebC/RwGvx8KpDlfpfL58/PNMuO0PBe58TV97WjBDuhd7L
+ 3pTrWdpxtaojtEUyLi+5Cya2YUt2Id8kn3VHa10utEc7F/jrEzFYHH8sgKuRR9d7Vv8Ql/Ucl3MOOP
+ tqfaieDGKT4+2+1/nRGn5/zf4FLvKPJRW24HNWPRMJBkDXu9JgdzMkE4vLnA==
+X-Developer-Key: i=keescook@chromium.org; a=openpgp;
+ fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
+Content-Transfer-Encoding: 8bit
+Subject: [Nouveau] [PATCH] drm/nouveau/fb/ga102: Replace zero-length array
+ of trailing structs with flex-array
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,89 +80,51 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>
+Cc: Kees Cook <keescook@chromium.org>, nouveau@lists.freedesktop.org,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org,
+ Daniel Vetter <daniel@ffwll.ch>, Gourav Samaiya <gsamaiya@nvidia.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Zero-length arrays are deprecated[1] and are being replaced with
+flexible array members in support of the ongoing efforts to tighten the
+FORTIFY_SOURCE routines on memcpy(), correctly instrument array indexing
+with UBSAN_BOUNDS, and to globally enable -fstrict-flex-arrays=3.
 
---cz56iqciiap5nisp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Replace zero-length array with flexible-array member.
 
-On Thu, Nov 17, 2022 at 04:49:28PM +0100, Mauro Carvalho Chehab wrote:
-> On Thu, 17 Nov 2022 10:29:01 +0100
-> Maxime Ripard <maxime@cerno.tech> wrote:
->=20
-> > From: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
-> >=20
-> > Add support for the following composite output modes (all of them are
-> > somewhat more obscure than the previously defined ones):
-> >=20
-> > - NTSC_443 - NTSC-style signal with the chroma subcarrier shifted to
-> >   4.43361875 MHz (the PAL subcarrier frequency). Never used for
-> >   broadcasting, but sometimes used as a hack to play NTSC content in PAL
-> >   regions (e.g. on VCRs).
->=20
-> > - PAL_N - PAL with alternative chroma subcarrier frequency,
-> >   3.58205625 MHz. Used as a broadcast standard in Argentina, Paraguay
-> >   and Uruguay to fit 576i50 with colour in 6 MHz channel raster.
->=20
-> That's not right. Argentina uses a different standard than Paraguay and
-> Uruguai.
->=20
-> See, there are two variants of PAL/N. The original one and PAL/N' - also
-> called PAL/NC or PAL/CN (Combination N). Some of the timings are=20
-> different on /NC variant.
->=20
-> As far as I'm aware, PAL/Nc is used in Argentina, while
-> PAL/N is used in Paraguai and Uruguai, but I may be wrong on that,
-> as it has been a long time since had to touch on this.
->=20
-> > - PAL60 - 480i60 signal with PAL-style color at normal European PAL
-> >   frequency. Another non-standard, non-broadcast mode, used in similar
-> >   contexts as NTSC_443. Some displays support one but not the other.
->=20
-> > - SECAM - French frequency-modulated analog color standard; also have
-> >   been broadcast in Eastern Europe and various parts of Africa and Asia.
-> >   Uses the same 576i50 timings as PAL.
->=20
-> This is also wrong. just like PAL, there are several variants of SECAM,
-> one used in France, and a different one in France overseas and on
-> previous France colonies in Africa and Asia. Eastern Europe also used
-> different variants of SECAM.
+This results in no differences in binary output.
 
-And that's fine? Everything I did is supposed to be easy to extend if
-and when needed, so if someone has some interest in providing support
-for more standards, they are very welcome to do so.
+[1] https://github.com/KSPP/linux/issues/78
 
-I won't do it in this series though.
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: David Airlie <airlied@gmail.com>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: Gourav Samaiya <gsamaiya@nvidia.com>
+Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Signed-off-by: Kees Cook <keescook@chromium.org>
+---
+ drivers/gpu/drm/nouveau/include/nvfw/hs.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Maxime
+diff --git a/drivers/gpu/drm/nouveau/include/nvfw/hs.h b/drivers/gpu/drm/nouveau/include/nvfw/hs.h
+index 8c4cd08a7b5f..8b58b668fc0c 100644
+--- a/drivers/gpu/drm/nouveau/include/nvfw/hs.h
++++ b/drivers/gpu/drm/nouveau/include/nvfw/hs.h
+@@ -52,7 +52,7 @@ struct nvfw_hs_load_header_v2 {
+ 	struct {
+ 		u32 offset;
+ 		u32 size;
+-	} app[0];
++	} app[];
+ };
+ 
+ const struct nvfw_hs_load_header_v2 *nvfw_hs_load_header_v2(struct nvkm_subdev *, const void *);
+-- 
+2.34.1
 
---cz56iqciiap5nisp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCY3Zr2QAKCRDj7w1vZxhR
-xQY3AQC3ODU/A4r/xCJ5Ms7gOYpWhJaSGlaY+jf/qgMPcMmMhAD/VJCODvzEFvlF
-AuxhxZDFClQh1TusZBNOY31fQyzDIAU=
-=f8ne
------END PGP SIGNATURE-----
-
---cz56iqciiap5nisp--
