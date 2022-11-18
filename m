@@ -1,63 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B30556F6B9B
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:03 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 610B36F6B5A
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:18 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E7F3E10E45C;
-	Thu,  4 May 2023 12:32:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5F75110E3DE;
+	Thu,  4 May 2023 12:31:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4E70310E3D6;
- Tue, 15 Nov 2022 13:16:32 +0000 (UTC)
-Received: by mail-wm1-x32c.google.com with SMTP id
- h186-20020a1c21c3000000b003cfe48519a6so86492wmh.0; 
- Tue, 15 Nov 2022 05:16:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=vauApsbc4UItGo8j86KlPEM6J2rbnw+bhzYXpI7YoWM=;
- b=isLPesBDOxojosEmqtH37oSLsnYQ+jBvATAQRBQCEEE7sNeleCbC0h30hD94qv2TC8
- oiNkbHcykai/3l5VZvnw3WKaReQwa3PSZ5U0oqfyKYBTMcBSkFTDfKxTXoyzwGGGNTf5
- DSp9iZ4p1iRFcas/U1VyWFjwym52luX8ZlyM2LieSuwWGDKVd4pz6cgeq6s9ojuWqJGJ
- 1+7dfq0sPaMt27W1d3AGiBGAp1SfylFopjH3/cJoYUdRsbSn42EJ9/lVP+L62EMq7TVu
- d6H/H+587hDQTR+PKhUTl2o6k4qFlaf6Bl0NLt3r8MekefsZFpHo0JNdsO8y8fao7zA3
- lYKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vauApsbc4UItGo8j86KlPEM6J2rbnw+bhzYXpI7YoWM=;
- b=1dqP6UYdyX3oEvJWVQjHXddG86shDsQIDh9lhYoOlGR8rIRvL1DFO/tBvLfdDonY6E
- ok+VW1ZzrEja8yCf/yrTR4Ku3XTIqRkDWwimiSlST+m19J5YI4blKeSXMR66hvgHPDVM
- lXNZc4CDbu/zxikvKfw7La+xuV94uLSC4MOqw8+qk8qspaxHxW+xAfryhJ96keQVJX/b
- ts1xWnmCjuTN1lPNledxBNWOOAIr7PFwTuWqN6o0dJueqeoGmADwBqIc7Is6lmcXiq3P
- 2eRNxIpR4aV3m1G/1+tFQNkbQvc80nvK4J8RIOT3bWnpun3pk9k/U6Yfyr3WpCer3Fnb
- Gytg==
-X-Gm-Message-State: ANoB5pmZRsI/vp0iTNuoLklI1HYDsux9VZ88hoX+4wfOs+eoctcdRCWY
- p4gE8A7OOFSlSPuNkL4xw6o=
-X-Google-Smtp-Source: AA0mqf7caGDVbLS846G0EB5PU7FYFbjEvGpWyiaMSjJd8HX8o7LSMxw/oKEE2kXNf9icY5Gm3sWPQQ==
-X-Received: by 2002:a05:600c:212:b0:3cf:cfea:904c with SMTP id
- 18-20020a05600c021200b003cfcfea904cmr456990wmi.33.1668518190808; 
- Tue, 15 Nov 2022 05:16:30 -0800 (PST)
-Received: from localhost ([102.36.222.112]) by smtp.gmail.com with ESMTPSA id
- a11-20020a5d570b000000b0022ca921dc67sm12422379wrv.88.2022.11.15.05.16.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Nov 2022 05:16:30 -0800 (PST)
-Date: Tue, 15 Nov 2022 16:16:27 +0300
-From: Dan Carpenter <error27@gmail.com>
-To: Ben Skeggs <bskeggs@redhat.com>
-Message-ID: <Y3Jd0JYhjPe4wTXh@kili>
+Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6687A10E1F7
+ for <nouveau@lists.freedesktop.org>; Fri, 18 Nov 2022 09:17:50 +0000 (UTC)
+Received: from dggpemm500024.china.huawei.com (unknown [172.30.72.54])
+ by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4NDB1m50QRzJnpq;
+ Fri, 18 Nov 2022 17:14:36 +0800 (CST)
+Received: from dggpemm500007.china.huawei.com (7.185.36.183) by
+ dggpemm500024.china.huawei.com (7.185.36.203) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Fri, 18 Nov 2022 17:17:47 +0800
+Received: from huawei.com (10.175.103.91) by dggpemm500007.china.huawei.com
+ (7.185.36.183) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Fri, 18 Nov
+ 2022 17:17:46 +0800
+From: Yang Yingliang <yangyingliang@huawei.com>
+To: <bskeggs@redhat.com>, <kherbst@redhat.com>, <lyude@redhat.com>,
+ <airlied@gmail.com>, <daniel@ffwll.ch>, <tzimmermann@suse.de>
+Date: Fri, 18 Nov 2022 17:16:11 +0800
+Message-ID: <20221118091611.18706-1-yangyingliang@huawei.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:32 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/gr/gv100-: unlock on error in
- gf100_gr_chan_new()
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.175.103.91]
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ dggpemm500007.china.huawei.com (7.185.36.183)
+X-CFilter-Loop: Reflected
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:38 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau/kms/nv04: fix pci device refcount leak
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,31 +49,83 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, kernel-janitors@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>
+Cc: nouveau@lists.freedesktop.org, yangyingliang@huawei.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Drop the "gr->fecs.mutex" lock before returning on this error path.
+As comment of pci_get_domain_bus_and_slot() says, it returns
+a pci device with refcount increment, when finish using it,
+the caller must decrement the reference count by calling
+pci_dev_put().
 
-Fixes: ca081fff6ecc ("drm/nouveau/gr/gf100-: generate golden context during first object alloc")
-Signed-off-by: Dan Carpenter <error27@gmail.com>
+In nv04_update_arb() and nouveau_hw_get_clock(), after using
+pci_dev_put() is called to avoid refcount leak.
+
+Fixes: 6ee738610f41 ("drm/nouveau: Add DRM driver for NVIDIA GPUs")
+Signed-off-by: Yang Yingliang <yangyingliang@huawei.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/gpu/drm/nouveau/dispnv04/arb.c |  6 ++++--
+ drivers/gpu/drm/nouveau/dispnv04/hw.c  | 13 +++++++++----
+ 2 files changed, 13 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
-index 5f20079c3660..24bec8f8f83e 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
-@@ -442,6 +442,7 @@ gf100_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
- 	if (gr->data == NULL) {
- 		ret = gf100_grctx_generate(gr, chan, fifoch->inst);
- 		if (ret) {
-+			mutex_unlock(&gr->fecs.mutex);
- 			nvkm_error(&base->engine.subdev, "failed to construct context\n");
- 			return ret;
- 		}
+diff --git a/drivers/gpu/drm/nouveau/dispnv04/arb.c b/drivers/gpu/drm/nouveau/dispnv04/arb.c
+index 1d3542d6006b..697e67fb21d3 100644
+--- a/drivers/gpu/drm/nouveau/dispnv04/arb.c
++++ b/drivers/gpu/drm/nouveau/dispnv04/arb.c
+@@ -209,11 +209,13 @@ nv04_update_arb(struct drm_device *dev, int VClk, int bpp,
+ 	sim_data.two_heads = nv_two_heads(dev);
+ 	if ((pdev->device & 0xffff) == 0x01a0 /*CHIPSET_NFORCE*/ ||
+ 	    (pdev->device & 0xffff) == 0x01f0 /*CHIPSET_NFORCE2*/) {
++		struct pci_dev *pdev;
+ 		uint32_t type;
+ 		int domain = pci_domain_nr(pdev->bus);
+ 
+-		pci_read_config_dword(pci_get_domain_bus_and_slot(domain, 0, 1),
+-				      0x7c, &type);
++		pdev = pci_get_domain_bus_and_slot(domain, 0, 1);
++		pci_read_config_dword(pdev, 0x7c, &type);
++		pci_dev_put(pdev);
+ 
+ 		sim_data.memory_type = (type >> 12) & 1;
+ 		sim_data.memory_width = 64;
+diff --git a/drivers/gpu/drm/nouveau/dispnv04/hw.c b/drivers/gpu/drm/nouveau/dispnv04/hw.c
+index f7d35657aa64..52e3999225d5 100644
+--- a/drivers/gpu/drm/nouveau/dispnv04/hw.c
++++ b/drivers/gpu/drm/nouveau/dispnv04/hw.c
+@@ -216,6 +216,7 @@ nouveau_hw_get_clock(struct drm_device *dev, enum nvbios_pll_type plltype)
+ {
+ 	struct pci_dev *pdev = to_pci_dev(dev->dev);
+ 	struct nvkm_pll_vals pllvals;
++	struct pci_dev *tmp_pdev;
+ 	int ret;
+ 	int domain;
+ 
+@@ -224,8 +225,10 @@ nouveau_hw_get_clock(struct drm_device *dev, enum nvbios_pll_type plltype)
+ 	if (plltype == PLL_MEMORY &&
+ 	    (pdev->device & 0x0ff0) == CHIPSET_NFORCE) {
+ 		uint32_t mpllP;
+-		pci_read_config_dword(pci_get_domain_bus_and_slot(domain, 0, 3),
+-				      0x6c, &mpllP);
++
++		tmp_pdev = pci_get_domain_bus_and_slot(domain, 0, 3);
++		pci_read_config_dword(tmp_pdev, 0x6c, &mpllP);
++		pci_dev_put(tmp_pdev);
+ 		mpllP = (mpllP >> 8) & 0xf;
+ 		if (!mpllP)
+ 			mpllP = 4;
+@@ -236,8 +239,10 @@ nouveau_hw_get_clock(struct drm_device *dev, enum nvbios_pll_type plltype)
+ 	    (pdev->device & 0xff0) == CHIPSET_NFORCE2) {
+ 		uint32_t clock;
+ 
+-		pci_read_config_dword(pci_get_domain_bus_and_slot(domain, 0, 5),
+-				      0x4c, &clock);
++		tmp_pdev = pci_get_domain_bus_and_slot(domain, 0, 5);
++		pci_read_config_dword(tmp_pdev, 0x4c, &clock);
++		pci_dev_put(tmp_pdev);
++
+ 		return clock / 1000;
+ 	}
+ 
 -- 
-2.35.1
+2.25.1
 
