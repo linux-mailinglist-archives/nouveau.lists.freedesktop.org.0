@@ -2,44 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24206630040
-	for <lists+nouveau@lfdr.de>; Fri, 18 Nov 2022 23:39:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0CD0630C17
+	for <lists+nouveau@lfdr.de>; Sat, 19 Nov 2022 06:20:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 179A510E7E8;
-	Fri, 18 Nov 2022 22:39:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E31CF10E260;
+	Sat, 19 Nov 2022 05:20:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C647A10E7E6;
- Fri, 18 Nov 2022 22:39:06 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 02BF9627A9;
- Fri, 18 Nov 2022 22:39:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48F4AC433D6;
- Fri, 18 Nov 2022 22:39:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1668811145;
- bh=7G8ECLw1ELEqxR6Z8QunxLZvnkLl+Xk4JcotDxWZGTU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=MqNvnouuMLsZXAjO0uvS7Uenbre81ICnQjgiFWQrB1S4P4QV5UroFyWsFOR9omKaU
- FfoR3j0xrx0dXV432YtcMzMicjMJ+QMLDygQqlkFgXa5etVWZUhb3Sshx9uyHyDxan
- qVti8010/ZiFLOu5kV6rH98JcPZHh+XicKWuEbZdpK349/257mTO/mMH01LaVvWtHR
- 4oE/WZ5fd00M4qjPRfRCjKBifoKM1v5VcfyUuAIvkmrz4LLw3NfRiNO7f7BsiyGIUv
- 9w1R0Hb5afE94Nj8iEUWt5kai2gIS4mbuqs3+9ut6MblR3c2XMNauYsemh9kcpFL2g
- YQcZJsXBui2AA==
-Date: Fri, 18 Nov 2022 16:38:52 -0600
-From: "Gustavo A. R. Silva" <gustavoars@kernel.org>
-To: Kees Cook <keescook@chromium.org>
-Message-ID: <Y3gJfLIGUTTdajY4@work>
-References: <20221118211207.never.039-kees@kernel.org>
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 352B810E25E;
+ Sat, 19 Nov 2022 05:20:26 +0000 (UTC)
+Received: by mail-ej1-x62b.google.com with SMTP id bj12so17581802ejb.13;
+ Fri, 18 Nov 2022 21:20:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7Y4bxw1JD63M5XllY6npHcIrHCuFCtkIt2jLzNAtGRU=;
+ b=exLzb3poQrwX0fkXQzG5mAxcKfcogKJp9nov8VgFXIyCExcSGg76o3gfk3lxW4TGq/
+ 5xNTWZqM33mWjFXrUkLSC6soMu7mSI8TX+/lMiKkDzXvt+BcnmFgvp6+6HUzQTJzMQJl
+ R/LpBJNoKtKYYDvKcuSYG4Np++PnyHl7ixI3U3G7Ksm9Ep4dvMeY2WURxEsaA5JQgICU
+ MOTfGU8w21ifwZUnzi73y76Wa8x5WHQJIbsFq+NMyaCcAGoptPLXnjLzenS8UDCS2pVA
+ KSNMHLP8IRfTL5bgWTaCNPl64ZUuRl+X9vKzXjd1YEc1E/L3UPEJXw5l+O/19kFQhGG9
+ Hyyg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7Y4bxw1JD63M5XllY6npHcIrHCuFCtkIt2jLzNAtGRU=;
+ b=xFPo3Y42U3Er3ZZXndHuXS3s1Q/C2F/Ak4+6r16/WvqwAWx+c60H9Vh7cAqtKMPsNv
+ friiln6d150K0SqKTJ0tHrH8YoX31VNzf9IJqlBQ+oKyIiBlX5G1crQYi/gI73SQ4UEf
+ HsVZY34P92T0o9H4nCxLl58Zf0KvqPSaiqFAFVLPUOTihc3JatK5+L0irOGm0E5CC17s
+ AcH4LB++UdIgrgwEWvrnx7ierkQaVO8DTrvrcxIPIy+LtbWpmcQI7B91xh+8wuOsNYCu
+ Pl41e5YSHAHRZfRojSPxAxEGMf5hDHCsijQrjOHZ61At4sDYS7/vQcwQkCwxeDbjJ7yV
+ 6zVw==
+X-Gm-Message-State: ANoB5pkC07jUTfMHp4c8TOKiyJS/5E5Yquebu8iuc74aTEZHiGfojbA/
+ +kmW3ODAhoXHdAoKRfFgCl1wacoV3zNv8/gGmto=
+X-Google-Smtp-Source: AA0mqf6QeRRX0IlcllwtANP/CEQ4uvjC6o1p5svY601MJVeWZ30wxil0NldfeqRcJRaIQZIb3Z49UrIGJN0yANUpc7w=
+X-Received: by 2002:a17:906:560e:b0:7a2:335e:90e2 with SMTP id
+ f14-20020a170906560e00b007a2335e90e2mr8281399ejq.712.1668835224347; Fri, 18
+ Nov 2022 21:20:24 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20221118211207.never.039-kees@kernel.org>
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/fb/ga102: Replace zero-length
- array of trailing structs with flex-array
+References: <20220819200928.401416-1-kherbst@redhat.com>
+In-Reply-To: <20220819200928.401416-1-kherbst@redhat.com>
+From: Computer Enthusiastic <computer.enthusiastic@gmail.com>
+Date: Sat, 19 Nov 2022 06:20:10 +0100
+Message-ID: <CAHSpYy182u=3g2dH+DRuoUSEBYYr8E571oHeN4y=wB1gCqbGEw@mail.gmail.com>
+To: Karol Herbst <kherbst@redhat.com>, stable@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH] nouveau: explicitly wait on the fence in
+ nouveau_bo_move_m2mf
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,58 +65,51 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-hardening@vger.kernel.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- Gourav Samaiya <gsamaiya@nvidia.com>
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Nov 18, 2022 at 01:12:08PM -0800, Kees Cook wrote:
-> Zero-length arrays are deprecated[1] and are being replaced with
-> flexible array members in support of the ongoing efforts to tighten the
-> FORTIFY_SOURCE routines on memcpy(), correctly instrument array indexing
-> with UBSAN_BOUNDS, and to globally enable -fstrict-flex-arrays=3.
-> 
-> Replace zero-length array with flexible-array member.
-> 
-> This results in no differences in binary output.
-> 
-> [1] https://github.com/KSPP/linux/issues/78
-> 
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> Cc: Karol Herbst <kherbst@redhat.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: David Airlie <airlied@gmail.com>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: Gourav Samaiya <gsamaiya@nvidia.com>
-> Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: nouveau@lists.freedesktop.org
-> Signed-off-by: Kees Cook <keescook@chromium.org>
+Hello,
 
-Reviewed-by: Gustavo A. R. Silva <gustavoars@kernel.org>
-
-Thanks!
---
-Gustavo
-
+Il giorno ven 19 ago 2022 alle ore 22:09 Karol Herbst
+<kherbst@redhat.com> ha scritto:
+>
+> It is a bit unlcear to us why that's helping, but it does and unbreaks
+> suspend/resume on a lot of GPUs without any known drawbacks.
+>
+> Cc: stable@vger.kernel.org # v5.15+
+> Closes: https://gitlab.freedesktop.org/drm/nouveau/-/issues/156
+> Signed-off-by: Karol Herbst <kherbst@redhat.com>
 > ---
->  drivers/gpu/drm/nouveau/include/nvfw/hs.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/include/nvfw/hs.h b/drivers/gpu/drm/nouveau/include/nvfw/hs.h
-> index 8c4cd08a7b5f..8b58b668fc0c 100644
-> --- a/drivers/gpu/drm/nouveau/include/nvfw/hs.h
-> +++ b/drivers/gpu/drm/nouveau/include/nvfw/hs.h
-> @@ -52,7 +52,7 @@ struct nvfw_hs_load_header_v2 {
->  	struct {
->  		u32 offset;
->  		u32 size;
-> -	} app[0];
-> +	} app[];
->  };
->  
->  const struct nvfw_hs_load_header_v2 *nvfw_hs_load_header_v2(struct nvkm_subdev *, const void *);
-> -- 
-> 2.34.1
-> 
+>  drivers/gpu/drm/nouveau/nouveau_bo.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> index 35bb0bb3fe61..126b3c6e12f9 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> @@ -822,6 +822,15 @@ nouveau_bo_move_m2mf(struct ttm_buffer_object *bo, int evict,
+>                 if (ret == 0) {
+>                         ret = nouveau_fence_new(chan, false, &fence);
+>                         if (ret == 0) {
+> +                               /* TODO: figure out a better solution here
+> +                                *
+> +                                * wait on the fence here explicitly as going through
+> +                                * ttm_bo_move_accel_cleanup somehow doesn't seem to do it.
+> +                                *
+> +                                * Without this the operation can timeout and we'll fallback to a
+> +                                * software copy, which might take several minutes to finish.
+> +                                */
+> +                               nouveau_fence_wait(fence, false, false);
+>                                 ret = ttm_bo_move_accel_cleanup(bo,
+>                                                                 &fence->base,
+>                                                                 evict, false,
+> --
+> 2.37.1
+>
+
+Could it be possible to make land the aforementioned patch to the
+5.10.x kernel version ? It is currently for >= 5.15.x kernel version
+only.
+
+Thanks.
