@@ -2,73 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 635E2632DF9
-	for <lists+nouveau@lfdr.de>; Mon, 21 Nov 2022 21:30:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B5C50632F6E
+	for <lists+nouveau@lfdr.de>; Mon, 21 Nov 2022 22:58:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 21E7E10E332;
-	Mon, 21 Nov 2022 20:30:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5B8F310E338;
+	Mon, 21 Nov 2022 21:58:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0736210E1A9;
- Mon, 21 Nov 2022 20:30:49 +0000 (UTC)
-Received: by mail-lj1-x231.google.com with SMTP id b9so15766023ljr.5;
- Mon, 21 Nov 2022 12:30:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:references:cc:to
- :content-language:subject:reply-to:user-agent:mime-version:date
- :message-id:from:from:to:cc:subject:date:message-id:reply-to;
- bh=yfpG9eV9KNVg6+qRSV5QIiQhtEjfHqp5OQWIwTqY8sA=;
- b=Ze5g2f/gPvQ3Tp9Cc8ktS01XE453EfrnyYaf+/a3VDrFFSP4CJO3aUfyiY+dOwYhRf
- 19y5fnAixQ0LpEiHwAfYBKxS6oixdLF89sVOfNWSGjkqQCIteMAo7nhKr7HwBJX++HYw
- Y7Ax6q0yOQyRIVBnUrcSnGFj7Wx/KzucaNwjMkgcgFxZByJ5QEPbtQzQSFUVzUl4wkcG
- Sm8W77Bo1bisA2AXtJ0Bu1wlMNp5TyyOW0nkHK0QCCm92Kclg9rh1IN5SgNX1tApr/F0
- 2g8ILU8TvDQOyJiywHaHtOIQi2yh6zfiAikOQeQ1u6d9uJBG4peZ7KOrGfpJCU/kBHZJ
- 7m/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:references:cc:to
- :content-language:subject:reply-to:user-agent:mime-version:date
- :message-id:from:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yfpG9eV9KNVg6+qRSV5QIiQhtEjfHqp5OQWIwTqY8sA=;
- b=mH68UOfTj/KT82OFGRK/baxM1rDd7laGoeNrvsPg6amgkoYWFKrdy+nPHKM9pdORuF
- uaaRSykA6XDQ+ZRy5lsZVy6IA1t3akezFR02ft9o7Wf7zBgjEtf3pKaa9Xof/nVykGNA
- Uwy9EBvOYbKoFSOgQ0APoFdQOS8LYulKeWawW7/rtYY/MLvq/s3k9ekmNb7WdnTGDmzr
- TVqaFQP/yPB3CNV6UQRHW4PZe/CA2lnHsYuVJkTmNgc8oylZYMU6EvcerDbkOzCYUVH/
- w5Hs7qzkkbAGygItXeWCBITRHMRonUqJkp7HhX4sDuqgG1rIDuKMx6Bx8AkTxABAV1DB
- ZtTw==
-X-Gm-Message-State: ANoB5pmvW3J3Os2Bx59uLwJ2JuPfhQl1Gw054acIy/9rWokxyNX2cryL
- 1HBE+bOickTuiVGzwVcmNRs=
-X-Google-Smtp-Source: AA0mqf4jNu8dHA6JfWXDhB4DyXYt8qsKIcM6lNMaXNk/PE24lBhpjgzvIjCR5uxjAMvvwmnDlhywFQ==
-X-Received: by 2002:a2e:2d01:0:b0:278:ebb5:ddd2 with SMTP id
- t1-20020a2e2d01000000b00278ebb5ddd2mr6025246ljt.494.1669062647681; 
- Mon, 21 Nov 2022 12:30:47 -0800 (PST)
-Received: from ?IPV6:2a02:a31a:a240:1700:cd97:47f7:90db:67bf?
- ([2a02:a31a:a240:1700:cd97:47f7:90db:67bf])
- by smtp.googlemail.com with ESMTPSA id
- r17-20020a2e9951000000b00261ccf566e3sm1555644ljj.65.2022.11.21.12.30.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Nov 2022 12:30:46 -0800 (PST)
-From: Mateusz Kwiatkowski <kfyatek@gmail.com>
-X-Google-Original-From: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
-Message-ID: <069ff6bb-c49e-e7c9-ce45-35999ff725c5@gmail.com>
-Date: Mon, 21 Nov 2022 21:30:40 +0100
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 764E210E336;
+ Mon, 21 Nov 2022 21:58:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1669067921; x=1700603921;
+ h=date:from:to:cc:subject:message-id:mime-version:
+ content-transfer-encoding;
+ bh=YGG+x4h+hQ07FnMjwq53sHtrTnzTFjfIqyustOHRNCo=;
+ b=RElKX99ffZZsvrnTyLyBFJitJLNTrDrWoqccOY/tlW6LfkHxiEdm6qXM
+ cmjg5xwI2hiyfZHDstpZxTRfRLcg/bD54AcwVG1MMEqPAtkmZaYcHs9OB
+ Ggq/cd26PIYR/Gl8hG/VFrQfTDJUzDLYFfOrijDNbKFCfQtwYVqHT45zC
+ L7+HiNMBdFDOk4ONYJg2bMkMpdgL6q92U7d0pGAUkaJPffA78osQA/cN4
+ t82pB/y4bbndULTVif21kKiCB09+8QGWuX8SJvdXuxJm++3UIQnzbtdTs
+ CqD0CRmMW/CUegFuGsd/DLLwnBhcoefkKVaggFCbOMGF45ooYUC15evFQ A==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10538"; a="311300947"
+X-IronPort-AV: E=Sophos;i="5.96,182,1665471600"; d="scan'208";a="311300947"
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 Nov 2022 13:58:41 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10538"; a="747080834"
+X-IronPort-AV: E=Sophos;i="5.96,182,1665471600"; d="scan'208";a="747080834"
+Received: from lkp-server01.sh.intel.com (HELO 64a2d449c951) ([10.239.97.150])
+ by fmsmga002.fm.intel.com with ESMTP; 21 Nov 2022 13:58:38 -0800
+Received: from kbuild by 64a2d449c951 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1oxEoH-0000mh-1q;
+ Mon, 21 Nov 2022 21:58:37 +0000
+Date: Tue, 22 Nov 2022 05:58:15 +0800
+From: kernel test robot <lkp@intel.com>
+To: Andrew Morton <akpm@linux-foundation.org>
+Message-ID: <637bf477.ORnAaf8quqxr/cRo%lkp@intel.com>
+User-Agent: Heirloom mailx 12.5 6/20/10
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.5.0
-Content-Language: pl
-To: Mauro Carvalho Chehab <mauro.chehab@linux.intel.com>,
- Maxime Ripard <maxime@cerno.tech>
-References: <20220728-rpi-analog-tv-properties-v10-0-256dad125326@cerno.tech>
- <20220728-rpi-analog-tv-properties-v10-18-256dad125326@cerno.tech>
- <20221117164928.200b3a1a@maurocar-mobl2>
-In-Reply-To: <20221117164928.200b3a1a@maurocar-mobl2>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v10 18/19] drm/vc4: vec: Add support for more
- analog TV standards
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Subject: [Nouveau] [linux-next:master] BUILD REGRESSION
+ e4cd8d3ff7f9efeb97330e5e9b99eeb2a68f5cf9
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,383 +58,228 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: kfyatek+publicgit@gmail.com
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Emma Anholt <emma@anholt.net>, Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
- Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- linux-arm-kernel@lists.infradead.org,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+Cc: alsa-devel@alsa-project.org, nouveau@lists.freedesktop.org,
+ linux-mmc@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-renesas-soc@vger.kernel.org,
+ Linux Memory Management List <linux-mm@kvack.org>,
+ amd-gfx@lists.freedesktop.org, linux-clk@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Mauro,
+tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
+branch HEAD: e4cd8d3ff7f9efeb97330e5e9b99eeb2a68f5cf9  Add linux-next specific files for 20221121
 
-As the author of the original version of this commit, and also a person who
-argued quite a bit on these descriptions and decisions, let me chip in a bit.
+Error/Warning reports:
 
-W dniu 17.11.2022 o 16:49, Mauro Carvalho Chehab pisze:
-> On Thu, 17 Nov 2022 10:29:01 +0100
-> Maxime Ripard <maxime@cerno.tech> wrote:
->
->> From: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
->>
->> Add support for the following composite output modes (all of them are
->> somewhat more obscure than the previously defined ones):
->>
->> - NTSC_443 - NTSC-style signal with the chroma subcarrier shifted to
->>   4.43361875 MHz (the PAL subcarrier frequency). Never used for
->>   broadcasting, but sometimes used as a hack to play NTSC content in PAL
->>   regions (e.g. on VCRs).
->
->> - PAL_N - PAL with alternative chroma subcarrier frequency,
->>   3.58205625 MHz. Used as a broadcast standard in Argentina, Paraguay
->>   and Uruguay to fit 576i50 with colour in 6 MHz channel raster.
->
-> That's not right. Argentina uses a different standard than Paraguay and
-> Uruguai.
->
-> See, there are two variants of PAL/N. The original one and PAL/N' - also
-> called PAL/NC or PAL/CN (Combination N). Some of the timings are 
-> different on /NC variant.
->
-> As far as I'm aware, PAL/Nc is used in Argentina, while
-> PAL/N is used in Paraguai and Uruguai, but I may be wrong on that,
-> as it has been a long time since had to touch on this.
+https://lore.kernel.org/oe-kbuild-all/202211130053.Np70VIdn-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202211191949.jqnWetUW-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202211200417.23aUOpyC-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202211211917.yLICUnMb-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202211212249.livTPi3Y-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202211220547.7Jd7QBi7-lkp@intel.com
 
-If you say so - maybe that's true. But I tried to find any differences between
-PAL-N and PAL-Nc many times and haven't found anything concrete. The only
-authoritative source where System N and "Combination N/PAL" seem to be mentioned
-as separate entities is BT.1701
-<https://www.itu.int/rec/R-REC-BT.1701-1-200508-I/en>. However:
+Error/Warning: (recently discovered and may have been fixed)
 
-a) the differences are very subtle (with "combination N/PAL" being just a tad
-   stricter than what's mentioned for System N)
-b) "Combination N/PAL" can be understood as just "System N combined with PAL
-   color", as opposed to "raw", black&white System N. This intepretation is also
-   what the user calling themselves "Alcahemist" suggests here:
-   https://en.wikipedia.org/wiki/Talk:PAL#PAL-N_versus_PAL-Nc
+arch/arm/mach-s3c/devs.c:32:10: fatal error: linux/platform_data/dma-s3c24xx.h: No such file or directory
+drivers/clk/clk.c:1022:5: error: redefinition of 'clk_prepare'
+drivers/clk/clk.c:1268:6: error: redefinition of 'clk_is_enabled_when_prepared'
+drivers/clk/clk.c:941:6: error: redefinition of 'clk_unprepare'
+drivers/gpu/drm/amd/amdgpu/../display/dc/core/dc.c:4939: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+drivers/gpu/drm/amd/amdgpu/../display/dc/core/dc_link_dp.c:5075:24: warning: implicit conversion from 'enum <anonymous>' to 'enum dc_status' [-Wenum-conversion]
+drivers/gpu/drm/amd/amdgpu/../display/dc/irq/dcn201/irq_service_dcn201.c:139:43: warning: unused variable 'dmub_outbox_irq_info_funcs' [-Wunused-const-variable]
+drivers/gpu/drm/amd/amdgpu/../display/dc/irq/dcn201/irq_service_dcn201.c:40:20: warning: no previous prototype for 'to_dal_irq_source_dcn201' [-Wmissing-prototypes]
+drivers/gpu/drm/amd/amdgpu/../display/dc/irq/dcn201/irq_service_dcn201.c:40:20: warning: no previous prototype for function 'to_dal_irq_source_dcn201' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: warning: no previous prototype for 'gf100_fifo_nonstall_block' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: warning: no previous prototype for function 'gf100_fifo_nonstall_block' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c:34:1: warning: no previous prototype for 'nvkm_engn_cgrp_get' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c:34:1: warning: no previous prototype for function 'nvkm_engn_cgrp_get' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: no previous prototype for 'tu102_gr_load' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: no previous prototype for function 'tu102_gr_load' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c:49:1: warning: no previous prototype for 'wpr_generic_header_dump' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c:49:1: warning: no previous prototype for function 'wpr_generic_header_dump' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:221:21: warning: variable 'loc' set but not used [-Wunused-but-set-variable]
+include/linux/ftrace.h:126:16: error: implicit declaration of function 'arch_ftrace_get_regs'; did you mean 'ftrace_get_regs'? [-Werror=implicit-function-declaration]
+include/linux/ftrace.h:126:16: warning: returning 'int' from a function with return type 'struct pt_regs *' makes pointer from integer without a cast [-Wint-conversion]
+microblaze-linux-ld: (.text+0x158): undefined reference to `drm_bridge_add'
+microblaze-linux-ld: drivers/gpu/drm/rcar-du/rzg2l_mipi_dsi.o:(.rodata+0x3b4): undefined reference to `drm_atomic_helper_bridge_duplicate_state'
+microblaze-linux-ld: drivers/gpu/drm/rcar-du/rzg2l_mipi_dsi.o:(.rodata+0x3b8): undefined reference to `drm_atomic_helper_bridge_destroy_state'
+microblaze-linux-ld: drivers/gpu/drm/rcar-du/rzg2l_mipi_dsi.o:(.rodata+0x3c8): undefined reference to `drm_atomic_helper_bridge_reset'
 
-This is of course far from an authoritative source. If you have a definitive
-source for PAL-N and PAL-Nc being different, or concrete information on what is
-different between them specifically, then so be it. But I tried and haven't
-found anything conclusive.
+Unverified Error/Warning (likely false positive, please contact us if interested):
 
->> - PAL60 - 480i60 signal with PAL-style color at normal European PAL
->>   frequency. Another non-standard, non-broadcast mode, used in similar
->>   contexts as NTSC_443. Some displays support one but not the other.
->
->> - SECAM - French frequency-modulated analog color standard; also have
->>   been broadcast in Eastern Europe and various parts of Africa and Asia.
->>   Uses the same 576i50 timings as PAL.
->
-> This is also wrong. just like PAL, there are several variants of SECAM,
-> one used in France, and a different one in France overseas and on
-> previous France colonies in Africa and Asia. Eastern Europe also used
-> different variants of SECAM.
+drivers/gpu/drm/nouveau/nouveau_dp.c:237 nouveau_dp_irq() warn: variable dereferenced before check 'outp' (see line 232)
+drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c:116 nvkm_uoutp_mthd_infoframe() error: we previously assumed 'ior->func->hdmi' could be null (see line 114)
+drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c:250 nvkm_uoutp_mthd_acquire() error: we previously assumed 'outp->ior' could be null (see line 217)
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c:133 nvkm_chan_cctx_get() warn: inconsistent returns '&cgrp->mutex'.
+drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c:480 gf100_gr_chan_new() warn: inconsistent returns '&gr->fecs.mutex'.
+drivers/gpu/drm/nouveau/nvkm/engine/gr/gv100.c:232:13: warning: use of uninitialized value '<unknown>' [CWE-457] [-Wanalyzer-use-of-uninitialized-value]
+drivers/gpu/drm/nouveau/nvkm/engine/gr/gv100.c:263 gv100_gr_oneinit_sm_id() warn: potentially one past the end of array 'gpc_tpc_mask[gpc_table[gtpc]]'
+drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:350 nvkm_acr_lsfw_load_bl_sig_net() warn: passing zero to 'PTR_ERR'
+drivers/mmc/host/renesas_sdhi_internal_dmac.c:327 renesas_sdhi_internal_dmac_dma_irq() warn: set_bit() takes a bit number
+drivers/mmc/host/renesas_sdhi_internal_dmac.c:341 renesas_sdhi_internal_dmac_dataend_dma() warn: set_bit() takes a bit number
+drivers/mmc/host/renesas_sdhi_internal_dmac.c:444 renesas_sdhi_internal_dmac_issue_tasklet_fn() warn: set_bit() takes a bit number
+lib/zstd/compress/huf_compress.c:460 HUF_getIndex() warn: the 'RANK_POSITION_LOG_BUCKETS_BEGIN' macro might need parens
+lib/zstd/decompress/zstd_decompress_block.c:1009 ZSTD_execSequence() warn: inconsistent indenting
+lib/zstd/decompress/zstd_decompress_block.c:894 ZSTD_execSequenceEnd() warn: inconsistent indenting
+lib/zstd/decompress/zstd_decompress_block.c:942 ZSTD_execSequenceEndSplitLitBuffer() warn: inconsistent indenting
+lib/zstd/decompress/zstd_decompress_internal.h:206 ZSTD_DCtx_get_bmi2() warn: inconsistent indenting
+mm/hugetlb.c:2073 alloc_pool_huge_page() error: uninitialized symbol 'folio'.
+sound/hda/ext/hdac_ext_controller.c:140:28: warning: Shifting signed 32-bit value by 31 bits is implementation-defined behaviour. See condition at line 160. [shiftTooManyBitsSigned]
 
-This is true. However, those differed only in RF modulation. For example,
-French SECAM-L used positive video modulation and AM sound, while Eastern
-European SECAM-D/K used negative video modulation and FM sound. But the
-baseband composite signals were identical.
+Error/Warning ids grouped by kconfigs:
 
-There were several other variants of SECAM, like early SECAM/V vs. SECAM/H
-("Field identification" vs. "Line identification") which moved the color
-identification signals from VBI to HBI. But that's a change that all SECAM
-regions, including both France and Eastern Europe did in the 1980s to
-acommodate for teletext. Again, authoritative sources are scarce, but see e.g.
-https://web.archive.org/web/20160303232903/http://www.pembers.freeserve.co.uk/World-TV-Standards/Colour-Standards.html
-(search for "Synchronisation of SECAM colour transmissions" on the page).
+gcc_recent_errors
+|-- alpha-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc.c:warning:This-comment-starts-with-but-isn-t-a-kernel-doc-comment.-Refer-Documentation-doc-guide-kernel-doc.rst
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arc-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc.c:warning:This-comment-starts-with-but-isn-t-a-kernel-doc-comment.-Refer-Documentation-doc-guide-kernel-doc.rst
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arc-randconfig-r022-20221120
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc.c:warning:This-comment-starts-with-but-isn-t-a-kernel-doc-comment.-Refer-Documentation-doc-guide-kernel-doc.rst
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   `-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
+|-- arc-randconfig-r033-20221120
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arm-allyesconfig
+|   |-- arch-arm-mach-s3c-devs.c:fatal-error:linux-platform_data-dma-s3c24xx.h:No-such-file-or-directory
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc.c:warning:This-comment-starts-with-but-isn-t-a-kernel-doc-comment.-Refer-Documentation-doc-guide-kernel-doc.rst
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arm-defconfig
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arm-randconfig-c002-20221115
+|   `-- drivers-gpu-drm-nouveau-nvkm-engine-gr-gv100.c:warning:use-of-uninitialized-value-unknown-CWE
+|-- arm64-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc.c:warning:This-comment-starts-with-but-isn-t-a-kernel-doc-comment.-Refer-Documentation-doc-guide-kernel-doc.rst
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
+clang_recent_errors
+|-- powerpc-randconfig-r004-20221121
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-function-to_dal_irq_source_dcn201
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:unused-variable-dmub_outbox_irq_info_funcs
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-function-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-function-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-function-tu102_gr_load
+|   `-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-function-wpr_generic_header_dump
+|-- riscv-randconfig-r042-20221120
+|   `-- ld.lld:error:too-many-errors-emitted-stopping-now-(use-error-limit-to-see-all-errors)
+`-- s390-randconfig-r044-20221120
+    |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-function-to_dal_irq_source_dcn201
+    |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:unused-variable-dmub_outbox_irq_info_funcs
+    |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-function-gf100_fifo_nonstall_block
+    |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-function-nvkm_engn_cgrp_get
+    |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-function-tu102_gr_load
+    `-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-function-wpr_generic_header_dump
 
-There's also MESECAM, but that only applies to encoding on VHS and Betamax
-tapes, not the signals themselves. There was also SECAM-M for 525-line (480i)
-signals, but I haven't found any conclusive evidence that it was ever used for
-broadcast anywhere
+elapsed time: 730m
 
-So yeah, SECAM can be a bit confusing, but AFAIK there's only one standard if
-we're talking about the composite video layer.
+configs tested: 73
+configs skipped: 4
 
---
+gcc tested configs:
+um                           x86_64_defconfig
+arc                                 defconfig
+alpha                               defconfig
+um                             i386_defconfig
+i386                                defconfig
+s390                                defconfig
+s390                             allmodconfig
+s390                             allyesconfig
+ia64                             allmodconfig
+x86_64                          rhel-8.3-func
+x86_64                    rhel-8.3-kselftests
+x86_64                              defconfig
+i386                             allyesconfig
+x86_64               randconfig-a011-20221121
+x86_64                               rhel-8.3
+arc                  randconfig-r043-20221120
+x86_64               randconfig-a013-20221121
+i386                 randconfig-a011-20221121
+riscv                randconfig-r042-20221121
+i386                 randconfig-a013-20221121
+x86_64                           allyesconfig
+arm                                 defconfig
+x86_64               randconfig-a012-20221121
+i386                 randconfig-a012-20221121
+x86_64               randconfig-a015-20221121
+i386                 randconfig-a014-20221121
+x86_64               randconfig-a014-20221121
+x86_64               randconfig-a016-20221121
+i386                 randconfig-a016-20221121
+i386                 randconfig-a015-20221121
+x86_64                            allnoconfig
+arc                  randconfig-r043-20221121
+arm                        oxnas_v6_defconfig
+s390                 randconfig-r044-20221121
+arm                           imxrt_defconfig
+x86_64                           rhel-8.3-syz
+x86_64                         rhel-8.3-kunit
+arm                         axm55xx_defconfig
+powerpc                      cm5200_defconfig
+mips                           ip32_defconfig
+arm                             pxa_defconfig
+powerpc                    adder875_defconfig
+mips                        bcm47xx_defconfig
+xtensa                       common_defconfig
+x86_64                           rhel-8.3-kvm
+arm                              allyesconfig
+arm64                            allyesconfig
+alpha                            allyesconfig
+m68k                             allmodconfig
+arc                              allyesconfig
+m68k                             allyesconfig
+powerpc                           allnoconfig
+mips                             allyesconfig
+powerpc                          allmodconfig
+sh                               allmodconfig
 
-Some *really* old (like, 1960s old) versions of CCIR documents also listed more
-substantial differences between various 625-line systems, including the number
-of active lines varying from 571 to 589. But all revisions from 1974 onward list
-the modern value of 575 active lines for all the variants, making them differ
-only in RF modulation details. Which is beyond the scope of what the "TV mode"
-property is supposed to do.
+clang tested configs:
+x86_64               randconfig-a004-20221121
+x86_64               randconfig-a001-20221121
+i386                 randconfig-a001-20221121
+hexagon              randconfig-r041-20221120
+i386                 randconfig-a003-20221121
+hexagon              randconfig-r041-20221121
+i386                 randconfig-a005-20221121
+i386                 randconfig-a002-20221121
+hexagon              randconfig-r045-20221120
+x86_64               randconfig-a003-20221121
+i386                 randconfig-a004-20221121
+hexagon              randconfig-r045-20221121
+i386                 randconfig-a006-20221121
+x86_64               randconfig-a002-20221121
+x86_64               randconfig-a005-20221121
+x86_64               randconfig-a006-20221121
+riscv                randconfig-r042-20221120
+s390                 randconfig-r044-20221120
 
->> Also added some comments explaining color subcarrier frequency
->> registers.
->>
->> Acked-by: Noralf Trønnes <noralf@tronnes.org>
->> Signed-off-by: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
->> Tested-by: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
->> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
->>
->> ---
->> Changes in v6:
->> - Support PAL60 again
->> ---
->>  drivers/gpu/drm/vc4/vc4_vec.c | 111 ++++++++++++++++++++++++++++++++++++++++--
->>  1 file changed, 107 insertions(+), 4 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/vc4/vc4_vec.c b/drivers/gpu/drm/vc4/vc4_vec.c
->> index a828fc6fb776..d23dbad3cbf6 100644
->> --- a/drivers/gpu/drm/vc4/vc4_vec.c
->> +++ b/drivers/gpu/drm/vc4/vc4_vec.c
->> @@ -46,6 +46,7 @@
->>  #define VEC_CONFIG0_YDEL(x)		((x) << 26)
->>  #define VEC_CONFIG0_CDEL_MASK		GENMASK(25, 24)
->>  #define VEC_CONFIG0_CDEL(x)		((x) << 24)
->> +#define VEC_CONFIG0_SECAM_STD		BIT(21)
->>  #define VEC_CONFIG0_PBPR_FIL		BIT(18)
->>  #define VEC_CONFIG0_CHROMA_GAIN_MASK	GENMASK(17, 16)
->>  #define VEC_CONFIG0_CHROMA_GAIN_UNITY	(0 << 16)
->> @@ -76,6 +77,27 @@
->>  #define VEC_SOFT_RESET			0x10c
->>  #define VEC_CLMP0_START			0x144
->>  #define VEC_CLMP0_END			0x148
->> +
->> +/*
->> + * These set the color subcarrier frequency
->> + * if VEC_CONFIG1_CUSTOM_FREQ is enabled.
->> + *
->> + * VEC_FREQ1_0 contains the most significant 16-bit half-word,
->> + * VEC_FREQ3_2 contains the least significant 16-bit half-word.
->> + * 0x80000000 seems to be equivalent to the pixel clock
->> + * (which itself is the VEC clock divided by 8).
->> + *
->> + * Reference values (with the default pixel clock of 13.5 MHz):
->> + *
->> + * NTSC  (3579545.[45] Hz)     - 0x21F07C1F
->> + * PAL   (4433618.75 Hz)       - 0x2A098ACB
->> + * PAL-M (3575611.[888111] Hz) - 0x21E6EFE3
->> + * PAL-N (3582056.25 Hz)       - 0x21F69446
->> + *
->> + * NOTE: For SECAM, it is used as the Dr center frequency,
->> + * regardless of whether VEC_CONFIG1_CUSTOM_FREQ is enabled or not;
->> + * that is specified as 4406250 Hz, which corresponds to 0x29C71C72.
->> + */
->>  #define VEC_FREQ3_2			0x180
->>  #define VEC_FREQ1_0			0x184
->>  
->> @@ -118,6 +140,14 @@
->>  
->>  #define VEC_INTERRUPT_CONTROL		0x190
->>  #define VEC_INTERRUPT_STATUS		0x194
->> +
->> +/*
->> + * Db center frequency for SECAM; the clock for this is the same as for
->> + * VEC_FREQ3_2/VEC_FREQ1_0, which is used for Dr center frequency.
->> + *
->> + * This is specified as 4250000 Hz, which corresponds to 0x284BDA13.
->> + * That is also the default value, so no need to set it explicitly.
->> + */
->>  #define VEC_FCW_SECAM_B			0x198
->>  #define VEC_SECAM_GAIN_VAL		0x19c
->>  
->> @@ -197,10 +227,15 @@ enum vc4_vec_tv_mode_id {
->>  	VC4_VEC_TV_MODE_NTSC_J,
->>  	VC4_VEC_TV_MODE_PAL,
->>  	VC4_VEC_TV_MODE_PAL_M,
->> +	VC4_VEC_TV_MODE_NTSC_443,
->> +	VC4_VEC_TV_MODE_PAL_60,
->> +	VC4_VEC_TV_MODE_PAL_N,
->> +	VC4_VEC_TV_MODE_SECAM,
->>  };
->>  
->>  struct vc4_vec_tv_mode {
->>  	unsigned int mode;
->> +	u16 expected_htotal;
->>  	u32 config0;
->>  	u32 config1;
->>  	u32 custom_freq;
->> @@ -236,35 +271,68 @@ static const struct debugfs_reg32 vec_regs[] = {
->>  static const struct vc4_vec_tv_mode vc4_vec_tv_modes[] = {
->>  	{
->>  		.mode = DRM_MODE_TV_MODE_NTSC,
->> +		.expected_htotal = 858,
->>  		.config0 = VEC_CONFIG0_NTSC_STD | VEC_CONFIG0_PDEN,
->>  		.config1 = VEC_CONFIG1_C_CVBS_CVBS,
->>  	},
->> +	{
->> +		.mode = DRM_MODE_TV_MODE_NTSC_443,
->> +		.expected_htotal = 858,
->> +		.config0 = VEC_CONFIG0_NTSC_STD,
->> +		.config1 = VEC_CONFIG1_C_CVBS_CVBS | VEC_CONFIG1_CUSTOM_FREQ,
->> +		.custom_freq = 0x2a098acb,
->> +	},
->>  	{
->>  		.mode = DRM_MODE_TV_MODE_NTSC_J,
->> +		.expected_htotal = 858,
->>  		.config0 = VEC_CONFIG0_NTSC_STD,
->>  		.config1 = VEC_CONFIG1_C_CVBS_CVBS,
->>  	},
->>  	{
->>  		.mode = DRM_MODE_TV_MODE_PAL,
->> +		.expected_htotal = 864,
->>  		.config0 = VEC_CONFIG0_PAL_BDGHI_STD,
->>  		.config1 = VEC_CONFIG1_C_CVBS_CVBS,
->>  	},
->> +	{
->> +		/* PAL-60 */
->> +		.mode = DRM_MODE_TV_MODE_PAL,
->> +		.expected_htotal = 858,
->> +		.config0 = VEC_CONFIG0_PAL_M_STD,
->> +		.config1 = VEC_CONFIG1_C_CVBS_CVBS | VEC_CONFIG1_CUSTOM_FREQ,
->> +		.custom_freq = 0x2a098acb,
->> +	},
->>  	{
->>  		.mode = DRM_MODE_TV_MODE_PAL_M,
->> +		.expected_htotal = 858,
->>  		.config0 = VEC_CONFIG0_PAL_M_STD,
->>  		.config1 = VEC_CONFIG1_C_CVBS_CVBS,
->>  	},
->> +	{
->> +		.mode = DRM_MODE_TV_MODE_PAL_N,
->> +		.expected_htotal = 864,
->> +		.config0 = VEC_CONFIG0_PAL_N_STD,
->> +		.config1 = VEC_CONFIG1_C_CVBS_CVBS,
->> +	},
->> +	{
->> +		.mode = DRM_MODE_TV_MODE_SECAM,
->> +		.expected_htotal = 864,
->> +		.config0 = VEC_CONFIG0_SECAM_STD,
->> +		.config1 = VEC_CONFIG1_C_CVBS_CVBS,
->> +		.custom_freq = 0x29c71c72,
->> +	},
->>  };
->>  
->>  static inline const struct vc4_vec_tv_mode *
->> -vc4_vec_tv_mode_lookup(unsigned int mode)
->> +vc4_vec_tv_mode_lookup(unsigned int mode, u16 htotal)
->>  {
->>  	unsigned int i;
->>  
->>  	for (i = 0; i < ARRAY_SIZE(vc4_vec_tv_modes); i++) {
->>  		const struct vc4_vec_tv_mode *tv_mode = &vc4_vec_tv_modes[i];
->>  
->> -		if (tv_mode->mode == mode)
->> +		if (tv_mode->mode == mode &&
->> +		    tv_mode->expected_htotal == htotal)
->>  			return tv_mode;
->>  	}
->>  
->> @@ -273,9 +341,13 @@ vc4_vec_tv_mode_lookup(unsigned int mode)
->>  
->>  static const struct drm_prop_enum_list legacy_tv_mode_names[] = {
->>  	{ VC4_VEC_TV_MODE_NTSC, "NTSC", },
->> +	{ VC4_VEC_TV_MODE_NTSC_443, "NTSC-443", },
->>  	{ VC4_VEC_TV_MODE_NTSC_J, "NTSC-J", },
->>  	{ VC4_VEC_TV_MODE_PAL, "PAL", },
->> +	{ VC4_VEC_TV_MODE_PAL_60, "PAL-60", },
->>  	{ VC4_VEC_TV_MODE_PAL_M, "PAL-M", },
->> +	{ VC4_VEC_TV_MODE_PAL_N, "PAL-N", },
->> +	{ VC4_VEC_TV_MODE_SECAM, "SECAM", },
->>  };
->>  
->>  static enum drm_connector_status
->> @@ -306,11 +378,16 @@ vc4_vec_connector_set_property(struct drm_connector *connector,
->>  		state->tv.mode = DRM_MODE_TV_MODE_NTSC;
->>  		break;
->>  
->> +	case VC4_VEC_TV_MODE_NTSC_443:
->> +		state->tv.mode = DRM_MODE_TV_MODE_NTSC_443;
->> +		break;
->> +
->>  	case VC4_VEC_TV_MODE_NTSC_J:
->>  		state->tv.mode = DRM_MODE_TV_MODE_NTSC_J;
->>  		break;
->>  
->>  	case VC4_VEC_TV_MODE_PAL:
->> +	case VC4_VEC_TV_MODE_PAL_60:
->>  		state->tv.mode = DRM_MODE_TV_MODE_PAL;
->>  		break;
->>  
->> @@ -318,6 +395,14 @@ vc4_vec_connector_set_property(struct drm_connector *connector,
->>  		state->tv.mode = DRM_MODE_TV_MODE_PAL_M;
->>  		break;
->>  
->> +	case VC4_VEC_TV_MODE_PAL_N:
->> +		state->tv.mode = DRM_MODE_TV_MODE_PAL_N;
->> +		break;
->> +
->> +	case VC4_VEC_TV_MODE_SECAM:
->> +		state->tv.mode = DRM_MODE_TV_MODE_SECAM;
->> +		break;
->> +
->>  	default:
->>  		return -EINVAL;
->>  	}
->> @@ -341,6 +426,10 @@ vc4_vec_connector_get_property(struct drm_connector *connector,
->>  		*val = VC4_VEC_TV_MODE_NTSC;
->>  		break;
->>  
->> +	case DRM_MODE_TV_MODE_NTSC_443:
->> +		*val = VC4_VEC_TV_MODE_NTSC_443;
->> +		break;
->> +
->>  	case DRM_MODE_TV_MODE_NTSC_J:
->>  		*val = VC4_VEC_TV_MODE_NTSC_J;
->>  		break;
->> @@ -353,6 +442,14 @@ vc4_vec_connector_get_property(struct drm_connector *connector,
->>  		*val = VC4_VEC_TV_MODE_PAL_M;
->>  		break;
->>  
->> +	case DRM_MODE_TV_MODE_PAL_N:
->> +		*val = VC4_VEC_TV_MODE_PAL_N;
->> +		break;
->> +
->> +	case DRM_MODE_TV_MODE_SECAM:
->> +		*val = VC4_VEC_TV_MODE_SECAM;
->> +		break;
->> +
->>  	default:
->>  		return -EINVAL;
->>  	}
->> @@ -448,13 +545,16 @@ static void vc4_vec_encoder_enable(struct drm_encoder *encoder,
->>  	struct drm_connector *connector = &vec->connector;
->>  	struct drm_connector_state *conn_state =
->>  		drm_atomic_get_new_connector_state(state, connector);
->> +	struct drm_display_mode *adjusted_mode =
->> +		&encoder->crtc->state->adjusted_mode;
->>  	const struct vc4_vec_tv_mode *tv_mode;
->>  	int idx, ret;
->>  
->>  	if (!drm_dev_enter(drm, &idx))
->>  		return;
->>  
->> -	tv_mode = vc4_vec_tv_mode_lookup(conn_state->tv.mode);
->> +	tv_mode = vc4_vec_tv_mode_lookup(conn_state->tv.mode,
->> +					 adjusted_mode->htotal);
->>  	if (!tv_mode)
->>  		goto err_dev_exit;
->>  
->> @@ -648,9 +748,12 @@ static int vc4_vec_bind(struct device *dev, struct device *master, void *data)
->>  
->>  	ret = drm_mode_create_tv_properties(drm,
->>  					    BIT(DRM_MODE_TV_MODE_NTSC) |
->> +					    BIT(DRM_MODE_TV_MODE_NTSC_443) |
->>  					    BIT(DRM_MODE_TV_MODE_NTSC_J) |
->>  					    BIT(DRM_MODE_TV_MODE_PAL) |
->> -					    BIT(DRM_MODE_TV_MODE_PAL_M));
->> +					    BIT(DRM_MODE_TV_MODE_PAL_M) |
->> +					    BIT(DRM_MODE_TV_MODE_PAL_N) |
->> +					    BIT(DRM_MODE_TV_MODE_SECAM));
->>  	if (ret)
->>  		return ret;
->>  
->>
-
-Best regards,
-Mateusz Kwiatkowski
-
+-- 
+0-DAY CI Kernel Test Service
+https://01.org/lkp
