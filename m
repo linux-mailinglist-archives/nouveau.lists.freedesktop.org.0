@@ -2,94 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53EBC6377FA
-	for <lists+nouveau@lfdr.de>; Thu, 24 Nov 2022 12:50:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 01D2D637A02
+	for <lists+nouveau@lfdr.de>; Thu, 24 Nov 2022 14:33:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F3B3310E6E5;
-	Thu, 24 Nov 2022 11:49:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7A95810E068;
+	Thu, 24 Nov 2022 13:33:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com
- [66.111.4.230])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7742D10E031;
- Thu, 24 Nov 2022 11:49:53 +0000 (UTC)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailnew.nyi.internal (Postfix) with ESMTP id C2B395802A8;
- Thu, 24 Nov 2022 06:49:49 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute2.internal (MEProxy); Thu, 24 Nov 2022 06:49:49 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :content-type:date:date:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm2; t=1669290589; x=1669297789; bh=OHFx68nmnn
- /ceAUAI4qgZcV6iBa2E8isOTaxL9ONytc=; b=HJiPVgLyhrcSJIoI5oHBuPCtif
- 7TkeOKloNPGFr9G7HpxETWIMqUwKFx7SL0JFIN+tCq7qTefMU73nDb1kgWY9jEvg
- jju8MAnU/W05uYdGIOo0suZbsbnlpf6AARruwbjhh7i0zHTNROi8w9fsLR+/J+uI
- f2k5Yn79Z5tPdt/6/Tx5DUQUAY3F5CNLACZt2EWIfOpA2BxKKAkED9sTiNGG8t9j
- Ox5M/iBawaCECjHYxKQvyUSfQyE/k6FerKXCxUwZkCogrOqHhSOaKWZH4RLP+9tU
- K9c2QGBt55ntYGJaWExIy1fpWtiPMjl7R3S+X29r22VUVBPgRlMssonXNFcQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-type:date:date:feedback-id
- :feedback-id:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:sender:subject:subject:to:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm1; t=1669290589; x=1669297789; bh=OHFx68nmnn/ceAUAI4qgZcV6iBa2
- E8isOTaxL9ONytc=; b=J0uwUwXhLVqUyKTozkwlimGquvlzDQkdPFAmgu6P/Gva
- zBEet87p11qgTrBX3XIePgLUa6o0iKWmbAijtdFm3m6jX3sFI2A+XANbsS1ziNUc
- lB1dYIjGgsVTV4IIPiOiEDdo72Kist/8YrNKcpBaW+cALs27xmBxozD8SL6UYZNs
- +PSczmcvdsS5ZGV6QwesmFhMwp3QdWmxb1SNwavWw6LKO74i71QmKgTebKxG2UrZ
- bivRxY+dD9UYez5vVu3mFzjEzKc3lHRmhR9f9T8XucrUoG0/WclxpqyBYZIRslpn
- HvOE5Y2B8QvhuF7QywZXFyxGQuKjkQUdc6NGRTprMg==
-X-ME-Sender: <xms:XFp_YxcMrWb8n-7P5fAeiUYAsgh26CSiWBsgCf3KrLVVASwV4u0iUw>
- <xme:XFp_Y_PrtI9LCp8UWiNwOa49Qea0CFSD10inJjTBFPprJ2vvNM_wRZmpq4SL8m5tt
- sM5WCZDIZ5sSWH-AKA>
-X-ME-Received: <xmr:XFp_Y6ggafGBm88t5XNCsk2-eoh9GC_OwW-s8w-5lBh1bq9dDqWfplLg7ibOTVoI0H_65Q4nKRdDkUOEjJ_-lxEvRwZlMZzfzdKhur7M7v13fg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrieefgdefgecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpeffhffvuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihimhgv
- ucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrghtth
- gvrhhnpeelkeeghefhuddtleejgfeljeffheffgfeijefhgfeufefhtdevteegheeiheeg
- udenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrg
- igihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:XFp_Y69D3UxIMiHcjBhcNgGcI_vtmaXUBKR1J3I1LFHX9YAowc5Z3w>
- <xmx:XFp_Y9vPnOgjw_XUJ0TgWbXcJMELQ1lNGpIcQBbNvNcSq2anOAWENg>
- <xmx:XFp_Y5HeTfb_pHMpSfPaCgvSzqwRBDN3n-KJSdN2d39Ch-L8LltJ2Q>
- <xmx:XVp_Y_vwd2w_-Jrg_wGS8bAYZv791C3i0PIK5SIB19VZ2BGQc-TwGQ>
-Feedback-ID: i8771445c:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 24 Nov 2022 06:49:47 -0500 (EST)
-Date: Thu, 24 Nov 2022 12:49:45 +0100
-From: Maxime Ripard <maxime@cerno.tech>
-To: Samuel Holland <samuel@sholland.org>,
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 83DF210E068;
+ Thu, 24 Nov 2022 13:33:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds202112;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=3q6RWR2v4j9zd3mF33OR8DtfinEVMVbu5MhzvMj3OOA=; b=qIn2d+Ple2l3OT7b96XKPWuurI
+ Vo5I2QPhlShuDKDJV57/z3LUYUOb0O06ph0X4Zndbhx3DdGKsQv6Y7X1X65DmdW6jwv/AvGAzf3U4
+ RK+vIn646i3jc2tyoMYkgzkwL7soVAdhitNCYJj8FLoy5mUAf9yF8ZIscGv0oTv7fia91TnhzMlAP
+ Z0J2xB+CXk8oKZKfxeCH8vgl/e11ygUKVfMPcXDkVG0ugc5T4u8Q0S0CRFOR+qwlVJPIJK17V02MF
+ CorKNB9kp4ZFNuMrxpTsPxA95lOZ1q20GGYndVLylB6ncQihgb/zeKenSN/I8sSMyNCLiRcRCqcs1
+ Ap4J58PA==;
+Received: from [2a01:799:95e:1700:6395:ccbd:d000:d42b] (port=54060)
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1oyCLu-00026c-7q; Thu, 24 Nov 2022 14:33:18 +0100
+Message-ID: <1506bcb7-fbdf-95e4-7ac3-945e9e24649d@tronnes.org>
+Date: Thu, 24 Nov 2022 14:33:10 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.5.0
+To: Maxime Ripard <maxime@cerno.tech>, Samuel Holland <samuel@sholland.org>,
  Jernej Skrabec <jernej.skrabec@gmail.com>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Ben Skeggs <bskeggs@redhat.com>, Chen-Yu Tsai <wens@csie.org>,
- David Airlie <airlied@linux.ie>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Chen-Yu Tsai <wens@csie.org>, David Airlie <airlied@linux.ie>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Emma Anholt <emma@anholt.net>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>,	Thomas Zimmermann <tzimmermann@suse.de>,
- Dave Stevenson <dave.stevenson@raspberrypi.com>,
- Hans de Goede <hdegoede@redhat.com>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org,
- Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
- dri-devel@lists.freedesktop.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-sunxi@lists.linux.dev, Dom Cobley <dom@raspberrypi.com>,
- Phil Elwell <phil@raspberrypi.com>,
- Geert Uytterhoeven <geert@linux-m68k.org>
-Message-ID: <20221124114945.oqilsc7zjth4jwso@houat>
+ Lyude Paul <lyude@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Daniel Vetter <daniel@ffwll.ch>
 References: <20220728-rpi-analog-tv-properties-v10-0-256dad125326@cerno.tech>
- <Y3uQbuQotGxh+XPS@phenom.ffwll.local>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="apvrjccnplb3u7fu"
-Content-Disposition: inline
-In-Reply-To: <Y3uQbuQotGxh+XPS@phenom.ffwll.local>
-Subject: Re: [Nouveau] [PATCH v10 00/19] drm: Analog TV Improvements
+ <20220728-rpi-analog-tv-properties-v10-5-256dad125326@cerno.tech>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+In-Reply-To: <20220728-rpi-analog-tv-properties-v10-5-256dad125326@cerno.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH v10 05/19] drm/connector: Add TV standard
+ property
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,110 +66,386 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: Dom Cobley <dom@raspberrypi.com>, Phil Elwell <phil@raspberrypi.com>,
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, linux-sunxi@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---apvrjccnplb3u7fu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 21, 2022 at 03:51:26PM +0100, Daniel Vetter wrote:
-> On Thu, Nov 17, 2022 at 10:28:43AM +0100, Maxime Ripard wrote:
-> > Hi,
-> >=20
-> > Here's a series aiming at improving the command line named modes suppor=
-t,
-> > and more importantly how we deal with all the analog TV variants.
-> >=20
-> > The named modes support were initially introduced to allow to specify t=
-he
-> > analog TV mode to be used.
-> >=20
-> > However, this was causing multiple issues:
-> >=20
-> >   * The mode name parsed on the command line was passed directly to the
-> >     driver, which had to figure out which mode it was suppose to match;
-> >=20
-> >   * Figuring that out wasn't really easy, since the video=3D argument o=
-r what
-> >     the userspace might not even have a name in the first place, but
-> >     instead could have passed a mode with the same timings;
-> >=20
-> >   * The fallback to matching on the timings was mostly working as long =
-as
-> >     we were supporting one 525 lines (most likely NSTC) and one 625 lin=
-es
-> >     (PAL), but couldn't differentiate between two modes with the same
-> >     timings (NTSC vs PAL-M vs NSTC-J for example);
-> >=20
-> >   * There was also some overlap with the tv mode property registered by
-> >     drm_mode_create_tv_properties(), but named modes weren't interacting
-> >     with that property at all.
-> >=20
-> >   * Even though that property was generic, its possible values were
-> >     specific to each drivers, which made some generic support difficult.
-> >=20
-> > Thus, I chose to tackle in multiple steps:
-> >=20
-> >   * A new TV mode property was introduced, with generic values, each dr=
-iver
-> >     reporting through a bitmask what standard it supports to the usersp=
-ace;
-> >=20
-> >   * This option was added to the command line parsing code to be able to
-> >     specify it on the kernel command line, and new atomic_check and res=
-et
-> >     helpers were created to integrate properly into atomic KMS;
-> >=20
-> >   * The named mode parsing code is now creating a proper display mode f=
-or
-> >     the given named mode, and the TV standard will thus be part of the
-> >     connector state;
-> >=20
-> >   * Two drivers were converted and tested for now (vc4 and sun4i), with
-> >     some backward compatibility code to translate the old TV mode to the
-> >     new TV mode;
-> >=20
-> > Unit tests were created along the way.
-> >=20
-> > One can switch from NTSC to PAL now using (on vc4)
-> >=20
-> > modetest -M vc4  -s 53:720x480i -w 53:'TV mode':1 # NTSC
-> > modetest -M vc4  -s 53:720x576i -w 53:'TV mode':4 # PAL
-> >=20
-> > Let me know what you think,
-> > Maxime
->=20
-> Maxime asked me to drop an Ack-in-principle on this, and I'm not sure I
-> have any useful input here with my utter lack of understanding for TV
-> things (I never even had one in my entire life, that's how much I don't
-> care). But it seems to check all the design boxes around solving annoying
-> uapi/kms-config issues properly, so
->=20
-> Acked-in-principle-or-something-like-that-by: Daniel Vetter <daniel.vette=
-r@ffwll.ch>
+Den 17.11.2022 10.28, skrev Maxime Ripard:
+> The TV mode property has been around for a while now to select and get the
+> current TV mode output on an analog TV connector.
+> 
+> Despite that property name being generic, its content isn't and has been
+> driver-specific which makes it hard to build any generic behaviour on top
+> of it, both in kernel and user-space.
+> 
+> Let's create a new enum tv norm property, that can contain any of the
+> analog TV standards currently supported by kernel drivers. Each driver can
+> then pass in a bitmask of the modes it supports, and the property
+> creation function will filter out the modes not supported.
+> 
+> We'll then be able to phase out the older tv mode property.
+> 
+> Tested-by: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
+> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> 
+> ---
+> Changes in v10:
+> - Fix checkpatch warning
+> 
+> Changes in v5:
+> - Create an analog TV properties documentation section, and document TV
+>   Mode there instead of the csv file
+> 
+> Changes in v4:
+> - Add property documentation to kms-properties.csv
+> - Fix documentation
+> ---
+>  Documentation/gpu/drm-kms.rst     |   6 ++
+>  drivers/gpu/drm/drm_atomic_uapi.c |   4 ++
+>  drivers/gpu/drm/drm_connector.c   | 122 +++++++++++++++++++++++++++++++++++++-
+>  include/drm/drm_connector.h       |  64 ++++++++++++++++++++
+>  include/drm/drm_mode_config.h     |   8 +++
+>  5 files changed, 203 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/gpu/drm-kms.rst b/Documentation/gpu/drm-kms.rst
+> index b4377a545425..321f2f582c64 100644
+> --- a/Documentation/gpu/drm-kms.rst
+> +++ b/Documentation/gpu/drm-kms.rst
+> @@ -520,6 +520,12 @@ HDMI Specific Connector Properties
+>  .. kernel-doc:: drivers/gpu/drm/drm_connector.c
+>     :doc: HDMI connector properties
+>  
+> +Analog TV Specific Connector Properties
+> +----------------------------------
+> +
+> +.. kernel-doc:: drivers/gpu/drm/drm_connector.c
+> +   :doc: Analog TV Connector Properties
+> +
+>  Standard CRTC Properties
+>  ------------------------
+>  
+> diff --git a/drivers/gpu/drm/drm_atomic_uapi.c b/drivers/gpu/drm/drm_atomic_uapi.c
+> index 7f2b9a07fbdf..d867e7f9f2cd 100644
+> --- a/drivers/gpu/drm/drm_atomic_uapi.c
+> +++ b/drivers/gpu/drm/drm_atomic_uapi.c
+> @@ -700,6 +700,8 @@ static int drm_atomic_connector_set_property(struct drm_connector *connector,
+>  		state->tv.margins.bottom = val;
+>  	} else if (property == config->legacy_tv_mode_property) {
+>  		state->tv.legacy_mode = val;
+> +	} else if (property == config->tv_mode_property) {
+> +		state->tv.mode = val;
+>  	} else if (property == config->tv_brightness_property) {
+>  		state->tv.brightness = val;
+>  	} else if (property == config->tv_contrast_property) {
+> @@ -810,6 +812,8 @@ drm_atomic_connector_get_property(struct drm_connector *connector,
+>  		*val = state->tv.margins.bottom;
+>  	} else if (property == config->legacy_tv_mode_property) {
+>  		*val = state->tv.legacy_mode;
+> +	} else if (property == config->tv_mode_property) {
+> +		*val = state->tv.mode;
+>  	} else if (property == config->tv_brightness_property) {
+>  		*val = state->tv.brightness;
+>  	} else if (property == config->tv_contrast_property) {
+> diff --git a/drivers/gpu/drm/drm_connector.c b/drivers/gpu/drm/drm_connector.c
+> index 06e737ed15f5..07d449736956 100644
+> --- a/drivers/gpu/drm/drm_connector.c
+> +++ b/drivers/gpu/drm/drm_connector.c
+> @@ -984,6 +984,17 @@ static const struct drm_prop_enum_list drm_dvi_i_subconnector_enum_list[] = {
+>  DRM_ENUM_NAME_FN(drm_get_dvi_i_subconnector_name,
+>  		 drm_dvi_i_subconnector_enum_list)
+>  
+> +static const struct drm_prop_enum_list drm_tv_mode_enum_list[] = {
+> +	{ DRM_MODE_TV_MODE_NTSC, "NTSC" },
+> +	{ DRM_MODE_TV_MODE_NTSC_443, "NTSC-443" },
+> +	{ DRM_MODE_TV_MODE_NTSC_J, "NTSC-J" },
+> +	{ DRM_MODE_TV_MODE_PAL, "PAL" },
+> +	{ DRM_MODE_TV_MODE_PAL_M, "PAL-M" },
+> +	{ DRM_MODE_TV_MODE_PAL_N, "PAL-N" },
+> +	{ DRM_MODE_TV_MODE_SECAM, "SECAM" },
+> +};
+> +DRM_ENUM_NAME_FN(drm_get_tv_mode_name, drm_tv_mode_enum_list)
+> +
 
-Thanks!
+This patch looks good but since I'm no TV standards expert I can't say
+if the content of this list is a good choice for reflecting the world of
+TV standards.
 
-I jumped the gun a bit too fast and forgot to amend the TV property
-commit message before pushing it out.
+Acked-by: Noralf Trønnes <noralf@tronnes.org>
 
-For the record though, that property is usable through xrandr, xorg.conf
-or any equivalent compositor mechanism
-
-Maxime
-
---apvrjccnplb3u7fu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCY39aWQAKCRDj7w1vZxhR
-xacgAP9NPkwQFyz0CvvFS5SzvELVnj6t9GBuTq/qrHpTLaRyaAD9GJpLyjLeg7Jy
-Z0pnBngL2vXGtvYVUCMQy5VhVkMtuAg=
-=fhxt
------END PGP SIGNATURE-----
-
---apvrjccnplb3u7fu--
+>  static const struct drm_prop_enum_list drm_tv_select_enum_list[] = {
+>  	{ DRM_MODE_SUBCONNECTOR_Automatic, "Automatic" }, /* DVI-I and TV-out */
+>  	{ DRM_MODE_SUBCONNECTOR_Composite, "Composite" }, /* TV-out */
+> @@ -1552,6 +1563,71 @@ EXPORT_SYMBOL(drm_connector_attach_dp_subconnector_property);
+>   *	infoframe values is done through drm_hdmi_avi_infoframe_content_type().
+>   */
+>  
+> +/*
+> + * TODO: Document the properties:
+> + *   - left margin
+> + *   - right margin
+> + *   - top margin
+> + *   - bottom margin
+> + *   - brightness
+> + *   - contrast
+> + *   - flicker reduction
+> + *   - hue
+> + *   - mode
+> + *   - overscan
+> + *   - saturation
+> + *   - select subconnector
+> + *   - subconnector
+> + */
+> +/**
+> + * DOC: Analog TV Connector Properties
+> + *
+> + * TV Mode:
+> + *	Indicates the TV Mode used on an analog TV connector. The value
+> + *	of this property can be one of the following:
+> + *
+> + *	NTSC:
+> + *		TV Mode is CCIR System M (aka 525-lines) together with
+> + *		the NTSC Color Encoding.
+> + *
+> + *	NTSC-443:
+> + *
+> + *		TV Mode is CCIR System M (aka 525-lines) together with
+> + *		the NTSC Color Encoding, but with a color subcarrier
+> + *		frequency of 4.43MHz
+> + *
+> + *	NTSC-J:
+> + *
+> + *		TV Mode is CCIR System M (aka 525-lines) together with
+> + *		the NTSC Color Encoding, but with a black level equal to
+> + *		the blanking level.
+> + *
+> + *	PAL:
+> + *
+> + *		TV Mode is CCIR System B (aka 625-lines) together with
+> + *		the PAL Color Encoding.
+> + *
+> + *	PAL-M:
+> + *
+> + *		TV Mode is CCIR System M (aka 525-lines) together with
+> + *		the PAL Color Encoding.
+> + *
+> + *	PAL-N:
+> + *
+> + *		TV Mode is CCIR System N together with the PAL Color
+> + *		Encoding, a color subcarrier frequency of 3.58MHz, the
+> + *		SECAM color space, and narrower channels than other PAL
+> + *		variants.
+> + *
+> + *	SECAM:
+> + *
+> + *		TV Mode is CCIR System B (aka 625-lines) together with
+> + *		the SECAM Color Encoding.
+> + *
+> + *	Drivers can set up this property by calling
+> + *	drm_mode_create_tv_properties().
+> + */
+> +
+>  /**
+>   * drm_connector_attach_content_type_property - attach content-type property
+>   * @connector: connector to attach content type property on.
+> @@ -1649,6 +1725,10 @@ EXPORT_SYMBOL(drm_mode_create_tv_margin_properties);
+>   * responsible for allocating a list of format names and passing them to
+>   * this routine.
+>   *
+> + * NOTE: This functions registers the deprecated "mode" connector
+> + * property to select the analog TV mode (ie, NTSC, PAL, etc.). New
+> + * drivers must use drm_mode_create_tv_properties() instead.
+> + *
+>   * Returns:
+>   * 0 on success or a negative error code on failure.
+>   */
+> @@ -1690,7 +1770,6 @@ int drm_mode_create_tv_properties_legacy(struct drm_device *dev,
+>  	if (drm_mode_create_tv_margin_properties(dev))
+>  		goto nomem;
+>  
+> -
+>  	if (num_modes) {
+>  		dev->mode_config.legacy_tv_mode_property =
+>  			drm_property_create(dev, DRM_MODE_PROP_ENUM,
+> @@ -1739,6 +1818,47 @@ int drm_mode_create_tv_properties_legacy(struct drm_device *dev,
+>  }
+>  EXPORT_SYMBOL(drm_mode_create_tv_properties_legacy);
+>  
+> +/**
+> + * drm_mode_create_tv_properties - create TV specific connector properties
+> + * @dev: DRM device
+> + * @supported_tv_modes: Bitmask of TV modes supported (See DRM_MODE_TV_MODE_*)
+> +
+> + * Called by a driver's TV initialization routine, this function creates
+> + * the TV specific connector properties for a given device.
+> + *
+> + * Returns:
+> + * 0 on success or a negative error code on failure.
+> + */
+> +int drm_mode_create_tv_properties(struct drm_device *dev,
+> +				  unsigned int supported_tv_modes)
+> +{
+> +	struct drm_prop_enum_list tv_mode_list[DRM_MODE_TV_MODE_MAX];
+> +	struct drm_property *tv_mode;
+> +	unsigned int i, len = 0;
+> +
+> +	if (dev->mode_config.tv_mode_property)
+> +		return 0;
+> +
+> +	for (i = 0; i < DRM_MODE_TV_MODE_MAX; i++) {
+> +		if (!(supported_tv_modes & BIT(i)))
+> +			continue;
+> +
+> +		tv_mode_list[len].type = i;
+> +		tv_mode_list[len].name = drm_get_tv_mode_name(i);
+> +		len++;
+> +	}
+> +
+> +	tv_mode = drm_property_create_enum(dev, 0, "TV mode",
+> +					   tv_mode_list, len);
+> +	if (!tv_mode)
+> +		return -ENOMEM;
+> +
+> +	dev->mode_config.tv_mode_property = tv_mode;
+> +
+> +	return drm_mode_create_tv_properties_legacy(dev, 0, NULL);
+> +}
+> +EXPORT_SYMBOL(drm_mode_create_tv_properties);
+> +
+>  /**
+>   * drm_mode_create_scaling_mode_property - create scaling mode property
+>   * @dev: DRM device
+> diff --git a/include/drm/drm_connector.h b/include/drm/drm_connector.h
+> index 15cb58117a94..4927dcb2573f 100644
+> --- a/include/drm/drm_connector.h
+> +++ b/include/drm/drm_connector.h
+> @@ -143,6 +143,65 @@ enum subpixel_order {
+>  
+>  };
+>  
+> +/**
+> + * enum drm_connector_tv_mode - Analog TV output mode
+> + *
+> + * This enum is used to indicate the TV output mode used on an analog TV
+> + * connector.
+> + *
+> + * WARNING: The values of this enum is uABI since they're exposed in the
+> + * "TV mode" connector property.
+> + */
+> +enum drm_connector_tv_mode {
+> +	/**
+> +	 * @DRM_MODE_TV_MODE_NTSC: CCIR System M (aka 525-lines)
+> +	 * together with the NTSC Color Encoding.
+> +	 */
+> +	DRM_MODE_TV_MODE_NTSC,
+> +
+> +	/**
+> +	 * @DRM_MODE_TV_MODE_NTSC_443: Variant of
+> +	 * @DRM_MODE_TV_MODE_NTSC. Uses a color subcarrier frequency
+> +	 * of 4.43 MHz.
+> +	 */
+> +	DRM_MODE_TV_MODE_NTSC_443,
+> +
+> +	/**
+> +	 * @DRM_MODE_TV_MODE_NTSC_J: Variant of @DRM_MODE_TV_MODE_NTSC
+> +	 * used in Japan. Uses a black level equals to the blanking
+> +	 * level.
+> +	 */
+> +	DRM_MODE_TV_MODE_NTSC_J,
+> +
+> +	/**
+> +	 * @DRM_MODE_TV_MODE_PAL: CCIR System B together with the PAL
+> +	 * color system.
+> +	 */
+> +	DRM_MODE_TV_MODE_PAL,
+> +
+> +	/**
+> +	 * @DRM_MODE_TV_MODE_PAL_M: CCIR System M (aka 525-lines)
+> +	 * together with the PAL color encoding
+> +	 */
+> +	DRM_MODE_TV_MODE_PAL_M,
+> +
+> +	/**
+> +	 * @DRM_MODE_TV_MODE_PAL_N: CCIR System N together with the PAL
+> +	 * color encoding. It uses 625 lines, but has a color subcarrier
+> +	 * frequency of 3.58MHz, the SECAM color space, and narrower
+> +	 * channels compared to most of the other PAL variants.
+> +	 */
+> +	DRM_MODE_TV_MODE_PAL_N,
+> +
+> +	/**
+> +	 * @DRM_MODE_TV_MODE_SECAM: CCIR System B together with the
+> +	 * SECAM color system.
+> +	 */
+> +	DRM_MODE_TV_MODE_SECAM,
+> +
+> +	DRM_MODE_TV_MODE_MAX,
+> +};
+> +
+>  /**
+>   * struct drm_scrambling: sink's scrambling support.
+>   */
+> @@ -696,6 +755,7 @@ struct drm_connector_tv_margins {
+>   * @subconnector: detected subconnector
+>   * @margins: TV margins
+>   * @legacy_mode: Legacy TV mode, driver specific value
+> + * @mode: TV mode
+>   * @brightness: brightness in percent
+>   * @contrast: contrast in percent
+>   * @flicker_reduction: flicker reduction in percent
+> @@ -708,6 +768,7 @@ struct drm_tv_connector_state {
+>  	enum drm_mode_subconnector subconnector;
+>  	struct drm_connector_tv_margins margins;
+>  	unsigned int legacy_mode;
+> +	unsigned int mode;
+>  	unsigned int brightness;
+>  	unsigned int contrast;
+>  	unsigned int flicker_reduction;
+> @@ -1804,6 +1865,7 @@ const char *drm_get_subpixel_order_name(enum subpixel_order order);
+>  const char *drm_get_dpms_name(int val);
+>  const char *drm_get_dvi_i_subconnector_name(int val);
+>  const char *drm_get_dvi_i_select_name(int val);
+> +const char *drm_get_tv_mode_name(int val);
+>  const char *drm_get_tv_subconnector_name(int val);
+>  const char *drm_get_tv_select_name(int val);
+>  const char *drm_get_dp_subconnector_name(int val);
+> @@ -1817,6 +1879,8 @@ int drm_mode_create_tv_margin_properties(struct drm_device *dev);
+>  int drm_mode_create_tv_properties_legacy(struct drm_device *dev,
+>  					 unsigned int num_modes,
+>  					 const char * const modes[]);
+> +int drm_mode_create_tv_properties(struct drm_device *dev,
+> +				  unsigned int supported_tv_modes);
+>  void drm_connector_attach_tv_margin_properties(struct drm_connector *conn);
+>  int drm_mode_create_scaling_mode_property(struct drm_device *dev);
+>  int drm_connector_attach_content_type_property(struct drm_connector *dev);
+> diff --git a/include/drm/drm_mode_config.h b/include/drm/drm_mode_config.h
+> index c47b29e80108..e5b053001d22 100644
+> --- a/include/drm/drm_mode_config.h
+> +++ b/include/drm/drm_mode_config.h
+> @@ -716,9 +716,17 @@ struct drm_mode_config {
+>  	/**
+>  	 * @legacy_tv_mode_property: Optional TV property to select
+>  	 * the output TV mode.
+> +	 *
+> +	 * Superseded by @tv_mode_property
+>  	 */
+>  	struct drm_property *legacy_tv_mode_property;
+>  
+> +	/**
+> +	 * @tv_mode_property: Optional TV property to select the TV
+> +	 * standard output on the connector.
+> +	 */
+> +	struct drm_property *tv_mode_property;
+> +
+>  	/**
+>  	 * @tv_left_margin_property: Optional TV property to set the left
+>  	 * margin (expressed in pixels).
+> 
