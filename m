@@ -1,74 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A57C639C5C
-	for <lists+nouveau@lfdr.de>; Sun, 27 Nov 2022 19:31:13 +0100 (CET)
+Received: from gabe.freedesktop.org (unknown [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F22C63AED0
+	for <lists+nouveau@lfdr.de>; Mon, 28 Nov 2022 18:25:10 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 70FF610E0CC;
-	Sun, 27 Nov 2022 18:31:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5E18410E30C;
+	Mon, 28 Nov 2022 17:24:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 21C0110E0D8
- for <nouveau@lists.freedesktop.org>; Sun, 27 Nov 2022 18:30:55 +0000 (UTC)
-Received: by mail-pj1-x102b.google.com with SMTP id ns17so739662pjb.1
- for <nouveau@lists.freedesktop.org>; Sun, 27 Nov 2022 10:30:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jDF7fJniIMYLvPziDoJ8MkC8F8ub7ejPyCVqiyAzxbk=;
- b=AisgvCleW+MkXJB8X9DCovNuu4hxzk9hIOBWg1ZYt5+sNDOfIoZyWmifRAm4aN0H7I
- c8P9W9MQMq8C2OYcpbAuj1U+rAYWcPFXKZwUdfnY10rg9IKx7CxATGyoElfk6S1S8VPO
- 1PdJvLOOkunkyhOsSyUGCZoRXLYGlD5jrvKEQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jDF7fJniIMYLvPziDoJ8MkC8F8ub7ejPyCVqiyAzxbk=;
- b=nERL2IBHbkt/XuOxKdhb/eeAtRwzDUwfAJ5aK97yqcqLd+npQ6mKZyw4q3eXzXD0YP
- Ll5JXdW60tHU1LZe7JvOB8HIdihcU6sd+9fiEIgyQOk9YZEQNNnBvUg7JEyrV9Y8J0kn
- 6i2Av0di+egqfeO4LTN59UPoqbxV+dsyf4SCu3Gb4wRZGzUpTs+el7PDmWBEkxZVTZrP
- ehEwqUZ4D5iEuLBEVsGEYfoTYAC8VeT/0R1dyFKPrZePgx9SlhVcqvk+K4y8xk2x0IEJ
- dCgmm9+pKYNVLCVDbQVe6ryJIv9p6Q9mhSg5G0OpyXNTZdMkJPlC6XiI3fI+v1NNyHOF
- /Pkw==
-X-Gm-Message-State: ANoB5pnVZBx2bJolRqiEeYG55LBtIGvKl9pvqKKO09twGQPfB9Ow23in
- LaKM31fgjznjVsdGqECBXk66og==
-X-Google-Smtp-Source: AA0mqf7vMt+NN5E0Qb1RrNycekHOmPvCA4lKOn3JC1pm9sJj9xn15AgZOivCj9HY2oPU8DHoxQGftA==
-X-Received: by 2002:a17:903:491:b0:17f:73d6:4375 with SMTP id
- jj17-20020a170903049100b0017f73d64375mr28634744plb.24.1669573854418; 
- Sun, 27 Nov 2022 10:30:54 -0800 (PST)
-Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
- by smtp.gmail.com with ESMTPSA id
- d17-20020a170902729100b00186727e5f5csm7056105pll.248.2022.11.27.10.30.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Nov 2022 10:30:53 -0800 (PST)
-From: Kees Cook <keescook@chromium.org>
-To: Ben Skeggs <bskeggs@redhat.com>
-Date: Sun, 27 Nov 2022 10:30:41 -0800
-Message-Id: <20221127183036.never.139-kees@kernel.org>
-X-Mailer: git-send-email 2.34.1
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A94D110E30A;
+ Mon, 28 Nov 2022 17:24:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1669656293; x=1701192293;
+ h=date:from:to:cc:subject:message-id:mime-version:
+ content-transfer-encoding;
+ bh=gIMxSjThOc3wgINTlCZhq7K2sOjoP/XFk+2wqF2Rc0o=;
+ b=Rj4yN/C27YSLBwhI8Lom3D9C+slSCL9Wf4e1GMF0vC/gYnms7fviQ3KR
+ ojISGtJC7ifP5LUHI89orb90Xlqgkr+tcYOFuSVwaaQrZE6TQvUBWXF77
+ 5P0Hxi9RiWmFcs7Wcx+ZngeU+SqLioY1R3SY7N6OyyPPO+wEu7X6JLc4q
+ SqJfO+QqNzDyjqN1xJ4fVQOtMv/v1zktkADY4Q3jtmiNmyG7N58YAa04B
+ zTxOgJ7tMq0V0zELmVuMqr/oIQdNfvFfC3za3iHzw4vGLUe0GQKXw+E2c
+ tf/LbPqP2ZgjaJ4/IWcfJDrbvHTvapcUjipxHoAREEpiqmEdeHK0jchLQ w==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10545"; a="316730690"
+X-IronPort-AV: E=Sophos;i="5.96,200,1665471600"; d="scan'208";a="316730690"
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+ by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 28 Nov 2022 09:24:52 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10545"; a="768117946"
+X-IronPort-AV: E=Sophos;i="5.96,200,1665471600"; d="scan'208";a="768117946"
+Received: from lkp-server01.sh.intel.com (HELO 64a2d449c951) ([10.239.97.150])
+ by orsmga004.jf.intel.com with ESMTP; 28 Nov 2022 09:24:50 -0800
+Received: from kbuild by 64a2d449c951 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1ozhs9-0008B1-2O;
+ Mon, 28 Nov 2022 17:24:49 +0000
+Date: Tue, 29 Nov 2022 01:24:39 +0800
+From: kernel test robot <lkp@intel.com>
+To: Andrew Morton <akpm@linux-foundation.org>
+Message-ID: <6384eed7.JsneE+FPasGJScWk%lkp@intel.com>
+User-Agent: Heirloom mailx 12.5 6/20/10
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3658; h=from:subject:message-id;
- bh=sZK5dE9btSjBkKxfA4jZ7gqAN7jjH8fOoys33f5siLw=;
- b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBjg6zRKOASHsDsI5HMr1hz1aZcJj50RsL9W8Nz5Ec5
- WMshrKaJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCY4Os0QAKCRCJcvTf3G3AJttfD/
- sHXTAYQIIIzN3AhaUwjNIR6S7WQm41hdKZf7A6wWb27QHSC2ACLJlTNHmYZatZCamyBAee3hh2oqHx
- 7XFsahk/Ol4P6EbW01mVxCwKskddYuvUXLa8qUyhJC4bLcMzsTIEPc6YVwIgJjpxAX3pbY7gB5ESeS
- HT3MZCWZNWKTjuNID8ZXQxdYJ1/VRyviwStdrdIbYQqCchaHprlY7sOWqmBU8cYw6uFsagh0nbRBwl
- zs/Kjc5GftyjHyoLs4WaKuN9LaHvkj2XjasKuzfBbPFNW9yRzhi+C8dR/R+h+jKeWqkhEBdB6bcw2M
- cImYaS/PQSCVvpVKOas65BWndH40jdBfm6KKi/SuHjBxZlGYzlrfIE6V3i7R3i3Q4XGUsmI4JmlrpS
- Rkk8CzQimshj29kc2okst/XZw45BhnSgTCuR9iZJ+FWaFyE4qKCeI7E7WHRWjbGwbKXtOjbJODrxfE
- 9gqZy9H8op3PjIjubv/HqBFwQIbsnSfPerlyrbWphGlXeLiJVoiD/sano2XoEkHDHyQ1ZX8ROyfn+i
- kGj3eG1NhGSQ52RfWTOA/wNxDOyKVDLcycCYmNkc+z6fmfSSel+YAF/gQnjYWkVjJV5ih+ecrvnbln
- mFU2tAYNru46y5SD4WffSIFjQL4i0Ytk+cuQryA4M52g/e58iWl8g/IRG+LA==
-X-Developer-Key: i=keescook@chromium.org; a=openpgp;
- fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
-Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH] drm/nouveau/disp: Fix nvif_outp_acquire_dp()
- argument size
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Subject: [Nouveau] [linux-next:master] BUILD REGRESSION
+ 15f2f20ccbf2d04cb14e3e7635aa0447208c71e7
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,87 +58,160 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Kees Cook <keescook@chromium.org>,
- "Gustavo A. R. Silva" <gustavo@embeddedor.com>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org,
- coverity-bot <keescook+coverity-bot@chromium.org>,
- dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
- Dave Airlie <airlied@redhat.com>, linux-hardening@vger.kernel.org
+Cc: nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ Linux Memory Management List <linux-mm@kvack.org>,
+ dri-devel@lists.freedesktop.org, linuxppc-dev@lists.ozlabs.org,
+ linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Both Coverity and GCC with -Wstringop-overflow noticed that
-nvif_outp_acquire_dp() accidentally defined its second argument with 1
-additional element:
+tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
+branch HEAD: 15f2f20ccbf2d04cb14e3e7635aa0447208c71e7  Add linux-next specific files for 20221128
 
-drivers/gpu/drm/nouveau/dispnv50/disp.c: In function 'nv50_pior_atomic_enable':
-drivers/gpu/drm/nouveau/dispnv50/disp.c:1813:17: error: 'nvif_outp_acquire_dp' accessing 16 bytes in a region of size 15 [-Werror=stringop-overflow=]
- 1813 |                 nvif_outp_acquire_dp(&nv_encoder->outp, nv_encoder->dp.dpcd, 0, 0, false, false);
-      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-drivers/gpu/drm/nouveau/dispnv50/disp.c:1813:17: note: referencing argument 2 of type 'u8[16]' {aka 'unsigned char[16]'}
-drivers/gpu/drm/nouveau/include/nvif/outp.h:24:5: note: in a call to function 'nvif_outp_acquire_dp'
-   24 | int nvif_outp_acquire_dp(struct nvif_outp *, u8 dpcd[16],
-      |     ^~~~~~~~~~~~~~~~~~~~
+Error/Warning reports:
 
-Avoid these warnings by defining the argument size using the matching
-define (DP_RECEIVER_CAP_SIZE, 15) instead of having it be a literal
-(and incorrect) value (16).
+https://lore.kernel.org/oe-kbuild-all/202211041320.coq8EELJ-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202211080348.BOsishom-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202211090634.RyFKK0WS-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202211242120.MzZVGULn-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202211282102.QUr7HHrW-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202211282244.c1FaAVIO-lkp@intel.com
 
-Reported-by: coverity-bot <keescook+coverity-bot@chromium.org>
-Addresses-Coverity-ID: 1527269 ("Memory - corruptions")
-Addresses-Coverity-ID: 1527268 ("Memory - corruptions")
-Link: https://lore.kernel.org/lkml/202211100848.FFBA2432@keescook/
-Link: https://lore.kernel.org/lkml/202211100848.F4C2819BB@keescook/
-Fixes: 813443721331 ("drm/nouveau/disp: move DP link config into acquire")
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Karol Herbst <kherbst@redhat.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: David Airlie <airlied@gmail.com>
-Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: Dave Airlie <airlied@redhat.com>
-Cc: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
-Cc: dri-devel@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org
-Signed-off-by: Kees Cook <keescook@chromium.org>
----
- drivers/gpu/drm/nouveau/include/nvif/outp.h | 3 ++-
- drivers/gpu/drm/nouveau/nvif/outp.c         | 2 +-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+Error/Warning: (recently discovered and may have been fixed)
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvif/outp.h b/drivers/gpu/drm/nouveau/include/nvif/outp.h
-index 45daadec3c0c..fa76a7b5e4b3 100644
---- a/drivers/gpu/drm/nouveau/include/nvif/outp.h
-+++ b/drivers/gpu/drm/nouveau/include/nvif/outp.h
-@@ -3,6 +3,7 @@
- #define __NVIF_OUTP_H__
- #include <nvif/object.h>
- #include <nvif/if0012.h>
-+#include <drm/display/drm_dp.h>
- struct nvif_disp;
- 
- struct nvif_outp {
-@@ -21,7 +22,7 @@ int nvif_outp_acquire_rgb_crt(struct nvif_outp *);
- int nvif_outp_acquire_tmds(struct nvif_outp *, int head,
- 			   bool hdmi, u8 max_ac_packet, u8 rekey, u8 scdc, bool hda);
- int nvif_outp_acquire_lvds(struct nvif_outp *, bool dual, bool bpc8);
--int nvif_outp_acquire_dp(struct nvif_outp *, u8 dpcd[16],
-+int nvif_outp_acquire_dp(struct nvif_outp *outp, u8 dpcd[DP_RECEIVER_CAP_SIZE],
- 			 int link_nr, int link_bw, bool hda, bool mst);
- void nvif_outp_release(struct nvif_outp *);
- int nvif_outp_infoframe(struct nvif_outp *, u8 type, struct nvif_outp_infoframe_v0 *, u32 size);
-diff --git a/drivers/gpu/drm/nouveau/nvif/outp.c b/drivers/gpu/drm/nouveau/nvif/outp.c
-index 7da39f1eae9f..c24bc5eae3ec 100644
---- a/drivers/gpu/drm/nouveau/nvif/outp.c
-+++ b/drivers/gpu/drm/nouveau/nvif/outp.c
-@@ -127,7 +127,7 @@ nvif_outp_acquire(struct nvif_outp *outp, u8 proto, struct nvif_outp_acquire_v0
- }
- 
- int
--nvif_outp_acquire_dp(struct nvif_outp *outp, u8 dpcd[16],
-+nvif_outp_acquire_dp(struct nvif_outp *outp, u8 dpcd[DP_RECEIVER_CAP_SIZE],
- 		     int link_nr, int link_bw, bool hda, bool mst)
- {
- 	struct nvif_outp_acquire_v0 args;
+arch/arm/mach-s3c/devs.c:32:10: fatal error: linux/platform_data/dma-s3c24xx.h: No such file or directory
+arch/powerpc/kernel/kvm_emul.o: warning: objtool: kvm_template_end(): can't find starting instruction
+arch/powerpc/kernel/optprobes_head.o: warning: objtool: optprobe_template_end(): can't find starting instruction
+drivers/gpu/drm/amd/amdgpu/../display/dc/core/dc_link_dp.c:5075:24: warning: implicit conversion from 'enum <anonymous>' to 'enum dc_status' [-Wenum-conversion]
+drivers/gpu/drm/amd/amdgpu/../display/dc/irq/dcn201/irq_service_dcn201.c:40:20: warning: no previous prototype for 'to_dal_irq_source_dcn201' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: warning: no previous prototype for 'gf100_fifo_nonstall_block' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c:34:1: warning: no previous prototype for 'nvkm_engn_cgrp_get' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: no previous prototype for 'tu102_gr_load' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c:49:1: warning: no previous prototype for 'wpr_generic_header_dump' [-Wmissing-prototypes]
+drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:221:21: warning: variable 'loc' set but not used [-Wunused-but-set-variable]
+vmlinux.o: warning: objtool: __btrfs_map_block+0x21ad: unreachable instruction
+vmlinux.o: warning: objtool: btrfs_calc_avail_data_space+0x4f: unreachable instruction
+
+Error/Warning ids grouped by kconfigs:
+
+gcc_recent_errors
+|-- alpha-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- alpha-randconfig-r031-20221128
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arc-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arc-randconfig-r024-20221127
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arm-allyesconfig
+|   |-- arch-arm-mach-s3c-devs.c:fatal-error:linux-platform_data-dma-s3c24xx.h:No-such-file-or-directory
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arm-defconfig
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
+|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
+|-- arm64-allyesconfig
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-core-dc_link_dp.c:warning:implicit-conversion-from-enum-anonymous-to-enum-dc_status
+|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
+|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
+clang_recent_errors
+|-- powerpc-buildonly-randconfig-r003-20221128
+|   `-- arch-powerpc-kernel-kvm_emul.o:warning:objtool:kvm_template_end():can-t-find-starting-instruction
+|-- x86_64-randconfig-a013-20221128
+|   `-- vmlinux.o:warning:objtool:handle_bug:call-to-kmsan_unpoison_entry_regs()-leaves-.noinstr.text-section
+`-- x86_64-randconfig-a015-20221128
+    `-- vmlinux.o:warning:objtool:handle_bug:call-to-kmsan_unpoison_entry_regs()-leaves-.noinstr.text-section
+
+elapsed time: 729m
+
+configs tested: 50
+configs skipped: 2
+
+gcc tested configs:
+um                             i386_defconfig
+um                           x86_64_defconfig
+i386                 randconfig-a002-20221128
+i386                 randconfig-a003-20221128
+i386                                defconfig
+i386                 randconfig-a001-20221128
+x86_64                          rhel-8.3-func
+x86_64                              defconfig
+x86_64                    rhel-8.3-kselftests
+i386                 randconfig-a005-20221128
+i386                 randconfig-a004-20221128
+i386                 randconfig-a006-20221128
+x86_64                         rhel-8.3-kunit
+x86_64               randconfig-a001-20221128
+x86_64               randconfig-a003-20221128
+x86_64               randconfig-a004-20221128
+x86_64               randconfig-a002-20221128
+x86_64               randconfig-a005-20221128
+x86_64               randconfig-a006-20221128
+powerpc                           allnoconfig
+arc                                 defconfig
+s390                             allmodconfig
+alpha                               defconfig
+s390                                defconfig
+s390                             allyesconfig
+x86_64                               rhel-8.3
+x86_64                           rhel-8.3-syz
+x86_64                           rhel-8.3-kvm
+x86_64                           allyesconfig
+arm                                 defconfig
+arm                              allyesconfig
+i386                             allyesconfig
+sh                               allmodconfig
+arm64                            allyesconfig
+mips                             allyesconfig
+m68k                             allyesconfig
+powerpc                          allmodconfig
+m68k                             allmodconfig
+arc                              allyesconfig
+alpha                            allyesconfig
+
+clang tested configs:
+hexagon              randconfig-r041-20221128
+riscv                randconfig-r042-20221128
+s390                 randconfig-r044-20221128
+hexagon              randconfig-r045-20221128
+i386                 randconfig-a012-20221128
+i386                 randconfig-a011-20221128
+x86_64               randconfig-a016-20221128
+x86_64               randconfig-a015-20221128
+x86_64               randconfig-a014-20221128
+x86_64               randconfig-a013-20221128
+
 -- 
-2.34.1
-
+0-DAY CI Kernel Test Service
+https://01.org/lkp
