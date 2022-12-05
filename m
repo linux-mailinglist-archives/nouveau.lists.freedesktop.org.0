@@ -2,51 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DBA2640F75
-	for <lists+nouveau@lfdr.de>; Fri,  2 Dec 2022 21:51:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8D53642E55
+	for <lists+nouveau@lfdr.de>; Mon,  5 Dec 2022 18:07:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ECA0610E183;
-	Fri,  2 Dec 2022 20:51:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 93FCD10E26B;
+	Mon,  5 Dec 2022 17:07:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga06.intel.com (mga06b.intel.com [134.134.136.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7907E10E13E;
- Fri,  2 Dec 2022 20:51:43 +0000 (UTC)
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E86FD10E25A;
+ Mon,  5 Dec 2022 17:07:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1670014303; x=1701550303;
+ t=1670260031; x=1701796031;
  h=date:from:to:cc:subject:message-id:mime-version:
  content-transfer-encoding;
- bh=3P5GUEaL1fs6nNStLmETjawtgamxBjBIqCSJKf0sz6E=;
- b=Q8EE5rSanofu6OX3LzpU5yxDBJezTwTG4/a7QBtNjNzy8j3GC7pzcRPx
- SteCB/NuQf4EAIuOuMFl1+gOH/Jz6owrgk1AYKBPD+Vrl7YRUEhmPDQ5j
- CZG2jkVIKFsPbfa/TfBtYfH7x56JhjAPzXPrNUyUEAvDVarBaz+6JPNlJ
- 2PZLr+k3BsT22BPiMnKa1D+qOBWPY38/QE4JTynJ9f7Tup6FnV7p0nJDQ
- 63PBZ72jZ3h0g5SQe94ub/5Sslqjc1dlaYzHerHaV5YzNnWHyJI99YfFl
- AMD5a3UssPArWRq2Usa1GaiugfPSQFPC99yw4gA7S4/DUvgROLPsmkUbV Q==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10549"; a="378193839"
-X-IronPort-AV: E=Sophos;i="5.96,213,1665471600"; d="scan'208";a="378193839"
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Dec 2022 12:51:31 -0800
+ bh=vvR/NEhNegklDAJADBM+PimCCqdG/cVpS9hvSwcjzi8=;
+ b=FCW71pXcEn4bDz6rxXCdjFs7NDv6zwqT1r2C+Hbl6fTRE3mS1hTJ+zGP
+ iE174hz75P0KqGSw8Spd2iSrGSGxP3Vpz3p+doJnyR3EtYqbUUJUup6BN
+ 6O7DpAwspSbhqKEdjplV2yXVoZ3nP4EuX814rDBVkH0eqcoTkFplbDxaf
+ LnBw1NY5VDekl9akbAcq49221GL0cljv6636EBupBysj0wPkiS0rxafPT
+ IDc8+WRVvXXSqY7/iBKBJGr0DnxNvp3YHObiSwsKHM7g2zFVC7mle2iWF
+ kYX7O39IhgHxtAFAogOf8exFma6xnPrl1VLHVwTMJ6QZrzMe32cosCjnV Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10552"; a="299832389"
+X-IronPort-AV: E=Sophos;i="5.96,220,1665471600"; d="scan'208";a="299832389"
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+ by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 05 Dec 2022 09:06:06 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10549"; a="751406445"
-X-IronPort-AV: E=Sophos;i="5.96,213,1665471600"; d="scan'208";a="751406445"
-Received: from lkp-server01.sh.intel.com (HELO 64a2d449c951) ([10.239.97.150])
- by fmsmga002.fm.intel.com with ESMTP; 02 Dec 2022 12:51:28 -0800
-Received: from kbuild by 64a2d449c951 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1p1D0J-000E15-2x;
- Fri, 02 Dec 2022 20:51:27 +0000
-Date: Sat, 03 Dec 2022 04:51:05 +0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10552"; a="714470671"
+X-IronPort-AV: E=Sophos;i="5.96,220,1665471600"; d="scan'208";a="714470671"
+Received: from lkp-server01.sh.intel.com (HELO b3c45e08cbc1) ([10.239.97.150])
+ by fmsmga004.fm.intel.com with ESMTP; 05 Dec 2022 09:05:59 -0800
+Received: from kbuild by b3c45e08cbc1 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1p2Euk-0000Ez-37;
+ Mon, 05 Dec 2022 17:05:58 +0000
+Date: Tue, 06 Dec 2022 01:05:09 +0800
 From: kernel test robot <lkp@intel.com>
 To: Andrew Morton <akpm@linux-foundation.org>
-Message-ID: <638a6539.qDMYj3a+alYfBmLi%lkp@intel.com>
+Message-ID: <638e24c5.oS0rVB5y1Y/NpbHH%lkp@intel.com>
 User-Agent: Heirloom mailx 12.5 6/20/10
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 Subject: [Nouveau] [linux-next:master] BUILD REGRESSION
- 5be860bfc73408bc1a8af9167955e480ecebba84
+ ee9bda616d36d2dc864aa294c2656fad88c9efa0
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,33 +58,33 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+Cc: kvm@vger.kernel.org, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org,
  Linux Memory Management List <linux-mm@kvack.org>,
- amd-gfx@lists.freedesktop.org, linux-omap@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org,
- linux-media@vger.kernel.org
+ amd-gfx@lists.freedesktop.org, loongarch@lists.linux.dev,
+ linux-omap@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+ linux-btrfs@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
-branch HEAD: 5be860bfc73408bc1a8af9167955e480ecebba84  Add linux-next specific files for 20221202
+branch HEAD: ee9bda616d36d2dc864aa294c2656fad88c9efa0  Add linux-next specific files for 20221205
 
 Error/Warning reports:
 
-https://lore.kernel.org/oe-kbuild-all/202211041320.coq8EELJ-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211090634.RyFKK0WS-lkp@intel.com
 https://lore.kernel.org/oe-kbuild-all/202211242120.MzZVGULn-lkp@intel.com
 https://lore.kernel.org/oe-kbuild-all/202211301840.y7rROb13-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202212021651.g6zTJJsz-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202212011005.7X5XAsmG-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202212032205.IeHBbyyp-lkp@intel.com
+https://lore.kernel.org/oe-kbuild-all/202212051759.cEv6fyHy-lkp@intel.com
 
 Error/Warning: (recently discovered and may have been fixed)
 
-ERROR: modpost: "__ld_r13_to_r21_ret" [lib/zstd/zstd_decompress.ko] undefined!
-ERROR: modpost: "__st_r13_to_r21" [lib/zstd/zstd_decompress.ko] undefined!
-arch/arm/mach-s3c/devs.c:32:10: fatal error: linux/platform_data/dma-s3c24xx.h: No such file or directory
 arch/powerpc/kernel/kvm_emul.o: warning: objtool: kvm_template_end(): can't find starting instruction
 arch/powerpc/kernel/optprobes_head.o: warning: objtool: optprobe_template_end(): can't find starting instruction
 drivers/gpu/drm/amd/amdgpu/../display/dc/irq/dcn201/irq_service_dcn201.c:40:20: warning: no previous prototype for 'to_dal_irq_source_dcn201' [-Wmissing-prototypes]
+drivers/gpu/drm/amd/amdgpu/amdgpu_ring_mux.c:353:5: warning: no previous prototype for 'amdgpu_mcbp_scan' [-Wmissing-prototypes]
+drivers/gpu/drm/amd/amdgpu/amdgpu_ring_mux.c:373:5: warning: no previous prototype for 'amdgpu_mcbp_trigger_preempt' [-Wmissing-prototypes]
 drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: warning: no previous prototype for 'gf100_fifo_nonstall_block' [-Wmissing-prototypes]
 drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: warning: no previous prototype for function 'gf100_fifo_nonstall_block' [-Wmissing-prototypes]
 drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c:34:1: warning: no previous prototype for 'nvkm_engn_cgrp_get' [-Wmissing-prototypes]
@@ -94,15 +94,66 @@ drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: no previous proto
 drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c:49:1: warning: no previous prototype for 'wpr_generic_header_dump' [-Wmissing-prototypes]
 drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c:49:1: warning: no previous prototype for function 'wpr_generic_header_dump' [-Wmissing-prototypes]
 drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:221:21: warning: variable 'loc' set but not used [-Wunused-but-set-variable]
+drivers/irqchip/irq-loongarch-cpu.c:96:12: warning: no previous prototype for 'loongarch_cpu_irq_of_init' [-Wmissing-prototypes]
 drivers/regulator/tps65219-regulator.c:310:60: warning: parameter 'dev' set but not used [-Wunused-but-set-parameter]
+drivers/regulator/tps65219-regulator.c:370:26: sparse:    int
+drivers/regulator/tps65219-regulator.c:370:26: sparse:    struct regulator_dev *[assigned] rdev
 drivers/regulator/tps65219-regulator.c:370:26: warning: ordered comparison of pointer with integer zero [-Wextra]
-ld.lld: error: .btf.vmlinux.bin.o: unknown file type
-vmlinux.o: warning: objtool: __btrfs_map_block+0x1d77: unreachable instruction
+fs/btrfs/btrfs.o: warning: objtool: __btrfs_map_block+0x1c67: unreachable instruction
+pahole: .tmp_vmlinux.btf: No such file or directory
 
 Unverified Error/Warning (likely false positive, please contact us if interested):
 
-drivers/media/platform/sunxi/sun6i-csi/sun6i_csi_bridge.c:202:30: sparse: sparse: symbol 'sun6i_csi_bridge_subdev_ops' was not declared. Should it be static?
-drivers/misc/mei/client.c:1818:3: warning: Value stored to 'next_ext' is never read [clang-analyzer-deadcode.DeadStores]
+arch/x86/kvm/vmx/hyperv.c:108:9: sparse: sparse: cast truncates bits from constant value (1a001a becomes 1a)
+arch/x86/kvm/vmx/hyperv.c:110:9: sparse: sparse: cast truncates bits from constant value (1a009a becomes 9a)
+arch/x86/kvm/vmx/hyperv.c:112:9: sparse: sparse: cast truncates bits from constant value (1a011a becomes 11a)
+arch/x86/kvm/vmx/hyperv.c:114:9: sparse: sparse: cast truncates bits from constant value (1a069a becomes 69a)
+arch/x86/kvm/vmx/hyperv.c:116:9: sparse: sparse: cast truncates bits from constant value (1b019b becomes 19b)
+arch/x86/kvm/vmx/hyperv.c:118:9: sparse: sparse: cast truncates bits from constant value (1b021b becomes 21b)
+arch/x86/kvm/vmx/hyperv.c:120:9: sparse: sparse: cast truncates bits from constant value (1b029b becomes 29b)
+arch/x86/kvm/vmx/hyperv.c:122:9: sparse: sparse: cast truncates bits from constant value (1b031b becomes 31b)
+arch/x86/kvm/vmx/hyperv.c:124:9: sparse: sparse: cast truncates bits from constant value (1b039b becomes 39b)
+arch/x86/kvm/vmx/hyperv.c:126:9: sparse: sparse: cast truncates bits from constant value (1b051b becomes 51b)
+arch/x86/kvm/vmx/hyperv.c:130:9: sparse: sparse: cast truncates bits from constant value (a048a becomes 48a)
+arch/x86/kvm/vmx/hyperv.c:132:9: sparse: sparse: cast truncates bits from constant value (80b08 becomes b08)
+arch/x86/kvm/vmx/hyperv.c:134:9: sparse: sparse: cast truncates bits from constant value (80b88 becomes b88)
+arch/x86/kvm/vmx/hyperv.c:136:9: sparse: sparse: cast truncates bits from constant value (80c88 becomes c88)
+arch/x86/kvm/vmx/hyperv.c:22:9: sparse: sparse: cast truncates bits from constant value (1a079a becomes 79a)
+arch/x86/kvm/vmx/hyperv.c:24:9: sparse: sparse: cast truncates bits from constant value (1a071a becomes 71a)
+arch/x86/kvm/vmx/hyperv.c:253:9: sparse: sparse: cast truncates bits from constant value (120a92 becomes a92)
+arch/x86/kvm/vmx/hyperv.c:26:9: sparse: sparse: cast truncates bits from constant value (1a081a becomes 81a)
+arch/x86/kvm/vmx/hyperv.c:28:9: sparse: sparse: cast truncates bits from constant value (b000b becomes b)
+arch/x86/kvm/vmx/hyperv.c:30:9: sparse: sparse: cast truncates bits from constant value (b008b becomes 8b)
+arch/x86/kvm/vmx/hyperv.c:32:9: sparse: sparse: cast truncates bits from constant value (b010b becomes 10b)
+arch/x86/kvm/vmx/hyperv.c:34:9: sparse: sparse: cast truncates bits from constant value (1b001b becomes 1b)
+arch/x86/kvm/vmx/hyperv.c:36:9: sparse: sparse: cast truncates bits from constant value (1b009b becomes 9b)
+arch/x86/kvm/vmx/hyperv.c:38:9: sparse: sparse: cast truncates bits from constant value (1b011b becomes 11b)
+arch/x86/kvm/vmx/hyperv.c:40:9: sparse: sparse: cast truncates bits from constant value (1b041b becomes 41b)
+arch/x86/kvm/vmx/hyperv.c:42:9: sparse: sparse: cast truncates bits from constant value (1b049b becomes 49b)
+arch/x86/kvm/vmx/hyperv.c:44:9: sparse: sparse: cast truncates bits from constant value (1b059b becomes 59b)
+arch/x86/kvm/vmx/hyperv.c:46:9: sparse: sparse: cast truncates bits from constant value (80008 becomes 8)
+arch/x86/kvm/vmx/hyperv.c:52:9: sparse: sparse: cast truncates bits from constant value (1a019a becomes 19a)
+arch/x86/kvm/vmx/hyperv.c:54:9: sparse: sparse: cast truncates bits from constant value (1a021a becomes 21a)
+arch/x86/kvm/vmx/hyperv.c:56:9: sparse: sparse: cast truncates bits from constant value (1a029a becomes 29a)
+arch/x86/kvm/vmx/hyperv.c:58:9: sparse: sparse: cast truncates bits from constant value (1a031a becomes 31a)
+arch/x86/kvm/vmx/hyperv.c:60:9: sparse: sparse: cast truncates bits from constant value (1a039a becomes 39a)
+arch/x86/kvm/vmx/hyperv.c:62:9: sparse: sparse: cast truncates bits from constant value (1a041a becomes 41a)
+arch/x86/kvm/vmx/hyperv.c:64:9: sparse: sparse: cast truncates bits from constant value (1a049a becomes 49a)
+arch/x86/kvm/vmx/hyperv.c:66:9: sparse: sparse: cast truncates bits from constant value (1a051a becomes 51a)
+arch/x86/kvm/vmx/hyperv.c:68:9: sparse: sparse: cast truncates bits from constant value (1a059a becomes 59a)
+arch/x86/kvm/vmx/hyperv.c:70:9: sparse: sparse: cast truncates bits from constant value (1a061a becomes 61a)
+arch/x86/kvm/vmx/hyperv.c:76:9: sparse: sparse: cast truncates bits from constant value (a000a becomes a)
+arch/x86/kvm/vmx/hyperv.c:78:9: sparse: sparse: cast truncates bits from constant value (a008a becomes 8a)
+arch/x86/kvm/vmx/hyperv.c:80:9: sparse: sparse: cast truncates bits from constant value (a010a becomes 10a)
+arch/x86/kvm/vmx/hyperv.c:82:9: sparse: sparse: cast truncates bits from constant value (a018a becomes 18a)
+arch/x86/kvm/vmx/hyperv.c:84:9: sparse: sparse: cast truncates bits from constant value (a020a becomes 20a)
+arch/x86/kvm/vmx/hyperv.c:86:9: sparse: sparse: cast truncates bits from constant value (a028a becomes 28a)
+arch/x86/kvm/vmx/hyperv.c:88:9: sparse: sparse: cast truncates bits from constant value (a030a becomes 30a)
+arch/x86/kvm/vmx/hyperv.c:90:9: sparse: sparse: cast truncates bits from constant value (a038a becomes 38a)
+arch/x86/kvm/vmx/hyperv.c:92:9: sparse: sparse: cast truncates bits from constant value (a040a becomes 40a)
+arch/x86/kvm/vmx/hyperv.c:94:9: sparse: sparse: cast truncates bits from constant value (1a089a becomes 89a)
+arch/x86/kvm/vmx/hyperv.c:96:9: sparse: sparse: cast truncates bits from constant value (1a091a becomes 91a)
+arch/x86/kvm/vmx/hyperv.c:98:9: sparse: sparse: cast truncates bits from constant value (1a099a becomes 99a)
 
 Error/Warning ids grouped by kconfigs:
 
@@ -116,6 +167,13 @@ gcc_recent_errors
 |   |-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
 |   |-- drivers-regulator-tps65219-regulator.c:warning:ordered-comparison-of-pointer-with-integer-zero
 |   `-- drivers-regulator-tps65219-regulator.c:warning:parameter-dev-set-but-not-used
+|-- alpha-randconfig-r032-20221205
+|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_ring_mux.c:warning:no-previous-prototype-for-amdgpu_mcbp_scan
+|   `-- drivers-gpu-drm-amd-amdgpu-amdgpu_ring_mux.c:warning:no-previous-prototype-for-amdgpu_mcbp_trigger_preempt
+|-- alpha-randconfig-s032-20221205
+|   |-- drivers-regulator-tps65219-regulator.c:sparse:int
+|   |-- drivers-regulator-tps65219-regulator.c:sparse:sparse:incompatible-types-for-operation-(-):
+|   `-- drivers-regulator-tps65219-regulator.c:sparse:struct-regulator_dev-assigned-rdev
 |-- arc-allyesconfig
 |   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
 |   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
@@ -125,10 +183,7 @@ gcc_recent_errors
 |   |-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
 |   |-- drivers-regulator-tps65219-regulator.c:warning:ordered-comparison-of-pointer-with-integer-zero
 |   `-- drivers-regulator-tps65219-regulator.c:warning:parameter-dev-set-but-not-used
-|-- arc-randconfig-r006-20221128
-|   |-- ERROR:__ld_r13_to_r21_ret-lib-zstd-zstd_decompress.ko-undefined
-|   `-- ERROR:__st_r13_to_r21-lib-zstd-zstd_decompress.ko-undefined
-|-- arc-randconfig-r043-20221201
+|-- arc-randconfig-r024-20221204
 |   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
 |   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
 |   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
@@ -136,7 +191,6 @@ gcc_recent_errors
 |   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
 |   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
 |-- arm-allyesconfig
-|   |-- arch-arm-mach-s3c-devs.c:fatal-error:linux-platform_data-dma-s3c24xx.h:No-such-file-or-directory
 |   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
 |   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
 |   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
@@ -151,91 +205,85 @@ gcc_recent_errors
 |   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
 |   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
 |   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
-|-- arm-randconfig-s053-20221201
-|   `-- drivers-media-platform-sunxi-sun6i-csi-sun6i_csi_bridge.c:sparse:sparse:symbol-sun6i_csi_bridge_subdev_ops-was-not-declared.-Should-it-be-static
 |-- arm64-allyesconfig
 |   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
 |   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
 clang_recent_errors
-|-- arm64-randconfig-r003-20221201
+|-- arm-randconfig-r046-20221205
 |   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-function-gf100_fifo_nonstall_block
 |   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-function-nvkm_engn_cgrp_get
 |   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-function-tu102_gr_load
-|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-function-wpr_generic_header_dump
-|   `-- ld.lld:error:.btf.vmlinux.bin.o:unknown-file-type
-|-- x86_64-randconfig-a016
-|   `-- vmlinux.o:warning:objtool:handle_bug:call-to-kmsan_unpoison_entry_regs()-leaves-.noinstr.text-section
-`-- x86_64-randconfig-c007-20221128
-    `-- drivers-misc-mei-client.c:warning:Value-stored-to-next_ext-is-never-read-clang-analyzer-deadcode.DeadStores
+|   `-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-function-wpr_generic_header_dump
+`-- s390-randconfig-r036-20221205
+    `-- pahole:.tmp_vmlinux.btf:No-such-file-or-directory
 
-elapsed time: 922m
+elapsed time: 721m
 
 configs tested: 59
-configs skipped: 2
+configs skipped: 3
 
 gcc tested configs:
+arc                                 defconfig
+s390                             allmodconfig
+alpha                               defconfig
+i386                                defconfig
+s390                                defconfig
 um                           x86_64_defconfig
 um                             i386_defconfig
-arc                                 defconfig
-alpha                               defconfig
-i386                          randconfig-a014
-s390                             allmodconfig
-i386                          randconfig-a012
-s390                                defconfig
-x86_64                           rhel-8.3-kvm
-x86_64                           rhel-8.3-syz
-i386                          randconfig-a016
-x86_64                              defconfig
-x86_64                         rhel-8.3-kunit
-x86_64                    rhel-8.3-kselftests
-x86_64                        randconfig-a004
-x86_64                          rhel-8.3-func
-x86_64                        randconfig-a002
-x86_64                               rhel-8.3
-x86_64                           allyesconfig
-x86_64                        randconfig-a013
-x86_64                        randconfig-a011
-x86_64                        randconfig-a006
-i386                                defconfig
 s390                             allyesconfig
-ia64                             allmodconfig
-x86_64                        randconfig-a015
 arm                                 defconfig
+x86_64                    rhel-8.3-kselftests
+x86_64                          rhel-8.3-func
+x86_64                              defconfig
+x86_64                               rhel-8.3
 powerpc                           allnoconfig
-arc                  randconfig-r043-20221201
-arm                              allyesconfig
-s390                 randconfig-r044-20221201
-i386                             allyesconfig
-arm64                            allyesconfig
-riscv                randconfig-r042-20221201
-i386                          randconfig-a003
-i386                          randconfig-a001
-i386                          randconfig-a005
-m68k                             allyesconfig
-m68k                             allmodconfig
+x86_64                           allyesconfig
+x86_64                           rhel-8.3-kvm
 arc                              allyesconfig
+x86_64                           rhel-8.3-syz
+x86_64                         rhel-8.3-kunit
+arm64                            allyesconfig
+i386                 randconfig-a014-20221205
+i386                 randconfig-a013-20221205
 alpha                            allyesconfig
 sh                               allmodconfig
+arm                              allyesconfig
+i386                 randconfig-a012-20221205
+i386                 randconfig-a015-20221205
 mips                             allyesconfig
+m68k                             allyesconfig
+i386                 randconfig-a011-20221205
+i386                 randconfig-a016-20221205
+m68k                             allmodconfig
 powerpc                          allmodconfig
+i386                             allyesconfig
+arc                  randconfig-r043-20221205
+x86_64               randconfig-a011-20221205
+x86_64               randconfig-a014-20221205
+x86_64               randconfig-a013-20221205
+ia64                             allmodconfig
+x86_64               randconfig-a015-20221205
+s390                 randconfig-r044-20221205
+x86_64               randconfig-a012-20221205
+riscv                randconfig-r042-20221205
+x86_64               randconfig-a016-20221205
 
 clang tested configs:
-i386                          randconfig-a013
-i386                          randconfig-a011
-i386                          randconfig-a015
-x86_64                        randconfig-a001
-x86_64                        randconfig-a003
-x86_64                        randconfig-a012
-x86_64                        randconfig-a014
-x86_64                        randconfig-a005
-x86_64                        randconfig-a016
-hexagon              randconfig-r045-20221201
-hexagon              randconfig-r041-20221201
-i386                          randconfig-a002
-i386                          randconfig-a004
-i386                          randconfig-a006
-x86_64                          rhel-8.3-rust
+x86_64               randconfig-a003-20221205
+x86_64               randconfig-a001-20221205
+x86_64               randconfig-a002-20221205
+x86_64               randconfig-a004-20221205
+i386                 randconfig-a001-20221205
+x86_64               randconfig-a006-20221205
+x86_64               randconfig-a005-20221205
+i386                 randconfig-a002-20221205
+i386                 randconfig-a004-20221205
+i386                 randconfig-a003-20221205
+i386                 randconfig-a006-20221205
+i386                 randconfig-a005-20221205
+hexagon              randconfig-r045-20221205
+arm                  randconfig-r046-20221205
+hexagon              randconfig-r041-20221205
 
 -- 
 0-DAY CI Kernel Test Service
