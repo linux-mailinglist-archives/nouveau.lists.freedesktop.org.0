@@ -2,61 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3C686F6B37
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:31:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 400596F6B7C
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 507A710E3A7;
-	Thu,  4 May 2023 12:31:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 141F610E444;
+	Thu,  4 May 2023 12:32:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mxct.zte.com.cn (mxct.zte.com.cn [58.251.27.85])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0DAA210E163
- for <nouveau@lists.freedesktop.org>; Wed,  7 Dec 2022 01:11:40 +0000 (UTC)
-Received: from mxde.zte.com.cn (unknown [10.35.20.165])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mxct.zte.com.cn (FangMail) with ESMTPS id 4NRfPj5RfszvLm
- for <nouveau@lists.freedesktop.org>; Wed,  7 Dec 2022 09:11:37 +0800 (CST)
-Received: from mxus.zte.com.cn (unknown [10.207.168.7])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mxde.zte.com.cn (FangMail) with ESMTPS id 4NRfPR1YH3z4xD1n
- for <nouveau@lists.freedesktop.org>; Wed,  7 Dec 2022 09:11:23 +0800 (CST)
-Received: from mxhk.zte.com.cn (unknown [192.168.250.138])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mxus.zte.com.cn (FangMail) with ESMTPS id 4NRfPM5W7Pz9tyD6
- for <nouveau@lists.freedesktop.org>; Wed,  7 Dec 2022 09:11:19 +0800 (CST)
-Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7077D10E184;
+ Mon, 12 Dec 2022 10:22:39 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mxhk.zte.com.cn (FangMail) with ESMTPS id 4NRfPH1mPfz5BNRf;
- Wed,  7 Dec 2022 09:11:15 +0800 (CST)
-Received: from szxlzmapp06.zte.com.cn ([10.5.230.252])
- by mse-fl1.zte.com.cn with SMTP id 2B71B7sg055208;
- Wed, 7 Dec 2022 09:11:07 +0800 (+08)
- (envelope-from yang.yang29@zte.com.cn)
-Received: from mapi (szxlzmapp02[null]) by mapi (Zmail) with MAPI id mid14;
- Wed, 7 Dec 2022 09:11:08 +0800 (CST)
-Date: Wed, 7 Dec 2022 09:11:08 +0800 (CST)
-X-Zmail-TransId: 2b04638fe82cffffffffe2d7a552
-X-Mailer: Zmail v1.0
-Message-ID: <202212070911086649831@zte.com.cn>
-Mime-Version: 1.0
-From: <yang.yang29@zte.com.cn>
-To: <bskeggs@redhat.com>
-Content-Type: text/plain;
-	charset="UTF-8"
-X-MAIL: mse-fl1.zte.com.cn 2B71B7sg055208
-X-Fangmail-Gw-Spam-Type: 0
-X-FangMail-Miltered: at cgslv5.04-192.168.251.14.novalocal with ID
- 638FE848.000 by FangMail milter!
-X-FangMail-Envelope: 1670375497/4NRfPj5RfszvLm/638FE848.000/10.35.20.165/[10.35.20.165]/mxde.zte.com.cn/<yang.yang29@zte.com.cn>
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 638FE848.000/4NRfPj5RfszvLm
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:34 +0000
-Subject: [Nouveau] =?utf-8?q?=5BPATCH_linux-next=5D_drm/nouveau/nvkm/core?=
- =?utf-8?q?/firmware=3A_replace_strncpy=28=29_with_strscpy=28=29?=
+ by dfw.source.kernel.org (Postfix) with ESMTPS id CA2D860F75;
+ Mon, 12 Dec 2022 10:22:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDEC5C433D2;
+ Mon, 12 Dec 2022 10:22:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1670840558;
+ bh=82Mek9NsJD1mKAuPA30xuCcYkcZNBfTDDhKVt3EFQzM=;
+ h=From:To:Cc:Subject:Date:From;
+ b=NSxvdpOfC0nfZOwWAx93P5YDuR9z+uaqCTm72wucNf2PtG00NySQJGfuaJixbOQkZ
+ ovks+zAa18D9YtDhXA49qCe8mGX9BGQLVx6vaCFoazXUXNrXhPCJA0JWyAO3Xob28n
+ 3hZHGBTIALF+7G66iHKqdtWdSmE9w5CuaoevQxeKWKfs5LqmernO+jaICDGK7l2NOD
+ dde8cnUM8pU30uWYypHFk6Kd7G2pDUfq/RJysmEYwResxD+de45QAsi1VlW2ey11Te
+ q61JxKm41cSkIVdP4w/c1Haa3sz5b4Jjl0ZW80SiXaETGhS3PrhWY4EdBovnQxhJSl
+ EBlNkCAhXlD8Q==
+From: "Jiri Slaby (SUSE)" <jirislaby@kernel.org>
+To: airlied@redhat.com
+Date: Mon, 12 Dec 2022 11:22:33 +0100
+Message-Id: <20221212102233.22212-1-jirislaby@kernel.org>
+X-Mailer: git-send-email 2.38.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:37 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau/kms/nv50- (gcc13): fix nv50_wndw_new_
+ prototype
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,36 +50,61 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, yang.yang29@zte.com.cn, daniel@ffwll.ch,
- xu.panda@zte.com.cn
+Cc: "Jiri Slaby \(SUSE\)" <jirislaby@kernel.org>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, nouveau@lists.freedesktop.org,
+ Martin Liska <mliska@suse.cz>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Xu Panda <xu.panda@zte.com.cn>
+gcc-13 warns about mismatching types for enums. That revealed switched
+arguments of nv50_wndw_new_():
+  drivers/gpu/drm/nouveau/dispnv50/wndw.c:696:1: error: conflicting types for 'nv50_wndw_new_' due to enum/integer mismatch; have 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const u32 *, u32,  enum nv50_disp_interlock_type,  u32,  struct nv50_wndw **)'
+  drivers/gpu/drm/nouveau/dispnv50/wndw.h:36:5: note: previous declaration of 'nv50_wndw_new_' with type 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const u32 *, enum nv50_disp_interlock_type,  u32,  u32,  struct nv50_wndw **)'
 
-The implementation of strscpy() is more robust and safer.
-That's now the recommended way to copy NUL terminated strings.
+It can be barely visible, but the declaration says about the parameters
+in the middle:
+  enum nv50_disp_interlock_type,
+  u32 interlock_data,
+  u32 heads,
 
-Signed-off-by: Xu Panda <xu.panda@zte.com.cn>
-Signed-off-by: Yang Yang <yang.yang29@zte.com>
+While the definition states differently:
+  u32 heads,
+  enum nv50_disp_interlock_type interlock_type,
+  u32 interlock_data,
+
+Unify/fix the declaration to match the definition.
+
+Cc: Martin Liska <mliska@suse.cz>
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: David Airlie <airlied@gmail.com>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Cc: linux-kernel@vger.kernel.org
+Signed-off-by: Jiri Slaby (SUSE) <jirislaby@kernel.org>
 ---
- drivers/gpu/drm/nouveau/nvkm/core/firmware.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ drivers/gpu/drm/nouveau/dispnv50/wndw.h | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/core/firmware.c b/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
-index fcf2a002f6cb..5554f907e0d4 100644
---- a/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
-@@ -79,8 +79,7 @@ nvkm_firmware_get(const struct nvkm_subdev *subdev, const char *fwname, int ver,
- 	int i;
-
- 	/* Convert device name to lowercase */
--	strncpy(cname, device->chip->name, sizeof(cname));
--	cname[sizeof(cname) - 1] = '\0';
-+	strscpy(cname, device->chip->name, sizeof(cname));
- 	i = strlen(cname);
- 	while (i) {
- 		--i;
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.h b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
+index 591c852f326b..76a6ae5d5652 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/wndw.h
++++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
+@@ -35,8 +35,9 @@ struct nv50_wndw {
+ 
+ int nv50_wndw_new_(const struct nv50_wndw_func *, struct drm_device *,
+ 		   enum drm_plane_type, const char *name, int index,
+-		   const u32 *format, enum nv50_disp_interlock_type,
+-		   u32 interlock_data, u32 heads, struct nv50_wndw **);
++		   const u32 *format, u32 heads,
++		   enum nv50_disp_interlock_type, u32 interlock_data,
++		   struct nv50_wndw **);
+ void nv50_wndw_flush_set(struct nv50_wndw *, u32 *interlock,
+ 			 struct nv50_wndw_atom *);
+ void nv50_wndw_flush_clr(struct nv50_wndw *, u32 *interlock, bool flush,
 -- 
-2.15.2
+2.38.1
+
