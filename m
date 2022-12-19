@@ -2,51 +2,73 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8CB2645EFC
-	for <lists+nouveau@lfdr.de>; Wed,  7 Dec 2022 17:32:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C13656508FD
+	for <lists+nouveau@lfdr.de>; Mon, 19 Dec 2022 10:02:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5B10010E3F5;
-	Wed,  7 Dec 2022 16:31:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A553A10E22D;
+	Mon, 19 Dec 2022 09:01:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C4B0B10E3F2;
- Wed,  7 Dec 2022 16:31:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1670430702; x=1701966702;
- h=date:from:to:cc:subject:message-id:mime-version:
- content-transfer-encoding;
- bh=vyOIPD1QcdoDOdc894HhvLtkRYWBJmy52hkMb/uhT/U=;
- b=CDdVhPnKRUxKVtff3Zhjznab3CE48srxQN+bhZZNIZiY8jw76m5e40xH
- iLA9xBpZNentJqBK1hUDuG5+MGNhW8qxLyuvhP++HXNlygMUgpHF1fCXT
- /gUsawqD+C5K6jp+7fUV8mnmZBITLt/vVp4eopi0PFhqhB1ALcSh5t+qs
- EDKfvfmcmit7LYaSWLXGzaMvQp6VDX9AODvAo1+wbIdghkKzDdnafvD7G
- OE3bPNdzPXFGBXpONpyfNUapxGemr/3Ic1HGuiot8TD0L6Ad2KrRgd5mV
- bx1xnrDQre5I+4waND3b28Wvz/YDu1ydwFrRTIKNCQErPvj2N380wM8fY Q==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10554"; a="297291830"
-X-IronPort-AV: E=Sophos;i="5.96,225,1665471600"; d="scan'208";a="297291830"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Dec 2022 08:31:15 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10554"; a="710122690"
-X-IronPort-AV: E=Sophos;i="5.96,225,1665471600"; d="scan'208";a="710122690"
-Received: from lkp-server01.sh.intel.com (HELO b5d47979f3ad) ([10.239.97.150])
- by fmsmga008.fm.intel.com with ESMTP; 07 Dec 2022 08:31:12 -0800
-Received: from kbuild by b5d47979f3ad with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1p2xKB-0000P9-1J;
- Wed, 07 Dec 2022 16:31:11 +0000
-Date: Thu, 08 Dec 2022 00:30:54 +0800
-From: kernel test robot <lkp@intel.com>
-To: Andrew Morton <akpm@linux-foundation.org>
-Message-ID: <6390bfbe.rxwT5v2Rml4m2xt/%lkp@intel.com>
-User-Agent: Heirloom mailx 12.5 6/20/10
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
+ [85.220.165.71])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 14A0710E1F9
+ for <nouveau@lists.freedesktop.org>; Mon, 19 Dec 2022 09:01:47 +0000 (UTC)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+ by metis.ext.pengutronix.de with esmtps
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1p7BdX-00055t-G9; Mon, 19 Dec 2022 09:36:39 +0100
+Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
+ by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1p7BdS-000I7t-UR; Mon, 19 Dec 2022 09:36:34 +0100
+Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1p7BdS-006GXR-8z; Mon, 19 Dec 2022 09:36:34 +0100
+From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ "Pan, Xinhui" <Xinhui.Pan@amd.com>, Dave Airlie <airlied@redhat.com>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Xinliang Liu <xinliang.liu@linaro.org>, Tian Tao <tiantao6@hisilicon.com>,
+ John Stultz <jstultz@google.com>,
+ Xinwei Kong <kong.kongxinwei@hisilicon.com>,
+ Chen Feng <puck.chen@hisilicon.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>,
+ Javier Martinez Canillas <javierm@redhat.com>
+Date: Mon, 19 Dec 2022 09:36:27 +0100
+Message-Id: <20221219083627.1401627-1-u.kleine-koenig@pengutronix.de>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Subject: [Nouveau] [linux-next:master] BUILD REGRESSION
- 591cd61541b9b95401e17dca24be486e32104cb8
+Content-Type: text/plain; charset=UTF-8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5224;
+ i=u.kleine-koenig@pengutronix.de; h=from:subject;
+ bh=ZqfFbvgJpMyKVKFmiZCYnPmobkFNQjvPehywec6oyBE=;
+ b=owEBbQGS/pANAwAKAcH8FHityuwJAcsmYgBjoCKHEJAtYyv1GKjnjBFZ0ZCBl4J5k3935lB4hMVw
+ 9i3WuFyJATMEAAEKAB0WIQR+cioWkBis/z50pAvB/BR4rcrsCQUCY6AihwAKCRDB/BR4rcrsCcixB/
+ 9hHo0+rNOd9s5KE7RHOsnO3muEbuMyw3QJhVVfVboODKLwdKCmjvBrrjRCG61slD4Xm5T6TnhZ0rHY
+ gEaIra20QAEkhbb1rDBig3igiMCvo3TOSg07DiOfbJAQivllRgTvvYZ5Sta55/ipBt58svNiQpdkd3
+ 7hvV5XzAXzK6RNL6H1tg71K2M2RI0AFI4rdJf2ACrubw/fAc/lHKxy8CxO0GjqhRvGrsG0TAfiQdYA
+ /ghQjMcj3J4H4XapZ8XwJJSJlhSHIxh/VU1kzB6AEuA4U8z03CU829UClkJGz6lASW97FQXMzKoZJ+
+ rwf5wKvKN0Jn6M68TphEMosYDhGEHP
+X-Developer-Key: i=u.kleine-koenig@pengutronix.de; a=openpgp;
+ fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ukl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: nouveau@lists.freedesktop.org
+Subject: [Nouveau] [PATCH v3] drm: Only select I2C_ALGOBIT for drivers that
+ actually need it
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,203 +80,149 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Linux Memory Management List <linux-mm@kvack.org>,
- amd-gfx@lists.freedesktop.org, loongarch@lists.linux.dev,
- netdev@vger.kernel.org, linux-omap@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, linux-media@vger.kernel.org
+Cc: kernel@pengutronix.de, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
-branch HEAD: 591cd61541b9b95401e17dca24be486e32104cb8  Add linux-next specific files for 20221207
+While working on a drm driver that doesn't need the i2c algobit stuff I
+noticed that DRM selects this code even though only 8 drivers actually use
+it. While also only some drivers use i2c, keep the select for I2C for the
+next cleanup patch. Still prepare this already by also selecting I2C for
+the individual drivers.
 
-Error/Warning reports:
+Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
+---
+ drivers/gpu/drm/Kconfig                 | 1 -
+ drivers/gpu/drm/amd/amdgpu/Kconfig      | 2 ++
+ drivers/gpu/drm/ast/Kconfig             | 2 ++
+ drivers/gpu/drm/gma500/Kconfig          | 2 ++
+ drivers/gpu/drm/hisilicon/hibmc/Kconfig | 2 ++
+ drivers/gpu/drm/i915/Kconfig            | 2 ++
+ drivers/gpu/drm/mgag200/Kconfig         | 2 ++
+ drivers/gpu/drm/nouveau/Kconfig         | 2 ++
+ drivers/gpu/drm/radeon/Kconfig          | 2 ++
+ 9 files changed, 16 insertions(+), 1 deletion(-)
 
-https://lore.kernel.org/oe-kbuild-all/202211090634.RyFKK0WS-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211242120.MzZVGULn-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211282102.QUr7HHrW-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211301634.cejLlTJP-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202211301840.y7rROb13-lkp@intel.com
-https://lore.kernel.org/oe-kbuild-all/202212070208.3FsKY80H-lkp@intel.com
+diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
+index 315cbdf61979..93c732a8f870 100644
+--- a/drivers/gpu/drm/Kconfig
++++ b/drivers/gpu/drm/Kconfig
+@@ -12,7 +12,6 @@ menuconfig DRM
+ 	select HDMI
+ 	select FB_CMDLINE
+ 	select I2C
+-	select I2C_ALGOBIT
+ 	select DMA_SHARED_BUFFER
+ 	select SYNC_FILE
+ # gallium uses SYS_kcmp for os_same_file_description() to de-duplicate
+diff --git a/drivers/gpu/drm/amd/amdgpu/Kconfig b/drivers/gpu/drm/amd/amdgpu/Kconfig
+index 5fcd510f1abb..5341b6b242c3 100644
+--- a/drivers/gpu/drm/amd/amdgpu/Kconfig
++++ b/drivers/gpu/drm/amd/amdgpu/Kconfig
+@@ -13,6 +13,8 @@ config DRM_AMDGPU
+ 	select DRM_TTM_HELPER
+ 	select POWER_SUPPLY
+ 	select HWMON
++	select I2C
++	select I2C_ALGOBIT
+ 	select BACKLIGHT_CLASS_DEVICE
+ 	select INTERVAL_TREE
+ 	select DRM_BUDDY
+diff --git a/drivers/gpu/drm/ast/Kconfig b/drivers/gpu/drm/ast/Kconfig
+index d367a90cd3de..563fa7a3b546 100644
+--- a/drivers/gpu/drm/ast/Kconfig
++++ b/drivers/gpu/drm/ast/Kconfig
+@@ -4,6 +4,8 @@ config DRM_AST
+ 	depends on DRM && PCI && MMU
+ 	select DRM_GEM_SHMEM_HELPER
+ 	select DRM_KMS_HELPER
++	select I2C
++	select I2C_ALGOBIT
+ 	help
+ 	 Say yes for experimental AST GPU driver. Do not enable
+ 	 this driver without having a working -modesetting,
+diff --git a/drivers/gpu/drm/gma500/Kconfig b/drivers/gpu/drm/gma500/Kconfig
+index 807b989e3c77..2efc0eb41c64 100644
+--- a/drivers/gpu/drm/gma500/Kconfig
++++ b/drivers/gpu/drm/gma500/Kconfig
+@@ -3,6 +3,8 @@ config DRM_GMA500
+ 	tristate "Intel GMA500/600/3600/3650 KMS Framebuffer"
+ 	depends on DRM && PCI && X86 && MMU
+ 	select DRM_KMS_HELPER
++	select I2C
++	select I2C_ALGOBIT
+ 	# GMA500 depends on ACPI_VIDEO when ACPI is enabled, just like i915
+ 	select ACPI_VIDEO if ACPI
+ 	select BACKLIGHT_CLASS_DEVICE if ACPI
+diff --git a/drivers/gpu/drm/hisilicon/hibmc/Kconfig b/drivers/gpu/drm/hisilicon/hibmc/Kconfig
+index 4e41c144a290..126504318a4f 100644
+--- a/drivers/gpu/drm/hisilicon/hibmc/Kconfig
++++ b/drivers/gpu/drm/hisilicon/hibmc/Kconfig
+@@ -7,6 +7,8 @@ config DRM_HISI_HIBMC
+ 	select DRM_VRAM_HELPER
+ 	select DRM_TTM
+ 	select DRM_TTM_HELPER
++	select I2C
++	select I2C_ALGOBIT
+ 	help
+ 	  Choose this option if you have a Hisilicon Hibmc soc chipset.
+ 	  If M is selected the module will be called hibmc-drm.
+diff --git a/drivers/gpu/drm/i915/Kconfig b/drivers/gpu/drm/i915/Kconfig
+index 3efce05d7b57..c6e3792622f2 100644
+--- a/drivers/gpu/drm/i915/Kconfig
++++ b/drivers/gpu/drm/i915/Kconfig
+@@ -18,6 +18,8 @@ config DRM_I915
+ 	select DRM_PANEL
+ 	select DRM_MIPI_DSI
+ 	select RELAY
++	select I2C
++	select I2C_ALGOBIT
+ 	select IRQ_WORK
+ 	# i915 depends on ACPI_VIDEO when ACPI is enabled
+ 	# but for select to work, need to select ACPI_VIDEO's dependencies, ick
+diff --git a/drivers/gpu/drm/mgag200/Kconfig b/drivers/gpu/drm/mgag200/Kconfig
+index eec59658a938..b28c5e4828f4 100644
+--- a/drivers/gpu/drm/mgag200/Kconfig
++++ b/drivers/gpu/drm/mgag200/Kconfig
+@@ -4,6 +4,8 @@ config DRM_MGAG200
+ 	depends on DRM && PCI && MMU
+ 	select DRM_GEM_SHMEM_HELPER
+ 	select DRM_KMS_HELPER
++	select I2C
++	select I2C_ALGOBIT
+ 	help
+ 	 This is a KMS driver for Matrox G200 chips. It supports the original
+ 	 MGA G200 desktop chips and the server variants. It requires 0.3.0
+diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kconfig
+index 03d12caf9e26..a0bb3987bf63 100644
+--- a/drivers/gpu/drm/nouveau/Kconfig
++++ b/drivers/gpu/drm/nouveau/Kconfig
+@@ -10,6 +10,8 @@ config DRM_NOUVEAU
+ 	select DRM_KMS_HELPER
+ 	select DRM_TTM
+ 	select DRM_TTM_HELPER
++	select I2C
++	select I2C_ALGOBIT
+ 	select BACKLIGHT_CLASS_DEVICE if DRM_NOUVEAU_BACKLIGHT
+ 	select X86_PLATFORM_DEVICES if ACPI && X86
+ 	select ACPI_WMI if ACPI && X86
+diff --git a/drivers/gpu/drm/radeon/Kconfig b/drivers/gpu/drm/radeon/Kconfig
+index 97a277f9a25e..62a596d3a891 100644
+--- a/drivers/gpu/drm/radeon/Kconfig
++++ b/drivers/gpu/drm/radeon/Kconfig
+@@ -15,6 +15,8 @@ config DRM_RADEON
+ 	select HWMON
+ 	select BACKLIGHT_CLASS_DEVICE
+ 	select INTERVAL_TREE
++	select I2C
++	select I2C_ALGOBIT
+ 	# radeon depends on ACPI_VIDEO when ACPI is enabled, for select to work
+ 	# ACPI_VIDEO's dependencies must also be selected.
+ 	select INPUT if ACPI
 
-Error/Warning: (recently discovered and may have been fixed)
-
-arch/loongarch/kernel/asm-offsets.c:265:6: warning: no previous prototype for 'output_pbe_defines' [-Wmissing-prototypes]
-arch/loongarch/power/hibernate.c:14:6: warning: no previous prototype for 'save_processor_state' [-Wmissing-prototypes]
-arch/loongarch/power/hibernate.c:26:6: warning: no previous prototype for 'restore_processor_state' [-Wmissing-prototypes]
-arch/loongarch/power/hibernate.c:38:5: warning: no previous prototype for 'pfn_is_nosave' [-Wmissing-prototypes]
-arch/loongarch/power/hibernate.c:48:5: warning: no previous prototype for 'swsusp_arch_suspend' [-Wmissing-prototypes]
-arch/loongarch/power/hibernate.c:56:5: warning: no previous prototype for 'swsusp_arch_resume' [-Wmissing-prototypes]
-arch/powerpc/kernel/kvm_emul.o: warning: objtool: kvm_template_end(): can't find starting instruction
-arch/powerpc/kernel/optprobes_head.o: warning: objtool: optprobe_template_end(): can't find starting instruction
-arch/powerpc/lib/qspinlock.c:304:2: error: call to undeclared function 'spin_end'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-arch/powerpc/lib/qspinlock.c:324:3: error: call to undeclared function 'spin_begin'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-arch/powerpc/lib/qspinlock.c:331:2: error: call to undeclared function 'spin_cpu_relax'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-drivers/gpu/drm/amd/amdgpu/../display/dc/irq/dcn201/irq_service_dcn201.c:40:20: warning: no previous prototype for 'to_dal_irq_source_dcn201' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: warning: no previous prototype for 'gf100_fifo_nonstall_block' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: warning: no previous prototype for function 'gf100_fifo_nonstall_block' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c:34:1: warning: no previous prototype for 'nvkm_engn_cgrp_get' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/engine/fifo/runl.c:34:1: warning: no previous prototype for function 'nvkm_engn_cgrp_get' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: no previous prototype for 'tu102_gr_load' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: no previous prototype for function 'tu102_gr_load' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c:49:1: warning: no previous prototype for 'wpr_generic_header_dump' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c:49:1: warning: no previous prototype for function 'wpr_generic_header_dump' [-Wmissing-prototypes]
-drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:221:21: warning: variable 'loc' set but not used [-Wunused-but-set-variable]
-drivers/media/platform/mediatek/jpeg/mtk_jpeg_core.c:1474:38: warning: unused variable 'mt8173_jpeg_drvdata' [-Wunused-const-variable]
-drivers/media/platform/mediatek/jpeg/mtk_jpeg_core.c:1489:38: warning: unused variable 'mtk_jpeg_drvdata' [-Wunused-const-variable]
-drivers/media/platform/mediatek/jpeg/mtk_jpeg_core.c:1859:38: warning: unused variable 'mtk8195_jpegdec_drvdata' [-Wunused-const-variable]
-drivers/regulator/tps65219-regulator.c:310:60: warning: parameter 'dev' set but not used [-Wunused-but-set-parameter]
-drivers/regulator/tps65219-regulator.c:370:26: warning: ordered comparison of pointer with integer zero [-Wextra]
-include/linux/signal.h:113:11: error: array index 3 is past the end of the array (that has type 'const unsigned long[2]') [-Werror,-Warray-bounds]
-include/linux/signal.h:97:11: error: array index 3 is past the end of the array (that has type 'unsigned long[2]') [-Werror,-Warray-bounds]
-vmlinux.o: warning: objtool: __btrfs_map_block+0x1d77: unreachable instruction
-
-Unverified Error/Warning (likely false positive, please contact us if interested):
-
-drivers/net/ipa/ipa_table.c:425 ipa_table_init_add() error: we previously assumed 'hash_mem' could be null (see line 416)
-
-Error/Warning ids grouped by kconfigs:
-
-gcc_recent_errors
-|-- alpha-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
-|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
-|   |-- drivers-regulator-tps65219-regulator.c:warning:ordered-comparison-of-pointer-with-integer-zero
-|   `-- drivers-regulator-tps65219-regulator.c:warning:parameter-dev-set-but-not-used
-|-- alpha-randconfig-r022-20221206
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
-|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
-|-- arc-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
-|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
-|   |-- drivers-regulator-tps65219-regulator.c:warning:ordered-comparison-of-pointer-with-integer-zero
-|   `-- drivers-regulator-tps65219-regulator.c:warning:parameter-dev-set-but-not-used
-|-- arm-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
-|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
-|   |-- drivers-regulator-tps65219-regulator.c:warning:ordered-comparison-of-pointer-with-integer-zero
-|   `-- drivers-regulator-tps65219-regulator.c:warning:parameter-dev-set-but-not-used
-|-- arm-defconfig
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
-|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
-|-- arm-randconfig-r016-20221206
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
-|   |-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-wpr_generic_header_dump
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-acr-lsfw.c:warning:variable-loc-set-but-not-used
-|-- arm64-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-..-display-dc-irq-dcn201-irq_service_dcn201.c:warning:no-previous-prototype-for-to_dal_irq_source_dcn201
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-gf100_fifo_nonstall_block
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-nvkm_engn_cgrp_get
-|   |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-tu102_gr_load
-clang_recent_errors
-|-- powerpc-randconfig-r003-20221207
-|   |-- arch-powerpc-kernel-kvm_emul.o:warning:objtool:kvm_template_end():can-t-find-starting-instruction
-|   |-- arch-powerpc-kernel-prom_init.o:warning:objtool:prom_init:unannotated-intra-function-call
-|   |-- arch-powerpc-lib-qspinlock.c:error:call-to-undeclared-function-spin_begin-ISO-C99-and-later-do-not-support-implicit-function-declarations
-|   |-- arch-powerpc-lib-qspinlock.c:error:call-to-undeclared-function-spin_cpu_relax-ISO-C99-and-later-do-not-support-implicit-function-declarations
-|   |-- arch-powerpc-lib-qspinlock.c:error:call-to-undeclared-function-spin_end-ISO-C99-and-later-do-not-support-implicit-function-declarations
-|   |-- include-linux-signal.h:error:array-index-is-past-the-end-of-the-array-(that-has-type-const-unsigned-long-)-Werror-Warray-bounds
-|   `-- include-linux-signal.h:error:array-index-is-past-the-end-of-the-array-(that-has-type-unsigned-long-)-Werror-Warray-bounds
-|-- s390-randconfig-r014-20221206
-|   |-- drivers-media-platform-mediatek-jpeg-mtk_jpeg_core.c:warning:unused-variable-mt8173_jpeg_drvdata
-|   |-- drivers-media-platform-mediatek-jpeg-mtk_jpeg_core.c:warning:unused-variable-mtk8195_jpegdec_drvdata
-|   `-- drivers-media-platform-mediatek-jpeg-mtk_jpeg_core.c:warning:unused-variable-mtk_jpeg_drvdata
-`-- s390-randconfig-r044-20221206
-    |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-gf100.c:warning:no-previous-prototype-for-function-gf100_fifo_nonstall_block
-    |-- drivers-gpu-drm-nouveau-nvkm-engine-fifo-runl.c:warning:no-previous-prototype-for-function-nvkm_engn_cgrp_get
-    |-- drivers-gpu-drm-nouveau-nvkm-engine-gr-tu102.c:warning:no-previous-prototype-for-function-tu102_gr_load
-    `-- drivers-gpu-drm-nouveau-nvkm-nvfw-acr.c:warning:no-previous-prototype-for-function-wpr_generic_header_dump
-
-elapsed time: 739m
-
-configs tested: 60
-configs skipped: 2
-
-gcc tested configs:
-um                             i386_defconfig
-um                           x86_64_defconfig
-x86_64                              defconfig
-x86_64                          rhel-8.3-rust
-powerpc                           allnoconfig
-x86_64                    rhel-8.3-kselftests
-x86_64                          rhel-8.3-func
-x86_64                               rhel-8.3
-i386                          randconfig-a001
-arc                                 defconfig
-x86_64                           rhel-8.3-syz
-i386                          randconfig-a003
-arm                  randconfig-r046-20221206
-s390                             allmodconfig
-alpha                               defconfig
-arc                  randconfig-r043-20221206
-i386                                defconfig
-i386                          randconfig-a005
-arm                                 defconfig
-x86_64                         rhel-8.3-kunit
-s390                                defconfig
-x86_64                           rhel-8.3-kvm
-ia64                             allmodconfig
-alpha                            allyesconfig
-x86_64                           allyesconfig
-m68k                             allyesconfig
-sh                               allmodconfig
-i386                          randconfig-a014
-x86_64                        randconfig-a013
-m68k                             allmodconfig
-x86_64                        randconfig-a011
-s390                             allyesconfig
-powerpc                          allmodconfig
-arc                              allyesconfig
-i386                          randconfig-a012
-i386                          randconfig-a016
-mips                             allyesconfig
-arm64                            allyesconfig
-arm                              allyesconfig
-x86_64                        randconfig-a015
-x86_64                        randconfig-a004
-x86_64                        randconfig-a002
-i386                             allyesconfig
-x86_64                        randconfig-a006
-
-clang tested configs:
-hexagon              randconfig-r041-20221206
-i386                          randconfig-a002
-hexagon              randconfig-r045-20221206
-i386                          randconfig-a013
-s390                 randconfig-r044-20221206
-i386                          randconfig-a006
-i386                          randconfig-a004
-i386                          randconfig-a015
-riscv                randconfig-r042-20221206
-i386                          randconfig-a011
-x86_64                        randconfig-a012
-x86_64                        randconfig-a014
-x86_64                        randconfig-a016
-x86_64                        randconfig-a001
-x86_64                        randconfig-a003
-x86_64                        randconfig-a005
-
+base-commit: ca39c4daa6f7f770b1329ffb46f1e4a6bcc3f291
 -- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
+2.38.1
+
