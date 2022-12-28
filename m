@@ -2,43 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 400596F6B7C
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 034176F6B5B
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 141F610E444;
-	Thu,  4 May 2023 12:32:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0F18D10E40E;
+	Thu,  4 May 2023 12:31:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7077D10E184;
- Mon, 12 Dec 2022 10:22:39 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id CA2D860F75;
- Mon, 12 Dec 2022 10:22:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDEC5C433D2;
- Mon, 12 Dec 2022 10:22:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1670840558;
- bh=82Mek9NsJD1mKAuPA30xuCcYkcZNBfTDDhKVt3EFQzM=;
- h=From:To:Cc:Subject:Date:From;
- b=NSxvdpOfC0nfZOwWAx93P5YDuR9z+uaqCTm72wucNf2PtG00NySQJGfuaJixbOQkZ
- ovks+zAa18D9YtDhXA49qCe8mGX9BGQLVx6vaCFoazXUXNrXhPCJA0JWyAO3Xob28n
- 3hZHGBTIALF+7G66iHKqdtWdSmE9w5CuaoevQxeKWKfs5LqmernO+jaICDGK7l2NOD
- dde8cnUM8pU30uWYypHFk6Kd7G2pDUfq/RJysmEYwResxD+de45QAsi1VlW2ey11Te
- q61JxKm41cSkIVdP4w/c1Haa3sz5b4Jjl0ZW80SiXaETGhS3PrhWY4EdBovnQxhJSl
- EBlNkCAhXlD8Q==
-From: "Jiri Slaby (SUSE)" <jirislaby@kernel.org>
-To: airlied@redhat.com
-Date: Mon, 12 Dec 2022 11:22:33 +0100
-Message-Id: <20221212102233.22212-1-jirislaby@kernel.org>
-X-Mailer: git-send-email 2.38.1
+X-Greylist: delayed 435 seconds by postgrey-1.36 at gabe;
+ Wed, 28 Dec 2022 14:58:46 UTC
+Received: from smtp1.tecnico.ulisboa.pt (smtp1.tecnico.ulisboa.pt
+ [193.136.128.21])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A6E8610E3A6
+ for <nouveau@lists.freedesktop.org>; Wed, 28 Dec 2022 14:58:46 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTP id D721C6008775;
+ Wed, 28 Dec 2022 14:50:49 +0000 (WET)
+X-Virus-Scanned: by amavisd-new-2.11.0 (20160426) (Debian) at
+ tecnico.ulisboa.pt
+Received: from smtp1.tecnico.ulisboa.pt ([127.0.0.1])
+ by localhost (smtp1.tecnico.ulisboa.pt [127.0.0.1]) (amavisd-new, port 10025)
+ with LMTP id HQFEh9eA__YI; Wed, 28 Dec 2022 14:50:46 +0000 (WET)
+Received: from mail1.tecnico.ulisboa.pt (mail1.ist.utl.pt
+ [IPv6:2001:690:2100:1::b3dd:b9ac])
+ by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTPS id C49DE600876F;
+ Wed, 28 Dec 2022 14:50:46 +0000 (WET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tecnico.ulisboa.pt;
+ s=mail; t=1672239046;
+ bh=1HO4Euafnc3ATG0WLfDkiuUVCgo90WriGTavAR16hUY=;
+ h=Date:From:To:Cc:Subject;
+ b=KL4BZIRAdPdUIOiqIBxUYZv/G2GM/dz0gLzls8Q/Z380lvMaG3gkaJpapim4aKqVg
+ CLk037AggI/XDTjxSVJ4PcEcr4nrxJEylm2W91WH0aeFkS1ZsL5q0eKr38e/uyMJ2Z
+ mi/mKUOiyDvJdIiZpWBaXRhRprfhJgK42ZOEWjFc=
+Received: from wslaptop (unknown [IPv6:2001:8a0:fbe7:6700:65be:d034:d2ec:60ff])
+ (Authenticated sender: ist187313)
+ by mail1.tecnico.ulisboa.pt (Postfix) with ESMTPSA id DE47B360071;
+ Wed, 28 Dec 2022 14:50:45 +0000 (WET)
+Date: Wed, 28 Dec 2022 14:49:14 +0000
+From: Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>
+To: diogo.ivo@tecnico.ulisboa.pt
+Message-ID: <20221228144914.z7t7a4fdwvbblnak@wslaptop>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:37 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/kms/nv50- (gcc13): fix nv50_wndw_new_
- prototype
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:35 +0000
+Subject: [Nouveau] [REGRESSION] GM20B probe fails after commit 2541626cfb79
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,61 +58,84 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Jiri Slaby \(SUSE\)" <jirislaby@kernel.org>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, nouveau@lists.freedesktop.org,
- Martin Liska <mliska@suse.cz>
+Cc: nouveau@lists.freedesktop.org, airlied@redhat.com,
+ regressions@lists.linux.dev, dri-devel@lists.freedesktop.org,
+ bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-gcc-13 warns about mismatching types for enums. That revealed switched
-arguments of nv50_wndw_new_():
-  drivers/gpu/drm/nouveau/dispnv50/wndw.c:696:1: error: conflicting types for 'nv50_wndw_new_' due to enum/integer mismatch; have 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const u32 *, u32,  enum nv50_disp_interlock_type,  u32,  struct nv50_wndw **)'
-  drivers/gpu/drm/nouveau/dispnv50/wndw.h:36:5: note: previous declaration of 'nv50_wndw_new_' with type 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const u32 *, enum nv50_disp_interlock_type,  u32,  u32,  struct nv50_wndw **)'
+Hello,
 
-It can be barely visible, but the declaration says about the parameters
-in the middle:
-  enum nv50_disp_interlock_type,
-  u32 interlock_data,
-  u32 heads,
+Commit 2541626cfb79 breaks GM20B probe with
+the following kernel log:
 
-While the definition states differently:
-  u32 heads,
-  enum nv50_disp_interlock_type interlock_type,
-  u32 interlock_data,
+[    2.153892] ------------[ cut here ]------------
+[    2.153897] WARNING: CPU: 1 PID: 36 at drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgf100.c:273 gf100_vmm_valid+0x2c4/0x390
+[    2.153916] Modules linked in:
+[    2.153922] CPU: 1 PID: 36 Comm: kworker/u8:1 Not tainted 6.1.0+ #1
+[    2.153929] Hardware name: Google Pixel C (DT)
+[    2.153933] Workqueue: events_unbound deferred_probe_work_func
+[    2.153943] pstate: 80000005 (Nzcv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+[    2.153950] pc : gf100_vmm_valid+0x2c4/0x390
+[    2.153959] lr : gf100_vmm_valid+0xb4/0x390
+[    2.153966] sp : ffffffc009e134b0
+[    2.153969] x29: ffffffc009e134b0 x28: 0000000000000000 x27: ffffffc008fd44c8
+[    2.153979] x26: 00000000ffffffea x25: ffffffc0087b98d0 x24: ffffff8080f89038
+[    2.153987] x23: ffffff8081fadc08 x22: 0000000000000000 x21: 0000000000000000
+[    2.153995] x20: ffffff8080f8a000 x19: ffffffc009e13678 x18: 0000000000000000
+[    2.154003] x17: f37a8b93418958e6 x16: ffffffc009f0d000 x15: 0000000000000000
+[    2.154011] x14: 0000000000000002 x13: 000000000003a020 x12: ffffffc008000000
+[    2.154019] x11: 0000000102913000 x10: 0000000000000000 x9 : 0000000000000000
+[    2.154026] x8 : ffffffc009e136d8 x7 : ffffffc008fd44c8 x6 : ffffff80803d0f00
+[    2.154034] x5 : 0000000000000000 x4 : ffffff8080f88c00 x3 : 0000000000000010
+[    2.154041] x2 : 000000000000000c x1 : 00000000ffffffea x0 : 00000000ffffffea
+[    2.154050] Call trace:
+[    2.154053]  gf100_vmm_valid+0x2c4/0x390
+[    2.154061]  nvkm_vmm_map_valid+0xd4/0x204
+[    2.154069]  nvkm_vmm_map_locked+0xa4/0x344
+[    2.154076]  nvkm_vmm_map+0x50/0x84
+[    2.154083]  nvkm_firmware_mem_map+0x84/0xc4
+[    2.154094]  nvkm_falcon_fw_oneinit+0xc8/0x320
+[    2.154101]  nvkm_acr_oneinit+0x428/0x5b0
+[    2.154109]  nvkm_subdev_oneinit_+0x50/0x104
+[    2.154114]  nvkm_subdev_init_+0x3c/0x12c
+[    2.154119]  nvkm_subdev_init+0x60/0xa0
+[    2.154125]  nvkm_device_init+0x14c/0x2a0
+[    2.154133]  nvkm_udevice_init+0x60/0x9c
+[    2.154140]  nvkm_object_init+0x48/0x1b0
+[    2.154144]  nvkm_ioctl_new+0x168/0x254
+[    2.154149]  nvkm_ioctl+0xd0/0x220
+[    2.154153]  nvkm_client_ioctl+0x10/0x1c
+[    2.154162]  nvif_object_ctor+0xf4/0x22c
+[    2.154168]  nvif_device_ctor+0x28/0x70
+[    2.154174]  nouveau_cli_init+0x150/0x590
+[    2.154180]  nouveau_drm_device_init+0x60/0x2a0
+[    2.154187]  nouveau_platform_device_create+0x90/0xd0
+[    2.154193]  nouveau_platform_probe+0x3c/0x9c
+[    2.154200]  platform_probe+0x68/0xc0
+[    2.154207]  really_probe+0xbc/0x2dc
+[    2.154211]  __driver_probe_device+0x78/0xe0
+[    2.154216]  driver_probe_device+0xd8/0x160
+[    2.154221]  __device_attach_driver+0xb8/0x134
+[    2.154226]  bus_for_each_drv+0x78/0xd0
+[    2.154230]  __device_attach+0x9c/0x1a0
+[    2.154234]  device_initial_probe+0x14/0x20
+[    2.154239]  bus_probe_device+0x98/0xa0
+[    2.154243]  deferred_probe_work_func+0x88/0xc0
+[    2.154247]  process_one_work+0x204/0x40c
+[    2.154256]  worker_thread+0x230/0x450
+[    2.154261]  kthread+0xc8/0xcc
+[    2.154266]  ret_from_fork+0x10/0x20
+[    2.154273] ---[ end trace 0000000000000000 ]---
+[    2.154278] nouveau 57000000.gpu: pmu: map -22
+[    2.154285] nouveau 57000000.gpu: acr: one-time init failed, -22
+[    2.154559] nouveau 57000000.gpu: init failed with -22
+[    2.154564] nouveau: DRM-master:00000000:00000080: init failed with -22
+[    2.154574] nouveau 57000000.gpu: DRM-master: Device allocation failed: -22
+[    2.162905] nouveau: probe of 57000000.gpu failed with error -22
 
-Unify/fix the declaration to match the definition.
+#regzbot introduced: 2541626cfb79
 
-Cc: Martin Liska <mliska@suse.cz>
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Karol Herbst <kherbst@redhat.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: David Airlie <airlied@gmail.com>
-Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org
-Cc: linux-kernel@vger.kernel.org
-Signed-off-by: Jiri Slaby (SUSE) <jirislaby@kernel.org>
----
- drivers/gpu/drm/nouveau/dispnv50/wndw.h | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+Thanks,
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.h b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
-index 591c852f326b..76a6ae5d5652 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/wndw.h
-+++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
-@@ -35,8 +35,9 @@ struct nv50_wndw {
- 
- int nv50_wndw_new_(const struct nv50_wndw_func *, struct drm_device *,
- 		   enum drm_plane_type, const char *name, int index,
--		   const u32 *format, enum nv50_disp_interlock_type,
--		   u32 interlock_data, u32 heads, struct nv50_wndw **);
-+		   const u32 *format, u32 heads,
-+		   enum nv50_disp_interlock_type, u32 interlock_data,
-+		   struct nv50_wndw **);
- void nv50_wndw_flush_set(struct nv50_wndw *, u32 *interlock,
- 			 struct nv50_wndw_atom *);
- void nv50_wndw_flush_clr(struct nv50_wndw *, u32 *interlock, bool flush,
--- 
-2.38.1
-
+Diogo Ivo
