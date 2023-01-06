@@ -1,42 +1,107 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FDA065EB38
-	for <lists+nouveau@lfdr.de>; Thu,  5 Jan 2023 13:57:28 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E7CF66049E
+	for <lists+nouveau@lfdr.de>; Fri,  6 Jan 2023 17:43:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B75D710E70B;
-	Thu,  5 Jan 2023 12:57:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6BD1A10E880;
+	Fri,  6 Jan 2023 16:42:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 1710 seconds by postgrey-1.36 at gabe;
- Thu, 05 Jan 2023 12:57:22 UTC
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de
- [80.237.130.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2ED8F10E70A
- for <nouveau@lists.freedesktop.org>; Thu,  5 Jan 2023 12:57:22 +0000 (UTC)
-Received: from [2a02:8108:963f:de38:eca4:7d19:f9a2:22c5]; authenticated
- by wp530.webpack.hosteurope.de running ExIM with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
- id 1pDPMY-0002B2-4e; Thu, 05 Jan 2023 13:28:50 +0100
-Message-ID: <c32ea02c-d706-ea2f-aa13-660b8db958ef@leemhuis.info>
-Date: Thu, 5 Jan 2023 13:28:49 +0100
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2041.outbound.protection.outlook.com [40.107.236.41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 91AB210E888;
+ Fri,  6 Jan 2023 16:42:52 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=LLyxgUb6i9LfABmWgZ0wuokfuiJonuT6MqPAcsYwiDgGLprwR1KxmAqTyqfsaSCcOuCrWMmXEkpHBu+7SEbhJ3KB38sM8XwIfeoo89xe4FMCTDC9efn8DyTHr7uCaZKH/QkMy43l9MvFm5Cx93AewdfUajXX4OBBcR7XOF37RjM2FJsssAxJtmOxwk6JsqrKlCy035OQmbGn+eH3wc6qOT2FHDsflIDbJZADncbGpj+X66ebimXvv+2q2/QV3+jiDoutbEgh4Gl71xAk/J0Wg8kvw5OFVnYl53/Oi6Cj9VREVDSELRJnFJ1AxUSSvOJvU71teh0jwEw9dZrCnewqpQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=G1oqx3oySm9rAzqJQwBK0SokBCkQT/v6l+Uh9b+rw4M=;
+ b=OLiUgOElX7h033i7qb5U6jJ+22zBaQXXGNGiYnteXbOm0Nkt92J61Ql/DDF3l3NP8QHd6GKsUbxHAXRQ44DcMVh+ovKhOyiqmuMCK22JWbIN5T+F0tdYYAy1MbOjPex9lMtv3haTO0brsF4RW7XqPCMydE2lalP93+r+Jtoss12NFHc7oHl1tu5pkjeVTE8uOrzGyu//2uEgV5D+5CqOo2aoe/Nh7hnxVPXAczFW94pNlbZ7He1nBrbJzSJ5a2SjhSq7aYkmqkL3tT7yrE7JoRyN+ZHRDCL5RFCJVLQOCp712R/+4p4jTfb4RnBZkUFyd6Tg7MoNxbB86fwflQxMmg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=G1oqx3oySm9rAzqJQwBK0SokBCkQT/v6l+Uh9b+rw4M=;
+ b=sPtsNkUIxhFLdd+MLqtyx4kXkgncpSw2kYJhNMigGY1RkJvjNhY42Ea8Lnf+Chu7pcjK21ngTljatYXA/o6hdrJUWh9W9R/dooi7YsWZjDD4uwJxMEpbV2IvqEONQkQDuYJLRcXaNK6/exO5SqpXwenzFTymuMHgzZu5ToJInIQUVxs2ViNi6C188J94t3qEuHNE7HXO4oHsbpnB/eqioFAF+Nb3wGSQf7PFIXMaizvOqDX3PvinUA92j7aDYBgs7bUQ6H7ypoWR3EwBUdXuSp0yEGh+n0/n0jNLkeiLtYOCBhEqJqFenC2/85FQUkL58+X//SjMO9cku8kCb4kodQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from LV2PR12MB5869.namprd12.prod.outlook.com (2603:10b6:408:176::16)
+ by DS0PR12MB6437.namprd12.prod.outlook.com (2603:10b6:8:cb::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5944.19; Fri, 6 Jan
+ 2023 16:42:49 +0000
+Received: from LV2PR12MB5869.namprd12.prod.outlook.com
+ ([fe80::f8b0:df13:5f8d:12a]) by LV2PR12MB5869.namprd12.prod.outlook.com
+ ([fe80::f8b0:df13:5f8d:12a%9]) with mapi id 15.20.5944.019; Fri, 6 Jan 2023
+ 16:42:49 +0000
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Lu Baolu <baolu.lu@linux.intel.com>, Joerg Roedel <joro@8bytes.org>,
+ Kevin Tian <kevin.tian@intel.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
+ Robin Murphy <robin.murphy@arm.com>
+Date: Fri,  6 Jan 2023 12:42:40 -0400
+Message-Id: <0-v1-6e8b3997c46d+89e-iommu_map_gfp_jgg@nvidia.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: BL0PR02CA0100.namprd02.prod.outlook.com
+ (2603:10b6:208:51::41) To LV2PR12MB5869.namprd12.prod.outlook.com
+ (2603:10b6:408:176::16)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Content-Language: en-US, de-DE
-To: bskeggs@redhat.com, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>
-References: <20221228144914.z7t7a4fdwvbblnak@wslaptop>
-From: Thorsten Leemhuis <regressions@leemhuis.info>
-In-Reply-To: <20221228144914.z7t7a4fdwvbblnak@wslaptop>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-bounce-key: webpack.hosteurope.de; regressions@leemhuis.info; 1672923442;
- 70e7d4ac; 
-X-HE-SMSGID: 1pDPMY-0002B2-4e
-Subject: Re: [Nouveau] [REGRESSION] GM20B probe fails after commit
- 2541626cfb79
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV2PR12MB5869:EE_|DS0PR12MB6437:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1157bfb0-054e-4a1d-d179-08daf0050bb2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 6mXBb7ogv9FbU6HBL295OqF16Kb6CekkcxXk7imSZpp686xXL2CGSPa/+nTp60sxRM37Gi3Jecn224fcPWGQ7IZoXicfHTQ28w8W3T+NU0ulm6SsOyj4GsgoUvEZ48NffBlI3Ze7I7AJ8CnFLpQFfhCLyO1cYeP47QdWVMiES+8k7kX0TNIhDmVTCXqe7J7mkIEeazA1R2PkLmBZChtnaS+VMWAK3zpT/2e8r/VbxpSjTf2g67K49G2LFzY0mVdEOQ7zStAxVE7/sKEASaEz95pvFo6CYW8xasduUBbpXx+fXUcpplTr/QrtzGXhKq64PAD6xlpX7UVEhiWXT9EIQhgphWy3zb13NoNzscIpWPK0wr3ziZx0Fk+cbQBxzvvHbvAfFJbHRhYN+njx/FFA1N076RknmK982jJ+rf7dMnNfLkDIJXKj2PzNsFcwq73I3fDR3WCZlfS3qNbxW3Wqp+nKRyqRvcoOcEk9jEJ+1kl/S+UTkHxCCoteU8xqvcg2x4lgg/9VxR3hfs8ivf7aAOiaLMWwKNmAHzKwM8dp9on/1VNO78c80Xn/AqMTue+NIB2hfVv2Xs0PnB+Zolm4ZAchC8K6gdftta9qgIin0iT3Q0dBMm1Zm4BMHBLNl5bDA01YkaEGr1MXCURVY8KJmsyOWYkMyu2AnBDWvIWIIWVi4gPXQueapZL8Cwe/vAgj
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV2PR12MB5869.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230022)(4636009)(366004)(136003)(376002)(346002)(39860400002)(396003)(451199015)(7416002)(5660300002)(54906003)(2906002)(41300700001)(8676002)(66946007)(8936002)(66476007)(316002)(4326008)(66556008)(83380400001)(6666004)(478600001)(110136005)(6506007)(36756003)(186003)(2616005)(26005)(6512007)(6486002)(86362001)(38100700002)(4216001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?I6eNKkq7MyT/Xi8Ux+ovjqJQyHSQ4R8x7W/4F1QTVe8h9ncrVz2SZAUnkmzu?=
+ =?us-ascii?Q?7kaMplOtwk84fWQoBg31yArQcieWgF6KkvnvCENRcn0/k/EEAa8dAk65ZLcJ?=
+ =?us-ascii?Q?85F8YdkWZ+EG8R0qE6+tFNbi4HTrZOmZK9JzpPSESPL2huNvo3h4PC3jCc2F?=
+ =?us-ascii?Q?J/8QWU03ewvscIeICwAd9mhHX+kRo/anuBnGnTdwPPtFfzSrHAb3pyoxu3Ac?=
+ =?us-ascii?Q?KTdk8RQP0Ow9xMrkbY6wW9kPaeiWAnPLCgbfLzhkt2tZc6YLVLOUjkV2mdUF?=
+ =?us-ascii?Q?zQziP6QoVk0/38a4oiJkovfkST0m9RiqTRbnLCMtSzBlKsuEXEhYsT1MsjA5?=
+ =?us-ascii?Q?qa2T52YLL4Lm5Po5VFvDEtT5ew3XEMqGG424NBDyK6wwk90/qo5oqcwYwzTt?=
+ =?us-ascii?Q?rTMLGWXOH5fZLcbf6SxiBvhYHC+MI86QLh+pcjNVxWCnYw2hSU6BwoxXmSc/?=
+ =?us-ascii?Q?fple8fyQZzlavVYmBqFYzFvSzWq7MNmW4M2JtpjS3RDXCLyzdkaxnLGREYVS?=
+ =?us-ascii?Q?OWE7D9325KzwtBWk+F8IchClQbXMuWKfEkiHz8wjWit09eJN+Mb0h3XmIifq?=
+ =?us-ascii?Q?bS/428A3vMVskeUrzY2RUrlqNQZsc8nexe6hlc6uoK2EJ3GGsTFekVZhrGhz?=
+ =?us-ascii?Q?PgDohfya5o/NcweAX0UQuPwBAPIMohj9zrtvp20UXOmhIwojUf3PC0AqxK2l?=
+ =?us-ascii?Q?r7pgy9VMRdm/NSqIP9ffa7dWO5/WPKloF7oYi9ow+zTtyYG2H1JbnxxvVYkY?=
+ =?us-ascii?Q?arvWpdk/1wnM5VitlWHkg8GM6KS50Lkx0F70TePtcJgVoamvurZLbwZ1o8l3?=
+ =?us-ascii?Q?+CGrdOrL4nTcYAwIhLc1u1g3cSeZU5ozS8i72ewYOiYO9+a2aX8QXLnvIpsL?=
+ =?us-ascii?Q?8VFnltvfIw5rueVRw2lLXVIfT2aKWMYqlOkHCo/KPQd8oyF9rNO7Us9cq8LK?=
+ =?us-ascii?Q?wIdWI6KNosNQDNBWICa/dQJYZxqRKLFLSajkVXmLIUNlt3ZxQXWk7QySBWgf?=
+ =?us-ascii?Q?PPJUK9Y02Jevx0ZpQhKNcI3AhOnQKPyu7JIi9l1FIIdoDk5t0zbwtj2MO7bZ?=
+ =?us-ascii?Q?xjaDt6D5byLPw44vVQ79At1I7yBf2hDw4uriTBWNWuv6Iz6cJIijlQPl2m3Y?=
+ =?us-ascii?Q?YiNA4pWgTMqOMyOZ1gl0Dm92vBVQMR39U89WYEOTDIligPqLYX/oZFjrhHVo?=
+ =?us-ascii?Q?1sK/dghUFbDc8Bmbda7pCZMFaldOA9+j3FJ+Lnjc+itebh1jUutGa7U0xicQ?=
+ =?us-ascii?Q?In6xRnEc3b03W1VF5Z8YEebU1rEm/CY98VNSGnbEHco08dpo4KW3xb+C8mTN?=
+ =?us-ascii?Q?HE7lIxwyVL1LuqZ/uNt9iBsJNRdNFQmjo1F7bSHH56+/x1VE/mDU7QAnOpyc?=
+ =?us-ascii?Q?Q64nB2tCdOoxpBBjsMmFOb3SI1lWx0kHfyHe0v0db+rjzZM5lPbyeWEaCl/w?=
+ =?us-ascii?Q?buNCNoTEPJqyBgWJdMoPF5Jn+DPJkmj3Q3ZKG/O7MGmmQPYMyQXWLayDoyGW?=
+ =?us-ascii?Q?Zt72tTIrkwJFKpJQVsM0hmgri1JuDh7ckTzSKCH0XvDmUfSXKp84CmaYVsTk?=
+ =?us-ascii?Q?8M3F+yE5mXxFUEJZOVkC5ZYsGf4sYexIiEjsXmsM?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1157bfb0-054e-4a1d-d179-08daf0050bb2
+X-MS-Exchange-CrossTenant-AuthSource: LV2PR12MB5869.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2023 16:42:48.9836 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: lvdzwNGZbRIslb5NYegHKsoQcLxxNy+6Ytsh4/HL+4fOWQZAeIS4QVVWDp7WObt9
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6437
+Subject: [Nouveau] [PATCH 0/8] Let iommufd charge IOPTE allocations to the
+ memory cgroup
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,104 +113,81 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>,
- regressions@lists.linux.dev, dri-devel@lists.freedesktop.org,
- airlied@redhat.com
+Cc: linux-s390@vger.kernel.org, kvm@vger.kernel.org,
+ nouveau@lists.freedesktop.org, linux-rdma@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, Niklas Schnelle <schnelle@linux.ibm.com>,
+ linux-remoteproc@vger.kernel.org, iommu@lists.linux.dev,
+ dri-devel@lists.freedesktop.org, linux-stm32@st-md-mailman.stormreply.com,
+ Alex Williamson <alex.williamson@redhat.com>, netdev@vger.kernel.org,
+ ath10k@lists.infradead.org, linux-wireless@vger.kernel.org,
+ linux-tegra@vger.kernel.org, Christian Borntraeger <borntraeger@linux.ibm.com>,
+ virtualization@lists.linux-foundation.org, ath11k@lists.infradead.org,
+ linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-[adding Karol and Lyude to the list of recipients]
+iommufd follows the same design as KVM and uses memory cgroups to limit
+the amount of kernel memory a iommufd file descriptor can pin down. The
+various internal data structures already use GFP_KERNEL_ACCOUNT to charge
+its own memory.
 
-Hi, this is your Linux kernel regression tracker. Top-posting for once,
-to make this easily accessible to everyone.
+However, one of the biggest consumers of kernel memory is the IOPTEs
+stored under the iommu_domain and these allocations are not tracked.
 
-On 28.12.22 15:49, Diogo Ivo wrote:
-> Hello,
-> 
-> Commit 2541626cfb79 breaks GM20B probe with
-> the following kernel log:
-Just wondering: is anyone looking on this? The report was posted more
-than a week ago and didn't even get a single reply yet afaics. This of
-course can happen at this time of the year, but I nevertheless thought a
-quick status inquiry might be a good idea at this point.
+This series is the first step in fixing it.
 
-Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
---
-Everything you wanna know about Linux kernel regression tracking:
-https://linux-regtracking.leemhuis.info/about/#tldr
-If I did something stupid, please tell me, as explained on that page.
+The iommu driver contract already includes a 'gfp' argument to the
+map_pages op, allowing iommufd to specify GFP_KERNEL_ACCOUNT and then
+having the driver allocate the IOPTE tables with that flag will capture a
+significant amount of the allocations.
 
-> [    2.153892] ------------[ cut here ]------------
-> [    2.153897] WARNING: CPU: 1 PID: 36 at drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgf100.c:273 gf100_vmm_valid+0x2c4/0x390
-> [    2.153916] Modules linked in:
-> [    2.153922] CPU: 1 PID: 36 Comm: kworker/u8:1 Not tainted 6.1.0+ #1
-> [    2.153929] Hardware name: Google Pixel C (DT)
-> [    2.153933] Workqueue: events_unbound deferred_probe_work_func
-> [    2.153943] pstate: 80000005 (Nzcv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
-> [    2.153950] pc : gf100_vmm_valid+0x2c4/0x390
-> [    2.153959] lr : gf100_vmm_valid+0xb4/0x390
-> [    2.153966] sp : ffffffc009e134b0
-> [    2.153969] x29: ffffffc009e134b0 x28: 0000000000000000 x27: ffffffc008fd44c8
-> [    2.153979] x26: 00000000ffffffea x25: ffffffc0087b98d0 x24: ffffff8080f89038
-> [    2.153987] x23: ffffff8081fadc08 x22: 0000000000000000 x21: 0000000000000000
-> [    2.153995] x20: ffffff8080f8a000 x19: ffffffc009e13678 x18: 0000000000000000
-> [    2.154003] x17: f37a8b93418958e6 x16: ffffffc009f0d000 x15: 0000000000000000
-> [    2.154011] x14: 0000000000000002 x13: 000000000003a020 x12: ffffffc008000000
-> [    2.154019] x11: 0000000102913000 x10: 0000000000000000 x9 : 0000000000000000
-> [    2.154026] x8 : ffffffc009e136d8 x7 : ffffffc008fd44c8 x6 : ffffff80803d0f00
-> [    2.154034] x5 : 0000000000000000 x4 : ffffff8080f88c00 x3 : 0000000000000010
-> [    2.154041] x2 : 000000000000000c x1 : 00000000ffffffea x0 : 00000000ffffffea
-> [    2.154050] Call trace:
-> [    2.154053]  gf100_vmm_valid+0x2c4/0x390
-> [    2.154061]  nvkm_vmm_map_valid+0xd4/0x204
-> [    2.154069]  nvkm_vmm_map_locked+0xa4/0x344
-> [    2.154076]  nvkm_vmm_map+0x50/0x84
-> [    2.154083]  nvkm_firmware_mem_map+0x84/0xc4
-> [    2.154094]  nvkm_falcon_fw_oneinit+0xc8/0x320
-> [    2.154101]  nvkm_acr_oneinit+0x428/0x5b0
-> [    2.154109]  nvkm_subdev_oneinit_+0x50/0x104
-> [    2.154114]  nvkm_subdev_init_+0x3c/0x12c
-> [    2.154119]  nvkm_subdev_init+0x60/0xa0
-> [    2.154125]  nvkm_device_init+0x14c/0x2a0
-> [    2.154133]  nvkm_udevice_init+0x60/0x9c
-> [    2.154140]  nvkm_object_init+0x48/0x1b0
-> [    2.154144]  nvkm_ioctl_new+0x168/0x254
-> [    2.154149]  nvkm_ioctl+0xd0/0x220
-> [    2.154153]  nvkm_client_ioctl+0x10/0x1c
-> [    2.154162]  nvif_object_ctor+0xf4/0x22c
-> [    2.154168]  nvif_device_ctor+0x28/0x70
-> [    2.154174]  nouveau_cli_init+0x150/0x590
-> [    2.154180]  nouveau_drm_device_init+0x60/0x2a0
-> [    2.154187]  nouveau_platform_device_create+0x90/0xd0
-> [    2.154193]  nouveau_platform_probe+0x3c/0x9c
-> [    2.154200]  platform_probe+0x68/0xc0
-> [    2.154207]  really_probe+0xbc/0x2dc
-> [    2.154211]  __driver_probe_device+0x78/0xe0
-> [    2.154216]  driver_probe_device+0xd8/0x160
-> [    2.154221]  __device_attach_driver+0xb8/0x134
-> [    2.154226]  bus_for_each_drv+0x78/0xd0
-> [    2.154230]  __device_attach+0x9c/0x1a0
-> [    2.154234]  device_initial_probe+0x14/0x20
-> [    2.154239]  bus_probe_device+0x98/0xa0
-> [    2.154243]  deferred_probe_work_func+0x88/0xc0
-> [    2.154247]  process_one_work+0x204/0x40c
-> [    2.154256]  worker_thread+0x230/0x450
-> [    2.154261]  kthread+0xc8/0xcc
-> [    2.154266]  ret_from_fork+0x10/0x20
-> [    2.154273] ---[ end trace 0000000000000000 ]---
-> [    2.154278] nouveau 57000000.gpu: pmu: map -22
-> [    2.154285] nouveau 57000000.gpu: acr: one-time init failed, -22
-> [    2.154559] nouveau 57000000.gpu: init failed with -22
-> [    2.154564] nouveau: DRM-master:00000000:00000080: init failed with -22
-> [    2.154574] nouveau 57000000.gpu: DRM-master: Device allocation failed: -22
-> [    2.162905] nouveau: probe of 57000000.gpu failed with error -22
-> 
-> #regzbot introduced: 2541626cfb79
-> 
-> Thanks,
-> 
-> Diogo Ivo
-> 
-> 
+Update the iommu_map() API to pass in the GFP argument, and fix all call
+sites. Replace iommu_map_atomic().
 
-#regzbot poke
+Audit the "enterprise" iommu drivers to make sure they do the right thing.
+Intel and S390 ignore the GFP argument and always use GFP_ATOMIC. This is
+problematic for iommufd anyhow, so fix it. AMD and ARM SMMUv2/3 are
+already correct.
+
+A follow up series will be needed to capture the allocations made when the
+iommu_domain itself is allocated, which will complete the job.
+
+Jason Gunthorpe (8):
+  iommu: Add a gfp parameter to iommu_map()
+  iommu: Remove iommu_map_atomic()
+  iommu: Add a gfp parameter to iommu_map_sg()
+  iommu/dma: Use the gfp parameter in __iommu_dma_alloc_noncontiguous()
+  iommufd: Use GFP_KERNEL_ACCOUNT for iommu_map()
+  iommu/intel: Add a gfp parameter to alloc_pgtable_page()
+  iommu/intel: Support the gfp argument to the map_pages op
+  iommu/s390: Push the gfp parameter to the kmem_cache_alloc()'s
+
+ arch/arm/mm/dma-mapping.c                     | 11 +++--
+ arch/s390/include/asm/pci_dma.h               |  5 ++-
+ arch/s390/pci/pci_dma.c                       | 31 +++++++------
+ .../drm/nouveau/nvkm/subdev/instmem/gk20a.c   |  3 +-
+ drivers/gpu/drm/tegra/drm.c                   |  2 +-
+ drivers/gpu/host1x/cdma.c                     |  2 +-
+ drivers/infiniband/hw/usnic/usnic_uiom.c      |  4 +-
+ drivers/iommu/dma-iommu.c                     | 11 ++---
+ drivers/iommu/intel/iommu.c                   | 36 +++++++++-------
+ drivers/iommu/intel/iommu.h                   |  2 +-
+ drivers/iommu/intel/pasid.c                   |  2 +-
+ drivers/iommu/iommu.c                         | 43 +++++--------------
+ drivers/iommu/iommufd/pages.c                 |  6 ++-
+ drivers/iommu/s390-iommu.c                    | 15 ++++---
+ drivers/media/platform/qcom/venus/firmware.c  |  2 +-
+ drivers/net/ipa/ipa_mem.c                     |  6 ++-
+ drivers/net/wireless/ath/ath10k/snoc.c        |  2 +-
+ drivers/net/wireless/ath/ath11k/ahb.c         |  4 +-
+ drivers/remoteproc/remoteproc_core.c          |  5 ++-
+ drivers/vfio/vfio_iommu_type1.c               |  9 ++--
+ drivers/vhost/vdpa.c                          |  2 +-
+ include/linux/iommu.h                         | 31 +++----------
+ 22 files changed, 109 insertions(+), 125 deletions(-)
+
+
+base-commit: 88603b6dc419445847923fcb7fe5080067a30f98
+-- 
+2.39.0
+
