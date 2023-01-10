@@ -2,77 +2,62 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1CF76640DD
-	for <lists+nouveau@lfdr.de>; Tue, 10 Jan 2023 13:49:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BED3D6640F7
+	for <lists+nouveau@lfdr.de>; Tue, 10 Jan 2023 13:54:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1DC1110E5B6;
-	Tue, 10 Jan 2023 12:49:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9EF4610E5BB;
+	Tue, 10 Jan 2023 12:53:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3573410E108
- for <nouveau@lists.freedesktop.org>; Tue, 10 Jan 2023 12:49:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1673354991;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4EB2510E5B7;
+ Tue, 10 Jan 2023 12:53:51 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 7E21D4EAB5;
+ Tue, 10 Jan 2023 12:53:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1673355229; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=a7tgKM20DsrNx637VF4CpQec8L0nTnjIQhsUYzDVSoo=;
- b=TP7Jq7I0097PiFLcOWlS4LxN+y/++FxTWesnEZjqS0sAXGAwWRflUv2dDN8TxnGjx7YGJX
- u5UZ1H3nD5AOxLsKYTn2g9BTUQty2cDjfk4YqdfL0rLM3O//fZ0cbYsT6Q+aLBKXcO8co5
- ds+K1N8dN4e3oyymcVb0ssYUrU6Dfo4=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-111-ot9V3YG0MBmtMC9hwG3Ekw-1; Tue, 10 Jan 2023 07:49:50 -0500
-X-MC-Unique: ot9V3YG0MBmtMC9hwG3Ekw-1
-Received: by mail-wm1-f71.google.com with SMTP id
- 21-20020a05600c021500b003d227b209e1so2505910wmi.1
- for <nouveau@lists.freedesktop.org>; Tue, 10 Jan 2023 04:49:49 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=a7tgKM20DsrNx637VF4CpQec8L0nTnjIQhsUYzDVSoo=;
- b=R5NiBlkHSBphuwfe8k3+8PgM3aKuNW5dvuvEllaZKzno/MBNn2xyu6sHIicTYor11o
- ity8kOnt7ymJEiwqvJNfhvbPMk1XNe2s+F09QQ8NpJaoTvuruCLPXof4jthYJ0CK69am
- Kz9vDb+z+G+HWJLpoTHyrrtZ9U+/jJnQR4/qjW6DFkjg48biTRmESW7ZXht77x0WAKCm
- 9E9+1z+IDs4rgZ1v7yapeIeHWpTMl1dtWlz2diTL0QcM0LU2RpMNNgcqai0r7RQquJfF
- CDZzvU6jxzuqa3/Dnbuy9MmHsR3gtMX6Oung6W0+npbey03cbgHA6MbUR2Fhc2PQJoaQ
- kj/w==
-X-Gm-Message-State: AFqh2kpybDMiWtr2zCeCv6ipVSYEiwxrwojwKklr8rDUfbwW3urPY0EE
- JDwUyOTCLtU6JilnUMQcC1gI/6If36QvfbWMLkMaKeP1gH/ipvfaXApKnSiuqcMy0Wqt6fG0KUb
- ZUzNuqL+A84n0zZO/GQqsH7hEFg==
-X-Received: by 2002:a1c:ed19:0:b0:3d3:52bb:3984 with SMTP id
- l25-20020a1ced19000000b003d352bb3984mr50092086wmh.17.1673354989022; 
- Tue, 10 Jan 2023 04:49:49 -0800 (PST)
-X-Google-Smtp-Source: AMrXdXvtCf5TAPAxZ3JxoE3rUo+OdTsS8gxdWrF9oAxkZz+a5XUyyGeKMFqiYs8eTs+Zw2Iyx2zWpg==
-X-Received: by 2002:a1c:ed19:0:b0:3d3:52bb:3984 with SMTP id
- l25-20020a1ced19000000b003d352bb3984mr50092069wmh.17.1673354988798; 
- Tue, 10 Jan 2023 04:49:48 -0800 (PST)
-Received: from [192.168.1.130] (205.pool92-176-231.dynamic.orange.es.
- [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
- 16-20020a05600c22d000b003b4a699ce8esm18214893wmg.6.2023.01.10.04.49.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Jan 2023 04:49:48 -0800 (PST)
-Message-ID: <da2e0a51-9f75-cf74-9244-fd7b82dda7c5@redhat.com>
-Date: Tue, 10 Jan 2023 13:49:47 +0100
+ bh=MeiI1zB4cNnVBqeqlVE+I6kGcZQIkeuPjHJaBc5Mnwg=;
+ b=CDz9aTb82F/r3+fZt02BbcpVonHxlDBWFfyOMjQko4HRiJEkF9ujPzd6QW1X0CSuSTVpMQ
+ VVAnbovZCrfnKrSoH1TPrpU/1OyvlGSLU3ahFvo0Z9J3Oos4sEI//tWOx/22Sd9FR6XEa2
+ zgoDhjM6uIUT+QtM8dBK+X+IHh4eNCY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1673355229;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=MeiI1zB4cNnVBqeqlVE+I6kGcZQIkeuPjHJaBc5Mnwg=;
+ b=voAWi7cZFFsWE2NnrMAd2AjLVnsTef3TZDwVEzN6VleKbjsu7TDgGshrmz1Sfjx30ZIB0Y
+ 5iAvz8THrWEU79Cw==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 485321358A;
+ Tue, 10 Jan 2023 12:53:49 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id jsXbEN1fvWPHKQAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Tue, 10 Jan 2023 12:53:49 +0000
+Message-ID: <8197553c-19cc-5ece-a6d2-f7c97d8760fe@suse.de>
+Date: Tue, 10 Jan 2023 13:53:48 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.0
-To: Thomas Zimmermann <tzimmermann@suse.de>, bskeggs@redhat.com,
+ Thunderbird/102.6.1
+To: Javier Martinez Canillas <javierm@redhat.com>, bskeggs@redhat.com,
  kherbst@redhat.com, lyude@redhat.com, airlied@gmail.com, daniel@ffwll.ch
 References: <20230110123526.28770-1-tzimmermann@suse.de>
-From: Javier Martinez Canillas <javierm@redhat.com>
-In-Reply-To: <20230110123526.28770-1-tzimmermann@suse.de>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+ <da2e0a51-9f75-cf74-9244-fd7b82dda7c5@redhat.com>
 Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <da2e0a51-9f75-cf74-9244-fd7b82dda7c5@redhat.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------i72dTLi036UwClSyoem7znLn"
 Subject: Re: [Nouveau] [PATCH v2] drm/nouveau: Remove file nouveau_fbcon.c
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -91,33 +76,71 @@ Cc: Jani Nikula <jani.nikula@intel.com>, nouveau@lists.freedesktop.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello Thomas,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------i72dTLi036UwClSyoem7znLn
+Content-Type: multipart/mixed; boundary="------------bLFrj1RrxfWfzDvvm90GRdxb";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Javier Martinez Canillas <javierm@redhat.com>, bskeggs@redhat.com,
+ kherbst@redhat.com, lyude@redhat.com, airlied@gmail.com, daniel@ffwll.ch
+Cc: Jani Nikula <jani.nikula@intel.com>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
+ Dave Airlie <airlied@redhat.com>, Sam Ravnborg <sam@ravnborg.org>
+Message-ID: <8197553c-19cc-5ece-a6d2-f7c97d8760fe@suse.de>
+Subject: Re: [PATCH v2] drm/nouveau: Remove file nouveau_fbcon.c
+References: <20230110123526.28770-1-tzimmermann@suse.de>
+ <da2e0a51-9f75-cf74-9244-fd7b82dda7c5@redhat.com>
+In-Reply-To: <da2e0a51-9f75-cf74-9244-fd7b82dda7c5@redhat.com>
 
-On 1/10/23 13:35, Thomas Zimmermann wrote:
-> Commit 4a16dd9d18a0 ("drm/nouveau/kms: switch to drm fbdev helpers")
-> converted nouveau to generic fbdev emulation. The driver's internal
-> implementation later got accidentally restored during a merge commit.
-> Remove the file from the driver. No functional changes.
-> 
-> v2:
-> 	* point Fixes tag to merge commit (Alex)
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
-> Fixes: 4e291f2f5853 ("Merge tag 'drm-misc-next-2022-11-10-1' of git://anongit.freedesktop.org/drm/drm-misc into drm-next")
+--------------bLFrj1RrxfWfzDvvm90GRdxb
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-I believe the fixes tag should be before the S-o-B ? At least that is
-the case in most commits and Documentation/process/maintainer-tip.rst
-example. But you could fix it just before applying.
+DQoNCkFtIDEwLjAxLjIzIHVtIDEzOjQ5IHNjaHJpZWIgSmF2aWVyIE1hcnRpbmV6IENhbmls
+bGFzOg0KPiBIZWxsbyBUaG9tYXMsDQo+IA0KPiBPbiAxLzEwLzIzIDEzOjM1LCBUaG9tYXMg
+WmltbWVybWFubiB3cm90ZToNCj4+IENvbW1pdCA0YTE2ZGQ5ZDE4YTAgKCJkcm0vbm91dmVh
+dS9rbXM6IHN3aXRjaCB0byBkcm0gZmJkZXYgaGVscGVycyIpDQo+PiBjb252ZXJ0ZWQgbm91
+dmVhdSB0byBnZW5lcmljIGZiZGV2IGVtdWxhdGlvbi4gVGhlIGRyaXZlcidzIGludGVybmFs
+DQo+PiBpbXBsZW1lbnRhdGlvbiBsYXRlciBnb3QgYWNjaWRlbnRhbGx5IHJlc3RvcmVkIGR1
+cmluZyBhIG1lcmdlIGNvbW1pdC4NCj4+IFJlbW92ZSB0aGUgZmlsZSBmcm9tIHRoZSBkcml2
+ZXIuIE5vIGZ1bmN0aW9uYWwgY2hhbmdlcy4NCj4+DQo+PiB2MjoNCj4+IAkqIHBvaW50IEZp
+eGVzIHRhZyB0byBtZXJnZSBjb21taXQgKEFsZXgpDQo+Pg0KPj4gU2lnbmVkLW9mZi1ieTog
+VGhvbWFzIFppbW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2UuZGU+DQo+PiBSZXZpZXdlZC1i
+eTogQWxleCBEZXVjaGVyIDxhbGV4YW5kZXIuZGV1Y2hlckBhbWQuY29tPg0KPj4gRml4ZXM6
+IDRlMjkxZjJmNTg1MyAoIk1lcmdlIHRhZyAnZHJtLW1pc2MtbmV4dC0yMDIyLTExLTEwLTEn
+IG9mIGdpdDovL2Fub25naXQuZnJlZWRlc2t0b3Aub3JnL2RybS9kcm0tbWlzYyBpbnRvIGRy
+bS1uZXh0IikNCj4gDQo+IEkgYmVsaWV2ZSB0aGUgZml4ZXMgdGFnIHNob3VsZCBiZSBiZWZv
+cmUgdGhlIFMtby1CID8gQXQgbGVhc3QgdGhhdCBpcw0KPiB0aGUgY2FzZSBpbiBtb3N0IGNv
+bW1pdHMgYW5kIERvY3VtZW50YXRpb24vcHJvY2Vzcy9tYWludGFpbmVyLXRpcC5yc3QNCj4g
+ZXhhbXBsZS4gQnV0IHlvdSBjb3VsZCBmaXggaXQganVzdCBiZWZvcmUgYXBwbHlpbmcuDQoN
+CkknbGwgZG8uDQoNCj4gDQo+IFRoZSBwYXRjaCBsb29rcyBnb29kIHRvIG1lLg0KPiANCj4g
+UmV2aWV3ZWQtYnk6IEphdmllciBNYXJ0aW5leiBDYW5pbGxhcyA8amF2aWVybUByZWRoYXQu
+Y29tPg0KPiANCg0KVGhhbmtzLg0KDQotLSANClRob21hcyBaaW1tZXJtYW5uDQpHcmFwaGlj
+cyBEcml2ZXIgRGV2ZWxvcGVyDQpTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdt
+YkgNCk1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQ0KKEhSQiAzNjgw
+OSwgQUcgTsO8cm5iZXJnKQ0KR2VzY2jDpGZ0c2bDvGhyZXI6IEl2byBUb3Rldg0K
 
-The patch looks good to me.
+--------------bLFrj1RrxfWfzDvvm90GRdxb--
 
-Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
+--------------i72dTLi036UwClSyoem7znLn
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
--- 
-Best regards,
+-----BEGIN PGP SIGNATURE-----
 
-Javier Martinez Canillas
-Core Platforms
-Red Hat
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmO9X9wFAwAAAAAACgkQlh/E3EQov+BN
+uQ//d9Bueh8SmP1ogYwL1ooS4/Wx6sNkLzDpcBK/yWQlLW6ygFpikb7oEdhMflY6eH0uyKuQLacR
+bCYBh7/k4G1qdqe/Fq/B3qzANRlzhmwsOYZJO6LMJF8lD/23HA3l75tBfc6LpMSzMEoeFMWwveSa
+mDN7nONSr01M4GIX8nd1GrL7u9HmOMoS6aadi4r4HotVwLL3/7jzB1UXQDX+2Jqob3UWjEosDhvX
+RZJXOfJ/MMfpvY3uKqvRoqnCa/3VKKDaAZkWaVpFf0xxZOVItCLW67fYNB3J7fpSaXZda7A3xXhr
+uG0lCv7gCCkiR+7ohWqwrM2hlWDVlcEcU0lVLd2gV9saT0P6l7meRDOELmkLoBjEd2PJ5MxoMHmu
+5CT1mQHPVB5NePQveoeF6uCork/Yu9qHN1TlJP6vw4faSVOnB+8EwLq3P4lfeG+VzlbIiCN0qGBA
+JZ/fPDCIz4DT8dCkpNrlpBavsh01DER+Wq/QqPP28oGJi7frcipjw43+2x6J1I7MnvqwQG5J75z9
+rAp+G2wNaXZk9JhaalxSNDN7YufPYsiJt9S5FqJTSwaKefM9JUpxggH/clNbvPS/t6pY8w1kFlEA
+3JoczqCyw8vUh01eeBruvHWSevl7xVpm09vIcMAuFI+Wd9dGqZ7+SVYpcQS2jsiGZSp6ELYtKf3Z
+oXk=
+=mFfK
+-----END PGP SIGNATURE-----
 
+--------------i72dTLi036UwClSyoem7znLn--
