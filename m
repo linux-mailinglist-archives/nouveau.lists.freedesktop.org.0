@@ -1,62 +1,68 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD00C6F6B47
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:09 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 999AB6F6B66
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2758410E3DA;
-	Thu,  4 May 2023 12:31:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 249F210E40F;
+	Thu,  4 May 2023 12:31:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pg1-x542.google.com (mail-pg1-x542.google.com
- [IPv6:2607:f8b0:4864:20::542])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D6C8C10E888;
- Thu, 12 Jan 2023 07:18:46 +0000 (UTC)
-Received: by mail-pg1-x542.google.com with SMTP id r18so12165459pgr.12;
- Wed, 11 Jan 2023 23:18:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UDSVYKBNF2+Uy+iLNC5V0cr7qiLHD6nPA7wwnGptmgE=;
- b=SijGG49NZHdI1KNM+q13z6V78bOY7XyDD6HAs474o0IjHEkHj57jWZBXi4RWTHkifD
- pY0kXWrxRJgkaaZMeRuiHTKfz41QF01vcK8r0DwR+a5Fp45ftlUykQqAtwDKVAp5inKA
- TgWzdgKzm6hU2Bojxi5+zYOPgEs1Triw2BYpBl51NwbGYBgA2UIvT+iPxk7Jm+zeWp7M
- DsZa+dSnR6q20RsGSLEot1ZrQAr04dx4ABX0zA4B2aQ1aInJ5bS39y5FMT6xMPzscQwR
- xkuAhZP0tzGvfWNu25b5AmnuK+5+U0C0P1fv8gjo95guqzF1+eGgDSxwR8cfUYHmoOT5
- Jwog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UDSVYKBNF2+Uy+iLNC5V0cr7qiLHD6nPA7wwnGptmgE=;
- b=OLjz18+9PkMgeE7RBz/ftU1AU8gK6wnku1D4fH1XtJ/LfD622RBgm/A4xAKhgT3ABS
- fpJxoj7HBIBasUxk5XdN4Wc02komchQK/uFlnvrvoWu2962iujhyzfu/HJWGZRVyGPtN
- SWPJarYre/8f48bBFS83TF1vTLH6p70CY53hed6W/yYC4ujIKyPhkIGBYINtKIcaeNAQ
- VJI2LOps4XIuFXLimZvAvVnnIITrT9VfSshFIlhIGgx3xGWTbFj+z5IqNgLXFoyWQ4Bq
- IFpFeG0t7OMl1KTi/gab1/3zJRwzuFjdh8e0BMliU3J/D76e9w1MsGLcMwimLro1hSzr
- uLOg==
-X-Gm-Message-State: AFqh2krOiA/ahpVKcm3Ub/aA5I6sBlXPSCLsLcuCCKkdBAdvXrNVKtSG
- y/snmzmI1HH3mfJ24wH4rTelFb61FQQYqQ==
-X-Google-Smtp-Source: AMrXdXuZYt2mUlQGkVh+q0eNdji128F4aLy4TNV26HWjm8aiwgOEHsgMnZSu+LHtNx6YoVKwe8NlSQ==
-X-Received: by 2002:a62:6d03:0:b0:582:998a:bed5 with SMTP id
- i3-20020a626d03000000b00582998abed5mr4990282pfc.23.1673507926535; 
- Wed, 11 Jan 2023 23:18:46 -0800 (PST)
-Received: from localhost.localdomain ([43.132.141.9])
- by smtp.gmail.com with ESMTPSA id
- e17-20020aa798d1000000b0058ba98f16a3sm289121pfm.171.2023.01.11.23.18.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Jan 2023 23:18:46 -0800 (PST)
-From: korantwork@gmail.com
-To: bskeggs@redhat.com, kherbst@redhat.com, airlied@gmail.com, daniel@ffwll.ch
-Date: Thu, 12 Jan 2023 15:18:42 +0800
-Message-Id: <20230112071842.819123-1-korantwork@gmail.com>
-X-Mailer: git-send-email 2.31.1
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 74D0910E358;
+ Thu, 12 Jan 2023 20:12:07 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 012FC3505B;
+ Thu, 12 Jan 2023 20:12:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1673554320; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Xar8pXmKetwoRnV4ZeNTqm/Qm8vEkDqxH/VsBrUwJNk=;
+ b=Z+QnjGBIIoGox++T8uxpUQvjwxAz6q1i5vREEJbrkwZPKoOy8ToZpO27py5ZoYo4/p/C+o
+ s3WY9Dc5j6Sk4gAKvKHJXAzgIx9YoRwsHm1ds4T5HJPwP8Hs/d5AbVHzRNTmfv1nb4uIFD
+ qOLMrP30AFQfX+YmjYRCKvEqijZfALU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1673554320;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Xar8pXmKetwoRnV4ZeNTqm/Qm8vEkDqxH/VsBrUwJNk=;
+ b=DD7Gn41GmJLkZ7NHm+O5eXrCtxRwkUWH0xOhxn/ovcpmvuLKpfTN0KrYt1kpfSYeGiN8su
+ HBv5WeoRW6mf+KBw==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 51EAE1377D;
+ Thu, 12 Jan 2023 20:11:59 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id sDo0E49pwGMGKgAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Thu, 12 Jan 2023 20:11:59 +0000
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
+ airlied@gmail.com, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, jani.nikula@linux.intel.com,
+ joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com,
+ tvrtko.ursulin@linux.intel.com, bskeggs@redhat.com, kherbst@redhat.com,
+ lyude@redhat.com, evan.quan@amd.com, jose.souza@intel.com
+Date: Thu, 12 Jan 2023 21:11:55 +0100
+Message-Id: <20230112201156.26849-3-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.39.0
+In-Reply-To: <20230112201156.26849-1-tzimmermann@suse.de>
+References: <20230112201156.26849-1-tzimmermann@suse.de>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 04 May 2023 12:31:33 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/mmu: Fix an UAF issue in NVKM
+Subject: [Nouveau] [PATCH v2 2/3] drm/fb-helper: Set framebuffer for
+ vga-switcheroo clients
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,39 +74,118 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, loydlv <loydlv@tencent.com>,
- Xinghui Li <korantli@tencent.com>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: dri-devel@lists.freedesktop.org, YiPeng Chai <YiPeng.Chai@amd.com>,
+ Hamza Mahfooz <hamza.mahfooz@amd.com>, Likun Gao <Likun.Gao@amd.com>,
+ Sam Ravnborg <sam@ravnborg.org>,
+ =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
+ Mario Limonciello <mario.limonciello@amd.com>,
+ Guchun Chen <guchun.chen@amd.com>,
+ Javier Martinez Canillas <javierm@redhat.com>, amd-gfx@lists.freedesktop.org,
+ Aurabindo Pillai <aurabindo.pillai@amd.com>,
+ Stanley Yang <Stanley.Yang@amd.com>, nouveau@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>,
+ =?UTF-8?q?Marek=20Ol=C5=A1=C3=A1k?= <marek.olsak@amd.com>,
+ Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
+ Jani Nikula <jani.nikula@intel.com>, Bokun Zhang <Bokun.Zhang@amd.com>,
+ intel-gfx@lists.freedesktop.org, "Tianci.Yin" <tianci.yin@amd.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Xiaojian Du <Xiaojian.Du@amd.com>, Felix Kuehling <Felix.Kuehling@amd.com>,
+ Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>, stable@vger.kernel.org,
+ Solomon Chiu <solomon.chiu@amd.com>,
+ Kai-Heng Feng <kai.heng.feng@canonical.com>,
+ Hawking Zhang <Hawking.Zhang@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Xinghui Li <korantli@tencent.com>
+Set the framebuffer info for drivers that support VGA switcheroo. Only
+affects the amdgpu and nouveau drivers, which use VGA switcheroo and
+generic fbdev emulation. For other drivers, this does nothing.
 
-In nvkm_mem_new_host, the mem is be alloced. And mem->memory is
-assigned to pmemory. During this process, the mem will be free if
-the error occurs. But the *pmemory still points to the &mem->memory
-which has been relased.Laterly, the nvkm_memory_unref will put the
-memory which points to the pmemory again.So, we set the *pmemory to
-NULL to avoid UAF issue.
+This fixes a potential regression in the console code. Both, amdgpu and
+nouveau, invoked vga_switcheroo_client_fb_set() from their internal fbdev
+code. But the call got lost when the drivers switched to the generic
+emulation.
 
-Reported-by: loydlv <loydlv@tencent.com>
-Signed-off-by: Xinghui Li <korantli@tencent.com>
+Fixes: 087451f372bf ("drm/amdgpu: use generic fb helpers instead of setting up AMD own's.")
+Fixes: 4a16dd9d18a0 ("drm/nouveau/kms: switch to drm fbdev helpers")
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: Javier Martinez Canillas <javierm@redhat.com>
+Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Cc: Jani Nikula <jani.nikula@intel.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Evan Quan <evan.quan@amd.com>
+Cc: Christian König <christian.koenig@amd.com>
+Cc: Alex Deucher <alexander.deucher@amd.com>
+Cc: Hawking Zhang <Hawking.Zhang@amd.com>
+Cc: Likun Gao <Likun.Gao@amd.com>
+Cc: "Christian König" <christian.koenig@amd.com>
+Cc: Stanley Yang <Stanley.Yang@amd.com>
+Cc: "Tianci.Yin" <tianci.yin@amd.com>
+Cc: Xiaojian Du <Xiaojian.Du@amd.com>
+Cc: Andrey Grodzovsky <andrey.grodzovsky@amd.com>
+Cc: YiPeng Chai <YiPeng.Chai@amd.com>
+Cc: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>
+Cc: Bokun Zhang <Bokun.Zhang@amd.com>
+Cc: Guchun Chen <guchun.chen@amd.com>
+Cc: Hamza Mahfooz <hamza.mahfooz@amd.com>
+Cc: Aurabindo Pillai <aurabindo.pillai@amd.com>
+Cc: Mario Limonciello <mario.limonciello@amd.com>
+Cc: Solomon Chiu <solomon.chiu@amd.com>
+Cc: Kai-Heng Feng <kai.heng.feng@canonical.com>
+Cc: Felix Kuehling <Felix.Kuehling@amd.com>
+Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
+Cc: "Marek Olšák" <marek.olsak@amd.com>
+Cc: Sam Ravnborg <sam@ravnborg.org>
+Cc: Hans de Goede <hdegoede@redhat.com>
+Cc: "Ville Syrjälä" <ville.syrjala@linux.intel.com>
+Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Cc: <stable@vger.kernel.org> # v5.17+
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/mmu/mem.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/gpu/drm/drm_fb_helper.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/mem.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/mem.c
-index 92e363dbbc5a..ab30eb1fc0a3 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/mem.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/mem.c
-@@ -185,6 +185,7 @@ nvkm_mem_new_host(struct nvkm_mmu *mmu, int type, u8 page, u64 size,
- 	} else
- 	if ( (ret = nvif_unvers(ret, &argv, &argc, args->vn))) {
- 		kfree(mem);
-+		*pmemory = NULL;
+diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
+index 427631706128..5e445c61252d 100644
+--- a/drivers/gpu/drm/drm_fb_helper.c
++++ b/drivers/gpu/drm/drm_fb_helper.c
+@@ -30,7 +30,9 @@
+ #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+ 
+ #include <linux/console.h>
++#include <linux/pci.h>
+ #include <linux/sysrq.h>
++#include <linux/vga_switcheroo.h>
+ 
+ #include <drm/drm_atomic.h>
+ #include <drm/drm_drv.h>
+@@ -1940,6 +1942,7 @@ static int drm_fb_helper_single_fb_probe(struct drm_fb_helper *fb_helper,
+ 					 int preferred_bpp)
+ {
+ 	struct drm_client_dev *client = &fb_helper->client;
++	struct drm_device *dev = fb_helper->dev;
+ 	struct drm_fb_helper_surface_size sizes;
+ 	int ret;
+ 
+@@ -1961,6 +1964,11 @@ static int drm_fb_helper_single_fb_probe(struct drm_fb_helper *fb_helper,
  		return ret;
- 	}
+ 
+ 	strcpy(fb_helper->fb->comm, "[fbcon]");
++
++	/* Set the fb info for vgaswitcheroo clients. Does nothing otherwise. */
++	if (dev_is_pci(dev->dev))
++		vga_switcheroo_client_fb_set(to_pci_dev(dev->dev), fb_helper->info);
++
+ 	return 0;
+ }
  
 -- 
-2.31.1
+2.39.0
 
