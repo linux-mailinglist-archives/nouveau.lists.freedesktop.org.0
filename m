@@ -1,45 +1,62 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D8BF6F6B6C
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:28 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id DD00C6F6B47
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C44D710E40A;
-	Thu,  4 May 2023 12:31:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2758410E3DA;
+	Thu,  4 May 2023 12:31:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 917 seconds by postgrey-1.36 at gabe;
- Fri, 30 Dec 2022 07:43:31 UTC
-Received: from m12.mail.163.com (m12.mail.163.com [123.126.96.234])
- by gabe.freedesktop.org (Postfix) with ESMTP id 24BE410E0D0
- for <nouveau@lists.freedesktop.org>; Fri, 30 Dec 2022 07:43:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=BZVBV
- RQVrTSn4BzI4JujaZV4qktmUeRF9eHZ5CKmHQM=; b=gJadKLaWCNs+R5dJcOlvU
- pXAWaVns4xKQJLjAOu+DCzyNHH7dhJ3pj3HBpKS6uyqCsb9Hz5V5ts2/uazefHoT
- t+TzH+ipfiNnAwWJ/KJaRUX3DCOcCdjr1SyFCyCIczbjTBIXcwvMrD8tlF5jnqtg
- Ercxuwa3ZpPBCNZF8HhgUQ=
-Received: from leanderwang-LC2.localdomain (unknown [111.206.145.21])
- by smtp16 (Coremail) with SMTP id MNxpCgCnzzsVk65jw+eMDQ--.25047S2;
- Fri, 30 Dec 2022 15:28:21 +0800 (CST)
-From: Zheng Wang <zyytlz.wz@163.com>
-To: bskeggs@redhat.com
-Date: Fri, 30 Dec 2022 15:27:58 +0800
-Message-Id: <20221230072758.443644-1-zyytlz.wz@163.com>
-X-Mailer: git-send-email 2.25.1
+Received: from mail-pg1-x542.google.com (mail-pg1-x542.google.com
+ [IPv6:2607:f8b0:4864:20::542])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D6C8C10E888;
+ Thu, 12 Jan 2023 07:18:46 +0000 (UTC)
+Received: by mail-pg1-x542.google.com with SMTP id r18so12165459pgr.12;
+ Wed, 11 Jan 2023 23:18:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UDSVYKBNF2+Uy+iLNC5V0cr7qiLHD6nPA7wwnGptmgE=;
+ b=SijGG49NZHdI1KNM+q13z6V78bOY7XyDD6HAs474o0IjHEkHj57jWZBXi4RWTHkifD
+ pY0kXWrxRJgkaaZMeRuiHTKfz41QF01vcK8r0DwR+a5Fp45ftlUykQqAtwDKVAp5inKA
+ TgWzdgKzm6hU2Bojxi5+zYOPgEs1Triw2BYpBl51NwbGYBgA2UIvT+iPxk7Jm+zeWp7M
+ DsZa+dSnR6q20RsGSLEot1ZrQAr04dx4ABX0zA4B2aQ1aInJ5bS39y5FMT6xMPzscQwR
+ xkuAhZP0tzGvfWNu25b5AmnuK+5+U0C0P1fv8gjo95guqzF1+eGgDSxwR8cfUYHmoOT5
+ Jwog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UDSVYKBNF2+Uy+iLNC5V0cr7qiLHD6nPA7wwnGptmgE=;
+ b=OLjz18+9PkMgeE7RBz/ftU1AU8gK6wnku1D4fH1XtJ/LfD622RBgm/A4xAKhgT3ABS
+ fpJxoj7HBIBasUxk5XdN4Wc02komchQK/uFlnvrvoWu2962iujhyzfu/HJWGZRVyGPtN
+ SWPJarYre/8f48bBFS83TF1vTLH6p70CY53hed6W/yYC4ujIKyPhkIGBYINtKIcaeNAQ
+ VJI2LOps4XIuFXLimZvAvVnnIITrT9VfSshFIlhIGgx3xGWTbFj+z5IqNgLXFoyWQ4Bq
+ IFpFeG0t7OMl1KTi/gab1/3zJRwzuFjdh8e0BMliU3J/D76e9w1MsGLcMwimLro1hSzr
+ uLOg==
+X-Gm-Message-State: AFqh2krOiA/ahpVKcm3Ub/aA5I6sBlXPSCLsLcuCCKkdBAdvXrNVKtSG
+ y/snmzmI1HH3mfJ24wH4rTelFb61FQQYqQ==
+X-Google-Smtp-Source: AMrXdXuZYt2mUlQGkVh+q0eNdji128F4aLy4TNV26HWjm8aiwgOEHsgMnZSu+LHtNx6YoVKwe8NlSQ==
+X-Received: by 2002:a62:6d03:0:b0:582:998a:bed5 with SMTP id
+ i3-20020a626d03000000b00582998abed5mr4990282pfc.23.1673507926535; 
+ Wed, 11 Jan 2023 23:18:46 -0800 (PST)
+Received: from localhost.localdomain ([43.132.141.9])
+ by smtp.gmail.com with ESMTPSA id
+ e17-20020aa798d1000000b0058ba98f16a3sm289121pfm.171.2023.01.11.23.18.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Jan 2023 23:18:46 -0800 (PST)
+From: korantwork@gmail.com
+To: bskeggs@redhat.com, kherbst@redhat.com, airlied@gmail.com, daniel@ffwll.ch
+Date: Thu, 12 Jan 2023 15:18:42 +0800
+Message-Id: <20230112071842.819123-1-korantwork@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: MNxpCgCnzzsVk65jw+eMDQ--.25047S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7GF15Gr48ur17XrW5WryxGrg_yoW8JF4rpF
- 45uryYvryxuF4Ut340vFy8ur90kan2yFWIk34YvasIvwnxZ3y0vFW5AryUGryrZw4xWw1a
- qr4DGr1fWry5ArJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0ziaZXrUUUUU=
-X-Originating-IP: [111.206.145.21]
-X-CM-SenderInfo: h2113zf2oz6qqrwthudrp/xtbCbxTnU2BbEN8pBAAAsW
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:35 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/mmu: fix Use after Free bug in
- nvkm_vmm_node_split
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:33 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau/mmu: Fix an UAF issue in NVKM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,42 +68,39 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alex000young@gmail.com, security@kernel.org, nouveau@lists.freedesktop.org,
- hackerzheng666@gmail.com, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, daniel@ffwll.ch, Zheng Wang <zyytlz.wz@163.com>
+Cc: nouveau@lists.freedesktop.org, loydlv <loydlv@tencent.com>,
+ Xinghui Li <korantli@tencent.com>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Here is a function call chain.
-nvkm_vmm_pfn_map->nvkm_vmm_pfn_split_merge->nvkm_vmm_node_split
-If nvkm_vma_tail return NULL in nvkm_vmm_node_split, it will
-finally invoke nvkm_vmm_node_merge->nvkm_vmm_node_delete, which
-will free the vma. However, nvkm_vmm_pfn_map didn't notice that.
-It goes into next label and UAF happens.
+From: Xinghui Li <korantli@tencent.com>
 
-Fix it by returning the return-value of nvkm_vmm_node_merge
-instead of NULL.
+In nvkm_mem_new_host, the mem is be alloced. And mem->memory is
+assigned to pmemory. During this process, the mem will be free if
+the error occurs. But the *pmemory still points to the &mem->memory
+which has been relased.Laterly, the nvkm_memory_unref will put the
+memory which points to the pmemory again.So, we set the *pmemory to
+NULL to avoid UAF issue.
 
-Signed-off-by: Zheng Wang <zyytlz.wz@163.com>
+Reported-by: loydlv <loydlv@tencent.com>
+Signed-off-by: Xinghui Li <korantli@tencent.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/mem.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-index ae793f400ba1..84d6fc87b2e8 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-@@ -937,8 +937,8 @@ nvkm_vmm_node_split(struct nvkm_vmm *vmm,
- 	if (vma->size != size) {
- 		struct nvkm_vma *tmp;
- 		if (!(tmp = nvkm_vma_tail(vma, vma->size - size))) {
--			nvkm_vmm_node_merge(vmm, prev, vma, NULL, vma->size);
--			return NULL;
-+			tmp = nvkm_vmm_node_merge(vmm, prev, vma, NULL, vma->size);
-+			return tmp;
- 		}
- 		tmp->part = true;
- 		nvkm_vmm_node_insert(vmm, tmp);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/mem.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/mem.c
+index 92e363dbbc5a..ab30eb1fc0a3 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/mem.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/mem.c
+@@ -185,6 +185,7 @@ nvkm_mem_new_host(struct nvkm_mmu *mmu, int type, u8 page, u64 size,
+ 	} else
+ 	if ( (ret = nvif_unvers(ret, &argv, &argc, args->vn))) {
+ 		kfree(mem);
++		*pmemory = NULL;
+ 		return ret;
+ 	}
+ 
 -- 
-2.25.1
+2.31.1
 
