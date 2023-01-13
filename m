@@ -1,61 +1,69 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39F87668745
-	for <lists+nouveau@lfdr.de>; Thu, 12 Jan 2023 23:49:46 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D53166881A
+	for <lists+nouveau@lfdr.de>; Fri, 13 Jan 2023 01:08:25 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8475F10E958;
-	Thu, 12 Jan 2023 22:49:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A61B910E96D;
+	Fri, 13 Jan 2023 00:08:23 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3C39110E952
- for <nouveau@lists.freedesktop.org>; Thu, 12 Jan 2023 22:49:36 +0000 (UTC)
-Received: by mail-pf1-x430.google.com with SMTP id 200so8729992pfx.7
- for <nouveau@lists.freedesktop.org>; Thu, 12 Jan 2023 14:49:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SWHx2ArszmWOMvOmL9HMTqeLRyXml8x4aecIK4J1xfM=;
- b=T2d6xQChtkuCRaI870QbrNhFwwVCxfB/ltmBQERjU/+oJfBXhY/cz1RHeYyjIdraiI
- 0RZZ1XMlhfo7B3NY4rKRaaxKLRWCZVgiVPgtgr17CgwOgHSIpYEu4zv+lpmlbvU88r6e
- jK9fILTLJRz6ovtajskEvsL9o5FUM/PTks/iA=
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6BB5910E96D
+ for <nouveau@lists.freedesktop.org>; Fri, 13 Jan 2023 00:08:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1673568500;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=p2cO1wKbX3TvwZAzMCAQ2O32nWT2kMj1ms6I+jy1HIc=;
+ b=f1pCC6AtRqFmvlYrCMIwpmtW2+s9Bs01wT/oA3LZR6BaWQ/O5dZivXUE6NxJj44hSho88O
+ r/9OWSkU2x/QA9Eu1SZyb9ResFpwIVwtV65CF7tZZQrO9u0gXOUfDAB1a4sprEaei8j7Yo
+ M5iLAiB35fd20TP4/LsLdQdvwnlFjmw=
+Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
+ [209.85.167.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-91-xFKnxbMaMqW_Cg4xav6WBg-1; Thu, 12 Jan 2023 19:07:18 -0500
+X-MC-Unique: xFKnxbMaMqW_Cg4xav6WBg-1
+Received: by mail-lf1-f71.google.com with SMTP id
+ a20-20020ac25214000000b004b57756f937so7524445lfl.3
+ for <nouveau@lists.freedesktop.org>; Thu, 12 Jan 2023 16:07:18 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SWHx2ArszmWOMvOmL9HMTqeLRyXml8x4aecIK4J1xfM=;
- b=EnJAE2j3XHmYB8doBDJghDKd7Mg1WUdTq6eqmQw9RlSZUHcRFnP2TXySsoraXVxtQW
- 17g6WeaURr0xBxat6JSid4TBax2dLHn0YofBm75EuvhY+Vapa8UuszI1EVnFNAxW6X28
- wLv9ki05SOPkzoPHZqBzVKQvWbapWtW1fdDA3ndsxqMlam46RGPJ1E5EdLXXUabTGLiV
- AMYp5Nav06WF4d/Kblmvxrn1kdVj0jQ/QoAgcM1QbVx/kFNDGtXHXxiNQneBJbMeEDdO
- t/xyuRd/IaKfeWkPMja+u+8k75K6pbZFrT0idcoIb2P4Y9Vq/a9tWREVW7Y+5kM6hkPh
- YZdw==
-X-Gm-Message-State: AFqh2krRUma/8KssKHyDFc6ojo+xwd8x/9X3n3e19qe1PwX1o0SKnPR1
- OmGupxM+WSqdjPlKfqYVhsF+RQ==
-X-Google-Smtp-Source: AMrXdXtrkkqEGE9cFZZR5OGma23Ht+dZor8UGc1LpcFDNVZF1aHL808lC/1ioJhhRsAmf4y/+tUmZw==
-X-Received: by 2002:aa7:99c4:0:b0:589:69ec:c6bc with SMTP id
- v4-20020aa799c4000000b0058969ecc6bcmr8245382pfi.21.1673563775884; 
- Thu, 12 Jan 2023 14:49:35 -0800 (PST)
-Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
- by smtp.gmail.com with ESMTPSA id
- x14-20020aa79a4e000000b005811c421e6csm12220412pfj.162.2023.01.12.14.49.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jan 2023 14:49:35 -0800 (PST)
-Date: Thu, 12 Jan 2023 14:49:34 -0800
-From: Kees Cook <keescook@chromium.org>
-To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
-Message-ID: <202301121449.EE489AA@keescook>
-References: <Y7zB0q2pr7lEpHGs@work>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=p2cO1wKbX3TvwZAzMCAQ2O32nWT2kMj1ms6I+jy1HIc=;
+ b=m79BNrgr8WOSb0U2KopvZh6dVme5qApm9CkNmkdP/kJkLGH1YDx27Uakc2whu52G2g
+ Thi8HbkSUcw4v/jR7+O/y9CXhO2kpOtexZ9ZfraeK4IKkBp88l2nJahCc5zWmz2nZ6dL
+ RJOaUbCOgqBBVybV1JnQoyFs4yzxOl+o+4Hakqu0v8tReEbMBE/QIEI3eCG+IF1X20LB
+ cLsVR8C20tusyk9hdXAAEoZ6YaNqu3396VeBixiTi77Ls8LBcV7fIk1pOJRIA1C3Zsid
+ +gM3WFwfE9bnLROo4ZwDcZZh61OtXihpNPVvwXiD0OI7jal4gFo7L6Gd5JwWJv0qR+Xg
+ OnRA==
+X-Gm-Message-State: AFqh2kpa9MQ5kbprLY8YcIXWI5XFVSYiTUHZrRcz8H+22RTq16fPOyIE
+ KkwthAXRgSR3aK4oW398+Ok6je32fOpRLHgxugSeFYe+FoNXMDbGhoZWTuFmZ2hT/dOFSCceRmV
+ ZwJOQgMAqW5srpSxkK8dWiZ+TIBOQSzBFaXpRS7GmNQ==
+X-Received: by 2002:a05:6512:4db:b0:4b5:9d87:14f6 with SMTP id
+ w27-20020a05651204db00b004b59d8714f6mr7795197lfq.117.1673568434531; 
+ Thu, 12 Jan 2023 16:07:14 -0800 (PST)
+X-Google-Smtp-Source: AMrXdXsTWpo1wW26DwcUuz9LybelGGMdgSVX31Xcl1dpvO+Y93RPYOquBKbMQ+ckwBuQxXhYcTqQelvPYV65eUsdKN4=
+X-Received: by 2002:a05:6512:4db:b0:4b5:9d87:14f6 with SMTP id
+ w27-20020a05651204db00b004b59d8714f6mr7795190lfq.117.1673568434219; Thu, 12
+ Jan 2023 16:07:14 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Y7zB0q2pr7lEpHGs@work>
-Subject: Re: [Nouveau] [PATCH][next] drm/nouveau/nvkm: Replace zero-length
- array with flexible-array member
+References: <20230112133858.17087-1-tzimmermann@suse.de>
+In-Reply-To: <20230112133858.17087-1-tzimmermann@suse.de>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Fri, 13 Jan 2023 01:07:02 +0100
+Message-ID: <CACO55tvBPS9yYM_TdijN0EddsLW69FXgURpXo9_LBT3xh_4a9A@mail.gmail.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Remove support for legacy
+ contexts/buffers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,28 +75,271 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, linux-hardening@vger.kernel.org
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, bskeggs@redhat.com,
+ daniel@ffwll.ch
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Jan 09, 2023 at 07:39:30PM -0600, Gustavo A. R. Silva wrote:
-> Zero-length arrays are deprecated[1] and we are moving towards
-> adopting C99 flexible-array members instead. So, replace zero-length
-> array declaration in struct nvfw_hs_load_header_v2 with flex-array
-> member.
-> 
-> This helps with the ongoing efforts to tighten the FORTIFY_SOURCE
-> routines on memcpy() and help us make progress towards globally
-> enabling -fstrict-flex-arrays=3 [2].
-> 
-> Link: https://www.kernel.org/doc/html/latest/process/deprecated.html#zero-length-and-one-element-arrays [1]
-> Link: https://gcc.gnu.org/pipermail/gcc-patches/2022-October/602902.html [2]
-> Link: https://github.com/KSPP/linux/issues/78
-> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+On Thu, Jan 12, 2023 at 2:39 PM Thomas Zimmermann <tzimmermann@suse.de> wrote:
+>
+> Remove nouveau's support for legacy contexts and buffers. It was
+> required by libdrm earlier than 2.4.33, released in March 2012. A
+> previous attempt in 2013 to remove the functionality [1] had to be
+> reverted [2] as there were still users left. Libdrm 2.4.33 is now
+> almost 11 years old and it is time for userspace to move on.
+>
+> With the nouveau code gone, we can also remove the driver-feature
+> bit DRIVER_KMS_LEGACY_CONTEXT.
+>
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=7c510133d93dd6f15ca040733ba7b2891ed61fd1 # 1
+> Link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=c21eb21cb50d58e7cbdcb8b9e7ff68b85cfa5095 # 2
 
-Reviewed-by: Kees Cook <keescook@chromium.org>
+Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
--- 
-Kees Cook
+let's hope there are no users left :)
+
+
+> ---
+>  drivers/gpu/drm/drm_bufs.c            | 12 +++------
+>  drivers/gpu/drm/drm_context.c         | 36 +++++++++------------------
+>  drivers/gpu/drm/nouveau/Kconfig       | 12 ---------
+>  drivers/gpu/drm/nouveau/nouveau_drm.c | 10 +++-----
+>  include/drm/drm_drv.h                 |  7 ------
+>  5 files changed, 19 insertions(+), 58 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/drm_bufs.c b/drivers/gpu/drm/drm_bufs.c
+> index fcca21e8efac..86700560fea2 100644
+> --- a/drivers/gpu/drm/drm_bufs.c
+> +++ b/drivers/gpu/drm/drm_bufs.c
+> @@ -423,8 +423,7 @@ int drm_legacy_addmap_ioctl(struct drm_device *dev, void *data,
+>         if (!(capable(CAP_SYS_ADMIN) || map->type == _DRM_AGP || map->type == _DRM_SHM))
+>                 return -EPERM;
+>
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return -EOPNOTSUPP;
+>
+>         err = drm_addmap_core(dev, map->offset, map->size, map->type,
+> @@ -469,8 +468,7 @@ int drm_legacy_getmap_ioctl(struct drm_device *dev, void *data,
+>         int idx;
+>         int i;
+>
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return -EOPNOTSUPP;
+>
+>         idx = map->offset;
+> @@ -570,8 +568,7 @@ EXPORT_SYMBOL(drm_legacy_rmmap_locked);
+>
+>  void drm_legacy_rmmap(struct drm_device *dev, struct drm_local_map *map)
+>  {
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return;
+>
+>         mutex_lock(&dev->struct_mutex);
+> @@ -628,8 +625,7 @@ int drm_legacy_rmmap_ioctl(struct drm_device *dev, void *data,
+>         struct drm_map_list *r_list;
+>         int ret;
+>
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return -EOPNOTSUPP;
+>
+>         mutex_lock(&dev->struct_mutex);
+> diff --git a/drivers/gpu/drm/drm_context.c b/drivers/gpu/drm/drm_context.c
+> index c6e6a3e7219a..a0fc779e5e1e 100644
+> --- a/drivers/gpu/drm/drm_context.c
+> +++ b/drivers/gpu/drm/drm_context.c
+> @@ -59,8 +59,7 @@ struct drm_ctx_list {
+>   */
+>  void drm_legacy_ctxbitmap_free(struct drm_device * dev, int ctx_handle)
+>  {
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return;
+>
+>         mutex_lock(&dev->struct_mutex);
+> @@ -97,8 +96,7 @@ static int drm_legacy_ctxbitmap_next(struct drm_device * dev)
+>   */
+>  void drm_legacy_ctxbitmap_init(struct drm_device * dev)
+>  {
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return;
+>
+>         idr_init(&dev->ctx_idr);
+> @@ -114,8 +112,7 @@ void drm_legacy_ctxbitmap_init(struct drm_device * dev)
+>   */
+>  void drm_legacy_ctxbitmap_cleanup(struct drm_device * dev)
+>  {
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return;
+>
+>         mutex_lock(&dev->struct_mutex);
+> @@ -136,8 +133,7 @@ void drm_legacy_ctxbitmap_flush(struct drm_device *dev, struct drm_file *file)
+>  {
+>         struct drm_ctx_list *pos, *tmp;
+>
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return;
+>
+>         mutex_lock(&dev->ctxlist_mutex);
+> @@ -182,8 +178,7 @@ int drm_legacy_getsareactx(struct drm_device *dev, void *data,
+>         struct drm_local_map *map;
+>         struct drm_map_list *_entry;
+>
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return -EOPNOTSUPP;
+>
+>         mutex_lock(&dev->struct_mutex);
+> @@ -230,8 +225,7 @@ int drm_legacy_setsareactx(struct drm_device *dev, void *data,
+>         struct drm_local_map *map = NULL;
+>         struct drm_map_list *r_list = NULL;
+>
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return -EOPNOTSUPP;
+>
+>         mutex_lock(&dev->struct_mutex);
+> @@ -335,8 +329,7 @@ int drm_legacy_resctx(struct drm_device *dev, void *data,
+>         struct drm_ctx ctx;
+>         int i;
+>
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return -EOPNOTSUPP;
+>
+>         if (res->count >= DRM_RESERVED_CONTEXTS) {
+> @@ -370,8 +363,7 @@ int drm_legacy_addctx(struct drm_device *dev, void *data,
+>         struct drm_ctx *ctx = data;
+>         int tmp_handle;
+>
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return -EOPNOTSUPP;
+>
+>         tmp_handle = drm_legacy_ctxbitmap_next(dev);
+> @@ -419,8 +411,7 @@ int drm_legacy_getctx(struct drm_device *dev, void *data,
+>  {
+>         struct drm_ctx *ctx = data;
+>
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return -EOPNOTSUPP;
+>
+>         /* This is 0, because we don't handle any context flags */
+> @@ -445,8 +436,7 @@ int drm_legacy_switchctx(struct drm_device *dev, void *data,
+>  {
+>         struct drm_ctx *ctx = data;
+>
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return -EOPNOTSUPP;
+>
+>         DRM_DEBUG("%d\n", ctx->handle);
+> @@ -469,8 +459,7 @@ int drm_legacy_newctx(struct drm_device *dev, void *data,
+>  {
+>         struct drm_ctx *ctx = data;
+>
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return -EOPNOTSUPP;
+>
+>         DRM_DEBUG("%d\n", ctx->handle);
+> @@ -495,8 +484,7 @@ int drm_legacy_rmctx(struct drm_device *dev, void *data,
+>  {
+>         struct drm_ctx *ctx = data;
+>
+> -       if (!drm_core_check_feature(dev, DRIVER_KMS_LEGACY_CONTEXT) &&
+> -           !drm_core_check_feature(dev, DRIVER_LEGACY))
+> +       if (!drm_core_check_feature(dev, DRIVER_LEGACY))
+>                 return -EOPNOTSUPP;
+>
+>         DRM_DEBUG("%d\n", ctx->handle);
+> diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kconfig
+> index 03d12caf9e26..ee92890d3266 100644
+> --- a/drivers/gpu/drm/nouveau/Kconfig
+> +++ b/drivers/gpu/drm/nouveau/Kconfig
+> @@ -24,18 +24,6 @@ config DRM_NOUVEAU
+>         help
+>           Choose this option for open-source NVIDIA support.
+>
+> -config NOUVEAU_LEGACY_CTX_SUPPORT
+> -       bool "Nouveau legacy context support"
+> -       depends on DRM_NOUVEAU
+> -       select DRM_LEGACY
+> -       default y
+> -       help
+> -         There was a version of the nouveau DDX that relied on legacy
+> -         ctx ioctls not erroring out. But that was back in time a long
+> -         ways, so offer a way to disable it now. For uapi compat with
+> -         old nouveau ddx this should be on by default, but modern distros
+> -         should consider turning it off.
+> -
+>  config NOUVEAU_PLATFORM_DRIVER
+>         bool "Nouveau (NVIDIA) SoC GPUs"
+>         depends on DRM_NOUVEAU && ARCH_TEGRA
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> index 80f154b6adab..80562177b581 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> @@ -1221,13 +1221,9 @@ nouveau_driver_fops = {
+>
+>  static struct drm_driver
+>  driver_stub = {
+> -       .driver_features =
+> -               DRIVER_GEM | DRIVER_MODESET | DRIVER_RENDER
+> -#if defined(CONFIG_NOUVEAU_LEGACY_CTX_SUPPORT)
+> -               | DRIVER_KMS_LEGACY_CONTEXT
+> -#endif
+> -               ,
+> -
+> +       .driver_features = DRIVER_GEM |
+> +                          DRIVER_MODESET |
+> +                          DRIVER_RENDER,
+>         .open = nouveau_drm_open,
+>         .postclose = nouveau_drm_postclose,
+>         .lastclose = nouveau_vga_lastclose,
+> diff --git a/include/drm/drm_drv.h b/include/drm/drm_drv.h
+> index d7c521e8860f..1d76d0686b03 100644
+> --- a/include/drm/drm_drv.h
+> +++ b/include/drm/drm_drv.h
+> @@ -149,13 +149,6 @@ enum drm_driver_feature {
+>          * Legacy irq support. Only for legacy drivers. Do not use.
+>          */
+>         DRIVER_HAVE_IRQ                 = BIT(30),
+> -       /**
+> -        * @DRIVER_KMS_LEGACY_CONTEXT:
+> -        *
+> -        * Used only by nouveau for backwards compatibility with existing
+> -        * userspace.  Do not use.
+> -        */
+> -       DRIVER_KMS_LEGACY_CONTEXT       = BIT(31),
+>  };
+>
+>  /**
+> --
+> 2.39.0
+>
+
