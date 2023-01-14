@@ -1,43 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8671C6F6B4E
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:13 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E6C5D6F6B36
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:31:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E6C4B10E3EB;
-	Thu,  4 May 2023 12:31:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 20E1610E39B;
+	Thu,  4 May 2023 12:31:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 3380 seconds by postgrey-1.36 at gabe;
- Sat, 14 Jan 2023 15:37:17 UTC
-Received: from msg-2.mailo.com (msg-2.mailo.com [213.182.54.12])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4532410E09B;
- Sat, 14 Jan 2023 15:37:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=mailo.com; s=mailo;
- t=1673710631; bh=KogKNHMpUirQdlYHqz97sT5yAlJfrB255+mRF0Ww8bI=;
- h=X-EA-Auth:Date:From:To:Cc:Subject:Message-ID:MIME-Version:
- Content-Type;
- b=WhKmH88QZuUcXFo3HjMde/zVzqwzEh6WGsCf/7ISc1EGoxqaMOmgrmR+/OnaW4yJ0
- 2z5GrkNWKzEImw7QXnC6xHjdZVZIwcK4zFP3j3UGgfVK/C2gS1PnDimqodML6Gx0cS
- R96SWyXIAGPLOITVdczzuqdNBWAu/hPH2Zg6NgrA=
-Received: by b-2.in.mailobj.net [192.168.90.12] with ESMTP
- via ip-206.mailobj.net [213.182.55.206]
- Sat, 14 Jan 2023 16:37:11 +0100 (CET)
-X-EA-Auth: HAkDNYaf/Qoz2wAnWHZlY7hQmL3lfRcwGOu8m6pRUI7ykY2CduksijrXj7BPIlfeLG6NIMfyJljLygQ5BUWPXRD0c8d5V8P5
-Date: Sat, 14 Jan 2023 21:07:05 +0530
-From: Deepak R Varma <drv@mailo.com>
-To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Message-ID: <Y8LMIWe2vbFTp1rf@ubun2204.myguest.virtualbox.org>
+Received: from smtp1.tecnico.ulisboa.pt (smtp1.tecnico.ulisboa.pt
+ [193.136.128.21])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1C01610E0A1;
+ Sat, 14 Jan 2023 16:01:01 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTP id E8468600086B;
+ Sat, 14 Jan 2023 16:00:55 +0000 (WET)
+X-Virus-Scanned: by amavisd-new-2.11.0 (20160426) (Debian) at
+ tecnico.ulisboa.pt
+Received: from smtp1.tecnico.ulisboa.pt ([127.0.0.1])
+ by localhost (smtp1.tecnico.ulisboa.pt [127.0.0.1]) (amavisd-new, port 10025)
+ with LMTP id xTKXyWXOQpbs; Sat, 14 Jan 2023 16:00:53 +0000 (WET)
+Received: from mail1.tecnico.ulisboa.pt (mail1.ist.utl.pt
+ [IPv6:2001:690:2100:1::b3dd:b9ac])
+ by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTPS id 77ED46000868;
+ Sat, 14 Jan 2023 16:00:53 +0000 (WET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tecnico.ulisboa.pt;
+ s=mail; t=1673712053;
+ bh=RZU58FeLyRmpVsu+m1wZmQJWulTa9BOooLU8AzAOYRQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=gxS1l7bAin500lDfFN68KnKCFACBeuW1O0mIxDiHof35CCJRwhMnWnR/B/udQJU1l
+ 56W9yezlyN7kzFLhDUJlTKCj/FzKKCzaopWAy9EILTsltcmDtNfn/cuH5nPKqwbynr
+ 8FtQsNA8StHxguSO7574xCJNvzrQB5MSqaeJbwe4=
+Received: from wslaptop (unknown [IPv6:2001:818:dcb5:dc00:d990:b664:f16:4cb2])
+ (Authenticated sender: ist187313)
+ by mail1.tecnico.ulisboa.pt (Postfix) with ESMTPSA id B5F1F36008B;
+ Sat, 14 Jan 2023 16:00:52 +0000 (WET)
+Date: Sat, 14 Jan 2023 15:58:37 +0000
+From: Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>
+To: Linux regressions mailing list <regressions@lists.linux.dev>
+Message-ID: <20230114155837.edqhigueohrkd3os@wslaptop>
+References: <20221228144914.z7t7a4fdwvbblnak@wslaptop>
+ <c32ea02c-d706-ea2f-aa13-660b8db958ef@leemhuis.info>
+ <481f19ba-da7e-6900-0bb2-64ba92d59ce6@leemhuis.info>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:32 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/gr/gf100-: remove unnecessary
- semicolon
+In-Reply-To: <481f19ba-da7e-6900-0bb2-64ba92d59ce6@leemhuis.info>
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:35 +0000
+Subject: Re: [Nouveau] [REGRESSION] GM20B probe fails after commit
+ 2541626cfb79
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -49,34 +61,21 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Praveen Kumar <kumarpraveen@linux.microsoft.com>,
- Saurabh Singh Sengar <ssengar@microsoft.com>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ bskeggs@redhat.com, Daniel Vetter <daniel@ffwll.ch>, airlied@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Remove extra unnecessary semicolon. Issue identified using
-semcolon.cocci Coccinelle semantic patch.
+On Fri, Jan 13, 2023 at 02:19:06PM +0100, Linux kernel regression tracking (Thorsten Leemhuis) wrote:
+> Diogo, for that it would be really helpful to known: is the issue still
+> happening with latest mainline? Is it possible to revert 2541626cfb79
+> easily? And if so: do things work afterwards again?
 
-Signed-off-by: Deepak R Varma <drv@mailo.com>
----
- drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hello,
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
-index 5f20079c3660..204516891ece 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
-@@ -420,7 +420,7 @@ gf100_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
- 			return ret;
- 	} else {
- 		ret = nvkm_memory_map(gr->attrib_cb, 0, chan->vmm, chan->attrib_cb,
--				      &args, sizeof(args));;
-+				      &args, sizeof(args));
- 		if (ret)
- 			return ret;
- 	}
--- 
-2.34.1
+Thank you for your attention to this! I have checked the latest mainline and
+it still occurs. As for reverting, I think it is complicated to do,
+since this commit is a part of a larger rework, but I'm afraid I don't know
+enough about the code to give a proper answer.
 
-
-
+Diogo
