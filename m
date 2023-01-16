@@ -1,69 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E96EF66C26B
-	for <lists+nouveau@lfdr.de>; Mon, 16 Jan 2023 15:41:47 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D57166C66C
+	for <lists+nouveau@lfdr.de>; Mon, 16 Jan 2023 17:20:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5FED710E44D;
-	Mon, 16 Jan 2023 14:41:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D21D610E2BE;
+	Mon, 16 Jan 2023 16:20:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C6BE910E44D
- for <nouveau@lists.freedesktop.org>; Mon, 16 Jan 2023 14:41:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1673880103;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=NOdvTIf1x9tQkJ1orPjPgaQ6ppXgSvc8Pon55J0dM/o=;
- b=h6BpwuVnDAj/m1HKKGRIYV13TK1ZazKwRMVE58UgX8Z2J1vPigDjHTtnq58KjXitKg2kXG
- CVfvBCtTTRzlIe18vFK+Usn3m/lm9jqRE3KEsE9ZqLGnDiGNOgWobubDRs803CxPzOcZS8
- CM26zgjaGtSgrgv7ibehLvRpQLhECN8=
-Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
- [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-411-eQIhcwxqNv6TdeB5yQvwig-1; Mon, 16 Jan 2023 09:41:42 -0500
-X-MC-Unique: eQIhcwxqNv6TdeB5yQvwig-1
-Received: by mail-lj1-f200.google.com with SMTP id
- a31-20020a2ebe9f000000b0028b64076c42so2349909ljr.22
- for <nouveau@lists.freedesktop.org>; Mon, 16 Jan 2023 06:41:42 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NOdvTIf1x9tQkJ1orPjPgaQ6ppXgSvc8Pon55J0dM/o=;
- b=ierPK45KLTxQw2A5Za3brcCzFwhdceBmE38dlGx8kjOUhFsiNKYHAbkxuOEb98U5AU
- VtYpjnXGelCF2y+TyqQHq6mPlXWJTN43eMLOPYiw6yvaYdbILVYwoHJhs64g1B7T8iGc
- iGgLQfrqnWqmab9s4EvdkiIszOHVEy6CGXUuiifzRCMWFNw9krJUhlSz1T+Eya6hRoHC
- DrIMyeeQ+Pf6C0sOQAdfxEbX2/kCFfhnaJ2W7FqVVflsSEjYt/XX8JzNZ97wWk5Tut4L
- 7ZawRF1B6mLeK1JqHxZ7wjRw6nRVE3Md+KnJycep8JDvSJJg1NiwRCvTfybqULwOXJC6
- zEfw==
-X-Gm-Message-State: AFqh2krNOT/Pn8k+40zxyDWMfkNSHfE+i/KGEUBwAonJIodyjQalJYNd
- 3Z8303VNDNIhA1CruyAyHSUiJNeQiyHsAqesploDWC7RWJSUYfnBQRN4lSIZZajueqP9Le4nW9d
- ob+4lyqCrezuoXR08gRBoO/rHOjFN5pBrG9k/GzLLzw==
-X-Received: by 2002:a2e:a278:0:b0:276:4462:2d20 with SMTP id
- k24-20020a2ea278000000b0027644622d20mr2384ljm.19.1673880101123; 
- Mon, 16 Jan 2023 06:41:41 -0800 (PST)
-X-Google-Smtp-Source: AMrXdXt9sY30K02/f5zO7kr1kC+X6IUBM2xn7/y8ozy2/Ri3RfIQeuDJUUrDrh1bQKXOq8bdG47xKQOTvByre+UJEzQ=
-X-Received: by 2002:a2e:a278:0:b0:276:4462:2d20 with SMTP id
- k24-20020a2ea278000000b0027644622d20mr2374ljm.19.1673880100820; Mon, 16 Jan
- 2023 06:41:40 -0800 (PST)
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EF79D10E2BB;
+ Mon, 16 Jan 2023 16:20:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1673886003; x=1705422003;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version;
+ bh=3kP3+Z/fGb1HUUCGydhyc9dGWiwyXHQhkXAlft+qAzY=;
+ b=O+jGBDv1wkdgNz+iubPM+2zPPetH3eq+JCKtA89kuVZSJuBNoTN/VTAB
+ w0M9Irjn8Qj6fm+rfTSKrzhNxovvcwtRA/rfMDbV3Xqiz8IhoysYavdN1
+ rPG0FYwxRAMwYqFc6hg0QfRzbGHpRmoIlzJGp2ojb8klh4niZZbrAaNh9
+ HwfrbED7WTMnB2zoR8E+ccNx/Zx/fMCittugQ6CzagJWIasd0usmnUkIg
+ Kk8t0DeHjjItBhypIpqA/AWyFAPr9G7sRZT/YMIAEgQGKnl1wisp178t4
+ 5WKIuUqQdZwxnQXuqBpMj/YFWPW34Z1dCNnnWCclia1wU9yiT44eUWnQp w==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10592"; a="324558189"
+X-IronPort-AV: E=Sophos;i="5.97,221,1669104000"; d="scan'208";a="324558189"
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+ by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 16 Jan 2023 08:20:03 -0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10592"; a="766952438"
+X-IronPort-AV: E=Sophos;i="5.97,221,1669104000"; d="scan'208";a="766952438"
+Received: from amakarev-mobl2.ger.corp.intel.com (HELO localhost)
+ ([10.252.13.137])
+ by fmsmga002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 16 Jan 2023 08:19:59 -0800
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>, sam@ravnborg.org,
+ daniel@ffwll.ch, airlied@gmail.com
+In-Reply-To: <20230116131235.18917-1-tzimmermann@suse.de>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20230116131235.18917-1-tzimmermann@suse.de>
+Date: Mon, 16 Jan 2023 18:19:56 +0200
+Message-ID: <87k01me9jn.fsf@intel.com>
 MIME-Version: 1.0
-References: <Y7zB0q2pr7lEpHGs@work> <202301121449.EE489AA@keescook>
-In-Reply-To: <202301121449.EE489AA@keescook>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Mon, 16 Jan 2023 15:41:29 +0100
-Message-ID: <CACO55ttCY1KbqWqzGS1adrJno6kUs7b5_QY7X1AE6qYUqztWNQ@mail.gmail.com>
-To: Kees Cook <keescook@chromium.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH][next] drm/nouveau/nvkm: Replace zero-length
- array with flexible-array member
+Content-Type: text/plain
+Subject: Re: [Nouveau] [PATCH 00/22] drm: Remove includes for
+ drm_crtc_helper.h
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,37 +58,36 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, linux-hardening@vger.kernel.org
+Cc: linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
+ linux-mips@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org,
+ dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reviewed-by: Karol Herbst <kherbst@redhat.com>
+On Mon, 16 Jan 2023, Thomas Zimmermann <tzimmermann@suse.de> wrote:
+> A lot of source files include drm_crtc_helper.h for its contained
+> include statements. This leads to excessive compile-time dependencies.
+>
+> Where possible, remove the include statements for drm_crtc_helper.h
+> and include the required source files directly. Also remove the
+> include statements from drm_crtc_helper.h itself, which doesn't need
+> most of them.
+>
+> I built this patchset on x86-64, aarch64 and arm. Hopefully I found
+> all include dependencies.
 
-will push in a moment
+I think this is the right direction and I support this. Personally I
+think it's enough to build test and fix any fallout afterwards.
 
-On Thu, Jan 12, 2023 at 11:49 PM Kees Cook <keescook@chromium.org> wrote:
->
-> On Mon, Jan 09, 2023 at 07:39:30PM -0600, Gustavo A. R. Silva wrote:
-> > Zero-length arrays are deprecated[1] and we are moving towards
-> > adopting C99 flexible-array members instead. So, replace zero-length
-> > array declaration in struct nvfw_hs_load_header_v2 with flex-array
-> > member.
-> >
-> > This helps with the ongoing efforts to tighten the FORTIFY_SOURCE
-> > routines on memcpy() and help us make progress towards globally
-> > enabling -fstrict-flex-arrays=3 [2].
-> >
-> > Link: https://www.kernel.org/doc/html/latest/process/deprecated.html#zero-length-and-one-element-arrays [1]
-> > Link: https://gcc.gnu.org/pipermail/gcc-patches/2022-October/602902.html [2]
-> > Link: https://github.com/KSPP/linux/issues/78
-> > Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
->
-> Reviewed-by: Kees Cook <keescook@chromium.org>
->
-> --
-> Kees Cook
->
+To that end, I did build test this myself with my config, and it was
+fine, though that probably doesn't add much coverage.
 
+FWIW,
+
+Acked-by: Jani Nikula <jani.nikula@intel.com>
+
+
+-- 
+Jani Nikula, Intel Open Source Graphics Center
