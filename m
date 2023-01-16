@@ -2,57 +2,52 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4402E66CF05
-	for <lists+nouveau@lfdr.de>; Mon, 16 Jan 2023 19:42:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0976C66D036
+	for <lists+nouveau@lfdr.de>; Mon, 16 Jan 2023 21:31:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7E00B10E490;
-	Mon, 16 Jan 2023 18:42:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 85F8F10E4BB;
+	Mon, 16 Jan 2023 20:31:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 02FFC10E48E;
- Mon, 16 Jan 2023 18:42:26 +0000 (UTC)
-Received: by mail-oi1-x22d.google.com with SMTP id d127so24036199oif.12;
- Mon, 16 Jan 2023 10:42:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4HdlXGaKgJ7j3Xx3N+QqSsZE3LQQQ06IoocMmKLVF5k=;
- b=C/Jp3Kxs7eBYGGLL7eqwB7dae9Ek8mOcqeygy78ZwBSm8qfU2gOyBwnI0JqOPpOxVq
- 5Jt5bJMH6+vDNrqHTJrsqtelcsSvIDe4neE0moHgYnbH/tuZkkKA6pd0Q0Z4alSy1bmu
- rjCOY53+BJJF7liaWZSyBlU//sfjukHmR8fFlcN/BDfet/rChQv5LaxXTUJqgrO2WLTU
- rGgVdCLkYDzbq2ArrqQiQ2H/AG9ioYsMXyd48Pp/p6m1iByxrEJ27xgJfgNmQJDCARZn
- dGYy72pRcMHVWAVIIJxehUptJg2TWQ17G4w3J4yoK+zFehWSxEQSNrCwm9viIvF+9Q9t
- jHxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4HdlXGaKgJ7j3Xx3N+QqSsZE3LQQQ06IoocMmKLVF5k=;
- b=MSC7LJ8FasbN2rBOBZGUZeuOKgcKUe7H6l2PYzQ4zZPOENXvgYV2vhQEO8cNbiYPjH
- LwjcoC6Eqr8HLYYg1sok2caujYMns9Q4li3Yg8Sq3p4HHM9ae8uBoQYubKZHkkp+fLc8
- jJX5AWuzAaWi1QJSmKhcX0xivYC0X5R1CB6vgzijJfqZ7M733RcTs5D8ydJXLKke0CBT
- 3UNxTiLaiQZUVVVNIaw7BK/0PPmYA6mTEmnopmm3+CvwwMf1OE4SQEz2GaGilGUSTEuV
- BIYYOHSbk1Ok7dZMf5PGoQtKdxakLU25E45WOBCHR5tfnCwKkFkfTKG6ESsOiCtRsZSG
- f4Fg==
-X-Gm-Message-State: AFqh2krliKRJjeXYUJHLT25Bf+4XFhJD4j8/nw+2InehSpZU1lF31Hhd
- lOgXWdr0hD1L6ujt4BltIF8mRxsgKWI4MHK+sv2vgeMm
-X-Google-Smtp-Source: AMrXdXu3arOjb6R68nisAAbP3AK9lobx1BaSsMafITAiYZi7BEUIVcf2Tr/wIcsRgvuFXf8PpjH+Q8/yp5yBXdFCa00=
-X-Received: by 2002:aca:2807:0:b0:35b:f5f7:3ed0 with SMTP id
- 7-20020aca2807000000b0035bf5f73ed0mr18782oix.46.1673894546170; Mon, 16 Jan
- 2023 10:42:26 -0800 (PST)
-MIME-Version: 1.0
-References: <20230116115425.13484-1-tzimmermann@suse.de>
-In-Reply-To: <20230116115425.13484-1-tzimmermann@suse.de>
-From: Alex Deucher <alexdeucher@gmail.com>
-Date: Mon, 16 Jan 2023 13:42:15 -0500
-Message-ID: <CADnq5_NvhCq0oo2hbTmeTTiusubLGc7d-6zxnw_G_bMQg587Ew@mail.gmail.com>
+X-Greylist: delayed 964 seconds by postgrey-1.36 at gabe;
+ Mon, 16 Jan 2023 20:31:55 UTC
+Received: from mailrelay1-1.pub.mailoutpod2-cph3.one.com
+ (mailrelay1-1.pub.mailoutpod2-cph3.one.com [IPv6:2a02:2350:5:400::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C446510E4BB
+ for <nouveau@lists.freedesktop.org>; Mon, 16 Jan 2023 20:31:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ravnborg.org; s=rsa2;
+ h=in-reply-to:content-type:mime-version:references:message-id:subject:cc:to:
+ from:date:from;
+ bh=qWZKxlX4KW/JmPpNe4hoOYISYsciP5gHQlpn+CvfXf8=;
+ b=kt2RebpVMaIBssccQkMEgek+nwW85G6J0siMHGZ1qETVQeJlMBKmjG0mlVm3r7ePnu8jfPm81ygq7
+ Mz8rQydCpwnm7+yWjbjNIN/fzDJe5WsKcBoAUsBadcQc0vOYb6T41tQjEeU/05VcOGjEkJnNNqYFDv
+ W6Hs6b61sUUwtJAeXWksNEBFK4Y9hM1amCX4haYovx3yLNNcTv+aB4AWsRcwfANqGXT1LV3gcWRrqV
+ ROUTznYXXwPl8HONFIMoZCbhWD4ezvanZv5cXNNxoJUbsVJ4K/EAnSMi/8BPSb4nuXYYFMXiL4SyAH
+ nCwGrMJpVzOvZphymhAQroedp3D9X1Q==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed;
+ d=ravnborg.org; s=ed2;
+ h=in-reply-to:content-type:mime-version:references:message-id:subject:cc:to:
+ from:date:from;
+ bh=qWZKxlX4KW/JmPpNe4hoOYISYsciP5gHQlpn+CvfXf8=;
+ b=xE4aoD0tRO5MstpdlKpx4S2jKlZCleYS/37b6LqWjWapIOw44SoqoiaLAWrBeI0WODd2oUSv6O6cJ
+ cNcxfeJCQ==
+X-HalOne-ID: 90146bb7-95da-11ed-afa2-11abd97b9443
+Received: from ravnborg.org (2-105-2-98-cable.dk.customer.tdc.net [2.105.2.98])
+ by mailrelay1 (Halon) with ESMTPSA
+ id 90146bb7-95da-11ed-afa2-11abd97b9443;
+ Mon, 16 Jan 2023 20:15:49 +0000 (UTC)
+Date: Mon, 16 Jan 2023 21:15:47 +0100
+From: Sam Ravnborg <sam@ravnborg.org>
 To: Thomas Zimmermann <tzimmermann@suse.de>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH v3 0/3] drm/{amdgpu, i915, nouveau,
- radeon}: Fix fbdev and vga-switcheroo
+Message-ID: <Y8Wwcy3LuknhDQz1@ravnborg.org>
+References: <20230116131235.18917-1-tzimmermann@suse.de>
+ <20230116131235.18917-3-tzimmermann@suse.de>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230116131235.18917-3-tzimmermann@suse.de>
+Subject: Re: [Nouveau] [PATCH 02/22] drm: Remove unnecessary include
+ statements for drm_crtc_helper.h
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,76 +59,91 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: tvrtko.ursulin@linux.intel.com, joonas.lahtinen@linux.intel.com,
- dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- Xinhui.Pan@amd.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- jose.souza@intel.com, jani.nikula@linux.intel.com, daniel@ffwll.ch,
- rodrigo.vivi@intel.com, alexander.deucher@amd.com, evan.quan@amd.com,
- christian.koenig@amd.com, bskeggs@redhat.com
+Cc: linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
+ linux-mips@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org,
+ dri-devel@lists.freedesktop.org, daniel@ffwll.ch, linux-sunxi@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Jan 16, 2023 at 6:54 AM Thomas Zimmermann <tzimmermann@suse.de> wrote:
->
-> (was: drm: Generic fbdev and vga-switcheroo)
->
-> This patchset fixes how fbdev helpers interact with vga-switcheroo. The
-> first two patches are bug fixes for the existing code. The third patch
-> cleans up the drivers.
->
-> Patch 1 fixes i915 to do the correct thing if the device has not been
-> initialized yet. Switching to the device is only possible after the
-> initialization, but switching away is always possible.
->
-> Patch 2 is the original patch without the amdgpu changes. Installs
-> the fbdev framebuffer in vga-switcheroo for the PCI device. Does
-> nothing for drivers without vga-switcheroo.
->
-> Patch 3 cleans up vga_switcheroo_process_delayed_switch() in amdgpu
-> and the other related drivers (i.e., i915, nouveau and radeon). The
-> call is now located at the end of drm_lastclose() and drivers do not
-> need their own lastclose helpers any longer.
->
-> I kept the r-bs from v1, but patch 1 is entirely new and patch 3 has
-> significantly grown in size.
+Hi Thomas.
 
-Series is:
-Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
+On Mon, Jan 16, 2023 at 02:12:15PM +0100, Thomas Zimmermann wrote:
+> Several DRM core and helper source files include drm_crtc_helper.h
+> without needing it or only to get its transitive include statements;
+> leading to unnecessary compile-time dependencies.
+> 
+> Directly include required headers and drop drm_crtc_helper.h where
+> possible. The header file, drm_fixed.h, includes <linux/kernel.h>
+> for lower_32_bits().
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
+>  drivers/gpu/drm/drm_crtc_helper.c  | 1 -
+>  drivers/gpu/drm/drm_lease.c        | 2 +-
+>  drivers/gpu/drm/drm_plane_helper.c | 1 -
+>  include/drm/drm_fixed.h            | 1 +
+>  4 files changed, 2 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/drm_crtc_helper.c b/drivers/gpu/drm/drm_crtc_helper.c
+> index a209659a996c..e7a23e18140c 100644
+> --- a/drivers/gpu/drm/drm_crtc_helper.c
+> +++ b/drivers/gpu/drm/drm_crtc_helper.c
+> @@ -39,7 +39,6 @@
+>  #include <drm/drm_atomic_uapi.h>
+>  #include <drm/drm_bridge.h>
+>  #include <drm/drm_crtc.h>
+> -#include <drm/drm_crtc_helper.h>
 
->
-> v3:
->         * include drm_fb_helper.h in radeon_drv.c
-> v2:
->         * expand to patch series
->         * fix i915, nouveau and radeon
->
-> Thomas Zimmermann (3):
->   drm/i915: Allow switching away via vga-switcheroo if uninitialized
->   drm/fb-helper: Set framebuffer for vga-switcheroo clients
->   drm: Call vga_switcheroo_process_delayed_switch() in drm_lastclose
->
->  drivers/gpu/drm/amd/amdgpu/amdgpu.h     |  1 -
->  drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c |  2 --
->  drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c | 13 -------------
->  drivers/gpu/drm/drm_fb_helper.c         |  8 ++++++++
->  drivers/gpu/drm/drm_file.c              |  3 +++
->  drivers/gpu/drm/i915/i915_driver.c      | 26 ++-----------------------
->  drivers/gpu/drm/i915/i915_switcheroo.c  |  6 +++++-
->  drivers/gpu/drm/nouveau/nouveau_drm.c   |  1 -
->  drivers/gpu/drm/nouveau/nouveau_vga.c   |  7 -------
->  drivers/gpu/drm/nouveau/nouveau_vga.h   |  1 -
->  drivers/gpu/drm/radeon/radeon_drv.c     |  3 ++-
->  drivers/gpu/drm/radeon/radeon_drv.h     |  1 -
->  drivers/gpu/drm/radeon/radeon_kms.c     | 18 -----------------
->  drivers/gpu/vga/vga_switcheroo.c        |  4 ++--
->  14 files changed, 22 insertions(+), 72 deletions(-)
->
->
-> base-commit: 68d139b609a97a83e7c231189d4864aba4e1679b
-> prerequisite-patch-id: 0aa359f6144c4015c140c8a6750be19099c676fb
-> prerequisite-patch-id: c67e5d886a47b7d0266d81100837557fda34cb24
-> prerequisite-patch-id: 3f204510fcbf9530d6540bd8e6128cce598988b6
-> --
+drm_crtc_helper.c may not require drm/drm_crtc_helper.h, but it should
+include it so we get a warning in case there is a mismatch between the
+header file and the implementation.
+I think sparse would also complain that the function is not declared
+or something like that.
+
+With this fixed:
+Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
+
+>  #include <drm/drm_drv.h>
+>  #include <drm/drm_edid.h>
+>  #include <drm/drm_encoder.h>
+> diff --git a/drivers/gpu/drm/drm_lease.c b/drivers/gpu/drm/drm_lease.c
+> index 08ab75303a00..150fe1555068 100644
+> --- a/drivers/gpu/drm/drm_lease.c
+> +++ b/drivers/gpu/drm/drm_lease.c
+> @@ -6,7 +6,7 @@
+>  #include <linux/uaccess.h>
+>  
+>  #include <drm/drm_auth.h>
+> -#include <drm/drm_crtc_helper.h>
+> +#include <drm/drm_crtc.h>
+>  #include <drm/drm_drv.h>
+>  #include <drm/drm_file.h>
+>  #include <drm/drm_lease.h>
+> diff --git a/drivers/gpu/drm/drm_plane_helper.c b/drivers/gpu/drm/drm_plane_helper.c
+> index ba6a9136a065..c91e454eba09 100644
+> --- a/drivers/gpu/drm/drm_plane_helper.c
+> +++ b/drivers/gpu/drm/drm_plane_helper.c
+> @@ -28,7 +28,6 @@
+>  #include <drm/drm_atomic.h>
+>  #include <drm/drm_atomic_helper.h>
+>  #include <drm/drm_atomic_uapi.h>
+> -#include <drm/drm_crtc_helper.h>
+>  #include <drm/drm_device.h>
+>  #include <drm/drm_drv.h>
+>  #include <drm/drm_encoder.h>
+> diff --git a/include/drm/drm_fixed.h b/include/drm/drm_fixed.h
+> index 553210c02ee0..255645c1f9a8 100644
+> --- a/include/drm/drm_fixed.h
+> +++ b/include/drm/drm_fixed.h
+> @@ -25,6 +25,7 @@
+>  #ifndef DRM_FIXED_H
+>  #define DRM_FIXED_H
+>  
+> +#include <linux/kernel.h>
+>  #include <linux/math64.h>
+>  
+>  typedef union dfixed {
+> -- 
 > 2.39.0
->
