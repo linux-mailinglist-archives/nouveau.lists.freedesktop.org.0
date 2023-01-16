@@ -2,67 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34C976F6BD9
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CE3C6F6B9A
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6086410E49C;
-	Thu,  4 May 2023 12:33:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BA26A10E456;
+	Thu,  4 May 2023 12:32:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9596E10E3DC;
- Mon, 16 Jan 2023 11:54:30 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 49B9233B43;
- Mon, 16 Jan 2023 11:54:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1673870069; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=EUggysgncP9uMhVH+dhNfBvNG/A+cX9Zl3Vz7+cHkwc=;
- b=yxk3skraO/Mtj5vW9U468+SdCqUo76uvOOBqxcntqYHfu8yby99nvJCGJzs5PMG8fjHkBj
- mEiOR8kxkfox2YIiVgZ9sDTHU+8Lwsr4UqojgdhCJCz2zmYNyU1vV/TM0rXzxVRwokCn4H
- v1yhwCoLg2pvV6eD89eO2yFdoFelesE=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1673870069;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=EUggysgncP9uMhVH+dhNfBvNG/A+cX9Zl3Vz7+cHkwc=;
- b=S4GS866Ou0/y6g8PuMrZ9fXlBegOCcv3edlcCNcfMSttSyBU7pgZ46BBXsXpY79aawt7qM
- qX4LmkHG7Zi9BJDQ==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 86905139C2;
- Mon, 16 Jan 2023 11:54:28 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id MMoXIPQ6xWPLBAAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Mon, 16 Jan 2023 11:54:28 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
- airlied@gmail.com, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, jani.nikula@linux.intel.com,
- joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com,
- tvrtko.ursulin@linux.intel.com, bskeggs@redhat.com, kherbst@redhat.com,
- lyude@redhat.com, evan.quan@amd.com, jose.souza@intel.com
-Date: Mon, 16 Jan 2023 12:54:24 +0100
-Message-Id: <20230116115425.13484-3-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230116115425.13484-1-tzimmermann@suse.de>
-References: <20230116115425.13484-1-tzimmermann@suse.de>
+Received: from smtp1.tecnico.ulisboa.pt (smtp1.tecnico.ulisboa.pt
+ [193.136.128.21])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 75AF310E3F5;
+ Mon, 16 Jan 2023 12:27:05 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTP id 11F0E6008768;
+ Mon, 16 Jan 2023 12:27:03 +0000 (WET)
+X-Virus-Scanned: by amavisd-new-2.11.0 (20160426) (Debian) at
+ tecnico.ulisboa.pt
+Received: from smtp1.tecnico.ulisboa.pt ([127.0.0.1])
+ by localhost (smtp1.tecnico.ulisboa.pt [127.0.0.1]) (amavisd-new, port 10025)
+ with LMTP id 7cdRpeg_D0dx; Mon, 16 Jan 2023 12:27:00 +0000 (WET)
+Received: from mail1.tecnico.ulisboa.pt (mail1.ist.utl.pt
+ [IPv6:2001:690:2100:1::b3dd:b9ac])
+ by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTPS id DB48C6008767;
+ Mon, 16 Jan 2023 12:26:59 +0000 (WET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tecnico.ulisboa.pt;
+ s=mail; t=1673872020;
+ bh=XkE1A2YnrbrU2WIxkcPZ+PORJqR8hAkePFOr8rxfZuE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=a8Xo4bkmsvTuqonsY4ekcnc5dvWH3mlZRjabBlWJkbOAWhp3rdDaUNODmHarhe2TH
+ H7Go9Ii3nCMaTd4Sd+q5JKYVxcOiaBrFMkQ2Lf5zBefVAuViUjOY0seSUGsOYEmhfx
+ 7qpXOISRmKIcZZ9Ro8jMZa1ERBnEr5r0BQs6JiUo=
+Received: from wslaptop (unknown [IPv6:2001:818:dcb5:dc00:d990:b664:f16:4cb2])
+ (Authenticated sender: ist187313)
+ by mail1.tecnico.ulisboa.pt (Postfix) with ESMTPSA id 4A87C360078;
+ Mon, 16 Jan 2023 12:26:59 +0000 (WET)
+Date: Mon, 16 Jan 2023 12:24:37 +0000
+From: Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>
+To: David Airlie <airlied@redhat.com>
+Message-ID: <20230116122403.upk5ci4mbebw23m7@wslaptop>
+References: <20221228144914.z7t7a4fdwvbblnak@wslaptop>
+ <CAMwc25rY4xpn0yvCScMr6Hk9pFSdvt=9QOypSQDfj1d5tWmtvA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:33 +0000
-Subject: [Nouveau] [PATCH v3 2/3] drm/fb-helper: Set framebuffer for
- vga-switcheroo clients
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAMwc25rY4xpn0yvCScMr6Hk9pFSdvt=9QOypSQDfj1d5tWmtvA@mail.gmail.com>
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:35 +0000
+Subject: Re: [Nouveau] [REGRESSION] GM20B probe fails after commit
+ 2541626cfb79
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,118 +60,85 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: dri-devel@lists.freedesktop.org, YiPeng Chai <YiPeng.Chai@amd.com>,
- Hamza Mahfooz <hamza.mahfooz@amd.com>, Likun Gao <Likun.Gao@amd.com>,
- Sam Ravnborg <sam@ravnborg.org>,
- =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
- Mario Limonciello <mario.limonciello@amd.com>,
- Guchun Chen <guchun.chen@amd.com>,
- Javier Martinez Canillas <javierm@redhat.com>, amd-gfx@lists.freedesktop.org,
- Aurabindo Pillai <aurabindo.pillai@amd.com>,
- Stanley Yang <Stanley.Yang@amd.com>, nouveau@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>,
- =?UTF-8?q?Marek=20Ol=C5=A1=C3=A1k?= <marek.olsak@amd.com>,
- Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
- Jani Nikula <jani.nikula@intel.com>, Bokun Zhang <Bokun.Zhang@amd.com>,
- intel-gfx@lists.freedesktop.org, "Tianci.Yin" <tianci.yin@amd.com>,
- Hans de Goede <hdegoede@redhat.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Xiaojian Du <Xiaojian.Du@amd.com>, Felix Kuehling <Felix.Kuehling@amd.com>,
- Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>, stable@vger.kernel.org,
- Solomon Chiu <solomon.chiu@amd.com>,
- Kai-Heng Feng <kai.heng.feng@canonical.com>,
- Hawking Zhang <Hawking.Zhang@amd.com>
+Cc: nouveau@lists.freedesktop.org, regressions@lists.linux.dev,
+ dri-devel@lists.freedesktop.org, bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Set the framebuffer info for drivers that support VGA switcheroo. Only
-affects the amdgpu and nouveau drivers, which use VGA switcheroo and
-generic fbdev emulation. For other drivers, this does nothing.
+On Mon, Jan 16, 2023 at 07:45:05AM +1000, David Airlie wrote:
+> On Thu, Dec 29, 2022 at 12:58 AM Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt> wrote:
+> As a quick check can you try changing
+> 
+> drivers/gpu/drm/nouveau/nvkm/core/firmware.c:nvkm_firmware_mem_target
+> from NVKM_MEM_TARGET_HOST to NVKM_MEM_TARGET_NCOH ?
 
-This fixes a potential regression in the console code. Both, amdgpu and
-nouveau, invoked vga_switcheroo_client_fb_set() from their internal fbdev
-code. But the call got lost when the drivers switched to the generic
-emulation.
+Hello!
 
-Fixes: 087451f372bf ("drm/amdgpu: use generic fb helpers instead of setting up AMD own's.")
-Fixes: 4a16dd9d18a0 ("drm/nouveau/kms: switch to drm fbdev helpers")
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Karol Herbst <kherbst@redhat.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Javier Martinez Canillas <javierm@redhat.com>
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Cc: Jani Nikula <jani.nikula@intel.com>
-Cc: Dave Airlie <airlied@redhat.com>
-Cc: Evan Quan <evan.quan@amd.com>
-Cc: Christian König <christian.koenig@amd.com>
-Cc: Alex Deucher <alexander.deucher@amd.com>
-Cc: Hawking Zhang <Hawking.Zhang@amd.com>
-Cc: Likun Gao <Likun.Gao@amd.com>
-Cc: "Christian König" <christian.koenig@amd.com>
-Cc: Stanley Yang <Stanley.Yang@amd.com>
-Cc: "Tianci.Yin" <tianci.yin@amd.com>
-Cc: Xiaojian Du <Xiaojian.Du@amd.com>
-Cc: Andrey Grodzovsky <andrey.grodzovsky@amd.com>
-Cc: YiPeng Chai <YiPeng.Chai@amd.com>
-Cc: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>
-Cc: Bokun Zhang <Bokun.Zhang@amd.com>
-Cc: Guchun Chen <guchun.chen@amd.com>
-Cc: Hamza Mahfooz <hamza.mahfooz@amd.com>
-Cc: Aurabindo Pillai <aurabindo.pillai@amd.com>
-Cc: Mario Limonciello <mario.limonciello@amd.com>
-Cc: Solomon Chiu <solomon.chiu@amd.com>
-Cc: Kai-Heng Feng <kai.heng.feng@canonical.com>
-Cc: Felix Kuehling <Felix.Kuehling@amd.com>
-Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
-Cc: "Marek Olšák" <marek.olsak@amd.com>
-Cc: Sam Ravnborg <sam@ravnborg.org>
-Cc: Hans de Goede <hdegoede@redhat.com>
-Cc: "Ville Syrjälä" <ville.syrjala@linux.intel.com>
-Cc: dri-devel@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org
-Cc: <stable@vger.kernel.org> # v5.17+
----
- drivers/gpu/drm/drm_fb_helper.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+Applying this change breaks probing in a different way, with a
+bad PC=0x0. From a quick look at nvkm_falcon_load_dmem it looks like this
+could happen due to the .load_dmem() callback not being properly
+initialized. This is the kernel log I got:
 
-diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-index 367fb8b2d5fa..c5c13e192b64 100644
---- a/drivers/gpu/drm/drm_fb_helper.c
-+++ b/drivers/gpu/drm/drm_fb_helper.c
-@@ -30,7 +30,9 @@
- #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
- 
- #include <linux/console.h>
-+#include <linux/pci.h>
- #include <linux/sysrq.h>
-+#include <linux/vga_switcheroo.h>
- 
- #include <drm/drm_atomic.h>
- #include <drm/drm_drv.h>
-@@ -1924,6 +1926,7 @@ static int drm_fb_helper_single_fb_probe(struct drm_fb_helper *fb_helper,
- 					 int preferred_bpp)
- {
- 	struct drm_client_dev *client = &fb_helper->client;
-+	struct drm_device *dev = fb_helper->dev;
- 	struct drm_fb_helper_surface_size sizes;
- 	int ret;
- 
-@@ -1945,6 +1948,11 @@ static int drm_fb_helper_single_fb_probe(struct drm_fb_helper *fb_helper,
- 		return ret;
- 
- 	strcpy(fb_helper->fb->comm, "[fbcon]");
-+
-+	/* Set the fb info for vgaswitcheroo clients. Does nothing otherwise. */
-+	if (dev_is_pci(dev->dev))
-+		vga_switcheroo_client_fb_set(to_pci_dev(dev->dev), fb_helper->info);
-+
- 	return 0;
- }
- 
--- 
-2.39.0
+[    2.010601] Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000
+[    2.019436] Mem abort info:
+[    2.022273]   ESR = 0x0000000086000005
+[    2.026066]   EC = 0x21: IABT (current EL), IL = 32 bits
+[    2.031429]   SET = 0, FnV = 0
+[    2.034528]   EA = 0, S1PTW = 0
+[    2.037694]   FSC = 0x05: level 1 translation fault
+[    2.042572] [0000000000000000] user address but active_mm is swapper
+[    2.048961] Internal error: Oops: 0000000086000005 [#1] SMP
+[    2.054529] Modules linked in:
+[    2.057582] CPU: 0 PID: 36 Comm: kworker/u8:1 Not tainted 6.2.0-rc3+ #2
+[    2.064190] Hardware name: Google Pixel C (DT)
+[    2.068628] Workqueue: events_unbound deferred_probe_work_func
+[    2.074463] pstate: 40000005 (nZcv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+[    2.081417] pc : 0x0
+[    2.083600] lr : nvkm_falcon_load_dmem+0x58/0x80
+[    2.088218] sp : ffffffc009ddb6f0
+[    2.091526] x29: ffffffc009ddb6f0 x28: ffffff808028a008 x27: ffffff8081e43c38
+[    2.098658] x26: 00000000000000ff x25: ffffff808028a0a0 x24: 0000000000000000
+[    2.105788] x23: ffffff8080c328f8 x22: 000000000000002c x21: 0000000000005fd4
+[    2.112917] x20: ffffffc009ddb76c x19: ffffff8080c328b8 x18: 0000000000000000
+[    2.120047] x17: 2e74696e695f646f x16: 6874656d5f77732f x15: 0000000000000000
+[    2.127176] x14: 0000000002f546c2 x13: 0000000000000000 x12: 00000000000001ce
+[    2.134306] x11: 0000000000000001 x10: 0000000000000a90 x9 : ffffffc009ddb600
+[    2.141436] x8 : ffffff80803d19f0 x7 : ffffff80bf971180 x6 : 00000000000001b9
+[    2.148565] x5 : 0000000000000000 x4 : 0000000000000000 x3 : 000000000000002c
+[    2.155693] x2 : 0000000000005fd4 x1 : ffffffc009ddb76c x0 : ffffff8080c328b8
+[    2.162822] Call trace:
+[    2.165264]  0x0
+[    2.167099]  gm20b_pmu_init+0x78/0xb4
+[    2.170762]  nvkm_pmu_init+0x20/0x34
+[    2.174334]  nvkm_subdev_init_+0x60/0x12c
+[    2.178339]  nvkm_subdev_init+0x60/0xa0
+[    2.182171]  nvkm_device_init+0x14c/0x2a0
+[    2.186178]  nvkm_udevice_init+0x60/0x9c
+[    2.190097]  nvkm_object_init+0x48/0x1b0
+[    2.194013]  nvkm_ioctl_new+0x168/0x254
+[    2.197843]  nvkm_ioctl+0xd0/0x220
+[    2.201239]  nvkm_client_ioctl+0x10/0x1c
+[    2.205160]  nvif_object_ctor+0xf4/0x22c
+[    2.209079]  nvif_device_ctor+0x28/0x70
+[    2.212910]  nouveau_cli_init+0x150/0x590
+[    2.216916]  nouveau_drm_device_init+0x60/0x2a0
+[    2.221442]  nouveau_platform_device_create+0x90/0xd0
+[    2.226489]  nouveau_platform_probe+0x3c/0x9c
+[    2.230841]  platform_probe+0x68/0xc0
+[    2.234500]  really_probe+0xbc/0x2dc
+[    2.238070]  __driver_probe_device+0x78/0xe0
+[    2.242334]  driver_probe_device+0xd8/0x160
+[    2.246511]  __device_attach_driver+0xb8/0x134
+[    2.250948]  bus_for_each_drv+0x78/0xd0
+[    2.254782]  __device_attach+0x9c/0x1a0
+[    2.258612]  device_initial_probe+0x14/0x20
+[    2.262789]  bus_probe_device+0x98/0xa0
+[    2.266619]  deferred_probe_work_func+0x88/0xc0
+[    2.271142]  process_one_work+0x204/0x40c
+[    2.275150]  worker_thread+0x230/0x450
+[    2.278894]  kthread+0xc8/0xcc
+[    2.281946]  ret_from_fork+0x10/0x20
+[    2.285525] Code: bad PC value
+[    2.288576] ---[ end trace 0000000000000000 ]---
 
+Diogo
