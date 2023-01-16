@@ -2,44 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 337CC6F6B43
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 34C976F6BD9
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 837ED10E3CC;
-	Thu,  4 May 2023 12:31:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6086410E49C;
+	Thu,  4 May 2023 12:33:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 18E5410E2B4;
- Mon, 16 Jan 2023 10:07:24 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9596E10E3DC;
+ Mon, 16 Jan 2023 11:54:30 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 7CCF460EEA;
- Mon, 16 Jan 2023 10:07:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99940C433EF;
- Mon, 16 Jan 2023 10:07:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1673863642;
- bh=12Oegiwv5+ajWab6JX3x49VzyjwNVu3L68Wu90nFrm4=;
- h=From:To:Cc:Subject:Date:From;
- b=YlsM9rM2TmtIsjX64tzh/6QANd83dOW6mXZziDxqSbpurh1sqPtj+amtf//Rk0dhQ
- H7g8TR34e7oVetIFbBoxwMmoSDxdOqqiXz1lO0P0GV9xF1kLb1HisYIA3u5kzQEr/1
- mxQT1K+A3jnbiJodmDup6qfFwVzaqbMLRWO72tP3b+7kgehYcsR6rknHkXNP0j8Xxk
- X4GsPp6lg/+hRtulVMBqD2eLZkTs49K1bCVPYDvUQ4sjAZ8QLIaSbYsCcNfE1UbVOO
- r+xzvZFAWlY6lpEoi3CJwWA+GA5H35ZNBN29hH4bzll1jN7TG85k9rA66E1kaBpYhJ
- 88Etd7cXeqnxg==
-From: "Jiri Slaby (SUSE)" <jirislaby@kernel.org>
-To: airlied@redhat.com
-Date: Mon, 16 Jan 2023 11:07:18 +0100
-Message-Id: <20230116100718.12832-1-jirislaby@kernel.org>
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 49B9233B43;
+ Mon, 16 Jan 2023 11:54:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1673870069; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=EUggysgncP9uMhVH+dhNfBvNG/A+cX9Zl3Vz7+cHkwc=;
+ b=yxk3skraO/Mtj5vW9U468+SdCqUo76uvOOBqxcntqYHfu8yby99nvJCGJzs5PMG8fjHkBj
+ mEiOR8kxkfox2YIiVgZ9sDTHU+8Lwsr4UqojgdhCJCz2zmYNyU1vV/TM0rXzxVRwokCn4H
+ v1yhwCoLg2pvV6eD89eO2yFdoFelesE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1673870069;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=EUggysgncP9uMhVH+dhNfBvNG/A+cX9Zl3Vz7+cHkwc=;
+ b=S4GS866Ou0/y6g8PuMrZ9fXlBegOCcv3edlcCNcfMSttSyBU7pgZ46BBXsXpY79aawt7qM
+ qX4LmkHG7Zi9BJDQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 86905139C2;
+ Mon, 16 Jan 2023 11:54:28 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id MMoXIPQ6xWPLBAAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Mon, 16 Jan 2023 11:54:28 +0000
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
+ airlied@gmail.com, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, jani.nikula@linux.intel.com,
+ joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com,
+ tvrtko.ursulin@linux.intel.com, bskeggs@redhat.com, kherbst@redhat.com,
+ lyude@redhat.com, evan.quan@amd.com, jose.souza@intel.com
+Date: Mon, 16 Jan 2023 12:54:24 +0100
+Message-Id: <20230116115425.13484-3-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.39.0
+In-Reply-To: <20230116115425.13484-1-tzimmermann@suse.de>
+References: <20230116115425.13484-1-tzimmermann@suse.de>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:38 +0000
-Subject: [Nouveau] [PATCH -resend] drm/nouveau/kms/nv50- (gcc13): fix
- nv50_wndw_new_ prototype
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:33 +0000
+Subject: [Nouveau] [PATCH v3 2/3] drm/fb-helper: Set framebuffer for
+ vga-switcheroo clients
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,65 +74,118 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Jiri Slaby \(SUSE\)" <jirislaby@kernel.org>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, nouveau@lists.freedesktop.org,
- Martin Liska <mliska@suse.cz>
+Cc: dri-devel@lists.freedesktop.org, YiPeng Chai <YiPeng.Chai@amd.com>,
+ Hamza Mahfooz <hamza.mahfooz@amd.com>, Likun Gao <Likun.Gao@amd.com>,
+ Sam Ravnborg <sam@ravnborg.org>,
+ =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
+ Mario Limonciello <mario.limonciello@amd.com>,
+ Guchun Chen <guchun.chen@amd.com>,
+ Javier Martinez Canillas <javierm@redhat.com>, amd-gfx@lists.freedesktop.org,
+ Aurabindo Pillai <aurabindo.pillai@amd.com>,
+ Stanley Yang <Stanley.Yang@amd.com>, nouveau@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>,
+ =?UTF-8?q?Marek=20Ol=C5=A1=C3=A1k?= <marek.olsak@amd.com>,
+ Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
+ Jani Nikula <jani.nikula@intel.com>, Bokun Zhang <Bokun.Zhang@amd.com>,
+ intel-gfx@lists.freedesktop.org, "Tianci.Yin" <tianci.yin@amd.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Xiaojian Du <Xiaojian.Du@amd.com>, Felix Kuehling <Felix.Kuehling@amd.com>,
+ Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>, stable@vger.kernel.org,
+ Solomon Chiu <solomon.chiu@amd.com>,
+ Kai-Heng Feng <kai.heng.feng@canonical.com>,
+ Hawking Zhang <Hawking.Zhang@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-gcc-13 warns about mismatching types for enums. That revealed switched
-arguments of nv50_wndw_new_():
-  drivers/gpu/drm/nouveau/dispnv50/wndw.c:696:1: error: conflicting types for 'nv50_wndw_new_' due to enum/integer mismatch; have 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const u32 *, u32,  enum nv50_disp_interlock_type,  u32,  struct nv50_wndw **)'
-  drivers/gpu/drm/nouveau/dispnv50/wndw.h:36:5: note: previous declaration of 'nv50_wndw_new_' with type 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const u32 *, enum nv50_disp_interlock_type,  u32,  u32,  struct nv50_wndw **)'
+Set the framebuffer info for drivers that support VGA switcheroo. Only
+affects the amdgpu and nouveau drivers, which use VGA switcheroo and
+generic fbdev emulation. For other drivers, this does nothing.
 
-It can be barely visible, but the declaration says about the parameters
-in the middle:
-  enum nv50_disp_interlock_type,
-  u32 interlock_data,
-  u32 heads,
+This fixes a potential regression in the console code. Both, amdgpu and
+nouveau, invoked vga_switcheroo_client_fb_set() from their internal fbdev
+code. But the call got lost when the drivers switched to the generic
+emulation.
 
-While the definition states differently:
-  u32 heads,
-  enum nv50_disp_interlock_type interlock_type,
-  u32 interlock_data,
-
-Unify/fix the declaration to match the definition.
-
-Cc: Martin Liska <mliska@suse.cz>
+Fixes: 087451f372bf ("drm/amdgpu: use generic fb helpers instead of setting up AMD own's.")
+Fixes: 4a16dd9d18a0 ("drm/nouveau/kms: switch to drm fbdev helpers")
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
 Cc: Ben Skeggs <bskeggs@redhat.com>
 Cc: Karol Herbst <kherbst@redhat.com>
 Cc: Lyude Paul <lyude@redhat.com>
-Cc: David Airlie <airlied@gmail.com>
-Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: Javier Martinez Canillas <javierm@redhat.com>
+Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Cc: Jani Nikula <jani.nikula@intel.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Evan Quan <evan.quan@amd.com>
+Cc: Christian König <christian.koenig@amd.com>
+Cc: Alex Deucher <alexander.deucher@amd.com>
+Cc: Hawking Zhang <Hawking.Zhang@amd.com>
+Cc: Likun Gao <Likun.Gao@amd.com>
+Cc: "Christian König" <christian.koenig@amd.com>
+Cc: Stanley Yang <Stanley.Yang@amd.com>
+Cc: "Tianci.Yin" <tianci.yin@amd.com>
+Cc: Xiaojian Du <Xiaojian.Du@amd.com>
+Cc: Andrey Grodzovsky <andrey.grodzovsky@amd.com>
+Cc: YiPeng Chai <YiPeng.Chai@amd.com>
+Cc: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>
+Cc: Bokun Zhang <Bokun.Zhang@amd.com>
+Cc: Guchun Chen <guchun.chen@amd.com>
+Cc: Hamza Mahfooz <hamza.mahfooz@amd.com>
+Cc: Aurabindo Pillai <aurabindo.pillai@amd.com>
+Cc: Mario Limonciello <mario.limonciello@amd.com>
+Cc: Solomon Chiu <solomon.chiu@amd.com>
+Cc: Kai-Heng Feng <kai.heng.feng@canonical.com>
+Cc: Felix Kuehling <Felix.Kuehling@amd.com>
+Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
+Cc: "Marek Olšák" <marek.olsak@amd.com>
+Cc: Sam Ravnborg <sam@ravnborg.org>
+Cc: Hans de Goede <hdegoede@redhat.com>
+Cc: "Ville Syrjälä" <ville.syrjala@linux.intel.com>
 Cc: dri-devel@lists.freedesktop.org
 Cc: nouveau@lists.freedesktop.org
-Cc: linux-kernel@vger.kernel.org
-Signed-off-by: Jiri Slaby (SUSE) <jirislaby@kernel.org>
+Cc: <stable@vger.kernel.org> # v5.17+
 ---
+ drivers/gpu/drm/drm_fb_helper.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-Notes:
-    [v2] switch to uint instead of to enum
-
- drivers/gpu/drm/nouveau/dispnv50/wndw.h | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.h b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
-index 591c852f326b..76a6ae5d5652 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/wndw.h
-+++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
-@@ -35,8 +35,9 @@ struct nv50_wndw {
+diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
+index 367fb8b2d5fa..c5c13e192b64 100644
+--- a/drivers/gpu/drm/drm_fb_helper.c
++++ b/drivers/gpu/drm/drm_fb_helper.c
+@@ -30,7 +30,9 @@
+ #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
  
- int nv50_wndw_new_(const struct nv50_wndw_func *, struct drm_device *,
- 		   enum drm_plane_type, const char *name, int index,
--		   const u32 *format, enum nv50_disp_interlock_type,
--		   u32 interlock_data, u32 heads, struct nv50_wndw **);
-+		   const u32 *format, u32 heads,
-+		   enum nv50_disp_interlock_type, u32 interlock_data,
-+		   struct nv50_wndw **);
- void nv50_wndw_flush_set(struct nv50_wndw *, u32 *interlock,
- 			 struct nv50_wndw_atom *);
- void nv50_wndw_flush_clr(struct nv50_wndw *, u32 *interlock, bool flush,
+ #include <linux/console.h>
++#include <linux/pci.h>
+ #include <linux/sysrq.h>
++#include <linux/vga_switcheroo.h>
+ 
+ #include <drm/drm_atomic.h>
+ #include <drm/drm_drv.h>
+@@ -1924,6 +1926,7 @@ static int drm_fb_helper_single_fb_probe(struct drm_fb_helper *fb_helper,
+ 					 int preferred_bpp)
+ {
+ 	struct drm_client_dev *client = &fb_helper->client;
++	struct drm_device *dev = fb_helper->dev;
+ 	struct drm_fb_helper_surface_size sizes;
+ 	int ret;
+ 
+@@ -1945,6 +1948,11 @@ static int drm_fb_helper_single_fb_probe(struct drm_fb_helper *fb_helper,
+ 		return ret;
+ 
+ 	strcpy(fb_helper->fb->comm, "[fbcon]");
++
++	/* Set the fb info for vgaswitcheroo clients. Does nothing otherwise. */
++	if (dev_is_pci(dev->dev))
++		vga_switcheroo_client_fb_set(to_pci_dev(dev->dev), fb_helper->info);
++
+ 	return 0;
+ }
+ 
 -- 
 2.39.0
 
