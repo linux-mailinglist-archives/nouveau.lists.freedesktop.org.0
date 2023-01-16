@@ -1,52 +1,69 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D57166C66C
-	for <lists+nouveau@lfdr.de>; Mon, 16 Jan 2023 17:20:14 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1198366C6CB
+	for <lists+nouveau@lfdr.de>; Mon, 16 Jan 2023 17:25:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D21D610E2BE;
-	Mon, 16 Jan 2023 16:20:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9D6CA10E45B;
+	Mon, 16 Jan 2023 16:25:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EF79D10E2BB;
- Mon, 16 Jan 2023 16:20:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1673886003; x=1705422003;
- h=from:to:cc:subject:in-reply-to:references:date:
- message-id:mime-version;
- bh=3kP3+Z/fGb1HUUCGydhyc9dGWiwyXHQhkXAlft+qAzY=;
- b=O+jGBDv1wkdgNz+iubPM+2zPPetH3eq+JCKtA89kuVZSJuBNoTN/VTAB
- w0M9Irjn8Qj6fm+rfTSKrzhNxovvcwtRA/rfMDbV3Xqiz8IhoysYavdN1
- rPG0FYwxRAMwYqFc6hg0QfRzbGHpRmoIlzJGp2ojb8klh4niZZbrAaNh9
- HwfrbED7WTMnB2zoR8E+ccNx/Zx/fMCittugQ6CzagJWIasd0usmnUkIg
- Kk8t0DeHjjItBhypIpqA/AWyFAPr9G7sRZT/YMIAEgQGKnl1wisp178t4
- 5WKIuUqQdZwxnQXuqBpMj/YFWPW34Z1dCNnnWCclia1wU9yiT44eUWnQp w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10592"; a="324558189"
-X-IronPort-AV: E=Sophos;i="5.97,221,1669104000"; d="scan'208";a="324558189"
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 16 Jan 2023 08:20:03 -0800
-X-IronPort-AV: E=McAfee;i="6500,9779,10592"; a="766952438"
-X-IronPort-AV: E=Sophos;i="5.97,221,1669104000"; d="scan'208";a="766952438"
-Received: from amakarev-mobl2.ger.corp.intel.com (HELO localhost)
- ([10.252.13.137])
- by fmsmga002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 16 Jan 2023 08:19:59 -0800
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>, sam@ravnborg.org,
- daniel@ffwll.ch, airlied@gmail.com
-In-Reply-To: <20230116131235.18917-1-tzimmermann@suse.de>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20230116131235.18917-1-tzimmermann@suse.de>
-Date: Mon, 16 Jan 2023 18:19:56 +0200
-Message-ID: <87k01me9jn.fsf@intel.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4866710E45B
+ for <nouveau@lists.freedesktop.org>; Mon, 16 Jan 2023 16:25:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1673886301;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=SapRDhSD4bg3SNicTSW2wGgbS66LIJZoHqZZ/9cufV4=;
+ b=KKec3WhzPW49Hf4c0lgI1FRD59s0ltp1jZD5Yma+1MwitgrYXw0tyZPhSThkpO6AHUUO4v
+ OYHEynqate4/Ir6Jo0Oi4hL3BoIw4aiXylOydVFyoQRLwAb159N6mDYGCmhqIGiDvDtLrq
+ Uxt37DiTFFr5SFf1rS0ymavoWvHpDfk=
+Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
+ [209.85.208.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-246-KMg4HIE4OGWR3ZlO10epJw-1; Mon, 16 Jan 2023 11:25:00 -0500
+X-MC-Unique: KMg4HIE4OGWR3ZlO10epJw-1
+Received: by mail-lj1-f199.google.com with SMTP id
+ y19-20020a05651c221300b00279958f353fso7520435ljq.1
+ for <nouveau@lists.freedesktop.org>; Mon, 16 Jan 2023 08:24:59 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SapRDhSD4bg3SNicTSW2wGgbS66LIJZoHqZZ/9cufV4=;
+ b=l0DTeF6wH+zwn1fm3WmLX21yrUtVz5nn0nD5U/57MQB1mqu8c3N7JDti/qmPKzNCvq
+ 1Sg3hvx8J6+KVHHZVCBqbYuWfmztaORnAeqb9SbIPXYF/1kOj0/swMdob1af0VPBjJnR
+ Ul77AvkdHG2E1h7q/uI/jUK5mL7rrpiCLez/fUY7Ixbzv5afx7ByuK/C0CSsJiyDSEZR
+ d8pNU5FqIDxbNuV5k16zgE39odzMDonGBIQO3rA63QCUo+InCoIcS4+pKJjjUYzHF7Yt
+ qzdBk3VbokvkYKlhzH79FNVa6LNaLgWNEX8fT7lSLULC24e4nlXMJDBNPU+oltU92aAl
+ il8w==
+X-Gm-Message-State: AFqh2krBUVCer2wUtDVoEvSrY4ZLrZDQ4ki5/ZHL8f8yG80805mKrPBs
+ LVU49QEaHZLsK/lEYdRufEt9CpHbai7KbVL71tNuV8tCaDCgZfcfBXYsOFW0Am8avWlL34+8ek6
+ YEQSJ8Cou8iVIyjshY/C4Yz790Jtw7REecj2vSLbXsQ==
+X-Received: by 2002:ac2:4f8c:0:b0:4d0:7b7:65dc with SMTP id
+ z12-20020ac24f8c000000b004d007b765dcmr483288lfs.122.1673886298943; 
+ Mon, 16 Jan 2023 08:24:58 -0800 (PST)
+X-Google-Smtp-Source: AMrXdXskVXALh3cMxytws6o+ulKkC0aRueGIcJS8YRlvP7WpfCxojGKp4y72qPmz5veoTJzcgsV96C0ycbrb/7Q/f08=
+X-Received: by 2002:ac2:4f8c:0:b0:4d0:7b7:65dc with SMTP id
+ z12-20020ac24f8c000000b004d007b765dcmr483278lfs.122.1673886298656; Mon, 16
+ Jan 2023 08:24:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-Subject: Re: [Nouveau] [PATCH 00/22] drm: Remove includes for
- drm_crtc_helper.h
+References: <20230103234835.never.378-kees@kernel.org> <Y7TNtQqunHIW8her@work>
+In-Reply-To: <Y7TNtQqunHIW8her@work>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Mon, 16 Jan 2023 17:24:47 +0100
+Message-ID: <CACO55tsyCtf-_mCPVEo-4Dj_mAu-tnNTTjP75wx=9n+TS1XVvw@mail.gmail.com>
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [RESEND][PATCH] drm/nouveau/fb/ga102: Replace
+ zero-length array of trailing structs with flex-array
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,36 +75,73 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
- linux-mips@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org,
- dri-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
- linux-arm-kernel@lists.infradead.org
+Cc: Kees Cook <keescook@chromium.org>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, Gourav Samaiya <gsamaiya@nvidia.com>,
+ linux-hardening@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, 16 Jan 2023, Thomas Zimmermann <tzimmermann@suse.de> wrote:
-> A lot of source files include drm_crtc_helper.h for its contained
-> include statements. This leads to excessive compile-time dependencies.
+On Wed, Jan 4, 2023 at 1:52 AM Gustavo A. R. Silva
+<gustavoars@kernel.org> wrote:
 >
-> Where possible, remove the include statements for drm_crtc_helper.h
-> and include the required source files directly. Also remove the
-> include statements from drm_crtc_helper.h itself, which doesn't need
-> most of them.
+> On Tue, Jan 03, 2023 at 03:48:36PM -0800, Kees Cook wrote:
+> > Zero-length arrays are deprecated[1] and are being replaced with
+> > flexible array members in support of the ongoing efforts to tighten the
+> > FORTIFY_SOURCE routines on memcpy(), correctly instrument array indexing
+> > with UBSAN_BOUNDS, and to globally enable -fstrict-flex-arrays=3.
+> >
+> > Replace zero-length array with flexible-array member.
+> >
+> > This results in no differences in binary output.
+> >
+> > [1] https://github.com/KSPP/linux/issues/78
+> >
+> > Cc: Ben Skeggs <bskeggs@redhat.com>
+> > Cc: Karol Herbst <kherbst@redhat.com>
+> > Cc: Lyude Paul <lyude@redhat.com>
+> > Cc: David Airlie <airlied@gmail.com>
+> > Cc: Daniel Vetter <daniel@ffwll.ch>
+> > Cc: Gourav Samaiya <gsamaiya@nvidia.com>
+> > Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+> > Cc: dri-devel@lists.freedesktop.org
+> > Cc: nouveau@lists.freedesktop.org
+> > Signed-off-by: Kees Cook <keescook@chromium.org>
 >
-> I built this patchset on x86-64, aarch64 and arm. Hopefully I found
-> all include dependencies.
+> Here is my RB again:
+>
+> Reviewed-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+>
 
-I think this is the right direction and I support this. Personally I
-think it's enough to build test and fix any fallout afterwards.
+Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
-To that end, I did build test this myself with my config, and it was
-fine, though that probably doesn't add much coverage.
+will push in a moment
 
-FWIW,
+> Thanks!
+> --
+> Gustavo
+>
+> > ---
+> > Sent before as: https://lore.kernel.org/all/20221118211207.never.039-kees@kernel.org/
+> > ---
+> >  drivers/gpu/drm/nouveau/include/nvfw/hs.h | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/include/nvfw/hs.h b/drivers/gpu/drm/nouveau/include/nvfw/hs.h
+> > index 8c4cd08a7b5f..8b58b668fc0c 100644
+> > --- a/drivers/gpu/drm/nouveau/include/nvfw/hs.h
+> > +++ b/drivers/gpu/drm/nouveau/include/nvfw/hs.h
+> > @@ -52,7 +52,7 @@ struct nvfw_hs_load_header_v2 {
+> >       struct {
+> >               u32 offset;
+> >               u32 size;
+> > -     } app[0];
+> > +     } app[];
+> >  };
+> >
+> >  const struct nvfw_hs_load_header_v2 *nvfw_hs_load_header_v2(struct nvkm_subdev *, const void *);
+> > --
+> > 2.34.1
+> >
+>
 
-Acked-by: Jani Nikula <jani.nikula@intel.com>
-
-
--- 
-Jani Nikula, Intel Open Source Graphics Center
