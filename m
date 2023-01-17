@@ -2,47 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76BF666D05F
-	for <lists+nouveau@lfdr.de>; Mon, 16 Jan 2023 21:47:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BD1666D868
+	for <lists+nouveau@lfdr.de>; Tue, 17 Jan 2023 09:41:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 94F4F10E05D;
-	Mon, 16 Jan 2023 20:47:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2471610E51B;
+	Tue, 17 Jan 2023 08:41:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mailrelay3-1.pub.mailoutpod2-cph3.one.com
- (mailrelay3-1.pub.mailoutpod2-cph3.one.com [IPv6:2a02:2350:5:402::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A5EB510E4C9
- for <nouveau@lists.freedesktop.org>; Mon, 16 Jan 2023 20:47:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ravnborg.org; s=rsa2;
- h=in-reply-to:content-type:mime-version:references:message-id:subject:cc:to:
- from:date:from;
- bh=hRkGhkGEnmgInCvs3rVTwzKWsHh71Vg6LNBuwBJhnGI=;
- b=QpnuNWjLm3HBShNHcv1jkSScOozA8nnb9tpP+9W+043hpJ6PGppYJYI84cxZGlrmGe7ujd0PptYxG
- UUvbYWLLqfrxsTfUgKV/DOQoSkAJgPOD5o+u6sNhB99ST605WNzltrTnMSpRVz6aEQk41HeRil52vw
- DvtpDbVTkouMlsjRLL4/z0jE88xfAHyxmDyfHOEGzmyQyQPuL/r2CYcpx1flwP3+rHOCEdicnuvs/W
- jM7Sl2WRxpVKA/mNBJ35JXcIEKPBseR8jqbmHVxwY0qvlMsWz5KI6lrsqzage8xYkyxtnvI445elRs
- 23dxmjsrEbVTFfR9rEzkEYmhMT9TGuA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed;
- d=ravnborg.org; s=ed2;
- h=in-reply-to:content-type:mime-version:references:message-id:subject:cc:to:
- from:date:from;
- bh=hRkGhkGEnmgInCvs3rVTwzKWsHh71Vg6LNBuwBJhnGI=;
- b=mCI+axuI2AfxFUOLQXYc2VJUv0VtmpAfcrLE6qklmT6q+xl8lgRJLmMDbSswchsPqWUlGnmCIrq0A
- k5Y79kqBw==
-X-HalOne-ID: f12f8be1-95de-11ed-b1f5-ede074c87fad
-Received: from ravnborg.org (2-105-2-98-cable.dk.customer.tdc.net [2.105.2.98])
- by mailrelay3 (Halon) with ESMTPSA
- id f12f8be1-95de-11ed-b1f5-ede074c87fad;
- Mon, 16 Jan 2023 20:47:09 +0000 (UTC)
-Date: Mon, 16 Jan 2023 21:47:07 +0100
-From: Sam Ravnborg <sam@ravnborg.org>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <Y8W3y32sOpP3D6YX@ravnborg.org>
-References: <20230116131235.18917-1-tzimmermann@suse.de>
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9626E10E519;
+ Tue, 17 Jan 2023 08:41:37 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 389096834E;
+ Tue, 17 Jan 2023 08:41:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1673944896; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=rg3+qKkwwxy1PyfGEgfsERCs9EspIVLV9IOlw7clUwc=;
+ b=cX3lTal0KQAYsRZMF9DQ+eMErCnOWxeo2gynfs10W9/H4iCoCFR7zgCqFJTZOizWm7VIwZ
+ ZmJGrcUQrPfE5w0M02dM9jLLMXFfoDYA1bxvPWPl7M/maov6xVTeh3O/OhNtv1rYSuvA64
+ t17ZNy0xFk3BW6nhAVMJ56ZYPKI6YXY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1673944896;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=rg3+qKkwwxy1PyfGEgfsERCs9EspIVLV9IOlw7clUwc=;
+ b=AxodzgBL94uIf+5wnZzzRB6mLCh0ReLOrIGCeXPVUVxG1UZhYLe+jPXJejK3aaDbhkNwc0
+ jGCKSb7cEzvvV/CQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E85351390C;
+ Tue, 17 Jan 2023 08:41:35 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id NOR0Nz9fxmNJXQAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Tue, 17 Jan 2023 08:41:35 +0000
+Message-ID: <40c778d6-1348-2c6c-2e37-c3602cc66b7b@suse.de>
+Date: Tue, 17 Jan 2023 09:41:35 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230116131235.18917-1-tzimmermann@suse.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.1
+Content-Language: en-US
+To: Alex Deucher <alexdeucher@gmail.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>
+References: <20230116131235.18917-1-tzimmermann@suse.de>
+ <87k01me9jn.fsf@intel.com>
+ <CADnq5_PsL8N27_LC_h1m8i_FCg6mJtr7K9Yjv=guw-KGD2wU5w@mail.gmail.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <CADnq5_PsL8N27_LC_h1m8i_FCg6mJtr7K9Yjv=guw-KGD2wU5w@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------HZoXM0yd7tEI0Xb9vAUNJ06z"
 Subject: Re: [Nouveau] [PATCH 00/22] drm: Remove includes for
  drm_crtc_helper.h
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -59,193 +75,86 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Cc: linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
  linux-mips@vger.kernel.org, amd-gfx@lists.freedesktop.org,
  linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org,
- dri-devel@lists.freedesktop.org, daniel@ffwll.ch, linux-sunxi@lists.linux.dev,
+ dri-devel@lists.freedesktop.org, sam@ravnborg.org, linux-sunxi@lists.linux.dev,
  linux-arm-kernel@lists.infradead.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Thomas.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------HZoXM0yd7tEI0Xb9vAUNJ06z
+Content-Type: multipart/mixed; boundary="------------M0Q2evvYu05hQ9r0mpgHSfn3";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Alex Deucher <alexdeucher@gmail.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>
+Cc: linux-aspeed@lists.ozlabs.org, sam@ravnborg.org,
+ linux-mips@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-sunxi@lists.linux.dev, linux-arm-kernel@lists.infradead.org
+Message-ID: <40c778d6-1348-2c6c-2e37-c3602cc66b7b@suse.de>
+Subject: Re: [PATCH 00/22] drm: Remove includes for drm_crtc_helper.h
+References: <20230116131235.18917-1-tzimmermann@suse.de>
+ <87k01me9jn.fsf@intel.com>
+ <CADnq5_PsL8N27_LC_h1m8i_FCg6mJtr7K9Yjv=guw-KGD2wU5w@mail.gmail.com>
+In-Reply-To: <CADnq5_PsL8N27_LC_h1m8i_FCg6mJtr7K9Yjv=guw-KGD2wU5w@mail.gmail.com>
 
-On Mon, Jan 16, 2023 at 02:12:13PM +0100, Thomas Zimmermann wrote:
-> A lot of source files include drm_crtc_helper.h for its contained
-> include statements. This leads to excessive compile-time dependencies.
-> 
-> Where possible, remove the include statements for drm_crtc_helper.h
-> and include the required source files directly. Also remove the
-> include statements from drm_crtc_helper.h itself, which doesn't need
-> most of them.
-With this patchset drm_crtc_helper usage is reduced from 85 places to 35
-places. And the 35 places is only .c files.
-This is a very nice reduction of bloat! I hope this has a measureable
-effect on building times.
+--------------M0Q2evvYu05hQ9r0mpgHSfn3
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-I was working on something similar, but that approach only added missing
-includes, and did not kill all the unnessesary includes - which I think
-is the biggest win here.
+SGkNCg0KQW0gMTYuMDEuMjMgdW0gMTk6Mzcgc2NocmllYiBBbGV4IERldWNoZXI6DQo+IE9u
+IE1vbiwgSmFuIDE2LCAyMDIzIGF0IDExOjIwIEFNIEphbmkgTmlrdWxhDQo+IDxqYW5pLm5p
+a3VsYUBsaW51eC5pbnRlbC5jb20+IHdyb3RlOg0KPj4NCj4+IE9uIE1vbiwgMTYgSmFuIDIw
+MjMsIFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPiB3cm90ZToNCj4+
+PiBBIGxvdCBvZiBzb3VyY2UgZmlsZXMgaW5jbHVkZSBkcm1fY3J0Y19oZWxwZXIuaCBmb3Ig
+aXRzIGNvbnRhaW5lZA0KPj4+IGluY2x1ZGUgc3RhdGVtZW50cy4gVGhpcyBsZWFkcyB0byBl
+eGNlc3NpdmUgY29tcGlsZS10aW1lIGRlcGVuZGVuY2llcy4NCj4+Pg0KPj4+IFdoZXJlIHBv
+c3NpYmxlLCByZW1vdmUgdGhlIGluY2x1ZGUgc3RhdGVtZW50cyBmb3IgZHJtX2NydGNfaGVs
+cGVyLmgNCj4+PiBhbmQgaW5jbHVkZSB0aGUgcmVxdWlyZWQgc291cmNlIGZpbGVzIGRpcmVj
+dGx5LiBBbHNvIHJlbW92ZSB0aGUNCj4+PiBpbmNsdWRlIHN0YXRlbWVudHMgZnJvbSBkcm1f
+Y3J0Y19oZWxwZXIuaCBpdHNlbGYsIHdoaWNoIGRvZXNuJ3QgbmVlZA0KPj4+IG1vc3Qgb2Yg
+dGhlbS4NCj4+Pg0KPj4+IEkgYnVpbHQgdGhpcyBwYXRjaHNldCBvbiB4ODYtNjQsIGFhcmNo
+NjQgYW5kIGFybS4gSG9wZWZ1bGx5IEkgZm91bmQNCj4+PiBhbGwgaW5jbHVkZSBkZXBlbmRl
+bmNpZXMuDQo+Pg0KPj4gSSB0aGluayB0aGlzIGlzIHRoZSByaWdodCBkaXJlY3Rpb24gYW5k
+IEkgc3VwcG9ydCB0aGlzLiBQZXJzb25hbGx5IEkNCj4+IHRoaW5rIGl0J3MgZW5vdWdoIHRv
+IGJ1aWxkIHRlc3QgYW5kIGZpeCBhbnkgZmFsbG91dCBhZnRlcndhcmRzLg0KPj4NCj4+IFRv
+IHRoYXQgZW5kLCBJIGRpZCBidWlsZCB0ZXN0IHRoaXMgbXlzZWxmIHdpdGggbXkgY29uZmln
+LCBhbmQgaXQgd2FzDQo+PiBmaW5lLCB0aG91Z2ggdGhhdCBwcm9iYWJseSBkb2Vzbid0IGFk
+ZCBtdWNoIGNvdmVyYWdlLg0KPj4NCj4+IEZXSVcsDQo+Pg0KPj4gQWNrZWQtYnk6IEphbmkg
+TmlrdWxhIDxqYW5pLm5pa3VsYUBpbnRlbC5jb20+DQo+IA0KPiBBZ3JlZWQuICBJIGFwcGxp
+ZWQgMS8yMiBzaW5jZSBpdCB3YXMgYW4gdW5yZWxhdGVkIGNsZWFudXAsIGJ1dCB0aGUNCj4g
+cmVzdCBvZiB0aGUgc2VyaWVzIGlzOg0KPiBBY2tlZC1ieTogQWxleCBEZXVjaGVyIDxhbGV4
+YW5kZXIuZGV1Y2hlckBhbWQuY29tPg0KDQpUaGFua3MgdG8gYm90aCBvZiB5b3UuIEknbGwg
+bGVhdmUgb3V0IHRoZSBmaXJzdCBwYXRjaCB3aGVuIG1lcmdpbmcgdGhlIA0Kc2VyaWVzLg0K
+DQpCZXN0IHJlZ2FyZHMNClRob21hcw0KDQo+IA0KPj4NCj4+DQo+PiAtLQ0KPj4gSmFuaSBO
+aWt1bGEsIEludGVsIE9wZW4gU291cmNlIEdyYXBoaWNzIENlbnRlcg0KDQotLSANClRob21h
+cyBaaW1tZXJtYW5uDQpHcmFwaGljcyBEcml2ZXIgRGV2ZWxvcGVyDQpTVVNFIFNvZnR3YXJl
+IFNvbHV0aW9ucyBHZXJtYW55IEdtYkgNCk1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVy
+ZywgR2VybWFueQ0KKEhSQiAzNjgwOSwgQUcgTsO8cm5iZXJnKQ0KR2VzY2jDpGZ0c2bDvGhy
+ZXI6IEl2byBUb3Rldg0K
 
-All patches are:
-Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
+--------------M0Q2evvYu05hQ9r0mpgHSfn3--
 
-For a few of them the r-b is conditional, see the specific comments
-posted.
+--------------HZoXM0yd7tEI0Xb9vAUNJ06z
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
+-----BEGIN PGP SIGNATURE-----
 
-I did a build check here with the archs and config I verifies with.
-This covers "alpha arm arm64 sparc64 i386 x86 powerpc s390 riscv sh"
-and everything was fine. I have a few specific configs to pull in
-drivers that need a bit extra to be built.
-So I consider build coverage OK for applying, but it would be nice to
-wait a few days for the bots to verify too.
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmPGXz8FAwAAAAAACgkQlh/E3EQov+CD
+Jw/+MTb+BPZzh8/QUyb31NxfXoxbq8jtzMJYljSz0DCcnbcyJi/VodlwaLvUrUMdrGCbwnbEQi3/
+tbnWP/LyqMUoi/wipxPzIS3kdeJka/6y5ytVh1xIXqGiGr4vrTPGfUvsl/5WKBvUDeLEhXRCjww6
+255YDfk6ypXLcbYIZMBw6JacQG6AjrFY0Nkd0GJjryMNRYigv+T06RauL4BdPshf7YWSz3FLU5QB
+UiueCCbkoGZZItQp0F6NwuNTOaIYcGaih1ZjYoM5sdF7PRWuUj2lgm5CKrYOL5USSWnMtrG+gV4c
+vrJXvdT4VlEcAIqhMcB+XprmbpjUEIkEwMpWgZncSFwJqYSPc3e9WNqVG8L3Yc2o0RXavaR+jgV4
+8TfMO42iMGxzIRRewW7nd4EswNn+4FQycCRIjBxsMR/yVSL29x6HMBDEm2FjpMX5NKMpRBwvrCcJ
+uH7yzcltwZDKq0UFEjNr4jNUedc1KU5My/OqSp4Vo8MTMXM3MwFQlQ+w4TjaHQOB/TxO2jb2bytv
+h7q4OPXnwAEJd3FRKgdgshzpM4oj7K6xuhgyeBZRjM0Js7QOSmXrWIB2W2oLBkOgnxlfTmvrvk/A
+3yb/toR+az7Zvh7nxy+dNvjbc+ivcWFEXirk0i4+3Sxx+VcvwdmF9WlOH7tEfG/EY15VzrC56LpJ
+X3E=
+=5Kpg
+-----END PGP SIGNATURE-----
 
-My own work on slimming drm_atomic_helper.h and drm_print.h will be
-rebased on top of your work before I continue it.
-I need to look into removing unused includes too.
-
-	Sam
-
-> 
-> I built this patchset on x86-64, aarch64 and arm. Hopefully I found
-> all include dependencies.
-> 
-> Thanks to Sam Ravnborg for bringing this to my attention.
-> 
-> Thomas Zimmermann (22):
->   drm/amdgpu: Fix coding style
->   drm: Remove unnecessary include statements for drm_crtc_helper.h
->   drm/amdgpu: Remove unnecessary include statements for
->     drm_crtc_helper.h
->   drm/arm/komeda: Remove unnecessary include statements for
->     drm_crtc_helper.h
->   drm/aspeed: Remove unnecessary include statements for
->     drm_crtc_helper.h
->   drm/ast: Remove unnecessary include statements for drm_crtc_helper.h
->   drm/bridge: Remove unnecessary include statements for
->     drm_crtc_helper.h
->   drm/gma500: Remove unnecessary include statements for
->     drm_crtc_helper.h
->   drm/i2c/ch7006: Remove unnecessary include statements for
->     drm_crtc_helper.h
->   drm/ingenic: Remove unnecessary include statements for
->     drm_crtc_helper.h
->   drm/kmb: Remove unnecessary include statements for drm_crtc_helper.h
->   drm/logicvc: Remove unnecessary include statements for
->     drm_crtc_helper.h
->   drm/nouveau: Remove unnecessary include statements for
->     drm_crtc_helper.h
->   drm/radeon: Remove unnecessary include statements for
->     drm_crtc_helper.h
->   drm/rockchip: Remove unnecessary include statements for
->     drm_crtc_helper.h
->   drm/shmobile: Remove unnecessary include statements for
->     drm_crtc_helper.h
->   drm/sprd: Remove unnecessary include statements for drm_crtc_helper.h
->   drm/sun4i: Remove unnecessary include statements for drm_crtc_helper.h
->   drm/tidss: Remove unnecessary include statements for drm_crtc_helper.h
->   drm/udl: Remove unnecessary include statements for drm_crtc_helper.h
->   drm/vboxvideo: Remove unnecessary include statements for
->     drm_crtc_helper.h
->   drm/crtc-helper: Remove most include statements from drm_crtc_helper.h
-> 
->  drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c     |  2 ++
->  drivers/gpu/drm/amd/amdgpu/amdgpu_device.c         |  5 +++--
->  drivers/gpu/drm/amd/amdgpu/amdgpu_display.c        |  1 +
->  drivers/gpu/drm/amd/amdgpu/amdgpu_encoders.c       |  1 -
->  drivers/gpu/drm/amd/amdgpu/amdgpu_irq.c            |  1 -
->  drivers/gpu/drm/amd/amdgpu/amdgpu_mode.h           |  1 -
->  drivers/gpu/drm/amd/amdgpu/atombios_crtc.c         |  1 -
->  drivers/gpu/drm/amd/amdgpu/atombios_encoders.c     |  1 -
->  drivers/gpu/drm/amd/amdgpu/dce_v10_0.c             |  2 ++
->  drivers/gpu/drm/amd/amdgpu/dce_v11_0.c             |  2 ++
->  drivers/gpu/drm/amd/amdgpu/dce_v6_0.c              |  2 ++
->  drivers/gpu/drm/amd/amdgpu/dce_v8_0.c              |  2 ++
->  drivers/gpu/drm/arm/display/komeda/komeda_crtc.c   |  1 -
->  drivers/gpu/drm/arm/display/komeda/komeda_kms.h    |  1 -
->  drivers/gpu/drm/aspeed/aspeed_gfx_crtc.c           |  1 -
->  drivers/gpu/drm/aspeed/aspeed_gfx_drv.c            |  1 -
->  drivers/gpu/drm/aspeed/aspeed_gfx_out.c            |  1 -
->  drivers/gpu/drm/ast/ast_drv.c                      |  1 -
->  drivers/gpu/drm/ast/ast_main.c                     |  1 -
->  drivers/gpu/drm/ast/ast_mode.c                     |  1 -
->  drivers/gpu/drm/bridge/analogix/analogix-anx6345.c |  1 -
->  drivers/gpu/drm/bridge/analogix/anx7625.c          |  1 -
->  .../gpu/drm/bridge/cadence/cdns-mhdp8546-core.c    |  1 -
->  drivers/gpu/drm/bridge/ite-it6505.c                |  1 -
->  drivers/gpu/drm/bridge/ite-it66121.c               |  1 -
->  drivers/gpu/drm/bridge/tc358768.c                  |  1 -
->  drivers/gpu/drm/bridge/tc358775.c                  |  1 -
->  drivers/gpu/drm/drm_crtc_helper.c                  |  1 -
->  drivers/gpu/drm/drm_lease.c                        |  2 +-
->  drivers/gpu/drm/drm_plane_helper.c                 |  1 -
->  drivers/gpu/drm/gma500/cdv_device.c                |  1 +
->  drivers/gpu/drm/gma500/cdv_intel_crt.c             |  2 ++
->  drivers/gpu/drm/gma500/cdv_intel_display.c         |  1 +
->  drivers/gpu/drm/gma500/cdv_intel_dp.c              |  1 +
->  drivers/gpu/drm/gma500/cdv_intel_hdmi.c            |  2 ++
->  drivers/gpu/drm/gma500/cdv_intel_lvds.c            |  2 ++
->  drivers/gpu/drm/gma500/framebuffer.c               |  2 ++
->  drivers/gpu/drm/gma500/gma_display.c               |  2 ++
->  drivers/gpu/drm/gma500/oaktrail_crtc.c             |  1 +
->  drivers/gpu/drm/gma500/oaktrail_hdmi.c             |  2 ++
->  drivers/gpu/drm/gma500/oaktrail_lvds.c             |  1 +
->  drivers/gpu/drm/gma500/psb_device.c                |  1 +
->  drivers/gpu/drm/gma500/psb_intel_display.c         |  3 +++
->  drivers/gpu/drm/gma500/psb_intel_drv.h             |  1 -
->  drivers/gpu/drm/gma500/psb_intel_lvds.c            |  2 ++
->  drivers/gpu/drm/gma500/psb_intel_sdvo.c            |  2 ++
->  drivers/gpu/drm/i2c/ch7006_drv.c                   |  2 ++
->  drivers/gpu/drm/i2c/ch7006_priv.h                  |  1 -
->  drivers/gpu/drm/ingenic/ingenic-drm-drv.c          |  1 -
->  drivers/gpu/drm/kmb/kmb_crtc.c                     |  1 -
->  drivers/gpu/drm/kmb/kmb_plane.c                    |  1 -
->  drivers/gpu/drm/logicvc/logicvc_interface.c        |  1 -
->  drivers/gpu/drm/logicvc/logicvc_mode.c             |  1 -
->  drivers/gpu/drm/nouveau/dispnv04/crtc.c            |  1 +
->  drivers/gpu/drm/nouveau/dispnv04/dac.c             |  2 +-
->  drivers/gpu/drm/nouveau/dispnv04/dfp.c             |  2 +-
->  drivers/gpu/drm/nouveau/dispnv04/tvmodesnv17.c     |  1 -
->  drivers/gpu/drm/nouveau/dispnv04/tvnv04.c          |  2 +-
->  drivers/gpu/drm/nouveau/dispnv04/tvnv17.c          |  1 +
->  drivers/gpu/drm/nouveau/dispnv50/head.c            |  1 -
->  drivers/gpu/drm/nouveau/nouveau_drm.c              |  1 -
->  drivers/gpu/drm/nouveau/nouveau_vga.c              |  1 -
->  drivers/gpu/drm/radeon/atombios_crtc.c             |  2 +-
->  drivers/gpu/drm/radeon/atombios_encoders.c         |  1 +
->  drivers/gpu/drm/radeon/r300.c                      |  1 -
->  drivers/gpu/drm/radeon/radeon_asic.c               |  1 -
->  drivers/gpu/drm/radeon/radeon_connectors.c         |  1 +
->  drivers/gpu/drm/radeon/radeon_display.c            |  1 +
->  drivers/gpu/drm/radeon/radeon_drv.c                |  1 -
->  drivers/gpu/drm/radeon/radeon_encoders.c           |  1 -
->  drivers/gpu/drm/radeon/radeon_irq_kms.c            |  1 -
->  drivers/gpu/drm/radeon/radeon_legacy_crtc.c        |  2 +-
->  drivers/gpu/drm/radeon/radeon_legacy_encoders.c    |  2 +-
->  drivers/gpu/drm/radeon/radeon_legacy_tv.c          |  1 -
->  drivers/gpu/drm/radeon/radeon_mode.h               |  2 +-
->  drivers/gpu/drm/rockchip/rockchip_drm_vop2.c       |  1 -
->  drivers/gpu/drm/shmobile/shmob_drm_crtc.c          |  2 ++
->  drivers/gpu/drm/shmobile/shmob_drm_drv.c           |  1 -
->  drivers/gpu/drm/shmobile/shmob_drm_plane.c         |  1 -
->  drivers/gpu/drm/sprd/sprd_dpu.c                    |  1 -
->  drivers/gpu/drm/sprd/sprd_drm.c                    |  1 -
->  drivers/gpu/drm/sprd/sprd_dsi.c                    |  1 -
->  drivers/gpu/drm/sun4i/sun8i_dw_hdmi.c              |  2 +-
->  drivers/gpu/drm/tidss/tidss_crtc.c                 |  1 -
->  drivers/gpu/drm/tidss/tidss_drv.c                  |  1 -
->  drivers/gpu/drm/tidss/tidss_encoder.c              |  2 +-
->  drivers/gpu/drm/tidss/tidss_kms.c                  |  1 -
->  drivers/gpu/drm/tidss/tidss_plane.c                |  1 -
->  drivers/gpu/drm/udl/udl_drv.c                      |  2 +-
->  drivers/gpu/drm/udl/udl_modeset.c                  |  1 -
->  drivers/gpu/drm/vboxvideo/vbox_drv.c               |  2 +-
->  drivers/gpu/drm/vboxvideo/vbox_main.c              |  1 -
->  include/drm/drm_crtc_helper.h                      | 14 +++++++++-----
->  include/drm/drm_fixed.h                            |  1 +
->  94 files changed, 70 insertions(+), 70 deletions(-)
-> 
-> 
-> base-commit: 68d139b609a97a83e7c231189d4864aba4e1679b
-> prerequisite-patch-id: 0aa359f6144c4015c140c8a6750be19099c676fb
-> prerequisite-patch-id: c67e5d886a47b7d0266d81100837557fda34cb24
-> prerequisite-patch-id: 3f204510fcbf9530d6540bd8e6128cce598988b6
-> -- 
-> 2.39.0
+--------------HZoXM0yd7tEI0Xb9vAUNJ06z--
