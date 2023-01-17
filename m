@@ -2,91 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DF866F6B48
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C3D46F6B61
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 803C910E3DD;
-	Thu,  4 May 2023 12:31:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8237310E3F7;
+	Thu,  4 May 2023 12:31:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E580910E521;
- Tue, 17 Jan 2023 08:49:36 +0000 (UTC)
-Received: from pps.filterd (m0098419.ppops.net [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 30H7jBg2002153; Tue, 17 Jan 2023 08:49:29 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=message-id : subject :
- from : to : cc : date : in-reply-to : references : content-type :
- content-transfer-encoding : mime-version; s=pp1;
- bh=H906UnaT+mKc1vvKmTCCEcWqGmxotatY633LkzBqxYU=;
- b=A6BVq7HNMg+oOk9phju+5wb8NvQ5nhXgUGV4aDzrytllvMMkF1QwAASO805mzs95eZ2n
- nFKcix/B9tP3yq5RutbLwr2yS0Abm57uKLmBtWu1LQCnzO68gBvKuRAubGf/f3lwbm/t
- d7yQv+5f0SONkcFHHSaAcX07ZpD4eOvZsvKy1FKh8tdh0yhzrWgHCxFAGAnbCx2hVThN
- Rond9aWSHw3YaiM/1OecQ05uP252qJXP3SYTDx0h1dBaObZJqgSUfIb/xpcCfRKWX9Px
- JCMj5JyJGhH44nebnIBpCrl3064gZ9Rc08Ewv1HQn0ismQJBIsB7Inz4PAelp10g6+mT Qw== 
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3n5hky0gqv-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 17 Jan 2023 08:49:29 +0000
-Received: from m0098419.ppops.net (m0098419.ppops.net [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 30H8ftP6001523;
- Tue, 17 Jan 2023 08:49:28 GMT
-Received: from ppma05fra.de.ibm.com (6c.4a.5195.ip4.static.sl-reverse.com
- [149.81.74.108])
- by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3n5hky0gq2-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 17 Jan 2023 08:49:28 +0000
-Received: from pps.filterd (ppma05fra.de.ibm.com [127.0.0.1])
- by ppma05fra.de.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id 30GGKqhH025576;
- Tue, 17 Jan 2023 08:49:26 GMT
-Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
- by ppma05fra.de.ibm.com (PPS) with ESMTPS id 3n3m16ajt5-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 17 Jan 2023 08:49:26 +0000
-Received: from smtpav06.fra02v.mail.ibm.com (smtpav06.fra02v.mail.ibm.com
- [10.20.54.105])
- by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 30H8nMXa14222046
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 17 Jan 2023 08:49:22 GMT
-Received: from smtpav06.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id CAED920049;
- Tue, 17 Jan 2023 08:49:22 +0000 (GMT)
-Received: from smtpav06.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 33E1620040;
- Tue, 17 Jan 2023 08:49:22 +0000 (GMT)
-Received: from [9.155.211.163] (unknown [9.155.211.163])
- by smtpav06.fra02v.mail.ibm.com (Postfix) with ESMTP;
- Tue, 17 Jan 2023 08:49:22 +0000 (GMT)
-Message-ID: <0bd438b3afa979b9f4d4d1e9c76451a93e7ef7eb.camel@linux.ibm.com>
-From: Niklas Schnelle <schnelle@linux.ibm.com>
-To: Jason Gunthorpe <jgg@nvidia.com>, Lu Baolu <baolu.lu@linux.intel.com>,
- Joerg Roedel <joro@8bytes.org>, Kevin Tian <kevin.tian@intel.com>, Matthew
- Rosato <mjrosato@linux.ibm.com>, Robin Murphy <robin.murphy@arm.com>
-Date: Tue, 17 Jan 2023 09:49:22 +0100
-In-Reply-To: <8-v1-6e8b3997c46d+89e-iommu_map_gfp_jgg@nvidia.com>
-References: <8-v1-6e8b3997c46d+89e-iommu_map_gfp_jgg@nvidia.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.3 (3.46.3-1.fc37) 
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E4D3910E1B3;
+ Tue, 17 Jan 2023 16:39:14 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 65B22B8166E;
+ Tue, 17 Jan 2023 16:39:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9D5FC433D2;
+ Tue, 17 Jan 2023 16:39:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1673973552;
+ bh=ySEJMU3KFh+SZ1kFanOfIpyzm2CVjH6uK0xDkFyQROU=;
+ h=From:To:Cc:Subject:Date:From;
+ b=eW7zq9g1aG1mp/LEKIMRBrKcu7V83Wp32f8TQWHkG7X1GY8T/FqSazEJLctqAuZN2
+ 7BqfQEtSyZhKlXvqJDAyvO8qeHGoS8/sbDOoEQJWRe4WhtinlYRUC+FTkBkNfUVFnX
+ pMnMkh/cwVDHf2o2hJikIYAflfIeZfxuYlYPEwEDV6/jUlWFMV2gyE7f+HJspVLx72
+ /kU/EMUzt51+eW92mKUCN5mMRcDyCgpbAUBHHl3213CZhlIwGupRg0jCXZUWIuUur/
+ uA75N4S6APQJjsSCptU54CwkzuPmFgcmr6IRt7+9MTOv7C2h7T17ot3l4fVf/hX6k7
+ VSISGdV7hoSCg==
+From: Arnd Bergmann <arnd@kernel.org>
+To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>
+Date: Tue, 17 Jan 2023 17:39:00 +0100
+Message-Id: <20230117163907.1081223-1-arnd@kernel.org>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: MKx4-ANHPJUrZonOgwaEaY-EVKsDWzHU
-X-Proofpoint-GUID: SbFxmq8QKSSdWBsgb5noBKiad8Yo5FPz
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.923,Hydra:6.0.562,FMLib:17.11.122.1
- definitions=2023-01-17_04,2023-01-13_02,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 mlxscore=0
- phishscore=0 malwarescore=0 lowpriorityscore=0 mlxlogscore=713 bulkscore=0
- spamscore=0 impostorscore=0 clxscore=1011 suspectscore=0 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2212070000
- definitions=main-2301170071
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:36 +0000
-Subject: Re: [Nouveau] [PATCH 8/8] iommu/s390: Push the gfp parameter to the
- kmem_cache_alloc()'s
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:34 +0000
+Subject: [Nouveau] [PATCH] nouveau: fix nv50_wndw_new_() prototype
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,36 +52,49 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-s390@vger.kernel.org, kvm@vger.kernel.org,
- nouveau@lists.freedesktop.org, linux-rdma@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
- iommu@lists.linux.dev, dri-devel@lists.freedesktop.org,
- linux-stm32@st-md-mailman.stormreply.com,
- Alex Williamson <alex.williamson@redhat.com>, netdev@vger.kernel.org,
- ath10k@lists.infradead.org, linux-wireless@vger.kernel.org,
- linux-tegra@vger.kernel.org, Christian Borntraeger <borntraeger@linux.ibm.com>,
- virtualization@lists.linux-foundation.org, ath11k@lists.infradead.org,
- linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
+Cc: Dave Airlie <airlied@redhat.com>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Arnd Bergmann <arnd@arndb.de>,
+ nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 2023-01-06 at 12:42 -0400, Jason Gunthorpe wrote:
-> dma_alloc_cpu_table() and dma_alloc_page_table() are eventually called by
-> iommufd through s390_iommu_map_pages() and it should not be forced to
-> atomic. Thread the gfp parameter through the call chain starting from
-> s390_iommu_map_pages().
->=20
-> Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
-> ---
->  arch/s390/include/asm/pci_dma.h |  5 +++--
->  arch/s390/pci/pci_dma.c         | 31 +++++++++++++++++--------------
->  drivers/iommu/s390-iommu.c      | 15 +++++++++------
->  3 files changed, 29 insertions(+), 22 deletions(-)
->=20
----8<---
-> =20
+From: Arnd Bergmann <arnd@arndb.de>
 
-Looks good to me and I have no objections.
+gcc-13 complains about a mismatched function declaration:
 
-Reviewed-by: Niklas Schnelle <schnelle@linux.ibm.com>
+drivers/gpu/drm/nouveau/dispnv50/wndw.c:696:1: error: conflicting types for 'nv50_wndw_new_' due to enum/integer mismatch; have 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const u32 *, u32,  enum nv50_disp_interlock_type,  u32,  struct nv50_wndw **)' {aka 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const unsigned int *, unsigned int,  enum nv50_disp_interlock_type,  unsigned int,  struct nv50_wndw **)'} [-Werror=enum-int-mismatch]
+  696 | nv50_wndw_new_(const struct nv50_wndw_func *func, struct drm_device *dev,
+      | ^~~~~~~~~~~~~~
+In file included from drivers/gpu/drm/nouveau/dispnv50/wndw.c:22:
+drivers/gpu/drm/nouveau/dispnv50/wndw.h:36:5: note: previous declaration of 'nv50_wndw_new_' with type 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const u32 *, enum nv50_disp_interlock_type,  u32,  u32,  struct nv50_wndw **)' {aka 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const unsigned int *, enum nv50_disp_interlock_type,  unsigned int,  unsigned int,  struct nv50_wndw **)'}
+   36 | int nv50_wndw_new_(const struct nv50_wndw_func *, struct drm_device *,
+      |     ^~~~~~~~~~~~~~
+
+All the callers are ok, just the header file mixes up the order of
+the arguments.
+
+Fixes: 53e0a3e70de6 ("drm/nouveau/kms/nv50-: simplify tracking of channel interlocks")
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+---
+ drivers/gpu/drm/nouveau/dispnv50/wndw.h | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.h b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
+index 591c852f326b..76a6ae5d5652 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/wndw.h
++++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
+@@ -35,8 +35,9 @@ struct nv50_wndw {
+ 
+ int nv50_wndw_new_(const struct nv50_wndw_func *, struct drm_device *,
+ 		   enum drm_plane_type, const char *name, int index,
+-		   const u32 *format, enum nv50_disp_interlock_type,
+-		   u32 interlock_data, u32 heads, struct nv50_wndw **);
++		   const u32 *format, u32 heads,
++		   enum nv50_disp_interlock_type, u32 interlock_data,
++		   struct nv50_wndw **);
+ void nv50_wndw_flush_set(struct nv50_wndw *, u32 *interlock,
+ 			 struct nv50_wndw_atom *);
+ void nv50_wndw_flush_clr(struct nv50_wndw *, u32 *interlock, bool flush,
+-- 
+2.39.0
 
