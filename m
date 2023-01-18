@@ -2,59 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54403670FFF
-	for <lists+nouveau@lfdr.de>; Wed, 18 Jan 2023 02:29:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C882C671395
+	for <lists+nouveau@lfdr.de>; Wed, 18 Jan 2023 07:13:38 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3B17C10E62B;
-	Wed, 18 Jan 2023 01:29:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A95D610E681;
+	Wed, 18 Jan 2023 06:13:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2182A10E626;
- Wed, 18 Jan 2023 01:29:02 +0000 (UTC)
-Received: by mail-qv1-xf33.google.com with SMTP id h10so22857920qvq.7;
- Tue, 17 Jan 2023 17:29:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Iz4L9MutRDu4i//bl3CPD5SAUD3xbLfNwoGXHPZQGU8=;
- b=fNLI4VUw7tVoehErgWSAErKzMXMzb0SAxqNGbOhlLXIG8H2E+yR74KzV/3igBAKS8Y
- CnC3Jpu3ifveVhj7cv2uYBTksAWUD0FM9T556V+jdDgzH3mw8d1UdL//nu7XRvG2XOwR
- zLpnWGxok0uOkG6SJePzfUkCe7i+7rZ0o1hRfT2wTuOsU7oGGbWDmmGkkbNIzlcFxXmX
- x83rIa4Sr1oy262dvZflzPkYIGlBdrGFQcveMPrRG9dONOvXKZeHfifchYUk6my0II/t
- jfa8SPwQHIhGGeESOMMjGaTqYhvFjaqhTJeCaIt9Hg4LDCYjlJ4XQi5Wy/ts0YRKgSNN
- mtBA==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B7E4010E67E
+ for <nouveau@lists.freedesktop.org>; Wed, 18 Jan 2023 06:13:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1674022405;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=/pZh0oWkHv9U+mVZ6EUlZd50f9ioPkk97n/cDzVAg/U=;
+ b=ehC0sb2RRyQ4DZiZY2dk9RCgF8ph02jBlWM/O42rjePgOOZ0ZSD2+TCtjyIAmaS6QhcyJM
+ ppWyuUd1hk+JC2Qslj5Al7c4JeDwPOlqLm54Mqa1hVjJsIvar0Q5TueswIf1IsjZVCzY+t
+ 991yhixfXQrRYcMtBftGzy6P5GhTOyo=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-444-37ZSYU8ONUWY6mw6LBkvDQ-1; Wed, 18 Jan 2023 01:13:24 -0500
+X-MC-Unique: 37ZSYU8ONUWY6mw6LBkvDQ-1
+Received: by mail-ed1-f69.google.com with SMTP id
+ h18-20020a056402281200b0049e5078a6c3so354105ede.12
+ for <nouveau@lists.freedesktop.org>; Tue, 17 Jan 2023 22:13:24 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Iz4L9MutRDu4i//bl3CPD5SAUD3xbLfNwoGXHPZQGU8=;
- b=dKIiPZ/6td3QxW7+h6BUNwqEP6x92gXQ36qU+hb/VGy5bY0ekUesKe8R6eFlcNwj/x
- gQxuKi0Jh1tOk2ac8DPfVHZaS/1namJjMu3nJDCjk4wXrQ1qCnEezq8Fc/xQkfcBa5iA
- zQnQGLXQ24Rint48WNJLcVdTwuIhObCxOOyeWlTTZgR73sGIfA2NWWF/irsRsp00pF+n
- A/QmKRtETN8+0FLWwBpwB6MDEHU+XfqGoDLJL8VLMELtj/rdHIz+XTA6WOIUy6qjJD4N
- l0W6QQ3R/DUv4n9pF3DHuAFZs8FALjHJoEVIopH0/YFsKHrmnMr01AwtFsx8TznkW7ZB
- N2Cw==
-X-Gm-Message-State: AFqh2kqSk0/nPJr7LqgBH96ZV8YkPZxgu6c0MdBpDIvuUARc7MjfX7nw
- 1MhkRW6pPnZ9mgIU38CkjhWxyCSS9NQbFxB+Tv8=
-X-Google-Smtp-Source: AMrXdXsL5k+qu8G54BqAcpSoqbR7Kh/EG425Zj1jJABE+kI/wdy6MycsQe63guSM36XzTphfuyiiDoG0oUBlbdav1f8=
-X-Received: by 2002:a05:6214:15ce:b0:534:2059:eb59 with SMTP id
- p14-20020a05621415ce00b005342059eb59mr256243qvz.14.1674005341125; Tue, 17 Jan
- 2023 17:29:01 -0800 (PST)
+ bh=/pZh0oWkHv9U+mVZ6EUlZd50f9ioPkk97n/cDzVAg/U=;
+ b=t1hHWC3BCGHz2VWn3KvvzArjh/4qSuc3SUUOWMCL19Itrqadac3rHtjlDefQKP/HJq
+ Ly1KSsHLKoeChJVcr36dnqypobdWCZR+wTif5vPceL4IWaRbQyw+um2FTVv5lyeaQIKh
+ x9dsv6lngTgGiihk8wVMKDNp8AkK+X9TMwh0+5CzlOR/c5QBveqfs/awcHkHWphHUWF2
+ lXKV+Cgmybp+fLcPzaF9df/yI/KrbdDZ9SUZeGEGDXMrjKODTQj02+UTRRFMl6o7xxnu
+ 80/CtpWhoJv2X5ZQRehDl5p1ZxN1+wstfO4cop6MwZ99G65wsjNqKFn/Xlg6yADXuYKd
+ t6/g==
+X-Gm-Message-State: AFqh2krB4owiY2lWUB7pl6vflvUmXApKFDF3VnDWeblN3Vzz2Hf4sKcx
+ msNmMLk4z7+tjfqqJlzfHEL6WWZRbtZ3mZ5d9CXo5Ib8p3bRVUUJCbCjpW2BNxTxXxHfqaHTyMH
+ qlYrEwCooe/MBjpWbaXUpna4ZGg==
+X-Received: by 2002:a05:6402:f04:b0:47f:ab65:b3fe with SMTP id
+ i4-20020a0564020f0400b0047fab65b3femr6405217eda.33.1674022403401; 
+ Tue, 17 Jan 2023 22:13:23 -0800 (PST)
+X-Google-Smtp-Source: AMrXdXtJz/n+tV/U2PcwOK9ZeYmr68NHtYR8xg9kvYlieT1Bt1DnacXgtAgckPl/3L5ii/8Iya7teg==
+X-Received: by 2002:a05:6402:f04:b0:47f:ab65:b3fe with SMTP id
+ i4-20020a0564020f0400b0047fab65b3femr6405205eda.33.1674022403083; 
+ Tue, 17 Jan 2023 22:13:23 -0800 (PST)
+Received: from cassiopeiae.. ([2a02:810d:4b3f:de78:642:1aff:fe31:a19f])
+ by smtp.gmail.com with ESMTPSA id
+ v18-20020aa7cd52000000b0047eeaae9558sm5689188edw.60.2023.01.17.22.13.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Jan 2023 22:13:22 -0800 (PST)
+From: Danilo Krummrich <dakr@redhat.com>
+To: daniel@ffwll.ch, airlied@redhat.com, christian.koenig@amd.com,
+ bskeggs@redhat.com, jason@jlekstrand.net, tzimmermann@suse.de,
+ mripard@kernel.org, corbet@lwn.net
+Date: Wed, 18 Jan 2023 07:12:42 +0100
+Message-Id: <20230118061256.2689-1-dakr@redhat.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-References: <20221228144914.z7t7a4fdwvbblnak@wslaptop>
- <CAMwc25rY4xpn0yvCScMr6Hk9pFSdvt=9QOypSQDfj1d5tWmtvA@mail.gmail.com>
- <20230116122403.upk5ci4mbebw23m7@wslaptop>
-In-Reply-To: <20230116122403.upk5ci4mbebw23m7@wslaptop>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Wed, 18 Jan 2023 11:28:49 +1000
-Message-ID: <CACAvsv48vH6hbacQCN+yKP8ZcDjFMWciBt6U_Xv-LEYJHZ1q9g@mail.gmail.com>
-To: Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [REGRESSION] GM20B probe fails after commit
- 2541626cfb79
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Nouveau] [PATCH drm-next 00/14] [RFC] DRM GPUVA Manager & Nouveau
+ VM_BIND UAPI
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,96 +82,160 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@redhat.com>, bskeggs@redhat.com,
- regressions@lists.linux.dev, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, 16 Jan 2023 at 22:27, Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt> wrote:
->
-> On Mon, Jan 16, 2023 at 07:45:05AM +1000, David Airlie wrote:
-> > On Thu, Dec 29, 2022 at 12:58 AM Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt> wrote:
-> > As a quick check can you try changing
-> >
-> > drivers/gpu/drm/nouveau/nvkm/core/firmware.c:nvkm_firmware_mem_target
-> > from NVKM_MEM_TARGET_HOST to NVKM_MEM_TARGET_NCOH ?
->
-> Hello!
->
-> Applying this change breaks probing in a different way, with a
-> bad PC=0x0. From a quick look at nvkm_falcon_load_dmem it looks like this
-> could happen due to the .load_dmem() callback not being properly
-> initialized. This is the kernel log I got:
-In addition to Dave's change, can you try changing the
-nvkm_falcon_load_dmem() call in gm20b_pmu_init() to:
+This patch series provides a new UAPI for the Nouveau driver in order to
+support Vulkan features, such as sparse bindings and sparse residency.
 
-nvkm_falcon_pio_wr(falcon, (u8 *)&args, 0, 0, DMEM, addr_args,
-sizeof(args), 0, false);
+Furthermore, with the DRM GPUVA manager it provides a new DRM core feature to
+keep track of GPU virtual address (VA) mappings in a more generic way.
 
-Ben.
+The DRM GPUVA manager is indented to help drivers implement userspace-manageable
+GPU VA spaces in reference to the Vulkan API. In order to achieve this goal it
+serves the following purposes in this context.
 
->
-> [    2.010601] Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000
-> [    2.019436] Mem abort info:
-> [    2.022273]   ESR = 0x0000000086000005
-> [    2.026066]   EC = 0x21: IABT (current EL), IL = 32 bits
-> [    2.031429]   SET = 0, FnV = 0
-> [    2.034528]   EA = 0, S1PTW = 0
-> [    2.037694]   FSC = 0x05: level 1 translation fault
-> [    2.042572] [0000000000000000] user address but active_mm is swapper
-> [    2.048961] Internal error: Oops: 0000000086000005 [#1] SMP
-> [    2.054529] Modules linked in:
-> [    2.057582] CPU: 0 PID: 36 Comm: kworker/u8:1 Not tainted 6.2.0-rc3+ #2
-> [    2.064190] Hardware name: Google Pixel C (DT)
-> [    2.068628] Workqueue: events_unbound deferred_probe_work_func
-> [    2.074463] pstate: 40000005 (nZcv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
-> [    2.081417] pc : 0x0
-> [    2.083600] lr : nvkm_falcon_load_dmem+0x58/0x80
-> [    2.088218] sp : ffffffc009ddb6f0
-> [    2.091526] x29: ffffffc009ddb6f0 x28: ffffff808028a008 x27: ffffff8081e43c38
-> [    2.098658] x26: 00000000000000ff x25: ffffff808028a0a0 x24: 0000000000000000
-> [    2.105788] x23: ffffff8080c328f8 x22: 000000000000002c x21: 0000000000005fd4
-> [    2.112917] x20: ffffffc009ddb76c x19: ffffff8080c328b8 x18: 0000000000000000
-> [    2.120047] x17: 2e74696e695f646f x16: 6874656d5f77732f x15: 0000000000000000
-> [    2.127176] x14: 0000000002f546c2 x13: 0000000000000000 x12: 00000000000001ce
-> [    2.134306] x11: 0000000000000001 x10: 0000000000000a90 x9 : ffffffc009ddb600
-> [    2.141436] x8 : ffffff80803d19f0 x7 : ffffff80bf971180 x6 : 00000000000001b9
-> [    2.148565] x5 : 0000000000000000 x4 : 0000000000000000 x3 : 000000000000002c
-> [    2.155693] x2 : 0000000000005fd4 x1 : ffffffc009ddb76c x0 : ffffff8080c328b8
-> [    2.162822] Call trace:
-> [    2.165264]  0x0
-> [    2.167099]  gm20b_pmu_init+0x78/0xb4
-> [    2.170762]  nvkm_pmu_init+0x20/0x34
-> [    2.174334]  nvkm_subdev_init_+0x60/0x12c
-> [    2.178339]  nvkm_subdev_init+0x60/0xa0
-> [    2.182171]  nvkm_device_init+0x14c/0x2a0
-> [    2.186178]  nvkm_udevice_init+0x60/0x9c
-> [    2.190097]  nvkm_object_init+0x48/0x1b0
-> [    2.194013]  nvkm_ioctl_new+0x168/0x254
-> [    2.197843]  nvkm_ioctl+0xd0/0x220
-> [    2.201239]  nvkm_client_ioctl+0x10/0x1c
-> [    2.205160]  nvif_object_ctor+0xf4/0x22c
-> [    2.209079]  nvif_device_ctor+0x28/0x70
-> [    2.212910]  nouveau_cli_init+0x150/0x590
-> [    2.216916]  nouveau_drm_device_init+0x60/0x2a0
-> [    2.221442]  nouveau_platform_device_create+0x90/0xd0
-> [    2.226489]  nouveau_platform_probe+0x3c/0x9c
-> [    2.230841]  platform_probe+0x68/0xc0
-> [    2.234500]  really_probe+0xbc/0x2dc
-> [    2.238070]  __driver_probe_device+0x78/0xe0
-> [    2.242334]  driver_probe_device+0xd8/0x160
-> [    2.246511]  __device_attach_driver+0xb8/0x134
-> [    2.250948]  bus_for_each_drv+0x78/0xd0
-> [    2.254782]  __device_attach+0x9c/0x1a0
-> [    2.258612]  device_initial_probe+0x14/0x20
-> [    2.262789]  bus_probe_device+0x98/0xa0
-> [    2.266619]  deferred_probe_work_func+0x88/0xc0
-> [    2.271142]  process_one_work+0x204/0x40c
-> [    2.275150]  worker_thread+0x230/0x450
-> [    2.278894]  kthread+0xc8/0xcc
-> [    2.281946]  ret_from_fork+0x10/0x20
-> [    2.285525] Code: bad PC value
-> [    2.288576] ---[ end trace 0000000000000000 ]---
->
-> Diogo
+    1) Provide a dedicated range allocator to track GPU VA allocations and
+       mappings, making use of the drm_mm range allocator.
+
+    2) Generically connect GPU VA mappings to their backing buffers, in
+       particular DRM GEM objects.
+
+    3) Provide a common implementation to perform more complex mapping
+       operations on the GPU VA space. In particular splitting and merging
+       of GPU VA mappings, e.g. for intersecting mapping requests or partial
+       unmap requests.
+
+The new VM_BIND Nouveau UAPI build on top of the DRM GPUVA manager, itself
+providing the following new interfaces.
+
+    1) Initialize a GPU VA space via the new DRM_IOCTL_NOUVEAU_VM_INIT ioctl
+       for UMDs to specify the portion of VA space managed by the kernel and
+       userspace, respectively.
+
+    2) Allocate and free a VA space region as well as bind and unbind memory
+       to the GPUs VA space via the new DRM_IOCTL_NOUVEAU_VM_BIND ioctl.
+
+    3) Execute push buffers with the new DRM_IOCTL_NOUVEAU_EXEC ioctl.
+
+Both, DRM_IOCTL_NOUVEAU_VM_BIND and DRM_IOCTL_NOUVEAU_EXEC, make use of the DRM
+scheduler to queue jobs and support asynchronous processing with DRM syncobjs
+as synchronization mechanism.
+
+By default DRM_IOCTL_NOUVEAU_VM_BIND does synchronous processing,
+DRM_IOCTL_NOUVEAU_EXEC supports asynchronous processing only.
+
+The new VM_BIND UAPI for Nouveau makes also use of drm_exec (execution context
+for GEM buffers) by Christian König. Since the patch implementing drm_exec was
+not yet merged into drm-next it is part of this series, as well as a small fix
+for this patch, which was found while testing this series.
+
+This patch series is also available at [1].
+
+There is a Mesa NVK merge request by Dave Airlie [2] implementing the
+corresponding userspace parts for this series.
+
+The Vulkan CTS test suite passes the sparse binding and sparse residency test
+cases for the new UAPI together with Dave's Mesa work.
+
+There are also some test cases in the igt-gpu-tools project [3] for the new UAPI
+and hence the DRM GPU VA manager. However, most of them are testing the DRM GPU
+VA manager's logic through Nouveau's new UAPI and should be considered just as
+helper for implementation.
+
+However, I absolutely intend to change those test cases to proper kunit test
+cases for the DRM GPUVA manager, once and if we agree on it's usefulness and
+design.
+
+[1] https://gitlab.freedesktop.org/nouvelles/kernel/-/tree/new-uapi-drm-next /
+    https://gitlab.freedesktop.org/nouvelles/kernel/-/merge_requests/1
+[2] https://gitlab.freedesktop.org/nouveau/mesa/-/merge_requests/150/
+[3] https://gitlab.freedesktop.org/dakr/igt-gpu-tools/-/tree/wip_nouveau_vm_bind
+
+I also want to give credit to Dave Airlie, who contributed a lot of ideas to
+this patch series.
+
+Christian König (1):
+  drm: execution context for GEM buffers
+
+Danilo Krummrich (13):
+  drm/exec: fix memory leak in drm_exec_prepare_obj()
+  drm: manager to keep track of GPUs VA mappings
+  drm: debugfs: provide infrastructure to dump a DRM GPU VA space
+  drm/nouveau: new VM_BIND uapi interfaces
+  drm/nouveau: get vmm via nouveau_cli_vmm()
+  drm/nouveau: bo: initialize GEM GPU VA interface
+  drm/nouveau: move usercopy helpers to nouveau_drv.h
+  drm/nouveau: fence: fail to emit when fence context is killed
+  drm/nouveau: chan: provide nouveau_channel_kill()
+  drm/nouveau: nvkm/vmm: implement raw ops to manage uvmm
+  drm/nouveau: implement uvmm for user mode bindings
+  drm/nouveau: implement new VM_BIND UAPI
+  drm/nouveau: debugfs: implement DRM GPU VA debugfs
+
+ Documentation/gpu/driver-uapi.rst             |   11 +
+ Documentation/gpu/drm-mm.rst                  |   43 +
+ drivers/gpu/drm/Kconfig                       |    6 +
+ drivers/gpu/drm/Makefile                      |    3 +
+ drivers/gpu/drm/amd/amdgpu/Kconfig            |    1 +
+ drivers/gpu/drm/drm_debugfs.c                 |   56 +
+ drivers/gpu/drm/drm_exec.c                    |  294 ++++
+ drivers/gpu/drm/drm_gem.c                     |    3 +
+ drivers/gpu/drm/drm_gpuva_mgr.c               | 1323 +++++++++++++++++
+ drivers/gpu/drm/nouveau/Kbuild                |    3 +
+ drivers/gpu/drm/nouveau/Kconfig               |    2 +
+ drivers/gpu/drm/nouveau/include/nvif/if000c.h |   23 +-
+ drivers/gpu/drm/nouveau/include/nvif/vmm.h    |   17 +-
+ .../gpu/drm/nouveau/include/nvkm/subdev/mmu.h |   10 +
+ drivers/gpu/drm/nouveau/nouveau_abi16.c       |   23 +
+ drivers/gpu/drm/nouveau/nouveau_abi16.h       |    1 +
+ drivers/gpu/drm/nouveau/nouveau_bo.c          |  152 +-
+ drivers/gpu/drm/nouveau/nouveau_bo.h          |    2 +-
+ drivers/gpu/drm/nouveau/nouveau_chan.c        |   16 +-
+ drivers/gpu/drm/nouveau/nouveau_chan.h        |    1 +
+ drivers/gpu/drm/nouveau/nouveau_debugfs.c     |   24 +
+ drivers/gpu/drm/nouveau/nouveau_drm.c         |   25 +-
+ drivers/gpu/drm/nouveau/nouveau_drv.h         |   92 +-
+ drivers/gpu/drm/nouveau/nouveau_exec.c        |  310 ++++
+ drivers/gpu/drm/nouveau/nouveau_exec.h        |   55 +
+ drivers/gpu/drm/nouveau/nouveau_fence.c       |    7 +
+ drivers/gpu/drm/nouveau/nouveau_fence.h       |    2 +-
+ drivers/gpu/drm/nouveau/nouveau_gem.c         |   83 +-
+ drivers/gpu/drm/nouveau/nouveau_mem.h         |    5 +
+ drivers/gpu/drm/nouveau/nouveau_prime.c       |    2 +-
+ drivers/gpu/drm/nouveau/nouveau_sched.c       |  780 ++++++++++
+ drivers/gpu/drm/nouveau/nouveau_sched.h       |   98 ++
+ drivers/gpu/drm/nouveau/nouveau_svm.c         |    2 +-
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c        |  575 +++++++
+ drivers/gpu/drm/nouveau/nouveau_uvmm.h        |   68 +
+ drivers/gpu/drm/nouveau/nouveau_vmm.c         |    4 +-
+ drivers/gpu/drm/nouveau/nvif/vmm.c            |   73 +-
+ .../gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c    |  168 ++-
+ .../gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.h    |    1 +
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c |   32 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h |    3 +
+ include/drm/drm_debugfs.h                     |   25 +
+ include/drm/drm_drv.h                         |    6 +
+ include/drm/drm_exec.h                        |  144 ++
+ include/drm/drm_gem.h                         |   75 +
+ include/drm/drm_gpuva_mgr.h                   |  527 +++++++
+ include/uapi/drm/nouveau_drm.h                |  216 +++
+ 47 files changed, 5266 insertions(+), 126 deletions(-)
+ create mode 100644 drivers/gpu/drm/drm_exec.c
+ create mode 100644 drivers/gpu/drm/drm_gpuva_mgr.c
+ create mode 100644 drivers/gpu/drm/nouveau/nouveau_exec.c
+ create mode 100644 drivers/gpu/drm/nouveau/nouveau_exec.h
+ create mode 100644 drivers/gpu/drm/nouveau/nouveau_sched.c
+ create mode 100644 drivers/gpu/drm/nouveau/nouveau_sched.h
+ create mode 100644 drivers/gpu/drm/nouveau/nouveau_uvmm.c
+ create mode 100644 drivers/gpu/drm/nouveau/nouveau_uvmm.h
+ create mode 100644 include/drm/drm_exec.h
+ create mode 100644 include/drm/drm_gpuva_mgr.h
+
+
+base-commit: 0b45ac1170ea6416bc1d36798414c04870cd356d
+-- 
+2.39.0
+
