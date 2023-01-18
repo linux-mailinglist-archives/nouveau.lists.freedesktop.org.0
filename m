@@ -2,54 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A50D3671E92
-	for <lists+nouveau@lfdr.de>; Wed, 18 Jan 2023 14:55:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6688B671F2A
+	for <lists+nouveau@lfdr.de>; Wed, 18 Jan 2023 15:15:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3624D10E1EF;
-	Wed, 18 Jan 2023 13:55:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3AADC10E101;
+	Wed, 18 Jan 2023 14:15:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ADA8B10E1EF;
- Wed, 18 Jan 2023 13:55:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1674050153; x=1705586153;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=sCfZLcl+x3j/GrBFzuMLWae9nVeRi6rNSH79s5QCyuU=;
- b=iR6PKHr4xmS0hTWBP4zPuZjkvEJcv0ZMMYqj1dC62LTimNFi2snMt1Da
- DKK7scEuei+dFiTLlAwYLYyyDsby801Hz+jvITTjB2NgTpw4gKOjUSR9E
- H7OvAmF9D1clWQime20rJ/6TrQOthSO20O8arZc8/bd5xR1DFm3iw3dyd
- Nt8cf4DiGDx55zILaLnLYjCt9uviRmtDTjsmfeMReG09AcVcpm7pHwCCb
- Ae9PdkqXwIfTcjv8Pw5MithCwSDagfDOTNs0tgPcQqUmYsPQ5BgdSc4ph
- +Ku/ue26DajuKGc0aXOeZY+d1R/zpDPyegKCCUwMSXGPYPSyOUZpf0BnT Q==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10593"; a="305358740"
-X-IronPort-AV: E=Sophos;i="5.97,226,1669104000"; d="scan'208";a="305358740"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Jan 2023 05:55:53 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10593"; a="802202108"
-X-IronPort-AV: E=Sophos;i="5.97,226,1669104000"; d="scan'208";a="802202108"
-Received: from lkp-server01.sh.intel.com (HELO 5646d64e7320) ([10.239.97.150])
- by fmsmga001.fm.intel.com with ESMTP; 18 Jan 2023 05:55:49 -0800
-Received: from kbuild by 5646d64e7320 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1pI8uq-0000NG-2M;
- Wed, 18 Jan 2023 13:55:48 +0000
-Date: Wed, 18 Jan 2023 21:55:18 +0800
-From: kernel test robot <lkp@intel.com>
-To: Danilo Krummrich <dakr@redhat.com>, daniel@ffwll.ch, airlied@redhat.com,
- christian.koenig@amd.com, bskeggs@redhat.com, jason@jlekstrand.net,
- tzimmermann@suse.de, mripard@kernel.org, corbet@lwn.net
-Message-ID: <202301182112.RFiF6tDh-lkp@intel.com>
-References: <20230118061256.2689-5-dakr@redhat.com>
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0B30B10E752
+ for <nouveau@lists.freedesktop.org>; Wed, 18 Jan 2023 14:15:43 +0000 (UTC)
+Received: by mail-ej1-x636.google.com with SMTP id ud5so83604723ejc.4
+ for <nouveau@lists.freedesktop.org>; Wed, 18 Jan 2023 06:15:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=oCGNHON3hfeheKriRMpVwiLlkDvk70CzUPGkb7lEcBQ=;
+ b=an+IEE6nXLW/ytxal/GYkPXj+PIp3cplnTRrgMCmMI8AhvLroZiy+Q/11RwllAYXhP
+ U1607KBFNyhfEV62fis1/AG7wanY8g65z8e0XRbaugyczWsWm0f3a+cQEYxwytWJ2JpS
+ gP4yi9T8VqH5jbXRtisWuXvE86+pDTZaPiC77HsAE+1fwCGEvUh2LDeHjzsm75IMS+qj
+ DrC2nytzCS8cZZdK5/D7Ila4wsxEzFOk/Kh7lAc2b7B25L36z+fUDU9SZy20abaxMgJz
+ UYOzjhhzZo9iGqVYPa3YeDtjje2vKlSXJJeDlHQ475Ox+g3i/7roXd+/mieGtBWLL8qn
+ xe9Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=oCGNHON3hfeheKriRMpVwiLlkDvk70CzUPGkb7lEcBQ=;
+ b=GkGO6PiUL6H77lbFq6hmmBMy/ihg5XQz+QbWJ31KZCjhfEyxfNTsdFhylKiy+eAJND
+ FpbgLBGv+7JTjxk88VlQKp+jCnhcLxkIXlGMJ9QKTvOmyy3ytLjkn8xf5ub/3QfsugIz
+ 9c8HzfIkvXeuf8vikXwDfay3BHzraFcADpuhdbxvls9ug+/Vf6Ps1z8aY9mOGU2U5RFz
+ rSuTi+JApVb6fZMyEhtNn31NqPPPFQVq9Nbi3NKDMbH6SBTnUHCyeHSpuGVgRa6Jl4Zo
+ hRuN7AyMH6xa9gigPmOAESdoFoHslBBvZYFHACLcnr/72DjCNCbh36x+OmU9rGdrofeo
+ VFEg==
+X-Gm-Message-State: AFqh2kr0tRlgenYZS7Hawrinj23KM5Nn12i9cHwZhLFT3+VY/GjrgKLy
+ fodhCs/AMcNN2l/vlT9maxQ=
+X-Google-Smtp-Source: AMrXdXsK1iSSizm9GlzoiftUlUNP6W0jN+znALegHiO3JgJNTBQ1vcNIoszA7dZ1BkxEXkIIfm/tOg==
+X-Received: by 2002:a17:906:f299:b0:7c0:fd1a:79ee with SMTP id
+ gu25-20020a170906f29900b007c0fd1a79eemr6979800ejb.63.1674051341500; 
+ Wed, 18 Jan 2023 06:15:41 -0800 (PST)
+Received: from ?IPV6:2a02:908:1256:79a0:11b:aaf8:6e8b:724f?
+ ([2a02:908:1256:79a0:11b:aaf8:6e8b:724f])
+ by smtp.gmail.com with ESMTPSA id
+ e22-20020a170906315600b007ae10525550sm14627246eje.47.2023.01.18.06.15.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Jan 2023 06:15:40 -0800 (PST)
+Message-ID: <144efbc1-7604-c2ab-0612-dfcb223f7c00@gmail.com>
+Date: Wed, 18 Jan 2023 15:15:39 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230118061256.2689-5-dakr@redhat.com>
-Subject: Re: [Nouveau] [PATCH drm-next 04/14] drm: debugfs: provide
- infrastructure to dump a DRM GPU VA space
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Content-Language: en-US
+To: Karol Herbst <kherbst@redhat.com>
+References: <20221125102137.1801-1-christian.koenig@amd.com>
+ <20221125102137.1801-5-christian.koenig@amd.com>
+ <1b69d455-ce93-4a9d-0bb3-f145c03837c7@gmail.com>
+ <ca4ae666-b971-5edb-733c-dbed7826b40c@gmail.com>
+ <CACO55tsVW9EVdK9TWVMx-v=0YNyMmRAVdBLYGoBOmBKATPO4Gw@mail.gmail.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+In-Reply-To: <CACO55tsVW9EVdK9TWVMx-v=0YNyMmRAVdBLYGoBOmBKATPO4Gw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH 5/9] drm/nouveau: stop using ttm_bo_wait
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,105 +78,118 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- oe-kbuild-all@lists.linux.dev
+Cc: Dave Airlie <airlied@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, nouveau <nouveau@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Danilo,
+Am 18.01.23 um 14:01 schrieb Karol Herbst:
+> On Wed, Jan 18, 2023 at 10:04 AM Christian König
+> <ckoenig.leichtzumerken@gmail.com> wrote:
+>> Hi guys,
+>>
+>> another ping for this. It's just a minor cleanup.
+>>
+> Acked-by: Karol Herbst <kherbst@redhat.com>
 
-Thank you for the patch! Perhaps something to improve:
+Thanks!
 
-[auto build test WARNING on 0b45ac1170ea6416bc1d36798414c04870cd356d]
+>
+> Though I'd say that having a wrapper function like that isn't
+> pointless on its own and I kind of fail to see the reason it gets
+> removed in the first place.
+>
+> Also.. I wouldn't call this a "cleanup" because it actually removes
+> something useful. Yes, it's only calling one function, but it's more
+> of a pain to use the wrapped one than the outer one.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-execution-context-for-GEM-buffers/20230118-141552
-base:   0b45ac1170ea6416bc1d36798414c04870cd356d
-patch link:    https://lore.kernel.org/r/20230118061256.2689-5-dakr%40redhat.com
-patch subject: [PATCH drm-next 04/14] drm: debugfs: provide infrastructure to dump a DRM GPU VA space
-config: i386-randconfig-a003 (https://download.01.org/0day-ci/archive/20230118/202301182112.RFiF6tDh-lkp@intel.com/config)
-compiler: gcc-11 (Debian 11.3.0-8) 11.3.0
-reproduce (this is a W=1 build):
-        # https://github.com/intel-lab-lkp/linux/commit/e00f79934034ce7eb4e7fc0d722a3d28d75d44bf
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Danilo-Krummrich/drm-execution-context-for-GEM-buffers/20230118-141552
-        git checkout e00f79934034ce7eb4e7fc0d722a3d28d75d44bf
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        make W=1 O=build_dir ARCH=i386 olddefconfig
-        make W=1 O=build_dir ARCH=i386 SHELL=/bin/bash drivers/gpu/drm/
+The problem is that it's hiding the timeout.
 
-If you fix the issue, kindly add following tag where applicable
-| Reported-by: kernel test robot <lkp@intel.com>
+Just read up what discussion this triggered within the Intel driver.
 
-All warnings (new ones prefixed by >>):
+Christian.
 
-   drivers/gpu/drm/drm_debugfs.c: In function 'drm_debugfs_gpuva_info':
->> drivers/gpu/drm/drm_debugfs.c:228:28: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
-     228 |                            (u64)va->gem.obj, va->gem.offset);
-         |                            ^
+>
+>> Dave/Daniel can you help me out here?
+>>
+>> Thanks,
+>> Christian.
+>>
+>> Am 11.01.23 um 10:52 schrieb Christian König:
+>>> Hi guys,
+>>>
+>>> can I get a quick ack for this?
+>>>
+>>> The patch has no functional change and is just a cleanup.
+>>>
+>>> Thanks,
+>>> Christian.
+>>>
+>>> Am 25.11.22 um 11:21 schrieb Christian König:
+>>>> TTM is just wrapping core DMA functionality here, remove the mid-layer.
+>>>> No functional change.
+>>>>
+>>>> Signed-off-by: Christian König <christian.koenig@amd.com>
+>>>> ---
+>>>>    drivers/gpu/drm/nouveau/nouveau_bo.c  |  6 +++++-
+>>>>    drivers/gpu/drm/nouveau/nouveau_gem.c | 11 ++++++++---
+>>>>    2 files changed, 13 insertions(+), 4 deletions(-)
+>>>>
+>>>> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c
+>>>> b/drivers/gpu/drm/nouveau/nouveau_bo.c
+>>>> index 335fa91ca4ad..288eebc70a67 100644
+>>>> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+>>>> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+>>>> @@ -922,6 +922,7 @@ static void nouveau_bo_move_ntfy(struct
+>>>> ttm_buffer_object *bo,
+>>>>        struct nouveau_mem *mem = new_reg ? nouveau_mem(new_reg) : NULL;
+>>>>        struct nouveau_bo *nvbo = nouveau_bo(bo);
+>>>>        struct nouveau_vma *vma;
+>>>> +    long ret;
+>>>>          /* ttm can now (stupidly) pass the driver bos it didn't
+>>>> create... */
+>>>>        if (bo->destroy != nouveau_bo_del_ttm)
+>>>> @@ -936,7 +937,10 @@ static void nouveau_bo_move_ntfy(struct
+>>>> ttm_buffer_object *bo,
+>>>>            }
+>>>>        } else {
+>>>>            list_for_each_entry(vma, &nvbo->vma_list, head) {
+>>>> -            WARN_ON(ttm_bo_wait(bo, false, false));
+>>>> +            ret = dma_resv_wait_timeout(bo->base.resv,
+>>>> +                            DMA_RESV_USAGE_BOOKKEEP,
+>>>> +                            false, 15 * HZ);
+>>>> +            WARN_ON(ret <= 0);
+>>>>                nouveau_vma_unmap(vma);
+>>>>            }
+>>>>        }
+>>>> diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c
+>>>> b/drivers/gpu/drm/nouveau/nouveau_gem.c
+>>>> index ac5793c96957..f77e44958037 100644
+>>>> --- a/drivers/gpu/drm/nouveau/nouveau_gem.c
+>>>> +++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+>>>> @@ -645,7 +645,7 @@ nouveau_gem_pushbuf_reloc_apply(struct
+>>>> nouveau_cli *cli,
+>>>>                    struct drm_nouveau_gem_pushbuf_reloc *reloc,
+>>>>                    struct drm_nouveau_gem_pushbuf_bo *bo)
+>>>>    {
+>>>> -    int ret = 0;
+>>>> +    long ret = 0;
+>>>>        unsigned i;
+>>>>          for (i = 0; i < req->nr_relocs; i++) {
+>>>> @@ -703,9 +703,14 @@ nouveau_gem_pushbuf_reloc_apply(struct
+>>>> nouveau_cli *cli,
+>>>>                    data |= r->vor;
+>>>>            }
+>>>>    -        ret = ttm_bo_wait(&nvbo->bo, false, false);
+>>>> +        ret = dma_resv_wait_timeout(nvbo->bo.base.resv,
+>>>> +                        DMA_RESV_USAGE_BOOKKEEP,
+>>>> +                        false, 15 * HZ);
+>>>> +        if (ret == 0)
+>>>> +            ret = -EBUSY;
+>>>>            if (ret) {
+>>>> -            NV_PRINTK(err, cli, "reloc wait_idle failed: %d\n", ret);
+>>>> +            NV_PRINTK(err, cli, "reloc wait_idle failed: %ld\n",
+>>>> +                  ret);
+>>>>                break;
+>>>>            }
 
-
-vim +228 drivers/gpu/drm/drm_debugfs.c
-
-   178	
-   179	/**
-   180	 * drm_debugfs_gpuva_info - dump the given DRM GPU VA space
-   181	 * @m: pointer to the &seq_file to write
-   182	 * @mgr: the &drm_gpuva_manager representing the GPU VA space
-   183	 *
-   184	 * Dumps the GPU VA regions and mappings of a given DRM GPU VA manager.
-   185	 *
-   186	 * For each DRM GPU VA space drivers should call this function from their
-   187	 * &drm_info_list's show callback.
-   188	 *
-   189	 * Returns: 0 on success, -ENODEV if the &mgr is not initialized
-   190	 */
-   191	int drm_debugfs_gpuva_info(struct seq_file *m,
-   192				   struct drm_gpuva_manager *mgr)
-   193	{
-   194		struct drm_gpuva_region *reg;
-   195		struct drm_gpuva *va;
-   196	
-   197		if (!mgr->name)
-   198			return -ENODEV;
-   199	
-   200		seq_printf(m, "DRM GPU VA space (%s)\n", mgr->name);
-   201		seq_puts  (m, "\n");
-   202		seq_puts  (m, " VA regions  | start              | range              | end                | sparse\n");
-   203		seq_puts  (m, "------------------------------------------------------------------------------------\n");
-   204		seq_printf(m, " VA space    | 0x%016llx | 0x%016llx | 0x%016llx |   -\n",
-   205			   mgr->mm_start, mgr->mm_range, mgr->mm_start + mgr->mm_range);
-   206		seq_puts  (m, "-----------------------------------------------------------------------------------\n");
-   207		drm_gpuva_for_each_region(reg, mgr) {
-   208			struct drm_mm_node *node = &reg->node;
-   209	
-   210			if (node == &mgr->kernel_alloc_node) {
-   211				seq_printf(m, " kernel node | 0x%016llx | 0x%016llx | 0x%016llx |   -\n",
-   212					   node->start, node->size, node->start + node->size);
-   213				continue;
-   214			}
-   215	
-   216			seq_printf(m, "             | 0x%016llx | 0x%016llx | 0x%016llx | %s\n",
-   217				   node->start, node->size, node->start + node->size,
-   218				   reg->sparse ? "true" : "false");
-   219		}
-   220		seq_puts(m, "\n");
-   221		seq_puts(m, " VAs | start              | range              | end                | object             | object offset\n");
-   222		seq_puts(m, "-------------------------------------------------------------------------------------------------------------\n");
-   223		drm_gpuva_for_each_va(va, mgr) {
-   224			struct drm_mm_node *node = &va->node;
-   225	
-   226			seq_printf(m, "     | 0x%016llx | 0x%016llx | 0x%016llx | 0x%016llx | 0x%016llx\n",
-   227				   node->start, node->size, node->start + node->size,
- > 228				   (u64)va->gem.obj, va->gem.offset);
-   229		}
-   230	
-   231		return 0;
-   232	}
-   233	EXPORT_SYMBOL(drm_debugfs_gpuva_info);
-   234	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests
