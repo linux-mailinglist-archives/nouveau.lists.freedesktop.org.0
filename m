@@ -1,111 +1,85 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5620D6720E3
-	for <lists+nouveau@lfdr.de>; Wed, 18 Jan 2023 16:15:38 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A65A867215B
+	for <lists+nouveau@lfdr.de>; Wed, 18 Jan 2023 16:35:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 88A7F10E76A;
-	Wed, 18 Jan 2023 15:15:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DD8CA10E1ED;
+	Wed, 18 Jan 2023 15:35:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2065.outbound.protection.outlook.com [40.107.92.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F203010E6F6;
- Wed, 18 Jan 2023 15:15:32 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=d7AMX38483WMPLEb3WZe3hdAXOyWBjU8bq8505wLWPPFt2I43KyNklfeLBafcpRyr1jvvkERuvu7NLWT1k0l3EzbZLb2JQkBpk6ZychWFq5rD2CCLeelpVRA2Qh7qE8iM4iH+/OFMG9OwQGQ50oBN2YT1nmKXPqaT4YY8mNopARdNNIwjnwo+bsXjj5HeyE2w7yUtBtzxL9vduRipRI2QaDCxeyZgAY4KLlL1QhHyvNigQWbG1h37EwSKeQzVgYxFvweE+AsLS4i7VHU//EDUCNj08dedIMej9UVgvBT+zGJOD52kXha32k3VfBPY/88zh9HGoZY3d4CzHUrN7HENA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/xLXlvtemBKhxT+1GV7IkwISw+CoMPNriPHVjiccKyA=;
- b=NwqBfDjTL9xcC0sw95Z/BkrjXRS34JQ0NzO+Df15tYzRxCWYDRtOngEdQY1wnTe8eLqf5fRinTUu9dxFjCAlKJKbcKDLfMpD78AQQlMKajnUNIsqyRuN1e55eDf0dOgXNXR6lpZA6QQ/kGiyeYZQaGSWO2ccPqH1tsrvkQfJJQyzhaN8/WXcoyBx48S4jncD7ylQrLup9aruPtcA9Zt0jqHWJ5LwmdXo1IBcBHpO2HC08HDhFtmsD/CBFRdAKNQvFqWBOHaz5+pxOiyeWRCo0w+ugr1Tf7GOxY9tkjGfCt1MHlt0VXOBMXK9KzUAgUeIBr8XeJ+HC2F8CASTR1GPBA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/xLXlvtemBKhxT+1GV7IkwISw+CoMPNriPHVjiccKyA=;
- b=hdyLkqGV5r+91p5X4Cz0z4Gxj3XKt/blPaQ2OlUIIaTxLLkobqR5tjiuPbGnsDDZYc9/o/HMJLMl0p0o+e6L1VokvX013F+npis3JW9ltWLGCBYHURr6t39/Yychin8Y3ius32/Z+85BSIU7Nt6O/M2uUQwDaY8v8hH2fO4YodleDQ9i0nmUcEWeTrfFB5q8EF3zWbeJCpE13eEjrkVWE4Edik0fm3oa2B/rL+66ZSDGRl8mFitw+jACxPAoKnSWsejWUI7QlO5U98izRvq9t4VtrdxGQkFtmbJkeeyleAl2+qPkPLzR9VXI8WVMTgPJvEc0+Gpz7t2Os8D5JezY2g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from LV2PR12MB5869.namprd12.prod.outlook.com (2603:10b6:408:176::16)
- by PH8PR12MB6770.namprd12.prod.outlook.com (2603:10b6:510:1c5::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5986.23; Wed, 18 Jan
- 2023 15:15:30 +0000
-Received: from LV2PR12MB5869.namprd12.prod.outlook.com
- ([fe80::f8b0:df13:5f8d:12a]) by LV2PR12MB5869.namprd12.prod.outlook.com
- ([fe80::f8b0:df13:5f8d:12a%9]) with mapi id 15.20.6002.013; Wed, 18 Jan 2023
- 15:15:30 +0000
-Date: Wed, 18 Jan 2023 11:15:29 -0400
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: "Tian, Kevin" <kevin.tian@intel.com>
-Message-ID: <Y8gNEUJ9ffSdfH51@nvidia.com>
-References: <0-v1-6e8b3997c46d+89e-iommu_map_gfp_jgg@nvidia.com>
- <6-v1-6e8b3997c46d+89e-iommu_map_gfp_jgg@nvidia.com>
- <BN9PR11MB5276A8193DE752CA8D8D89928CC69@BN9PR11MB5276.namprd11.prod.outlook.com>
- <Y8ai8i2FpW4CuAX6@nvidia.com>
- <BN9PR11MB52769B8225A81D0636FFE5648CC79@BN9PR11MB5276.namprd11.prod.outlook.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <BN9PR11MB52769B8225A81D0636FFE5648CC79@BN9PR11MB5276.namprd11.prod.outlook.com>
-X-ClientProxiedBy: MN2PR08CA0004.namprd08.prod.outlook.com
- (2603:10b6:208:239::9) To LV2PR12MB5869.namprd12.prod.outlook.com
- (2603:10b6:408:176::16)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7069E10E76C
+ for <nouveau@lists.freedesktop.org>; Wed, 18 Jan 2023 15:35:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1674056102;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=vpTQpjYNAk3XvtyK5ZGAiy3XmVPFLh4QlSlt0JHPp3g=;
+ b=GluTs5Bt8h1q3AW8kYShfGN21cc7xXeyhlMUSD2f6s0MtFahH1QwMrVYombJXtFt2lPgaz
+ Hk5GvgRPM2Yb6IuLx6uZFkqkDROatg2Ww+32TetWjXoQ3u+LVtwY6IOM+ED2NKZlaatDTz
+ THJFMEgiUsNIv0PBv1RVjEB/4GHFQ7g=
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-75-TUQyKimnMZifmOhWkuJnRA-1; Wed, 18 Jan 2023 10:35:00 -0500
+X-MC-Unique: TUQyKimnMZifmOhWkuJnRA-1
+Received: by mail-ed1-f72.google.com with SMTP id
+ c12-20020a05640227cc00b0049e2c079aabso4767882ede.1
+ for <nouveau@lists.freedesktop.org>; Wed, 18 Jan 2023 07:35:00 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vpTQpjYNAk3XvtyK5ZGAiy3XmVPFLh4QlSlt0JHPp3g=;
+ b=YtnP0u4IDxWDq9JJBc1mmBXpwg1oNXt6ncYpXubX8IAMKgddzs/KxSwaDgL25x4MDl
+ HueGhyid3c/+6ihC8WVdf3MyVTMUMl5OP5RqPi2ICf43O4/2lhctxJBkupNs0qUJhksq
+ 0AcD7CDmnOImSC2K8SiOgdNYbjvQq1gq+h0vig6Xr7d7MYdEONWtmfrHL0Rrto9+e74H
+ NF5rJrVs8qyCcpWCDjwqfw8+bumuwtYqTpg/rYIjeXk4QHPsi5QXz4JcJZxnqqYSF7h+
+ L+oicOI8e5sYi67ufJ2dhsBZ6A/vnoOUuMn7w6fqMA00PIiLjrg7cqKJ5KXTcm+uGDQW
+ GGiA==
+X-Gm-Message-State: AFqh2koblJzDEJTwokDZ/IrW19c8+jjBBbEbgQVELx4c9YcBNz9ri1s9
+ hhOryWla1gQmx/2mdcKHNC+MwJ3T29kKLZoZp53zFngtY6AZrGPB4S4+ptXeYG+PbMbNca5grab
+ xy6VYM2i6G7KugbpY19ISD3euNA==
+X-Received: by 2002:a17:906:5a5f:b0:86f:3c6b:f7c6 with SMTP id
+ my31-20020a1709065a5f00b0086f3c6bf7c6mr7664160ejc.64.1674056099605; 
+ Wed, 18 Jan 2023 07:34:59 -0800 (PST)
+X-Google-Smtp-Source: AMrXdXsOoo3EG20RFXrfylq7Pialuja03yLXGPDjL2I7nXl6iPhWeh7hkF/TG1FOi+8BpRpJa4tYww==
+X-Received: by 2002:a17:906:5a5f:b0:86f:3c6b:f7c6 with SMTP id
+ my31-20020a1709065a5f00b0086f3c6bf7c6mr7664127ejc.64.1674056099311; 
+ Wed, 18 Jan 2023 07:34:59 -0800 (PST)
+Received: from ?IPV6:2a02:810d:4b3f:de78:642:1aff:fe31:a15c?
+ ([2a02:810d:4b3f:de78:642:1aff:fe31:a15c])
+ by smtp.gmail.com with ESMTPSA id
+ wb9-20020a170907d50900b0087045ae5935sm4465825ejc.1.2023.01.18.07.34.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Jan 2023 07:34:58 -0800 (PST)
+Message-ID: <02b0bcb8-f69f-93cf-1f56-ec883cb33965@redhat.com>
+Date: Wed, 18 Jan 2023 16:34:57 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV2PR12MB5869:EE_|PH8PR12MB6770:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8e88fa23-14eb-49ed-3ef4-08daf966d618
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: VqkeOZyMHCubF29L0ig33g7+rBZaJdLP+HxE0a7KWTJL1bO/GVHuwH9VXCWVlC8VA/puDGcmtuq76cwVUl0ZaiubsrY+G5yqnP8ZQQ4saMe5U3sfka7QSOvqvWfHZshzjspmc1yOJ5vM8ih+9Cp45lxg8mhQ8PBKK8qQVCfIwZhAcFvKm6FKAmivzU4OBx8T6wDuBvbmI/wK4PECoih9kksnc/RqiyfKd+GXHKZ/lsfs8X0kGCb9KpSs03anNaLXD00IuY77tgeC6/tDKeUmc5KLUQwr4hEtNNsISCNDvfRpalXq4fjJgHPPzOStm1e9bLumMS8EefC+xGRbW1kim7YVNmEuPwVkNqWr59/qyYThYyTsZnWLVGAGzw7ZjDRq6ZR0UQgQ+Md+Raqg8G97nFjpjvSR7SHsJaqoIqK7HktLd16n3lzNCYvg372pxEQatUL/5ogQQ01ZNy+GysuzOOPvypfgFwXzRDyaxX6dc5axLUqyeiE05PiJ750Giw7y5PMQeG8ohRL7pOeiWNKslGGhCZtxu19IZWE+34MakhMi0kMVqjQnpxAfxUDvnQ6h8eSuURkqnDwwH3njv/OG23efH9oXzdHPpRgKh1mwQ4JLwNTid9nN9T25fcuqHlFQADHXZ1Zl1RjFdXwP9zS8Kw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV2PR12MB5869.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(39860400002)(136003)(396003)(346002)(376002)(366004)(451199015)(8676002)(86362001)(38100700002)(7416002)(6916009)(5660300002)(8936002)(2906002)(66476007)(66556008)(4326008)(66946007)(41300700001)(26005)(6506007)(6512007)(2616005)(186003)(478600001)(316002)(6486002)(54906003)(36756003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?rOpluIWQy+1NxO6yGe6376cl0Tmrlsf1pZTdI6ZISSltWdpHsrIiC4ygZANe?=
- =?us-ascii?Q?17iMBFpiXH4dIj+MYVDYKWyTveytvsJF2TOyJO5X1MlPo95dQoAhiUZ7QgDV?=
- =?us-ascii?Q?HRjO53y8p/CLi4uyqIptvgGlTAZ1krXuBCoqwMV1XBftLDafDofGSfqFtGLw?=
- =?us-ascii?Q?9vq17QpRDzBfpb8+ROqpZdXZ7MV2VUD50zrpemUVoSn2j96Nkc6rZGKfieay?=
- =?us-ascii?Q?yHFpo8kTLwS4vvRPmLA/uCc1c2W+gF8NMSDQp0X8ynTWZpNRMp6FM9COr1nJ?=
- =?us-ascii?Q?43gE7/bUZhZ6J5CpG38EscYXh+y021z0rwTppvb09+Ql2mZ7pZTfzfYrV4eT?=
- =?us-ascii?Q?LnZ985b0NzwyET1IlONll8NWUybOnM9fsXckRpbOjzrEwb2v70aB21+SpXOf?=
- =?us-ascii?Q?48pC8xG7QPVIi8v9iWhx/2xwY4XDJWHOGJeiNe4ZUc01cCENSYPPosjCe5yi?=
- =?us-ascii?Q?2mwTe2/ItMW/2Y96l58WNDyXSdYCR8xkMgkns3D3D0gfI75wcHehQootzEAJ?=
- =?us-ascii?Q?UbWs18WKCJJF3foRcypxCJXTeZJncGNXvZgEzbjL1++p6yYCdb4bu+wHQaR7?=
- =?us-ascii?Q?9G6zINy0P483Dd3KMSatfyfTg02vTavPXr4HzgC6i8E0VDfcpCA7DOPolRAQ?=
- =?us-ascii?Q?2m6A4KUG5W8wTIm5pyh6y0x5Unc2fzbtR6MJ4VR1no0nQuccP2HnfVkvLydG?=
- =?us-ascii?Q?+4eA/9wdzo4uPxZqQR47HRE3uYV58Rnb7ZqIoT+xYq/qATaACOnxEhqEZ3HF?=
- =?us-ascii?Q?CdBJltqtvbTCLrDaNxNciB1mXpdwTKsOc4pLONzhok200Xk51N10CgsYpsAK?=
- =?us-ascii?Q?uwSRrS1wVIqq3UxxUyGY1Nsqa5BivnMdx5sA/En3sKtrKSTfv1sChnKgid52?=
- =?us-ascii?Q?jmGiyAJS1eY+NzCgO7Z/sxlBB7BC3i2DPOA39yCeSk4EfOm0HBAKWzh0kt+f?=
- =?us-ascii?Q?Jy8VxJzPXcRBc9iA96noM+qXoQyJl0cQChyU56UZkJn5LkELEHh6Rw1tOCny?=
- =?us-ascii?Q?/b8CSSFY9yKISluAOJ3pW4qR5jYejr/erVAxDfcYgx8YdP5BPrNZpD1rJ/ku?=
- =?us-ascii?Q?l6ghcHY6T3R++zs7rXqcLMoEfYkRdrU8uKwF1KApSrppyyPmvYvNb/XuOHRR?=
- =?us-ascii?Q?AIBQfs0b+cHEuu1kkPiqkoSUYBfkeUJ1Cbsncuqv2BTz3/iAjPicZl92UXj2?=
- =?us-ascii?Q?3Lh0iT/dPcRpPIvRzjl5tA1KFbDHd0n8R+sfgqLCl5O3F0B9icuij+tAtpZ1?=
- =?us-ascii?Q?NPhniNuoj+IZWJATC49hWlImv4VSdGc8PBlHZdTmDCDe7tifFG9N/JWv/wsV?=
- =?us-ascii?Q?4qLUWJy4uMpEZpSQtfZJ6HPcAgGBovxLPWZX/nglgpTXAUNEhMzVDgMvrNkB?=
- =?us-ascii?Q?lV9w937M6Hl/UvmqzoZK8JPt93HzAcydjCRxnz799wJPT0qUnzowEQWoCRpK?=
- =?us-ascii?Q?YZTyXf6+S9bkQvdE09DsNutidZ+MGx/C7YY8u11SGhtMOlOt24XE0hHrXZi5?=
- =?us-ascii?Q?eG6p+iJZPMzd88nG073Uj7uBMNRf+tY1t2lng8RKyn73ITCoQX9k6AjH6oH7?=
- =?us-ascii?Q?cXCgHAg/1bu1JK4byEAKLxJ1JOvx3Hx3RYokkAWq?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8e88fa23-14eb-49ed-3ef4-08daf966d618
-X-MS-Exchange-CrossTenant-AuthSource: LV2PR12MB5869.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jan 2023 15:15:30.2895 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QIZyr6v+oKhwQQpCgWjDbbncIhOISvKiO9v5UR7uZ6xhPj2xLZYEfjszUIXgPrOV
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6770
-Subject: Re: [Nouveau] [PATCH 6/8] iommu/intel: Add a gfp parameter to
- alloc_pgtable_page()
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.0
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ daniel@ffwll.ch, airlied@redhat.com, bskeggs@redhat.com,
+ jason@jlekstrand.net, tzimmermann@suse.de, mripard@kernel.org, corbet@lwn.net
+References: <20230118061256.2689-1-dakr@redhat.com>
+ <db4fa0fc-c9a6-9a48-c45f-1d655b30aff9@amd.com>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <db4fa0fc-c9a6-9a48-c45f-1d655b30aff9@amd.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH drm-next 00/14] [RFC] DRM GPUVA Manager &
+ Nouveau VM_BIND UAPI
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -117,82 +91,199 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "linux-remoteproc@vger.kernel.org" <linux-remoteproc@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "linux-stm32@st-md-mailman.stormreply.com"
- <linux-stm32@st-md-mailman.stormreply.com>,
- "linux-s390@vger.kernel.org" <linux-s390@vger.kernel.org>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
- Joerg Roedel <joro@8bytes.org>,
- "ath10k@lists.infradead.org" <ath10k@lists.infradead.org>,
- "iommu@lists.linux.dev" <iommu@lists.linux.dev>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- "ath11k@lists.infradead.org" <ath11k@lists.infradead.org>,
- "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
- Niklas Schnelle <schnelle@linux.ibm.com>,
- "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>,
- Alex Williamson <alex.williamson@redhat.com>,
- "linux-tegra@vger.kernel.org" <linux-tegra@vger.kernel.org>,
- "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>,
- "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
- "linux-wireless@vger.kernel.org" <linux-wireless@vger.kernel.org>,
- Robin Murphy <robin.murphy@arm.com>, Lu Baolu <baolu.lu@linux.intel.com>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jan 18, 2023 at 01:18:18AM +0000, Tian, Kevin wrote:
-> > From: Jason Gunthorpe <jgg@nvidia.com>
-> > Sent: Tuesday, January 17, 2023 9:30 PM
-> > 
-> > On Tue, Jan 17, 2023 at 03:35:08AM +0000, Tian, Kevin wrote:
-> > > > From: Jason Gunthorpe <jgg@nvidia.com>
-> > > > Sent: Saturday, January 7, 2023 12:43 AM
-> > > >
-> > > > @@ -2676,7 +2676,7 @@ static int copy_context_table(struct
-> > intel_iommu
-> > > > *iommu,
-> > > >  			if (!old_ce)
-> > > >  				goto out;
-> > > >
-> > > > -			new_ce = alloc_pgtable_page(iommu->node);
-> > > > +			new_ce = alloc_pgtable_page(iommu->node,
-> > > > GFP_KERNEL);
-> > >
-> > > GFP_ATOMIC
-> > 
-> > Can't be:
-> > 
-> > 			old_ce = memremap(old_ce_phys, PAGE_SIZE,
-> > 					MEMREMAP_WB);
-> > 			if (!old_ce)
-> > 				goto out;
-> > 
-> > 			new_ce = alloc_pgtable_page(iommu->node,
-> > GFP_KERNEL);
-> > 			if (!new_ce)
-> > 
-> > memremap() is sleeping.
-> > 
-> > And the only caller is:
-> > 
-> > 	ctxt_tbls = kcalloc(ctxt_table_entries, sizeof(void *), GFP_KERNEL);
-> > 	if (!ctxt_tbls)
-> > 		goto out_unmap;
-> > 
-> > 	for (bus = 0; bus < 256; bus++) {
-> > 		ret = copy_context_table(iommu, &old_rt[bus],
-> > 					 ctxt_tbls, bus, ext);
-> > 
+Hi Christian,
+
+On 1/18/23 09:53, Christian König wrote:
+> Am 18.01.23 um 07:12 schrieb Danilo Krummrich:
+>> This patch series provides a new UAPI for the Nouveau driver in order to
+>> support Vulkan features, such as sparse bindings and sparse residency.
+>>
+>> Furthermore, with the DRM GPUVA manager it provides a new DRM core 
+>> feature to
+>> keep track of GPU virtual address (VA) mappings in a more generic way.
+>>
+>> The DRM GPUVA manager is indented to help drivers implement 
+>> userspace-manageable
+>> GPU VA spaces in reference to the Vulkan API. In order to achieve this 
+>> goal it
+>> serves the following purposes in this context.
+>>
+>>      1) Provide a dedicated range allocator to track GPU VA 
+>> allocations and
+>>         mappings, making use of the drm_mm range allocator.
 > 
-> Yes, but the patch description says "Push the GFP_ATOMIC to all
-> callers." implying it's purely a refactoring w/o changing those
-> semantics.
+> This means that the ranges are allocated by the kernel? If yes that's a 
+> really really bad idea.
 
-Sure, lets split the patch, it is a good idea
+No, it's just for keeping track of the ranges userspace has allocated.
 
-Jason
+- Danilo
+
+> 
+> Regards,
+> Christian.
+> 
+>>
+>>      2) Generically connect GPU VA mappings to their backing buffers, in
+>>         particular DRM GEM objects.
+>>
+>>      3) Provide a common implementation to perform more complex mapping
+>>         operations on the GPU VA space. In particular splitting and 
+>> merging
+>>         of GPU VA mappings, e.g. for intersecting mapping requests or 
+>> partial
+>>         unmap requests.
+>>
+>> The new VM_BIND Nouveau UAPI build on top of the DRM GPUVA manager, 
+>> itself
+>> providing the following new interfaces.
+>>
+>>      1) Initialize a GPU VA space via the new 
+>> DRM_IOCTL_NOUVEAU_VM_INIT ioctl
+>>         for UMDs to specify the portion of VA space managed by the 
+>> kernel and
+>>         userspace, respectively.
+>>
+>>      2) Allocate and free a VA space region as well as bind and unbind 
+>> memory
+>>         to the GPUs VA space via the new DRM_IOCTL_NOUVEAU_VM_BIND ioctl.
+>>
+>>      3) Execute push buffers with the new DRM_IOCTL_NOUVEAU_EXEC ioctl.
+>>
+>> Both, DRM_IOCTL_NOUVEAU_VM_BIND and DRM_IOCTL_NOUVEAU_EXEC, make use 
+>> of the DRM
+>> scheduler to queue jobs and support asynchronous processing with DRM 
+>> syncobjs
+>> as synchronization mechanism.
+>>
+>> By default DRM_IOCTL_NOUVEAU_VM_BIND does synchronous processing,
+>> DRM_IOCTL_NOUVEAU_EXEC supports asynchronous processing only.
+>>
+>> The new VM_BIND UAPI for Nouveau makes also use of drm_exec (execution 
+>> context
+>> for GEM buffers) by Christian König. Since the patch implementing 
+>> drm_exec was
+>> not yet merged into drm-next it is part of this series, as well as a 
+>> small fix
+>> for this patch, which was found while testing this series.
+>>
+>> This patch series is also available at [1].
+>>
+>> There is a Mesa NVK merge request by Dave Airlie [2] implementing the
+>> corresponding userspace parts for this series.
+>>
+>> The Vulkan CTS test suite passes the sparse binding and sparse 
+>> residency test
+>> cases for the new UAPI together with Dave's Mesa work.
+>>
+>> There are also some test cases in the igt-gpu-tools project [3] for 
+>> the new UAPI
+>> and hence the DRM GPU VA manager. However, most of them are testing 
+>> the DRM GPU
+>> VA manager's logic through Nouveau's new UAPI and should be considered 
+>> just as
+>> helper for implementation.
+>>
+>> However, I absolutely intend to change those test cases to proper 
+>> kunit test
+>> cases for the DRM GPUVA manager, once and if we agree on it's 
+>> usefulness and
+>> design.
+>>
+>> [1] 
+>> https://gitlab.freedesktop.org/nouvelles/kernel/-/tree/new-uapi-drm-next /
+>>      https://gitlab.freedesktop.org/nouvelles/kernel/-/merge_requests/1
+>> [2] https://gitlab.freedesktop.org/nouveau/mesa/-/merge_requests/150/
+>> [3] 
+>> https://gitlab.freedesktop.org/dakr/igt-gpu-tools/-/tree/wip_nouveau_vm_bind
+>>
+>> I also want to give credit to Dave Airlie, who contributed a lot of 
+>> ideas to
+>> this patch series.
+>>
+>> Christian König (1):
+>>    drm: execution context for GEM buffers
+>>
+>> Danilo Krummrich (13):
+>>    drm/exec: fix memory leak in drm_exec_prepare_obj()
+>>    drm: manager to keep track of GPUs VA mappings
+>>    drm: debugfs: provide infrastructure to dump a DRM GPU VA space
+>>    drm/nouveau: new VM_BIND uapi interfaces
+>>    drm/nouveau: get vmm via nouveau_cli_vmm()
+>>    drm/nouveau: bo: initialize GEM GPU VA interface
+>>    drm/nouveau: move usercopy helpers to nouveau_drv.h
+>>    drm/nouveau: fence: fail to emit when fence context is killed
+>>    drm/nouveau: chan: provide nouveau_channel_kill()
+>>    drm/nouveau: nvkm/vmm: implement raw ops to manage uvmm
+>>    drm/nouveau: implement uvmm for user mode bindings
+>>    drm/nouveau: implement new VM_BIND UAPI
+>>    drm/nouveau: debugfs: implement DRM GPU VA debugfs
+>>
+>>   Documentation/gpu/driver-uapi.rst             |   11 +
+>>   Documentation/gpu/drm-mm.rst                  |   43 +
+>>   drivers/gpu/drm/Kconfig                       |    6 +
+>>   drivers/gpu/drm/Makefile                      |    3 +
+>>   drivers/gpu/drm/amd/amdgpu/Kconfig            |    1 +
+>>   drivers/gpu/drm/drm_debugfs.c                 |   56 +
+>>   drivers/gpu/drm/drm_exec.c                    |  294 ++++
+>>   drivers/gpu/drm/drm_gem.c                     |    3 +
+>>   drivers/gpu/drm/drm_gpuva_mgr.c               | 1323 +++++++++++++++++
+>>   drivers/gpu/drm/nouveau/Kbuild                |    3 +
+>>   drivers/gpu/drm/nouveau/Kconfig               |    2 +
+>>   drivers/gpu/drm/nouveau/include/nvif/if000c.h |   23 +-
+>>   drivers/gpu/drm/nouveau/include/nvif/vmm.h    |   17 +-
+>>   .../gpu/drm/nouveau/include/nvkm/subdev/mmu.h |   10 +
+>>   drivers/gpu/drm/nouveau/nouveau_abi16.c       |   23 +
+>>   drivers/gpu/drm/nouveau/nouveau_abi16.h       |    1 +
+>>   drivers/gpu/drm/nouveau/nouveau_bo.c          |  152 +-
+>>   drivers/gpu/drm/nouveau/nouveau_bo.h          |    2 +-
+>>   drivers/gpu/drm/nouveau/nouveau_chan.c        |   16 +-
+>>   drivers/gpu/drm/nouveau/nouveau_chan.h        |    1 +
+>>   drivers/gpu/drm/nouveau/nouveau_debugfs.c     |   24 +
+>>   drivers/gpu/drm/nouveau/nouveau_drm.c         |   25 +-
+>>   drivers/gpu/drm/nouveau/nouveau_drv.h         |   92 +-
+>>   drivers/gpu/drm/nouveau/nouveau_exec.c        |  310 ++++
+>>   drivers/gpu/drm/nouveau/nouveau_exec.h        |   55 +
+>>   drivers/gpu/drm/nouveau/nouveau_fence.c       |    7 +
+>>   drivers/gpu/drm/nouveau/nouveau_fence.h       |    2 +-
+>>   drivers/gpu/drm/nouveau/nouveau_gem.c         |   83 +-
+>>   drivers/gpu/drm/nouveau/nouveau_mem.h         |    5 +
+>>   drivers/gpu/drm/nouveau/nouveau_prime.c       |    2 +-
+>>   drivers/gpu/drm/nouveau/nouveau_sched.c       |  780 ++++++++++
+>>   drivers/gpu/drm/nouveau/nouveau_sched.h       |   98 ++
+>>   drivers/gpu/drm/nouveau/nouveau_svm.c         |    2 +-
+>>   drivers/gpu/drm/nouveau/nouveau_uvmm.c        |  575 +++++++
+>>   drivers/gpu/drm/nouveau/nouveau_uvmm.h        |   68 +
+>>   drivers/gpu/drm/nouveau/nouveau_vmm.c         |    4 +-
+>>   drivers/gpu/drm/nouveau/nvif/vmm.c            |   73 +-
+>>   .../gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c    |  168 ++-
+>>   .../gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.h    |    1 +
+>>   drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c |   32 +-
+>>   drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h |    3 +
+>>   include/drm/drm_debugfs.h                     |   25 +
+>>   include/drm/drm_drv.h                         |    6 +
+>>   include/drm/drm_exec.h                        |  144 ++
+>>   include/drm/drm_gem.h                         |   75 +
+>>   include/drm/drm_gpuva_mgr.h                   |  527 +++++++
+>>   include/uapi/drm/nouveau_drm.h                |  216 +++
+>>   47 files changed, 5266 insertions(+), 126 deletions(-)
+>>   create mode 100644 drivers/gpu/drm/drm_exec.c
+>>   create mode 100644 drivers/gpu/drm/drm_gpuva_mgr.c
+>>   create mode 100644 drivers/gpu/drm/nouveau/nouveau_exec.c
+>>   create mode 100644 drivers/gpu/drm/nouveau/nouveau_exec.h
+>>   create mode 100644 drivers/gpu/drm/nouveau/nouveau_sched.c
+>>   create mode 100644 drivers/gpu/drm/nouveau/nouveau_sched.h
+>>   create mode 100644 drivers/gpu/drm/nouveau/nouveau_uvmm.c
+>>   create mode 100644 drivers/gpu/drm/nouveau/nouveau_uvmm.h
+>>   create mode 100644 include/drm/drm_exec.h
+>>   create mode 100644 include/drm/drm_gpuva_mgr.h
+>>
+>>
+>> base-commit: 0b45ac1170ea6416bc1d36798414c04870cd356d
+> 
+
