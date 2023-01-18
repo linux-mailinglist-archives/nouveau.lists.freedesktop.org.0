@@ -2,63 +2,121 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C482267166A
-	for <lists+nouveau@lfdr.de>; Wed, 18 Jan 2023 09:42:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F91167168A
+	for <lists+nouveau@lfdr.de>; Wed, 18 Jan 2023 09:52:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 81A9110E1E8;
-	Wed, 18 Jan 2023 08:42:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D0A8E10E0CB;
+	Wed, 18 Jan 2023 08:52:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1DD6410E1E8;
- Wed, 18 Jan 2023 08:42:28 +0000 (UTC)
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-142b72a728fso34727527fac.9; 
- Wed, 18 Jan 2023 00:42:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sui+3Tn8QL+wYly/3IIPo/fowqY89EqiaKkNW/dATHM=;
- b=lVPrRcxDtq7TvNulgEnPr2FKMGEnTErX5W4fULAA5v1jkhT4dPnJrCAJSGtd80tS3J
- aF1Jyv22DCLARogax4+iCb04YvIW1/wndYvzMiqRTOQmJirdAD7BxaMtc+cU5NuoJMJu
- MwMhPCNziuFY9++5T2uf5l3u1B2gt7t28i/i2f4ZseIquUujRROr5YQ2/n7TPSYCjI/r
- JEZIbp0tGf5f/3uMqkHB+6RbYH6K8cPDm1Ny23viBHFRCvOptRhcZRXPlEyTC7bGCqUY
- 5GC7FOam8p6tQu/DdGlGDDvFvih0yvukVOrJDMAivOl4FMCxyLyEjXRwTg//9muy595m
- V8jg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sui+3Tn8QL+wYly/3IIPo/fowqY89EqiaKkNW/dATHM=;
- b=TcHC7Dw96RujfcGYBauEI/2soS+Wj8ycoQc12TOn15/zQ8Gopyw7Uoql+dR0Wi9VoB
- UplRj8mFbsnEoFD13wHDVEFcv10W717OXjkFNXKQaiivylPfA643jCpy14v1eeY06y7j
- AXtTR9Q6kPjyF4wZN7WKcdSVyyoeNLqYzcJU0gC+AhWO+yvosAeUzV731yVWPqrJ28HO
- rLXC8oqRlyONNpR9oXhda8MGgRAuTZ7A2TdVM8Yb/TFmY+jJn93WsFhHrvKSNkto9WLV
- vcyzJ46hjrNWh8bNu6qdmmReowRSkxjexGs1khbUDfgFK0kaT/sxQq09jqlYBlRzt0px
- JCHQ==
-X-Gm-Message-State: AFqh2kq69aiI4nU38qGp/WDZfjUlxo49Fi4H1MVLNdLkBEa0GTuuki/P
- Jhl89ps6yWGLRaa6ux8HU9gMUTFRFZBX/FeBlH7zpGs/l3YMDA==
-X-Google-Smtp-Source: AMrXdXtkqqA6buwWWh+uQyE2W6QnplVFxGzq6N8OoAs+UoRmdqKTiJW2o9Yw/38zKdkOgfpAYBRTbaBHe/sHcwwhbwk=
-X-Received: by 2002:a05:6870:1f07:b0:15e:d99b:80b6 with SMTP id
- pd7-20020a0568701f0700b0015ed99b80b6mr511386oab.126.1674031347222; Wed, 18
- Jan 2023 00:42:27 -0800 (PST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2050.outbound.protection.outlook.com [40.107.244.50])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 32D1F10E0CB;
+ Wed, 18 Jan 2023 08:52:05 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=bi70F7SfUt7jE+rrB1+uJM/U3c3jKwcBn75j5hcKRpZprOZRSrFgcis+TgLWOMHhJ9xnWK32DPYLcu280YKq56WpgyXdqYeolXjjhnawRcFOb9pD1EKwivTg6c2EgiJHET1GeorQuQ9KGFnHNCD4zWyd+lEwi8ubLm+vW4C2gCOiSiqjfMfpSO4LobO3ZLwmYojTbrb8XaiGpsMywXqgQ3ehkERTKLlU0RbdL0d+JSjGNI9s5b0U4UAUFL2V5trfboYJ/NrrKDjm1JBbTw/MxVN2Fip7pCii4DmkWeGvXT8N+3UtM/jx8sNXa4pPSIHAGBtmClj2rOENcQ+Ssbgu/Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=h1ECkoR+3/WDoEQ2FuO44DKpRaxHsDksYpGsGiduLVU=;
+ b=E7IvKkcjdwbbuUrzNQvHIc5+/nLlw3TlZDvJiUi9HX3bNfhRgEH5klUYNw6YEr5zjK4+EtWJ490OINRWJpKwHax0GdZbZb5G+zDGFriMmxU2IzBXC/UyyEeTbC4PRhAmjnppxYuqzm0MXy00sPUE11Xu/WuZnVvCAOPmX/Or4D1iRfdmxopIwUy+cy0kqx0EqtdjXl2aCrcD/cWmnvvtHvaxhtF6j6h55i7RUKq957RzpDwYjw/xpOFODT8Y4djnm7xAto31RyzSoIFlQZI80hvmHe3AZQIYnKpq2lNl+cDvJt7oVUv2qyjnW/zWT9UmL/+tt/2DSUhIJRvEjrlPOQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=h1ECkoR+3/WDoEQ2FuO44DKpRaxHsDksYpGsGiduLVU=;
+ b=t3Qyw1C1KSaWtBT05HiL3kJZPNSsWgFWc+SD7Up6y50i1EnT25qUiQbU5gZKLqC/Oqw1g42se8NAAsWTtTblHbkRzwtumwEj87VrYjedjOQUxgUxbaDF/A7wuO0/U/HzplzhJ+S0UQWq1Xy9ZSMsa/tSDiTAnUvfTPszbYoEwBs=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BYAPR12MB3589.namprd12.prod.outlook.com (2603:10b6:a03:df::29)
+ by BY5PR12MB4870.namprd12.prod.outlook.com (2603:10b6:a03:1de::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6002.24; Wed, 18 Jan
+ 2023 08:52:03 +0000
+Received: from BYAPR12MB3589.namprd12.prod.outlook.com
+ ([fe80::500a:d02f:5ceb:4221]) by BYAPR12MB3589.namprd12.prod.outlook.com
+ ([fe80::500a:d02f:5ceb:4221%7]) with mapi id 15.20.5986.023; Wed, 18 Jan 2023
+ 08:52:03 +0000
+Message-ID: <3c3bd64a-164b-7ff2-ebf0-c8f9c2f94b72@amd.com>
+Date: Wed, 18 Jan 2023 09:51:55 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Content-Language: en-US
+To: Danilo Krummrich <dakr@redhat.com>, daniel@ffwll.ch, airlied@redhat.com,
+ bskeggs@redhat.com, jason@jlekstrand.net, tzimmermann@suse.de,
+ mripard@kernel.org, corbet@lwn.net
+References: <20230118061256.2689-1-dakr@redhat.com>
+ <20230118061256.2689-3-dakr@redhat.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20230118061256.2689-3-dakr@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR2P281CA0070.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9a::9) To BYAPR12MB3589.namprd12.prod.outlook.com
+ (2603:10b6:a03:df::29)
 MIME-Version: 1.0
-References: <20221228144914.z7t7a4fdwvbblnak@wslaptop>
- <CAMwc25rY4xpn0yvCScMr6Hk9pFSdvt=9QOypSQDfj1d5tWmtvA@mail.gmail.com>
- <20230116122403.upk5ci4mbebw23m7@wslaptop>
- <CACAvsv48vH6hbacQCN+yKP8ZcDjFMWciBt6U_Xv-LEYJHZ1q9g@mail.gmail.com>
-In-Reply-To: <CACAvsv48vH6hbacQCN+yKP8ZcDjFMWciBt6U_Xv-LEYJHZ1q9g@mail.gmail.com>
-From: Nicolas Chauvet <kwizart@gmail.com>
-Date: Wed, 18 Jan 2023 09:42:15 +0100
-Message-ID: <CABr+WTnOyC-jpRiafuwPCXMY6+2JiOXnJuKuTCBZfEbOKfmo-A@mail.gmail.com>
-To: Ben Skeggs <skeggsb@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [REGRESSION] GM20B probe fails after commit
- 2541626cfb79
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BYAPR12MB3589:EE_|BY5PR12MB4870:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7886a82e-8e4e-4baa-df1a-08daf931448f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: SEPJWkNN8Q7M/UMg9NbgyC3vLFLyo8zmNUSk4zvVXGgdOPLgXtwZI0o+tsg4KYihdywdXwnBhFbvuuGgvHDGWWNPeH78Xy0rGCqdtq/Zd2uAQye+5rg9jZ+AIOeI1TpwU13sCMbHc6YRcZb7bKkhi0AqTavaQQLNvTnks4roVKEcdz/uikOP6XMPOyxcCxTGaGlKi7A+TPnsbkCbsuKD93SYbPnqt9BD/OqDy7EyXffu+gsGvk1q0BqrLnLCSx2lbdlaWj9YOzXwC+ppQoSa9fFl7tHi9KMMQ8dyZzoNQQ9oCs0xig2PxiQkKfeBM2W+Ep8vJmdIFwy4868ia/IeXpqebUhGlCW4E5JJuhSxipX7vOeK6ptWngmWd9Yh+rZcrcS+D/NliGCr8ICYjG+Xdq6LzLJVSinH+889ijnz17dGITWUj+MDANX63CgEIjMcoTTqcfgkcRE7iS/K11Z+uL9SMtd43Z8A0uV0wPSArgklmO/Y2i/76fv1MZuAIje3md9DKLVpjpP7NoEFmumpzniDHv4pLPajgptwaHo3lG6EgMI+DjkK0dU+fyfi5AlHYy0RGZkPhDkT/uecwhIe7ZIZY8+e9HwM4O47WI9kZjjOlJ0WpSxQVYCRSd+J4+CjJySZO9edXS83a5r0f2Z7cHCzX2Ub0If5o+hj1Nb3R1xlD5OGw5iPCAcDMjZsmc1GU6n79s75JQB1TfCuuN3LS3JL2DTmt7tf8tLq6laCh1U=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BYAPR12MB3589.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230022)(4636009)(376002)(136003)(39860400002)(396003)(346002)(366004)(451199015)(31686004)(86362001)(2906002)(7416002)(66556008)(66476007)(66946007)(4744005)(8936002)(5660300002)(31696002)(38100700002)(316002)(6666004)(6486002)(6506007)(478600001)(36756003)(41300700001)(8676002)(4326008)(186003)(6512007)(83380400001)(2616005)(43740500002)(45980500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZTFJYVpQRXo0VEpod1RiNXI2QllYOVlvY1k2RVJLc2tqQmxRTGtBVm9sRWZ0?=
+ =?utf-8?B?Sy96TkFxanh3ZkZQOW1JbWNWRzl5ZWFQai9ZNmtMaGN4a09DTitWcXNaVVNX?=
+ =?utf-8?B?RDI0czlRdFJDOW9qR1BJeC9Mc3k0Z25jK1pzYnpESjdJaWZnUzRadjlIdEpU?=
+ =?utf-8?B?Qzh5K2ErNldCQ0NpSjMrQ0hNdHY2T21YTmI0VC9VV1EyaUpYaHpQTzVIcGhL?=
+ =?utf-8?B?ZnhsUUV0T2xyek9qb3ZmUHNzeWdtaDcyNXc5SFpNMDFCNTdlaUxnVHNCZXRt?=
+ =?utf-8?B?Vmo4Q3o4eW1taVVJbG5EcU9WQit2ZG9YVnhvcCtiWWZ3a0dDQmtQR0t1U1hx?=
+ =?utf-8?B?QjBqbnNCOUhBemJmdmwrTzIrbmdySjMxcDVtTU43VDdFcC85VjJzb3h1bENH?=
+ =?utf-8?B?aXBnL1JRbFdJNGVpMndjNDIzNXJEQ2dTa3FxbllZcjdGdjNGNzdXRnJ6SkRQ?=
+ =?utf-8?B?cXFaaVM2S21wTEppeTA1aVl6SjFyNkxtQi9SbXhGTCtxN0JTV1F2RmZsVUNJ?=
+ =?utf-8?B?blUwUlVxTnMyalh1YzErV1ZTbW5Da1FJM2RYbWVsSUMyNDB6aG5ITWFQVkY0?=
+ =?utf-8?B?N3ZYTlh5Z01jZEg0SlorOXN3bFIrbXE3aEZzV1ZYMFJxUERGZFp4VGxtbnlU?=
+ =?utf-8?B?L0sxZUFjazdPbUhxVitldmdJamE5dlJZWWUzL1VMTFNMeUlhb1phdEZXTVBj?=
+ =?utf-8?B?aENzS3RDK0NkNVRRaERnYlpJbTVrVU41VDh6eS92cFlabkxHVyszUFZQWDdo?=
+ =?utf-8?B?RHFkTWthYk5LTmhvM3pORjdicG42Nnh0V1E4M242ajJDSFlCMklRYXlBNmJS?=
+ =?utf-8?B?MXNpZXZiRTdHMGZ5bHNEQ1ZFejIzVTQzWXoyT3pkYkZSY1hTRGIvZCtnOGF3?=
+ =?utf-8?B?MHB6TEh6TTM1YlJYZlJwK3M2Z0NlbUNvK3lOTXVrSFVwK3hZZGphejFxOE0w?=
+ =?utf-8?B?Y1FUeEg2a0JpbDhubko5WDlYR01rK3dsRUZNd24vQk1sWGpsZDl3bll3TmRP?=
+ =?utf-8?B?ME4vZENYYUtUdEpKVWl2WXJRdHpEVEthc1dDcUFiZkt1ckxDTVN2c2JIaXZJ?=
+ =?utf-8?B?TXRHZWE1bEFVVk1Gd3FOd0Rsc0tYcWlSQU1aRzF1RGxIL28vcisydEhiVXNT?=
+ =?utf-8?B?QXlNTEZEcUFOR1pUV0hHT01lN1VlSmxLQVRmbFY5OE8wb2hNYmVjTGJma0ZX?=
+ =?utf-8?B?MDVMZ3FMQ3JmWk5ySDlCU1hiVGJvVGpvdHRiMW5DVFdycVlETHNTZjN3WEhF?=
+ =?utf-8?B?MHRhTlVSaHR1bTVXV2l0NzZlMDNaMUw5RUhTLzdjUTVLVENPVzFnZEhvMTJa?=
+ =?utf-8?B?eDU0ZERjK0R0MVFMaE5YSDArdUVLdUtkZXRveHR4dXlzL2JublZORWZVUXZB?=
+ =?utf-8?B?UTJyNDBqcEFqamlUNFhHREVOSnFVVE5ZR0Y2eDcxTVZSbnhWRTdRVVpoN1g1?=
+ =?utf-8?B?SE81QXpzVDRva2F2QWxiTkpKNlQ4d2N5ZFcyZjh6WnQvUnZodXdqdzRDcFlE?=
+ =?utf-8?B?Yjl3UlFKelR4Uzg3VjlMbUZmYmRuczdlWmhLQnFFc0Q4U0VkV0huWWJqVDk4?=
+ =?utf-8?B?WTExRDNlQW05N1pvMmdCZWNwbVhCMWJicituRkhWZ3BtNE44NWFPc2x1eUdX?=
+ =?utf-8?B?ZlJncWUzMTJIdEVFTVdZa2dOdVdKaVl6bkpVMStZNUNwM0ZTUTIzc2VRd04x?=
+ =?utf-8?B?UWx4SVBIdTBnOWN3NEYzcW0vV0EvVEllNUtpVVJCR1FLRzRJSkpDeTUwNm9m?=
+ =?utf-8?B?QVIzdmtrc3BOZld1c1VVMjBqem5mK0greGtGZXByUVRHUmZSMkVVbk5ISTZK?=
+ =?utf-8?B?cVdUOXFMYnVVdVI4Q1VxbGlpTHFhZ3NDZjR0dld6UFppMEdxU1VJVUxVZStv?=
+ =?utf-8?B?NjB1cDJLMitqWEJxSHVYeklVOXNmcGduZkFrTGwvYWpvMTRGUlltTUpId1BX?=
+ =?utf-8?B?bldRQlowWmpRQmlSSWQ0Rm9vWE1EN0tkblJiZXE0K0dLZHBjOWMrcVZVNCtG?=
+ =?utf-8?B?NXc5QnB6UzJCU2lZMkxOUHZ4Q2xyRkhnTStYaW9HSUE1VUtNSlJscEpDcXZO?=
+ =?utf-8?B?bmpsQTBibUxFNC84ZU5qMHVpVEsydG1lRnZ4ajVCRjZ2ZkxKdnlvcGdGamxs?=
+ =?utf-8?B?a3dNUE40Z2hlRklHS1JlNlV2bXgrK1JTSS9qN3c2VmVsQzhvN0IxcDZybFlR?=
+ =?utf-8?Q?sXiqYQJcw0fWrRZxLJ48n1F6SDFfo9heCvn8Cq1F19tO?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7886a82e-8e4e-4baa-df1a-08daf931448f
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB3589.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jan 2023 08:52:02.8308 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9RVMhxuegYjd4hRk5bNnOcGR6v9SbwxP05r7rEOs2QRmQOvHZa4H2sqvW8L4c2De
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4870
+Subject: Re: [Nouveau] [PATCH drm-next 02/14] drm/exec: fix memory leak in
+ drm_exec_prepare_obj()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,119 +128,33 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: regressions@lists.linux.dev, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>,
- bskeggs@redhat.com, David Airlie <airlied@redhat.com>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Le mer. 18 janv. 2023 =C3=A0 02:29, Ben Skeggs <skeggsb@gmail.com> a =C3=A9=
-crit :
->
-> On Mon, 16 Jan 2023 at 22:27, Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt> wr=
-ote:
-> >
-> > On Mon, Jan 16, 2023 at 07:45:05AM +1000, David Airlie wrote:
-> > > On Thu, Dec 29, 2022 at 12:58 AM Diogo Ivo <diogo.ivo@tecnico.ulisboa=
-.pt> wrote:
-> > > As a quick check can you try changing
-> > >
-> > > drivers/gpu/drm/nouveau/nvkm/core/firmware.c:nvkm_firmware_mem_target
-> > > from NVKM_MEM_TARGET_HOST to NVKM_MEM_TARGET_NCOH ?
-> >
-> > Hello!
-> >
-> > Applying this change breaks probing in a different way, with a
-> > bad PC=3D0x0. From a quick look at nvkm_falcon_load_dmem it looks like =
-this
-> > could happen due to the .load_dmem() callback not being properly
-> > initialized. This is the kernel log I got:
-> In addition to Dave's change, can you try changing the
-> nvkm_falcon_load_dmem() call in gm20b_pmu_init() to:
->
-> nvkm_falcon_pio_wr(falcon, (u8 *)&args, 0, 0, DMEM, addr_args,
-> sizeof(args), 0, false);
+That one should probably be squashed into the original patch.
 
-Here is the new stack trace:
+Christian.
 
-[ 1112.488211] nouveau: loading out-of-tree module taints kernel.
-[ 1112.494763] nouveau: module verification failed: signature and/or
-required key missing - tainting kernel
-[ 1112.534035] Failed to set up IOMMU for device 57000000.gpu;
-retaining platform DMA ops
-[ 1112.537536] nouveau 57000000.gpu: NVIDIA GM20B (12b000a1)
-[ 1112.537587] nouveau 57000000.gpu: imem: using IOMMU
-[ 1112.616677] ------------[ cut here ]------------
-[ 1112.616820] nouveau 57000000.gpu: DRM: VRAM: 0 MiB
-[ 1112.616830] nouveau 57000000.gpu: DRM: GART: 1048576 MiB
-[ 1112.616688] WARNING: CPU: 0 PID: 388 at
-/var/tmp/linux/drivers/gpu/drm/nouveau/nvkm/falcon/base.c:135
-nvkm_falcon_pio_rd+0x150/0x2bc [nouveau]
-[ 1112.617272] Modules linked in: nouveau(OE+) drm_ttm_helper ttm
-snd_seq_dummy snd_hrtimer nf_conntrack_netbios_ns
-nf_conntrack_broadcast nft_fib_inet nft_fib_ipv4 nft_fib_ipv6 nft_fib
-nft_reject_inet nf_reject_ipv4 nf_reject_ipv6 nft_reject nft_ct
-nft_chain_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 rfkill
-ip_set nf_tables nfnetlink qrtr snd_soc_tegra_audio_graph_card
-snd_soc_audio_graph_card snd_soc_simple_card_utils snd_soc_core
-snd_hda_codec_hdmi snd_hda_tegra snd_compress snd_hda_codec ac97_bus
-snd_hda_core snd_pcm_dmaengine snd_hwdep snd_seq snd_seq_device sunrpc
-snd_pcm usb_conn_gpio snd_timer snd max77620_thermal tegra_xudc
-tegra_soctherm udc_core soundcore cpufreq_dt at24 vfat fat zram r8152
-mii panel_simple mmc_block tegra_drm drm_dp_aux_bus drm_display_helper
-rtc_max77686 lp855x_bl crct10dif_ce cec polyval_ce polyval_generic
-ghash_ce gpio_keys sdhci_tegra xhci_tegra sdhci_pltfm sdhci
-phy_tegra_xusb rtc_tegra cqhci ahci_tegra host1x tegra210_emc
-i2c_tegra ip6_tables
-[ 1112.617430]  ip_tables fuse
-[ 1112.617440] CPU: 0 PID: 388 Comm: kworker/0:4 Tainted: G
-OE     -------  ---  6.2.0-0.rc4.31.fc38.aarch64 #1
-[ 1112.617446] Hardware name: nvidia,p2371-2180 NVIDIA
-P2371-2180/NVIDIA P2371-2180, BIOS 2022.10 10/01/2022
-[ 1112.617452] Workqueue: events nvkm_pmu_recv [nouveau]
-[ 1112.617934] pstate: 00400005 (nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=
-=3D--)
-[ 1112.617940] pc : nvkm_falcon_pio_rd+0x150/0x2bc [nouveau]
-[ 1112.618418] nouveau 57000000.gpu: DRM: MM: using COPY for buffer copies
-[ 1112.618525] lr : nvkm_falcon_pio_rd+0x50/0x2bc [nouveau]
-[ 1112.619057] sp : ffff80000bf13c40
-[ 1112.619060] x29: ffff80000bf13c50 x28: 0000000000000000 x27: 00000000000=
-00000
-[ 1112.619070] x26: ffff8000553f3d70 x25: ffff0000b04704b8 x24: 00000000000=
-00000
-[ 1112.619079] x23: ffff8000554800a0 x22: 0000000000000000 x21: ffff80000bf=
-13d56
-[ 1112.619086] x20: 000000000000002a x19: 0000000000000001 x18: 00000000000=
-00000
-[ 1112.619093] x17: 000000040044ffff x16: ffff8000091f53b0 x15: 00000000000=
-00000
-[ 1112.619100] x14: 0000000000000000 x13: 0000000000000030 x12: 01010101010=
-10101
-[ 1112.619108] x11: 7f7f7f7f7f7f7f7f x10: fefefefefefefeff x9 : ffff8000552=
-cc224
-[ 1112.619115] x8 : ffff0000b0470420 x7 : 0000000000000000 x6 : 00000000000=
-0002a
-[ 1112.619123] x5 : 0000000000000000 x4 : ffff80005540b7c8 x3 : ffff0000b04=
-70408
-[ 1112.619130] x2 : ffff0000b0470420 x1 : ffff0000b0470408 x0 : 00000000000=
-00003
-[ 1112.619138] Call trace:
-[ 1112.619141]  nvkm_falcon_pio_rd+0x150/0x2bc [nouveau]
-[ 1112.619756]  nvkm_falcon_msgq_pop+0x90/0x1c0 [nouveau]
-[ 1112.620313]  nvkm_falcon_msgq_recv_initmsg+0xd4/0x1f4 [nouveau]
-[ 1112.620877]  gm20b_pmu_initmsg+0x3c/0xd4 [nouveau]
-[ 1112.621418]  gm20b_pmu_recv+0x30/0x80 [nouveau]
-[ 1112.622004]  nvkm_pmu_recv+0x24/0x30 [nouveau]
-[ 1112.622547]  process_one_work+0x1e8/0x480
-[ 1112.622559]  worker_thread+0x74/0x410
-[ 1112.622564]  kthread+0xe8/0xf4
-[ 1112.622568]  ret_from_fork+0x10/0x20
-[ 1112.622577] ---[ end trace 0000000000000000 ]---
-[ 1112.622696] nouveau 57000000.gpu: pmu: unexpected init message size 0 vs=
- 42
-[ 1112.622708] nouveau 57000000.gpu: pmu: error parsing init message: -22
-[ 1112.623365] [drm] Initialized nouveau 1.3.1 20120801 for
-57000000.gpu on minor 1
-[ 1113.688183] nouveau 57000000.gpu: pmu:hpq: timeout waiting for queue rea=
-dy
-[ 1113.688246] nouveau 57000000.gpu: gr: init failed, -110
+Am 18.01.23 um 07:12 schrieb Danilo Krummrich:
+> Don't call drm_gem_object_get() unconditionally.
+>
+> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+> ---
+>   drivers/gpu/drm/drm_exec.c | 1 -
+>   1 file changed, 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/drm_exec.c b/drivers/gpu/drm/drm_exec.c
+> index ed2106c22786..5713a589a6a3 100644
+> --- a/drivers/gpu/drm/drm_exec.c
+> +++ b/drivers/gpu/drm/drm_exec.c
+> @@ -282,7 +282,6 @@ int drm_exec_prepare_obj(struct drm_exec *exec, struct drm_gem_object *obj,
+>   			goto error_unlock;
+>   	}
+>   
+> -	drm_gem_object_get(obj);
+>   	return 0;
+>   
+>   error_unlock:
+
