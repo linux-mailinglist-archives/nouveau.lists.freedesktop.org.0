@@ -1,42 +1,42 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F82D6F6BD6
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:49 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F2896F6B65
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2788010E459;
-	Thu,  4 May 2023 12:33:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6757B10E3F4;
+	Thu,  4 May 2023 12:31:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 480E910E914;
- Thu, 19 Jan 2023 11:47:52 +0000 (UTC)
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 87BA310E91D;
+ Thu, 19 Jan 2023 11:57:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1674128872; x=1705664872;
+ t=1674129457; x=1705665457;
  h=message-id:date:mime-version:cc:subject:to:references:
  from:in-reply-to:content-transfer-encoding;
- bh=DuOBg1V/kEEpNk+BV4bYqVrWJSOOFRR3sdWDamFrvt0=;
- b=GUc1sDL2PLjN2+V+ZitG8REELvXg2ry77rnL1wALEEp9g7zCLSwtkvhP
- 2GEG53DjwoA7MfgR/pV33eujZZCrD8Lc95Rb9kpwdpV4DLV69thjCb8+Y
- 2g/8F/8h9/X2fOGgOFvyOLZKw9aUQxSGE3TF2N2obI0bexlZivji6/uUz
- Pgm4qrguFrApgul0eZ1z0PWYaTGsC1sFuzQB25cknUn6XFl/+zjOKriR/
- k0A//aYL/4Bv5kuSZhHP9C13jk3sDtFkq7MwY8iU5N/kXWUm11HQJLEKl
- hWs6L0dsW+vW51TNVYm8UG0RWo4pPV/qzgL/+9UQabnZU6sLtHbIWxQdK w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10594"; a="308821077"
-X-IronPort-AV: E=Sophos;i="5.97,229,1669104000"; d="scan'208";a="308821077"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jan 2023 03:47:51 -0800
-X-IronPort-AV: E=McAfee;i="6500,9779,10594"; a="988957189"
-X-IronPort-AV: E=Sophos;i="5.97,229,1669104000"; d="scan'208";a="988957189"
+ bh=OOSuI8Ptgbyop0bHqYWl6Cev1ihhKUlYoWWsszEriiM=;
+ b=Ld6BNIAxy62CgK+XmkZEcn8u2OyXgy38RzLrI62u+91zbhwkJHL7M/DM
+ 6qLa4Jgtz/ZYP+Kq6YpEvUjCPAccKhRPgDkNEMUtuQ1rTpPjMPUpqZSOl
+ DNt12/diIZKjyxD2dc4yRIaL1QpRBiLaX6hnu8SbQNIBFjH1rrwdRn1LD
+ MBlcd8hdxlG7g/3OKpiWe3ldRGFLu2P5tdd8q6LxwkUyHbuSrDm9N9P7v
+ K2d2G6jP0ZFCd1vgXbBnlCTViTLds66WXqvfckl8b+CmSxRHpP9OXVuZ2
+ SAZrKRw+7liKWUHn+GGoVMvS2zZBpLlUpRTF7HhIWG2vCq7bMVBEgnUdw A==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10594"; a="305637394"
+X-IronPort-AV: E=Sophos;i="5.97,229,1669104000"; d="scan'208";a="305637394"
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+ by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Jan 2023 03:57:29 -0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10594"; a="692393155"
+X-IronPort-AV: E=Sophos;i="5.97,229,1669104000"; d="scan'208";a="692393155"
 Received: from blu2-mobl.ccr.corp.intel.com (HELO [10.252.185.248])
  ([10.252.185.248])
- by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jan 2023 03:47:45 -0800
-Message-ID: <08c874f6-0c59-0b74-a2c8-7ad61356af6f@linux.intel.com>
-Date: Thu, 19 Jan 2023 19:47:42 +0800
+ by orsmga001-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Jan 2023 03:57:23 -0800
+Message-ID: <e44077a7-e275-4e34-b7ad-3e1382ea974d@linux.intel.com>
+Date: Thu, 19 Jan 2023 19:57:20 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.6.1
@@ -44,14 +44,14 @@ Content-Language: en-US
 To: Jason Gunthorpe <jgg@nvidia.com>, Joerg Roedel <joro@8bytes.org>,
  Kevin Tian <kevin.tian@intel.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
  Robin Murphy <robin.murphy@arm.com>
-References: <6-v2-ce66f632bd0d+484-iommu_map_gfp_jgg@nvidia.com>
+References: <7-v2-ce66f632bd0d+484-iommu_map_gfp_jgg@nvidia.com>
 From: Baolu Lu <baolu.lu@linux.intel.com>
-In-Reply-To: <6-v2-ce66f632bd0d+484-iommu_map_gfp_jgg@nvidia.com>
+In-Reply-To: <7-v2-ce66f632bd0d+484-iommu_map_gfp_jgg@nvidia.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Thu, 04 May 2023 12:31:34 +0000
-Subject: Re: [Nouveau] [PATCH v2 06/10] iommu/intel: Add a gfp parameter to
- alloc_pgtable_page()
+Subject: Re: [Nouveau] [PATCH v2 07/10] iommu/intel: Support the gfp
+ argument to the map_pages op
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,10 +77,15 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On 2023/1/19 2:00, Jason Gunthorpe wrote:
-> This is eventually called by iommufd through intel_iommu_map_pages() and
-> it should not be forced to atomic. Push the GFP_ATOMIC to all callers.
+> Flow it down to alloc_pgtable_page() via pfn_to_dma_pte() and
+> __domain_mapping().
 > 
 > Signed-off-by: Jason Gunthorpe<jgg@nvidia.com>
+
+Irrelevant to this patch, GFP_ATOMIC could be changed to GFP_KERNEL in
+some places. I will follow up further to clean it up.
+
+For this patch,
 
 Reviewed-by: Lu Baolu <baolu.lu@linux.intel.com>
 
