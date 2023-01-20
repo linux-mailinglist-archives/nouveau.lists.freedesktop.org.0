@@ -2,64 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 513896F6B69
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 246316F6BEA
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:34:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2A33D10E42B;
-	Thu,  4 May 2023 12:31:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BBE1110E4A6;
+	Thu,  4 May 2023 12:33:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 67CFB10E099;
- Thu, 19 Jan 2023 22:54:06 +0000 (UTC)
-Received: by mail-ed1-x529.google.com with SMTP id 18so4739488edw.7;
- Thu, 19 Jan 2023 14:54:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=khL1Nx5/0J4PkaYH2tde4UnbrwukvlMmrAWH0vjr2bI=;
- b=Ac2OX+39mFVECn4hmmfAWS6rVP1xBX7Wn30/vwGx8/3ZfjypN7OQgYqrpKb07D8Jlx
- j77BkYexw/gJ1baOWzJ0FtaD5JHwFDfB1FuciuirfpHEBa1UPw7h2lKdabbcKpenEhzc
- 9psvBAIsSdBOmYKdPZrBkCZy/eP7Ucr/axblCgKlPqt2qnLpfGXeAnZBe2QtTTIygv+e
- E+LDkFrXqBcIqcFz7xbc+f/ax6knJTfluBa7GV7QkMJTeGEXxRWXNaKcoovlCGBVK99J
- 14SdtIXYuok20iBvWMOtCrz+/fTV1A1UCFtWmA2HakOb+K6bWmVAIfHTElFx2k+dOqMI
- Yuqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=khL1Nx5/0J4PkaYH2tde4UnbrwukvlMmrAWH0vjr2bI=;
- b=GNpRH7XbM17+X87LYGYuxaZDN+JQdYjsAlHoSr2msO4RzSiduBUo4rplAEYdchrLNl
- Sqe9e8wPqeylMhp7ca0Y9+JY8IQIE8OS5QJo32C2Vqgac/vayvIHQ87rO8bdMVa0GwAn
- S99jdJeK10VSYfxgQlr1aucjHfnpjOi4ReOFKfnUIGX5ZM1CWY6Bhpg4PWebsFQCpa3c
- LIFvYL9VDEEXUxmQ7XuDLmpOMVkmy7Wpa4nPNIF9KRnHyEFERTR29wbPob3Hy+tXnpUn
- qMs5uW8TZG3F77c1ZO44TcMcuoDSblVuGsA42g04XOIgc45awSQcdx4W91adOqAZ2dTw
- E5Yg==
-X-Gm-Message-State: AFqh2kpRDOEVMNygkPzTehtzemwuJiDnxmBAku/fHhTSBU3AqOj8kH7E
- /xZsV7GkaYOfGuKZJnIYG/4=
-X-Google-Smtp-Source: AMrXdXsUCyTMzdubcmLV/sZTktU8cjOIaxH0ioMYdQNFrdyqzBYrF/7iQaq0jIBMed1wxB8P61zQzA==
-X-Received: by 2002:a05:6402:289b:b0:49e:8410:ff1f with SMTP id
- eg27-20020a056402289b00b0049e8410ff1fmr1881349edb.28.1674168844603; 
- Thu, 19 Jan 2023 14:54:04 -0800 (PST)
-Received: from Tanmay.. (ip5f5ad407.dynamic.kabel-deutschland.de.
- [95.90.212.7]) by smtp.gmail.com with ESMTPSA id
- d14-20020a170906304e00b0077077c62cadsm16916985ejd.31.2023.01.19.14.54.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Jan 2023 14:54:04 -0800 (PST)
-From: Tanmay Bhushan <007047221b@gmail.com>
-To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Date: Thu, 19 Jan 2023 23:53:51 +0100
-Message-Id: <20230119225351.71657-1-007047221b@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 53AC110E0E7;
+ Fri, 20 Jan 2023 10:08:38 +0000 (UTC)
+Received: from localhost (unknown [IPv6:2a01:e0a:2c:6930:5cf4:84a1:2763:fe0d])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: bbrezillon)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id 6CD116602AAA;
+ Fri, 20 Jan 2023 10:08:36 +0000 (GMT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1674209316;
+ bh=mGZMRhz079cBUS3es9XAvPfXNBT914As8zfpB8Pu9n4=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=ZWHBopnaIcDi261qkYCZ/g4fD7bEZ1Ek8PwKjhKVuNsNx1nenWz+K7ID4TSR7SWO5
+ XFvWgQ2lRRZE5EzQkG92UzEV8UExou8CWSm5mjZJPVQTZuHO+7+6X3vUv8rJCsVc85
+ iubV3oJ1y0d+jEIMqMySOLl0Zyx2y9f6RX8DV78Vt9W19exCH3eumax91ZnZZ5qCrJ
+ LA/ahTmOejcx+9iWNauPHVSAz0xPmhcAJSLTeUpATtXNBKMcdF4SszpfmF4WURSDHV
+ cU9sHbYnW0giNFNPwFCJLP0GQa8bbkAbt6oI+Eyo4IoEijpplAPvWdmk7FHtahrGSy
+ DFhERHKe3a5FQ==
+Date: Fri, 20 Jan 2023 11:08:33 +0100
+From: Boris Brezillon <boris.brezillon@collabora.com>
+To: Matthew Brost <matthew.brost@intel.com>
+Message-ID: <20230120110833.76cc7864@collabora.com>
+In-Reply-To: <Y8jOCE/PyNZ2Z6aX@DUT025-TGLU.fm.intel.com>
+References: <20230118061256.2689-1-dakr@redhat.com>
+ <20230118061256.2689-14-dakr@redhat.com>
+ <e371e8a1-88f8-1309-07ca-f48f4157fec8@shipmail.org>
+ <8e10b46c-f934-8eee-904e-b3d8a7644a71@redhat.com>
+ <Y8jOCE/PyNZ2Z6aX@DUT025-TGLU.fm.intel.com>
+Organization: Collabora
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.36; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:32 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau: Fix bug in buffer relocs for Nouveau
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:34 +0000
+Subject: Re: [Nouveau] [PATCH drm-next 13/14] drm/nouveau: implement new
+ VM_BIND UAPI
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,34 +57,35 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Tanmay Bhushan <007047221b@gmail.com>
+Cc: jason@jlekstrand.net, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, "Thomas =?UTF-8?B?SGVsbHN0csO2bQ==?=
+ \(Intel\)" <thomas_os@shipmail.org>, corbet@lwn.net,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ bskeggs@redhat.com, airlied@redhat.com, christian.koenig@amd.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-dma_resv_wait_timeout returns greater than zero on success
-as opposed to ttm_bo_wait_ctx. As a result of that relocs
-will fail and give failure even when it was a success.
+On Thu, 19 Jan 2023 04:58:48 +0000
+Matthew Brost <matthew.brost@intel.com> wrote:
 
-Signed-off-by: Tanmay Bhushan <007047221b@gmail.com>
----
- drivers/gpu/drm/nouveau/nouveau_gem.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+> > For the ops structures the drm_gpuva_manager allocates for reporting the
+> > split/merge steps back to the driver I have ideas to entirely avoid
+> > allocations, which also is a good thing in respect of Christians feedback
+> > regarding the huge amount of mapping requests some applications seem to
+> > generate.
+> >  
+> 
+> It should be fine to have allocations to report the split/merge step as
+> this step should be before a dma-fence is published, but yea if possible
+> to avoid extra allocs as that is always better.
+> 
+> Also BTW, great work on drm_gpuva_manager too. We will almost likely
+> pick this up in Xe rather than open coding all of this as we currently
+> do. We should probably start the port to this soon so we can contribute
+> to the implementation and get both of our drivers upstream sooner.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-index f77e44958037..0e3690459144 100644
---- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -706,9 +706,8 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
- 		ret = dma_resv_wait_timeout(nvbo->bo.base.resv,
- 					    DMA_RESV_USAGE_BOOKKEEP,
- 					    false, 15 * HZ);
--		if (ret == 0)
-+		if (ret <= 0) {
- 			ret = -EBUSY;
--		if (ret) {
- 			NV_PRINTK(err, cli, "reloc wait_idle failed: %ld\n",
- 				  ret);
- 			break;
--- 
-2.34.1
-
+Also quite interested in using this drm_gpuva_manager for pancsf, since
+I've been open-coding something similar. Didn't have the
+gpuva_region concept to make sure VA mapping/unmapping requests don't
+don't go outside a pre-reserved region, but it seems to automate some
+of the stuff I've been doing quite nicely.
