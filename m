@@ -1,55 +1,49 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06556674A47
-	for <lists+nouveau@lfdr.de>; Fri, 20 Jan 2023 04:38:47 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E7A0675148
+	for <lists+nouveau@lfdr.de>; Fri, 20 Jan 2023 10:36:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9636E10EA13;
-	Fri, 20 Jan 2023 03:38:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ABC9510E9F8;
+	Fri, 20 Jan 2023 09:36:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B38A810EA13;
- Fri, 20 Jan 2023 03:38:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1674185922; x=1705721922;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=EJl2wtDgpfUKTXoKSyUkpNnhZlVNVqNRsJl+mn9CCy8=;
- b=gFKX0tA3HHNoGhp0COhJw2M4PRZT/bFJEfEnKpEc41an1+dN8hjUG6qr
- LEla2pfZmuYdW90Rlcbin604tUz65ruhcjRWgX3tEtDqEv0wxc+5qqx/i
- Zepo3v4yO/JC219JstLxEjxpZfzJ/lggWlDFaku5g1sHkxauaDYZitm9t
- eAXQt0ZFr3Rsw2IhgvOjyaRtqPEnv2aDrUACBRB/J60Q6KEJa0Zzn2An8
- /UXfMLlfTN+dEkN5w7ihlPKDAIkpJA/aYcUUEeugSKHNjarDQyo5krgJn
- 8Nfuacl8iQ9YpZNa3pEQ3tRnMmdgqsFPeABaTB7apc1IBH7sAGVpwztjl w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10595"; a="313387644"
-X-IronPort-AV: E=Sophos;i="5.97,230,1669104000"; d="scan'208";a="313387644"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jan 2023 19:38:41 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10595"; a="638014484"
-X-IronPort-AV: E=Sophos;i="5.97,230,1669104000"; d="scan'208";a="638014484"
-Received: from lkp-server01.sh.intel.com (HELO 5646d64e7320) ([10.239.97.150])
- by orsmga006.jf.intel.com with ESMTP; 19 Jan 2023 19:38:38 -0800
-Received: from kbuild by 5646d64e7320 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1pIiEf-00028w-22;
- Fri, 20 Jan 2023 03:38:37 +0000
-Date: Fri, 20 Jan 2023 11:37:55 +0800
-From: kernel test robot <lkp@intel.com>
-To: Danilo Krummrich <dakr@redhat.com>, daniel@ffwll.ch, airlied@redhat.com,
- christian.koenig@amd.com, bskeggs@redhat.com, jason@jlekstrand.net,
- tzimmermann@suse.de, mripard@kernel.org, corbet@lwn.net
-Message-ID: <202301201115.THLpCShO-lkp@intel.com>
-References: <20230118061256.2689-12-dakr@redhat.com>
+X-Greylist: delayed 668 seconds by postgrey-1.36 at gabe;
+ Fri, 20 Jan 2023 09:36:07 UTC
+Received: from mail.8bytes.org (mail.8bytes.org [85.214.250.239])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 0AB3710E9F8;
+ Fri, 20 Jan 2023 09:36:06 +0000 (UTC)
+Received: from 8bytes.org
+ (p200300c27714bc0086ad4f9d2505dd0d.dip0.t-ipconnect.de
+ [IPv6:2003:c2:7714:bc00:86ad:4f9d:2505:dd0d])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.8bytes.org (Postfix) with ESMTPSA id E12D62626D1;
+ Fri, 20 Jan 2023 10:24:56 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=8bytes.org;
+ s=default; t=1674206697;
+ bh=N0Ez9jlBhYWiOK7+xYABfIe0+VmfRPgpACpzUje2F4A=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=lOLKVLD4dyMYfuGfszt0Aqi18MMtbwUvgwVbHoDO6hE/pu3jlsoFnfOvfV2sSJ6i8
+ k3lOBgDA7x9bkKbnD+qVSk6qrzEVOc/9/JS99/CzblV3IjUWMNUsDLegoejr0hYkyT
+ NIAGgbjvSNtqhO8clUAYjH7vWYcGoTKi2kDTgKFmFcsSDinl9Vo2l2M2oUTe7UNJh3
+ 4hHtdAX4so62XBRGFWlRKgCJW94p/lPduMMBp2SCZ238xwGOe1m0xh9F5SouN8x7NO
+ 06U5w+umYu9ogUcIQK1YpQ4ciXMhW+H2quzpMMrP7f3cTLkb2U0hf6Ab3xk/GMJY5E
+ 1P63Vv4/HChRw==
+Date: Fri, 20 Jan 2023 10:24:55 +0100
+From: Joerg Roedel <joro@8bytes.org>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Message-ID: <Y8pd50mdNShTyVRX@8bytes.org>
+References: <1-v1-6e8b3997c46d+89e-iommu_map_gfp_jgg@nvidia.com>
+ <4fd1b194-29ef-621d-4059-a8336058f217@arm.com>
+ <Y7hZOwerwljDKoQq@nvidia.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230118061256.2689-12-dakr@redhat.com>
-Subject: Re: [Nouveau] [PATCH drm-next 11/14] drm/nouveau: nvkm/vmm:
- implement raw ops to manage uvmm
+In-Reply-To: <Y7hZOwerwljDKoQq@nvidia.com>
+Subject: Re: [Nouveau] [PATCH 1/8] iommu: Add a gfp parameter to iommu_map()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,73 +55,35 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- oe-kbuild-all@lists.linux.dev
+Cc: kvm@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-remoteproc@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org,
+ linux-stm32@st-md-mailman.stormreply.com, linux-s390@vger.kernel.org,
+ Matthew Rosato <mjrosato@linux.ibm.com>, linux-rdma@vger.kernel.org,
+ ath10k@lists.infradead.org, iommu@lists.linux.dev,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, ath11k@lists.infradead.org,
+ linux-media@vger.kernel.org, Kevin Tian <kevin.tian@intel.com>,
+ Niklas Schnelle <schnelle@linux.ibm.com>, linux-arm-msm@vger.kernel.org,
+ Alex Williamson <alex.williamson@redhat.com>, linux-tegra@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, netdev@vger.kernel.org,
+ linux-wireless@vger.kernel.org, Robin Murphy <robin.murphy@arm.com>,
+ Lu Baolu <baolu.lu@linux.intel.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Danilo,
+On Fri, Jan 06, 2023 at 01:24:11PM -0400, Jason Gunthorpe wrote:
+> I think it is just better to follow kernel convention and have
+> allocation functions include the GFP because it is a clear signal to
+> the user that there is an allocation hidden inside the API. The whole
+> point of gfp is not to have multitudes of every function for every
+> allocation mode.
 
-Thank you for the patch! Perhaps something to improve:
+Well, having GFP parameters is not a strict kernel convention. There are
+places doing it differently and have sleeping and atomic variants of
+APIs. I have to say I like the latter more. But given that this leads to
+an invasion of API functions here which all do the same under the hood, I
+agree it is better to go with a GFP parameter here.
 
-[auto build test WARNING on 0b45ac1170ea6416bc1d36798414c04870cd356d]
+Regards,
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-execution-context-for-GEM-buffers/20230118-141552
-base:   0b45ac1170ea6416bc1d36798414c04870cd356d
-patch link:    https://lore.kernel.org/r/20230118061256.2689-12-dakr%40redhat.com
-patch subject: [PATCH drm-next 11/14] drm/nouveau: nvkm/vmm: implement raw ops to manage uvmm
-config: arc-randconfig-s051-20230119 (https://download.01.org/0day-ci/archive/20230120/202301201115.THLpCShO-lkp@intel.com/config)
-compiler: arc-elf-gcc (GCC) 12.1.0
-reproduce:
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # apt-get install sparse
-        # sparse version: v0.6.4-39-gce1a6720-dirty
-        # https://github.com/intel-lab-lkp/linux/commit/5fca471110e52d7c8db10f9ff483134a546174a1
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Danilo-Krummrich/drm-execution-context-for-GEM-buffers/20230118-141552
-        git checkout 5fca471110e52d7c8db10f9ff483134a546174a1
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=arc olddefconfig
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=arc SHELL=/bin/bash drivers/gpu/drm/
-
-If you fix the issue, kindly add following tag where applicable
-| Reported-by: kernel test robot <lkp@intel.com>
-
-sparse warnings: (new ones prefixed by >>)
->> drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c:413:34: sparse: sparse: non size-preserving integer to pointer cast
-
-vim +413 drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c
-
-   406	
-   407	static int
-   408	nvkm_uvmm_mthd_raw_unmap(struct nvkm_uvmm *uvmm, struct nvif_vmm_raw_v0 *args)
-   409	{
-   410		struct nvkm_vmm *vmm = uvmm->vmm;
-   411		struct nvkm_vma *vma;
-   412	
- > 413		vma = (struct nvkm_vma *)args->handle;
-   414		if (!vma)
-   415			return -EINVAL;
-   416	
-   417		mutex_lock(&vmm->mutex);
-   418		if (vma->busy) {
-   419			VMM_DEBUG(vmm, "denied %016llx: %d", vma->addr, vma->busy);
-   420			mutex_unlock(&vmm->mutex);
-   421			return -ENOENT;
-   422		}
-   423		vma->sparse = args->sparse;
-   424		nvkm_vmm_raw_unmap_locked(vmm, vma);
-   425		mutex_unlock(&vmm->mutex);
-   426	
-   427		args->handle = 0;
-   428		kfree(vma);
-   429		return 0;
-   430	}
-   431	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests
+	Joerg
