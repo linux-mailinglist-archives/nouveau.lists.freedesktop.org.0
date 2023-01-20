@@ -2,39 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B17A2673F27
-	for <lists+nouveau@lfdr.de>; Thu, 19 Jan 2023 17:43:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06556674A47
+	for <lists+nouveau@lfdr.de>; Fri, 20 Jan 2023 04:38:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D3D5210E9D1;
-	Thu, 19 Jan 2023 16:43:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9636E10EA13;
+	Fri, 20 Jan 2023 03:38:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de
- [80.237.130.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 372E110E9CE;
- Thu, 19 Jan 2023 16:43:09 +0000 (UTC)
-Received: from [2a02:8108:963f:de38:4bc7:2566:28bd:b73c]; authenticated
- by wp530.webpack.hosteurope.de running ExIM with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
- id 1pIY0I-0004b9-TV; Thu, 19 Jan 2023 17:43:06 +0100
-Message-ID: <33cdaf9b-49ce-a98b-350e-5885343d10b4@leemhuis.info>
-Date: Thu, 19 Jan 2023 17:43:06 +0100
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B38A810EA13;
+ Fri, 20 Jan 2023 03:38:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1674185922; x=1705721922;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=EJl2wtDgpfUKTXoKSyUkpNnhZlVNVqNRsJl+mn9CCy8=;
+ b=gFKX0tA3HHNoGhp0COhJw2M4PRZT/bFJEfEnKpEc41an1+dN8hjUG6qr
+ LEla2pfZmuYdW90Rlcbin604tUz65ruhcjRWgX3tEtDqEv0wxc+5qqx/i
+ Zepo3v4yO/JC219JstLxEjxpZfzJ/lggWlDFaku5g1sHkxauaDYZitm9t
+ eAXQt0ZFr3Rsw2IhgvOjyaRtqPEnv2aDrUACBRB/J60Q6KEJa0Zzn2An8
+ /UXfMLlfTN+dEkN5w7ihlPKDAIkpJA/aYcUUEeugSKHNjarDQyo5krgJn
+ 8Nfuacl8iQ9YpZNa3pEQ3tRnMmdgqsFPeABaTB7apc1IBH7sAGVpwztjl w==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10595"; a="313387644"
+X-IronPort-AV: E=Sophos;i="5.97,230,1669104000"; d="scan'208";a="313387644"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+ by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Jan 2023 19:38:41 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10595"; a="638014484"
+X-IronPort-AV: E=Sophos;i="5.97,230,1669104000"; d="scan'208";a="638014484"
+Received: from lkp-server01.sh.intel.com (HELO 5646d64e7320) ([10.239.97.150])
+ by orsmga006.jf.intel.com with ESMTP; 19 Jan 2023 19:38:38 -0800
+Received: from kbuild by 5646d64e7320 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1pIiEf-00028w-22;
+ Fri, 20 Jan 2023 03:38:37 +0000
+Date: Fri, 20 Jan 2023 11:37:55 +0800
+From: kernel test robot <lkp@intel.com>
+To: Danilo Krummrich <dakr@redhat.com>, daniel@ffwll.ch, airlied@redhat.com,
+ christian.koenig@amd.com, bskeggs@redhat.com, jason@jlekstrand.net,
+ tzimmermann@suse.de, mripard@kernel.org, corbet@lwn.net
+Message-ID: <202301201115.THLpCShO-lkp@intel.com>
+References: <20230118061256.2689-12-dakr@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Content-Language: en-US, de-DE
-From: "Linux kernel regression tracking (#update)" <regressions@leemhuis.info>
-To: bskeggs@redhat.com, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>
-References: <b64705e3-2e63-a466-f829-f9568b06766a@googlemail.com>
- <fcec3c78-b5d9-eb48-0fc0-d1f27de87f23@leemhuis.info>
-In-Reply-To: <fcec3c78-b5d9-eb48-0fc0-d1f27de87f23@leemhuis.info>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-bounce-key: webpack.hosteurope.de; regressions@leemhuis.info; 1674146589;
- 4304e8b1; 
-X-HE-SMSGID: 1pIY0I-0004b9-TV
-Subject: Re: [Nouveau] linux-6.2-rc4+ hangs on poweroff/reboot: Bisected
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230118061256.2689-12-dakr@redhat.com>
+Subject: Re: [Nouveau] [PATCH drm-next 11/14] drm/nouveau: nvkm/vmm:
+ implement raw ops to manage uvmm
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -46,41 +61,73 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: Linux regressions mailing list <regressions@lists.linux.dev>
-Cc: ML nouveau <nouveau@lists.freedesktop.org>,
- Chris Clayton <chris2553@googlemail.com>, LKML <linux-kernel@vger.kernel.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- Linux kernel regressions list <regressions@lists.linux.dev>
+Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ oe-kbuild-all@lists.linux.dev
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-[TLDR: This mail in primarily relevant for Linux kernel regression
-tracking. See link in footer if these mails annoy you.]
+Hi Danilo,
 
-On 19.01.23 15:33, Linux kernel regression tracking (Thorsten Leemhuis)
-wrote:
-> On 18.01.23 21:59, Chris Clayton wrote:
->>
->> 	# first bad commit: [0e44c21708761977dcbea9b846b51a6fb684907a] drm/nouveau/flcn: new code to load+boot simple HS FWs
->> (VPR scrubber)
->
-> #regzbot ^introduced e44c2170876197
+Thank you for the patch! Perhaps something to improve:
 
-/me wonders if he failed to spot or cut'n'paste the leading 0
-/me wonders if he needs glasses
-#sigh
+[auto build test WARNING on 0b45ac1170ea6416bc1d36798414c04870cd356d]
 
-Sorry for the noise!
+url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-execution-context-for-GEM-buffers/20230118-141552
+base:   0b45ac1170ea6416bc1d36798414c04870cd356d
+patch link:    https://lore.kernel.org/r/20230118061256.2689-12-dakr%40redhat.com
+patch subject: [PATCH drm-next 11/14] drm/nouveau: nvkm/vmm: implement raw ops to manage uvmm
+config: arc-randconfig-s051-20230119 (https://download.01.org/0day-ci/archive/20230120/202301201115.THLpCShO-lkp@intel.com/config)
+compiler: arc-elf-gcc (GCC) 12.1.0
+reproduce:
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # apt-get install sparse
+        # sparse version: v0.6.4-39-gce1a6720-dirty
+        # https://github.com/intel-lab-lkp/linux/commit/5fca471110e52d7c8db10f9ff483134a546174a1
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Danilo-Krummrich/drm-execution-context-for-GEM-buffers/20230118-141552
+        git checkout 5fca471110e52d7c8db10f9ff483134a546174a1
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=arc olddefconfig
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=arc SHELL=/bin/bash drivers/gpu/drm/
 
-#regzbot 0e44c21708761977dc
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
 
-> #regzbot title drm: nouveau: hangs on poweroff/reboot
-> #regzbot ignore-activity
+sparse warnings: (new ones prefixed by >>)
+>> drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c:413:34: sparse: sparse: non size-preserving integer to pointer cast
 
-Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
---
-Everything you wanna know about Linux kernel regression tracking:
-https://linux-regtracking.leemhuis.info/about/#tldr
-That page also explains what to do if mails like this annoy you.
+vim +413 drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c
 
-#regzbot ignore-activity
+   406	
+   407	static int
+   408	nvkm_uvmm_mthd_raw_unmap(struct nvkm_uvmm *uvmm, struct nvif_vmm_raw_v0 *args)
+   409	{
+   410		struct nvkm_vmm *vmm = uvmm->vmm;
+   411		struct nvkm_vma *vma;
+   412	
+ > 413		vma = (struct nvkm_vma *)args->handle;
+   414		if (!vma)
+   415			return -EINVAL;
+   416	
+   417		mutex_lock(&vmm->mutex);
+   418		if (vma->busy) {
+   419			VMM_DEBUG(vmm, "denied %016llx: %d", vma->addr, vma->busy);
+   420			mutex_unlock(&vmm->mutex);
+   421			return -ENOENT;
+   422		}
+   423		vma->sparse = args->sparse;
+   424		nvkm_vmm_raw_unmap_locked(vmm, vma);
+   425		mutex_unlock(&vmm->mutex);
+   426	
+   427		args->handle = 0;
+   428		kfree(vma);
+   429		return 0;
+   430	}
+   431	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
