@@ -1,108 +1,39 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB2FD675C25
-	for <lists+nouveau@lfdr.de>; Fri, 20 Jan 2023 18:53:47 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id DDCA1675E06
+	for <lists+nouveau@lfdr.de>; Fri, 20 Jan 2023 20:28:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3DFC610E136;
-	Fri, 20 Jan 2023 17:53:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2414C10E39C;
+	Fri, 20 Jan 2023 19:28:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2076.outbound.protection.outlook.com [40.107.93.76])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E7BA010E136;
- Fri, 20 Jan 2023 17:53:42 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jKwTwhEOI2/vKWprvfhYxukFWV1hORC3apUFwJDo2g4NIv8TZQR2gqf6s3KkVYoU30eS9qBIwLLblyVbvAV34UqOoaQSs5reamaYvzE350fm/62IWhVgr2GTNpEdwqmPq2Fkwa6vE+JcM2FgrsIvNXjJkXML/wbRFpj/YsBnjasmbQNWKCiiMnUvN1mgdbE2q6JTD1tiBnWQSxkM/55cMvEpebfScKSYJ6lJdxFUxY5+YM1YoZVi+ihjeAOvlTH6FVT16KMNJ9qGg3ZH/GkUDDCeoYQFzLVMKDVcDh5ll6wiMpbC95ZFTvkW4cWZ9Z9Vs/vUENvyC5MU6RXNlXrRAg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cXFt93pMtQTD3Nr5BElncWhLzk/oOeSjayXm6n79zuw=;
- b=i7BF2hVOIQ3YlJNTULTu2B68T5G+R9CjuSqjvagzh4tBs5GmNsLXx51wkll2UYfRWgBeZdCtkIsaiehqzR3ybXVvbF6QTRjydo9VYW0NZ1mUrHNuJ/1U3/UhHTLv3mdTlM0uq64naoHMyaH+sTVBvgXTruaFJ8bL7CPe2m4rF+p9oEn/8q+8UKJZNBSZN9J2tkGk3zpnfuknK/pwmIISXc6rtyLKDvmSg5WNsJec89HOQn5S/bYSr0UT1d3zyFGugJVoEPAgkT9quPW7U4W68Gfycm4QrMGYt+MmTZdMQWm6hqM9o9zjm+Rhbr5EltuClgYAeHuP8VtaK6KbKyVkKg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cXFt93pMtQTD3Nr5BElncWhLzk/oOeSjayXm6n79zuw=;
- b=DrF3k+K+897Yq50c0abDAZ6YHYeB9xWUTjXZ0pCSws1N29HXJ3TDUxMxQNvFNz0yZNTVu/YOje/Gco99n0OaPgWEu8q221L3VpCSTqzbrsYfCk8iwiHYKoE0CU/dKNE89cHW9mKyy1FNkbVi5iQaA3ZVqLoqbrP6T9a0QIZIW/QhYWh6AIxhw8IJZcD5bvRvc77NqNoP5eTbkUBbk1bYpETUgWFNKPg5T/rPrGDUfTNJjWox3goggBJGPbG8rK8Op1PDykN6zHDEhA6QmZrXnodKunBw5SR+v1Zuk2Wr7G2byH3knDOdQ1hYP+XXZ7KD7eaWwT9Jhsvipo96YZP2+g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from LV2PR12MB5869.namprd12.prod.outlook.com (2603:10b6:408:176::16)
- by DM6PR12MB4076.namprd12.prod.outlook.com (2603:10b6:5:213::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6002.13; Fri, 20 Jan
- 2023 17:53:41 +0000
-Received: from LV2PR12MB5869.namprd12.prod.outlook.com
- ([fe80::f8b0:df13:5f8d:12a]) by LV2PR12MB5869.namprd12.prod.outlook.com
- ([fe80::f8b0:df13:5f8d:12a%9]) with mapi id 15.20.6002.013; Fri, 20 Jan 2023
- 17:53:41 +0000
-Date: Fri, 20 Jan 2023 13:53:40 -0400
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Joerg Roedel <joro@8bytes.org>
-Message-ID: <Y8rVJGyTKAjXjLwV@nvidia.com>
-References: <1-v1-6e8b3997c46d+89e-iommu_map_gfp_jgg@nvidia.com>
- <4fd1b194-29ef-621d-4059-a8336058f217@arm.com>
- <Y7hZOwerwljDKoQq@nvidia.com> <Y8pd50mdNShTyVRX@8bytes.org>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Y8pd50mdNShTyVRX@8bytes.org>
-X-ClientProxiedBy: MN2PR03CA0029.namprd03.prod.outlook.com
- (2603:10b6:208:23a::34) To LV2PR12MB5869.namprd12.prod.outlook.com
- (2603:10b6:408:176::16)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 1B06F10E13F;
+ Fri, 20 Jan 2023 19:28:28 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CB11511FB;
+ Fri, 20 Jan 2023 11:29:08 -0800 (PST)
+Received: from [10.57.89.132] (unknown [10.57.89.132])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A6FF03F445;
+ Fri, 20 Jan 2023 11:28:23 -0800 (PST)
+Message-ID: <f24fcba7-2fcb-ed43-05da-60763dbb07bf@arm.com>
+Date: Fri, 20 Jan 2023 19:28:19 +0000
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV2PR12MB5869:EE_|DM6PR12MB4076:EE_
-X-MS-Office365-Filtering-Correlation-Id: e29fdfc1-a93a-4424-19c0-08dafb0f440c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: f6qU6mqG7QQPIANewSeV3NY/O6fs4qOmTSfk9eK3ubu9AyrR1Anxe0vmSpG10K3DWpbZ9mn+/9wXZJpPWZoiR3md3epyfFdJkMwD1B82Vxq/js99fWzuIYoJr0hqGfRlVJZagOwxyNI8B5ViK6l5TINHNSnIInltEgJF5u0Td0xURxNGpW1euuiQ3iG4Vd7ceq1JbqIqu1ZSCd2E3BJBjCxMulhP140Uk/sqYRtAyRh/r42qK0XuwQlsNUt+b+dshRTT6FbbxsYSvGhtnkCIEyEJLPu3+4D5mNxyJaRTDJS3iTO7qwX4G0GZ9co6/dfeE6XjqxfhOfra918zxu8u6ageYBix5Sl8VpC8GAiOpHNk5wZWKW/qdKPjhxAjNkbayedJLlvQvCtoDj/iAxrXYzu2bQfVL3bl1ZiHruNyOi+doxL6tK5URthNNG1Yl1W5mOqTHCRY/mNQxhTIYoBY1vpva13nNn7zHx9wmQu/ZQpA0ggvaBd2Eh6cDP0EjTifOK83jDHVb/byllW0dqkJud1whWIvZO0Cm+Aj1/3AypijWJuan/nUdJB7EFvXhxmnxkUgKcybKWtThY0SCEcLN5Qx1N4xjVYP7esNJOJNAToXJJgQwW7eaOt+QMqocAyMZL6dyzhbQxscA64t1BBRxA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV2PR12MB5869.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(396003)(346002)(39860400002)(366004)(136003)(376002)(451199015)(66476007)(38100700002)(66556008)(5660300002)(478600001)(86362001)(316002)(8936002)(66946007)(4744005)(7416002)(2906002)(4326008)(6916009)(41300700001)(8676002)(26005)(186003)(2616005)(54906003)(6506007)(36756003)(6512007)(6486002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?8v1EMXBN73/TrR2ymZ61ASZdsthvduOnp0JZ6UJItEqeJepd8eAVU6K1Jhnt?=
- =?us-ascii?Q?mDjxgkEMVIrj/bjh1Zx1u3DnlsOIM9XXW7xCNzCVWBO2u3D2wUEHzzQg0Su1?=
- =?us-ascii?Q?3zcQmxgFb/nj04eBQbjW060wF60MXYY9vBiZXDehCKAClS+HXaC9vRs/lHES?=
- =?us-ascii?Q?IxKQfymRS/3DeIQmQNfe91HTd6raseBBLXhfKYqZN6cRiu5hq6Vkwep+xCJO?=
- =?us-ascii?Q?r3qquSbMNLcjCtC3oiXaE/WmOM4G1gxafA9NrA+Y0Z/ibN174RqAOi5lMBNH?=
- =?us-ascii?Q?5cXjgxxPwdFA5Jyniahx0ScHEiG6VR+vYQzQC6KSIdvzoAK4cx3U11F6O+oD?=
- =?us-ascii?Q?PpXytuzURAysCVMqDnsEuzxVb5zg722xy1wvxzetAN6mkbGq20uzkzXlxehV?=
- =?us-ascii?Q?oTaTmK2KHHOt8mgFusxeAF68eQt7+9hwgqx34QLSbUBvVTvRsugWslELuOuj?=
- =?us-ascii?Q?1Vf49DLhosezcSprLKncMfDiOB+lliDnuT9qVWlc/Y2/1UIidUxk6HIgjm8x?=
- =?us-ascii?Q?pTn3z4O+5JWfK3wwV5NoJyBUr+2NUWVbGifatEsJF++/mN6hwBesHJyZwmsb?=
- =?us-ascii?Q?5vdZg426Hwx/FgYlWhZv6kzihSqj6JtaKxwHlZkinOBOL9lwrbThQKdkg1XC?=
- =?us-ascii?Q?5zsRIl/FA0StWJ3gJ46tAxlNvcUb4zSVxU5Jt1Pwo9XuzOdJeOavoD5w9q3z?=
- =?us-ascii?Q?aVe36csh7yNtT1j8fB05xnfJHDXPxrPciW7hm7aieWst4InpWdFBkqPdfiGF?=
- =?us-ascii?Q?s/lH/xFfWRIM4GNKBQtkbvhdlHVYDG8Rr6IXrsGhZHDFTchwZKj8m+qKlrW3?=
- =?us-ascii?Q?XduIzE8+DUvWoroATR1hXDj4jcqXRwela2x9fRT0pGMM7ofM2T4CKv1cEI4r?=
- =?us-ascii?Q?tfs9NX1aaIqBhNnUHIq6T5KvXNTQ5ryETOgfGH1NBQlagFFVT3y6rt9oACpS?=
- =?us-ascii?Q?jwOu5HfZc1CxlvU5gqELhJuzU74vo4FQAwNZV59kE0b3BmTAVrkLjqh+Ds0/?=
- =?us-ascii?Q?2RFa8zX7HQaPd+S6tu5tXc/xoP+vn4xmjAaRo4Ki4avXBXGz3oHdzTQCKa2P?=
- =?us-ascii?Q?FnPJ/OCZc9Yw822T2tKpQy7lci+6Sy1ojeBobphKiyLIYI/eKvr5t5TFA97Q?=
- =?us-ascii?Q?kBymkNkxj7KaXpR5YVs/0V75LTJfv2BXQ0EFcc667lVWlz0kx4EvcxyUjKMu?=
- =?us-ascii?Q?vUjniN7MEp02WN5wMPozpgXPajQ6HKnYSvdI2BLsbGTOh5UGfc4q+l6hKbTV?=
- =?us-ascii?Q?l9RmF4ZpepGbEIO0d2dPQjod8n6H/QaWv39uFP+GuUmXiaVxyFuUOPgZzKjS?=
- =?us-ascii?Q?o/bOuYLizTog3+p1x+72B3/+uJFPVzu4eIpRJXDdB8V/RPkxrDTtJgGagv0w?=
- =?us-ascii?Q?OWXbno3cNXWjxDpi3VhDIP+hqbu/Frrx/1T/cyPd4gcm1FZhAyUrt47TQeAs?=
- =?us-ascii?Q?huM7u5pF9aW+fZcW24foaSJGN7v04Y7sAM3R/ccJ6/qzyrHw9gFLTh/Vfsz+?=
- =?us-ascii?Q?tj8rPV9vW2RoSsDRwsvvP4bZvkxmJeqRMsBVjoGqQf5gkUkN3uwrZQ3L4EiF?=
- =?us-ascii?Q?3q+iP4mIYpeIHLdhp1oYXyWlrMgO3yUnR6KcLSVL?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e29fdfc1-a93a-4424-19c0-08dafb0f440c
-X-MS-Exchange-CrossTenant-AuthSource: LV2PR12MB5869.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2023 17:53:41.3258 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: S/ShNRiahaTIoIB6a/UQRktiU0bLbxGlrw3I9KvaFFDMptah/1bC4Sxj+oCgwfl+
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4076
-Subject: Re: [Nouveau] [PATCH 1/8] iommu: Add a gfp parameter to iommu_map()
+User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.1
+Content-Language: en-GB
+To: Jason Gunthorpe <jgg@nvidia.com>, Lu Baolu <baolu.lu@linux.intel.com>,
+ Joerg Roedel <joro@8bytes.org>, Kevin Tian <kevin.tian@intel.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>
+References: <4-v2-ce66f632bd0d+484-iommu_map_gfp_jgg@nvidia.com>
+From: Robin Murphy <robin.murphy@arm.com>
+In-Reply-To: <4-v2-ce66f632bd0d+484-iommu_map_gfp_jgg@nvidia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH v2 04/10] iommu/dma: Use the gfp parameter in
+ __iommu_dma_alloc_noncontiguous()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -114,38 +45,66 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: kvm@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-remoteproc@vger.kernel.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org,
- linux-stm32@st-md-mailman.stormreply.com, linux-s390@vger.kernel.org,
- Matthew Rosato <mjrosato@linux.ibm.com>, linux-rdma@vger.kernel.org,
- ath10k@lists.infradead.org, iommu@lists.linux.dev,
- Christian Borntraeger <borntraeger@linux.ibm.com>, ath11k@lists.infradead.org,
- linux-media@vger.kernel.org, Kevin Tian <kevin.tian@intel.com>,
- Niklas Schnelle <schnelle@linux.ibm.com>, linux-arm-msm@vger.kernel.org,
- Alex Williamson <alex.williamson@redhat.com>, linux-tegra@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, netdev@vger.kernel.org,
- linux-wireless@vger.kernel.org, Robin Murphy <robin.murphy@arm.com>,
- Lu Baolu <baolu.lu@linux.intel.com>
+Cc: linux-s390@vger.kernel.org, kvm@vger.kernel.org,
+ nouveau@lists.freedesktop.org, linux-rdma@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, Niklas Schnelle <schnelle@linux.ibm.com>,
+ linux-remoteproc@vger.kernel.org, iommu@lists.linux.dev,
+ dri-devel@lists.freedesktop.org, linux-stm32@st-md-mailman.stormreply.com,
+ Alex Williamson <alex.williamson@redhat.com>, netdev@vger.kernel.org,
+ ath10k@lists.infradead.org, linux-wireless@vger.kernel.org,
+ linux-tegra@vger.kernel.org, Christian Borntraeger <borntraeger@linux.ibm.com>,
+ virtualization@lists.linux-foundation.org, ath11k@lists.infradead.org,
+ linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jan 20, 2023 at 10:24:55AM +0100, Joerg Roedel wrote:
-> On Fri, Jan 06, 2023 at 01:24:11PM -0400, Jason Gunthorpe wrote:
-> > I think it is just better to follow kernel convention and have
-> > allocation functions include the GFP because it is a clear signal to
-> > the user that there is an allocation hidden inside the API. The whole
-> > point of gfp is not to have multitudes of every function for every
-> > allocation mode.
+On 2023-01-18 18:00, Jason Gunthorpe wrote:
+> Change the sg_alloc_table_from_pages() allocation that was hardwired to
+> GFP_KERNEL to use the gfp parameter like the other allocations in this
+> function.
 > 
-> Well, having GFP parameters is not a strict kernel convention. There are
-> places doing it differently and have sleeping and atomic variants of
-> APIs. I have to say I like the latter more. But given that this leads to
-> an invasion of API functions here which all do the same under the hood, I
-> agree it is better to go with a GFP parameter here.
+> Auditing says this is never called from an atomic context, so it is safe
+> as is, but reads wrong.
 
-Ok, I think we are done with this series, I'll stick it in linux-next
-for a bit and send you a PR so the trees stay in sync
+I think the point may have been that the sgtable metadata is a 
+logically-distinct allocation from the buffer pages themselves. Much 
+like the allocation of the pages array itself further down in 
+__iommu_dma_alloc_pages(). I see these days it wouldn't be catastrophic 
+to pass GFP_HIGHMEM into __get_free_page() via sg_kmalloc(), but still, 
+allocating implementation-internal metadata with all the same 
+constraints as a DMA buffer has just as much smell of wrong about it IMO.
+
+I'd say the more confusing thing about this particular context is why 
+we're using iommu_map_sg_atomic() further down - that seems to have been 
+an oversight in 781ca2de89ba, since this particular path has never 
+supported being called in atomic context.
+
+Overall I'm starting to wonder if it might not be better to stick a "use 
+GFP_KERNEL_ACCOUNT if you allocate" flag in the domain for any level of 
+the API internals to pick up as appropriate, rather than propagate 
+per-call gfp flags everywhere. As it stands we're still missing 
+potential pagetable and other domain-related allocations by drivers in 
+.attach_dev and even (in probably-shouldn't-really-happen cases) 
+.unmap_pages...
 
 Thanks,
-Jason
+Robin.
+
+> Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+> ---
+>   drivers/iommu/dma-iommu.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
+> index 8c2788633c1766..e4bf1bb159f7c7 100644
+> --- a/drivers/iommu/dma-iommu.c
+> +++ b/drivers/iommu/dma-iommu.c
+> @@ -822,7 +822,7 @@ static struct page **__iommu_dma_alloc_noncontiguous(struct device *dev,
+>   	if (!iova)
+>   		goto out_free_pages;
+>   
+> -	if (sg_alloc_table_from_pages(sgt, pages, count, 0, size, GFP_KERNEL))
+> +	if (sg_alloc_table_from_pages(sgt, pages, count, 0, size, gfp))
+>   		goto out_free_iova;
+>   
+>   	if (!(ioprot & IOMMU_CACHE)) {
