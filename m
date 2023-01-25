@@ -1,41 +1,94 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E87FE6F6B7A
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:36 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E6C96F6B75
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 711BC10E435;
-	Thu,  4 May 2023 12:32:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0BFC710E3BB;
+	Thu,  4 May 2023 12:32:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from msg-4.mailo.com (msg-4.mailo.com [213.182.54.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 59B4810E7F9;
- Wed, 25 Jan 2023 15:07:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=mailo.com; s=mailo;
- t=1674659245; bh=3kVFSj9F5r4zxQcKbBTyYKgIq05zuwPxG6KbVQ++e3g=;
- h=X-EA-Auth:Date:From:To:Cc:Subject:Message-ID:MIME-Version:
- Content-Type;
- b=ijJPXqb9T9rNuYug9wDmBjZNcoI7knQGv8uhpPu+63nu+Scs9p8fYO64+AHMrkdJw
- 2hMEv2cUyhkIYyYKWWdSmFP6WRIHhgWibdJ96z0Uzi+3QmMsPdDM1iwhLzm/ba//Yr
- 5e3iaPKb81ODwt4zzBRTTxWkaerko2Z6dcXhC0Zc=
-Received: by b-2.in.mailobj.net [192.168.90.12] with ESMTP
- via ip-206.mailobj.net [213.182.55.206]
- Wed, 25 Jan 2023 16:07:24 +0100 (CET)
-X-EA-Auth: P9eRXJcvULD/LlNSEoxED6IvPVWZxGaHOnHgLK9K0jZ0NU4zvHdVexZOWXhZmyT1B6y9xTnZegI4FpF4U7FiqDfX7yUYLlBh
-Date: Wed, 25 Jan 2023 20:37:14 +0530
-From: Deepak R Varma <drv@mailo.com>
-To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Message-ID: <Y9FFoooIXjlr+UP1@ubun2204.myguest.virtualbox.org>
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2061.outbound.protection.outlook.com [40.107.220.61])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C3F4410E033;
+ Wed, 25 Jan 2023 15:20:37 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=LLlCUC61uqTADTm00sNX+OuDuVXA+WmEQtZFYhuMu3XprUpyJeqq68kVl4+dnHe/5zkCTEuN1bYiDKiFPOqD3bXqXVwmYSizemW6i3aGzooBV/hi9/t5hFB2SWymWV2r5ebQJw0YjCAqLm9PpAVmBaP2St54yoBXDfDfNJV0YHo06jltRwxzq3f9OmamFERwSGwrXI+ER/b/JEzt0rs/j5gJRx5kBHkxYgPIgI1o/7pMoUHMAVK0OaegaWhjOVd5/WFS+0r2RCxUQ/S1cKv0S7zq+fxeXBvx1VJrd+lAI5naiFGe6sR1zRI5aUNz7iHG9oNIcBRa5V7rq5tkYw17Pw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FKqmTfLzzwBstqA2gaPDOoIZ3yddDHXNfRCsmJeVEUs=;
+ b=oekg7x+wbIIMeTiaiIW9TrlvKaUJnOXjdKgJ140L+B6mk9b/kXP2CakpOqOWfSbInlXhgwpwxBTgUB3dmyuArOt4bplk685rR1rhzt9veCIuTNKVX6fNmySG6uUrUn1Ow5znwp0JYCk+f++d0ShBsqzvAcdNu/TNlw6qyY9Fr9DKGOPgWUDWySpK383WRzQf9n0lkYv0l5lGFGFmAsXC9bmNe4XFE97jdDxvY0tSbLcJYV0lpC4beZLkhuz10hkc4WDsBj2AUSSUwgIwB1AIDqvvcGTxFiYCD1gIZe6ZkY3MqOtVd86P7WlGxdbsix1ew+syZMNlRQExJ5L1tGdo3g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.freedesktop.org smtp.mailfrom=amd.com; 
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FKqmTfLzzwBstqA2gaPDOoIZ3yddDHXNfRCsmJeVEUs=;
+ b=A2cyXXGfkAcrI81EatV3gvGIk35ItdRpXaWHAI+Gvkq7xLEbjya0Xh6h8nNF3+Nm4otHxhRwGZY5F6M/z+AUfmE5YlZ318s6MlYap0OZUIXHxR0pK+pxdAt0YEoZEh4kJua7GI06A3v5qAx9J4uLPZaERhwWxFQzL24e9aOufjI=
+Received: from BN9PR03CA0373.namprd03.prod.outlook.com (2603:10b6:408:f7::18)
+ by BL1PR12MB5221.namprd12.prod.outlook.com (2603:10b6:208:30b::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6002.33; Wed, 25 Jan
+ 2023 15:20:34 +0000
+Received: from BN8NAM11FT105.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:f7:cafe::17) by BN9PR03CA0373.outlook.office365.com
+ (2603:10b6:408:f7::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6002.33 via Frontend
+ Transport; Wed, 25 Jan 2023 15:20:34 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN8NAM11FT105.mail.protection.outlook.com (10.13.176.183) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6043.17 via Frontend Transport; Wed, 25 Jan 2023 15:20:34 +0000
+Received: from amar-X570-AORUS-ELITE.amd.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.34; Wed, 25 Jan 2023 09:20:31 -0600
+From: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>
+To: <dri-devel@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>,
+ <intel-gfx@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>
+Date: Wed, 25 Jan 2023 20:50:03 +0530
+Message-ID: <20230125152006.3945-1-Amaranath.Somalapuram@amd.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:32 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/devinit: Convert function disable()
- to be void
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT105:EE_|BL1PR12MB5221:EE_
+X-MS-Office365-Filtering-Correlation-Id: 843a5b82-2e43-4a0b-a4d6-08dafee7b442
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: DdszCZjRnvK0Izv3IzCO978611IryaOVIww7wq8EAlQk4st8zXtRCW7VoX7A39Ei+f9xWku5tn5eE1ExdXiqJC/a0i78VT2pd8ZcAokaQSrDDHC01PnJnP2GGkH7aqQ48ojU1X8r2+SnLKgbrqm9UEpwetpI12OXJ3YBAxQqF7kZMM0PDd8gXgj8dmQvw+43bwYyYX/1bUE+dCNXf2T8k61yLyCUiu0JeNZBSIzcP/ZHG4ArNEMEnl6CFRxx5D68MxmbfZPWuUM99HopDiaj4xW2y+GyxL0UoRxkNFMLRNewotiBn1pXx/Hn5DJyVAURqBj6Nlm/L9+Zrt3lKQgFDHtw1igQ5eJFDeg3tTqX7DL9T3hX8mMKf7aeNQW/VA/aIcediqEGK73eqrfutknODcevUcCsz+Ga4dgBEZV0ruemY585juGPyShBiZqAUgyRIricEwSq/r7JOZMl9hEVrRpnCd4m45o+T3GTNmzL9DiaY2/JWO/cvpvcabNPQsFzGRCuDZXGeruS8AALeAseqrrH/Lvf/DnM7E/Nu1mHUPcbhScNsUO3xNynyE5O0HGpcR8emWa5tRRuLZL8Jz6DY+7XFMoI48bik8bDHHfu+eux9eQxyUAEV4/z4ZQ0JwikZzieDLqat3+SEUvBNF+e4Ghq5XLpKDA9MBvRHUsVvNnRO1XlimifXZarzq6edba65Xr9V371wqPqeNvK8pWm4EoL9Npy6h0j0mhfYngjPfw=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230025)(4636009)(39860400002)(396003)(376002)(346002)(136003)(451199018)(36840700001)(40470700004)(46966006)(36860700001)(83380400001)(26005)(81166007)(5660300002)(2906002)(7696005)(356005)(82740400003)(41300700001)(86362001)(8936002)(4326008)(82310400005)(16526019)(6666004)(40460700003)(40480700001)(316002)(8676002)(186003)(47076005)(2616005)(426003)(336012)(54906003)(478600001)(110136005)(36756003)(450100002)(70586007)(70206006)(1076003)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2023 15:20:34.1044 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 843a5b82-2e43-4a0b-a4d6-08dafee7b442
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT105.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5221
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:37 +0000
+Subject: [Nouveau] [PATCH v4 1/4] drm/amdgpu: Use cursor start instead of
+ ttm resource start
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,240 +100,82 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Praveen Kumar <kumarpraveen@linux.microsoft.com>,
- Saurabh Singh Sengar <ssengar@microsoft.com>
+Cc: shashank.sharma@amd.com, arunpravin.paneerselvam@amd.com,
+ Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>, arvind.yadav@amd.com,
+ alexander.deucher@amd.com, christian.koenig@amd.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The current design of callback function disable() of struct
-nvkm_devinit_func is defined to return a u64 value. In its implementation
-in the driver modules, the function always returns a fixed value 0. Hence
-the design and implementation of this function should be enhanced to return
-void instead of a fixed value. This change also eliminates untouched
-return variables.
+cleanup PAGE_SHIFT operation and replacing
+ttm_resource resource->start with cursor start
+using amdgpu_res_first API.
+v1 -> v2: reorder patch sequence
+v2 -> v3: addressing review comment v2
+v3 -> v4: addressing review comment v3
 
-The change is identified using the returnvar.cocci Coccinelle semantic
-patch script.
-
-Signed-off-by: Deepak R Varma <drv@mailo.com>
+Signed-off-by: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>
 ---
-Please note: The change is compile build tested only.
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c | 4 +++-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c    | 8 ++++++--
+ 2 files changed, 9 insertions(+), 3 deletions(-)
 
- drivers/gpu/drm/nouveau/nvkm/subdev/devinit/base.c  | 3 ++-
- drivers/gpu/drm/nouveau/nvkm/subdev/devinit/g84.c   | 5 +----
- drivers/gpu/drm/nouveau/nvkm/subdev/devinit/g98.c   | 4 +---
- drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gf100.c | 4 +---
- drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gm107.c | 4 +---
- drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gt215.c | 4 +---
- drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c | 4 +---
- drivers/gpu/drm/nouveau/nvkm/subdev/devinit/nv50.c  | 5 +----
- drivers/gpu/drm/nouveau/nvkm/subdev/devinit/nv50.h  | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/devinit/priv.h  | 2 +-
- 10 files changed, 11 insertions(+), 26 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/base.c
-index dd4981708fe4..3d9319c319c6 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/base.c
-@@ -51,7 +51,8 @@ u64
- nvkm_devinit_disable(struct nvkm_devinit *init)
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+index 25a68d8888e0..2a74039c82eb 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+@@ -1491,9 +1491,11 @@ u64 amdgpu_bo_gpu_offset(struct amdgpu_bo *bo)
+ u64 amdgpu_bo_gpu_offset_no_check(struct amdgpu_bo *bo)
  {
- 	if (init && init->func->disable)
--		return init->func->disable(init);
-+		init->func->disable(init);
-+
- 	return 0;
- }
+ 	struct amdgpu_device *adev = amdgpu_ttm_adev(bo->tbo.bdev);
++	struct amdgpu_res_cursor cursor;
+ 	uint64_t offset;
  
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/g84.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/g84.c
-index c224702b7bed..00df7811dd10 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/g84.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/g84.c
-@@ -26,13 +26,12 @@
- #include <subdev/bios.h>
- #include <subdev/bios/init.h>
+-	offset = (bo->tbo.resource->start << PAGE_SHIFT) +
++	amdgpu_res_first(bo->tbo.resource, 0, bo->tbo.resource->size, &cursor);
++	offset = cursor.start +
+ 		 amdgpu_ttm_domain_start(adev, bo->tbo.resource->mem_type);
  
--static u64
-+static void
- g84_devinit_disable(struct nvkm_devinit *init)
+ 	return amdgpu_gmc_sign_extend(offset);
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+index c5ef7f7bdc15..a97e8236bde9 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+@@ -849,6 +849,7 @@ static int amdgpu_ttm_backend_bind(struct ttm_device *bdev,
  {
- 	struct nvkm_device *device = init->subdev.device;
- 	u32 r001540 = nvkm_rd32(device, 0x001540);
- 	u32 r00154c = nvkm_rd32(device, 0x00154c);
--	u64 disable = 0ULL;
+ 	struct amdgpu_device *adev = amdgpu_ttm_adev(bdev);
+ 	struct amdgpu_ttm_tt *gtt = ttm_to_amdgpu_ttm_tt(ttm);
++	struct amdgpu_res_cursor cursor;
+ 	uint64_t flags;
+ 	int r;
  
- 	if (!(r001540 & 0x40000000)) {
- 		nvkm_subdev_disable(device, NVKM_ENGINE_MPEG, 0);
-@@ -47,8 +46,6 @@ g84_devinit_disable(struct nvkm_devinit *init)
- 		nvkm_subdev_disable(device, NVKM_ENGINE_BSP, 0);
- 	if (!(r00154c & 0x00000040))
- 		nvkm_subdev_disable(device, NVKM_ENGINE_CIPHER, 0);
--
--	return disable;
- }
+@@ -896,7 +897,8 @@ static int amdgpu_ttm_backend_bind(struct ttm_device *bdev,
+ 	flags = amdgpu_ttm_tt_pte_flags(adev, ttm, bo_mem);
  
- static const struct nvkm_devinit_func
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/g98.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/g98.c
-index 8977483a9f42..54bee499b982 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/g98.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/g98.c
-@@ -26,7 +26,7 @@
- #include <subdev/bios.h>
- #include <subdev/bios/init.h>
+ 	/* bind pages into GART page tables */
+-	gtt->offset = (u64)bo_mem->start << PAGE_SHIFT;
++	amdgpu_res_first(bo_mem, 0, bo_mem->size, &cursor);
++	gtt->offset = cursor.start;
+ 	amdgpu_gart_bind(adev, gtt->offset, ttm->num_pages,
+ 			 gtt->ttm.dma_address, flags);
+ 	gtt->bound = true;
+@@ -916,6 +918,7 @@ int amdgpu_ttm_alloc_gart(struct ttm_buffer_object *bo)
+ 	struct amdgpu_device *adev = amdgpu_ttm_adev(bo->bdev);
+ 	struct ttm_operation_ctx ctx = { false, false };
+ 	struct amdgpu_ttm_tt *gtt = ttm_to_amdgpu_ttm_tt(bo->ttm);
++	struct amdgpu_res_cursor cursor;
+ 	struct ttm_placement placement;
+ 	struct ttm_place placements;
+ 	struct ttm_resource *tmp;
+@@ -949,7 +952,8 @@ int amdgpu_ttm_alloc_gart(struct ttm_buffer_object *bo)
+ 	flags = amdgpu_ttm_tt_pte_flags(adev, bo->ttm, tmp);
  
--static u64
-+static void
- g98_devinit_disable(struct nvkm_devinit *init)
- {
- 	struct nvkm_device *device = init->subdev.device;
-@@ -45,8 +45,6 @@ g98_devinit_disable(struct nvkm_devinit *init)
- 		nvkm_subdev_disable(device, NVKM_ENGINE_MSVLD, 0);
- 	if (!(r00154c & 0x00000040))
- 		nvkm_subdev_disable(device, NVKM_ENGINE_SEC, 0);
--
--	return 0ULL;
- }
- 
- static const struct nvkm_devinit_func
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gf100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gf100.c
-index 5b7cb1fe7897..5368e705e7fd 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gf100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gf100.c
-@@ -63,7 +63,7 @@ gf100_devinit_pll_set(struct nvkm_devinit *init, u32 type, u32 freq)
- 	return ret;
- }
- 
--static u64
-+static void
- gf100_devinit_disable(struct nvkm_devinit *init)
- {
- 	struct nvkm_device *device = init->subdev.device;
-@@ -85,8 +85,6 @@ gf100_devinit_disable(struct nvkm_devinit *init)
- 		nvkm_subdev_disable(device, NVKM_ENGINE_CE, 0);
- 	if (r022500 & 0x00000200)
- 		nvkm_subdev_disable(device, NVKM_ENGINE_CE, 1);
--
--	return 0ULL;
- }
- 
- void
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gm107.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gm107.c
-index 8955af2704c7..7bcbc4895ec2 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gm107.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gm107.c
-@@ -26,7 +26,7 @@
- #include <subdev/bios.h>
- #include <subdev/bios/init.h>
- 
--u64
-+void
- gm107_devinit_disable(struct nvkm_devinit *init)
- {
- 	struct nvkm_device *device = init->subdev.device;
-@@ -39,8 +39,6 @@ gm107_devinit_disable(struct nvkm_devinit *init)
- 		nvkm_subdev_disable(device, NVKM_ENGINE_CE, 2);
- 	if (r021c04 & 0x00000001)
- 		nvkm_subdev_disable(device, NVKM_ENGINE_DISP, 0);
--
--	return 0ULL;
- }
- 
- static const struct nvkm_devinit_func
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gt215.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gt215.c
-index 3d0ab86c3115..dbca92318baf 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gt215.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gt215.c
-@@ -62,7 +62,7 @@ gt215_devinit_pll_set(struct nvkm_devinit *init, u32 type, u32 freq)
- 	return ret;
- }
- 
--static u64
-+static void
- gt215_devinit_disable(struct nvkm_devinit *init)
- {
- 	struct nvkm_device *device = init->subdev.device;
-@@ -80,8 +80,6 @@ gt215_devinit_disable(struct nvkm_devinit *init)
- 		nvkm_subdev_disable(device, NVKM_ENGINE_MSVLD, 0);
- 	if (!(r00154c & 0x00000200))
- 		nvkm_subdev_disable(device, NVKM_ENGINE_CE, 0);
--
--	return 0ULL;
- }
- 
- static u32
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c
-index a9cdf2411187..a24bd2e7d7ce 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c
-@@ -26,7 +26,7 @@
- #include <subdev/bios.h>
- #include <subdev/bios/init.h>
- 
--static u64
-+static void
- mcp89_devinit_disable(struct nvkm_devinit *init)
- {
- 	struct nvkm_device *device = init->subdev.device;
-@@ -46,8 +46,6 @@ mcp89_devinit_disable(struct nvkm_devinit *init)
- 		nvkm_subdev_disable(device, NVKM_ENGINE_VIC, 0);
- 	if (!(r00154c & 0x00000200))
- 		nvkm_subdev_disable(device, NVKM_ENGINE_CE, 0);
--
--	return 0;
- }
- 
- static const struct nvkm_devinit_func
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/nv50.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/nv50.c
-index 380995d398b1..07ed8fd778b2 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/nv50.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/nv50.c
-@@ -77,17 +77,14 @@ nv50_devinit_pll_set(struct nvkm_devinit *init, u32 type, u32 freq)
- 	return 0;
- }
- 
--static u64
-+static void
- nv50_devinit_disable(struct nvkm_devinit *init)
- {
- 	struct nvkm_device *device = init->subdev.device;
- 	u32 r001540 = nvkm_rd32(device, 0x001540);
--	u64 disable = 0ULL;
- 
- 	if (!(r001540 & 0x40000000))
- 		nvkm_subdev_disable(device, NVKM_ENGINE_MPEG, 0);
--
--	return disable;
- }
- 
- void
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/nv50.h b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/nv50.h
-index 987a7f478b84..8de409c084c1 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/nv50.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/nv50.h
-@@ -23,7 +23,7 @@ int  gf100_devinit_ctor(struct nvkm_object *, struct nvkm_object *,
- int  gf100_devinit_pll_set(struct nvkm_devinit *, u32, u32);
- void gf100_devinit_preinit(struct nvkm_devinit *);
- 
--u64  gm107_devinit_disable(struct nvkm_devinit *);
-+void  gm107_devinit_disable(struct nvkm_devinit *);
- 
- int gm200_devinit_post(struct nvkm_devinit *, bool);
- void gm200_devinit_preos(struct nv50_devinit *, bool);
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/priv.h
-index dd8b038a8cee..a648482d06e9 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/priv.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/priv.h
-@@ -12,7 +12,7 @@ struct nvkm_devinit_func {
- 	u32  (*mmio)(struct nvkm_devinit *, u32);
- 	void (*meminit)(struct nvkm_devinit *);
- 	int  (*pll_set)(struct nvkm_devinit *, u32 type, u32 freq);
--	u64  (*disable)(struct nvkm_devinit *);
-+	void (*disable)(struct nvkm_devinit *);
- };
- 
- void nvkm_devinit_ctor(const struct nvkm_devinit_func *, struct nvkm_device *,
+ 	/* Bind pages */
+-	gtt->offset = (u64)tmp->start << PAGE_SHIFT;
++	amdgpu_res_first(tmp, 0, tmp->size, &cursor);
++	gtt->offset = cursor.start;
+ 	amdgpu_ttm_gart_bind(adev, bo, flags);
+ 	amdgpu_gart_invalidate_tlb(adev);
+ 	ttm_resource_free(bo, &bo->resource);
 -- 
-2.34.1
-
-
+2.32.0
 
