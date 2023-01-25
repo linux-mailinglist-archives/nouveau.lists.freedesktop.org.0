@@ -1,122 +1,61 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D20C67B476
-	for <lists+nouveau@lfdr.de>; Wed, 25 Jan 2023 15:29:59 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E593B67BC64
+	for <lists+nouveau@lfdr.de>; Wed, 25 Jan 2023 21:15:10 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7959910E7EA;
-	Wed, 25 Jan 2023 14:29:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C176110E398;
+	Wed, 25 Jan 2023 20:15:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on2041.outbound.protection.outlook.com [40.107.236.41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8F94010E7CF;
- Wed, 25 Jan 2023 14:29:52 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UkPRZx9fNnMdYHpfLhXBwuZNQKXRILG6AVIIUEzECnVQI1Z5n4tClKaPeRfZIE0GIz6hObPtIKV1LnoWnaWzhWD1+5PrgmkvAn42hsSaIV4vCNos4f0AK+U2jA2T+Sxid6wKTU7ebJAW6xxI5HUPzdzD+2yKhvptBA7mseQspB6+1N0BkQO5DWGYMzQ9zPRn0Gq4w3ymjw90QmGXCuuiu5gg6g05CV2PspFhy9PzkaMUYbA2m9R2C9SzS2mZo4sVgSOx+8OcIf2e9TciYldo8Xd8M1Q+VBpjkah3oI15tN0Xuw7SCo/muItm221FLf6gFCQ9D+/tPkDE/LJoQD+AGw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=l2+yM7NhPdXI+T2XG6SGPMlld1XUvIHvam+mCU0PnTw=;
- b=NPdQXS23czq05vrv0bq7t+7JU5il55LqDpHpEHg0ykL+NYfeXLAycGUp8Yikxd2bThpVtEjptQinee4LQxkUV0fcGlFsz3s+hoAQ2GqcaWjUMz1g+hYC2d77OcuhZlUUUVZSvA+TTFrJdXf7u/0BnI6RrA1W9NYKTu+ija7HqfwmEHsucBV4KaFh8LpkluM3dDIMaJGHRx/y099YZrLEMJoJF0+2+q77r0Plz/bpitn9fZenqYWMMxLfjtUAdEeSqZHLiIGSoPpQHK7msYnbUTk2rN1xhrxhs8dYy0Z5p0PWB1zAp1UvDXWR3/McBkBU8QX31dQDRwt6zT0+A+kIsA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=l2+yM7NhPdXI+T2XG6SGPMlld1XUvIHvam+mCU0PnTw=;
- b=lUtV4lCl8ACqixuedPlmBCThC7J229m1e8x/qf4fJlydd9KjhlHaLnHXuJ6QugDZNJ94OPZ1RZ30UMX5S2c8iYwGH+Wma+Mfz5QPELKuaEZ9PVp+UsSfHeblFBvSx/FNHFFQfAP5t4gOSGVLwa20H3hdJuAzmOD9b0sb/VAR26s=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by SJ1PR12MB6314.namprd12.prod.outlook.com (2603:10b6:a03:457::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6002.33; Wed, 25 Jan
- 2023 14:29:47 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::2e4f:4041:28be:ba7a]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::2e4f:4041:28be:ba7a%6]) with mapi id 15.20.6043.017; Wed, 25 Jan 2023
- 14:29:47 +0000
-Message-ID: <91e0dbdd-6e78-5c28-a647-16a0305478e7@amd.com>
-Date: Wed, 25 Jan 2023 15:29:41 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Content-Language: en-US
-To: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>,
- dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org
-References: <20230125142415.18546-1-Amaranath.Somalapuram@amd.com>
- <20230125142415.18546-3-Amaranath.Somalapuram@amd.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20230125142415.18546-3-Amaranath.Somalapuram@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AS8PR04CA0143.eurprd04.prod.outlook.com
- (2603:10a6:20b:127::28) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6A46B10E85E
+ for <nouveau@lists.freedesktop.org>; Wed, 25 Jan 2023 20:15:06 +0000 (UTC)
+Received: by mail-pl1-x62d.google.com with SMTP id k13so30763plg.0
+ for <nouveau@lists.freedesktop.org>; Wed, 25 Jan 2023 12:15:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=g2N/7kJHsM/uMFl1vK4chpOhxOn6kXj3cUzmime38z8=;
+ b=erh34wiBfF8ZcjbgaZm58uG7hplqgLQHbhXzmoV9yKWnpHQxUUp/X/H7/gEX+1TuNj
+ nHagAj4mjgV4X/Y/3P+pSXPWfikcqsSDocAnb0PWsxU+NwsKLpQFKUw997LoA8s+mNyH
+ MCaae0Ft1fjVk+93HtFUVXcsJ3WS7BYaqAQsg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g2N/7kJHsM/uMFl1vK4chpOhxOn6kXj3cUzmime38z8=;
+ b=stUU5Dk5wjRieE8ic1JNN6wz5rd6EYGZI+LsAXVvIhe/VurNy52a7vzwUloF1oREej
+ /S/9xVwU5ANbI3b6uyUeMGI8ucngNzJ8sBSNc85k+lD3rvvyahENEL87mPDmr5rLROB7
+ +PCMNjQH1SH4rc+rQJLlY9HzQlMP6kMj0iqjU09Dqq7g6GfsKIyOCNtZgq0/tIRmyOrE
+ OX5MSr/l+gsyaAPjzMvOHYWGjWQXYOpIYyf3lPchpLj+FCilZD40kPS/wsCPsMIYrJkv
+ HAyxZJYjrjntQpENwMgN29gJP/OeVHzTNkybriuPh+tb2PCXQ1m7Wg3EM3RyJNLLUZK5
+ +/Tg==
+X-Gm-Message-State: AFqh2kqZ+2c1CXBY2HSRnY57FYZaFcXCP5kRy5ilq1SvPj+Xjq3uQAa7
+ c9HmrAboPpVggQKW8DDw4Mnlgw==
+X-Google-Smtp-Source: AMrXdXs6l74h/YQbfQL0Reby1hhdTavqq9M5qaz1j8FUN8zyFATcdnMg16iS5lGlq/OeiNBwqipenA==
+X-Received: by 2002:a05:6a20:6a92:b0:b8:7ef5:4308 with SMTP id
+ bi18-20020a056a206a9200b000b87ef54308mr31737202pzb.23.1674677705908; 
+ Wed, 25 Jan 2023 12:15:05 -0800 (PST)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+ by smtp.gmail.com with ESMTPSA id
+ m4-20020a638c04000000b0046f7e1ca434sm3616124pgd.0.2023.01.25.12.15.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Jan 2023 12:15:05 -0800 (PST)
+Date: Wed, 25 Jan 2023 12:15:04 -0800
+From: Kees Cook <keescook@chromium.org>
+To: Ben Skeggs <bskeggs@redhat.com>
+Message-ID: <202301251214.8E52414D0@keescook>
+References: <20221127183036.never.139-kees@kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|SJ1PR12MB6314:EE_
-X-MS-Office365-Filtering-Correlation-Id: c94036f1-c308-4d96-3d9d-08dafee09be1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: DNeByvhApHO1a9Khwg70g0zvZ4zc3jV5paD/+4Zs1SgL+Cr1EQqjwaD1TakKimiGKSr01QJ7/90GzUloxOP8a7TcqPhBB8TXdTV/olwiq4RCGwwOULLgRtXZyyqQLR/DrhRhkOO++RDF+iDeQSHa37Nr7T75nATGOVYMTFBtJnEONb4LqUbxlKaU7GZEZUN8696p+iO/nTOq0Wf4GLuT5AmeDQSrJcw6AGiVg9w0VFBW/5/4e2MG6nC+3p+2YBvi+sTBWTH+GrMNCnyvFpWc5QRqm7drlZwx+ap7+sAEND2qycaHaSZUCCrfY7WxCqLr98o9fNhp4c9ER3Vr4ECN24u0+AB+mXFa2JwuCND4+KKjrht9LkTljo5diz8gs92w4GHb1RJST4flfmR7eJIUDdlq8z6VFokXcfuwlWFCFRCz5gUP9ViPf4+R6gyxtwG3H5E28omGnZGkPXTwAz5j7PKUDcWOxPT1NW4XfP3+N/3U7WKIH5/0DX40zZkaSC1AxLbOFSSEsu/+by5GbhvpcE4oU+jlNMYJ2F4KphS72Hr3E1Rel0MOa3w5wOp2qK9KsT7JVMH4pQ65LEIAa8ftPQ82FkvpSSuNwYcRkzk45UBMuTK0xmaMcDF/AsOKglDQ8kN6JqUKtj02OIm9y+eQU5l2WRVGIqKkbs8KxbT1Qn8znh6XWzIpL4h4hUuj9Iyi1jlha4ZyhYTrDUrhThzzHEno8aXv4Dpe9Az8rP0NcPE=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230025)(4636009)(396003)(346002)(39860400002)(136003)(376002)(366004)(451199018)(38100700002)(31696002)(86362001)(6512007)(6506007)(2906002)(186003)(316002)(2616005)(6486002)(478600001)(8936002)(41300700001)(6666004)(5660300002)(36756003)(450100002)(4326008)(8676002)(66476007)(66946007)(66556008)(83380400001)(31686004)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OExUZDN3ck9hS0JNTW5qL2ErLytvQXYvaVBPSVJWcGk4TEVnUklNYjM0M3pT?=
- =?utf-8?B?VVFPYStKeklINmFBZU9laTBMNnU4bnZtdmdiZVNsdzdIYS9jMk44OFhJMW4w?=
- =?utf-8?B?bUF2dUVkU2hEVXpINllIT093NS9obXRTN2luU1pnY0hqTXRzQWpJNHlma3Fp?=
- =?utf-8?B?T1l0RkQxUVRlS1ZzZk5oRUw5bW5SY0owa1Q5aWJDZlhpMk5jV1lPMFA4NWxl?=
- =?utf-8?B?Y1VxOTdQckxoN3ZIa3ZVbzNhYURIaGloazRsNGpKY2FyVnZzWEZQampVM2lX?=
- =?utf-8?B?SmRoNGVPTENtNEY0c3pXbzZKQVlaS2lZN2ZKZDRlYThGd2lUUHZ1QnRtUEZa?=
- =?utf-8?B?RXI4NGVSZDRsZnhoQjVNYzg2Y3h4dUVwSkNZVHRRWXZDaWsyS3d4RnBrVDRZ?=
- =?utf-8?B?OHd2dW9TNitDaDZkYnhjL0wrc3pJTEpIYTJmbXphV0xQRnZmTnlPeWZ6d3pz?=
- =?utf-8?B?UFplQ3pndEVWVUE4QzdETUVjRUxBdzBvTXZ6VmYwUnJ6MExGa21zM05zL0Fa?=
- =?utf-8?B?SnZyRDBsOU0zV2JDTWsxWGJ5cXZHSkYzOVh5L1hnZlhIUkI2RmFWL3VNVDNK?=
- =?utf-8?B?MzQzNnphWVNZT1pGamhaVWNDV0kwOG0xNkpEaHVCRHNncW4vMFVEV1VId3Ar?=
- =?utf-8?B?dlNmYUlIdzFwY3hpSHBnWXdmb29JaWZjZUlOV2ZJdXF6dEk0Zmg3ZkJhSmh6?=
- =?utf-8?B?d0RiZjcvMGtwcTZseUZ6eXZtUGdyclVyVHVGK2IvNlk1RkdWZGVzRDBSZ3Y5?=
- =?utf-8?B?ZVBCbU12UWdCZXo0eUQrOS94VjJnUGRiWE42S3ptcTlqNHFhYU9VSjBKeENq?=
- =?utf-8?B?OHpHNWFFWktLWC9TckF6MWtWQ0M4TEwwNkxVa2g4Yk5vUGFkR0RuaUlqcGZy?=
- =?utf-8?B?SWtSWHA4K0ZqOVJhamNHVDVmdy93VFUrK1J1d0lYaHVLUk9lRkJjYnhWcjJB?=
- =?utf-8?B?Wk9jRlZic2RxYkwyaFRzZjNBb0FPTGp5bmdDeFk4Z0lhNnd3dWEyWExwWVc4?=
- =?utf-8?B?TWlqaW9JekFDekgwNUtRZklVb2dUY1N2T1JyRTZQWE8yeHpQcDQxVEgvRmQz?=
- =?utf-8?B?UWNLR1VqbENYajZuV1ZxRVlIa1g4T2tPSXpQM2xSaCtaby94d29uNkxLNjht?=
- =?utf-8?B?VDV5SGczcUpMeDhEZk83aDFNNVYvNlhEWkQ3bHI2VUxZTG95TUFPd0VJTzA0?=
- =?utf-8?B?azRZaTZvcjE4V3pxQXhiSkdXdWJvLzllazdHVzRsUDd0dXJadHNkeWZYdEVW?=
- =?utf-8?B?VmtWNmV2dmRwZ3ZpK2NuSkdJdUNRR0U3dVpqZjdEeFdsa2F6dGJiMDB4WXdZ?=
- =?utf-8?B?KzBpV2d6ZThsQ2JmeUZBTHFaYXRyeDJRNE1tTHJ2c2hEbmhyOGVxTXYrK09h?=
- =?utf-8?B?WEIySWJIWDBHWGEvMDFMNStWeGxNTFAydkkxbk14eG5CdnFFbG5qUmQvSDkx?=
- =?utf-8?B?TnRYRU5FcGZiQUhlaGtCZjBYeE5RUkluSFRzM1VPOTJXaFI2dGFTZ1AyV3Zy?=
- =?utf-8?B?a2orTnRmOVF3aWlmZ056TW1nZGpFbFduWktsemNCTFRuc1pmeTNQZmZVL1ZB?=
- =?utf-8?B?STI0MERUdk5mRlZhM3F5VXhxa3pweE5CSm1sNlBMRmQvRjlNKzF0Y0NpcTJJ?=
- =?utf-8?B?cTVSVjJHc3dIb3N6dVlOdHhKYXp1Vlg4cVg4UDdlTmN1YzFFa3JDVTloMlZT?=
- =?utf-8?B?bDAzR3Z3TVQxUnprbzJRZVV5a3BQcGJRUVNvL2RQMFJiQjlJUVRMa0wxaEw0?=
- =?utf-8?B?czI5dVRGd1JCK04yZE5pZ0p5d0gzQmptSlNqbHUyZ3d6cW5kK0krWVV2Wk5C?=
- =?utf-8?B?Yi9MZUJCd3pPcHplZ2lROTdOK29sU25VVzVmRWFSc1NKck5NSmlGWVFVY2Vh?=
- =?utf-8?B?U2hTblBuSjdMb2t4Qm9rMGRycUZuOFZxeDAyWlp3cXUwandNZm9OOWNqNktp?=
- =?utf-8?B?aDVwR1A0UFlsaERQK01PdmZOdzhwRWVGWDg4a2orWXJoR1ZBM3AwRFdzcEtY?=
- =?utf-8?B?YzVwOFErYURrY2tHT2t1ZW5VTE5oanFlV2tTYXhWb0YxSUZsdEdqV2dxVmV5?=
- =?utf-8?B?and2Y0dXL1lZWkhjUkRZa0JTVVljakQyejFMbC80dHBDbkZoK3lYUDU1U0xl?=
- =?utf-8?B?Q0Z0S2FPam1mZ0ZoQnA1MHVaQWNBc2JFanR3dUg5QU9PQ0RnWXZGTXp3RTlr?=
- =?utf-8?Q?JCt6bn9vK58P3nvFxd8yKFakk3DfEaUucUpal4K7CWNN?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c94036f1-c308-4d96-3d9d-08dafee09be1
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2023 14:29:47.0361 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nAr0ttK1ql0o/Ev32oYUpu2sxUbkYpuqnKYL9YUwfehb+/cur/eu2AGyyEhfFxaB
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6314
-Subject: Re: [Nouveau] [PATCH v3 3/4] drm/amdgpu: Movie the amdgpu_gtt_mgr
- start and size from pages to bytes
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20221127183036.never.139-kees@kernel.org>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/disp: Fix nvif_outp_acquire_dp()
+ argument size
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -128,53 +67,91 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alexander.deucher@amd.com, arunpravin.paneerselvam@amd.com,
- arvind.yadav@amd.com, shashank.sharma@amd.com
+Cc: "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-hardening@vger.kernel.org,
+ Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 25.01.23 um 15:24 schrieb Somalapuram Amaranath:
-> To support GTT manager amdgpu_res_first, amdgpu_res_next
-> from pages to bytes and clean up PAGE_SHIFT operation.
-> v1 -> v2: reorder patch sequence
+Ping. I'll take this via my tree unless someone else wants to take it...
 
-Ok once more: You need to squash this patch here together with the other 
-patches.
-
-Otherwise this patch would break the driver if applied alone.
-
-Christian.
-
->
-> Signed-off-by: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>
+On Sun, Nov 27, 2022 at 10:30:41AM -0800, Kees Cook wrote:
+> Both Coverity and GCC with -Wstringop-overflow noticed that
+> nvif_outp_acquire_dp() accidentally defined its second argument with 1
+> additional element:
+> 
+> drivers/gpu/drm/nouveau/dispnv50/disp.c: In function 'nv50_pior_atomic_enable':
+> drivers/gpu/drm/nouveau/dispnv50/disp.c:1813:17: error: 'nvif_outp_acquire_dp' accessing 16 bytes in a region of size 15 [-Werror=stringop-overflow=]
+>  1813 |                 nvif_outp_acquire_dp(&nv_encoder->outp, nv_encoder->dp.dpcd, 0, 0, false, false);
+>       |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> drivers/gpu/drm/nouveau/dispnv50/disp.c:1813:17: note: referencing argument 2 of type 'u8[16]' {aka 'unsigned char[16]'}
+> drivers/gpu/drm/nouveau/include/nvif/outp.h:24:5: note: in a call to function 'nvif_outp_acquire_dp'
+>    24 | int nvif_outp_acquire_dp(struct nvif_outp *, u8 dpcd[16],
+>       |     ^~~~~~~~~~~~~~~~~~~~
+> 
+> Avoid these warnings by defining the argument size using the matching
+> define (DP_RECEIVER_CAP_SIZE, 15) instead of having it be a literal
+> (and incorrect) value (16).
+> 
+> Reported-by: coverity-bot <keescook+coverity-bot@chromium.org>
+> Addresses-Coverity-ID: 1527269 ("Memory - corruptions")
+> Addresses-Coverity-ID: 1527268 ("Memory - corruptions")
+> Link: https://lore.kernel.org/lkml/202211100848.FFBA2432@keescook/
+> Link: https://lore.kernel.org/lkml/202211100848.F4C2819BB@keescook/
+> Fixes: 813443721331 ("drm/nouveau/disp: move DP link config into acquire")
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: Karol Herbst <kherbst@redhat.com>
+> Cc: Lyude Paul <lyude@redhat.com>
+> Cc: David Airlie <airlied@gmail.com>
+> Cc: Daniel Vetter <daniel@ffwll.ch>
+> Cc: Dave Airlie <airlied@redhat.com>
+> Cc: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
+> Cc: dri-devel@lists.freedesktop.org
+> Cc: nouveau@lists.freedesktop.org
+> Signed-off-by: Kees Cook <keescook@chromium.org>
 > ---
->   drivers/gpu/drm/amd/amdgpu/amdgpu_res_cursor.h | 8 ++++----
->   1 file changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_res_cursor.h b/drivers/gpu/drm/amd/amdgpu/amdgpu_res_cursor.h
-> index 5c4f93ee0c57..5c78f0b09351 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_res_cursor.h
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_res_cursor.h
-> @@ -94,8 +94,8 @@ static inline void amdgpu_res_first(struct ttm_resource *res,
->   		while (start >= node->size << PAGE_SHIFT)
->   			start -= node++->size << PAGE_SHIFT;
->   
-> -		cur->start = (node->start << PAGE_SHIFT) + start;
-> -		cur->size = min((node->size << PAGE_SHIFT) - start, size);
-> +		cur->start = node->start + start;
-> +		cur->size = min(node->size - start, size);
->   		cur->remaining = size;
->   		cur->node = node;
->   		break;
-> @@ -155,8 +155,8 @@ static inline void amdgpu_res_next(struct amdgpu_res_cursor *cur, uint64_t size)
->   		node = cur->node;
->   
->   		cur->node = ++node;
-> -		cur->start = node->start << PAGE_SHIFT;
-> -		cur->size = min(node->size << PAGE_SHIFT, cur->remaining);
-> +		cur->start = node->start;
-> +		cur->size = min(node->size, cur->remaining);
->   		break;
->   	default:
->   		return;
+>  drivers/gpu/drm/nouveau/include/nvif/outp.h | 3 ++-
+>  drivers/gpu/drm/nouveau/nvif/outp.c         | 2 +-
+>  2 files changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/include/nvif/outp.h b/drivers/gpu/drm/nouveau/include/nvif/outp.h
+> index 45daadec3c0c..fa76a7b5e4b3 100644
+> --- a/drivers/gpu/drm/nouveau/include/nvif/outp.h
+> +++ b/drivers/gpu/drm/nouveau/include/nvif/outp.h
+> @@ -3,6 +3,7 @@
+>  #define __NVIF_OUTP_H__
+>  #include <nvif/object.h>
+>  #include <nvif/if0012.h>
+> +#include <drm/display/drm_dp.h>
+>  struct nvif_disp;
+>  
+>  struct nvif_outp {
+> @@ -21,7 +22,7 @@ int nvif_outp_acquire_rgb_crt(struct nvif_outp *);
+>  int nvif_outp_acquire_tmds(struct nvif_outp *, int head,
+>  			   bool hdmi, u8 max_ac_packet, u8 rekey, u8 scdc, bool hda);
+>  int nvif_outp_acquire_lvds(struct nvif_outp *, bool dual, bool bpc8);
+> -int nvif_outp_acquire_dp(struct nvif_outp *, u8 dpcd[16],
+> +int nvif_outp_acquire_dp(struct nvif_outp *outp, u8 dpcd[DP_RECEIVER_CAP_SIZE],
+>  			 int link_nr, int link_bw, bool hda, bool mst);
+>  void nvif_outp_release(struct nvif_outp *);
+>  int nvif_outp_infoframe(struct nvif_outp *, u8 type, struct nvif_outp_infoframe_v0 *, u32 size);
+> diff --git a/drivers/gpu/drm/nouveau/nvif/outp.c b/drivers/gpu/drm/nouveau/nvif/outp.c
+> index 7da39f1eae9f..c24bc5eae3ec 100644
+> --- a/drivers/gpu/drm/nouveau/nvif/outp.c
+> +++ b/drivers/gpu/drm/nouveau/nvif/outp.c
+> @@ -127,7 +127,7 @@ nvif_outp_acquire(struct nvif_outp *outp, u8 proto, struct nvif_outp_acquire_v0
+>  }
+>  
+>  int
+> -nvif_outp_acquire_dp(struct nvif_outp *outp, u8 dpcd[16],
+> +nvif_outp_acquire_dp(struct nvif_outp *outp, u8 dpcd[DP_RECEIVER_CAP_SIZE],
+>  		     int link_nr, int link_bw, bool hda, bool mst)
+>  {
+>  	struct nvif_outp_acquire_v0 args;
+> -- 
+> 2.34.1
+> 
 
+-- 
+Kees Cook
