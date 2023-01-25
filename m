@@ -1,55 +1,94 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A8656F6B5F
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:21 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 035036F6BA9
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9D83110E3FA;
-	Thu,  4 May 2023 12:31:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3CCFB10E47B;
+	Thu,  4 May 2023 12:32:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp1.tecnico.ulisboa.pt (smtp1.tecnico.ulisboa.pt
- [193.136.128.21])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3482010EA36;
- Fri, 20 Jan 2023 11:37:22 +0000 (UTC)
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTP id 769D26008831;
- Fri, 20 Jan 2023 11:37:20 +0000 (WET)
-X-Virus-Scanned: by amavisd-new-2.11.0 (20160426) (Debian) at
- tecnico.ulisboa.pt
-Received: from smtp1.tecnico.ulisboa.pt ([127.0.0.1])
- by localhost (smtp1.tecnico.ulisboa.pt [127.0.0.1]) (amavisd-new, port 10025)
- with LMTP id ycM_b9OLVerz; Fri, 20 Jan 2023 11:37:18 +0000 (WET)
-Received: from mail1.tecnico.ulisboa.pt (mail1.ist.utl.pt [193.136.128.10])
- by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTPS id C98626008828;
- Fri, 20 Jan 2023 11:37:17 +0000 (WET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tecnico.ulisboa.pt;
- s=mail; t=1674214638;
- bh=Xceh/ltBYNbtbQTxGHxOIwMD72Lbmf8kpmBAZEASpkE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=JdyXvczcQUGMYfdwQuGfdfmR0IQNaf9xCiY1/23qDPJ7xLEsyMrqH6u3MIJg/IeiA
- YxzvXehwCSosD+ViCsPFh1yxnEW3kXfxrfWzgibHKiUAYa7B0gstWThkQ1HoYHxhpj
- rflecTJF3he+AV99L3OvDpP5AMdFEExGDSOzz5Tg=
-Received: from wslaptop (unknown [IPv6:2001:818:dcb5:dc00:d990:b664:f16:4cb2])
- (Authenticated sender: ist187313)
- by mail1.tecnico.ulisboa.pt (Postfix) with ESMTPSA id 66A0F360079;
- Fri, 20 Jan 2023 11:37:17 +0000 (WET)
-Date: Fri, 20 Jan 2023 11:34:43 +0000
-From: Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>
-To: Ben Skeggs <skeggsb@gmail.com>
-Message-ID: <20230120113443.wgwhwp7tm6rnc6je@wslaptop>
-References: <20221228144914.z7t7a4fdwvbblnak@wslaptop>
- <CAMwc25rY4xpn0yvCScMr6Hk9pFSdvt=9QOypSQDfj1d5tWmtvA@mail.gmail.com>
- <20230116122403.upk5ci4mbebw23m7@wslaptop>
- <CACAvsv48vH6hbacQCN+yKP8ZcDjFMWciBt6U_Xv-LEYJHZ1q9g@mail.gmail.com>
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2080.outbound.protection.outlook.com [40.107.94.80])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DE04410E760;
+ Wed, 25 Jan 2023 10:01:13 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=C+W8wXfRfGFK/dul2NB8XVVmCo57KwwbsouPg175rEYr23Dwxn/nUs7XNceCnSsTOYD2zzAbSUEP/rSAmCbqBL+1rRcCCyg1ULv9pemREAKul9In8pExnjhwd7M+E5n8mDHbDdebXVpzj0219uMqaa9cP7IrXn19ZcrEv789cL4uTjByN+CaNpZUojd4kh/X7jblvKuJn11jwMeXYVfvxBXpRlpz7krbKceUaGS8brMXnbJNf+MKXgpBlZyg9N6SNGKZvJqkzVNnyyICUa6ZcbXUIr1t1oWB4xLHjjFnqkeWeF/YJMz9+yqaxwA/jHegVoCWJbGE4QehZuyC9lj3OA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7r3JfSAfhnn3KRCPJFXp1OeRcIc18o5+h8G6Bv4ocCQ=;
+ b=Y8S0sJpzpNZiUVX2qYlNXsVeRdnSO3SmR/Np7zffZ6kcGBxhMEcki5upHOVwCYP5jC8sRZ8vDAp6TUYI/Qnx1ZewgFb1Ijv5M1rJI/N9Mp7FaVC8g3jfx6f580ozX4eX6EDKog2GbS3B05jt7eLZBNimgXMbY2VvlgqFrVN4zHO4c1Cyv/gaU3I3kIbVf04OZNGWxPjZx4Fq8VWDRn+/Kdd1AAy//yM5km6a7Kh24oEVjFKv3R3RZjJUittyEwXUbHgRlOIFqDZ9DjksgS34JdA1efk6x7zhcIOwiqYcaLf4FfyrdgELHoUNMmnoTLw4V94J/HAZS11izUrYjOFGHA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.freedesktop.org smtp.mailfrom=amd.com; 
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7r3JfSAfhnn3KRCPJFXp1OeRcIc18o5+h8G6Bv4ocCQ=;
+ b=Gxh3usbTys7USM8GNCUbgt25318pDWhYYEwn/3TOjC//DsuqNqtT6w3W9vM8bQuBXTzoJuP3zeiOuXFrhVIjBL8C5sNzakcCd0ok+NaMJjupRMtpkUmgt4PMEog+zAYD/FQqW+iX4wNasNzYUpm17JncbIBBOJjBnUMsigARdUE=
+Received: from MW4PR03CA0132.namprd03.prod.outlook.com (2603:10b6:303:8c::17)
+ by SJ0PR12MB6903.namprd12.prod.outlook.com (2603:10b6:a03:485::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6002.33; Wed, 25 Jan
+ 2023 10:01:11 +0000
+Received: from CO1NAM11FT029.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:303:8c:cafe::e7) by MW4PR03CA0132.outlook.office365.com
+ (2603:10b6:303:8c::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.21 via Frontend
+ Transport; Wed, 25 Jan 2023 10:01:11 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1NAM11FT029.mail.protection.outlook.com (10.13.174.214) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6023.16 via Frontend Transport; Wed, 25 Jan 2023 10:01:10 +0000
+Received: from amar-X570-AORUS-ELITE.amd.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.34; Wed, 25 Jan 2023 04:01:07 -0600
+From: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>
+To: <dri-devel@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>,
+ <intel-gfx@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>
+Date: Wed, 25 Jan 2023 15:30:23 +0530
+Message-ID: <20230125100026.5086-1-Amaranath.Somalapuram@amd.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CACAvsv48vH6hbacQCN+yKP8ZcDjFMWciBt6U_Xv-LEYJHZ1q9g@mail.gmail.com>
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:35 +0000
-Subject: Re: [Nouveau] [REGRESSION] GM20B probe fails after commit
- 2541626cfb79
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1NAM11FT029:EE_|SJ0PR12MB6903:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0abe643d-87e0-4692-9d54-08dafebb1623
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: zMWdEmQKO5J3wDLRKstZS3+6QfX+snH95UoAUD2ugRo7YjL7BRWth18pcaqSu4OTyH0a+LMCHyO/R3WTajkHepv3ssB7ogfIdXEZsW4wuWQVgV9x2CrU7GjhgfU/BTBKzUqlkJz8mjWwVWTLOycE1q4TwbM1kEivkYBUwaTlR7qLh2EUoOw8BcEMqR76K64IbIUOpIEMd2Z6C4NpdWiBfgX/y3Jndv/Ea63sjnG9cXNAzQJ/MZDRl4fEmk8O6CWEvj8blRfo9+zz9Lpcu0K1HPqpsZW2YCRQkMDK56O/WK2zOgGalf9+ZhW0PEIZvH4p4lVkiEXzu2hZtMXH4kSn2hCd8YvzRr43FJ7rzUT1E5K2lqAdj04ak1TpfAhpHSSby5zGPKK+2ZTLmLvP+0yVtTCAf+05T5ZlikLS7vBvcRmdQM22UAIUjahPQ4yBYvucq2W8YMC9wQpqfKIjOMV/zIu/89DWZOCGtPmnb1JZtL3KCMeDgVI1nsxM7c3F84QOkhTXJnDgRBOV/mJ/Kcxuzslxi16OsRqB6Z2sOvqrhMNGIPQiO90nlWYo/x/+fu3qWkPrQ4sLc2jfjEzf7PXl5Df0p1dBHev8nwxgSIf9Nl3sh64U0BeZr2/mjDmFFf1cRH8mIRoPAcqyyhNzQViNCQ99OVUBXmZ5cnb4kZZI7Qbjz6XhrBTUKALd0CFKdwP1yvRfXoqlHyW03IbouoiyzJoLsr6arQli1cAEypPLvyE=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230025)(4636009)(376002)(39860400002)(136003)(346002)(396003)(451199018)(46966006)(36840700001)(40470700004)(36860700001)(83380400001)(426003)(336012)(54906003)(47076005)(2616005)(478600001)(8676002)(186003)(450100002)(36756003)(1076003)(70206006)(70586007)(110136005)(7696005)(356005)(2906002)(86362001)(82740400003)(41300700001)(26005)(81166007)(5660300002)(16526019)(316002)(40480700001)(40460700003)(6666004)(4326008)(82310400005)(8936002)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2023 10:01:10.8556 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0abe643d-87e0-4692-9d54-08dafebb1623
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT029.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6903
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:37 +0000
+Subject: [Nouveau] [PATCH 1/4] drm/amdgpu: Movie the amdgpu_gtt_mgr start
+ and size from pages to bytes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,29 +100,46 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: regressions@lists.linux.dev, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, bskeggs@redhat.com,
- David Airlie <airlied@redhat.com>
+Cc: shashank.sharma@amd.com, arunpravin.paneerselvam@amd.com,
+ Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>, arvind.yadav@amd.com,
+ alexander.deucher@amd.com, christian.koenig@amd.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jan 18, 2023 at 11:28:49AM +1000, Ben Skeggs wrote:
-> On Mon, 16 Jan 2023 at 22:27, Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt> wrote:
-> > On Mon, Jan 16, 2023 at 07:45:05AM +1000, David Airlie wrote:
-> > > As a quick check can you try changing
-> > >
-> > > drivers/gpu/drm/nouveau/nvkm/core/firmware.c:nvkm_firmware_mem_target
-> > > from NVKM_MEM_TARGET_HOST to NVKM_MEM_TARGET_NCOH ?
+To support GTT manager amdgpu_res_first, amdgpu_res_next
+from pages to bytes and clean up PAGE_SHIFT operation.
 
-> In addition to Dave's change, can you try changing the
-> nvkm_falcon_load_dmem() call in gm20b_pmu_init() to:
-> 
-> nvkm_falcon_pio_wr(falcon, (u8 *)&args, 0, 0, DMEM, addr_args,
-> sizeof(args), 0, false);
+Signed-off-by: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_res_cursor.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Hello!
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_res_cursor.h b/drivers/gpu/drm/amd/amdgpu/amdgpu_res_cursor.h
+index 5c4f93ee0c57..5c78f0b09351 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_res_cursor.h
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_res_cursor.h
+@@ -94,8 +94,8 @@ static inline void amdgpu_res_first(struct ttm_resource *res,
+ 		while (start >= node->size << PAGE_SHIFT)
+ 			start -= node++->size << PAGE_SHIFT;
+ 
+-		cur->start = (node->start << PAGE_SHIFT) + start;
+-		cur->size = min((node->size << PAGE_SHIFT) - start, size);
++		cur->start = node->start + start;
++		cur->size = min(node->size - start, size);
+ 		cur->remaining = size;
+ 		cur->node = node;
+ 		break;
+@@ -155,8 +155,8 @@ static inline void amdgpu_res_next(struct amdgpu_res_cursor *cur, uint64_t size)
+ 		node = cur->node;
+ 
+ 		cur->node = ++node;
+-		cur->start = node->start << PAGE_SHIFT;
+-		cur->size = min(node->size << PAGE_SHIFT, cur->remaining);
++		cur->start = node->start;
++		cur->size = min(node->size, cur->remaining);
+ 		break;
+ 	default:
+ 		return;
+-- 
+2.32.0
 
-Chiming in just to say that with this change I see the same as Nicolas
-except that the init message size is 255 instead of 0:
-
-[    2.196934] nouveau 57000000.gpu: pmu: unexpected init message size 255 vs 42
