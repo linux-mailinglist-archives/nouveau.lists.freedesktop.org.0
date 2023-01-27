@@ -2,66 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3E1567DB39
-	for <lists+nouveau@lfdr.de>; Fri, 27 Jan 2023 02:26:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C1C767DB5D
+	for <lists+nouveau@lfdr.de>; Fri, 27 Jan 2023 02:43:49 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5AFE810E3D7;
-	Fri, 27 Jan 2023 01:26:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8C4AE10E3DC;
+	Fri, 27 Jan 2023 01:43:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ADE4B10E3D7
- for <nouveau@lists.freedesktop.org>; Fri, 27 Jan 2023 01:26:37 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DB79D10E3DA
+ for <nouveau@lists.freedesktop.org>; Fri, 27 Jan 2023 01:43:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1674782796;
+ s=mimecast20190719; t=1674783817;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=hbvey5wHHvjs/oXB5rGmtyX2nEk7d2EsdqbZiV/BBWQ=;
- b=DiYU5jIHe+DYj7A5ECYloaK01qSajw+Um8rHPPYknz1BUPj7ryU8GHXHUMXzqBGo72R0gd
- Vpmhn74B3cdUyK1G5uSnjZa8P0sSfPNWciTXDV9Cjp9dFd+SB/3BjntdDFCPugfEr5ZFpW
- KuYx+rYSYyGKJtb3+uGXgjfnV5QiBkQ=
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=klEMThSq4VD88RqpfRh/FhT879utDrAYmm/oRbd9oCw=;
+ b=YgvzY6DznZTqjs4PSaz3i1aUtXZXJGCKSXBjK0Cwjwx5kOJ2LBm7JwfUzVqYn85HXU6Lvy
+ McczIgerXvnAMyoCKBLiurWheYhB6uKHUgkyzh6vqXNkI1FNH9csf0Koug5pFBi6weIwLX
+ +aORpVbFg2EY4crxw3d/AFqv5jp9uiY=
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-260-EnRq3eKMNcKmYbrr-um_8Q-1; Thu, 26 Jan 2023 20:26:28 -0500
-X-MC-Unique: EnRq3eKMNcKmYbrr-um_8Q-1
-Received: by mail-ed1-f72.google.com with SMTP id
- s3-20020a50ab03000000b0049ec3a108beso2556903edc.7
- for <nouveau@lists.freedesktop.org>; Thu, 26 Jan 2023 17:26:28 -0800 (PST)
+ us-mta-27--vfVjCuNOPCbzeievPGvAg-1; Thu, 26 Jan 2023 20:43:33 -0500
+X-MC-Unique: -vfVjCuNOPCbzeievPGvAg-1
+Received: by mail-ej1-f72.google.com with SMTP id
+ sa8-20020a170906eda800b0087875c99e6bso1591097ejb.22
+ for <nouveau@lists.freedesktop.org>; Thu, 26 Jan 2023 17:43:33 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:organization:from:references
  :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hbvey5wHHvjs/oXB5rGmtyX2nEk7d2EsdqbZiV/BBWQ=;
- b=jaDHl77JrPVn86egV6+R03MTzMO1pPSTQZCztdRq5IoD3Zvrbc7q3P+RGVUe6s1/bu
- A4cQnxfBEq6FWR5vQSRkPhRpF/j/iDLInSVQ5Mi6KSgIME11tN4ZhAJS4oMGwLYZYARz
- WP6Hx045mErgHcrzqcbxPCrZispzZANgkRlR8wNWIb3pTqI5a9XxvYzY01lf1aY0MExf
- XrcjNFFTOrj/15j4cZW6BrgaHlzWcS0Rmq1f5xU6kTqXm78yN5BmHN1+Mp0NDiseS3aF
- wO5WwOyazEhlTrH/fGFWI+5ptZKGKAHgH5zH0LK43LnxoobtuCR6HI7oOqgm39D3uwdX
- fNeg==
-X-Gm-Message-State: AFqh2kpeSxLMV9dUx7izyZlnr+DVSCe4dLOd1Pm1iGpMGU+QVcpiOzIz
- vmODNuGNMBM4d2xDfUm5K7ZpCGR7ekAvq3OyOBokSR3WrRCJXcSwlzHyECHKDp8pWAaxww6ig62
- nd1PLqkqa6TVEqlU/gb4tioSzlQ==
-X-Received: by 2002:aa7:c845:0:b0:497:b6bc:b811 with SMTP id
- g5-20020aa7c845000000b00497b6bcb811mr37913423edt.33.1674782787022; 
- Thu, 26 Jan 2023 17:26:27 -0800 (PST)
-X-Google-Smtp-Source: AMrXdXu6lha1mIb8CVkXNvveMAnSWzbNPvcCRf2xMZqXV2fpjBOJrCyBsekrS27Y2oQ8i/77wGdXrA==
-X-Received: by 2002:aa7:c845:0:b0:497:b6bc:b811 with SMTP id
- g5-20020aa7c845000000b00497b6bcb811mr37913404edt.33.1674782786693; 
- Thu, 26 Jan 2023 17:26:26 -0800 (PST)
+ bh=klEMThSq4VD88RqpfRh/FhT879utDrAYmm/oRbd9oCw=;
+ b=EPBNd6KiRCO5kJ1UT+PQLFUnfUbKcuV9rk0JRrvoEYmfKGFHTeIDyza09N8zMln1rf
+ FWdAA6DjQQS00xf/wXHMzEjBjm09QPNyPnEXGl6+uuRnYJtxBqUQGwpDr0JRKughdJTG
+ cXInuvOi6qUqtEot1FoYeyyk6zuj4naCMy7jtqDroGvJJlxAokL83nL2unrTCVvluZM0
+ lJjYEUVRktzTa1QR1YD4eptQrzTK7M/WZToQWfOB1Cw8d3b5iyEyWPrPhxjX+iVRtpQG
+ 2tCzJETXnxxfrU8OLlH+Dt3ln3rYpee4eaFtSs1HrlwpT7hWHwA8iBeIaASJbTMz8ljG
+ IcJA==
+X-Gm-Message-State: AFqh2koZKFgmR90kat4Bu7+t60Dos1p5WtSMGokZxi9v/7CQV6Ib9Ezb
+ 1UNMRjc4TtuMtvYqwfk4a72l00bXPFCqIfZ9yXmQkNjr54vzKqEl3GUe/HvIXD58RZOPFupzctU
+ 8Jk8UhZQ2lHGLjjJrNteHuyXdlQ==
+X-Received: by 2002:a17:906:814e:b0:86d:f6fe:3c3b with SMTP id
+ z14-20020a170906814e00b0086df6fe3c3bmr40210811ejw.23.1674783812676; 
+ Thu, 26 Jan 2023 17:43:32 -0800 (PST)
+X-Google-Smtp-Source: AMrXdXuRiEZe0tJTLhounCiwsl8cmVMaC2QzkbhzkEhofcXURHObWEtYm1ypBPdTHjbRkaU/GCsNeg==
+X-Received: by 2002:a17:906:814e:b0:86d:f6fe:3c3b with SMTP id
+ z14-20020a170906814e00b0086df6fe3c3bmr40210791ejw.23.1674783812416; 
+ Thu, 26 Jan 2023 17:43:32 -0800 (PST)
 Received: from ?IPV6:2a02:810d:4b3f:de78:642:1aff:fe31:a15c?
  ([2a02:810d:4b3f:de78:642:1aff:fe31:a15c])
  by smtp.gmail.com with ESMTPSA id
- j23-20020aa7c0d7000000b0046892e493dcsm1530377edp.26.2023.01.26.17.26.25
+ w5-20020a1709061f0500b0086a2e31d1c1sm1404316ejj.28.2023.01.26.17.43.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 26 Jan 2023 17:26:26 -0800 (PST)
-Message-ID: <7c046ff9-728d-7634-9d77-8536308c7481@redhat.com>
-Date: Fri, 27 Jan 2023 02:26:24 +0100
+ Thu, 26 Jan 2023 17:43:31 -0800 (PST)
+Message-ID: <0bf3fec7-5aac-d3cb-8953-a332f84bdf8a@redhat.com>
+Date: Fri, 27 Jan 2023 02:43:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.6.0
@@ -96,6 +96,8 @@ Cc: daniel@ffwll.ch, corbet@lwn.net, nouveau@lists.freedesktop.org,
  jason@jlekstrand.net, airlied@redhat.com, christian.koenig@amd.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
+
+
 
 On 1/27/23 02:05, Matthew Brost wrote:
 > On Wed, Jan 18, 2023 at 07:12:47AM +0100, Danilo Krummrich wrote:
@@ -217,38 +219,21 @@ On 1/27/23 02:05, Matthew Brost wrote:
 > Do you really need this operation? We have no concept of this in Xe,
 > e.g. we can create a VM and the entire address space is managed exactly
 > the same.
-
-The idea for alloc/free is to let UMDs allocate a portion of the VA 
-space (which I call a region), basically the same thing Vulkan 
-represents with a VKBuffer.
-
-It serves two purposes:
-
-1. It gives the kernel (in particular the GPUVA manager) the bounds in 
-which it is allowed to merge mappings. E.g. when a user request asks for 
-a new mapping and we detect we could merge this mapping with an existing 
-one (used in another VKBuffer than the mapping request came for) the 
-driver is not allowed to change the page table for the existing mapping 
-we want to merge with (assuming that some drivers would need to do this 
-in order to merge), because the existing mapping could already be in use 
-and by re-mapping it we'd potentially cause a fault on the GPU.
-
-2. It is used for sparse residency in a way that such an allocated VA 
-space region can be flagged as sparse, such that the kernel always keeps 
-sparse mappings around for the parts of the region that do not contain 
-actual memory backed mappings.
-
-If for your driver merging is always OK, creating a single huge region 
-would do the trick I guess. Otherwise, we could also add an option to 
-the GPUVA manager (or a specific region, which could also be a single 
-huge one) within which it never merges.
-
 > 
 > If this can be removed then the entire concept of regions in the GPUVA
 > can be removed too (drop struct drm_gpuva_region). I say this because
 > in Xe as I'm porting over to GPUVA the first thing I'm doing after
 > drm_gpuva_manager_init is calling drm_gpuva_region_insert on the entire
-> address space. To me this seems kinda useless but maybe I'm missing why
+> address space. 
+
+Also, since you've been starting to use the code, this [1] is the branch 
+I'm pushing my fixes for a v2 to. It already contains the changes for 
+the GPUVA manager except for switching away from drm_mm.
+
+[1] 
+https://gitlab.freedesktop.org/nouvelles/kernel/-/tree/new-uapi-drm-next-fixes
+
+> To me this seems kinda useless but maybe I'm missing why
 > you need this for Nouveau.
 > 
 > Matt
