@@ -1,60 +1,59 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74B786F6BC1
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:33 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C07E76F6BBD
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DE51610E47D;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5005D10E469;
 	Thu,  4 May 2023 12:32:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 820A610E17E;
- Fri, 27 Jan 2023 15:53:57 +0000 (UTC)
-Received: by mail-lf1-x132.google.com with SMTP id a11so8902691lfg.0;
- Fri, 27 Jan 2023 07:53:57 -0800 (PST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8DDD810E9AB;
+ Fri, 27 Jan 2023 15:58:45 +0000 (UTC)
+Received: by mail-lf1-x129.google.com with SMTP id f34so8790781lfv.10;
+ Fri, 27 Jan 2023 07:58:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=googlemail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5OGLoQNhfElwlf4HSSljs/h1UxRr1MpBzN6yt1vwDjk=;
- b=Dxxml8dXOTjwtUnGbGFQErqhLdm3/nf+ySkYzcVBT9XALc77iRzB5+ecKEuc7uP0Z6
- sifhAcHkiMHiNex5VToV03R9EmuRnAIs9uzrgKR6AkmT2563PsFgZPim9QhUO8yw3yLz
- par05/XS+aRFqTlbptc6d65oB8t7lwNl+hcoff7BW7LB5QG2Uo6znBuEiJuTFGH7WTy/
- kpE0g7iRgiTAbB9mOEg26xa7DRWwLFbmJPYlZET7hqZd0ngY6X/yvvavaAbwms0p+DQM
- 72VRgaV9FzbkeHXqx2G8J7sKEDZgY7c5Qp7PsBljdr3DRChehdKbqgMqip/P/7ZLfflB
- J5wA==
+ bh=gxPYGkBTLyNwdnpWXyMidWkyToKrKS2TDNAp8XKdcr0=;
+ b=ltgTBhYyECT4aeWJUQHm1M5VrbDTeEYKKPy3TlfpSBPHPEyHpyCwVRQYNb6pOWXa/8
+ JMdvt/o0YODaBX4gNvTyeFU2m5qO4b48n7cXLRGFARYV46Z4V+42B07PhEAPeDehdYqO
+ sQ13OD9zuvfwukgpJw5Jemf1H+StxBdNXyY+ee/tM/4LaGnyD0fDH8bwTZhUJtB6D1T0
+ 093uw82/Ek9zV+/hQay/Fo4H0oSb33BmvmpZdoLiAQzocEFbBmivhwTUsxfM7yZOjfxN
+ mK9Spkn2R0vmHarwJWz36Sn6HxaVwSJytU1VdgafpSN+SdeNXgnNxsBuZWidRXECllpc
+ demg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5OGLoQNhfElwlf4HSSljs/h1UxRr1MpBzN6yt1vwDjk=;
- b=8Bd8Mrk6WVASK5syMmye0r6agaitXoRwKjBzm/SGGWJxvzRilL4ggcFVgIInYNl8lj
- sGSby7r+TjcDmhoJekE37KZJK4xau4tErOTKY925L54uJxsSxOOxd9Xcac35Rboja3uk
- jeMMwL3Qk6PzoI/kp7PbUUbZBtWAaucLEAHLy75puJPEJZSZFDmSY9YjVXVaVx+nSFfu
- u/GEjMTum2SxZVx/wHSOBSVU9hz06yAKXU4bUb7H1oBQuOMShfZoOG3jbFhzJ33HVRyh
- 4nNZ6P+erk1SFIR7pjsFc2kFM6is6M8TYRuzvr20l89GkkwvqqlF/chM6LlY9yMx6O4i
- uy1Q==
-X-Gm-Message-State: AFqh2kovM+S5+deF/OSDN9FsMhs67xGOZWoOe8+mhDyMnukpqNiPAwtS
- 4p2uOJ1nFC8jg4wNUJ/miUfZ9LHUx0pO5BqLMZg=
-X-Google-Smtp-Source: AMrXdXvCQ3pd/VvAclGrdN5I9Xdf8njwLY5A+w3H4bWeF7I/UlW9fVCQzJPBYeiwMyjgu6Ur6CxYweKJSbGJQK5knZw=
-X-Received: by 2002:a19:6901:0:b0:4d5:af91:f3e9 with SMTP id
- e1-20020a196901000000b004d5af91f3e9mr1458852lfc.269.1674834835556; Fri, 27
- Jan 2023 07:53:55 -0800 (PST)
+ bh=gxPYGkBTLyNwdnpWXyMidWkyToKrKS2TDNAp8XKdcr0=;
+ b=RSkgt3QEcFJG98GD9ueBU1TW4L8+2gZgKvy3laXiDdH226cB5c1tgf599N7YpgNrWj
+ 9WJWKxw1gG8nLGsKthV5uP/3XwrlLeFpPaaaZJt93XzwznbmNJpqfsWcixJAEBsc8IFA
+ Rq1OHZJaE1v/5WD/2fQZjdzVDlIsynnOQVuqBAIbMmZKQpV0rEIz28vVM6UtrbSLFFov
+ gtFYDIfLRUFmdg3SItalIOPZIxzNNA9k1AIQSU+OKQ/aP6hLEsQ0WEoC88Q08EnB+kPX
+ Ruho/pd0aQQUuTarPRHr6lmuBmjUfoOFpC38CsoSXn79OEYy3YJyt+PdBf5gGWCbZYhP
+ OF8A==
+X-Gm-Message-State: AFqh2kq5Y+6FA62x1j8vQngxDJUxWnB0FRcNSijpsPrd7T++ygvHQYfZ
+ 6MrCLqNNDxT3+LigzSuJq31jPobCPTepBq7EfYY=
+X-Google-Smtp-Source: AMrXdXvIluarNvYG0CtDBhA8Lzuu88bokR/qsJ4KfMXHbvl8AcCkstnd9L+0r8FIqD6ztdfcghLyV3SVtwJ1LXGwfAg=
+X-Received: by 2002:ac2:5dfb:0:b0:4b5:6a20:ca94 with SMTP id
+ z27-20020ac25dfb000000b004b56a20ca94mr3207427lfq.135.1674835123630; Fri, 27
+ Jan 2023 07:58:43 -0800 (PST)
 MIME-Version: 1.0
 References: <b64705e3-2e63-a466-f829-f9568b06766a@googlemail.com>
  <fcec3c78-b5d9-eb48-0fc0-d1f27de87f23@leemhuis.info>
  <b21fa1f6-a71d-5657-8596-ee0be73185ea@leemhuis.info>
- <CACO55tsgc7mmmYBQATqG=zUmO22A1uA3_+A0krdCoORj4PirXg@mail.gmail.com>
-In-Reply-To: <CACO55tsgc7mmmYBQATqG=zUmO22A1uA3_+A0krdCoORj4PirXg@mail.gmail.com>
+In-Reply-To: <b21fa1f6-a71d-5657-8596-ee0be73185ea@leemhuis.info>
 From: Chris Clayton <chris2553@googlemail.com>
-Date: Fri, 27 Jan 2023 15:53:44 +0000
-Message-ID: <CAGGLNViL2p6=X9phs3Aps6kXN_+g0k6q21Jw5aUyfxO5jsPGYw@mail.gmail.com>
-To: Karol Herbst <kherbst@redhat.com>
-Content-Type: multipart/alternative; boundary="0000000000006e4b1005f340df3a"
+Date: Fri, 27 Jan 2023 15:58:29 +0000
+Message-ID: <CAGGLNVj1Jnb115jc6opcmg1YJ7-trObAWpqv2w_EtLnvbecSvw@mail.gmail.com>
+To: Linux regressions mailing list <regressions@lists.linux.dev>
+Content-Type: multipart/alternative; boundary="00000000000099f63605f340f04a"
 X-Mailman-Approved-At: Thu, 04 May 2023 12:31:37 +0000
 Subject: Re: [Nouveau] linux-6.2-rc4+ hangs on poweroff/reboot: Bisected
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -68,407 +67,349 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Linux regressions mailing list <regressions@lists.linux.dev>,
- ML nouveau <nouveau@lists.freedesktop.org>,
+Cc: ML nouveau <nouveau@lists.freedesktop.org>,
  LKML <linux-kernel@vger.kernel.org>,
  ML dri-devel <dri-devel@lists.freedesktop.org>, bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---0000000000006e4b1005f340df3a
+--00000000000099f63605f340f04a
 Content-Type: text/plain; charset="UTF-8"
 
-Hi Karol.
+Thanks Thorsten.
 
-I sent the originsl report to Ben and LKML. Thorsten then added you, Lyude
-Paul and the dri-devel and nouveau lists. So you should have received this
-report on or about January 19.
+I did try to revert but it didnt revert cleanly and I don't have the
+knowledge to fix it up.
+
+The patch was part of a merge that included a number of related patches.
+I'll try to revert the lot and report back.
 
 Chris
 
-On Fri, 27 Jan 2023, 11:35 Karol Herbst, <kherbst@redhat.com> wrote:
 
-> Where was the original email sent to anyway, because I don't have it at
-> all.
+On Fri, 27 Jan 2023, 11:20 Linux kernel regression tracking (Thorsten
+Leemhuis), <regressions@leemhuis.info> wrote:
+
+> Hi, this is your Linux kernel regression tracker. Top-posting for once,
+> to make this easily accessible to everyone.
 >
-> Anyhow, I suspect we want to fetch logs to see what's happening, but
-> due to the nature of this bug it might get difficult.
+> @nouveau-maintainers, did anyone take a look at this? The report is
+> already 8 days old and I don't see a single reply. Sure, we'll likely
+> get a -rc8, but still it would be good to not fix this on the finish line.
 >
-> I'm checking out the laptops I have here if I can reproduce this
-> issue, but I think all mine with Turing GPUs are fine.
+> Chris, btw, did you try if you can revert the commit on top of latest
+> mainline? And if so, does it fix the problem?
 >
-> Maybe Ben has any idea what might be wrong with
-> 0e44c21708761977dcbea9b846b51a6fb684907a or if that's an issue which
-> is already fixed by not upstreamed patches as I think I remember Ben
-> to talk about something like that recently.
+> Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
+> --
+> Everything you wanna know about Linux kernel regression tracking:
+> https://linux-regtracking.leemhuis.info/about/#tldr
+> If I did something stupid, please tell me, as explained on that page.
 >
-> Karol
+> #regzbot poke
 >
-> On Fri, Jan 27, 2023 at 12:20 PM Linux kernel regression tracking
-> (Thorsten Leemhuis) <regressions@leemhuis.info> wrote:
+> On 19.01.23 15:33, Linux kernel regression tracking (Thorsten Leemhuis)
+> wrote:
+> > [adding various lists and the two other nouveau maintainers to the list
+> > of recipients]
+>
+> > On 18.01.23 21:59, Chris Clayton wrote:
+> >> Hi.
+> >>
+> >> I build and installed the lastest development kernel earlier this week.
+> I've found that when I try the laptop down (or
+> >> reboot it), it hangs right at the end of closing the current session.
+> The last line I see on  the screen when rebooting is:
+> >>
+> >>      sd 4:0:0:0: [sda] Synchronising SCSI cache
+> >>
+> >> when closing down I see one additional line:
+> >>
+> >>      sd 4:0:0:0 [sda]Stopping disk
+> >>
+> >> In both cases the machine then hangs and I have to hold down the power
+> button fot a few seconds to switch it off.
+> >>
+> >> Linux 6.1 is OK but 6.2-rc1 hangs, so I bisected between this two and
+> landed on:
+> >>
+> >>      # first bad commit: [0e44c21708761977dcbea9b846b51a6fb684907a]
+> drm/nouveau/flcn: new code to load+boot simple HS FWs
+> >> (VPR scrubber)
+> >>
+> >> I built and installed a kernel with
+> f15cde64b66161bfa74fb58f4e5697d8265b802e (the parent of the bad commit)
+> checked out
+> >> and that shuts down and reboots fine. It the did the same with the bad
+> commit checked out and that does indeed hang, so
+> >> I'm confident the bisect outcome is OK.
+> >>
+> >> Kernels 6.1.6 and 5.15.88 are also OK.
+> >>
+> >> My system had dual GPUs - one intel and one NVidia. Related extracts
+> from 'lscpi -v' is:
+> >>
+> >> 00:02.0 VGA compatible controller: Intel Corporation CometLake-H GT2
+> [UHD Graphics] (rev 05) (prog-if 00 [VGA controller])
+> >>         Subsystem: CLEVO/KAPOK Computer CometLake-H GT2 [UHD Graphics]
+> >>
+> >>         Flags: bus master, fast devsel, latency 0, IRQ 142
+> >>
+> >>         Memory at c2000000 (64-bit, non-prefetchable) [size=16M]
+> >>
+> >>         Memory at a0000000 (64-bit, prefetchable) [size=256M]
+> >>
+> >>         I/O ports at 5000 [size=64]
+> >>
+> >>         Expansion ROM at 000c0000 [virtual] [disabled] [size=128K]
+> >>
+> >>         Capabilities: [40] Vendor Specific Information: Len=0c <?>
+> >>
+> >>         Capabilities: [70] Express Root Complex Integrated Endpoint,
+> MSI 00
+> >>
+> >>         Capabilities: [ac] MSI: Enable+ Count=1/1 Maskable- 64bit-
+> >>
+> >>         Capabilities: [d0] Power Management version 2
+> >>
+> >>         Kernel driver in use: i915
+> >>
+> >>         Kernel modules: i915
+> >>
+> >>
+> >> 01:00.0 VGA compatible controller: NVIDIA Corporation TU117M [GeForce
+> GTX 1650 Ti Mobile] (rev a1) (prog-if 00 [VGA
+> >> controller])
+> >>         Subsystem: CLEVO/KAPOK Computer TU117M [GeForce GTX 1650 Ti
+> Mobile]
+> >>         Flags: bus master, fast devsel, latency 0, IRQ 141
+> >>         Memory at c4000000 (32-bit, non-prefetchable) [size=16M]
+> >>         Memory at b0000000 (64-bit, prefetchable) [size=256M]
+> >>         Memory at c0000000 (64-bit, prefetchable) [size=32M]
+> >>         I/O ports at 4000 [size=128]
+> >>         Expansion ROM at c3000000 [disabled] [size=512K]
+> >>         Capabilities: [60] Power Management version 3
+> >>         Capabilities: [68] MSI: Enable+ Count=1/1 Maskable- 64bit+
+> >>         Capabilities: [78] Express Legacy Endpoint, MSI 00
+> >>         Kernel driver in use: nouveau
+> >>         Kernel modules: nouveau
+> >>
+> >> DRI_PRIME=1 is exported in one of my init scripts (yes, I am still
+> using sysvinit).
+> >>
+> >> I've attached the bisect.log, but please let me know if I can provide
+> any other diagnostics. Please cc me as I'm not
+> >> subscribed.
 > >
-> > Hi, this is your Linux kernel regression tracker. Top-posting for once,
-> > to make this easily accessible to everyone.
+> > Thanks for the report. To be sure the issue doesn't fall through the
+> > cracks unnoticed, I'm adding it to regzbot, the Linux kernel regression
+> > tracking bot:
 > >
-> > @nouveau-maintainers, did anyone take a look at this? The report is
-> > already 8 days old and I don't see a single reply. Sure, we'll likely
-> > get a -rc8, but still it would be good to not fix this on the finish
-> line.
+> > #regzbot ^introduced e44c2170876197
+> > #regzbot title drm: nouveau: hangs on poweroff/reboot
+> > #regzbot ignore-activity
 > >
-> > Chris, btw, did you try if you can revert the commit on top of latest
-> > mainline? And if so, does it fix the problem?
+> > This isn't a regression? This issue or a fix for it are already
+> > discussed somewhere else? It was fixed already? You want to clarify when
+> > the regression started to happen? Or point out I got the title or
+> > something else totally wrong? Then just reply and tell me -- ideally
+> > while also telling regzbot about it, as explained by the page listed in
+> > the footer of this mail.
+> >
+> > Developers: When fixing the issue, remember to add 'Link:' tags pointing
+> > to the report (the parent of this mail). See page linked in footer for
+> > details.
 > >
 > > Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
 > > --
 > > Everything you wanna know about Linux kernel regression tracking:
 > > https://linux-regtracking.leemhuis.info/about/#tldr
-> > If I did something stupid, please tell me, as explained on that page.
-> >
-> > #regzbot poke
-> >
-> > On 19.01.23 15:33, Linux kernel regression tracking (Thorsten Leemhuis)
-> > wrote:
-> > > [adding various lists and the two other nouveau maintainers to the list
-> > > of recipients]
-> >
-> > > On 18.01.23 21:59, Chris Clayton wrote:
-> > >> Hi.
-> > >>
-> > >> I build and installed the lastest development kernel earlier this
-> week. I've found that when I try the laptop down (or
-> > >> reboot it), it hangs right at the end of closing the current session.
-> The last line I see on  the screen when rebooting is:
-> > >>
-> > >>      sd 4:0:0:0: [sda] Synchronising SCSI cache
-> > >>
-> > >> when closing down I see one additional line:
-> > >>
-> > >>      sd 4:0:0:0 [sda]Stopping disk
-> > >>
-> > >> In both cases the machine then hangs and I have to hold down the
-> power button fot a few seconds to switch it off.
-> > >>
-> > >> Linux 6.1 is OK but 6.2-rc1 hangs, so I bisected between this two and
-> landed on:
-> > >>
-> > >>      # first bad commit: [0e44c21708761977dcbea9b846b51a6fb684907a]
-> drm/nouveau/flcn: new code to load+boot simple HS FWs
-> > >> (VPR scrubber)
-> > >>
-> > >> I built and installed a kernel with
-> f15cde64b66161bfa74fb58f4e5697d8265b802e (the parent of the bad commit)
-> checked out
-> > >> and that shuts down and reboots fine. It the did the same with the
-> bad commit checked out and that does indeed hang, so
-> > >> I'm confident the bisect outcome is OK.
-> > >>
-> > >> Kernels 6.1.6 and 5.15.88 are also OK.
-> > >>
-> > >> My system had dual GPUs - one intel and one NVidia. Related extracts
-> from 'lscpi -v' is:
-> > >>
-> > >> 00:02.0 VGA compatible controller: Intel Corporation CometLake-H GT2
-> [UHD Graphics] (rev 05) (prog-if 00 [VGA controller])
-> > >>         Subsystem: CLEVO/KAPOK Computer CometLake-H GT2 [UHD Graphics]
-> > >>
-> > >>         Flags: bus master, fast devsel, latency 0, IRQ 142
-> > >>
-> > >>         Memory at c2000000 (64-bit, non-prefetchable) [size=16M]
-> > >>
-> > >>         Memory at a0000000 (64-bit, prefetchable) [size=256M]
-> > >>
-> > >>         I/O ports at 5000 [size=64]
-> > >>
-> > >>         Expansion ROM at 000c0000 [virtual] [disabled] [size=128K]
-> > >>
-> > >>         Capabilities: [40] Vendor Specific Information: Len=0c <?>
-> > >>
-> > >>         Capabilities: [70] Express Root Complex Integrated Endpoint,
-> MSI 00
-> > >>
-> > >>         Capabilities: [ac] MSI: Enable+ Count=1/1 Maskable- 64bit-
-> > >>
-> > >>         Capabilities: [d0] Power Management version 2
-> > >>
-> > >>         Kernel driver in use: i915
-> > >>
-> > >>         Kernel modules: i915
-> > >>
-> > >>
-> > >> 01:00.0 VGA compatible controller: NVIDIA Corporation TU117M [GeForce
-> GTX 1650 Ti Mobile] (rev a1) (prog-if 00 [VGA
-> > >> controller])
-> > >>         Subsystem: CLEVO/KAPOK Computer TU117M [GeForce GTX 1650 Ti
-> Mobile]
-> > >>         Flags: bus master, fast devsel, latency 0, IRQ 141
-> > >>         Memory at c4000000 (32-bit, non-prefetchable) [size=16M]
-> > >>         Memory at b0000000 (64-bit, prefetchable) [size=256M]
-> > >>         Memory at c0000000 (64-bit, prefetchable) [size=32M]
-> > >>         I/O ports at 4000 [size=128]
-> > >>         Expansion ROM at c3000000 [disabled] [size=512K]
-> > >>         Capabilities: [60] Power Management version 3
-> > >>         Capabilities: [68] MSI: Enable+ Count=1/1 Maskable- 64bit+
-> > >>         Capabilities: [78] Express Legacy Endpoint, MSI 00
-> > >>         Kernel driver in use: nouveau
-> > >>         Kernel modules: nouveau
-> > >>
-> > >> DRI_PRIME=1 is exported in one of my init scripts (yes, I am still
-> using sysvinit).
-> > >>
-> > >> I've attached the bisect.log, but please let me know if I can provide
-> any other diagnostics. Please cc me as I'm not
-> > >> subscribed.
-> > >
-> > > Thanks for the report. To be sure the issue doesn't fall through the
-> > > cracks unnoticed, I'm adding it to regzbot, the Linux kernel regression
-> > > tracking bot:
-> > >
-> > > #regzbot ^introduced e44c2170876197
-> > > #regzbot title drm: nouveau: hangs on poweroff/reboot
-> > > #regzbot ignore-activity
-> > >
-> > > This isn't a regression? This issue or a fix for it are already
-> > > discussed somewhere else? It was fixed already? You want to clarify
-> when
-> > > the regression started to happen? Or point out I got the title or
-> > > something else totally wrong? Then just reply and tell me -- ideally
-> > > while also telling regzbot about it, as explained by the page listed in
-> > > the footer of this mail.
-> > >
-> > > Developers: When fixing the issue, remember to add 'Link:' tags
-> pointing
-> > > to the report (the parent of this mail). See page linked in footer for
-> > > details.
-> > >
-> > > Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker'
-> hat)
-> > > --
-> > > Everything you wanna know about Linux kernel regression tracking:
-> > > https://linux-regtracking.leemhuis.info/about/#tldr
-> > > That page also explains what to do if mails like this annoy you.
-> >
->
+> > That page also explains what to do if mails like this annoy you.
 >
 
---0000000000006e4b1005f340df3a
+--00000000000099f63605f340f04a
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"auto">Hi Karol.<div dir=3D"auto"><br></div><div dir=3D"auto">I =
-sent the originsl report to Ben and LKML. Thorsten then added you, Lyude=C2=
-=A0 Paul and the dri-devel and nouveau lists. So you should have received t=
-his report on or about January 19.</div><div dir=3D"auto"><br></div><div di=
-r=3D"auto">Chris</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr"=
- class=3D"gmail_attr">On Fri, 27 Jan 2023, 11:35 Karol Herbst, &lt;<a href=
-=3D"mailto:kherbst@redhat.com" rel=3D"noreferrer noreferrer noreferrer nore=
-ferrer" target=3D"_blank">kherbst@redhat.com</a>&gt; wrote:<br></div><block=
-quote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc=
- solid;padding-left:1ex">Where was the original email sent to anyway, becau=
-se I don&#39;t have it at all.<br>
+<div dir=3D"auto">Thanks Thorsten.<div dir=3D"auto"><br></div><div dir=3D"a=
+uto">I did try to revert but it didnt revert cleanly and I don&#39;t have t=
+he knowledge to fix it up.</div><div dir=3D"auto"><br></div><div dir=3D"aut=
+o">The patch was part of a merge that included a number of related patches.=
+ I&#39;ll try to revert the lot and report back.</div><div dir=3D"auto"><br=
+></div><div dir=3D"auto">Chris<br><div dir=3D"auto"><br></div></div></div><=
+br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri,=
+ 27 Jan 2023, 11:20 Linux kernel regression tracking (Thorsten Leemhuis), &=
+lt;<a href=3D"mailto:regressions@leemhuis.info">regressions@leemhuis.info</=
+a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 =
+0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">Hi, this is your Linu=
+x kernel regression tracker. Top-posting for once,<br>
+to make this easily accessible to everyone.<br>
 <br>
-Anyhow, I suspect we want to fetch logs to see what&#39;s happening, but<br=
->
-due to the nature of this bug it might get difficult.<br>
-<br>
-I&#39;m checking out the laptops I have here if I can reproduce this<br>
-issue, but I think all mine with Turing GPUs are fine.<br>
-<br>
-Maybe Ben has any idea what might be wrong with<br>
-0e44c21708761977dcbea9b846b51a6fb684907a or if that&#39;s an issue which<br=
->
-is already fixed by not upstreamed patches as I think I remember Ben<br>
-to talk about something like that recently.<br>
-<br>
-Karol<br>
-<br>
-On Fri, Jan 27, 2023 at 12:20 PM Linux kernel regression tracking<br>
-(Thorsten Leemhuis) &lt;<a href=3D"mailto:regressions@leemhuis.info" rel=3D=
-"noreferrer noreferrer noreferrer noreferrer noreferrer" target=3D"_blank">=
-regressions@leemhuis.info</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Hi, this is your Linux kernel regression tracker. Top-posting for once=
-,<br>
-&gt; to make this easily accessible to everyone.<br>
-&gt;<br>
-&gt; @nouveau-maintainers, did anyone take a look at this? The report is<br=
->
-&gt; already 8 days old and I don&#39;t see a single reply. Sure, we&#39;ll=
- likely<br>
-&gt; get a -rc8, but still it would be good to not fix this on the finish l=
-ine.<br>
-&gt;<br>
-&gt; Chris, btw, did you try if you can revert the commit on top of latest<=
+@nouveau-maintainers, did anyone take a look at this? The report is<br>
+already 8 days old and I don&#39;t see a single reply. Sure, we&#39;ll like=
+ly<br>
+get a -rc8, but still it would be good to not fix this on the finish line.<=
 br>
-&gt; mainline? And if so, does it fix the problem?<br>
-&gt;<br>
+<br>
+Chris, btw, did you try if you can revert the commit on top of latest<br>
+mainline? And if so, does it fix the problem?<br>
+<br>
+Ciao, Thorsten (wearing his &#39;the Linux kernel&#39;s regression tracker&=
+#39; hat)<br>
+--<br>
+Everything you wanna know about Linux kernel regression tracking:<br>
+<a href=3D"https://linux-regtracking.leemhuis.info/about/#tldr" rel=3D"nore=
+ferrer noreferrer" target=3D"_blank">https://linux-regtracking.leemhuis.inf=
+o/about/#tldr</a><br>
+If I did something stupid, please tell me, as explained on that page.<br>
+<br>
+#regzbot poke<br>
+<br>
+On 19.01.23 15:33, Linux kernel regression tracking (Thorsten Leemhuis)<br>
+wrote:<br>
+&gt; [adding various lists and the two other nouveau maintainers to the lis=
+t<br>
+&gt; of recipients]<br>
+<br>
+&gt; On 18.01.23 21:59, Chris Clayton wrote:<br>
+&gt;&gt; Hi.<br>
+&gt;&gt;<br>
+&gt;&gt; I build and installed the lastest development kernel earlier this =
+week. I&#39;ve found that when I try the laptop down (or<br>
+&gt;&gt; reboot it), it hangs right at the end of closing the current sessi=
+on. The last line I see on=C2=A0 the screen when rebooting is:<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 sd 4:0:0:0: [sda] Synchronising SCSI cache<br>
+&gt;&gt;<br>
+&gt;&gt; when closing down I see one additional line:<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 sd 4:0:0:0 [sda]Stopping disk<br>
+&gt;&gt;<br>
+&gt;&gt; In both cases the machine then hangs and I have to hold down the p=
+ower button fot a few seconds to switch it off.<br>
+&gt;&gt;<br>
+&gt;&gt; Linux 6.1 is OK but 6.2-rc1 hangs, so I bisected between this two =
+and landed on:<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 # first bad commit: [0e44c21708761977dcbea9b84=
+6b51a6fb684907a] drm/nouveau/flcn: new code to load+boot simple HS FWs<br>
+&gt;&gt; (VPR scrubber)<br>
+&gt;&gt;<br>
+&gt;&gt; I built and installed a kernel with f15cde64b66161bfa74fb58f4e5697=
+d8265b802e (the parent of the bad commit) checked out<br>
+&gt;&gt; and that shuts down and reboots fine. It the did the same with the=
+ bad commit checked out and that does indeed hang, so<br>
+&gt;&gt; I&#39;m confident the bisect outcome is OK.<br>
+&gt;&gt;<br>
+&gt;&gt; Kernels 6.1.6 and 5.15.88 are also OK.<br>
+&gt;&gt;<br>
+&gt;&gt; My system had dual GPUs - one intel and one NVidia. Related extrac=
+ts from &#39;lscpi -v&#39; is:<br>
+&gt;&gt;<br>
+&gt;&gt; 00:02.0 VGA compatible controller: Intel Corporation CometLake-H G=
+T2 [UHD Graphics] (rev 05) (prog-if 00 [VGA controller])<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Subsystem: CLEVO/KAPOK Computer C=
+ometLake-H GT2 [UHD Graphics]<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Flags: bus master, fast devsel, l=
+atency 0, IRQ 142<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Memory at c2000000 (64-bit, non-p=
+refetchable) [size=3D16M]<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Memory at a0000000 (64-bit, prefe=
+tchable) [size=3D256M]<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0I/O ports at 5000 [size=3D64]<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Expansion ROM at 000c0000 [virtua=
+l] [disabled] [size=3D128K]<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [40] Vendor Specifi=
+c Information: Len=3D0c &lt;?&gt;<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [70] Express Root C=
+omplex Integrated Endpoint, MSI 00<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [ac] MSI: Enable+ C=
+ount=3D1/1 Maskable- 64bit-<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [d0] Power Manageme=
+nt version 2<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Kernel driver in use: i915<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Kernel modules: i915<br>
+&gt;&gt;<br>
+&gt;&gt;<br>
+&gt;&gt; 01:00.0 VGA compatible controller: NVIDIA Corporation TU117M [GeFo=
+rce GTX 1650 Ti Mobile] (rev a1) (prog-if 00 [VGA<br>
+&gt;&gt; controller])<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Subsystem: CLEVO/KAPOK Computer T=
+U117M [GeForce GTX 1650 Ti Mobile]<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Flags: bus master, fast devsel, l=
+atency 0, IRQ 141<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Memory at c4000000 (32-bit, non-p=
+refetchable) [size=3D16M]<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Memory at b0000000 (64-bit, prefe=
+tchable) [size=3D256M]<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Memory at c0000000 (64-bit, prefe=
+tchable) [size=3D32M]<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0I/O ports at 4000 [size=3D128]<br=
+>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Expansion ROM at c3000000 [disabl=
+ed] [size=3D512K]<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [60] Power Manageme=
+nt version 3<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [68] MSI: Enable+ C=
+ount=3D1/1 Maskable- 64bit+<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [78] Express Legacy=
+ Endpoint, MSI 00<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Kernel driver in use: nouveau<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Kernel modules: nouveau<br>
+&gt;&gt;<br>
+&gt;&gt; DRI_PRIME=3D1 is exported in one of my init scripts (yes, I am sti=
+ll using sysvinit).<br>
+&gt;&gt;<br>
+&gt;&gt; I&#39;ve attached the bisect.log, but please let me know if I can =
+provide any other diagnostics. Please cc me as I&#39;m not<br>
+&gt;&gt; subscribed.<br>
+&gt; <br>
+&gt; Thanks for the report. To be sure the issue doesn&#39;t fall through t=
+he<br>
+&gt; cracks unnoticed, I&#39;m adding it to regzbot, the Linux kernel regre=
+ssion<br>
+&gt; tracking bot:<br>
+&gt; <br>
+&gt; #regzbot ^introduced e44c2170876197<br>
+&gt; #regzbot title drm: nouveau: hangs on poweroff/reboot<br>
+&gt; #regzbot ignore-activity<br>
+&gt; <br>
+&gt; This isn&#39;t a regression? This issue or a fix for it are already<br=
+>
+&gt; discussed somewhere else? It was fixed already? You want to clarify wh=
+en<br>
+&gt; the regression started to happen? Or point out I got the title or<br>
+&gt; something else totally wrong? Then just reply and tell me -- ideally<b=
+r>
+&gt; while also telling regzbot about it, as explained by the page listed i=
+n<br>
+&gt; the footer of this mail.<br>
+&gt; <br>
+&gt; Developers: When fixing the issue, remember to add &#39;Link:&#39; tag=
+s pointing<br>
+&gt; to the report (the parent of this mail). See page linked in footer for=
+<br>
+&gt; details.<br>
+&gt; <br>
 &gt; Ciao, Thorsten (wearing his &#39;the Linux kernel&#39;s regression tra=
 cker&#39; hat)<br>
 &gt; --<br>
 &gt; Everything you wanna know about Linux kernel regression tracking:<br>
 &gt; <a href=3D"https://linux-regtracking.leemhuis.info/about/#tldr" rel=3D=
-"noreferrer noreferrer noreferrer noreferrer noreferrer noreferrer" target=
-=3D"_blank">https://linux-regtracking.leemhuis.info/about/#tldr</a><br>
-&gt; If I did something stupid, please tell me, as explained on that page.<=
-br>
-&gt;<br>
-&gt; #regzbot poke<br>
-&gt;<br>
-&gt; On 19.01.23 15:33, Linux kernel regression tracking (Thorsten Leemhuis=
-)<br>
-&gt; wrote:<br>
-&gt; &gt; [adding various lists and the two other nouveau maintainers to th=
-e list<br>
-&gt; &gt; of recipients]<br>
-&gt;<br>
-&gt; &gt; On 18.01.23 21:59, Chris Clayton wrote:<br>
-&gt; &gt;&gt; Hi.<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; I build and installed the lastest development kernel earlier =
-this week. I&#39;ve found that when I try the laptop down (or<br>
-&gt; &gt;&gt; reboot it), it hangs right at the end of closing the current =
-session. The last line I see on=C2=A0 the screen when rebooting is:<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 sd 4:0:0:0: [sda] Synchronising SCSI cach=
-e<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; when closing down I see one additional line:<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 sd 4:0:0:0 [sda]Stopping disk<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; In both cases the machine then hangs and I have to hold down =
-the power button fot a few seconds to switch it off.<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; Linux 6.1 is OK but 6.2-rc1 hangs, so I bisected between this=
- two and landed on:<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 # first bad commit: [0e44c21708761977dcbe=
-a9b846b51a6fb684907a] drm/nouveau/flcn: new code to load+boot simple HS FWs=
-<br>
-&gt; &gt;&gt; (VPR scrubber)<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; I built and installed a kernel with f15cde64b66161bfa74fb58f4=
-e5697d8265b802e (the parent of the bad commit) checked out<br>
-&gt; &gt;&gt; and that shuts down and reboots fine. It the did the same wit=
-h the bad commit checked out and that does indeed hang, so<br>
-&gt; &gt;&gt; I&#39;m confident the bisect outcome is OK.<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; Kernels 6.1.6 and 5.15.88 are also OK.<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; My system had dual GPUs - one intel and one NVidia. Related e=
-xtracts from &#39;lscpi -v&#39; is:<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; 00:02.0 VGA compatible controller: Intel Corporation CometLak=
-e-H GT2 [UHD Graphics] (rev 05) (prog-if 00 [VGA controller])<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Subsystem: CLEVO/KAPOK Compu=
-ter CometLake-H GT2 [UHD Graphics]<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Flags: bus master, fast devs=
-el, latency 0, IRQ 142<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Memory at c2000000 (64-bit, =
-non-prefetchable) [size=3D16M]<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Memory at a0000000 (64-bit, =
-prefetchable) [size=3D256M]<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0I/O ports at 5000 [size=3D64=
-]<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Expansion ROM at 000c0000 [v=
-irtual] [disabled] [size=3D128K]<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [40] Vendor Sp=
-ecific Information: Len=3D0c &lt;?&gt;<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [70] Express R=
-oot Complex Integrated Endpoint, MSI 00<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [ac] MSI: Enab=
-le+ Count=3D1/1 Maskable- 64bit-<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [d0] Power Man=
-agement version 2<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Kernel driver in use: i915<b=
-r>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Kernel modules: i915<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; 01:00.0 VGA compatible controller: NVIDIA Corporation TU117M =
-[GeForce GTX 1650 Ti Mobile] (rev a1) (prog-if 00 [VGA<br>
-&gt; &gt;&gt; controller])<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Subsystem: CLEVO/KAPOK Compu=
-ter TU117M [GeForce GTX 1650 Ti Mobile]<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Flags: bus master, fast devs=
-el, latency 0, IRQ 141<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Memory at c4000000 (32-bit, =
-non-prefetchable) [size=3D16M]<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Memory at b0000000 (64-bit, =
-prefetchable) [size=3D256M]<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Memory at c0000000 (64-bit, =
-prefetchable) [size=3D32M]<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0I/O ports at 4000 [size=3D12=
-8]<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Expansion ROM at c3000000 [d=
-isabled] [size=3D512K]<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [60] Power Man=
-agement version 3<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [68] MSI: Enab=
-le+ Count=3D1/1 Maskable- 64bit+<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Capabilities: [78] Express L=
-egacy Endpoint, MSI 00<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Kernel driver in use: nouvea=
-u<br>
-&gt; &gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Kernel modules: nouveau<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; DRI_PRIME=3D1 is exported in one of my init scripts (yes, I a=
-m still using sysvinit).<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; I&#39;ve attached the bisect.log, but please let me know if I=
- can provide any other diagnostics. Please cc me as I&#39;m not<br>
-&gt; &gt;&gt; subscribed.<br>
-&gt; &gt;<br>
-&gt; &gt; Thanks for the report. To be sure the issue doesn&#39;t fall thro=
-ugh the<br>
-&gt; &gt; cracks unnoticed, I&#39;m adding it to regzbot, the Linux kernel =
-regression<br>
-&gt; &gt; tracking bot:<br>
-&gt; &gt;<br>
-&gt; &gt; #regzbot ^introduced e44c2170876197<br>
-&gt; &gt; #regzbot title drm: nouveau: hangs on poweroff/reboot<br>
-&gt; &gt; #regzbot ignore-activity<br>
-&gt; &gt;<br>
-&gt; &gt; This isn&#39;t a regression? This issue or a fix for it are alrea=
-dy<br>
-&gt; &gt; discussed somewhere else? It was fixed already? You want to clari=
-fy when<br>
-&gt; &gt; the regression started to happen? Or point out I got the title or=
-<br>
-&gt; &gt; something else totally wrong? Then just reply and tell me -- idea=
-lly<br>
-&gt; &gt; while also telling regzbot about it, as explained by the page lis=
-ted in<br>
-&gt; &gt; the footer of this mail.<br>
-&gt; &gt;<br>
-&gt; &gt; Developers: When fixing the issue, remember to add &#39;Link:&#39=
-; tags pointing<br>
-&gt; &gt; to the report (the parent of this mail). See page linked in foote=
-r for<br>
-&gt; &gt; details.<br>
-&gt; &gt;<br>
-&gt; &gt; Ciao, Thorsten (wearing his &#39;the Linux kernel&#39;s regressio=
-n tracker&#39; hat)<br>
-&gt; &gt; --<br>
-&gt; &gt; Everything you wanna know about Linux kernel regression tracking:=
-<br>
-&gt; &gt; <a href=3D"https://linux-regtracking.leemhuis.info/about/#tldr" r=
-el=3D"noreferrer noreferrer noreferrer noreferrer noreferrer noreferrer" ta=
-rget=3D"_blank">https://linux-regtracking.leemhuis.info/about/#tldr</a><br>
-&gt; &gt; That page also explains what to do if mails like this annoy you.<=
-br>
-&gt;<br>
-<br>
+"noreferrer noreferrer" target=3D"_blank">https://linux-regtracking.leemhui=
+s.info/about/#tldr</a><br>
+&gt; That page also explains what to do if mails like this annoy you.<br>
 </blockquote></div>
 
---0000000000006e4b1005f340df3a--
+--00000000000099f63605f340f04a--
