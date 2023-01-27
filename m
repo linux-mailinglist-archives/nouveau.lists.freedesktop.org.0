@@ -1,48 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3BF96F6BF6
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:34:16 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 946C96F6BCB
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B8F8310E4E8;
-	Thu,  4 May 2023 12:33:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C642210E4A4;
+	Thu,  4 May 2023 12:32:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp1.tecnico.ulisboa.pt (smtp1.tecnico.ulisboa.pt
  [193.136.128.21])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4881910E446;
- Fri, 27 Jan 2023 10:42:53 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B869810E447;
+ Fri, 27 Jan 2023 10:51:53 +0000 (UTC)
 Received: from localhost (localhost.localdomain [127.0.0.1])
- by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTP id 0E4476007C24;
- Fri, 27 Jan 2023 10:42:51 +0000 (WET)
+ by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTP id 2F3BB600EAE9;
+ Fri, 27 Jan 2023 10:51:50 +0000 (WET)
 X-Virus-Scanned: by amavisd-new-2.11.0 (20160426) (Debian) at
  tecnico.ulisboa.pt
 Received: from smtp1.tecnico.ulisboa.pt ([127.0.0.1])
  by localhost (smtp1.tecnico.ulisboa.pt [127.0.0.1]) (amavisd-new, port 10025)
- with LMTP id D_GNnw6Kc8Qd; Fri, 27 Jan 2023 10:42:48 +0000 (WET)
+ with LMTP id arxiVCH-fa5m; Fri, 27 Jan 2023 10:51:47 +0000 (WET)
 Received: from mail1.tecnico.ulisboa.pt (mail1.ist.utl.pt [193.136.128.10])
- by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTPS id 8F1206008769;
- Fri, 27 Jan 2023 10:42:48 +0000 (WET)
+ by smtp1.tecnico.ulisboa.pt (Postfix) with ESMTPS id 5C352600EAD2;
+ Fri, 27 Jan 2023 10:51:47 +0000 (WET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tecnico.ulisboa.pt;
- s=mail; t=1674816168;
- bh=RVMq2cCO9Sul6gjbW012jY94VUJxlmcmXK6BQRcKNcA=;
- h=Date:From:To:Cc:Subject:In-Reply-To;
- b=WWBJIj/mfTjX9zUBO3vkUdwOTxo3vJYE5g0bv0igowysqsy49iC3qTaxZteHBXao/
- X2BzNGPsWZeRdcI8QShPbIx8oI8fR+gz9JIsSkM6O4DLRrLds/VzXlAhtzCBC4Zk4k
- QZtTyRvAXfqz4rUFFRaoaI15hLDa+z5FfPtnUPjY=
+ s=mail; t=1674816707;
+ bh=wOtTdkOGHgSvvf5JexX+l9uHf4j3jt1tsIZ25QKI0j0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=cpBgIoHHJnxWM2XoEa7+qvhnWuyK79iXAjdRmes8wQRF0FP+L8Wz85IahgzAXJuR7
+ DBR+3jqMj0gP+T82lnS4VkVF03qGJh0toeWp6bnXM0bvT6YaN1QfGISCkVriYvYP/3
+ Z2y/ic3eHfjSNxWTLRFrnj4Wa8yG47F2uauOQtUs=
 Received: from wslaptop (unknown [IPv6:2001:8a0:fbe7:6700:65be:d034:d2ec:60ff])
  (Authenticated sender: ist187313)
- by mail1.tecnico.ulisboa.pt (Postfix) with ESMTPSA id EFF0636008C;
- Fri, 27 Jan 2023 10:42:47 +0000 (WET)
-Date: Fri, 27 Jan 2023 10:39:59 +0000
+ by mail1.tecnico.ulisboa.pt (Postfix) with ESMTPSA id 2A823360090;
+ Fri, 27 Jan 2023 10:51:47 +0000 (WET)
+Date: Fri, 27 Jan 2023 10:48:42 +0000
 From: Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>
-To: Ben Skeggs <skeggsb@gmail.com>
-Message-ID: <20230127103959.5nqk57sb7qchtaw6@wslaptop>
+To: Nicolas Chauvet <kwizart@gmail.com>
+Message-ID: <20230127104842.ahu6thtod7eeuvbe@wslaptop>
+References: <20221228144914.z7t7a4fdwvbblnak@wslaptop>
+ <CAMwc25rY4xpn0yvCScMr6Hk9pFSdvt=9QOypSQDfj1d5tWmtvA@mail.gmail.com>
+ <20230116122403.upk5ci4mbebw23m7@wslaptop>
+ <CACAvsv48vH6hbacQCN+yKP8ZcDjFMWciBt6U_Xv-LEYJHZ1q9g@mail.gmail.com>
+ <20230120113443.wgwhwp7tm6rnc6je@wslaptop>
+ <CACAvsv4_XJLSwnA-s0BXLVbBCESDfnK7kx5-WUPd2+vdJuMojg@mail.gmail.com>
+ <CABr+WTmfQkLoHxpONag4bHEsQtGwmno+84mYF-RzAGw0jqo-gA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CACAvsv4_XJLSwnA-s0BXLVbBCESDfnK7kx5-WUPd2+vdJuMojg@mail.gmail.com>
+In-Reply-To: <CABr+WTmfQkLoHxpONag4bHEsQtGwmno+84mYF-RzAGw0jqo-gA@mail.gmail.com>
 X-Mailman-Approved-At: Thu, 04 May 2023 12:31:36 +0000
 Subject: Re: [Nouveau] [REGRESSION] GM20B probe fails after commit
  2541626cfb79
@@ -57,44 +64,33 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: regressions@lists.linux.dev, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, airlied@redhat.com
+Cc: David Airlie <airlied@redhat.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jan 27, 2023 at 04:00:59PM +1000, Ben Skeggs wrote:
-> On Fri, 20 Jan 2023 at 21:37, Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt> wrote:
-> >
-> > On Wed, Jan 18, 2023 at 11:28:49AM +1000, Ben Skeggs wrote:
-> > > On Mon, 16 Jan 2023 at 22:27, Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt> wrote:
-> > > > On Mon, Jan 16, 2023 at 07:45:05AM +1000, David Airlie wrote:
-> > > > > As a quick check can you try changing
-> > > > >
-> > > > > drivers/gpu/drm/nouveau/nvkm/core/firmware.c:nvkm_firmware_mem_target
-> > > > > from NVKM_MEM_TARGET_HOST to NVKM_MEM_TARGET_NCOH ?
-> >
-> > > In addition to Dave's change, can you try changing the
-> > > nvkm_falcon_load_dmem() call in gm20b_pmu_init() to:
-> > >
-> > > nvkm_falcon_pio_wr(falcon, (u8 *)&args, 0, 0, DMEM, addr_args,
-> > > sizeof(args), 0, false);
-> >
-> > Chiming in just to say that with this change I see the same as Nicolas
-> > except that the init message size is 255 instead of 0:
-> >
-> > [    2.196934] nouveau 57000000.gpu: pmu: unexpected init message size 255 vs 42
-> I've attached an entirely untested patch (to go on top of the other
-> hacks/fixes so far), that will hopefully get us a little further.
+On Fri, Jan 27, 2023 at 10:03:17AM +0100, Nicolas Chauvet wrote:
+> I've tried to run glmark2-wayland under weston with DRI_PRIME=1, it
+> seems to work at the beginning, but then I have the following error:
+> 
+> [ 1510.861730] nouveau 57000000.gpu: gr: DATA_ERROR 00000003
+> [INVALID_OPERATION] ch 3 [04002a2000 glmark2-wayland[2753]] subc 0
+> class b197 mthd 19d0 data 0000003d
+> [ 1510.952000] nouveau 57000000.gpu: gr: DATA_ERROR 00000003
+> [INVALID_OPERATION] ch 3 [04002a2000 glmark2-wayland[2753]] subc 0
+> class b197 mthd 19d0 data 0000003d
+> [ 1510.952060] nouveau 57000000.gpu: gr: DATA_ERROR 0000009c [] ch 3
+> [04002a2000 glmark2-wayland[2753]] subc 0 class b197 mthd 0d78 data
+> 00000006
+> I think it's a separate error as I think I can reproduce on kernel
+> 6.1x (I will open a separate thread).
 
 Hello,
 
-Thank you for the patch! I can confirm that it fixes the problem
-on the Pixel C, and everything works as before the regression.
-With this, for the combination of patches
+Would you mind testing this Mesa merge request (and the kernel patches
+mentioned there) to see if it fixes this error:
 
-Tested-by: Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt> 
-
-which I can resend after testing the final patch version.
+https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/20811
 
 Thanks,
 Diogo
