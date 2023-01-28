@@ -2,76 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D62467F3EE
-	for <lists+nouveau@lfdr.de>; Sat, 28 Jan 2023 03:17:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FA7667F504
+	for <lists+nouveau@lfdr.de>; Sat, 28 Jan 2023 06:42:19 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6E30210E2ED;
-	Sat, 28 Jan 2023 02:17:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5380110E172;
+	Sat, 28 Jan 2023 05:42:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3862B10E2ED
- for <nouveau@lists.freedesktop.org>; Sat, 28 Jan 2023 02:17:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1674872246;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=1Nfb5TyV36RNZzOexJAnbr/uhWI9BYbLm6GvCjHYzrI=;
- b=XWdT1s43ktZCqtnYqBBSYptnHM29H5QYUzom+i3avAbVwLSdm5oIfpGP7VbW8F/XpHAc9O
- 55OiSZw/HuHTcUsYx+zi9xjWgSiR30ZSXG49OD9FNhO2QLxf9as8Vg0tKIuhA0nFy5w/hP
- ED8wf3OA5LrE4NToRY4kz8bG2S9oO1g=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-347-NFj7on3vOeWNSEhfchU_8Q-1; Fri, 27 Jan 2023 21:17:24 -0500
-X-MC-Unique: NFj7on3vOeWNSEhfchU_8Q-1
-Received: by mail-ej1-f71.google.com with SMTP id
- sc9-20020a1709078a0900b0086910fdf624so4449394ejc.13
- for <nouveau@lists.freedesktop.org>; Fri, 27 Jan 2023 18:17:24 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1Nfb5TyV36RNZzOexJAnbr/uhWI9BYbLm6GvCjHYzrI=;
- b=U4CZgbWuenyT5A24dvO+uDaCM2x/G+P29w5czPM2Sox7+x5yEJ0NZcarQIRUUgh3tM
- X1AwQbiixf4pUaDk7a0Q/k9JtxgbS+3j371DrKr5DvDvX+7F2rTbSWlT6QJyAu7vNJzp
- GLCCekaW6XhRcOuBYMhV4M1NLmsNMGzIJUr7SHzephr9DbF7lv8lR+cFSsgstvJaqYaY
- ZqLdCy5kHJVVd2Mg+c5DF9rbq5sB6eYq9PkcNECakIUqm6LxpnfXziVZc1ug8OLZIXVC
- z5+chNBPRMS/26bm9lt03OTHTYvaHQlzHwnXPvOoKArRqS1h79mFBItKCu+5Jqhb0/aT
- V7yw==
-X-Gm-Message-State: AFqh2koGStBVXxHwTyTMeYKTBo8A0iMMUsjudzdPpjj50psflvo7kp8N
- CjBN2o8fxDZ7ex9BGjKbgWGnpiLrp9gUJMzBshvpU8Vf2onoq3TOsL5NNYX9Nkk8eX+cjt1DSai
- bvFGgYeWji2619WQZxITxykYh6g==
-X-Received: by 2002:a17:907:d684:b0:870:4986:2ce with SMTP id
- wf4-20020a170907d68400b00870498602cemr51588156ejc.58.1674872243766; 
- Fri, 27 Jan 2023 18:17:23 -0800 (PST)
-X-Google-Smtp-Source: AMrXdXum01YGNXBgtWBiKpPeFfGkYkT0P2LOkTiVNvtA7VlleM4KOwoApiJmgjZunuCwGbsvP8dFdQ==
-X-Received: by 2002:a17:907:d684:b0:870:4986:2ce with SMTP id
- wf4-20020a170907d68400b00870498602cemr51588140ejc.58.1674872243534; 
- Fri, 27 Jan 2023 18:17:23 -0800 (PST)
-Received: from WINDOWS. ([2a02:810d:4b3f:de78:34ca:d547:b407:3c1c])
- by smtp.gmail.com with ESMTPSA id
- t21-20020a170906065500b007a4e02e32ffsm3202905ejb.60.2023.01.27.18.17.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jan 2023 18:17:22 -0800 (PST)
-Message-ID: <63d485b2.170a0220.4af4c.d54f@mx.google.com>
-X-Google-Original-Message-ID: <Y9SFqwE50SA4NwMZ@WINDOWS.>
-Date: Sat, 28 Jan 2023 03:17:15 +0100
-From: Danilo Krummrich <dakr@redhat.com>
-To: Takashi Iwai <tiwai@suse.de>
-References: <20221230072758.443644-1-zyytlz.wz@163.com>
- <87mt6zr9s4.wl-tiwai@suse.de> <87mt64qit5.wl-tiwai@suse.de>
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de
+ [80.237.130.52])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 94BAD10E172;
+ Sat, 28 Jan 2023 05:42:11 +0000 (UTC)
+Received: from [2a02:8108:963f:de38:4bc7:2566:28bd:b73c]; authenticated
+ by wp530.webpack.hosteurope.de running ExIM with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ id 1pLdya-00049i-OH; Sat, 28 Jan 2023 06:42:08 +0100
+Message-ID: <a163dd7b-c5d1-a07b-a816-7a2dfd3edfd4@leemhuis.info>
+Date: Sat, 28 Jan 2023 06:42:08 +0100
 MIME-Version: 1.0
-In-Reply-To: <87mt64qit5.wl-tiwai@suse.de>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/mmu: fix Use after Free bug in
- nvkm_vmm_node_split
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.0
+Content-Language: en-US, de-DE
+To: Chris Clayton <chris2553@googlemail.com>,
+ Linux regressions mailing list <regressions@lists.linux.dev>,
+ bskeggs@redhat.com, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>
+References: <b64705e3-2e63-a466-f829-f9568b06766a@googlemail.com>
+ <fcec3c78-b5d9-eb48-0fc0-d1f27de87f23@leemhuis.info>
+ <b21fa1f6-a71d-5657-8596-ee0be73185ea@leemhuis.info>
+ <3ab28896-70e9-6f90-5b97-e5397b06e715@googlemail.com>
+From: "Linux kernel regression tracking (Thorsten Leemhuis)"
+ <regressions@leemhuis.info>
+In-Reply-To: <3ab28896-70e9-6f90-5b97-e5397b06e715@googlemail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-bounce-key: webpack.hosteurope.de; regressions@leemhuis.info; 1674884531;
+ 968ce319; 
+X-HE-SMSGID: 1pLdya-00049i-OH
+Subject: Re: [Nouveau] linux-6.2-rc4+ hangs on poweroff/reboot: Bisected
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,100 +51,151 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alex000young@gmail.com, security@kernel.org, nouveau@lists.freedesktop.org,
- hackerzheng666@gmail.com, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, bskeggs@redhat.com,
- Zheng Wang <zyytlz.wz@163.com>
+Reply-To: Linux regressions mailing list <regressions@lists.linux.dev>
+Cc: ML nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jan 27, 2023 at 01:10:46PM +0100, Takashi Iwai wrote:
-> On Tue, 03 Jan 2023 15:07:55 +0100,
-> Takashi Iwai wrote:
-> > 
-> > On Fri, 30 Dec 2022 08:27:58 +0100,
-> > Zheng Wang wrote:
-> > > 
-> > > Here is a function call chain.
-> > > nvkm_vmm_pfn_map->nvkm_vmm_pfn_split_merge->nvkm_vmm_node_split
-> > > If nvkm_vma_tail return NULL in nvkm_vmm_node_split, it will
-> > > finally invoke nvkm_vmm_node_merge->nvkm_vmm_node_delete, which
-> > > will free the vma. However, nvkm_vmm_pfn_map didn't notice that.
-> > > It goes into next label and UAF happens.
-> > > 
-> > > Fix it by returning the return-value of nvkm_vmm_node_merge
-> > > instead of NULL.
-> > > 
-> > > Signed-off-by: Zheng Wang <zyytlz.wz@163.com>
-> > 
-> > FWIW, CVE-2023-0030 has been assigned to this bug.
-> > It's a question whether it really deserves as a security issue, but a
-> > bug is a bug...
-> > 
-> > Ben, could you review this please?
+On 27.01.23 20:46, Chris Clayton wrote:
+> [Resend because the mail client on my phone decided to turn HTML on behind my back, so my reply got bounced.]
 > 
-> A gentle ping as reminder.  The bug is still present.
+> Thanks Thorsten.
+> 
+> I did try to revert but it didnt revert cleanly and I don't have the knowledge to fix it up.
+> 
+> The patch was part of a merge that included a number of related patches. Tomorrow, I'll try to revert the lot and report
+> back.
 
-This was also reported in [1]. I had a closer look and FWICT this code is fine
-and there isn't a bug.
+You are free to do so, but there is no need for that from my side. I
+only wanted to know if a simple revert would do the trick; if it
+doesn't, it in my experience often is best to leave things to the
+developers of the code in question, as they know it best and thus have a
+better idea which hidden side effect a more complex revert might have.
 
-Zheng Wang, the reporter of the BZ, also confirmed this to be a false positive
-from CodeQL.
+Ciao, Thorsten
 
-Anyway, here's the explaination I also posted in the BZ:
-
-"In nvkm_vmm_node_merge() nvkm_vmm_node_delete() is only called when prev is
-set. However, prev is NULL unless we enter the "if (vma->addr != addr)" path in
-nvkm_vmm_node_split(). In such a case the vma pointer, which is also passed to
-nvkm_vmm_node_merge(), is set to a freshly allocated struct nvkm_vma with
-nvkm_vma_tail() right before prev is set to the old vma pointer.
-
-Hence, the only thing happening there when nvkm_vma_tail() fails in the
-"if (vma->size != size)" path is that either nvkm_vmm_node_merge() does nothing
-in case prev wasn't set or it merges and frees the new vma created in the
-"if (vma->addr != addr)" path. Or in other words the proper cleanup for the
-error condition is done.
-
-I can't see any case where the original vma pointer given by nvkm_vmm_pfn_map()
-is actually freed."
-
-[1] https://bugzilla.redhat.com/show_bug.cgi?id=2157041
-
-- Danilo
-
+> On 27/01/2023 11:20, Linux kernel regression tracking (Thorsten Leemhuis) wrote:
+>> Hi, this is your Linux kernel regression tracker. Top-posting for once,
+>> to make this easily accessible to everyone.
+>>
+>> @nouveau-maintainers, did anyone take a look at this? The report is
+>> already 8 days old and I don't see a single reply. Sure, we'll likely
+>> get a -rc8, but still it would be good to not fix this on the finish line.
+>>
+>> Chris, btw, did you try if you can revert the commit on top of latest
+>> mainline? And if so, does it fix the problem?
+>>
+>> Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
+>> --
+>> Everything you wanna know about Linux kernel regression tracking:
+>> https://linux-regtracking.leemhuis.info/about/#tldr
+>> If I did something stupid, please tell me, as explained on that page.
+>>
+>> #regzbot poke
+>>
+>> On 19.01.23 15:33, Linux kernel regression tracking (Thorsten Leemhuis)
+>> wrote:
+>>> [adding various lists and the two other nouveau maintainers to the list
+>>> of recipients]
+>>
+>>> On 18.01.23 21:59, Chris Clayton wrote:
+>>>> Hi.
+>>>>
+>>>> I build and installed the lastest development kernel earlier this week. I've found that when I try the laptop down (or
+>>>> reboot it), it hangs right at the end of closing the current session. The last line I see on  the screen when rebooting is:
+>>>>
+>>>> 	sd 4:0:0:0: [sda] Synchronising SCSI cache
+>>>>
+>>>> when closing down I see one additional line:
+>>>>
+>>>> 	sd 4:0:0:0 [sda]Stopping disk
+>>>>
+>>>> In both cases the machine then hangs and I have to hold down the power button fot a few seconds to switch it off.
+>>>>
+>>>> Linux 6.1 is OK but 6.2-rc1 hangs, so I bisected between this two and landed on:
+>>>>
+>>>> 	# first bad commit: [0e44c21708761977dcbea9b846b51a6fb684907a] drm/nouveau/flcn: new code to load+boot simple HS FWs
+>>>> (VPR scrubber)
+>>>>
+>>>> I built and installed a kernel with f15cde64b66161bfa74fb58f4e5697d8265b802e (the parent of the bad commit) checked out
+>>>> and that shuts down and reboots fine. It the did the same with the bad commit checked out and that does indeed hang, so
+>>>> I'm confident the bisect outcome is OK.
+>>>>
+>>>> Kernels 6.1.6 and 5.15.88 are also OK.
+>>>>
+>>>> My system had dual GPUs - one intel and one NVidia. Related extracts from 'lscpi -v' is:
+>>>>
+>>>> 00:02.0 VGA compatible controller: Intel Corporation CometLake-H GT2 [UHD Graphics] (rev 05) (prog-if 00 [VGA controller])
+>>>>         Subsystem: CLEVO/KAPOK Computer CometLake-H GT2 [UHD Graphics]
+>>>>
+>>>>         Flags: bus master, fast devsel, latency 0, IRQ 142
+>>>>
+>>>>         Memory at c2000000 (64-bit, non-prefetchable) [size=16M]
+>>>>
+>>>>         Memory at a0000000 (64-bit, prefetchable) [size=256M]
+>>>>
+>>>>         I/O ports at 5000 [size=64]
+>>>>
+>>>>         Expansion ROM at 000c0000 [virtual] [disabled] [size=128K]
+>>>>
+>>>>         Capabilities: [40] Vendor Specific Information: Len=0c <?>
+>>>>
+>>>>         Capabilities: [70] Express Root Complex Integrated Endpoint, MSI 00
+>>>>
+>>>>         Capabilities: [ac] MSI: Enable+ Count=1/1 Maskable- 64bit-
+>>>>
+>>>>         Capabilities: [d0] Power Management version 2
+>>>>
+>>>>         Kernel driver in use: i915
+>>>>
+>>>>         Kernel modules: i915
+>>>>
+>>>>
+>>>> 01:00.0 VGA compatible controller: NVIDIA Corporation TU117M [GeForce GTX 1650 Ti Mobile] (rev a1) (prog-if 00 [VGA
+>>>> controller])
+>>>>         Subsystem: CLEVO/KAPOK Computer TU117M [GeForce GTX 1650 Ti Mobile]
+>>>>         Flags: bus master, fast devsel, latency 0, IRQ 141
+>>>>         Memory at c4000000 (32-bit, non-prefetchable) [size=16M]
+>>>>         Memory at b0000000 (64-bit, prefetchable) [size=256M]
+>>>>         Memory at c0000000 (64-bit, prefetchable) [size=32M]
+>>>>         I/O ports at 4000 [size=128]
+>>>>         Expansion ROM at c3000000 [disabled] [size=512K]
+>>>>         Capabilities: [60] Power Management version 3
+>>>>         Capabilities: [68] MSI: Enable+ Count=1/1 Maskable- 64bit+
+>>>>         Capabilities: [78] Express Legacy Endpoint, MSI 00
+>>>>         Kernel driver in use: nouveau
+>>>>         Kernel modules: nouveau
+>>>>
+>>>> DRI_PRIME=1 is exported in one of my init scripts (yes, I am still using sysvinit).
+>>>>
+>>>> I've attached the bisect.log, but please let me know if I can provide any other diagnostics. Please cc me as I'm not
+>>>> subscribed.
+>>>
+>>> Thanks for the report. To be sure the issue doesn't fall through the
+>>> cracks unnoticed, I'm adding it to regzbot, the Linux kernel regression
+>>> tracking bot:
+>>>
+>>> #regzbot ^introduced e44c2170876197
+>>> #regzbot title drm: nouveau: hangs on poweroff/reboot
+>>> #regzbot ignore-activity
+>>>
+>>> This isn't a regression? This issue or a fix for it are already
+>>> discussed somewhere else? It was fixed already? You want to clarify when
+>>> the regression started to happen? Or point out I got the title or
+>>> something else totally wrong? Then just reply and tell me -- ideally
+>>> while also telling regzbot about it, as explained by the page listed in
+>>> the footer of this mail.
+>>>
+>>> Developers: When fixing the issue, remember to add 'Link:' tags pointing
+>>> to the report (the parent of this mail). See page linked in footer for
+>>> details.
+>>>
+>>> Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
+>>> --
+>>> Everything you wanna know about Linux kernel regression tracking:
+>>> https://linux-regtracking.leemhuis.info/about/#tldr
+>>> That page also explains what to do if mails like this annoy you.
 > 
 > 
-> thanks,
-> 
-> Takashi
-> 
-> > 
-> > 
-> > thanks,
-> > 
-> > Takashi
-> > 
-> > > ---
-> > >  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c | 4 ++--
-> > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > > 
-> > > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-> > > index ae793f400ba1..84d6fc87b2e8 100644
-> > > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-> > > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-> > > @@ -937,8 +937,8 @@ nvkm_vmm_node_split(struct nvkm_vmm *vmm,
-> > >  	if (vma->size != size) {
-> > >  		struct nvkm_vma *tmp;
-> > >  		if (!(tmp = nvkm_vma_tail(vma, vma->size - size))) {
-> > > -			nvkm_vmm_node_merge(vmm, prev, vma, NULL, vma->size);
-> > > -			return NULL;
-> > > +			tmp = nvkm_vmm_node_merge(vmm, prev, vma, NULL, vma->size);
-> > > +			return tmp;
-> > >  		}
-> > >  		tmp->part = true;
-> > >  		nvkm_vmm_node_insert(vmm, tmp);
-> > > -- 
-> > > 2.25.1
-> > > 
-> 
-
