@@ -2,72 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E543E6801A4
-	for <lists+nouveau@lfdr.de>; Sun, 29 Jan 2023 22:36:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2829D680249
+	for <lists+nouveau@lfdr.de>; Sun, 29 Jan 2023 23:36:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7BA7210E009;
-	Sun, 29 Jan 2023 21:36:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 08D5D10E09B;
+	Sun, 29 Jan 2023 22:36:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BD0D010E009
- for <nouveau@lists.freedesktop.org>; Sun, 29 Jan 2023 21:36:39 +0000 (UTC)
-Received: by mail-ej1-x62d.google.com with SMTP id gr7so2288359ejb.5
- for <nouveau@lists.freedesktop.org>; Sun, 29 Jan 2023 13:36:39 -0800 (PST)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D4E3A10E063;
+ Sun, 29 Jan 2023 22:36:18 +0000 (UTC)
+Received: by mail-qt1-x82b.google.com with SMTP id z9so8620418qtv.5;
+ Sun, 29 Jan 2023 14:36:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zs19kDc/7qwAXdCYJEeMzxXKqq/Z0D6o3tKd1HBVTWM=;
- b=WsR3N4uDCcnGPIknDXyHFA5Shco/+ci9NhgKlOFDL13yZ3HIhHLOzAVi/qZrRAH14O
- 6td5ZKHKPt8i7+5V8AqWud4uRo7dZPLfJU+2QYKz07hrtVx29AOLv1u6ELXwai6wip8P
- 240hmmA7p7DME7fgFm9WD9YCyGB75YMlSe1bZd55YU8f4Cw6jQb8vxPfHaoeY1cQ9jUj
- lV3uUN2k/GGnXFqjA1qfn6QGxQI+xPZJtbFFTEWLzCqCPyM+EVV1+mH7cd/kYpvGkhjw
- pp4P6WL/s0+VPBLcyzSkQshmxbEZKR7xWasRah1pC8nqnde1hu2tehdc/1HK8ck4NLgt
- CNGw==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fFrh0pKgZJpJJGzsGCczy6pWPp4yact3E0+EfHTzMNw=;
+ b=hnvlVNOjrI+AvOzslffuR1SuQniLkMRo+KVfz8SIXleBn4oyaRo9ILzvwX3RucBYjF
+ VTNMVG2011Yaue4fwXArSMl+UXvNvTZvN/fECB8qfmMOqnhlnOeNtoB7S7IXXOfTfvWA
+ 9KoOjuEruHQwGshB3DZvjxje10Ur1aq2CDjwRWkVgGx4N9tKpGQX254t/P2ZFPLZlyB5
+ /iw4UPwX0KgJ2Ww/dHzhLB3WWmgr7TVjtzSeALS1Pwf/7veGz3TgLfS12kBRt+pYVgsv
+ lQ0Q6lMBml/bv9JVcg5Cc1qHAW2sajyMheLPRUF5wLz9g2LHrHOsQLeG8xfFffosIe68
+ Uudw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=zs19kDc/7qwAXdCYJEeMzxXKqq/Z0D6o3tKd1HBVTWM=;
- b=KwoTG56Z5FZEpTwNCyRx25ga8tuqQEWLascLbxjfagqFh4bRIZJKmd09FfuHir46Is
- 1nGFiTOTy3s5GxyYn3BI+10HNyuXo6GZl1fQBo7X8igYzGghZcNyO8kNNgDOy2TJa+Vc
- n8DVkb9g04oJoD5VTpk/cfS/XilUQVwhASB0oO8gXC2P9GBMEMSujQDhJntly1vioc/u
- Tj9xpA/gQgEQ71j04SKnJApbp6CqdZuD+iw7C0epuhyevxeeb/qA4yBoiIb9yX96QTbd
- DZpcJS99wGAZ7Ej9bvcKDfSKxJTol55JWg74jU2ncZ1S+R2EecFJWUM8yIyHlDCgyiLR
- uELQ==
-X-Gm-Message-State: AO0yUKXbOwKLe+SUPKNqB93x2EwU7LxKZSj25I9HBtTAeNFrCyiyTpEb
- f/JKr32xkoU/wlefz86Wx7RaougYGbxKOQ==
-X-Google-Smtp-Source: AK7set/b/XDGVNdc4I8L4igCCg0eAo8R/JgP1m4pwI8f6gpG3mSiQLCLW2JDgwtkTK5EYCd99gEiKw==
-X-Received: by 2002:a17:907:76ea:b0:878:8294:9179 with SMTP id
- kg10-20020a17090776ea00b0087882949179mr13424205ejc.54.1675028198174; 
- Sun, 29 Jan 2023 13:36:38 -0800 (PST)
-Received: from [192.168.178.20] (host-95-250-162-30.retail.telecomitalia.it.
- [95.250.162.30]) by smtp.gmail.com with ESMTPSA id
- p2-20020a05640210c200b00499e5659988sm5713473edu.68.2023.01.29.13.36.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 29 Jan 2023 13:36:37 -0800 (PST)
-Message-ID: <51511ea3-431f-a45c-1328-5d1447e5169b@gmail.com>
-Date: Sun, 29 Jan 2023 22:36:31 +0100
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fFrh0pKgZJpJJGzsGCczy6pWPp4yact3E0+EfHTzMNw=;
+ b=eFid1rkmoFf1dqVApZJQI5La7N4qrYQJmwtl2HSw1vj8AA3zohlf16KxSdWdgHk0ph
+ davxV9C7S3ZRuuvns31VgOXqv8le7aZ0WhWfLmsrhNzaUyrWNH6LgrgjaF8iWX3ZTUmo
+ f3sFOrOpOUvQKbF0VyhH0ChL0RxS7/sG77x73X4+hhSn412vJnMrx1zj+tIIRHR+0+YO
+ SDrASr9lLlwUkpnQ4aCbrd5NsALlxMzxdWvGQlglwvDgHFE/tDNS+ruBaj+u+Y2xe2EE
+ 6JK2QRNMsKFufgQlkd/OzWnxyYmch+ywCd5qyp3Xx3BcxzeXIPuJD9078Y1uE3l3+lCQ
+ vibQ==
+X-Gm-Message-State: AO0yUKVFccuTuISrlmCr7F5rGseXkndew9JIJTifLJR594car/7K6YwQ
+ JK3XKqoiVsu4eOmq3HNwZhheU6fl3ArgKOV4q28=
+X-Google-Smtp-Source: AK7set/DSZ+qZ9zPwwft+8UYO6LW4i0sH3FWdbd0fn7nbj3vChP2x8bfT36nlqLzIbGOuIG5cAE71jtS4Wn3QYPDn+A=
+X-Received: by 2002:ac8:5e0e:0:b0:3b8:6577:8c31 with SMTP id
+ h14-20020ac85e0e000000b003b865778c31mr187218qtx.339.1675031777858; Sun, 29
+ Jan 2023 14:36:17 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.0
-To: Salvatore Bonaccorso <carnil@debian.org>,
- Greg KH <gregkh@linuxfoundation.org>
-References: <20220819200928.401416-1-kherbst@redhat.com>
- <CAHSpYy0HAifr4f+z64h+xFUmMNbB4hCR1r2Z==TsB4WaHatQqg@mail.gmail.com>
- <CACO55tv0jO2TmuWcwFiAUQB-__DZVwhv7WNN9MfgMXV053gknw@mail.gmail.com>
- <CAHSpYy117N0A1QJKVNmFNii3iL9mU71_RusiUo5ZAMcJZciM-g@mail.gmail.com>
- <cdfc26b5-c045-5f93-b553-942618f0983a@gmail.com> <Y9VgjLneuqkl+Y87@kroah.com>
- <Y9V8UoUHm3rHcDkc@eldamar.lan>
-From: Computer Enthusiastic <computer.enthusiastic@gmail.com>
-In-Reply-To: <Y9V8UoUHm3rHcDkc@eldamar.lan>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH] nouveau: explicitly wait on the fence in
- nouveau_bo_move_m2mf
+References: <CACAvsv4_XJLSwnA-s0BXLVbBCESDfnK7kx5-WUPd2+vdJuMojg@mail.gmail.com>
+ <20230127103959.5nqk57sb7qchtaw6@wslaptop>
+In-Reply-To: <20230127103959.5nqk57sb7qchtaw6@wslaptop>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Mon, 30 Jan 2023 08:36:06 +1000
+Message-ID: <CACAvsv5sA8pmhYEVhJk9PEAWyKRZYvcsSHa-04CsJxgu7+YEiw@mail.gmail.com>
+To: Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>
+Content-Type: multipart/mixed; boundary="0000000000001b9a0b05f36eba2d"
+Subject: Re: [Nouveau] [REGRESSION] GM20B probe fails after commit
+ 2541626cfb79
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,78 +65,116 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, stable@vger.kernel.org,
- Ben Skeggs <bskeggs@redhat.com>
+Cc: regressions@lists.linux.dev, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, airlied@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello Greg,
-Hello Salvatore,
+--0000000000001b9a0b05f36eba2d
+Content-Type: text/plain; charset="UTF-8"
 
-On 28/01/2023 20:49, Salvatore Bonaccorso wrote:
-> Hi Greg,
-> 
-> I'm not the reporter, so would like to confirm him explicitly, but I
-> believe I can give some context:
-> 
-> On Sat, Jan 28, 2023 at 06:51:08PM +0100, Greg KH wrote:
->> On Sat, Jan 28, 2023 at 03:49:59PM +0100, Computer Enthusiastic wrote:
->>> Hello,
->>>
->>> The patch "[Nouveau] [PATCH] nouveau: explicitly wait on the fence in
->>> nouveau_bo_move_m2mf" [1] was marked for kernels v5.15+ and it was merged
->>> upstream.
->>>
->>> The same patch [1] works with kernel 5.10.y, but it is not been merged
->>> upstream so far.
->>>
->>> According to Karol Herbst suggestion [2], I'm sending this message to ask
->>> for merging it into 5.10 kernel.
->>
->> We need to know the git commit id.  And have you tested it on 5.10.y?
->> And why are you stuck on 5.10.y for this type of hardware?  Why not move
->> to 5.15.y or 6.1.y?
-> 
-> This would be commit 6b04ce966a73 ("nouveau: explicitly wait on the
-> fence in nouveau_bo_move_m2mf") in mainline, applied in 6.0-rc3 and
-> backported to 5.19.6 and 5.15.64.
-> 
-> Computer Enthusiastic, tested it on 5.10.y:
-> https://lore.kernel.org/nouveau/CAHSpYy1mcTns0JS6eivjK82CZ9_ajSwH-H7gtDwCkNyfvihaAw@mail.gmail.com/
-> 
-> It was reported in Debian by the user originally as
-> https://bugs.debian.org/989705#69 after updating to the 5.10.y series in Debian
-> bullseye.
-> 
-> I guess the user could move to the next stable release Debian bookworm, once
-> it's released (it's currently in the last milestones to finalize, cf.
-> https://release.debian.org/ but we are not yet there). In the next release this
-> will be automatically be fixed indeed.
-> 
-> Computer Enthusiastic, can you confirm please to Greg in particular the first
-> questions, in particular to confirm the commit fixes the suspend issue?
-> 
-> Regards,
-> Salvatore
+On Fri, 27 Jan 2023 at 20:42, Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt> wrote:
+>
+> On Fri, Jan 27, 2023 at 04:00:59PM +1000, Ben Skeggs wrote:
+> > On Fri, 20 Jan 2023 at 21:37, Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt> wrote:
+> > >
+> > > On Wed, Jan 18, 2023 at 11:28:49AM +1000, Ben Skeggs wrote:
+> > > > On Mon, 16 Jan 2023 at 22:27, Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt> wrote:
+> > > > > On Mon, Jan 16, 2023 at 07:45:05AM +1000, David Airlie wrote:
+> > > > > > As a quick check can you try changing
+> > > > > >
+> > > > > > drivers/gpu/drm/nouveau/nvkm/core/firmware.c:nvkm_firmware_mem_target
+> > > > > > from NVKM_MEM_TARGET_HOST to NVKM_MEM_TARGET_NCOH ?
+> > >
+> > > > In addition to Dave's change, can you try changing the
+> > > > nvkm_falcon_load_dmem() call in gm20b_pmu_init() to:
+> > > >
+> > > > nvkm_falcon_pio_wr(falcon, (u8 *)&args, 0, 0, DMEM, addr_args,
+> > > > sizeof(args), 0, false);
+> > >
+> > > Chiming in just to say that with this change I see the same as Nicolas
+> > > except that the init message size is 255 instead of 0:
+> > >
+> > > [    2.196934] nouveau 57000000.gpu: pmu: unexpected init message size 255 vs 42
+> > I've attached an entirely untested patch (to go on top of the other
+> > hacks/fixes so far), that will hopefully get us a little further.
+>
+> Hello,
+>
+> Thank you for the patch! I can confirm that it fixes the problem
+> on the Pixel C, and everything works as before the regression.
+> With this, for the combination of patches
+>
+> Tested-by: Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>
+>
+> which I can resend after testing the final patch version.
+Thank you (both!) for testing!
 
-Thanks for replaying to my request: I really appreciate.
+I've attached a "final" version of a patch that I'll send (assuming it
+still works ;)) after re-testing.  There's only a minor change to
+avoid breaking the non-Tegra path, so I expect it should be fine.
 
-I apologize if my request was not formally correct.
+Ben.
+>
+> Thanks,
+> Diogo
 
-The upstream kernel 5.10.y hangs on suspend or fails to resume if it is 
-suspended to ram or suspended to disk (if nouveau kernel module is used 
-with some nvidia graphic cards).
+--0000000000001b9a0b05f36eba2d
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-drm-nouveau-acr-gm20b-regression-fixes.patch"
+Content-Disposition: attachment; 
+	filename="0001-drm-nouveau-acr-gm20b-regression-fixes.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_ldhynvap0>
+X-Attachment-Id: f_ldhynvap0
 
-I confirm the commit ID 6b04ce966a73 (by Karol Herbst) fixes the 
-aforementioned suspend to ram and suspend to disk issues with kernel 
-5.10.y . It tested it with my own computer.
-
-The last kernel version I tested is 5.10.165, that I patched and 
-installed in Debian Stable (11.6) that I'm currently running and that I 
-tested again today.
-
-It would be nice if the next point release of Debian Stable could ship a 
-kernel that includes patch commit ID 6b04ce966a73 for the benefit of 
-nouveau module users.
-
-Thanks again.
+RnJvbSBiZmMxYjg0ZDI2Y2EyOGY3OGEwN2Q0OTRiMDgxM2ZlNjQyZTgwYmJlIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBCZW4gU2tlZ2dzIDxic2tlZ2dzQHJlZGhhdC5jb20+CkRhdGU6
+IEZyaSwgMjcgSmFuIDIwMjMgMTU6NDI6MjcgKzEwMDAKU3ViamVjdDogW1BBVENIXSBkcm0vbm91
+dmVhdS9hY3IvZ20yMGI6IHJlZ3Jlc3Npb24gZml4ZXMKCk1pc3NlZCBzb21lIFRlZ3JhLXNwZWNp
+ZmljIHF1aXJrcyB3aGVuIHJld29ya2luZyBBQ1IgdG8gc3VwcG9ydCBBbXBlcmUuCgpGaXhlczog
+MjU0MTYyNmNmYjc5ICgiZHJtL25vdXZlYXUvYWNyOiB1c2UgY29tbW9uIGZhbGNvbiBIUyBGVyBj
+b2RlIGZvcglBQ1IgRldzIikKU2lnbmVkLW9mZi1ieTogQmVuIFNrZWdncyA8YnNrZWdnc0ByZWRo
+YXQuY29tPgotLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vY29yZS9maXJtd2FyZS5j
+ICAgIHwgIDMgKysrCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2ZhbGNvbi9nbTIwMC5j
+ICAgICB8IDE0ICsrKysrKysrKysrKystCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1
+YmRldi9wbXUvZ20yMGIuYyB8ICAyICstCiAzIGZpbGVzIGNoYW5nZWQsIDE3IGluc2VydGlvbnMo
+KyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
+bnZrbS9jb3JlL2Zpcm13YXJlLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2NvcmUv
+ZmlybXdhcmUuYwppbmRleCBmY2YyYTAwMmY2Y2IuLjkxZmI0OTRkNDAwOSAxMDA2NDQKLS0tIGEv
+ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9jb3JlL2Zpcm13YXJlLmMKKysrIGIvZHJpdmVy
+cy9ncHUvZHJtL25vdXZlYXUvbnZrbS9jb3JlL2Zpcm13YXJlLmMKQEAgLTE1MSw2ICsxNTEsOSBA
+QCBudmttX2Zpcm13YXJlX21lbV9wYWdlKHN0cnVjdCBudmttX21lbW9yeSAqbWVtb3J5KQogc3Rh
+dGljIGVudW0gbnZrbV9tZW1vcnlfdGFyZ2V0CiBudmttX2Zpcm13YXJlX21lbV90YXJnZXQoc3Ry
+dWN0IG52a21fbWVtb3J5ICptZW1vcnkpCiB7CisJaWYgKG52a21fZmlybXdhcmVfbWVtKG1lbW9y
+eSktPmRldmljZS0+ZnVuYy0+dGVncmEpCisJCXJldHVybiBOVktNX01FTV9UQVJHRVRfTkNPSDsK
+KwogCXJldHVybiBOVktNX01FTV9UQVJHRVRfSE9TVDsKIH0KIApkaWZmIC0tZ2l0IGEvZHJpdmVy
+cy9ncHUvZHJtL25vdXZlYXUvbnZrbS9mYWxjb24vZ20yMDAuYyBiL2RyaXZlcnMvZ3B1L2RybS9u
+b3V2ZWF1L252a20vZmFsY29uL2dtMjAwLmMKaW5kZXggMzkzYWRlOWY3ZTZjLi5iN2RhM2FiNDRj
+MjcgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZmFsY29uL2dtMjAw
+LmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9mYWxjb24vZ20yMDAuYwpAQCAt
+NDgsNiArNDgsMTYgQEAgZ20yMDBfZmxjbl9waW9fZG1lbV9yZChzdHJ1Y3QgbnZrbV9mYWxjb24g
+KmZhbGNvbiwgdTggcG9ydCwgY29uc3QgdTggKmltZywgaW50IGwKIAkJaW1nICs9IDQ7CiAJCWxl
+biAtPSA0OwogCX0KKworCS8qIFNpZ2guICBUZWdyYSBQTVUgRlcncyBpbml0IG1lc3NhZ2UuLi4g
+Ki8KKwlpZiAobGVuKSB7CisJCXUzMiBkYXRhID0gbnZrbV9mYWxjb25fcmQzMihmYWxjb24sIDB4
+MWM0ICsgKHBvcnQgKiA4KSk7CisKKwkJd2hpbGUgKGxlbi0tKSB7CisJCQkqKHU4ICopaW1nKysg
+PSBkYXRhICYgMHhmZjsKKwkJCWRhdGEgPj49IDg7CisJCX0KKwl9CiB9CiAKIHN0YXRpYyB2b2lk
+CkBAIC02NCw2ICs3NCw4IEBAIGdtMjAwX2ZsY25fcGlvX2RtZW1fd3Ioc3RydWN0IG52a21fZmFs
+Y29uICpmYWxjb24sIHU4IHBvcnQsIGNvbnN0IHU4ICppbWcsIGludCBsCiAJCWltZyArPSA0Owog
+CQlsZW4gLT0gNDsKIAl9CisKKwlXQVJOX09OKGxlbik7CiB9CiAKIHN0YXRpYyB2b2lkCkBAIC03
+NCw3ICs4Niw3IEBAIGdtMjAwX2ZsY25fcGlvX2RtZW1fd3JfaW5pdChzdHJ1Y3QgbnZrbV9mYWxj
+b24gKmZhbGNvbiwgdTggcG9ydCwgYm9vbCBzZWMsIHUzMiBkCiAKIGNvbnN0IHN0cnVjdCBudmtt
+X2ZhbGNvbl9mdW5jX3BpbwogZ20yMDBfZmxjbl9kbWVtX3BpbyA9IHsKLQkubWluID0gNCwKKwku
+bWluID0gMSwKIAkubWF4ID0gMHgxMDAsCiAJLndyX2luaXQgPSBnbTIwMF9mbGNuX3Bpb19kbWVt
+X3dyX2luaXQsCiAJLndyID0gZ20yMDBfZmxjbl9waW9fZG1lbV93ciwKZGlmZiAtLWdpdCBhL2Ry
+aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vc3ViZGV2L3BtdS9nbTIwYi5jIGIvZHJpdmVycy9n
+cHUvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvcG11L2dtMjBiLmMKaW5kZXggYTcyNDAzNzc3MzI5
+Li4yZWQwNGRhMzYyMWQgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20v
+c3ViZGV2L3BtdS9nbTIwYi5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vc3Vi
+ZGV2L3BtdS9nbTIwYi5jCkBAIC0yMjUsNyArMjI1LDcgQEAgZ20yMGJfcG11X2luaXQoc3RydWN0
+IG52a21fcG11ICpwbXUpCiAKIAlwbXUtPmluaXRtc2dfcmVjZWl2ZWQgPSBmYWxzZTsKIAotCW52
+a21fZmFsY29uX2xvYWRfZG1lbShmYWxjb24sICZhcmdzLCBhZGRyX2FyZ3MsIHNpemVvZihhcmdz
+KSwgMCk7CisJbnZrbV9mYWxjb25fcGlvX3dyKGZhbGNvbiwgKHU4ICopJmFyZ3MsIDAsIDAsIERN
+RU0sIGFkZHJfYXJncywgc2l6ZW9mKGFyZ3MpLCAwLCBmYWxzZSk7CiAJbnZrbV9mYWxjb25fc3Rh
+cnQoZmFsY29uKTsKIAlyZXR1cm4gMDsKIH0KLS0gCjIuMzUuMQoK
+--0000000000001b9a0b05f36eba2d--
