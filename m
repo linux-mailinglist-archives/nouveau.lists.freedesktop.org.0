@@ -2,71 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 118506820C4
-	for <lists+nouveau@lfdr.de>; Tue, 31 Jan 2023 01:34:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 32D61686151
+	for <lists+nouveau@lfdr.de>; Wed,  1 Feb 2023 09:10:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C655810E2FE;
-	Tue, 31 Jan 2023 00:34:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6AF9C10E3B4;
+	Wed,  1 Feb 2023 08:10:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CA66A10E2FE
- for <nouveau@lists.freedesktop.org>; Tue, 31 Jan 2023 00:33:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1675125237;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=53MHgWs7Ugbg3eJ3sGE2EYx1+FLlBrKb6XWoMq74u/c=;
- b=DOX6p8kiwfMqy/6QGdMAlRyHCh9vr3BLRUwzk5EUa5tmsA6DbBNzk+sNWKg5OU107I2Y9E
- jgL4iizpu4Oqi4DDYlrqGsy4WGATx4pG7TtvxtY3IjzkKP1mDSEnTUmgpKLiB3IBQUgNT3
- rEk1jqwov5P3SFiujE/5cGHhQdHmI18=
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-435-Si2FQ208Pu-pKhiO0SHLng-1; Mon, 30 Jan 2023 19:33:56 -0500
-X-MC-Unique: Si2FQ208Pu-pKhiO0SHLng-1
-Received: by mail-ej1-f69.google.com with SMTP id
- xh12-20020a170906da8c00b007413144e87fso8458044ejb.14
- for <nouveau@lists.freedesktop.org>; Mon, 30 Jan 2023 16:33:56 -0800 (PST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C041610E37C;
+ Wed,  1 Feb 2023 08:10:38 +0000 (UTC)
+Received: by mail-ej1-x633.google.com with SMTP id gr7so24344450ejb.5;
+ Wed, 01 Feb 2023 00:10:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sAw/2Lb4WEMKODNRpea0RgUuW7spEUL/UcL2ikpdsPM=;
+ b=hypU2ywqUPnhOFmO53k3vWMtaI3TZk9w/pAiV2phxid8BLcmhkZuK41q9GCZhvKV4U
+ 4FAOXwwT1jJ8UXX7p9DBkJ6FiBkXRkRgMRGUVbmqizXWe1WW/yJxWJG49X3dwnUb3y6g
+ oDsp1vtU4rMVLRJV+Cg2QfEpBiQeivDtiRBzQA0L6Ks/OAa8NjlK4BUv1jQ8DEtELsDk
+ tlnIDtN+/JKx1I1e3XEblB03aMsxjz6GYdutVfrTzF5am6rYxqnU1LA/lA7yj0QVQqu+
+ YjP65yHGatxQtbF3C7VAGtHlIK+cJk9MwDVHTDLDYMYnUtrlbzTBJagHwxfnhSJwUNjH
+ CE+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=53MHgWs7Ugbg3eJ3sGE2EYx1+FLlBrKb6XWoMq74u/c=;
- b=AIow8F3Fhw6v7kvUR7u+WvuSBnfaG5Wb3JNHOFCNcQbYNxG94Ro3HcaAY/NC17GKLV
- sgDl60+YCkTnSIjhJvRTvv+PXpP7Pafhg6aNhethXtos08zQ8cZHAyNu+rAB1rB8jFKN
- 180oMiGkYy2eInQUJldOfwm2QKpw/HeyVJlKas78Q9b+AHe4Qft/Yvuh0WDZhDmGeWU/
- qJ9HhX8/1aCPpJPcMe/pZw79927DZb+9MPB2DAWjbiSmlmJ4Mkl8gHYAmJFExpgOJQia
- 3jUS639yqpr3X2hLZLXLUuBTlT3OzueaDkBtPGAoZMUoX8Cbqv7/wD8tU46E+oOS7GoW
- xGmA==
-X-Gm-Message-State: AO0yUKXbNrlD6/17L0wW4G1xMqBwkaVcwrBRcrsjzGLYC8qWEYEf0h2t
- E9CvtyU9chPqAxG6Tyk8FmwV/LRhRzSWYJIaHB3BTFj9tDZspNfuq3sc4BLJKvNHmWMsNBXYfTE
- pF4gpE0ticWOcwL/IJxxtTpVGSA==
-X-Received: by 2002:a17:906:71d7:b0:885:5682:7e52 with SMTP id
- i23-20020a17090671d700b0088556827e52mr8714916ejk.13.1675125235029; 
- Mon, 30 Jan 2023 16:33:55 -0800 (PST)
-X-Google-Smtp-Source: AK7set/wO+8MYY08YltsC1hKa6IHEpmDv7/lMdXNXozmLAGC2hPQ+we1ncHkUOY0TTO/pO6pkvhy0Q==
-X-Received: by 2002:a17:906:71d7:b0:885:5682:7e52 with SMTP id
- i23-20020a17090671d700b0088556827e52mr8714892ejk.13.1675125234722; 
- Mon, 30 Jan 2023 16:33:54 -0800 (PST)
-Received: from ?IPV6:2a02:810d:4b3f:de78:642:1aff:fe31:a15c?
- ([2a02:810d:4b3f:de78:642:1aff:fe31:a15c])
- by smtp.gmail.com with ESMTPSA id
- w20-20020a170906d21400b008897858bb06sm1879634ejz.119.2023.01.30.16.33.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 30 Jan 2023 16:33:54 -0800 (PST)
-Message-ID: <f93559f3-7c46-789a-8340-aa0138de2469@redhat.com>
-Date: Tue, 31 Jan 2023 00:38:18 +0100
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sAw/2Lb4WEMKODNRpea0RgUuW7spEUL/UcL2ikpdsPM=;
+ b=12t84DMyi5ZwkBkK+T+jHod/k4BjTvHjf8sw/c82XeeofjaPPr+A4/TTtiLBiYe/is
+ Z2oZ8GfRIuPejP6DYGytSw1w51fVuy04jLds+QU6yQD64wUndn+Tpk6Q03yO6w/R68YM
+ ntw3bRL89kpgwRwcCy2NS4MnHdH0oH1GtZI/k89MEK4ase7UxOQz+PnPOktppzlsGEhc
+ HxZJpptUD425EGMzxOXWPYh0egjV5ZuhdVI20YwMaxRCftNJonuZQphUEBiXy0n1t1jA
+ 0UohMc9Ud3pxAzrZfYSr4voEH7GFZTi/08j4EaYZBXD9sHKjy9dkQD/7+9yONzNeeC1z
+ zmJA==
+X-Gm-Message-State: AO0yUKVSYq2dgb5Q/3jmnO96PVFs+9/NGV7lpD+FAN62LaLBAV3/5BxR
+ FDyKfcIdbGdQzA1k4Ac7khewr8MF2rl4jg6Vmm0=
+X-Google-Smtp-Source: AK7set+9h23A/qVuAHRJqdAxWAXuK7e3mK/l4CvEdFLsZLVp6YEZc8fcyuPeZ7PdWPEF2EwqPFPsM2fTVnMzSM05ZfA=
+X-Received: by 2002:a17:906:2c53:b0:83d:2544:a11 with SMTP id
+ f19-20020a1709062c5300b0083d25440a11mr387344ejh.226.1675239037037; Wed, 01
+ Feb 2023 00:10:37 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Matthew Brost <matthew.brost@intel.com>
 References: <20230118061256.2689-1-dakr@redhat.com>
  <20230118061256.2689-6-dakr@redhat.com>
  <Y9MjSeMcsd18r9vM@DUT025-TGLU.fm.intel.com>
@@ -79,14 +57,13 @@ References: <20230118061256.2689-1-dakr@redhat.com>
  <bc523c5c-efe6-1a7f-b49a-e0867dc1413d@redhat.com>
  <15fb0179-c7c5-8a64-ed08-841189919f5e@redhat.com>
  <1840e9fb-fd1b-79b7-4238-54ae97333d0b@amd.com>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
 In-Reply-To: <1840e9fb-fd1b-79b7-4238-54ae97333d0b@amd.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+From: Dave Airlie <airlied@gmail.com>
+Date: Wed, 1 Feb 2023 18:10:24 +1000
+Message-ID: <CAPM=9txON8VCb3H7vDY_DOgtUg2Ad3mBvYVxgSMyZ1noOu-rBQ@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Subject: Re: [Nouveau] [PATCH drm-next 05/14] drm/nouveau: new VM_BIND uapi
  interfaces
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -100,282 +77,216 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: daniel@ffwll.ch, corbet@lwn.net, dri-devel@lists.freedesktop.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, mripard@kernel.org,
- bskeggs@redhat.com, jason@jlekstrand.net, nouveau@lists.freedesktop.org,
- airlied@redhat.com
+Cc: Matthew Brost <matthew.brost@intel.com>, jason@jlekstrand.net,
+ linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org, corbet@lwn.net,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ mripard@kernel.org, daniel@ffwll.ch, airlied@redhat.com, bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 1/30/23 14:02, Christian König wrote:
+On Mon, 30 Jan 2023 at 23:02, Christian K=C3=B6nig <christian.koenig@amd.co=
+m> wrote:
+>
 > Am 29.01.23 um 19:46 schrieb Danilo Krummrich:
->> On 1/27/23 22:09, Danilo Krummrich wrote:
->>> On 1/27/23 16:17, Christian König wrote:
->>>> Am 27.01.23 um 15:44 schrieb Danilo Krummrich:
->>>>> [SNIP]
->>>>>>>>
->>>>>>>> What you want is one component for tracking the VA allocations 
->>>>>>>> (drm_mm based) and a different component/interface for tracking 
->>>>>>>> the VA mappings (probably rb tree based).
->>>>>>>
->>>>>>> That's what the GPUVA manager is doing. There are gpuva_regions 
->>>>>>> which correspond to VA allocations and gpuvas which represent the 
->>>>>>> mappings. Both are tracked separately (currently both with a 
->>>>>>> separate drm_mm, though). However, the GPUVA manager needs to 
->>>>>>> take regions into account when dealing with mappings to make sure 
->>>>>>> the GPUVA manager doesn't propose drivers to merge over region 
->>>>>>> boundaries. Speaking from userspace PoV, the kernel wouldn't 
->>>>>>> merge mappings from different VKBuffer objects even if they're 
->>>>>>> virtually and physically contiguous.
->>>>>>
->>>>>> That are two completely different things and shouldn't be handled 
->>>>>> in a single component.
->>>>>
->>>>> They are different things, but they're related in a way that for 
->>>>> handling the mappings (in particular merging and sparse) the GPUVA 
->>>>> manager needs to know the VA allocation (or region) boundaries.
->>>>>
->>>>> I have the feeling there might be a misunderstanding. Userspace is 
->>>>> in charge to actually allocate a portion of VA space and manage it. 
->>>>> The GPUVA manager just needs to know about those VA space 
->>>>> allocations and hence keeps track of them.
->>>>>
->>>>> The GPUVA manager is not meant to be an allocator in the sense of 
->>>>> finding and providing a hole for a given request.
->>>>>
->>>>> Maybe the non-ideal choice of using drm_mm was implying something 
->>>>> else.
->>>>
->>>> Uff, well long story short that doesn't even remotely match the 
->>>> requirements. This way the GPUVA manager won't be usable for a whole 
->>>> bunch of use cases.
->>>>
->>>> What we have are mappings which say X needs to point to Y with this 
->>>> and hw dependent flags.
->>>>
->>>> The whole idea of having ranges is not going to fly. Neither with 
->>>> AMD GPUs and I strongly think not with Intels XA either.
->>>
->>> A range in the sense of the GPUVA manager simply represents a VA 
->>> space allocation (which in case of Nouveau is taken in userspace). 
->>> Userspace allocates the portion of VA space and lets the kernel know 
->>> about it. The current implementation needs that for the named 
->>> reasons. So, I think there is no reason why this would work with one 
->>> GPU, but not with another. It's just part of the design choice of the 
->>> manager.
->>>
->>> And I'm absolutely happy to discuss the details of the manager 
->>> implementation though.
->>>
->>>>
->>>>>> We should probably talk about the design of the GPUVA manager once 
->>>>>> more when this should be applicable to all GPU drivers.
->>>>>
->>>>> That's what I try to figure out with this RFC, how to make it 
->>>>> appicable for all GPU drivers, so I'm happy to discuss this. :-)
->>>>
->>>> Yeah, that was really good idea :) That proposal here is really far 
->>>> away from the actual requirements.
->>>>
->>>
->>> And those are the ones I'm looking for. Do you mind sharing the 
->>> requirements for amdgpu in particular?
->>>
->>>>>>> For sparse residency the kernel also needs to know the region 
->>>>>>> boundaries to make sure that it keeps sparse mappings around.
->>>>>>
->>>>>> What?
->>>>>
->>>>> When userspace creates a new VKBuffer with the 
->>>>> VK_BUFFER_CREATE_SPARSE_BINDING_BIT the kernel may need to create 
->>>>> sparse mappings in order to ensure that using this buffer without 
->>>>> any memory backed mappings doesn't fault the GPU.
->>>>>
->>>>> Currently, the implementation does this the following way:
->>>>>
->>>>> 1. Userspace creates a new VKBuffer and hence allocates a portion 
->>>>> of the VA space for it. It calls into the kernel indicating the new 
->>>>> VA space region and the fact that the region is sparse.
->>>>>
->>>>> 2. The kernel picks up the region and stores it in the GPUVA 
->>>>> manager, the driver creates the corresponding sparse mappings / 
->>>>> page table entries.
->>>>>
->>>>> 3. Userspace might ask the driver to create a couple of memory 
->>>>> backed mappings for this particular VA region. The GPUVA manager 
->>>>> stores the mapping parameters, the driver creates the corresponding 
->>>>> page table entries.
->>>>>
->>>>> 4. Userspace might ask to unmap all the memory backed mappings from 
->>>>> this particular VA region. The GPUVA manager removes the mapping 
->>>>> parameters, the driver cleans up the corresponding page table 
->>>>> entries. However, the driver also needs to re-create the sparse 
->>>>> mappings, since it's a sparse buffer, hence it needs to know the 
->>>>> boundaries of the region it needs to create the sparse mappings in.
->>>>
->>>> Again, this is not how things are working. First of all the kernel 
->>>> absolutely should *NOT* know about those regions.
->>>>
->>>> What we have inside the kernel is the information what happens if an 
->>>> address X is accessed. On AMD HW this can be:
->>>>
->>>> 1. Route to the PCIe bus because the mapped BO is stored in system 
->>>> memory.
->>>> 2. Route to the internal MC because the mapped BO is stored in local 
->>>> memory.
->>>> 3. Route to other GPUs in the same hive.
->>>> 4. Route to some doorbell to kick of other work.
->>>> ...
->>>> x. Ignore write, return 0 on reads (this is what is used for sparse 
->>>> mappings).
->>>> x+1. Trigger a recoverable page fault. This is used for things like 
->>>> SVA.
->>>> x+2. Trigger a non-recoverable page fault. This is used for things 
->>>> like unmapped regions where access is illegal.
->>>>
->>>> All this is plus some hw specific caching flags.
->>>>
->>>> When Vulkan allocates a sparse VKBuffer what should happen is the 
->>>> following:
->>>>
->>>> 1. The Vulkan driver somehow figures out a VA region A..B for the 
->>>> buffer. This can be in userspace (libdrm_amdgpu) or kernel (drm_mm), 
->>>> but essentially is currently driver specific.
->>>
->>> Right, for Nouveau we have this in userspace as well.
->>>
->>>>
->>>> 2. The kernel gets a request to map the VA range A..B as sparse, 
->>>> meaning that it updates the page tables from A..B with the sparse 
->>>> setting.
->>>>
->>>> 3. User space asks kernel to map a couple of memory backings at 
->>>> location A+1, A+10, A+15 etc....
->>>>
->>>> 4. The VKBuffer is de-allocated, userspace asks kernel to update 
->>>> region A..B to not map anything (usually triggers a non-recoverable 
->>>> fault).
->>>
->>> Until here this seems to be identical to what I'm doing.
->>>
->>> It'd be interesting to know how amdgpu handles everything that 
->>> potentially happens between your 3) and 4). More specifically, how 
->>> are the page tables changed when memory backed mappings are mapped on 
->>> a sparse range? What happens when the memory backed mappings are 
->>> unmapped, but the VKBuffer isn't de-allocated, and hence sparse 
->>> mappings need to be re-deployed?
->>>
->>> Let's assume the sparse VKBuffer (and hence the VA space allocation) 
->>> is pretty large. In Nouveau the corresponding PTEs would have a 
->>> rather huge page size to cover this. Now, if small memory backed 
->>> mappings are mapped to this huge sparse buffer, in Nouveau we'd 
->>> allocate a new PT with a corresponding smaller page size overlaying 
->>> the sparse mappings PTEs.
->>>
->>> How would this look like in amdgpu?
->>>
->>>>
->>>> When you want to unify this between hw drivers I strongly suggest to 
->>>> completely start from scratch once more.
->>>>
->>
->> I just took some time digging into amdgpu and, surprisingly, aside 
->> from the gpuva_regions it seems like amdgpu basically does exactly the 
->> same as I do in the GPU VA manager. As explained, those region 
->> boundaries are needed for merging only and, depending on the driver, 
->> might be useful for sparse mappings.
->>
->> For drivers that don't intend to merge at all and (somehow) are 
->> capable of dealing with sparse regions without knowing the sparse 
->> region's boundaries, it'd be easy to make those gpuva_regions optional.
-> 
-> Yeah, but this then defeats the approach of having the same hw 
+> > On 1/27/23 22:09, Danilo Krummrich wrote:
+> >> On 1/27/23 16:17, Christian K=C3=B6nig wrote:
+> >>> Am 27.01.23 um 15:44 schrieb Danilo Krummrich:
+> >>>> [SNIP]
+> >>>>>>>
+> >>>>>>> What you want is one component for tracking the VA allocations
+> >>>>>>> (drm_mm based) and a different component/interface for tracking
+> >>>>>>> the VA mappings (probably rb tree based).
+> >>>>>>
+> >>>>>> That's what the GPUVA manager is doing. There are gpuva_regions
+> >>>>>> which correspond to VA allocations and gpuvas which represent the
+> >>>>>> mappings. Both are tracked separately (currently both with a
+> >>>>>> separate drm_mm, though). However, the GPUVA manager needs to
+> >>>>>> take regions into account when dealing with mappings to make sure
+> >>>>>> the GPUVA manager doesn't propose drivers to merge over region
+> >>>>>> boundaries. Speaking from userspace PoV, the kernel wouldn't
+> >>>>>> merge mappings from different VKBuffer objects even if they're
+> >>>>>> virtually and physically contiguous.
+> >>>>>
+> >>>>> That are two completely different things and shouldn't be handled
+> >>>>> in a single component.
+> >>>>
+> >>>> They are different things, but they're related in a way that for
+> >>>> handling the mappings (in particular merging and sparse) the GPUVA
+> >>>> manager needs to know the VA allocation (or region) boundaries.
+> >>>>
+> >>>> I have the feeling there might be a misunderstanding. Userspace is
+> >>>> in charge to actually allocate a portion of VA space and manage it.
+> >>>> The GPUVA manager just needs to know about those VA space
+> >>>> allocations and hence keeps track of them.
+> >>>>
+> >>>> The GPUVA manager is not meant to be an allocator in the sense of
+> >>>> finding and providing a hole for a given request.
+> >>>>
+> >>>> Maybe the non-ideal choice of using drm_mm was implying something
+> >>>> else.
+> >>>
+> >>> Uff, well long story short that doesn't even remotely match the
+> >>> requirements. This way the GPUVA manager won't be usable for a whole
+> >>> bunch of use cases.
+> >>>
+> >>> What we have are mappings which say X needs to point to Y with this
+> >>> and hw dependent flags.
+> >>>
+> >>> The whole idea of having ranges is not going to fly. Neither with
+> >>> AMD GPUs and I strongly think not with Intels XA either.
+> >>
+> >> A range in the sense of the GPUVA manager simply represents a VA
+> >> space allocation (which in case of Nouveau is taken in userspace).
+> >> Userspace allocates the portion of VA space and lets the kernel know
+> >> about it. The current implementation needs that for the named
+> >> reasons. So, I think there is no reason why this would work with one
+> >> GPU, but not with another. It's just part of the design choice of the
+> >> manager.
+> >>
+> >> And I'm absolutely happy to discuss the details of the manager
+> >> implementation though.
+> >>
+> >>>
+> >>>>> We should probably talk about the design of the GPUVA manager once
+> >>>>> more when this should be applicable to all GPU drivers.
+> >>>>
+> >>>> That's what I try to figure out with this RFC, how to make it
+> >>>> appicable for all GPU drivers, so I'm happy to discuss this. :-)
+> >>>
+> >>> Yeah, that was really good idea :) That proposal here is really far
+> >>> away from the actual requirements.
+> >>>
+> >>
+> >> And those are the ones I'm looking for. Do you mind sharing the
+> >> requirements for amdgpu in particular?
+> >>
+> >>>>>> For sparse residency the kernel also needs to know the region
+> >>>>>> boundaries to make sure that it keeps sparse mappings around.
+> >>>>>
+> >>>>> What?
+> >>>>
+> >>>> When userspace creates a new VKBuffer with the
+> >>>> VK_BUFFER_CREATE_SPARSE_BINDING_BIT the kernel may need to create
+> >>>> sparse mappings in order to ensure that using this buffer without
+> >>>> any memory backed mappings doesn't fault the GPU.
+> >>>>
+> >>>> Currently, the implementation does this the following way:
+> >>>>
+> >>>> 1. Userspace creates a new VKBuffer and hence allocates a portion
+> >>>> of the VA space for it. It calls into the kernel indicating the new
+> >>>> VA space region and the fact that the region is sparse.
+> >>>>
+> >>>> 2. The kernel picks up the region and stores it in the GPUVA
+> >>>> manager, the driver creates the corresponding sparse mappings /
+> >>>> page table entries.
+> >>>>
+> >>>> 3. Userspace might ask the driver to create a couple of memory
+> >>>> backed mappings for this particular VA region. The GPUVA manager
+> >>>> stores the mapping parameters, the driver creates the corresponding
+> >>>> page table entries.
+> >>>>
+> >>>> 4. Userspace might ask to unmap all the memory backed mappings from
+> >>>> this particular VA region. The GPUVA manager removes the mapping
+> >>>> parameters, the driver cleans up the corresponding page table
+> >>>> entries. However, the driver also needs to re-create the sparse
+> >>>> mappings, since it's a sparse buffer, hence it needs to know the
+> >>>> boundaries of the region it needs to create the sparse mappings in.
+> >>>
+> >>> Again, this is not how things are working. First of all the kernel
+> >>> absolutely should *NOT* know about those regions.
+> >>>
+> >>> What we have inside the kernel is the information what happens if an
+> >>> address X is accessed. On AMD HW this can be:
+> >>>
+> >>> 1. Route to the PCIe bus because the mapped BO is stored in system
+> >>> memory.
+> >>> 2. Route to the internal MC because the mapped BO is stored in local
+> >>> memory.
+> >>> 3. Route to other GPUs in the same hive.
+> >>> 4. Route to some doorbell to kick of other work.
+> >>> ...
+> >>> x. Ignore write, return 0 on reads (this is what is used for sparse
+> >>> mappings).
+> >>> x+1. Trigger a recoverable page fault. This is used for things like
+> >>> SVA.
+> >>> x+2. Trigger a non-recoverable page fault. This is used for things
+> >>> like unmapped regions where access is illegal.
+> >>>
+> >>> All this is plus some hw specific caching flags.
+> >>>
+> >>> When Vulkan allocates a sparse VKBuffer what should happen is the
+> >>> following:
+> >>>
+> >>> 1. The Vulkan driver somehow figures out a VA region A..B for the
+> >>> buffer. This can be in userspace (libdrm_amdgpu) or kernel (drm_mm),
+> >>> but essentially is currently driver specific.
+> >>
+> >> Right, for Nouveau we have this in userspace as well.
+> >>
+> >>>
+> >>> 2. The kernel gets a request to map the VA range A..B as sparse,
+> >>> meaning that it updates the page tables from A..B with the sparse
+> >>> setting.
+> >>>
+> >>> 3. User space asks kernel to map a couple of memory backings at
+> >>> location A+1, A+10, A+15 etc....
+> >>>
+> >>> 4. The VKBuffer is de-allocated, userspace asks kernel to update
+> >>> region A..B to not map anything (usually triggers a non-recoverable
+> >>> fault).
+> >>
+> >> Until here this seems to be identical to what I'm doing.
+> >>
+> >> It'd be interesting to know how amdgpu handles everything that
+> >> potentially happens between your 3) and 4). More specifically, how
+> >> are the page tables changed when memory backed mappings are mapped on
+> >> a sparse range? What happens when the memory backed mappings are
+> >> unmapped, but the VKBuffer isn't de-allocated, and hence sparse
+> >> mappings need to be re-deployed?
+> >>
+> >> Let's assume the sparse VKBuffer (and hence the VA space allocation)
+> >> is pretty large. In Nouveau the corresponding PTEs would have a
+> >> rather huge page size to cover this. Now, if small memory backed
+> >> mappings are mapped to this huge sparse buffer, in Nouveau we'd
+> >> allocate a new PT with a corresponding smaller page size overlaying
+> >> the sparse mappings PTEs.
+> >>
+> >> How would this look like in amdgpu?
+> >>
+> >>>
+> >>> When you want to unify this between hw drivers I strongly suggest to
+> >>> completely start from scratch once more.
+> >>>
+> >
+> > I just took some time digging into amdgpu and, surprisingly, aside
+> > from the gpuva_regions it seems like amdgpu basically does exactly the
+> > same as I do in the GPU VA manager. As explained, those region
+> > boundaries are needed for merging only and, depending on the driver,
+> > might be useful for sparse mappings.
+> >
+> > For drivers that don't intend to merge at all and (somehow) are
+> > capable of dealing with sparse regions without knowing the sparse
+> > region's boundaries, it'd be easy to make those gpuva_regions optional.
+>
+> Yeah, but this then defeats the approach of having the same hw
 > independent interface/implementation for all drivers.
 
-That's probably a question of interpretation and I'd rather see it as an 
-optional feature. Probably 80% to 90% of the code is for tracking 
-mappings, generating split / merge steps on bind / unbind and connect 
-the mappings to GEM objects. This would be the same for all the drivers 
-and some might opt-in for using the feature of additionally tracking 
-regions on top and other won't.
+I think you are running a few steps ahead here. The plan isn't to have
+an independent interface, it's to provide a set of routines and
+tracking that will be consistent across drivers, so that all drivers
+once using them will operate in mostly the same fashion with respect
+to GPU VA tracking and VA/BO lifetimes. Already in the tree we have
+amdgpu and freedreno which I think end up operating slightly different
+around lifetimes. I'd like to save future driver writers the effort of
+dealing with those decisions and this should drive their user api
+design so to enable vulkan sparse bindings.
 
-> 
-> Let me ask the other way around how does the hw implementation of a 
-> sparse mapping looks like for NVidia based hardware?
-> 
-> For newer AMD hw its a flag in the page tables, for older hw its a 
-> register where you can specify ranges A..B. We don't really support the 
-> later with AMDGPU any more, but from this interface I would guess you 
-> have the second variant, right?
+Now if merging is a feature that makes sense to one driver maybe it
+makes sense to all, however there may be reasons amdgpu gets away
+without merging that other drivers might not benefit from, there might
+also be a benefit to amdgpu from merging that you haven't looked at
+yet, so I think we could leave merging as an optional extra driver
+knob here. The userspace API should operate the same, it would just be
+the gpu pagetables that would end up different sizes.
 
-No, it's a flag in the PTEs as well.
-
-However, for a rather huge sparse region the sparse PTEs might have a 
-different (larger) page size than the PTEs of the (smaller) memory 
-backed mappings. Hence, it might be that when trying to map a small 
-memory backed mapping within a huge sparse region, we can *not* just 
-change the sparse PTE to point to actual memory, but rather create a new 
-PT with a smaller page size kind of overlaying the page table containing 
-the sparse PTEs with a greater page size.
-
-In such a situation, tracking the whole (sparse) region (representing 
-the whole VA allocation) separately comes in handy.
-
-And of course, as mentioned, tracking regions gives us the bounds for 
-merging, which e.g. might be useful to pick a greater page size for 
-merged mappings. It might also keep the amount of mappings to track down 
-by a little bit, however, this would probably only be relevant if we 
-actually have quite a few to merge.
-
-> 
-> Christian.
-> 
->>
->>>> First of all don't think about those mappings as VMAs, that won't 
->>>> work because VMAs are usually something large. Think of this as 
->>>> individual PTEs controlled by the application. similar how COW 
->>>> mappings and struct pages are handled inside the kernel.
->>>
->>> Why do you consider tracking single PTEs superior to tracking VMAs? 
->>> All the properties for a page you mentioned above should be equal for 
->>> the entirety of pages of a whole (memory backed) mapping, aren't they?
->>>
->>>>
->>>> Then I would start with the VA allocation manager. You could 
->>>> probably base that on drm_mm. We handle it differently in amdgpu 
->>>> currently, but I think this is something we could change.
->>>
->>> It was not my intention to come up with an actual allocator for the 
->>> VA space in the sense of actually finding a free and fitting hole in 
->>> the VA space.
->>>
->>> For Nouveau (and XE, I think) we have this in userspace and from what 
->>> you've written previously I thought the same applies for amdgpu?
->>>
->>>>
->>>> Then come up with something close to the amdgpu VM system. I'm 
->>>> pretty sure that should work for Nouveau and Intel XA as well. In 
->>>> other words you just have a bunch of very very small structures 
->>>> which represents mappings and a larger structure which combine all 
->>>> mappings of a specific type, e.g. all mappings of a BO or all sparse 
->>>> mappings etc...
->>>
->>> Considering what you wrote above I assume that small structures / 
->>> mappings in this paragraph refer to PTEs.
->>>
->>> Immediately, I don't really see how this fine grained resolution of 
->>> single PTEs would help implementing this in Nouveau. Actually, I 
->>> think it would even complicate the handling of PTs, but I would need 
->>> to think about this a bit more.
->>>
->>>>
->>>> Merging of regions is actually not mandatory. We don't do it in 
->>>> amdgpu and can live with the additional mappings pretty well. But I 
->>>> think this can differ between drivers.
->>>>
->>>> Regards,
->>>> Christian.
->>>>
->>
-> 
-
+Dave.
