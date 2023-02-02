@@ -1,74 +1,130 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA600686EDE
-	for <lists+nouveau@lfdr.de>; Wed,  1 Feb 2023 20:24:35 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id EE7D3687CBE
+	for <lists+nouveau@lfdr.de>; Thu,  2 Feb 2023 12:54:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BE30910E18F;
-	Wed,  1 Feb 2023 19:24:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9395C10E17C;
+	Thu,  2 Feb 2023 11:54:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9A35110E18F
- for <nouveau@lists.freedesktop.org>; Wed,  1 Feb 2023 19:24:29 +0000 (UTC)
-Received: by mail-ej1-x633.google.com with SMTP id me3so54490623ejb.7
- for <nouveau@lists.freedesktop.org>; Wed, 01 Feb 2023 11:24:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=poo4tsXckRFrYwGi5N8FZZfjWRpt0+is5KS+2Zd2Jt4=;
- b=eZmHGchBgXT3XVl46I30x59CAAK9BnGHOTL7cH0wURQ7y2u9DkSeK/rk+X/NE3a/3R
- poQcPwA6LnrsElUxwy56FMgUopmbSaJk9h+sxFvEtgqiwikuNfooHjItZViIGdDuQRRF
- QPTM6itx2CYNA9ayOy9cak0ST3l8IdOYnucgPO4OTvC1UE+D4+/mjM72NqIp0gMLEhEI
- EKFCqaH1+N0h1EsU4Y27h9QOiYDeVLOie5O5BkL1MO9FPRsxYIj2zDG7GL3/LpU/biwg
- FfCuZ2dKkFRH1l7uzsZf2Tml2EU6UMHZJ2xQblL+0rxxcqZakrui+0aNk+f/w/57mnRr
- zT0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=poo4tsXckRFrYwGi5N8FZZfjWRpt0+is5KS+2Zd2Jt4=;
- b=LR0QM9dLvZVRJI28FBS3ZcVWbiDfXS3gTo2BycJW9U+gMFVRm0yTETE4UzFrd3Ar7R
- lfKbEW4QNXO0hwQOxLG4FNLM7QT474u+edLoRHH26ZcHmwqC27tl5RgwQfl4uZd3NIrQ
- NWE0xKUECxdNagq4nmitcsE6wuepEiLHHUGrSHF2YbVob0dSSBEYp4VqnWgS81xho6H7
- GJsm9kn96VCoidjErHMX/HP/cRs9g7TjCqw3oTlmoJvnb77TXhAGbaEZfrIvbG2sYLuh
- osUmVeBIggLEM065PCMB7PxCDGOo0vkyPrfwGiqjho4ZEFvwn1D9sZ2GP0r3cLwDVCE4
- JIjw==
-X-Gm-Message-State: AO0yUKWCLdZbWVT1Q/TLYawyJmgLTYLQ7acFB1mJ94xvPAprqd3xPzHO
- TRS9nJEynrZ527bbJ/Ehh/o=
-X-Google-Smtp-Source: AK7set/ctkKx13DC24Sh9RE3eedTVbueLsS2BP/eQ/OqhYUA24xbDfbRYX1nrp86sIKkzDH3VDi8dw==
-X-Received: by 2002:a17:906:7fd8:b0:87b:d376:b850 with SMTP id
- r24-20020a1709067fd800b0087bd376b850mr3430008ejs.10.1675279467864; 
- Wed, 01 Feb 2023 11:24:27 -0800 (PST)
-Received: from [192.168.178.20] (host-95-250-162-30.retail.telecomitalia.it.
- [95.250.162.30]) by smtp.gmail.com with ESMTPSA id
- v24-20020a1709067d9800b008857fe10c5csm6458308ejo.126.2023.02.01.11.24.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Feb 2023 11:24:26 -0800 (PST)
-Message-ID: <7a8a4290-eb81-a848-8386-c080523fb3bd@gmail.com>
-Date: Wed, 1 Feb 2023 20:24:24 +0100
-MIME-Version: 1.0
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02on2048.outbound.protection.outlook.com [40.107.96.48])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 52DB410E0CB;
+ Thu,  2 Feb 2023 11:54:04 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=mm8vyBUxkmnYngmBRSZBgfldVz0/RwCb+2urj2JT4nhPfsOY3T3CSjIMhePQfMgzPFUmE4u47cgwNUJnwCZgemm+BsoeW0LsMNrXvJ3/75AXiIRwTm/3gHYOH17hw0A8DXFSeI39yLBeHyBvCTp4hvVdbyY+izd+JH5YNbutHiKqo9UCQqn4zkF1bBHgVG8pbDN/s2KZPVqIp6o9kdYXooRjP8blHfKSWdjwdxybVG1q9XGpArEHLyLwvlPgHz3QfsdG86g3Jh8NoF++eT/bIP9nmODdMZQebJDiJqO4VeM3vyIaXPfItDn4e8sfScVA3J7i3oiRMEa2kud4gpvE+w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sd1++6eH4bibxHvS2TgmZTSEGZnGndGrqiBvt7ElW8o=;
+ b=Jano7tyMsbOkOm8aW9hWci5fuZ7Jj8lgY1jo2jb6XXjEn1Jw/vCysIgVnF+A0lQ0O1JHQkpB0erjQ59ScZWMHNi5hri8Xbf3UxuY09nwaQ5E299w8shFtz/vSNF9NHqMfFZGN1F9ZmqGrFE6U9+bucIx1ETDU/CIfo9cUBhOwv3FU0ENR9t0P/nLag56Hkk8MA/tG7LdcrLzgXOxZ0XMWZ3egB5KlN+5H54Y/RtPXg6nqjy1bhV4R7Z99TGYvEQmB3F/x7o89x6ffKxc0gwuHZQ90IE968XFg7cIUUOafrgjcsGy+Shnx+vt6ct63v4zc4Mf/NUxCEaXcPUz76DP6A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sd1++6eH4bibxHvS2TgmZTSEGZnGndGrqiBvt7ElW8o=;
+ b=izURMIZ6FXHySnOFKKSGAQSXz11quC7UCGXIjwSbAwT+qkpyey6pTaAIzLAPjtxV+cTA3AY3iX3Vp+JXZyHlrZAus97U+Ngln6f7zyJAcyspqoBCS28NF+OnVSJXHMytTu1G2PQFaIwTe1QaaIcFbGm8f40doP5IDgEc6mymdYI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BYAPR12MB3589.namprd12.prod.outlook.com (2603:10b6:a03:df::29)
+ by SA1PR12MB8162.namprd12.prod.outlook.com (2603:10b6:806:33a::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.36; Thu, 2 Feb
+ 2023 11:54:00 +0000
+Received: from BYAPR12MB3589.namprd12.prod.outlook.com
+ ([fe80::500a:d02f:5ceb:4221]) by BYAPR12MB3589.namprd12.prod.outlook.com
+ ([fe80::500a:d02f:5ceb:4221%7]) with mapi id 15.20.6043.030; Thu, 2 Feb 2023
+ 11:54:00 +0000
+Message-ID: <a1c526e0-0df7-12cb-c5a1-06e9cd0d876b@amd.com>
+Date: Thu, 2 Feb 2023 12:53:52 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.0
-To: Lyude Paul <lyude@redhat.com>, Greg KH <gregkh@linuxfoundation.org>
-References: <20220819200928.401416-1-kherbst@redhat.com>
- <CAHSpYy0HAifr4f+z64h+xFUmMNbB4hCR1r2Z==TsB4WaHatQqg@mail.gmail.com>
- <CACO55tv0jO2TmuWcwFiAUQB-__DZVwhv7WNN9MfgMXV053gknw@mail.gmail.com>
- <CAHSpYy117N0A1QJKVNmFNii3iL9mU71_RusiUo5ZAMcJZciM-g@mail.gmail.com>
- <cdfc26b5-c045-5f93-b553-942618f0983a@gmail.com> <Y9VgjLneuqkl+Y87@kroah.com>
- <Y9V8UoUHm3rHcDkc@eldamar.lan>
- <51511ea3-431f-a45c-1328-5d1447e5169b@gmail.com> <Y9eWhGj/ecjUcYO/@kroah.com>
- <9e4cb1d818e4ce04c3e465a397e5652349e3938a.camel@redhat.com>
-From: Computer Enthusiastic <computer.enthusiastic@gmail.com>
-In-Reply-To: <9e4cb1d818e4ce04c3e465a397e5652349e3938a.camel@redhat.com>
+ Thunderbird/102.4.2
+Content-Language: en-US
+To: Dave Airlie <airlied@gmail.com>
+References: <20230118061256.2689-1-dakr@redhat.com>
+ <20230118061256.2689-6-dakr@redhat.com>
+ <Y9MjSeMcsd18r9vM@DUT025-TGLU.fm.intel.com>
+ <7c046ff9-728d-7634-9d77-8536308c7481@redhat.com>
+ <c2256c7d-e768-ae3f-d465-b9f8080d111b@amd.com>
+ <2427a918-5348-d1ef-ccae-a29c1ff33c83@redhat.com>
+ <a214b28b-043c-a8bb-69da-b4d8216fce56@amd.com>
+ <3a76bfa9-8ee5-a7d9-b9fb-a98181baec0b@redhat.com>
+ <49ac3f95-6eda-9009-4b28-0167213301b2@amd.com>
+ <bc523c5c-efe6-1a7f-b49a-e0867dc1413d@redhat.com>
+ <15fb0179-c7c5-8a64-ed08-841189919f5e@redhat.com>
+ <1840e9fb-fd1b-79b7-4238-54ae97333d0b@amd.com>
+ <CAPM=9txON8VCb3H7vDY_DOgtUg2Ad3mBvYVxgSMyZ1noOu-rBQ@mail.gmail.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <CAPM=9txON8VCb3H7vDY_DOgtUg2Ad3mBvYVxgSMyZ1noOu-rBQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH] nouveau: explicitly wait on the fence in
- nouveau_bo_move_m2mf
+X-ClientProxiedBy: FR0P281CA0103.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a9::16) To BYAPR12MB3589.namprd12.prod.outlook.com
+ (2603:10b6:a03:df::29)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BYAPR12MB3589:EE_|SA1PR12MB8162:EE_
+X-MS-Office365-Filtering-Correlation-Id: 448a0337-5161-438a-d52a-08db05142c39
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: S6Bj/m2+OtYEBE2brnQL5lu3Z1fSMxTXNOKNwjXgVrazPr9w8kpLab0oqA5AcJMGK1xZdNQ8kLvMN1EQHwVas7eahKOYvAe69DuiZ1mU14Emj1GXAeIQgbP+Oap6PpbOrgb3Racgd1hyOlxa+ZVLAGHkgIeaD1rOKfOouZRKT6mTPWRudIqLroBl+LnekfAGpoWHXVVXeT9m8YDKli6wfRhw7hRp7wrbEAIg67h164t1TiHHdqBwQwlaEavaow62vcZDSeIzfWIEJ5uUTO99qYSpL28yWMCGEE5UGBcUa9Ah703M/TA3zrgepdoDdbbKfggE9t/kmjfZ3gQEvSd9v048rTkWKeXr/lYyayqJfC/H62NLrefiLul0mLfsgXJhb31wRN8nxBYrskWIJeyeFCwRSO5L6L/1z8vw73mMhJo+Gh5qolscr7sR+pDIsqurTYONouyQqeFoINTsvz+JyJF8rphsAWaB6+b615b0r0DjV9DrdEfiFcMGBfJuQrfKiERCeKsuPh8QExnsk/2dCl3fgFx55JnJ1LGW92c7mmS7dhOl2+1n9WlDhjC+KYVT/1iKA5Xj2YEUk0kK0sb0o+8VOQgxXfoivnZZJfcHApZKNaeQHuju1U1+cgf2jvuN3bBinqk890m8PgX+Hq+Vn3mA42JL21vlb9qQZIWp2o78CkpnEI2nJ4DZVNw+oYhGPK6rtnvud2ufnKMQjnUB60A9/CCOt/hAAw/xwtsMTGc=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BYAPR12MB3589.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230025)(4636009)(136003)(366004)(396003)(346002)(39860400002)(376002)(451199018)(31686004)(83380400001)(66556008)(8676002)(2616005)(66946007)(6916009)(66899018)(41300700001)(38100700002)(66476007)(26005)(6512007)(4326008)(186003)(2906002)(8936002)(6666004)(316002)(31696002)(86362001)(6506007)(6486002)(478600001)(7416002)(54906003)(5660300002)(36756003)(43740500002)(45980500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NFU5eUcxTGJZRk5SSFhNN3VpQlU0d0ZUdlRibmpubkVLMXhuZiszNkEwcTFR?=
+ =?utf-8?B?SXVFS3ZjUmswNDVBUDBTTEFKb0RQeDJlek1XM3J2UXp4YVhHanFXZ1pqN3Mx?=
+ =?utf-8?B?SDZibFd0ODFmc1dUcXB4dTlGckNxd1hBeFhzSjBzQ2dXRlg1V2xjRVJpbHcz?=
+ =?utf-8?B?RHNrdmR6NmNCSVVKSElMU3pQa3hjazdMN3dYQXFIQldZVjZtN20wUHpxdVpY?=
+ =?utf-8?B?eEFWQlkwVjVzdEc1Y2x6R3VZSzlKZGFDLzdZNFlSSHFtQ1hlWUhoNnYxSjlq?=
+ =?utf-8?B?c1MzYUpQTzh3L2NTWjcvV296VHp0T3RobUNiVlI1aUJFZEhqU25BSElHdWhP?=
+ =?utf-8?B?STNHMVExRW1RZlVsK1ZlNGovSEt3bG5KZm12eUlaemNnSWxxREZ6T3dqNHhl?=
+ =?utf-8?B?UkphWThHT1lSSkVFRkY5bjF2RnZXYVQ4bHVvb3o4NWVkcW15QzBsRGVDWEFh?=
+ =?utf-8?B?amtKU3g0RnRhT24vRkhjNW8yUS9EYzROZFEzRklyWTBqelV6TnlBTXJ3RVhz?=
+ =?utf-8?B?bmRiNGVTT0pTWUx5TDRaOXVubUhXVy8xV2NDaGVyQlh2YkpzN2JwVmNiU0Uv?=
+ =?utf-8?B?OHR6QXhES1RpemYyTlVlWnFZNGpDV2RDaEs5YjNrdENXeEN6SGZlWk15WkVD?=
+ =?utf-8?B?NlR2VTRCL1RUV1FxYnVZUy9JYVBYUTBFb2pYZVkwdHpCTmY2WWRCQ1I5YUo1?=
+ =?utf-8?B?NXcrR1JwRFptbGRmZ3Q3cURHNUg1anVwZTZSZEJEV1Bra0lTZCsvdjNITTlE?=
+ =?utf-8?B?ZnZwQzFSWDZTUy9XQy81YlZpSUwvSmsxTjBjTnk0ZGNuVGN2Y0dBNU51WVJR?=
+ =?utf-8?B?V3k2NUFoODdwOFdsTnNpTXUxczRNL2lNUUNma0JKZUt6Sm5vc09FMnFYNTJF?=
+ =?utf-8?B?dDhXNDB2ek93QUtLQis0ekJKdXRFcTloUkM2Y2EyVzRjUGFqOEN3akxSVDJG?=
+ =?utf-8?B?ZkhrSlNHMVFYNVpYV0tMVDZrYjIwNU5WVEdTYjFoekRPTVIyU0ZPL1gwNHVu?=
+ =?utf-8?B?dTRZeDgxL2Foem5VeU11alFHTDNreWsxM3lpK3gxK3MxQjN3ejdRTUNkaTJS?=
+ =?utf-8?B?K2F0T2NKdXgxVC9rQ1NrMUJHZjJBdFJTN2RsaGZQVU9BSWgxbFp5ajMxSW95?=
+ =?utf-8?B?clFCK0FQSWpTTjZhS1dCMFpXWUhUODVDcGlsMEdxM0lGYUMvOHVReDR1NFpZ?=
+ =?utf-8?B?bUVDb3ZGcGUvRUdoMWcxOE5DWnRoaXhjQnJ0NXBHUytlWUJDTVZhcUwwUmo4?=
+ =?utf-8?B?UUM3N0o2UWxTZkRJbXkxUklTMUE3OTBQZGg4eDRQQ2hyWFNMeTFML2JiUTRt?=
+ =?utf-8?B?bDl3SGFMTUFBSm5tQUthcnJ2NTcrQkI0VnVoaEdDSFBpUFJ3UTlPYWRSSW16?=
+ =?utf-8?B?MzcyRm45dXJpU3BLZXR2Nm56MXEyOFlNUEFQN1U0Vm5PVHBBSGF0Qi9Xcnhw?=
+ =?utf-8?B?WnZwS3JBWERrQU1wbTBla20zbzVwRm11SkdaTlNMZlJZZUNmQnVvaFFLc2No?=
+ =?utf-8?B?dDZ5OXdZaTNLZEhROFBWK1ZqZHp0a0Y2N1FLeGV2dGwyTmNDUlhBdngvaGgw?=
+ =?utf-8?B?dEJ5V3JkSXcwdTJ0U20zTUg1dXN3K2tvMmZIdzFaanlWM25Sby9nc3UzdnJj?=
+ =?utf-8?B?OFMrWTdlS3RDZVRrZnBCWmUvVmFDWWN5WkIzOGxQL3BaWWluM1M0ejhKK2l2?=
+ =?utf-8?B?OWhtUzdkVGdybTFpVGswSnFyN3h1ZWlIOWMyVnVhSldDYnorV3c5V0JmZlNk?=
+ =?utf-8?B?czVNZ003ODl6SlNMYkxNWFZBWWplVWQ4eUpBNUg4ZVpJcktOdHhTcEZXWUo4?=
+ =?utf-8?B?SVJVRU9oV0gzMWc5Wm82T2RiWmhSRkVxTHJNZ3JvOEM2ZU5JV21SSURhbjBP?=
+ =?utf-8?B?dVNmejFtN09iNHkvZmJSTlhOZ2trTGlLRjBZYmFOQlZpV0RZSG4wQ2p3MXBT?=
+ =?utf-8?B?dnJURWJjdm5IczFsdjJFL3BFZ2xXbDlKUFJsRzdYTUNORGVJVkFXc1JIQStI?=
+ =?utf-8?B?VzN6MTNtbExwQ1pvVlVuaTlueUF2WU51RnFIblFyS3lGVUFQTlB1cHBycEVi?=
+ =?utf-8?B?QmpWRXViTkJ6MFAyUUJGWHpZaXJRa2M0K0M2NDFCZEp3dFM4VEE1SjQ3MmQ1?=
+ =?utf-8?Q?ArUZVskLkqaJJg6fkEEkXHqcR?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 448a0337-5161-438a-d52a-08db05142c39
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB3589.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2023 11:54:00.5341 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: SDmMtEju6G7euwvr5RuolJcBNV/bWOOa0BYWv48BJMj/5PED03xUVB2qhGDskMMP
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8162
+Subject: Re: [Nouveau] [PATCH drm-next 05/14] drm/nouveau: new VM_BIND uapi
+ interfaces
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,93 +136,95 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- stable@vger.kernel.org, Salvatore Bonaccorso <carnil@debian.org>
+Cc: Matthew Brost <matthew.brost@intel.com>, jason@jlekstrand.net,
+ linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org, corbet@lwn.net,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ mripard@kernel.org, daniel@ffwll.ch, airlied@redhat.com, bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello Greg,
+Am 01.02.23 um 09:10 schrieb Dave Airlie:
+> [SNIP]
+>>> For drivers that don't intend to merge at all and (somehow) are
+>>> capable of dealing with sparse regions without knowing the sparse
+>>> region's boundaries, it'd be easy to make those gpuva_regions optional.
+>> Yeah, but this then defeats the approach of having the same hw
+>> independent interface/implementation for all drivers.
+> I think you are running a few steps ahead here. The plan isn't to have
+> an independent interface, it's to provide a set of routines and
+> tracking that will be consistent across drivers, so that all drivers
+> once using them will operate in mostly the same fashion with respect
+> to GPU VA tracking and VA/BO lifetimes. Already in the tree we have
+> amdgpu and freedreno which I think end up operating slightly different
+> around lifetimes. I'd like to save future driver writers the effort of
+> dealing with those decisions and this should drive their user api
+> design so to enable vulkan sparse bindings.
 
-On 30/01/2023 23:27, Lyude Paul wrote:
-> Thanks a ton for the help Greg!
-> 
-> On Mon, 2023-01-30 at 11:05 +0100, Greg KH wrote:
->> On Sun, Jan 29, 2023 at 10:36:31PM +0100, Computer Enthusiastic wrote:
->>> Hello Greg,
->>> Hello Salvatore,
->>>
->>> On 28/01/2023 20:49, Salvatore Bonaccorso wrote:
->>>> Hi Greg,
->>>>
->>>> I'm not the reporter, so would like to confirm him explicitly, but I
->>>> believe I can give some context:
->>>>
->>>> On Sat, Jan 28, 2023 at 06:51:08PM +0100, Greg KH wrote:
->>>>> On Sat, Jan 28, 2023 at 03:49:59PM +0100, Computer Enthusiastic wrote:
->>>>>> Hello,
->>>>>>
->>>>>> The patch "[Nouveau] [PATCH] nouveau: explicitly wait on the fence in
->>>>>> nouveau_bo_move_m2mf" [1] was marked for kernels v5.15+ and it was merged
->>>>>> upstream.
->>>>>>
->>>>>> The same patch [1] works with kernel 5.10.y, but it is not been merged
->>>>>> upstream so far.
->>>>>>
->>>>>> According to Karol Herbst suggestion [2], I'm sending this message to ask
->>>>>> for merging it into 5.10 kernel.
->>>>>
->>>>> We need to know the git commit id.  And have you tested it on 5.10.y?
->>>>> And why are you stuck on 5.10.y for this type of hardware?  Why not move
->>>>> to 5.15.y or 6.1.y?
->>>>
->>>> This would be commit 6b04ce966a73 ("nouveau: explicitly wait on the
->>>> fence in nouveau_bo_move_m2mf") in mainline, applied in 6.0-rc3 and
->>>> backported to 5.19.6 and 5.15.64.
->>>>
->>>> Computer Enthusiastic, tested it on 5.10.y:
->>>> https://lore.kernel.org/nouveau/CAHSpYy1mcTns0JS6eivjK82CZ9_ajSwH-H7gtDwCkNyfvihaAw@mail.gmail.com/
->>>>
->>>> It was reported in Debian by the user originally as
->>>> https://bugs.debian.org/989705#69 after updating to the 5.10.y series in Debian
->>>> bullseye.
->>>>
->>>> I guess the user could move to the next stable release Debian bookworm, once
->>>> it's released (it's currently in the last milestones to finalize, cf.
->>>> https://release.debian.org/ but we are not yet there). In the next release this
->>>> will be automatically be fixed indeed.
->>>>
->>>> Computer Enthusiastic, can you confirm please to Greg in particular the first
->>>> questions, in particular to confirm the commit fixes the suspend issue?
->>>>
->>>> Regards,
->>>> Salvatore
->>>
->>> Thanks for replaying to my request: I really appreciate.
->>>
->>> I apologize if my request was not formally correct.
->>>
->>> The upstream kernel 5.10.y hangs on suspend or fails to resume if it is
->>> suspended to ram or suspended to disk (if nouveau kernel module is used with
->>> some nvidia graphic cards).
->>>
->>> I confirm the commit ID 6b04ce966a73 (by Karol Herbst) fixes the
->>> aforementioned suspend to ram and suspend to disk issues with kernel 5.10.y
->>> . It tested it with my own computer.
->>>
->>> The last kernel version I tested is 5.10.165, that I patched and installed
->>> in Debian Stable (11.6) that I'm currently running and that I tested again
->>> today.
->>>
->>> It would be nice if the next point release of Debian Stable could ship a
->>> kernel that includes patch commit ID 6b04ce966a73 for the benefit of nouveau
->>> module users.
->>
->> Ok, I've queued it up for 5.10.y now, thanks.
->>
->> greg k-h
->>
+Ok in this case I'm pretty sure this is *NOT* a good idea.
 
-Thank you so much.
+See this means that we define the UAPI implicitly by saying to drivers 
+to use a common framework for their VM implementation which then results 
+in behavior A,B,C,D....
 
-Many thanks to Salvatore for the help and, of course, to Karl for the 
-patch and to all of you who made it possible.
+If a driver strides away from this common framework because it has 
+different requirements based on how his hw work you certainly get 
+different behavior again (and you have tons of hw specific requirements 
+in here).
+
+What we should do instead if we want to have some common handling among 
+drivers (which I totally agree on makes sense) then we should define the 
+UAPI explicitly.
+
+For example we could have a DRM_IOCTL_GPU_VM which takes both driver 
+independent as well as driver dependent information and then has the 
+documented behavior:
+a) VAs do (or don't) vanish automatically when the GEM handle is closed.
+b) GEM BOs do (or don't) get an additional reference for each VM they 
+are used in.
+c) Can handle some common use cases driver independent (BO mappings, 
+readonly, writeonly, sparse etc...).
+d) Has a well defined behavior when the operation is executed async. 
+E.g. in/out fences.
+e) Can still handle hw specific stuff like (for example) trap on access 
+etc....
+...
+
+Especially d is what Bas and I have pretty much already created a 
+prototype for the amdgpu specific IOCTL for, but essentially this is 
+completely driver independent and actually the more complex stuff. 
+Compared to that common lifetime of BOs is just nice to have.
+
+I strongly think we should concentrate on getting this right as well.
+
+> Now if merging is a feature that makes sense to one driver maybe it
+> makes sense to all, however there may be reasons amdgpu gets away
+> without merging that other drivers might not benefit from, there might
+> also be a benefit to amdgpu from merging that you haven't looked at
+> yet, so I think we could leave merging as an optional extra driver
+> knob here. The userspace API should operate the same, it would just be
+> the gpu pagetables that would end up different sizes.
+
+Yeah, agree completely. The point is that we should not have complexity 
+inside the kernel which is not necessarily needed in the kernel.
+
+So merging or not is something we have gone back and forth for amdgpu, 
+one the one hand it reduces the memory footprint of the housekeeping 
+overhead on the other hand it makes the handling more complex, error 
+prone and use a few more CPU cycles.
+
+For amdgpu merging is mostly beneficial when you can get rid of a whole 
+page tables layer in the hierarchy, but for this you need to merge at 
+least 2MiB or 1GiB together. And since that case doesn't happen that 
+often we stopped doing it.
+
+But for my understanding why you need the ranges for the merging? Isn't 
+it sufficient to check that the mappings have the same type, flags, BO, 
+whatever backing them?
+
+Regards,
+Christian.
+
+
+>
+> Dave.
+
