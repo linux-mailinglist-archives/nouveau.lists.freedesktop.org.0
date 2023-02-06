@@ -2,48 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5471268C2C8
-	for <lists+nouveau@lfdr.de>; Mon,  6 Feb 2023 17:15:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1453268C600
+	for <lists+nouveau@lfdr.de>; Mon,  6 Feb 2023 19:42:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7A7AD10E980;
-	Mon,  6 Feb 2023 16:15:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7B99A10E43B;
+	Mon,  6 Feb 2023 18:42:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2067.outbound.protection.outlook.com [40.107.220.67])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6084510E814;
- Mon,  6 Feb 2023 16:15:03 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lksoR2Z8QRKmeoAvHYHxfRAIObOfGOyxo8cK9oKdKew8w/solzspapbiaORmXPD3rG0XtSk0bkETcgjtIDBP+MQ7Zy8GmEIOgy+HTSiKz+8oqRkiRzbereejEDVUQIWAOb3Vz8Q8r0zqtboCRvJ54P9PCwdDh0f/zM/F4N0sm8ncxRRwGR94vAkHxpGL/yloYvRJYcKv2gBC6wFX94nYlfaSrJFlqkGp0ZB6mJjHdlRpjHREigVGX2D9989COLGOJa2c1G2CDEHDc2/S7PHJHdYFCVt7laopub+BCk7L46/0okV9qtatMRQrb6OlcnAYFJYjBJWsnvn88g3uag53rw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ieKBmWLrrQzdTtcMGPgc2sBfRtpXnGnIHgrfCI5toi8=;
- b=aLN+p75XEXlH4B4MvGi3QJWuukAiEKM3XuDkB2hF9YE453wuD+qijyKgTbuWiX6YoPcohs4TOWgQFHXYfRU6oUMOiRKY9XE3Qp5cjQeogcGyqjm2B/Ek5NWbGM8TRX6PDThak1Jx6oxRBySyQGNqG3IEqjZ1hmIuGkFgJlNFCJoPVv5+qPAswrFjeUkFgZbMeHhxHH9Om6SWBd41opncPrw1e4c5qy0XYLNstSCfBXSt4Ij0blAyvfxRM8ZTibi76vGEI0Q696zyPp9Rr7lcEetkw3VjpHg3HKa7DosIjHdAZ/zP9DEKEKY/goINpQpIM6Q3byf7zhYBwV1P1fzkHg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ieKBmWLrrQzdTtcMGPgc2sBfRtpXnGnIHgrfCI5toi8=;
- b=3I6M3fE4ZtaRriLndJ8aPJwYRFm4b5tEUQ81APJVLJOj/ggVC/c10RBynCnjR7TNDeAg7cgFT7kavEzBIGLLQ0KQRnVLfky/G3Ojw95LTiBLH5GgTHi9BBODj776sLNOHTOKo4lwAGl8Ftm7f1mB+aZaK5U7jFE4KEasJcVo/2Q=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by SJ0PR12MB5408.namprd12.prod.outlook.com (2603:10b6:a03:305::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.34; Mon, 6 Feb
- 2023 16:15:01 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::2e4f:4041:28be:ba7a]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::2e4f:4041:28be:ba7a%6]) with mapi id 15.20.6064.032; Mon, 6 Feb 2023
- 16:15:01 +0000
-Message-ID: <c0635ff3-027f-bcd7-afbc-46f4e62d3651@amd.com>
-Date: Mon, 6 Feb 2023 17:14:54 +0100
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4284F10E43B
+ for <nouveau@lists.freedesktop.org>; Mon,  6 Feb 2023 18:42:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1675708945;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=mV7wu48lUfeS3GU07IXyzbGWRiDs4lMjYJhBoJBL7dQ=;
+ b=fq0UWva9yxi5hqLzIDdA9BUWX2XOGF3KazdWfgeTWhvnWwP8NbbvaclChmulYjXGf5NzAt
+ LtbgowpcegTcCkJLCWydZs/cMXw7vV7yjgiSjg8SKIMARWPJtBvSDVPbpBF/WzUoc4ecyx
+ e3REH1RKrJ8vo2UOnYMcuKVZYMvweSQ=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-571-mRkJcDSnNMaF0qOkrZW4Yg-1; Mon, 06 Feb 2023 13:42:02 -0500
+X-MC-Unique: mRkJcDSnNMaF0qOkrZW4Yg-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ g19-20020a056402115300b004a26cc7f6cbso8312937edw.4
+ for <nouveau@lists.freedesktop.org>; Mon, 06 Feb 2023 10:41:38 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mV7wu48lUfeS3GU07IXyzbGWRiDs4lMjYJhBoJBL7dQ=;
+ b=nkA2U5rfb8MI0N1x4gkUts0tCY+H5deVVXonfBJwTC2GzuHEa0+QUIA6pR8QED7GeR
+ cGZ3aNOMwGoNfksWwSqf5D+9gjQrk/2jPuxamLq9U1rdTvL04mHpWWk7fpgysz0ZA4kN
+ EnL6Dhe3tDG6a4yyaM0F2hIqAu+iY3vyJFahez430AgetBz2YRyvaoDG13Ds8jFDxGkY
+ buV7pD8W14aOTXEmU66U9w2Umz/T1aVAyQedZBN+c8CUvnWjleBmMa+MLGgXSl0Pvm0x
+ uVv4oTr+RG9LOJt/ef4867GyLPVm73KbU1/tvt7eN2q3BUHyrv44Cd4SG8CavnFTFk1e
+ 53aw==
+X-Gm-Message-State: AO0yUKWwKpbiJ9ec0JpkuiO3bs5Ds054FfrYBtVoKRQvcc7ntB0g/QKO
+ 265bhxgiJWL5TSX9xCTvmHRveTCyAPnqeEeauJdrF0utxNShYPQU0wlpN+sPN7iy4UDMNLCtMkD
+ oXlw4I/oD7CK8njEuqH6SPEmwAg==
+X-Received: by 2002:a17:906:1dc8:b0:878:8237:7abb with SMTP id
+ v8-20020a1709061dc800b0087882377abbmr383408ejh.35.1675708885089; 
+ Mon, 06 Feb 2023 10:41:25 -0800 (PST)
+X-Google-Smtp-Source: AK7set9FFg9WxyaDxE9MX9rbZD0l91/5bcmXcVyXebsSOuym8lZQpDrI3Bo83tXHjG/CiZX7/gEa+A==
+X-Received: by 2002:a17:906:1dc8:b0:878:8237:7abb with SMTP id
+ v8-20020a1709061dc800b0087882377abbmr383390ejh.35.1675708884883; 
+ Mon, 06 Feb 2023 10:41:24 -0800 (PST)
+Received: from ?IPV6:2a02:810d:4b3f:de78:642:1aff:fe31:a15c?
+ ([2a02:810d:4b3f:de78:642:1aff:fe31:a15c])
+ by smtp.gmail.com with ESMTPSA id
+ bu18-20020a170906a15200b0088351ea808bsm5750226ejb.46.2023.02.06.10.41.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 06 Feb 2023 10:41:24 -0800 (PST)
+Message-ID: <4439c44b-cbd0-7160-da3d-e78f6aeeec77@redhat.com>
+Date: Mon, 6 Feb 2023 19:20:52 +0100
+MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Content-Language: en-US
-To: Danilo Krummrich <dakr@redhat.com>, Dave Airlie <airlied@gmail.com>
+ Thunderbird/102.7.1
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Dave Airlie <airlied@gmail.com>
 References: <20230118061256.2689-1-dakr@redhat.com>
  <20230118061256.2689-6-dakr@redhat.com>
  <Y9MjSeMcsd18r9vM@DUT025-TGLU.fm.intel.com>
@@ -61,73 +84,15 @@ References: <20230118061256.2689-1-dakr@redhat.com>
  <3f935a7e-fede-2bad-c029-4a3af850c9b5@redhat.com>
  <95d0631b-545c-ea4d-7439-75422e9a9120@amd.com>
  <67958920-c5bb-a0f5-2306-e3ae4fdbaeb3@redhat.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <67958920-c5bb-a0f5-2306-e3ae4fdbaeb3@redhat.com>
+ <c0635ff3-027f-bcd7-afbc-46f4e62d3651@amd.com>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <c0635ff3-027f-bcd7-afbc-46f4e62d3651@amd.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0029.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1c::22) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|SJ0PR12MB5408:EE_
-X-MS-Office365-Filtering-Correlation-Id: 545af347-bbb0-4c61-8112-08db085d4c8a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 4YgAr/WoUymFYgils929a4WuNmW+HdMTXALlGA9OldJO5cdWKEAXgTI8iw21fpGL6NpqA2YvSK/z2bNLgGjMow8ZaEXlexkr3dOfHn7ccMslRcf8InseVsEqlw2g84Fk7lJywdJvqjvsnVV9TKP9u3HvsIZ9fh/zrMKTQ5WZ/qbc5idwWGGBfMS0Mbuqt8EtLMnyXF6Wd7S7pySMz3TkWvLL2+I5C+LOdY9/yDbd9LkNwgolAYt6NoMRCy029Aemmc+bFqal7f/TbCzY3kwMiUHHu93t2QKBxXgpWEaC9zArBNkb5vKYJzbco8in8Lu3rxRpOIJ2NlnS2D6ypykRGYSkNpq1nc4PilvDtFxQ9LNDsKqN+PA58ha3P+jAx7cJaWPGu9NxerGJfR4reKR0jBi/eT3j2V+pN8AffMf7hCyBRoV2LYsSRmsppPibuwExtE9cm1iI9shxH6RHsPvQEUcW/1cam69DJyKZgigvCz/MxHgIL4P5PqfBicITD/LZwYa5Qqv3UAR0mo8zKvzJan/A2VpYpzUTNA17DWwHLRtXQMo2UCnMpnfC4FIyQuTgri9GhYTNj4CTnptU3ccr6+YtW+upJceFCBu9rOMIyI6g55i71F5caY+bE62S/47FPfdKDiMuDcGC/wkw+cfwmOUb3Bba/RbdFGr+ydSXS4np8tk5wPLZGlIHM+hbom4cz7opYGZoA6amw9Z9lmNn1mwsjoPEJTA2mm5udnfDwzQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230025)(4636009)(396003)(136003)(39860400002)(346002)(366004)(376002)(451199018)(36756003)(316002)(110136005)(6512007)(31696002)(86362001)(31686004)(186003)(6506007)(2906002)(66476007)(4744005)(66556008)(7416002)(4326008)(8936002)(8676002)(5660300002)(41300700001)(2616005)(6486002)(6666004)(478600001)(66946007)(38100700002)(83380400001)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RFg0YzhwVSsvelErNXcwcmJ3L2xiTVZxeGlaTDN2a1huNHBwa0NHeXk2NWxk?=
- =?utf-8?B?bGIzaTNLb3BTaFpxeFBtTzFlbUpFMWRDZFJIbWtsTHF4bU1kSnhoSmxGK2NI?=
- =?utf-8?B?NnkreHFuVGdoeWQxUEhtaStiV1UrTmlQcndJOHU5SHNBb0t1TzZLQ0UxaC8z?=
- =?utf-8?B?bDU1NlpMTS9TakJlWWE4TCtFaXQ1a1NqZkdRWFd4R21SQ1NYdTFEc3UwR082?=
- =?utf-8?B?cU9seExYSHo1cE53RlFSa3k1L2NQRUJYdU9VcDNUKzB2SStwNDBQSWJKd0lP?=
- =?utf-8?B?Q09TemF0d3ZuSjZvYTNoRFJMZ0JGSHJrOVpPNEkvNk1YTDYwSi9UY3E5TXF3?=
- =?utf-8?B?T3ZuTWt0eDRIUWZLVmJaTEZsY0s0OGF1U1ZKbStybGdlR2tvZFREZkpKL3Rt?=
- =?utf-8?B?WGFweHAvTVM4MFJtUkYrMm0yU0pCNUVCRTF3UnhkLzJERlZvTFc2UDhBNCtZ?=
- =?utf-8?B?S2xrVEhPSHhaRHA0TVRQenhzbFdoS2JpTDhIakFBdUx4dzJra3dLYkJ5TGFL?=
- =?utf-8?B?Q0lPRHlzNHR5SW1ZN1RHWHFuSWlWc3BSWkpMQkJaR05SZnprVnVRakV1TXpD?=
- =?utf-8?B?VjN1YS9DdmpRaWh4TFUzeHdCOHA1cE5MODRFWTJqbXFCZmxFdksvNXZtSkRy?=
- =?utf-8?B?eEsvby9iaWVQVU9DSUJaeVZDV2pSRlg5RTRpZ3c0M0RGQ3BEaCsrQzgwcks1?=
- =?utf-8?B?bFhUNkhGekl0SUtSaFZMK0xXc3ZBLzkyMi9BbnQraHV4V2RZNG5OMjAyRDY3?=
- =?utf-8?B?amxiQS8rbTVYblYxcDBQQk1ucHJlcnIrYXUvYmM4V2w2eWhOVXZrcllrckFk?=
- =?utf-8?B?dW9aM08vRzdMSVo5K0loYnhxb2E3VXJhWHdDMGRML01MSmJaaHdPYXJuS0Ey?=
- =?utf-8?B?RnhreDhwdUV4cEZXM3NLU2J4dHhMS0l0VHdHREpONmdrMEx4ckRxeFl1c2Rl?=
- =?utf-8?B?T0x0NU1mNnVYZHpCdUZtbTFEbmhaam81dUh6OEMvdk1Yd1lPYWx6YS9JMXhk?=
- =?utf-8?B?NEVTY01tM1lIajNpWm9MOHlQWG9kRmJxSDcwMFNtZloyOGhkL2diOS9FTEc0?=
- =?utf-8?B?NHJ3eldBMU56eGE2Ujc0NzJsZGtLQkNQK3ArdS9HMzV3WHBFYngrcW1mRTZj?=
- =?utf-8?B?amJCMXRzSFhIYVAvVnZqdTB5ajJjZTVuY3JNVjY5T3kzU2NXRkp0THExamFx?=
- =?utf-8?B?eERuQWVrTjlBRWFmdWV1bnBJd0ZGbThCdGVKSTFqcnUrc1JoNUo4QVp5cmZ1?=
- =?utf-8?B?QkpINmdmRnVpNzd1eU01UlI0WlFnS0VHOUo0OStVVm9aQ3VRdUYzUlRQMU01?=
- =?utf-8?B?RXQzNFNyRTY1OW5kUjYvazhkUDVqTmJPaXNuRnNGTkRkZ0ZGbm5zUWFZeGNk?=
- =?utf-8?B?K3lkOHRiOU5zcjNBakVYUFVOMHpQWkJzTkx3OWVWMVlMRzhpRDdDNStqN0gr?=
- =?utf-8?B?TURSV0JWQTJ1MGxPdGdwMlgxWWM2bjFYUHYrWjFrZGpKZmIxR21xN3VGL3pl?=
- =?utf-8?B?QWp0RmdLVXdQQkxYN0JUSFovS2tBVXkydHVTcFpCejNLdGsvSHM1WDZvZEdi?=
- =?utf-8?B?bms4OGIxRWRxdnFyYmwxUGpVYVVDWWt3dnB0aEJ5UFp1UTdPaS9vTzFQa3BT?=
- =?utf-8?B?M1AwbGJ1UU9mQ1JnTmRWWjJ4SWdWNjU4blF1cDdYdms0RXY2WnFYYzBVczFE?=
- =?utf-8?B?dnYvZFhKQmFFUWlETzNCb3FjZng3Nk1vbmRGbmlVb1Vka3Z4Y1FyL213YUJi?=
- =?utf-8?B?ZnZDVzd3akZFbmU5WEtpRGRJcldhdGxPZTl5Q1JKTytPZUY2T0VpZ1dBdE9W?=
- =?utf-8?B?SWN3a1doSkp4TUZpY0lQNGhpTVdzcEh2alYxMTFFWEJQQ0FPSFByUVFCMXl1?=
- =?utf-8?B?dkRjZ0RoaFdLNXRha3M4Y1ZWemZPejB6eEtjWGxjbWJVLzJFYVM3WHBjdGd1?=
- =?utf-8?B?M2NvcHRMdnV2b2tiMm9abi9GY3ZQSm5tZzVGZzFIY1l2RHY4TkpCbnR5dWcx?=
- =?utf-8?B?U01WTmVkeERoNSsyVitoOHRSSytaN2M0WXgvbEM4Y2JJdzNhYXQvT25mS1pB?=
- =?utf-8?B?T0hyTndnSXFnU09nYmtJVk8vM2kreUlmZVh1dHJ3ajR5cEQ1dlBVbFRRaGkv?=
- =?utf-8?B?NUJORmVsNXVIVGp2TFJWMnFwU3JyQVBrN2NSTnB5dncrMXdFbk1XRDEwdnFH?=
- =?utf-8?Q?bsYD+PPXmVE8TSZHBSDzA0lPKG3U9hn117cjOQweEgtt?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 545af347-bbb0-4c61-8112-08db085d4c8a
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2023 16:15:01.5464 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ny9pO6KBM6hIhN8Oizxqr9RFBcVpgfCL6PbOuG/tYj2OUdvU0Uygdf10N4UZaRzZ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB5408
+Content-Transfer-Encoding: 8bit
 Subject: Re: [Nouveau] [PATCH drm-next 05/14] drm/nouveau: new VM_BIND uapi
  interfaces
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -148,24 +113,63 @@ Cc: Matthew Brost <matthew.brost@intel.com>, jason@jlekstrand.net,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Concentrating this discussion on a very big misunderstanding first.
+On 2/6/23 17:14, Christian König wrote:
+> Concentrating this discussion on a very big misunderstanding first.
+> 
+> Am 06.02.23 um 14:27 schrieb Danilo Krummrich:
+>> [SNIP]
+>> My understanding is that userspace is fully responsible on the parts 
+>> of the GPU VA space it owns. This means that userspace needs to take 
+>> care to *not* ask the kernel to modify mappings that are in use 
+>> currently.
+> 
+> This is a completely wrong assumption! Take a look at what games like 
+> Forza Horizzon are doing.
+> 
+> Basically that game allocates a very big sparse area and fills it with 
+> pages from BOs while shaders are accessing it. And yes, as far as I know 
+> this is completely valid behavior.
 
-Am 06.02.23 um 14:27 schrieb Danilo Krummrich:
-> [SNIP]
-> My understanding is that userspace is fully responsible on the parts 
-> of the GPU VA space it owns. This means that userspace needs to take 
-> care to *not* ask the kernel to modify mappings that are in use currently.
+I also think this is valid behavior. That's not the problem I'm trying 
+to describe. In this case userspace modifies the VA space 
+*intentionally* while shaders are accessing it, because it knows that 
+the shaders can deal with reading 0s.
 
-This is a completely wrong assumption! Take a look at what games like 
-Forza Horizzon are doing.
+Just to have it all in place, the example I gave was:
+  - two virtually contiguous buffers A and B
+  - binding 1 mapped to A with BO offset 0
+  - binding 2 mapped to B with BO offset length(A)
 
-Basically that game allocates a very big sparse area and fills it with 
-pages from BOs while shaders are accessing it. And yes, as far as I know 
-this is completely valid behavior.
+What I did not mention both A and B aren't sparse buffers in this 
+example, although it probably doesn't matter too much.
 
-So you need to be able to handle this case anyway and the approach with 
-the regions won't help you at all preventing that.
+Since the conditions to do so are given, we merge binding 1 and binding 
+2 right at the time when binding 2 is requested. To do so a driver might 
+unmap binding 1 for a very short period of time (e.g. to (re-)map the 
+freshly merged binding with a different page size if possible).
 
-Regards,
-Christian.
+ From userspace perspective buffer A is ready to use before applying 
+binding 2 to buffer B, hence it would be illegal to touch binding 1 
+again when userspace asks the kernel to map binding 2 to buffer B.
+
+Besides that I think there is no point in merging between buffers anyway 
+because we'd end up splitting such a merged mapping anyway later on when 
+one of the two buffers is destroyed.
+
+Also, I think the same applies to sparse buffers as well, a mapping 
+within A isn't expected to be re-mapped just because something is mapped 
+to B.
+
+However, in this context I start wondering if re-mapping in the context 
+of merge and split is allowed at all, even within the same sparse buffer 
+(and even with a separate page table for sparse mappings as described in 
+my last mail; shaders would never fault).
+
+> 
+> So you need to be able to handle this case anyway and the approach with 
+> the regions won't help you at all preventing that.
+> 
+> Regards,
+> Christian.
+> 
 
