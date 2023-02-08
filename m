@@ -2,101 +2,122 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A59E68D4CF
-	for <lists+nouveau@lfdr.de>; Tue,  7 Feb 2023 11:50:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AEF1A68EE9C
+	for <lists+nouveau@lfdr.de>; Wed,  8 Feb 2023 13:11:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A4F4A10E4C9;
-	Tue,  7 Feb 2023 10:50:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2487710E759;
+	Wed,  8 Feb 2023 12:11:18 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4895C10E4C9
- for <nouveau@lists.freedesktop.org>; Tue,  7 Feb 2023 10:50:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1675767022;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=gWccwJILvPfir6IoRku7EfqJmuwZVLGK2lUu+Ccdb5Y=;
- b=fuQTTfiROl4JLrosxdxRkfzW8pq/MMojDhFxQtAvQ6W9iPKUa2Lf0pWTtpHxQuENia/m7E
- PmwJ4p9flP0GoZcFU4FBHMRuuqonuh4SvUf9cW+cHhK2nOjUaGBckgKg/aBEkyq7ix8k71
- H8Kbv/I6l64KgsmEBlbCzv9lG+0NHOo=
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-245-Sq4O3VVPMAqxSZlmEz7D3w-1; Tue, 07 Feb 2023 05:50:18 -0500
-X-MC-Unique: Sq4O3VVPMAqxSZlmEz7D3w-1
-Received: by mail-ej1-f70.google.com with SMTP id
- qa17-20020a170907869100b0088ea39742c8so10877094ejc.13
- for <nouveau@lists.freedesktop.org>; Tue, 07 Feb 2023 02:50:17 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gWccwJILvPfir6IoRku7EfqJmuwZVLGK2lUu+Ccdb5Y=;
- b=DPlXL1IFA8+piYHIJpzyAS3bTvURifnv1286Dx345fIAe7c5oWhIbbHNkNFaXVSxN4
- YcGyGtHZ76fqPyVSmGBxkEbG45JBAxStY/+4J7qtNCBjkR4/z2nAEJTQ0HCMzatliMqf
- +6p6vo/rUeHc4Ji2UbVWrQJAFuE5nT64CpoIEoMtVS9eGTKZdGqxjgYrmDToQx+Hp9wU
- YVbpccKjrqn7agvA+c9NodfUvi/aeo1aub0yNWXKMwQh9B37xFLjY3a6F96gvS2xL44Z
- GK+EsV8PsfjQ9ryJlFjMA2VMitWk+NiaqqTGG4t4JyGWsc+l/+3fP0CfKtdtPE9zpxcS
- IXeg==
-X-Gm-Message-State: AO0yUKVd/AcCcZA3tVhpH2oDqI2SEwiOTgt2aDUugzgZuR7het2mH/Vn
- ar9JCZGkYirAAKcC4d5bO8c6zCZrb1PbAP8JBQYIYLVSo6C3UGbkEbHFnvcIEJRcbXosOrZn+S0
- l46WD25fVLXhhY8JZILNAr5IiEA==
-X-Received: by 2002:a17:906:f253:b0:88f:8c13:52ba with SMTP id
- gy19-20020a170906f25300b0088f8c1352bamr3157352ejb.48.1675767016419; 
- Tue, 07 Feb 2023 02:50:16 -0800 (PST)
-X-Google-Smtp-Source: AK7set9oW8U930FGBTV8niNO+uHiUUmonlSEzr9xcfkIrG51boczPSjNCISgwtjiF9d6Q0UULEduHA==
-X-Received: by 2002:a17:906:f253:b0:88f:8c13:52ba with SMTP id
- gy19-20020a170906f25300b0088f8c1352bamr3157328ejb.48.1675767016165; 
- Tue, 07 Feb 2023 02:50:16 -0800 (PST)
-Received: from ?IPV6:2a02:810d:4b3f:de78:642:1aff:fe31:a15c?
- ([2a02:810d:4b3f:de78:642:1aff:fe31:a15c])
- by smtp.gmail.com with ESMTPSA id
- i12-20020a170906264c00b00878769f1e6bsm6694723ejc.55.2023.02.07.02.50.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Feb 2023 02:50:15 -0800 (PST)
-Message-ID: <69e87e6a-7e6a-7b8d-c877-739be9cba0a1@redhat.com>
-Date: Tue, 7 Feb 2023 11:50:14 +0100
-MIME-Version: 1.0
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on2062.outbound.protection.outlook.com [40.107.102.62])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D489910E742;
+ Wed,  8 Feb 2023 12:11:15 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=hGCCiZG4fslUIYmc5kxNF1qepvytcprypWOhKPOWoipzqG6/C8ziPTuoMJPOZi1OFUAIkOrZdhCN/0c6CTK4nQIlUg6Txxe4FmAlaPTPMPCg98N6TNxu8gINm4xqGMZ3/DFwe2rnubTSed5wQwdn3anId0dlWkdp9yVtjMgwKdwWaxADrSWG5mKo2wp+H8qxY4fXOQ2eMNuxCfbub9fOUvxZy0LvhwO4SUdr+fvDtKEpa3clCWV2fXbN5WOJEy+5BzwBgCjJA9sFR4Vwf86/8zPDLRgPL/zKvD+g71Ir+GfLLTU9f+yu6xZA8P3XaHUSWkeJA848/xeH5UUWEG+JFQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=d+9zhKgmqQqD/oShtP1HyRPPHTGAu55Lo5StNqYzcOw=;
+ b=DY4DCqFRXmyfdR1gnqh3cQ7k2qP7fu+UQ0l3PHzO7MedaabzpQsBrtZGRFpczXNbdUHV3TCHhTCY1euC5gIdjxiLk/HAzl1LunDDpUwBSzOnIClgnATKTAU1FGQXW2agZLmb04QCHP+eBrZEb2tXRGDiNf5rfBxSW+n86pGxEWDXtGqNMVCshZ/Z8AJ6xkkkcva33Pz7GMLMEyc/LVSQIl5BLsHhhbhi5s642lRe5xURCholjWuLdv3qEI013xG5u8d4Yt0aX/fUR6NL9DXtIuEhcF+v+cOi+Izp5EYnftdRCPNkRc7YfRCIiiamkXMpmpslPeqEumZbn431ZK+SeQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=d+9zhKgmqQqD/oShtP1HyRPPHTGAu55Lo5StNqYzcOw=;
+ b=0ZRPuryHRUTZeYCWpIkZzUn7P9sYcauw28xOAj19gMVpYWavoY7pxDnMTqcMvJ/nWLVi8dDsNY0gO0dXknrlBjBZKiGFE8E4xY25zDXv77gDQWtIe4C4RzKGiv2kuEsss/UjCtutxWuJ8i9aTQy8XJ3tHFtRFit+6YFvO+qSZO0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by SJ2PR12MB8064.namprd12.prod.outlook.com (2603:10b6:a03:4cc::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.34; Wed, 8 Feb
+ 2023 12:11:13 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::2e4f:4041:28be:ba7a]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::2e4f:4041:28be:ba7a%6]) with mapi id 15.20.6064.032; Wed, 8 Feb 2023
+ 12:11:13 +0000
+Message-ID: <a918a254-5c8c-b5f5-853e-e70dc97a4ed0@amd.com>
+Date: Wed, 8 Feb 2023 13:11:07 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.1
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Dave Airlie <airlied@gmail.com>
-References: <20230118061256.2689-1-dakr@redhat.com>
- <20230118061256.2689-6-dakr@redhat.com>
- <Y9MjSeMcsd18r9vM@DUT025-TGLU.fm.intel.com>
- <7c046ff9-728d-7634-9d77-8536308c7481@redhat.com>
- <c2256c7d-e768-ae3f-d465-b9f8080d111b@amd.com>
- <2427a918-5348-d1ef-ccae-a29c1ff33c83@redhat.com>
- <a214b28b-043c-a8bb-69da-b4d8216fce56@amd.com>
- <3a76bfa9-8ee5-a7d9-b9fb-a98181baec0b@redhat.com>
- <49ac3f95-6eda-9009-4b28-0167213301b2@amd.com>
- <bc523c5c-efe6-1a7f-b49a-e0867dc1413d@redhat.com>
- <15fb0179-c7c5-8a64-ed08-841189919f5e@redhat.com>
- <1840e9fb-fd1b-79b7-4238-54ae97333d0b@amd.com>
- <CAPM=9txON8VCb3H7vDY_DOgtUg2Ad3mBvYVxgSMyZ1noOu-rBQ@mail.gmail.com>
- <a1c526e0-0df7-12cb-c5a1-06e9cd0d876b@amd.com>
- <3f935a7e-fede-2bad-c029-4a3af850c9b5@redhat.com>
- <95d0631b-545c-ea4d-7439-75422e9a9120@amd.com>
- <67958920-c5bb-a0f5-2306-e3ae4fdbaeb3@redhat.com>
- <c0635ff3-027f-bcd7-afbc-46f4e62d3651@amd.com>
- <4439c44b-cbd0-7160-da3d-e78f6aeeec77@redhat.com>
- <85548cd2-1bea-3c04-40b9-9abb03cb57b3@amd.com>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <85548cd2-1bea-3c04-40b9-9abb03cb57b3@amd.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Language: en-US
+To: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>,
+ dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-graphics-maintainer@vmware.com
+References: <20230208090106.9659-1-Amaranath.Somalapuram@amd.com>
+ <20230208090106.9659-2-Amaranath.Somalapuram@amd.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20230208090106.9659-2-Amaranath.Somalapuram@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH drm-next 05/14] drm/nouveau: new VM_BIND uapi
- interfaces
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0133.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:94::20) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|SJ2PR12MB8064:EE_
+X-MS-Office365-Filtering-Correlation-Id: 65f621b6-87b2-43de-d214-08db09cd9219
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: SGiM8/mD6MD0bvKSU+3TjodtOOjeIoDG/ZjTPB77AmqLIScdvmYyIjCIIPUTmyt7Xp8vplx58Ud4KaJZQGR6VfJ/DIjzUTkG1dcraCPJgdZ+xcVP2zYVUZe4jXWRD7GB38/U5PQoL7C++lzAyCXh1ioPQjsSbA1l6JTAnNy4d3L3/7vtrgBfq7lTQdyPnzDdDor6K4Zur5NCk9ex6/w4jwczlTvCoL8Khzdep0/xdr4dwwc/Y1uIEiLyOFIeCleHooCLBhvEzVIv1m3g1gXrdKRRpvx4x7rdbQbefHCouegDR2lmyWyqUmQd22d+khqpPTtnIsTqc8UXEH4w1IZfd6KsQt8iNlXvu5rCHTkkG3QWrwT4BAVyKkDnwZlQSFvpJbm4zH6wUtGu6Ao8CZ02RjuORRDh1P67k1rpPzmeoDWsYtxbAWRw+GE2K4sDtUisdgB23f+esPpKWYP6aq3fWvp6tRYI+WRH/0jzIt12Hl+UQZqbhiHggnp4dta84lTrnD+XI+zdcrydBCwquV0UDZbdM0uFDZtglpszcVhgO269o/EQW3Spt2tjVxt7N/Lj0ftC6TjSoCuxbI1xo+WFqJ+iVEI78HWUbsV7eg8U+8nIePJ0ciUe4dqYs71obW5d9EFx2+1f7grcGWKlqZ+wrMY8q0HfjK3zXPQlcQX6JD+Hs0456AmDngPO8jsv5ZFHFAjPiaB27lJJ9oUuwh5TPNnypkZZaV86NM0LSYutFzg=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230025)(4636009)(346002)(136003)(366004)(39860400002)(396003)(376002)(451199018)(8936002)(5660300002)(2616005)(31696002)(66556008)(66476007)(6486002)(66946007)(8676002)(4326008)(38100700002)(478600001)(86362001)(41300700001)(2906002)(36756003)(316002)(83380400001)(31686004)(6512007)(186003)(6666004)(6506007)(43740500002)(45980500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eUZRczhiVVZtU1NkS2xPN2w2Ykt2d2VsRk9HL1A1Z0RzQ1Rxc2Y1VVdxaXBP?=
+ =?utf-8?B?K3JOUWRnOSswTmlMdGpMM0YzY1FyL29IN25ZNmhNMFVPeTlsU1JBOXQ1YUJ1?=
+ =?utf-8?B?QlpWZ1hLTTZNS2RtS29QMWFLZ2k1aU4veFhZUjhHUVhlTDZYdndXcjhLOG9C?=
+ =?utf-8?B?Q3BRS09Dc2hDNjNVdHgyNDV3dnVRZ0JJYTJnL1dtWUtZQkQvbkg2UmdSOUU1?=
+ =?utf-8?B?dzBSaGZlRFg3N3hJdFpHL3liWTd4bWgrM2RrcTZPTll4RXpFYmp3d1kvUkc1?=
+ =?utf-8?B?ZUdPOTM3aHR1Ky9VVWd1NnlxaXRqY0pSMWM2TEYxcGxRUnVKSm5mNVo0L0Ny?=
+ =?utf-8?B?NU9CbVlkbXlkVWtTT1pPV2hGR0t3em9iZjFnMWZ6OTBxRm1LVEJPMmxKcmZE?=
+ =?utf-8?B?VHZ0WEptVWFaYXJUM0lxVTUyVDBzYzhEMWZZcHp3Z01ld08zSEN4aGxveXdC?=
+ =?utf-8?B?NjBzQTBnRlpKZW5Fa2JRNENoRmNQd1BiY1l2U3h5TXBYUERQSVlWc2xiYktR?=
+ =?utf-8?B?aDFReWwxUCtsOE45SE1EbVhlMnlkN0FHWXo4NEZLeDdsSXlpeXZxaElkQ3d4?=
+ =?utf-8?B?ZmtETEJoS2ltb1pnVG95bFpXVDJCeGFPUXlFd1BTMVZ2TW94bDdVUHRWWEVa?=
+ =?utf-8?B?cVU0am9MSjcyV0pnTDQrUWdoYU9sbVhHNCtaTWdKRUNzc0o4bVBPZWtoZ3NR?=
+ =?utf-8?B?QnNEZVlENjRweEtYL0cxVHlYZVlRbllyK1gybUx6QTg2NWZHS3Y2eFN2T1hy?=
+ =?utf-8?B?TGZoOFY3S0NjcFhWKzQ3M3d4TlA1L3JBS2dvQXh1THVjV3pJS2JoZDNtbjRH?=
+ =?utf-8?B?QzZmbTkrbjk5azh1MnFwR2owSVp6SmdzM2lDNkd2QWxsSlZFQXVDUlBYeWNr?=
+ =?utf-8?B?Ujg0M1ZPMStFT1JtK2J5SSs3aVlBRDhPd0hjSXQwS2YrQjZQMEtreFlBOEpr?=
+ =?utf-8?B?MlcyUkU3dE1kd25ibXJPYlJlVmg3anlOQkpwelVxQ01CMU1odGFGem5zeTlG?=
+ =?utf-8?B?b09JZWNOQWJwUUErZ2owY3BOZjR2UnQyS0F4RUdyNmk4RzZKT0x4dVk1akox?=
+ =?utf-8?B?SzFISXlZa29wWEtyTWN2ZUFzNUNVUHB3U3lHR21hSk5kbUdzZE0zVjVicmlt?=
+ =?utf-8?B?Q214Yy94VkMrTjUxL2tGdTEwTVErVGJWdTNVcFhzelgrRWRIVjRBTXFuaXcw?=
+ =?utf-8?B?bnZrNUZmQ1UxN1BVNDJkSEZXNlRPVWQ3NGZrdWJ4YkxxYjBuS3kycThMUjZk?=
+ =?utf-8?B?SHk4c2dvU2pGM01qelFUS3dPZzV2b01EeXhSaFlMZjNFSCtiOGFUMStsenFG?=
+ =?utf-8?B?Q0tGdnAwMDlweHY0L2srckY3NC85RDBGNVB2Zk42Y0QwL3dlckRweEdERCto?=
+ =?utf-8?B?d0MrQ3JoRnJDemU0MEVXNDJMeHJnZzc5VEZSbUxoNGI3T3VrOW5CK1ZYS0Mr?=
+ =?utf-8?B?dHlOTm5VcmtmZENhZ0hLL2d5VTNZQ0RaRkFtV0ZqdzQwRUxESjQwWEoyaUYv?=
+ =?utf-8?B?c3dxT1pWWTZHS1VlbDJqQXpBYi9YSkpWc21ucG50MW9tY1o2TE5mUnNsMmt5?=
+ =?utf-8?B?UjJ0WE5pRmc2VVNuWEJQM2x6bU9DdFhnZnlQUE5NdmlxY2d5S3ZwZERyQ2lR?=
+ =?utf-8?B?WkhZNWdEVjFabHU5UldSSFhDcTkvS0hYRnlOcE5hYks0b1ZQMzJIY0hOZUZw?=
+ =?utf-8?B?RHA1L3Bwd1FhNlRYaTYyL0hHTUFXV0FnVTFmQTdISVJqc2JiTGUwZng2QVE0?=
+ =?utf-8?B?M09wSnJDQjVnRWg0UmtXOVlYekVhQTdhUlhZVW1XNzV6b1FrZnREZENqYjY2?=
+ =?utf-8?B?WERiYTdiOXBQa2dDREdKZUZvQ1I0QlVQelc0Tjlvb0dYaWd3c0FOU2VxOFhK?=
+ =?utf-8?B?YWVQMjdvN3RDYTFMNlJqUy9ZdnViLzV2NU9SbXA2cVltRU1FY2FzblhYMzdX?=
+ =?utf-8?B?a1JjTE5BcnJBcVI1Q2ZwQnJQcHJibEwwV0tTTEN2OG52WFJMU3BsOWJKeFMx?=
+ =?utf-8?B?S045MDFZZXgyKzRZUHdXQ0dJeE5vNVBJT0EyVm9MRjV6elJEZzhCeFFsaTNS?=
+ =?utf-8?B?a1dZSmVuaWRGQnFLV05UZFJxbUdzYXlEWDlvNGNVN2NndHV3Z2xJMkxXL0lJ?=
+ =?utf-8?B?Rk5sM2xDSDNNSnlQV3ZmOS9GbFg2QVgrMi9tY01jeWVkdElsNmRDSHhqVHFj?=
+ =?utf-8?Q?8Zpo+CKWC0y5Gt6/4InHif/VFstkUoFCghpXXZGkP8zK?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 65f621b6-87b2-43de-d214-08db09cd9219
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Feb 2023 12:11:12.9824 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1ZCOMQRr9MywI+v/rULwF4eQvoGtKbrsV0pnz03ZDTGoKAJhdETN7qCJ3hKpGAe6
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8064
+Subject: Re: [Nouveau] [PATCH 2/6] drm/amdgpu: Remove TTM resource->start
+ visible VRAM condition
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -108,156 +129,71 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Matthew Brost <matthew.brost@intel.com>, jason@jlekstrand.net,
- linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org, corbet@lwn.net,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- mripard@kernel.org, daniel@ffwll.ch, airlied@redhat.com, bskeggs@redhat.com
+Cc: alexander.deucher@amd.com, arunpravin.paneerselvam@amd.com,
+ arvind.yadav@amd.com, shashank.sharma@amd.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2/7/23 10:35, Christian König wrote:
-> Am 06.02.23 um 19:20 schrieb Danilo Krummrich:
->> On 2/6/23 17:14, Christian König wrote:
->>> Concentrating this discussion on a very big misunderstanding first.
->>>
->>> Am 06.02.23 um 14:27 schrieb Danilo Krummrich:
->>>> [SNIP]
->>>> My understanding is that userspace is fully responsible on the parts 
->>>> of the GPU VA space it owns. This means that userspace needs to take 
->>>> care to *not* ask the kernel to modify mappings that are in use 
->>>> currently.
->>>
->>> This is a completely wrong assumption! Take a look at what games like 
->>> Forza Horizzon are doing.
->>>
->>> Basically that game allocates a very big sparse area and fills it 
->>> with pages from BOs while shaders are accessing it. And yes, as far 
->>> as I know this is completely valid behavior.
->>
->> I also think this is valid behavior. That's not the problem I'm trying 
->> to describe. In this case userspace modifies the VA space 
->> *intentionally* while shaders are accessing it, because it knows that 
->> the shaders can deal with reading 0s.
-> 
-> No, it's perfectly valid for userspace to modify the VA space even if 
-> shaders are not supposed to deal with reading 0s.
-> 
->>
->>
->> Just to have it all in place, the example I gave was:
->>  - two virtually contiguous buffers A and B
->>  - binding 1 mapped to A with BO offset 0
->>  - binding 2 mapped to B with BO offset length(A)
->>
->> What I did not mention both A and B aren't sparse buffers in this 
->> example, although it probably doesn't matter too much.
->>
->> Since the conditions to do so are given, we merge binding 1 and 
->> binding 2 right at the time when binding 2 is requested. To do so a 
->> driver might unmap binding 1 for a very short period of time (e.g. to 
->> (re-)map the freshly merged binding with a different page size if 
->> possible).
-> 
-> Nope, that's not correct handling.
 
-I agree, and that's exactly what I'm trying to say. However, I start 
-noticing that this is not correct if it happens within the same buffer 
-as well.
 
-> 
->>
->> From userspace perspective buffer A is ready to use before applying 
->> binding 2 to buffer B, hence it would be illegal to touch binding 1 
->> again when userspace asks the kernel to map binding 2 to buffer B.
->>
->> Besides that I think there is no point in merging between buffers 
->> anyway because we'd end up splitting such a merged mapping anyway 
->> later on when one of the two buffers is destroyed.
->>
->> Also, I think the same applies to sparse buffers as well, a mapping 
->> within A isn't expected to be re-mapped just because something is 
->> mapped to B.
->>
->> However, in this context I start wondering if re-mapping in the 
->> context of merge and split is allowed at all, even within the same 
->> sparse buffer (and even with a separate page table for sparse mappings 
->> as described in my last mail; shaders would never fault).
-> 
-> See, your assumption is that userspace/applications don't modify the VA 
-> space intentionally while the GPU is accessing it is just bluntly 
-> speaking incorrect.
-> 
+Am 08.02.23 um 10:01 schrieb Somalapuram Amaranath:
+> Use amdgpu_bo_in_cpu_visible_vram() instead.
+>
+> Signed-off-by: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>
+> ---
+>   drivers/gpu/drm/amd/amdgpu/amdgpu_object.c | 9 +++------
+>   1 file changed, 3 insertions(+), 6 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+> index 981010de0a28..d835ee2131d2 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+> @@ -600,7 +600,7 @@ int amdgpu_bo_create(struct amdgpu_device *adev,
+>   
+>   	if (!amdgpu_gmc_vram_full_visible(&adev->gmc) &&
+>   	    bo->tbo.resource->mem_type == TTM_PL_VRAM &&
+> -	    bo->tbo.resource->start < adev->gmc.visible_vram_size >> PAGE_SHIFT)
+> +	    amdgpu_bo_in_cpu_visible_vram(bo))
+>   		amdgpu_cs_report_moved_bytes(adev, ctx.bytes_moved,
+>   					     ctx.bytes_moved);
+>   	else
+> @@ -1346,7 +1346,6 @@ vm_fault_t amdgpu_bo_fault_reserve_notify(struct ttm_buffer_object *bo)
+>   	struct amdgpu_device *adev = amdgpu_ttm_adev(bo->bdev);
+>   	struct ttm_operation_ctx ctx = { false, false };
+>   	struct amdgpu_bo *abo = ttm_to_amdgpu_bo(bo);
+> -	unsigned long offset;
+>   	int r;
+>   
+>   	/* Remember that this BO was accessed by the CPU */
+> @@ -1355,8 +1354,7 @@ vm_fault_t amdgpu_bo_fault_reserve_notify(struct ttm_buffer_object *bo)
+>   	if (bo->resource->mem_type != TTM_PL_VRAM)
+>   		return 0;
+>   
+> -	offset = bo->resource->start << PAGE_SHIFT;
+> -	if ((offset + bo->base.size) <= adev->gmc.visible_vram_size)
+> +	if (amdgpu_bo_in_cpu_visible_vram(abo))
+>   		return 0;
+>   
+>   	/* Can't move a pinned BO to visible VRAM */
+> @@ -1378,10 +1376,9 @@ vm_fault_t amdgpu_bo_fault_reserve_notify(struct ttm_buffer_object *bo)
+>   	else if (unlikely(r))
+>   		return VM_FAULT_SIGBUS;
+>   
+> -	offset = bo->resource->start << PAGE_SHIFT;
+>   	/* this should never happen */
+>   	if (bo->resource->mem_type == TTM_PL_VRAM &&
+> -	    (offset + bo->base.size) > adev->gmc.visible_vram_size)
+> +	    amdgpu_bo_in_cpu_visible_vram(abo))
 
-I don't assume that. The opposite is the case. My assumption is that 
-it's always OK for userspace to intentionally modify the VA space.
+This check needs to be inversed. E.g. we return the error if the BO is 
+not in visible VRAM.
 
-However, I also assumed that if userspace asks for e.g. a new mapping 
-within a certain buffer it is OK for the kernel to apply further changes 
-(e.g. re-organize PTs to split or merge) to the VA space of which 
-userspace isn't aware of. At least as long as they happen within the 
-bounds of this particular buffer, but not for other buffers.
+Apart from that the patch looks good to me.
 
-I think the reasoning I had in mind was that I thought if userspace asks 
-for any modification of a given portion of the VA space (that is a 
-VKBuffer) userspace must assume that until this modification (e.g. 
-re-organization of PTs) is complete reading 0s intermediately may 
-happen. This seems to be clearly wrong.
+Regards,
+Christian.
 
-> When you have a VA address which is mapped to buffer A and accessed by 
-> some GPU shaders it is perfectly valid for the application to say "map 
-> it again to the same buffer A".
-> 
-> It is also perfectly valid for an application to re-map this region to a 
-> different buffer B, it's just not defined when the access then transits 
-> from A to B. (AFAIK this is currently worked on in a new specification).
-> 
-> So when your page table updates result in the shader to intermediately 
-> get 0s in return, because you change the underlying mapping you simply 
-> have some implementation bug in Nouveau.
-
-Luckily that's not the case (anymore).
-
-> 
-> I don't know how Nvidia hw handles this, and yes it's quite complicated 
-> on AMD hw as well because our TLBs are not really made for this use 
-> case, but I'm 100% sure that this is possible since it is still part of 
-> some of the specifications (mostly Vulkan I think).
-> 
-> To sum it up as far as I can see by giving the regions to the kernel is 
-> not something you would want for Nouveau either.
-
-If, as it turns out, it's also not allowed to do what I described above 
-within the same VKBuffer, I agree the bounds aren't needed for merging.
-
-However, I still don't see why we would want to merge over buffer 
-boundaries, because ultimately we'll end up splitting such a merged 
-mapping later on anyway once one of the buffers is destroyed.
-
-Also, as explained in one of the previous mails in nouveau we can have 
-separate PTs for sparse mappings with large page sizes and separate PTs 
-for memory backed mappings with smaller page sizes overlaying them. 
-Hence, I need to track a single sparse mapping per buffer spanning the 
-whole buffer (which I do with a region) and the actual memory backed 
-mappings within the same range.
-
-Now, this might or might not be unique for Nvidia hardware. If nouveau 
-would be the only potential user, plus we don't care about potentially 
-merging mappings over buffer boundaries and hence producing foreseeable 
-splits of those merged mappings, we could get rid of regions entirely.
-
-> 
-> Regards,
-> Christian.
-> 
-> 
->>
->>>
->>> So you need to be able to handle this case anyway and the approach 
->>> with the regions won't help you at all preventing that.
->>>
->>> Regards,
->>> Christian.
->>>
->>
-> 
+>   		return VM_FAULT_SIGBUS;
+>   
+>   	ttm_bo_move_to_lru_tail_unlocked(bo);
 
