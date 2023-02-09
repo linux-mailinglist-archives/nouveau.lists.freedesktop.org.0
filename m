@@ -1,48 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B71A769065D
-	for <lists+nouveau@lfdr.de>; Thu,  9 Feb 2023 12:16:41 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 51FC0690695
+	for <lists+nouveau@lfdr.de>; Thu,  9 Feb 2023 12:18:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3EFBB10E156;
-	Thu,  9 Feb 2023 11:16:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AA1A910E9B6;
+	Thu,  9 Feb 2023 11:18:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from ams.source.kernel.org (ams.source.kernel.org
  [IPv6:2604:1380:4601:e00::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0F37010E156;
- Thu,  9 Feb 2023 11:16:36 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C5DCC10E9B5;
+ Thu,  9 Feb 2023 11:18:22 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 9FFD3B81FF4;
- Thu,  9 Feb 2023 11:16:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66BDAC433D2;
- Thu,  9 Feb 2023 11:16:33 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 3C78CB82107;
+ Thu,  9 Feb 2023 11:18:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E0CB1C433D2;
+ Thu,  9 Feb 2023 11:18:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1675941394;
+ s=k20201202; t=1675941499;
  bh=fmwrvlSnzYMpOU6Bb/kbeD5NAHZC6hAf1LWtjxppyh8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=fe7a0eF2Z/4f9pzwCIURmjMK00WA6oNYBctLOZ2rUVv8emKe66aOp34YibkHvI5sp
- jsqZ6GQ/SSaeUPNv/TMIIKhVPt03ZxGNSGbk+wgbdS3nTxK5mohThnmdzPavPYog3r
- PnQ32mRW3UAdJQrRwyp0RPPBQ9GPEgA2TIgK+ahG4CnNZmaTjXHU3xgjXkEv0RCmiM
- BZ2a84SOY3MM/mLd5PC5aaay3x+SME3B6aE4sbtawjytIdyLFHGkNk7TDFuAjI7NPj
- 6FjOQG5KN6nNx8kHeLf5tPqyIdrPOIANzOm8lC7KGZmsuNSX37QLkHzOhFZErBSZc3
- sjeeNOsVkVLkA==
+ b=aEGrR/WctjNNwsAnEovCEFcZYJ+HI0vj8fVRy8H3bDpB9z9vWiz/li+bkonSzMWN9
+ R+VSd9jTM1KH1MEiPCLuNse0OwdxYBXdotRI+G3nAuRaBmQpRPC2rv5AoZuJYcpmTm
+ XEv5vj6Ii7+3WlMbct5xhGsx+nZ0avdxCkAM3YpTENvR97tZ7YqLu+UCwJk2xpw/3L
+ THVelHKwC5cnXFmy9EOHXJM6YYKhCndYb4+UiS2q1rhvMSEcBSvxryOdQHmp+6TRo7
+ 0WeQIKef24rXOvqEEiSbi/YRYBPzJG8qPIS05OCkwz2LOxh29LaJx81dJtV4rlb1bc
+ vjlwfaE4vp0og==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu,  9 Feb 2023 06:14:41 -0500
-Message-Id: <20230209111459.1891941-22-sashal@kernel.org>
+Date: Thu,  9 Feb 2023 06:17:24 -0500
+Message-Id: <20230209111731.1892569-12-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230209111459.1891941-1-sashal@kernel.org>
-References: <20230209111459.1891941-1-sashal@kernel.org>
+In-Reply-To: <20230209111731.1892569-1-sashal@kernel.org>
+References: <20230209111731.1892569-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH AUTOSEL 6.1 22/38] drm/nouveau/devinit/tu102-:
+Subject: [Nouveau] [PATCH AUTOSEL 5.15 12/17] drm/nouveau/devinit/tu102-:
  wait for GFW_BOOT_PROGRESS == COMPLETED
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
