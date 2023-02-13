@@ -2,29 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4051692668
-	for <lists+nouveau@lfdr.de>; Fri, 10 Feb 2023 20:33:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 77279693CB2
+	for <lists+nouveau@lfdr.de>; Mon, 13 Feb 2023 03:57:58 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 108A110EDE9;
-	Fri, 10 Feb 2023 19:33:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 236A010E03B;
+	Mon, 13 Feb 2023 02:57:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de
- [80.237.130.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7AF7510EDD6;
- Fri, 10 Feb 2023 19:33:04 +0000 (UTC)
-Received: from [2a02:8108:8980:2478:8cde:aa2c:f324:937e]; authenticated
- by wp530.webpack.hosteurope.de running ExIM with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
- id 1pQZ8n-0000Mk-Td; Fri, 10 Feb 2023 20:33:01 +0100
-Message-ID: <a6188878-f84c-0fcc-9509-b9d7ab797f4c@leemhuis.info>
-Date: Fri, 10 Feb 2023 20:33:01 +0100
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2972110E035;
+ Mon, 13 Feb 2023 02:57:47 +0000 (UTC)
+Received: by mail-ed1-x534.google.com with SMTP id w3so4069197edc.2;
+ Sun, 12 Feb 2023 18:57:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hw9ehYVDq4moKFFfu+9OhsPZCy7y23ffO2nBq/yLrA4=;
+ b=PJrSank/HxSMunzkm1fR5tYP9U7Z8BvPW9A0/ge4QaohJG+zg4gfB+0kLZNR8O8w0c
+ rgGY+nFWRqAsO3bYR6kaqoVXT4XmhFi64UVXIdHTJUCyjsfzNy/B62cITCl1m7k5vTVE
+ jLhNCEt19V+6WoPstiHKU9RVs8lJP7hNDffQACva4go52M5BuI/HxdQiqIhXVE+eHtyz
+ Exj9shR338hQzgVtytzQXCQYY8tHAMPnxKo8kiGejAKh40Uiu2TTUlVr+PRLg5dUZ4Ic
+ epiynC1faSejQjvJCGQETmrp6DHmy8ZsHkaHjZlVliJalnkLnbm8vI7q24DLf1fhdF5h
+ IxwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hw9ehYVDq4moKFFfu+9OhsPZCy7y23ffO2nBq/yLrA4=;
+ b=KROn4m1mo3Wi9j//iv1Xjxodv7BPoApHFlw4R3w3TxvF3xXlFl/Jf9+7c/kS2EPOT+
+ azKGFZs8FvDeH8qEpBrml991j145afdT7w8iOBzuwGz1pU4QToDHOmxAxgW8x7k5mxT2
+ C0vEf5qzuy30iEJCahj93rc2FyW5/Z3nds/KKXd2cYbF1oWnBRVB7HA7NTJNPAK/JSnW
+ BwmrqIqrTRpByo9na21qJCKwjb8rhl7Iw7jbMTpXeGP6IuEDBE5IyuO/qHZQhAgqursZ
+ co1om+9WL0riKhbUrCvct6mw3Zrx3gucB9h86Fn/rPW8syVEsUZBEAwTVwjvinQGpClD
+ ZQGQ==
+X-Gm-Message-State: AO0yUKWDNAjj4LxnaZTruNI6Iu4XXvdrfOcsSMcYfK3023I71/yHyoN3
+ 2ExOaViaEBFbmF3YI4aVOUKQ/Lfx+F7pXFD+OPk=
+X-Google-Smtp-Source: AK7set9mBuQIrk3oO2rWHodC/1gO5O/yOJ2sf/e+WQ0l7IxCo7aLgd6UYYj2pbnhDI/nTsLxr8j0ivM4KjuT+dYQTxY=
+X-Received: by 2002:a50:9eee:0:b0:4aa:a4f2:ca1a with SMTP id
+ a101-20020a509eee000000b004aaa4f2ca1amr5993822edf.0.1676257065447; Sun, 12
+ Feb 2023 18:57:45 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Content-Language: en-US, de-DE
-To: Karol Herbst <kherbst@redhat.com>,
- Linux regressions mailing list <regressions@lists.linux.dev>
 References: <b64705e3-2e63-a466-f829-f9568b06766a@googlemail.com>
  <fcec3c78-b5d9-eb48-0fc0-d1f27de87f23@leemhuis.info>
  <b21fa1f6-a71d-5657-8596-ee0be73185ea@leemhuis.info>
@@ -40,14 +59,14 @@ References: <b64705e3-2e63-a466-f829-f9568b06766a@googlemail.com>
  <5cf46df8-0fa2-e9f5-aa8e-7f7f703d96dd@googlemail.com>
  <f72fe15b-db1d-56dd-aaf6-3cba68a8bf0a@leemhuis.info>
  <CACO55tvR4ydDOXt=9nbR3n2aFLKrj8zeuGRR_xpezVQBBLrjqg@mail.gmail.com>
-From: "Linux regression tracking (Thorsten Leemhuis)"
- <regressions@leemhuis.info>
-In-Reply-To: <CACO55tvR4ydDOXt=9nbR3n2aFLKrj8zeuGRR_xpezVQBBLrjqg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-bounce-key: webpack.hosteurope.de; regressions@leemhuis.info; 1676057584;
- 358fd3b5; 
-X-HE-SMSGID: 1pQZ8n-0000Mk-Td
+ <a6188878-f84c-0fcc-9509-b9d7ab797f4c@leemhuis.info>
+ <d031f0a5-8d5e-af51-6db6-11844de3eeba@googlemail.com>
+In-Reply-To: <d031f0a5-8d5e-af51-6db6-11844de3eeba@googlemail.com>
+From: Dave Airlie <airlied@gmail.com>
+Date: Mon, 13 Feb 2023 12:57:32 +1000
+Message-ID: <CAPM=9tz+wksJTvMi_4Ef7XWezfH0ReN2se189s8Q=obJjHC+Fw@mail.gmail.com>
+To: Chris Clayton <chris2553@googlemail.com>
+Content-Type: text/plain; charset="UTF-8"
 Subject: Re: [Nouveau] linux-6.2-rc4+ hangs on poweroff/reboot: Bisected
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -60,168 +79,57 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: Linux regressions mailing list <regressions@lists.linux.dev>
-Cc: ML nouveau <nouveau@lists.freedesktop.org>,
- Chris Clayton <chris2553@googlemail.com>, LKML <linux-kernel@vger.kernel.org>,
+Cc: Linux regressions mailing list <regressions@lists.linux.dev>,
+ ML nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
  ML dri-devel <dri-devel@lists.freedesktop.org>, bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 10.02.23 20:01, Karol Herbst wrote:
-> On Fri, Feb 10, 2023 at 7:35 PM Linux regression tracking (Thorsten
-> Leemhuis) <regressions@leemhuis.info> wrote:
->>
->> On 08.02.23 09:48, Chris Clayton wrote:
->>>
->>> I'm assuming  that we are not going to see a fix for this regression before 6.2 is released.
->>
->> Yeah, looks like it. That's unfortunate, but happens. But there is still
->> time to fix it and there is one thing I wonder:
->>
->> Did any of the nouveau developers look at the netconsole captures Chris
->> posted more than a week ago to check if they somehow help to track down
->> the root of this problem?
-> 
-> I did now and I can't spot anything. I think at this point it would
-> make sense to dump the active tasks/threads via sqsrq keys to see if
-> any is in a weird state preventing the machine from shutting down.
+On Sun, 12 Feb 2023 at 00:43, Chris Clayton <chris2553@googlemail.com> wrote:
+>
+>
+>
+> On 10/02/2023 19:33, Linux regression tracking (Thorsten Leemhuis) wrote:
+> > On 10.02.23 20:01, Karol Herbst wrote:
+> >> On Fri, Feb 10, 2023 at 7:35 PM Linux regression tracking (Thorsten
+> >> Leemhuis) <regressions@leemhuis.info> wrote:
+> >>>
+> >>> On 08.02.23 09:48, Chris Clayton wrote:
+> >>>>
+> >>>> I'm assuming  that we are not going to see a fix for this regression before 6.2 is released.
+> >>>
+> >>> Yeah, looks like it. That's unfortunate, but happens. But there is still
+> >>> time to fix it and there is one thing I wonder:
+> >>>
+> >>> Did any of the nouveau developers look at the netconsole captures Chris
+> >>> posted more than a week ago to check if they somehow help to track down
+> >>> the root of this problem?
+> >>
+> >> I did now and I can't spot anything. I think at this point it would
+> >> make sense to dump the active tasks/threads via sqsrq keys to see if
+> >> any is in a weird state preventing the machine from shutting down.
+> >
+> > Many thx for looking into it!
+>
+> Yes, thanks Karol.
+>
+> Attached is the output from dmesg when this block of code:
+>
+>         /bin/mount /dev/sda7 /mnt/sda7
+>         /bin/mountpoint /proc || /bin/mount /proc
+>         /bin/dmesg -w > /mnt/sda7/sysrq.dmesg.log &
+>         /bin/echo t > /proc/sysrq-trigger
+>         /bin/sleep 1
+>         /bin/sync
+>         /bin/sleep 1
+>         kill $(pidof dmesg)
+>         /bin/umount /mnt/sda7
+>
+> is executed immediately before /sbin/reboot is called as the final step of rebooting my system.
+>
+> I hope this is what you were looking for, but if not, please let me know what you need
 
-Many thx for looking into it!
+Another shot in the dark, but does nouveau.runpm=0 help at all?
 
-Ciao, Thorsten
-
->> Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
->> --
->> Everything you wanna know about Linux kernel regression tracking:
->> https://linux-regtracking.leemhuis.info/about/#tldr
->> If I did something stupid, please tell me, as explained on that page.
->>
->>> Consequently, I've
->>> implemented a (very simple) workaround. All that happens is that in the (sysv) init script that starts and stops SDDM,
->>> the nouveau module is removed once SDDM is stopped. With that in place, my system no longer freezes on reboot or poweroff.
->>>
->>> Let me know if I can provide any additional diagnostics although, with the problem seemingly occurring so late in the
->>> shutdown process, I may need help on how to go about capturing.
->>>
->>> Chris
->>>
->>> On 02/02/2023 20:45, Chris Clayton wrote:
->>>>
->>>>
->>>> On 01/02/2023 13:51, Chris Clayton wrote:
->>>>>
->>>>>
->>>>> On 30/01/2023 23:27, Ben Skeggs wrote:
->>>>>> On Tue, 31 Jan 2023 at 09:09, Chris Clayton <chris2553@googlemail.com> wrote:
->>>>>>>
->>>>>>> Hi again.
->>>>>>>
->>>>>>> On 30/01/2023 20:19, Chris Clayton wrote:
->>>>>>>> Thanks, Ben.
->>>>>>>
->>>>>>> <snip>
->>>>>>>
->>>>>>>>> Hey,
->>>>>>>>>
->>>>>>>>> This is a complete shot-in-the-dark, as I don't see this behaviour on
->>>>>>>>> *any* of my boards.  Could you try the attached patch please?
->>>>>>>>
->>>>>>>> Unfortunately, the patch made no difference.
->>>>>>>>
->>>>>>>> I've been looking at how the graphics on my laptop is set up, and have a bit of a worry about whether the firmware might
->>>>>>>> be playing a part in this problem. In order to offload video decoding to the NVidia TU117 GPU, it seems the scrubber
->>>>>>>> firmware must be available, but as far as I know,that has not been released by NVidia. To get it to work, I followed
->>>>>>>> what ubuntu have done and the scrubber in /lib/firmware/nvidia/tu117/nvdec/ is a symlink to
->>>>>>>> ../../tu116/nvdev/scrubber.bin. That, of course, means that some of the firmware loaded is for a different card is being
->>>>>>>> loaded. I note that processing related to firmware is being changed in the patch. Might my set up be at the root of my
->>>>>>>> problem?
->>>>>>>>
->>>>>>>> I'll have a fiddle an see what I can work out.
->>>>>>>>
->>>>>>>> Chris
->>>>>>>>
->>>>>>>>>
->>>>>>>>> Thanks,
->>>>>>>>> Ben.
->>>>>>>>>
->>>>>>>>>>
->>>>>>>
->>>>>>> Well, my fiddling has got my system rebooting and shutting down successfully again. I found that if I delete the symlink
->>>>>>> to the scrubber firmware, reboot and shutdown work again. There are however, a number of other files in the tu117
->>>>>>> firmware directory tree that that are symlinks to actual files in its tu116 counterpart. So I deleted all of those too.
->>>>>>> Unfortunately, the absence of one or more of those symlinks causes Xorg to fail to start. I've reinstated all the links
->>>>>>> except scrubber and I now have a system that works as it did until I tried to run a kernel that includes the bad commit
->>>>>>> I identified in my bisection. That includes offloading video decoding to the NVidia card, so what ever I read that said
->>>>>>> the scrubber firmware was needed seems to have been wrong. I get a new message that (nouveau 0000:01:00.0: fb: VPR
->>>>>>> locked, but no scrubber binary!), but, hey, we can't have everything.
->>>>>>>
->>>>>>> If you still want to get to the bottom of this, let me know what you need me to provide and I'll do my best. I suspect
->>>>>>> you might want to because there will a n awful lot of Ubuntu-based systems out there with that scrubber.bin symlink in
->>>>>>> place. On the other hand,m it could but quite a while before ubuntu are deploying 6.2 or later kernels.
->>>>>> The symlinks are correct - whole groups of GPUs share the same FW, and
->>>>>> we use symlinks in linux-firmware to represent this.
->>>>>>
->>>>>> I don't really have any ideas how/why this patch causes issues with
->>>>>> shutdown - it's a path that only gets executed during initialisation.
->>>>>> Can you try and capture the kernel log during shutdown ("dmesg -w"
->>>>>> over ssh? netconsole?), and see if there's any relevant messages
->>>>>> providing a hint at what's going on?  Alternatively, you could try
->>>>>> unloading the module (you will have to stop X/wayland/gdm/etc/etc
->>>>>> first) and seeing if that hangs too.
->>>>>>
->>>>>> Ben.
->>>>>
->>>>> Sorry for the delay - I've been learning about netconsole and netcat. However, I had no success with ssh and netconsole
->>>>> produced a log with nothing unusual in it.
->>>>>
->>>>> Simply stopping Xorg and removing the nouveau module succeeds.
->>>>>
->>>>> So, I rebuilt rc6+ after a pull from linus' tree this morning and set the nouveau debug level to 7. I then booted to a
->>>>> console before doing a reboot (with Ctl+Alt+Del). As expected the machine locked up just before it would ordinarily
->>>>> restart. The last few lines on the console might be helpful:
->>>>>
->>>>> ...
->>>>> nouveau 0000:01:00:0  fifo: preinit running...
->>>>> nouveau 0000:01:00:0  fifo: preinit completed in 4us
->>>>> nouveau 0000:01:00:0  gr: preinit running...
->>>>> nouveau 0000:01:00:0  gr: preinit completed in 0us
->>>>> nouveau 0000:01:00:0  nvdec0: preinit running...
->>>>> nouveau 0000:01:00:0  nvdec0: preinit completed in 0us
->>>>> nouveau 0000:01:00:0  nvdec0: preinit running...
->>>>> nouveau 0000:01:00:0  nvdec0: preinit completed in 0us
->>>>> nouveau 0000:01:00:0  sec2: preinit running...
->>>>> nouveau 0000:01:00:0  sec2: preinit completed in 0us
->>>>> nouveau 0000:01:00:0  fb:.VPR locked, running scrubber binary
->>>>>
->>>>> These messages appear after the "sd 4:0:0:0 [sda] Stopping disk" I reported in my initial email.
->>>>>
->>>>> After the "running scrubber" line appears the machine is locked and I have to hold down the power button to recover. I
->>>>> get the same outcome from running "halt -dip", "poweroff -di" and "shutdown -h -P now". I guess it's no surprise that
->>>>> all three result in the same outcome because invocations halt, poweroff and reboot (without the -f argument)from a
->>>>> runlevel other than 0 resukt in shutdown being run. switching to runlevel 0 with "telenit 0" results in the same
->>>>> messages from nouveau followed by the lockup.
->>>>>
->>>>> Let me know if you need any additional diagnostics.
->>>>>
->>>>> Chris
->>>>>
->>>>
->>>> I've done some more investigation and found that I hadn't done sufficient amemdment the scripts run at shutdown to
->>>> prevent the network being shutdown. I've now got netconsole captures for 6.2.0-rc6+
->>>> (9f266ccaa2f5228bfe67ad58a94ca4e0109b954a) and, for comparison, 6.1.9. These two logs are attached.
->>>>
->>>> Chris
->>>>
->>>>>>
->>>>>>>
->>>>>>> Thanks,
->>>>>>>
->>>>>>> Chris
->>>>>>>
->>>>>>> <snip>
->>>
->>>
->>
-> 
-> 
-> 
+Dave.
