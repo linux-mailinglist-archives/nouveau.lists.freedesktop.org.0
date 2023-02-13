@@ -2,84 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCFBD6F6BCA
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C45EC6F6BC0
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E07C610E491;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1165310E483;
 	Thu,  4 May 2023 12:32:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2E49510E510;
- Mon, 13 Feb 2023 09:14:52 +0000 (UTC)
-Received: by mail-wr1-x431.google.com with SMTP id m14so11343081wrg.13;
- Mon, 13 Feb 2023 01:14:52 -0800 (PST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8E1D910E5C8;
+ Mon, 13 Feb 2023 14:12:54 +0000 (UTC)
+Received: by mail-wr1-x42b.google.com with SMTP id m10so3463886wrn.4;
+ Mon, 13 Feb 2023 06:12:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=googlemail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ h=content-transfer-encoding:in-reply-to:cc:from:to:references
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=D0Zxk9nlGibG/+2xr84KCXIYQirPbNBqFNHwNX/j4MI=;
- b=dptk+QMfkriyZws1xoVXnRyDeqjdPmOca2BdGPx0pDsafOrpFNaXkT/lJD7PeErW9i
- sc0U9vMqp0pOsn1LTpuj9/RSCddKKctubYGbMOAFCwxAFaV9E2cRMDZxmypnygSaiNf7
- XviuGYlSR8O5lkgpcfaFH9sZXK4vg9zQFc+cvU60IR4q8vpzkHdyIJuYSPX3eBW4pcJk
- zGj84JnHlisy7tlWg5QjxXcNBzMlToEIsK8S+zG+ZZX3MbNHL+7SLwxQWoaKWQhw41Dm
- 42bHnuYOzbwTwW5Ffspu9DLsYRuPwGREPdteJCt0ohfFHuRhNB0CW2EmPb14RuoIMQt8
- RWlA==
+ bh=EsqkxOvpnaFZCqHajOpHltyVhIkx+s6eYXNOmyQ4+o4=;
+ b=OUzZcLleBxOMqrP9XviKuUrD0xYSPYpPLESmUkD1O6ZcmLJxTCv8nULdz7i0tyZs60
+ /ERJgBT0bqLe9+7CQv5+/Bniht4E6MKnF95RcrMKk0rm3JLHFamh/Dw7Xq3XQcXwk3L0
+ cepU8kuWhq/7HKV127ztH7nXOnwNqY2dSnKewNDpMhj0UB+gIr64VdEQGaRdYH6aZ3/i
+ A9plwBGs20Yy1rjA9v5CIevipFF8L4XI7cG2IZGLTvXaoXOZczrOPIDxKkL4zEpwrZZ7
+ HnhClGGjw8mKRBY8tBK9+/hYx99wmLerEASStnvHqBfD2EvTq2cDRCzv+a1oEi+vQADl
+ 0Uuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ h=content-transfer-encoding:in-reply-to:cc:from:to:references
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=D0Zxk9nlGibG/+2xr84KCXIYQirPbNBqFNHwNX/j4MI=;
- b=RilX+wEGeoQtpzjnQLd4t7LO7S9BEh7uzrve+17cRVuO1z5S3r2Fk0LbhcDU8y1EqW
- 8YGcgEPzOIBHRq2LcFhvEXwUeM8u6Rh4LTJ5rhK54nSAhtJWHtDImyEPZghy1988mmD7
- ejpqKtuiF0igLTQbVklXmeoxSQU7r2s3mAe7b7u0fZ+TDSs9qdA97jlbS695P3joiOCA
- yVmcTF078aaKEKaAflQHWtcRC4wwzB6P7zNCmtb2RAI01ijKHmeZ+7rEEDSEj4SIHh5S
- BnILay9iIqrlZHztV/T12M2aGEfn0vaSqKVhyiEHBherkcFDTGOK2wbO0VZOtKrRRu5H
- lxmg==
-X-Gm-Message-State: AO0yUKWsYWhEYTa/kHv1+LJpCpSyfXMSPFeDvIpZIqmmPY71KMEBCnqP
- WFzCZFfm9JSOKK7jTKqXwKFSq/VypsuSLA==
-X-Google-Smtp-Source: AK7set+MFO189SjOPO9EioJwc4mDcWfoO7PkSuUi7yW7G2UAmspopBZ46DUZE4wO5fFZU2qmPXZ44w==
-X-Received: by 2002:a5d:488b:0:b0:2c3:daf1:ec3 with SMTP id
- g11-20020a5d488b000000b002c3daf10ec3mr21529700wrq.61.1676279690626; 
- Mon, 13 Feb 2023 01:14:50 -0800 (PST)
+ bh=EsqkxOvpnaFZCqHajOpHltyVhIkx+s6eYXNOmyQ4+o4=;
+ b=ZP7aQ5DfCA7CkzmfBABSMxr4GnwByrQt223sRUiIJuyMN+AJA9API7UEQJFv10ybDj
+ YC9gO+XthbbsmdunFyNor3a7NHxBa0Ub+oUOjfQ5YlEJd74OTMGmb+OHNRKCyhSm+Le+
+ 7RXKFGdVarEKMqDT8uPeO1DlPski+uVcfVITEJkr8K2DDI+ERNve6f6pzeq7mVQUx2GC
+ AMTYUQNMElOMhVP/xBPCLrgwneybnCM18cZBiAcuIVyMvcVg7S4nRRbJyFVaZ1qt/w0K
+ 65VM/dwKkFhM9MCnQGm7gjcNg3+kHJmxekbppoIfRTM6ig7AdD1Y/Sx7ugsG1LkUNMON
+ 1F/Q==
+X-Gm-Message-State: AO0yUKWeDTyLsMDydWLJOmVy/zakBRDIINM0Su2e5shjVw6VMn6csSJW
+ Ys6lB6ZI+RTyO+64sk99BuAnReDPF3w=
+X-Google-Smtp-Source: AK7set/wugfPYZOYQTzQrvfbcgzO0WnIG8etqnnThADl0ZnsrGA9jjVo3EGtn3NH4mRbfJ3Nruf9Wg==
+X-Received: by 2002:adf:e54a:0:b0:2c5:5984:6f07 with SMTP id
+ z10-20020adfe54a000000b002c559846f07mr2319355wrm.26.1676297573096; 
+ Mon, 13 Feb 2023 06:12:53 -0800 (PST)
 Received: from [192.168.1.10] (97e09f27.skybroadband.com. [151.224.159.39])
  by smtp.googlemail.com with ESMTPSA id
- i8-20020a5d4388000000b002c5493a17efsm7983696wrq.25.2023.02.13.01.14.49
+ w11-20020adff9cb000000b002c54e9f6bc2sm6176883wrr.77.2023.02.13.06.12.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Feb 2023 01:14:50 -0800 (PST)
-Message-ID: <4e786e22-f17a-da76-5129-8fef0c7c825a@googlemail.com>
-Date: Mon, 13 Feb 2023 09:14:49 +0000
+ Mon, 13 Feb 2023 06:12:52 -0800 (PST)
+Message-ID: <e0b80506-b3cf-315b-4327-1b988d86031e@googlemail.com>
+Date: Mon, 13 Feb 2023 14:12:51 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.2
-To: Dave Airlie <airlied@gmail.com>
-References: <b64705e3-2e63-a466-f829-f9568b06766a@googlemail.com>
- <b21fa1f6-a71d-5657-8596-ee0be73185ea@leemhuis.info>
- <3ab28896-70e9-6f90-5b97-e5397b06e715@googlemail.com>
- <a163dd7b-c5d1-a07b-a816-7a2dfd3edfd4@leemhuis.info>
- <ab1b0f73-6b4e-8602-2999-b7bec25d92db@googlemail.com>
- <CACAvsv4sOtPjCVnEcKd2RCUqYWxSn5XKyksbS-Bds2qCqyusVw@mail.gmail.com>
- <1cdb84ac-f7a8-66ba-98fc-3db302b49a5a@googlemail.com>
- <dab6eb81-db3f-8fa1-84ad-9b40e209514b@googlemail.com>
- <CACAvsv5iYdF3P8AbyrbYo3zGmYRYhxDWn7WbAR5V9qHpbgBXRA@mail.gmail.com>
- <1632a9ef-2954-c8f0-cdc9-03157c9d8547@googlemail.com>
- <5abbee70-cc84-1528-c3d8-9befd9edd611@googlemail.com>
- <5cf46df8-0fa2-e9f5-aa8e-7f7f703d96dd@googlemail.com>
- <f72fe15b-db1d-56dd-aaf6-3cba68a8bf0a@leemhuis.info>
- <CACO55tvR4ydDOXt=9nbR3n2aFLKrj8zeuGRR_xpezVQBBLrjqg@mail.gmail.com>
- <a6188878-f84c-0fcc-9509-b9d7ab797f4c@leemhuis.info>
- <d031f0a5-8d5e-af51-6db6-11844de3eeba@googlemail.com>
- <CAPM=9tz+wksJTvMi_4Ef7XWezfH0ReN2se189s8Q=obJjHC+Fw@mail.gmail.com>
 Content-Language: en-GB
+References: <ab3b4b8a-93a7-5129-5996-f0b364b04dda@googlemail.com>
+To: ">> ML dri-devel" <dri-devel@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ Linux regressions mailing list <regressions@lists.linux.dev>,
+ Karol Herbst <kherbst@redhat.com>, Ben Skeggs <skeggsb@gmail.com>,
+ bskeggs@redhat.com, Lyude Paul <lyude@redhat.com>,
+ ML nouveau <nouveau@lists.freedesktop.org>
 From: Chris Clayton <chris2553@googlemail.com>
-In-Reply-To: <CAPM=9tz+wksJTvMi_4Ef7XWezfH0ReN2se189s8Q=obJjHC+Fw@mail.gmail.com>
+In-Reply-To: <ab3b4b8a-93a7-5129-5996-f0b364b04dda@googlemail.com>
+X-Forwarded-Message-Id: <ab3b4b8a-93a7-5129-5996-f0b364b04dda@googlemail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Thu, 04 May 2023 12:31:37 +0000
-Subject: Re: [Nouveau] linux-6.2-rc4+ hangs on poweroff/reboot: Bisected
+Subject: [Nouveau] Fwd: linux-6.2-rc4+ hangs on poweroff/reboot: Bisected
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,14 +81,22 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Linux regressions mailing list <regressions@lists.linux.dev>,
- ML nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>, bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Proof, if any where needed, that I should consume more coffee before dealing with email...
 
+Adding cc recipients that were dropped in my message this morning.
+
+
+-------- Forwarded Message --------
+Subject: Re: linux-6.2-rc4+ hangs on poweroff/reboot: Bisected
+Date: Mon, 13 Feb 2023 09:21:10 +0000
+From: Chris Clayton <chris2553@googlemail.com>
+To: Dave Airlie <airlied@gmail.com>
+
+[ Apologies for the incomplete message I sent a few minutes ago. I should have had more coffee before I started dealing
+with email. ]
 
 On 13/02/2023 02:57, Dave Airlie wrote:
 > On Sun, 12 Feb 2023 at 00:43, Chris Clayton <chris2553@googlemail.com> wrote:
@@ -146,7 +144,14 @@ On 13/02/2023 02:57, Dave Airlie wrote:
 >> I hope this is what you were looking for, but if not, please let me know what you need
 > 
 
-Thanks Dave.
-> Another ot in the dark, but does nouveau.runpm=0 help at all?
+Thanks, Dave.
+
+> Another shot in the dark, but does nouveau.runpm=0 help at all?
 > 
+Yes, it does. With runpm=0, both reboot and poweroff work on my laptop. Of course, it also means that the discrete
+(NVidia) GPU is now powered on permanently.
+
+Chris
+
+
 > Dave.
