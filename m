@@ -1,75 +1,39 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C45EC6F6BC0
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:32 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D43A06F6BDC
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:34:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1165310E483;
-	Thu,  4 May 2023 12:32:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F092210E4E6;
+	Thu,  4 May 2023 12:33:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8E1D910E5C8;
- Mon, 13 Feb 2023 14:12:54 +0000 (UTC)
-Received: by mail-wr1-x42b.google.com with SMTP id m10so3463886wrn.4;
- Mon, 13 Feb 2023 06:12:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=googlemail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:cc:from:to:references
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=EsqkxOvpnaFZCqHajOpHltyVhIkx+s6eYXNOmyQ4+o4=;
- b=OUzZcLleBxOMqrP9XviKuUrD0xYSPYpPLESmUkD1O6ZcmLJxTCv8nULdz7i0tyZs60
- /ERJgBT0bqLe9+7CQv5+/Bniht4E6MKnF95RcrMKk0rm3JLHFamh/Dw7Xq3XQcXwk3L0
- cepU8kuWhq/7HKV127ztH7nXOnwNqY2dSnKewNDpMhj0UB+gIr64VdEQGaRdYH6aZ3/i
- A9plwBGs20Yy1rjA9v5CIevipFF8L4XI7cG2IZGLTvXaoXOZczrOPIDxKkL4zEpwrZZ7
- HnhClGGjw8mKRBY8tBK9+/hYx99wmLerEASStnvHqBfD2EvTq2cDRCzv+a1oEi+vQADl
- 0Uuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:cc:from:to:references
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=EsqkxOvpnaFZCqHajOpHltyVhIkx+s6eYXNOmyQ4+o4=;
- b=ZP7aQ5DfCA7CkzmfBABSMxr4GnwByrQt223sRUiIJuyMN+AJA9API7UEQJFv10ybDj
- YC9gO+XthbbsmdunFyNor3a7NHxBa0Ub+oUOjfQ5YlEJd74OTMGmb+OHNRKCyhSm+Le+
- 7RXKFGdVarEKMqDT8uPeO1DlPski+uVcfVITEJkr8K2DDI+ERNve6f6pzeq7mVQUx2GC
- AMTYUQNMElOMhVP/xBPCLrgwneybnCM18cZBiAcuIVyMvcVg7S4nRRbJyFVaZ1qt/w0K
- 65VM/dwKkFhM9MCnQGm7gjcNg3+kHJmxekbppoIfRTM6ig7AdD1Y/Sx7ugsG1LkUNMON
- 1F/Q==
-X-Gm-Message-State: AO0yUKWeDTyLsMDydWLJOmVy/zakBRDIINM0Su2e5shjVw6VMn6csSJW
- Ys6lB6ZI+RTyO+64sk99BuAnReDPF3w=
-X-Google-Smtp-Source: AK7set/wugfPYZOYQTzQrvfbcgzO0WnIG8etqnnThADl0ZnsrGA9jjVo3EGtn3NH4mRbfJ3Nruf9Wg==
-X-Received: by 2002:adf:e54a:0:b0:2c5:5984:6f07 with SMTP id
- z10-20020adfe54a000000b002c559846f07mr2319355wrm.26.1676297573096; 
- Mon, 13 Feb 2023 06:12:53 -0800 (PST)
-Received: from [192.168.1.10] (97e09f27.skybroadband.com. [151.224.159.39])
- by smtp.googlemail.com with ESMTPSA id
- w11-20020adff9cb000000b002c54e9f6bc2sm6176883wrr.77.2023.02.13.06.12.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Feb 2023 06:12:52 -0800 (PST)
-Message-ID: <e0b80506-b3cf-315b-4327-1b988d86031e@googlemail.com>
-Date: Mon, 13 Feb 2023 14:12:51 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 4586810E1BB;
+ Wed, 15 Feb 2023 09:57:34 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 036C31042;
+ Wed, 15 Feb 2023 01:58:16 -0800 (PST)
+Received: from [10.57.11.212] (unknown [10.57.11.212])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 910D73F663;
+ Wed, 15 Feb 2023 01:57:30 -0800 (PST)
+Message-ID: <3020f24b-e387-930a-8cf9-2fd02dbe5779@arm.com>
+Date: Wed, 15 Feb 2023 09:57:30 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.2
+ Thunderbird/102.7.1
+To: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ dri-devel@lists.freedesktop.org
+References: <20230214125050.1205394-1-tvrtko.ursulin@linux.intel.com>
 Content-Language: en-GB
-References: <ab3b4b8a-93a7-5129-5996-f0b364b04dda@googlemail.com>
-To: ">> ML dri-devel" <dri-devel@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>,
- Linux regressions mailing list <regressions@lists.linux.dev>,
- Karol Herbst <kherbst@redhat.com>, Ben Skeggs <skeggsb@gmail.com>,
- bskeggs@redhat.com, Lyude Paul <lyude@redhat.com>,
- ML nouveau <nouveau@lists.freedesktop.org>
-From: Chris Clayton <chris2553@googlemail.com>
-In-Reply-To: <ab3b4b8a-93a7-5129-5996-f0b364b04dda@googlemail.com>
-X-Forwarded-Message-Id: <ab3b4b8a-93a7-5129-5996-f0b364b04dda@googlemail.com>
+From: Steven Price <steven.price@arm.com>
+In-Reply-To: <20230214125050.1205394-1-tvrtko.ursulin@linux.intel.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 04 May 2023 12:31:37 +0000
-Subject: [Nouveau] Fwd: linux-6.2-rc4+ hangs on poweroff/reboot: Bisected
+Subject: Re: [Nouveau] [PATCH] drm/gem: Expose the buffer object handle to
+ userspace last
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,77 +45,188 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: Rob Clark <robdclark@chromium.org>, lima@lists.freedesktop.org,
+ Tvrtko Ursulin <tvrtko.ursulin@intel.com>, nouveau@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ David Herrmann <dh.herrmann@gmail.com>, spice-devel@lists.freedesktop.org,
+ Zack Rusin <zackr@vmware.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Proof, if any where needed, that I should consume more coffee before dealing with email...
-
-Adding cc recipients that were dropped in my message this morning.
-
-
--------- Forwarded Message --------
-Subject: Re: linux-6.2-rc4+ hangs on poweroff/reboot: Bisected
-Date: Mon, 13 Feb 2023 09:21:10 +0000
-From: Chris Clayton <chris2553@googlemail.com>
-To: Dave Airlie <airlied@gmail.com>
-
-[ Apologies for the incomplete message I sent a few minutes ago. I should have had more coffee before I started dealing
-with email. ]
-
-On 13/02/2023 02:57, Dave Airlie wrote:
-> On Sun, 12 Feb 2023 at 00:43, Chris Clayton <chris2553@googlemail.com> wrote:
->>
->>
->>
->> On 10/02/2023 19:33, Linux regression tracking (Thorsten Leemhuis) wrote:
->>> On 10.02.23 20:01, Karol Herbst wrote:
->>>> On Fri, Feb 10, 2023 at 7:35 PM Linux regression tracking (Thorsten
->>>> Leemhuis) <regressions@leemhuis.info> wrote:
->>>>>
->>>>> On 08.02.23 09:48, Chris Clayton wrote:
->>>>>>
->>>>>> I'm assuming  that we are not going to see a fix for this regression before 6.2 is released.
->>>>>
->>>>> Yeah, looks like it. That's unfortunate, but happens. But there is still
->>>>> time to fix it and there is one thing I wonder:
->>>>>
->>>>> Did any of the nouveau developers look at the netconsole captures Chris
->>>>> posted more than a week ago to check if they somehow help to track down
->>>>> the root of this problem?
->>>>
->>>> I did now and I can't spot anything. I think at this point it would
->>>> make sense to dump the active tasks/threads via sqsrq keys to see if
->>>> any is in a weird state preventing the machine from shutting down.
->>>
->>> Many thx for looking into it!
->>
->> Yes, thanks Karol.
->>
->> Attached is the output from dmesg when this block of code:
->>
->>         /bin/mount /dev/sda7 /mnt/sda7
->>         /bin/mountpoint /proc || /bin/mount /proc
->>         /bin/dmesg -w > /mnt/sda7/sysrq.dmesg.log &
->>         /bin/echo t > /proc/sysrq-trigger
->>         /bin/sleep 1
->>         /bin/sync
->>         /bin/sleep 1
->>         kill $(pidof dmesg)
->>         /bin/umount /mnt/sda7
->>
->> is executed immediately before /sbin/reboot is called as the final step of rebooting my system.
->>
->> I hope this is what you were looking for, but if not, please let me know what you need
+On 14/02/2023 12:50, Tvrtko Ursulin wrote:
+> From: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
 > 
-
-Thanks, Dave.
-
-> Another shot in the dark, but does nouveau.runpm=0 help at all?
+> Currently drm_gem_handle_create_tail exposes the handle to userspace
+> before the buffer object constructions is complete. This allowing
+> of working against a partially constructed object, which may also be in
+> the process of having its creation fail, can have a range of negative
+> outcomes.
 > 
-Yes, it does. With runpm=0, both reboot and poweroff work on my laptop. Of course, it also means that the discrete
-(NVidia) GPU is now powered on permanently.
+> A lot of those will depend on what the individual drivers are doing in
+> their obj->funcs->open() callbacks, and also with a common failure mode
+> being -ENOMEM from drm_vma_node_allow.
+> 
+> We can make sure none of this can happen by allocating a handle last,
+> although with a downside that more of the function now runs under the
+> dev->object_name_lock.
+> 
+> Looking into the individual drivers open() hooks, we have
+> amdgpu_gem_object_open which seems like it could have a potential security
+> issue without this change.
+> 
+> A couple drivers like qxl_gem_object_open and vmw_gem_object_open
+> implement no-op hooks so no impact for them.
+> 
+> A bunch of other require a deeper look by individual owners to asses for
+> impact. Those are lima_gem_object_open, nouveau_gem_object_open,
+> panfrost_gem_open, radeon_gem_object_open and virtio_gpu_gem_object_open.
 
-Chris
+I've looked over the panfrost code, and I can't see how this could
+create a security hole there. It looks like there's a path which can
+confuse the shrinker (so objects might not be purged when they could
+be[1]) but they would be freed properly in the normal path - so no worse
+than user space could already do.
 
+[1] gpu_usecount is incremented in panfrost_lookup_bos() per bo, but not
+decremented on failure.
 
-> Dave.
+> Putting aside the risk assesment of the above, some common scenarios to
+> think about are along these lines:
+> 
+> 1)
+> Userspace closes a handle by speculatively "guessing" it from a second
+> thread.
+> 
+> This results in an unreachable buffer object so, a memory leak.
+> 
+> 2)
+> Same as 1), but object is in the process of getting closed (failed
+> creation).
+> 
+> The second thread is then able to re-cycle the handle and idr_remove would
+> in the first thread would then remove the handle it does not own from the
+> idr.
+
+This, however, looks plausible - and I can see how this could
+potentially trigger a security hole in user space.
+
+> 3)
+> Going back to the earlier per driver problem space - individual impact
+> assesment of allowing a second thread to access and operate on a partially
+> constructed handle / object. (Can something crash? Leak information?)
+> 
+> In terms of identifying when the problem started I will tag some patches
+> as references, but not all, if even any, of them actually point to a
+> broken state. I am just identifying points at which more opportunity for
+> issues to arise was added.
+> 
+> References: 304eda32920b ("drm/gem: add hooks to notify driver when object handle is created/destroyed")
+> References: ca481c9b2a3a ("drm/gem: implement vma access management")
+> References: b39b5394fabc ("drm/gem: Add drm_gem_object_funcs")
+> Cc: dri-devel@lists.freedesktop.org
+> Cc: Rob Clark <robdclark@chromium.org>
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: David Herrmann <dh.herrmann@gmail.com>
+> Cc: Noralf Trønnes <noralf@tronnes.org>
+> Cc: David Airlie <airlied@gmail.com>
+> Cc: Daniel Vetter <daniel@ffwll.ch>
+> Cc: amd-gfx@lists.freedesktop.org
+> Cc: lima@lists.freedesktop.org
+> Cc: nouveau@lists.freedesktop.org
+> Cc: Steven Price <steven.price@arm.com>
+> Cc: virtualization@lists.linux-foundation.org
+> Cc: spice-devel@lists.freedesktop.org
+> Cc: Zack Rusin <zackr@vmware.com>
+
+FWIW I think this makes the code easier to reason about, so
+
+Reviewed-by: Steven Price <steven.price@arm.com>
+
+> ---
+>  drivers/gpu/drm/drm_gem.c | 48 +++++++++++++++++++--------------------
+>  1 file changed, 24 insertions(+), 24 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
+> index aa15c52ae182..e3d897bca0f2 100644
+> --- a/drivers/gpu/drm/drm_gem.c
+> +++ b/drivers/gpu/drm/drm_gem.c
+> @@ -356,52 +356,52 @@ drm_gem_handle_create_tail(struct drm_file *file_priv,
+>  			   u32 *handlep)
+>  {
+>  	struct drm_device *dev = obj->dev;
+> -	u32 handle;
+>  	int ret;
+>  
+>  	WARN_ON(!mutex_is_locked(&dev->object_name_lock));
+>  	if (obj->handle_count++ == 0)
+>  		drm_gem_object_get(obj);
+>  
+> +	ret = drm_vma_node_allow(&obj->vma_node, file_priv);
+> +	if (ret)
+> +		goto err_put;
+> +
+> +	if (obj->funcs->open) {
+> +		ret = obj->funcs->open(obj, file_priv);
+> +		if (ret)
+> +			goto err_revoke;
+> +	}
+> +
+>  	/*
+> -	 * Get the user-visible handle using idr.  Preload and perform
+> -	 * allocation under our spinlock.
+> +	 * Get the user-visible handle using idr as the _last_ step.
+> +	 * Preload and perform allocation under our spinlock.
+>  	 */
+>  	idr_preload(GFP_KERNEL);
+>  	spin_lock(&file_priv->table_lock);
+> -
+>  	ret = idr_alloc(&file_priv->object_idr, obj, 1, 0, GFP_NOWAIT);
+> -
+>  	spin_unlock(&file_priv->table_lock);
+>  	idr_preload_end();
+>  
+> -	mutex_unlock(&dev->object_name_lock);
+>  	if (ret < 0)
+> -		goto err_unref;
+> -
+> -	handle = ret;
+> +		goto err_close;
+>  
+> -	ret = drm_vma_node_allow(&obj->vma_node, file_priv);
+> -	if (ret)
+> -		goto err_remove;
+> +	mutex_unlock(&dev->object_name_lock);
+>  
+> -	if (obj->funcs->open) {
+> -		ret = obj->funcs->open(obj, file_priv);
+> -		if (ret)
+> -			goto err_revoke;
+> -	}
+> +	*handlep = ret;
+>  
+> -	*handlep = handle;
+>  	return 0;
+>  
+> +err_close:
+> +	if (obj->funcs->close)
+> +		obj->funcs->close(obj, file_priv);
+>  err_revoke:
+>  	drm_vma_node_revoke(&obj->vma_node, file_priv);
+> -err_remove:
+> -	spin_lock(&file_priv->table_lock);
+> -	idr_remove(&file_priv->object_idr, handle);
+> -	spin_unlock(&file_priv->table_lock);
+> -err_unref:
+> -	drm_gem_object_handle_put_unlocked(obj);
+> +err_put:
+> +	if (--obj->handle_count == 0)
+> +		drm_gem_object_put(obj);
+> +
+> +	mutex_unlock(&dev->object_name_lock);
+> +
+>  	return ret;
+>  }
+>  
+
