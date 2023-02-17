@@ -2,70 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54E5369ACFE
-	for <lists+nouveau@lfdr.de>; Fri, 17 Feb 2023 14:49:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D519A69AD00
+	for <lists+nouveau@lfdr.de>; Fri, 17 Feb 2023 14:49:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 033BC10EFFC;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9353010F004;
 	Fri, 17 Feb 2023 13:48:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1663810EFF6
- for <nouveau@lists.freedesktop.org>; Fri, 17 Feb 2023 13:48:45 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7223A10EFF4
+ for <nouveau@lists.freedesktop.org>; Fri, 17 Feb 2023 13:48:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1676641724;
+ s=mimecast20190719; t=1676641728;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=qV+blR6Tkr/sKsOr7dEvAgWdCXkrbGqs9gehh/nqNIE=;
- b=B1Vgb7kgfBTXb+JzODrfpfvV9zwoFZpAzeFJ9h6xfFfwgLZgBQkFf78rcyVQloQsYwotTa
- pT7CrniBUk1uTu3D7LJo0sa4j9UIWAfwTjLWLj3fUGD030lJoLu+twnA0lPS3ldLTuPR19
- W5jCMCnFE+P5bNRcIpuPinM5PCdnTgA=
+ bh=d5/2RnRF2JWHGpr9RK4XcaUSwl3Atw4selg5mVgZ4/g=;
+ b=X/n01YSN1gpk+KK903jEsu4aTusHdMHCMKZku9kCbirFEX4XXlUq/tCUMe+2w/N0alUNbx
+ rlmoxasiGW0XiRg3iteIbnlEuBUlKpAhisQrxs2MbWQeYDaahLzK5LJKy4ecL0dnZ2WMuc
+ 16iMaleWtdWNqmMfx67UI8K6Ie/XRaY=
 Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
  [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-183-KlH4MMfNOi-mZJaByXv3sA-1; Fri, 17 Feb 2023 08:48:42 -0500
-X-MC-Unique: KlH4MMfNOi-mZJaByXv3sA-1
+ us-mta-414-BQSUEoh4MEOqUWxPI4C5tA-1; Fri, 17 Feb 2023 08:48:47 -0500
+X-MC-Unique: BQSUEoh4MEOqUWxPI4C5tA-1
 Received: by mail-ed1-f70.google.com with SMTP id
- cn9-20020a0564020ca900b004a25d8d7593so1229215edb.0
- for <nouveau@lists.freedesktop.org>; Fri, 17 Feb 2023 05:48:42 -0800 (PST)
+ x14-20020a05640226ce00b004acc4f8aa3fso1827298edd.3
+ for <nouveau@lists.freedesktop.org>; Fri, 17 Feb 2023 05:48:47 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qV+blR6Tkr/sKsOr7dEvAgWdCXkrbGqs9gehh/nqNIE=;
- b=URBo54cD72grBIplOORFmrgiVNYiyA4DicHeMCPCMhaw0RIEP0GbiWWW8Js49X2Z9w
- R0sOJqDK+6PpFTzIKXvdpOIkAdN4vOcXDiAP6SGVX2dw+QMo/uY1GgabBrQXrxe/3O/g
- BjMV/vmWEzyXt/HFLWVE9uUPpuzxycKyl0a9jVQzxKNXMUmyZVvFTxAnl4DfEwC8Vsx7
- 8279pH2bIdeCQtxxb7D2S3EZx0mQ6OVDxg0k4mWVl2LFUlDmVM2o8xPTWb2YlfKpO427
- jSO0F8M1U9sB9g2yY8cpTxQVT0h9koOwl0/gIYd4cKsyF8b6q6b2SyeOnIzg+dPFKMER
- 2Yjg==
-X-Gm-Message-State: AO0yUKUgws8/P2c3xp4icd28+TO9tzRW85XFbQOvlPr0SW0kVJV8uDwE
- JDefAKPAI60ZcVH2a4SgiZHrSCLKTadcJ00Uyqs8XgQtW7Q5UDouzAnUbSZqHmVMqi6IHdWlkwf
- x4YtJfdLeWBPxwX+n/essT2mBBQ==
-X-Received: by 2002:a05:6402:457:b0:4ad:7640:ff47 with SMTP id
- p23-20020a056402045700b004ad7640ff47mr3317198edw.13.1676641721927; 
- Fri, 17 Feb 2023 05:48:41 -0800 (PST)
-X-Google-Smtp-Source: AK7set8TQtlKkchdYFDpX6esHsmxmbuVnZmBvwTb0vwG2PSeRr7Qepshcx1saI0cWGGhV/p6T+nLUA==
-X-Received: by 2002:a05:6402:457:b0:4ad:7640:ff47 with SMTP id
- p23-20020a056402045700b004ad7640ff47mr3317181edw.13.1676641721700; 
- Fri, 17 Feb 2023 05:48:41 -0800 (PST)
+ bh=d5/2RnRF2JWHGpr9RK4XcaUSwl3Atw4selg5mVgZ4/g=;
+ b=glK1K1PyOHc4u/yVE8LPMt/5QEMRC93shyy+Yzr10ajG2rkcM6GNM/GVSJAfEagia7
+ pQck+BTehp8amnvQuTVhjPYi13HFtQZYJJC7e78kWGdhiUeox10zWpfR11zfd7OGBaZb
+ 5gBBlgJHr/4PRmot7A5Mu5zue/tnPkno0R/aqnW5cUcOubgg8TDUuKYiEa1hMmK6XC1n
+ DNj3ley2AN9GeRO2vHHiOsygGHdkycX+WbzyZtCESQZhqQNpf6W59UyNT5lRBlkOjtM4
+ Nu+6c3gXNW4S101uKzgTpMqOpi0s6GgwWa9AGkSxR3Fm4JAl3717xotdqM9gCRkj/AQ9
+ 0+qQ==
+X-Gm-Message-State: AO0yUKXtb4JbyHEXidpASSrSeh0YxV1NbT7b5BT6Dr6NBn5NlERHqSNR
+ wgZYdTjxTu+zw2Ls8OPkuWqGh239cRAfl3LAtZozKggDi23bxKGLS6K5DfpQmh+I0L4SIPjc+yS
+ kZxtRQHAyGabhawKJtCNuM3phEw==
+X-Received: by 2002:a17:907:72c1:b0:8b1:7569:ad58 with SMTP id
+ du1-20020a17090772c100b008b17569ad58mr4848791ejc.2.1676641726467; 
+ Fri, 17 Feb 2023 05:48:46 -0800 (PST)
+X-Google-Smtp-Source: AK7set8dScSkWfRlq0RX8QSswoAOat82FsG+rCLCZ5wYVMw47uLr1CKX3blizMd0kItf9w+BCuGUrQ==
+X-Received: by 2002:a17:907:72c1:b0:8b1:7569:ad58 with SMTP id
+ du1-20020a17090772c100b008b17569ad58mr4848763ejc.2.1676641726232; 
+ Fri, 17 Feb 2023 05:48:46 -0800 (PST)
 Received: from cassiopeiae.. ([2a02:810d:4b3f:de78:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- v22-20020a509556000000b004a23558f01fsm2348675eda.43.2023.02.17.05.48.39
+ l21-20020a50d6d5000000b004aab36ad060sm2302248edj.92.2023.02.17.05.48.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Feb 2023 05:48:40 -0800 (PST)
+ Fri, 17 Feb 2023 05:48:45 -0800 (PST)
 From: Danilo Krummrich <dakr@redhat.com>
 To: airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
  mripard@kernel.org, corbet@lwn.net, christian.koenig@amd.com,
  bskeggs@redhat.com, Liam.Howlett@oracle.com, matthew.brost@intel.com,
  boris.brezillon@collabora.com, alexdeucher@gmail.com, ogabbay@kernel.org,
  bagasdotme@gmail.com, willy@infradead.org, jason@jlekstrand.net
-Date: Fri, 17 Feb 2023 14:48:14 +0100
-Message-Id: <20230217134820.14672-5-dakr@redhat.com>
+Date: Fri, 17 Feb 2023 14:48:15 +0100
+Message-Id: <20230217134820.14672-6-dakr@redhat.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230217134422.14116-1-dakr@redhat.com>
 References: <20230217134422.14116-1-dakr@redhat.com>
@@ -74,8 +74,8 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Subject: [Nouveau] [PATCH drm-next v2 10/16] drm/nouveau: move usercopy
- helpers to nouveau_drv.h
+Subject: [Nouveau] [PATCH drm-next v2 11/16] drm/nouveau: fence: fail to
+ emit when fence context is killed
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,89 +93,61 @@ Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Move the usercopy helpers to a common driver header file to make it
-usable for the new API added in subsequent commits.
+The new VM_BIND UAPI implementation introduced in subsequent commits
+will allow asynchronous jobs processing push buffers and emitting
+fences.
+
+If a fence context is killed, e.g. due to a channel fault, jobs which
+are already queued for execution might still emit new fences. In such a
+case a job would hang forever.
+
+To fix that, fail to emit a new fence on a killed fence context with
+-ENODEV to unblock the job.
 
 Signed-off-by: Danilo Krummrich <dakr@redhat.com>
 ---
- drivers/gpu/drm/nouveau/nouveau_drv.h | 26 ++++++++++++++++++++++++++
- drivers/gpu/drm/nouveau/nouveau_gem.c | 26 --------------------------
- 2 files changed, 26 insertions(+), 26 deletions(-)
+ drivers/gpu/drm/nouveau/nouveau_fence.c | 7 +++++++
+ drivers/gpu/drm/nouveau/nouveau_fence.h | 2 +-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
-index 81350e685b50..20a7f31b9082 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drv.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-@@ -130,6 +130,32 @@ nouveau_cli(struct drm_file *fpriv)
- 	return fpriv ? fpriv->driver_priv : NULL;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
+index ee5e9d40c166..62c70d9a32e6 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_fence.c
++++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+@@ -96,6 +96,7 @@ nouveau_fence_context_kill(struct nouveau_fence_chan *fctx, int error)
+ 		if (nouveau_fence_signal(fence))
+ 			nvif_event_block(&fctx->event);
+ 	}
++	fctx->killed = 1;
+ 	spin_unlock_irqrestore(&fctx->lock, flags);
  }
  
-+static inline void
-+u_free(void *addr)
-+{
-+	kvfree(addr);
-+}
-+
-+static inline void *
-+u_memcpya(uint64_t user, unsigned nmemb, unsigned size)
-+{
-+	void *mem;
-+	void __user *userptr = (void __force __user *)(uintptr_t)user;
-+
-+	size *= nmemb;
-+
-+	mem = kvmalloc(size, GFP_KERNEL);
-+	if (!mem)
-+		return ERR_PTR(-ENOMEM);
-+
-+	if (copy_from_user(mem, userptr, size)) {
-+		u_free(mem);
-+		return ERR_PTR(-EFAULT);
-+	}
-+
-+	return mem;
-+}
-+
- #include <nvif/object.h>
- #include <nvif/parent.h>
+@@ -226,6 +227,12 @@ nouveau_fence_emit(struct nouveau_fence *fence, struct nouveau_channel *chan)
+ 		dma_fence_get(&fence->base);
+ 		spin_lock_irq(&fctx->lock);
  
-diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-index 08689ced4f6a..4369c8dc8b5b 100644
---- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -613,32 +613,6 @@ nouveau_gem_pushbuf_validate(struct nouveau_channel *chan,
- 	return 0;
- }
++		if (unlikely(fctx->killed)) {
++			spin_unlock_irq(&fctx->lock);
++			dma_fence_put(&fence->base);
++			return -ENODEV;
++		}
++
+ 		if (nouveau_fence_update(chan, fctx))
+ 			nvif_event_block(&fctx->event);
  
--static inline void
--u_free(void *addr)
--{
--	kvfree(addr);
--}
--
--static inline void *
--u_memcpya(uint64_t user, unsigned nmemb, unsigned size)
--{
--	void *mem;
--	void __user *userptr = (void __force __user *)(uintptr_t)user;
--
--	size *= nmemb;
--
--	mem = kvmalloc(size, GFP_KERNEL);
--	if (!mem)
--		return ERR_PTR(-ENOMEM);
--
--	if (copy_from_user(mem, userptr, size)) {
--		u_free(mem);
--		return ERR_PTR(-EFAULT);
--	}
--
--	return mem;
--}
--
- static int
- nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
- 				struct drm_nouveau_gem_pushbuf *req,
+diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.h b/drivers/gpu/drm/nouveau/nouveau_fence.h
+index 0ca2bc85adf6..00a08699bb58 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_fence.h
++++ b/drivers/gpu/drm/nouveau/nouveau_fence.h
+@@ -45,7 +45,7 @@ struct nouveau_fence_chan {
+ 	char name[32];
+ 
+ 	struct nvif_event event;
+-	int notify_ref, dead;
++	int notify_ref, dead, killed;
+ };
+ 
+ struct nouveau_fence_priv {
 -- 
 2.39.1
 
