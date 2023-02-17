@@ -2,79 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91670698872
-	for <lists+nouveau@lfdr.de>; Thu, 16 Feb 2023 00:01:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 31F7669ACC5
+	for <lists+nouveau@lfdr.de>; Fri, 17 Feb 2023 14:44:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3466B10E30A;
-	Wed, 15 Feb 2023 23:01:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9C0C610EFDE;
+	Fri, 17 Feb 2023 13:44:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 64F7A10E30A
- for <nouveau@lists.freedesktop.org>; Wed, 15 Feb 2023 23:01:35 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CF49210EFE0
+ for <nouveau@lists.freedesktop.org>; Fri, 17 Feb 2023 13:44:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1676502094;
+ s=mimecast20190719; t=1676641471;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=GqVitRGjYBX8GSzEkilO7B7lFiZnfb8r4eRKt2Vhqk0=;
- b=fYfqtpMxJevMU/cbTTwbOxM96QwVsbF994+WpSqzHc8m0nRl73cBaCRDMNmzH+7OAefdgk
- AT/cEgUxNm9nsEH5XVf5nQDz7MLYIPhnsVUhnMdmzCit2f/jZnqjrU6YCUUvr0nEDv6sOZ
- 0FlDB/jLmXXrK2sz7m0lwEJXzKF8aUo=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding;
+ bh=LwLShPp83DT/SjdrQ8e0j5FoWk8xRUBiFNvXjirXtcY=;
+ b=YCSd70ubQtlT/7Py5W/gliqGePBlwgI6H5cvnEHKOXf9wl4wbGx61CdkP97IHpwqAtfbd4
+ 3rVNMCdVMxEmBrMiWUDlZ0UrwRtmP1cW8mDZmDevD2q/tIom1Tjl8W2oktoVPdAY6xSi9s
+ JbJ+p+u2Hq3B3MmxfErFcI0reFLuNZ4=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-310-91fEioxSOomOV2_Y7Pbtgw-1; Wed, 15 Feb 2023 18:01:32 -0500
-X-MC-Unique: 91fEioxSOomOV2_Y7Pbtgw-1
-Received: by mail-qt1-f200.google.com with SMTP id
- t5-20020a05622a180500b003b9c03cd525so171320qtc.20
- for <nouveau@lists.freedesktop.org>; Wed, 15 Feb 2023 15:01:32 -0800 (PST)
+ us-mta-437-MjJVKYsiOuahl4PIwoDnAA-1; Fri, 17 Feb 2023 08:44:30 -0500
+X-MC-Unique: MjJVKYsiOuahl4PIwoDnAA-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ bt18-20020a0564020a5200b004a26ef05c34so1337297edb.16
+ for <nouveau@lists.freedesktop.org>; Fri, 17 Feb 2023 05:44:30 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=mime-version:user-agent:content-transfer-encoding:organization
- :references:in-reply-to:date:cc:to:from:subject:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bsYrZzYMtnpPy1dLr5xbLMKSM/UlrfB6vQQZ4rqlNLU=;
- b=f2sBspTNeAyW35rC/gkThkzuAE0o25hUmFUF4VIpu4BHH5tAZv+mhHmgule2RhONH5
- ONFf37pTB8Z1pagtFod5KP3Ae9prcwIzPeb8WztpjclgUvs7V297B86s1B2IPP7ixeLC
- 3gW4VoF9L6QMFjXkYTPTRX2zTL3LjtFOe0GGCb1Hj9HE8GhpMhmuKCzZ/ZzPwRTFYa9Q
- MM3ePU6WWXtc3rWNfzGZH6DWaWbtPEUfKnpbIx9TeqbuyEv9yQ5KCgDCzkdamQjpH2eH
- TGvRUhg0xePh8jefHnm1d2xwP98bJ0EjvQ/LAH+W9Ztu2jcm5DR3AkW0qXZvHukZKlWE
- DImg==
-X-Gm-Message-State: AO0yUKUDQw1/+FTeDE/FOEhLoHzFF+wo8TneomDI1563aPl26aJw0FTJ
- rK2zGCy9IeB0EA0WS8L3QDCvIA5d9upoI038i2PH/kVKRLVV+fDFQzThqRd9sqHX7C6njXebmAe
- tEQYUANiZy7RyFSybAIQFcFWZlg==
-X-Received: by 2002:ac8:7f16:0:b0:3b9:b422:4d5b with SMTP id
- f22-20020ac87f16000000b003b9b4224d5bmr6282648qtk.26.1676502092427; 
- Wed, 15 Feb 2023 15:01:32 -0800 (PST)
-X-Google-Smtp-Source: AK7set+qnHViHFdBUIjxUI6M3KrFKZ6NirVS+Cp47Y7N9ahccvHsZrp34JkpSRGEGSaqRlksgX+0TA==
-X-Received: by 2002:ac8:7f16:0:b0:3b9:b422:4d5b with SMTP id
- f22-20020ac87f16000000b003b9b4224d5bmr6282620qtk.26.1676502092198; 
- Wed, 15 Feb 2023 15:01:32 -0800 (PST)
-Received: from ?IPv6:2600:4040:5c68:6800::feb? ([2600:4040:5c68:6800::feb])
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LwLShPp83DT/SjdrQ8e0j5FoWk8xRUBiFNvXjirXtcY=;
+ b=VYjrWu3LHkm/WdczyGgDu8Cxfcq/2Ql0IbNU44nux1iR7wMks7zRRf9/ME5U9HW4QM
+ PxknocCrSwwqB/701zxTAI/ZUFHe0gr1sTEwesyVPiPKy6M1WnKG7uAKLW0XBcJHqxfV
+ blXtkxXYkCZyUTl1xXaynghf85grjM6Urly1lK6HBE8uUZENIQ1Aw1n9LlQGVBFG0TgG
+ 4NQFBRAUrLvbOfw3V1b7zAOJmhxoT+4sEdyLkSmQYMc7uJiNAAlk7KByWbgAlkGSIwDs
+ f6uIsHsEwlxRX0NdEb93qB5LLr2EicCVxlWosk9BAl19mSvxv9O1pxOg3G2GVOPb+wI7
+ lHVQ==
+X-Gm-Message-State: AO0yUKVx3QnKywuGfz/fpLlzeOS45kE6IXg/DQGFihCA2stEPfB0DDNX
+ HsJjBMh11xCR2CH1dyDFnWAdpEAQC0dDjVogyjRMp654c+K8bwx8RJJD96Ov7ZkMRjbIqfBuzzx
+ 9quuXs3mmPm7jBg+klOZpV1a+Uw==
+X-Received: by 2002:a17:906:d104:b0:8b1:279c:82c7 with SMTP id
+ b4-20020a170906d10400b008b1279c82c7mr855060ejz.50.1676641469591; 
+ Fri, 17 Feb 2023 05:44:29 -0800 (PST)
+X-Google-Smtp-Source: AK7set9bwPc8c8ahszSaP/wQTMd4R9rpXWxJ4wDJVBZN063mM6nFIe9FLzQVWxLMjS8msuQDnJMLeg==
+X-Received: by 2002:a17:906:d104:b0:8b1:279c:82c7 with SMTP id
+ b4-20020a170906d10400b008b1279c82c7mr855038ejz.50.1676641469294; 
+ Fri, 17 Feb 2023 05:44:29 -0800 (PST)
+Received: from cassiopeiae.. ([2a02:810d:4b3f:de78:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- o190-20020a375ac7000000b0073b45004754sm6662405qkb.34.2023.02.15.15.01.31
+ s24-20020a508d18000000b004acb2c8aeaesm2326370eds.85.2023.02.17.05.44.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Feb 2023 15:01:31 -0800 (PST)
-Message-ID: <d676862c180af8c5325fb00f0e2e469e6f600835.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Thomas =?ISO-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>, Ben Skeggs
- <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>, David Airlie
- <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>
-Date: Wed, 15 Feb 2023 18:01:30 -0500
-In-Reply-To: <20230215-power_supply-leds-nouveau-v1-1-ea93bfa0ba7e@weissschuh.net>
-References: <20230215-power_supply-leds-nouveau-v1-1-ea93bfa0ba7e@weissschuh.net>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.44.4 (3.44.4-2.fc36)
+ Fri, 17 Feb 2023 05:44:28 -0800 (PST)
+From: Danilo Krummrich <dakr@redhat.com>
+To: airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
+ mripard@kernel.org, corbet@lwn.net, christian.koenig@amd.com,
+ bskeggs@redhat.com, Liam.Howlett@oracle.com, matthew.brost@intel.com,
+ boris.brezillon@collabora.com, alexdeucher@gmail.com, ogabbay@kernel.org,
+ bagasdotme@gmail.com, willy@infradead.org, jason@jlekstrand.net
+Date: Fri, 17 Feb 2023 14:44:06 +0100
+Message-Id: <20230217134422.14116-1-dakr@redhat.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/led: explicitly include
- linux/leds.h
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Nouveau] [PATCH drm-next v2 00/16] [RFC] DRM GPUVA Manager &
+ Nouveau VM_BIND UAPI
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,50 +84,210 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reviewed-by: Lyude Paul <lyude@redhat.com>
+This patch series provides a new UAPI for the Nouveau driver in order to
+support Vulkan features, such as sparse bindings and sparse residency.
 
-Will push to drm-misc-next in a moment
+Furthermore, with the DRM GPUVA manager it provides a new DRM core feature to
+keep track of GPU virtual address (VA) mappings in a more generic way.
 
-On Wed, 2023-02-15 at 01:04 +0000, Thomas Wei=C3=9Fschuh wrote:
-> Instead of relying on an accidental, transitive inclusion of linux/leds.h
-> use it directly.
->=20
-> Also drop the forware definition of struct led_classdev that is now
-> provided by linux/leds.h.
->=20
-> Signed-off-by: Thomas Wei=C3=9Fschuh <linux@weissschuh.net>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_led.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_led.h b/drivers/gpu/drm/nouv=
-eau/nouveau_led.h
-> index 21a5775028cc..bc9bc7208da3 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_led.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_led.h
-> @@ -27,7 +27,7 @@
-> =20
->  #include "nouveau_drv.h"
-> =20
-> -struct led_classdev;
-> +#include <linux/leds.h>
-> =20
->  struct nouveau_led {
->  =09struct drm_device *dev;
->=20
-> ---
-> base-commit: e1c04510f521e853019afeca2a5991a5ef8d6a5b
-> change-id: 20230215-power_supply-leds-nouveau-ff4995ba0794
->=20
-> Best regards,
+The DRM GPUVA manager is indented to help drivers implement userspace-manageable
+GPU VA spaces in reference to the Vulkan API. In order to achieve this goal it
+serves the following purposes in this context.
 
---=20
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+    1) Provide infrastructure to track GPU VA allocations and mappings,
+       making use of the maple_tree.
+
+    2) Generically connect GPU VA mappings to their backing buffers, in
+       particular DRM GEM objects.
+
+    3) Provide a common implementation to perform more complex mapping
+       operations on the GPU VA space. In particular splitting and merging
+       of GPU VA mappings, e.g. for intersecting mapping requests or partial
+       unmap requests.
+
+The new VM_BIND Nouveau UAPI build on top of the DRM GPUVA manager, itself
+providing the following new interfaces.
+
+    1) Initialize a GPU VA space via the new DRM_IOCTL_NOUVEAU_VM_INIT ioctl
+       for UMDs to specify the portion of VA space managed by the kernel and
+       userspace, respectively.
+
+    2) Allocate and free a VA space region as well as bind and unbind memory
+       to the GPUs VA space via the new DRM_IOCTL_NOUVEAU_VM_BIND ioctl.
+
+    3) Execute push buffers with the new DRM_IOCTL_NOUVEAU_EXEC ioctl.
+
+Both, DRM_IOCTL_NOUVEAU_VM_BIND and DRM_IOCTL_NOUVEAU_EXEC, make use of the DRM
+scheduler to queue jobs and support asynchronous processing with DRM syncobjs
+as synchronization mechanism.
+
+By default DRM_IOCTL_NOUVEAU_VM_BIND does synchronous processing,
+DRM_IOCTL_NOUVEAU_EXEC supports asynchronous processing only.
+
+The new VM_BIND UAPI for Nouveau makes also use of drm_exec (execution context
+for GEM buffers) by Christian König. Since the patch implementing drm_exec was
+not yet merged into drm-next it is part of this series, as well as a small fix
+for this patch, which was found while testing this series.
+
+This patch series is also available at [1].
+
+There is a Mesa NVK merge request by Dave Airlie [2] implementing the
+corresponding userspace parts for this series.
+
+The Vulkan CTS test suite passes the sparse binding and sparse residency test
+cases for the new UAPI together with Dave's Mesa work.
+
+There are also some test cases in the igt-gpu-tools project [3] for the new UAPI
+and hence the DRM GPU VA manager. However, most of them are testing the DRM GPU
+VA manager's logic through Nouveau's new UAPI and should be considered just as
+helper for implementation.
+
+However, I absolutely intend to change those test cases to proper kunit test
+cases for the DRM GPUVA manager, once and if we agree on it's usefulness and
+design.
+
+[1] https://gitlab.freedesktop.org/nouvelles/kernel/-/tree/new-uapi-drm-next /
+    https://gitlab.freedesktop.org/nouvelles/kernel/-/merge_requests/1
+[2] https://gitlab.freedesktop.org/nouveau/mesa/-/merge_requests/150/
+[3] https://gitlab.freedesktop.org/dakr/igt-gpu-tools/-/tree/wip_nouveau_vm_bind
+
+Changes in V2:
+==============
+  Nouveau:
+    - Reworked the Nouveau VM_BIND UAPI to avoid memory allocations in fence
+      signalling critical sections. Updates to the VA space are split up in three
+      separate stages, where only the 2. stage executes in a fence signalling
+      critical section:
+
+        1. update the VA space, allocate new structures and page tables
+        2. (un-)map the requested memory bindings
+        3. free structures and page tables
+
+    - Separated generic job scheduler code from specific job implementations.
+    - Separated the EXEC and VM_BIND implementation of the UAPI.
+    - Reworked the locking parts of the nvkm/vmm RAW interface, such that
+      (un-)map operations can be executed in fence signalling critical sections.
+
+  GPUVA Manager:
+    - made drm_gpuva_regions optional for users of the GPUVA manager
+    - allow NULL GEMs for drm_gpuva entries
+    - swichted from drm_mm to maple_tree for track drm_gpuva / drm_gpuva_region
+      entries
+    - provide callbacks for users to allocate custom drm_gpuva_op structures to
+      allow inheritance
+    - added user bits to drm_gpuva_flags
+    - added a prefetch operation type in order to support generating prefetch
+      operations in the same way other operations generated
+    - hand the responsibility for mutual exclusion for a GEM's
+      drm_gpuva list to the user; simplified corresponding (un-)link functions
+
+  Maple Tree:
+    - I added two maple tree patches to the series, one to support custom tree
+      walk macros and one to hand the locking responsibility to the user of the
+      GPUVA manager without pre-defined lockdep checks.
+
+TODO
+====
+  Maple Tree:
+    - Maple tree uses the 'unsinged long' type for node entries. While this
+      works for 64bit, it's incompatible with the DRM GPUVA Manager on 32bit,
+      since the DRM GPUVA Manager uses the u64 type and so do drivers using it.
+      While it's questionable whether a 32bit kernel and a > 32bit GPU address
+      space make any sense, it creates tons of compiler warnings when compiling
+      for 32bit. Maybe it makes sense to expand the maple tree API to let users
+      decide which size to pick - other ideas / proposals are welcome.
+
+Christian König (1):
+  drm: execution context for GEM buffers
+
+Danilo Krummrich (15):
+  drm/exec: fix memory leak in drm_exec_prepare_obj()
+  maple_tree: split up MA_STATE() macro
+  maple_tree: add flag MT_FLAGS_LOCK_NONE
+  drm: manager to keep track of GPUs VA mappings
+  drm: debugfs: provide infrastructure to dump a DRM GPU VA space
+  drm/nouveau: new VM_BIND uapi interfaces
+  drm/nouveau: get vmm via nouveau_cli_vmm()
+  drm/nouveau: bo: initialize GEM GPU VA interface
+  drm/nouveau: move usercopy helpers to nouveau_drv.h
+  drm/nouveau: fence: fail to emit when fence context is killed
+  drm/nouveau: chan: provide nouveau_channel_kill()
+  drm/nouveau: nvkm/vmm: implement raw ops to manage uvmm
+  drm/nouveau: implement uvmm for user mode bindings
+  drm/nouveau: implement new VM_BIND UAPI
+  drm/nouveau: debugfs: implement DRM GPU VA debugfs
+
+ Documentation/gpu/driver-uapi.rst             |   11 +
+ Documentation/gpu/drm-mm.rst                  |   43 +
+ drivers/gpu/drm/Kconfig                       |    6 +
+ drivers/gpu/drm/Makefile                      |    3 +
+ drivers/gpu/drm/amd/amdgpu/Kconfig            |    1 +
+ drivers/gpu/drm/drm_debugfs.c                 |   56 +
+ drivers/gpu/drm/drm_exec.c                    |  294 +++
+ drivers/gpu/drm/drm_gem.c                     |    3 +
+ drivers/gpu/drm/drm_gpuva_mgr.c               | 1704 +++++++++++++++++
+ drivers/gpu/drm/nouveau/Kbuild                |    3 +
+ drivers/gpu/drm/nouveau/Kconfig               |    2 +
+ drivers/gpu/drm/nouveau/include/nvif/if000c.h |   26 +-
+ drivers/gpu/drm/nouveau/include/nvif/vmm.h    |   19 +-
+ .../gpu/drm/nouveau/include/nvkm/subdev/mmu.h |   20 +-
+ drivers/gpu/drm/nouveau/nouveau_abi16.c       |   23 +
+ drivers/gpu/drm/nouveau/nouveau_abi16.h       |    1 +
+ drivers/gpu/drm/nouveau/nouveau_bo.c          |  152 +-
+ drivers/gpu/drm/nouveau/nouveau_bo.h          |    2 +-
+ drivers/gpu/drm/nouveau/nouveau_chan.c        |   16 +-
+ drivers/gpu/drm/nouveau/nouveau_chan.h        |    1 +
+ drivers/gpu/drm/nouveau/nouveau_debugfs.c     |   24 +
+ drivers/gpu/drm/nouveau/nouveau_drm.c         |   26 +-
+ drivers/gpu/drm/nouveau/nouveau_drv.h         |   92 +-
+ drivers/gpu/drm/nouveau/nouveau_exec.c        |  322 ++++
+ drivers/gpu/drm/nouveau/nouveau_exec.h        |   39 +
+ drivers/gpu/drm/nouveau/nouveau_fence.c       |    7 +
+ drivers/gpu/drm/nouveau/nouveau_fence.h       |    2 +-
+ drivers/gpu/drm/nouveau/nouveau_gem.c         |   57 +-
+ drivers/gpu/drm/nouveau/nouveau_mem.h         |    5 +
+ drivers/gpu/drm/nouveau/nouveau_prime.c       |    2 +-
+ drivers/gpu/drm/nouveau/nouveau_sched.c       |  467 +++++
+ drivers/gpu/drm/nouveau/nouveau_sched.h       |   96 +
+ drivers/gpu/drm/nouveau/nouveau_svm.c         |    2 +-
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c        | 1536 +++++++++++++++
+ drivers/gpu/drm/nouveau/nouveau_uvmm.h        |  138 ++
+ drivers/gpu/drm/nouveau/nouveau_vmm.c         |    4 +-
+ drivers/gpu/drm/nouveau/nvif/vmm.c            |  100 +-
+ .../gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c    |  213 ++-
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c |  197 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h |   25 +
+ .../drm/nouveau/nvkm/subdev/mmu/vmmgf100.c    |   16 +-
+ .../drm/nouveau/nvkm/subdev/mmu/vmmgp100.c    |   16 +-
+ .../gpu/drm/nouveau/nvkm/subdev/mmu/vmmnv50.c |   27 +-
+ include/drm/drm_debugfs.h                     |   25 +
+ include/drm/drm_drv.h                         |    6 +
+ include/drm/drm_exec.h                        |  144 ++
+ include/drm/drm_gem.h                         |   75 +
+ include/drm/drm_gpuva_mgr.h                   |  714 +++++++
+ include/linux/maple_tree.h                    |   27 +-
+ include/uapi/drm/nouveau_drm.h                |  220 +++
+ lib/maple_tree.c                              |    7 +-
+ 51 files changed, 6808 insertions(+), 209 deletions(-)
+ create mode 100644 drivers/gpu/drm/drm_exec.c
+ create mode 100644 drivers/gpu/drm/drm_gpuva_mgr.c
+ create mode 100644 drivers/gpu/drm/nouveau/nouveau_exec.c
+ create mode 100644 drivers/gpu/drm/nouveau/nouveau_exec.h
+ create mode 100644 drivers/gpu/drm/nouveau/nouveau_sched.c
+ create mode 100644 drivers/gpu/drm/nouveau/nouveau_sched.h
+ create mode 100644 drivers/gpu/drm/nouveau/nouveau_uvmm.c
+ create mode 100644 drivers/gpu/drm/nouveau/nouveau_uvmm.h
+ create mode 100644 include/drm/drm_exec.h
+ create mode 100644 include/drm/drm_gpuva_mgr.h
+
+
+base-commit: 48075a66fca613477ac1969b576a93ef5db0164f
+-- 
+2.39.1
 
