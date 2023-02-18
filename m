@@ -2,42 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11A7469B765
-	for <lists+nouveau@lfdr.de>; Sat, 18 Feb 2023 02:17:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD59869B7C9
+	for <lists+nouveau@lfdr.de>; Sat, 18 Feb 2023 03:50:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2570110E4B0;
-	Sat, 18 Feb 2023 01:17:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9E2E010E023;
+	Sat, 18 Feb 2023 02:50:23 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga06.intel.com (mga06b.intel.com [134.134.136.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 05EB010E4B0;
- Sat, 18 Feb 2023 01:17:10 +0000 (UTC)
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5A0AE10E002;
+ Sat, 18 Feb 2023 02:50:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1676683031; x=1708219031;
+ t=1676688621; x=1708224621;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=HNvNqbmNQGDbDMfLrMP6VuuwO0QUq34bgWJCvZxntGY=;
- b=Oh5ftZFvuiVqDksbKJ44AgyD6J1Gve1Mvb6BkNvGxxdzBUtzubqy1JM5
- ShIunspW6BevF0YI0MtgxC5bcbndTlwBfQ11MaCYeASRGUP3BXViJXdpN
- kWG1r7GGgmb/2ZcqjH/Okwb4Fvq7MJab2jz6S4EGOUbSlwOjcQCO4DYjP
- uavp7So5n1fzFc6v+K0CgVv9PE0cUNYkhciYfII9smaskVAv6QHXOw3JO
- C0+NenCm40FTDtZ1aE97VbWTJ7ElXpgFCd3zCQNBd4NSi45TSpLPoF3YI
- VoUw9rqmSTj9OBDfesK01LDhIX6gP7y2+4v1eDptGK99Dw3xwE7gwvWWm Q==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10624"; a="394613002"
-X-IronPort-AV: E=Sophos;i="5.97,306,1669104000"; d="scan'208";a="394613002"
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 17 Feb 2023 17:16:46 -0800
+ bh=mCwCBFKM5W10vvViKqJohx198JYrfGaLCfjvdwLgaxo=;
+ b=cZEhlRKCwmHsB962su+LDIjkcy4ATUbdl5MJR6KXbXAfiGV+FmTcBrYw
+ Mg706Q1Ho5CUQIXGkab79BeBYd/g1pjeOO46mBveOLNKFNpisMVl2VqaP
+ ME5nbYzHE7v1nnuHI9jzgGO6s0Ux030B73egxbz/HeJX6n3a9Ww7J3fzA
+ IiYcCmBKDS7mUlLpWEHf4D/NCADYlUFMLVlUzHT3ZCy6gs9um1ybcqAI4
+ Y7hBvSOyWaCM59I+R3kkDPDs0tS2GHJD3v/BDnj1jSi9aoESOPoudQdUZ
+ D0DZIB8l65RxIdO8oypt8YEFheKOlDotQFLqeFHfPsLy+WlgqgA8KlVyj w==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10624"; a="329853833"
+X-IronPort-AV: E=Sophos;i="5.97,306,1669104000"; d="scan'208";a="329853833"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 17 Feb 2023 18:50:19 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10624"; a="664062152"
-X-IronPort-AV: E=Sophos;i="5.97,306,1669104000"; d="scan'208";a="664062152"
+X-IronPort-AV: E=McAfee;i="6500,9779,10624"; a="759600407"
+X-IronPort-AV: E=Sophos;i="5.97,306,1669104000"; d="scan'208";a="759600407"
 Received: from lkp-server01.sh.intel.com (HELO 4455601a8d94) ([10.239.97.150])
- by orsmga007.jf.intel.com with ESMTP; 17 Feb 2023 17:16:40 -0800
+ by FMSMGA003.fm.intel.com with ESMTP; 17 Feb 2023 18:48:48 -0800
 Received: from kbuild by 4455601a8d94 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1pTBqC-000By7-0O;
- Sat, 18 Feb 2023 01:16:40 +0000
-Date: Sat, 18 Feb 2023 09:16:14 +0800
+ (envelope-from <lkp@intel.com>) id 1pTDHI-000C2l-1q;
+ Sat, 18 Feb 2023 02:48:44 +0000
+Date: Sat, 18 Feb 2023 10:47:59 +0800
 From: kernel test robot <lkp@intel.com>
 To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
  tzimmermann@suse.de, mripard@kernel.org, corbet@lwn.net,
@@ -46,14 +46,14 @@ To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
  boris.brezillon@collabora.com, alexdeucher@gmail.com,
  ogabbay@kernel.org, bagasdotme@gmail.com, willy@infradead.org,
  jason@jlekstrand.net
-Message-ID: <202302180839.s0w26kcJ-lkp@intel.com>
-References: <20230217134820.14672-8-dakr@redhat.com>
+Message-ID: <202302181014.L0SHo3S1-lkp@intel.com>
+References: <20230217134820.14672-1-dakr@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230217134820.14672-8-dakr@redhat.com>
-Subject: Re: [Nouveau] [PATCH drm-next v2 13/16] drm/nouveau: nvkm/vmm:
- implement raw ops to manage uvmm
+In-Reply-To: <20230217134820.14672-1-dakr@redhat.com>
+Subject: Re: [Nouveau] [PATCH drm-next v2 06/16] drm: debugfs: provide
+ infrastructure to dump a DRM GPU VA space
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,17 +79,17 @@ Thank you for the patch! Perhaps something to improve:
 
 url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-execution-context-for-GEM-buffers/20230217-215101
 base:   48075a66fca613477ac1969b576a93ef5db0164f
-patch link:    https://lore.kernel.org/r/20230217134820.14672-8-dakr%40redhat.com
-patch subject: [PATCH drm-next v2 13/16] drm/nouveau: nvkm/vmm: implement raw ops to manage uvmm
-config: mips-allyesconfig (https://download.01.org/0day-ci/archive/20230218/202302180839.s0w26kcJ-lkp@intel.com/config)
+patch link:    https://lore.kernel.org/r/20230217134820.14672-1-dakr%40redhat.com
+patch subject: [PATCH drm-next v2 06/16] drm: debugfs: provide infrastructure to dump a DRM GPU VA space
+config: mips-allyesconfig (https://download.01.org/0day-ci/archive/20230218/202302181014.L0SHo3S1-lkp@intel.com/config)
 compiler: mips-linux-gcc (GCC) 12.1.0
 reproduce (this is a W=1 build):
         wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
         chmod +x ~/bin/make.cross
-        # https://github.com/intel-lab-lkp/linux/commit/b25c0bcfed93dd62ed732968d8987b92e10c4579
+        # https://github.com/intel-lab-lkp/linux/commit/e1a1c9659baee305780e1ce50c05e53e1d14b245
         git remote add linux-review https://github.com/intel-lab-lkp/linux
         git fetch --no-tags linux-review Danilo-Krummrich/drm-execution-context-for-GEM-buffers/20230217-215101
-        git checkout b25c0bcfed93dd62ed732968d8987b92e10c4579
+        git checkout e1a1c9659baee305780e1ce50c05e53e1d14b245
         # save the config file
         mkdir build_dir && cp config build_dir/.config
         COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=mips olddefconfig
@@ -97,65 +97,75 @@ reproduce (this is a W=1 build):
 
 If you fix the issue, kindly add following tag where applicable
 | Reported-by: kernel test robot <lkp@intel.com>
-| Link: https://lore.kernel.org/oe-kbuild-all/202302180839.s0w26kcJ-lkp@intel.com/
+| Link: https://lore.kernel.org/oe-kbuild-all/202302181014.L0SHo3S1-lkp@intel.com/
 
 All warnings (new ones prefixed by >>):
 
-   In file included from drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h:4,
-                    from drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.h:5,
-                    from drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c:22:
-   drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c: In function 'nvkm_uvmm_mthd_raw_map':
->> drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c:422:31: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
-     422 |                               (void *)args->argv, args->argc);
-         |                               ^
-   drivers/gpu/drm/nouveau/include/nvkm/core/memory.h:66:43: note: in definition of macro 'nvkm_memory_map'
-      66 |         (p)->func->map((p),(o),(vm),(va),(av),(ac))
-         |                                           ^~
+   drivers/gpu/drm/drm_debugfs.c: In function 'drm_debugfs_gpuva_info':
+>> drivers/gpu/drm/drm_debugfs.c:228:28: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+     228 |                            (u64)va->gem.obj, va->gem.offset);
+         |                            ^
 
 
-vim +422 drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c
+vim +228 drivers/gpu/drm/drm_debugfs.c
 
-   388	
-   389	static int
-   390	nvkm_uvmm_mthd_raw_map(struct nvkm_uvmm *uvmm, struct nvif_vmm_raw_v0 *args)
-   391	{
-   392		struct nvkm_client *client = uvmm->object.client;
-   393		struct nvkm_vmm *vmm = uvmm->vmm;
-   394		struct nvkm_vma vma = {
-   395			.addr = args->addr,
-   396			.size = args->size,
-   397			.used = true,
-   398			.mapref = false,
-   399			.no_comp = true,
-   400		};
-   401		struct nvkm_memory *memory;
-   402		u64 handle = args->memory;
-   403		u8 refd;
-   404		int ret;
-   405	
-   406		if (!nvkm_vmm_in_managed_range(vmm, args->addr, args->size))
-   407			return -EINVAL;
-   408	
-   409		ret = nvkm_uvmm_page_index(uvmm, args->size, args->shift, &refd);
-   410		if (ret)
-   411			return ret;
-   412	
-   413		vma.page = vma.refd = refd;
-   414	
-   415		memory = nvkm_umem_search(client, args->memory);
-   416		if (IS_ERR(memory)) {
-   417			VMM_DEBUG(vmm, "memory %016llx %ld\n", handle, PTR_ERR(memory));
-   418			return PTR_ERR(memory);
-   419		}
-   420	
-   421		ret = nvkm_memory_map(memory, args->offset, vmm, &vma,
- > 422				      (void *)args->argv, args->argc);
-   423	
-   424		nvkm_memory_unref(&vma.memory);
-   425		nvkm_memory_unref(&memory);
-   426		return ret;
-   427	}
-   428	
+   178	
+   179	/**
+   180	 * drm_debugfs_gpuva_info - dump the given DRM GPU VA space
+   181	 * @m: pointer to the &seq_file to write
+   182	 * @mgr: the &drm_gpuva_manager representing the GPU VA space
+   183	 *
+   184	 * Dumps the GPU VA regions and mappings of a given DRM GPU VA manager.
+   185	 *
+   186	 * For each DRM GPU VA space drivers should call this function from their
+   187	 * &drm_info_list's show callback.
+   188	 *
+   189	 * Returns: 0 on success, -ENODEV if the &mgr is not initialized
+   190	 */
+   191	int drm_debugfs_gpuva_info(struct seq_file *m,
+   192				   struct drm_gpuva_manager *mgr)
+   193	{
+   194		DRM_GPUVA_ITER(it, mgr);
+   195		DRM_GPUVA_REGION_ITER(__it, mgr);
+   196	
+   197		if (!mgr->name)
+   198			return -ENODEV;
+   199	
+   200		seq_printf(m, "DRM GPU VA space (%s)\n", mgr->name);
+   201		seq_puts  (m, "\n");
+   202		seq_puts  (m, " VA regions  | start              | range              | end                | sparse\n");
+   203		seq_puts  (m, "------------------------------------------------------------------------------------\n");
+   204		seq_printf(m, " VA space    | 0x%016llx | 0x%016llx | 0x%016llx |   -\n",
+   205			   mgr->mm_start, mgr->mm_range, mgr->mm_start + mgr->mm_range);
+   206		seq_puts  (m, "-----------------------------------------------------------------------------------\n");
+   207		drm_gpuva_iter_for_each(__it) {
+   208			struct drm_gpuva_region *reg = __it.reg;
+   209	
+   210			if (reg == &mgr->kernel_alloc_region) {
+   211				seq_printf(m, " kernel node | 0x%016llx | 0x%016llx | 0x%016llx |   -\n",
+   212					   reg->va.addr, reg->va.range, reg->va.addr + reg->va.range);
+   213				continue;
+   214			}
+   215	
+   216			seq_printf(m, "             | 0x%016llx | 0x%016llx | 0x%016llx | %s\n",
+   217				   reg->va.addr, reg->va.range, reg->va.addr + reg->va.range,
+   218				   reg->sparse ? "true" : "false");
+   219		}
+   220		seq_puts(m, "\n");
+   221		seq_puts(m, " VAs | start              | range              | end                | object             | object offset\n");
+   222		seq_puts(m, "-------------------------------------------------------------------------------------------------------------\n");
+   223		drm_gpuva_iter_for_each(it) {
+   224			struct drm_gpuva *va = it.va;
+   225	
+   226			seq_printf(m, "     | 0x%016llx | 0x%016llx | 0x%016llx | 0x%016llx | 0x%016llx\n",
+   227				   va->va.addr, va->va.range, va->va.addr + va->va.range,
+ > 228				   (u64)va->gem.obj, va->gem.offset);
+   229		}
+   230	
+   231		return 0;
+   232	}
+   233	EXPORT_SYMBOL(drm_debugfs_gpuva_info);
+   234	
 
 -- 
 0-DAY CI Kernel Test Service
