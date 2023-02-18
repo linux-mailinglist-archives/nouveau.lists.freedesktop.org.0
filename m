@@ -2,58 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD59869B7C9
-	for <lists+nouveau@lfdr.de>; Sat, 18 Feb 2023 03:50:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CDEB69B9FA
+	for <lists+nouveau@lfdr.de>; Sat, 18 Feb 2023 13:26:03 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9E2E010E023;
-	Sat, 18 Feb 2023 02:50:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3A25C10E201;
+	Sat, 18 Feb 2023 12:26:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5A0AE10E002;
- Sat, 18 Feb 2023 02:50:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1676688621; x=1708224621;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=mCwCBFKM5W10vvViKqJohx198JYrfGaLCfjvdwLgaxo=;
- b=cZEhlRKCwmHsB962su+LDIjkcy4ATUbdl5MJR6KXbXAfiGV+FmTcBrYw
- Mg706Q1Ho5CUQIXGkab79BeBYd/g1pjeOO46mBveOLNKFNpisMVl2VqaP
- ME5nbYzHE7v1nnuHI9jzgGO6s0Ux030B73egxbz/HeJX6n3a9Ww7J3fzA
- IiYcCmBKDS7mUlLpWEHf4D/NCADYlUFMLVlUzHT3ZCy6gs9um1ybcqAI4
- Y7hBvSOyWaCM59I+R3kkDPDs0tS2GHJD3v/BDnj1jSi9aoESOPoudQdUZ
- D0DZIB8l65RxIdO8oypt8YEFheKOlDotQFLqeFHfPsLy+WlgqgA8KlVyj w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10624"; a="329853833"
-X-IronPort-AV: E=Sophos;i="5.97,306,1669104000"; d="scan'208";a="329853833"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
- by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 17 Feb 2023 18:50:19 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10624"; a="759600407"
-X-IronPort-AV: E=Sophos;i="5.97,306,1669104000"; d="scan'208";a="759600407"
-Received: from lkp-server01.sh.intel.com (HELO 4455601a8d94) ([10.239.97.150])
- by FMSMGA003.fm.intel.com with ESMTP; 17 Feb 2023 18:48:48 -0800
-Received: from kbuild by 4455601a8d94 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1pTDHI-000C2l-1q;
- Sat, 18 Feb 2023 02:48:44 +0000
-Date: Sat, 18 Feb 2023 10:47:59 +0800
-From: kernel test robot <lkp@intel.com>
-To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
- tzimmermann@suse.de, mripard@kernel.org, corbet@lwn.net,
- christian.koenig@amd.com, bskeggs@redhat.com,
- Liam.Howlett@oracle.com, matthew.brost@intel.com,
- boris.brezillon@collabora.com, alexdeucher@gmail.com,
- ogabbay@kernel.org, bagasdotme@gmail.com, willy@infradead.org,
- jason@jlekstrand.net
-Message-ID: <202302181014.L0SHo3S1-lkp@intel.com>
-References: <20230217134820.14672-1-dakr@redhat.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BD4ED10E202
+ for <nouveau@lists.freedesktop.org>; Sat, 18 Feb 2023 12:25:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1676723157;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=RijZqlt6QPxnZ5qsCx6gnldqHryetV8XG7/DeGD2O5Y=;
+ b=UT5cEKPmutgk7KsDPAfH9i/IEh31slq4azgIHIgcUFCpKr33cmVBzDqDouMhefyucAaSdQ
+ tQK4h2htiTY+Y+YUzepBS5k6lAoSe9LQhChXQ1IXW+8JulYr15CzefJTMiw9XXN1816XML
+ AQMMHbgVn5NPfGdmaR8mOqJAqbdU6gM=
+Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com
+ [209.85.208.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-424-3aM5MafPPHmOTYSTzdDoRA-1; Sat, 18 Feb 2023 07:25:56 -0500
+X-MC-Unique: 3aM5MafPPHmOTYSTzdDoRA-1
+Received: by mail-lj1-f197.google.com with SMTP id
+ z12-20020a2e7e0c000000b00279958f353fso198444ljc.1
+ for <nouveau@lists.freedesktop.org>; Sat, 18 Feb 2023 04:25:56 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RijZqlt6QPxnZ5qsCx6gnldqHryetV8XG7/DeGD2O5Y=;
+ b=ElSTJg1U2ngt1ckCW2Bs3UaMQX2urqPhUayDgyyTHy0AaOoHns5F2YTrF/1eG0t5O4
+ lEc6jLSVlC/Y52YtD1xn6gRORpSCmi205aSfE+vOegzKK9WzqpYyafP4IsYogB7LNGUU
+ rYwVdOx527wfIwzRJcebBBcuomg0a1POvZk23i4rmUhSOs4fLq4ul7NJoVMZ2iBa8lhb
+ bmvZXJb3wVyoPLuPkBz3uFX/mg24LpjVf258AvXziwt4frv275tIUY0ASLY24IL1QoBo
+ PM80iG5aY+wJAuN98BHbspPqKtNncACB2A2SvMGZx6LsxxYa6ozlUW9AXQCf9I1oPPRB
+ NGkw==
+X-Gm-Message-State: AO0yUKXKKfhylqucEj34oMHckCXCITPkENXMoj0HPAg+yKREIuNwGPk0
+ rSEtOZlCXQOrAN7rxPt5YtvxdlG9bfaEhKwGJ3CCt2VJ4avZ4H4Yj+wLhYr1Hug8JR2a5YSQErE
+ ylrsCKRcV3LZ/BAgVH6PN1ir/95KKSDQZrGicoF9HJw==
+X-Received: by 2002:ac2:46f8:0:b0:4db:38ba:618d with SMTP id
+ q24-20020ac246f8000000b004db38ba618dmr1266292lfo.12.1676723154856; 
+ Sat, 18 Feb 2023 04:25:54 -0800 (PST)
+X-Google-Smtp-Source: AK7set/Z7L8+b7P0J8LwiD8xHpb8nnAbtyDGwQ25yG4cizIYlJMz2FM+E2DWgrE9e6Ejw2J20Q2KybtR01oL+r0Zquw=
+X-Received: by 2002:ac2:46f8:0:b0:4db:38ba:618d with SMTP id
+ q24-20020ac246f8000000b004db38ba618dmr1266288lfo.12.1676723154517; Sat, 18
+ Feb 2023 04:25:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230217134820.14672-1-dakr@redhat.com>
-Subject: Re: [Nouveau] [PATCH drm-next v2 06/16] drm: debugfs: provide
- infrastructure to dump a DRM GPU VA space
+References: <b64705e3-2e63-a466-f829-f9568b06766a@googlemail.com>
+ <CACAvsv4sOtPjCVnEcKd2RCUqYWxSn5XKyksbS-Bds2qCqyusVw@mail.gmail.com>
+ <1cdb84ac-f7a8-66ba-98fc-3db302b49a5a@googlemail.com>
+ <dab6eb81-db3f-8fa1-84ad-9b40e209514b@googlemail.com>
+ <CACAvsv5iYdF3P8AbyrbYo3zGmYRYhxDWn7WbAR5V9qHpbgBXRA@mail.gmail.com>
+ <1632a9ef-2954-c8f0-cdc9-03157c9d8547@googlemail.com>
+ <5abbee70-cc84-1528-c3d8-9befd9edd611@googlemail.com>
+ <5cf46df8-0fa2-e9f5-aa8e-7f7f703d96dd@googlemail.com>
+ <f72fe15b-db1d-56dd-aaf6-3cba68a8bf0a@leemhuis.info>
+ <CACO55tvR4ydDOXt=9nbR3n2aFLKrj8zeuGRR_xpezVQBBLrjqg@mail.gmail.com>
+ <a6188878-f84c-0fcc-9509-b9d7ab797f4c@leemhuis.info>
+ <d031f0a5-8d5e-af51-6db6-11844de3eeba@googlemail.com>
+ <CAPM=9tz+wksJTvMi_4Ef7XWezfH0ReN2se189s8Q=obJjHC+Fw@mail.gmail.com>
+ <4e786e22-f17a-da76-5129-8fef0c7c825a@googlemail.com>
+ <b829633e-ccc4-7a54-1cad-f29254de1251@leemhuis.info>
+ <CACO55tsvM07_6mGU3dCgeji0a6B4JJKSDOOBuCHv2Mw3rYbCHg@mail.gmail.com>
+ <181bea6a-e501-f5bd-b002-de7a244a921a@googlemail.com>
+In-Reply-To: <181bea6a-e501-f5bd-b002-de7a244a921a@googlemail.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Sat, 18 Feb 2023 13:25:42 +0100
+Message-ID: <CACO55tsGXfy9-a-nexvcn7pnDGoEWXMqhiQEBwCDkGyOeT1sXQ@mail.gmail.com>
+To: Chris Clayton <chris2553@googlemail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] linux-6.2-rc4+ hangs on poweroff/reboot: Bisected
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,108 +90,130 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, oe-kbuild-all@lists.linux.dev
+Cc: Linux regressions mailing list <regressions@lists.linux.dev>,
+ ML nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>, bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Danilo,
+On Sat, Feb 18, 2023 at 1:22 PM Chris Clayton <chris2553@googlemail.com> wrote:
+>
+>
+>
+> On 15/02/2023 11:09, Karol Herbst wrote:
+> > On Wed, Feb 15, 2023 at 11:36 AM Linux regression tracking #update
+> > (Thorsten Leemhuis) <regressions@leemhuis.info> wrote:
+> >>
+> >> On 13.02.23 10:14, Chris Clayton wrote:
+> >>> On 13/02/2023 02:57, Dave Airlie wrote:
+> >>>> On Sun, 12 Feb 2023 at 00:43, Chris Clayton <chris2553@googlemail.com> wrote:
+> >>>>>
+> >>>>>
+> >>>>>
+> >>>>> On 10/02/2023 19:33, Linux regression tracking (Thorsten Leemhuis) wrote:
+> >>>>>> On 10.02.23 20:01, Karol Herbst wrote:
+> >>>>>>> On Fri, Feb 10, 2023 at 7:35 PM Linux regression tracking (Thorsten
+> >>>>>>> Leemhuis) <regressions@leemhuis.info> wrote:
+> >>>>>>>>
+> >>>>>>>> On 08.02.23 09:48, Chris Clayton wrote:
+> >>>>>>>>>
+> >>>>>>>>> I'm assuming  that we are not going to see a fix for this regression before 6.2 is released.
+> >>>>>>>>
+> >>>>>>>> Yeah, looks like it. That's unfortunate, but happens. But there is still
+> >>>>>>>> time to fix it and there is one thing I wonder:
+> >>>>>>>>
+> >>>>>>>> Did any of the nouveau developers look at the netconsole captures Chris
+> >>>>>>>> posted more than a week ago to check if they somehow help to track down
+> >>>>>>>> the root of this problem?
+> >>>>>>>
+> >>>>>>> I did now and I can't spot anything. I think at this point it would
+> >>>>>>> make sense to dump the active tasks/threads via sqsrq keys to see if
+> >>>>>>> any is in a weird state preventing the machine from shutting down.
+> >>>>>>
+> >>>>>> Many thx for looking into it!
+> >>>>>
+> >>>>> Yes, thanks Karol.
+> >>>>>
+> >>>>> Attached is the output from dmesg when this block of code:
+> >>>>>
+> >>>>>         /bin/mount /dev/sda7 /mnt/sda7
+> >>>>>         /bin/mountpoint /proc || /bin/mount /proc
+> >>>>>         /bin/dmesg -w > /mnt/sda7/sysrq.dmesg.log &
+> >>>>>         /bin/echo t > /proc/sysrq-trigger
+> >>>>>         /bin/sleep 1
+> >>>>>         /bin/sync
+> >>>>>         /bin/sleep 1
+> >>>>>         kill $(pidof dmesg)
+> >>>>>         /bin/umount /mnt/sda7
+> >>>>>
+> >>>>> is executed immediately before /sbin/reboot is called as the final step of rebooting my system.
+> >>>>>
+> >>>>> I hope this is what you were looking for, but if not, please let me know what you need
+> >>>
+> >>> Thanks Dave. [...]
+> >> FWIW, in case anyone strands here in the archives: the msg was
+> >> truncated. The full post can be found in a new thread:
+> >>
+> >> https://lore.kernel.org/lkml/e0b80506-b3cf-315b-4327-1b988d86031e@googlemail.com/
+> >>
+> >> Sadly it seems the info "With runpm=0, both reboot and poweroff work on
+> >> my laptop." didn't bring us much further to a solution. :-/ I don't
+> >> really like it, but for regression tracking I'm now putting this on the
+> >> back-burner, as a fix is not in sight.
+> >>
+> >> #regzbot monitor:
+> >> https://lore.kernel.org/lkml/e0b80506-b3cf-315b-4327-1b988d86031e@googlemail.com/
+> >> #regzbot backburner: hard to debug and apparently rare
+> >> #regzbot ignore-activity
+> >>
+> >
+> > yeah.. this bug looks a little annoying. Sadly the only Turing based
+> > laptop I got doesn't work on Nouveau because of firmware related
+> > issues and we probably need to get updated ones from Nvidia here :(
+> >
+> > But it's a bit weird that the kernel doesn't shutdown, because I don't
+> > see anything in the logs which would prevent that from happening.
+> > Unless it's waiting on one of the tasks to complete, but none of them
+> > looked in any way nouveau related.
+> >
+> > If somebody else has any fancy kernel debugging tips here to figure
+> > out why it hangs, that would be very helpful...
+> >
+>
+> I think I've figured this out. It's to do with how my system is configured. I do have an initrd, but the only thing on
+> it is the cpu microcode which, it is recommended, should be loaded early. The absence of the NVidia firmare from an
+> initrd doesn't matter because the drivers for the hardware that need to load firmware are all built as modules, So, by
+> the time the devices are configured via udev, the root partition is mounted and the drivers can get at the firmware.
+>
+> I've found, by turning on nouveau debug and taking a video of the screen as the system shuts down, that nouveau seems to
+> be trying to run the scrubber very very late in the shutdown process. The problem is that by this time, I think the root
+> partition, and thus the scrubber binary, have become inaccessible.
+>
+> I seem to have two choices - either make the firmware accessible on an initrd or unload the module in a shutdown script
+> before the scrubber binary becomes inaccessible. The latter of these is the workaround I have implemented whilst the
+> problem I reported has been under investigation. For simplicity, I think I'll promote my workaround to being the
+> permanent solution.
+>
+> So, apologies (and thanks) to everyone whose time I have taken up with this non-bug.
+>
 
-Thank you for the patch! Perhaps something to improve:
+Well.. nouveau shouldn't prevent the system from shutting down if the
+firmware file isn't available. Or at least it should print a
+warning/error. Mind messing with the code a little to see if skipping
+it kind of works? I probably can also come up with a patch by next
+week.
 
-[auto build test WARNING on 48075a66fca613477ac1969b576a93ef5db0164f]
+> Chris
+>
+> >> Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
+> >> --
+> >> Everything you wanna know about Linux kernel regression tracking:
+> >> https://linux-regtracking.leemhuis.info/about/#tldr
+> >> That page also explains what to do if mails like this annoy you.
+> >>
+> >> #regzbot ignore-activity
+> >>
+> >
+>
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-execution-context-for-GEM-buffers/20230217-215101
-base:   48075a66fca613477ac1969b576a93ef5db0164f
-patch link:    https://lore.kernel.org/r/20230217134820.14672-1-dakr%40redhat.com
-patch subject: [PATCH drm-next v2 06/16] drm: debugfs: provide infrastructure to dump a DRM GPU VA space
-config: mips-allyesconfig (https://download.01.org/0day-ci/archive/20230218/202302181014.L0SHo3S1-lkp@intel.com/config)
-compiler: mips-linux-gcc (GCC) 12.1.0
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://github.com/intel-lab-lkp/linux/commit/e1a1c9659baee305780e1ce50c05e53e1d14b245
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Danilo-Krummrich/drm-execution-context-for-GEM-buffers/20230217-215101
-        git checkout e1a1c9659baee305780e1ce50c05e53e1d14b245
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=mips olddefconfig
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=mips SHELL=/bin/bash drivers/gpu/drm/
-
-If you fix the issue, kindly add following tag where applicable
-| Reported-by: kernel test robot <lkp@intel.com>
-| Link: https://lore.kernel.org/oe-kbuild-all/202302181014.L0SHo3S1-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
-   drivers/gpu/drm/drm_debugfs.c: In function 'drm_debugfs_gpuva_info':
->> drivers/gpu/drm/drm_debugfs.c:228:28: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
-     228 |                            (u64)va->gem.obj, va->gem.offset);
-         |                            ^
-
-
-vim +228 drivers/gpu/drm/drm_debugfs.c
-
-   178	
-   179	/**
-   180	 * drm_debugfs_gpuva_info - dump the given DRM GPU VA space
-   181	 * @m: pointer to the &seq_file to write
-   182	 * @mgr: the &drm_gpuva_manager representing the GPU VA space
-   183	 *
-   184	 * Dumps the GPU VA regions and mappings of a given DRM GPU VA manager.
-   185	 *
-   186	 * For each DRM GPU VA space drivers should call this function from their
-   187	 * &drm_info_list's show callback.
-   188	 *
-   189	 * Returns: 0 on success, -ENODEV if the &mgr is not initialized
-   190	 */
-   191	int drm_debugfs_gpuva_info(struct seq_file *m,
-   192				   struct drm_gpuva_manager *mgr)
-   193	{
-   194		DRM_GPUVA_ITER(it, mgr);
-   195		DRM_GPUVA_REGION_ITER(__it, mgr);
-   196	
-   197		if (!mgr->name)
-   198			return -ENODEV;
-   199	
-   200		seq_printf(m, "DRM GPU VA space (%s)\n", mgr->name);
-   201		seq_puts  (m, "\n");
-   202		seq_puts  (m, " VA regions  | start              | range              | end                | sparse\n");
-   203		seq_puts  (m, "------------------------------------------------------------------------------------\n");
-   204		seq_printf(m, " VA space    | 0x%016llx | 0x%016llx | 0x%016llx |   -\n",
-   205			   mgr->mm_start, mgr->mm_range, mgr->mm_start + mgr->mm_range);
-   206		seq_puts  (m, "-----------------------------------------------------------------------------------\n");
-   207		drm_gpuva_iter_for_each(__it) {
-   208			struct drm_gpuva_region *reg = __it.reg;
-   209	
-   210			if (reg == &mgr->kernel_alloc_region) {
-   211				seq_printf(m, " kernel node | 0x%016llx | 0x%016llx | 0x%016llx |   -\n",
-   212					   reg->va.addr, reg->va.range, reg->va.addr + reg->va.range);
-   213				continue;
-   214			}
-   215	
-   216			seq_printf(m, "             | 0x%016llx | 0x%016llx | 0x%016llx | %s\n",
-   217				   reg->va.addr, reg->va.range, reg->va.addr + reg->va.range,
-   218				   reg->sparse ? "true" : "false");
-   219		}
-   220		seq_puts(m, "\n");
-   221		seq_puts(m, " VAs | start              | range              | end                | object             | object offset\n");
-   222		seq_puts(m, "-------------------------------------------------------------------------------------------------------------\n");
-   223		drm_gpuva_iter_for_each(it) {
-   224			struct drm_gpuva *va = it.va;
-   225	
-   226			seq_printf(m, "     | 0x%016llx | 0x%016llx | 0x%016llx | 0x%016llx | 0x%016llx\n",
-   227				   va->va.addr, va->va.range, va->va.addr + va->va.range,
- > 228				   (u64)va->gem.obj, va->gem.offset);
-   229		}
-   230	
-   231		return 0;
-   232	}
-   233	EXPORT_SYMBOL(drm_debugfs_gpuva_info);
-   234	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests
