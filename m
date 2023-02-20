@@ -2,59 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CECE69C879
-	for <lists+nouveau@lfdr.de>; Mon, 20 Feb 2023 11:23:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AB9269C9D2
+	for <lists+nouveau@lfdr.de>; Mon, 20 Feb 2023 12:27:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 23DFE10E65B;
-	Mon, 20 Feb 2023 10:23:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6DCC810E69D;
+	Mon, 20 Feb 2023 11:27:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2C51810E65B;
- Mon, 20 Feb 2023 10:23:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1676888607; x=1708424607;
- h=message-id:date:mime-version:subject:to:cc:references:
- from:in-reply-to:content-transfer-encoding;
- bh=+moSdz6ykMmhAIG4bd6yOGcwfFNEqIXe0/1tqWXT49k=;
- b=juE1oWLCl7bOFJal5sbZSr9ZsBTqoS6JS8IUJR92joVLIfw+x2vqJ9x1
- 5Jw/wmczV+emqfhsFkNjZnEwbWr4uowb026JsMC3aqPFgmDy6In0YWmM5
- ZD8E9IBy9L6vU1Z76C/OJBYGynXwI193PlO9TidoHmFr4B7ftzDZS4byW
- lRFtFIjXFabuZrn6JslQsV1K+UN4zDy8uXVfDhQi51y82qreYZ3ZQw+ix
- Tzl0yCiq0FihNxUL//8ch5ghnX+52sPydI+WS14u/Phk+HFXElXl+oFvr
- AAf2s0eLN3uSZZdu6VcpB35BSPdUZfcWsUyQt5XvpIrSsfaEbdj+bmQyJ g==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10626"; a="418592059"
-X-IronPort-AV: E=Sophos;i="5.97,312,1669104000"; d="scan'208";a="418592059"
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Feb 2023 02:23:26 -0800
-X-IronPort-AV: E=McAfee;i="6500,9779,10626"; a="845287022"
-X-IronPort-AV: E=Sophos;i="5.97,312,1669104000"; d="scan'208";a="845287022"
-Received: from mochoamo-mobl.ger.corp.intel.com (HELO [10.213.211.126])
- ([10.213.211.126])
- by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Feb 2023 02:23:21 -0800
-Message-ID: <6e05c985-327f-7d6a-af4f-82b97378d0b5@linux.intel.com>
-Date: Mon, 20 Feb 2023 10:23:19 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8037410E696
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Feb 2023 11:27:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1676892423;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=QITTcF0TgBnVC2t89a+M11n/sxNBaKivZvomAgx8yQQ=;
+ b=Jv74FbD4JXneKOm+NYMiTy5lpr4H20n5BYpArQkrY4uCiZoHZ6vvqwYGCwfGJ+mGe+wTn+
+ TH0+0Ri9ejwqYk9bZGJgGd5aw3jeP1WsyTWPiHH8hLrRCkDYn5+M8EYdLfhVufFIU2VU/W
+ FAgXB3rJzucIg9CYTwZiImkEc5fuCVs=
+Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
+ [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-637-yVEJBD6iNCiZWg4qoPMqXw-1; Mon, 20 Feb 2023 06:27:02 -0500
+X-MC-Unique: yVEJBD6iNCiZWg4qoPMqXw-1
+Received: by mail-lj1-f198.google.com with SMTP id
+ w18-20020a2e3012000000b0029547a17979so526118ljw.7
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Feb 2023 03:27:02 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QITTcF0TgBnVC2t89a+M11n/sxNBaKivZvomAgx8yQQ=;
+ b=Xce+CxvzJ+XcVtIPoMq1tpxBvK+CJ3qMGkcbJZnJoObNfNVPgKVjVZdlbLEpeAORoQ
+ bfJ9ocYVmlfOQoIE1uNu5ioFGjkmYrwcoAIzm/h+VJdk9lqAVwWQJjTot9LU0thIT4F5
+ OY3zthO6IfhMcJPlsje0OJg7Ynl1zO+Km7dVgLBaMCOevsWrHOmOoeSy97zgwe4IMFmd
+ Ds6Xaox5FDFcTa53aWCKUaenBymASasNWkQBMEZOjQEFUNo0wTVZaSHns2h7/uosgFwZ
+ cuSZa1SMdwRx5kk8cjIBfzPPovNMEhuX7i5zFr9cxBtIsVUwZ+JgGeakRkW4hcSPdTt6
+ WWew==
+X-Gm-Message-State: AO0yUKVcB1KVQccRN/acEfPwJVEA0e1z8aMkgcB0ONYxhTwF3jty3YBy
+ tMv2tBbRUqu+CKstWmpzJYq8mCdrvcRBgI+3kDLGnrNlZ5fCMWEzB6x7eD/7KQWTI9aOSxz3ay5
+ YVqeQSrVal/8N6i8572LL3SHuSVponEm6OY1o8xANVw==
+X-Received: by 2002:a05:651c:1304:b0:294:751e:30a0 with SMTP id
+ u4-20020a05651c130400b00294751e30a0mr556840lja.9.1676892421012; 
+ Mon, 20 Feb 2023 03:27:01 -0800 (PST)
+X-Google-Smtp-Source: AK7set/4C6+yoxchfoTjNWJnjnM2hCEqXG3EkpndVmt0f/WEwCJ1cowhjfViNSCDPEa/J6ctx3R+mP/1PPpLwCmCT9c=
+X-Received: by 2002:a05:651c:1304:b0:294:751e:30a0 with SMTP id
+ u4-20020a05651c130400b00294751e30a0mr556829lja.9.1676892420634; Mon, 20 Feb
+ 2023 03:27:00 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- dri-devel@lists.freedesktop.org
-References: <20230214125050.1205394-1-tvrtko.ursulin@linux.intel.com>
- <f1256a51-5c4d-ab44-3867-931f7d2c0695@amd.com>
- <767620c4-385f-c0e8-dcb1-513ef4402ad0@linux.intel.com>
- <b7bb9888-b1d3-0d89-1e4f-bc25475b0071@gmail.com>
-From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-Organization: Intel Corporation UK Plc
-In-Reply-To: <b7bb9888-b1d3-0d89-1e4f-bc25475b0071@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH] drm/gem: Expose the buffer object handle to
- userspace last
+References: <b64705e3-2e63-a466-f829-f9568b06766a@googlemail.com>
+ <5abbee70-cc84-1528-c3d8-9befd9edd611@googlemail.com>
+ <5cf46df8-0fa2-e9f5-aa8e-7f7f703d96dd@googlemail.com>
+ <f72fe15b-db1d-56dd-aaf6-3cba68a8bf0a@leemhuis.info>
+ <CACO55tvR4ydDOXt=9nbR3n2aFLKrj8zeuGRR_xpezVQBBLrjqg@mail.gmail.com>
+ <a6188878-f84c-0fcc-9509-b9d7ab797f4c@leemhuis.info>
+ <d031f0a5-8d5e-af51-6db6-11844de3eeba@googlemail.com>
+ <CAPM=9tz+wksJTvMi_4Ef7XWezfH0ReN2se189s8Q=obJjHC+Fw@mail.gmail.com>
+ <4e786e22-f17a-da76-5129-8fef0c7c825a@googlemail.com>
+ <b829633e-ccc4-7a54-1cad-f29254de1251@leemhuis.info>
+ <CACO55tsvM07_6mGU3dCgeji0a6B4JJKSDOOBuCHv2Mw3rYbCHg@mail.gmail.com>
+ <181bea6a-e501-f5bd-b002-de7a244a921a@googlemail.com>
+ <CACO55tsGXfy9-a-nexvcn7pnDGoEWXMqhiQEBwCDkGyOeT1sXQ@mail.gmail.com>
+ <dbfc1f77-29f3-7690-c231-55f906a4e7e5@googlemail.com>
+ <7f6ec5b3-b5c7-f564-003e-132f112b7cf4@googlemail.com>
+ <CACAvsv7Uf5=K44y8YLsiy0aMnc1zvGEQdeDe7RQF=AV+fxxzuQ@mail.gmail.com>
+ <c12aa9b8-65a1-0cdf-8948-15309f16b955@googlemail.com>
+In-Reply-To: <c12aa9b8-65a1-0cdf-8948-15309f16b955@googlemail.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Mon, 20 Feb 2023 12:26:48 +0100
+Message-ID: <CACO55tvGQdHPnZEMAGPZN3K1nUCV-ruX_QNwSqQAg_z81ab0MA@mail.gmail.com>
+To: Chris Clayton <chris2553@googlemail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] linux-6.2-rc4+ hangs on poweroff/reboot: Bisected
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,216 +90,190 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Rob Clark <robdclark@chromium.org>, lima@lists.freedesktop.org,
- Tvrtko Ursulin <tvrtko.ursulin@intel.com>, nouveau@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org, Steven Price <steven.price@arm.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- David Herrmann <dh.herrmann@gmail.com>, spice-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, Zack Rusin <zackr@vmware.com>
+Cc: Linux regressions mailing list <regressions@lists.linux.dev>,
+ ML nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>, bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Mon, Feb 20, 2023 at 11:51 AM Chris Clayton <chris2553@googlemail.com> wrote:
+>
+>
+>
+> On 20/02/2023 05:35, Ben Skeggs wrote:
+> > On Sun, 19 Feb 2023 at 04:55, Chris Clayton <chris2553@googlemail.com> wrote:
+> >>
+> >>
+> >>
+> >> On 18/02/2023 15:19, Chris Clayton wrote:
+> >>>
+> >>>
+> >>> On 18/02/2023 12:25, Karol Herbst wrote:
+> >>>> On Sat, Feb 18, 2023 at 1:22 PM Chris Clayton <chris2553@googlemail.com> wrote:
+> >>>>>
+> >>>>>
+> >>>>>
+> >>>>> On 15/02/2023 11:09, Karol Herbst wrote:
+> >>>>>> On Wed, Feb 15, 2023 at 11:36 AM Linux regression tracking #update
+> >>>>>> (Thorsten Leemhuis) <regressions@leemhuis.info> wrote:
+> >>>>>>>
+> >>>>>>> On 13.02.23 10:14, Chris Clayton wrote:
+> >>>>>>>> On 13/02/2023 02:57, Dave Airlie wrote:
+> >>>>>>>>> On Sun, 12 Feb 2023 at 00:43, Chris Clayton <chris2553@googlemail.com> wrote:
+> >>>>>>>>>>
+> >>>>>>>>>>
+> >>>>>>>>>>
+> >>>>>>>>>> On 10/02/2023 19:33, Linux regression tracking (Thorsten Leemhuis) wrote:
+> >>>>>>>>>>> On 10.02.23 20:01, Karol Herbst wrote:
+> >>>>>>>>>>>> On Fri, Feb 10, 2023 at 7:35 PM Linux regression tracking (Thorsten
+> >>>>>>>>>>>> Leemhuis) <regressions@leemhuis.info> wrote:
+> >>>>>>>>>>>>>
+> >>>>>>>>>>>>> On 08.02.23 09:48, Chris Clayton wrote:
+> >>>>>>>>>>>>>>
+> >>>>>>>>>>>>>> I'm assuming  that we are not going to see a fix for this regression before 6.2 is released.
+> >>>>>>>>>>>>>
+> >>>>>>>>>>>>> Yeah, looks like it. That's unfortunate, but happens. But there is still
+> >>>>>>>>>>>>> time to fix it and there is one thing I wonder:
+> >>>>>>>>>>>>>
+> >>>>>>>>>>>>> Did any of the nouveau developers look at the netconsole captures Chris
+> >>>>>>>>>>>>> posted more than a week ago to check if they somehow help to track down
+> >>>>>>>>>>>>> the root of this problem?
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> I did now and I can't spot anything. I think at this point it would
+> >>>>>>>>>>>> make sense to dump the active tasks/threads via sqsrq keys to see if
+> >>>>>>>>>>>> any is in a weird state preventing the machine from shutting down.
+> >>>>>>>>>>>
+> >>>>>>>>>>> Many thx for looking into it!
+> >>>>>>>>>>
+> >>>>>>>>>> Yes, thanks Karol.
+> >>>>>>>>>>
+> >>>>>>>>>> Attached is the output from dmesg when this block of code:
+> >>>>>>>>>>
+> >>>>>>>>>>         /bin/mount /dev/sda7 /mnt/sda7
+> >>>>>>>>>>         /bin/mountpoint /proc || /bin/mount /proc
+> >>>>>>>>>>         /bin/dmesg -w > /mnt/sda7/sysrq.dmesg.log &
+> >>>>>>>>>>         /bin/echo t > /proc/sysrq-trigger
+> >>>>>>>>>>         /bin/sleep 1
+> >>>>>>>>>>         /bin/sync
+> >>>>>>>>>>         /bin/sleep 1
+> >>>>>>>>>>         kill $(pidof dmesg)
+> >>>>>>>>>>         /bin/umount /mnt/sda7
+> >>>>>>>>>>
+> >>>>>>>>>> is executed immediately before /sbin/reboot is called as the final step of rebooting my system.
+> >>>>>>>>>>
+> >>>>>>>>>> I hope this is what you were looking for, but if not, please let me know what you need
+> >>>>>>>>
+> >>>>>>>> Thanks Dave. [...]
+> >>>>>>> FWIW, in case anyone strands here in the archives: the msg was
+> >>>>>>> truncated. The full post can be found in a new thread:
+> >>>>>>>
+> >>>>>>> https://lore.kernel.org/lkml/e0b80506-b3cf-315b-4327-1b988d86031e@googlemail.com/
+> >>>>>>>
+> >>>>>>> Sadly it seems the info "With runpm=0, both reboot and poweroff work on
+> >>>>>>> my laptop." didn't bring us much further to a solution. :-/ I don't
+> >>>>>>> really like it, but for regression tracking I'm now putting this on the
+> >>>>>>> back-burner, as a fix is not in sight.
+> >>>>>>>
+> >>>>>>> #regzbot monitor:
+> >>>>>>> https://lore.kernel.org/lkml/e0b80506-b3cf-315b-4327-1b988d86031e@googlemail.com/
+> >>>>>>> #regzbot backburner: hard to debug and apparently rare
+> >>>>>>> #regzbot ignore-activity
+> >>>>>>>
+> >>>>>>
+> >>>>>> yeah.. this bug looks a little annoying. Sadly the only Turing based
+> >>>>>> laptop I got doesn't work on Nouveau because of firmware related
+> >>>>>> issues and we probably need to get updated ones from Nvidia here :(
+> >>>>>>
+> >>>>>> But it's a bit weird that the kernel doesn't shutdown, because I don't
+> >>>>>> see anything in the logs which would prevent that from happening.
+> >>>>>> Unless it's waiting on one of the tasks to complete, but none of them
+> >>>>>> looked in any way nouveau related.
+> >>>>>>
+> >>>>>> If somebody else has any fancy kernel debugging tips here to figure
+> >>>>>> out why it hangs, that would be very helpful...
+> >>>>>>
+> >>>>>
+> >>>>> I think I've figured this out. It's to do with how my system is configured. I do have an initrd, but the only thing on
+> >>>>> it is the cpu microcode which, it is recommended, should be loaded early. The absence of the NVidia firmare from an
+> >>>>> initrd doesn't matter because the drivers for the hardware that need to load firmware are all built as modules, So, by
+> >>>>> the time the devices are configured via udev, the root partition is mounted and the drivers can get at the firmware.
+> >>>>>
+> >>>>> I've found, by turning on nouveau debug and taking a video of the screen as the system shuts down, that nouveau seems to
+> >>>>> be trying to run the scrubber very very late in the shutdown process. The problem is that by this time, I think the root
+> >>>>> partition, and thus the scrubber binary, have become inaccessible.
+> >>>>>
+> >>>>> I seem to have two choices - either make the firmware accessible on an initrd or unload the module in a shutdown script
+> >>>>> before the scrubber binary becomes inaccessible. The latter of these is the workaround I have implemented whilst the
+> >>>>> problem I reported has been under investigation. For simplicity, I think I'll promote my workaround to being the
+> >>>>> permanent solution.
+> >>>>>
+> >>>>> So, apologies (and thanks) to everyone whose time I have taken up with this non-bug.
+> >>>>>
+> >>>>
+> >>>> Well.. nouveau shouldn't prevent the system from shutting down if the
+> >>>> firmware file isn't available. Or at least it should print a
+> >>>> warning/error. Mind messing with the code a little to see if skipping
+> >>>> it kind of works? I probably can also come up with a patch by next
+> >>>> week.
+> >>>>
+> >>> Well, I'd love to but a quick glance at the code caused me to bump into this obscenity:
+> >>>
+> >>> int
+> >>> gm200_flcn_reset_wait_mem_scrubbing(struct nvkm_falcon *falcon)
+> >>> {
+> >>>         nvkm_falcon_mask(falcon, 0x040, 0x00000000, 0x00000000);
+> >>>
+> >>>         if (nvkm_msec(falcon->owner->device, 10,
+> >>>                 if (!(nvkm_falcon_rd32(falcon, 0x10c) & 0x00000006))
+> >>>                         break;
+> >>>         ) < 0)
+> >>>                 return -ETIMEDOUT;
+> >>>
+> >>>         return 0;
+> >>> }
+> >>>
+> >>> nvkm_msec is #defined to nvkm_usec which in turn is #defined to nvkm_nsec where the loop that the break is related to
+> >>> appears
+> >>
+> >> I think someone who knows the code needs to look at this. What I can confirm is that after a freeze, I waited for 90
+> >> seconds for a timeout to occur, but it didn't.
+> > Hey,
+> >
+> > Are you able to try the attached patch for me please?
+> >
+> > Thanks,
+> > Ben.
+> >
+>
+> Thanks Ben.
+>
+> Yes, this patch fixes the lockup on reboot and poweroff that I've been seeing on my laptop. As you would expect,
+> offloaded rendering is still working and the discrete GPU is being powered on and off as required.
+>
+> Thanks.
+>
+> Reported-by: Chris Clayton <chris2553@googlemail.com>
+> Tested-by: Chris Clayton <chris2553@googlemail.com>
+>
 
-On 20/02/2023 10:01, Christian König wrote:
-> Am 20.02.23 um 10:55 schrieb Tvrtko Ursulin:
->>
->> Hi,
->>
->> On 14/02/2023 13:59, Christian König wrote:
->>> Am 14.02.23 um 13:50 schrieb Tvrtko Ursulin:
->>>> From: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
->>>>
->>>> Currently drm_gem_handle_create_tail exposes the handle to userspace
->>>> before the buffer object constructions is complete. This allowing
->>>> of working against a partially constructed object, which may also be in
->>>> the process of having its creation fail, can have a range of negative
->>>> outcomes.
->>>>
->>>> A lot of those will depend on what the individual drivers are doing in
->>>> their obj->funcs->open() callbacks, and also with a common failure mode
->>>> being -ENOMEM from drm_vma_node_allow.
->>>>
->>>> We can make sure none of this can happen by allocating a handle last,
->>>> although with a downside that more of the function now runs under the
->>>> dev->object_name_lock.
->>>>
->>>> Looking into the individual drivers open() hooks, we have
->>>> amdgpu_gem_object_open which seems like it could have a potential 
->>>> security
->>>> issue without this change.
->>>>
->>>> A couple drivers like qxl_gem_object_open and vmw_gem_object_open
->>>> implement no-op hooks so no impact for them.
->>>>
->>>> A bunch of other require a deeper look by individual owners to asses 
->>>> for
->>>> impact. Those are lima_gem_object_open, nouveau_gem_object_open,
->>>> panfrost_gem_open, radeon_gem_object_open and 
->>>> virtio_gpu_gem_object_open.
->>>>
->>>> Putting aside the risk assesment of the above, some common scenarios to
->>>> think about are along these lines:
->>>>
->>>> 1)
->>>> Userspace closes a handle by speculatively "guessing" it from a second
->>>> thread.
->>>>
->>>> This results in an unreachable buffer object so, a memory leak.
->>>>
->>>> 2)
->>>> Same as 1), but object is in the process of getting closed (failed
->>>> creation).
->>>>
->>>> The second thread is then able to re-cycle the handle and idr_remove 
->>>> would
->>>> in the first thread would then remove the handle it does not own 
->>>> from the
->>>> idr.
->>>>
->>>> 3)
->>>> Going back to the earlier per driver problem space - individual impact
->>>> assesment of allowing a second thread to access and operate on a 
->>>> partially
->>>> constructed handle / object. (Can something crash? Leak information?)
->>>>
->>>> In terms of identifying when the problem started I will tag some 
->>>> patches
->>>> as references, but not all, if even any, of them actually point to a
->>>> broken state. I am just identifying points at which more opportunity 
->>>> for
->>>> issues to arise was added.
->>>
->>> Yes I've looked into this once as well, but couldn't completely solve 
->>> it for some reason.
->>>
->>> Give me a day or two to get this tested and all the logic swapped 
->>> back into my head again.
->>
->> Managed to recollect what the problem with earlier attempts was?
-> 
-> Nope, that's way to long ago. I can only assume that I ran into problems 
-> with the object_name_lock.
-> 
-> Probably best to double check if that doesn't result in a lock inversion 
-> when somebody grabs the reservation lock in their ->load() callback.
+Ben, did you manage to get push rights to drm-misc by now or should I
+just pick the patch and push it through -fixes?
 
-Hmm I don't immediately follow the connection. But I have only found 
-radeon_driver_load_kms as using the load callback. Is there any lockdep 
-enabled CI for that driver which could tell us if there is a problem there?
+> >>
+> >>
+> >> .> Chris
+> >>>>>
+> >>>>>>> Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
+> >>>>>>> --
+> >>>>>>> Everything you wanna know about Linux kernel regression tracking:
+> >>>>>>> https://linux-regtracking.leemhuis.info/about/#tldr
+> >>>>>>> That page also explains what to do if mails like this annoy you.
+> >>>>>>>
+> >>>>>>> #regzbot ignore-activity
+> >>>>>>>
+> >>>>>>
+> >>>>>
+> >>>>
+>
 
-Regards,
-
-Tvrtko
-
-> 
-> Regards,
-> Christian.
-> 
->>
->> Regards,
->>
->> Tvrtko
->>
->>> Christian.
->>>
->>>>
->>>> References: 304eda32920b ("drm/gem: add hooks to notify driver when 
->>>> object handle is created/destroyed")
->>>> References: ca481c9b2a3a ("drm/gem: implement vma access management")
->>>> References: b39b5394fabc ("drm/gem: Add drm_gem_object_funcs")
->>>> Cc: dri-devel@lists.freedesktop.org
->>>> Cc: Rob Clark <robdclark@chromium.org>
->>>> Cc: Ben Skeggs <bskeggs@redhat.com>
->>>> Cc: David Herrmann <dh.herrmann@gmail.com>
->>>> Cc: Noralf Trønnes <noralf@tronnes.org>
->>>> Cc: David Airlie <airlied@gmail.com>
->>>> Cc: Daniel Vetter <daniel@ffwll.ch>
->>>> Cc: amd-gfx@lists.freedesktop.org
->>>> Cc: lima@lists.freedesktop.org
->>>> Cc: nouveau@lists.freedesktop.org
->>>> Cc: Steven Price <steven.price@arm.com>
->>>> Cc: virtualization@lists.linux-foundation.org
->>>> Cc: spice-devel@lists.freedesktop.org
->>>> Cc: Zack Rusin <zackr@vmware.com>
->>>> ---
->>>>   drivers/gpu/drm/drm_gem.c | 48 
->>>> +++++++++++++++++++--------------------
->>>>   1 file changed, 24 insertions(+), 24 deletions(-)
->>>>
->>>> diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
->>>> index aa15c52ae182..e3d897bca0f2 100644
->>>> --- a/drivers/gpu/drm/drm_gem.c
->>>> +++ b/drivers/gpu/drm/drm_gem.c
->>>> @@ -356,52 +356,52 @@ drm_gem_handle_create_tail(struct drm_file 
->>>> *file_priv,
->>>>                  u32 *handlep)
->>>>   {
->>>>       struct drm_device *dev = obj->dev;
->>>> -    u32 handle;
->>>>       int ret;
->>>> WARN_ON(!mutex_is_locked(&dev->object_name_lock));
->>>>       if (obj->handle_count++ == 0)
->>>>           drm_gem_object_get(obj);
->>>> +    ret = drm_vma_node_allow(&obj->vma_node, file_priv);
->>>> +    if (ret)
->>>> +        goto err_put;
->>>> +
->>>> +    if (obj->funcs->open) {
->>>> +        ret = obj->funcs->open(obj, file_priv);
->>>> +        if (ret)
->>>> +            goto err_revoke;
->>>> +    }
->>>> +
->>>>       /*
->>>> -     * Get the user-visible handle using idr.  Preload and perform
->>>> -     * allocation under our spinlock.
->>>> +     * Get the user-visible handle using idr as the _last_ step.
->>>> +     * Preload and perform allocation under our spinlock.
->>>>        */
->>>>       idr_preload(GFP_KERNEL);
->>>>       spin_lock(&file_priv->table_lock);
->>>> -
->>>>       ret = idr_alloc(&file_priv->object_idr, obj, 1, 0, GFP_NOWAIT);
->>>> -
->>>>       spin_unlock(&file_priv->table_lock);
->>>>       idr_preload_end();
->>>> -    mutex_unlock(&dev->object_name_lock);
->>>>       if (ret < 0)
->>>> -        goto err_unref;
->>>> -
->>>> -    handle = ret;
->>>> +        goto err_close;
->>>> -    ret = drm_vma_node_allow(&obj->vma_node, file_priv);
->>>> -    if (ret)
->>>> -        goto err_remove;
->>>> +    mutex_unlock(&dev->object_name_lock);
->>>> -    if (obj->funcs->open) {
->>>> -        ret = obj->funcs->open(obj, file_priv);
->>>> -        if (ret)
->>>> -            goto err_revoke;
->>>> -    }
->>>> +    *handlep = ret;
->>>> -    *handlep = handle;
->>>>       return 0;
->>>> +err_close:
->>>> +    if (obj->funcs->close)
->>>> +        obj->funcs->close(obj, file_priv);
->>>>   err_revoke:
->>>>       drm_vma_node_revoke(&obj->vma_node, file_priv);
->>>> -err_remove:
->>>> -    spin_lock(&file_priv->table_lock);
->>>> -    idr_remove(&file_priv->object_idr, handle);
->>>> -    spin_unlock(&file_priv->table_lock);
->>>> -err_unref:
->>>> -    drm_gem_object_handle_put_unlocked(obj);
->>>> +err_put:
->>>> +    if (--obj->handle_count == 0)
->>>> +        drm_gem_object_put(obj);
->>>> +
->>>> +    mutex_unlock(&dev->object_name_lock);
->>>> +
->>>>       return ret;
->>>>   }
->>>
-> 
