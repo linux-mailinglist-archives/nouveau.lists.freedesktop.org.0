@@ -1,122 +1,89 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0200069F77B
-	for <lists+nouveau@lfdr.de>; Wed, 22 Feb 2023 16:14:39 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id BB6E069F8A9
+	for <lists+nouveau@lfdr.de>; Wed, 22 Feb 2023 17:11:45 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C0EB210E9ED;
-	Wed, 22 Feb 2023 15:14:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2F0DA10E192;
+	Wed, 22 Feb 2023 16:11:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2056.outbound.protection.outlook.com [40.107.220.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3966F10E9ED;
- Wed, 22 Feb 2023 15:14:34 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WikdilMnbFC0i+1veefBKThOn0M4vaArzgvgT0r/mEawI2ydYVTzM1cxg97yBk+h46QrHdYZ73RBZfuNuuCfQTvetNyf6SUZe93FxSCHG/IdBWYzeVJScAaxgiT5REzPnB41wS0bLOSAOIN1n6rgcMR2Ry4X5+cVTvNo2fQ86kr/it+6kZib75bGEPhpImlUnnZAm6lOy26in4JzNb9cNo7Zuoq5JhdRm4ziaiLHOmOn49CIxTg8K4KcGQyeCFWTq1BWfJC4ALt68OK9BqnJV6w9sQ+XqkIqOk442EQvyqMkcbIo3N28Ju+jhxjn3a82TRxxVEsMUEWK/AxaeG4lOg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Jvapx6aY8UVoU2bouqBbKh0o9CmfLYVTQ/xgjDEQzjo=;
- b=D7rATxpPa4pkeVFd16Yg8ooBD68lP7fWBjjI9JDzmWbxwWdjVY0pZlu01PwiFrv1fhAH9YwuViuaSUmEc+OZwh0Ii1EIiPIwfRWX4EkUsNNjo7OhCyXYzodCFeAgrx/oY8kLs009GZDo+DRNT9g863fQb+WHVHiMIP/2gG5FzpcbEQ1MmwGmMGVMa2w7OV/w+uNyagCLdTxksaCaqrJeTmDWtoIjpP3urbodjbXDhbUh8hBVDhmNspO/zWsi6KuTzZcjc6dvBlxIY+HwxyrBT8vWVxolV5RnD4LGfjpe+vWtV629VwGRiB0deauLM9YTKtdKzYOnWa9uReoNhImi3g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Jvapx6aY8UVoU2bouqBbKh0o9CmfLYVTQ/xgjDEQzjo=;
- b=22Jn9KuV7R8ebNcmDfTpSM55XxmCDc2xJo1nhiqeG+OLEw4h1zO2Cuev9L+8ETX5gosxJlgTOoKBW0XnVz8yPM4I0+4Qtypb9ndMtaubPaPmfrkTH4HOUfwm2MIuUp/T9xTYTch2QlPeOSGBSYzocRG3iiBY5Aq8HnPyv6WltfM=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by CH0PR12MB5234.namprd12.prod.outlook.com (2603:10b6:610:d1::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6134.19; Wed, 22 Feb
- 2023 15:14:32 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::2e4f:4041:28be:ba7a]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::2e4f:4041:28be:ba7a%6]) with mapi id 15.20.6134.019; Wed, 22 Feb 2023
- 15:14:31 +0000
-Message-ID: <29ea3705-5634-c204-c1da-d356b6dfbafc@amd.com>
-Date: Wed, 22 Feb 2023 16:14:25 +0100
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C1E9910E192
+ for <nouveau@lists.freedesktop.org>; Wed, 22 Feb 2023 16:11:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1677082302;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=neiYWm2KbKr5dWFV5xeD5ApqAkur8gwJzODT2/WCgzQ=;
+ b=Z9/wLKvVa5b0Y0NsKFJLKiN4qnkUlSjB4kNAZYW52UVLgmqEPQMEGWSpH7AkovQodFpVT3
+ +O9Do2CYgkpOe0xrVEUXU8kaVVpZENKnihScJ0+OqAmtz/+XAsAaTzP4t7NsVEiHtZD6qc
+ 0ukTH6Dd3/D3n1/nrT+m1GaR3pTvLv0=
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-453-JCzgeyedOCeYUfaPncvYKw-1; Wed, 22 Feb 2023 11:11:40 -0500
+X-MC-Unique: JCzgeyedOCeYUfaPncvYKw-1
+Received: by mail-ed1-f72.google.com with SMTP id
+ r6-20020aa7c146000000b004acd97105ffso11675941edp.19
+ for <nouveau@lists.freedesktop.org>; Wed, 22 Feb 2023 08:11:39 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=neiYWm2KbKr5dWFV5xeD5ApqAkur8gwJzODT2/WCgzQ=;
+ b=6rTPDmANLFH/lWC5ICES5eciYoOfTGzTaevSNxJq4ebwoMQNcB3FF7GN8YngbXuSON
+ agAYviZN1VaQNZBhvbLIbFf0M+QJDtb0mlKg6mvc7bLhqfQYkfTDwTHBs9wf0CQ121Wz
+ rGJrzar86Mu2BPlsH8jH+sso4hp6JosMM/EH0S8wRzmK038CPFRRjmbYcd8cGZhZMVMb
+ +oC3ZxeD6aAsKP/2HSe6JkJIzucFe0ofHyXLA1ziQqqevxNIVvnTz1S91t/4Ycbq9pEg
+ R6HPfCMnCwjPEy0lk5q+VrFAb0ptoD1/LFojGLHp85NOzx7/pzGL7REWzTadoIoiod/m
+ QkMw==
+X-Gm-Message-State: AO0yUKXn9PBomJxsG1eUGoAsc3VQkQ95ZmUX5+77V41LNHxNgCZKCnkb
+ eNv2KECZZB7I8nNpGVHaQ6VZnzu3Zx1kGPv1HChe6kUh6jIh5WxdIFHpKndMeW8knwJD4rYyJjJ
+ Woy8JY/n/gLivGohdenJEuiZlzA==
+X-Received: by 2002:a05:6402:1655:b0:4ac:b4b1:53fe with SMTP id
+ s21-20020a056402165500b004acb4b153femr9384027edx.20.1677082298231; 
+ Wed, 22 Feb 2023 08:11:38 -0800 (PST)
+X-Google-Smtp-Source: AK7set+4YjeyYaom2DoSpii6LTOZ2xL+Xxy+F7uowt5r+Q52MN1xE+Xc3Jamf5spWTJd79U9gwGfhA==
+X-Received: by 2002:a05:6402:1655:b0:4ac:b4b1:53fe with SMTP id
+ s21-20020a056402165500b004acb4b153femr9383994edx.20.1677082297854; 
+ Wed, 22 Feb 2023 08:11:37 -0800 (PST)
+Received: from ?IPV6:2a02:810d:4b3f:de78:642:1aff:fe31:a15c?
+ ([2a02:810d:4b3f:de78:642:1aff:fe31:a15c])
+ by smtp.gmail.com with ESMTPSA id
+ g16-20020a50d0d0000000b004ad1d3cf195sm3504753edf.95.2023.02.22.08.11.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 22 Feb 2023 08:11:37 -0800 (PST)
+Message-ID: <91d34e47-10f6-8278-ef4c-72cdfa24e038@redhat.com>
+Date: Wed, 22 Feb 2023 17:11:34 +0100
+MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.1
-Content-Language: en-US
-To: Danilo Krummrich <dakr@redhat.com>
+To: Matthew Wilcox <willy@infradead.org>
 References: <20230217134422.14116-1-dakr@redhat.com>
- <20230217134422.14116-6-dakr@redhat.com>
- <70ba382f-1559-289a-4922-ca9c371aaf59@amd.com>
- <cc8eeaf4-31e7-98e4-a712-012fc604e985@redhat.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <cc8eeaf4-31e7-98e4-a712-012fc604e985@redhat.com>
+ <20230217134422.14116-5-dakr@redhat.com>
+ <Y+/Xn11dfdn7SfBD@casper.infradead.org>
+ <3bb02ec3-4d19-9135-cabc-26ed210f7396@redhat.com>
+ <Y/ONYhyDCPEYH1ml@casper.infradead.org>
+ <e43f6acc-175d-1031-c4a2-67a6f1741866@redhat.com>
+ <Y/PZH/q2Xsr3od9m@casper.infradead.org> <Y/TXPasvkhtGiR+w@pollux>
+ <Y/UN50hCaRe+8ZCg@casper.infradead.org>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <Y/UN50hCaRe+8ZCg@casper.infradead.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR0P281CA0008.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:15::13) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|CH0PR12MB5234:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5d4f2792-b799-4fa6-f3c0-08db14e77fa5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: /PDRqFgsSaOP77DaCNTPuforgsZt+IcXNoTeNr5JxDsb48bT9nEAy4MYeLm42PFGxqC3gHJKgTWWIK+HY2C+2XrgUwdozEP+YbDE8/Uku+KQAShfjKfaln102sIO82JQAwKRRbpcOtcPQzxI+naVDVmXP0VdGJC5NYFrPnHRFZlch3DkaGsdfvfzmlJ73xfWHVUmazduAsCXeXzVpMIUnlpu9XJAufc7YkRVzg86/yTtg2xTbgADOYcsCyyeXxz1uflFv4uVpSTG+hCxirGyb7Hzur17j6+ig3gDJO1TTFLv4zqjWet9CcOrKUAaA2a6ZpbPpruVObj5QyII2/xNY2HrtsF2aE/oynyiJ0rBqrKtWYKSHW9NOnvYrsUalFrvHqaVTHhFM7c0g9hrtopYlc/eU6IcB0qQe+NUMQ8HDrOqAIyimkkZAPFKjOM6nUw8jfatgFZkKbUy4559c7Lg7R4AAnb3lgWQTsCfbPo3IECrI3ua9DBtBMr6F3NPjjfGzyFnJf+Z8mPNYHTrMXUsxjvHaMj+CSXz+S3uYBCDY3D4wPbqqlRDp41BeklkM8rUgvzWOZVydQ73tZxZJE2p2Splfgj/784heUnp4kiKB1znT+dyzM0tvYG1QwXLaDC/b1JBpzl/FvEhYcDdA83Z/36wKB3jmjnSXX4e25gqi00k/htvGDsTOAUCvepx6B9KyjdtPqCtQG9FGQVj2Eij8iSbPEVqVTA8j/wsD0nSXAU=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230025)(4636009)(136003)(376002)(39860400002)(396003)(346002)(366004)(451199018)(31696002)(86362001)(36756003)(6512007)(66476007)(66946007)(53546011)(6916009)(4326008)(8936002)(66556008)(186003)(41300700001)(2616005)(316002)(38100700002)(6666004)(6506007)(6486002)(478600001)(2906002)(8676002)(66574015)(83380400001)(7416002)(5660300002)(31686004)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UU12bjNBT3V1aVdQS3pnblR0RkJDMFIxd2F4T3o1dElTUjJTcjREcHRFN2or?=
- =?utf-8?B?UWtRVUlXdXNWM1MwRXlSSWV0NXlNeU9jM3RjOXlTYlZrMjlHNWMvRlNxZURx?=
- =?utf-8?B?WWdET0w2cHNjdTBvU2dFMlBHTGt3NkcrZlh6QXZUYVBBalgyK2VCUlJhOUlE?=
- =?utf-8?B?bmZTUWdrVVFDSlNJSUlHb0lFNG1qOWxhNUhvL0hhZENaUTY4RTVHNHVjRnJ5?=
- =?utf-8?B?cUVVUVB0RnFpaFFFbkdFMVl4Z253dER4dkFMWGRTM2c1SU5OWGxTbXE0ejI3?=
- =?utf-8?B?WXl4Um96d25GRFdDK29JR2c3bjRyWUlaN3NuMUtvZ2drOGVzcVdsSjZVQkpO?=
- =?utf-8?B?UUJJMjg5ZVFUbWRDNG1PK3U5dVpTOC92UGJvaTgvY01oL3pDMG01RHJraTRm?=
- =?utf-8?B?d1NrYy8yMkxRa2xSeFgrMnNyM2RJWmlveVpwbkIyMkxqR21BdWNBdGtPdWxV?=
- =?utf-8?B?K2ZBYk41WDA3VjkyZGY3QW90OGUyb2VsTUNCLzVTc3Bua2dVeFZ4VW5CcmFJ?=
- =?utf-8?B?R3lGM28rQU5BdDFid2psMkZwbW9haFFKc0VTZis4Q2ZscmRDRXIzMzE2Q0hH?=
- =?utf-8?B?dUNXL3JyM0Q1SG1sZkpUbEgvK0hzdHF5S0tpWTNjRTE4bWFnOFNVbEtaREE0?=
- =?utf-8?B?SEs4V0xUTjBBb2EwaUQzOG1LUXhTbkFpM1ptMDdNUllHZWVHdlVOWXNLa0Fj?=
- =?utf-8?B?Wkd5OEY1N0JjdVZDRis3UGpiTENHbjFEN3dlQUp3b2FSUGN5aVZZdCtPL0hu?=
- =?utf-8?B?bm45UGhkS1YvRXArZFh6eEw4RENGOFQzK2p4MXJ2RDMxZEg3amFCNDkwNWZ5?=
- =?utf-8?B?eGN1UWpRR084dmx4WU94U1ppblo3bVpZVmRDUHJHUURWcHgyUVZjMFk2Zkpz?=
- =?utf-8?B?VVpUKzZScGpwQVE0K242K0I4VzJ5dnBQV3VvVG1ubFdSc2IxQmw4RVJPVU1m?=
- =?utf-8?B?c2xBQ2lSelZOVVMxM0RHd001MGlRaWd1cFVtRStLcVRCb2VLVHBNbWVNQUM0?=
- =?utf-8?B?TFd5OVdzMUVVUmQvZ1J6a2JQVDg3MVJDRHAyaVR6Ymd6ZE9iTnZUb2EwRkhO?=
- =?utf-8?B?dlQvd2hpdTRTR3RReko3N0RmTWRCZE9tTnBMdDVYNWhVVzNBVDQ5OGtad200?=
- =?utf-8?B?M2Z4VEdhV1hpZWNBa2JoeWVyWS9SMnZFSjdMS1VrSFNUdC9XUms1aFZYRDRT?=
- =?utf-8?B?eUllOERhWHpUbjFsb2l3SlRrSmdGMDNzMFZoN0szSzEzYTZ1Q0lWMHd6azZ0?=
- =?utf-8?B?M1VlK3ZFR2NGSDk0OTYwbXM5SnhDd2IrWTV0R3d0TGpXaGxydDhuZk9UNWZu?=
- =?utf-8?B?djBGSkJkQlZpUmJZa2loWHJlMkh1UnZLOE1oa3RYMEI4bUFEWXQ2bXVXbGtm?=
- =?utf-8?B?OU44UUZhNFk4VzU3YjFFaldpMDZLYXIyblQxejg1clJTaXd4cTQ5RW1NS3R0?=
- =?utf-8?B?MjJ5Uld0R0grdG9udWhYODNkR2JpWkFHMFZxZnArSXlPM3lWZWlCdDAvc2tV?=
- =?utf-8?B?MUNRQlRueXRuTVVGby9aY0tIY3UyZU5WdEhLcE5VT29LM1FxYUEzQkxaczcv?=
- =?utf-8?B?bjAwSzFCUlRieVFzc2RyOXFpY2o0TDNPVHNVSGQvR29zdS9sdnJtR1JtR0gy?=
- =?utf-8?B?MkZqM29DQ2F2Nmh5VjNvS2ZnT0JQSVAzZzZSeUh3S2RDb1E0OXVURHk2MWpZ?=
- =?utf-8?B?NkVWdGFCa1JOVSt5MVpLa01jWHBGRzA3dnZPUE9ocm5pL3lGUlpIbjlsQnln?=
- =?utf-8?B?UzNPTHo4N0o3L0R1SW5QWEkwMGdNZlVMeHFGaTlQa0I2dGxiMVZBVlhtT3N1?=
- =?utf-8?B?ajRteC9tV21wK1hndzBOcTF3NjZaMDJRemludURNMHoxd3pNVEJ5OU8wbEov?=
- =?utf-8?B?QlZTVXhKVWlyS2VBS3Y4aDZMdlpEd3QrZThnajNyS3FZSDgzcWI4OXg1L01u?=
- =?utf-8?B?bjNGYm55T1pBKzk4S1hRK0ludWgrZzNDa2luRndOa1pGSlBTRndoa3N0MVIv?=
- =?utf-8?B?YmVqWDVaMGFBSDQ4NE1CL0tLdnBBa0RGZ0g4dy9vVDM0bFk4K095NDRXMS9s?=
- =?utf-8?B?bXFPTXlET3N0Wnk5aGVTay9GOE4vN2dHSHBETHJHM3RXQy9NVGZPelgyelBU?=
- =?utf-8?B?NllDdjNIMTZjdEErOU9KYkVDSlI5bFhtSUtkSDh0TCtzYnA0emdxbnU0SDh3?=
- =?utf-8?Q?gMQbxXmrtwGLRmKz7P87SEgTr489F7dLMirW2Eqerpmt?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5d4f2792-b799-4fa6-f3c0-08db14e77fa5
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Feb 2023 15:14:31.6671 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 345VGiA10iftcGENcMj4XLr/sZVpsA815b/MkB9eRSUSnimiHMXwZSw9t3cVLEi4
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB5234
-Subject: Re: [Nouveau] [PATCH drm-next v2 05/16] drm: manager to keep track
- of GPUs VA mappings
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH drm-next v2 04/16] maple_tree: add flag
+ MT_FLAGS_LOCK_NONE
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -128,109 +95,175 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, willy@infradead.org, daniel@ffwll.ch,
- dri-devel@lists.freedesktop.org, corbet@lwn.net, nouveau@lists.freedesktop.org,
- ogabbay@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- mripard@kernel.org, linux-mm@kvack.org, alexdeucher@gmail.com,
- boris.brezillon@collabora.com, bskeggs@redhat.com, Liam.Howlett@oracle.com,
- Dave Airlie <airlied@redhat.com>, bagasdotme@gmail.com, jason@jlekstrand.net
+Cc: matthew.brost@intel.com, bagasdotme@gmail.com, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, ogabbay@kernel.org, corbet@lwn.net,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, boris.brezillon@collabora.com, bskeggs@redhat.com,
+ Liam.Howlett@oracle.com, christian.koenig@amd.com, jason@jlekstrand.net
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 22.02.23 um 16:07 schrieb Danilo Krummrich:
-> On 2/22/23 11:25, Christian König wrote:
->> Am 17.02.23 um 14:44 schrieb Danilo Krummrich:
->
-> <snip>
->
->>> +/**
->>> + * DOC: Overview
->>> + *
->>> + * The DRM GPU VA Manager, represented by struct drm_gpuva_manager 
->>> keeps track
->>> + * of a GPU's virtual address (VA) space and manages the 
->>> corresponding virtual
->>> + * mappings represented by &drm_gpuva objects. It also keeps track 
->>> of the
->>> + * mapping's backing &drm_gem_object buffers.
->>> + *
->>> + * &drm_gem_object buffers maintain a list (and a corresponding 
->>> list lock) of
->>> + * &drm_gpuva objects representing all existent GPU VA mappings 
->>> using this
->>> + * &drm_gem_object as backing buffer.
->>> + *
->>> + * If the &DRM_GPUVA_MANAGER_REGIONS feature is enabled, a GPU VA 
->>> mapping can
->>> + * only be created within a previously allocated &drm_gpuva_region, 
->>> which
->>> + * represents a reserved portion of the GPU VA space. GPU VA 
->>> mappings are not
->>> + * allowed to span over a &drm_gpuva_region's boundary.
->>> + *
->>> + * GPU VA regions can also be flagged as sparse, which allows 
->>> drivers to create
->>> + * sparse mappings for a whole GPU VA region in order to support 
->>> Vulkan
->>> + * 'Sparse Resources'.
+On 2/21/23 19:31, Matthew Wilcox wrote:
+> On Tue, Feb 21, 2023 at 03:37:49PM +0100, Danilo Krummrich wrote:
+>> On Mon, Feb 20, 2023 at 08:33:35PM +0000, Matthew Wilcox wrote:
+>>> On Mon, Feb 20, 2023 at 06:06:03PM +0100, Danilo Krummrich wrote:
+>>>> On 2/20/23 16:10, Matthew Wilcox wrote:
+>>>>> This is why we like people to use the spinlock embedded in the tree.
+>>>>> There's nothing for the user to care about.  If the access really is
+>>>>> serialised, acquiring/releasing the uncontended spinlock is a minimal
+>>>>> cost compared to all the other things that will happen while modifying
+>>>>> the tree.
+>>>>
+>>>> I think as for the users of the GPUVA manager we'd have two cases:
+>>>>
+>>>> 1) Accesses to the manager (and hence the tree) are serialized, no lock
+>>>> needed.
+>>>>
+>>>> 2) Multiple operations on the tree must be locked in order to make them
+>>>> appear atomic.
+>>>
+>>> Could you give an example here of what you'd like to do?  Ideally
+>>> something complicated so I don't say "Oh, you can just do this" when
+>>> there's a more complex example for which "this" won't work.  I'm sure
+>>> that's embedded somewhere in the next 20-odd patches, but it's probably
+>>> quicker for you to describe in terms of tree operations that have to
+>>> appear atomic than for me to try to figure it out.
+>>>
 >>
->> Well since we have now found that there is absolutely no technical 
->> reason for having those regions could we please drop them?
->
-> I disagree this was the outcome of our previous discussion.
->
-> In nouveau I still need them to track the separate sparse page tables 
-> and, as you confirmed previously, Nvidia cards are not the only cards 
-> supporting this feature.
->
-> The second reason is that with regions we can avoid merging between 
-> buffers, which saves some effort. However, I agree that this argument 
-> by itself probably doesn't hold too much, since you've pointed out in 
-> a previous mail that:
->
-> <cite>
-> 1) If we merge and decide to only do that inside certain boundaries 
-> then those boundaries needs to be provided and checked against. This 
-> burns quite some CPU cycles
->
-> 2) If we just merge what we can we might have extra page table updates 
-> which cost time and could result in undesired side effects.
->
-> 3) If we don't merge at all we have additional housekeeping for the 
-> mappings and maybe hw restrictions.
-> </cite>
->
-> However, if a driver uses regions to track its separate sparse page 
-> tables anyway it gets 1) for free, which is a nice synergy.
->
-> I totally agree that regions aren't for everyone though. Hence, I made 
-> them an optional feature and by default regions are disabled. In order 
-> to use them drm_gpuva_manager_init() must be called with the 
-> DRM_GPUVA_MANAGER_REGIONS feature flag.
->
-> I really would not want to open code regions or have two GPUVA manager 
-> instances in nouveau to track sparse page tables. That would be really 
-> messy, hence I hope we can agree on this to be an optional feature.
-
-I absolutely don't think that this is a good idea then. This separate 
-handling of sparse page tables is completely Nouveau specific.
-
-Even when it's optional feature mixing this into the common handling is 
-exactly what I pointed out as not properly separating between hardware 
-specific and hardware agnostic functionality.
-
-This is exactly the problem we ran into with TTM as well and I've spend 
-a massive amount of time to clean that up again.
-
-Regards,
-Christian.
-
->
+>> Absolutely, not gonna ask you to read all of that. :-)
 >>
->> I don't really see a need for them any more.
+>> One thing the GPUVA manager does is to provide drivers the (sub-)operations
+>> that need to be processed in order to fulfill a map or unmap request from
+>> userspace. For instance, when userspace asks the driver to map some memory
+>> the GPUVA manager calculates which existing mappings must be removed, split up
+>> or can be merged with the newly requested mapping.
 >>
->> Regards,
->> Christian.
+>> A driver has two ways to fetch those operations from the GPUVA manager. It can
+>> either obtain a list of operations or receive a callback for each operation
+>> generated by the GPUVA manager.
 >>
->
+>> In both cases the GPUVA manager walks the maple tree, which keeps track of
+>> existing mappings, for the given range in __drm_gpuva_sm_map() (only considering
+>> the map case, since the unmap case is a subset basically). For each mapping
+>> found in the given range the driver, as mentioned, either receives a callback or
+>> a list entry is added to the list of operations.
+>>
+>> Typically, for each operation / callback one entry within the maple tree is
+>> removed and, optionally at the beginning and end of a new mapping's range, a
+>> new entry is inserted. An of course, as the last operation, there is the new
+>> mapping itself to insert.
+>>
+>> The GPUVA manager delegates locking responsibility to the drivers. Typically,
+>> a driver either serializes access to the VA space managed by the GPUVA manager
+>> (no lock needed) or need to lock the processing of a full set of operations
+>> generated by the GPUVA manager.
+> 
+> OK, that all makes sense.  It does make sense to have the driver use its
+> own mutex and then take the spinlock inside the maple tree code.  It
+> shouldn't ever be contended.
+> 
+>>>> In either case the embedded spinlock wouldn't be useful, we'd either need an
+>>>> external lock or no lock at all.
+>>>>
+>>>> If there are any internal reasons why specific tree operations must be
+>>>> mutually excluded (such as those you explain below), wouldn't it make more
+>>>> sense to always have the internal lock and, optionally, allow users to
+>>>> specify an external lock additionally?
+>>>
+>>> So the way this works for the XArray, which is a little older than the
+>>> Maple tree, is that we always use the internal spinlock for
+>>> modifications (possibly BH or IRQ safe), and if someone wants to
+>>> use an external mutex to make some callers atomic with respect to each
+>>> other, they're free to do so.  In that case, the XArray doesn't check
+>>> the user's external locking at all, because it really can't know.
+>>>
+>>> I'd advise taking that approach; if there's really no way to use the
+>>> internal spinlock to make your complicated updates appear atomic
+>>> then just let the maple tree use its internal spinlock, and you can
+>>> also use your external mutex however you like.
+>>>
+>>
+>> That sounds like the right thing to do.
+>>
+>> However, I'm using the advanced API of the maple tree (and that's the reason
+>> why the above example appears a little more detailed than needed) because I
+>> think with the normal API I can't insert / remove tree entries while walking
+>> the tree, right?
+> 
+> Right.  The normal API is for simple operations while the advanced API
+> is for doing compound operations.
+> 
+>> As by the documentation the advanced API, however, doesn't take care of locking
+>> itself, hence just letting the maple tree use its internal spinlock doesn't
+>> really work - I need to take care of that myself, right?
+> 
+> Yes; once you're using the advanced API, you get to compose the entire
+> operation yourself.
+> 
+>> It feels a bit weird that I, as a user of the API, would need to lock certain
+>> (or all?) mas_*() functions with the internal spinlock in order to protect
+>> (future) internal features of the tree, such as the slab cache defragmentation
+>> you mentioned. Because from my perspective, as the generic component that tells
+>> it's users (the drivers) to take care of locking VA space operations (and hence
+>> tree operations) I don't have an own purpose of this internal spinlock, right?
+> 
+> You don't ... but we can't know that.
+
+Thanks for the clarification. I think I should now know what to for the 
+GPUVA manager in terms of locking the maple tree in general.
+
+Though I still have very limited insights on the maple tree I want to 
+share some further thoughts.
+
+ From what I got so far it really seems to me that it would be better to 
+just take the internal spinlock for both APIs (normal and advanced) 
+whenever you need to internally.
+
+This way users would not need to take care of locking maple tree 
+internals, which I still think is a little odd.
+
+Another plus would probably be maintainability. Once you got quite a few 
+maple tree users using external locks (either in the sense of calling 
+mt_set_external_lock() or in the way I'll potentially do it by using the 
+internal lock with the advanced API and an additional external lock) it 
+might be hard to apply any changes to the locking requirements, because 
+you would either need to check every users implementation by hand or be 
+able to run it in order to check it with lockdep.
+
+If I got this correctly (please tell me if I don't) the only reason the 
+internal lock is not managed by the advanced API internally is to let 
+users do more complex transactions, without the need of having a 
+separate external lock, as long as they fulfill the locking requirements 
+of the maple tree, which are enforced by lockdep.
+
+However, you already mentioned that "acquiring/releasing the uncontended 
+spinlock is a minimal cost compared to all the other things that will 
+happen while modifying the tree".
+
+Do I miss something?
+
+> 
+>> Also I'm a little confused how I'd know where to take the spinlock? E.g. for
+>> inserting entries in the tree I use mas_store_gfp() with GFP_KERNEL.
+> 
+> Lockdep will shout at you if you get it wrong ;-)  But you can safely
+> take the spinlock before calling mas_store_gfp(GFP_KERNEL) because
+> mas_nomem() knows to drop the lock before doing a sleeping allocation.
+> Essentially you're open-coding mtree_store_range() but doing your own
+> thing in addition to the store.
+> 
+Just asking lockdep was my plan already, however I thought I still 
+better ask. :D
+
+If you will keep the current approach of handling the internal lock I 
+think its necessary to somewhere document where users need to take the 
+lock and, even more important, where the maple tree implementation will 
+drop the lock.
+
+For instance, if I would rely on using the internal spinlock for locking 
+sets of transactions to the maple tree this would cause nasty bugs if I 
+use functions like mas_store_gfp() dropping the lock. Even though I must 
+admit that this is not a great example, since it should raise some red 
+flags if a user would expect a spinlock is held for a sleeping 
+allocation without questioning it. However, you get the point I guess.
 
