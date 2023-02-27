@@ -1,86 +1,89 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6231B6A426A
-	for <lists+nouveau@lfdr.de>; Mon, 27 Feb 2023 14:17:57 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id BE13A6A484F
+	for <lists+nouveau@lfdr.de>; Mon, 27 Feb 2023 18:39:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0135D10E2F8;
-	Mon, 27 Feb 2023 13:17:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 20DEC10E18E;
+	Mon, 27 Feb 2023 17:39:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 011AE10E1D2
- for <nouveau@lists.freedesktop.org>; Mon, 27 Feb 2023 13:17:49 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 58F3610E18E
+ for <nouveau@lists.freedesktop.org>; Mon, 27 Feb 2023 17:39:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1677503869;
+ s=mimecast20190719; t=1677519578;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=7/JwXXOcUANfKgQHRX2hBTjJHPucALZHVEapWMAnt6c=;
- b=RRNTN50TwamBkd3K411GC89zZp1vWLUmrjsAqgfE156qx2fDRaY8evutTc25FfeJjmkdNt
- AhmOIYShDsacL356tJhmAV+YPI0if06QGXR7ZYjhxUfcg1q/zOVrjO3M54kbAOTAu5wP3X
- m/UKFBvNHJpNV5cw2ZdPAUGZOAPj6cw=
+ bh=3mkc3cHryKoQlVgV2zVl+0PzzwDJTUCgbCBX7Jw82OE=;
+ b=f+vofc2AIveLo0QvR62EMkjo0DM3WEZ12h0y7QSYaPobKZaHkxdT2JdgSQBqJEwvBm1J89
+ 53aXVmuVkQ9yP5DdzkGZxLSFaHx1ucv6GfzTbygMIiiiFjEolHAJrU7hLlc5yF3Ld4nxmp
+ uRf9GE4YQj+ZuHxY8G36SpCl3VYjl24=
 Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
  [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-190-JCquCF5PN5uRIENjSpCiag-1; Mon, 27 Feb 2023 08:17:45 -0500
-X-MC-Unique: JCquCF5PN5uRIENjSpCiag-1
+ us-mta-528-3lw8hi1KMjSJ3sN83Fes1g-1; Mon, 27 Feb 2023 12:39:37 -0500
+X-MC-Unique: 3lw8hi1KMjSJ3sN83Fes1g-1
 Received: by mail-ed1-f71.google.com with SMTP id
- cy28-20020a0564021c9c00b004acc6cf6322so8391468edb.18
- for <nouveau@lists.freedesktop.org>; Mon, 27 Feb 2023 05:17:45 -0800 (PST)
+ h13-20020a0564020e8d00b004a26ef05c34so9665958eda.16
+ for <nouveau@lists.freedesktop.org>; Mon, 27 Feb 2023 09:39:37 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:cc:organization:from
- :references:to:content-language:subject:user-agent:mime-version:date
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=7/JwXXOcUANfKgQHRX2hBTjJHPucALZHVEapWMAnt6c=;
- b=ZRmKYyngOyb091uYwPwiYQ2vP88PR9xeYBlqDfoyK2ihnPJLNS3R170TeO7VggJdbX
- 6lCW6VN50Tvns/0BJbFJaXzQTPdHEHFQkr5ezZN44GLNT2hkjdjcGYLZmg5O5vZ7NoSu
- JoFyzUfQIGDn4t7ZKGWAemUE2KJKE0XtUY8V2ztVDUyjP3uk+WjBn+KtoY5Y45zOBlk5
- OY/S0Ymriw3rDMpr/4m5wJ4h45z1434p7E1Xeupgm3aPQ2hPKU+ZJyDVBGu3Qt/FNVxF
- Rk+7SA/h5EdzvR0U+gWsqj3KU3fnUN81YMXkKJNMJXIwlCjJt/LCYgCZH4pLSz9Wj9Mh
- zHgA==
-X-Gm-Message-State: AO0yUKUP8Z3pZfCgqmWHM4p6saNt71EprFXJDSrmJvmJgdCY0U+jeqaG
- yZ4ab+b+y0Fvk6kvHf5h6xW7JJCOi4m4i1LMGpYjOSqAlE89VBT85VC68ptlP/T6eI+OI/DXyqh
- UonNSmMO66fKKdXChWfKTVDj0mw==
-X-Received: by 2002:a17:906:37cb:b0:8b1:2867:380 with SMTP id
- o11-20020a17090637cb00b008b128670380mr31973716ejc.22.1677503864555; 
- Mon, 27 Feb 2023 05:17:44 -0800 (PST)
-X-Google-Smtp-Source: AK7set+Cy7sWsLPXTn4bLU8LAuBfTn0Skdun8SJ+X036TqItJ9jom1n1S1TS3Ov3cpgz77klS/5oQA==
-X-Received: by 2002:a17:906:37cb:b0:8b1:2867:380 with SMTP id
- o11-20020a17090637cb00b008b128670380mr31973678ejc.22.1677503864067; 
- Mon, 27 Feb 2023 05:17:44 -0800 (PST)
+ bh=3mkc3cHryKoQlVgV2zVl+0PzzwDJTUCgbCBX7Jw82OE=;
+ b=bgTyIy97utUAPhthZtrmoMzW/bN6FFrIAN53f11DfQ5G3VEb1HA4QSu0V0MRpnqhjv
+ WPXd6jXprt8Sfi1Fl5v1r5YWAzTjDXD8NmAi7ZojJKEhULMOoNKX1ducV7m1g51okq37
+ qggnvi9+IxuIKeVaSOM8rq3pvsdqIjYKZs7P/5gQ8ZrQX+7kxQn0ImbUP3RmV9eBlddA
+ RvNZssXFLHBZlSLoHgLnOTAp8fqDaxyOpXSv/Rdgmo/T20gE8r6e05YbLA/xC/NiWZJ+
+ vqja7IGTBd5AJ+fVeKZvvVqOcO6J5DJLcqPd0gPZaFgDUfEOe/w96DgJR7zYXtk7bl3U
+ iAFw==
+X-Gm-Message-State: AO0yUKUp/s4PAMUyZro7Krf/2j0HiN5GH/Ojz2mTdFF5W9nwfA9J2pC+
+ Bmo+vJlkVfvEwQ2F4rdDo5yz12BP3osG6AIh5aKUqO0xLQmJS301FGs5doe/r1cMBAIrhmlWaew
+ gOdb2PUJn6x10JDJ6u7fShpxVJNCepfk=
+X-Received: by 2002:a17:907:97c3:b0:8af:ef00:b853 with SMTP id
+ js3-20020a17090797c300b008afef00b853mr44969560ejc.73.1677519576275; 
+ Mon, 27 Feb 2023 09:39:36 -0800 (PST)
+X-Google-Smtp-Source: AK7set8dwfwqQmqPjam8UzWIoP7CWEacRLfEPhcixYlLH9/bKx4zKjhRg3obJwXpommPMEyYgK8mKw==
+X-Received: by 2002:a17:907:97c3:b0:8af:ef00:b853 with SMTP id
+ js3-20020a17090797c300b008afef00b853mr44969529ejc.73.1677519575989; 
+ Mon, 27 Feb 2023 09:39:35 -0800 (PST)
 Received: from ?IPV6:2a02:810d:4b3f:de78:642:1aff:fe31:a15c?
  ([2a02:810d:4b3f:de78:642:1aff:fe31:a15c])
  by smtp.gmail.com with ESMTPSA id
- sb11-20020a170906edcb00b008d2d2990c9fsm3238435ejb.93.2023.02.27.05.17.42
+ e19-20020a1709061e9300b008d83ad86fe8sm3481538ejj.59.2023.02.27.09.39.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Feb 2023 05:17:43 -0800 (PST)
-Message-ID: <0868bbeb-11b4-b832-a601-f289278e3e76@redhat.com>
-Date: Mon, 27 Feb 2023 13:23:26 +0100
+ Mon, 27 Feb 2023 09:39:35 -0800 (PST)
+Message-ID: <67942a68-2ae7-8883-25d7-c6d595c3587e@redhat.com>
+Date: Mon, 27 Feb 2023 18:39:33 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.1
-To: "Liam R. Howlett" <Liam.Howlett@Oracle.com>
+To: Matthew Wilcox <willy@infradead.org>
 References: <20230217134422.14116-1-dakr@redhat.com>
- <20230217134422.14116-6-dakr@redhat.com>
- <20230221182050.day6z5ge2e3dxerv@revolver>
- <ce3ee7f2-e8a3-80eb-9bca-cd465f7f332e@redhat.com>
- <20230223190941.bkkloowmvqjiu6d7@revolver>
+ <20230217134422.14116-5-dakr@redhat.com>
+ <Y+/Xn11dfdn7SfBD@casper.infradead.org>
+ <3bb02ec3-4d19-9135-cabc-26ed210f7396@redhat.com>
+ <Y/ONYhyDCPEYH1ml@casper.infradead.org>
+ <e43f6acc-175d-1031-c4a2-67a6f1741866@redhat.com>
+ <Y/PZH/q2Xsr3od9m@casper.infradead.org> <Y/TXPasvkhtGiR+w@pollux>
+ <Y/UN50hCaRe+8ZCg@casper.infradead.org>
 From: Danilo Krummrich <dakr@redhat.com>
 Organization: RedHat
-In-Reply-To: <20230223190941.bkkloowmvqjiu6d7@revolver>
+In-Reply-To: <Y/UN50hCaRe+8ZCg@casper.infradead.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH drm-next v2 05/16] drm: manager to keep track
- of GPUs VA mappings
+Subject: Re: [Nouveau] [PATCH drm-next v2 04/16] maple_tree: add flag
+ MT_FLAGS_LOCK_NONE
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,631 +95,146 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, willy@infradead.org, daniel@ffwll.ch,
- dri-devel@lists.freedesktop.org, corbet@lwn.net, nouveau@lists.freedesktop.org,
- ogabbay@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- mripard@kernel.org, linux-mm@kvack.org, boris.brezillon@collabora.com,
- bskeggs@redhat.com, alexdeucher@gmail.com, Dave Airlie <airlied@redhat.com>,
- bagasdotme@gmail.com, christian.koenig@amd.com, jason@jlekstrand.net
+Cc: matthew.brost@intel.com, bagasdotme@gmail.com, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, ogabbay@kernel.org, corbet@lwn.net,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, boris.brezillon@collabora.com, bskeggs@redhat.com,
+ Liam.Howlett@oracle.com, christian.koenig@amd.com, jason@jlekstrand.net
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2/23/23 20:09, Liam R. Howlett wrote:
-> * Danilo Krummrich <dakr@redhat.com> [230222 13:13]:
->> On 2/21/23 19:20, Liam R. Howlett wrote:
->>> * Danilo Krummrich <dakr@redhat.com> [230217 08:45]:
->>>> Add infrastructure to keep track of GPU virtual address (VA) mappings
->>>> with a decicated VA space manager implementation.
+On 2/21/23 19:31, Matthew Wilcox wrote:
+> On Tue, Feb 21, 2023 at 03:37:49PM +0100, Danilo Krummrich wrote:
+>> On Mon, Feb 20, 2023 at 08:33:35PM +0000, Matthew Wilcox wrote:
+>>> On Mon, Feb 20, 2023 at 06:06:03PM +0100, Danilo Krummrich wrote:
+>>>> On 2/20/23 16:10, Matthew Wilcox wrote:
+>>>>> This is why we like people to use the spinlock embedded in the tree.
+>>>>> There's nothing for the user to care about.  If the access really is
+>>>>> serialised, acquiring/releasing the uncontended spinlock is a minimal
+>>>>> cost compared to all the other things that will happen while modifying
+>>>>> the tree.
 >>>>
->>>> New UAPIs, motivated by Vulkan sparse memory bindings graphics drivers
->>>> start implementing, allow userspace applications to request multiple and
->>>> arbitrary GPU VA mappings of buffer objects. The DRM GPU VA manager is
->>>> intended to serve the following purposes in this context.
+>>>> I think as for the users of the GPUVA manager we'd have two cases:
 >>>>
->>>> 1) Provide infrastructure to track GPU VA allocations and mappings,
->>>>      making use of the maple_tree.
+>>>> 1) Accesses to the manager (and hence the tree) are serialized, no lock
+>>>> needed.
 >>>>
->>>> 2) Generically connect GPU VA mappings to their backing buffers, in
->>>>      particular DRM GEM objects.
+>>>> 2) Multiple operations on the tree must be locked in order to make them
+>>>> appear atomic.
+>>>
+>>> Could you give an example here of what you'd like to do?  Ideally
+>>> something complicated so I don't say "Oh, you can just do this" when
+>>> there's a more complex example for which "this" won't work.  I'm sure
+>>> that's embedded somewhere in the next 20-odd patches, but it's probably
+>>> quicker for you to describe in terms of tree operations that have to
+>>> appear atomic than for me to try to figure it out.
+>>>
+>>
+>> Absolutely, not gonna ask you to read all of that. :-)
+>>
+>> One thing the GPUVA manager does is to provide drivers the (sub-)operations
+>> that need to be processed in order to fulfill a map or unmap request from
+>> userspace. For instance, when userspace asks the driver to map some memory
+>> the GPUVA manager calculates which existing mappings must be removed, split up
+>> or can be merged with the newly requested mapping.
+>>
+>> A driver has two ways to fetch those operations from the GPUVA manager. It can
+>> either obtain a list of operations or receive a callback for each operation
+>> generated by the GPUVA manager.
+>>
+>> In both cases the GPUVA manager walks the maple tree, which keeps track of
+>> existing mappings, for the given range in __drm_gpuva_sm_map() (only considering
+>> the map case, since the unmap case is a subset basically). For each mapping
+>> found in the given range the driver, as mentioned, either receives a callback or
+>> a list entry is added to the list of operations.
+>>
+>> Typically, for each operation / callback one entry within the maple tree is
+>> removed and, optionally at the beginning and end of a new mapping's range, a
+>> new entry is inserted. An of course, as the last operation, there is the new
+>> mapping itself to insert.
+>>
+>> The GPUVA manager delegates locking responsibility to the drivers. Typically,
+>> a driver either serializes access to the VA space managed by the GPUVA manager
+>> (no lock needed) or need to lock the processing of a full set of operations
+>> generated by the GPUVA manager.
+> 
+> OK, that all makes sense.  It does make sense to have the driver use its
+> own mutex and then take the spinlock inside the maple tree code.  It
+> shouldn't ever be contended.
+> 
+>>>> In either case the embedded spinlock wouldn't be useful, we'd either need an
+>>>> external lock or no lock at all.
 >>>>
->>>> 3) Provide a common implementation to perform more complex mapping
->>>>      operations on the GPU VA space. In particular splitting and merging
->>>>      of GPU VA mappings, e.g. for intersecting mapping requests or partial
->>>>      unmap requests.
->>>>
->>>> Suggested-by: Dave Airlie <airlied@redhat.com>
->>>> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
->>>> ---
->>>>    Documentation/gpu/drm-mm.rst    |   31 +
->>>>    drivers/gpu/drm/Makefile        |    1 +
->>>>    drivers/gpu/drm/drm_gem.c       |    3 +
->>>>    drivers/gpu/drm/drm_gpuva_mgr.c | 1704 +++++++++++++++++++++++++++++++
->>>>    include/drm/drm_drv.h           |    6 +
->>>>    include/drm/drm_gem.h           |   75 ++
->>>>    include/drm/drm_gpuva_mgr.h     |  714 +++++++++++++
->>>>    7 files changed, 2534 insertions(+)
->>>>    create mode 100644 drivers/gpu/drm/drm_gpuva_mgr.c
->>>>    create mode 100644 include/drm/drm_gpuva_mgr.h
->>>>
->>>> diff --git a/Documentation/gpu/drm-mm.rst b/Documentation/gpu/drm-mm.rst
->>>> index a52e6f4117d6..c9f120cfe730 100644
->>>> --- a/Documentation/gpu/drm-mm.rst
->>>> +++ b/Documentation/gpu/drm-mm.rst
->>>> @@ -466,6 +466,37 @@ DRM MM Range Allocator Function References
->>>>    .. kernel-doc:: drivers/gpu/drm/drm_mm.c
->>>>       :export:
->>> ...
+>>>> If there are any internal reasons why specific tree operations must be
+>>>> mutually excluded (such as those you explain below), wouldn't it make more
+>>>> sense to always have the internal lock and, optionally, allow users to
+>>>> specify an external lock additionally?
 >>>
->>>> +
->>>> +/**
->>>> + * drm_gpuva_remove_iter - removes the iterators current element
->>>> + * @it: the &drm_gpuva_iterator
->>>> + *
->>>> + * This removes the element the iterator currently points to.
->>>> + */
->>>> +void
->>>> +drm_gpuva_iter_remove(struct drm_gpuva_iterator *it)
->>>> +{
->>>> +	mas_erase(&it->mas);
->>>> +}
->>>> +EXPORT_SYMBOL(drm_gpuva_iter_remove);
->>>> +
->>>> +/**
->>>> + * drm_gpuva_insert - insert a &drm_gpuva
->>>> + * @mgr: the &drm_gpuva_manager to insert the &drm_gpuva in
->>>> + * @va: the &drm_gpuva to insert
->>>> + * @addr: the start address of the GPU VA
->>>> + * @range: the range of the GPU VA
->>>> + *
->>>> + * Insert a &drm_gpuva with a given address and range into a
->>>> + * &drm_gpuva_manager.
->>>> + *
->>>> + * Returns: 0 on success, negative error code on failure.
->>>> + */
->>>> +int
->>>> +drm_gpuva_insert(struct drm_gpuva_manager *mgr,
->>>> +		 struct drm_gpuva *va)
->>>> +{
->>>> +	u64 addr = va->va.addr;
->>>> +	u64 range = va->va.range;
->>>> +	MA_STATE(mas, &mgr->va_mt, addr, addr + range - 1);
->>>> +	struct drm_gpuva_region *reg = NULL;
->>>> +	int ret;
->>>> +
->>>> +	if (unlikely(!drm_gpuva_in_mm_range(mgr, addr, range)))
->>>> +		return -EINVAL;
->>>> +
->>>> +	if (unlikely(drm_gpuva_in_kernel_region(mgr, addr, range)))
->>>> +		return -EINVAL;
->>>> +
->>>> +	if (mgr->flags & DRM_GPUVA_MANAGER_REGIONS) {
->>>> +		reg = drm_gpuva_in_region(mgr, addr, range);
->>>> +		if (unlikely(!reg))
->>>> +			return -EINVAL;
->>>> +	}
->>>> +
+>>> So the way this works for the XArray, which is a little older than the
+>>> Maple tree, is that we always use the internal spinlock for
+>>> modifications (possibly BH or IRQ safe), and if someone wants to
+>>> use an external mutex to make some callers atomic with respect to each
+>>> other, they're free to do so.  In that case, the XArray doesn't check
+>>> the user's external locking at all, because it really can't know.
 >>>
->>> -----
->>>
->>>> +	if (unlikely(drm_gpuva_find_first(mgr, addr, range)))
->>>> +		return -EEXIST;
->>>> +
->>>> +	ret = mas_store_gfp(&mas, va, GFP_KERNEL);
->>>
->>> mas_walk() will set the internal maple state to the limits to what it
->>> finds.  So, instead of an iterator, you can use the walk function and
->>> ensure there is a large enough area in the existing NULL:
->>>
->>> /*
->>>    * Nothing at addr, mas now points to the location where the store would
->>>    * happen
->>>    */
->>> if (mas_walk(&mas))
->>> 	return -EEXIST;
->>>
->>> /* The NULL entry ends at mas.last, make sure there is room */
->>> if (mas.last < (addr + range - 1))
->>> 	return -EEXIST;
->>>
->>> /* Limit the store size to the correct end address, and store */
->>>    mas.last = addr + range - 1;
->>>    ret = mas_store_gfp(&mas, va, GFP_KERNEL);
+>>> I'd advise taking that approach; if there's really no way to use the
+>>> internal spinlock to make your complicated updates appear atomic
+>>> then just let the maple tree use its internal spinlock, and you can
+>>> also use your external mutex however you like.
 >>>
 >>
->> Would this variant be significantly more efficient?
+>> That sounds like the right thing to do.
+>>
+>> However, I'm using the advanced API of the maple tree (and that's the reason
+>> why the above example appears a little more detailed than needed) because I
+>> think with the normal API I can't insert / remove tree entries while walking
+>> the tree, right?
 > 
-> Well, what you are doing is walking the tree to see if there's anything
-> there... then re-walking the tree to store it.  So, yes, it's much more
-> efficient..  However, writing is heavier.  How much of the time is spent
-> walking vs writing depends on the size of the tree, but it's rather easy
-> to do this in a single walk of the tree so why wouldn't you?
-
-I will, I was just curious about how much of an impact it has.
-
+> Right.  The normal API is for simple operations while the advanced API
+> is for doing compound operations.
 > 
->>
->> Also, would this also work while already walking the tree?
+>> As by the documentation the advanced API, however, doesn't take care of locking
+>> itself, hence just letting the maple tree use its internal spinlock doesn't
+>> really work - I need to take care of that myself, right?
 > 
-> Yes, to an extent.  If you are at the correct location in the tree, you
-> can write to that location.  If you are not in the correct location and
-> try to write to the tree then things will go poorly..  In this scenario,
-> we are very much walking the tree and writing to it in two steps.
+> Yes; once you're using the advanced API, you get to compose the entire
+> operation yourself.
 > 
->>
->> To remove an entry while walking the tree I have a separate function
->> drm_gpuva_iter_remove(). Would I need something similar for inserting
->> entries?
+>> It feels a bit weird that I, as a user of the API, would need to lock certain
+>> (or all?) mas_*() functions with the internal spinlock in order to protect
+>> (future) internal features of the tree, such as the slab cache defragmentation
+>> you mentioned. Because from my perspective, as the generic component that tells
+>> it's users (the drivers) to take care of locking VA space operations (and hence
+>> tree operations) I don't have an own purpose of this internal spinlock, right?
 > 
-> I saw that.  Your remove function uses the erase operation which is
-> implemented as a walk to that location and a store of a null over the
-> range that is returned.  You do not need a function to insert an entry
-> if the maple state is at the correct location, and that doesn't just
-> mean setting mas.index/mas.last to the correct value.  There is a node &
-> offset saved in the maple state that needs to be in the correct
-> location.  If you store to that node then the node may be replaced, so
-> other iterators that you have may become stale, but the one you used
-> execute the store operation will now point to the new node with the new
-> entry.
+> You don't ... but we can't know that.
 > 
->>
->> I already provided this example in a separate mail thread, but it may makes
->> sense to move this to the mailing list:
->>
->> In __drm_gpuva_sm_map() we're iterating a given range of the tree, where the
->> given range is the size of the newly requested mapping. __drm_gpuva_sm_map()
->> invokes a callback for each sub-operation that needs to be taken in order to
->> fulfill this mapping request. In most cases such a callback just creates a
->> drm_gpuva_op object and stores it in a list.
->>
->> However, drivers can also implement the callback, such that they directly
->> execute this operation within the callback.
->>
->> Let's have a look at the following example:
->>
->>       0     a     2
->> old: |-----------|       (bo_offset=n)
->>
->>             1     b     3
->> req:       |-----------| (bo_offset=m)
->>
->>       0  a' 1     b     3
->> new: |-----|-----------| (a.bo_offset=n,b.bo_offset=m)
->>
->> This would result in the following operations.
->>
->> __drm_gpuva_sm_map() finds entry "a" and calls back into the driver
->> suggesting to re-map "a" with the new size. The driver removes entry "a"
->> from the tree and adds "a'"
+>> Also I'm a little confused how I'd know where to take the spinlock? E.g. for
+>> inserting entries in the tree I use mas_store_gfp() with GFP_KERNEL.
 > 
-> What you have here won't work.  The driver will cause your iterators
-> maple state to point to memory that is freed.  You will either need to
-> pass through your iterator so that the modifications can occur with that
-> maple state so it remains valid, or you will need to invalidate the
-> iterator on every modification by the driver.
-> 
-> I'm sure the first idea you have will be to invalidate the iterator, but
-> that is probably not the way to proceed.  Even ignoring the unclear
-> locking of two maple states trying to modify the tree, this is rather
-> inefficient - each invalidation means a re-walk of the tree.  You may as
-> well not use an iterator in this case.
-> 
-> Depending on how/when the lookups occur, you could still iterate over
-> the tree and let the driver modify the ending of "a", but leave the tree
-> alone and just store b over whatever - but the failure scenarios may
-> cause you grief.
-> 
-> If you pass the iterator through, then you can just use it to do your
-> writes and keep iterating as if nothing changed.
-
-Passing through the iterater clearly seems to be the way to go.
-
-I assume that if the entry to insert isn't at the location of the 
-iterator (as in the following example) we can just keep walking to this 
-location my changing the index of the mas and calling mas_walk()? This 
-would also imply that the "outer" tree walk continues after the entry we 
-just inserted, right?
-
-            1     a     3
-old:       |-----------| (bo_offset=n)
-
-      0     b     2
-req: |-----------|       (bo_offset=m)
-
-      0     b     2  a' 3
-new: |-----------|-----| (b.bo_offset=m,a.bo_offset=n+2)
-
-Again, after finding "a", we want to remove it and insert "a'" instead.
-
-> 
->>
->> __drm_gpuva_sm_map(), ideally, continues the loop searching for nodes
->> starting from the end of "a" (which is 2) till the end of the requested
->> mapping "b" (which is 3). Since it doesn't find any other mapping within
->> this range it calls back into the driver suggesting to finally map "b".
->>
->> If there would have been another mapping between 2 and 3 it would have
->> called back into the driver asking to unmap this mapping beforehand.
->>
->> So, it boils down to re-mapping as described at the beginning (and
->> analogously at the end) of a new mapping range and removing of entries that
->> are enclosed by the new mapping range.
-> 
-> I assume the unmapped area is no longer needed, and the 're-map' is
-> really a removal of information?  Otherwise I'd suggest searching for a
-> gap which fits your request.  What you have here is a lot like
-> "MAP_FIXED" vs top-down/bottom-up search in the VMA code, this seems to
-> be like your __drm_gpuva_sm_map() and the drm mm range allocator with
-> DRM_MM_INSERT_LOW, and DRM_MM_INSERT_HIGH.
-> 
-> Why can these split/unmappings fail?  Is it because they are still
-> needed?
+> Lockdep will shout at you if you get it wrong ;-)  But you can safely
+> take the spinlock before calling mas_store_gfp(GFP_KERNEL) because
+> mas_nomem() knows to drop the lock before doing a sleeping allocation.
+> Essentially you're open-coding mtree_store_range() but doing your own
+> thing in addition to the store.
 > 
 
-You mean the check before the mas_*() operations in drm_gpuva_insert()?
+As already mentioned, I went with your advice to just take the maple 
+tree's internal spinlock within the GPUVA manager and leave all the 
+other locking to the drivers as intended.
 
-Removing entries should never fail, inserting entries should fail when 
-the caller tries to store to an area outside of the VA space (it doesn't 
-necessarily span the whole 64-bit space), a kernel reserved area of the 
-VA space, is not in any pre-allocated range of the VA space (if regions 
-are enabled) or an entry already exists at that location.
+However, I run into the case that lockdep shouts at me for not taking 
+the spinlock before calling mas_find() in the iterator macros.
 
->>
->>>> +	if (unlikely(ret))
->>>> +		return ret;
->>>> +
->>>> +	va->mgr = mgr;
->>>> +	va->region = reg;
->>>> +
->>>> +	return 0;
->>>> +}
->>>> +EXPORT_SYMBOL(drm_gpuva_insert);
->>>> +
->>>> +/**
->>>> + * drm_gpuva_remove - remove a &drm_gpuva
->>>> + * @va: the &drm_gpuva to remove
->>>> + *
->>>> + * This removes the given &va from the underlaying tree.
->>>> + */
->>>> +void
->>>> +drm_gpuva_remove(struct drm_gpuva *va)
->>>> +{
->>>> +	MA_STATE(mas, &va->mgr->va_mt, va->va.addr, 0);
->>>> +
->>>> +	mas_erase(&mas);
->>>> +}
->>>> +EXPORT_SYMBOL(drm_gpuva_remove);
->>>> +
->>> ...
->>>
->>>> +/**
->>>> + * drm_gpuva_find_first - find the first &drm_gpuva in the given range
->>>> + * @mgr: the &drm_gpuva_manager to search in
->>>> + * @addr: the &drm_gpuvas address
->>>> + * @range: the &drm_gpuvas range
->>>> + *
->>>> + * Returns: the first &drm_gpuva within the given range
->>>> + */
->>>> +struct drm_gpuva *
->>>> +drm_gpuva_find_first(struct drm_gpuva_manager *mgr,
->>>> +		     u64 addr, u64 range)
->>>> +{
->>>> +	MA_STATE(mas, &mgr->va_mt, addr, 0);
->>>> +
->>>> +	return mas_find(&mas, addr + range - 1);
->>>> +}
->>>> +EXPORT_SYMBOL(drm_gpuva_find_first);
->>>> +
->>>> +/**
->>>> + * drm_gpuva_find - find a &drm_gpuva
->>>> + * @mgr: the &drm_gpuva_manager to search in
->>>> + * @addr: the &drm_gpuvas address
->>>> + * @range: the &drm_gpuvas range
->>>> + *
->>>> + * Returns: the &drm_gpuva at a given &addr and with a given &range
->>>
->>> Note that mas_find() will continue upwards in the address space if there
->>> isn't anything at @addr.  This means that &drm_gpuva may not be at
->>> &addr.  If you want to check just at &addr, use mas_walk().
->>
->> Good catch. drm_gpuva_find() should then either also check for 'va->va.addr
->> == addr' as well or, alternatively, use mas_walk(). As above, any reason to
->> prefer mas_walk()?
->>
->>>
->>>> + */
->>>> +struct drm_gpuva *
->>>> +drm_gpuva_find(struct drm_gpuva_manager *mgr,
->>>> +	       u64 addr, u64 range)
->>>> +{
->>>> +	struct drm_gpuva *va;
->>>> +
->>>> +	va = drm_gpuva_find_first(mgr, addr, range);
->>>> +	if (!va)
->>>> +		goto out;
->>>> +
->>>> +	if (va->va.range != range)
->>>> +		goto out;
->>>> +
->>>> +	return va;
->>>> +
->>>> +out:
->>>> +	return NULL;
->>>> +}
->>>> +EXPORT_SYMBOL(drm_gpuva_find);
->>>> +
->>>> +/**
->>>> + * drm_gpuva_find_prev - find the &drm_gpuva before the given address
->>>> + * @mgr: the &drm_gpuva_manager to search in
->>>> + * @start: the given GPU VA's start address
->>>> + *
->>>> + * Find the adjacent &drm_gpuva before the GPU VA with given &start address.
->>>> + *
->>>> + * Note that if there is any free space between the GPU VA mappings no mapping
->>>> + * is returned.
->>>> + *
->>>> + * Returns: a pointer to the found &drm_gpuva or NULL if none was found
->>>> + */
->>>> +struct drm_gpuva *
->>>> +drm_gpuva_find_prev(struct drm_gpuva_manager *mgr, u64 start)
->>>
->>> find_prev() usually continues beyond 1 less than the address. I found
->>> this name confusing.
->>
->> Don't really get that, mind explaining?
-> 
-> When I ask for the previous one in a list or tree, I think the one
-> before.. but since you are limiting your search from start to start - 1,
-> you may as well walk to start - 1 and see if one exists.
-> 
-> Is that what you meant to do here?
+Now, I definitely don't want to let the drivers take the maple tree's 
+spinlock before they use the iterator macro. Of course, drivers 
+shouldn't even know about the underlying maple tree of the GPUVA manager.
 
-Yes, I want to know whether there is a previous entry which ends right 
-before the current entry, without a gap between the two.
+One way to make lockdep happy in this case seems to be taking the 
+spinlock right before mas_find() and drop it right after for each iteration.
 
-> 
->>
->>> You may as well use mas_walk(), it would be faster.
->>
->> How would I use mas_walk() for that? If I understand it correctly,
->> mas_walk() requires me to know that start address, which I don't know for
->> the previous entry.
-> 
-> mas_walk() walks to the value you specify and returns the entry at that
-> address, not necessarily the start address, but any address in the
-> range.
-> 
-> If you have a tree and store A = [0x1000 - 0x2000] and set your maple
-> state to walk to 0x1500, mas_walk() will return A, and the maple state
-> will have mas.index = 0x1000 and mas.last = 0x2000.
-> 
-> You have set the maple state to start at "start" and called
-> mas_prev(&mas, start - 1).  start - 1 is the lower limit, so the
-> internal implementation will walk to start then go to the previous entry
-> until start - 1.. it will stop at start - 1 and return NULL if there
-> isn't one there.
+What do you advice to do in this case?
 
-Thanks for the clarification and all the other very helpful comments and 
-explanations!
-
-- Danilo
-
-> 
->>
->> However, mas_walk() seems to be a good alternative to use for
->> drm_gpuva_find_next().
->>
->>>> +{
->>>> +	MA_STATE(mas, &mgr->va_mt, start, 0);
->>>> +
->>>> +	if (start <= mgr->mm_start ||
->>>> +	    start > (mgr->mm_start + mgr->mm_range))
->>>> +		return NULL;
->>>> +
->>>> +	return mas_prev(&mas, start - 1);
->>>> +}
->>>> +EXPORT_SYMBOL(drm_gpuva_find_prev);
->>>> +
->>>> +/**
->>>> + * drm_gpuva_find_next - find the &drm_gpuva after the given address
->>>> + * @mgr: the &drm_gpuva_manager to search in
->>>> + * @end: the given GPU VA's end address
->>>> + *
->>>> + * Find the adjacent &drm_gpuva after the GPU VA with given &end address.
->>>> + *
->>>> + * Note that if there is any free space between the GPU VA mappings no mapping
->>>> + * is returned.
->>>> + *
->>>> + * Returns: a pointer to the found &drm_gpuva or NULL if none was found
->>>> + */
->>>> +struct drm_gpuva *
->>>> +drm_gpuva_find_next(struct drm_gpuva_manager *mgr, u64 end)
->>>
->>> This name is also a bit confusing for the same reason.  Again, it seems
->>> worth just walking to end here.
->>>
->>>> +{
->>>> +	MA_STATE(mas, &mgr->va_mt, end - 1, 0);
->>>> +
->>>> +	if (end < mgr->mm_start ||
->>>> +	    end >= (mgr->mm_start + mgr->mm_range))
->>>> +		return NULL;
->>>> +
->>>> +	return mas_next(&mas, end);
->>>> +}
->>>> +EXPORT_SYMBOL(drm_gpuva_find_next);
->>>> +
->>>> +static int
->>>> +__drm_gpuva_region_insert(struct drm_gpuva_manager *mgr,
->>>> +			  struct drm_gpuva_region *reg)
->>>> +{
->>>> +	u64 addr = reg->va.addr;
->>>> +	u64 range = reg->va.range;
->>>> +	MA_STATE(mas, &mgr->region_mt, addr, addr + range - 1);
->>>> +	int ret;
->>>> +
->>>> +	if (unlikely(!drm_gpuva_in_mm_range(mgr, addr, range)))
->>>> +		return -EINVAL;
->>>> +
->>>> +	ret = mas_store_gfp(&mas, reg, GFP_KERNEL);
->>>> +	if (unlikely(ret))
->>>> +		return ret;
->>>> +
->>>> +	reg->mgr = mgr;
->>>> +
->>>> +	return 0;
->>>> +}
->>>> +
->>>> +/**
->>>> + * drm_gpuva_region_insert - insert a &drm_gpuva_region
->>>> + * @mgr: the &drm_gpuva_manager to insert the &drm_gpuva in
->>>> + * @reg: the &drm_gpuva_region to insert
->>>> + * @addr: the start address of the GPU VA
->>>> + * @range: the range of the GPU VA
->>>> + *
->>>> + * Insert a &drm_gpuva_region with a given address and range into a
->>>> + * &drm_gpuva_manager.
->>>> + *
->>>> + * Returns: 0 on success, negative error code on failure.
->>>> + */
->>>> +int
->>>> +drm_gpuva_region_insert(struct drm_gpuva_manager *mgr,
->>>> +			struct drm_gpuva_region *reg)
->>>> +{
->>>> +	if (unlikely(!(mgr->flags & DRM_GPUVA_MANAGER_REGIONS)))
->>>> +		return -EINVAL;
->>>> +
->>>> +	return __drm_gpuva_region_insert(mgr, reg);
->>>> +}
->>>> +EXPORT_SYMBOL(drm_gpuva_region_insert);
->>>> +
->>>> +static void
->>>> +__drm_gpuva_region_remove(struct drm_gpuva_region *reg)
->>>> +{
->>>> +	struct drm_gpuva_manager *mgr = reg->mgr;
->>>> +	MA_STATE(mas, &mgr->region_mt, reg->va.addr, 0);
->>>> +
->>>> +	mas_erase(&mas);
->>>> +}
->>>> +
->>>> +/**
->>>> + * drm_gpuva_region_remove - remove a &drm_gpuva_region
->>>> + * @reg: the &drm_gpuva to remove
->>>> + *
->>>> + * This removes the given &reg from the underlaying tree.
->>>> + */
->>>> +void
->>>> +drm_gpuva_region_remove(struct drm_gpuva_region *reg)
->>>> +{
->>>> +	struct drm_gpuva_manager *mgr = reg->mgr;
->>>> +
->>>> +	if (unlikely(!(mgr->flags & DRM_GPUVA_MANAGER_REGIONS)))
->>>> +		return;
->>>> +
->>>> +	if (unlikely(reg == &mgr->kernel_alloc_region)) {
->>>> +		WARN(1, "Can't destroy kernel reserved region.\n");
->>>> +		return;
->>>> +	}
->>>> +
->>>> +	if (unlikely(!drm_gpuva_region_empty(reg)))
->>>> +		WARN(1, "GPU VA region should be empty on destroy.\n");
->>>> +
->>>> +	__drm_gpuva_region_remove(reg);
->>>> +}
->>>> +EXPORT_SYMBOL(drm_gpuva_region_remove);
->>>> +
->>>> +/**
->>>> + * drm_gpuva_region_empty - indicate whether a &drm_gpuva_region is empty
->>>> + * @reg: the &drm_gpuva to destroy
->>>> + *
->>>> + * Returns: true if the &drm_gpuva_region is empty, false otherwise
->>>> + */
->>>> +bool
->>>> +drm_gpuva_region_empty(struct drm_gpuva_region *reg)
->>>> +{
->>>> +	DRM_GPUVA_ITER(it, reg->mgr);
->>>> +
->>>> +	drm_gpuva_iter_for_each_range(it, reg->va.addr,
->>>> +				      reg->va.addr +
->>>> +				      reg->va.range)
->>>> +		return false;
->>>> +
->>>> +	return true;
->>>> +}
->>>> +EXPORT_SYMBOL(drm_gpuva_region_empty);
->>>> +
->>>> +/**
->>>> + * drm_gpuva_region_find_first - find the first &drm_gpuva_region in the given
->>>> + * range
->>>> + * @mgr: the &drm_gpuva_manager to search in
->>>> + * @addr: the &drm_gpuva_regions address
->>>> + * @range: the &drm_gpuva_regions range
->>>> + *
->>>> + * Returns: the first &drm_gpuva_region within the given range
->>>> + */
->>>> +struct drm_gpuva_region *
->>>> +drm_gpuva_region_find_first(struct drm_gpuva_manager *mgr,
->>>> +			    u64 addr, u64 range)
->>>> +{
->>>> +	MA_STATE(mas, &mgr->region_mt, addr, 0);
->>>> +
->>>> +	return mas_find(&mas, addr + range - 1);
->>>> +}
->>>> +EXPORT_SYMBOL(drm_gpuva_region_find_first);
->>>> +
->>>> +/**
->>>> + * drm_gpuva_region_find - find a &drm_gpuva_region
->>>> + * @mgr: the &drm_gpuva_manager to search in
->>>> + * @addr: the &drm_gpuva_regions address
->>>> + * @range: the &drm_gpuva_regions range
->>>> + *
->>>> + * Returns: the &drm_gpuva_region at a given &addr and with a given &range
->>>
->>> again, I'm not sure you want to find first or walk here.. It sounds like
->>> you want exactly addr to addr + range VMA?
->>
->> Exactly, same as above.
-> 
-> MA_STATE(mas, &mgr->region_mt, addr, addr);
-> 
-> reg = mas_walk(&mas);
-> if (!reg)
-> 	return reg;
-> 
-> if ((mas.index != addr) | (mas.last != range - 1))
-> 	return NULL;
-> 
-> return reg;
-> 
->>
->>>
->>>> + */
->>>> +struct drm_gpuva_region *
->>>> +drm_gpuva_region_find(struct drm_gpuva_manager *mgr,
->>>> +		      u64 addr, u64 range)
->>>> +{
->>>> +	struct drm_gpuva_region *reg;
->>>> +
->>>> +	reg = drm_gpuva_region_find_first(mgr, addr, range);
-> 
-> mas_find() will keep searching, so you may get a VMA that starts higher
-> than addr.
-> 
->>>> +	if (!reg)
->>>> +		goto out;
->>>> +
->>>> +	if (reg->va.range != range)
->>>> +		goto out;
->>>> +
->>>> +	return reg;
->>>> +
->>>> +out:
->>>> +	return NULL;
->>>> +}
->>>> +EXPORT_SYMBOL(drm_gpuva_region_find);
->>>> +
->>>
->>> ...
->>>
->>
-> 
+Thanks,
+Danilo
 
