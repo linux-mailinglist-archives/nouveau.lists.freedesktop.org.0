@@ -1,71 +1,34 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE13A6A484F
-	for <lists+nouveau@lfdr.de>; Mon, 27 Feb 2023 18:39:42 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 65DFA6A49E2
+	for <lists+nouveau@lfdr.de>; Mon, 27 Feb 2023 19:37:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 20DEC10E18E;
-	Mon, 27 Feb 2023 17:39:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 96E7B10E1D8;
+	Mon, 27 Feb 2023 18:37:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 58F3610E18E
- for <nouveau@lists.freedesktop.org>; Mon, 27 Feb 2023 17:39:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1677519578;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=3mkc3cHryKoQlVgV2zVl+0PzzwDJTUCgbCBX7Jw82OE=;
- b=f+vofc2AIveLo0QvR62EMkjo0DM3WEZ12h0y7QSYaPobKZaHkxdT2JdgSQBqJEwvBm1J89
- 53aXVmuVkQ9yP5DdzkGZxLSFaHx1ucv6GfzTbygMIiiiFjEolHAJrU7hLlc5yF3Ld4nxmp
- uRf9GE4YQj+ZuHxY8G36SpCl3VYjl24=
-Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
- [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-528-3lw8hi1KMjSJ3sN83Fes1g-1; Mon, 27 Feb 2023 12:39:37 -0500
-X-MC-Unique: 3lw8hi1KMjSJ3sN83Fes1g-1
-Received: by mail-ed1-f71.google.com with SMTP id
- h13-20020a0564020e8d00b004a26ef05c34so9665958eda.16
- for <nouveau@lists.freedesktop.org>; Mon, 27 Feb 2023 09:39:37 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3mkc3cHryKoQlVgV2zVl+0PzzwDJTUCgbCBX7Jw82OE=;
- b=bgTyIy97utUAPhthZtrmoMzW/bN6FFrIAN53f11DfQ5G3VEb1HA4QSu0V0MRpnqhjv
- WPXd6jXprt8Sfi1Fl5v1r5YWAzTjDXD8NmAi7ZojJKEhULMOoNKX1ducV7m1g51okq37
- qggnvi9+IxuIKeVaSOM8rq3pvsdqIjYKZs7P/5gQ8ZrQX+7kxQn0ImbUP3RmV9eBlddA
- RvNZssXFLHBZlSLoHgLnOTAp8fqDaxyOpXSv/Rdgmo/T20gE8r6e05YbLA/xC/NiWZJ+
- vqja7IGTBd5AJ+fVeKZvvVqOcO6J5DJLcqPd0gPZaFgDUfEOe/w96DgJR7zYXtk7bl3U
- iAFw==
-X-Gm-Message-State: AO0yUKUp/s4PAMUyZro7Krf/2j0HiN5GH/Ojz2mTdFF5W9nwfA9J2pC+
- Bmo+vJlkVfvEwQ2F4rdDo5yz12BP3osG6AIh5aKUqO0xLQmJS301FGs5doe/r1cMBAIrhmlWaew
- gOdb2PUJn6x10JDJ6u7fShpxVJNCepfk=
-X-Received: by 2002:a17:907:97c3:b0:8af:ef00:b853 with SMTP id
- js3-20020a17090797c300b008afef00b853mr44969560ejc.73.1677519576275; 
- Mon, 27 Feb 2023 09:39:36 -0800 (PST)
-X-Google-Smtp-Source: AK7set8dwfwqQmqPjam8UzWIoP7CWEacRLfEPhcixYlLH9/bKx4zKjhRg3obJwXpommPMEyYgK8mKw==
-X-Received: by 2002:a17:907:97c3:b0:8af:ef00:b853 with SMTP id
- js3-20020a17090797c300b008afef00b853mr44969529ejc.73.1677519575989; 
- Mon, 27 Feb 2023 09:39:35 -0800 (PST)
-Received: from ?IPV6:2a02:810d:4b3f:de78:642:1aff:fe31:a15c?
- ([2a02:810d:4b3f:de78:642:1aff:fe31:a15c])
- by smtp.gmail.com with ESMTPSA id
- e19-20020a1709061e9300b008d83ad86fe8sm3481538ejj.59.2023.02.27.09.39.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Feb 2023 09:39:35 -0800 (PST)
-Message-ID: <67942a68-2ae7-8883-25d7-c6d595c3587e@redhat.com>
-Date: Mon, 27 Feb 2023 18:39:33 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-To: Matthew Wilcox <willy@infradead.org>
+Received: from casper.infradead.org (casper.infradead.org
+ [IPv6:2001:8b0:10b:1236::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7BC4810E1D8;
+ Mon, 27 Feb 2023 18:37:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=jYT+cGJBvQcrrjhbci0ohC6UHJhkTcwfc27DUKpdpjo=; b=DYZiatxMcGzMStxHrkjOwq1K3C
+ tSf8vNX+Z9nv50rokR5GAdnOs9ehEfqo6HT16BCOr/D7Qw678un7eK9IvP7AZUI4PSjmQC5vGs/6e
+ i4MNwKGONuiZB89KQYE8FJOmqwLEGJrOyLEeXpxMK5MOErpyQNinxWNY06mEtRA81ojSQMLJgJax/
+ FCkMOylQgSg7TepXBGpoWBilkjiAnckITPS124OWuMV/f8tfETAkxHC3YCTuXXpwm7FCBhKFQWn+X
+ EjT1SPnMy8IzDGwfW6ujMPWMprMba8gkcVh2oerkNgYxV6FX08XNhLHEh3N3B1pqhhJyTevC/CL2Q
+ C93Lx7Tw==;
+Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
+ Hat Linux)) id 1pWiMi-000Jv6-NK; Mon, 27 Feb 2023 18:36:48 +0000
+Date: Mon, 27 Feb 2023 18:36:48 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: Danilo Krummrich <dakr@redhat.com>
+Message-ID: <Y/z4QMyIkZLi4Ruw@casper.infradead.org>
 References: <20230217134422.14116-1-dakr@redhat.com>
  <20230217134422.14116-5-dakr@redhat.com>
  <Y+/Xn11dfdn7SfBD@casper.infradead.org>
@@ -74,14 +37,11 @@ References: <20230217134422.14116-1-dakr@redhat.com>
  <e43f6acc-175d-1031-c4a2-67a6f1741866@redhat.com>
  <Y/PZH/q2Xsr3od9m@casper.infradead.org> <Y/TXPasvkhtGiR+w@pollux>
  <Y/UN50hCaRe+8ZCg@casper.infradead.org>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <Y/UN50hCaRe+8ZCg@casper.infradead.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <67942a68-2ae7-8883-25d7-c6d595c3587e@redhat.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <67942a68-2ae7-8883-25d7-c6d595c3587e@redhat.com>
 Subject: Re: [Nouveau] [PATCH drm-next v2 04/16] maple_tree: add flag
  MT_FLAGS_LOCK_NONE
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -103,138 +63,33 @@ Cc: matthew.brost@intel.com, bagasdotme@gmail.com, linux-doc@vger.kernel.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2/21/23 19:31, Matthew Wilcox wrote:
-> On Tue, Feb 21, 2023 at 03:37:49PM +0100, Danilo Krummrich wrote:
->> On Mon, Feb 20, 2023 at 08:33:35PM +0000, Matthew Wilcox wrote:
->>> On Mon, Feb 20, 2023 at 06:06:03PM +0100, Danilo Krummrich wrote:
->>>> On 2/20/23 16:10, Matthew Wilcox wrote:
->>>>> This is why we like people to use the spinlock embedded in the tree.
->>>>> There's nothing for the user to care about.  If the access really is
->>>>> serialised, acquiring/releasing the uncontended spinlock is a minimal
->>>>> cost compared to all the other things that will happen while modifying
->>>>> the tree.
->>>>
->>>> I think as for the users of the GPUVA manager we'd have two cases:
->>>>
->>>> 1) Accesses to the manager (and hence the tree) are serialized, no lock
->>>> needed.
->>>>
->>>> 2) Multiple operations on the tree must be locked in order to make them
->>>> appear atomic.
->>>
->>> Could you give an example here of what you'd like to do?  Ideally
->>> something complicated so I don't say "Oh, you can just do this" when
->>> there's a more complex example for which "this" won't work.  I'm sure
->>> that's embedded somewhere in the next 20-odd patches, but it's probably
->>> quicker for you to describe in terms of tree operations that have to
->>> appear atomic than for me to try to figure it out.
->>>
->>
->> Absolutely, not gonna ask you to read all of that. :-)
->>
->> One thing the GPUVA manager does is to provide drivers the (sub-)operations
->> that need to be processed in order to fulfill a map or unmap request from
->> userspace. For instance, when userspace asks the driver to map some memory
->> the GPUVA manager calculates which existing mappings must be removed, split up
->> or can be merged with the newly requested mapping.
->>
->> A driver has two ways to fetch those operations from the GPUVA manager. It can
->> either obtain a list of operations or receive a callback for each operation
->> generated by the GPUVA manager.
->>
->> In both cases the GPUVA manager walks the maple tree, which keeps track of
->> existing mappings, for the given range in __drm_gpuva_sm_map() (only considering
->> the map case, since the unmap case is a subset basically). For each mapping
->> found in the given range the driver, as mentioned, either receives a callback or
->> a list entry is added to the list of operations.
->>
->> Typically, for each operation / callback one entry within the maple tree is
->> removed and, optionally at the beginning and end of a new mapping's range, a
->> new entry is inserted. An of course, as the last operation, there is the new
->> mapping itself to insert.
->>
->> The GPUVA manager delegates locking responsibility to the drivers. Typically,
->> a driver either serializes access to the VA space managed by the GPUVA manager
->> (no lock needed) or need to lock the processing of a full set of operations
->> generated by the GPUVA manager.
+On Mon, Feb 27, 2023 at 06:39:33PM +0100, Danilo Krummrich wrote:
+> On 2/21/23 19:31, Matthew Wilcox wrote:
+> > Lockdep will shout at you if you get it wrong ;-)  But you can safely
+> > take the spinlock before calling mas_store_gfp(GFP_KERNEL) because
+> > mas_nomem() knows to drop the lock before doing a sleeping allocation.
+> > Essentially you're open-coding mtree_store_range() but doing your own
+> > thing in addition to the store.
 > 
-> OK, that all makes sense.  It does make sense to have the driver use its
-> own mutex and then take the spinlock inside the maple tree code.  It
-> shouldn't ever be contended.
+> As already mentioned, I went with your advice to just take the maple tree's
+> internal spinlock within the GPUVA manager and leave all the other locking
+> to the drivers as intended.
 > 
->>>> In either case the embedded spinlock wouldn't be useful, we'd either need an
->>>> external lock or no lock at all.
->>>>
->>>> If there are any internal reasons why specific tree operations must be
->>>> mutually excluded (such as those you explain below), wouldn't it make more
->>>> sense to always have the internal lock and, optionally, allow users to
->>>> specify an external lock additionally?
->>>
->>> So the way this works for the XArray, which is a little older than the
->>> Maple tree, is that we always use the internal spinlock for
->>> modifications (possibly BH or IRQ safe), and if someone wants to
->>> use an external mutex to make some callers atomic with respect to each
->>> other, they're free to do so.  In that case, the XArray doesn't check
->>> the user's external locking at all, because it really can't know.
->>>
->>> I'd advise taking that approach; if there's really no way to use the
->>> internal spinlock to make your complicated updates appear atomic
->>> then just let the maple tree use its internal spinlock, and you can
->>> also use your external mutex however you like.
->>>
->>
->> That sounds like the right thing to do.
->>
->> However, I'm using the advanced API of the maple tree (and that's the reason
->> why the above example appears a little more detailed than needed) because I
->> think with the normal API I can't insert / remove tree entries while walking
->> the tree, right?
+> However, I run into the case that lockdep shouts at me for not taking the
+> spinlock before calling mas_find() in the iterator macros.
 > 
-> Right.  The normal API is for simple operations while the advanced API
-> is for doing compound operations.
+> Now, I definitely don't want to let the drivers take the maple tree's
+> spinlock before they use the iterator macro. Of course, drivers shouldn't
+> even know about the underlying maple tree of the GPUVA manager.
 > 
->> As by the documentation the advanced API, however, doesn't take care of locking
->> itself, hence just letting the maple tree use its internal spinlock doesn't
->> really work - I need to take care of that myself, right?
-> 
-> Yes; once you're using the advanced API, you get to compose the entire
-> operation yourself.
-> 
->> It feels a bit weird that I, as a user of the API, would need to lock certain
->> (or all?) mas_*() functions with the internal spinlock in order to protect
->> (future) internal features of the tree, such as the slab cache defragmentation
->> you mentioned. Because from my perspective, as the generic component that tells
->> it's users (the drivers) to take care of locking VA space operations (and hence
->> tree operations) I don't have an own purpose of this internal spinlock, right?
-> 
-> You don't ... but we can't know that.
-> 
->> Also I'm a little confused how I'd know where to take the spinlock? E.g. for
->> inserting entries in the tree I use mas_store_gfp() with GFP_KERNEL.
-> 
-> Lockdep will shout at you if you get it wrong ;-)  But you can safely
-> take the spinlock before calling mas_store_gfp(GFP_KERNEL) because
-> mas_nomem() knows to drop the lock before doing a sleeping allocation.
-> Essentially you're open-coding mtree_store_range() but doing your own
-> thing in addition to the store.
-> 
+> One way to make lockdep happy in this case seems to be taking the spinlock
+> right before mas_find() and drop it right after for each iteration.
 
-As already mentioned, I went with your advice to just take the maple 
-tree's internal spinlock within the GPUVA manager and leave all the 
-other locking to the drivers as intended.
+While we don't have any lockdep checking of this, you really shouldn't be
+using an iterator if you're going to drop the lock between invocations.
+The iterator points into the tree, so you need to invalidate the iterator
+any time you drop the lock.
 
-However, I run into the case that lockdep shouts at me for not taking 
-the spinlock before calling mas_find() in the iterator macros.
-
-Now, I definitely don't want to let the drivers take the maple tree's 
-spinlock before they use the iterator macro. Of course, drivers 
-shouldn't even know about the underlying maple tree of the GPUVA manager.
-
-One way to make lockdep happy in this case seems to be taking the 
-spinlock right before mas_find() and drop it right after for each iteration.
-
-What do you advice to do in this case?
-
-Thanks,
-Danilo
-
+You don't have to use a spinlock to do a read iteration.  You can just
+take the rcu_read_lock() around your iteration, as long as you can
+tolerate the mild inconsistencies that RCU permits.
