@@ -2,74 +2,40 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 089A56F6BED
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:34:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74E3F6F6BC7
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 42A8F10E4B4;
-	Thu,  4 May 2023 12:33:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DADD510E48F;
+	Thu,  4 May 2023 12:32:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com
- [IPv6:2a00:1450:4864:20::542])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B763210E1CE;
- Wed,  1 Mar 2023 17:25:46 +0000 (UTC)
-Received: by mail-ed1-x542.google.com with SMTP id f13so56908036edz.6;
- Wed, 01 Mar 2023 09:25:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=StPWDobta73ip1qDTST6ZbHesp2pu7tDl2nHqqljCSg=;
- b=AX6dkWbGG7HI7qWP8CQ2n0fejalpaDQtYhUXIEsv9EbPRRD47CjPsul90m5PkZAmAO
- KKduqdAX8ad+UjyKoLhYhCjC9Z53VJcJkA7RBtvbcCVVg0P+kDlYQwgrLjmtPqZ28vfo
- Lcevqt3SnDuifMdPCh6ZgEXiPNEhK8fNp6JA/MK5DloTwx6SjgUQbAsLqM0YExtZOlhE
- c035ccUmu2uAKpuLFDA4Uwh1h3+f/Mtaz0bUOh/Jd6cRGtUHi/QP2hUjuWzKtcD+XbDX
- eTKbcgoQXyUDA7qbqR+CmWDe//fPLfzbpXvA4+mKQSzKCmB6TP8fnRB0nnYhqkPyVS2K
- JZQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=StPWDobta73ip1qDTST6ZbHesp2pu7tDl2nHqqljCSg=;
- b=QZyvSOyXcb0G6KHbmoW5SjmOpN6ww+hSz8cSGmtcqCRkjfy6P07a4jQnEM/GKLD9Jw
- 4QBSbAnW7gC0mvA+GzHwsCa2BapmAYhd1EPLWfAwDvD5bRdCEnUc2Ed5p0ixsRz26hyH
- KaTwU3tMh0gYWey7l37u4UhNV9lyQHtbKBU4Fb6RBUEm+iZF7c3ZJE/ENvduW7ea0gE4
- nHphuV3g6Qg/IbjyQUTrlIwOG5rUWS8anT05t/VmZ6XFNPtV+Aks2p0YZBB0gKXcXSle
- fUibAywFYWJwaMQdL3vMmh1WAjw29dRmpmMJIGHjW8/7YNqNsEGTNPkhHVQoVv71cNH6
- bMxw==
-X-Gm-Message-State: AO0yUKWbCBvPLUUUqAsXaiRdB8sIjPgsZY07l1CFOz47YfiYQ8UOUrCE
- fVOBNSlyScUhin9gseP0br4=
-X-Google-Smtp-Source: AK7set+hg3kOeoOWYBWlvzIhtELcU/JRDHSU+x12DxpDjzNnm58yMunzJ50vgAJ2p6Dz+DqIBA6Srw==
-X-Received: by 2002:a17:906:aaca:b0:878:6477:d7 with SMTP id
- kt10-20020a170906aaca00b00878647700d7mr7041024ejb.72.1677691545111; 
- Wed, 01 Mar 2023 09:25:45 -0800 (PST)
-Received: from [127.0.1.1] (i130160.upc-i.chello.nl. [62.195.130.160])
- by smtp.googlemail.com with ESMTPSA id
- v23-20020a170906489700b008e9ac1ad79dsm5974715ejq.194.2023.03.01.09.25.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Mar 2023 09:25:44 -0800 (PST)
-From: Jakob Koschel <jkl820.git@gmail.com>
-Date: Wed, 01 Mar 2023 18:25:38 +0100
+Received: from msg-1.mailo.com (msg-1.mailo.com [213.182.54.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A1B6510E100;
+ Wed,  1 Mar 2023 19:35:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=mailo.com; s=mailo;
+ t=1677699348; bh=wMm9SK0T1X6wjNTxe4InzSuoAuJv/ovXH3Yd9x3INdU=;
+ h=X-EA-Auth:Date:From:To:Cc:Subject:Message-ID:MIME-Version:
+ Content-Type;
+ b=M+bk0agZs/ip9NlWKZDeUxfjq8j6MC+6xVMMX5fU/IoWhEkbNWW1yC9t5wgOcujW3
+ 9UpzH2khiWtofRavCKeOROPNzJ7F1MwDHi1MQC8lAMQrLQvxFJRM/n+qZ371YI/pA4
+ ryeabzdxFT5WjBOu4Wulvt4pgZaD1gbmA35PMcD0=
+Received: by b221-2.in.mailobj.net [192.168.90.22] with ESMTP
+ via ip-20.mailobj.net [213.182.54.20]
+ Wed,  1 Mar 2023 20:35:48 +0100 (CET)
+X-EA-Auth: PldJwNJFnC6SMwwwKTtAv1uOQAxuwnwELDsuScmNAdkFQxNVkfwbnt8OHmVTfN7luEAx/wUZHVjyHoFVwndeyg==
+Date: Thu, 2 Mar 2023 01:05:41 +0530
+From: Deepak R Varma <drv@mailo.com>
+To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Message-ID: <Y/+pDaHOgG1x8Py2@ubun2204.myguest.virtualbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20230301-drm-nouveau-avoid-iter-after-loop-v1-2-0702ec23f970@gmail.com>
-References: <20230301-drm-nouveau-avoid-iter-after-loop-v1-0-0702ec23f970@gmail.com>
-In-Reply-To: <20230301-drm-nouveau-avoid-iter-after-loop-v1-0-0702ec23f970@gmail.com>
-To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>, 
- Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>, 
- Daniel Vetter <daniel@ffwll.ch>
-X-Mailer: b4 0.12.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1677691543; l=1723;
- i=jkl820.git@gmail.com; s=20230112; h=from:subject:message-id;
- bh=cB1L+buYcR+Tpr+4lhFvQl5kYWyprM+RBeyV2GzjhSo=;
- b=CEGNMg2otXSMBx1WQApv1HsHMopWqKLPZgrWcoZGewVvf/Xlo1d5jWyKYFGMquZX2RVdLaQPeqUL
- neXY1hPKDE8yiBEM2brKl63q2RgIUrUzEYQgrSoMVWjniUabUl+H
-X-Developer-Key: i=jkl820.git@gmail.com; a=ed25519;
- pk=rcRpP90oZXet9udPj+2yOibfz31aYv8tpf0+ZYOQhyA=
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:35 +0000
-Subject: [Nouveau] [PATCH 2/2] drm/nouveau/clk: avoid usage of list iterator
- after loop
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:32 +0000
+Subject: [Nouveau] [PATCH RESEND] drm/nouveau/hwmon: Use sysfs_emit in show
+ function callsbacks
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,56 +47,62 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Pietro Borrello <borrello@diag.uniroma1.it>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Cristiano Giuffrida <c.giuffrida@vu.nl>, "Bos, H.J." <h.j.bos@vu.nl>,
- Jakob Koschel <jkl820.git@gmail.com>
+Cc: Praveen Kumar <kumarpraveen@linux.microsoft.com>,
+ Deepak R Varma <drv@mailo.com>, Saurabh Singh Sengar <ssengar@microsoft.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-If potentially no valid element is found, 'pstate' would contain an
-invalid pointer past the iterator loop. To ensure 'pstate' is always
-valid, we only set it if the correct element was found. That allows
-adding a BUG_ON in case the code works incorrectly, exposing currently
-undetectable potential bugs.
+According to Documentation/filesystems/sysfs.rst, the show() callback
+function of kobject attributes should strictly use sysfs_emit() instead
+of sprintf() family functions. So, make this change.
+Issue identified using the coccinelle device_attr_show.cocci script.
 
-Additionally, Linus proposed to avoid any use of the list iterator
-variable after the loop, in the attempt to move the list iterator
-variable declaration into the marcro to avoid any potential misuse after
-the loop [1].
-
-Link: https://lore.kernel.org/all/CAHk-=wgRr_D8CB-D9Kg-c=EHreAsk5SqXPwr9Y7k9sA6cWXJ6w@mail.gmail.com/ [1]
-Signed-off-by: Jakob Koschel <jkl820.git@gmail.com>
+Signed-off-by: Deepak R Varma <drv@mailo.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+Note:
+   Resending the patch for review and feedback. No functional changes.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c
-index da07a2fbef06..871127dfe1d7 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c
-@@ -269,14 +269,17 @@ nvkm_pstate_prog(struct nvkm_clk *clk, int pstatei)
- 	struct nvkm_subdev *subdev = &clk->subdev;
- 	struct nvkm_fb *fb = subdev->device->fb;
- 	struct nvkm_pci *pci = subdev->device->pci;
--	struct nvkm_pstate *pstate;
-+	struct nvkm_pstate *pstate = NULL, *iter;
- 	int ret, idx = 0;
- 
--	list_for_each_entry(pstate, &clk->states, head) {
--		if (idx++ == pstatei)
-+	list_for_each_entry(iter, &clk->states, head) {
-+		if (idx++ == pstatei) {
-+			pstate = iter;
- 			break;
-+		}
- 	}
- 
-+	BUG_ON(!pstate);
- 	nvkm_debug(subdev, "setting performance state %d\n", pstatei);
- 	clk->pstate = pstatei;
- 
 
+ drivers/gpu/drm/nouveau/nouveau_hwmon.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_hwmon.c b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+index a7db7c31064b..e844be49e11e 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_hwmon.c
++++ b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+@@ -41,7 +41,7 @@ static ssize_t
+ nouveau_hwmon_show_temp1_auto_point1_pwm(struct device *d,
+ 					 struct device_attribute *a, char *buf)
+ {
+-	return snprintf(buf, PAGE_SIZE, "%d\n", 100);
++	return sysfs_emit(buf, "%d\n", 100);
+ }
+ static SENSOR_DEVICE_ATTR(temp1_auto_point1_pwm, 0444,
+ 			  nouveau_hwmon_show_temp1_auto_point1_pwm, NULL, 0);
+@@ -54,8 +54,8 @@ nouveau_hwmon_temp1_auto_point1_temp(struct device *d,
+ 	struct nouveau_drm *drm = nouveau_drm(dev);
+ 	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+ 
+-	return snprintf(buf, PAGE_SIZE, "%d\n",
+-	      therm->attr_get(therm, NVKM_THERM_ATTR_THRS_FAN_BOOST) * 1000);
++	return sysfs_emit(buf, "%d\n",
++			  therm->attr_get(therm, NVKM_THERM_ATTR_THRS_FAN_BOOST) * 1000);
+ }
+ static ssize_t
+ nouveau_hwmon_set_temp1_auto_point1_temp(struct device *d,
+@@ -87,8 +87,8 @@ nouveau_hwmon_temp1_auto_point1_temp_hyst(struct device *d,
+ 	struct nouveau_drm *drm = nouveau_drm(dev);
+ 	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+ 
+-	return snprintf(buf, PAGE_SIZE, "%d\n",
+-	 therm->attr_get(therm, NVKM_THERM_ATTR_THRS_FAN_BOOST_HYST) * 1000);
++	return sysfs_emit(buf, "%d\n",
++			  therm->attr_get(therm, NVKM_THERM_ATTR_THRS_FAN_BOOST_HYST) * 1000);
+ }
+ static ssize_t
+ nouveau_hwmon_set_temp1_auto_point1_temp_hyst(struct device *d,
 -- 
 2.34.1
+
+
 
