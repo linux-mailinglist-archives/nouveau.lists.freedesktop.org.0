@@ -1,76 +1,76 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43E8C6A8294
-	for <lists+nouveau@lfdr.de>; Thu,  2 Mar 2023 13:48:43 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D3E7A6A9852
+	for <lists+nouveau@lfdr.de>; Fri,  3 Mar 2023 14:27:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B19E610E4DE;
-	Thu,  2 Mar 2023 12:48:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1593510E0A6;
+	Fri,  3 Mar 2023 13:27:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 80ABB10E168
- for <nouveau@lists.freedesktop.org>; Thu,  2 Mar 2023 12:48:34 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E03E910E05D
+ for <nouveau@lists.freedesktop.org>; Fri,  3 Mar 2023 13:27:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1677761313;
+ s=mimecast20190719; t=1677850058;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding;
- bh=qWubdolcTPcYZMWRbItbBs4vyBxRKmavcU+qlGC7gI4=;
- b=eUvQLSgB4lvqePnLEFQZ2ozTi8sM5Y2G5USsHBAQ7dfRi+atOurZ6D6G7OIkfTTDqMzWul
- benvq65FrMeJwjFAu+2QCxN0SEBU5r5OJMCrjl9IlF8Tsg0TQHmd0G+ittgq7xudrx2RHj
- ZS0lQmo69ccVfdWUIyVyTS/4KhIXVNY=
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-369-tmjmsmWMMOOx0tJvrcSIZw-1; Thu, 02 Mar 2023 07:48:31 -0500
-X-MC-Unique: tmjmsmWMMOOx0tJvrcSIZw-1
-Received: by mail-qv1-f71.google.com with SMTP id
- m1-20020a05621402a100b004bb706b3a27so8770315qvv.20
- for <nouveau@lists.freedesktop.org>; Thu, 02 Mar 2023 04:48:31 -0800 (PST)
+ bh=xZViEbKSFytDEA7BQHkIqtpOmiHcpYWTt+g+Ou0aIyc=;
+ b=ZX+9IjTEimLAVNmOgi58M1EnAxh9xhie3wyEtiBAOWf7we0Sz7b0XSIDhaQftBflXmmTUY
+ 2YBD3hPX3OdCJQYG73RX4m5PehJzfmi0Z3TTq4cXg47LhKRAQaAdrw83nocIb/XwxokqsM
+ Rsvxk+kxFBCtfihVjcbpHlD2ZhLDs04=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-206-V075EOSBNjeQztdkY029Qg-1; Fri, 03 Mar 2023 08:27:37 -0500
+X-MC-Unique: V075EOSBNjeQztdkY029Qg-1
+Received: by mail-qt1-f198.google.com with SMTP id
+ z22-20020ac86b96000000b003bfc3f97097so1461461qts.14
+ for <nouveau@lists.freedesktop.org>; Fri, 03 Mar 2023 05:27:37 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677761311;
+ d=1e100.net; s=20210112; t=1677850057;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qWubdolcTPcYZMWRbItbBs4vyBxRKmavcU+qlGC7gI4=;
- b=fNtAL397pk8EgStv4pbEVk8yqcE1ollVe/+jM1Fwi+1awNn6gF6+kPOeHd/XxRQOWa
- Ks3IiwvlMBgnvWCEVkfWyBn1AZ/E/XpseIV1VBxETSjcRfmJs4+joGfwf224TTB5NGR/
- NRLu3y9VoAl8UGbOQYC5oJ+r3JGgYkFPepg9G95xpsN2SeoPztXCYyV3gwo8wlkKURF+
- G5lAMCrsXppnI64b+wzNs5yU+DV1wyCM7u69OD6KpWrLcGTe6RTgmCCtP8uK1fBwGQgp
- UKNqw3rwcFo+WzxL4QNUCIrQ+691xt64oxMQNv8l1orgImh+1kg5NhDrhdVJOuyA0zzj
- j8LQ==
-X-Gm-Message-State: AO0yUKVVysUu3f0HdOYShc7mV/1vK457C5sx97/aJeMCFpsxi+vhq+3i
- Z3+g2AZEhuA5voRtS6NTxrmkv6Y4x7mSgwdf0pVMpPeMAGGASSDU41qz2bWJL+6DhdQJhKoEjy5
- kgL5Mh4hJ+6+8Xi9V4mldvjVWnA==
-X-Received: by 2002:a05:622a:5cf:b0:3bf:db54:b622 with SMTP id
- d15-20020a05622a05cf00b003bfdb54b622mr17085762qtb.30.1677761311192; 
- Thu, 02 Mar 2023 04:48:31 -0800 (PST)
-X-Google-Smtp-Source: AK7set9I+TSl84uLi9L/hA047N42TNQ2RbkOPTsi+FcB8UwVS5/djJiPNP8Zc/AXLoClAtyGqLq6XA==
-X-Received: by 2002:a05:622a:5cf:b0:3bf:db54:b622 with SMTP id
- d15-20020a05622a05cf00b003bfdb54b622mr17085737qtb.30.1677761310938; 
- Thu, 02 Mar 2023 04:48:30 -0800 (PST)
+ bh=xZViEbKSFytDEA7BQHkIqtpOmiHcpYWTt+g+Ou0aIyc=;
+ b=HVW8+OwDSmOEyAsOPDEU1Bp+Z0FKtASL1jzaynYjCMNfxabGWLT7HKyCaAq4pTWs7s
+ f6cxILaEXaK2WeIG6fQByaJn0mI6MBcLjsu7Ch4rOFztOsEJhzboHnQ+HdFAl3WecUMb
+ yARis+mWbaGoudLi+y8NGTRfwC5qwLaiV4RlBpXNaUkfPc4OCTxEAlay8JcWk1VVKbJD
+ cuIfqNvgOJ7irkpZJ+3ndS/GWfitUHjiFEAHXLjYDsS4vChr5RGdT6W7+jzgGf4tgbvT
+ roYE6tuWsNO9ZLHLT3pohBrZ9PfRLX/pxCZ+7gQ4wImOmiTXDuOhvdkZ0uxYreZzoPxo
+ xgbg==
+X-Gm-Message-State: AO0yUKV4MPjWddWagj/a1MLZ464VNprrGb8VdgoYLQCMWgcaxvdj7LYL
+ Oe/ssM5L424ieOS6a6TvBxS6qDZrs5qwLL43AEEMJ2e+9f0JiStb5WKPmTd5DGkFJ+jiVuLpzLn
+ Hq1fOybEukHP/VGdcF1OCTvlhIQ==
+X-Received: by 2002:a05:6214:d02:b0:56e:a07b:f4d1 with SMTP id
+ 2-20020a0562140d0200b0056ea07bf4d1mr2488036qvh.2.1677850057314; 
+ Fri, 03 Mar 2023 05:27:37 -0800 (PST)
+X-Google-Smtp-Source: AK7set8dveykfGBVt70UyNuMYBmxTxxZX4pm0Ls634+/jDN5mktxgyqaetnfSuCm+FshuDVD566LrA==
+X-Received: by 2002:a05:6214:d02:b0:56e:a07b:f4d1 with SMTP id
+ 2-20020a0562140d0200b0056ea07bf4d1mr2488014qvh.2.1677850057060; 
+ Fri, 03 Mar 2023 05:27:37 -0800 (PST)
 Received: from dell-per740-01.7a2m.lab.eng.bos.redhat.com
  (nat-pool-bos-t.redhat.com. [66.187.233.206])
  by smtp.gmail.com with ESMTPSA id
- b9-20020ac801c9000000b003bfd8e2ab40sm7585267qtg.16.2023.03.02.04.48.29
+ d11-20020a05620a158b00b0073b8745fd39sm1682277qkk.110.2023.03.03.05.27.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Mar 2023 04:48:30 -0800 (PST)
+ Fri, 03 Mar 2023 05:27:36 -0800 (PST)
 From: Tom Rix <trix@redhat.com>
 To: bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com,
- airlied@gmail.com, daniel@ffwll.ch, gsamaiya@nvidia.com
-Date: Thu,  2 Mar 2023 07:48:19 -0500
-Message-Id: <20230302124819.686469-1-trix@redhat.com>
+ airlied@gmail.com, daniel@ffwll.ch
+Date: Fri,  3 Mar 2023 08:27:31 -0500
+Message-Id: <20230303132731.1919329-1-trix@redhat.com>
 X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH] drm/nouveau/nvfw/acr: set wpr_generic_header_dump
- storage-class-specifier to static
+Subject: [Nouveau] [PATCH] drm/nouveau/fifo: set
+ gf100_fifo_nonstall_block_dump storage-class-specifier to static
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,31 +88,31 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 gcc with W=1 reports
-drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c:49:1: error: no previous
-  prototype for ‘wpr_generic_header_dump’ [-Werror=missing-prototypes]
-   49 | wpr_generic_header_dump(struct nvkm_subdev *subdev,
-      | ^~~~~~~~~~~~~~~~~~~~~~~
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: error:
+  no previous prototype for ‘gf100_fifo_nonstall_block’ [-Werror=missing-prototypes]
+  451 | gf100_fifo_nonstall_block(struct nvkm_event *event, int type, int index)
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~
 
-wpr_generic_header_dump is only used in acr.c, so it should be static
+gf100_fifo_nonstall_block is only used in gf100.c, so it should be static
 
 Signed-off-by: Tom Rix <trix@redhat.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c b/drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c
-index 83a9c48bc58c..7ac90c495737 100644
---- a/drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/nvfw/acr.c
-@@ -45,7 +45,7 @@ wpr_header_v1_dump(struct nvkm_subdev *subdev, const struct wpr_header_v1 *hdr)
- 	nvkm_debug(subdev, "\tstatus        : %d\n", hdr->status);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c
+index 5bb65258c36d..6c94451d0faa 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c
+@@ -447,7 +447,7 @@ gf100_fifo_nonstall_allow(struct nvkm_event *event, int type, int index)
+ 	spin_unlock_irqrestore(&fifo->lock, flags);
  }
  
 -void
 +static void
- wpr_generic_header_dump(struct nvkm_subdev *subdev, const struct wpr_generic_header *hdr)
+ gf100_fifo_nonstall_block(struct nvkm_event *event, int type, int index)
  {
- 	nvkm_debug(subdev, "wprGenericHeader\n");
+ 	struct nvkm_fifo *fifo = container_of(event, typeof(*fifo), nonstall.event);
 -- 
 2.27.0
 
