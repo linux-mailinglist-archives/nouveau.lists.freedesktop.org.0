@@ -2,182 +2,94 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 711896F6BB8
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02D426F6BC9
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ABAB910E490;
-	Thu,  4 May 2023 12:32:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 236F010E496;
+	Thu,  4 May 2023 12:32:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
- [205.220.165.32])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9487910E042;
- Thu,  2 Mar 2023 02:39:00 +0000 (UTC)
-Received: from pps.filterd (m0333521.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 321NBQCi011770; Thu, 2 Mar 2023 02:38:37 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : references : content-type :
- content-transfer-encoding : in-reply-to : mime-version; s=corp-2022-7-12;
- bh=1dpreVIBytiiWLdfkrs6pZPCAe15VfixPAxfMUEjebc=;
- b=msDPZTkumtuwQZimrj2fEsQPkCUhxMKmN+hd2ggfGexc7ZbG5WZceA3kjsrDHdeTdf3D
- XfyPW7mD8nI9Tsj1fxzqZEYn8PO7ehd4Vuly3t9KZa+45D328+tiFrPNk+avy/3/hDqQ
- 1LI7vmw2p6NIaCuc5JZDJQGNqyRVTNQVhsbKtDVxx3Syuw11H4N95RsEXeakHkGJVW2l
- 31P0Od1GNNIDvAuyj1ofGEYNmS/zB8ncP7dyrfyeTSbiiY2Br4El68dFQzVhsZrNbuXL
- FPZsfOhU/V+Xd5sBm+mjtopPVlIQvxYqfabdA42e3PzwGb8o7AwQvOkPm2dhy5BSf+98 ug== 
-Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3nyb7wtj4p-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 02 Mar 2023 02:38:37 +0000
-Received: from pps.filterd
- (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
- with ESMTP id 3220rv2N028604; Thu, 2 Mar 2023 02:38:35 GMT
-Received: from nam10-dm6-obe.outbound.protection.outlook.com
- (mail-dm6nam10lp2104.outbound.protection.outlook.com [104.47.58.104])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
- 3ny8sffvkf-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 02 Mar 2023 02:38:35 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2045.outbound.protection.outlook.com [40.107.220.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8D90610E605;
+ Fri,  3 Mar 2023 07:17:36 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Ouf4OpjSbJutorbLT0qh4Ww3qh/0yw25bjlNM66xI8byzD/vS47Js7d9RjBHMkH997QpX1M8/LItnU2fPOgbPtNV5sxxvav1qbFFPD5UkpsYI3/kxuglSZw+dvOzYHfRkDLx4Z2l+zwAeee7Fco1oqI5QTtIjNMkQoEsKuIeAX8I1cd7OyKEDlLy5/TIxlirsiiuL4QX7mYbIaikN1SVzl2TkF2DM9AStrGRPP0dfn0POZegBVYUnXnwWoBRM1ly8TVJy+pqzehppxqpJ0w587U2TwmkYUDqsOH2m4A3VMBDnQN1NjLiFgPVV28WBdgqPDjVSpRUJ9o+4wuJPWQzUA==
+ b=PqWcijI84qRZkPa9NxtKw0AORi9NNRic8hIKSTp/ZegZIup+Ff2iYqvnDjcqv01/sDct6TCej8hlcOWUW6LzrKHCkLh3/VLhr3Dy5HUQDROaW9s7ckwadwZtUqyI8U4Ds9sIG1QXAHzLV9aqvA4N+eKAQSEgtXcV2Bc9Djt6gMEVR9SbaxLC5R3M8kmXnJFW+CV8IPSkkdftjnYlVdYYuGTf52QgWo+ToRTuImU/UvW/8M6rZmrMyCHsMeMB6Cahfgf/fSK0UkZrIcn2TNwl1aaYcg7YoGBwcnZkaOQfEsqvB/9VG6/kfUUl/JszyjVVyrpV/C4Er0l2sVLTbiRdgQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1dpreVIBytiiWLdfkrs6pZPCAe15VfixPAxfMUEjebc=;
- b=DIOkchVCIvxnZ24bhu/wL7iU7ZCEkHVk4VItGpwdvSY8Buz1ueSrxLjRCVeYsy2Mgmeag0cU4WligmZFeiJx8y8eh4BS/QsZNhVaARJ3vojxhn5uO29vnfTjWU9M4ew7WXIByCRJppjtEldtdKxbarmk96oM1PzZKuzRyBoWROjLpIcvpTytxL4dUFmB05JrcDfFKPDPtetA+WUH88eclP4c5JYM151xg/v9ljEXBgMz/rl25fusjkXlDQS/lU1h5LGoCBvFt9DRyAZdpOHUxYsOc2TbJ2qxmLmJPRmY88KCtMvG8hoZJvhtedIR9IkanZrxlezFkFstpyx5xeEpyg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ bh=Sk0Jc8mPbTvEqNtJ7NqxDJrOnUheD4ys1bbszq7Kkx0=;
+ b=oAn1G4ILls1dfnatyzgop1qMEpRf7N0XynI6HvAQ6IR+HkZYOydMDKAyq1pmarS4CBkc0XOjDECFxx6qzXUMCvx4srEvPsvFR6tc+BvIkjbzDh9dMe5s8LBq8BWZ72i0y3u9TEMq92js/VkfSf7syl8SJYREStIFTvuy5xTJLhQ6rXMeanDybXa084RayFeWzNsVEIbE4glBWF/0zbYuoRFssyIxMtX2V/5PiyN3GJBpm+U9yrkM+fcaQNDiX8G/VdswM4+7gYi4C7vlos8s+7PIQoSXQrOlrhxb4Fwo/WvZ84v+rjUep9FL6YJKvZS6m7D4afKWP0Pjd2RAgX7DyQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.freedesktop.org smtp.mailfrom=amd.com; 
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1dpreVIBytiiWLdfkrs6pZPCAe15VfixPAxfMUEjebc=;
- b=npSogmK5dECda+lMpSbNIezjA7gqdkIx3dwnZn8uJowZ6xiRBw/IhAa1MDwR46RI7M9sjLnbGuwBL3g2+Z2JFovDmlByM1xji/oivUNoS/6HNpSV4ZgmPv5KVCXYrTnAr2jGBNUeZdvbQRKRuPFngJZ8tJuPIIWUBqkMO4+44xQ=
-Received: from SN6PR10MB3022.namprd10.prod.outlook.com (2603:10b6:805:d8::25)
- by DS7PR10MB5104.namprd10.prod.outlook.com (2603:10b6:5:3a1::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.18; Thu, 2 Mar
- 2023 02:38:33 +0000
-Received: from SN6PR10MB3022.namprd10.prod.outlook.com
- ([fe80::93c9:c99e:5ab:4319]) by SN6PR10MB3022.namprd10.prod.outlook.com
- ([fe80::93c9:c99e:5ab:4319%7]) with mapi id 15.20.6156.017; Thu, 2 Mar 2023
- 02:38:33 +0000
-Date: Wed, 1 Mar 2023 21:38:29 -0500
-From: "Liam R. Howlett" <Liam.Howlett@Oracle.com>
-To: Danilo Krummrich <dakr@redhat.com>
-Message-ID: <20230302023829.kcxyukt7guacr7xg@revolver>
-Mail-Followup-To: "Liam R. Howlett" <Liam.Howlett@Oracle.com>,
- Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com,
- daniel@ffwll.ch, tzimmermann@suse.de, mripard@kernel.org,
- corbet@lwn.net, christian.koenig@amd.com, bskeggs@redhat.com,
- matthew.brost@intel.com, boris.brezillon@collabora.com,
- alexdeucher@gmail.com, ogabbay@kernel.org, bagasdotme@gmail.com,
- willy@infradead.org, jason@jlekstrand.net,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-doc@vger.kernel.org, linux-mm@kvack.org,
- linux-kernel@vger.kernel.org, Dave Airlie <airlied@redhat.com>
-References: <20230217134422.14116-1-dakr@redhat.com>
- <20230217134422.14116-6-dakr@redhat.com>
- <20230221182050.day6z5ge2e3dxerv@revolver>
- <ce3ee7f2-e8a3-80eb-9bca-cd465f7f332e@redhat.com>
- <20230223190941.bkkloowmvqjiu6d7@revolver>
- <0868bbeb-11b4-b832-a601-f289278e3e76@redhat.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <0868bbeb-11b4-b832-a601-f289278e3e76@redhat.com>
-User-Agent: NeoMutt/20220429
-X-ClientProxiedBy: YT4PR01CA0262.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:10f::26) To SN6PR10MB3022.namprd10.prod.outlook.com
- (2603:10b6:805:d8::25)
+ bh=Sk0Jc8mPbTvEqNtJ7NqxDJrOnUheD4ys1bbszq7Kkx0=;
+ b=aJXwIVCGKTphtU/BjxbcxplV4+Xe5WSoV7iIUwd5DLDIwC09jMfZNTGuy6xv5A5lAr2jNoFKt8c8cYIV3aSrm6JtTjooimzoweNWTw5t2NBlveP0OiA164GMRHBtHhR4nkxcxTjmh+qh+Zs35uI7lJVfZw8Fz5IPVMbUtwK9kTw=
+Received: from MW4PR04CA0044.namprd04.prod.outlook.com (2603:10b6:303:6a::19)
+ by BN9PR12MB5212.namprd12.prod.outlook.com (2603:10b6:408:11d::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.22; Fri, 3 Mar
+ 2023 07:17:26 +0000
+Received: from CO1NAM11FT069.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:303:6a:cafe::52) by MW4PR04CA0044.outlook.office365.com
+ (2603:10b6:303:6a::19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.22 via Frontend
+ Transport; Fri, 3 Mar 2023 07:17:26 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1NAM11FT069.mail.protection.outlook.com (10.13.174.129) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6156.22 via Frontend Transport; Fri, 3 Mar 2023 07:17:26 +0000
+Received: from amar-X570-AORUS-ELITE.amd.com (10.180.168.240) by
+ SATLEXMB04.amd.com (10.181.40.145) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.34; Fri, 3 Mar 2023 01:17:20 -0600
+From: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>
+To: <dri-devel@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>,
+ <intel-gfx@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
+ <linux-graphics-maintainer@vmware.com>
+Date: Fri, 3 Mar 2023 12:46:59 +0530
+Message-ID: <20230303071659.1213074-1-Amaranath.Somalapuram@amd.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN6PR10MB3022:EE_|DS7PR10MB5104:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1bd209e9-2712-466d-69df-08db1ac73705
+X-MS-TrafficTypeDiagnostic: CO1NAM11FT069:EE_|BN9PR12MB5212:EE_
+X-MS-Office365-Filtering-Correlation-Id: d25298ed-396f-481c-56b9-08db1bb7577d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: wLD8byrIYAmLJvzpw/dU7a5k48jTkP2EngfXi153own+uV5aSxU/neibyUajQEMqPPCftxcpRdIRvTbvrH583RseJYU5YVvJbzIoOq2shyqljyrUSBfzTozUQ9kq1/19akFSha2GWXbm4T0l+VUUvvIYkrGIBXIHq4pH0zpadieAnJYkd90sh0yVltfxr5wsfyIiXGVtjZe11Axnvb6FX74YClAz0ERpdqNgFDXB1L8iUlLlLAA59pV3ErigSdjlmLEVBA8hSnhSe/a8tV4eQmVQ9RbJJeakt8Vr7jG2NtmnuL0dadSg0lV+E5dCKinkJUbbKqk6FczwGF10QGjPVzJn8OZDYtXRqAvh4o3YKFxUVHMzNme9s+OEBhJqBGT+OP2ivWsZPzxtuGZ2e0tbtxrYZQ0L3jHwCbUjn0RXQtIA2CtJqICFsFYWfOB5vMicE8S+iX8wH1Zn485QCkhBiq/Ne2rXHC8CUrScKDcO4MJWJiCW8TRH2HDptmZqDRYdhfqhPJa5jGB/NFLWd0lj1GprllqGoIuEgLFy7c3zttB9mDBzQvPBDxRFj2x5C5jcDU6TYWPFi96BAVVCrYEOXNvNMk1RnxbB+YaMbfbAUtwiN8PV2CRkBC9qamRI1sJk
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN6PR10MB3022.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230025)(7916004)(136003)(366004)(376002)(39860400002)(396003)(346002)(451199018)(66899018)(84970400001)(4326008)(66556008)(66476007)(8676002)(66946007)(6916009)(8936002)(5660300002)(2906002)(30864003)(7416002)(38100700002)(86362001)(41300700001)(6486002)(478600001)(6666004)(316002)(33716001)(1076003)(26005)(9686003)(6506007)(186003)(83380400001)(6512007);
+X-Microsoft-Antispam-Message-Info: FBt7yV5pxxm/Te3pAczevoAwd7soTgXV/Bzj9YaV73BP8RhwFiyQ53pn18igjQ85lq0hLcT1gBAZM5PAMbBHUSQTtZCaDV7MNbyVEhCFDOzVPUZ/k4MC6eGn//2SUEVCdihT17fQKU83vwDgu4EShE6xzceEVQK+ESrksXmQl3SDDURqyFJuKP/xtP2Nlyf492NAyezg4DawnQnA1zsc7syXnvYKRgw7/67LDLu+z7pHO6fu6fpDe+9lZahaemW/UUStiHXRflIux+AYc5ECuKAS0nIDcEDX1neK63tcnh3MsfFRlmaITe/79BMJ3YTi81SHcvw9xTS3bLLgYx2LhDDsiuc65AgchQgAz4RiYrvbKwwLVm9SOwyJ7Oab5lHDmH4wX4BemThSmTbpX/uSmx2fPnpjglNIfDD9PAgsqBs9W/o5wIuux/9U9FQqV3+hFpyZX8na21v9xAEEVBBuKpbKtN9DyRHLB2Ifkzdf0aCXBthIrqBXJxvOV6d1MzYCZwGiQcz8L9qG/4GPtGRxlfSDlN0V1eAo0pjDZmLflVmx4lyWmBw8uZp/Q1pfJZ6re3C3/IQcVKWBvqPI84t/J9XvsIN/PgR4W4ZHLiGoeXJ+XJZmBE0gw65/yBME8Vhdb4GkYVgRtJ/fGfboadsPHXoz0f2MlMy5AsepwsY1b7lHDOGwMGH93QysgtaDt+TwebEE00PPThanQahHBG5RLgH/9mkMyMykJvJGYXA0ffcuulRBd1eAxh/D58leo/KstqdNTXX0xsj0CrOpCEOLoA==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230025)(4636009)(39860400002)(346002)(376002)(136003)(396003)(451199018)(36840700001)(46966006)(40470700004)(336012)(36860700001)(8936002)(7696005)(26005)(1076003)(2616005)(6666004)(16526019)(186003)(426003)(47076005)(478600001)(54906003)(110136005)(83380400001)(41300700001)(316002)(4326008)(356005)(8676002)(40480700001)(40460700003)(70586007)(70206006)(30864003)(81166007)(82310400005)(86362001)(82740400003)(2906002)(5660300002)(36756003)(36900700001)(579004)(559001)(309714004);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5WgtmOObjjNuPMG8AyezsW/1QDJHeeE3t1et0g7x0wRYHA7W4XpLApxV/D4a?=
- =?us-ascii?Q?G8kjSY0RNu6XLkdWrsWvkRYudbbrH9ShLMQlqExG/BKly7FR8E8mv8Ap726N?=
- =?us-ascii?Q?GJGGgCW1TgSFvZ97u3aU4dE/ndFGoXjIAMXMpF+ObEW6f/C0pMUsGWurlxwm?=
- =?us-ascii?Q?OYTzYLJjksfiUtCXsX1nMaLf5eqc6Xf/60/4kDr96Yb97W/6th29WPjY7rKK?=
- =?us-ascii?Q?CSxCy2KiBl4CytFWdyhqHTtb6L7z8OqPZyrss1QwH57+S1oxT8n6IgJ7Hltq?=
- =?us-ascii?Q?Q4GYybXSY9cdl7MKv2+WyP1FaYzLIUx41Ece2uuWC2uEoMlOEwCUN/tqNK/4?=
- =?us-ascii?Q?jd1yWrCY6jNQ+H9QIqyTv0LoOsuYBzlGALN74J7uXotx7oVvrI3ohigEU3Xf?=
- =?us-ascii?Q?GrRr4l/aRFRk3pDAlN6eT66MmzI0SkeSf5el1USmAt8hssTeCH5MjClEsBOb?=
- =?us-ascii?Q?9iJcJtzr9wYznWP1VCiWH2Cy6+w6AHc7lEciibGCclE51/Dv86xKyAUBq1bS?=
- =?us-ascii?Q?8QF+wl12gEb6kxAtPpx+OF7l4Qg5gSobAmNeu21sBfdOuULkhEml1S8RjuDY?=
- =?us-ascii?Q?HtSK61UltVcBPVvhqys/m88ebyPOjsOymmfE8wtA3zKsOIH9tk22uaZ79Ld+?=
- =?us-ascii?Q?j+an9Q0ZZPExXvffk9JedCD4j5cuYi48UZKx/cI/BKAfHwtthDoMyujxbkSH?=
- =?us-ascii?Q?WiMCJ72Lz6KO5NVP4aWXMcjbiay5I9PWcVKjapcXFZnn2vPT0RbjEsvxSXvj?=
- =?us-ascii?Q?ltLoutoYpMrsz40EB6aLAi3991ctFoPXv/Dscv7FqkIs2N95YZpmF8nZX95C?=
- =?us-ascii?Q?BFe5LzvOSU4jNAOrR+E+DaUZrhytfExx72YNZYRJh0D7YtareEdp3S0hXujG?=
- =?us-ascii?Q?LtrqAlXd2L2pBgbubVKW6b42gc2/aEw+5cpI7QzolPh785JPgJjFTd0MGnVk?=
- =?us-ascii?Q?an68WPwkNoZAzk+kSyDpkNjWLs79xLPixr2c75sEZcqskGnzDcruDghXrCur?=
- =?us-ascii?Q?Lciie1gosCeGn9gA/2yS6Rpio4lvrLYGhzvy/nXL6ZoRonxcIkcnb4seTgcw?=
- =?us-ascii?Q?k9F7IlukIRlWShP27UEd5YQJ+dnO3Zzf36byycqGa5uFfSLOTLqCfISF/uui?=
- =?us-ascii?Q?0U0/IiNl8MYd8LdOvCBx2Xs2t6pvV7ZEMHxsczG3MmHUbcy2RFpGHUgwjCOQ?=
- =?us-ascii?Q?vFPthKuWGPflY/puTSIKmQWvVUYFI22c2YjEmJ0JgdRrCt2MKReiz3u+FV+X?=
- =?us-ascii?Q?R8EDC6t6Z7ld7S77pj5Gtf4vD5mh4/YgJ320nvzqm7e7bTjqm6gglgwtiZ8W?=
- =?us-ascii?Q?D6ktVRHdw5lFT6MCY79e0IVhbaFbJD2NnDbdIplEVrf+ZUMgd4NZYV3rT6ng?=
- =?us-ascii?Q?eyT+aKzKhCp6J8vGgkvuHmefxGohVYVrlSX0v8CqEQKFn0FCH8FcSiTeY9Ab?=
- =?us-ascii?Q?WvW03WNUuoJPWdII31mJRywDhDAMRqgkreq/WsNPYktrf9UlWmXoHP2e9839?=
- =?us-ascii?Q?5DNRbtTcpUVUJLlIiX8UV9iHrtPEgALLZm/e0t3BcrOxDZ5hfdbicndyekua?=
- =?us-ascii?Q?jom1JwRB1bBV5s6Zlk0mOy8caYPBmYwGEwUMWQ8r8NjomIf/MqCaLZRAaTxK?=
- =?us-ascii?Q?Rg=3D=3D?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: =?us-ascii?Q?iKUZvs53ooBzq2uDaQ3HHDMx0xebnR6F4n5q3HTDqEDbPnkEzoYFCiVpq8Vg?=
- =?us-ascii?Q?32/ZpPQYQ5Q4nK9SaBxYukc9smgOkP0NqWbv9gr4/B3Dj2GAUnqp7VK3nXoy?=
- =?us-ascii?Q?fm1tevu2JejKAK3JfUDDQF+1GDWPXYblM49XPUyAvFpe5Qrb+JpeLzCZbk0F?=
- =?us-ascii?Q?8f9CAUqRjf+1XDVREQDyJ5ese8uMhg5uy2CQUo/G543ax3S0r4boKJEUr0m8?=
- =?us-ascii?Q?bKQ2N4ofdSDhexmNhMKF+JGq+iIoLdYl+hL7Wr4IexdDA8KxBvu9jLrkC3Xo?=
- =?us-ascii?Q?l7ujhQ/ad0s2QmWgij/qSGnYsVvB9hZcyRO6N55Wht8tjiLdSJZDzR/eVBFQ?=
- =?us-ascii?Q?0DNmB/dVWNfNdWng6tNbkAkQbK/AUdH+UngJDQuIL+yBGcMpSIJfc2+JOuWF?=
- =?us-ascii?Q?p/e3dlNTJ06pkpN7RrquWCXsTNiA0mCwQfUkB9hOUFJz5YdfrxpbhuedjmXi?=
- =?us-ascii?Q?yeN3LlvmbVtId2t4CrkZeHFaBOEMiuqlqGK8d9n4CezVRFHtT3YNKbjgmw5O?=
- =?us-ascii?Q?D8Yeh5H7ED8Sy7MfoFzKKPHZVEwlTWvIpgBF51cTkUgxaw3zhdaz3oZ0KTJe?=
- =?us-ascii?Q?7gI2iNhUptqxjfZ7ihf/TcuTgpRauRMQx+1qOVL2vuelhoE5xH9mO9R0yA4i?=
- =?us-ascii?Q?uq97BMJFEuYzbTZT0tR+iZfgpU7D5pVvzr0xj7PEet3wF5W+3SCUguxFLnT3?=
- =?us-ascii?Q?aCOtBV+UTz0DdQm58vxN1Vu4mlWbS4y6ys4h8eSb9+0CvPiuZF8TqkO6nsMQ?=
- =?us-ascii?Q?t7eh650Lif1UVWgJHJnTP+Ln8ZJw0ikF9qbZgGJX7qpP9tTiSLDj18o/AN1J?=
- =?us-ascii?Q?KEQTnEWyxNbTFfLsTE+jmTmmojKOYcDp4SuddTd+tWOfCDB9tKlASSL9yl8v?=
- =?us-ascii?Q?HR+0gJiv+XLbthmh9jzZD6xKmXlER6yiG0O2S+uxV9L4f9RGuR8goQGR9p6v?=
- =?us-ascii?Q?yDafY0rF+aSTLwqBc3afL8LbdxrQNvt1GVjJljFfmV9g4wibBSqVcnGt8AiS?=
- =?us-ascii?Q?HqnWRYylcMuiXj5ZICjmfy83N28tflzq+wrY04Eg9UG+5idAyoLoQ92T2Jw/?=
- =?us-ascii?Q?Gl1vvx0cX9waEPL0RjIvtp9GC6uCpiR8wvdI9Cls5XKKokJ9TLn9SBfN2MZG?=
- =?us-ascii?Q?Wchc0L8kaKYTVl6BGK665MnwaW1Vkg8pOg=3D=3D?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1bd209e9-2712-466d-69df-08db1ac73705
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR10MB3022.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Mar 2023 02:38:32.9941 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hBx2RmzYBXic7mzVQoLctAuuFOhNPpORUrpMfan2gI3iv4kRyG7ppMhqYAr2QxeqW3oiu3LptnWfnWtWRvlINQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB5104
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-01_17,2023-03-01_03,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999
- mlxscore=0
- suspectscore=0 spamscore=0 adultscore=0 phishscore=0 malwarescore=0
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2212070000 definitions=main-2303020019
-X-Proofpoint-GUID: E496qiqROwUNZQZGKlz0A0PdPBIeMwHl
-X-Proofpoint-ORIG-GUID: E496qiqROwUNZQZGKlz0A0PdPBIeMwHl
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:36 +0000
-Subject: Re: [Nouveau] [PATCH drm-next v2 05/16] drm: manager to keep track
- of GPUs VA mappings
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2023 07:17:26.2291 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d25298ed-396f-481c-56b9-08db1bb7577d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT069.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR12MB5212
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:37 +0000
+Subject: [Nouveau] [PATCH] Change the meaning of the fields in the ttm_place
+ structure from pfn to bytes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -189,402 +101,1568 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, willy@infradead.org, daniel@ffwll.ch,
- dri-devel@lists.freedesktop.org, corbet@lwn.net, nouveau@lists.freedesktop.org,
- ogabbay@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- mripard@kernel.org, linux-mm@kvack.org, boris.brezillon@collabora.com,
- bskeggs@redhat.com, alexdeucher@gmail.com, Dave Airlie <airlied@redhat.com>,
- bagasdotme@gmail.com, christian.koenig@amd.com, jason@jlekstrand.net
+Cc: shashank.sharma@amd.com, arunpravin.paneerselvam@amd.com,
+ Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>, arvind.yadav@amd.com,
+ alexander.deucher@amd.com, christian.koenig@amd.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-* Danilo Krummrich <dakr@redhat.com> [230227 08:17]:
+Change the ttm_place structure member fpfn, lpfn, mem_type to
+res_start, res_end, res_type.
+Change the unsigned to u64.
+Fix the dependence in all the DRM drivers and
+clean up PAGE_SHIFT operation.
 
-...
-> > > Would this variant be significantly more efficient?
-> >=20
-> > Well, what you are doing is walking the tree to see if there's anything
-> > there... then re-walking the tree to store it.  So, yes, it's much more
-> > efficient..  However, writing is heavier.  How much of the time is spen=
-t
-> > walking vs writing depends on the size of the tree, but it's rather eas=
-y
-> > to do this in a single walk of the tree so why wouldn't you?
->=20
-> I will, I was just curious about how much of an impact it has.
->=20
-> >=20
-> > >=20
-> > > Also, would this also work while already walking the tree?
-> >=20
-> > Yes, to an extent.  If you are at the correct location in the tree, you
-> > can write to that location.  If you are not in the correct location and
-> > try to write to the tree then things will go poorly..  In this scenario=
-,
-> > we are very much walking the tree and writing to it in two steps.
-> >=20
-> > >=20
-> > > To remove an entry while walking the tree I have a separate function
-> > > drm_gpuva_iter_remove(). Would I need something similar for inserting
-> > > entries?
-> >=20
-> > I saw that.  Your remove function uses the erase operation which is
-> > implemented as a walk to that location and a store of a null over the
-> > range that is returned.  You do not need a function to insert an entry
-> > if the maple state is at the correct location, and that doesn't just
-> > mean setting mas.index/mas.last to the correct value.  There is a node =
-&
-> > offset saved in the maple state that needs to be in the correct
-> > location.  If you store to that node then the node may be replaced, so
-> > other iterators that you have may become stale, but the one you used
-> > execute the store operation will now point to the new node with the new
-> > entry.
-> >=20
-> > >=20
-> > > I already provided this example in a separate mail thread, but it may=
- makes
-> > > sense to move this to the mailing list:
-> > >=20
-> > > In __drm_gpuva_sm_map() we're iterating a given range of the tree, wh=
-ere the
-> > > given range is the size of the newly requested mapping. __drm_gpuva_s=
-m_map()
-> > > invokes a callback for each sub-operation that needs to be taken in o=
-rder to
-> > > fulfill this mapping request. In most cases such a callback just crea=
-tes a
-> > > drm_gpuva_op object and stores it in a list.
-> > >=20
-> > > However, drivers can also implement the callback, such that they dire=
-ctly
-> > > execute this operation within the callback.
-> > >=20
-> > > Let's have a look at the following example:
-> > >=20
-> > >       0     a     2
-> > > old: |-----------|       (bo_offset=3Dn)
-> > >=20
-> > >             1     b     3
-> > > req:       |-----------| (bo_offset=3Dm)
-> > >=20
-> > >       0  a' 1     b     3
-> > > new: |-----|-----------| (a.bo_offset=3Dn,b.bo_offset=3Dm)
-> > >=20
-> > > This would result in the following operations.
-> > >=20
-> > > __drm_gpuva_sm_map() finds entry "a" and calls back into the driver
-> > > suggesting to re-map "a" with the new size. The driver removes entry =
-"a"
-> > > from the tree and adds "a'"
-> >=20
-> > What you have here won't work.  The driver will cause your iterators
-> > maple state to point to memory that is freed.  You will either need to
-> > pass through your iterator so that the modifications can occur with tha=
-t
-> > maple state so it remains valid, or you will need to invalidate the
-> > iterator on every modification by the driver.
-> >=20
-> > I'm sure the first idea you have will be to invalidate the iterator, bu=
-t
-> > that is probably not the way to proceed.  Even ignoring the unclear
-> > locking of two maple states trying to modify the tree, this is rather
-> > inefficient - each invalidation means a re-walk of the tree.  You may a=
-s
-> > well not use an iterator in this case.
-> >=20
-> > Depending on how/when the lookups occur, you could still iterate over
-> > the tree and let the driver modify the ending of "a", but leave the tre=
-e
-> > alone and just store b over whatever - but the failure scenarios may
-> > cause you grief.
-> >=20
-> > If you pass the iterator through, then you can just use it to do your
-> > writes and keep iterating as if nothing changed.
->=20
-> Passing through the iterater clearly seems to be the way to go.
->=20
-> I assume that if the entry to insert isn't at the location of the iterato=
-r
-> (as in the following example) we can just keep walking to this location m=
-y
-> changing the index of the mas and calling mas_walk()?
+Signed-off-by: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gtt_mgr.c   |  11 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c    |  66 ++++++------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       |  22 ++--
+ drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c       |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vce.c       |  17 +--
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vram_mgr.c  |  40 ++++---
+ drivers/gpu/drm/drm_gem_vram_helper.c         |  10 +-
+ drivers/gpu/drm/i915/gem/i915_gem_ttm.c       |  22 ++--
+ drivers/gpu/drm/i915/gem/i915_gem_ttm_move.c  |   2 +-
+ drivers/gpu/drm/i915/i915_ttm_buddy_manager.c | 102 ++++++++----------
+ drivers/gpu/drm/i915/i915_ttm_buddy_manager.h |   2 +-
+ drivers/gpu/drm/i915/intel_region_ttm.c       |  12 +--
+ drivers/gpu/drm/nouveau/nouveau_bo.c          |  41 +++----
+ drivers/gpu/drm/nouveau/nouveau_mem.c         |  10 +-
+ drivers/gpu/drm/qxl/qxl_object.c              |  14 +--
+ drivers/gpu/drm/qxl/qxl_ttm.c                 |   8 +-
+ drivers/gpu/drm/radeon/radeon_object.c        |  50 ++++-----
+ drivers/gpu/drm/radeon/radeon_ttm.c           |  20 ++--
+ drivers/gpu/drm/radeon/radeon_uvd.c           |   8 +-
+ drivers/gpu/drm/ttm/ttm_bo.c                  |  20 ++--
+ drivers/gpu/drm/ttm/ttm_range_manager.c       |  21 ++--
+ drivers/gpu/drm/ttm/ttm_resource.c            |   8 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_bo.c            |  46 ++++----
+ drivers/gpu/drm/vmwgfx/vmwgfx_ttm_buffer.c    |  30 +++---
+ include/drm/ttm/ttm_placement.h               |  12 +--
+ 25 files changed, 293 insertions(+), 305 deletions(-)
 
-no.  You have to mas_set() to the value and walk from the top of the
-tree.  mas_walk() walks down, not from side to side - well, it does go
-forward within a node (increasing offset), but if you hit the node limit
-then you have gotten yourself in trouble.
-
-> This would also imply
-> that the "outer" tree walk continues after the entry we just inserted,
-> right?
-
-I don't understand the "outer" tree walk statement.
-
->=20
->            1     a     3
-> old:       |-----------| (bo_offset=3Dn)
->=20
->      0     b     2
-> req: |-----------|       (bo_offset=3Dm)
->=20
->      0     b     2  a' 3
-> new: |-----------|-----| (b.bo_offset=3Dm,a.bo_offset=3Dn+2)
->=20
-> Again, after finding "a", we want to remove it and insert "a'" instead.
-
-Ah, so you could walk to 0, see that it's NULL from 0 - 1, call
-mas_next() and get "a" from 1 - 3, write "a'" from 2 - 3:
-
-        0     1  a   2  a' 3
-broken: |-----|------|-----| (a is broken in this 1/2 step)
-
-mas_set_range(&mas, 0, 2); /* Resets the tree location to MAS_START */
-mas_store(&mas, b);
-        0     b     2  a' 3
-new:    |-----------|-----| (b.bo_offset=3Dm,a.bo_offset=3Dn+2)
-
-
-You can *probably* also get away with this:
-
-walk to 0, see that it's NULL from 0 - 1, call mas_next() and get "a"
-from 1 - 3, write "a'" from 2 - 3:
-
-        0     1  a   2  a' 3
-broken: |-----|------|-----| (a is broken in this 1/2 step)
-
-mas_prev(&mas, 0); /* Looking at broken a from 1-2.
-mas_store(&mas, NULL); /* NULL is expanded on write to 0-2.
-            0    NULL   2  a' 3
-broken':    |-----------|-----| (b.bo_offset=3Dm,a.bo_offset=3Dn+2)
-
-mas_store(&mas, b);
-        0     b     2  a' 3
-new:    |-----------|-----| (b.bo_offset=3Dm,a.bo_offset=3Dn+2)
-
-You may want to iterate backwards and do the writes as you go until you
-have enough room.. it really depends how you want to go about doing
-things.
-
->=20
-> >=20
-> > >=20
-> > > __drm_gpuva_sm_map(), ideally, continues the loop searching for nodes
-> > > starting from the end of "a" (which is 2) till the end of the request=
-ed
-> > > mapping "b" (which is 3). Since it doesn't find any other mapping wit=
-hin
-> > > this range it calls back into the driver suggesting to finally map "b=
-".
-> > >=20
-> > > If there would have been another mapping between 2 and 3 it would hav=
-e
-> > > called back into the driver asking to unmap this mapping beforehand.
-> > >=20
-> > > So, it boils down to re-mapping as described at the beginning (and
-> > > analogously at the end) of a new mapping range and removing of entrie=
-s that
-> > > are enclosed by the new mapping range.
-> >=20
-> > I assume the unmapped area is no longer needed, and the 're-map' is
-> > really a removal of information?  Otherwise I'd suggest searching for a
-> > gap which fits your request.  What you have here is a lot like
-> > "MAP_FIXED" vs top-down/bottom-up search in the VMA code, this seems to
-> > be like your __drm_gpuva_sm_map() and the drm mm range allocator with
-> > DRM_MM_INSERT_LOW, and DRM_MM_INSERT_HIGH.
-> >=20
-> > Why can these split/unmappings fail?  Is it because they are still
-> > needed?
-> >=20
->=20
-> You mean the check before the mas_*() operations in drm_gpuva_insert()?
-
-Yes, the callbacks.
-
->=20
-> Removing entries should never fail, inserting entries should fail when th=
-e
-> caller tries to store to an area outside of the VA space (it doesn't
-> necessarily span the whole 64-bit space), a kernel reserved area of the V=
-A
-> space, is not in any pre-allocated range of the VA space (if regions are
-> enabled) or an entry already exists at that location.
-
-In the mmap code, I have to deal with splitting the start/end VMA and
-removing any VMAs in the way.  I do this by making a 'detached' tree
-that is dealt with later, then just overwriting the area with one
-mas_store() operation.  Would something like that work for you?
-
->=20
-> > >=20
-> > > > > +	if (unlikely(ret))
-> > > > > +		return ret;
-> > > > > +
-> > > > > +	va->mgr =3D mgr;
-> > > > > +	va->region =3D reg;
-> > > > > +
-> > > > > +	return 0;
-> > > > > +}
-> > > > > +EXPORT_SYMBOL(drm_gpuva_insert);
-> > > > > +
-> > > > > +/**
-> > > > > + * drm_gpuva_remove - remove a &drm_gpuva
-> > > > > + * @va: the &drm_gpuva to remove
-> > > > > + *
-> > > > > + * This removes the given &va from the underlaying tree.
-> > > > > + */
-> > > > > +void
-> > > > > +drm_gpuva_remove(struct drm_gpuva *va)
-> > > > > +{
-> > > > > +	MA_STATE(mas, &va->mgr->va_mt, va->va.addr, 0);
-> > > > > +
-> > > > > +	mas_erase(&mas);
-> > > > > +}
-> > > > > +EXPORT_SYMBOL(drm_gpuva_remove);
-> > > > > +
-> > > > ...
-> > > >=20
-> > > > > +/**
-> > > > > + * drm_gpuva_find_first - find the first &drm_gpuva in the given=
- range
-> > > > > + * @mgr: the &drm_gpuva_manager to search in
-> > > > > + * @addr: the &drm_gpuvas address
-> > > > > + * @range: the &drm_gpuvas range
-> > > > > + *
-> > > > > + * Returns: the first &drm_gpuva within the given range
-> > > > > + */
-> > > > > +struct drm_gpuva *
-> > > > > +drm_gpuva_find_first(struct drm_gpuva_manager *mgr,
-> > > > > +		     u64 addr, u64 range)
-> > > > > +{
-> > > > > +	MA_STATE(mas, &mgr->va_mt, addr, 0);
-> > > > > +
-> > > > > +	return mas_find(&mas, addr + range - 1);
-> > > > > +}
-> > > > > +EXPORT_SYMBOL(drm_gpuva_find_first);
-> > > > > +
-> > > > > +/**
-> > > > > + * drm_gpuva_find - find a &drm_gpuva
-> > > > > + * @mgr: the &drm_gpuva_manager to search in
-> > > > > + * @addr: the &drm_gpuvas address
-> > > > > + * @range: the &drm_gpuvas range
-> > > > > + *
-> > > > > + * Returns: the &drm_gpuva at a given &addr and with a given &ra=
-nge
-> > > >=20
-> > > > Note that mas_find() will continue upwards in the address space if =
-there
-> > > > isn't anything at @addr.  This means that &drm_gpuva may not be at
-> > > > &addr.  If you want to check just at &addr, use mas_walk().
-> > >=20
-> > > Good catch. drm_gpuva_find() should then either also check for 'va->v=
-a.addr
-> > > =3D=3D addr' as well or, alternatively, use mas_walk(). As above, any=
- reason to
-> > > prefer mas_walk()?
-
-I think I missed this question last time..
-
-Internally, mas_find() is just a mas_walk() on the first call, then
-mas_next() for each call after that.  If, during the mas_walk(), there
-is no value at addr, it immediately calls mas_next() to get a value to
-return.  It will continue upwards until the limit is reached (addr +
-range - 1 in your case).
-
-So if you only want to know if there is something at addr, then it's
-best to use mas_walk() and keep things a bit more efficient.  Then you
-can check mas.last for your end value.
-
-If you do want the first VMA within the range passed in, then mas_find()
-is the function you want.
-
-> > >=20
-> > > >=20
-> > > > > + */
-> > > > > +struct drm_gpuva *
-> > > > > +drm_gpuva_find(struct drm_gpuva_manager *mgr,
-> > > > > +	       u64 addr, u64 range)
-> > > > > +{
-> > > > > +	struct drm_gpuva *va;
-> > > > > +
-> > > > > +	va =3D drm_gpuva_find_first(mgr, addr, range);
-> > > > > +	if (!va)
-> > > > > +		goto out;
-> > > > > +
-> > > > > +	if (va->va.range !=3D range)
-> > > > > +		goto out;
-> > > > > +
-> > > > > +	return va;
-> > > > > +
-> > > > > +out:
-> > > > > +	return NULL;
-> > > > > +}
-> > > > > +EXPORT_SYMBOL(drm_gpuva_find);
-> > > > > +
-> > > > > +/**
-> > > > > + * drm_gpuva_find_prev - find the &drm_gpuva before the given ad=
-dress
-> > > > > + * @mgr: the &drm_gpuva_manager to search in
-> > > > > + * @start: the given GPU VA's start address
-> > > > > + *
-> > > > > + * Find the adjacent &drm_gpuva before the GPU VA with given &st=
-art address.
-> > > > > + *
-> > > > > + * Note that if there is any free space between the GPU VA mappi=
-ngs no mapping
-> > > > > + * is returned.
-> > > > > + *
-> > > > > + * Returns: a pointer to the found &drm_gpuva or NULL if none wa=
-s found
-> > > > > + */
-> > > > > +struct drm_gpuva *
-> > > > > +drm_gpuva_find_prev(struct drm_gpuva_manager *mgr, u64 start)
-> > > >=20
-> > > > find_prev() usually continues beyond 1 less than the address. I fou=
-nd
-> > > > this name confusing.
-> > >=20
-> > > Don't really get that, mind explaining?
-> >=20
-> > When I ask for the previous one in a list or tree, I think the one
-> > before.. but since you are limiting your search from start to start - 1=
-,
-> > you may as well walk to start - 1 and see if one exists.
-> >=20
-> > Is that what you meant to do here?
->=20
-> Yes, I want to know whether there is a previous entry which ends right
-> before the current entry, without a gap between the two.
->=20
-> >=20
-> > >=20
-> > > > You may as well use mas_walk(), it would be faster.
-> > >=20
-> > > How would I use mas_walk() for that? If I understand it correctly,
-> > > mas_walk() requires me to know that start address, which I don't know=
- for
-> > > the previous entry.
-> >=20
-> > mas_walk() walks to the value you specify and returns the entry at that
-> > address, not necessarily the start address, but any address in the
-> > range.
-> >=20
-> > If you have a tree and store A =3D [0x1000 - 0x2000] and set your maple
-> > state to walk to 0x1500, mas_walk() will return A, and the maple state
-> > will have mas.index =3D 0x1000 and mas.last =3D 0x2000.
-> >=20
-> > You have set the maple state to start at "start" and called
-> > mas_prev(&mas, start - 1).  start - 1 is the lower limit, so the
-> > internal implementation will walk to start then go to the previous entr=
-y
-> > until start - 1.. it will stop at start - 1 and return NULL if there
-> > isn't one there.
->=20
-> Thanks for the clarification and all the other very helpful comments and
-> explanations!
->=20
-
-Always glad to help.  The more users the tree has, the more I can see
-where we may need to expand the interface to help others.
-
-...
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_gtt_mgr.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_gtt_mgr.c
+index 44367f03316f..5b5104e724e3 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_gtt_mgr.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_gtt_mgr.c
+@@ -131,11 +131,12 @@ static int amdgpu_gtt_mgr_new(struct ttm_resource_manager *man,
+ 		goto err_free;
+ 	}
+ 
+-	if (place->lpfn) {
++	if (place->res_end) {
+ 		spin_lock(&mgr->lock);
+ 		r = drm_mm_insert_node_in_range(&mgr->mm, &node->mm_nodes[0],
+-						num_pages, tbo->page_alignment,
+-						0, place->fpfn, place->lpfn,
++						num_pages, tbo->page_alignment,	0,
++						place->res_start << PAGE_SHIFT,
++						place->res_end << PAGE_SHIFT,
+ 						DRM_MM_INSERT_BEST);
+ 		spin_unlock(&mgr->lock);
+ 		if (unlikely(r))
+@@ -219,7 +220,7 @@ static bool amdgpu_gtt_mgr_intersects(struct ttm_resource_manager *man,
+ 				      const struct ttm_place *place,
+ 				      size_t size)
+ {
+-	return !place->lpfn || amdgpu_gtt_mgr_has_gart_addr(res);
++	return !place->res_end || amdgpu_gtt_mgr_has_gart_addr(res);
+ }
+ 
+ /**
+@@ -237,7 +238,7 @@ static bool amdgpu_gtt_mgr_compatible(struct ttm_resource_manager *man,
+ 				      const struct ttm_place *place,
+ 				      size_t size)
+ {
+-	return !place->lpfn || amdgpu_gtt_mgr_has_gart_addr(res);
++	return !place->res_end || amdgpu_gtt_mgr_has_gart_addr(res);
+ }
+ 
+ /**
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+index 283e8fe608ce..2926389e21d4 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+@@ -130,15 +130,15 @@ void amdgpu_bo_placement_from_domain(struct amdgpu_bo *abo, u32 domain)
+ 	u32 c = 0;
+ 
+ 	if (domain & AMDGPU_GEM_DOMAIN_VRAM) {
+-		unsigned visible_pfn = adev->gmc.visible_vram_size >> PAGE_SHIFT;
++		u64 visible_pfn = adev->gmc.visible_vram_size;
+ 
+-		places[c].fpfn = 0;
+-		places[c].lpfn = 0;
+-		places[c].mem_type = TTM_PL_VRAM;
++		places[c].res_start = 0;
++		places[c].res_end = 0;
++		places[c].res_type = TTM_PL_VRAM;
+ 		places[c].flags = 0;
+ 
+ 		if (flags & AMDGPU_GEM_CREATE_CPU_ACCESS_REQUIRED)
+-			places[c].lpfn = visible_pfn;
++			places[c].res_end = visible_pfn;
+ 		else
+ 			places[c].flags |= TTM_PL_FLAG_TOPDOWN;
+ 
+@@ -148,9 +148,9 @@ void amdgpu_bo_placement_from_domain(struct amdgpu_bo *abo, u32 domain)
+ 	}
+ 
+ 	if (domain & AMDGPU_GEM_DOMAIN_GTT) {
+-		places[c].fpfn = 0;
+-		places[c].lpfn = 0;
+-		places[c].mem_type =
++		places[c].res_start = 0;
++		places[c].res_end = 0;
++		places[c].res_type =
+ 			abo->flags & AMDGPU_GEM_CREATE_PREEMPTIBLE ?
+ 			AMDGPU_PL_PREEMPT : TTM_PL_TT;
+ 		places[c].flags = 0;
+@@ -158,41 +158,41 @@ void amdgpu_bo_placement_from_domain(struct amdgpu_bo *abo, u32 domain)
+ 	}
+ 
+ 	if (domain & AMDGPU_GEM_DOMAIN_CPU) {
+-		places[c].fpfn = 0;
+-		places[c].lpfn = 0;
+-		places[c].mem_type = TTM_PL_SYSTEM;
++		places[c].res_start = 0;
++		places[c].res_start = 0;
++		places[c].res_type = TTM_PL_SYSTEM;
+ 		places[c].flags = 0;
+ 		c++;
+ 	}
+ 
+ 	if (domain & AMDGPU_GEM_DOMAIN_GDS) {
+-		places[c].fpfn = 0;
+-		places[c].lpfn = 0;
+-		places[c].mem_type = AMDGPU_PL_GDS;
++		places[c].res_start = 0;
++		places[c].res_end = 0;
++		places[c].res_type = AMDGPU_PL_GDS;
+ 		places[c].flags = 0;
+ 		c++;
+ 	}
+ 
+ 	if (domain & AMDGPU_GEM_DOMAIN_GWS) {
+-		places[c].fpfn = 0;
+-		places[c].lpfn = 0;
+-		places[c].mem_type = AMDGPU_PL_GWS;
++		places[c].res_start = 0;
++		places[c].res_end = 0;
++		places[c].res_type = AMDGPU_PL_GWS;
+ 		places[c].flags = 0;
+ 		c++;
+ 	}
+ 
+ 	if (domain & AMDGPU_GEM_DOMAIN_OA) {
+-		places[c].fpfn = 0;
+-		places[c].lpfn = 0;
+-		places[c].mem_type = AMDGPU_PL_OA;
++		places[c].res_start = 0;
++		places[c].res_end = 0;
++		places[c].res_type = AMDGPU_PL_OA;
+ 		places[c].flags = 0;
+ 		c++;
+ 	}
+ 
+ 	if (!c) {
+-		places[c].fpfn = 0;
+-		places[c].lpfn = 0;
+-		places[c].mem_type = TTM_PL_SYSTEM;
++		places[c].res_start = 0;
++		places[c].res_end = 0;
++		places[c].res_type = TTM_PL_SYSTEM;
+ 		places[c].flags = 0;
+ 		c++;
+ 	}
+@@ -384,8 +384,8 @@ int amdgpu_bo_create_kernel_at(struct amdgpu_device *adev,
+ 	ttm_resource_free(&(*bo_ptr)->tbo, &(*bo_ptr)->tbo.resource);
+ 
+ 	for (i = 0; i < (*bo_ptr)->placement.num_placement; ++i) {
+-		(*bo_ptr)->placements[i].fpfn = offset >> PAGE_SHIFT;
+-		(*bo_ptr)->placements[i].lpfn = (offset + size) >> PAGE_SHIFT;
++		(*bo_ptr)->placements[i].res_start = offset;
++		(*bo_ptr)->placements[i].res_end = offset + size;
+ 	}
+ 	r = ttm_bo_mem_space(&(*bo_ptr)->tbo, &(*bo_ptr)->placement,
+ 			     &(*bo_ptr)->tbo.resource, &ctx);
+@@ -935,16 +935,16 @@ int amdgpu_bo_pin_restricted(struct amdgpu_bo *bo, u32 domain,
+ 		bo->flags |= AMDGPU_GEM_CREATE_CPU_ACCESS_REQUIRED;
+ 	amdgpu_bo_placement_from_domain(bo, domain);
+ 	for (i = 0; i < bo->placement.num_placement; i++) {
+-		unsigned fpfn, lpfn;
++		u64 res_start, res_end;
+ 
+-		fpfn = min_offset >> PAGE_SHIFT;
+-		lpfn = max_offset >> PAGE_SHIFT;
++		res_start = min_offset;
++		res_end = max_offset;
+ 
+-		if (fpfn > bo->placements[i].fpfn)
+-			bo->placements[i].fpfn = fpfn;
+-		if (!bo->placements[i].lpfn ||
+-		    (lpfn && lpfn < bo->placements[i].lpfn))
+-			bo->placements[i].lpfn = lpfn;
++		if (res_start > bo->placements[i].res_start)
++			bo->placements[i].res_start = res_start;
++		if (!bo->placements[i].res_end ||
++		    (res_end && res_end < bo->placements[i].res_end))
++			bo->placements[i].res_end = res_end;
+ 	}
+ 
+ 	r = ttm_bo_validate(&bo->tbo, &bo->placement, &ctx);
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+index 2cd081cbf706..1b5c0c1fa7af 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+@@ -95,9 +95,9 @@ static void amdgpu_evict_flags(struct ttm_buffer_object *bo,
+ 	struct amdgpu_device *adev = amdgpu_ttm_adev(bo->bdev);
+ 	struct amdgpu_bo *abo;
+ 	static const struct ttm_place placements = {
+-		.fpfn = 0,
+-		.lpfn = 0,
+-		.mem_type = TTM_PL_SYSTEM,
++		.res_start = 0,
++		.res_end = 0,
++		.res_type = TTM_PL_SYSTEM,
+ 		.flags = 0
+ 	};
+ 
+@@ -148,8 +148,8 @@ static void amdgpu_evict_flags(struct ttm_buffer_object *bo,
+ 			amdgpu_bo_placement_from_domain(abo, AMDGPU_GEM_DOMAIN_VRAM |
+ 							AMDGPU_GEM_DOMAIN_GTT |
+ 							AMDGPU_GEM_DOMAIN_CPU);
+-			abo->placements[0].fpfn = adev->gmc.visible_vram_size >> PAGE_SHIFT;
+-			abo->placements[0].lpfn = 0;
++			abo->placements[0].res_start = adev->gmc.visible_vram_size;
++			abo->placements[0].res_end = 0;
+ 			abo->placement.busy_placement = &abo->placements[1];
+ 			abo->placement.num_busy_placement = 1;
+ 		} else {
+@@ -518,9 +518,9 @@ static int amdgpu_bo_move(struct ttm_buffer_object *bo, bool evict,
+ 		      new_mem->mem_type == TTM_PL_VRAM) ||
+ 		     (old_mem->mem_type == TTM_PL_VRAM &&
+ 		      new_mem->mem_type == TTM_PL_SYSTEM))) {
+-			hop->fpfn = 0;
+-			hop->lpfn = 0;
+-			hop->mem_type = TTM_PL_TT;
++			hop->res_start = 0;
++			hop->res_end = 0;
++			hop->res_type = TTM_PL_TT;
+ 			hop->flags = TTM_PL_FLAG_TEMPORARY;
+ 			return -EMULTIHOP;
+ 		}
+@@ -932,9 +932,9 @@ int amdgpu_ttm_alloc_gart(struct ttm_buffer_object *bo)
+ 	placement.placement = &placements;
+ 	placement.num_busy_placement = 1;
+ 	placement.busy_placement = &placements;
+-	placements.fpfn = 0;
+-	placements.lpfn = adev->gmc.gart_size >> PAGE_SHIFT;
+-	placements.mem_type = TTM_PL_TT;
++	placements.res_start = 0;
++	placements.res_end = adev->gmc.gart_size;
++	placements.res_type = TTM_PL_TT;
+ 	placements.flags = bo->resource->placement;
+ 
+ 	r = ttm_bo_mem_space(bo, &placement, &tmp, &ctx);
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c
+index 632a6ded5735..cbfefbee9bb6 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c
+@@ -543,8 +543,8 @@ static void amdgpu_uvd_force_into_uvd_segment(struct amdgpu_bo *abo)
+ {
+ 	int i;
+ 	for (i = 0; i < abo->placement.num_placement; ++i) {
+-		abo->placements[i].fpfn = 0 >> PAGE_SHIFT;
+-		abo->placements[i].lpfn = (256 * 1024 * 1024) >> PAGE_SHIFT;
++		abo->placements[i].res_start = 0;
++		abo->placements[i].res_end = 256 * 1024 * 1024;
+ 	}
+ }
+ 
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_vce.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_vce.c
+index 2fb61410b1c0..3471b4c59161 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_vce.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_vce.c
+@@ -600,20 +600,21 @@ static int amdgpu_vce_validate_bo(struct amdgpu_cs_parser *p,
+ 	int64_t offset = ((uint64_t)size) * ((int64_t)index);
+ 	struct ttm_operation_ctx ctx = { false, false };
+ 	struct amdgpu_bo_va_mapping *mapping;
+-	unsigned i, fpfn, lpfn;
++	u64 res_start, res_end;
+ 	struct amdgpu_bo *bo;
+ 	uint64_t addr;
++	unsigned int i;
+ 	int r;
+ 
+ 	addr = ((uint64_t)amdgpu_ib_get_value(ib, lo)) |
+ 	       ((uint64_t)amdgpu_ib_get_value(ib, hi)) << 32;
+ 	if (index >= 0) {
+ 		addr += offset;
+-		fpfn = PAGE_ALIGN(offset) >> PAGE_SHIFT;
+-		lpfn = 0x100000000ULL >> PAGE_SHIFT;
++		res_start = PAGE_ALIGN(offset);
++		res_end = 0x100000000ULL;
+ 	} else {
+-		fpfn = 0;
+-		lpfn = (0x100000000ULL - PAGE_ALIGN(offset)) >> PAGE_SHIFT;
++		res_start = 0;
++		res_end = 0x100000000ULL - PAGE_ALIGN(offset);
+ 	}
+ 
+ 	r = amdgpu_cs_find_mapping(p, addr, &bo, &mapping);
+@@ -624,9 +625,9 @@ static int amdgpu_vce_validate_bo(struct amdgpu_cs_parser *p,
+ 	}
+ 
+ 	for (i = 0; i < bo->placement.num_placement; ++i) {
+-		bo->placements[i].fpfn = max(bo->placements[i].fpfn, fpfn);
+-		bo->placements[i].lpfn = bo->placements[i].lpfn ?
+-			min(bo->placements[i].lpfn, lpfn) : lpfn;
++		bo->placements[i].res_start = max(bo->placements[i].res_start, res_start);
++		bo->placements[i].res_end = bo->placements[i].res_end ?
++			min(bo->placements[i].res_end, res_end) : res_end;
+ 	}
+ 	return ttm_bo_validate(&bo->tbo, &bo->placement, &ctx);
+ }
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_vram_mgr.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_vram_mgr.c
+index 9fa1d814508a..813ca0a06d94 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_vram_mgr.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_vram_mgr.c
+@@ -389,17 +389,17 @@ static int amdgpu_vram_mgr_new(struct ttm_resource_manager *man,
+ 	struct amdgpu_vram_mgr *mgr = to_vram_mgr(man);
+ 	struct amdgpu_device *adev = to_amdgpu_device(mgr);
+ 	struct amdgpu_vram_mgr_resource *vres;
+-	u64 size, remaining_size, lpfn, fpfn;
++	u64 size, remaining_size, res_start, res_end;
+ 	struct drm_buddy *mm = &mgr->mm;
+ 	struct drm_buddy_block *block;
+ 	unsigned long pages_per_block;
+ 	int r;
+ 
+-	lpfn = (u64)place->lpfn << PAGE_SHIFT;
+-	if (!lpfn)
+-		lpfn = man->size;
++	res_end = place->res_end;
++	if (!res_end)
++		res_end = man->size;
+ 
+-	fpfn = (u64)place->fpfn << PAGE_SHIFT;
++	res_start = place->res_start;
+ 
+ 	max_bytes = adev->gmc.mc_vram_size;
+ 	if (tbo->type != ttm_bo_type_kernel)
+@@ -435,7 +435,7 @@ static int amdgpu_vram_mgr_new(struct ttm_resource_manager *man,
+ 	if (place->flags & TTM_PL_FLAG_TOPDOWN)
+ 		vres->flags |= DRM_BUDDY_TOPDOWN_ALLOCATION;
+ 
+-	if (fpfn || lpfn != mgr->mm.size)
++	if (res_start || res_end != mgr->mm.size)
+ 		/* Allocate blocks in desired range */
+ 		vres->flags |= DRM_BUDDY_RANGE_ALLOCATION;
+ 
+@@ -458,7 +458,7 @@ static int amdgpu_vram_mgr_new(struct ttm_resource_manager *man,
+ 
+ 		cur_size = size;
+ 
+-		if (fpfn + size != (u64)place->lpfn << PAGE_SHIFT) {
++		if (res_start + size != place->res_end) {
+ 			/*
+ 			 * Except for actual range allocation, modify the size and
+ 			 * min_block_size conforming to continuous flag enablement
+@@ -474,13 +474,13 @@ static int amdgpu_vram_mgr_new(struct ttm_resource_manager *man,
+ 				size = round_up(size, min_block_size);
+ 			}
+ 		}
+-
+-		r = drm_buddy_alloc_blocks(mm, fpfn,
+-					   lpfn,
++		r = drm_buddy_alloc_blocks(mm, res_start,
++					   res_end,
+ 					   size,
+ 					   min_block_size,
+ 					   &vres->blocks,
+ 					   vres->flags);
++
+ 		if (unlikely(r))
+ 			goto error_free_blocks;
+ 
+@@ -740,13 +740,11 @@ static bool amdgpu_vram_mgr_intersects(struct ttm_resource_manager *man,
+ 
+ 	/* Check each drm buddy block individually */
+ 	list_for_each_entry(block, &mgr->blocks, link) {
+-		unsigned long fpfn =
+-			amdgpu_vram_mgr_block_start(block) >> PAGE_SHIFT;
+-		unsigned long lpfn = fpfn +
+-			(amdgpu_vram_mgr_block_size(block) >> PAGE_SHIFT);
++		u64 res_start  = amdgpu_vram_mgr_block_start(block);
++		u64 res_end = res_start + amdgpu_vram_mgr_block_size(block);
+ 
+-		if (place->fpfn < lpfn &&
+-		    (!place->lpfn || place->lpfn > fpfn))
++		if (place->res_start < res_end &&
++		    (!place->res_end || place->res_end > res_start))
+ 			return true;
+ 	}
+ 
+@@ -773,13 +771,11 @@ static bool amdgpu_vram_mgr_compatible(struct ttm_resource_manager *man,
+ 
+ 	/* Check each drm buddy block individually */
+ 	list_for_each_entry(block, &mgr->blocks, link) {
+-		unsigned long fpfn =
+-			amdgpu_vram_mgr_block_start(block) >> PAGE_SHIFT;
+-		unsigned long lpfn = fpfn +
+-			(amdgpu_vram_mgr_block_size(block) >> PAGE_SHIFT);
++		u64 res_start = amdgpu_vram_mgr_block_start(block);
++		u64 res_end = res_start + amdgpu_vram_mgr_block_size(block);
+ 
+-		if (fpfn < place->fpfn ||
+-		    (place->lpfn && lpfn > place->lpfn))
++		if (res_start < place->res_start ||
++		    (place->res_end && res_end > place->res_end))
+ 			return false;
+ 	}
+ 
+diff --git a/drivers/gpu/drm/drm_gem_vram_helper.c b/drivers/gpu/drm/drm_gem_vram_helper.c
+index 0bea3df2a16d..ffd52e52f663 100644
+--- a/drivers/gpu/drm/drm_gem_vram_helper.c
++++ b/drivers/gpu/drm/drm_gem_vram_helper.c
+@@ -150,12 +150,12 @@ static void drm_gem_vram_placement(struct drm_gem_vram_object *gbo,
+ 	gbo->placement.busy_placement = gbo->placements;
+ 
+ 	if (pl_flag & DRM_GEM_VRAM_PL_FLAG_VRAM) {
+-		gbo->placements[c].mem_type = TTM_PL_VRAM;
++		gbo->placements[c].res_type = TTM_PL_VRAM;
+ 		gbo->placements[c++].flags = invariant_flags;
+ 	}
+ 
+ 	if (pl_flag & DRM_GEM_VRAM_PL_FLAG_SYSTEM || !c) {
+-		gbo->placements[c].mem_type = TTM_PL_SYSTEM;
++		gbo->placements[c].res_type = TTM_PL_SYSTEM;
+ 		gbo->placements[c++].flags = invariant_flags;
+ 	}
+ 
+@@ -163,8 +163,8 @@ static void drm_gem_vram_placement(struct drm_gem_vram_object *gbo,
+ 	gbo->placement.num_busy_placement = c;
+ 
+ 	for (i = 0; i < c; ++i) {
+-		gbo->placements[i].fpfn = 0;
+-		gbo->placements[i].lpfn = 0;
++		gbo->placements[i].res_start = 0;
++		gbo->placements[i].res_start = 0;
+ 	}
+ }
+ 
+@@ -918,7 +918,7 @@ static int bo_driver_move(struct ttm_buffer_object *bo,
+ 
+ 	if (!bo->resource) {
+ 		if (new_mem->mem_type != TTM_PL_SYSTEM) {
+-			hop->mem_type = TTM_PL_SYSTEM;
++			hop->res_type = TTM_PL_SYSTEM;
+ 			hop->flags = TTM_PL_FLAG_TEMPORARY;
+ 			return -EMULTIHOP;
+ 		}
+diff --git a/drivers/gpu/drm/i915/gem/i915_gem_ttm.c b/drivers/gpu/drm/i915/gem/i915_gem_ttm.c
+index 341b94672abc..eae8d7c69c04 100644
+--- a/drivers/gpu/drm/i915/gem/i915_gem_ttm.c
++++ b/drivers/gpu/drm/i915/gem/i915_gem_ttm.c
+@@ -56,9 +56,9 @@ struct i915_ttm_tt {
+ };
+ 
+ static const struct ttm_place sys_placement_flags = {
+-	.fpfn = 0,
+-	.lpfn = 0,
+-	.mem_type = I915_PL_SYSTEM,
++	.res_start = 0,
++	.res_end = 0,
++	.res_type = I915_PL_SYSTEM,
+ 	.flags = 0,
+ };
+ 
+@@ -132,7 +132,7 @@ i915_ttm_place_from_region(const struct intel_memory_region *mr,
+ 			   unsigned int flags)
+ {
+ 	memset(place, 0, sizeof(*place));
+-	place->mem_type = intel_region_to_ttm_type(mr);
++	place->res_type = intel_region_to_ttm_type(mr);
+ 
+ 	if (mr->type == INTEL_MEMORY_SYSTEM)
+ 		return;
+@@ -140,17 +140,17 @@ i915_ttm_place_from_region(const struct intel_memory_region *mr,
+ 	if (flags & I915_BO_ALLOC_CONTIGUOUS)
+ 		place->flags |= TTM_PL_FLAG_CONTIGUOUS;
+ 	if (offset != I915_BO_INVALID_OFFSET) {
+-		WARN_ON(overflows_type(offset >> PAGE_SHIFT, place->fpfn));
+-		place->fpfn = offset >> PAGE_SHIFT;
+-		WARN_ON(overflows_type(place->fpfn + (size >> PAGE_SHIFT), place->lpfn));
+-		place->lpfn = place->fpfn + (size >> PAGE_SHIFT);
++		WARN_ON(overflows_type(offset, place->res_start));
++		place->res_start = offset;
++		WARN_ON(overflows_type(place->res_start + size, place->res_end));
++		place->res_end = place->res_start + size;
+ 	} else if (mr->io_size && mr->io_size < mr->total) {
+ 		if (flags & I915_BO_ALLOC_GPU_ONLY) {
+ 			place->flags |= TTM_PL_FLAG_TOPDOWN;
+ 		} else {
+-			place->fpfn = 0;
+-			WARN_ON(overflows_type(mr->io_size >> PAGE_SHIFT, place->lpfn));
+-			place->lpfn = mr->io_size >> PAGE_SHIFT;
++			place->res_start = 0;
++			WARN_ON(overflows_type(mr->io_size, place->res_end));
++			place->res_end = mr->io_size;
+ 		}
+ 	}
+ }
+diff --git a/drivers/gpu/drm/i915/gem/i915_gem_ttm_move.c b/drivers/gpu/drm/i915/gem/i915_gem_ttm_move.c
+index d030182ca176..544f86dd3d17 100644
+--- a/drivers/gpu/drm/i915/gem/i915_gem_ttm_move.c
++++ b/drivers/gpu/drm/i915/gem/i915_gem_ttm_move.c
+@@ -583,7 +583,7 @@ int i915_ttm_move(struct ttm_buffer_object *bo, bool evict,
+ 
+ 	if (!bo->resource) {
+ 		if (dst_mem->mem_type != TTM_PL_SYSTEM) {
+-			hop->mem_type = TTM_PL_SYSTEM;
++			hop->res_type = TTM_PL_SYSTEM;
+ 			hop->flags = TTM_PL_FLAG_TEMPORARY;
+ 			return -EMULTIHOP;
+ 		}
+diff --git a/drivers/gpu/drm/i915/i915_ttm_buddy_manager.c b/drivers/gpu/drm/i915/i915_ttm_buddy_manager.c
+index a72698a2dbc8..2ac29a875c82 100644
+--- a/drivers/gpu/drm/i915/i915_ttm_buddy_manager.c
++++ b/drivers/gpu/drm/i915/i915_ttm_buddy_manager.c
+@@ -19,9 +19,9 @@ struct i915_ttm_buddy_manager {
+ 	struct drm_buddy mm;
+ 	struct list_head reserved;
+ 	struct mutex lock;
+-	unsigned long visible_size;
+-	unsigned long visible_avail;
+-	unsigned long visible_reserved;
++	u64 visible_size;
++	u64 visible_avail;
++	u64 visible_reserved;
+ 	u64 default_page_size;
+ };
+ 
+@@ -39,14 +39,14 @@ static int i915_ttm_buddy_man_alloc(struct ttm_resource_manager *man,
+ 	struct i915_ttm_buddy_manager *bman = to_buddy_manager(man);
+ 	struct i915_ttm_buddy_resource *bman_res;
+ 	struct drm_buddy *mm = &bman->mm;
+-	unsigned long n_pages, lpfn;
+ 	u64 min_page_size;
++	u64 res_end;
+ 	u64 size;
+ 	int err;
+ 
+-	lpfn = place->lpfn;
+-	if (!lpfn)
+-		lpfn = man->size;
++	res_end = place->res_end;
++	if (!res_end)
++		res_end = man->size;
+ 
+ 	bman_res = kzalloc(sizeof(*bman_res), GFP_KERNEL);
+ 	if (!bman_res)
+@@ -59,7 +59,7 @@ static int i915_ttm_buddy_man_alloc(struct ttm_resource_manager *man,
+ 	if (place->flags & TTM_PL_FLAG_TOPDOWN)
+ 		bman_res->flags |= DRM_BUDDY_TOPDOWN_ALLOCATION;
+ 
+-	if (place->fpfn || lpfn != man->size)
++	if (place->res_start || res_end != man->size)
+ 		bman_res->flags |= DRM_BUDDY_RANGE_ALLOCATION;
+ 
+ 	GEM_BUG_ON(!bman_res->base.size);
+@@ -72,35 +72,32 @@ static int i915_ttm_buddy_man_alloc(struct ttm_resource_manager *man,
+ 	GEM_BUG_ON(min_page_size < mm->chunk_size);
+ 	GEM_BUG_ON(!IS_ALIGNED(size, min_page_size));
+ 
+-	if (place->fpfn + PFN_UP(bman_res->base.size) != place->lpfn &&
++	if (place->res_start + bman_res->base.size != place->res_end &&
+ 	    place->flags & TTM_PL_FLAG_CONTIGUOUS) {
+-		unsigned long pages;
+ 
+ 		size = roundup_pow_of_two(size);
+ 		min_page_size = size;
+ 
+-		pages = size >> ilog2(mm->chunk_size);
+-		if (pages > lpfn)
+-			lpfn = pages;
++		if (size  > res_end)
++			res_end = size;
+ 	}
+ 
+-	if (size > lpfn << PAGE_SHIFT) {
++	if (size > res_end) {
+ 		err = -E2BIG;
+ 		goto err_free_res;
+ 	}
+ 
+-	n_pages = size >> ilog2(mm->chunk_size);
+ 
+ 	mutex_lock(&bman->lock);
+-	if (lpfn <= bman->visible_size && n_pages > bman->visible_avail) {
++	if (res_end <= bman->visible_size && size > bman->visible_avail) {
+ 		mutex_unlock(&bman->lock);
+ 		err = -ENOSPC;
+ 		goto err_free_res;
+ 	}
+ 
+-	err = drm_buddy_alloc_blocks(mm, (u64)place->fpfn << PAGE_SHIFT,
+-				     (u64)lpfn << PAGE_SHIFT,
+-				     (u64)n_pages << PAGE_SHIFT,
++	err = drm_buddy_alloc_blocks(mm, place->res_start,
++				     res_end,
++				     size,
+ 				     min_page_size,
+ 				     &bman_res->blocks,
+ 				     bman_res->flags);
+@@ -115,18 +112,17 @@ static int i915_ttm_buddy_man_alloc(struct ttm_resource_manager *man,
+ 				     &bman_res->blocks);
+ 	}
+ 
+-	if (lpfn <= bman->visible_size) {
+-		bman_res->used_visible_size = PFN_UP(bman_res->base.size);
++	if (res_end <= bman->visible_size) {
++		bman_res->used_visible_size = bman_res->base.size;
+ 	} else {
+ 		struct drm_buddy_block *block;
+ 
+ 		list_for_each_entry(block, &bman_res->blocks, link) {
+-			unsigned long start =
+-				drm_buddy_block_offset(block) >> PAGE_SHIFT;
++			u64 start = drm_buddy_block_offset(block);
+ 
+ 			if (start < bman->visible_size) {
+-				unsigned long end = start +
+-					(drm_buddy_block_size(mm, block) >> PAGE_SHIFT);
++				u64 end = start +
++					drm_buddy_block_size(mm, block);
+ 
+ 				bman_res->used_visible_size +=
+ 					min(end, bman->visible_size) - start;
+@@ -139,9 +135,9 @@ static int i915_ttm_buddy_man_alloc(struct ttm_resource_manager *man,
+ 
+ 	mutex_unlock(&bman->lock);
+ 
+-	if (place->lpfn - place->fpfn == n_pages)
+-		bman_res->base.start = place->fpfn;
+-	else if (lpfn <= bman->visible_size)
++	if (place->res_end - place->res_start == size)
++		bman_res->base.start = place->res_start;
++	else if (res_end <= bman->visible_size)
+ 		bman_res->base.start = 0;
+ 	else
+ 		bman_res->base.start = bman->visible_size;
+@@ -183,28 +179,26 @@ static bool i915_ttm_buddy_man_intersects(struct ttm_resource_manager *man,
+ 	struct drm_buddy *mm = &bman->mm;
+ 	struct drm_buddy_block *block;
+ 
+-	if (!place->fpfn && !place->lpfn)
++	if (!place->res_start && !place->res_end)
+ 		return true;
+ 
+-	GEM_BUG_ON(!place->lpfn);
++	GEM_BUG_ON(!place->res_end);
+ 
+ 	/*
+ 	 * If we just want something mappable then we can quickly check
+ 	 * if the current victim resource is using any of the CPU
+ 	 * visible portion.
+ 	 */
+-	if (!place->fpfn &&
+-	    place->lpfn == i915_ttm_buddy_man_visible_size(man))
++	if (!place->res_start &&
++	    place->res_end == i915_ttm_buddy_man_visible_size(man))
+ 		return bman_res->used_visible_size > 0;
+ 
+ 	/* Check each drm buddy block individually */
+ 	list_for_each_entry(block, &bman_res->blocks, link) {
+-		unsigned long fpfn =
+-			drm_buddy_block_offset(block) >> PAGE_SHIFT;
+-		unsigned long lpfn = fpfn +
+-			(drm_buddy_block_size(mm, block) >> PAGE_SHIFT);
++		u64 res_start =	drm_buddy_block_offset(block);
++		u64 res_end = res_start + drm_buddy_block_size(mm, block);
+ 
+-		if (place->fpfn < lpfn && place->lpfn > fpfn)
++		if (place->res_start < res_end && place->res_end > res_start)
+ 			return true;
+ 	}
+ 
+@@ -221,23 +215,21 @@ static bool i915_ttm_buddy_man_compatible(struct ttm_resource_manager *man,
+ 	struct drm_buddy *mm = &bman->mm;
+ 	struct drm_buddy_block *block;
+ 
+-	if (!place->fpfn && !place->lpfn)
++	if (!place->res_start && !place->res_end)
+ 		return true;
+ 
+-	GEM_BUG_ON(!place->lpfn);
++	GEM_BUG_ON(!place->res_end);
+ 
+-	if (!place->fpfn &&
+-	    place->lpfn == i915_ttm_buddy_man_visible_size(man))
+-		return bman_res->used_visible_size == PFN_UP(res->size);
++	if (!place->res_start &&
++	    place->res_end == i915_ttm_buddy_man_visible_size(man))
++		return bman_res->used_visible_size == res->size;
+ 
+ 	/* Check each drm buddy block individually */
+ 	list_for_each_entry(block, &bman_res->blocks, link) {
+-		unsigned long fpfn =
+-			drm_buddy_block_offset(block) >> PAGE_SHIFT;
+-		unsigned long lpfn = fpfn +
+-			(drm_buddy_block_size(mm, block) >> PAGE_SHIFT);
++		u64 res_start =	drm_buddy_block_offset(block);
++		u64 res_end = res_start + drm_buddy_block_size(mm, block);
+ 
+-		if (fpfn < place->fpfn || lpfn > place->lpfn)
++		if (res_start < place->res_start || res_end > place->res_end)
+ 			return false;
+ 	}
+ 
+@@ -254,11 +246,11 @@ static void i915_ttm_buddy_man_debug(struct ttm_resource_manager *man,
+ 	drm_printf(printer, "default_page_size: %lluKiB\n",
+ 		   bman->default_page_size >> 10);
+ 	drm_printf(printer, "visible_avail: %lluMiB\n",
+-		   (u64)bman->visible_avail << PAGE_SHIFT >> 20);
++		   (u64)bman->visible_avail >> 20);
+ 	drm_printf(printer, "visible_size: %lluMiB\n",
+-		   (u64)bman->visible_size << PAGE_SHIFT >> 20);
++		   (u64)bman->visible_size  >> 20);
+ 	drm_printf(printer, "visible_reserved: %lluMiB\n",
+-		   (u64)bman->visible_reserved << PAGE_SHIFT >> 20);
++		   (u64)bman->visible_reserved >> 20);
+ 
+ 	drm_buddy_print(&bman->mm, printer);
+ 
+@@ -325,7 +317,7 @@ int i915_ttm_buddy_man_init(struct ttm_device *bdev,
+ 	INIT_LIST_HEAD(&bman->reserved);
+ 	GEM_BUG_ON(default_page_size < chunk_size);
+ 	bman->default_page_size = default_page_size;
+-	bman->visible_size = visible_size >> PAGE_SHIFT;
++	bman->visible_size = visible_size;
+ 	bman->visible_avail = bman->visible_size;
+ 
+ 	man = &bman->manager;
+@@ -396,7 +388,7 @@ int i915_ttm_buddy_man_reserve(struct ttm_resource_manager *man,
+ {
+ 	struct i915_ttm_buddy_manager *bman = to_buddy_manager(man);
+ 	struct drm_buddy *mm = &bman->mm;
+-	unsigned long fpfn = start >> PAGE_SHIFT;
++	u64 res_start = start;
+ 	unsigned long flags = 0;
+ 	int ret;
+ 
+@@ -409,9 +401,9 @@ int i915_ttm_buddy_man_reserve(struct ttm_resource_manager *man,
+ 				     &bman->reserved,
+ 				     flags);
+ 
+-	if (fpfn < bman->visible_size) {
+-		unsigned long lpfn = fpfn + (size >> PAGE_SHIFT);
+-		unsigned long visible = min(lpfn, bman->visible_size) - fpfn;
++	if (res_start < bman->visible_size) {
++		u64 res_end = res_start + size;
++		u64 visible = min(res_end, bman->visible_size) - res_start;
+ 
+ 		bman->visible_reserved += visible;
+ 		bman->visible_avail -= visible;
+diff --git a/drivers/gpu/drm/i915/i915_ttm_buddy_manager.h b/drivers/gpu/drm/i915/i915_ttm_buddy_manager.h
+index d64620712830..d00e7dafb21d 100644
+--- a/drivers/gpu/drm/i915/i915_ttm_buddy_manager.h
++++ b/drivers/gpu/drm/i915/i915_ttm_buddy_manager.h
+@@ -32,7 +32,7 @@ struct i915_ttm_buddy_resource {
+ 	struct ttm_resource base;
+ 	struct list_head blocks;
+ 	unsigned long flags;
+-	unsigned long used_visible_size;
++	u64 used_visible_size;
+ 	struct drm_buddy *mm;
+ };
+ 
+diff --git a/drivers/gpu/drm/i915/intel_region_ttm.c b/drivers/gpu/drm/i915/intel_region_ttm.c
+index b7fbd5abb42a..29b80c735a4c 100644
+--- a/drivers/gpu/drm/i915/intel_region_ttm.c
++++ b/drivers/gpu/drm/i915/intel_region_ttm.c
+@@ -208,26 +208,26 @@ intel_region_ttm_resource_alloc(struct intel_memory_region *mem,
+ 	if (flags & I915_BO_ALLOC_CONTIGUOUS)
+ 		place.flags |= TTM_PL_FLAG_CONTIGUOUS;
+ 	if (offset != I915_BO_INVALID_OFFSET) {
+-		if (WARN_ON(overflows_type(offset >> PAGE_SHIFT, place.fpfn))) {
++		if (WARN_ON(overflows_type(offset, place.res_start))) {
+ 			ret = -E2BIG;
+ 			goto out;
+ 		}
+ 		place.fpfn = offset >> PAGE_SHIFT;
+-		if (WARN_ON(overflows_type(place.fpfn + (size >> PAGE_SHIFT), place.lpfn))) {
++		if (WARN_ON(overflows_type(place.res_start + size, place.res_end))) {
+ 			ret = -E2BIG;
+ 			goto out;
+ 		}
+-		place.lpfn = place.fpfn + (size >> PAGE_SHIFT);
++		place.res_end = place.res_start + size;
+ 	} else if (mem->io_size && mem->io_size < mem->total) {
+ 		if (flags & I915_BO_ALLOC_GPU_ONLY) {
+ 			place.flags |= TTM_PL_FLAG_TOPDOWN;
+ 		} else {
+-			place.fpfn = 0;
+-			if (WARN_ON(overflows_type(mem->io_size >> PAGE_SHIFT, place.lpfn))) {
++			place.res_start = 0;
++			if (WARN_ON(overflows_type(mem->io_size, place.res_end))) {
+ 				ret = -E2BIG;
+ 				goto out;
+ 			}
+-			place.lpfn = mem->io_size >> PAGE_SHIFT;
++			place.res_end = mem->io_size;
+ 		}
+ 	}
+ 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+index c2ec91cc845d..601d3a38a67e 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_bo.c
++++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+@@ -353,17 +353,17 @@ set_placement_list(struct ttm_place *pl, unsigned *n, uint32_t domain)
+ 	*n = 0;
+ 
+ 	if (domain & NOUVEAU_GEM_DOMAIN_VRAM) {
+-		pl[*n].mem_type = TTM_PL_VRAM;
++		pl[*n].res_type = TTM_PL_VRAM;
+ 		pl[*n].flags = 0;
+ 		(*n)++;
+ 	}
+ 	if (domain & NOUVEAU_GEM_DOMAIN_GART) {
+-		pl[*n].mem_type = TTM_PL_TT;
++		pl[*n].res_type = TTM_PL_TT;
+ 		pl[*n].flags = 0;
+ 		(*n)++;
+ 	}
+ 	if (domain & NOUVEAU_GEM_DOMAIN_CPU) {
+-		pl[*n].mem_type = TTM_PL_SYSTEM;
++		pl[*n].res_type = TTM_PL_SYSTEM;
+ 		pl[(*n)++].flags = 0;
+ 	}
+ }
+@@ -373,7 +373,8 @@ set_placement_range(struct nouveau_bo *nvbo, uint32_t domain)
+ {
+ 	struct nouveau_drm *drm = nouveau_bdev(nvbo->bo.bdev);
+ 	u64 vram_size = drm->client.device.info.ram_size;
+-	unsigned i, fpfn, lpfn;
++	u64 res_start, res_end;
++	unsigned int i;
+ 
+ 	if (drm->client.device.info.family == NV_DEVICE_INFO_V0_CELSIUS &&
+ 	    nvbo->mode && (domain & NOUVEAU_GEM_DOMAIN_VRAM) &&
+@@ -385,19 +386,19 @@ set_placement_range(struct nouveau_bo *nvbo, uint32_t domain)
+ 		 * at the same time.
+ 		 */
+ 		if (nvbo->zeta) {
+-			fpfn = (vram_size / 2) >> PAGE_SHIFT;
+-			lpfn = ~0;
++			res_start = vram_size / 2;
++			res_end = ~0;
+ 		} else {
+-			fpfn = 0;
+-			lpfn = (vram_size / 2) >> PAGE_SHIFT;
++			res_start = 0;
++			res_end = vram_size / 2;
+ 		}
+ 		for (i = 0; i < nvbo->placement.num_placement; ++i) {
+-			nvbo->placements[i].fpfn = fpfn;
+-			nvbo->placements[i].lpfn = lpfn;
++			nvbo->placements[i].res_start = res_start;
++			nvbo->placements[i].res_end = res_end;
+ 		}
+ 		for (i = 0; i < nvbo->placement.num_busy_placement; ++i) {
+-			nvbo->busy_placements[i].fpfn = fpfn;
+-			nvbo->busy_placements[i].lpfn = lpfn;
++			nvbo->busy_placements[i].res_start = res_start;
++			nvbo->busy_placements[i].res_end = res_end;
+ 		}
+ 	}
+ }
+@@ -1048,9 +1049,9 @@ nouveau_bo_move(struct ttm_buffer_object *bo, bool evict,
+ 		     new_reg->mem_type == TTM_PL_VRAM) ||
+ 		    (old_reg->mem_type == TTM_PL_VRAM &&
+ 		     new_reg->mem_type == TTM_PL_SYSTEM)) {
+-			hop->fpfn = 0;
+-			hop->lpfn = 0;
+-			hop->mem_type = TTM_PL_TT;
++			hop->res_start = 0;
++			hop->res_end = 0;
++			hop->res_type = TTM_PL_TT;
+ 			hop->flags = 0;
+ 			return -EMULTIHOP;
+ 		}
+@@ -1222,7 +1223,7 @@ vm_fault_t nouveau_ttm_fault_reserve_notify(struct ttm_buffer_object *bo)
+ 	struct nouveau_drm *drm = nouveau_bdev(bo->bdev);
+ 	struct nouveau_bo *nvbo = nouveau_bo(bo);
+ 	struct nvkm_device *device = nvxx_device(&drm->client.device);
+-	u32 mappable = device->func->resource_size(device, 1) >> PAGE_SHIFT;
++	u64 mappable = device->func->resource_size(device, 1);
+ 	int i, ret;
+ 
+ 	/* as long as the bo isn't in vram, and isn't tiled, we've got
+@@ -1245,13 +1246,13 @@ vm_fault_t nouveau_ttm_fault_reserve_notify(struct ttm_buffer_object *bo)
+ 			return 0;
+ 
+ 		for (i = 0; i < nvbo->placement.num_placement; ++i) {
+-			nvbo->placements[i].fpfn = 0;
+-			nvbo->placements[i].lpfn = mappable;
++			nvbo->placements[i].res_start = 0;
++			nvbo->placements[i].res_end = mappable;
+ 		}
+ 
+ 		for (i = 0; i < nvbo->placement.num_busy_placement; ++i) {
+-			nvbo->busy_placements[i].fpfn = 0;
+-			nvbo->busy_placements[i].lpfn = mappable;
++			nvbo->busy_placements[i].res_start = 0;
++			nvbo->busy_placements[i].res_end = mappable;
+ 		}
+ 
+ 		nouveau_bo_placement_set(nvbo, NOUVEAU_GEM_DOMAIN_VRAM, 0);
+diff --git a/drivers/gpu/drm/nouveau/nouveau_mem.c b/drivers/gpu/drm/nouveau/nouveau_mem.c
+index 25f31d5169e5..359eee62e7f8 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_mem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_mem.c
+@@ -194,11 +194,10 @@ nouveau_mem_intersects(struct ttm_resource *res,
+ 		       const struct ttm_place *place,
+ 		       size_t size)
+ {
+-	u32 num_pages = PFN_UP(size);
+ 
+ 	/* Don't evict BOs outside of the requested placement range */
+-	if (place->fpfn >= (res->start + num_pages) ||
+-	    (place->lpfn && place->lpfn <= res->start))
++	if (place->res_start >= res->start + size ||
++	   (place->res_end && place->res_end <= res->start))
+ 		return false;
+ 
+ 	return true;
+@@ -209,10 +208,9 @@ nouveau_mem_compatible(struct ttm_resource *res,
+ 		       const struct ttm_place *place,
+ 		       size_t size)
+ {
+-	u32 num_pages = PFN_UP(size);
+ 
+-	if (res->start < place->fpfn ||
+-	    (place->lpfn && (res->start + num_pages) > place->lpfn))
++	if (res->start < place->res_start ||
++	    (place->res_end && (res->start + size) > place->res_end))
+ 		return false;
+ 
+ 	return true;
+diff --git a/drivers/gpu/drm/qxl/qxl_object.c b/drivers/gpu/drm/qxl/qxl_object.c
+index 06a58dad5f5c..98633861b52c 100644
+--- a/drivers/gpu/drm/qxl/qxl_object.c
++++ b/drivers/gpu/drm/qxl/qxl_object.c
+@@ -68,28 +68,28 @@ void qxl_ttm_placement_from_domain(struct qxl_bo *qbo, u32 domain)
+ 	qbo->placement.placement = qbo->placements;
+ 	qbo->placement.busy_placement = qbo->placements;
+ 	if (domain == QXL_GEM_DOMAIN_VRAM) {
+-		qbo->placements[c].mem_type = TTM_PL_VRAM;
++		qbo->placements[c].res_type = TTM_PL_VRAM;
+ 		qbo->placements[c++].flags = pflag;
+ 	}
+ 	if (domain == QXL_GEM_DOMAIN_SURFACE) {
+-		qbo->placements[c].mem_type = TTM_PL_PRIV;
++		qbo->placements[c].res_type = TTM_PL_PRIV;
+ 		qbo->placements[c++].flags = pflag;
+-		qbo->placements[c].mem_type = TTM_PL_VRAM;
++		qbo->placements[c].res_type = TTM_PL_VRAM;
+ 		qbo->placements[c++].flags = pflag;
+ 	}
+ 	if (domain == QXL_GEM_DOMAIN_CPU) {
+-		qbo->placements[c].mem_type = TTM_PL_SYSTEM;
++		qbo->placements[c].res_type = TTM_PL_SYSTEM;
+ 		qbo->placements[c++].flags = pflag;
+ 	}
+ 	if (!c) {
+-		qbo->placements[c].mem_type = TTM_PL_SYSTEM;
++		qbo->placements[c].res_type = TTM_PL_SYSTEM;
+ 		qbo->placements[c++].flags = 0;
+ 	}
+ 	qbo->placement.num_placement = c;
+ 	qbo->placement.num_busy_placement = c;
+ 	for (i = 0; i < c; ++i) {
+-		qbo->placements[i].fpfn = 0;
+-		qbo->placements[i].lpfn = 0;
++		qbo->placements[i].res_start = 0;
++		qbo->placements[i].res_end = 0;
+ 	}
+ }
+ 
+diff --git a/drivers/gpu/drm/qxl/qxl_ttm.c b/drivers/gpu/drm/qxl/qxl_ttm.c
+index 1a82629bce3f..f91a253b88a5 100644
+--- a/drivers/gpu/drm/qxl/qxl_ttm.c
++++ b/drivers/gpu/drm/qxl/qxl_ttm.c
+@@ -52,9 +52,9 @@ static void qxl_evict_flags(struct ttm_buffer_object *bo,
+ {
+ 	struct qxl_bo *qbo;
+ 	static const struct ttm_place placements = {
+-		.fpfn = 0,
+-		.lpfn = 0,
+-		.mem_type = TTM_PL_SYSTEM,
++		.res_start = 0,
++		.res_end = 0,
++		.res_type = TTM_PL_SYSTEM,
+ 		.flags = 0
+ 	};
+ 
+@@ -145,7 +145,7 @@ static int qxl_bo_move(struct ttm_buffer_object *bo, bool evict,
+ 
+ 	if (!old_mem) {
+ 		if (new_mem->mem_type != TTM_PL_SYSTEM) {
+-			hop->mem_type = TTM_PL_SYSTEM;
++			hop->res_type = TTM_PL_SYSTEM;
+ 			hop->flags = TTM_PL_FLAG_TEMPORARY;
+ 			return -EMULTIHOP;
+ 		}
+diff --git a/drivers/gpu/drm/radeon/radeon_object.c b/drivers/gpu/drm/radeon/radeon_object.c
+index 10c0fbd9d2b4..bc2199079a4f 100644
+--- a/drivers/gpu/drm/radeon/radeon_object.c
++++ b/drivers/gpu/drm/radeon/radeon_object.c
+@@ -85,31 +85,31 @@ void radeon_ttm_placement_from_domain(struct radeon_bo *rbo, u32 domain)
+ 		 */
+ 		if ((rbo->flags & RADEON_GEM_NO_CPU_ACCESS) &&
+ 		    rbo->rdev->mc.visible_vram_size < rbo->rdev->mc.real_vram_size) {
+-			rbo->placements[c].fpfn =
+-				rbo->rdev->mc.visible_vram_size >> PAGE_SHIFT;
+-			rbo->placements[c].mem_type = TTM_PL_VRAM;
++			rbo->placements[c].res_start =
++				rbo->rdev->mc.visible_vram_size;
++			rbo->placements[c].res_type = TTM_PL_VRAM;
+ 			rbo->placements[c++].flags = 0;
+ 		}
+ 
+-		rbo->placements[c].fpfn = 0;
+-		rbo->placements[c].mem_type = TTM_PL_VRAM;
++		rbo->placements[c].res_start = 0;
++		rbo->placements[c].res_type = TTM_PL_VRAM;
+ 		rbo->placements[c++].flags = 0;
+ 	}
+ 
+ 	if (domain & RADEON_GEM_DOMAIN_GTT) {
+-		rbo->placements[c].fpfn = 0;
+-		rbo->placements[c].mem_type = TTM_PL_TT;
++		rbo->placements[c].res_start = 0;
++		rbo->placements[c].res_type = TTM_PL_TT;
+ 		rbo->placements[c++].flags = 0;
+ 	}
+ 
+ 	if (domain & RADEON_GEM_DOMAIN_CPU) {
+-		rbo->placements[c].fpfn = 0;
+-		rbo->placements[c].mem_type = TTM_PL_SYSTEM;
++		rbo->placements[c].res_start = 0;
++		rbo->placements[c].res_type = TTM_PL_SYSTEM;
+ 		rbo->placements[c++].flags = 0;
+ 	}
+ 	if (!c) {
+-		rbo->placements[c].fpfn = 0;
+-		rbo->placements[c].mem_type = TTM_PL_SYSTEM;
++		rbo->placements[c].res_start = 0;
++		rbo->placements[c].res_type = TTM_PL_SYSTEM;
+ 		rbo->placements[c++].flags = 0;
+ 	}
+ 
+@@ -118,12 +118,12 @@ void radeon_ttm_placement_from_domain(struct radeon_bo *rbo, u32 domain)
+ 
+ 	for (i = 0; i < c; ++i) {
+ 		if ((rbo->flags & RADEON_GEM_CPU_ACCESS) &&
+-		    (rbo->placements[i].mem_type == TTM_PL_VRAM) &&
+-		    !rbo->placements[i].fpfn)
+-			rbo->placements[i].lpfn =
+-				rbo->rdev->mc.visible_vram_size >> PAGE_SHIFT;
++		    (rbo->placements[i].res_type == TTM_PL_VRAM) &&
++		    !rbo->placements[i].res_start)
++			rbo->placements[i].res_end =
++				rbo->rdev->mc.visible_vram_size;
+ 		else
+-			rbo->placements[i].lpfn = 0;
++			rbo->placements[i].res_end = 0;
+ 	}
+ }
+ 
+@@ -308,13 +308,13 @@ int radeon_bo_pin_restricted(struct radeon_bo *bo, u32 domain, u64 max_offset,
+ 	radeon_ttm_placement_from_domain(bo, domain);
+ 	for (i = 0; i < bo->placement.num_placement; i++) {
+ 		/* force to pin into visible video ram */
+-		if ((bo->placements[i].mem_type == TTM_PL_VRAM) &&
++		if ((bo->placements[i].res_type == TTM_PL_VRAM) &&
+ 		    !(bo->flags & RADEON_GEM_NO_CPU_ACCESS) &&
+ 		    (!max_offset || max_offset > bo->rdev->mc.visible_vram_size))
+-			bo->placements[i].lpfn =
+-				bo->rdev->mc.visible_vram_size >> PAGE_SHIFT;
++			bo->placements[i].res_end =
++				bo->rdev->mc.visible_vram_size;
+ 		else
+-			bo->placements[i].lpfn = max_offset >> PAGE_SHIFT;
++			bo->placements[i].res_end = max_offset;
+ 	}
+ 
+ 	r = ttm_bo_validate(&bo->tbo, &bo->placement, &ctx);
+@@ -726,7 +726,7 @@ vm_fault_t radeon_bo_fault_reserve_notify(struct ttm_buffer_object *bo)
+ 	struct ttm_operation_ctx ctx = { false, false };
+ 	struct radeon_device *rdev;
+ 	struct radeon_bo *rbo;
+-	unsigned long offset, size, lpfn;
++	u64 offset, size, res_end;
+ 	int i, r;
+ 
+ 	if (!radeon_ttm_bo_is_radeon_bo(bo))
+@@ -748,12 +748,12 @@ vm_fault_t radeon_bo_fault_reserve_notify(struct ttm_buffer_object *bo)
+ 
+ 	/* hurrah the memory is not visible ! */
+ 	radeon_ttm_placement_from_domain(rbo, RADEON_GEM_DOMAIN_VRAM);
+-	lpfn =	rdev->mc.visible_vram_size >> PAGE_SHIFT;
++	res_end = rdev->mc.visible_vram_size;
+ 	for (i = 0; i < rbo->placement.num_placement; i++) {
+ 		/* Force into visible VRAM */
+-		if ((rbo->placements[i].mem_type == TTM_PL_VRAM) &&
+-		    (!rbo->placements[i].lpfn || rbo->placements[i].lpfn > lpfn))
+-			rbo->placements[i].lpfn = lpfn;
++		if ((rbo->placements[i].res_type == TTM_PL_VRAM) &&
++		    (!rbo->placements[i].res_end || rbo->placements[i].res_end > res_end))
++			rbo->placements[i].res_end = res_end;
+ 	}
+ 	r = ttm_bo_validate(bo, &rbo->placement, &ctx);
+ 	if (unlikely(r == -ENOMEM)) {
+diff --git a/drivers/gpu/drm/radeon/radeon_ttm.c b/drivers/gpu/drm/radeon/radeon_ttm.c
+index 2220cdf6a3f6..5b14597b0ac9 100644
+--- a/drivers/gpu/drm/radeon/radeon_ttm.c
++++ b/drivers/gpu/drm/radeon/radeon_ttm.c
+@@ -83,9 +83,9 @@ static void radeon_evict_flags(struct ttm_buffer_object *bo,
+ 				struct ttm_placement *placement)
+ {
+ 	static const struct ttm_place placements = {
+-		.fpfn = 0,
+-		.lpfn = 0,
+-		.mem_type = TTM_PL_SYSTEM,
++		.res_start = 0,
++		.res_end = 0,
++		.res_type = TTM_PL_SYSTEM,
+ 		.flags = 0
+ 	};
+ 
+@@ -105,7 +105,7 @@ static void radeon_evict_flags(struct ttm_buffer_object *bo,
+ 			radeon_ttm_placement_from_domain(rbo, RADEON_GEM_DOMAIN_CPU);
+ 		else if (rbo->rdev->mc.visible_vram_size < rbo->rdev->mc.real_vram_size &&
+ 			 bo->resource->start < (rbo->rdev->mc.visible_vram_size >> PAGE_SHIFT)) {
+-			unsigned fpfn = rbo->rdev->mc.visible_vram_size >> PAGE_SHIFT;
++			u64 res_start = rbo->rdev->mc.visible_vram_size;
+ 			int i;
+ 
+ 			/* Try evicting to the CPU inaccessible part of VRAM
+@@ -117,9 +117,9 @@ static void radeon_evict_flags(struct ttm_buffer_object *bo,
+ 							 RADEON_GEM_DOMAIN_GTT);
+ 			rbo->placement.num_busy_placement = 0;
+ 			for (i = 0; i < rbo->placement.num_placement; i++) {
+-				if (rbo->placements[i].mem_type == TTM_PL_VRAM) {
+-					if (rbo->placements[i].fpfn < fpfn)
+-						rbo->placements[i].fpfn = fpfn;
++				if (rbo->placements[i].res_type == TTM_PL_VRAM) {
++					if (rbo->placements[i].res_start < res_start)
++						rbo->placements[i].res_start = res_start;
+ 				} else {
+ 					rbo->placement.busy_placement =
+ 						&rbo->placements[i];
+@@ -237,9 +237,9 @@ static int radeon_bo_move(struct ttm_buffer_object *bo, bool evict,
+ 		     new_mem->mem_type == TTM_PL_VRAM) ||
+ 		    (old_mem->mem_type == TTM_PL_VRAM &&
+ 		     new_mem->mem_type == TTM_PL_SYSTEM)) {
+-			hop->fpfn = 0;
+-			hop->lpfn = 0;
+-			hop->mem_type = TTM_PL_TT;
++			hop->res_start = 0;
++			hop->res_end = 0;
++			hop->res_type = TTM_PL_TT;
+ 			hop->flags = 0;
+ 			return -EMULTIHOP;
+ 		}
+diff --git a/drivers/gpu/drm/radeon/radeon_uvd.c b/drivers/gpu/drm/radeon/radeon_uvd.c
+index a2cda184b2b2..7487894c0159 100644
+--- a/drivers/gpu/drm/radeon/radeon_uvd.c
++++ b/drivers/gpu/drm/radeon/radeon_uvd.c
+@@ -307,8 +307,8 @@ void radeon_uvd_force_into_uvd_segment(struct radeon_bo *rbo,
+ 	int i;
+ 
+ 	for (i = 0; i < rbo->placement.num_placement; ++i) {
+-		rbo->placements[i].fpfn = 0 >> PAGE_SHIFT;
+-		rbo->placements[i].lpfn = (256 * 1024 * 1024) >> PAGE_SHIFT;
++		rbo->placements[i].res_start = 0;
++		rbo->placements[i].res_end = 256 * 1024 * 1024;
+ 	}
+ 
+ 	/* If it must be in VRAM it must be in the first segment as well */
+@@ -321,8 +321,8 @@ void radeon_uvd_force_into_uvd_segment(struct radeon_bo *rbo,
+ 
+ 	/* add another 256MB segment */
+ 	rbo->placements[1] = rbo->placements[0];
+-	rbo->placements[1].fpfn += (256 * 1024 * 1024) >> PAGE_SHIFT;
+-	rbo->placements[1].lpfn += (256 * 1024 * 1024) >> PAGE_SHIFT;
++	rbo->placements[1].res_start += 256 * 1024 * 1024;
++	rbo->placements[1].res_end += 256 * 1024 * 1024;
+ 	rbo->placement.num_placement++;
+ 	rbo->placement.num_busy_placement++;
+ }
+diff --git a/drivers/gpu/drm/ttm/ttm_bo.c b/drivers/gpu/drm/ttm/ttm_bo.c
+index 882c2fa346f3..4d88b2f796ca 100644
+--- a/drivers/gpu/drm/ttm/ttm_bo.c
++++ b/drivers/gpu/drm/ttm/ttm_bo.c
+@@ -51,13 +51,13 @@ static void ttm_bo_mem_space_debug(struct ttm_buffer_object *bo,
+ {
+ 	struct drm_printer p = drm_debug_printer(TTM_PFX);
+ 	struct ttm_resource_manager *man;
+-	int i, mem_type;
++	int i, res_type;
+ 
+ 	for (i = 0; i < placement->num_placement; i++) {
+-		mem_type = placement->placement[i].mem_type;
++		res_type = placement->placement[i].res_type;
+ 		drm_printf(&p, "  placement[%d]=0x%08X (%d)\n",
+-			   i, placement->placement[i].flags, mem_type);
+-		man = ttm_manager_type(bo->bdev, mem_type);
++			   i, placement->placement[i].flags, res_type);
++		man = ttm_manager_type(bo->bdev, res_type);
+ 		ttm_resource_manager_debug(man, &p);
+ 	}
+ }
+@@ -531,7 +531,7 @@ static bool ttm_bo_evict_swapout_allowable(struct ttm_buffer_object *bo,
+ 			*busy = !ret;
+ 	}
+ 
+-	if (ret && place && (bo->resource->mem_type != place->mem_type ||
++	if (ret && place && (bo->resource->mem_type != place->res_type ||
+ 		!bo->bdev->funcs->eviction_valuable(bo, place))) {
+ 		ret = false;
+ 		if (*locked) {
+@@ -725,7 +725,7 @@ static int ttm_bo_mem_force_space(struct ttm_buffer_object *bo,
+ 	struct ww_acquire_ctx *ticket;
+ 	int ret;
+ 
+-	man = ttm_manager_type(bdev, place->mem_type);
++	man = ttm_manager_type(bdev, place->res_type);
+ 	ticket = dma_resv_locking_ctx(bo->base.resv);
+ 	do {
+ 		ret = ttm_resource_alloc(bo, place, mem);
+@@ -777,7 +777,7 @@ int ttm_bo_mem_space(struct ttm_buffer_object *bo,
+ 		const struct ttm_place *place = &placement->placement[i];
+ 		struct ttm_resource_manager *man;
+ 
+-		man = ttm_manager_type(bdev, place->mem_type);
++		man = ttm_manager_type(bdev, place->res_type);
+ 		if (!man || !ttm_resource_manager_used(man))
+ 			continue;
+ 
+@@ -803,7 +803,7 @@ int ttm_bo_mem_space(struct ttm_buffer_object *bo,
+ 		const struct ttm_place *place = &placement->busy_placement[i];
+ 		struct ttm_resource_manager *man;
+ 
+-		man = ttm_manager_type(bdev, place->mem_type);
++		man = ttm_manager_type(bdev, place->res_type);
+ 		if (!man || !ttm_resource_manager_used(man))
+ 			continue;
+ 
+@@ -1128,7 +1128,7 @@ int ttm_bo_swapout(struct ttm_buffer_object *bo, struct ttm_operation_ctx *ctx,
+ 	 * as an indication that we're about to swap out.
+ 	 */
+ 	memset(&place, 0, sizeof(place));
+-	place.mem_type = bo->resource->mem_type;
++	place.res_type = bo->resource->mem_type;
+ 	if (!ttm_bo_evict_swapout_allowable(bo, ctx, &place, &locked, NULL))
+ 		return -EBUSY;
+ 
+@@ -1159,7 +1159,7 @@ int ttm_bo_swapout(struct ttm_buffer_object *bo, struct ttm_operation_ctx *ctx,
+ 		struct ttm_place hop;
+ 
+ 		memset(&hop, 0, sizeof(hop));
+-		place.mem_type = TTM_PL_SYSTEM;
++		place.res_type = TTM_PL_SYSTEM;
+ 		ret = ttm_resource_alloc(bo, &place, &evict_mem);
+ 		if (unlikely(ret))
+ 			goto out;
+diff --git a/drivers/gpu/drm/ttm/ttm_range_manager.c b/drivers/gpu/drm/ttm/ttm_range_manager.c
+index ae11d07eb63a..88871b5766d2 100644
+--- a/drivers/gpu/drm/ttm/ttm_range_manager.c
++++ b/drivers/gpu/drm/ttm/ttm_range_manager.c
+@@ -64,12 +64,12 @@ static int ttm_range_man_alloc(struct ttm_resource_manager *man,
+ 	struct ttm_range_mgr_node *node;
+ 	struct drm_mm *mm = &rman->mm;
+ 	enum drm_mm_insert_mode mode;
+-	unsigned long lpfn;
++	u64 res_end;
+ 	int ret;
+ 
+-	lpfn = place->lpfn;
+-	if (!lpfn)
+-		lpfn = man->size;
++	res_end = place->res_end;
++	if (!res_end)
++		res_end = man->size;
+ 
+ 	node = kzalloc(struct_size(node, mm_nodes, 1), GFP_KERNEL);
+ 	if (!node)
+@@ -85,7 +85,8 @@ static int ttm_range_man_alloc(struct ttm_resource_manager *man,
+ 	ret = drm_mm_insert_node_in_range(mm, &node->mm_nodes[0],
+ 					  PFN_UP(node->base.size),
+ 					  bo->page_alignment, 0,
+-					  place->fpfn, lpfn, mode);
++					  place->res_start >> PAGE_SHIFT,
++					  res_end >> PAGE_SHIFT, mode);
+ 	spin_unlock(&rman->lock);
+ 
+ 	if (unlikely(ret)) {
+@@ -119,11 +120,10 @@ static bool ttm_range_man_intersects(struct ttm_resource_manager *man,
+ 				     size_t size)
+ {
+ 	struct drm_mm_node *node = &to_ttm_range_mgr_node(res)->mm_nodes[0];
+-	u32 num_pages = PFN_UP(size);
+ 
+ 	/* Don't evict BOs outside of the requested placement range */
+-	if (place->fpfn >= (node->start + num_pages) ||
+-	    (place->lpfn && place->lpfn <= node->start))
++	if (place->res_start >= (node->start + size) ||
++	    (place->res_end && place->res_end <= node->start))
+ 		return false;
+ 
+ 	return true;
+@@ -135,10 +135,9 @@ static bool ttm_range_man_compatible(struct ttm_resource_manager *man,
+ 				     size_t size)
+ {
+ 	struct drm_mm_node *node = &to_ttm_range_mgr_node(res)->mm_nodes[0];
+-	u32 num_pages = PFN_UP(size);
+ 
+-	if (node->start < place->fpfn ||
+-	    (place->lpfn && (node->start + num_pages) > place->lpfn))
++	if (node->start < place->res_start ||
++	    (place->res_end && (node->start + size) > place->res_end))
+ 		return false;
+ 
+ 	return true;
+diff --git a/drivers/gpu/drm/ttm/ttm_resource.c b/drivers/gpu/drm/ttm/ttm_resource.c
+index 7333f7a87a2f..c45c50841be3 100644
+--- a/drivers/gpu/drm/ttm/ttm_resource.c
++++ b/drivers/gpu/drm/ttm/ttm_resource.c
+@@ -179,7 +179,7 @@ void ttm_resource_init(struct ttm_buffer_object *bo,
+ 
+ 	res->start = 0;
+ 	res->size = bo->base.size;
+-	res->mem_type = place->mem_type;
++	res->mem_type = place->res_type;
+ 	res->placement = place->flags;
+ 	res->bus.addr = NULL;
+ 	res->bus.offset = 0;
+@@ -187,7 +187,7 @@ void ttm_resource_init(struct ttm_buffer_object *bo,
+ 	res->bus.caching = ttm_cached;
+ 	res->bo = bo;
+ 
+-	man = ttm_manager_type(bo->bdev, place->mem_type);
++	man = ttm_manager_type(bo->bdev, place->res_type);
+ 	spin_lock(&bo->bdev->lru_lock);
+ 	if (bo->pin_count)
+ 		list_add_tail(&res->lru, &bo->bdev->pinned);
+@@ -225,7 +225,7 @@ int ttm_resource_alloc(struct ttm_buffer_object *bo,
+ 		       struct ttm_resource **res_ptr)
+ {
+ 	struct ttm_resource_manager *man =
+-		ttm_manager_type(bo->bdev, place->mem_type);
++		ttm_manager_type(bo->bdev, place->res_type);
+ 	int ret;
+ 
+ 	ret = man->func->alloc(man, bo, place, res_ptr);
+@@ -330,7 +330,7 @@ static bool ttm_resource_places_compat(struct ttm_resource *res,
+ 		if (!ttm_resource_compatible(bdev, res, heap, bo->base.size))
+ 			continue;
+ 
+-		if ((res->mem_type == heap->mem_type) &&
++		if ((res->mem_type == heap->res_type) &&
+ 		    (!(heap->flags & TTM_PL_FLAG_CONTIGUOUS) ||
+ 		     (res->placement & TTM_PL_FLAG_CONTIGUOUS)))
+ 			return true;
+diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_bo.c b/drivers/gpu/drm/vmwgfx/vmwgfx_bo.c
+index 82094c137855..e1f34ce1eb1c 100644
+--- a/drivers/gpu/drm/vmwgfx/vmwgfx_bo.c
++++ b/drivers/gpu/drm/vmwgfx/vmwgfx_bo.c
+@@ -201,7 +201,7 @@ int vmw_bo_pin_in_start_of_vram(struct vmw_private *dev_priv,
+ 	vmw_bo_placement_set(buf,
+ 			     VMW_BO_DOMAIN_VRAM,
+ 			     VMW_BO_DOMAIN_VRAM);
+-	buf->places[0].lpfn = PFN_UP(bo->resource->size);
++	buf->places[0].res_end = bo->resource->size;
+ 	ret = ttm_bo_validate(bo, &buf->placement, &ctx);
+ 
+ 	/* For some reason we didn't end up at the start of vram */
+@@ -287,9 +287,9 @@ void vmw_bo_pin_reserved(struct vmw_bo *vbo, bool pin)
+ 	if (pin == !!bo->pin_count)
+ 		return;
+ 
+-	pl.fpfn = 0;
+-	pl.lpfn = 0;
+-	pl.mem_type = bo->resource->mem_type;
++	pl.res_start = 0;
++	pl.res_end = 0;
++	pl.res_type = bo->resource->mem_type;
+ 	pl.flags = bo->resource->placement;
+ 
+ 	memset(&placement, 0, sizeof(placement));
+@@ -752,47 +752,47 @@ set_placement_list(struct ttm_place *pl, u32 domain)
+ 	 * The placements are ordered according to our preferences
+ 	 */
+ 	if (domain & VMW_BO_DOMAIN_MOB) {
+-		pl[n].mem_type = VMW_PL_MOB;
++		pl[n].res_type = VMW_PL_MOB;
+ 		pl[n].flags = 0;
+-		pl[n].fpfn = 0;
+-		pl[n].lpfn = 0;
++		pl[n].res_start = 0;
++		pl[n].res_end = 0;
+ 		n++;
+ 	}
+ 	if (domain & VMW_BO_DOMAIN_GMR) {
+-		pl[n].mem_type = VMW_PL_GMR;
++		pl[n].res_type = VMW_PL_GMR;
+ 		pl[n].flags = 0;
+-		pl[n].fpfn = 0;
+-		pl[n].lpfn = 0;
++		pl[n].res_start = 0;
++		pl[n].res_end = 0;
+ 		n++;
+ 	}
+ 	if (domain & VMW_BO_DOMAIN_VRAM) {
+-		pl[n].mem_type = TTM_PL_VRAM;
++		pl[n].res_type = TTM_PL_VRAM;
+ 		pl[n].flags = 0;
+-		pl[n].fpfn = 0;
+-		pl[n].lpfn = 0;
++		pl[n].res_start = 0;
++		pl[n].res_end = 0;
+ 		n++;
+ 	}
+ 	if (domain & VMW_BO_DOMAIN_WAITABLE_SYS) {
+-		pl[n].mem_type = VMW_PL_SYSTEM;
++		pl[n].res_type = VMW_PL_SYSTEM;
+ 		pl[n].flags = 0;
+-		pl[n].fpfn = 0;
+-		pl[n].lpfn = 0;
++		pl[n].res_start = 0;
++		pl[n].res_end = 0;
+ 		n++;
+ 	}
+ 	if (domain & VMW_BO_DOMAIN_SYS) {
+-		pl[n].mem_type = TTM_PL_SYSTEM;
++		pl[n].res_type = TTM_PL_SYSTEM;
+ 		pl[n].flags = 0;
+-		pl[n].fpfn = 0;
+-		pl[n].lpfn = 0;
++		pl[n].res_start = 0;
++		pl[n].res_end = 0;
+ 		n++;
+ 	}
+ 
+ 	WARN_ON(!n);
+ 	if (!n) {
+-		pl[n].mem_type = TTM_PL_SYSTEM;
++		pl[n].res_type = TTM_PL_SYSTEM;
+ 		pl[n].flags = 0;
+-		pl[n].fpfn = 0;
+-		pl[n].lpfn = 0;
++		pl[n].res_start = 0;
++		pl[n].res_end = 0;
+ 		n++;
+ 	}
+ 	return n;
+@@ -812,7 +812,7 @@ void vmw_bo_placement_set(struct vmw_bo *bo, u32 domain, u32 busy_domain)
+ 	if (drm_debug_enabled(DRM_UT_DRIVER) && bo->tbo.resource) {
+ 		for (i = 0; i < pl->num_placement; ++i) {
+ 			if (bo->tbo.resource->mem_type == TTM_PL_SYSTEM ||
+-			    bo->tbo.resource->mem_type == pl->placement[i].mem_type)
++			    bo->tbo.resource->mem_type == pl->placement[i].res_type)
+ 				mem_compatible = true;
+ 		}
+ 		if (!mem_compatible)
+diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_buffer.c b/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_buffer.c
+index af8562c95cc3..7005ce47a2b3 100644
+--- a/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_buffer.c
++++ b/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_buffer.c
+@@ -30,23 +30,23 @@
+ #include <drm/ttm/ttm_placement.h>
+ 
+ static const struct ttm_place vram_placement_flags = {
+-	.fpfn = 0,
+-	.lpfn = 0,
+-	.mem_type = TTM_PL_VRAM,
++	.res_start = 0,
++	.res_end = 0,
++	.res_type = TTM_PL_VRAM,
+ 	.flags = 0
+ };
+ 
+ static const struct ttm_place sys_placement_flags = {
+-	.fpfn = 0,
+-	.lpfn = 0,
+-	.mem_type = TTM_PL_SYSTEM,
++	.res_start = 0,
++	.res_end = 0,
++	.res_type = TTM_PL_SYSTEM,
+ 	.flags = 0
+ };
+ 
+ static const struct ttm_place gmr_placement_flags = {
+-	.fpfn = 0,
+-	.lpfn = 0,
+-	.mem_type = VMW_PL_GMR,
++	.res_start = 0,
++	.res_end = 0,
++	.res_type = VMW_PL_GMR,
+ 	.flags = 0
+ };
+ 
+@@ -59,14 +59,14 @@ struct ttm_placement vmw_vram_placement = {
+ 
+ static const struct ttm_place vram_gmr_placement_flags[] = {
+ 	{
+-		.fpfn = 0,
+-		.lpfn = 0,
+-		.mem_type = TTM_PL_VRAM,
++		.res_start = 0,
++		.res_end = 0,
++		.res_type = TTM_PL_VRAM,
+ 		.flags = 0
+ 	}, {
+-		.fpfn = 0,
+-		.lpfn = 0,
+-		.mem_type = VMW_PL_GMR,
++		.res_start = 0,
++		.res_end = 0,
++		.res_type = VMW_PL_GMR,
+ 		.flags = 0
+ 	}
+ };
+diff --git a/include/drm/ttm/ttm_placement.h b/include/drm/ttm/ttm_placement.h
+index 8074d0f6cae5..de18b4bd542e 100644
+--- a/include/drm/ttm/ttm_placement.h
++++ b/include/drm/ttm/ttm_placement.h
+@@ -67,17 +67,17 @@
+ /**
+  * struct ttm_place
+  *
+- * @fpfn:	first valid page frame number to put the object
+- * @lpfn:	last valid page frame number to put the object
+- * @mem_type:	One of TTM_PL_* where the resource should be allocated from.
++ * @res_start:	first valid byte address to put the object
++ * @res_end:	last valid byte address to put the object
++ * @res_type:	One of TTM_PL_* where the resource should be allocated from.
+  * @flags:	memory domain and caching flags for the object
+  *
+  * Structure indicating a possible place to put an object.
+  */
+ struct ttm_place {
+-	unsigned	fpfn;
+-	unsigned	lpfn;
+-	uint32_t	mem_type;
++	u64		res_start;
++	u64		res_end;
++	uint32_t	res_type;
+ 	uint32_t	flags;
+ };
+ 
+-- 
+2.32.0
 
