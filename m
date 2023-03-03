@@ -1,75 +1,70 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3E7A6A9852
-	for <lists+nouveau@lfdr.de>; Fri,  3 Mar 2023 14:27:44 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C98E86A9965
+	for <lists+nouveau@lfdr.de>; Fri,  3 Mar 2023 15:28:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1593510E0A6;
-	Fri,  3 Mar 2023 13:27:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F28E410E5FD;
+	Fri,  3 Mar 2023 14:28:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E03E910E05D
- for <nouveau@lists.freedesktop.org>; Fri,  3 Mar 2023 13:27:39 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 391D510E5FE
+ for <nouveau@lists.freedesktop.org>; Fri,  3 Mar 2023 14:28:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1677850058;
+ s=mimecast20190719; t=1677853717;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=xZViEbKSFytDEA7BQHkIqtpOmiHcpYWTt+g+Ou0aIyc=;
- b=ZX+9IjTEimLAVNmOgi58M1EnAxh9xhie3wyEtiBAOWf7we0Sz7b0XSIDhaQftBflXmmTUY
- 2YBD3hPX3OdCJQYG73RX4m5PehJzfmi0Z3TTq4cXg47LhKRAQaAdrw83nocIb/XwxokqsM
- Rsvxk+kxFBCtfihVjcbpHlD2ZhLDs04=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=o3ApB4exZoXcG63nEHDI8L+9x3I4wPipSfbFGyH/f0E=;
+ b=USdkhU4fziI2iZQfQKcUB+2SOCI+oQXK6d99boC0PyOzWvSQjFTv7ZY2T9Je/KzavRfQZc
+ 0Wn77vvqBcQGCF3cCu9lXrQg7kwprTNd+WinpvhiUg866D6W9Mvg3q5QxExjQ1axVfa69O
+ XPvx3YxAK0RLreoUyNGluDQC4i+eVtQ=
+Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
+ [209.85.167.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-206-V075EOSBNjeQztdkY029Qg-1; Fri, 03 Mar 2023 08:27:37 -0500
-X-MC-Unique: V075EOSBNjeQztdkY029Qg-1
-Received: by mail-qt1-f198.google.com with SMTP id
- z22-20020ac86b96000000b003bfc3f97097so1461461qts.14
- for <nouveau@lists.freedesktop.org>; Fri, 03 Mar 2023 05:27:37 -0800 (PST)
+ us-mta-498-oKgbc7ZDOsSkMnlVpjPSaQ-1; Fri, 03 Mar 2023 09:28:35 -0500
+X-MC-Unique: oKgbc7ZDOsSkMnlVpjPSaQ-1
+Received: by mail-lf1-f70.google.com with SMTP id
+ n7-20020a056512310700b004cae66ea2bfso1102505lfb.0
+ for <nouveau@lists.freedesktop.org>; Fri, 03 Mar 2023 06:28:35 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677850057;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xZViEbKSFytDEA7BQHkIqtpOmiHcpYWTt+g+Ou0aIyc=;
- b=HVW8+OwDSmOEyAsOPDEU1Bp+Z0FKtASL1jzaynYjCMNfxabGWLT7HKyCaAq4pTWs7s
- f6cxILaEXaK2WeIG6fQByaJn0mI6MBcLjsu7Ch4rOFztOsEJhzboHnQ+HdFAl3WecUMb
- yARis+mWbaGoudLi+y8NGTRfwC5qwLaiV4RlBpXNaUkfPc4OCTxEAlay8JcWk1VVKbJD
- cuIfqNvgOJ7irkpZJ+3ndS/GWfitUHjiFEAHXLjYDsS4vChr5RGdT6W7+jzgGf4tgbvT
- roYE6tuWsNO9ZLHLT3pohBrZ9PfRLX/pxCZ+7gQ4wImOmiTXDuOhvdkZ0uxYreZzoPxo
- xgbg==
-X-Gm-Message-State: AO0yUKV4MPjWddWagj/a1MLZ464VNprrGb8VdgoYLQCMWgcaxvdj7LYL
- Oe/ssM5L424ieOS6a6TvBxS6qDZrs5qwLL43AEEMJ2e+9f0JiStb5WKPmTd5DGkFJ+jiVuLpzLn
- Hq1fOybEukHP/VGdcF1OCTvlhIQ==
-X-Received: by 2002:a05:6214:d02:b0:56e:a07b:f4d1 with SMTP id
- 2-20020a0562140d0200b0056ea07bf4d1mr2488036qvh.2.1677850057314; 
- Fri, 03 Mar 2023 05:27:37 -0800 (PST)
-X-Google-Smtp-Source: AK7set8dveykfGBVt70UyNuMYBmxTxxZX4pm0Ls634+/jDN5mktxgyqaetnfSuCm+FshuDVD566LrA==
-X-Received: by 2002:a05:6214:d02:b0:56e:a07b:f4d1 with SMTP id
- 2-20020a0562140d0200b0056ea07bf4d1mr2488014qvh.2.1677850057060; 
- Fri, 03 Mar 2023 05:27:37 -0800 (PST)
-Received: from dell-per740-01.7a2m.lab.eng.bos.redhat.com
- (nat-pool-bos-t.redhat.com. [66.187.233.206])
- by smtp.gmail.com with ESMTPSA id
- d11-20020a05620a158b00b0073b8745fd39sm1682277qkk.110.2023.03.03.05.27.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Mar 2023 05:27:36 -0800 (PST)
-From: Tom Rix <trix@redhat.com>
-To: bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com,
- airlied@gmail.com, daniel@ffwll.ch
-Date: Fri,  3 Mar 2023 08:27:31 -0500
-Message-Id: <20230303132731.1919329-1-trix@redhat.com>
-X-Mailer: git-send-email 2.27.0
+ d=1e100.net; s=20210112; t=1677853714;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=o3ApB4exZoXcG63nEHDI8L+9x3I4wPipSfbFGyH/f0E=;
+ b=UyncaYMJbcCIfVPc9PGQAF8KPIPX6idKiswidrCk6FpZZG/0Z12HeFbkTwhp94dQwP
+ BYMvsC6xhFia3+0Dg31Ji/qCc8sHSnc6Ip114slrOceQbUS0AEMLuAxYGb5ncD6wa6dx
+ Fc6i/3i+AoYLWgoJHASAetPv+krMTUAIAMPtGeI2NJoIH+3Pu/xubO+dvMIFtfKR2KU5
+ t69Qe2+28Fe039xJCLgDMARklDYaahDk3AeLdfpL79+fhJIwLVQ5q5vPDrm6dnf0vmbp
+ qWiEah91j+55VPw1xFEtjjTzw0iMyCFobrA4auDBkEtDWaZskZSay+O2+tQsaUp4FcI9
+ +n7w==
+X-Gm-Message-State: AO0yUKVqByKjSgEq3Qcf8KY4eKQ3J8oZJBGTGBHypDVbVKRQnNjw4zXv
+ BCJ9BtuBbFQOZjP6e8Ftg3rAzWRGMNmWst7ia9jHscutbg5sITv8icWuUgjokr4zsf1nXfRLYfb
+ hKjkqAfgZAA8+Lj77p+waHVCNS7hd7l7yiqemYQDzzQ==
+X-Received: by 2002:ac2:5927:0:b0:4d5:ca32:6aec with SMTP id
+ v7-20020ac25927000000b004d5ca326aecmr645061lfi.12.1677853714511; 
+ Fri, 03 Mar 2023 06:28:34 -0800 (PST)
+X-Google-Smtp-Source: AK7set89z3ZaDV+0l8hN22o89ZbCZILIi4QRjANWBxaYKra+nJigSS7Ho1XPgvAOO/WyESHVRzmPsFP0RA2BCA7iIf8=
+X-Received: by 2002:ac2:5927:0:b0:4d5:ca32:6aec with SMTP id
+ v7-20020ac25927000000b004d5ca326aecmr645049lfi.12.1677853714194; Fri, 03 Mar
+ 2023 06:28:34 -0800 (PST)
 MIME-Version: 1.0
+References: <20230303132731.1919329-1-trix@redhat.com>
+In-Reply-To: <20230303132731.1919329-1-trix@redhat.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Fri, 3 Mar 2023 15:28:21 +0100
+Message-ID: <CACO55tuMxp5M+zgG_p3QpXUfrPhcssPMz91tfMBFt5OVobOSaw@mail.gmail.com>
+To: Tom Rix <trix@redhat.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH] drm/nouveau/fifo: set
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/fifo: set
  gf100_fifo_nonstall_block_dump storage-class-specifier to static
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -83,36 +78,48 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Tom Rix <trix@redhat.com>
+ dri-devel@lists.freedesktop.org, bskeggs@redhat.com, daniel@ffwll.ch
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-gcc with W=1 reports
-drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: error:
-  no previous prototype for ‘gf100_fifo_nonstall_block’ [-Werror=missing-prototypes]
-  451 | gf100_fifo_nonstall_block(struct nvkm_event *event, int type, int index)
-      | ^~~~~~~~~~~~~~~~~~~~~~~~~
+Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
-gf100_fifo_nonstall_block is only used in gf100.c, so it should be static
+will push in a moment
 
-Signed-off-by: Tom Rix <trix@redhat.com>
----
- drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c
-index 5bb65258c36d..6c94451d0faa 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c
-@@ -447,7 +447,7 @@ gf100_fifo_nonstall_allow(struct nvkm_event *event, int type, int index)
- 	spin_unlock_irqrestore(&fifo->lock, flags);
- }
- 
--void
-+static void
- gf100_fifo_nonstall_block(struct nvkm_event *event, int type, int index)
- {
- 	struct nvkm_fifo *fifo = container_of(event, typeof(*fifo), nonstall.event);
--- 
-2.27.0
+On Fri, Mar 3, 2023 at 2:27 PM Tom Rix <trix@redhat.com> wrote:
+>
+> gcc with W=3D1 reports
+> drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c:451:1: error:
+>   no previous prototype for =E2=80=98gf100_fifo_nonstall_block=E2=80=99 [=
+-Werror=3Dmissing-prototypes]
+>   451 | gf100_fifo_nonstall_block(struct nvkm_event *event, int type, int=
+ index)
+>       | ^~~~~~~~~~~~~~~~~~~~~~~~~
+>
+> gf100_fifo_nonstall_block is only used in gf100.c, so it should be static
+>
+> Signed-off-by: Tom Rix <trix@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c b/drivers/g=
+pu/drm/nouveau/nvkm/engine/fifo/gf100.c
+> index 5bb65258c36d..6c94451d0faa 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gf100.c
+> @@ -447,7 +447,7 @@ gf100_fifo_nonstall_allow(struct nvkm_event *event, i=
+nt type, int index)
+>         spin_unlock_irqrestore(&fifo->lock, flags);
+>  }
+>
+> -void
+> +static void
+>  gf100_fifo_nonstall_block(struct nvkm_event *event, int type, int index)
+>  {
+>         struct nvkm_fifo *fifo =3D container_of(event, typeof(*fifo), non=
+stall.event);
+> --
+> 2.27.0
+>
 
