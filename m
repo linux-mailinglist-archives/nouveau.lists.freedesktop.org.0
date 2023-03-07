@@ -2,68 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AC296AD330
-	for <lists+nouveau@lfdr.de>; Tue,  7 Mar 2023 01:11:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BDE6B6AD339
+	for <lists+nouveau@lfdr.de>; Tue,  7 Mar 2023 01:20:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 165F710E271;
-	Tue,  7 Mar 2023 00:11:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E437510E286;
+	Tue,  7 Mar 2023 00:20:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DEE4B10E271
- for <nouveau@lists.freedesktop.org>; Tue,  7 Mar 2023 00:11:25 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 79CEA10E34B
+ for <nouveau@lists.freedesktop.org>; Tue,  7 Mar 2023 00:20:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1678147885;
+ s=mimecast20190719; t=1678148409;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=bFSOAGCFBzs2Dfwy4LmBFaGQi1+dg8AS24/ZjCcSYZs=;
- b=N8dN8RM3vXP8P05x9eDzxUgsnDLLMd+IzMT/Zp7lgetzHEENJLI+6l4HjduA3WzSYufZdT
- 50CLd78jHrB3U6TTA6PJsSKaP9MotRDBdWj66uRKgKzDW8MpXWEFFsyP/5qV6Ps/dzwbLb
- ABawDA7avt0GpGe0c3IefA3EE+6gNiQ=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=7+4tzxyqERGXd7AQ2o1b0aj9Gq2c77AeuI8QhLTg5i8=;
+ b=Gucy5EU/48KSZY6P3z7x8WMddzm7ZY7BYDAEl8Y/mj+3zd/IpViPYu9CwodmXQEChdqL95
+ Wp3nOAYlNXNH/Y6zSPwfcPan4cCtRvuhfZYJv4akxaGIEiFiMiV5YsQhUZPWxkl8a6Seq4
+ ZZUn57DMEbOpgoMpXMWQlo+D9VZSVx0=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-516-p06WAADTOrO0NpjaOblZLA-1; Mon, 06 Mar 2023 19:11:21 -0500
-X-MC-Unique: p06WAADTOrO0NpjaOblZLA-1
-Received: by mail-qk1-f200.google.com with SMTP id
- ou5-20020a05620a620500b007423e532628so6416132qkn.5
- for <nouveau@lists.freedesktop.org>; Mon, 06 Mar 2023 16:11:21 -0800 (PST)
+ us-mta-41-8I04OEsTPROXnZ5zD5sl_w-1; Mon, 06 Mar 2023 19:20:08 -0500
+X-MC-Unique: 8I04OEsTPROXnZ5zD5sl_w-1
+Received: by mail-qv1-f71.google.com with SMTP id
+ x10-20020ad440ca000000b005800220da38so5364730qvp.14
+ for <nouveau@lists.freedesktop.org>; Mon, 06 Mar 2023 16:20:08 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678147881;
+ d=1e100.net; s=20210112; t=1678148407;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fOzDuJrDxV1m0d9OGwSp4ESW3MVpzmUb4ORlvJ2wcQA=;
- b=wmjyjDIyiQ3wbdcWDMhC7z88UhgUA98a0BGJz+DLffo32DbbkrwFjTG4/CFqJdMY54
- 2Q7qbV6SXYnso/z0gBgYJY1jPMMwp8PIsdSchRbvoWVI9h2Cz4GsEQ0hZZhSMa1DnqHL
- g6WtjtamJtdTaSKu3r+KXANc5jZGs+uxkW7r6v0nB+rPPPdddygN7ak4qHcNyMSEgo7c
- SUjQQgZ8LCSPXfbGpvFevjG2QiTM+26wdevW3MxDM4VWEpL15q6KmLg499Jwa7onfpyd
- tKenSon0huwfJqyDQin/rC+OLwPiRifAD8GEOpJniFTVo+MVqbs/MnYoA2wF6Gry4W5U
- ZiGQ==
-X-Gm-Message-State: AO0yUKWfE0MyhmUkYxKNL2Y2/jzfdcRlKEpC864XmA5AfrC3qZ2GtF6k
- wfyctSY1S3otBHLqSPCtvfjonnabr8/knIZg2tlJEjMRLCalzhdC0ryjo8t06Vg3tzjSecoSO/q
- zPuywZH/BGEiFSZbta2lO2WxpqA==
-X-Received: by 2002:ac8:5751:0:b0:3b9:bc8c:c1f8 with SMTP id
- 17-20020ac85751000000b003b9bc8cc1f8mr28359397qtx.3.1678147881106; 
- Mon, 06 Mar 2023 16:11:21 -0800 (PST)
-X-Google-Smtp-Source: AK7set8BM7AUsiRefOt1umMJ4Dth06Cpb8323Q/aybM3/LmMXC+QAMfwEyfV8FMCNIXFRNS5DobkXw==
-X-Received: by 2002:ac8:5751:0:b0:3b9:bc8c:c1f8 with SMTP id
- 17-20020ac85751000000b003b9bc8cc1f8mr28359368qtx.3.1678147880861; 
- Mon, 06 Mar 2023 16:11:20 -0800 (PST)
+ bh=3OO5g3ulKc98Lo7VM2vnzz9iptcrpwzftjrdFER2j9g=;
+ b=3GHQ9U+2E+mjT9L4jdcbaP2dnHDU4FPAo6kQ2RKGuuDuSdExwj+7+4XuVulrNrHY75
+ WvaCqoSDJ8VG2tvulH5CH1GzeUmE6NwZuwhlOz/4V2Shchbwj/Wrzzlrwj8MNnLV+p0O
+ 6UvG7wEbscOqwjTuyJa+Q7LcSGHYrL6huTKgb5NY4kzQ8vSuNm7VZXfMM9SUkuM9jv81
+ XyaIFLOJSgqFRhIvOzwzIyEhW6BELK70uwuwBlpcykhHVnQ9dqMtt1DltwZ0S6pBGh3j
+ zqIvYt2cHTGkDq5jHVGlAHHZgCLj0K6ln/aC3t1mwFf3Ly6zbw0qu62uOV3kPlOJWJLl
+ KY6A==
+X-Gm-Message-State: AO0yUKUMhfZs5PT8x+FW8fFFBmJYVqaY2SS9q4tY3hVTiLAh0oa29K7X
+ J9EfCDKHeIj3WTJ3NbTEVszPH2MBEj0mGFIc3bhO08qjuFC1ovM816D3I0OBr/hvrL0pnDILFJF
+ bhUm1qP3qRZiyqsgg+qMuS8rVKQ==
+X-Received: by 2002:ac8:5e0c:0:b0:3bf:b1d6:359e with SMTP id
+ h12-20020ac85e0c000000b003bfb1d6359emr17210014qtx.7.1678148407652; 
+ Mon, 06 Mar 2023 16:20:07 -0800 (PST)
+X-Google-Smtp-Source: AK7set9G99b4/F24c6ODRtdenQOBsR+rNyjSK/ievkE2R8v6jyZs5TelbiEvYAAjwLxnvAJSnVjzCA==
+X-Received: by 2002:ac8:5e0c:0:b0:3bf:b1d6:359e with SMTP id
+ h12-20020ac85e0c000000b003bfb1d6359emr17209989qtx.7.1678148407373; 
+ Mon, 06 Mar 2023 16:20:07 -0800 (PST)
 Received: from ?IPv6:2600:4040:5c68:6800::feb? ([2600:4040:5c68:6800::feb])
  by smtp.gmail.com with ESMTPSA id
- m190-20020a3758c7000000b006ff8a122a1asm8411153qkb.78.2023.03.06.16.11.19
+ n132-20020a37408a000000b007425dade624sm8526056qka.41.2023.03.06.16.20.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Mar 2023 16:11:20 -0800 (PST)
-Message-ID: <5882bd80983ac04a32676f07622cba7d0e245e55.camel@redhat.com>
+ Mon, 06 Mar 2023 16:20:06 -0800 (PST)
+Message-ID: <cf9f2bba28420dd19e14f449f4049ed23cfc41a2.camel@redhat.com>
 From: Lyude Paul <lyude@redhat.com>
-To: Zheng Wang <zyytlz.wz@163.com>, nouveau@lists.freedesktop.org
-Date: Mon, 06 Mar 2023 19:11:18 -0500
-In-Reply-To: <20221029074654.203153-1-zyytlz.wz@163.com>
-References: <20221029074654.203153-1-zyytlz.wz@163.com>
+To: Deepak R Varma <drv@mailo.com>, Ben Skeggs <bskeggs@redhat.com>, Karol
+ Herbst <kherbst@redhat.com>, David Airlie <airlied@gmail.com>, Daniel
+ Vetter <daniel@ffwll.ch>,  dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org,  linux-kernel@vger.kernel.org
+Date: Mon, 06 Mar 2023 19:20:05 -0500
+In-Reply-To: <Y/+pDaHOgG1x8Py2@ubun2204.myguest.virtualbox.org>
+References: <Y/+pDaHOgG1x8Py2@ubun2204.myguest.virtualbox.org>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.44.4 (3.44.4-2.fc36)
 MIME-Version: 1.0
@@ -71,8 +74,8 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/mmu: fix use-after-free bug in
- nvkm_vmm_pfn_map
+Subject: Re: [Nouveau] [PATCH RESEND] drm/nouveau/hwmon: Use sysfs_emit in
+ show function callsbacks
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,46 +87,69 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alex000young@gmail.com, security@kernel.org, hackerzheng666@gmail.com,
- linux-kernel@vger.kernel.org, Julia.Lawall@inria.fr, bskeggs@redhat.com,
- daniel@ffwll.ch
+Cc: Praveen Kumar <kumarpraveen@linux.microsoft.com>,
+ Saurabh Singh Sengar <ssengar@microsoft.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Actually - could you resend this with dri-devel@lists.freedesktop.org added=
- to
-the cc list just to make patchwork happy?
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-On Sat, 2022-10-29 at 15:46 +0800, Zheng Wang wrote:
-> If it failed in kzalloc, vma will be freed in nvkm_vmm_node_merge.
-> The later use of vma will casue use after free.
+Will push upstream in a moment
+
+On Thu, 2023-03-02 at 01:05 +0530, Deepak R Varma wrote:
+> According to Documentation/filesystems/sysfs.rst, the show() callback
+> function of kobject attributes should strictly use sysfs_emit() instead
+> of sprintf() family functions. So, make this change.
+> Issue identified using the coccinelle device_attr_show.cocci script.
 >=20
-> Reported-by: Zheng Wang <hackerzheng666@gmail.com>
-> Reported-by: Zhuorao Yang <alex000young@gmail.com>
->=20
-> Fix it by returning to upper caller as soon as error occurs.
->=20
-> Signed-off-by: Zheng Wang <zyytlz.wz@163.com>
+> Signed-off-by: Deepak R Varma <drv@mailo.com>
 > ---
->  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
+> Note:
+>    Resending the patch for review and feedback. No functional changes.
 >=20
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/=
-drm/nouveau/nvkm/subdev/mmu/vmm.c
-> index ae793f400ba1..04befd28f80b 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-> @@ -1272,8 +1272,7 @@ nvkm_vmm_pfn_map(struct nvkm_vmm *vmm, u8 shift, u6=
-4 addr, u64 size, u64 *pfn)
->  =09=09=09=09=09=09       page -
->  =09=09=09=09=09=09       vmm->func->page, map);
->  =09=09=09if (WARN_ON(!tmp)) {
-> -=09=09=09=09ret =3D -ENOMEM;
-> -=09=09=09=09goto next;
-> +=09=09=09=09return -ENOMEM;
->  =09=09=09}
+>=20
+>  drivers/gpu/drm/nouveau/nouveau_hwmon.c | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_hwmon.c b/drivers/gpu/drm/no=
+uveau/nouveau_hwmon.c
+> index a7db7c31064b..e844be49e11e 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+> @@ -41,7 +41,7 @@ static ssize_t
+>  nouveau_hwmon_show_temp1_auto_point1_pwm(struct device *d,
+>  =09=09=09=09=09 struct device_attribute *a, char *buf)
+>  {
+> -=09return snprintf(buf, PAGE_SIZE, "%d\n", 100);
+> +=09return sysfs_emit(buf, "%d\n", 100);
+>  }
+>  static SENSOR_DEVICE_ATTR(temp1_auto_point1_pwm, 0444,
+>  =09=09=09  nouveau_hwmon_show_temp1_auto_point1_pwm, NULL, 0);
+> @@ -54,8 +54,8 @@ nouveau_hwmon_temp1_auto_point1_temp(struct device *d,
+>  =09struct nouveau_drm *drm =3D nouveau_drm(dev);
+>  =09struct nvkm_therm *therm =3D nvxx_therm(&drm->client.device);
 > =20
->  =09=09=09if ((tmp->mapped =3D map))
+> -=09return snprintf(buf, PAGE_SIZE, "%d\n",
+> -=09      therm->attr_get(therm, NVKM_THERM_ATTR_THRS_FAN_BOOST) * 1000);
+> +=09return sysfs_emit(buf, "%d\n",
+> +=09=09=09  therm->attr_get(therm, NVKM_THERM_ATTR_THRS_FAN_BOOST) * 1000=
+);
+>  }
+>  static ssize_t
+>  nouveau_hwmon_set_temp1_auto_point1_temp(struct device *d,
+> @@ -87,8 +87,8 @@ nouveau_hwmon_temp1_auto_point1_temp_hyst(struct device=
+ *d,
+>  =09struct nouveau_drm *drm =3D nouveau_drm(dev);
+>  =09struct nvkm_therm *therm =3D nvxx_therm(&drm->client.device);
+> =20
+> -=09return snprintf(buf, PAGE_SIZE, "%d\n",
+> -=09 therm->attr_get(therm, NVKM_THERM_ATTR_THRS_FAN_BOOST_HYST) * 1000);
+> +=09return sysfs_emit(buf, "%d\n",
+> +=09=09=09  therm->attr_get(therm, NVKM_THERM_ATTR_THRS_FAN_BOOST_HYST) *=
+ 1000);
+>  }
+>  static ssize_t
+>  nouveau_hwmon_set_temp1_auto_point1_temp_hyst(struct device *d,
 
 --=20
 Cheers,
