@@ -2,48 +2,84 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF3236F6BAA
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D8D76F6B90
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DEA8610E476;
-	Thu,  4 May 2023 12:32:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1980F10E454;
+	Thu,  4 May 2023 12:32:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from madras.collabora.co.uk (madras.collabora.co.uk
- [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4EEE010E7D0;
- Thu,  9 Mar 2023 09:48:46 +0000 (UTC)
-Received: from localhost (unknown [IPv6:2a01:e0a:2c:6930:5cf4:84a1:2763:fe0d])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: bbrezillon)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id 3F5B56603007;
- Thu,  9 Mar 2023 09:48:44 +0000 (GMT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1678355324;
- bh=A50/72yir9yl+4D3pjJl/L2YPO9X4ebuwpQ6QWEfGK8=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=BlA9bNQGTwENVcuchUmZU0zKRIQtfqHMv+XEHNt1n1px6HtnR7et8gClwpnnVdkIn
- IsLWvioyN29w7AqACudpFr57ZctauG6ZIgJFd8LftSXgf0CS38ZZzV83iRogQTFBWL
- sF11OCF68vbVN1Q1lGeMs89xhkNjZOMZN8s386GpenrH5dhZ3C9kzlB0ljekHfrbZ+
- aTBlrwC1DbsFNIaqc0c5qjzOEExd2mkcY8NUCtPlSfxkj0CgG9FVWYKTW4BaEycQ9Z
- SR9E5bo+zEr5A5xTgQqQyb0UFurgErllvE2vblGYI1jIncZB+DGGb/blpuN+cDwku2
- /qsm7DdJQybZA==
-Date: Thu, 9 Mar 2023 10:48:41 +0100
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Danilo Krummrich <dakr@redhat.com>
-Message-ID: <20230309104841.7c03d5b4@collabora.com>
-In-Reply-To: <20230309101243.1150506f@collabora.com>
-References: <20230217134422.14116-1-dakr@redhat.com>
- <20230309101243.1150506f@collabora.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.36; x86_64-redhat-linux-gnu)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D209310E995;
+ Fri, 10 Mar 2023 09:26:53 +0000 (UTC)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ o38-20020a05600c512600b003e8320d1c11so4488808wms.1; 
+ Fri, 10 Mar 2023 01:26:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=googlemail.com; s=20210112; t=1678440412;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mNL+f3pZ6bNpmj3kt1NLjVcEmx4ylNGYtgxCZ9dlKFA=;
+ b=Sd4qVuxJDQFuMLlCPFaJoDKvhwHA9HlXnyhXjoU1pFEIyMWlwEmdwZnUEPK1vuhMzZ
+ 9lq0+0yA0+2WUFeTD8v4G+it6tTbmo5+k79Tcrlot5KeDZmkz1+X7zhcadhZ91VnPJyX
+ CAtVpFMn5cjjOgRHzupMZWIyk5aNH7IJK3r7p7LauKKPOKZyQTGHFMB7SVdd4CRTh/9c
+ Ltb4XwQA1r2f05/BOgLxSrkwciuvbI5VVpF5twbmZJhMFA71HM+pvyG7Ugo5LXMybPah
+ /sAUZASNaCLN/ep2eHUDmQVlDH6bS+JqKDxoIGuuvU39/oyZGPXmp+2fkCFyIifKvvt4
+ 7eWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1678440412;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mNL+f3pZ6bNpmj3kt1NLjVcEmx4ylNGYtgxCZ9dlKFA=;
+ b=7eGiVvbY13fK7bnMuFLSzfILpFT7Zn6gNJhNQYwODaq2BmAheWSWWD3DN7y586LGI6
+ 70x6yT4FGqR5L1kaWq1MfgwREHsX1iMteVQLfnc0T8xxFqJ9ydR0bhqp0CrUBd9Fz5IG
+ O0Z5fkOCh0SDGuOCKk2SJ/zTcMx1B0jzpY03nX7SSIpSr40MM7BkrTmItOhNoqt//K3n
+ QnyFCgxh7dBdtwGsdPqHQLB9P3QY6GtjeBUE3Y8SzF8TejNeU53Y1DeG5vQU3yT2ACJv
+ xKS2dyPWWkj9wSszgSSncL2gQm8KxTTcubeDJcTGoTCYv64yQmGR+kGbHQ6gdoyr9OuN
+ 75Ag==
+X-Gm-Message-State: AO0yUKX04XAfXyYfbmLiCeU47Mwz5M4ebqQNmjkSHGI4qYS2nttKf5k6
+ SN5LDclsuw4yRPyPjP8Xkz8=
+X-Google-Smtp-Source: AK7set9Xzk9BMbnoqlJVd1xoOzH2NobQcn8OcgRL3OMdLvLTW0Gl7RfPo93cGx+Qh3BdyL3vbUzymg==
+X-Received: by 2002:a05:600c:35c9:b0:3ea:d601:976f with SMTP id
+ r9-20020a05600c35c900b003ead601976fmr1979380wmq.23.1678440412107; 
+ Fri, 10 Mar 2023 01:26:52 -0800 (PST)
+Received: from [192.168.1.10] (95f1a118.skybroadband.com. [149.241.161.24])
+ by smtp.googlemail.com with ESMTPSA id
+ g9-20020a7bc4c9000000b003e20970175dsm2353826wmk.32.2023.03.10.01.26.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 10 Mar 2023 01:26:51 -0800 (PST)
+Message-ID: <853b7e32-f566-2a92-0f59-3490ad5d88df@googlemail.com>
+Date: Fri, 10 Mar 2023 09:26:49 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+To: Ben Skeggs <skeggsb@gmail.com>, Karol Herbst <kherbst@redhat.com>
+References: <b64705e3-2e63-a466-f829-f9568b06766a@googlemail.com>
+ <CACO55tvR4ydDOXt=9nbR3n2aFLKrj8zeuGRR_xpezVQBBLrjqg@mail.gmail.com>
+ <a6188878-f84c-0fcc-9509-b9d7ab797f4c@leemhuis.info>
+ <d031f0a5-8d5e-af51-6db6-11844de3eeba@googlemail.com>
+ <CAPM=9tz+wksJTvMi_4Ef7XWezfH0ReN2se189s8Q=obJjHC+Fw@mail.gmail.com>
+ <4e786e22-f17a-da76-5129-8fef0c7c825a@googlemail.com>
+ <b829633e-ccc4-7a54-1cad-f29254de1251@leemhuis.info>
+ <CACO55tsvM07_6mGU3dCgeji0a6B4JJKSDOOBuCHv2Mw3rYbCHg@mail.gmail.com>
+ <181bea6a-e501-f5bd-b002-de7a244a921a@googlemail.com>
+ <CACO55tsGXfy9-a-nexvcn7pnDGoEWXMqhiQEBwCDkGyOeT1sXQ@mail.gmail.com>
+ <dbfc1f77-29f3-7690-c231-55f906a4e7e5@googlemail.com>
+ <7f6ec5b3-b5c7-f564-003e-132f112b7cf4@googlemail.com>
+ <CACAvsv7Uf5=K44y8YLsiy0aMnc1zvGEQdeDe7RQF=AV+fxxzuQ@mail.gmail.com>
+ <c12aa9b8-65a1-0cdf-8948-15309f16b955@googlemail.com>
+ <CACO55tvGQdHPnZEMAGPZN3K1nUCV-ruX_QNwSqQAg_z81ab0MA@mail.gmail.com>
+ <CACAvsv53xc8dr0e5HEFcV+218WoCbGVor0HDgBw-C51fPkR9kQ@mail.gmail.com>
+Content-Language: en-GB
+From: Chris Clayton <chris2553@googlemail.com>
+In-Reply-To: <CACAvsv53xc8dr0e5HEFcV+218WoCbGVor0HDgBw-C51fPkR9kQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:34 +0000
-Subject: Re: [Nouveau] [PATCH drm-next v2 00/16] [RFC] DRM GPUVA Manager &
- Nouveau VM_BIND UAPI
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:37 +0000
+Subject: Re: [Nouveau] linux-6.2-rc4+ hangs on poweroff/reboot: Bisected
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,77 +91,204 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, willy@infradead.org, daniel@ffwll.ch,
- dri-devel@lists.freedesktop.org, corbet@lwn.net, nouveau@lists.freedesktop.org,
- ogabbay@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- mripard@kernel.org, linux-mm@kvack.org, alexdeucher@gmail.com,
- bskeggs@redhat.com, Liam.Howlett@oracle.com, bagasdotme@gmail.com,
- christian.koenig@amd.com, jason@jlekstrand.net
+Cc: Linux regressions mailing list <regressions@lists.linux.dev>,
+ ML nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>, bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 9 Mar 2023 10:12:43 +0100
-Boris Brezillon <boris.brezillon@collabora.com> wrote:
+Hi.
 
-> Hi Danilo,
-> 
-> On Fri, 17 Feb 2023 14:44:06 +0100
-> Danilo Krummrich <dakr@redhat.com> wrote:
-> 
-> > Changes in V2:
-> > ==============
-> >   Nouveau:
-> >     - Reworked the Nouveau VM_BIND UAPI to avoid memory allocations in fence
-> >       signalling critical sections. Updates to the VA space are split up in three
-> >       separate stages, where only the 2. stage executes in a fence signalling
-> >       critical section:
-> > 
-> >         1. update the VA space, allocate new structures and page tables  
-> 
-> Sorry for the silly question, but I didn't find where the page tables
-> pre-allocation happens. Mind pointing it to me? It's also unclear when
-> this step happens. Is this at bind-job submission time, when the job is
-> not necessarily ready to run, potentially waiting for other deps to be
-> signaled. Or is it done when all deps are met, as an extra step before
-> jumping to step 2. If that's the former, then I don't see how the VA
-> space update can happen, since the bind-job might depend on other
-> bind-jobs modifying the same portion of the VA space (unbind ops might
-> lead to intermediate page table levels disappearing while we were
-> waiting for deps). If it's the latter, I wonder why this is not
-> considered as an allocation in the fence signaling path (for the
-> bind-job out-fence to be signaled, you need these allocations to
-> succeed, unless failing to allocate page-tables is considered like a HW
-> misbehavior and the fence is signaled with an error in that case).
+Is it likely that this fix will be sumbmitted to mainline during the ongoing 6.3 development cycle?
 
-Ok, so I just noticed you only have one bind queue per drm_file
-(cli->sched_entity), and jobs are executed in-order on a given queue,
-so I guess that allows you to modify the VA space at submit time
-without risking any modifications to the VA space coming from other
-bind-queues targeting the same VM. And, if I'm correct, synchronous
-bind/unbind ops take the same path, so no risk for those to modify the
-VA space either (just wonder if it's a good thing to have to sync
-bind/unbind operations waiting on async ones, but that's a different
-topic).
+Chris
 
+On 20/02/2023 22:16, Ben Skeggs wrote:
+> On Mon, 20 Feb 2023 at 21:27, Karol Herbst <kherbst@redhat.com> wrote:
+>>
+>> On Mon, Feb 20, 2023 at 11:51 AM Chris Clayton <chris2553@googlemail.com> wrote:
+>>>
+>>>
+>>>
+>>> On 20/02/2023 05:35, Ben Skeggs wrote:
+>>>> On Sun, 19 Feb 2023 at 04:55, Chris Clayton <chris2553@googlemail.com> wrote:
+>>>>>
+>>>>>
+>>>>>
+>>>>> On 18/02/2023 15:19, Chris Clayton wrote:
+>>>>>>
+>>>>>>
+>>>>>> On 18/02/2023 12:25, Karol Herbst wrote:
+>>>>>>> On Sat, Feb 18, 2023 at 1:22 PM Chris Clayton <chris2553@googlemail.com> wrote:
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>
+>>>>>>>> On 15/02/2023 11:09, Karol Herbst wrote:
+>>>>>>>>> On Wed, Feb 15, 2023 at 11:36 AM Linux regression tracking #update
+>>>>>>>>> (Thorsten Leemhuis) <regressions@leemhuis.info> wrote:
+>>>>>>>>>>
+>>>>>>>>>> On 13.02.23 10:14, Chris Clayton wrote:
+>>>>>>>>>>> On 13/02/2023 02:57, Dave Airlie wrote:
+>>>>>>>>>>>> On Sun, 12 Feb 2023 at 00:43, Chris Clayton <chris2553@googlemail.com> wrote:
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> On 10/02/2023 19:33, Linux regression tracking (Thorsten Leemhuis) wrote:
+>>>>>>>>>>>>>> On 10.02.23 20:01, Karol Herbst wrote:
+>>>>>>>>>>>>>>> On Fri, Feb 10, 2023 at 7:35 PM Linux regression tracking (Thorsten
+>>>>>>>>>>>>>>> Leemhuis) <regressions@leemhuis.info> wrote:
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> On 08.02.23 09:48, Chris Clayton wrote:
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>> I'm assuming  that we are not going to see a fix for this regression before 6.2 is released.
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> Yeah, looks like it. That's unfortunate, but happens. But there is still
+>>>>>>>>>>>>>>>> time to fix it and there is one thing I wonder:
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> Did any of the nouveau developers look at the netconsole captures Chris
+>>>>>>>>>>>>>>>> posted more than a week ago to check if they somehow help to track down
+>>>>>>>>>>>>>>>> the root of this problem?
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> I did now and I can't spot anything. I think at this point it would
+>>>>>>>>>>>>>>> make sense to dump the active tasks/threads via sqsrq keys to see if
+>>>>>>>>>>>>>>> any is in a weird state preventing the machine from shutting down.
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> Many thx for looking into it!
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> Yes, thanks Karol.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> Attached is the output from dmesg when this block of code:
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>         /bin/mount /dev/sda7 /mnt/sda7
+>>>>>>>>>>>>>         /bin/mountpoint /proc || /bin/mount /proc
+>>>>>>>>>>>>>         /bin/dmesg -w > /mnt/sda7/sysrq.dmesg.log &
+>>>>>>>>>>>>>         /bin/echo t > /proc/sysrq-trigger
+>>>>>>>>>>>>>         /bin/sleep 1
+>>>>>>>>>>>>>         /bin/sync
+>>>>>>>>>>>>>         /bin/sleep 1
+>>>>>>>>>>>>>         kill $(pidof dmesg)
+>>>>>>>>>>>>>         /bin/umount /mnt/sda7
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> is executed immediately before /sbin/reboot is called as the final step of rebooting my system.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> I hope this is what you were looking for, but if not, please let me know what you need
+>>>>>>>>>>>
+>>>>>>>>>>> Thanks Dave. [...]
+>>>>>>>>>> FWIW, in case anyone strands here in the archives: the msg was
+>>>>>>>>>> truncated. The full post can be found in a new thread:
+>>>>>>>>>>
+>>>>>>>>>> https://lore.kernel.org/lkml/e0b80506-b3cf-315b-4327-1b988d86031e@googlemail.com/
+>>>>>>>>>>
+>>>>>>>>>> Sadly it seems the info "With runpm=0, both reboot and poweroff work on
+>>>>>>>>>> my laptop." didn't bring us much further to a solution. :-/ I don't
+>>>>>>>>>> really like it, but for regression tracking I'm now putting this on the
+>>>>>>>>>> back-burner, as a fix is not in sight.
+>>>>>>>>>>
+>>>>>>>>>> #regzbot monitor:
+>>>>>>>>>> https://lore.kernel.org/lkml/e0b80506-b3cf-315b-4327-1b988d86031e@googlemail.com/
+>>>>>>>>>> #regzbot backburner: hard to debug and apparently rare
+>>>>>>>>>> #regzbot ignore-activity
+>>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>> yeah.. this bug looks a little annoying. Sadly the only Turing based
+>>>>>>>>> laptop I got doesn't work on Nouveau because of firmware related
+>>>>>>>>> issues and we probably need to get updated ones from Nvidia here :(
+>>>>>>>>>
+>>>>>>>>> But it's a bit weird that the kernel doesn't shutdown, because I don't
+>>>>>>>>> see anything in the logs which would prevent that from happening.
+>>>>>>>>> Unless it's waiting on one of the tasks to complete, but none of them
+>>>>>>>>> looked in any way nouveau related.
+>>>>>>>>>
+>>>>>>>>> If somebody else has any fancy kernel debugging tips here to figure
+>>>>>>>>> out why it hangs, that would be very helpful...
+>>>>>>>>>
+>>>>>>>>
+>>>>>>>> I think I've figured this out. It's to do with how my system is configured. I do have an initrd, but the only thing on
+>>>>>>>> it is the cpu microcode which, it is recommended, should be loaded early. The absence of the NVidia firmare from an
+>>>>>>>> initrd doesn't matter because the drivers for the hardware that need to load firmware are all built as modules, So, by
+>>>>>>>> the time the devices are configured via udev, the root partition is mounted and the drivers can get at the firmware.
+>>>>>>>>
+>>>>>>>> I've found, by turning on nouveau debug and taking a video of the screen as the system shuts down, that nouveau seems to
+>>>>>>>> be trying to run the scrubber very very late in the shutdown process. The problem is that by this time, I think the root
+>>>>>>>> partition, and thus the scrubber binary, have become inaccessible.
+>>>>>>>>
+>>>>>>>> I seem to have two choices - either make the firmware accessible on an initrd or unload the module in a shutdown script
+>>>>>>>> before the scrubber binary becomes inaccessible. The latter of these is the workaround I have implemented whilst the
+>>>>>>>> problem I reported has been under investigation. For simplicity, I think I'll promote my workaround to being the
+>>>>>>>> permanent solution.
+>>>>>>>>
+>>>>>>>> So, apologies (and thanks) to everyone whose time I have taken up with this non-bug.
+>>>>>>>>
+>>>>>>>
+>>>>>>> Well.. nouveau shouldn't prevent the system from shutting down if the
+>>>>>>> firmware file isn't available. Or at least it should print a
+>>>>>>> warning/error. Mind messing with the code a little to see if skipping
+>>>>>>> it kind of works? I probably can also come up with a patch by next
+>>>>>>> week.
+>>>>>>>
+>>>>>> Well, I'd love to but a quick glance at the code caused me to bump into this obscenity:
+>>>>>>
+>>>>>> int
+>>>>>> gm200_flcn_reset_wait_mem_scrubbing(struct nvkm_falcon *falcon)
+>>>>>> {
+>>>>>>         nvkm_falcon_mask(falcon, 0x040, 0x00000000, 0x00000000);
+>>>>>>
+>>>>>>         if (nvkm_msec(falcon->owner->device, 10,
+>>>>>>                 if (!(nvkm_falcon_rd32(falcon, 0x10c) & 0x00000006))
+>>>>>>                         break;
+>>>>>>         ) < 0)
+>>>>>>                 return -ETIMEDOUT;
+>>>>>>
+>>>>>>         return 0;
+>>>>>> }
+>>>>>>
+>>>>>> nvkm_msec is #defined to nvkm_usec which in turn is #defined to nvkm_nsec where the loop that the break is related to
+>>>>>> appears
+>>>>>
+>>>>> I think someone who knows the code needs to look at this. What I can confirm is that after a freeze, I waited for 90
+>>>>> seconds for a timeout to occur, but it didn't.
+>>>> Hey,
+>>>>
+>>>> Are you able to try the attached patch for me please?
+>>>>
+>>>> Thanks,
+>>>> Ben.
+>>>>
+>>>
+>>> Thanks Ben.
+>>>
+>>> Yes, this patch fixes the lockup on reboot and poweroff that I've been seeing on my laptop. As you would expect,
+>>> offloaded rendering is still working and the discrete GPU is being powered on and off as required.
+>>>
+>>> Thanks.
+>>>
+>>> Reported-by: Chris Clayton <chris2553@googlemail.com>
+>>> Tested-by: Chris Clayton <chris2553@googlemail.com>
+>>>
+>>
+>> Ben, did you manage to get push rights to drm-misc by now or should I
+>> just pick the patch and push it through -fixes?
+> Feel free to pick it up!
 > 
-> Note that I'm not familiar at all with Nouveau or TTM, and it might
-> be something that's solved by another component, or I'm just
-> misunderstanding how the whole thing is supposed to work. This being
-> said, I'd really like to implement a VM_BIND-like uAPI in pancsf using
-> the gpuva_manager infra you're proposing here, so please bare with me
-> :-).
+> Thank you,
+> Ben.
 > 
-> >         2. (un-)map the requested memory bindings
-> >         3. free structures and page tables
-> > 
-> >     - Separated generic job scheduler code from specific job implementations.
-> >     - Separated the EXEC and VM_BIND implementation of the UAPI.
-> >     - Reworked the locking parts of the nvkm/vmm RAW interface, such that
-> >       (un-)map operations can be executed in fence signalling critical sections.
-> >   
-> 
-> Regards,
-> 
-> Boris
-> 
-
+>>
+>>>>>
+>>>>>
+>>>>> .> Chris
+>>>>>>>>
+>>>>>>>>>> Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
+>>>>>>>>>> --
+>>>>>>>>>> Everything you wanna know about Linux kernel regression tracking:
+>>>>>>>>>> https://linux-regtracking.leemhuis.info/about/#tldr
+>>>>>>>>>> That page also explains what to do if mails like this annoy you.
+>>>>>>>>>>
+>>>>>>>>>> #regzbot ignore-activity
+>>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>
+>>>>>>>
+>>>
+>>
