@@ -1,67 +1,67 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A359B6B4D72
-	for <lists+nouveau@lfdr.de>; Fri, 10 Mar 2023 17:46:10 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A8696B5165
+	for <lists+nouveau@lfdr.de>; Fri, 10 Mar 2023 21:07:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5A17A10E2E8;
-	Fri, 10 Mar 2023 16:46:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D908B10E334;
+	Fri, 10 Mar 2023 20:07:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5B90010E210
- for <nouveau@lists.freedesktop.org>; Fri, 10 Mar 2023 16:46:05 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CABB510E336
+ for <nouveau@lists.freedesktop.org>; Fri, 10 Mar 2023 20:06:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1678466764;
+ s=mimecast20190719; t=1678478818;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=U1nV2/qDntqDJZlPcxYfsT9dw0Ma0q80Z3zjf/0HtgY=;
- b=Cwj9W/dUrvsjMFIfDbaCDG7ukzGehFBlCkwH0Ej0cgpgZCfld3sYrTpy13mpXey5mAgeWa
- rZmVEH6mT4tIA9RAFzzcDfu1bbxu4CkYxqPeBH7CTyUWKa91Wvffe0jDNmSbl5qXJx7o62
- Bafx7mUqYFz3B6uCEQOoUDuRa+BOSok=
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=pbWktnKIf2P4TvXCV62Olk42Buree+tecJxAeWz28rI=;
+ b=KT1TT1sgTJRV8ZZ8xAKWVG8psHu+paniRzWW3KzhzvvTEy35czl5/079vdit4xyZchkxnm
+ oOfLxbXGBcDG/M9CJvlwEDj47aFkNChw1gCx3gjL9AUn4BvkE8q2elSC35KIff3IqN04tu
+ 3iSO1KskEdJ/HXp6ToKYR5th/0pc+F8=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-281-kCrMkyPPPhKoMc6Fy2vYWA-1; Fri, 10 Mar 2023 11:46:02 -0500
-X-MC-Unique: kCrMkyPPPhKoMc6Fy2vYWA-1
-Received: by mail-ed1-f70.google.com with SMTP id
- h11-20020a0564020e8b00b004e59d4722a3so8490372eda.6
- for <nouveau@lists.freedesktop.org>; Fri, 10 Mar 2023 08:46:02 -0800 (PST)
+ us-mta-582-OCcHzMYENXeK8DQVNJ6vKQ-1; Fri, 10 Mar 2023 15:06:57 -0500
+X-MC-Unique: OCcHzMYENXeK8DQVNJ6vKQ-1
+Received: by mail-ed1-f71.google.com with SMTP id
+ k12-20020a50c8cc000000b004accf30f6d3so9217167edh.14
+ for <nouveau@lists.freedesktop.org>; Fri, 10 Mar 2023 12:06:57 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678466761;
+ d=1e100.net; s=20210112; t=1678478816;
  h=content-transfer-encoding:in-reply-to:organization:from:references
  :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=U1nV2/qDntqDJZlPcxYfsT9dw0Ma0q80Z3zjf/0HtgY=;
- b=1MyaudC1kUBZyesLbNaUbp4WQCDtIgABZw0a5bIce1GY/cWkrVuVaLxHEvUc04tiVL
- R8eLSZyKuZ7EhK0GUkgNamVWypf3qUvKPvvpe9klmqojYEQrpW2jfaWDVRKuOnCttpRb
- jSjU+4fxfmDJ5Kozr0u1YZ+1CPwHCWLvtu8FHkZiUthJEN+9VF/JwJz3mrxRfw4f9b05
- 9ckrKvUb0D8wB1y0nGmJHwkmZo/2U3TurA5wa8cBG3NyNPp41RFq8ZKgrOM6JFiccv/m
- zaVO4J6NPQk/qHbQJUteTRfBWpxos2UyyyLFtp6ltT2q36W41lBxQGYpDxTKqP/Sx3R7
- qU1A==
-X-Gm-Message-State: AO0yUKUmJNJ90cq7ye/sL5ZAT5pE3PnfvoH/9e0tTJMEC/qOdpNditQj
- 95GaQ/05bdY74URqmYutDgjOayP6DuEpFi8es2ePehQJWt+ckdtzamjNoZIdQYFUj2b07ydwQD+
- Ofqex9qCCFmEqxnGEprdNq8n/sA==
-X-Received: by 2002:aa7:c147:0:b0:4bd:e63c:d3be with SMTP id
- r7-20020aa7c147000000b004bde63cd3bemr24297872edp.20.1678466761652; 
- Fri, 10 Mar 2023 08:46:01 -0800 (PST)
-X-Google-Smtp-Source: AK7set9dpP4chv/p3br8fwfdqT8BO6VAbkXs+gurJic+F3oSvI/bhsLhmsg9mPQUDdSjr+l64ivZqA==
-X-Received: by 2002:aa7:c147:0:b0:4bd:e63c:d3be with SMTP id
- r7-20020aa7c147000000b004bde63cd3bemr24297854edp.20.1678466761360; 
- Fri, 10 Mar 2023 08:46:01 -0800 (PST)
+ bh=pbWktnKIf2P4TvXCV62Olk42Buree+tecJxAeWz28rI=;
+ b=XdjvlWm49tvtB+aUCfH+yGmOzBNB/ieyi6fqcVxHbPkW4kr+9PHDAg2C1LAQdno1JM
+ 87xm/CgF/TpfzrkjPHrl6zU7WJzDx5IRekrrrTiHqHANPGieTiE+uyS9ODq1u/M/SDwL
+ EJ7fzbAZ/z7OT/HbzpmaEIMD213e3Eei+QNGjvPcv9mOoagt63yNFfMcpwVTAac/8OVw
+ ot9w3TuHLYN7lpCXet8bkYtbm3sipuspoJ6Dt0JbAiDsFXWVidm8k00UyUsPrDBqr5/5
+ q69o1xSyxbjPs/a44svVQGuO9ah1NRdMvkcG01tVB58MouFVZ0g6hFBujXnU+ERim2dC
+ 0lEQ==
+X-Gm-Message-State: AO0yUKXeJOE0Z0Fs553NQxn2Xpwte3cu82U4MVo7Y8MsXsmSmlW+FqYc
+ WLF+nOJz4BnnKD60SwK+sm1JiR6pLdEt8YuQg6NliP1PVHP51/RlblgHjlsKz6QYKuIs5Agr8jt
+ cDTLQfXvl9dMDI/tYQHv1ZO/t7A==
+X-Received: by 2002:aa7:d856:0:b0:4bf:5295:ba0e with SMTP id
+ f22-20020aa7d856000000b004bf5295ba0emr21307711eds.41.1678478816189; 
+ Fri, 10 Mar 2023 12:06:56 -0800 (PST)
+X-Google-Smtp-Source: AK7set/04Ww2URZyxcrVnn+BOVIBwqWJSPCfubZMMJCHj+xbnHonAHgF8D8cE2q+F9tPWeyJOJhDMw==
+X-Received: by 2002:aa7:d856:0:b0:4bf:5295:ba0e with SMTP id
+ f22-20020aa7d856000000b004bf5295ba0emr21307685eds.41.1678478815848; 
+ Fri, 10 Mar 2023 12:06:55 -0800 (PST)
 Received: from ?IPV6:2a02:810d:4b3f:de78:642:1aff:fe31:a15c?
  ([2a02:810d:4b3f:de78:642:1aff:fe31:a15c])
  by smtp.gmail.com with ESMTPSA id
- t21-20020a50d715000000b004accf3a63cbsm217252edi.68.2023.03.10.08.45.59
+ vv7-20020a170907a68700b008b1b86bf668sm255915ejc.4.2023.03.10.12.06.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Mar 2023 08:46:00 -0800 (PST)
-Message-ID: <d0e59837-703b-964a-877e-38c244f58a85@redhat.com>
-Date: Fri, 10 Mar 2023 17:45:58 +0100
+ Fri, 10 Mar 2023 12:06:55 -0800 (PST)
+Message-ID: <c33db2d3-a15e-24bc-87d5-0b31ee468b52@redhat.com>
+Date: Fri, 10 Mar 2023 21:06:52 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
@@ -69,9 +69,11 @@ To: Boris Brezillon <boris.brezillon@collabora.com>
 References: <20230217134422.14116-1-dakr@redhat.com>
  <20230309101243.1150506f@collabora.com>
  <20230309104841.7c03d5b4@collabora.com>
+ <d0e59837-703b-964a-877e-38c244f58a85@redhat.com>
+ <20230310182536.571315f3@collabora.com>
 From: Danilo Krummrich <dakr@redhat.com>
 Organization: RedHat
-In-Reply-To: <20230309104841.7c03d5b4@collabora.com>
+In-Reply-To: <20230310182536.571315f3@collabora.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -90,121 +92,152 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, willy@infradead.org, daniel@ffwll.ch,
- dri-devel@lists.freedesktop.org, corbet@lwn.net, nouveau@lists.freedesktop.org,
- ogabbay@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- mripard@kernel.org, linux-mm@kvack.org, alexdeucher@gmail.com,
- bskeggs@redhat.com, Liam.Howlett@oracle.com, bagasdotme@gmail.com,
- christian.koenig@amd.com, jason@jlekstrand.net
+Cc: matthew.brost@intel.com, bagasdotme@gmail.com, corbet@lwn.net,
+ nouveau@lists.freedesktop.org, ogabbay@kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, willy@infradead.org, Liam.Howlett@oracle.com,
+ christian.koenig@amd.com, jason@jlekstrand.net, bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Boris,
-
-On 3/9/23 10:48, Boris Brezillon wrote:
-> On Thu, 9 Mar 2023 10:12:43 +0100
-> Boris Brezillon <boris.brezillon@collabora.com> wrote:
+On 3/10/23 18:25, Boris Brezillon wrote:
+> Hi Danilo,
 > 
->> Hi Danilo,
+> On Fri, 10 Mar 2023 17:45:58 +0100
+> Danilo Krummrich <dakr@redhat.com> wrote:
+>> Hi Boris,
 >>
->> On Fri, 17 Feb 2023 14:44:06 +0100
->> Danilo Krummrich <dakr@redhat.com> wrote:
->>
->>> Changes in V2:
->>> ==============
->>>    Nouveau:
->>>      - Reworked the Nouveau VM_BIND UAPI to avoid memory allocations in fence
->>>        signalling critical sections. Updates to the VA space are split up in three
->>>        separate stages, where only the 2. stage executes in a fence signalling
->>>        critical section:
+>>> On Thu, 9 Mar 2023 10:12:43 +0100
+>>> Boris Brezillon <boris.brezillon@collabora.com> wrote:
 >>>
->>>          1. update the VA space, allocate new structures and page tables
+>>> Ok, so I just noticed you only have one bind queue per drm_file
+>>> (cli->sched_entity), and jobs are executed in-order on a given queue,
+>>> so I guess that allows you to modify the VA space at submit time
+>>> without risking any modifications to the VA space coming from other
+>>> bind-queues targeting the same VM. And, if I'm correct, synchronous
+>>> bind/unbind ops take the same path, so no risk for those to modify the
+>>> VA space either (just wonder if it's a good thing to have to sync
+>>> bind/unbind operations waiting on async ones, but that's a different
+>>> topic).
 >>
->> Sorry for the silly question, but I didn't find where the page tables
->> pre-allocation happens. Mind pointing it to me? It's also unclear when
->> this step happens. Is this at bind-job submission time, when the job is
->> not necessarily ready to run, potentially waiting for other deps to be
->> signaled. Or is it done when all deps are met, as an extra step before
->> jumping to step 2. If that's the former, then I don't see how the VA
->> space update can happen, since the bind-job might depend on other
->> bind-jobs modifying the same portion of the VA space (unbind ops might
->> lead to intermediate page table levels disappearing while we were
->> waiting for deps). If it's the latter, I wonder why this is not
->> considered as an allocation in the fence signaling path (for the
->> bind-job out-fence to be signaled, you need these allocations to
->> succeed, unless failing to allocate page-tables is considered like a HW
->> misbehavior and the fence is signaled with an error in that case).
+>> Yes, that's all correct.
+>>
+>> The page table allocation happens through nouveau_uvmm_vmm_get() which
+>> either allocates the corresponding page tables or increases the
+>> reference count, in case they already exist, accordingly.
+>> The call goes all the way through nvif into the nvkm layer (not the
+>> easiest to follow the call chain) and ends up in nvkm_vmm_ptes_get().
+>>
+>> There are multiple reasons for updating the VA space at submit time in
+>> Nouveau.
+>>
+>> 1) Subsequent EXEC ioctl() calls would need to wait for the bind jobs
+>> they depend on within the ioctl() rather than in the scheduler queue,
+>> because at the point of time where the ioctl() happens the VA space
+>> wouldn't be up-to-date.
 > 
-> Ok, so I just noticed you only have one bind queue per drm_file
-> (cli->sched_entity), and jobs are executed in-order on a given queue,
-> so I guess that allows you to modify the VA space at submit time
-> without risking any modifications to the VA space coming from other
-> bind-queues targeting the same VM. And, if I'm correct, synchronous
-> bind/unbind ops take the same path, so no risk for those to modify the
-> VA space either (just wonder if it's a good thing to have to sync
-> bind/unbind operations waiting on async ones, but that's a different
-> topic).
+> Hm, actually that's what explicit sync is all about, isn't it? If you
+> have async binding ops, you should retrieve the bind-op out-fences and
+> pass them back as in-fences to the EXEC call, so you're sure all the
+> memory mappings you depend on are active when you execute those GPU
+> jobs. And if you're using sync binds, the changes are guaranteed to be
+> applied before the ioctl() returns. Am I missing something?
+> 
 
-Yes, that's all correct.
+No, you're right and this is exactly how I implemented it. The 
+difference is where to wait for the bind jobs out-fences.
 
-The page table allocation happens through nouveau_uvmm_vmm_get() which 
-either allocates the corresponding page tables or increases the 
-reference count, in case they already exist, accordingly.
-The call goes all the way through nvif into the nvkm layer (not the 
-easiest to follow the call chain) and ends up in nvkm_vmm_ptes_get().
+In the EXEC ioctl() we need to validate the GEM objects backing the 
+dependent mappings and add the jobs fence to the GEMs DMA reservation. 
+If the VA space isn't up-to-date we might not be able to look up the 
+relevant GEMs and miss them.
 
-There are multiple reasons for updating the VA space at submit time in 
-Nouveau.
+If the VA space change happens in the bind jobs submit path (ioctl()), 
+it is guaranteed that the view of the VA space is up-to-date (actually 
+it might even be ahead of the actual current state) when the EXEC 
+ioctl() is called. Hence, I can just pass the out-fences of the binds 
+jobs the EXEC depends on to the job scheduler and return from the 
+ioctl(). The job scheduler will then wait for the actual mappings being 
+populated before executing the EXEC job.
 
-1) Subsequent EXEC ioctl() calls would need to wait for the bind jobs 
-they depend on within the ioctl() rather than in the scheduler queue, 
-because at the point of time where the ioctl() happens the VA space 
-wouldn't be up-to-date.
+If the VA space change is done when the bind job executes on the 
+scheduler we would need to wait for the bind jobs out-fences in the EXEC 
+ioctl() itself.
 
-2) Let's assume a new mapping is requested and within it's range other 
-mappings already exist. Let's also assume that those existing mappings 
-aren't contiguous, such that there are gaps between them. In such a case 
-I need to allocate page tables only for the gaps between the existing 
-mappings, or alternatively, allocate them for the whole range of the new 
-mapping, but free / decrease the reference count of the page tables for 
-the ranges of the previously existing mappings afterwards.
-In the first case I need to know the gaps to allocate page tables for 
-when submitting the job, which means the VA space must be up-to-date. In 
-the latter one I must save the ranges of the previously existing 
-mappings somewhere in order to clean them up, hence I need to allocate 
-memory to store this information. Since I can't allocate this memory in 
-the jobs run() callback (fence signalling critical section) I need to do 
-it when submitting the job already and hence the VA space must be 
-up-to-date again.
-However, this is due to how page table management currently works in 
-Nouveau and we might change that in the future.
+>>
+>> 2) Let's assume a new mapping is requested and within it's range other
+>> mappings already exist. Let's also assume that those existing mappings
+>> aren't contiguous, such that there are gaps between them. In such a case
+>> I need to allocate page tables only for the gaps between the existing
+>> mappings, or alternatively, allocate them for the whole range of the new
+>> mapping, but free / decrease the reference count of the page tables for
+>> the ranges of the previously existing mappings afterwards.
+>> In the first case I need to know the gaps to allocate page tables for
+>> when submitting the job, which means the VA space must be up-to-date. In
+>> the latter one I must save the ranges of the previously existing
+>> mappings somewhere in order to clean them up, hence I need to allocate
+>> memory to store this information. Since I can't allocate this memory in
+>> the jobs run() callback (fence signalling critical section) I need to do
+>> it when submitting the job already and hence the VA space must be
+>> up-to-date again.
+> 
+> Yep that makes perfect sense, and that explains how the whole thing can
+> work. When I initially read the patch series, I had more complex use
+> cases in mind, with multiple bind queues targeting the same VM, and
+> synchronous bind taking a fast path (so they don't have to wait on
+> async binds which can in turn wait on external deps). This model makes
+> it hard to predict what the VA space will look like when an async bind
+> operation gets to be executed, thus making page table allocation more
+> complex, or forcing us to over-estimate the amount of pages we need for
+> this update (basically one page per MMU level, except maybe the top
+> level, plus the number of pages you'll always need for the bind
+> operation itself).
+> 
+>> However, this is due to how page table management currently works in
+>> Nouveau and we might change that in the future.
+> 
+> I'm curious to hear about that if you have a bit of time. I'm starting
+> from scratch with pancsf, and I might consider going for something
+> similar to what you plan to do next.
 
-Synchronous binds/unbinds taking the same path through the scheduler is 
-a downside of this approach.
-
-- Danilo
+There is no concrete plan yet. However, with the current implementation 
+there are a few shortcomings (also in handling sparse ranges) that I'd 
+like to address in the future.
 
 > 
 >>
->> Note that I'm not familiar at all with Nouveau or TTM, and it might
->> be something that's solved by another component, or I'm just
->> misunderstanding how the whole thing is supposed to work. This being
->> said, I'd really like to implement a VM_BIND-like uAPI in pancsf using
->> the gpuva_manager infra you're proposing here, so please bare with me
->> :-).
->>
->>>          2. (un-)map the requested memory bindings
->>>          3. free structures and page tables
->>>
->>>      - Separated generic job scheduler code from specific job implementations.
->>>      - Separated the EXEC and VM_BIND implementation of the UAPI.
->>>      - Reworked the locking parts of the nvkm/vmm RAW interface, such that
->>>        (un-)map operations can be executed in fence signalling critical sections.
->>>    
->>
->> Regards,
->>
->> Boris
->>
+>> Synchronous binds/unbinds taking the same path through the scheduler is
+>> a downside of this approach.
+> 
+> Indeed. I mean, I can probably live with this limitation, but I'm
+> curious to know if the pg table management changes you're considering
+> for the future would solve that problem.
+
+As mentioned above, I have a few ideas, but I did not think through them 
+entirely yet.
+
+A few thoughts though: If running synchronous binds/unbinds through the 
+job scheduler is a concern I think it could be beneficial to 
+(pre-)allocate page tables for newly requested mappings without the need 
+to know whether there are existing mappings within this range already 
+(ideally without tracking page table allocations separate from GPUVAs), 
+such that we can update the VA space at job execution time. Same thing 
+for freeing page tables for a range that only partially contains 
+mappings at all. For that, reference counting page tables per mapping 
+wouldn't really work.
+
+On the other hand we need to consider that freeing page tables for a 
+given range and allocating new page tables for the same or an 
+overlapping range would need to be ordered in order to avoid races.
+
+> 
+> Anyway, thanks for taking the time to answer my question, things are
+> much clearer now.
+
+I'm happy to discuss this. Feel free to also reach out in IRC, my nick 
+is 'dakr'.
+
+> 
+> Boris
 > 
 
