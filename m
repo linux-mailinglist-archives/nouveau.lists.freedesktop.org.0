@@ -2,49 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 341836F6BB5
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BCD256F6BC3
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3B55810E484;
-	Thu,  4 May 2023 12:32:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B6F4710E48B;
+	Thu,  4 May 2023 12:32:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3258B10E2A9;
- Fri, 10 Mar 2023 17:25:42 +0000 (UTC)
-Received: from localhost (unknown [IPv6:2a01:e0a:2c:6930:5cf4:84a1:2763:fe0d])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: bbrezillon)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id 0886A66003B0;
- Fri, 10 Mar 2023 17:25:40 +0000 (GMT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1678469140;
- bh=wM54TmsN2cbOzHJr/5TpGI05vTyX+Oe7JKg+tq6vv6E=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=TmcRYGkEuRzs7i+cH0kQa41ntt/LAH7dNLd532WuM7EUdDdyUoWKer7VEEXgoE4Wd
- Jnc1ZSfw3gKnCIXy1FccES9JiGkavm2cxV6HWPjhicEXLRBZKtuEMyRmdO4zJZAwHM
- aDLTEKR8bLrtwcaRxIoYt+ZuC7VYWLYEkHTEMmaS4+ReEwdB++QwXDBsYx2cDnyILe
- DeFr89UuUdVq9ceDu7XFxtBItyBnah1+PynhJ8hvELzQLmQHLIG/oPleydhB7e7A6b
- 7rY0Vv8dTdtXYTgvR4t1pTe8EakW9eE2MxUzOpYmhnSi7gObXPPqEiJqu+puyW+Rk0
- maVtGaCIv9w5w==
-Date: Fri, 10 Mar 2023 18:25:36 +0100
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Danilo Krummrich <dakr@redhat.com>
-Message-ID: <20230310182536.571315f3@collabora.com>
-In-Reply-To: <d0e59837-703b-964a-877e-38c244f58a85@redhat.com>
-References: <20230217134422.14116-1-dakr@redhat.com>
- <20230309101243.1150506f@collabora.com>
- <20230309104841.7c03d5b4@collabora.com>
- <d0e59837-703b-964a-877e-38c244f58a85@redhat.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.36; x86_64-redhat-linux-gnu)
+Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com
+ [IPv6:2a00:1450:4864:20::541])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 16CFF10E52C;
+ Mon, 13 Mar 2023 13:55:13 +0000 (UTC)
+Received: by mail-ed1-x541.google.com with SMTP id r15so21848298edq.11;
+ Mon, 13 Mar 2023 06:55:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20210112; t=1678715711;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5ANUqqLjStoxoRFBqdgwmvZsT70GJ/Jr3W8t8R6fOUM=;
+ b=LfvryJ/Hh9VtYfYGkYcRE5XtQIW5CiCZpxNR9nyzT1kOsu0Jrtjr7v2iOxMb/w99cx
+ tPaTM4Eluypt4+FrGHJ4bjOiMtHW3w9W5QMalZWrztjOw+h0fcExZfKUluQdaNxWUYXJ
+ ztahp9nyxgr8S5qxk5aNIdgqrLwh4nlwLflUyQNzYL7zvYo+v0l7j6OL1sutWFvT2J/p
+ CEn84V+4Q5kyARP8+iDj6iemwFOwiAsApfRDaAE5fNTr52L4TJ6hyXW1QTsibXdg3zFG
+ NB/Rps7/RbXFEYRDO4UbwQrZrQPsvCTZqFGZbzdWpBAPkqbgLBWxg1WR5aNQ7MrM4SOW
+ B8Cg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1678715711;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5ANUqqLjStoxoRFBqdgwmvZsT70GJ/Jr3W8t8R6fOUM=;
+ b=28NkNQ4qZXvd4e0MhAagjbtfXdVqHeiuIpqNtayH/RST6zp/UFrETPh6IJ7uJQBy3x
+ KzXA7B3mnr5jA+Mw80OQixIiwOy2B5gPypYRAKq06qGZ/EVltHJ4XU2v2kowzu9hhmS7
+ fwpfA9XvdLvFrx6dWnVOrD/Z/Wn+sTz2p9QN74zG1XkmDWb5tAGCgAKymgFyS+wpXxLY
+ MK6AIdm23QB6PfYvbXcCPopFLg4Hra9+DAH1iPjRuZrGSQwWDY33gWVRsf/JbI9KriE3
+ GR5INyqyYnGqBylnPoWBEZRc120GN+TgxFy0tn4NCl3ZTW/uzMb7qr2a0WzvBNLyPgQ+
+ ONiA==
+X-Gm-Message-State: AO0yUKVIOGZzFuA2M2Gc/mrtvbHPnVxtuTd5MB6ES36GhCDFvLyiQZP+
+ mSgS3KRrTCbip/8nyu13xew=
+X-Google-Smtp-Source: AK7set9/H1wWlFAmPUJSqeoduvu77jubQDUoBG2Tq/orIZDxpSFJwPGjAQdHPFvc9rKR1pOjDEClTg==
+X-Received: by 2002:a17:906:3141:b0:8b1:7b10:61d5 with SMTP id
+ e1-20020a170906314100b008b17b1061d5mr33118610eje.33.1678715711476; 
+ Mon, 13 Mar 2023 06:55:11 -0700 (PDT)
+Received: from [127.0.1.1] (i130160.upc-i.chello.nl. [62.195.130.160])
+ by smtp.googlemail.com with ESMTPSA id
+ t29-20020a50d71d000000b004fb419921e2sm2100094edi.57.2023.03.13.06.55.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Mar 2023 06:55:11 -0700 (PDT)
+From: Jakob Koschel <jkl820.git@gmail.com>
+Date: Mon, 13 Mar 2023 14:54:48 +0100
+Message-Id: <20230301-drm-nouveau-avoid-iter-after-loop-v2-0-1e6428cc7fa8@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:34 +0000
-Subject: Re: [Nouveau] [PATCH drm-next v2 00/16] [RFC] DRM GPUVA Manager &
- Nouveau VM_BIND UAPI
+X-B4-Tracking: v=1; b=H4sIACgrD2QC/5WOwQqDMBBEf0Vy7pYkFqU99T+KhzVudMEkJdHQI
+ v57o3/Qy8CbXWZmE4kiUxKPahORMicOvoC+VMJM6EcCHgoLLXUta6lgiA58WDPhCpgDD8ALRUB
+ 76BzCG269tfdWNQ1ZFCWnx0TQR/RmOpIcpvJ6HN6RLH/O8ldXeOK0hPg9t2R1uP/UZgUSZCs1G
+ V2XAfI5OuT5aoIT3b7vP6y2HRnrAAAA
+To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>, 
+ Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>, 
+ Daniel Vetter <daniel@ffwll.ch>
+X-Mailer: b4 0.12.1
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1678715710; l=1449;
+ i=jkl820.git@gmail.com; s=20230112; h=from:subject:message-id;
+ bh=2L1COAFZdosvV2nj+9Azdzd+YrB52T+o5+nwJnnaB04=;
+ b=bzOGournFjDpt2sMS0dAIh4T4eb7MuWaz0jjEOJP/0+zGY+ul4w4rHxchzbQWjNAK2Exf5l6K3zw
+ UxK4gnsXAp1nsjLXuxfTz8D3BlJSObdekHvIPgtIxVdtICKsgUqM
+X-Developer-Key: i=jkl820.git@gmail.com; a=ed25519;
+ pk=rcRpP90oZXet9udPj+2yOibfz31aYv8tpf0+ZYOQhyA=
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:35 +0000
+Subject: [Nouveau] [PATCH v2 0/2] drm/nouveau: avoid usage of list iterator
+ after loop
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,134 +84,46 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, willy@infradead.org, daniel@ffwll.ch,
- dri-devel@lists.freedesktop.org, corbet@lwn.net, nouveau@lists.freedesktop.org,
- ogabbay@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- mripard@kernel.org, linux-mm@kvack.org, alexdeucher@gmail.com,
- bskeggs@redhat.com, Liam.Howlett@oracle.com, bagasdotme@gmail.com,
- christian.koenig@amd.com, jason@jlekstrand.net
+Cc: nouveau@lists.freedesktop.org, Pietro Borrello <borrello@diag.uniroma1.it>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Cristiano Giuffrida <c.giuffrida@vu.nl>, "Bos, H.J." <h.j.bos@vu.nl>,
+ Jakob Koschel <jkl820.git@gmail.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Danilo,
+This patch set includes two instances where the list iterator variable
+'pstate' is implicitly assumed to be valid after the iterator loop.
+While in pratice that is most likely the case (if
+'pstatei'/'args->v0.state' is <= the elements in clk->states), we should
+explicitly only allow 'pstate' to always point to correct 'nvkm_pstate'
+structs.
 
-On Fri, 10 Mar 2023 17:45:58 +0100
-Danilo Krummrich <dakr@redhat.com> wrote:
+That allows catching potential bugs with WARN_ON(!pstate) that otherwise
+would be completely undetectable.
 
-> Hi Boris,
-> 
-> On 3/9/23 10:48, Boris Brezillon wrote:
-> > On Thu, 9 Mar 2023 10:12:43 +0100
-> > Boris Brezillon <boris.brezillon@collabora.com> wrote:
-> >   
-> >> Hi Danilo,
-> >>
-> >> On Fri, 17 Feb 2023 14:44:06 +0100
-> >> Danilo Krummrich <dakr@redhat.com> wrote:
-> >>  
-> >>> Changes in V2:
-> >>> ==============
-> >>>    Nouveau:
-> >>>      - Reworked the Nouveau VM_BIND UAPI to avoid memory allocations in fence
-> >>>        signalling critical sections. Updates to the VA space are split up in three
-> >>>        separate stages, where only the 2. stage executes in a fence signalling
-> >>>        critical section:
-> >>>
-> >>>          1. update the VA space, allocate new structures and page tables  
-> >>
-> >> Sorry for the silly question, but I didn't find where the page tables
-> >> pre-allocation happens. Mind pointing it to me? It's also unclear when
-> >> this step happens. Is this at bind-job submission time, when the job is
-> >> not necessarily ready to run, potentially waiting for other deps to be
-> >> signaled. Or is it done when all deps are met, as an extra step before
-> >> jumping to step 2. If that's the former, then I don't see how the VA
-> >> space update can happen, since the bind-job might depend on other
-> >> bind-jobs modifying the same portion of the VA space (unbind ops might
-> >> lead to intermediate page table levels disappearing while we were
-> >> waiting for deps). If it's the latter, I wonder why this is not
-> >> considered as an allocation in the fence signaling path (for the
-> >> bind-job out-fence to be signaled, you need these allocations to
-> >> succeed, unless failing to allocate page-tables is considered like a HW
-> >> misbehavior and the fence is signaled with an error in that case).  
-> > 
-> > Ok, so I just noticed you only have one bind queue per drm_file
-> > (cli->sched_entity), and jobs are executed in-order on a given queue,
-> > so I guess that allows you to modify the VA space at submit time
-> > without risking any modifications to the VA space coming from other
-> > bind-queues targeting the same VM. And, if I'm correct, synchronous
-> > bind/unbind ops take the same path, so no risk for those to modify the
-> > VA space either (just wonder if it's a good thing to have to sync
-> > bind/unbind operations waiting on async ones, but that's a different
-> > topic).  
-> 
-> Yes, that's all correct.
-> 
-> The page table allocation happens through nouveau_uvmm_vmm_get() which 
-> either allocates the corresponding page tables or increases the 
-> reference count, in case they already exist, accordingly.
-> The call goes all the way through nvif into the nvkm layer (not the 
-> easiest to follow the call chain) and ends up in nvkm_vmm_ptes_get().
-> 
-> There are multiple reasons for updating the VA space at submit time in 
-> Nouveau.
-> 
-> 1) Subsequent EXEC ioctl() calls would need to wait for the bind jobs 
-> they depend on within the ioctl() rather than in the scheduler queue, 
-> because at the point of time where the ioctl() happens the VA space 
-> wouldn't be up-to-date.
+It also helps the greater mission to hopefully move the list iterator
+variable into the iterating macro directly [1].
 
-Hm, actually that's what explicit sync is all about, isn't it? If you
-have async binding ops, you should retrieve the bind-op out-fences and
-pass them back as in-fences to the EXEC call, so you're sure all the
-memory mappings you depend on are active when you execute those GPU
-jobs. And if you're using sync binds, the changes are guaranteed to be
-applied before the ioctl() returns. Am I missing something?
+Link: https://lore.kernel.org/all/CAHk-=wgRr_D8CB-D9Kg-c=EHreAsk5SqXPwr9Y7k9sA6cWXJ6w@mail.gmail.com/ [1]
+Signed-off-by: Jakob Koschel <jkl820.git@gmail.com>
+---
+Changes in v2:
+- convert BUG_ON() into WARN_ON()
+- Link to v1: https://lore.kernel.org/r/20230301-drm-nouveau-avoid-iter-after-loop-v1-0-0702ec23f970@gmail.com
 
-> 
-> 2) Let's assume a new mapping is requested and within it's range other 
-> mappings already exist. Let's also assume that those existing mappings 
-> aren't contiguous, such that there are gaps between them. In such a case 
-> I need to allocate page tables only for the gaps between the existing 
-> mappings, or alternatively, allocate them for the whole range of the new 
-> mapping, but free / decrease the reference count of the page tables for 
-> the ranges of the previously existing mappings afterwards.
-> In the first case I need to know the gaps to allocate page tables for 
-> when submitting the job, which means the VA space must be up-to-date. In 
-> the latter one I must save the ranges of the previously existing 
-> mappings somewhere in order to clean them up, hence I need to allocate 
-> memory to store this information. Since I can't allocate this memory in 
-> the jobs run() callback (fence signalling critical section) I need to do 
-> it when submitting the job already and hence the VA space must be 
-> up-to-date again.
+---
+Jakob Koschel (2):
+      drm/nouveau/device: avoid usage of list iterator after loop
+      drm/nouveau/clk: avoid usage of list iterator after loop
 
-Yep that makes perfect sense, and that explains how the whole thing can
-work. When I initially read the patch series, I had more complex use
-cases in mind, with multiple bind queues targeting the same VM, and
-synchronous bind taking a fast path (so they don't have to wait on
-async binds which can in turn wait on external deps). This model makes
-it hard to predict what the VA space will look like when an async bind
-operation gets to be executed, thus making page table allocation more
-complex, or forcing us to over-estimate the amount of pages we need for
-this update (basically one page per MMU level, except maybe the top
-level, plus the number of pages you'll always need for the bind
-operation itself).
+ drivers/gpu/drm/nouveau/nvkm/engine/device/ctrl.c | 11 ++++++++---
+ drivers/gpu/drm/nouveau/nvkm/subdev/clk/base.c    | 10 +++++++---
+ 2 files changed, 15 insertions(+), 6 deletions(-)
+---
+base-commit: c0927a7a5391f7d8e593e5e50ead7505a23cadf9
+change-id: 20230301-drm-nouveau-avoid-iter-after-loop-4bff97166efa
 
-> However, this is due to how page table management currently works in 
-> Nouveau and we might change that in the future.
+Best regards,
+-- 
+Jakob Koschel <jkl820.git@gmail.com>
 
-I'm curious to hear about that if you have a bit of time. I'm starting
-from scratch with pancsf, and I might consider going for something
-similar to what you plan to do next.
-
-> 
-> Synchronous binds/unbinds taking the same path through the scheduler is 
-> a downside of this approach.
-
-Indeed. I mean, I can probably live with this limitation, but I'm
-curious to know if the pg table management changes you're considering
-for the future would solve that problem.
-
-Anyway, thanks for taking the time to answer my question, things are
-much clearer now.
-
-Boris
