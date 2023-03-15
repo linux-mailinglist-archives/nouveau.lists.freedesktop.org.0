@@ -1,43 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC0586BB21F
-	for <lists+nouveau@lfdr.de>; Wed, 15 Mar 2023 13:33:20 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 30DB36BB2D4
+	for <lists+nouveau@lfdr.de>; Wed, 15 Mar 2023 13:39:00 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 37BAD10E9C1;
-	Wed, 15 Mar 2023 12:33:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8FFB110EAF5;
+	Wed, 15 Mar 2023 12:38:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F0AC810E9C1;
- Wed, 15 Mar 2023 12:33:17 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id ABC3910EAF5;
+ Wed, 15 Mar 2023 12:38:57 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 653C7CE19C1;
- Wed, 15 Mar 2023 12:33:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39AE9C433EF;
- Wed, 15 Mar 2023 12:33:13 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 241A861D71;
+ Wed, 15 Mar 2023 12:38:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0949DC433EF;
+ Wed, 15 Mar 2023 12:38:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1678883593;
+ s=korg; t=1678883936;
  bh=etYCdQjmQ3MfcfmwcIxY4173EwgJTDNwtqJOInfO2s4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=g5Sz8vMJwXKxnKGNkyvaVA67/SqBCKrlusF3mxzFwZFOKKZM9z7s9caaM7UTC2S6n
- eA9Z43SS/xxgYR97ONgbEqSnu0Q/0a3MeGl+u0lEd80YPJpR8ZXZ/93poiUM8+cpNs
- fZaj0bCJbgjZ/mkWoeYdq1n7mqRr3jlcc9rJs8ac=
+ b=WsLzORw7+4E69n68V0o6SZ3741/VbEVu2byrAaTirZgjTnYHk+Gi0xM+j+2iNny6P
+ XprK72nlMuBzlKs4p09usJ0nisIdMCrg024yH3v+dG97FeUBz7J6nAkf0t6JrELHfN
+ VJXgXTRwTA1I5gpjfUoXbQMSYjYHjc9bIrbSsWxQ=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: stable@vger.kernel.org
-Date: Wed, 15 Mar 2023 13:12:24 +0100
-Message-Id: <20230315115742.284910999@linuxfoundation.org>
+Date: Wed, 15 Mar 2023 13:12:28 +0100
+Message-Id: <20230315115741.343839335@linuxfoundation.org>
 X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230315115740.429574234@linuxfoundation.org>
-References: <20230315115740.429574234@linuxfoundation.org>
+In-Reply-To: <20230315115739.932786806@linuxfoundation.org>
+References: <20230315115739.932786806@linuxfoundation.org>
 User-Agent: quilt/0.67
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 6.1 058/143] drm/nouveau/kms/nv50: fix
+Subject: [Nouveau] [PATCH 6.2 045/141] drm/nouveau/kms/nv50: fix
  nv50_wndw_new_ prototype
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
