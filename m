@@ -1,43 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D840D6BB174
-	for <lists+nouveau@lfdr.de>; Wed, 15 Mar 2023 13:27:39 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 83D3E6BB0C4
+	for <lists+nouveau@lfdr.de>; Wed, 15 Mar 2023 13:21:09 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6BC9310E037;
-	Wed, 15 Mar 2023 12:27:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7974610E03B;
+	Wed, 15 Mar 2023 12:21:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5AEB310E037;
- Wed, 15 Mar 2023 12:27:37 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2264E10E755;
+ Wed, 15 Mar 2023 12:21:03 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 7334461D49;
- Wed, 15 Mar 2023 12:27:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5833BC433EF;
- Wed, 15 Mar 2023 12:27:35 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 60D9361D13;
+ Wed, 15 Mar 2023 12:21:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4D1DAC433D2;
+ Wed, 15 Mar 2023 12:21:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1678883255;
- bh=XaCohvPX/DT15FSlywtvC7JBU0feq6KLerYbCEVXnno=;
+ s=korg; t=1678882861;
+ bh=otWQfkOjRcKYmh1VqrfmvrHW/ax92X+qCi+inqN6B9o=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Osfjf1HbhMS4YwjZWAYH3GaDjolb0v9CnqT0vwD7PheeI/8irL332n5YOZ3wHlQQ3
- yLC5csLWgiPKDMlYFR348A42KUegewj3HZx++eEoiNBiG+aBmmtzmDbqodOXyOhYtq
- t9rjBHBB23gGtcxWCaiWPTRtm9LiGyOkp9/gvMvE=
+ b=U34i/BjhfE+Yzktf/id0d0RSafzTXU9cEQrpjFtUg+3o0hAgze+Z696Qpn5tavaBB
+ r7/eyK7Ag8W8OABQykPvy+g1EQ6zDXxBtZSLt8PqR4JZlBzCIPFUnOxZzQoKgeBwvB
+ PBHPagxZiK+ThHy/MlTokrAjcPis+rwo46cIKxB0=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: stable@vger.kernel.org
-Date: Wed, 15 Mar 2023 13:11:50 +0100
-Message-Id: <20230315115740.533087448@linuxfoundation.org>
+Date: Wed, 15 Mar 2023 13:12:00 +0100
+Message-Id: <20230315115733.261181999@linuxfoundation.org>
 X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230315115738.951067403@linuxfoundation.org>
-References: <20230315115738.951067403@linuxfoundation.org>
+In-Reply-To: <20230315115731.942692602@linuxfoundation.org>
+References: <20230315115731.942692602@linuxfoundation.org>
 User-Agent: quilt/0.67
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 5.15 044/145] drm/nouveau/kms/nv50: fix
+Subject: [Nouveau] [PATCH 5.10 029/104] drm/nouveau/kms/nv50: fix
  nv50_wndw_new_ prototype
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -100,7 +101,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.h b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
-index 980f8ea96d54a..6c64864da4550 100644
+index 8bed195ae098a..77bf124319fbd 100644
 --- a/drivers/gpu/drm/nouveau/dispnv50/wndw.h
 +++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
 @@ -38,8 +38,9 @@ struct nv50_wndw {
