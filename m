@@ -2,44 +2,34 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30DB36BB2D4
-	for <lists+nouveau@lfdr.de>; Wed, 15 Mar 2023 13:39:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45E146BCFED
+	for <lists+nouveau@lfdr.de>; Thu, 16 Mar 2023 13:53:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8FFB110EAF5;
-	Wed, 15 Mar 2023 12:38:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1A66610E0B7;
+	Thu, 16 Mar 2023 12:53:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ABC3910EAF5;
- Wed, 15 Mar 2023 12:38:57 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 241A861D71;
- Wed, 15 Mar 2023 12:38:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0949DC433EF;
- Wed, 15 Mar 2023 12:38:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1678883936;
- bh=etYCdQjmQ3MfcfmwcIxY4173EwgJTDNwtqJOInfO2s4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=WsLzORw7+4E69n68V0o6SZ3741/VbEVu2byrAaTirZgjTnYHk+Gi0xM+j+2iNny6P
- XprK72nlMuBzlKs4p09usJ0nisIdMCrg024yH3v+dG97FeUBz7J6nAkf0t6JrELHfN
- VJXgXTRwTA1I5gpjfUoXbQMSYjYHjc9bIrbSsWxQ=
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: stable@vger.kernel.org
-Date: Wed, 15 Mar 2023 13:12:28 +0100
-Message-Id: <20230315115741.343839335@linuxfoundation.org>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230315115739.932786806@linuxfoundation.org>
-References: <20230315115739.932786806@linuxfoundation.org>
-User-Agent: quilt/0.67
+Received: from mail.fsf.org (mail.fsf.org [IPv6:2001:470:142::13])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 675AE10E104
+ for <nouveau@lists.freedesktop.org>; Thu, 16 Mar 2023 12:53:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=fsf.org;
+ s=mail-fsf-org; h=MIME-Version:In-reply-to:Date:Subject:To:From:References;
+ bh=1v03i9w4oGryefZKGUc1+UmSAAT5Kphu6HZLvqVKk7A=; b=Jos5By9v55nDDGvJPhe0es3Dg
+ Mov6vYh7bI9twoxztULyVIzIG5fPSRuSdARm/ImhfHpVqwu5ukpUgBpW99dGolyx2o+baGZOnKD4s
+ iyDAY4hi7r40zERDQsnm1vMhBQfmWxDklbF/6Is6zM/VibDlyGz9OiwkRqzluxRUSWZ2Cjy4UpS7z
+ iKYs9rbe8OC4aLMoHt6a5YMf9u36lfIWz6kgB2G0/KQyCjkEdhKfc0mu/5NK5Jw5qMoMR2D3ZGCVa
+ Yo1Urwc937oDe8tDjELaCTfQss+FpiiT1kIIgcBAxrCbdbgZpYtRNhtV1m16se7IdcWd7NH0EzUi2
+ LlCImUQLA==;
+References: <87bkky51ri.fsf@fsf.org>
+User-agent: mu4e 1.9.0; emacs 29.0.50
+From: Ian Kelling <iank@fsf.org>
+To: Ian Kelling <iank@fsf.org>
+Date: Thu, 16 Mar 2023 08:51:52 -0400
+In-reply-to: <87bkky51ri.fsf@fsf.org>
+Message-ID: <87edpozwkq.fsf@fsf.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 6.2 045/141] drm/nouveau/kms/nv50: fix
- nv50_wndw_new_ prototype
+Content-Type: text/plain
+Subject: Re: [Nouveau] Any tips to avoid Nouveau crashes & freezes?
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,73 +41,11 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, patches@lists.linux.dev,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- nouveau@lists.freedesktop.org, "Jiri Slaby \(SUSE\)" <jirislaby@kernel.org>,
- Martin Liska <mliska@suse.cz>
+Cc: nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Jiri Slaby (SUSE) <jirislaby@kernel.org>
-
-[ Upstream commit 3638a820c5c3b52f327cebb174fd4274bee08aa7 ]
-
-gcc-13 warns about mismatching types for enums. That revealed switched
-arguments of nv50_wndw_new_():
-  drivers/gpu/drm/nouveau/dispnv50/wndw.c:696:1: error: conflicting types for 'nv50_wndw_new_' due to enum/integer mismatch; have 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const u32 *, u32,  enum nv50_disp_interlock_type,  u32,  struct nv50_wndw **)'
-  drivers/gpu/drm/nouveau/dispnv50/wndw.h:36:5: note: previous declaration of 'nv50_wndw_new_' with type 'int(const struct nv50_wndw_func *, struct drm_device *, enum drm_plane_type,  const char *, int,  const u32 *, enum nv50_disp_interlock_type,  u32,  u32,  struct nv50_wndw **)'
-
-It can be barely visible, but the declaration says about the parameters
-in the middle:
-  enum nv50_disp_interlock_type,
-  u32 interlock_data,
-  u32 heads,
-
-While the definition states differently:
-  u32 heads,
-  enum nv50_disp_interlock_type interlock_type,
-  u32 interlock_data,
-
-Unify/fix the declaration to match the definition.
-
-Fixes: 53e0a3e70de6 ("drm/nouveau/kms/nv50-: simplify tracking of channel interlocks")
-Cc: Martin Liska <mliska@suse.cz>
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Karol Herbst <kherbst@redhat.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: David Airlie <airlied@gmail.com>
-Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org
-Cc: linux-kernel@vger.kernel.org
-Signed-off-by: Jiri Slaby (SUSE) <jirislaby@kernel.org>
-Signed-off-by: Karol Herbst <kherbst@redhat.com>
-Link: https://patchwork.freedesktop.org/patch/msgid/20221031114229.10289-1-jirislaby@kernel.org
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/gpu/drm/nouveau/dispnv50/wndw.h | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.h b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
-index 591c852f326b9..76a6ae5d56526 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/wndw.h
-+++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
-@@ -35,8 +35,9 @@ struct nv50_wndw {
- 
- int nv50_wndw_new_(const struct nv50_wndw_func *, struct drm_device *,
- 		   enum drm_plane_type, const char *name, int index,
--		   const u32 *format, enum nv50_disp_interlock_type,
--		   u32 interlock_data, u32 heads, struct nv50_wndw **);
-+		   const u32 *format, u32 heads,
-+		   enum nv50_disp_interlock_type, u32 interlock_data,
-+		   struct nv50_wndw **);
- void nv50_wndw_flush_set(struct nv50_wndw *, u32 *interlock,
- 			 struct nv50_wndw_atom *);
- void nv50_wndw_flush_clr(struct nv50_wndw *, u32 *interlock, bool flush,
--- 
-2.39.2
-
-
-
+Small update: Using llvmpipe for running OBS seems to fix the crashes &
+hangs. It uses a lot of CPU, like 7.5 cores vs around 1 without, but
+that seems fine for our purpose. Running OBS AMD gpus uses this much cpu
+without explicitly asking for llvmpipe.
