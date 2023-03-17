@@ -1,49 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 256516F6BC2
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:34 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 941886F6B84
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4839B10E48A;
-	Thu,  4 May 2023 12:32:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B8E4D10E457;
+	Thu,  4 May 2023 12:32:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C8DE210EE8E;
- Fri, 17 Mar 2023 08:23:45 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 72CE8B82500;
- Fri, 17 Mar 2023 08:23:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5390FC433A0;
- Fri, 17 Mar 2023 08:23:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1679041424;
- bh=6a8BtlskbP9+bgQcqTudP5Da9xVRBITUVFtK0dF48DY=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=vNV0jZq3225L0LcWA5AnesWS7MJGdsuVqYnhxdKZLT5BEC/eRMZg/tWTL4fOY3igt
- bptRhoFxYZybJRbInp44U/7PTFcSjMb9mme/FsFfPpJp67kogKhgTsjEnAGT3IFm+V
- oJM5+BrLanshy4LjPmNrTMBQjGn/OoVI+3sIa7Ut/NksmhIHc1xah4r3VtAEVba4cv
- NFBBnq/5qjk8Qk9lLc8DTQPXmExojlMLJXxYv6zBmc9mBwZnGfFAho7pKyIc5FQxcZ
- 0A4Eg5FQ8Zb6+j2e/3rmKrerYpnchCO23m3ttXw0yTo+GKSfLM5STEP7PwFpJfnQvr
- nXlVVt73sI+LA==
-From: Lee Jones <lee@kernel.org>
-To: lee@kernel.org,
-	dri-devel@lists.freedesktop.org
-Date: Fri, 17 Mar 2023 08:17:15 +0000
-Message-Id: <20230317081718.2650744-35-lee@kernel.org>
-X-Mailer: git-send-email 2.40.0.rc1.284.g88254d51c5-goog
-In-Reply-To: <20230317081718.2650744-1-lee@kernel.org>
-References: <20230317081718.2650744-1-lee@kernel.org>
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B4B5110E288;
+ Fri, 17 Mar 2023 21:54:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
+ s=20170329;
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
+ In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=+GbVqzctd4n33a2yd9rymKGEXP8gzDcHMfyXnPYe278=; b=OZAFd+LZk8wcpvfkH9hf8/m1uw
+ gn/iBfzaHcOQC1S2njhHeV5ZJ8WkKVf0Utb3o/IwebMMHuL8l35Gz2CZ7JeQUsOiQT7Rjk2nsevnl
+ 8xI6+E28Snt8kx67u8hSvLJ3jIauClqE+9Ao/i0xH5f8HwUIgEPjIaUofu/r8APxgkVc9W3RR1yYY
+ r14QWzuuAmwamCeqbV0rAf+ZIo8JfXRM4aQEbrP6Hxk7wj85HTDV4whgdGPTU6aBDqgfI3c4xrq6r
+ 7Mi1tqQT3KGvkKvNtYX8O6zpda9rnlAT5lRinN62+0pneQIdA67mZR0cNuMPN1YV5GrPg1EozotSE
+ XarGB0Mg==;
+Received: from 137.red-83-52-2.dynamicip.rima-tde.net ([83.52.2.137]
+ helo=localhost.localdomain) by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1pdI2E-00GMAw-36; Fri, 17 Mar 2023 22:54:49 +0100
+Message-ID: <21eeb767a9ef197f4ca443231bb483a00291afdb.camel@igalia.com>
+From: Ricardo Garcia <rgarcia@igalia.com>
+To: members@x.org, events@lists.x.org, xorg-devel@lists.freedesktop.org, 
+ wayland-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
+ mesa-dev@lists.freedesktop.org, amd-gfx@lists.freedesktop.org, 
+ etnaviv@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ libre-soc-dev <libre-soc-dev@lists.libre-soc.org>
+Date: Fri, 17 Mar 2023 22:54:49 +0100
+In-Reply-To: <19f8b5328550abde46a316189c8cd746339819b0.camel@igalia.com>
+References: <c1c2591a7f7c9bcb05b69b08da529ddb8fc8145c.camel@igalia.com>
+ <19f8b5328550abde46a316189c8cd746339819b0.camel@igalia.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.46.4 (3.46.4-1.fc37) 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:31 +0000
-Subject: [Nouveau] =?utf-8?q?=5BPATCH_34/37=5D_drm/nouveau/nvkm/engine/gr?=
- =?utf-8?q?/tu102=3A_Completely_remove_unused_function_=E2=80=98tu102=5Fgr?=
- =?utf-8?b?X2xvYWTigJk=?=
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:38 +0000
+Subject: [Nouveau] Reminder: Only 2 days left to nominate candidates for the
+ 2023 X.Org Board of Directors Elections
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,51 +59,85 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: board <board@foundation.x.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Fixes the following W=1 kernel build warning(s):
+Further reminder that the nomination period for the X.Org Board of
+Director elections finishes in only 2 days, on March 19th.
 
- drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: ‘tu102_gr_load’ defined but not used [-Wunused-function]
+Please send your nominations or self-nominations as soon as possible
+following the instructions below.
 
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Karol Herbst <kherbst@redhat.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: David Airlie <airlied@gmail.com>
-Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org
-Signed-off-by: Lee Jones <lee@kernel.org>
----
- drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c | 13 -------------
- 1 file changed, 13 deletions(-)
+Thanks again for your attention.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
-index 10a7e59482a6f..a7775aa185415 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
-@@ -206,19 +206,6 @@ tu102_gr_av_to_init_veid(struct nvkm_blob *blob, struct gf100_gr_pack **ppack)
- 	return gk20a_gr_av_to_init_(blob, 64, 0x00100000, ppack);
- }
- 
--static int
--tu102_gr_load(struct gf100_gr *gr, int ver, const struct gf100_gr_fwif *fwif)
--{
--	int ret;
--
--	ret = gm200_gr_load(gr, ver, fwif);
--	if (ret)
--		return ret;
--
--	return gk20a_gr_load_net(gr, "gr/", "sw_veid_bundle_init", ver, tu102_gr_av_to_init_veid,
--				 &gr->bundle_veid);
--}
--
- static const struct gf100_gr_fwif
- tu102_gr_fwif[] = {
- 	{  0, gm200_gr_load, &tu102_gr, &gp108_gr_fecs_acr, &gp108_gr_gpccs_acr },
--- 
-2.40.0.rc1.284.g88254d51c5-goog
+On Mon, 2023-03-13 at 16:27 +0100, Ricardo Garcia wrote:
+> This is a reminder that the nomination period for the X.Org Board of
+> Director elections finishes in a week, on March 19th.
+>=20
+> If you would like to nominate yourself please send email to the election
+> committee elections@x.org, giving your
+>=20
+>     name
+>     current professional affiliation
+>     a statement of contribution to X.Org or related technologies
+>     a personal statement.
+>=20
+> To vote or to be elected to the Board you needed to be a Member of the
+> X.Org Foundation. To be a Member of the X.Org Foundation you need to
+> apply or renew your membership until the end of the nomination period.
+>=20
+> Original email follows below. Thanks for your attention.
+>=20
+> On Wed, 2023-02-15 at 21:53 +0100, Ricardo Garcia wrote:
+> > We are seeking nominations for candidates for election to the X.Org
+> > Foundation Board of Directors. All X.Org Foundation members are eligibl=
+e
+> > for election to the board.
+> >=20
+> > Nominations for the 2023 election are now open and will remain open
+> > until 23:59 UTC on 19 March 2023.
+> >=20
+> > The Board consists of directors elected from the membership. Each year,
+> > an election is held to bring the total number of directors to eight. Th=
+e
+> > four members receiving the highest vote totals will serve as directors
+> > for two year terms.
+> >=20
+> > The directors who received two year terms starting in 2022 were Emma
+> > Anholt, Mark Filion, Alyssa Rosenzweig and Ricardo Garcia. They will
+> > continue to serve until their term ends in 2024. Current directors whos=
+e
+> > term expires in 2023 are Samuel Iglesias Gons=C3=A1lvez, Manasi D Navar=
+e,
+> > Lyude Paul and Daniel Vetter.
+> >=20
+> > A director is expected to participate in the fortnightly IRC meeting to
+> > discuss current business and to attend the annual meeting of the X.Org
+> > Foundation, which will be held at a location determined in advance by
+> > the Board of Directors.
+> >=20
+> > A member may nominate themselves or any other member they feel is
+> > qualified. Nominations should be sent to the Election Committee at
+> > elections at x.org.
+> >=20
+> > Nominees shall be required to be current members of the X.Org
+> > Foundation, and submit a personal statement of up to 200 words that wil=
+l
+> > be provided to prospective voters. The collected statements, along with
+> > the statement of contribution to the X.Org Foundation in the member's
+> > account page on http://members.x.org, will be made available to all
+> > voters to help them make their voting decisions.
+> >=20
+> > Nominations, membership applications or renewals and completed personal
+> > statements must be received no later than 23:59 UTC on 19 March 2023.
+> >=20
+> > The slate of candidates will be published 26 March 2023 and candidate
+> > Q&A will begin then. The deadline for Xorg membership applications and
+> > renewals is 26 March 2023.
+> >=20
+> > Cheers,
+> > Ricardo Garcia, on behalf of the X.Org BoD
+> >=20
+>=20
 
