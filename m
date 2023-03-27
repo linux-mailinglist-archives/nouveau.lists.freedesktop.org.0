@@ -2,52 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A6856F6BAF
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E6536F6B94
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1524710E482;
-	Thu,  4 May 2023 12:32:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 94BEC10E458;
+	Thu,  4 May 2023 12:32:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4825410E43D;
- Thu, 23 Mar 2023 08:50:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
- s=20170329;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ubX+nnzIxzDny+5k+G0pJbfcXie/ybrhPkiV40AdBmw=; b=c+i7uj8z3jWy25uAUAR45qnaaT
- pF3tyH/ZjP0wTJjtmbOrXnGcW4sql3YaYj6MZSogbloXIZVITUnYxaEhkdkdZGfF44hUx6SPaE9a0
- xBQfiNtm13EsVbjmnrxvpKZ+GhK4HcE6JamresuAMIAPDpsNnMQfN/c2qbLJncaZW+HRMBbuEnUQn
- WlMCQ33hqkQvD8SOdim8Co2aWJXy8H4SUHJsokyAPRKKsuO/m5UFp9AoLoRdsC3NEs7XRMY+IVarW
- NHQUKY0C6P2v9a3OIKypXSqH242vPOXOEd29Ql/vyVbl5+O5iKbzPF1BxoBOL+V7KjlBNHfCp9yYW
- FqQ8q7Xg==;
-Received: from 137.red-83-52-2.dynamicip.rima-tde.net ([83.52.2.137]
- helo=localhost.localdomain) by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1pfGe1-003vRg-Vl; Thu, 23 Mar 2023 09:50:02 +0100
-Message-ID: <b32a52db030cc746ee082fa89078898a7d88ad28.camel@igalia.com>
-From: Ricardo Garcia <rgarcia@igalia.com>
-To: members@x.org, events@lists.x.org, xorg-devel@lists.freedesktop.org, 
- wayland-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
- mesa-dev@lists.freedesktop.org, amd-gfx@lists.freedesktop.org, 
- etnaviv@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- libre-soc-dev <libre-soc-dev@lists.libre-soc.org>
-Date: Thu, 23 Mar 2023 09:50:01 +0100
-In-Reply-To: <19f8b5328550abde46a316189c8cd746339819b0.camel@igalia.com>
-References: <c1c2591a7f7c9bcb05b69b08da529ddb8fc8145c.camel@igalia.com>
- <19f8b5328550abde46a316189c8cd746339819b0.camel@igalia.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.4 (3.46.4-1.fc37) 
+X-Greylist: delayed 636 seconds by postgrey-1.36 at gabe;
+ Mon, 27 Mar 2023 08:55:08 UTC
+Received: from galois.linutronix.de (Galois.linutronix.de
+ [IPv6:2a0a:51c0:0:12e:550::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5EB0010E338;
+ Mon, 27 Mar 2023 08:55:08 +0000 (UTC)
+From: John Ogness <john.ogness@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1679906669;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to; bh=2sySZtQBfq4L19gj/4gjZ3ggLK9raMfJSFg59Wjh2eU=;
+ b=PC1Fc8oyBCQtNOG/RnSIyDobcxaq7sMrCF1hF+CwvZPusMXk3D5P/LTBXewhtj7bNe4fVB
+ S7EyLoO+7d5gI/uO00+66r0SOEQ1nvCEANuJ3QPNHhB1WQ96YZ5z9EKnR5qVFMBanGbqDX
+ rvW0Tz3EeCoqCROjgXWGVnYMcsU1cpwl67gLTxd1FvsxFg/1kEnnte8u6Z0KGd9muZyi/p
+ cfPp6HueDZ4WUX+WIqBS54k7cL2jSfiPitT3sIxEjRcVJk4GOGbcHDmJiyFSZ7wlrK64Zi
+ f3M8F42H3SCSM4HvI8cKlYKKxFSyjX8WThZMnvyc2ERzcYAmjtxg/snBuNML9Q==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1679906669;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to; bh=2sySZtQBfq4L19gj/4gjZ3ggLK9raMfJSFg59Wjh2eU=;
+ b=2Ow1ZUN2AJU6ec7XoFSU8BgyUDtigL8sf39ypFZkE/5U6DU1vxTwZ+GirXQ594h0jEES5u
+ aVhREx4DPqz5lNBw==
+To: Tanmay Bhushan <007047221b@gmail.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, David
+ Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, =?utf-8?Q?Christian_K=C3=B6nig?=
+ <christian.koenig@amd.com>
+In-Reply-To: <20230119225351.71657-1-007047221b@gmail.com>
+Date: Mon, 27 Mar 2023 10:48:48 +0206
+Message-ID: <87r0taa8l3.fsf@jogness.linutronix.de>
 MIME-Version: 1.0
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:38 +0000
-Subject: [Nouveau] 2023 X.Org Board of Directors Elections timeline extended,
- request for nominations
+Content-Type: text/plain
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:34 +0000
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Fix bug in buffer relocs for
+ Nouveau
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,56 +58,92 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: board <board@foundation.x.org>
+Cc: Tanmay Bhushan <007047221b@gmail.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-We are seeking nominations for candidates for election to the X.org
-Foundation Board of Directors. However, as we presently do not have
-enough nominations to start the election - the decision has been made to
-extend the timeline by 2 weeks. Note this is a fairly regular part of
-the elections process.
+On 2023-01-19, Tanmay Bhushan <007047221b@gmail.com> wrote:
+> dma_resv_wait_timeout returns greater than zero on success
+> as opposed to ttm_bo_wait_ctx. As a result of that relocs
+> will fail and give failure even when it was a success.
 
-The new deadline for nominations to the X.org Board of Directors is
-23:59 UTC on April 2nd, 2023.
+Today I switched my workstation from 6.2 to 6.3-rc3 and started seeing
+lots of new kernel messages:
 
-The new deadline for membership application or renewals is April 9th,
-2023. Membership is required to vote on the elections.
+[  642.138313][ T1751] nouveau 0000:f0:10.0: X[1751]: reloc wait_idle failed: 1500
+[  642.138389][ T1751] nouveau 0000:f0:10.0: X[1751]: reloc apply: 1500
+[  646.123490][ T1751] nouveau 0000:f0:10.0: X[1751]: reloc wait_idle failed: 1500
+[  646.123573][ T1751] nouveau 0000:f0:10.0: X[1751]: reloc apply: 1500
 
-The Board consists of directors elected from the membership. Each year,
-an election is held to bring the total number of directors to eight. The
-four members receiving the highest vote totals will serve as directors
-for two year terms.
+The graphics seemed to go slower or hang a bit when these messages would
+appear. I then found your patch! However, I have some comments about it.
 
-The directors who received two year terms starting in 2022 were Emma
-Anholt, Mark Filion, Alyssa Rosenzweig and Ricardo Garcia. They will
-continue to serve until their term ends in 2024. Current directors whose
-term expires in 2023 are Samuel Iglesias Gons=C3=A1lvez, Manasi D Navare,
-Lyude Paul and Daniel Vetter.
+First, it should include a fixes tag:
 
-A director is expected to participate in the fortnightly IRC meeting to
-discuss current business and to attend the annual meeting of the X.Org
-Foundation, which will be held at a location determined in advance by
-the Board of Directors.
+Fixes: 41d351f29528 ("drm/nouveau: stop using ttm_bo_wait")
 
-A member may nominate themselves or any other member they feel is
-qualified. Nominations should be sent to the Election Committee at
-elections@x.org.
+> Signed-off-by: Tanmay Bhushan <007047221b@gmail.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_gem.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> index f77e44958037..0e3690459144 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_gem.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> @@ -706,9 +706,8 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
+>  		ret = dma_resv_wait_timeout(nvbo->bo.base.resv,
+>  					    DMA_RESV_USAGE_BOOKKEEP,
+>  					    false, 15 * HZ);
+> -		if (ret == 0)
+> +		if (ret <= 0) {
+>  			ret = -EBUSY;
 
-Nominees shall be required to be current members of the X.Org
-Foundation, and submit a personal statement of up to 200 words that will
-be provided to prospective voters. The collected statements, along with
-the statement of contribution to the X.Org Foundation in the member's
-account page on http://members.x.org, will be made available to all
-voters to help them make their voting decisions.
+This is incorrect for 2 reasons:
 
-Nominations, membership applications or renewals and completed personal
-statements must be received no later than 23:59 UTC on April 2nd, 2023.
+* it treats restarts as timeouts
 
-The slate of candidates will be published April 10th 2023 and candidate
-Q&A will begin then. The deadline for Xorg membership applications and
-renewals is April 9th, 2023.
+* this function now returns >0 on success
 
-Cheers,
-Ricardo Garcia, on behalf of the X.Org BoD
+> -		if (ret) {
+>  			NV_PRINTK(err, cli, "reloc wait_idle failed: %ld\n",
+>  				  ret);
+>  			break;
 
+I rearranged things to basically correctly translate the return code of
+dma_resv_wait_timeout() to match the previous ttm_bo_wait():
+
+		ret = dma_resv_wait_timeout(nvbo->bo.base.resv,
+					    DMA_RESV_USAGE_BOOKKEEP,
+					    false, 15 * HZ);
+		if (ret == 0)
+			ret = -EBUSY;
+		if (ret > 0)
+			ret = 0;
+		if (ret) {
+			NV_PRINTK(err, cli, "reloc wait_idle failed: %ld\n",
+				  ret);
+			break;
+		}
+
+So the patch just becomes:
+
+@@ -708,6 +708,8 @@ nouveau_gem_pushbuf_reloc_apply(struct n
+ 					    false, 15 * HZ);
+ 		if (ret == 0)
+ 			ret = -EBUSY;
++		if (ret > 0)
++			ret = 0;
+ 		if (ret) {
+ 			NV_PRINTK(err, cli, "reloc wait_idle failed: %ld\n",
+ 				  ret);
+
+With this variant, everything runs correctly on my workstation again.
+
+It probably deserves a comment about why @ret is being translated. Or
+perhaps a new variable should be introduced to separate the return value
+of dma_resv_wait_timeout() from the return value of this function.
+
+Either way, this is an important fix for 6.3-rc!
+
+John Ogness
