@@ -2,102 +2,82 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 280C36CD0CF
-	for <lists+nouveau@lfdr.de>; Wed, 29 Mar 2023 05:45:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D2D96CD7C3
+	for <lists+nouveau@lfdr.de>; Wed, 29 Mar 2023 12:34:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ECAB810E4CF;
-	Wed, 29 Mar 2023 03:45:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B2B4D10EA6E;
+	Wed, 29 Mar 2023 10:34:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2055.outbound.protection.outlook.com [40.107.223.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 630D510E4B3
- for <nouveau@lists.freedesktop.org>; Wed, 29 Mar 2023 03:45:28 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PYpJPLuQPx92VGW1DY/E2VfJCq8SXPRQ1gpPNXxmRVeh5Ce72LCt4qpo0tpduLB8HU0lhN8qwOgn+xUzR/Y2AdNsADi2uIfAqgkFYVpiAbuBXUrmNl3kE7PChLTQkTx66eDCLiTN5jbx/XtP65GclNw+gs65vSyLF8TqxhCe+6+NmUb835dVM/AwlcQ/FiwRG8hSBWYo1nM5POLkFaCdoiIq5RU+Yp9E6YyUlJyXiKAPZmJGqTPApHqrl8cDJAUI3HX+hAYspF8SEk/ahAKSqhmmmdEki1xD34tqMT8JkV+9iiKcch+SFqdv2fBCEXmQ1l0hWQ4AM16rLzAE0va1sg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VtZ/dg/FCavFlJdlQFKRFOc1d5MaDfynq2yufp2TEds=;
- b=lsLpvh7IBt6YI9QP68P55GRAcSm3FeTlJeywkoYJM5IQ/6iL7PcZh7laU2G4dfp4gdDCN8oVlLgPaWZa5itvXxTOxhCzRMEuIhqND1OtZQ9ysibCpLFnPPjY7p5+uGOKVWWgCTc5wBD+CieUTw2G0JvO2k7gYRhQAZiNnRyCyHI1MGWxFTzzT84AnxWMz6ku8UU0aHIvmSSnXwA/boyLjE75aSWIQRbh1M2SVY82lUoqxIre+nhUwOrd9ftuu0corARSWW5eW6NZqbj6jY/V89EqaJ5LlQfrt2NARUbIBcB4Fd4t6WTqrhFKUe0GL+85vJEJL27Q12XvwD2mrDpEcQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=infradead.org smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VtZ/dg/FCavFlJdlQFKRFOc1d5MaDfynq2yufp2TEds=;
- b=ZFj85QiZYW+LF4HC9FhS5ZMgZAj+ij2LP9WU8Nzz0jyBDB8TSVH+SyeB2aexuOWtvA5MeyXYibuFhFW6HrLLBfAZWnkckohTULgal7UF9Vlt1lotv+hOaJD9IzNy94uB9oA+v5p62IBYwjnZfmtC3sbjRM8BhO5Te/N01rFJHu9Igiqb0QUb5kN7xmg73M7THX6GgJfNiK5thuKM/7UA7XQYUJikfSJBKaU3atJ5dzH59cLnsUMjPhHToHkMmsvyzR86nnLsZAgikkb7NiWqwl8N5T2eFZ+bZLC3QkClkyxCeEl5lGfKC4JtIcjFRTOj/13KKw2Vrgw30y4hbsIzHw==
-Received: from MW4PR03CA0342.namprd03.prod.outlook.com (2603:10b6:303:dc::17)
- by CH3PR12MB7594.namprd12.prod.outlook.com (2603:10b6:610:140::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6222.29; Wed, 29 Mar
- 2023 03:45:26 +0000
-Received: from CO1NAM11FT009.eop-nam11.prod.protection.outlook.com
- (2603:10b6:303:dc:cafe::bb) by MW4PR03CA0342.outlook.office365.com
- (2603:10b6:303:dc::17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6254.20 via Frontend
- Transport; Wed, 29 Mar 2023 03:45:26 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- CO1NAM11FT009.mail.protection.outlook.com (10.13.175.61) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6222.22 via Frontend Transport; Wed, 29 Mar 2023 03:45:25 +0000
-Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.5; Tue, 28 Mar 2023
- 20:45:16 -0700
-Received: from [10.110.48.28] (10.126.231.37) by rnnvmail201.nvidia.com
- (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.37; Tue, 28 Mar
- 2023 20:45:15 -0700
-Message-ID: <bbc8bc42-5f2a-9238-94e9-b2191e2f8c7e@nvidia.com>
-Date: Tue, 28 Mar 2023 20:45:15 -0700
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 44F6A10EA6E
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Mar 2023 10:34:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1680086047;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=5WV+o+6BPdaDM+LpqzyXbB5Lv5klnj7u4YwO4RzzAR4=;
+ b=Mp7hpPX83tgRDF3FNYBrtpQB7k7LvxQqaL2LYSJXa9+tAUBoT0fWNkJwu3JOu9GqYRrk2Q
+ fj7A2AOF4o/cNxx2rDGiwh/K4ghNe32bBADaN6FsZ290RkTVcUsFgRJx0LRRthDMr0Rgo4
+ T5OK8ldjlqj1NLa2w6w3b0SwSJ8umfA=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-570-6DHbhPnsOv6egMCz1WMrZw-1; Wed, 29 Mar 2023 06:34:05 -0400
+X-MC-Unique: 6DHbhPnsOv6egMCz1WMrZw-1
+Received: by mail-ed1-f69.google.com with SMTP id
+ j21-20020a508a95000000b004fd82403c91so21569358edj.3
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Mar 2023 03:34:05 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1680086045;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5WV+o+6BPdaDM+LpqzyXbB5Lv5klnj7u4YwO4RzzAR4=;
+ b=YMaaf5Sy2jlu9bSKkc7oWXopgnnPuJKv158krcso7tBRRT2/PyohYqIvE/Bl8EE+zO
+ 06nNADz35diw5NM1ptjH1wDPLQBoT9BsK1rblDIVeyLg6CuPUnJcxLvh5CqyQQJTe0jO
+ AXPQN0J5/ZelqDrIQmtT8Oxox9hOBV24Ve+Xh0hsK3R7mMF3nu1EplYIMgfjOuFcjw5X
+ 6B+IwTiFGJ+Nm9LyZhrmiAU0vPEjsh8URZOXHNdI27FLVLydOTVyn6Dl0m6vzW4e11ck
+ uv5EmysuTGtNsRO/lNOPBmF9gGQKVfZcZbnJGlBuK7ZwLgFx93zwBXMhyh0BQuS++0cU
+ 5Rjw==
+X-Gm-Message-State: AAQBX9dyhH25Yj/8G3lQKD2NY4Y/Wxfz6kRRoIcxCXioZmJ9g8XSj5XG
+ vVUsqb7GDjRq72olNlZuMI3zll1BkqBmkplCjgVaS1KPfV+tgTFH7dpmBUoWGYa4i1Kuyvn+L+8
+ KwOPmL+WL9ds7McgdBb9xLgh8yQ==
+X-Received: by 2002:a17:906:4492:b0:931:d277:78a4 with SMTP id
+ y18-20020a170906449200b00931d27778a4mr19509518ejo.30.1680086044857; 
+ Wed, 29 Mar 2023 03:34:04 -0700 (PDT)
+X-Google-Smtp-Source: AKy350Z57CBpiseFMIgnGNryXrCZSYDx0tr+2VtzalweO0jAD5KLEw2kHf2+a73sKHZ56RkovxiFYw==
+X-Received: by 2002:a17:906:4492:b0:931:d277:78a4 with SMTP id
+ y18-20020a170906449200b00931d27778a4mr19509506ejo.30.1680086044568; 
+ Wed, 29 Mar 2023 03:34:04 -0700 (PDT)
+Received: from ?IPV6:2001:1c00:c32:7800:5bfa:a036:83f0:f9ec?
+ (2001-1c00-0c32-7800-5bfa-a036-83f0-f9ec.cable.dynamic.v6.ziggo.nl.
+ [2001:1c00:c32:7800:5bfa:a036:83f0:f9ec])
+ by smtp.gmail.com with ESMTPSA id
+ rk28-20020a170907215c00b00933b38505f9sm13763006ejb.152.2023.03.29.03.34.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 29 Mar 2023 03:34:03 -0700 (PDT)
+Message-ID: <5a6150d9-3410-b453-b4f2-c25b85d9a4d2@redhat.com>
+Date: Wed, 29 Mar 2023 12:34:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Content-Language: en-US
-To: Matthew Wilcox <willy@infradead.org>, Alistair Popple <apopple@nvidia.com>
-References: <20230328021434.292971-1-apopple@nvidia.com>
- <ZCOtiZFoxC6w/eoZ@casper.infradead.org>
-From: John Hubbard <jhubbard@nvidia.com>
-In-Reply-To: <ZCOtiZFoxC6w/eoZ@casper.infradead.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+ Thunderbird/102.7.1
+To: Lyude Paul <lyude@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Karol Herbst <kherbst@redhat.com>
+References: <20230326205433.36485-1-hdegoede@redhat.com>
+ <3b14406294755cde2b2be6ba54dc09105c071775.camel@redhat.com>
+From: Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <3b14406294755cde2b2be6ba54dc09105c071775.camel@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US, nl
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.126.231.37]
-X-ClientProxiedBy: rnnvmail201.nvidia.com (10.129.68.8) To
- rnnvmail201.nvidia.com (10.129.68.8)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1NAM11FT009:EE_|CH3PR12MB7594:EE_
-X-MS-Office365-Filtering-Correlation-Id: d8fe3ff9-8830-489a-f7d9-08db30080857
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 2oprKiCBul16PaM4e5lsb5jBdftFEAdseFu0SxWhHAG/kUKDmzXe+Sni7qYWM3wtBfJ9f+53zvlwQPT6ZvlLVJ0DjVUTxvjKLNi1oBU6zWI3JwmYKRKDPT0REWMCowrZGS0vlId2GG+5TVaz0MsANGoPAmRLHBSFdduEw4OjdIcRsmKy7m1A8u0euTRX5g2Ckbu6clt8Ljvm1nlLWZ5s3Er47BcnVVENZD0ixQ4Sa3+Endmib8iv5S4teoxnICHfe8iOd7O/IuOzm/iNC/1ZV/wWTjQG0JkkugaQX63NXjpARQY4c3HOzgnshFHUSLk+rv7KMiqk1d4zUKVXSZ/YsuileVXQvo2yNyxkIYGCdC0+KhaKrtq68VsGxLfLqWtyE4txfSglzLeEX3thrb5hhENg85aJRSa6ZRB9FHa3/gYXLYEYRX8uCnUietHxbTt9eXS1H/ba6jlGlqAoPJ9GzIIMOwFyfKo85mLwkq/MLGyuw3c2x3U6UUdUYZIBhfHnrHs14+dqD0o7CrIiJlPEQsKTxCm2wkd/CSC+bNVh1MUcoYBQAOLx0VyhG1U1myYvU5kwVzkTbJhkSmZbzX5/ig1Es3vAYv2EVf3QAHPKbpL8CqvYgPSCMGMhg8qnCrZAMA17uAYFj+Bj6CWM92ZiKTu4hgbF8OA5jDtMbMxSOnyCX4O7haDPDCbKcIKndZHJUc4SDrG9P8IcLgFZX6EBLoJM0oM6wRS1tM/f2rbnLKnnIZUfTJfwgNWcfM3lJ3ypX6SVQOl2Ft2gCl7NRILSlxwClcrUu/QbvdX9mvB4OhRRuwdG7s+HCqmLqghA8Xlu
-X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
- SFS:(13230028)(4636009)(39860400002)(346002)(396003)(136003)(376002)(451199021)(40470700004)(46966006)(36840700001)(8936002)(31686004)(2906002)(47076005)(336012)(83380400001)(426003)(2616005)(34020700004)(36860700001)(41300700001)(31696002)(86362001)(36756003)(40460700003)(7636003)(5660300002)(82740400003)(356005)(6636002)(478600001)(40480700001)(54906003)(8676002)(70586007)(70206006)(4326008)(4744005)(16526019)(82310400005)(186003)(53546011)(110136005)(316002)(26005)(16576012)(43740500002);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Mar 2023 03:45:25.9974 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d8fe3ff9-8830-489a-f7d9-08db30080857
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT009.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7594
-Subject: Re: [Nouveau] [PATCH] mm: Take a page reference when removing
- device exclusive entries
+Subject: Re: [Nouveau] [PATCH 6.2 regression fix] drm/nouveau/kms: Fix
+ backlight registration
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -109,28 +89,82 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-mm@kvack.org, Andrew Morton <akpm@linux-foundation.org>, Ralph
- Campbell <rcampbell@nvidia.com>, stable@vger.kernel.org,
- nouveau@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, regressions@lists.linux.dev,
+ dri-devel@lists.freedesktop.org, Mark Pearson <mpearson@lenovo.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 3/28/23 20:16, Matthew Wilcox wrote:
-...
->> +	if (!get_page_unless_zero(vmf->page))
->> +		return 0;
+Hi,
+
+On 3/29/23 00:23, Lyude Paul wrote:
+> Reviewed-by: Lyude Paul <lyude@redhat.com>
 > 
->  From a folio point of view: what the hell are you doing here?  Tail
-> pages don't have individual refcounts; all the refcounts are actually
+> (Also note to Mark: this is my way of letting you know someone fixed the
+> regression with backlight controls upstream, looking into the weird bright
+> screen after resume issue)
 
-ohh, and I really should have caught that too. I plead spending too much
-time recently in a somewhat more driver-centric mindset, and failing to
-mentally shift gears properly for this case.
+Thanks.
 
-Sorry for missing that!
+I have pushed this to drm-misc-fixes now.
 
-thanks,
--- 
-John Hubbard
-NVIDIA
+I'll also submit a downstream Fedora kernel pull-req with this
+to get this resolved in the Fedora kernels .
+
+Regards,
+
+Hans
+
+
+
+> 
+> On Sun, 2023-03-26 at 22:54 +0200, Hans de Goede wrote:
+>> The nouveau code used to call drm_fb_helper_initial_config() from
+>> nouveau_fbcon_init() before calling drm_dev_register(). This would
+>> probe all connectors so that drm_connector->status could be used during
+>> backlight registration which runs from nouveau_connector_late_register().
+>>
+>> After commit 4a16dd9d18a0 ("drm/nouveau/kms: switch to drm fbdev helpers")
+>> the fbdev emulation code, which now is a drm-client, can only run after
+>> drm_dev_register(). So during backlight registration the connectors are
+>> not probed yet and the drm_connector->status == connected check in
+>> nv50_backlight_init() would now always fail.
+>>
+>> Replace the drm_connector->status == connected check with
+>> a drm_helper_probe_detect() == connected check to fix nv_backlight
+>> no longer getting registered because of this.
+>>
+>> Fixes: 4a16dd9d18a0 ("drm/nouveau/kms: switch to drm fbdev helpers")
+>> Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/202
+>> Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+>> ---
+>>  drivers/gpu/drm/nouveau/nouveau_backlight.c | 7 ++++++-
+>>  1 file changed, 6 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/gpu/drm/nouveau/nouveau_backlight.c b/drivers/gpu/drm/nouveau/nouveau_backlight.c
+>> index 40409a29f5b6..91b5ecc57538 100644
+>> --- a/drivers/gpu/drm/nouveau/nouveau_backlight.c
+>> +++ b/drivers/gpu/drm/nouveau/nouveau_backlight.c
+>> @@ -33,6 +33,7 @@
+>>  #include <linux/apple-gmux.h>
+>>  #include <linux/backlight.h>
+>>  #include <linux/idr.h>
+>> +#include <drm/drm_probe_helper.h>
+>>  
+>>  #include "nouveau_drv.h"
+>>  #include "nouveau_reg.h"
+>> @@ -299,8 +300,12 @@ nv50_backlight_init(struct nouveau_backlight *bl,
+>>  	struct nouveau_drm *drm = nouveau_drm(nv_encoder->base.base.dev);
+>>  	struct nvif_object *device = &drm->client.device.object;
+>>  
+>> +	/*
+>> +	 * Note when this runs the connectors have not been probed yet,
+>> +	 * so nv_conn->base.status is not set yet.
+>> +	 */
+>>  	if (!nvif_rd32(device, NV50_PDISP_SOR_PWM_CTL(ffs(nv_encoder->dcb->or) - 1)) ||
+>> -	    nv_conn->base.status != connector_status_connected)
+>> +	    drm_helper_probe_detect(&nv_conn->base, NULL, false) != connector_status_connected)
+>>  		return -ENODEV;
+>>  
+>>  	if (nv_conn->type == DCB_CONNECTOR_eDP) {
+> 
 
