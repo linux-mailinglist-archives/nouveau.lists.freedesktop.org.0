@@ -2,51 +2,73 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 106D06D09F1
-	for <lists+nouveau@lfdr.de>; Thu, 30 Mar 2023 17:40:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1328A6D123D
+	for <lists+nouveau@lfdr.de>; Fri, 31 Mar 2023 00:39:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0D04A10EEE3;
-	Thu, 30 Mar 2023 15:40:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7D95110F085;
+	Thu, 30 Mar 2023 22:39:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E9A2410EEE1;
- Thu, 30 Mar 2023 15:40:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1680190827; x=1711726827;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=1tpAD2lJHHTbfmMOk8wfEQn/PwAZtGTK00t9XCICJu8=;
- b=BDLOfWDp3jh2Kqt5F3vUJV1tUYbjJfDej/N/2VPRkNNaIMh/hg/KhrT0
- 9DRIH8CMlXfPIxH0VSY2Fw17ucY1E/GZ8+AvHv3PWi2mqwqV4HQdZRLVY
- 71SsJYdPQLX6mOZft7WNCQL5ckYJmYeK50bNXbl8Lde68cn7zWWwtznjR
- VdcpZXDz/fbClCm4IlQqe8pEGvBTzVHkwkQgA1S6prCQ95EQJq7pjjHEy
- mXDjB8ylgFfiSXIj1umemJvwC5Cf7kf9gugcV+AP5vJwIGU7+xoy/3rf6
- cNDLhB+VwVWrJ3OSnYiVPEq1ULBqwzCP4frMn0Wja3uwBxUSvr2fS3EF3 w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="427480527"
-X-IronPort-AV: E=Sophos;i="5.98,305,1673942400"; d="scan'208";a="427480527"
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
- by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Mar 2023 08:40:08 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="795702262"
-X-IronPort-AV: E=Sophos;i="5.98,305,1673942400"; d="scan'208";a="795702262"
-Received: from unknown (HELO localhost) ([10.237.66.160])
- by fmsmga002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Mar 2023 08:40:06 -0700
-From: Jani Nikula <jani.nikula@intel.com>
-To: dri-devel@lists.freedesktop.org
-Date: Thu, 30 Mar 2023 18:39:39 +0300
-Message-Id: <21b080fbe1a70066f5f4dc2ab3a397dcbf5e8b92.1680190534.git.jani.nikula@intel.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E502B10F082
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Mar 2023 22:39:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1680215983;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=5KLRGaugo3bJYNHTNbGObcKYy+aEw9oHl8WJdhU1s28=;
+ b=IvactrNgFYTK31q2S+4NgnWODymlIM9iSK6jA6tmNOOh4b2qUi7ouIiRobu2yDZpi4uRpC
+ J9zDZYLgyGnNBPI0toDU/uyBGrOnezZVfMQ/tJ2jjYUimGThocl4/MaGEKPzELmqe0Dvsb
+ YeEfcCjLAxgdjLDNs+k61rtAT1IUmWo=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-367-WzuWF_QAMLWNyl43uNkIhQ-1; Thu, 30 Mar 2023 18:39:41 -0400
+X-MC-Unique: WzuWF_QAMLWNyl43uNkIhQ-1
+Received: by mail-ed1-f71.google.com with SMTP id
+ r19-20020a50aad3000000b005002e950cd3so29406259edc.11
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Mar 2023 15:39:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1680215980;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5KLRGaugo3bJYNHTNbGObcKYy+aEw9oHl8WJdhU1s28=;
+ b=DiDLzaRwInC97jwz7S3CFuE446fTl2Wmu3iyvn5SHoI3P0fQzuJMILFNibte1JI776
+ tPofCUzpC0TAi2rNpxlZJ/en7cPLysAJnNoL3HMKnJSv4jAVztX+gY9OGaTgnkJIAxbg
+ u9A+aGFTMJcHC9ESBr087LH1PLUI4Qj8JGi58dW+wdqAbCiD8YX0d6BMCYm0J0fYzV1D
+ ehevvEYYrj4xw0RRH7qEBHQ/GPBvJ4hQUxh2V2qLGFaqqjNAcqZXYZjm1ZQ675bv32w8
+ ExZlx4144kLMRdl5NShAJ4Ua5uSPC2PfQ0SYyANA/XCnKeqzjg1O56OytgJU7JW6W3Q4
+ ZMIQ==
+X-Gm-Message-State: AAQBX9f5PYSX6dWHOMPfw69kN9qe1/QiLNuClBLs6lYj35xDDIRlkL64
+ fyS5XqpmdGBBb6mCeGC4r+AbEB7KyDpbwcVEqH7zu6M1XZL6VxFb6BdmPUEHAkytjAHgnjF5vPK
+ hecMf8PWBXnen6SdvV8Bf0ebNCA==
+X-Received: by 2002:a17:906:297:b0:932:170:e07b with SMTP id
+ 23-20020a170906029700b009320170e07bmr2717000ejf.7.1680215980600; 
+ Thu, 30 Mar 2023 15:39:40 -0700 (PDT)
+X-Google-Smtp-Source: AKy350YArwjRfAnCTrwT8vxsxel4wJik3BioMPfTSW1diiRfUzP7BNbx8CC8jIFESIUiLA6Oy1WH9w==
+X-Received: by 2002:a17:906:297:b0:932:170:e07b with SMTP id
+ 23-20020a170906029700b009320170e07bmr2716990ejf.7.1680215980283; 
+ Thu, 30 Mar 2023 15:39:40 -0700 (PDT)
+Received: from kherbst.pingu (ip1f113ce7.dynamic.kabel-deutschland.de.
+ [31.17.60.231]) by smtp.gmail.com with ESMTPSA id
+ t2-20020a1709061be200b00932b3e2c015sm288612ejg.51.2023.03.30.15.39.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Mar 2023 15:39:39 -0700 (PDT)
+From: Karol Herbst <kherbst@redhat.com>
+To: linux-kernel@vger.kernel.org
+Date: Fri, 31 Mar 2023 00:39:38 +0200
+Message-Id: <20230330223938.4025569-1-kherbst@redhat.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <cover.1680190534.git.jani.nikula@intel.com>
-References: <cover.1680190534.git.jani.nikula@intel.com>
 MIME-Version: 1.0
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 02/12] drm/nouveau: convert to using is_hdmi and
- has_audio from display info
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
+Subject: [Nouveau] [PATCH] drm/nouveau/disp: Support more modes by checking
+ with lower bpc
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,107 +80,99 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: jani.nikula@intel.com, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ stable@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Prefer the parsed results for is_hdmi and has_audio in display info over
-calling drm_detect_hdmi_monitor() and drm_detect_monitor_audio(),
-respectively.
+This allows us to advertise more modes especially on HDR displays.
 
-Conveniently, this also removes the need to use edid_blob_ptr.
+Fixes using 4K@60 modes on my TV and main display both using a HDMI to DP
+adapter. Also fixes similiar issues for users running into this.
 
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Karol Herbst <kherbst@redhat.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: nouveau@lists.freedesktop.org
-Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Cc: stable@vger.kernel.org # 5.10+
+Signed-off-by: Karol Herbst <kherbst@redhat.com>
 ---
- drivers/gpu/drm/nouveau/dispnv50/disp.c     | 8 ++++----
- drivers/gpu/drm/nouveau/dispnv50/head.c     | 8 +-------
- drivers/gpu/drm/nouveau/nouveau_connector.c | 2 +-
- 3 files changed, 6 insertions(+), 12 deletions(-)
+ drivers/gpu/drm/nouveau/dispnv50/disp.c | 32 +++++++++++++++++++++++++
+ drivers/gpu/drm/nouveau/nouveau_dp.c    |  8 ++++---
+ 2 files changed, 37 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index ed9d374147b8..6c41e0316043 100644
+index ed9d374147b8d..f28e47c161dd9 100644
 --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
 +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -713,7 +713,7 @@ nv50_audio_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
- 	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
- 	struct nvif_outp *outp = &nv_encoder->outp;
+@@ -363,6 +363,35 @@ nv50_outp_atomic_check_view(struct drm_encoder *encoder,
+ 	return 0;
+ }
  
--	if (!nv50_audio_supported(encoder) || !drm_detect_monitor_audio(nv_connector->edid))
-+	if (!nv50_audio_supported(encoder) || !nv_connector->base.display_info.has_audio)
- 		return;
++static void
++nv50_outp_atomic_fix_depth(struct drm_encoder *encoder, struct drm_crtc_state *crtc_state)
++{
++	struct nv50_head_atom *asyh = nv50_head_atom(crtc_state);
++	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
++	struct drm_display_mode *mode = &asyh->state.adjusted_mode;
++	unsigned int max_rate, mode_rate;
++
++	switch (nv_encoder->dcb->type) {
++	case DCB_OUTPUT_DP:
++		max_rate = nv_encoder->dp.link_nr * nv_encoder->dp.link_bw;
++
++                /* we don't support more than 10 anyway */
++		asyh->or.bpc = max_t(u8, asyh->or.bpc, 10);
++
++		/* reduce the bpc until it works out */
++		while (asyh->or.bpc > 6) {
++			mode_rate = DIV_ROUND_UP(mode->clock * asyh->or.bpc * 3, 8);
++			if (mode_rate <= max_rate)
++				break;
++
++			asyh->or.bpc -= 2;
++		}
++		break;
++	default:
++		break;
++	}
++}
++
+ static int
+ nv50_outp_atomic_check(struct drm_encoder *encoder,
+ 		       struct drm_crtc_state *crtc_state,
+@@ -381,6 +410,9 @@ nv50_outp_atomic_check(struct drm_encoder *encoder,
+ 	if (crtc_state->mode_changed || crtc_state->connectors_changed)
+ 		asyh->or.bpc = connector->display_info.bpc;
  
- 	mutex_lock(&drm->audio.lock);
-@@ -1555,13 +1555,13 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
++	/* We might have to reduce the bpc */
++	nv50_outp_atomic_fix_depth(encoder, crtc_state);
++
+ 	return 0;
+ }
  
- 	if ((disp->disp->object.oclass == GT214_DISP ||
- 	     disp->disp->object.oclass >= GF110_DISP) &&
--	    drm_detect_monitor_audio(nv_connector->edid))
-+	    nv_connector->base.display_info.has_audio)
- 		hda = true;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_dp.c b/drivers/gpu/drm/nouveau/nouveau_dp.c
+index e00876f92aeea..d49b4875fc3c9 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_dp.c
++++ b/drivers/gpu/drm/nouveau/nouveau_dp.c
+@@ -263,8 +263,6 @@ nouveau_dp_irq(struct work_struct *work)
+ }
  
- 	switch (nv_encoder->dcb->type) {
- 	case DCB_OUTPUT_TMDS:
- 		if (disp->disp->object.oclass == NV50_DISP ||
--		    !drm_detect_hdmi_monitor(nv_connector->edid))
-+		    !nv_connector->base.display_info.is_hdmi)
- 			nvif_outp_acquire_tmds(outp, nv_crtc->index, false, 0, 0, 0, false);
- 		else
- 			nv50_hdmi_enable(encoder, nv_crtc, nv_connector, state, mode, hda);
-@@ -1576,7 +1576,7 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
- 			 */
- 			if (mode->clock >= 165000 &&
- 			    nv_encoder->dcb->duallink_possible &&
--			    !drm_detect_hdmi_monitor(nv_connector->edid))
-+			    !nv_connector->base.display_info.is_hdmi)
- 				proto = NV507D_SOR_SET_CONTROL_PROTOCOL_DUAL_TMDS;
- 		} else {
- 			proto = NV507D_SOR_SET_CONTROL_PROTOCOL_SINGLE_TMDS_B;
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
-index 5f490fbf1877..628db44af891 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/head.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
-@@ -126,14 +126,8 @@ nv50_head_atomic_check_view(struct nv50_head_atom *armh,
- 	struct drm_display_mode *omode = &asyh->state.adjusted_mode;
- 	struct drm_display_mode *umode = &asyh->state.mode;
- 	int mode = asyc->scaler.mode;
--	struct edid *edid;
- 	int umode_vdisplay, omode_hdisplay, omode_vdisplay;
+ /* TODO:
+- * - Use the minimum possible BPC here, once we add support for the max bpc
+- *   property.
+  * - Validate against the DP caps advertised by the GPU (we don't check these
+  *   yet)
+  */
+@@ -276,7 +274,11 @@ nv50_dp_mode_valid(struct drm_connector *connector,
+ {
+ 	const unsigned int min_clock = 25000;
+ 	unsigned int max_rate, mode_rate, ds_max_dotclock, clock = mode->clock;
+-	const u8 bpp = connector->display_info.bpc * 3;
++	/* Check with the minmum bpc always, so we can advertise better modes.
++	 * In particlar not doing this causes modes to be dropped on HDR
++	 * displays as we might check with a bpc of 16 even.
++	 */
++	const u8 bpp = 6 * 3;
  
--	if (connector->edid_blob_ptr)
--		edid = (struct edid *)connector->edid_blob_ptr->data;
--	else
--		edid = NULL;
--
- 	if (!asyc->scaler.full) {
- 		if (mode == DRM_MODE_SCALE_NONE)
- 			omode = umode;
-@@ -161,7 +155,7 @@ nv50_head_atomic_check_view(struct nv50_head_atom *armh,
- 	 */
- 	if ((asyc->scaler.underscan.mode == UNDERSCAN_ON ||
- 	    (asyc->scaler.underscan.mode == UNDERSCAN_AUTO &&
--	     drm_detect_hdmi_monitor(edid)))) {
-+	     connector->display_info.is_hdmi))) {
- 		u32 bX = asyc->scaler.underscan.hborder;
- 		u32 bY = asyc->scaler.underscan.vborder;
- 		u32 r = (asyh->view.oH << 19) / asyh->view.oW;
-diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
-index 086b66b60d91..3143d2083c6d 100644
---- a/drivers/gpu/drm/nouveau/nouveau_connector.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
-@@ -1012,7 +1012,7 @@ get_tmds_link_bandwidth(struct drm_connector *connector)
- 	unsigned duallink_scale =
- 		nouveau_duallink && nv_encoder->dcb->duallink_possible ? 2 : 1;
- 
--	if (drm_detect_hdmi_monitor(nv_connector->edid)) {
-+	if (nv_connector->base.display_info.is_hdmi) {
- 		info = &nv_connector->base.display_info;
- 		duallink_scale = 1;
- 	}
+ 	if (mode->flags & DRM_MODE_FLAG_INTERLACE && !outp->caps.dp_interlace)
+ 		return MODE_NO_INTERLACE;
 -- 
 2.39.2
 
