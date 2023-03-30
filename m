@@ -1,51 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AA3B6D09EA
-	for <lists+nouveau@lfdr.de>; Thu, 30 Mar 2023 17:40:11 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 106D06D09F1
+	for <lists+nouveau@lfdr.de>; Thu, 30 Mar 2023 17:40:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EE66E10EEDA;
-	Thu, 30 Mar 2023 15:40:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0D04A10EEE3;
+	Thu, 30 Mar 2023 15:40:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A01F310EED9;
- Thu, 30 Mar 2023 15:40:07 +0000 (UTC)
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E9A2410EEE1;
+ Thu, 30 Mar 2023 15:40:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1680190807; x=1711726807;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=0FhdH0p/HcWeBfk5OJ7HWQw0UUWQdBGYy04tFYP7/6M=;
- b=n89gg+p7ASW5oF+nA56LbsoUEeRJ/hGtSkOEZKYiqDKoLJgsBT4E++L+
- UHg1ZyNyc9p5b/Hyrfts8qX6W/zrsxndtVKRSsEQRcFvgBQblqhH4iwiR
- 0lkrNHPnxHTsGnZWc0LhQl0pxp2wnPvN/vy/QxGqUMocRx5aTbOa+aWo5
- HsRUtSogOLxaYuyaTEjE2FOF28wYBHMh89Wn3DeKubwDlet/UyWuwbgeW
- Vqa+d1o1wTIvNEyMPH4fttMGfBxLf9eQonp6bA4DUknvJm55eEbfvw0v8
- oWbbk8NoltNB7Jm32BoheJSx0+iMBldE0eTCCmJfYYwkK0GBnQbwpb5g2 w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="329722047"
-X-IronPort-AV: E=Sophos;i="5.98,305,1673942400"; d="scan'208";a="329722047"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
- by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Mar 2023 08:40:00 -0700
+ t=1680190827; x=1711726827;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=1tpAD2lJHHTbfmMOk8wfEQn/PwAZtGTK00t9XCICJu8=;
+ b=BDLOfWDp3jh2Kqt5F3vUJV1tUYbjJfDej/N/2VPRkNNaIMh/hg/KhrT0
+ 9DRIH8CMlXfPIxH0VSY2Fw17ucY1E/GZ8+AvHv3PWi2mqwqV4HQdZRLVY
+ 71SsJYdPQLX6mOZft7WNCQL5ckYJmYeK50bNXbl8Lde68cn7zWWwtznjR
+ VdcpZXDz/fbClCm4IlQqe8pEGvBTzVHkwkQgA1S6prCQ95EQJq7pjjHEy
+ mXDjB8ylgFfiSXIj1umemJvwC5Cf7kf9gugcV+AP5vJwIGU7+xoy/3rf6
+ cNDLhB+VwVWrJ3OSnYiVPEq1ULBqwzCP4frMn0Wja3uwBxUSvr2fS3EF3 w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="427480527"
+X-IronPort-AV: E=Sophos;i="5.98,305,1673942400"; d="scan'208";a="427480527"
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Mar 2023 08:40:08 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="774032104"
-X-IronPort-AV: E=Sophos;i="5.98,305,1673942400"; d="scan'208";a="774032104"
+X-IronPort-AV: E=McAfee;i="6600,9927,10665"; a="795702262"
+X-IronPort-AV: E=Sophos;i="5.98,305,1673942400"; d="scan'208";a="795702262"
 Received: from unknown (HELO localhost) ([10.237.66.160])
- by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Mar 2023 08:39:55 -0700
+ by fmsmga002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Mar 2023 08:40:06 -0700
 From: Jani Nikula <jani.nikula@intel.com>
 To: dri-devel@lists.freedesktop.org
-Date: Thu, 30 Mar 2023 18:39:37 +0300
-Message-Id: <cover.1680190534.git.jani.nikula@intel.com>
+Date: Thu, 30 Mar 2023 18:39:39 +0300
+Message-Id: <21b080fbe1a70066f5f4dc2ab3a397dcbf5e8b92.1680190534.git.jani.nikula@intel.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <cover.1680190534.git.jani.nikula@intel.com>
+References: <cover.1680190534.git.jani.nikula@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 00/12] drm: reduce
- drm_detect_monitor_audio/drm_detect_hdmi_monitor/edid_blob_ptr usage
+Subject: [Nouveau] [PATCH 02/12] drm/nouveau: convert to using is_hdmi and
+ has_audio from display info
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,93 +58,107 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: =?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko@sntech.de>,
-	jani.nikula@intel.com, nouveau@lists.freedesktop.org,
-	intel-gfx@lists.freedesktop.org, Xinhui <Xinhui.Pan@amd.com>,
-	Seung-Woo Kim <sw0312.kim@samsung.com>,
-	Russell King <linux@armlinux.org.uk>, amd-gfx@lists.freedesktop.org,
-	Sandy Huang <hjc@rock-chips.com>, Inki Dae <inki.dae@samsung.com>,
-	Kyungmin Park <kyungmin.park@samsung.com>,
-	Ben Skeggs <bskeggs@redhat.com>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Alain Volmat <alain.volmat@foss.st.com>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	Pan@freedesktop.org
+Cc: jani.nikula@intel.com, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-THIS IS UNTESTED for anything other than i915.
+Prefer the parsed results for is_hdmi and has_audio in display info over
+calling drm_detect_hdmi_monitor() and drm_detect_monitor_audio(),
+respectively.
 
-Use previously parsed EDID where possible for display audio/hdmi
-detection. This in turn reduces edid_blob_ptr usage in a number of
-places. Further reduce edid_blob_ptr usage, and document that it should
-not be used by drivers directly.
+Conveniently, this also removes the need to use edid_blob_ptr.
 
-BR,
-Jani.
-
-
-Cc: Alain Volmat <alain.volmat@foss.st.com>
-Cc: Alex Deucher <alexander.deucher@amd.com>
-Cc: amd-gfx@lists.freedesktop.org
 Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Christian König <christian.koenig@amd.com>
-Cc: Heiko Stübner <heiko@sntech.de>
-Cc: Inki Dae <inki.dae@samsung.com>
 Cc: Karol Herbst <kherbst@redhat.com>
-Cc: Kyungmin Park <kyungmin.park@samsung.com>
 Cc: Lyude Paul <lyude@redhat.com>
 Cc: nouveau@lists.freedesktop.org
-Cc: Pan, Xinhui <Xinhui.Pan@amd.com>
-Cc: Russell King <linux@armlinux.org.uk>
-Cc: Sandy Huang <hjc@rock-chips.com>
-Cc: Seung-Woo Kim <sw0312.kim@samsung.com>
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+---
+ drivers/gpu/drm/nouveau/dispnv50/disp.c     | 8 ++++----
+ drivers/gpu/drm/nouveau/dispnv50/head.c     | 8 +-------
+ drivers/gpu/drm/nouveau/nouveau_connector.c | 2 +-
+ 3 files changed, 6 insertions(+), 12 deletions(-)
 
-
-Jani Nikula (12):
-  drm/edid: parse display info has_audio similar to is_hdmi
-  drm/nouveau: convert to using is_hdmi and has_audio from display info
-  drm/radeon: convert to using is_hdmi and has_audio from display info
-  drm/radeon: remove radeon_connector_edid() and stop using
-    edid_blob_ptr
-  drm/amdgpu: remove amdgpu_connector_edid() and stop using
-    edid_blob_ptr
-  drm/i915/debugfs: stop using edid_blob_ptr
-  drm/exynos: fix is_hdmi usage
-  drm/i2c/tda998x: convert to using has_audio from display_info
-  drm/sti/sti_hdmi: convert to using is_hdmi from display info
-  drm/rockchip: cdn-dp: call drm_connector_update_edid_property()
-    unconditionally
-  drm/rockchip: convert to using has_audio from display_info
-  drm/connector: update edid_blob_ptr documentation
-
- .../gpu/drm/amd/amdgpu/amdgpu_connectors.c    | 15 -----------
- .../gpu/drm/amd/amdgpu/amdgpu_connectors.h    |  1 -
- drivers/gpu/drm/amd/amdgpu/dce_v10_0.c        |  4 +--
- drivers/gpu/drm/amd/amdgpu/dce_v11_0.c        |  4 +--
- drivers/gpu/drm/amd/amdgpu/dce_v6_0.c         |  4 +--
- drivers/gpu/drm/amd/amdgpu/dce_v8_0.c         |  4 +--
- drivers/gpu/drm/drm_edid.c                    |  6 +++++
- drivers/gpu/drm/exynos/exynos_hdmi.c          |  3 ++-
- drivers/gpu/drm/i2c/tda998x_drv.c             |  2 +-
- .../drm/i915/display/intel_display_debugfs.c  | 10 +++----
- drivers/gpu/drm/nouveau/dispnv50/disp.c       |  8 +++---
- drivers/gpu/drm/nouveau/dispnv50/head.c       |  8 +-----
- drivers/gpu/drm/nouveau/nouveau_connector.c   |  2 +-
- drivers/gpu/drm/radeon/atombios_encoders.c    | 10 +++----
- drivers/gpu/drm/radeon/evergreen_hdmi.c       |  5 ++--
- drivers/gpu/drm/radeon/radeon_audio.c         | 11 ++++----
- drivers/gpu/drm/radeon/radeon_connectors.c    | 27 +++++--------------
- drivers/gpu/drm/radeon/radeon_display.c       |  2 +-
- drivers/gpu/drm/radeon/radeon_encoders.c      |  4 +--
- drivers/gpu/drm/radeon/radeon_mode.h          |  2 --
- drivers/gpu/drm/rockchip/cdn-dp-core.c        |  7 +++--
- drivers/gpu/drm/rockchip/inno_hdmi.c          |  3 ++-
- drivers/gpu/drm/sti/sti_hdmi.c                | 11 ++++----
- drivers/gpu/drm/sti/sti_hdmi.h                |  2 --
- include/drm/drm_connector.h                   | 14 +++++++++-
- 25 files changed, 73 insertions(+), 96 deletions(-)
-
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+index ed9d374147b8..6c41e0316043 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+@@ -713,7 +713,7 @@ nv50_audio_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
+ 	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
+ 	struct nvif_outp *outp = &nv_encoder->outp;
+ 
+-	if (!nv50_audio_supported(encoder) || !drm_detect_monitor_audio(nv_connector->edid))
++	if (!nv50_audio_supported(encoder) || !nv_connector->base.display_info.has_audio)
+ 		return;
+ 
+ 	mutex_lock(&drm->audio.lock);
+@@ -1555,13 +1555,13 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
+ 
+ 	if ((disp->disp->object.oclass == GT214_DISP ||
+ 	     disp->disp->object.oclass >= GF110_DISP) &&
+-	    drm_detect_monitor_audio(nv_connector->edid))
++	    nv_connector->base.display_info.has_audio)
+ 		hda = true;
+ 
+ 	switch (nv_encoder->dcb->type) {
+ 	case DCB_OUTPUT_TMDS:
+ 		if (disp->disp->object.oclass == NV50_DISP ||
+-		    !drm_detect_hdmi_monitor(nv_connector->edid))
++		    !nv_connector->base.display_info.is_hdmi)
+ 			nvif_outp_acquire_tmds(outp, nv_crtc->index, false, 0, 0, 0, false);
+ 		else
+ 			nv50_hdmi_enable(encoder, nv_crtc, nv_connector, state, mode, hda);
+@@ -1576,7 +1576,7 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
+ 			 */
+ 			if (mode->clock >= 165000 &&
+ 			    nv_encoder->dcb->duallink_possible &&
+-			    !drm_detect_hdmi_monitor(nv_connector->edid))
++			    !nv_connector->base.display_info.is_hdmi)
+ 				proto = NV507D_SOR_SET_CONTROL_PROTOCOL_DUAL_TMDS;
+ 		} else {
+ 			proto = NV507D_SOR_SET_CONTROL_PROTOCOL_SINGLE_TMDS_B;
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
+index 5f490fbf1877..628db44af891 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/head.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
+@@ -126,14 +126,8 @@ nv50_head_atomic_check_view(struct nv50_head_atom *armh,
+ 	struct drm_display_mode *omode = &asyh->state.adjusted_mode;
+ 	struct drm_display_mode *umode = &asyh->state.mode;
+ 	int mode = asyc->scaler.mode;
+-	struct edid *edid;
+ 	int umode_vdisplay, omode_hdisplay, omode_vdisplay;
+ 
+-	if (connector->edid_blob_ptr)
+-		edid = (struct edid *)connector->edid_blob_ptr->data;
+-	else
+-		edid = NULL;
+-
+ 	if (!asyc->scaler.full) {
+ 		if (mode == DRM_MODE_SCALE_NONE)
+ 			omode = umode;
+@@ -161,7 +155,7 @@ nv50_head_atomic_check_view(struct nv50_head_atom *armh,
+ 	 */
+ 	if ((asyc->scaler.underscan.mode == UNDERSCAN_ON ||
+ 	    (asyc->scaler.underscan.mode == UNDERSCAN_AUTO &&
+-	     drm_detect_hdmi_monitor(edid)))) {
++	     connector->display_info.is_hdmi))) {
+ 		u32 bX = asyc->scaler.underscan.hborder;
+ 		u32 bY = asyc->scaler.underscan.vborder;
+ 		u32 r = (asyh->view.oH << 19) / asyh->view.oW;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+index 086b66b60d91..3143d2083c6d 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.c
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+@@ -1012,7 +1012,7 @@ get_tmds_link_bandwidth(struct drm_connector *connector)
+ 	unsigned duallink_scale =
+ 		nouveau_duallink && nv_encoder->dcb->duallink_possible ? 2 : 1;
+ 
+-	if (drm_detect_hdmi_monitor(nv_connector->edid)) {
++	if (nv_connector->base.display_info.is_hdmi) {
+ 		info = &nv_connector->base.display_info;
+ 		duallink_scale = 1;
+ 	}
 -- 
 2.39.2
 
