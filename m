@@ -2,75 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EF006D298F
-	for <lists+nouveau@lfdr.de>; Fri, 31 Mar 2023 22:42:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8AA26D29A9
+	for <lists+nouveau@lfdr.de>; Fri, 31 Mar 2023 22:52:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EEEB010E2FE;
-	Fri, 31 Mar 2023 20:42:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BDE5F10E562;
+	Fri, 31 Mar 2023 20:52:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BB3FE10E2FE
- for <nouveau@lists.freedesktop.org>; Fri, 31 Mar 2023 20:42:16 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 321BE10F2FD
+ for <nouveau@lists.freedesktop.org>; Fri, 31 Mar 2023 20:52:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1680295335;
+ s=mimecast20190719; t=1680295923;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=dpVbBRCiJ4We7LHm9u8gIxfqs0WEGOfu+33bncRZNio=;
- b=haFJkNwPItkcxwZgeXKoN0CaBppjIeYBoBJQP0JRgurjTGlWmGZAtEws4/8X5DeOc30jd1
- eq/32GGWMuqjOhJGBN05HRQ6J3Etstki4hwh9le7cT/85MD7p+YUbjFQSCgBIqzE3n4Tmr
- JyMW30wKH+wE0kIO0cCs++er/Ls2FeY=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=KDH3L7DwZn1vZBwS1na4+1Vi8gh6jhDOuuWvh5vp39o=;
+ b=VgiTf3WGVx+uJA6veldeJruWxnIp3Swpsc4wqKTwlX76ST9yX5X9X5MS9DSV4ozNqGe24J
+ l67nmaJadvEsZeL0n+9a4HBhgYzcEstXDi6F1FqRQfIojslVSFdTCK1IhAlsDrtDeQuGpH
+ IJhEF+YrrPf1oH5SBqmHJsQlFo79gls=
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-619-WOs-mkuTMBSnASPO6qrdTg-1; Fri, 31 Mar 2023 16:42:14 -0400
-X-MC-Unique: WOs-mkuTMBSnASPO6qrdTg-1
-Received: by mail-qk1-f198.google.com with SMTP id
- 187-20020a3707c4000000b007468d9a30faso11049072qkh.23
- for <nouveau@lists.freedesktop.org>; Fri, 31 Mar 2023 13:42:14 -0700 (PDT)
+ us-mta-53-x3Iv-eWwNuyzZQhithBhyQ-1; Fri, 31 Mar 2023 16:52:02 -0400
+X-MC-Unique: x3Iv-eWwNuyzZQhithBhyQ-1
+Received: by mail-qk1-f200.google.com with SMTP id
+ r70-20020a374449000000b00746c31401f0so10917563qka.6
+ for <nouveau@lists.freedesktop.org>; Fri, 31 Mar 2023 13:52:01 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680295333;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dpVbBRCiJ4We7LHm9u8gIxfqs0WEGOfu+33bncRZNio=;
- b=kcZhfptfQ5yTPlDcdI+Dfh/G5oS8ceyEIPIFbtupfctw5bZf/eObSfBLYRqchVLO0q
- UMUSQh+dadK0eZdtHs5Qt0HC6ktw5YTBX1WhpLzMFvGwC0hXtHtuIDU9LIgHITxSL9kq
- kdgHkJ0dWDHIt2P/Jg+Fx97SJjcdk5K1MzF975/VStNH/hChSzqbOzU3NQLtKnCWsZub
- i8RerADgpTqG78RJzYh/yB+6hzNvqNOaqQr5m/XN96AbaGCC5t4glMSgKoT8wLLBm6xo
- Y+KBVx98jpLiy6t1asuLSyQWFWhBu6QORRa8DDSntnVE0jJK3RHMtnj6ilBBVRn3REoC
- oGwA==
-X-Gm-Message-State: AO0yUKVD1TtCnUMmcZ1DUvzV2r+jzDXuVt9iULpyTlkziMmKsiRWQVag
- GNKoSXAVzKULGt7BB5hpmFEwV3L1aBL/r9KlEM2Id0WC/OGxSIuPR9pq2hSqu0kk7pWkn6B9I9K
- CJUL3IiPqDMyAURFkNxiX4FkTzA==
-X-Received: by 2002:a05:622a:1d5:b0:3b8:6ae9:b107 with SMTP id
- t21-20020a05622a01d500b003b86ae9b107mr45596237qtw.17.1680295333576; 
- Fri, 31 Mar 2023 13:42:13 -0700 (PDT)
-X-Google-Smtp-Source: AK7set/mIthcjf+qNMnYSZIwwm7EuAYx4smtbfumckwe21E1gR7bqyHXH49VRfud0h3afzJGf56gqA==
-X-Received: by 2002:a05:622a:1d5:b0:3b8:6ae9:b107 with SMTP id
- t21-20020a05622a01d500b003b86ae9b107mr45596209qtw.17.1680295333331; 
- Fri, 31 Mar 2023 13:42:13 -0700 (PDT)
-Received: from dell-per740-01.7a2m.lab.eng.bos.redhat.com
- (nat-pool-bos-t.redhat.com. [66.187.233.206])
+ d=1e100.net; s=20210112; t=1680295921;
+ h=mime-version:user-agent:content-transfer-encoding:organization
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=TExCraw6m8qeEuU/cKmvx3BPZJEqqAr20GEIk47fq4k=;
+ b=xljePxkBXNfHV3+sueyZ3OT35Omonr4Lnq4v8upufcwgea4acwuRLVqZUUkW59qbsL
+ Ux+rD/iyZowl4Bnukq/sYp9D3UZKI0ok9OdCCUU51U4sFGdtOae2Br8PsMpm22Eush/u
+ nkooJki9CyJnj9UnZfZBC9+Q0z7rQA2w/F9m0eezCmDLnyjiZ1gOfV78DHR6Y8cwHQn1
+ Gb86fVkBR4oCHeVKxdpOzcDWlaIVqMmWUGV+ZrZnEsgcF8PfGk1hlZ4DPxmuaQdiB35U
+ ltXE+yd3X7RSzBbm0AGpPHJ5o9CbTP3HGTW7u0ql9neV7Kx3lDpiooUsr6lGaUP/yIqH
+ pYug==
+X-Gm-Message-State: AAQBX9d/qoh+5FRnURqIXDppSGVWmet0N2HdUFhftS8pyY5yZPtxLZch
+ pJzuV+dFnWr91GbxtUPLKrQ2W0bWROlU2Tr6mKMighSKi71v08fboNgsFIrK6YEsODGQHmiQ0FC
+ myVmT+Ar9MMN6RpW2/DZYmAJzXg==
+X-Received: by 2002:ad4:5de2:0:b0:5b5:a816:6b27 with SMTP id
+ jn2-20020ad45de2000000b005b5a8166b27mr46860472qvb.8.1680295921462; 
+ Fri, 31 Mar 2023 13:52:01 -0700 (PDT)
+X-Google-Smtp-Source: AKy350a4BujdGcJ2iPES2jo4+UFcgXVDnbMTbMhCNXJcZZp/TV6Ekdjl4SHquQYXB/2xAlFP8ZOBGQ==
+X-Received: by 2002:ad4:5de2:0:b0:5b5:a816:6b27 with SMTP id
+ jn2-20020ad45de2000000b005b5a8166b27mr46860448qvb.8.1680295921187; 
+ Fri, 31 Mar 2023 13:52:01 -0700 (PDT)
+Received: from ?IPv6:2600:4040:5c57:b700::feb? ([2600:4040:5c57:b700::feb])
  by smtp.gmail.com with ESMTPSA id
- r194-20020a3744cb000000b007465ee178a3sm910309qka.96.2023.03.31.13.42.11
+ bm20-20020a05620a199400b007435a646354sm939211qkb.0.2023.03.31.13.52.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Mar 2023 13:42:12 -0700 (PDT)
-From: Tom Rix <trix@redhat.com>
-To: bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com,
- airlied@gmail.com, daniel@ffwll.ch, nathan@kernel.org,
- ndesaulniers@google.com, gsamaiya@nvidia.com
-Date: Fri, 31 Mar 2023 16:42:09 -0400
-Message-Id: <20230331204209.1863060-1-trix@redhat.com>
-X-Mailer: git-send-email 2.27.0
+ Fri, 31 Mar 2023 13:52:00 -0700 (PDT)
+Message-ID: <286e8ae9c2bddf332e917b72178e0d4e82ab63cb.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Karol Herbst <kherbst@redhat.com>, linux-kernel@vger.kernel.org
+Date: Fri, 31 Mar 2023 16:51:59 -0400
+In-Reply-To: <20230330223938.4025569-1-kherbst@redhat.com>
+References: <20230330223938.4025569-1-kherbst@redhat.com>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.44.4 (3.44.4-2.fc36)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Subject: [Nouveau] [PATCH] drm/nouveau/acr: remove unused loc variable
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/disp: Support more modes by
+ checking with lower bpc
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,45 +84,114 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, llvm@lists.linux.dev,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Tom Rix <trix@redhat.com>
+Cc: nouveau@lists.freedesktop.org, stable@vger.kernel.org,
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-clang with W=1 reports
-drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:221:7: error: variable
-  'loc' set but not used [-Werror,-Wunused-but-set-variable]
-                u32 loc, sig, cnt, *meta;
-                    ^
-This variable is not used so remove it.
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-Signed-off-by: Tom Rix <trix@redhat.com>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+On Fri, 2023-03-31 at 00:39 +0200, Karol Herbst wrote:
+> This allows us to advertise more modes especially on HDR displays.
+>=20
+> Fixes using 4K@60 modes on my TV and main display both using a HDMI to DP
+> adapter. Also fixes similiar issues for users running into this.
+>=20
+> Cc: stable@vger.kernel.org # 5.10+
+> Signed-off-by: Karol Herbst <kherbst@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/dispnv50/disp.c | 32 +++++++++++++++++++++++++
+>  drivers/gpu/drm/nouveau/nouveau_dp.c    |  8 ++++---
+>  2 files changed, 37 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/no=
+uveau/dispnv50/disp.c
+> index ed9d374147b8d..f28e47c161dd9 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> @@ -363,6 +363,35 @@ nv50_outp_atomic_check_view(struct drm_encoder *enco=
+der,
+>  =09return 0;
+>  }
+> =20
+> +static void
+> +nv50_outp_atomic_fix_depth(struct drm_encoder *encoder, struct drm_crtc_=
+state *crtc_state)
+> +{
+> +=09struct nv50_head_atom *asyh =3D nv50_head_atom(crtc_state);
+> +=09struct nouveau_encoder *nv_encoder =3D nouveau_encoder(encoder);
+> +=09struct drm_display_mode *mode =3D &asyh->state.adjusted_mode;
+> +=09unsigned int max_rate, mode_rate;
+> +
+> +=09switch (nv_encoder->dcb->type) {
+> +=09case DCB_OUTPUT_DP:
+> +=09=09max_rate =3D nv_encoder->dp.link_nr * nv_encoder->dp.link_bw;
+> +
+> +                /* we don't support more than 10 anyway */
+> +=09=09asyh->or.bpc =3D max_t(u8, asyh->or.bpc, 10);
+> +
+> +=09=09/* reduce the bpc until it works out */
+> +=09=09while (asyh->or.bpc > 6) {
+> +=09=09=09mode_rate =3D DIV_ROUND_UP(mode->clock * asyh->or.bpc * 3, 8);
+> +=09=09=09if (mode_rate <=3D max_rate)
+> +=09=09=09=09break;
+> +
+> +=09=09=09asyh->or.bpc -=3D 2;
+> +=09=09}
+> +=09=09break;
+> +=09default:
+> +=09=09break;
+> +=09}
+> +}
+> +
+>  static int
+>  nv50_outp_atomic_check(struct drm_encoder *encoder,
+>  =09=09       struct drm_crtc_state *crtc_state,
+> @@ -381,6 +410,9 @@ nv50_outp_atomic_check(struct drm_encoder *encoder,
+>  =09if (crtc_state->mode_changed || crtc_state->connectors_changed)
+>  =09=09asyh->or.bpc =3D connector->display_info.bpc;
+> =20
+> +=09/* We might have to reduce the bpc */
+> +=09nv50_outp_atomic_fix_depth(encoder, crtc_state);
+> +
+>  =09return 0;
+>  }
+> =20
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_dp.c b/drivers/gpu/drm/nouve=
+au/nouveau_dp.c
+> index e00876f92aeea..d49b4875fc3c9 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_dp.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_dp.c
+> @@ -263,8 +263,6 @@ nouveau_dp_irq(struct work_struct *work)
+>  }
+> =20
+>  /* TODO:
+> - * - Use the minimum possible BPC here, once we add support for the max =
+bpc
+> - *   property.
+>   * - Validate against the DP caps advertised by the GPU (we don't check =
+these
+>   *   yet)
+>   */
+> @@ -276,7 +274,11 @@ nv50_dp_mode_valid(struct drm_connector *connector,
+>  {
+>  =09const unsigned int min_clock =3D 25000;
+>  =09unsigned int max_rate, mode_rate, ds_max_dotclock, clock =3D mode->cl=
+ock;
+> -=09const u8 bpp =3D connector->display_info.bpc * 3;
+> +=09/* Check with the minmum bpc always, so we can advertise better modes=
+.
+> +=09 * In particlar not doing this causes modes to be dropped on HDR
+> +=09 * displays as we might check with a bpc of 16 even.
+> +=09 */
+> +=09const u8 bpp =3D 6 * 3;
+> =20
+>  =09if (mode->flags & DRM_MODE_FLAG_INTERLACE && !outp->caps.dp_interlace=
+)
+>  =09=09return MODE_NO_INTERLACE;
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
-index f36a359d4531..bd104a030243 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
-@@ -218,7 +218,7 @@ nvkm_acr_lsfw_load_sig_image_desc_v2(struct nvkm_subdev *subdev,
- 		const struct firmware *hsbl;
- 		const struct nvfw_ls_hsbl_bin_hdr *hdr;
- 		const struct nvfw_ls_hsbl_hdr *hshdr;
--		u32 loc, sig, cnt, *meta;
-+		u32 sig, cnt, *meta;
- 
- 		ret = nvkm_firmware_load_name(subdev, path, "hs_bl_sig", ver, &hsbl);
- 		if (ret)
-@@ -227,7 +227,6 @@ nvkm_acr_lsfw_load_sig_image_desc_v2(struct nvkm_subdev *subdev,
- 		hdr = nvfw_ls_hsbl_bin_hdr(subdev, hsbl->data);
- 		hshdr = nvfw_ls_hsbl_hdr(subdev, hsbl->data + hdr->header_offset);
- 		meta = (u32 *)(hsbl->data + hshdr->meta_data_offset);
--		loc = *(u32 *)(hsbl->data + hshdr->patch_loc);
- 		sig = *(u32 *)(hsbl->data + hshdr->patch_sig);
- 		cnt = *(u32 *)(hsbl->data + hshdr->num_sig);
- 
--- 
-2.27.0
+--=20
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
