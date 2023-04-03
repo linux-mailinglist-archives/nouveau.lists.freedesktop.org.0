@@ -1,52 +1,85 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E6536F6B94
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:56 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA9546F6BEB
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:34:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 94BEC10E458;
-	Thu,  4 May 2023 12:32:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 041D210E46C;
+	Thu,  4 May 2023 12:33:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 636 seconds by postgrey-1.36 at gabe;
- Mon, 27 Mar 2023 08:55:08 UTC
-Received: from galois.linutronix.de (Galois.linutronix.de
- [IPv6:2a0a:51c0:0:12e:550::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5EB0010E338;
- Mon, 27 Mar 2023 08:55:08 +0000 (UTC)
-From: John Ogness <john.ogness@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1679906669;
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A61C410E17E
+ for <nouveau@lists.freedesktop.org>; Mon,  3 Apr 2023 12:02:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1680523357;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to; bh=2sySZtQBfq4L19gj/4gjZ3ggLK9raMfJSFg59Wjh2eU=;
- b=PC1Fc8oyBCQtNOG/RnSIyDobcxaq7sMrCF1hF+CwvZPusMXk3D5P/LTBXewhtj7bNe4fVB
- S7EyLoO+7d5gI/uO00+66r0SOEQ1nvCEANuJ3QPNHhB1WQ96YZ5z9EKnR5qVFMBanGbqDX
- rvW0Tz3EeCoqCROjgXWGVnYMcsU1cpwl67gLTxd1FvsxFg/1kEnnte8u6Z0KGd9muZyi/p
- cfPp6HueDZ4WUX+WIqBS54k7cL2jSfiPitT3sIxEjRcVJk4GOGbcHDmJiyFSZ7wlrK64Zi
- f3M8F42H3SCSM4HvI8cKlYKKxFSyjX8WThZMnvyc2ERzcYAmjtxg/snBuNML9Q==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1679906669;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to; bh=2sySZtQBfq4L19gj/4gjZ3ggLK9raMfJSFg59Wjh2eU=;
- b=2Ow1ZUN2AJU6ec7XoFSU8BgyUDtigL8sf39ypFZkE/5U6DU1vxTwZ+GirXQ594h0jEES5u
- aVhREx4DPqz5lNBw==
-To: Tanmay Bhushan <007047221b@gmail.com>, Ben Skeggs <bskeggs@redhat.com>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, David
- Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, =?utf-8?Q?Christian_K=C3=B6nig?=
- <christian.koenig@amd.com>
-In-Reply-To: <20230119225351.71657-1-007047221b@gmail.com>
-Date: Mon, 27 Mar 2023 10:48:48 +0206
-Message-ID: <87r0taa8l3.fsf@jogness.linutronix.de>
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=GDB/hmJOcrYFtJnN1TBanTBM2RE49CIj8eveC48zPtU=;
+ b=IWxkp/Ucy8xVRHY29w6pFdNFAL0UKAn+fpZuP6Fjk5a85wNSzFx/uVjjp8UqeJQAS/aWs+
+ VY+wP5ZcB2b1t0ODls33mNCBqpIGZJiJJlrdFdP10MLyYXqpNw66wD705rqc4zib1rtRUL
+ oVCpRpujiW2bUbwLiI8biBxVPEQqfRw=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-551-f4NDYjtwPB6185C4_zaPvw-1; Mon, 03 Apr 2023 08:02:36 -0400
+X-MC-Unique: f4NDYjtwPB6185C4_zaPvw-1
+Received: by mail-wm1-f71.google.com with SMTP id
+ bg33-20020a05600c3ca100b003ef6d684105so11777601wmb.1
+ for <nouveau@lists.freedesktop.org>; Mon, 03 Apr 2023 05:02:35 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1680523355;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GDB/hmJOcrYFtJnN1TBanTBM2RE49CIj8eveC48zPtU=;
+ b=bEeuYI+NBHiTigStx32DcqYMdzUVEVykyC+zmyud+ohw5H5NnhcmO89lbFteKZEcb/
+ y/v9OpmrP43bvNgsr57dBq+4j0SrGRWM5lnO//85xE5FJ7xcpDAEZkO1cYBDIRuE+ffp
+ wCG6pI2IfJzdexmti3BDDcsbm0uJU5QyWOIacFtdPmFmRnewHbWk/mx0hxvVXPNJYh6D
+ teVihokgSNOPLcmyoL0BsxOCL1Na4Ay37Jnl+hDR2P9p8tncbo5ixOoKkIhD7+B5QTd2
+ XS5sJs2pq8HZaZVs5/EAkHaQFurkUSZbEQyc36qRQphns99ffLidXzoLMAAlFh4k5oNa
+ 1KjA==
+X-Gm-Message-State: AAQBX9c6Uj6tKrJcQ/J44rka1fNjuZAr5LdSopfXP2y9OEM2uwfWgVSu
+ nW3c/8qanB9/CsKCWpM2tWsePt4nhmQ4rbFZy1QLHAxWObwIkxYXQQ+VNT11zUZMcQNmUmP+kRJ
+ Rfuq4mQx+xzLuTZO2jWT88AB51Q==
+X-Received: by 2002:a7b:ce88:0:b0:3f0:3a5a:362e with SMTP id
+ q8-20020a7bce88000000b003f03a5a362emr10037681wmj.39.1680523355008; 
+ Mon, 03 Apr 2023 05:02:35 -0700 (PDT)
+X-Google-Smtp-Source: AKy350bK74W1j6j/etoodmlgMY4hwEOB599KYyw+0fEjbGAAaXiONOHFfop9MJUYTe3lHtONcsh5ug==
+X-Received: by 2002:a7b:ce88:0:b0:3f0:3a5a:362e with SMTP id
+ q8-20020a7bce88000000b003f03a5a362emr10037657wmj.39.1680523354652; 
+ Mon, 03 Apr 2023 05:02:34 -0700 (PDT)
+Received: from ?IPV6:2003:cb:c702:5e00:8e78:71f3:6243:77f0?
+ (p200300cbc7025e008e7871f3624377f0.dip0.t-ipconnect.de.
+ [2003:cb:c702:5e00:8e78:71f3:6243:77f0])
+ by smtp.gmail.com with ESMTPSA id
+ p13-20020a05600c468d00b003ef7058ea02sm19072053wmo.29.2023.04.03.05.02.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Apr 2023 05:02:33 -0700 (PDT)
+Message-ID: <aab81ed0-9c1e-a10d-63a5-5172c3f91d38@redhat.com>
+Date: Mon, 3 Apr 2023 14:02:32 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:34 +0000
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: Fix bug in buffer relocs for
- Nouveau
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.1
+To: Alistair Popple <apopple@nvidia.com>, linux-mm@kvack.org,
+ Andrew Morton <akpm@linux-foundation.org>
+References: <20230330012519.804116-1-apopple@nvidia.com>
+From: David Hildenbrand <david@redhat.com>
+Organization: Red Hat
+In-Reply-To: <20230330012519.804116-1-apopple@nvidia.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:38 +0000
+Subject: Re: [Nouveau] [PATCH v2] mm: Take a page reference when removing
+ device exclusive entries
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,92 +91,50 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Tanmay Bhushan <007047221b@gmail.com>
+Cc: Ralph Campbell <rcampbell@nvidia.com>, stable@vger.kernel.org,
+ Matthew Wilcox <willy@infradead.org>, nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2023-01-19, Tanmay Bhushan <007047221b@gmail.com> wrote:
-> dma_resv_wait_timeout returns greater than zero on success
-> as opposed to ttm_bo_wait_ctx. As a result of that relocs
-> will fail and give failure even when it was a success.
+On 30.03.23 03:25, Alistair Popple wrote:
+> Device exclusive page table entries are used to prevent CPU access to
+> a page whilst it is being accessed from a device. Typically this is
+> used to implement atomic operations when the underlying bus does not
+> support atomic access. When a CPU thread encounters a device exclusive
+> entry it locks the page and restores the original entry after calling
+> mmu notifiers to signal drivers that exclusive access is no longer
+> available.
+> 
+> The device exclusive entry holds a reference to the page making it
+> safe to access the struct page whilst the entry is present. However
+> the fault handling code does not hold the PTL when taking the page
+> lock. This means if there are multiple threads faulting concurrently
+> on the device exclusive entry one will remove the entry whilst others
+> will wait on the page lock without holding a reference.
+> 
+> This can lead to threads locking or waiting on a folio with a zero
+> refcount. Whilst mmap_lock prevents the pages getting freed via
+> munmap() they may still be freed by a migration. This leads to
+> warnings such as PAGE_FLAGS_CHECK_AT_FREE due to the page being locked
+> when the refcount drops to zero.
+> 
+> Fix this by trying to take a reference on the folio before locking
+> it. The code already checks the PTE under the PTL and aborts if the
+> entry is no longer there. It is also possible the folio has been
+> unmapped, freed and re-allocated allowing a reference to be taken on
+> an unrelated folio. This case is also detected by the PTE check and
+> the folio is unlocked without further changes.
+> 
+> Signed-off-by: Alistair Popple <apopple@nvidia.com>
+> Reviewed-by: Ralph Campbell <rcampbell@nvidia.com>
+> Reviewed-by: John Hubbard <jhubbard@nvidia.com>
+> Fixes: b756a3b5e7ea ("mm: device exclusive memory access")
+> Cc: stable@vger.kernel.org
 
-Today I switched my workstation from 6.2 to 6.3-rc3 and started seeing
-lots of new kernel messages:
+Acked-by: David Hildenbrand <david@redhat.com>
 
-[  642.138313][ T1751] nouveau 0000:f0:10.0: X[1751]: reloc wait_idle failed: 1500
-[  642.138389][ T1751] nouveau 0000:f0:10.0: X[1751]: reloc apply: 1500
-[  646.123490][ T1751] nouveau 0000:f0:10.0: X[1751]: reloc wait_idle failed: 1500
-[  646.123573][ T1751] nouveau 0000:f0:10.0: X[1751]: reloc apply: 1500
+-- 
+Thanks,
 
-The graphics seemed to go slower or hang a bit when these messages would
-appear. I then found your patch! However, I have some comments about it.
+David / dhildenb
 
-First, it should include a fixes tag:
-
-Fixes: 41d351f29528 ("drm/nouveau: stop using ttm_bo_wait")
-
-> Signed-off-by: Tanmay Bhushan <007047221b@gmail.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_gem.c | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-> index f77e44958037..0e3690459144 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-> @@ -706,9 +706,8 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
->  		ret = dma_resv_wait_timeout(nvbo->bo.base.resv,
->  					    DMA_RESV_USAGE_BOOKKEEP,
->  					    false, 15 * HZ);
-> -		if (ret == 0)
-> +		if (ret <= 0) {
->  			ret = -EBUSY;
-
-This is incorrect for 2 reasons:
-
-* it treats restarts as timeouts
-
-* this function now returns >0 on success
-
-> -		if (ret) {
->  			NV_PRINTK(err, cli, "reloc wait_idle failed: %ld\n",
->  				  ret);
->  			break;
-
-I rearranged things to basically correctly translate the return code of
-dma_resv_wait_timeout() to match the previous ttm_bo_wait():
-
-		ret = dma_resv_wait_timeout(nvbo->bo.base.resv,
-					    DMA_RESV_USAGE_BOOKKEEP,
-					    false, 15 * HZ);
-		if (ret == 0)
-			ret = -EBUSY;
-		if (ret > 0)
-			ret = 0;
-		if (ret) {
-			NV_PRINTK(err, cli, "reloc wait_idle failed: %ld\n",
-				  ret);
-			break;
-		}
-
-So the patch just becomes:
-
-@@ -708,6 +708,8 @@ nouveau_gem_pushbuf_reloc_apply(struct n
- 					    false, 15 * HZ);
- 		if (ret == 0)
- 			ret = -EBUSY;
-+		if (ret > 0)
-+			ret = 0;
- 		if (ret) {
- 			NV_PRINTK(err, cli, "reloc wait_idle failed: %ld\n",
- 				  ret);
-
-With this variant, everything runs correctly on my workstation again.
-
-It probably deserves a comment about why @ret is being translated. Or
-perhaps a new variable should be introduced to separate the return value
-of dma_resv_wait_timeout() from the return value of this function.
-
-Either way, this is an important fix for 6.3-rc!
-
-John Ogness
