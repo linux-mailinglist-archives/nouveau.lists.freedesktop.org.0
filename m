@@ -2,75 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FFCB6D55FE
-	for <lists+nouveau@lfdr.de>; Tue,  4 Apr 2023 03:28:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3FFDE6D5769
+	for <lists+nouveau@lfdr.de>; Tue,  4 Apr 2023 06:06:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3231F10E2EA;
-	Tue,  4 Apr 2023 01:28:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 01F8110E0D6;
+	Tue,  4 Apr 2023 04:06:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0635010E2C8
- for <nouveau@lists.freedesktop.org>; Tue,  4 Apr 2023 01:28:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1680571720;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=teftSvf3j+oDEfh9blmwCCDYEJcHPfUL8pF7dJUM03o=;
- b=NqFZbJqifYaG7/Y9HcDCPiTkFjb9OkWhM9tDVMF1GfgHCF0tnw8+Q1nu1v4nNr8xHo3/fW
- HgdyU/9s3mbKX0nOG1RLcWDrRktvwr7RJO2GM9SMtOW4qpuqke2DWjXAndEFDY3ZLGH2oL
- gDo5gXAQuQAOs25HAZ/fYxZADt7QL4U=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-575-10a0-xSXO2WxVobc2Yvwrw-1; Mon, 03 Apr 2023 21:28:39 -0400
-X-MC-Unique: 10a0-xSXO2WxVobc2Yvwrw-1
-Received: by mail-qt1-f197.google.com with SMTP id
- s23-20020a05622a1a9700b003e6578904c3so2504620qtc.17
- for <nouveau@lists.freedesktop.org>; Mon, 03 Apr 2023 18:28:38 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680571718;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=teftSvf3j+oDEfh9blmwCCDYEJcHPfUL8pF7dJUM03o=;
- b=4V+Ys6jRx9na9rjOsq7/4UIvWaMbD9IcAUIVi6YPCgbXrfYK7WvEKRVIvg+pK42uWU
- cB+8tks+h8+NQy0uvE6TbuPZyb7BYL0uxoEuk6oahLeF63mR9GnxW+2afM0TCc9aL7wV
- QtwjFyByR9rVWNyRrWQtKkSNtSDYyjPD3odrLP9ULE4EDD5fjPvsq9SqdKWKfYV12dSI
- vUP/Orduk7l5mptYCrBO6L8/QQxc9mFIv9iP0K68QQT3kDOmNkE1n0qKRrO34aYlNDjT
- s5YIhHwqxy6zfsKVSZhF2FGqpZhx1ivqHPjFvtG6cB3bGuk/Tg+sGT92gIcw9KnL0Vi0
- Lp+A==
-X-Gm-Message-State: AAQBX9ci3y6kOtztvDmWN3rWtaQwysEIvc12dL7xoU3bUEbrbao6zt3U
- mp/Rxl5l8nQcDMUCPlnsvPMfx+nfyNSOjhzqwodkY7WzsyIIMaZj27wWSXE3pb/4kFSmmyzWTmK
- EPx7u21VnlTuYQmDiccN8BAaKog==
-X-Received: by 2002:a05:622a:198f:b0:3b9:b70c:9697 with SMTP id
- u15-20020a05622a198f00b003b9b70c9697mr1012260qtc.5.1680571718507; 
- Mon, 03 Apr 2023 18:28:38 -0700 (PDT)
-X-Google-Smtp-Source: AKy350bbiryGVTITqdtIsbZB0xVNKw9hfnyjZ3IusPT9JnYkHi5X/4j9GN4kCg0GViAYb2/AR5XwFA==
-X-Received: by 2002:a05:622a:198f:b0:3b9:b70c:9697 with SMTP id
- u15-20020a05622a198f00b003b9b70c9697mr1012244qtc.5.1680571718299; 
- Mon, 03 Apr 2023 18:28:38 -0700 (PDT)
-Received: from dell-per740-01.7a2m.lab.eng.bos.redhat.com
- (nat-pool-bos-t.redhat.com. [66.187.233.206])
- by smtp.gmail.com with ESMTPSA id
- de27-20020a05620a371b00b007486d9fa1d7sm3185102qkb.95.2023.04.03.18.28.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Apr 2023 18:28:38 -0700 (PDT)
-From: Tom Rix <trix@redhat.com>
-To: bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com,
- airlied@gmail.com, daniel@ffwll.ch, airlied@redhat.com
-Date: Mon,  3 Apr 2023 21:28:34 -0400
-Message-Id: <20230404012834.1914225-1-trix@redhat.com>
-X-Mailer: git-send-email 2.27.0
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4928D10E0D6;
+ Tue,  4 Apr 2023 04:06:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1680581166; x=1712117166;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=FMrZVyd22PM6TVP1ItBcA2qS5xG7Y4eZhT9IM7BxYAg=;
+ b=mKA/UeuKCQwC55eueryVY2PTd1foXqTqIRwdo4OcNQnlaPL2l7f2gY9X
+ vo/1RBguHpYi0n4TEwKMevlWef20yQ5L1hXwSH5uhjm0XYwiNBmgAocds
+ 9sS7Y4z+jKgPVT0vpUGtuDLKFI1N19IThSntbJkUKWPgzIh7XRP/DWJiY
+ x7WmlZVjQUQj9CYluIt34/Pipxm0hr0t/83hDD5TdjQUDS8xmgyJOOrWg
+ dUt7FiOSH6XOPw9jY6vKTCrUH003tWsbuJuK5YgdakPm00y85KO/voL9O
+ aDlsCGolk8fUaxKCU/9r7Bsuo2wjA16Gnvl4S8toHhWsdQDPkNATpTDMF g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10669"; a="339570846"
+X-IronPort-AV: E=Sophos;i="5.98,316,1673942400"; d="scan'208";a="339570846"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 Apr 2023 21:06:05 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10669"; a="932297750"
+X-IronPort-AV: E=Sophos;i="5.98,316,1673942400"; d="scan'208";a="932297750"
+Received: from lkp-server01.sh.intel.com (HELO b613635ddfff) ([10.239.97.150])
+ by fmsmga006.fm.intel.com with ESMTP; 03 Apr 2023 21:06:00 -0700
+Received: from kbuild by b613635ddfff with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1pjXvj-000P9S-1m;
+ Tue, 04 Apr 2023 04:05:59 +0000
+Date: Tue, 4 Apr 2023 12:05:08 +0800
+From: kernel test robot <lkp@intel.com>
+To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
+ tzimmermann@suse.de, mripard@kernel.org, corbet@lwn.net,
+ christian.koenig@amd.com, bskeggs@redhat.com,
+ Liam.Howlett@oracle.com, matthew.brost@intel.com,
+ boris.brezillon@collabora.com, alexdeucher@gmail.com,
+ ogabbay@kernel.org, bagasdotme@gmail.com, willy@infradead.org,
+ jason@jlekstrand.net
+Message-ID: <202304041151.y2WMbGh6-lkp@intel.com>
+References: <20230404012741.116502-6-dakr@redhat.com>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Subject: [Nouveau] [PATCH] drm/nouveau/disp: set varaiable
- gv100_disp_core_mthd_base storage-class-specifier to static
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230404012741.116502-6-dakr@redhat.com>
+Subject: Re: [Nouveau] [PATCH drm-next v3 05/15] drm: debugfs: provide
+ infrastructure to dump a DRM GPU VA space
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,35 +65,93 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Tom Rix <trix@redhat.com>
+Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, oe-kbuild-all@lists.linux.dev
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-smatch reports
-drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c:610:1: warning: symbol
-  'gv100_disp_core_mthd_base' was not declared. Should it be static?
+Hi Danilo,
 
-This variable is only used in one file so it should be static.
+kernel test robot noticed the following build warnings:
 
-Signed-off-by: Tom Rix <trix@redhat.com>
----
- drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+[auto build test WARNING on d36d68fd1925d33066d52468b7c7c6aca6521248]
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
-index 115d0997fd62..4ebc030e40d1 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
-@@ -606,7 +606,7 @@ gv100_disp_curs = {
- 	.user = 73,
- };
- 
--const struct nvkm_disp_mthd_list
-+static const struct nvkm_disp_mthd_list
- gv100_disp_core_mthd_base = {
- 	.mthd = 0x0000,
- 	.addr = 0x000000,
+url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-execution-context-for-GEM-buffers-v3/20230404-093042
+base:   d36d68fd1925d33066d52468b7c7c6aca6521248
+patch link:    https://lore.kernel.org/r/20230404012741.116502-6-dakr%40redhat.com
+patch subject: [PATCH drm-next v3 05/15] drm: debugfs: provide infrastructure to dump a DRM GPU VA space
+config: xtensa-allyesconfig (https://download.01.org/0day-ci/archive/20230404/202304041151.y2WMbGh6-lkp@intel.com/config)
+compiler: xtensa-linux-gcc (GCC) 12.1.0
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/intel-lab-lkp/linux/commit/97d8731cc359143f6f790b1c4755d1055a72adb9
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Danilo-Krummrich/drm-execution-context-for-GEM-buffers-v3/20230404-093042
+        git checkout 97d8731cc359143f6f790b1c4755d1055a72adb9
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=xtensa olddefconfig
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=xtensa SHELL=/bin/bash drivers/gpu/drm/
+
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
+| Link: https://lore.kernel.org/oe-kbuild-all/202304041151.y2WMbGh6-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+   drivers/gpu/drm/drm_debugfs.c: In function 'drm_debugfs_gpuva_info':
+>> drivers/gpu/drm/drm_debugfs.c:213:28: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+     213 |                            (u64)va->gem.obj, va->gem.offset);
+         |                            ^
+
+
+vim +213 drivers/gpu/drm/drm_debugfs.c
+
+   178	
+   179	/**
+   180	 * drm_debugfs_gpuva_info - dump the given DRM GPU VA space
+   181	 * @m: pointer to the &seq_file to write
+   182	 * @mgr: the &drm_gpuva_manager representing the GPU VA space
+   183	 *
+   184	 * Dumps the GPU VA mappings of a given DRM GPU VA manager.
+   185	 *
+   186	 * For each DRM GPU VA space drivers should call this function from their
+   187	 * &drm_info_list's show callback.
+   188	 *
+   189	 * Returns: 0 on success, -ENODEV if the &mgr is not initialized
+   190	 */
+   191	int drm_debugfs_gpuva_info(struct seq_file *m,
+   192				   struct drm_gpuva_manager *mgr)
+   193	{
+   194		DRM_GPUVA_ITER(it, mgr, 0);
+   195		struct drm_gpuva *va, *kva = &mgr->kernel_alloc_node;
+   196	
+   197		if (!mgr->name)
+   198			return -ENODEV;
+   199	
+   200		seq_printf(m, "DRM GPU VA space (%s) [0x%016llx;0x%016llx]\n",
+   201			   mgr->name, mgr->mm_start, mgr->mm_start + mgr->mm_range);
+   202		seq_printf(m, "Kernel reserved node [0x%016llx;0x%016llx]\n",
+   203			   kva->va.addr, kva->va.addr + kva->va.range);
+   204		seq_puts(m, "\n");
+   205		seq_puts(m, " VAs | start              | range              | end                | object             | object offset\n");
+   206		seq_puts(m, "-------------------------------------------------------------------------------------------------------------\n");
+   207		drm_gpuva_iter_for_each(va, it) {
+   208			if (unlikely(va == &mgr->kernel_alloc_node))
+   209				continue;
+   210	
+   211			seq_printf(m, "     | 0x%016llx | 0x%016llx | 0x%016llx | 0x%016llx | 0x%016llx\n",
+   212				   va->va.addr, va->va.range, va->va.addr + va->va.range,
+ > 213				   (u64)va->gem.obj, va->gem.offset);
+   214		}
+   215	
+   216		return 0;
+   217	}
+   218	EXPORT_SYMBOL(drm_debugfs_gpuva_info);
+   219	
+
 -- 
-2.27.0
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
