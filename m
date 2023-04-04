@@ -1,71 +1,71 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B6B16D55DF
-	for <lists+nouveau@lfdr.de>; Tue,  4 Apr 2023 03:28:13 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3473A6D55E0
+	for <lists+nouveau@lfdr.de>; Tue,  4 Apr 2023 03:28:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0FB2210E1C8;
-	Tue,  4 Apr 2023 01:28:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 68DDE10E1C0;
+	Tue,  4 Apr 2023 01:28:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D907810E1B2
- for <nouveau@lists.freedesktop.org>; Tue,  4 Apr 2023 01:27:57 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9F9DD10E216
+ for <nouveau@lists.freedesktop.org>; Tue,  4 Apr 2023 01:28:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1680571676;
+ s=mimecast20190719; t=1680571680;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Qy5D/ZZ0dwag1BT8hM3evEqOdQXhrzVTN7mL8aXSMGo=;
- b=CshnjORxmNKltlAAsPW89y32wRKHVa8MZGwn2mCJTjCYOQaC8uAem36/0FS5jjJr9cJjnn
- 409r36nAeVLHzns6cK243cmik9N8MVrdu9s2ZGRuEEJxmX9dXtqDtaf7pA3nA4fcASdyfZ
- C6Oyj7ATck9SegzXRymk6/nTNKUZmsU=
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=zKXKlpbqPz1zBDAc8gRMr7UD/43fGbZFIFAeWQ+/v+c=;
+ b=PIAmDAIQyJKd+35TQfiCJ8ZDnypiDUggvDuYgWDzoLNgBaKFRFF2sN+y1DJzH1PKK6O2Eq
+ GOHNAK9yZgtaO7V3kVg2iGNEn8+LCzhykb6fq62uxRyIvoIa7D1aZKFz5nBU9VT/kVJkc6
+ jSeuRTaYV3EFvpTdAuK5y2qsVdl55rI=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-362-PUV2mOzmNvu4S3q5ElvpKg-1; Mon, 03 Apr 2023 21:27:55 -0400
-X-MC-Unique: PUV2mOzmNvu4S3q5ElvpKg-1
-Received: by mail-ed1-f70.google.com with SMTP id
- b1-20020aa7dc01000000b004ad062fee5eso43246134edu.17
- for <nouveau@lists.freedesktop.org>; Mon, 03 Apr 2023 18:27:55 -0700 (PDT)
+ us-mta-608-W6V3kEGuN6u8g2Capaonww-1; Mon, 03 Apr 2023 21:27:59 -0400
+X-MC-Unique: W6V3kEGuN6u8g2Capaonww-1
+Received: by mail-ed1-f71.google.com with SMTP id
+ c11-20020a509f8b000000b00501e2facf47so43804537edf.16
+ for <nouveau@lists.freedesktop.org>; Mon, 03 Apr 2023 18:27:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680571674;
+ d=1e100.net; s=20210112; t=1680571678;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Qy5D/ZZ0dwag1BT8hM3evEqOdQXhrzVTN7mL8aXSMGo=;
- b=HhT3sFFy4G1R4XWAvCFnGHHVR9sF4TqMA3mioOx9IUSYTbgYSwKSlSkayj/LOULco/
- wucJuMB3wzNqe0v1E3qlVJBjrVmhoTuXSTr/EwDRdErLbBJGKTweG9oSP6YCKzu1kVxB
- aiYNl1WS0f+TXngsNNDsMY/1JeWbIiDwDFmPMhi0oBgtu/AQH4mWEfIch3j5beEUvuJv
- dO3eWLjEGJ2xKKoLXneWtbB/UvDUOqu26+7EYEVvbi2lSPUBcc401TXbsbvnUCKoWfX9
- Ke5V7Z0mhm7vWgsdWXozN4pF7symnPzt5vd0NDstGq0cEXqdHJdpFcnvrDxfYN3n8VVp
- 3LNA==
-X-Gm-Message-State: AAQBX9cc/AmAlbTh2Cj+VezSB+DytlCYDolQPYnoXM/MWCoWbohjpPkB
- WQm9Nro3fX2gXMK5MbsdoAWpaieWfGgA3aWfrvf5u+YslIfayA6BBP1nnRthqrhWS/A4bVgovhw
- R1hSU5RmBMyOiyKQ/J87y86Snyg==
-X-Received: by 2002:a17:906:4dc1:b0:8b0:ad0b:7ab8 with SMTP id
- f1-20020a1709064dc100b008b0ad0b7ab8mr537810ejw.14.1680571674351; 
- Mon, 03 Apr 2023 18:27:54 -0700 (PDT)
-X-Google-Smtp-Source: AKy350aYg00eHiyswbtoLlF56sjeND5GW8MPldJF2FDkJFmQJWCtDChMw3C466wihCFb4E1/7woEmA==
-X-Received: by 2002:a17:906:4dc1:b0:8b0:ad0b:7ab8 with SMTP id
- f1-20020a1709064dc100b008b0ad0b7ab8mr537795ejw.14.1680571674124; 
- Mon, 03 Apr 2023 18:27:54 -0700 (PDT)
+ bh=zKXKlpbqPz1zBDAc8gRMr7UD/43fGbZFIFAeWQ+/v+c=;
+ b=um3R2QiCbJaqiPAvmWmY1HD4H4S0Ro8+V5ux/E613FFE/YE3pN+0r7iJjsD8TFWP6e
+ oJxnHJX64S3vn+U3+qKMgh5KYbjGAhaBYgla+fRRlPcE+/wbTuWYZELbQd/jcowwSsEi
+ rH9R49Hwgvc+9edBOk86X3YHXd/7hQZpNaDwUSqtVYaDjIG/lO/Eh+hkcX8FgS/70Jlj
+ SCPngDk0lfUJoRDKY6ZjrckPeHPaxYARNiuFwlW55d2oWseYkNKZsg3htwZ4LCUoG/AR
+ EVUmjJAWc8pqX/Hs7oODJPNLV7FFrLGeYj562LwxiGORwOWiCoeDVlTjOM5NiobYFTEN
+ 8fXg==
+X-Gm-Message-State: AAQBX9cCdpBgt/Ieo34HoWRg5zAbGt5tAzzkF3qbPS0g3D+JXM7hnkur
+ NmnXu4pX9QPfm/djpZSqeEd6tDFrvsUC9rvuUVJPVYxaU4zzV9CoAAkErU2Yn8DCOe0ANhGITZl
+ k58ad+ircUBk7Zm/B/iYdwapahA==
+X-Received: by 2002:a17:906:3518:b0:947:f937:d58c with SMTP id
+ r24-20020a170906351800b00947f937d58cmr399000eja.73.1680571678176; 
+ Mon, 03 Apr 2023 18:27:58 -0700 (PDT)
+X-Google-Smtp-Source: AKy350YwVNPsPlkQRJTUmcCSFAR4UCs9dVRBPURJGBPqRf9UDK5ZqVStZ/XxLd5hu3kZ37jVcjG1Sg==
+X-Received: by 2002:a17:906:3518:b0:947:f937:d58c with SMTP id
+ r24-20020a170906351800b00947f937d58cmr398989eja.73.1680571677891; 
+ Mon, 03 Apr 2023 18:27:57 -0700 (PDT)
 Received: from cassiopeiae.. ([2a02:810d:4b3f:de78:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- mh13-20020a170906eb8d00b00931024e96c5sm5222682ejb.99.2023.04.03.18.27.52
+ z9-20020a17090665c900b0093fa8c2e877sm5158255ejn.80.2023.04.03.18.27.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Apr 2023 18:27:53 -0700 (PDT)
+ Mon, 03 Apr 2023 18:27:57 -0700 (PDT)
 From: Danilo Krummrich <dakr@redhat.com>
 To: airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
  mripard@kernel.org, corbet@lwn.net, christian.koenig@amd.com,
  bskeggs@redhat.com, Liam.Howlett@oracle.com, matthew.brost@intel.com,
  boris.brezillon@collabora.com, alexdeucher@gmail.com, ogabbay@kernel.org,
  bagasdotme@gmail.com, willy@infradead.org, jason@jlekstrand.net
-Date: Tue,  4 Apr 2023 03:27:28 +0200
-Message-Id: <20230404012741.116502-3-dakr@redhat.com>
+Date: Tue,  4 Apr 2023 03:27:29 +0200
+Message-Id: <20230404012741.116502-4-dakr@redhat.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230404012741.116502-1-dakr@redhat.com>
 References: <20230404012741.116502-1-dakr@redhat.com>
@@ -74,8 +74,8 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Subject: [Nouveau] [PATCH drm-next v3 02/15] drm_exec: fix double dma_resv
- unlock
+Subject: [Nouveau] [PATCH drm-next v3 03/15] maple_tree: split up MA_STATE()
+ macro
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,23 +93,65 @@ Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Split up the MA_STATE() macro such that components using the maple tree
+can easily inherit from struct ma_state and build custom tree walk
+macros to hide their internals from users.
+
+Example:
+
+struct sample_iterator {
+	struct ma_state mas;
+	struct sample_mgr *mgr;
+};
+
+\#define SAMPLE_ITERATOR(name, __mgr, start)			\
+	struct sample_iterator name = {				\
+		.mas = MA_STATE_INIT(&(__mgr)->mt, start, 0),	\
+		.mgr = __mgr,					\
+	}
+
+\#define sample_iter_for_each_range(it__, entry__, end__) \
+	mas_for_each(&(it__).mas, entry__, end__)
+
+--
+
+struct sample *sample;
+SAMPLE_ITERATOR(si, min);
+
+sample_iter_for_each_range(&si, sample, max) {
+	frob(mgr, sample);
+}
+
 Signed-off-by: Danilo Krummrich <dakr@redhat.com>
 ---
- drivers/gpu/drm/drm_exec.c | 1 -
- 1 file changed, 1 deletion(-)
+ include/linux/maple_tree.h | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_exec.c b/drivers/gpu/drm/drm_exec.c
-index df546cc5a227..f645d22a0863 100644
---- a/drivers/gpu/drm/drm_exec.c
-+++ b/drivers/gpu/drm/drm_exec.c
-@@ -62,7 +62,6 @@ static void drm_exec_unlock_all(struct drm_exec *exec)
+diff --git a/include/linux/maple_tree.h b/include/linux/maple_tree.h
+index 1fadb5f5978b..87d55334f1c2 100644
+--- a/include/linux/maple_tree.h
++++ b/include/linux/maple_tree.h
+@@ -423,8 +423,8 @@ struct ma_wr_state {
+ #define MA_ERROR(err) \
+ 		((struct maple_enode *)(((unsigned long)err << 2) | 2UL))
+ 
+-#define MA_STATE(name, mt, first, end)					\
+-	struct ma_state name = {					\
++#define MA_STATE_INIT(mt, first, end)					\
++	{								\
+ 		.tree = mt,						\
+ 		.index = first,						\
+ 		.last = end,						\
+@@ -435,6 +435,9 @@ struct ma_wr_state {
+ 		.mas_flags = 0,						\
  	}
  
- 	if (exec->prelocked) {
--		dma_resv_unlock(exec->prelocked->resv);
- 		drm_gem_object_put(exec->prelocked);
- 		exec->prelocked = NULL;
- 	}
++#define MA_STATE(name, mt, first, end)					\
++	struct ma_state name = MA_STATE_INIT(mt, first, end)
++
+ #define MA_WR_STATE(name, ma_state, wr_entry)				\
+ 	struct ma_wr_state name = {					\
+ 		.mas = ma_state,					\
 -- 
 2.39.2
 
