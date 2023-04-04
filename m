@@ -2,42 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FFDE6D5769
-	for <lists+nouveau@lfdr.de>; Tue,  4 Apr 2023 06:06:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 844FD6D57FE
+	for <lists+nouveau@lfdr.de>; Tue,  4 Apr 2023 07:30:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 01F8110E0D6;
-	Tue,  4 Apr 2023 04:06:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1C8E910E0DC;
+	Tue,  4 Apr 2023 05:30:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4928D10E0D6;
- Tue,  4 Apr 2023 04:06:06 +0000 (UTC)
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6049810E0DC;
+ Tue,  4 Apr 2023 05:30:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1680581166; x=1712117166;
+ t=1680586214; x=1712122214;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=FMrZVyd22PM6TVP1ItBcA2qS5xG7Y4eZhT9IM7BxYAg=;
- b=mKA/UeuKCQwC55eueryVY2PTd1foXqTqIRwdo4OcNQnlaPL2l7f2gY9X
- vo/1RBguHpYi0n4TEwKMevlWef20yQ5L1hXwSH5uhjm0XYwiNBmgAocds
- 9sS7Y4z+jKgPVT0vpUGtuDLKFI1N19IThSntbJkUKWPgzIh7XRP/DWJiY
- x7WmlZVjQUQj9CYluIt34/Pipxm0hr0t/83hDD5TdjQUDS8xmgyJOOrWg
- dUt7FiOSH6XOPw9jY6vKTCrUH003tWsbuJuK5YgdakPm00y85KO/voL9O
- aDlsCGolk8fUaxKCU/9r7Bsuo2wjA16Gnvl4S8toHhWsdQDPkNATpTDMF g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10669"; a="339570846"
-X-IronPort-AV: E=Sophos;i="5.98,316,1673942400"; d="scan'208";a="339570846"
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
- by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Apr 2023 21:06:05 -0700
+ bh=ve6U2A790yFZDP2NASGkDII48rORhlhHF+QczkodZ4o=;
+ b=mTF8s+MdlRXHTMVEzRuE7b9hH99oEBvNMz1X6HlJQu9L9bKlYjOAYEV9
+ CIMZi9q+TT+P1hZJLLhKlFR9C7XcVtjDBevhyLlJf1XtdnNVrlGmVWlo5
+ gtGvs9ERpOPkdGLGYu64Rnyx0bDpWkc38jSALprqwQoj4HW/ozIynIiKR
+ fD9UXcc4B/r2beIM0fTPlgUZYf505YEpdVXVdn09Cd1LrKCBPSKTasiam
+ Mt1PQOQDReHXbrz1JOZw7zRiCQ0BZu4aUiSP74LRpSoHpzeli9XyrIHgg
+ nGcDLHqhn+0oZWfvJR5M0SAk8M1yuWAhjzB3otxJDyjhVqTsle4eHm0yq Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10669"; a="407154297"
+X-IronPort-AV: E=Sophos;i="5.98,316,1673942400"; d="scan'208";a="407154297"
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+ by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 Apr 2023 22:30:12 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10669"; a="932297750"
-X-IronPort-AV: E=Sophos;i="5.98,316,1673942400"; d="scan'208";a="932297750"
+X-IronPort-AV: E=McAfee;i="6600,9927,10669"; a="810096875"
+X-IronPort-AV: E=Sophos;i="5.98,316,1673942400"; d="scan'208";a="810096875"
 Received: from lkp-server01.sh.intel.com (HELO b613635ddfff) ([10.239.97.150])
- by fmsmga006.fm.intel.com with ESMTP; 03 Apr 2023 21:06:00 -0700
+ by orsmga004.jf.intel.com with ESMTP; 03 Apr 2023 22:30:06 -0700
 Received: from kbuild by b613635ddfff with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1pjXvj-000P9S-1m;
- Tue, 04 Apr 2023 04:05:59 +0000
-Date: Tue, 4 Apr 2023 12:05:08 +0800
+ (envelope-from <lkp@intel.com>) id 1pjZF8-000PEc-0r;
+ Tue, 04 Apr 2023 05:30:06 +0000
+Date: Tue, 4 Apr 2023 13:29:44 +0800
 From: kernel test robot <lkp@intel.com>
 To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
  tzimmermann@suse.de, mripard@kernel.org, corbet@lwn.net,
@@ -46,14 +46,14 @@ To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
  boris.brezillon@collabora.com, alexdeucher@gmail.com,
  ogabbay@kernel.org, bagasdotme@gmail.com, willy@infradead.org,
  jason@jlekstrand.net
-Message-ID: <202304041151.y2WMbGh6-lkp@intel.com>
-References: <20230404012741.116502-6-dakr@redhat.com>
+Message-ID: <202304041336.BD0G9U85-lkp@intel.com>
+References: <20230404012741.116502-5-dakr@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230404012741.116502-6-dakr@redhat.com>
-Subject: Re: [Nouveau] [PATCH drm-next v3 05/15] drm: debugfs: provide
- infrastructure to dump a DRM GPU VA space
+In-Reply-To: <20230404012741.116502-5-dakr@redhat.com>
+Subject: Re: [Nouveau] [PATCH drm-next v3 04/15] drm: manager to keep track
+ of GPUs VA mappings
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,8 +66,9 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, oe-kbuild-all@lists.linux.dev
+ llvm@lists.linux.dev, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+ oe-kbuild-all@lists.linux.dev, Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
@@ -79,78 +80,187 @@ kernel test robot noticed the following build warnings:
 
 url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-execution-context-for-GEM-buffers-v3/20230404-093042
 base:   d36d68fd1925d33066d52468b7c7c6aca6521248
-patch link:    https://lore.kernel.org/r/20230404012741.116502-6-dakr%40redhat.com
-patch subject: [PATCH drm-next v3 05/15] drm: debugfs: provide infrastructure to dump a DRM GPU VA space
-config: xtensa-allyesconfig (https://download.01.org/0day-ci/archive/20230404/202304041151.y2WMbGh6-lkp@intel.com/config)
-compiler: xtensa-linux-gcc (GCC) 12.1.0
+patch link:    https://lore.kernel.org/r/20230404012741.116502-5-dakr%40redhat.com
+patch subject: [PATCH drm-next v3 04/15] drm: manager to keep track of GPUs VA mappings
+config: mips-randconfig-r024-20230403 (https://download.01.org/0day-ci/archive/20230404/202304041336.BD0G9U85-lkp@intel.com/config)
+compiler: clang version 17.0.0 (https://github.com/llvm/llvm-project 67409911353323ca5edf2049ef0df54132fa1ca7)
 reproduce (this is a W=1 build):
         wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
         chmod +x ~/bin/make.cross
-        # https://github.com/intel-lab-lkp/linux/commit/97d8731cc359143f6f790b1c4755d1055a72adb9
+        # install mips cross compiling tool for clang build
+        # apt-get install binutils-mipsel-linux-gnu
+        # https://github.com/intel-lab-lkp/linux/commit/c25139e5a168ae8a3a3e5ca0b650c201e5f41367
         git remote add linux-review https://github.com/intel-lab-lkp/linux
         git fetch --no-tags linux-review Danilo-Krummrich/drm-execution-context-for-GEM-buffers-v3/20230404-093042
-        git checkout 97d8731cc359143f6f790b1c4755d1055a72adb9
+        git checkout c25139e5a168ae8a3a3e5ca0b650c201e5f41367
         # save the config file
         mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=xtensa olddefconfig
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=xtensa SHELL=/bin/bash drivers/gpu/drm/
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=mips olddefconfig
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=mips SHELL=/bin/bash drivers/gpu/drm/ drivers/iio/light/
 
 If you fix the issue, kindly add following tag where applicable
 | Reported-by: kernel test robot <lkp@intel.com>
-| Link: https://lore.kernel.org/oe-kbuild-all/202304041151.y2WMbGh6-lkp@intel.com/
+| Link: https://lore.kernel.org/oe-kbuild-all/202304041336.BD0G9U85-lkp@intel.com/
 
 All warnings (new ones prefixed by >>):
 
-   drivers/gpu/drm/drm_debugfs.c: In function 'drm_debugfs_gpuva_info':
->> drivers/gpu/drm/drm_debugfs.c:213:28: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
-     213 |                            (u64)va->gem.obj, va->gem.offset);
-         |                            ^
+>> drivers/gpu/drm/drm_gpuva_mgr.c:1031:25: warning: variable 'prev' set but not used [-Wunused-but-set-variable]
+           struct drm_gpuva *va, *prev = NULL;
+                                  ^
+   1 warning generated.
 
 
-vim +213 drivers/gpu/drm/drm_debugfs.c
+vim +/prev +1031 drivers/gpu/drm/drm_gpuva_mgr.c
 
-   178	
-   179	/**
-   180	 * drm_debugfs_gpuva_info - dump the given DRM GPU VA space
-   181	 * @m: pointer to the &seq_file to write
-   182	 * @mgr: the &drm_gpuva_manager representing the GPU VA space
-   183	 *
-   184	 * Dumps the GPU VA mappings of a given DRM GPU VA manager.
-   185	 *
-   186	 * For each DRM GPU VA space drivers should call this function from their
-   187	 * &drm_info_list's show callback.
-   188	 *
-   189	 * Returns: 0 on success, -ENODEV if the &mgr is not initialized
-   190	 */
-   191	int drm_debugfs_gpuva_info(struct seq_file *m,
-   192				   struct drm_gpuva_manager *mgr)
-   193	{
-   194		DRM_GPUVA_ITER(it, mgr, 0);
-   195		struct drm_gpuva *va, *kva = &mgr->kernel_alloc_node;
-   196	
-   197		if (!mgr->name)
-   198			return -ENODEV;
-   199	
-   200		seq_printf(m, "DRM GPU VA space (%s) [0x%016llx;0x%016llx]\n",
-   201			   mgr->name, mgr->mm_start, mgr->mm_start + mgr->mm_range);
-   202		seq_printf(m, "Kernel reserved node [0x%016llx;0x%016llx]\n",
-   203			   kva->va.addr, kva->va.addr + kva->va.range);
-   204		seq_puts(m, "\n");
-   205		seq_puts(m, " VAs | start              | range              | end                | object             | object offset\n");
-   206		seq_puts(m, "-------------------------------------------------------------------------------------------------------------\n");
-   207		drm_gpuva_iter_for_each(va, it) {
-   208			if (unlikely(va == &mgr->kernel_alloc_node))
-   209				continue;
-   210	
-   211			seq_printf(m, "     | 0x%016llx | 0x%016llx | 0x%016llx | 0x%016llx | 0x%016llx\n",
-   212				   va->va.addr, va->va.range, va->va.addr + va->va.range,
- > 213				   (u64)va->gem.obj, va->gem.offset);
-   214		}
-   215	
-   216		return 0;
-   217	}
-   218	EXPORT_SYMBOL(drm_debugfs_gpuva_info);
-   219	
+  1023	
+  1024	static int
+  1025	__drm_gpuva_sm_map(struct drm_gpuva_manager *mgr,
+  1026			   struct drm_gpuva_fn_ops *ops, void *priv,
+  1027			   u64 req_addr, u64 req_range,
+  1028			   struct drm_gem_object *req_obj, u64 req_offset)
+  1029	{
+  1030		DRM_GPUVA_ITER(it, mgr, req_addr);
+> 1031		struct drm_gpuva *va, *prev = NULL;
+  1032		u64 req_end = req_addr + req_range;
+  1033		int ret;
+  1034	
+  1035		if (unlikely(!drm_gpuva_in_mm_range(mgr, req_addr, req_range)))
+  1036			return -EINVAL;
+  1037	
+  1038		if (unlikely(drm_gpuva_in_kernel_node(mgr, req_addr, req_range)))
+  1039			return -EINVAL;
+  1040	
+  1041		drm_gpuva_iter_for_each_range(va, it, req_end) {
+  1042			struct drm_gem_object *obj = va->gem.obj;
+  1043			u64 offset = va->gem.offset;
+  1044			u64 addr = va->va.addr;
+  1045			u64 range = va->va.range;
+  1046			u64 end = addr + range;
+  1047			bool merge = !!va->gem.obj;
+  1048	
+  1049			if (addr == req_addr) {
+  1050				merge &= obj == req_obj &&
+  1051					 offset == req_offset;
+  1052	
+  1053				if (end == req_end) {
+  1054					ret = op_unmap_cb(ops, &it, priv, va, merge);
+  1055					if (ret)
+  1056						return ret;
+  1057					break;
+  1058				}
+  1059	
+  1060				if (end < req_end) {
+  1061					ret = op_unmap_cb(ops, &it, priv, va, merge);
+  1062					if (ret)
+  1063						return ret;
+  1064					goto next;
+  1065				}
+  1066	
+  1067				if (end > req_end) {
+  1068					struct drm_gpuva_op_map n = {
+  1069						.va.addr = req_end,
+  1070						.va.range = range - req_range,
+  1071						.gem.obj = obj,
+  1072						.gem.offset = offset + req_range,
+  1073					};
+  1074					struct drm_gpuva_op_unmap u = {
+  1075						.va = va,
+  1076						.keep = merge,
+  1077					};
+  1078	
+  1079					ret = op_remap_cb(ops, &it, priv, NULL, &n, &u);
+  1080					if (ret)
+  1081						return ret;
+  1082					break;
+  1083				}
+  1084			} else if (addr < req_addr) {
+  1085				u64 ls_range = req_addr - addr;
+  1086				struct drm_gpuva_op_map p = {
+  1087					.va.addr = addr,
+  1088					.va.range = ls_range,
+  1089					.gem.obj = obj,
+  1090					.gem.offset = offset,
+  1091				};
+  1092				struct drm_gpuva_op_unmap u = { .va = va };
+  1093	
+  1094				merge &= obj == req_obj &&
+  1095					 offset + ls_range == req_offset;
+  1096				u.keep = merge;
+  1097	
+  1098				if (end == req_end) {
+  1099					ret = op_remap_cb(ops, &it, priv, &p, NULL, &u);
+  1100					if (ret)
+  1101						return ret;
+  1102					break;
+  1103				}
+  1104	
+  1105				if (end < req_end) {
+  1106					ret = op_remap_cb(ops, &it, priv, &p, NULL, &u);
+  1107					if (ret)
+  1108						return ret;
+  1109					goto next;
+  1110				}
+  1111	
+  1112				if (end > req_end) {
+  1113					struct drm_gpuva_op_map n = {
+  1114						.va.addr = req_end,
+  1115						.va.range = end - req_end,
+  1116						.gem.obj = obj,
+  1117						.gem.offset = offset + ls_range +
+  1118							      req_range,
+  1119					};
+  1120	
+  1121					ret = op_remap_cb(ops, &it, priv, &p, &n, &u);
+  1122					if (ret)
+  1123						return ret;
+  1124					break;
+  1125				}
+  1126			} else if (addr > req_addr) {
+  1127				merge &= obj == req_obj &&
+  1128					 offset == req_offset +
+  1129						   (addr - req_addr);
+  1130	
+  1131				if (end == req_end) {
+  1132					ret = op_unmap_cb(ops, &it, priv, va, merge);
+  1133					if (ret)
+  1134						return ret;
+  1135					break;
+  1136				}
+  1137	
+  1138				if (end < req_end) {
+  1139					ret = op_unmap_cb(ops, &it, priv, va, merge);
+  1140					if (ret)
+  1141						return ret;
+  1142					goto next;
+  1143				}
+  1144	
+  1145				if (end > req_end) {
+  1146					struct drm_gpuva_op_map n = {
+  1147						.va.addr = req_end,
+  1148						.va.range = end - req_end,
+  1149						.gem.obj = obj,
+  1150						.gem.offset = offset + req_end - addr,
+  1151					};
+  1152					struct drm_gpuva_op_unmap u = {
+  1153						.va = va,
+  1154						.keep = merge,
+  1155					};
+  1156	
+  1157					ret = op_remap_cb(ops, &it, priv, NULL, &n, &u);
+  1158					if (ret)
+  1159						return ret;
+  1160					break;
+  1161				}
+  1162			}
+  1163	next:
+  1164			prev = va;
+  1165		}
+  1166	
+  1167		return op_map_cb(ops, priv,
+  1168				 req_addr, req_range,
+  1169				 req_obj, req_offset);
+  1170	}
+  1171	
 
 -- 
 0-DAY CI Kernel Test Service
