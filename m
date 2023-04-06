@@ -2,69 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F8836D84BD
-	for <lists+nouveau@lfdr.de>; Wed,  5 Apr 2023 19:17:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0366E6D9751
+	for <lists+nouveau@lfdr.de>; Thu,  6 Apr 2023 14:51:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 32BA410E226;
-	Wed,  5 Apr 2023 17:17:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B8AD110E245;
+	Thu,  6 Apr 2023 12:51:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 327 seconds by postgrey-1.36 at gabe;
- Wed, 05 Apr 2023 17:17:01 UTC
-Received: from mout.web.de (mout.web.de [212.227.17.11])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B39B310E226
- for <nouveau@lists.freedesktop.org>; Wed,  5 Apr 2023 17:17:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de; s=s29768273;
- t=1680715017; i=markus.elfring@web.de;
- bh=9vk/wCzM3misVERGO6hb9HrWR0a3YXKHA6xQqnouWCQ=;
- h=X-UI-Sender-Class:Date:Subject:From:To:References:Cc:In-Reply-To;
- b=uH+IOF6NZJzUzlAY/nIjft7Jcyv6Sfg4QK/Gr/HV3V3WNHgn5vqe0z1Z5FDv2GrXE
- wETSjIz2Dh670MEBa51cMWjvGB4yxM/Tl6qjFu0RmuJvqoKQs4EZ50qcxScQVv+h4x
- faf4Os22VUup75XkgCZIGfTj2w/Xrz57fMMASqMMMX1cIyzTZpA1LfVY/fLQtWgCTQ
- ENV8n2IWHkZzuWh9z4V2KYZMYl4AYJsXdiGn4KbAFNk9cMx/BB3ezepdOu0LUjpykC
- 2cBCNJHg35EoW4Tn7DohgDOR6R8Py27cuxJQYX6xEV4H/FwluHTXhi4/OVqsOT4l3v
- JVX/U3Mvgic3w==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [192.168.178.21] ([94.31.82.83]) by smtp.web.de (mrweb105
- [213.165.67.124]) with ESMTPSA (Nemesis) id 1MeDQj-1qILI72BUd-00b5xo; Wed, 05
- Apr 2023 19:11:28 +0200
-Message-ID: <809905c6-73c0-75a6-1226-048d8cb8dfda@web.de>
-Date: Wed, 5 Apr 2023 19:10:45 +0200
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 965C810E245
+ for <nouveau@lists.freedesktop.org>; Thu,  6 Apr 2023 12:51:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1680785468;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=a8vJf32VjBTqhSXC4UaNWwEC2++PydY9gb3nY7Y6vs4=;
+ b=DFYhq67WrTL6ArlpuJXmIQhXglpf4BpBAaDFHWP6f3I9CaG7GXVEQTsYWM7LweQUNMZRvh
+ /mBT8wrcmblt27MPPdZrZWEHsS5EkF/gjfeIt9ntKdEeVDaS2JZ9KNeEtswd2xI5a0qAV0
+ q8zaLQDSkxFjUIYNpxem4YxBwj4cuxQ=
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-140-aINpmoYrOAO_jlTA6vxsOA-1; Thu, 06 Apr 2023 08:51:07 -0400
+X-MC-Unique: aINpmoYrOAO_jlTA6vxsOA-1
+Received: by mail-qk1-f200.google.com with SMTP id
+ 198-20020a370bcf000000b007468cffa4e2so17670545qkl.10
+ for <nouveau@lists.freedesktop.org>; Thu, 06 Apr 2023 05:51:07 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1680785467;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=a8vJf32VjBTqhSXC4UaNWwEC2++PydY9gb3nY7Y6vs4=;
+ b=gfvwhXqxN+kmnDxdgTBH/oo1QvEgKHP/2bOd2M2E66DOcXRT7GhcBRtgZ7aPx7aoFc
+ J9UbaFPDnMM7jBFUuusbaXc+FLDR1GIBiJXxbRNf8IFiyDMvVDtmmnLBP4mGOS7LnBh4
+ 96XyRDX3HzD8eSc9U/I0KasUZY7j5v0h4jZ8cgy+SCh0k1pVgWNJFwh8mWdAgDltt4AD
+ O+LJNnuumS0jBqlsxpZAGqbMAr1K6EOp+4culYgtVw7WhsjqxUkEW2m0E0j0QGK8b2XL
+ sajMpsuaclcGDg8QPa/DOcWB5H3srQ5a+m0Ms4rehFrr7eewm9H5cr3U2zpfWQLD5VSW
+ T3qA==
+X-Gm-Message-State: AAQBX9eKhn9Z2j/31RAgwk5dV4XvZ4WCIEdFKM2ldzlEqCvmvP0geiUM
+ 809sbFqMjRdBoIUeka3z/Ki7ImHTcQsWFn+J81f7gBjbz21yyROnAt3zLQtzdoH6Oc1c3ckDWs2
+ 0WOlPgmkhR9zlQTmaQGuTGeTTEg==
+X-Received: by 2002:ad4:5ca6:0:b0:5df:450b:8002 with SMTP id
+ q6-20020ad45ca6000000b005df450b8002mr4830659qvh.31.1680785467004; 
+ Thu, 06 Apr 2023 05:51:07 -0700 (PDT)
+X-Google-Smtp-Source: AKy350YSPMv3nhVaAKMIwGcpzI1WXbVj1KNben3bHvDLvNgWUG5IbK0u6ODiRzBeHNfaFX4xk75FiA==
+X-Received: by 2002:ad4:5ca6:0:b0:5df:450b:8002 with SMTP id
+ q6-20020ad45ca6000000b005df450b8002mr4830628qvh.31.1680785466773; 
+ Thu, 06 Apr 2023 05:51:06 -0700 (PDT)
+Received: from dell-per740-01.7a2m.lab.eng.bos.redhat.com
+ (nat-pool-bos-t.redhat.com. [66.187.233.206])
+ by smtp.gmail.com with ESMTPSA id
+ de11-20020ad4584b000000b005dd8b93457csm489252qvb.20.2023.04.06.05.51.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Apr 2023 05:51:06 -0700 (PDT)
+From: Tom Rix <trix@redhat.com>
+To: bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com,
+ airlied@gmail.com, daniel@ffwll.ch, gsamaiya@nvidia.com
+Date: Thu,  6 Apr 2023 08:51:02 -0400
+Message-Id: <20230406125102.1952202-1-trix@redhat.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.1
-From: Markus Elfring <Markus.Elfring@web.de>
-To: kernel-janitors@vger.kernel.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@gmail.com>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>
-References: <f9303bdc-b1a7-be5e-56c6-dfa8232b8b55@web.de>
- <8f785de5-ebe2-edd9-2155-f440acacc643@web.de>
-Content-Language: en-GB
-In-Reply-To: <8f785de5-ebe2-edd9-2155-f440acacc643@web.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:qFv9xlk5AIOZ4GNsZRuSxSI/E015NJ+DKcMIB1asBsWst+GZ9/L
- zvT37d2pqq0s34WFIYKlbjJYZgDSOae6KVPUa3i/3ehI6dj25z3znMmCZ7Cp69353WUbi/R
- jcopn7CZBTZZH5LnuliQ99wKse4OjXV3Oc64ZM61hwhGfUMVQCbNN49nRBVstujkxIbKFGh
- EWCOiezCC4SavgHuoqFEw==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:6EWKI+nQuIc=;ykfgNuYJqDF1PWBDEpgvkfBLcmn
- 0fymosMtkBRT/Qax/eZIteYn8Ji5ZlSjbsyiLkFAFcupmwLMGIgHtmMQsqZmz4YJLbB24wLQn
- IQbzS/iFBEoToPPOmgezeq/BxIPafkW2mbF6JRom/UFSmtYJgCeAzhNiVgCVeKNqekzVlWl5W
- IHEWrbO/GWpWumBQ3Ro0Cf3WEKZTaApvaCc0+LffudqQiVPozZQiSKJ+4N4rmJbw1c/MmBxnv
- 7KxOV0Ml7tIzWhDQB/eSeYvbA5Z+kumIpmV5Y96ukbHzdQwr0FR4oouKY7uU5zIKhxteYKqnD
- oK+xJaARJr5BaLmWBUErv7RP0GK6fr1+Tgv+IWjFgHOF53yw11tZe9WT8ZkW/B5x0Dw6gDPsI
- 8r5srPa4UxUvaM7euxieqc5W7bIHZMCanalKYYo/aMQEvyvD4BfDsbY/x0aCkp09KZ+bRaIN+
- IsxyV5tqzzAv4jhMeF0je3H5hABaXME+iJcKKG5MaUccV8dRlwW+E3flNptqlCFuTDVpQzrr6
- Q3hpp+tbIfOf3RElB4wWrIpcLACa7FbCqrrFoLeR1vWKHUkdjK4z4KuVAxd4DVSm6wgl25PUs
- NxDeBGHp3BPWmdxYa0xpgGqSBQVx18v+YbVvldGR9lvgdSmEA94rY9DQv5Xzx/0lOs4iatkAt
- OP8fCU26Zc6OrPURPGOtHyc3bPz6AKlUZxtxbDgPuxcXWe6UKydu//BYBns/voLNDoQCghQlx
- jeRi7ZIDJwSSGPUEz2ftF2QbHGrjzE4RWx8V3UDQisaE2gVdIArPI+vbfgK6br23B5y4FBGxm
- 69vSOHyXzzMwkb4XjKNGrvHqBrfry267HFToZjt51nXy50Xou+kbhWUANnjMraX0bwXYmdnoC
- E/kPu99U472hm2KAxlt/c9Wc5bKDzXQxh5jKgd5xcndgJHbluVvkkDGdt
-Subject: [Nouveau] [PATCH] drm/nouveau: Add a jump label in
- nouveau_gem_ioctl_pushbuf()
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
+Subject: [Nouveau] [PATCH] drm/nouveau/gr/tu102: remove unused tu102_gr_load
+ function
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,55 +82,46 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: LKML <linux-kernel@vger.kernel.org>, cocci@inria.fr
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Tom Rix <trix@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Date: Wed, 5 Apr 2023 18:38:54 +0200
+smatch reports
+drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: symbol
+  'tu102_gr_load' was not declared. Should it be static?
 
-The label =E2=80=9Cout_prevalid=E2=80=9D was used to jump to another point=
-er check
-despite of the detail in the implementation of the function
-=E2=80=9Cnouveau_gem_ioctl_pushbuf=E2=80=9D that it was determined already=
- in one case
-that the corresponding variable contained an error pointer
-because of a failed call of the function =E2=80=9Cu_memcpya=E2=80=9D.
+This function is not used so remove it.
 
-Thus use an additional label.
+Signed-off-by: Tom Rix <trix@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c | 13 -------------
+ 1 file changed, 13 deletions(-)
 
-This issue was detected by using the Coccinelle software.
-
-Fixes: 2be65641642ef423f82162c3a5f28c754d1637d2 ("drm/nouveau: fix relocat=
-ions applying logic and a double-free")
-Signed-off-by: Markus Elfring <elfring@users.sourceforge.net>
-=2D--
- drivers/gpu/drm/nouveau/nouveau_gem.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouve=
-au/nouveau_gem.c
-index f77e44958037..d87e1cb2c933 100644
-=2D-- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -814,7 +814,7 @@ nouveau_gem_ioctl_pushbuf(struct drm_device *dev, void=
- *data,
- 			reloc =3D u_memcpya(req->relocs, req->nr_relocs, sizeof(*reloc));
- 			if (IS_ERR(reloc)) {
- 				ret =3D PTR_ERR(reloc);
--				goto out_prevalid;
-+				goto out_free_bo;
- 			}
-
- 			goto revalidate;
-@@ -929,6 +929,7 @@ nouveau_gem_ioctl_pushbuf(struct drm_device *dev, void=
- *data,
- out_prevalid:
- 	if (!IS_ERR(reloc))
- 		u_free(reloc);
-+out_free_bo:
- 	u_free(bo);
- 	u_free(push);
-
-=2D-
-2.40.0
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
+index 3b6c8100a242..a7775aa18541 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
+@@ -206,19 +206,6 @@ tu102_gr_av_to_init_veid(struct nvkm_blob *blob, struct gf100_gr_pack **ppack)
+ 	return gk20a_gr_av_to_init_(blob, 64, 0x00100000, ppack);
+ }
+ 
+-int
+-tu102_gr_load(struct gf100_gr *gr, int ver, const struct gf100_gr_fwif *fwif)
+-{
+-	int ret;
+-
+-	ret = gm200_gr_load(gr, ver, fwif);
+-	if (ret)
+-		return ret;
+-
+-	return gk20a_gr_load_net(gr, "gr/", "sw_veid_bundle_init", ver, tu102_gr_av_to_init_veid,
+-				 &gr->bundle_veid);
+-}
+-
+ static const struct gf100_gr_fwif
+ tu102_gr_fwif[] = {
+ 	{  0, gm200_gr_load, &tu102_gr, &gp108_gr_fecs_acr, &gp108_gr_gpccs_acr },
+-- 
+2.27.0
 
