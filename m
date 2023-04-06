@@ -1,76 +1,79 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0366E6D9751
-	for <lists+nouveau@lfdr.de>; Thu,  6 Apr 2023 14:51:16 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 535CC6DA35E
+	for <lists+nouveau@lfdr.de>; Thu,  6 Apr 2023 22:36:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B8AD110E245;
-	Thu,  6 Apr 2023 12:51:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CFF0110ED03;
+	Thu,  6 Apr 2023 20:36:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 965C810E245
- for <nouveau@lists.freedesktop.org>; Thu,  6 Apr 2023 12:51:09 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1433F10ED12
+ for <nouveau@lists.freedesktop.org>; Thu,  6 Apr 2023 20:36:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1680785468;
+ s=mimecast20190719; t=1680813388;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=a8vJf32VjBTqhSXC4UaNWwEC2++PydY9gb3nY7Y6vs4=;
- b=DFYhq67WrTL6ArlpuJXmIQhXglpf4BpBAaDFHWP6f3I9CaG7GXVEQTsYWM7LweQUNMZRvh
- /mBT8wrcmblt27MPPdZrZWEHsS5EkF/gjfeIt9ntKdEeVDaS2JZ9KNeEtswd2xI5a0qAV0
- q8zaLQDSkxFjUIYNpxem4YxBwj4cuxQ=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=irbR4glmPEIfzFVDABEDFiMlvxyIKRZYDMi+bXbiU3E=;
+ b=bFYpHCYqeTazo0T46ANHwVHvnggnjy+i8FrVfyD7C4Dk1GGCZaESDO/uf/UJ1edoH/wBOq
+ 8Wi1egpTdZprIpUSqjGPP4mQdImPKtdSm2uftBpA42vrTQECLxCATFt4kMVmos6+iJxMHT
+ f8yxGNPMyFp5PQ6EaOokwgtnphvExls=
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-140-aINpmoYrOAO_jlTA6vxsOA-1; Thu, 06 Apr 2023 08:51:07 -0400
-X-MC-Unique: aINpmoYrOAO_jlTA6vxsOA-1
-Received: by mail-qk1-f200.google.com with SMTP id
- 198-20020a370bcf000000b007468cffa4e2so17670545qkl.10
- for <nouveau@lists.freedesktop.org>; Thu, 06 Apr 2023 05:51:07 -0700 (PDT)
+ us-mta-244-B1AL0F1CPji_2KUhaGrYbQ-1; Thu, 06 Apr 2023 16:36:27 -0400
+X-MC-Unique: B1AL0F1CPji_2KUhaGrYbQ-1
+Received: by mail-qt1-f200.google.com with SMTP id
+ v10-20020a05622a130a00b003e4ee70e001so21264836qtk.6
+ for <nouveau@lists.freedesktop.org>; Thu, 06 Apr 2023 13:36:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680785467;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=a8vJf32VjBTqhSXC4UaNWwEC2++PydY9gb3nY7Y6vs4=;
- b=gfvwhXqxN+kmnDxdgTBH/oo1QvEgKHP/2bOd2M2E66DOcXRT7GhcBRtgZ7aPx7aoFc
- J9UbaFPDnMM7jBFUuusbaXc+FLDR1GIBiJXxbRNf8IFiyDMvVDtmmnLBP4mGOS7LnBh4
- 96XyRDX3HzD8eSc9U/I0KasUZY7j5v0h4jZ8cgy+SCh0k1pVgWNJFwh8mWdAgDltt4AD
- O+LJNnuumS0jBqlsxpZAGqbMAr1K6EOp+4culYgtVw7WhsjqxUkEW2m0E0j0QGK8b2XL
- sajMpsuaclcGDg8QPa/DOcWB5H3srQ5a+m0Ms4rehFrr7eewm9H5cr3U2zpfWQLD5VSW
- T3qA==
-X-Gm-Message-State: AAQBX9eKhn9Z2j/31RAgwk5dV4XvZ4WCIEdFKM2ldzlEqCvmvP0geiUM
- 809sbFqMjRdBoIUeka3z/Ki7ImHTcQsWFn+J81f7gBjbz21yyROnAt3zLQtzdoH6Oc1c3ckDWs2
- 0WOlPgmkhR9zlQTmaQGuTGeTTEg==
-X-Received: by 2002:ad4:5ca6:0:b0:5df:450b:8002 with SMTP id
- q6-20020ad45ca6000000b005df450b8002mr4830659qvh.31.1680785467004; 
- Thu, 06 Apr 2023 05:51:07 -0700 (PDT)
-X-Google-Smtp-Source: AKy350YSPMv3nhVaAKMIwGcpzI1WXbVj1KNben3bHvDLvNgWUG5IbK0u6ODiRzBeHNfaFX4xk75FiA==
-X-Received: by 2002:ad4:5ca6:0:b0:5df:450b:8002 with SMTP id
- q6-20020ad45ca6000000b005df450b8002mr4830628qvh.31.1680785466773; 
- Thu, 06 Apr 2023 05:51:06 -0700 (PDT)
-Received: from dell-per740-01.7a2m.lab.eng.bos.redhat.com
- (nat-pool-bos-t.redhat.com. [66.187.233.206])
+ d=1e100.net; s=20210112; t=1680813386; x=1683405386;
+ h=mime-version:user-agent:content-transfer-encoding:organization
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6LXsKr+a/Z33uwWnUodThDv9wbW0mvJrlyH2U+mElvk=;
+ b=qdf6GyxxPe5mIz0Zz7wya5BEmNRRoyruwnVs06SSKLbE0amOPF2NSISzq/aOcz6YdS
+ r6xNcCZ9hpf1IJxGbsFJI/4uuQ6mqZwC0DXWZQQeXyIylGmnjZ5+yA/6N5q0u7J5xznA
+ xKFGFNCJ6xbz3QNc4hRLlAhqf/dItW+epvFxlBxfYWivcM+7zi55+xhofN2d3MbL8Q/f
+ xFeEXjIe3FbHY3BkpOXZvJWIqm/Am0CkRcm0S1phBgEdVpDTFu7iYlfyW1B+/tUeLX1v
+ u5igd7hl4zi1KoebgclbM4x8cNq7/MOuyTSAKGL4K83kzJ/faCjLwHwDKXoW9iVgBxIS
+ VUYQ==
+X-Gm-Message-State: AAQBX9f1bQtJHRTxPGj/Lo8+0YnSVMLZbRiMh8BvmS+GhLrNgcdasP/r
+ FdLjYeCcftn/xl2fo4S9NJ7T4DylYoR+I05WQYwXHH/w6PiIDdqx/JwwjhzrwIYrCSVuxl84TCk
+ vYR26ffNLCq2nuehsWmgw5IabjQ==
+X-Received: by 2002:a05:6214:5011:b0:5e0:2d2a:33c7 with SMTP id
+ jo17-20020a056214501100b005e02d2a33c7mr1134137qvb.17.1680813386438; 
+ Thu, 06 Apr 2023 13:36:26 -0700 (PDT)
+X-Google-Smtp-Source: AKy350aMIlr6kOr7QlKmLXQ+/A47WKSK2XBUpbzukLONDGPnJm/66bMRzwwZPj9Vn6QKrcOYSdjPyw==
+X-Received: by 2002:a05:6214:5011:b0:5e0:2d2a:33c7 with SMTP id
+ jo17-20020a056214501100b005e02d2a33c7mr1134098qvb.17.1680813386085; 
+ Thu, 06 Apr 2023 13:36:26 -0700 (PDT)
+Received: from ?IPv6:2600:4040:5c62:8200::feb? ([2600:4040:5c62:8200::feb])
  by smtp.gmail.com with ESMTPSA id
- de11-20020ad4584b000000b005dd8b93457csm489252qvb.20.2023.04.06.05.51.06
+ u12-20020a0ced2c000000b005dd8b934572sm784208qvq.10.2023.04.06.13.36.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Apr 2023 05:51:06 -0700 (PDT)
-From: Tom Rix <trix@redhat.com>
-To: bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com,
+ Thu, 06 Apr 2023 13:36:25 -0700 (PDT)
+Message-ID: <dc98897a97ba0f7e959dbcb8465ebc522e91dc3a.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Tom Rix <trix@redhat.com>, bskeggs@redhat.com, kherbst@redhat.com, 
  airlied@gmail.com, daniel@ffwll.ch, gsamaiya@nvidia.com
-Date: Thu,  6 Apr 2023 08:51:02 -0400
-Message-Id: <20230406125102.1952202-1-trix@redhat.com>
-X-Mailer: git-send-email 2.27.0
+Date: Thu, 06 Apr 2023 16:36:24 -0400
+In-Reply-To: <20230406125102.1952202-1-trix@redhat.com>
+References: <20230406125102.1952202-1-trix@redhat.com>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.44.4 (3.44.4-2.fc36)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Subject: [Nouveau] [PATCH] drm/nouveau/gr/tu102: remove unused tu102_gr_load
- function
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: [Nouveau] (Attn. Skeggsb) Re: [PATCH] drm/nouveau/gr/tu102: remove
+ unused tu102_gr_load function
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,45 +86,60 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Tom Rix <trix@redhat.com>
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-smatch reports
-drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: symbol
-  'tu102_gr_load' was not declared. Should it be static?
+Hey Ben - this patch looks fine to me but I figured I should check before
+giving it the OK: I assume we're not planning on using tu102_gr_load for
+anything in the future? (if we are, do we want to just #if 0 this for the t=
+ime
+being?)
 
-This function is not used so remove it.
+On Thu, 2023-04-06 at 08:51 -0400, Tom Rix wrote:
+> smatch reports
+> drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: symbol
+>   'tu102_gr_load' was not declared. Should it be static?
+>=20
+> This function is not used so remove it.
+>=20
+> Signed-off-by: Tom Rix <trix@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c | 13 -------------
+>  1 file changed, 13 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c b/drivers/gpu=
+/drm/nouveau/nvkm/engine/gr/tu102.c
+> index 3b6c8100a242..a7775aa18541 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
+> @@ -206,19 +206,6 @@ tu102_gr_av_to_init_veid(struct nvkm_blob *blob, str=
+uct gf100_gr_pack **ppack)
+>  =09return gk20a_gr_av_to_init_(blob, 64, 0x00100000, ppack);
+>  }
+> =20
+> -int
+> -tu102_gr_load(struct gf100_gr *gr, int ver, const struct gf100_gr_fwif *=
+fwif)
+> -{
+> -=09int ret;
+> -
+> -=09ret =3D gm200_gr_load(gr, ver, fwif);
+> -=09if (ret)
+> -=09=09return ret;
+> -
+> -=09return gk20a_gr_load_net(gr, "gr/", "sw_veid_bundle_init", ver, tu102=
+_gr_av_to_init_veid,
+> -=09=09=09=09 &gr->bundle_veid);
+> -}
+> -
+>  static const struct gf100_gr_fwif
+>  tu102_gr_fwif[] =3D {
+>  =09{  0, gm200_gr_load, &tu102_gr, &gp108_gr_fecs_acr, &gp108_gr_gpccs_a=
+cr },
 
-Signed-off-by: Tom Rix <trix@redhat.com>
----
- drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c | 13 -------------
- 1 file changed, 13 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
-index 3b6c8100a242..a7775aa18541 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
-@@ -206,19 +206,6 @@ tu102_gr_av_to_init_veid(struct nvkm_blob *blob, struct gf100_gr_pack **ppack)
- 	return gk20a_gr_av_to_init_(blob, 64, 0x00100000, ppack);
- }
- 
--int
--tu102_gr_load(struct gf100_gr *gr, int ver, const struct gf100_gr_fwif *fwif)
--{
--	int ret;
--
--	ret = gm200_gr_load(gr, ver, fwif);
--	if (ret)
--		return ret;
--
--	return gk20a_gr_load_net(gr, "gr/", "sw_veid_bundle_init", ver, tu102_gr_av_to_init_veid,
--				 &gr->bundle_veid);
--}
--
- static const struct gf100_gr_fwif
- tu102_gr_fwif[] = {
- 	{  0, gm200_gr_load, &tu102_gr, &gp108_gr_fecs_acr, &gp108_gr_gpccs_acr },
--- 
-2.27.0
+--=20
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
