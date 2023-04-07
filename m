@@ -1,79 +1,61 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 535CC6DA35E
-	for <lists+nouveau@lfdr.de>; Thu,  6 Apr 2023 22:36:32 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 912286DB24F
+	for <lists+nouveau@lfdr.de>; Fri,  7 Apr 2023 20:01:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CFF0110ED03;
-	Thu,  6 Apr 2023 20:36:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 19FA910E20F;
+	Fri,  7 Apr 2023 18:01:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1433F10ED12
- for <nouveau@lists.freedesktop.org>; Thu,  6 Apr 2023 20:36:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1680813388;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=irbR4glmPEIfzFVDABEDFiMlvxyIKRZYDMi+bXbiU3E=;
- b=bFYpHCYqeTazo0T46ANHwVHvnggnjy+i8FrVfyD7C4Dk1GGCZaESDO/uf/UJ1edoH/wBOq
- 8Wi1egpTdZprIpUSqjGPP4mQdImPKtdSm2uftBpA42vrTQECLxCATFt4kMVmos6+iJxMHT
- f8yxGNPMyFp5PQ6EaOokwgtnphvExls=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-244-B1AL0F1CPji_2KUhaGrYbQ-1; Thu, 06 Apr 2023 16:36:27 -0400
-X-MC-Unique: B1AL0F1CPji_2KUhaGrYbQ-1
-Received: by mail-qt1-f200.google.com with SMTP id
- v10-20020a05622a130a00b003e4ee70e001so21264836qtk.6
- for <nouveau@lists.freedesktop.org>; Thu, 06 Apr 2023 13:36:27 -0700 (PDT)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2CE5C10E20F
+ for <nouveau@lists.freedesktop.org>; Fri,  7 Apr 2023 18:01:32 +0000 (UTC)
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-50bf6f29601so150796a12.0
+ for <nouveau@lists.freedesktop.org>; Fri, 07 Apr 2023 11:01:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20210112; t=1680890491; x=1683482491;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=q77ZcgCYnodZClKQX1HhPOSoqs2rfxGtOfBwRswul/4=;
+ b=b8gKd+6rbeWwg8r+DFOMum1BwImUQSQAJBPrje68ohZORJXaU6x2Xjwzkhvjx0zkBd
+ 5h5bRrw74dAx8oRlL3w74Jr9fcAfAvcocqj/1iJERl3gENUbwc4NGQ55i5HQ+b+0ZP09
+ 0rez9y9Qa5huxDLtpYeke3L8uF9vTMjRiL+vSbvl9/TsWbbjtrZCUB3oXEknJi7Yhk47
+ JXF9nbuPR2gdw5dq4TaBv2MF+VCKznTZ3GqXyMZ37PRQS5m96O2D+EIpIAaQFlYoGbdz
+ WsWo06NQmP1P4MIKU9TIsU4519oxYzv7nhhKpZgz+FnI+GxMuVQaX78O9G7tHEuj/+r8
+ t6sA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680813386; x=1683405386;
- h=mime-version:user-agent:content-transfer-encoding:organization
- :references:in-reply-to:date:cc:to:from:subject:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6LXsKr+a/Z33uwWnUodThDv9wbW0mvJrlyH2U+mElvk=;
- b=qdf6GyxxPe5mIz0Zz7wya5BEmNRRoyruwnVs06SSKLbE0amOPF2NSISzq/aOcz6YdS
- r6xNcCZ9hpf1IJxGbsFJI/4uuQ6mqZwC0DXWZQQeXyIylGmnjZ5+yA/6N5q0u7J5xznA
- xKFGFNCJ6xbz3QNc4hRLlAhqf/dItW+epvFxlBxfYWivcM+7zi55+xhofN2d3MbL8Q/f
- xFeEXjIe3FbHY3BkpOXZvJWIqm/Am0CkRcm0S1phBgEdVpDTFu7iYlfyW1B+/tUeLX1v
- u5igd7hl4zi1KoebgclbM4x8cNq7/MOuyTSAKGL4K83kzJ/faCjLwHwDKXoW9iVgBxIS
- VUYQ==
-X-Gm-Message-State: AAQBX9f1bQtJHRTxPGj/Lo8+0YnSVMLZbRiMh8BvmS+GhLrNgcdasP/r
- FdLjYeCcftn/xl2fo4S9NJ7T4DylYoR+I05WQYwXHH/w6PiIDdqx/JwwjhzrwIYrCSVuxl84TCk
- vYR26ffNLCq2nuehsWmgw5IabjQ==
-X-Received: by 2002:a05:6214:5011:b0:5e0:2d2a:33c7 with SMTP id
- jo17-20020a056214501100b005e02d2a33c7mr1134137qvb.17.1680813386438; 
- Thu, 06 Apr 2023 13:36:26 -0700 (PDT)
-X-Google-Smtp-Source: AKy350aMIlr6kOr7QlKmLXQ+/A47WKSK2XBUpbzukLONDGPnJm/66bMRzwwZPj9Vn6QKrcOYSdjPyw==
-X-Received: by 2002:a05:6214:5011:b0:5e0:2d2a:33c7 with SMTP id
- jo17-20020a056214501100b005e02d2a33c7mr1134098qvb.17.1680813386085; 
- Thu, 06 Apr 2023 13:36:26 -0700 (PDT)
-Received: from ?IPv6:2600:4040:5c62:8200::feb? ([2600:4040:5c62:8200::feb])
- by smtp.gmail.com with ESMTPSA id
- u12-20020a0ced2c000000b005dd8b934572sm784208qvq.10.2023.04.06.13.36.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Apr 2023 13:36:25 -0700 (PDT)
-Message-ID: <dc98897a97ba0f7e959dbcb8465ebc522e91dc3a.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Tom Rix <trix@redhat.com>, bskeggs@redhat.com, kherbst@redhat.com, 
- airlied@gmail.com, daniel@ffwll.ch, gsamaiya@nvidia.com
-Date: Thu, 06 Apr 2023 16:36:24 -0400
-In-Reply-To: <20230406125102.1952202-1-trix@redhat.com>
-References: <20230406125102.1952202-1-trix@redhat.com>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.44.4 (3.44.4-2.fc36)
+ d=1e100.net; s=20210112; t=1680890491; x=1683482491;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=q77ZcgCYnodZClKQX1HhPOSoqs2rfxGtOfBwRswul/4=;
+ b=tNYfNBoPkdkcuq/90HIoFcF9slD9Qyc9zj/LpA0WNrc2lcV5fQDlciQjK7UlZ6riZv
+ nAOCICvjW2Lhn9jynRgBWxFVM7FId8f8b7bMyxBLNgPhj23Y9cwVhrapueXddG2WmD5U
+ 8uN7TNJmAWoG27Y5nilG4FCVuJ6SZyPLkmmIiZD8qyEhuswqzPWRZ56cvnoAgDr+bjU6
+ q+iBht5ya/x7wjGZQWiW4VglFq4Xs/RHjkQqjCT5VyNUWdXjSaAZ1GVnbuiqgn3bwlHR
+ kQwpxkwXRUBwFmxP3R45H3A5gda1nRThakEN8IIxMWe1C9VAyn9YMDpOfpx0tM7mgrhQ
+ cnNA==
+X-Gm-Message-State: AAQBX9c9T1zU7QiIIRF57dpNe2F90IZiunQFAsb1gRIuA7SXRO/GXrAD
+ xKaHc/fpjjMNShUC2e38eX3iJEREkBpl1azPwd1I4g==
+X-Google-Smtp-Source: AKy350ZHpTLUkU+XPnuqC13BzSbCyuTyl9RXM3G4Em3Qru7EkrOtM+34INuQ/mLJt+FyJN0GtVAS94TF68VaGc2rObc=
+X-Received: by 2002:a05:6a00:2e28:b0:625:c55f:bc66 with SMTP id
+ fc40-20020a056a002e2800b00625c55fbc66mr1615956pfb.4.1680890490979; Fri, 07
+ Apr 2023 11:01:30 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+References: <20230329231407.1816570-1-trix@redhat.com>
+In-Reply-To: <20230329231407.1816570-1-trix@redhat.com>
+From: Nick Desaulniers <ndesaulniers@google.com>
+Date: Fri, 7 Apr 2023 11:01:19 -0700
+Message-ID: <CAKwvOdnQCVZ+gqOWzsRvkSKbYFJdh5yAJEN-TT+7MC4e8tdu8A@mail.gmail.com>
+To: Tom Rix <trix@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: [Nouveau] (Attn. Skeggsb) Re: [PATCH] drm/nouveau/gr/tu102: remove
- unused tu102_gr_load function
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/svm: remove unused ret variable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,61 +67,67 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, llvm@lists.linux.dev,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ nathan@kernel.org, bskeggs@redhat.com, daniel@ffwll.ch
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hey Ben - this patch looks fine to me but I figured I should check before
-giving it the OK: I assume we're not planning on using tu102_gr_load for
-anything in the future? (if we are, do we want to just #if 0 this for the t=
-ime
-being?)
-
-On Thu, 2023-04-06 at 08:51 -0400, Tom Rix wrote:
-> smatch reports
-> drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: symbol
->   'tu102_gr_load' was not declared. Should it be static?
->=20
-> This function is not used so remove it.
->=20
+On Wed, Mar 29, 2023 at 4:14=E2=80=AFPM Tom Rix <trix@redhat.com> wrote:
+>
+> clang with W=3D1 reports
+> drivers/gpu/drm/nouveau/nouveau_svm.c:929:6: error: variable
+>   'ret' set but not used [-Werror,-Wunused-but-set-variable]
+>         int ret;
+>             ^
+> This variable is not used so remove it.
+>
 > Signed-off-by: Tom Rix <trix@redhat.com>
 > ---
->  drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c | 13 -------------
->  1 file changed, 13 deletions(-)
->=20
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c b/drivers/gpu=
-/drm/nouveau/nvkm/engine/gr/tu102.c
-> index 3b6c8100a242..a7775aa18541 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
-> @@ -206,19 +206,6 @@ tu102_gr_av_to_init_veid(struct nvkm_blob *blob, str=
-uct gf100_gr_pack **ppack)
->  =09return gk20a_gr_av_to_init_(blob, 64, 0x00100000, ppack);
+>  drivers/gpu/drm/nouveau/nouveau_svm.c | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouv=
+eau/nouveau_svm.c
+> index a74ba8d84ba7..e072d610f2f9 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> @@ -926,15 +926,14 @@ nouveau_pfns_map(struct nouveau_svmm *svmm, struct =
+mm_struct *mm,
+>                  unsigned long addr, u64 *pfns, unsigned long npages)
+>  {
+>         struct nouveau_pfnmap_args *args =3D nouveau_pfns_to_args(pfns);
+> -       int ret;
+>
+>         args->p.addr =3D addr;
+>         args->p.size =3D npages << PAGE_SHIFT;
+>
+>         mutex_lock(&svmm->mutex);
+>
+> -       ret =3D nvif_object_ioctl(&svmm->vmm->vmm.object, args,
+> -                               struct_size(args, p.phys, npages), NULL);
+> +       nvif_object_ioctl(&svmm->vmm->vmm.object, args,
+> +                         struct_size(args, p.phys, npages), NULL);
+
+nvif_object_ioctl() may return -ENOSYS.  Seeing other call sites have
+comments like:
+114     /*XXX: warn? */
+134     /*XXX: warn? */
+
+or other places where the return code isn't checked makes me think
+that a better approach would be to
+1. plumb error codes back up through nouveau_pfns_map() (and other
+call sites of nvif_object_ioctl)
+2. consider making nvif_object_ioctl __must_check
+
+>
+>         mutex_unlock(&svmm->mutex);
 >  }
-> =20
-> -int
-> -tu102_gr_load(struct gf100_gr *gr, int ver, const struct gf100_gr_fwif *=
-fwif)
-> -{
-> -=09int ret;
-> -
-> -=09ret =3D gm200_gr_load(gr, ver, fwif);
-> -=09if (ret)
-> -=09=09return ret;
-> -
-> -=09return gk20a_gr_load_net(gr, "gr/", "sw_veid_bundle_init", ver, tu102=
-_gr_av_to_init_veid,
-> -=09=09=09=09 &gr->bundle_veid);
-> -}
-> -
->  static const struct gf100_gr_fwif
->  tu102_gr_fwif[] =3D {
->  =09{  0, gm200_gr_load, &tu102_gr, &gp108_gr_fecs_acr, &gp108_gr_gpccs_a=
-cr },
+> --
+> 2.27.0
+>
+
 
 --=20
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
-
+Thanks,
+~Nick Desaulniers
