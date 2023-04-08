@@ -2,77 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C0A66DB70F
-	for <lists+nouveau@lfdr.de>; Sat,  8 Apr 2023 01:15:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63F4C6DB80D
+	for <lists+nouveau@lfdr.de>; Sat,  8 Apr 2023 03:46:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1330F10EE6B;
-	Fri,  7 Apr 2023 23:15:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C04CE10E084;
+	Sat,  8 Apr 2023 01:46:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AABC610E7C4
- for <nouveau@lists.freedesktop.org>; Fri,  7 Apr 2023 23:15:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1680909319;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=1ISymq/GgmsRPf4qsquUvqkqq/xnOiiDysSrttQOxIQ=;
- b=jIFa9QrNWMOny2FWTp1rre4rIF6U7X4wyPyDwsTiAORNJA147lIAURHbBD4+5V+BWnJ8c8
- 6inZTi9WBYR44PdXW4/XYTmxFihMOBvJZ7Kpk51svPACu02Ud7lent2HlQfmP40cYnl9hj
- nbAz4OYlwR+UkwAKxZcZRHmLviBoZ/U=
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-367-DyHLbTVSPtiRzKkexU3KpA-1; Fri, 07 Apr 2023 19:15:18 -0400
-X-MC-Unique: DyHLbTVSPtiRzKkexU3KpA-1
-Received: by mail-qv1-f71.google.com with SMTP id
- n12-20020a0cbe8c000000b005e79f8d1417so1994491qvi.13
- for <nouveau@lists.freedesktop.org>; Fri, 07 Apr 2023 16:15:18 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680909318; x=1683501318;
- h=mime-version:user-agent:content-transfer-encoding:organization
- :references:in-reply-to:date:cc:to:from:subject:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=gDqv07q4EW3FaIE3tiwTcIZKESozldm9Lvt1N22Zwwk=;
- b=gLVvRFldDc5hC7Jkawrpnxjw/E6bTghMCOjBrwVD5mWXfycGmu5pb2PxurhUDGcZq1
- ytDlOGIMwzjI8AonicqhBw417W7vBo694RkctQQgPEcdHqozw8BgKrrEtHfSM+/SenvF
- 0jWRv9lozRpB+Ri389E0MZRg25P98VTQo5fgOQMKgy7OQ8oFvrBxuGYz2HEG4zjoNB3z
- 3FEyRCJ2uS/lIgm/jcLq6MmpTCAWcNYweRb44LpSVKl9QpSLm+AaL8BvMFjmB/VFBzSB
- hAxzMV0hfjK/TKf3qiwGd/V4kn68N/Xff05y6Bun6VOu7/SXXoQGwiYTj+6amn7oERYP
- WRtw==
-X-Gm-Message-State: AAQBX9eNhEvinNQri8ZbXusrEgggoXIuRNQ8QNi1+x7Gsr7jsooPXKR5
- TI5iw4Z6aQRLOYTjZHxQxi9j9sTUZGJBOqqRPcnRDpC4HNhMPNNVeA7qlCXVIbvCODBAdkk+6x7
- LdivBisL/L+5k3q9ecZFLwWwrzg==
-X-Received: by 2002:a05:622a:1818:b0:3db:fba6:53f8 with SMTP id
- t24-20020a05622a181800b003dbfba653f8mr6591183qtc.25.1680909318281; 
- Fri, 07 Apr 2023 16:15:18 -0700 (PDT)
-X-Google-Smtp-Source: AKy350ZdgxF2YkJyao35TIkGn0N7Mvwz1VbA4EtERvx/JG60e/RP0fMnaunGlYblEzKjanOkDS6r8Q==
-X-Received: by 2002:a05:622a:1818:b0:3db:fba6:53f8 with SMTP id
- t24-20020a05622a181800b003dbfba653f8mr6591161qtc.25.1680909318047; 
- Fri, 07 Apr 2023 16:15:18 -0700 (PDT)
-Received: from ?IPv6:2600:4040:5c62:8200::feb? ([2600:4040:5c62:8200::feb])
- by smtp.gmail.com with ESMTPSA id
- x78-20020a376351000000b007466432a559sm1632908qkb.86.2023.04.07.16.15.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Apr 2023 16:15:17 -0700 (PDT)
-Message-ID: <bcf9a62b87e4d46cabfe7d751882527b10b6b401.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Karol Herbst <kherbst@redhat.com>, linux-kernel@vger.kernel.org
-Date: Fri, 07 Apr 2023 19:15:15 -0400
-In-Reply-To: <20230405110455.1368428-1-kherbst@redhat.com>
-References: <20230405110455.1368428-1-kherbst@redhat.com>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.44.4 (3.44.4-2.fc36)
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 48D9D10E084;
+ Sat,  8 Apr 2023 01:46:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1680918384; x=1712454384;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=YfUtNEwJ9JQoeQFPeGky5RqHKjakQODVtB8RgU/JkTc=;
+ b=N34niOKZo4P7iCYP0O6ZWcRG5Jzeds1L2wMTvT6MJ5vlaa/iRainBfZg
+ qJH2TJ3xeE/H3/y13KjmlTAEfXQn+zl2bhRWUFBJ8olbluwPUalWCgZzo
+ v6kDEluuiKQE8P3tj/TmKCLGld81MoAtE2JWNWtCaGcT+9Nnyb8E55yKJ
+ iBckJKTIomX5LOfuH7jNTiD1PkiE3ldnA8dXYs6glYicyJeS+Txt3CGGo
+ 2SBLjJbJT9PU1I6uMXg5ljFm6UZA53mivuaJFw2POgpn57wSxwbFsk/L0
+ ajl8a4JxOhlYIw4QbEalKSPIk3GogNSMIsB9RsZdkVTtDJfNr/yXcmzfP A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10673"; a="344877355"
+X-IronPort-AV: E=Sophos;i="5.98,328,1673942400"; d="scan'208";a="344877355"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+ by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 07 Apr 2023 18:46:23 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10673"; a="665071624"
+X-IronPort-AV: E=Sophos;i="5.98,328,1673942400"; d="scan'208";a="665071624"
+Received: from lkp-server01.sh.intel.com (HELO b613635ddfff) ([10.239.97.150])
+ by orsmga006.jf.intel.com with ESMTP; 07 Apr 2023 18:46:20 -0700
+Received: from kbuild by b613635ddfff with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1pkxel-000T8j-0J;
+ Sat, 08 Apr 2023 01:46:19 +0000
+Date: Sat, 8 Apr 2023 09:45:41 +0800
+From: kernel test robot <lkp@intel.com>
+To: Lyude Paul <lyude@redhat.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
+Message-ID: <202304080927.xI7Meodx-lkp@intel.com>
+References: <20230407222133.1425969-2-lyude@redhat.com>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/fb: add missing sysmen flush
- callbacks
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230407222133.1425969-2-lyude@redhat.com>
+Subject: Re: [Nouveau] [PATCH 2/2] drm/nouveau/kms: Add INHERIT ioctl to
+ nvkm/nvif for reading IOR state
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,80 +60,80 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- dri-devel@lists.freedesktop.org
+Cc: Kees Cook <keescook@chromium.org>, Jani Nikula <jani.nikula@intel.com>,
+ open list <linux-kernel@vger.kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
+ oe-kbuild-all@lists.linux.dev, Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reviewed-by: Lyude Paul <lyude@redhat.com>
+Hi Lyude,
 
-On Wed, 2023-04-05 at 13:04 +0200, Karol Herbst wrote:
-> Closes: https://gitlab.freedesktop.org/drm/nouveau/-/issues/203
-> Fixes: 5728d064190e1 ("drm/nouveau/fb: handle sysmem flush page from comm=
-on code")
-> Signed-off-by: Karol Herbst <kherbst@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c | 1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c | 1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c | 1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c | 1 +
->  4 files changed, 4 insertions(+)
->=20
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c b/drivers/gpu=
-/drm/nouveau/nvkm/subdev/fb/gf108.c
-> index 76678dd60f93f..c4c6f67af7ccc 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c
-> @@ -31,6 +31,7 @@ gf108_fb =3D {
->  =09.init =3D gf100_fb_init,
->  =09.init_page =3D gf100_fb_init_page,
->  =09.intr =3D gf100_fb_intr,
-> +=09.sysmem.flush_page_init =3D gf100_fb_sysmem_flush_page_init,
->  =09.ram_new =3D gf108_ram_new,
->  =09.default_bigpage =3D 17,
->  };
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c b/drivers/gpu=
-/drm/nouveau/nvkm/subdev/fb/gk104.c
-> index f73442ccb424b..433fa966ba231 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c
-> @@ -77,6 +77,7 @@ gk104_fb =3D {
->  =09.init =3D gf100_fb_init,
->  =09.init_page =3D gf100_fb_init_page,
->  =09.intr =3D gf100_fb_intr,
-> +=09.sysmem.flush_page_init =3D gf100_fb_sysmem_flush_page_init,
->  =09.ram_new =3D gk104_ram_new,
->  =09.default_bigpage =3D 17,
->  =09.clkgate_pack =3D gk104_fb_clkgate_pack,
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c b/drivers/gpu=
-/drm/nouveau/nvkm/subdev/fb/gk110.c
-> index 45d6cdffafeed..4dc283dedf8b5 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c
-> @@ -59,6 +59,7 @@ gk110_fb =3D {
->  =09.init =3D gf100_fb_init,
->  =09.init_page =3D gf100_fb_init_page,
->  =09.intr =3D gf100_fb_intr,
-> +=09.sysmem.flush_page_init =3D gf100_fb_sysmem_flush_page_init,
->  =09.ram_new =3D gk104_ram_new,
->  =09.default_bigpage =3D 17,
->  =09.clkgate_pack =3D gk110_fb_clkgate_pack,
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c b/drivers/gpu=
-/drm/nouveau/nvkm/subdev/fb/gm107.c
-> index de52462a92bf0..90bfff616d35b 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c
-> @@ -31,6 +31,7 @@ gm107_fb =3D {
->  =09.init =3D gf100_fb_init,
->  =09.init_page =3D gf100_fb_init_page,
->  =09.intr =3D gf100_fb_intr,
-> +=09.sysmem.flush_page_init =3D gf100_fb_sysmem_flush_page_init,
->  =09.ram_new =3D gm107_ram_new,
->  =09.default_bigpage =3D 17,
->  };
+kernel test robot noticed the following build warnings:
 
---=20
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+[auto build test WARNING on drm-misc/drm-misc-next]
+[also build test WARNING on drm/drm-next drm-exynos/exynos-drm-next drm-intel/for-linux-next drm-intel/for-linux-next-fixes drm-tip/drm-tip linus/master v6.3-rc5 next-20230406]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
+url:    https://github.com/intel-lab-lkp/linux/commits/Lyude-Paul/drm-nouveau-kms-Add-INHERIT-ioctl-to-nvkm-nvif-for-reading-IOR-state/20230408-062329
+base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
+patch link:    https://lore.kernel.org/r/20230407222133.1425969-2-lyude%40redhat.com
+patch subject: [PATCH 2/2] drm/nouveau/kms: Add INHERIT ioctl to nvkm/nvif for reading IOR state
+config: sparc-allyesconfig (https://download.01.org/0day-ci/archive/20230408/202304080927.xI7Meodx-lkp@intel.com/config)
+compiler: sparc64-linux-gcc (GCC) 12.1.0
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/intel-lab-lkp/linux/commit/a3d963915cf6f2d87b57146f7bc57a6a89d90cf6
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Lyude-Paul/drm-nouveau-kms-Add-INHERIT-ioctl-to-nvkm-nvif-for-reading-IOR-state/20230408-062329
+        git checkout a3d963915cf6f2d87b57146f7bc57a6a89d90cf6
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=sparc olddefconfig
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=sparc SHELL=/bin/bash drivers/gpu/
+
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
+| Link: https://lore.kernel.org/oe-kbuild-all/202304080927.xI7Meodx-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+>> drivers/gpu/drm/nouveau/dispnv50/disp.c:2554:1: warning: no previous prototype for 'nv50_display_read_hw_state' [-Wmissing-prototypes]
+    2554 | nv50_display_read_hw_state(struct nouveau_drm *drm)
+         | ^~~~~~~~~~~~~~~~~~~~~~~~~~
+   drivers/gpu/drm/nouveau/dispnv50/disp.c:2618:1: warning: no previous prototype for 'nv50_display_create' [-Wmissing-prototypes]
+    2618 | nv50_display_create(struct drm_device *dev)
+         | ^~~~~~~~~~~~~~~~~~~
+
+
+vim +/nv50_display_read_hw_state +2554 drivers/gpu/drm/nouveau/dispnv50/disp.c
+
+  2551	
+  2552	/* Read back the currently programmed display state */
+  2553	void
+> 2554	nv50_display_read_hw_state(struct nouveau_drm *drm)
+  2555	{
+  2556		struct drm_device *dev = drm->dev;
+  2557		struct drm_encoder *encoder;
+  2558		struct drm_modeset_acquire_ctx ctx;
+  2559		struct nv50_disp *disp = nv50_disp(dev);
+  2560		int ret;
+  2561	
+  2562		DRM_MODESET_LOCK_ALL_BEGIN(dev, ctx, 0, ret);
+  2563	
+  2564		drm_for_each_encoder(encoder, dev) {
+  2565			if (encoder->encoder_type == DRM_MODE_ENCODER_DPMST)
+  2566				continue;
+  2567	
+  2568			nv50_display_read_hw_or_state(dev, disp, nouveau_encoder(encoder));
+  2569		}
+  2570	
+  2571		DRM_MODESET_LOCK_ALL_END(dev, ctx, ret);
+  2572	}
+  2573	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
