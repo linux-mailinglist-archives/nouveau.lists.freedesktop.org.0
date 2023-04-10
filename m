@@ -2,53 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 064A86DB8BF
-	for <lists+nouveau@lfdr.de>; Sat,  8 Apr 2023 06:09:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7DA36DCD40
+	for <lists+nouveau@lfdr.de>; Tue, 11 Apr 2023 00:06:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4B06D10E041;
-	Sat,  8 Apr 2023 04:09:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DEBEF10E1E3;
+	Mon, 10 Apr 2023 22:06:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1C63B10E0B5;
- Sat,  8 Apr 2023 04:09:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1680926981; x=1712462981;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=I85LnZNyBLif63Nt+7CkFxtYuaxsLLp2R4nv7/uIJo0=;
- b=eDf+4NykiCKc+xnJkuhj7vHHWhmFDeRyqv27Dk4U9OWqntm1hku3gG1S
- p+ywMp4PhLEh9bz/1gUMCYrhghxuJRCAk2NKk4k8LZW6jegkwFd6Hdbui
- GnkW4EoA7mvu8AYjLEofFTgF8RZGZDLFZV/wtX2XjNXPb9r000n6LHwcz
- OZ2Zqj/JHBPDiKMgHARmSTnkvewB6Ey61NKenOmCufizuC4NkBVRgrn2S
- kQZCpD3G4R6MPp5kACOQV8wYCsQe0Gx1GkA4XdLPUOZ5dIJIAVntKjB8+
- mN14iNfVp7eGbnqHU+Ukvb7vPV5wLHEDzBUcDLYiqoUW+2FZ9j8dX4xO5 Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10673"; a="341861522"
-X-IronPort-AV: E=Sophos;i="5.98,328,1673942400"; d="scan'208";a="341861522"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Apr 2023 21:09:31 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10673"; a="831368603"
-X-IronPort-AV: E=Sophos;i="5.98,328,1673942400"; d="scan'208";a="831368603"
-Received: from lkp-server01.sh.intel.com (HELO b613635ddfff) ([10.239.97.150])
- by fmsmga001.fm.intel.com with ESMTP; 07 Apr 2023 21:09:28 -0700
-Received: from kbuild by b613635ddfff with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1pkztH-000TIP-1p;
- Sat, 08 Apr 2023 04:09:27 +0000
-Date: Sat, 8 Apr 2023 12:09:08 +0800
-From: kernel test robot <lkp@intel.com>
-To: Lyude Paul <lyude@redhat.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-Message-ID: <202304081129.AMXCmyn2-lkp@intel.com>
-References: <20230407222133.1425969-2-lyude@redhat.com>
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 35ACE10E1E3;
+ Mon, 10 Apr 2023 22:06:09 +0000 (UTC)
+Received: by mail-qv1-xf34.google.com with SMTP id kj14so4254804qvb.12;
+ Mon, 10 Apr 2023 15:06:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20210112; t=1681164368;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=pjZar/MQ6b8qhGH+7PNrFyUqecvUssrkJbOR7pgMRKc=;
+ b=AKjhpvE8a0FvmQzxH1oSCFwMlFKaSCrVrgg0QM/2yl87UEhKP7TdhrsHaOiQqAglRR
+ tJQKz35Vz27LR72Y8GaYQ8hDq++AkfUTdJdNStkY3CkPdkWoKR2HAtMcUz3DFpRUI5dw
+ lZ+nY+lm3TuDg9cX7+rBZa2823hR2Tc7BVvmiIAyLtCXkWiikUlV/hr3HbJTelbjfb5T
+ 3GfG5rhUCDByztzWW2+UUT7XZSqfje8/JQpcD8U2tbbrJMSut2QFtnCrPZXUFqVLTncR
+ h9q8h4cSKGKp1+4s6yQG9eS7k2Z2yyk2GOmIdFr1q4bdqNjFy/gl8P6l8OnGI+P4Z1OT
+ sB/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1681164368;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pjZar/MQ6b8qhGH+7PNrFyUqecvUssrkJbOR7pgMRKc=;
+ b=wdZ1tgrn8TP2DXlfU5G0TuphQ1MTbFa5khTb7w5uwFM4Umv1xUU+U0VJ+nonyxVa84
+ KmGnje7MB+585a/z1CaEFrqNlEd6i24lgh7MxBJrL+5vSGXYCrLhk6nAIFg++9N9IKDC
+ lUk3s2v83L1av7wmJRoEMuySLvKDZbFS9KJnCH7pggZ7wFGmvxSfWNIUYv6CX06sUcKx
+ ENT5zCuz3GOOa2ON4IakuCWiChELLoepTu61o98CflGuWFwRJoQ7DIgSUK9s049apA23
+ EOLBGaQZDlJpc/rRgRmeHQ/oQ3WBpgKK0qGK8HPL1xt0OISsdA6F76utj7RDuFrv50eD
+ UCXw==
+X-Gm-Message-State: AAQBX9d7veNpH1/XakT2+fMj6yeVXGKioo18FPY/XuwBtyKjQB7/mpSv
+ Qgg4D9HYXThjU/zuZS/8ejYtHPceO4Q0LbY0gug=
+X-Google-Smtp-Source: AKy350ZCO2ODxbxkhuEt1R/ncctGRfvUhnl8jBM9I1A4QEn77gjZc7dDt155ded3USH7Jve042Cl5hhNInj2Nt4O8CU=
+X-Received: by 2002:a05:6214:560b:b0:56f:80e:701b with SMTP id
+ mg11-20020a056214560b00b0056f080e701bmr2493952qvb.2.1681164367933; Mon, 10
+ Apr 2023 15:06:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230407222133.1425969-2-lyude@redhat.com>
-Subject: Re: [Nouveau] [PATCH 2/2] drm/nouveau/kms: Add INHERIT ioctl to
- nvkm/nvif for reading IOR state
+References: <20230405110455.1368428-1-kherbst@redhat.com>
+In-Reply-To: <20230405110455.1368428-1-kherbst@redhat.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Tue, 11 Apr 2023 08:05:56 +1000
+Message-ID: <CACAvsv6ODb++b3nZMJcv2__rUC7M0K1BDiZqoh9tLhNqtSxKzQ@mail.gmail.com>
+To: Karol Herbst <kherbst@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/fb: add missing sysmen flush
+ callbacks
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,92 +65,75 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Kees Cook <keescook@chromium.org>, Jani Nikula <jani.nikula@intel.com>,
- llvm@lists.linux.dev, open list <linux-kernel@vger.kernel.org>,
- Ben Skeggs <bskeggs@redhat.com>, oe-kbuild-all@lists.linux.dev,
- Dave Airlie <airlied@redhat.com>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Lyude,
+On Wed, 5 Apr 2023 at 21:05, Karol Herbst <kherbst@redhat.com> wrote:
+>
+> Closes: https://gitlab.freedesktop.org/drm/nouveau/-/issues/203
+> Fixes: 5728d064190e1 ("drm/nouveau/fb: handle sysmem flush page from common code")
+> Signed-off-by: Karol Herbst <kherbst@redhat.com>
+Oops, that must've gotten lost in a rebase somehow.
 
-kernel test robot noticed the following build warnings:
+Reviewed-by: Ben Skeggs <bskeggs@redhat.com>
 
-[auto build test WARNING on drm-misc/drm-misc-next]
-[also build test WARNING on drm/drm-next drm-exynos/exynos-drm-next drm-intel/for-linux-next drm-intel/for-linux-next-fixes drm-tip/drm-tip linus/master v6.3-rc5 next-20230406]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Lyude-Paul/drm-nouveau-kms-Add-INHERIT-ioctl-to-nvkm-nvif-for-reading-IOR-state/20230408-062329
-base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
-patch link:    https://lore.kernel.org/r/20230407222133.1425969-2-lyude%40redhat.com
-patch subject: [PATCH 2/2] drm/nouveau/kms: Add INHERIT ioctl to nvkm/nvif for reading IOR state
-config: arm64-buildonly-randconfig-r001-20230403 (https://download.01.org/0day-ci/archive/20230408/202304081129.AMXCmyn2-lkp@intel.com/config)
-compiler: clang version 17.0.0 (https://github.com/llvm/llvm-project 2c57868e2e877f73c339796c3374ae660bb77f0d)
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # install arm64 cross compiling tool for clang build
-        # apt-get install binutils-aarch64-linux-gnu
-        # https://github.com/intel-lab-lkp/linux/commit/a3d963915cf6f2d87b57146f7bc57a6a89d90cf6
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Lyude-Paul/drm-nouveau-kms-Add-INHERIT-ioctl-to-nvkm-nvif-for-reading-IOR-state/20230408-062329
-        git checkout a3d963915cf6f2d87b57146f7bc57a6a89d90cf6
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=arm64 olddefconfig
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=arm64 SHELL=/bin/bash drivers/gpu/drm/
-
-If you fix the issue, kindly add following tag where applicable
-| Reported-by: kernel test robot <lkp@intel.com>
-| Link: https://lore.kernel.org/oe-kbuild-all/202304081129.AMXCmyn2-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
->> drivers/gpu/drm/nouveau/dispnv50/disp.c:2554:1: warning: no previous prototype for function 'nv50_display_read_hw_state' [-Wmissing-prototypes]
-   nv50_display_read_hw_state(struct nouveau_drm *drm)
-   ^
-   drivers/gpu/drm/nouveau/dispnv50/disp.c:2553:1: note: declare 'static' if the function is not intended to be used outside of this translation unit
-   void
-   ^
-   static 
-   drivers/gpu/drm/nouveau/dispnv50/disp.c:2618:1: warning: no previous prototype for function 'nv50_display_create' [-Wmissing-prototypes]
-   nv50_display_create(struct drm_device *dev)
-   ^
-   drivers/gpu/drm/nouveau/dispnv50/disp.c:2617:1: note: declare 'static' if the function is not intended to be used outside of this translation unit
-   int
-   ^
-   static 
-   2 warnings generated.
-
-
-vim +/nv50_display_read_hw_state +2554 drivers/gpu/drm/nouveau/dispnv50/disp.c
-
-  2551	
-  2552	/* Read back the currently programmed display state */
-  2553	void
-> 2554	nv50_display_read_hw_state(struct nouveau_drm *drm)
-  2555	{
-  2556		struct drm_device *dev = drm->dev;
-  2557		struct drm_encoder *encoder;
-  2558		struct drm_modeset_acquire_ctx ctx;
-  2559		struct nv50_disp *disp = nv50_disp(dev);
-  2560		int ret;
-  2561	
-  2562		DRM_MODESET_LOCK_ALL_BEGIN(dev, ctx, 0, ret);
-  2563	
-  2564		drm_for_each_encoder(encoder, dev) {
-  2565			if (encoder->encoder_type == DRM_MODE_ENCODER_DPMST)
-  2566				continue;
-  2567	
-  2568			nv50_display_read_hw_or_state(dev, disp, nouveau_encoder(encoder));
-  2569		}
-  2570	
-  2571		DRM_MODESET_LOCK_ALL_END(dev, ctx, ret);
-  2572	}
-  2573	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c | 1 +
+>  drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c | 1 +
+>  drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c | 1 +
+>  drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c | 1 +
+>  4 files changed, 4 insertions(+)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c
+> index 76678dd60f93f..c4c6f67af7ccc 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c
+> @@ -31,6 +31,7 @@ gf108_fb = {
+>         .init = gf100_fb_init,
+>         .init_page = gf100_fb_init_page,
+>         .intr = gf100_fb_intr,
+> +       .sysmem.flush_page_init = gf100_fb_sysmem_flush_page_init,
+>         .ram_new = gf108_ram_new,
+>         .default_bigpage = 17,
+>  };
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c
+> index f73442ccb424b..433fa966ba231 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c
+> @@ -77,6 +77,7 @@ gk104_fb = {
+>         .init = gf100_fb_init,
+>         .init_page = gf100_fb_init_page,
+>         .intr = gf100_fb_intr,
+> +       .sysmem.flush_page_init = gf100_fb_sysmem_flush_page_init,
+>         .ram_new = gk104_ram_new,
+>         .default_bigpage = 17,
+>         .clkgate_pack = gk104_fb_clkgate_pack,
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c
+> index 45d6cdffafeed..4dc283dedf8b5 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c
+> @@ -59,6 +59,7 @@ gk110_fb = {
+>         .init = gf100_fb_init,
+>         .init_page = gf100_fb_init_page,
+>         .intr = gf100_fb_intr,
+> +       .sysmem.flush_page_init = gf100_fb_sysmem_flush_page_init,
+>         .ram_new = gk104_ram_new,
+>         .default_bigpage = 17,
+>         .clkgate_pack = gk110_fb_clkgate_pack,
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c
+> index de52462a92bf0..90bfff616d35b 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c
+> @@ -31,6 +31,7 @@ gm107_fb = {
+>         .init = gf100_fb_init,
+>         .init_page = gf100_fb_init_page,
+>         .intr = gf100_fb_intr,
+> +       .sysmem.flush_page_init = gf100_fb_sysmem_flush_page_init,
+>         .ram_new = gm107_ram_new,
+>         .default_bigpage = 17,
+>  };
+> --
+> 2.39.2
+>
