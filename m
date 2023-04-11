@@ -2,70 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E65E86DDD3D
-	for <lists+nouveau@lfdr.de>; Tue, 11 Apr 2023 16:05:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C1AC6DDD60
+	for <lists+nouveau@lfdr.de>; Tue, 11 Apr 2023 16:13:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3076710E553;
-	Tue, 11 Apr 2023 14:05:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1BC1210E568;
+	Tue, 11 Apr 2023 14:13:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 70FDC10E391
- for <nouveau@lists.freedesktop.org>; Tue, 11 Apr 2023 14:05:50 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 16B7F10E57D
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Apr 2023 14:13:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1681221949;
+ s=mimecast20190719; t=1681222386;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=7Ptm4DEXFusgjoGKLkYnDTCXvT/rOJ3Pu6Hnf86R9zo=;
- b=PyX6VJwvQm1z457Pv5ErwuO/BLosH3ii7rcpe2qB9Pz0TcNWns1TFpT/nDKMKGkLtaD5J5
- 62aRvJPw/bshLHZSyWHaOfw21Qu7DTFi+Ch1X/2BX4szkaAQxpg6XjN2c9mnjCetKqv0aO
- EjfKeGZcX1AkZ0iYsMY7vU5KEPjVT0Y=
-Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
- [209.85.167.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=UgWHYZJKqiNl4gOA+tqLLIKQpJrOHM98+Ie5Z3qvOjs=;
+ b=KK8QJP65SZWzH8s5TQaUDezYJe349bBhqkPLOSkyPHIxaezJp9W85lU69HCXNny4r15Ksg
+ +ruaiznh6B6wmWJmz0P07UyvgIeTQqV7V2q9U4ooAZLyk9IQEq/5RNux1miusMS3MXEn6V
+ emXza2dClalLNDOli5dT10+5qYcBxPA=
+Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
+ [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-127-hgby9n0pPUSzLSNKNi8GvQ-1; Tue, 11 Apr 2023 10:05:48 -0400
-X-MC-Unique: hgby9n0pPUSzLSNKNi8GvQ-1
-Received: by mail-lf1-f72.google.com with SMTP id
- s24-20020a197718000000b004ec89359465so2278184lfc.17
- for <nouveau@lists.freedesktop.org>; Tue, 11 Apr 2023 07:05:47 -0700 (PDT)
+ us-mta-558-cPqCraVeOwCFa3igToYAzg-1; Tue, 11 Apr 2023 10:13:05 -0400
+X-MC-Unique: cPqCraVeOwCFa3igToYAzg-1
+Received: by mail-lj1-f198.google.com with SMTP id
+ z7-20020a05651c11c700b0029a6cbad7baso1618415ljo.16
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Apr 2023 07:13:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681221946;
+ d=1e100.net; s=20210112; t=1681222383;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7Ptm4DEXFusgjoGKLkYnDTCXvT/rOJ3Pu6Hnf86R9zo=;
- b=ulZaQWGXRBlmW/mj6j3p/hV/3Hv2u3tOl0XKrS4sFeZM+R3WPoRU2KK2gZznTrke2B
- Q8m9JvSGdAhEQSl5p5lHAra+r+A3SNsWO6T6UpbeSin1bY5+R+Qrp7ikql0W9ScZXlP4
- q+FBbjBz2MxVaYOvT/owq9ZJBbTPc9tlTyG4SfyWxCCu452gnzF7rqbBg1LbaSdkUc/9
- j/m2F5BclNUf4YBQoao8sg4vuOwPXPCmwrFdXtUEs8Er6IJ/AgL/fsekrQkESVI0oVxP
- J5GhSUxWmdfmfOp13uT6ZX2i9c/No6UQMLAULCPCI4BgRcmtl36OuVEAd9LsIuwsw6Kp
- flKA==
-X-Gm-Message-State: AAQBX9d+v7SkChOE5A0x9JPDs30J+HB70JspZqo7N+Fr0fmsEUfYNs3A
- r8E7V2eMCmHj/2dpZ8vlZrgkY9Ha+wa1VUITifYddaWV3Giba3LOYVyD6G45b+0eicZywJGQv+4
- SFyF7mzllgJgorXqgTLkYxp3fOimGkh7+PHP+0Rh5FQ==
-X-Received: by 2002:ac2:5549:0:b0:4ec:8087:b346 with SMTP id
- l9-20020ac25549000000b004ec8087b346mr3055936lfk.11.1681221946755; 
- Tue, 11 Apr 2023 07:05:46 -0700 (PDT)
-X-Google-Smtp-Source: AKy350ZHNUuRwFptiOr8WxUy16ysnLhlRlVskTDI96rBiwONMf4bIomWxULQGE6LPuV3y9HwCEdj7RLbrvl/9EFHYWk=
-X-Received: by 2002:ac2:5549:0:b0:4ec:8087:b346 with SMTP id
- l9-20020ac25549000000b004ec8087b346mr3055928lfk.11.1681221946462; Tue, 11 Apr
- 2023 07:05:46 -0700 (PDT)
+ bh=UgWHYZJKqiNl4gOA+tqLLIKQpJrOHM98+Ie5Z3qvOjs=;
+ b=f940QPKctRn23jNorGSFiK7EDBC3TNULge4CKEIxeXZunPXuJEWKI+zy/BHp2r2om/
+ 9KaU4dKkbhNJoG4WHWO9jTQJEqJPYKXVVtTb8fhrMn5Lo4dYO2LX2up3fh/+7g9eTds0
+ X1dBkq2F8JksuUKDTdeg0kUAXohsQh+YnpYXVGoAymCokdWO2B7gAlY1nwcJRxRtieFX
+ v1s32HesrL62/o8XmkWf53Q/nnApOtLIFjssgzgIzzbYU8BA7nIOR0gaaFVlHp9ytvB9
+ LIMIfIOug50/f271L3a7ZtX8CYOCcjC3mEjmc7Twx0KvHg3HWgxSuIhAerwaOlrKjogP
+ 9zBg==
+X-Gm-Message-State: AAQBX9eGpxCl/NvqoXMUYXnM/uT75MtRTeM1PslPUE1lefaAVtm/uD7G
+ k8zjMcssfWw2Rn3H+Zq4jsN98DGZ2KESkfEUXe+vHhqP13agi1oUmh5vVVpoe66S0yJdF+06WBR
+ NjyNOuogl6/QZeqiOmQI8ozlySHCS8C8c5XWnY6s6S4Xzkn6+NKMm
+X-Received: by 2002:ac2:54b9:0:b0:4ec:8e1e:60c7 with SMTP id
+ w25-20020ac254b9000000b004ec8e1e60c7mr1447477lfk.4.1681222383014; 
+ Tue, 11 Apr 2023 07:13:03 -0700 (PDT)
+X-Google-Smtp-Source: AKy350ZJNvA1En0899YIptSvqorm8IgX6qDO8OV/Q4M08zulGPBKcyK2yEfUe2F2T6iaJY/jr6uhrRqFH9MWQjDNWMg=
+X-Received: by 2002:ac2:54b9:0:b0:4ec:8e1e:60c7 with SMTP id
+ w25-20020ac254b9000000b004ec8e1e60c7mr1447459lfk.4.1681222382653; Tue, 11 Apr
+ 2023 07:13:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <20221229155249.669436-1-ben-linux@fluff.org>
-In-Reply-To: <20221229155249.669436-1-ben-linux@fluff.org>
+References: <20220924073957.4140388-1-ruanjinjie@huawei.com>
+In-Reply-To: <20220924073957.4140388-1-ruanjinjie@huawei.com>
 From: Karol Herbst <kherbst@redhat.com>
-Date: Tue, 11 Apr 2023 16:05:35 +0200
-Message-ID: <CACO55tujarFtbLjTKGcbpuYHp-8jAdLSSrXcwRawPOtcXAKQRA@mail.gmail.com>
-To: Ben Dooks <ben-linux@fluff.org>
+Date: Tue, 11 Apr 2023 16:12:51 +0200
+Message-ID: <CACO55tuDx0khsqgv6MBBnwKtcB-UwVLQYEfFah4f0WhOLHd0-A@mail.gmail.com>
+To: ruanjinjie <ruanjinjie@huawei.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/mc/ga100: make ga100_mc_device
- static
+Subject: Re: [Nouveau] [PATCH -next] drm/nouveau/disp: make
+ gv100_disp_core_mthd_base static
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,43 +77,44 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, daniel@ffwll.ch,
- dri-devel@lists.freedesktop.org, bskeggs@redhat.com
+Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ bskeggs@redhat.com, daniel@ffwll.ch, airlied@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
-On Thu, Dec 29, 2022 at 4:52=E2=80=AFPM Ben Dooks <ben-linux@fluff.org> wro=
-te:
+On Sat, Sep 24, 2022 at 10:00=E2=80=AFAM ruanjinjie <ruanjinjie@huawei.com>=
+ wrote:
 >
-> Make ga100_mc_device static as it isn't exported, to
-> fix the following sparse warning:
+> The symbol is not used outside of the file, so mark it static.
 >
-> drivers/gpu/drm/nouveau/nvkm/subdev/mc/ga100.c:51:1: warning: symbol 'ga1=
-00_mc_device' was not declared. Should it be static?
+> Fixes the following warning:
 >
-> Signed-off-by: Ben Dooks <ben-linux@fluff.org>
+> ./drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c:591:1: warning:
+> symbol 'gv100_disp_core_mthd_base' was not declared. Should it be static?
+>
+> Signed-off-by: ruanjinjie <ruanjinjie@huawei.com>
 > ---
->  drivers/gpu/drm/nouveau/nvkm/subdev/mc/ga100.c | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mc/ga100.c b/drivers/gpu=
-/drm/nouveau/nvkm/subdev/mc/ga100.c
-> index 1e2eabec1a76..5d28d30d09d5 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mc/ga100.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mc/ga100.c
-> @@ -47,7 +47,7 @@ ga100_mc_device_enabled(struct nvkm_mc *mc, u32 mask)
->         return (nvkm_rd32(mc->subdev.device, 0x000600) & mask) =3D=3D mas=
-k;
->  }
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c b/drivers/g=
+pu/drm/nouveau/nvkm/engine/disp/gv100.c
+> index 6b9d49270fa7..347c12a1fcb7 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
+> @@ -587,7 +587,7 @@ gv100_disp_curs =3D {
+>         .user =3D 73,
+>  };
 >
-> -const struct nvkm_mc_device_func
-> +static const struct nvkm_mc_device_func
->  ga100_mc_device =3D {
->         .enabled =3D ga100_mc_device_enabled,
->         .enable =3D ga100_mc_device_enable,
+> -const struct nvkm_disp_mthd_list
+> +static const struct nvkm_disp_mthd_list
+>  gv100_disp_core_mthd_base =3D {
+>         .mthd =3D 0x0000,
+>         .addr =3D 0x000000,
 > --
-> 2.39.0
+> 2.25.1
 >
 
