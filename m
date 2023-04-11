@@ -2,58 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7DA36DCD40
-	for <lists+nouveau@lfdr.de>; Tue, 11 Apr 2023 00:06:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8859C6DD68A
+	for <lists+nouveau@lfdr.de>; Tue, 11 Apr 2023 11:27:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DEBEF10E1E3;
-	Mon, 10 Apr 2023 22:06:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0004910E519;
+	Tue, 11 Apr 2023 09:27:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 35ACE10E1E3;
- Mon, 10 Apr 2023 22:06:09 +0000 (UTC)
-Received: by mail-qv1-xf34.google.com with SMTP id kj14so4254804qvb.12;
- Mon, 10 Apr 2023 15:06:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1681164368;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pjZar/MQ6b8qhGH+7PNrFyUqecvUssrkJbOR7pgMRKc=;
- b=AKjhpvE8a0FvmQzxH1oSCFwMlFKaSCrVrgg0QM/2yl87UEhKP7TdhrsHaOiQqAglRR
- tJQKz35Vz27LR72Y8GaYQ8hDq++AkfUTdJdNStkY3CkPdkWoKR2HAtMcUz3DFpRUI5dw
- lZ+nY+lm3TuDg9cX7+rBZa2823hR2Tc7BVvmiIAyLtCXkWiikUlV/hr3HbJTelbjfb5T
- 3GfG5rhUCDByztzWW2+UUT7XZSqfje8/JQpcD8U2tbbrJMSut2QFtnCrPZXUFqVLTncR
- h9q8h4cSKGKp1+4s6yQG9eS7k2Z2yyk2GOmIdFr1q4bdqNjFy/gl8P6l8OnGI+P4Z1OT
- sB/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681164368;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pjZar/MQ6b8qhGH+7PNrFyUqecvUssrkJbOR7pgMRKc=;
- b=wdZ1tgrn8TP2DXlfU5G0TuphQ1MTbFa5khTb7w5uwFM4Umv1xUU+U0VJ+nonyxVa84
- KmGnje7MB+585a/z1CaEFrqNlEd6i24lgh7MxBJrL+5vSGXYCrLhk6nAIFg++9N9IKDC
- lUk3s2v83L1av7wmJRoEMuySLvKDZbFS9KJnCH7pggZ7wFGmvxSfWNIUYv6CX06sUcKx
- ENT5zCuz3GOOa2ON4IakuCWiChELLoepTu61o98CflGuWFwRJoQ7DIgSUK9s049apA23
- EOLBGaQZDlJpc/rRgRmeHQ/oQ3WBpgKK0qGK8HPL1xt0OISsdA6F76utj7RDuFrv50eD
- UCXw==
-X-Gm-Message-State: AAQBX9d7veNpH1/XakT2+fMj6yeVXGKioo18FPY/XuwBtyKjQB7/mpSv
- Qgg4D9HYXThjU/zuZS/8ejYtHPceO4Q0LbY0gug=
-X-Google-Smtp-Source: AKy350ZCO2ODxbxkhuEt1R/ncctGRfvUhnl8jBM9I1A4QEn77gjZc7dDt155ded3USH7Jve042Cl5hhNInj2Nt4O8CU=
-X-Received: by 2002:a05:6214:560b:b0:56f:80e:701b with SMTP id
- mg11-20020a056214560b00b0056f080e701bmr2493952qvb.2.1681164367933; Mon, 10
- Apr 2023 15:06:07 -0700 (PDT)
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A426310E511;
+ Tue, 11 Apr 2023 09:27:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1681205243; x=1712741243;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version;
+ bh=iI2t87/uhLKu3MKVrrkEskkv3w9ib+0I3zw/GUEjajw=;
+ b=bXho+2XixksvlcCYYuou3X49J2SB0uvIc0x2hR3GxFJq9pHji9/6F+XN
+ JpNV9DQd9YKUt7nGQo/ebhmHlmdJcfJt2nMcvBTeAQzYud61p8XoUXjTd
+ NjpMVvgyS2gQzzhHcK3VgE798ilz+eMIEMYOVKC/cjtZMhnHjLR96/xxj
+ EyhQ9/PYvd04ZIWU5I1NZ+hs1cI79HOlMr1WNBgB/p5j+9u3UfYl4AOKH
+ Y5LuMH9yXUBTnr10NbRoyiJFkwT42h//xZZNu7MKONVM4Q+AmCpgjOucO
+ O12ZuH7lTjgiRHVMt3oehpDINjtwXzeZMTzsSpTVgaltAeiyBFooSgSAj w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10676"; a="429855757"
+X-IronPort-AV: E=Sophos;i="5.98,336,1673942400"; d="scan'208";a="429855757"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 11 Apr 2023 02:27:21 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10676"; a="718902535"
+X-IronPort-AV: E=Sophos;i="5.98,336,1673942400"; d="scan'208";a="718902535"
+Received: from tunterlu-mobl2.amr.corp.intel.com (HELO localhost)
+ ([10.252.56.34])
+ by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 11 Apr 2023 02:27:13 -0700
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, Joonas Lahtinen
+ <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, David Airlie
+ <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs
+ <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>, Lyude Paul
+ <lyude@redhat.com>, intel-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org
+In-Reply-To: <20230407150031.79749-1-krzysztof.kozlowski@linaro.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20230407150031.79749-1-krzysztof.kozlowski@linaro.org>
+Date: Tue, 11 Apr 2023 12:27:10 +0300
+Message-ID: <873556epld.fsf@intel.com>
 MIME-Version: 1.0
-References: <20230405110455.1368428-1-kherbst@redhat.com>
-In-Reply-To: <20230405110455.1368428-1-kherbst@redhat.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Tue, 11 Apr 2023 08:05:56 +1000
-Message-ID: <CACAvsv6ODb++b3nZMJcv2__rUC7M0K1BDiZqoh9tLhNqtSxKzQ@mail.gmail.com>
-To: Karol Herbst <kherbst@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/fb: add missing sysmen flush
- callbacks
+Content-Type: text/plain
+Subject: Re: [Nouveau] [PATCH 1/2] drm/i915: constify pointers to
+ hwmon_channel_info
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,75 +65,65 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
+Cc: linux-hwmon@vger.kernel.org,
+ Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 5 Apr 2023 at 21:05, Karol Herbst <kherbst@redhat.com> wrote:
+On Fri, 07 Apr 2023, Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org> wrote:
+> Statically allocated array of pointed to hwmon_channel_info can be made
+> const for safety.
 >
-> Closes: https://gitlab.freedesktop.org/drm/nouveau/-/issues/203
-> Fixes: 5728d064190e1 ("drm/nouveau/fb: handle sysmem flush page from common code")
-> Signed-off-by: Karol Herbst <kherbst@redhat.com>
-Oops, that must've gotten lost in a rebase somehow.
-
-Reviewed-by: Ben Skeggs <bskeggs@redhat.com>
-
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+>
 > ---
->  drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c | 1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c | 1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c | 1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c | 1 +
->  4 files changed, 4 insertions(+)
 >
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c
-> index 76678dd60f93f..c4c6f67af7ccc 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gf108.c
-> @@ -31,6 +31,7 @@ gf108_fb = {
->         .init = gf100_fb_init,
->         .init_page = gf100_fb_init_page,
->         .intr = gf100_fb_intr,
-> +       .sysmem.flush_page_init = gf100_fb_sysmem_flush_page_init,
->         .ram_new = gf108_ram_new,
->         .default_bigpage = 17,
->  };
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c
-> index f73442ccb424b..433fa966ba231 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk104.c
-> @@ -77,6 +77,7 @@ gk104_fb = {
->         .init = gf100_fb_init,
->         .init_page = gf100_fb_init_page,
->         .intr = gf100_fb_intr,
-> +       .sysmem.flush_page_init = gf100_fb_sysmem_flush_page_init,
->         .ram_new = gk104_ram_new,
->         .default_bigpage = 17,
->         .clkgate_pack = gk104_fb_clkgate_pack,
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c
-> index 45d6cdffafeed..4dc283dedf8b5 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gk110.c
-> @@ -59,6 +59,7 @@ gk110_fb = {
->         .init = gf100_fb_init,
->         .init_page = gf100_fb_init_page,
->         .intr = gf100_fb_intr,
-> +       .sysmem.flush_page_init = gf100_fb_sysmem_flush_page_init,
->         .ram_new = gk104_ram_new,
->         .default_bigpage = 17,
->         .clkgate_pack = gk110_fb_clkgate_pack,
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c
-> index de52462a92bf0..90bfff616d35b 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gm107.c
-> @@ -31,6 +31,7 @@ gm107_fb = {
->         .init = gf100_fb_init,
->         .init_page = gf100_fb_init_page,
->         .intr = gf100_fb_intr,
-> +       .sysmem.flush_page_init = gf100_fb_sysmem_flush_page_init,
->         .ram_new = gm107_ram_new,
->         .default_bigpage = 17,
->  };
-> --
-> 2.39.2
+> This depends on hwmon core patch:
+> https://lore.kernel.org/all/20230406203103.3011503-2-krzysztof.kozlowski@linaro.org/
 >
+> Therefore I propose this should also go via hwmon tree.
+
+Thanks for doing this, I couldn't be bothered to follow through with it
+[1].
+
+Acked-by: Jani Nikula <jani.nikula@intel.com>
+
+
+
+[1] https://lore.kernel.org/r/20230309082841.400118-1-jani.nikula@intel.com
+
+
+>
+> Cc: Jean Delvare <jdelvare@suse.com>
+> Cc: Guenter Roeck <linux@roeck-us.net>
+> Cc: linux-hwmon@vger.kernel.org
+> ---
+>  drivers/gpu/drm/i915/i915_hwmon.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/i915/i915_hwmon.c b/drivers/gpu/drm/i915/i915_hwmon.c
+> index 596dd2c07010..87b527a54272 100644
+> --- a/drivers/gpu/drm/i915/i915_hwmon.c
+> +++ b/drivers/gpu/drm/i915/i915_hwmon.c
+> @@ -267,7 +267,7 @@ static const struct attribute_group *hwm_groups[] = {
+>  	NULL
+>  };
+>  
+> -static const struct hwmon_channel_info *hwm_info[] = {
+> +static const struct hwmon_channel_info * const hwm_info[] = {
+>  	HWMON_CHANNEL_INFO(in, HWMON_I_INPUT),
+>  	HWMON_CHANNEL_INFO(power, HWMON_P_MAX | HWMON_P_RATED_MAX | HWMON_P_CRIT),
+>  	HWMON_CHANNEL_INFO(energy, HWMON_E_INPUT),
+> @@ -275,7 +275,7 @@ static const struct hwmon_channel_info *hwm_info[] = {
+>  	NULL
+>  };
+>  
+> -static const struct hwmon_channel_info *hwm_gt_info[] = {
+> +static const struct hwmon_channel_info * const hwm_gt_info[] = {
+>  	HWMON_CHANNEL_INFO(energy, HWMON_E_INPUT),
+>  	NULL
+>  };
+
+-- 
+Jani Nikula, Intel Open Source Graphics Center
