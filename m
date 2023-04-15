@@ -2,44 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52F0C6F6BCC
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED1C46F6B78
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AC98A10E4A2;
-	Thu,  4 May 2023 12:32:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7565010E41D;
+	Thu,  4 May 2023 12:32:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from galois.linutronix.de (Galois.linutronix.de
  [IPv6:2a0a:51c0:0:12e:550::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4685410EEE5;
- Sat, 15 Apr 2023 01:23:42 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 12DD710E00F;
+ Sat, 15 Apr 2023 02:04:46 +0000 (UTC)
 From: John Ogness <john.ogness@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1681521812;
+ s=2020; t=1681524285;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=wk6tBRL4rOUhZyc8yDlJOrUexb/aW0doiLcILhv9l7I=;
- b=K3VpJIa7/dxb0WP7AvWLftrAQNOTsaZjvZmKQ6YN2nguYFLsK6AsUuyRV9uDrC6jiWGzPD
- lganGKWEcmuOvIgBuHlfalKv3fuJVLucbbyw+e9JWAQyXZ84woRWVrjWslhuXs85CfHp9c
- omAzaAOG5TzCfmfat02AeNfKJW9OCG2hOwekQ+PE6TYZMtIjsUYjIU2xXGrikg1ws+V8IS
- bdJ/57TjCAwVw/BA+SNG8YFss8jEtMXwtWg+dZqBAbssKa0td9ruPW/8anxCcbkqwD67qg
- 8bfNP4vxgc3Ums3ojYGSf6fK8w0v6DukzGWb5n0z5MF+slXH5C6fP3az35hViA==
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=QvcA5HnArT0juQcF/pl/UzocaIDN3s8qO05ZD9AHBzE=;
+ b=WAdGjtojvZtiEi0uFTGSkIhurdv40v6CO9/2ElIZENNMe/XpJb6QqRTo7lK+AVvZ/QSaGu
+ SPGx0ndC+0A0mVsTL5HcIh77lBq3+ojEHj/h2i1mdbQwHu5g5UQonlvrLc3bzGwj/iF8Hw
+ LZAU4Yl5o+nGNAQHinyQRG/Xo7Arffk53TSjXUxrl95YRoifE4rCEgk9k6PbW/RCxbK3lg
+ liSjFPsFw/KfoepDZKW8S4GVazp/pNLxibZntNctNFHBpdRExSRd8LLAIr6uNSys3ETss5
+ bfw+YjOoIq+xe3QCyRsDSlzi5w7Nn3SJS2plz21OPFI94G/6w4U2OgU/zVbZdQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1681521812;
+ s=2020e; t=1681524285;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=wk6tBRL4rOUhZyc8yDlJOrUexb/aW0doiLcILhv9l7I=;
- b=sD8RwqQUN1CEo6InqlzRlqogbgz0MsLVKyf2S6UvbYcE7yi6nc7UxCvpXgQQkjg45mnbnl
- XS7dLzTzE7fWAlDw==
-To: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Date: Sat, 15 Apr 2023 03:27:37 +0206
-Message-Id: <20230415012137.615305-1-john.ogness@linutronix.de>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=QvcA5HnArT0juQcF/pl/UzocaIDN3s8qO05ZD9AHBzE=;
+ b=CwlW0QiZiaCRp7T+kaLraqtWcuxFmF7F3Nw4r2zMdjo8BTw+gg7+DNlx4B/zx+6AeXqakD
+ jLgy4BY6abTjgwBQ==
+To: =?utf-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20230415012137.615305-1-john.ogness@linutronix.de>
+References: <20230415012137.615305-1-john.ogness@linutronix.de>
+Date: Sat, 15 Apr 2023 04:08:50 +0206
+Message-ID: <87edolaomt.fsf@jogness.linutronix.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-Mailman-Approved-At: Thu, 04 May 2023 12:31:34 +0000
-Subject: [Nouveau] [PATCH v2] drm/nouveau: fix incorrect conversion to
+Subject: [Nouveau] [PATCH v3] drm/nouveau: fix incorrect conversion to
  dma_resv_wait_timeout()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -73,30 +75,35 @@ Reported-by: Tanmay Bhushan <007047221b@gmail.com>
 Link: https://lore.kernel.org/lkml/20230119225351.71657-1-007047221b@gmail.com
 Signed-off-by: John Ogness <john.ogness@linutronix.de>
 ---
- The original report was actually a patch that needed fixing.
- Since nobody has stepped up to fix this regression correctly,
- I'm posting the v2.
+ I just realized that the nouveau driver style prefers to scope
+ variables used only in loops.
 
- This is a real regression introduced in 6.3-rc1.
+ v3: Define @lret within the for-loop.
 
  drivers/gpu/drm/nouveau/nouveau_gem.c | 18 ++++++++++++------
  1 file changed, 12 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-index f77e44958037..346839c24273 100644
+index f77e44958037..ab9062e50977 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_gem.c
 +++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -645,8 +645,9 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
+@@ -645,7 +645,7 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
  				struct drm_nouveau_gem_pushbuf_reloc *reloc,
  				struct drm_nouveau_gem_pushbuf_bo *bo)
  {
 -	long ret = 0;
 +	int ret = 0;
  	unsigned i;
-+	long lret;
  
  	for (i = 0; i < req->nr_relocs; i++) {
- 		struct drm_nouveau_gem_pushbuf_reloc *r = &reloc[i];
+@@ -653,6 +653,7 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
+ 		struct drm_nouveau_gem_pushbuf_bo *b;
+ 		struct nouveau_bo *nvbo;
+ 		uint32_t data;
++		long lret;
+ 
+ 		if (unlikely(r->bo_index >= req->nr_buffers)) {
+ 			NV_PRINTK(err, cli, "reloc bo index invalid\n");
 @@ -703,13 +704,18 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
  				data |= r->vor;
  		}
@@ -125,4 +132,3 @@ index f77e44958037..346839c24273 100644
 base-commit: 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d
 -- 
 2.30.2
-
