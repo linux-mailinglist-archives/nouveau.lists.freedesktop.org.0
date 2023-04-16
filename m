@@ -1,33 +1,35 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DA816E36B4
-	for <lists+nouveau@lfdr.de>; Sun, 16 Apr 2023 11:41:38 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 008216E36AA
+	for <lists+nouveau@lfdr.de>; Sun, 16 Apr 2023 11:38:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DBC9E10E2E2;
-	Sun, 16 Apr 2023 09:41:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7B9B310E1D9;
+	Sun, 16 Apr 2023 09:38:20 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.web.de (mout.web.de [212.227.15.3])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 957A310E2E2
- for <nouveau@lists.freedesktop.org>; Sun, 16 Apr 2023 09:41:34 +0000 (UTC)
+X-Greylist: delayed 461 seconds by postgrey-1.36 at gabe;
+ Sun, 16 Apr 2023 09:38:18 UTC
+Received: from mout.web.de (mout.web.de [212.227.15.14])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C4B8210E1D9;
+ Sun, 16 Apr 2023 09:38:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de; s=s29768273;
- t=1681638092; i=markus.elfring@web.de;
- bh=VbiCcvFD+Qi96Uu3AYsuuKIDaQ41gEUacwhrpgjbDtQ=;
+ t=1681637893; i=markus.elfring@web.de;
+ bh=/v7J9qb+S1Ei+KmfiIERdQOeXfeF2fvCstCNfkjfefo=;
  h=X-UI-Sender-Class:Date:Subject:From:To:Cc:References:In-Reply-To;
- b=XVBlAQOYOJBZ/s0JjYTtr/TxyXIASHVz6BprYNyZw8sKpFQob94N3SOh+db+26+B6
- 7SnaSjN87dLufMPJhTXdAa6EkedpTWihsLa9xUA4ZVldiFssFM7cIMaRp4F7ooyejG
- QbNnuplBkBTkH1g9NvP/CpI8Undxn1lzfZtrxcwm9pzLodpAbDaPaEhxSiec3LGgXo
- v5098yxWxQKl42u6JGgABooRaB5zJ1XFf6AKDoI57FQYHXbi4JPkLOZCSzgz94w2VX
- ttNCVbiKS+wa0+b0LLVVf2DOdKstNDuw27PRQoTAVhcnt0tJtPEvTN1sX5inQuBU3C
- Qd0vJtiZlfGVA==
+ b=gzxuTj6gjxWHu58rBVezOb/3F/NsssK+m70GUAh/RbD7CaKO0NKeGST1L1sTzweAY
+ OwupIJsfN466JB5oUJcLaYORSeMhJDxnrRqBSuThwd1jJx3DhnofOPTy8s4HLf3plf
+ 7HPzJlGUnCBI9Epy6BcJH2aefLid4j4fDAvuone71VjTcZ7AbCjn5FhcfPIxVKcOtk
+ wCTGa6v6IwlFs9OeFJlTJSFWViR6OldIsfp9Ryj4rKzSL2UMEzF2YATmXo7y80aeRo
+ o41uyjRkTPh95Dm+W3beO/dNeHEd4vGGnJ/QIBVV0cUTf3yt5daimdCETWKEBkhHIR
+ ml8ewscdF2qog==
 X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [192.168.178.21] ([94.31.85.83]) by smtp.web.de (mrweb006
- [213.165.67.108]) with ESMTPSA (Nemesis) id 1MA4fW-1pcTYe2hli-00C1jS; Sun, 16
- Apr 2023 11:36:18 +0200
-Message-ID: <5b7b99f7-1692-74e5-4b1e-cfa14dad7c57@web.de>
-Date: Sun, 16 Apr 2023 11:36:18 +0200
+Received: from [192.168.178.21] ([94.31.85.83]) by smtp.web.de (mrweb005
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 1MXoYS-1prHBZ1QL6-00Y8qj; Sun, 16
+ Apr 2023 11:38:13 +0200
+Message-ID: <e6f9b34e-58d9-b1aa-8b12-8d4a55153d1d@web.de>
+Date: Sun, 16 Apr 2023 11:38:12 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
@@ -43,27 +45,27 @@ References: <40c60719-4bfe-b1a4-ead7-724b84637f55@web.de>
 In-Reply-To: <2a746461-844a-2ad6-7b52-03f13fe1b9bf@web.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:AJ9D9+EKDgZDPgbcMafxaHj4mOgWlvC+BvY25gB1NZGB6gNVx+O
- xhlki1nbLNhebMQqVZC12o1VYHnC/hTtQPF1DAizUyk2o7v3fn2fPTUi/m+RNs0cM8+MNFf
- ohoDmlpNTR62CxT6BFNOCtonYB30A9B+2zGYwJaAbi6U2WStWeJhow8NUeolN5fEtVgp6P3
- RRdDPeBeF+6FzYAzg1i2w==
+X-Provags-ID: V03:K1:4D4ESLHPB8pyiBmbTozBYVsVfRFBzRRNDKTiTI7dxS4chI5F2c5
+ enS3S4JZ7OYOci9SvxH607Us8zZEc2uGkr7kzS7dLUF9vtJ0emw9MQ6rPjJmsTpGoZmr+Ej
+ YS9pdQ+HrlIElxQ3lmYIyRm1ljmzG6lb5VS2Ng5HMuvq/L9qU82GVnLc9t+8SbuLzgWre13
+ tj+Hvt6YvXZpHeg0FZaEg==
 X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:nOy3efXdRWs=;6Ze/pKz000AeCbOgES8VQCM7IF1
- vXLcJI/GO75QjcVIKnOTXVf0PmSsTL4zEfCBZIlBEv4tQEb+paIVZkPS6uqK8XHtF/uW4faqR
- RLyUFGvuFQl0REbJq9DoQacgbM6j7SwgPAHkX+VIX+kPS5py3zvXf9Tygo1gIgFKhSr7t6+SN
- 5sWP48lfW+Y59OEbwlB0NwBRupXK255XWggT9bmtpiX4mnlivF7Jox/ECZsm9llvJ2xUFSxfV
- L74ca+WLS5aX4kRy+drz8sue9MB4amxT9k/n3b0WUZTz5q+KntKcWrr/0sVsq57veJEo13yPu
- LLaSFIP1BHys78SemzLTWyhOTbWmCB06Fa+j/iqFrg7JHDFfuqpBAow4Ybv6lKtazU5qkg1pG
- QqZyrCmC8jJCTn3nh332ovMyRcq9FH1lMnvhn1jRqvGtpYZQnW2ah3ZAjAt6vHUbTjR+NGJQG
- 7sVZmnhP1DFHK3SBZvFeW4hThiv1hJHOIdTD3jgchQt6EQApBgn90sxTC0J+WL1HfQFS3SCe0
- SD4QOaZa6CqKV6flKH8wBvUmfxV95vAj7XeUcA9kFsbSKmzKob9hza5OWtyQ+Ktjd6DhaW82s
- jtNVi+FimO+pMAM4WqnoaOmukRQQuGfJkINb3nGmbmqsm+ChbQm5959uypi1xcvRVN1ucQ04J
- H6ncExQWwy1JhSpnMg0B6OoqI3+aP32CWW1JLv+pAuVEvRPJlEntOZO0PnmYS7ypSyNIcSFcJ
- YwJalWrFi2BCdkOs7wKNWwwCyJAIl4Iekk9gwwB6bH430UyBNBPqcWVLwzpl8Gx944lG9DdS6
- blzIXrn5s1Fwb/eEuuWg4jvGjgv6tu7BHAcDohw1c8HmBtuJmD+wMNeiRHrfatSwRcRvTvtvA
- F9xeqEHRGtnMzIx4qX/KeW5o/maP9IZWCPbPEMmsqba7fBVq3pzRLiAOs
-Subject: [Nouveau] [PATCH 2/9] drm/nouveau/debugfs: Move a variable
- assignment behind a null pointer check in nouveau_debugfs_pstate_get()
+UI-OutboundReport: notjunk:1;M01:P0:H3TNyIVyf2A=;+bPz2fL98vAVhmLicVPq68J01Ya
+ Hsa62yaENUDxCVdka8agUgVl55jQd5CU5SAqaaAx9Ho2tkZss1B59/QQyb/U15xpYVvT11zwx
+ j9DTO3vLbkmI8dneTK7+zZFZQF0ctYRUQpApw9c42xdLda7mJ65J3NbYQ9AW9ss2rZzfpC+mG
+ 45TbJ6DcP6nvvfvcjJvyasXnX4R4znFeIoTJ7T/+rafG/mqctE7hTAIKxBLLTcPQ8dmAh/VYB
+ lnJBcs2bJiR49O6PWVUol7rWPQhitkFV/mXl+ccVAilcScMdrgZoSgo1dmN36J+WuTV//RMWI
+ iY3vEHmagZD7aOQj8Y7LxjphPnnIBXDVw6m+03A6A81f3NQLrWUP0TNx1VNCDMIeunoDaMdBW
+ hhu2p0Hv6VDwuP0tZf46r2QV8lY30HblYtMXm4jv3d/4iRol8Tath7xQ75Yx+tQQT7e/rup1S
+ LJHb/RW5yVhLQMfRQ2VBsS/5xZ16ZIQ3FuieW9JBRvNLrXS97n29Kxw2HO7khW2sLmnF5Uz4n
+ 0K7BQSxEqWmF+4dXIJqfkc434/WhuMAvSNfVI/JPaynP6krJh6weuo9rqXyYOpzvbxe7GwIBM
+ 4TIlWiCW8fzpjwAigQz7BIdErxDcRkmtQfxmkZaUK5Aer8iwihNRocx1rMZJk7GPaDDrpd6eh
+ sGRAN06QWI2jd6y+g88E9Ab+za222qmfuN+G+mk9V3yHKZkf6hcPNasTow4s0gfC41vZjfyhX
+ +fRnxw83huy2tSwk235g6KWmbq9YVCbzyko6P8PQmhQGLn7O1a8Kb4pX4n02N1ChtukriYZ+3
+ V7EuVubeHCawnKobPkkUTfweto0sN+Ykem3dy3YzjF2TpDJD8Js6N1OReJc5+JJdOLC/qxyhA
+ XZyx8T/KnZ+78a2BqOCV7eG5eo2MQLEjh7jsuwJBgNIPr6EbPPpc4X1Mu
+Subject: [Nouveau] [PATCH 3/9] drm/nouveau/debugfs: Use seq_putc() in
+ nouveau_debugfs_pstate_get()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,46 +81,33 @@ Cc: LKML <linux-kernel@vger.kernel.org>, cocci@inria.fr
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Date: Sat, 15 Apr 2023 21:24:43 +0200
+Date: Sat, 15 Apr 2023 21:48:47 +0200
 
-The address of a data structure member was determined before
-a corresponding null pointer check in the implementation of
-the function =E2=80=9Cnouveau_debugfs_pstate_get=E2=80=9D.
-
-Thus avoid the risk for undefined behaviour by moving the assignment
-for the variable =E2=80=9Cctrl=E2=80=9D behind the null pointer check.
+A single character (line break) should be put into a sequence.
+Thus use the corresponding function =E2=80=9Cseq_putc=E2=80=9D.
 
 This issue was detected by using the Coccinelle software.
 
-Fixes: 6e9fc177399f08446293fec7607913fdbc95e191 ("drm/nouveau/debugfs: add=
- copy of sysfs pstate interface ported to debugfs")
 Signed-off-by: Markus Elfring <elfring@users.sourceforge.net>
 =2D--
- drivers/gpu/drm/nouveau/nouveau_debugfs.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/nouveau_debugfs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/n=
 ouveau/nouveau_debugfs.c
-index 44e26b6e74c7..a859a086f308 100644
+index a859a086f308..13c82eea8828 100644
 =2D-- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
 +++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-@@ -73,13 +73,14 @@ nouveau_debugfs_pstate_get(struct seq_file *m, void *d=
+@@ -132,7 +132,7 @@ nouveau_debugfs_pstate_get(struct seq_file *m, void *d=
 ata)
- {
- 	struct drm_device *drm =3D m->private;
- 	struct nouveau_debugfs *debugfs =3D nouveau_debugfs(drm);
--	struct nvif_object *ctrl =3D &debugfs->ctrl;
-+	struct nvif_object *ctrl;
- 	struct nvif_control_pstate_info_v0 info =3D {};
- 	int ret, i;
+ 				seq_printf(m, " DC");
+ 		}
 
- 	if (!debugfs)
- 		return -ENODEV;
+-		seq_printf(m, "\n");
++		seq_putc(m, '\n');
+ 	}
 
-+	ctrl =3D &debugfs->ctrl;
- 	ret =3D nvif_mthd(ctrl, NVIF_CONTROL_PSTATE_INFO, &info, sizeof(info));
- 	if (ret)
- 		return ret;
+ 	return 0;
 =2D-
 2.40.0
 
