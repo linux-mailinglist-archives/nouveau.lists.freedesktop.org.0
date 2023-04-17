@@ -1,48 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED1C46F6B78
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:35 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id EC9326F6B97
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7565010E41D;
-	Thu,  4 May 2023 12:32:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4C11110E45E;
+	Thu,  4 May 2023 12:32:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from galois.linutronix.de (Galois.linutronix.de
- [IPv6:2a0a:51c0:0:12e:550::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 12DD710E00F;
- Sat, 15 Apr 2023 02:04:46 +0000 (UTC)
-From: John Ogness <john.ogness@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1681524285;
+X-Greylist: delayed 403 seconds by postgrey-1.36 at gabe;
+ Tue, 18 Apr 2023 21:38:19 UTC
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0A10B10E2FC;
+ Tue, 18 Apr 2023 21:38:18 +0000 (UTC)
+Received: from smtp102.mailbox.org (unknown [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Q1HDH079Cz9t4K;
+ Tue, 18 Apr 2023 23:31:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1681853487;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=QvcA5HnArT0juQcF/pl/UzocaIDN3s8qO05ZD9AHBzE=;
- b=WAdGjtojvZtiEi0uFTGSkIhurdv40v6CO9/2ElIZENNMe/XpJb6QqRTo7lK+AVvZ/QSaGu
- SPGx0ndC+0A0mVsTL5HcIh77lBq3+ojEHj/h2i1mdbQwHu5g5UQonlvrLc3bzGwj/iF8Hw
- LZAU4Yl5o+nGNAQHinyQRG/Xo7Arffk53TSjXUxrl95YRoifE4rCEgk9k6PbW/RCxbK3lg
- liSjFPsFw/KfoepDZKW8S4GVazp/pNLxibZntNctNFHBpdRExSRd8LLAIr6uNSys3ETss5
- bfw+YjOoIq+xe3QCyRsDSlzi5w7Nn3SJS2plz21OPFI94G/6w4U2OgU/zVbZdQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1681524285;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=QvcA5HnArT0juQcF/pl/UzocaIDN3s8qO05ZD9AHBzE=;
- b=CwlW0QiZiaCRp7T+kaLraqtWcuxFmF7F3Nw4r2zMdjo8BTw+gg7+DNlx4B/zx+6AeXqakD
- jLgy4BY6abTjgwBQ==
-To: =?utf-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20230415012137.615305-1-john.ogness@linutronix.de>
-References: <20230415012137.615305-1-john.ogness@linutronix.de>
-Date: Sat, 15 Apr 2023 04:08:50 +0206
-Message-ID: <87edolaomt.fsf@jogness.linutronix.de>
+ bh=KC9FUxhkYIrJcl9CTNIj/+D5n5jqJvE6Q6ukjUkKjgU=;
+ b=iOhsPXPQBr3wHW9fEQnn1H5Xxrcndhu5PSan/o9ZRycMM4Pi+GvYMnmTNWAQLJDaCePnPl
+ xk+S7Sd0u1bL5nZdJy0Oip9iNqo4aARvkS6y4jN1qn+q2fCPFi61VwvK3zG91FijKdA22h
+ p7oon1un7Lgvm+DmIPno1GvR6hW2bcOpQx1KxYamqSvADPrcsxNDkSASG4ApgTSZJiZYfQ
+ V08WjFMwTKAUBx/em1qvSkGDJ+FyjzUa1Fq6xrPlO+STrAYJmpTOXlTGuRIokJd4ix07/s
+ fSZoQhrwFwrqQ5zQN5Z/YdcG9HuRXojtoCu0x6dzNZJNWibv1Gdx66nU8nl5fw==
+Date: Mon, 17 Apr 2023 20:48:09 +0200
+From: Harald Koenig <harald@mailbox.org>
+To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Message-ID: <ZD2UabVlQOBVaVRO@hl.fritz.box>
+References: <ef4e39301a769ef83668074c341274e30db57f95.camel@igalia.com>
+ <2b861d289edaab1c53c031f72de192fcddf85b13.camel@igalia.com>
+ <20230417124502.GB19964@pendragon.ideasonboard.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:34 +0000
-Subject: [Nouveau] [PATCH v3] drm/nouveau: fix incorrect conversion to
- dma_resv_wait_timeout()
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230417124502.GB19964@pendragon.ideasonboard.com>
+X-MBO-RS-META: 7gitco355spy61a3k3zmf6tukn6cq3nt
+X-MBO-RS-ID: c488dba0842a997c9ba
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:38 +0000
+Subject: Re: [Nouveau] 2023 X.Org Foundation Membership deadline for voting
+ in the election
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,81 +59,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Tanmay Bhushan <007047221b@gmail.com>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: xorg-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, wayland-devel@lists.freedesktop.org,
+ board <board@foundation.x.org>, members@x.org, amd-gfx@lists.freedesktop.org,
+ mesa-dev@lists.freedesktop.org, events@lists.x.org,
+ Ricardo Garcia <rgarcia@igalia.com>, freedreno@lists.freedesktop.org,
+ libre-soc-dev@lists.libre-soc.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Commit 41d351f29528 ("drm/nouveau: stop using ttm_bo_wait")
-converted from ttm_bo_wait_ctx() to dma_resv_wait_timeout().
-However, dma_resv_wait_timeout() returns greater than zero on
-success as opposed to ttm_bo_wait_ctx(). As a result, relocs
-will fail and log errors even when it was a success.
+On Apr 17, Laurent Pinchart wrote:
 
-Change the return code handling to match that of
-nouveau_gem_ioctl_cpu_prep(), which was already using
-dma_resv_wait_timeout() correctly.
+> I don't know if I'm the only one affected by this issue, but I've just
+> received today two months of e-mails from x.org, including all the
+> reminders aboud membership renewal and election nomination period. This
+> isn't the first time this happens, and the last time I was told there
+> was no automated process to quick the mail queues when errors happen,
+> making mails pile up forever on x.org's side until someone handles it
+> manually. This is something you really want to automate, or at least
+> monitored.
 
-Fixes: 41d351f29528 ("drm/nouveau: stop using ttm_bo_wait")
-Reported-by: Tanmay Bhushan <007047221b@gmail.com>
-Link: https://lore.kernel.org/lkml/20230119225351.71657-1-007047221b@gmail.com
-Signed-off-by: John Ogness <john.ogness@linutronix.de>
----
- I just realized that the nouveau driver style prefers to scope
- variables used only in loops.
+same here for me: looking into the mail header,
+both mails were stuck on server "gabe.freedesktop.org" 
 
- v3: Define @lret within the for-loop.
+	Received: from gabe.freedesktop.org (localhost [127.0.0.1])
+	        by gabe.freedesktop.org (Postfix) with ESMTP id BD01310E459;
+	        Mon, 17 Apr 2023 11:42:45 +0000 (UTC)
+	X-Original-To: events@lists.x.org
+	Delivered-To: events@lists.x.org
+	Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+	 by gabe.freedesktop.org (Postfix) with ESMTPS id 6C54510E162;
+	 Wed, 15 Feb 2023 15:58:10 +0000 (UTC)
 
- drivers/gpu/drm/nouveau/nouveau_gem.c | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+and	
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-index f77e44958037..ab9062e50977 100644
---- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -645,7 +645,7 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
- 				struct drm_nouveau_gem_pushbuf_reloc *reloc,
- 				struct drm_nouveau_gem_pushbuf_bo *bo)
- {
--	long ret = 0;
-+	int ret = 0;
- 	unsigned i;
- 
- 	for (i = 0; i < req->nr_relocs; i++) {
-@@ -653,6 +653,7 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
- 		struct drm_nouveau_gem_pushbuf_bo *b;
- 		struct nouveau_bo *nvbo;
- 		uint32_t data;
-+		long lret;
- 
- 		if (unlikely(r->bo_index >= req->nr_buffers)) {
- 			NV_PRINTK(err, cli, "reloc bo index invalid\n");
-@@ -703,13 +704,18 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
- 				data |= r->vor;
- 		}
- 
--		ret = dma_resv_wait_timeout(nvbo->bo.base.resv,
--					    DMA_RESV_USAGE_BOOKKEEP,
--					    false, 15 * HZ);
--		if (ret == 0)
-+		lret = dma_resv_wait_timeout(nvbo->bo.base.resv,
-+					     DMA_RESV_USAGE_BOOKKEEP,
-+					     false, 15 * HZ);
-+		if (!lret)
- 			ret = -EBUSY;
-+		else if (lret > 0)
-+			ret = 0;
-+		else
-+			ret = lret;
-+
- 		if (ret) {
--			NV_PRINTK(err, cli, "reloc wait_idle failed: %ld\n",
-+			NV_PRINTK(err, cli, "reloc wait_idle failed: %d\n",
- 				  ret);
- 			break;
- 		}
+	Received: from gabe.freedesktop.org (localhost [127.0.0.1])
+	        by gabe.freedesktop.org (Postfix) with ESMTP id 6735010E46D;
+	        Mon, 17 Apr 2023 11:42:45 +0000 (UTC)
+	X-Original-To: events@lists.x.org
+	Delivered-To: events@lists.x.org
+	Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+	 by gabe.freedesktop.org (Postfix) with ESMTPS id 98DB48953E;
+	 Mon, 13 Mar 2023 15:23:02 +0000 (UTC)
 
-base-commit: 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d
+
+
+Harald
 -- 
-2.30.2
+"I hope to die                                      ___       _____
+before I *have* to use Microsoft Word.",           0--,|    /OOOOOOO\
+Donald E. Knuth, 02-Oct-2001 in Tuebingen.        <_/  /  /OOOOOOOOOOO\
+                                                    \  \/OOOOOOOOOOOOOOO\
+                                                      \ OOOOOOOOOOOOOOOOO|//
+                                                       \/\/\/\/\/\/\/\/\/
+Harald Koenig                                           //  /     \\  \
+harald.koenig@mailbox.org                              ^^^^^       ^^^^^
