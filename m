@@ -2,68 +2,118 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 225356E36D7
-	for <lists+nouveau@lfdr.de>; Sun, 16 Apr 2023 11:57:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BCFB06E3F31
+	for <lists+nouveau@lfdr.de>; Mon, 17 Apr 2023 07:56:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1AF3610E30C;
-	Sun, 16 Apr 2023 09:57:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 04FAB10E2AD;
+	Mon, 17 Apr 2023 05:55:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.web.de (mout.web.de [212.227.17.12])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A632910E30C;
- Sun, 16 Apr 2023 09:56:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de; s=s29768273;
- t=1681639012; i=markus.elfring@web.de;
- bh=r0+PJdQ4hGk1HJh+uo+JIif8tJrueAMEY3mwlSLHrmU=;
- h=X-UI-Sender-Class:Date:Subject:From:To:Cc:References:In-Reply-To;
- b=mtES6whmgR9otWu9W9TcthNGrHLhJk3lpf5NK2lV9mOEj3y7NkGGTp8acRyaNKk6M
- AzXiQlAFSW9aXFpsPk2zFGevx6XgSBSiJZkB/a0vOIyluXHKWD4qdqVbZ617QyoXMi
- fFRl5TsjaotS3LeigZoiUV+zLnbt63l7ivKoTxAHlsTIj62+VCCnq7sIIYtLOAe6LB
- XEqsiDqMiYVixG2da1FhLtuyFGixV7R+ubjeX5X3S6AwkdgQGodGtIxEBsxJYJiBAj
- TyUAWRaBdhbRtiOeflL3K6cXT/PvCFx9YjNimYlqTx/Dlr99tOi7EY8wyW0c+MnIE+
- uSuZHpN9T2cvA==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [192.168.178.21] ([94.31.85.83]) by smtp.web.de (mrweb105
- [213.165.67.124]) with ESMTPSA (Nemesis) id 1MS17h-1ptjSx1Gwd-00TChB; Sun, 16
- Apr 2023 11:56:52 +0200
-Message-ID: <3d0215dc-74d4-2c42-2eee-7a5fcf62b9f1@web.de>
-Date: Sun, 16 Apr 2023 11:56:51 +0200
-MIME-Version: 1.0
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2085.outbound.protection.outlook.com [40.107.223.85])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C34F310E284;
+ Mon, 17 Apr 2023 05:55:49 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Hw6jANSCvj0Ez1jdccZkwGvnbB9/xU1d33pgf069bOlP4v4dD0gHvndfeV9mzQ/+ty4T8uDYhdPoHj6M38JTdrVPVJS/SFofgLu+EJLixM/R9jsMm4OD5ZXpAd9Zts2QmFrlzbRiLGYDC7zSctrsJ+494GDCPCApalhhkuzaOAvZby2Pt99oMh8OIhd+rwpuqczSr6x2V720jiL4lHLgOMugpLz4+e6x6yIEn0xPVfTFR5MHxz3jzJo4Wi1TkxKuNJx24nZNGrLrXtlMnq/LcUwF49uMCpsasLN09kINb/dJmbWq9TgSdlkH4wGe5KiJ6xdJGOKFyiZLRozLvEcLlA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cBsF71+pQlJ9hL8rJAtzSOoqAqSGNArwtWD7nWLjufE=;
+ b=FVuB/IvFf5Im5JPipZ300Heu+mDWtsfXnGEc1lLhiQVkz/dUYuAgE5xYTy+CqL3AHmUrGZf2uXPmuhXedgiwaaRaCN281ehH2YYDdDYtUoPO2jvVbAzj8tBd3XHNu34lX2Uc9Z3Er/YsNYXHxnENMqHdjNNXdDpttY3RHbjyETljMp9Dkj8/AAKib7GnY80MViZswZFlo9LRjI28Xz3B+Rozu6SOrGi1EExuDrE1KvP0CIA0SiYV1hXH/2BWFU0b07KvqCTsc7HZ5v69lgHsmKaXwmCJMhEv1iidn+ilvENIL0nzKiKwj8LhTivUnuBC/VtF3jwgo0tMpjomL877WA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cBsF71+pQlJ9hL8rJAtzSOoqAqSGNArwtWD7nWLjufE=;
+ b=H7clR1Tb/dEq2sDDmEaBxPIDCZU7ngNxmGdW/4+S3Z9rf1UvVZXbuUO+EQaAT7W7aVEqnEE4T0XaCnTXad8XAD5Zz326di6omVcRDQxFVQC0vwllTErd/UdvoVZsf8n8r4Q3SPS6O6Fwnv8uFa2tiopRkt9BNI7KRDe61sc1RTg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by PH8PR12MB7375.namprd12.prod.outlook.com (2603:10b6:510:215::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6277.34; Mon, 17 Apr
+ 2023 05:55:46 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::d2f8:7388:39c1:bbed]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::d2f8:7388:39c1:bbed%3]) with mapi id 15.20.6298.045; Mon, 17 Apr 2023
+ 05:55:46 +0000
+Message-ID: <7b17a825-0f76-3e0f-5e56-0e689b7d7866@amd.com>
+Date: Mon, 17 Apr 2023 07:55:43 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
-Content-Language: en-GB
-From: Markus Elfring <Markus.Elfring@web.de>
-To: kernel-janitors@vger.kernel.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@gmail.com>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>
-References: <40c60719-4bfe-b1a4-ead7-724b84637f55@web.de>
- <1a11455f-ab57-dce0-1677-6beb8492a257@web.de>
- <2a746461-844a-2ad6-7b52-03f13fe1b9bf@web.de>
-In-Reply-To: <2a746461-844a-2ad6-7b52-03f13fe1b9bf@web.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:WvnSLZ8JcCgMT40fqtD67Yim4ZvJgIl6oJCIwq+1/gPHEiaAl8q
- FhtXDlNawnxkcNTWtv875NFd9FxT1kFrqwfVPOWehFvliE95E2oftLK3nleN6PpZQmBrTIR
- dqcN7ls1xmnpH6Lx0jRAmSFNub8Av8hEqARkT3eoWHkCVnp48ebOrpqbliPFnNTNZ8/+tDp
- KOep4bZGKEzYHnxFvlB0g==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:ZddhYlKIvjo=;RArXRPo10vQmCQ1pWSpjmtcplWF
- boRDeb0W74h79NEj3z/879cMkWGPWlpqSiTIIrqpZ8WHqgD9vR06i8tuM4o1RDeo0+zuAPdas
- g7kKZ9I3wJVXtFi8RYIi/xeq0t6xHOTSAkw23lq8+9PsHVBYI0e16xFZjRMHNBi8pDZtunlbs
- OL0qOEDn9Vs7r6DbVdgmGHxQ3Ru7S5FzfCloOBbCcwnT8ScjI0LkcIfXwS8C9HAfojtXNKmgp
- DjrjMDEL5zOSKjJMMJHr/MS+ylJbq6YpT/CrBBn15iPdIxw1ChtyqyDcvjD1I5R+xUClCz60P
- rYdJ6oWQr8zQaKfxKdD7OOX8Kdet9cWA2T7Avwt2JAWnh7/n3d9/Aa8ikFI+z87SLrjuX4YNM
- 1aNiqJMEGz93sk+iA5X5sPeZFJgQWxL7iy8JFRcKl/UJV5uZ3m/ZyyMxmKZTF1E9vul/8vEzI
- BdEoQklhJ5VWr7SuN2yT7xwz4xi3/TQglDWseqjWRr+ZrO6YUarqg6kPycCNXlU6C8pv5HMZ8
- VPdIZvFVTesPT1Rb8PQi9KWGajs6ZxIY7vnQNqdKjccvlCNq90s60aeR6SFmHhcKjfKMWvG24
- Q/xwQUHdWAEEOhFqcANrR/gVh2g5zfQTx/lDeNry9iqpm8ZcTbfqvMTc2BoeNnmoxaOV96aaC
- KS5JYFbu5xfu1nqjkPOJZSuwWlc5lplhWkd/O+X4l2qPwSVyKuVaEcFMGLwRx/5a7y88w3tsU
- aP43GwBHdnzfgm8o8r3AQXUvBNHinu4trUCY18oMRgTpsDYO7CN1QU9Cr9Zah7tsdYuye1DNT
- vgXPhbLFQyMD3jYma131HsHkJOIYR2V4AmhSjwH/BZDaMeiRepcC88cGNmrqtKrpl+yvtiIZV
- NFDT15KJgPVW8w5i2G+GeFxsZ+2WPkXJ2U3+SrFZ0ewx3B/He2SNXpIkm
-Subject: [Nouveau] [PATCH 9/9] drm/nouveau/therm: Move an assignment
- statement behind a null pointer check in two functions
+Content-Language: en-US
+To: John Ogness <john.ogness@linutronix.de>
+References: <20230415012137.615305-1-john.ogness@linutronix.de>
+ <87edolaomt.fsf@jogness.linutronix.de>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <87edolaomt.fsf@jogness.linutronix.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: AM0PR03CA0103.eurprd03.prod.outlook.com
+ (2603:10a6:208:69::44) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|PH8PR12MB7375:EE_
+X-MS-Office365-Filtering-Correlation-Id: 950c412b-6656-4534-20f2-08db3f0862df
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: i1xIftTvKOXTP6EwAp3W5Es5N4E8Uip1Q4NlciBuWL2Psff2s1TqJj1ZJwmBV5lW0UzXBzv38cMyWRk010vP6AYjhp7QyiwCVcejifQ6lED83/bVugUee176v+I10vj4bVD/38H4ZlCJeZN8b5vgLHqQ0GEw/uHQ5YuaJfs1SuEJiWGiNsvOe74bxBKAHk2s0vI2dYzjcz/C9NCBmvrvfP+y93gKM/jUos72bOt03vRbs3AkKlBDtVz/ShVc+f/yQYHhpSwpbTNmzHIWQwZajUp7hTftRO7Or/KmDGHuW88d3558D/8SnQUM0vfc765dzDuDP9cPkuLm3c2igKGTOP46/HLFtgW3UkjD3UI5aqZGJfcLDK0Mz5z6EnmNtJtXxd3BBfvmwE2oUWG6scWv+tFVAGQZTlPtkYWcnDBw0924PuZnmO8ug/dMnOQQ5ir7/rlSmzQV8GqdZdpGGxTUwK+4cupH07ltkhr+KqLXxTmvacgJ6s+yPJQOgooFxB7ckizBG8ceGe875bUH58yU4HBwgEkY+7YlqkTI3rHLjJUW9yyKwdpxx7bluKj/NoclLQvcPbNljhMYFSy7jvwQn/1q8ycO1zVtMeq0uENOXOiWYIuJnKICtG+F9GEN8BYvojH7EQxrAWTIfwQCzxIURQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230028)(4636009)(39860400002)(396003)(376002)(136003)(346002)(366004)(451199021)(86362001)(6916009)(36756003)(966005)(31696002)(66556008)(478600001)(4326008)(8676002)(316002)(66946007)(6486002)(41300700001)(54906003)(66476007)(7416002)(8936002)(5660300002)(38100700002)(186003)(2906002)(6512007)(6506007)(26005)(2616005)(6666004)(83380400001)(31686004)(43740500002)(45980500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZytPalpoQWEyOC9BVWVTRUVMR2QyWU5nM094b285VzEvUUNUaHZVUWFxNUc1?=
+ =?utf-8?B?RnBoUFNCamZ5SlRybVNrZWxnSWFiL0VXWUNYWjRZNlR6T3UxeEcxOUxvU2hP?=
+ =?utf-8?B?S25pbXlpcXJjaUpMOEFwV2E4UlQrVWRpeWJyWTc1aDhUYWlLQkhWbDlQdXd6?=
+ =?utf-8?B?QlVuemFXUW1NenAzUEZnU3ZUalpWNW82WVZKVmhzT25McStUaURhaEgvZzF0?=
+ =?utf-8?B?YzROVUhrK1ZKZks5TFVhWjJGU3p1b29hNDFmb1ZwbHdSajBKa2ZCc3l1Wnpk?=
+ =?utf-8?B?NGJPbkxrbXRjQ2tGMjJrSVcyaXpVMDRmeHBudW5HOVFHUjFrTFdKSlJ3UjE4?=
+ =?utf-8?B?Q1RTTGpTaUNzV095dmtjeXRlQ0lqc0tHSUozMXFlaHZBbWdVM0tIcTVuUTBF?=
+ =?utf-8?B?em1Cd1JXK0dscUhJTE4yNnlqdHZVV2plT3B2VUZnbDVhbHplYlUrR0hON0Rv?=
+ =?utf-8?B?ajcwNi9oRVMwMTE1K2RtcE1QK0hDK3FjdXBtRFhFWHFOS2Jsd1hpUHF4WnN6?=
+ =?utf-8?B?WTJudnlHaVY3WUMrbXNiV3lYdG5Jd3Bad0RoKzlaSUx3b2RQdVBUSWIrcnpv?=
+ =?utf-8?B?UlpqSTJXYldqYXhjaHdMQzVGV0pKaVhWVjhvU0REVFp0elc5RXFwNi9vRVZD?=
+ =?utf-8?B?V1ZLMHZxekdqOWJjL0FpY3crYkRRdDI5U3BCZDl6cUdMMS84dU9pMktGMmZE?=
+ =?utf-8?B?aDZiL0lLSUFYZTloYmh3VkY5eG5heENDWHR5RWJhQnUxcStHeCsxQzR6bnpR?=
+ =?utf-8?B?ZVA4WXI3eEZFYi9HeUh6aU1DdXJ3WnN6MGRHbXlPRkxTcFR3SCtsRnB0aHVG?=
+ =?utf-8?B?OGl1OWVXeFpJMXhjRTl4SDRwTFFqcnBEb29LR0YrZWprWW5WbWM0ZGZNRjB2?=
+ =?utf-8?B?RHArUGs0S1MwWVJYdGYyWGZUQm13NFhiMzhGRzFxRkQ2VlFvTEpKNk5CemIv?=
+ =?utf-8?B?eWJqSFhpT0RGVDFKSHRUdDRCamxicHNoN0N4QXpsRUdZRnhIYVBENU00QWd6?=
+ =?utf-8?B?VWp3MThvek5RcjlVZVhHbGwydEtrNmZHUEJHckZxV1NteEdKaU9rTlRiQ3l3?=
+ =?utf-8?B?ZFpyVktvMHV3djQ4YzlNcVNrdUJ6UGQzNGdNNnpYYkx4d0tlZkM3SUtqRGR3?=
+ =?utf-8?B?OTFza2JORTg2cmVYZ0g1UG1ncUFpTjBUNGZzNXFTMTFrT3ltdmFyZ0xia1Zi?=
+ =?utf-8?B?RTZBK1RFaWR5Y0lKQU5ITldzcllkU2FpUmlJQ3FWTW9oWlcxNGN0eEtUcXpo?=
+ =?utf-8?B?dkRNbXgrT1R0TTZuNkhrRitsRHdTMW9Fb2dvSGtlYmNkdGh2em5XOStyTFRa?=
+ =?utf-8?B?QkZMczVaUEtGckg4QTE5RHdSM2JwT1Zoa1VZQmVDTnRWQk1obGM5OXBqM1hV?=
+ =?utf-8?B?d0t6N2FFdU9KbkQvRVQyMmRtZ0Jod3RaL1NyUkdsUStVVmZ0SzlqaGVxV1Mr?=
+ =?utf-8?B?REkxWDlmcWYrRTc5YmJZT1VSQWc4c2NYNDh1RWtoUW9QZmdOSnJDNHhDclAw?=
+ =?utf-8?B?TFIrMmJqNlViUVFvODExdWdLMlRBUEpIcXArY0NBcTRRalJ2VktWN29uYW8y?=
+ =?utf-8?B?R0lSUU9DMVVOaU8vREw5cmpqZXFEUE1QNW5KUnJ6SnhGZnBxcUkreUpzR3h1?=
+ =?utf-8?B?ZUtOeW9UUWsvYURkZTUrVG1WVVpPNkxoUldnQXF6SHg5eXU3enJRVENpZkpu?=
+ =?utf-8?B?dUN3NjUvRlBib2l3ME94ZWVzUXF1U0UyUi9NQWd1UjRhbUM4ZlFpL1ZRd0Zi?=
+ =?utf-8?B?eFZOQ25rY295Y0Q4VHhCNEhHdXl4bWI2YlVXek9Uem9uRXJFM0I0V3Uvbk94?=
+ =?utf-8?B?NXBjY28vQ2l2djBiV2VzZGx6MlNQenk5RkFEY01uZ0NCQnBMUDdwbFdsbTFk?=
+ =?utf-8?B?czdXTjh1eHhmUUFQdUJPczgzZGk1cHNKQ0k0b3Q5cXVJeVU5akt1Y1VRK2lB?=
+ =?utf-8?B?WFJYL0lYUHNWOHZXaXNQN1JpOVlDY0RxQjJTMWlsNDF0SUl0eG1DZERXMTFL?=
+ =?utf-8?B?aUxVSDlUbWE5a1hReGN5NUN4Z2Vvb1FrMnlMQ3ZPa0pPeVhZbDJtcnBIcnNj?=
+ =?utf-8?B?bVJtak82eFdPQURodk1XVHFoV0xsdWlZbk1FTG12R2pXcERWZUhFS0J1Rld5?=
+ =?utf-8?Q?cWZ4=3D?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 950c412b-6656-4534-20f2-08db3f0862df
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2023 05:55:45.8413 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9emN4dt7kgfQKc9RBxk6101T5Gx6jCtVQOhmd8Sj1j6nsxxBMsubIfjKovb19u/t
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7375
+Subject: Re: [Nouveau] [PATCH v3] drm/nouveau: fix incorrect conversion to
+ dma_resv_wait_timeout()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,67 +125,84 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: LKML <linux-kernel@vger.kernel.org>, cocci@inria.fr
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Tanmay Bhushan <007047221b@gmail.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Date: Sun, 16 Apr 2023 10:50:12 +0200
+Am 15.04.23 um 04:02 schrieb John Ogness:
+> Commit 41d351f29528 ("drm/nouveau: stop using ttm_bo_wait")
+> converted from ttm_bo_wait_ctx() to dma_resv_wait_timeout().
+> However, dma_resv_wait_timeout() returns greater than zero on
+> success as opposed to ttm_bo_wait_ctx(). As a result, relocs
+> will fail and log errors even when it was a success.
+>
+> Change the return code handling to match that of
+> nouveau_gem_ioctl_cpu_prep(), which was already using
+> dma_resv_wait_timeout() correctly.
+>
+> Fixes: 41d351f29528 ("drm/nouveau: stop using ttm_bo_wait")
+> Reported-by: Tanmay Bhushan <007047221b@gmail.com>
+> Link: https://lore.kernel.org/lkml/20230119225351.71657-1-007047221b@gmail.com
+> Signed-off-by: John Ogness <john.ogness@linutronix.de>
 
-The address of a data structure member was determined before
-a corresponding null pointer check in the implementation of
-the functions =E2=80=9Cnvkm_fanpwm_create=E2=80=9D and =E2=80=9Cnvkm_fanto=
-g_create=E2=80=9D.
+Reviewed-by: Christian König <christian.koenig@amd.com>
 
-Thus avoid the risk for undefined behaviour by moving the assignment
-for the data structure member =E2=80=9Cfan=E2=80=9D behind two null pointe=
-r checks.
-
-This issue was detected by using the Coccinelle software.
-
-Fixes: da06b46b720687117178d3ee85a601762f1c36b5 ("drm/nouveau/therm: cosme=
-tic changes")
-Signed-off-by: Markus Elfring <elfring@users.sourceforge.net>
-=2D--
- drivers/gpu/drm/nouveau/nvkm/subdev/therm/fanpwm.c | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/therm/fantog.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/fanpwm.c b/drivers/=
-gpu/drm/nouveau/nvkm/subdev/therm/fanpwm.c
-index 340f37a299dc..b13ba9b2f6be 100644
-=2D-- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/fanpwm.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/fanpwm.c
-@@ -98,10 +98,10 @@ nvkm_fanpwm_create(struct nvkm_therm *therm, struct dc=
-b_gpio_func *func)
- 		return -ENODEV;
-
- 	fan =3D kzalloc(sizeof(*fan), GFP_KERNEL);
--	therm->fan =3D &fan->base;
- 	if (!fan)
- 		return -ENOMEM;
-
-+	therm->fan =3D &fan->base;
- 	fan->base.type =3D "PWM";
- 	fan->base.get =3D nvkm_fanpwm_get;
- 	fan->base.set =3D nvkm_fanpwm_set;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/fantog.c b/drivers/=
-gpu/drm/nouveau/nvkm/subdev/therm/fantog.c
-index ff9fbe7950e5..bfdf4ca5625c 100644
-=2D-- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/fantog.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/fantog.c
-@@ -100,10 +100,10 @@ nvkm_fantog_create(struct nvkm_therm *therm, struct =
-dcb_gpio_func *func)
- 	}
-
- 	fan =3D kzalloc(sizeof(*fan), GFP_KERNEL);
--	therm->fan =3D &fan->base;
- 	if (!fan)
- 		return -ENOMEM;
-
-+	therm->fan =3D &fan->base;
- 	fan->base.type =3D "toggle";
- 	fan->base.get =3D nvkm_fantog_get;
- 	fan->base.set =3D nvkm_fantog_set;
-=2D-
-2.40.0
+> ---
+>   I just realized that the nouveau driver style prefers to scope
+>   variables used only in loops.
+>
+>   v3: Define @lret within the for-loop.
+>
+>   drivers/gpu/drm/nouveau/nouveau_gem.c | 18 ++++++++++++------
+>   1 file changed, 12 insertions(+), 6 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> index f77e44958037..ab9062e50977 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_gem.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> @@ -645,7 +645,7 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
+>   				struct drm_nouveau_gem_pushbuf_reloc *reloc,
+>   				struct drm_nouveau_gem_pushbuf_bo *bo)
+>   {
+> -	long ret = 0;
+> +	int ret = 0;
+>   	unsigned i;
+>   
+>   	for (i = 0; i < req->nr_relocs; i++) {
+> @@ -653,6 +653,7 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
+>   		struct drm_nouveau_gem_pushbuf_bo *b;
+>   		struct nouveau_bo *nvbo;
+>   		uint32_t data;
+> +		long lret;
+>   
+>   		if (unlikely(r->bo_index >= req->nr_buffers)) {
+>   			NV_PRINTK(err, cli, "reloc bo index invalid\n");
+> @@ -703,13 +704,18 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
+>   				data |= r->vor;
+>   		}
+>   
+> -		ret = dma_resv_wait_timeout(nvbo->bo.base.resv,
+> -					    DMA_RESV_USAGE_BOOKKEEP,
+> -					    false, 15 * HZ);
+> -		if (ret == 0)
+> +		lret = dma_resv_wait_timeout(nvbo->bo.base.resv,
+> +					     DMA_RESV_USAGE_BOOKKEEP,
+> +					     false, 15 * HZ);
+> +		if (!lret)
+>   			ret = -EBUSY;
+> +		else if (lret > 0)
+> +			ret = 0;
+> +		else
+> +			ret = lret;
+> +
+>   		if (ret) {
+> -			NV_PRINTK(err, cli, "reloc wait_idle failed: %ld\n",
+> +			NV_PRINTK(err, cli, "reloc wait_idle failed: %d\n",
+>   				  ret);
+>   			break;
+>   		}
+>
+> base-commit: 09a9639e56c01c7a00d6c0ca63f4c7c41abe075d
 
