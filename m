@@ -1,53 +1,47 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC9326F6B97
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:58 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id AB7706F6B7B
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4C11110E45E;
-	Thu,  4 May 2023 12:32:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A51A710E43F;
+	Thu,  4 May 2023 12:32:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 403 seconds by postgrey-1.36 at gabe;
- Tue, 18 Apr 2023 21:38:19 UTC
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0A10B10E2FC;
- Tue, 18 Apr 2023 21:38:18 +0000 (UTC)
-Received: from smtp102.mailbox.org (unknown [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Q1HDH079Cz9t4K;
- Tue, 18 Apr 2023 23:31:27 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1681853487;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=KC9FUxhkYIrJcl9CTNIj/+D5n5jqJvE6Q6ukjUkKjgU=;
- b=iOhsPXPQBr3wHW9fEQnn1H5Xxrcndhu5PSan/o9ZRycMM4Pi+GvYMnmTNWAQLJDaCePnPl
- xk+S7Sd0u1bL5nZdJy0Oip9iNqo4aARvkS6y4jN1qn+q2fCPFi61VwvK3zG91FijKdA22h
- p7oon1un7Lgvm+DmIPno1GvR6hW2bcOpQx1KxYamqSvADPrcsxNDkSASG4ApgTSZJiZYfQ
- V08WjFMwTKAUBx/em1qvSkGDJ+FyjzUa1Fq6xrPlO+STrAYJmpTOXlTGuRIokJd4ix07/s
- fSZoQhrwFwrqQ5zQN5Z/YdcG9HuRXojtoCu0x6dzNZJNWibv1Gdx66nU8nl5fw==
-Date: Mon, 17 Apr 2023 20:48:09 +0200
-From: Harald Koenig <harald@mailbox.org>
-To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Message-ID: <ZD2UabVlQOBVaVRO@hl.fritz.box>
-References: <ef4e39301a769ef83668074c341274e30db57f95.camel@igalia.com>
- <2b861d289edaab1c53c031f72de192fcddf85b13.camel@igalia.com>
- <20230417124502.GB19964@pendragon.ideasonboard.com>
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8A55010E36B;
+ Mon, 17 Apr 2023 21:03:16 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 0A8CF62517;
+ Mon, 17 Apr 2023 21:03:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39E1AC433EF;
+ Mon, 17 Apr 2023 21:03:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1681765395;
+ bh=6v5l4vPJTur+E1/6K1HeqdG2RoCvkceddg82nGQhHzo=;
+ h=From:To:Cc:Subject:Date:From;
+ b=uYSogoOgT3vkHqwAHouEmEcZ1WY9ayQbD/3q4D41z4V5W2bvOcpjGr+v+6RcS/ToR
+ ksjBYY8BTb2gZZnZ0G17NgHokSTPCyuics1K/YIDbFQFwiCNJswJzMe8i7FW+6DPt9
+ 52zM9KfWyr7b5MYhgF9JxykVPv/YC3pT2XZXAJje/5IFUzIT1evA79NODj8MbJHPOy
+ Amxip8uDsZS2YSK4nY3QAUDOEEtTN/mY+2GR7t4gnHNpv3MuD+OktfnJchWFgFJ+zn
+ uLpUN1SU8EpmkuHjdaPSKbZtvNshNng42Z2WkAmiA4ZETtmOX+uK9ncFHVzxrHIzq6
+ DHQ31NPo574MQ==
+From: Arnd Bergmann <arnd@kernel.org>
+To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>
+Date: Mon, 17 Apr 2023 23:03:04 +0200
+Message-Id: <20230417210310.2443152-1-arnd@kernel.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230417124502.GB19964@pendragon.ideasonboard.com>
-X-MBO-RS-META: 7gitco355spy61a3k3zmf6tukn6cq3nt
-X-MBO-RS-ID: c488dba0842a997c9ba
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:38 +0000
-Subject: Re: [Nouveau] 2023 X.Org Foundation Membership deadline for voting
- in the election
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:34 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau: remove unused tu102_gr_load()
+ function
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,59 +53,49 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: xorg-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, wayland-devel@lists.freedesktop.org,
- board <board@foundation.x.org>, members@x.org, amd-gfx@lists.freedesktop.org,
- mesa-dev@lists.freedesktop.org, events@lists.x.org,
- Ricardo Garcia <rgarcia@igalia.com>, freedreno@lists.freedesktop.org,
- libre-soc-dev@lists.libre-soc.org
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Arnd Bergmann <arnd@arndb.de>,
+ Gourav Samaiya <gsamaiya@nvidia.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Apr 17, Laurent Pinchart wrote:
+From: Arnd Bergmann <arnd@arndb.de>
 
-> I don't know if I'm the only one affected by this issue, but I've just
-> received today two months of e-mails from x.org, including all the
-> reminders aboud membership renewal and election nomination period. This
-> isn't the first time this happens, and the last time I was told there
-> was no automated process to quick the mail queues when errors happen,
-> making mails pile up forever on x.org's side until someone handles it
-> manually. This is something you really want to automate, or at least
-> monitored.
+tu102_gr_load() is completely unused and can be removed to address
+this warning:
 
-same here for me: looking into the mail header,
-both mails were stuck on server "gabe.freedesktop.org" 
+drivers/gpu/drm/nouveau/dispnv50/disp.c:2517:1: error: no previous prototype for 'nv50_display_create'
 
-	Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	        by gabe.freedesktop.org (Postfix) with ESMTP id BD01310E459;
-	        Mon, 17 Apr 2023 11:42:45 +0000 (UTC)
-	X-Original-To: events@lists.x.org
-	Delivered-To: events@lists.x.org
-	Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
-	 by gabe.freedesktop.org (Postfix) with ESMTPS id 6C54510E162;
-	 Wed, 15 Feb 2023 15:58:10 +0000 (UTC)
+Fixes: 1cd97b5490c8 ("drm/nouveau/gr/tu102-: use sw_veid_bundle_init from firmware")
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+---
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c | 13 -------------
+ 1 file changed, 13 deletions(-)
 
-and	
-
-	Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	        by gabe.freedesktop.org (Postfix) with ESMTP id 6735010E46D;
-	        Mon, 17 Apr 2023 11:42:45 +0000 (UTC)
-	X-Original-To: events@lists.x.org
-	Delivered-To: events@lists.x.org
-	Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
-	 by gabe.freedesktop.org (Postfix) with ESMTPS id 98DB48953E;
-	 Mon, 13 Mar 2023 15:23:02 +0000 (UTC)
-
-
-
-Harald
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
+index 3b6c8100a242..a7775aa18541 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
+@@ -206,19 +206,6 @@ tu102_gr_av_to_init_veid(struct nvkm_blob *blob, struct gf100_gr_pack **ppack)
+ 	return gk20a_gr_av_to_init_(blob, 64, 0x00100000, ppack);
+ }
+ 
+-int
+-tu102_gr_load(struct gf100_gr *gr, int ver, const struct gf100_gr_fwif *fwif)
+-{
+-	int ret;
+-
+-	ret = gm200_gr_load(gr, ver, fwif);
+-	if (ret)
+-		return ret;
+-
+-	return gk20a_gr_load_net(gr, "gr/", "sw_veid_bundle_init", ver, tu102_gr_av_to_init_veid,
+-				 &gr->bundle_veid);
+-}
+-
+ static const struct gf100_gr_fwif
+ tu102_gr_fwif[] = {
+ 	{  0, gm200_gr_load, &tu102_gr, &gp108_gr_fecs_acr, &gp108_gr_gpccs_acr },
 -- 
-"I hope to die                                      ___       _____
-before I *have* to use Microsoft Word.",           0--,|    /OOOOOOO\
-Donald E. Knuth, 02-Oct-2001 in Tuebingen.        <_/  /  /OOOOOOOOOOO\
-                                                    \  \/OOOOOOOOOOOOOOO\
-                                                      \ OOOOOOOOOOOOOOOOO|//
-                                                       \/\/\/\/\/\/\/\/\/
-Harald Koenig                                           //  /     \\  \
-harald.koenig@mailbox.org                              ^^^^^       ^^^^^
+2.39.2
+
