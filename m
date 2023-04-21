@@ -1,46 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5DA36EA395
-	for <lists+nouveau@lfdr.de>; Fri, 21 Apr 2023 08:14:37 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id DEA256EB0B2
+	for <lists+nouveau@lfdr.de>; Fri, 21 Apr 2023 19:37:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9244610ED7C;
-	Fri, 21 Apr 2023 06:14:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9A72A10EEA9;
+	Fri, 21 Apr 2023 17:37:13 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 1690 seconds by postgrey-1.36 at gabe;
- Fri, 21 Apr 2023 06:14:34 UTC
-Received: from mail1.merlins.org (magic.merlins.org [209.81.13.136])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 75D0110ED7C
- for <nouveau@lists.freedesktop.org>; Fri, 21 Apr 2023 06:14:34 +0000 (UTC)
-Received: from svh-gw.merlins.org ([76.132.34.178]:37418
- helo=sauron.svh.merlins.org) by mail1.merlins.org with esmtpsa 
- (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim
- 4.94.2 #2)
- id 1ppiem-0007ib-Eh by authid <merlins.org> with srv_auth_plain;
- Thu, 20 Apr 2023 22:46:20 -0700
-Received: from merlin by sauron.svh.merlins.org with local (Exim 4.92)
- (envelope-from <marc_nouveau@merlins.org>)
- id 1ppjbA-0003aE-IT; Thu, 20 Apr 2023 22:46:20 -0700
-Date: Thu, 20 Apr 2023 22:46:20 -0700
-From: Marc MERLIN <marc_nouveau@merlins.org>
-To: Ilia Mirkin <imirkin@alum.mit.edu>
-Message-ID: <20230421054620.GA13387@merlins.org>
-References: <20200529180315.GA18804@merlins.org>
- <CAKb7Uvhw2EYo1RR-=NGgLO3CU9QTRWchcAw1injffybZbJ-zOA@mail.gmail.com>
- <20200529194605.GB18804@merlins.org>
- <20230419064916.GA25282@merlins.org>
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 58F9910EEAB
+ for <nouveau@lists.freedesktop.org>; Fri, 21 Apr 2023 17:37:12 +0000 (UTC)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-541b60e0a7fso1178440eaf.1
+ for <nouveau@lists.freedesktop.org>; Fri, 21 Apr 2023 10:37:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1682098630; x=1684690630;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=k/v3UDCryNLwdFvFp3PIQO6O4361b7m8c24XprKao6s=;
+ b=IrtTYm3AnzGbsNV5LWJCxNqBA6OCoW9TAAEMZIxoocO4DClJevy4YkOQ2EmQ/rbN73
+ bNe0X7iiyh1siat7rTICzM35I0OspjevlM//D7YRa4SsCDvyPqYB23uuIXTul1g8A+54
+ sWyzFSekxfKBfry8KhxiEgFib665ILBspJj6JRK+XT0ecEzUFixrbgNyzihH0V964kAU
+ 2+9nfrdxMUodHAy4ltRaDlcA2QoZBcliUWx+LVl4GcSZyD4ViWuuLsJl7m/Y2Iu2iq+p
+ ltu25RWbyOfYubXYVTu+r9v0AbUmQgt2YTdEroQZmXpKZfgfd4qnfQ3S0tJHoc4TQ/87
+ N0/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1682098630; x=1684690630;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=k/v3UDCryNLwdFvFp3PIQO6O4361b7m8c24XprKao6s=;
+ b=J+3EcN6RyVixiX/dzYq9xZ7HTvRhlXk2uUhZcBJbiyvzCgzOWnDPhYcm0Vf0CUkDf2
+ zNDEcCL/Ho1mZ+c9cvvfFH1j3yxJ0Rhw2PhRIScFjp7JVbDxNSQE8xjExe0zZDt3GOYd
+ h06O7l+6y0cI4aaylB2MSP/nSyeLMMswEIKps5EdJjq81W5yOm9Vh0t+vm0iJi/riv+/
+ e8y80o1pXrx0gPPaz40YZYomHHDdn7e6V6a/KhhEOg1AT77fmypNkEmWEJ8fdiEyR3q5
+ 8zgo48b+t5JlmxsntaVNRQXBnKU9Go/FvkrvRPJyAxCtut3d7pYBnKu+kLT1Rk5ZZlXf
+ aa8g==
+X-Gm-Message-State: AAQBX9cHyHKC1kAYG0qXHlYirhVGO24m2f9/kU8G2CReFXYEW8JKjpGU
+ Njca8aGuwr56TIoEQ9o6o7UXtPqa1yz+Ctt4GXgUMjhPzxU=
+X-Google-Smtp-Source: AKy350aPdnARt2p6RxofNImC1mPvEyJtnXK2fdYrzHGru9C3/azd68YmDp9ve6mh/OSHnkLbhj6luIoYyObOG9Mmpes=
+X-Received: by 2002:a4a:c408:0:b0:542:4985:a516 with SMTP id
+ y8-20020a4ac408000000b005424985a516mr1814985oop.4.1682098630238; Fri, 21 Apr
+ 2023 10:37:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230419064916.GA25282@merlins.org>
-X-Sysadmin: BOFH
-X-URL: http://marc.merlins.org/
-X-SA-Exim-Connect-IP: 76.132.34.178
-X-SA-Exim-Mail-From: marc_nouveau@merlins.org
-Subject: Re: [Nouveau] 6.2 still cannot get hdmi display out on Thinkpad P73
- Quadro RTX 4000 Mobile/TU104
+From: Monty Montgomery <xiphmont@gmail.com>
+Date: Fri, 21 Apr 2023 13:36:58 -0400
+Message-ID: <CACrD=+-DUomkWxe0X5M5vMFS_JijjPGNqVXuq+qimie99vmwzw@mail.gmail.com>
+To: nouveau@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="000000000000558d2105f9dc1bd4"
+Subject: [Nouveau] Panic report and patch against master (Quadro FX)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,414 +62,327 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Tested with 6.2.8 and still nothing.  Is it meant to work at all?
+--000000000000558d2105f9dc1bd4
+Content-Type: text/plain; charset="UTF-8"
 
-Intel graphics works, but as soon as I plug in external HDMI, nouveau outputs huge amount of spam logs
-but nothing seems to work
+Hiya folks,
 
-nouveau: detected PR support, will not use DSM
-nouveau 0000:01:00.0: enabling device (0000 -> 0003)
-Console: switching to colour dummy device 80x25
-nouveau 0000:01:00.0: NVIDIA TU104 (164000a1)
-nouveau 0000:01:00.0: bios: version 90.04.4d.00.2c
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/nvdec/scrubber.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/acr/bl.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/acr/ucode_ahesasc.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/acr/bl.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/acr/ucode_asb.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/acr/unload_bl.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/acr/ucode_unload.bin
-nouveau 0000:01:00.0: pmu: firmware unavailable
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/gr/fecs_bl.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/gr/fecs_inst.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/gr/fecs_data.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/gr/fecs_sig.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/gr/gpccs_bl.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/gr/gpccs_inst.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/gr/gpccs_data.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/gr/gpccs_sig.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/gr/sw_nonctx.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/gr/sw_ctx.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/gr/sw_bundle_init.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/gr/sw_method_init.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/sec2/sig.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/sec2/image.bin
-nouveau 0000:01:00.0: firmware: direct-loading firmware nvidia/tu104/sec2/desc.bin
-nouveau 0000:01:00.0: disp: preinit running...
-nouveau 0000:01:00.0: disp: preinit completed in 0us
-nouveau 0000:01:00.0: disp: fini running...
-nouveau 0000:01:00.0: disp: fini completed in 0us
-nouveau 0000:01:00.0: fb: 8192 MiB GDDR6
-nouveau 0000:01:00.0: disp: init running...
-nouveau 0000:01:00.0: disp: init skipped, engine has no users
-nouveau 0000:01:00.0: disp: init completed in 2us
-nouveau 0000:01:00.0: DRM: VRAM: 8192 MiB
-nouveau 0000:01:00.0: DRM: GART: 536870912 MiB
-nouveau 0000:01:00.0: DRM: BIT table 'A' not found
-nouveau 0000:01:00.0: DRM: BIT table 'L' not found
-nouveau 0000:01:00.0: DRM: TMDS table version 2.0
-nouveau 0000:01:00.0: DRM: DCB version 4.1
-nouveau 0000:01:00.0: DRM: DCB outp 00: 02800f66 04600020
-nouveau 0000:01:00.0: DRM: DCB outp 01: 02011f52 00020010
-nouveau 0000:01:00.0: DRM: DCB outp 02: 01022f36 04600010
-nouveau 0000:01:00.0: DRM: DCB outp 03: 04033f76 04600010
-nouveau 0000:01:00.0: DRM: DCB outp 04: 04044f86 04600020
-nouveau 0000:01:00.0: DRM: DCB conn 00: 00020047
-nouveau 0000:01:00.0: DRM: DCB conn 01: 00010161
-nouveau 0000:01:00.0: DRM: DCB conn 02: 00001248
-nouveau 0000:01:00.0: DRM: DCB conn 03: 01000348
-nouveau 0000:01:00.0: DRM: DCB conn 04: 02000471
-nouveau 0000:01:00.0: DRM: MM: using COPY for buffer copies
-nouveau 0000:01:00.0: disp: init running...
-nouveau 0000:01:00.0: disp: one-time init running...
-nouveau 0000:01:00.0: disp: outp 00:0006:0f82: type 06 loc 0 or 2 link 2 con 0 edid 6 bus 0 head f
-nouveau 0000:01:00.0: disp: outp 00:0006:0f82: bios dp 42 13 00 00
-nouveau 0000:01:00.0: disp: outp 01:0002:0f42: type 02 loc 0 or 2 link 1 con 1 edid 5 bus 1 head f
-nouveau 0000:01:00.0: disp: outp 02:0006:0f41: type 06 loc 0 or 1 link 1 con 2 edid 3 bus 2 head f
-nouveau 0000:01:00.0: disp: outp 02:0006:0f41: bios dp 42 13 00 00
-nouveau 0000:01:00.0: disp: outp 03:0006:0f44: type 06 loc 0 or 4 link 1 con 3 edid 7 bus 3 head f
-nouveau 0000:01:00.0: disp: outp 03:0006:0f44: bios dp 42 13 00 00
-nouveau 0000:01:00.0: disp: outp 04:0006:0f84: type 06 loc 0 or 4 link 2 con 4 edid 8 bus 4 head f
-nouveau 0000:01:00.0: disp: outp 04:0006:0f84: bios dp 42 13 00 00
-nouveau 0000:01:00.0: disp: conn 00:0047: type 47 loc 0 hpd 08 dp 0 di 0 sr 0 lcdid 0
-nouveau 0000:01:00.0: disp: conn 00:0047: func 52 (HPD)
-nouveau 0000:01:00.0: disp: conn 01:0161: type 61 loc 1 hpd 04 dp 0 di 0 sr 0 lcdid 0
-nouveau 0000:01:00.0: disp: conn 01:0161: func 51 (HPD)
-nouveau 0000:01:00.0: disp: conn 02:0248: type 48 loc 2 hpd 01 dp 0 di 0 sr 0 lcdid 0
-nouveau 0000:01:00.0: disp: conn 02:0248: func 07 (HPD)
-nouveau 0000:01:00.0: disp: conn 03:0348: type 48 loc 3 hpd 10 dp 0 di 0 sr 0 lcdid 0
-nouveau 0000:01:00.0: disp: conn 03:0348: func 5e (HPD)
-nouveau 0000:01:00.0: disp: conn 04:0471: type 71 loc 4 hpd 20 dp 0 di 0 sr 0 lcdid 0
-nouveau 0000:01:00.0: disp: conn 04:0471: func 5f (HPD)
-nouveau 0000:01:00.0: disp: Window(s): 8 (000000ff)
-nouveau 0000:01:00.0: disp:   Head(s): 4 (0f)
-nouveau 0000:01:00.0: disp: head-0: ctor
-nouveau 0000:01:00.0: disp: head-1: ctor
-nouveau 0000:01:00.0: disp: head-2: ctor
-nouveau 0000:01:00.0: disp: head-3: ctor
-nouveau 0000:01:00.0: disp:    SOR(s): 4 (0f)
-nouveau 0000:01:00.0: disp: SOR-0: ctor
-nouveau 0000:01:00.0: disp: SOR-1: ctor
-nouveau 0000:01:00.0: disp: SOR-2: ctor
-nouveau 0000:01:00.0: disp: SOR-3: ctor
-nouveau 0000:01:00.0: disp: one-time init completed in 103us
-nouveau 0000:01:00.0: disp: outp 00:0006:0f82: no route
-i915: unknown parameter 'i915_enable_fbc' ignored
-Setting dangerous option enable_guc - tainting kernel
-i915 0000:00:02.0: enabling device (0006 -> 0007)
-i915 0000:00:02.0: [drm] VT-d active for gfx access
-i915 0000:00:02.0: vgaarb: deactivate vga console
-i915 0000:00:02.0: [drm] Using Transparent Hugepages
-i915 0000:00:02.0: vgaarb: changed VGA decodes: olddecodes=io+mem,decodes=none:owns=mem
-nouveau 0000:01:00.0: vgaarb: changed VGA decodes: olddecodes=io+mem,decodes=none:owns=none
-(...)
-nouveau 0000:01:00.0: disp: outp 00:0006:0f82: aux power -> always
-nouveau 0000:01:00.0: disp: outp 00:0006:0f82: aux power -> demand
-nouveau 0000:01:00.0: disp: outp 01:0002:0f42: no route
-nouveau 0000:01:00.0: disp: outp 02:0006:0f41: no route
-nouveau 0000:01:00.0: disp: outp 02:0006:0f41: aux power -> always
-nouveau 0000:01:00.0: disp: outp 02:0006:0f41: aux power -> demand
-nouveau 0000:01:00.0: disp: outp 03:0006:0f44: no route
-nouveau 0000:01:00.0: disp: outp 03:0006:0f44: aux power -> always
-nouveau 0000:01:00.0: disp: outp 03:0006:0f44: aux power -> demand
-nouveau 0000:01:00.0: disp: outp 04:0006:0f84: no route
-nouveau 0000:01:00.0: disp: outp 04:0006:0f84: aux power -> always
-nouveau 0000:01:00.0: disp: outp 04:0006:0f84: aux power -> demand
-nouveau 0000:01:00.0: disp: init completed in 332939us
-nouveau 0000:01:00.0: [drm] Cannot find any crtc or sizes
-nouveau 0000:01:00.0: disp: supervisor 1: 00000000
-nouveau 0000:01:00.0: disp: head-0: 00000000
-nouveau 0000:01:00.0: disp: head-1: 00000000
-nouveau 0000:01:00.0: disp: head-2: 00000000
-nouveau 0000:01:00.0: disp: head-3: 00000000
-nouveau 0000:01:00.0: disp: Core:
-nouveau 0000:01:00.0: disp:       0200: 7afebeff -> 00000001
-nouveau 0000:01:00.0: disp:       0208: 00000000 -> f0000000
-nouveau 0000:01:00.0: disp:       020c: 00000000 -> 00001000
-nouveau 0000:01:00.0: disp:       0210: 00000000              
-nouveau 0000:01:00.0: disp:       0214: 00000000              
-nouveau 0000:01:00.0: disp:       0218: 00000000              
-nouveau 0000:01:00.0: disp:       021c: 00000000              
-nouveau 0000:01:00.0: disp: Core - SOR 0:
-nouveau 0000:01:00.0: disp:       0300: 00000100              
-nouveau 0000:01:00.0: disp:       0304: 00000000              
-nouveau 0000:01:00.0: disp:       0308: 00000000              
-nouveau 0000:01:00.0: disp:       030c: 00000000              
-nouveau 0000:01:00.0: disp: Core - SOR 1:
-nouveau 0000:01:00.0: disp:       0320: 00000100              
-nouveau 0000:01:00.0: disp:       0324: 00000000              
-nouveau 0000:01:00.0: disp:       0328: 00000000              
-nouveau 0000:01:00.0: disp:       032c: 00000000              
-nouveau 0000:01:00.0: disp: Core - SOR 2:
-nouveau 0000:01:00.0: disp:       0340: 00000100              
-nouveau 0000:01:00.0: disp:       0344: 00000000              
-nouveau 0000:01:00.0: disp:       0348: 00000000              
-nouveau 0000:01:00.0: disp:       034c: 00000000              
-nouveau 0000:01:00.0: disp: Core - SOR 3:
-nouveau 0000:01:00.0: disp:       0360: 00000100              
-nouveau 0000:01:00.0: disp:       0364: 00000000              
-nouveau 0000:01:00.0: disp:       0368: 00000000              
-nouveau 0000:01:00.0: disp:       036c: 00000000              
-nouveau 0000:01:00.0: disp: Core - WINDOW 0:
-nouveau 0000:01:00.0: disp:       1000: 0000000f -> 00000000
-nouveau 0000:01:00.0: disp:       1004: 000003b7 -> 0000000f
-nouveau 0000:01:00.0: disp:       1008: 00000000              
-nouveau 0000:01:00.0: disp:       100c: 04000400              
-nouveau 0000:01:00.0: disp:       1010: 00100000 -> 00117fff
-nouveau 0000:01:00.0: disp: Core - WINDOW 1:
-nouveau 0000:01:00.0: disp:       1080: 0000000f -> 00000000
-nouveau 0000:01:00.0: disp:       1084: 000003b7 -> 0000000f
-nouveau 0000:01:00.0: disp:       1088: 00000000              
-nouveau 0000:01:00.0: disp:       108c: 04000400              
-nouveau 0000:01:00.0: disp:       1090: 00100000 -> 00117fff
-nouveau 0000:01:00.0: disp: Core - WINDOW 2:
-nouveau 0000:01:00.0: disp:       1100: 0000000f -> 00000001
-nouveau 0000:01:00.0: disp:       1104: 000003b7 -> 0000000f
-nouveau 0000:01:00.0: disp:       1108: 00000000              
-nouveau 0000:01:00.0: disp:       110c: 04000400              
-nouveau 0000:01:00.0: disp:       1110: 00100000 -> 00117fff
-nouveau 0000:01:00.0: disp: Core - WINDOW 3:
-nouveau 0000:01:00.0: disp:       1180: 0000000f -> 00000001
-nouveau 0000:01:00.0: disp:       1184: 000003b7 -> 0000000f
-nouveau 0000:01:00.0: disp:       1188: 00000000              
-nouveau 0000:01:00.0: disp:       118c: 04000400              
-nouveau 0000:01:00.0: disp:       1190: 00100000 -> 00117fff
-nouveau 0000:01:00.0: disp: Core - WINDOW 4:
-nouveau 0000:01:00.0: disp:       1200: 0000000f -> 00000002
-nouveau 0000:01:00.0: disp:       1204: 000003b7 -> 0000000f
-nouveau 0000:01:00.0: disp:       1208: 00000000              
-nouveau 0000:01:00.0: disp:       120c: 04000400              
-nouveau 0000:01:00.0: disp:       1210: 00100000 -> 00117fff
-nouveau 0000:01:00.0: disp: Core - WINDOW 5:
-nouveau 0000:01:00.0: disp:       1280: 0000000f -> 00000002
-nouveau 0000:01:00.0: disp:       1284: 000003b7 -> 0000000f
-nouveau 0000:01:00.0: disp:       1288: 00000000              
-nouveau 0000:01:00.0: disp:       128c: 04000400              
-nouveau 0000:01:00.0: disp:       1290: 00100000 -> 00117fff
-nouveau 0000:01:00.0: disp: Core - WINDOW 6:
-nouveau 0000:01:00.0: disp:       1300: 0000000f -> 00000003
-nouveau 0000:01:00.0: disp:       1304: 000003b7 -> 0000000f
-nouveau 0000:01:00.0: disp:       1308: 00000000              
-nouveau 0000:01:00.0: disp:       130c: 04000400 
+The new nouveau event/notify code in 6.2.x panics early in device
+setup here on my Quadro FX hardware, resulting in device setup failure
+and a black screen.
 
-nouveau 0000:01:00.0: disp:       2e14: 00000000              
-nouveau 0000:01:00.0: disp:       2e18: 00010002              
-nouveau 0000:01:00.0: disp: supervisor 2: 00000010
-nouveau 0000:01:00.0: disp: head-0: 00000000
-nouveau 0000:01:00.0: disp: head-1: 00000000
-nouveau 0000:01:00.0: disp: head-2: 00000000
-nouveau 0000:01:00.0: disp: head-3: 00000000
-nouveau 0000:01:00.0: disp: supervisor 3: 00000010
-nouveau 0000:01:00.0: disp: head-0: 00000000
-nouveau 0000:01:00.0: disp: head-1: 00000000
-nouveau 0000:01:00.0: disp: head-2: 00000000
-nouveau 0000:01:00.0: disp: head-3: 00000000
-[drm] Initialized nouveau 1.3.1 20120801 for 0000:01:00.0 on minor 0
-nouveau 0000:01:00.0: DRM: Disabling PCI power management to avoid bug
-nouveau 0000:01:00.0: [drm] Cannot find any crtc or sizes
-nouveau 0000:01:00.0: [drm] Cannot find any crtc or sizes
+The direct cause appears to be i2c aux IDs no longer being truncated
+to 8 bits before being used as an index to event->ref[] by
+nvkm_event_put, nvkm_event_get, and nvkm_event_send as of
+773eb04d14a11552b2c3953097ed09cde2ab4831.
 
-then I plug HDMI:
-Apr 20 22:07:52 sauron kernel: [   81.418141] nouveau 0000:01:00.0: disp: outp 01:0002:0f42: acquire 00 |= 02 0000000000000000
-Apr 20 22:07:52 sauron kernel: [   81.418685] nouveau 0000:01:00.0: disp: event: ntfy allow 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.418687] nouveau 0000:01:00.0: disp: event: ntfy state changed
-Apr 20 22:07:52 sauron kernel: [   81.418688] nouveau 0000:01:00.0: disp: event: incr 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.418690] nouveau 0000:01:00.0: disp: event: allowing 0 on 0
-Apr 20 22:07:52 sauron kernel: [   81.419863] nouveau 0000:01:00.0: disp: supervisor 1: 00000000
-Apr 20 22:07:52 sauron kernel: [   81.419869] nouveau 0000:01:00.0: disp: head-0: 00001100
-Apr 20 22:07:52 sauron kernel: [   81.419872] nouveau 0000:01:00.0: disp: head-1: 00000000
-Apr 20 22:07:52 sauron kernel: [   81.419875] nouveau 0000:01:00.0: disp: head-2: 00000000
-Apr 20 22:07:52 sauron kernel: [   81.419879] nouveau 0000:01:00.0: disp: head-3: 00000000
-Apr 20 22:07:52 sauron kernel: [   81.419880] nouveau 0000:01:00.0: disp: Core:
-Apr 20 22:07:52 sauron kernel: [   81.419885] nouveau 0000:01:00.0: disp:       0200: 3efebfff -> 00000001
-Apr 20 22:07:52 sauron kernel: [   81.419894] nouveau 0000:01:00.0: disp:       0208: f0000000              
-Apr 20 22:07:52 sauron kernel: [   81.419900] nouveau 0000:01:00.0: disp:       020c: 00001000              
-Apr 20 22:07:52 sauron kernel: [   81.419907] nouveau 0000:01:00.0: disp:       0210: 00000000              
-Apr 20 22:07:52 sauron kernel: [   81.419912] nouveau 0000:01:00.0: disp:       0214: 00000000              
-Apr 20 22:07:52 sauron kernel: [   81.419916] nouveau 0000:01:00.0: disp:       0218: 00000000              
-Apr 20 22:07:52 sauron kernel: [   81.419922] nouveau 0000:01:00.0: disp:       021c: 00000001              
-Apr 20 22:07:52 sauron kernel: [   81.419923] nouveau 0000:01:00.0: disp: Core - SOR 0:
-(...)
-Apr 20 22:07:52 sauron kernel: [   81.421484] nouveau 0000:01:00.0: disp: head-0: supervisor 2.0
-Apr 20 22:07:52 sauron kernel: [   81.421485] nouveau 0000:01:00.0: disp: head-0: nothing attached
-Apr 20 22:07:52 sauron kernel: [   81.421486] nouveau 0000:01:00.0: disp: outp 01:0002:0f42: acquire SOR-0
-Apr 20 22:07:52 sauron kernel: [   81.421505] nouveau 0000:01:00.0: disp: head-0: supervisor 2.2
-Apr 20 22:07:52 sauron kernel: [   81.421507] nouveau 0000:01:00.0: disp: head-0: to SOR-0
-Apr 20 22:07:52 sauron kernel: [   81.421521] nouveau 0000:01:00.0: disp: 0x000057c1[0]: ZM_REG_SEQUENCE        0x02
-Apr 20 22:07:52 sauron kernel: [   81.421523] nouveau 0000:01:00.0: disp: 0x000057c7[0]:                R[0x6061c118] = 0x333f3f3f
-Apr 20 22:07:52 sauron kernel: [   81.421526] nouveau 0000:01:00.0: disp: 0x000057cb[0]:                R[0x6061c11c] = 0x0000003c
-Apr 20 22:07:52 sauron kernel: [   81.421528] nouveau 0000:01:00.0: disp: 0x000057cf[0]: ZM_REG R[0x6061c120] = 0x00030303
-Apr 20 22:07:52 sauron kernel: [   81.421530] nouveau 0000:01:00.0: disp: 0x000057d8[0]: ZM_REG R[0x4061c1b8] = 0x00000500
-Apr 20 22:07:52 sauron kernel: [   81.421531] nouveau 0000:01:00.0: disp: 0x000057e1[0]: SUB_DIRECT     0x520d
-Apr 20 22:07:52 sauron kernel: [   81.421533] nouveau 0000:01:00.0: disp: 0x0000520d[1]: SUB_DIRECT     0x5240
-Apr 20 22:07:52 sauron kernel: [   81.421535] nouveau 0000:01:00.0: disp: 0x00005240[2]: NV_REG R[0x4061c138] &= 0xfffff00c |= 0x00000442
-Apr 20 22:07:52 sauron kernel: [   81.421540] nouveau 0000:01:00.0: disp: 0x0000524d[2]: DONE
-Apr 20 22:07:52 sauron kernel: [   81.421541] nouveau 0000:01:00.0: disp: 0x00005210[1]: ZM_REG_SEQUENCE        0x02
-Apr 20 22:07:52 sauron kernel: [   81.421543] nouveau 0000:01:00.0: disp: 0x00005216[1]:                R[0x4061c00c] = 0x03050300
-Apr 20 22:07:52 sauron kernel: [   81.421545] nouveau 0000:01:00.0: disp: 0x0000521a[1]:                R[0x4061c010] = 0x00000d00
-Apr 20 22:07:52 sauron kernel: [   81.421547] nouveau 0000:01:00.0: disp: 0x0000521e[1]: NV_REG R[0x4061c1b8] &= 0x01fff0ff |= 0x38000500
-Apr 20 22:07:52 sauron kernel: [   81.421551] nouveau 0000:01:00.0: disp: 0x0000522b[1]: ZM_REG_SEQUENCE        0x02
-Apr 20 22:07:52 sauron kernel: [   81.421552] nouveau 0000:01:00.0: disp: 0x00005231[1]:                R[0x4061c014] = 0x00020000
-Apr 20 22:07:52 sauron kernel: [   81.421554] nouveau 0000:01:00.0: disp: 0x00005235[1]:                R[0x4061c018] = 0x00245888
-Apr 20 22:07:52 sauron kernel: [   81.421555] nouveau 0000:01:00.0: disp: 0x00005239[1]: SUB_DIRECT     0x524e
-Apr 20 22:07:52 sauron kernel: [   81.421557] nouveau 0000:01:00.0: disp: 0x0000524e[2]: TIME   0x0032
-Apr 20 22:07:52 sauron kernel: [   81.421608] nouveau 0000:01:00.0: disp: 0x00005251[2]: ZM_REG R[0x4061c138] = 0x38000440
-Apr 20 22:07:52 sauron kernel: [   81.421609] nouveau 0000:01:00.0: disp: 0x0000525a[2]: DONE
-Apr 20 22:07:52 sauron kernel: [   81.421611] nouveau 0000:01:00.0: disp: 0x0000523c[1]: SUB_DIRECT     0x50ed
-Apr 20 22:07:52 sauron kernel: [   81.421612] nouveau 0000:01:00.0: disp: 0x000050ed[2]: NV_REG R[0x4061c200] &= 0xffffdfff |= 0x00002000
-Apr 20 22:07:52 sauron kernel: [   81.421616] nouveau 0000:01:00.0: disp: 0x000050fa[2]: NV_REG R[0x40612300] &= 0xfffcffff |= 0x00030000
-Apr 20 22:07:52 sauron kernel: [   81.421623] nouveau 0000:01:00.0: disp: 0x00005107[2]: NV_REG R[0x4061c1b0] &= 0xff7fffff |= 0x00000000
-Apr 20 22:07:52 sauron kernel: [   81.421629] nouveau 0000:01:00.0: disp: 0x00005114[2]: DONE
-Apr 20 22:07:52 sauron kernel: [   81.421630] nouveau 0000:01:00.0: disp: 0x0000523f[1]: DONE
-Apr 20 22:07:52 sauron kernel: [   81.421632] nouveau 0000:01:00.0: disp: 0x000057e4[0]: SUB_DIRECT     0x41e3
-Apr 20 22:07:52 sauron kernel: [   81.421634] nouveau 0000:01:00.0: disp: 0x000041e3[1]: NV_REG R[0x612488] &= 0xffffffdf |= 0x00000000
-Apr 20 22:07:52 sauron kernel: [   81.421638] nouveau 0000:01:00.0: disp: 0x000041f0[1]: NV_REG R[0x612408] &= 0xfffff0ff |= 0x00000800
-Apr 20 22:07:52 sauron kernel: [   81.421642] nouveau 0000:01:00.0: disp: 0x000041fd[1]: TIME   0x0064
-Apr 20 22:07:52 sauron kernel: [   81.421742] nouveau 0000:01:00.0: disp: 0x00004200[1]: CONDITION      0x02
-Apr 20 22:07:52 sauron kernel: [   81.421744] nouveau 0000:01:00.0: disp: 0x00004202[1]:        [0x02] (R[0x612408] & 0x00000080) == 0x00000080
-Apr 20 22:07:52 sauron kernel: [   81.421748] nouveau 0000:01:00.0: disp: 0x00004202[1]: ANDN_REG       R[0x612408] &= ~0x00000800
-Apr 20 22:07:52 sauron kernel: [   81.421751] nouveau 0000:01:00.0: disp: 0x0000420b[1]: RESUME
-Apr 20 22:07:52 sauron kernel: [   81.421753] nouveau 0000:01:00.0: disp: 0x0000420c[1]: OR_REG R[0x612408] |= 0x00000400
-Apr 20 22:07:52 sauron kernel: [   81.421756] nouveau 0000:01:00.0: disp: 0x00004215[1]: TIME   0x0064
-Apr 20 22:07:52 sauron kernel: [   81.421857] nouveau 0000:01:00.0: disp: 0x00004218[1]: CONDITION      0x02
-Apr 20 22:07:52 sauron kernel: [   81.421858] nouveau 0000:01:00.0: disp: 0x0000421a[1]:        [0x02] (R[0x612408] & 0x00000080) == 0x00000080
-Apr 20 22:07:52 sauron kernel: [   81.421861] nouveau 0000:01:00.0: disp: 0x0000421a[ ]: ANDN_REG       R[0x612408] &= ~0x00000400
-Apr 20 22:07:52 sauron kernel: [   81.421863] nouveau 0000:01:00.0: disp: 0x00004223[ ]: RESUME
-Apr 20 22:07:52 sauron kernel: [   81.421864] nouveau 0000:01:00.0: disp: 0x00004224[1]: OR_REG R[0x612408] |= 0x00000200
-Apr 20 22:07:52 sauron kernel: [   81.421869] nouveau 0000:01:00.0: disp: 0x0000422d[1]: TIME   0x0064
-Apr 20 22:07:52 sauron kernel: [   81.421969] nouveau 0000:01:00.0: disp: 0x00004230[1]: CONDITION      0x02
-Apr 20 22:07:52 sauron kernel: [   81.421971] nouveau 0000:01:00.0: disp: 0x00004232[1]:        [0x02] (R[0x612408] & 0x00000080) == 0x00000080
-Apr 20 22:07:52 sauron kernel: [   81.421974] nouveau 0000:01:00.0: disp: 0x00004232[ ]: ANDN_REG       R[0x612408] &= ~0x00000200
-Apr 20 22:07:52 sauron kernel: [   81.421976] nouveau 0000:01:00.0: disp: 0x0000423b[ ]: RESUME
-Apr 20 22:07:52 sauron kernel: [   81.421977] nouveau 0000:01:00.0: disp: 0x0000423c[1]: OR_REG R[0x612408] |= 0x00000100
-Apr 20 22:07:52 sauron kernel: [   81.421980] nouveau 0000:01:00.0: disp: 0x00004245[1]: TIME   0x0064
-Apr 20 22:07:52 sauron kernel: [   81.422081] nouveau 0000:01:00.0: disp: 0x00004248[1]: CONDITION      0x02
-Apr 20 22:07:52 sauron kernel: [   81.422082] nouveau 0000:01:00.0: disp: 0x0000424a[1]:        [0x02] (R[0x612408] & 0x00000080) == 0x00000080
-Apr 20 22:07:52 sauron kernel: [   81.422086] nouveau 0000:01:00.0: disp: 0x0000424a[1]: ANDN_REG       R[0x612408] &= ~0x00000100
-Apr 20 22:07:52 sauron kernel: [   81.422090] nouveau 0000:01:00.0: disp: 0x00004253[1]: RESUME
-Apr 20 22:07:52 sauron kernel: [   81.422091] nouveau 0000:01:00.0: disp: 0x00004254[1]: CONDITION      0x34
-Apr 20 22:07:52 sauron kernel: [   81.422093] nouveau 0000:01:00.0: disp: 0x00004256[1]:        [0x34] (R[0x625488] & 0x00020000) == 0x00000000
-Apr 20 22:07:52 sauron kernel: [   81.422096] nouveau 0000:01:00.0: disp: 0x00004256[1]: COPY_NV_REG    R[0x612488] &= 0xfffff0ff |= ((R[0x612408] >> 0x00) & 0x00000f00 ^ 0x00000000)
-Apr 20 22:07:52 sauron kernel: [   81.422102] nouveau 0000:01:00.0: disp: 0x0000426c[1]: RESUME
-Apr 20 22:07:52 sauron kernel: [   81.422103] nouveau 0000:01:00.0: disp: 0x0000426d[1]: DONE
-Apr 20 22:07:52 sauron kernel: [   81.422105] nouveau 0000:01:00.0: disp: 0x000057e7[0]: SUB_DIRECT     0x57eb
-Apr 20 22:07:52 sauron kernel: [   81.422106] nouveau 0000:01:00.0: disp: 0x000057eb[1]: NV_REG R[0x6061c130] &= 0xffff0fff |= 0x00002000
-Apr 20 22:07:52 sauron kernel: [   81.422110] nouveau 0000:01:00.0: disp: 0x000057f8[1]: NV_REG R[0x4061c1b0] &= 0xffff0fff |= 0x00002000
-Apr 20 22:07:52 sauron kernel: [   81.422114] nouveau 0000:01:00.0: disp: 0x00005805[1]: SUB_DIRECT     0x5115
-Apr 20 22:07:52 sauron kernel: [   81.422116] nouveau 0000:01:00.0: disp: 0x00005115[2]: SUB_DIRECT     0x5bdd
-Apr 20 22:07:52 sauron kernel: [   81.422118] nouveau 0000:01:00.0: disp: 0x00005bdd[3]: ZM_REG_SEQUENCE        0x10
-Apr 20 22:07:52 sauron kernel: [   81.422119] nouveau 0000:01:00.0: disp: 0x00005be3[3]:                R[0x4061c040] = 0x030b0000
-Apr 20 22:07:52 sauron kernel: [   81.422121] nouveau 0000:01:00.0: disp: 0x00005be7[3]:                R[0x4061c044] = 0x020a0000
-Apr 20 22:07:52 sauron kernel: [   81.422123] nouveau 0000:01:00.0: disp: 0x00005beb[3]:                R[0x4061c048] = 0x02080000
-Apr 20 22:07:52 sauron kernel: [   81.422125] nouveau 0000:01:00.0: disp: 0x00005bef[3]:                R[0x4061c04c] = 0x02042000
-Apr 20 22:07:52 sauron kernel: [   81.422127] nouveau 0000:01:00.0: disp: 0x00005bf3[3]:                R[0x4061c050] = 0x00008000
-Apr 20 22:07:52 sauron kernel: [   81.422128] nouveau 0000:01:00.0: disp: 0x00005bf7[3]:                R[0x4061c054] = 0x00008000
-Apr 20 22:07:52 sauron kernel: [   81.422130] nouveau 0000:01:00.0: disp: 0x00005bfb[3]:                R[0x4061c058] = 0x00008000
-Apr 20 22:07:52 sauron kernel: [   81.422131] nouveau 0000:01:00.0: disp: 0x00005bff[3]:                R[0x4061c05c] = 0x00008000
-Apr 20 22:07:52 sauron kernel: [   81.422133] nouveau 0000:01:00.0: disp: 0x00005c03[3]:                R[0x4061c060] = 0x00002000
-Apr 20 22:07:52 sauron kernel: [   81.422134] nouveau 0000:01:00.0: disp: 0x00005c07[3]:                R[0x4061c064] = 0x03002000
-Apr 20 22:07:52 sauron kernel: [   81.422136] nouveau 0000:01:00.0: disp: 0x00005c0b[3]:                R[0x4061c068] = 0x030c0000
-Apr 20 22:07:52 sauron kernel: [   81.422137] nouveau 0000:01:00.0: disp: 0x00005c0f[3]:                R[0x4061c06c] = 0x030a0000
-Apr 20 22:07:52 sauron kernel: [   81.422139] nouveau 0000:01:00.0: disp: 0x00005c13[3]:                R[0x4061c070] = 0x030b8000
-Apr 20 22:07:52 sauron kernel: [   81.422140] nouveau 0000:01:00.0: disp: 0x00005c17[3]:                R[0x4061c074] = 0x030b8000
-Apr 20 22:07:52 sauron kernel: [   81.422142] nouveau 0000:01:00.0: disp: 0x00005c1b[3]:                R[0x4061c078] = 0x030b8000
-Apr 20 22:07:52 sauron kernel: [   81.422143] nouveau 0000:01:00.0: disp: 0x00005c1f[3]:                R[0x4061c07c] = 0x030b8000
-Apr 20 22:07:52 sauron kernel: [   81.422145] nouveau 0000:01:00.0: disp: 0x00005c23[3]: DONE
-Apr 20 22:07:52 sauron kernel: [   81.422146] nouveau 0000:01:00.0: disp: 0x00005118[2]: NV_REG R[0x4061c130] &= 0xffbff0ff |= 0x00400600
-Apr 20 22:07:52 sauron kernel: [   81.422150] nouveau 0000:01:00.0: disp: 0x00005125[2]: NV_REG R[0x4061c1b0] &= 0xff3ff0ff |= 0x00c00600
-Apr 20 22:07:52 sauron kernel: [   81.422154] nouveau 0000:01:00.0: disp: 0x00005132[2]: NV_REG R[0x40612300] &= 0xfcffffff |= 0x00000000
-Apr 20 22:07:52 sauron kernel: [   81.422158] nouveau 0000:01:00.0: disp: 0x0000513f[2]: NV_REG R[0x4061c1b8] &= 0x7fffffff |= 0x80000000
-Apr 20 22:07:52 sauron kernel: [   81.422162] nouveau 0000:01:00.0: disp: 0x0000514c[2]: DONE
-Apr 20 22:07:52 sauron kernel: [   81.422163] nouveau 0000:01:00.0: disp: 0x00005808[1]: DONE
-Apr 20 22:07:52 sauron kernel: [   81.422164] nouveau 0000:01:00.0: disp: 0x000057ea[0]: DONE
-Apr 20 22:07:52 sauron kernel: [   81.422478] nouveau 0000:01:00.0: disp: supervisor 3: 00000010
+The now-eliminated nvkm_i2c_intr_ctor built an nvkm_notify struct that
+stored 'index' as u8, truncating the integer ID to a usable index.
+The new code no longer constructs a notification ahead of time, simply
+passing the integer id of the i2c bus/aux/pad/etc directly to
+nvkm_event_send as int.  The ID value routinely stores
+offests/flags/markers(?) in the upper bytes, and when used directly as
+an array index, it goes way off the end of event->ref[] and triggers
+a panic.  There's no code to check/guard out-of-range access in ref
+lookup, so I also added guard/trace code to 6.1 to verify this is a
+new bug, and did not record any event->ref[] index bounds errors in
+6.1.15.
 
-And then it loops and spams forever with:
-Apr 20 22:07:52 sauron kernel: [   81.422494] nouveau 0000:01:00.0: disp: 0x0000514d[0]: SUB_DIRECT     0x5154
-Apr 20 22:07:52 sauron kernel: [   81.422496] nouveau 0000:01:00.0: disp: 0x00005154[1]: CONDITION_TIME 0x00 0xff
-Apr 20 22:07:52 sauron kernel: [   81.422498] nouveau 0000:01:00.0: disp: 0x00005157[1]:        [0x00] (R[0x4061c030] & 0x10000000) == 0x00000000
-Apr 20 22:07:52 sauron kernel: [   81.422516] nouveau 0000:01:00.0: disp: 0x00005157[1]: RESUME
-Apr 20 22:07:52 sauron kernel: [   81.422517] nouveau 0000:01:00.0: disp: 0x00005158[1]: DONE
-Apr 20 22:07:52 sauron kernel: [   81.422518] nouveau 0000:01:00.0: disp: 0x00005150[0]: SUB_DIRECT     0x5159
-Apr 20 22:07:52 sauron kernel: [   81.422520] nouveau 0000:01:00.0: disp: 0x00005159[1]: NV_REG R[0x4061c10c] &= 0xfffffffe |= 0x00000000
-Apr 20 22:07:52 sauron kernel: [   81.422523] nouveau 0000:01:00.0: disp: 0x00005166[1]: NV_REG R[0x80616540] &= 0xfffffffe |= 0x00000000
-Apr 20 22:07:52 sauron kernel: [   81.422526] nouveau 0000:01:00.0: disp: 0x00005173[1]: DONE
-Apr 20 22:07:52 sauron kernel: [   81.422528] nouveau 0000:01:00.0: disp: 0x00005153[0]: DONE
-Apr 20 22:07:52 sauron kernel: [   81.439093] nouveau 0000:01:00.0: disp: event: ntfy 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.455749] nouveau 0000:01:00.0: disp: event: ntfy 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.455791] nouveau 0000:01:00.0: disp: event: ntfy block 00000001 on 0 wait:0
-Apr 20 22:07:52 sauron kernel: [   81.455795] nouveau 0000:01:00.0: disp: event: ntfy state changed
-Apr 20 22:07:52 sauron kernel: [   81.455798] nouveau 0000:01:00.0: disp: event: decr 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.455800] nouveau 0000:01:00.0: disp: event: blocking 0 on 0
-Apr 20 22:07:52 sauron kernel: [   81.459792] nouveau 0000:01:00.0: disp: event: ntfy allow 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.459797] nouveau 0000:01:00.0: disp: event: ntfy state changed
-Apr 20 22:07:52 sauron kernel: [   81.459799] nouveau 0000:01:00.0: disp: event: incr 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.459800] nouveau 0000:01:00.0: disp: event: allowing 0 on 0
-Apr 20 22:07:52 sauron kernel: [   81.472413] nouveau 0000:01:00.0: disp: event: ntfy 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.489115] nouveau 0000:01:00.0: disp: event: ntfy 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.505777] nouveau 0000:01:00.0: disp: event: ntfy 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.505801] nouveau 0000:01:00.0: disp: event: ntfy block 00000001 on 0 wait:0
-Apr 20 22:07:52 sauron kernel: [   81.505803] nouveau 0000:01:00.0: disp: event: ntfy state changed
-Apr 20 22:07:52 sauron kernel: [   81.505804] nouveau 0000:01:00.0: disp: event: decr 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.505806] nouveau 0000:01:00.0: disp: event: blocking 0 on 0
-Apr 20 22:07:52 sauron kernel: [   81.514072] nouveau 0000:01:00.0: disp: event: ntfy allow 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.514076] nouveau 0000:01:00.0: disp: event: ntfy state changed
-Apr 20 22:07:52 sauron kernel: [   81.514077] nouveau 0000:01:00.0: disp: event: incr 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.514079] nouveau 0000:01:00.0: disp: event: allowing 0 on 0
-Apr 20 22:07:52 sauron kernel: [   81.522417] nouveau 0000:01:00.0: disp: event: ntfy 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.539114] nouveau 0000:01:00.0: disp: event: ntfy 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.539143] nouveau 0000:01:00.0: disp: event: ntfy block 00000001 on 0 wait:0
-Apr 20 22:07:52 sauron kernel: [   81.539145] nouveau 0000:01:00.0: disp: event: ntfy state changed
-Apr 20 22:07:52 sauron kernel: [   81.539147] nouveau 0000:01:00.0: disp: event: decr 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.539148] nouveau 0000:01:00.0: disp: event: blocking 0 on 0
-Apr 20 22:07:52 sauron kernel: [   81.688694] vgaarb: client 0x0000000009c9a4a6 called 'target'
-Apr 20 22:07:52 sauron kernel: [   81.688703] vgaarb: PCI:0000:00:02.0 ==> 0000:00:02.0 pdev 00000000cea7876c
-Apr 20 22:07:52 sauron kernel: [   81.688706] vgaarb: vgadev 0000000061e2f948
-Apr 20 22:07:52 sauron kernel: [   81.704107] vgaarb: client 0x0000000009c9a4a6 called 'target'
-Apr 20 22:07:52 sauron kernel: [   81.704116] vgaarb: PCI:0000:00:02.0 ==> 0000:00:02.0 pdev 00000000cea7876c
-Apr 20 22:07:52 sauron kernel: [   81.704119] vgaarb: vgadev 0000000061e2f948
+I don't understand the actual device setup procedure for an nVidia
+card, so this surface analysis may be woefully incomplete :-)
 
-it then loops forever and fill my logs with:
-Apr 20 22:07:52 sauron kernel: [   81.704150] nouveau 0000:01:00.0: disp: event: ntfy allow 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.704152] nouveau 0000:01:00.0: disp: event: ntfy state changed
-Apr 20 22:07:52 sauron kernel: [   81.704154] nouveau 0000:01:00.0: disp: event: incr 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.704156] nouveau 0000:01:00.0: disp: event: allowing 0 on 0
-Apr 20 22:07:52 sauron kernel: [   81.704208] nouveau 0000:01:00.0: disp: event: ntfy 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.704232] nouveau 0000:01:00.0: disp: event: ntfy block 00000001 on 0 wait:0
-Apr 20 22:07:52 sauron kernel: [   81.704234] nouveau 0000:01:00.0: disp: event: ntfy state changed
-Apr 20 22:07:52 sauron kernel: [   81.704235] nouveau 0000:01:00.0: disp: event: decr 00000001 on 0
-Apr 20 22:07:52 sauron kernel: [   81.704237] nouveau 0000:01:00.0: disp: event: blocking 0 on 0
-Apr 20 22:07:53 sauron kernel: [   81.851196] nouveau 0000:01:00.0: disp: event: ntfy allow 00000001 on 0
-Apr 20 22:07:53 sauron kernel: [   81.851220] nouveau 0000:01:00.0: disp: event: ntfy state changed
-Apr 20 22:07:53 sauron kernel: [   81.851222] nouveau 0000:01:00.0: disp: event: incr 00000001 on 0
-Apr 20 22:07:53 sauron kernel: [   81.851224] nouveau 0000:01:00.0: disp: event: allowing 0 on 0
-Apr 20 22:07:53 sauron kernel: [   81.851271] nouveau 0000:01:00.0: disp: event: ntfy 00000001 on 0
-Apr 20 22:07:53 sauron kernel: [   81.855801] nouveau 0000:01:00.0: disp: event: ntfy 00000001 on 0
-Apr 20 22:07:53 sauron kernel: [   81.872466] nouveau 0000:01:00.0: disp: event: ntfy 00000001 on 0
-Apr 20 22:07:53 sauron kernel: [   81.872546] nouveau 0000:01:00.0: disp: event: ntfy block 00000001 on 0 wait:0
-Apr 20 22:07:53 sauron kernel: [   81.872548] nouveau 0000:01:00.0: disp: event: ntfy state changed
-Apr 20 22:07:53 sauron kernel: [   81.872550] nouveau 0000:01:00.0: disp: event: decr 00000001 on 0
-Apr 20 22:07:53 sauron kernel: [   81.872552] nouveau 0000:01:00.0: disp: event: blocking 0 on 0
-Apr 20 22:07:53 sauron kernel: [   81.880706] nouveau 0000:01:00.0: disp: event: ntfy allow 00000001 on 0
-Apr 20 22:07:53 sauron kernel: [   81.880712] nouveau 0000:01:00.0: disp: event: ntfy state changed
-Apr 20 22:07:53 sauron kernel: [   81.880714] nouveau 0000:01:00.0: disp: event: incr 00000001 on 0
-Apr 20 22:07:53 sauron kernel: [   81.880715] nouveau 0000:01:00.0: disp: event: allowing 0 on 0
-Apr 20 22:07:53 sauron kernel: [   81.889167] nouveau 0000:01:00.0: disp: event: ntfy 00000001 on 0
-Apr 20 22:07:53 sauron kernel: [   81.889261] nouveau 0000:01:00.0: disp: event: ntfy block 00000001 on 0 wait:0
-Apr 20 22:07:53 sauron kernel: [   81.889263] nouveau 0000:01:00.0: disp: event: ntfy state changed
-Apr 20 22:07:53 sauron kernel: [   81.889264] nouveau 0000:01:00.0: disp: event: decr 00000001 on 0
+At the point of panic, we see the i2c code calling event code with an
+index of 269 (0x010d).
 
-and continues/loops forever. Most of the time, I cannot recover my X
-session on the intel chip, even after I unplug HDMI.
+Apr 17 01:07:53 boatanchor kernel: nouveau: DRM:00000006:8000000e:
+ioctl: mthd size 8
+Apr 17 01:07:53 boatanchor kernel: nouveau: DRM:00000006:8000000e:
+ioctl: mthd vers 0 mthd 00
+Apr 17 01:07:53 boatanchor kernel: nouveau 0000:01:00.0: i2c: event:
+ntfy allow 00000003 on 269
+Apr 17 01:07:53 boatanchor kernel: nouveau 0000:01:00.0: i2c: event:
+ntfy state changed
+Apr 17 01:07:53 boatanchor kernel: nouveau 0000:01:00.0: i2c: event:
+incr 00000003 on 269
+Apr 17 01:07:53 boatanchor kernel: nouveau 0000:01:00.0: i2c: event:
+allowing 0 on 269
+Apr 17 01:07:53 boatanchor kernel: BUG: kernel NULL pointer
+dereference, address: 0000000000000000
+Apr 17 01:07:53 boatanchor kernel: #PF: supervisor instruction fetch
+in kernel mode
+Apr 17 01:07:53 boatanchor kernel: #PF: error_code(0x0010) - not-present page
+Apr 17 01:07:53 boatanchor kernel: PGD 0 P4D 0
+Apr 17 01:07:53 boatanchor kernel: Oops: 0010 [#1] PREEMPT SMP PTI
+Apr 17 01:07:53 boatanchor kernel: CPU: 1 PID: 427 Comm: (udev-worker)
+Not tainted 6.2.10-200.fc37.x86_64+debug #1
+Apr 17 01:07:53 boatanchor kernel: Hardware name: LENOVO
+25003BU/25003BU, BIOS 6KET60WW (1.30 ) 10/24/2012
+Apr 17 01:07:53 boatanchor kernel: RIP: 0010:0x0
+Apr 17 01:07:53 boatanchor kernel: Code: Unable to access opcode bytes
+at 0xffffffffffffffd6.
+Apr 17 01:07:53 boatanchor kernel: RSP: 0018:ffff967ec1b9f8c0 EFLAGS: 00010086
+Apr 17 01:07:53 boatanchor kernel: RAX: 0000000000000000 RBX:
+0000000000000002 RCX: 0000000000000000
+Apr 17 01:07:53 boatanchor kernel: RDX: 0000000000000000 RSI:
+0000000000000001 RDI: ffff8b69120fc400
+Apr 17 01:07:53 boatanchor kernel: RBP: ffff8b69120fc568 R08:
+ffff8b69120fc400 R09: ffff967ec1b9f690
+Apr 17 01:07:53 boatanchor kernel: R10: 0000000000000003 R11:
+ffffffffb1564968 R12: ffff8b631362ca88
+Apr 17 01:07:53 boatanchor kernel: R13: 000000000000010d R14:
+0000000000000001 R15: 0000000000000001
+Apr 17 01:07:53 boatanchor kernel: FS:  00007fbc0af0cb40(0000)
+GS:ffff8b6a1e200000(0000) knlGS:0000000000000000
+Apr 17 01:07:53 boatanchor kernel: CS:  0010 DS: 0000 ES: 0000 CR0:
+0000000080050033
+Apr 17 01:07:53 boatanchor kernel: CR2: ffffffffffffffd6 CR3:
+00000001133ea000 CR4: 00000000000006e0
+Apr 17 01:07:53 boatanchor kernel: Call Trace:
+Apr 17 01:07:53 boatanchor kernel:  <TASK>
+Apr 17 01:07:53 boatanchor kernel:  nvkm_event_ntfy_state+0x184/0x250 [nouveau]
+Apr 17 01:07:53 boatanchor kernel:  nvkm_event_ntfy_allow+0x5f/0xc0 [nouveau]
+Apr 17 01:07:53 boatanchor kernel:  nvkm_uevent_mthd+0x49/0x70 [nouveau]
+Apr 17 01:07:53 boatanchor kernel:  nvkm_ioctl+0x10a/0x240 [nouveau]
+Apr 17 01:07:53 boatanchor kernel:  nvif_object_mthd+0xcb/0x200 [nouveau]
+Apr 17 01:07:53 boatanchor kernel:  nvif_event_allow+0x26/0xa0 [nouveau]
+Apr 17 01:07:53 boatanchor kernel:  nouveau_display_init+0x71/0x110 [nouveau]
+Apr 17 01:07:53 boatanchor kernel:
+nouveau_drm_device_init+0x1d8/0x9b0 [nouveau]
+Apr 17 01:07:53 boatanchor kernel:  ? pci_bus_read_config_word+0x49/0x80
+Apr 17 01:07:53 boatanchor kernel:  nouveau_drm_probe+0x128/0x280 [nouveau]
+Apr 17 01:07:53 boatanchor kernel:  local_pci_probe+0x41/0x90
+Apr 17 01:07:53 boatanchor kernel:  pci_device_probe+0xc3/0x230
+Apr 17 01:07:53 boatanchor kernel:  really_probe+0x1b9/0x410
+Apr 17 01:07:53 boatanchor kernel:  __driver_probe_device+0x78/0x170
+Apr 17 01:07:53 boatanchor kernel:  driver_probe_device+0x1f/0x90
+Apr 17 01:07:53 boatanchor kernel:  __driver_attach+0xd2/0x1c0
+Apr 17 01:07:53 boatanchor kernel:  ? __pfx___driver_attach+0x10/0x10
+Apr 17 01:07:53 boatanchor kernel:  bus_for_each_dev+0x8a/0xd0
+Apr 17 01:07:53 boatanchor kernel:  bus_add_driver+0x141/0x230
+Apr 17 01:07:53 boatanchor kernel:  driver_register+0x77/0x120
+Apr 17 01:07:53 boatanchor kernel:  ? __pfx_init_module+0x10/0x10 [nouveau]
+Apr 17 01:07:53 boatanchor kernel:  do_one_initcall+0x70/0x290
+Apr 17 01:07:53 boatanchor kernel:  do_init_module+0x4a/0x220
+Apr 17 01:07:53 boatanchor kernel:  __do_sys_init_module+0x192/0x1c0
+Apr 17 01:07:53 boatanchor kernel:  do_syscall_64+0x5b/0x80
+Apr 17 01:07:53 boatanchor kernel:  ? lock_release+0x15d/0x400
+Apr 17 01:07:53 boatanchor kernel:  ? preempt_count_add+0x47/0xa0
+Apr 17 01:07:53 boatanchor kernel:  ? __up_read+0x98/0x220
+Apr 17 01:07:53 boatanchor kernel:  ? do_user_addr_fault+0x202/0x730
+Apr 17 01:07:53 boatanchor kernel:  ? exc_page_fault+0xfc/0x200
+Apr 17 01:07:53 boatanchor kernel:  ? lockdep_hardirqs_off+0x9c/0xe0
+Apr 17 01:07:53 boatanchor kernel:  ? asm_exc_page_fault+0x22/0x30
+Apr 17 01:07:53 boatanchor kernel:  ? lockdep_hardirqs_on+0x7d/0x100
+Apr 17 01:07:53 boatanchor kernel:  entry_SYSCALL_64_after_hwframe+0x72/0xdc
+Apr 17 01:07:53 boatanchor kernel: RIP: 0033:0x7fbc0b97800e
+Apr 17 01:07:53 boatanchor kernel: Code: 48 8b 0d 25 5e 0c 00 f7 d8 64
+89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3
+ 0f 1e fa 49 89 ca b8 af 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3
+48 8b 0d f2 5d 0c 00 f7 d8 64 89 01 48
+Apr 17 01:07:53 boatanchor kernel: RSP: 002b:00007fff5dc02b58 EFLAGS:
+00000246 ORIG_RAX: 00000000000000af
+Apr 17 01:07:53 boatanchor kernel: RAX: ffffffffffffffda RBX:
+00005613c37bee10 RCX: 00007fbc0b97800e
+Apr 17 01:07:53 boatanchor kernel: RDX: 00005613c36b7bb0 RSI:
+00000000007258f6 RDI: 00005613c3fc1b70
+Apr 17 01:07:53 boatanchor kernel: RBP: 00005613c36b7bb0 R08:
+00005613c36af860 R09: 00007fff5dc002f6
+Apr 17 01:07:53 boatanchor kernel: R10: 0000000000000005 R11:
+0000000000000246 R12: 0000000000020000
+Apr 17 01:07:53 boatanchor kernel: R13: 00005613c36ab4e0 R14:
+0000000000000000 R15: 00005613c3689610
+Apr 17 01:07:53 boatanchor kernel:  </TASK>
+Apr 17 01:07:53 boatanchor kernel: Modules linked in: nouveau(+) raid0
+wacom uas usb_storage crc32c_intel serio_raw e1000e sha5
+12_ssse3 sdhci_pci cqhci sdhci mmc_core drm_ttm_helper firewire_ohci
+ttm mxm_wmi firewire_core drm_display_helper crc_itu_t cec
+ video wmi scsi_dh_rdac scsi_dh_emc scsi_dh_alua ip6_tables ip_tables
+dm_multipath fuse
+Apr 17 01:07:53 boatanchor kernel: CR2: 0000000000000000
 
-Thanks,
-Marc
--- 
-"A mouse is a device used to point at the xterm you want to type in" - A.S.R.
- 
-Home page: http://marc.merlins.org/                       | PGP 7F55D5F27AAF9D08
+nvkm/core/event.c:nvkm_event_get() is inlined, that's where the panic
+is happening.
+Noting that 269 == 0x10d, which matches an i2c pad ID allocated
+earlier during CCB
+enumeration, and that earlier we logged only 16 CCBs:
 
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 00:
+type 05 drive 00 sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 0100: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: bus 0000: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 01:
+type 05 drive 01 sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 0101: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: bus 0001: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 02:
+type 05 drive 03 sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 0102: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: bus 0002: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 03:
+type ff drive ff sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 0103: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 04:
+type ff drive ff sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 0104: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 05:
+type ff drive ff sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 0105: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 06:
+type ff drive ff sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 0106: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 07:
+type ff drive ff sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 0107: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 08:
+type ff drive ff sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 0108: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 09:
+type ff drive ff sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 0109: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 0a:
+type ff drive ff sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 010a: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 0b:
+type ff drive ff sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 010b: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 0c:
+type ff drive ff sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 010c: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 0d:
+type ff drive ff sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 010d: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 0e:
+type ff drive ff sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 010e: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: ccb 0f:
+type ff drive ff sense ff share ff auxch ff
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 010f: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: dcb 08
+drv 00 unknown
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: pad 020d: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: aux 010d: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: bus 010d: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: aux 010d: ctor
+Apr 17 01:07:51 boatanchor kernel: nouveau 0000:01:00.0: i2c: bus 010d: ctor
+
+I added additional debugging logs to determine that the index_nr for
+the relevant event is only 16, so an index of 269 to event->ref[] is
+obviously wrong.
+
+It appears that the simplest maybe-correct fix is to reinstate the u8
+truncation in this argument path, eg:
+
+diff -urp a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
+b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c  2023-04-06
+06:12:48.000000000 -0400
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c  2023-04-21
+09:07:59.864884896 -0400
+@@ -86,7 +86,7 @@ nvkm_uconn_uevent(struct nvkm_object *ob
+                        if (args->v0.types &
+NVIF_CONN_EVENT_V0_UNPLUG) bits |= NVKM_I2C_UNPLUG;
+                        if (args->v0.types & NVIF_CONN_EVENT_V0_IRQ
+) bits |= NVKM_I2C_IRQ;
+
+-                       return nvkm_uevent_add(uevent,
+&device->i2c->event, outp->dp.aux->id, bits,
++                       return nvkm_uevent_add(uevent,
+&device->i2c->event, (outp->dp.aux->id)&0xff, bits,
+                                               nvkm_uconn_uevent_aux);
+                }
+        }
+
+This assumes the truncation was itself correct/intentional, and not
+due to some other
+mistake which should also be corrected.  However, a slightly larger patch I've
+attached (which contains the above fix + a little extra guard/logging)
+has me back up
+and running under 6.2.10.
+
+Cheers,
+Monty
+
+--000000000000558d2105f9dc1bd4
+Content-Type: text/x-patch; charset="US-ASCII"; name="linux-6.2.10-nouveau_event.patch"
+Content-Disposition: attachment; filename="linux-6.2.10-nouveau_event.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_lgqtyr6t0>
+X-Attachment-Id: f_lgqtyr6t0
+
+ZGlmZiAtdXJwIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9jb3JlL2V2ZW50LmMgYi9k
+cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2NvcmUvZXZlbnQuYwotLS0gYS9kcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9udmttL2NvcmUvZXZlbnQuYwkyMDIzLTA0LTA2IDA2OjEyOjQ4LjAwMDAw
+MDAwMCAtMDQwMAorKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2NvcmUvZXZlbnQu
+YwkyMDIzLTA0LTE5IDEzOjExOjUxLjUxMDU0MDg5NCAtMDQwMApAQCAtMjgsMTMgKzI4LDMwIEBA
+IG52a21fZXZlbnRfcHV0KHN0cnVjdCBudmttX2V2ZW50ICpldmVudCwKIAlhc3NlcnRfc3Bpbl9s
+b2NrZWQoJmV2ZW50LT5yZWZzX2xvY2spOwogCiAJbnZrbV90cmFjZShldmVudC0+c3ViZGV2LCAi
+ZXZlbnQ6IGRlY3IgJTA4eCBvbiAlZFxuIiwgdHlwZXMsIGluZGV4KTsKLQorCQorCWlmIChpbmRl
+eCA+PSBldmVudC0+aW5kZXhfbnIpIHsKKyAgICAgCSAgICAgICAgbnZrbV93YXJuKGV2ZW50LT5z
+dWJkZXYsICJldmVudDogaW5kZXggb3V0IG9mIHJhbmdlICglZCA+PSAlZCkhXG4iLCBpbmRleCwg
+ZXZlbnQtPmluZGV4X25yKTsKKwkJcmV0dXJuOworCX0KKwkKIAl3aGlsZSAodHlwZXMpIHsKIAkJ
+aW50IHR5cGUgPSBfX2Zmcyh0eXBlcyk7IHR5cGVzICY9IH4oMSA8PCB0eXBlKTsKKwkJaWYgKHR5
+cGUgPj0gZXZlbnQtPnR5cGVzX25yKSB7CisJCSAgICAgICAgbnZrbV93YXJuKGV2ZW50LT5zdWJk
+ZXYsICJldmVudDogdHlwZSBvdXQgb2YgcmFuZ2UgKCVkID49ICVkKSFcbiIsIHR5cGUsIGV2ZW50
+LT50eXBlc19ucik7CisJCQljb250aW51ZTsKKwkJfQorCQkKIAkJaWYgKC0tZXZlbnQtPnJlZnNb
+aW5kZXggKiBldmVudC0+dHlwZXNfbnIgKyB0eXBlXSA9PSAwKSB7Ci0JCQludmttX3RyYWNlKGV2
+ZW50LT5zdWJkZXYsICJldmVudDogYmxvY2tpbmcgJWQgb24gJWRcbiIsIHR5cGUsIGluZGV4KTsK
+LQkJCWlmIChldmVudC0+ZnVuYy0+ZmluaSkKLQkJCQlldmVudC0+ZnVuYy0+ZmluaShldmVudCwg
+MSA8PCB0eXBlLCBpbmRleCk7CisJCQludmttX3RyYWNlKGV2ZW50LT5zdWJkZXYsICJldmVudDog
+YmxvY2tpbmcgJTA4eCBvbiAlZFxuIiwgdHlwZSwgaW5kZXgpOworCQkJaWYgKGV2ZW50LT5mdW5j
+KSB7CisJCQkgICAgICAgIGlmIChldmVudC0+ZnVuYy0+ZmluaSkgeworCQkJCQlldmVudC0+ZnVu
+Yy0+ZmluaShldmVudCwgMSA8PCB0eXBlLCBpbmRleCk7CisJCQkJfSBlbHNlIHsKKwkJCQkgICAg
+ICAgIG52a21fZGVidWcoZXZlbnQtPnN1YmRldiwgImV2ZW50OiBubyAuZmluaSwgbm90aGluZyB0
+byBkb1xuIik7CisJCQkJfQorCQkJfSBlbHNlIHsKKwkJCSAgICAgICAgbnZrbV93YXJuKGV2ZW50
+LT5zdWJkZXYsICJldmVudDogbWlzc2luZyAuZnVuYyBlbnRyeSFcbiIpOworCQkJfQogCQl9CiAJ
+fQogfQpAQCAtNDYsMTIgKzYzLDI5IEBAIG52a21fZXZlbnRfZ2V0KHN0cnVjdCBudmttX2V2ZW50
+ICpldmVudCwKIAogCW52a21fdHJhY2UoZXZlbnQtPnN1YmRldiwgImV2ZW50OiBpbmNyICUwOHgg
+b24gJWRcbiIsIHR5cGVzLCBpbmRleCk7CiAKKwlpZiAoaW5kZXggPj0gZXZlbnQtPmluZGV4X25y
+KSB7CisgICAgIAkgICAgICAgIG52a21fd2FybihldmVudC0+c3ViZGV2LCAiZXZlbnQ6IGluZGV4
+IG91dCBvZiByYW5nZSAoJWQgPj0gJWQpIVxuIiwgaW5kZXgsIGV2ZW50LT5pbmRleF9ucik7CisJ
+CXJldHVybjsKKwl9CisKIAl3aGlsZSAodHlwZXMpIHsKIAkJaW50IHR5cGUgPSBfX2Zmcyh0eXBl
+cyk7IHR5cGVzICY9IH4oMSA8PCB0eXBlKTsKKwkJaWYgKHR5cGUgPj0gZXZlbnQtPnR5cGVzX25y
+KSB7CisJCSAgICAgICAgbnZrbV93YXJuKGV2ZW50LT5zdWJkZXYsICJldmVudDogdHlwZSBvdXQg
+b2YgcmFuZ2UgKCVkID49ICVkKSFcbiIsIHR5cGUsIGV2ZW50LT50eXBlc19ucik7CisJCQljb250
+aW51ZTsKKwkJfQogCQlpZiAoKytldmVudC0+cmVmc1tpbmRleCAqIGV2ZW50LT50eXBlc19uciAr
+IHR5cGVdID09IDEpIHsKLQkJCW52a21fdHJhY2UoZXZlbnQtPnN1YmRldiwgImV2ZW50OiBhbGxv
+d2luZyAlZCBvbiAlZFxuIiwgdHlwZSwgaW5kZXgpOwotCQkJaWYgKGV2ZW50LT5mdW5jLT5pbml0
+KQotCQkJCWV2ZW50LT5mdW5jLT5pbml0KGV2ZW50LCAxIDw8IHR5cGUsIGluZGV4KTsKKwkJCW52
+a21fdHJhY2UoZXZlbnQtPnN1YmRldiwgImV2ZW50OiBhbGxvd2luZyAlMDh4IG9uICVkXG4iLCB0
+eXBlLCBpbmRleCk7CisJCQlpZiAoZXZlbnQtPmZ1bmMpIHsKKwkJCSAgICAgICAgaWYgKGV2ZW50
+LT5mdW5jLT5pbml0KSB7CisJCQkJICAgICAgICBldmVudC0+ZnVuYy0+aW5pdChldmVudCwgMSA8
+PCB0eXBlLCBpbmRleCk7CisJCQkJfSBlbHNlIHsKKwkJCQkgICAgICAgIG52a21fZGVidWcoZXZl
+bnQtPnN1YmRldiwgImV2ZW50OiBubyAuaW5pdCwgbm90aGluZyB0byBkb1xuIik7CisJCQkJfQor
+CQkJfSBlbHNlIHsKKwkJCSAgICAgICAgbnZrbV93YXJuKGV2ZW50LT5zdWJkZXYsICJldmVudDog
+bWlzc2luZyAuZnVuYyBlbnRyeSFcbiIpOworCQkJfQorCiAJCX0KIAl9CiB9CkBAIC0xNDYsNyAr
+MTgwLDcgQEAgdm9pZAogbnZrbV9ldmVudF9udGZ5X2FkZChzdHJ1Y3QgbnZrbV9ldmVudCAqZXZl
+bnQsIGludCBpZCwgdTMyIGJpdHMsIGJvb2wgd2FpdCwgbnZrbV9ldmVudF9mdW5jIGZ1bmMsCiAJ
+CSAgICBzdHJ1Y3QgbnZrbV9ldmVudF9udGZ5ICpudGZ5KQogewotCW52a21fdHJhY2UoZXZlbnQt
+PnN1YmRldiwgImV2ZW50OiBudGZ5IGFkZCAlMDh4IG9uICVkIHdhaXQ6JWRcbiIsIGlkLCBiaXRz
+LCB3YWl0KTsKKyAgICAgICBudmttX3RyYWNlKGV2ZW50LT5zdWJkZXYsICJldmVudDogbnRmeSBh
+ZGQgJTA4eCBvbiAlZCB3YWl0OiVkXG4iLCBiaXRzLCBpZCwgd2FpdCk7CiAKIAludGZ5LT5ldmVu
+dCA9IGV2ZW50OwogCW50ZnktPmlkID0gaWQ7CkBAIC0yMDEsMTAgKzIzNSwxNCBAQCBpbnQKIF9f
+bnZrbV9ldmVudF9pbml0KGNvbnN0IHN0cnVjdCBudmttX2V2ZW50X2Z1bmMgKmZ1bmMsIHN0cnVj
+dCBudmttX3N1YmRldiAqc3ViZGV2LAogCQkgIGludCB0eXBlc19uciwgaW50IGluZGV4X25yLCBz
+dHJ1Y3QgbnZrbV9ldmVudCAqZXZlbnQpCiB7CisKIAlldmVudC0+cmVmcyA9IGt6YWxsb2MoYXJy
+YXkzX3NpemUoaW5kZXhfbnIsIHR5cGVzX25yLCBzaXplb2YoKmV2ZW50LT5yZWZzKSksIEdGUF9L
+RVJORUwpOwogCWlmICghZXZlbnQtPnJlZnMpCiAJCXJldHVybiAtRU5PTUVNOwogCisJbnZrbV90
+cmFjZShzdWJkZXYsICJldmVudDogaW5pdCBmb3IgJWQgdHlwZXMgb24gJWQgaW5kaWNlcyBjYWxs
+aW5nICVwXG4iLAorCQkgICB0eXBlc19uciwgaW5kZXhfbnIsIGZ1bmMpOworCiAJZXZlbnQtPmZ1
+bmMgPSBmdW5jOwogCWV2ZW50LT5zdWJkZXYgPSBzdWJkZXY7CiAJZXZlbnQtPnR5cGVzX25yID0g
+dHlwZXNfbnI7CmRpZmYgLXVycCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5l
+L2Rpc3AvdWNvbm4uYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2Rpc3Av
+dWNvbm4uYwotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kaXNwL3Vj
+b25uLmMJMjAyMy0wNC0wNiAwNjoxMjo0OC4wMDAwMDAwMDAgLTA0MDAKKysrIGIvZHJpdmVycy9n
+cHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvZGlzcC91Y29ubi5jCTIwMjMtMDQtMjEgMDk6MDc6
+NTkuODY0ODg0ODk2IC0wNDAwCkBAIC04Niw3ICs4Niw3IEBAIG52a21fdWNvbm5fdWV2ZW50KHN0
+cnVjdCBudmttX29iamVjdCAqb2IKIAkJCWlmIChhcmdzLT52MC50eXBlcyAmIE5WSUZfQ09OTl9F
+VkVOVF9WMF9VTlBMVUcpIGJpdHMgfD0gTlZLTV9JMkNfVU5QTFVHOwogCQkJaWYgKGFyZ3MtPnYw
+LnR5cGVzICYgTlZJRl9DT05OX0VWRU5UX1YwX0lSUSAgICkgYml0cyB8PSBOVktNX0kyQ19JUlE7
+CiAKLQkJCXJldHVybiBudmttX3VldmVudF9hZGQodWV2ZW50LCAmZGV2aWNlLT5pMmMtPmV2ZW50
+LCBvdXRwLT5kcC5hdXgtPmlkLCBiaXRzLAorCQkJcmV0dXJuIG52a21fdWV2ZW50X2FkZCh1ZXZl
+bnQsICZkZXZpY2UtPmkyYy0+ZXZlbnQsIChvdXRwLT5kcC5hdXgtPmlkKSYweGZmLCBiaXRzLAog
+CQkJCQkgICAgICAgbnZrbV91Y29ubl91ZXZlbnRfYXV4KTsKIAkJfQogCX0K
+--000000000000558d2105f9dc1bd4--
