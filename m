@@ -2,65 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71BFD6EC163
-	for <lists+nouveau@lfdr.de>; Sun, 23 Apr 2023 19:36:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7AA2A6ED12D
+	for <lists+nouveau@lfdr.de>; Mon, 24 Apr 2023 17:20:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5F4B210E0DA;
-	Sun, 23 Apr 2023 17:36:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 68A9110E1D4;
+	Mon, 24 Apr 2023 15:20:38 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A246710E0EF
- for <nouveau@lists.freedesktop.org>; Sun, 23 Apr 2023 17:36:45 +0000 (UTC)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-959a626b622so21221366b.0
- for <nouveau@lists.freedesktop.org>; Sun, 23 Apr 2023 10:36:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux-foundation.org; s=google; t=1682271403; x=1684863403;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=wNv3VClFzMvt3MDI7I2HzZM+U4+0tRFHNLn+/5zq8Hk=;
- b=ICB9f2XYji9QBkEQ20ggHB4He1kLG+CmpUtVBzlw85+XZnVMWov4Z0KbL79vWgMS/M
- jpOo7T1XzkagLlnFOzg+BSvAZbAOMpkw4KUU75Ul3OKq4HcNeUnC0s4Avd+RqCGzXwV1
- AVPnqpnLVLoDJTxHOivuTU7cd/cpNTjWddB80=
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 70A2810E1D4
+ for <nouveau@lists.freedesktop.org>; Mon, 24 Apr 2023 15:20:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1682349635;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=0ybXQpJGX8ksVbqeQTg5aMwu/7o/goFFitwiYzrK7BM=;
+ b=TZWQoflSC8xQcNtYq58/yTGVvnswVa5Km0u7Gr7CFgzuE4rGIuC27NuJ91dnA/okrBR1tu
+ sUxisp2bOeLrFnp7TF6upyMJr/v63Z8F0FKUoHsEJ/P+vMME2y2SD/EvSTivR7txeIvh9o
+ BSLiSmVrNlx7jxXLavDswLcC8M1TC1Q=
+Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com
+ [209.85.208.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-528-YhZGQmhBOxSmQC9m92zPZA-1; Mon, 24 Apr 2023 11:20:29 -0400
+X-MC-Unique: YhZGQmhBOxSmQC9m92zPZA-1
+Received: by mail-lj1-f197.google.com with SMTP id
+ 38308e7fff4ca-2a8aaa36757so2685431fa.0
+ for <nouveau@lists.freedesktop.org>; Mon, 24 Apr 2023 08:20:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682271403; x=1684863403;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=wNv3VClFzMvt3MDI7I2HzZM+U4+0tRFHNLn+/5zq8Hk=;
- b=Wth/rRqNVMtpFop82mbk3C5syl+CY7NeC/Yr6SormDNWFZN4nssMTpy6eWd/fhepHu
- 9Rq2D3BK/CUwre/YKtNjYkSqw4mgaGStVesE4XJtAKKHI2CCWtmrZ2YTVQVaURIKzpzx
- iRWNCB3Y8nyJjLuWC4dkOx1U82COx8N8+tcoO2C9470hY0pL3Bs+kVWeAOjGsIP4yHx3
- 5q0HG/35D3Ky3nux3nWeIw1p9aCA1/hfvcIVnbMwlwnOWs4dMpKdzeFmT5PnjRdJpAtR
- /nuTvVdd5APbEAz2QXPp/ieeGbhhgzAuwZVxVBmpwme/OdK/XdEbbVSfNQ/+Ry0ETDxZ
- YgTA==
-X-Gm-Message-State: AAQBX9fGiTOAN+euh9sxNDHXG9n6k5CPluYviiGTTuHmOY66lPWBtvyz
- kVjmTvk+7DZqByR64QNKfDzVmwGvU5ODervMdz1ifw==
-X-Google-Smtp-Source: AKy350YH3N6vY1pvJ6DdJ58M4MFUyGH0XAGmvLfNYQ827+lsDWxpVLJhZ5fqCLrpdYV6eNNy4g9K/w==
-X-Received: by 2002:a17:906:71d8:b0:94f:3074:14fe with SMTP id
- i24-20020a17090671d800b0094f307414femr7710901ejk.17.1682271403598; 
- Sun, 23 Apr 2023 10:36:43 -0700 (PDT)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com.
- [209.85.218.41]) by smtp.gmail.com with ESMTPSA id
- mb20-20020a170906eb1400b0094f432f2429sm4601778ejb.109.2023.04.23.10.36.41
- for <nouveau@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 23 Apr 2023 10:36:42 -0700 (PDT)
-Received: by mail-ej1-f41.google.com with SMTP id
- a640c23a62f3a-953343581a4so506836266b.3
- for <nouveau@lists.freedesktop.org>; Sun, 23 Apr 2023 10:36:41 -0700 (PDT)
-X-Received: by 2002:a17:907:7659:b0:94d:a2c2:9aeb with SMTP id
- kj25-20020a170907765900b0094da2c29aebmr7938240ejc.49.1682271401463; Sun, 23
- Apr 2023 10:36:41 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1682349628; x=1684941628;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0ybXQpJGX8ksVbqeQTg5aMwu/7o/goFFitwiYzrK7BM=;
+ b=kxMlY4LSUbfrxP+1GK5rrtYCuK2grrpaYKj51YKrG9FNtT6uKDstoE7nhi1VlEqAFL
+ wk/Itj/FY8tQE3onwMj7UjQ+lZ2WHthJSxteK6Nyw7lDVjTIIvncSUVBaL4KHj6DAYaq
+ 7+ysHLL+pH2fyVtK5tQP6DunFsKeQuXC/BeELtzLM5ARJ+IQa7gIIzU3NhotLKv94seU
+ u++EvNWFfs94WK7gm46BkmgRyPq6dVexWtqlbMRGR6yZoJyIY5fdXoeufkosCQzvo0hr
+ PvfI0kIZIIb5hBJirjNYrwFLxPR9e9yFAjXBeuwIzkEp+PQFoo95FRKlQmTUBN+Zk00Q
+ rjDg==
+X-Gm-Message-State: AAQBX9ejqVIl7li8ksNJId1mbzcDI4OTDCgOIxyQwh7IpSvScYxp7ych
+ 4xverZPtamwJgZTAJs5GYs+vww7RlqE3pNMlK2w0w4q0VyUSIltypamL7SYZnBb/dwgklmwYOWh
+ acH3ah8NO+BKsY/OmWmAEN2xc3eHooZUgkqTe6MH5pw==
+X-Received: by 2002:a2e:924b:0:b0:2a9:f6f0:fc84 with SMTP id
+ v11-20020a2e924b000000b002a9f6f0fc84mr3486701ljg.4.1682349628263; 
+ Mon, 24 Apr 2023 08:20:28 -0700 (PDT)
+X-Google-Smtp-Source: AKy350brn3/2mvZw23jR8Revx5XmXXtkygZGuUo8HD5LLVeLxmu8zC85TkjrgP/HdRDXdUOJ1/BuBAsvCCX/3rAcWwU=
+X-Received: by 2002:a2e:924b:0:b0:2a9:f6f0:fc84 with SMTP id
+ v11-20020a2e924b000000b002a9f6f0fc84mr3486688ljg.4.1682349627904; Mon, 24 Apr
+ 2023 08:20:27 -0700 (PDT)
 MIME-Version: 1.0
-From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Sun, 23 Apr 2023 10:36:24 -0700
-X-Gmail-Original-Message-ID: <CAHk-=whMiMqAv5ATKRkjrdgP2R7WgWmCS4hW2mPwBcL=gzdDNw@mail.gmail.com>
-Message-ID: <CAHk-=whMiMqAv5ATKRkjrdgP2R7WgWmCS4hW2mPwBcL=gzdDNw@mail.gmail.com>
-To: Kees Cook <keescook@chromium.org>
+References: <20230204184307.never.825-kees@kernel.org>
+ <0a48d61b-6e11-9144-b11e-dd46de836c53@embeddedor.com>
+In-Reply-To: <0a48d61b-6e11-9144-b11e-dd46de836c53@embeddedor.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Mon, 24 Apr 2023 17:20:16 +0200
+Message-ID: <CACO55tv43F7TQGYCmifyzOxR-Ddt28wpj9t9RyK4sQPR6aU+bQ@mail.gmail.com>
+To: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
-Subject: [Nouveau] Disabling -Warray-bounds for gcc-13 too
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/disp: More DP_RECEIVER_CAP_SIZE
+ array fixes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,89 +78,133 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel <dri-devel@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: Kees Cook <keescook@chromium.org>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Dave Airlie <airlied@redhat.com>, linux-hardening@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Kees,
-  I made the mistake of upgrading my M2 Macbook Air to Fedora-38, and
-in the process I got gcc-13 which is not WERROR-clean because we only
-limited the 'array-bounds' warning to gcc-11 and gcc-12. But gcc-13
-has all the same issues.
+On Wed, Mar 22, 2023 at 10:40=E2=80=AFPM Gustavo A. R. Silva
+<gustavo@embeddedor.com> wrote:
+>
+>
+>
+> On 2/4/23 12:43, Kees Cook wrote:
+> > More arrays (and arguments) for dcpd were set to 16, when it looks like
+> > DP_RECEIVER_CAP_SIZE (15) should be used. Fix the remaining cases, seen
+> > with GCC 13:
+> >
+> > ../drivers/gpu/drm/nouveau/nvif/outp.c: In function 'nvif_outp_acquire_=
+dp':
+> > ../include/linux/fortify-string.h:57:33: warning: array subscript 'unsi=
+gned char[16][0]' is partly outside array bounds of 'u8[15]' {aka 'unsigned=
+ char[15]'} [-Warray-bounds=3D]
+> >     57 | #define __underlying_memcpy     __builtin_memcpy
+> >        |                                 ^
+> > ...
+> > ../drivers/gpu/drm/nouveau/nvif/outp.c:140:9: note: in expansion of mac=
+ro 'memcpy'
+> >    140 |         memcpy(args.dp.dpcd, dpcd, sizeof(args.dp.dpcd));
+> >        |         ^~~~~~
+> > ../drivers/gpu/drm/nouveau/nvif/outp.c:130:49: note: object 'dpcd' of s=
+ize [0, 15]
+> >    130 | nvif_outp_acquire_dp(struct nvif_outp *outp, u8 dpcd[DP_RECEIV=
+ER_CAP_SIZE],
+> >        |                                              ~~~^~~~~~~~~~~~~~=
+~~~~~~~~~~~~
+> >
+> > Fixes: 813443721331 ("drm/nouveau/disp: move DP link config into acquir=
+e")
+> > Cc: Ben Skeggs <bskeggs@redhat.com>
+> > Cc: Lyude Paul <lyude@redhat.com>
+> > Cc: Karol Herbst <kherbst@redhat.com>
+> > Cc: David Airlie <airlied@gmail.com>
+> > Cc: Daniel Vetter <daniel@ffwll.ch>
+> > Cc: Dave Airlie <airlied@redhat.com>
+> > Cc: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
+> > Cc: dri-devel@lists.freedesktop.org
+> > Cc: nouveau@lists.freedesktop.org
+> > Signed-off-by: Kees Cook <keescook@chromium.org>
+>
+> Reviewed-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+>
 
-And I want to be able to do my arm64 builds with WERROR on still...
+Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
-I guess it never made much sense to hope it was going to go away
-without having a confirmation, so I just changed it to be gcc-11+.
+sorry for not seeing this earlier.
 
-A lot of the warnings seem just crazy, with gcc just not getting the
-bounds right, and then being upset about us going backwards with
-'container_of()' etc. Ok, so the kernel is special. We do odd things.
-I get it, gcc ends up being confused.
+> Thanks!
+> --
+> Gustavo
+>
+> > ---
+> >   drivers/gpu/drm/nouveau/include/nvif/if0012.h    | 4 +++-
+> >   drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.h  | 3 ++-
+> >   drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c | 2 +-
+> >   3 files changed, 6 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/include/nvif/if0012.h b/drivers/gp=
+u/drm/nouveau/include/nvif/if0012.h
+> > index eb99d84eb844..16d4ad5023a3 100644
+> > --- a/drivers/gpu/drm/nouveau/include/nvif/if0012.h
+> > +++ b/drivers/gpu/drm/nouveau/include/nvif/if0012.h
+> > @@ -2,6 +2,8 @@
+> >   #ifndef __NVIF_IF0012_H__
+> >   #define __NVIF_IF0012_H__
+> >
+> > +#include <drm/display/drm_dp.h>
+> > +
+> >   union nvif_outp_args {
+> >       struct nvif_outp_v0 {
+> >               __u8 version;
+> > @@ -63,7 +65,7 @@ union nvif_outp_acquire_args {
+> >                               __u8 hda;
+> >                               __u8 mst;
+> >                               __u8 pad04[4];
+> > -                             __u8 dpcd[16];
+> > +                             __u8 dpcd[DP_RECEIVER_CAP_SIZE];
+> >                       } dp;
+> >               };
+> >       } v0;
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.h b/drivers/=
+gpu/drm/nouveau/nvkm/engine/disp/outp.h
+> > index b7631c1ab242..4e7f873f66e2 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.h
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.h
+> > @@ -3,6 +3,7 @@
+> >   #define __NVKM_DISP_OUTP_H__
+> >   #include "priv.h"
+> >
+> > +#include <drm/display/drm_dp.h>
+> >   #include <subdev/bios.h>
+> >   #include <subdev/bios/dcb.h>
+> >   #include <subdev/bios/dp.h>
+> > @@ -42,7 +43,7 @@ struct nvkm_outp {
+> >                       bool aux_pwr_pu;
+> >                       u8 lttpr[6];
+> >                       u8 lttprs;
+> > -                     u8 dpcd[16];
+> > +                     u8 dpcd[DP_RECEIVER_CAP_SIZE];
+> >
+> >                       struct {
+> >                               int dpcd; /* -1, or index into SUPPORTED_=
+LINK_RATES table */
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c b/drivers=
+/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
+> > index 4f0ca709c85a..fc283a4a1522 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
+> > @@ -146,7 +146,7 @@ nvkm_uoutp_mthd_release(struct nvkm_outp *outp, voi=
+d *argv, u32 argc)
+> >   }
+> >
+> >   static int
+> > -nvkm_uoutp_mthd_acquire_dp(struct nvkm_outp *outp, u8 dpcd[16],
+> > +nvkm_uoutp_mthd_acquire_dp(struct nvkm_outp *outp, u8 dpcd[DP_RECEIVER=
+_CAP_SIZE],
+> >                          u8 link_nr, u8 link_bw, bool hda, bool mst)
+> >   {
+> >       int ret;
+>
 
-But before I disabled it, I did take a look at a couple of warnings
-that didn't look like the sea of crazy.
-
-And one of them is from you.
-
-In particular, commit 4076ea2419cf ("drm/nouveau/disp: Fix
-nvif_outp_acquire_dp() argument size") cannot possibly be right, It
-changes
-
- nvif_outp_acquire_dp(struct nvif_outp *outp, u8 dpcd[16],
-
-to
-
- nvif_outp_acquire_dp(struct nvif_outp *outp, u8 dpcd[DP_RECEIVER_CAP_SIZE],
-
-and then does
-
-        memcpy(args.dp.dpcd, dpcd, sizeof(args.dp.dpcd));
-
-where that 'args.dp.dpcd' is a 16-byte array, and DP_RECEIVER_CAP_SIZE is 15.
-
-So yeah, it's copying 16 bytes from an argument that claims to be 15
-bytes in size.
-
-I think that commit was wrong, and the problem is that the 'dpcd'
-array is something 15 and sometimes 16. For example, we have
-
-  struct nouveau_encoder {
-        ...
-        union {
-            struct {
-            ...
-                u8 dpcd[DP_RECEIVER_CAP_SIZE];
-            } dp;
-        };
-
-so there it's indeed 15 bytes, but then we have
-
-union nvif_outp_acquire_args {
-        struct nvif_outp_acquire_v0 {
-            ...
-            union {
-                ...
-                struct {
-                    ...
-                    __u8 dpcd[16];
-                } dp;
-
-where it's 16.
-
-I think it's all entirely harmless from a code generation standpoint,
-because the 15-byte field will be padded out to 16 bytes in the
-structure that contains it, but it's most definitely buggy.
-
-So that warning does find real cases of wrong code. But when those
-real cases are hidden by hundreds of lines of unfixable false
-positives, we don't have much choice.
-
-But could the Nouveau driver *please* pick a size for the dhcp[] array
-and stick with it?
-
-The other driver where the warnings didn't look entirely crazy was the
-ath/carl9170 wireless driver, but I didn't look closer at that one.
-
-                 Linus
