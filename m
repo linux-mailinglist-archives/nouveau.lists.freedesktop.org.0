@@ -1,48 +1,50 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 310E86F6BCD
-	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:33:42 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 929F06F6B96
+	for <lists+nouveau@lfdr.de>; Thu,  4 May 2023 14:32:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B124110E4AB;
-	Thu,  4 May 2023 12:32:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6F83310E440;
+	Thu,  4 May 2023 12:32:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4F71210ECC6;
- Fri, 28 Apr 2023 10:18:20 +0000 (UTC)
-Received: from localhost (unknown [IPv6:2a01:e0a:2c:6930:5cf4:84a1:2763:fe0d])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: bbrezillon)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id 265436602097;
- Fri, 28 Apr 2023 11:18:17 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1682677097;
- bh=Yk5D9b+oPUkoCZwzeMIIJtHOgvXide7fZoW+I8ghpV0=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=mhhECMNxkLs1iW+QaB2pRm8nUySryOtAT9Y4NOyMqr2EqHYzZmpOT+adaU6/ID1a9
- no1OdnK+ALZIj8/C7cBWw20X2bNzE89ZFuf6mYMbos909zeCh8D7m0E2UFsLyi3fri
- MJloqfSnhMn9R9NfMh89i03ukNYFMrsV08bymj3SSPhXtXvaNygxNTThFredKI91aT
- E3NP3647tgYI23H9PtLyuLvhEXAJoK4jHGAjfi09ZqIlAzfKWTKK6G/5bZj9bKGvUX
- sM8uGnfSD66AngdfS1WteFdbKzplq4xmhjx4GPFm5NVhHHnboQ0n6DZdSmsdshX2G0
- mCGmVSSVOfJmw==
-Date: Fri, 28 Apr 2023 12:18:13 +0200
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Danilo Krummrich <dakr@redhat.com>
-Message-ID: <20230428121813.309ea609@collabora.com>
-In-Reply-To: <20230404012741.116502-5-dakr@redhat.com>
-References: <20230404012741.116502-1-dakr@redhat.com>
- <20230404012741.116502-5-dakr@redhat.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.36; x86_64-redhat-linux-gnu)
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2648910E087;
+ Thu,  4 May 2023 11:41:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
+ s=20170329;
+ h=MIME-Version:Content-Transfer-Encoding:Content-Type:Date:To:
+ From:Subject:Message-ID:Sender:Reply-To:Cc:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=DY2Ok8279LYbukTn4RyVDpj5MbcGHsCyoi1DnlySgWk=; b=coqZ51PvbgUdFwIKttmgO2Wczt
+ rNJcEsJlXANwIm5gE46wTOvrfBWb2mskizyrA1UwrsZB/iKxW5/54r63SZEFAcIdZIZ1EAPhhEUYY
+ CYVzeVefmvYA63395H0nHKEB3vz3Jbzl9y0LYb4BDn4ay7pRR3rus5b6/9qO60EbBo7r7ASiegCa5
+ KCLX+scCQQLqKdB69QSty1zn7PvOaKKYTpSJsGL+uiretyyQpQ8aHMcGd8K2wtX65IhlDi+lzO+Ie
+ zT02dI85ukQjm6EKZLxuk1pMmIaNZYcYTMNa11dlT0UpHNuSonulW8ZXuI2HP6l4RW/S5jlGfuCkd
+ mGz8l/dQ==;
+Received: from 137.red-83-52-2.dynamicip.rima-tde.net ([83.52.2.137]
+ helo=localhost.localdomain) by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1puXKZ-001506-AJ; Thu, 04 May 2023 13:41:03 +0200
+Message-ID: <bd27b87dc34f5ff00d346a8115cbf3bbb22b911b.camel@igalia.com>
+From: Ricardo Garcia <rgarcia@igalia.com>
+To: events@lists.x.org, xorg-devel@lists.x.org, 
+ wayland-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
+ mesa-dev@lists.freedesktop.org, amd-gfx@lists.freedesktop.org, 
+ etnaviv@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
+ libre-soc-dev@lists.libre-soc.org, elections@x.org, members@x.org, 
+ xorg@lists.freedesktop.org
+Date: Thu, 04 May 2023 13:41:02 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.46.4 (3.46.4-1.fc37) 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Thu, 04 May 2023 12:31:34 +0000
-Subject: Re: [Nouveau] [PATCH drm-next v3 04/15] drm: manager to keep track
- of GPUs VA mappings
+X-Mailman-Approved-At: Thu, 04 May 2023 12:31:38 +0000
+Subject: [Nouveau] 2023 X.Org Foundation Election vote results
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,53 +56,50 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, willy@infradead.org, daniel@ffwll.ch,
- dri-devel@lists.freedesktop.org, corbet@lwn.net, nouveau@lists.freedesktop.org,
- ogabbay@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- mripard@kernel.org, linux-mm@kvack.org, alexdeucher@gmail.com,
- bskeggs@redhat.com, Liam.Howlett@oracle.com, Dave Airlie <airlied@redhat.com>,
- bagasdotme@gmail.com, christian.koenig@amd.com, jason@jlekstrand.net
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue,  4 Apr 2023 03:27:30 +0200
-Danilo Krummrich <dakr@redhat.com> wrote:
+The Board of Directors election and the vote on the By-laws concluded at
+14:00 UTC on May 1st 2023 and these are the results:
 
-> +struct drm_gpuva_manager {
-> +	/**
-> +	 * @name: the name of the DRM GPU VA space
-> +	 */
-> +	const char *name;
-> +
-> +	/**
-> +	 * @mm_start: start of the VA space
-> +	 */
-> +	u64 mm_start;
-> +
-> +	/**
-> +	 * @mm_range: length of the VA space
-> +	 */
-> +	u64 mm_range;
-> +
-> +	/**
-> +	 * @mtree: the &maple_tree to track GPU VA mappings
-> +	 */
-> +	struct maple_tree mtree;
-> +
-> +	/**
-> +	 * @kernel_alloc_node:
-> +	 *
-> +	 * &drm_gpuva representing the address space cutout reserved for
-> +	 * the kernel
-> +	 */
-> +	struct drm_gpuva kernel_alloc_node;
-> +
-> +	/**
-> +	 * @ops: &drm_gpuva_fn_ops providing the split/merge steps to drivers
-> +	 */
-> +	struct drm_gpuva_fn_ops *ops;
+- We had 75 members this year, of which 55 cast a vote, so the turnout
+is 73.3%.
 
-Any reason for not making that a const object (same goes for all the
-functions being passed a drm_gpuva_fn_ops)?
+- On the question "Do you accept the proposed By-Law changes to make SFC
+the new fiscal sponsor of the X.Org foundation, replacing SPI?" 52 of
+the 55 members voted yes (94.5%). Among all 75 members, approval is
+69.3% (52/75, over 2/3), so we can consider this change approved using
+the current by-law rules.
 
-> +};
+- On the question "Do you accept the proposed By-Law changes to modify
+the special voting quorum requirements to be limited to present (meaning
+voting) members?" 48 of the 55 members voted yes (87.3%). Despite this,
+48 votes represent only 64% of the members, which means the by-laws
+change does not pass.
+
+- In the election of the Directors to the Board of the X.Org Foundation,
+the results were that Daniel Vetter, Lyude Paul, Arkadiusz Hiler and
+Christopher Michael were elected for two-year terms.
+
+The old full board is: Emma Anholt, Mark Filion, Ricardo Garcia, Samuel
+Iglesias Gons=C3=A1lvez, Manasi D Navare, Lyude Paul, Alyssa Rosenzweig and
+Daniel Vetter.
+
+The new full board is: Emma Anholt, Mark Filion, Ricardo Garcia,
+Arkadiusz Hiler, Christopher Michael, Lyude Paul, Alyssa Rosenzweig and
+Daniel Vetter.
+
+Full election results, sorted by points:
+
+* Daniel Vetter (367 points)
+* Lyude Paul (348 points)
+* Arkadiusz Hiler (286 points)
+* Christopher Michael (263 points)
+* Manasi Navare (195 points)
+* Uma Shankar (157 points)
+* Thomas Adam (105 points)
+* William Weeks-Balconi (51 points)
+
+Thanks everyone,
+-Ricardo Garcia, on behalf of the X.Org elections committee
+
