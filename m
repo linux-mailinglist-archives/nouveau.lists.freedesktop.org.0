@@ -1,83 +1,137 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA068736E88
-	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 16:20:22 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 01BB97373E4
+	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:21:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3AD6910E2EC;
-	Tue, 20 Jun 2023 14:20:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4C27A10E367;
+	Tue, 20 Jun 2023 18:20:36 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D791810E2EC
- for <nouveau@lists.freedesktop.org>; Tue, 20 Jun 2023 14:20:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1687270818;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=N4w8PsKKzheBCQ5Hh7lA29swkjbvM1jw2ekMjFbOnXU=;
- b=feLFqxhRKB4oDxyWya135JCxdNjUxe8YWLvykYszVkL4tNVnuC7RHdo63h6jTafKLA7Sks
- ODS3nSvIAOALswpqab5HVr5478Lsw1dlUll7pbnaFJLnqnBq764ggSaI3PkSD2IPaQmCbP
- mTczC2xV6+WARNrlXReVFs+RbZNANnU=
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-315-xls9w54zOCG5S_xKuOAorA-1; Tue, 20 Jun 2023 10:20:11 -0400
-X-MC-Unique: xls9w54zOCG5S_xKuOAorA-1
-Received: by mail-ej1-f69.google.com with SMTP id
- a640c23a62f3a-987accb96dbso229324466b.2
- for <nouveau@lists.freedesktop.org>; Tue, 20 Jun 2023 07:20:02 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687270801; x=1689862801;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=N4w8PsKKzheBCQ5Hh7lA29swkjbvM1jw2ekMjFbOnXU=;
- b=SaLaz4tfIyS1lWYl2E0n4qSuC8oXX+vmDyHjQv5NSDgC4yWOIbG2YqNgCFxii/ke+w
- Hgs+Km6yPmcQsnN5xauomGiBjRcGdvA2mB8gY8+i6B47s5jr0dTSs3HsJgt8Yc3flfEF
- IzAaRbi4Net1RMPHtekt1O7R92PnCNWpsyhFKIZtbyI1sY4o/bWmKB7vnfKLz5cZJjEO
- wdifc7Eq1pd4w8EZiFUwwYEwCwF06/n40JxpersKDryL/RdehODYR+1xoOyrQwU3V91u
- iBhfGOwax24EUOx/tuavHr7d67iJiN21KVJ0Yslj1tYvCHq27icBxeh4VBJOigcoIEWN
- 5sUg==
-X-Gm-Message-State: AC+VfDw/J1WYL9M3n0DFRUPvcKsafNj/lqEB/Y7rCsX8hc5npkeUtPun
- Cqii5Ul7+0oC7y4FW4F/4e2G/C67vQ+/MsaCq/sBkJbAq5U4XvX2i+wHgN3SnSdO5Bs9KhwUmqh
- 0m79DxVbDGGR7U6lI+YYXbLp4mw==
-X-Received: by 2002:a17:907:e92:b0:988:9b29:564c with SMTP id
- ho18-20020a1709070e9200b009889b29564cmr5261018ejc.59.1687270801149; 
- Tue, 20 Jun 2023 07:20:01 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ7MKEUyuKjqKPHGqFbTylSlJzmHsoh1nejHl08z2eGSXm3FFlE2jKt0WBM21R9pGr+F1yTXiA==
-X-Received: by 2002:a17:907:e92:b0:988:9b29:564c with SMTP id
- ho18-20020a1709070e9200b009889b29564cmr5260992ejc.59.1687270800680; 
- Tue, 20 Jun 2023 07:20:00 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
- ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
- by smtp.gmail.com with ESMTPSA id
- q15-20020a170906770f00b00989257be620sm1238331ejm.200.2023.06.20.07.19.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Jun 2023 07:20:00 -0700 (PDT)
-Message-ID: <94adfd82-e77d-f99c-1d94-8b6397d39310@redhat.com>
-Date: Tue, 20 Jun 2023 14:46:07 +0200
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
+ [IPv6:2001:67c:670:201:290:27ff:fe1d:cc33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6A09310E270
+ for <nouveau@lists.freedesktop.org>; Sun,  7 May 2023 16:27:09 +0000 (UTC)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+ by metis.ext.pengutronix.de with esmtps
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1pvhDT-0001dQ-9k; Sun, 07 May 2023 18:26:31 +0200
+Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
+ by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1pvhDN-001nB9-TQ; Sun, 07 May 2023 18:26:25 +0200
+Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1pvhDM-002Afe-ST; Sun, 07 May 2023 18:26:24 +0200
+From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+To: James@pengutronix.de, Liviu Dudau <liviu.dudau@arm.com>,
+ Mihail Atanassov <mihail.atanassov@arm.com>,
+ Brian Starkey <brian.starkey@arm.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Russell King <linux@armlinux.org.uk>,
+ Joel Stanley <joel@jms.id.au>, Sam Ravnborg <sam@ravnborg.org>,
+ Boris Brezillon <bbrezillon@kernel.org>,
+ Nicolas Ferre <nicolas.ferre@microchip.com>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>,
+ Claudiu Beznea <claudiu.beznea@microchip.com>,
+ Andrzej Hajda <andrzej.hajda@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+ Rahul T R <r-ravikumar@ti.com>, Jayshri Pawar <jpawar@cadence.com>,
+ Liu Ying <victor.liu@nxp.com>, Shawn Guo <shawnguo@kernel.org>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ Minghao Chi <chi.minghao@zte.com.cn>, Mark Brown <broonie@kernel.org>,
+ Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+ Lucas Stach <l.stach@pengutronix.de>, Inki Dae <inki.dae@samsung.com>,
+ Seung-Woo Kim <sw0312.kim@samsung.com>,
+ Kyungmin Park <kyungmin.park@samsung.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ Jingoo Han <jingoohan1@gmail.com>, Stefan Agner <stefan@agner.ch>,
+ Alison Wang <alison.wang@nxp.com>, Xinliang Liu <xinliang.liu@linaro.org>,
+ Tian Tao <tiantao6@hisilicon.com>,
+ =?utf-8?b?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
+ Jani Nikula <jani.nikula@intel.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Danilo Krummrich <dakr@redhat.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>,
+ Paul Cercueil <paul@crapouillou.net>,
+ Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
+ Edmund Dea <edmund.j.dea@intel.com>, Qiang Yu <yuq825@gmail.com>,
+ Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Chun-Kuang Hu <chunkuang.hu@kernel.org>,
+ Matthias Brugger <matthias.bgg@gmail.com>,
+ Kevin Hilman <khilman@baylibre.com>, Rob Clark <robdclark@gmail.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Akhil P Oommen <quic_akhilpo@quicinc.com>,
+ Ricardo Ribalda <ribalda@chromium.org>,
+ Konrad Dybcio <konrad.dybcio@somainline.org>,
+ Johan Hovold <johan+linaro@kernel.org>, Joel@pengutronix.de,
+ Stephen Boyd <swboyd@chromium.org>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Liu Shixin <liushixin2@huawei.com>,
+ Douglas Anderson <dianders@chromium.org>,
+ Miaoqian Lin <linmq006@gmail.com>, Kuogee Hsieh <quic_khsieh@quicinc.com>,
+ Bjorn Andersson <andersson@kernel.org>, Marek Vasut <marex@denx.de>,
+ Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, Tomi Valkeinen <tomba@kernel.org>,
+ Guo Zhengkui <guozhengkui@vivo.com>, Yuan Can <yuancan@huawei.com>,
+ Arnd Bergmann <arnd@arndb.de>, Liang He <windhl@126.com>,
+ Thierry Reding <thierry.reding@gmail.com>, Rob Herring <robh@kernel.org>,
+ Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+ Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+ Sandy Huang <hjc@rock-chips.com>,
+ =?utf-8?q?Heiko_St=C3=BCbner?= <heiko@sntech.de>,
+ Orson Zhai <orsonzhai@gmail.com>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Chunyan Zhang <zhang.lyra@gmail.com>, Deepak R Varma <drv@mailo.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Alain Volmat <alain.volmat@foss.st.com>,
+ Yannick Fertre <yannick.fertre@foss.st.com>,
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+ Philippe Cornu <philippe.cornu@foss.st.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>,
+ Maxime Ripard <mripard@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Jonathan Hunter <jonathanh@nvidia.com>, Maxime Ripard <maxime@cerno.tech>,
+ =?utf-8?q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>,
+ =?utf-8?q?Noralf_Tr=C3=B8nnes?= <noralf@tronnes.org>,
+ Jyri Sarha <jyri.sarha@iki.fi>, Alexey Brodkin <abrodkin@synopsys.com>,
+ Emma Anholt <emma@anholt.net>, Melissa Wen <mwen@igalia.com>,
+ Hyun Kwon <hyun.kwon@xilinx.com>, Michal Simek <michal.simek@xilinx.com>
+Date: Sun,  7 May 2023 18:25:23 +0200
+Message-Id: <20230507162616.1368908-1-u.kleine-koenig@pengutronix.de>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-To: Boris Brezillon <boris.brezillon@collabora.com>, matthew.brost@intel.com
-References: <20230620004217.4700-1-dakr@redhat.com>
- <20230620112540.19142ef3@collabora.com>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <20230620112540.19142ef3@collabora.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=14798;
+ i=u.kleine-koenig@pengutronix.de; h=from:subject;
+ bh=lYC/6nt2775YYktBBe0La4Rd2LbkHx63Y8C/T7uMCDE=;
+ b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBkV9DiHJvsTbW8rDzpNQDprwurMfyYCBw0QTbXz
+ 4sTxy3YVsuJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCZFfQ4gAKCRCPgPtYfRL+
+ TviMB/9PsRD/JiXPREc6Dc3inx8IdOBOrHq6jxR5UDc/pmYqKB6+6v/3uFt5U+2QXfzV3gsSX8e
+ utyLxLAFqDYkaZkXZYTsGdtJ/RE7Q2w5yAaRCF4DAu0k4iEyZr+QUUF8FNJ3xE5hkdOoD2m5qO3
+ rJz4ZawyKXTCeQ9FZU/w2YIIh78VkoHyhfn+TSOxwFWnzxB4PFhfpv5yWyDiGfAci2r6guguWYZ
+ Mh8yYbvfm/ULrsI3q5kZ4s3RlWdC+E9KqC4PXRn7G6vW6X/g6OGu9KA9Q4KYIcIH8EmVs6R3U4r
+ WM07tmh6e12qYth7UA/lmTb00hY7H23XsjDkMxU0N7bnHX1g
+X-Developer-Key: i=u.kleine-koenig@pengutronix.de; a=openpgp;
+ fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH drm-next v5 00/14] [RFC] DRM GPUVA Manager &
- Nouveau VM_BIND UAPI
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ukl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: nouveau@lists.freedesktop.org
+X-Mailman-Approved-At: Tue, 20 Jun 2023 18:20:12 +0000
+Subject: [Nouveau] [PATCH 00/53] drm: Convert to platform remove callback
+ returning void
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,331 +143,276 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: dri-devel@lists.freedesktop.org, willy@infradead.org, daniel@ffwll.ch,
- corbet@lwn.net, nouveau@lists.freedesktop.org, ogabbay@kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, mripard@kernel.org,
- linux-mm@kvack.org, alexdeucher@gmail.com, bskeggs@redhat.com,
- Liam.Howlett@oracle.com, bagasdotme@gmail.com, christian.koenig@amd.com,
- jason@jlekstrand.net
+Cc: linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, John Stultz <jstultz@google.com>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Alim Akhtar <alim.akhtar@samsung.com>, Fabio Estevam <festevam@gmail.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>, Jerome Brunet <jbrunet@baylibre.com>,
+ linux-samsung-soc@vger.kernel.org, lima@lists.freedesktop.org,
+ Steven Price <steven.price@arm.com>, linux-rockchip@lists.infradead.org,
+ Xinwei Kong <kong.kongxinwei@hisilicon.com>,
+ Mali DP Maintainers <malidp@foss.arm.com>, NXP Linux Team <linux-imx@nxp.com>,
+ Russell King <linux+etnaviv@armlinux.org.uk>, linux-sunxi@lists.linux.dev,
+ Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+ linux-arm-msm@vger.kernel.org, etnaviv@lists.freedesktop.org,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ linux-mediatek@lists.infradead.org, linux-tegra@vger.kernel.org,
+ linux-amlogic@lists.infradead.org, Sean Paul <sean@poorly.run>,
+ linux-arm-kernel@lists.infradead.org,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ Andrew Jeffery <andrew@aj.id.au>, linux-stm32@st-md-mailman.stormreply.com,
+ linux-mips@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
+ kernel@pengutronix.de, Yongqin Liu <yongqin.liu@linaro.org>,
+ freedreno@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Boris,
+Hello,
 
-On 6/20/23 11:25, Boris Brezillon wrote:
-> Hi Danilo,
-> 
-> On Tue, 20 Jun 2023 02:42:03 +0200
-> Danilo Krummrich <dakr@redhat.com> wrote:
-> 
->> This patch series provides a new UAPI for the Nouveau driver in order to
->> support Vulkan features, such as sparse bindings and sparse residency.
->>
->> Furthermore, with the DRM GPUVA manager it provides a new DRM core feature to
->> keep track of GPU virtual address (VA) mappings in a more generic way.
->>
->> The DRM GPUVA manager is indented to help drivers implement userspace-manageable
->> GPU VA spaces in reference to the Vulkan API. In order to achieve this goal it
->> serves the following purposes in this context.
->>
->>      1) Provide infrastructure to track GPU VA allocations and mappings,
->>         making use of the maple_tree.
->>
->>      2) Generically connect GPU VA mappings to their backing buffers, in
->>         particular DRM GEM objects.
->>
->>      3) Provide a common implementation to perform more complex mapping
->>         operations on the GPU VA space. In particular splitting and merging
->>         of GPU VA mappings, e.g. for intersecting mapping requests or partial
->>         unmap requests.
->>
->> The new VM_BIND Nouveau UAPI build on top of the DRM GPUVA manager, itself
->> providing the following new interfaces.
->>
->>      1) Initialize a GPU VA space via the new DRM_IOCTL_NOUVEAU_VM_INIT ioctl
->>         for UMDs to specify the portion of VA space managed by the kernel and
->>         userspace, respectively.
->>
->>      2) Allocate and free a VA space region as well as bind and unbind memory
->>         to the GPUs VA space via the new DRM_IOCTL_NOUVEAU_VM_BIND ioctl.
->>
->>      3) Execute push buffers with the new DRM_IOCTL_NOUVEAU_EXEC ioctl.
->>
->> Both, DRM_IOCTL_NOUVEAU_VM_BIND and DRM_IOCTL_NOUVEAU_EXEC, make use of the DRM
->> scheduler to queue jobs and support asynchronous processing with DRM syncobjs
->> as synchronization mechanism.
->>
->> By default DRM_IOCTL_NOUVEAU_VM_BIND does synchronous processing,
->> DRM_IOCTL_NOUVEAU_EXEC supports asynchronous processing only.
->>
->> The new VM_BIND UAPI for Nouveau makes also use of drm_exec (execution context
->> for GEM buffers) by Christian König. Since the patch implementing drm_exec was
->> not yet merged into drm-next it is part of this series, as well as a small fix
->> for this patch, which was found while testing this series.
->>
->> This patch series is also available at [1].
->>
->> There is a Mesa NVK merge request by Dave Airlie [2] implementing the
->> corresponding userspace parts for this series.
->>
->> The Vulkan CTS test suite passes the sparse binding and sparse residency test
->> cases for the new UAPI together with Dave's Mesa work.
->>
->> There are also some test cases in the igt-gpu-tools project [3] for the new UAPI
->> and hence the DRM GPU VA manager. However, most of them are testing the DRM GPU
->> VA manager's logic through Nouveau's new UAPI and should be considered just as
->> helper for implementation.
->>
->> However, I absolutely intend to change those test cases to proper kunit test
->> cases for the DRM GPUVA manager, once and if we agree on it's usefulness and
->> design.
->>
->> [1] https://gitlab.freedesktop.org/nouvelles/kernel/-/tree/new-uapi-drm-next /
->>      https://gitlab.freedesktop.org/nouvelles/kernel/-/merge_requests/1
->> [2] https://gitlab.freedesktop.org/nouveau/mesa/-/merge_requests/150/
->> [3] https://gitlab.freedesktop.org/dakr/igt-gpu-tools/-/tree/wip_nouveau_vm_bind
->>
->> Changes in V2:
->> ==============
->>    Nouveau:
->>      - Reworked the Nouveau VM_BIND UAPI to avoid memory allocations in fence
->>        signalling critical sections. Updates to the VA space are split up in three
->>        separate stages, where only the 2. stage executes in a fence signalling
->>        critical section:
->>
->>          1. update the VA space, allocate new structures and page tables
->>          2. (un-)map the requested memory bindings
->>          3. free structures and page tables
->>
->>      - Separated generic job scheduler code from specific job implementations.
->>      - Separated the EXEC and VM_BIND implementation of the UAPI.
->>      - Reworked the locking parts of the nvkm/vmm RAW interface, such that
->>        (un-)map operations can be executed in fence signalling critical sections.
->>
->>    GPUVA Manager:
->>      - made drm_gpuva_regions optional for users of the GPUVA manager
->>      - allow NULL GEMs for drm_gpuva entries
->>      - swichted from drm_mm to maple_tree for track drm_gpuva / drm_gpuva_region
->>        entries
->>      - provide callbacks for users to allocate custom drm_gpuva_op structures to
->>        allow inheritance
->>      - added user bits to drm_gpuva_flags
->>      - added a prefetch operation type in order to support generating prefetch
->>        operations in the same way other operations generated
->>      - hand the responsibility for mutual exclusion for a GEM's
->>        drm_gpuva list to the user; simplified corresponding (un-)link functions
->>
->>    Maple Tree:
->>      - I added two maple tree patches to the series, one to support custom tree
->>        walk macros and one to hand the locking responsibility to the user of the
->>        GPUVA manager without pre-defined lockdep checks.
->>
->> Changes in V3:
->> ==============
->>    Nouveau:
->>      - Reworked the Nouveau VM_BIND UAPI to do the job cleanup (including page
->>        table cleanup) within a workqueue rather than the job_free() callback of
->>        the scheduler itself. A job_free() callback can stall the execution (run()
->>        callback) of the next job in the queue. Since the page table cleanup
->>        requires to take the same locks as need to be taken for page table
->>        allocation, doing it directly in the job_free() callback would still
->>        violate the fence signalling critical path.
->>      - Separated Nouveau fence allocation and emit, such that we do not violate
->>        the fence signalling critical path in EXEC jobs.
->>      - Implement "regions" (for handling sparse mappings through PDEs and dual
->>        page tables) within Nouveau.
->>      - Drop the requirement for every mapping to be contained within a region.
->>      - Add necassary synchronization of VM_BIND job operation sequences in order
->>        to work around limitations in page table handling. This will be addressed
->>        in a future re-work of Nouveau's page table handling.
->>      - Fixed a couple of race conditions found through more testing. Thanks to
->>        Dave for consitently trying to break it. :-)
->>
->>    GPUVA Manager:
->>      - Implement pre-allocation capabilities for tree modifications within fence
->>        signalling critical sections.
->>      - Implement accessors to to apply tree modification while walking the GPUVA
->>        tree in order to actually support processing of drm_gpuva_ops through
->>        callbacks in fence signalling critical sections rather than through
->>        pre-allocated operation lists.
->>      - Remove merging of GPUVAs; the kernel has limited to none knowlege about
->>        the semantics of mapping sequences. Hence, merging is purely speculative.
->>        It seems that gaining a significant (or at least a measurable) performance
->>        increase through merging is way more likely to happen when userspace is
->>        responsible for merging mappings up to the next larger page size if
->>        possible.
->>      - Since merging was removed, regions pretty much loose their right to exist.
->>        They might still be useful for handling dual page tables or similar
->>        mechanisms, but since Nouveau seems to be the only driver having a need
->>        for this for now, regions were removed from the GPUVA manager.
->>      - Fixed a couple of maple_tree related issues; thanks to Liam for helping me
->>        out.
->>
->> Changes in V4:
->> ==============
->>    Nouveau:
->>      - Refactored how specific VM_BIND and EXEC jobs are created and how their
->>        arguments are passed to the generic job implementation.
->>      - Fixed a UAF race condition where bind job ops could have been freed
->>        already while still waiting for a job cleanup to finish. This is due to
->>        in certain cases we need to wait for mappings actually being unmapped
->>        before creating sparse regions in the same area.
->>      - Re-based the code onto drm_exec v4 patch.
->>
->>    GPUVA Manager:
->>      - Fixed a maple tree related bug when pre-allocating MA states.
->>        (Boris Brezillion)
->>      - Made struct drm_gpuva_fn_ops a const object in all occurrences.
->>        (Boris Brezillion)
->>
->> Changes in V5:
->> ==============
->>    Nouveau:
->>      - Link and unlink GPUVAs outside the fence signalling critical path in
->>        nouveau_uvmm_bind_job_submit() holding the dma-resv lock. Mutual exclusion
->>        of BO evicts causing mapping invalidation and regular mapping operations
->>        is ensured with dma-fences.
->>
->>    GPUVA Manager:
->>      - Removed the separate GEMs GPUVA list lock. Link and unlink as well as
->>        iterating the GEM's GPUVA list should be protected with the GEM's dma-resv
->>        lock instead.
->>      - Renamed DRM_GPUVA_EVICTED flag to DRM_GPUVA_INVALIDATED. Mappings do not
->>        get eviced, they might get invalidated due to eviction.
->>      - Maple tree uses the 'unsinged long' type for node entries. While this
->>        works for GPU VA spaces larger than 32-bit on 64-bit kernel, the GPU VA
->>        space is limited to 32-bit on 32-bit kernels as well.
->>        As long as we do not have a 64-bit capable maple tree for 32-bit kernels,
->>        the GPU VA manager contains checks to throw warnings when GPU VA entries
->>        exceed the maple tree's storage capabilities.
->>      - Extended the Documentation and added example code as requested by Donald
->>        Robson.
->>
->> Christian König (1):
->>    drm: execution context for GEM buffers v4
->>
->> Danilo Krummrich (13):
->>    maple_tree: split up MA_STATE() macro
->>    drm: manager to keep track of GPUs VA mappings
->>    drm: debugfs: provide infrastructure to dump a DRM GPU VA space
-> 
-> Core drm patches are
-> 
-> Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
-> 
-> The only thing I'm worried about is the 'sync mapping requests have to
-> go through the async path and wait for all previous async requests to
-> be processed' problem I mentioned in one of your previous submission,
-> but I'm happy leave that for later.
+this patch series adapts the platform drivers below drivers/gpu/drm
+to use the .remove_new() callback. Compared to the traditional .remove()
+callback .remove_new() returns no value. This is a good thing because
+the driver core doesn't (and cannot) cope for errors during remove. The
+only effect of a non-zero return value in .remove() is that the driver
+core emits a warning. The device is removed anyhow and an early return
+from .remove() usually yields a resource leak.
 
-Yes, I'm aware of this limitation.
+By changing the remove callback to return void driver authors cannot
+reasonably (but wrongly) assume any more that there happens some kind of
+cleanup later.
 
-Let me quickly try to explain where this limitation comes from and how I 
-intend to address it.
+Best regards
+Uwe
 
-In order to be able to allocate the required page tables for a mapping 
-request and in order to free corresponding page tables once the (async) 
-job finished I need to know the corresponding sequence of operations 
-(drm_gpuva_ops) to fulfill the mapping request.
+Uwe Kleine-König (53):
+  drm/komeda: Convert to platform remove callback returning void
+  drm/arm/hdlcd: Convert to platform remove callback returning void
+  drm/arm/malidp: Convert to platform remove callback returning void
+  drm/armada: Convert to platform remove callback returning void
+  drm/aspeed: Convert to platform remove callback returning void
+  drm/atmel-hlcdc: Convert to platform remove callback returning void
+  drm/bridge: cdns-dsi: Convert to platform remove callback returning
+    void
+  drm/bridge: display-connector: Convert to platform remove callback
+    returning void
+  drm/bridge: fsl-ldb: Convert to platform remove callback returning
+    void
+  drm/imx/imx8*: Convert to platform remove callback returning void
+  drm/bridge: lvds-codec: Convert to platform remove callback returning
+    void
+  drm/bridge: nwl-dsi: Convert to platform remove callback returning
+    void
+  drm/bridge: simple-bridge: Convert to platform remove callback
+    returning void
+  drm/bridge: synopsys: Convert to platform remove callback returning
+    void
+  drm/bridge: thc63lvd1024: Convert to platform remove callback
+    returning void
+  drm/bridge: tfp410: Convert to platform remove callback returning void
+  drm/etnaviv: Convert to platform remove callback returning void
+  drm/exynos: Convert to platform remove callback returning void
+  drm/fsl-dcu: Convert to platform remove callback returning void
+  drm/hisilicon: Convert to platform remove callback returning void
+  drm/imx/dcss: Convert to platform remove callback returning void
+  drm/imx/ipuv3: Convert to platform remove callback returning void
+  drm/ingenic: Convert to platform remove callback returning void
+  drm/kmb: Convert to platform remove callback returning void
+  drm/lima: Convert to platform remove callback returning void
+  drm/logicvc: Convert to platform remove callback returning void
+  drm/mcde: Convert to platform remove callback returning void
+  drm/mediatek: Convert to platform remove callback returning void
+  drm/mediatek: Convert to platform remove callback returning void
+  drm/meson: Convert to platform remove callback returning void
+  drm/msm: Convert to platform remove callback returning void
+  drm/mxsfb: Convert to platform remove callback returning void
+  drm/nouveau: Convert to platform remove callback returning void
+  drm/omap: Convert to platform remove callback returning void
+  drm/panel: Convert to platform remove callback returning void
+  drm/panfrost: Convert to platform remove callback returning void
+  drm/rcar-du: Convert to platform remove callback returning void
+  drm/rockchip: Convert to platform remove callback returning void
+  drm/shmobile: Convert to platform remove callback returning void
+  drm/sprd: Convert to platform remove callback returning void
+  drm/sti: Convert to platform remove callback returning void
+  drm/stm: Convert to platform remove callback returning void
+  drm/sun4i: Convert to platform remove callback returning void
+  drm/tegra: Convert to platform remove callback returning void
+  drm/tests: helpers: Convert to platform remove callback returning void
+  drm/tidss: Convert to platform remove callback returning void
+  drm/tilcdc: Convert to platform remove callback returning void
+  drm/tiny: Convert to platform remove callback returning void
+  drm/tiny: Convert to platform remove callback returning void
+  drm/tve200: Convert to platform remove callback returning void
+  drm/v3d: Convert to platform remove callback returning void
+  drm/vc4: Convert to platform remove callback returning void
+  drm/xlnx/zynqmp_dpsub: Convert to platform remove callback returning
+    void
 
-This requires me to update the GPUVA space in the ioctl() rather than in 
-the async stage, because otherwise I would need to wait for previous 
-jobs to finish before being able to submit subsequent jobs to the job 
-queue, since I need an up to date view of the GPUVA space in order to 
-calculate the sequence of operations to fulfill a mapping request.
+ drivers/gpu/drm/arm/display/komeda/komeda_drv.c     | 5 ++---
+ drivers/gpu/drm/arm/hdlcd_drv.c                     | 5 ++---
+ drivers/gpu/drm/arm/malidp_drv.c                    | 5 ++---
+ drivers/gpu/drm/armada/armada_crtc.c                | 5 ++---
+ drivers/gpu/drm/armada/armada_drv.c                 | 5 ++---
+ drivers/gpu/drm/aspeed/aspeed_gfx_drv.c             | 6 ++----
+ drivers/gpu/drm/atmel-hlcdc/atmel_hlcdc_dc.c        | 6 ++----
+ drivers/gpu/drm/bridge/cadence/cdns-dsi-core.c      | 6 ++----
+ drivers/gpu/drm/bridge/display-connector.c          | 6 ++----
+ drivers/gpu/drm/bridge/fsl-ldb.c                    | 6 ++----
+ drivers/gpu/drm/bridge/imx/imx8qm-ldb-drv.c         | 6 ++----
+ drivers/gpu/drm/bridge/imx/imx8qxp-ldb-drv.c        | 6 ++----
+ drivers/gpu/drm/bridge/imx/imx8qxp-pixel-combiner.c | 6 ++----
+ drivers/gpu/drm/bridge/imx/imx8qxp-pixel-link.c     | 6 ++----
+ drivers/gpu/drm/bridge/imx/imx8qxp-pxl2dpi.c        | 6 ++----
+ drivers/gpu/drm/bridge/lvds-codec.c                 | 6 ++----
+ drivers/gpu/drm/bridge/nwl-dsi.c                    | 5 ++---
+ drivers/gpu/drm/bridge/simple-bridge.c              | 6 ++----
+ drivers/gpu/drm/bridge/synopsys/dw-hdmi-ahb-audio.c | 6 ++----
+ drivers/gpu/drm/bridge/synopsys/dw-hdmi-cec.c       | 6 ++----
+ drivers/gpu/drm/bridge/synopsys/dw-hdmi-gp-audio.c  | 6 ++----
+ drivers/gpu/drm/bridge/synopsys/dw-hdmi-i2s-audio.c | 6 ++----
+ drivers/gpu/drm/bridge/thc63lvd1024.c               | 6 ++----
+ drivers/gpu/drm/bridge/ti-tfp410.c                  | 6 ++----
+ drivers/gpu/drm/etnaviv/etnaviv_drv.c               | 6 ++----
+ drivers/gpu/drm/etnaviv/etnaviv_gpu.c               | 5 ++---
+ drivers/gpu/drm/exynos/exynos5433_drm_decon.c       | 6 ++----
+ drivers/gpu/drm/exynos/exynos7_drm_decon.c          | 6 ++----
+ drivers/gpu/drm/exynos/exynos_dp.c                  | 6 ++----
+ drivers/gpu/drm/exynos/exynos_drm_drv.c             | 5 ++---
+ drivers/gpu/drm/exynos/exynos_drm_dsi.c             | 6 ++----
+ drivers/gpu/drm/exynos/exynos_drm_fimc.c            | 6 ++----
+ drivers/gpu/drm/exynos/exynos_drm_fimd.c            | 6 ++----
+ drivers/gpu/drm/exynos/exynos_drm_g2d.c             | 6 ++----
+ drivers/gpu/drm/exynos/exynos_drm_gsc.c             | 6 ++----
+ drivers/gpu/drm/exynos/exynos_drm_mic.c             | 6 ++----
+ drivers/gpu/drm/exynos/exynos_drm_rotator.c         | 6 ++----
+ drivers/gpu/drm/exynos/exynos_drm_scaler.c          | 6 ++----
+ drivers/gpu/drm/exynos/exynos_hdmi.c                | 6 ++----
+ drivers/gpu/drm/exynos/exynos_mixer.c               | 6 ++----
+ drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_drv.c           | 6 ++----
+ drivers/gpu/drm/hisilicon/kirin/dw_drm_dsi.c        | 6 ++----
+ drivers/gpu/drm/hisilicon/kirin/kirin_drm_drv.c     | 5 ++---
+ drivers/gpu/drm/imx/dcss/dcss-drv.c                 | 6 ++----
+ drivers/gpu/drm/imx/ipuv3/dw_hdmi-imx.c             | 6 ++----
+ drivers/gpu/drm/imx/ipuv3/imx-drm-core.c            | 5 ++---
+ drivers/gpu/drm/imx/ipuv3/imx-ldb.c                 | 5 ++---
+ drivers/gpu/drm/imx/ipuv3/imx-tve.c                 | 5 ++---
+ drivers/gpu/drm/imx/ipuv3/ipuv3-crtc.c              | 5 ++---
+ drivers/gpu/drm/imx/ipuv3/parallel-display.c        | 6 ++----
+ drivers/gpu/drm/ingenic/ingenic-drm-drv.c           | 6 ++----
+ drivers/gpu/drm/ingenic/ingenic-ipu.c               | 5 ++---
+ drivers/gpu/drm/kmb/kmb_drv.c                       | 5 ++---
+ drivers/gpu/drm/lima/lima_drv.c                     | 5 ++---
+ drivers/gpu/drm/logicvc/logicvc_drm.c               | 6 ++----
+ drivers/gpu/drm/mcde/mcde_drv.c                     | 6 ++----
+ drivers/gpu/drm/mcde/mcde_dsi.c                     | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_cec.c                  | 5 ++---
+ drivers/gpu/drm/mediatek/mtk_disp_aal.c             | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_disp_ccorr.c           | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_disp_color.c           | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_disp_gamma.c           | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_disp_merge.c           | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_disp_ovl.c             | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_disp_rdma.c            | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_dp.c                   | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_dpi.c                  | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c              | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_dsi.c                  | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_hdmi.c                 | 5 ++---
+ drivers/gpu/drm/mediatek/mtk_hdmi_ddc.c             | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_mdp_rdma.c             | 5 ++---
+ drivers/gpu/drm/meson/meson_drv.c                   | 6 ++----
+ drivers/gpu/drm/meson/meson_dw_hdmi.c               | 6 ++----
+ drivers/gpu/drm/msm/adreno/adreno_device.c          | 5 ++---
+ drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c             | 6 ++----
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c            | 6 ++----
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c            | 5 ++---
+ drivers/gpu/drm/msm/dp/dp_display.c                 | 6 ++----
+ drivers/gpu/drm/msm/dsi/dsi.c                       | 6 ++----
+ drivers/gpu/drm/msm/hdmi/hdmi.c                     | 6 ++----
+ drivers/gpu/drm/msm/hdmi/hdmi_phy.c                 | 6 ++----
+ drivers/gpu/drm/msm/msm_drv.c                       | 6 ++----
+ drivers/gpu/drm/msm/msm_mdss.c                      | 6 ++----
+ drivers/gpu/drm/mxsfb/lcdif_drv.c                   | 6 ++----
+ drivers/gpu/drm/mxsfb/mxsfb_drv.c                   | 6 ++----
+ drivers/gpu/drm/nouveau/nouveau_platform.c          | 5 ++---
+ drivers/gpu/drm/omapdrm/dss/dispc.c                 | 5 ++---
+ drivers/gpu/drm/omapdrm/dss/dsi.c                   | 6 ++----
+ drivers/gpu/drm/omapdrm/dss/dss.c                   | 6 ++----
+ drivers/gpu/drm/omapdrm/dss/hdmi4.c                 | 5 ++---
+ drivers/gpu/drm/omapdrm/dss/hdmi5.c                 | 5 ++---
+ drivers/gpu/drm/omapdrm/dss/venc.c                  | 5 ++---
+ drivers/gpu/drm/omapdrm/omap_dmm_tiler.c            | 9 +++------
+ drivers/gpu/drm/omapdrm/omap_drv.c                  | 6 ++----
+ drivers/gpu/drm/panel/panel-lvds.c                  | 6 ++----
+ drivers/gpu/drm/panel/panel-seiko-43wvf1g.c         | 6 ++----
+ drivers/gpu/drm/panel/panel-sharp-ls037v7dw01.c     | 6 ++----
+ drivers/gpu/drm/panel/panel-simple.c                | 6 ++----
+ drivers/gpu/drm/panfrost/panfrost_drv.c             | 5 ++---
+ drivers/gpu/drm/rcar-du/rcar_cmm.c                  | 6 ++----
+ drivers/gpu/drm/rcar-du/rcar_du_drv.c               | 6 ++----
+ drivers/gpu/drm/rcar-du/rcar_dw_hdmi.c              | 6 ++----
+ drivers/gpu/drm/rcar-du/rcar_lvds.c                 | 6 ++----
+ drivers/gpu/drm/rcar-du/rcar_mipi_dsi.c             | 6 ++----
+ drivers/gpu/drm/rcar-du/rzg2l_mipi_dsi.c            | 6 ++----
+ drivers/gpu/drm/rockchip/analogix_dp-rockchip.c     | 6 ++----
+ drivers/gpu/drm/rockchip/cdn-dp-core.c              | 6 ++----
+ drivers/gpu/drm/rockchip/dw-mipi-dsi-rockchip.c     | 6 ++----
+ drivers/gpu/drm/rockchip/dw_hdmi-rockchip.c         | 6 ++----
+ drivers/gpu/drm/rockchip/inno_hdmi.c                | 6 ++----
+ drivers/gpu/drm/rockchip/rk3066_hdmi.c              | 6 ++----
+ drivers/gpu/drm/rockchip/rockchip_drm_drv.c         | 6 ++----
+ drivers/gpu/drm/rockchip/rockchip_lvds.c            | 6 ++----
+ drivers/gpu/drm/rockchip/rockchip_vop2_reg.c        | 6 ++----
+ drivers/gpu/drm/rockchip/rockchip_vop_reg.c         | 6 ++----
+ drivers/gpu/drm/shmobile/shmob_drm_drv.c            | 6 ++----
+ drivers/gpu/drm/sprd/sprd_dpu.c                     | 6 ++----
+ drivers/gpu/drm/sprd/sprd_drm.c                     | 5 ++---
+ drivers/gpu/drm/sprd/sprd_dsi.c                     | 6 ++----
+ drivers/gpu/drm/sti/sti_compositor.c                | 5 ++---
+ drivers/gpu/drm/sti/sti_drv.c                       | 6 ++----
+ drivers/gpu/drm/sti/sti_dvo.c                       | 5 ++---
+ drivers/gpu/drm/sti/sti_hda.c                       | 5 ++---
+ drivers/gpu/drm/sti/sti_hdmi.c                      | 6 ++----
+ drivers/gpu/drm/sti/sti_hqvdp.c                     | 5 ++---
+ drivers/gpu/drm/sti/sti_tvout.c                     | 5 ++---
+ drivers/gpu/drm/stm/drv.c                           | 6 ++----
+ drivers/gpu/drm/stm/dw_mipi_dsi-stm.c               | 6 ++----
+ drivers/gpu/drm/sun4i/sun4i_backend.c               | 6 ++----
+ drivers/gpu/drm/sun4i/sun4i_drv.c                   | 6 ++----
+ drivers/gpu/drm/sun4i/sun4i_frontend.c              | 6 ++----
+ drivers/gpu/drm/sun4i/sun4i_hdmi_enc.c              | 6 ++----
+ drivers/gpu/drm/sun4i/sun4i_tcon.c                  | 6 ++----
+ drivers/gpu/drm/sun4i/sun4i_tv.c                    | 6 ++----
+ drivers/gpu/drm/sun4i/sun6i_drc.c                   | 6 ++----
+ drivers/gpu/drm/sun4i/sun6i_mipi_dsi.c              | 6 ++----
+ drivers/gpu/drm/sun4i/sun8i_dw_hdmi.c               | 6 ++----
+ drivers/gpu/drm/sun4i/sun8i_mixer.c                 | 6 ++----
+ drivers/gpu/drm/sun4i/sun8i_tcon_top.c              | 6 ++----
+ drivers/gpu/drm/tegra/dpaux.c                       | 6 ++----
+ drivers/gpu/drm/tests/drm_kunit_helpers.c           | 5 ++---
+ drivers/gpu/drm/tidss/tidss_drv.c                   | 6 ++----
+ drivers/gpu/drm/tilcdc/tilcdc_panel.c               | 6 ++----
+ drivers/gpu/drm/tiny/arcpgu.c                       | 6 ++----
+ drivers/gpu/drm/tiny/ofdrm.c                        | 6 ++----
+ drivers/gpu/drm/tiny/simpledrm.c                    | 6 ++----
+ drivers/gpu/drm/tve200/tve200_drv.c                 | 6 ++----
+ drivers/gpu/drm/v3d/v3d_drv.c                       | 6 ++----
+ drivers/gpu/drm/vc4/vc4_crtc.c                      | 5 ++---
+ drivers/gpu/drm/vc4/vc4_dpi.c                       | 5 ++---
+ drivers/gpu/drm/vc4/vc4_drv.c                       | 6 ++----
+ drivers/gpu/drm/vc4/vc4_dsi.c                       | 6 ++----
+ drivers/gpu/drm/vc4/vc4_hdmi.c                      | 5 ++---
+ drivers/gpu/drm/vc4/vc4_hvs.c                       | 5 ++---
+ drivers/gpu/drm/vc4/vc4_txp.c                       | 5 ++---
+ drivers/gpu/drm/vc4/vc4_v3d.c                       | 5 ++---
+ drivers/gpu/drm/vc4/vc4_vec.c                       | 5 ++---
+ drivers/gpu/drm/xlnx/zynqmp_dpsub.c                 | 6 ++----
+ 159 files changed, 319 insertions(+), 597 deletions(-)
 
-As a consequence all jobs need to be processed in the order they were 
-submitted, including synchronous jobs.
 
-@Matt: I think you will have the same limitation with synchronous jobs 
-as your implementation in XE should be similar?
-
-In order to address it I want to switch to using callbacks rather than 
-'pre-allocated' drm_gpuva_ops and update the GPUVA space within the 
-asynchronous stage. This would allow me to 'fit' synchronous jobs 
-between jobs waiting in the async job queue. However, to do this I have 
-to re-work how the page table handling in Nouveau is implemented, since 
-this would require me to be able to manage the page tables without 
-knowing the exact sequence of operations to fulfill a mapping request.
-
-- Danilo
-
-> 
->>    drm/nouveau: new VM_BIND uapi interfaces
->>    drm/nouveau: get vmm via nouveau_cli_vmm()
->>    drm/nouveau: bo: initialize GEM GPU VA interface
->>    drm/nouveau: move usercopy helpers to nouveau_drv.h
->>    drm/nouveau: fence: separate fence alloc and emit
->>    drm/nouveau: fence: fail to emit when fence context is killed
->>    drm/nouveau: chan: provide nouveau_channel_kill()
->>    drm/nouveau: nvkm/vmm: implement raw ops to manage uvmm
->>    drm/nouveau: implement new VM_BIND uAPI
->>    drm/nouveau: debugfs: implement DRM GPU VA debugfs
->>
->>   Documentation/gpu/driver-uapi.rst             |   11 +
->>   Documentation/gpu/drm-mm.rst                  |   54 +
->>   drivers/gpu/drm/Kconfig                       |    6 +
->>   drivers/gpu/drm/Makefile                      |    3 +
->>   drivers/gpu/drm/drm_debugfs.c                 |   41 +
->>   drivers/gpu/drm/drm_exec.c                    |  278 +++
->>   drivers/gpu/drm/drm_gem.c                     |    3 +
->>   drivers/gpu/drm/drm_gpuva_mgr.c               | 1971 ++++++++++++++++
->>   drivers/gpu/drm/nouveau/Kbuild                |    3 +
->>   drivers/gpu/drm/nouveau/Kconfig               |    2 +
->>   drivers/gpu/drm/nouveau/dispnv04/crtc.c       |    9 +-
->>   drivers/gpu/drm/nouveau/include/nvif/if000c.h |   26 +-
->>   drivers/gpu/drm/nouveau/include/nvif/vmm.h    |   19 +-
->>   .../gpu/drm/nouveau/include/nvkm/subdev/mmu.h |   20 +-
->>   drivers/gpu/drm/nouveau/nouveau_abi16.c       |   24 +
->>   drivers/gpu/drm/nouveau/nouveau_abi16.h       |    1 +
->>   drivers/gpu/drm/nouveau/nouveau_bo.c          |  204 +-
->>   drivers/gpu/drm/nouveau/nouveau_bo.h          |    2 +-
->>   drivers/gpu/drm/nouveau/nouveau_chan.c        |   22 +-
->>   drivers/gpu/drm/nouveau/nouveau_chan.h        |    1 +
->>   drivers/gpu/drm/nouveau/nouveau_debugfs.c     |   39 +
->>   drivers/gpu/drm/nouveau/nouveau_dmem.c        |    9 +-
->>   drivers/gpu/drm/nouveau/nouveau_drm.c         |   27 +-
->>   drivers/gpu/drm/nouveau/nouveau_drv.h         |   94 +-
->>   drivers/gpu/drm/nouveau/nouveau_exec.c        |  418 ++++
->>   drivers/gpu/drm/nouveau/nouveau_exec.h        |   54 +
->>   drivers/gpu/drm/nouveau/nouveau_fence.c       |   23 +-
->>   drivers/gpu/drm/nouveau/nouveau_fence.h       |    5 +-
->>   drivers/gpu/drm/nouveau/nouveau_gem.c         |   62 +-
->>   drivers/gpu/drm/nouveau/nouveau_mem.h         |    5 +
->>   drivers/gpu/drm/nouveau/nouveau_prime.c       |    2 +-
->>   drivers/gpu/drm/nouveau/nouveau_sched.c       |  461 ++++
->>   drivers/gpu/drm/nouveau/nouveau_sched.h       |  123 +
->>   drivers/gpu/drm/nouveau/nouveau_svm.c         |    2 +-
->>   drivers/gpu/drm/nouveau/nouveau_uvmm.c        | 1979 +++++++++++++++++
->>   drivers/gpu/drm/nouveau/nouveau_uvmm.h        |  107 +
->>   drivers/gpu/drm/nouveau/nouveau_vmm.c         |    4 +-
->>   drivers/gpu/drm/nouveau/nvif/vmm.c            |  100 +-
->>   .../gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c    |  213 +-
->>   drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c |  197 +-
->>   drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h |   25 +
->>   .../drm/nouveau/nvkm/subdev/mmu/vmmgf100.c    |   16 +-
->>   .../drm/nouveau/nvkm/subdev/mmu/vmmgp100.c    |   16 +-
->>   .../gpu/drm/nouveau/nvkm/subdev/mmu/vmmnv50.c |   27 +-
->>   include/drm/drm_debugfs.h                     |   25 +
->>   include/drm/drm_drv.h                         |    6 +
->>   include/drm/drm_exec.h                        |  119 +
->>   include/drm/drm_gem.h                         |   52 +
->>   include/drm/drm_gpuva_mgr.h                   |  682 ++++++
->>   include/linux/maple_tree.h                    |    7 +-
->>   include/uapi/drm/nouveau_drm.h                |  209 ++
->>   51 files changed, 7566 insertions(+), 242 deletions(-)
->>   create mode 100644 drivers/gpu/drm/drm_exec.c
->>   create mode 100644 drivers/gpu/drm/drm_gpuva_mgr.c
->>   create mode 100644 drivers/gpu/drm/nouveau/nouveau_exec.c
->>   create mode 100644 drivers/gpu/drm/nouveau/nouveau_exec.h
->>   create mode 100644 drivers/gpu/drm/nouveau/nouveau_sched.c
->>   create mode 100644 drivers/gpu/drm/nouveau/nouveau_sched.h
->>   create mode 100644 drivers/gpu/drm/nouveau/nouveau_uvmm.c
->>   create mode 100644 drivers/gpu/drm/nouveau/nouveau_uvmm.h
->>   create mode 100644 include/drm/drm_exec.h
->>   create mode 100644 include/drm/drm_gpuva_mgr.h
->>
->>
->> base-commit: 2222dcb0775d36de28992f56455ab3967b30d380
-> 
+base-commit: 457391b0380335d5e9a5babdec90ac53928b23b4
+-- 
+2.39.2
 
