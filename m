@@ -2,35 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CBEB6F7BC3
-	for <lists+nouveau@lfdr.de>; Fri,  5 May 2023 06:11:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6584D6F99E4
+	for <lists+nouveau@lfdr.de>; Sun,  7 May 2023 18:27:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8242110E55B;
-	Fri,  5 May 2023 04:11:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BFE1510E294;
+	Sun,  7 May 2023 16:27:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail1.merlins.org (magic.merlins.org [209.81.13.136])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DBDC610E55B
- for <nouveau@lists.freedesktop.org>; Fri,  5 May 2023 04:11:12 +0000 (UTC)
-Received: from merlin by mail1.merlins.org with local (Exim 4.94.2 #2)
- id 1pumml-0004uO-4s by authid <merlin>; Thu, 04 May 2023 21:11:11 -0700
-Date: Thu, 4 May 2023 21:11:11 -0700
-From: Marc MERLIN <marc_nouveau@merlins.org>
-To: Steven Kucharzyk <stvr_8888@comcast.net>
-Message-ID: <20230505041111.GS13387@merlins.org>
-References: <20230504233216.GJ1191678@merlins.org>
- <20230504224321.2b8b2f54@n2pa>
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
+ [IPv6:2001:67c:670:201:290:27ff:fe1d:cc33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6EC4910E236
+ for <nouveau@lists.freedesktop.org>; Sun,  7 May 2023 16:26:51 +0000 (UTC)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+ by metis.ext.pengutronix.de with esmtps
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1pvhDa-000283-8N; Sun, 07 May 2023 18:26:38 +0200
+Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
+ by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1pvhDZ-001nDq-4k; Sun, 07 May 2023 18:26:37 +0200
+Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1pvhDY-002Aho-7w; Sun, 07 May 2023 18:26:36 +0200
+From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>
+Date: Sun,  7 May 2023 18:25:56 +0200
+Message-Id: <20230507162616.1368908-34-u.kleine-koenig@pengutronix.de>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230507162616.1368908-1-u.kleine-koenig@pengutronix.de>
+References: <20230507162616.1368908-1-u.kleine-koenig@pengutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230504224321.2b8b2f54@n2pa>
-X-Sysadmin: BOFH
-X-URL: http://marc.merlins.org/
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-SA-Exim-Connect-IP: <locally generated>
-X-SA-Exim-Mail-From: marc@merlins.org
-Subject: Re: [Nouveau] 6.2 still cannot get hdmi display out on Thinkpad P73
- Quadro RTX 4000 Mobile/TU104
+Content-Type: text/plain; charset=UTF-8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1639;
+ i=u.kleine-koenig@pengutronix.de; h=from:subject;
+ bh=Aas34mM8r2UNncCy6pRgZ1pPDP6Z2C/pivtVsXVacDI=;
+ b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBkV9EKYb5Y7UphJvliTa1p2Qa+Peo7Zfj3zhHQV
+ xoLgcI3xSGJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCZFfRCgAKCRCPgPtYfRL+
+ TsOxB/9IbEHeot3Lcg1cjhsCFT3YoEpPBHJ3ftcqMl+xceLj65HX0/cvmFsefq244GcIROmaY5k
+ O52hc2NfHqQfh6ywfG3O5lhF/+3N02k4VzXtbgxYCAWHTIxt3h6700EofIJJr+zk5W+MDlhmaZn
+ QjwMRsGdNv3v0CV6oxRwedn3tujMRB4v/A7zW42jroRTphl5OEfvPDplZ7I9Pxmt5x1ErvU7GTD
+ ObiGjPmRDjVmdb28/wIn55eq/mZ2++5ZO6HKmPjzxb5glLr7i9pEKr7erR+yqZypu1XtBeS6oLl
+ NdE8TRY98MBl49hnNgu+bLm7Rm83A87mFiPdgCUlHH9HyUDm
+X-Developer-Key: i=u.kleine-koenig@pengutronix.de; a=openpgp;
+ fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ukl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: nouveau@lists.freedesktop.org
+Subject: [Nouveau] [PATCH 33/53] drm/nouveau: Convert to platform remove
+ callback returning void
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -42,67 +67,51 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, kernel@pengutronix.de,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, May 04, 2023 at 10:43:21PM -0500, Steven Kucharzyk wrote:
-> On Thu, 4 May 2023 16:32:16 -0700
-> Marc MERLIN <marc_nouveau@merlins.org> wrote:
-> 
-> > Hi again, I just saw a bunch of commits from all of you (thanks), but
-> > still can't find info if my thinkpad P73 with Quadro RTX 4000
-> > Mobile/TU104 is meant to be supported, or not, and if so, how I can
-> > best report issues beyond what I've already sent.
-> > 
-> > The intel graphics works great thankfully, but I do need to use HDMI
-> > out from time to time, which is only wired to the nvidia chip
-> > unfortunately.
-> > 
-> > Guidance would be very appreciated.
-> 
-> I'm going to take a leap here ...
-> 
-> any UEFI ? TSM ?
+The .remove() callback for a platform driver returns an int which makes
+many driver authors wrongly assume it's possible to do error handling by
+returning an error code. However the value returned is (mostly) ignored
+and this typically results in resource leaks. To improve here there is a
+quest to make the remove callback return void. In the first step of this
+quest all drivers are converted to .remove_new() which already returns
+void.
+
+Trivially convert this driver from always returning zero in the remove
+callback to the void returning variant.
+
+Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
+---
+ drivers/gpu/drm/nouveau/nouveau_platform.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_platform.c b/drivers/gpu/drm/nouveau/nouveau_platform.c
+index 23cd43a7fd19..bf2dc7567ea4 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_platform.c
++++ b/drivers/gpu/drm/nouveau/nouveau_platform.c
+@@ -43,11 +43,10 @@ static int nouveau_platform_probe(struct platform_device *pdev)
+ 	return 0;
+ }
  
-Yes, I boot with UEFI.  Not sure what TSM means
-
-> In the spec's that I looked at Lenovo's ThinkPad P73 FHD / 4K UHD
-> personally I found it interesting that the "up to" Nvidia Quadro RTX
-> 5000 was listed as "Discrete" vs. the UHD Graphics 620 (24 EUs) as
-> "Integrated".  Are you 4K?
-
-4K correct. As far as I understand, I have integrated intel graphics,
-which is what I use every day, and that nvidia chip I never use and have
-no real need for, except that external display ports are only connected
-to that chip, so I have to use it in that case.
-I had a P70 with the same config and was able to get nouveau working on
-it and HDMI out, but P73 uses different chips and never fully got it
-working (well, the monitor turns on and I see a mouse cursor, so
-something works)
-https://docs.google.com/document/d/1GnyBE1xc4qx3EF-IcUOwr7d9D8Npzy63Pwj-joOw86o/view#heading=h.tmm3ssfqplva
-explains how I got it to work on P70
-
-> HDMI ... I have had issues with Laps + HDMI when plugging the cable
-> into an already turn-on monitor. I have taken DVI-I > DP cables just to
-> see ... Next I didn't see any reference to Nvidia drivers is that your
-> option ? (I know, I live with bane of a "tainted kernel" because of
-> them and flop back and forth to see how Nouveau is progressing)
+-static int nouveau_platform_remove(struct platform_device *pdev)
++static void nouveau_platform_remove(struct platform_device *pdev)
+ {
+ 	struct drm_device *dev = platform_get_drvdata(pdev);
+ 	nouveau_drm_device_remove(dev);
+-	return 0;
+ }
  
-I do not have plans to use the nvidia binary drivers and do want my
-nvidia chip to be turned off all the time except when I need video out
-(for battery reasons)
-
-If you wanted context/more info:
-https://www.spinics.net/lists/nouveau/msg11393.html
-https://www.spinics.net/lists/nouveau/msg11394.html
-
-and older from 2020:
-https://www.spinics.net/lists/nouveau/msg05361.html
-
-Thanks,
-Marc
+ #if IS_ENABLED(CONFIG_OF)
+@@ -93,5 +92,5 @@ struct platform_driver nouveau_platform_driver = {
+ 		.of_match_table = of_match_ptr(nouveau_platform_match),
+ 	},
+ 	.probe = nouveau_platform_probe,
+-	.remove = nouveau_platform_remove,
++	.remove_new = nouveau_platform_remove,
+ };
 -- 
-"A mouse is a device used to point at the xterm you want to type in" - A.S.R.
- 
-Home page: http://marc.merlins.org/  
+2.39.2
+
