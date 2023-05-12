@@ -1,49 +1,40 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 091DA7373D5
-	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:21:04 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id DF4BE7373B1
+	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:20:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7DFA110E34F;
-	Tue, 20 Jun 2023 18:20:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A972910E32C;
+	Tue, 20 Jun 2023 18:20:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
- [IPv6:2001:67c:670:201:290:27ff:fe1d:cc33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 05E3510E13D
- for <nouveau@lists.freedesktop.org>; Mon,  8 May 2023 07:50:49 +0000 (UTC)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
- by metis.ext.pengutronix.de with esmtps
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <ukl@pengutronix.de>)
- id 1pvvdN-000352-R3; Mon, 08 May 2023 09:50:13 +0200
-Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
- by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
- (envelope-from <ukl@pengutronix.de>)
- id 1pvvdK-001wDu-Ru; Mon, 08 May 2023 09:50:10 +0200
-Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
- (envelope-from <ukl@pengutronix.de>)
- id 1pvvdJ-002Kte-5G; Mon, 08 May 2023 09:50:09 +0200
-Date: Mon, 8 May 2023 09:50:09 +0200
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20230508075009.4l4ghdrwopfhmcao@pengutronix.de>
-References: <20230507162616.1368908-1-u.kleine-koenig@pengutronix.de>
- <935faac5-280b-b2e0-3fdb-d0424990e43a@suse.de>
+X-Greylist: delayed 326 seconds by postgrey-1.36 at gabe;
+ Fri, 12 May 2023 10:38:55 UTC
+Received: from exchange.fintech.ru (exchange.fintech.ru [195.54.195.159])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2904710E67B;
+ Fri, 12 May 2023 10:38:55 +0000 (UTC)
+Received: from Ex16-01.fintech.ru (10.0.10.18) by exchange.fintech.ru
+ (195.54.195.169) with Microsoft SMTP Server (TLS) id 14.3.498.0; Fri, 12 May
+ 2023 13:33:22 +0300
+Received: from KANASHIN1.fintech.ru (10.0.253.125) by Ex16-01.fintech.ru
+ (10.0.10.18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2242.4; Fri, 12 May
+ 2023 13:33:22 +0300
+From: Natalia Petrova <n.petrova@fintech.ru>
+To: Ben Skeggs <bskeggs@redhat.com>
+Date: Fri, 12 May 2023 13:33:20 +0300
+Message-ID: <20230512103320.82234-1-n.petrova@fintech.ru>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3pf3cmic5n6cdkye"
-Content-Disposition: inline
-In-Reply-To: <935faac5-280b-b2e0-3fdb-d0424990e43a@suse.de>
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ukl@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: nouveau@lists.freedesktop.org
-X-Mailman-Approved-At: Tue, 20 Jun 2023 18:20:12 +0000
-Subject: Re: [Nouveau] [PATCH 00/53] drm: Convert to platform remove
- callback returning void
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.0.253.125]
+X-ClientProxiedBy: Ex16-02.fintech.ru (10.0.10.19) To Ex16-01.fintech.ru
+ (10.0.10.18)
+X-Mailman-Approved-At: Tue, 20 Jun 2023 18:20:13 +0000
+Subject: [Nouveau] [PATCH] nouveau_connector: add nv_encoder pointer check
+ for NULL
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,141 +46,39 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
- Xinliang Liu <xinliang.liu@linaro.org>,
- Linus Walleij <linus.walleij@linaro.org>, dri-devel@lists.freedesktop.org,
- Russell King <linux@armlinux.org.uk>, Alim Akhtar <alim.akhtar@samsung.com>,
- Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Steven Price <steven.price@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>,
- Jerome Brunet <jbrunet@baylibre.com>, linux-samsung-soc@vger.kernel.org,
- Robert Foss <rfoss@kernel.org>, Samuel Holland <samuel@sholland.org>,
- Kevin Hilman <khilman@baylibre.com>,
- =?utf-8?B?TWHDrXJh?= Canal <mcanal@igalia.com>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Kuogee Hsieh <quic_khsieh@quicinc.com>,
- Akhil P Oommen <quic_akhilpo@quicinc.com>, NXP Linux Team <linux-imx@nxp.com>,
- Miaoqian Lin <linmq006@gmail.com>, linux-sunxi@lists.linux.dev,
- Rahul T R <r-ravikumar@ti.com>,
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
- Jani Nikula <jani.nikula@intel.com>, Sascha Hauer <s.hauer@pengutronix.de>,
- etnaviv@lists.freedesktop.org, Stephen Boyd <swboyd@chromium.org>,
- Inki Dae <inki.dae@samsung.com>, Sean Paul <sean@poorly.run>,
- Johan Hovold <johan+linaro@kernel.org>, Hyun Kwon <hyun.kwon@xilinx.com>,
- Andrew Jeffery <andrew@aj.id.au>, Jingoo Han <jingoohan1@gmail.com>,
- Seung-Woo Kim <sw0312.kim@samsung.com>,
- Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>, kernel@pengutronix.de,
- Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org,
- Claudiu Beznea <claudiu.beznea@microchip.com>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>,
- linux-aspeed@lists.ozlabs.org,
- Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
- Thierry Reding <thierry.reding@gmail.com>, John Stultz <jstultz@google.com>,
- Mihail Atanassov <mihail.atanassov@arm.com>, Liang He <windhl@126.com>,
- Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
- lima@lists.freedesktop.org, Chunyan Zhang <zhang.lyra@gmail.com>,
- Alexey Brodkin <abrodkin@synopsys.com>, Minghao Chi <chi.minghao@zte.com.cn>,
- linux-rockchip@lists.infradead.org,
- "James \(Qian\) Wang" <james.qian.wang@arm.com>,
- Ben Skeggs <bskeggs@redhat.com>, Russell King <linux+etnaviv@armlinux.org.uk>,
- Alain Volmat <alain.volmat@foss.st.com>, linux-mips@vger.kernel.org,
- Liu Ying <victor.liu@nxp.com>, linux-arm-msm@vger.kernel.org,
- Maxime Ripard <mripard@kernel.org>, linux-amlogic@lists.infradead.org,
- linux-arm-kernel@lists.infradead.org,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Boris Brezillon <bbrezillon@kernel.org>,
- Douglas Anderson <dianders@chromium.org>,
- Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
- Kyungmin Park <kyungmin.park@samsung.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Brian Starkey <brian.starkey@arm.com>,
- Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
- Yuan Can <yuancan@huawei.com>, Stefan Agner <stefan@agner.ch>,
- Michal Simek <michal.simek@xilinx.com>, linux-tegra@vger.kernel.org,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Andrzej Hajda <andrzej.hajda@intel.com>,
- Joel Fernandes <joel@joelfernandes.org>, Sam Ravnborg <sam@ravnborg.org>,
- Rob Herring <robh@kernel.org>, Xinwei Kong <kong.kongxinwei@hisilicon.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Mali DP Maintainers <malidp@foss.arm.com>, Joel Stanley <joel@jms.id.au>,
- nouveau@lists.freedesktop.org, Orson Zhai <orsonzhai@gmail.com>,
- Chun-Kuang Hu <chunkuang.hu@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- Guo Zhengkui <guozhengkui@vivo.com>,
- Konrad Dybcio <konrad.dybcio@somainline.org>,
- Alison Wang <alison.wang@nxp.com>, Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Mark Brown <broonie@kernel.org>, Maxime Ripard <maxime@cerno.tech>,
- Baolin Wang <baolin.wang@linux.alibaba.com>,
- Liu Shixin <liushixin2@huawei.com>, Tomi Valkeinen <tomba@kernel.org>,
- Deepak R Varma <drv@mailo.com>,
- Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
- Ricardo Ribalda <ribalda@chromium.org>, Tian Tao <tiantao6@hisilicon.com>,
- Shawn Guo <shawnguo@kernel.org>, Yannick Fertre <yannick.fertre@foss.st.com>,
- linux-stm32@st-md-mailman.stormreply.com, Emma Anholt <emma@anholt.net>,
- Liviu Dudau <liviu.dudau@arm.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Sandy Huang <hjc@rock-chips.com>, Paul Cercueil <paul@crapouillou.net>,
- Marek Vasut <marex@denx.de>, linux-renesas-soc@vger.kernel.org,
- Yongqin Liu <yongqin.liu@linaro.org>, Jayshri Pawar <jpawar@cadence.com>,
- Jonas Karlman <jonas@kwiboo.se>, Rob Clark <robdclark@gmail.com>,
- Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
- Philippe Cornu <philippe.cornu@foss.st.com>, Daniel Vetter <daniel@ffwll.ch>,
- Melissa Wen <mwen@igalia.com>, linux-mediatek@lists.infradead.org,
- Fabio Estevam <festevam@gmail.com>,
- Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Nicolas Ferre <nicolas.ferre@microchip.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
- Qiang Yu <yuq825@gmail.com>, Philipp Zabel <p.zabel@pengutronix.de>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Jyri Sarha <jyri.sarha@iki.fi>,
- Lucas Stach <l.stach@pengutronix.de>
+Cc: lvc-project@linuxtesting.org, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org, Natalia Petrova <n.petrova@fintech.ru>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Pointer nv_encoder could be dereferenced at nouveau_connector.c
+in case it's equal to NULL by jumping to goto label.
+This patch adds a NULL-check to avoid it.
 
---3pf3cmic5n6cdkye
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Found by Linux Verification Center (linuxtesting.org) with SVACE.
 
-[A few addressed bounced and my script to find the recipents for a patch
-series broke and invented some addresses. I fixed all the problem I'm
-aware of in this mail.]
+Fixes: 3195c5f9784a ("drm/nouveau: set encoder for lvds")
+Signed-off-by: Natalia Petrova <n.petrova@fintech.ru>
+---
+ drivers/gpu/drm/nouveau/nouveau_connector.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-On Mon, May 08, 2023 at 09:06:27AM +0200, Thomas Zimmermann wrote:
-> for the whole series:
->=20
-> Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
->=20
-> Please see my comment on the patches to tiny/.
->=20
-> Let me know if you want me to merge this patchset into drm-misc-next.
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+index 43a9d1e1cf71..90ba6d0a9c80 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.c
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+@@ -729,7 +729,8 @@ nouveau_connector_detect_lvds(struct drm_connector *connector, bool force)
+ #endif
+ 
+ 	nouveau_connector_set_edid(nv_connector, edid);
+-	nouveau_connector_set_encoder(connector, nv_encoder);
++	if (nv_encoder)
++		nouveau_connector_set_encoder(connector, nv_encoder);
+ 	return status;
+ }
+ 
+-- 
+2.34.1
 
-Thanks, I'd wait a bit for more acks/reviews to come in and then plan to
-resend later, also addressing the feedback you sent.
-
-Best regards
-Uwe
-
---=20
-Pengutronix e.K.                           | Uwe Kleine-K=F6nig            |
-Industrial Linux Solutions                 | https://www.pengutronix.de/ |
-
---3pf3cmic5n6cdkye
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmRYqbAACgkQj4D7WH0S
-/k4JeggAnBHUxma4vQ+/T0T9qJC+5c7iGOJ+hg1VKQdu3RFYOsfEdBVHywMuX8Fb
-bkfMbL4jsyN80KX3Sc7XeT0GkuA6n1bkIfJsTz16Dl8pPUTDBLPKYKNT82+brNvg
-XIif/963gu+RJ+x6ME2cdKET84LGmQwhonW2LUxGiRX5JD3FroDO8qaiLtFzkxEg
-zhCTMEQJUy1J6coFLDsxnhLFu4R/6ngT6tZOJfRAB4OiIEFmKVVH0/Y2Ko/ggJ/d
-50TcQO/0MoAzPrToLpaLaT3VtMocbAxQf7XRwpqF4MDvhu7dVfsJIhcWtBYjocz+
-WfD1B59vo0hWYb/QXlkA6OY3tzlBQQ==
-=Fhn+
------END PGP SIGNATURE-----
-
---3pf3cmic5n6cdkye--
