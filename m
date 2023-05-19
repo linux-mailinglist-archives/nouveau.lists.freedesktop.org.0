@@ -1,33 +1,32 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B744708EAA
-	for <lists+nouveau@lfdr.de>; Fri, 19 May 2023 06:11:49 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B519B709761
+	for <lists+nouveau@lfdr.de>; Fri, 19 May 2023 14:41:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8D50B10E5B7;
-	Fri, 19 May 2023 04:11:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 736E410E0F2;
+	Fri, 19 May 2023 12:41:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 452 seconds by postgrey-1.36 at gabe;
- Fri, 19 May 2023 04:11:42 UTC
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BC90410E038
- for <nouveau@lists.freedesktop.org>; Fri, 19 May 2023 04:11:42 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C8F8A10E0F2
+ for <nouveau@lists.freedesktop.org>; Fri, 19 May 2023 12:41:23 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 6AB6268AFE; Fri, 19 May 2023 06:04:05 +0200 (CEST)
-Date: Fri, 19 May 2023 06:04:05 +0200
+ id A400368C7B; Fri, 19 May 2023 14:41:18 +0200 (CEST)
+Date: Fri, 19 May 2023 14:41:18 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?=
  <marmarek@invisiblethingslab.com>
-Message-ID: <20230519040405.GA10818@lst.de>
+Message-ID: <20230519124118.GA5869@lst.de>
 References: <20230518134253.909623-1-hch@lst.de>
  <20230518134253.909623-3-hch@lst.de> <ZGZr/xgbUmVqpOpN@mail-itl>
+ <20230519040405.GA10818@lst.de> <ZGdLErBzi9MANL3i@mail-itl>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <ZGZr/xgbUmVqpOpN@mail-itl>
+In-Reply-To: <ZGdLErBzi9MANL3i@mail-itl>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 Subject: Re: [Nouveau] [PATCH 2/4] x86: always initialize xen-swiotlb when
  xen-pcifront is enabling
@@ -53,17 +52,19 @@ Cc: Juergen Gross <jgross@suse.com>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, May 18, 2023 at 08:18:39PM +0200, Marek Marczykowski-Górecki wrote:
-> On Thu, May 18, 2023 at 03:42:51PM +0200, Christoph Hellwig wrote:
-> > Remove the dangerous late initialization of xen-swiotlb in
-> > pci_xen_swiotlb_init_late and instead just always initialize
-> > xen-swiotlb in the boot code if CONFIG_XEN_PCIDEV_FRONTEND is enabled.
-> > 
-> > Signed-off-by: Christoph Hellwig <hch@lst.de>
-> 
-> Doesn't it mean all the PV guests will basically waste 64MB of RAM
-> by default each if they don't really have PCI devices?
+On Fri, May 19, 2023 at 12:10:26PM +0200, Marek Marczykowski-Górecki wrote:
+> While I would say PCI passthrough is not very common for PV guests, can
+> the decision about xen-swiotlb be delayed until you can enumerate
+> xenstore to check if there are any PCI devices connected (and not
+> allocate xen-swiotlb by default if there are none)? This would
+> still not cover the hotplug case (in which case, you'd need to force it
+> with a cmdline), but at least you wouldn't loose much memory just
+> because one of your VMs may use PCI passthrough (so, you have it enabled
+> in your kernel).
 
-If CONFIG_XEN_PCIDEV_FRONTEND is enabled, and the kernel's isn't booted
-with swiotlb=noforce, yes.
+How early can we query xenstore?  We'd need to do this before setting
+up DMA for any device.
 
+The alternative would be to finally merge swiotlb-xen into swiotlb, in
+which case we might be able to do this later.  Let me see what I can
+do there.
