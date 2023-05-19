@@ -1,78 +1,79 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D77CB737403
-	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:21:56 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 24EB57373B4
+	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:20:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0D48610E369;
-	Tue, 20 Jun 2023 18:21:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CE52B10E32E;
+	Tue, 20 Jun 2023 18:20:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
  [66.111.4.25])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8ABBB10E53E
- for <nouveau@lists.freedesktop.org>; Thu, 18 May 2023 18:18:47 +0000 (UTC)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailout.nyi.internal (Postfix) with ESMTP id 467EA5C0189;
- Thu, 18 May 2023 14:18:45 -0400 (EDT)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4D2AD10E080
+ for <nouveau@lists.freedesktop.org>; Fri, 19 May 2023 10:10:34 +0000 (UTC)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailout.nyi.internal (Postfix) with ESMTP id 590545C014B;
+ Fri, 19 May 2023 06:10:32 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute1.internal (MEProxy); Thu, 18 May 2023 14:18:45 -0400
+ by compute4.internal (MEProxy); Fri, 19 May 2023 06:10:32 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  invisiblethingslab.com; h=cc:cc:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:sender:subject:subject:to:to; s=fm3; t=
- 1684433925; x=1684520325; bh=8axqpDZcBJUL6/RSlQEGx3UykZkeYDfsoFq
- sKS4DlH8=; b=LTDJ72ZJBNU4Q+wdQtTMHbKI7Rf7xCwPmPlFPa/OWtk6KR2yIsb
- wUx4TgI9fwxNTiD9tCkEW9fGhx6uFOOexL8CANKKVptANJ3uJC8nIcLpDQnNeuJ5
- 9tieBz0pNDhKd4uSNPNux7XAJUkWci2MO18bTW3KhOKheIthnn54/C2EIz2B7n0p
- ArsV7dtXoA+8i7LqZVw5QBTuof9aSMA381lGLdwimEdPy6/4q2hSQupv4lFLphcq
- Xz1nGSd9blAmwB1xoafB3KUXW/7h0gRdkot2+/Ph2RsVSc6V0quQymU13VP2wcXw
- AuAa+ike1zV5TPGd9EvSg2UdVQTk5IVi74g==
+ :references:reply-to:sender:subject:subject:to:to; s=fm1; t=
+ 1684491032; x=1684577432; bh=WmoTlhd7e1kwJpAAsaCCOOQJxMdCzpL/nDP
+ L1E42Cfo=; b=P5i+sNrzGgkybQ2llHpdSW2AKLSaYvzjLV/X1tKoCOnMEuquyum
+ Xz7L7fUs5n+bcz3EquSOz/LyYzo4+bnInf6pePRv8KXFTe1Ri70wn0/aQTymk6Nj
+ 3cOgoNnjULfVW8UqeTZdOxRVQ+EBZ+LWRXrUhP2M9QLZF0gH6sQkNPc9qKZCOrO9
+ 9MfZ9MN3Y9m8U5zroM3O8KCYAEdroMxEt0djE4C7v+kuG5NSqqLCvp420255lmj3
+ Zfhv2QVb/G0g/MmOCnqA0OBNGNTtKmfHSBfBvNe+eSi5vldVRS0rB6sPFGLPp1+q
+ imYfiENJ01Bse+gNazzWEmT6kALsLF8G68A==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:content-type:date:date
  :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
  :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
- :x-sasl-enc; s=fm1; t=1684433925; x=1684520325; bh=8axqpDZcBJUL6
- /RSlQEGx3UykZkeYDfsoFqsKS4DlH8=; b=ahTrDDMNHMprtR6j7zsInmHT0unIR
- qAyeVpbtq7fyzs/HsksHaOtng51EzIdD1Y4DmO8WoPBkTWZ5M3rG0m/mcJ6JDmPw
- Ecy4AFX/C+Uewwq8xxSQ0sk7Is2WYhYYslyESxZijdWH/cei3IxLH5Fq8X6pTphq
- SxFdOZPf2JQXVzxxMxEilNQPw4mbB+ZrezIiDlKcdSqxv2j25fEZnzUl0MJ8yfLX
- 4IBsMTnU58G/IcA7jgPp15uxmuqzn8dHYvRHo01VfoDYtRBqchFq9RUOtpPcUI9N
- ZflIOipXAScjPuYZeecwD2XoSt2p9rjtUfsNR+ACw3XeX8tFtlst0182g==
-X-ME-Sender: <xms:BGxmZEHwrxvzj2rUdyQFtkeClxzfILEtdDb-xaRPscDsugNfa_gRhg>
- <xme:BGxmZNXNpf0AMvINhbKCxiq-tUTzBaefoJnHwWVNaDikDkZjQkGPm_8uhSk2JyFpn
- 4sOIN4kpu3nRQ>
-X-ME-Received: <xmr:BGxmZOJZQmSuEVRCprIH4kzePADrtGYRp1bSQUHUENFrUWHdOe2cZ4QgvTtelEMwRsTpyFOh_IZf-gSqvSecmq8Ebl-rrYiRAFA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrfeeifedguddvfecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghr
- vghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesih
- hnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefg
- udelteefvefhfeehieetleeihfejhfeludevteetkeevtedtvdegueetfeejudenucevlh
- hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
- khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:BGxmZGG9PGqozfwHtPqImZp0h9jq6zXETkRQMUn2ych4Vg8Ht-Fv7g>
- <xmx:BGxmZKWMsb0cJjwvkTZF5RgdlJXSFKEsQNnO8v9cj_4G3rifEk9oVA>
- <xmx:BGxmZJO894ds2AjAhhHmsTz7sH_UR233C-BOjr4cInJFMiOoHG__fw>
- <xmx:BWxmZDVQItjPzKlagxJxlOPA1P5hwMRsW1KjHLFzxth6sl8DCB60tA>
+ :x-sasl-enc; s=fm1; t=1684491032; x=1684577432; bh=WmoTlhd7e1kwJ
+ pAAsaCCOOQJxMdCzpL/nDPL1E42Cfo=; b=xGmbjPzlgjhHajV61PT0fxHOkTPA9
+ P/BKddYJeZL8r3HwmUtZQoGkTKDM3sMX2G2E47LEKMHpnsftch7DUZCK3BGFhY94
+ qp7VHIhqnZbVw9bKSeYk7xj1S+ywBdu1R3Z+/eMTB4h0v5/lNdk7d0UjJ6+USLn/
+ P/hvq8ohUkOE9QafrdILUftyhnmjgg631lGCldrTurUHMVTM73uZKI3dDsT/NJWJ
+ X/UjqL6iaIaAhkO2lv6CnDY+vYB14qlO0xDRW15Eu4p2VpQ+NsZcRo5gdaBSL5/u
+ UwkL3yHLMhGBwUUudXDfwgnrAIf6s8EPADQJkSMIokbsiTEV/s8yHvbEw==
+X-ME-Sender: <xms:F0tnZHkDT-Yelrchp8VYR0XaK9crha449BTfficNd73wBREUMflA5A>
+ <xme:F0tnZK1MRXbgM7v-C9t2xZc8E_Or2jhOZiSv4A9o_b74SKo8qEk7L9IO1Y9kSOg3U
+ ai88nLPPn61bA>
+X-ME-Received: <xmr:F0tnZNprQUsXTFl7lvK1CHl92nb7NWLH5Vh17LdECZL8ASWuJUyNkriWpp4gXXVb2KbHmK8hrICDHD5zZXDlUakiFA6EOjfasJI>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrfeeihedgvdeiucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepfffhvfevuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepofgrrhgv
+ khcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinh
+ hvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfdu
+ leetfeevhfefheeiteeliefhjefhleduveetteekveettddvgeeuteefjedunecuvehluh
+ hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghk
+ sehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
+X-ME-Proxy: <xmx:F0tnZPkznI8Dzysbg3Je1q1Haflx3_kES29BO_hzPvRFEZZya4yEfA>
+ <xmx:F0tnZF2bA5DdY11UUPtFQPCIHoGt_tmnpY_iR1S6AbEzh2Q89gSLLg>
+ <xmx:F0tnZOtQwe94V3TNIOi1__ZV8Bk1B_Z4LPUSCGxb79tkGw_tF69vFw>
+ <xmx:GEtnZE3OXQaasri_Ttvfhpz8-Ksd1lV6mvoGRbShRHswItGlXDiKsw>
 Feedback-ID: i1568416f:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 18 May 2023 14:18:42 -0400 (EDT)
-Date: Thu, 18 May 2023 20:18:39 +0200
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 19 May 2023 06:10:29 -0400 (EDT)
+Date: Fri, 19 May 2023 12:10:26 +0200
 From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
  <marmarek@invisiblethingslab.com>
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <ZGZr/xgbUmVqpOpN@mail-itl>
+Message-ID: <ZGdLErBzi9MANL3i@mail-itl>
 References: <20230518134253.909623-1-hch@lst.de>
- <20230518134253.909623-3-hch@lst.de>
+ <20230518134253.909623-3-hch@lst.de> <ZGZr/xgbUmVqpOpN@mail-itl>
+ <20230519040405.GA10818@lst.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="CsM+DO8kg05XbydD"
+ protocol="application/pgp-signature"; boundary="A3eIvvbx7EttM1KL"
 Content-Disposition: inline
-In-Reply-To: <20230518134253.909623-3-hch@lst.de>
+In-Reply-To: <20230519040405.GA10818@lst.de>
 X-Mailman-Approved-At: Tue, 20 Jun 2023 18:20:11 +0000
 Subject: Re: [Nouveau] [PATCH 2/4] x86: always initialize xen-swiotlb when
  xen-pcifront is enabling
@@ -98,11 +99,11 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---CsM+DO8kg05XbydD
+--A3eIvvbx7EttM1KL
 Content-Type: text/plain; protected-headers=v1; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 18 May 2023 20:18:39 +0200
+Date: Fri, 19 May 2023 12:10:26 +0200
 From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: Christoph Hellwig <hch@lst.de>
 Cc: Juergen Gross <jgross@suse.com>,
@@ -117,131 +118,55 @@ Cc: Juergen Gross <jgross@suse.com>,
 Subject: Re: [PATCH 2/4] x86: always initialize xen-swiotlb when xen-pcifront
  is enabling
 
-On Thu, May 18, 2023 at 03:42:51PM +0200, Christoph Hellwig wrote:
-> Remove the dangerous late initialization of xen-swiotlb in
-> pci_xen_swiotlb_init_late and instead just always initialize
-> xen-swiotlb in the boot code if CONFIG_XEN_PCIDEV_FRONTEND is enabled.
+On Fri, May 19, 2023 at 06:04:05AM +0200, Christoph Hellwig wrote:
+> On Thu, May 18, 2023 at 08:18:39PM +0200, Marek Marczykowski-G=C3=B3recki=
+ wrote:
+> > On Thu, May 18, 2023 at 03:42:51PM +0200, Christoph Hellwig wrote:
+> > > Remove the dangerous late initialization of xen-swiotlb in
+> > > pci_xen_swiotlb_init_late and instead just always initialize
+> > > xen-swiotlb in the boot code if CONFIG_XEN_PCIDEV_FRONTEND is enabled.
+> > >=20
+> > > Signed-off-by: Christoph Hellwig <hch@lst.de>
+> >=20
+> > Doesn't it mean all the PV guests will basically waste 64MB of RAM
+> > by default each if they don't really have PCI devices?
 >=20
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> If CONFIG_XEN_PCIDEV_FRONTEND is enabled, and the kernel's isn't booted
+> with swiotlb=3Dnoforce, yes.
 
-Doesn't it mean all the PV guests will basically waste 64MB of RAM
-by default each if they don't really have PCI devices?
-
-> ---
->  arch/x86/include/asm/xen/swiotlb-xen.h |  6 ------
->  arch/x86/kernel/pci-dma.c              | 25 +++----------------------
->  drivers/pci/xen-pcifront.c             |  6 ------
->  3 files changed, 3 insertions(+), 34 deletions(-)
->=20
-> diff --git a/arch/x86/include/asm/xen/swiotlb-xen.h b/arch/x86/include/as=
-m/xen/swiotlb-xen.h
-> index 77a2d19cc9909e..abde0f44df57dc 100644
-> --- a/arch/x86/include/asm/xen/swiotlb-xen.h
-> +++ b/arch/x86/include/asm/xen/swiotlb-xen.h
-> @@ -2,12 +2,6 @@
->  #ifndef _ASM_X86_SWIOTLB_XEN_H
->  #define _ASM_X86_SWIOTLB_XEN_H
-> =20
-> -#ifdef CONFIG_SWIOTLB_XEN
-> -extern int pci_xen_swiotlb_init_late(void);
-> -#else
-> -static inline int pci_xen_swiotlb_init_late(void) { return -ENXIO; }
-> -#endif
-> -
->  int xen_swiotlb_fixup(void *buf, unsigned long nslabs);
->  int xen_create_contiguous_region(phys_addr_t pstart, unsigned int order,
->  				unsigned int address_bits,
-> diff --git a/arch/x86/kernel/pci-dma.c b/arch/x86/kernel/pci-dma.c
-> index f887b08ac5ffe4..c4a7ead9eb674e 100644
-> --- a/arch/x86/kernel/pci-dma.c
-> +++ b/arch/x86/kernel/pci-dma.c
-> @@ -81,27 +81,6 @@ static void __init pci_xen_swiotlb_init(void)
->  	if (IS_ENABLED(CONFIG_PCI))
->  		pci_request_acs();
->  }
-> -
-> -int pci_xen_swiotlb_init_late(void)
-> -{
-> -	if (dma_ops =3D=3D &xen_swiotlb_dma_ops)
-> -		return 0;
-> -
-> -	/* we can work with the default swiotlb */
-> -	if (!io_tlb_default_mem.nslabs) {
-> -		int rc =3D swiotlb_init_late(swiotlb_size_or_default(),
-> -					   GFP_KERNEL, xen_swiotlb_fixup);
-> -		if (rc < 0)
-> -			return rc;
-> -	}
-> -
-> -	/* XXX: this switches the dma ops under live devices! */
-> -	dma_ops =3D &xen_swiotlb_dma_ops;
-> -	if (IS_ENABLED(CONFIG_PCI))
-> -		pci_request_acs();
-> -	return 0;
-> -}
-> -EXPORT_SYMBOL_GPL(pci_xen_swiotlb_init_late);
->  #else
->  static inline void __init pci_xen_swiotlb_init(void)
->  {
-> @@ -111,7 +90,9 @@ static inline void __init pci_xen_swiotlb_init(void)
->  void __init pci_iommu_alloc(void)
->  {
->  	if (xen_pv_domain()) {
-> -		if (xen_initial_domain() || x86_swiotlb_enable)
-> +		if (xen_initial_domain() ||
-> +		    IS_ENABLED(CONFIG_XEN_PCIDEV_FRONTEND) ||
-> +		    x86_swiotlb_enable)
->  			pci_xen_swiotlb_init();
->  		return;
->  	}
-> diff --git a/drivers/pci/xen-pcifront.c b/drivers/pci/xen-pcifront.c
-> index 83c0ab50676dff..11636634ae512f 100644
-> --- a/drivers/pci/xen-pcifront.c
-> +++ b/drivers/pci/xen-pcifront.c
-> @@ -22,7 +22,6 @@
->  #include <linux/bitops.h>
->  #include <linux/time.h>
->  #include <linux/ktime.h>
-> -#include <linux/swiotlb.h>
->  #include <xen/platform_pci.h>
-> =20
->  #include <asm/xen/swiotlb-xen.h>
-> @@ -669,11 +668,6 @@ static int pcifront_connect_and_init_dma(struct pcif=
-ront_device *pdev)
-> =20
->  	spin_unlock(&pcifront_dev_lock);
-> =20
-> -	if (!err && !is_swiotlb_active(&pdev->xdev->dev)) {
-> -		err =3D pci_xen_swiotlb_init_late();
-> -		if (err)
-> -			dev_err(&pdev->xdev->dev, "Could not setup SWIOTLB!\n");
-> -	}
->  	return err;
->  }
-> =20
-> --=20
-> 2.39.2
->=20
->=20
+That's "a bit" unfortunate, since that might be significant part of the
+VM memory, or if you have a lot of VMs, a significant part of the host
+memory - it quickly adds up.
+While I would say PCI passthrough is not very common for PV guests, can
+the decision about xen-swiotlb be delayed until you can enumerate
+xenstore to check if there are any PCI devices connected (and not
+allocate xen-swiotlb by default if there are none)? This would
+still not cover the hotplug case (in which case, you'd need to force it
+with a cmdline), but at least you wouldn't loose much memory just
+because one of your VMs may use PCI passthrough (so, you have it enabled
+in your kernel).
+Please remember that guest kernel is not always under full control of
+the host admin, so making guests loose 64MB of RAM always, in default
+setup isn't good for customers of such VMs...
 
 --=20
 Best Regards,
 Marek Marczykowski-G=C3=B3recki
 Invisible Things Lab
 
---CsM+DO8kg05XbydD
+--A3eIvvbx7EttM1KL
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmRma/8ACgkQ24/THMrX
-1yzT+gf/S1uwHKmjBfQtKqzw50EE/PUeNAO8869wN0cpWYT6WkKJT5BxXOVgbJfW
-9mibLfMCcVO0H1cE8+PCxvC9BIv3ldhC7KVtSQks99V24zf0mPiqBiGM2mAI9VRD
-SYMwmipIXDSRFERIcBo1XomAt4ytJj/BkqCv+Xy5PgYIqdABz9R4G3HT2q6rN0Lq
-M2sLnKWdGwoYdk8hOmlTY5F3/iYdv/Zlel4Ki2s5ZzLUBxCZ1IKErb31wRaRid8p
-APcTnrs8RZE8+YBL7nzdr9HudKMlaChsiZsPkIo0v0aI5oFa+OHs6Z5sOXOP0RAB
-qmCDKShHiVUc6Lqc1gT6VHLmZdEEig==
-=Y97F
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmRnSxEACgkQ24/THMrX
+1yxoZQgAigYwLANKEDjGQFkztgAogWxy1LFDTtNJ3E+BQRNBEzsMU2jP0ND6oIWA
+fuzuDMHRtd7zAop8RQSHwJ+x9OTpPlBR1a7tSxaszuF9tm+l1lWN/6M+fFKNNG+C
+C8hCEe5NjlcrGsCOzfsPrU2/141dN/1DayOWQ6DPpBawF7PBOZrhqdEKVV+SfVEL
+D7HM1k8hZj8Nxn39zU0AztoC4HpnhA/ovojpuL7HhyKrs/PbUFgQeJJhYAWDxsNI
+1CGjRlyzNFMFBtmC1r7foXOX8AKpcOGeGLcnw5aoMCBnAlZi7rUE/WY+fHGud1tk
+iPlvgAJ6SgmEF/kRu7VrzljzR8eZZA==
+=fKf1
 -----END PGP SIGNATURE-----
 
---CsM+DO8kg05XbydD--
+--A3eIvvbx7EttM1KL--
