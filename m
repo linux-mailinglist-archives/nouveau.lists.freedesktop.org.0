@@ -1,58 +1,71 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53B3A70B7CD
-	for <lists+nouveau@lfdr.de>; Mon, 22 May 2023 10:37:16 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B8A6270BB14
+	for <lists+nouveau@lfdr.de>; Mon, 22 May 2023 13:05:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A59DF10E276;
-	Mon, 22 May 2023 08:37:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A1D9410E2C0;
+	Mon, 22 May 2023 11:05:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C022810E276
- for <nouveau@lists.freedesktop.org>; Mon, 22 May 2023 08:37:11 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 16A8621972;
- Mon, 22 May 2023 08:37:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1684744630; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DFBD710E2C0
+ for <nouveau@lists.freedesktop.org>; Mon, 22 May 2023 11:05:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1684753540;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=8ga5Zo8jqgo2Pq5tah2wZHCDCAl0WaiL8Zh0l8OnPpQ=;
- b=XtmMC6KGID7aLqQib45KPdLWlpll/Q7yy8XjVtDHEyg/w+IGN6zQsEw6yZj5sMUqzrozb7
- h8m+RBA1Hkf+x20fuf254GrTKCkUBksQdHvINgYp6+moEjtdKNsLqbmjnla407bw2Zaf8I
- yT72i5TTiaJxVLCVoumxC5JJe2HZjbs=
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 91E1913776;
- Mon, 22 May 2023 08:37:09 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id HVzUIbUpa2QeWwAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 22 May 2023 08:37:09 +0000
-Message-ID: <c5defff8-882e-3482-0de1-e50a4bcdfa99@suse.com>
-Date: Mon, 22 May 2023 10:37:09 +0200
+ bh=MX/s9CqqCW6cH2AMqyMMQv3ISbYNht7FksP6LmQ8hqw=;
+ b=MOHjv5uvdxxNDK3aUEpZ5RMULs6RXugEl5UbKU5c8OtXI697XoLHApZoxHWcylhXWZ44t+
+ x/8116pVIGmdWkOwOFL18N7dxEUf6JNhV2oQMvIE5frYBMhhMa3CRcY45F6QEZwSdru2Vx
+ 7F8T0UbCaDIuT0qHwjOXP/AEN9nsllw=
+Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
+ [209.85.167.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-401-gA9vcSthOHKJY7xprvdZow-1; Mon, 22 May 2023 07:05:39 -0400
+X-MC-Unique: gA9vcSthOHKJY7xprvdZow-1
+Received: by mail-lf1-f71.google.com with SMTP id
+ 2adb3069b0e04-4f24f491835so234911e87.0
+ for <nouveau@lists.freedesktop.org>; Mon, 22 May 2023 04:05:38 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1684753537; x=1687345537;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MX/s9CqqCW6cH2AMqyMMQv3ISbYNht7FksP6LmQ8hqw=;
+ b=H49IvaTk39ZrQ52LqHmAE7r0wYJxpRHAdEOZh9t2fT5BegArTAzQOikTTEiTpMac9E
+ ZFrA4qTwpMoRRrJuiNx4ywkcAOLZNFMNt+eN+6RBemhNhJp5we/kEvyEs9epyPf54p8D
+ 2ZaDIzLo1DC9vwUBjxIMSAiPllF/eyysFTQuscNK69jRDLlPsHo/5bXrCsQAuzntHRjE
+ hx52HqfRGVmrVj/s2y3Ma5fpS9Rizx2D9fRcapH2L3Fghis+JUVfhEmq0M/Nm99yHPTm
+ t7K9zg8N16op/vcASvPQECFKHfO5gB4EFBWTrI8YZF/sXdSaHbbF63LFFGsFcYGto+Nz
+ h+IA==
+X-Gm-Message-State: AC+VfDx7kQ8pHuI8JD8gqLfgh1tXBHrhDYUQCoOnN9lwbAU8cSI0K1Sm
+ g57cEE34Us9hAUJao6RVkgTpOMCIruL6craGQOsA/IhDcpo4YoAy8r0jE8FmjMIKAYmMVoERbFg
+ xuL5JOlB8ygy7QE643IEA3kJisqLNJbwOUpSprFQcCQ==
+X-Received: by 2002:a2e:a4ba:0:b0:2af:237c:c335 with SMTP id
+ g26-20020a2ea4ba000000b002af237cc335mr3549919ljm.3.1684753537809; 
+ Mon, 22 May 2023 04:05:37 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ6x3VG32WQUaO2EyREF1ehIOVQgkJqkNFu6Egwvvu/4sFAXjJoytU/NPjAcnvx2WnEdpXLHgR+ABojRY1WCGjE=
+X-Received: by 2002:a2e:a4ba:0:b0:2af:237c:c335 with SMTP id
+ g26-20020a2ea4ba000000b002af237cc335mr3549902ljm.3.1684753537479; Mon, 22 May
+ 2023 04:05:37 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.1
-Content-Language: en-US
-To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
- <marmarek@invisiblethingslab.com>, Christoph Hellwig <hch@lst.de>
-References: <20230518134253.909623-1-hch@lst.de>
- <20230518134253.909623-3-hch@lst.de> <ZGZr/xgbUmVqpOpN@mail-itl>
- <20230519040405.GA10818@lst.de> <ZGdLErBzi9MANL3i@mail-itl>
-From: Juergen Gross <jgross@suse.com>
-In-Reply-To: <ZGdLErBzi9MANL3i@mail-itl>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------yxQ05rE4I03r9lxlh0bCXS2U"
-Subject: Re: [Nouveau] [PATCH 2/4] x86: always initialize xen-swiotlb when
- xen-pcifront is enabling
+References: <20230417210329.2469722-1-arnd@kernel.org>
+In-Reply-To: <20230417210329.2469722-1-arnd@kernel.org>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Mon, 22 May 2023 13:05:26 +0200
+Message-ID: <CACO55tuL06jff8WnvU5e-rjwWx+smyYriET7DZDPgNM5e-0UFw@mail.gmail.com>
+To: Arnd Bergmann <arnd@kernel.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: dispnv50: fix missing-prototypes
+ warning
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,162 +77,64 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, nouveau@lists.freedesktop.org,
- Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
- linux-kernel@vger.kernel.org, iommu@lists.linux.dev,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- Ben Skeggs <bskeggs@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>,
- xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@linutronix.de>
+Cc: Arnd Bergmann <arnd@arndb.de>, Jani Nikula <jani.nikula@intel.com>,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------yxQ05rE4I03r9lxlh0bCXS2U
-Content-Type: multipart/mixed; boundary="------------lebpN3m0ix011maVFGvYhzJB";
- protected-headers="v1"
-From: Juergen Gross <jgross@suse.com>
-To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
- <marmarek@invisiblethingslab.com>, Christoph Hellwig <hch@lst.de>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
- Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, xen-devel@lists.xenproject.org,
- iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
- nouveau@lists.freedesktop.org
-Message-ID: <c5defff8-882e-3482-0de1-e50a4bcdfa99@suse.com>
-Subject: Re: [PATCH 2/4] x86: always initialize xen-swiotlb when xen-pcifront
- is enabling
-References: <20230518134253.909623-1-hch@lst.de>
- <20230518134253.909623-3-hch@lst.de> <ZGZr/xgbUmVqpOpN@mail-itl>
- <20230519040405.GA10818@lst.de> <ZGdLErBzi9MANL3i@mail-itl>
-In-Reply-To: <ZGdLErBzi9MANL3i@mail-itl>
+Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
---------------lebpN3m0ix011maVFGvYhzJB
-Content-Type: multipart/mixed; boundary="------------mgbNAlWVI77vXQcN1yCpbTLa"
+will merge soon
 
---------------mgbNAlWVI77vXQcN1yCpbTLa
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+On Mon, Apr 17, 2023 at 11:03=E2=80=AFPM Arnd Bergmann <arnd@kernel.org> wr=
+ote:
+>
+> From: Arnd Bergmann <arnd@arndb.de>
+>
+> nv50_display_create() is declared in another header, along with
+> a couple of declarations that are now outdated:
+>
+> drivers/gpu/drm/nouveau/dispnv50/disp.c:2517:1: error: no previous protot=
+ype for 'nv50_display_create'
+>
+> Fixes: ba801ef068c1 ("drm/nouveau/kms: display destroy/init/fini hooks ca=
+n be static")
+> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+> ---
+>  drivers/gpu/drm/nouveau/dispnv50/disp.c | 1 +
+>  drivers/gpu/drm/nouveau/nv50_display.h  | 4 +---
+>  2 files changed, 2 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/no=
+uveau/dispnv50/disp.c
+> index 5bb777ff1313..9b6824f6b9e4 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> @@ -64,6 +64,7 @@
+>  #include "nouveau_connector.h"
+>  #include "nouveau_encoder.h"
+>  #include "nouveau_fence.h"
+> +#include "nv50_display.h"
+>
+>  #include <subdev/bios/dp.h>
+>
+> diff --git a/drivers/gpu/drm/nouveau/nv50_display.h b/drivers/gpu/drm/nou=
+veau/nv50_display.h
+> index fbd3b15583bc..60f77766766e 100644
+> --- a/drivers/gpu/drm/nouveau/nv50_display.h
+> +++ b/drivers/gpu/drm/nouveau/nv50_display.h
+> @@ -31,7 +31,5 @@
+>  #include "nouveau_reg.h"
+>
+>  int  nv50_display_create(struct drm_device *);
+> -void nv50_display_destroy(struct drm_device *);
+> -int  nv50_display_init(struct drm_device *);
+> -void nv50_display_fini(struct drm_device *);
+> +
+>  #endif /* __NV50_DISPLAY_H__ */
+> --
+> 2.39.2
+>
 
-T24gMTkuMDUuMjMgMTI6MTAsIE1hcmVrIE1hcmN6eWtvd3NraS1Hw7NyZWNraSB3cm90ZToN
-Cj4gT24gRnJpLCBNYXkgMTksIDIwMjMgYXQgMDY6MDQ6MDVBTSArMDIwMCwgQ2hyaXN0b3Bo
-IEhlbGx3aWcgd3JvdGU6DQo+PiBPbiBUaHUsIE1heSAxOCwgMjAyMyBhdCAwODoxODozOVBN
-ICswMjAwLCBNYXJlayBNYXJjenlrb3dza2ktR8OzcmVja2kgd3JvdGU6DQo+Pj4gT24gVGh1
-LCBNYXkgMTgsIDIwMjMgYXQgMDM6NDI6NTFQTSArMDIwMCwgQ2hyaXN0b3BoIEhlbGx3aWcg
-d3JvdGU6DQo+Pj4+IFJlbW92ZSB0aGUgZGFuZ2Vyb3VzIGxhdGUgaW5pdGlhbGl6YXRpb24g
-b2YgeGVuLXN3aW90bGIgaW4NCj4+Pj4gcGNpX3hlbl9zd2lvdGxiX2luaXRfbGF0ZSBhbmQg
-aW5zdGVhZCBqdXN0IGFsd2F5cyBpbml0aWFsaXplDQo+Pj4+IHhlbi1zd2lvdGxiIGluIHRo
-ZSBib290IGNvZGUgaWYgQ09ORklHX1hFTl9QQ0lERVZfRlJPTlRFTkQgaXMgZW5hYmxlZC4N
-Cj4+Pj4NCj4+Pj4gU2lnbmVkLW9mZi1ieTogQ2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBsc3Qu
-ZGU+DQo+Pj4NCj4+PiBEb2Vzbid0IGl0IG1lYW4gYWxsIHRoZSBQViBndWVzdHMgd2lsbCBi
-YXNpY2FsbHkgd2FzdGUgNjRNQiBvZiBSQU0NCj4+PiBieSBkZWZhdWx0IGVhY2ggaWYgdGhl
-eSBkb24ndCByZWFsbHkgaGF2ZSBQQ0kgZGV2aWNlcz8NCj4+DQo+PiBJZiBDT05GSUdfWEVO
-X1BDSURFVl9GUk9OVEVORCBpcyBlbmFibGVkLCBhbmQgdGhlIGtlcm5lbCdzIGlzbid0IGJv
-b3RlZA0KPj4gd2l0aCBzd2lvdGxiPW5vZm9yY2UsIHllcy4NCj4gDQo+IFRoYXQncyAiYSBi
-aXQiIHVuZm9ydHVuYXRlLCBzaW5jZSB0aGF0IG1pZ2h0IGJlIHNpZ25pZmljYW50IHBhcnQg
-b2YgdGhlDQo+IFZNIG1lbW9yeSwgb3IgaWYgeW91IGhhdmUgYSBsb3Qgb2YgVk1zLCBhIHNp
-Z25pZmljYW50IHBhcnQgb2YgdGhlIGhvc3QNCj4gbWVtb3J5IC0gaXQgcXVpY2tseSBhZGRz
-IHVwLg0KPiBXaGlsZSBJIHdvdWxkIHNheSBQQ0kgcGFzc3Rocm91Z2ggaXMgbm90IHZlcnkg
-Y29tbW9uIGZvciBQViBndWVzdHMsIGNhbg0KPiB0aGUgZGVjaXNpb24gYWJvdXQgeGVuLXN3
-aW90bGIgYmUgZGVsYXllZCB1bnRpbCB5b3UgY2FuIGVudW1lcmF0ZQ0KPiB4ZW5zdG9yZSB0
-byBjaGVjayBpZiB0aGVyZSBhcmUgYW55IFBDSSBkZXZpY2VzIGNvbm5lY3RlZCAoYW5kIG5v
-dA0KPiBhbGxvY2F0ZSB4ZW4tc3dpb3RsYiBieSBkZWZhdWx0IGlmIHRoZXJlIGFyZSBub25l
-KT8gVGhpcyB3b3VsZA0KPiBzdGlsbCBub3QgY292ZXIgdGhlIGhvdHBsdWcgY2FzZSAoaW4g
-d2hpY2ggY2FzZSwgeW91J2QgbmVlZCB0byBmb3JjZSBpdA0KPiB3aXRoIGEgY21kbGluZSks
-IGJ1dCBhdCBsZWFzdCB5b3Ugd291bGRuJ3QgbG9vc2UgbXVjaCBtZW1vcnkganVzdA0KPiBi
-ZWNhdXNlIG9uZSBvZiB5b3VyIFZNcyBtYXkgdXNlIFBDSSBwYXNzdGhyb3VnaCAoc28sIHlv
-dSBoYXZlIGl0IGVuYWJsZWQNCj4gaW4geW91ciBrZXJuZWwpLg0KPiBQbGVhc2UgcmVtZW1i
-ZXIgdGhhdCBndWVzdCBrZXJuZWwgaXMgbm90IGFsd2F5cyB1bmRlciBmdWxsIGNvbnRyb2wg
-b2YNCj4gdGhlIGhvc3QgYWRtaW4sIHNvIG1ha2luZyBndWVzdHMgbG9vc2UgNjRNQiBvZiBS
-QU0gYWx3YXlzLCBpbiBkZWZhdWx0DQo+IHNldHVwIGlzbid0IGdvb2QgZm9yIGN1c3RvbWVy
-cyBvZiBzdWNoIFZNcy4uLg0KPiANCg0KSW4gbm9ybWFsIGNhc2VzIFBDSSBwYXNzdGhyb3Vn
-aCBpbiBQViBndWVzdHMgcmVxdWlyZXMgdG8gc3RhcnQgdGhlIGd1ZXN0DQp3aXRoIGU4MjBf
-aG9zdD0xLiBTbyBpdCBzaG91bGQgYmUgcmF0aGVyIGVhc3kgdG8gbGltaXQgYWxsb2NhdGlu
-ZyB0aGUNCjY0TUIgaW4gUFYgZ3Vlc3RzIHRvIHRoZSBjYXNlcyB3aGVyZSB0aGUgbWVtb3J5
-IG1hcCBoYXMgbm9uLVJBTSByZWdpb25zDQplc3BlY2lhbGx5IGluIHRoZSBmaXJzdCAxTUIg
-b2YgdGhlIG1lbW9yeS4NCg0KVGhpcyB3aWxsIGNvdmVyIGV2ZW4gaG90cGx1ZyBjYXNlcy4g
-VGhlIG9ubHkgY2FzZSBub3QgY292ZXJlZCB3b3VsZCBiZSBhDQpndWVzdCBzdGFydGVkIHdp
-dGggZTgyMF9ob3N0PTEgZXZlbiBpZiBubyBQQ0kgcGFzc3Rocm91Z2ggd2FzIHBsYW5uZWQu
-DQpCdXQgdGhpcyBzaG91bGQgYmUgcmF0aGVyIHJhcmUgKGF0IGxlYXN0IEkgaG9wZSBzbyku
-DQoNCg0KSnVlcmdlbg0K
---------------mgbNAlWVI77vXQcN1yCpbTLa
-Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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
-jR/i1DG86lem3iBDXzXsZDn8R38=3D
-=3D2wuH
------END PGP PUBLIC KEY BLOCK-----
-
---------------mgbNAlWVI77vXQcN1yCpbTLa--
-
---------------lebpN3m0ix011maVFGvYhzJB--
-
---------------yxQ05rE4I03r9lxlh0bCXS2U
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmRrKbUFAwAAAAAACgkQsN6d1ii/Ey+v
-oAf/RGlDPMYqkyXWlGUV4BUpVOohUjP+ndb+vqr426H0D3cuX5Wyojbd2qS0SGrO7sS92eu0Afv7
-vOsOYgMl+2I+UGpMfiT9SNlhkcaIcZ7Trb3j4w61+m2zG52XShawOGUgnwnjk2PIoSsCHDc1iScg
-8Kg6Acqa+as13B02OnnyGUO0aKEscYk3x7F0JbRrhBjhpyKZGZTg6r3MUn6f8lgsliESV1lMrQSo
-x+ztSCC27+xJHhKN61OEVwbGVeunLOoEj9wn2yjrsGc3MN/+PntU2xdWmtbNybeQcy+7UlY8NUWB
-hybiVNhbMYUI9qV3kMhO6M3zoXdYgL5le4urmk15oA==
-=q2Cw
------END PGP SIGNATURE-----
-
---------------yxQ05rE4I03r9lxlh0bCXS2U--
