@@ -1,57 +1,75 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6654871180C
-	for <lists+nouveau@lfdr.de>; Thu, 25 May 2023 22:24:04 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 013567118D3
+	for <lists+nouveau@lfdr.de>; Thu, 25 May 2023 23:10:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7A73110E758;
-	Thu, 25 May 2023 20:23:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 224F210E76C;
+	Thu, 25 May 2023 21:10:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C581B886A4;
- Thu, 25 May 2023 20:23:54 +0000 (UTC)
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-bacfcc7d1b2so136489276.2; 
- Thu, 25 May 2023 13:23:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1685046233; x=1687638233;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=HviupHnR7WlIt0Rt/kfjmoXdYBgnsdUIrSRqZRmkzYw=;
- b=lNFm/w/1b46/vCzqygOMNyN8KxAD1Hq5Yu06ACSJXS2BdYGwUuP1CwA5j7sveLbIC+
- 6GiwCNlFi2EyaLrk6nFFa3i5DRQgA+hEZzpTLBqwi6bKgsehNOnpO29AMnHgbeLJWQb8
- 7BZXX0ehDq8rzTU7AJSRqNbFvQME1RcnPg+M3MtznaGfQEpiPBMEx9DBOZ21ZMpUTJ/M
- RMEe6kCwVO7eYqApftzIeSK9rtoktLNqJxMLAUKG5HVB5NL7O1Tihfta/c8qgraopf19
- X/vpEkLYG4jpYskSaPsHFHZy9s6QwtTl20OzmkvRyT9r3/yHeFLL0Xf4ZnVUBaMKV+G0
- XACQ==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 831B210E768
+ for <nouveau@lists.freedesktop.org>; Thu, 25 May 2023 21:10:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1685049048;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=tDnyD1Q+TvZD8RBnYsiyH5gRK/DXU5xMZC5lqC7VcXs=;
+ b=hM/mnt9at0ZBdh2FYfiBBvq3A2fDl29aK8OMETJwzUsf1geE4dUZYAiygkmNBqi2ApusAO
+ qfr7JZHuE6Fzqh3wtTlmVdhouh70dsK5M+Dli/NRnqPeFZUKGalzdlWifYTXb65/GBaixh
+ /7Xkk9zbCcV13WmfuHaQ7c688YK4Lbo=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-391-r0wsFsaVNN-x1voBi3c50w-1; Thu, 25 May 2023 17:10:46 -0400
+X-MC-Unique: r0wsFsaVNN-x1voBi3c50w-1
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-3f6a8c3ef10so14176401cf.2
+ for <nouveau@lists.freedesktop.org>; Thu, 25 May 2023 14:10:46 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685046233; x=1687638233;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=HviupHnR7WlIt0Rt/kfjmoXdYBgnsdUIrSRqZRmkzYw=;
- b=fDO1hn+EtKF65ligDEXfoLPWhBdMf/P5YG6oYglzXw36Ne9f3OdIpeubeNrAHynbzz
- baJ6ehnuYpS/PsssuNwi1udfJqKa/i8PJg49GrQb/XHvOqlGKuvrO9lqc1Q4P6I85JEZ
- bB5cv8pSbFocNTM3PT0OGtjgM8ttC5b1lASE3kL5YSMUBn56RXp85hcIIr45jWk4Kln2
- YqAQuXzmujsjh54nHQxKbZ5mDTO8wOMKP9Z25bYVyG4PNuW9Ch+slDnWL5EHC8+1o0uv
- 1J3UmqCiszMf4Jb9ZIjbMEQMdjiiIJC0ACd0E0/L8NZq2vKDsxcVxZI+dujgSrXDR0Z2
- nROg==
-X-Gm-Message-State: AC+VfDzUoBmF18xfoZmV60kfyvQFfgUYggPse1MzdLzrrhFe51raIZM3
- e4VWPk1VsuHW2dNbw2KdkrqdZNnzljXgjSYpIbz6Ifm45Jn1sw==
-X-Google-Smtp-Source: ACHHUZ6LtDSyP4LmayO+3/MeczcrtcnLu6NqOBuL3r0I3dP+pvxLbNatro8BhKZCH5MhErC1x/gZZFJi1TXtD2POT4s=
-X-Received: by 2002:a81:8303:0:b0:561:b584:180f with SMTP id
- t3-20020a818303000000b00561b584180fmr779198ywf.30.1685046232802; Thu, 25 May
- 2023 13:23:52 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1685049046; x=1687641046;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tDnyD1Q+TvZD8RBnYsiyH5gRK/DXU5xMZC5lqC7VcXs=;
+ b=UCYYy0BJMyKAkNiQAllIzyt0MGUmv+WVq+UyYBrjEbMBoQiSqtXa+jQCULwzBuk2hi
+ /e45DmXl4ipD6IdZ0Tz6sSmjKgLaKfgGGh1b79qX0Gau3shsidtdUq6pYegwKpnmeDcm
+ EpVoZMOb9qZvVViaOL8i4WoTsUYcUI9liTnRq44jRrdDKjolxKyY2NwbAhvj0QFezFef
+ Hy4a0vTlYRvWzJM7MtKMR9VYOiOSDc7Ju00oCY4haPjQM4C1ZazLgJzPceRsLXs+lT/q
+ gMI10PBZ54qevQKgXUSe2U05DvaM/HPXPHlqWTQza6dodLKr2be6eyxzYhOE8pRmYfYM
+ k7Jw==
+X-Gm-Message-State: AC+VfDyxx/KAZxFBHsft1v2ZLNW+11DqXr1lor7LYCEhChbItyqHVgAL
+ 5dhhjI8QeLh5czI04dQv+LoHYmB15gf+enArzYHjoNyo8a1oB/fqo3+1C5e9JpW5fmjdpMf7h4D
+ YXMLOL/zLb5g6ojYzWiSu4wLieg==
+X-Received: by 2002:ac8:5acf:0:b0:3e3:7e6f:423c with SMTP id
+ d15-20020ac85acf000000b003e37e6f423cmr1017692qtd.34.1685049046283; 
+ Thu, 25 May 2023 14:10:46 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ6tZiuI8gD3Aif7n+Bf8DUaassrUnfxP6XFasaXNKtLHxyDyblw20JldsbFKRXFeXMklWQvIQ==
+X-Received: by 2002:ac8:5acf:0:b0:3e3:7e6f:423c with SMTP id
+ d15-20020ac85acf000000b003e37e6f423cmr1017674qtd.34.1685049046045; 
+ Thu, 25 May 2023 14:10:46 -0700 (PDT)
+Received: from dell-per740-01.7a2m.lab.eng.bos.redhat.com
+ (nat-pool-bos-t.redhat.com. [66.187.233.206])
+ by smtp.gmail.com with ESMTPSA id
+ br5-20020a05622a1e0500b003ef5dc13bbbsm702340qtb.85.2023.05.25.14.10.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 May 2023 14:10:45 -0700 (PDT)
+From: Tom Rix <trix@redhat.com>
+To: bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com,
+ airlied@gmail.com, daniel@ffwll.ch, gsamaiya@nvidia.com
+Date: Thu, 25 May 2023 17:10:40 -0400
+Message-Id: <20230525211040.3233982-1-trix@redhat.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-From: Mario Marietto <marietto2008@gmail.com>
-Date: Thu, 25 May 2023 22:23:16 +0200
-Message-ID: <CA+1FSigK20ApfNTbJokd_uKfwueyk7wEYPg2QOLpHJ=0gK_bXw@mail.gmail.com>
-To: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="00000000000022ec1e05fc8a66bd"
-Subject: [Nouveau] libGL error: glx: failed to create dri2 screen libGL /
- error: failed to load driver: nouveau
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Nouveau] [PATCH] drm/nouveau/acr: remove unused variable loc
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,171 +81,44 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Tom Rix <trix@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---00000000000022ec1e05fc8a66bd
-Content-Type: text/plain; charset="UTF-8"
+gcc with W=1 reports
+drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:221:21: error: variable
+  ‘loc’ set but not used [-Werror=unused-but-set-variable]
+  221 |                 u32 loc, sig, cnt, *meta;
+      |                     ^~~
+This variable is not used so remove it.
 
-Hello.
+Signed-off-by: Tom Rix <trix@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-I wrote this tutorial some time ago because I wanted that Blender was able
-to recognize CUDA and the Nvidia driver directly within the linuxulator :
-
-https://www.reddit.com/r/freebsd/comments/1118eae/how_to_install_the_nvidia_driver_5257801_cuda_12/
-
-I was inspired by this tutorial :
-https://gist.github.com/Mostly-BSD/4d3cacc0ee2f045ed8505005fd664c6e
-
-someone found my tutorial and created this github :
-
-https://github.com/spfcraze/Nvidia-Drivers-linux
-
-He says that he created a Python script for updating Nvidia drivers on
-CentOS 7 and Ubuntu. That's nice,but it can't work. Why ? please give a
-look to an old post created by me some time ago and you will see :
-
-https://www.reddit.com/r/freebsd/comments/11431bi/how_to_blacklist_the_nouveau_driver_within_the/
-
-since the nouveau driver can't be blacklisted within the Linuxulator
-because it's impossible to run "sudo update-initramfs -u" inside of it. For
-this reason,I would ask if in your opinion the nouveau driver can be
-blacklisted directly in FreeBSD or in some other way.
-
-FreeBSD does not contain the nouveau kernel module so there is nothing to
-blacklist.
-
->
-https://www.reddit.com/r/freebsd/comments/11431bi/how_to_blacklist_the_nouveau_driver_within_the/
-
-These libGL errors are from Mesa libGL, which is trying to use the
-userspace part of nouveau (which is part of the Mesa project),
-presumably based on Nvidia GPU's PCI ID being known to Mesa, despite there
-being no nouveau kernel interface available.
-
-Since I'm trying to use Nvidia's binary driver (the only one which works on
-FreeBSD), Blender should have never loaded Mesa's libGL in the
-first place - there is most likely a configuration problem here with
-libglvnd, the component responsible for choosing the correct libGL
-implementation.
-
-When Blender fails to detect CUDA this has nothing to do with libGL and
-absolutely nothing to do with nouveau.
-
-Smplayer behaves the same as blender. I think this is a general behavior.
-Check below what happens when I run it within the linuxulator :
-
-root@marietto:/mnt/zroot2/zroot2 # chroot /compat/ubuntulunar /bin/bash
-
-root@marietto:/# smplayer
-
-QStandardPaths: error creating runtime directory '/var/run/user/1001' (No
-such file or directory)
-This is SMPlayer v. 22.7.0 (revision 10091) running on Linux
-libGL error: glx: failed to create dri2 screen
-*libGL error: failed to load driver: nouveau*
-
-
-Can you figure out a method to do what I want to do ? If we are able to
-"connect" the nVidia driver to the CG / graphic tool instead of the nouveau
-one,a lot of cool features will be unfrozen on FreeBSD. For example we
-could try to run Unreal Engine 5 within the linuxulator,Davinci
-Resolve,Maya 3D,a lot of cool stuff will use the nVidia driver + CUDA and
-it will work great. That's because unfortunately Nouveau does not support
-CUDA.
-
-
-Thanks.
-
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
+index f36a359d4531..bd104a030243 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
+@@ -218,7 +218,7 @@ nvkm_acr_lsfw_load_sig_image_desc_v2(struct nvkm_subdev *subdev,
+ 		const struct firmware *hsbl;
+ 		const struct nvfw_ls_hsbl_bin_hdr *hdr;
+ 		const struct nvfw_ls_hsbl_hdr *hshdr;
+-		u32 loc, sig, cnt, *meta;
++		u32 sig, cnt, *meta;
+ 
+ 		ret = nvkm_firmware_load_name(subdev, path, "hs_bl_sig", ver, &hsbl);
+ 		if (ret)
+@@ -227,7 +227,6 @@ nvkm_acr_lsfw_load_sig_image_desc_v2(struct nvkm_subdev *subdev,
+ 		hdr = nvfw_ls_hsbl_bin_hdr(subdev, hsbl->data);
+ 		hshdr = nvfw_ls_hsbl_hdr(subdev, hsbl->data + hdr->header_offset);
+ 		meta = (u32 *)(hsbl->data + hshdr->meta_data_offset);
+-		loc = *(u32 *)(hsbl->data + hshdr->patch_loc);
+ 		sig = *(u32 *)(hsbl->data + hshdr->patch_sig);
+ 		cnt = *(u32 *)(hsbl->data + hshdr->num_sig);
+ 
 -- 
-Mario.
+2.27.0
 
---00000000000022ec1e05fc8a66bd
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hello. <br></div><div><br></div><div>I wrote this tut=
-orial some=20
-time ago because I wanted that Blender was able to recognize CUDA and=20
-the Nvidia driver directly within the linuxulator :<br></div><div><br></div=
-><div><a href=3D"https://www.reddit.com/r/freebsd/comments/1118eae/how_to_i=
-nstall_the_nvidia_driver_5257801_cuda_12/" target=3D"_blank">https://www.re=
-ddit.com/r/freebsd/comments/1118eae/how_to_install_the_nvidia_driver_525780=
-1_cuda_12/</a></div><div><br></div><div>I was inspired by this tutorial : <=
-a href=3D"https://gist.github.com/Mostly-BSD/4d3cacc0ee2f045ed8505005fd664c=
-6e" target=3D"_blank">https://gist.github.com/Mostly-BSD/4d3cacc0ee2f045ed8=
-505005fd664c6e</a></div><div><br></div><div>someone found my tutorial and c=
-reated this github :</div><div><br></div><div><a href=3D"https://github.com=
-/spfcraze/Nvidia-Drivers-linux" target=3D"_blank">https://github.com/spfcra=
-ze/Nvidia-Drivers-linux</a></div><div><br></div><div>He
- says that he created a Python script for updating Nvidia drivers=20
-on CentOS 7 and Ubuntu. That&#39;s nice,but it can&#39;t work. Why ? please=
- give a look
- to an old post created by me some time ago and you will see :<br></div><di=
-v><br></div><div><a href=3D"https://www.reddit.com/r/freebsd/comments/11431=
-bi/how_to_blacklist_the_nouveau_driver_within_the/" target=3D"_blank">https=
-://www.reddit.com/r/freebsd/comments/11431bi/how_to_blacklist_the_nouveau_d=
-river_within_the/</a></div><div><br></div><div>since the nouveau driver can=
-&#39;t be blacklisted within the Linuxulator because it&#39;s impossible to=
- run &quot;sudo=20
-update-initramfs -u&quot; inside of it. For this reason,I would ask if in y=
-our opinion the nouveau
- driver can be blacklisted directly in FreeBSD or in some other way.</div><=
-div><font color=3D"#888888"><br></font></div><div><span class=3D"gmail-im">=
-</span>
-FreeBSD does not contain the nouveau kernel module so there is nothing to b=
-lacklist.<span class=3D"gmail-im"><br>
-<br>
-&gt; <a href=3D"https://www.reddit.com/r/freebsd/comments/11431bi/how_to_bl=
-acklist_the_nouveau_driver_within_the/" rel=3D"noreferrer" target=3D"_blank=
-">https://www.reddit.com/r/freebsd/comments/11431bi/how_to_blacklist_the_no=
-uveau_driver_within_the/</a><br><br></span>
-These libGL errors are from Mesa libGL, which is trying to use the userspac=
-e part of nouveau (which is part of the Mesa project), <br>
-presumably based on Nvidia GPU&#39;s PCI ID being known to Mesa, despite th=
-ere being no nouveau kernel interface available.<br>
-<br>
-Since I&#39;m trying to use Nvidia&#39;s binary driver (the only one which =
-works on FreeBSD), Blender should have never loaded Mesa&#39;s libGL in the=
- <br>
-first place - there is most likely a configuration problem here with=20
-libglvnd, the component responsible for choosing the correct libGL <br>
-implementation.<br>
-<br>
-When Blender fails to detect CUDA this has nothing to do with libGL and abs=
-olutely nothing to do with nouveau.<font color=3D"#888888"><br></font></div=
-><div><font color=3D"#888888"><br></font></div><div><div>Smplayer behaves t=
-he same as blender. I think this is a general=20
-behavior. Check below what happens when I run it within the linuxulator :<b=
-r></div><div><br></div><div><span style=3D"font-family:times new roman,seri=
-f"></span></div><div><span style=3D"color:rgb(0,0,0);background-color:rgb(2=
-55,255,255);font-family:times new roman,serif">root@marietto:/mnt/zroot2/zr=
-oot2 # chroot /compat/ubuntulunar /bin/bash</span></div><div><span style=3D=
-"font-family:times new roman,serif"><br></span></div><div><span style=3D"fo=
-nt-family:times new roman,serif">root@marietto:/# smplayer=C2=A0</span></di=
-v><div><span style=3D"font-family:times new roman,serif"><br></span></div><=
-div><span style=3D"font-family:times new roman,serif">QStandardPaths: error=
- creating runtime directory &#39;/var/run/user/1001&#39; (No such file or d=
-irectory)
-<br>This is SMPlayer v. 22.7.0 (revision 10091) running on Linux
-<br>libGL error: glx: failed to create dri2 screen
-<br><b>libGL error: failed to load driver: nouveau</b><br></span></div><div=
-><span style=3D"font-family:times new roman,serif"><br></span></div><div><s=
-pan style=3D"font-family:monospace"><br></span></div></div>Can you figure o=
-ut a method to do what I want to do ? If we are able to=20
-&quot;connect&quot; the nVidia driver to the CG / graphic tool instead of t=
-he=20
-nouveau one,a lot of cool features will be unfrozen on FreeBSD. For example=
- we=20
-could try to run Unreal Engine 5 within the linuxulator,Davinci=20
-Resolve,Maya 3D,a lot of cool stuff will use the nVidia driver + CUDA and i=
-t=20
-will work great. That&#39;s because unfortunately Nouveau does not support =
-CUDA.<br><div><span class=3D"gmail_signature_prefix"><br></span></div><div>=
-<span class=3D"gmail_signature_prefix"><br></span></div><div><span class=3D=
-"gmail_signature_prefix">Thanks.</span></div><div><span class=3D"gmail_sign=
-ature_prefix"><br></span></div><div><span class=3D"gmail_signature_prefix">=
--- </span></div><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=
-=3D"gmail_signature">Mario.<br></div></div>
-
---00000000000022ec1e05fc8a66bd--
