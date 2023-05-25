@@ -2,74 +2,73 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FD59710728
-	for <lists+nouveau@lfdr.de>; Thu, 25 May 2023 10:18:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2C12710A57
+	for <lists+nouveau@lfdr.de>; Thu, 25 May 2023 12:52:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5D4C110E55E;
-	Thu, 25 May 2023 08:18:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E2B4D10E8C9;
+	Thu, 25 May 2023 10:52:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sonic307-53.consmr.mail.ir2.yahoo.com
- (sonic307-53.consmr.mail.ir2.yahoo.com [87.248.110.30])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 94D7A10E55E
- for <nouveau@lists.freedesktop.org>; Thu, 25 May 2023 08:18:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.fr; s=s2048;
- t=1685002714; bh=PGqelS34AqAYsN9YNfL/9nx3YEv7uXuEdSU8RgqrJug=;
- h=From:Subject:Date:To:References:From:Subject:Reply-To;
- b=U8vP2/z91WgQm0VJptkgp45OrdIAiKfa+1d0wvBNfCnA7E3sVLYrJOyfD0MGAKrKrvyuc5TwT+AVjiqU604A1XsiFIlslji+QSCBcWdNK/iYvWUj6R//vVjZ7uVkBHIhOacOo/6CWYA2Y2A4ag8cv57qiYQEz8LFB7IOqauLTDRXm9abdqlEwtjbs/JYaD+yr52WX3/nzdQMPGw8r94lTiS3js3vKR7tNcr3OsGiyEbKG/zcse8qIXu/9H+gAw4dH5efT32v8c3zCfyqjlT9aPPY/YpqQL1cxcQA5tPyL66aLuWhyv8kxck6xOb7Mmcl/4mvZ/VJXNVabhzc096AYw==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1685002714; bh=MGln3QT0RxciLSh93YAzgn1BkwkFdyn3//RBKA2mxvd=;
- h=X-Sonic-MF:From:Subject:Date:To:From:Subject;
- b=nT6s3mi6Y0oD4OfYLW+ZOfldrJ+H4P0Pz9ZjxQnyY3+z7RSRPaiiBbcLOEysjHMLdodS3RLS/qIqVIrSRvyo4NYw3dSa+B4nAJSRnVTraPFoFAJ3EDB3poJHIIwmASQ+N7IrPkkgeOn6ZiRjP5ZyKYGjDDLUlDo6sSRzKqJ8fcwExOPBTXg6SU2edLlwS6bLAAhYpkGvVYS6srkdb4YnWZOHvHD80MFn8FPnAQm9nrM5+Sfrh1ZyAQkYC6/Lu5iBntVEXLph4e2gKhHHc1QQR46F9/0c9YnDSbMXY0MFKCMX04+veLj0Jov1gRE5+qBsKr9b0uuKGLTaqhBdPQO/bw==
-X-YMail-OSG: MP5KGFoVM1n9ivQCCtXDjE3hELpMepTGLOzpW0DCiT6tZPliGweVRu_8WAxcfmE
- q9V3tavQWSeHa4JWANMj363GU4jTwJkMwBkJOyGOPv6MI_L8aqjKeEGouF_oGa2PtbZ6qlD5J3Ca
- Qs9oGYmvEWBUU2nehVTkL8w4s.h.zhm11bZ0Y7W5g39A868wL1LN_twL636AzaHLHP.0_AxNR2i4
- 0HY5nBTJ69ufqr5xfBDyseipb0HwrpIWzd5hZKwCYrjSx73y1Qbebe7ML2lAAkkaRn2dUJzKJvxX
- Je0kKn.FYdssu1Y.vPwfqf6Kw.cDUR57HKnp4I18mk3oS73thYBW8RQBKcXD5klgEhZDlzwXBl3g
- 7V57frSYwxg1CjADqm7_.PnBcl6RhrnWoNBfnziRyf40_l0L4ibbQY_2lSut9F1N9V9CF5dRSGCu
- 8FCiYMVe8R122blEORX9mlBSbDZ2k1iOu3P8K.Qh0mAe3xc6qF63eSHqcwS3SD7mAeZL57vfZYG1
- SGrd4RLqmjdaylnwe_u15dOtIJgBiI4PxaQpCutASCIA3BiRWInxgh.GLL8EYaPGE3hPdgZyFhYi
- 8D1e48O.msUTf4SZmBOPmwhLXBlJ1jRamzplTGb7hxUH9Ppzpmu0l327t9DXt09eYphTqDKKk8eB
- 4LypwtJKerNQZgtxW7kTyLxKYf6GhXXnKASGoMvtmq6NxlkPeB8Y6hkmeDOuNIwsP0CMSEhfGo1b
- WgcJN90T7BefU9Cei58j_zCgo1yAaah7.WLbw_LNlQPEib72I9cWzllzzHs418vt4d7_AUSUkMtK
- HrQIZy7LIzgKuqEygheVG13zr3BgelXvwiHW0OtcxfgNzdSYxGWvjOuYzmxWPp8hFuVBzEPl4kQi
- UYPdXsKmejJqe_RQox7bVfL5Zgx7v2zv3XS_AhbtpF8dTreCpG8xmMU3BiBMhLXr3od0Rt.QXFK_
- 03udmKz2u8h1.Db2Cs9KnaPnlqiFDsRNH8FByusqB5KOmjPmZewV0SIherTBL2Nf19FfVF9UD13O
- OeD64jRpuEO2JhrNhIGv6qz6a_9vsZ0ihIs9FjBuPrbOMxgFLgR2UuwPHQKmr1xvzEuSQi0yYPCi
- qG2XpyvdXUPirlTvNGr6eyYMhAsJQgH_hR7z8b4586CNu8mFYnVrCudfQ0Gdr8H1J5Ne6sEoFht3
- Pm2s2XhDSLyIg39pdRHglfhLzqQoTqF66fEd2OzRBnw5lJmH2XoFjrZMMkL2Ga0VJ6cdWvTkldLE
- PAqozBcsUOr7VI3yi0shkPEtJz.vzHTEeS8wbBHW0DqqzzaPGJZXp6pqwj7GDBqBSHF_caYZkoqB
- QY4RJza3JA95_OxaMf6rR6sebbIJSEAcDWPQxZGVTrQN5Vyr6xm7IqhvTCfR4FCup5osp_bTIgPx
- Kk9zCSMhDacwkTqcvf3zCV_JOJLMngKBxRcgepxoSzKQ_tcWvoUeXaYZxhnUJ0wPuu7qPiBPtJOV
- 58tyFfawNXmq6WawBreQa.zm.vQkysTbFuXrdmV4Q5hM5l6WLawiahGZ4.lJdSWGgS.kdUj.Bp0W
- AY6nh6OvyKAjxlQ.2IRf5tKQfcjJ50W.aLzkN1kEpbeXq2Z4PIQNfZkptn.i3CKIVjLujjFBABlV
- M0w3ghJAEa3u23PJgD0wDQKbbiaNFU1QXAwrs.BYkmh6D0jifalVCM_WbTtpb7Ra8furNaqQOcSP
- GZiNleg8VV0zDIw31sbxEuZIBthuD_SFDg8rbmB9cxHnNtv6_SWEveSB2aPbtlXkgjlzl1vSRle.
- JWviaUth54TokfZxdCrSZJjLwQ6ZWL0bPew52u7kr7BnVLGJzhmL0cPpGqfq.1Q5zkgDZXEMMFTL
- 3YqPcL0UAUK5fOHe9iYPrpai87KwDDQ2409brslzoiPjn5DfpNuENZTn2j0DoJMsWEt0jWuoV.q2
- Wmr5UtJroVP_Err7_z26gsB9RfMtLSkBp_sFPiOvyaVo3qnUbu4qy4PLlOk23eRd.JeW3sZes1.p
- ce.BipEVUA3nix4Nkkr3c0i2tMZDpSGfKGA1iU0quH.QkWWIuOR0JowVDp_TzdS.vuaq0TsOW24r
- OgAVsy34SHgPwqhAzc_XOXhHxYNxiRz8u1DDrZPNHsZAOkrbu5WY3zCwoAZQKKjXEN5mF09y5IQS
- Vwbf3_gzwcXJFlFXkq7NM.SVZD6E4BcfEuyKYqUEhYaXIbq1yyT6cU0wjj5KUr8EXGm79dCrskkY
- t3NZcfWfQEy4htDw-
-X-Sonic-MF: <djod4556@yahoo.fr>
-X-Sonic-ID: 43050082-5f35-4332-9a6d-ca4bc43ce47c
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic307.consmr.mail.ir2.yahoo.com with HTTP; Thu, 25 May 2023 08:18:34 +0000
-Received: by hermes--production-ir2-7867f454fc-mmctx (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID cb21648fbd03db302820c83f262edb83; 
- Thu, 25 May 2023 08:18:30 +0000 (UTC)
-From: Damien Dejean <djod4556@yahoo.fr>
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3731.500.231\))
-Message-Id: <9F91C657-9AF2-45D7-86E5-D2472F1CE0AD@yahoo.fr>
-Date: Thu, 25 May 2023 17:18:19 +0900
-To: nouveau@lists.freedesktop.org
-X-Mailer: Apple Mail (2.3731.500.231)
-References: <9F91C657-9AF2-45D7-86E5-D2472F1CE0AD.ref@yahoo.fr>
-Subject: [Nouveau] Nouveau with G98: console mixed up
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E63C610E154;
+ Thu, 25 May 2023 10:52:09 +0000 (UTC)
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-64d2467d640so2333083b3a.1; 
+ Thu, 25 May 2023 03:52:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1685011929; x=1687603929;
+ h=content-transfer-encoding:cc:to:subject:from:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uKxz95HpCbuh/D0m8xyBwXgcATYmLHxvtvHZsmTAjvM=;
+ b=MWrsouSOOS/cmfHAbtaBDlA5hu/Zsz8eQpc0ejq/r1lHJ6zWF379v3eijhTI/KVTpS
+ 1C7+Mciljxexh94Kx57j0geBMnJLzmolaCy026y9US7G8p/pc8tDP4gaZVSg3nQmUFMb
+ p5YhDE5Om+Vw35b25srQIuABNbDm+ziiuaseIo2mPO6ROWPkW6HwVKyj5sGXWePXNU7o
+ w2ZeKQfs+OykPZX63MPepCJC4yqk/MewWKh8NxfCDfUMDTC84lt1Cpi96jkU22ukBHN9
+ CJyDZLXT5XP7ODQyj9PFsd08PcGDBEiyW4SohPSK/SPmau/sPhFcfOkgbpSUuxA4KIgs
+ CFmA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1685011929; x=1687603929;
+ h=content-transfer-encoding:cc:to:subject:from:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=uKxz95HpCbuh/D0m8xyBwXgcATYmLHxvtvHZsmTAjvM=;
+ b=UVWft2OmeLe0DMW3CYt7Z4grUmCr8v0aAmYqB62hcfcHIOwWHqDU5CJtH07GKGtk/0
+ 9FKcN+3xljjpV2jf8D2iaWm8hzUMxjMmMIM8MsW+wYQaedWp0qG7R47PDGRUUjCeaeUj
+ VLS5DeGME7NarJNgRl15bckeNSOkfaRQyCxBNLqTodYXljhVQrKSxquFdWXIBXun49V1
+ K6MUjG5F0SXAddbnbAH/lwCkhDUPyOioJj2vmf2NgjDsNr0Org0W0HeXRmw+gtBzM+qw
+ CgR0Xga4OawFepEwTLuY16p79Lz0vjD2it6K8KDqSj/9C3f8Rd8i8NF+V//tJdHUwRIP
+ 6YOA==
+X-Gm-Message-State: AC+VfDycr0KJ6KUJthLIx+DbREaLAjQ9rtRDGflbzFqk7aF9qHuWWtdZ
+ XVGHVw8mWXTb/W6gS1rBAyw=
+X-Google-Smtp-Source: ACHHUZ4t3SiYOJoolZUCHAT1XgTAYYbV/XtXlsKSF3tKEyR9blhYcZ1CFakdTFQ200+G0aZdshBR9g==
+X-Received: by 2002:a05:6a20:8413:b0:10c:5ff4:8bb9 with SMTP id
+ c19-20020a056a20841300b0010c5ff48bb9mr10574335pzd.58.1685011928691; 
+ Thu, 25 May 2023 03:52:08 -0700 (PDT)
+Received: from [192.168.43.80] (subs02-180-214-232-68.three.co.id.
+ [180.214.232.68]) by smtp.gmail.com with ESMTPSA id
+ 18-20020a630012000000b0052c9d1533b6sm905392pga.56.2023.05.25.03.52.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 25 May 2023 03:52:08 -0700 (PDT)
+Message-ID: <e8f93560-a2f6-8e9f-031a-88d333482a31@gmail.com>
+Date: Thu, 25 May 2023 17:52:02 +0700
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Content-Language: en-US
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux Regressions <regressions@lists.linux.dev>,
+ Linux Framebuffer <linux-fbdev@vger.kernel.org>,
+ DRI Development List <dri-devel@lists.freedesktop.org>,
+ Linux Nouveau/NVIDIA <nouveau@lists.freedesktop.org>,
+ Linux Stable <stable@vger.kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+Subject: [Nouveau] Fwd: absent both plymouth, and video= on linu lines,
+ vtty[1-6] framebuffers produce vast raster right and bottom borders
+ on the larger resolution of two displays
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,27 +80,56 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: Antonino Daplas <adaplas@gmail.com>, Helge Deller <deller@gmx.de>,
+ Felix Miata <mrmazda@earthlink.net>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello nouveau team!
+Hi,
 
-I installed Debian 11 on an old laptop with a Geforce 9300M graphics =
-card. The system starts but as soon as the session manager starts, the =
-display is black.
-If I start in =E2=80=9Crecovery mode=E2=80=9D, ie without display =
-manager but only a shell, the console gets completely mixed up. I can =
-see something is printed on the screen (I see pixel lines, and even the =
-colour of some systems traces), but the pixel lines are not aligned and =
-the content is not readable.
+I notice a regression report on Bugzilla [1]. Quoting from it:
 
-I also tried to set nouveau.modeset=3D0 on the kernel command line to =
-boot with a console working, I can get a shell but I don=E2=80=99t know =
-what else to do to debug the situation.
+> Original Summary:
+> absent both plymouth, and video= on linu lines, vtty[1-6] framebuffers produce vast raster right and bottom borders on the larger resolution of two displays
+> 
+> To reproduce:
+> 1-connect two unequal native resolution displays to a Tesla or Firmi GPU
+> 2-don't have plymouth in use (I don't ever have it installed, so don't know whether it impacts)
+> 3-don't include e.g. video=1440x900@60 directive on Grub's linu lines
+> 4-boot Tumbleweed or Fedora 38
+> 5-switch to a vtty, e.g. Ctrl-Alt-F3
+> 
+> Actual behavior:
+> 1-Both displays utilize the resolution (same pixel grid) of the lower resolution display
+> 2-Lower resolution display behaves as expected (light text on black background)
+> 3-Higher resolution display uses same pixels as lower resolution display, with light text on black background, leaving right side and bottom raster instead of black
+> 
+> Expected behavior:
+> 1-Both displays utilize the resolution (same pixel grid) of the lower resolution display
+> 2-Lower resolution display behaves as expected
+> 3-Entire higher resolution display's background is black instead of portions in raster
+> 
+> Workaround: add e.g. video=1440x900@60 to Grub's linu lines, which causes both displays to use the same nominal mode on the full display space.
+> 
+> Typical other linu line options:
+> noresume consoleblank=0 net.ifnames=0 ipv6.disable=1 preempt=full mitigations=none
+> 
+> My Tesla has HDMI and DVI outputs, tested with 1920x1200 and 1680x1050 displays.
+> My Fermi has dual DisplayPort, tested with 2560x1440 and 1680x1050 displays.
+> Occurs Tumbleweed with 6.3.2 and 6.2.12 kernel-default, and with 6.2.15 on Fedora 38, and (partially with Tesla, right side only) with 6.2.12 and 6.3.3 on Mageia 9.
+> Does not occur with 6.1.12 kernel-default on NVidia, or with AMD Caicos (Terascale2) GPU, or with Intel Eaglelake GPU.
+> Tested only on legacy booting (no UEFI support).
+> Others might describe what I call "raster" as multicolored snow.
 
-Do you have any advices on parameters I should give to the driver, or to =
-the system to make it works ? Since I can see pixels draw on the screen =
-I guess we=E2=80=99re not far from something working but =E2=80=A6
+See bugzilla for the full thread and attached dmesg.
 
-Thanks,
-Damien=
+Anyway, I'm adding it to regzbot:
+
+#regzbot introduced: v6.1.12..v6.2.12
+#regzbot title: vast raster right and bottom borders on larger display (two displays with inequal resolution) unless forcing resolution with video= parameter
+
+Thanks.
+
+-- 
+An old man doll... just what I always wanted! - Clara
