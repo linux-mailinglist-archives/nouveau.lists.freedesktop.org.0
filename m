@@ -2,49 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3B8E712942
-	for <lists+nouveau@lfdr.de>; Fri, 26 May 2023 17:21:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D6D6713BAA
+	for <lists+nouveau@lfdr.de>; Sun, 28 May 2023 20:34:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5ADBF10E7FE;
-	Fri, 26 May 2023 15:20:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 467C410E0F0;
+	Sun, 28 May 2023 18:34:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vs1-f52.google.com (mail-vs1-f52.google.com
- [209.85.217.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3280B10E1CB;
- Fri, 26 May 2023 15:20:56 +0000 (UTC)
-Received: by mail-vs1-f52.google.com with SMTP id
- ada2fe7eead31-42c38a6daf3so527210137.3; 
- Fri, 26 May 2023 08:20:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685114454; x=1687706454;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=b+SOwkMnAYLUhEyDhUUgTK3i7OucfEXqIXWQlJcLoVU=;
- b=PuzLeEcfvg/LdSchneMYTd0vUpYvTU6YZvM2Y3o1q0AsC9FK8+Nkw/5MNFR+dIZXnU
- lkFEzO03ZQJ93LbRiV8biz7XAYN9l5UYCzWcA+U2ADY6AnKR6H4hSOhLo7HYqlRUsvsv
- nKa6muV1DoL+sYLAz1o3pGgtGu5Rm28lsmNWFNCvDuFVdjbk7qjzZuthKkvwIxrN1RyF
- QSR2i8AJ2mgEy4/JnoKpJpflO2UQm4uxRLD2TPRbsPVSRYXle30AklVRmartoXxxengG
- 8bn7OTwbq0DAnaPjEAkfc/nfkUpeRQXl76X4ijTTXJgMad0akJ5se72Ko9M8KO57XMr7
- +O4w==
-X-Gm-Message-State: AC+VfDyKLGrtB3aNB2Hps4KEt4L+MhhN5bgMD2kAwfuhNmMJdFclw0pc
- KCLr/N2XDieE1s+qI+hLDeBsCrQd4W6GOxSOqw8=
-X-Google-Smtp-Source: ACHHUZ6ZlhFY7AADiHbWA1tNcXhU9OhjLGRqgcDbeU13+spfQOI9Yck0GdZSs3V5xPT9GKA0itjGIYseaGK56N8MAdk=
-X-Received: by 2002:a67:fb0c:0:b0:436:c4a:bcc4 with SMTP id
- d12-20020a67fb0c000000b004360c4abcc4mr644960vsr.21.1685114454682; Fri, 26 May
- 2023 08:20:54 -0700 (PDT)
+Received: from lilac.mail.einfra.hu (lilac.mail.einfra.hu
+ [IPv6:2001:738:0:415::6])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1B24310E0F0
+ for <nouveau@lists.freedesktop.org>; Sun, 28 May 2023 18:34:50 +0000 (UTC)
+Received: from [2a02:ab88:38c:6f80:31fb:e6cb:e0fd:bc4a] (helo=fin)
+ by lilac.mail.einfra.hu with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <wferi@niif.hu>) id 1q3LE3-0004cS-32
+ for nouveau@lists.freedesktop.org; Sun, 28 May 2023 20:34:43 +0200
+Received: from wferi by fin with local (Exim 4.94.2)
+ (envelope-from <wferi@niif.hu>) id 1q3LE2-00081j-CO
+ for nouveau@lists.freedesktop.org; Sun, 28 May 2023 20:34:42 +0200
+Resent-To: nouveau@lists.freedesktop.org
+Resent-From: =?utf-8?Q?Ferenc_W=C3=A1gner?= <wferi@niif.hu>
+Resent-Date: Sun, 28 May 2023 20:34:42 +0200
+Resent-Message-ID: <87zg5ojoe5.fsf@fin.soreny>
+Received: from linzer.ki.iif.hu ([unix socket])
+ by linzer (Cyrus git2.4.17+0-Debian-2.4.17+nocaldav-0+deb8u2) with LMTPA;
+ Sat, 27 May 2023 22:09:01 +0200
+X-Sieve: CMU Sieve 2.4
+Received: from lilac.mail.einfra.hu (lilac.mail.einfra.hu
+ [IPv6:2001:738:0:415::6])
+ by linzer.ki.iif.hu (Postfix) with ESMTPS id 3DE2F4060C2
+ for <wferi@niif.hu>; Sat, 27 May 2023 22:09:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=niif.hu; s=dkim;
+ t=1685218141;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=DzAp/jve1zp43u5fpxQ4w83Zi7kQvSCMWZiv+XXUqxM=;
+ b=J6i86MVoC42YleUWIFnI2mNJasVv3dmAhx4w8ajgi1s6d0DNQ7GYpQplvls2K33q6SlGpE
+ YanGSgDK6GJTBaXz0OjzuoxEuSF4pxBUuaAH/Qw8kbR5m09W9o2s7y5D59VVfbEQevyc1D
+ pHzDsFi+YvcBmIzaBPbc6LiunZs5E14zHyHgUAs2rh1JAxMptvDUeDVff8KU/U5vQKjQNJ
+ OU3fktneyBd2XTerBRt7je9/Kq0Futrg+kd7b/QA63cSZpjsw0Tdhama5TVWZcFmWPgM2F
+ xWoGlcxQBDsIai6BvHDF/tg4p8V44NoGrVGsu8l+F9dIuPhpu0CIL6iO4d+6SA==
+Received: from [2a02:ab88:38c:6f80:7012:8c25:ce40:6164] (helo=fin)
+ by lilac.mail.einfra.hu with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <wferi@niif.hu>)
+ id 1q30Dk-0002hA-FB; Sat, 27 May 2023 22:09:00 +0200
+Received: from wferi by fin with local (Exim 4.94.2)
+ (envelope-from <wferi@niif.hu>)
+ id 1q30Di-0003dJ-Kh; Sat, 27 May 2023 22:08:58 +0200
+From: =?utf-8?Q?Ferenc_W=C3=A1gner?= <wferi@niif.hu>
+To: nouveau@lists.freedesktop.org
+Date: Sat, 27 May 2023 22:08:58 +0200
+Message-ID: <875y8dlep1.fsf@fin.soreny>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
 MIME-Version: 1.0
-References: <20230526091052.2169044-1-kherbst@redhat.com>
-In-Reply-To: <20230526091052.2169044-1-kherbst@redhat.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Fri, 26 May 2023 11:20:43 -0400
-Message-ID: <CAKb7Uvha74HOvny25aqnwzvvRLpc7+DNQm6QEAk4oxfTa1urJg@mail.gmail.com>
-To: Karol Herbst <kherbst@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH v2] drm/nouveau: bring back blit subchannel
- for pre nv50 GPUs
+Content-Type: text/plain
+Subject: [Nouveau] Powering down laptop GPU TU117GLM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,75 +68,19 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, May 26, 2023 at 5:11=E2=80=AFAM Karol Herbst <kherbst@redhat.com> w=
-rote:
->
-> 1ba6113a90a0 removed a lot of the kernel GPU channel, but method 0x128
-> was important as otherwise the GPU spams us with `CACHE_ERROR` messages.
->
-> We use the blit subchannel inside our vblank handling, so we should keep
-> at least this part.
->
-> v2: Only do it for NV11+ GPUs
->
-> Closes: https://gitlab.freedesktop.org/drm/nouveau/-/issues/201
-> Fixes: 4a16dd9d18a0 ("drm/nouveau/kms: switch to drm fbdev helpers")
-> Signed-off-by: Karol Herbst <kherbst@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_chan.c |  1 +
->  drivers/gpu/drm/nouveau/nouveau_chan.h |  1 +
->  drivers/gpu/drm/nouveau/nouveau_drm.c  | 20 +++++++++++++++++---
->  3 files changed, 19 insertions(+), 3 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.c b/drivers/gpu/drm/nou=
-veau/nouveau_chan.c
-> index e648ecd0c1a0..3dfbc374478e 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_chan.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_chan.c
-> @@ -90,6 +90,7 @@ nouveau_channel_del(struct nouveau_channel **pchan)
->                 if (cli)
->                         nouveau_svmm_part(chan->vmm->svmm, chan->inst);
->
-> +               nvif_object_dtor(&chan->blit);
->                 nvif_object_dtor(&chan->nvsw);
->                 nvif_object_dtor(&chan->gart);
->                 nvif_object_dtor(&chan->vram);
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.h b/drivers/gpu/drm/nou=
-veau/nouveau_chan.h
-> index e06a8ffed31a..bad7466bd0d5 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_chan.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_chan.h
-> @@ -53,6 +53,7 @@ struct nouveau_channel {
->         u32 user_put;
->
->         struct nvif_object user;
-> +       struct nvif_object blit;
->
->         struct nvif_event kill;
->         atomic_t killed;
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouv=
-eau/nouveau_drm.c
-> index cc7c5b4a05fd..9512f1c2f871 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> @@ -369,15 +369,29 @@ nouveau_accel_gr_init(struct nouveau_drm *drm)
->                 ret =3D nvif_object_ctor(&drm->channel->user, "drmNvsw",
->                                        NVDRM_NVSW, nouveau_abi16_swclass(=
-drm),
->                                        NULL, 0, &drm->channel->nvsw);
-> +
-> +               if (ret =3D=3D 0 && device->info.chipset >=3D 0x11) {
+Hi,
 
-Can you double-check that this is needed on NV15? IIRC there's some
-non-linearity of chipsets here which is why we had (some long time
-ago, not sure if it's still there), a chip class which would simplify
-such checks.
+Sorry if I'm reaching the wrong forum, please advise if so.  My question
+is not about the main focus of this community, but I had no better idea
+about where to look for the relevant expertise.
 
-Cheers,
-
-  -ilia
+So: this Dell Precision 5560 laptop is built with a "T1200 Laptop GPU",
+and I suspect it draws power even though I don't ever use it, heating
+the computer and shortening battery life.  Is there a way to shut it
+down for good?  (Or to make sure it isn't causing my problems?)
+-- 
+Thanks,
+Feri.
