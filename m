@@ -2,124 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9FD997373AF
-	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:20:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8D387373EC
+	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:21:18 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 42AA110E329;
-	Tue, 20 Jun 2023 18:20:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A3F6410E362;
+	Tue, 20 Jun 2023 18:20:38 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
- [IPv6:2001:67c:670:201:290:27ff:fe1d:cc33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0F75710E08B
- for <nouveau@lists.freedesktop.org>; Thu,  1 Jun 2023 15:40:34 +0000 (UTC)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
- by metis.ext.pengutronix.de with esmtps
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <ukl@pengutronix.de>)
- id 1q4kPH-0006TI-0k; Thu, 01 Jun 2023 17:40:07 +0200
-Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
- by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
- (envelope-from <ukl@pengutronix.de>)
- id 1q4kPD-004Nxp-Bi; Thu, 01 Jun 2023 17:40:03 +0200
-Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
- (envelope-from <ukl@pengutronix.de>)
- id 1q4kPC-00ACbI-LP; Thu, 01 Jun 2023 17:40:02 +0200
-Date: Thu, 1 Jun 2023 17:40:02 +0200
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
-To: Liviu Dudau <liviu.dudau@arm.com>,
- Mihail Atanassov <mihail.atanassov@arm.com>,
- Brian Starkey <brian.starkey@arm.com>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Russell King <linux@armlinux.org.uk>, Joel Stanley <joel@jms.id.au>,
- Sam Ravnborg <sam@ravnborg.org>, Boris Brezillon <bbrezillon@kernel.org>,
- Nicolas Ferre <nicolas.ferre@microchip.com>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>,
- Claudiu Beznea <claudiu.beznea@microchip.com>,
- Andrzej Hajda <andrzej.hajda@intel.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
- Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
- Rahul T R <r-ravikumar@ti.com>, Jayshri Pawar <jpawar@cadence.com>,
- Liu Ying <victor.liu@nxp.com>, Shawn Guo <shawnguo@kernel.org>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Minghao Chi <chi.minghao@zte.com.cn>, Mark Brown <broonie@kernel.org>,
- Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
- Lucas Stach <l.stach@pengutronix.de>, Inki Dae <inki.dae@samsung.com>,
- Seung-Woo Kim <sw0312.kim@samsung.com>,
- Kyungmin Park <kyungmin.park@samsung.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
- Jingoo Han <jingoohan1@gmail.com>, Stefan Agner <stefan@agner.ch>,
- Alison Wang <alison.wang@nxp.com>, Xinliang Liu <xinliang.liu@linaro.org>,
- Tian Tao <tiantao6@hisilicon.com>,
- Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
- Jani Nikula <jani.nikula@intel.com>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Danilo Krummrich <dakr@redhat.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
- Philipp Zabel <p.zabel@pengutronix.de>,
- Paul Cercueil <paul@crapouillou.net>,
- Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
- Qiang Yu <yuq825@gmail.com>,
- Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
- Linus Walleij <linus.walleij@linaro.org>,
- Chun-Kuang Hu <chunkuang.hu@kernel.org>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- Kevin Hilman <khilman@baylibre.com>, Rob Clark <robdclark@gmail.com>,
- Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Akhil P Oommen <quic_akhilpo@quicinc.com>,
- Ricardo Ribalda <ribalda@chromium.org>,
- Konrad Dybcio <konrad.dybcio@somainline.org>,
- Johan Hovold <johan+linaro@kernel.org>, Stephen Boyd <swboyd@chromium.org>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Liu Shixin <liushixin2@huawei.com>,
- Douglas Anderson <dianders@chromium.org>,
- Miaoqian Lin <linmq006@gmail.com>, Kuogee Hsieh <quic_khsieh@quicinc.com>,
- Bjorn Andersson <andersson@kernel.org>, Marek Vasut <marex@denx.de>,
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+ by gabe.freedesktop.org (Postfix) with ESMTP id AA64F10E041;
+ Sun,  4 Jun 2023 20:55:39 +0000 (UTC)
+Received: from loongson.cn (unknown [10.20.42.43])
+ by gateway (Coremail) with SMTP id _____8CxZ_FJ+nxkV2gEAA--.9186S3;
+ Mon, 05 Jun 2023 04:55:37 +0800 (CST)
+Received: from openarena.loongson.cn (unknown [10.20.42.43])
+ by localhost.localdomain (Coremail) with SMTP id
+ AQAAf8BxLL5I+nxkF7SJAA--.24647S2; 
+ Mon, 05 Jun 2023 04:55:36 +0800 (CST)
+From: Sui Jingfeng <suijingfeng@loongson.cn>
+To: Alex Deucher <alexander.deucher@amd.com>,
+ Christian Konig <christian.koenig@amd.com>,
+ Pan Xinhui <Xinhui.Pan@amd.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, Tomi Valkeinen <tomba@kernel.org>,
- Guo Zhengkui <guozhengkui@vivo.com>, Yuan Can <yuancan@huawei.com>,
- Arnd Bergmann <arnd@arndb.de>, Liang He <windhl@126.com>,
- Thierry Reding <thierry.reding@gmail.com>, Rob Herring <robh@kernel.org>,
- Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
- Sandy Huang <hjc@rock-chips.com>,
- Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
- Orson Zhai <orsonzhai@gmail.com>,
- Baolin Wang <baolin.wang@linux.alibaba.com>,
- Chunyan Zhang <zhang.lyra@gmail.com>, Deepak R Varma <drv@mailo.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- Alain Volmat <alain.volmat@foss.st.com>,
- Yannick Fertre <yannick.fertre@foss.st.com>,
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
- Philippe Cornu <philippe.cornu@foss.st.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Maxime Ripard <mripard@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>,
- Jonathan Hunter <jonathanh@nvidia.com>, Maxime Ripard <maxime@cerno.tech>,
- =?utf-8?B?TWHDrXJh?= Canal <mcanal@igalia.com>,
- Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>,
- Jyri Sarha <jyri.sarha@iki.fi>, Alexey Brodkin <abrodkin@synopsys.com>,
- Emma Anholt <emma@anholt.net>, Melissa Wen <mwen@igalia.com>,
- Hyun Kwon <hyun.kwon@xilinx.com>, Michal Simek <michal.simek@xilinx.com>
-Message-ID: <20230601154002.uv2wfatpb7b45duz@pengutronix.de>
-References: <20230507162616.1368908-1-u.kleine-koenig@pengutronix.de>
+ Lyude Paul <lyude@redhat.com>, Bjorn Helgaas <bhelgaas@google.com>,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Hawking Zhang <Hawking.Zhang@amd.com>,
+ Mario Limonciello <mario.limonciello@amd.com>,
+ Lijo Lazar <lijo.lazar@amd.com>, YiPeng Chai <YiPeng.Chai@amd.com>,
+ Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
+ Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>,
+ Bokun Zhang <Bokun.Zhang@amd.com>,
+ Ville Syrjala <ville.syrjala@linux.intel.com>, Li Yi <liyi@loongson.cn>,
+ Sui Jingfeng <suijingfeng@loongson.cn>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Kevin Tian <kevin.tian@intel.com>, Cornelia Huck <cohuck@redhat.com>,
+ Yishai Hadas <yishaih@nvidia.com>, Abhishek Sahu <abhsahu@nvidia.com>,
+ Yi Liu <yi.l.liu@intel.com>
+Date: Mon,  5 Jun 2023 04:55:35 +0800
+Message-Id: <20230604205536.3357439-1-suijingfeng@loongson.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="p66bggbd6asm576v"
-Content-Disposition: inline
-In-Reply-To: <20230507162616.1368908-1-u.kleine-koenig@pengutronix.de>
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ukl@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: nouveau@lists.freedesktop.org
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf8BxLL5I+nxkF7SJAA--.24647S2
+X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
+X-Coremail-Antispam: 1Uk129KBjvJXoWxXw4kur1fXFWrtrW3ZrWDurg_yoWrKw1Upr
+ Zakas8CrW8XFs7ZrsrXF4rGF1Y9393CFyfArWakwn3AF15JFn2qF9YyryYv3yfJ392kF4I
+ qan8tF4UuF4UJFJanT9S1TB71UUUUj7qnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
+ qI5I8CrVACY4xI64kE6c02F40Ex7xfYxn0WfASr-VFAUDa7-sFnT9fnUUIcSsGvfJTRUUU
+ bS8YFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s
+ 1l1IIY67AEw4v_Jrv_JF1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
+ wVC0I7IYx2IY67AKxVWUCVW8JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwA2z4
+ x0Y4vEx4A2jsIE14v26F4j6r4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UM2kK
+ e7AKxVWUAVWUtwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07AIYIkI8VC2zVCFFI
+ 0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUAVWUtwAv7VC2z280
+ aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JMxkF7I0En4
+ kS14v26r1q6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMxCIbckI
+ 1I0E14v26r126r1DMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_Jr
+ Wlx4CE17CEb7AF67AKxVWrXVW8Jr1lIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWU
+ CVW8JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r
+ 1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1U
+ YxBIdaVFxhVjvjDU0xZFpf9x07j0mhrUUUUU=
 X-Mailman-Approved-At: Tue, 20 Jun 2023 18:20:12 +0000
-Subject: Re: [Nouveau] [PATCH 00/53] drm: Convert to platform remove
- callback returning void
+Subject: [Nouveau] [PATCH v2 1/2] vgaarb: various coding style and comments
+ fix
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -131,74 +82,142 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, John Stultz <jstultz@google.com>,
- Alim Akhtar <alim.akhtar@samsung.com>, Fabio Estevam <festevam@gmail.com>,
- Sumit Semwal <sumit.semwal@linaro.org>, Jerome Brunet <jbrunet@baylibre.com>,
- linux-samsung-soc@vger.kernel.org, lima@lists.freedesktop.org,
- Steven Price <steven.price@arm.com>, linux-rockchip@lists.infradead.org,
- Xinwei Kong <kong.kongxinwei@hisilicon.com>,
- Mali DP Maintainers <malidp@foss.arm.com>, NXP Linux Team <linux-imx@nxp.com>,
- Russell King <linux+etnaviv@armlinux.org.uk>, linux-sunxi@lists.linux.dev,
- Jonas Karlman <jonas@kwiboo.se>,
- Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
- linux-arm-msm@vger.kernel.org, etnaviv@lists.freedesktop.org,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- linux-mediatek@lists.infradead.org, linux-tegra@vger.kernel.org,
- linux-amlogic@lists.infradead.org, Sean Paul <sean@poorly.run>,
- linux-arm-kernel@lists.infradead.org,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Andrew Jeffery <andrew@aj.id.au>, linux-stm32@st-md-mailman.stormreply.com,
- linux-mips@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
- kernel@pengutronix.de, Yongqin Liu <yongqin.liu@linaro.org>,
- freedreno@lists.freedesktop.org
+Cc: kvm@vger.kernel.org, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, loongson-kernel@lists.loongnix.cn,
+ amd-gfx@lists.freedesktop.org, linux-pci@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+To keep consistent with vga_iostate_to_str() function, the third argument
+of vga_str_to_iostate() function should be 'unsigned int *'.
 
---p66bggbd6asm576v
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Sui Jingfeng <suijingfeng@loongson.cn>
+---
+ drivers/pci/vgaarb.c   | 29 +++++++++++++++--------------
+ include/linux/vgaarb.h |  8 +++-----
+ 2 files changed, 18 insertions(+), 19 deletions(-)
 
-Hello,
+diff --git a/drivers/pci/vgaarb.c b/drivers/pci/vgaarb.c
+index 5a696078b382..e40e6e5e5f03 100644
+--- a/drivers/pci/vgaarb.c
++++ b/drivers/pci/vgaarb.c
+@@ -61,7 +61,6 @@ static bool vga_arbiter_used;
+ static DEFINE_SPINLOCK(vga_lock);
+ static DECLARE_WAIT_QUEUE_HEAD(vga_wait_queue);
+ 
+-
+ static const char *vga_iostate_to_str(unsigned int iostate)
+ {
+ 	/* Ignore VGA_RSRC_IO and VGA_RSRC_MEM */
+@@ -77,10 +76,12 @@ static const char *vga_iostate_to_str(unsigned int iostate)
+ 	return "none";
+ }
+ 
+-static int vga_str_to_iostate(char *buf, int str_size, int *io_state)
++static int vga_str_to_iostate(char *buf, int str_size, unsigned int *io_state)
+ {
+-	/* we could in theory hand out locks on IO and mem
+-	 * separately to userspace but it can cause deadlocks */
++	/*
++	 * we could in theory hand out locks on IO and mem
++	 * separately to userspace but it can cause deadlocks
++	 */
+ 	if (strncmp(buf, "none", 4) == 0) {
+ 		*io_state = VGA_RSRC_NONE;
+ 		return 1;
+@@ -99,7 +100,7 @@ static int vga_str_to_iostate(char *buf, int str_size, int *io_state)
+ 	return 1;
+ }
+ 
+-/* this is only used a cookie - it should not be dereferenced */
++/* This is only used as cookie, it should not be dereferenced */
+ static struct pci_dev *vga_default;
+ 
+ /* Find somebody in our list */
+@@ -194,13 +195,15 @@ int vga_remove_vgacon(struct pci_dev *pdev)
+ EXPORT_SYMBOL(vga_remove_vgacon);
+ 
+ /* If we don't ever use VGA arb we should avoid
+-   turning off anything anywhere due to old X servers getting
+-   confused about the boot device not being VGA */
++ * turning off anything anywhere due to old X servers getting
++ * confused about the boot device not being VGA
++ */
+ static void vga_check_first_use(void)
+ {
+ 	/* we should inform all GPUs in the system that
+ 	 * VGA arb has occurred and to try and disable resources
+-	 * if they can */
++	 * if they can
++	 */
+ 	if (!vga_arbiter_used) {
+ 		vga_arbiter_used = true;
+ 		vga_arbiter_notify_clients();
+@@ -865,8 +868,7 @@ static bool vga_arbiter_del_pci_device(struct pci_dev *pdev)
+ }
+ 
+ /* this is called with the lock */
+-static inline void vga_update_device_decodes(struct vga_device *vgadev,
+-					     int new_decodes)
++static void vga_update_device_decodes(struct vga_device *vgadev, int new_decodes)
+ {
+ 	struct device *dev = &vgadev->pdev->dev;
+ 	int old_decodes, decodes_removed, decodes_unlocked;
+@@ -956,9 +958,9 @@ EXPORT_SYMBOL(vga_set_legacy_decoding);
+  * @set_decode callback: If a client can disable its GPU VGA resource, it
+  * will get a callback from this to set the encode/decode state.
+  *
+- * Rationale: we cannot disable VGA decode resources unconditionally some single
+- * GPU laptops seem to require ACPI or BIOS access to the VGA registers to
+- * control things like backlights etc.  Hopefully newer multi-GPU laptops do
++ * Rationale: we cannot disable VGA decode resources unconditionally, some
++ * single GPU laptops seem to require ACPI or BIOS access to the VGA registers
++ * to control things like backlights etc. Hopefully newer multi-GPU laptops do
+  * something saner, and desktops won't have any special ACPI for this. The
+  * driver will get a callback when VGA arbitration is first used by userspace
+  * since some older X servers have issues.
+@@ -988,7 +990,6 @@ int vga_client_register(struct pci_dev *pdev,
+ bail:
+ 	spin_unlock_irqrestore(&vga_lock, flags);
+ 	return ret;
+-
+ }
+ EXPORT_SYMBOL(vga_client_register);
+ 
+diff --git a/include/linux/vgaarb.h b/include/linux/vgaarb.h
+index b4b9137f9792..d36225c582ee 100644
+--- a/include/linux/vgaarb.h
++++ b/include/linux/vgaarb.h
+@@ -23,9 +23,7 @@
+  * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+- * DEALINGS
+- * IN THE SOFTWARE.
+- *
++ * DEALINGS IN THE SOFTWARE.
+  */
+ 
+ #ifndef LINUX_VGA_H
+@@ -96,7 +94,7 @@ static inline int vga_client_register(struct pci_dev *pdev,
+ static inline int vga_get_interruptible(struct pci_dev *pdev,
+ 					unsigned int rsrc)
+ {
+-       return vga_get(pdev, rsrc, 1);
++	return vga_get(pdev, rsrc, 1);
+ }
+ 
+ /**
+@@ -111,7 +109,7 @@ static inline int vga_get_interruptible(struct pci_dev *pdev,
+ static inline int vga_get_uninterruptible(struct pci_dev *pdev,
+ 					  unsigned int rsrc)
+ {
+-       return vga_get(pdev, rsrc, 0);
++	return vga_get(pdev, rsrc, 0);
+ }
+ 
+ static inline void vga_client_unregister(struct pci_dev *pdev)
+-- 
+2.25.1
 
-On Sun, May 07, 2023 at 06:25:23PM +0200, Uwe Kleine-K=F6nig wrote:
-> this patch series adapts the platform drivers below drivers/gpu/drm
-> to use the .remove_new() callback. Compared to the traditional .remove()
-> callback .remove_new() returns no value. This is a good thing because
-> the driver core doesn't (and cannot) cope for errors during remove. The
-> only effect of a non-zero return value in .remove() is that the driver
-> core emits a warning. The device is removed anyhow and an early return
-> from .remove() usually yields a resource leak.
->=20
-> By changing the remove callback to return void driver authors cannot
-> reasonably (but wrongly) assume any more that there happens some kind of
-> cleanup later.
-
-I wonder if someone would volunteer to add the whole series to
-drm-misc-next?!
-
-Best regards
-Uwe
-
---=20
-Pengutronix e.K.                           | Uwe Kleine-K=F6nig            |
-Industrial Linux Solutions                 | https://www.pengutronix.de/ |
-
---p66bggbd6asm576v
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmR4u9EACgkQj4D7WH0S
-/k6pCgf/XXR0G22HLU/MVuNu1ZT+KFwZti46/pOMarp24StchWjJqsvsoo9mc1tI
-G4w/Z5yO5q4ZeCXX57bi5xuQfR0XZz96r6ZCHkxaaSJDydbm70lJyg88BUtqKsPC
-1CEZ6UQdvjhM5hXaVZzFYYydmOKvgs68jMs4AUC5auawB2lP6A8U1z7g5AxYSM7E
-elXaqEEcvsm7xBm5H4hMroNG15Gw0awdAZ3nKJnwCK3jlrf7OMaJD/nA1QK+2lpp
-pv2eI9/NwJf31WmpHLOCj8NYuTN/A4haICwhScmweXtsdFk2TnPHthGEk1+hTlC8
-Xyf99cj8btKIWF+ICt7lNc4eo0D7ZQ==
-=Nl7B
------END PGP SIGNATURE-----
-
---p66bggbd6asm576v--
