@@ -1,57 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68F0C7373D3
-	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:21:03 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A7377373EB
+	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:21:18 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4F69110E34D;
-	Tue, 20 Jun 2023 18:20:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 935C010E361;
+	Tue, 20 Jun 2023 18:20:38 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7963810E21E;
- Tue,  6 Jun 2023 11:00:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1686049231; x=1717585231;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=3b3vmHcNenRMEV+YtNGwUxporwj/nTLjEg7K71x0dfQ=;
- b=AcRdxOI+9OebY+UyY0Q/mUlWqU3+9MNwRzRFfYEikRRnqDf6aK6XfxMh
- E161QxvJJ0SmtkHicbucZ1ZOzInRnZjnE+KXu22hZcULNpLyDEgtclyfo
- mBc9rXdRJaQ7/g93RU8Y4CsWsfKPG9HQ4o91lV8LBCMiGP3+x7OgFUTVe
- cMcy+oi1UTGiydlQa0exKeItvuqgnK7q5bLl8gVVAWqY4dSkE/Vg4wfLy
- Z3rWZxx4+M0R/YotpWOMR7AFgoHvKcZ6WmV00zwaivls0I52G/Jhf/Okk
- QaU7uIk9Q6rdjXEhTBZVRy/zyEFYZxhkTnkzXi5VWR1vvyQ2Z4twhPQNV A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10732"; a="384944996"
-X-IronPort-AV: E=Sophos;i="6.00,221,1681196400"; d="scan'208";a="384944996"
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 06 Jun 2023 04:00:29 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10732"; a="703119390"
-X-IronPort-AV: E=Sophos;i="6.00,221,1681196400"; d="scan'208";a="703119390"
-Received: from yuguen-mobl2.ger.corp.intel.com (HELO intel.com)
- ([10.252.57.68])
- by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 06 Jun 2023 04:00:08 -0700
-Date: Tue, 6 Jun 2023 13:00:02 +0200
-From: Andi Shyti <andi.shyti@linux.intel.com>
-To: Sui Jingfeng <15330273260@189.cn>
-Message-ID: <ZH8RslOfwIVf527x@ashyti-mobl2.lan>
-References: <20230604205831.3357596-1-15330273260@189.cn>
- <ZH5epG6rfTOWT6CS@ashyti-mobl2.lan>
- <f9e67fe9-a93b-75ab-1fdb-87d3783fe5fc@loongson.cn>
- <680cea2e-7984-5f26-c440-46047f4733fa@189.cn>
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+ by gabe.freedesktop.org (Postfix) with ESMTP id E1FF410E244;
+ Tue,  6 Jun 2023 19:06:42 +0000 (UTC)
+Received: from loongson.cn (unknown [10.20.42.43])
+ by gateway (Coremail) with SMTP id _____8AxmOmqg39ku0wAAA--.393S3;
+ Wed, 07 Jun 2023 03:06:19 +0800 (CST)
+Received: from openarena.loongson.cn (unknown [10.20.42.43])
+ by localhost.localdomain (Coremail) with SMTP id
+ AQAAf8AxPMqpg39k9fgCAA--.3107S2; 
+ Wed, 07 Jun 2023 03:06:17 +0800 (CST)
+From: Sui Jingfeng <suijingfeng@loongson.cn>
+To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Sui Jingfeng <suijingfeng@loongson.cn>
+Date: Wed,  7 Jun 2023 03:06:17 +0800
+Message-Id: <20230606190617.300080-1-suijingfeng@loongson.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-15
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <680cea2e-7984-5f26-c440-46047f4733fa@189.cn>
+X-CM-TRANSID: AQAAf8AxPMqpg39k9fgCAA--.3107S2
+X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
+X-Coremail-Antispam: 1Uk129KBj93XoW7Aw18Kr1DZryxGr4UKr1UXFc_yoW8tF4DpF
+ ZrCFyFgaykta1Fg3W8tF1v9FWrGan3KayIk3ZrCwsag3ZIyr1UZr4YkF93Zr9xXFyxCw17
+ trnrtF1agF4FyrcCm3ZEXasCq-sJn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7KY7ZEXa
+ sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+ 0xBIdaVrnRJUUUvFb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+ IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+ e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+ 0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
+ Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx1l5I
+ 8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1Y6r17McIj6I8E87Iv67AK
+ xVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2AFwI
+ 0_JF0_Jw1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG
+ 67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MI
+ IYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E
+ 14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JV
+ WxJwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxU2a9a
+ DUUUU
 X-Mailman-Approved-At: Tue, 20 Jun 2023 18:20:12 +0000
-Subject: Re: [Nouveau] [Intel-gfx] [PATCH v2 1/2] vgaarb: various coding
- style and comments fix
+Subject: [Nouveau] [PATCH] drm/nouveau: fix codeing style
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,57 +62,67 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>,
- nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, YiPeng Chai <YiPeng.Chai@amd.com>,
- Mario Limonciello <mario.limonciello@amd.com>,
- Ville Syrjala <ville.syrjala@linux.intel.com>, Yi Liu <yi.l.liu@intel.com>,
- kvm@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- Jason Gunthorpe <jgg@ziepe.ca>, Ben Skeggs <bskeggs@redhat.com>,
- Andi Shyti <andi.shyti@linux.intel.com>, linux-pci@vger.kernel.org,
- Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
- Kevin Tian <kevin.tian@intel.com>, Lijo Lazar <lijo.lazar@amd.com>,
- Sui Jingfeng <suijingfeng@loongson.cn>, Bokun Zhang <Bokun.Zhang@amd.com>,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, loongson-kernel@lists.loongnix.cn,
- Alex Williamson <alex.williamson@redhat.com>,
- Abhishek Sahu <abhsahu@nvidia.com>, Jani Nikula <jani.nikula@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Bjorn Helgaas <bhelgaas@google.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Yishai Hadas <yishaih@nvidia.com>, Li Yi <liyi@loongson.cn>,
- Pan Xinhui <Xinhui.Pan@amd.com>, linux-kernel@vger.kernel.org,
- Daniel Vetter <daniel@ffwll.ch>, Cornelia Huck <cohuck@redhat.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- Christian Konig <christian.koenig@amd.com>,
- Hawking Zhang <Hawking.Zhang@amd.com>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Sui,
+drivers/gpu/drm/nouveau/dispnv04/crtc.c:453: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+ * Sets up registers for the given mode/adjusted_mode pair.
+drivers/gpu/drm/nouveau/dispnv04/crtc.c:629: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+ * Sets up registers for the given mode/adjusted_mode pair.
 
-On Tue, Jun 06, 2023 at 06:27:05PM +0800, Sui Jingfeng wrote:
-> Hi,
-> 
-> On 2023/6/6 10:06, Sui Jingfeng wrote:
-> > Originally, I also want to express the opinion.
-> 
-> 
-> Originally,  I want to express the same opinion as you told me.
-> 
-> Because vga_iostate_to_str() function is taking unsigned int parameter.
-> 
-> so, I think, using 'unsigned int *' type as the third parameter
-> vga_str_to_iostate() function is more suitable.
-> 
-> 
-> But this patch is too trivial, so I smash them into one patch.
+Signed-off-by: Sui Jingfeng <suijingfeng@loongson.cn>
+---
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-it does not matter. Please keep patches separated. A trivial
-patch can be ignored, however lots of trivial patches in a bigger
-series might be appreciated.
+diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+index a6f2e681bde9..2a9400ba4b92 100644
+--- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
++++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+@@ -413,8 +413,8 @@ nv_crtc_mode_set_vga(struct drm_crtc *crtc, struct drm_display_mode *mode)
+ 		regp->CRTC[NV_CIO_CRE_ILACE__INDEX] = 0xff;  /* interlace off */
+ 
+ 	/*
+-	* Graphics Display Controller
+-	*/
++	 * Graphics Display Controller
++	 */
+ 	regp->Graphics[NV_VIO_GX_SR_INDEX] = 0x00;
+ 	regp->Graphics[NV_VIO_GX_SREN_INDEX] = 0x00;
+ 	regp->Graphics[NV_VIO_GX_CCOMP_INDEX] = 0x00;
+@@ -449,7 +449,7 @@ nv_crtc_mode_set_vga(struct drm_crtc *crtc, struct drm_display_mode *mode)
+ 	regp->Attribute[NV_CIO_AR_CSEL_INDEX] = 0x00;
+ }
+ 
+-/**
++/*
+  * Sets up registers for the given mode/adjusted_mode pair.
+  *
+  * The clocks, CRTCs and outputs attached to this CRTC must be off.
+@@ -625,7 +625,7 @@ nv_crtc_swap_fbs(struct drm_crtc *crtc, struct drm_framebuffer *old_fb)
+ 	return ret;
+ }
+ 
+-/**
++/*
+  * Sets up registers for the given mode/adjusted_mode pair.
+  *
+  * The clocks, CRTCs and outputs attached to this CRTC must be off.
+@@ -1263,9 +1263,9 @@ static const struct drm_crtc_helper_funcs nv04_crtc_helper_funcs = {
+ };
+ 
+ static const uint32_t modeset_formats[] = {
+-        DRM_FORMAT_XRGB8888,
+-        DRM_FORMAT_RGB565,
+-        DRM_FORMAT_XRGB1555,
++	DRM_FORMAT_XRGB8888,
++	DRM_FORMAT_RGB565,
++	DRM_FORMAT_XRGB1555,
+ };
+ 
+ static const struct drm_plane_funcs nv04_primary_plane_funcs = {
+-- 
+2.25.1
 
-Have fun!
-
-Andi
