@@ -2,42 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7CDB7264EC
-	for <lists+nouveau@lfdr.de>; Wed,  7 Jun 2023 17:43:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 19421726513
+	for <lists+nouveau@lfdr.de>; Wed,  7 Jun 2023 17:53:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8386810E0BA;
-	Wed,  7 Jun 2023 15:43:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6DB2C10E0BA;
+	Wed,  7 Jun 2023 15:53:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga06.intel.com (mga06b.intel.com [134.134.136.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 567BA10E048;
- Wed,  7 Jun 2023 15:43:36 +0000 (UTC)
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A1E5610E0BA;
+ Wed,  7 Jun 2023 15:53:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1686152616; x=1717688616;
+ t=1686153207; x=1717689207;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=j6zflyQMoWlDas1SZirAeOtucemhZGcw3KpPqh1Lgbc=;
- b=oJftp9OEb6p0+5HY2VoawIG7Te/ZZPLY9RVos0p4HRx617taCaqrhwb/
- GBYa6uWV8ACUljNrx6V/E2BraCwAgRcJ5wdk8MtC5gwDWRuxdmmY5zCN2
- J2GylZFoy2lw+EkxF1ZJALY1M/D0wNl1EaerRSMFaqG0SHnM/wVmclvnr
- omq9Up1V97bAJ7KnX7S1pvPQWF5uUCBHayvp6ncgvt9LKy1ATfDCyVxEY
- o16WaImhlAxb7v8Yl/Yx0MVBDGhHWHlTLZT6BY12qzCBMHM1qzD3CO+fb
- x79yhw0Vv98L3+yGkE0RUq1r0V6pSpPRV3p1X34CfRPzpKh9PygSu7wao w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10734"; a="420584307"
-X-IronPort-AV: E=Sophos;i="6.00,224,1681196400"; d="scan'208";a="420584307"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Jun 2023 08:43:26 -0700
+ bh=uPnMmCmZE1Xlj5mTktqTOUCGshsLZyVT68mlGsmxeg0=;
+ b=XFbzJ/uxYweMIZYbkTLFzWypo2Qh3Hq5At0V1qmfd7nONlRGQXpPqyKm
+ ziLCel2IA2b+Yvtr4NYoBxPb5TM3P8aoVQjDgMTxRYbUVhPd56Yu9g0QT
+ PtQ7qen6tDMGBY6c3BLZV43hOsTOoJQPp+SLlHUlkGOE7x/UblpZShwL4
+ EXL65rTd92PSJI9B9fCXnHTy2LdXORbqi0VnZ+0T2y0RzeLShGip9f+EB
+ HTlwx1sk852xl+ozqAPFHv2iyXkM+iW4rIHDdzJIAHQw5m6azoFAM8r/M
+ P0ZcWvJl1Vx+YiQjL2LKtr7qeL5YP7BC1QX1ntqTklyABSCQDDmdK1GeP g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10734"; a="360359267"
+X-IronPort-AV: E=Sophos;i="6.00,224,1681196400"; d="scan'208";a="360359267"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 07 Jun 2023 08:53:26 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10734"; a="1039727330"
-X-IronPort-AV: E=Sophos;i="6.00,224,1681196400"; d="scan'208";a="1039727330"
+X-IronPort-AV: E=McAfee;i="6600,9927,10734"; a="739333990"
+X-IronPort-AV: E=Sophos;i="6.00,224,1681196400"; d="scan'208";a="739333990"
 Received: from lkp-server01.sh.intel.com (HELO 15ab08e44a81) ([10.239.97.150])
- by fmsmga005.fm.intel.com with ESMTP; 07 Jun 2023 08:43:20 -0700
+ by orsmga008.jf.intel.com with ESMTP; 07 Jun 2023 08:53:20 -0700
 Received: from kbuild by 15ab08e44a81 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1q6vJf-0006hv-24;
- Wed, 07 Jun 2023 15:43:19 +0000
-Date: Wed, 7 Jun 2023 23:42:32 +0800
+ (envelope-from <lkp@intel.com>) id 1q6vTL-0006iF-31;
+ Wed, 07 Jun 2023 15:53:19 +0000
+Date: Wed, 7 Jun 2023 23:52:59 +0800
 From: kernel test robot <lkp@intel.com>
 To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
  tzimmermann@suse.de, mripard@kernel.org, corbet@lwn.net,
@@ -46,14 +46,14 @@ To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
  boris.brezillon@collabora.com, alexdeucher@gmail.com,
  ogabbay@kernel.org, bagasdotme@gmail.com, willy@infradead.org,
  jason@jlekstrand.net
-Message-ID: <202306072327.BHC88W12-lkp@intel.com>
-References: <20230606223130.6132-10-dakr@redhat.com>
+Message-ID: <202306072317.vpcwyh1W-lkp@intel.com>
+References: <20230606223130.6132-13-dakr@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230606223130.6132-10-dakr@redhat.com>
-Subject: Re: [Nouveau] [PATCH drm-next v4 09/14] drm/nouveau: fence:
- separate fence alloc and emit
+In-Reply-To: <20230606223130.6132-13-dakr@redhat.com>
+Subject: Re: [Nouveau] [PATCH drm-next v4 12/14] drm/nouveau: nvkm/vmm:
+ implement raw ops to manage uvmm
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,69 +73,89 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Hi Danilo,
 
-kernel test robot noticed the following build errors:
+kernel test robot noticed the following build warnings:
 
-[auto build test ERROR on 33a86170888b7e4aa0cea94ebb9c67180139cea9]
+[auto build test WARNING on 33a86170888b7e4aa0cea94ebb9c67180139cea9]
 
 url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-execution-context-for-GEM-buffers-v4/20230607-063442
 base:   33a86170888b7e4aa0cea94ebb9c67180139cea9
-patch link:    https://lore.kernel.org/r/20230606223130.6132-10-dakr%40redhat.com
-patch subject: [PATCH drm-next v4 09/14] drm/nouveau: fence: separate fence alloc and emit
-config: x86_64-allyesconfig (https://download.01.org/0day-ci/archive/20230607/202306072327.BHC88W12-lkp@intel.com/config)
-compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
+patch link:    https://lore.kernel.org/r/20230606223130.6132-13-dakr%40redhat.com
+patch subject: [PATCH drm-next v4 12/14] drm/nouveau: nvkm/vmm: implement raw ops to manage uvmm
+config: riscv-rv32_defconfig (https://download.01.org/0day-ci/archive/20230607/202306072317.vpcwyh1W-lkp@intel.com/config)
+compiler: riscv32-linux-gcc (GCC) 12.3.0
 reproduce (this is a W=1 build):
+        mkdir -p ~/bin
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
         git checkout 33a86170888b7e4aa0cea94ebb9c67180139cea9
-        b4 shazam https://lore.kernel.org/r/20230606223130.6132-10-dakr@redhat.com
+        b4 shazam https://lore.kernel.org/r/20230606223130.6132-13-dakr@redhat.com
         # save the config file
         mkdir build_dir && cp config build_dir/.config
-        make W=1 O=build_dir ARCH=x86_64 olddefconfig
-        make W=1 O=build_dir ARCH=x86_64 SHELL=/bin/bash drivers/gpu/drm/
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.3.0 ~/bin/make.cross W=1 O=build_dir ARCH=riscv olddefconfig
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.3.0 ~/bin/make.cross W=1 O=build_dir ARCH=riscv SHELL=/bin/bash drivers/gpu/drm/
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202306072327.BHC88W12-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202306072317.vpcwyh1W-lkp@intel.com/
 
-All errors (new ones prefixed by >>):
+All warnings (new ones prefixed by >>):
 
-   drivers/gpu/drm/nouveau/nouveau_dmem.c: In function 'nouveau_dmem_migrate_chunk':
->> drivers/gpu/drm/nouveau/nouveau_dmem.c:681:43: error: 'chunk' undeclared (first use in this function)
-     681 |                 nouveau_fence_emit(fence, chunk->drm->dmem->migrate.chan);
-         |                                           ^~~~~
-   drivers/gpu/drm/nouveau/nouveau_dmem.c:681:43: note: each undeclared identifier is reported only once for each function it appears in
+   In file included from drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h:4,
+                    from drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.h:5,
+                    from drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c:22:
+   drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c: In function 'nvkm_uvmm_mthd_raw_map':
+>> drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c:422:31: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+     422 |                               (void *)args->argv, args->argc);
+         |                               ^
+   drivers/gpu/drm/nouveau/include/nvkm/core/memory.h:66:43: note: in definition of macro 'nvkm_memory_map'
+      66 |         (p)->func->map((p),(o),(vm),(va),(av),(ac))
+         |                                           ^~
 
 
-vim +/chunk +681 drivers/gpu/drm/nouveau/nouveau_dmem.c
+vim +422 drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c
 
-   664	
-   665	static void nouveau_dmem_migrate_chunk(struct nouveau_drm *drm,
-   666			struct nouveau_svmm *svmm, struct migrate_vma *args,
-   667			dma_addr_t *dma_addrs, u64 *pfns)
-   668	{
-   669		struct nouveau_fence *fence;
-   670		unsigned long addr = args->start, nr_dma = 0, i;
-   671	
-   672		for (i = 0; addr < args->end; i++) {
-   673			args->dst[i] = nouveau_dmem_migrate_copy_one(drm, svmm,
-   674					args->src[i], dma_addrs + nr_dma, pfns + i);
-   675			if (!dma_mapping_error(drm->dev->dev, dma_addrs[nr_dma]))
-   676				nr_dma++;
-   677			addr += PAGE_SIZE;
-   678		}
-   679	
-   680		if (!nouveau_fence_new(&fence))
- > 681			nouveau_fence_emit(fence, chunk->drm->dmem->migrate.chan);
-   682		migrate_vma_pages(args);
-   683		nouveau_dmem_fence_done(&fence);
-   684		nouveau_pfns_map(svmm, args->vma->vm_mm, args->start, pfns, i);
-   685	
-   686		while (nr_dma--) {
-   687			dma_unmap_page(drm->dev->dev, dma_addrs[nr_dma], PAGE_SIZE,
-   688					DMA_BIDIRECTIONAL);
-   689		}
-   690		migrate_vma_finalize(args);
-   691	}
-   692	
+   388	
+   389	static int
+   390	nvkm_uvmm_mthd_raw_map(struct nvkm_uvmm *uvmm, struct nvif_vmm_raw_v0 *args)
+   391	{
+   392		struct nvkm_client *client = uvmm->object.client;
+   393		struct nvkm_vmm *vmm = uvmm->vmm;
+   394		struct nvkm_vma vma = {
+   395			.addr = args->addr,
+   396			.size = args->size,
+   397			.used = true,
+   398			.mapref = false,
+   399			.no_comp = true,
+   400		};
+   401		struct nvkm_memory *memory;
+   402		u64 handle = args->memory;
+   403		u8 refd;
+   404		int ret;
+   405	
+   406		if (!nvkm_vmm_in_managed_range(vmm, args->addr, args->size))
+   407			return -EINVAL;
+   408	
+   409		ret = nvkm_uvmm_page_index(uvmm, args->size, args->shift, &refd);
+   410		if (ret)
+   411			return ret;
+   412	
+   413		vma.page = vma.refd = refd;
+   414	
+   415		memory = nvkm_umem_search(client, args->memory);
+   416		if (IS_ERR(memory)) {
+   417			VMM_DEBUG(vmm, "memory %016llx %ld\n", handle, PTR_ERR(memory));
+   418			return PTR_ERR(memory);
+   419		}
+   420	
+   421		ret = nvkm_memory_map(memory, args->offset, vmm, &vma,
+ > 422				      (void *)args->argv, args->argc);
+   423	
+   424		nvkm_memory_unref(&vma.memory);
+   425		nvkm_memory_unref(&memory);
+   426		return ret;
+   427	}
+   428	
 
 -- 
 0-DAY CI Kernel Test Service
