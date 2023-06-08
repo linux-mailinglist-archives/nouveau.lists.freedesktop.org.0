@@ -2,65 +2,73 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B99E7373F5
-	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:21:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 69F4D7373E8
+	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:21:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E03B410E36B;
-	Tue, 20 Jun 2023 18:20:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9586110E346;
+	Tue, 20 Jun 2023 18:20:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from 189.cn (ptr.189.cn [183.61.185.103])
- by gabe.freedesktop.org (Postfix) with ESMTP id 81FF010E26B;
- Thu,  8 Jun 2023 11:43:43 +0000 (UTC)
-HMM_SOURCE_IP: 10.64.8.41:48916.660287130
-HMM_ATTACHE_NUM: 0000
-HMM_SOURCE_TYPE: SMTP
-Received: from clientip-114.242.206.180 (unknown [10.64.8.41])
- by 189.cn (HERMES) with SMTP id 7246D1002AF;
- Thu,  8 Jun 2023 19:43:38 +0800 (CST)
-Received: from  ([114.242.206.180])
- by gateway-151646-dep-75648544bd-xwndj with ESMTP id
- be5be8aede204d31a3c846f914d94a56 for alexander.deucher@amd.com; 
- Thu, 08 Jun 2023 19:43:42 CST
-X-Transaction-ID: be5be8aede204d31a3c846f914d94a56
-X-Real-From: 15330273260@189.cn
-X-Receive-IP: 114.242.206.180
-X-MEDUSA-Status: 0
-From: Sui Jingfeng <15330273260@189.cn>
-To: Alex Deucher <alexander.deucher@amd.com>,
- Christian Konig <christian.koenig@amd.com>,
- Pan Xinhui <Xinhui.Pan@amd.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, Bjorn Helgaas <bhelgaas@google.com>,
- Alex Williamson <alex.williamson@redhat.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Hawking Zhang <Hawking.Zhang@amd.com>,
- Mario Limonciello <mario.limonciello@amd.com>,
- Lijo Lazar <lijo.lazar@amd.com>, YiPeng Chai <YiPeng.Chai@amd.com>,
- Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
- Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>,
- Bokun Zhang <Bokun.Zhang@amd.com>,
- Ville Syrjala <ville.syrjala@linux.intel.com>, Li Yi <liyi@loongson.cn>,
- Sui Jingfeng <suijingfeng@loongson.cn>, Jason Gunthorpe <jgg@ziepe.ca>,
- Kevin Tian <kevin.tian@intel.com>, Cornelia Huck <cohuck@redhat.com>,
- Yishai Hadas <yishaih@nvidia.com>, Abhishek Sahu <abhsahu@nvidia.com>,
- Yi Liu <yi.l.liu@intel.com>
-Date: Thu,  8 Jun 2023 19:43:22 +0800
-Message-Id: <20230608114322.604887-5-15330273260@189.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230608114322.604887-1-15330273260@189.cn>
-References: <20230608114322.604887-1-15330273260@189.cn>
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2E75610E0F5
+ for <nouveau@lists.freedesktop.org>; Thu,  8 Jun 2023 16:15:37 +0000 (UTC)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-777a9d7efabso28467839f.0
+ for <nouveau@lists.freedesktop.org>; Thu, 08 Jun 2023 09:15:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1686240936; x=1688832936;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yZrPvXOaXEQPKsXtUpbfz4WhJ7pTJywi1kpaIctsmkU=;
+ b=Rt++Uf5x1Kh7AMz6x7DYnj4QP6v6l5PgKyWsk6gzsDQ/N4lzdL/4LYpBC/9JNsC2t1
+ tUrwC0AIekOckbfCXhFlknhU9qgMNcb5UAVClMhgGylAJYMILHTe1tH8PNDQL9dSYxGQ
+ yTdIcw7lYklLaZiwPcM8Edeuc0awnSf9oAt1A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1686240936; x=1688832936;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yZrPvXOaXEQPKsXtUpbfz4WhJ7pTJywi1kpaIctsmkU=;
+ b=GziVxyuGYuWjlz9luffi3/r44wyFSIjLSfuv4KJKLFQd5sukSgdbXYzPpMKAhxkHWt
+ NzvtM3Rs6+WXUSUk4yu4kEoWWSn9FFC2/PaUT1VQYP5rrVelAMDe9vC5mF5gptxyevH/
+ oE1ybmhFDg5swxM9q/WgE1IAWVNYmw0LjYrw1vdVwVtKaqdJXVPcJIS1518DfyP1CYb7
+ gEXLnAYaby7nsxYzW1A8VR0vmgn3OtnbShA9Z8nk+aIbuTY74L9L2frOsnwToExsTIUT
+ iE9LPmGgee6KiIJhxeJrKu8Nsd1y8IZwx0R/sRL6lsffEhvsTix/EwnS8r4jqPfh2wm6
+ Ql/g==
+X-Gm-Message-State: AC+VfDyNZQsBc532Qs2DfBACZp+IIKNxpK2lsdTvJylA5nb5fukwMeG9
+ vt5HBsfeUNsDXngPhRtc0jSjRgxie3t5hdolGWKd2Q==
+X-Google-Smtp-Source: ACHHUZ6Ln+xNTWK6QCl+sYQf6bqus5CJs9gHhjVfQRz9TMrDQBHcjgO2J6ZUcRGltFVHPvj+ewh4Dw==
+X-Received: by 2002:a5e:c10b:0:b0:76c:5ba7:7ef with SMTP id
+ v11-20020a5ec10b000000b0076c5ba707efmr11537050iol.3.1686240936405; 
+ Thu, 08 Jun 2023 09:15:36 -0700 (PDT)
+Received: from mail-il1-f169.google.com (mail-il1-f169.google.com.
+ [209.85.166.169]) by smtp.gmail.com with ESMTPSA id
+ w12-20020a02cf8c000000b0041653d00c1fsm362907jar.72.2023.06.08.09.15.35
+ for <nouveau@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 08 Jun 2023 09:15:36 -0700 (PDT)
+Received: by mail-il1-f169.google.com with SMTP id
+ e9e14a558f8ab-33d928a268eso139455ab.0
+ for <nouveau@lists.freedesktop.org>; Thu, 08 Jun 2023 09:15:35 -0700 (PDT)
+X-Received: by 2002:a05:6e02:1a22:b0:330:af65:de3d with SMTP id
+ g2-20020a056e021a2200b00330af65de3dmr115540ile.11.1686240508041; Thu, 08 Jun
+ 2023 09:08:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 20 Jun 2023 18:20:12 +0000
-Subject: [Nouveau] [PATCH v3 4/4] PCI/VGA: introduce is_boot_device function
- callback to vga_client_register
+References: <20230507162616.1368908-1-u.kleine-koenig@pengutronix.de>
+ <20230601154002.uv2wfatpb7b45duz@pengutronix.de>
+In-Reply-To: <20230601154002.uv2wfatpb7b45duz@pengutronix.de>
+From: Doug Anderson <dianders@chromium.org>
+Date: Thu, 8 Jun 2023 09:08:15 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=WvP--wJwBQtnSoW_xb57R1Wf9dH0XzWxe+NorczXfeAw@mail.gmail.com>
+Message-ID: <CAD=FV=WvP--wJwBQtnSoW_xb57R1Wf9dH0XzWxe+NorczXfeAw@mail.gmail.com>
+To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Tue, 20 Jun 2023 18:20:11 +0000
+Subject: Re: [Nouveau] [PATCH 00/53] drm: Convert to platform remove
+ callback returning void
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,217 +80,181 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: kvm@vger.kernel.org, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, loongson-kernel@lists.loongnix.cn,
- amd-gfx@lists.freedesktop.org, linux-pci@vger.kernel.org
+Cc: =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko@sntech.de>,
+ Xinliang Liu <xinliang.liu@linaro.org>,
+ Linus Walleij <linus.walleij@linaro.org>, dri-devel@lists.freedesktop.org,
+ Russell King <linux@armlinux.org.uk>, Alim Akhtar <alim.akhtar@samsung.com>,
+ Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Steven Price <steven.price@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>,
+ Jerome Brunet <jbrunet@baylibre.com>, linux-samsung-soc@vger.kernel.org,
+ Robert Foss <rfoss@kernel.org>, Samuel Holland <samuel@sholland.org>,
+ Kevin Hilman <khilman@baylibre.com>,
+ =?UTF-8?B?TWHDrXJhIENhbmFs?= <mcanal@igalia.com>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Kuogee Hsieh <quic_khsieh@quicinc.com>,
+ Akhil P Oommen <quic_akhilpo@quicinc.com>, NXP Linux Team <linux-imx@nxp.com>,
+ Miaoqian Lin <linmq006@gmail.com>, linux-sunxi@lists.linux.dev,
+ Rahul T R <r-ravikumar@ti.com>,
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+ Jani Nikula <jani.nikula@intel.com>, Sascha Hauer <s.hauer@pengutronix.de>,
+ etnaviv@lists.freedesktop.org, Stephen Boyd <swboyd@chromium.org>,
+ Inki Dae <inki.dae@samsung.com>, Sean Paul <sean@poorly.run>,
+ Johan Hovold <johan+linaro@kernel.org>, Hyun Kwon <hyun.kwon@xilinx.com>,
+ Andrew Jeffery <andrew@aj.id.au>, Jingoo Han <jingoohan1@gmail.com>,
+ Seung-Woo Kim <sw0312.kim@samsung.com>,
+ =?UTF-8?Q?Noralf_Tr=C3=B8nnes?= <noralf@tronnes.org>, kernel@pengutronix.de,
+ Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org,
+ Claudiu Beznea <claudiu.beznea@microchip.com>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>,
+ linux-aspeed@lists.ozlabs.org,
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+ Thierry Reding <thierry.reding@gmail.com>, John Stultz <jstultz@google.com>,
+ Mihail Atanassov <mihail.atanassov@arm.com>, Liang He <windhl@126.com>,
+ =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
+ lima@lists.freedesktop.org, Chunyan Zhang <zhang.lyra@gmail.com>,
+ Alexey Brodkin <abrodkin@synopsys.com>, Minghao Chi <chi.minghao@zte.com.cn>,
+ linux-rockchip@lists.infradead.org, Ben Skeggs <bskeggs@redhat.com>,
+ Russell King <linux+etnaviv@armlinux.org.uk>,
+ Alain Volmat <alain.volmat@foss.st.com>, Liu Ying <victor.liu@nxp.com>,
+ linux-arm-msm@vger.kernel.org, Maxime Ripard <mripard@kernel.org>,
+ linux-amlogic@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Boris Brezillon <bbrezillon@kernel.org>, Sandy Huang <hjc@rock-chips.com>,
+ Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
+ Kyungmin Park <kyungmin.park@samsung.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Brian Starkey <brian.starkey@arm.com>,
+ Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+ Yuan Can <yuancan@huawei.com>, Stefan Agner <stefan@agner.ch>,
+ Michal Simek <michal.simek@xilinx.com>, linux-tegra@vger.kernel.org,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Andrzej Hajda <andrzej.hajda@intel.com>, Sam Ravnborg <sam@ravnborg.org>,
+ Rob Herring <robh@kernel.org>, Xinwei Kong <kong.kongxinwei@hisilicon.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Mali DP Maintainers <malidp@foss.arm.com>, Joel Stanley <joel@jms.id.au>,
+ nouveau@lists.freedesktop.org, Orson Zhai <orsonzhai@gmail.com>,
+ Chun-Kuang Hu <chunkuang.hu@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
+ Guo Zhengkui <guozhengkui@vivo.com>,
+ Konrad Dybcio <konrad.dybcio@somainline.org>,
+ Alison Wang <alison.wang@nxp.com>, Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Mark Brown <broonie@kernel.org>, Maxime Ripard <maxime@cerno.tech>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Liu Shixin <liushixin2@huawei.com>, Tomi Valkeinen <tomba@kernel.org>,
+ Deepak R Varma <drv@mailo.com>,
+ Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+ Ricardo Ribalda <ribalda@chromium.org>, Tian Tao <tiantao6@hisilicon.com>,
+ Shawn Guo <shawnguo@kernel.org>, Yannick Fertre <yannick.fertre@foss.st.com>,
+ linux-stm32@st-md-mailman.stormreply.com, Emma Anholt <emma@anholt.net>,
+ Liviu Dudau <liviu.dudau@arm.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>, linux-mips@vger.kernel.org,
+ Paul Cercueil <paul@crapouillou.net>, Marek Vasut <marex@denx.de>,
+ linux-renesas-soc@vger.kernel.org, Yongqin Liu <yongqin.liu@linaro.org>,
+ Jayshri Pawar <jpawar@cadence.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Rob Clark <robdclark@gmail.com>,
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+ Philippe Cornu <philippe.cornu@foss.st.com>, Melissa Wen <mwen@igalia.com>,
+ linux-mediatek@lists.infradead.org, Fabio Estevam <festevam@gmail.com>,
+ Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
+ Matthias Brugger <matthias.bgg@gmail.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Nicolas Ferre <nicolas.ferre@microchip.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ Qiang Yu <yuq825@gmail.com>, Philipp Zabel <p.zabel@pengutronix.de>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Jyri Sarha <jyri.sarha@iki.fi>,
+ Lucas Stach <l.stach@pengutronix.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Sui Jingfeng <suijingfeng@loongson.cn>
+Hi,
 
-The vga_is_firmware_default() function is arch-dependent, which doesn't
-sound right. At least, it also works on the Mips and LoongArch platforms.
-Tested with the drm/amdgpu and drm/radeon drivers. However, it's difficult
-to enumerate all arch-driver combinations. I'm wrong if there is only one
-exception.
+On Thu, Jun 1, 2023 at 8:40=E2=80=AFAM Uwe Kleine-K=C3=B6nig
+<u.kleine-koenig@pengutronix.de> wrote:
+>
+> Hello,
+>
+> On Sun, May 07, 2023 at 06:25:23PM +0200, Uwe Kleine-K=C3=B6nig wrote:
+> > this patch series adapts the platform drivers below drivers/gpu/drm
+> > to use the .remove_new() callback. Compared to the traditional .remove(=
+)
+> > callback .remove_new() returns no value. This is a good thing because
+> > the driver core doesn't (and cannot) cope for errors during remove. The
+> > only effect of a non-zero return value in .remove() is that the driver
+> > core emits a warning. The device is removed anyhow and an early return
+> > from .remove() usually yields a resource leak.
+> >
+> > By changing the remove callback to return void driver authors cannot
+> > reasonably (but wrongly) assume any more that there happens some kind o=
+f
+> > cleanup later.
+>
+> I wonder if someone would volunteer to add the whole series to
+> drm-misc-next?!
 
-With the observation that device drivers typically have better knowledge
-about which PCI bar contains the firmware framebuffer, which could avoid
-the need to iterate all of the PCI BARs.
+It looks as if Neil applied quite a few of them already, so I looked
+at what was left...
 
-But as a PCI function at pci/vgaarb.c, vga_is_firmware_default() is
-probably not suitable to make such an optimization for a specific device.
+I'm a little hesitant to just apply the whole kit-and-caboodle to
+drm-misc-next since there are specific DRM trees for a bunch of them
+and it would be better if they landed there. ...so I went through all
+the patches that still applied to drm-misc-next, then used
+'scripts/get_maintainer.pl --scm' to check if they were maintained
+through drm-misc. That still left quite a few patches. I've applied
+those ones and pushed to drm-misc-next:
 
-There are PCI display controllers that don't have a dedicated VRAM bar,
-this function will lose its effectiveness in such a case. Luckily, the
-device driver can provide an accurate workaround.
+71722685cd17 drm/xlnx/zynqmp_dpsub: Convert to platform remove
+callback returning void
+1ed54a19f3b3 drm/vc4: Convert to platform remove callback returning void
+b957812839f8 drm/v3d: Convert to platform remove callback returning void
+e2fd3192e267 drm/tve200: Convert to platform remove callback returning void
+84e6da7ad553 drm/tiny: Convert to platform remove callback returning void
+34cdd1f691ad drm/tidss: Convert to platform remove callback returning void
+d665e3c9d37a drm/sun4i: Convert to platform remove callback returning void
+0c259ab19146 drm/stm: Convert to platform remove callback returning void
+9a865e45884a drm/sti: Convert to platform remove callback returning void
+3c855610840e drm/rockchip: Convert to platform remove callback returning vo=
+id
+e41977a83b71 drm/panfrost: Convert to platform remove callback returning vo=
+id
+cef3776d0b5a drm/panel: Convert to platform remove callback returning void
+bd296a594e87 drm/mxsfb: Convert to platform remove callback returning void
+38ca2d93d323 drm/meson: Convert to platform remove callback returning void
+fd1457d84bae drm/mcde: Convert to platform remove callback returning void
+41a56a18615c drm/logicvc: Convert to platform remove callback returning voi=
+d
+980ec6444372 drm/lima: Convert to platform remove callback returning void
+82a2c0cc1a22 drm/hisilicon: Convert to platform remove callback returning v=
+oid
+c3b28b29ac0a drm/fsl-dcu: Convert to platform remove callback returning voi=
+d
+a118fc6e71f9 drm/atmel-hlcdc: Convert to platform remove callback returning=
+ void
+9a32dd324c46 drm/aspeed: Convert to platform remove callback returning void
+2c7d291c498c drm/arm/malidp: Convert to platform remove callback returning =
+void
+a920028df679 drm/arm/hdlcd: Convert to platform remove callback returning v=
+oid
+1bf3d76a7d15 drm/komeda: Convert to platform remove callback returning void
 
-Therefore, this patch introduces a callback that allows the device driver
-to tell the VGAARB if the device is the default boot device. This patch
-only intends to introduce the mechanism, while the implementation is left
-to the device driver authors. Also honor the comment: "Clients have two
-callback mechanisms they can use"
+The following ones appeared to apply to the top of drm-misc-next, but
+I didn't apply them since get_maintainer didn't say they were part of
+drm-misc-next:
 
-Signed-off-by: Sui Jingfeng <suijingfeng@loongson.cn>
----
- drivers/gpu/drm/amd/amdgpu/amdgpu_device.c |  2 +-
- drivers/gpu/drm/i915/display/intel_vga.c   |  3 +--
- drivers/gpu/drm/nouveau/nouveau_vga.c      |  2 +-
- drivers/gpu/drm/radeon/radeon_device.c     |  2 +-
- drivers/pci/vgaarb.c                       | 22 ++++++++++++++++++----
- drivers/vfio/pci/vfio_pci_core.c           |  2 +-
- include/linux/vgaarb.h                     |  8 +++++---
- 7 files changed, 28 insertions(+), 13 deletions(-)
+drm/tiny: Convert to platform remove callback returning void
+drm/tilcdc: Convert to platform remove callback returning void
+drm/sprd: Convert to platform remove callback returning void
+drm/shmobile: Convert to platform remove callback returning void
+drm/rcar-du: Convert to platform remove callback returning void
+drm/omap: Convert to platform remove callback returning void
+drm/nouveau: Convert to platform remove callback returning void
+drm/mediatek: Convert to platform remove callback returning void
+drm/kmb: Convert to platform remove callback returning void
+drm/ingenic: Convert to platform remove callback returning void
+drm/imx/ipuv3: Convert to platform remove callback returning void
+drm/imx/dcss: Convert to platform remove callback returning void
+drm/etnaviv: Convert to platform remove callback returning void
+drm/armada: Convert to platform remove callback returning void
 
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-index 5c7d40873ee2..7a096f2d5c16 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-@@ -3960,7 +3960,7 @@ int amdgpu_device_init(struct amdgpu_device *adev,
- 	/* this will fail for cards that aren't VGA class devices, just
- 	 * ignore it */
- 	if ((adev->pdev->class >> 8) == PCI_CLASS_DISPLAY_VGA)
--		vga_client_register(adev->pdev, amdgpu_device_vga_set_decode);
-+		vga_client_register(adev->pdev, amdgpu_device_vga_set_decode, NULL);
- 
- 	px = amdgpu_device_supports_px(ddev);
- 
-diff --git a/drivers/gpu/drm/i915/display/intel_vga.c b/drivers/gpu/drm/i915/display/intel_vga.c
-index 286a0bdd28c6..98d7d4dffe9f 100644
---- a/drivers/gpu/drm/i915/display/intel_vga.c
-+++ b/drivers/gpu/drm/i915/display/intel_vga.c
-@@ -115,7 +115,6 @@ intel_vga_set_decode(struct pci_dev *pdev, bool enable_decode)
- 
- int intel_vga_register(struct drm_i915_private *i915)
- {
--
- 	struct pci_dev *pdev = to_pci_dev(i915->drm.dev);
- 	int ret;
- 
-@@ -127,7 +126,7 @@ int intel_vga_register(struct drm_i915_private *i915)
- 	 * then we do not take part in VGA arbitration and the
- 	 * vga_client_register() fails with -ENODEV.
- 	 */
--	ret = vga_client_register(pdev, intel_vga_set_decode);
-+	ret = vga_client_register(pdev, intel_vga_set_decode, NULL);
- 	if (ret && ret != -ENODEV)
- 		return ret;
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_vga.c b/drivers/gpu/drm/nouveau/nouveau_vga.c
-index f8bf0ec26844..162b4f4676c7 100644
---- a/drivers/gpu/drm/nouveau/nouveau_vga.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_vga.c
-@@ -92,7 +92,7 @@ nouveau_vga_init(struct nouveau_drm *drm)
- 		return;
- 	pdev = to_pci_dev(dev->dev);
- 
--	vga_client_register(pdev, nouveau_vga_set_decode);
-+	vga_client_register(pdev, nouveau_vga_set_decode, NULL);
- 
- 	/* don't register Thunderbolt eGPU with vga_switcheroo */
- 	if (pci_is_thunderbolt_attached(pdev))
-diff --git a/drivers/gpu/drm/radeon/radeon_device.c b/drivers/gpu/drm/radeon/radeon_device.c
-index afbb3a80c0c6..71f2ff39d6a1 100644
---- a/drivers/gpu/drm/radeon/radeon_device.c
-+++ b/drivers/gpu/drm/radeon/radeon_device.c
-@@ -1425,7 +1425,7 @@ int radeon_device_init(struct radeon_device *rdev,
- 	/* if we have > 1 VGA cards, then disable the radeon VGA resources */
- 	/* this will fail for cards that aren't VGA class devices, just
- 	 * ignore it */
--	vga_client_register(rdev->pdev, radeon_vga_set_decode);
-+	vga_client_register(rdev->pdev, radeon_vga_set_decode, NULL);
- 
- 	if (rdev->flags & RADEON_IS_PX)
- 		runtime = true;
-diff --git a/drivers/pci/vgaarb.c b/drivers/pci/vgaarb.c
-index b0bf4952a95d..d3dab61e0ef2 100644
---- a/drivers/pci/vgaarb.c
-+++ b/drivers/pci/vgaarb.c
-@@ -53,6 +53,7 @@ struct vga_device {
- 	bool bridge_has_one_vga;
- 	bool is_firmware_default;	/* device selected by firmware */
- 	unsigned int (*set_decode)(struct pci_dev *pdev, bool decode);
-+	bool (*is_boot_device)(struct pci_dev *pdev);
- };
- 
- static LIST_HEAD(vga_list);
-@@ -614,10 +615,17 @@ static bool vga_is_boot_device(struct vga_device *vgadev)
- 	if (boot_vga && boot_vga->is_firmware_default)
- 		return false;
- 
--	if (vga_is_firmware_default(pdev)) {
--		vgadev->is_firmware_default = true;
-+	/*
-+	 * Ask the device driver first, if registered. Fallback to the
-+	 * default implement if the callback is non-exist.
-+	 */
-+	if (vgadev->is_boot_device)
-+		vgadev->is_firmware_default = vgadev->is_boot_device(pdev);
-+	else
-+		vgadev->is_firmware_default = vga_is_firmware_default(pdev);
-+
-+	if (vgadev->is_firmware_default)
- 		return true;
--	}
- 
- 	/*
- 	 * A legacy VGA device has MEM and IO enabled and any bridges
-@@ -954,6 +962,10 @@ EXPORT_SYMBOL(vga_set_legacy_decoding);
-  * @set_decode callback: If a client can disable its GPU VGA resource, it
-  * will get a callback from this to set the encode/decode state.
-  *
-+ * @is_boot_device: callback to the device driver, query if a client is the
-+ * default boot device, as the device driver typically has better knowledge
-+ * if specific device is the boot device. But this callback is optional.
-+ *
-  * Rationale: we cannot disable VGA decode resources unconditionally, some
-  * single GPU laptops seem to require ACPI or BIOS access to the VGA registers
-  * to control things like backlights etc. Hopefully newer multi-GPU laptops do
-@@ -969,7 +981,8 @@ EXPORT_SYMBOL(vga_set_legacy_decoding);
-  * Returns: 0 on success, -1 on failure
-  */
- int vga_client_register(struct pci_dev *pdev,
--		unsigned int (*set_decode)(struct pci_dev *pdev, bool decode))
-+		unsigned int (*set_decode)(struct pci_dev *pdev, bool decode),
-+		bool (*is_boot_device)(struct pci_dev *pdev))
- {
- 	int ret = -ENODEV;
- 	struct vga_device *vgadev;
-@@ -981,6 +994,7 @@ int vga_client_register(struct pci_dev *pdev,
- 		goto bail;
- 
- 	vgadev->set_decode = set_decode;
-+	vgadev->is_boot_device = is_boot_device;
- 	ret = 0;
- 
- bail:
-diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
-index a5ab416cf476..2a8873a330ba 100644
---- a/drivers/vfio/pci/vfio_pci_core.c
-+++ b/drivers/vfio/pci/vfio_pci_core.c
-@@ -2067,7 +2067,7 @@ static int vfio_pci_vga_init(struct vfio_pci_core_device *vdev)
- 	if (ret)
- 		return ret;
- 
--	ret = vga_client_register(pdev, vfio_pci_set_decode);
-+	ret = vga_client_register(pdev, vfio_pci_set_decode, NULL);
- 	if (ret)
- 		return ret;
- 	vga_set_legacy_decoding(pdev, vfio_pci_set_decode(pdev, false));
-diff --git a/include/linux/vgaarb.h b/include/linux/vgaarb.h
-index d36225c582ee..66fe80ffad76 100644
---- a/include/linux/vgaarb.h
-+++ b/include/linux/vgaarb.h
-@@ -50,7 +50,8 @@ struct pci_dev *vga_default_device(void);
- void vga_set_default_device(struct pci_dev *pdev);
- int vga_remove_vgacon(struct pci_dev *pdev);
- int vga_client_register(struct pci_dev *pdev,
--		unsigned int (*set_decode)(struct pci_dev *pdev, bool state));
-+		unsigned int (*set_decode)(struct pci_dev *pdev, bool state),
-+		bool (*is_boot_device)(struct pci_dev *pdev));
- #else /* CONFIG_VGA_ARB */
- static inline void vga_set_legacy_decoding(struct pci_dev *pdev,
- 		unsigned int decodes)
-@@ -76,7 +77,8 @@ static inline int vga_remove_vgacon(struct pci_dev *pdev)
- 	return 0;
- }
- static inline int vga_client_register(struct pci_dev *pdev,
--		unsigned int (*set_decode)(struct pci_dev *pdev, bool state))
-+		unsigned int (*set_decode)(struct pci_dev *pdev, bool state),
-+		bool (*is_boot_device)(struct pci_dev *pdev))
- {
- 	return 0;
- }
-@@ -114,7 +116,7 @@ static inline int vga_get_uninterruptible(struct pci_dev *pdev,
- 
- static inline void vga_client_unregister(struct pci_dev *pdev)
- {
--	vga_client_register(pdev, NULL);
-+	vga_client_register(pdev, NULL, NULL);
- }
- 
- #endif /* LINUX_VGA_H */
--- 
-2.25.1
-
+-Doug
