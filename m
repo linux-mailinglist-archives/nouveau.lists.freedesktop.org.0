@@ -1,59 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A81757280A1
-	for <lists+nouveau@lfdr.de>; Thu,  8 Jun 2023 14:54:18 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E9F4072879B
+	for <lists+nouveau@lfdr.de>; Thu,  8 Jun 2023 21:07:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1AC2E10E258;
-	Thu,  8 Jun 2023 12:54:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0EBBD10E60D;
+	Thu,  8 Jun 2023 19:07:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DC92110E258;
- Thu,  8 Jun 2023 12:54:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1686228855; x=1717764855;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=ANx6CbIhekRQ83tFcSsoMWFj7V/9tdCSO1pg4R3s0Pw=;
- b=M77M1mGOMymufXqV8zWyY5wGN64uJi24j+fzBcNDM0lEHBCNg8xcmyaX
- i2eKQp8/2ZznlefXD5JbnMiLL/ceDqvwiX7pG2MtqfHRC8aYxOuFApDCu
- T15SXdn7o7lJufE8X7ThH3DNUlb8AWUpK8JNiW9i5dKrt7wriW9KCqkMJ
- N6RNiKYtQPVQXE2bsceZiCMQj4Sw9KkLJzhQIhsDttKQkrhP9quhVz5YU
- jq0OofsQl8KrmABWXBCY4niW+PPsPGdxk6j21mL0hg9MU3WEqmZn1r0PI
- +THSuo6VZgs21JxJoA6ruwyUCddGppWix1rsuwGygyiKPh4diOqDr36J2 A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10734"; a="346912559"
-X-IronPort-AV: E=Sophos;i="6.00,226,1681196400"; d="scan'208";a="346912559"
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
- by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Jun 2023 05:54:14 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10734"; a="743098987"
-X-IronPort-AV: E=Sophos;i="6.00,226,1681196400"; d="scan'208";a="743098987"
-Received: from lkp-server01.sh.intel.com (HELO 15ab08e44a81) ([10.239.97.150])
- by orsmga001.jf.intel.com with ESMTP; 08 Jun 2023 05:54:08 -0700
-Received: from kbuild by 15ab08e44a81 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1q7F9U-0007mw-0z;
- Thu, 08 Jun 2023 12:54:08 +0000
-Date: Thu, 8 Jun 2023 20:53:34 +0800
-From: kernel test robot <lkp@intel.com>
-To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
- tzimmermann@suse.de, mripard@kernel.org, corbet@lwn.net,
- christian.koenig@amd.com, bskeggs@redhat.com,
- Liam.Howlett@oracle.com, matthew.brost@intel.com,
- boris.brezillon@collabora.com, alexdeucher@gmail.com,
- ogabbay@kernel.org, bagasdotme@gmail.com, willy@infradead.org,
- jason@jlekstrand.net
-Message-ID: <202306082035.J4ZJW2HE-lkp@intel.com>
-References: <20230606223130.6132-14-dakr@redhat.com>
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6EBF110E60A;
+ Thu,  8 Jun 2023 19:07:33 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id C91FF6507B;
+ Thu,  8 Jun 2023 19:07:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9AFDC433EF;
+ Thu,  8 Jun 2023 19:07:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1686251252;
+ bh=GCMwx5k3Bt73ybwU+xYV6fYC/0AQ7aBIYHCUpkvNKfo=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:From;
+ b=IMVbHFLxBjjj08+tTY4mqBYXPu+yPkr26OZEBnmqwftRD4Q1SIAVbxtVB+RaEhaTB
+ 9YNpxhOb06DUNpsGWpqlO8z9M/UoGEk2AM7sufDW3RJNemcOsnAqYtglNCuAJpE+kf
+ JUNbc9ZTxw7AcQ/hSPwWfQdyFV4yp8l+IAq+TPrnPI702kcblJyStDWHqfH3yQj13S
+ t0Qutj14xL88vuhjZ7Z7pf9c2BxwZj+zB62b8uEzHzrF0cwWx7KsTwLNS7kF2x5DgT
+ 9sI7zqmisychBq+ZtaxoiQBolhnEvyYOtA7a5hsVEwn9EOwYNv2+9Uz/yX7pGykML/
+ Wog9TxmEmNR5g==
+Date: Thu, 8 Jun 2023 14:07:30 -0500
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Sui Jingfeng <15330273260@189.cn>
+Message-ID: <20230608190730.GA1209607@bhelgaas>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230606223130.6132-14-dakr@redhat.com>
-Subject: Re: [Nouveau] [PATCH drm-next v4 13/14] drm/nouveau: implement new
- VM_BIND uAPI
+In-Reply-To: <20230608114322.604887-2-15330273260@189.cn>
+Subject: Re: [Nouveau] [Intel-gfx] [PATCH v3 1/4] PCI/VGA: tidy up the code
+ and comment format
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,105 +50,73 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, oe-kbuild-all@lists.linux.dev
+Cc: Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>,
+ nouveau@lists.freedesktop.org,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, YiPeng Chai <YiPeng.Chai@amd.com>,
+ Mario Limonciello <mario.limonciello@amd.com>,
+ Sui Jingfeng <suijingfeng@loongson.cn>,
+ Ville Syrjala <ville.syrjala@linux.intel.com>, Yi Liu <yi.l.liu@intel.com>,
+ kvm@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ Jason Gunthorpe <jgg@ziepe.ca>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-pci@vger.kernel.org, Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
+ Kevin Tian <kevin.tian@intel.com>, Lijo Lazar <lijo.lazar@amd.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Bokun Zhang <Bokun.Zhang@amd.com>,
+ intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, loongson-kernel@lists.loongnix.cn,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Abhishek Sahu <abhsahu@nvidia.com>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Bjorn Helgaas <bhelgaas@google.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Yishai Hadas <yishaih@nvidia.com>, Li Yi <liyi@loongson.cn>,
+ Pan Xinhui <Xinhui.Pan@amd.com>, linux-kernel@vger.kernel.org,
+ Cornelia Huck <cohuck@redhat.com>, Alex Deucher <alexander.deucher@amd.com>,
+ Christian Konig <christian.koenig@amd.com>,
+ Hawking Zhang <Hawking.Zhang@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Danilo,
+Capitalize subject to match ("Tidy ...")
 
-kernel test robot noticed the following build warnings:
+On Thu, Jun 08, 2023 at 07:43:19PM +0800, Sui Jingfeng wrote:
+> From: Sui Jingfeng <suijingfeng@loongson.cn>
+> 
+> This patch replaces the leading space with a tab and removes the double
+> blank line, no functional change.
 
-[auto build test WARNING on 33a86170888b7e4aa0cea94ebb9c67180139cea9]
+Can you move this to the end of the series?  The functional changes
+are more likely to be backported, and I think the backport may be a
+little easier without the cleanup in the middle.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-execution-context-for-GEM-buffers-v4/20230607-063442
-base:   33a86170888b7e4aa0cea94ebb9c67180139cea9
-patch link:    https://lore.kernel.org/r/20230606223130.6132-14-dakr%40redhat.com
-patch subject: [PATCH drm-next v4 13/14] drm/nouveau: implement new VM_BIND uAPI
-config: alpha-randconfig-s041-20230608 (https://download.01.org/0day-ci/archive/20230608/202306082035.J4ZJW2HE-lkp@intel.com/config)
-compiler: alpha-linux-gcc (GCC) 12.3.0
-reproduce:
-        mkdir -p ~/bin
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # apt-get install sparse
-        # sparse version: v0.6.4-39-gce1a6720-dirty
-        # https://github.com/intel-lab-lkp/linux/commit/28d9f3973f9ed165312943fb05304fad878abb33
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Danilo-Krummrich/drm-execution-context-for-GEM-buffers-v4/20230607-063442
-        git checkout 28d9f3973f9ed165312943fb05304fad878abb33
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.3.0 ~/bin/make.cross C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=alpha olddefconfig
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.3.0 ~/bin/make.cross C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=alpha SHELL=/bin/bash drivers/gpu/drm/
+>  	/* we could in theory hand out locks on IO and mem
+> -	 * separately to userspace but it can cause deadlocks */
+> +	 * separately to userspace but it can cause deadlocks
+> +	 */
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202306082035.J4ZJW2HE-lkp@intel.com/
+Since you're touching this anyway, can you update it to the
+conventional multi-line comment style:
 
-sparse warnings: (new ones prefixed by >>)
->> drivers/gpu/drm/nouveau/nouveau_drm.c:1194:9: sparse: sparse: incorrect type in initializer (incompatible argument 2 (different address spaces)) @@     expected int ( [usertype] *func )( ... ) @@     got int ( * )( ... ) @@
-   drivers/gpu/drm/nouveau/nouveau_drm.c:1194:9: sparse:     expected int ( [usertype] *func )( ... )
-   drivers/gpu/drm/nouveau/nouveau_drm.c:1194:9: sparse:     got int ( * )( ... )
-   drivers/gpu/drm/nouveau/nouveau_drm.c:1195:9: sparse: sparse: incorrect type in initializer (incompatible argument 2 (different address spaces)) @@     expected int ( [usertype] *func )( ... ) @@     got int ( * )( ... ) @@
-   drivers/gpu/drm/nouveau/nouveau_drm.c:1195:9: sparse:     expected int ( [usertype] *func )( ... )
-   drivers/gpu/drm/nouveau/nouveau_drm.c:1195:9: sparse:     got int ( * )( ... )
-   drivers/gpu/drm/nouveau/nouveau_drm.c:1196:9: sparse: sparse: incorrect type in initializer (incompatible argument 2 (different address spaces)) @@     expected int ( [usertype] *func )( ... ) @@     got int ( * )( ... ) @@
-   drivers/gpu/drm/nouveau/nouveau_drm.c:1196:9: sparse:     expected int ( [usertype] *func )( ... )
-   drivers/gpu/drm/nouveau/nouveau_drm.c:1196:9: sparse:     got int ( * )( ... )
---
->> drivers/gpu/drm/nouveau/nouveau_exec.c:305:19: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_exec.c:306:19: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_exec.c:307:20: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_exec.c:308:20: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_exec.c:309:21: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_exec.c:310:21: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_exec.c:378:43: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_exec.c:393:13: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_exec.c:396:13: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_exec.c:397:17: sparse: sparse: dereference of noderef expression
---
-   drivers/gpu/drm/nouveau/nouveau_uvmm.c:1637:1: sparse: sparse: symbol 'nouveau_uvmm_ioctl_vm_init' redeclared with different type (incompatible argument 2 (different address spaces)):
->> drivers/gpu/drm/nouveau/nouveau_uvmm.c:1637:1: sparse:    int extern [addressable] [signed] [toplevel] nouveau_uvmm_ioctl_vm_init( ... )
-   drivers/gpu/drm/nouveau/nouveau_uvmm.c: note: in included file (through drivers/gpu/drm/nouveau/nouveau_drv.h):
-   drivers/gpu/drm/nouveau/nouveau_uvmm.h:91:5: sparse: note: previously declared as:
->> drivers/gpu/drm/nouveau/nouveau_uvmm.h:91:5: sparse:    int extern [addressable] [signed] [toplevel] nouveau_uvmm_ioctl_vm_init( ... )
-   drivers/gpu/drm/nouveau/nouveau_uvmm.c:342:17: sparse: sparse: context imbalance in '__nouveau_uvma_region_insert' - unexpected unlock
->> drivers/gpu/drm/nouveau/nouveau_uvmm.c:1674:19: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_uvmm.c:1675:19: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_uvmm.c:1676:20: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_uvmm.c:1677:20: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_uvmm.c:1678:19: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_uvmm.c:1679:19: sparse: sparse: dereference of noderef expression
-   drivers/gpu/drm/nouveau/nouveau_uvmm.c:1682:23: sparse: sparse: dereference of noderef expression
+  /*
+   * We could in theory ...
+   */
 
-vim +1194 drivers/gpu/drm/nouveau/nouveau_drm.c
+And capitalize "We", add a period at end, and rewrap to fill 78
+columns or so?  Same for other comments below.
 
-  1177	
-  1178	static const struct drm_ioctl_desc
-  1179	nouveau_ioctls[] = {
-  1180		DRM_IOCTL_DEF_DRV(NOUVEAU_GETPARAM, nouveau_abi16_ioctl_getparam, DRM_RENDER_ALLOW),
-  1181		DRM_IOCTL_DEF_DRV(NOUVEAU_SETPARAM, drm_invalid_op, DRM_AUTH|DRM_MASTER|DRM_ROOT_ONLY),
-  1182		DRM_IOCTL_DEF_DRV(NOUVEAU_CHANNEL_ALLOC, nouveau_abi16_ioctl_channel_alloc, DRM_RENDER_ALLOW),
-  1183		DRM_IOCTL_DEF_DRV(NOUVEAU_CHANNEL_FREE, nouveau_abi16_ioctl_channel_free, DRM_RENDER_ALLOW),
-  1184		DRM_IOCTL_DEF_DRV(NOUVEAU_GROBJ_ALLOC, nouveau_abi16_ioctl_grobj_alloc, DRM_RENDER_ALLOW),
-  1185		DRM_IOCTL_DEF_DRV(NOUVEAU_NOTIFIEROBJ_ALLOC, nouveau_abi16_ioctl_notifierobj_alloc, DRM_RENDER_ALLOW),
-  1186		DRM_IOCTL_DEF_DRV(NOUVEAU_GPUOBJ_FREE, nouveau_abi16_ioctl_gpuobj_free, DRM_RENDER_ALLOW),
-  1187		DRM_IOCTL_DEF_DRV(NOUVEAU_SVM_INIT, nouveau_svmm_init, DRM_RENDER_ALLOW),
-  1188		DRM_IOCTL_DEF_DRV(NOUVEAU_SVM_BIND, nouveau_svmm_bind, DRM_RENDER_ALLOW),
-  1189		DRM_IOCTL_DEF_DRV(NOUVEAU_GEM_NEW, nouveau_gem_ioctl_new, DRM_RENDER_ALLOW),
-  1190		DRM_IOCTL_DEF_DRV(NOUVEAU_GEM_PUSHBUF, nouveau_gem_ioctl_pushbuf, DRM_RENDER_ALLOW),
-  1191		DRM_IOCTL_DEF_DRV(NOUVEAU_GEM_CPU_PREP, nouveau_gem_ioctl_cpu_prep, DRM_RENDER_ALLOW),
-  1192		DRM_IOCTL_DEF_DRV(NOUVEAU_GEM_CPU_FINI, nouveau_gem_ioctl_cpu_fini, DRM_RENDER_ALLOW),
-  1193		DRM_IOCTL_DEF_DRV(NOUVEAU_GEM_INFO, nouveau_gem_ioctl_info, DRM_RENDER_ALLOW),
-> 1194		DRM_IOCTL_DEF_DRV(NOUVEAU_VM_INIT, nouveau_uvmm_ioctl_vm_init, DRM_RENDER_ALLOW),
-  1195		DRM_IOCTL_DEF_DRV(NOUVEAU_VM_BIND, nouveau_uvmm_ioctl_vm_bind, DRM_RENDER_ALLOW),
-  1196		DRM_IOCTL_DEF_DRV(NOUVEAU_EXEC, nouveau_exec_ioctl_exec, DRM_RENDER_ALLOW),
-  1197	};
-  1198	
+> +++ b/include/linux/vgaarb.h
+> @@ -23,9 +23,7 @@
+>   * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+>   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+>   * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+> - * DEALINGS
+> - * IN THE SOFTWARE.
+> - *
+> + * DEALINGS IN THE SOFTWARE.
+>   */
 
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Can you make a separate patch to replace this entire copyright notice
+with the appropriate SPDX-License-Identifier header?
+Documentation/process/license-rules.rst has details.
+
+Bjorn
