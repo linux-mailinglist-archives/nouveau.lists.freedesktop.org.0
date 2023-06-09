@@ -1,72 +1,72 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A213729918
-	for <lists+nouveau@lfdr.de>; Fri,  9 Jun 2023 14:09:47 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id DB17072991A
+	for <lists+nouveau@lfdr.de>; Fri,  9 Jun 2023 14:09:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8A06610E69C;
-	Fri,  9 Jun 2023 12:09:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CB43610E69F;
+	Fri,  9 Jun 2023 12:09:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1CB6E10E69C
- for <nouveau@lists.freedesktop.org>; Fri,  9 Jun 2023 12:09:41 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EA39010E69E
+ for <nouveau@lists.freedesktop.org>; Fri,  9 Jun 2023 12:09:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1686312570;
+ s=mimecast20190719; t=1686312583;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=NeKki35R3nHZloLkDG1ZCPTX7wZF5l/41ruoekgsNnQ=;
- b=XkY5VD8TY5RgCEosYbVK5IC2ZDBZSWx7MbmKe6W65FKhbaZhyUFshn3DBmz6YXTgF7lRZ4
- QaNcEonUhV5q0UUF/rMwX3z8nYHUZEVx3FFjO0zpBI35OLpNsdjanXnizhvITPR0HfDwRX
- HOsLfHOKOooGYahg0t2n+j65wqsR8Co=
-Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
- [209.85.167.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=k3YEGdNvp8HrOlSgpTvQVmaRiPOQzGrP0bC+OvJCrwQ=;
+ b=ZK3o4OGs5x4PjWSXrc8QPRbVeegBGkDhhaUVMxdrMRswHugw8I1J4nFlFJe6XuoowGdy9h
+ SuNr13xeoAMbnEYZ7A6nZjopptpHV0nI2aRDKx0j+lqECDa5RwUYDil6wanYRPJveMYxAm
+ JAvPBsKHWnOjqp8TkQDvj5j3Qbf8ssg=
+Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
+ [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-490-k5bSilU4MB2MQeaKOrd6Tg-1; Fri, 09 Jun 2023 08:09:21 -0400
-X-MC-Unique: k5bSilU4MB2MQeaKOrd6Tg-1
-Received: by mail-lf1-f70.google.com with SMTP id
- 2adb3069b0e04-4f630005028so333798e87.0
- for <nouveau@lists.freedesktop.org>; Fri, 09 Jun 2023 05:09:21 -0700 (PDT)
+ us-mta-622-UsHWG7tKOZWEaZ4v5p6HRg-1; Fri, 09 Jun 2023 08:09:41 -0400
+X-MC-Unique: UsHWG7tKOZWEaZ4v5p6HRg-1
+Received: by mail-lj1-f198.google.com with SMTP id
+ 38308e7fff4ca-2b0982c99adso1154911fa.0
+ for <nouveau@lists.freedesktop.org>; Fri, 09 Jun 2023 05:09:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686312560; x=1688904560;
+ d=1e100.net; s=20221208; t=1686312580; x=1688904580;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NeKki35R3nHZloLkDG1ZCPTX7wZF5l/41ruoekgsNnQ=;
- b=VPcH5dnd4owNSydLOfUQ9rg9LqIjSQ9wY6vieW+CSzwlCZcFn4YlHX3DJiOjNp5wn5
- PKpkuJjfvTO1fD7mo7MgwmY+qyxZZbaY4cU1lKRrAOtewYNRGSBa32nc1YilCNc6mXWR
- yMUPRsaBCEEtZ5yUWoCl3qKlPXVrq6zrBzYcy1z3tNY7FGd5L5BAlUl7vyJS4YNAYE9S
- HBTLK3OujCn+8dBKb/2iV9CtvR9bXX5VS9hj6MfKMfoKvlcxHWvuWaLp3Y1TGIwEw3V4
- 8u73+b/VmNCzcGKzF6ExKD/LSxPEfd2J4GL9GXdT7wenuNbN5h5Uf8gMtX1ipfahDJzy
- SYBQ==
-X-Gm-Message-State: AC+VfDxFTLng/HgITKhtTe2l9m5rnFX+qxcuYJtI3n33kbjuoQSDjeiT
- 9NwqiRMQAtfGa4/Z+S8UIJDRbLLUugHJxka3aDakegexhTTc1pOPF3lJRX46Au/RXaGY7+aFUle
- RJvDF1rmoGKOmC3scSU15IA39Xlq35qor2zNTjAVp+g==
-X-Received: by 2002:a2e:b10a:0:b0:2b1:dc69:67fa with SMTP id
- p10-20020a2eb10a000000b002b1dc6967famr905443ljl.0.1686312560207; 
- Fri, 09 Jun 2023 05:09:20 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ4sGvitz6MAqdd6tZ18gCtAtzFKKnM7SaCsBhMqHlpY5riWAgGlYFCIjNbTYVkKWuGGwpXgGW07vlqLixzWvUU=
-X-Received: by 2002:a2e:b10a:0:b0:2b1:dc69:67fa with SMTP id
- p10-20020a2eb10a000000b002b1dc6967famr905434ljl.0.1686312559950; Fri, 09 Jun
- 2023 05:09:19 -0700 (PDT)
+ bh=k3YEGdNvp8HrOlSgpTvQVmaRiPOQzGrP0bC+OvJCrwQ=;
+ b=K6w04NgsScr/0BUjHK1f6Znmiepvcy7gdHnUY1/OMllV6VbjcJgYju60c7AIvUJPk7
+ /Ox2owi1IgKuEYyDqRUUMSPOBOXaAc4mb07emOwNahQpy3WHErRThTFFqvxF5NqQA9SS
+ Tck7CmUdmQtQwBUMftp9WXrhYVB2vHCue8VTGZ5mybriKUj5z75MS8xPL2IjXngVF1vz
+ F1EU4n3kCb7UuuojxfPP6u+jfGC0r3Q4iTr8wuz6h01jqPwUZjYSk29O0BV9axqj/tIE
+ ilt8Z6lARxD9e8q0vouVdaMnKxuOqKagyPDO2ZkuT62T3khKY49mQd/lkhpJKUjUZhoc
+ 4AUA==
+X-Gm-Message-State: AC+VfDy1NN/5kIHkmvzUMjGhHTS7r9LjVppu61Fa0nDSQY8FrQYFX5aw
+ nWggutLPDUSyaiotQvCQdEb2UqAFVJtFUOQnCcoyrlJDjWbxe1Xb/pi/+ZohDFaKtKi2VuSBU+4
+ Rwe5hBtx8kgjO44C4ezbiYdrysfacpetHhgtXRJSJ0Q==
+X-Received: by 2002:a2e:aa1c:0:b0:2b1:e724:4d08 with SMTP id
+ bf28-20020a2eaa1c000000b002b1e7244d08mr988058ljb.4.1686312580323; 
+ Fri, 09 Jun 2023 05:09:40 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ7/t2tD8MaFXp12L6CGZR5hbVtX9aWeEyd2gjiDmsXx5pBr/sPbrekf6193BsmLX+ZVCnheOQK5h1GW9Ht/eq8=
+X-Received: by 2002:a2e:aa1c:0:b0:2b1:e724:4d08 with SMTP id
+ bf28-20020a2eaa1c000000b002b1e7244d08mr988048ljb.4.1686312580168; Fri, 09 Jun
+ 2023 05:09:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230609081732.3842341-1-lee@kernel.org>
- <20230609081732.3842341-10-lee@kernel.org>
-In-Reply-To: <20230609081732.3842341-10-lee@kernel.org>
+ <20230609081732.3842341-11-lee@kernel.org>
+In-Reply-To: <20230609081732.3842341-11-lee@kernel.org>
 From: Karol Herbst <kherbst@redhat.com>
-Date: Fri, 9 Jun 2023 14:09:09 +0200
-Message-ID: <CACO55ttX2efbweyUMoTQj4_aCmT6z_ke4_0vScoYUjtrzSaprw@mail.gmail.com>
+Date: Fri, 9 Jun 2023 14:09:29 +0200
+Message-ID: <CACO55tuaNOYphHyB9+ygi9AnXVuF49etsW7x2X5K5iEtFNAAyw@mail.gmail.com>
 To: Lee Jones <lee@kernel.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [RESEND 09/15] drm/nouveau/nvkm/engine/gr/gf100:
- Demote kerneldoc abuse
+Subject: Re: [Nouveau] [RESEND 10/15] drm/nouveau/nvkm/engine/gr/tu102:
+ Staticify local function gf100_fifo_nonstall_block()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,9 +88,8 @@ On Fri, Jun 9, 2023 at 10:18=E2=80=AFAM Lee Jones <lee@kernel.org> wrote:
 >
 > Fixes the following W=3D1 kernel build warning(s):
 >
->  drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c:1044: warning: This comme=
-nt starts with '/**', but isn't a kernel-doc comment. Refer Documentation/d=
-oc-guide/kernel-doc.rst
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: no previo=
+us prototype for =E2=80=98tu102_gr_load=E2=80=99 [-Wmissing-prototypes]
 >
 > Cc: Ben Skeggs <bskeggs@redhat.com>
 > Cc: Karol Herbst <kherbst@redhat.com>
@@ -104,24 +103,25 @@ oc-guide/kernel-doc.rst
 Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
 > ---
->  drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c b/drivers/gpu=
-/drm/nouveau/nvkm/engine/gr/gf100.c
-> index 5f20079c3660f..7d4c2264d3c05 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
-> @@ -1040,7 +1040,7 @@ gf100_gr_zbc_init(struct gf100_gr *gr)
->         }
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c b/drivers/gpu=
+/drm/nouveau/nvkm/engine/gr/tu102.c
+> index 3b6c8100a2428..10a7e59482a6f 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
+> @@ -206,7 +206,7 @@ tu102_gr_av_to_init_veid(struct nvkm_blob *blob, stru=
+ct gf100_gr_pack **ppack)
+>         return gk20a_gr_av_to_init_(blob, 64, 0x00100000, ppack);
 >  }
 >
-> -/**
-> +/*
->   * Wait until GR goes idle. GR is considered idle if it is disabled by t=
-he
->   * MC (0x200) register, or GR is not busy and a context switch is not in
->   * progress.
+> -int
+> +static int
+>  tu102_gr_load(struct gf100_gr *gr, int ver, const struct gf100_gr_fwif *=
+fwif)
+>  {
+>         int ret;
 > --
 > 2.41.0.162.gfafddb0af9-goog
 >
