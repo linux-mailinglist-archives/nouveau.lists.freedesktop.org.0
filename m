@@ -1,72 +1,72 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB17072991A
-	for <lists+nouveau@lfdr.de>; Fri,  9 Jun 2023 14:09:49 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2081872991D
+	for <lists+nouveau@lfdr.de>; Fri,  9 Jun 2023 14:10:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CB43610E69F;
-	Fri,  9 Jun 2023 12:09:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8BF9810E6A5;
+	Fri,  9 Jun 2023 12:10:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EA39010E69E
- for <nouveau@lists.freedesktop.org>; Fri,  9 Jun 2023 12:09:43 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BE74B10E6A2
+ for <nouveau@lists.freedesktop.org>; Fri,  9 Jun 2023 12:09:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1686312583;
+ s=mimecast20190719; t=1686312597;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=k3YEGdNvp8HrOlSgpTvQVmaRiPOQzGrP0bC+OvJCrwQ=;
- b=ZK3o4OGs5x4PjWSXrc8QPRbVeegBGkDhhaUVMxdrMRswHugw8I1J4nFlFJe6XuoowGdy9h
- SuNr13xeoAMbnEYZ7A6nZjopptpHV0nI2aRDKx0j+lqECDa5RwUYDil6wanYRPJveMYxAm
- JAvPBsKHWnOjqp8TkQDvj5j3Qbf8ssg=
-Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
- [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=8K8zOc2VRoAIFNnTvussYfo75dEOYDyNWNKLCNNQoBA=;
+ b=S+RSh4fjb9FJoLZpieG2dMjd0gg3po2JsgceZxZCkEjR7dC6OV2/ibxa3fPtHAZdkQ0C5M
+ hBunSRcZE/4nMH+xXA9oPzFfD/nmkphGDytTdbOlMFRwuKJPXeynhMJlGCWtC1DLLwTpGE
+ eOEKbP59uT5ULVU0//jUChxwR9OoZYE=
+Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com
+ [209.85.208.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-622-UsHWG7tKOZWEaZ4v5p6HRg-1; Fri, 09 Jun 2023 08:09:41 -0400
-X-MC-Unique: UsHWG7tKOZWEaZ4v5p6HRg-1
-Received: by mail-lj1-f198.google.com with SMTP id
- 38308e7fff4ca-2b0982c99adso1154911fa.0
- for <nouveau@lists.freedesktop.org>; Fri, 09 Jun 2023 05:09:41 -0700 (PDT)
+ us-mta-615-twsSKDNHMCeo36nYU5j02g-1; Fri, 09 Jun 2023 08:09:56 -0400
+X-MC-Unique: twsSKDNHMCeo36nYU5j02g-1
+Received: by mail-lj1-f197.google.com with SMTP id
+ 38308e7fff4ca-2b1b8ec9343so2387331fa.1
+ for <nouveau@lists.freedesktop.org>; Fri, 09 Jun 2023 05:09:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686312580; x=1688904580;
+ d=1e100.net; s=20221208; t=1686312595; x=1688904595;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=k3YEGdNvp8HrOlSgpTvQVmaRiPOQzGrP0bC+OvJCrwQ=;
- b=K6w04NgsScr/0BUjHK1f6Znmiepvcy7gdHnUY1/OMllV6VbjcJgYju60c7AIvUJPk7
- /Ox2owi1IgKuEYyDqRUUMSPOBOXaAc4mb07emOwNahQpy3WHErRThTFFqvxF5NqQA9SS
- Tck7CmUdmQtQwBUMftp9WXrhYVB2vHCue8VTGZ5mybriKUj5z75MS8xPL2IjXngVF1vz
- F1EU4n3kCb7UuuojxfPP6u+jfGC0r3Q4iTr8wuz6h01jqPwUZjYSk29O0BV9axqj/tIE
- ilt8Z6lARxD9e8q0vouVdaMnKxuOqKagyPDO2ZkuT62T3khKY49mQd/lkhpJKUjUZhoc
- 4AUA==
-X-Gm-Message-State: AC+VfDy1NN/5kIHkmvzUMjGhHTS7r9LjVppu61Fa0nDSQY8FrQYFX5aw
- nWggutLPDUSyaiotQvCQdEb2UqAFVJtFUOQnCcoyrlJDjWbxe1Xb/pi/+ZohDFaKtKi2VuSBU+4
- Rwe5hBtx8kgjO44C4ezbiYdrysfacpetHhgtXRJSJ0Q==
-X-Received: by 2002:a2e:aa1c:0:b0:2b1:e724:4d08 with SMTP id
- bf28-20020a2eaa1c000000b002b1e7244d08mr988058ljb.4.1686312580323; 
- Fri, 09 Jun 2023 05:09:40 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ7/t2tD8MaFXp12L6CGZR5hbVtX9aWeEyd2gjiDmsXx5pBr/sPbrekf6193BsmLX+ZVCnheOQK5h1GW9Ht/eq8=
-X-Received: by 2002:a2e:aa1c:0:b0:2b1:e724:4d08 with SMTP id
- bf28-20020a2eaa1c000000b002b1e7244d08mr988048ljb.4.1686312580168; Fri, 09 Jun
- 2023 05:09:40 -0700 (PDT)
+ bh=8K8zOc2VRoAIFNnTvussYfo75dEOYDyNWNKLCNNQoBA=;
+ b=ECp1FGSVQkDFm9F3HyK33jmFD06QO57obL8hi++RN2q6z9CtUOq2Uy9tWmOK/1vKUo
+ SleUbFxcpl1IL0mPHFhhwararys2zItX1rRjnEWgswxSNj7XO7MQ1BB5uwK3yFSnCUYC
+ lb7Z+S/bSX3f5+iCXNfLJIYSIauttjBCzd63158jIvLHmmFVAIyddbUsFfgJPvvX8uhh
+ a2uy6cma8WrBpSQthq9FE4N3p9nTb/OHg9ZajY9FyMTeCnma8Ny1me5+PhSKC/TxWxOH
+ pYcn8AGFjvGVxbnQBr1U/1i+YdBfKL3EjzFrtkmWULbGwgKo36c61EeZtBNG1HZIhOkJ
+ YnwA==
+X-Gm-Message-State: AC+VfDzOeuLntm0Ar5eMTSt+NxIRgkbU5FjK+aAXy8+z2rRbC7tY+uDu
+ 9st/jZlxkidyNPAhJbRjF3Nuy60/XbQQuNGlJ0IcAE3zHGHl1BBWEOoOLOULa1vFRY4jtCebc6/
+ k2IfweY3OmKoCxQFXkYj6t40hDshLSwuRF1LlS07oZQ==
+X-Received: by 2002:a2e:b108:0:b0:2b1:dc69:67fd with SMTP id
+ p8-20020a2eb108000000b002b1dc6967fdmr808629ljl.5.1686312594959; 
+ Fri, 09 Jun 2023 05:09:54 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ5x4JIMK1TQ12rpra/mBTbK0YAIXvw7OKgm1UtrERedLpibE3QvP+XQvRXtwHvlv51+JuJjz8J+mA4OusmOEjA=
+X-Received: by 2002:a2e:b108:0:b0:2b1:dc69:67fd with SMTP id
+ p8-20020a2eb108000000b002b1dc6967fdmr808618ljl.5.1686312594802; Fri, 09 Jun
+ 2023 05:09:54 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230609081732.3842341-1-lee@kernel.org>
- <20230609081732.3842341-11-lee@kernel.org>
-In-Reply-To: <20230609081732.3842341-11-lee@kernel.org>
+ <20230609081732.3842341-13-lee@kernel.org>
+In-Reply-To: <20230609081732.3842341-13-lee@kernel.org>
 From: Karol Herbst <kherbst@redhat.com>
-Date: Fri, 9 Jun 2023 14:09:29 +0200
-Message-ID: <CACO55tuaNOYphHyB9+ygi9AnXVuF49etsW7x2X5K5iEtFNAAyw@mail.gmail.com>
+Date: Fri, 9 Jun 2023 14:09:43 +0200
+Message-ID: <CACO55tsP+FgJRSZS0gEVpOFx-GgNhGA3kr6KLvURVgmpEmWrFA@mail.gmail.com>
 To: Lee Jones <lee@kernel.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [RESEND 10/15] drm/nouveau/nvkm/engine/gr/tu102:
- Staticify local function gf100_fifo_nonstall_block()
+Subject: Re: [Nouveau] [RESEND 12/15] drm/nouveau/dispnv04/crtc: Demote
+ kerneldoc abuses
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,8 +88,12 @@ On Fri, Jun 9, 2023 at 10:18=E2=80=AFAM Lee Jones <lee@kernel.org> wrote:
 >
 > Fixes the following W=3D1 kernel build warning(s):
 >
->  drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: no previo=
-us prototype for =E2=80=98tu102_gr_load=E2=80=99 [-Wmissing-prototypes]
+>  drivers/gpu/drm/nouveau/dispnv04/crtc.c:453: warning: This comment start=
+s with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide=
+/kernel-doc.rst
+>  drivers/gpu/drm/nouveau/dispnv04/crtc.c:629: warning: This comment start=
+s with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide=
+/kernel-doc.rst
 >
 > Cc: Ben Skeggs <bskeggs@redhat.com>
 > Cc: Karol Herbst <kherbst@redhat.com>
@@ -103,25 +107,34 @@ us prototype for =E2=80=98tu102_gr_load=E2=80=99 [-Wmissing-prototypes]
 Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
 > ---
->  drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  drivers/gpu/drm/nouveau/dispnv04/crtc.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c b/drivers/gpu=
-/drm/nouveau/nvkm/engine/gr/tu102.c
-> index 3b6c8100a2428..10a7e59482a6f 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
-> @@ -206,7 +206,7 @@ tu102_gr_av_to_init_veid(struct nvkm_blob *blob, stru=
-ct gf100_gr_pack **ppack)
->         return gk20a_gr_av_to_init_(blob, 64, 0x00100000, ppack);
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/no=
+uveau/dispnv04/crtc.c
+> index a6f2e681bde98..7794902df17d5 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+> @@ -449,7 +449,7 @@ nv_crtc_mode_set_vga(struct drm_crtc *crtc, struct dr=
+m_display_mode *mode)
+>         regp->Attribute[NV_CIO_AR_CSEL_INDEX] =3D 0x00;
 >  }
 >
-> -int
-> +static int
->  tu102_gr_load(struct gf100_gr *gr, int ver, const struct gf100_gr_fwif *=
-fwif)
->  {
->         int ret;
+> -/**
+> +/*
+>   * Sets up registers for the given mode/adjusted_mode pair.
+>   *
+>   * The clocks, CRTCs and outputs attached to this CRTC must be off.
+> @@ -625,7 +625,7 @@ nv_crtc_swap_fbs(struct drm_crtc *crtc, struct drm_fr=
+amebuffer *old_fb)
+>         return ret;
+>  }
+>
+> -/**
+> +/*
+>   * Sets up registers for the given mode/adjusted_mode pair.
+>   *
+>   * The clocks, CRTCs and outputs attached to this CRTC must be off.
 > --
 > 2.41.0.162.gfafddb0af9-goog
 >
