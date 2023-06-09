@@ -1,47 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1BF397292AE
-	for <lists+nouveau@lfdr.de>; Fri,  9 Jun 2023 10:18:24 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7794A7292B1
+	for <lists+nouveau@lfdr.de>; Fri,  9 Jun 2023 10:18:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 852C910E668;
-	Fri,  9 Jun 2023 08:18:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A0D1710E667;
+	Fri,  9 Jun 2023 08:18:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9D9BD10E663;
- Fri,  9 Jun 2023 08:18:09 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3BAD810E667;
+ Fri,  9 Jun 2023 08:18:15 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 204AD654A3;
- Fri,  9 Jun 2023 08:18:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0239BC4339B;
- Fri,  9 Jun 2023 08:18:06 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id B8FF261705;
+ Fri,  9 Jun 2023 08:18:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 437E9C433A1;
+ Fri,  9 Jun 2023 08:18:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1686298688;
- bh=g43Hws3iLiAkztDwyEphPUBG078I8EpCKqK2eu0HlW8=;
+ s=k20201202; t=1686298694;
+ bh=21Srb7JJ7aWQibsq7Epm+9IaQI5kx7gLrn4UED9xIes=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=a+hNeRSrwoWkqmhdQ386sDy8odIcPCZrMUtTx6bJqEuaVBPsuFQbFx9kS9Vc6Lm1W
- hyZ7YnK6PprSrKBzFuQBlUA91ZLvG5Efe5qdQRJUoD2uSb8qYaYIDZUJsQ1JNQR6xC
- JIIbT7ErNyA1OOZI++x1QVC+AJklX04k/QhaaY4X8smxYKbsBenhjFq3+r3G0MkTuJ
- G3WagfmWhk6ZkTaKVZi86r38hQEKmqIRyD3x6BSIhpA2jOuxYZa+yf09hvRbdkoGiU
- sJSvebP8sA80RvV4vmnUTagwKWr9ABWUyJ+/znOkR65xUx6/dRC8p6U2I4wZrsoWKg
- z/lRttF93ir8Q==
+ b=PNmumLgwu0wWbxiIepjZc31NUJFFNYLnHpH549g63dBQNdYquAr335g1F2BNzT7ch
+ /0Lszr7cTHpfdL8U3otNoBR6raX3/Sa34bb3csrAFFhT3bYagCQ07FMF6V4+Ndh39f
+ 22XppYp8pvtyFEKttzq3LHfqAj2X/ritOe6kqj1hw1t7HeHd+1KjxeXw6qSIqRGtT2
+ vLOjoYRxR8hrB2zK0n2K72EILckcFCXl8O4kIeJBncWdKDfywedV9Egf/Wpk83jVFd
+ 4hWWbS6qpUOKhB1hsdtgBcHjCykTe4t1F7XUyW7pwvF5BdxVKJ6puCc5nnd/G6UiyS
+ RNY6XLwbkHf2g==
 From: Lee Jones <lee@kernel.org>
 To: lee@kernel.org
-Date: Fri,  9 Jun 2023 09:17:13 +0100
-Message-ID: <20230609081732.3842341-11-lee@kernel.org>
+Date: Fri,  9 Jun 2023 09:17:15 +0100
+Message-ID: <20230609081732.3842341-13-lee@kernel.org>
 X-Mailer: git-send-email 2.41.0.162.gfafddb0af9-goog
 In-Reply-To: <20230609081732.3842341-1-lee@kernel.org>
 References: <20230609081732.3842341-1-lee@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [RESEND 10/15] drm/nouveau/nvkm/engine/gr/tu102:
- Staticify local function gf100_fifo_nonstall_block()
+Subject: [Nouveau] [RESEND 12/15] drm/nouveau/dispnv04/crtc: Demote
+ kerneldoc abuses
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,7 +59,8 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Fixes the following W=1 kernel build warning(s):
 
- drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c:210:1: warning: no previous prototype for ‘tu102_gr_load’ [-Wmissing-prototypes]
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c:453: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c:629: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
 
 Cc: Ben Skeggs <bskeggs@redhat.com>
 Cc: Karol Herbst <kherbst@redhat.com>
@@ -72,22 +71,31 @@ Cc: dri-devel@lists.freedesktop.org
 Cc: nouveau@lists.freedesktop.org
 Signed-off-by: Lee Jones <lee@kernel.org>
 ---
- drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
-index 3b6c8100a2428..10a7e59482a6f 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/tu102.c
-@@ -206,7 +206,7 @@ tu102_gr_av_to_init_veid(struct nvkm_blob *blob, struct gf100_gr_pack **ppack)
- 	return gk20a_gr_av_to_init_(blob, 64, 0x00100000, ppack);
+diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+index a6f2e681bde98..7794902df17d5 100644
+--- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
++++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+@@ -449,7 +449,7 @@ nv_crtc_mode_set_vga(struct drm_crtc *crtc, struct drm_display_mode *mode)
+ 	regp->Attribute[NV_CIO_AR_CSEL_INDEX] = 0x00;
  }
  
--int
-+static int
- tu102_gr_load(struct gf100_gr *gr, int ver, const struct gf100_gr_fwif *fwif)
- {
- 	int ret;
+-/**
++/*
+  * Sets up registers for the given mode/adjusted_mode pair.
+  *
+  * The clocks, CRTCs and outputs attached to this CRTC must be off.
+@@ -625,7 +625,7 @@ nv_crtc_swap_fbs(struct drm_crtc *crtc, struct drm_framebuffer *old_fb)
+ 	return ret;
+ }
+ 
+-/**
++/*
+  * Sets up registers for the given mode/adjusted_mode pair.
+  *
+  * The clocks, CRTCs and outputs attached to this CRTC must be off.
 -- 
 2.41.0.162.gfafddb0af9-goog
 
