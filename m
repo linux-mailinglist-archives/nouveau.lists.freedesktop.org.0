@@ -1,46 +1,59 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED67F7373A8
-	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:20:24 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 56833737404
+	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:21:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6E03110E319;
-	Tue, 20 Jun 2023 18:20:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6E27810E370;
+	Tue, 20 Jun 2023 18:21:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from 189.cn (ptr.189.cn [183.61.185.102])
- by gabe.freedesktop.org (Postfix) with ESMTP id 5C05210E157;
- Fri,  9 Jun 2023 17:43:47 +0000 (UTC)
-HMM_SOURCE_IP: 10.64.8.43:47690.1937665454
-HMM_ATTACHE_NUM: 0000
-HMM_SOURCE_TYPE: SMTP
-Received: from clientip-114.242.206.180 (unknown [10.64.8.43])
- by 189.cn (HERMES) with SMTP id AEDBE100212;
- Sat, 10 Jun 2023 01:43:39 +0800 (CST)
-Received: from  ([114.242.206.180])
- by gateway-151646-dep-75648544bd-7vx9t with ESMTP id
- 0877e90f4b584cbe94a878d807b39f22 for helgaas@kernel.org; 
- Sat, 10 Jun 2023 01:43:43 CST
-X-Transaction-ID: 0877e90f4b584cbe94a878d807b39f22
-X-Real-From: 15330273260@189.cn
-X-Receive-IP: 114.242.206.180
-X-MEDUSA-Status: 0
-Message-ID: <2cf50ad0-e4fa-17a3-3e22-7fd8d4a316ed@189.cn>
-Date: Sat, 10 Jun 2023 01:43:39 +0800
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+ by gabe.freedesktop.org (Postfix) with ESMTP id AC3BD10E0BB;
+ Sun, 11 Jun 2023 06:59:28 +0000 (UTC)
+Received: from loongson.cn (unknown [10.20.42.43])
+ by gateway (Coremail) with SMTP id _____8Cx8OjNcIVkMI8CAA--.4031S3;
+ Sun, 11 Jun 2023 14:59:26 +0800 (CST)
+Received: from [10.20.42.43] (unknown [10.20.42.43])
+ by localhost.localdomain (Coremail) with SMTP id
+ AQAAf8AxPMrNcIVk8bIRAA--.42850S3; 
+ Sun, 11 Jun 2023 14:59:25 +0800 (CST)
+Message-ID: <a4256a0e-c175-8006-c1e0-07f0fe782f95@loongson.cn>
+Date: Sun, 11 Jun 2023 14:59:25 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
-To: Bjorn Helgaas <helgaas@kernel.org>, Sui Jingfeng <suijingfeng@loongson.cn>
-References: <20230609164850.GA1251187@bhelgaas>
+To: Lee Jones <lee@kernel.org>
+References: <20230609081732.3842341-13-lee@kernel.org>
 Content-Language: en-US
-From: Sui Jingfeng <15330273260@189.cn>
-In-Reply-To: <20230609164850.GA1251187@bhelgaas>
+From: Sui Jingfeng <suijingfeng@loongson.cn>
+Organization: Loongson
+In-Reply-To: <20230609081732.3842341-13-lee@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-CM-TRANSID: AQAAf8AxPMrNcIVk8bIRAA--.42850S3
+X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
+X-Coremail-Antispam: 1Uk129KBj93XoW7Cw1Utw4fuF15tr15CF4Utrc_yoW8CrWDpa
+ 17GF1F9rWkta1rK3WIyF929FWrGa93KFW3K3ZxJ34ruwnIyr1jvr4YkF1aqryDXF17Cw4f
+ trn7Kryaga1fZFbCm3ZEXasCq-sJn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7KY7ZEXa
+ sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+ 0xBIdaVrnRJUUUvYb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+ IYs7xG6rWj6s0DM7CIcVAFz4kK6r106r15M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+ e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+ 0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
+ Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx1l5I
+ 8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1q6rW5McIj6I8E87Iv67AK
+ xVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7I2V7IY0VAS07AlzV
+ AYIcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E
+ 14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_JF0_Jw1lIx
+ kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAF
+ wI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F
+ 4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07jOdb8U
+ UUUU=
 X-Mailman-Approved-At: Tue, 20 Jun 2023 18:20:12 +0000
-Subject: Re: [Nouveau] [Intel-gfx] [PATCH v3 4/4] PCI/VGA: introduce
- is_boot_device function callback to vga_client_register
+Subject: Re: [Nouveau] [RESEND,
+ 12/15] drm/nouveau/dispnv04/crtc: Demote kerneldoc abuses
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,93 +65,55 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Pan Xinhui <Xinhui.Pan@amd.com>, kvm@vger.kernel.org,
- nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, YiPeng Chai <YiPeng.Chai@amd.com>,
- Mario Limonciello <mario.limonciello@amd.com>,
- Ville Syrjala <ville.syrjala@linux.intel.com>, Yi Liu <yi.l.liu@intel.com>,
- amd-gfx@lists.freedesktop.org, Jason Gunthorpe <jgg@ziepe.ca>,
- Ben Skeggs <bskeggs@redhat.com>, linux-pci@vger.kernel.org,
- Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
- Kevin Tian <kevin.tian@intel.com>, Lijo Lazar <lijo.lazar@amd.com>,
- Bokun Zhang <Bokun.Zhang@amd.com>, intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, loongson-kernel@lists.loongnix.cn,
- Alex Williamson <alex.williamson@redhat.com>,
- Abhishek Sahu <abhsahu@nvidia.com>, Jani Nikula <jani.nikula@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Bjorn Helgaas <bhelgaas@google.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Yishai Hadas <yishaih@nvidia.com>, Li Yi <liyi@loongson.cn>,
- Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>,
- linux-kernel@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
- Cornelia Huck <cohuck@redhat.com>, Alex Deucher <alexander.deucher@amd.com>,
- Christian Konig <christian.koenig@amd.com>,
- Hawking Zhang <Hawking.Zhang@amd.com>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Reviewed-by: Sui Jingfeng <suijingfeng@loongson.cn>
 
-On 2023/6/10 00:48, Bjorn Helgaas wrote:
-> On Fri, Jun 09, 2023 at 10:27:39AM +0800, Sui Jingfeng wrote:
->> On 2023/6/9 03:19, Bjorn Helgaas wrote:
->>> On Thu, Jun 08, 2023 at 07:43:22PM +0800, Sui Jingfeng wrote:
->>>> From: Sui Jingfeng <suijingfeng@loongson.cn>
->>>>
->>>> The vga_is_firmware_default() function is arch-dependent, which doesn't
->>>> sound right. At least, it also works on the Mips and LoongArch platforms.
->>>> Tested with the drm/amdgpu and drm/radeon drivers. However, it's difficult
->>>> to enumerate all arch-driver combinations. I'm wrong if there is only one
->>>> exception.
->>>>
->>>> With the observation that device drivers typically have better knowledge
->>>> about which PCI bar contains the firmware framebuffer, which could avoid
->>>> the need to iterate all of the PCI BARs.
->>>>
->>>> But as a PCI function at pci/vgaarb.c, vga_is_firmware_default() is
->>>> probably not suitable to make such an optimization for a specific device.
->>>>
->>>> There are PCI display controllers that don't have a dedicated VRAM bar,
->>>> this function will lose its effectiveness in such a case. Luckily, the
->>>> device driver can provide an accurate workaround.
->>>>
->>>> Therefore, this patch introduces a callback that allows the device driver
->>>> to tell the VGAARB if the device is the default boot device. This patch
->>>> only intends to introduce the mechanism, while the implementation is left
->>>> to the device driver authors. Also honor the comment: "Clients have two
->>>> callback mechanisms they can use"
->>> s/bar/BAR/ (several)
->>>
->>> Nothing here uses the callback.  I don't want to merge this until we
->>> have a user.
->> This is chicken and egg question.
->>
->> If you could help get this merge first, I will show you the first user.
->>
->>> I'm not sure why the device driver should know whether its device is
->>> the default boot device.
->> It's not that the device driver should know,
->>
->> but it's about that the device driver has the right to override.
->>
->> Device driver may have better approach to identify the default boot
->> device.
-> The way we usually handle this is to include the new callback in the
-> same series as the first user of it.  That has two benefits:
-> (1) everybody can review the whole picture and possibly suggest
-> different approaches, and (2) when we merge the infrastructure,
-> we also merge a user of it at the same time, so the whole thing can be
-> tested and we don't end up with unused code.
+On 2023/6/9 16:17, Lee Jones wrote:
+> Fixes the following W=1 kernel build warning(s):
+>
+>   drivers/gpu/drm/nouveau/dispnv04/crtc.c:453: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+>   drivers/gpu/drm/nouveau/dispnv04/crtc.c:629: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+>
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: Karol Herbst <kherbst@redhat.com>
+> Cc: Lyude Paul <lyude@redhat.com>
+> Cc: David Airlie <airlied@gmail.com>
+> Cc: Daniel Vetter <daniel@ffwll.ch>
+> Cc: dri-devel@lists.freedesktop.org
+> Cc: nouveau@lists.freedesktop.org
+> Signed-off-by: Lee Jones <lee@kernel.org>
+> Reviewed-by: Karol Herbst <kherbst@redhat.com>
+> ---
+>   drivers/gpu/drm/nouveau/dispnv04/crtc.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+> index a6f2e681bde98..7794902df17d5 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+> @@ -449,7 +449,7 @@ nv_crtc_mode_set_vga(struct drm_crtc *crtc, struct drm_display_mode *mode)
+>   	regp->Attribute[NV_CIO_AR_CSEL_INDEX] = 0x00;
+>   }
+>   
+> -/**
+> +/*
+>    * Sets up registers for the given mode/adjusted_mode pair.
+>    *
+>    * The clocks, CRTCs and outputs attached to this CRTC must be off.
+> @@ -625,7 +625,7 @@ nv_crtc_swap_fbs(struct drm_crtc *crtc, struct drm_framebuffer *old_fb)
+>   	return ret;
+>   }
+>   
+> -/**
+> +/*
+>    * Sets up registers for the given mode/adjusted_mode pair.
+>    *
+>    * The clocks, CRTCs and outputs attached to this CRTC must be off.
 
-OK, acceptable
+-- 
+Jingfeng
 
-I will try to prepare the user code of this callback and respin the patch.
-
-I may resend it with another patch set in the future, this series 
-already drop it,
-
-see v5[1]
-
-[1] https://patchwork.freedesktop.org/series/119134/
-
-> Bjorn
