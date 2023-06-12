@@ -2,44 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3DAF72A094
-	for <lists+nouveau@lfdr.de>; Fri,  9 Jun 2023 18:49:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D695A72B845
+	for <lists+nouveau@lfdr.de>; Mon, 12 Jun 2023 08:47:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 738D810E6C9;
-	Fri,  9 Jun 2023 16:48:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 44D0010E164;
+	Mon, 12 Jun 2023 06:47:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 846B810E144;
- Fri,  9 Jun 2023 16:48:54 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 58DA1659F6;
- Fri,  9 Jun 2023 16:48:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7117EC433EF;
- Fri,  9 Jun 2023 16:48:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1686329331;
- bh=wj6ps6y4ft6WvpJQrBdcLusOhuloDy4bHnascQVlTT0=;
- h=Date:From:To:Cc:Subject:In-Reply-To:From;
- b=O4xMnvyru9ylkQLSbinraMlwoqqoCRzqiohujByEGtJFDGMM2+bIqDUl5eHnyQxXo
- rY6Jt+s9J9b2BJMm3LdqlppNkZafwg1ABQk0do5vWtrwv0HjpULglS2SDN2D6aMymp
- CWxzgfiCmay+hbv7MVTWZ0mdVEp8uqGYXaqtxKSQkL5P7BHI2KgvO4BKLhYRuItyUe
- b1MGXu2c7L7tT5+p5OajerVERb9IENBTZBVZNst9tkM+K3jNo95v+iyFA8Z0Q9QZCe
- 4IkGGUvPbx+9E+dUiQyq/RGdROHaFJmb7Ilr8VJ8sFWFpVVNEi3FletAovP7YIwJSa
- +jJM45seUVXUw==
-Date: Fri, 9 Jun 2023 11:48:50 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Sui Jingfeng <suijingfeng@loongson.cn>
-Message-ID: <20230609164850.GA1251187@bhelgaas>
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BD57F10E164
+ for <nouveau@lists.freedesktop.org>; Mon, 12 Jun 2023 06:47:43 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id C601568AFE; Mon, 12 Jun 2023 08:47:38 +0200 (CEST)
+Date: Mon, 12 Jun 2023 08:47:38 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Juergen Gross <jgross@suse.com>
+Message-ID: <20230612064738.GA19518@lst.de>
+References: <20230518134253.909623-1-hch@lst.de>
+ <20230518134253.909623-3-hch@lst.de> <ZGZr/xgbUmVqpOpN@mail-itl>
+ <20230519040405.GA10818@lst.de> <ZGdLErBzi9MANL3i@mail-itl>
+ <c5defff8-882e-3482-0de1-e50a4bcdfa99@suse.com>
+ <20230607131257.GB19206@lst.de>
+ <79b26dac-b507-1c05-b499-784ca6ee3db0@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <0d2ba099-9817-13be-c85b-997211443119@loongson.cn>
-Subject: Re: [Nouveau] [Intel-gfx] [PATCH v3 4/4] PCI/VGA: introduce
- is_boot_device function callback to vga_client_register
+In-Reply-To: <79b26dac-b507-1c05-b499-784ca6ee3db0@suse.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+Subject: Re: [Nouveau] [PATCH 2/4] x86: always initialize xen-swiotlb when
+ xen-pcifront is enabling
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,83 +42,26 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Pan Xinhui <Xinhui.Pan@amd.com>, kvm@vger.kernel.org,
- nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, YiPeng Chai <YiPeng.Chai@amd.com>,
- Mario Limonciello <mario.limonciello@amd.com>,
- Ville Syrjala <ville.syrjala@linux.intel.com>, Yi Liu <yi.l.liu@intel.com>,
- amd-gfx@lists.freedesktop.org, Sui Jingfeng <15330273260@189.cn>,
- Jason Gunthorpe <jgg@ziepe.ca>, Ben Skeggs <bskeggs@redhat.com>,
- linux-pci@vger.kernel.org, Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
- Kevin Tian <kevin.tian@intel.com>, Lijo Lazar <lijo.lazar@amd.com>,
- Bokun Zhang <Bokun.Zhang@amd.com>, intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, loongson-kernel@lists.loongnix.cn,
- Alex Williamson <alex.williamson@redhat.com>,
- Abhishek Sahu <abhsahu@nvidia.com>, Jani Nikula <jani.nikula@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Bjorn Helgaas <bhelgaas@google.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Yishai Hadas <yishaih@nvidia.com>, Li Yi <liyi@loongson.cn>,
- Somalapuram Amaranath <Amaranath.Somalapuram@amd.com>,
- linux-kernel@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
- Cornelia Huck <cohuck@redhat.com>, Alex Deucher <alexander.deucher@amd.com>,
- Christian Konig <christian.koenig@amd.com>,
- Hawking Zhang <Hawking.Zhang@amd.com>
+Cc: x86@kernel.org, Stefano Stabellini <sstabellini@kernel.org>,
+ nouveau@lists.freedesktop.org, Dave Hansen <dave.hansen@linux.intel.com>,
+ Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?=
+ <marmarek@invisiblethingslab.com>, linux-kernel@vger.kernel.org,
+ iommu@lists.linux.dev, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Ben Skeggs <bskeggs@redhat.com>,
+ "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org,
+ Thomas Gleixner <tglx@linutronix.de>, Christoph Hellwig <hch@lst.de>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jun 09, 2023 at 10:27:39AM +0800, Sui Jingfeng wrote:
-> On 2023/6/9 03:19, Bjorn Helgaas wrote:
-> > On Thu, Jun 08, 2023 at 07:43:22PM +0800, Sui Jingfeng wrote:
-> > > From: Sui Jingfeng <suijingfeng@loongson.cn>
-> > > 
-> > > The vga_is_firmware_default() function is arch-dependent, which doesn't
-> > > sound right. At least, it also works on the Mips and LoongArch platforms.
-> > > Tested with the drm/amdgpu and drm/radeon drivers. However, it's difficult
-> > > to enumerate all arch-driver combinations. I'm wrong if there is only one
-> > > exception.
-> > > 
-> > > With the observation that device drivers typically have better knowledge
-> > > about which PCI bar contains the firmware framebuffer, which could avoid
-> > > the need to iterate all of the PCI BARs.
-> > > 
-> > > But as a PCI function at pci/vgaarb.c, vga_is_firmware_default() is
-> > > probably not suitable to make such an optimization for a specific device.
-> > > 
-> > > There are PCI display controllers that don't have a dedicated VRAM bar,
-> > > this function will lose its effectiveness in such a case. Luckily, the
-> > > device driver can provide an accurate workaround.
-> > > 
-> > > Therefore, this patch introduces a callback that allows the device driver
-> > > to tell the VGAARB if the device is the default boot device. This patch
-> > > only intends to introduce the mechanism, while the implementation is left
-> > > to the device driver authors. Also honor the comment: "Clients have two
-> > > callback mechanisms they can use"
-> > s/bar/BAR/ (several)
-> > 
-> > Nothing here uses the callback.  I don't want to merge this until we
-> > have a user.
-> 
-> This is chicken and egg question.
-> 
-> If you could help get this merge first, I will show you the first user.
-> 
-> > I'm not sure why the device driver should know whether its device is
-> > the default boot device.
-> 
-> It's not that the device driver should know,
-> 
-> but it's about that the device driver has the right to override.
-> 
-> Device driver may have better approach to identify the default boot
-> device.
+On Fri, Jun 09, 2023 at 05:38:28PM +0200, Juergen Gross wrote:
+>>> guest started with e820_host=1 even if no PCI passthrough was planned.
+>>> But this should be rather rare (at least I hope so).
+>>
+>> So is this an ACK for the patch and can we go ahead with it?
+>
+> As long as above mentioned check of the E820 map is done, yes.
+>
+> If you want I can send a diff to be folded into your patch on Monday.
 
-The way we usually handle this is to include the new callback in the
-same series as the first user of it.  That has two benefits:
-(1) everybody can review the whole picture and possibly suggest
-different approaches, and (2) when we merge the infrastructure,
-we also merge a user of it at the same time, so the whole thing can be
-tested and we don't end up with unused code.
+Yes, that would be great!
 
-Bjorn
