@@ -1,72 +1,72 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7FBD72EDE5
-	for <lists+nouveau@lfdr.de>; Tue, 13 Jun 2023 23:30:17 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id F3AF272EDFB
+	for <lists+nouveau@lfdr.de>; Tue, 13 Jun 2023 23:32:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0D07B10E3E2;
-	Tue, 13 Jun 2023 21:30:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 24A8910E3E2;
+	Tue, 13 Jun 2023 21:32:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F332210E3E2
- for <nouveau@lists.freedesktop.org>; Tue, 13 Jun 2023 21:30:12 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5691C10E3E2
+ for <nouveau@lists.freedesktop.org>; Tue, 13 Jun 2023 21:32:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1686691812;
+ s=mimecast20190719; t=1686691954;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=BcxnAFsB73N1AMUtdPPscj+rOYVcRYIQ4rVO2va/kSU=;
- b=F3ChAv15xV6JvthQHETgMKDeLiHWidFqVBdtJEkuA2Zq1SbNe+Y5IE2UFlnC/5yhqjz2dN
- SJGLBiVpuOLWpbUGT1fi/QqbQBgoF/OxwGsuK0sELxF9zhl7ZP51LT/4C5cGrqruq9aiXd
- Xia9tBbOA0tNycfwd1uBV7nN6N9vjUM=
-Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
- [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=QdOrFiDnrtMMQTAFk0z7jVpsb9hiYGd67nsDaocTQzc=;
+ b=JOLRSQZVaARyen0GeX9qXdo7qJpNFZNwpyvM/TRztmWUFGm7nVDGluN9fxA1/MFDEK0EwN
+ m2+nryhleFwg7mO6h2OGlvuJEa7OADJYXECbFffe/qckKpz2joQ7pJtiomxzZDgwkmOEEA
+ P9kgjAwig9lC1yMRcz7dpgRKLzGcJqI=
+Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
+ [209.85.167.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-573-VP1zcdhAMICZbTByfF1AHw-1; Tue, 13 Jun 2023 17:30:09 -0400
-X-MC-Unique: VP1zcdhAMICZbTByfF1AHw-1
-Received: by mail-lj1-f200.google.com with SMTP id
- 38308e7fff4ca-2b330fbc513so3438291fa.0
- for <nouveau@lists.freedesktop.org>; Tue, 13 Jun 2023 14:30:08 -0700 (PDT)
+ us-mta-421-C48w0uR-MrWj3YldhTAcJQ-1; Tue, 13 Jun 2023 17:32:32 -0400
+X-MC-Unique: C48w0uR-MrWj3YldhTAcJQ-1
+Received: by mail-lf1-f71.google.com with SMTP id
+ 2adb3069b0e04-4f74128e499so452340e87.0
+ for <nouveau@lists.freedesktop.org>; Tue, 13 Jun 2023 14:32:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686691807; x=1689283807;
+ d=1e100.net; s=20221208; t=1686691950; x=1689283950;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BcxnAFsB73N1AMUtdPPscj+rOYVcRYIQ4rVO2va/kSU=;
- b=ZFkAK3o7HVC53tDr+rMOd5rDhEcYD1np/q9amehi/01MIfTZfgDD8CnkQVlBUI3/K0
- 5HSo6ZCaBSu7wgEq0221sI5IarlHT0jH8kQwJ3L7+/g0cEzBCQECoSZCeoXPqrUeQUvo
- 8V5vqA1k+BjKVProVqlbcR5kDE+J53jVzag+wXU9t3Tr0JQVoxG/DpXfHzGkaDqkWov0
- bqXE4MjGSPtQr+1LeXCkI8Wxc0NvIiqRv5jU01JT6RwhdscEt0rw3ueLuH9o2uRF2fdp
- +YCoum4EEEHTZw0ye0NQmyeCUhS4Vq71sE86ofXPUp85lMH0B3cg3i8bgUu8/Gn+Fhfg
- BVag==
-X-Gm-Message-State: AC+VfDzJtxZcSjElCzMUNxe97KaQLi2iCMGwFpiR/ReJhcuOHB7LVwld
- bVskHKCtb7gNGR/FvInBrGUobcX0zAkTRu3q/F0upkoWNsK3G4VCsCGAlf448MyzSythKbvTnru
- q+KxA4NkeoLG5A+IsnF/weVX/uZUwJPIho+zgi6tn9w==
-X-Received: by 2002:a2e:a23a:0:b0:2b1:b741:7500 with SMTP id
- i26-20020a2ea23a000000b002b1b7417500mr6265951ljm.1.1686691807427; 
- Tue, 13 Jun 2023 14:30:07 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ5Auh9x6BvU8T2YlEYiuoQpOR/DafUDwGX5oMKL15yuB/rVzorXfkzg1yxABx1SEBbDoVbpoaGoEqmWKv1zFxw=
-X-Received: by 2002:a2e:a23a:0:b0:2b1:b741:7500 with SMTP id
- i26-20020a2ea23a000000b002b1b7417500mr6265941ljm.1.1686691807028; Tue, 13 Jun
- 2023 14:30:07 -0700 (PDT)
+ bh=QdOrFiDnrtMMQTAFk0z7jVpsb9hiYGd67nsDaocTQzc=;
+ b=MHGE6ZXNFv7SFn3eY7/+8wctYo1GR5Qz2eoPWjKSL487kHdgA8DiVMDv6IkvtoeMza
+ qB41qJB6u26ZiOo/LWKCO1SsS3lI+dFjelXjr2z9s0Ho7SPfKu3jdkPwpiFI4RZauhCU
+ P+fkujc87PjMMa34jQyeiijSn6Hde+Tyhlsu67T2/ek0Mc823qHirKICUfDhz9Suk38b
+ zcNbVhMCHMwQhdO77LZaJjnSDIlFkTMle0gnb3pcptpXEihjeOV4xlyrhTlnlkSAw/X/
+ ZvsBf0ggqNIsEQ+3hMy1MrtU5mwyHGRwKWN8trdpaDwYbILDK/0kICsL0nxzW16JRX1s
+ c7fg==
+X-Gm-Message-State: AC+VfDxH+DeMb4kqwlt5Wo/czMvRFy9JlBGuULssFoA7ZyIB2Ct/ua/W
+ K06y53YgMvtdlbq6mZb04cmhNpRkTOMiXy99jWZ8Yke5OUlZeMCRC+iLO4GBcuzxykNMiX2uQVK
+ ojTlFIJsduqacYaCtNFLD2Bwqo0ph6jbxqXW7tz42099gbrI9bAOI
+X-Received: by 2002:a2e:a4a3:0:b0:2b2:1757:13ed with SMTP id
+ g3-20020a2ea4a3000000b002b2175713edmr6577895ljm.4.1686691949848; 
+ Tue, 13 Jun 2023 14:32:29 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ7GmSSUI7uEURXf8akEftXbqSVQhNskKIyqKc1FQ9w70sxbxJga45I007nygVHoRVmlMbqrb70/dEXCWnCunAU=
+X-Received: by 2002:a2e:a4a3:0:b0:2b2:1757:13ed with SMTP id
+ g3-20020a2ea4a3000000b002b2175713edmr6577891ljm.4.1686691949257; Tue, 13 Jun
+ 2023 14:32:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230525003106.3853741-1-skeggsb@gmail.com>
- <20230525003106.3853741-3-skeggsb@gmail.com>
-In-Reply-To: <20230525003106.3853741-3-skeggsb@gmail.com>
+ <20230525003106.3853741-5-skeggsb@gmail.com>
+In-Reply-To: <20230525003106.3853741-5-skeggsb@gmail.com>
 From: Karol Herbst <kherbst@redhat.com>
-Date: Tue, 13 Jun 2023 23:29:56 +0200
-Message-ID: <CACO55tvsApqn+mn3Zjeo6Tfs6fPvycqVkQz974DEe1z9uv-x_Q@mail.gmail.com>
+Date: Tue, 13 Jun 2023 23:32:18 +0200
+Message-ID: <CACO55ts5Tk=a4Zs_T2m=TyEFN+VtpJGFf+DsBx_CufKH+Hpx1A@mail.gmail.com>
 To: Ben Skeggs <skeggsb@gmail.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH 03/10] drm/nouveau/fb/gp102-ga100: switch to
- simpler vram size detection method
+Subject: Re: [Nouveau] [PATCH 05/10] drm/nouveau/fifo: remove left-over
+ references to nvkm_fifo_chan
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,269 +87,579 @@ e:
 >
 > From: Ben Skeggs <bskeggs@redhat.com>
 >
-> Also exposes this for use by upcoming GSP-RM initialisation code.
+> This was renamed to nvkm_chan in the host rework.
 >
 > Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 > ---
->  .../gpu/drm/nouveau/include/nvkm/subdev/fb.h  |  1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/fb/Kbuild |  1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/fb/base.c | 12 +++++
->  .../gpu/drm/nouveau/nvkm/subdev/fb/ga100.c    |  3 +-
->  .../gpu/drm/nouveau/nvkm/subdev/fb/gp102.c    | 17 ++++++-
->  .../gpu/drm/nouveau/nvkm/subdev/fb/gv100.c    |  3 +-
->  drivers/gpu/drm/nouveau/nvkm/subdev/fb/priv.h |  5 ++
->  drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h  |  1 +
->  .../gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c | 50 +++++++++++++++++++
->  .../gpu/drm/nouveau/nvkm/subdev/fb/tu102.c    |  3 +-
->  10 files changed, 92 insertions(+), 4 deletions(-)
->  create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c
+>  drivers/gpu/drm/nouveau/include/nvkm/core/engine.h   | 5 ++---
+>  drivers/gpu/drm/nouveau/include/nvkm/core/os.h       | 5 -----
+>  drivers/gpu/drm/nouveau/include/nvkm/engine/falcon.h | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/ce/priv.h        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/base.c        | 3 +--
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c       | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/nv04.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/nv10.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/nv10.h        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/nv20.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/nv25.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/nv2a.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/nv30.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/nv34.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/nv35.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/nv40.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/nv40.h        | 4 ++--
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/nv50.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/nv50.h        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/priv.h        | 4 ++--
+>  drivers/gpu/drm/nouveau/nvkm/engine/mpeg/nv31.c      | 3 +--
+>  drivers/gpu/drm/nouveau/nvkm/engine/mpeg/nv31.h      | 4 ++--
+>  drivers/gpu/drm/nouveau/nvkm/engine/mpeg/nv44.c      | 5 ++---
+>  drivers/gpu/drm/nouveau/nvkm/engine/mpeg/priv.h      | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/sw/base.c        | 3 +--
+>  drivers/gpu/drm/nouveau/nvkm/engine/sw/chan.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/sw/chan.h        | 4 ++--
+>  drivers/gpu/drm/nouveau/nvkm/engine/sw/gf100.c       | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/sw/nv04.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/sw/nv10.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/sw/nv50.c        | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/sw/priv.h        | 2 +-
+>  32 files changed, 37 insertions(+), 47 deletions(-)
 >
-> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/fb.h b/drivers/g=
-pu/drm/nouveau/include/nvkm/subdev/fb.h
-> index 01a22a13b452..1755b0df3cc1 100644
-> --- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/fb.h
-> +++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/fb.h
-> @@ -59,6 +59,7 @@ struct nvkm_fb {
->         struct nvkm_memory *mmu_wr;
->  };
+> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/engine.h b/drivers=
+/gpu/drm/nouveau/include/nvkm/core/engine.h
+> index b67b9c1a6b4e..8041fe03237e 100644
+> --- a/drivers/gpu/drm/nouveau/include/nvkm/core/engine.h
+> +++ b/drivers/gpu/drm/nouveau/include/nvkm/core/engine.h
+> @@ -3,7 +3,7 @@
+>  #define __NVKM_ENGINE_H__
+>  #define nvkm_engine(p) container_of((p), struct nvkm_engine, subdev)
+>  #include <core/subdev.h>
+> -struct nvkm_fifo_chan;
+> +struct nvkm_chan;
+>  struct nvkm_fb_tile;
 >
-> +u64 nvkm_fb_vidmem_size(struct nvkm_device *);
->  int nvkm_fb_mem_unlock(struct nvkm_fb *);
+>  extern const struct nvkm_subdev_func nvkm_engine;
+> @@ -32,8 +32,7 @@ struct nvkm_engine_func {
+>         } base;
 >
->  void nvkm_fb_tile_init(struct nvkm_fb *, int region, u32 addr, u32 size,
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/Kbuild b/drivers/gpu/=
-drm/nouveau/nvkm/subdev/fb/Kbuild
-> index 6ba5120a2ebe..11dbfc4a381a 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/Kbuild
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/Kbuild
-> @@ -55,6 +55,7 @@ nvkm-y +=3D nvkm/subdev/fb/ramgk104.o
->  nvkm-y +=3D nvkm/subdev/fb/ramgm107.o
->  nvkm-y +=3D nvkm/subdev/fb/ramgm200.o
->  nvkm-y +=3D nvkm/subdev/fb/ramgp100.o
-> +nvkm-y +=3D nvkm/subdev/fb/ramgp102.o
->  nvkm-y +=3D nvkm/subdev/fb/ramga102.o
->  nvkm-y +=3D nvkm/subdev/fb/sddr2.o
->  nvkm-y +=3D nvkm/subdev/fb/sddr3.o
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/base.c b/drivers/gpu/=
-drm/nouveau/nvkm/subdev/fb/base.c
-> index 0955340cc421..8a286a9349ac 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/base.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/base.c
-> @@ -174,6 +174,18 @@ nvkm_fb_mem_unlock(struct nvkm_fb *fb)
->         return 0;
->  }
->
-> +u64
-> +nvkm_fb_vidmem_size(struct nvkm_device *device)
-> +{
-> +       struct nvkm_fb *fb =3D device->fb;
-> +
-> +       if (fb && fb->func->vidmem.size)
-> +               return fb->func->vidmem.size(fb);
-> +
-> +       WARN_ON(1);
-> +       return 0;
-> +}
-> +
->  static int
->  nvkm_fb_init(struct nvkm_subdev *subdev)
->  {
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ga100.c b/drivers/gpu=
-/drm/nouveau/nvkm/subdev/fb/ga100.c
-> index a7456e786463..12037fd4fdf2 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ga100.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ga100.c
-> @@ -30,7 +30,8 @@ ga100_fb =3D {
->         .init_page =3D gv100_fb_init_page,
->         .init_unkn =3D gp100_fb_init_unkn,
->         .sysmem.flush_page_init =3D gf100_fb_sysmem_flush_page_init,
-> -       .ram_new =3D gp100_ram_new,
-> +       .vidmem.size =3D gp102_fb_vidmem_size,
-> +       .ram_new =3D gp102_ram_new,
->         .default_bigpage =3D 16,
->  };
->
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gp102.c b/drivers/gpu=
-/drm/nouveau/nvkm/subdev/fb/gp102.c
-> index 14d942e8b857..534553c64805 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gp102.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gp102.c
-> @@ -40,6 +40,20 @@ gp102_fb_vpr_scrub_required(struct nvkm_fb *fb)
->         return (nvkm_rd32(device, 0x100cd0) & 0x00000010) !=3D 0;
->  }
->
-> +u64
-> +gp102_fb_vidmem_size(struct nvkm_fb *fb)
-> +{
-> +       const u32 data =3D nvkm_rd32(fb->subdev.device, 0x100ce0);
-
-Do we have any kind of documentation for this register?
-
-> +       const u32 lmag =3D (data & 0x000003f0) >> 4;
-> +       const u32 lsca =3D (data & 0x0000000f);
-> +       const u64 size =3D (u64)lmag << (lsca + 20);
-> +
-> +       if (data & 0x40000000)
-> +               return size / 16 * 15;
-> +
-> +       return size;
-> +}
-> +
->  int
->  gp102_fb_oneinit(struct nvkm_fb *fb)
->  {
-> @@ -59,9 +73,10 @@ gp102_fb =3D {
->         .init_remapper =3D gp100_fb_init_remapper,
->         .init_page =3D gm200_fb_init_page,
->         .sysmem.flush_page_init =3D gf100_fb_sysmem_flush_page_init,
-> +       .vidmem.size =3D gp102_fb_vidmem_size,
->         .vpr.scrub_required =3D gp102_fb_vpr_scrub_required,
->         .vpr.scrub =3D gp102_fb_vpr_scrub,
-> -       .ram_new =3D gp100_ram_new,
-> +       .ram_new =3D gp102_ram_new,
->  };
->
->  int
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gv100.c b/drivers/gpu=
-/drm/nouveau/nvkm/subdev/fb/gv100.c
-> index 4d8a286a7a34..f422564bee5b 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gv100.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/gv100.c
-> @@ -36,9 +36,10 @@ gv100_fb =3D {
->         .init_page =3D gv100_fb_init_page,
->         .init_unkn =3D gp100_fb_init_unkn,
->         .sysmem.flush_page_init =3D gf100_fb_sysmem_flush_page_init,
-> +       .vidmem.size =3D gp102_fb_vidmem_size,
->         .vpr.scrub_required =3D gp102_fb_vpr_scrub_required,
->         .vpr.scrub =3D gp102_fb_vpr_scrub,
-> -       .ram_new =3D gp100_ram_new,
-> +       .ram_new =3D gp102_ram_new,
->         .default_bigpage =3D 16,
->  };
->
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/priv.h b/drivers/gpu/=
-drm/nouveau/nvkm/subdev/fb/priv.h
-> index 726c30c8bf95..77d6a8c10829 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/priv.h
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/priv.h
-> @@ -20,6 +20,10 @@ struct nvkm_fb_func {
->                 void (*flush_page_init)(struct nvkm_fb *);
->         } sysmem;
->
-> +       struct nvkm_fb_func_vidmem {
-> +               u64 (*size)(struct nvkm_fb *);
-> +       } vidmem;
-> +
 >         struct {
->                 bool (*scrub_required)(struct nvkm_fb *);
->                 int (*scrub)(struct nvkm_fb *);
-> @@ -84,6 +88,7 @@ void gp100_fb_init_remapper(struct nvkm_fb *);
->  void gp100_fb_init_unkn(struct nvkm_fb *);
->
->  int gp102_fb_oneinit(struct nvkm_fb *);
-> +u64 gp102_fb_vidmem_size(struct nvkm_fb *);
->  bool gp102_fb_vpr_scrub_required(struct nvkm_fb *);
->  int gp102_fb_vpr_scrub(struct nvkm_fb *);
->
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h b/drivers/gpu/d=
-rm/nouveau/nvkm/subdev/fb/ram.h
-> index ea7d66f3dd82..33d4ab8d92e6 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h
-> @@ -70,5 +70,6 @@ int gk104_ram_new(struct nvkm_fb *, struct nvkm_ram **)=
-;
->  int gm107_ram_new(struct nvkm_fb *, struct nvkm_ram **);
->  int gm200_ram_new(struct nvkm_fb *, struct nvkm_ram **);
->  int gp100_ram_new(struct nvkm_fb *, struct nvkm_ram **);
-> +int gp102_ram_new(struct nvkm_fb *, struct nvkm_ram **);
->  int ga102_ram_new(struct nvkm_fb *, struct nvkm_ram **);
+> -               int (*cclass)(struct nvkm_fifo_chan *,
+> -                             const struct nvkm_oclass *,
+> +               int (*cclass)(struct nvkm_chan *, const struct nvkm_oclas=
+s *,
+>                               struct nvkm_object **);
+>                 int (*sclass)(struct nvkm_oclass *, int index);
+>         } fifo;
+> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/os.h b/drivers/gpu=
+/drm/nouveau/include/nvkm/core/os.h
+> index 4486d9862849..3fd5c007a663 100644
+> --- a/drivers/gpu/drm/nouveau/include/nvkm/core/os.h
+> +++ b/drivers/gpu/drm/nouveau/include/nvkm/core/os.h
+> @@ -49,9 +49,4 @@ nvkm_blob_dtor(struct nvkm_blob *blob)
+>         (p =3D container_of((h), typeof(*p), m), nvkm_list_find_next(p, (=
+h), m, (c)))
+>  #define nvkm_list_foreach(p,h,m,c)                                      =
+                     \
+>         for (p =3D nvkm_list_find(p, (h), m, (c)); p; p =3D nvkm_list_fin=
+d_next(p, (h), m, (c)))
+> -
+> -/*FIXME: remove after */
+> -#define nvkm_fifo_chan nvkm_chan
+> -#define nvkm_fifo_chan_func nvkm_chan_func
+> -#define nvkm_fifo_cgrp nvkm_cgrp
 >  #endif
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c b/drivers/=
-gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c
-> new file mode 100644
-> index 000000000000..ee541b049fc5
-> --- /dev/null
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c
-> @@ -0,0 +1,50 @@
-> +/*
-> + * Copyright 2023 Red Hat Inc.
-> + *
-> + * Permission is hereby granted, free of charge, to any person obtaining=
- a
-> + * copy of this software and associated documentation files (the "Softwa=
-re"),
-> + * to deal in the Software without restriction, including without limita=
-tion
-> + * the rights to use, copy, modify, merge, publish, distribute, sublicen=
-se,
-> + * and/or sell copies of the Software, and to permit persons to whom the
-> + * Software is furnished to do so, subject to the following conditions:
-> + *
-> + * The above copyright notice and this permission notice shall be includ=
-ed in
-> + * all copies or substantial portions of the Software.
-> + *
-> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRE=
-SS OR
-> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILI=
-TY,
-> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SH=
-ALL
-> + * THE COPYRIGHT HOLDER(S) OR AUTHOR(S) BE LIABLE FOR ANY CLAIM, DAMAGES=
- OR
-> + * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-> + * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-> + * OTHER DEALINGS IN THE SOFTWARE.
-> + */
-> +#include "ram.h"
-> +
-> +#include <subdev/bios.h>
-> +
-> +static const struct nvkm_ram_func
-> +gp102_ram =3D {
-> +};
-> +
-> +int
-> +gp102_ram_new(struct nvkm_fb *fb, struct nvkm_ram **pram)
-> +{
-> +       enum nvkm_ram_type type =3D nvkm_fb_bios_memtype(fb->subdev.devic=
-e->bios);
-> +       const u32 rsvd_head =3D ( 256 * 1024); /* vga memory */
-> +       const u32 rsvd_tail =3D (1024 * 1024); /* vbios etc */
-> +       u64 size =3D fb->func->vidmem.size(fb);
-> +       int ret;
-> +
-> +       ret =3D nvkm_ram_new_(&gp102_ram, fb, type, size, pram);
-> +       if (ret)
-> +               return ret;
-> +
-> +       nvkm_mm_fini(&(*pram)->vram);
-> +
-> +       return nvkm_mm_init(&(*pram)->vram, NVKM_RAM_MM_NORMAL,
-> +                           rsvd_head >> NVKM_RAM_MM_SHIFT,
-> +                           (size - rsvd_head - rsvd_tail) >> NVKM_RAM_MM=
-_SHIFT,
-> +                           1);
-> +
-> +}
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/tu102.c b/drivers/gpu=
-/drm/nouveau/nvkm/subdev/fb/tu102.c
-> index b8803c124c3b..bcc23d4c8115 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/tu102.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/tu102.c
-> @@ -36,9 +36,10 @@ tu102_fb =3D {
->         .init_page =3D gv100_fb_init_page,
->         .init_unkn =3D gp100_fb_init_unkn,
->         .sysmem.flush_page_init =3D gf100_fb_sysmem_flush_page_init,
-> +       .vidmem.size =3D gp102_fb_vidmem_size,
->         .vpr.scrub_required =3D tu102_fb_vpr_scrub_required,
->         .vpr.scrub =3D gp102_fb_vpr_scrub,
-> -       .ram_new =3D gp100_ram_new,
-> +       .ram_new =3D gp102_ram_new,
->         .default_bigpage =3D 16,
+> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/engine/falcon.h b/drive=
+rs/gpu/drm/nouveau/include/nvkm/engine/falcon.h
+> index cd86d9198e4a..b7bb8a29a729 100644
+> --- a/drivers/gpu/drm/nouveau/include/nvkm/engine/falcon.h
+> +++ b/drivers/gpu/drm/nouveau/include/nvkm/engine/falcon.h
+> @@ -3,7 +3,7 @@
+>  #define __NVKM_FLCNEN_H__
+>  #define nvkm_falcon(p) container_of((p), struct nvkm_falcon, engine)
+>  #include <core/engine.h>
+> -struct nvkm_fifo_chan;
+> +struct nvkm_chan;
+>
+>  enum nvkm_falcon_dmaidx {
+>         FALCON_DMAIDX_UCODE             =3D 0,
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/ce/priv.h b/drivers/gpu/=
+drm/nouveau/nvkm/engine/ce/priv.h
+> index c4c046916fa6..53ba2abe0bf5 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/ce/priv.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/ce/priv.h
+> @@ -3,7 +3,7 @@
+>  #define __NVKM_CE_PRIV_H__
+>  #include <engine/ce.h>
+>
+> -void gt215_ce_intr(struct nvkm_falcon *, struct nvkm_fifo_chan *);
+> +void gt215_ce_intr(struct nvkm_falcon *, struct nvkm_chan *);
+>  void gk104_ce_intr(struct nvkm_engine *);
+>  void gp100_ce_intr(struct nvkm_engine *);
+>
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/base.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/base.c
+> index 71b824e6da9d..5653fbf785e1 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/base.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/base.c
+> @@ -109,8 +109,7 @@ nvkm_gr_oclass_get(struct nvkm_oclass *oclass, int in=
+dex)
+>  }
+>
+>  static int
+> -nvkm_gr_cclass_new(struct nvkm_fifo_chan *chan,
+> -                  const struct nvkm_oclass *oclass,
+> +nvkm_gr_cclass_new(struct nvkm_chan *chan, const struct nvkm_oclass *ocl=
+ass,
+>                    struct nvkm_object **pobject)
+>  {
+>         struct nvkm_gr *gr =3D nvkm_gr(oclass->engine);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c b/drivers/gpu=
+/drm/nouveau/nvkm/engine/gr/gf100.c
+> index 5f20079c3660..29afec9a55bf 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
+> @@ -374,7 +374,7 @@ gf100_gr_chan =3D {
 >  };
 >
+>  static int
+> -gf100_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
+> +gf100_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
+>                   const struct nvkm_oclass *oclass,
+>                   struct nvkm_object **pobject)
+>  {
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv04.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/nv04.c
+> index 81bd682c2102..ca822f07b63e 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv04.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv04.c
+> @@ -1181,7 +1181,7 @@ nv04_gr_chan =3D {
+>  };
+>
+>  static int
+> -nv04_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
+> +nv04_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
+>                  const struct nvkm_oclass *oclass, struct nvkm_object **p=
+object)
+>  {
+>         struct nv04_gr *gr =3D nv04_gr(base);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv10.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/nv10.c
+> index 7fe6e58f6bab..92ef7c9b2910 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv10.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv10.c
+> @@ -999,7 +999,7 @@ nv10_gr_chan =3D {
+>         } while (0)
+>
+>  int
+> -nv10_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
+> +nv10_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
+>                  const struct nvkm_oclass *oclass, struct nvkm_object **p=
+object)
+>  {
+>         struct nv10_gr *gr =3D nv10_gr(base);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv10.h b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/nv10.h
+> index 5cfe927c9123..b86090c08060 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv10.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv10.h
+> @@ -9,6 +9,6 @@ int nv10_gr_init(struct nvkm_gr *);
+>  void nv10_gr_intr(struct nvkm_gr *);
+>  void nv10_gr_tile(struct nvkm_gr *, int, struct nvkm_fb_tile *);
+>
+> -int nv10_gr_chan_new(struct nvkm_gr *, struct nvkm_fifo_chan *,
+> +int nv10_gr_chan_new(struct nvkm_gr *, struct nvkm_chan *,
+>                      const struct nvkm_oclass *, struct nvkm_object **);
+>  #endif
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv20.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/nv20.c
+> index 75434f5de7ad..02a8c62a0a32 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv20.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv20.c
+> @@ -72,7 +72,7 @@ nv20_gr_chan =3D {
+>  };
+>
+>  static int
+> -nv20_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
+> +nv20_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
+>                  const struct nvkm_oclass *oclass, struct nvkm_object **p=
+object)
+>  {
+>         struct nv20_gr *gr =3D nv20_gr(base);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv25.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/nv25.c
+> index 94685e4d4f87..d6bc6904dcc8 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv25.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv25.c
+> @@ -18,7 +18,7 @@ nv25_gr_chan =3D {
+>  };
+>
+>  static int
+> -nv25_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
+> +nv25_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
+>                  const struct nvkm_oclass *oclass, struct nvkm_object **p=
+object)
+>  {
+>         struct nv20_gr *gr =3D nv20_gr(base);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv2a.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/nv2a.c
+> index 2d6273675291..e5a351b51eb9 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv2a.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv2a.c
+> @@ -18,7 +18,7 @@ nv2a_gr_chan =3D {
+>  };
+>
+>  static int
+> -nv2a_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
+> +nv2a_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
+>                  const struct nvkm_oclass *oclass, struct nvkm_object **p=
+object)
+>  {
+>         struct nv20_gr *gr =3D nv20_gr(base);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv30.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/nv30.c
+> index 647bd6fede04..80370323755e 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv30.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv30.c
+> @@ -19,7 +19,7 @@ nv30_gr_chan =3D {
+>  };
+>
+>  static int
+> -nv30_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
+> +nv30_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
+>                  const struct nvkm_oclass *oclass, struct nvkm_object **p=
+object)
+>  {
+>         struct nv20_gr *gr =3D nv20_gr(base);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv34.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/nv34.c
+> index 2eae3fe4ef4e..cdf043bbdd59 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv34.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv34.c
+> @@ -18,7 +18,7 @@ nv34_gr_chan =3D {
+>  };
+>
+>  static int
+> -nv34_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
+> +nv34_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
+>                  const struct nvkm_oclass *oclass, struct nvkm_object **p=
+object)
+>  {
+>         struct nv20_gr *gr =3D nv20_gr(base);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv35.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/nv35.c
+> index 657d7cdba369..fa5a6ccb871d 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv35.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv35.c
+> @@ -18,7 +18,7 @@ nv35_gr_chan =3D {
+>  };
+>
+>  static int
+> -nv35_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
+> +nv35_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
+>                  const struct nvkm_oclass *oclass, struct nvkm_object **p=
+object)
+>  {
+>         struct nv20_gr *gr =3D nv20_gr(base);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv40.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/nv40.c
+> index d2df097a6cf6..a5e1f02791b4 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv40.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv40.c
+> @@ -145,7 +145,7 @@ nv40_gr_chan =3D {
+>  };
+>
+>  int
+> -nv40_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
+> +nv40_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
+>                  const struct nvkm_oclass *oclass, struct nvkm_object **p=
+object)
+>  {
+>         struct nv40_gr *gr =3D nv40_gr(base);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv40.h b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/nv40.h
+> index f3d3d3a5ae5b..84fbc99139e5 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv40.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv40.h
+> @@ -22,12 +22,12 @@ u64 nv40_gr_units(struct nvkm_gr *);
+>  struct nv40_gr_chan {
+>         struct nvkm_object object;
+>         struct nv40_gr *gr;
+> -       struct nvkm_fifo_chan *fifo;
+> +       struct nvkm_chan *fifo;
+>         u32 inst;
+>         struct list_head head;
+>  };
+>
+> -int nv40_gr_chan_new(struct nvkm_gr *, struct nvkm_fifo_chan *,
+> +int nv40_gr_chan_new(struct nvkm_gr *, struct nvkm_chan *,
+>                      const struct nvkm_oclass *, struct nvkm_object **);
+>
+>  extern const struct nvkm_object_func nv40_gr_object;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv50.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/nv50.c
+> index 1ba18a8e380f..c8a0288c092d 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv50.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv50.c
+> @@ -86,7 +86,7 @@ nv50_gr_chan =3D {
+>  };
+>
+>  int
+> -nv50_gr_chan_new(struct nvkm_gr *base, struct nvkm_fifo_chan *fifoch,
+> +nv50_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
+>                  const struct nvkm_oclass *oclass, struct nvkm_object **p=
+object)
+>  {
+>         struct nv50_gr *gr =3D nv50_gr(base);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv50.h b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/nv50.h
+> index 84388c42e5c6..97ead0042357 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv50.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/nv50.h
+> @@ -27,7 +27,7 @@ struct nv50_gr_chan {
+>         struct nv50_gr *gr;
+>  };
+>
+> -int nv50_gr_chan_new(struct nvkm_gr *, struct nvkm_fifo_chan *,
+> +int nv50_gr_chan_new(struct nvkm_gr *, struct nvkm_chan *,
+>                      const struct nvkm_oclass *, struct nvkm_object **);
+>
+>  extern const struct nvkm_object_func nv50_gr_object;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/priv.h b/drivers/gpu/=
+drm/nouveau/nvkm/engine/gr/priv.h
+> index 08d5c96e6458..6ec8b94854c0 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/priv.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/priv.h
+> @@ -5,7 +5,7 @@
+>  #include <engine/gr.h>
+>  #include <core/enum.h>
+>  struct nvkm_fb_tile;
+> -struct nvkm_fifo_chan;
+> +struct nvkm_chan;
+>
+>  int nvkm_gr_ctor(const struct nvkm_gr_func *, struct nvkm_device *, enum=
+ nvkm_subdev_type, int,
+>                  bool enable, struct nvkm_gr *);
+> @@ -21,7 +21,7 @@ struct nvkm_gr_func {
+>         void (*intr)(struct nvkm_gr *);
+>         void (*tile)(struct nvkm_gr *, int region, struct nvkm_fb_tile *)=
+;
+>         int (*tlb_flush)(struct nvkm_gr *);
+> -       int (*chan_new)(struct nvkm_gr *, struct nvkm_fifo_chan *,
+> +       int (*chan_new)(struct nvkm_gr *, struct nvkm_chan *,
+>                         const struct nvkm_oclass *, struct nvkm_object **=
+);
+>         int (*object_get)(struct nvkm_gr *, int, struct nvkm_sclass *);
+>         /* Returns chipset-specific counts of units packed into an u64.
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/mpeg/nv31.c b/drivers/gp=
+u/drm/nouveau/nvkm/engine/mpeg/nv31.c
+> index cb0c3991b2ad..db9fc1ecae0d 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/mpeg/nv31.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/mpeg/nv31.c
+> @@ -81,8 +81,7 @@ nv31_mpeg_chan =3D {
+>  };
+>
+>  int
+> -nv31_mpeg_chan_new(struct nvkm_fifo_chan *fifoch,
+> -                  const struct nvkm_oclass *oclass,
+> +nv31_mpeg_chan_new(struct nvkm_chan *fifoch, const struct nvkm_oclass *o=
+class,
+>                    struct nvkm_object **pobject)
+>  {
+>         struct nv31_mpeg *mpeg =3D nv31_mpeg(oclass->engine);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/mpeg/nv31.h b/drivers/gp=
+u/drm/nouveau/nvkm/engine/mpeg/nv31.h
+> index 9f30aaaf809e..251d659565de 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/mpeg/nv31.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/mpeg/nv31.h
+> @@ -24,9 +24,9 @@ struct nv31_mpeg_func {
+>  struct nv31_mpeg_chan {
+>         struct nvkm_object object;
+>         struct nv31_mpeg *mpeg;
+> -       struct nvkm_fifo_chan *fifo;
+> +       struct nvkm_chan *fifo;
+>  };
+>
+> -int nv31_mpeg_chan_new(struct nvkm_fifo_chan *, const struct nvkm_oclass=
+ *,
+> +int nv31_mpeg_chan_new(struct nvkm_chan *, const struct nvkm_oclass *,
+>                        struct nvkm_object **);
+>  #endif
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/mpeg/nv44.c b/drivers/gp=
+u/drm/nouveau/nvkm/engine/mpeg/nv44.c
+> index 0890a279458e..4b1374adbda3 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/mpeg/nv44.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/mpeg/nv44.c
+> @@ -43,7 +43,7 @@ struct nv44_mpeg {
+>  struct nv44_mpeg_chan {
+>         struct nvkm_object object;
+>         struct nv44_mpeg *mpeg;
+> -       struct nvkm_fifo_chan *fifo;
+> +       struct nvkm_chan *fifo;
+>         struct list_head head;
+>         u32 inst;
+>  };
+> @@ -100,8 +100,7 @@ nv44_mpeg_chan =3D {
+>  };
+>
+>  static int
+> -nv44_mpeg_chan_new(struct nvkm_fifo_chan *fifoch,
+> -                  const struct nvkm_oclass *oclass,
+> +nv44_mpeg_chan_new(struct nvkm_chan *fifoch, const struct nvkm_oclass *o=
+class,
+>                    struct nvkm_object **pobject)
+>  {
+>         struct nv44_mpeg *mpeg =3D nv44_mpeg(oclass->engine);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/mpeg/priv.h b/drivers/gp=
+u/drm/nouveau/nvkm/engine/mpeg/priv.h
+> index 667a2d05dd89..044ff4133874 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/mpeg/priv.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/mpeg/priv.h
+> @@ -2,7 +2,7 @@
+>  #ifndef __NVKM_MPEG_PRIV_H__
+>  #define __NVKM_MPEG_PRIV_H__
+>  #include <engine/mpeg.h>
+> -struct nvkm_fifo_chan;
+> +struct nvkm_chan;
+>
+>  int nv31_mpeg_init(struct nvkm_engine *);
+>  void nv31_mpeg_tile(struct nvkm_engine *, int, struct nvkm_fb_tile *);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sw/base.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/sw/base.c
+> index a9d464db6974..20220d6d4a13 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/sw/base.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/sw/base.c
+> @@ -74,8 +74,7 @@ nvkm_sw_oclass_get(struct nvkm_oclass *oclass, int inde=
+x)
+>  }
+>
+>  static int
+> -nvkm_sw_cclass_get(struct nvkm_fifo_chan *fifoch,
+> -                  const struct nvkm_oclass *oclass,
+> +nvkm_sw_cclass_get(struct nvkm_chan *fifoch, const struct nvkm_oclass *o=
+class,
+>                    struct nvkm_object **pobject)
+>  {
+>         struct nvkm_sw *sw =3D nvkm_sw(oclass->engine);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sw/chan.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/sw/chan.c
+> index 834b8cbed51d..2bf45141de60 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/sw/chan.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/sw/chan.c
+> @@ -74,7 +74,7 @@ nvkm_sw_chan =3D {
+>
+>  int
+>  nvkm_sw_chan_ctor(const struct nvkm_sw_chan_func *func, struct nvkm_sw *=
+sw,
+> -                 struct nvkm_fifo_chan *fifo, const struct nvkm_oclass *=
+oclass,
+> +                 struct nvkm_chan *fifo, const struct nvkm_oclass *oclas=
+s,
+>                   struct nvkm_sw_chan *chan)
+>  {
+>         unsigned long flags;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sw/chan.h b/drivers/gpu/=
+drm/nouveau/nvkm/engine/sw/chan.h
+> index 67b2e5ea93d9..c313aea16a17 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/sw/chan.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/sw/chan.h
+> @@ -11,7 +11,7 @@ struct nvkm_sw_chan {
+>         const struct nvkm_sw_chan_func *func;
+>         struct nvkm_object object;
+>         struct nvkm_sw *sw;
+> -       struct nvkm_fifo_chan *fifo;
+> +       struct nvkm_chan *fifo;
+>         struct list_head head;
+>
+>  #define NVKM_SW_CHAN_EVENT_PAGE_FLIP BIT(0)
+> @@ -24,7 +24,7 @@ struct nvkm_sw_chan_func {
+>  };
+>
+>  int nvkm_sw_chan_ctor(const struct nvkm_sw_chan_func *, struct nvkm_sw *=
+,
+> -                     struct nvkm_fifo_chan *, const struct nvkm_oclass *=
+,
+> +                     struct nvkm_chan *, const struct nvkm_oclass *,
+>                       struct nvkm_sw_chan *);
+>  bool nvkm_sw_chan_mthd(struct nvkm_sw_chan *, int subc, u32 mthd, u32 da=
+ta);
+>  #endif
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sw/gf100.c b/drivers/gpu=
+/drm/nouveau/nvkm/engine/sw/gf100.c
+> index c3cf6f2ff86c..a0273baf4c67 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/sw/gf100.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/sw/gf100.c
+> @@ -102,7 +102,7 @@ gf100_sw_chan =3D {
+>  };
+>
+>  static int
+> -gf100_sw_chan_new(struct nvkm_sw *sw, struct nvkm_fifo_chan *fifoch,
+> +gf100_sw_chan_new(struct nvkm_sw *sw, struct nvkm_chan *fifoch,
+>                   const struct nvkm_oclass *oclass,
+>                   struct nvkm_object **pobject)
+>  {
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sw/nv04.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/sw/nv04.c
+> index 4aa57573869c..8a1d112da894 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/sw/nv04.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/sw/nv04.c
+> @@ -106,7 +106,7 @@ nv04_sw_chan =3D {
+>  };
+>
+>  static int
+> -nv04_sw_chan_new(struct nvkm_sw *sw, struct nvkm_fifo_chan *fifo,
+> +nv04_sw_chan_new(struct nvkm_sw *sw, struct nvkm_chan *fifo,
+>                  const struct nvkm_oclass *oclass, struct nvkm_object **p=
+object)
+>  {
+>         struct nv04_sw_chan *chan;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sw/nv10.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/sw/nv10.c
+> index e79e640ae535..742c75859569 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/sw/nv10.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/sw/nv10.c
+> @@ -36,7 +36,7 @@ nv10_sw_chan =3D {
+>  };
+>
+>  static int
+> -nv10_sw_chan_new(struct nvkm_sw *sw, struct nvkm_fifo_chan *fifo,
+> +nv10_sw_chan_new(struct nvkm_sw *sw, struct nvkm_chan *fifo,
+>                  const struct nvkm_oclass *oclass, struct nvkm_object **p=
+object)
+>  {
+>         struct nvkm_sw_chan *chan;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sw/nv50.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/sw/nv50.c
+> index 9d7a9b7d5be3..99476d32c5af 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/sw/nv50.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/sw/nv50.c
+> @@ -99,7 +99,7 @@ nv50_sw_chan =3D {
+>  };
+>
+>  static int
+> -nv50_sw_chan_new(struct nvkm_sw *sw, struct nvkm_fifo_chan *fifoch,
+> +nv50_sw_chan_new(struct nvkm_sw *sw, struct nvkm_chan *fifoch,
+>                  const struct nvkm_oclass *oclass, struct nvkm_object **p=
+object)
+>  {
+>         struct nvkm_disp *disp =3D sw->engine.subdev.device->disp;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sw/priv.h b/drivers/gpu/=
+drm/nouveau/nvkm/engine/sw/priv.h
+> index d9d83b1b8849..8015afaba947 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/sw/priv.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/sw/priv.h
+> @@ -15,7 +15,7 @@ struct nvkm_sw_chan_sclass {
+>  };
+>
+>  struct nvkm_sw_func {
+> -       int (*chan_new)(struct nvkm_sw *, struct nvkm_fifo_chan *,
+> +       int (*chan_new)(struct nvkm_sw *, struct nvkm_chan *,
+>                         const struct nvkm_oclass *, struct nvkm_object **=
+);
+>         const struct nvkm_sw_chan_sclass sclass[];
+>  };
 > --
 > 2.40.1
 >
+
+Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
