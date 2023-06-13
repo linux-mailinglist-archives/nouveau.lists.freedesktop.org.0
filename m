@@ -2,71 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C28C772EE3A
-	for <lists+nouveau@lfdr.de>; Tue, 13 Jun 2023 23:44:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9515172EE3B
+	for <lists+nouveau@lfdr.de>; Tue, 13 Jun 2023 23:45:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ABD0010E3FD;
-	Tue, 13 Jun 2023 21:44:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 15ACF89F35;
+	Tue, 13 Jun 2023 21:45:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EBB8E10E087
- for <nouveau@lists.freedesktop.org>; Tue, 13 Jun 2023 21:44:23 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 48BBC89F35
+ for <nouveau@lists.freedesktop.org>; Tue, 13 Jun 2023 21:45:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1686692663;
+ s=mimecast20190719; t=1686692711;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=oaEaa0l31IXqM90UF4dkugFFxzcFTNl39a8he47uTVY=;
- b=QPz91wc2RQlx0xMOLzLKutXQgUVaN2gjXFCT2K/wv2KQw2FgL7DVDzh+Esm0zGffNENTJL
- DIqd5ShtJMxprarTzn2feMCoCrMvsOqU4C0UXTnA5A2/1LcPm/vZim5PaPYQqTLn52YXf4
- lgL/QWfhTJWqM6Rjf07Rq7fsfQGV/XU=
-Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
- [209.85.167.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=9QQZQy68bt9qh/YAukyxxzaRpSDgdVZPohvQ7bKtSTU=;
+ b=SKciQ5ABPaR7VPNO6xagAVtJkdZ7953V+8t4jDcSkwfjkZBDoS/tt6qZgH80jS6j/7EBYP
+ kD2eiOQIo+CUNvtUTM3FeLMBEMfwKS5iphOT78EtwIjEKe0IM4Vr/KS++wGOyhL9SESHDr
+ zXLOfqdtlM0d4zg2y+nRbz6uZMnBmrM=
+Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com
+ [209.85.208.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-205-XuNt-y83PDSn4u81ySOF5Q-1; Tue, 13 Jun 2023 17:44:14 -0400
-X-MC-Unique: XuNt-y83PDSn4u81ySOF5Q-1
-Received: by mail-lf1-f70.google.com with SMTP id
- 2adb3069b0e04-4f74128e499so454596e87.0
- for <nouveau@lists.freedesktop.org>; Tue, 13 Jun 2023 14:44:13 -0700 (PDT)
+ us-mta-434-ar8xo97IO7iY2kzvewrp8g-1; Tue, 13 Jun 2023 17:45:10 -0400
+X-MC-Unique: ar8xo97IO7iY2kzvewrp8g-1
+Received: by mail-lj1-f197.google.com with SMTP id
+ 38308e7fff4ca-2b1b8ec9343so9537551fa.1
+ for <nouveau@lists.freedesktop.org>; Tue, 13 Jun 2023 14:45:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686692652; x=1689284652;
+ d=1e100.net; s=20221208; t=1686692708; x=1689284708;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oaEaa0l31IXqM90UF4dkugFFxzcFTNl39a8he47uTVY=;
- b=PMSnEDgIJ2CE6Pq2ex72xOlr8W8bPrcr9V5XSloUoV77xMpGj5ysi2lJCuh6+hWlsN
- W+Bez22ZWSthJ7qT3NXscfnoe3UMykiaH16MwJQmB15xpn7gcFens2kMfDs/3ktElWw4
- +pcGvaHpEXsGMNYDoSqt3n7g63yT4JfZfmfjKz97+ZBPHQ3HY4ELnrQQqbQirnriJScm
- 9PcT2o02oFAy5Gi1nJwwaw/nYQOBkrKGUbmTnbVaRD093SPa/8JRusPr+wWT5adIoLmo
- xFXWHsOWjlCMOPIcPlGRTPk9/7ecfrs4+8tMXGlUbQiDOxbesLO7+LmrjtJwTENB63NY
- eMKQ==
-X-Gm-Message-State: AC+VfDyIv/X801GlTv6/ckAxT5jziiYtYmaliLTlMsyn65ILVYSaHjF3
- ZrOXtN3jyRlS2shOofHt6wm0ycYKTrs9bbmq4VvVIPz5sqPRPKN1Tte6+kU74nmFmKx8OVy4sU5
- khTHPvr+PUW5DVA0+a5gfYYchk/fAhem0x2bF5XDowHbzmft7Lq1Y
-X-Received: by 2002:a05:651c:3cc:b0:2b2:4e86:64a0 with SMTP id
- f12-20020a05651c03cc00b002b24e8664a0mr5449309ljp.3.1686692652389; 
- Tue, 13 Jun 2023 14:44:12 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ6FohFOtT7T44qaGFelK948RX2m+t+pqpc4/IBU4ilCYKhmzzlDOswhx/FDvrCzY9IFJrBCLFATBsJOnoJIMR8=
-X-Received: by 2002:a05:651c:3cc:b0:2b2:4e86:64a0 with SMTP id
- f12-20020a05651c03cc00b002b24e8664a0mr5449300ljp.3.1686692652044; Tue, 13 Jun
- 2023 14:44:12 -0700 (PDT)
+ bh=9QQZQy68bt9qh/YAukyxxzaRpSDgdVZPohvQ7bKtSTU=;
+ b=VP2m/C8HJolVR5YxLmpilvqaeayPdkrOYSWfIwiaOpWSeI7vE6u/Ghpcx9BuGMuJyV
+ nXuQOgcD9PwEJM6uvubvVtYG8qlYwrAuFlgqSzMVlYF/pzmmzsV2lhDXAeZGXw4R+Z+2
+ 5RRMFY1arxyzyndhIR5mWaaxbBjI5CTrroEaAjRZ77AkS19vNrgL5hh+2M2qDfKrzxxU
+ YiqtBjwTlf8YVAZhlsdc2lCO/ji+zhY1p1pxqWzJbniXSGYLcpIk6t/0FS71sk++CzRa
+ F/VkqkxkgN2ygZ6XVxeZEqrOkkEo2L6zaU+JaoSN0Gmfm4zY7iMmB8DlqbVKQtUn+pKx
+ JOww==
+X-Gm-Message-State: AC+VfDwt+gKBMncsL91237SoklxRHcyRSh90s5/K5ZoRxUfbqmI4dPcK
+ IJxvkuXzEVGCvSuVqmnjWhlnBSD4sTl67g9nYhEPI48/tshIzxfhMWQQzYt+PHdyNgRekkZpK0i
+ dtgaDM0/eawLFYNlU+Gx3+hxf8i2xG81VY9u07PK5/7JpwMg4SoN3
+X-Received: by 2002:a2e:b5dc:0:b0:2b1:c184:9afe with SMTP id
+ g28-20020a2eb5dc000000b002b1c1849afemr6854769ljn.4.1686692708653; 
+ Tue, 13 Jun 2023 14:45:08 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ5IqN1pxbHDNNyX7+nLZvWywvui88tRb9vVkuFFQlNC1rmoTFnkhl2S26WVXakxHS4gfOmXOh6MibG80kCvIBY=
+X-Received: by 2002:a2e:b5dc:0:b0:2b1:c184:9afe with SMTP id
+ g28-20020a2eb5dc000000b002b1c1849afemr6854761ljn.4.1686692708353; Tue, 13 Jun
+ 2023 14:45:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230525003106.3853741-1-skeggsb@gmail.com>
- <20230525003106.3853741-9-skeggsb@gmail.com>
-In-Reply-To: <20230525003106.3853741-9-skeggsb@gmail.com>
+ <20230525003106.3853741-10-skeggsb@gmail.com>
+In-Reply-To: <20230525003106.3853741-10-skeggsb@gmail.com>
 From: Karol Herbst <kherbst@redhat.com>
-Date: Tue, 13 Jun 2023 23:44:01 +0200
-Message-ID: <CACO55ts_a+r-A7QiRysWvC=3MQUBcV0DFTsWikSL-4EuD1AuBQ@mail.gmail.com>
+Date: Tue, 13 Jun 2023 23:44:57 +0200
+Message-ID: <CACO55tsX+L5Jv8LefvyM=Z3qzi1Q=Rpvsv+pqx7d23i_aqWaoQ@mail.gmail.com>
 To: Ben Skeggs <skeggsb@gmail.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH 09/10] drm/nouveau/nvif: fix potential
- double-free
+Subject: Re: [Nouveau] [PATCH 10/10] drm/nouveau/kms: don't call
+ drm_dp_cec_set_edid() on TMDS
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,35 +87,36 @@ e:
 >
 > From: Ben Skeggs <bskeggs@redhat.com>
 >
-> DRM cleanup paths unconditionally call nvif_mmu_dtor() for clients,
-> which would result in a double-free if nvif_mmu_ctor()'d previously
-> failed.
+> RM complains very loudly at the aux transaction attempts.
 >
 > Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 > ---
->  drivers/gpu/drm/nouveau/nvif/mmu.c | 3 +++
->  1 file changed, 3 insertions(+)
+>  drivers/gpu/drm/nouveau/nouveau_connector.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 >
-> diff --git a/drivers/gpu/drm/nouveau/nvif/mmu.c b/drivers/gpu/drm/nouveau=
-/nvif/mmu.c
-> index 3709cbbc19a1..c9dd3cff49a0 100644
-> --- a/drivers/gpu/drm/nouveau/nvif/mmu.c
-> +++ b/drivers/gpu/drm/nouveau/nvif/mmu.c
-> @@ -27,6 +27,9 @@
->  void
->  nvif_mmu_dtor(struct nvif_mmu *mmu)
->  {
-> +       if (!nvif_object_constructed(&mmu->object))
-> +               return;
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/dr=
+m/nouveau/nouveau_connector.c
+> index 086b66b60d91..4c0cb32f6f2c 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> @@ -619,7 +619,10 @@ nouveau_connector_detect(struct drm_connector *conne=
+ctor, bool force)
+>
+>                 nouveau_connector_set_encoder(connector, nv_encoder);
+>                 conn_status =3D connector_status_connected;
+> -               drm_dp_cec_set_edid(&nv_connector->aux, nv_connector->edi=
+d);
 > +
-
-nvif_mmu_ctor seems to be calling into this in its clean up path, so
-this could now leaks memory in case nvif_mmu_ctor fails, no?
-
->         kfree(mmu->kind);
->         kfree(mmu->type);
->         kfree(mmu->heap);
+> +               if (nv_encoder->dcb->type =3D=3D DCB_OUTPUT_DP)
+> +                       drm_dp_cec_set_edid(&nv_connector->aux, nv_connec=
+tor->edid);
+> +
+>                 goto out;
+>         } else {
+>                 nouveau_connector_set_edid(nv_connector, NULL);
 > --
 > 2.40.1
 >
+
+Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
