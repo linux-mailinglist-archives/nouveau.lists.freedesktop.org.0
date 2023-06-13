@@ -2,70 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A42B372EDD0
-	for <lists+nouveau@lfdr.de>; Tue, 13 Jun 2023 23:23:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F34C572EDDE
+	for <lists+nouveau@lfdr.de>; Tue, 13 Jun 2023 23:27:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F31AB10E3E0;
-	Tue, 13 Jun 2023 21:23:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7DF9310E3E2;
+	Tue, 13 Jun 2023 21:27:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A31C510E3E0
- for <nouveau@lists.freedesktop.org>; Tue, 13 Jun 2023 21:23:47 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0D4D910E3E2
+ for <nouveau@lists.freedesktop.org>; Tue, 13 Jun 2023 21:27:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1686691426;
+ s=mimecast20190719; t=1686691621;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=EWsjugpohne5df5/X+6GB3p53oFQ5MGoNldK3p6P9vk=;
- b=UNYKXCS9WT6o9XpjpbQcwYRYtGER5gF1etrbl9OFsgSamRzsfXhM6FzIMMBHlnfPljW2c6
- kfYEkLc2oZW0nmjqMEUpcXLt0lR5gV5Is3zmb5MqftiW1j2P50htPlZNwImmhqP5EGAFkJ
- hAZvjjFHZ2qsTjwNIj9+bIEY1Ar+3O0=
-Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
- [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=w+GokRaz/CXRCYGtzlxU6A1MiOBFlvyVYnzQfsXLZXg=;
+ b=jODNRSJK5y4wjS3vV5peqiUlYG7YlITLTcILOCxY224g+TX5SVS28IEvJSUB7/lbZsI0al
+ kyXRfJclLI06RIa7JaYfLlai/ynU9EGAJ8v0u0B6Czlgdcv8DToo9KH0dJYVXcnQOlUg4v
+ ykh+yRzJevoK+mDpYFFMUWmQYh1t4r0=
+Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com
+ [209.85.208.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-581-ApZFaEaGP_-I2BUy0rz3-Q-1; Tue, 13 Jun 2023 17:23:45 -0400
-X-MC-Unique: ApZFaEaGP_-I2BUy0rz3-Q-1
-Received: by mail-lj1-f198.google.com with SMTP id
- 38308e7fff4ca-2b330fbc513so3428271fa.0
- for <nouveau@lists.freedesktop.org>; Tue, 13 Jun 2023 14:23:45 -0700 (PDT)
+ us-mta-460-usS8uVvdPcix_ldUKrGjeA-1; Tue, 13 Jun 2023 17:26:59 -0400
+X-MC-Unique: usS8uVvdPcix_ldUKrGjeA-1
+Received: by mail-lj1-f197.google.com with SMTP id
+ 38308e7fff4ca-2b32a11b31bso4620381fa.0
+ for <nouveau@lists.freedesktop.org>; Tue, 13 Jun 2023 14:26:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686691424; x=1689283424;
+ d=1e100.net; s=20221208; t=1686691617; x=1689283617;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EWsjugpohne5df5/X+6GB3p53oFQ5MGoNldK3p6P9vk=;
- b=SKta2JvO92wyy4ZpwUArGkeeMM13yjfqbAzVxBuRWTPZ2cEhmkUSboY5R7vYBD6WDk
- CqLj/Fb0urcvtKbvIXeXCtFSezz8HEXaHGaZcbIJUWl4efF2W+af6nYFXoo8xgcsPRcQ
- gEEJJ+YzSba7FbkNxf7mZqkNJGJxSqmw+aHBKGgbgl8MPg1wk9c9Ur69ftDv5qgirfSF
- ZJpxcDmTrvSbu2sfJ3szpEUhsmc+jEn6UImJon/sqEmmpHFKGp6ORRR4SjzRi6TsMZU6
- VibiF0moaQ1v8Gw6oKCAAvUdXVzo5CVCGX3zh9PQ9Owy+v13nhFATCQww0M0Qn5SUqt5
- aONw==
-X-Gm-Message-State: AC+VfDyOrclkQL8Q+eN6xOYjTNJSwdA+0BotUUcq6rT3codizEWeqSWC
- vRJqDkkaWDDag2GahH8JgJ6iR43vuh8lh8dWyq3dL0BI+7I57dN8t08QDGEchEQ5qTG0ooZ6Iy+
- 3NjOMw1uqj/oN3yV4TKxJru5Qs024EdCIGm1O9wMW6w==
-X-Received: by 2002:a05:651c:169b:b0:2b1:e625:7e1b with SMTP id
- bd27-20020a05651c169b00b002b1e6257e1bmr6319980ljb.0.1686691424071; 
- Tue, 13 Jun 2023 14:23:44 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ5AlCNoOaXbVxU5NOLaYc+4CaTl5SFp3/u3ykWEuLnEhB2JrvIcHz5LPSUIjytKMktVlyqAzKFlzlBmlBdkItY=
-X-Received: by 2002:a05:651c:169b:b0:2b1:e625:7e1b with SMTP id
- bd27-20020a05651c169b00b002b1e6257e1bmr6319969ljb.0.1686691423715; Tue, 13
- Jun 2023 14:23:43 -0700 (PDT)
+ bh=w+GokRaz/CXRCYGtzlxU6A1MiOBFlvyVYnzQfsXLZXg=;
+ b=Ovp2BxnGnDJCLNiPSg5gL9+pQQVQqyte5scy4w2GAGMYqDF4eh99DEy4i/EB7f3P0x
+ bJu1WtUoYf4dWn2nLzDEvzvIBl0RGJJBvDOSi/T4Ha+DLYqS1AAjx62kCe00e7nbUOVY
+ TXMFrFw0Gec9dwVzPZmB8zM2kNgTcSu/sEnJr98h219lM1C/SkrFNc4Aw4aOwAP9dnGN
+ /aRpaB3vkuE5eeXht0WoTQtcjYLhdl+D0iKet6gFAWpc0uYhXUDv1FKE5L7FDA5V9+MR
+ dzKT/Q0x7QTaS3+pUwdJXg/0Bkt1OQaJUNfzOK0rm0ifsvfm8u64VeILWkbblMFjASvm
+ vu7Q==
+X-Gm-Message-State: AC+VfDyg+puSOzx4W6LcrqiaIIOVrW8eHc0s16XjDWKDKgQ5mb4SWkGD
+ OI8qiu8JfcTaFHfYLGcnhGY7gaTqdqM/DuF0eOpGrh1/xxm5NrTd7HSpJPBsN7KBW/CxaRBPq2X
+ jk/DzbSInrQSewj9IfHlzcZBvxQHVDBaJ/16knb7E4w==
+X-Received: by 2002:a2e:a36a:0:b0:2b3:461b:e4b4 with SMTP id
+ i10-20020a2ea36a000000b002b3461be4b4mr390120ljn.5.1686691617376; 
+ Tue, 13 Jun 2023 14:26:57 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ40W5LUZtkdB7kFB9oQZ83y0oKN0Ip23GwRuMRrnBnumEb7amH749RdYjlQVN8Gbh8Ui9NIa6hdhKblB4JPtOI=
+X-Received: by 2002:a2e:a36a:0:b0:2b3:461b:e4b4 with SMTP id
+ i10-20020a2ea36a000000b002b3461be4b4mr390116ljn.5.1686691617098; Tue, 13 Jun
+ 2023 14:26:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230613210529.552098-1-lyude@redhat.com>
-In-Reply-To: <20230613210529.552098-1-lyude@redhat.com>
+References: <20230525003106.3853741-1-skeggsb@gmail.com>
+In-Reply-To: <20230525003106.3853741-1-skeggsb@gmail.com>
 From: Karol Herbst <kherbst@redhat.com>
-Date: Tue, 13 Jun 2023 23:23:32 +0200
-Message-ID: <CACO55tvju6-pF-e9-Zx+7dNB1XKavaf74RW0yGheGzbM1w9nhg@mail.gmail.com>
-To: Lyude Paul <lyude@redhat.com>
+Date: Tue, 13 Jun 2023 23:26:46 +0200
+Message-ID: <CACO55tsOXd7DnwmmTYot-RarCTfN-0+Oyh2ysrz+J9KuU0SVkg@mail.gmail.com>
+To: Ben Skeggs <skeggsb@gmail.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/kms/nv50-: Fix
- drm_dp_remove_payload() invocation
+Subject: Re: [Nouveau] [PATCH 01/10] drm/nouveau/nvkm: fini object children
+ in reverse order
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,68 +77,47 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jani Nikula <jani.nikula@intel.com>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, open list <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
- nouveau-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Jun 13, 2023 at 11:05=E2=80=AFPM Lyude Paul <lyude@redhat.com> wrot=
+On Thu, May 25, 2023 at 2:31=E2=80=AFAM Ben Skeggs <skeggsb@gmail.com> wrot=
 e:
 >
-> We changed the semantics for this in:
+> From: Ben Skeggs <bskeggs@redhat.com>
 >
-> e761cc20946a ("drm/display/dp_mst: Handle old/new payload states in drm_d=
-p_remove_payload()")
+> Turns out, we're currently tearing down the disp core channel *before*
+> the satellite channels (wndw, etc) during suspend.
 >
-> But I totally forgot to update this properly in nouveau. So, let's do tha=
-t.
+> This makes RM return NV_ERR_NOT_SUPPORTED on attempting to reallocate
+> the core channel on resume for some reason, but we probably shouldn't
+> be doing it on HW either.
 >
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-
-Reviewed-by: Karol Herbst <kherbst@redhat.com>
-
+> Tear down children in the reverse of allocation order instead.
+>
+> Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 > ---
->  drivers/gpu/drm/nouveau/dispnv50/disp.c | 8 ++++++--
->  1 file changed, 6 insertions(+), 2 deletions(-)
+>  drivers/gpu/drm/nouveau/nvkm/core/object.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/no=
-uveau/dispnv50/disp.c
-> index 5bb777ff13130..1637e08b548c2 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> @@ -909,15 +909,19 @@ nv50_msto_prepare(struct drm_atomic_state *state,
->         struct nouveau_drm *drm =3D nouveau_drm(msto->encoder.dev);
->         struct nv50_mstc *mstc =3D msto->mstc;
->         struct nv50_mstm *mstm =3D mstc->mstm;
-> -       struct drm_dp_mst_atomic_payload *payload;
-> +       struct drm_dp_mst_topology_state *old_mst_state;
-> +       struct drm_dp_mst_atomic_payload *payload, *old_payload;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/core/object.c b/drivers/gpu/drm=
+/nouveau/nvkm/core/object.c
+> index 301a5e5b5f7f..7c554c14e884 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/core/object.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/core/object.c
+> @@ -185,7 +185,7 @@ nvkm_object_fini(struct nvkm_object *object, bool sus=
+pend)
 >
->         NV_ATOMIC(drm, "%s: msto prepare\n", msto->encoder.name);
->
-> +       old_mst_state =3D drm_atomic_get_old_mst_topology_state(state, mg=
-r);
-> +
->         payload =3D drm_atomic_get_mst_payload_state(mst_state, mstc->por=
-t);
-> +       old_payload =3D drm_atomic_get_mst_payload_state(old_mst_state, m=
-stc->port);
->
->         // TODO: Figure out if we want to do a better job of handling VCP=
-I allocation failures here?
->         if (msto->disabled) {
-> -               drm_dp_remove_payload(mgr, mst_state, payload, payload);
-> +               drm_dp_remove_payload(mgr, mst_state, old_payload, payloa=
-d);
->
->                 nvif_outp_dp_mst_vcpi(&mstm->outp->outp, msto->head->base=
-.index, 0, 0, 0, 0);
->         } else {
+>         nvif_debug(object, "%s children...\n", action);
+>         time =3D ktime_to_us(ktime_get());
+> -       list_for_each_entry(child, &object->tree, head) {
+> +       list_for_each_entry_reverse(child, &object->tree, head) {
+>                 ret =3D nvkm_object_fini(child, suspend);
+>                 if (ret && suspend)
+>                         goto fail_child;
 > --
 > 2.40.1
 >
+
+Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
