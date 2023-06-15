@@ -1,60 +1,61 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D511E7373E2
-	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:21:12 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 126BC7373F6
+	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:21:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8610710E35F;
-	Tue, 20 Jun 2023 18:20:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 162FF10E357;
+	Tue, 20 Jun 2023 18:20:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
- by gabe.freedesktop.org (Postfix) with ESMTP id 0116A10E24E;
- Wed, 14 Jun 2023 10:50:36 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 3524910E11A;
+ Thu, 15 Jun 2023 06:51:53 +0000 (UTC)
 Received: from loongson.cn (unknown [10.20.42.43])
- by gateway (Coremail) with SMTP id _____8AxW+p7m4lkURgFAA--.10857S3;
- Wed, 14 Jun 2023 18:50:35 +0800 (CST)
+ by gateway (Coremail) with SMTP id _____8Bx7eoGtYpkb3YFAA--.11707S3;
+ Thu, 15 Jun 2023 14:51:50 +0800 (CST)
 Received: from [10.20.42.43] (unknown [10.20.42.43])
  by localhost.localdomain (Coremail) with SMTP id
- AQAAf8DxK8p6m4lkKIUaAA--.1634S3; 
- Wed, 14 Jun 2023 18:50:34 +0800 (CST)
-Message-ID: <dbf0d89f-717a-1f78-aef2-f30506751d4d@loongson.cn>
-Date: Wed, 14 Jun 2023 18:50:34 +0800
+ AQAAf8CxhuQFtYpkQKEbAA--.13222S3; 
+ Thu, 15 Jun 2023 14:51:49 +0800 (CST)
+Message-ID: <1b5e3b60-28dc-60f1-b963-2eab2c787244@loongson.cn>
+Date: Thu, 15 Jun 2023 14:51:49 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
 To: Sui Jingfeng <15330273260@189.cn>, Bjorn Helgaas <bhelgaas@google.com>
 References: <20230613030151.216625-1-15330273260@189.cn>
- <20230613030151.216625-3-15330273260@189.cn>
+ <20230613030151.216625-8-15330273260@189.cn>
 Content-Language: en-US
 From: Sui Jingfeng <suijingfeng@loongson.cn>
 Organization: Loongson
-In-Reply-To: <20230613030151.216625-3-15330273260@189.cn>
+In-Reply-To: <20230613030151.216625-8-15330273260@189.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf8DxK8p6m4lkKIUaAA--.1634S3
+X-CM-TRANSID: AQAAf8CxhuQFtYpkQKEbAA--.13222S3
 X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
-X-Coremail-Antispam: 1Uk129KBj93XoWxXr43WFyxtr4ruFWDXr4xAFc_yoW5tr1xpF
- yrGa45KrW8Ga4xW3y2qF18ZFy5ZFZ0ka4rtr42k34FkFWqkw1qqF95GFyYq343JrWkJF1I
- qa1ayrnruanFgabCm3ZEXasCq-sJn29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7KY7ZEXa
+X-Coremail-Antispam: 1Uk129KBj93XoWxArWUWw17ZFWDCrWDuF4rJFc_yoWrurW5pw
+ 48Ga13Wr48Jr1Skryj9Fn8GF1Y9F95AayDArn7tw18Cr47Ka10qF9Iqa1Yg3ZxAr4IvrnI
+ qrn2y340y34DZagCm3ZEXasCq-sJn29KB7ZKAUJUUUUr529EdanIXcx71UUUUU7KY7ZEXa
  sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
- 0xBIdaVrnRJUUUv2b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+ 0xBIdaVrnRJUUUPab4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
  IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
- e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
- 0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v2
- 6rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx1l5I
- 8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AK
- xVWxJVW8Jr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxk0xIA0c2IEe2xFo4
- CEbIxvr21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG
- 67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MI
- IYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E
- 14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWxJV
- W8Jr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU13E
- fUUUUUU==
+ e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+ 0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
+ xVW8Jr0_Cr1UM2kKe7AKxVWUXVWUAwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07
+ AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWU
+ XVWUAwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI4
+ 8JMxk0xIA0c2IEe2xFo4CEbIxvr21lc7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64vI
+ r41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xFxVAFwI0_Jrv_JF1lx2IqxVAqx4xG67
+ AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r4a6rW5MIIY
+ rxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14
+ v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8
+ JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxU43xhDU
+ UUU
 X-Mailman-Approved-At: Tue, 20 Jun 2023 18:20:12 +0000
-Subject: Re: [Nouveau] [PATCH v7 2/8] PCI/VGA: Deal only with VGA class
- devices
+Subject: Re: [Nouveau] [PATCH v7 7/8] drm/amdgpu: Implement the
+ is_boot_device callback function
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,125 +67,132 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-fbdev@vger.kernel.org, kvm@vger.kernel.org,
+Cc: Mario Limonciello <mario.limonciello@amd.com>, linux-fbdev@vger.kernel.org,
+ Lijo Lazar <lijo.lazar@amd.com>, kvm@vger.kernel.org,
  nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org, linux-pci@vger.kernel.org
+ Pan Xinhui <Xinhui.Pan@amd.com>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, YiPeng Chai <YiPeng.Chai@amd.com>,
+ amd-gfx@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
+ linux-pci@vger.kernel.org, Alex Deucher <alexander.deucher@amd.com>,
+ Bokun Zhang <Bokun.Zhang@amd.com>, Likun Gao <Likun.Gao@amd.com>,
+ Christian Konig <christian.koenig@amd.com>,
+ Hawking Zhang <Hawking.Zhang@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Hi,
 
+
+Does anyone has the bandwidth to review this?
+
+I provide more additional information here, hope it helps.
+
+
+On a non-x86 multiple platform, the discrete AMDGPU fails to override 
+the integrated one.
+
+because the PCI BAR 0 of the AMDGPU gets moved.
+
+Below is the log of 'dmesg | grep vgaarb'.
+
+So relaying on screen_info is not always reliable.
+
+
+[    0.361928] pci 0000:00:06.1: vgaarb: setting as boot VGA device
+[    0.361932] pci 0000:00:06.1: vgaarb: bridge control possible
+[    0.361933] pci 0000:00:06.1: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+[    0.361940] pci 0000:05:00.0: vgaarb: bridge control possible
+[    0.361941] pci 0000:05:00.0: vgaarb: VGA device added: decodes=io+mem,owns=none,locks=none
+[    0.361943] vgaarb: loaded
+[   11.352087] amdgpu 0000:05:00.0: vgaarb: Set as boot device (dictated by driver)
+[   11.575505] loongson 0000:00:06.1: vgaarb: changed VGA decodes: olddecodes=io+mem,decodes=none:owns=io+mem
+[   11.585100] amdgpu 0000:05:00.0: vgaarb: changed VGA decodes: olddecodes=io+mem,decodes=none:owns=none
+
+
+dmesg | grep efifb:
+
+
+[    0.356355] pci 0000:05:00.0: BAR 0: assigned to efifb
+[    0.375793] efifb: probing for efifb
+[    0.375795] pci 0000:05:00.0: BAR has moved, updating efifb address
+[    0.375803] efifb: framebuffer at 0xe0030000000, using 976k, total 975k
+[    0.375805] efifb: mode is 800x600x16, linelength=1664, pages=1
+[    0.375806] efifb: scrolling: redraw
+[    0.375808] efifb: Truecolor: size=0:5:6:5, shift=0:11:5:0
+
+
+efifb can also prove that "BAR has been moved"
+
+
+ From dmesg |  grep "pci 0000:05:00.0":
+
+
+[    0.356286] pci 0000:05:00.0: [1002:699f] type 00 class 0x030000
+[    0.356303] pci 0000:05:00.0: reg 0x10: [mem 
+0xe0020000000-0xe002fffffff 64bit pref]
+[    0.356315] pci 0000:05:00.0: reg 0x18: [mem 
+0xe0030000000-0xe00301fffff 64bit pref]
+[    0.356323] pci 0000:05:00.0: reg 0x20: [io  0x40000-0x400ff]
+[    0.356331] pci 0000:05:00.0: reg 0x24: [mem 0xe0053100000-0xe005313ffff]
+[    0.356339] pci 0000:05:00.0: reg 0x30: [mem 0xfffe0000-0xffffffff pref]
+[    0.356346] pci 0000:05:00.0: enabling Extended Tags
+[    0.356355] pci 0000:05:00.0: BAR 0: assigned to efifb
+[    0.356421] pci 0000:05:00.0: supports D1 D2
+[    0.356422] pci 0000:05:00.0: PME# supported from D1 D2 D3hot D3cold
+[    0.356858] pci 0000:05:00.0: BAR 0: assigned [mem 
+0xe0030000000-0xe003fffffff 64bit pref]
+[    0.356866] pci 0000:05:00.0: BAR 2: assigned [mem 
+0xe0040000000-0xe00401fffff 64bit pref]
+[    0.356875] pci 0000:05:00.0: BAR 5: assigned [mem 
+0xe0049000000-0xe004903ffff]
+[    0.356878] pci 0000:05:00.0: BAR 6: assigned [mem 
+0xe0049040000-0xe004905ffff pref]
+[    0.356889] pci 0000:05:00.0: BAR 4: assigned [io 0x4000-0x40ff]
+[    0.361940] pci 0000:05:00.0: vgaarb: bridge control possible
+[    0.361941] pci 0000:05:00.0: vgaarb: VGA device added: 
+decodes=io+mem,owns=none,locks=none
+[    0.375795] pci 0000:05:00.0: BAR has moved, updating efifb address
+
+We can see that the Bar 0 of AMDGPU
+
+moved from '0xe0020000000-0xe002fffffff'  to '0xe0030000000-0xe003fffffff'
+
+while the fb location information recorded by the screen_info still 
+belong to '0xe0020000000-0xe002fffffff'
+
+
+I suspect this is also the reason that video/aperture don't relay on the 
+information provided by screen_info
+
+in the contrast, it require the firmware framebuffer driver(efifb) to call
+
+devm_aperture_acquire_from_firmware() function, only in this way 
+video/aperture
+
+could record the correct information about the aperture being used the 
+by the firmware framebuffe.
+
+
+While vgaarb is loaded too early, even before efifb.
+
+so that we can only relay on the pci_notifier call back to us.
+
+
 On 2023/6/13 11:01, Sui Jingfeng wrote:
 > From: Sui Jingfeng <suijingfeng@loongson.cn>
 >
-> Deal only with the VGA devcie(pdev->class == 0x0300), so replace the
-> pci_get_subsys() function with pci_get_class(). Filter the non-PCI display
-> device(pdev->class != 0x0300) out. There no need to process the non-display
-> PCI device.
+> [why]
 >
-> Cc: Bjorn Helgaas <bhelgaas@google.com>
-> Signed-off-by: Sui Jingfeng <suijingfeng@loongson.cn>
-> ---
->   drivers/pci/vgaarb.c | 22 ++++++++++++----------
->   1 file changed, 12 insertions(+), 10 deletions(-)
+> The vga_is_firmware_default() defined in drivers/pci/vgaarb.c is
+> arch-dependent, it's a dummy on non-x86 architectures currently.
+> This made VGAARB lost an important condition for the arbitration.
+> It could still be wrong even if we remove the #ifdef and #endif guards.
+> because the PCI bar will move (resource re-allocation).
 >
-> diff --git a/drivers/pci/vgaarb.c b/drivers/pci/vgaarb.c
-> index c1bc6c983932..22a505e877dc 100644
-> --- a/drivers/pci/vgaarb.c
-> +++ b/drivers/pci/vgaarb.c
-> @@ -754,10 +754,6 @@ static bool vga_arbiter_add_pci_device(struct pci_dev *pdev)
->   	struct pci_dev *bridge;
->   	u16 cmd;
->   
-> -	/* Only deal with VGA class devices */
-> -	if ((pdev->class >> 8) != PCI_CLASS_DISPLAY_VGA)
-> -		return false;
-> -
-
-Hi, here is probably a bug fixing.
-
-For an example, nvidia render only GPU typically has 0x0380.
-
-at its PCI class number, but  render only GPU should not participate in 
-the arbitration.
-
-As it shouldn't snoop the legacy fixed VGA address.
-
-It(render only GPU) can not display anything.
-
-
-But 0x0380 >> 8 = 0x03, the filter  failed.
-
-
->   	/* Allocate structure */
->   	vgadev = kzalloc(sizeof(struct vga_device), GFP_KERNEL);
->   	if (vgadev == NULL) {
-> @@ -1500,7 +1496,9 @@ static int pci_notify(struct notifier_block *nb, unsigned long action,
->   	struct pci_dev *pdev = to_pci_dev(dev);
->   	bool notify = false;
->   
-> -	vgaarb_dbg(dev, "%s\n", __func__);
-> +	/* Only deal with VGA class devices */
-> +	if (pdev->class != PCI_CLASS_DISPLAY_VGA << 8)
-> +		return 0;
-
-So here we only care 0x0300, my initial intent is to make an optimization,
-
-nowadays sane display graphic card should all has 0x0300 as its PCI 
-class number, is this complete right?
-
-```
-
-#define PCI_BASE_CLASS_DISPLAY        0x03
-#define PCI_CLASS_DISPLAY_VGA        0x0300
-#define PCI_CLASS_DISPLAY_XGA        0x0301
-#define PCI_CLASS_DISPLAY_3D        0x0302
-#define PCI_CLASS_DISPLAY_OTHER        0x0380
-
-```
-
-Any ideas ?
-
->   	/* For now we're only intereted in devices added and removed. I didn't
->   	 * test this thing here, so someone needs to double check for the
-> @@ -1510,6 +1508,8 @@ static int pci_notify(struct notifier_block *nb, unsigned long action,
->   	else if (action == BUS_NOTIFY_DEL_DEVICE)
->   		notify = vga_arbiter_del_pci_device(pdev);
->   
-> +	vgaarb_dbg(dev, "%s: action = %lu\n", __func__, action);
-> +
->   	if (notify)
->   		vga_arbiter_notify_clients();
->   	return 0;
-> @@ -1534,8 +1534,8 @@ static struct miscdevice vga_arb_device = {
->   
->   static int __init vga_arb_device_init(void)
->   {
-> +	struct pci_dev *pdev = NULL;
->   	int rc;
-> -	struct pci_dev *pdev;
->   
->   	rc = misc_register(&vga_arb_device);
->   	if (rc < 0)
-> @@ -1545,11 +1545,13 @@ static int __init vga_arb_device_init(void)
->   
->   	/* We add all PCI devices satisfying VGA class in the arbiter by
->   	 * default */
-> -	pdev = NULL;
-> -	while ((pdev =
-> -		pci_get_subsys(PCI_ANY_ID, PCI_ANY_ID, PCI_ANY_ID,
-> -			       PCI_ANY_ID, pdev)) != NULL)
-> +	while (1) {
-> +		pdev = pci_get_class(PCI_CLASS_DISPLAY_VGA << 8, pdev);
-> +		if (!pdev)
-> +			break;
-> +
->   		vga_arbiter_add_pci_device(pdev);
-> +	}
->   
->   	pr_info("loaded\n");
->   	return rc;
+> [how]
+>
+> The device that owns the firmware framebuffer should be the default boot
+> device. This patch adds an arch-independent function to enforce this rule
 
 -- 
 Jingfeng
