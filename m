@@ -2,58 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EACD732167
-	for <lists+nouveau@lfdr.de>; Thu, 15 Jun 2023 23:12:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DEC1733263
+	for <lists+nouveau@lfdr.de>; Fri, 16 Jun 2023 15:41:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 06FD510E54C;
-	Thu, 15 Jun 2023 21:12:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7005510E62A;
+	Fri, 16 Jun 2023 13:41:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2E99210E023;
- Thu, 15 Jun 2023 21:12:10 +0000 (UTC)
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-1a991886254so140341fac.2; 
- Thu, 15 Jun 2023 14:12:10 -0700 (PDT)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 674D910E622;
+ Fri, 16 Jun 2023 13:41:20 +0000 (UTC)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-394c7ba4cb5so546763b6e.1; 
+ Fri, 16 Jun 2023 06:41:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1686863529; x=1689455529;
+ d=gmail.com; s=20221208; t=1686922879; x=1689514879;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cYFIoxmK6/11WcQGMEd3k+GSDGPqNwcIqNk05D0COTE=;
- b=Ctj8OnhGP2r2mDaRqVkWYkbCXLxlBOU1XnLMs2rQnEZVFtLbX4y/91GeJfTZJq5ilZ
- BEBJVQLtXSa74ZV6v9HQtOkzjDigIp47DOIRcrHwGUcKTsqQAhkMdn1UO87Sb7Gpm7ex
- X45UZ0QhVvOtmv5xonVSE+x+ADmFWyurK8i6hsId3TXKamH0UIU6FCtus2oYmyYc/hXN
- aKVQWGwGuIgL3W0ZwDOUERyeYftA7rlPAK83m58oUSPJYAdDpFEgGtRYfhALMGIZvZ2b
- gofXVCoULo3vxmDnvGTZQX+wnBV6wdCwVEVCg+rvInQGzr6Uhq9I2bWmhZs/WkNDiQrK
- W5gw==
+ bh=tntugFqU/8S6D8QnfnZKCyxcavv0/StvRTc0doVwTug=;
+ b=Hq9/lbXSB2l5TeApTnHoiauPYE3//779ma15+Cxmn8L3T34gMGZWhlKVlT3W7xr8WQ
+ KquU4OujSYGtCkP3iZXQXG3Xyvj0NOht7ph8hBsVZ/hmmUBQ3/vaPNPEFOkZUpqeTlCQ
+ 6VYbS3K/B4Nbgkd6E4aBFeztPoaY/gr7fsX5Gp6QIVxwpUu+3JRIs0cy/I6gTgf+OJXz
+ j6kHCfrcHX++zLnKYt3ECf69LCZCIHeddRS81VJTgQ99J4ZOh1E60VJwNYTDPalONOtL
+ 69u3yUmftpqms9OZBC/FmX1HYvw22rkPIM3B9ztiUK88ui8GfDZBF2LEAYwzJ5swcIY7
+ OjCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686863529; x=1689455529;
+ d=1e100.net; s=20221208; t=1686922879; x=1689514879;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cYFIoxmK6/11WcQGMEd3k+GSDGPqNwcIqNk05D0COTE=;
- b=jfVVE6xAZdVxNcuxdOj0IBv7br7cvBdPcsUViwbPRbPROC8oLbRo4J+nYzUJyjl5dG
- ayVkSLOBarNeI+KP0iy20FVKOfN9GDjuF9fUkdg85iqrTueQuTv0wAXz7Iqs2NYstyNt
- jy5wQYDInLvG4S6IrfCaQGr2Sq2fhrjAgAMvkWPs0cP6DNkm0fydTgqXyMCU75V2/iXY
- Ul4KjIaS+OCsz8EogjdLHK6CCa2dNaBv4a7O08dwuOwc0al8V5t/k8BiNjdaM/K/ohDu
- +MILem1sdHOF21AM25/9cF2An4VO8Fq+qgnfriEnVEB+178C7XLgA0iHGRDYGVK0ayXe
- 8nEw==
-X-Gm-Message-State: AC+VfDz/MOd3CB5EbHtRPqe66VpVcSiW57b8XpQGqoiYOgHDY6sZPrtk
- CNY64h0vlkx/ncUOk6DKR21HIKmSvcmVAzq2fm0=
-X-Google-Smtp-Source: ACHHUZ4RQOzLkRBT57QFtwfdt42rHQTpRvSKNUguWsVJUC9l4YMVkHjXvUxUEmpNf+dIqOqbJjieNSEhAcMqJy+p5M0=
-X-Received: by 2002:a05:6871:6ba6:b0:19f:ad5a:f518 with SMTP id
- zh38-20020a0568716ba600b0019fad5af518mr274084oab.25.1686863529246; Thu, 15
- Jun 2023 14:12:09 -0700 (PDT)
+ bh=tntugFqU/8S6D8QnfnZKCyxcavv0/StvRTc0doVwTug=;
+ b=iw2m7eI/3D+0aAtO4m71C+0w2bt02/Q7etwhpamselZQ7Qr+G6ln4yaYVk0KHZfEQ/
+ SrVFHRAtH79gT+hGvqfom1aWIFkJkqvNoZIWqS0Ndua5HwVDP36VZjh+VGdyDlMbx59S
+ KEkzM3WtlTaEfTvkpTnwojH/Io3rNnCvswxjcJzRPlsIIf2ddh09+M/4l32BKbt7n0yT
+ /DVc8zem9+0Y9ef0P+KmLMevdPFe44P/w8B6+3jTanjptjioEMcB+CxFR5PWFNFFoVpD
+ puT3Nv1m70cCZ1C1foHfh58whixzTNj/19r5caQm6X8StKMIUQ6n1xWVoyUqtPiilmgj
+ 9rDQ==
+X-Gm-Message-State: AC+VfDz6bQvnA1s1xC8FPxjBP6SPi/IU96ihB0Hu+xvVgwfXNUomZMx3
+ /vYJbY720j4XdNw+50YuQmptBEmPArZJ8N7ejgY=
+X-Google-Smtp-Source: ACHHUZ5DUTS2+G6vWyka9hNK/jQ6zUkQOgAWXaZ33xSXADCJfdHjNufahkasrMK6Qa6EriSSkLq2Z+fUNgoHOthdzLA=
+X-Received: by 2002:a54:4802:0:b0:39a:664c:9761 with SMTP id
+ j2-20020a544802000000b0039a664c9761mr2082977oij.29.1686922878844; Fri, 16 Jun
+ 2023 06:41:18 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230613030151.216625-1-15330273260@189.cn>
  <20230613030151.216625-3-15330273260@189.cn>
  <dbf0d89f-717a-1f78-aef2-f30506751d4d@loongson.cn>
-In-Reply-To: <dbf0d89f-717a-1f78-aef2-f30506751d4d@loongson.cn>
+ <CADnq5_N6vVtzH6tzguZdHnP_TdRoG1G-Cr94O+X03jvtk=vhag@mail.gmail.com>
+ <3c1c86ab-96ea-aa1c-c9c5-9a4012644fd6@loongson.cn>
+In-Reply-To: <3c1c86ab-96ea-aa1c-c9c5-9a4012644fd6@loongson.cn>
 From: Alex Deucher <alexdeucher@gmail.com>
-Date: Thu, 15 Jun 2023 17:11:58 -0400
-Message-ID: <CADnq5_N6vVtzH6tzguZdHnP_TdRoG1G-Cr94O+X03jvtk=vhag@mail.gmail.com>
+Date: Fri, 16 Jun 2023 09:41:07 -0400
+Message-ID: <CADnq5_Px-HWfwetv8LZsCnCeV7SMt_uqtLwMVK7648ZQiP2RCQ@mail.gmail.com>
 To: Sui Jingfeng <suijingfeng@loongson.cn>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -78,139 +80,212 @@ Cc: linux-fbdev@vger.kernel.org, kvm@vger.kernel.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jun 14, 2023 at 6:50=E2=80=AFAM Sui Jingfeng <suijingfeng@loongson.=
+On Fri, Jun 16, 2023 at 3:11=E2=80=AFAM Sui Jingfeng <suijingfeng@loongson.=
 cn> wrote:
 >
 > Hi,
 >
-> On 2023/6/13 11:01, Sui Jingfeng wrote:
-> > From: Sui Jingfeng <suijingfeng@loongson.cn>
-> >
-> > Deal only with the VGA devcie(pdev->class =3D=3D 0x0300), so replace th=
-e
-> > pci_get_subsys() function with pci_get_class(). Filter the non-PCI disp=
-lay
-> > device(pdev->class !=3D 0x0300) out. There no need to process the non-d=
-isplay
-> > PCI device.
-> >
-> > Cc: Bjorn Helgaas <bhelgaas@google.com>
-> > Signed-off-by: Sui Jingfeng <suijingfeng@loongson.cn>
-> > ---
-> >   drivers/pci/vgaarb.c | 22 ++++++++++++----------
-> >   1 file changed, 12 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/drivers/pci/vgaarb.c b/drivers/pci/vgaarb.c
-> > index c1bc6c983932..22a505e877dc 100644
-> > --- a/drivers/pci/vgaarb.c
-> > +++ b/drivers/pci/vgaarb.c
-> > @@ -754,10 +754,6 @@ static bool vga_arbiter_add_pci_device(struct pci_=
-dev *pdev)
-> >       struct pci_dev *bridge;
-> >       u16 cmd;
-> >
-> > -     /* Only deal with VGA class devices */
-> > -     if ((pdev->class >> 8) !=3D PCI_CLASS_DISPLAY_VGA)
-> > -             return false;
-> > -
+> On 2023/6/16 05:11, Alex Deucher wrote:
+> > On Wed, Jun 14, 2023 at 6:50=E2=80=AFAM Sui Jingfeng <suijingfeng@loong=
+son.cn> wrote:
+> >> Hi,
+> >>
+> >> On 2023/6/13 11:01, Sui Jingfeng wrote:
+> >>> From: Sui Jingfeng <suijingfeng@loongson.cn>
+> >>>
+> >>> Deal only with the VGA devcie(pdev->class =3D=3D 0x0300), so replace =
+the
+> >>> pci_get_subsys() function with pci_get_class(). Filter the non-PCI di=
+splay
+> >>> device(pdev->class !=3D 0x0300) out. There no need to process the non=
+-display
+> >>> PCI device.
+> >>>
+> >>> Cc: Bjorn Helgaas <bhelgaas@google.com>
+> >>> Signed-off-by: Sui Jingfeng <suijingfeng@loongson.cn>
+> >>> ---
+> >>>    drivers/pci/vgaarb.c | 22 ++++++++++++----------
+> >>>    1 file changed, 12 insertions(+), 10 deletions(-)
+> >>>
+> >>> diff --git a/drivers/pci/vgaarb.c b/drivers/pci/vgaarb.c
+> >>> index c1bc6c983932..22a505e877dc 100644
+> >>> --- a/drivers/pci/vgaarb.c
+> >>> +++ b/drivers/pci/vgaarb.c
+> >>> @@ -754,10 +754,6 @@ static bool vga_arbiter_add_pci_device(struct pc=
+i_dev *pdev)
+> >>>        struct pci_dev *bridge;
+> >>>        u16 cmd;
+> >>>
+> >>> -     /* Only deal with VGA class devices */
+> >>> -     if ((pdev->class >> 8) !=3D PCI_CLASS_DISPLAY_VGA)
+> >>> -             return false;
+> >>> -
+> >> Hi, here is probably a bug fixing.
+> >>
+> >> For an example, nvidia render only GPU typically has 0x0380.
+> >>
+> >> as its PCI class number, but render only GPU should not participate in
+> >> the arbitration.
+> >>
+> >> As it shouldn't snoop the legacy fixed VGA address.
+> >>
+> >> It(render only GPU) can not display anything.
+> >>
+> >>
+> >> But 0x0380 >> 8 =3D 0x03, the filter  failed.
+> >>
+> >>
+> >>>        /* Allocate structure */
+> >>>        vgadev =3D kzalloc(sizeof(struct vga_device), GFP_KERNEL);
+> >>>        if (vgadev =3D=3D NULL) {
+> >>> @@ -1500,7 +1496,9 @@ static int pci_notify(struct notifier_block *nb=
+, unsigned long action,
+> >>>        struct pci_dev *pdev =3D to_pci_dev(dev);
+> >>>        bool notify =3D false;
+> >>>
+> >>> -     vgaarb_dbg(dev, "%s\n", __func__);
+> >>> +     /* Only deal with VGA class devices */
+> >>> +     if (pdev->class !=3D PCI_CLASS_DISPLAY_VGA << 8)
+> >>> +             return 0;
+> >> So here we only care 0x0300, my initial intent is to make an optimizat=
+ion,
+> >>
+> >> nowadays sane display graphic card should all has 0x0300 as its PCI
+> >> class number, is this complete right?
+> >>
+> >> ```
+> >>
+> >> #define PCI_BASE_CLASS_DISPLAY        0x03
+> >> #define PCI_CLASS_DISPLAY_VGA        0x0300
+> >> #define PCI_CLASS_DISPLAY_XGA        0x0301
+> >> #define PCI_CLASS_DISPLAY_3D        0x0302
+> >> #define PCI_CLASS_DISPLAY_OTHER        0x0380
+> >>
+> >> ```
+> >>
+> >> Any ideas ?
+> > I'm not quite sure what you are asking about here.
 >
-> Hi, here is probably a bug fixing.
+> To be honest, I'm worried about the PCI devices which has a
 >
-> For an example, nvidia render only GPU typically has 0x0380.
+> PCI_CLASS_DISPLAY_XGA as its PCI class number.
 >
-> at its PCI class number, but  render only GPU should not participate in
-> the arbitration.
->
-> As it shouldn't snoop the legacy fixed VGA address.
->
-> It(render only GPU) can not display anything.
+> As those devices are very uncommon in the real world.
 >
 >
-> But 0x0380 >> 8 =3D 0x03, the filter  failed.
+> $ find . -name "*.c" -type f | xargs grep "PCI_CLASS_DISPLAY_XGA"
 >
 >
-> >       /* Allocate structure */
-> >       vgadev =3D kzalloc(sizeof(struct vga_device), GFP_KERNEL);
-> >       if (vgadev =3D=3D NULL) {
-> > @@ -1500,7 +1496,9 @@ static int pci_notify(struct notifier_block *nb, =
-unsigned long action,
-> >       struct pci_dev *pdev =3D to_pci_dev(dev);
-> >       bool notify =3D false;
-> >
-> > -     vgaarb_dbg(dev, "%s\n", __func__);
-> > +     /* Only deal with VGA class devices */
-> > +     if (pdev->class !=3D PCI_CLASS_DISPLAY_VGA << 8)
-> > +             return 0;
+> Grep the "PCI_CLASS_DISPLAY_XGA" in the linux kernel tree got ZERO,
 >
-> So here we only care 0x0300, my initial intent is to make an optimization=
-,
+> there no code reference this macro. So I think it seems safe to ignore
+> the XGA ?
 >
-> nowadays sane display graphic card should all has 0x0300 as its PCI
-> class number, is this complete right?
 >
-> ```
+> PCI_CLASS_DISPLAY_3D and PCI_CLASS_DISPLAY_OTHER are used to annotate
+> the render-only GPU.
 >
-> #define PCI_BASE_CLASS_DISPLAY        0x03
-> #define PCI_CLASS_DISPLAY_VGA        0x0300
-> #define PCI_CLASS_DISPLAY_XGA        0x0301
-> #define PCI_CLASS_DISPLAY_3D        0x0302
-> #define PCI_CLASS_DISPLAY_OTHER        0x0380
+> And render-only GPU can't decode the fixed VGA address space, it is safe
+> to ignore them.
 >
-> ```
 >
-> Any ideas ?
+> >   For vga_arb, we
+> > only care about VGA class devices since those should be on the only
+> > ones that might have VGA routed to them.
+>
+> >   However, as VGA gets deprecated,
+>
+> We need the vgaarb for a system with multiple video card.
+>
+> Not only because some Legacy VGA devices implemented
+>
+> on PCI will typically have the same "hard-decoded" addresses;
+>
+> But also these video card need to participate in the arbitration,
+>
+> determine the default boot device.
 
-I'm not quite sure what you are asking about here.  For vga_arb, we
-only care about VGA class devices since those should be on the only
-ones that might have VGA routed to them.  However, as VGA gets
-deprecated, you'll have more non VGA PCI classes for devices which
-could be the pre-OS console device.
+But couldn't the boot device be determined via what whatever resources
+were used by the pre-OS console?  I feel like that should be separate
+from vgaarb.  vgaarb should handle PCI VGA routing and some other
+mechanism should be used to determine what device provided the pre-OS
+console.
 
 Alex
 
+
 >
-> >       /* For now we're only intereted in devices added and removed. I d=
-idn't
-> >        * test this thing here, so someone needs to double check for the
-> > @@ -1510,6 +1508,8 @@ static int pci_notify(struct notifier_block *nb, =
-unsigned long action,
-> >       else if (action =3D=3D BUS_NOTIFY_DEL_DEVICE)
-> >               notify =3D vga_arbiter_del_pci_device(pdev);
-> >
-> > +     vgaarb_dbg(dev, "%s: action =3D %lu\n", __func__, action);
-> > +
-> >       if (notify)
-> >               vga_arbiter_notify_clients();
-> >       return 0;
-> > @@ -1534,8 +1534,8 @@ static struct miscdevice vga_arb_device =3D {
-> >
-> >   static int __init vga_arb_device_init(void)
-> >   {
-> > +     struct pci_dev *pdev =3D NULL;
-> >       int rc;
-> > -     struct pci_dev *pdev;
-> >
-> >       rc =3D misc_register(&vga_arb_device);
-> >       if (rc < 0)
-> > @@ -1545,11 +1545,13 @@ static int __init vga_arb_device_init(void)
-> >
-> >       /* We add all PCI devices satisfying VGA class in the arbiter by
-> >        * default */
-> > -     pdev =3D NULL;
-> > -     while ((pdev =3D
-> > -             pci_get_subsys(PCI_ANY_ID, PCI_ANY_ID, PCI_ANY_ID,
-> > -                            PCI_ANY_ID, pdev)) !=3D NULL)
-> > +     while (1) {
-> > +             pdev =3D pci_get_class(PCI_CLASS_DISPLAY_VGA << 8, pdev);
-> > +             if (!pdev)
-> > +                     break;
-> > +
-> >               vga_arbiter_add_pci_device(pdev);
-> > +     }
-> >
-> >       pr_info("loaded\n");
-> >       return rc;
 >
+> Nowadays, the 'VGA devices' here is stand for the Graphics card
+>
+> which is capable of display something on the screen.
+>
+> We still need vgaarb to select the default boot device.
+>
+>
+> > you'll have more non VGA PCI classes for devices which
+> > could be the pre-OS console device.
+>
+> Ah, we still want  do this(by applying this patch) first,
+>
+> and then we will have the opportunity to see who will crying if
+> something is broken. Will know more then.
+>
+> But drop this patch or revise it with more consideration is also
+> acceptable.
+>
+>
+> I asking about suggestion and/or review.
+>
+> > Alex
+> >
+> >>>        /* For now we're only intereted in devices added and removed. =
+I didn't
+> >>>         * test this thing here, so someone needs to double check for =
+the
+> >>> @@ -1510,6 +1508,8 @@ static int pci_notify(struct notifier_block *nb=
+, unsigned long action,
+> >>>        else if (action =3D=3D BUS_NOTIFY_DEL_DEVICE)
+> >>>                notify =3D vga_arbiter_del_pci_device(pdev);
+> >>>
+> >>> +     vgaarb_dbg(dev, "%s: action =3D %lu\n", __func__, action);
+> >>> +
+> >>>        if (notify)
+> >>>                vga_arbiter_notify_clients();
+> >>>        return 0;
+> >>> @@ -1534,8 +1534,8 @@ static struct miscdevice vga_arb_device =3D {
+> >>>
+> >>>    static int __init vga_arb_device_init(void)
+> >>>    {
+> >>> +     struct pci_dev *pdev =3D NULL;
+> >>>        int rc;
+> >>> -     struct pci_dev *pdev;
+> >>>
+> >>>        rc =3D misc_register(&vga_arb_device);
+> >>>        if (rc < 0)
+> >>> @@ -1545,11 +1545,13 @@ static int __init vga_arb_device_init(void)
+> >>>
+> >>>        /* We add all PCI devices satisfying VGA class in the arbiter =
+by
+> >>>         * default */
+> >>> -     pdev =3D NULL;
+> >>> -     while ((pdev =3D
+> >>> -             pci_get_subsys(PCI_ANY_ID, PCI_ANY_ID, PCI_ANY_ID,
+> >>> -                            PCI_ANY_ID, pdev)) !=3D NULL)
+> >>> +     while (1) {
+> >>> +             pdev =3D pci_get_class(PCI_CLASS_DISPLAY_VGA << 8, pdev=
+);
+> >>> +             if (!pdev)
+> >>> +                     break;
+> >>> +
+> >>>                vga_arbiter_add_pci_device(pdev);
+> >>> +     }
+> >>>
+> >>>        pr_info("loaded\n");
+> >>>        return rc;
+> >> --
+> >> Jingfeng
+> >>
 > --
 > Jingfeng
 >
