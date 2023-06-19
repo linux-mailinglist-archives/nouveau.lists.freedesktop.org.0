@@ -2,34 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1BCF7373C0
-	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:20:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4D22737402
+	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:21:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EFE4410E334;
-	Tue, 20 Jun 2023 18:20:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 733C110E37A;
+	Tue, 20 Jun 2023 18:21:23 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 525 seconds by postgrey-1.36 at gabe;
- Mon, 19 Jun 2023 03:11:37 UTC
-Received: from angie.orcam.me.uk (angie.orcam.me.uk [IPv6:2001:4190:8020::34])
- by gabe.freedesktop.org (Postfix) with ESMTP id E92A810E18B;
- Mon, 19 Jun 2023 03:11:37 +0000 (UTC)
-Received: by angie.orcam.me.uk (Postfix, from userid 500)
- id BF25592009C; Mon, 19 Jun 2023 05:02:48 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by angie.orcam.me.uk (Postfix) with ESMTP id B0C1092009B;
- Mon, 19 Jun 2023 04:02:48 +0100 (BST)
-Date: Mon, 19 Jun 2023 04:02:48 +0100 (BST)
-From: "Maciej W. Rozycki" <macro@orcam.me.uk>
-To: Sui Jingfeng <15330273260@189.cn>
-In-Reply-To: <20230613030151.216625-3-15330273260@189.cn>
-Message-ID: <alpine.DEB.2.21.2306190339590.14084@angie.orcam.me.uk>
+Received: from 189.cn (ptr.189.cn [183.61.185.103])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 2D26810E18B;
+ Mon, 19 Jun 2023 03:45:35 +0000 (UTC)
+HMM_SOURCE_IP: 10.64.8.43:57978.1471128269
+HMM_ATTACHE_NUM: 0000
+HMM_SOURCE_TYPE: SMTP
+Received: from clientip-114.242.206.180 (unknown [10.64.8.43])
+ by 189.cn (HERMES) with SMTP id 505FA10029B;
+ Mon, 19 Jun 2023 11:45:30 +0800 (CST)
+Received: from  ([114.242.206.180])
+ by gateway-151646-dep-75648544bd-7vx9t with ESMTP id
+ 7239e2ea64ab49028b0edbdbd8b976d0 for macro@orcam.me.uk; 
+ Mon, 19 Jun 2023 11:45:32 CST
+X-Transaction-ID: 7239e2ea64ab49028b0edbdbd8b976d0
+X-Real-From: 15330273260@189.cn
+X-Receive-IP: 114.242.206.180
+X-MEDUSA-Status: 0
+Message-ID: <c53476a4-fbc9-00e9-d47d-51a4ce5b9259@189.cn>
+Date: Mon, 19 Jun 2023 11:45:30 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Content-Language: en-US
+To: "Maciej W. Rozycki" <macro@orcam.me.uk>
 References: <20230613030151.216625-1-15330273260@189.cn>
  <20230613030151.216625-3-15330273260@189.cn>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-X-Mailman-Approved-At: Tue, 20 Jun 2023 18:20:11 +0000
+ <alpine.DEB.2.21.2306190339590.14084@angie.orcam.me.uk>
+From: Sui Jingfeng <15330273260@189.cn>
+In-Reply-To: <alpine.DEB.2.21.2306190339590.14084@angie.orcam.me.uk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Tue, 20 Jun 2023 18:20:12 +0000
 Subject: Re: [Nouveau] [PATCH v7 2/8] PCI/VGA: Deal only with VGA class
  devices
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -51,35 +62,49 @@ Cc: linux-fbdev@vger.kernel.org, Sui Jingfeng <suijingfeng@loongson.cn>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 13 Jun 2023, Sui Jingfeng wrote:
+Hi,
 
-> Deal only with the VGA devcie(pdev->class == 0x0300), so replace the
+On 2023/6/19 11:02, Maciej W. Rozycki wrote:
+> On Tue, 13 Jun 2023, Sui Jingfeng wrote:
+>
+>> Deal only with the VGA devcie(pdev->class == 0x0300), so replace the
+>   Typo here: s/devcie/device/.
+Thanks a lot,
+>> pci_get_subsys() function with pci_get_class(). Filter the non-PCI display
+>> device(pdev->class != 0x0300) out. There no need to process the non-display
+>> PCI device.
+>   I've only come across this patch series now.  Without diving into what
+> this code actually does I have just one question as a matter of interest.
+>
+>> diff --git a/drivers/pci/vgaarb.c b/drivers/pci/vgaarb.c
+>> index c1bc6c983932..22a505e877dc 100644
+>> --- a/drivers/pci/vgaarb.c
+>> +++ b/drivers/pci/vgaarb.c
+>> @@ -1500,7 +1496,9 @@ static int pci_notify(struct notifier_block *nb, unsigned long action,
+>>   	struct pci_dev *pdev = to_pci_dev(dev);
+>>   	bool notify = false;
+>>   
+>> -	vgaarb_dbg(dev, "%s\n", __func__);
+>> +	/* Only deal with VGA class devices */
+>> +	if (pdev->class != PCI_CLASS_DISPLAY_VGA << 8)
+>> +		return 0;
+>   Hmm, shouldn't this also handle PCI_CLASS_NOT_DEFINED_VGA?
 
- Typo here: s/devcie/device/.
+If your machine have only one such a VGA card, it probably don't hurt.
 
-> pci_get_subsys() function with pci_get_class(). Filter the non-PCI display
-> device(pdev->class != 0x0300) out. There no need to process the non-display
-> PCI device.
+But, such a card will also get ignored originally (before applying this 
+patch).
 
- I've only come across this patch series now.  Without diving into what 
-this code actually does I have just one question as a matter of interest.
+>   As far as I
+> know it is the equivalent of PCI_CLASS_DISPLAY_VGA for PCI <= 2.0 devices
+> that were implemented before the idea of PCI device classes has developed
+> into its current form.
 
-> diff --git a/drivers/pci/vgaarb.c b/drivers/pci/vgaarb.c
-> index c1bc6c983932..22a505e877dc 100644
-> --- a/drivers/pci/vgaarb.c
-> +++ b/drivers/pci/vgaarb.c
-> @@ -1500,7 +1496,9 @@ static int pci_notify(struct notifier_block *nb, unsigned long action,
->  	struct pci_dev *pdev = to_pci_dev(dev);
->  	bool notify = false;
->  
-> -	vgaarb_dbg(dev, "%s\n", __func__);
-> +	/* Only deal with VGA class devices */
-> +	if (pdev->class != PCI_CLASS_DISPLAY_VGA << 8)
-> +		return 0;
+If multiple video card problems on your machine is matter,
 
- Hmm, shouldn't this also handle PCI_CLASS_NOT_DEFINED_VGA?  As far as I 
-know it is the equivalent of PCI_CLASS_DISPLAY_VGA for PCI <= 2.0 devices 
-that were implemented before the idea of PCI device classes has developed 
-into its current form.  I may have such a VGA device somewhere.
+then I think it do deserve another patch to clarify this issue and to 
+explain the rationale.
 
-  Maciej
+>   I may have such a VGA device somewhere.
+>
+>    Maciej
