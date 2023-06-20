@@ -1,65 +1,89 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4300973642B
-	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 09:13:54 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 203B8736E21
+	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 15:59:18 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E25D210E272;
-	Tue, 20 Jun 2023 07:13:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CFDA710E2E1;
+	Tue, 20 Jun 2023 13:59:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 02FA210E265;
- Tue, 20 Jun 2023 07:13:48 +0000 (UTC)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-9786fc23505so526870566b.2; 
- Tue, 20 Jun 2023 00:13:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1687245224; x=1689837224;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cHYZLznLEupvmNgdz85Wsrh9nTfIdkBiscUX255Az7M=;
- b=KS2MlNlXd3y1nTza3BQfUQefl0hUFRyaHJjF0aNqen8fNC0xrWWq2Wqj4BXSO/TymI
- 7ZYHqb9Q0z2YI2jLz3j5V3n5Ti55PCYI2DNo0FHlYiLkbjgBrKE94yVJbYGGRKO2JNie
- swEfgr00n17CznG0qqtGxiT9LXeKUpAqB8fL9K0Wiz5Fv4c9DZuG7zH27UlHU+IpIXwj
- /74r3NxBxFV57roZ9AojpB2d+cobw2MJdSENRHLkn+1RSHeZreF8MTrO09njiqaaSNXW
- jaqzeslntv7BXyd++oVljfTIIA2Inss/uW3+u+Ol8tO7biaME1caakBq2wFMkXEmVjx/
- SE8w==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B2AF410E2E4
+ for <nouveau@lists.freedesktop.org>; Tue, 20 Jun 2023 13:59:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1687269549;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=QTLnyrCbOY1xAfP5SqHK9oZhSTIFzQoN+FT5nbHO/xo=;
+ b=O1Ci1He5Pqida7gpPZxPF3LEn2855ZrfPzD8zlsGYkAg6peMgzLrlcATGn1G/HLFDVRfNM
+ Zasx1sj4tuo1TpaYj8iG3GS0oNizqsSDzLjKJPtwcWehCHOUq9hRCmgN30+w8CpXxtjcIJ
+ SCkbmR6lm+HRTxkpnmKjipHZfBmQQnk=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-645-EJNJWMiIOD6zCx_eNbNkPw-1; Tue, 20 Jun 2023 09:59:05 -0400
+X-MC-Unique: EJNJWMiIOD6zCx_eNbNkPw-1
+Received: by mail-ed1-f71.google.com with SMTP id
+ 4fb4d7f45d1cf-514a6909c35so3104319a12.3
+ for <nouveau@lists.freedesktop.org>; Tue, 20 Jun 2023 06:59:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687245224; x=1689837224;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cHYZLznLEupvmNgdz85Wsrh9nTfIdkBiscUX255Az7M=;
- b=PhKwlcxI6JmmLWkWzTHLZJvHrXl4pdduwZH/FSCTK3Uo5+0/L3YsFbdMRQaCSirCCr
- q0AiFInv/+Ov5DXj2r6PmedMfx3g/YfNXx/WiQs8LrljIlAEfszM803HREk94NywVTht
- 2AquCIx8H5RjbM9Rd6wzThFIVO/BKzxcN2XNCxuVsj6J5IPZUUo6Ll8ncUel72S2CMJl
- loKogaZN8y/4owvxCV+tRo7m5cqbiLBKKCsdNO5zxCGabhmncNKXB/CueLbzfS6uV7uB
- mYTNFkW3Oqh7fLi4nzJX8W1BB47rWiqp4YPr/69uCBzNwTbgkNVbNxUGuESJc2sxtG+u
- K61g==
-X-Gm-Message-State: AC+VfDxjTP+GryjyXtpJa7hT5eIwZaJ4tFNlMlCNjv89ruByuQRQE4FW
- 6vR2ik6cBxmAyIh4RbrUdfpGGx6M+OUtuk0Xoz8=
-X-Google-Smtp-Source: ACHHUZ6F96J1yKxnlaxPS5FMbR2w71s7opnQjEhCe3UpSiAY5D8Q7lBEBoaoOSJHfUY5/idqlvCgI9wkZMATl0p2xeQ=
-X-Received: by 2002:a17:907:a412:b0:989:d9d:d911 with SMTP id
- sg18-20020a170907a41200b009890d9dd911mr1975412ejc.69.1687245224382; Tue, 20
- Jun 2023 00:13:44 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1687269544; x=1689861544;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QTLnyrCbOY1xAfP5SqHK9oZhSTIFzQoN+FT5nbHO/xo=;
+ b=Wq/KrODflA/D6LLHJzyuz0LtyqHoG53cpLI6R9RH/qjyV7tU6O0mhVaAlgcB6pobAc
+ vkRi/1e/0Lgm7O52vGo67FoJMBn7+vzveT3BxafaXne3D1TFEYgVYZUWpFMdtFkhM3YK
+ LHeoXcjAkZUGQs6weFoS9FBjD6t0htvK+Lo7sP/7Ar1KLWyP5zEcOtRyV9ZGQrbBmHtU
+ I2q6GwX6Ve8Wx6nWCKI9lkbL/oHzOQzZHUqfDLeN+S5dw/sBaqkbE5Y5C353zQx1a6LF
+ mabmjGuAA8DcjqZ7gLWCbbaQ6tzEFwSPI0COFP2nOcvc/xebIyFoVkNMY0lugoosgLIs
+ a2GQ==
+X-Gm-Message-State: AC+VfDz4cua7lT912gpc3B6sFxFOjtD3sxCoE+nf5oyLTEfp8P9avQYJ
+ lf9VW8W3/Ij6svRN22mUD5B5+f9n/+NpHAQOOZYjxBFSC44+MbkSFxH4lg8/8Z+2VzeSiKDrdwt
+ fc47UQd9CQipe2Inf/8ylv0mqww==
+X-Received: by 2002:aa7:d888:0:b0:51a:23fb:355c with SMTP id
+ u8-20020aa7d888000000b0051a23fb355cmr8076347edq.10.1687269543787; 
+ Tue, 20 Jun 2023 06:59:03 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ6b5AT6QAAjfNGSFqHnSqiPb5mv+npztwci67WB0CYLQf6lJNAROx+U2HhYdxy7fYnS0gvCQg==
+X-Received: by 2002:aa7:d888:0:b0:51a:23fb:355c with SMTP id
+ u8-20020aa7d888000000b0051a23fb355cmr8076320edq.10.1687269543440; 
+ Tue, 20 Jun 2023 06:59:03 -0700 (PDT)
+Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
+ ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
+ by smtp.gmail.com with ESMTPSA id
+ x22-20020aa7dad6000000b0050d83a39e6fsm1278687eds.4.2023.06.20.06.59.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 Jun 2023 06:59:02 -0700 (PDT)
+Message-ID: <a8edf75b-e0f7-a6c7-7d29-f0d39923549b@redhat.com>
+Date: Tue, 20 Jun 2023 14:23:25 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de, mripard@kernel.org,
+ corbet@lwn.net, bskeggs@redhat.com, Liam.Howlett@oracle.com,
+ matthew.brost@intel.com, boris.brezillon@collabora.com,
+ alexdeucher@gmail.com, ogabbay@kernel.org, bagasdotme@gmail.com,
+ willy@infradead.org, jason@jlekstrand.net
 References: <20230620004217.4700-1-dakr@redhat.com>
- <2c92bae3-0003-3c53-8ef1-6e12e5413995@redhat.com>
- <CAPM=9tzMzfuMN_iGD-97_o=QQEDT6Mbb9_u=z_o49TeT7=XUFA@mail.gmail.com>
- <CAFCwf11OwnoxPWHuS_55OXKE7wfHH++1Bk_37DATeCiT07GtMQ@mail.gmail.com>
-In-Reply-To: <CAFCwf11OwnoxPWHuS_55OXKE7wfHH++1Bk_37DATeCiT07GtMQ@mail.gmail.com>
-From: Dave Airlie <airlied@gmail.com>
-Date: Tue, 20 Jun 2023 17:13:31 +1000
-Message-ID: <CAPM=9tyv5Fje0iL0-2oJQBKEsg-nc-YV9q4BSg5SwnBvGvrzDw@mail.gmail.com>
-To: Oded Gabbay <ogabbay@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH drm-next v5 00/14] [RFC] DRM GPUVA Manager &
- Nouveau VM_BIND UAPI
+ <20230620004217.4700-4-dakr@redhat.com>
+ <cf6846ea-5bd0-0b41-b7e6-901c70701751@amd.com>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <cf6846ea-5bd0-0b41-b7e6-901c70701751@amd.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH drm-next v5 03/14] drm: manager to keep track
+ of GPUs VA mappings
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,85 +95,92 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, willy@infradead.org, daniel@ffwll.ch,
- corbet@lwn.net, nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, mripard@kernel.org,
- linux-mm@kvack.org, alexdeucher@gmail.com, boris.brezillon@collabora.com,
- Donald Robson <Donald.Robson@imgtec.com>, Liam.Howlett@oracle.com,
- bagasdotme@gmail.com, christian.koenig@amd.com, jason@jlekstrand.net,
- bskeggs@redhat.com
+Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, Donald Robson <donald.robson@imgtec.com>,
+ Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 20 Jun 2023 at 17:06, Oded Gabbay <ogabbay@kernel.org> wrote:
->
-> On Tue, Jun 20, 2023 at 7:05=E2=80=AFAM Dave Airlie <airlied@gmail.com> w=
-rote:
-> >
-> > Since this is feature is nouveau only currently and doesn't disturb
-> > the current nouveau code paths, I'd like to try and get this work in
-> > tree so other drivers can work from it.
-> >
-> > If there are any major objections to this, I'm happy to pull it back
-> > out again, but I'd like to get some acks/rb in the next couple of days
-> > in order to land some of it.
-> >
-> > Dave.
-> >
-> >
-> > >
-> > > forgot to add your email address to the patch series - sorry about th=
-at.
-> > >
-> > > This series (v5) contains the Documentation changes you requested.
-> > >
-> > > - Danilo
-> > >
-> > > On 6/20/23 02:42, Danilo Krummrich wrote:
-> > > > This patch series provides a new UAPI for the Nouveau driver in ord=
-er to
-> > > > support Vulkan features, such as sparse bindings and sparse residen=
-cy.
-> > > >
-> > > > Furthermore, with the DRM GPUVA manager it provides a new DRM core =
-feature to
-> > > > keep track of GPU virtual address (VA) mappings in a more generic w=
-ay.
-> > > >
-> > > > The DRM GPUVA manager is indented to help drivers implement userspa=
-ce-manageable
-> > > > GPU VA spaces in reference to the Vulkan API. In order to achieve t=
-his goal it
-> > > > serves the following purposes in this context.
-> > > >
-> > > >      1) Provide infrastructure to track GPU VA allocations and mapp=
-ings,
-> > > >         making use of the maple_tree.
-> > > >
-> > > >      2) Generically connect GPU VA mappings to their backing buffer=
-s, in
-> > > >         particular DRM GEM objects.
-> Will this manager be able to connect GPU VA mappings to host memory
-> allocations (aka user pointers) ?
->
-> I only skimmed over the uapi definitions, but from that quick glance I
-> saw you can only pass a (gem) handle to the vm bind uapi.
->
-> I think it is an important feature because you don't want to have two
-> GPU VA managers running in your driver (if that's even possible).
-> Maybe we should at least try to make sure the uapi is/will be
-> compatible with such an extension.
->
+Hi Christian,
 
-I think that would have to be a new uAPI entry point anyways, since
-managing user ptrs is extra, but the uAPI is nouveau specific and
-nouveau has no hostptr support as of now.
+On 6/20/23 08:45, Christian König wrote:
+> Hi Danilo,
+> 
+> sorry for the delayed reply. I've trying to dig myself out of a hole at 
+> the moment.
 
-The gpuva manager is kernel internal, I think adding host ptr tracking
-is useful, but I don't think it's a blocker right now.
+No worries, thank you for taking a look anyway!
 
-One of the reasons I'd like to get this in the tree is to add things
-like that instead of overloading this initial patchset with feature
-creep.
+> 
+> Am 20.06.23 um 02:42 schrieb Danilo Krummrich:
+>> [SNIP]
+>> diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
+>> index bbc721870c13..5ec8148a30ee 100644
+>> --- a/include/drm/drm_gem.h
+>> +++ b/include/drm/drm_gem.h
+>> @@ -36,6 +36,8 @@
+>>   #include <linux/kref.h>
+>>   #include <linux/dma-resv.h>
+>> +#include <linux/list.h>
+>> +#include <linux/mutex.h>
+>>   #include <drm/drm_vma_manager.h>
+>> @@ -379,6 +381,18 @@ struct drm_gem_object {
+>>        */
+>>       struct dma_resv _resv;
+>> +    /**
+>> +     * @gpuva:
+>> +     *
+>> +     * Provides the list of GPU VAs attached to this GEM object.
+>> +     *
+>> +     * Drivers should lock list accesses with the GEMs &dma_resv lock
+>> +     * (&drm_gem_object.resv).
+>> +     */
+>> +    struct {
+>> +        struct list_head list;
+>> +    } gpuva;
+>> +
+>>       /**
+>>        * @funcs:
+>>        *
+> 
+> I'm pretty sure that it's not a good idea to attach this directly to the 
+> GEM object.
 
-Dave.
+Why do you think so? IMHO having a common way to connect mappings to 
+their backing buffers is a good thing, since every driver needs this 
+connection anyway.
+
+E.g. when a BO gets evicted, drivers can just iterate the list of 
+mappings and, as the circumstances require, invalidate the corresponding 
+mappings or to unmap all existing mappings of a given buffer.
+
+What would be the advantage to let every driver implement a driver 
+specific way of keeping this connection? Do you see cases where this 
+kind of connection between mappings and backing buffers wouldn't be good 
+enough? If so, which cases do you have in mind? Maybe we can cover them 
+in a common way as well?
+
+> 
+> As you wrote in the commit message it's highly driver specific what to 
+> map and where to map it.
+
+In the end the common case should be that in a VA space at least every 
+mapping being backed by a BO is represented by a struct drm_gpuva.
+
+> 
+> Instead I suggest to have a separate structure for mappings in a VA 
+> space which driver can then add to their GEM objects or whatever they 
+> want to map into their VMs.
+
+Which kind of separate structure for mappings? Another one analogous to 
+struct drm_gpuva?
+
+- Danilo
+
+> 
+> Regards,
+> Christian.
+> 
+> 
+
