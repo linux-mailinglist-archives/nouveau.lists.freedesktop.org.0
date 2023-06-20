@@ -1,43 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C76047361D0
-	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 05:00:58 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id EABCD736231
+	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 05:33:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 167D910E0FD;
-	Tue, 20 Jun 2023 03:00:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 32C9110E121;
+	Tue, 20 Jun 2023 03:33:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9DDD210E0FD;
- Tue, 20 Jun 2023 03:00:55 +0000 (UTC)
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A06D310E110;
+ Tue, 20 Jun 2023 03:32:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1687230055; x=1718766055;
+ t=1687231977; x=1718767977;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=z5eEsOZD4FR2rx478Lw4DduE9LHSpVA+uLN2qXeFF7o=;
- b=D8dxj+R6FfjrmhohMF/q/QdXFGsd+9TKcl1F0B1zBQR+TyAr+N6B9AED
- TTfKcnUc97BScTGiUB7c0kAL6B80Hcbey54mFRp2QDnP5vlh6MBxrI3JP
- Jyi+/F9B4XnwPP4gmYkRaWtOkpOuQm9s5FhDLwBPnw51w+QkQGIJ6uj6H
- Y68gSenS3MJVeK++YV5zUUVnUeo6RxAA9sFTD1rrqTRnbWgo3kOVSSutM
- 2tXH/HzAOOmEAX+LQB5ZgSqvk5H1CvSiX/7r/NKnfdJzuB5rYlssNxA4E
- yYiI1T4Mmo5uZGzlVBZPzTXMIQigQCw/AfHuhhtmWZUGOVQM5qVCbEVUu g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10746"; a="362291842"
-X-IronPort-AV: E=Sophos;i="6.00,256,1681196400"; d="scan'208";a="362291842"
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jun 2023 20:00:54 -0700
+ bh=vz9Elmf3UeS0RL3UTjU7uNXgCY47ti7fqCDYGrkHqhs=;
+ b=m9tobE2MoUEA6+xAN6tKuRg6pC29TlEust+Ya/vQLh8zFCy7h5Ov0a+k
+ dnK/cCILG9kowFVDJIsIJMVu126+qtzxGYWxeztBdhOsyPWUR1xzXVpWY
+ I4nevD/Ahas2SpikE0RihUsSgVayUbTOjj4Z038Yf6vkL3bYONatz3C3h
+ O/mTTSD+bkp5Ueod1obFWkRr/GWwEM/tNCSwlYv9HF9/hpFvnWE6OvAdd
+ iN6A1hUpDlb53yQ5CmtPD18ohDitiANmX25UBdqn3eD4E00/ZuHT4STCD
+ KnvA/i7/5wlo3wZg5fJoMAwoaFKxLVR1NKZS1l+c/tngcEBH1PjAaTawh A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10746"; a="359758198"
+X-IronPort-AV: E=Sophos;i="6.00,256,1681196400"; d="scan'208";a="359758198"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+ by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Jun 2023 20:32:56 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10746"; a="960604952"
-X-IronPort-AV: E=Sophos;i="6.00,256,1681196400"; d="scan'208";a="960604952"
+X-IronPort-AV: E=McAfee;i="6600,9927,10746"; a="691279341"
+X-IronPort-AV: E=Sophos;i="6.00,256,1681196400"; d="scan'208";a="691279341"
 Received: from lkp-server01.sh.intel.com (HELO 783282924a45) ([10.239.97.150])
- by fmsmga006.fm.intel.com with ESMTP; 19 Jun 2023 20:00:48 -0700
+ by orsmga006.jf.intel.com with ESMTP; 19 Jun 2023 20:32:50 -0700
 Received: from kbuild by 783282924a45 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1qBRbr-0005PI-0C;
- Tue, 20 Jun 2023 03:00:47 +0000
-Date: Tue, 20 Jun 2023 11:00:10 +0800
+ (envelope-from <lkp@intel.com>) id 1qBS6s-0005RH-0F;
+ Tue, 20 Jun 2023 03:32:50 +0000
+Date: Tue, 20 Jun 2023 11:32:33 +0800
 From: kernel test robot <lkp@intel.com>
 To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
  tzimmermann@suse.de, mripard@kernel.org, corbet@lwn.net,
@@ -46,7 +46,7 @@ To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
  boris.brezillon@collabora.com, alexdeucher@gmail.com,
  ogabbay@kernel.org, bagasdotme@gmail.com, willy@infradead.org,
  jason@jlekstrand.net
-Message-ID: <202306201034.GucldV3r-lkp@intel.com>
+Message-ID: <202306201123.4nvLB3cQ-lkp@intel.com>
 References: <20230620004217.4700-4-dakr@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
@@ -66,9 +66,10 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, Donald Robson <donald.robson@imgtec.com>,
- oe-kbuild-all@lists.linux.dev, Dave Airlie <airlied@redhat.com>
+ llvm@lists.linux.dev, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+ Donald Robson <donald.robson@imgtec.com>, oe-kbuild-all@lists.linux.dev,
+ Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
@@ -82,50 +83,41 @@ url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-exec
 base:   2222dcb0775d36de28992f56455ab3967b30d380
 patch link:    https://lore.kernel.org/r/20230620004217.4700-4-dakr%40redhat.com
 patch subject: [PATCH drm-next v5 03/14] drm: manager to keep track of GPUs VA mappings
-config: m68k-allyesconfig (https://download.01.org/0day-ci/archive/20230620/202306201034.GucldV3r-lkp@intel.com/config)
-compiler: m68k-linux-gcc (GCC) 12.3.0
-reproduce: (https://download.01.org/0day-ci/archive/20230620/202306201034.GucldV3r-lkp@intel.com/reproduce)
+config: hexagon-randconfig-r041-20230620 (https://download.01.org/0day-ci/archive/20230620/202306201123.4nvLB3cQ-lkp@intel.com/config)
+compiler: clang version 17.0.0 (https://github.com/llvm/llvm-project.git 4a5ac14ee968ff0ad5d2cc1ffa0299048db4c88a)
+reproduce: (https://download.01.org/0day-ci/archive/20230620/202306201123.4nvLB3cQ-lkp@intel.com/reproduce)
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202306201034.GucldV3r-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202306201123.4nvLB3cQ-lkp@intel.com/
 
 All warnings (new ones prefixed by >>):
 
-   In file included from arch/m68k/include/asm/bug.h:32,
-                    from include/linux/bug.h:5,
-                    from include/linux/thread_info.h:13,
-                    from include/asm-generic/preempt.h:5,
-                    from ./arch/m68k/include/generated/asm/preempt.h:1,
-                    from include/linux/preempt.h:78,
-                    from include/linux/spinlock.h:56,
-                    from include/linux/kref.h:16,
-                    from include/drm/drm_gem.h:37,
-                    from drivers/gpu/drm/drm_gpuva_mgr.c:28:
-   drivers/gpu/drm/drm_gpuva_mgr.c: In function 'drm_gpuva_check_overflow':
->> drivers/gpu/drm/drm_gpuva_mgr.c:675:21: warning: format '%lu' expects argument of type 'long unsigned int', but argument 5 has type 'unsigned int' [-Wformat=]
-     675 |                     "GPUVA address limited to %lu bytes, see Documentation.\n",
-         |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   include/asm-generic/bug.h:97:62: note: in definition of macro '__WARN_printf'
+>> drivers/gpu/drm/drm_gpuva_mgr.c:676:7: warning: format specifies type 'unsigned long' but the argument has type 'unsigned int' [-Wformat]
+     676 |         return WARN(check_add_overflow(addr, range, &end),
+         |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     677 |                     "GPUVA address limited to %lu bytes, see Documentation.\n",
+         |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         |                                               %u
+     678 |                     MTREE_INDEX_SIZE);
+         |                     ^~~~~~~~~~~~~~~~~
+   drivers/gpu/drm/drm_gpuva_mgr.c:663:26: note: expanded from macro 'MTREE_INDEX_SIZE'
+     663 | #define MTREE_INDEX_SIZE sizeof(MTREE_INDEX_TYPE)
+         |                          ^
+   include/asm-generic/bug.h:133:29: note: expanded from macro 'WARN'
+     133 |                 __WARN_printf(TAINT_WARN, format);                      \
+         |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~
+   include/asm-generic/bug.h:97:48: note: expanded from macro '__WARN_printf'
       97 |                 warn_slowpath_fmt(__FILE__, __LINE__, taint, arg);      \
          |                                                              ^~~
-   drivers/gpu/drm/drm_gpuva_mgr.c:674:16: note: in expansion of macro 'WARN'
-     674 |         return WARN(check_add_overflow(addr, range, &end),
-         |                ^~~~
-   drivers/gpu/drm/drm_gpuva_mgr.c:675:49: note: format string is defined here
-     675 |                     "GPUVA address limited to %lu bytes, see Documentation.\n",
-         |                                               ~~^
-         |                                                 |
-         |                                                 long unsigned int
-         |                                               %u
-   drivers/gpu/drm/drm_gpuva_mgr.c: In function '__drm_gpuva_sm_map':
-   drivers/gpu/drm/drm_gpuva_mgr.c:1314:32: warning: variable 'prev' set but not used [-Wunused-but-set-variable]
+   drivers/gpu/drm/drm_gpuva_mgr.c:1314:25: warning: variable 'prev' set but not used [-Wunused-but-set-variable]
     1314 |         struct drm_gpuva *va, *prev = NULL;
-         |                                ^~~~
+         |                                ^
+   2 warnings generated.
 
 
-vim +675 drivers/gpu/drm/drm_gpuva_mgr.c
+vim +676 drivers/gpu/drm/drm_gpuva_mgr.c
 
    668	
    669	static inline bool
@@ -134,8 +126,8 @@ vim +675 drivers/gpu/drm/drm_gpuva_mgr.c
    672		MTREE_INDEX_TYPE end;
    673	
    674		return WARN(check_add_overflow(addr, range, &end),
- > 675			    "GPUVA address limited to %lu bytes, see Documentation.\n",
-   676			    MTREE_INDEX_SIZE);
+   675			    "GPUVA address limited to %lu bytes, see Documentation.\n",
+ > 676			    MTREE_INDEX_SIZE);
    677	}
    678	
 
