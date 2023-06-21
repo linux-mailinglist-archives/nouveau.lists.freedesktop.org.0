@@ -1,42 +1,59 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C53CC73739D
-	for <lists+nouveau@lfdr.de>; Tue, 20 Jun 2023 20:16:02 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A194D73791C
+	for <lists+nouveau@lfdr.de>; Wed, 21 Jun 2023 04:27:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1065810E30D;
-	Tue, 20 Jun 2023 18:16:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 491FA10E3A5;
+	Wed, 21 Jun 2023 02:27:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-41103.protonmail.ch (mail-41103.protonmail.ch
- [185.70.41.103])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B9DC810E30D
- for <nouveau@lists.freedesktop.org>; Tue, 20 Jun 2023 18:15:59 +0000 (UTC)
-Date: Tue, 20 Jun 2023 18:15:51 +0000
-Authentication-Results: mail-41103.protonmail.ch;
- dkim=pass (2048-bit key) header.d=emersion.fr header.i=@emersion.fr
- header.b="Ok/pIhGB"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=emersion.fr;
- s=protonmail; t=1687284952; x=1687544152;
- bh=r+cjdol+ePEhSgSDwiwVOcI82Gms+opxLXafMwB8bgs=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=Ok/pIhGBSQiLjYvKyfCxuDjR05e/RQaJLoy7izQdLNx1bqU0/f4K1a+cTkK9o2Z7R
- AN2MqYZy92QUMEMT4/Esq3OY1hChmVbxB3Ubii61rXwuM65+6M9GuIuFMx8+pnC0KD
- 9OL6TaBJP27KwaSL/J/nTyxX0N2TsYZQlfiebzZPLv0rosaCfC5t8SL4HgOZRQdUOZ
- 73GALQH8RA3brLE89yEFp4VfQ31Q7OE2WM5meO/QZXipyldNjk6i8RzYOxm1DSYRkF
- MPbJEoD0ituv6iNBUPIjUnKZ5cadTNm1Kt5UYM0l/fAsWrvi38/SGYWhhBXk0drFKK
- Femhlg6/beD+g==
-To: nouveau@lists.freedesktop.org
-From: Simon Ser <contact@emersion.fr>
-Message-ID: <20230620181547.272476-1-contact@emersion.fr>
-Feedback-ID: 1358184:user:proton
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 05DDC10E3A0;
+ Wed, 21 Jun 2023 02:26:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1687314418; x=1718850418;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=EoAhUS47E9izYuucHbuu0d9aZFBnVw73UJlUamg3hvE=;
+ b=eRcupdudGNjo7rl2hVb99J8U8zsZeGKfKDf/XikGrX+A+/oMN5NtdGKT
+ yKhzv2uOQfHkvfUUhrwvldZsrYvdwzFXh/3XYKg+gnWHmOJE60CPY4CdH
+ JKoZv0fghhmVhp5mRIVcov9koVfc8RNuGtbLtMptxiTiZ7vEVwH4fHMmj
+ Ao+TZEeq3p6PzdjSSjHKA+I8177FE3vlAF3/tjy2W8qgaIbggOec4UqG8
+ G5anWiD3+J9s1p/AsmlJEXJqLbGbQReJN89GXyuFGce16TJxAE83oNle3
+ Vvou1gVfm5WzTO/WtQhHg/zAq20/IlzNVpBYzdyJmEsAlUkUDcuGtUgfh Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10747"; a="362584505"
+X-IronPort-AV: E=Sophos;i="6.00,259,1681196400"; d="scan'208";a="362584505"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+ by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 20 Jun 2023 19:26:56 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10747"; a="779670492"
+X-IronPort-AV: E=Sophos;i="6.00,259,1681196400"; d="scan'208";a="779670492"
+Received: from lkp-server01.sh.intel.com (HELO 783282924a45) ([10.239.97.150])
+ by fmsmga008.fm.intel.com with ESMTP; 20 Jun 2023 19:26:52 -0700
+Received: from kbuild by 783282924a45 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1qBnYZ-0006Sg-1R;
+ Wed, 21 Jun 2023 02:26:51 +0000
+Date: Wed, 21 Jun 2023 10:26:16 +0800
+From: kernel test robot <lkp@intel.com>
+To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
+ tzimmermann@suse.de, mripard@kernel.org, corbet@lwn.net,
+ christian.koenig@amd.com, bskeggs@redhat.com,
+ Liam.Howlett@oracle.com, matthew.brost@intel.com,
+ boris.brezillon@collabora.com, alexdeucher@gmail.com,
+ ogabbay@kernel.org, bagasdotme@gmail.com, willy@infradead.org,
+ jason@jlekstrand.net
+Message-ID: <202306211017.r9G5NqSc-lkp@intel.com>
+References: <20230620004217.4700-10-dakr@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Subject: [Nouveau] [PATCH] drm/nouveau/disp: use
- drm_kms_helper_connector_hotplug_event()
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230620004217.4700-10-dakr@redhat.com>
+Subject: Re: [Nouveau] [PATCH drm-next v5 09/14] drm/nouveau: fence:
+ separate fence alloc and emit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,69 +65,72 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, Ben Skeggs <bskeggs@redhat.com>
+Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, oe-kbuild-all@lists.linux.dev
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This adds more information to the hotplug uevent and lets user-space
-know that it's about a particular connector only.
+Hi Danilo,
 
-Signed-off-by: Simon Ser <contact@emersion.fr>
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: David Airlie <airlied@linux.ie>
-Cc: Karol Herbst <kherbst@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_display.c | 17 ++++++++++++++---
- 1 file changed, 14 insertions(+), 3 deletions(-)
+kernel test robot noticed the following build errors:
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/no=
-uveau/nouveau_display.c
-index ec3ffff487fc..99977e5fe716 100644
---- a/drivers/gpu/drm/nouveau/nouveau_display.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-@@ -465,7 +465,8 @@ nouveau_display_hpd_work(struct work_struct *work)
- =09struct drm_connector *connector;
- =09struct drm_connector_list_iter conn_iter;
- =09u32 pending;
--=09bool changed =3D false;
-+=09int changed =3D 0;
-+=09struct drm_connector *first_changed_connector =3D NULL;
-=20
- =09pm_runtime_get_sync(dev->dev);
-=20
-@@ -509,7 +510,12 @@ nouveau_display_hpd_work(struct work_struct *work)
- =09=09if (old_epoch_counter =3D=3D connector->epoch_counter)
- =09=09=09continue;
-=20
--=09=09changed =3D true;
-+=09=09changed++;
-+=09=09if (!first_changed_connector) {
-+=09=09=09drm_connector_get(connector);
-+=09=09=09first_changed_connector =3D connector;
-+=09=09}
-+
- =09=09drm_dbg_kms(dev, "[CONNECTOR:%d:%s] status updated from %s to %s (ep=
-och counter %llu->%llu)\n",
- =09=09=09    connector->base.id, connector->name,
- =09=09=09    drm_get_connector_status_name(old_status),
-@@ -520,9 +526,14 @@ nouveau_display_hpd_work(struct work_struct *work)
- =09drm_connector_list_iter_end(&conn_iter);
- =09mutex_unlock(&dev->mode_config.mutex);
-=20
--=09if (changed)
-+=09if (changed =3D=3D 1)
-+=09=09drm_kms_helper_connector_hotplug_event(first_changed_connector);
-+=09else if (changed > 0)
- =09=09drm_kms_helper_hotplug_event(dev);
-=20
-+=09if (first_changed_connector)
-+=09=09drm_connector_put(first_changed_connector);
-+
- =09pm_runtime_mark_last_busy(drm->dev->dev);
- noop:
- =09pm_runtime_put_autosuspend(dev->dev);
---=20
-2.41.0
+[auto build test ERROR on 2222dcb0775d36de28992f56455ab3967b30d380]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-execution-context-for-GEM-buffers-v4/20230620-084448
+base:   2222dcb0775d36de28992f56455ab3967b30d380
+patch link:    https://lore.kernel.org/r/20230620004217.4700-10-dakr%40redhat.com
+patch subject: [PATCH drm-next v5 09/14] drm/nouveau: fence: separate fence alloc and emit
+config: arm64-allyesconfig (https://download.01.org/0day-ci/archive/20230621/202306211017.r9G5NqSc-lkp@intel.com/config)
+compiler: aarch64-linux-gcc (GCC) 12.3.0
+reproduce: (https://download.01.org/0day-ci/archive/20230621/202306211017.r9G5NqSc-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202306211017.r9G5NqSc-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+   drivers/gpu/drm/nouveau/nouveau_dmem.c: In function 'nouveau_dmem_migrate_chunk':
+>> drivers/gpu/drm/nouveau/nouveau_dmem.c:681:43: error: 'chunk' undeclared (first use in this function)
+     681 |                 nouveau_fence_emit(fence, chunk->drm->dmem->migrate.chan);
+         |                                           ^~~~~
+   drivers/gpu/drm/nouveau/nouveau_dmem.c:681:43: note: each undeclared identifier is reported only once for each function it appears in
 
 
+vim +/chunk +681 drivers/gpu/drm/nouveau/nouveau_dmem.c
+
+   664	
+   665	static void nouveau_dmem_migrate_chunk(struct nouveau_drm *drm,
+   666			struct nouveau_svmm *svmm, struct migrate_vma *args,
+   667			dma_addr_t *dma_addrs, u64 *pfns)
+   668	{
+   669		struct nouveau_fence *fence;
+   670		unsigned long addr = args->start, nr_dma = 0, i;
+   671	
+   672		for (i = 0; addr < args->end; i++) {
+   673			args->dst[i] = nouveau_dmem_migrate_copy_one(drm, svmm,
+   674					args->src[i], dma_addrs + nr_dma, pfns + i);
+   675			if (!dma_mapping_error(drm->dev->dev, dma_addrs[nr_dma]))
+   676				nr_dma++;
+   677			addr += PAGE_SIZE;
+   678		}
+   679	
+   680		if (!nouveau_fence_new(&fence))
+ > 681			nouveau_fence_emit(fence, chunk->drm->dmem->migrate.chan);
+   682		migrate_vma_pages(args);
+   683		nouveau_dmem_fence_done(&fence);
+   684		nouveau_pfns_map(svmm, args->vma->vm_mm, args->start, pfns, i);
+   685	
+   686		while (nr_dma--) {
+   687			dma_unmap_page(drm->dev->dev, dma_addrs[nr_dma], PAGE_SIZE,
+   688					DMA_BIDIRECTIONAL);
+   689		}
+   690		migrate_vma_finalize(args);
+   691	}
+   692	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
