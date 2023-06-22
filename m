@@ -2,59 +2,125 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 426697396A4
-	for <lists+nouveau@lfdr.de>; Thu, 22 Jun 2023 07:08:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 66D2973A23C
+	for <lists+nouveau@lfdr.de>; Thu, 22 Jun 2023 15:55:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 128CC10E4C2;
-	Thu, 22 Jun 2023 05:08:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A052E10E566;
+	Thu, 22 Jun 2023 13:55:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
- by gabe.freedesktop.org (Postfix) with ESMTP id 469BB10E4C2;
- Thu, 22 Jun 2023 05:08:23 +0000 (UTC)
-Received: from loongson.cn (unknown [10.20.42.43])
- by gateway (Coremail) with SMTP id _____8Axz8dE15NkH1cAAA--.545S3;
- Thu, 22 Jun 2023 13:08:20 +0800 (CST)
-Received: from [10.20.42.43] (unknown [10.20.42.43])
- by localhost.localdomain (Coremail) with SMTP id
- AQAAf8BxrM4_15Nk16ABAA--.9048S3; 
- Thu, 22 Jun 2023 13:08:15 +0800 (CST)
-Message-ID: <0dd961ae-78a7-0b67-af51-008ecbcdbbef@loongson.cn>
-Date: Thu, 22 Jun 2023 13:08:15 +0800
-MIME-Version: 1.0
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2070.outbound.protection.outlook.com [40.107.93.70])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7BD9310E563;
+ Thu, 22 Jun 2023 13:54:59 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=J7ckdXmc5r339tqodzgh1XyiZoiKynvuSGLIlPwqRsw/Vg26CROsoQk1BHXHmD2DVOsv0CiJM1i2/5npUMwwgb3FlyjU8t64AT8FwZND0QkZWKXcIcCJWCof2rTXdT+7ijQ4RBf0mL+OZr8SgVOqXAAwAyojGNpPI8xaVw5Lfw9sM/hLqFAQ7HexbgO/pUdOZ7smc8fToVdNLkVHMMvoLHqJ3lH/eWjDwPQkG4IEwePqoJAqlNrrLEHz3WWOQ8AlPD2cf7KqlY7Qv5pokHaasv+v/6RFFr3skUKqYIYrlgCvLcbf9inU6NylE6YghNTMyaMi7/X16PROeFt/IopBiA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=s+shdh6NGArwfLr6NFjRBJWkoog4c2JJdwtGauzW2dQ=;
+ b=T2+c98VI/xfr6bcu4dk3RF06pJBMdOz9Vauj224Hz7iAosZL5fuoDrmyDSFk39E4LudkYsbIOlg/gRQutUXgK2ulNql4TNd8hdrAuIeZoEdma5t4+ONY6qrxXx298CFDDg94hwXkvVgYsNY4o9T7jCRBr+rAxH4A9nrogoWPDfAsddG8xoOlgeMnJS2RQG34x1ROAzIRAXKSkiqYupYC3spAMLOoFyK06/PgdVAEr8yOx8LSs8ambTCq+ZZ68DO5s3ED0qv9a8xSzAnbhJhdqQKxIFLUE555fTW53vLPPqOH1I/G7rVYUbs2AEW8O/LqMxXSUhjMfZK1BHx35LRT9w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=s+shdh6NGArwfLr6NFjRBJWkoog4c2JJdwtGauzW2dQ=;
+ b=N3mpkoDx6nTOPq97Y+YmeT/XIT+qYZ2dY6A84VAI4oVqDUS2OQbA+YtdfvFCDiedWXOaYWif9LDF3SqaTrii9kgHT3gYxT12BkKDWmgqoC8ZngRYNkBDL4aqK4CX5g15Q5B4g6yin8MEBaJfnpTHXJp630i/kPswt4uT4Pb9JIA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by MW4PR12MB6683.namprd12.prod.outlook.com (2603:10b6:303:1e2::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6521.24; Thu, 22 Jun
+ 2023 13:54:57 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::384a:95a4:8819:ee84]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::384a:95a4:8819:ee84%7]) with mapi id 15.20.6521.024; Thu, 22 Jun 2023
+ 13:54:57 +0000
+Message-ID: <41aecd10-9956-0752-2838-34c97834f0c8@amd.com>
+Date: Thu, 22 Jun 2023 15:54:51 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
 Content-Language: en-US
-To: Sui Jingfeng <15330273260@189.cn>, Bjorn Helgaas <bhelgaas@google.com>
-References: <20230613030151.216625-1-15330273260@189.cn>
- <20230613030151.216625-7-15330273260@189.cn>
-From: Sui Jingfeng <suijingfeng@loongson.cn>
-Organization: Loongson
-In-Reply-To: <20230613030151.216625-7-15330273260@189.cn>
+To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
+ tzimmermann@suse.de, mripard@kernel.org, corbet@lwn.net, bskeggs@redhat.com,
+ Liam.Howlett@oracle.com, matthew.brost@intel.com,
+ boris.brezillon@collabora.com, alexdeucher@gmail.com, ogabbay@kernel.org,
+ bagasdotme@gmail.com, willy@infradead.org, jason@jlekstrand.net
+References: <20230620004217.4700-1-dakr@redhat.com>
+ <20230620004217.4700-4-dakr@redhat.com>
+ <cf6846ea-5bd0-0b41-b7e6-901c70701751@amd.com>
+ <a8edf75b-e0f7-a6c7-7d29-f0d39923549b@redhat.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <a8edf75b-e0f7-a6c7-7d29-f0d39923549b@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: AQAAf8BxrM4_15Nk16ABAA--.9048S3
-X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
-X-Coremail-Antispam: 1Uk129KBj93XoW3KF1DJw4UAw1xZry3ur45Jwc_yoWDtF13pF
- 4rJF15Ar97ZF4I9w47Xa4UAFyYv3y0va4fGrW7A34Y9a43Ar9YgF9YyFy5tryxJrZrCF43
- tryDKFWxuF1jvFcCm3ZEXasCq-sJn29KB7ZKAUJUUUUf529EdanIXcx71UUUUU7KY7ZEXa
- sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
- 0xBIdaVrnRJUUUPvb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
- IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
- e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
- 0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv6xkF7I0E14v2
- 6r4UJVWxJr1ln4kS14v26r126r1DM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12
- xvs2x26I8E6xACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r12
- 6r1DMcIj6I8E87Iv67AKxVWxJVW8Jr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI4
- 8JMxk0xIA0c2IEe2xFo4CEbIxvr21lc7CjxVAaw2AFwI0_GFv_Wryl42xK82IYc2Ij64vI
- r41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xFxVAFwI0_JF0_Jw1lx2IqxVAqx4xG67
- AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26rWY6r4UJwCI
- c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267
- AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Cr0_
- Gr1UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73UjIFyTuYvjxUsl
- 4iUUUUU
-Subject: Re: [Nouveau] [PATCH v7 6/8] PCI/VGA: Introduce is_boot_device
- function callback to vga_client_register
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR3P281CA0012.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1d::15) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|MW4PR12MB6683:EE_
+X-MS-Office365-Filtering-Correlation-Id: 118ca507-aea3-4868-9e17-08db73284348
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: cvmjLVgyGqtgULEgTAY23QGsp3qhLhgwVHjMl1XFvM8V+chl84h3IQNdMhcbQUqbBiJAtbWmnby+Oya1JWHJJPwl1es8aYjIdhlNiqwPro88aqVZjYw0l216ulPkituFuBpPHNaI6b8eiw5dA1BkPU9eIFLLdr6CpBLg2nbjzPskw6GtXmKFp+h9ZxlxdELwo6E0uEwQZHJTBRHWVJ6G/AOXnjaHpNXmgR1t58xUXsHW8xMxXVoLIGEA8/YQZt7EzwRWb37+IOf9hHjuFFBiRIWJxMGs46zbJ/Zs+Mjmwgu5DeOU6cLUk/x85ABMuqUad7xNppklN9FFDC0Oi7WCs5B/gZxkbHyYo9kwUS8nmwodgqAArDzfOmaV8h8tX6+Xb1pqqIcL7ouGrsWKg3H6tGgbfPgJUQajcR4tPKVWr83LgQlfkSyw5DUL6XKfN7n6fDnIGrBz0+6TuKDQ6MmpiA4PFP7ykp+8a257Rb3AegrMJzVUv9sQwClS7W65C0OCPSO2LwiRqQWRAr+zXJXyh6nrSJv/LUpYC2o8UlTCUnjmKwUOFgmgZlVSYkeykyBuQCOj8NmtDP6iCJvbnnh4HTbNetllSvcxHpINT+LHZvRfragepisnGnjG/4L2twuRUBm7duNHTdVzMvYpKVSNTkBzjcxdo8EIIXkwOSsfsNo=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230028)(4636009)(366004)(346002)(396003)(136003)(39860400002)(376002)(451199021)(2906002)(7416002)(5660300002)(38100700002)(921005)(31696002)(86362001)(36756003)(478600001)(54906003)(6666004)(6486002)(41300700001)(316002)(8676002)(8936002)(66476007)(66556008)(66946007)(4326008)(66574015)(186003)(6512007)(53546011)(6506007)(83380400001)(2616005)(31686004)(45980500001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?c01ZVjNLd0o2Z3N3UnRha3BnV2VJM2krY2ZyQ2d6TkxTS3hLR2p0S1Q4eDNm?=
+ =?utf-8?B?NmVZWUtLQTc5WHEzeE5wQnFnSVJIOGNxTnJ3QVFvY1laNS9iSFI4d0RoVlFh?=
+ =?utf-8?B?RFRKSERGTGcxRWdsNnV6M1ZLWnVKaVRYUnJwTUJsUENna2ZqNnNscTVwd2Zt?=
+ =?utf-8?B?UmxweVdQKytLWmdLK0JkQnVBTk9RZEY4dU5lTGVPL0NLU2tUT05HVEwzK1dr?=
+ =?utf-8?B?WDBYNHJFb251N2pzRld0UjE0Ry8xM3c4VHhsOW44K2xldHJ4L2dvWU9BNEZW?=
+ =?utf-8?B?amlwNUNNMXhETGJwMXhndHJEN2xIZ0NaMUc4cjYvYnQ2eWViT2t4WHo0RHJ1?=
+ =?utf-8?B?dFd0eFBYNzRnTW5ZM1FDZzgyRWhMekFpTlViaVlSTDdKZmNRZUd2dVY0bkhr?=
+ =?utf-8?B?V2VqOG1IT2I5bnBBbnZJRzdQSTdPamJzU1FGY3FtZmtNVEFoaXZGTGdtNnJE?=
+ =?utf-8?B?dmFVWDQ4TnFVMTFHVmRkQ2FZU2RWNENCMkpuQTMvKyszYlJldTF5V1VEOXBu?=
+ =?utf-8?B?WW93THVEbkZKbE1xLzdvRCswNEJlYktaZGh6N0JZMGxKV1pMRmRKb3RYdlFK?=
+ =?utf-8?B?bW94WTJnUWRpUDVJTWFvWDJzZlBnSmMwRWRreXAvUmJMcEs2bWtLUXRzU3lG?=
+ =?utf-8?B?KzhXclRTakN3Z1R1cDdaUTdPUE1JV2gvaDM1TUhkSlhYbTJDOGxPNFpoQW11?=
+ =?utf-8?B?Sm9vbEtEYk4wL1hQYm15Vi9KNUhJdlVITjVXakUzWHNzS09FQXZhZjA4Z1Jq?=
+ =?utf-8?B?ZXk0STE0TjdTTUJyTXRCeGVmdDRoOG5DcWFMcWU3RnM4eGt6c3hSNkdoalBo?=
+ =?utf-8?B?dlZ4dk05U0o5RHUrSEpVQ1hlSlR2MDRBalVIS2VhbENZQUowKy9ScWNtSVVX?=
+ =?utf-8?B?MWhGVVFpdlJUOUs4WUJML1hnY1RKRWM2YWFBVElyVkxIQldFb1VRclVrcVNk?=
+ =?utf-8?B?OTNuK2FHdjRMQ3Vobit1bG9iTitCbmNzWTRxeSt3VXJTdTF3VWVOY0VjNjgr?=
+ =?utf-8?B?ak0yVExYSGhKYmpoZk9GNDhuUUtGNzNZNEFJN1E3NUk1MGdydkpSRGJodDdo?=
+ =?utf-8?B?ZEJLSzRobnVSTm5Fc0hRdzYxRWQ4L3doVlhmb3VDN1BSbzZLSXBoenk5eitY?=
+ =?utf-8?B?VDNvNC8wV0JQcExjUUdLSHdxaWdlRXVLWG9oKzNlUUNBQ1plNDJDL24yelZF?=
+ =?utf-8?B?OEVaZE9XWDRUeGdyRXBCRUJiNFdQV0ZhREJSZUhKWG1NVXViM0h0VkcxTng3?=
+ =?utf-8?B?ZHpJUnVLQVR6S01TN0lSUTBNckFDbDlya3lBOHZrczVPWFBJWjByOG5zUGdM?=
+ =?utf-8?B?MWx3QzdsSE9xMlpFckVSVVhaYmNxMk9HcmlEbVRKb3ZSUHhjbEQzQmtMeFdJ?=
+ =?utf-8?B?dklEYmxQZis1clgyVDhvaW1HQWJuTVNuZlAyUTI3clZ1RUFVS0FFSW5FeUtN?=
+ =?utf-8?B?eC9WbWZtTDN1K3g2VEhWUFhtV3ZTcEgrNlJlUHd2Ny94WWs5TWRnYmQwWUs2?=
+ =?utf-8?B?M3I3US8xSHdhTHd6RVpZbE0xWFoxcjFKY3hoL2NjdjRsdEorZ3J6ZlV2S2U4?=
+ =?utf-8?B?TDFrcjJMWUZJTUlFN2hVenAvWW9GZ1ZDN1UxUWxncWpuT0Jta1VjOGpMbCto?=
+ =?utf-8?B?S3JhVTNWV1dXQzBoL0JDWEgvY0V6bHIwMmhSNFNJN3JxUFBEWnhsdWltZHJm?=
+ =?utf-8?B?N0xQVDFnTmMyV2RPbytjbkQzeG52R09yNE11TWs5aTZCSmpmVHcwZ0ttcVJ5?=
+ =?utf-8?B?OVlsTFhNd3QwOXpQdWxBNUdBeXBGQ25NNzFwUGtkU2lNMjlIN1N0T3RIMjVI?=
+ =?utf-8?B?VUd3SngwRUFSV3A3TlhyNjUvQ2dqUHNvWnJHN3B2L2dHZmtPS0N4VVJxRFJ6?=
+ =?utf-8?B?K0laTWY4V2tkMHlqK1BCc1FkZGJrV3dsRTNsU1RmaWNacG1WV0I4amd6QjdD?=
+ =?utf-8?B?VXpMYVo4TTdvTFpBbGVDZTBJNjh4LzZ3NDJCaXMrQmpucEI3RDI1Rjd1dnlF?=
+ =?utf-8?B?dGJteUNiVWJDOVpYUlNkU3RZSVdzbjRZN09PQkpramVLUEtacTIyQTkzc1N0?=
+ =?utf-8?B?eUJPTi9maVQzaVZsSVpndkw0M3prMHRSVHNVZ3FQVWlFUStDMWVvVVRQZlNK?=
+ =?utf-8?B?Wmc4R3ZKam9qNXl5eTJkQk0zTERwbngzVXk3aDdnN3pQQUZ2NzlJT05TdHNl?=
+ =?utf-8?Q?aFfIkRH4QLvlgmEbPGDZYBomMM7hNGTaO2n3h6fBumRY?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 118ca507-aea3-4868-9e17-08db73284348
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jun 2023 13:54:57.1208 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: WV9aN4OUL8VmVyvbtRTs5CD04l85uWRAt46eWxkdCkejs8zcG4Esa95Y+aIGnkqY
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6683
+Subject: Re: [Nouveau] [PATCH drm-next v5 03/14] drm: manager to keep track
+ of GPUs VA mappings
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,279 +132,123 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-fbdev@vger.kernel.org, Cornelia Huck <cohuck@redhat.com>,
- nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, YiPeng Chai <YiPeng.Chai@amd.com>,
- Mario Limonciello <mario.limonciello@amd.com>, Likun Gao <Likun.Gao@amd.com>,
- Ville Syrjala <ville.syrjala@linux.intel.com>, Yi Liu <yi.l.liu@intel.com>,
- kvm@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- Jason Gunthorpe <jgg@ziepe.ca>, Ben Skeggs <bskeggs@redhat.com>,
- linux-pci@vger.kernel.org, Kevin Tian <kevin.tian@intel.com>,
- Lijo Lazar <lijo.lazar@amd.com>, Bokun Zhang <Bokun.Zhang@amd.com>,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Alex Williamson <alex.williamson@redhat.com>,
- Abhishek Sahu <abhsahu@nvidia.com>, Maxime Ripard <mripard@kernel.org>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Yishai Hadas <yishaih@nvidia.com>, Pan Xinhui <Xinhui.Pan@amd.com>,
- linux-kernel@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
- Alex Deucher <alexander.deucher@amd.com>,
- Christian Konig <christian.koenig@amd.com>,
- Hawking Zhang <Hawking.Zhang@amd.com>
+Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, Donald Robson <donald.robson@imgtec.com>,
+ Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
-
-
-A nouveau developer(Lyude) from redhat send me a R-B,
-
-Thanks for the developers of nouveau project.
-
-
-Please allow me add a link[1] here.
-
-
-[1] 
-https://lore.kernel.org/all/0afadc69f99a36bc9d03ecf54ff25859dbc10e28.camel@redhat.com/
-
-
-On 2023/6/13 11:01, Sui Jingfeng wrote:
-> From: Sui Jingfeng <suijingfeng@loongson.cn>
+Am 20.06.23 um 14:23 schrieb Danilo Krummrich:
+> Hi Christian,
 >
-> The vga_is_firmware_default() function is arch-dependent, it's probably
-> wrong if we simply remove the arch guard. As the VRAM BAR which contains
-> firmware framebuffer may move, while the lfb_base and lfb_size members of
-> the screen_info does not change accordingly. In short, it should take the
-> re-allocation of the PCI BAR into consideration.
+> On 6/20/23 08:45, Christian König wrote:
+>> Hi Danilo,
+>>
+>> sorry for the delayed reply. I've trying to dig myself out of a hole 
+>> at the moment.
 >
-> With the observation that device drivers or video aperture helpers may
-> have better knowledge about which PCI bar contains the firmware fb,
-> which could avoid the need to iterate all of the PCI BARs. But as a PCI
-> function at pci/vgaarb.c, vga_is_firmware_default() is not suitable to
-> make such an optimization since it is loaded too early.
+> No worries, thank you for taking a look anyway!
 >
-> There are PCI display controllers that don't have a dedicated VRAM bar,
-> this function will lose its effectiveness in such a case. Luckily, the
-> device driver can provide an accurate workaround.
+>>
+>> Am 20.06.23 um 02:42 schrieb Danilo Krummrich:
+>>> [SNIP]
+>>> diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
+>>> index bbc721870c13..5ec8148a30ee 100644
+>>> --- a/include/drm/drm_gem.h
+>>> +++ b/include/drm/drm_gem.h
+>>> @@ -36,6 +36,8 @@
+>>>   #include <linux/kref.h>
+>>>   #include <linux/dma-resv.h>
+>>> +#include <linux/list.h>
+>>> +#include <linux/mutex.h>
+>>>   #include <drm/drm_vma_manager.h>
+>>> @@ -379,6 +381,18 @@ struct drm_gem_object {
+>>>        */
+>>>       struct dma_resv _resv;
+>>> +    /**
+>>> +     * @gpuva:
+>>> +     *
+>>> +     * Provides the list of GPU VAs attached to this GEM object.
+>>> +     *
+>>> +     * Drivers should lock list accesses with the GEMs &dma_resv lock
+>>> +     * (&drm_gem_object.resv).
+>>> +     */
+>>> +    struct {
+>>> +        struct list_head list;
+>>> +    } gpuva;
+>>> +
+>>>       /**
+>>>        * @funcs:
+>>>        *
+>>
+>> I'm pretty sure that it's not a good idea to attach this directly to 
+>> the GEM object.
 >
-> Therefore, this patch introduces a callback that allows the device driver
-> to tell the VGAARB if the device is the default boot device. This patch
-> only intends to introduce the mechanism, while the implementation is left
-> to the device driver authors. Also honor the comment: "Clients have two
-> callback mechanisms they can use"
+> Why do you think so? IMHO having a common way to connect mappings to 
+> their backing buffers is a good thing, since every driver needs this 
+> connection anyway.
 >
-> Cc: Alex Deucher <alexander.deucher@amd.com>
-> Cc: Christian Konig <christian.koenig@amd.com>
-> Cc: Pan Xinhui <Xinhui.Pan@amd.com>
-> Cc: David Airlie <airlied@gmail.com>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: Jani Nikula <jani.nikula@linux.intel.com>
-> Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
-> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-> Cc: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> Cc: Karol Herbst <kherbst@redhat.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: Bjorn Helgaas <bhelgaas@google.com>
-> Cc: Alex Williamson <alex.williamson@redhat.com>
-> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-> Cc: Maxime Ripard <mripard@kernel.org>
-> Cc: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Hawking Zhang <Hawking.Zhang@amd.com>
-> Cc: Mario Limonciello <mario.limonciello@amd.com>
-> Cc: Lijo Lazar <lijo.lazar@amd.com>
-> Cc: YiPeng Chai <YiPeng.Chai@amd.com>
-> Cc: Bokun Zhang <Bokun.Zhang@amd.com>
-> Cc: Likun Gao <Likun.Gao@amd.com>
-> Cc: Ville Syrjala <ville.syrjala@linux.intel.com>
-> Cc: Jason Gunthorpe <jgg@ziepe.ca>
-> CC: Kevin Tian <kevin.tian@intel.com>
-> Cc: Cornelia Huck <cohuck@redhat.com>
-> Cc: Yishai Hadas <yishaih@nvidia.com>
-> Cc: Abhishek Sahu <abhsahu@nvidia.com>
-> Cc: Yi Liu <yi.l.liu@intel.com>
-> Signed-off-by: Sui Jingfeng <suijingfeng@loongson.cn>
-> ---
->   drivers/gpu/drm/amd/amdgpu/amdgpu_device.c |  2 +-
->   drivers/gpu/drm/i915/display/intel_vga.c   |  3 +--
->   drivers/gpu/drm/nouveau/nouveau_vga.c      |  2 +-
->   drivers/gpu/drm/radeon/radeon_device.c     |  2 +-
->   drivers/pci/vgaarb.c                       | 21 ++++++++++++++++++++-
->   drivers/vfio/pci/vfio_pci_core.c           |  2 +-
->   include/linux/vgaarb.h                     |  8 +++++---
->   7 files changed, 30 insertions(+), 10 deletions(-)
+> E.g. when a BO gets evicted, drivers can just iterate the list of 
+> mappings and, as the circumstances require, invalidate the 
+> corresponding mappings or to unmap all existing mappings of a given 
+> buffer.
 >
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-> index 5c7d40873ee2..7a096f2d5c16 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-> @@ -3960,7 +3960,7 @@ int amdgpu_device_init(struct amdgpu_device *adev,
->   	/* this will fail for cards that aren't VGA class devices, just
->   	 * ignore it */
->   	if ((adev->pdev->class >> 8) == PCI_CLASS_DISPLAY_VGA)
-> -		vga_client_register(adev->pdev, amdgpu_device_vga_set_decode);
-> +		vga_client_register(adev->pdev, amdgpu_device_vga_set_decode, NULL);
->   
->   	px = amdgpu_device_supports_px(ddev);
->   
-> diff --git a/drivers/gpu/drm/i915/display/intel_vga.c b/drivers/gpu/drm/i915/display/intel_vga.c
-> index 286a0bdd28c6..98d7d4dffe9f 100644
-> --- a/drivers/gpu/drm/i915/display/intel_vga.c
-> +++ b/drivers/gpu/drm/i915/display/intel_vga.c
-> @@ -115,7 +115,6 @@ intel_vga_set_decode(struct pci_dev *pdev, bool enable_decode)
->   
->   int intel_vga_register(struct drm_i915_private *i915)
->   {
-> -
->   	struct pci_dev *pdev = to_pci_dev(i915->drm.dev);
->   	int ret;
->   
-> @@ -127,7 +126,7 @@ int intel_vga_register(struct drm_i915_private *i915)
->   	 * then we do not take part in VGA arbitration and the
->   	 * vga_client_register() fails with -ENODEV.
->   	 */
-> -	ret = vga_client_register(pdev, intel_vga_set_decode);
-> +	ret = vga_client_register(pdev, intel_vga_set_decode, NULL);
->   	if (ret && ret != -ENODEV)
->   		return ret;
->   
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_vga.c b/drivers/gpu/drm/nouveau/nouveau_vga.c
-> index f8bf0ec26844..162b4f4676c7 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_vga.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_vga.c
-> @@ -92,7 +92,7 @@ nouveau_vga_init(struct nouveau_drm *drm)
->   		return;
->   	pdev = to_pci_dev(dev->dev);
->   
-> -	vga_client_register(pdev, nouveau_vga_set_decode);
-> +	vga_client_register(pdev, nouveau_vga_set_decode, NULL);
->   
->   	/* don't register Thunderbolt eGPU with vga_switcheroo */
->   	if (pci_is_thunderbolt_attached(pdev))
-> diff --git a/drivers/gpu/drm/radeon/radeon_device.c b/drivers/gpu/drm/radeon/radeon_device.c
-> index afbb3a80c0c6..71f2ff39d6a1 100644
-> --- a/drivers/gpu/drm/radeon/radeon_device.c
-> +++ b/drivers/gpu/drm/radeon/radeon_device.c
-> @@ -1425,7 +1425,7 @@ int radeon_device_init(struct radeon_device *rdev,
->   	/* if we have > 1 VGA cards, then disable the radeon VGA resources */
->   	/* this will fail for cards that aren't VGA class devices, just
->   	 * ignore it */
-> -	vga_client_register(rdev->pdev, radeon_vga_set_decode);
-> +	vga_client_register(rdev->pdev, radeon_vga_set_decode, NULL);
->   
->   	if (rdev->flags & RADEON_IS_PX)
->   		runtime = true;
-> diff --git a/drivers/pci/vgaarb.c b/drivers/pci/vgaarb.c
-> index ceb914245383..c574898380f0 100644
-> --- a/drivers/pci/vgaarb.c
-> +++ b/drivers/pci/vgaarb.c
-> @@ -53,6 +53,7 @@ struct vga_device {
->   	bool bridge_has_one_vga;
->   	bool is_firmware_default;	/* device selected by firmware */
->   	unsigned int (*set_decode)(struct pci_dev *pdev, bool decode);
-> +	bool (*is_boot_device)(struct pci_dev *pdev);
->   };
->   
->   static LIST_HEAD(vga_list);
-> @@ -969,6 +970,10 @@ EXPORT_SYMBOL(vga_set_legacy_decoding);
->    * @set_decode callback: If a client can disable its GPU VGA resource, it
->    * will get a callback from this to set the encode/decode state.
->    *
-> + * @is_boot_device: callback to the device driver, query if a client is the
-> + * default boot device, as the device driver typically has better knowledge
-> + * if specific device is the boot device. But this callback is optional.
-> + *
->    * Rationale: we cannot disable VGA decode resources unconditionally, some
->    * single GPU laptops seem to require ACPI or BIOS access to the VGA registers
->    * to control things like backlights etc. Hopefully newer multi-GPU laptops do
-> @@ -984,7 +989,8 @@ EXPORT_SYMBOL(vga_set_legacy_decoding);
->    * Returns: 0 on success, -1 on failure
->    */
->   int vga_client_register(struct pci_dev *pdev,
-> -		unsigned int (*set_decode)(struct pci_dev *pdev, bool decode))
-> +		unsigned int (*set_decode)(struct pci_dev *pdev, bool decode),
-> +		bool (*is_boot_device)(struct pci_dev *pdev))
->   {
->   	int ret = -ENODEV;
->   	struct vga_device *vgadev;
-> @@ -996,6 +1002,7 @@ int vga_client_register(struct pci_dev *pdev,
->   		goto bail;
->   
->   	vgadev->set_decode = set_decode;
-> +	vgadev->is_boot_device = is_boot_device;
->   	ret = 0;
->   
->   bail:
-> @@ -1523,6 +1530,18 @@ static int pci_notify(struct notifier_block *nb, unsigned long action,
->   		notify = vga_arbiter_add_pci_device(pdev);
->   	else if (action == BUS_NOTIFY_DEL_DEVICE)
->   		notify = vga_arbiter_del_pci_device(pdev);
-> +	else if (action == BUS_NOTIFY_BOUND_DRIVER) {
-> +		struct vga_device *vgadev = vgadev_find(pdev);
-> +		bool boot_dev = false;
-> +
-> +		if (vgadev && vgadev->is_boot_device)
-> +			boot_dev = vgadev->is_boot_device(pdev);
-> +
-> +		if (boot_dev) {
-> +			vgaarb_info(&pdev->dev, "Set as boot device (dictated by driver)\n");
-> +			vga_set_default_device(pdev);
-> +		}
-> +	}
->   
->   	vgaarb_dbg(dev, "%s: action = %lu\n", __func__, action);
->   
-> diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
-> index a5ab416cf476..2a8873a330ba 100644
-> --- a/drivers/vfio/pci/vfio_pci_core.c
-> +++ b/drivers/vfio/pci/vfio_pci_core.c
-> @@ -2067,7 +2067,7 @@ static int vfio_pci_vga_init(struct vfio_pci_core_device *vdev)
->   	if (ret)
->   		return ret;
->   
-> -	ret = vga_client_register(pdev, vfio_pci_set_decode);
-> +	ret = vga_client_register(pdev, vfio_pci_set_decode, NULL);
->   	if (ret)
->   		return ret;
->   	vga_set_legacy_decoding(pdev, vfio_pci_set_decode(pdev, false));
-> diff --git a/include/linux/vgaarb.h b/include/linux/vgaarb.h
-> index 97129a1bbb7d..dfde5a6ba55a 100644
-> --- a/include/linux/vgaarb.h
-> +++ b/include/linux/vgaarb.h
-> @@ -33,7 +33,8 @@ struct pci_dev *vga_default_device(void);
->   void vga_set_default_device(struct pci_dev *pdev);
->   int vga_remove_vgacon(struct pci_dev *pdev);
->   int vga_client_register(struct pci_dev *pdev,
-> -		unsigned int (*set_decode)(struct pci_dev *pdev, bool state));
-> +		unsigned int (*set_decode)(struct pci_dev *pdev, bool state),
-> +		bool (*is_boot_device)(struct pci_dev *pdev));
->   #else /* CONFIG_VGA_ARB */
->   static inline void vga_set_legacy_decoding(struct pci_dev *pdev,
->   		unsigned int decodes)
-> @@ -59,7 +60,8 @@ static inline int vga_remove_vgacon(struct pci_dev *pdev)
->   	return 0;
->   }
->   static inline int vga_client_register(struct pci_dev *pdev,
-> -		unsigned int (*set_decode)(struct pci_dev *pdev, bool state))
-> +		unsigned int (*set_decode)(struct pci_dev *pdev, bool state),
-> +		bool (*is_boot_device)(struct pci_dev *pdev))
->   {
->   	return 0;
->   }
-> @@ -97,7 +99,7 @@ static inline int vga_get_uninterruptible(struct pci_dev *pdev,
->   
->   static inline void vga_client_unregister(struct pci_dev *pdev)
->   {
-> -	vga_client_register(pdev, NULL);
-> +	vga_client_register(pdev, NULL, NULL);
->   }
->   
->   #endif /* LINUX_VGA_H */
+> What would be the advantage to let every driver implement a driver 
+> specific way of keeping this connection?
 
--- 
-Jingfeng
+Flexibility. For example on amdgpu the mappings of a BO are groups by VM 
+address spaces.
+
+E.g. the BO points to multiple bo_vm structures which in turn have lists 
+of their mappings.
+
+Additional to that there is a state maschine associated with the 
+mappings, e.g. if the page tables are up to date or need to be updated 
+etc....
+
+> Do you see cases where this kind of connection between mappings and 
+> backing buffers wouldn't be good enough? If so, which cases do you 
+> have in mind? Maybe we can cover them in a common way as well?
+
+Yeah, we have tons of cases like that. But I have no idea how to 
+generalize them.
+
+>
+>>
+>> As you wrote in the commit message it's highly driver specific what 
+>> to map and where to map it.
+>
+> In the end the common case should be that in a VA space at least every 
+> mapping being backed by a BO is represented by a struct drm_gpuva.
+
+Oh, no! We also have mappings not backed by a BO at all! For example for 
+partial resident textures or data routing to internal hw etc...
+
+You can't be sure that a mapping is backed by a BO at all.
+
+>
+>>
+>> Instead I suggest to have a separate structure for mappings in a VA 
+>> space which driver can then add to their GEM objects or whatever they 
+>> want to map into their VMs.
+>
+> Which kind of separate structure for mappings? Another one analogous 
+> to struct drm_gpuva?
+
+Well similar to what amdgpu uses BO -> one structure for each 
+combination of BO and VM -> mappings inside that VM
+
+Regards,
+Christian.
+
+>
+> - Danilo
+>
+>>
+>> Regards,
+>> Christian.
+>>
+>>
+>
 
