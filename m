@@ -1,94 +1,74 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38B8D73A450
-	for <lists+nouveau@lfdr.de>; Thu, 22 Jun 2023 17:07:31 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C2EF73A4A3
+	for <lists+nouveau@lfdr.de>; Thu, 22 Jun 2023 17:20:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D354310E57F;
-	Thu, 22 Jun 2023 15:07:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8855F10E581;
+	Thu, 22 Jun 2023 15:20:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B443210E57F
- for <nouveau@lists.freedesktop.org>; Thu, 22 Jun 2023 15:07:28 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F2EE510E586
+ for <nouveau@lists.freedesktop.org>; Thu, 22 Jun 2023 15:20:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1687446447;
+ s=mimecast20190719; t=1687447223;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=jx6WC1mHABJsvuM+bnp+yD3GpYJCZcdfj8MNht3/Ius=;
- b=Sjhf5uH6f8/SbB+SFE/+gkSVteHzvJ2IPDLwZOc/l6UqFg/Q7vKoQtcRueX2bCOo7qId+1
- lvV7PThsH4tAs2AdvT3O2p8NUbdN81qkIpZkBdOk2L9Ee/qbfhC+PXmNL9eoLqYEc5/gH3
- 8UUnW+OCe0E8R+wYwzewhB5Paax9lOM=
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding;
+ bh=GMA8wGndW1W3qKjciAhlPaH569xG8UzR5aTyG8RbL8A=;
+ b=IvXFSNFl86n7xTE6RJcbq3YE4QtzFEauCXTcaUFj6YmhhGNTBNaWnB1bp7DKfkfN4HxvBy
+ hKTBqeTszLOtt4RpX/m/Kidv4LX5hT9NuZJ0aUbs8iUeuYVVaD1w6lOzQVIR75fyswTxNr
+ AV9OL2r8qZYs4Ez84fMA5Vc2Y8fRx0Y=
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-494-ffsrgeIeOL2ojj4pxSJuew-1; Thu, 22 Jun 2023 11:07:26 -0400
-X-MC-Unique: ffsrgeIeOL2ojj4pxSJuew-1
-Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-66663453f65so3575992b3a.0
- for <nouveau@lists.freedesktop.org>; Thu, 22 Jun 2023 08:07:26 -0700 (PDT)
+ us-mta-669-EUOZVGjBMnOmAdzLsaqYXg-1; Thu, 22 Jun 2023 11:20:22 -0400
+X-MC-Unique: EUOZVGjBMnOmAdzLsaqYXg-1
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-7625940fbf3so89886385a.0
+ for <nouveau@lists.freedesktop.org>; Thu, 22 Jun 2023 08:20:22 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687446445; x=1690038445;
- h=content-transfer-encoding:in-reply-to:organization:references:cc:to
- :from:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20221208; t=1687447221; x=1690039221;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=jx6WC1mHABJsvuM+bnp+yD3GpYJCZcdfj8MNht3/Ius=;
- b=AUTb+DcP681wPSi59xJqTWq0mm6pls+crdhJjl69UsYfeYH/ttfnbNZouDd0okklZm
- hh9yduKS8UUb08RhorTG+9SbI0elAe0aQcbvosXq7JTxREHRHoPKRmKniERqfPESqXL2
- x0gKWMxNzfCSGsxdl7uIqZ4yv16GesxvIfRpzLcNfHzHQHBHMqif4c4SJvxjL0o5hiU/
- Vf3xQCXUF25qGhgzkdmbOUmoCEh5b+ZXPHHAkBTwkQbrrBmtEmdljSKgaHhK/x2wl1EH
- PjVeXiJOIB3giCpfd/P/un2szuajLePvK6GmFr5vKw+NWKv96rzJS0ttD4lw4KtL2Gch
- o35g==
-X-Gm-Message-State: AC+VfDznhEiSJB0UyPDZlTB9h/Xo8nS/SisXfVXMKP/+VGaz7BIACUXY
- EShYO1LHhgEbReBWf7BFnGrzDHw3PMJZnuF7ORvFQ1a0hLVzzEz06qPV/qILB5ARjlSH517Mh7a
- LNZe7aNpJW+a2euSS69WiLvEwww==
-X-Received: by 2002:a05:6a00:809:b0:66a:2ff1:dee4 with SMTP id
- m9-20020a056a00080900b0066a2ff1dee4mr6496436pfk.2.1687446445086; 
- Thu, 22 Jun 2023 08:07:25 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ6HRa0GCUXkWBtzHtdiP3Pquuzaz9AEf4d8mo5rrQwuiJDyyK0Sq1psu59IAgHb74bq4hLcmA==
-X-Received: by 2002:a05:6a00:809:b0:66a:2ff1:dee4 with SMTP id
- m9-20020a056a00080900b0066a2ff1dee4mr6496388pfk.2.1687446444684; 
- Thu, 22 Jun 2023 08:07:24 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
- ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
- by smtp.gmail.com with ESMTPSA id
- o2-20020a63e342000000b0053fb37fb626sm5011644pgj.43.2023.06.22.08.07.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 Jun 2023 08:07:24 -0700 (PDT)
-Message-ID: <2f502150-c1f8-615c-66d9-c3fb59b8c409@redhat.com>
-Date: Thu, 22 Jun 2023 17:07:11 +0200
+ bh=GMA8wGndW1W3qKjciAhlPaH569xG8UzR5aTyG8RbL8A=;
+ b=Zc7nJbHoJ/jHSRp/G39Z51Y6uWzglI0sWZI2qyNM13P0xoJq65bmTj5RdJo1D/9nbk
+ uRtcXM2anZAfW6Q+VLRJI0l3VOeyh2eX920RN9BpFpUOFHT3NuzJGPElxlQIWYwncvn9
+ m9cvgKQJYJzvbE+5Bi9NOaqG+1Nbmor+O5z1xmfeN7CJCEsT7YhD3xzVsjDq9mfHzK0j
+ 8nJ6K75mwTkgyMsB6AyPijCfX51IyjtOfXOYFRNVORpiLU/CL2VsQpfEY1KhB4TV37gB
+ 1amegsJTVhbxQjGKTMwVGrJLTAZpgv43PcftxXkoPDEdOTLbeABKr3Uoc+Ic+LxMTacY
+ KvpA==
+X-Gm-Message-State: AC+VfDzBSEifw4RdfjniVGyLOCZNxKiQ3d8Y0+LkIHqMIcb+ozpOyDXb
+ 4wdBGi2rwwRnFWLdeWsiBn/wSUCv/ALNggiuS+YBjVTvlbxKnlkl2tlM/afZt4AvTcM9gHvH6mF
+ UfPwEWrRwaecCcZAxk4x0FqApBA==
+X-Received: by 2002:a05:622a:1b8c:b0:3fd:def0:57fb with SMTP id
+ bp12-20020a05622a1b8c00b003fddef057fbmr22153320qtb.6.1687447221594; 
+ Thu, 22 Jun 2023 08:20:21 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ7bOzGejNL9heS5tg9yZzKLbqW+z4bcegBQgxfOE33k3iRU6uDJF1Thh4gS9a3ffxTuKXKluQ==
+X-Received: by 2002:a05:622a:1b8c:b0:3fd:def0:57fb with SMTP id
+ bp12-20020a05622a1b8c00b003fddef057fbmr22153311qtb.6.1687447221348; 
+ Thu, 22 Jun 2023 08:20:21 -0700 (PDT)
+Received: from kherbst.pingu (ip5f5a301e.dynamic.kabel-deutschland.de.
+ [95.90.48.30]) by smtp.gmail.com with ESMTPSA id
+ bp20-20020a05622a1b9400b003ff251b17c8sm3701072qtb.10.2023.06.22.08.20.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 Jun 2023 08:20:20 -0700 (PDT)
+From: Karol Herbst <kherbst@redhat.com>
+To: linux-kernel@vger.kernel.org
+Date: Thu, 22 Jun 2023 17:20:17 +0200
+Message-ID: <20230622152017.2512101-1-kherbst@redhat.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-From: Danilo Krummrich <dakr@redhat.com>
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de, mripard@kernel.org,
- corbet@lwn.net, bskeggs@redhat.com, Liam.Howlett@oracle.com,
- matthew.brost@intel.com, boris.brezillon@collabora.com,
- alexdeucher@gmail.com, ogabbay@kernel.org, bagasdotme@gmail.com,
- willy@infradead.org, jason@jlekstrand.net
-References: <20230620004217.4700-1-dakr@redhat.com>
- <20230620004217.4700-4-dakr@redhat.com>
- <cf6846ea-5bd0-0b41-b7e6-901c70701751@amd.com>
- <a8edf75b-e0f7-a6c7-7d29-f0d39923549b@redhat.com>
- <41aecd10-9956-0752-2838-34c97834f0c8@amd.com>
- <bcde7ea3-fbab-3a18-e810-64b6589ddb18@redhat.com>
- <86ef9898-c4b6-f4c0-7ad3-3ffe5358365a@amd.com>
- <c1f05169-dec0-22ee-52fa-c8070678394e@redhat.com>
-Organization: RedHat
-In-Reply-To: <c1f05169-dec0-22ee-52fa-c8070678394e@redhat.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH drm-next v5 03/14] drm: manager to keep track
- of GPUs VA mappings
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
+Subject: [Nouveau] [PATCH v2] drm/nouveau/gr: enable memory loads on helper
+ invocation on all channels
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,216 +80,123 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, Donald Robson <donald.robson@imgtec.com>,
- Dave Airlie <airlied@redhat.com>
+Cc: nouveau@lists.freedesktop.org, stable@vger.kernel.org,
+ Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 6/22/23 17:04, Danilo Krummrich wrote:
-> On 6/22/23 16:42, Christian König wrote:
->> Am 22.06.23 um 16:22 schrieb Danilo Krummrich:
->>> On 6/22/23 15:54, Christian König wrote:
->>>> Am 20.06.23 um 14:23 schrieb Danilo Krummrich:
->>>>> Hi Christian,
->>>>>
->>>>> On 6/20/23 08:45, Christian König wrote:
->>>>>> Hi Danilo,
->>>>>>
->>>>>> sorry for the delayed reply. I've trying to dig myself out of a 
->>>>>> hole at the moment.
->>>>>
->>>>> No worries, thank you for taking a look anyway!
->>>>>
->>>>>>
->>>>>> Am 20.06.23 um 02:42 schrieb Danilo Krummrich:
->>>>>>> [SNIP]
->>>>>>> diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
->>>>>>> index bbc721870c13..5ec8148a30ee 100644
->>>>>>> --- a/include/drm/drm_gem.h
->>>>>>> +++ b/include/drm/drm_gem.h
->>>>>>> @@ -36,6 +36,8 @@
->>>>>>>   #include <linux/kref.h>
->>>>>>>   #include <linux/dma-resv.h>
->>>>>>> +#include <linux/list.h>
->>>>>>> +#include <linux/mutex.h>
->>>>>>>   #include <drm/drm_vma_manager.h>
->>>>>>> @@ -379,6 +381,18 @@ struct drm_gem_object {
->>>>>>>        */
->>>>>>>       struct dma_resv _resv;
->>>>>>> +    /**
->>>>>>> +     * @gpuva:
->>>>>>> +     *
->>>>>>> +     * Provides the list of GPU VAs attached to this GEM object.
->>>>>>> +     *
->>>>>>> +     * Drivers should lock list accesses with the GEMs &dma_resv 
->>>>>>> lock
->>>>>>> +     * (&drm_gem_object.resv).
->>>>>>> +     */
->>>>>>> +    struct {
->>>>>>> +        struct list_head list;
->>>>>>> +    } gpuva;
->>>>>>> +
->>>>>>>       /**
->>>>>>>        * @funcs:
->>>>>>>        *
->>>>>>
->>>>>> I'm pretty sure that it's not a good idea to attach this directly 
->>>>>> to the GEM object.
->>>>>
->>>>> Why do you think so? IMHO having a common way to connect mappings 
->>>>> to their backing buffers is a good thing, since every driver needs 
->>>>> this connection anyway.
->>>>>
->>>>> E.g. when a BO gets evicted, drivers can just iterate the list of 
->>>>> mappings and, as the circumstances require, invalidate the 
->>>>> corresponding mappings or to unmap all existing mappings of a given 
->>>>> buffer.
->>>>>
->>>>> What would be the advantage to let every driver implement a driver 
->>>>> specific way of keeping this connection?
->>>>
->>>> Flexibility. For example on amdgpu the mappings of a BO are groups 
->>>> by VM address spaces.
->>>>
->>>> E.g. the BO points to multiple bo_vm structures which in turn have 
->>>> lists of their mappings.
->>>
->>> Isn't this (almost) the same relationship I introduce with the GPUVA 
->>> manager?
->>>
->>> If you would switch over to the GPUVA manager right now, it would be 
->>> that every GEM has a list of it's mappings (the gpuva list). The 
->>> mapping is represented by struct drm_gpuva (of course embedded in 
->>> driver specific structure(s)) which has a pointer to the VM address 
->>> space it is part of, namely the GPUVA manager instance. And the GPUVA 
->>> manager keeps a maple tree of it's mappings as well.
->>>
->>> If you still would like to *directly* (indirectly you already have 
->>> that relationship) keep a list of GPUVA managers (VM address spaces) 
->>> per GEM, you could still do that in a driver specific way.
->>>
->>> Do I miss something?
->>
->> How do you efficiently find only the mappings of a BO in one VM?
-> 
-> Actually, I think this case should even be more efficient than with a BO 
-> having a list of GPUVAs (or mappings):
+We have a lurking bug where Fragment Shader Helper Invocations can't load
+from memory. But this is actually required in OpenGL and is causing random
+hangs or failures in random shaders.
 
-*than with a BO having a list of VMs:
+It is unknown how widespread this issue is, but shaders hitting this can
+end up with infinite loops.
 
-> 
-> Having a list of GPUVAs per GEM, each GPUVA has a pointer to it's VM. 
-> Hence, you'd only need to iterate the list of mappings for a given BO 
-> and check the mappings VM pointer.
-> 
-> Having a list of VMs per BO, you'd have to iterate the whole VM to find 
-> the mappings having a pointer to the given BO, right?
-> 
-> I'd think that a single VM potentially has more mapping entries than a 
-> single BO was mapped in multiple VMs.
-> 
-> Another case to consider is the case I originally had in mind choosing 
-> this relationship: finding all mappings for a given BO, which I guess 
-> all drivers need to do in order to invalidate mappings on BO eviction.
-> 
-> Having a list of VMs per BO, wouldn't you need to iterate all of the VMs 
-> entirely?
-> 
->>
->> Keep in mind that we have cases where one BO is shared with hundreds 
->> of different VMs as well as potentially the number of mappings can be 
->> >10k.
->>
->>>
->>>>
->>>> Additional to that there is a state maschine associated with the 
->>>> mappings, e.g. if the page tables are up to date or need to be 
->>>> updated etc....
->>>>
->>>>> Do you see cases where this kind of connection between mappings and 
->>>>> backing buffers wouldn't be good enough? If so, which cases do you 
->>>>> have in mind? Maybe we can cover them in a common way as well?
->>>>
->>>> Yeah, we have tons of cases like that. But I have no idea how to 
->>>> generalize them.
->>>
->>> They could still remain to be driver specific then, right?
->>
->> Well does the mapping has a back pointer to the BO? And can that be 
->> optional NULL if there is no BO?
-> 
-> Yes to both.
-> 
-> - Danilo
-> 
->>
->> Regards,
->> Christian.
->>
->>>
->>>>
->>>>>
->>>>>>
->>>>>> As you wrote in the commit message it's highly driver specific 
->>>>>> what to map and where to map it.
->>>>>
->>>>> In the end the common case should be that in a VA space at least 
->>>>> every mapping being backed by a BO is represented by a struct 
->>>>> drm_gpuva.
->>>>
->>>> Oh, no! We also have mappings not backed by a BO at all! For example 
->>>> for partial resident textures or data routing to internal hw etc...
->>>>
->>>> You can't be sure that a mapping is backed by a BO at all.
->>>
->>> I fully agree, that's why I wrote "the common case should be that in 
->>> a VA space at least every mapping *being backed by a BO* is 
->>> represented by a struct drm_gpuva".
->>>
->>> Mappings not being backed by an actual BO would not be linked to a 
->>> GEM of course.
->>>
->>>>
->>>>>
->>>>>>
->>>>>> Instead I suggest to have a separate structure for mappings in a 
->>>>>> VA space which driver can then add to their GEM objects or 
->>>>>> whatever they want to map into their VMs.
->>>>>
->>>>> Which kind of separate structure for mappings? Another one 
->>>>> analogous to struct drm_gpuva?
->>>>
->>>> Well similar to what amdgpu uses BO -> one structure for each 
->>>> combination of BO and VM -> mappings inside that VM
->>>
->>> As explained above, I think that's exactly what the GPUVA manager 
->>> does, just in another order:
->>>
->>> BO has list of mappings, mappings have pointer to VM, VM has list (or 
->>> actually a maple tree) of mappings.
->>>
->>> You see any advantages or disadvantages of either order of 
->>> relationships? For me it looks like it doesn't really matter which 
->>> one to pick.
->>>
->>> - Danilo
->>>
->>>>
->>>> Regards,
->>>> Christian.
->>>>
->>>>>
->>>>> - Danilo
->>>>>
->>>>>>
->>>>>> Regards,
->>>>>> Christian.
->>>>>>
->>>>>>
->>>>>
->>>>
->>>
->>
+We enable those only on all Kepler and newer GPUs where we use our own
+Firmware.
+
+Nvidia's firmware provides a way to set a kernelspace controlled list of
+mmio registers in the gr space from push buffers via MME macros.
+
+v2: drop code for gm200 and newer.
+
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: David Airlie <airlied@gmail.com>
+Cc: nouveau@lists.freedesktop.org
+Cc: stable@vger.kernel.org
+Signed-off-by: Karol Herbst <kherbst@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h  |  1 +
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk104.c  |  4 +++-
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110.c  | 10 ++++++++++
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110b.c |  1 +
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk208.c  |  1 +
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgm107.c  |  1 +
+ 6 files changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h
+index 00dbeda7e346..de161e7a04aa 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h
+@@ -117,6 +117,7 @@ void gk104_grctx_generate_r418800(struct gf100_gr *);
+ 
+ extern const struct gf100_grctx_func gk110_grctx;
+ void gk110_grctx_generate_r419eb0(struct gf100_gr *);
++void gk110_grctx_generate_r419f78(struct gf100_gr *);
+ 
+ extern const struct gf100_grctx_func gk110b_grctx;
+ extern const struct gf100_grctx_func gk208_grctx;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk104.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk104.c
+index 94233d0119df..52a234b1ef01 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk104.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk104.c
+@@ -906,7 +906,9 @@ static void
+ gk104_grctx_generate_r419f78(struct gf100_gr *gr)
+ {
+ 	struct nvkm_device *device = gr->base.engine.subdev.device;
+-	nvkm_mask(device, 0x419f78, 0x00000001, 0x00000000);
++
++	/* bit 3 set disables loads in fp helper invocations, we need it enabled */
++	nvkm_mask(device, 0x419f78, 0x00000009, 0x00000000);
+ }
+ 
+ void
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110.c
+index 4391458e1fb2..3acdd9eeb74a 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110.c
+@@ -820,6 +820,15 @@ gk110_grctx_generate_r419eb0(struct gf100_gr *gr)
+ 	nvkm_mask(device, 0x419eb0, 0x00001000, 0x00001000);
+ }
+ 
++void
++gk110_grctx_generate_r419f78(struct gf100_gr *gr)
++{
++	struct nvkm_device *device = gr->base.engine.subdev.device;
++
++	/* bit 3 set disables loads in fp helper invocations, we need it enabled */
++	nvkm_mask(device, 0x419f78, 0x00000008, 0x00000000);
++}
++
+ const struct gf100_grctx_func
+ gk110_grctx = {
+ 	.main  = gf100_grctx_generate_main,
+@@ -854,4 +863,5 @@ gk110_grctx = {
+ 	.gpc_tpc_nr = gk104_grctx_generate_gpc_tpc_nr,
+ 	.r418800 = gk104_grctx_generate_r418800,
+ 	.r419eb0 = gk110_grctx_generate_r419eb0,
++	.r419f78 = gk110_grctx_generate_r419f78,
+ };
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110b.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110b.c
+index 7b9a34f9ec3c..5597e87624ac 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110b.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110b.c
+@@ -103,4 +103,5 @@ gk110b_grctx = {
+ 	.gpc_tpc_nr = gk104_grctx_generate_gpc_tpc_nr,
+ 	.r418800 = gk104_grctx_generate_r418800,
+ 	.r419eb0 = gk110_grctx_generate_r419eb0,
++	.r419f78 = gk110_grctx_generate_r419f78,
+ };
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk208.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk208.c
+index c78d07a8bb7d..612656496541 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk208.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk208.c
+@@ -568,4 +568,5 @@ gk208_grctx = {
+ 	.dist_skip_table = gf117_grctx_generate_dist_skip_table,
+ 	.gpc_tpc_nr = gk104_grctx_generate_gpc_tpc_nr,
+ 	.r418800 = gk104_grctx_generate_r418800,
++	.r419f78 = gk110_grctx_generate_r419f78,
+ };
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgm107.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgm107.c
+index beac66eb2a80..9906974ac3f0 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgm107.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgm107.c
+@@ -988,4 +988,5 @@ gm107_grctx = {
+ 	.r406500 = gm107_grctx_generate_r406500,
+ 	.gpc_tpc_nr = gk104_grctx_generate_gpc_tpc_nr,
+ 	.r419e00 = gm107_grctx_generate_r419e00,
++	.r419f78 = gk110_grctx_generate_r419f78,
+ };
+-- 
+2.41.0
 
