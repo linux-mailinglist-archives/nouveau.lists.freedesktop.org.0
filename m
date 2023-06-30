@@ -2,72 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CE7B743F82
-	for <lists+nouveau@lfdr.de>; Fri, 30 Jun 2023 18:14:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BB6874417C
+	for <lists+nouveau@lfdr.de>; Fri, 30 Jun 2023 19:42:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8277510E4AE;
-	Fri, 30 Jun 2023 16:14:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9497310E4D4;
+	Fri, 30 Jun 2023 17:42:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4D3C510E4AE
- for <nouveau@lists.freedesktop.org>; Fri, 30 Jun 2023 16:14:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1688141675;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=zDzqJbvPB3+ncS0JVgMogsHg0szcNxLVo0nvRHNMeoA=;
- b=FfjvqCpa9rhz9u6QUjvQlRRIOdL3OSB/mSotUW9eVOcY3+1LQQpdmnlFta9YAL3Ity/783
- VWZP1EpwgovA9pWMcpuhbJaqQAYYsVtwkwKatnPWkNjENgr8Z4AbHtN+5RPz9g03OfFbwl
- DFuhPtGCKXpbIhTQikGjdd0oNM93mMY=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-625-us8IQUhIMxuSHXPpJ4XgQg-1; Fri, 30 Jun 2023 12:14:34 -0400
-X-MC-Unique: us8IQUhIMxuSHXPpJ4XgQg-1
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-3fa71e19e32so4095595e9.1
- for <nouveau@lists.freedesktop.org>; Fri, 30 Jun 2023 09:14:33 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688141673; x=1690733673;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zDzqJbvPB3+ncS0JVgMogsHg0szcNxLVo0nvRHNMeoA=;
- b=l9ybJMQe8d5aJZsJdqXRSUTlQybWo8Y2dHVvtXG+qaRuyLpRAqHfuo86pQ5OXZgTSd
- sDdOhEMKrc+uTPeauafuHCPZeJUUSIaUPuI/NAlQWKvjMK20gar6MKyWiWvCE5ORKyOq
- PAN3iWQieVD8vJ419OVOftd4FieyY/CyeZYPXy0jrvBU/Wsv+8SA4Fn09xIdAmVo1sRL
- SU4mDxL5UanJjeZktIzhYJhqtk/GDZkmWUl9kTwHcs12YJKgdyclGF9rAEZRmDfV73wQ
- FqPzw64YO/8Gt+47zaOfxoUdQh4YR/yS1iFxgPZ5dXtiqHddE6/2M7jGFN76f4sRXQhC
- 9c0g==
-X-Gm-Message-State: AC+VfDwQnZZga6reoZhVNnFJZyhZ+4AStwwICEjOkPirhzeYirTGxMCk
- qkUeSDj08Vx/LOk30E4QFUaVHU5u0m7BqNJj3ljB54CeIrQrDFfgeUCl7viYkCOv9MNVApsO0kf
- EbwKoRRNcrq2gyInaGLrrkBeWng==
-X-Received: by 2002:a05:600c:1d9b:b0:3fa:9767:bb0 with SMTP id
- p27-20020a05600c1d9b00b003fa97670bb0mr2822019wms.0.1688141673014; 
- Fri, 30 Jun 2023 09:14:33 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlHboVEA9uwXPyVU1Q8VvIf0AXphxjPZ6dsb08b1Lb3IKDCnNo6XzcKAR3OcUmRaH9Lq3IFlhA==
-X-Received: by 2002:a5d:4a91:0:b0:313:ed10:7f53 with SMTP id
- o17-20020a5d4a91000000b00313ed107f53mr2727668wrq.6.1688141208961; 
- Fri, 30 Jun 2023 09:06:48 -0700 (PDT)
-Received: from kherbst.pingu (ip5f5a301e.dynamic.kabel-deutschland.de.
- [95.90.48.30]) by smtp.gmail.com with ESMTPSA id
- cw8-20020a056000090800b00311d8c2561bsm18551755wrb.60.2023.06.30.09.06.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Jun 2023 09:06:47 -0700 (PDT)
-From: Karol Herbst <kherbst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Date: Fri, 30 Jun 2023 18:06:45 +0200
-Message-ID: <20230630160645.3984596-1-kherbst@redhat.com>
-X-Mailer: git-send-email 2.41.0
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DA20410E4D2;
+ Fri, 30 Jun 2023 17:41:59 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 38043617C5;
+ Fri, 30 Jun 2023 17:41:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45920C433C0;
+ Fri, 30 Jun 2023 17:41:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1688146918;
+ bh=oBuH5pzv1m4U165eHXlxwEABZcjqI8yl/lnDYOcl6ZI=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:From;
+ b=A7CbpXg3brFiPOI2ytxu8IpWxHI3M+/swPov9cHayuiqO9cMATSG6c4ez6MFGNO0z
+ Ru8EowGY/rqrRQIZwEhDZTnk+iduM52sCwhkWlTTCl8+a5J9Km01kl5HI3fQzFq2Lq
+ wOjgPd6RxDUg7m4ocetVdyjL+MealrAsXh9h9PMnDDoFqivVT/qQoq3c/TGjtjiqN/
+ eHYBXPGgPFhstAo0o8ix5t3xiMpkLqrACIll6PSfK9pdsSXGZRuCxFRzU8s+FYzCAc
+ zL43+fczW0etE3m5c1GVglsbsvMe5lL55YAga1mOHJkaKrmOGii/a/rGs1ilq7P74h
+ ZnlgoVz7lUrlg==
+Date: Fri, 30 Jun 2023 12:41:56 -0500
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: suijingfeng <suijingfeng@loongson.cn>
+Message-ID: <20230630174156.GA487980@bhelgaas>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Subject: [Nouveau] [PATCH] drm/nouveau/disp/g94: enable HDMI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2c81fbe3-308a-4c5e-0150-32006253b3ea@loongson.cn>
+Subject: Re: [Nouveau] [PATCH v7 6/8] PCI/VGA: Introduce is_boot_device
+ function callback to vga_client_register
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,31 +51,81 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- dri-devel@lists.freedesktop.org
+Cc: "linux-fbdev@vger.kernel.org" <linux-fbdev@vger.kernel.org>,
+ Cornelia Huck <cohuck@redhat.com>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, "Lazar,
+ Lijo" <Lijo.Lazar@amd.com>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "Chai,
+ Thomas" <YiPeng.Chai@amd.com>, "Limonciello,
+ Mario" <Mario.Limonciello@amd.com>, "Gao, Likun" <Likun.Gao@amd.com>,
+ Ville Syrjala <ville.syrjala@linux.intel.com>, Yi Liu <yi.l.liu@intel.com>,
+ "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ "15330273260@189.cn" <15330273260@189.cn>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Ben Skeggs <bskeggs@redhat.com>,
+ "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
+ Kevin Tian <kevin.tian@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, "Zhang,
+ Bokun" <Bokun.Zhang@amd.com>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Abhishek Sahu <abhsahu@nvidia.com>, Maxime Ripard <mripard@kernel.org>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Bjorn Helgaas <bhelgaas@google.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Yishai Hadas <yishaih@nvidia.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ Daniel Vetter <daniel@ffwll.ch>, "Deucher,
+ Alexander" <Alexander.Deucher@amd.com>, "Koenig,
+ Christian" <Christian.Koenig@amd.com>, "Zhang,
+ Hawking" <Hawking.Zhang@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Fixes: f530bc60a30b ("drm/nouveau/disp: move HDMI config into acquire + infoframe methods")
-Signed-off-by: Karol Herbst <kherbst@redhat.com>
----
- drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c | 1 +
- 1 file changed, 1 insertion(+)
+On Fri, Jun 30, 2023 at 10:14:11AM +0800, suijingfeng wrote:
+> On 2023/6/30 01:44, Limonciello, Mario wrote:
+> > > On 2023/6/29 23:54, Bjorn Helgaas wrote:
+> > > > On Thu, Jun 22, 2023 at 01:08:15PM +0800, Sui Jingfeng wrote:
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c
-index a4853c4e5ee3..67ef889a0c5f 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c
-@@ -295,6 +295,7 @@ g94_sor = {
- 	.clock = nv50_sor_clock,
- 	.war_2 = g94_sor_war_2,
- 	.war_3 = g94_sor_war_3,
-+	.hdmi = &g84_sor_hdmi,
- 	.dp = &g94_sor_dp,
- };
- 
--- 
-2.41.0
+> > > > 4) Right now we're in the middle of the v6.5 merge window, so new
+> > > >      content, e.g., this series, is too late for v6.5.  Most
+> > > >      maintainers, including me, wait to merge new content until the
+> > > >      merge window closes and a new -rc1 is tagged.  This merge window
+> > > >      should close on July 9, and people will start merging content for
+> > > >      v6.6, typically based on v6.5-rc1.
+> > > 
+> > > Would you will merge all of the patches in this series (e.g. including
+> > > the patch for drm/amdgpu(7/8) and drm/radeon(8/8)) ?
+> > > 
+> > > Or just part of them?
 
+The bulk of this series is drivers/pci changes, so typically I would
+merge all the patches after getting Acked-by tags from the other
+subsystems (DRM and VFIO).
+
+> Is it possible to merge the PCI/VGA part as fast as possible,
+> especially the PATCH-0006 PCI/VGA: Introduce is_boot_device function
+> callback to vga_client_register
+
+We're in the middle of the v6.5 merge window, so it's too late to add
+things to v6.5-rc1.  The most likely path for new material like this
+would be to queue it for v6.6, which means I would merge it after
+v6.5-rc1 is tagged (that tag will probably happen on July 9).
+
+It would then be in -next until the v6.6 merge window opens (likely in
+September), when it would be merged into Linus' tree.
+
+If the series fixes a regression or other major defect, it's
+*possible* to merge things earlier, so they appear in v6.5.  But this
+series doesn't seem to fall in that category, so I think v6.6 is a
+more realistic target.
+
+Merging for v6.6 would include both the PCI parts and the DRM parts at
+the same time, so hopefully that addresses your dependency concerns.
+
+I suggest that you wait until v6.5-rc1, rebase your patches so they
+apply cleanly on that tag, collect all the Reviewed-by and Acked-by
+tags, include them in your commit logs, and then repost them.
+
+Bjorn
