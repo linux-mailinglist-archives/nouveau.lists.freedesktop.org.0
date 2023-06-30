@@ -2,42 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BB6874417C
-	for <lists+nouveau@lfdr.de>; Fri, 30 Jun 2023 19:42:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1328D74423E
+	for <lists+nouveau@lfdr.de>; Fri, 30 Jun 2023 20:32:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9497310E4D4;
-	Fri, 30 Jun 2023 17:42:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C93CB10E4E0;
+	Fri, 30 Jun 2023 18:32:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DA20410E4D2;
- Fri, 30 Jun 2023 17:41:59 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 38043617C5;
- Fri, 30 Jun 2023 17:41:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45920C433C0;
- Fri, 30 Jun 2023 17:41:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1688146918;
- bh=oBuH5pzv1m4U165eHXlxwEABZcjqI8yl/lnDYOcl6ZI=;
- h=Date:From:To:Cc:Subject:In-Reply-To:From;
- b=A7CbpXg3brFiPOI2ytxu8IpWxHI3M+/swPov9cHayuiqO9cMATSG6c4ez6MFGNO0z
- Ru8EowGY/rqrRQIZwEhDZTnk+iduM52sCwhkWlTTCl8+a5J9Km01kl5HI3fQzFq2Lq
- wOjgPd6RxDUg7m4ocetVdyjL+MealrAsXh9h9PMnDDoFqivVT/qQoq3c/TGjtjiqN/
- eHYBXPGgPFhstAo0o8ix5t3xiMpkLqrACIll6PSfK9pdsSXGZRuCxFRzU8s+FYzCAc
- zL43+fczW0etE3m5c1GVglsbsvMe5lL55YAga1mOHJkaKrmOGii/a/rGs1ilq7P74h
- ZnlgoVz7lUrlg==
-Date: Fri, 30 Jun 2023 12:41:56 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: suijingfeng <suijingfeng@loongson.cn>
-Message-ID: <20230630174156.GA487980@bhelgaas>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3D3BD10E4E0;
+ Fri, 30 Jun 2023 18:32:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1688149953; x=1719685953;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version;
+ bh=AUog1oylk7F8erWTwuZvVpqNmif9eOSht3QwuL4uOG8=;
+ b=KK1RfvbhbAh74z3tzwv+CJBtmzNehYTlcpbn4/sGM0VtVNRl7RPKG2Oe
+ usWsvVk8XNFb5zzrzCLFzIkE7A/x9Jk4zD4b+OEtSTev2OOVXFb8YS/CH
+ 4E2ITrdBQ9xhMLR5r8JcxGHWe6NGhr4w4jK+UZfTV6Qz7EvRdEqQPQBxz
+ KmetxV6fNdhar/tZAFv+/89lKiuhK4Jh8lyzPrDSJDfvtZX98H3/mQAjb
+ IDEEsE3vIVMfmHoQcgBuFY9+t1WLMfBptJ6dXrWaiM6iozkgNoOoqFMNG
+ 7SnVsrI2jLFYXyw2ro6JbtZAWj8pLkjT2IE0yx02mCMKm8k3sLpTzHeF7 A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10757"; a="365949337"
+X-IronPort-AV: E=Sophos;i="6.01,171,1684825200"; d="scan'208";a="365949337"
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+ by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Jun 2023 11:32:32 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10757"; a="717896031"
+X-IronPort-AV: E=Sophos;i="6.01,171,1684825200"; d="scan'208";a="717896031"
+Received: from lpascal-mobl.amr.corp.intel.com (HELO localhost)
+ ([10.252.49.62])
+ by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Jun 2023 11:32:23 -0700
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: Bjorn Helgaas <helgaas@kernel.org>, suijingfeng <suijingfeng@loongson.cn>
+In-Reply-To: <20230630174156.GA487980@bhelgaas>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20230630174156.GA487980@bhelgaas>
+Date: Fri, 30 Jun 2023 21:32:20 +0300
+Message-ID: <87v8f4243v.fsf@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2c81fbe3-308a-4c5e-0150-32006253b3ea@loongson.cn>
+Content-Type: text/plain
 Subject: Re: [Nouveau] [PATCH v7 6/8] PCI/VGA: Introduce is_boot_device
  function callback to vga_client_register
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -53,7 +60,7 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: "linux-fbdev@vger.kernel.org" <linux-fbdev@vger.kernel.org>,
  Cornelia Huck <cohuck@redhat.com>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, "Lazar,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, "Lazar, 
  Lijo" <Lijo.Lazar@amd.com>,
  "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "Chai,
  Thomas" <YiPeng.Chai@amd.com>, "Limonciello,
@@ -65,14 +72,14 @@ Cc: "linux-fbdev@vger.kernel.org" <linux-fbdev@vger.kernel.org>,
  Ben Skeggs <bskeggs@redhat.com>,
  "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
  Kevin Tian <kevin.tian@intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, "Zhang,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, "Zhang, 
  Bokun" <Bokun.Zhang@amd.com>,
  "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
  Alex Williamson <alex.williamson@redhat.com>,
- Abhishek Sahu <abhsahu@nvidia.com>, Maxime Ripard <mripard@kernel.org>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Bjorn Helgaas <bhelgaas@google.com>,
+ Abhishek Sahu <abhsahu@nvidia.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Bjorn Helgaas <bhelgaas@google.com>,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Yishai Hadas <yishaih@nvidia.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
  "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
@@ -83,49 +90,73 @@ Cc: "linux-fbdev@vger.kernel.org" <linux-fbdev@vger.kernel.org>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jun 30, 2023 at 10:14:11AM +0800, suijingfeng wrote:
-> On 2023/6/30 01:44, Limonciello, Mario wrote:
-> > > On 2023/6/29 23:54, Bjorn Helgaas wrote:
-> > > > On Thu, Jun 22, 2023 at 01:08:15PM +0800, Sui Jingfeng wrote:
+On Fri, 30 Jun 2023, Bjorn Helgaas <helgaas@kernel.org> wrote:
+> On Fri, Jun 30, 2023 at 10:14:11AM +0800, suijingfeng wrote:
+>> On 2023/6/30 01:44, Limonciello, Mario wrote:
+>> > > On 2023/6/29 23:54, Bjorn Helgaas wrote:
+>> > > > On Thu, Jun 22, 2023 at 01:08:15PM +0800, Sui Jingfeng wrote:
+>
+>> > > > 4) Right now we're in the middle of the v6.5 merge window, so new
+>> > > >      content, e.g., this series, is too late for v6.5.  Most
+>> > > >      maintainers, including me, wait to merge new content until the
+>> > > >      merge window closes and a new -rc1 is tagged.  This merge window
+>> > > >      should close on July 9, and people will start merging content for
+>> > > >      v6.6, typically based on v6.5-rc1.
+>> > > 
+>> > > Would you will merge all of the patches in this series (e.g. including
+>> > > the patch for drm/amdgpu(7/8) and drm/radeon(8/8)) ?
+>> > > 
+>> > > Or just part of them?
+>
+> The bulk of this series is drivers/pci changes, so typically I would
+> merge all the patches after getting Acked-by tags from the other
+> subsystems (DRM and VFIO).
 
-> > > > 4) Right now we're in the middle of the v6.5 merge window, so new
-> > > >      content, e.g., this series, is too late for v6.5.  Most
-> > > >      maintainers, including me, wait to merge new content until the
-> > > >      merge window closes and a new -rc1 is tagged.  This merge window
-> > > >      should close on July 9, and people will start merging content for
-> > > >      v6.6, typically based on v6.5-rc1.
-> > > 
-> > > Would you will merge all of the patches in this series (e.g. including
-> > > the patch for drm/amdgpu(7/8) and drm/radeon(8/8)) ?
-> > > 
-> > > Or just part of them?
+For the (negligible) i915 parts,
 
-The bulk of this series is drivers/pci changes, so typically I would
-merge all the patches after getting Acked-by tags from the other
-subsystems (DRM and VFIO).
+Acked-by: Jani Nikula <jani.nikula@intel.com>
 
-> Is it possible to merge the PCI/VGA part as fast as possible,
-> especially the PATCH-0006 PCI/VGA: Introduce is_boot_device function
-> callback to vga_client_register
+>> Is it possible to merge the PCI/VGA part as fast as possible,
+>> especially the PATCH-0006 PCI/VGA: Introduce is_boot_device function
+>> callback to vga_client_register
+>
+> We're in the middle of the v6.5 merge window, so it's too late to add
+> things to v6.5-rc1.  The most likely path for new material like this
+> would be to queue it for v6.6, which means I would merge it after
+> v6.5-rc1 is tagged (that tag will probably happen on July 9).
 
-We're in the middle of the v6.5 merge window, so it's too late to add
-things to v6.5-rc1.  The most likely path for new material like this
-would be to queue it for v6.6, which means I would merge it after
-v6.5-rc1 is tagged (that tag will probably happen on July 9).
+Perhaps the part that causes confusion here is that the drm-misc-next
+and drm-intel-next branches, for example, are always open for new
+patches; it's just that there's a cutoff at around rc5/rc6 after which
+they start targeting the next+1 release. We basically hide the merge
+window from a lot of drm developers.
 
-It would then be in -next until the v6.6 merge window opens (likely in
-September), when it would be merged into Linus' tree.
+> It would then be in -next until the v6.6 merge window opens (likely in
+> September), when it would be merged into Linus' tree.
+>
+> If the series fixes a regression or other major defect, it's
+> *possible* to merge things earlier, so they appear in v6.5.  But this
+> series doesn't seem to fall in that category, so I think v6.6 is a
+> more realistic target.
+>
+> Merging for v6.6 would include both the PCI parts and the DRM parts at
+> the same time, so hopefully that addresses your dependency concerns.
 
-If the series fixes a regression or other major defect, it's
-*possible* to merge things earlier, so they appear in v6.5.  But this
-series doesn't seem to fall in that category, so I think v6.6 is a
-more realistic target.
+I guess the main question is whether Sui Jingfeng has follow-up work
+planned in drm that depends on these being merged. This would set that
+back by a full release. (But it happens.)
 
-Merging for v6.6 would include both the PCI parts and the DRM parts at
-the same time, so hopefully that addresses your dependency concerns.
+BR,
+Jani.
 
-I suggest that you wait until v6.5-rc1, rebase your patches so they
-apply cleanly on that tag, collect all the Reviewed-by and Acked-by
-tags, include them in your commit logs, and then repost them.
 
-Bjorn
+
+>
+> I suggest that you wait until v6.5-rc1, rebase your patches so they
+> apply cleanly on that tag, collect all the Reviewed-by and Acked-by
+> tags, include them in your commit logs, and then repost them.
+>
+> Bjorn
+
+-- 
+Jani Nikula, Intel Open Source Graphics Center
