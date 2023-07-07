@@ -2,83 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFBEB74B10C
-	for <lists+nouveau@lfdr.de>; Fri,  7 Jul 2023 14:41:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AFC2F74B86D
+	for <lists+nouveau@lfdr.de>; Fri,  7 Jul 2023 23:03:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8CE3510E579;
-	Fri,  7 Jul 2023 12:41:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2A5A310E1A3;
+	Fri,  7 Jul 2023 21:03:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DF80410E579
- for <nouveau@lists.freedesktop.org>; Fri,  7 Jul 2023 12:41:29 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CF5CF10E1A3
+ for <nouveau@lists.freedesktop.org>; Fri,  7 Jul 2023 21:03:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1688733689;
+ s=mimecast20190719; t=1688763831;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=7Pvx8BnPDazf3dvRsddP57JfF7wRhoQ8lQ+cKlGDP24=;
- b=IGFrpt9Jqem6+YGSFrTmjGy6KcSbzT0eshpXJQRPEeGGi55T9/YIC3WB88SPQaNOGl1fCL
- L6iayasKRuwW1+6yBYuDvC2LlJ2CMyZWOG6pW+VZS9IWb0KpzTEbZSnekbJT+2Q/Ukx6oj
- hNL7l6/k0Q9zkkyOyIOeXIz40bGECig=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=Zm/fftTF7/oyzUiDYwjKxW5aboUQHvMQ91ScEBlmiPg=;
+ b=dKep7OoY17F6J2rUgEIo+wn7MjltCiKhE3q4tgiSTJFU5RPDfromYAug9Qr4T13MrTqcBL
+ t/O/CLin9t1jwetnBl8LzrFyPVaQd+55AODhaxnqnHhxtQQCVAjC4uGCiuSxHbJtV3pshy
+ rJ1Y74ldhymq6acPIzRsNp05OwSuQw0=
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-15-0yhyyRQROKioL_gfuU77pQ-1; Fri, 07 Jul 2023 08:41:26 -0400
-X-MC-Unique: 0yhyyRQROKioL_gfuU77pQ-1
-Received: by mail-ej1-f71.google.com with SMTP id
- a640c23a62f3a-993d631393fso29258166b.0
- for <nouveau@lists.freedesktop.org>; Fri, 07 Jul 2023 05:41:26 -0700 (PDT)
+ us-mta-317-nMgwGOmkMiW3MyqHi4Z95g-1; Fri, 07 Jul 2023 17:03:50 -0400
+X-MC-Unique: nMgwGOmkMiW3MyqHi4Z95g-1
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-765a44ce88aso173713785a.1
+ for <nouveau@lists.freedesktop.org>; Fri, 07 Jul 2023 14:03:50 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688733685; x=1691325685;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7Pvx8BnPDazf3dvRsddP57JfF7wRhoQ8lQ+cKlGDP24=;
- b=YBOPABrOLqVxPgsGSSCHmcud1tJomHd+qVOAzURZ0e2n9j9+8USieRXCREYVK3FgAW
- xp9Yy7SQCkRCaJxi1QSbBgsz8v1n0XPfd3fOQudsLCP7q8sHuDc9wqX6izm/28bbcY6g
- B4ZFyTt1aphhQFsBTyQ1YJYqtMkWAz2yopOz+R7HRW/RJz5RnFW16xhvetyle6O2zSNn
- SJ43xc08vfVMVabwX12Myvw6LC/NgVF+H4YxSXce95aB/GMnVQZZzWPtd5gewTu7okY1
- vNdYQVJhN3eTaXg1IbpUADZFQA1rVhiCBh8GLQqE4D8Kg3k6xz6KcymcZRoyS9JiD6/C
- ZsVw==
-X-Gm-Message-State: ABy/qLaXd8/ueLodPb+8zeWFK6aq3WONp87jrcOSmB7E/4GdZ4UROYW3
- /E+diN7KH/5HCLJkbrskCGPyvwj6YwD9ZjFiaQFwXeNuhveCUzkkkPiHJxwrGNfcOciZtyrXY/2
- mCApJyxczRpRq8T1lFOrfht1oqA==
-X-Received: by 2002:a17:906:7a0f:b0:974:1c98:d2d9 with SMTP id
- d15-20020a1709067a0f00b009741c98d2d9mr4407023ejo.3.1688733685810; 
- Fri, 07 Jul 2023 05:41:25 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlEjteGIi3KT97fwOWlMdZkLiUsbSPeH2eror+aBLBU9/BQlYnfXmM4DYbHJ8zXHqJFnCi0/Wg==
-X-Received: by 2002:a17:906:7a0f:b0:974:1c98:d2d9 with SMTP id
- d15-20020a1709067a0f00b009741c98d2d9mr4406995ejo.3.1688733685531; 
- Fri, 07 Jul 2023 05:41:25 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
- ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
+ d=1e100.net; s=20221208; t=1688763829; x=1691355829;
+ h=mime-version:user-agent:content-transfer-encoding:organization
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=jyU5zBy/a84oEoWoieA/ffOtOuuHwgqV4ycNSTCevL0=;
+ b=cAzx/jed5cAKreYvUrJnSh/Lc7nlIbbSP73fD2R4A+HmYVHsf20GnyE3JODTfwsYFs
+ w4EZzGI7qlf18IwhlbywGQsN/lLTax5UOPtsjde5x9bhAR2L5T+6xvNFfVsslpu7J1XA
+ WV3couFk33qoHsO6PXSHZwPcFWYII54oWJnBpq2essLs3/dprsjSA1k6wxsWKFdI/nLQ
+ daOQL/oBgmr5d7z2Czqv0COB2zDA1KBV6eMVcO1NQyZvfUwq6wI0aPh2pcz0/IGQlSLg
+ 2eiQy0C0YZvt8JzBIJSLNtDXn6I3qAfc0xy5nqQFU49lGq6v/MtA14lYeZ6/I18TTLTw
+ 1J9g==
+X-Gm-Message-State: ABy/qLa8fqt2fPtIRPpxwiIe/Dcz8sAXLyt/3pf4g7qv12v0RzMDmsec
+ w1cFoEr4nptPR4mxPgLubu2HiO5C5IK1dJfrDy+mqr8fbk4PY8x2hi5vCdcGfVA09IBtwixBhB2
+ dESgqwzG9ReMF71/evuorteq42Q==
+X-Received: by 2002:a05:620a:28cc:b0:762:3841:c098 with SMTP id
+ l12-20020a05620a28cc00b007623841c098mr11890024qkp.30.1688763829797; 
+ Fri, 07 Jul 2023 14:03:49 -0700 (PDT)
+X-Google-Smtp-Source: APBJJlHub679rj9p13wuI63bc+RfomIr/ACWE3AhFx9HYEJTtP2JkglWWuEwG3TTkgaIDBh6fY4VsA==
+X-Received: by 2002:a05:620a:28cc:b0:762:3841:c098 with SMTP id
+ l12-20020a05620a28cc00b007623841c098mr11889999qkp.30.1688763829506; 
+ Fri, 07 Jul 2023 14:03:49 -0700 (PDT)
+Received: from ?IPv6:2600:4040:5c62:8200:4d3e:bd5a:7e0a:133a?
+ ([2600:4040:5c62:8200:4d3e:bd5a:7e0a:133a])
  by smtp.gmail.com with ESMTPSA id
- qh27-20020a170906ecbb00b0098733a40bb7sm2148920ejb.155.2023.07.07.05.41.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Jul 2023 05:41:25 -0700 (PDT)
-Message-ID: <e92219d7-77f7-a40a-39d9-ea7afc5f3687@redhat.com>
-Date: Fri, 7 Jul 2023 14:41:23 +0200
+ u6-20020a0cdd06000000b006301ec0d16fsm2493703qvk.0.2023.07.07.14.03.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Jul 2023 14:03:49 -0700 (PDT)
+Message-ID: <14f2b03302c07a62cce1ec272f54727b2ad39721.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Karol Herbst <kherbst@redhat.com>, linux-kernel@vger.kernel.org
+Date: Fri, 07 Jul 2023 17:03:48 -0400
+In-Reply-To: <20230630160645.3984596-1-kherbst@redhat.com>
+References: <20230630160645.3984596-1-kherbst@redhat.com>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.48.3 (3.48.3-1.fc38)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-To: Boris Brezillon <boris.brezillon@collabora.com>
-References: <20230629222651.3196-1-dakr@redhat.com>
- <20230629222651.3196-3-dakr@redhat.com>
- <20230707130010.1bd5d41b@collabora.com>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <20230707130010.1bd5d41b@collabora.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH drm-next v6 02/13] drm: manager to keep track
- of GPUs VA mappings
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/disp/g94: enable HDMI
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,116 +84,43 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, willy@infradead.org, daniel@ffwll.ch,
- dri-devel@lists.freedesktop.org, corbet@lwn.net, nouveau@lists.freedesktop.org,
- ogabbay@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- mripard@kernel.org, alexdeucher@gmail.com, bskeggs@redhat.com,
- Liam.Howlett@oracle.com, Dave Airlie <airlied@redhat.com>,
- bagasdotme@gmail.com, christian.koenig@amd.com, jason@jlekstrand.net,
- Donald Robson <donald.robson@imgtec.com>
+Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 7/7/23 13:00, Boris Brezillon wrote:
-> On Fri, 30 Jun 2023 00:25:18 +0200
-> Danilo Krummrich <dakr@redhat.com> wrote:
-> 
->> +/**
->> + * drm_gpuva_for_each_va_range - iternator to walk over a range of &drm_gpuvas
->> + * @va__: &drm_gpuva structure to assign to in each iteration step
->> + * @mgr__: &drm_gpuva_manager to walk over
->> + * @start__: starting offset, the first gpuva will overlap this
->> + * @end__: ending offset, the last gpuva will start before this (but may
->> + * overlap)
->> + *
->> + * This iterator walks over all &drm_gpuvas in the &drm_gpuva_manager that lie
->> + * between @start__ and @end__. It is implemented similarly to list_for_each(),
->> + * but is using the &drm_gpuva_manager's internal interval tree to accelerate
->> + * the search for the starting &drm_gpuva, and hence isn't safe against removal
->> + * of elements. It assumes that @end__ is within (or is the upper limit of) the
->> + * &drm_gpuva_manager. This iterator does not skip over the &drm_gpuva_manager's
->> + * @kernel_alloc_node.
->> + */
->> +#define drm_gpuva_for_each_va_range(va__, mgr__, start__, end__) \
->> +	for (va__ = drm_gpuva_find_first((mgr__), (start__), (end__)); \
-> 
-> drm_gpuva_find_first() takes the range size as its last argument, not
-> the range end:
-> 
-> 	for (va__ = drm_gpuva_find_first((mgr__), (start__), (end__) - (start__)); \
-> 
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-Good catch! Originally this was
+But seeing as I looked at this + some other patches yesterday I assume ther=
+e's
+still more to this?
 
-drm_gpuva_it_iter_first(&(mgr)->rb.tree, (start__), (end__) - 1)
+On Fri, 2023-06-30 at 18:06 +0200, Karol Herbst wrote:
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: Lyude Paul <lyude@redhat.com>
+> Fixes: f530bc60a30b ("drm/nouveau/disp: move HDMI config into acquire + i=
+nfoframe methods")
+> Signed-off-by: Karol Herbst <kherbst@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c b/drivers/gpu=
+/drm/nouveau/nvkm/engine/disp/g94.c
+> index a4853c4e5ee3..67ef889a0c5f 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c
+> @@ -295,6 +295,7 @@ g94_sor =3D {
+>  =09.clock =3D nv50_sor_clock,
+>  =09.war_2 =3D g94_sor_war_2,
+>  =09.war_3 =3D g94_sor_war_3,
+> +=09.hdmi =3D &g84_sor_hdmi,
+>  =09.dp =3D &g94_sor_dp,
+>  };
+> =20
 
-but then I changed it since I did not want to expose the interval tree 
-functions directly.
-
-> 
->> +	     va__ && (va__->va.addr < (end__)) && \
->> +	     !list_entry_is_head(va__, &(mgr__)->rb.list, rb.entry); \
->> +	     va__ = list_next_entry(va__, rb.entry))
-> 
-> If you define:
-> 
-> static inline struct drm_gpuva *
-> drm_gpuva_next(struct drm_gpuva *va)
-> {
-> 	if (va && !list_is_last(&va->rb.entry, &va->mgr->rb.list))
-> 		return list_next_entry(va, rb.entry);
-> 
-> 	return NULL;
-> } >
-> the for loop becomes a bit more readable:
-
-Yes, it would. However, I don't want it to be confused with 
-drm_gpuva_find_next(). Maybe I should rename the latter to something 
-like drm_gpuva_find_next_neighbor() then.
-
-> 
-> 	for (va__ = drm_gpuva_find_first((mgr__), (start__), (end__) - (start__)); \
-> 	     va__ && (va__->va.addr < (end__)); \
-> 	     va__ = drm_gpuva_next(va__))
-> 
->> +
->> +/**
->> + * drm_gpuva_for_each_va_range_safe - iternator to safely walk over a range of
->> + * &drm_gpuvas
->> + * @va__: &drm_gpuva to assign to in each iteration step
->> + * @next__: another &drm_gpuva to use as temporary storage
->> + * @mgr__: &drm_gpuva_manager to walk over
->> + * @start__: starting offset, the first gpuva will overlap this
->> + * @end__: ending offset, the last gpuva will start before this (but may
->> + * overlap)
->> + *
->> + * This iterator walks over all &drm_gpuvas in the &drm_gpuva_manager that lie
->> + * between @start__ and @end__. It is implemented similarly to
->> + * list_for_each_safe(), but is using the &drm_gpuva_manager's internal interval
->> + * tree to accelerate the search for the starting &drm_gpuva, and hence is safe
->> + * against removal of elements. It assumes that @end__ is within (or is the
->> + * upper limit of) the &drm_gpuva_manager. This iterator does not skip over the
->> + * &drm_gpuva_manager's @kernel_alloc_node.
->> + */
->> +#define drm_gpuva_for_each_va_range_safe(va__, next__, mgr__, start__, end__) \
->> +	for (va__ = drm_gpuva_find_first((mgr__), (start__), (end__)), \
->> +	     next__ = va ? list_next_entry(va__, rb.entry) : NULL; \
->> +	     va__ && (va__->va.addr < (end__)) && \
->> +	     !list_entry_is_head(va__, &(mgr__)->rb.list, rb.entry); \
->> +	     va__ = next__, next__ = list_next_entry(va__, rb.entry))
-> 
-> And this is the safe version using the drm_gpuva_next() helper:
-> 
-> 	for (va__ = drm_gpuva_find_first((mgr__), (start__), (end__) - (start__)), \
-> 	     next__ = drm_gpuva_next(va__); \
-> 	     va__ && (va__->va.addr < (end__)); \
-> 	     va__ = next__, next__ = drm_gpuva_next(va__))
-> 
-> Those changes fixed an invalid pointer access I had in the sm_unmap()
-> path.
-> 
-
-Sorry you did run into this bug.
-
-- Danilo
+--=20
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
