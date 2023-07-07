@@ -2,69 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFC2F74B86D
-	for <lists+nouveau@lfdr.de>; Fri,  7 Jul 2023 23:03:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 427B674B8A9
+	for <lists+nouveau@lfdr.de>; Fri,  7 Jul 2023 23:27:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2A5A310E1A3;
-	Fri,  7 Jul 2023 21:03:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5662910E00C;
+	Fri,  7 Jul 2023 21:27:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CF5CF10E1A3
- for <nouveau@lists.freedesktop.org>; Fri,  7 Jul 2023 21:03:52 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A682A10E00C
+ for <nouveau@lists.freedesktop.org>; Fri,  7 Jul 2023 21:27:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1688763831;
+ s=mimecast20190719; t=1688765246;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Zm/fftTF7/oyzUiDYwjKxW5aboUQHvMQ91ScEBlmiPg=;
- b=dKep7OoY17F6J2rUgEIo+wn7MjltCiKhE3q4tgiSTJFU5RPDfromYAug9Qr4T13MrTqcBL
- t/O/CLin9t1jwetnBl8LzrFyPVaQd+55AODhaxnqnHhxtQQCVAjC4uGCiuSxHbJtV3pshy
- rJ1Y74ldhymq6acPIzRsNp05OwSuQw0=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=YedJvQ8aXiP77STDAQlWTy9BESVnkdmYrUgAzEX4QL4=;
+ b=IAHGM7lZ4sv/tP52umvhRYY/dKfhZ1ASFStjhF8bj6x0ZaWNQEg8gS1PFpSwuatHECNiYy
+ R/6s2X6FDp0mwP7WbDa/v3aVYA4OOsYKrbt+7tKwsyB7teAnLv5BluC+lM7ZSCw1L/HtfN
+ AGeW9z0hj1QUQwdxYaaAicjy2JV2oDI=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-317-nMgwGOmkMiW3MyqHi4Z95g-1; Fri, 07 Jul 2023 17:03:50 -0400
-X-MC-Unique: nMgwGOmkMiW3MyqHi4Z95g-1
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-765a44ce88aso173713785a.1
- for <nouveau@lists.freedesktop.org>; Fri, 07 Jul 2023 14:03:50 -0700 (PDT)
+ us-mta-484-hsAWwlTlNkOeJVs7FgyM-w-1; Fri, 07 Jul 2023 17:27:25 -0400
+X-MC-Unique: hsAWwlTlNkOeJVs7FgyM-w-1
+Received: by mail-qt1-f197.google.com with SMTP id
+ d75a77b69052e-4033e4d51ecso23973471cf.0
+ for <nouveau@lists.freedesktop.org>; Fri, 07 Jul 2023 14:27:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688763829; x=1691355829;
+ d=1e100.net; s=20221208; t=1688765245; x=1691357245;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jyU5zBy/a84oEoWoieA/ffOtOuuHwgqV4ycNSTCevL0=;
- b=cAzx/jed5cAKreYvUrJnSh/Lc7nlIbbSP73fD2R4A+HmYVHsf20GnyE3JODTfwsYFs
- w4EZzGI7qlf18IwhlbywGQsN/lLTax5UOPtsjde5x9bhAR2L5T+6xvNFfVsslpu7J1XA
- WV3couFk33qoHsO6PXSHZwPcFWYII54oWJnBpq2essLs3/dprsjSA1k6wxsWKFdI/nLQ
- daOQL/oBgmr5d7z2Czqv0COB2zDA1KBV6eMVcO1NQyZvfUwq6wI0aPh2pcz0/IGQlSLg
- 2eiQy0C0YZvt8JzBIJSLNtDXn6I3qAfc0xy5nqQFU49lGq6v/MtA14lYeZ6/I18TTLTw
- 1J9g==
-X-Gm-Message-State: ABy/qLa8fqt2fPtIRPpxwiIe/Dcz8sAXLyt/3pf4g7qv12v0RzMDmsec
- w1cFoEr4nptPR4mxPgLubu2HiO5C5IK1dJfrDy+mqr8fbk4PY8x2hi5vCdcGfVA09IBtwixBhB2
- dESgqwzG9ReMF71/evuorteq42Q==
-X-Received: by 2002:a05:620a:28cc:b0:762:3841:c098 with SMTP id
- l12-20020a05620a28cc00b007623841c098mr11890024qkp.30.1688763829797; 
- Fri, 07 Jul 2023 14:03:49 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlHub679rj9p13wuI63bc+RfomIr/ACWE3AhFx9HYEJTtP2JkglWWuEwG3TTkgaIDBh6fY4VsA==
-X-Received: by 2002:a05:620a:28cc:b0:762:3841:c098 with SMTP id
- l12-20020a05620a28cc00b007623841c098mr11889999qkp.30.1688763829506; 
- Fri, 07 Jul 2023 14:03:49 -0700 (PDT)
+ bh=aRCz1owDxNnsSmVTiqMJsBnAmTae+PjtZnNSaet++A8=;
+ b=HLxrYdZEBUinMj+0aVevagUHrVOCVsijs7luupzsKWB6MTJYqhVsJsySeF5DFE7psx
+ +zOGASjeWLvtfA1wnv6gExUKIPm1XxWv6prTd3qqnbbdBUSBUfeWMdFK3k3he3jHeQv5
+ 8lQCN/zhCW+0cD0UeQN0HcFrU2j3tgiRPLIlMI5yEGpduuhYUjKDLefto8GFxJtFIO6q
+ PKbaB8LcnvHBgux7rKK5cjbCsV1v8RabjYIEstLmkhpe7AhLDnnMHrfBvq8zCju3Bdal
+ ApTdfR0HF07eARi5D3CoxeaGT65CdyRKMw0CUrVO9nSVt1bLnh5KHqucUNlcgvk5qwBz
+ r0LA==
+X-Gm-Message-State: ABy/qLaSDflyra+q0P+dNzE6znOiRbTApzC/rgH5gUwbfJIUBUS8f3ij
+ D7SmRPXz1OCVcD3SNQo/tax7lTrUEkl42wohHRDD51vnr3X1xqHzfXsRxhTeDTTbdty+uegstQS
+ NJ62PhFmBsHV4f0LSIwYZs+ga+rr8xRR9xw==
+X-Received: by 2002:a05:622a:386:b0:400:9390:d129 with SMTP id
+ j6-20020a05622a038600b004009390d129mr7062818qtx.36.1688765244865; 
+ Fri, 07 Jul 2023 14:27:24 -0700 (PDT)
+X-Google-Smtp-Source: APBJJlFuIjPlE810le5KzXeZ9bNzoMrtVJ8ecgHwmQyVcVv+zYgaKQUdEGGjOQtrM4tcdJSmtXxNog==
+X-Received: by 2002:a05:622a:386:b0:400:9390:d129 with SMTP id
+ j6-20020a05622a038600b004009390d129mr7062805qtx.36.1688765244640; 
+ Fri, 07 Jul 2023 14:27:24 -0700 (PDT)
 Received: from ?IPv6:2600:4040:5c62:8200:4d3e:bd5a:7e0a:133a?
  ([2600:4040:5c62:8200:4d3e:bd5a:7e0a:133a])
  by smtp.gmail.com with ESMTPSA id
- u6-20020a0cdd06000000b006301ec0d16fsm2493703qvk.0.2023.07.07.14.03.48
+ c15-20020ac8660f000000b003f6be76a5c1sm2133963qtp.6.2023.07.07.14.27.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Jul 2023 14:03:49 -0700 (PDT)
-Message-ID: <14f2b03302c07a62cce1ec272f54727b2ad39721.camel@redhat.com>
+ Fri, 07 Jul 2023 14:27:23 -0700 (PDT)
+Message-ID: <c94c3351895f3c74615ebb5a8b5cab2b8e5cae9d.camel@redhat.com>
 From: Lyude Paul <lyude@redhat.com>
-To: Karol Herbst <kherbst@redhat.com>, linux-kernel@vger.kernel.org
-Date: Fri, 07 Jul 2023 17:03:48 -0400
-In-Reply-To: <20230630160645.3984596-1-kherbst@redhat.com>
-References: <20230630160645.3984596-1-kherbst@redhat.com>
+To: Simon Ser <contact@emersion.fr>
+Date: Fri, 07 Jul 2023 17:27:23 -0400
+In-Reply-To: <7VkEmw9tAQsZuvc6AX3CTPGZx102IVl7z2vd8jHfIFxXPduS5d79gS1HpD40ik0Gr26myfu9edHs-kRtc_HIaxjIHFynRkiGRvkkGn6sp9g=@emersion.fr>
+References: <20230620181547.272476-1-contact@emersion.fr>
+ <f70b3789d961861cdefb0752979d4666cdd151ba.camel@redhat.com>
+ <7VkEmw9tAQsZuvc6AX3CTPGZx102IVl7z2vd8jHfIFxXPduS5d79gS1HpD40ik0Gr26myfu9edHs-kRtc_HIaxjIHFynRkiGRvkkGn6sp9g=@emersion.fr>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.48.3 (3.48.3-1.fc38)
 MIME-Version: 1.0
@@ -72,7 +74,8 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/disp/g94: enable HDMI
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/disp: use
+ drm_kms_helper_connector_hotplug_event()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,40 +87,60 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- dri-devel@lists.freedesktop.org
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Wed, 2023-06-21 at 22:13 +0000, Simon Ser wrote:
+> Hi Lyude!
+>=20
+> On Wednesday, June 21st, 2023 at 23:56, Lyude Paul <lyude@redhat.com> wro=
+te:
+>=20
+> > > -=09if (changed)
+> > > +=09if (changed =3D=3D 1)
+> > > +=09=09drm_kms_helper_connector_hotplug_event(first_changed_connector=
+);
+> > > +=09else if (changed > 0)
+> > >  =09=09drm_kms_helper_hotplug_event(dev);
+> >=20
+> > I'm curious if you think there might be an advantage to doing this per-
+> > connector even with multiple connectors? Seems like we could do that if=
+ we
+> > stored changed connectors as a bitmask.
+>=20
+> I believe firing off multiple per-connector uevents would be worse than a
+> single per-device uevent because user-space would see intermediate states
+> instead of an atomic change.
+>=20
+> Let's say I have 3 connectors connected, and different settings set in my
+> compositor when 1, 2 or 3 screens are connected. Let's say an unplug
+> disconnects 2 monitors at the same time. With a single uevent, the compos=
+itor
+> refreshes the whole device state, and then applies the 1-screen settings.=
+ With
+> 2 uevents (one for each connector), the compositor refreshes the first
+> disconnected connector state, then applies the 2-screen settings, then
+> refreshes the second disconnected connector state, then applies the 1-scr=
+een
+> settings. Applying the 2-screen settings might cause an unnecessarily gli=
+tchy
+> intermediate state, where windows move around, modesets are performed, us=
+er
+> configured commands are run, just to un-do everything right after.
+>=20
+> I hope this makes sense,
+>=20
+
+Hi! Seems fine to me :)
+
 Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-But seeing as I looked at this + some other patches yesterday I assume ther=
-e's
-still more to this?
+Let me know if you need me to push it to drm-misc
 
-On Fri, 2023-06-30 at 18:06 +0200, Karol Herbst wrote:
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Fixes: f530bc60a30b ("drm/nouveau/disp: move HDMI config into acquire + i=
-nfoframe methods")
-> Signed-off-by: Karol Herbst <kherbst@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c | 1 +
->  1 file changed, 1 insertion(+)
+> Simon
 >=20
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c b/drivers/gpu=
-/drm/nouveau/nvkm/engine/disp/g94.c
-> index a4853c4e5ee3..67ef889a0c5f 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c
-> @@ -295,6 +295,7 @@ g94_sor =3D {
->  =09.clock =3D nv50_sor_clock,
->  =09.war_2 =3D g94_sor_war_2,
->  =09.war_3 =3D g94_sor_war_3,
-> +=09.hdmi =3D &g84_sor_hdmi,
->  =09.dp =3D &g94_sor_dp,
->  };
-> =20
 
 --=20
 Cheers,
