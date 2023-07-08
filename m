@@ -2,50 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BBD974B906
-	for <lists+nouveau@lfdr.de>; Fri,  7 Jul 2023 23:59:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3268C74BA6B
+	for <lists+nouveau@lfdr.de>; Sat,  8 Jul 2023 02:06:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E946010E592;
-	Fri,  7 Jul 2023 21:59:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7F6BB10E62A;
+	Sat,  8 Jul 2023 00:06:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4B6E810E592
- for <nouveau@lists.freedesktop.org>; Fri,  7 Jul 2023 21:59:00 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9079C10E62A
+ for <nouveau@lists.freedesktop.org>; Sat,  8 Jul 2023 00:06:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1688767139;
+ s=mimecast20190719; t=1688774810;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=+rsK4w5s/iuBLQer6P3Y3zMk8adlTjvdF1ODpcoFTPU=;
- b=i0ixpoh7PE+lBE54qlWgL83zXNOotGZcoVJOhNl7R8c+0db+X71freCas0lG58Xsmf+oWE
- //Z6GPA/57/l5ixqJXxi3MmjmR3PLlpOSvVqKEPCyYYNTDbnVaMEEPfOelJSTyqZZgHiWg
- zlLOct4ZKdNCazU7o3x+YcznegytT6Q=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-675-Vrnd9375MzivrBaS-TSFGQ-1; Fri, 07 Jul 2023 17:58:56 -0400
-X-MC-Unique: Vrnd9375MzivrBaS-TSFGQ-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A294B858EED;
- Fri,  7 Jul 2023 21:58:55 +0000 (UTC)
-Received: from emerald.redhat.com (unknown [10.22.33.28])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 1D10BC09A09;
- Fri,  7 Jul 2023 21:58:55 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org
-Date: Fri,  7 Jul 2023 17:58:51 -0400
-Message-Id: <20230707215851.590754-1-lyude@redhat.com>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ClNl+J5kZre4g9U4Ilh/C86VTLXimbatUVRVhRP/EmY=;
+ b=K4+uD5dugJ5qlg2ymE4QggX1VqesB4TTxY4GBESrG4VuWbYEWJJHfjDKyNSqcICfWaity1
+ dasYi6W/so3yMF+7ZXR7ty3purys5FECh2MiAejuXk+27sptozaDwzVyNDdsNFrdmQcZue
+ r/Z+zcgYUdr1mqE5umrNFm42sTi57dg=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-241-qU3QZhaXPaSTnBfPmek7JA-1; Fri, 07 Jul 2023 20:06:48 -0400
+X-MC-Unique: qU3QZhaXPaSTnBfPmek7JA-1
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2b6a64c5aa5so4313321fa.0
+ for <nouveau@lists.freedesktop.org>; Fri, 07 Jul 2023 17:06:48 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1688774807; x=1691366807;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ClNl+J5kZre4g9U4Ilh/C86VTLXimbatUVRVhRP/EmY=;
+ b=C3byOPIzUxNDQYVtC86xjrWGfHFGCZxzZiUGV/L2fkB1gg3tKEFdIw37VN5SiC9kyM
+ mNo1ZT15DFqRZtEqrzr2vx3o3inx01AlIdmf9sgDKYcEHVTxtobZCh9dfskYJUh9K3oW
+ m/VynEAjVkXODEcspqSY9xzG/DE22isXRXRMbUPlyjerWuJhfk16/QfXELpJUr1/LYhp
+ Q4Pvk1/96yTb8XMPJxM201Q31PRbq/snWCJU5XcH7URgexbfkDwE/E+ASMCXaKlYvnvi
+ mMQAdBvPqzFqbHda58hWi7FTTUIzLt15B9L2H3VXjieKqxxVkR5iGKuqoLP1NIUVBIod
+ P6JA==
+X-Gm-Message-State: ABy/qLaG/v7wBxJyoixhtmNn4avPWs42AXaYQkT3G4+CpRsxP3xMzVee
+ F3hcZViMCoBPiSJShRW+XZeL0mUmGPOUNwMMzCCxZEt/ugrsSaVFA0vuL91m66Vbtl8n/MVPDfK
+ iDv4aNqdH5Zb6YQ+CJ4MEaQLnNeta7QCjak0ub2mYkg==
+X-Received: by 2002:a2e:a4af:0:b0:2b6:cd7f:5ea8 with SMTP id
+ g15-20020a2ea4af000000b002b6cd7f5ea8mr3974264ljm.1.1688774807530; 
+ Fri, 07 Jul 2023 17:06:47 -0700 (PDT)
+X-Google-Smtp-Source: APBJJlFpPr6r6JoBVvnvb4DwD31nWTUtEWSpKheU8SGmCkexh44pjRQR6+zxMEjOSNetT8JZmG/XoPxNZG9/X8BANUg=
+X-Received: by 2002:a2e:a4af:0:b0:2b6:cd7f:5ea8 with SMTP id
+ g15-20020a2ea4af000000b002b6cd7f5ea8mr3974256ljm.1.1688774807136; Fri, 07 Jul
+ 2023 17:06:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
-Subject: [Nouveau] [PATCH] drm/nouveau/nvkm/dp: Add hack to fix DP 1.3+ DPCD
- issues
+References: <20230630160645.3984596-1-kherbst@redhat.com>
+ <14f2b03302c07a62cce1ec272f54727b2ad39721.camel@redhat.com>
+In-Reply-To: <14f2b03302c07a62cce1ec272f54727b2ad39721.camel@redhat.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Sat, 8 Jul 2023 02:06:36 +0200
+Message-ID: <CACO55tv_2Oisgkm+FqQ6xz91zJ8KidwFV6hMoCxHS-JYMkiFxQ@mail.gmail.com>
+To: Lyude Paul <lyude@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/disp/g94: enable HDMI
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,104 +77,51 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: open list <linux-kernel@vger.kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Currently we use the drm_dp_dpcd_read_caps() helper in the DRM side of
-nouveau in order to read the DPCD of a DP connector, which makes sure we do
-the right thing and also check for extended DPCD caps. However, it turns
-out we're not currently doing this on the nvkm side since we don't have
-access to the drm_dp_aux structure there - which means that the DRM side of
-the driver and the NVKM side can end up with different DPCD capabilities
-for the same connector.
+On Fri, Jul 7, 2023 at 11:03=E2=80=AFPM Lyude Paul <lyude@redhat.com> wrote=
+:
+>
+> Reviewed-by: Lyude Paul <lyude@redhat.com>
+>
+> But seeing as I looked at this + some other patches yesterday I assume th=
+ere's
+> still more to this?
+>
 
-Ideally to fix this, we want to start setting up the drm_dp_aux device in
-NVKM before we've made contact with the DRM side - which should be pretty
-easy to accomplish (I'm already working on it!). Until then however, let's
-workaround this problem by porting a copy of drm_dp_read_dpcd_caps() into
-NVKM - which should fix this issue.
+not really. All those patches are all independent and just a bunch of
+fixes. I just figured this one out a bit later.
 
-Issue: https://gitlab.freedesktop.org/drm/nouveau/-/issues/211
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c | 48 ++++++++++++++++++-
- 1 file changed, 47 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
-index 40c8ea43c42f..b8ac66b4a2c4 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
-@@ -26,6 +26,8 @@
- #include "head.h"
- #include "ior.h"
- 
-+#include <drm/display/drm_dp.h>
-+
- #include <subdev/bios.h>
- #include <subdev/bios/init.h>
- #include <subdev/gpio.h>
-@@ -634,6 +636,50 @@ nvkm_dp_enable_supported_link_rates(struct nvkm_outp *outp)
- 	return outp->dp.rates != 0;
- }
- 
-+/* XXX: This is a big fat hack, and this is just drm_dp_read_dpcd_caps()
-+ * converted to work inside nvkm. This is a temporary holdover until we start
-+ * passing the drm_dp_aux device through NVKM
-+ */
-+static int
-+nvkm_dp_read_dpcd_caps(struct nvkm_outp *outp)
-+{
-+	struct nvkm_i2c_aux *aux = outp->dp.aux;
-+	u8 dpcd_ext[DP_RECEIVER_CAP_SIZE];
-+	int ret;
-+
-+	ret = nvkm_rdaux(aux, DPCD_RC00_DPCD_REV, outp->dp.dpcd, DP_RECEIVER_CAP_SIZE);
-+	if (ret < 0)
-+		return ret;
-+
-+	/*
-+	 * Prior to DP1.3 the bit represented by
-+	 * DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT was reserved.
-+	 * If it is set DP_DPCD_REV at 0000h could be at a value less than
-+	 * the true capability of the panel. The only way to check is to
-+	 * then compare 0000h and 2200h.
-+	 */
-+	if (!(outp->dp.dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
-+	      DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT))
-+		return 0;
-+
-+	ret = nvkm_rdaux(aux, DP_DP13_DPCD_REV, dpcd_ext, sizeof(dpcd_ext));
-+	if (ret < 0)
-+		return ret;
-+
-+	if (outp->dp.dpcd[DP_DPCD_REV] > dpcd_ext[DP_DPCD_REV]) {
-+		OUTP_DBG(outp, "Extended DPCD rev less than base DPCD rev (%d > %d)\n",
-+			 outp->dp.dpcd[DP_DPCD_REV], dpcd_ext[DP_DPCD_REV]);
-+		return 0;
-+	}
-+
-+	if (!memcmp(outp->dp.dpcd, dpcd_ext, sizeof(dpcd_ext)))
-+		return 0;
-+
-+	memcpy(outp->dp.dpcd, dpcd_ext, sizeof(dpcd_ext));
-+
-+	return 0;
-+}
-+
- void
- nvkm_dp_enable(struct nvkm_outp *outp, bool auxpwr)
- {
-@@ -689,7 +735,7 @@ nvkm_dp_enable(struct nvkm_outp *outp, bool auxpwr)
- 			memset(outp->dp.lttpr, 0x00, sizeof(outp->dp.lttpr));
- 		}
- 
--		if (!nvkm_rdaux(aux, DPCD_RC00_DPCD_REV, outp->dp.dpcd, sizeof(outp->dp.dpcd))) {
-+		if (!nvkm_dp_read_dpcd_caps(outp)) {
- 			const u8 rates[] = { 0x1e, 0x14, 0x0a, 0x06, 0 };
- 			const u8 *rate;
- 			int rate_max;
--- 
-2.40.1
+> On Fri, 2023-06-30 at 18:06 +0200, Karol Herbst wrote:
+> > Cc: Ben Skeggs <bskeggs@redhat.com>
+> > Cc: Lyude Paul <lyude@redhat.com>
+> > Fixes: f530bc60a30b ("drm/nouveau/disp: move HDMI config into acquire +=
+ infoframe methods")
+> > Signed-off-by: Karol Herbst <kherbst@redhat.com>
+> > ---
+> >  drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c b/drivers/g=
+pu/drm/nouveau/nvkm/engine/disp/g94.c
+> > index a4853c4e5ee3..67ef889a0c5f 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/g94.c
+> > @@ -295,6 +295,7 @@ g94_sor =3D {
+> >       .clock =3D nv50_sor_clock,
+> >       .war_2 =3D g94_sor_war_2,
+> >       .war_3 =3D g94_sor_war_3,
+> > +     .hdmi =3D &g84_sor_hdmi,
+> >       .dp =3D &g94_sor_dp,
+> >  };
+> >
+>
+> --
+> Cheers,
+>  Lyude Paul (she/her)
+>  Software Engineer at Red Hat
+>
 
