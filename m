@@ -1,47 +1,68 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8895374CEE7
-	for <lists+nouveau@lfdr.de>; Mon, 10 Jul 2023 09:48:02 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4553774D110
+	for <lists+nouveau@lfdr.de>; Mon, 10 Jul 2023 11:10:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A764210E20D;
-	Mon, 10 Jul 2023 07:48:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B11F310E242;
+	Mon, 10 Jul 2023 09:10:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-4321.protonmail.ch (mail-4321.protonmail.ch [185.70.43.21])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3B1C710E20B
- for <nouveau@lists.freedesktop.org>; Mon, 10 Jul 2023 07:47:58 +0000 (UTC)
-Date: Mon, 10 Jul 2023 07:47:32 +0000
-Authentication-Results: mail-4321.protonmail.ch;
- dkim=pass (2048-bit key) header.d=emersion.fr header.i=@emersion.fr
- header.b="ha0128kS"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=emersion.fr;
- s=protonmail; t=1688975270; x=1689234470;
- bh=eDjdHBj8Yjcgz28RxHZDLZUExZn6AoqNYAz+mtk8NPw=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=ha0128kSnqN6wOND40b3wKWrtO0Y439igKl3kBxIu6FPeXA+u0kA5hYW//k7Cdvun
- irE+zf2nIQXr0ky5DR4zdqFNu8KNlIdgyqXIIttcHvfVcVsPx0KmvNjz/j4mjuCAbk
- lY9ceH85n1DJA8qmoqe1dK4lZEaO50w+mcqkW/CPz2ocgBPGn+skRfWSuCfBW8t9wf
- sq8to+Qxr2n5a7i9ZVjO3ylor3bd5IMF0Z1pjI/82z34FidvotI53deCQcuzL8FANu
- q+SRvxrZ+e5YqB+Wy81P2IuGcZMfQPkm5GXoKS+uD8WNV+JCN9svmPDMZKAsdd+x2W
- UY0NiQzXNQHrw==
-To: Lyude Paul <lyude@redhat.com>
-From: Simon Ser <contact@emersion.fr>
-Message-ID: <Ph6fyZ55sIDOCjbqUfSs1wSEq60UpYlMZYb3bYQdITGV_JqeaJXEVHSudp-QqT1usBznNKFws8RnuCVK1NR1aX8C-Q6nxqHlzxVUEsN2sdg=@emersion.fr>
-In-Reply-To: <c94c3351895f3c74615ebb5a8b5cab2b8e5cae9d.camel@redhat.com>
-References: <20230620181547.272476-1-contact@emersion.fr>
- <f70b3789d961861cdefb0752979d4666cdd151ba.camel@redhat.com>
- <7VkEmw9tAQsZuvc6AX3CTPGZx102IVl7z2vd8jHfIFxXPduS5d79gS1HpD40ik0Gr26myfu9edHs-kRtc_HIaxjIHFynRkiGRvkkGn6sp9g=@emersion.fr>
- <c94c3351895f3c74615ebb5a8b5cab2b8e5cae9d.camel@redhat.com>
-Feedback-ID: 1358184:user:proton
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AFBEC10E00F;
+ Mon, 10 Jul 2023 09:09:59 +0000 (UTC)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1b8a462e0b0so20023415ad.3; 
+ Mon, 10 Jul 2023 02:09:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1688980199; x=1691572199;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZfziryGEywF1OCFAiRrD5HH2CawNQQd/yh4CzyASrxI=;
+ b=EgnRXmIty3Veat9BxmT9s9PzIR26yGSc64PHjsJASW6rQkjDt6h6hF6dFNdPEL6Nt4
+ PUT0zti06eDX6hNIbbMG/t6j3cpQBB1RBa8+w18HTM904n9b+ueSlinzNk0MtsoG8+oz
+ dLQk3zFQTzQaXt6W+/yDX0add7uJCFrqJirKxFpXM3dhQ3jpmshjbjruAZ4SOuuujXaF
+ lCkjeuiAwSs3Ebu3Ya3oj5RwWphbVmTerT/FkoDqWeTTTorZy1PMc8NMKXMPur7dzvig
+ oUGnp5EJBFTJyQv8Fywqlmmpt6Z43QAsdsq/8J//KV/53/E6RuYZHW08OlipX40ilE1F
+ vhXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1688980199; x=1691572199;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZfziryGEywF1OCFAiRrD5HH2CawNQQd/yh4CzyASrxI=;
+ b=BR8PvfJng6sm6mgzm2qf7f4b4BHHM4lCWHWfxq167wWruQ5Vq8WR9OAurZxpXx67qM
+ /mnSvesCGAB3mUv4jlYOckmEG6dAROgouPRFFGJuwqeWZV5F3ZymuBrxkbSwRnUE2qLJ
+ rzMo/cXE9yobtqoRuGjvxdDM2Z8G1UrFAh7abZrsbTWIH5ej0XmapzpjIZSvzG8Nut54
+ jaU/6TWKGKp3K6ORBg5PGfZiSCG8BqqJyH6gfol4FQ6j1o9EexF/+15potHWiUQVC4ye
+ 4ZQ3r3L3OseJsH3H6l87ay3zlSIITIA2yuqP3f6C9yH3OW0f/EOfUYhNRwNT5Z6Lba8y
+ Yubw==
+X-Gm-Message-State: ABy/qLZDsSUC878HGhiWSfa2NvEa+tPaTsiMGbOxrnM8HzcmTa5KcdpT
+ zdkm0qygb8NFMchjuMAfrzb3NaGKihdwBXlc
+X-Google-Smtp-Source: APBJJlECPiX2JObsb+RjoZmVK9i5eoWA4utCjAYXj24Z5oVB1RCRjZJ3hDpsi5MIPpxKT6wRYYOytQ==
+X-Received: by 2002:a17:902:c409:b0:1b8:28f6:20e6 with SMTP id
+ k9-20020a170902c40900b001b828f620e6mr13600129plk.34.1688980198740; 
+ Mon, 10 Jul 2023 02:09:58 -0700 (PDT)
+Received: from debian.me ([103.131.18.64]) by smtp.gmail.com with ESMTPSA id
+ s12-20020a170902ea0c00b001b9df8f14d7sm1822852plg.267.2023.07.10.02.09.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Jul 2023 02:09:57 -0700 (PDT)
+Received: by debian.me (Postfix, from userid 1000)
+ id AF9DF91C4E4C; Mon, 10 Jul 2023 16:09:52 +0700 (WIB)
+Date: Mon, 10 Jul 2023 16:09:52 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: sunran001@208suo.com, airlied@gmail.com, daniel@ffwll.ch
+Message-ID: <ZKvK4NXzkKZTE35E@debian.me>
+References: <20230710070505.53916-1-xujianghui@cdjrlc.com>
+ <1ddf673283e93e83d912066f2241b976@208suo.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/disp: use
- drm_kms_helper_connector_hotplug_event()
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="sesJufGAkiPhMEHr"
+Content-Disposition: inline
+In-Reply-To: <1ddf673283e93e83d912066f2241b976@208suo.com>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/iccsense:
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,9 +74,66 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Thanks for the review, I've pushed the patch.
+
+--sesJufGAkiPhMEHr
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jul 10, 2023 at 03:06:47PM +0800, sunran001@208suo.com wrote:
+> Fixed error: 'do not use assignment in if condition'
+>=20
+> This patch fixes error: 'do not use assignment in if condition'
+> in drm/nouveau/iccsense
+
+I guess this is checkpatch fix, right?
+
+>=20
+> Signed-off-by: Ran Sun <sunran001@208suo.com>
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c
+> b/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c
+> index 8f0ccd3664eb..2428f3d6e477 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c
+> @@ -322,7 +322,8 @@ int
+>  nvkm_iccsense_new_(struct nvkm_device *device, enum nvkm_subdev_type typ=
+e,
+> int inst,
+>             struct nvkm_iccsense **iccsense)
+>  {
+> -    if (!(*iccsense =3D kzalloc(sizeof(**iccsense), GFP_KERNEL)))
+> +    *iccsense =3D kzalloc(sizeof(**iccsense), GFP_KERNEL);
+> +    if (!*iccsense)
+>          return -ENOMEM;
+>      INIT_LIST_HEAD(&(*iccsense)->sensors);
+>      INIT_LIST_HEAD(&(*iccsense)->rails);
+
+Your patch is corrupted (tabs converted to spaces) because you're using
+Roundcube. Please use git-send-mail(1) instead.
+
+Thanks.
+
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--sesJufGAkiPhMEHr
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCZKvK2QAKCRD2uYlJVVFO
+o30SAQCBQ0XJUZtYK5k23vpkl8YQStJLMGNiuEo8Wulk+Ne03QEAkGbjMCU8DRCz
+Ohcbe1uBj+CW/b2kAyogZavYb8WBBAE=
+=5wr9
+-----END PGP SIGNATURE-----
+
+--sesJufGAkiPhMEHr--
