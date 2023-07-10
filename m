@@ -2,47 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2F0C74CE42
-	for <lists+nouveau@lfdr.de>; Mon, 10 Jul 2023 09:23:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1FA774CE2C
+	for <lists+nouveau@lfdr.de>; Mon, 10 Jul 2023 09:23:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DAF8510E1F3;
-	Mon, 10 Jul 2023 07:23:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C2AE310E1D5;
+	Mon, 10 Jul 2023 07:23:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.208.org (unknown [183.242.55.162])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EA23110E0F1
- for <nouveau@lists.freedesktop.org>; Mon, 10 Jul 2023 06:11:36 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DA56110E1A8
+ for <nouveau@lists.freedesktop.org>; Mon, 10 Jul 2023 06:31:22 +0000 (UTC)
 Received: from mail.208.org (email.208.org [127.0.0.1])
- by mail.208.org (Postfix) with ESMTP id 4QzttY225TzBHXh2
- for <nouveau@lists.freedesktop.org>; Mon, 10 Jul 2023 14:11:33 +0800 (CST)
+ by mail.208.org (Postfix) with ESMTP id 4QzvKM5JbBzBHXh9
+ for <nouveau@lists.freedesktop.org>; Mon, 10 Jul 2023 14:31:19 +0800 (CST)
 Authentication-Results: mail.208.org (amavisd-new); dkim=pass
  reason="pass (just generated, assumed good)" header.d=208.org
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=208.org; h=
  content-transfer-encoding:content-type:message-id:user-agent
  :references:in-reply-to:subject:to:from:date:mime-version; s=
- dkim; t=1688969493; x=1691561494; bh=azaJMEJAgL47SIIml1shBWGLWae
- rskcRy12zpLCLts0=; b=lmJcULnCX6PZwbkiAsTck1QMlEqS2jg1NZ/l6IEazPD
- dNPZZqYJZQLs0FLyQ9PUu0RD1nOchlhgsq2mqrJ4xdvEKog8eNe7imHEvNAumfiH
- IRzIv9INLi3NQLBij/EACfxdt7H4GImSkHDW9nckIsk37Z76kcMZwR6xm0rfB0SZ
- IAH3CujwsSRzCx1yF0hn1zgCIHzl7PlzudAgCTR5bQmKSttuv3xfwK8sIiD3yOC9
- bM/VwMqiZLA/KbR4kixcEipBEwH2rZHLEc0dFvCkvczLlt69rTDBgorau1YuVpbB
- +eWpHXagXdMPiXMQa0NLryso9KJjmQQ2jeedkC5suig==
+ dkim; t=1688970679; x=1691562680; bh=aTlm6Xb7XXh6jhxQV0R2zMsPiDO
+ qv5eG9s4lBNA59SU=; b=ltMav5J8wazDv3YZNCFgd3oFcSatAp7nwnZXwjxtiqi
+ nm/jKVHuqLGU/QE4ekoH223zlVF2k5VKU7TTK0DtD4tpwdlvfXJOFlujJq/GnhuA
+ /NRAwxvXTbVG26RhyUEmsvl4HUICeHmmK1ssjBw/3CDMQIFpj+3bP4/Q5dww0lbE
+ OVlzx5F3j6eOwk0VDR+HdGzE3p7Nbh3l/AeGXVGVRP3LA+5Xi9eFmAgUXEMgJuZx
+ 34W+ZDx0e3W20KY3Hw0sMCHmYX1a8yj1aQc7sC1Wj401QHSrYQf7pPZbPMmF9WQn
+ Ebfs+OcD0m9fbiO/omEH8Y2hSaUFS2y21jizxcgGVZA==
 X-Virus-Scanned: amavisd-new at mail.208.org
 Received: from mail.208.org ([127.0.0.1])
  by mail.208.org (mail.208.org [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id SrI_RBNcNmJ1 for <nouveau@lists.freedesktop.org>;
- Mon, 10 Jul 2023 14:11:33 +0800 (CST)
+ with ESMTP id QMdBD4fF4qRx for <nouveau@lists.freedesktop.org>;
+ Mon, 10 Jul 2023 14:31:19 +0800 (CST)
 Received: from localhost (email.208.org [127.0.0.1])
- by mail.208.org (Postfix) with ESMTPSA id 4QzttX52cdzBHXgl;
- Mon, 10 Jul 2023 14:11:32 +0800 (CST)
+ by mail.208.org (Postfix) with ESMTPSA id 4QzvKM2q8MzBHXgl;
+ Mon, 10 Jul 2023 14:31:19 +0800 (CST)
 MIME-Version: 1.0
-Date: Mon, 10 Jul 2023 14:11:32 +0800
+Date: Mon, 10 Jul 2023 14:31:15 +0800
 From: sunran001@208suo.com
 To: airlied@gmail.com, daniel@ffwll.ch
-In-Reply-To: <20230710055219.53210-1-xujianghui@cdjrlc.com>
-References: <20230710055219.53210-1-xujianghui@cdjrlc.com>
+In-Reply-To: <20230710062932.53655-1-xujianghui@cdjrlc.com>
+References: <20230710062932.53655-1-xujianghui@cdjrlc.com>
 User-Agent: Roundcube Webmail
-Message-ID: <2fb128f812c7bf59d7af52193e307cdc@208suo.com>
+Message-ID: <7ab55aa7169d6a3bd0309b43c3de592e@208suo.com>
 X-Sender: sunran001@208suo.com
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
@@ -73,12 +73,22 @@ ERROR: do not use assignment in if condition
 
 Signed-off-by: Ran Sun <sunran001@208suo.com>
 ---
-  drivers/gpu/drm/nouveau/nvkm/subdev/i2c/busnv04.c | 0
-  1 file changed, 0 insertions(+), 0 deletions(-)
-  mode change 100755 => 100644 
-drivers/gpu/drm/nouveau/nvkm/subdev/i2c/busnv04.c
+  drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c | 3 ++-
+  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/busnv04.c 
-b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/busnv04.c
-old mode 100755
-new mode 100644
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c 
+b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c
+index d063d0dc13c5..098051d3755c 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c
+@@ -209,7 +209,8 @@ nvkm_i2c_aux_new_(const struct nvkm_i2c_aux_func 
+*func,
+            struct nvkm_i2c_pad *pad, int id,
+            struct nvkm_i2c_aux **paux)
+  {
+-    if (!(*paux = kzalloc(sizeof(**paux), GFP_KERNEL)))
++    *paux = kzalloc(sizeof(**paux), GFP_KERNEL);
++    if (!*paux)
+          return -ENOMEM;
+      return nvkm_i2c_aux_ctor(func, pad, id, *paux);
+  }
