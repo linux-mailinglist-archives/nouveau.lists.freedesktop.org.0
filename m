@@ -1,52 +1,50 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1508674EB64
-	for <lists+nouveau@lfdr.de>; Tue, 11 Jul 2023 12:03:57 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A45FA74F542
+	for <lists+nouveau@lfdr.de>; Tue, 11 Jul 2023 18:32:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E7BBB10E361;
-	Tue, 11 Jul 2023 10:03:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E907E10E3E9;
+	Tue, 11 Jul 2023 16:32:20 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9DC1110E358;
- Tue, 11 Jul 2023 10:03:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
- s=20170329;
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:
- In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Qy38nSyAkc0qhzNnog8BBlXyEItM31ZP1dtbuk4NSas=; b=YzhsIwXDM/xfGCzRI0DCeI11qh
- CQIXsKrBKQsDwj1LStUbfcE25/lr4Y0GGCNp1ob90ewpSdjOOnK/6V0Y7Joh2pLt8alHCqv6Bhss7
- tRqQDEqCAu0zfnBRwUVuK1ERbrt/uCPTluyyZEY80K3/3D6az+oe9JZ1nPAOrwvqG9V5U3F30MIx1
- 4hjrpOvdIjXc2UrNUN0FPuVFHQ0ENxtp/V7lWWxXYINvcOAytQVoO47O9OMrMgWOIiMC09vjyGvrS
- n/iHpLS2tMBRMDrNQrIxXZUcNwLt9y/xxBHRlWhzfSPAp+azAJZ+AStXtMo+ExeWOhxH89/j6g3Bo
- K0mMqhlQ==;
-Received: from 55.red-83-52-4.dynamicip.rima-tde.net ([83.52.4.55]
- helo=localhost.localdomain) by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1qJADd-00CLEz-HK; Tue, 11 Jul 2023 12:03:41 +0200
-Message-ID: <2c97b770da11457583c48b200e4f989c05ecc023.camel@igalia.com>
-From: Ricardo Garcia <rgarcia@igalia.com>
-To: Samuel Iglesias =?ISO-8859-1?Q?Gons=E1lvez?= <siglesias@igalia.com>, 
- events@lists.x.org, xorg-devel@lists.freedesktop.org, 
- wayland-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
- mesa-dev@lists.freedesktop.org, amd-gfx@lists.freedesktop.org, 
- etnaviv@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
- libre-soc-dev@lists.libre-soc.org, members@x.org
-Date: Tue, 11 Jul 2023 12:03:40 +0200
-In-Reply-To: <43ee9173619f841ab7aab965441114cf9a6263b5.camel@igalia.com>
-References: <249b7449-c47b-47e6-0582-d87bd323fbbe@igalia.com>
- <43ee9173619f841ab7aab965441114cf9a6263b5.camel@igalia.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.48.3 (3.48.3-1.fc38) 
+Received: from out-63.mta0.migadu.com (out-63.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::3f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8295110E3DE
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 16:32:17 +0000 (UTC)
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+ t=1689093133;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=AOe2sK5corMJVr8s18spKTEHFO7S6COQNSRgsjkc54A=;
+ b=ixKAhLu28/nq1vazDkLtGsR/XEiVHt1ra2tNTmdDLo9BPHekHQ7OViZ9PZCadSk3DSxHL1
+ 6Md7s5pSxG/rbDPk5WiAXKGCJ9q1jxF9DVPaEOAcGbdFMUXTFAqhY+mtay7NocxBghXDdE
+ nl8Q8HRCQmWsB+O7po7KrEn9IlnkOKE=
+From: Sui Jingfeng <sui.jingfeng@linux.dev>
+To: Alex Deucher <alexander.deucher@amd.com>,
+ Christian Koenig <christian.koenig@amd.com>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Dave Airlie <airlied@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Jocelyn Falempe <jfalempe@redhat.com>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Bjorn Helgaas <bhelgaas@google.com>, Helge Deller <deller@gmx.de>,
+ Mario Limonciello <mario.limonciello@amd.com>
+Date: Wed, 12 Jul 2023 00:31:46 +0800
+Message-Id: <20230711163155.791522-1-sui.jingfeng@linux.dev>
 MIME-Version: 1.0
-Subject: Re: [Nouveau] XDC 2023: Registration & Call for Proposals now open!
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
+Subject: [Nouveau] [PATCH v3 0/9] PCI/VGA: Improve the default VGA device
+ selection
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,95 +56,84 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "board@foundation.x.org" <board@foundation.x.org>
+Cc: linux-fbdev@vger.kernel.org, Sui Jingfeng <suijingfeng@loongson.cn>,
+ kvm@vger.kernel.org, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ linux-pci@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-New reminder that the XDC 2023 Registration and Call for Proposals are
-open till the end of this week. The deadline is July 17. Please submit
-your proposals ASAP! You can find more information about XDC 2023 in
-previous emails below.
+From: Sui Jingfeng <suijingfeng@loongson.cn>
 
-Thanks again for your attention,
--Ricardo
+Currently, the default VGA device selection is not perfect. Potential
+problems are:
 
-On Tue, 2023-06-27 at 16:24 +0200, Ricardo Garcia wrote:
-> This is a reminder that the XDC 2023 Registration and the Call for
-> Proposals are still open and will be open for about 2 more weeks. Do not
-> forget to submit your proposals before the deadline (July 17)!
->=20
-> The conference will take place in A Coru=C3=B1a this year, from October 1=
-7 to
-> 19. You can find more information about the conference in the links
-> below and you can also follow us on Mastodon for the latest updates.
->=20
-> https://floss.social/@XOrgDevConf
->=20
-> Thanks for your attention,
-> -Ricardo
->=20
-> On Mon, 2023-04-17 at 13:41 +0200, Samuel Iglesias Gons=C3=A1lvez wrote:
-> > =C2=A0
-> > Hello!
-> > =C2=A0=C2=A0
-> > =C2=A0Registration & Call for Proposals are now open for XDC 2023, whic=
-h will
-> > =C2=A0take place on October 17-19, 2023.=20
-> > =C2=A0
-> > =C2=A0https://xdc2023.x.org
-> > =C2=A0=C2=A0
-> > =C2=A0As usual, the conference is free of charge and open to the genera=
-l
-> > =C2=A0public. If you plan on attending, please make sure to register as=
- early
-> > =C2=A0as possible!
-> > =C2=A0=C2=A0
-> > =C2=A0In order to register as attendee, you will therefore need to regi=
-ster
-> > =C2=A0via the XDC website.
-> > =C2=A0=C2=A0
-> > =C2=A0https://indico.freedesktop.org/event/4/registrations/
-> > =C2=A0=C2=A0
-> > =C2=A0In addition to registration, the CfP is now open for talks, works=
-hops
-> > =C2=A0and demos at XDC 2023. While any serious proposal will be gratefu=
-lly
-> > =C2=A0considered, topics of interest to X.Org and freedesktop.org devel=
-opers
-> > =C2=A0are encouraged. The program focus is on new development, ongoing
-> > =C2=A0challenges and anything else that will spark discussions among
-> > =C2=A0attendees in the hallway track.
-> > =C2=A0=C2=A0
-> > =C2=A0We are open to talks across all layers of the graphics stack, fro=
-m the
-> > =C2=A0kernel to desktop environments / graphical applications and about=
- how
-> > =C2=A0to make things better for the developers who build them. Head to =
-the
-> > =C2=A0CfP page to learn more:=20
-> > =C2=A0=C2=A0
-> > =C2=A0https://indico.freedesktop.org/event/4/abstracts/
-> > =C2=A0=C2=A0
-> > =C2=A0The deadline for submissions is Monday, 17 July 2023 (23:59 CEST)
-> > =C2=A0=C2=A0
-> > =C2=A0Check out our Reimbursement Policy to accept speaker expenses:
-> > =C2=A0=C2=A0
-> > =C2=A0https://www.x.org/wiki/XorgFoundation/Policies/Reimbursement/
-> > =C2=A0=C2=A0
-> > =C2=A0If you have any questions, please send me an email to
-> > =C2=A0siglesias AT igalia.com, adding on Cc the X.org board (board
-> > =C2=A0at foundation.x.org).
-> > =C2=A0=C2=A0
-> > =C2=A0And please keep in mind, you can follow us on Twitter for all the=
- latest
-> > =C2=A0updates and to stay connected:
-> > =C2=A0=C2=A0
-> > =C2=A0https://twitter.com/XOrgDevConf
-> > =C2=A0=C2=A0
-> > =C2=A0Best,
-> > =C2=A0=C2=A0
-> > =C2=A0Sam
-> > =C2=A0
-> > =C2=A0
->=20
+1) This function is a no-op on non-x86 architectures.
+2) It does not take the PCI Bar may get relocated into consideration.
+3) It is not effective for the PCI device without a dedicated VRAM Bar.
+4) It is device-agnostic, thus it has to waste the effort to iterate all
+   of the PCI Bar to find the VRAM aperture.
+5) It has invented lots of methods to determine which one is the default
+   boot device on a multiple video card coexistence system. But this is
+   still a policy because it doesn't give the user a choice to override.
+
+With the observation that device drivers or video aperture helpers may
+have better knowledge about which PCI bar contains the firmware FB,
+
+This patch tries to solve the above problems by introducing a function
+callback to the vga_client_register() function interface. DRM device
+drivers for the PCI device need to register the is_boot_device() function
+callback during the driver loading time. Once the driver binds the device
+successfully, VRAARB will call back to the driver. This gives the device
+drivers a chance to provide accurate boot device identification. Which in
+turn unlock the abitration service to non-x86 architectures. A device
+driver can also pass a NULL pointer to keep the original behavior.
+
+This series is applied on the drm-tip branch (with a cleanup patch set[1]
+applied beforehand)
+
+[1] https://patchwork.freedesktop.org/series/120548/
+
+v2:
+	* Add a simple implemment for drm/i915 and drm/ast
+	* Pick up all tags (Mario)
+v3:
+	* Fix a mistake for drm/i915 implement
+	* Fix patch can not be applied problem because of drm/amdgpu merged
+          other people's patch.
+
+Sui Jingfeng (9):
+  video/aperture: Add a helper to detect if an aperture contains
+    firmware FB
+  video/aperture: Add a helper for determining if an unmoved aperture
+    contain FB
+  PCI/VGA: Switch to aperture_contain_firmware_fb_nonreloc()
+  PCI/VGA: Improve the default VGA device selection
+  drm/amdgpu: Implement the is_primary_gpu callback of
+    vga_client_register()
+  drm/radeon: Add an implement for the is_primary_gpu function callback
+  drm/i915: Add an implement for the is_primary_gpu hook
+  drm/ast: Register as a vga client to vgaarb by calling
+    vga_client_register()
+  drm/loongson: Add an implement for the is_primary_gpu function
+    callback
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c | 12 +++-
+ drivers/gpu/drm/ast/ast_drv.c              | 29 +++++++++
+ drivers/gpu/drm/drm_aperture.c             | 16 +++++
+ drivers/gpu/drm/i915/display/intel_vga.c   | 31 ++++++++-
+ drivers/gpu/drm/loongson/lsdc_drv.c        | 10 ++-
+ drivers/gpu/drm/nouveau/nouveau_vga.c      |  2 +-
+ drivers/gpu/drm/radeon/radeon_device.c     | 12 +++-
+ drivers/pci/vgaarb.c                       | 74 ++++++++++++++++------
+ drivers/vfio/pci/vfio_pci_core.c           |  2 +-
+ drivers/video/aperture.c                   | 65 +++++++++++++++++++
+ include/drm/drm_aperture.h                 |  2 +
+ include/linux/aperture.h                   | 14 ++++
+ include/linux/vgaarb.h                     |  8 ++-
+ 13 files changed, 247 insertions(+), 30 deletions(-)
+
+-- 
+2.25.1
 
