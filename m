@@ -1,52 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EBA974E6B2
-	for <lists+nouveau@lfdr.de>; Tue, 11 Jul 2023 08:02:31 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A8BD74E6EF
+	for <lists+nouveau@lfdr.de>; Tue, 11 Jul 2023 08:13:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7A2C210E301;
-	Tue, 11 Jul 2023 06:02:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3F58210E30E;
+	Tue, 11 Jul 2023 06:13:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.208.org (unknown [183.242.55.162])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1BC6D10E301
- for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 06:02:25 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 59E0710E30F
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 06:12:59 +0000 (UTC)
 Received: from mail.208.org (email.208.org [127.0.0.1])
- by mail.208.org (Postfix) with ESMTP id 4R0VdT4l0wzBHXhl
- for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 14:02:21 +0800 (CST)
+ by mail.208.org (Postfix) with ESMTP id 4R0Vsh1bZpzBHXkQ
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 14:12:56 +0800 (CST)
 Authentication-Results: mail.208.org (amavisd-new); dkim=pass
  reason="pass (just generated, assumed good)" header.d=208.org
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=208.org; h=
- content-type:message-id:user-agent:references:in-reply-to
- :subject:to:from:date:mime-version; s=dkim; t=1689055341; x=
- 1691647342; bh=b8hHmnhwvioMharC+I07LYQUBP9wCvt66s8t620cj4Q=; b=w
- dbJGMo0nVLe2DWkBtDsi8YtwM3YH6gPv6HcGhtYzzW/EWyMnpWHVpalIFqIgv29z
- SXrKueWZZ5BR2XU5ttgkXHxofMbj7ZKwo3vPDqOUYmyeIlWIPBeVdyFF5vjyuqIG
- Xy3NTTwBAwDjlVolprl3yN91NL7qPxeGIaZ7chE7ebIbc3jmeiz91Kqfqi6WqSGB
- r4aHpUKd2mDrzm1vZQ/QriOOO3/Z7yOohbF7bIYuJwni/T+bYFIHKguefIqS0z0B
- Si0GkWML2+wIr6p3ppWiLxFx/KpQTIqXGY1If779s2N+59BrFC/1n+dMlnMrnhrH
- 99Res6epkSnE3Nv630+pQ==
+ content-transfer-encoding:content-type:message-id:user-agent
+ :references:in-reply-to:subject:to:from:date:mime-version; s=
+ dkim; t=1689055976; x=1691647977; bh=HCeXK205aAUdPIW4pevCl7+pDB+
+ fom36VtNou9SjZP8=; b=RFMbuN93EVxVTzVy7M3lx0dda62X4rnGOvM2p9m3Xzu
+ 6VpJ0vBbm3nO04DX2ryGqet9F3Ws8+TCnl2cPqTUmyJTJtUnt8zW3b7BHnZveCII
+ HOFtSjNiaT7TnetmlPXWIZgi8GGvtyhtnNaePx9cwzA3tCDk6VAR7pSvFMOF1mt5
+ T2PDkdBQT7tTWmR7NlH9Uk+waBsMwK03WJe/9nV30PEfN9aUKqflqc8OsOMpYvpL
+ ImFaWzAjOUli8OIcYlLCkKS4HOMNWBdFAxdsBE4Yg2f6BTYKM0Xmu7GZgDvJbB3g
+ +i9lU9z8GFOohaVuPwj2lTj2Iom6+IMtC16jINKQ+4A==
 X-Virus-Scanned: amavisd-new at mail.208.org
 Received: from mail.208.org ([127.0.0.1])
  by mail.208.org (mail.208.org [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id dW6Jpf7K-Zwp for <nouveau@lists.freedesktop.org>;
- Tue, 11 Jul 2023 14:02:21 +0800 (CST)
+ with ESMTP id dVaiPe0SWeow for <nouveau@lists.freedesktop.org>;
+ Tue, 11 Jul 2023 14:12:56 +0800 (CST)
 Received: from localhost (email.208.org [127.0.0.1])
- by mail.208.org (Postfix) with ESMTPSA id 4R0VdT21Z1zBHXgj;
- Tue, 11 Jul 2023 14:02:21 +0800 (CST)
+ by mail.208.org (Postfix) with ESMTPSA id 4R0Vsg6BVwzBHXgj;
+ Tue, 11 Jul 2023 14:12:55 +0800 (CST)
 MIME-Version: 1.0
-Date: Tue, 11 Jul 2023 14:02:21 +0800
+Date: Tue, 11 Jul 2023 14:12:55 +0800
 From: sunran001@208suo.com
 To: airlied@gmail.com, daniel@ffwll.ch
-In-Reply-To: <20230711060037.79553-1-xujianghui@cdjrlc.com>
-References: <20230711060037.79553-1-xujianghui@cdjrlc.com>
+In-Reply-To: <20230711061131.79666-1-xujianghui@cdjrlc.com>
+References: <20230711061131.79666-1-xujianghui@cdjrlc.com>
 User-Agent: Roundcube Webmail
-Message-ID: <508482277025753b619a7595d7ff7e2e@208suo.com>
+Message-ID: <d9e5907b772bde22eefb26cb7e0e65e0@208suo.com>
 X-Sender: sunran001@208suo.com
-Content-Type: multipart/alternative;
- boundary="=_03b51b7bf49e88ad5069713b3d20b154"
-Subject: [Nouveau] [PATCH] drm/nouveau/flcn/qmgr: add missing spaces after ', '
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Subject: [Nouveau] [PATCH] drm/nouveau: ERROR: (foo*) should be (foo *)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,65 +64,38 @@ Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---=_03b51b7bf49e88ad5069713b3d20b154
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+Fix two occurrences of the checkpatch.pl error:
 
-
-Add missing spaces to clear checkpatch errors.
-
-ERROR: space required before the open brace ','
+ERROR: (foo*) should be (foo *)
 
 Signed-off-by: Ran Sun <sunran001@208suo.com>
 ---
-  drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h | 6 +++---
-  1 file changed, 3 insertions(+), 3 deletions(-)
+  drivers/gpu/drm/nouveau/nouveau_fence.c | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h 
-b/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h
-index 79f0da9e749f..0503183d7ca8 100644
---- a/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h
-@@ -82,7 +82,7 @@ struct nvkm_falcon_msgq {
-      u32 position;
-  };
+diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c 
+b/drivers/gpu/drm/nouveau/nouveau_fence.c
+index ee5e9d40c166..287885a3a37e 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_fence.c
++++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+@@ -169,7 +169,7 @@ nouveau_fence_wait_uevent_handler(struct nvif_event 
+*event, void *repv, u32 repc
+  void
+  nouveau_fence_context_new(struct nouveau_channel *chan, struct 
+nouveau_fence_chan *fctx)
+  {
+-    struct nouveau_fence_priv *priv = (void*)chan->drm->fence;
++    struct nouveau_fence_priv *priv = (void *)chan->drm->fence;
+      struct nouveau_cli *cli = (void *)chan->user.client;
+      struct {
+          struct nvif_event_v0 base;
+@@ -207,7 +207,7 @@ int
+  nouveau_fence_emit(struct nouveau_fence *fence, struct nouveau_channel 
+*chan)
+  {
+      struct nouveau_fence_chan *fctx = chan->fence;
+-    struct nouveau_fence_priv *priv = (void*)chan->drm->fence;
++    struct nouveau_fence_priv *priv = (void *)chan->drm->fence;
+      int ret;
 
--#define FLCNQ_PRINTK(q,l,p,f,a...) FLCN_PRINTK((q)->qmgr->falcon, l, p, 
-"%s: "f, (q)->name, ##a)
--#define FLCNQ_DBG(q,f,a...) FLCNQ_PRINTK((q), DEBUG, info, f, ##a)
--#define FLCNQ_ERR(q,f,a...) FLCNQ_PRINTK((q), ERROR, err, f, ##a)
-+#define FLCNQ_PRINTK(q, l, p, f, a...) FLCN_PRINTK((q)->qmgr->falcon, 
-l, p, "%s: "f, (q)->name, ##a)
-+#define FLCNQ_DBG(q, f, a...) FLCNQ_PRINTK((q), DEBUG, info, f, ##a)
-+#define FLCNQ_ERR(q, f, a...) FLCNQ_PRINTK((q), ERROR, err, f, ##a)
-  #endif
---=_03b51b7bf49e88ad5069713b3d20b154
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html; charset=UTF-8
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
-=3DUTF-8" /></head><body style=3D'font-size: 12pt; font-family: Verdana,Gen=
-eva,sans-serif'>
-<div class=3D"pre" style=3D"margin: 0; padding: 0; font-family: monospace">=
-Add missing spaces to clear checkpatch errors.<br /><br />ERROR: space requ=
-ired before the open brace ','<br /><br />Signed-off-by: Ran Sun &lt;sunran=
-001@208suo.com&gt;<br />---<br />&nbsp;drivers/gpu/drm/nouveau/nvkm/falcon/=
-qmgr.h | 6 +++---<br />&nbsp;1 file changed, 3 insertions(+), 3 deletions(-=
-)<br /><br />diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h b/driv=
-ers/gpu/drm/nouveau/nvkm/falcon/qmgr.h<br />index 79f0da9e749f..0503183d7ca=
-8 100644<br />--- a/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h<br />+++ b/d=
-rivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h<br />@@ -82,7 +82,7 @@ struct nvk=
-m_falcon_msgq {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u32 position;<br />&nbsp=
-;};<br />&nbsp;<br />-#define FLCNQ_PRINTK(q,l,p,f,a...) FLCN_PRINTK((q)-&g=
-t;qmgr-&gt;falcon, l, p, "%s: "f, (q)-&gt;name, ##a)<br />-#define FLCNQ_DB=
-G(q,f,a...) FLCNQ_PRINTK((q), DEBUG, info, f, ##a)<br />-#define FLCNQ_ERR(=
-q,f,a...) FLCNQ_PRINTK((q), ERROR, err, f, ##a)<br />+#define FLCNQ_PRINTK(=
-q, l, p, f, a...) FLCN_PRINTK((q)-&gt;qmgr-&gt;falcon, l, p, "%s: "f, (q)-&=
-gt;name, ##a)<br />+#define FLCNQ_DBG(q, f, a...) FLCNQ_PRINTK((q), DEBUG, =
-info, f, ##a)<br />+#define FLCNQ_ERR(q, f, a...) FLCNQ_PRINTK((q), ERROR, =
-err, f, ##a)<br />&nbsp;#endif</div>
-
-</body></html>
-
---=_03b51b7bf49e88ad5069713b3d20b154--
+      fence->channel  = chan;
