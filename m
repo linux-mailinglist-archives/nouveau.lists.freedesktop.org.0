@@ -2,53 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80AB274E696
-	for <lists+nouveau@lfdr.de>; Tue, 11 Jul 2023 07:55:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EBA974E6B2
+	for <lists+nouveau@lfdr.de>; Tue, 11 Jul 2023 08:02:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 59A4C10E2FD;
-	Tue, 11 Jul 2023 05:55:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7A2C210E301;
+	Tue, 11 Jul 2023 06:02:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.208.org (unknown [183.242.55.162])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D237710E2FC
- for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 05:54:59 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1BC6D10E301
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 06:02:25 +0000 (UTC)
 Received: from mail.208.org (email.208.org [127.0.0.1])
- by mail.208.org (Postfix) with ESMTP id 4R0VSv4qzCzBHXhl
- for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 13:54:55 +0800 (CST)
+ by mail.208.org (Postfix) with ESMTP id 4R0VdT4l0wzBHXhl
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 14:02:21 +0800 (CST)
 Authentication-Results: mail.208.org (amavisd-new); dkim=pass
  reason="pass (just generated, assumed good)" header.d=208.org
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=208.org; h=
- content-transfer-encoding:content-type:message-id:user-agent
- :references:in-reply-to:subject:to:from:date:mime-version; s=
- dkim; t=1689054895; x=1691646896; bh=aOK/vrvHGfxYdmaAFZxDnwb5Czx
- 72k5Aa/iRkuEQeqU=; b=iTEWhZ6tMGIEqDb4mhgQ29Lun6USjSVBcIOwBvbgExI
- WvhUHZTQThMy1zg3m69nCieYDRJoRr0nyYvi0liW/gxApwjhhidQ7y/UMgybYiJ4
- vHqIYWA2HmDm/XzxqdQLRgBvJJOzrHH+I8WujuVurblPT7FiqioNE0TD0GPhGB78
- r68MkmmEswb9oErbwnxooA9B8fr1RHEGQLPZwfhkxZB66696Ik1rHeoOTrBTL8gR
- cFrAoPZVRvplcIkX7KM5bqDPRohUtWcPmBZNdH7teLy/S5SY0uvi9RXsRHkaaWlt
- IE68cihlAti/VaGVhHxcHoZgiQqx4onSeMEQSrcuJ1w==
+ content-type:message-id:user-agent:references:in-reply-to
+ :subject:to:from:date:mime-version; s=dkim; t=1689055341; x=
+ 1691647342; bh=b8hHmnhwvioMharC+I07LYQUBP9wCvt66s8t620cj4Q=; b=w
+ dbJGMo0nVLe2DWkBtDsi8YtwM3YH6gPv6HcGhtYzzW/EWyMnpWHVpalIFqIgv29z
+ SXrKueWZZ5BR2XU5ttgkXHxofMbj7ZKwo3vPDqOUYmyeIlWIPBeVdyFF5vjyuqIG
+ Xy3NTTwBAwDjlVolprl3yN91NL7qPxeGIaZ7chE7ebIbc3jmeiz91Kqfqi6WqSGB
+ r4aHpUKd2mDrzm1vZQ/QriOOO3/Z7yOohbF7bIYuJwni/T+bYFIHKguefIqS0z0B
+ Si0GkWML2+wIr6p3ppWiLxFx/KpQTIqXGY1If779s2N+59BrFC/1n+dMlnMrnhrH
+ 99Res6epkSnE3Nv630+pQ==
 X-Virus-Scanned: amavisd-new at mail.208.org
 Received: from mail.208.org ([127.0.0.1])
  by mail.208.org (mail.208.org [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id Fl-xKniYPiIG for <nouveau@lists.freedesktop.org>;
- Tue, 11 Jul 2023 13:54:55 +0800 (CST)
+ with ESMTP id dW6Jpf7K-Zwp for <nouveau@lists.freedesktop.org>;
+ Tue, 11 Jul 2023 14:02:21 +0800 (CST)
 Received: from localhost (email.208.org [127.0.0.1])
- by mail.208.org (Postfix) with ESMTPSA id 4R0VSv1lnQzBHXgj;
- Tue, 11 Jul 2023 13:54:55 +0800 (CST)
+ by mail.208.org (Postfix) with ESMTPSA id 4R0VdT21Z1zBHXgj;
+ Tue, 11 Jul 2023 14:02:21 +0800 (CST)
 MIME-Version: 1.0
-Date: Tue, 11 Jul 2023 13:54:55 +0800
+Date: Tue, 11 Jul 2023 14:02:21 +0800
 From: sunran001@208suo.com
 To: airlied@gmail.com, daniel@ffwll.ch
-In-Reply-To: <20230711055304.79441-1-xujianghui@cdjrlc.com>
-References: <20230711055304.79441-1-xujianghui@cdjrlc.com>
+In-Reply-To: <20230711060037.79553-1-xujianghui@cdjrlc.com>
+References: <20230711060037.79553-1-xujianghui@cdjrlc.com>
 User-Agent: Roundcube Webmail
-Message-ID: <f5b217c2420c2948bd402e8e36e391a3@208suo.com>
+Message-ID: <508482277025753b619a7595d7ff7e2e@208suo.com>
 X-Sender: sunran001@208suo.com
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: [Nouveau] [PATCH] drm/nouveau/flcn/cmdq: Move assignment outside if
- condition
+Content-Type: multipart/alternative;
+ boundary="=_03b51b7bf49e88ad5069713b3d20b154"
+Subject: [Nouveau] [PATCH] drm/nouveau/flcn/qmgr: add missing spaces after ', '
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,28 +63,65 @@ Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Fixes the following checkpatch errors:
+--=_03b51b7bf49e88ad5069713b3d20b154
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
 
-ERROR: do not use assignment in if condition
+
+Add missing spaces to clear checkpatch errors.
+
+ERROR: space required before the open brace ','
 
 Signed-off-by: Ran Sun <sunran001@208suo.com>
 ---
-  drivers/gpu/drm/nouveau/nvkm/falcon/cmdq.c | 3 ++-
-  1 file changed, 2 insertions(+), 1 deletion(-)
+  drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h | 6 +++---
+  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/cmdq.c 
-b/drivers/gpu/drm/nouveau/nvkm/falcon/cmdq.c
-index 211ebe7afac6..a8beb55097a6 100644
---- a/drivers/gpu/drm/nouveau/nvkm/falcon/cmdq.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/falcon/cmdq.c
-@@ -203,7 +203,8 @@ nvkm_falcon_cmdq_new(struct nvkm_falcon_qmgr *qmgr, 
-const char *name,
-  {
-      struct nvkm_falcon_cmdq *cmdq = *pcmdq;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h 
+b/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h
+index 79f0da9e749f..0503183d7ca8 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h
++++ b/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h
+@@ -82,7 +82,7 @@ struct nvkm_falcon_msgq {
+      u32 position;
+  };
 
--    if (!(cmdq = *pcmdq = kzalloc(sizeof(*cmdq), GFP_KERNEL)))
-+    cmdq = *pcmdq = kzalloc(sizeof(*cmdq), GFP_KERNEL);
-+    if (!cmdq)
-          return -ENOMEM;
+-#define FLCNQ_PRINTK(q,l,p,f,a...) FLCN_PRINTK((q)->qmgr->falcon, l, p, 
+"%s: "f, (q)->name, ##a)
+-#define FLCNQ_DBG(q,f,a...) FLCNQ_PRINTK((q), DEBUG, info, f, ##a)
+-#define FLCNQ_ERR(q,f,a...) FLCNQ_PRINTK((q), ERROR, err, f, ##a)
++#define FLCNQ_PRINTK(q, l, p, f, a...) FLCN_PRINTK((q)->qmgr->falcon, 
+l, p, "%s: "f, (q)->name, ##a)
++#define FLCNQ_DBG(q, f, a...) FLCNQ_PRINTK((q), DEBUG, info, f, ##a)
++#define FLCNQ_ERR(q, f, a...) FLCNQ_PRINTK((q), ERROR, err, f, ##a)
+  #endif
+--=_03b51b7bf49e88ad5069713b3d20b154
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
 
-      cmdq->qmgr = qmgr;
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3DUTF-8" /></head><body style=3D'font-size: 12pt; font-family: Verdana,Gen=
+eva,sans-serif'>
+<div class=3D"pre" style=3D"margin: 0; padding: 0; font-family: monospace">=
+Add missing spaces to clear checkpatch errors.<br /><br />ERROR: space requ=
+ired before the open brace ','<br /><br />Signed-off-by: Ran Sun &lt;sunran=
+001@208suo.com&gt;<br />---<br />&nbsp;drivers/gpu/drm/nouveau/nvkm/falcon/=
+qmgr.h | 6 +++---<br />&nbsp;1 file changed, 3 insertions(+), 3 deletions(-=
+)<br /><br />diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h b/driv=
+ers/gpu/drm/nouveau/nvkm/falcon/qmgr.h<br />index 79f0da9e749f..0503183d7ca=
+8 100644<br />--- a/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h<br />+++ b/d=
+rivers/gpu/drm/nouveau/nvkm/falcon/qmgr.h<br />@@ -82,7 +82,7 @@ struct nvk=
+m_falcon_msgq {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u32 position;<br />&nbsp=
+;};<br />&nbsp;<br />-#define FLCNQ_PRINTK(q,l,p,f,a...) FLCN_PRINTK((q)-&g=
+t;qmgr-&gt;falcon, l, p, "%s: "f, (q)-&gt;name, ##a)<br />-#define FLCNQ_DB=
+G(q,f,a...) FLCNQ_PRINTK((q), DEBUG, info, f, ##a)<br />-#define FLCNQ_ERR(=
+q,f,a...) FLCNQ_PRINTK((q), ERROR, err, f, ##a)<br />+#define FLCNQ_PRINTK(=
+q, l, p, f, a...) FLCN_PRINTK((q)-&gt;qmgr-&gt;falcon, l, p, "%s: "f, (q)-&=
+gt;name, ##a)<br />+#define FLCNQ_DBG(q, f, a...) FLCNQ_PRINTK((q), DEBUG, =
+info, f, ##a)<br />+#define FLCNQ_ERR(q, f, a...) FLCNQ_PRINTK((q), ERROR, =
+err, f, ##a)<br />&nbsp;#endif</div>
+
+</body></html>
+
+--=_03b51b7bf49e88ad5069713b3d20b154--
