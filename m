@@ -2,52 +2,52 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 581D374E570
-	for <lists+nouveau@lfdr.de>; Tue, 11 Jul 2023 05:43:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80AB274E696
+	for <lists+nouveau@lfdr.de>; Tue, 11 Jul 2023 07:55:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C29E710E2F8;
-	Tue, 11 Jul 2023 03:43:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 59A4C10E2FD;
+	Tue, 11 Jul 2023 05:55:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.208.org (unknown [183.242.55.162])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4338910E2F9
- for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 03:43:42 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D237710E2FC
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 05:54:59 +0000 (UTC)
 Received: from mail.208.org (email.208.org [127.0.0.1])
- by mail.208.org (Postfix) with ESMTP id 4R0RYR1d5QzBJJjv
- for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 11:43:39 +0800 (CST)
+ by mail.208.org (Postfix) with ESMTP id 4R0VSv4qzCzBHXhl
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 13:54:55 +0800 (CST)
 Authentication-Results: mail.208.org (amavisd-new); dkim=pass
  reason="pass (just generated, assumed good)" header.d=208.org
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=208.org; h=
  content-transfer-encoding:content-type:message-id:user-agent
  :references:in-reply-to:subject:to:from:date:mime-version; s=
- dkim; t=1689047019; x=1691639020; bh=PROXNSRNkmtHn8K/s7RFD4PL/CT
- OhC4irdWGixGUyVM=; b=1C/rS180+1xqNa9qU67FhPsrfoKHF13ZcVl5yEw35Ir
- h+0Z/gF7udnawEOTpzRJSXtkP1M5keVlBF3ZDZJRGQxN24LGwJbjbFvUPR4EIP9P
- Pzo6l8hhlccC9Y4u6UeSIyMHV+JqeTneiCNFF0TMvdKalvfJcGRk/yGqjEfEuzka
- yxLBW6fxI90ASVftLXIInXg2rcNVORdupRfD1y/6YOZ8eQWej0oM6sHVjmFg7E4h
- 1xsonX6nLDXcKQhkbjfEwK3IXA6fExZENeKuf1Bq+CX3Vh9yp6U642voj6ZamPoC
- W3lcrc14mH74Q22+ETow9bHY7UotrnieR39So6TPQMA==
+ dkim; t=1689054895; x=1691646896; bh=aOK/vrvHGfxYdmaAFZxDnwb5Czx
+ 72k5Aa/iRkuEQeqU=; b=iTEWhZ6tMGIEqDb4mhgQ29Lun6USjSVBcIOwBvbgExI
+ WvhUHZTQThMy1zg3m69nCieYDRJoRr0nyYvi0liW/gxApwjhhidQ7y/UMgybYiJ4
+ vHqIYWA2HmDm/XzxqdQLRgBvJJOzrHH+I8WujuVurblPT7FiqioNE0TD0GPhGB78
+ r68MkmmEswb9oErbwnxooA9B8fr1RHEGQLPZwfhkxZB66696Ik1rHeoOTrBTL8gR
+ cFrAoPZVRvplcIkX7KM5bqDPRohUtWcPmBZNdH7teLy/S5SY0uvi9RXsRHkaaWlt
+ IE68cihlAti/VaGVhHxcHoZgiQqx4onSeMEQSrcuJ1w==
 X-Virus-Scanned: amavisd-new at mail.208.org
 Received: from mail.208.org ([127.0.0.1])
  by mail.208.org (mail.208.org [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id m8RNTwtiZpee for <nouveau@lists.freedesktop.org>;
- Tue, 11 Jul 2023 11:43:39 +0800 (CST)
+ with ESMTP id Fl-xKniYPiIG for <nouveau@lists.freedesktop.org>;
+ Tue, 11 Jul 2023 13:54:55 +0800 (CST)
 Received: from localhost (email.208.org [127.0.0.1])
- by mail.208.org (Postfix) with ESMTPSA id 4R0RYQ6Q7mzBJ8kq;
- Tue, 11 Jul 2023 11:43:38 +0800 (CST)
+ by mail.208.org (Postfix) with ESMTPSA id 4R0VSv1lnQzBHXgj;
+ Tue, 11 Jul 2023 13:54:55 +0800 (CST)
 MIME-Version: 1.0
-Date: Tue, 11 Jul 2023 11:43:38 +0800
+Date: Tue, 11 Jul 2023 13:54:55 +0800
 From: sunran001@208suo.com
 To: airlied@gmail.com, daniel@ffwll.ch
-In-Reply-To: <20230711034221.79302-1-xujianghui@cdjrlc.com>
-References: <20230711034221.79302-1-xujianghui@cdjrlc.com>
+In-Reply-To: <20230711055304.79441-1-xujianghui@cdjrlc.com>
+References: <20230711055304.79441-1-xujianghui@cdjrlc.com>
 User-Agent: Roundcube Webmail
-Message-ID: <4a21bb7bb79108ae96518a8d1372ef1d@208suo.com>
+Message-ID: <f5b217c2420c2948bd402e8e36e391a3@208suo.com>
 X-Sender: sunran001@208suo.com
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
 Content-Transfer-Encoding: 7bit
-Subject: [Nouveau] [PATCH] drm/nouveau/flcn/qmgr: Move assignment outside if
+Subject: [Nouveau] [PATCH] drm/nouveau/flcn/cmdq: Move assignment outside if
  condition
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -71,21 +71,22 @@ ERROR: do not use assignment in if condition
 
 Signed-off-by: Ran Sun <sunran001@208suo.com>
 ---
-  drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.c | 3 ++-
+  drivers/gpu/drm/nouveau/nvkm/falcon/cmdq.c | 3 ++-
   1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.c 
-b/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.c
-index a453de341a75..48abdb124326 100644
---- a/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/falcon/qmgr.c
-@@ -73,7 +73,8 @@ nvkm_falcon_qmgr_new(struct nvkm_falcon *falcon,
-      struct nvkm_falcon_qmgr *qmgr;
-      int i;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/cmdq.c 
+b/drivers/gpu/drm/nouveau/nvkm/falcon/cmdq.c
+index 211ebe7afac6..a8beb55097a6 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/falcon/cmdq.c
++++ b/drivers/gpu/drm/nouveau/nvkm/falcon/cmdq.c
+@@ -203,7 +203,8 @@ nvkm_falcon_cmdq_new(struct nvkm_falcon_qmgr *qmgr, 
+const char *name,
+  {
+      struct nvkm_falcon_cmdq *cmdq = *pcmdq;
 
--    if (!(qmgr = *pqmgr = kzalloc(sizeof(*qmgr), GFP_KERNEL)))
-+    qmgr = *pqmgr = kzalloc(sizeof(*qmgr), GFP_KERNEL);
-+    if (!qmgr)
+-    if (!(cmdq = *pcmdq = kzalloc(sizeof(*cmdq), GFP_KERNEL)))
++    cmdq = *pcmdq = kzalloc(sizeof(*cmdq), GFP_KERNEL);
++    if (!cmdq)
           return -ENOMEM;
 
-      qmgr->falcon = falcon;
+      cmdq->qmgr = qmgr;
