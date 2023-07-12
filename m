@@ -1,59 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0096E751142
-	for <lists+nouveau@lfdr.de>; Wed, 12 Jul 2023 21:31:06 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 95B697511E0
+	for <lists+nouveau@lfdr.de>; Wed, 12 Jul 2023 22:39:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 89B2410E5D5;
-	Wed, 12 Jul 2023 19:31:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BDD8C10E048;
+	Wed, 12 Jul 2023 20:39:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8CAAC10E5D6;
- Wed, 12 Jul 2023 19:31:03 +0000 (UTC)
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-6b8decf09e1so6445470a34.0; 
- Wed, 12 Jul 2023 12:31:03 -0700 (PDT)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8F95E10E048;
+ Wed, 12 Jul 2023 20:39:10 +0000 (UTC)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-4fbcbf4375dso1595473e87.0; 
+ Wed, 12 Jul 2023 13:39:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689190262; x=1691782262;
+ d=gmail.com; s=20221208; t=1689194348; x=1691786348;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yVtSCpW+Tth4mC3MWGAVEkXOAuk+fenRNi3sCg0wW/s=;
- b=r32FMANDItl8SWdMt3H1qMFDlAHWoxWPe6MrEB33WVrdTB8FoKKtRmyAx5c6yFfK0e
- 1oOPzWmuNc6xljTGS/Z3ai96BCd7pCg45e+Mv9tfebdsFfxen9ScPuKZHpaJGC/4EQv+
- J1/KhQ5rUKe0SFwZ/8/5bbM3Mn7TINH3RXSbno8ZRUvc6MTmhZlHZ8Ih71+15+c9jfR2
- CjxvCRzZBzoQ9J3PUoJqXnwgHHlpNcC0ZF1szDyIyPteTEErrvpAfhbKAl0XqeufIRaN
- sjL8Wt+uGr7P+5xN+x7EFC+Ha50BJcGI0UCqoNr733Z/dyLS0NZjjZbGHe8F+jsYAbNm
- Qdyg==
+ bh=n3Aw+/y9y4d+i3cxzJxMrhK42+dQ+oiMMdAhC+nVYJU=;
+ b=D65i0ZgJZryvUj4mF/jaQIHWSquZLHKSFoRxBZb00GXYUT8PREoM42YBQyW6a4GRuU
+ tWmYjYU8Gnr1iRDSYv7vhgP5J2oCjk1eIOp+pQQMGDRkHi+14LjerjcTMo7JtIm+icr7
+ 8aZw9WlQLF1toaY62FQWLyftpPjTrrdykg9r7BElThk51Z+J4einHxBSlDsTBuYmszq8
+ wo0TfaGUt6IItjuVuK/gEGhpssX7XD1nClK6Y+dlbFSZR4596hdUadHi+WMQjdkEt5tb
+ S3LAYgHsil6bBeORflHQmb6wTlQdKc5f9MZeNe1ljdclQbjWoaxn0nchSittu4er0ZOy
+ zPag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689190262; x=1691782262;
+ d=1e100.net; s=20221208; t=1689194348; x=1691786348;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yVtSCpW+Tth4mC3MWGAVEkXOAuk+fenRNi3sCg0wW/s=;
- b=g+Se1abqMQJzPeyFHifBlb2DOIRveKTbTFgmGkBhc6slVRFwVzJfz6GdQJn2dR5nak
- f3vm5UMoUvHX2UJAb3zu2cic2TB7PTNme9NJ0AygCJSRYU+Vqjba81BGZNqaCjNBvyir
- 6wN09tJlOj1el7tQ7Q6vB3jq+zNs7VOp5EmpLmWzgKiSjhaFfGBpVNWLTKSBMp6iiv1d
- 1amsXhjKz2/OUGFHii5/4bElWjP90ltOSC5DDcm/efI06GPUly1jxc4Av9CxoXtn6v5P
- Dhr2mWuBEScx+obUj+V726KilVmPL99LSljt9kYYSd+jI9gX9Y7QpcsDGsb+kIyxtavZ
- whkA==
-X-Gm-Message-State: ABy/qLYjQ39LKXh9X358B6Q3GHbVg6sJFISwMX2mlqP0pbz4uZQZaPbQ
- F74D8vBuHL7DL35kTyKVSCKokIzW3QujXBMJu04=
-X-Google-Smtp-Source: APBJJlEt110G42kGYTiSWg5RkQiygRnhzKc4MikyaoVcdGUWksdFdFLUXc1bxTG+gXM5gOw+VMyJ2yO+C7wyuDUzvdI=
-X-Received: by 2002:a05:6870:b24e:b0:1b3:e46a:7164 with SMTP id
- b14-20020a056870b24e00b001b3e46a7164mr21502131oam.40.1689190262500; Wed, 12
- Jul 2023 12:31:02 -0700 (PDT)
+ bh=n3Aw+/y9y4d+i3cxzJxMrhK42+dQ+oiMMdAhC+nVYJU=;
+ b=Ssb80umYsjeUx2HugxM/h7Y1vu1t6ifXi9Dt108pp+t3BSX4PWqjBh3mT7hcmErdXV
+ KgQ7jsvQ2RwdlBPgNuBUVaegKHE0DDXsPAqjij62xo23vf1SNFxteil5Qq6urSnts1JY
+ PgzQMmJQjzm+wycVytLq2Ud3QmBFuNtquJ3lZXztC8vlCKGYLinQX/pApfVjj6YFrcdN
+ nGkcAv3KkyS6cFDGiK3qkJ9xoQeK4WL2NDwdjoM686vU9jRfwzf5FljKpF64hKCPDodk
+ SGjS1jhpLtVakAlUZ5zz0x89isIzyqDUwWN3G0yZHGLvKKpXV+rA8P4BDZUswe5x+Cus
+ S/uA==
+X-Gm-Message-State: ABy/qLbK74EwfgZxJNKwHJTi914w7j4IzaoXM+YxynxUny7e/2GOukXq
+ ZfceM43Hcl748GT07bRXNkmvTLYGIyKho0SWJhc=
+X-Google-Smtp-Source: APBJJlE4zSFvx6Zo3GKHIRV22wEE/iuCXt9jm8m6cfRi1vG5WKOsAupCfTIazj1pe2+m712CCradYuymkKMJMTKAtmc=
+X-Received: by 2002:a05:6512:234d:b0:4f8:586a:d6ca with SMTP id
+ p13-20020a056512234d00b004f8586ad6camr1125246lfu.9.1689194347888; Wed, 12 Jul
+ 2023 13:39:07 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230522201838.1496622-1-kherbst@redhat.com>
  <CACO55tuZeJZ6GTA+ooaXsSgde2Zy70qpe8Cg_AEfZRXtmd2LWA@mail.gmail.com>
-In-Reply-To: <CACO55tuZeJZ6GTA+ooaXsSgde2Zy70qpe8Cg_AEfZRXtmd2LWA@mail.gmail.com>
-From: Dave Airlie <airlied@gmail.com>
-Date: Thu, 13 Jul 2023 05:30:49 +1000
-Message-ID: <CAPM=9txP3D8p9H=xCvBocFVssH=YP0h12FEOTnuTF7_pEUpRow@mail.gmail.com>
-To: Karol Herbst <kherbst@redhat.com>
+ <CAPM=9txP3D8p9H=xCvBocFVssH=YP0h12FEOTnuTF7_pEUpRow@mail.gmail.com>
+In-Reply-To: <CAPM=9txP3D8p9H=xCvBocFVssH=YP0h12FEOTnuTF7_pEUpRow@mail.gmail.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Thu, 13 Jul 2023 06:38:56 +1000
+Message-ID: <CACAvsv6-AJ4EHg7pNUWgsnCN0CYrO8gWd3NR8pu32a-wXSOjeA@mail.gmail.com>
+To: Dave Airlie <airlied@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 Subject: Re: [Nouveau] [PATCH] drm/nouveau/acr: Abort loading ACR if no
@@ -77,45 +78,50 @@ Cc: "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 23 May 2023 at 19:37, Karol Herbst <kherbst@redhat.com> wrote:
+On Thu, 13 Jul 2023 at 05:31, Dave Airlie <airlied@gmail.com> wrote:
 >
-> On Mon, May 22, 2023 at 10:18=E2=80=AFPM Karol Herbst <kherbst@redhat.com=
-> wrote:
+> On Tue, 23 May 2023 at 19:37, Karol Herbst <kherbst@redhat.com> wrote:
 > >
-> > This fixes a NULL pointer access inside nvkm_acr_oneinit in case necess=
-ary
-> > firmware files couldn't be loaded.
+> > On Mon, May 22, 2023 at 10:18=E2=80=AFPM Karol Herbst <kherbst@redhat.c=
+om> wrote:
+> > >
+> > > This fixes a NULL pointer access inside nvkm_acr_oneinit in case nece=
+ssary
+> > > firmware files couldn't be loaded.
+> > >
+> > > Closes: https://gitlab.freedesktop.org/drm/nouveau/-/issues/212
+> > > Fixes: 4b569ded09fd ("drm/nouveau/acr/ga102: initial support")
+> > > Signed-off-by: Karol Herbst <kherbst@redhat.com>
+> > > ---
+> > >  drivers/gpu/drm/nouveau/nvkm/subdev/acr/base.c | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> > > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/base.c b/drivers=
+/gpu/drm/nouveau/nvkm/subdev/acr/base.c
+> > > index 795f3a649b12..6388234c352c 100644
+> > > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/base.c
+> > > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/base.c
+> > > @@ -224,7 +224,7 @@ nvkm_acr_oneinit(struct nvkm_subdev *subdev)
+> > >         u64 falcons;
+> > >         int ret, i;
+> > >
+> > > -       if (list_empty(&acr->hsfw)) {
+> > > +       if (list_empty(&acr->hsfw) || !acr->func->wpr_layout) {
 > >
-> > Closes: https://gitlab.freedesktop.org/drm/nouveau/-/issues/212
-> > Fixes: 4b569ded09fd ("drm/nouveau/acr/ga102: initial support")
-> > Signed-off-by: Karol Herbst <kherbst@redhat.com>
-> > ---
-> >  drivers/gpu/drm/nouveau/nvkm/subdev/acr/base.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/base.c b/drivers/g=
-pu/drm/nouveau/nvkm/subdev/acr/base.c
-> > index 795f3a649b12..6388234c352c 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/base.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/base.c
-> > @@ -224,7 +224,7 @@ nvkm_acr_oneinit(struct nvkm_subdev *subdev)
-> >         u64 falcons;
-> >         int ret, i;
-> >
-> > -       if (list_empty(&acr->hsfw)) {
-> > +       if (list_empty(&acr->hsfw) || !acr->func->wpr_layout) {
+> > Now thinking about this, it should probably also check acr->func...
 >
-> Now thinking about this, it should probably also check acr->func...
+> with that fixed if you think you need it,
+I don't *think* you do.  I believe modprobe will fail for any case it
+can be NULL.
 
-with that fixed if you think you need it,
-
-Reviewed-by: Dave Airlie <airlied@redhat.com>
-
 >
-> >                 nvkm_debug(subdev, "No HSFW(s)\n");
-> >                 nvkm_acr_cleanup(acr);
-> >                 return 0;
-> > --
-> > 2.40.1
+> Reviewed-by: Dave Airlie <airlied@redhat.com>
+>
 > >
->
+> > >                 nvkm_debug(subdev, "No HSFW(s)\n");
+> > >                 nvkm_acr_cleanup(acr);
+> > >                 return 0;
+> > > --
+> > > 2.40.1
+> > >
+> >
