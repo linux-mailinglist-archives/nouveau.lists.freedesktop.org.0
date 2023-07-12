@@ -1,51 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52D3674F563
-	for <lists+nouveau@lfdr.de>; Tue, 11 Jul 2023 18:32:50 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9909074FFF7
+	for <lists+nouveau@lfdr.de>; Wed, 12 Jul 2023 09:16:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C455C10E3F8;
-	Tue, 11 Jul 2023 16:32:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1C9F610E49B;
+	Wed, 12 Jul 2023 07:16:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from out-45.mta0.migadu.com (out-45.mta0.migadu.com [91.218.175.45])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B895710E3F7
- for <nouveau@lists.freedesktop.org>; Tue, 11 Jul 2023 16:32:45 +0000 (UTC)
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1689093163;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QoMhwjFigAbTHq+HcB9GYpyFfpHDzGgLNmwruJkUmC8=;
- b=mjzopN32gkDIHH2DKeXPU4Uhh5gf5z6r2DVtvgerWF+e+HZlmhuYpklBE1idXQeZo+0qP6
- kmmBiis6yM0xkO0eQgkG3GzLPBwQlnlpbqo8JYOMgGxYMoHSFvkTp+dFbaI/Dx0l2tA5er
- DVLQ6sEcNFPLD8VVKk9IBe1o8Q3fX7c=
-From: Sui Jingfeng <sui.jingfeng@linux.dev>
-To: Alex Deucher <alexander.deucher@amd.com>,
- Christian Koenig <christian.koenig@amd.com>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Dave Airlie <airlied@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>,
- Jocelyn Falempe <jfalempe@redhat.com>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Maxime Ripard <mripard@kernel.org>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Ben Skeggs <bskeggs@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Bjorn Helgaas <bhelgaas@google.com>, Helge Deller <deller@gmx.de>,
- Mario Limonciello <mario.limonciello@amd.com>
-Date: Wed, 12 Jul 2023 00:31:51 +0800
-Message-Id: <20230711163155.791522-6-sui.jingfeng@linux.dev>
-In-Reply-To: <20230711163155.791522-1-sui.jingfeng@linux.dev>
-References: <20230711163155.791522-1-sui.jingfeng@linux.dev>
+Received: from mail.208.org (unknown [183.242.55.162])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2307410E49B
+ for <nouveau@lists.freedesktop.org>; Wed, 12 Jul 2023 07:16:36 +0000 (UTC)
+Received: from mail.208.org (email.208.org [127.0.0.1])
+ by mail.208.org (Postfix) with ESMTP id 4R18Dc4QwVzBR5lR
+ for <nouveau@lists.freedesktop.org>; Wed, 12 Jul 2023 15:16:32 +0800 (CST)
+Authentication-Results: mail.208.org (amavisd-new); dkim=pass
+ reason="pass (just generated, assumed good)" header.d=208.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=208.org; h=
+ content-transfer-encoding:content-type:message-id:user-agent
+ :references:in-reply-to:subject:to:from:date:mime-version; s=
+ dkim; t=1689146192; x=1691738193; bh=hW1NHKFAT/aNLxN4cBLKVxdssNR
+ L3aNh0S7mH6TQvGM=; b=ilOJ4FeRCW8RdigUHkQKR66nf/FihTXkuSSH5qD6CRr
+ 2UUDYvF1jLyNpv/CFWZvdVPUyCwN8CsjGAElMjLgqkHpCJn5ZAF+YcBRzAdMpU5+
+ 3AZYwFrnqCE2beXiIf5qixbIXCpdJZshgApn73SKWeHpKGJ2L1AB1pGHb9uFZxkT
+ 7TItLrVNlXb4oLQW6ZbOtX7pc11JAhn7GkBgg9iSVmSIXiPW37GSAQxTf2NmB0OI
+ r7yDX0O3qoQ4INsXMi7jR/6K2QTgkBfqyodkjUH3OazdDIkR0hY2WBp1OTH5jauR
+ yiwiQk0E5hrNnVVzvROQxA9I4oZOnraeupcs64bkkxg==
+X-Virus-Scanned: amavisd-new at mail.208.org
+Received: from mail.208.org ([127.0.0.1])
+ by mail.208.org (mail.208.org [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id vD-Hy4VKiBQb for <nouveau@lists.freedesktop.org>;
+ Wed, 12 Jul 2023 15:16:32 +0800 (CST)
+Received: from localhost (email.208.org [127.0.0.1])
+ by mail.208.org (Postfix) with ESMTPSA id 4R18Db6hX0zBR5CX;
+ Wed, 12 Jul 2023 15:16:31 +0800 (CST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
-Subject: [Nouveau] [PATCH v3 5/9] drm/amdgpu: Implement the is_primary_gpu
- callback of vga_client_register()
+Date: Wed, 12 Jul 2023 15:16:31 +0800
+From: sunran001@208suo.com
+To: airlied@gmail.com, daniel@ffwll.ch
+In-Reply-To: <20230712071449.12326-1-xujianghui@cdjrlc.com>
+References: <20230712071449.12326-1-xujianghui@cdjrlc.com>
+User-Agent: Roundcube Webmail
+Message-ID: <1fe8c2c240beb55f655814d725070e8b@208suo.com>
+X-Sender: sunran001@208suo.com
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Subject: [Nouveau] [PATCH] drm/nouveau: remove spaces after '*'
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,80 +59,46 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-fbdev@vger.kernel.org, Lijo Lazar <lijo.lazar@amd.com>,
- Sui Jingfeng <suijingfeng@loongson.cn>, kvm@vger.kernel.org,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- Pan Xinhui <Xinhui.Pan@amd.com>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, YiPeng Chai <YiPeng.Chai@amd.com>,
- amd-gfx@lists.freedesktop.org, Bokun Zhang <Bokun.Zhang@amd.com>,
- linux-pci@vger.kernel.org, Likun Gao <Likun.Gao@amd.com>,
- Hawking Zhang <Hawking.Zhang@amd.com>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Sui Jingfeng <suijingfeng@loongson.cn>
+Fix four occurrences of the checkpatch.pl error:
 
-[why]
+ERROR: "foo * bar" should be "foo *bar"
 
-The vga_is_firmware_default() function defined in drivers/pci/vgaarb.c is
-arch-dependent, it's a dummy on non-x86 architectures. This made VGAARB
-lost an important condition for the arbitration on non-x86 platform. The
-rules about which GPU is (or should be) the primary display device get used
-by userspace are obscure on non-x86 platform, let's made the things clear.
-
-[how]
-
-The device that owns the firmware framebuffer should be the default boot
-device. This patch adds an arch-independent function to implement this
-rule. The vgaarb subsystem will call back to amdgpu_is_primary_gpu() when
-drm/amdgpu is bound to an AMDGPU device successfully.
-
-Cc: Alex Deucher <alexander.deucher@amd.com>
-Cc: Christian Konig <christian.koenig@amd.com>
-Cc: Pan Xinhui <Xinhui.Pan@amd.com>
-Cc: David Airlie <airlied@gmail.com>
-Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: Hawking Zhang <Hawking.Zhang@amd.com>
-Cc: Mario Limonciello <mario.limonciello@amd.com>
-Cc: Lijo Lazar <lijo.lazar@amd.com>
-Cc: YiPeng Chai <YiPeng.Chai@amd.com>
-Cc: Bokun Zhang <Bokun.Zhang@amd.com>
-CC: Likun Gao <Likun.Gao@amd.com>
-Signed-off-by: Sui Jingfeng <suijingfeng@loongson.cn>
+Signed-off-by: Ran Sun <sunran001@208suo.com>
 ---
- drivers/gpu/drm/amd/amdgpu/amdgpu_device.c | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+  drivers/gpu/drm/nouveau/dispnv04/crtc.c | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-index d98f0801ac77..b638eff58636 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-@@ -3690,6 +3690,15 @@ static void amdgpu_device_set_mcbp(struct amdgpu_device *adev)
- 		DRM_INFO("MCBP is enabled\n");
- }
- 
-+static bool amdgpu_is_primary_gpu(struct pci_dev *pdev)
-+{
-+	struct drm_device *dev = pci_get_drvdata(pdev);
-+	struct amdgpu_device *adev = drm_to_adev(dev);
-+	struct amdgpu_gmc *gmc = &adev->gmc;
-+
-+	return drm_aperture_contain_firmware_fb(gmc->aper_base, gmc->aper_size);
-+}
-+
- /**
-  * amdgpu_device_init - initialize the driver
-  *
-@@ -4103,7 +4112,8 @@ int amdgpu_device_init(struct amdgpu_device *adev,
- 	/* this will fail for cards that aren't VGA class devices, just
- 	 * ignore it */
- 	if ((adev->pdev->class >> 8) == PCI_CLASS_DISPLAY_VGA)
--		vga_client_register(adev->pdev, amdgpu_device_vga_set_decode, NULL);
-+		vga_client_register(adev->pdev, amdgpu_device_vga_set_decode,
-+				    amdgpu_is_primary_gpu);
- 
- 	px = amdgpu_device_supports_px(ddev);
- 
--- 
-2.25.1
+diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c 
+b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+index a6f2e681bde9..5ef84f4749e1 100644
+--- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
++++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+@@ -114,7 +114,7 @@ static void nv_crtc_set_image_sharpening(struct 
+drm_crtc *crtc, int level)
+   * bits 28-31: related to single stage mode? (bit 8/12)
+   */
 
+-static void nv_crtc_calc_state_ext(struct drm_crtc *crtc, struct 
+drm_display_mode * mode, int dot_clock)
++static void nv_crtc_calc_state_ext(struct drm_crtc *crtc, struct 
+drm_display_mode *mode, int dot_clock)
+  {
+      struct drm_device *dev = crtc->dev;
+      struct nouveau_drm *drm = nouveau_drm(dev);
+@@ -458,7 +458,7 @@ nv_crtc_mode_set_vga(struct drm_crtc *crtc, struct 
+drm_display_mode *mode)
+   * be easily turned on/off after this.
+   */
+  static void
+-nv_crtc_mode_set_regs(struct drm_crtc *crtc, struct drm_display_mode * 
+mode)
++nv_crtc_mode_set_regs(struct drm_crtc *crtc, struct drm_display_mode 
+*mode)
+  {
+      struct drm_device *dev = crtc->dev;
+      struct nouveau_drm *drm = nouveau_drm(dev);
