@@ -2,48 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7177775E0D5
-	for <lists+nouveau@lfdr.de>; Sun, 23 Jul 2023 11:24:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5026075E0CB
+	for <lists+nouveau@lfdr.de>; Sun, 23 Jul 2023 11:24:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 90E6B10E20D;
-	Sun, 23 Jul 2023 09:24:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 24D3F10E09D;
+	Sun, 23 Jul 2023 09:23:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.208.org (unknown [183.242.55.162])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8034310E7C2
- for <nouveau@lists.freedesktop.org>; Fri, 14 Jul 2023 03:51:29 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 52BCF10E128
+ for <nouveau@lists.freedesktop.org>; Fri, 14 Jul 2023 05:14:37 +0000 (UTC)
 Received: from mail.208.org (email.208.org [127.0.0.1])
- by mail.208.org (Postfix) with ESMTP id 4R2Hb16XR5zBRSVN
- for <nouveau@lists.freedesktop.org>; Fri, 14 Jul 2023 11:51:25 +0800 (CST)
+ by mail.208.org (Postfix) with ESMTP id 4R2KQz1YW8zBR9sj
+ for <nouveau@lists.freedesktop.org>; Fri, 14 Jul 2023 13:14:35 +0800 (CST)
 Authentication-Results: mail.208.org (amavisd-new); dkim=pass
  reason="pass (just generated, assumed good)" header.d=208.org
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=208.org; h=
  content-transfer-encoding:content-type:message-id:user-agent
  :references:in-reply-to:subject:to:from:date:mime-version; s=
- dkim; t=1689306685; x=1691898686; bh=QD5wT/8x1E9M8LSp4jRHIAhQCQo
- Pi5hSuSfjtzogOas=; b=ZHw6c8u2/z+5GtVUcOcsaGHJUnoV/oIuU0kGzPRMfWq
- m19IVTXe/KNfcxdYm37cwcyNIqsSEu6AZeat1YB9SzfwC9f65X0+rZD7x/3dGWu2
- vLXpJH+jruz4Ue53UQn8AiN2L+s1zBNie0FgwA+b0dIYzfyisHRYuXcrkNet9ZZK
- g5p+IclJqMxXFuHYnkLyIrnmwl3YYjKVzxhuQwCNUYMjBRSERnkYmPm5HDMew3/5
- jN3c47QUDcIbw8bIArGwMhxsuzQr/WbrY9tLdNbO3pnyNGceNpJNrzzsvV/TLue5
- jZxovYkW4+DbQCub9d5319dwBaiR7Ci4IhyxV+afU5A==
+ dkim; t=1689311675; x=1691903676; bh=7scmTbQs/wsjbW5FBE+Ka8Is++h
+ 9WlnkMEr/CtGidh8=; b=ClYf8QwinKCS8+rWu4p8AlUX6Uw66TZaMBC4DO3nQ/D
+ Ir5rLqZ84oKpxtty9DCXDzrB2ysb1DLN/PJvBOVWVUyy5Ym5jugK3/wZZgkUIqMg
+ kkKtZ+NVd8tsxieT3q33yuU4BR45fX7mrjg/Ti27dCSYz17fBXkP0Ucvt1rJ4+lQ
+ HKTw2R4jraaVCa5Y0SgREwOvSa1NKcAud+C7QqHPJeyYQtwvDjng2cAmohpB4I8W
+ wDyg6RCezoMwbhLSCt3uHahlRZyjUf5upbx/2BcxPl/7iNKzkslojHdEdbBo0J+w
+ qI/xrFsHe7re+vDWewMciOwLoPnvjoKVtCAj4KQfpzw==
 X-Virus-Scanned: amavisd-new at mail.208.org
 Received: from mail.208.org ([127.0.0.1])
  by mail.208.org (mail.208.org [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id Nb9aaSrt3-ez for <nouveau@lists.freedesktop.org>;
- Fri, 14 Jul 2023 11:51:25 +0800 (CST)
+ with ESMTP id 2h3wcvH_alJz for <nouveau@lists.freedesktop.org>;
+ Fri, 14 Jul 2023 13:14:35 +0800 (CST)
 Received: from localhost (email.208.org [127.0.0.1])
- by mail.208.org (Postfix) with ESMTPSA id 4R2Hb12z43zBHXhN;
- Fri, 14 Jul 2023 11:51:25 +0800 (CST)
+ by mail.208.org (Postfix) with ESMTPSA id 4R2KQy2hgTzBHXhS;
+ Fri, 14 Jul 2023 13:14:34 +0800 (CST)
 MIME-Version: 1.0
-Date: Fri, 14 Jul 2023 11:51:25 +0800
+Date: Fri, 14 Jul 2023 13:14:34 +0800
 From: huzhi001@208suo.com
 To: bskeggs@redhat.com, kherbst@redhat.com, lyude@redhat.com,
  airlied@gmail.com, daniel@ffwll.ch
 In-Reply-To: <tencent_0FA6AE16A21AAA2E9481C6FE598BA70CC405@qq.com>
 References: <tencent_0FA6AE16A21AAA2E9481C6FE598BA70CC405@qq.com>
 User-Agent: Roundcube Webmail
-Message-ID: <5c894d0a8a178628ca200d054004be3c@208suo.com>
+Message-ID: <f25017a660f8a3a4e49258a1d96003dc@208suo.com>
 X-Sender: huzhi001@208suo.com
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
@@ -80,26 +80,6 @@ Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Fix Nineteen occurrences of the checkpatch.pl error:
-ERROR: space prohibited before that ':' (ctx:WxW)
-ERROR: trailing statements should be on next line
-ERROR: space prohibited before that ':' (ctx:WxW)
-ERROR: trailing statements should be on next line
-ERROR: space prohibited before that ':' (ctx:WxW)
-ERROR: trailing statements should be on next line
-ERROR: trailing statements should be on next line
-ERROR: space prohibited before that ':' (ctx:WxW)
-ERROR: trailing statements should be on next line
-ERROR: space prohibited before that ':' (ctx:WxW)
-ERROR: trailing statements should be on next line
-ERROR: space prohibited before that ':' (ctx:WxW)
-ERROR: trailing statements should be on next line
-ERROR: space prohibited before that ':' (ctx:WxW)
-ERROR: trailing statements should be on next line
-ERROR: space prohibited before that ':' (ctx:WxE)
-ERROR: space prohibited before that ':' (ctx:WxE)
-ERROR: trailing statements should be on next line
-ERROR: trailing statements should be on next line
 Signed-off-by: ZhiHu <huzhi001@208suo.com>
 ---
   .../gpu/drm/nouveau/nvkm/engine/fifo/gk104.c  | 40 ++++++++++++++-----
