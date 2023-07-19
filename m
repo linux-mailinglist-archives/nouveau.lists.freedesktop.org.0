@@ -2,97 +2,62 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EEC3757DB9
-	for <lists+nouveau@lfdr.de>; Tue, 18 Jul 2023 15:35:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4DE4D758CB7
+	for <lists+nouveau@lfdr.de>; Wed, 19 Jul 2023 06:41:18 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 82A9E10E343;
-	Tue, 18 Jul 2023 13:35:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C367E10E0F3;
+	Wed, 19 Jul 2023 04:41:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7014510E0D9
- for <nouveau@lists.freedesktop.org>; Tue, 18 Jul 2023 13:35:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1689687327;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=cEu1yb4Zgq1SLELJ8rlpOHBQWwE2NJnVWaDiK7u0B4Q=;
- b=G7h3ahF7YZIu7wF/bCeYmvQ2knQ7V0soXbpPHE1MRYjb9Ixn0sxVgW9ODMZ6vXWAYBdUAp
- S+vRPC4yg6s886n4dWD9bhxdZoQqCjIz2TSdEhqk2WMrLTtlUzcpnlHd9NdW4KRXu8eemt
- 1C4yAd78NWRFWSNFUTpxvDTzigwiF9w=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-423-BQZj5nQmPqSbxQZw_9MUjg-1; Tue, 18 Jul 2023 09:35:26 -0400
-X-MC-Unique: BQZj5nQmPqSbxQZw_9MUjg-1
-Received: by mail-ej1-f71.google.com with SMTP id
- a640c23a62f3a-94f7a2b21fdso354549566b.2
- for <nouveau@lists.freedesktop.org>; Tue, 18 Jul 2023 06:35:25 -0700 (PDT)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2DB9010E0F3
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Jul 2023 04:41:13 +0000 (UTC)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1b8bbcfd89aso38353655ad.1
+ for <nouveau@lists.freedesktop.org>; Tue, 18 Jul 2023 21:41:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1689741672; x=1692333672;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=OFJjSHu+NQ89RAHFANcr2ueFzvnJqbes+CL/7Vnga1I=;
+ b=rOJfGLCJSE6iqceyqE2puj86UNchslOBdhuDX3rqzAQJzniqe/aTtkdxW9h7mRAnx5
+ oxtOJKMyfx2a/Dgush/DZp2/9bkYt7SaLph0YAvUo4v6QS/jBBRgzHGhlVoVcFRXDcup
+ qLJNbYxaK3DwfSWA6TXnNOpgJQi6Ui7mGXhMFYhyuVgMTevxu5H9fL60zpKYsqyUjG9E
+ 9G8k6ccpYO/euEW93uJNx5kqDgS9iFocvjKC455HFo4FNmFwoLYRp5j9lR2+YbPSqRLt
+ eeVkdEhgmbGghclChi4Ba3qFVeC3xNczZKlrWW3dR98oOqlfIl2xYuWR4ztjJr80LACO
+ d7gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689687325; x=1692279325;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20221208; t=1689741672; x=1692333672;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cEu1yb4Zgq1SLELJ8rlpOHBQWwE2NJnVWaDiK7u0B4Q=;
- b=QNNJaybLanFm77WFhJWuqxN8mbNdiy1byFJnGAmGPoLukPojW90gEHIHRNyt/BkXQh
- G2YzEgyWIpaNZTTJlojwPPAe2nUvcc/afTFMg/1eVMqcKCbCw7a/TZb7KtT1XJ+lYyap
- OlFywPvBDyrQTQOkQ8uscnkD31QKVyUsS6AwBILIGgSeVgaYHIOkLw18q48Fly78U9TM
- qEalyUOmRh3jikyAL6pCgaJ/oStYnkBw/lFeMjul80bLxpVldPol6C1lJiGHkQGq4H8u
- jLBU9dJXxtkFdWxNjRZN8c/GHn8ndl+bypVTl3+ek6QBM78D91jnAon04YVItcAMOSNf
- 5GXg==
-X-Gm-Message-State: ABy/qLbXVPzKo6Ah2D86aiorB4xiicnvu3S3hlxvfV7ryadmAuZFFpoM
- q25Q4JnZaAUpSSG5iCprTItTHFNZqpiU/NRUOa9DpJqXJUqdryNKnb+rA2TwSYDbnNQzP8t7Qlr
- fcsz97gJabKYSpQjodi0l6nRvng==
-X-Received: by 2002:a17:906:eb82:b0:991:f7cb:cc3d with SMTP id
- mh2-20020a170906eb8200b00991f7cbcc3dmr13327534ejb.65.1689687324862; 
- Tue, 18 Jul 2023 06:35:24 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlE6BIgUGric7bcLk/QABEzPWeIdh0wiGZkCK6sZV8z78PAPNcNuqus+Bife1lVy6P9Ah+mfdA==
-X-Received: by 2002:a17:906:eb82:b0:991:f7cb:cc3d with SMTP id
- mh2-20020a170906eb8200b00991f7cbcc3dmr13327514ejb.65.1689687324521; 
- Tue, 18 Jul 2023 06:35:24 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
- ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
- by smtp.gmail.com with ESMTPSA id
- d1-20020a056402516100b00521a3d8474csm1244859ede.57.2023.07.18.06.35.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Jul 2023 06:35:24 -0700 (PDT)
-Message-ID: <51968407-c87a-e565-28f7-868a1b923d5c@redhat.com>
-Date: Tue, 18 Jul 2023 13:38:48 +0200
+ bh=OFJjSHu+NQ89RAHFANcr2ueFzvnJqbes+CL/7Vnga1I=;
+ b=YoLolUH9mFdsBP5IgtC7WWFjgX98TtZ21nlTRD0WVz7KsR/iMUfb06Mk66mDEA6G7G
+ unzEfeBDR8SyUrnADUQvULvMQrjXWiPPZAPgDSh3lr1LHZ94nLRastzdakYmi4AFxGlE
+ n2/qvJmDaYmJooD+cUwZUFI5bjBqXTfi3Vvef6UOX6Eupw7V64HNck1EIfb97fEYN6nE
+ xY+3OeD/60FeUzxvOXEkhRx6HLbCKUxBD0qzDn7GB0NpzfPEYG3U/4V8i0VfD4KvaxdD
+ pv56zdE3UhLA611qF7qjs/oqPU3cJBUAHggvUBEM7ifxkW4il3QliCSj6sFQs6MCWzTF
+ 2SMg==
+X-Gm-Message-State: ABy/qLYXd260w3XObpFbi048/TZQ0wMWoNfYlaXsuqABKixM9NXfvpgT
+ 2jiSQSNdZDKbk/SXIXg9y54uGPPdZds=
+X-Google-Smtp-Source: APBJJlF66TzRMuuIEKYfiwOjOOF4xtrm7U/G97lqshfb/NFE2+7VCZp4E62wLToRHnJEP1gAB6vSPw==
+X-Received: by 2002:a17:902:e54b:b0:1b9:ebf4:5d2 with SMTP id
+ n11-20020a170902e54b00b001b9ebf405d2mr15732057plf.33.1689741671688; 
+ Tue, 18 Jul 2023 21:41:11 -0700 (PDT)
+Received: from localhost.localdomain (87-121-74-45.dyn.launtel.net.au.
+ [87.121.74.45]) by smtp.gmail.com with ESMTPSA id
+ ji2-20020a170903324200b001b53be3d942sm2740930plb.232.2023.07.18.21.41.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Jul 2023 21:41:11 -0700 (PDT)
+From: Ben Skeggs <skeggsb@gmail.com>
+To: nouveau@lists.freedesktop.org
+Date: Wed, 19 Jul 2023 14:40:49 +1000
+Message-ID: <20230719044051.6975-1-skeggsb@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-To: Donald Robson <Donald.Robson@imgtec.com>, "corbet@lwn.net"
- <corbet@lwn.net>, "jason@jlekstrand.net" <jason@jlekstrand.net>,
- "willy@infradead.org" <willy@infradead.org>,
- "christian.koenig@amd.com" <christian.koenig@amd.com>,
- "tzimmermann@suse.de" <tzimmermann@suse.de>,
- "bagasdotme@gmail.com" <bagasdotme@gmail.com>,
- "mripard@kernel.org" <mripard@kernel.org>,
- "matthew.brost@intel.com" <matthew.brost@intel.com>,
- "bskeggs@redhat.com" <bskeggs@redhat.com>,
- "ogabbay@kernel.org" <ogabbay@kernel.org>,
- "boris.brezillon@collabora.com" <boris.brezillon@collabora.com>,
- "Liam.Howlett@oracle.com" <Liam.Howlett@oracle.com>,
- "daniel@ffwll.ch" <daniel@ffwll.ch>,
- "alexdeucher@gmail.com" <alexdeucher@gmail.com>,
- "airlied@gmail.com" <airlied@gmail.com>
-References: <20230713170429.2964-1-dakr@redhat.com>
- <20230713170429.2964-3-dakr@redhat.com>
- <f5957892c4fb41becd7084ac93310aae3a6e091a.camel@imgtec.com>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <f5957892c4fb41becd7084ac93310aae3a6e091a.camel@imgtec.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH drm-next v7 02/13] drm: manager to keep track
- of GPUs VA mappings
+Content-Transfer-Encoding: 8bit
+Subject: [Nouveau] [PATCH 1/3] drm/nouveau/i2c: fix number of aux event slots
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -104,52 +69,78 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "thomas.hellstrom@linux.intel.com" <thomas.hellstrom@linux.intel.com>,
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "airlied@redhat.com" <airlied@redhat.com>
+Cc: Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 7/17/23 12:00, Donald Robson wrote:
-> Hi Danilo,
-> The below part of the documentation is out of date now.
-> Thanks,
-> Donald
+From: Ben Skeggs <bskeggs@redhat.com>
 
-Thanks Donald for pointing this out.
+This was completely bogus before, using maximum DCB device index rather
+than maximum AUX ID to size the buffer that stores event refcounts.
 
-If there aren't any further objections in general I will fix up the 
-comment and then push the GPUVA Manager parts of the series to 
-drm-misc-next.
+*Pretty* unlikely to have been an actual problem on most configurations,
+that is, unless you've got one of the rare boards that have off-chip DP.
 
-- Danilo
+There, it'll likely crash.
 
-> 
-> On Thu, 2023-07-13 at 19:03 +0200, Danilo Krummrich wrote:
->>
->> +
->> +/**
->> + * DOC: Locking
->> + *
->> + * Generally, the GPU VA manager does not take care of locking itself, it is
->> + * the drivers responsibility to take care about locking. Drivers might want to
->> + * protect the following operations: inserting, removing and iterating
->> + * &drm_gpuva objects as well as generating all kinds of operations, such as
->> + * split / merge or prefetch.
->> + *
->> + * The GPU VA manager also does not take care of the locking of the backing
->> + * &drm_gem_object buffers GPU VA lists by itself; drivers are responsible to
->> + * enforce mutual exclusion using either the GEMs dma_resv lock or alternatively
->> + * a driver specific external lock by setting the @DRM_GPUVA_MANAGER_LOCK_EXTERN
->> + * flag.
->> + *
->> + * For the latter, functions such as drm_gpuva_link() or drm_gpuva_unlink()
->> + * contain lockdep checks to indicate locking issues. For this to work drivers
->> + * must provide (in case the @DRM_GPUVA_MANAGER_LOCK_EXTERN flag is set) their
->> + * external lock with drm_gpuva_manager_set_ext_lock() after initialization.
->> + */
->>
+Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
+---
+ drivers/gpu/drm/nouveau/include/nvkm/subdev/i2c.h |  4 ++--
+ drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c    | 11 +++++++++--
+ 2 files changed, 11 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/i2c.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/i2c.h
+index 40a1065ae626..ef441dfdea09 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/i2c.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/i2c.h
+@@ -16,7 +16,7 @@ struct nvkm_i2c_bus {
+ 	const struct nvkm_i2c_bus_func *func;
+ 	struct nvkm_i2c_pad *pad;
+ #define NVKM_I2C_BUS_CCB(n) /* 'n' is ccb index */                           (n)
+-#define NVKM_I2C_BUS_EXT(n) /* 'n' is dcb external encoder type */ ((n) + 0x100)
++#define NVKM_I2C_BUS_EXT(n) /* 'n' is dcb external encoder type */  ((n) + 0x10)
+ #define NVKM_I2C_BUS_PRI /* ccb primary comm. port */                        -1
+ #define NVKM_I2C_BUS_SEC /* ccb secondary comm. port */                      -2
+ 	int id;
+@@ -38,7 +38,7 @@ struct nvkm_i2c_aux {
+ 	const struct nvkm_i2c_aux_func *func;
+ 	struct nvkm_i2c_pad *pad;
+ #define NVKM_I2C_AUX_CCB(n) /* 'n' is ccb index */                           (n)
+-#define NVKM_I2C_AUX_EXT(n) /* 'n' is dcb external encoder type */ ((n) + 0x100)
++#define NVKM_I2C_AUX_EXT(n) /* 'n' is dcb external encoder type */  ((n) + 0x10)
+ 	int id;
+ 
+ 	struct mutex mutex;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
+index 976539de4220..731b2f68d3db 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
+@@ -260,10 +260,11 @@ nvkm_i2c_new_(const struct nvkm_i2c_func *func, struct nvkm_device *device,
+ {
+ 	struct nvkm_bios *bios = device->bios;
+ 	struct nvkm_i2c *i2c;
++	struct nvkm_i2c_aux *aux;
+ 	struct dcb_i2c_entry ccbE;
+ 	struct dcb_output dcbE;
+ 	u8 ver, hdr;
+-	int ret, i;
++	int ret, i, ids;
+ 
+ 	if (!(i2c = *pi2c = kzalloc(sizeof(*i2c), GFP_KERNEL)))
+ 		return -ENOMEM;
+@@ -406,5 +407,11 @@ nvkm_i2c_new_(const struct nvkm_i2c_func *func, struct nvkm_device *device,
+ 		}
+ 	}
+ 
+-	return nvkm_event_init(&nvkm_i2c_intr_func, &i2c->subdev, 4, i, &i2c->event);
++	ids = 0;
++	list_for_each_entry(aux, &i2c->aux, head)
++		ids = max(ids, aux->id + 1);
++	if (!ids)
++		return 0;
++
++	return nvkm_event_init(&nvkm_i2c_intr_func, &i2c->subdev, 4, ids, &i2c->event);
+ }
+-- 
+2.41.0
 
