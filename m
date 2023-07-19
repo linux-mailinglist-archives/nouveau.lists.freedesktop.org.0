@@ -2,66 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E965758CB9
-	for <lists+nouveau@lfdr.de>; Wed, 19 Jul 2023 06:41:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA709758CF6
+	for <lists+nouveau@lfdr.de>; Wed, 19 Jul 2023 07:17:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D1CDF10E101;
-	Wed, 19 Jul 2023 04:41:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 336E010E3F2;
+	Wed, 19 Jul 2023 05:17:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1E55D10E0FA
- for <nouveau@lists.freedesktop.org>; Wed, 19 Jul 2023 04:41:17 +0000 (UTC)
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1bb1baf55f5so38717925ad.0
- for <nouveau@lists.freedesktop.org>; Tue, 18 Jul 2023 21:41:17 -0700 (PDT)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EDBD410E3F0;
+ Wed, 19 Jul 2023 05:17:24 +0000 (UTC)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-4fb7769f15aso10695069e87.0; 
+ Tue, 18 Jul 2023 22:17:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689741676; x=1692333676;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hmDxeFemyn1OSTHzP25E+hPbQYk1zRbRGkryNbwOYOc=;
- b=RCfrsmlHseYqhR1g4zw63Rexms0CNPHiPwECWBhXjOph+upSk0YoVchAzvAmX2WUY1
- C6Z3SCrLjNU5D1aRW+30zxZsji6tEDzGA4ptan/6H2nUkO4Ib7vEPMkOm64nMg7MdRUm
- JH1iKI6VBalXbBXbv+jPdXx8HQhNN+rEFoN9imUY5brwbTmcK+OX42DkKoEcOgZEPJMd
- JlfO1pDx9wjc7KP1A880nYKw9E1mAo/WxTnJESfLTCEti0Nf387bTD6fTx56yzlWpokh
- yeVHw3YLDZNyj687PzPKa9mUJtEBre5+iWT0BWVAZ/9b0x5VjjiVGtXEcfJ88Khmd1je
- rjGw==
+ d=gmail.com; s=20221208; t=1689743842; x=1692335842;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Gx9Abb9INC5EOsKVb3k5BkOEXlQkiI5XeDiYpmyACHE=;
+ b=ik0PA+XyZ6EQ/iPxbOeyzFxJOT6AEKqgv5X0qSAxZFf6BrQMhiytm4lEtObYr+z1l/
+ R92CB3J7nufWgv5X2vd+cyfYhE6bbuzh/GF6h0IH+Y/rZ3/Xz0ir/bGe6mdoms6oKgpv
+ Od8BWJq6L7EI4PmPQuWh7mZlCyrLj2anYmaZxz9LpoqNqFCWpV5oQ5gH2gJo5uScvgQa
+ XL2URV7ieiRCuHfm6vjzslUUwcLeqYr4Q/4oY+q7CHOc1LEAJrZpNLwJhlf7mR17RT/A
+ IRRRQTrK9PDvyXojw1qbLs//XPiEdJvCdpOG4IBDLs74Wh0wk22Br0ILtgdRywnFSqrR
+ O6hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689741676; x=1692333676;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hmDxeFemyn1OSTHzP25E+hPbQYk1zRbRGkryNbwOYOc=;
- b=lg8nSbeEc4aXRBWMhvf4hfyEncU3EC3yOnRZgCdKmoECWyrurISy83U4fhDNnfkPwK
- RvJyAPgT4ePCUsGeIb6f9tsrqcF2WbbXVgkiwgGbh5djMbgrlhyDV4M5iSqAJBKNxMKc
- 5CgwvISDe9rsHlkY/7r3VjJJAtVxTujLtwNnjMZTju6xQNEoSHikuUMelc+xk6MyB4kQ
- YhDxDDckZB36FccIHpikK1hj7dE6zyWluprGSCCStN+vfNhmHcCDCdRxjkUVFbDyV6jO
- lMXrkQ7E1lqD4VrXQztodqNU2WOt9gffpPBYqi6xarb8cvtrN1+MYiRobQfan99aPmvY
- KPAA==
-X-Gm-Message-State: ABy/qLa6rYeq07OAU/7S3t0E1QyyN0mZULEsGCpyysTWayakBW/BD2PW
- mr6xjf/APSj0DGrw6KON+rJy9IwZiG4=
-X-Google-Smtp-Source: APBJJlG96pP+8CtbdrdTS8drsuh2OgsE9hRJhnAbBxvUH5e5oy7A4taucBz4xhffgxxPwqATydS1Cw==
-X-Received: by 2002:a17:902:868a:b0:1b8:1335:b775 with SMTP id
- g10-20020a170902868a00b001b81335b775mr15293149plo.0.1689741675919; 
- Tue, 18 Jul 2023 21:41:15 -0700 (PDT)
-Received: from localhost.localdomain (87-121-74-45.dyn.launtel.net.au.
- [87.121.74.45]) by smtp.gmail.com with ESMTPSA id
- ji2-20020a170903324200b001b53be3d942sm2740930plb.232.2023.07.18.21.41.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jul 2023 21:41:15 -0700 (PDT)
-From: Ben Skeggs <skeggsb@gmail.com>
-To: nouveau@lists.freedesktop.org
-Date: Wed, 19 Jul 2023 14:40:51 +1000
-Message-ID: <20230719044051.6975-3-skeggsb@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230719044051.6975-1-skeggsb@gmail.com>
-References: <20230719044051.6975-1-skeggsb@gmail.com>
+ d=1e100.net; s=20221208; t=1689743842; x=1692335842;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Gx9Abb9INC5EOsKVb3k5BkOEXlQkiI5XeDiYpmyACHE=;
+ b=hy7oc3pMGS7pBa7bV5ZzzQUcVN47s6NRFTDmC2+r4n1JUCVBdoKpIiknzRgNtR7Kec
+ DJBWD/LoThtTA3LJcfDdSXfruuzX8gdEYZVL16S9kvjQj8gSxWqA5eoldE2dtPCFFQMg
+ XFk6aCb+0jaCFA/k9jUZ8jary7LB5E7k7VOBLti0/i2QEDYzVYtZViiiuhOh2XjXREwz
+ GN/4fsKXSKRItdlv6mOkjrK2pau0i9kxqcOgueD4CmIL3Z4lZk7BNWlH9MF3dtBMZeQu
+ C67PE82tSGdLdMlBLEqnPTiCSraXzfltzNUhvoPdwOmzI+5yDrQBnX0yfs65i7JP/eC7
+ 8KCg==
+X-Gm-Message-State: ABy/qLbW4yOJ9YCrtWxYfJ1VZvkjRyaI7wUt0zEMm80u28rkK1Dh0Ub5
+ tzWaof3dZykKQdJSKjioTjSFOOe7fZair+W6hX4=
+X-Google-Smtp-Source: APBJJlG4kEIE9+L4K9I3qpDvgrniK4lv3rFr3CmpqBIzXWyBnGue4o8nlEF85TgW7NuQkBwv9nyNeQ3tvFDxxDTDqSE=
+X-Received: by 2002:a19:6703:0:b0:4f9:7aee:8dc5 with SMTP id
+ b3-20020a196703000000b004f97aee8dc5mr10604774lfc.19.1689743842233; Tue, 18
+ Jul 2023 22:17:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 3/3] drm/nouveau/kms/nv50-: init hpd_irq_lock for
- PIOR DP
+References: <20230707215851.590754-1-lyude@redhat.com>
+In-Reply-To: <20230707215851.590754-1-lyude@redhat.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Wed, 19 Jul 2023 15:17:10 +1000
+Message-ID: <CACAvsv743W4i8ad=orgoUy+Hox0z2CL9rXw18od-oeiB=b25Xg@mail.gmail.com>
+To: Lyude Paul <lyude@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/nvkm/dp: Add hack to fix DP 1.3+
+ DPCD issues
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,41 +66,111 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org, open list <linux-kernel@vger.kernel.org>,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Ben Skeggs <bskeggs@redhat.com>
+On Sat, 8 Jul 2023 at 07:59, Lyude Paul <lyude@redhat.com> wrote:
+>
+> Currently we use the drm_dp_dpcd_read_caps() helper in the DRM side of
+> nouveau in order to read the DPCD of a DP connector, which makes sure we do
+> the right thing and also check for extended DPCD caps. However, it turns
+> out we're not currently doing this on the nvkm side since we don't have
+> access to the drm_dp_aux structure there - which means that the DRM side of
+> the driver and the NVKM side can end up with different DPCD capabilities
+> for the same connector.
+>
+> Ideally to fix this, we want to start setting up the drm_dp_aux device in
+> NVKM before we've made contact with the DRM side - which should be pretty
+> easy to accomplish (I'm already working on it!). Until then however, let's
+> workaround this problem by porting a copy of drm_dp_read_dpcd_caps() into
+> NVKM - which should fix this issue.
+I wouldn't worry about this.  I'm moving basically everything to the
+DRM side of the driver for the GSP work anyway.
 
-Fixes OOPS on boards with ANX9805 DP encoders.
-
-Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
----
- drivers/gpu/drm/nouveau/dispnv50/disp.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 42e1665ba11a..1ecd3d63b108 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -1873,6 +1873,8 @@ nv50_pior_destroy(struct drm_encoder *encoder)
- 	nvif_outp_dtor(&nv_encoder->outp);
- 
- 	drm_encoder_cleanup(encoder);
-+
-+	mutex_destroy(&nv_encoder->dp.hpd_irq_lock);
- 	kfree(encoder);
- }
- 
-@@ -1917,6 +1919,8 @@ nv50_pior_create(struct drm_connector *connector, struct dcb_output *dcbe)
- 	nv_encoder->i2c = ddc;
- 	nv_encoder->aux = aux;
- 
-+	mutex_init(&nv_encoder->dp.hpd_irq_lock);
-+
- 	encoder = to_drm_encoder(nv_encoder);
- 	encoder->possible_crtcs = dcbe->heads;
- 	encoder->possible_clones = 0;
--- 
-2.41.0
-
+Ben.
+>
+> Issue: https://gitlab.freedesktop.org/drm/nouveau/-/issues/211
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c | 48 ++++++++++++++++++-
+>  1 file changed, 47 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
+> index 40c8ea43c42f..b8ac66b4a2c4 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
+> @@ -26,6 +26,8 @@
+>  #include "head.h"
+>  #include "ior.h"
+>
+> +#include <drm/display/drm_dp.h>
+> +
+>  #include <subdev/bios.h>
+>  #include <subdev/bios/init.h>
+>  #include <subdev/gpio.h>
+> @@ -634,6 +636,50 @@ nvkm_dp_enable_supported_link_rates(struct nvkm_outp *outp)
+>         return outp->dp.rates != 0;
+>  }
+>
+> +/* XXX: This is a big fat hack, and this is just drm_dp_read_dpcd_caps()
+> + * converted to work inside nvkm. This is a temporary holdover until we start
+> + * passing the drm_dp_aux device through NVKM
+> + */
+> +static int
+> +nvkm_dp_read_dpcd_caps(struct nvkm_outp *outp)
+> +{
+> +       struct nvkm_i2c_aux *aux = outp->dp.aux;
+> +       u8 dpcd_ext[DP_RECEIVER_CAP_SIZE];
+> +       int ret;
+> +
+> +       ret = nvkm_rdaux(aux, DPCD_RC00_DPCD_REV, outp->dp.dpcd, DP_RECEIVER_CAP_SIZE);
+> +       if (ret < 0)
+> +               return ret;
+> +
+> +       /*
+> +        * Prior to DP1.3 the bit represented by
+> +        * DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT was reserved.
+> +        * If it is set DP_DPCD_REV at 0000h could be at a value less than
+> +        * the true capability of the panel. The only way to check is to
+> +        * then compare 0000h and 2200h.
+> +        */
+> +       if (!(outp->dp.dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
+> +             DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT))
+> +               return 0;
+> +
+> +       ret = nvkm_rdaux(aux, DP_DP13_DPCD_REV, dpcd_ext, sizeof(dpcd_ext));
+> +       if (ret < 0)
+> +               return ret;
+> +
+> +       if (outp->dp.dpcd[DP_DPCD_REV] > dpcd_ext[DP_DPCD_REV]) {
+> +               OUTP_DBG(outp, "Extended DPCD rev less than base DPCD rev (%d > %d)\n",
+> +                        outp->dp.dpcd[DP_DPCD_REV], dpcd_ext[DP_DPCD_REV]);
+> +               return 0;
+> +       }
+> +
+> +       if (!memcmp(outp->dp.dpcd, dpcd_ext, sizeof(dpcd_ext)))
+> +               return 0;
+> +
+> +       memcpy(outp->dp.dpcd, dpcd_ext, sizeof(dpcd_ext));
+> +
+> +       return 0;
+> +}
+> +
+>  void
+>  nvkm_dp_enable(struct nvkm_outp *outp, bool auxpwr)
+>  {
+> @@ -689,7 +735,7 @@ nvkm_dp_enable(struct nvkm_outp *outp, bool auxpwr)
+>                         memset(outp->dp.lttpr, 0x00, sizeof(outp->dp.lttpr));
+>                 }
+>
+> -               if (!nvkm_rdaux(aux, DPCD_RC00_DPCD_REV, outp->dp.dpcd, sizeof(outp->dp.dpcd))) {
+> +               if (!nvkm_dp_read_dpcd_caps(outp)) {
+>                         const u8 rates[] = { 0x1e, 0x14, 0x0a, 0x06, 0 };
+>                         const u8 *rate;
+>                         int rate_max;
+> --
+> 2.40.1
+>
