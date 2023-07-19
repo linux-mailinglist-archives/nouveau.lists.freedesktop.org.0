@@ -2,66 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BEBFB758CB8
-	for <lists+nouveau@lfdr.de>; Wed, 19 Jul 2023 06:41:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E965758CB9
+	for <lists+nouveau@lfdr.de>; Wed, 19 Jul 2023 06:41:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6D2D610E0FA;
-	Wed, 19 Jul 2023 04:41:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D1CDF10E101;
+	Wed, 19 Jul 2023 04:41:18 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 131AE10E0FA
- for <nouveau@lists.freedesktop.org>; Wed, 19 Jul 2023 04:41:14 +0000 (UTC)
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2633fe9b6c0so274203a91.1
- for <nouveau@lists.freedesktop.org>; Tue, 18 Jul 2023 21:41:14 -0700 (PDT)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1E55D10E0FA
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Jul 2023 04:41:17 +0000 (UTC)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1bb1baf55f5so38717925ad.0
+ for <nouveau@lists.freedesktop.org>; Tue, 18 Jul 2023 21:41:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689741674; x=1692333674;
+ d=gmail.com; s=20221208; t=1689741676; x=1692333676;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wXiwQbFGeZPKnMc/2mtNfvQTusq2q54vT6J+mtO4ZpI=;
- b=deMMVD3EPBjxiCUQg9NLZHUsHYz2GWhewdLLctQ58nj6JYKYd/O0obFfjwiqYlTiq4
- Toznz9jFVGIsL0ndwG4H8zrtOFH1WiozTwvbDEmHTmdeYaUkXiwXfemjkb2RzXXQRdS6
- YlivkJzELpjH65Yog4pb8LwWH1so0t795rUUXlZUoYppnpXcVYASFa92vzi30DZe2v0Y
- iRMn6DceYJMKvzxKIDkJBaH2fN6Vk8sK5pk3sIzsITQiU4y5jHCG9PaEp0AAxmj/o4Sr
- QJeZguMGTc5nlFaxVrsCbMkQ10SE5OO892PRIjs5MdBwWz4STG4hfX2MXeY5y9kYJLVR
- R/XQ==
+ bh=hmDxeFemyn1OSTHzP25E+hPbQYk1zRbRGkryNbwOYOc=;
+ b=RCfrsmlHseYqhR1g4zw63Rexms0CNPHiPwECWBhXjOph+upSk0YoVchAzvAmX2WUY1
+ C6Z3SCrLjNU5D1aRW+30zxZsji6tEDzGA4ptan/6H2nUkO4Ib7vEPMkOm64nMg7MdRUm
+ JH1iKI6VBalXbBXbv+jPdXx8HQhNN+rEFoN9imUY5brwbTmcK+OX42DkKoEcOgZEPJMd
+ JlfO1pDx9wjc7KP1A880nYKw9E1mAo/WxTnJESfLTCEti0Nf387bTD6fTx56yzlWpokh
+ yeVHw3YLDZNyj687PzPKa9mUJtEBre5+iWT0BWVAZ/9b0x5VjjiVGtXEcfJ88Khmd1je
+ rjGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689741674; x=1692333674;
+ d=1e100.net; s=20221208; t=1689741676; x=1692333676;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wXiwQbFGeZPKnMc/2mtNfvQTusq2q54vT6J+mtO4ZpI=;
- b=JqS40RdnZuIDh6WuB7i9dU4oICEluL8TcIKhNdwlX1PRqO5QF4qwI3vZpdNF9r2WJR
- lriEYvrV6gdh8hEqErkBhEzzq4/c5d8+rfKmUOmcn35jVY+keaooFAhLWsh817CGGUn4
- Gy6RfcsHVbC+lY32fg5xmwU9Nq0/E9BTsOAzCPjpE7ieSQs+mqNI0IMJKMnXqX6valMl
- 7f0mFiJvX0wT13Bm5ZxvlstqXojimLdpg7XvfVGUr/jTTH+VTuswtl9wj4qm8BloDxBQ
- +qvwcxMd7FMJQFxTcwTFkkxC5texZTLK4pKmQ40p92Aa0kzCaJYA0OHDMcj8daeuf5U3
- ERgQ==
-X-Gm-Message-State: ABy/qLZgdY/PfBHcQAoUQTFYUIXEcTIkahlUGcCfuvzTR2apGUORT9ef
- CU/7QOZHXFsPE8tx/EJl1L6zg6eQrVc=
-X-Google-Smtp-Source: APBJJlED3MBd9P0Egx4wdDQQ2kf3U4kxF+niFB2TaS2xetD9w1j4mfPcQX4skP62w/F4ePI/CuorPw==
-X-Received: by 2002:a17:90a:644f:b0:263:1f1c:ef49 with SMTP id
- y15-20020a17090a644f00b002631f1cef49mr1496869pjm.13.1689741673836; 
- Tue, 18 Jul 2023 21:41:13 -0700 (PDT)
+ bh=hmDxeFemyn1OSTHzP25E+hPbQYk1zRbRGkryNbwOYOc=;
+ b=lg8nSbeEc4aXRBWMhvf4hfyEncU3EC3yOnRZgCdKmoECWyrurISy83U4fhDNnfkPwK
+ RvJyAPgT4ePCUsGeIb6f9tsrqcF2WbbXVgkiwgGbh5djMbgrlhyDV4M5iSqAJBKNxMKc
+ 5CgwvISDe9rsHlkY/7r3VjJJAtVxTujLtwNnjMZTju6xQNEoSHikuUMelc+xk6MyB4kQ
+ YhDxDDckZB36FccIHpikK1hj7dE6zyWluprGSCCStN+vfNhmHcCDCdRxjkUVFbDyV6jO
+ lMXrkQ7E1lqD4VrXQztodqNU2WOt9gffpPBYqi6xarb8cvtrN1+MYiRobQfan99aPmvY
+ KPAA==
+X-Gm-Message-State: ABy/qLa6rYeq07OAU/7S3t0E1QyyN0mZULEsGCpyysTWayakBW/BD2PW
+ mr6xjf/APSj0DGrw6KON+rJy9IwZiG4=
+X-Google-Smtp-Source: APBJJlG96pP+8CtbdrdTS8drsuh2OgsE9hRJhnAbBxvUH5e5oy7A4taucBz4xhffgxxPwqATydS1Cw==
+X-Received: by 2002:a17:902:868a:b0:1b8:1335:b775 with SMTP id
+ g10-20020a170902868a00b001b81335b775mr15293149plo.0.1689741675919; 
+ Tue, 18 Jul 2023 21:41:15 -0700 (PDT)
 Received: from localhost.localdomain (87-121-74-45.dyn.launtel.net.au.
  [87.121.74.45]) by smtp.gmail.com with ESMTPSA id
- ji2-20020a170903324200b001b53be3d942sm2740930plb.232.2023.07.18.21.41.12
+ ji2-20020a170903324200b001b53be3d942sm2740930plb.232.2023.07.18.21.41.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jul 2023 21:41:13 -0700 (PDT)
+ Tue, 18 Jul 2023 21:41:15 -0700 (PDT)
 From: Ben Skeggs <skeggsb@gmail.com>
 To: nouveau@lists.freedesktop.org
-Date: Wed, 19 Jul 2023 14:40:50 +1000
-Message-ID: <20230719044051.6975-2-skeggsb@gmail.com>
+Date: Wed, 19 Jul 2023 14:40:51 +1000
+Message-ID: <20230719044051.6975-3-skeggsb@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230719044051.6975-1-skeggsb@gmail.com>
 References: <20230719044051.6975-1-skeggsb@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 2/3] drm/nouveau/disp: PIOR DP uses GPIO for HPD,
- not PMGR AUX interrupts
+Subject: [Nouveau] [PATCH 3/3] drm/nouveau/kms/nv50-: init hpd_irq_lock for
+ PIOR DP
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,56 +79,35 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Ben Skeggs <bskeggs@redhat.com>
 
-Fixes crash on boards with ANX9805 TMDS/DP encoders.
+Fixes OOPS on boards with ANX9805 DP encoders.
 
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 ---
- .../gpu/drm/nouveau/nvkm/engine/disp/uconn.c  | 27 ++++++++++++-------
- 1 file changed, 18 insertions(+), 9 deletions(-)
+ drivers/gpu/drm/nouveau/dispnv50/disp.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
-index dad942be6679..46b057fe1412 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
-@@ -81,20 +81,29 @@ nvkm_uconn_uevent(struct nvkm_object *object, void *argv, u32 argc, struct nvkm_
- 		return -ENOSYS;
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+index 42e1665ba11a..1ecd3d63b108 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+@@ -1873,6 +1873,8 @@ nv50_pior_destroy(struct drm_encoder *encoder)
+ 	nvif_outp_dtor(&nv_encoder->outp);
  
- 	list_for_each_entry(outp, &conn->disp->outps, head) {
--		if (outp->info.connector == conn->index && outp->dp.aux) {
--			if (args->v0.types & NVIF_CONN_EVENT_V0_PLUG  ) bits |= NVKM_I2C_PLUG;
--			if (args->v0.types & NVIF_CONN_EVENT_V0_UNPLUG) bits |= NVKM_I2C_UNPLUG;
--			if (args->v0.types & NVIF_CONN_EVENT_V0_IRQ   ) bits |= NVKM_I2C_IRQ;
-+		if (outp->info.connector == conn->index)
-+			break;
-+	}
- 
--			return nvkm_uevent_add(uevent, &device->i2c->event, outp->dp.aux->id, bits,
--					       nvkm_uconn_uevent_aux);
--		}
-+	if (&outp->head == &conn->disp->outps)
-+		return -EINVAL;
+ 	drm_encoder_cleanup(encoder);
 +
-+	if (outp->dp.aux && !outp->info.location) {
-+		if (args->v0.types & NVIF_CONN_EVENT_V0_PLUG  ) bits |= NVKM_I2C_PLUG;
-+		if (args->v0.types & NVIF_CONN_EVENT_V0_UNPLUG) bits |= NVKM_I2C_UNPLUG;
-+		if (args->v0.types & NVIF_CONN_EVENT_V0_IRQ   ) bits |= NVKM_I2C_IRQ;
++	mutex_destroy(&nv_encoder->dp.hpd_irq_lock);
+ 	kfree(encoder);
+ }
+ 
+@@ -1917,6 +1919,8 @@ nv50_pior_create(struct drm_connector *connector, struct dcb_output *dcbe)
+ 	nv_encoder->i2c = ddc;
+ 	nv_encoder->aux = aux;
+ 
++	mutex_init(&nv_encoder->dp.hpd_irq_lock);
 +
-+		return nvkm_uevent_add(uevent, &device->i2c->event, outp->dp.aux->id, bits,
-+				       nvkm_uconn_uevent_aux);
- 	}
- 
- 	if (args->v0.types & NVIF_CONN_EVENT_V0_PLUG  ) bits |= NVKM_GPIO_HI;
- 	if (args->v0.types & NVIF_CONN_EVENT_V0_UNPLUG) bits |= NVKM_GPIO_LO;
--	if (args->v0.types & NVIF_CONN_EVENT_V0_IRQ)
--		return -EINVAL;
-+	if (args->v0.types & NVIF_CONN_EVENT_V0_IRQ) {
-+		/* TODO: support DP IRQ on ANX9805 and remove this hack. */
-+		if (!outp->info.location)
-+			return -EINVAL;
-+	}
- 
- 	return nvkm_uevent_add(uevent, &device->gpio->event, conn->info.hpd, bits,
- 			       nvkm_uconn_uevent_gpio);
+ 	encoder = to_drm_encoder(nv_encoder);
+ 	encoder->possible_crtcs = dcbe->heads;
+ 	encoder->possible_clones = 0;
 -- 
 2.41.0
 
