@@ -2,70 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7DA17590CB
-	for <lists+nouveau@lfdr.de>; Wed, 19 Jul 2023 11:01:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 027077590CC
+	for <lists+nouveau@lfdr.de>; Wed, 19 Jul 2023 11:01:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D03C610E087;
-	Wed, 19 Jul 2023 09:01:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9226610E1CC;
+	Wed, 19 Jul 2023 09:01:18 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8604E10E1CC
- for <nouveau@lists.freedesktop.org>; Wed, 19 Jul 2023 09:01:08 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D7B7510E1CC
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Jul 2023 09:01:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1689757267;
+ s=mimecast20190719; t=1689757276;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=XTSWtCdRRyBQtaxq6k7vtQgN1uF7XZRdPHODarevd4M=;
- b=IgBQDNT/odASJlwrAqmCivQ0eJDl90+8zCK/fdQdftOi3GHs7VLUBzhgyvA11rKG0aTEHJ
- x4jhtrknfVK/AF1RkMbCL+COZEz2GMkwTvvbkv00yvwis/mhWwYuPxdWGwJT4/i5UC5VJt
- IQDBcj13tUPmk9aUPegJdbymzw0hB0k=
-Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
- [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=iEingK6F6sQjEzMfdFhGQISzZgx2KwL76de8p1LAtAc=;
+ b=Zo/UcUeNmSo0sDr2KuPxGJehC4/SNLXTPf/ecE3kM+2K2ehPOJLqR4+ghFPrxXpPHRAy4Y
+ bWoOfxZ4yb81SaNvhR9NtnS+46QRtWWFmtre4HYFUQvpy4zH944tLkgwHPMysrrIQKpm3M
+ pZO2kHo/mxRWtHavVEOb8SFGa0SrV8w=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-416-2iG9PNpKMeOGpR_4i92q5A-1; Wed, 19 Jul 2023 05:01:06 -0400
-X-MC-Unique: 2iG9PNpKMeOGpR_4i92q5A-1
-Received: by mail-lj1-f198.google.com with SMTP id
- 38308e7fff4ca-2b6fdb8d0acso11680691fa.0
- for <nouveau@lists.freedesktop.org>; Wed, 19 Jul 2023 02:01:05 -0700 (PDT)
+ us-mta-592-QG8jolQTNLyJsgAGdOqAxg-1; Wed, 19 Jul 2023 05:01:14 -0400
+X-MC-Unique: QG8jolQTNLyJsgAGdOqAxg-1
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2b72262fb80so11177391fa.0
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Jul 2023 02:01:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689757264; x=1690362064;
+ d=1e100.net; s=20221208; t=1689757273; x=1690362073;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XTSWtCdRRyBQtaxq6k7vtQgN1uF7XZRdPHODarevd4M=;
- b=bX3XhjGjMoe2Vs8NPeOSc267/FqhEFw5M0KsBtQXGA7ZjSU4dZAfLx3dGWLhkFiiVS
- t3XNTAJwD72500jMbrEPUvIgCrlhGYBXXk/zoF7ms5Wx3aWh2waULb+bliaSxDeEdEfv
- sg6VY5LyT0K7rurGLi0YdwxBu5PAV6LQCh9buRlq2lHuNmyQLGADG4QLoeyuKe+TtUvD
- VzcE70vuAj8BKmWT6Eva7w69cqU5BquZc3O/Xi0Hnt+UdJTUzQsEK3KDRlW4YNGE33BN
- RfvRaFgrWFiYecfiDL/DfsJnJDhO/zASoaIhOVNYSfXTH1OcHF9zlDWnsg9CfzDvhiBz
- nOOQ==
-X-Gm-Message-State: ABy/qLYLJeIL7pkBi0PxUwpe4Vkw5zcSFiQeg8asTGqd2qu/0UAbFmWU
- GE8wVz8AJV5GI4gwnC9WdEjeOO3AxIZ2ChlBCTgbVA60ePaOX4qcq4LW/mhGC5xxCtfBPgqyiHx
- vS8hqa8GRWoZyMYAV45tk4hcbSB9aDIbMWmZ3gKZz3ZqElvX9na3z
-X-Received: by 2002:a05:651c:1725:b0:2b9:3c1d:6ec0 with SMTP id
- be37-20020a05651c172500b002b93c1d6ec0mr924586ljb.4.1689757264037; 
- Wed, 19 Jul 2023 02:01:04 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlGtyKIFzC0Oe5dIhMtIlHNMmF5RleyvN7KeLT6gW5sXZRB08x6FwAarTMlNrvsYshHE+fAI1cnuIRtmQPK9hdQ=
-X-Received: by 2002:a05:651c:1725:b0:2b9:3c1d:6ec0 with SMTP id
- be37-20020a05651c172500b002b93c1d6ec0mr924571ljb.4.1689757263619; Wed, 19 Jul
- 2023 02:01:03 -0700 (PDT)
+ bh=iEingK6F6sQjEzMfdFhGQISzZgx2KwL76de8p1LAtAc=;
+ b=dQhojuf/mIBEDJnqOsmlpU7dKFKqvYerzyLlzzuoKPD0hqqwZfgMMIUMD+AngofXEX
+ O41fxA+oINc30usF1idVVthDfso0fjLKTmsUYXs3C4ljdI7ZQyzo256ezosxeZUhCH9D
+ x+DPCOzG7ryilTY6JK1QlOPVQPBoSrjk2JKZ1tKEY/tybhBpWwa0Dn+++7XpGDZJBQgL
+ zZKtgdeVNp3qb3P6Vhp5EmihC2Ux7OO9iKTxWcipPJi7Tu2Ey1WUI6hCpJ0Ev2bEnSlr
+ mUZWP2+BxNqOmo0pRcPMd+WDxZbReG5MrVQVZQRJuHmArvzFpWOtW3dSQf8m2zO24XDO
+ pGlA==
+X-Gm-Message-State: ABy/qLZF/P3SxOazYVbd+b6ASV1VLxY0c9C5K84n817oehwMD2mP+y2n
+ 4RdHgoWWtpo9SHUhDq7ocpjXKqcVrWK3nANJYLHlDMjzZVJYzLglEbDDKdtfGWypL0A/ZfOM7B9
+ fQbzAonKfE4F59YIfp1rv7r16qwxM/roxSq1lzWLNUw==
+X-Received: by 2002:a2e:b891:0:b0:2b6:9a47:c4bd with SMTP id
+ r17-20020a2eb891000000b002b69a47c4bdmr8857189ljp.1.1689757272939; 
+ Wed, 19 Jul 2023 02:01:12 -0700 (PDT)
+X-Google-Smtp-Source: APBJJlFVcnTraDYZyT6H8+2HkWTXBE73JnREC8HbKBvR2QCxpwFXsH9jfRQZnT1LHuB4uC0NL0yOLLXRDEd4uTb8lkE=
+X-Received: by 2002:a2e:b891:0:b0:2b6:9a47:c4bd with SMTP id
+ r17-20020a2eb891000000b002b69a47c4bdmr8857171ljp.1.1689757272554; Wed, 19 Jul
+ 2023 02:01:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230719044051.6975-1-skeggsb@gmail.com>
-In-Reply-To: <20230719044051.6975-1-skeggsb@gmail.com>
+ <20230719044051.6975-2-skeggsb@gmail.com>
+In-Reply-To: <20230719044051.6975-2-skeggsb@gmail.com>
 From: Karol Herbst <kherbst@redhat.com>
-Date: Wed, 19 Jul 2023 11:00:52 +0200
-Message-ID: <CACO55tsNg42B_PJj6hX22uCxiB+kQf7AxTqg152TfdPnhUcrrQ@mail.gmail.com>
+Date: Wed, 19 Jul 2023 11:01:00 +0200
+Message-ID: <CACO55tv19giHd7-Psv6AU5tPTHraCxYSzRwkL6G_p+PdGXq7OQ@mail.gmail.com>
 To: Ben Skeggs <skeggsb@gmail.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH 1/3] drm/nouveau/i2c: fix number of aux event
- slots
+Subject: Re: [Nouveau] [PATCH 2/3] drm/nouveau/disp: PIOR DP uses GPIO for
+ HPD, not PMGR AUX interrupts
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,86 +87,71 @@ e:
 >
 > From: Ben Skeggs <bskeggs@redhat.com>
 >
-> This was completely bogus before, using maximum DCB device index rather
-> than maximum AUX ID to size the buffer that stores event refcounts.
->
-> *Pretty* unlikely to have been an actual problem on most configurations,
-> that is, unless you've got one of the rare boards that have off-chip DP.
->
-> There, it'll likely crash.
+> Fixes crash on boards with ANX9805 TMDS/DP encoders.
 >
 > Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 > ---
->  drivers/gpu/drm/nouveau/include/nvkm/subdev/i2c.h |  4 ++--
->  drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c    | 11 +++++++++--
->  2 files changed, 11 insertions(+), 4 deletions(-)
+>  .../gpu/drm/nouveau/nvkm/engine/disp/uconn.c  | 27 ++++++++++++-------
+>  1 file changed, 18 insertions(+), 9 deletions(-)
 >
-> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/i2c.h b/drivers/=
-gpu/drm/nouveau/include/nvkm/subdev/i2c.h
-> index 40a1065ae626..ef441dfdea09 100644
-> --- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/i2c.h
-> +++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/i2c.h
-> @@ -16,7 +16,7 @@ struct nvkm_i2c_bus {
->         const struct nvkm_i2c_bus_func *func;
->         struct nvkm_i2c_pad *pad;
->  #define NVKM_I2C_BUS_CCB(n) /* 'n' is ccb index */                      =
-     (n)
-> -#define NVKM_I2C_BUS_EXT(n) /* 'n' is dcb external encoder type */ ((n) =
-+ 0x100)
-> +#define NVKM_I2C_BUS_EXT(n) /* 'n' is dcb external encoder type */  ((n)=
- + 0x10)
->  #define NVKM_I2C_BUS_PRI /* ccb primary comm. port */                   =
-     -1
->  #define NVKM_I2C_BUS_SEC /* ccb secondary comm. port */                 =
-     -2
->         int id;
-> @@ -38,7 +38,7 @@ struct nvkm_i2c_aux {
->         const struct nvkm_i2c_aux_func *func;
->         struct nvkm_i2c_pad *pad;
->  #define NVKM_I2C_AUX_CCB(n) /* 'n' is ccb index */                      =
-     (n)
-> -#define NVKM_I2C_AUX_EXT(n) /* 'n' is dcb external encoder type */ ((n) =
-+ 0x100)
-> +#define NVKM_I2C_AUX_EXT(n) /* 'n' is dcb external encoder type */  ((n)=
- + 0x10)
->         int id;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c b/drivers/g=
+pu/drm/nouveau/nvkm/engine/disp/uconn.c
+> index dad942be6679..46b057fe1412 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
+> @@ -81,20 +81,29 @@ nvkm_uconn_uevent(struct nvkm_object *object, void *a=
+rgv, u32 argc, struct nvkm_
+>                 return -ENOSYS;
 >
->         struct mutex mutex;
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c b/drivers/gpu=
-/drm/nouveau/nvkm/subdev/i2c/base.c
-> index 976539de4220..731b2f68d3db 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
-> @@ -260,10 +260,11 @@ nvkm_i2c_new_(const struct nvkm_i2c_func *func, str=
-uct nvkm_device *device,
->  {
->         struct nvkm_bios *bios =3D device->bios;
->         struct nvkm_i2c *i2c;
-> +       struct nvkm_i2c_aux *aux;
->         struct dcb_i2c_entry ccbE;
->         struct dcb_output dcbE;
->         u8 ver, hdr;
-> -       int ret, i;
-> +       int ret, i, ids;
+>         list_for_each_entry(outp, &conn->disp->outps, head) {
+> -               if (outp->info.connector =3D=3D conn->index && outp->dp.a=
+ux) {
+> -                       if (args->v0.types & NVIF_CONN_EVENT_V0_PLUG  ) b=
+its |=3D NVKM_I2C_PLUG;
+> -                       if (args->v0.types & NVIF_CONN_EVENT_V0_UNPLUG) b=
+its |=3D NVKM_I2C_UNPLUG;
+> -                       if (args->v0.types & NVIF_CONN_EVENT_V0_IRQ   ) b=
+its |=3D NVKM_I2C_IRQ;
+> +               if (outp->info.connector =3D=3D conn->index)
+> +                       break;
+> +       }
 >
->         if (!(i2c =3D *pi2c =3D kzalloc(sizeof(*i2c), GFP_KERNEL)))
->                 return -ENOMEM;
-> @@ -406,5 +407,11 @@ nvkm_i2c_new_(const struct nvkm_i2c_func *func, stru=
-ct nvkm_device *device,
->                 }
+> -                       return nvkm_uevent_add(uevent, &device->i2c->even=
+t, outp->dp.aux->id, bits,
+> -                                              nvkm_uconn_uevent_aux);
+> -               }
+> +       if (&outp->head =3D=3D &conn->disp->outps)
+> +               return -EINVAL;
+> +
+> +       if (outp->dp.aux && !outp->info.location) {
+> +               if (args->v0.types & NVIF_CONN_EVENT_V0_PLUG  ) bits |=3D=
+ NVKM_I2C_PLUG;
+> +               if (args->v0.types & NVIF_CONN_EVENT_V0_UNPLUG) bits |=3D=
+ NVKM_I2C_UNPLUG;
+> +               if (args->v0.types & NVIF_CONN_EVENT_V0_IRQ   ) bits |=3D=
+ NVKM_I2C_IRQ;
+> +
+> +               return nvkm_uevent_add(uevent, &device->i2c->event, outp-=
+>dp.aux->id, bits,
+> +                                      nvkm_uconn_uevent_aux);
 >         }
 >
-> -       return nvkm_event_init(&nvkm_i2c_intr_func, &i2c->subdev, 4, i, &=
-i2c->event);
-> +       ids =3D 0;
-> +       list_for_each_entry(aux, &i2c->aux, head)
-> +               ids =3D max(ids, aux->id + 1);
-> +       if (!ids)
-> +               return 0;
-> +
-> +       return nvkm_event_init(&nvkm_i2c_intr_func, &i2c->subdev, 4, ids,=
- &i2c->event);
->  }
+>         if (args->v0.types & NVIF_CONN_EVENT_V0_PLUG  ) bits |=3D NVKM_GP=
+IO_HI;
+>         if (args->v0.types & NVIF_CONN_EVENT_V0_UNPLUG) bits |=3D NVKM_GP=
+IO_LO;
+> -       if (args->v0.types & NVIF_CONN_EVENT_V0_IRQ)
+> -               return -EINVAL;
+> +       if (args->v0.types & NVIF_CONN_EVENT_V0_IRQ) {
+> +               /* TODO: support DP IRQ on ANX9805 and remove this hack. =
+*/
+> +               if (!outp->info.location)
+> +                       return -EINVAL;
+> +       }
+>
+>         return nvkm_uevent_add(uevent, &device->gpio->event, conn->info.h=
+pd, bits,
+>                                nvkm_uconn_uevent_gpio);
 > --
 > 2.41.0
 >
