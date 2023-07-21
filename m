@@ -2,71 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBFBD75E0C8
-	for <lists+nouveau@lfdr.de>; Sun, 23 Jul 2023 11:24:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D43D75E0D4
+	for <lists+nouveau@lfdr.de>; Sun, 23 Jul 2023 11:24:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BEB6710E1EE;
-	Sun, 23 Jul 2023 09:23:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A25EB10E208;
+	Sun, 23 Jul 2023 09:24:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [IPv6:2001:67c:2178:6::1d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5AD3E10E7E6;
- Fri, 14 Jul 2023 07:39:03 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id DA2C71FD60;
- Fri, 14 Jul 2023 07:39:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1689320340; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=nMWGIzR5HguJc3P736wDMWr57FecGJdaqmJS12K5GD8=;
- b=OV/gdDYm2uAVKIOz4nhzePkYLXrydA5b3efhEo7z+cVzoc69jEcZ9YUPxA/NhvPVXLWvEK
- vJIvaON/yN1mFbFrVG7sKhziYU63JMVKYJGeW1n98N87iPjWLM8zYVr6K0n35gCWrr5LeV
- JgA1RKDnRqnC54CoGkXQO7OYQ/3TZwA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1689320340;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=nMWGIzR5HguJc3P736wDMWr57FecGJdaqmJS12K5GD8=;
- b=nMR4Tsarzd8uBtjx+g3rJCIL8W+d0+uFe/ZArcyeUxAaSOobgaEVTX4FctsZNVklH+ZvS6
- 4af1u0Io24CrO6Dw==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4805313A15;
- Fri, 14 Jul 2023 07:38:57 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 3v5aEJH7sGTTOwAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Fri, 14 Jul 2023 07:38:57 +0000
-Message-ID: <ebc6167a-0696-11d2-cb20-bcc7d23427aa@suse.de>
-Date: Fri, 14 Jul 2023 09:38:56 +0200
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6E5F110E70F
+ for <nouveau@lists.freedesktop.org>; Fri, 21 Jul 2023 22:58:49 +0000 (UTC)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-986d8332f50so376688766b.0
+ for <nouveau@lists.freedesktop.org>; Fri, 21 Jul 2023 15:58:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gfxstrand-net.20221208.gappssmtp.com; s=20221208; t=1689980328; x=1690585128;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=3TdhF2mBxzZnAG60L9IldpXYtbQ3cNWwPE+SC4e7ZHA=;
+ b=yQAMellr1BOOTOUYs0dRkjMxjgdrRlmKX9YYPFSOwwN1lpRmdc5KcOd5mvxcz9CI8m
+ QhrRl9bG0IHMPbCfyMKTw4FMzwEClhffAlsF0WIlQCrDObjjl1eTcZaOZl5/GUrVKxw7
+ GBOVkQB6fieFh6ypWmOOTLDDhcer5usa38Q2ENdykPmscfzk++U4e0M/hnjXzZYt1g/a
+ ctibcru7dyt9l9xjMgGmMZSXAJ6+7ozBF4A86gKhLuOOd7MXd0o+aAlamIvp8pvRTUJ4
+ f/zf15Xzon0d7O8vDYfHedp+p68OfivrPK0kNS22Ag2Uq9eezLz48GjFYL8GHR0LFO0B
+ NKGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1689980328; x=1690585128;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3TdhF2mBxzZnAG60L9IldpXYtbQ3cNWwPE+SC4e7ZHA=;
+ b=jfjMoti0sXgYx73Cfl71mxDqT9A4119po7W2notFRyCKpavCXKScPQldjXPljUVn2I
+ jPCaJhp5qjkvvDM3cy8HSypxanr+ZZoZUs+n6JHXoSOH23VWJBIV2ZXtCHMRrx3iAW0u
+ 2C1U7xVNH8kykV3/lRXCvea9YqRCtlsn23RHCEKHDoWcLD5UlntAnEeSLXM1mp6APsbm
+ aOSsbt8/ycfrctQnX6WQ/7DxMlIckNfwy/eQfMr+PyLEXs2h2alsxcyL9Oy21TOEjZv0
+ 5RB2x4Itti7sJPcrlGHERMq3V3q8q0v+GW8fimMqC9PGrY4aEURe3zdvCvZdSN5D0EF3
+ HZkA==
+X-Gm-Message-State: ABy/qLbpfZWEdR87n9UT6M8hGDeAwK0uC5bSHoZDCKtDn+rasfVsYyf2
+ zYWhAIoQZ3nGnEHdvSJcDha6hsgm4u1pylhOF6UB3Q==
+X-Google-Smtp-Source: APBJJlFikxB6VkPOGpxNFsoJHEWztjJiV6wMOsiRwZHbdyeOXAkXCXKJvS4M+W9u0dURWl9vMkQ7Pc2fEcOlvRAlIOw=
+X-Received: by 2002:a17:907:771a:b0:993:d617:bdc5 with SMTP id
+ kw26-20020a170907771a00b00993d617bdc5mr2810745ejc.37.1689980327687; Fri, 21
+ Jul 2023 15:58:47 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-To: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Sean Paul <seanpaul@chromium.org>,
- =?UTF-8?Q?Uwe_Kleine-K=c3=b6nig?= <u.kleine-koenig@pengutronix.de>
-References: <20230712094702.1770121-1-u.kleine-koenig@pengutronix.de>
- <87fs5tgpvv.fsf@intel.com>
- <CAOw6vbLO_UaXDbTCtAQJgthXOUMPqEV+c2MQhP-1DuK44OhGxw@mail.gmail.com>
- <20230713130337.fd2l67r23g2irifx@pengutronix.de>
- <CAOw6vbKtjyUm+OqO7LSV1hDOMQATwkEWP4GzBbbXib0i5EviUQ@mail.gmail.com>
- <78be52b8-5ffb-601a-84b2-ead2894973a6@suse.de>
- <d6160aeb-6344-b272-775a-cb665dca46ac@linux.intel.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-In-Reply-To: <d6160aeb-6344-b272-775a-cb665dca46ac@linux.intel.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------jeLFGePkiFpCJh0eHqRS7GTg"
+References: <20230720001443.2380-1-dakr@redhat.com>
+ <20230720001443.2380-4-dakr@redhat.com>
+In-Reply-To: <20230720001443.2380-4-dakr@redhat.com>
+From: Faith Ekstrand <faith@gfxstrand.net>
+Date: Fri, 21 Jul 2023 17:58:35 -0500
+Message-ID: <CAOFGe95kS0KzSUhjWiikBcx9vRQKnqipFE+a=FPobCgEi=ysAw@mail.gmail.com>
+To: Danilo Krummrich <dakr@redhat.com>
+Content-Type: multipart/alternative; boundary="0000000000001c0ff60601073543"
 X-Mailman-Approved-At: Sun, 23 Jul 2023 09:23:50 +0000
-Subject: Re: [Nouveau] [Freedreno] [PATCH RFC v1 00/52] drm/crtc: Rename
- struct drm_crtc::dev to drm_dev
+Subject: Re: [Nouveau] [PATCH drm-misc-next v8 03/12] drm/nouveau: new
+ VM_BIND uapi interfaces
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,417 +68,773 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: =?UTF-8?Q?Heiko_St=c3=bcbner?= <heiko@sntech.de>,
- Geert Uytterhoeven <geert+renesas@glider.be>,
- Xinliang Liu <xinliang.liu@linaro.org>,
- Linus Walleij <linus.walleij@linaro.org>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Alexey Kodanev <aleksei.kodanev@bell-sw.com>, dri-devel@lists.freedesktop.org,
- Vandita Kulkarni <vandita.kulkarni@intel.com>,
- Alim Akhtar <alim.akhtar@samsung.com>,
- Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Arun R Murthy <arun.r.murthy@intel.com>, Jerome Brunet <jbrunet@baylibre.com>,
- linux-samsung-soc@vger.kernel.org, Samuel Holland <samuel@sholland.org>,
- Matt Roper <matthew.d.roper@intel.com>, Wenjing Liu <wenjing.liu@amd.com>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Stanislav Lisovskiy <stanislav.lisovskiy@intel.com>,
- NXP Linux Team <linux-imx@nxp.com>, spice-devel@lists.freedesktop.org,
- Niranjana Vishwanathapura <niranjana.vishwanathapura@intel.com>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, linux-sunxi@lists.linux.dev,
- Matthias Brugger <matthias.bgg@gmail.com>, Tim Huang <Tim.Huang@amd.com>,
- Suraj Kandpal <suraj.kandpal@intel.com>,
- =?UTF-8?Q?Andr=c3=a9_Almeida?= <andrealmeid@igalia.com>,
- Mika Kahola <mika.kahola@intel.com>,
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
- Leo Li <sunpeng.li@amd.com>, Sascha Hauer <s.hauer@pengutronix.de>,
- Lucas De Marchi <lucas.demarchi@intel.com>, Inki Dae <inki.dae@samsung.com>,
- Hersen Wu <hersenxs.wu@amd.com>, Dave Airlie <airlied@redhat.com>,
- Kamlesh Gurudasani <kamlesh.gurudasani@gmail.com>,
- Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
- =?UTF-8?Q?=c5=81ukasz_Bartosik?= <lb@semihalf.com>,
- Radhakrishna Sripada <radhakrishna.sripada@intel.com>,
- Andrew Jeffery <andrew@aj.id.au>, Seung-Woo Kim <sw0312.kim@samsung.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>, kernel@pengutronix.de,
- Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org,
- Claudiu Beznea <claudiu.beznea@microchip.com>, Zack Rusin <zackr@vmware.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>,
- linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
- Mitul Golani <mitulkumar.ajitkumar.golani@intel.com>,
- =?UTF-8?Q?Jos=c3=a9_Roberto_de_Souza?= <jose.souza@intel.com>,
- virtualization@lists.linux-foundation.org,
- Thierry Reding <thierry.reding@gmail.com>,
- Yongqin Liu <yongqin.liu@linaro.org>,
- Mario Limonciello <mario.limonciello@amd.com>, Fei Yang <fei.yang@intel.com>,
- =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
- Juha-Pekka Heikkila <juhapekka.heikkila@gmail.com>,
- Chunyan Zhang <zhang.lyra@gmail.com>, David Francis <David.Francis@amd.com>,
- Vinod Govindapillai <vinod.govindapillai@intel.com>,
- Aaron Liu <aaron.liu@amd.com>, Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Vinod Polimera <quic_vpolimer@quicinc.com>, linux-rockchip@lists.infradead.org,
- Fangzhi Zuo <jerry.zuo@amd.com>, Aurabindo Pillai <aurabindo.pillai@amd.com>,
- VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
- Ben Skeggs <bskeggs@redhat.com>,
- =?UTF-8?Q?Jouni_H=c3=b6gander?= <jouni.hogander@intel.com>,
- Jessica Zhang <quic_jesszhan@quicinc.com>,
- Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
- linux-arm-msm@vger.kernel.org, Animesh Manna <animesh.manna@intel.com>,
- Nicolas Ferre <nicolas.ferre@microchip.com>,
- Maxime Ripard <mripard@kernel.org>,
- Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>,
- Tian Tao <tiantao6@hisilicon.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- linux-amlogic@lists.infradead.org, Evan Quan <evan.quan@amd.com>,
- Michal Simek <michal.simek@amd.com>, linux-arm-kernel@lists.infradead.org,
- Sean Paul <sean@poorly.run>, Neil Armstrong <neil.armstrong@linaro.org>,
- Kai Vehmanen <kai.vehmanen@linux.intel.com>,
- Boris Brezillon <bbrezillon@kernel.org>, Shawn Guo <shawnguo@kernel.org>,
- Qingqing Zhuo <qingqing.zhuo@amd.com>, Sandy Huang <hjc@rock-chips.com>,
- Swati Sharma <swati2.sharma@intel.com>, linux-renesas-soc@vger.kernel.org,
- Kyungmin Park <kyungmin.park@samsung.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Kevin Hilman <khilman@baylibre.com>, Hawking Zhang <Hawking.Zhang@amd.com>,
- Haneen Mohammed <hamohammed.sa@gmail.com>,
- Paul Cercueil <paul@crapouillou.net>,
- Anusha Srivatsa <anusha.srivatsa@intel.com>, Dan Carpenter <error27@gmail.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- linux-hyperv@vger.kernel.org, Stefan Agner <stefan@agner.ch>,
- Melissa Wen <melissa.srw@gmail.com>,
- =?UTF-8?Q?Ma=c3=adra_Canal?= <mairacanal@riseup.net>,
- Luca Coelho <luciano.coelho@intel.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Andrzej Hajda <andrzej.hajda@intel.com>, Likun Gao <Likun.Gao@amd.com>,
- "Jiri Slaby \(SUSE\)" <jirislaby@kernel.org>, Emma Anholt <emma@anholt.net>,
- Alain Volmat <alain.volmat@foss.st.com>, Chen-Yu Tsai <wens@csie.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Deepak Rawat <drawat.floss@gmail.com>,
- Xinwei Kong <kong.kongxinwei@hisilicon.com>, Joel Stanley <joel@jms.id.au>,
- Orson Zhai <orsonzhai@gmail.com>, Ankit Nautiyal <ankit.k.nautiyal@intel.com>,
- Harry Wentland <harry.wentland@amd.com>, Chia-I Wu <olvaffe@gmail.com>,
- Alan Liu <haoping.liu@amd.com>, Philip Yang <Philip.Yang@amd.com>,
- intel-gfx@lists.freedesktop.org, Alison Wang <alison.wang@nxp.com>,
- Wolfram Sang <wsa+renesas@sang-engineering.com>,
- Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Gustavo Sousa <gustavo.sousa@intel.com>,
- Baolin Wang <baolin.wang@linux.alibaba.com>,
- Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>,
- Daniel Vetter <daniel@ffwll.ch>, Mikko Perttunen <mperttunen@nvidia.com>,
- Yifan Zhang <yifan1.zhang@amd.com>,
- Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
- Tomi Valkeinen <tomba@kernel.org>, Deepak R Varma <drv@mailo.com>, "Pan,
- Xinhui" <Xinhui.Pan@amd.com>, Konrad Dybcio <konrad.dybcio@linaro.org>,
- Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
- John Stultz <jstultz@google.com>, Roman Li <roman.li@amd.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Khaled Almahallawy <khaled.almahallawy@intel.com>,
- linux-stm32@st-md-mailman.stormreply.com, Sam Ravnborg <sam@ravnborg.org>,
- Chun-Kuang Hu <chunkuang.hu@kernel.org>, Imre Deak <imre.deak@intel.com>,
- Liviu Dudau <liviu.dudau@arm.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>,
- Liu Shixin <liushixin2@huawei.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
- Hamza Mahfooz <hamza.mahfooz@amd.com>, Marek Vasut <marex@denx.de>,
- Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
- xen-devel@lists.xenproject.org, Guchun Chen <guchun.chen@amd.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
- Russell King <linux@armlinux.org.uk>, Jani Nikula <jani.nikula@intel.com>,
- Uma Shankar <uma.shankar@intel.com>, Andi Shyti <andi.shyti@linux.intel.com>,
- Jiasheng Jiang <jiasheng@iscas.ac.cn>,
- Srinivasan Shanmugam <srinivasan.shanmugam@amd.com>,
- David Lechner <david@lechnology.com>,
- Jiapeng Chong <jiapeng.chong@linux.alibaba.com>,
- =?UTF-8?B?TWFyZWsgT2zFocOhaw==?= <marek.olsak@amd.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- =?UTF-8?Q?Joaqu=c3=adn_Ignacio_Aramend=c3=ada?= <samsagax@gmail.com>,
- Melissa Wen <mwen@igalia.com>, Hans de Goede <hdegoede@redhat.com>,
- linux-mediatek@lists.infradead.org, Fabio Estevam <festevam@gmail.com>,
- Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>, linux-tegra@vger.kernel.org,
- David Tadokoro <davidbtadokoro@usp.br>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- amd-gfx@lists.freedesktop.org, Lang Yu <Lang.Yu@amd.com>,
- Yannick Fertre <yannick.fertre@foss.st.com>, linux-mips@vger.kernel.org,
- Rob Clark <robdclark@gmail.com>, Philippe Cornu <philippe.cornu@foss.st.com>,
- Philipp Zabel <p.zabel@pengutronix.de>, Wayne Lin <Wayne.Lin@amd.com>,
- Drew Davenport <ddavenport@chromium.org>, Nirmoy Das <nirmoy.das@intel.com>,
- Jyri Sarha <jyri.sarha@iki.fi>, Lucas Stach <l.stach@pengutronix.de>
+Cc: matthew.brost@intel.com, willy@infradead.org, daniel@ffwll.ch,
+ dri-devel@lists.freedesktop.org, corbet@lwn.net, nouveau@lists.freedesktop.org,
+ ogabbay@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ mripard@kernel.org, alexdeucher@gmail.com, boris.brezillon@collabora.com,
+ bskeggs@redhat.com, Liam.Howlett@oracle.com, Dave Airlie <airlied@redhat.com>,
+ bagasdotme@gmail.com, christian.koenig@amd.com, jason@jlekstrand.net,
+ donald.robson@imgtec.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------jeLFGePkiFpCJh0eHqRS7GTg
-Content-Type: multipart/mixed; boundary="------------NtcVQEWFF5WDzksvmBN1dmoE";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Sean Paul <seanpaul@chromium.org>,
- =?UTF-8?Q?Uwe_Kleine-K=c3=b6nig?= <u.kleine-koenig@pengutronix.de>
-Cc: Jani Nikula <jani.nikula@intel.com>, =?UTF-8?Q?Heiko_St=c3=bcbner?=
- <heiko@sntech.de>, Geert Uytterhoeven <geert+renesas@glider.be>,
- Xinliang Liu <xinliang.liu@linaro.org>,
- Linus Walleij <linus.walleij@linaro.org>,
- Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>,
- Alexey Kodanev <aleksei.kodanev@bell-sw.com>,
- dri-devel@lists.freedesktop.org,
- Vandita Kulkarni <vandita.kulkarni@intel.com>,
- Alim Akhtar <alim.akhtar@samsung.com>,
- Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Jonathan Hunter <jonathanh@nvidia.com>,
- Arun R Murthy <arun.r.murthy@intel.com>, Jerome Brunet
- <jbrunet@baylibre.com>, Liu Shixin <liushixin2@huawei.com>,
- linux-samsung-soc@vger.kernel.org, Samuel Holland <samuel@sholland.org>,
- Matt Roper <matthew.d.roper@intel.com>, Wenjing Liu <wenjing.liu@amd.com>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Stanislav Lisovskiy <stanislav.lisovskiy@intel.com>,
- Danilo Krummrich <dakr@redhat.com>, NXP Linux Team <linux-imx@nxp.com>,
- spice-devel@lists.freedesktop.org,
- Niranjana Vishwanathapura <niranjana.vishwanathapura@intel.com>,
- linux-sunxi@lists.linux.dev, Stylon Wang <stylon.wang@amd.com>,
- Tim Huang <Tim.Huang@amd.com>, Suraj Kandpal <suraj.kandpal@intel.com>,
- =?UTF-8?Q?Andr=c3=a9_Almeida?= <andrealmeid@igalia.com>,
- Andi Shyti <andi.shyti@linux.intel.com>, Yifan Zhang <yifan1.zhang@amd.com>,
- Leo Li <sunpeng.li@amd.com>, Sascha Hauer <s.hauer@pengutronix.de>,
- Lucas De Marchi <lucas.demarchi@intel.com>, Inki Dae <inki.dae@samsung.com>,
- Hersen Wu <hersenxs.wu@amd.com>, Jessica Zhang <quic_jesszhan@quicinc.com>,
- Kamlesh Gurudasani <kamlesh.gurudasani@gmail.com>,
- Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
- =?UTF-8?Q?=c5=81ukasz_Bartosik?= <lb@semihalf.com>,
- Radhakrishna Sripada <radhakrishna.sripada@intel.com>,
- Andrew Jeffery <andrew@aj.id.au>, Seung-Woo Kim <sw0312.kim@samsung.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>, kernel@pengutronix.de,
- Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org,
- Claudiu Beznea <claudiu.beznea@microchip.com>, Zack Rusin
- <zackr@vmware.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>,
- linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
- Mitul Golani <mitulkumar.ajitkumar.golani@intel.com>,
- =?UTF-8?Q?Jos=c3=a9_Roberto_de_Souza?= <jose.souza@intel.com>,
- virtualization@lists.linux-foundation.org,
- Thierry Reding <thierry.reding@gmail.com>,
- Yongqin Liu <yongqin.liu@linaro.org>,
- Mario Limonciello <mario.limonciello@amd.com>, Fei Yang
- <fei.yang@intel.com>, =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?=
- <ville.syrjala@linux.intel.com>, David Lechner <david@lechnology.com>,
- Juha-Pekka Heikkila <juhapekka.heikkila@gmail.com>,
- "Jiri Slaby (SUSE)" <jirislaby@kernel.org>,
- David Francis <David.Francis@amd.com>, Aaron Liu <aaron.liu@amd.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Vinod Polimera <quic_vpolimer@quicinc.com>,
- linux-rockchip@lists.infradead.org, Fangzhi Zuo <jerry.zuo@amd.com>,
- Aurabindo Pillai <aurabindo.pillai@amd.com>,
- VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
- Ben Skeggs <bskeggs@redhat.com>, =?UTF-8?Q?Jouni_H=c3=b6gander?=
- <jouni.hogander@intel.com>, Dave Airlie <airlied@redhat.com>,
- linux-mips@vger.kernel.org, Gurchetan Singh <gurchetansingh@chromium.org>,
- Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
- linux-arm-msm@vger.kernel.org, Animesh Manna <animesh.manna@intel.com>,
- linux-renesas-soc@vger.kernel.org, Maxime Ripard <mripard@kernel.org>,
- Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>,
- Philipp Zabel <p.zabel@pengutronix.de>, linux-amlogic@lists.infradead.org,
- Evan Quan <evan.quan@amd.com>, Michal Simek <michal.simek@amd.com>,
- linux-arm-kernel@lists.infradead.org, Sean Paul <sean@poorly.run>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Kai Vehmanen <kai.vehmanen@linux.intel.com>,
- Boris Brezillon <bbrezillon@kernel.org>, Chunyan Zhang
- <zhang.lyra@gmail.com>, Qingqing Zhuo <qingqing.zhuo@amd.com>,
- Sandy Huang <hjc@rock-chips.com>, Swati Sharma <swati2.sharma@intel.com>,
- John Stultz <jstultz@google.com>,
- Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
- Kyungmin Park <kyungmin.park@samsung.com>,
- Drew Davenport <ddavenport@chromium.org>, Kevin Hilman
- <khilman@baylibre.com>, Hawking Zhang <Hawking.Zhang@amd.com>,
- Haneen Mohammed <hamohammed.sa@gmail.com>,
- Anusha Srivatsa <anusha.srivatsa@intel.com>,
- Dan Carpenter <error27@gmail.com>, Karol Herbst <kherbst@redhat.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- linux-hyperv@vger.kernel.org, Stefan Agner <stefan@agner.ch>,
- Melissa Wen <melissa.srw@gmail.com>, =?UTF-8?Q?Ma=c3=adra_Canal?=
- <mairacanal@riseup.net>, Luca Coelho <luciano.coelho@intel.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Andrzej Hajda <andrzej.hajda@intel.com>, Likun Gao <Likun.Gao@amd.com>,
- Sam Ravnborg <sam@ravnborg.org>, Alain Volmat <alain.volmat@foss.st.com>,
- Xinwei Kong <kong.kongxinwei@hisilicon.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Deepak Rawat <drawat.floss@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Joel Stanley <joel@jms.id.au>, Ankit Nautiyal <ankit.k.nautiyal@intel.com>,
- Harry Wentland <harry.wentland@amd.com>,
- Sumit Semwal <sumit.semwal@linaro.org>, Alan Liu <haoping.liu@amd.com>,
- Philip Yang <Philip.Yang@amd.com>, Lyude Paul <lyude@redhat.com>,
- intel-gfx@lists.freedesktop.org, Alison Wang <alison.wang@nxp.com>,
- Wolfram Sang <wsa+renesas@sang-engineering.com>,
- Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Gustavo Sousa <gustavo.sousa@intel.com>,
- Baolin Wang <baolin.wang@linux.alibaba.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Mikko Perttunen <mperttunen@nvidia.com>,
- Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
- Tomi Valkeinen <tomba@kernel.org>, Deepak R Varma <drv@mailo.com>,
- "Pan, Xinhui" <Xinhui.Pan@amd.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Chia-I Wu <olvaffe@gmail.com>, Konrad Dybcio <konrad.dybcio@linaro.org>,
- Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
- Tian Tao <tiantao6@hisilicon.com>, Shawn Guo <shawnguo@kernel.org>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Khaled Almahallawy <khaled.almahallawy@intel.com>,
- linux-stm32@st-md-mailman.stormreply.com, Emma Anholt <emma@anholt.net>,
- Chun-Kuang Hu <chunkuang.hu@kernel.org>, Imre Deak <imre.deak@intel.com>,
- Liviu Dudau <liviu.dudau@arm.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>, Roman Li
- <roman.li@amd.com>, Paul Cercueil <paul@crapouillou.net>,
- Rob Clark <robdclark@gmail.com>, Hamza Mahfooz <hamza.mahfooz@amd.com>,
- David Airlie <airlied@gmail.com>, Marek Vasut <marex@denx.de>,
- Jiapeng Chong <jiapeng.chong@linux.alibaba.com>,
- xen-devel@lists.xenproject.org, Guchun Chen <guchun.chen@amd.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
- Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
- Russell King <linux@armlinux.org.uk>, Uma Shankar <uma.shankar@intel.com>,
- Mika Kahola <mika.kahola@intel.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Jiasheng Jiang <jiasheng@iscas.ac.cn>,
- Srinivasan Shanmugam <srinivasan.shanmugam@amd.com>,
- Vinod Govindapillai <vinod.govindapillai@intel.com>,
- linux-tegra@vger.kernel.org, =?UTF-8?B?TWFyZWsgT2zFocOhaw==?=
- <marek.olsak@amd.com>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>,
- =?UTF-8?Q?Joaqu=c3=adn_Ignacio_Aramend=c3=ada?= <samsagax@gmail.com>,
- Melissa Wen <mwen@igalia.com>, Hans de Goede <hdegoede@redhat.com>,
- linux-mediatek@lists.infradead.org, Fabio Estevam <festevam@gmail.com>,
- Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- David Tadokoro <davidbtadokoro@usp.br>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Orson Zhai <orsonzhai@gmail.com>, amd-gfx@lists.freedesktop.org,
- Jyri Sarha <jyri.sarha@iki.fi>, Yannick Fertre <yannick.fertre@foss.st.com>,
- Nicolas Ferre <nicolas.ferre@microchip.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
- Philippe Cornu <philippe.cornu@foss.st.com>, Daniel Vetter
- <daniel@ffwll.ch>, Wayne Lin <Wayne.Lin@amd.com>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Nirmoy Das <nirmoy.das@intel.com>, Lang Yu <Lang.Yu@amd.com>,
- Lucas Stach <l.stach@pengutronix.de>
-Message-ID: <ebc6167a-0696-11d2-cb20-bcc7d23427aa@suse.de>
-Subject: Re: [Freedreno] [PATCH RFC v1 00/52] drm/crtc: Rename struct
- drm_crtc::dev to drm_dev
-References: <20230712094702.1770121-1-u.kleine-koenig@pengutronix.de>
- <87fs5tgpvv.fsf@intel.com>
- <CAOw6vbLO_UaXDbTCtAQJgthXOUMPqEV+c2MQhP-1DuK44OhGxw@mail.gmail.com>
- <20230713130337.fd2l67r23g2irifx@pengutronix.de>
- <CAOw6vbKtjyUm+OqO7LSV1hDOMQATwkEWP4GzBbbXib0i5EviUQ@mail.gmail.com>
- <78be52b8-5ffb-601a-84b2-ead2894973a6@suse.de>
- <d6160aeb-6344-b272-775a-cb665dca46ac@linux.intel.com>
-In-Reply-To: <d6160aeb-6344-b272-775a-cb665dca46ac@linux.intel.com>
+--0000000000001c0ff60601073543
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
---------------NtcVQEWFF5WDzksvmBN1dmoE
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+On Wed, Jul 19, 2023 at 7:15=E2=80=AFPM Danilo Krummrich <dakr@redhat.com> =
+wrote:
 
-SGkNCg0KQW0gMTMuMDcuMjMgdW0gMTc6MTQgc2NocmllYiBUdnJ0a28gVXJzdWxpbjoNCj4g
-DQo+IE9uIDEzLzA3LzIwMjMgMTY6MDksIFRob21hcyBaaW1tZXJtYW5uIHdyb3RlOg0KPj4g
-SGkNCj4+DQo+PiBBbSAxMy4wNy4yMyB1bSAxNjo0MSBzY2hyaWViIFNlYW4gUGF1bDoNCj4+
-PiBPbiBUaHUsIEp1bCAxMywgMjAyMyBhdCA5OjA04oCvQU0gVXdlIEtsZWluZS1Lw7ZuaWcN
-Cj4+PiA8dS5rbGVpbmUta29lbmlnQHBlbmd1dHJvbml4LmRlPiB3cm90ZToNCj4+Pj4NCj4+
-Pj4gaGVsbG8gU2VhbiwNCj4+Pj4NCj4+Pj4gT24gV2VkLCBKdWwgMTIsIDIwMjMgYXQgMDI6
-MzE6MDJQTSAtMDQwMCwgU2VhbiBQYXVsIHdyb3RlOg0KPj4+Pj4gSSdkIHJlYWxseSBwcmVm
-ZXIgdGhpcyBwYXRjaCAoc2VyaWVzIG9yIHNpbmdsZSkgaXMgbm90IGFjY2VwdGVkLiBUaGlz
-DQo+Pj4+PiB3aWxsIGNhdXNlIHByb2JsZW1zIGZvciBldmVyeW9uZSBjaGVycnktcGlja2lu
-ZyBwYXRjaGVzIHRvIGENCj4+Pj4+IGRvd25zdHJlYW0ga2VybmVsIChMVFMgb3IgZGlzdHJv
-IHRyZWUpLiBJIHVzdWFsbHkgd291bGRuJ3QgZXhwZWN0DQo+Pj4+PiBzeW1wYXRoeSBoZXJl
-LCBidXQgdGhlIHF1ZXN0aW9uYWJsZSBiZW5lZml0IGRvZXMgbm90IG91dHdlaWdoIHRoZSBj
-b3N0DQo+Pj4+PiBJTVtiaWFzZWRdTy4NCj4+Pj4NCj4+Pj4gSSBhZ3JlZSB0aGF0IGZvciBi
-YWNrcG9ydHMgdGhpcyBpc24ndCBzbyBuaWNlLiBIb3dldmVyIHdpdGggdGhlIHNwbGl0DQo+
-Pj4+IGFwcHJvYWNoICh0aGF0IHdhcyBhcmd1bWVudGVkIGFnYWluc3QgaGVyZSkgaXQncyBu
-b3Qgc29vIGJhZC4gUGF0Y2ggIzENCj4+Pj4gKGFuZCBzaW1pbGFyIGNoYW5nZXMgZm9yIHRo
-ZSBvdGhlciBhZmZlY3RlZCBzdHJ1Y3R1cmVzKSBjb3VsZCBiZQ0KPj4+PiB0cml2aWFsbHkg
-YmFja3BvcnRlZCBhbmQgd2l0aCB0aGF0IGl0IGRvZXNuJ3QgbWF0dGVyIGlmIHlvdSB3cml0
-ZSANCj4+Pj4gZGV2IG9yDQo+Pj4+IGRybSAob3Igd2hhdGV2ZXIgbmFtZSBpcyBjaG9zZW4g
-aW4gdGhlIGVuZCk7IGJvdGggd29yayBpbiB0aGUgc2FtZSB3YXkuDQo+Pj4NCj4+PiBQYXRj
-aCAjMSBhdm9pZHMgdGhlIG5lZWQgdG8gYmFja3BvcnQgdGhlIGVudGlyZSBzZXQsIGhvd2V2
-ZXIgZXZlcnkNCj4+PiBjaGFuZ2Ugb2NjdXJpbmcgYWZ0ZXIgdGhlIHJlbmFtZSBwYXRjaGVz
-IHdpbGwgY2F1c2UgY29uZmxpY3RzIG9uDQo+Pj4gZnV0dXJlIGNoZXJyeS1waWNrcy4gRG93
-bnN0cmVhbSBrZXJuZWxzIHdpbGwgaGF2ZSB0byBiYWNrcG9ydCB0aGUNCj4+PiB3aG9sZSBz
-ZXQuIEJhY2twb3J0aW5nIHRoZSBlbnRpcmUgc2V0IHdpbGwgY3JlYXRlIGFuIGVwb2NoIGlu
-DQo+Pj4gZG93bnN0cmVhbSBrZXJuZWxzIHdoZXJlIGNoZXJyeS1waWNraW5nIHBhdGNoZXMg
-cHJlY2VkaW5nIHRoaXMgc2V0DQo+Pj4gd2lsbCBuZWVkIHRvIHVuZGVyZ28gY29uZmxpY3Qg
-cmVzb2x1dGlvbiBhcyB3ZWxsLiBBcyBtZW50aW9uZWQgaW4gbXkNCj4+PiBwcmV2aW91cyBl
-bWFpbCwgSSBkb24ndCBleHBlY3Qgc3ltcGF0aHkgaGVyZSwgaXQncyBwYXJ0IG9mIG1haW50
-YWluaW5nDQo+Pj4gYSBkb3duc3RyZWFtIGtlcm5lbCwgYnV0IHRoZXJlIGlzIGEgcmVhbCBj
-b3N0IHRvIGtlcm5lbCBjb25zdW1lcnMuDQo+Pj4NCj4+Pj4NCj4+Pj4gQnV0IGV2ZW4gd2l0
-aCB0aGUgb25lLXBhdGNoLXBlci1yZW5hbWUgYXBwcm9hY2ggSSdkIGNvbnNpZGVyIHRoZQ0K
-Pj4+PiByZW5hbWluZyBhIG5ldCB3aW4sIGJlY2F1c2UgZWFzZSBvZiB1bmRlcnN0YW5kaW5n
-IGNvZGUgaGFzIGEgYmlnIHZhbHVlLg0KPj4+PiBJdCdzIHZhbHVlIGlzIG5vdCBzbyBlYXN5
-IG1lYXN1cmFibGUgYXMgImNvbmZsaWN0cyB3aGVuIGJhY2twb3J0aW5nIiwNCj4+Pj4gYnV0
-IGl0IGFsc28gbWF0dGVycyBpbiBzYXkgdHdvIHllYXJzIGZyb20gbm93LCB3aGlsZSBiYWNr
-cG9ydGluZw0KPj4+PiBzaG91bGRuJ3QgYmUgYW4gaXNzdWUgdGhlbiBhbnkgbW9yZS4NCj4+
-Pg0KPj4+IFlvdSd2ZSByaWdodGx5IGlkZW50aWZpZWQgdGhlIGNvbmplY3R1cmUgaW4geW91
-ciBzdGF0ZW1lbnQuIEkndmUgYmVlbg0KPj4+IG9uIGJvdGggc2lkZXMgb2YgdGhlIGFyZ3Vt
-ZW50LCBoYXZpbmcgd3JpdHRlbi9tYWludGFpbmVkIGRybSBjb2RlDQo+Pj4gdXBzdHJlYW0g
-YW5kIGNoZXJyeS1waWNrZWQgY2hhbmdlcyB0byBhIGRvd25zdHJlYW0ga2VybmVsLiBQZXJo
-YXBzDQo+Pj4gaXQncyBiZWNhdXNlIGRybSdzIGRlZmluaXRpb24gb2YgZGV2IGlzIGluZ3Jh
-aW5lZCBpbiBteSBtdXNjbGUgbWVtb3J5LA0KPj4+IG9yIG1heWJlIGl0J3MgYmVjYXVzZSBJ
-IGRvbid0IGRvIGEgbG90IG9mIHVwc3RyZWFtIGRldmVsb3BtZW50IHRoZXNlDQo+Pj4gZGF5
-cywgYnV0IEkganVzdCBoYXZlIGEgaGFyZCB0aW1lIHNlZWluZyB0aGUgYmVuZWZpdCBoZXJl
-Lg0KPj4NCj4+IEkgY2FuIG9ubHkgc2Vjb25kIHdoYXQgU2VhbiB3cml0ZXMuIEkndmUgZG9u
-ZSBxdWl0ZSBhIGJpdCBvZiANCj4+IGJhY2twb3J0aW5nIG9mIERSTSBjb2RlLiBJdCdzIGhh
-cmQgYWxyZWFkeS4gQW5kIHRoaXMga2luZCBvZiBjaGFuZ2UgaXMgDQo+PiBnb2luZyB0byB0
-byBhZmZlY3QgYWxtb3N0IGV2ZXJ5IGJhY2twb3J0ZWQgRFJNIHBhdGNoIGluIHRoZSBjb21p
-bmcgDQo+PiB5ZWFycy4gTm90IGp1c3QgZm9yIGRpc3RyaWJ1dGlvbiBrZXJuZWxzLCBidXQg
-YWxzbyBmb3IgdXBzdHJlYW0ncyANCj4+IHN0YWJsZSBzZXJpZXMuIEl0J3MgcmVhbGx5IG9u
-bHkgcG9zc2libGUgdG8gZG8gdGhpcyBjaGFuZ2Ugb3ZlciBtYW55IA0KPj4gcmVsZWFzZXMg
-d2hpbGUga2VlcGluZyBjb21wYXRpYmxlIHdpdGggdGhlIG9sZCBuYW1lLiBTbyB0aGUgbW9y
-ZSBJIA0KPj4gdGhpbmsgYWJvdXQgaXQsIHRoZSBsZXNzIEkgbGlrZSB0aGlzIGNoYW5nZS4N
-Cj4gDQo+IEkndmUgZG9uZSBteSBzaGFyZSBvZiBiYWNrcG9ydGluZywgYW5kIHN0aWxsIGFt
-IGRvaW5nIGl0LCBzbyBJIGNhbiBzYXkgSSANCj4gZGlzbGlrZSBpdCBhcyBtdWNoIGFzIGFu
-eW9uZSwgaG93ZXZlci4uIElzIHRoaXMgYW4gYXJndW1lbnQgd2hpY2ggdGhlIA0KPiBrZXJu
-ZWwgYXMgYSB3aWRlciBlbnRpdHkgdHlwaWNhbGx5IGFjY2VwdHM/IElmIG5vdCBjb3VsZCBp
-dCBiZSBhIA0KPiBzbGlwcGVyeSBzbG9wZSB0byBzdGFydCBhIHByZWNlZGVudD8NCg0KSU1I
-TyB1cHN0cmVhbSBwYXRjaGVzIHNob3VsZCBvbmx5IGJlIGp1ZGdlZCBieSB0aGVpciBlZmZl
-Y3Qgb24gdGhlIA0KdXBzdHJlYW0uIEJhY2twb3J0aW5nLCBBUEkgc3RhYmlsaXR5LCBvdXQt
-b2YtdHJlZSBkcml2ZXJzLCBldGMgc2hvdWxkIA0Kbm90IGJlIGEgY29uY2Vybi4gSSB0aGlu
-ayB0aGF0IHdlICh0aGUgRFJNIGRldnMpIGFyZSBtb3N0bHkgbGl2aW5nIHVwIHRvIA0KdGhh
-dCBpZGVhbC4gT1RPSCBpZiBhIGNoYW5nZSBoYXMgYmVlbiBhY2NlcHRlZCwgaXQncyBmYWly
-IHRvIGFzayBob3cgdG8gDQptYWtlIGl0IGluIHRoZSBsZWFzdCBpbnRydXNpdmUgd2F5Lg0K
-DQpCdXQgd2l0aCB0aGlzIGNoYW5nZSwgaXQgZG9lc24ndCBhZGQgdXAgZm9yIG1lLiBUaGUg
-YmVuZWZpdCB0byBMaW51eCBpcyANCnJhdGhlciBjb3NtZXRpYy4gQW5kIHRoZSBwb3NzaWJs
-ZSBkb3duc2lkZXMgYXJlIHNpZ25pZmljYW50IGV2ZW4gaWYgd2UgDQppZ25vcmUgZG93bnN0
-cmVhbSBkaXN0cmlidXRpb24ga2VybmVscy4gTWVyZ2luZyBiZXR3ZWVuIERSTSB0cmVlcyB3
-aWxsIA0KYmUgYWZmZWN0ZWQsIGJhY2twb3J0aW5nIGludG8gc3RhYmxlIGtlcm5lbHMgYXMg
-d2VsbCwgdGhlIHJlbmFtZSB3aWxsIA0KbWVzcyB1cCBnaXQgYmxhbWUgd2l0aCByZW5hbWUg
-Y29tbWl0cy4NCg0KQmVzdCByZWdhcmRzDQpUaG9tYXMNCg0KPiANCj4gSXQgaXMgYSBob25l
-c3QgcXVlc3Rpb24gLSBJIGFtIG5vdCBmYW1pbGlhciBpZiB0aGVyZSB3ZXJlIG9yIHdlcmUg
-bm90IA0KPiBhbnkgc2ltaWxhciBkaXNjdXNzaW9ucyBpbiB0aGUgcGFzdC4NCj4gDQo+IE15
-IGd1dCBmZWVsaW5nIGlzIHRoYXQgKmlmKiB0aGVyZSBpcyBhIGNvbnNlbnN1cyB0aGF0IHNv
-bWV0aGluZyANCj4gX2ltcHJvdmVzXyB0aGUgY29kZSBiYXNlIHNpZ25pZmljYW50bHksIGJh
-Y2twb3J0aW5nIHBhaW5zIHNob3VsZCANCj4gcHJvYmFibHkgbm90IGJlIHdlaWdodGVkIHZl
-cnkgaGVhdmlseSBhcyBhIGNvbnRyYSBhcmd1bWVudC4NCj4gDQo+IFJlZ2FyZHMsDQo+IA0K
-PiBUdnJ0a28NCg0KLS0gDQpUaG9tYXMgWmltbWVybWFubg0KR3JhcGhpY3MgRHJpdmVyIERl
-dmVsb3Blcg0KU1VTRSBTb2Z0d2FyZSBTb2x1dGlvbnMgR2VybWFueSBHbWJIDQpGcmFua2Vu
-c3RyYXNzZSAxNDYsIDkwNDYxIE51ZXJuYmVyZywgR2VybWFueQ0KR0Y6IEl2byBUb3Rldiwg
-QW5kcmV3IE15ZXJzLCBBbmRyZXcgTWNEb25hbGQsIEJvdWRpZW4gTW9lcm1hbg0KSFJCIDM2
-ODA5IChBRyBOdWVybmJlcmcpDQo=
+> This commit provides the interfaces for the new UAPI motivated by the
+> Vulkan API. It allows user mode drivers (UMDs) to:
+>
+> 1) Initialize a GPU virtual address (VA) space via the new
+>    DRM_IOCTL_NOUVEAU_VM_INIT ioctl. UMDs can provide a kernel reserved
+>    VA area.
+>
+> 2) Bind and unbind GPU VA space mappings via the new
+>    DRM_IOCTL_NOUVEAU_VM_BIND ioctl.
+>
+> 3) Execute push buffers with the new DRM_IOCTL_NOUVEAU_EXEC ioctl.
+>
+> Both, DRM_IOCTL_NOUVEAU_VM_BIND and DRM_IOCTL_NOUVEAU_EXEC support
+> asynchronous processing with DRM syncobjs as synchronization mechanism.
+>
+> The default DRM_IOCTL_NOUVEAU_VM_BIND is synchronous processing,
+> DRM_IOCTL_NOUVEAU_EXEC supports asynchronous processing only.
+>
+> Co-authored-by: Dave Airlie <airlied@redhat.com>
+> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+> ---
+>  Documentation/gpu/driver-uapi.rst |   8 ++
+>  include/uapi/drm/nouveau_drm.h    | 209 ++++++++++++++++++++++++++++++
+>  2 files changed, 217 insertions(+)
+>
+> diff --git a/Documentation/gpu/driver-uapi.rst
+> b/Documentation/gpu/driver-uapi.rst
+> index 4411e6919a3d..9c7ca6e33a68 100644
+> --- a/Documentation/gpu/driver-uapi.rst
+> +++ b/Documentation/gpu/driver-uapi.rst
+> @@ -6,3 +6,11 @@ drm/i915 uAPI
+>  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>
+>  .. kernel-doc:: include/uapi/drm/i915_drm.h
+> +
+> +drm/nouveau uAPI
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +VM_BIND / EXEC uAPI
+> +-------------------
+> +
+> +.. kernel-doc:: include/uapi/drm/nouveau_drm.h
+> diff --git a/include/uapi/drm/nouveau_drm.h
+> b/include/uapi/drm/nouveau_drm.h
+> index 853a327433d3..4d3a70529637 100644
+> --- a/include/uapi/drm/nouveau_drm.h
+> +++ b/include/uapi/drm/nouveau_drm.h
+> @@ -126,6 +126,209 @@ struct drm_nouveau_gem_cpu_fini {
+>         __u32 handle;
+>  };
+>
+> +/**
+> + * struct drm_nouveau_sync - sync object
+> + *
+> + * This structure serves as synchronization mechanism for (potentially)
+> + * asynchronous operations such as EXEC or VM_BIND.
+> + */
+> +struct drm_nouveau_sync {
+> +       /**
+> +        * @flags: the flags for a sync object
+> +        *
+> +        * The first 8 bits are used to determine the type of the sync
+> object.
+> +        */
+> +       __u32 flags;
+> +#define DRM_NOUVEAU_SYNC_SYNCOBJ 0x0
+> +#define DRM_NOUVEAU_SYNC_TIMELINE_SYNCOBJ 0x1
+> +#define DRM_NOUVEAU_SYNC_TYPE_MASK 0xf
+> +       /**
+> +        * @handle: the handle of the sync object
+> +        */
+> +       __u32 handle;
+> +       /**
+> +        * @timeline_value:
+> +        *
+> +        * The timeline point of the sync object in case the syncobj is o=
+f
+> +        * type DRM_NOUVEAU_SYNC_TIMELINE_SYNCOBJ.
+> +        */
+> +       __u64 timeline_value;
+> +};
+> +
+> +/**
+> + * struct drm_nouveau_vm_init - GPU VA space init structure
+> + *
+> + * Used to initialize the GPU's VA space for a user client, telling the
+> kernel
+> + * which portion of the VA space is managed by the UMD and kernel
+> respectively.
+>
 
---------------NtcVQEWFF5WDzksvmBN1dmoE--
+I assume this has to be called quite early. Like maybe before any BOs or
+channels are created? In any case, it'd be nice to have that documented.
 
---------------jeLFGePkiFpCJh0eHqRS7GTg
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
 
------BEGIN PGP SIGNATURE-----
+> + */
+> +struct drm_nouveau_vm_init {
+> +       /**
+> +        * @unmanaged_addr: start address of the kernel managed VA space
+> region
+> +        */
+> +       __u64 unmanaged_addr;
+> +       /**
+> +        * @unmanaged_size: size of the kernel managed VA space region in
+> bytes
+> +        */
+> +       __u64 unmanaged_size;
+>
 
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmSw+5AFAwAAAAAACgkQlh/E3EQov+CJ
-FRAAs3UnPVAh602q8J7TFsiuYzv75xdkD8C1ihsIF3xnPxQT4AwrlZzGu4Uelh/Db1o8yFEitfnA
-Ghk92aBwnLnf5crMh+qux1g/HHhYMLAGvmiGbR8H1tIx7VO3n4E/gm8OMkVG7xQ0Tz4+Qs8oTiJK
-kFpsq/h6tqmJTjGbBnwTCMeHoYGFZM4h+KfSAYrMkT3lD/WSYbFmKrtSrmVcUbax/trVPRyEDyV1
-D5uAUaWHZYEIZMmHPD65yfbjmAKKvXkCFbaHS0dwfGfuNjTS/tVtoFSohLsKThhgn3lSHnPpzx3K
-4r83L4KZRQCDTM9vsTG2JYxJoq+Liw70fLe8gFXO6xD0Z8IWSTG+a8kgeKYtJ1kDtw9nfzZlUoZh
-zFxr2af/nGZRpLjA1enMf0GRisUvW3CtTmvdYQwBoEULHpAwUqGoDVAvz1lMUgew/Ezm65E/qO0X
-9mjGUHNEne4/DZ1y1cO68JQO+F3mgFTOM6nRrlboy+wGlyxLwthlMkSfsCwF3elI3/zC1NXqNfk+
-9qkQfSm4QsV+6amus2nwk3HuV1i4oRdy9YpQ+k2NvFAKjh6AS4JxTEBCtoZ4pq5Z4z92GrWpBS8P
-tVzDaIy4+/mZeIQbou1prQZzpZdPSVKLCpfys3YCEeT+G4s0WAXhsOpvkh/Qc3ob7418D7bqWFti
-6q8=
-=i/hH
------END PGP SIGNATURE-----
+Over-all, I think this is the right API. My only concern is with the word
+"unmanaged". None of the VA space is unmanaged. Some is userspace-managed
+and some is kernel-managed.  I guess "unmanaged" kinda makes sense because
+this is coming from userspace and it's saying which bits it manages and
+which bits it doesn't.  Still seems clunky to me.  Maybe kernel_managed?
+IDK, that feels weird too. Since we're already using UMD in this file, we
+could call it kmd_managed. IDK. =F0=9F=A4=B7=F0=9F=8F=BB=E2=80=8D=E2=99=80=
+=EF=B8=8F
 
---------------jeLFGePkiFpCJh0eHqRS7GTg--
+Yeah, I know this is a total bikeshed color thing and I'm not going to
+block anything based on it. =F0=9F=98=85 Just wanted to see if we can come =
+up with
+anything better.  It's documented and that's the important thing.
+
+
+> +};
+> +
+> +/**
+> + * struct drm_nouveau_vm_bind_op - VM_BIND operation
+> + *
+> + * This structure represents a single VM_BIND operation. UMDs should pas=
+s
+> + * an array of this structure via struct drm_nouveau_vm_bind's &op_ptr
+> field.
+> + */
+> +struct drm_nouveau_vm_bind_op {
+> +       /**
+> +        * @op: the operation type
+> +        */
+> +       __u32 op;
+> +/**
+> + * @DRM_NOUVEAU_VM_BIND_OP_MAP:
+> + *
+> + * Map a GEM object to the GPU's VA space. Optionally, the
+> + * &DRM_NOUVEAU_VM_BIND_SPARSE flag can be passed to instruct the kernel
+> to
+> + * create sparse mappings for the given range.
+> + */
+> +#define DRM_NOUVEAU_VM_BIND_OP_MAP 0x0
+> +/**
+> + * @DRM_NOUVEAU_VM_BIND_OP_UNMAP:
+> + *
+> + * Unmap an existing mapping in the GPU's VA space. If the region the
+> mapping
+> + * is located in is a sparse region, new sparse mappings are created
+> where the
+> + * unmapped (memory backed) mapping was mapped previously. To remove a
+> sparse
+> + * region the &DRM_NOUVEAU_VM_BIND_SPARSE must be set.
+> + */
+> +#define DRM_NOUVEAU_VM_BIND_OP_UNMAP 0x1
+> +       /**
+> +        * @flags: the flags for a &drm_nouveau_vm_bind_op
+> +        */
+> +       __u32 flags;
+> +/**
+> + * @DRM_NOUVEAU_VM_BIND_SPARSE:
+> + *
+> + * Indicates that an allocated VA space region should be sparse.
+> + */
+> +#define DRM_NOUVEAU_VM_BIND_SPARSE (1 << 8)
+> +       /**
+> +        * @handle: the handle of the DRM GEM object to map
+> +        */
+> +       __u32 handle;
+> +       /**
+> +        * @pad: 32 bit padding, should be 0
+> +        */
+> +       __u32 pad;
+> +       /**
+> +        * @addr:
+> +        *
+> +        * the address the VA space region or (memory backed) mapping
+> should be mapped to
+> +        */
+> +       __u64 addr;
+> +       /**
+> +        * @bo_offset: the offset within the BO backing the mapping
+> +        */
+> +       __u64 bo_offset;
+> +       /**
+> +        * @range: the size of the requested mapping in bytes
+> +        */
+> +       __u64 range;
+> +};
+> +
+> +/**
+> + * struct drm_nouveau_vm_bind - structure for DRM_IOCTL_NOUVEAU_VM_BIND
+> + */
+> +struct drm_nouveau_vm_bind {
+> +       /**
+> +        * @op_count: the number of &drm_nouveau_vm_bind_op
+> +        */
+> +       __u32 op_count;
+>
+
+I've chatted a bit with Dave on IRC about this but both VM_BIND and EXEC
+should support `op_count =3D=3D 0` and do exactly the same thing that they
+would do if there were real ops. In the case of vm_bind, that just means
+wait on the waits and then signal the signals. In particular, it should NOT
+just return success and do nothing. Dave has a patch for this for EXEC but
+IDK if VM_BIND needs any attention.  Of course, if it's not ASYNC, then
+quickly doing nothing after validating inputs is acceptable.
+
+
+> +       /**
+> +        * @flags: the flags for a &drm_nouveau_vm_bind ioctl
+> +        */
+> +       __u32 flags;
+> +/**
+> + * @DRM_NOUVEAU_VM_BIND_RUN_ASYNC:
+> + *
+> + * Indicates that the given VM_BIND operation should be executed
+> asynchronously
+> + * by the kernel.
+> + *
+> + * If this flag is not supplied the kernel executes the associated
+> operations
+> + * synchronously and doesn't accept any &drm_nouveau_sync objects.
+> + */
+> +#define DRM_NOUVEAU_VM_BIND_RUN_ASYNC 0x1
+> +       /**
+> +        * @wait_count: the number of wait &drm_nouveau_syncs
+> +        */
+> +       __u32 wait_count;
+> +       /**
+> +        * @sig_count: the number of &drm_nouveau_syncs to signal when
+> finished
+> +        */
+> +       __u32 sig_count;
+> +       /**
+> +        * @wait_ptr: pointer to &drm_nouveau_syncs to wait for
+> +        */
+> +       __u64 wait_ptr;
+> +       /**
+> +        * @sig_ptr: pointer to &drm_nouveau_syncs to signal when finishe=
+d
+> +        */
+> +       __u64 sig_ptr;
+> +       /**
+> +        * @op_ptr: pointer to the &drm_nouveau_vm_bind_ops to execute
+> +        */
+> +       __u64 op_ptr;
+> +};
+> +
+> +/**
+> + * struct drm_nouveau_exec_push - EXEC push operation
+> + *
+> + * This structure represents a single EXEC push operation. UMDs should
+> pass an
+> + * array of this structure via struct drm_nouveau_exec's &push_ptr field=
+.
+> + */
+> +struct drm_nouveau_exec_push {
+> +       /**
+> +        * @va: the virtual address of the push buffer mapping
+> +        */
+> +       __u64 va;
+> +       /**
+> +        * @va_len: the length of the push buffer mapping
+> +        */
+> +       __u64 va_len;
+> +};
+> +
+> +/**
+> + * struct drm_nouveau_exec - structure for DRM_IOCTL_NOUVEAU_EXEC
+> + */
+> +struct drm_nouveau_exec {
+> +       /**
+> +        * @channel: the channel to execute the push buffer in
+> +        */
+> +       __u32 channel;
+> +       /**
+> +        * @push_count: the number of &drm_nouveau_exec_push ops
+> +        */
+> +       __u32 push_count;
+>
+
+Same comment as above. We want `push_count =3D=3D 0` to behave the same as =
+any
+other EXEC just without anything new. In particular, it needs to wait on
+all the waits as well as the previous EXECs on that channel and then signal
+the sigs. I know Dave has a patch for this and it's working quite well in
+my testing.
+
+Other than that, everything looks good.  I'm still re-reading all the NVK
+patches but they've been working quite well in my testing this week apart
+from a perf issue I need to dig into. I'll give a real RB once we're sure
+we all agree on the semantics of _count.
+
+~Faith
+
+
+> +       /**
+> +        * @wait_count: the number of wait &drm_nouveau_syncs
+> +        */
+> +       __u32 wait_count;
+> +       /**
+> +        * @sig_count: the number of &drm_nouveau_syncs to signal when
+> finished
+> +        */
+> +       __u32 sig_count;
+> +       /**
+> +        * @wait_ptr: pointer to &drm_nouveau_syncs to wait for
+> +        */
+> +       __u64 wait_ptr;
+> +       /**
+> +        * @sig_ptr: pointer to &drm_nouveau_syncs to signal when finishe=
+d
+> +        */
+> +       __u64 sig_ptr;
+> +       /**
+> +        * @push_ptr: pointer to &drm_nouveau_exec_push ops
+> +        */
+> +       __u64 push_ptr;
+> +};
+> +
+>  #define DRM_NOUVEAU_GETPARAM           0x00 /* deprecated */
+>  #define DRM_NOUVEAU_SETPARAM           0x01 /* deprecated */
+>  #define DRM_NOUVEAU_CHANNEL_ALLOC      0x02 /* deprecated */
+> @@ -136,6 +339,9 @@ struct drm_nouveau_gem_cpu_fini {
+>  #define DRM_NOUVEAU_NVIF               0x07
+>  #define DRM_NOUVEAU_SVM_INIT           0x08
+>  #define DRM_NOUVEAU_SVM_BIND           0x09
+> +#define DRM_NOUVEAU_VM_INIT            0x10
+> +#define DRM_NOUVEAU_VM_BIND            0x11
+> +#define DRM_NOUVEAU_EXEC               0x12
+>  #define DRM_NOUVEAU_GEM_NEW            0x40
+>  #define DRM_NOUVEAU_GEM_PUSHBUF        0x41
+>  #define DRM_NOUVEAU_GEM_CPU_PREP       0x42
+> @@ -197,6 +403,9 @@ struct drm_nouveau_svm_bind {
+>  #define DRM_IOCTL_NOUVEAU_GEM_CPU_FINI       DRM_IOW (DRM_COMMAND_BASE +
+> DRM_NOUVEAU_GEM_CPU_FINI, struct drm_nouveau_gem_cpu_fini)
+>  #define DRM_IOCTL_NOUVEAU_GEM_INFO           DRM_IOWR(DRM_COMMAND_BASE +
+> DRM_NOUVEAU_GEM_INFO, struct drm_nouveau_gem_info)
+>
+> +#define DRM_IOCTL_NOUVEAU_VM_INIT            DRM_IOWR(DRM_COMMAND_BASE +
+> DRM_NOUVEAU_VM_INIT, struct drm_nouveau_vm_init)
+> +#define DRM_IOCTL_NOUVEAU_VM_BIND            DRM_IOWR(DRM_COMMAND_BASE +
+> DRM_NOUVEAU_VM_BIND, struct drm_nouveau_vm_bind)
+> +#define DRM_IOCTL_NOUVEAU_EXEC               DRM_IOWR(DRM_COMMAND_BASE +
+> DRM_NOUVEAU_EXEC, struct drm_nouveau_exec)
+>  #if defined(__cplusplus)
+>  }
+>  #endif
+> --
+> 2.41.0
+>
+>
+
+--0000000000001c0ff60601073543
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"g=
+mail_attr">On Wed, Jul 19, 2023 at 7:15=E2=80=AFPM Danilo Krummrich &lt;<a =
+href=3D"mailto:dakr@redhat.com">dakr@redhat.com</a>&gt; wrote:<br></div><bl=
+ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
+t:1px solid rgb(204,204,204);padding-left:1ex">This commit provides the int=
+erfaces for the new UAPI motivated by the<br>
+Vulkan API. It allows user mode drivers (UMDs) to:<br>
+<br>
+1) Initialize a GPU virtual address (VA) space via the new<br>
+=C2=A0 =C2=A0DRM_IOCTL_NOUVEAU_VM_INIT ioctl. UMDs can provide a kernel res=
+erved<br>
+=C2=A0 =C2=A0VA area.<br>
+<br>
+2) Bind and unbind GPU VA space mappings via the new<br>
+=C2=A0 =C2=A0DRM_IOCTL_NOUVEAU_VM_BIND ioctl.<br>
+<br>
+3) Execute push buffers with the new DRM_IOCTL_NOUVEAU_EXEC ioctl.<br>
+<br>
+Both, DRM_IOCTL_NOUVEAU_VM_BIND and DRM_IOCTL_NOUVEAU_EXEC support<br>
+asynchronous processing with DRM syncobjs as synchronization mechanism.<br>
+<br>
+The default DRM_IOCTL_NOUVEAU_VM_BIND is synchronous processing,<br>
+DRM_IOCTL_NOUVEAU_EXEC supports asynchronous processing only.<br>
+<br>
+Co-authored-by: Dave Airlie &lt;<a href=3D"mailto:airlied@redhat.com" targe=
+t=3D"_blank">airlied@redhat.com</a>&gt;<br>
+Signed-off-by: Danilo Krummrich &lt;<a href=3D"mailto:dakr@redhat.com" targ=
+et=3D"_blank">dakr@redhat.com</a>&gt;<br>
+---<br>
+=C2=A0Documentation/gpu/driver-uapi.rst |=C2=A0 =C2=A08 ++<br>
+=C2=A0include/uapi/drm/nouveau_drm.h=C2=A0 =C2=A0 | 209 +++++++++++++++++++=
++++++++++++<br>
+=C2=A02 files changed, 217 insertions(+)<br>
+<br>
+diff --git a/Documentation/gpu/driver-uapi.rst b/Documentation/gpu/driver-u=
+api.rst<br>
+index 4411e6919a3d..9c7ca6e33a68 100644<br>
+--- a/Documentation/gpu/driver-uapi.rst<br>
++++ b/Documentation/gpu/driver-uapi.rst<br>
+@@ -6,3 +6,11 @@ drm/i915 uAPI<br>
+=C2=A0=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
+<br>
+=C2=A0.. kernel-doc:: include/uapi/drm/i915_drm.h<br>
++<br>
++drm/nouveau uAPI<br>
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
++<br>
++VM_BIND / EXEC uAPI<br>
++-------------------<br>
++<br>
++.. kernel-doc:: include/uapi/drm/nouveau_drm.h<br>
+diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_drm.=
+h<br>
+index 853a327433d3..4d3a70529637 100644<br>
+--- a/include/uapi/drm/nouveau_drm.h<br>
++++ b/include/uapi/drm/nouveau_drm.h<br>
+@@ -126,6 +126,209 @@ struct drm_nouveau_gem_cpu_fini {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 __u32 handle;<br>
+=C2=A0};<br>
+<br>
++/**<br>
++ * struct drm_nouveau_sync - sync object<br>
++ *<br>
++ * This structure serves as synchronization mechanism for (potentially)<br=
+>
++ * asynchronous operations such as EXEC or VM_BIND.<br>
++ */<br>
++struct drm_nouveau_sync {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @flags: the flags for a sync object<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 *<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * The first 8 bits are used to determine the t=
+ype of the sync object.<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 flags;<br>
++#define DRM_NOUVEAU_SYNC_SYNCOBJ 0x0<br>
++#define DRM_NOUVEAU_SYNC_TIMELINE_SYNCOBJ 0x1<br>
++#define DRM_NOUVEAU_SYNC_TYPE_MASK 0xf<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @handle: the handle of the sync object<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 handle;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @timeline_value:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 *<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * The timeline point of the sync object in cas=
+e the syncobj is of<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * type DRM_NOUVEAU_SYNC_TIMELINE_SYNCOBJ.<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 timeline_value;<br>
++};<br>
++<br>
++/**<br>
++ * struct drm_nouveau_vm_init - GPU VA space init structure<br>
++ *<br>
++ * Used to initialize the GPU&#39;s VA space for a user client, telling th=
+e kernel<br>
++ * which portion of the VA space is managed by the UMD and kernel respecti=
+vely.<br></blockquote><div><br></div><div>I assume this has to be called qu=
+ite early.  Like maybe before any BOs or channels are created?  In any case=
+, it&#39;d be nice to have that documented.</div><div>=C2=A0</div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex">
++ */<br>
++struct drm_nouveau_vm_init {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @unmanaged_addr: start address of the kernel=
+ managed VA space region<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 unmanaged_addr;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @unmanaged_size: size of the kernel managed =
+VA space region in bytes<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 unmanaged_size;<br></blockquote><div><br>=
+</div><div>Over-all, I think this is the right API. My only concern is with=
+ the word &quot;unmanaged&quot;. None of the VA space is unmanaged. Some is=
+ userspace-managed and some is kernel-managed.=C2=A0 I guess &quot;unmanage=
+d&quot; kinda makes sense because this is coming from userspace and it&#39;=
+s saying which bits it manages and which bits it doesn&#39;t.=C2=A0 Still s=
+eems clunky to me.=C2=A0 Maybe kernel_managed? IDK, that feels weird too. S=
+ince we&#39;re already using UMD in this file, we could call it kmd_managed=
+. IDK. =F0=9F=A4=B7=F0=9F=8F=BB=E2=80=8D=E2=99=80=EF=B8=8F</div><div><br></=
+div><div>Yeah, I know this is a total bikeshed color thing and I&#39;m not =
+going to block anything based on it. =F0=9F=98=85 Just wanted to see if we =
+can come up with anything better.=C2=A0 It&#39;s documented and that&#39;s =
+the important thing.<br></div><div>=C2=A0</div><blockquote class=3D"gmail_q=
+uote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,2=
+04);padding-left:1ex">
++};<br>
++<br>
++/**<br>
++ * struct drm_nouveau_vm_bind_op - VM_BIND operation<br>
++ *<br>
++ * This structure represents a single VM_BIND operation. UMDs should pass<=
+br>
++ * an array of this structure via struct drm_nouveau_vm_bind&#39;s &amp;op=
+_ptr field.<br>
++ */<br>
++struct drm_nouveau_vm_bind_op {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @op: the operation type<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 op;<br>
++/**<br>
++ * @DRM_NOUVEAU_VM_BIND_OP_MAP:<br>
++ *<br>
++ * Map a GEM object to the GPU&#39;s VA space. Optionally, the<br>
++ * &amp;DRM_NOUVEAU_VM_BIND_SPARSE flag can be passed to instruct the kern=
+el to<br>
++ * create sparse mappings for the given range.<br>
++ */<br>
++#define DRM_NOUVEAU_VM_BIND_OP_MAP 0x0<br>
++/**<br>
++ * @DRM_NOUVEAU_VM_BIND_OP_UNMAP:<br>
++ *<br>
++ * Unmap an existing mapping in the GPU&#39;s VA space. If the region the =
+mapping<br>
++ * is located in is a sparse region, new sparse mappings are created where=
+ the<br>
++ * unmapped (memory backed) mapping was mapped previously. To remove a spa=
+rse<br>
++ * region the &amp;DRM_NOUVEAU_VM_BIND_SPARSE must be set.<br>
++ */<br>
++#define DRM_NOUVEAU_VM_BIND_OP_UNMAP 0x1<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @flags: the flags for a &amp;drm_nouveau_vm_=
+bind_op<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 flags;<br>
++/**<br>
++ * @DRM_NOUVEAU_VM_BIND_SPARSE:<br>
++ *<br>
++ * Indicates that an allocated VA space region should be sparse.<br>
++ */<br>
++#define DRM_NOUVEAU_VM_BIND_SPARSE (1 &lt;&lt; 8)<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @handle: the handle of the DRM GEM object to=
+ map<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 handle;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @pad: 32 bit padding, should be 0<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 pad;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @addr:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 *<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * the address the VA space region or (memory b=
+acked) mapping should be mapped to<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 addr;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @bo_offset: the offset within the BO backing=
+ the mapping<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 bo_offset;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @range: the size of the requested mapping in=
+ bytes<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 range;<br>
++};<br>
++<br>
++/**<br>
++ * struct drm_nouveau_vm_bind - structure for DRM_IOCTL_NOUVEAU_VM_BIND<br=
+>
++ */<br>
++struct drm_nouveau_vm_bind {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @op_count: the number of &amp;drm_nouveau_vm=
+_bind_op<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 op_count;<br></blockquote><div><br></div>=
+<div>I&#39;ve chatted a bit with Dave on IRC about this but both VM_BIND an=
+d EXEC should support `op_count =3D=3D 0` and do exactly the same thing tha=
+t they would do if there were real ops. In the case of vm_bind, that just m=
+eans wait on the waits and then signal the signals. In particular, it shoul=
+d NOT just return success and do nothing. Dave has a patch for this for EXE=
+C but IDK if VM_BIND needs any attention.=C2=A0 Of course, if it&#39;s not =
+ASYNC, then quickly doing nothing after validating inputs is acceptable.<br=
+></div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0=
+px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @flags: the flags for a &amp;drm_nouveau_vm_=
+bind ioctl<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 flags;<br>
++/**<br>
++ * @DRM_NOUVEAU_VM_BIND_RUN_ASYNC:<br>
++ *<br>
++ * Indicates that the given VM_BIND operation should be executed asynchron=
+ously<br>
++ * by the kernel.<br>
++ *<br>
++ * If this flag is not supplied the kernel executes the associated operati=
+ons<br>
++ * synchronously and doesn&#39;t accept any &amp;drm_nouveau_sync objects.=
+<br>
++ */<br>
++#define DRM_NOUVEAU_VM_BIND_RUN_ASYNC 0x1<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @wait_count: the number of wait &amp;drm_nou=
+veau_syncs<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 wait_count;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @sig_count: the number of &amp;drm_nouveau_s=
+yncs to signal when finished<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 sig_count;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @wait_ptr: pointer to &amp;drm_nouveau_syncs=
+ to wait for<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 wait_ptr;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @sig_ptr: pointer to &amp;drm_nouveau_syncs =
+to signal when finished<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 sig_ptr;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @op_ptr: pointer to the &amp;drm_nouveau_vm_=
+bind_ops to execute<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 op_ptr;<br>
++};<br>
++<br>
++/**<br>
++ * struct drm_nouveau_exec_push - EXEC push operation<br>
++ *<br>
++ * This structure represents a single EXEC push operation. UMDs should pas=
+s an<br>
++ * array of this structure via struct drm_nouveau_exec&#39;s &amp;push_ptr=
+ field.<br>
++ */<br>
++struct drm_nouveau_exec_push {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @va: the virtual address of the push buffer =
+mapping<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 va;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @va_len: the length of the push buffer mappi=
+ng<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 va_len;<br>
++};<br>
++<br>
++/**<br>
++ * struct drm_nouveau_exec - structure for DRM_IOCTL_NOUVEAU_EXEC<br>
++ */<br>
++struct drm_nouveau_exec {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @channel: the channel to execute the push bu=
+ffer in<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 channel;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @push_count: the number of &amp;drm_nouveau_=
+exec_push ops<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 push_count;<br></blockquote><div><br></di=
+v><div>Same comment as above. We want `push_count =3D=3D 0` to behave the s=
+ame as any other EXEC just without anything new. In particular, it needs to=
+ wait on all the waits as well as the previous EXECs on that channel and th=
+en signal the sigs. I know Dave has a patch for this and it&#39;s working q=
+uite well in my testing.</div><div><br></div><div>Other than that, everythi=
+ng looks good.=C2=A0 I&#39;m still re-reading all the NVK patches but they&=
+#39;ve been working quite well in my testing this week apart from a perf is=
+sue I need to dig into. I&#39;ll give a real RB once we&#39;re sure we all =
+agree on the semantics of _count.</div><div><br></div><div>~Faith<br></div>=
+<div>=C2=A0<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
+0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @wait_count: the number of wait &amp;drm_nou=
+veau_syncs<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 wait_count;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @sig_count: the number of &amp;drm_nouveau_s=
+yncs to signal when finished<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 sig_count;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @wait_ptr: pointer to &amp;drm_nouveau_syncs=
+ to wait for<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 wait_ptr;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @sig_ptr: pointer to &amp;drm_nouveau_syncs =
+to signal when finished<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 sig_ptr;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @push_ptr: pointer to &amp;drm_nouveau_exec_=
+push ops<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 push_ptr;<br>
++};<br>
++<br>
+=C2=A0#define DRM_NOUVEAU_GETPARAM=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+0x00 /* deprecated */<br>
+=C2=A0#define DRM_NOUVEAU_SETPARAM=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+0x01 /* deprecated */<br>
+=C2=A0#define DRM_NOUVEAU_CHANNEL_ALLOC=C2=A0 =C2=A0 =C2=A0 0x02 /* depreca=
+ted */<br>
+@@ -136,6 +339,9 @@ struct drm_nouveau_gem_cpu_fini {<br>
+=C2=A0#define DRM_NOUVEAU_NVIF=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A00x07<br>
+=C2=A0#define DRM_NOUVEAU_SVM_INIT=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+0x08<br>
+=C2=A0#define DRM_NOUVEAU_SVM_BIND=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+0x09<br>
++#define DRM_NOUVEAU_VM_INIT=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x10<=
+br>
++#define DRM_NOUVEAU_VM_BIND=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x11<=
+br>
++#define DRM_NOUVEAU_EXEC=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A00x12<br>
+=C2=A0#define DRM_NOUVEAU_GEM_NEW=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+0x40<br>
+=C2=A0#define DRM_NOUVEAU_GEM_PUSHBUF=C2=A0 =C2=A0 =C2=A0 =C2=A0 0x41<br>
+=C2=A0#define DRM_NOUVEAU_GEM_CPU_PREP=C2=A0 =C2=A0 =C2=A0 =C2=A00x42<br>
+@@ -197,6 +403,9 @@ struct drm_nouveau_svm_bind {<br>
+=C2=A0#define DRM_IOCTL_NOUVEAU_GEM_CPU_FINI=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_=
+IOW (DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_CPU_FINI, struct drm_nouveau_gem_cp=
+u_fini)<br>
+=C2=A0#define DRM_IOCTL_NOUVEAU_GEM_INFO=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_INFO, struct drm_nouveau_=
+gem_info)<br>
+<br>
++#define DRM_IOCTL_NOUVEAU_VM_INIT=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_VM_INIT, struct drm_nouveau_vm_ini=
+t)<br>
++#define DRM_IOCTL_NOUVEAU_VM_BIND=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_VM_BIND, struct drm_nouveau_vm_bin=
+d)<br>
++#define DRM_IOCTL_NOUVEAU_EXEC=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_EXEC, struct drm_nouve=
+au_exec)<br>
+=C2=A0#if defined(__cplusplus)<br>
+=C2=A0}<br>
+=C2=A0#endif<br>
+-- <br>
+2.41.0<br>
+<br>
+</blockquote></div></div>
+
+--0000000000001c0ff60601073543--
