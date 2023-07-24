@@ -1,64 +1,90 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E9FE75E5C7
-	for <lists+nouveau@lfdr.de>; Mon, 24 Jul 2023 01:54:58 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D04DA75FCFE
+	for <lists+nouveau@lfdr.de>; Mon, 24 Jul 2023 19:16:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0E33E10E0A9;
-	Sun, 23 Jul 2023 23:54:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4CE0D10E339;
+	Mon, 24 Jul 2023 17:16:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D6DC010E0A8;
- Sun, 23 Jul 2023 23:54:48 +0000 (UTC)
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-52229d3b8c8so931659a12.2; 
- Sun, 23 Jul 2023 16:54:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1690156487; x=1690761287;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZIT+hSMafkg++eE44gK8LEvrBC1icuncW2J+Pf4/L80=;
- b=ZO7wxRHl1bT/4i+iOouXAMTcpShANRl/Kj9440bykG3Dv7tg+xdYCRWXuFLwMyYkPh
- tkzf4xXIjhMh6Aen7KX/SIsgveiIz+vcsvch2N6khrdisapCoEMS/62azvWnmVksGDqb
- I3jJ9XF5tj+2JHikIxAu/ViZddt4EZtFGfFjC3gGwqYYF/BNiN/vZoDSRcjwkPyI7oyJ
- 60tde6X9wh30Ivlthv6O2jcjQ4qthJrRiEv8Ft3MQBF9Y8JjPWePl0VbBowBAR1ahvLC
- zNFoMZQfuWAAtoO1j1gujHTpcBQzR3qNPn+6p/35g0Xdv6Zupfdm2Mcd0nGs7rLZ5Rgr
- sq/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690156487; x=1690761287;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZIT+hSMafkg++eE44gK8LEvrBC1icuncW2J+Pf4/L80=;
- b=D9QDAjvSHuVkyK8nEX+n7Rr3+N7gOCorer/Gq3fSOHYrZkW+Y+YGilm/SLVZ8MRxnN
- n3j88nHw5SXDiBeJ8sjn5X3W2orsEORah0nnemwvztCEaHaNQLgagc3XKkNbS3ThFnMD
- ehcsTrDdMyMZoDUr7ajbs+6ocvb82mcbu5R1G0PSVNgV2DFVw5lYIizC4bIV5EISZhLj
- ZzNBgIv2TJxYhYKi4ukauvXVD7egmVuPVyo41McWF7IQ3BOEqI5v1n6hHB+mqLI0rVbl
- Qbmqe/zFXsHtU75dzsE5Yg//rGTgxFWQHJ89i1Hz+CyY5vSjylGcBqhldN3GdgaWSGDV
- Crvw==
-X-Gm-Message-State: ABy/qLbgUXdXNRHrVQJMI6sLWE32YpsmOq20db/fTYX/h7f4Kq4ZnAS7
- osaOuDOLC/zHL/lFmBjJ54O0ygz3wEU1xWX4o4k=
-X-Google-Smtp-Source: APBJJlGVH6e+Cmznbgs7azX60lZYUZNxmpCjiTEvV0Fem9YUEz3NQ0NgyP51NP4kNMRRzgXDd+APqGYJ5wmdpTo/s5U=
-X-Received: by 2002:a17:906:77dd:b0:994:539d:f983 with SMTP id
- m29-20020a17090677dd00b00994539df983mr6921287ejn.23.1690156486697; Sun, 23
- Jul 2023 16:54:46 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230720001443.2380-1-dakr@redhat.com>
- <20230720001443.2380-12-dakr@redhat.com>
- <CAOFGe945tp344=g-++=EAT89t0qJHZ=3yeW-k9OTbGNJodvwAg@mail.gmail.com>
-In-Reply-To: <CAOFGe945tp344=g-++=EAT89t0qJHZ=3yeW-k9OTbGNJodvwAg@mail.gmail.com>
-From: Dave Airlie <airlied@gmail.com>
-Date: Mon, 24 Jul 2023 09:54:34 +1000
-Message-ID: <CAPM=9tyQQTn=+Af1kWySde75T=MLFeboTErLv3NxqtQ8pvqtzA@mail.gmail.com>
-To: Faith Ekstrand <faith@gfxstrand.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH drm-misc-next v8 11/12] drm/nouveau: implement
- new VM_BIND uAPI
+Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
+ [66.111.4.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 895D610E339;
+ Mon, 24 Jul 2023 17:16:03 +0000 (UTC)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailout.nyi.internal (Postfix) with ESMTP id F30DA5C0176;
+ Mon, 24 Jul 2023 13:16:00 -0400 (EDT)
+Received: from imap47 ([10.202.2.97])
+ by compute2.internal (MEProxy); Mon, 24 Jul 2023 13:16:00 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dymek.me; h=cc
+ :cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:sender
+ :subject:subject:to:to; s=fm1; t=1690218960; x=1690305360; bh=id
+ Kj2ASfwZqfnrjhLGpjl4JQ0T7IJDG1zW5qQpC4ECI=; b=QEjCHRoR6eYizkYa+k
+ HmzSrm9w4HKrHrnOuIl2Ng4syPK3n8YLqXP7VyG+Vs5znh0upjGLbH2MgTAxyf5A
+ N3IhpvkAbP5W6AYeEP5iGMrbfHsyBwKi5lPiEoN5Oj2xwa2NUBjeCMOFXNF5NHP9
+ UpxJWUrJ5fVR5lZGa7u0jw/jM5wJjm9owF7/V96NrvRk6ea7KXG3tpLsAx7P+EUG
+ 2wSZzKw3LV96XbkKQCkz3hA3+IAGuuoSFYAK41qexdldzQA0CI7W1zyvNpszbN8o
+ itJex4PGGBSQO05KjoSm4N4bTDnB2ycLyp0op/b388Pt6KhGrHUFxCmRQdk1eS3/
+ hLfQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm3; t=1690218960; x=1690305360; bh=idKj2ASfwZqfn
+ rjhLGpjl4JQ0T7IJDG1zW5qQpC4ECI=; b=OqhOPFFlJAz+CnNuhmlFuClvbjrtd
+ J6m1ASuMFteSdYh1BulFPuSHr54g4Ew1OaAEuuuD/YE6ADqpdh7Pr8dXRUMXSqsu
+ IzM3eUR/82EP9+q/oReZkc9Gh0e77hlKxNnnOENpJguvbPHIFVAW6TfVgNj58JzO
+ 3kgqES2BUHXG/XpcFK5dXMdwPzIB1jVZOV4ClvztoSGGItacyN4ECfWfWtqinfHi
+ HxFnsw3kD1BRzUm/3kdZFCgEGtHB347kheT+CJHEosWANV6skSA+P5QTm0PI8Dst
+ s0uCMkn/CweLBaaOQ3rNT9GLWeb0XvE8HKQwp1dPhHJl5lhMIOL5cPt4g==
+X-ME-Sender: <xms:z7G-ZCOvlgDQWV-ybtxO33cGJ3WPP7iloSuRrJ3kJY9LjKqMY5c03Q>
+ <xme:z7G-ZA8gvLc0jedJImdUZx3dWjtfC6laRbCjrRvw02iHsQPIkmv567cYix7BhZ9uY
+ xmnHy8_RAmB1UhBWA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrheekgddutdelucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucenucfjughrpefofgggkfgjfhffhffvvefutgesrg
+ dtreerreerjeenucfhrhhomhepfdforghrkhcuffihmhgvkhdfuceomhgrrhhkseguhihm
+ vghkrdhmvgeqnecuggftrfgrthhtvghrnhepgfeuudefveegueelfeekueeuteevuedvff
+ dvkedtveeuteegvddtveetfeefkedvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghr
+ rghmpehmrghilhhfrhhomhepmhgrrhhkseguhihmvghkrdhmvg
+X-ME-Proxy: <xmx:0LG-ZJR4G8eXKgBeZJQ9xWT4CfdDJo1hdaj7Fzu3B72Qg-Zo7Dt8Tg>
+ <xmx:0LG-ZCu7WjrDvdn0g5RESpalgzqUOIQeMPwG63J1TadbfatQlvR2OA>
+ <xmx:0LG-ZKcXsm4Z-aq4a42IANf5e5dDJOCE1RxMwp341D2fmP1BUmXzNg>
+ <xmx:0LG-ZCQj6nrVnYyOoHMALlaeQ0T6RstHerfaaMandl0cHPHV6Iy7aQ>
+Feedback-ID: ia4a1448b:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id DE414A60077; Mon, 24 Jul 2023 13:15:59 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.9.0-alpha0-531-gfdfa13a06d-fm-20230703.001-gfdfa13a0
+Mime-Version: 1.0
+Message-Id: <6f8d6649-5b53-4a44-8b9e-0ffd00af3fb6@app.fastmail.com>
+In-Reply-To: <f25017a660f8a3a4e49258a1d96003dc@208suo.com>
+References: <tencent_0FA6AE16A21AAA2E9481C6FE598BA70CC405@qq.com>
+ <f25017a660f8a3a4e49258a1d96003dc@208suo.com>
+Date: Mon, 24 Jul 2023 13:15:39 -0400
+From: "Mark Dymek" <mark@dymek.me>
+To: huzhi001@208suo.com, bskeggs@redhat.com, kherbst@redhat.com,
+ lyude@redhat.com, airlied@gmail.com, daniel@ffwll.ch
+Content-Type: multipart/alternative; boundary=fb81da4b909a46b4a6fb5f653089f9e2
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/fifo:Fix Nineteen occurrences of
+ the gk104.c error: ERROR: space prohibited before that ':' (ctx:WxW) ERROR:
+ trailing statements should be on next line ERROR: space prohibited before
+ that ':' (ctx:WxW) ERROR: trailing statements should be on next line ERROR:
+ space prohibited before that ':' (ctx:WxW) ERROR: trailing statements
+ should be on next line ERROR: trailing statements should be on next line
+ ERROR: space prohibited before that ':' (ctx:WxW) ERROR: trailing
+ statements should be on next line ERROR: space prohibited before that ':'
+ (ctx:WxW) ERROR: trailing statements should be on next line ERROR: space
+ prohibited before that ':' (ctx:WxW) ERROR: trailing statements should be
+ on next line ERROR: space prohibited before that ':' (ctx:WxW) ERROR:
+ trailing statements should be on next line ERROR: space prohibited before
+ that ':' (ctx:WxE) ERROR: space prohibited before that ':' (ctx:WxE) ERROR:
+ trailing statements should be on next line ERROR: trailing s tatements
+ should be on next line
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,99 +96,160 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, willy@infradead.org, daniel@ffwll.ch,
- dri-devel@lists.freedesktop.org, corbet@lwn.net, nouveau@lists.freedesktop.org,
- ogabbay@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- mripard@kernel.org, alexdeucher@gmail.com, boris.brezillon@collabora.com,
- bskeggs@redhat.com, Liam.Howlett@oracle.com, bagasdotme@gmail.com,
- christian.koenig@amd.com, jason@jlekstrand.net, donald.robson@imgtec.com
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, 23 Jul 2023 at 01:12, Faith Ekstrand <faith@gfxstrand.net> wrote:
->
-> On Wed, Jul 19, 2023 at 7:15=E2=80=AFPM Danilo Krummrich <dakr@redhat.com=
-> wrote:
->>
->> This commit provides the implementation for the new uapi motivated by th=
-e
->> Vulkan API. It allows user mode drivers (UMDs) to:
->>
->> 1) Initialize a GPU virtual address (VA) space via the new
->>    DRM_IOCTL_NOUVEAU_VM_INIT ioctl for UMDs to specify the portion of VA
->>    space managed by the kernel and userspace, respectively.
->>
->> 2) Allocate and free a VA space region as well as bind and unbind memory
->>    to the GPUs VA space via the new DRM_IOCTL_NOUVEAU_VM_BIND ioctl.
->>    UMDs can request the named operations to be processed either
->>    synchronously or asynchronously. It supports DRM syncobjs
->>    (incl. timelines) as synchronization mechanism. The management of the
->>    GPU VA mappings is implemented with the DRM GPU VA manager.
->>
->> 3) Execute push buffers with the new DRM_IOCTL_NOUVEAU_EXEC ioctl. The
->>    execution happens asynchronously. It supports DRM syncobj (incl.
->>    timelines) as synchronization mechanism. DRM GEM object locking is
->>    handled with drm_exec.
->>
->> Both, DRM_IOCTL_NOUVEAU_VM_BIND and DRM_IOCTL_NOUVEAU_EXEC, use the DRM
->> GPU scheduler for the asynchronous paths.
->
->
-> IDK where the best place to talk about this is but this seems as good as =
-any.
->
-> I've been looking into why the Vulkan CTS runs about 2x slower for me on =
-the new UAPI and I created a little benchmark to facilitate testing:
->
-> https://gitlab.freedesktop.org/mesa/crucible/-/merge_requests/141
->
-> The test, roughly, does the following:
->  1. Allocates and binds 1000 BOs
->  2. Constructs a pushbuf that executes a no-op compute shader.
->  3. Does a single EXEC/wait combo to warm up the kernel
->  4. Loops 10,000 times, doing SYNCOBJ_RESET (fast), EXEC, and then SYNCOB=
-J_WAIT and times the loop
->
-> Of course, there's a bit of userspace driver overhead but that's negledga=
-ble.
->
-> If you drop the top patch which allocates 1k buffers, the submit time on =
-the old uAPI is 54 us/exec vs. 66 us/exec on the new UAPI. This includes th=
-e time to do a SYNCOBJ_RESET (fast), EXEC, and SYNCOBJ_WAIT. The Intel driv=
-er, by comparison, is 33us/exec so it's not syncobj overhead. This is a bit=
- concerning (you'd think the new thing would be faster) but what really has=
- me concerned is the 1k buffer case.
->
-> If you include the top patch in the crucible MR, it allocates 1000 BOs an=
-d VM_BINDs them. All the binding is done before the warmup EXEC. Suddenly, =
-the submit time jumps to 257 us/exec with the new UAPI. The old UAPI is muc=
-h worse (1134 us/exec) but that's not the point. Once we've done the first =
-EXEC and created our VM bindings, the cost per EXEC shouldn't change at all=
- based on the number of BOs bound.  Part of the point of VM_BIND is to get =
-all that binding logic and BO walking off the EXEC path.
->
-> Normally, I wouldn't be too worried about a little performance problem li=
-ke this. This is the first implementation and we can improve it later. I ge=
-t that. However, I suspect the solution to this problem involves more UAPI =
-and I want to make sure we have it all before we call this all done and dus=
-ted and land it.
->
-> The way AMD solves this problem as well as the new Xe driver for Intel is=
- to have a concept of internal vs. external BOs. Basically, there's an INTE=
-RNAL bit specified somewhere in BO creation that has a few userspace implic=
-ations:
->  1. In the Xe world where VMs are objects, INTERNAL BOs are assigned a VM=
- on creation and can never be bound to any other VM.
->  2. Any attempt to export an INTERNAL BO via prime or a similar mechanism=
- will fail with -EINVAL (I think?).
+--fb81da4b909a46b4a6fb5f653089f9e2
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Okay I've done a first pass at implementing this,
+not sure how i got signed up for this and i don=E2=80=99t see a way to u=
+nsubscribe. this is flooding my email with things i don=E2=80=99t care a=
+bout.=20
 
-https://gitlab.freedesktop.org/nouvelles/kernel/-/commit/005a0005ff80ec85f3=
-e9a314cae0576b7441076c
+On Fri, Jul 14, 2023, at 1:14 AM, huzhi001@208suo.com wrote:
+> Signed-off-by: ZhiHu <huzhi001@208suo.com>
+> ---
+>   .../gpu/drm/nouveau/nvkm/engine/fifo/gk104.c  | 40 ++++++++++++++---=
+--
+>   1 file changed, 29 insertions(+), 11 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gk104.c=20
+> b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gk104.c
+> index d8a4d773a58c..b99e0a7c96bb 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gk104.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gk104.c
+> @@ -137,15 +137,29 @@ gk104_ectx_bind(struct nvkm_engn *engn, struct=20
+> nvkm_cctx *cctx, struct nvkm_chan
+>       u64 addr =3D 0ULL;
+>=20
+>       switch (engn->engine->subdev.type) {
+> -    case NVKM_ENGINE_SW    : return;
+> -    case NVKM_ENGINE_GR    : ptr0 =3D 0x0210; break;
+> -    case NVKM_ENGINE_SEC   : ptr0 =3D 0x0220; break;
+> -    case NVKM_ENGINE_MSPDEC: ptr0 =3D 0x0250; break;
+> -    case NVKM_ENGINE_MSPPP : ptr0 =3D 0x0260; break;
+> -    case NVKM_ENGINE_MSVLD : ptr0 =3D 0x0270; break;
+> -    case NVKM_ENGINE_VIC   : ptr0 =3D 0x0280; break;
+> -    case NVKM_ENGINE_MSENC : ptr0 =3D 0x0290; break;
+> -    case NVKM_ENGINE_NVDEC :
+> +    case NVKM_ENGINE_SW:
+> +        return;
+> +    case NVKM_ENGINE_GR:
+> +        ptr0 =3D 0x0210;
+> +        break;
+> +    case NVKM_ENGINE_SEC:
+> +        ptr0 =3D 0x0220;
+> +        break;
+> +    case NVKM_ENGINE_MSPDEC:
+> +        ptr0 =3D 0x0250;
+> +        break;
+> +    case NVKM_ENGINE_MSPPP:
+> +        ptr0 =3D 0x0260;
+> +        break;
+> +    case NVKM_ENGINE_MSVLD:
+> +        ptr0 =3D 0x0270;
+> +        break;
+> +    case NVKM_ENGINE_VIC:
+> +        ptr0 =3D 0x0280; break;
+> +    case NVKM_ENGINE_MSENC:
+> +        ptr0 =3D 0x0290;
+> +        break;
+> +    case NVKM_ENGINE_NVDEC:
+>           ptr1 =3D 0x0270;
+>           ptr0 =3D 0x0210;
+>           break;
+> @@ -435,8 +449,12 @@ gk104_runl_commit(struct nvkm_runl *runl, struct=20
+> nvkm_memory *memory, u32 start,
+>       int target;
+>=20
+>       switch (nvkm_memory_target(memory)) {
+> -    case NVKM_MEM_TARGET_VRAM: target =3D 0; break;
+> -    case NVKM_MEM_TARGET_NCOH: target =3D 3; break;
+> +    case NVKM_MEM_TARGET_VRAM:
+> +        target =3D 0;
+> +        break;
+> +    case NVKM_MEM_TARGET_NCOH:
+> +        target =3D 3;
+> +        break;
+>       default:
+>           WARN_ON(1);
+>           return;
+>=20
+--fb81da4b909a46b4a6fb5f653089f9e2
+Content-Type: text/html;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Danilo we should probably pick that up for the next iteration. with
-corresponding mesa work it gets the latency for me from 180us down to
-70us.
-
-Dave.
+<!DOCTYPE html><html><head><title></title><style type=3D"text/css">p.Mso=
+Normal,p.MsoNoSpacing{margin:0}</style></head><body><div>not sure how i =
+got signed up for this and i don=E2=80=99t see a way to unsubscribe. thi=
+s is flooding my email with things i don=E2=80=99t care about.&nbsp;</di=
+v><div><br></div><div>On Fri, Jul 14, 2023, at 1:14 AM,&nbsp;<a href=3D"=
+mailto:huzhi001@208suo.com">huzhi001@208suo.com</a> wrote:<br></div><blo=
+ckquote type=3D"cite" id=3D"qt" style=3D""><div>Signed-off-by: ZhiHu &lt=
+;<a href=3D"mailto:huzhi001@208suo.com">huzhi001@208suo.com</a>&gt;<br><=
+/div><div>---<br></div><div>&nbsp; .../gpu/drm/nouveau/nvkm/engine/fifo/=
+gk104.c&nbsp; | 40 ++++++++++++++-----<br></div><div>&nbsp; 1 file chang=
+ed, 29 insertions(+), 11 deletions(-)<br></div><div><br></div><div>diff =
+--git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gk104.c&nbsp;<br></div>=
+<div>b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gk104.c<br></div><div>in=
+dex d8a4d773a58c..b99e0a7c96bb 100644<br></div><div>--- a/drivers/gpu/dr=
+m/nouveau/nvkm/engine/fifo/gk104.c<br></div><div>+++ b/drivers/gpu/drm/n=
+ouveau/nvkm/engine/fifo/gk104.c<br></div><div>@@ -137,15 +137,29 @@ gk10=
+4_ectx_bind(struct nvkm_engn *engn, struct&nbsp;<br></div><div>nvkm_cctx=
+ *cctx, struct nvkm_chan<br></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; u6=
+4 addr =3D 0ULL;<br></div><div><br></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp; switch (engn-&gt;engine-&gt;subdev.type) {<br></div><div>-&nbsp;&nb=
+sp;&nbsp; case NVKM_ENGINE_SW&nbsp;&nbsp;&nbsp; : return;<br></div><div>=
+-&nbsp;&nbsp;&nbsp; case NVKM_ENGINE_GR&nbsp;&nbsp;&nbsp; : ptr0 =3D 0x0=
+210; break;<br></div><div>-&nbsp;&nbsp;&nbsp; case NVKM_ENGINE_SEC&nbsp;=
+&nbsp; : ptr0 =3D 0x0220; break;<br></div><div>-&nbsp;&nbsp;&nbsp; case =
+NVKM_ENGINE_MSPDEC: ptr0 =3D 0x0250; break;<br></div><div>-&nbsp;&nbsp;&=
+nbsp; case NVKM_ENGINE_MSPPP : ptr0 =3D 0x0260; break;<br></div><div>-&n=
+bsp;&nbsp;&nbsp; case NVKM_ENGINE_MSVLD : ptr0 =3D 0x0270; break;<br></d=
+iv><div>-&nbsp;&nbsp;&nbsp; case NVKM_ENGINE_VIC&nbsp;&nbsp; : ptr0 =3D =
+0x0280; break;<br></div><div>-&nbsp;&nbsp;&nbsp; case NVKM_ENGINE_MSENC =
+: ptr0 =3D 0x0290; break;<br></div><div>-&nbsp;&nbsp;&nbsp; case NVKM_EN=
+GINE_NVDEC :<br></div><div>+&nbsp;&nbsp;&nbsp; case NVKM_ENGINE_SW:<br><=
+/div><div>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return;<br></div><=
+div>+&nbsp;&nbsp;&nbsp; case NVKM_ENGINE_GR:<br></div><div>+&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ptr0 =3D 0x0210;<br></div><div>+&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br></div><div>+&nbsp;&nbsp;&nbs=
+p; case NVKM_ENGINE_SEC:<br></div><div>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp; ptr0 =3D 0x0220;<br></div><div>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp; break;<br></div><div>+&nbsp;&nbsp;&nbsp; case NVKM_ENGINE_=
+MSPDEC:<br></div><div>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ptr0 =3D=
+ 0x0250;<br></div><div>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break=
+;<br></div><div>+&nbsp;&nbsp;&nbsp; case NVKM_ENGINE_MSPPP:<br></div><di=
+v>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ptr0 =3D 0x0260;<br></div>=
+<div>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br></div><div>+&=
+nbsp;&nbsp;&nbsp; case NVKM_ENGINE_MSVLD:<br></div><div>+&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp; ptr0 =3D 0x0270;<br></div><div>+&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br></div><div>+&nbsp;&nbsp;&nbsp; =
+case NVKM_ENGINE_VIC:<br></div><div>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp; ptr0 =3D 0x0280; break;<br></div><div>+&nbsp;&nbsp;&nbsp; case N=
+VKM_ENGINE_MSENC:<br></div><div>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp; ptr0 =3D 0x0290;<br></div><div>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp; break;<br></div><div>+&nbsp;&nbsp;&nbsp; case NVKM_ENGINE_NVDEC:<=
+br></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ptr=
+1 =3D 0x0270;<br></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp; ptr0 =3D 0x0210;<br></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp; break;<br></div><div>@@ -435,8 +449,12 @@ gk104=
+_runl_commit(struct nvkm_runl *runl, struct&nbsp;<br></div><div>nvkm_mem=
+ory *memory, u32 start,<br></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int=
+ target;<br></div><div><br></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; swi=
+tch (nvkm_memory_target(memory)) {<br></div><div>-&nbsp;&nbsp;&nbsp; cas=
+e NVKM_MEM_TARGET_VRAM: target =3D 0; break;<br></div><div>-&nbsp;&nbsp;=
+&nbsp; case NVKM_MEM_TARGET_NCOH: target =3D 3; break;<br></div><div>+&n=
+bsp;&nbsp;&nbsp; case NVKM_MEM_TARGET_VRAM:<br></div><div>+&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp; target =3D 0;<br></div><div>+&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br></div><div>+&nbsp;&nbsp;&nbsp; c=
+ase NVKM_MEM_TARGET_NCOH:<br></div><div>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp; target =3D 3;<br></div><div>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp; break;<br></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default:=
+<br></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WA=
+RN_ON(1);<br></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp; return;<br></div><div><br></div></blockquote></body></html>
+--fb81da4b909a46b4a6fb5f653089f9e2--
