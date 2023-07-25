@@ -1,63 +1,63 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 277A7761D8E
-	for <lists+nouveau@lfdr.de>; Tue, 25 Jul 2023 17:42:45 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id BADB0761E3B
+	for <lists+nouveau@lfdr.de>; Tue, 25 Jul 2023 18:16:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A8C2810E0EC;
-	Tue, 25 Jul 2023 15:42:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 58DAD10E15E;
+	Tue, 25 Jul 2023 16:16:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0A3BB10E0FC
- for <nouveau@lists.freedesktop.org>; Tue, 25 Jul 2023 15:42:41 +0000 (UTC)
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5222bc91838so3675760a12.0
- for <nouveau@lists.freedesktop.org>; Tue, 25 Jul 2023 08:42:40 -0700 (PDT)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A5BE310E0FE
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Jul 2023 16:16:25 +0000 (UTC)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5222c5d71b8so3352700a12.2
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Jul 2023 09:16:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gfxstrand-net.20221208.gappssmtp.com; s=20221208; t=1690299759; x=1690904559;
+ d=gfxstrand-net.20221208.gappssmtp.com; s=20221208; t=1690301784; x=1690906584;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wxPmIatxTXy31kUxbKzYcZYp/VN+Gul+eKu1vONRI6k=;
- b=Kqd1CtVD3pNPxLLuzcNakWv7B3YbOkQ50I3Iz1vyNID9kAiHk880xJfkWkeLEb+Z3+
- sL9gx0AEcxgZLmI21U0k53RhZTy4LEK7f3hj2KYffAq6l6QV9J0tSiX8OlFgTK1/3gUQ
- 7OCB3KXKpAmYN1M+fOR9uF38sIrZylMdXHFZGqt6uWs2uwtg0Qf2IjMrWwCa3Q1Ir1uk
- TqKlh5ESpL17JB/39aeR/f5FJI4CzMbLJ/eSySZ+vAFqk28lC8jn2qzOUYA0sfsk2Tz/
- uFbfdrq6YRJWAPOThDJSE9tP55BkpmDzLPOYlaBjSE580ESEl3ykJRrUiX3mqa8QDDJp
- ff/Q==
+ bh=+SMjkWSDuRcE4EWQkehN6B+0pDWq7fEh9SRxYaHpZ5A=;
+ b=hhpgXYdPoCjkdZHBtKDK5s9TNeNm2Bjigj2gUEuMVwhMHWUmqt9ZYyR150tIDIrJG5
+ Bxf4IpCo0RUVcGR2rotn/pDySUTrkDpOVNxqQ3wekI1ewJmaBi2FNl+/WZEbq+pLSrUc
+ o8w4m1m09kWUQb41KUBvhoMgxq9G5ewZq4Mhzxb8AMxUR9BwHlAn+ksmrUR9Rlr+rlp5
+ 83vSjR/2OujmzAFK7ddm7kgShkHJAoyjzw0Xy/Q61iGql/cATqEwbh+fGU9T5itDFfje
+ zOgDVfefRsnXdPpkvomdr/UoHmm0eTl63Gxe15R2qu1J89fAUw9DEO3YnTaYwfuNbKd2
+ ybgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690299759; x=1690904559;
+ d=1e100.net; s=20221208; t=1690301784; x=1690906584;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wxPmIatxTXy31kUxbKzYcZYp/VN+Gul+eKu1vONRI6k=;
- b=S4bQeE5gMchAT827sU1MSfKt6pM00btlpWeOIHzdrwG0Og7Bestm6UYDgJJvwPAa3v
- CvHu+E9x8aVyauYvMhSv9pUcaKhTNiGeNpyyNzEwyXN6z/TpWmNJR0mtfTIuUj2Dt9qa
- VYec4y/1XKYXiTrvtH/js3OuKCsePB/FUNHQ7GFXKiGhPigy6qbaL0zV3O916AQYe2Xj
- i3WDcO+r76j+GguofIPbc1I4nnI3IZUmPV3Rx7lW5K98p13LH9MX4zCQFOjiOA+Ud58H
- Dtnf1fhLAZ78oOHCktBFN6ZA4NtQlDDSVnOHYkVkjNk/N5OJhzJ6mnseLDQA8/ImTJh4
- KFgQ==
-X-Gm-Message-State: ABy/qLaWeaoQg42HcR0SUUgOxRKWvxWlvdeG3nMMjv1gxnqkjaxKNoyB
- K+kxVpf4/I5tBqEV9wp+kN42vU36gBVZq6ZMEqZEsw==
-X-Google-Smtp-Source: APBJJlFMrrSNqhMZRvIor7cTHUaiWXJHyO7qtFHvUT9gdwsO2OpWsHyNTySfwNRNZ2HuPl5yT2jTqa5MwUIQmb27BpI=
-X-Received: by 2002:a17:907:b13:b0:991:b292:695 with SMTP id
- h19-20020a1709070b1300b00991b2920695mr13497924ejl.55.1690299759276; Tue, 25
- Jul 2023 08:42:39 -0700 (PDT)
+ bh=+SMjkWSDuRcE4EWQkehN6B+0pDWq7fEh9SRxYaHpZ5A=;
+ b=aNuTHGDZIdNjnXERukmOMBrD9vnocVTuhbv6ETQq4o9+UlhFNkWmU4yHRFLVAnCtMj
+ 3N45MjNFSZvPA+L2BqGU9rxzGqkEL7OpA9BzpT0g29xFy6Ht483abbTjE5bbMV/Husv9
+ rzWyOkj6KBpvvLgc38R4klJ95CCHkPjxIBZL8TtUTcpnm26Gl/TH1OSKVeHhiLwx3qX+
+ lplY1ImswTJ87COdOqHBYMBsdQd2E0Y8pou/eJGpizHpBuPXNyOEQY5y/IULqVdGbmVr
+ HdnATiwgnirnxCjm6keuiRRxXgoj4aC0b4+sRUAEMYQ9iqxe7Iap7QGryURijaibST8e
+ 84fA==
+X-Gm-Message-State: ABy/qLZWUkeisJ+X5Hd5WOLs9terH7rEe9MViWcXyDdjpsCtPHAXLRAU
+ RE65PrlOsjFQzHvxw22BLXG9a6cX0ynptP5ZAwmtyw==
+X-Google-Smtp-Source: APBJJlFA13OA+4GBmodo4NDvvj6eKgn1kc9m/aBuTLd+Bar+At4wsmMp6gU8GY8EKfIQzvvqTOb/xStRIwTVBTXl/VE=
+X-Received: by 2002:a17:907:1dd4:b0:99b:5445:10d5 with SMTP id
+ og20-20020a1709071dd400b0099b544510d5mr13386665ejc.51.1690301784071; Tue, 25
+ Jul 2023 09:16:24 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230720001443.2380-1-dakr@redhat.com>
- <20230720001443.2380-4-dakr@redhat.com>
- <CAOFGe95kS0KzSUhjWiikBcx9vRQKnqipFE+a=FPobCgEi=ysAw@mail.gmail.com>
- <da776218-e930-5cbf-b2ab-8e6c39b900cd@redhat.com>
-In-Reply-To: <da776218-e930-5cbf-b2ab-8e6c39b900cd@redhat.com>
+ <20230720001443.2380-12-dakr@redhat.com>
+ <CAOFGe945tp344=g-++=EAT89t0qJHZ=3yeW-k9OTbGNJodvwAg@mail.gmail.com>
+ <542203c6-781a-dc44-6fa1-13cd20ab9e21@redhat.com>
+In-Reply-To: <542203c6-781a-dc44-6fa1-13cd20ab9e21@redhat.com>
 From: Faith Ekstrand <faith@gfxstrand.net>
-Date: Tue, 25 Jul 2023 10:42:27 -0500
-Message-ID: <CAOFGe95tHENSBCUKF6Hba8b_4Tcys_p_T2zKhSA+xRJxKQyQNw@mail.gmail.com>
+Date: Tue, 25 Jul 2023 11:16:12 -0500
+Message-ID: <CAOFGe94sG5==GM+spcTihcAtMCoj2xZYpN8NsYE6CEckdHJ8rQ@mail.gmail.com>
 To: Danilo Krummrich <dakr@redhat.com>
-Content-Type: multipart/alternative; boundary="000000000000b748bb06015194cc"
-Subject: Re: [Nouveau] [PATCH drm-misc-next v8 03/12] drm/nouveau: new
- VM_BIND uapi interfaces
+Content-Type: multipart/alternative; boundary="0000000000006736190601520d5c"
+Subject: Re: [Nouveau] [PATCH drm-misc-next v8 11/12] drm/nouveau: implement
+ new VM_BIND uAPI
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,290 +73,249 @@ Cc: matthew.brost@intel.com, willy@infradead.org, daniel@ffwll.ch,
  dri-devel@lists.freedesktop.org, corbet@lwn.net, nouveau@lists.freedesktop.org,
  ogabbay@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
  mripard@kernel.org, alexdeucher@gmail.com, boris.brezillon@collabora.com,
- bskeggs@redhat.com, Liam.Howlett@oracle.com, Dave Airlie <airlied@redhat.com>,
- bagasdotme@gmail.com, christian.koenig@amd.com, jason@jlekstrand.net,
- donald.robson@imgtec.com
+ bskeggs@redhat.com, Liam.Howlett@oracle.com, bagasdotme@gmail.com,
+ christian.koenig@amd.com, jason@jlekstrand.net, donald.robson@imgtec.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---000000000000b748bb06015194cc
+--0000000000006736190601520d5c
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 On Mon, Jul 24, 2023 at 9:04=E2=80=AFPM Danilo Krummrich <dakr@redhat.com> =
 wrote:
 
->
->
-> On 7/22/23 00:58, Faith Ekstrand wrote:
-> >
+> On 7/22/23 17:12, Faith Ekstrand wrote:
 > > On Wed, Jul 19, 2023 at 7:15=E2=80=AFPM Danilo Krummrich <dakr@redhat.c=
 om
 > > <mailto:dakr@redhat.com>> wrote:
 > >
-> >     This commit provides the interfaces for the new UAPI motivated by t=
-he
+> >     This commit provides the implementation for the new uapi motivated
+> >     by the
 > >     Vulkan API. It allows user mode drivers (UMDs) to:
 > >
 > >     1) Initialize a GPU virtual address (VA) space via the new
-> >         DRM_IOCTL_NOUVEAU_VM_INIT ioctl. UMDs can provide a kernel
-> reserved
-> >         VA area.
+> >         DRM_IOCTL_NOUVEAU_VM_INIT ioctl for UMDs to specify the portion
+> >     of VA
+> >         space managed by the kernel and userspace, respectively.
 > >
-> >     2) Bind and unbind GPU VA space mappings via the new
-> >         DRM_IOCTL_NOUVEAU_VM_BIND ioctl.
+> >     2) Allocate and free a VA space region as well as bind and unbind
+> memory
+> >         to the GPUs VA space via the new DRM_IOCTL_NOUVEAU_VM_BIND ioct=
+l.
+> >         UMDs can request the named operations to be processed either
+> >         synchronously or asynchronously. It supports DRM syncobjs
+> >         (incl. timelines) as synchronization mechanism. The management
+> >     of the
+> >         GPU VA mappings is implemented with the DRM GPU VA manager.
 > >
 > >     3) Execute push buffers with the new DRM_IOCTL_NOUVEAU_EXEC ioctl.
-> >
-> >     Both, DRM_IOCTL_NOUVEAU_VM_BIND and DRM_IOCTL_NOUVEAU_EXEC support
-> >     asynchronous processing with DRM syncobjs as synchronization
-> mechanism.
-> >
-> >     The default DRM_IOCTL_NOUVEAU_VM_BIND is synchronous processing,
-> >     DRM_IOCTL_NOUVEAU_EXEC supports asynchronous processing only.
-> >
-> >     Co-authored-by: Dave Airlie <airlied@redhat.com
-> >     <mailto:airlied@redhat.com>>
-> >     Signed-off-by: Danilo Krummrich <dakr@redhat.com
-> >     <mailto:dakr@redhat.com>>
-> >     ---
-> >       Documentation/gpu/driver-uapi.rst |   8 ++
-> >       include/uapi/drm/nouveau_drm.h    | 209
-> ++++++++++++++++++++++++++++++
-> >       2 files changed, 217 insertions(+)
-> >
-> >     diff --git a/Documentation/gpu/driver-uapi.rst
-> >     b/Documentation/gpu/driver-uapi.rst
-> >     index 4411e6919a3d..9c7ca6e33a68 100644
-> >     --- a/Documentation/gpu/driver-uapi.rst
-> >     +++ b/Documentation/gpu/driver-uapi.rst
-> >     @@ -6,3 +6,11 @@ drm/i915 uAPI
-> >       =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >
-> >       .. kernel-doc:: include/uapi/drm/i915_drm.h
-> >     +
-> >     +drm/nouveau uAPI
-> >     +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >     +
-> >     +VM_BIND / EXEC uAPI
-> >     +-------------------
-> >     +
-> >     +.. kernel-doc:: include/uapi/drm/nouveau_drm.h
-> >     diff --git a/include/uapi/drm/nouveau_drm.h
-> >     b/include/uapi/drm/nouveau_drm.h
-> >     index 853a327433d3..4d3a70529637 100644
-> >     --- a/include/uapi/drm/nouveau_drm.h
-> >     +++ b/include/uapi/drm/nouveau_drm.h
-> >     @@ -126,6 +126,209 @@ struct drm_nouveau_gem_cpu_fini {
-> >              __u32 handle;
-> >       };
-> >
-> >     +/**
-> >     + * struct drm_nouveau_sync - sync object
-> >     + *
-> >     + * This structure serves as synchronization mechanism for
-> (potentially)
-> >     + * asynchronous operations such as EXEC or VM_BIND.
-> >     + */
-> >     +struct drm_nouveau_sync {
-> >     +       /**
-> >     +        * @flags: the flags for a sync object
-> >     +        *
-> >     +        * The first 8 bits are used to determine the type of the
-> >     sync object.
-> >     +        */
-> >     +       __u32 flags;
-> >     +#define DRM_NOUVEAU_SYNC_SYNCOBJ 0x0
-> >     +#define DRM_NOUVEAU_SYNC_TIMELINE_SYNCOBJ 0x1
-> >     +#define DRM_NOUVEAU_SYNC_TYPE_MASK 0xf
-> >     +       /**
-> >     +        * @handle: the handle of the sync object
-> >     +        */
-> >     +       __u32 handle;
-> >     +       /**
-> >     +        * @timeline_value:
-> >     +        *
-> >     +        * The timeline point of the sync object in case the syncob=
-j
-> >     is of
-> >     +        * type DRM_NOUVEAU_SYNC_TIMELINE_SYNCOBJ.
-> >     +        */
-> >     +       __u64 timeline_value;
-> >     +};
-> >     +
-> >     +/**
-> >     + * struct drm_nouveau_vm_init - GPU VA space init structure
-> >     + *
-> >     + * Used to initialize the GPU's VA space for a user client, tellin=
-g
-> >     the kernel
-> >     + * which portion of the VA space is managed by the UMD and kernel
-> >     respectively.
-> >
-> >
-> > I assume this has to be called quite early. Like maybe before any BOs o=
-r
-> > channels are created? In any case, it'd be nice to have that documented=
+> The
+> >         execution happens asynchronously. It supports DRM syncobj (incl=
 .
->
-> Exactly, doing any of those will disable the new uAPI entirely if it
-> wasn't yet initialized. I will add some documentation for this.
->
-
-Thanks!
-
-
+> >         timelines) as synchronization mechanism. DRM GEM object locking
+> is
+> >         handled with drm_exec.
 > >
-> >     + */
-> >     +struct drm_nouveau_vm_init {
-> >     +       /**
-> >     +        * @unmanaged_addr: start address of the kernel managed VA
-> >     space region
-> >     +        */
-> >     +       __u64 unmanaged_addr;
-> >     +       /**
-> >     +        * @unmanaged_size: size of the kernel managed VA space
-> >     region in bytes
-> >     +        */
-> >     +       __u64 unmanaged_size;
+> >     Both, DRM_IOCTL_NOUVEAU_VM_BIND and DRM_IOCTL_NOUVEAU_EXEC, use the
+> DRM
+> >     GPU scheduler for the asynchronous paths.
 > >
 > >
-> > Over-all, I think this is the right API. My only concern is with the
-> > word "unmanaged". None of the VA space is unmanaged. Some is
-> > userspace-managed and some is kernel-managed.  I guess "unmanaged" kind=
-a
-> > makes sense because this is coming from userspace and it's saying which
-> > bits it manages and which bits it doesn't.  Still seems clunky to me.
-> > Maybe kernel_managed? IDK, that feels weird too. Since we're already
-> > using UMD in this file, we could call it kmd_managed. IDK. =F0=9F=A4=B7=
-=F0=9F=8F=BB=E2=80=8D=E2=99=80=EF=B8=8F
->
-> kernel_managed / kmd_managed both sounds fine to me. I'm good with
-> either one.
->
-
-Let's go with kernel_managed then, unless anyone objects.
-
-
-> >
-> > Yeah, I know this is a total bikeshed color thing and I'm not going to
-> > block anything based on it. =F0=9F=98=85 Just wanted to see if we can c=
-ome up with
-> > anything better.  It's documented and that's the important thing.
-> >
-> >     +};
-> >     +
-> >     +/**
-> >     + * struct drm_nouveau_vm_bind_op - VM_BIND operation
-> >     + *
-> >     + * This structure represents a single VM_BIND operation. UMDs
-> >     should pass
-> >     + * an array of this structure via struct drm_nouveau_vm_bind's
-> >     &op_ptr field.
-> >     + */
-> >     +struct drm_nouveau_vm_bind_op {
-> >     +       /**
-> >     +        * @op: the operation type
-> >     +        */
-> >     +       __u32 op;
-> >     +/**
-> >     + * @DRM_NOUVEAU_VM_BIND_OP_MAP:
-> >     + *
-> >     + * Map a GEM object to the GPU's VA space. Optionally, the
-> >     + * &DRM_NOUVEAU_VM_BIND_SPARSE flag can be passed to instruct the
-> >     kernel to
-> >     + * create sparse mappings for the given range.
-> >     + */
-> >     +#define DRM_NOUVEAU_VM_BIND_OP_MAP 0x0
-> >     +/**
-> >     + * @DRM_NOUVEAU_VM_BIND_OP_UNMAP:
-> >     + *
-> >     + * Unmap an existing mapping in the GPU's VA space. If the region
-> >     the mapping
-> >     + * is located in is a sparse region, new sparse mappings are
-> >     created where the
-> >     + * unmapped (memory backed) mapping was mapped previously. To
-> >     remove a sparse
-> >     + * region the &DRM_NOUVEAU_VM_BIND_SPARSE must be set.
-> >     + */
-> >     +#define DRM_NOUVEAU_VM_BIND_OP_UNMAP 0x1
-> >     +       /**
-> >     +        * @flags: the flags for a &drm_nouveau_vm_bind_op
-> >     +        */
-> >     +       __u32 flags;
-> >     +/**
-> >     + * @DRM_NOUVEAU_VM_BIND_SPARSE:
-> >     + *
-> >     + * Indicates that an allocated VA space region should be sparse.
-> >     + */
-> >     +#define DRM_NOUVEAU_VM_BIND_SPARSE (1 << 8)
-> >     +       /**
-> >     +        * @handle: the handle of the DRM GEM object to map
-> >     +        */
-> >     +       __u32 handle;
-> >     +       /**
-> >     +        * @pad: 32 bit padding, should be 0
-> >     +        */
-> >     +       __u32 pad;
-> >     +       /**
-> >     +        * @addr:
-> >     +        *
-> >     +        * the address the VA space region or (memory backed)
-> >     mapping should be mapped to
-> >     +        */
-> >     +       __u64 addr;
-> >     +       /**
-> >     +        * @bo_offset: the offset within the BO backing the mapping
-> >     +        */
-> >     +       __u64 bo_offset;
-> >     +       /**
-> >     +        * @range: the size of the requested mapping in bytes
-> >     +        */
-> >     +       __u64 range;
-> >     +};
-> >     +
-> >     +/**
-> >     + * struct drm_nouveau_vm_bind - structure for
-> DRM_IOCTL_NOUVEAU_VM_BIND
-> >     + */
-> >     +struct drm_nouveau_vm_bind {
-> >     +       /**
-> >     +        * @op_count: the number of &drm_nouveau_vm_bind_op
-> >     +        */
-> >     +       __u32 op_count;
-> >
-> >
-> > I've chatted a bit with Dave on IRC about this but both VM_BIND and EXE=
-C
-> > should support `op_count =3D=3D 0` and do exactly the same thing that t=
-hey
-> > would do if there were real ops. In the case of vm_bind, that just mean=
+> > IDK where the best place to talk about this is but this seems as good a=
 s
-> > wait on the waits and then signal the signals. In particular, it should
-> > NOT just return success and do nothing. Dave has a patch for this for
-> > EXEC but IDK if VM_BIND needs any attention.  Of course, if it's not
-> > ASYNC, then quickly doing nothing after validating inputs is acceptable=
+> > any.
+> >
+> > I've been looking into why the Vulkan CTS runs about 2x slower for me o=
+n
+> > the new UAPI and I created a little benchmark to facilitate testing:
+> >
+> > https://gitlab.freedesktop.org/mesa/crucible/-/merge_requests/141
+> > <https://gitlab.freedesktop.org/mesa/crucible/-/merge_requests/141>
+> >
+> > The test, roughly, does the following:
+> >   1. Allocates and binds 1000 BOs
+> >   2. Constructs a pushbuf that executes a no-op compute shader.
+> >   3. Does a single EXEC/wait combo to warm up the kernel
+> >   4. Loops 10,000 times, doing SYNCOBJ_RESET (fast), EXEC, and then
+> > SYNCOBJ_WAIT and times the loop
+> >
+> > Of course, there's a bit of userspace driver overhead but that's
+> > negledgable.
+> >
+> > If you drop the top patch which allocates 1k buffers, the submit time o=
+n
+> > the old uAPI is 54 us/exec vs. 66 us/exec on the new UAPI. This include=
+s
+> > the time to do a SYNCOBJ_RESET (fast), EXEC, and SYNCOBJ_WAIT.The Intel
+> > driver, by comparison, is 33us/exec so it's not syncobj overhead. This
+> > is a bit concerning (you'd think the new thing would be faster) but wha=
+t
+> > really has me concerned is the 1k buffer case.
+> >
+> > If you include the top patch in the crucible MR, it allocates 1000 BOs
+> > and VM_BINDs them. All the binding is done before the warmup EXEC.
+> > Suddenly, the submit time jumps to 257 us/exec with the new UAPI. The
+> > old UAPI is much worse (1134 us/exec) but that's not the point. Once
+> > we've done the first EXEC and created our VM bindings, the cost per EXE=
+C
+> > shouldn't change at all based on the number of BOs bound.  Part of the
+> > point of VM_BIND is to get all that binding logic and BO walking off th=
+e
+> > EXEC path.
+> >
+> > Normally, I wouldn't be too worried about a little performance problem
+> > like this. This is the first implementation and we can improve it later=
 .
+> > I get that. However, I suspect the solution to this problem involves
+> > more UAPI and I want to make sure we have it all before we call this al=
+l
+> > done and dusted and land it.
+> >
+> > The way AMD solves this problem as well as the new Xe driver for Intel
+> > is to have a concept of internal vs. external BOs. Basically, there's a=
+n
+> > INTERNAL bit specified somewhere in BO creation that has a few userspac=
+e
+> > implications:
+> >   1. In the Xe world where VMs are objects, INTERNAL BOs are assigned a
+> > VM on creation and can never be bound to any other VM.
+> >   2. Any attempt to export an INTERNAL BO via prime or a similar
+> > mechanism will fail with -EINVAL (I think?).
+> >
+> > Inside the kernel driver, all the internal BOs on a VM (or DRM file in
+> > the case of nouveau/AMD since they don't have VM objects) share a singl=
+e
+> > dma_resv which allows you to avoid having to walk lists of BOs and take
+> > locks on every exec. Instead, you can just look at the fences on the
+> > dma_resv for the VM. There's still a BO list associated with the VM for
+> > external BOs but, in most Vulkan applications, there are less than a
+> > half dozen external BOs total.  Meanwhile, the hundreds or thousands of
+> > BOs used entirely internally to the application basically count as one
+> > BO when it comes to locking overhead.
 >
-> What will this be used for? I guess it would not be important to be
-> executed in order with "regular" (non-noop) jobs? Because the only thing
-> this would tell you is that e.g. for VM_BIND all previous binds
-> completed, which is what we have syncobjs for.
+> I am aware of that and I have some WIP patches [1] to generalize a
+> common dma-resv within the GPUVA manager which basically represents a
+> GPU-VM. It also keeps track of external GEM objects and evicted objects,
+> such that on EXEC we only need to validate objects needing validation,
+> rather than all of them. Hence, it should be faster than with Daves
+> patch having a common dma-resv only.
+>
+> In [1] I also picked up Daves code to allow for noop jobs to be
+> submitted as well as the NOUVEAU_GEM_DOMAIN_NO_SHARE flag.
+>
+> This seems to work fine with yours and Daves latest mesa work
+> (670c301a9845a3fc795fd48a1e6714e75b388245).
+>
+> Your crucible bench.submit-latency test goes down to 51us on my machine
+> with those patches.
+>
+> I am unsure though, if we should aim for a common solution within the
+> GPUVA manager directly or if we should do it driver specific in a first
+> shot. I discussed this patch with Matt and I know that XE looks for
+> having a generalized solution as well. However, it surely needs some
+> more care and polish and feedback from other drivers perspective.
+>
+> [1]
+>
+> https://gitlab.freedesktop.org/nouvelles/kernel/-/tree/new-uapi-drm-next-=
+vm-resv
+>
+> >
+> > I'm not actually trying to dictate kernel driver design here. If one
+> > dma_resv doesn't work, fine. I don't care as long as EXEC scales.
+> > However, given that the solution in all the other drivers involves a BO
+> > create flag nouveau doesn't have, we need to either add that or prove
+> > that we can get EXEC to scale without it.
+>
+>  From #nouveau:
+>
+> <gfxstrand> CTSing now
+> <gfxstrand> It looks like it's still going to take 1.5 hours.
+>
+> I may have an idea what could be the issue, let me explain.
+>
+> Currently, there is a single drm_gpu_scheduler having a drm_sched_entity
+> per client (for VM_BIND jobs) and a drm_sched_entity per channel (for
+> EXEC jobs).
+>
+> For VM_BIND jobs the corresponding PT[E]s are allocated before the job
+> is pushed to the corresponding drm_sched_entity. The PT[E]s are freed by
+> the schedulers free() callback pushing work to a single threaded
+> workqueue doing the actual free. (We can't do it in the free() callback
+> directly, since to free PT[E]s we need to hold a mutex we also need to
+> hold while allocating them.)
+>
+> Because of how the page table handling in Nouveau is implemented
+> currently there are some ordering restrictions when it comes to
+> allocating and freeing PT[E]s. For instance, we can't allocate PT[E]s
+> for sparse regions before the PT[E]s of previously removed memory backed
+> mappings *within the same address range* aren't freed. The same applies
+> vice versa and for sparse mapping replacing sparse mapping. For memory
+> backed mappings (also for those within sparse regions) we do *not* have
+> such ordering requirements.
+>
+> So, let's assume userspace removes a sparse region A[0x0, 0x8000000] and
+> asks for a couple of new memory backed mappings within or crossing this
+> range; the kernel needs to wait for A not only to be unmapped, but also
+> the backing PT[E]s to be freed before it can even allocate the PT[E]s
+> for the new memory backed mappings.
+>
+> Now, let's have a look what the gpu schedulers main loop does. Before
+> picking the next entity to schedule a job for, it tries to fetch the
+> first job from the pending_list and checks whether its dma-fence is
+> signaled already and whether the job can be cleaned up. Subsequent jobs
+> on the pending_list are not taken into consideration. Hence, it might
+> well be that the first job on the pending_list isn't signaled yet, but
+> subsequent jobs are and hence *could* be cleaned up.
+>
+> Normally, this shouldn't be a problem, since we wouldn't really care
+> *when* resources are cleaned up as long as they are eventually. However,
+> with the ordering restrictions the page table handling gives us we might
+> actually care about the "when".
+>
+> For instance, it could happen that the first job on the pending list is
+> a rather long running EXEC job (1) scheduled from client A on some
+> channel. The next job on the pending list could be a VM_BIND job (2)
+> from client B removing a sparse region, which is finished already but is
+> blocked to be cleaned up until the EXEC job (1) from client A is
+> finished and cleaned up. Now, a subsequent VM_BIND job (3) from client B
+> creating a new memory backed mapping in the same address range as the
+> sparse region removed by job (2) would need to wait for (2) to be
+> cleaned up. Ultimately, we can expect client B to submit an EXEC job
+> that needs to wait for the corresponding mappings to be created, namely
+> the VM_BIND job (3).
+>
+> Clearly in order to address this we need to rework the page table
+> handling in Nouveau to get rid of those ordering restrictions.
+>
+> Temporarily, we could also try to run a secondary drm_gpu_scheduler
+> instance, one for VM_BINDs and one for EXECs maybe...
+>
+> However, I would not expect this to be an issue in real applications,
+> especially if mesa takes a little care not to re-use certain address
+> space areas right away to avoid running into such wait conditions.
+>
+> For parallel VK CTS runs I could imagine that we run into such cases
+> from time to time though.
 >
 
-Yes, exactly that. Effectively, it allows you to add more signal objects to
-the last submitted job after the fact. Vulkan allows submits with zero
-command buffers and they have to behave the same as submits that actually
-do work. We also use this internally in Mesa to implement things like
-`vkQueueWaitForIdle`. (It's actually a little more subtle than that because
-the new signals will also wait on any waits in the zero-size exec.)
+Thanks for the detailed write-up! That would definitely explain it. If I
+remember, I'll try to do a single-threaded run or two. If your theory is
+correct, there should be no real perf difference when running
+single-threaded. Those runs will take a long time, though, so I'll have to
+run them over night. I'll let you know in a few days once I have the
+results.
 
-The standard driver work-around for this which Mesa Vulkan drivers carry is
-to have a no-op pushbuf that you stash somewhere. Whenever
-command_buffer_count =3D=3D 0, you submit that one instead to trick the ker=
-nel
-into thinking it's doing work. Since we're building a new UAPI, though, we
-may as well just support this corner case directly in the kernel driver.
+If this theory holds, then I'm not concerned about the performance of the
+API itself. It would still be good to see if we can find a way to reduce
+the cross-process drag in the implementation but that's a perf optimization
+we can do later.
+
+Does it actually matter? Yes, it kinda does. No, it probably doesn't matter
+for games because you're typically only running one game at a time. From a
+development PoV, however, if it makes CI take longer then that slows down
+development and that's not good for the users, either.
 
 ~Faith
 
@@ -364,158 +323,12 @@ may as well just support this corner case directly in the kernel driver.
 > - Danilo
 >
 > >
-> >     +       /**
-> >     +        * @flags: the flags for a &drm_nouveau_vm_bind ioctl
-> >     +        */
-> >     +       __u32 flags;
-> >     +/**
-> >     + * @DRM_NOUVEAU_VM_BIND_RUN_ASYNC:
-> >     + *
-> >     + * Indicates that the given VM_BIND operation should be executed
-> >     asynchronously
-> >     + * by the kernel.
-> >     + *
-> >     + * If this flag is not supplied the kernel executes the associated
-> >     operations
-> >     + * synchronously and doesn't accept any &drm_nouveau_sync objects.
-> >     + */
-> >     +#define DRM_NOUVEAU_VM_BIND_RUN_ASYNC 0x1
-> >     +       /**
-> >     +        * @wait_count: the number of wait &drm_nouveau_syncs
-> >     +        */
-> >     +       __u32 wait_count;
-> >     +       /**
-> >     +        * @sig_count: the number of &drm_nouveau_syncs to signal
-> >     when finished
-> >     +        */
-> >     +       __u32 sig_count;
-> >     +       /**
-> >     +        * @wait_ptr: pointer to &drm_nouveau_syncs to wait for
-> >     +        */
-> >     +       __u64 wait_ptr;
-> >     +       /**
-> >     +        * @sig_ptr: pointer to &drm_nouveau_syncs to signal when
-> >     finished
-> >     +        */
-> >     +       __u64 sig_ptr;
-> >     +       /**
-> >     +        * @op_ptr: pointer to the &drm_nouveau_vm_bind_ops to
-> execute
-> >     +        */
-> >     +       __u64 op_ptr;
-> >     +};
-> >     +
-> >     +/**
-> >     + * struct drm_nouveau_exec_push - EXEC push operation
-> >     + *
-> >     + * This structure represents a single EXEC push operation. UMDs
-> >     should pass an
-> >     + * array of this structure via struct drm_nouveau_exec's &push_ptr
-> >     field.
-> >     + */
-> >     +struct drm_nouveau_exec_push {
-> >     +       /**
-> >     +        * @va: the virtual address of the push buffer mapping
-> >     +        */
-> >     +       __u64 va;
-> >     +       /**
-> >     +        * @va_len: the length of the push buffer mapping
-> >     +        */
-> >     +       __u64 va_len;
-> >     +};
-> >     +
-> >     +/**
-> >     + * struct drm_nouveau_exec - structure for DRM_IOCTL_NOUVEAU_EXEC
-> >     + */
-> >     +struct drm_nouveau_exec {
-> >     +       /**
-> >     +        * @channel: the channel to execute the push buffer in
-> >     +        */
-> >     +       __u32 channel;
-> >     +       /**
-> >     +        * @push_count: the number of &drm_nouveau_exec_push ops
-> >     +        */
-> >     +       __u32 push_count;
-> >
-> >
-> > Same comment as above. We want `push_count =3D=3D 0` to behave the same=
- as
-> > any other EXEC just without anything new. In particular, it needs to
-> > wait on all the waits as well as the previous EXECs on that channel and
-> > then signal the sigs. I know Dave has a patch for this and it's working
-> > quite well in my testing.
-> >
-> > Other than that, everything looks good.  I'm still re-reading all the
-> > NVK patches but they've been working quite well in my testing this week
-> > apart from a perf issue I need to dig into. I'll give a real RB once
-> > we're sure we all agree on the semantics of _count.
-> >
 > > ~Faith
-> >
-> >     +       /**
-> >     +        * @wait_count: the number of wait &drm_nouveau_syncs
-> >     +        */
-> >     +       __u32 wait_count;
-> >     +       /**
-> >     +        * @sig_count: the number of &drm_nouveau_syncs to signal
-> >     when finished
-> >     +        */
-> >     +       __u32 sig_count;
-> >     +       /**
-> >     +        * @wait_ptr: pointer to &drm_nouveau_syncs to wait for
-> >     +        */
-> >     +       __u64 wait_ptr;
-> >     +       /**
-> >     +        * @sig_ptr: pointer to &drm_nouveau_syncs to signal when
-> >     finished
-> >     +        */
-> >     +       __u64 sig_ptr;
-> >     +       /**
-> >     +        * @push_ptr: pointer to &drm_nouveau_exec_push ops
-> >     +        */
-> >     +       __u64 push_ptr;
-> >     +};
-> >     +
-> >       #define DRM_NOUVEAU_GETPARAM           0x00 /* deprecated */
-> >       #define DRM_NOUVEAU_SETPARAM           0x01 /* deprecated */
-> >       #define DRM_NOUVEAU_CHANNEL_ALLOC      0x02 /* deprecated */
-> >     @@ -136,6 +339,9 @@ struct drm_nouveau_gem_cpu_fini {
-> >       #define DRM_NOUVEAU_NVIF               0x07
-> >       #define DRM_NOUVEAU_SVM_INIT           0x08
-> >       #define DRM_NOUVEAU_SVM_BIND           0x09
-> >     +#define DRM_NOUVEAU_VM_INIT            0x10
-> >     +#define DRM_NOUVEAU_VM_BIND            0x11
-> >     +#define DRM_NOUVEAU_EXEC               0x12
-> >       #define DRM_NOUVEAU_GEM_NEW            0x40
-> >       #define DRM_NOUVEAU_GEM_PUSHBUF        0x41
-> >       #define DRM_NOUVEAU_GEM_CPU_PREP       0x42
-> >     @@ -197,6 +403,9 @@ struct drm_nouveau_svm_bind {
-> >       #define DRM_IOCTL_NOUVEAU_GEM_CPU_FINI       DRM_IOW
-> >     (DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_CPU_FINI, struct
-> >     drm_nouveau_gem_cpu_fini)
-> >       #define DRM_IOCTL_NOUVEAU_GEM_INFO
-> >       DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_INFO, struct
-> >     drm_nouveau_gem_info)
-> >
-> >     +#define DRM_IOCTL_NOUVEAU_VM_INIT
-> >     DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_VM_INIT, struct
-> >     drm_nouveau_vm_init)
-> >     +#define DRM_IOCTL_NOUVEAU_VM_BIND
-> >     DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_VM_BIND, struct
-> >     drm_nouveau_vm_bind)
-> >     +#define DRM_IOCTL_NOUVEAU_EXEC
-> >       DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_EXEC, struct
-> drm_nouveau_exec)
-> >       #if defined(__cplusplus)
-> >       }
-> >       #endif
-> >     --
-> >     2.41.0
 > >
 >
 >
 
---000000000000b748bb06015194cc
+--0000000000006736190601520d5c
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -523,532 +336,306 @@ Content-Transfer-Encoding: quoted-printable
 _attr">On Mon, Jul 24, 2023 at 9:04=E2=80=AFPM Danilo Krummrich &lt;<a href=
 =3D"mailto:dakr@redhat.com">dakr@redhat.com</a>&gt; wrote:<br></div><blockq=
 uote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1p=
-x solid rgb(204,204,204);padding-left:1ex"><br>
-<br>
-On 7/22/23 00:58, Faith Ekstrand wrote:<br>
-&gt; <br>
+x solid rgb(204,204,204);padding-left:1ex">On 7/22/23 17:12, Faith Ekstrand=
+ wrote:<br>
 &gt; On Wed, Jul 19, 2023 at 7:15=E2=80=AFPM Danilo Krummrich &lt;<a href=
 =3D"mailto:dakr@redhat.com" target=3D"_blank">dakr@redhat.com</a> <br>
 &gt; &lt;mailto:<a href=3D"mailto:dakr@redhat.com" target=3D"_blank">dakr@r=
 edhat.com</a>&gt;&gt; wrote:<br>
 &gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0This commit provides the interfaces for the new UAP=
-I motivated by the<br>
+&gt;=C2=A0 =C2=A0 =C2=A0This commit provides the implementation for the new=
+ uapi motivated<br>
+&gt;=C2=A0 =C2=A0 =C2=A0by the<br>
 &gt;=C2=A0 =C2=A0 =C2=A0Vulkan API. It allows user mode drivers (UMDs) to:<=
 br>
 &gt; <br>
 &gt;=C2=A0 =C2=A0 =C2=A01) Initialize a GPU virtual address (VA) space via =
 the new<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_IOCTL_NOUVEAU_VM_INIT ioctl. UMDs=
- can provide a kernel reserved<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VA area.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_IOCTL_NOUVEAU_VM_INIT ioctl for U=
+MDs to specify the portion<br>
+&gt;=C2=A0 =C2=A0 =C2=A0of VA<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0space managed by the kernel and users=
+pace, respectively.<br>
 &gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A02) Bind and unbind GPU VA space mappings via the ne=
-w<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_IOCTL_NOUVEAU_VM_BIND ioctl.<br>
+&gt;=C2=A0 =C2=A0 =C2=A02) Allocate and free a VA space region as well as b=
+ind and unbind memory<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0to the GPUs VA space via the new DRM_=
+IOCTL_NOUVEAU_VM_BIND ioctl.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0UMDs can request the named operations=
+ to be processed either<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0synchronously or asynchronously. It s=
+upports DRM syncobjs<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(incl. timelines) as synchronization =
+mechanism. The management<br>
+&gt;=C2=A0 =C2=A0 =C2=A0of the<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0GPU VA mappings is implemented with t=
+he DRM GPU VA manager.<br>
 &gt; <br>
 &gt;=C2=A0 =C2=A0 =C2=A03) Execute push buffers with the new DRM_IOCTL_NOUV=
-EAU_EXEC ioctl.<br>
+EAU_EXEC ioctl. The<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0execution happens asynchronously. It =
+supports DRM syncobj (incl.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0timelines) as synchronization mechani=
+sm. DRM GEM object locking is<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0handled with drm_exec.<br>
 &gt; <br>
 &gt;=C2=A0 =C2=A0 =C2=A0Both, DRM_IOCTL_NOUVEAU_VM_BIND and DRM_IOCTL_NOUVE=
-AU_EXEC support<br>
-&gt;=C2=A0 =C2=A0 =C2=A0asynchronous processing with DRM syncobjs as synchr=
-onization mechanism.<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0The default DRM_IOCTL_NOUVEAU_VM_BIND is synchronou=
-s processing,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0DRM_IOCTL_NOUVEAU_EXEC supports asynchronous proces=
-sing only.<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0Co-authored-by: Dave Airlie &lt;<a href=3D"mailto:a=
-irlied@redhat.com" target=3D"_blank">airlied@redhat.com</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;mailto:<a href=3D"mailto:airlied@redhat.com" ta=
-rget=3D"_blank">airlied@redhat.com</a>&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0Signed-off-by: Danilo Krummrich &lt;<a href=3D"mail=
-to:dakr@redhat.com" target=3D"_blank">dakr@redhat.com</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;mailto:<a href=3D"mailto:dakr@redhat.com" targe=
-t=3D"_blank">dakr@redhat.com</a>&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0---<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0Documentation/gpu/driver-uapi.rst |=C2=A0 =
-=C2=A08 ++<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0include/uapi/drm/nouveau_drm.h=C2=A0 =C2=A0 =
-| 209 ++++++++++++++++++++++++++++++<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A02 files changed, 217 insertions(+)<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0diff --git a/Documentation/gpu/driver-uapi.rst<br>
-&gt;=C2=A0 =C2=A0 =C2=A0b/Documentation/gpu/driver-uapi.rst<br>
-&gt;=C2=A0 =C2=A0 =C2=A0index 4411e6919a3d..9c7ca6e33a68 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0--- a/Documentation/gpu/driver-uapi.rst<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+++ b/Documentation/gpu/driver-uapi.rst<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -6,3 +6,11 @@ drm/i915 uAPI<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0.. kernel-doc:: include/uapi/drm/i915_drm.h<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+drm/nouveau uAPI<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+VM_BIND / EXEC uAPI<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+-------------------<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+.. kernel-doc:: include/uapi/drm/nouveau_drm.h<br>
-&gt;=C2=A0 =C2=A0 =C2=A0diff --git a/include/uapi/drm/nouveau_drm.h<br>
-&gt;=C2=A0 =C2=A0 =C2=A0b/include/uapi/drm/nouveau_drm.h<br>
-&gt;=C2=A0 =C2=A0 =C2=A0index 853a327433d3..4d3a70529637 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0--- a/include/uapi/drm/nouveau_drm.h<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+++ b/include/uapi/drm/nouveau_drm.h<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -126,6 +126,209 @@ struct drm_nouveau_gem_cpu_fi=
-ni {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 __u32 handle;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0};<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0+/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * struct drm_nouveau_sync - sync object<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ *<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * This structure serves as synchronization mechan=
-ism for (potentially)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * asynchronous operations such as EXEC or VM_BIND=
-.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+struct drm_nouveau_sync {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @flags: the flags fo=
-r a sync object<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 *<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * The first 8 bits are=
- used to determine the type of the<br>
-&gt;=C2=A0 =C2=A0 =C2=A0sync object.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 flags;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#define DRM_NOUVEAU_SYNC_SYNCOBJ 0x0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#define DRM_NOUVEAU_SYNC_TIMELINE_SYNCOBJ 0x1<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#define DRM_NOUVEAU_SYNC_TYPE_MASK 0xf<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @handle: the handle =
-of the sync object<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 handle;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @timeline_value:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 *<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * The timeline point o=
-f the sync object in case the syncobj<br>
-&gt;=C2=A0 =C2=A0 =C2=A0is of<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * type DRM_NOUVEAU_SYN=
-C_TIMELINE_SYNCOBJ.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 timeline_value;<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0+};<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * struct drm_nouveau_vm_init - GPU VA space init =
-structure<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ *<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * Used to initialize the GPU&#39;s VA space for a=
- user client, telling<br>
-&gt;=C2=A0 =C2=A0 =C2=A0the kernel<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * which portion of the VA space is managed by the=
- UMD and kernel<br>
-&gt;=C2=A0 =C2=A0 =C2=A0respectively.<br>
+AU_EXEC, use the DRM<br>
+&gt;=C2=A0 =C2=A0 =C2=A0GPU scheduler for the asynchronous paths.<br>
 &gt; <br>
 &gt; <br>
-&gt; I assume this has to be called quite early. Like maybe before any BOs =
-or <br>
-&gt; channels are created? In any case, it&#39;d be nice to have that docum=
-ented.<br>
-<br>
-Exactly, doing any of those will disable the new uAPI entirely if it <br>
-wasn&#39;t yet initialized. I will add some documentation for this.<br></bl=
-ockquote><div><br></div><div>Thanks!<br></div><div>=C2=A0</div><blockquote =
-class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
-id rgb(204,204,204);padding-left:1ex">
+&gt; IDK where the best place to talk about this is but this seems as good =
+as <br>
+&gt; any.<br>
 &gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+struct drm_nouveau_vm_init {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @unmanaged_addr: sta=
-rt address of the kernel managed VA<br>
-&gt;=C2=A0 =C2=A0 =C2=A0space region<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 unmanaged_addr;<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @unmanaged_size: siz=
-e of the kernel managed VA space<br>
-&gt;=C2=A0 =C2=A0 =C2=A0region in bytes<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 unmanaged_size;<b=
+&gt; I&#39;ve been looking into why the Vulkan CTS runs about 2x slower for=
+ me on <br>
+&gt; the new UAPI and I created a little benchmark to facilitate testing:<b=
 r>
 &gt; <br>
+&gt; <a href=3D"https://gitlab.freedesktop.org/mesa/crucible/-/merge_reques=
+ts/141" rel=3D"noreferrer" target=3D"_blank">https://gitlab.freedesktop.org=
+/mesa/crucible/-/merge_requests/141</a> <br>
+&gt; &lt;<a href=3D"https://gitlab.freedesktop.org/mesa/crucible/-/merge_re=
+quests/141" rel=3D"noreferrer" target=3D"_blank">https://gitlab.freedesktop=
+.org/mesa/crucible/-/merge_requests/141</a>&gt;<br>
 &gt; <br>
-&gt; Over-all, I think this is the right API. My only concern is with the <=
-br>
-&gt; word &quot;unmanaged&quot;. None of the VA space is unmanaged. Some is=
+&gt; The test, roughly, does the following:<br>
+&gt;=C2=A0 =C2=A01. Allocates and binds 1000 BOs<br>
+&gt;=C2=A0 =C2=A02. Constructs a pushbuf that executes a no-op compute shad=
+er.<br>
+&gt;=C2=A0 =C2=A03. Does a single EXEC/wait combo to warm up the kernel<br>
+&gt;=C2=A0 =C2=A04. Loops 10,000 times, doing SYNCOBJ_RESET (fast), EXEC, a=
+nd then <br>
+&gt; SYNCOBJ_WAIT and times the loop<br>
+&gt; <br>
+&gt; Of course, there&#39;s a bit of userspace driver overhead but that&#39=
+;s <br>
+&gt; negledgable.<br>
+&gt; <br>
+&gt; If you drop the top patch which allocates 1k buffers, the submit time =
+on <br>
+&gt; the old uAPI is 54 us/exec vs. 66 us/exec on the new UAPI. This includ=
+es <br>
+&gt; the time to do a SYNCOBJ_RESET (fast), EXEC, and SYNCOBJ_WAIT.The Inte=
+l <br>
+&gt; driver, by comparison, is 33us/exec so it&#39;s not syncobj overhead. =
+This <br>
+&gt; is a bit concerning (you&#39;d think the new thing would be faster) bu=
+t what <br>
+&gt; really has me concerned is the 1k buffer case.<br>
+&gt; <br>
+&gt; If you include the top patch in the crucible MR, it allocates 1000 BOs=
  <br>
-&gt; userspace-managed and some is kernel-managed.=C2=A0 I guess &quot;unma=
-naged&quot; kinda <br>
-&gt; makes sense because this is coming from userspace and it&#39;s saying =
-which <br>
-&gt; bits it manages and which bits it doesn&#39;t.=C2=A0 Still seems clunk=
-y to me.=C2=A0 <br>
-&gt; Maybe kernel_managed? IDK, that feels weird too. Since we&#39;re alrea=
-dy <br>
-&gt; using UMD in this file, we could call it kmd_managed. IDK. =F0=9F=A4=
-=B7=F0=9F=8F=BB=E2=80=8D=E2=99=80=EF=B8=8F<br>
+&gt; and VM_BINDs them. All the binding is done before the warmup EXEC. <br=
+>
+&gt; Suddenly, the submit time jumps to 257 us/exec with the new UAPI. The =
 <br>
-kernel_managed / kmd_managed both sounds fine to me. I&#39;m good with <br>
-either one.<br></blockquote><div><br></div><div>Let&#39;s go with kernel_ma=
-naged then, unless anyone objects.<br></div><div>=C2=A0</div><blockquote cl=
-ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
- rgb(204,204,204);padding-left:1ex">
+&gt; old UAPI is much worse (1134 us/exec) but that&#39;s not the point. On=
+ce <br>
+&gt; we&#39;ve done the first EXEC and created our VM bindings, the cost pe=
+r EXEC <br>
+&gt; shouldn&#39;t change at all based on the number of BOs bound.=C2=A0 Pa=
+rt of the <br>
+&gt; point of VM_BIND is to get all that binding logic and BO walking off t=
+he <br>
+&gt; EXEC path.<br>
 &gt; <br>
-&gt; Yeah, I know this is a total bikeshed color thing and I&#39;m not goin=
-g to <br>
-&gt; block anything based on it. =F0=9F=98=85 Just wanted to see if we can =
-come up with <br>
-&gt; anything better.=C2=A0 It&#39;s documented and that&#39;s the importan=
-t thing.<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0+};<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * struct drm_nouveau_vm_bind_op - VM_BIND operati=
-on<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ *<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * This structure represents a single VM_BIND oper=
-ation. UMDs<br>
-&gt;=C2=A0 =C2=A0 =C2=A0should pass<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * an array of this structure via struct drm_nouve=
-au_vm_bind&#39;s<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&amp;op_ptr field.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+struct drm_nouveau_vm_bind_op {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @op: the operation t=
-ype<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 op;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * @DRM_NOUVEAU_VM_BIND_OP_MAP:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ *<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * Map a GEM object to the GPU&#39;s VA space. Opt=
-ionally, the<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * &amp;DRM_NOUVEAU_VM_BIND_SPARSE flag can be pas=
-sed to instruct the<br>
-&gt;=C2=A0 =C2=A0 =C2=A0kernel to<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * create sparse mappings for the given range.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#define DRM_NOUVEAU_VM_BIND_OP_MAP 0x0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * @DRM_NOUVEAU_VM_BIND_OP_UNMAP:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ *<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * Unmap an existing mapping in the GPU&#39;s VA s=
-pace. If the region<br>
-&gt;=C2=A0 =C2=A0 =C2=A0the mapping<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * is located in is a sparse region, new sparse ma=
-ppings are<br>
-&gt;=C2=A0 =C2=A0 =C2=A0created where the<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * unmapped (memory backed) mapping was mapped pre=
-viously. To<br>
-&gt;=C2=A0 =C2=A0 =C2=A0remove a sparse<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * region the &amp;DRM_NOUVEAU_VM_BIND_SPARSE must=
- be set.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#define DRM_NOUVEAU_VM_BIND_OP_UNMAP 0x1<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @flags: the flags fo=
-r a &amp;drm_nouveau_vm_bind_op<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 flags;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * @DRM_NOUVEAU_VM_BIND_SPARSE:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ *<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * Indicates that an allocated VA space region sho=
-uld be sparse.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#define DRM_NOUVEAU_VM_BIND_SPARSE (1 &lt;&lt; 8)<=
+&gt; Normally, I wouldn&#39;t be too worried about a little performance pro=
+blem <br>
+&gt; like this. This is the first implementation and we can improve it late=
+r. <br>
+&gt; I get that. However, I suspect the solution to this problem involves <=
 br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @handle: the handle =
-of the DRM GEM object to map<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 handle;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @pad: 32 bit padding=
-, should be 0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 pad;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @addr:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 *<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * the address the VA s=
-pace region or (memory backed)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0mapping should be mapped to<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 addr;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @bo_offset: the offs=
-et within the BO backing the mapping<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 bo_offset;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @range: the size of =
-the requested mapping in bytes<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 range;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+};<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * struct drm_nouveau_vm_bind - structure for DRM_=
-IOCTL_NOUVEAU_VM_BIND<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+struct drm_nouveau_vm_bind {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @op_count: the numbe=
-r of &amp;drm_nouveau_vm_bind_op<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 op_count;<br>
+&gt; more UAPI and I want to make sure we have it all before we call this a=
+ll <br>
+&gt; done and dusted and land it.<br>
 &gt; <br>
+&gt; The way AMD solves this problem as well as the new Xe driver for Intel=
+ <br>
+&gt; is to have a concept of internal vs. external BOs. Basically, there&#3=
+9;s an <br>
+&gt; INTERNAL bit specified somewhere in BO creation that has a few userspa=
+ce <br>
+&gt; implications:<br>
+&gt;=C2=A0 =C2=A01. In the Xe world where VMs are objects, INTERNAL BOs are=
+ assigned a <br>
+&gt; VM on creation and can never be bound to any other VM.<br>
+&gt;=C2=A0 =C2=A02. Any attempt to export an INTERNAL BO via prime or a sim=
+ilar <br>
+&gt; mechanism will fail with -EINVAL (I think?).<br>
 &gt; <br>
-&gt; I&#39;ve chatted a bit with Dave on IRC about this but both VM_BIND an=
-d EXEC <br>
-&gt; should support `op_count =3D=3D 0` and do exactly the same thing that =
-they <br>
-&gt; would do if there were real ops. In the case of vm_bind, that just mea=
-ns <br>
-&gt; wait on the waits and then signal the signals. In particular, it shoul=
+&gt; Inside the kernel driver, all the internal BOs on a VM (or DRM file in=
+ <br>
+&gt; the case of nouveau/AMD since they don&#39;t have VM objects) share a =
+single <br>
+&gt; dma_resv which allows you to avoid having to walk lists of BOs and tak=
+e <br>
+&gt; locks on every exec. Instead, you can just look at the fences on the <=
+br>
+&gt; dma_resv for the VM. There&#39;s still a BO list associated with the V=
+M for <br>
+&gt; external BOs but, in most Vulkan applications, there are less than a <=
+br>
+&gt; half dozen external BOs total.=C2=A0 Meanwhile, the hundreds or thousa=
+nds of <br>
+&gt; BOs used entirely internally to the application basically count as one=
+ <br>
+&gt; BO when it comes to locking overhead.<br>
+<br>
+I am aware of that and I have some WIP patches [1] to generalize a <br>
+common dma-resv within the GPUVA manager which basically represents a <br>
+GPU-VM. It also keeps track of external GEM objects and evicted objects, <b=
+r>
+such that on EXEC we only need to validate objects needing validation, <br>
+rather than all of them. Hence, it should be faster than with Daves <br>
+patch having a common dma-resv only.<br>
+<br>
+In [1] I also picked up Daves code to allow for noop jobs to be <br>
+submitted as well as the NOUVEAU_GEM_DOMAIN_NO_SHARE flag.<br>
+<br>
+This seems to work fine with yours and Daves latest mesa work <br>
+(670c301a9845a3fc795fd48a1e6714e75b388245).<br>
+<br>
+Your crucible bench.submit-latency test goes down to 51us on my machine <br=
+>
+with those patches.<br>
+<br>
+I am unsure though, if we should aim for a common solution within the <br>
+GPUVA manager directly or if we should do it driver specific in a first <br=
+>
+shot. I discussed this patch with Matt and I know that XE looks for <br>
+having a generalized solution as well. However, it surely needs some <br>
+more care and polish and feedback from other drivers perspective.<br>
+<br>
+[1] <br>
+<a href=3D"https://gitlab.freedesktop.org/nouvelles/kernel/-/tree/new-uapi-=
+drm-next-vm-resv" rel=3D"noreferrer" target=3D"_blank">https://gitlab.freed=
+esktop.org/nouvelles/kernel/-/tree/new-uapi-drm-next-vm-resv</a><br>
+<br>
+&gt; <br>
+&gt; I&#39;m not actually trying to dictate kernel driver design here. If o=
+ne <br>
+&gt; dma_resv doesn&#39;t work, fine. I don&#39;t care as long as EXEC scal=
+es. <br>
+&gt; However, given that the solution in all the other drivers involves a B=
+O <br>
+&gt; create flag nouveau doesn&#39;t have, we need to either add that or pr=
+ove <br>
+&gt; that we can get EXEC to scale without it.<br>
+<br>
+=C2=A0From #nouveau:<br>
+<br>
+&lt;gfxstrand&gt; CTSing now<br>
+&lt;gfxstrand&gt; It looks like it&#39;s still going to take 1.5 hours.<br>
+<br>
+I may have an idea what could be the issue, let me explain.<br>
+<br>
+Currently, there is a single drm_gpu_scheduler having a drm_sched_entity <b=
+r>
+per client (for VM_BIND jobs) and a drm_sched_entity per channel (for <br>
+EXEC jobs).<br>
+<br>
+For VM_BIND jobs the corresponding PT[E]s are allocated before the job <br>
+is pushed to the corresponding drm_sched_entity. The PT[E]s are freed by <b=
+r>
+the schedulers free() callback pushing work to a single threaded <br>
+workqueue doing the actual free. (We can&#39;t do it in the free() callback=
+ <br>
+directly, since to free PT[E]s we need to hold a mutex we also need to <br>
+hold while allocating them.)<br>
+<br>
+Because of how the page table handling in Nouveau is implemented <br>
+currently there are some ordering restrictions when it comes to <br>
+allocating and freeing PT[E]s. For instance, we can&#39;t allocate PT[E]s <=
+br>
+for sparse regions before the PT[E]s of previously removed memory backed <b=
+r>
+mappings *within the same address range* aren&#39;t freed. The same applies=
+ <br>
+vice versa and for sparse mapping replacing sparse mapping. For memory <br>
+backed mappings (also for those within sparse regions) we do *not* have <br=
+>
+such ordering requirements.<br>
+<br>
+So, let&#39;s assume userspace removes a sparse region A[0x0, 0x8000000] an=
 d <br>
-&gt; NOT just return success and do nothing. Dave has a patch for this for =
+asks for a couple of new memory backed mappings within or crossing this <br=
+>
+range; the kernel needs to wait for A not only to be unmapped, but also <br=
+>
+the backing PT[E]s to be freed before it can even allocate the PT[E]s <br>
+for the new memory backed mappings.<br>
 <br>
-&gt; EXEC but IDK if VM_BIND needs any attention.=C2=A0 Of course, if it&#3=
-9;s not <br>
-&gt; ASYNC, then quickly doing nothing after validating inputs is acceptabl=
-e.<br>
+Now, let&#39;s have a look what the gpu schedulers main loop does. Before <=
+br>
+picking the next entity to schedule a job for, it tries to fetch the <br>
+first job from the pending_list and checks whether its dma-fence is <br>
+signaled already and whether the job can be cleaned up. Subsequent jobs <br=
+>
+on the pending_list are not taken into consideration. Hence, it might <br>
+well be that the first job on the pending_list isn&#39;t signaled yet, but =
 <br>
-What will this be used for? I guess it would not be important to be <br>
-executed in order with &quot;regular&quot; (non-noop) jobs? Because the onl=
-y thing <br>
-this would tell you is that e.g. for VM_BIND all previous binds <br>
-completed, which is what we have syncobjs for.<br></blockquote><div><br></d=
-iv><div>Yes, exactly that. Effectively, it allows you to add more signal ob=
-jects to the last submitted job after the fact. Vulkan allows submits with =
-zero command buffers and they have to behave the same as submits that actua=
-lly do work. We also use this internally in Mesa to implement things like `=
-vkQueueWaitForIdle`. (It&#39;s actually a little more subtle than that beca=
-use the new signals will also wait on any waits in the zero-size exec.)<br>=
-</div><div><br></div><div>The standard driver work-around for this which Me=
-sa Vulkan drivers carry is to have a no-op pushbuf that you stash somewhere=
-. Whenever command_buffer_count =3D=3D 0, you submit that one instead to tr=
-ick the kernel into thinking it&#39;s doing work. Since we&#39;re building =
-a new UAPI, though, we may as well just support this corner case directly i=
-n the kernel driver.</div><div><br></div><div>~Faith<br></div><div>=C2=A0</=
-div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
-der-left:1px solid rgb(204,204,204);padding-left:1ex">
+subsequent jobs are and hence *could* be cleaned up.<br>
+<br>
+Normally, this shouldn&#39;t be a problem, since we wouldn&#39;t really car=
+e <br>
+*when* resources are cleaned up as long as they are eventually. However, <b=
+r>
+with the ordering restrictions the page table handling gives us we might <b=
+r>
+actually care about the &quot;when&quot;.<br>
+<br>
+For instance, it could happen that the first job on the pending list is <br=
+>
+a rather long running EXEC job (1) scheduled from client A on some <br>
+channel. The next job on the pending list could be a VM_BIND job (2) <br>
+from client B removing a sparse region, which is finished already but is <b=
+r>
+blocked to be cleaned up until the EXEC job (1) from client A is <br>
+finished and cleaned up. Now, a subsequent VM_BIND job (3) from client B <b=
+r>
+creating a new memory backed mapping in the same address range as the <br>
+sparse region removed by job (2) would need to wait for (2) to be <br>
+cleaned up. Ultimately, we can expect client B to submit an EXEC job <br>
+that needs to wait for the corresponding mappings to be created, namely <br=
+>
+the VM_BIND job (3).<br>
+<br>
+Clearly in order to address this we need to rework the page table <br>
+handling in Nouveau to get rid of those ordering restrictions.<br>
+<br>
+Temporarily, we could also try to run a secondary drm_gpu_scheduler <br>
+instance, one for VM_BINDs and one for EXECs maybe...<br>
+<br>
+However, I would not expect this to be an issue in real applications, <br>
+especially if mesa takes a little care not to re-use certain address <br>
+space areas right away to avoid running into such wait conditions.<br>
+<br>
+For parallel VK CTS runs I could imagine that we run into such cases <br>
+from time to time though.<br></blockquote><div><br></div><div>Thanks for th=
+e detailed write-up! That would definitely explain it. If I remember, I&#39=
+;ll try to do a single-threaded run or two. If your theory is correct, ther=
+e should be no real perf difference when running single-threaded. Those run=
+s will take a long time, though, so I&#39;ll have to run them over night. I=
+&#39;ll let you know in a few days once I have the results.</div><div><br><=
+/div><div>If this theory holds, then I&#39;m not concerned about the perfor=
+mance of the API itself. It would still be good to see if we can find a way=
+ to reduce the cross-process drag in the implementation but that&#39;s a pe=
+rf optimization we can do later.</div><div><br></div><div>Does it actually =
+matter? Yes, it kinda does. No, it probably doesn&#39;t matter for games be=
+cause you&#39;re typically only running one game at a time. From a developm=
+ent PoV, however, if it makes CI take longer then that slows down developme=
+nt and that&#39;s not good for the users, either.</div><div><br></div><div>=
+~Faith<br></div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D=
+"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
+ft:1ex">
 - Danilo<br>
 <br>
 &gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @flags: the flags fo=
-r a &amp;drm_nouveau_vm_bind ioctl<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 flags;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * @DRM_NOUVEAU_VM_BIND_RUN_ASYNC:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ *<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * Indicates that the given VM_BIND operation shou=
-ld be executed<br>
-&gt;=C2=A0 =C2=A0 =C2=A0asynchronously<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * by the kernel.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ *<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * If this flag is not supplied the kernel execute=
-s the associated<br>
-&gt;=C2=A0 =C2=A0 =C2=A0operations<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * synchronously and doesn&#39;t accept any &amp;d=
-rm_nouveau_sync objects.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#define DRM_NOUVEAU_VM_BIND_RUN_ASYNC 0x1<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @wait_count: the num=
-ber of wait &amp;drm_nouveau_syncs<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 wait_count;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @sig_count: the numb=
-er of &amp;drm_nouveau_syncs to signal<br>
-&gt;=C2=A0 =C2=A0 =C2=A0when finished<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 sig_count;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @wait_ptr: pointer t=
-o &amp;drm_nouveau_syncs to wait for<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 wait_ptr;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @sig_ptr: pointer to=
- &amp;drm_nouveau_syncs to signal when<br>
-&gt;=C2=A0 =C2=A0 =C2=A0finished<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 sig_ptr;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @op_ptr: pointer to =
-the &amp;drm_nouveau_vm_bind_ops to execute<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 op_ptr;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+};<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * struct drm_nouveau_exec_push - EXEC push operat=
-ion<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ *<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * This structure represents a single EXEC push op=
-eration. UMDs<br>
-&gt;=C2=A0 =C2=A0 =C2=A0should pass an<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * array of this structure via struct drm_nouveau_=
-exec&#39;s &amp;push_ptr<br>
-&gt;=C2=A0 =C2=A0 =C2=A0field.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+struct drm_nouveau_exec_push {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @va: the virtual add=
-ress of the push buffer mapping<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 va;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @va_len: the length =
-of the push buffer mapping<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 va_len;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+};<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ * struct drm_nouveau_exec - structure for DRM_IOC=
-TL_NOUVEAU_EXEC<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+struct drm_nouveau_exec {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @channel: the channe=
-l to execute the push buffer in<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 channel;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @push_count: the num=
-ber of &amp;drm_nouveau_exec_push ops<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 push_count;<br>
-&gt; <br>
-&gt; <br>
-&gt; Same comment as above. We want `push_count =3D=3D 0` to behave the sam=
-e as <br>
-&gt; any other EXEC just without anything new. In particular, it needs to <=
-br>
-&gt; wait on all the waits as well as the previous EXECs on that channel an=
-d <br>
-&gt; then signal the sigs. I know Dave has a patch for this and it&#39;s wo=
-rking <br>
-&gt; quite well in my testing.<br>
-&gt; <br>
-&gt; Other than that, everything looks good.=C2=A0 I&#39;m still re-reading=
- all the <br>
-&gt; NVK patches but they&#39;ve been working quite well in my testing this=
- week <br>
-&gt; apart from a perf issue I need to dig into. I&#39;ll give a real RB on=
-ce <br>
-&gt; we&#39;re sure we all agree on the semantics of _count.<br>
-&gt; <br>
 &gt; ~Faith<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @wait_count: the num=
-ber of wait &amp;drm_nouveau_syncs<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 wait_count;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @sig_count: the numb=
-er of &amp;drm_nouveau_syncs to signal<br>
-&gt;=C2=A0 =C2=A0 =C2=A0when finished<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u32 sig_count;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @wait_ptr: pointer t=
-o &amp;drm_nouveau_syncs to wait for<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 wait_ptr;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @sig_ptr: pointer to=
- &amp;drm_nouveau_syncs to signal when<br>
-&gt;=C2=A0 =C2=A0 =C2=A0finished<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 sig_ptr;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0/**<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * @push_ptr: pointer t=
-o &amp;drm_nouveau_exec_push ops<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0__u64 push_ptr;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+};<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0#define DRM_NOUVEAU_GETPARAM=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A00x00 /* deprecated */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0#define DRM_NOUVEAU_SETPARAM=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A00x01 /* deprecated */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0#define DRM_NOUVEAU_CHANNEL_ALLOC=C2=A0 =C2=
-=A0 =C2=A0 0x02 /* deprecated */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -136,6 +339,9 @@ struct drm_nouveau_gem_cpu_fini=
- {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0#define DRM_NOUVEAU_NVIF=C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x07<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0#define DRM_NOUVEAU_SVM_INIT=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A00x08<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0#define DRM_NOUVEAU_SVM_BIND=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A00x09<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#define DRM_NOUVEAU_VM_INIT=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 0x10<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#define DRM_NOUVEAU_VM_BIND=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 0x11<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#define DRM_NOUVEAU_EXEC=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x12<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0#define DRM_NOUVEAU_GEM_NEW=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0x40<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0#define DRM_NOUVEAU_GEM_PUSHBUF=C2=A0 =C2=A0=
- =C2=A0 =C2=A0 0x41<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0#define DRM_NOUVEAU_GEM_CPU_PREP=C2=A0 =C2=
-=A0 =C2=A0 =C2=A00x42<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -197,6 +403,9 @@ struct drm_nouveau_svm_bind {<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0#define DRM_IOCTL_NOUVEAU_GEM_CPU_FINI=C2=A0=
- =C2=A0 =C2=A0 =C2=A0DRM_IOW<br>
-&gt;=C2=A0 =C2=A0 =C2=A0(DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_CPU_FINI, struc=
-t<br>
-&gt;=C2=A0 =C2=A0 =C2=A0drm_nouveau_gem_cpu_fini)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0#define DRM_IOCTL_NOUVEAU_GEM_INFO=C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_=
-INFO, struct<br>
-&gt;=C2=A0 =C2=A0 =C2=A0drm_nouveau_gem_info)<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#define DRM_IOCTL_NOUVEAU_VM_INIT=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_VM_INIT, st=
-ruct<br>
-&gt;=C2=A0 =C2=A0 =C2=A0drm_nouveau_vm_init)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#define DRM_IOCTL_NOUVEAU_VM_BIND=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_VM_BIND, st=
-ruct<br>
-&gt;=C2=A0 =C2=A0 =C2=A0drm_nouveau_vm_bind)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#define DRM_IOCTL_NOUVEAU_EXEC=C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_EXEC=
-, struct drm_nouveau_exec)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0#if defined(__cplusplus)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0#endif<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-- <br>
-&gt;=C2=A0 =C2=A0 =C2=A02.41.0<br>
 &gt; <br>
 <br>
 </blockquote></div></div>
 
---000000000000b748bb06015194cc--
+--0000000000006736190601520d5c--
