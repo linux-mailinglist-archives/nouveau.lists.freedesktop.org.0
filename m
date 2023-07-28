@@ -1,74 +1,49 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65913766997
-	for <lists+nouveau@lfdr.de>; Fri, 28 Jul 2023 12:00:06 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B7D4F766BB6
+	for <lists+nouveau@lfdr.de>; Fri, 28 Jul 2023 13:31:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E948210E6D2;
-	Fri, 28 Jul 2023 10:00:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2A21210E1F1;
+	Fri, 28 Jul 2023 11:31:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B467C10E6D2
- for <nouveau@lists.freedesktop.org>; Fri, 28 Jul 2023 09:59:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1690538398;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=64cwbX0RqK2VCO/K9nDSDwV09g6WKDYXzEmbeoTby84=;
- b=YT7gJHZYlnEJnlQJT89Bm5H9L3NR972nuLv7jHSbLUHKL66xJnnKxb23VB1wuUNZok1hTE
- NYZOffpFlw5pPGTzepleN2nKVb2N7enJ5tkwC91weLvfcPn6rhvpTuNYqe/5zLqlJIWIyu
- CKaAX/Jl48IbJnpDqsWCxn4pH92F8xk=
-Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
- [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-213-js8PwF1dOFeyEQc2c-G39w-1; Fri, 28 Jul 2023 05:59:54 -0400
-X-MC-Unique: js8PwF1dOFeyEQc2c-G39w-1
-Received: by mail-lj1-f198.google.com with SMTP id
- 38308e7fff4ca-2a7a6393ba6so4049161fa.1
- for <nouveau@lists.freedesktop.org>; Fri, 28 Jul 2023 02:59:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690538393; x=1691143193;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=64cwbX0RqK2VCO/K9nDSDwV09g6WKDYXzEmbeoTby84=;
- b=UJ4BpDkTVk/EhJmK0jeV0nsBXMxtaT1pjU5rPGT2l3/MHsf/wjESPdX2RwzoiArB1U
- /t+ZgEXaV9p1PaFLItrVabAw/H9+XXi3KZfZS9ivgxBp/7Z7+xlhjSPMC4WmeBu/HMwD
- l2yRBg5eXp/6eKQCFS3H+eEfAn8V9VKAMradPcsEUq2bRI2B1p+ZcO1VmG17xgVw4Nj3
- O+yEY8Jk0JYFm1Blci6a+J5+1BlbUT1bpIF/ofLdfBpvBnn0zZXGjFjYEEGhFSK2QQC5
- QuaNTtepRqIISXhU3V9xC2m/5WnF2tEpnOLaWSmZImkhZCOKihVYyP/9SCiDRrOv5Osy
- EZHg==
-X-Gm-Message-State: ABy/qLZc0pMmnXuA2mT5bpE4W2z9H6LOqKNk87Odggu5MfHcrRZ0Vodp
- 3DZfh+N0DUW6/H2bfNLN8Cml3t/BESeZYwYdF4fMkvAXp0e2tGmHJZCqdqUjOXxjPwaRwGQd45J
- c3LU8bgxDZhtQ1zMgSW4IhaIAiTSjvSCNhh5/obWQ7w==
-X-Received: by 2002:a2e:501c:0:b0:2b6:af68:6803 with SMTP id
- e28-20020a2e501c000000b002b6af686803mr705819ljb.4.1690538393209; 
- Fri, 28 Jul 2023 02:59:53 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlFAIXcAWMCt7sf6hNC3aFwCm0EH6PL4GAUcsvLw8voE2q9DUMDvV3f/2rOa2DVWhU8XcDIjRJl86zmb1WZ6ujo=
-X-Received: by 2002:a2e:501c:0:b0:2b6:af68:6803 with SMTP id
- e28-20020a2e501c000000b002b6af686803mr705816ljb.4.1690538392874; Fri, 28 Jul
- 2023 02:59:52 -0700 (PDT)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3AB6410E1EE;
+ Fri, 28 Jul 2023 11:31:40 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 908FA620F6;
+ Fri, 28 Jul 2023 11:31:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C216C433C8;
+ Fri, 28 Jul 2023 11:31:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1690543899;
+ bh=mQamHmOgyjxhff4tf13gl/WJXm01xBH8XpNyYc9u4CU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=oEq86SlctDT6n2xRRfUW6BXg07k0GOYkhjEmq11FHtLbCgAdef74cw05oPdwlJMxM
+ nMFKaz3L5nKPQEiU/c9j4ostFrLN6rWdsaFn+Tg3bcNhTzdRyFcDzEzmeXulEYunm8
+ GZxgykpDgWSNe+PLNwW8xOiTCxWwSoyBE9/aq9OSJj9/cN5dI5yKh35KUDbqp9nCSp
+ FzD7ww99o97k5yFbC619m7SskfC2XbDCZTgPthSqUSdVLHsGGeU5z3WFzvqKDea9iO
+ tYBWjY4vjuS0WJO0oninAReyBrrpmped45vPoIZgt+kFoOBDqZ+vIQcKAb6xbCaxE0
+ tPf0W4jFPJCmA==
+Date: Fri, 28 Jul 2023 13:31:36 +0200
+From: Maxime Ripard <mripard@kernel.org>
+To: Danilo Krummrich <dakr@redhat.com>
+Message-ID: <hi5magp4icayy5dxmylfyxws52cu63jvlhu4yj5xem3acoaylk@msf7zthcr3lg>
+References: <20230720001443.2380-1-dakr@redhat.com>
+ <20230720001443.2380-2-dakr@redhat.com>
 MIME-Version: 1.0
-References: <20230707215851.590754-1-lyude@redhat.com>
- <CACO55tvfTDu8XcKowWXcSRqp8OMLb8Q4jnPG_Fn5y=yJy-Dqbw@mail.gmail.com>
- <badef3d33469d97b01a42da520ad22ae4c9485fe.camel@redhat.com>
- <CACO55ttVgw=uuG1i9bNOi5hh-0Xi+WhcR4eL_TQOzjzUKGX1rw@mail.gmail.com>
-In-Reply-To: <CACO55ttVgw=uuG1i9bNOi5hh-0Xi+WhcR4eL_TQOzjzUKGX1rw@mail.gmail.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Fri, 28 Jul 2023 11:59:41 +0200
-Message-ID: <CACO55tt=Hr0RWhVEJeffMFxwvLuNmB38dUz2ZB1zWf5cNpXYKQ@mail.gmail.com>
-To: Lyude Paul <lyude@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/nvkm/dp: Add hack to fix DP 1.3+
- DPCD issues
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3n5o5ss2bit7ecey"
+Content-Disposition: inline
+In-Reply-To: <20230720001443.2380-2-dakr@redhat.com>
+Subject: Re: [Nouveau] [PATCH drm-misc-next v8 01/12] drm: manager to keep
+ track of GPUs VA mappings
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,171 +55,133 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, open list <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>
+Cc: matthew.brost@intel.com,
+ Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ willy@infradead.org, daniel@ffwll.ch, dri-devel@lists.freedesktop.org,
+ corbet@lwn.net, nouveau@lists.freedesktop.org, ogabbay@kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Liam.Howlett@oracle.com, boris.brezillon@collabora.com, bskeggs@redhat.com,
+ alexdeucher@gmail.com, Dave Airlie <airlied@redhat.com>, bagasdotme@gmail.com,
+ christian.koenig@amd.com, jason@jlekstrand.net, donald.robson@imgtec.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jul 28, 2023 at 1:11=E2=80=AFAM Karol Herbst <kherbst@redhat.com> w=
-rote:
->
-> On Thu, Jul 27, 2023 at 11:57=E2=80=AFPM Lyude Paul <lyude@redhat.com> wr=
-ote:
-> >
-> > On Sun, 2023-07-09 at 01:42 +0200, Karol Herbst wrote:
-> > > On Fri, Jul 7, 2023 at 11:58=E2=80=AFPM Lyude Paul <lyude@redhat.com>=
- wrote:
-> > > >
-> > > > Currently we use the drm_dp_dpcd_read_caps() helper in the DRM side=
- of
-> > > > nouveau in order to read the DPCD of a DP connector, which makes su=
-re we do
-> > > > the right thing and also check for extended DPCD caps. However, it =
-turns
-> > > > out we're not currently doing this on the nvkm side since we don't =
-have
-> > > > access to the drm_dp_aux structure there - which means that the DRM=
- side of
-> > > > the driver and the NVKM side can end up with different DPCD capabil=
-ities
-> > > > for the same connector.
-> > > >
-> > > > Ideally to fix this, we want to start setting up the drm_dp_aux dev=
-ice in
-> > > > NVKM before we've made contact with the DRM side - which should be =
-pretty
-> > > > easy to accomplish (I'm already working on it!). Until then however=
-, let's
-> > > > workaround this problem by porting a copy of drm_dp_read_dpcd_caps(=
-) into
-> > > > NVKM - which should fix this issue.
-> > > >
-> > > > Issue: https://gitlab.freedesktop.org/drm/nouveau/-/issues/211
-> > >
-> > > Should a Fixes: or Cc: stable tag be added so it gets backported?
-> >
-> > JFYI I think not adding one is fine nowadays? The stable bot seems to b=
-e
-> > pretty good at catching anything with the words fix/fixes in it
-> >
->
-> Yeah not sure.. I'd rather be specific and add it just to be sure.
-> Anyway, it could also be done while pushing. I think the bigger
-> question here was if this fix is good enough for stable or if you plan
-> to rework it.
->
-> > >
-> > > > Signed-off-by: Lyude Paul <lyude@redhat.com>
-> > > > ---
-> > > >  drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c | 48 +++++++++++++++=
-+++-
-> > > >  1 file changed, 47 insertions(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c b/driver=
-s/gpu/drm/nouveau/nvkm/engine/disp/dp.c
-> > > > index 40c8ea43c42f..b8ac66b4a2c4 100644
-> > > > --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
-> > > > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
-> > > > @@ -26,6 +26,8 @@
-> > > >  #include "head.h"
-> > > >  #include "ior.h"
-> > > >
-> > > > +#include <drm/display/drm_dp.h>
-> > > > +
-> > > >  #include <subdev/bios.h>
-> > > >  #include <subdev/bios/init.h>
-> > > >  #include <subdev/gpio.h>
-> > > > @@ -634,6 +636,50 @@ nvkm_dp_enable_supported_link_rates(struct nvk=
-m_outp *outp)
-> > > >         return outp->dp.rates !=3D 0;
-> > > >  }
-> > > >
-> > > > +/* XXX: This is a big fat hack, and this is just drm_dp_read_dpcd_=
-caps()
-> > >
-> > > Well.. maybe we should rephrase that _if_ we want to see it
-> > > backported. But is this code really that bad? It kinda looks
-> > > reasonable enough.
-> > >
-> > > > + * converted to work inside nvkm. This is a temporary holdover unt=
-il we start
-> > > > + * passing the drm_dp_aux device through NVKM
-> > > > + */
-> > > > +static int
-> > > > +nvkm_dp_read_dpcd_caps(struct nvkm_outp *outp)
-> > > > +{
-> > > > +       struct nvkm_i2c_aux *aux =3D outp->dp.aux;
-> > > > +       u8 dpcd_ext[DP_RECEIVER_CAP_SIZE];
-> > > > +       int ret;
-> > > > +
-> > > > +       ret =3D nvkm_rdaux(aux, DPCD_RC00_DPCD_REV, outp->dp.dpcd, =
-DP_RECEIVER_CAP_SIZE);
-> > > > +       if (ret < 0)
-> > > > +               return ret;
-> > > > +
-> > > > +       /*
-> > > > +        * Prior to DP1.3 the bit represented by
-> > > > +        * DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT was reserved.
-> > > > +        * If it is set DP_DPCD_REV at 0000h could be at a value le=
-ss than
-> > > > +        * the true capability of the panel. The only way to check =
-is to
-> > > > +        * then compare 0000h and 2200h.
-> > > > +        */
-> > > > +       if (!(outp->dp.dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
-> > > > +             DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT))
-> > > > +               return 0;
-> > > > +
-> > > > +       ret =3D nvkm_rdaux(aux, DP_DP13_DPCD_REV, dpcd_ext, sizeof(=
-dpcd_ext));
-> > > > +       if (ret < 0)
-> > > > +               return ret;
-> > > > +
-> > > > +       if (outp->dp.dpcd[DP_DPCD_REV] > dpcd_ext[DP_DPCD_REV]) {
-> > > > +               OUTP_DBG(outp, "Extended DPCD rev less than base DP=
-CD rev (%d > %d)\n",
-> > > > +                        outp->dp.dpcd[DP_DPCD_REV], dpcd_ext[DP_DP=
-CD_REV]);
-> > > > +               return 0;
-> > > > +       }
-> > > > +
-> > > > +       if (!memcmp(outp->dp.dpcd, dpcd_ext, sizeof(dpcd_ext)))
-> > > > +               return 0;
-> > > > +
-> > > > +       memcpy(outp->dp.dpcd, dpcd_ext, sizeof(dpcd_ext));
-> > > > +
-> > > > +       return 0;
-> > > > +}
-> > > > +
-> > > >  void
-> > > >  nvkm_dp_enable(struct nvkm_outp *outp, bool auxpwr)
-> > > >  {
-> > > > @@ -689,7 +735,7 @@ nvkm_dp_enable(struct nvkm_outp *outp, bool aux=
-pwr)
-> > > >                         memset(outp->dp.lttpr, 0x00, sizeof(outp->d=
-p.lttpr));
-> > > >                 }
-> > > >
-> > > > -               if (!nvkm_rdaux(aux, DPCD_RC00_DPCD_REV, outp->dp.d=
-pcd, sizeof(outp->dp.dpcd))) {
-> > > > +               if (!nvkm_dp_read_dpcd_caps(outp)) {
-> > > >                         const u8 rates[] =3D { 0x1e, 0x14, 0x0a, 0x=
-06, 0 };
-> > > >                         const u8 *rate;
-> > > >                         int rate_max;
-> > > > --
-> > > > 2.40.1
-> > > >
-> > >
-> >
-> > --
-> > Cheers,
-> >  Lyude Paul (she/her)
-> >  Software Engineer at Red Hat
-> >
 
-before I forget:
+--3n5o5ss2bit7ecey
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Karol Herbst <kherbst@redhat.com>
+Hi Danilo,
 
+On Thu, Jul 20, 2023 at 02:14:22AM +0200, Danilo Krummrich wrote:
+> Add infrastructure to keep track of GPU virtual address (VA) mappings
+> with a decicated VA space manager implementation.
+>=20
+> New UAPIs, motivated by Vulkan sparse memory bindings graphics drivers
+> start implementing, allow userspace applications to request multiple and
+> arbitrary GPU VA mappings of buffer objects. The DRM GPU VA manager is
+> intended to serve the following purposes in this context.
+>=20
+> 1) Provide infrastructure to track GPU VA allocations and mappings,
+>    making using an interval tree (RB-tree).
+>=20
+> 2) Generically connect GPU VA mappings to their backing buffers, in
+>    particular DRM GEM objects.
+>=20
+> 3) Provide a common implementation to perform more complex mapping
+>    operations on the GPU VA space. In particular splitting and merging
+>    of GPU VA mappings, e.g. for intersecting mapping requests or partial
+>    unmap requests.
+>=20
+> Acked-by: Thomas Hellstr=F6m <thomas.hellstrom@linux.intel.com>
+> Acked-by: Matthew Brost <matthew.brost@intel.com>
+> Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
+> Tested-by: Matthew Brost <matthew.brost@intel.com>
+> Tested-by: Donald Robson <donald.robson@imgtec.com>
+> Suggested-by: Dave Airlie <airlied@redhat.com>
+> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+
+For some reason this breaks the drm_exec kunit patches:
+
+
+$ ./tools/testing/kunit/kunit.py run --kunitconfig=3Ddrivers/gpu/drm/tests =
+  --cross_compile aarch64-linux-gnu- --arch arm64 --raw_output drm_exec.tes=
+t_lock
+[13:31:14] Configuring KUnit Kernel ...
+[13:31:14] Building KUnit Kernel ...
+Populating config with:
+$ make ARCH=3Darm64 O=3D.kunit olddefconfig CROSS_COMPILE=3Daarch64-linux-g=
+nu-
+Building with:
+$ make ARCH=3Darm64 O=3D.kunit --jobs=3D32 CROSS_COMPILE=3Daarch64-linux-gn=
+u-
+[13:31:16] Starting KUnit Kernel (1/1)...
+Running tests with:
+$ qemu-system-aarch64 -nodefaults -m 1024 -kernel .kunit/arch/arm64/boot/Im=
+age.gz -append 'kunit.filter_glob=3Ddrm_exec.test_lock kunit.enable=3D1 con=
+sole=3DttyAMA0 kunit_shutdown=3Dreboot' -no-reboot -nographic -serial stdio=
+ -machine virt -cpu cortex-a57
+KTAP version 1
+1..1
+    KTAP version 1
+    # Subtest: drm_exec
+    1..1
+Unable to handle kernel NULL pointer dereference at virtual address 0000000=
+0000000b0
+Mem abort info:
+  ESR =3D 0x0000000096000005
+  EC =3D 0x25: DABT (current EL), IL =3D 32 bits
+  SET =3D 0, FnV =3D 0
+  EA =3D 0, S1PTW =3D 0
+  FSC =3D 0x05: level 1 translation fault
+Data abort info:
+  ISV =3D 0, ISS =3D 0x00000005
+  CM =3D 0, WnR =3D 0
+[00000000000000b0] user address but active_mm is swapper
+Internal error: Oops: 0000000096000005 [#1] SMP
+CPU: 0 PID: 21 Comm: kunit_try_catch Tainted: G                 N 6.4.0-rc7=
+-02032-ge6303f323b1a #17
+Hardware name: linux,dummy-virt (DT)
+pstate: 40000005 (nZcv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=3D--)
+pc : drm_gem_private_object_init+0x54/0xa8
+lr : drm_gem_private_object_init+0x44/0xa8
+sp : ffffffc008763c10
+x29: ffffffc008763c10 x28: 0000000000000000 x27: 0000000000000000
+x26: 0000000000000000 x25: 0000000000000000 x24: ffffffc00800bb90
+x23: ffffffc00820d3e4 x22: ffffff8000fb8880 x21: ffffffc008763db8
+x20: ffffffc0086171d8 x19: ffffffc008763cb8 x18: ffffffffffffffff
+x17: ffffffc0085b0da8 x16: 000000005a832b7d x15: 0000000000000000
+x14: 0000000000000001 x13: 0000000000000000 x12: ffffff8000cbe380
+x11: ffffff8000ca0000 x10: 00000000000007b0 x9 : 0000000000000000
+x8 : ffffffc008763cb8 x7 : 0000000000000000 x6 : 000000000000003f
+x5 : 0000000000000040 x4 : 0000000000000008 x3 : 0000000000000030
+x2 : ffffffc0085b9118 x1 : 0000000000000000 x0 : 0000000000000000
+Call trace:
+ drm_gem_private_object_init+0x54/0xa8
+ test_lock+0x58/0xf4
+ kunit_try_run_case+0x48/0xa8
+ kunit_generic_run_threadfn_adapter+0x20/0x2c
+ kthread+0xd4/0xd8
+ ret_from_fork+0x10/0x20
+Code: f9407e60 b40002a0 f9401a80 b9406a81 (b940b000)
+---[ end trace 0000000000000000 ]---
+^CERROR:root:Build interruption occurred. Cleaning console.
+qemu-system-aarch64: terminating on signal 2
+[13:31:17] Elapsed time: 3.396s total, 0.001s configuring, 1.978s building,=
+ 1.417s running
+
+Maxime
+
+--3n5o5ss2bit7ecey
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZMOnGAAKCRDj7w1vZxhR
+xSR2AP9tE8/f72q5jHIMHjhhir0PsVypUMPCWXU4fR+59oPfOgD/ZE9aH6tsf2Vd
+FouLH8frZRDzfA2nPV3qd89JLuV60wM=
+=Gn76
+-----END PGP SIGNATURE-----
+
+--3n5o5ss2bit7ecey--
