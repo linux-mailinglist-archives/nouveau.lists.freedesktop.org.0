@@ -1,70 +1,74 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2AF79766672
-	for <lists+nouveau@lfdr.de>; Fri, 28 Jul 2023 10:09:44 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 65913766997
+	for <lists+nouveau@lfdr.de>; Fri, 28 Jul 2023 12:00:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B00B410E682;
-	Fri, 28 Jul 2023 08:09:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E948210E6D2;
+	Fri, 28 Jul 2023 10:00:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6B5A210E682;
- Fri, 28 Jul 2023 08:09:40 +0000 (UTC)
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-3fc0aecf15bso20579305e9.1; 
- Fri, 28 Jul 2023 01:09:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1690531779; x=1691136579;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GqLr/DM3vzoT2FIGmxl1EtsMfdCCfHjdp08hXZT3Xyg=;
- b=jNqp0QPCVYTkV4bvppxC/WE1D3dThiR6UKFK8p4qV3WMajrs8aXfR/yEOGVVt4WO/4
- C6lj+p89l37MtuxXWAebhshvKx83b6ctlrKZ3CD7QWkKwaUrDUSdAhTUkL5JZllRwaIn
- aUO/FOw/zeur8egsp7p8tXrfbkQm2MAPBeeKrptG93bsgZA/gRiHUfaZXvUwjeD9JUty
- PZXizjxorCUDAclhWNrac3NH1InWJ9R9WrAat5wjHGfPbEQyyaYYdn/ntfYc9fC8ZlFj
- 2jP6M0Ff0Led0BcYGs2Hc3hK+Sblib/akOE7NoPjHj59JUM1ML9mw3yh6Xauefqt8RMT
- 9fPw==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B467C10E6D2
+ for <nouveau@lists.freedesktop.org>; Fri, 28 Jul 2023 09:59:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1690538398;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=64cwbX0RqK2VCO/K9nDSDwV09g6WKDYXzEmbeoTby84=;
+ b=YT7gJHZYlnEJnlQJT89Bm5H9L3NR972nuLv7jHSbLUHKL66xJnnKxb23VB1wuUNZok1hTE
+ NYZOffpFlw5pPGTzepleN2nKVb2N7enJ5tkwC91weLvfcPn6rhvpTuNYqe/5zLqlJIWIyu
+ CKaAX/Jl48IbJnpDqsWCxn4pH92F8xk=
+Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
+ [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-213-js8PwF1dOFeyEQc2c-G39w-1; Fri, 28 Jul 2023 05:59:54 -0400
+X-MC-Unique: js8PwF1dOFeyEQc2c-G39w-1
+Received: by mail-lj1-f198.google.com with SMTP id
+ 38308e7fff4ca-2a7a6393ba6so4049161fa.1
+ for <nouveau@lists.freedesktop.org>; Fri, 28 Jul 2023 02:59:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690531779; x=1691136579;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=GqLr/DM3vzoT2FIGmxl1EtsMfdCCfHjdp08hXZT3Xyg=;
- b=RpERCx05tusiJdUamHklthkOPMfH19QnmgsNbQ1jEm03SBsBAOnyKqyXX4+zsd1kqR
- VZ8mOfnvLW93NIHMleY9hZ8X2ZKKbRkimWHOaVlMJsNyqTWhzoivBt22PSf2ujnm5jLC
- OrL0aIFhgkzTuZ/qECgCvrGZ+Mp4Gz+F7XcZKx9zi9mPWzyDjnRO2212a3iBWuHfwYOn
- bEpKyuOmsV66AyKLzWJFHJkvjagOPh/eWaDIW+BAQaqmRqdjkpzgBrXZ5rr5OrLWY1RJ
- xQyO1bBfRaTlgFTLnJK42/S1JGQ+YSMKuzLwmba33o8xT3UOL4T9qyfk2SWI8+x02B3R
- xqlQ==
-X-Gm-Message-State: ABy/qLYAojqQTD4ih5VVDS6Ou/kS854BeDKbT18x9VHfQPjlN+5dFeGN
- Faqx3zA6RxeFtbjJ0xGugtfgfXeAEotHDg==
-X-Google-Smtp-Source: APBJJlFQW3i7+kOV3XLOmwouH4a0XHOhL2g3BliaVEr4MqWslzbF6GJX6aD17eqL//lIKPOLtJwD6Q==
-X-Received: by 2002:a7b:c853:0:b0:3fb:b67b:7f15 with SMTP id
- c19-20020a7bc853000000b003fbb67b7f15mr1289443wml.21.1690531778542; 
- Fri, 28 Jul 2023 01:09:38 -0700 (PDT)
-Received: from [192.168.0.101]
- (cpc154979-craw9-2-0-cust193.16-3.cable.virginm.net. [80.193.200.194])
- by smtp.googlemail.com with ESMTPSA id
- f21-20020a7bcc15000000b003fd32074e74sm6447479wmh.31.2023.07.28.01.09.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Jul 2023 01:09:38 -0700 (PDT)
-Message-ID: <29e17fa4-0dc3-2542-f303-7dceb1ed16bc@gmail.com>
-Date: Fri, 28 Jul 2023 09:09:37 +0100
+ d=1e100.net; s=20221208; t=1690538393; x=1691143193;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=64cwbX0RqK2VCO/K9nDSDwV09g6WKDYXzEmbeoTby84=;
+ b=UJ4BpDkTVk/EhJmK0jeV0nsBXMxtaT1pjU5rPGT2l3/MHsf/wjESPdX2RwzoiArB1U
+ /t+ZgEXaV9p1PaFLItrVabAw/H9+XXi3KZfZS9ivgxBp/7Z7+xlhjSPMC4WmeBu/HMwD
+ l2yRBg5eXp/6eKQCFS3H+eEfAn8V9VKAMradPcsEUq2bRI2B1p+ZcO1VmG17xgVw4Nj3
+ O+yEY8Jk0JYFm1Blci6a+J5+1BlbUT1bpIF/ofLdfBpvBnn0zZXGjFjYEEGhFSK2QQC5
+ QuaNTtepRqIISXhU3V9xC2m/5WnF2tEpnOLaWSmZImkhZCOKihVYyP/9SCiDRrOv5Osy
+ EZHg==
+X-Gm-Message-State: ABy/qLZc0pMmnXuA2mT5bpE4W2z9H6LOqKNk87Odggu5MfHcrRZ0Vodp
+ 3DZfh+N0DUW6/H2bfNLN8Cml3t/BESeZYwYdF4fMkvAXp0e2tGmHJZCqdqUjOXxjPwaRwGQd45J
+ c3LU8bgxDZhtQ1zMgSW4IhaIAiTSjvSCNhh5/obWQ7w==
+X-Received: by 2002:a2e:501c:0:b0:2b6:af68:6803 with SMTP id
+ e28-20020a2e501c000000b002b6af686803mr705819ljb.4.1690538393209; 
+ Fri, 28 Jul 2023 02:59:53 -0700 (PDT)
+X-Google-Smtp-Source: APBJJlFAIXcAWMCt7sf6hNC3aFwCm0EH6PL4GAUcsvLw8voE2q9DUMDvV3f/2rOa2DVWhU8XcDIjRJl86zmb1WZ6ujo=
+X-Received: by 2002:a2e:501c:0:b0:2b6:af68:6803 with SMTP id
+ e28-20020a2e501c000000b002b6af686803mr705816ljb.4.1690538392874; Fri, 28 Jul
+ 2023 02:59:52 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>
-From: "Colin King (gmail)" <colin.i.king@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: [Nouveau] drm/nouveau: fan:
+References: <20230707215851.590754-1-lyude@redhat.com>
+ <CACO55tvfTDu8XcKowWXcSRqp8OMLb8Q4jnPG_Fn5y=yJy-Dqbw@mail.gmail.com>
+ <badef3d33469d97b01a42da520ad22ae4c9485fe.camel@redhat.com>
+ <CACO55ttVgw=uuG1i9bNOi5hh-0Xi+WhcR4eL_TQOzjzUKGX1rw@mail.gmail.com>
+In-Reply-To: <CACO55ttVgw=uuG1i9bNOi5hh-0Xi+WhcR4eL_TQOzjzUKGX1rw@mail.gmail.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Fri, 28 Jul 2023 11:59:41 +0200
+Message-ID: <CACO55tt=Hr0RWhVEJeffMFxwvLuNmB38dUz2ZB1zWf5cNpXYKQ@mail.gmail.com>
+To: Lyude Paul <lyude@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/nvkm/dp: Add hack to fix DP 1.3+
+ DPCD issues
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,42 +80,171 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: ML nouveau <nouveau@lists.freedesktop.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
+Cc: nouveau@lists.freedesktop.org, open list <linux-kernel@vger.kernel.org>,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+On Fri, Jul 28, 2023 at 1:11=E2=80=AFAM Karol Herbst <kherbst@redhat.com> w=
+rote:
+>
+> On Thu, Jul 27, 2023 at 11:57=E2=80=AFPM Lyude Paul <lyude@redhat.com> wr=
+ote:
+> >
+> > On Sun, 2023-07-09 at 01:42 +0200, Karol Herbst wrote:
+> > > On Fri, Jul 7, 2023 at 11:58=E2=80=AFPM Lyude Paul <lyude@redhat.com>=
+ wrote:
+> > > >
+> > > > Currently we use the drm_dp_dpcd_read_caps() helper in the DRM side=
+ of
+> > > > nouveau in order to read the DPCD of a DP connector, which makes su=
+re we do
+> > > > the right thing and also check for extended DPCD caps. However, it =
+turns
+> > > > out we're not currently doing this on the nvkm side since we don't =
+have
+> > > > access to the drm_dp_aux structure there - which means that the DRM=
+ side of
+> > > > the driver and the NVKM side can end up with different DPCD capabil=
+ities
+> > > > for the same connector.
+> > > >
+> > > > Ideally to fix this, we want to start setting up the drm_dp_aux dev=
+ice in
+> > > > NVKM before we've made contact with the DRM side - which should be =
+pretty
+> > > > easy to accomplish (I'm already working on it!). Until then however=
+, let's
+> > > > workaround this problem by porting a copy of drm_dp_read_dpcd_caps(=
+) into
+> > > > NVKM - which should fix this issue.
+> > > >
+> > > > Issue: https://gitlab.freedesktop.org/drm/nouveau/-/issues/211
+> > >
+> > > Should a Fixes: or Cc: stable tag be added so it gets backported?
+> >
+> > JFYI I think not adding one is fine nowadays? The stable bot seems to b=
+e
+> > pretty good at catching anything with the words fix/fixes in it
+> >
+>
+> Yeah not sure.. I'd rather be specific and add it just to be sure.
+> Anyway, it could also be done while pushing. I think the bigger
+> question here was if this fix is good enough for stable or if you plan
+> to rework it.
+>
+> > >
+> > > > Signed-off-by: Lyude Paul <lyude@redhat.com>
+> > > > ---
+> > > >  drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c | 48 +++++++++++++++=
++++-
+> > > >  1 file changed, 47 insertions(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c b/driver=
+s/gpu/drm/nouveau/nvkm/engine/disp/dp.c
+> > > > index 40c8ea43c42f..b8ac66b4a2c4 100644
+> > > > --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
+> > > > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
+> > > > @@ -26,6 +26,8 @@
+> > > >  #include "head.h"
+> > > >  #include "ior.h"
+> > > >
+> > > > +#include <drm/display/drm_dp.h>
+> > > > +
+> > > >  #include <subdev/bios.h>
+> > > >  #include <subdev/bios/init.h>
+> > > >  #include <subdev/gpio.h>
+> > > > @@ -634,6 +636,50 @@ nvkm_dp_enable_supported_link_rates(struct nvk=
+m_outp *outp)
+> > > >         return outp->dp.rates !=3D 0;
+> > > >  }
+> > > >
+> > > > +/* XXX: This is a big fat hack, and this is just drm_dp_read_dpcd_=
+caps()
+> > >
+> > > Well.. maybe we should rephrase that _if_ we want to see it
+> > > backported. But is this code really that bad? It kinda looks
+> > > reasonable enough.
+> > >
+> > > > + * converted to work inside nvkm. This is a temporary holdover unt=
+il we start
+> > > > + * passing the drm_dp_aux device through NVKM
+> > > > + */
+> > > > +static int
+> > > > +nvkm_dp_read_dpcd_caps(struct nvkm_outp *outp)
+> > > > +{
+> > > > +       struct nvkm_i2c_aux *aux =3D outp->dp.aux;
+> > > > +       u8 dpcd_ext[DP_RECEIVER_CAP_SIZE];
+> > > > +       int ret;
+> > > > +
+> > > > +       ret =3D nvkm_rdaux(aux, DPCD_RC00_DPCD_REV, outp->dp.dpcd, =
+DP_RECEIVER_CAP_SIZE);
+> > > > +       if (ret < 0)
+> > > > +               return ret;
+> > > > +
+> > > > +       /*
+> > > > +        * Prior to DP1.3 the bit represented by
+> > > > +        * DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT was reserved.
+> > > > +        * If it is set DP_DPCD_REV at 0000h could be at a value le=
+ss than
+> > > > +        * the true capability of the panel. The only way to check =
+is to
+> > > > +        * then compare 0000h and 2200h.
+> > > > +        */
+> > > > +       if (!(outp->dp.dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
+> > > > +             DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT))
+> > > > +               return 0;
+> > > > +
+> > > > +       ret =3D nvkm_rdaux(aux, DP_DP13_DPCD_REV, dpcd_ext, sizeof(=
+dpcd_ext));
+> > > > +       if (ret < 0)
+> > > > +               return ret;
+> > > > +
+> > > > +       if (outp->dp.dpcd[DP_DPCD_REV] > dpcd_ext[DP_DPCD_REV]) {
+> > > > +               OUTP_DBG(outp, "Extended DPCD rev less than base DP=
+CD rev (%d > %d)\n",
+> > > > +                        outp->dp.dpcd[DP_DPCD_REV], dpcd_ext[DP_DP=
+CD_REV]);
+> > > > +               return 0;
+> > > > +       }
+> > > > +
+> > > > +       if (!memcmp(outp->dp.dpcd, dpcd_ext, sizeof(dpcd_ext)))
+> > > > +               return 0;
+> > > > +
+> > > > +       memcpy(outp->dp.dpcd, dpcd_ext, sizeof(dpcd_ext));
+> > > > +
+> > > > +       return 0;
+> > > > +}
+> > > > +
+> > > >  void
+> > > >  nvkm_dp_enable(struct nvkm_outp *outp, bool auxpwr)
+> > > >  {
+> > > > @@ -689,7 +735,7 @@ nvkm_dp_enable(struct nvkm_outp *outp, bool aux=
+pwr)
+> > > >                         memset(outp->dp.lttpr, 0x00, sizeof(outp->d=
+p.lttpr));
+> > > >                 }
+> > > >
+> > > > -               if (!nvkm_rdaux(aux, DPCD_RC00_DPCD_REV, outp->dp.d=
+pcd, sizeof(outp->dp.dpcd))) {
+> > > > +               if (!nvkm_dp_read_dpcd_caps(outp)) {
+> > > >                         const u8 rates[] =3D { 0x1e, 0x14, 0x0a, 0x=
+06, 0 };
+> > > >                         const u8 *rate;
+> > > >                         int rate_max;
+> > > > --
+> > > > 2.40.1
+> > > >
+> > >
+> >
+> > --
+> > Cheers,
+> >  Lyude Paul (she/her)
+> >  Software Engineer at Red Hat
+> >
 
-static analysis with cppcheck has detected an issue in function 
-nvkm_fan_update() in drivers/gpu/drm/nouveau/nvkm/subdev/therm/fan.c as 
-follows:
+before I forget:
 
-         /* schedule next fan update, if not at target speed already */
-         if (target != duty) {
-                 u16 bump_period = fan->bios.bump_period;
-                 u16 slow_down_period = fan->bios.slow_down_period;
-                 u64 delay;
+Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
-                 if (duty > target)
-                         delay = slow_down_period;
-                 else if (duty == target)
-                         delay = min(bump_period, slow_down_period) ;
-                 else
-                         delay = bump_period;
-
-                 nvkm_timer_alarm(tmr, delay * 1000 * 1000, &fan->alarm);
-         }
-
-Checking drivers/gpu/drm/nouveau/nvkm/subdev/therm/gm107.c ...
-drivers/gpu/drm/nouveau/nvkm/subdev/therm/fan.c:93:17: warning: Opposite 
-inner 'if' condition leads to a dead code block. [oppositeInnerCondition]
-   else if (duty == target)
-                 ^
-
-The first if statement checks if target != duty, however inside the code 
-block there is a check if duty == target which can never be true. Either 
-the logic is wrong, or the duty == target can be safely removed.
-
-Colin
