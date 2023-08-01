@@ -2,69 +2,93 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5B5176AE4F
-	for <lists+nouveau@lfdr.de>; Tue,  1 Aug 2023 11:37:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C67B76B296
+	for <lists+nouveau@lfdr.de>; Tue,  1 Aug 2023 13:03:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7A8C510E383;
-	Tue,  1 Aug 2023 09:37:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DFE6310E3DD;
+	Tue,  1 Aug 2023 11:03:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9EBAF10E37B
- for <nouveau@lists.freedesktop.org>; Tue,  1 Aug 2023 09:37:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1690882664;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vOvZgebHhV2X/IS76eyWQ9bR6nPimMpn+dZuHOTy76Q=;
- b=dahlRYS9w9X8gkE/dp46Fz0s1cZS2PYWpTbL3c/LjcsATnCLorxkqINAIeb27kKOA3V7lK
- WDyiD402RDfUb8VwKA5UKQ3prUFOL0yjmnm5yosIiKoGguD3Oo9T4/sO6jqBRIP02R2pO3
- aOKfWHMXqTzGlBSVPiaF9lOhEPq/YcE=
-Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
- [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-550-VIw9_eiKP4K24i9HKBjdRA-1; Tue, 01 Aug 2023 05:37:43 -0400
-X-MC-Unique: VIw9_eiKP4K24i9HKBjdRA-1
-Received: by mail-lj1-f200.google.com with SMTP id
- 38308e7fff4ca-2b6fdb8d0acso10494521fa.0
- for <nouveau@lists.freedesktop.org>; Tue, 01 Aug 2023 02:37:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1690882662; x=1691487462;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vOvZgebHhV2X/IS76eyWQ9bR6nPimMpn+dZuHOTy76Q=;
- b=BmSIqh4vH6fD42EzJMeZS2KntQjR7OXW1DA/T9Jkb4z0oD1GhJgZwPSLUSlGXO7io5
- myouuT05nTytkV4Q2Lbua5bAJCnr6QUpB60Qhbz/Ec9qExwT+PYqn/EbGBt7ay6Y1oqH
- 2RkOr19yoCIu+Xrqm7aat7dFRXeq8N6hXo3NyMw+83LnGoOdrlQ3SjxvZcN1YCuH9KCL
- AXfX4CoJo7pHXhSh/xgVM7sDzDkI4ogJcVlMcuqUykoshfAZTM5W5NNSPqYFIERjBEwm
- Tso75tD+MzcyT0FqR84bFlbQJxi1aYBDH+3OToi9e+CmMlY2p8f0KOV7XLh1Ivd9rtyY
- Qxpg==
-X-Gm-Message-State: ABy/qLbMioCyFWyoW+puLP4YqqTQ3a4g0uxpYp+WoHLUMxsSN1j4ZNpi
- XK7xJpk2xdWjCXtXm0pYDkeRDpAz2WGUhvDcfJOe30Faz8CiTN1eTjIlZqonGR8oaH2JpUwcNoe
- /0vY7HHxmvOZP9gkfpw8Wp+LiiHy5rh6TZlIra/x9+A==
-X-Received: by 2002:a2e:bc84:0:b0:2b9:54bd:caed with SMTP id
- h4-20020a2ebc84000000b002b954bdcaedmr6000415ljf.1.1690882661792; 
- Tue, 01 Aug 2023 02:37:41 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlHhkiWwGT7vC2QWuh3taZnSoR+s9GN7DTg0C69McemaKSXMKG8Sq8EFza9kx3EhI8MJ9mYhn5qCueXDQVY29ek=
-X-Received: by 2002:a2e:bc84:0:b0:2b9:54bd:caed with SMTP id
- h4-20020a2ebc84000000b002b954bdcaedmr6000400ljf.1.1690882661387; Tue, 01 Aug
- 2023 02:37:41 -0700 (PDT)
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
+ [IPv6:2001:67c:670:201:290:27ff:fe1d:cc33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4A1D910E39F
+ for <nouveau@lists.freedesktop.org>; Tue,  1 Aug 2023 11:03:48 +0000 (UTC)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+ by metis.ext.pengutronix.de with esmtps
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1qQn9L-0006er-TG; Tue, 01 Aug 2023 13:02:47 +0200
+Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
+ by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1qQn9G-000MYc-Qz; Tue, 01 Aug 2023 13:02:42 +0200
+Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1qQn9F-009bb2-Rs; Tue, 01 Aug 2023 13:02:41 +0200
+From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+To: Russell King <linux@armlinux.org.uk>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Lucas Stach <l.stach@pengutronix.de>,
+ Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
+ Shawn Guo <shawnguo@kernel.org>, Sascha Hauer <s.hauer@pengutronix.de>,
+ Philipp Zabel <p.zabel@pengutronix.de>,
+ Paul Cercueil <paul@crapouillou.net>,
+ Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
+ Edmund Dea <edmund.j.dea@intel.com>,
+ Chun-Kuang Hu <chunkuang.hu@kernel.org>,
+ Matthias Brugger <matthias.bgg@gmail.com>, Rob Clark <robdclark@gmail.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Johan Hovold <johan+linaro@kernel.org>,
+ Konrad Dybcio <konrad.dybcio@linaro.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ "Joel Fernandes (Google)" <joel@joelfernandes.org>,
+ Akhil P Oommen <quic_akhilpo@quicinc.com>,
+ Jessica Zhang <quic_jesszhan@quicinc.com>,
+ Liu Shixin <liushixin2@huawei.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Su Hui <suhui@nfschina.com>,
+ Kuogee Hsieh <quic_khsieh@quicinc.com>,
+ Vinod Polimera <quic_vpolimer@quicinc.com>,
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, Rob Herring <robh@kernel.org>,
+ Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+ Jyri Sarha <jyri.sarha@iki.fi>,
+ Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+ Sam Ravnborg <sam@ravnborg.org>, Liviu Dudau <liviu.dudau@arm.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>,
+ Danilo Krummrich <dakr@redhat.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Orson Zhai <orsonzhai@gmail.com>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Chunyan Zhang <zhang.lyra@gmail.com>, Deepak R Varma <drv@mailo.com>,
+ Steven Price <steven.price@arm.com>, Thierry Reding <treding@nvidia.com>,
+ Jani Nikula <jani.nikula@intel.com>, Alexey Brodkin <abrodkin@synopsys.com>
+Date: Tue,  1 Aug 2023 13:02:27 +0200
+Message-Id: <20230801110239.831099-1-u.kleine-koenig@pengutronix.de>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20230731191557.4179175-1-airlied@gmail.com>
-In-Reply-To: <20230731191557.4179175-1-airlied@gmail.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Tue, 1 Aug 2023 11:37:30 +0200
-Message-ID: <CACO55tuV8A_sLmQ=7yBdmsW7WWGoMs1oLmfszUg+RHW4_P8sNQ@mail.gmail.com>
-To: Dave Airlie <airlied@gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: fixup the uapi header file.
+Content-Type: text/plain; charset=UTF-8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4647;
+ i=u.kleine-koenig@pengutronix.de; h=from:subject;
+ bh=lLYOduakdAZPV7h2t7p0GtcJJgBTffjjiGktWPRzcYQ=;
+ b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBkyOWz7AY2J/amMZa1ly1xZnt1qVfdI+rjtzZOC
+ 8JCyUY0p4KJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCZMjlswAKCRCPgPtYfRL+
+ ToYFCACzSxwyZvnMzJgJyOkvEePf/ZXRnGrtlXaVQ3ZoUTHkj+i/+jpBQWVCP7WrMGN7DsJJNtK
+ 0JA9E3Yn8ljBPqK2hZbNAJIiaj3l1RjP00t00TVHzUaRcD8bpf0MQbCl7XVh+S1lGpscwAhUhU5
+ EuB/uIagIPze58OicfVqTEO6iH3tvWG6Tiw+Vj2etWniKNEhnyG94qzpKxsJ1UQxqjG+th5ODs2
+ R/fbiH6ltN6uLcrT7oBmUbtwgnmFm0z6KSzEqBKSAi6WhI4Cz6iIb1+Kt+G3TH2c0+5ZjkMcAix
+ V3zjdSfyyffaoQc3LkxVPtw9eSDLh/jJp7lNI4Ci05e+WBPm
+X-Developer-Key: i=u.kleine-koenig@pengutronix.de; a=openpgp;
+ fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ukl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: nouveau@lists.freedesktop.org
+Subject: [Nouveau] [PATCH v2 00/12] drm: Convert to platform remove callback
+ returning void
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,188 +100,106 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Cc: freedreno@lists.freedesktop.org, Sean Paul <sean@poorly.run>,
+ linux-arm-msm@vger.kernel.org, etnaviv@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-mips@vger.kernel.org,
+ linux-renesas-soc@vger.kernel.org,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ linux-mediatek@lists.infradead.org, NXP Linux Team <linux-imx@nxp.com>,
+ kernel@pengutronix.de, Russell King <linux+etnaviv@armlinux.org.uk>,
+ nouveau@lists.freedesktop.org, Marijn Suijten <marijn.suijten@somainline.org>,
+ Fabio Estevam <festevam@gmail.com>, linux-arm-kernel@lists.infradead.org,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Jul 31, 2023 at 9:16=E2=80=AFPM Dave Airlie <airlied@gmail.com> wro=
-te:
->
-> From: Dave Airlie <airlied@redhat.com>
->
-> nouveau > 10 years ago had a plan for new multiplexer inside a multiplexe=
-r
-> API using nvif. It never fully reached fruition, fast forward 10 years,
-> and the new vulkan driver is avoiding libdrm and calling ioctls, and
-> these 3 ioctls, getparam, channel alloc + free don't seem to be things
-> we'd want to use nvif for.
->
-> Undeprecate and put them into the uapi header so we can just copy it
-> into mesa later.
->
-> Signed-off-by: Dave Airlie <airlied@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_abi16.h | 41 ---------------------
->  include/uapi/drm/nouveau_drm.h          | 48 +++++++++++++++++++++++--
->  2 files changed, 45 insertions(+), 44 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.h b/drivers/gpu/drm/no=
-uveau/nouveau_abi16.h
-> index 27eae85f33e6..d5d80d0d9011 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.h
-> @@ -43,28 +43,6 @@ int  nouveau_abi16_usif(struct drm_file *, void *data,=
- u32 size);
->  #define NOUVEAU_GEM_DOMAIN_VRAM      (1 << 1)
->  #define NOUVEAU_GEM_DOMAIN_GART      (1 << 2)
->
-> -struct drm_nouveau_channel_alloc {
-> -       uint32_t     fb_ctxdma_handle;
-> -       uint32_t     tt_ctxdma_handle;
-> -
-> -       int          channel;
-> -       uint32_t     pushbuf_domains;
-> -
-> -       /* Notifier memory */
-> -       uint32_t     notifier_handle;
-> -
-> -       /* DRM-enforced subchannel assignments */
-> -       struct {
-> -               uint32_t handle;
-> -               uint32_t grclass;
-> -       } subchan[8];
-> -       uint32_t nr_subchan;
-> -};
-> -
-> -struct drm_nouveau_channel_free {
-> -       int channel;
-> -};
-> -
->  struct drm_nouveau_grobj_alloc {
->         int      channel;
->         uint32_t handle;
-> @@ -83,31 +61,12 @@ struct drm_nouveau_gpuobj_free {
->         uint32_t handle;
->  };
->
-> -#define NOUVEAU_GETPARAM_PCI_VENDOR      3
-> -#define NOUVEAU_GETPARAM_PCI_DEVICE      4
-> -#define NOUVEAU_GETPARAM_BUS_TYPE        5
-> -#define NOUVEAU_GETPARAM_FB_SIZE         8
-> -#define NOUVEAU_GETPARAM_AGP_SIZE        9
-> -#define NOUVEAU_GETPARAM_CHIPSET_ID      11
-> -#define NOUVEAU_GETPARAM_VM_VRAM_BASE    12
-> -#define NOUVEAU_GETPARAM_GRAPH_UNITS     13
-> -#define NOUVEAU_GETPARAM_PTIMER_TIME     14
-> -#define NOUVEAU_GETPARAM_HAS_BO_USAGE    15
-> -#define NOUVEAU_GETPARAM_HAS_PAGEFLIP    16
-> -struct drm_nouveau_getparam {
-> -       uint64_t param;
-> -       uint64_t value;
-> -};
-> -
->  struct drm_nouveau_setparam {
->         uint64_t param;
->         uint64_t value;
->  };
->
-> -#define DRM_IOCTL_NOUVEAU_GETPARAM           DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_GETPARAM, struct drm_nouveau_getparam)
->  #define DRM_IOCTL_NOUVEAU_SETPARAM           DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_SETPARAM, struct drm_nouveau_setparam)
-> -#define DRM_IOCTL_NOUVEAU_CHANNEL_ALLOC      DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_CHANNEL_ALLOC, struct drm_nouveau_channel_alloc)
-> -#define DRM_IOCTL_NOUVEAU_CHANNEL_FREE       DRM_IOW (DRM_COMMAND_BASE +=
- DRM_NOUVEAU_CHANNEL_FREE, struct drm_nouveau_channel_free)
->  #define DRM_IOCTL_NOUVEAU_GROBJ_ALLOC        DRM_IOW (DRM_COMMAND_BASE +=
- DRM_NOUVEAU_GROBJ_ALLOC, struct drm_nouveau_grobj_alloc)
->  #define DRM_IOCTL_NOUVEAU_NOTIFIEROBJ_ALLOC  DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_NOTIFIEROBJ_ALLOC, struct drm_nouveau_notifierobj_alloc)
->  #define DRM_IOCTL_NOUVEAU_GPUOBJ_FREE        DRM_IOW (DRM_COMMAND_BASE +=
- DRM_NOUVEAU_GPUOBJ_FREE, struct drm_nouveau_gpuobj_free)
-> diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_dr=
-m.h
-> index 853a327433d3..1cd97b3d8eda 100644
-> --- a/include/uapi/drm/nouveau_drm.h
-> +++ b/include/uapi/drm/nouveau_drm.h
-> @@ -33,6 +33,44 @@
->  extern "C" {
->  #endif
->
-> +#define NOUVEAU_GETPARAM_PCI_VENDOR      3
-> +#define NOUVEAU_GETPARAM_PCI_DEVICE      4
-> +#define NOUVEAU_GETPARAM_BUS_TYPE        5
-> +#define NOUVEAU_GETPARAM_FB_SIZE         8
-> +#define NOUVEAU_GETPARAM_AGP_SIZE        9
-> +#define NOUVEAU_GETPARAM_CHIPSET_ID      11
-> +#define NOUVEAU_GETPARAM_VM_VRAM_BASE    12
-> +#define NOUVEAU_GETPARAM_GRAPH_UNITS     13
-> +#define NOUVEAU_GETPARAM_PTIMER_TIME     14
-> +#define NOUVEAU_GETPARAM_HAS_BO_USAGE    15
-> +#define NOUVEAU_GETPARAM_HAS_PAGEFLIP    16
-> +struct drm_nouveau_getparam {
-> +       uint64_t param;
-> +       uint64_t value;
-> +};
-> +
-> +struct drm_nouveau_channel_alloc {
-> +       uint32_t     fb_ctxdma_handle;
-> +       uint32_t     tt_ctxdma_handle;
-> +
-> +       int          channel;
-> +       uint32_t     pushbuf_domains;
-> +
-> +       /* Notifier memory */
-> +       uint32_t     notifier_handle;
-> +
-> +       /* DRM-enforced subchannel assignments */
-> +       struct {
-> +               uint32_t handle;
-> +               uint32_t grclass;
-> +       } subchan[8];
-> +       uint32_t nr_subchan;
-> +};
-> +
-> +struct drm_nouveau_channel_free {
-> +       int channel;
-> +};
-> +
->  #define NOUVEAU_GEM_DOMAIN_CPU       (1 << 0)
->  #define NOUVEAU_GEM_DOMAIN_VRAM      (1 << 1)
->  #define NOUVEAU_GEM_DOMAIN_GART      (1 << 2)
-> @@ -126,10 +164,10 @@ struct drm_nouveau_gem_cpu_fini {
->         __u32 handle;
->  };
->
-> -#define DRM_NOUVEAU_GETPARAM           0x00 /* deprecated */
-> +#define DRM_NOUVEAU_GETPARAM           0x00
->  #define DRM_NOUVEAU_SETPARAM           0x01 /* deprecated */
-> -#define DRM_NOUVEAU_CHANNEL_ALLOC      0x02 /* deprecated */
-> -#define DRM_NOUVEAU_CHANNEL_FREE       0x03 /* deprecated */
-> +#define DRM_NOUVEAU_CHANNEL_ALLOC      0x02
-> +#define DRM_NOUVEAU_CHANNEL_FREE       0x03
->  #define DRM_NOUVEAU_GROBJ_ALLOC        0x04 /* deprecated */
->  #define DRM_NOUVEAU_NOTIFIEROBJ_ALLOC  0x05 /* deprecated */
->  #define DRM_NOUVEAU_GPUOBJ_FREE        0x06 /* deprecated */
-> @@ -188,6 +226,10 @@ struct drm_nouveau_svm_bind {
->  #define NOUVEAU_SVM_BIND_TARGET__GPU_VRAM               (1UL << 31)
->
->
-> +#define DRM_IOCTL_NOUVEAU_GETPARAM           DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_GETPARAM, struct drm_nouveau_getparam)
-> +#define DRM_IOCTL_NOUVEAU_CHANNEL_ALLOC      DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_CHANNEL_ALLOC, struct drm_nouveau_channel_alloc)
-> +#define DRM_IOCTL_NOUVEAU_CHANNEL_FREE       DRM_IOW (DRM_COMMAND_BASE +=
- DRM_NOUVEAU_CHANNEL_FREE, struct drm_nouveau_channel_free)
-> +
->  #define DRM_IOCTL_NOUVEAU_SVM_INIT           DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_SVM_INIT, struct drm_nouveau_svm_init)
->  #define DRM_IOCTL_NOUVEAU_SVM_BIND           DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_SVM_BIND, struct drm_nouveau_svm_bind)
->
-> --
-> 2.41.0
->
+Hello,
 
-Reviewed-by: Karol Herbst <kherbst@redhat.com>
+(implicit) v1 of this series can be found at
+https://lore.kernel.org/dri-devel/20230507162616.1368908-1-u.kleine-koenig@pengutronix.de
+
+Back then the series contained 53 patches. A big bunch was already
+applied to drm-misc, this is the remainder; with only little changes
+compared to v1:
+
+ - rebased to todays drm-misc-next
+ - Squashed together the two mediatek patches
+ - Adapted the subject prefix for the arcpgu as pointed out by Thomas
+   Zimmermann. (This affected two patches originally, one of them was merged
+   already before anyhow (next-20230801~41^2~34^2~179).)
+
+All these patches are pairwise independant of each other and so can be
+applied individually to their respective maintainer trees. I'm open to
+get these all in together via drm-misc, but each maintainer picking the
+individual patches that they are repsonsible for is maybe the easier
+approach?!
+
+Best regards
+Uwe
+   
+
+Uwe Kleine-König (12):
+  drm/armada: Convert to platform remove callback returning void
+  drm/etnaviv: Convert to platform remove callback returning void
+  drm/imx/dcss: Convert to platform remove callback returning void
+  drm/imx/ipuv3: Convert to platform remove callback returning void
+  drm/ingenic: Convert to platform remove callback returning void
+  drm/kmb: Convert to platform remove callback returning void
+  drm/mediatek: Convert to platform remove callback returning void
+  drm/msm: Convert to platform remove callback returning void
+  drm/nouveau: Convert to platform remove callback returning void
+  drm/shmobile: Convert to platform remove callback returning void
+  drm/sprd: Convert to platform remove callback returning void
+  drm/arcpgu: Convert to platform remove callback returning void
+
+ drivers/gpu/drm/armada/armada_crtc.c             | 5 ++---
+ drivers/gpu/drm/armada/armada_drv.c              | 5 ++---
+ drivers/gpu/drm/etnaviv/etnaviv_drv.c            | 6 ++----
+ drivers/gpu/drm/etnaviv/etnaviv_gpu.c            | 5 ++---
+ drivers/gpu/drm/imx/dcss/dcss-drv.c              | 6 ++----
+ drivers/gpu/drm/imx/ipuv3/dw_hdmi-imx.c          | 6 ++----
+ drivers/gpu/drm/imx/ipuv3/imx-drm-core.c         | 5 ++---
+ drivers/gpu/drm/imx/ipuv3/imx-ldb.c              | 5 ++---
+ drivers/gpu/drm/imx/ipuv3/imx-tve.c              | 5 ++---
+ drivers/gpu/drm/imx/ipuv3/ipuv3-crtc.c           | 5 ++---
+ drivers/gpu/drm/imx/ipuv3/parallel-display.c     | 6 ++----
+ drivers/gpu/drm/ingenic/ingenic-drm-drv.c        | 6 ++----
+ drivers/gpu/drm/ingenic/ingenic-ipu.c            | 5 ++---
+ drivers/gpu/drm/kmb/kmb_drv.c                    | 5 ++---
+ drivers/gpu/drm/mediatek/mtk_cec.c               | 5 ++---
+ drivers/gpu/drm/mediatek/mtk_disp_aal.c          | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_disp_ccorr.c        | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_disp_color.c        | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_disp_gamma.c        | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_disp_merge.c        | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_disp_ovl.c          | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_disp_rdma.c         | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_dp.c                | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_dpi.c               | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c           | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_dsi.c               | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_hdmi.c              | 5 ++---
+ drivers/gpu/drm/mediatek/mtk_hdmi_ddc.c          | 6 ++----
+ drivers/gpu/drm/mediatek/mtk_mdp_rdma.c          | 5 ++---
+ drivers/gpu/drm/msm/adreno/adreno_device.c       | 5 ++---
+ drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c          | 6 ++----
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c         | 6 ++----
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c         | 5 ++---
+ drivers/gpu/drm/msm/dp/dp_display.c              | 6 ++----
+ drivers/gpu/drm/msm/dsi/dsi.c                    | 6 ++----
+ drivers/gpu/drm/msm/hdmi/hdmi.c                  | 6 ++----
+ drivers/gpu/drm/msm/hdmi/hdmi_phy.c              | 6 ++----
+ drivers/gpu/drm/msm/msm_drv.c                    | 6 ++----
+ drivers/gpu/drm/msm/msm_mdss.c                   | 6 ++----
+ drivers/gpu/drm/nouveau/nouveau_platform.c       | 5 ++---
+ drivers/gpu/drm/renesas/shmobile/shmob_drm_drv.c | 6 ++----
+ drivers/gpu/drm/sprd/sprd_dpu.c                  | 6 ++----
+ drivers/gpu/drm/sprd/sprd_drm.c                  | 5 ++---
+ drivers/gpu/drm/sprd/sprd_dsi.c                  | 6 ++----
+ drivers/gpu/drm/tiny/arcpgu.c                    | 6 ++----
+ 45 files changed, 90 insertions(+), 164 deletions(-)
+
+base-commit: 290cdd7959a734a0ef20ec096af7810177c4b9f8
+-- 
+2.39.2
 
