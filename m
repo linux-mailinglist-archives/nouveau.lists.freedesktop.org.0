@@ -2,59 +2,73 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E849779682
-	for <lists+nouveau@lfdr.de>; Fri, 11 Aug 2023 19:53:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55511779D92
+	for <lists+nouveau@lfdr.de>; Sat, 12 Aug 2023 08:12:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 892E210E070;
-	Fri, 11 Aug 2023 17:53:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D65A010E183;
+	Sat, 12 Aug 2023 06:12:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 948B010E07E
- for <nouveau@lists.freedesktop.org>; Fri, 11 Aug 2023 17:53:25 +0000 (UTC)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-99bf9252eddso316227366b.3
- for <nouveau@lists.freedesktop.org>; Fri, 11 Aug 2023 10:53:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gfxstrand-net.20221208.gappssmtp.com; s=20221208; t=1691776404; x=1692381204;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=381ZTU/OK0I85VAdXyn9Aza96NEIc6x+1uRKzMfGnfU=;
- b=1CpK3tev2eIyzUnDI2l/LDm9Du2eqO55MpV51fnIm2sREnkuoI+U+L6/pqCRMEmil9
- hzhYUWbqDarW2L1yup9p0TLrpZi00r4ak7coz5y3tIDf8zkFV4eplihlpix5TgpO1dwG
- W13wG0E9CT0CsQzSJvYHwio2bocB/qCKa9HUzRBzsb70zhmFbNow75Lx3RDkY2G8DSRM
- dPXQGMmhokMzCkiv8gHM2F01e9UCavYeH0/UmW3pkZl+WQTG/ovrcV8PEG2HKkO8KRyu
- pU879dkDBznBn5yxbKriqpxIqvRbuza02QHsSCyUX/pR1PY99ScXS2XkMK513mu5fqrK
- VLhg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691776404; x=1692381204;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=381ZTU/OK0I85VAdXyn9Aza96NEIc6x+1uRKzMfGnfU=;
- b=NElFYfyHJKcL+FbPsRsNAceflNwpusxuTt/8Oj5CYMvGP9wPVlE2zSDvuENYotV+4B
- GgbkTWLd8HAa9cBLj6vmB34oaXPeC1j0Cpmqy7El2rDAkPhAarr2FPbji8u84I8ST/Gw
- hE+ypD+QLcMkXF26YKJSNP+A1IzfMLD/PKsXQyg/fty3LME55eyHKLI49ymPZkr6hqjU
- hZZSAlOJcLdl6EeqbRLK9AdqZPtS9xvlhcEcwJaUGr0k0+zQVHnzU7Kt3zw/+iqSAKxc
- VGJk8bCeREHPdkXkbe98eoI2GLFUbZS+/OBx34pXl31FA0Iq0zdJ92oY3p5HzAka4rr+
- Xu6A==
-X-Gm-Message-State: AOJu0Ywwsi77WJfzOekGjELxji04hLfl/hLhEadKrhuqFRR2IqFCAFK9
- 4APLa5zBBwqjA+9KH9FrlesHyRbalc1WpIO/uT8SrQ==
-X-Google-Smtp-Source: AGHT+IEVTp0bnNEFruUoI3Y5XzXG2KWUTocP7nU4mX8j7eWtt7m91A37+Xmp7ye0ogUHwt51aBTVY7hTfG8u3m66M6s=
-X-Received: by 2002:a17:907:2bdc:b0:96f:a891:36cb with SMTP id
- gv28-20020a1709072bdc00b0096fa89136cbmr2452964ejc.0.1691776403796; Fri, 11
- Aug 2023 10:53:23 -0700 (PDT)
+X-Greylist: delayed 714 seconds by postgrey-1.36 at gabe;
+ Wed, 02 Aug 2023 21:40:07 UTC
+Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
+ [81.169.146.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3BD2B10E155;
+ Wed,  2 Aug 2023 21:40:06 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1691011685; cv=none;
+ d=strato.com; s=strato-dkim-0002;
+ b=Fx/qZj7s3guZOXf1WQswLfrUtaHaHBnmz5DGRgQPIKcnHuUbh+yyZhkhVm93pyPQC8
+ T3Mv+FDFlK/oKFqzhVN/DE3LuE/DgimmOv1o6h8/T7++gLmYafwvUg3H3zenM7RuR8Ci
+ dJxqdCWiIiPYHHCXvOfBuFb4fIdM4BPqgPnsoydkET1dEcaZVKNqW6142eGXjJ+cetuu
+ kjt9oKNE88t/X1qrPDX3i+94VQG9v93eS6NxN17eqidiNajr0eFuAon/Afxi4FbIqOJ3
+ 0VA35dLaD0wd1m6EaTZmzSnPoDIVMmSsdQYlaz4UC2osq8i1R3D4hZNo28z7/In9Mb6y
+ t3JQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1691011685;
+ s=strato-dkim-0002; d=strato.com;
+ h=Message-ID:Subject:cc:To:From:Date:Cc:Date:From:Subject:Sender;
+ bh=x4UBCc8CQ6q3DIajFFGUiRq9xMNubdSIR0XXq2ZES7Q=;
+ b=QbZhSAWRjlkAyNurpg9zFighMIvNSeGBZkRGXR7TH+RWEyn22I3B/NzaOeEpABd3Zq
+ ArB6BynNMwMNALbcxw19+XaDA8S0u4YBqeYsMd/kUfbGPlDXD2X6sEuN1Yh2MYrbP03w
+ fj2vYm5ZftntX06V7tnEqSUVNphnHlPZNkcJmORVlhdqB9uZK69udpvjimgqEmPceGr4
+ /HAMXPbJfIr5W9Zw+nYXR8MXkMbYttNssO2qkHXDsW4uqPe/o2yXwzLWxq8Bp8DAiOEq
+ MEFRWHWCwkeLQG7CjTa5epOEY8hlVinM3fs9uYfMDmAhREgZ2dakWrFXT5VMOS1AWij5
+ /E3Q==
+ARC-Authentication-Results: i=1; strato.com;
+    arc=none;
+    dkim=none
+X-RZG-CLASS-ID: mo00
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1691011685;
+ s=strato-dkim-0002; d=kravcenko.com;
+ h=Message-ID:Subject:cc:To:From:Date:Cc:Date:From:Subject:Sender;
+ bh=x4UBCc8CQ6q3DIajFFGUiRq9xMNubdSIR0XXq2ZES7Q=;
+ b=XMpDj7EkGsMUhJuH6y+1oPa/ZTihhSDRMwnePXuaMNE9ipAKLdLOgaJM7yIAHb1Blg
+ VoV6DIwm/vs+4Hy83DX/H4PZrnvu+Pvv07oT2XBWR1ctCf5CcgqG2pfESkM2jezSeMGp
+ 584IehMhTU8gwDhTTjrSIjkgbxRpiF8cBmz9R5ZcdN0+vbr5XxMUwm3cppS4sHsvBtZ9
+ EJJ+jimWgbbnDzi9QyWH3GeR1BA+re+N6Lm7SUjSINSuuLogOiWGaD97rGngPwyYt16v
+ J5o0MMOwF8jyv5BxUBbsYiDBz6uvqMBh5swm5c1pKHV4EWYNmfygzxHm2wSvvdfAgldk
+ drMw==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1691011685;
+ s=strato-dkim-0003; d=kravcenko.com;
+ h=Message-ID:Subject:cc:To:From:Date:Cc:Date:From:Subject:Sender;
+ bh=x4UBCc8CQ6q3DIajFFGUiRq9xMNubdSIR0XXq2ZES7Q=;
+ b=yQbvuQiAzxpaLqkoC2vNABOIChdwIazHX80BNgCQJDY7AEiXh/1Gj0SBKvtveW7ah1
+ prRDgK3LLJvMh1/pxyAw==
+X-RZG-AUTH: ":I2AFc2Cjaf5HiRB0lhnvZ9elhwku56KjVuxY6AZJWRy8C0aEhFGYVtZdsoywGOIVpSHY0o63PckPhiSO1IhQGG0mBjo18W4hBO/Ijw=="
+Received: from p200300c7f704d301468a5bfffe84f964.dip0.t-ipconnect.de
+ by smtp.strato.de (RZmta 49.6.6 AUTH) with ESMTPSA id dd2654z72LS5RVa
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Wed, 2 Aug 2023 23:28:05 +0200 (CEST)
+Date: Wed, 2 Aug 2023 23:28:03 +0200 (CEST)
+From: Olaf Skibbe <news@kravcenko.com>
+To: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Message-ID: <20be6650-5db3-b72a-a7a8-5e817113cff5@kravcenko.com>
+User-Agent: Alpine 2.26 (DEB 649 2022-06-02)
 MIME-Version: 1.0
-References: <20230811010632.2473-1-dakr@redhat.com>
-In-Reply-To: <20230811010632.2473-1-dakr@redhat.com>
-From: Faith Ekstrand <faith@gfxstrand.net>
-Date: Fri, 11 Aug 2023 12:53:12 -0500
-Message-ID: <CAOFGe95PkZJLmsn6H2npPiLuwoWc109a570oOST2N110D+ajHw@mail.gmail.com>
-To: Danilo Krummrich <dakr@redhat.com>
-Content-Type: multipart/alternative; boundary="00000000000096864b0602a963d3"
-Subject: Re: [Nouveau] [PATCH drm-misc-next] drm/nouveau: sched: avoid job
- races between entities
+Content-Type: text/plain; format=flowed; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Sat, 12 Aug 2023 06:12:24 +0000
+Subject: [Nouveau] nouveau bug in linux/6.1.38-2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,203 +80,93 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- faith.ekstrand@collabora.com
+Cc: 1042753@bugs.debian.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---00000000000096864b0602a963d3
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Dear Maintainers,
 
-On Thu, Aug 10, 2023 at 8:06=E2=80=AFPM Danilo Krummrich <dakr@redhat.com> =
-wrote:
+Hereby I would like to report an apparent bug in the nouveau driver in
+linux/6.1.38-2.
 
-> If a sched job depends on a dma-fence from a job from the same GPU
-> scheduler instance, but a different scheduler entity, the GPU scheduler
-> does only wait for the particular job to be scheduled, rather than for
-> the job to fully complete. This is due to the GPU scheduler assuming
-> that there is a scheduler instance per ring. However, the current
-> implementation, in order to avoid arbitrary amounts of kthreads, has a
-> single scheduler instance while scheduler entities represent rings.
->
-> As a workaround, set the DRM_SCHED_FENCE_DONT_PIPELINE for all
-> out-fences in order to force the scheduler to wait for full job
-> completion for dependent jobs from different entities and same scheduler
-> instance.
->
-> There is some work in progress [1] to address the issues of firmware
-> schedulers; once it is in-tree the scheduler topology in Nouveau should
-> be re-worked accordingly.
->
-> [1]
-> https://lore.kernel.org/dri-devel/20230801205103.627779-1-matthew.brost@i=
-ntel.com/
->
-> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_sched.c | 22 ++++++++++++++++++++++
->  1 file changed, 22 insertions(+)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c
-> b/drivers/gpu/drm/nouveau/nouveau_sched.c
-> index 3424a1bf6af3..88217185e0f3 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_sched.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-> @@ -292,6 +292,28 @@ nouveau_job_submit(struct nouveau_job *job)
->         if (job->sync)
->                 done_fence =3D dma_fence_get(job->done_fence);
->
-> +       /* If a sched job depends on a dma-fence from a job from the same
-> GPU
-> +        * scheduler instance, but a different scheduler entity, the GPU
-> +        * scheduler does only wait for the particular job to be schedule=
-d,
->
+Running a current debian stable on a Dell Latitude E6510 with a
+"NVIDIA Corporation GT218M" graphic card, the monitor turns black
+after the grub screen. Also switching to a console (Strg-Alt-F2) shows
+just a black screen. Access via ssh is possible.
 
-s/does only wait/only waits/
+~# uname -r
+6.1.0-10-amd64
 
-Reviewed-by: Faith Ekstrand <faith.ekstrand@collaboralcom>
+demesg shows the following error message:
 
-+        * rather than for the job to fully complete. This is due to the GP=
-U
-> +        * scheduler assuming that there is a scheduler instance per ring=
-.
-> +        * However, the current implementation, in order to avoid arbitra=
-ry
-> +        * amounts of kthreads, has a single scheduler instance while
-> scheduler
-> +        * entities represent rings.
-> +        *
-> +        * As a workaround, set the DRM_SCHED_FENCE_DONT_PIPELINE for all
-> +        * out-fences in order to force the scheduler to wait for full jo=
-b
-> +        * completion for dependent jobs from different entities and same
-> +        * scheduler instance.
-> +        *
-> +        * There is some work in progress [1] to address the issues of
-> firmware
-> +        * schedulers; once it is in-tree the scheduler topology in Nouve=
-au
-> +        * should be re-worked accordingly.
-> +        *
-> +        * [1]
-> https://lore.kernel.org/dri-devel/20230801205103.627779-1-matthew.brost@i=
-ntel.com/
-> +        */
-> +       set_bit(DRM_SCHED_FENCE_DONT_PIPELINE, &job->done_fence->flags);
-> +
->         if (job->ops->armed_submit)
->                 job->ops->armed_submit(job);
->
->
-> base-commit: 68132cc6d1bcbc78ade524c6c6c226de42139f0e
-> --
-> 2.41.0
->
->
+[    3.560153] WARNING: CPU: 0 PID: 176 at drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c:460 nvkm_dp_acquire+0x26a/0x490 [nouveau]
+[    3.560287] Modules linked in: sd_mod t10_pi sr_mod crc64_rocksoft cdrom crc64 crc_t10dif crct10dif_generic nouveau(+) ahci libahci mxm_wmi i2c_algo_bit drm_display_helper libata cec rc_core drm_ttm_helper ttm scsi_mod e1000e drm_kms_helper ptp firewire_ohci sdhci_pci cqhci ehci_pci sdhci ehci_hcd firewire_core i2c_i801 crct10dif_pclmul crct10dif_common drm crc32_pclmul crc32c_intel psmouse usbcore mmc_core crc_itu_t pps_core scsi_common i2c_smbus lpc_ich usb_common battery video wmi button
+[    3.560322] CPU: 0 PID: 176 Comm: kworker/u16:5 Not tainted 6.1.0-10-amd64 #1  Debian 6.1.38-2
+[    3.560325] Hardware name: Dell Inc. Latitude E6510/0N5KHN, BIOS A17 05/12/2017
+[    3.560327] Workqueue: nvkm-disp nv50_disp_super [nouveau]
+[    3.560433] RIP: 0010:nvkm_dp_acquire+0x26a/0x490 [nouveau]
+[    3.560538] Code: 48 8b 44 24 58 65 48 2b 04 25 28 00 00 00 0f 85 37 02 00 00 48 83 c4 60 44 89 e0 5b 5d 41 5c 41 5d 41 5e 41 5f c3 cc cc cc cc <0f> 0b c1 e8 03 41 88 6d 62 44 89 fe 48 89 df 48 69 c0 cf 0d d6 26
+[    3.560541] RSP: 0018:ffff9899c048bd60 EFLAGS: 00010246
+[    3.560542] RAX: 0000000000041eb0 RBX: ffff88e0209d2600 RCX: 0000000000041eb0
+[    3.560544] RDX: ffffffffc079f760 RSI: 0000000000000000 RDI: ffff9899c048bcf0
+[    3.560545] RBP: 0000000000000001 R08: ffff9899c048bc64 R09: 0000000000005b76
+[    3.560546] R10: 000000000000000d R11: ffff9899c048bde0 R12: 00000000ffffffea
+[    3.560548] R13: ffff88e00b39e480 R14: 0000000000044d45 R15: 0000000000000000
+[    3.560549] FS:  0000000000000000(0000) GS:ffff88e123c00000(0000) knlGS:0000000000000000
+[    3.560551] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    3.560552] CR2: 00007f57f4e90451 CR3: 0000000181410000 CR4: 00000000000006f0
+[    3.560554] Call Trace:
+[    3.560558]  <TASK>
+[    3.560560]  ? __warn+0x7d/0xc0
+[    3.560566]  ? nvkm_dp_acquire+0x26a/0x490 [nouveau]
+[    3.560671]  ? report_bug+0xe6/0x170
+[    3.560675]  ? handle_bug+0x41/0x70
+[    3.560679]  ? exc_invalid_op+0x13/0x60
+[    3.560681]  ? asm_exc_invalid_op+0x16/0x20
+[    3.560685]  ? init_reset_begun+0x20/0x20 [nouveau]
+[    3.560769]  ? nvkm_dp_acquire+0x26a/0x490 [nouveau]
+[    3.560888]  nv50_disp_super_2_2+0x70/0x430 [nouveau]
+[    3.560997]  nv50_disp_super+0x113/0x210 [nouveau]
+[    3.561103]  process_one_work+0x1c7/0x380
+[    3.561109]  worker_thread+0x4d/0x380
+[    3.561113]  ? rescuer_thread+0x3a0/0x3a0
+[    3.561116]  kthread+0xe9/0x110
+[    3.561120]  ? kthread_complete_and_exit+0x20/0x20
+[    3.561122]  ret_from_fork+0x22/0x30
+[    3.561130]  </TASK>
 
---00000000000096864b0602a963d3
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Further information:
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Thu, Aug 10, 2023 at 8:06=E2=80=AF=
-PM Danilo Krummrich &lt;<a href=3D"mailto:dakr@redhat.com">dakr@redhat.com<=
-/a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
-px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">I=
-f a sched job depends on a dma-fence from a job from the same GPU<br>
-scheduler instance, but a different scheduler entity, the GPU scheduler<br>
-does only wait for the particular job to be scheduled, rather than for<br>
-the job to fully complete. This is due to the GPU scheduler assuming<br>
-that there is a scheduler instance per ring. However, the current<br>
-implementation, in order to avoid arbitrary amounts of kthreads, has a<br>
-single scheduler instance while scheduler entities represent rings.<br>
-<br>
-As a workaround, set the DRM_SCHED_FENCE_DONT_PIPELINE for all<br>
-out-fences in order to force the scheduler to wait for full job<br>
-completion for dependent jobs from different entities and same scheduler<br=
->
-instance.<br>
-<br>
-There is some work in progress [1] to address the issues of firmware<br>
-schedulers; once it is in-tree the scheduler topology in Nouveau should<br>
-be re-worked accordingly.<br>
-<br>
-[1] <a href=3D"https://lore.kernel.org/dri-devel/20230801205103.627779-1-ma=
-tthew.brost@intel.com/" rel=3D"noreferrer" target=3D"_blank">https://lore.k=
-ernel.org/dri-devel/20230801205103.627779-1-matthew.brost@intel.com/</a><br=
->
-<br>
-Signed-off-by: Danilo Krummrich &lt;<a href=3D"mailto:dakr@redhat.com" targ=
-et=3D"_blank">dakr@redhat.com</a>&gt;<br>
----<br>
-=C2=A0drivers/gpu/drm/nouveau/nouveau_sched.c | 22 ++++++++++++++++++++++<b=
-r>
-=C2=A01 file changed, 22 insertions(+)<br>
-<br>
-diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouv=
-eau/nouveau_sched.c<br>
-index 3424a1bf6af3..88217185e0f3 100644<br>
---- a/drivers/gpu/drm/nouveau/nouveau_sched.c<br>
-+++ b/drivers/gpu/drm/nouveau/nouveau_sched.c<br>
-@@ -292,6 +292,28 @@ nouveau_job_submit(struct nouveau_job *job)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (job-&gt;sync)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 done_fence =3D dma_=
-fence_get(job-&gt;done_fence);<br>
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0/* If a sched job depends on a dma-fence from a=
- job from the same GPU<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * scheduler instance, but a different schedule=
-r entity, the GPU<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * scheduler does only wait for the particular =
-job to be scheduled,<br></blockquote><div><br></div><div>s/does only wait/o=
-nly waits/</div><div><br></div><div>Reviewed-by: Faith Ekstrand &lt;faith.e=
-kstrand@collaboralcom&gt;</div><div><br></div><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
-4);padding-left:1ex">
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * rather than for the job to fully complete. T=
-his is due to the GPU<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * scheduler assuming that there is a scheduler=
- instance per ring.<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * However, the current implementation, in orde=
-r to avoid arbitrary<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * amounts of kthreads, has a single scheduler =
-instance while scheduler<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * entities represent rings.<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 *<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * As a workaround, set the DRM_SCHED_FENCE_DON=
-T_PIPELINE for all<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * out-fences in order to force the scheduler t=
-o wait for full job<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * completion for dependent jobs from different=
- entities and same<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * scheduler instance.<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 *<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * There is some work in progress [1] to addres=
-s the issues of firmware<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * schedulers; once it is in-tree the scheduler=
- topology in Nouveau<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * should be re-worked accordingly.<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 *<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * [1] <a href=3D"https://lore.kernel.org/dri-d=
-evel/20230801205103.627779-1-matthew.brost@intel.com/" rel=3D"noreferrer" t=
-arget=3D"_blank">https://lore.kernel.org/dri-devel/20230801205103.627779-1-=
-matthew.brost@intel.com/</a><br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0set_bit(DRM_SCHED_FENCE_DONT_PIPELINE, &amp;job=
--&gt;done_fence-&gt;flags);<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (job-&gt;ops-&gt;armed_submit)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 job-&gt;ops-&gt;arm=
-ed_submit(job);<br>
-<br>
-<br>
-base-commit: 68132cc6d1bcbc78ade524c6c6c226de42139f0e<br>
--- <br>
-2.41.0<br>
-<br>
-</blockquote></div></div>
+$ lspci -v -s $(lspci | grep -i vga | awk '{ print $1 }')
+01:00.0 VGA compatible controller: NVIDIA Corporation GT218M [NVS 3100M] (rev a2) (prog-if 00 [VGA controller])
+ 	Subsystem: Dell Latitude E6510
+ 	Flags: bus master, fast devsel, latency 0, IRQ 27
+ 	Memory at e2000000 (32-bit, non-prefetchable) [size=16M]
+ 	Memory at d0000000 (64-bit, prefetchable) [size=256M]
+ 	Memory at e0000000 (64-bit, prefetchable) [size=32M]
+ 	I/O ports at 7000 [size=128]
+ 	Expansion ROM at 000c0000 [disabled] [size=128K]
+ 	Capabilities: <access denied>
+ 	Kernel driver in use: nouveau
+ 	Kernel modules: nouveau
 
---00000000000096864b0602a963d3--
+I reported this bug to debian already, see
+https://bugs.debian.org/1042753 for context.
+
+With support (thanks Diederik!) I managed to figure out that the cause
+was a regression between upstream kernel version 6.1.27 and 6.1.38.
+
+I build a new 6.1.38 kernel with these commits reverted:
+
+62aecf23f3d1 drm/nouveau: add nv_encoder pointer check for NULL
+fb725beca62d drm/nouveau/dp: check for NULL nv_connector->native_mode
+90748be0f4f3 drm/nouveau: don't detect DSM for non-NVIDIA device
+5a144bad3e75 nouveau: fix client work fence deletion race
+
+With that kernel the graphic works again.
+
+Please inform me if further tests are required.
+
+Cheers,
+Olaf
+
