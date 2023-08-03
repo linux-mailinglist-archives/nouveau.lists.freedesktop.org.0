@@ -1,63 +1,63 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0EC676F002
-	for <lists+nouveau@lfdr.de>; Thu,  3 Aug 2023 18:53:25 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 05F0076F004
+	for <lists+nouveau@lfdr.de>; Thu,  3 Aug 2023 18:53:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A3D3810E63F;
-	Thu,  3 Aug 2023 16:53:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CF17410E63E;
+	Thu,  3 Aug 2023 16:53:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B513B10E63C
- for <nouveau@lists.freedesktop.org>; Thu,  3 Aug 2023 16:53:20 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 00E5E10E63F
+ for <nouveau@lists.freedesktop.org>; Thu,  3 Aug 2023 16:53:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1691081599;
+ s=mimecast20190719; t=1691081602;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JE5qxL02LY7rREUvepKGofvsZrlWFOOeCSr49xTjl74=;
- b=hzfrCHJecW9QAwYAZ++6AJ4ptTm6HHb0YzTSzFKHG7B24MAGX814npKDkYEeGFIFy+D0vU
- WfCjI1jCxSrQS0lE2g7Lns6DDOm+ku8FJarZYhW7nM0gnj5C2Y1ycP7PFO8BlH4L+8ciMF
- YKOe3QKq+6KT7v0qIere011TSZgq9MM=
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=/pp7pCNssCFdX07s9SqyoLBjaIvnkOQtt7NO/vv36Sc=;
+ b=ia6bvfHvkGRbpi4StLJwYzttQY9+rchp9pn1007oCN5/+UdINHrSg4PEma8C00qHd5xkY3
+ FrT9n+0xA8J8UyfyBuPVgkNMZOh7IevdZoZCOFXWPmLNvtN0/Dw+D+AB1NE02H5ov/e2gA
+ obQ5+GGsjg/WbcLXF0xUWO9hPeryLSk=
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-623-X2POvUfQNk2KrkBFD6P-iA-1; Thu, 03 Aug 2023 12:53:16 -0400
-X-MC-Unique: X2POvUfQNk2KrkBFD6P-iA-1
-Received: by mail-ed1-f70.google.com with SMTP id
- 4fb4d7f45d1cf-522a85b4caaso1585999a12.0
- for <nouveau@lists.freedesktop.org>; Thu, 03 Aug 2023 09:53:16 -0700 (PDT)
+ us-mta-435-80sHwpJ9MOKmabmnfopb7A-1; Thu, 03 Aug 2023 12:53:20 -0400
+X-MC-Unique: 80sHwpJ9MOKmabmnfopb7A-1
+Received: by mail-ej1-f72.google.com with SMTP id
+ a640c23a62f3a-94a34a0b75eso77325166b.1
+ for <nouveau@lists.freedesktop.org>; Thu, 03 Aug 2023 09:53:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691081595; x=1691686395;
+ d=1e100.net; s=20221208; t=1691081600; x=1691686400;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JE5qxL02LY7rREUvepKGofvsZrlWFOOeCSr49xTjl74=;
- b=XTLzMSvscI2fi9HOGgSRY3fCyUizpBZfHGxNb4eheBWaYdoUFMD42YruUcRBcWK+GE
- v4/uIYPMs+6/FJBkVhBG/CN+2cIZLiTChhGShBJ9oAwKsZh39wuW8vx3EUOrojpPV082
- 9K5yZsQUM8NxKQxCYsl0gyEy3w7YVSIuSxrnaEwadlqe0OVKqOpZMP731zMVByJ+puUR
- FGZ/OuKm7vxCwwgGQVXadIugooQjJXMO4X4MGDAUGyyXC+cIT4R82egPiM3JzwHfvZti
- uCrRavr0oFH8FUgt5FnSPvtB4KjGWibzdr1RVbFlKlVlLZJ2RZK9d1BswZtAZpaEh48R
- OfWQ==
-X-Gm-Message-State: ABy/qLYiXEtP5Pq4fbOAi6kG2KrMwUfKE51ZjcWweaZyykcEpQr5Cxlt
- zUIRHafXz71QE9UXWleDfvNBtXIDgT8SyLrzxuqNbZRQQ54H4+4v7tvwnFm6mD62G6yK7oFtlpB
- GXfwokLwpyMzjJPkjGKWopvSh/A==
-X-Received: by 2002:aa7:ca58:0:b0:522:b876:9ef5 with SMTP id
- j24-20020aa7ca58000000b00522b8769ef5mr10701559edt.8.1691081595626; 
- Thu, 03 Aug 2023 09:53:15 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlE5yfFRDtpL2E0oDNsKLWl0TWW3bnXka9NaQORnSea0pV/Z8noGPzjTpndjL2P4gnE6LCeifg==
-X-Received: by 2002:aa7:ca58:0:b0:522:b876:9ef5 with SMTP id
- j24-20020aa7ca58000000b00522b8769ef5mr10701541edt.8.1691081595331; 
- Thu, 03 Aug 2023 09:53:15 -0700 (PDT)
+ bh=/pp7pCNssCFdX07s9SqyoLBjaIvnkOQtt7NO/vv36Sc=;
+ b=dT7PGuCLzchgAvhPQjWE7sYagbwm7gYCaUvOqyDwTaCtnTmKV34QZj2jTu1qpewPyt
+ un7Zkhq+7hkH2qeDigzMqFt3lyH/jesnF6dS+QDHcdxSqAw9S/IeZIeufsCRLGkOFsez
+ At/cSB4IlQGHrvKRR3Em/Nu2Mwx1brGFdirH/CFT1axAU+hM1y+EHEvFSqVBcvUFTQC0
+ 9JEtbtCx6O22G153w7QmS0kda5bp7tySqeljDGOQD0csGpYGkpptnwaeq+JhlKz4ox+O
+ oxGO7Vcb2azXeOM9Gi9W9sZIKRpi3Ne53rjMHPTsnUfzG3nzfNMwHAUYWMksI6nrBjOw
+ PAAw==
+X-Gm-Message-State: AOJu0YxLI2djwHVdVH36kuffK3gMwTCcVs0c07+ILDJwwWXOlfUoaHwu
+ yif9his0cqhhXPh4sQRO2X/PWWIPjQCvXoihriBaAZBBKo0YyHw6DRsBcvQQ0cjWylKYp29Iz/i
+ eVs+5V0fKNUukuaSZIwe2Wi6nrg==
+X-Received: by 2002:a17:907:75f2:b0:99c:6651:2ab7 with SMTP id
+ jz18-20020a17090775f200b0099c66512ab7mr2209725ejc.57.1691081599867; 
+ Thu, 03 Aug 2023 09:53:19 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG7/zdTyo1H/lNhcIQxy0MATbWku+5A0hcNban9RJXMRCMfMwfuX2CSslnW7lp+CzT2kJFMxg==
+X-Received: by 2002:a17:907:75f2:b0:99c:6651:2ab7 with SMTP id
+ jz18-20020a17090775f200b0099c66512ab7mr2209711ejc.57.1691081599679; 
+ Thu, 03 Aug 2023 09:53:19 -0700 (PDT)
 Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- u4-20020a05640207c400b0051d9ee1c9d3sm27978edy.84.2023.08.03.09.53.13
+ t23-20020a17090605d700b00993cc1242d4sm62233ejt.151.2023.08.03.09.53.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Aug 2023 09:53:14 -0700 (PDT)
+ Thu, 03 Aug 2023 09:53:19 -0700 (PDT)
 From: Danilo Krummrich <dakr@redhat.com>
 To: airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
  mripard@kernel.org, corbet@lwn.net, christian.koenig@amd.com,
@@ -65,8 +65,8 @@ To: airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
  boris.brezillon@collabora.com, alexdeucher@gmail.com, ogabbay@kernel.org,
  bagasdotme@gmail.com, willy@infradead.org, jason@jlekstrand.net,
  donald.robson@imgtec.com
-Date: Thu,  3 Aug 2023 18:52:25 +0200
-Message-ID: <20230803165238.8798-7-dakr@redhat.com>
+Date: Thu,  3 Aug 2023 18:52:26 +0200
+Message-ID: <20230803165238.8798-8-dakr@redhat.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230803165238.8798-1-dakr@redhat.com>
 References: <20230803165238.8798-1-dakr@redhat.com>
@@ -75,8 +75,8 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Subject: [Nouveau] [PATCH drm-misc-next v9 06/11] drm/nouveau: fence:
- separate fence alloc and emit
+Subject: [Nouveau] [PATCH drm-misc-next v9 07/11] drm/nouveau: fence: fail
+ to emit when fence context is killed
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,236 +93,61 @@ Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The new (VM_BIND) UAPI exports DMA fences through DRM syncobjs. Hence,
-in order to emit fences within DMA fence signalling critical sections
-(e.g. as typically done in the DRM GPU schedulers run_job() callback) we
-need to separate fence allocation and fence emitting.
+The new VM_BIND UAPI implementation introduced in subsequent commits
+will allow asynchronous jobs processing push buffers and emitting
+fences.
+
+If a fence context is killed, e.g. due to a channel fault, jobs which
+are already queued for execution might still emit new fences. In such a
+case a job would hang forever.
+
+To fix that, fail to emit a new fence on a killed fence context with
+-ENODEV to unblock the job.
 
 Signed-off-by: Danilo Krummrich <dakr@redhat.com>
 ---
- drivers/gpu/drm/nouveau/dispnv04/crtc.c |  9 ++++-
- drivers/gpu/drm/nouveau/nouveau_bo.c    | 52 +++++++++++++++----------
- drivers/gpu/drm/nouveau/nouveau_chan.c  |  6 ++-
- drivers/gpu/drm/nouveau/nouveau_dmem.c  |  9 +++--
- drivers/gpu/drm/nouveau/nouveau_fence.c | 16 +++-----
- drivers/gpu/drm/nouveau/nouveau_fence.h |  3 +-
- drivers/gpu/drm/nouveau/nouveau_gem.c   |  5 ++-
- 7 files changed, 59 insertions(+), 41 deletions(-)
+ drivers/gpu/drm/nouveau/nouveau_fence.c | 7 +++++++
+ drivers/gpu/drm/nouveau/nouveau_fence.h | 2 +-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
-index a6f2e681bde9..a34924523133 100644
---- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
-+++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
-@@ -1122,11 +1122,18 @@ nv04_page_flip_emit(struct nouveau_channel *chan,
- 	PUSH_NVSQ(push, NV_SW, NV_SW_PAGE_FLIP, 0x00000000);
- 	PUSH_KICK(push);
- 
--	ret = nouveau_fence_new(chan, false, pfence);
-+	ret = nouveau_fence_new(pfence);
- 	if (ret)
- 		goto fail;
- 
-+	ret = nouveau_fence_emit(*pfence, chan);
-+	if (ret)
-+		goto fail_fence_unref;
-+
- 	return 0;
-+
-+fail_fence_unref:
-+	nouveau_fence_unref(pfence);
- fail:
- 	spin_lock_irqsave(&dev->event_lock, flags);
- 	list_del(&s->head);
-diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
-index 057bc995f19b..e9cbbf594e6f 100644
---- a/drivers/gpu/drm/nouveau/nouveau_bo.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
-@@ -820,29 +820,39 @@ nouveau_bo_move_m2mf(struct ttm_buffer_object *bo, int evict,
- 		mutex_lock(&cli->mutex);
- 	else
- 		mutex_lock_nested(&cli->mutex, SINGLE_DEPTH_NESTING);
-+
- 	ret = nouveau_fence_sync(nouveau_bo(bo), chan, true, ctx->interruptible);
--	if (ret == 0) {
--		ret = drm->ttm.move(chan, bo, bo->resource, new_reg);
--		if (ret == 0) {
--			ret = nouveau_fence_new(chan, false, &fence);
--			if (ret == 0) {
--				/* TODO: figure out a better solution here
--				 *
--				 * wait on the fence here explicitly as going through
--				 * ttm_bo_move_accel_cleanup somehow doesn't seem to do it.
--				 *
--				 * Without this the operation can timeout and we'll fallback to a
--				 * software copy, which might take several minutes to finish.
--				 */
--				nouveau_fence_wait(fence, false, false);
--				ret = ttm_bo_move_accel_cleanup(bo,
--								&fence->base,
--								evict, false,
--								new_reg);
--				nouveau_fence_unref(&fence);
--			}
--		}
-+	if (ret)
-+		goto out_unlock;
-+
-+	ret = drm->ttm.move(chan, bo, bo->resource, new_reg);
-+	if (ret)
-+		goto out_unlock;
-+
-+	ret = nouveau_fence_new(&fence);
-+	if (ret)
-+		goto out_unlock;
-+
-+	ret = nouveau_fence_emit(fence, chan);
-+	if (ret) {
-+		nouveau_fence_unref(&fence);
-+		goto out_unlock;
- 	}
-+
-+	/* TODO: figure out a better solution here
-+	 *
-+	 * wait on the fence here explicitly as going through
-+	 * ttm_bo_move_accel_cleanup somehow doesn't seem to do it.
-+	 *
-+	 * Without this the operation can timeout and we'll fallback to a
-+	 * software copy, which might take several minutes to finish.
-+	 */
-+	nouveau_fence_wait(fence, false, false);
-+	ret = ttm_bo_move_accel_cleanup(bo, &fence->base, evict, false,
-+					new_reg);
-+	nouveau_fence_unref(&fence);
-+
-+out_unlock:
- 	mutex_unlock(&cli->mutex);
- 	return ret;
- }
-diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.c b/drivers/gpu/drm/nouveau/nouveau_chan.c
-index 6d639314250a..f69be4c8f9f2 100644
---- a/drivers/gpu/drm/nouveau/nouveau_chan.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_chan.c
-@@ -62,9 +62,11 @@ nouveau_channel_idle(struct nouveau_channel *chan)
- 		struct nouveau_fence *fence = NULL;
- 		int ret;
- 
--		ret = nouveau_fence_new(chan, false, &fence);
-+		ret = nouveau_fence_new(&fence);
- 		if (!ret) {
--			ret = nouveau_fence_wait(fence, false, false);
-+			ret = nouveau_fence_emit(fence, chan);
-+			if (!ret)
-+				ret = nouveau_fence_wait(fence, false, false);
- 			nouveau_fence_unref(&fence);
- 		}
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-index 789857faa048..4ad40e42cae1 100644
---- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-@@ -209,7 +209,8 @@ static vm_fault_t nouveau_dmem_migrate_to_ram(struct vm_fault *vmf)
- 		goto done;
- 	}
- 
--	nouveau_fence_new(dmem->migrate.chan, false, &fence);
-+	if (!nouveau_fence_new(&fence))
-+		nouveau_fence_emit(fence, dmem->migrate.chan);
- 	migrate_vma_pages(&args);
- 	nouveau_dmem_fence_done(&fence);
- 	dma_unmap_page(drm->dev->dev, dma_addr, PAGE_SIZE, DMA_BIDIRECTIONAL);
-@@ -402,7 +403,8 @@ nouveau_dmem_evict_chunk(struct nouveau_dmem_chunk *chunk)
- 		}
- 	}
- 
--	nouveau_fence_new(chunk->drm->dmem->migrate.chan, false, &fence);
-+	if (!nouveau_fence_new(&fence))
-+		nouveau_fence_emit(fence, chunk->drm->dmem->migrate.chan);
- 	migrate_device_pages(src_pfns, dst_pfns, npages);
- 	nouveau_dmem_fence_done(&fence);
- 	migrate_device_finalize(src_pfns, dst_pfns, npages);
-@@ -675,7 +677,8 @@ static void nouveau_dmem_migrate_chunk(struct nouveau_drm *drm,
- 		addr += PAGE_SIZE;
- 	}
- 
--	nouveau_fence_new(drm->dmem->migrate.chan, false, &fence);
-+	if (!nouveau_fence_new(&fence))
-+		nouveau_fence_emit(fence, chunk->drm->dmem->migrate.chan);
- 	migrate_vma_pages(args);
- 	nouveau_dmem_fence_done(&fence);
- 	nouveau_pfns_map(svmm, args->vma->vm_mm, args->start, pfns, i);
 diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
-index ee5e9d40c166..e946408f945b 100644
+index e946408f945b..77c739a55b19 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
 +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
-@@ -210,6 +210,9 @@ nouveau_fence_emit(struct nouveau_fence *fence, struct nouveau_channel *chan)
- 	struct nouveau_fence_priv *priv = (void*)chan->drm->fence;
- 	int ret;
+@@ -96,6 +96,7 @@ nouveau_fence_context_kill(struct nouveau_fence_chan *fctx, int error)
+ 		if (nouveau_fence_signal(fence))
+ 			nvif_event_block(&fctx->event);
+ 	}
++	fctx->killed = 1;
+ 	spin_unlock_irqrestore(&fctx->lock, flags);
+ }
  
-+	if (unlikely(!chan->fence))
-+		return -ENODEV;
+@@ -229,6 +230,12 @@ nouveau_fence_emit(struct nouveau_fence *fence, struct nouveau_channel *chan)
+ 		dma_fence_get(&fence->base);
+ 		spin_lock_irq(&fctx->lock);
+ 
++		if (unlikely(fctx->killed)) {
++			spin_unlock_irq(&fctx->lock);
++			dma_fence_put(&fence->base);
++			return -ENODEV;
++		}
 +
- 	fence->channel  = chan;
- 	fence->timeout  = jiffies + (15 * HZ);
+ 		if (nouveau_fence_update(chan, fctx))
+ 			nvif_event_block(&fctx->event);
  
-@@ -396,25 +399,16 @@ nouveau_fence_unref(struct nouveau_fence **pfence)
- }
- 
- int
--nouveau_fence_new(struct nouveau_channel *chan, bool sysmem,
--		  struct nouveau_fence **pfence)
-+nouveau_fence_new(struct nouveau_fence **pfence)
- {
- 	struct nouveau_fence *fence;
--	int ret = 0;
--
--	if (unlikely(!chan->fence))
--		return -ENODEV;
- 
- 	fence = kzalloc(sizeof(*fence), GFP_KERNEL);
- 	if (!fence)
- 		return -ENOMEM;
- 
--	ret = nouveau_fence_emit(fence, chan);
--	if (ret)
--		nouveau_fence_unref(&fence);
--
- 	*pfence = fence;
--	return ret;
-+	return 0;
- }
- 
- static const char *nouveau_fence_get_get_driver_name(struct dma_fence *fence)
 diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.h b/drivers/gpu/drm/nouveau/nouveau_fence.h
-index 0ca2bc85adf6..7c73c7c9834a 100644
+index 7c73c7c9834a..2c72d96ef17d 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_fence.h
 +++ b/drivers/gpu/drm/nouveau/nouveau_fence.h
-@@ -17,8 +17,7 @@ struct nouveau_fence {
- 	unsigned long timeout;
+@@ -44,7 +44,7 @@ struct nouveau_fence_chan {
+ 	char name[32];
+ 
+ 	struct nvif_event event;
+-	int notify_ref, dead;
++	int notify_ref, dead, killed;
  };
  
--int  nouveau_fence_new(struct nouveau_channel *, bool sysmem,
--		       struct nouveau_fence **);
-+int  nouveau_fence_new(struct nouveau_fence **);
- void nouveau_fence_unref(struct nouveau_fence **);
- 
- int  nouveau_fence_emit(struct nouveau_fence *, struct nouveau_channel *);
-diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-index a48f42aaeab9..9c8d1b911a01 100644
---- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -873,8 +873,11 @@ nouveau_gem_ioctl_pushbuf(struct drm_device *dev, void *data,
- 		}
- 	}
- 
--	ret = nouveau_fence_new(chan, false, &fence);
-+	ret = nouveau_fence_new(&fence);
-+	if (!ret)
-+		ret = nouveau_fence_emit(fence, chan);
- 	if (ret) {
-+		nouveau_fence_unref(&fence);
- 		NV_PRINTK(err, cli, "error fencing pushbuf: %d\n", ret);
- 		WIND_RING(chan);
- 		goto out;
+ struct nouveau_fence_priv {
 -- 
 2.41.0
 
