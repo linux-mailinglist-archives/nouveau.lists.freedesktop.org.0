@@ -1,52 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3212076C0D0
-	for <lists+nouveau@lfdr.de>; Wed,  2 Aug 2023 01:22:53 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A74BA76DDE5
+	for <lists+nouveau@lfdr.de>; Thu,  3 Aug 2023 04:15:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7B31610E01F;
-	Tue,  1 Aug 2023 23:22:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8C97410E58E;
+	Thu,  3 Aug 2023 02:15:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (unknown [192.55.52.93])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BAA5E10E01F;
- Tue,  1 Aug 2023 23:22:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1690932167; x=1722468167;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=+vE+AAIO6NG6Ng7vxXC+NsijxE4eR3H3ZGvuVIMw7zU=;
- b=dxxuhf423mbMqZddc3+mmWQiwCAXeLZaeMSoJA1mBLQd1O9qkQ7pyuik
- nHBYhQvbdwmIGv79zfu6od2qtGn6CeIy6m6DkztbADsvNETFeQ18ydYG8
- DD1mj2UYb75SoRnEuy++P1IfZws2u0vDKLyDaspb38gRZXXo8v3Zpsbpm
- w7cLIo4mHcjo4CqM4WhGcdWbG++4+D/Iw0ovCgaTtFKEyI1znn6ilngKH
- kVJ6g6RnMyTmDgsLPSIeXtj0611XSxT9MdgV/5gjjt7+lgJhFFcxDAvg3
- Jk0KkL0i1pE4CrM2IHvJ8PWZn2OOrVCgjOZM+fmh7Qlc2isos5soo3mkR w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10789"; a="366900822"
-X-IronPort-AV: E=Sophos;i="6.01,248,1684825200"; d="scan'208";a="366900822"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Aug 2023 16:22:47 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10789"; a="705962185"
-X-IronPort-AV: E=Sophos;i="6.01,248,1684825200"; d="scan'208";a="705962185"
-Received: from lkp-server01.sh.intel.com (HELO d1ccc7e87e8f) ([10.239.97.150])
- by orsmga006.jf.intel.com with ESMTP; 01 Aug 2023 16:22:45 -0700
-Received: from kbuild by d1ccc7e87e8f with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1qQyhQ-0000eR-1Q;
- Tue, 01 Aug 2023 23:22:44 +0000
-Date: Wed, 2 Aug 2023 07:22:00 +0800
-From: kernel test robot <lkp@intel.com>
-To: Dave Airlie <airlied@gmail.com>, dri-devel@lists.freedesktop.org
-Message-ID: <202308020752.d9JOnIHz-lkp@intel.com>
-References: <20230731191557.4179175-1-airlied@gmail.com>
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 96C9810E58F
+ for <nouveau@lists.freedesktop.org>; Thu,  3 Aug 2023 02:15:11 +0000 (UTC)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-522462d8416so459224a12.1
+ for <nouveau@lists.freedesktop.org>; Wed, 02 Aug 2023 19:15:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1691028910; x=1691633710;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=unkis5nXNs66F8VIMqSk5MoQfKJubskRTJFUPZd8qbw=;
+ b=k1jX/fjz8FkLDLaxCgVrmFEJuJOa6PlfRIOdx4jo1nBpHhdVWAwDEQUPMl92Dj7i+s
+ /AtOYhnL8sCreORgAgG+mFSo9RaBNL0Wmzpw+SE0MZv86SsicfZIX+YcUBDQSg72DNJ5
+ LuJzisNL4IVjh4B1xGHaTgRr240XVQVG+fcjzmyN/qBSDnQKOavbGZgRzVNvrowJGASe
+ 2NCNenCsPqNX85acun6Ez5JK/T49iwuC7H2MbAe+L5nSycE8vxkpMPiM/SlC1nKWiYWa
+ 81LTouMO7tgBCY7LNPze6oWXCY89ke2WX0NU6pNnAg7uoNdj+0suDBxQgWpVy6XBjBue
+ hq3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1691028910; x=1691633710;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=unkis5nXNs66F8VIMqSk5MoQfKJubskRTJFUPZd8qbw=;
+ b=ROH+V4f+c60pGd/29WTnGglcDymnXfngx55caFXqCo/Zjjt5kaF1GUHDBrEiPvnv9e
+ 8eDd0aqb8OxE9FKl81d1+PHc+LcA4AOJAlwHFF7ihwUly5esZu/Uhf0kTv6o5A7nZqcI
+ uvcJuw/GgEta4BGLIh6EJGwBiXnMSK3ueNnjtjnwQCib/KF/ighDOPOS1zRdwftGmCj8
+ +6MBjbyfeMPPicb1lYeHRM3Ocb6eYkREWf/L6czTKbWZw1URdV1GtLkr4gJxshigMsPh
+ NPA6H3VTQkH6BXiYDklWvFfKbw0644keuMMZnIl34m/NTNzWMfOAa9FQ8N2zPXph0DxQ
+ iGEA==
+X-Gm-Message-State: ABy/qLYQ00B2aUNR4yU72GOiRcgfPFfIpDfVzeMOLPXMG9M7nN8bV99M
+ cmN7kgSnb5EswLeeR8xVj+vJlzgVT5sz5olPw2Q=
+X-Google-Smtp-Source: APBJJlGfaOHFrEispGkCIYBL3pBtijSTK2Andpe3ZctM0sw1IZGwRKwVImEjxbYXaed1UDCcW5GfPRF56xFdEy3SCnw=
+X-Received: by 2002:a17:907:2c77:b0:992:48b7:99e3 with SMTP id
+ ib23-20020a1709072c7700b0099248b799e3mr6243347ejc.63.1691028909671; Wed, 02
+ Aug 2023 19:15:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230731191557.4179175-1-airlied@gmail.com>
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: fixup the uapi header file.
+References: <20230622152017.2512101-1-kherbst@redhat.com>
+In-Reply-To: <20230622152017.2512101-1-kherbst@redhat.com>
+From: Dave Airlie <airlied@gmail.com>
+Date: Thu, 3 Aug 2023 12:14:57 +1000
+Message-ID: <CAPM=9ty8KT+JNu3x_qu4_1+Xg91Hdhyak_4_AVOfRQ0GMDjD9w@mail.gmail.com>
+To: Karol Herbst <kherbst@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH v2] drm/nouveau/gr: enable memory loads on
+ helper invocation on all channels
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,66 +66,129 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, llvm@lists.linux.dev,
- oe-kbuild-all@lists.linux.dev
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Dave,
+On Fri, 23 Jun 2023 at 01:20, Karol Herbst <kherbst@redhat.com> wrote:
+>
+> We have a lurking bug where Fragment Shader Helper Invocations can't load
+> from memory. But this is actually required in OpenGL and is causing random
+> hangs or failures in random shaders.
+>
+> It is unknown how widespread this issue is, but shaders hitting this can
+> end up with infinite loops.
+>
+> We enable those only on all Kepler and newer GPUs where we use our own
+> Firmware.
+>
+> Nvidia's firmware provides a way to set a kernelspace controlled list of
+> mmio registers in the gr space from push buffers via MME macros.
 
-kernel test robot noticed the following build errors:
+seems sane,
 
-[auto build test ERROR on drm-misc/drm-misc-next]
-[also build test ERROR on drm/drm-next drm-exynos/exynos-drm-next drm-intel/for-linux-next drm-intel/for-linux-next-fixes drm-tip/drm-tip linus/master v6.5-rc4 next-20230801]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Dave-Airlie/drm-nouveau-fixup-the-uapi-header-file/20230801-031705
-base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
-patch link:    https://lore.kernel.org/r/20230731191557.4179175-1-airlied%40gmail.com
-patch subject: [PATCH] drm/nouveau: fixup the uapi header file.
-config: i386-randconfig-i012-20230731 (https://download.01.org/0day-ci/archive/20230802/202308020752.d9JOnIHz-lkp@intel.com/config)
-compiler: clang version 16.0.4 (https://github.com/llvm/llvm-project.git ae42196bc493ffe877a7e3dff8be32035dea4d07)
-reproduce: (https://download.01.org/0day-ci/archive/20230802/202308020752.d9JOnIHz-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202308020752.d9JOnIHz-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   In file included from <built-in>:1:
->> ./usr/include/drm/nouveau_drm.h:48:2: error: unknown type name 'uint64_t'
-           uint64_t param;
-           ^
-   ./usr/include/drm/nouveau_drm.h:49:2: error: unknown type name 'uint64_t'
-           uint64_t value;
-           ^
->> ./usr/include/drm/nouveau_drm.h:53:2: error: unknown type name 'uint32_t'
-           uint32_t     fb_ctxdma_handle;
-           ^
-   ./usr/include/drm/nouveau_drm.h:54:2: error: unknown type name 'uint32_t'
-           uint32_t     tt_ctxdma_handle;
-           ^
-   ./usr/include/drm/nouveau_drm.h:57:2: error: unknown type name 'uint32_t'
-           uint32_t     pushbuf_domains;
-           ^
-   ./usr/include/drm/nouveau_drm.h:60:2: error: unknown type name 'uint32_t'
-           uint32_t     notifier_handle;
-           ^
-   ./usr/include/drm/nouveau_drm.h:64:3: error: unknown type name 'uint32_t'
-                   uint32_t handle;
-                   ^
-   ./usr/include/drm/nouveau_drm.h:65:3: error: unknown type name 'uint32_t'
-                   uint32_t grclass;
-                   ^
-   ./usr/include/drm/nouveau_drm.h:67:2: error: unknown type name 'uint32_t'
-           uint32_t nr_subchan;
-           ^
-   9 errors generated.
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Reviewed-by: Dave Airlie <airlied@redhat.com>
+>
+> v2: drop code for gm200 and newer.
+>
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: David Airlie <airlied@gmail.com>
+> Cc: nouveau@lists.freedesktop.org
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Karol Herbst <kherbst@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h  |  1 +
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk104.c  |  4 +++-
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110.c  | 10 ++++++++++
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110b.c |  1 +
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk208.c  |  1 +
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgm107.c  |  1 +
+>  6 files changed, 17 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h
+> index 00dbeda7e346..de161e7a04aa 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h
+> @@ -117,6 +117,7 @@ void gk104_grctx_generate_r418800(struct gf100_gr *);
+>
+>  extern const struct gf100_grctx_func gk110_grctx;
+>  void gk110_grctx_generate_r419eb0(struct gf100_gr *);
+> +void gk110_grctx_generate_r419f78(struct gf100_gr *);
+>
+>  extern const struct gf100_grctx_func gk110b_grctx;
+>  extern const struct gf100_grctx_func gk208_grctx;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk104.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk104.c
+> index 94233d0119df..52a234b1ef01 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk104.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk104.c
+> @@ -906,7 +906,9 @@ static void
+>  gk104_grctx_generate_r419f78(struct gf100_gr *gr)
+>  {
+>         struct nvkm_device *device = gr->base.engine.subdev.device;
+> -       nvkm_mask(device, 0x419f78, 0x00000001, 0x00000000);
+> +
+> +       /* bit 3 set disables loads in fp helper invocations, we need it enabled */
+> +       nvkm_mask(device, 0x419f78, 0x00000009, 0x00000000);
+>  }
+>
+>  void
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110.c
+> index 4391458e1fb2..3acdd9eeb74a 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110.c
+> @@ -820,6 +820,15 @@ gk110_grctx_generate_r419eb0(struct gf100_gr *gr)
+>         nvkm_mask(device, 0x419eb0, 0x00001000, 0x00001000);
+>  }
+>
+> +void
+> +gk110_grctx_generate_r419f78(struct gf100_gr *gr)
+> +{
+> +       struct nvkm_device *device = gr->base.engine.subdev.device;
+> +
+> +       /* bit 3 set disables loads in fp helper invocations, we need it enabled */
+> +       nvkm_mask(device, 0x419f78, 0x00000008, 0x00000000);
+> +}
+> +
+>  const struct gf100_grctx_func
+>  gk110_grctx = {
+>         .main  = gf100_grctx_generate_main,
+> @@ -854,4 +863,5 @@ gk110_grctx = {
+>         .gpc_tpc_nr = gk104_grctx_generate_gpc_tpc_nr,
+>         .r418800 = gk104_grctx_generate_r418800,
+>         .r419eb0 = gk110_grctx_generate_r419eb0,
+> +       .r419f78 = gk110_grctx_generate_r419f78,
+>  };
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110b.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110b.c
+> index 7b9a34f9ec3c..5597e87624ac 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110b.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110b.c
+> @@ -103,4 +103,5 @@ gk110b_grctx = {
+>         .gpc_tpc_nr = gk104_grctx_generate_gpc_tpc_nr,
+>         .r418800 = gk104_grctx_generate_r418800,
+>         .r419eb0 = gk110_grctx_generate_r419eb0,
+> +       .r419f78 = gk110_grctx_generate_r419f78,
+>  };
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk208.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk208.c
+> index c78d07a8bb7d..612656496541 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk208.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk208.c
+> @@ -568,4 +568,5 @@ gk208_grctx = {
+>         .dist_skip_table = gf117_grctx_generate_dist_skip_table,
+>         .gpc_tpc_nr = gk104_grctx_generate_gpc_tpc_nr,
+>         .r418800 = gk104_grctx_generate_r418800,
+> +       .r419f78 = gk110_grctx_generate_r419f78,
+>  };
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgm107.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgm107.c
+> index beac66eb2a80..9906974ac3f0 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgm107.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgm107.c
+> @@ -988,4 +988,5 @@ gm107_grctx = {
+>         .r406500 = gm107_grctx_generate_r406500,
+>         .gpc_tpc_nr = gk104_grctx_generate_gpc_tpc_nr,
+>         .r419e00 = gm107_grctx_generate_r419e00,
+> +       .r419f78 = gk110_grctx_generate_r419f78,
+>  };
+> --
+> 2.41.0
+>
