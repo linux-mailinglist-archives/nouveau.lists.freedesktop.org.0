@@ -2,81 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC6B57707E4
-	for <lists+nouveau@lfdr.de>; Fri,  4 Aug 2023 20:26:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93054770C3B
+	for <lists+nouveau@lfdr.de>; Sat,  5 Aug 2023 01:10:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0E06C10E0F1;
-	Fri,  4 Aug 2023 18:26:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5451D10E141;
+	Fri,  4 Aug 2023 23:09:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B9CD410E760
- for <nouveau@lists.freedesktop.org>; Fri,  4 Aug 2023 18:25:10 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B056710E146
+ for <nouveau@lists.freedesktop.org>; Fri,  4 Aug 2023 23:09:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1691173509;
+ s=mimecast20190719; t=1691190592;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Fdvxi7T0QQZA7DILvp9xTFYkELtQTf+gq8ZCaeS7cjM=;
- b=cJ1tDxPray6QsdAqlzwmbjxUoDZRwuMam6cTRi0Xx2yqXHlFC3dMYZ0jzHXteHRUn0NlQn
- VdIBQT8L/ohDJOGOEYVwgoCP0a98RTiK6eKAT5TU8+vo1FerVb0olX1lGomODQ8QRXSECs
- SYcqRbI6FPcwyJuZHdU4zAdDS9QsdvQ=
-Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
- [209.85.167.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=rGCnB3fJiFhED+4NmrRDcI4D3P863dc+KOY1iErYZgo=;
+ b=F3RfCxdIyo/3LZ1QrBUer7tuYDE9f5sjjBfxHZ6PPCyqDaVst7ziWrVG09FBRfEVb2PX/B
+ 40vYvCpaaBKa0EiMpnY7n0MBmkOHKG7idgnrMgtmo033DjgOpPaDqSaSCHxKl2n3pyxbie
+ UKxXro3JRMwq4qEDLvTsvjT+qV/c6tg=
+Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
+ [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-193-qJDp4vleOtC9SvHUgolXUg-1; Fri, 04 Aug 2023 14:25:08 -0400
-X-MC-Unique: qJDp4vleOtC9SvHUgolXUg-1
-Received: by mail-lf1-f72.google.com with SMTP id
- 2adb3069b0e04-4fe4aaa6dacso2368319e87.2
- for <nouveau@lists.freedesktop.org>; Fri, 04 Aug 2023 11:25:08 -0700 (PDT)
+ us-mta-58-WAAdy3O0OHiribczlDwsbA-1; Fri, 04 Aug 2023 19:09:51 -0400
+X-MC-Unique: WAAdy3O0OHiribczlDwsbA-1
+Received: by mail-lj1-f198.google.com with SMTP id
+ 38308e7fff4ca-2b04d5ed394so4295841fa.1
+ for <nouveau@lists.freedesktop.org>; Fri, 04 Aug 2023 16:09:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691173507; x=1691778307;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20221208; t=1691190590; x=1691795390;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Fdvxi7T0QQZA7DILvp9xTFYkELtQTf+gq8ZCaeS7cjM=;
- b=dBUjJBBs0PnK1iQ+IvTKbwL0VoqNVsv59xexzz9qA/AKXtWtuGhe0nsyK61JuS8WL5
- 3YvFIvuwPcJQg67aZuP+kcOY/ROJKlv4a/BjnlSkpbwsr6OHs0/YNQVOeUsU1+S+JjF5
- uGPP2nvmrAREAF2rUqXF8Bt5t9RLy3uMk/EzSnbsk6u0InDgG4nVOa/C6xcJ8Lxvyaoj
- ngAUF6IGDxiEN5ZHdeIZrdsxcJVRUxjQutcuJ+uxsU5RPbmtZN3ew8vPwwy8jAePd/Zn
- /ADeUU/2m8MugNpjKrmP4QnNNF1SihUnay+fb3B2UkmTS0cAfnB17kmd0AnuqSu8B1yF
- uuYw==
-X-Gm-Message-State: AOJu0YzEfcaZUbCntPlypzT2eZjpQ6zlsPRc3Fyre1JJ5e/axYCVG6Bv
- KoFfUUOl4Yeq3ZIFrDBdN0g1iMen93uQMGJXBD9OGYb/VwrUWBmZCViVKr61+hzv+LzlEqEuE0d
- G+d+u6LQv6sIYNkxuUrt7wvSKJw==
-X-Received: by 2002:ac2:4e8c:0:b0:4fb:7666:3bbf with SMTP id
- o12-20020ac24e8c000000b004fb76663bbfmr1856022lfr.26.1691173507139; 
- Fri, 04 Aug 2023 11:25:07 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFRJJOgbOvJzg5RaLcCj6w1yIpUQozrGAJ91MHogx2h+oZXIcVyODrY21YmNH8oxYAKETecWA==
-X-Received: by 2002:ac2:4e8c:0:b0:4fb:7666:3bbf with SMTP id
- o12-20020ac24e8c000000b004fb76663bbfmr1856008lfr.26.1691173506953; 
- Fri, 04 Aug 2023 11:25:06 -0700 (PDT)
-Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
- by smtp.gmail.com with ESMTPSA id
- u15-20020a056402064f00b00523228f615dsm486979edx.88.2023.08.04.11.25.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Aug 2023 11:25:06 -0700 (PDT)
-From: Danilo Krummrich <dakr@redhat.com>
-To: airlied@gmail.com, daniel@ffwll.ch, tzimmermann@suse.de,
- mripard@kernel.org, corbet@lwn.net, christian.koenig@amd.com,
- bskeggs@redhat.com, Liam.Howlett@oracle.com, matthew.brost@intel.com,
- boris.brezillon@collabora.com, alexdeucher@gmail.com, ogabbay@kernel.org,
- bagasdotme@gmail.com, willy@infradead.org, jason@jlekstrand.net,
- donald.robson@imgtec.com
-Date: Fri,  4 Aug 2023 20:23:52 +0200
-Message-ID: <20230804182406.5222-13-dakr@redhat.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230804182406.5222-1-dakr@redhat.com>
-References: <20230804182406.5222-1-dakr@redhat.com>
+ bh=rGCnB3fJiFhED+4NmrRDcI4D3P863dc+KOY1iErYZgo=;
+ b=DyUxMJ0qqD52xtTZF7qck53JHCR15wHCM7r/819O6aVhQZLJqh5LjNdTqkQ8IK6kLa
+ W8jWmdXOZUMsUEY361xuI8aRxIFPk8Fb9SkG88q2Q6jcisKJYH15G40inKulObAi44cW
+ j2xhdAWQ+iJxBoKBHeKBAbRxCPGcyZfI4DuRvXCy3lRGOb10/DE1J3QU7bfb77WVDbPz
+ 16lAM4tmhUHlSBE93XxP6e6fkZBG4gbakJlPUXzo0v3hiyIB5eerZz62W88sCI/ekd1l
+ b1yVtgQqW/IAhBKcvJZFy6sCNGFU3fJmxwIK+hx2QFzawb9pcPOgk7+rTLhvyAr5x55Y
+ T2tA==
+X-Gm-Message-State: ABy/qLYS4/ukUSlJHxNLr0Q3XYGN8YbeAabPC8JtASZWxc+ZLMG/OHOJ
+ waFljLGyN0QMLYr9aciRqx/YnmguepsDy+FISMtlFEQc4F+JLYpisFWnyXnTyRAeivuTKtDNSpW
+ DkD3WRqx64pZTKU/H3LSLPMG7o76IqIxsDNvsMAcWUA==
+X-Received: by 2002:a2e:bc84:0:b0:2b9:a156:6239 with SMTP id
+ h4-20020a2ebc84000000b002b9a1566239mr13237995ljf.1.1691190589991; 
+ Fri, 04 Aug 2023 16:09:49 -0700 (PDT)
+X-Google-Smtp-Source: APBJJlHgKpvsw++h/1/U4MD4NAKlDRdCgpsinNaKCo62Wk9tbcmL7YBD3v7x4v6+EDuDTCwUK2Ub1EkbIZavXxH3PrA=
+X-Received: by 2002:a2e:bc84:0:b0:2b9:a156:6239 with SMTP id
+ h4-20020a2ebc84000000b002b9a1566239mr13237989ljf.1.1691190589643; Fri, 04 Aug
+ 2023 16:09:49 -0700 (PDT)
 MIME-Version: 1.0
+References: <20be6650-5db3-b72a-a7a8-5e817113cff5@kravcenko.com>
+ <c27fb4dd-b2dc-22de-4425-6c7db5f543ba@leemhuis.info>
+ <CACO55ttcUEUjdVgx4y7pv26VAGeHS5q1wVKWrMw5=o9QLaJLZw@mail.gmail.com>
+ <977ac5b0-4ab8-7782-10e1-b4bee6b58030@kravcenko.com>
+In-Reply-To: <977ac5b0-4ab8-7782-10e1-b4bee6b58030@kravcenko.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Sat, 5 Aug 2023 01:09:38 +0200
+Message-ID: <CACO55tvq=GoPJZxouiTT0tty9A0fEeyS1uGjWLHjfJgq=VA4ug@mail.gmail.com>
+To: Olaf Skibbe <news@kravcenko.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Subject: [Nouveau] [PATCH drm-misc-next v10 12/12] drm/nouveau: debugfs:
- implement DRM GPU VA debugfs
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] nouveau bug in linux/6.1.38-2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,78 +79,115 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>
+Cc: Linux kernel regressions list <regressions@lists.linux.dev>,
+ nouveau@lists.freedesktop.org, 1042753@bugs.debian.org,
+ dri-devel@lists.freedesktop.org, Thorsten Leemhuis <regressions@leemhuis.info>,
+ Ben Skeggs <bskeggs@redhat.com>,
+ "stable@vger.kernel.org" <stable@vger.kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Provide the driver indirection iterating over all DRM GPU VA spaces to
-enable the common 'gpuvas' debugfs file for dumping DRM GPU VA spaces.
+On Fri, Aug 4, 2023 at 8:10=E2=80=AFPM Olaf Skibbe <news@kravcenko.com> wro=
+te:
+>
+> Dear all,
+>
+> On Fri, 4 Aug 2023 at 14:15, Karol Herbst wrote:
+>
+> >>> 62aecf23f3d1 drm/nouveau: add nv_encoder pointer check for NULL
+> >>> fb725beca62d drm/nouveau/dp: check for NULL nv_connector->native_mode
+> >>> 90748be0f4f3 drm/nouveau: don't detect DSM for non-NVIDIA device
+> >>> 5a144bad3e75 nouveau: fix client work fence deletion race
+> >
+> > mind retrying with only fb725beca62d and 62aecf23f3d1 reverted? Would
+> > be weird if the other two commits are causing it. If that's the case,
+> > it's a bit worrying that reverting either of the those causes issues,
+> > but maybe there is a good reason for it. Anyway, mind figuring out
+> > which of the two you need reverted to fix your issue? Thanks!
+>
+> The result is:
+>
+> Patch with commit fb725beca62d reverted: Graphics works. I attached the
+> respective patch again to this mail.
+>
 
-Reviewed-by: Dave Airlie <airlied@redhat.com>
-Signed-off-by: Danilo Krummrich <dakr@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_debugfs.c | 39 +++++++++++++++++++++++
- 1 file changed, 39 insertions(+)
+Mind checking if instead of reverting the entire commit that this is
+enough to fix it as well?
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-index 99d022a91afc..053f703f2f68 100644
---- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-@@ -203,6 +203,44 @@ nouveau_debugfs_pstate_open(struct inode *inode, struct file *file)
- 	return single_open(file, nouveau_debugfs_pstate_get, inode->i_private);
- }
- 
-+static void
-+nouveau_debugfs_gpuva_regions(struct seq_file *m, struct nouveau_uvmm *uvmm)
-+{
-+	MA_STATE(mas, &uvmm->region_mt, 0, 0);
-+	struct nouveau_uvma_region *reg;
-+
-+	seq_puts  (m, " VA regions  | start              | range              | end                \n");
-+	seq_puts  (m, "----------------------------------------------------------------------------\n");
-+	mas_for_each(&mas, reg, ULONG_MAX)
-+		seq_printf(m, "             | 0x%016llx | 0x%016llx | 0x%016llx\n",
-+			   reg->va.addr, reg->va.range, reg->va.addr + reg->va.range);
-+}
-+
-+static int
-+nouveau_debugfs_gpuva(struct seq_file *m, void *data)
-+{
-+	struct drm_info_node *node = (struct drm_info_node *) m->private;
-+	struct nouveau_drm *drm = nouveau_drm(node->minor->dev);
-+	struct nouveau_cli *cli;
-+
-+	mutex_lock(&drm->clients_lock);
-+	list_for_each_entry(cli, &drm->clients, head) {
-+		struct nouveau_uvmm *uvmm = nouveau_cli_uvmm(cli);
-+
-+		if (!uvmm)
-+			continue;
-+
-+		nouveau_uvmm_lock(uvmm);
-+		drm_debugfs_gpuva_info(m, &uvmm->umgr);
-+		seq_puts(m, "\n");
-+		nouveau_debugfs_gpuva_regions(m, uvmm);
-+		nouveau_uvmm_unlock(uvmm);
-+	}
-+	mutex_unlock(&drm->clients_lock);
-+
-+	return 0;
-+}
-+
- static const struct file_operations nouveau_pstate_fops = {
- 	.owner = THIS_MODULE,
- 	.open = nouveau_debugfs_pstate_open,
-@@ -214,6 +252,7 @@ static const struct file_operations nouveau_pstate_fops = {
- static struct drm_info_list nouveau_debugfs_list[] = {
- 	{ "vbios.rom",  nouveau_debugfs_vbios_image, 0, NULL },
- 	{ "strap_peek", nouveau_debugfs_strap_peek, 0, NULL },
-+	DRM_DEBUGFS_GPUVA_INFO(nouveau_debugfs_gpuva, NULL),
- };
- #define NOUVEAU_DEBUGFS_ENTRIES ARRAY_SIZE(nouveau_debugfs_list)
- 
--- 
-2.41.0
+https://gitlab.freedesktop.org/karolherbst/nouveau/-/commit/f99ae069876f7ff=
+eb6368da0381485e8c3adda43.patch
+
+
+> Patch with commit 62aecf23f3d1 reverted: Screen remains black, error
+> message:
+>
+> # dmesg | grep -A 36 "cut here"
+> [    2.921358] ------------[ cut here ]------------
+> [    2.921361] WARNING: CPU: 1 PID: 176 at drivers/gpu/drm/nouveau/nvkm/e=
+ngine/disp/dp.c:460 nvkm_dp_acquire+0x26a/0x490 [nouveau]
+> [    2.921627] Modules linked in: sd_mod(E) t10_pi(E) crc64_rocksoft(E) s=
+r_mod(E) crc64(E) crc_t10dif(E) crct10dif_generic(E) cdrom(E) nouveau(E+) m=
+xm_wmi(E) i2c_algo_bit(E) drm_display_helper(E) cec(E) ahci(E) rc_core(E) d=
+rm_ttm_helper(E) libahci(E) ttm(E) ehci_pci(E) crct10dif_pclmul(E) crct10di=
+f_common(E) ehci_hcd(E) drm_kms_helper(E) crc32_pclmul(E) firewire_ohci(E) =
+sdhci_pci(E) cqhci(E) libata(E) e1000e(E) sdhci(E) psmouse(E) crc32c_intel(=
+E) lpc_ich(E) ptp(E) i2c_i801(E) scsi_mod(E) i2c_smbus(E) firewire_core(E) =
+scsi_common(E) usbcore(E) crc_itu_t(E) mmc_core(E) drm(E) pps_core(E) usb_c=
+ommon(E) battery(E) video(E) wmi(E) button(E)
+> [    2.921695] CPU: 1 PID: 176 Comm: kworker/u16:5 Tainted: G            =
+E      6.1.0-0.a.test-amd64 #1  Debian 6.1.38-2a~test
+> [    2.921701] Hardware name: Dell Inc. Latitude E6510/0N5KHN, BIOS A17 0=
+5/12/2017
+> [    2.921705] Workqueue: nvkm-disp nv50_disp_super [nouveau]
+> [    2.921948] RIP: 0010:nvkm_dp_acquire+0x26a/0x490 [nouveau]
+> [    2.922192] Code: 48 8b 44 24 58 65 48 2b 04 25 28 00 00 00 0f 85 37 0=
+2 00 00 48 83 c4 60 44 89 e0 5b 5d 41 5c 41 5d 41 5e 41 5f c3 cc cc cc cc <=
+0f> 0b c1 e8 03 41 88 6d 62 44 89 fe 48 89 df 48 69 c0 cf 0d d6 26
+> [    2.922196] RSP: 0018:ffffc077c04dfd60 EFLAGS: 00010246
+> [    2.922201] RAX: 0000000000041eb0 RBX: ffff9a8482624c00 RCX: 000000000=
+0041eb0
+> [    2.922204] RDX: ffffffffc0b47760 RSI: 0000000000000000 RDI: ffffc077c=
+04dfcf0
+> [    2.922206] RBP: 0000000000000001 R08: ffffc077c04dfc64 R09: 000000000=
+0005b76
+> [    2.922209] R10: 000000000000000d R11: ffffc077c04dfde0 R12: 00000000f=
+fffffea
+> [    2.922212] R13: ffff9a8517541e00 R14: 0000000000044d45 R15: 000000000=
+0000000
+> [    2.922215] FS:  0000000000000000(0000) GS:ffff9a85a3c40000(0000) knlG=
+S:0000000000000000
+> [    2.922219] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [    2.922222] CR2: 000055f660bcb3a8 CR3: 0000000197610000 CR4: 000000000=
+00006e0
+> [    2.922226] Call Trace:
+> [    2.922231]  <TASK>
+> [    2.922235]  ? __warn+0x7d/0xc0
+> [    2.922244]  ? nvkm_dp_acquire+0x26a/0x490 [nouveau]
+> [    2.922487]  ? report_bug+0xe6/0x170
+> [    2.922494]  ? handle_bug+0x41/0x70
+> [    2.922501]  ? exc_invalid_op+0x13/0x60
+> [    2.922505]  ? asm_exc_invalid_op+0x16/0x20
+> [    2.922512]  ? init_reset_begun+0x20/0x20 [nouveau]
+> [    2.922708]  ? nvkm_dp_acquire+0x26a/0x490 [nouveau]
+> [    2.922954]  nv50_disp_super_2_2+0x70/0x430 [nouveau]
+> [    2.923200]  nv50_disp_super+0x113/0x210 [nouveau]
+> [    2.923445]  process_one_work+0x1c7/0x380
+> [    2.923456]  worker_thread+0x4d/0x380
+> [    2.923463]  ? rescuer_thread+0x3a0/0x3a0
+> [    2.923469]  kthread+0xe9/0x110
+> [    2.923476]  ? kthread_complete_and_exit+0x20/0x20
+> [    2.923482]  ret_from_fork+0x22/0x30
+> [    2.923493]  </TASK>
+> [    2.923494] ---[ end trace 0000000000000000 ]---
+>
+> (Maybe it's worth to mention that the LED back-light is on, while the
+> screen appears black.)
+>
+> Cheers,
+> Olaf
+>
+> P.S.: By the way: as a linux user for more than 20 years, I am very
+> pleased to have the opportunity to contribute at least a little bit to
+> the improvement. I'd like to use the chance to thank you all very much
+> for building and developing this great operating system.
 
