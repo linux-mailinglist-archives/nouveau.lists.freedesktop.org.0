@@ -2,70 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 767D47710AE
-	for <lists+nouveau@lfdr.de>; Sat,  5 Aug 2023 19:02:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F8D57716CC
+	for <lists+nouveau@lfdr.de>; Sun,  6 Aug 2023 23:40:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8939710E0F2;
-	Sat,  5 Aug 2023 17:02:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DC30810E03C;
+	Sun,  6 Aug 2023 21:40:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0E21589343
- for <nouveau@lists.freedesktop.org>; Sat,  5 Aug 2023 17:02:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1691254970;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=AwC2ZFlhYxmRV4GegFNry2xNQ2qKII2yxV/GxFfD/+Q=;
- b=QRdHD3hjtLpyFARvkD3iXYX4WLzHGPgtBC0/jH+Woft7HBO2Q4yY/g6I4cQPHzeAGnGLQ0
- mjDIayRPCEC+dGUbUXuDKKuADPZi6PdM5DPXmJ2oYiDxW9n3J4UXgTHSgYOIG4R64bjqAQ
- Bgi/ypTy8fnqcWa1YCrBJsX+bIX5fMg=
-Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
- [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-467-lR7eInoyPrO4uqNyXILr4Q-1; Sat, 05 Aug 2023 13:02:49 -0400
-X-MC-Unique: lR7eInoyPrO4uqNyXILr4Q-1
-Received: by mail-lj1-f200.google.com with SMTP id
- 38308e7fff4ca-2a7a6393ba6so6723181fa.1
- for <nouveau@lists.freedesktop.org>; Sat, 05 Aug 2023 10:02:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691254967; x=1691859767;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AwC2ZFlhYxmRV4GegFNry2xNQ2qKII2yxV/GxFfD/+Q=;
- b=Qp5dBHa9IP8vEGgx/5HMaa6+p38ZzdBNq6HrWT5+1YuThHgtHnTs+DADhiPsOAZXFG
- y0voSxTBqnERQZNr+qRzWneakK0IPYVFZAUC5l04YC10QTMmfI1xvt6wG6Du7FDJpXo9
- 9EG5yYIg3jiqHq+D+aDJElf/k8ahmgYJd4l2RM9yYMD3siKmRIBamtzQ2xCnMTTlKIGm
- AU7o8nGIus9719KxTr1KGXVY/Ee9DtJPJ6AlZDN0Y2FGO0AURYvbFExgarg/c8EfkL+N
- KbCAUL8b/ZFqOnikZrncF1qnEHjMLeBFSNG9z2sINJrv51hO5k+5xrm2dBaPR2tfKTTe
- 80CQ==
-X-Gm-Message-State: ABy/qLZGkaxmAIvAgv/sxtU9FHEfl84JKW8V5cZC2yoOab97DFgY8L6G
- MO8eCiv5/LWy8OmMigjfLgFKtqrt679o5txaCocJda8lNScSPTOZGMkuHV4QbuRGH0hMRvCKybU
- W4w45yIIRLgjFkjhNvP3AV7fUoPfom+7bbV/5woyQMw==
-X-Received: by 2002:a05:651c:2c6:b0:2b6:120a:af65 with SMTP id
- f6-20020a05651c02c600b002b6120aaf65mr11587131ljo.3.1691254967644; 
- Sat, 05 Aug 2023 10:02:47 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlGYiaAtFICZukz9GbgjadQIab1/CS12YPAHJmL8CGE4gx4kvaxS7NRq41yHA7pyNnx9RsTZk5QJDcTdUUMT23U=
-X-Received: by 2002:a05:651c:2c6:b0:2b6:120a:af65 with SMTP id
- f6-20020a05651c02c600b002b6120aaf65mr11587124ljo.3.1691254967373; Sat, 05 Aug
- 2023 10:02:47 -0700 (PDT)
+X-Greylist: delayed 552 seconds by postgrey-1.36 at gabe;
+ Sun, 06 Aug 2023 21:40:45 UTC
+Received: from mail.alien8.de (mail.alien8.de [IPv6:2a01:4f9:3051:3f93::2])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 458D310E03C;
+ Sun,  6 Aug 2023 21:40:44 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 519D440E0191; 
+ Sun,  6 Aug 2023 21:31:26 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+ header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+ by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id 3EDwEU3EFcvT; Sun,  6 Aug 2023 21:31:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+ t=1691357482; bh=OHjEeMmC5x4CkjeCMWYqJriYnSyVlai4d9bbKiPobp4=;
+ h=Date:From:To:Cc:Subject:From;
+ b=d/z26m2e7e/lDCZ3wj37vbzo+kv2qdHmJc7GxvZOJDNyKQDjyhemot+kwfL9HYg8m
+ u3R/nn6N+kr9sHv57rum4fg5ifmO1LIskRC6lQi/jdPuD6tU07DRsJDV8CyqYZdAEk
+ 1b4pAjtjfXw1iKnqP7nMEXG+fSkXB396wf0alOllFY8+OlHITUxtZP5RSgU2ld15on
+ lK2C8I77s1xO5LKv4DXGBkVvMkPmRXXAuvvdzPQrNAZ2Hh8VOTIlABSBmv3dKWf/vD
+ O5WfIZ+9ptn91dU5kVh/2FB+osJC8QiO3i58yMRJusOB9RjuECVXwU6inDfcli9FUE
+ US5BMLab/Kdx8yf05d6sCVUPxWzBO69binPhoC+IVTzmkbbd10xhx5gzNAYfSZsFj1
+ 8ezu1/c9nHFYZ+Ta5tyOj8ZuaB/0EGKhU+0g+S5GWl2jkQcUPTxJCPRmS6mw9D4Bch
+ RG6EiSRDkWLErTZViRFxqjpwsR6V6cqdF2PQMMx4AITDlR/j7DoWlpe6ddQU3l9npS
+ b+rhWBa+cCqFAMNIwR0/wSzjScWoQPnWkSKkbOEnlNM62dBSh51a83NCK5OomAyJ0E
+ mvQCQnJmB+kv9JCofsoFPnOBB9RRJy/PZV5pecAnSvTELgOLiKXZKPwIPalu7GJETF
+ xnwrOu0KFovZNPMO8upiOF3I=
+Received: from zn.tnic (pd9530d32.dip0.t-ipconnect.de [217.83.13.50])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
+ SHA256) (No client certificate requested)
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id B9CFF40E018F;
+ Sun,  6 Aug 2023 21:31:13 +0000 (UTC)
+Date: Sun, 6 Aug 2023 23:31:07 +0200
+From: Borislav Petkov <bp@alien8.de>
+To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>
+Message-ID: <20230806213107.GFZNARG6moWpFuSJ9W@fat_crate.local>
 MIME-Version: 1.0
-References: <20230805160027.88116-1-dakr@redhat.com>
-In-Reply-To: <20230805160027.88116-1-dakr@redhat.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Sat, 5 Aug 2023 19:02:36 +0200
-Message-ID: <CACO55tuS=tg_r-9W1fCr55svT8U0GhxLauMAmAmW7A052S_Mdg@mail.gmail.com>
-To: Danilo Krummrich <dakr@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH drm-misc-next] nouveau/dmem: fix copy-paste
- error in nouveau_dmem_migrate_chunk()
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Subject: [Nouveau] 2b5d1c29f6c4 ("drm/nouveau/disp: PIOR DP uses GPIO for
+ HPD, not PMGR AUX interrupts")
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,43 +63,64 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, bskeggs@redhat.com, daniel@ffwll.ch
+Cc: nouveau@lists.freedesktop.org, lkml <linux-kernel@vger.kernel.org>,
+ dri-devel@lists.freedesktop.org, regressions@leemhuis.info,
+ Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Aug 5, 2023 at 6:00=E2=80=AFPM Danilo Krummrich <dakr@redhat.com> w=
-rote:
->
-> Fix call to nouveau_fence_emit() with wrong channel parameter.
->
-> Fixes: 7f2a0b50b2b2 ("drm/nouveau: fence: separate fence alloc and emit")
-> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_dmem.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nou=
-veau/nouveau_dmem.c
-> index 4ad40e42cae1..61e84562094a 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-> @@ -678,7 +678,7 @@ static void nouveau_dmem_migrate_chunk(struct nouveau=
-_drm *drm,
->         }
->
->         if (!nouveau_fence_new(&fence))
-> -               nouveau_fence_emit(fence, chunk->drm->dmem->migrate.chan)=
-;
-> +               nouveau_fence_emit(fence, drm->dmem->migrate.chan);
->         migrate_vma_pages(args);
->         nouveau_dmem_fence_done(&fence);
->         nouveau_pfns_map(svmm, args->vma->vm_mm, args->start, pfns, i);
->
-> base-commit: 82d750e9d2f5d0594c8f7057ce59127e701af781
-> --
-> 2.41.0
->
+Hi folks,
 
-Reviewed-by: Karol Herbst <kherbst@redhat.com>
+the patch in $Subject breaks booting here on one of my test boxes, see
+below.
 
+Reverting it ontop of -rc4 fixes the issue.
+
+Thx.
+
+[    3.580535] ACPI: \_PR_.CP04: Found 4 idle states
+[    3.585694] ACPI: \_PR_.CP05: Found 4 idle states
+[    3.590852] ACPI: \_PR_.CP06: Found 4 idle states
+[    3.596037] ACPI: \_PR_.CP07: Found 4 idle states
+[    3.644065] Freeing initrd memory: 6740K
+[    3.742932] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+[    3.750409] 00:05: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+[    3.762111] serial 0000:00:16.3: enabling device (0000 -> 0003)
+[    3.771589] 0000:00:16.3: ttyS1 at I/O 0xf0a0 (irq = 17, base_baud = 115200) is a 16550A
+[    3.782503] Linux agpgart interface v0.103
+[    3.787805] ACPI: bus type drm_connector registered
+
+<--- boot stops here.
+
+It should continue with this:
+
+[    3.795491] Console: switching to colour dummy device 80x25
+[    3.801933] nouveau 0000:03:00.0: vgaarb: deactivate vga console
+[    3.808303] nouveau 0000:03:00.0: NVIDIA GT218 (0a8c00b1)
+[    3.931002] nouveau 0000:03:00.0: bios: version 70.18.83.00.08
+[    3.941731] nouveau 0000:03:00.0: fb: 512 MiB DDR3
+[    4.110348] tsc: Refined TSC clocksource calibration: 3591.349 MHz
+[    4.116627] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x33c466a1ab5, max_idle_ns: 440795209767 ns
+[    4.126871] clocksource: Switched to clocksource tsc
+[    4.252013] nouveau 0000:03:00.0: DRM: VRAM: 512 MiB
+[    4.257088] nouveau 0000:03:00.0: DRM: GART: 1048576 MiB
+[    4.262501] nouveau 0000:03:00.0: DRM: TMDS table version 2.0
+[    4.268333] nouveau 0000:03:00.0: DRM: DCB version 4.0
+[    4.273561] nouveau 0000:03:00.0: DRM: DCB outp 00: 02000360 00000000
+[    4.280104] nouveau 0000:03:00.0: DRM: DCB outp 01: 02000362 00020010
+[    4.286630] nouveau 0000:03:00.0: DRM: DCB outp 02: 028003a6 0f220010
+[    4.293176] nouveau 0000:03:00.0: DRM: DCB outp 03: 01011380 00000000
+[    4.299711] nouveau 0000:03:00.0: DRM: DCB outp 04: 08011382 00020010
+[    4.306243] nouveau 0000:03:00.0: DRM: DCB outp 05: 088113c6 0f220010
+[    4.312772] nouveau 0000:03:00.0: DRM: DCB conn 00: 00101064
+[    4.318520] nouveau 0000:03:00.0: DRM: DCB conn 01: 00202165
+[    4.329488] nouveau 0000:03:00.0: DRM: MM: using COPY for buffer copies
+[    4.336261] stackdepot: allocating hash table of 1048576 entries via kvcalloc
+...
+
+
+-- 
+Regards/Gruss,
+    Boris.
+
+https://people.kernel.org/tglx/notes-about-netiquette
