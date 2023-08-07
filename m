@@ -2,66 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB83F772AD4
-	for <lists+nouveau@lfdr.de>; Mon,  7 Aug 2023 18:29:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C3226772AE6
+	for <lists+nouveau@lfdr.de>; Mon,  7 Aug 2023 18:32:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1ED9C10E2C7;
-	Mon,  7 Aug 2023 16:29:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 23E4410E2BD;
+	Mon,  7 Aug 2023 16:32:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A459610E2C2
- for <nouveau@lists.freedesktop.org>; Mon,  7 Aug 2023 16:29:06 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9D60A10E2BD
+ for <nouveau@lists.freedesktop.org>; Mon,  7 Aug 2023 16:32:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1691425746;
+ s=mimecast20190719; t=1691425965;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding;
  bh=8RzhR0Defsn9yPdyrBq2FgdXanmnGOPFDzct4NabJUc=;
- b=aibrFb1CRHTlK1ckDfyoP9sfEvTIHCddAcZb7SYhhm3uXs9ht8gvs870JB11egCtL0hl3j
- BLbCKh8JchkZVn1/pJ9XAfdvYc8g9OQ9QHBjtKnZagmduYDwFmjELzSDQVXpPUhEI8AHt+
- zhreWuO8uzh6GjJlq0WIGALiq2gErwA=
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ b=C+/CyL6DWmJ97DvzadNxN/4lkkgbk7hRr9Zj4E1hmAdSuzbgFhJXbaLPqoRQZ2II9WaIxO
+ m7EasRiv0PRVjFn8teXb4HaZDs0Hwr6jVAu/kIjrxLNAiwJ3dMHwqe7XqJDB4SKPAWQHCP
+ AIO/QqAOj/nbEn1Ej8k7nPDvDK/qhUo=
+Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
+ [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-681-L3j9jBkEMXSRxUlkBHvk1w-1; Mon, 07 Aug 2023 12:29:04 -0400
-X-MC-Unique: L3j9jBkEMXSRxUlkBHvk1w-1
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-99bfe3dd009so756391666b.0
- for <nouveau@lists.freedesktop.org>; Mon, 07 Aug 2023 09:29:04 -0700 (PDT)
+ us-mta-171-G9zx51BRPriq_-UDhQyZcA-1; Mon, 07 Aug 2023 12:32:44 -0400
+X-MC-Unique: G9zx51BRPriq_-UDhQyZcA-1
+Received: by mail-lf1-f69.google.com with SMTP id
+ 2adb3069b0e04-4fe0e1dfdbaso4476622e87.1
+ for <nouveau@lists.freedesktop.org>; Mon, 07 Aug 2023 09:32:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691425743; x=1692030543;
+ d=1e100.net; s=20221208; t=1691425962; x=1692030762;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
  bh=8RzhR0Defsn9yPdyrBq2FgdXanmnGOPFDzct4NabJUc=;
- b=kRGfqCVZDGaeEMTKQWnBe9KMyMXBptmwRVWG58oYfd0anqLlQT+WD3yNkFSZRAjasz
- +CCg4xLlIoryiuNQCJHsiL6kreT6G3U44Tk+gk3mEf268nVQXIlXjEXBDu4w6DcaeOrx
- Ol92CsNHs7XlOehVg8VZxCz7cY2yuecbIg46M0Nf9kG8b0EbDMq/1TVhWGjjMQhqFu4P
- 4D4XedBErCbVn7JjI2PxnZSzCvj/zvh8NAQc+TLnMThAaWjTf7twq59YcaYduWDANJk5
- OFwA1H3W3yyx2DqVowkEQftTRc9WKhIz7youbkAFqCSpC/hRl71e7EJsqBq9kvUAnpGS
- P35A==
-X-Gm-Message-State: AOJu0YzUo1bqUokI8QUa2UPk7oqH5XE6wKzKBk+DGouF+o79GS/4hntA
- 7rQ0oSP5QB2G6g3ZMciTGyIaSgM34M4VyHTzYv7tmXhodh8Jr7k8G53Lp2SComafMfvNejyhoTg
- a1z7KQQWVoYEiJ9CA8PZra1/zUQ==
-X-Received: by 2002:a17:907:3f93:b0:99b:cadd:c2ee with SMTP id
- hr19-20020a1709073f9300b0099bcaddc2eemr9291171ejc.29.1691425743723; 
- Mon, 07 Aug 2023 09:29:03 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFw6akvBExQRKLRcc48yHKLdyy5YgC26FFwO36Jpq7vnN3NYThd0gduelCV3L44tmqlcvtGLg==
-X-Received: by 2002:a17:907:3f93:b0:99b:cadd:c2ee with SMTP id
- hr19-20020a1709073f9300b0099bcaddc2eemr9291145ejc.29.1691425743314; 
- Mon, 07 Aug 2023 09:29:03 -0700 (PDT)
+ b=e0KiqgRd6sog07Ie8u0UUlvuDsZhTE502rESeowZamMPGY6uGfUw/LC1zycLSMCbER
+ Vind4krw4R3ZFCacVomSZ1UPx4FZx27b8ASSA20EIo3doV0tLrhIktQOgKeSHSsCeNsX
+ j5akOi5d4O+zvco06/4lcVfscyx9dwmTLw6mVmAbOfzw2Ty8WqsQNINIB4dTy1c3LEki
+ GM0eF4uJisG+yE0rhUamssNBHGTd+Pnju5Os+HKnaFVKlxxSyiwrLFla+v6aZwYvetLn
+ MFELYigb3DDUhVO8zjbMzSbt9Q9pZkqpxCPTzO/D+jBl6XcE503MM7va2WHbwc20eodK
+ zyIQ==
+X-Gm-Message-State: AOJu0Yx31f8trrKLIWTbL6oxWW9Kvaej3wF2FqalAvadbxHe7ylLXgnU
+ ewi96Olb7Rw8qaguEZnj0Twyb3M7JboTGVRbxD7ywuC3Y1+A9GAu5MdvXeIqv50os7WY3O+Ajka
+ 2knqPwjaqzl5naQAaAB3Efkpgug==
+X-Received: by 2002:ac2:5e90:0:b0:4fb:c657:3376 with SMTP id
+ b16-20020ac25e90000000b004fbc6573376mr5710684lfq.29.1691425962408; 
+ Mon, 07 Aug 2023 09:32:42 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGoveHUcxmtOtYeVGuvV0X+WYxTBKr9SEAQjhSbownwD6MHWzDQxtVUZ5WIVK3lj030C9Zegw==
+X-Received: by 2002:ac2:5e90:0:b0:4fb:c657:3376 with SMTP id
+ b16-20020ac25e90000000b004fbc6573376mr5710669lfq.29.1691425962042; 
+ Mon, 07 Aug 2023 09:32:42 -0700 (PDT)
 Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- m8-20020a1709066d0800b0099cadcf13cesm4504419ejr.66.2023.08.07.09.29.01
+ d17-20020a50fb11000000b00522572f323dsm5394761edq.16.2023.08.07.09.32.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Aug 2023 09:29:02 -0700 (PDT)
+ Mon, 07 Aug 2023 09:32:41 -0700 (PDT)
 From: Danilo Krummrich <dakr@redhat.com>
 To: airlied@gmail.com, daniel@ffwll.ch, bskeggs@redhat.com, kherbst@redhat.com,
  lyude@redhat.com, sfr@canb.auug.org.au
-Date: Mon,  7 Aug 2023 18:28:44 +0200
-Message-ID: <20230807162859.68905-1-dakr@redhat.com>
+Date: Mon,  7 Aug 2023 18:32:21 +0200
+Message-ID: <20230807163238.2091-1-dakr@redhat.com>
 X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
