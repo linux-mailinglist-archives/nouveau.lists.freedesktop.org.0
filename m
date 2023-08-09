@@ -1,81 +1,79 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id F315777674B
-	for <lists+nouveau@lfdr.de>; Wed,  9 Aug 2023 20:30:32 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D215776C18
+	for <lists+nouveau@lfdr.de>; Thu, 10 Aug 2023 00:18:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6BF7710E492;
-	Wed,  9 Aug 2023 18:30:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 78D6E10E132;
+	Wed,  9 Aug 2023 22:18:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 22F6B10E492
- for <nouveau@lists.freedesktop.org>; Wed,  9 Aug 2023 18:30:29 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A8B3D10E12C
+ for <nouveau@lists.freedesktop.org>; Wed,  9 Aug 2023 22:18:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1691605828;
+ s=mimecast20190719; t=1691619503;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=mbjndyEV18fW8Q6aaYiEgoKrYM26FczR+bnw1W1kYtY=;
- b=fD/VvTsJmOivGjkjUN91U9TuLuX5YxAIsRzS05UAtNDpqkiXUXKQRkeNGq96bum5U/ykSb
- 8iyshUqNSmQ4gI0pvLURljraf+1CaMCwrLvV7v2YZUw5pPYc5SqhMh2tC/kUsZYy+TQn7y
- fxUqh5uLgPDhSgRhel4Fk+RGpCCwAkc=
-Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
- [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding;
+ bh=4swX8dMl/TijHGT/PyStaDlhL4BvYkXkrr8Mth8YW8U=;
+ b=MuqKYzhYPjo6G1NzPU65gDrbs/uDPCn+jUZ4T+PJ9g4Hj3S4CJl7TUt93Xg+2uTy696wht
+ q6/ysbph3SXvN+Kr7V1mNlnZ6ljqp+fnfDN98l8horqIbTFbcRJk8ZaPBOY6gBO1iLrsz3
+ U2rnmHhxtVpspmhCUBKJ3cxwunpzWag=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-609-9owVPoupO4Sl6SecxcL_CQ-1; Wed, 09 Aug 2023 14:30:26 -0400
-X-MC-Unique: 9owVPoupO4Sl6SecxcL_CQ-1
-Received: by mail-lj1-f200.google.com with SMTP id
- 38308e7fff4ca-2b6fdb8d0acso260361fa.0
- for <nouveau@lists.freedesktop.org>; Wed, 09 Aug 2023 11:30:26 -0700 (PDT)
+ us-mta-286-4xKExbHDPCGruNBFFywLHg-1; Wed, 09 Aug 2023 18:18:22 -0400
+X-MC-Unique: 4xKExbHDPCGruNBFFywLHg-1
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-3175bf07953so200349f8f.2
+ for <nouveau@lists.freedesktop.org>; Wed, 09 Aug 2023 15:18:22 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691605825; x=1692210625;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mbjndyEV18fW8Q6aaYiEgoKrYM26FczR+bnw1W1kYtY=;
- b=YmLzb79mJQ4nWNiz12efcUE2vw0THUiRYj5aCNpvih5Nna9YU88T5/R704FcQVDPwj
- lmx/I9Y56CTWGRbMur5qGo7BrUmKiHSHz30bAIlJb1zqdeR0r0O0oU4VAKBZxy5MzKK1
- tnlXERYagCK5brAvSCn7/VRELpbnHti+VLDF6uzIG9mvf1VI33qCQ3uVjzQbkre8pXUs
- Ojy/1e8Nd2oNkCnZEc0LLl60YbsFeNH1bkGcaTY/gFy6J6VyfmvLazg2w+S4S9j6pPgS
- KKbn6no+TE9Y0VjGpx0KEuKOr7E9XW9cAyCZgC00u9hRpkn+keUCNlWi5HStwoh3Pjxp
- x8Yw==
-X-Gm-Message-State: AOJu0Yxzdcqi1kAms3bfUOC9Ji4s0gNvIEJGazwjM/F5SxfyDbauwnoL
- VqpkPsv3kB4rqsmryYnqrMOJ7TqvCzIxxn0Uc+zZFufElpHUWHl7RW0zPvUJVqSpkPVX0KvneoK
- BnTV/M7KkIiXAkcDGWFFg8jTvQFUye2EhSkHNzfcwpg==
-X-Received: by 2002:a2e:bc26:0:b0:2b9:6610:d7ca with SMTP id
- b38-20020a2ebc26000000b002b96610d7camr2960819ljf.5.1691605825386; 
- Wed, 09 Aug 2023 11:30:25 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEyvglv3LGH/ukn+Eb+jsR7KbtrzIbPTNwruMlpHnbwXO1CT5AZMoySQQYEHX6dyFsxo+vCB9UAiYpnP5/b6aw=
-X-Received: by 2002:a2e:bc26:0:b0:2b9:6610:d7ca with SMTP id
- b38-20020a2ebc26000000b002b96610d7camr2960796ljf.5.1691605825099; Wed, 09 Aug
- 2023 11:30:25 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1691619501; x=1692224301;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4swX8dMl/TijHGT/PyStaDlhL4BvYkXkrr8Mth8YW8U=;
+ b=bxHf3xapodH6OgGZmPheH9wFv7xR0DlMveU5RGVE4GxxPx+NgJtopdLHmHe5AZxmBK
+ HFmadvpL5rrbc3nHY5z1jWCFEira3xJIAd9c8ZrKOgTUfJ2RDA04lbZLbgNE39H9l07o
+ PLotAHG/lcMi0K8VNZFT4BAz/J/ndUzDq2rBrxC6eqRXjDp2zlzUc9zxjaaz/NKiZQ2i
+ pqyrxO5kBVvEyE0O5pcgsxF9/heEhkFHsBV8fQNquMlo6xDCBV/M7eTAbieFaFIGSTg5
+ S3gU6bmrt2mE6vh8ZD361T468ZFq0KuSk0XBT7gE5BRr/9+uRBVs4xyxtjthvlU7ZTHN
+ peDw==
+X-Gm-Message-State: AOJu0YziTwvTizJbro1yAmxcYs0XSiOozeMuximsukD8ykAhuKRpcmFr
+ rKmQOunhfxRso9AjCVS51X6qSjMoM9RkM53wYi7eiWlk2V0tuMZf/PT0GjxXj7Hu0mAKejqLCZ4
+ db6qbouv88TfGDFs7ZNHvtUej1Q==
+X-Received: by 2002:adf:fc92:0:b0:314:475:bc47 with SMTP id
+ g18-20020adffc92000000b003140475bc47mr509158wrr.69.1691619501250; 
+ Wed, 09 Aug 2023 15:18:21 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGr72ABwcc+dQMkFbinxm22Sh0FvMsgVJo9z/frkODp+2NoqFGLiB6k97q2hvJxap+i7e9mIw==
+X-Received: by 2002:adf:fc92:0:b0:314:475:bc47 with SMTP id
+ g18-20020adffc92000000b003140475bc47mr509133wrr.69.1691619500835; 
+ Wed, 09 Aug 2023 15:18:20 -0700 (PDT)
+Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
+ by smtp.gmail.com with ESMTPSA id
+ n4-20020a05640206c400b00523372c86e7sm30683edy.24.2023.08.09.15.18.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Aug 2023 15:18:20 -0700 (PDT)
+From: Danilo Krummrich <dakr@redhat.com>
+To: airlied@gmail.com, daniel@ffwll.ch, luben.tuikov@amd.com,
+ matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
+ robdclark@chromium.org, sarah.walker@imgtec.com, ketil.johnsen@arm.com,
+ Liviu.Dudau@arm.com, lina@asahilina.net, donald.robson@imgtec.com,
+ boris.brezillon@collabora.com, christian.koenig@amd.com,
+ faith.ekstrand@collabora.com, bskeggs@redhat.com
+Date: Thu, 10 Aug 2023 00:17:23 +0200
+Message-ID: <20230809221729.3657-1-dakr@redhat.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-References: <20230806213107.GFZNARG6moWpFuSJ9W@fat_crate.local>
- <CACO55tvZD5U4J8DawFTRVnV-dLYLngfhuqO29_sWNEGofKfnBg@mail.gmail.com>
- <20230807150521.GGZNEIMQ9rsyCmkpoA@fat_crate.local>
- <CACO55tvWuSdwdirj7S3Dk-r4NAw8jC8g5RHKFd62WXi43iQP-w@mail.gmail.com>
- <87fs4sfu54.wl-tiwai@suse.de>
- <CACO55tszwFEgt=8xn4auAE7KJVs3ybGG68OzL9HJt19XGVhhHQ@mail.gmail.com>
- <874jl8fngo.wl-tiwai@suse.de>
- <CACO55ts9YWF7nLi3Zs4xKySpdHyUFgf4r566cKx3FwNTCaz0Sg@mail.gmail.com>
- <87wmy4e4uk.wl-tiwai@suse.de>
- <60ef0646-b0ab-b4e0-9eaa-a2c431c5d682@leemhuis.info>
- <CACO55tt=RosBaYPc_wf3NnRC-+prFg2G9E0GEjnV7TSkWjB2HQ@mail.gmail.com>
-In-Reply-To: <CACO55tt=RosBaYPc_wf3NnRC-+prFg2G9E0GEjnV7TSkWjB2HQ@mail.gmail.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Wed, 9 Aug 2023 20:30:13 +0200
-Message-ID: <CACO55ttZUVCVuWpBiTcr1goWWxs2KP1Xxg00X+hYhbpeJzUEFA@mail.gmail.com>
-To: Thorsten Leemhuis <regressions@leemhuis.info>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] 2b5d1c29f6c4 ("drm/nouveau/disp: PIOR DP uses GPIO
- for HPD, not PMGR AUX interrupts")
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
+Subject: [Nouveau] [PATCH drm-misc-next] drm/sched: support multiple rings
+ per gpu_scheduler
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,54 +85,363 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Takashi Iwai <tiwai@suse.de>, nouveau@lists.freedesktop.org,
- lkml <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
- Borislav Petkov <bp@alien8.de>, Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Aug 9, 2023 at 8:28=E2=80=AFPM Karol Herbst <kherbst@redhat.com> wr=
-ote:
->
-> On Wed, Aug 9, 2023 at 4:04=E2=80=AFPM Thorsten Leemhuis
-> <regressions@leemhuis.info> wrote:
-> >
-> > On 09.08.23 15:13, Takashi Iwai wrote:
-> > >
-> > > If this can't be fixed quickly, I suppose it's safer to revert it fro=
-m
-> > > 6.4.y for now.  6.5 is still being cooked, but 6.4.x is already in
-> > > wide deployment, hence the regression has to be addressed quickly.
-> >
->
-> feel free to send reverts to mainline and add my r-by tage to it and I
-> can push those changes up. Sadly those patches fixed another
-> use-after-free, but it seems like we have to take another shot unless
-> somebody does have time to look into it promptly.
->
+With the current mental model every GPU scheduler instance represents
+a single HW ring, while every entity represents a software queue feeding
+into one or multiple GPU scheduler instances and hence into one or
+multiple HW rings.
 
-uhm and the two patches around that one,
-752a281032b2d6f4564be827e082bde6f7d2fd4fand
-ea293f823a8805735d9e00124df81a8f448ed1ae
+This does not really scale with firmware schedulers feeding the actual
+HW rings, while the driver feeds the firmware scheduler through an
+arbitrary amount of dynamically created rings, since for each of those
+rings a GPU scheduler instance would be required and a separate kthread
+would be created.
 
-> > Good luck with that. To quote
-> > https://docs.kernel.org/process/handling-regressions.html :
-> >
-> > ```
-> > Regarding stable and longterm kernels:
-> >
-> > [...]
-> >
-> > * Whenever you want to swiftly resolve a regression that recently also
-> > made it into a proper mainline, stable, or longterm release, fix it
-> > quickly in mainline; when appropriate thus involve Linus to fast-track
-> > the fix (see above). That's because the stable team normally does
-> > neither revert nor fix any changes that cause the same problems in main=
-line.
-> > ```
-> >
-> > Note the "normally" in there, so there is a chance.
-> >
-> > Ciao, Thorsten
-> >
+To overcome this we can think of the scheduler having two modes of
+operation, single ring mode and multi ring mode. Depending on the mode
+of operation, the mental model differs.
+
+Single ring mode (which is the default) keeps the original behaviour of
+the scheduler and its entities.
+
+In multi ring mode (enabled by passing the GPU scheduler the
+DRM_GPU_SCHEDULER_MODE_MULTI_RING flag) each entity represents a ring,
+while the GPU scheduler itself only exists to sort out job dependencies
+and actually process the jobs of each entity.
+
+By just applying this different mental model, the required code change
+is pretty minimalistic: While in single ring mode, if a job depends on a
+dma-fence from the same scheduler instance we only wait for the
+dependency to be scheduled (sched_fence->scheduled), in multi ring mode
+we fall through and just wait for the dependency to fully complete
+(sched_fence->finished) in order to avoid races between separate rings.
+Or in other words, to pick up the schedulers existing terminology,
+prevent dependency pipelining.
+
+Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+---
+Just before sending out this patch I was made aware of the "DRM Scheduler
+changes for XE" [1] patch series.
+
+However, I think bringing this alternative approach into discussion could
+be useful.
+
+From a first glance it looks like that both approaches semantically aim for
+the same goal, namely addressing firmware schedulers with arbitrary amounts
+of software rings to feed from the driver side.
+
+The "XE approach" for that seems to be to make GPU scheduler instances
+scalable by submitting jobs to a workqueue rather than creating a kthread
+per scheduler instance, such that per software ring a scheduler instance can
+be created. Hence the definition of a 1:1 relationship between scheduler and
+entity.
+
+In Nouveau we approached it differently, such that we have just one GPU
+scheduler per driver instance, while software rings are represented as
+entities. As explained in the commit message, this seems to work fine, as
+long as we can teach the scheduler to prevent dependency pipelining.
+
+As a hack this basically already works without this patch by just setting the
+DRM_SCHED_FENCE_DONT_PIPELINE flag for all out-fences.
+
+[1] https://lore.kernel.org/intel-xe/20230801205103.627779-1-matthew.brost@intel.com/T/#t
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c |  2 +-
+ drivers/gpu/drm/etnaviv/etnaviv_sched.c    |  2 +-
+ drivers/gpu/drm/lima/lima_sched.c          |  2 +-
+ drivers/gpu/drm/msm/msm_ringbuffer.c       |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_sched.c    |  7 +--
+ drivers/gpu/drm/panfrost/panfrost_job.c    |  2 +-
+ drivers/gpu/drm/scheduler/sched_entity.c   |  3 +-
+ drivers/gpu/drm/scheduler/sched_main.c     | 55 +++++++++++++++-------
+ drivers/gpu/drm/v3d/v3d_sched.c            | 10 ++--
+ include/drm/gpu_scheduler.h                | 18 ++++++-
+ 10 files changed, 72 insertions(+), 31 deletions(-)
+
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
+index a2cdde0ca0a7..eed6f56e3957 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
+@@ -2491,7 +2491,7 @@ static int amdgpu_device_init_schedulers(struct amdgpu_device *adev)
+ 			break;
+ 		}
+ 
+-		r = drm_sched_init(&ring->sched, &amdgpu_sched_ops,
++		r = drm_sched_init(&ring->sched, 0, &amdgpu_sched_ops,
+ 				   ring->num_hw_submission, 0,
+ 				   timeout, adev->reset_domain->wq,
+ 				   ring->sched_score, ring->name,
+diff --git a/drivers/gpu/drm/etnaviv/etnaviv_sched.c b/drivers/gpu/drm/etnaviv/etnaviv_sched.c
+index 1ae87dfd19c4..bfe761316ba9 100644
+--- a/drivers/gpu/drm/etnaviv/etnaviv_sched.c
++++ b/drivers/gpu/drm/etnaviv/etnaviv_sched.c
+@@ -133,7 +133,7 @@ int etnaviv_sched_init(struct etnaviv_gpu *gpu)
+ {
+ 	int ret;
+ 
+-	ret = drm_sched_init(&gpu->sched, &etnaviv_sched_ops,
++	ret = drm_sched_init(&gpu->sched, 0, &etnaviv_sched_ops,
+ 			     etnaviv_hw_jobs_limit, etnaviv_job_hang_limit,
+ 			     msecs_to_jiffies(500), NULL, NULL,
+ 			     dev_name(gpu->dev), gpu->dev);
+diff --git a/drivers/gpu/drm/lima/lima_sched.c b/drivers/gpu/drm/lima/lima_sched.c
+index ffd91a5ee299..f559d7de5658 100644
+--- a/drivers/gpu/drm/lima/lima_sched.c
++++ b/drivers/gpu/drm/lima/lima_sched.c
+@@ -488,7 +488,7 @@ int lima_sched_pipe_init(struct lima_sched_pipe *pipe, const char *name)
+ 
+ 	INIT_WORK(&pipe->recover_work, lima_sched_recover_work);
+ 
+-	return drm_sched_init(&pipe->base, &lima_sched_ops, 1,
++	return drm_sched_init(&pipe->base, 0, &lima_sched_ops, 1,
+ 			      lima_job_hang_limit,
+ 			      msecs_to_jiffies(timeout), NULL,
+ 			      NULL, name, pipe->ldev->dev);
+diff --git a/drivers/gpu/drm/msm/msm_ringbuffer.c b/drivers/gpu/drm/msm/msm_ringbuffer.c
+index b60199184409..79fb8c96465d 100644
+--- a/drivers/gpu/drm/msm/msm_ringbuffer.c
++++ b/drivers/gpu/drm/msm/msm_ringbuffer.c
+@@ -93,7 +93,7 @@ struct msm_ringbuffer *msm_ringbuffer_new(struct msm_gpu *gpu, int id,
+ 	 /* currently managing hangcheck ourselves: */
+ 	sched_timeout = MAX_SCHEDULE_TIMEOUT;
+ 
+-	ret = drm_sched_init(&ring->sched, &msm_sched_ops,
++	ret = drm_sched_init(&ring->sched, 0, &msm_sched_ops,
+ 			num_hw_submissions, 0, sched_timeout,
+ 			NULL, NULL, to_msm_bo(ring->bo)->name, gpu->dev->dev);
+ 	if (ret) {
+diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
+index 3424a1bf6af3..6528c09fffc9 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_sched.c
++++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
+@@ -407,9 +407,10 @@ int nouveau_sched_init(struct nouveau_drm *drm)
+ 	if (!drm->sched_wq)
+ 		return -ENOMEM;
+ 
+-	return drm_sched_init(sched, &nouveau_sched_ops,
+-			      NOUVEAU_SCHED_HW_SUBMISSIONS, 0, job_hang_limit,
+-			      NULL, NULL, "nouveau_sched", drm->dev->dev);
++	return drm_sched_init(sched, DRM_GPU_SCHEDULER_MODE_MULTI_RING,
++			      &nouveau_sched_ops, NOUVEAU_SCHED_HW_SUBMISSIONS,
++			      0, job_hang_limit, NULL, NULL, "nouveau_sched",
++			      drm->dev->dev);
+ }
+ 
+ void nouveau_sched_fini(struct nouveau_drm *drm)
+diff --git a/drivers/gpu/drm/panfrost/panfrost_job.c b/drivers/gpu/drm/panfrost/panfrost_job.c
+index dbc597ab46fb..dbbabf63f08f 100644
+--- a/drivers/gpu/drm/panfrost/panfrost_job.c
++++ b/drivers/gpu/drm/panfrost/panfrost_job.c
+@@ -814,7 +814,7 @@ int panfrost_job_init(struct panfrost_device *pfdev)
+ 	for (j = 0; j < NUM_JOB_SLOTS; j++) {
+ 		js->queue[j].fence_context = dma_fence_context_alloc(1);
+ 
+-		ret = drm_sched_init(&js->queue[j].sched,
++		ret = drm_sched_init(&js->queue[j].sched, 0,
+ 				     &panfrost_sched_ops,
+ 				     nentries, 0,
+ 				     msecs_to_jiffies(JOB_TIMEOUT_MS),
+diff --git a/drivers/gpu/drm/scheduler/sched_entity.c b/drivers/gpu/drm/scheduler/sched_entity.c
+index a42763e1429d..6d1e11e6bdcd 100644
+--- a/drivers/gpu/drm/scheduler/sched_entity.c
++++ b/drivers/gpu/drm/scheduler/sched_entity.c
+@@ -401,7 +401,8 @@ static bool drm_sched_entity_add_dependency_cb(struct drm_sched_entity *entity)
+ 
+ 	s_fence = to_drm_sched_fence(fence);
+ 	if (!fence->error && s_fence && s_fence->sched == sched &&
+-	    !test_bit(DRM_SCHED_FENCE_DONT_PIPELINE, &fence->flags)) {
++	    !test_bit(DRM_SCHED_FENCE_DONT_PIPELINE, &fence->flags) &&
++	    !(sched->flags & DRM_GPU_SCHEDULER_MODE_MULTI_RING)) {
+ 
+ 		/*
+ 		 * Fence is from the same scheduler, only need to wait for
+diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
+index 506371c42745..0c432c1dafdf 100644
+--- a/drivers/gpu/drm/scheduler/sched_main.c
++++ b/drivers/gpu/drm/scheduler/sched_main.c
+@@ -24,28 +24,50 @@
+ /**
+  * DOC: Overview
+  *
+- * The GPU scheduler provides entities which allow userspace to push jobs
+- * into software queues which are then scheduled on a hardware run queue.
+- * The software queues have a priority among them. The scheduler selects the entities
+- * from the run queue using a FIFO. The scheduler provides dependency handling
+- * features among jobs. The driver is supposed to provide callback functions for
+- * backend operations to the scheduler like submitting a job to hardware run queue,
+- * returning the dependencies of a job etc.
++ * The GPU scheduler is mainly structured into the scheduler itself
++ * (&drm_gpu_scheduler), scheduler entities (&drm_sched_entity) and scheduler
++ * jobs (&drm_sched_job).
+  *
+- * The organisation of the scheduler is the following:
++ * Each &drm_gpu_scheduler has different priority run queues (e.g. HIGH_HW,
++ * HIGH_SW, KERNEL, NORMAL), which themselfs contain a list of &drm_sched_entity
++ * objects, while each &drm_sched_entity maintains a queue of &drm_sched_jobs.
+  *
+- * 1. Each hw run queue has one scheduler
+- * 2. Each scheduler has multiple run queues with different priorities
+- *    (e.g., HIGH_HW,HIGH_SW, KERNEL, NORMAL)
+- * 3. Each scheduler run queue has a queue of entities to schedule
+- * 4. Entities themselves maintain a queue of jobs that will be scheduled on
+- *    the hardware.
++ * There are two modes of operation, single ring mode and multi ring mode.
++ * Depending on the mode of operation, the mental model of what the named
++ * structures represent differs.
+  *
+- * The jobs in a entity are always scheduled in the order that they were pushed.
++ * In single ring mode (which is the default) every &drm_gpu_scheduler
++ * instance represents a single HW ring, while every &drm_sched_entity
++ * represents a software queue feeding into one or multiple &drm_gpu_scheduler
++ * instances and hence into one or multiple HW rings.
++ *
++ * Single ring mode may be used when the GPU has a fixed amount of HW rings
++ * which can be directly fed by the driver.
++ *
++ * In multi ring mode (enabled by passing the &drm_gpu_scheduler the
++ * &DRM_GPU_SCHEDULER_MODE_MULTI_RING flag) each &drm_sched_entity represents a
++ * HW ring, while the &drm_gpu_scheduler itself only exists to sort out job
++ * dependencies and actually process the jobs of each &drm_sched_entity.
++ *
++ * Multi ring mode may be used when the GPU has a firmware scheduler feeding the
++ * actual HW rings, while the driver feeds the firmware scheduler through an
++ * arbitrary amount of dynamically created rings.
++ *
++ * While one or the other mental model could be applied without setting the ring
++ * mode through a flag, the scheduler needs to know the mode of operation in
++ * order to be able to make correct decitions when it comes to handling job
++ * dependencies.
++ *
++ * Independent of the mode of operation jobs within an entity are always
++ * scheduled in the order in which they were submitted.
+  *
+  * Note that once a job was taken from the entities queue and pushed to the
+  * hardware, i.e. the pending queue, the entity must not be referenced anymore
+  * through the jobs entity pointer.
++ *
++ * In order for the scheduler to actually prepare, process or free a job once it
++ * is completed, the driver is supposed to provide the corresponding callback
++ * functions (&drm_sched_backend_ops) to the scheduler.
+  */
+ 
+ #include <linux/kthread.h>
+@@ -1082,7 +1104,7 @@ static int drm_sched_main(void *param)
+  *
+  * Return 0 on success, otherwise error code.
+  */
+-int drm_sched_init(struct drm_gpu_scheduler *sched,
++int drm_sched_init(struct drm_gpu_scheduler *sched, unsigned int flags,
+ 		   const struct drm_sched_backend_ops *ops,
+ 		   unsigned hw_submission, unsigned hang_limit,
+ 		   long timeout, struct workqueue_struct *timeout_wq,
+@@ -1097,6 +1119,7 @@ int drm_sched_init(struct drm_gpu_scheduler *sched,
+ 	sched->hang_limit = hang_limit;
+ 	sched->score = score ? score : &sched->_score;
+ 	sched->dev = dev;
++	sched->flags = flags;
+ 	for (i = DRM_SCHED_PRIORITY_MIN; i < DRM_SCHED_PRIORITY_COUNT; i++)
+ 		drm_sched_rq_init(sched, &sched->sched_rq[i]);
+ 
+diff --git a/drivers/gpu/drm/v3d/v3d_sched.c b/drivers/gpu/drm/v3d/v3d_sched.c
+index 06238e6d7f5c..4ba561014a5d 100644
+--- a/drivers/gpu/drm/v3d/v3d_sched.c
++++ b/drivers/gpu/drm/v3d/v3d_sched.c
+@@ -387,7 +387,7 @@ v3d_sched_init(struct v3d_dev *v3d)
+ 	int hang_limit_ms = 500;
+ 	int ret;
+ 
+-	ret = drm_sched_init(&v3d->queue[V3D_BIN].sched,
++	ret = drm_sched_init(&v3d->queue[V3D_BIN].sched, 0,
+ 			     &v3d_bin_sched_ops,
+ 			     hw_jobs_limit, job_hang_limit,
+ 			     msecs_to_jiffies(hang_limit_ms), NULL,
+@@ -395,7 +395,7 @@ v3d_sched_init(struct v3d_dev *v3d)
+ 	if (ret)
+ 		return ret;
+ 
+-	ret = drm_sched_init(&v3d->queue[V3D_RENDER].sched,
++	ret = drm_sched_init(&v3d->queue[V3D_RENDER].sched, 0,
+ 			     &v3d_render_sched_ops,
+ 			     hw_jobs_limit, job_hang_limit,
+ 			     msecs_to_jiffies(hang_limit_ms), NULL,
+@@ -403,7 +403,7 @@ v3d_sched_init(struct v3d_dev *v3d)
+ 	if (ret)
+ 		goto fail;
+ 
+-	ret = drm_sched_init(&v3d->queue[V3D_TFU].sched,
++	ret = drm_sched_init(&v3d->queue[V3D_TFU].sched, 0,
+ 			     &v3d_tfu_sched_ops,
+ 			     hw_jobs_limit, job_hang_limit,
+ 			     msecs_to_jiffies(hang_limit_ms), NULL,
+@@ -412,7 +412,7 @@ v3d_sched_init(struct v3d_dev *v3d)
+ 		goto fail;
+ 
+ 	if (v3d_has_csd(v3d)) {
+-		ret = drm_sched_init(&v3d->queue[V3D_CSD].sched,
++		ret = drm_sched_init(&v3d->queue[V3D_CSD].sched, 0,
+ 				     &v3d_csd_sched_ops,
+ 				     hw_jobs_limit, job_hang_limit,
+ 				     msecs_to_jiffies(hang_limit_ms), NULL,
+@@ -420,7 +420,7 @@ v3d_sched_init(struct v3d_dev *v3d)
+ 		if (ret)
+ 			goto fail;
+ 
+-		ret = drm_sched_init(&v3d->queue[V3D_CACHE_CLEAN].sched,
++		ret = drm_sched_init(&v3d->queue[V3D_CACHE_CLEAN].sched, 0,
+ 				     &v3d_cache_clean_sched_ops,
+ 				     hw_jobs_limit, job_hang_limit,
+ 				     msecs_to_jiffies(hang_limit_ms), NULL,
+diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
+index f9544d9b670d..afe29196cc7e 100644
+--- a/include/drm/gpu_scheduler.h
++++ b/include/drm/gpu_scheduler.h
+@@ -465,6 +465,20 @@ struct drm_sched_backend_ops {
+ 	void (*free_job)(struct drm_sched_job *sched_job);
+ };
+ 
++/**
++ * DRM_GPU_SCHEDULER_MODE_MULTI_RING - Run the scheduler in multi ring mode
++ *
++ * The &drm_gpu_scheduler typically represents one HW ring with
++ * &drm_sched_entities feeding into one or multiple scheduler instances.
++ *
++ * In multi ring mode it is assumed there is a single &drm_gpu_scheduler
++ * instance only, where &drm_sched_entities represent rings instead.
++ *
++ * This is useful for GPUs where the &drm_gpu_scheduler should feed a firmware
++ * scheduler with an arbitrary amount of rings.
++ */
++#define DRM_GPU_SCHEDULER_MODE_MULTI_RING	(1 << 0)
++
+ /**
+  * struct drm_gpu_scheduler - scheduler instance-specific data
+  *
+@@ -493,6 +507,7 @@ struct drm_sched_backend_ops {
+  * @ready: marks if the underlying HW is ready to work
+  * @free_guilty: A hit to time out handler to free the guilty job.
+  * @dev: system &struct device
++ * @flags: the flags for the &drm_gpu_scheduler
+  *
+  * One scheduler is implemented for each hardware ring.
+  */
+@@ -517,9 +532,10 @@ struct drm_gpu_scheduler {
+ 	bool				ready;
+ 	bool				free_guilty;
+ 	struct device			*dev;
++	unsigned long			flags;
+ };
+ 
+-int drm_sched_init(struct drm_gpu_scheduler *sched,
++int drm_sched_init(struct drm_gpu_scheduler *sched, unsigned int flags,
+ 		   const struct drm_sched_backend_ops *ops,
+ 		   uint32_t hw_submission, unsigned hang_limit,
+ 		   long timeout, struct workqueue_struct *timeout_wq,
+
+base-commit: e05f3938c5a7896d09736e3381675a57ffee7a0a
+-- 
+2.41.0
 
