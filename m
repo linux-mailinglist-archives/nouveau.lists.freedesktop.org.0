@@ -2,140 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C04CF7752AE
-	for <lists+nouveau@lfdr.de>; Wed,  9 Aug 2023 08:15:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88E38775644
+	for <lists+nouveau@lfdr.de>; Wed,  9 Aug 2023 11:21:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 93C7010E3FA;
-	Wed,  9 Aug 2023 06:15:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9E96E10E409;
+	Wed,  9 Aug 2023 09:21:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on2075.outbound.protection.outlook.com [40.107.95.75])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 65AFB10E23C;
- Wed,  9 Aug 2023 06:15:35 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NSt7+R0WqGiZKXXOV8kK/g42X7tU3jaLmcogER24j8boq4nvKQhXrO85UY0zK35zgOzF8RSPlp9U6WyFW0MjCQNSfCU7z50GLwUKOUZpd3rBEC1MeYerbs+yjgbcwA1xFJcMUbnz/yMylTm0juXnLr3vwixQNTPfEa/a/BZ5gDsO42XsMSajKhoXxkirrix+sjF2rVPoNpiGYcM/q6W/Phlejq40X+e8BXF/ohjbe8Cje+Llv6YkGtsR+ESg7M989u0XEdk4JP+xO7yT0k2j+cKBKG9BaSGWpwLrIBQuGnfkK5fRuSPXIL1WsAbmLJ7p1B4PKg0+gOhocmTSeP2PQw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XqKdQWNsZujQELLTqxPkmyoj62uEMHdzP7cZc4NWsc4=;
- b=QKJFiQkPMYH8edANr0BlIBmgFS1Tnad8fbOXXtSA60tIN7GdF5BUZgpKse9XFB3NV5LBchDSAP8AIUqlOGmXpR0LSfvJvsYBpV+L5Ol/CNQXoa1gq6rykqgc92nMa+Yk52OsLDSE3OXDfg151nyhE7+6z+9lc+IuW4v8XGffdzoZu3FjBVJ34M3S5kW5f1aXjGP6Mz4LBfoP8meKCW5nZ8vnJTRi9/6sdz3s2qWkZn7TWqz0YsKTsXaNzY7z4MYbeaEzrP7omV/8X89fzeu3DWCKxuiZ0AEJn7LvY492TcjuD1SkK7GIHu/riS1kpTvmlw4nZm6tkeVu74Ras8Cyig==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XqKdQWNsZujQELLTqxPkmyoj62uEMHdzP7cZc4NWsc4=;
- b=gKAYPQse0GC/UbtnGwG3yCJMRG7wNcxuWfnPbyy6bUobMjilnguO2GnJPH2BFqZng3AQthUuDo/pjJlRQoJHuDTtnB8nSQmXRYrzWJYom+vQGhYQLJiTtMlnJGW/Ni0DbE7ygj/kOh/wnirQ6NPboB2qiypRedXidERPPy+OCIA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by CY5PR12MB6228.namprd12.prod.outlook.com (2603:10b6:930:20::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6652.27; Wed, 9 Aug
- 2023 06:15:33 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::3d:c14:667a:1c81]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::3d:c14:667a:1c81%4]) with mapi id 15.20.6652.028; Wed, 9 Aug 2023
- 06:15:33 +0000
-Message-ID: <c2b0d96e-b768-b295-c672-3ae52e14b10b@amd.com>
-Date: Wed, 9 Aug 2023 08:15:23 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Ruan Jinjie <ruanjinjie@huawei.com>, Felix.Kuehling@amd.com,
- alexander.deucher@amd.com, Xinhui.Pan@amd.com, airlied@gmail.com,
- daniel@ffwll.ch, harry.wentland@amd.com, sunpeng.li@amd.com,
- Rodrigo.Siqueira@amd.com, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, tzimmermann@suse.de, inki.dae@samsung.com,
- sw0312.kim@samsung.com, kyungmin.park@samsung.com,
- krzysztof.kozlowski@linaro.org, alim.akhtar@samsung.com,
- robdclark@gmail.com, quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org,
- sean@poorly.run, marijn.suijten@somainline.org, bskeggs@redhat.com,
- kherbst@redhat.com, lyude@redhat.com, kraxel@redhat.com,
- gurchetansingh@chromium.org, olvaffe@gmail.com,
- paulo.miguel.almeida.rodenas@gmail.com, wenjing.liu@amd.com,
- haoping.liu@amd.com, Charlene.Liu@amd.com, chiahsuan.chung@amd.com,
- george.shen@amd.com, sancchen@amd.com, tony.tascioglu@amd.com,
- jaehyun.chung@amd.com, tales.aparecida@gmail.com, drv@mailo.com,
- aurabindo.pillai@amd.com, quic_vpolimer@quicinc.com, jiasheng@iscas.ac.cn,
- noralf@tronnes.org, jose.exposito89@gmail.com, javierm@redhat.com,
- mairacanal@riseup.net, davidgow@google.com, arthurgrillo@riseup.net,
- amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-arm-kernel@lists.infradead.org, linux-samsung-soc@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, virtualization@lists.linux-foundation.org
-References: <20230809034445.434902-1-ruanjinjie@huawei.com>
- <20230809034445.434902-2-ruanjinjie@huawei.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20230809034445.434902-2-ruanjinjie@huawei.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1F0DE10E408;
+ Wed,  9 Aug 2023 09:21:46 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 51FB921863;
+ Wed,  9 Aug 2023 09:21:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1691572904; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/2BaukZBs1178DJasYBeYZOhbgk+EesmxE+CXX4UvPI=;
+ b=nlVDsn/kpPQ343kqv/c7rPUp54pkAYq5LxDpA4hLjjeTapzLQTDdphL+0+f4S6pbhOAJKL
+ +hwa3KixukHJVfo9uQsiYvtFPscEvpdpAITQsLBGAX4jPRHp8IITCUU9K9FdvNT7hd/E67
+ TJ8zp7anC9NI/cu+G8kIYrNDISXLhB4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1691572904;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/2BaukZBs1178DJasYBeYZOhbgk+EesmxE+CXX4UvPI=;
+ b=mVYYnl0+G7GmGDhAAc+4kGm8HzDkoS3ANlb6tqPAHS5C7Vsnay71GOGJsSeio97QQSJGjb
+ bKjvidC5tB+tNCAg==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 13437133B5;
+ Wed,  9 Aug 2023 09:21:44 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id Xf6xA6ha02TNDgAAMHmgww
+ (envelope-from <tiwai@suse.de>); Wed, 09 Aug 2023 09:21:44 +0000
+Date: Wed, 09 Aug 2023 11:21:43 +0200
+Message-ID: <87fs4sfu54.wl-tiwai@suse.de>
+From: Takashi Iwai <tiwai@suse.de>
+To: Karol Herbst <kherbst@redhat.com>
+In-Reply-To: <CACO55tvWuSdwdirj7S3Dk-r4NAw8jC8g5RHKFd62WXi43iQP-w@mail.gmail.com>
+References: <20230806213107.GFZNARG6moWpFuSJ9W@fat_crate.local>
+ <CACO55tvZD5U4J8DawFTRVnV-dLYLngfhuqO29_sWNEGofKfnBg@mail.gmail.com>
+ <20230807150521.GGZNEIMQ9rsyCmkpoA@fat_crate.local>
+ <CACO55tvWuSdwdirj7S3Dk-r4NAw8jC8g5RHKFd62WXi43iQP-w@mail.gmail.com>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) Emacs/27.2 Mule/6.0
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR3P281CA0207.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a5::12) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|CY5PR12MB6228:EE_
-X-MS-Office365-Filtering-Correlation-Id: db2f1aeb-8c33-4dcf-672e-08db98a0098a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 9lBNf5pI3/wHCv3eD6u2IqjyxcG0626nG1CbrHWZJ2S3wW7ztPIG8rsvQYRfW4S44nU1+gbiMpQLO5bE2p3xYe91G3iAT9DjZA2b8s59lzqzAHfQNRaze0qJv6QCsFswEYuQj/mBv+9WcBAx9yv3Gwe3Zd0+5quqAj37YtKibpWB+UEYoFvopudW0EVd3sThQ7GiYn+aDId86fj9vQF235dlwqnPMnCvHacG1c5T3pdznj4PJz0vdIuAcZK2g1lgMxX/eJMBRPFXLdxaTZNPZq8oKfiHuw79zWGkWcuMl+bHOF+Pgwcecvhfx4RWxOFuiAYHIJ6hgQE0n69ADAOAs6FbTe7tVsmh9t3wVVQ5/Qdxzt8P7ZRBCqTvX/I79+I49zgmkgm4Nmp+bRrkneDZZdi4EFmy7ykdFumkkGL0WIHydRtRbp7s2Atl3QNgZtGsyPHYsgnQrY6FcLgJi3HdxnWYbQU29x/65H23YBvOq2oqqCk7XSQVf7lCQ+fBwGoXWSSR74GmOCCnJ6KnEcp/3jwlGdRv/fcYZXGN8z7gazVgT5U3wne+RXs0oucfv5J/fbM9WLN41BuYg1c+tMVpRgOixlcFt5Yj2Y7PKt5iFntEphVOYc6a0mlCN3A5iK4rneHBFZXAIZPT6ANwKMS0rl8gN2LYw8FyBh1bjU4BWiI=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(4636009)(366004)(396003)(39860400002)(376002)(136003)(346002)(1800799006)(451199021)(186006)(7416002)(7406005)(8936002)(5660300002)(8676002)(41300700001)(316002)(83380400001)(31696002)(86362001)(2906002)(6512007)(31686004)(6666004)(6486002)(1191002)(2616005)(6506007)(66556008)(36756003)(66946007)(66476007)(921005)(478600001)(38100700002)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eFB6ZDE5V2w5NSt0UVZaK2tQcGJXNUF5Y2kreWNzMnV4VDE5bGQ5Um1MVC83?=
- =?utf-8?B?NHVrd1p5V2pGOFJMYUFFa0huZ01SMlVmN1dsQ2dQOUtqSU5yUm52TzkyWGs4?=
- =?utf-8?B?VERhQUc3Z0FVdDNlenBlcTgzZzRLU1p2TTdtNVEyeVZldTFuVVFYVlErUFMz?=
- =?utf-8?B?WkkwTnVmdUJyVjFFYTlSdlpNNllYWTI5U0o3Mkh2TkFyNHE1Vm5wRERxWFpn?=
- =?utf-8?B?UnJmUndleGZDTG9DRW5HOWF6cWtPdTBmM015RUJ6S21WNlhvMEQ4T1J5TVY1?=
- =?utf-8?B?OHcybnk5VW1ET01sNUZOQVhFT3pOYkRid2lwYW55SXZrQ29ldUF2UStqTnFC?=
- =?utf-8?B?UlNjUm94aWV4aDNFditxZC9KRXh5UnQwQ2VCQUtOYlJPS1cxaHYrNWpWTWxw?=
- =?utf-8?B?RVBMS2NxS2ZJTTM0dlZVT3RFODdBc0g1cnFBcGtXbW9FMGlnNVh6VTdMdHhi?=
- =?utf-8?B?YlRFSDBNajhMcURsTkRocUxGY0hXaktpdkNnSExnZVVrZW1qTGxWN1QrcFpa?=
- =?utf-8?B?U1FmZGwxOW0yTDJ3N1B0ZnU2VzlOeURmTkFtTGlyRmp6NTVOU2QzSTJLcE9U?=
- =?utf-8?B?RE1NZ0N1ZERNMHJkL0MrVU41emEwOGJjMG9IenhibTJpNmJSMURVWko4aGNF?=
- =?utf-8?B?YmMvOXJ0NExZUlBFZ0l0eElma3dyWTQwREJiYzFDcit5bVNJRmEwMkhZQ3pB?=
- =?utf-8?B?OC9Zb3kzcnhpSFgxeXpZMUlVM3NCaDd4NWxDOUFNam10SktEalA5YkpGRGpq?=
- =?utf-8?B?MzlyNmNZdUFzS0kyNmhPZWNiak5rUGN5WmNYcWV4TVNhbFN4cFpvemJzWUlx?=
- =?utf-8?B?aXBPN2oyWEdPSXVGNE10NmxJWHQxZ2VIUjVZZGc0b20ybzlsaW5vSTNkejU2?=
- =?utf-8?B?Q0U1SjYvaUsvSlE2cUora3pvWklxdFRNd09MMGQrVUIxTUFWaDJ4NkgzcE53?=
- =?utf-8?B?dWZKZUM4bWVwNXVrcnprNHpZRXZrM2ZOa3Jvc3o3dWpHdTU0ZWg5ZHlCaWVm?=
- =?utf-8?B?RVc0aS9oU0tkK3M0SklvQStDSVJWR3I4Z0F6bnJXN3pxUzkxSEJKT2NaeFdl?=
- =?utf-8?B?dW4wUGpUaWJGMEhIYzRPYUl6N0Q5ZksxRnFseGtwc3FvYWZ2Q1M4TFhaRzdj?=
- =?utf-8?B?VWJ1eHZHSFl6cXp1N3VCdFpsajduc3l0K2wxWlNJQTM2R0NNWFF5Qy9uQ2RG?=
- =?utf-8?B?ZkVac0x1S0duSHdmMHVGUFdYaWdUUmQ1QU5PN3VCaytsQlE5Zmh2TnZGNU1o?=
- =?utf-8?B?V0hHa3Y5U1I4dXJOalIzbHBNdE1PdjZOTzZDaUY0Y2JOaXNDV0FEWi83blQ3?=
- =?utf-8?B?VTBmNEtvQ3R1SHBnUmRoLzBJL1RveDBFUGkyYktoS3dRNm8wYlY5eENNaG9R?=
- =?utf-8?B?SXBPdnBYMzl6OEhEa3hBT3N3Z09NSEI2VGxRam9NbEVSR3hjZHV6T2psUlhQ?=
- =?utf-8?B?cFE5SG0yQS9RS3RPWGQvZSt6NlBocnBtdjd3ZjJ0TkgwTHFDbG1NWXZDNnN1?=
- =?utf-8?B?ampkMjRWeU1BaXBzOENwZVNTaUtXTFFTelNBVFdrVDFLekJwOHlpM2E5ckZr?=
- =?utf-8?B?SlBmS3UzZThDNGRFZEYzTXB0Tm5uMXMzZTd6Y1Y0MGR2M0FBM3p2Q0FxeWZT?=
- =?utf-8?B?MXVkUFpnUWVWZHZBbXJXYUMxK2RGbzJvZ09aT1hSSUt6bGhsQ0FCTHRWeHlt?=
- =?utf-8?B?b0NDMTU3ZHNaRnNBZTd6cUFvTW4ycWw4ZmZFVzhFcVl2YlZDQmdBYjFGOFR4?=
- =?utf-8?B?K2NYSEo3cGlGRnlnU05hdmk3Nzk4bEthUHNjZ2lDTWg2VkhqelVVRkxHSW1m?=
- =?utf-8?B?RjJYRkd3djM2L1JJTTl3RGs2eXl0VXVON1M5Yk9UdFE1cWVWdFk3TzlibEdv?=
- =?utf-8?B?eVM3ZGNuV1ZuSWUrZUtyaW5DZ0pFWWpIRktUdU9NOVVCcDNQaklNZU5pUm9L?=
- =?utf-8?B?NGZpN2g5M09xVitKZUNXYVFrblRVbkhtVTFKdzZ6Z0htaGI1L1hOT2ZTbWNR?=
- =?utf-8?B?ZmtJQmphSjkyU0FJRGphT1JaUU9KNHN4WmpnZnNCWFpjaHExQU5xZUdiODRI?=
- =?utf-8?B?V3QxUnlLSFZtMm5PanZSV2pXNk5pdFFjeW9WNVBTbG8wa0J4MGlxME4zcXE2?=
- =?utf-8?B?a1g4Mm5EYTRFRDUxRjZZcFNXZ0lVOVR5T0RLUTZ6T0JieFIwSld4S3g0dUVI?=
- =?utf-8?Q?lCL/gFM7KuZktA/kSXMsflTLet2M5HLpXg4TlNI433YX?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: db2f1aeb-8c33-4dcf-672e-08db98a0098a
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Aug 2023 06:15:32.9069 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SNlZEvRvIgEQhQzuGsOmJQYPSJsOurd+bv1gYRBgzDXrWuVsEs0AqZbg1XYXknjU
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6228
-Subject: Re: [Nouveau] [PATCH -next 1/7] drm/amdkfd: Remove unnecessary NULL
- values
+Subject: Re: [Nouveau] 2b5d1c29f6c4 ("drm/nouveau/disp: PIOR DP uses GPIO
+ for HPD, not PMGR AUX interrupts")
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -147,46 +71,193 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: nouveau@lists.freedesktop.org, lkml <linux-kernel@vger.kernel.org>,
+ dri-devel@lists.freedesktop.org, regressions@leemhuis.info,
+ Borislav Petkov <bp@alien8.de>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 09.08.23 um 05:44 schrieb Ruan Jinjie:
-> The NULL initialization of the pointers assigned by kzalloc() first is
-> not necessary, because if the kzalloc() failed, the pointers will be
-> assigned NULL, otherwise it works as usual. so remove it.
->
-> Signed-off-by: Ruan Jinjie <ruanjinjie@huawei.com>
+On Tue, 08 Aug 2023 12:39:32 +0200,
+Karol Herbst wrote:
+> 
+> On Mon, Aug 7, 2023 at 5:05 PM Borislav Petkov <bp@alien8.de> wrote:
+> >
+> > On Mon, Aug 07, 2023 at 01:49:42PM +0200, Karol Herbst wrote:
+> > > in what way does it stop? Just not progressing? That would be kinda
+> > > concerning. Mind tracing with what arguments `nvkm_uevent_add` is
+> > > called with and without that patch?
+> >
+> > Well, me dumping those args I guess made the box not freeze before
+> > catching a #PF over serial. Does that help?
+> >
+> > ....
+> > [    3.410135] Unpacking initramfs...
+> > [    3.416319] software IO TLB: mapped [mem 0x00000000a877d000-0x00000000ac77d000] (64MB)
+> > [    3.418227] Initialise system trusted keyrings
+> > [    3.432273] workingset: timestamp_bits=56 max_order=22 bucket_order=0
+> > [    3.439006] ntfs: driver 2.1.32 [Flags: R/W].
+> > [    3.443368] fuse: init (API version 7.38)
+> > [    3.447601] 9p: Installing v9fs 9p2000 file system support
+> > [    3.453223] Key type asymmetric registered
+> > [    3.457332] Asymmetric key parser 'x509' registered
+> > [    3.462236] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 250)
+> > [    3.475865] efifb: probing for efifb
+> > [    3.479458] efifb: framebuffer at 0xf9000000, using 1920k, total 1920k
+> > [    3.485969] efifb: mode is 800x600x32, linelength=3200, pages=1
+> > [    3.491872] efifb: scrolling: redraw
+> > [    3.495438] efifb: Truecolor: size=8:8:8:8, shift=24:16:8:0
+> > [    3.502349] Console: switching to colour frame buffer device 100x37
+> > [    3.509564] fb0: EFI VGA frame buffer device
+> > [    3.514013] ACPI: \_PR_.CP00: Found 4 idle states
+> > [    3.518850] ACPI: \_PR_.CP01: Found 4 idle states
+> > [    3.523687] ACPI: \_PR_.CP02: Found 4 idle states
+> > [    3.528515] ACPI: \_PR_.CP03: Found 4 idle states
+> > [    3.533346] ACPI: \_PR_.CP04: Found 4 idle states
+> > [    3.538173] ACPI: \_PR_.CP05: Found 4 idle states
+> > [    3.543003] ACPI: \_PR_.CP06: Found 4 idle states
+> > [    3.544219] Freeing initrd memory: 8196K
+> > [    3.547844] ACPI: \_PR_.CP07: Found 4 idle states
+> > [    3.609542] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+> > [    3.616224] 00:05: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+> > [    3.625552] serial 0000:00:16.3: enabling device (0000 -> 0003)
+> > [    3.633034] 0000:00:16.3: ttyS1 at I/O 0xf0a0 (irq = 17, base_baud = 115200) is a 16550A
+> > [    3.642451] Linux agpgart interface v0.103
+> > [    3.647141] ACPI: bus type drm_connector registered
+> > [    3.653261] Console: switching to colour dummy device 80x25
+> > [    3.659092] nouveau 0000:03:00.0: vgaarb: deactivate vga console
+> > [    3.665174] nouveau 0000:03:00.0: NVIDIA GT218 (0a8c00b1)
+> > [    3.784585] nouveau 0000:03:00.0: bios: version 70.18.83.00.08
+> > [    3.792244] nouveau 0000:03:00.0: fb: 512 MiB DDR3
+> > [    3.948786] nouveau 0000:03:00.0: DRM: VRAM: 512 MiB
+> > [    3.953755] nouveau 0000:03:00.0: DRM: GART: 1048576 MiB
+> > [    3.959073] nouveau 0000:03:00.0: DRM: TMDS table version 2.0
+> > [    3.964808] nouveau 0000:03:00.0: DRM: DCB version 4.0
+> > [    3.969938] nouveau 0000:03:00.0: DRM: DCB outp 00: 02000360 00000000
+> > [    3.976367] nouveau 0000:03:00.0: DRM: DCB outp 01: 02000362 00020010
+> > [    3.982792] nouveau 0000:03:00.0: DRM: DCB outp 02: 028003a6 0f220010
+> > [    3.989223] nouveau 0000:03:00.0: DRM: DCB outp 03: 01011380 00000000
+> > [    3.995647] nouveau 0000:03:00.0: DRM: DCB outp 04: 08011382 00020010
+> > [    4.002076] nouveau 0000:03:00.0: DRM: DCB outp 05: 088113c6 0f220010
+> > [    4.008511] nouveau 0000:03:00.0: DRM: DCB conn 00: 00101064
+> > [    4.014151] nouveau 0000:03:00.0: DRM: DCB conn 01: 00202165
+> > [    4.021710] nvkm_uevent_add: uevent: 0xffff888100242100, event: 0xffff8881022de1a0, id: 0x0, bits: 0x1, func: 0x0000000000000000
+> > [    4.033680] nvkm_uevent_add: uevent: 0xffff888100242300, event: 0xffff8881022de1a0, id: 0x0, bits: 0x1, func: 0x0000000000000000
+> > [    4.045429] nouveau 0000:03:00.0: DRM: MM: using COPY for buffer copies
+> > [    4.052059] stackdepot: allocating hash table of 1048576 entries via kvcalloc
+> > [    4.067191] nvkm_uevent_add: uevent: 0xffff888100242800, event: 0xffff888104b3e260, id: 0x0, bits: 0x1, func: 0x0000000000000000
+> > [    4.078936] nvkm_uevent_add: uevent: 0xffff888100242900, event: 0xffff888104b3e260, id: 0x1, bits: 0x1, func: 0x0000000000000000
+> > [    4.090514] nvkm_uevent_add: uevent: 0xffff888100242a00, event: 0xffff888102091f28, id: 0x1, bits: 0x3, func: 0xffffffff8177b700
+> > [    4.102118] tsc: Refined TSC clocksource calibration: 3591.345 MHz
+> > [    4.108342] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x33c4635c383, max_idle_ns: 440795314831 ns
+> > [    4.108401] nvkm_uevent_add: uevent: 0xffff8881020b6000, event: 0xffff888102091f28, id: 0xf, bits: 0x3, func: 0xffffffff8177b700
+> > [    4.129864] clocksource: Switched to clocksource tsc
+> > [    4.131478] [drm] Initialized nouveau 1.3.1 20120801 for 0000:03:00.0 on minor 0
+> > [    4.143806] BUG: kernel NULL pointer dereference, address: 0000000000000020
+> 
+> ahh, that would have been good to know :) Mind figuring out what's
+> exactly NULL inside nvif_object_mthd? Or rather what line
+> `nvif_object_mthd+0x136` belongs to, then it should be easy to figure
+> out what's wrong here.
 
-Reviewed-by: Christian König <christian.koenig@amd.com> for this one, 
-the amd display code and the radeon stuff.
+FWIW, we've hit the bug on openSUSE Tumbleweed 6.4.8 kernel:
+  https://bugzilla.suse.com/show_bug.cgi?id=1214073
+Confirmed that reverting the patch cured the issue.
 
-Thanks,
-Christian.
+FWIW, loading nouveau showed a refcount_t warning just before the NULL
+dereference:
 
-> ---
->   drivers/gpu/drm/amd/amdkfd/kfd_mqd_manager.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/gpu/drm/amd/amdkfd/kfd_mqd_manager.c b/drivers/gpu/drm/amd/amdkfd/kfd_mqd_manager.c
-> index 863cf060af48..d01bb57733b3 100644
-> --- a/drivers/gpu/drm/amd/amdkfd/kfd_mqd_manager.c
-> +++ b/drivers/gpu/drm/amd/amdkfd/kfd_mqd_manager.c
-> @@ -48,7 +48,7 @@ int pipe_priority_map[] = {
->   
->   struct kfd_mem_obj *allocate_hiq_mqd(struct kfd_node *dev, struct queue_properties *q)
->   {
-> -	struct kfd_mem_obj *mqd_mem_obj = NULL;
-> +	struct kfd_mem_obj *mqd_mem_obj;
->   
->   	mqd_mem_obj = kzalloc(sizeof(struct kfd_mem_obj), GFP_KERNEL);
->   	if (!mqd_mem_obj)
-> @@ -64,7 +64,7 @@ struct kfd_mem_obj *allocate_hiq_mqd(struct kfd_node *dev, struct queue_properti
->   struct kfd_mem_obj *allocate_sdma_mqd(struct kfd_node *dev,
->   					struct queue_properties *q)
->   {
-> -	struct kfd_mem_obj *mqd_mem_obj = NULL;
-> +	struct kfd_mem_obj *mqd_mem_obj;
->   	uint64_t offset;
->   
->   	mqd_mem_obj = kzalloc(sizeof(struct kfd_mem_obj), GFP_KERNEL);
+[  163.237655] ACPI Warning: \_SB.PCI0.IXVE.IGPU._DSM: Argument #4 type mismatch - Found [Buffer], ACPI requires [Package] (20230331/nsarguments-61)
+[  163.237700] ACPI: \_SB_.PCI0.IXVE.IGPU: failed to evaluate _DSM
+[  163.237755] nouveau 0000:02:00.0: enabling device (0002 -> 0003)
+[  163.238089] ACPI: \_SB_.PCI0.LGPU: Enabled at IRQ 20
+[  163.249419] Console: switching to colour dummy device 80x25
+[  163.266174] nouveau 0000:02:00.0: vgaarb: deactivate vga console
+[  163.266307] nouveau 0000:02:00.0: NVIDIA MCP79/MCP7A (0ac180b1)
+[  163.287303] nouveau 0000:02:00.0: bios: version 62.79.40.00.01
+[  163.309529] nouveau 0000:02:00.0: fb: 256 MiB stolen system memory
+[  163.383121] nouveau 0000:02:00.0: DRM: VRAM: 256 MiB
+[  163.383132] nouveau 0000:02:00.0: DRM: GART: 1048576 MiB
+[  163.383138] nouveau 0000:02:00.0: DRM: TMDS table version 2.0
+[  163.383142] nouveau 0000:02:00.0: DRM: DCB version 4.0
+[  163.383145] nouveau 0000:02:00.0: DRM: DCB outp 00: 01000123 00010014
+[  163.383150] nouveau 0000:02:00.0: DRM: DCB outp 01: 02021232 00000010
+[  163.383154] nouveau 0000:02:00.0: DRM: DCB outp 02: 02021286 0f220010
+[  163.383158] nouveau 0000:02:00.0: DRM: DCB conn 00: 00000040
+[  163.383162] nouveau 0000:02:00.0: DRM: DCB conn 01: 0000a146
+[  163.385635] nouveau 0000:02:00.0: DRM: MM: using M2MF for buffer copies
+[  163.417977] ------------[ cut here ]------------
+[  163.417988] refcount_t: saturated; leaking memory.
+[  163.418012] WARNING: CPU: 1 PID: 2873 at lib/refcount.c:19 refcount_warn_saturate+0x9b/0x110
+[  163.418022] Modules linked in: nouveau(+) button mxm_wmi i2c_algo_bit drm_display_helper drm_ttm_helper xt_conntrack xt_MASQUERADE nf_conntrack_netlink nfnetlink xfrm_user xfrm_algo iptable_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 xt_addrtype iptable_filter bpfilter br_netfilter bridge stp llc overlay ccm af_packet bnep btusb btrtl btbcm btintel btmtk bluetooth ecdh_generic uvcvideo rtl8xxxu videobuf2_vmalloc mac80211 uvc videobuf2_memops videobuf2_v4l2 videodev libarc4 videobuf2_common mc cfg80211 hid_appleir hid_apple bcm5974 apple_mfi_fastcharge iscsi_ibft iscsi_boot_sysfs joydev rfkill qrtr z3fold snd_hda_codec_realtek snd_hda_codec_generic ledtrig_audio coretemp snd_hda_intel snd_intel_dspcfg snd_intel_sdw_acpi snd_hda_codec kvm_intel snd_hda_core applesmc snd_hwdep kvm snd_pcm irqbypass pcspkr acpi_cpufreq snd_timer binfmt_misc snd forcedeth soundcore squashfs nls_iso8859_1 loop nls_cp437 vfat fat i2c_nforce2 acpi_als industrialio_triggered_buffer kfifo_buf indu
+ strialio sbs sbshc apple_bl ac
+[  163.418129]  tiny_power_button fuse efi_pstore configfs dmi_sysfs ip_tables x_tables hid_generic usbhid ttm video wmi cec ohci_pci ohci_hcd ehci_pci rc_core sr_mod ehci_hcd sha512_ssse3 cdrom usbcore nv_tco btrfs blake2b_generic libcrc32c xor raid6_pq sg dm_multipath dm_mod scsi_dh_rdac scsi_dh_emc scsi_dh_alua msr efivarfs [last unloaded: button]
+[  163.418177] CPU: 1 PID: 2873 Comm: modprobe Not tainted 6.4.8-1-default #1 openSUSE Tumbleweed 5f0d78911475bf45bbeef64510275b9fba2542b1
+[  163.418183] Hardware name: Apple Inc. MacBook5,1/Mac-F42D89C8, BIOS     MB51.88Z.007D.B03.0904271443 04/27/09
+[  163.418187] RIP: 0010:refcount_warn_saturate+0x9b/0x110
+[  163.418192] Code: 01 01 e8 68 7b aa ff 0f 0b c3 cc cc cc cc 80 3d e6 e1 a8 01 00 75 a8 48 c7 c7 d0 ed 05 a4 c6 05 d6 e1 a8 01 01 e8 45 7b aa ff <0f> 0b c3 cc cc cc cc 80 3d c0 e1 a8 01 00 75 85 48 c7 c7 28 ee 05
+[  163.418196] RSP: 0018:ffffbae941613aa0 EFLAGS: 00010086
+[  163.418200] RAX: 0000000000000000 RBX: ffff951bc88c2000 RCX: 0000000000000027
+[  163.418204] RDX: ffff951cf81274c8 RSI: 0000000000000001 RDI: ffff951cf81274c0
+[  163.418207] RBP: 0000000000000246 R08: 0000000000000000 R09: ffffbae941613948
+[  163.418210] R10: 0000000000000003 R11: ffffffffa4958d48 R12: ffff951be0df3a58
+[  163.418213] R13: ffffbae941613ad8 R14: ffff951be0df3800 R15: 0000000000000000
+[  163.418216] FS:  00007f81c0247740(0000) GS:ffff951cf8100000(0000) knlGS:0000000000000000
+[  163.418220] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  163.418223] CR2: 00005653d818cd64 CR3: 000000012c72a000 CR4: 00000000000006e0
+[  163.418226] Call Trace:
+[  163.418231]  <TASK>
+[  163.418234]  ? refcount_warn_saturate+0x9b/0x110
+[  163.418238]  ? __warn+0x81/0x130
+[  163.418248]  ? refcount_warn_saturate+0x9b/0x110
+[  163.418252]  ? report_bug+0x171/0x1a0
+[  163.418259]  ? handle_bug+0x3c/0x80
+[  163.418264]  ? exc_invalid_op+0x17/0x70
+[  163.418268]  ? asm_exc_invalid_op+0x1a/0x20
+[  163.418275]  ? refcount_warn_saturate+0x9b/0x110
+[  163.418279]  drm_connector_list_iter_next+0x97/0xc0
+[  163.418289]  drm_connector_register_all+0x3d/0xf0
+[  163.418296]  drm_modeset_register_all+0x5f/0x80
+[  163.418302]  drm_dev_register+0x114/0x240
+[  163.418307]  nouveau_drm_probe+0x16a/0x280 [nouveau 7f21e95875a4a0137564007ae3277f6b641e9279]
+[  163.418713]  local_pci_probe+0x45/0xa0
+[  163.418719]  pci_device_probe+0xc7/0x230
+[  163.418726]  really_probe+0x19e/0x3e0
+[  163.418730]  ? __pfx___driver_attach+0x10/0x10
+[  163.418734]  __driver_probe_device+0x78/0x160
+[  163.418737]  driver_probe_device+0x1f/0x90
+[  163.418741]  __driver_attach+0xd2/0x1c0
+[  163.418745]  bus_for_each_dev+0x77/0xc0
+[  163.418751]  bus_add_driver+0x116/0x220
+[  163.418757]  driver_register+0x59/0x100
+[  163.418762]  ? __pfx_nouveau_drm_init+0x10/0x10 [nouveau 7f21e95875a4a0137564007ae3277f6b641e9279]
+[  163.418999]  do_one_initcall+0x4a/0x220
+[  163.418999]  ? kmalloc_trace+0x2a/0xa0
+[  163.418999]  do_init_module+0x60/0x240
+[  163.418999]  __do_sys_init_module+0x17f/0x1b0
+[  163.418999]  do_syscall_64+0x60/0x90
+[  163.418999]  ? syscall_exit_to_user_mode+0x1b/0x40
+[  163.418999]  ? do_syscall_64+0x6c/0x90
+[  163.418999]  ? count_memcg_events.constprop.0+0x1a/0x30
+[  163.418999]  ? handle_mm_fault+0x9e/0x350
+[  163.418999]  ? do_user_addr_fault+0x179/0x640
+[  163.418999]  ? exc_page_fault+0x71/0x160
+[  163.418999]  entry_SYSCALL_64_after_hwframe+0x72/0xdc
+[  163.418999] RIP: 0033:0x7f81bfb19a5e
+[  163.418999] Code: c3 66 2e 0f 1f 84 00 00 00 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3 0f 1e fa 66 90 49 89 ca b8 af 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 7a 03 0d 00 f7 d8 64 89 01 48
+[  163.418999] RSP: 002b:00007ffddb1760c8 EFLAGS: 00000246 ORIG_RAX: 00000000000000af
+[  163.418999] RAX: ffffffffffffffda RBX: 0000560bc842df00 RCX: 00007f81bfb19a5e
+[  163.418999] RDX: 0000560bc8432900 RSI: 00000000006aef9b RDI: 00007f81bea94010
+[  163.418999] RBP: 0000560bc8432900 R08: 0000560bc8432c20 R09: 0000000000000000
+[  163.418999] R10: 0000000000012b71 R11: 0000000000000246 R12: 0000000000040000
+[  163.418999] R13: 0000000000000000 R14: 0000000000000009 R15: 0000560bc842d7b0
+[  163.418999]  </TASK>
+[  163.418999] ---[ end trace 0000000000000000 ]---
 
+The full dmesg is found in
+  https://bugzilla.suse.com/attachment.cgi?id=868688
+
+
+thanks,
+
+Takashi
