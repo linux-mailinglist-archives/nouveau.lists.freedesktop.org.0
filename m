@@ -1,75 +1,64 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F5E0775EC0
-	for <lists+nouveau@lfdr.de>; Wed,  9 Aug 2023 14:19:50 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E4FE1776043
+	for <lists+nouveau@lfdr.de>; Wed,  9 Aug 2023 15:11:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9130310E427;
-	Wed,  9 Aug 2023 12:19:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 559EF10E43D;
+	Wed,  9 Aug 2023 13:11:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B3C0710E092
- for <nouveau@lists.freedesktop.org>; Wed,  9 Aug 2023 12:19:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1691583578;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=tMiDKnOt5oAwioWPsyF60HTEcf/nalReerPWwijU6Gk=;
- b=N3tcjnhWVZYtW6HpRLIVXxAUUBgH7OmDVKofaykaXUpEZ8lVqZPVMlPSY5iAfQTviytzpL
- pPd0pra4OEPEa2W1IwpYx+7eIGyEdor8Wk75hor6OC0s3ev/21R7OcBfSgWNLXAkKLBde+
- bX4JTqCKobd/nZmO9uTRyoaI9ORV1/4=
-Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
- [209.85.167.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-602-hmEzD0aVOSGStEhGUeQWZQ-1; Wed, 09 Aug 2023 08:19:36 -0400
-X-MC-Unique: hmEzD0aVOSGStEhGUeQWZQ-1
-Received: by mail-lf1-f72.google.com with SMTP id
- 2adb3069b0e04-4fe4f5ffe2aso1285985e87.1
- for <nouveau@lists.freedesktop.org>; Wed, 09 Aug 2023 05:19:36 -0700 (PDT)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 10E4310E438;
+ Wed,  9 Aug 2023 13:11:41 +0000 (UTC)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-3a7556e4edcso583934b6e.1; 
+ Wed, 09 Aug 2023 06:11:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1691586700; x=1692191500;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0bsfHSbir+1N3BPwsEF83+v9jo06cZjJVauWxQE2x88=;
+ b=X39VyQ81ASYk/nBdQF2k0zkOJr/0vtM4ZpjXBKvnXgqH0R4bVOzYwN862VOzrR+xcj
+ x3FpupRMsRy7LDq7LpyqF25wC6tbW75E04I9YjPO14TSPjRX6C5prULvlJsGvEEptNVm
+ +KaJ1dgo9yDYvvU9xgG4hPh/jBo2jN+cWTaB9vM2sw0taGzXVXkI09vm9gjv3YdsbQfq
+ fVPylz6eN+KR5L6QcKAbs2scRSlOmKkbZMpF9eiAuRUCeeiue3+fNiq6cua13K7CE3MR
+ iwhCAiADw5MAtzoz2nRqhIRpteROYyPsV+/Zu+9qMzuIk9n/JNtv02kFrJu5jM+1rnUx
+ ohVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691583575; x=1692188375;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EnGYefSqp3RUJ1okIxDhgSoX43gjncyGYfDercd0w4M=;
- b=UH5V9m6fC0WhH/juunpnt5lXJ3P7HoKfIJDX8LtMWTyodmIw4AmDfJxye/cF3ySD7h
- OFk73PT6+tWXpbtBfYNzdwnPysvWi9CGCyhsUdGOs+ERyRqn7F0CnQR0sXfSwpq5ycUM
- hq3Kx4J8yUzikD7BSE70wV0WN3bZIPlTf0arz5lqVGHshdYMLKJoLtoIuRMpuuaCc55J
- dakidT/tH1s0tq+pPaVQit647EI3LzPyjKbZnERl0J5jW9BJXksg2XhSjjaeyoR5o68q
- nPLSpC169RlJVGkOIll/bdlECN+jeoLLOH07Yp5vXQAHleyjmsRVpjKmUDp/0gnAhIYf
- laFQ==
-X-Gm-Message-State: AOJu0YxIutXmvVMXjPi0fklBb2ylmwIcZtSLe/0nsyRId2AKgzdNjF1q
- 4CMzXLX22zwevJz7s3pRI97u0eYgqK/FzAvlbhPrjXigbqHJX/1oAjc+bo8P+uzq3GIKhNeMqdI
- aP6WICK7N3QfgMZZJMUwRTNSt018mofyKsOWICaygdQ==
-X-Received: by 2002:a2e:1504:0:b0:2b7:3a7e:9e89 with SMTP id
- s4-20020a2e1504000000b002b73a7e9e89mr1074693ljd.2.1691583574891; 
- Wed, 09 Aug 2023 05:19:34 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGGPqq97u+pLpSVHo0FFU0I51as+nYdRNDhK73HtQK+NcefAY/J8XE/pCZ40/rLTWxoqQA1mobMWFkx36gkKRc=
-X-Received: by 2002:a2e:1504:0:b0:2b7:3a7e:9e89 with SMTP id
- s4-20020a2e1504000000b002b73a7e9e89mr1074680ljd.2.1691583574554; Wed, 09 Aug
- 2023 05:19:34 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1691586700; x=1692191500;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0bsfHSbir+1N3BPwsEF83+v9jo06cZjJVauWxQE2x88=;
+ b=fILUE4SrgWDIHSkLDf61gx/XFaEU5i7KWqgj059q6AddGOk0O9HuzrGHMLGpLG2rUV
+ PS38aYZdlPFj8NoJqhD4T3G7gFN4F80i4OrmgabUAM6N5WFtVcNe3liAn6njApr7zXgr
+ omuwhDcmq66GYuSmQGRUYI10QPPBdUbZhSuAqLz4dk/mWEWt/3IfrZ6fHsnP1HXiN77L
+ 0CfZWvFu4FJG8nvW94SUWiRe2KfgMiW3QDkdr6+3hfxMwBJ55uzl19E9kfxHgB0//8/p
+ Uk4nqSJkHpbqJ93jQmU7I9B5GuLK7LU34QqcCSq6hbKq9mUBAmz44oJwtg0PX1LDhYXa
+ hoXA==
+X-Gm-Message-State: AOJu0YyDpKzzsluzgpc/5bTJDpcaYeE0c3vDoAamfbRFfiOeQDXbIIvQ
+ qq6vxMMbT2pSYioTP3CVJ32FUi+NKpBapS8tK+k=
+X-Google-Smtp-Source: AGHT+IGr/N7x0qp/tLHJD9vnx3F+mQLn8Qo3mYlXKDAIof/DZHtBXv2c6gcV9z6BHmLltXrWKyQrwzMGuJze0KPjlPM=
+X-Received: by 2002:aca:bb0b:0:b0:3a7:46c4:e8cd with SMTP id
+ l11-20020acabb0b000000b003a746c4e8cdmr8330814oif.12.1691586700314; Wed, 09
+ Aug 2023 06:11:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230806213107.GFZNARG6moWpFuSJ9W@fat_crate.local>
- <CACO55tvZD5U4J8DawFTRVnV-dLYLngfhuqO29_sWNEGofKfnBg@mail.gmail.com>
- <20230807150521.GGZNEIMQ9rsyCmkpoA@fat_crate.local>
- <CACO55tvWuSdwdirj7S3Dk-r4NAw8jC8g5RHKFd62WXi43iQP-w@mail.gmail.com>
- <87fs4sfu54.wl-tiwai@suse.de>
- <CACO55tszwFEgt=8xn4auAE7KJVs3ybGG68OzL9HJt19XGVhhHQ@mail.gmail.com>
- <874jl8fngo.wl-tiwai@suse.de>
-In-Reply-To: <874jl8fngo.wl-tiwai@suse.de>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Wed, 9 Aug 2023 14:19:23 +0200
-Message-ID: <CACO55ts9YWF7nLi3Zs4xKySpdHyUFgf4r566cKx3FwNTCaz0Sg@mail.gmail.com>
-To: Takashi Iwai <tiwai@suse.de>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/mixed; boundary="00000000000011eb5806027c7e5f"
-Subject: Re: [Nouveau] 2b5d1c29f6c4 ("drm/nouveau/disp: PIOR DP uses GPIO
- for HPD, not PMGR AUX interrupts")
+References: <20230809034445.434902-1-ruanjinjie@huawei.com>
+ <20230809034445.434902-2-ruanjinjie@huawei.com>
+ <c2b0d96e-b768-b295-c672-3ae52e14b10b@amd.com>
+In-Reply-To: <c2b0d96e-b768-b295-c672-3ae52e14b10b@amd.com>
+From: Alex Deucher <alexdeucher@gmail.com>
+Date: Wed, 9 Aug 2023 09:11:29 -0400
+Message-ID: <CADnq5_MZXYBmxr3dJn4vmW2qAbzUDM0eL48anjCot77LinE8tg@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [PATCH -next 1/7] drm/amdkfd: Remove unnecessary NULL
+ values
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,194 +70,76 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, lkml <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org, regressions@leemhuis.info,
- Borislav Petkov <bp@alien8.de>, Ben Skeggs <bskeggs@redhat.com>
+Cc: wenjing.liu@amd.com, dri-devel@lists.freedesktop.org,
+ gurchetansingh@chromium.org, mairacanal@riseup.net, kraxel@redhat.com,
+ alim.akhtar@samsung.com, marijn.suijten@somainline.org,
+ arthurgrillo@riseup.net, Charlene.Liu@amd.com,
+ linux-samsung-soc@vger.kernel.org, Ruan Jinjie <ruanjinjie@huawei.com>,
+ Rodrigo.Siqueira@amd.com, krzysztof.kozlowski@linaro.org,
+ amd-gfx@lists.freedesktop.org, quic_vpolimer@quicinc.com,
+ tony.tascioglu@amd.com, aurabindo.pillai@amd.com, bskeggs@redhat.com,
+ george.shen@amd.com, kyungmin.park@samsung.com, harry.wentland@amd.com,
+ olvaffe@gmail.com, haoping.liu@amd.com, daniel@ffwll.ch, javierm@redhat.com,
+ sunpeng.li@amd.com, linux-arm-msm@vger.kernel.org, jiasheng@iscas.ac.cn,
+ maarten.lankhorst@linux.intel.com, quic_abhinavk@quicinc.com,
+ mripard@kernel.org, inki.dae@samsung.com, alexander.deucher@amd.com,
+ davidgow@google.com, nouveau@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, sean@poorly.run,
+ linux-arm-kernel@lists.infradead.org, noralf@tronnes.org,
+ paulo.miguel.almeida.rodenas@gmail.com, chiahsuan.chung@amd.com, drv@mailo.com,
+ tales.aparecida@gmail.com, Felix.Kuehling@amd.com, Xinhui.Pan@amd.com,
+ sw0312.kim@samsung.com, robdclark@gmail.com, jaehyun.chung@amd.com,
+ dmitry.baryshkov@linaro.org, jose.exposito89@gmail.com,
+ freedreno@lists.freedesktop.org, sancchen@amd.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---00000000000011eb5806027c7e5f
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Applied.  Thanks!
 
-On Wed, Aug 9, 2023 at 1:46=E2=80=AFPM Takashi Iwai <tiwai@suse.de> wrote:
+On Wed, Aug 9, 2023 at 2:15=E2=80=AFAM Christian K=C3=B6nig <christian.koen=
+ig@amd.com> wrote:
 >
-> On Wed, 09 Aug 2023 13:42:09 +0200,
-> Karol Herbst wrote:
+> Am 09.08.23 um 05:44 schrieb Ruan Jinjie:
+> > The NULL initialization of the pointers assigned by kzalloc() first is
+> > not necessary, because if the kzalloc() failed, the pointers will be
+> > assigned NULL, otherwise it works as usual. so remove it.
 > >
-> > On Wed, Aug 9, 2023 at 11:22=E2=80=AFAM Takashi Iwai <tiwai@suse.de> wr=
-ote:
-> > >
-> > > On Tue, 08 Aug 2023 12:39:32 +0200,
-> > > Karol Herbst wrote:
-> > > >
-> > > > On Mon, Aug 7, 2023 at 5:05=E2=80=AFPM Borislav Petkov <bp@alien8.d=
-e> wrote:
-> > > > >
-> > > > > On Mon, Aug 07, 2023 at 01:49:42PM +0200, Karol Herbst wrote:
-> > > > > > in what way does it stop? Just not progressing? That would be k=
-inda
-> > > > > > concerning. Mind tracing with what arguments `nvkm_uevent_add` =
-is
-> > > > > > called with and without that patch?
-> > > > >
-> > > > > Well, me dumping those args I guess made the box not freeze befor=
-e
-> > > > > catching a #PF over serial. Does that help?
-> > > > >
-> > > > > ....
-> > > > > [    3.410135] Unpacking initramfs...
-> > > > > [    3.416319] software IO TLB: mapped [mem 0x00000000a877d000-0x=
-00000000ac77d000] (64MB)
-> > > > > [    3.418227] Initialise system trusted keyrings
-> > > > > [    3.432273] workingset: timestamp_bits=3D56 max_order=3D22 buc=
-ket_order=3D0
-> > > > > [    3.439006] ntfs: driver 2.1.32 [Flags: R/W].
-> > > > > [    3.443368] fuse: init (API version 7.38)
-> > > > > [    3.447601] 9p: Installing v9fs 9p2000 file system support
-> > > > > [    3.453223] Key type asymmetric registered
-> > > > > [    3.457332] Asymmetric key parser 'x509' registered
-> > > > > [    3.462236] Block layer SCSI generic (bsg) driver version 0.4 =
-loaded (major 250)
-> > > > > [    3.475865] efifb: probing for efifb
-> > > > > [    3.479458] efifb: framebuffer at 0xf9000000, using 1920k, tot=
-al 1920k
-> > > > > [    3.485969] efifb: mode is 800x600x32, linelength=3D3200, page=
-s=3D1
-> > > > > [    3.491872] efifb: scrolling: redraw
-> > > > > [    3.495438] efifb: Truecolor: size=3D8:8:8:8, shift=3D24:16:8:=
-0
-> > > > > [    3.502349] Console: switching to colour frame buffer device 1=
-00x37
-> > > > > [    3.509564] fb0: EFI VGA frame buffer device
-> > > > > [    3.514013] ACPI: \_PR_.CP00: Found 4 idle states
-> > > > > [    3.518850] ACPI: \_PR_.CP01: Found 4 idle states
-> > > > > [    3.523687] ACPI: \_PR_.CP02: Found 4 idle states
-> > > > > [    3.528515] ACPI: \_PR_.CP03: Found 4 idle states
-> > > > > [    3.533346] ACPI: \_PR_.CP04: Found 4 idle states
-> > > > > [    3.538173] ACPI: \_PR_.CP05: Found 4 idle states
-> > > > > [    3.543003] ACPI: \_PR_.CP06: Found 4 idle states
-> > > > > [    3.544219] Freeing initrd memory: 8196K
-> > > > > [    3.547844] ACPI: \_PR_.CP07: Found 4 idle states
-> > > > > [    3.609542] Serial: 8250/16550 driver, 4 ports, IRQ sharing en=
-abled
-> > > > > [    3.616224] 00:05: ttyS0 at I/O 0x3f8 (irq =3D 4, base_baud =
-=3D 115200) is a 16550A
-> > > > > [    3.625552] serial 0000:00:16.3: enabling device (0000 -> 0003=
-)
-> > > > > [    3.633034] 0000:00:16.3: ttyS1 at I/O 0xf0a0 (irq =3D 17, bas=
-e_baud =3D 115200) is a 16550A
-> > > > > [    3.642451] Linux agpgart interface v0.103
-> > > > > [    3.647141] ACPI: bus type drm_connector registered
-> > > > > [    3.653261] Console: switching to colour dummy device 80x25
-> > > > > [    3.659092] nouveau 0000:03:00.0: vgaarb: deactivate vga conso=
-le
-> > > > > [    3.665174] nouveau 0000:03:00.0: NVIDIA GT218 (0a8c00b1)
-> > > > > [    3.784585] nouveau 0000:03:00.0: bios: version 70.18.83.00.08
-> > > > > [    3.792244] nouveau 0000:03:00.0: fb: 512 MiB DDR3
-> > > > > [    3.948786] nouveau 0000:03:00.0: DRM: VRAM: 512 MiB
-> > > > > [    3.953755] nouveau 0000:03:00.0: DRM: GART: 1048576 MiB
-> > > > > [    3.959073] nouveau 0000:03:00.0: DRM: TMDS table version 2.0
-> > > > > [    3.964808] nouveau 0000:03:00.0: DRM: DCB version 4.0
-> > > > > [    3.969938] nouveau 0000:03:00.0: DRM: DCB outp 00: 02000360 0=
-0000000
-> > > > > [    3.976367] nouveau 0000:03:00.0: DRM: DCB outp 01: 02000362 0=
-0020010
-> > > > > [    3.982792] nouveau 0000:03:00.0: DRM: DCB outp 02: 028003a6 0=
-f220010
-> > > > > [    3.989223] nouveau 0000:03:00.0: DRM: DCB outp 03: 01011380 0=
-0000000
-> > > > > [    3.995647] nouveau 0000:03:00.0: DRM: DCB outp 04: 08011382 0=
-0020010
-> > > > > [    4.002076] nouveau 0000:03:00.0: DRM: DCB outp 05: 088113c6 0=
-f220010
-> > > > > [    4.008511] nouveau 0000:03:00.0: DRM: DCB conn 00: 00101064
-> > > > > [    4.014151] nouveau 0000:03:00.0: DRM: DCB conn 01: 00202165
-> > > > > [    4.021710] nvkm_uevent_add: uevent: 0xffff888100242100, event=
-: 0xffff8881022de1a0, id: 0x0, bits: 0x1, func: 0x0000000000000000
-> > > > > [    4.033680] nvkm_uevent_add: uevent: 0xffff888100242300, event=
-: 0xffff8881022de1a0, id: 0x0, bits: 0x1, func: 0x0000000000000000
-> > > > > [    4.045429] nouveau 0000:03:00.0: DRM: MM: using COPY for buff=
-er copies
-> > > > > [    4.052059] stackdepot: allocating hash table of 1048576 entri=
-es via kvcalloc
-> > > > > [    4.067191] nvkm_uevent_add: uevent: 0xffff888100242800, event=
-: 0xffff888104b3e260, id: 0x0, bits: 0x1, func: 0x0000000000000000
-> > > > > [    4.078936] nvkm_uevent_add: uevent: 0xffff888100242900, event=
-: 0xffff888104b3e260, id: 0x1, bits: 0x1, func: 0x0000000000000000
-> > > > > [    4.090514] nvkm_uevent_add: uevent: 0xffff888100242a00, event=
-: 0xffff888102091f28, id: 0x1, bits: 0x3, func: 0xffffffff8177b700
-> > > > > [    4.102118] tsc: Refined TSC clocksource calibration: 3591.345=
- MHz
-> > > > > [    4.108342] clocksource: tsc: mask: 0xffffffffffffffff max_cyc=
-les: 0x33c4635c383, max_idle_ns: 440795314831 ns
-> > > > > [    4.108401] nvkm_uevent_add: uevent: 0xffff8881020b6000, event=
-: 0xffff888102091f28, id: 0xf, bits: 0x3, func: 0xffffffff8177b700
-> > > > > [    4.129864] clocksource: Switched to clocksource tsc
-> > > > > [    4.131478] [drm] Initialized nouveau 1.3.1 20120801 for 0000:=
-03:00.0 on minor 0
-> > > > > [    4.143806] BUG: kernel NULL pointer dereference, address: 000=
-0000000000020
-> > > >
-> > > > ahh, that would have been good to know :) Mind figuring out what's
-> > > > exactly NULL inside nvif_object_mthd? Or rather what line
-> > > > `nvif_object_mthd+0x136` belongs to, then it should be easy to figu=
-re
-> > > > out what's wrong here.
-> > >
-> > > FWIW, we've hit the bug on openSUSE Tumbleweed 6.4.8 kernel:
-> > >   https://bugzilla.suse.com/show_bug.cgi?id=3D1214073
-> > > Confirmed that reverting the patch cured the issue.
-> > >
-> > > FWIW, loading nouveau showed a refcount_t warning just before the NUL=
-L
-> > > dereference:
-> > >
+> > Signed-off-by: Ruan Jinjie <ruanjinjie@huawei.com>
+>
+> Reviewed-by: Christian K=C3=B6nig <christian.koenig@amd.com> for this one=
+,
+> the amd display code and the radeon stuff.
+>
+> Thanks,
+> Christian.
+>
+> > ---
+> >   drivers/gpu/drm/amd/amdkfd/kfd_mqd_manager.c | 4 ++--
+> >   1 file changed, 2 insertions(+), 2 deletions(-)
 > >
-> > mh, I wonder if one of those `return -EINVAL;` branches is hit where
-> > it wasn't before. Could some of you check if `nvkm_uconn_uevent`
-> > returns -EINVAL with that patch where it didn't before? I wonder if
-> > it's the `if (&outp->head =3D=3D &conn->disp->outps) return -EINVAL;` a=
-nd
-> > if remove that fixes the crash?
+> > diff --git a/drivers/gpu/drm/amd/amdkfd/kfd_mqd_manager.c b/drivers/gpu=
+/drm/amd/amdkfd/kfd_mqd_manager.c
+> > index 863cf060af48..d01bb57733b3 100644
+> > --- a/drivers/gpu/drm/amd/amdkfd/kfd_mqd_manager.c
+> > +++ b/drivers/gpu/drm/amd/amdkfd/kfd_mqd_manager.c
+> > @@ -48,7 +48,7 @@ int pipe_priority_map[] =3D {
+> >
+> >   struct kfd_mem_obj *allocate_hiq_mqd(struct kfd_node *dev, struct que=
+ue_properties *q)
+> >   {
+> > -     struct kfd_mem_obj *mqd_mem_obj =3D NULL;
+> > +     struct kfd_mem_obj *mqd_mem_obj;
+> >
+> >       mqd_mem_obj =3D kzalloc(sizeof(struct kfd_mem_obj), GFP_KERNEL);
+> >       if (!mqd_mem_obj)
+> > @@ -64,7 +64,7 @@ struct kfd_mem_obj *allocate_hiq_mqd(struct kfd_node =
+*dev, struct queue_properti
+> >   struct kfd_mem_obj *allocate_sdma_mqd(struct kfd_node *dev,
+> >                                       struct queue_properties *q)
+> >   {
+> > -     struct kfd_mem_obj *mqd_mem_obj =3D NULL;
+> > +     struct kfd_mem_obj *mqd_mem_obj;
+> >       uint64_t offset;
+> >
+> >       mqd_mem_obj =3D kzalloc(sizeof(struct kfd_mem_obj), GFP_KERNEL);
 >
-> Please give a patch, then I can build a kernel and let the reporter
-> testing it :)
->
-
-attached a patch.
-
-Anyway, I'll be on PTO for the rest of the week and I kinda wished
-somebody else would have time to figure out what's going wrong there,
-or at least simply figuring out what the difference is. Not having
-direct access to such a GPU also makes it a bit harder. Once I'm back
-I'll check with all my GPUs if there is one hitting a difference here,
-but the ones I've tested it with so far were all fine sadly.
-
->
-> thanks,
->
-> Takashi
->
-
---00000000000011eb5806027c7e5f
-Content-Type: text/x-patch; charset="US-ASCII"; name="tmp.patch"
-Content-Disposition: attachment; filename="tmp.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_ll3p2n330>
-X-Attachment-Id: f_ll3p2n330
-
-ZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2Rpc3AvdWNv
-bm4uYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2Rpc3AvdWNvbm4uYwpp
-bmRleCA0NmIwNTdmZTE0MTJlLi4zNjY2ZGZiN2VjYmY0IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dw
-dS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kaXNwL3Vjb25uLmMKKysrIGIvZHJpdmVycy9ncHUv
-ZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvZGlzcC91Y29ubi5jCkBAIC04NSw4ICs4NSw4IEBAIG52
-a21fdWNvbm5fdWV2ZW50KHN0cnVjdCBudmttX29iamVjdCAqb2JqZWN0LCB2b2lkICphcmd2LCB1
-MzIgYXJnYywgc3RydWN0IG52a21fCiAJCQlicmVhazsKIAl9CiAKLQlpZiAoJm91dHAtPmhlYWQg
-PT0gJmNvbm4tPmRpc3AtPm91dHBzKQotCQlyZXR1cm4gLUVJTlZBTDsKKy8vCWlmICgmb3V0cC0+
-aGVhZCA9PSAmY29ubi0+ZGlzcC0+b3V0cHMpCisvLwkJcmV0dXJuIC1FSU5WQUw7CiAKIAlpZiAo
-b3V0cC0+ZHAuYXV4ICYmICFvdXRwLT5pbmZvLmxvY2F0aW9uKSB7CiAJCWlmIChhcmdzLT52MC50
-eXBlcyAmIE5WSUZfQ09OTl9FVkVOVF9WMF9QTFVHICApIGJpdHMgfD0gTlZLTV9JMkNfUExVRzsK
-
---00000000000011eb5806027c7e5f--
-
