@@ -1,48 +1,67 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFE1D779D9E
-	for <lists+nouveau@lfdr.de>; Sat, 12 Aug 2023 08:12:49 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D776F779D9B
+	for <lists+nouveau@lfdr.de>; Sat, 12 Aug 2023 08:12:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1628C10E19C;
-	Sat, 12 Aug 2023 06:12:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7E02E10E1B2;
+	Sat, 12 Aug 2023 06:12:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 452 seconds by postgrey-1.36 at gabe;
- Thu, 10 Aug 2023 14:51:11 UTC
-Received: from avasout-peh-002.plus.net (avasout-peh-002.plus.net
- [212.159.14.18])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8E04010E552
- for <nouveau@lists.freedesktop.org>; Thu, 10 Aug 2023 14:51:11 +0000 (UTC)
-Received: from [192.168.1.190] ([46.208.81.29]) by smtp with ESMTPA
- id U6rVq5vrcb4qhU6swqpRLw; Thu, 10 Aug 2023 15:43:36 +0100
-X-Clacks-Overhead: "GNU Terry Pratchett"
-X-CM-Score: 0.00
-X-CNFS-Analysis: v=2.4 cv=ZcsOi+ZA c=1 sm=1 tr=0 ts=64d4f798
- a=4/TYW0LrnEpXeiqJr2p33Q==:117 a=4/TYW0LrnEpXeiqJr2p33Q==:17
- a=r77TgQKjGQsHNAKrUKIA:9 a=7jl1q3i7JMjqkCRZIzkA:9 a=QEXdDO2ut3YA:10
- a=F6M7YO7CNlnXaCf-_yIA:9 a=_W_S_7VecoQA:10
-X-AUTH: peebee@:2500
-Content-Type: multipart/alternative;
- boundary="------------twy2mxR5IcftWWZaMeNVlHOy"
-Message-ID: <3e0c9cb6-6b85-e1c9-6e08-2fc771a54ae8@peebee.org.uk>
-Date: Thu, 10 Aug 2023 15:43:33 +0100
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5AC2B10E662;
+ Fri, 11 Aug 2023 06:31:57 +0000 (UTC)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1bba48b0bd2so12219045ad.3; 
+ Thu, 10 Aug 2023 23:31:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1691735517; x=1692340317;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=LQ1M3C8oCeNHlAIM7S9dLfoMmUG2TNrYAIGvX32nZuI=;
+ b=H5U8a3+cNKb3odFyPRMiD69LR83CpnTQuL2EE0SUyGd6z8cw9k9TLsGIdB0Fj/rtbI
+ b2d1u+H2TVao9P2TDRsTLtZrvRlYq/QP+uVkJCFNeaWZut6Ac/NXxiMo6Yu170zs9NDh
+ 3Hzqqoy7cA01j3OCEXRIiaP13hczlbWD1iHKlbVpebB0tdgMBW1YfNkJZZQdTzZoTMhK
+ rWCG1SMZzvXjHhUklsO5sQSV1QlimIMLQcg9wbokCwpwjI2krIfIYKiwc57pdwKRJ0Kw
+ vFPtOpEZdnc7NfSqVskXYGDG3xjw8M6t9LK/Eke84vbsHI00Fldcf2T0jKDXytTK5alZ
+ ro8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1691735517; x=1692340317;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LQ1M3C8oCeNHlAIM7S9dLfoMmUG2TNrYAIGvX32nZuI=;
+ b=GArci5Crkw3Kcf0CiUe0o8KmNfjXS6WRqZ4GRXU5zZ+9NailRJJq1sCBFYzWrixVBr
+ Pq6NJZra7+pYlqsCO8NIoSoQj56+X8pp6u1FP/fr3Hr7XkgHVIzGagPMLV8fZeUqfRL/
+ eou0dgXu6MeMwS6wXEObQAcx4CqCRSb7o+QTn8VQOiyewv4wr+8VtJQjUc90ILbYYaZu
+ Ot8rUeHqr0dUzw8n4nUCmZvOLetux+dnSoTakmMDERQMhPy9A8pWXUqQGN8D4ZBJGM+c
+ xewTMtnfgVQVxUB1AW+vIb94Y7X9cQHLFnrcYRW3oUO9zi3hwQLfVW0f/MMpi0G8H0f5
+ Is9g==
+X-Gm-Message-State: AOJu0YxuPB6XmpxRSjhqrkRZfGaTTikQC9nN02QoncIxztQheHJkVo3M
+ ioyMenAirCSFRLWDHEQTGLwnounZrR65bg==
+X-Google-Smtp-Source: AGHT+IHUA6rWDRY9pKGc706ugGSJVg1oSxlipohGOlhGHLZrkVDH3xKp7OVEKc6nm6fxdrAK0hXj0g==
+X-Received: by 2002:a17:902:e549:b0:1bb:8725:f537 with SMTP id
+ n9-20020a170902e54900b001bb8725f537mr811040plf.66.1691735516811; 
+ Thu, 10 Aug 2023 23:31:56 -0700 (PDT)
+Received: from rajgad.hsd1.ca.comcast.net
+ ([2601:204:df00:9cd0:1eb3:d724:a7eb:7d6c])
+ by smtp.gmail.com with ESMTPSA id
+ z3-20020a170902ee0300b001b9fef7f454sm2943580plb.73.2023.08.10.23.31.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Aug 2023 23:31:56 -0700 (PDT)
+From: Atul Raut <rauji.raut@gmail.com>
+To: bskeggs@redhat.com,
+	kherbst@redhat.com,
+	lyude@redhat.com
+Date: Thu, 10 Aug 2023 23:31:11 -0700
+Message-Id: <20230811063110.152221-1-rauji.raut@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-GB
-To: Thorsten Leemhuis <regressions@leemhuis.info>,
- Bagas Sanjaya <bagasdotme@gmail.com>, Ben Skeggs <bskeggs@redhat.com>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>
-References: <4b0c06ba-b05c-071c-d494-67775bd7250f@gmail.com>
- <94a31824-016a-7fe3-7477-e3ab500844c1@leemhuis.info>
-From: Peter Bottomley <peter@peebee.org.uk>
-In-Reply-To: <94a31824-016a-7fe3-7477-e3ab500844c1@leemhuis.info>
-X-CMAE-Envelope: MS4xfBWCJdcwmKVb28Au/gEDG2I3/Z7PsIXlvS+HpPb7K65Tuqk3clhZD6LvPtFjvHHL+n01kms808ts0BLSKzSiEmMIipfjqi/36gRW/D61K6prECH4bHsf
- Zby2DOKMj393LyKXh3RMmmYbW70+2GHUMCD1q23BH8EZMb8z5y0ZgK1y2p1C9JUzy9hB4/fbXU1MuqOX2wiv4oZKHH11KimoKIA=
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 12 Aug 2023 06:12:24 +0000
-Subject: Re: [Nouveau] Fwd: System (Xeon Nvidia) hangs at boot terminal
- after kernel 6.4.7
+Subject: [Nouveau] drm/nouveau: switch over to vmemdup_user()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,38 +73,44 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Linux Nouveau <nouveau@lists.freedesktop.org>,
- Linux DRI Development <dri-devel@lists.freedesktop.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux Stable <stable@vger.kernel.org>,
- Linux Regressions <regressions@lists.linux.dev>
+Cc: nouveau@lists.freedesktop.org,
+ linux-kernel-mentees@lists.linuxfoundation.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
---------------twy2mxR5IcftWWZaMeNVlHOy
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Use vmemdup_user() rather than duplicating its implementation.
 
-6.4.9 built with unconn.c from 6.4.6 builds and boots and runs fine. 
-Thanks everybody.
+This patch fixes the following Coccinelle warning:
+./drivers/gpu/drm/nouveau/nouveau_gem.c:630:7-15: WARNING opportunity for vmemdup_user
 
+Signed-off-by: Atul Raut <rauji.raut@gmail.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_gem.c | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
 
---------------twy2mxR5IcftWWZaMeNVlHOy
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+index ab9062e50977..a244b39df213 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+@@ -627,15 +627,10 @@ u_memcpya(uint64_t user, unsigned nmemb, unsigned size)
+ 
+ 	size *= nmemb;
+ 
+-	mem = kvmalloc(size, GFP_KERNEL);
+-	if (!mem)
++	mem = vmemdup_user(userptr, size);
++	if (IS_ERR(mem))
+ 		return ERR_PTR(-ENOMEM);
+ 
+-	if (copy_from_user(mem, userptr, size)) {
+-		u_free(mem);
+-		return ERR_PTR(-EFAULT);
+-	}
+-
+ 	return mem;
+ }
+ 
+-- 
+2.34.1
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><font size="4">6.4.9 built with unconn.c from 6.4.6 builds and
-        boots and runs fine. Thanks everybody.</font></p>
-    <p><font size="4"><br>
-      </font></p>
-  </body>
-</html>
-
---------------twy2mxR5IcftWWZaMeNVlHOy--
