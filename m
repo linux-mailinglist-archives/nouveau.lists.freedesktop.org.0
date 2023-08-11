@@ -1,81 +1,75 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 153C677824B
-	for <lists+nouveau@lfdr.de>; Thu, 10 Aug 2023 22:46:44 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id DCD817784C1
+	for <lists+nouveau@lfdr.de>; Fri, 11 Aug 2023 03:06:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 18E6610E5FB;
-	Thu, 10 Aug 2023 20:46:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D315510E617;
+	Fri, 11 Aug 2023 01:06:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 39F7A10E5FB
- for <nouveau@lists.freedesktop.org>; Thu, 10 Aug 2023 20:46:39 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E443B10E51C
+ for <nouveau@lists.freedesktop.org>; Fri, 11 Aug 2023 01:06:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1691700398;
+ s=mimecast20190719; t=1691716005;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=peMTe0/5+mkSedrYiGrzKaaCxKfi8eF8di3SVpG6oGg=;
- b=MYgQX5bMpVhJpseNyTzfWxCCRg9clM+bayYT4r44vrUHDYDmNklz7GKdtqWEzDNv5Y26jl
- Oscm04doh9Q9FKxtx+cGnlGlk4Pp8+HWf5SFy20N61Lth67OGYXhuw5MJH+X1UWwBOq6Fi
- yGrpMv7f7dkZpMDEmpYifadifXsWNkE=
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding;
+ bh=gQmfJqg0U6QQ+P0YAxBqdqzWanoylJrwE4wgvssrPN0=;
+ b=F682uCwhs8e5csmoUb5I66Q10lSk/Z92fafvR6gYdzT5GBYDGC2RyjT/l33ePoFiV2JCSl
+ j3ymxHcHy5KpvUDQgCAI2a983XH7XiKc3HkVJhgSVH5p0UgH/q49lI6m8dMwGvMG/FeZk8
+ hhBD+pl3gBOkAK4g3rWAcJ6QfcSOtHc=
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-312-UBuIhrOpMaChFNdHxmNXrQ-1; Thu, 10 Aug 2023 16:46:36 -0400
-X-MC-Unique: UBuIhrOpMaChFNdHxmNXrQ-1
-Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-99bc8f1290eso94495666b.3
- for <nouveau@lists.freedesktop.org>; Thu, 10 Aug 2023 13:46:36 -0700 (PDT)
+ us-mta-46-L5xIIFQHP_i5h33yJaC7EQ-1; Thu, 10 Aug 2023 21:06:42 -0400
+X-MC-Unique: L5xIIFQHP_i5h33yJaC7EQ-1
+Received: by mail-ej1-f72.google.com with SMTP id
+ a640c23a62f3a-94a35b0d4ceso103466366b.3
+ for <nouveau@lists.freedesktop.org>; Thu, 10 Aug 2023 18:06:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691700395; x=1692305195;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20221208; t=1691716001; x=1692320801;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=peMTe0/5+mkSedrYiGrzKaaCxKfi8eF8di3SVpG6oGg=;
- b=Xspn17+NG/zM9EDU/joZvbN4VjChb5d+KsWgsKgOVWm1yX261Smu3tCbUN7aJZneUv
- Wwkfgh26tGSUOmVQ26LndgoXfEHUMwMUyEWn8gaOnXSPM0014gggq4YKkHDE0DMrfOS/
- vDr5RhPc2DqlBOn2RcwhD/Q6u9PUH+8O1clVkCUs5VRxBKB+vVWeLubshOe1mr7xvnBS
- /GsrVF1ayBroDIdyOvGdWZn99bLYCeV6PwdB3gntDa6Fxu18eOmw0uNZdXYKGjWKLiW+
- IgRJda4CZY3dFWKVSWvfL1O5TMTVGWa8UhF0p8eqV5MFMthkCI7Q0SCfzQf7Qn9ETlfO
- 1ftA==
-X-Gm-Message-State: AOJu0YwU3R2npEOGPl4XtXzmbT9jEVfcqSQR2oGjj0SEYPd3Zhs4tB+O
- ZebbmMqs0Ml2vOPz+Sljg6JcQ2zDaG1VVDwkos5q414FVe7YqAwN/Abeyl2+e3hZVva+1PNxtzL
- ekRbnmXzoKYlei+hlkCs3YZ/JnA==
-X-Received: by 2002:a17:906:21c:b0:99d:101a:adad with SMTP id
- 28-20020a170906021c00b0099d101aadadmr2926388ejd.71.1691700395848; 
- Thu, 10 Aug 2023 13:46:35 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHW26xxTNJPFQ3smOHWGxyKlX0mnvuZtjaAEGkjD93ZtdsWhyKIS2aZ+xETefj0ZEOQl3flLg==
-X-Received: by 2002:a17:906:21c:b0:99d:101a:adad with SMTP id
- 28-20020a170906021c00b0099d101aadadmr2926376ejd.71.1691700395512; 
- Thu, 10 Aug 2023 13:46:35 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
- ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
+ bh=gQmfJqg0U6QQ+P0YAxBqdqzWanoylJrwE4wgvssrPN0=;
+ b=KIkrAIIuVsfdGV0gvNyZRGR2mwV84s4vo9D+NBcOkdP8D75y67WSUCiDvWKqgFVLLp
+ aM2Cxut9FGaIYGCnTFUlDxX9zSJsUoAbmGkVnaJ6h8viGkP0IQ+XbGiQ+vIpRd+Y9Y34
+ 5lPPM4XoJ79k3mnSYLXk9M1VUVODJqN2wZOqdtXRvi8tL3BnFa5hYOj6xPv3SgyvNt3J
+ gIep2Yj2CQxjOp079d77mNjvSozmEjQY0+VYbbj/aOWHZ8T7hCKNHUvAFA1M+qvcuEzC
+ fAgUIIDl4+6GsTYXk5lxZFAkeGGRCXNJrRgFHN6ePz3qFTFlbhznHp0gCUozOBfsEEIk
+ JCxg==
+X-Gm-Message-State: AOJu0YxpwXO5jQ3f0i9ALA8ZrXR5PqQD4rXqlRNPiToWZpLufrcPFVqZ
+ zcPSV2mdnXzdkmqZ08VaaZp97+QCWIawxqGg6//vRo2Y2tnr49CweGhjRhPEkOLO8PRTWoxcTRI
+ 8EU5DtAmDQC+g7mQfDX33btRCkQ==
+X-Received: by 2002:a17:906:3018:b0:99b:cf4f:9090 with SMTP id
+ 24-20020a170906301800b0099bcf4f9090mr359477ejz.66.1691716001243; 
+ Thu, 10 Aug 2023 18:06:41 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF8hEv/JCXaBemmNkSvUqVC1g6HHGKPUTY+1z6MfNCAMXoMW8l8cQizAk4W/hHLEOEqs/Kf4A==
+X-Received: by 2002:a17:906:3018:b0:99b:cf4f:9090 with SMTP id
+ 24-20020a170906301800b0099bcf4f9090mr359470ejz.66.1691716000904; 
+ Thu, 10 Aug 2023 18:06:40 -0700 (PDT)
+Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- q1-20020a1709064c8100b00991faf3810esm1406863eju.146.2023.08.10.13.46.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Aug 2023 13:46:34 -0700 (PDT)
-Message-ID: <0cad9f8b-7ff7-dfed-cf53-6953c5ff644d@redhat.com>
-Date: Thu, 10 Aug 2023 22:46:32 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-To: Dave Airlie <airlied@gmail.com>
-References: <20230810185020.231135-1-airlied@gmail.com>
+ h11-20020a170906110b00b00977cad140a8sm1572625eja.218.2023.08.10.18.06.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Aug 2023 18:06:40 -0700 (PDT)
 From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <20230810185020.231135-1-airlied@gmail.com>
+To: airlied@gmail.com,
+	faith.ekstrand@collabora.com
+Date: Fri, 11 Aug 2023 03:06:25 +0200
+Message-ID: <20230811010632.2473-1-dakr@redhat.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH] nouveau/u_memcpya: use vmemdup_user
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
+Subject: [Nouveau] [PATCH drm-misc-next] drm/nouveau: sched: avoid job races
+ between entities
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,55 +81,70 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Cc: matthew.brost@intel.com, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 8/10/23 20:50, Dave Airlie wrote:
-> From: Dave Airlie <airlied@redhat.com>
-> 
-> I think there are limit checks in places for most things but the
-> new api wants to not have them.
-> 
-> Add a limit check and use the vmemdup_user helper instead.
+If a sched job depends on a dma-fence from a job from the same GPU
+scheduler instance, but a different scheduler entity, the GPU scheduler
+does only wait for the particular job to be scheduled, rather than for
+the job to fully complete. This is due to the GPU scheduler assuming
+that there is a scheduler instance per ring. However, the current
+implementation, in order to avoid arbitrary amounts of kthreads, has a
+single scheduler instance while scheduler entities represent rings.
 
-Reviewed-by: Danilo Krummrich <dakr@redhat.com>
+As a workaround, set the DRM_SCHED_FENCE_DONT_PIPELINE for all
+out-fences in order to force the scheduler to wait for full job
+completion for dependent jobs from different entities and same scheduler
+instance.
 
-> 
-> Signed-off-by: Dave Airlie <airlied@redhat.com>
-> ---
->   drivers/gpu/drm/nouveau/nouveau_drv.h | 19 +++++--------------
->   1 file changed, 5 insertions(+), 14 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
-> index 54063b094a69..8a7357688aff 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-> @@ -189,21 +189,12 @@ u_free(void *addr)
->   static inline void *
->   u_memcpya(uint64_t user, unsigned nmemb, unsigned size)
->   {
-> -	void *mem;
-> -	void __user *userptr = (void __force __user *)(uintptr_t)user;
-> +	void __user *userptr = u64_to_user_ptr(user);
-> +	size_t bytes;
->   
-> -	size *= nmemb;
-> -
-> -	mem = kvmalloc(size, GFP_KERNEL);
-> -	if (!mem)
-> -		return ERR_PTR(-ENOMEM);
-> -
-> -	if (copy_from_user(mem, userptr, size)) {
-> -		u_free(mem);
-> -		return ERR_PTR(-EFAULT);
-> -	}
-> -
-> -	return mem;
-> +	if (unlikely(check_mul_overflow(nmemb, size, &bytes)))
-> +		return NULL;
-> +	return vmemdup_user(userptr, bytes);
->   }
->   
->   #include <nvif/object.h>
+There is some work in progress [1] to address the issues of firmware
+schedulers; once it is in-tree the scheduler topology in Nouveau should
+be re-worked accordingly.
+
+[1] https://lore.kernel.org/dri-devel/20230801205103.627779-1-matthew.brost@intel.com/
+
+Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_sched.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
+index 3424a1bf6af3..88217185e0f3 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_sched.c
++++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
+@@ -292,6 +292,28 @@ nouveau_job_submit(struct nouveau_job *job)
+ 	if (job->sync)
+ 		done_fence = dma_fence_get(job->done_fence);
+ 
++	/* If a sched job depends on a dma-fence from a job from the same GPU
++	 * scheduler instance, but a different scheduler entity, the GPU
++	 * scheduler does only wait for the particular job to be scheduled,
++	 * rather than for the job to fully complete. This is due to the GPU
++	 * scheduler assuming that there is a scheduler instance per ring.
++	 * However, the current implementation, in order to avoid arbitrary
++	 * amounts of kthreads, has a single scheduler instance while scheduler
++	 * entities represent rings.
++	 *
++	 * As a workaround, set the DRM_SCHED_FENCE_DONT_PIPELINE for all
++	 * out-fences in order to force the scheduler to wait for full job
++	 * completion for dependent jobs from different entities and same
++	 * scheduler instance.
++	 *
++	 * There is some work in progress [1] to address the issues of firmware
++	 * schedulers; once it is in-tree the scheduler topology in Nouveau
++	 * should be re-worked accordingly.
++	 *
++	 * [1] https://lore.kernel.org/dri-devel/20230801205103.627779-1-matthew.brost@intel.com/
++	 */
++	set_bit(DRM_SCHED_FENCE_DONT_PIPELINE, &job->done_fence->flags);
++
+ 	if (job->ops->armed_submit)
+ 		job->ops->armed_submit(job);
+ 
+
+base-commit: 68132cc6d1bcbc78ade524c6c6c226de42139f0e
+-- 
+2.41.0
 
