@@ -1,45 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A8C4779DB2
-	for <lists+nouveau@lfdr.de>; Sat, 12 Aug 2023 08:22:43 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id DA44F779DB3
+	for <lists+nouveau@lfdr.de>; Sat, 12 Aug 2023 08:23:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D8B0510E1BF;
-	Sat, 12 Aug 2023 06:22:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6911A10E1C4;
+	Sat, 12 Aug 2023 06:23:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from dfw.source.kernel.org (dfw.source.kernel.org
  [IPv6:2604:1380:4641:c500::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C149B10E1BF
- for <nouveau@lists.freedesktop.org>; Sat, 12 Aug 2023 06:22:39 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7CF6B10E1C4
+ for <nouveau@lists.freedesktop.org>; Sat, 12 Aug 2023 06:23:13 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 40F8363FE3;
- Sat, 12 Aug 2023 06:22:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 528CCC433C8;
- Sat, 12 Aug 2023 06:22:38 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id DE00164694;
+ Sat, 12 Aug 2023 06:23:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8C2BC43395;
+ Sat, 12 Aug 2023 06:23:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1691821358;
- bh=G2RzqGywBhhexZ6TXDFCWsGYoV6vLhoWcMcBMPmv3SU=;
+ s=korg; t=1691821392;
+ bh=UMLFBrHN86TX8cYQjvqc4fQ3IG9EboL+eVlH6PDn9Uk=;
  h=Subject:To:Cc:From:Date:From;
- b=tjaL1A00s3MFNUtwcKiH0mkfX5hdeDGCwb3SbiyQb++GQDuPwwMUzlaZjOZqF46mI
- PP60CPJ61evGoCoPAqmG00KUK8HDTaLky33UHFqMQAnwGIJZdDJOj++Cec2U3VzKTA
- FOy41EEfRWPYMCZ5btIDOb/40VCG+8ZfXIRaNGzc=
+ b=Y1sAk4yoPuFKsnfTGJuZYJwYZhNDr/EOBq15MATUy0VUHMuYmyl6X8i+1r4YASsqv
+ jpvyqVXA+WmdoKmWsAU4AKUY8QjH12k9S/KPQ4go7C12Xst1HZopL6dt0PoBztPcFB
+ L/3L6lBOKjSrFgjRWNhora/qXIDTdBQ5R1I1JoDM=
 To: airlied@gmail.com, airlied@redhat.com, bskeggs@redhat.com,
  gregkh@linuxfoundation.org, kherbst@redhat.com, nouveau@lists.freedesktop.org
 From: <gregkh@linuxfoundation.org>
-Date: Sat, 12 Aug 2023 08:22:20 +0200
-Message-ID: <2023081220-planner-constrict-2d85@gregkh>
+Date: Sat, 12 Aug 2023 08:22:36 +0200
+Message-ID: <2023081236-sarcastic-reptilian-53b9@gregkh>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=ANSI_X3.4-1968
 Content-Transfer-Encoding: 8bit
 X-stable: commit
 X-Patchwork-Hint: ignore 
 Subject: [Nouveau] Patch "drm/nouveau/gr: enable memory loads on helper
- invocation on all channels" has been added to the 5.15-stable tree
+ invocation on all channels" has been added to the 6.1-stable tree
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,12 +60,12 @@ This is a note to let you know that I've just added the patch titled
 
     drm/nouveau/gr: enable memory loads on helper invocation on all channels
 
-to the 5.15-stable tree which can be found at:
+to the 6.1-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      drm-nouveau-gr-enable-memory-loads-on-helper-invocation-on-all-channels.patch
-and it can be found in the queue-5.15 subdirectory.
+and it can be found in the queue-6.1 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
@@ -187,4 +187,5 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from kherbst@redhat.com are
 
-queue-5.15/drm-nouveau-gr-enable-memory-loads-on-helper-invocation-on-all-channels.patch
+queue-6.1/drm-nouveau-nvkm-dp-add-workaround-to-fix-dp-1.3-dpcd-issues.patch
+queue-6.1/drm-nouveau-gr-enable-memory-loads-on-helper-invocation-on-all-channels.patch
