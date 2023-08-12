@@ -2,43 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C99B779DAA
-	for <lists+nouveau@lfdr.de>; Sat, 12 Aug 2023 08:21:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70989779DAB
+	for <lists+nouveau@lfdr.de>; Sat, 12 Aug 2023 08:21:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 79EDD10E1C2;
-	Sat, 12 Aug 2023 06:21:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C954510E1BC;
+	Sat, 12 Aug 2023 06:21:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 31B9610E1BC
- for <nouveau@lists.freedesktop.org>; Sat, 12 Aug 2023 06:21:15 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8D70810E1BC
+ for <nouveau@lists.freedesktop.org>; Sat, 12 Aug 2023 06:21:40 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 70E7660B71;
- Sat, 12 Aug 2023 06:21:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 51D78C433C7;
- Sat, 12 Aug 2023 06:21:13 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 09C176342E;
+ Sat, 12 Aug 2023 06:21:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 18F74C433C8;
+ Sat, 12 Aug 2023 06:21:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1691821273;
- bh=BEuTCcjLEpE1LKbBMAfs5CWnUEStvG3QYeFhKcixTN0=;
+ s=korg; t=1691821299;
+ bh=VVjKDVbyej5WB9rWQP1/4di9dSOTGx41pkqN1tV2tmQ=;
  h=Subject:To:Cc:From:Date:From;
- b=y8cgF2GAWKrpdYhsSH72flPqkZ4Ee40jQcycbZ59oygGP+gzZnzaNkasOsRcLV1if
- ibRMhrSB+2I8i1pb0oK9xYQDw3BZofU3EDq3NOx18UEHDVxkrFVqPYGmVlfgOvUOIa
- OHd4L9kUJwGxUnIDYd7IB7e6IAjrxqENG3Jp4Z/0=
+ b=QaaO8bx1FMWz7lcyirWHdQI3hSxlA1R0EfPfKn+aX5Vj6EeysD67N8nRJwzzZvI5f
+ 6P9sSGFCRdufGP/oMPWkvs2+JSc7TK1mQ3OmUbHT7sjWPbzPK4xv5oW2cNDppbc1pe
+ P8BYbqV44Ot6fDQbdA1vAg2UT5jj/bb2E0gwa4bI=
 To: airlied@gmail.com, airlied@redhat.com, bskeggs@redhat.com,
  gregkh@linuxfoundation.org, kherbst@redhat.com, nouveau@lists.freedesktop.org
 From: <gregkh@linuxfoundation.org>
-Date: Sat, 12 Aug 2023 08:21:07 +0200
-Message-ID: <2023081207-freebase-remarry-3a65@gregkh>
+Date: Sat, 12 Aug 2023 08:21:18 +0200
+Message-ID: <2023081217-glade-galvanize-0910@gregkh>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=ANSI_X3.4-1968
 Content-Transfer-Encoding: 8bit
 X-stable: commit
 X-Patchwork-Hint: ignore 
 Subject: [Nouveau] Patch "drm/nouveau/gr: enable memory loads on helper
- invocation on all channels" has been added to the 5.4-stable tree
+ invocation on all channels" has been added to the 5.10-stable tree
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,12 +60,12 @@ This is a note to let you know that I've just added the patch titled
 
     drm/nouveau/gr: enable memory loads on helper invocation on all channels
 
-to the 5.4-stable tree which can be found at:
+to the 5.10-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      drm-nouveau-gr-enable-memory-loads-on-helper-invocation-on-all-channels.patch
-and it can be found in the queue-5.4 subdirectory.
+and it can be found in the queue-5.10 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
@@ -113,7 +114,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h
 +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h
-@@ -121,6 +121,7 @@ void gk104_grctx_generate_r418800(struct
+@@ -123,6 +123,7 @@ void gk104_grctx_generate_r418800(struct
  
  extern const struct gf100_grctx_func gk110_grctx;
  void gk110_grctx_generate_r419eb0(struct gf100_gr *);
@@ -186,4 +187,4 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from kherbst@redhat.com are
 
-queue-5.4/drm-nouveau-gr-enable-memory-loads-on-helper-invocation-on-all-channels.patch
+queue-5.10/drm-nouveau-gr-enable-memory-loads-on-helper-invocation-on-all-channels.patch
