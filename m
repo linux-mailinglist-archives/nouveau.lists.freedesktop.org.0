@@ -2,43 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97C4B779DA9
-	for <lists+nouveau@lfdr.de>; Sat, 12 Aug 2023 08:21:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C99B779DAA
+	for <lists+nouveau@lfdr.de>; Sat, 12 Aug 2023 08:21:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 239E910E028;
-	Sat, 12 Aug 2023 06:21:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 79EDD10E1C2;
+	Sat, 12 Aug 2023 06:21:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 95DCE10E028
- for <nouveau@lists.freedesktop.org>; Sat, 12 Aug 2023 06:21:06 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 31B9610E1BC
+ for <nouveau@lists.freedesktop.org>; Sat, 12 Aug 2023 06:21:15 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id BB18A60B71;
- Sat, 12 Aug 2023 06:21:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C843FC433C8;
- Sat, 12 Aug 2023 06:21:04 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 70E7660B71;
+ Sat, 12 Aug 2023 06:21:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 51D78C433C7;
+ Sat, 12 Aug 2023 06:21:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1691821265;
- bh=macwL6oG+GJXxE7AeF+GR+6QIy7+gTk2f7dKiSllVoU=;
+ s=korg; t=1691821273;
+ bh=BEuTCcjLEpE1LKbBMAfs5CWnUEStvG3QYeFhKcixTN0=;
  h=Subject:To:Cc:From:Date:From;
- b=lmWvP6ZnKb0cwWtBbIqlBWt9t2xEvx6epnbCZu+Ww5HdyuMJ79Z13ONOitVDMqIXN
- lvPjJ8aobfU9m6gYuMhsDUZt+U4UVOMtBGfig2YOxk+IR+hgsECEOk7aY6dWk8dr5w
- btnxOQnBBjeAG8ywdU3ZSYva6TC7jOrvF+Xy0ekQ=
+ b=y8cgF2GAWKrpdYhsSH72flPqkZ4Ee40jQcycbZ59oygGP+gzZnzaNkasOsRcLV1if
+ ibRMhrSB+2I8i1pb0oK9xYQDw3BZofU3EDq3NOx18UEHDVxkrFVqPYGmVlfgOvUOIa
+ OHd4L9kUJwGxUnIDYd7IB7e6IAjrxqENG3Jp4Z/0=
 To: airlied@gmail.com, airlied@redhat.com, bskeggs@redhat.com,
  gregkh@linuxfoundation.org, kherbst@redhat.com, nouveau@lists.freedesktop.org
 From: <gregkh@linuxfoundation.org>
-Date: Sat, 12 Aug 2023 08:20:54 +0200
-Message-ID: <2023081254-emphatic-antacid-c0a6@gregkh>
+Date: Sat, 12 Aug 2023 08:21:07 +0200
+Message-ID: <2023081207-freebase-remarry-3a65@gregkh>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=ANSI_X3.4-1968
 Content-Transfer-Encoding: 8bit
 X-stable: commit
 X-Patchwork-Hint: ignore 
 Subject: [Nouveau] Patch "drm/nouveau/gr: enable memory loads on helper
- invocation on all channels" has been added to the 4.19-stable tree
+ invocation on all channels" has been added to the 5.4-stable tree
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,12 +59,12 @@ This is a note to let you know that I've just added the patch titled
 
     drm/nouveau/gr: enable memory loads on helper invocation on all channels
 
-to the 4.19-stable tree which can be found at:
+to the 5.4-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      drm-nouveau-gr-enable-memory-loads-on-helper-invocation-on-all-channels.patch
-and it can be found in the queue-4.19 subdirectory.
+and it can be found in the queue-5.4 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
@@ -186,4 +186,4 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from kherbst@redhat.com are
 
-queue-4.19/drm-nouveau-gr-enable-memory-loads-on-helper-invocation-on-all-channels.patch
+queue-5.4/drm-nouveau-gr-enable-memory-loads-on-helper-invocation-on-all-channels.patch
