@@ -1,67 +1,103 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D776F779D9B
-	for <lists+nouveau@lfdr.de>; Sat, 12 Aug 2023 08:12:46 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B982C779D95
+	for <lists+nouveau@lfdr.de>; Sat, 12 Aug 2023 08:12:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7E02E10E1B2;
-	Sat, 12 Aug 2023 06:12:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CDF0910E1B0;
+	Sat, 12 Aug 2023 06:12:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5AC2B10E662;
- Fri, 11 Aug 2023 06:31:57 +0000 (UTC)
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1bba48b0bd2so12219045ad.3; 
- Thu, 10 Aug 2023 23:31:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1691735517; x=1692340317;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=LQ1M3C8oCeNHlAIM7S9dLfoMmUG2TNrYAIGvX32nZuI=;
- b=H5U8a3+cNKb3odFyPRMiD69LR83CpnTQuL2EE0SUyGd6z8cw9k9TLsGIdB0Fj/rtbI
- b2d1u+H2TVao9P2TDRsTLtZrvRlYq/QP+uVkJCFNeaWZut6Ac/NXxiMo6Yu170zs9NDh
- 3Hzqqoy7cA01j3OCEXRIiaP13hczlbWD1iHKlbVpebB0tdgMBW1YfNkJZZQdTzZoTMhK
- rWCG1SMZzvXjHhUklsO5sQSV1QlimIMLQcg9wbokCwpwjI2krIfIYKiwc57pdwKRJ0Kw
- vFPtOpEZdnc7NfSqVskXYGDG3xjw8M6t9LK/Eke84vbsHI00Fldcf2T0jKDXytTK5alZ
- ro8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1691735517; x=1692340317;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LQ1M3C8oCeNHlAIM7S9dLfoMmUG2TNrYAIGvX32nZuI=;
- b=GArci5Crkw3Kcf0CiUe0o8KmNfjXS6WRqZ4GRXU5zZ+9NailRJJq1sCBFYzWrixVBr
- Pq6NJZra7+pYlqsCO8NIoSoQj56+X8pp6u1FP/fr3Hr7XkgHVIzGagPMLV8fZeUqfRL/
- eou0dgXu6MeMwS6wXEObQAcx4CqCRSb7o+QTn8VQOiyewv4wr+8VtJQjUc90ILbYYaZu
- Ot8rUeHqr0dUzw8n4nUCmZvOLetux+dnSoTakmMDERQMhPy9A8pWXUqQGN8D4ZBJGM+c
- xewTMtnfgVQVxUB1AW+vIb94Y7X9cQHLFnrcYRW3oUO9zi3hwQLfVW0f/MMpi0G8H0f5
- Is9g==
-X-Gm-Message-State: AOJu0YxuPB6XmpxRSjhqrkRZfGaTTikQC9nN02QoncIxztQheHJkVo3M
- ioyMenAirCSFRLWDHEQTGLwnounZrR65bg==
-X-Google-Smtp-Source: AGHT+IHUA6rWDRY9pKGc706ugGSJVg1oSxlipohGOlhGHLZrkVDH3xKp7OVEKc6nm6fxdrAK0hXj0g==
-X-Received: by 2002:a17:902:e549:b0:1bb:8725:f537 with SMTP id
- n9-20020a170902e54900b001bb8725f537mr811040plf.66.1691735516811; 
- Thu, 10 Aug 2023 23:31:56 -0700 (PDT)
-Received: from rajgad.hsd1.ca.comcast.net
- ([2601:204:df00:9cd0:1eb3:d724:a7eb:7d6c])
- by smtp.gmail.com with ESMTPSA id
- z3-20020a170902ee0300b001b9fef7f454sm2943580plb.73.2023.08.10.23.31.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Aug 2023 23:31:56 -0700 (PDT)
-From: Atul Raut <rauji.raut@gmail.com>
-To: bskeggs@redhat.com,
-	kherbst@redhat.com,
-	lyude@redhat.com
-Date: Thu, 10 Aug 2023 23:31:11 -0700
-Message-Id: <20230811063110.152221-1-rauji.raut@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3578910E138;
+ Sat, 12 Aug 2023 00:29:47 +0000 (UTC)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 37C0BQPe013062; Sat, 12 Aug 2023 00:28:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com;
+ h=message-id : date :
+ mime-version : subject : to : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=qcppdkim1;
+ bh=qYH12/iPlU8v63BB6B/eawPaI6tpN34REP1QbZ/mXAw=;
+ b=N3J8OrKymS16F5cxSaXkaN5mzFUX93QnwUNuhPgoV34lm9SZg8yiFt6PS/jk4Ya4tytB
+ TmMnW3ZYX5cENUsujWmD01SCQ70uvLqGTroKsoW1c/E+/A2MsPsjWztwpZxWvKScTWY+
+ 1zV2DU9ZjYhpZjVZjUbQ5J0BsW7oqRc7+9/53UyO651n3IxDEKgoYlsQW5NfhuCZBIgU
+ yRGrh3CMaXR8WwfWsSAV00WtAvb176HkPkru/lLRSe2FV9GfhU2WBQk0ddzZhDXNXz1/
+ jEuwSyYIS8cXZbaePcIOX5dgIdvLxG2tIh25jCVxEVChXH7x8+bZjPK8RbDikNlYwIXM zg== 
+Received: from nalasppmta02.qualcomm.com (Global_NAT1.qualcomm.com
+ [129.46.96.20])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3sd8yuk36w-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Sat, 12 Aug 2023 00:28:49 +0000
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com
+ [10.47.209.196])
+ by NALASPPMTA02.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 37C0SmSf008800
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Sat, 12 Aug 2023 00:28:48 GMT
+Received: from [10.110.20.185] (10.80.80.8) by nalasex01a.na.qualcomm.com
+ (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.30; Fri, 11 Aug
+ 2023 17:28:44 -0700
+Message-ID: <75c88834-a931-86d6-91d0-5bdba24bca34@quicinc.com>
+Date: Fri, 11 Aug 2023 17:28:43 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Content-Language: en-US
+To: Ruan Jinjie <ruanjinjie@huawei.com>, <Felix.Kuehling@amd.com>,
+ <alexander.deucher@amd.com>, <christian.koenig@amd.com>,
+ <Xinhui.Pan@amd.com>, <airlied@gmail.com>, <daniel@ffwll.ch>,
+ <harry.wentland@amd.com>, <sunpeng.li@amd.com>,
+ <Rodrigo.Siqueira@amd.com>, <maarten.lankhorst@linux.intel.com>,
+ <mripard@kernel.org>, <tzimmermann@suse.de>, <inki.dae@samsung.com>,
+ <sw0312.kim@samsung.com>, <kyungmin.park@samsung.com>,
+ <krzysztof.kozlowski@linaro.org>, <alim.akhtar@samsung.com>,
+ <robdclark@gmail.com>, <dmitry.baryshkov@linaro.org>,
+ <sean@poorly.run>, <marijn.suijten@somainline.org>,
+ <bskeggs@redhat.com>, <kherbst@redhat.com>, <lyude@redhat.com>,
+ <kraxel@redhat.com>, <gurchetansingh@chromium.org>,
+ <olvaffe@gmail.com>, <paulo.miguel.almeida.rodenas@gmail.com>,
+ <wenjing.liu@amd.com>, <haoping.liu@amd.com>, <Charlene.Liu@amd.com>,
+ <chiahsuan.chung@amd.com>, <george.shen@amd.com>, <sancchen@amd.com>,
+ <tony.tascioglu@amd.com>, <jaehyun.chung@amd.com>,
+ <tales.aparecida@gmail.com>, <drv@mailo.com>,
+ <aurabindo.pillai@amd.com>, <quic_vpolimer@quicinc.com>,
+ <jiasheng@iscas.ac.cn>, <noralf@tronnes.org>,
+ <jose.exposito89@gmail.com>, <javierm@redhat.com>,
+ <mairacanal@riseup.net>, <davidgow@google.com>,
+ <arthurgrillo@riseup.net>, <amd-gfx@lists.freedesktop.org>,
+ <dri-devel@lists.freedesktop.org>, <linux-arm-kernel@lists.infradead.org>,
+ <linux-samsung-soc@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
+ <freedreno@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
+ <virtualization@lists.linux-foundation.org>
+References: <20230809034445.434902-1-ruanjinjie@huawei.com>
+ <20230809034445.434902-4-ruanjinjie@huawei.com>
+From: Abhinav Kumar <quic_abhinavk@quicinc.com>
+In-Reply-To: <20230809034445.434902-4-ruanjinjie@huawei.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-GUID: 8JUTKJ4SUFP-OUokVlxpVpG_EeUxAsA0
+X-Proofpoint-ORIG-GUID: 8JUTKJ4SUFP-OUokVlxpVpG_EeUxAsA0
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-08-11_15,2023-08-10_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0
+ priorityscore=1501 impostorscore=0 bulkscore=0 mlxscore=0 suspectscore=0
+ phishscore=0 lowpriorityscore=0 mlxlogscore=999 adultscore=0 clxscore=1011
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2306200000
+ definitions=main-2308120001
 X-Mailman-Approved-At: Sat, 12 Aug 2023 06:12:24 +0000
-Subject: [Nouveau] drm/nouveau: switch over to vmemdup_user()
+Subject: Re: [Nouveau] [PATCH -next 3/7] drm/msm: Remove unnecessary NULL
+ values
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,44 +109,21 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org,
- linux-kernel-mentees@lists.linuxfoundation.org,
- dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Use vmemdup_user() rather than duplicating its implementation.
 
-This patch fixes the following Coccinelle warning:
-./drivers/gpu/drm/nouveau/nouveau_gem.c:630:7-15: WARNING opportunity for vmemdup_user
 
-Signed-off-by: Atul Raut <rauji.raut@gmail.com>
----
- drivers/gpu/drm/nouveau/nouveau_gem.c | 9 ++-------
- 1 file changed, 2 insertions(+), 7 deletions(-)
+On 8/8/2023 8:44 PM, Ruan Jinjie wrote:
+> The NULL initialization of the pointers assigned by kzalloc() first is
+> not necessary, because if the kzalloc() failed, the pointers will be
+> assigned NULL, otherwise it works as usual. so remove it.
+> 
+> Signed-off-by: Ruan Jinjie <ruanjinjie@huawei.com>
+> ---
+>   drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c | 2 +-
+>   drivers/gpu/drm/msm/disp/mdp5/mdp5_smp.c | 2 +-
+>   2 files changed, 2 insertions(+), 2 deletions(-)
+> 
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-index ab9062e50977..a244b39df213 100644
---- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -627,15 +627,10 @@ u_memcpya(uint64_t user, unsigned nmemb, unsigned size)
- 
- 	size *= nmemb;
- 
--	mem = kvmalloc(size, GFP_KERNEL);
--	if (!mem)
-+	mem = vmemdup_user(userptr, size);
-+	if (IS_ERR(mem))
- 		return ERR_PTR(-ENOMEM);
- 
--	if (copy_from_user(mem, userptr, size)) {
--		u_free(mem);
--		return ERR_PTR(-EFAULT);
--	}
--
- 	return mem;
- }
- 
--- 
-2.34.1
-
+Reviewed-by: Abhinav Kumar <quic_abhinavk@quicinc.com>
