@@ -2,45 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A24077AC9D
-	for <lists+nouveau@lfdr.de>; Sun, 13 Aug 2023 23:35:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 020F377ACF5
+	for <lists+nouveau@lfdr.de>; Sun, 13 Aug 2023 23:43:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 40C6710E0E5;
-	Sun, 13 Aug 2023 21:35:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 467CA10E106;
+	Sun, 13 Aug 2023 21:43:53 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from dfw.source.kernel.org (dfw.source.kernel.org
  [IPv6:2604:1380:4641:c500::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6180E10E0E5
- for <nouveau@lists.freedesktop.org>; Sun, 13 Aug 2023 21:35:03 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F285A10E106
+ for <nouveau@lists.freedesktop.org>; Sun, 13 Aug 2023 21:43:51 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id A034062CCC;
- Sun, 13 Aug 2023 21:35:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B4F44C433C8;
- Sun, 13 Aug 2023 21:35:01 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 4C50361A2D;
+ Sun, 13 Aug 2023 21:43:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5FF8DC433C7;
+ Sun, 13 Aug 2023 21:43:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1691962502;
+ s=korg; t=1691963030;
  bh=hOabV+KorJK9yJKufh1IhqTLOa1UUsSKa8xLx0V0TvE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=jJ79xCRZ7CiUnhYxcctadfYveQgIrsnPcvl1Yi0GXV7sKtLvCV/UkGTx5Iqnuwkxy
- e/WDzcLwk77BN6j4mrqWluHP05F7fkL73VisF+7+6drVXd9V9+7lxoH/rrEgtG0FHC
- RkpbhmZXxZ9E9K4cIyT3B78z4e6b/Fp2EPGhbWS8=
+ b=vnoSqcCJd9xAfBLyrKnsobJfBr322FIo+bIqPf85dRkGxJizOBo0FRjs6dUTNEhNO
+ LIkXRW3YnfoXHi7xWzCeL+6IFXZwBUxxOfRQYK7bbedpawbMPACrYobftnUKJWITAE
+ t3Y8H1INTBm6oTVuU+tCEsTqpZPPrY6LQiPKevU4=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: stable@vger.kernel.org
-Date: Sun, 13 Aug 2023 23:17:50 +0200
-Message-ID: <20230813211719.554323424@linuxfoundation.org>
+Date: Sun, 13 Aug 2023 23:18:59 +0200
+Message-ID: <20230813211711.029282242@linuxfoundation.org>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230813211718.757428827@linuxfoundation.org>
-References: <20230813211718.757428827@linuxfoundation.org>
+In-Reply-To: <20230813211710.787645394@linuxfoundation.org>
+References: <20230813211710.787645394@linuxfoundation.org>
 User-Agent: quilt/0.67
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 6.1 025/149] drm/nouveau/gr: enable memory loads
- on helper invocation on all channels
+Subject: [Nouveau] [PATCH 5.15 08/89] drm/nouveau/gr: enable memory loads on
+ helper invocation on all channels
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
