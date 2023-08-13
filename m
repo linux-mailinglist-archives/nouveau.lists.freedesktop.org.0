@@ -2,44 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1CE877AB76
-	for <lists+nouveau@lfdr.de>; Sun, 13 Aug 2023 23:22:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D12177ACF4
+	for <lists+nouveau@lfdr.de>; Sun, 13 Aug 2023 23:40:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AA52910E049;
-	Sun, 13 Aug 2023 21:22:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 20F0F10E0F6;
+	Sun, 13 Aug 2023 21:40:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 05B2A10E049
- for <nouveau@lists.freedesktop.org>; Sun, 13 Aug 2023 21:22:31 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C736010E0F6
+ for <nouveau@lists.freedesktop.org>; Sun, 13 Aug 2023 21:40:00 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 156FA62801;
- Sun, 13 Aug 2023 21:22:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 30B51C433C7;
- Sun, 13 Aug 2023 21:22:30 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 40764622CB;
+ Sun, 13 Aug 2023 21:40:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 517CCC433C8;
+ Sun, 13 Aug 2023 21:39:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1691961750;
- bh=6G4kSgCXG/FEsdVTpIowIUtq5BEcBaQy3j2XY1KTA2c=;
+ s=korg; t=1691962799;
+ bh=hOabV+KorJK9yJKufh1IhqTLOa1UUsSKa8xLx0V0TvE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=js9vKwjrFkUO1RXTtRBU8jsev3AaW5q8vQkFoXOzjBGIZ4rFu8pFnyaHyAAorkwHC
- OO2aNCDmwQ88emZPJ2V+Pa8u1RVEgRXq+8xzMfVvXj7e+CxypXoiP0rNJ9E0bzb3e7
- QsCcXjC8rodv/Msvyx6g390jlCrWrK4qfOzSA1mY=
+ b=RyYFlOS4lhB1QNoRHOTZS4R5TQhtXWpLBzaaUk+w4K3gTY+ieIcvoQuX63v176aVR
+ I7rlzmpSy9Mi00TaJJJ0U5653UjrqM2oTUOR+ibrXlOy50rwTqeLUeyCb0SG/Xq/CI
+ 5Lf+Td9o3h21vAnmAuGxVnXFBeQK2YtgG9uZ/VRE=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: stable@vger.kernel.org
-Date: Sun, 13 Aug 2023 23:18:59 +0200
-Message-ID: <20230813211704.120063047@linuxfoundation.org>
+Date: Sun, 13 Aug 2023 23:19:13 +0200
+Message-ID: <20230813211708.530365128@linuxfoundation.org>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230813211703.915807095@linuxfoundation.org>
-References: <20230813211703.915807095@linuxfoundation.org>
+In-Reply-To: <20230813211708.149630011@linuxfoundation.org>
+References: <20230813211708.149630011@linuxfoundation.org>
 User-Agent: quilt/0.67
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 4.19 05/33] drm/nouveau/gr: enable memory loads on
+Subject: [Nouveau] [PATCH 5.10 12/68] drm/nouveau/gr: enable memory loads on
  helper invocation on all channels
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -97,7 +96,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h
 +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h
-@@ -121,6 +121,7 @@ void gk104_grctx_generate_r418800(struct
+@@ -123,6 +123,7 @@ void gk104_grctx_generate_r418800(struct
  
  extern const struct gf100_grctx_func gk110_grctx;
  void gk110_grctx_generate_r419eb0(struct gf100_gr *);
