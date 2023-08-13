@@ -1,78 +1,72 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3E3C77EDC0
-	for <lists+nouveau@lfdr.de>; Thu, 17 Aug 2023 01:18:32 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 29A0277F0D6
+	for <lists+nouveau@lfdr.de>; Thu, 17 Aug 2023 09:03:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D6A3910E122;
-	Wed, 16 Aug 2023 23:18:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8943510E1A3;
+	Thu, 17 Aug 2023 07:03:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 966FD10E122
- for <nouveau@lists.freedesktop.org>; Wed, 16 Aug 2023 23:18:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1692227906;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=e27Prao+8w59knGJmOWj+3FndpKc2qgsbyaKBRsKylU=;
- b=GaoHb4/rbh9UXABrp5iX8spotzgZtDfJxO9hDUiN0OTPOq26yAQC6sHEDsixxWHogue9At
- 5j2DSZHxP4eECJCLOruamSgGnLzfENwGIOHsBc0EqNDz/HUbuPEXRqbuGjwpGet1XBeadM
- vTrm2zsZMv1KFoAobMHgldKxLR24eBI=
-Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
- [209.85.167.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-445-A09hOKL-MNCovmT6eOTa6w-1; Wed, 16 Aug 2023 19:18:25 -0400
-X-MC-Unique: A09hOKL-MNCovmT6eOTa6w-1
-Received: by mail-lf1-f70.google.com with SMTP id
- 2adb3069b0e04-4fe6b399119so1420292e87.1
- for <nouveau@lists.freedesktop.org>; Wed, 16 Aug 2023 16:18:25 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692227904; x=1692832704;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=e27Prao+8w59knGJmOWj+3FndpKc2qgsbyaKBRsKylU=;
- b=d8EbXQYn+BhMPAGBE9YNCN8lZj8vGnuLmwqrGPGcqtBIg6Sdj5si2DdqScW+qMYrJz
- fNIlVkWAOEUg5o6TRMStEQZ06vow7enfnzSRZcMM/rYnCumT2gSYcphHeeO1jFutvtUA
- K8YqjsUdWZiBRZx/V59Gpbn4sV5tAVb1ts7o3PKJ0pfeKLkj6cEG8dtW2jE1vlw4Vqxt
- Be4GA2EcVp2DVPqdw3hEaZH9aVfHR7awYZ7VBF3xyIMo5mW0Mr8z+WPS4tlFqOxonKz8
- XKUUjCu+HUQxxTXWkEeCYbvpWRR2gy1rmWsTTvFFHNL0KLDGlJIx+r0eLtlqVzZk49X0
- sjMg==
-X-Gm-Message-State: AOJu0Yz/R1jWFQi9mzmufVOunLV7ZKV89ynUe2eAoOpQbEE8l9M5A2rN
- 4ga8vEQBcGcZ/5xdgwIHSe6LVGTnFx+dyViQd+jZ4eZVxLvrCHOk7s3h7mj41aREXpofiRMzOY7
- fpY4qthxSyaU38KNpR0WWSuEVXKMhl7pyMFg4P9ksaA==
-X-Received: by 2002:a2e:535d:0:b0:2b6:af68:6803 with SMTP id
- t29-20020a2e535d000000b002b6af686803mr2442422ljd.4.1692227904016; 
- Wed, 16 Aug 2023 16:18:24 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IF1K6kBGziG4deNuHLAraS88W59a/Ay7fpQlOgwaRtMAQHHcJu47CsepbxS6R+gOkE0cHNdxbWZY06UjdNnDbI=
-X-Received: by 2002:a2e:535d:0:b0:2b6:af68:6803 with SMTP id
- t29-20020a2e535d000000b002b6af686803mr2442415ljd.4.1692227903720; Wed, 16 Aug
- 2023 16:18:23 -0700 (PDT)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4314810E044;
+ Sun, 13 Aug 2023 01:14:57 +0000 (UTC)
+Received: from [192.168.2.249] (109-252-150-127.dynamic.spd-mgts.ru
+ [109.252.150.127])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ (Authenticated sender: dmitry.osipenko)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id F222866071B8;
+ Sun, 13 Aug 2023 02:14:51 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1691889295;
+ bh=bPp/hkEoDS0ZxAQiv7IPH0ePMv+YAdVNwR7xflkKTfA=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=Uz8KDonPc/gBgbinrFzsCdc6rgNcwCbXiIogKVRXysqJJtxOGqNEF2OUOR+rVnrXd
+ VwOSU59ZkqE9I2R9CNOpO28dhmbVc2RZcZcaxEONC0OAH+wxz6POH8Rza1irhAgWQX
+ 3jNxUqWp9qemwwuadE6DSax0voEzK6ad/MwWNwyqoUmdMClJ0GuN+GntG6o/Y2+G20
+ US0ec6J00OLr7/jjIhU8IlmjV5yvwReELAfpnaFBKL055tF1xHd83m+Q1gCsxqJfu1
+ GvuSjjhWUWtbQvALG3p1XUa66zNV9izcGryYx+W8Bq2+CW9UGz0xQnSZk7uepiAzPw
+ 5WLxzXW8kcnpw==
+Message-ID: <325014e7-cb8d-54e0-eead-7727c8ec2f07@collabora.com>
+Date: Sun, 13 Aug 2023 04:14:49 +0300
 MIME-Version: 1.0
-References: <20230814144933.3956959-1-kherbst@redhat.com>
- <20230816093015.GDZNyXJ28y9uspb4Mr@fat_crate.local>
- <CACO55tu8ab-rxCzxFXbUh4Z=W9E-1f8sH6BVd=P+16dQ9PQNjg@mail.gmail.com>
- <20230816145338.GIZNzi8o3d9x9bcPzX@fat_crate.local>
- <CACO55ttasKLxBTmZjN-XBOuJFC7rng2PbLgxCT8WT6ukOZNGzQ@mail.gmail.com>
- <20230816151252.GKZNzndDNySuWC+Vwz@fat_crate.local>
- <CACO55tunC5mEu3Tw64rKLqNM6MN6d=N90kYQKYwXWNMB=ahDaw@mail.gmail.com>
- <20230816221353.GXZN1KIXloRn8cGt5E@fat_crate.local>
-In-Reply-To: <20230816221353.GXZN1KIXloRn8cGt5E@fat_crate.local>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Thu, 17 Aug 2023 01:18:12 +0200
-Message-ID: <CACO55ts7430tAUDC+0qY0EZ5ReO=2Rjwj1SzHaBLodmyBgrUrw@mail.gmail.com>
-To: Borislav Petkov <bp@alien8.de>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/disp: fix use-after-free in error
- handling of nouveau_connector_create
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Content-Language: en-US
+To: Ruan Jinjie <ruanjinjie@huawei.com>, Felix.Kuehling@amd.com,
+ alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
+ airlied@gmail.com, daniel@ffwll.ch, harry.wentland@amd.com,
+ sunpeng.li@amd.com, Rodrigo.Siqueira@amd.com,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
+ inki.dae@samsung.com, sw0312.kim@samsung.com, kyungmin.park@samsung.com,
+ krzysztof.kozlowski@linaro.org, alim.akhtar@samsung.com,
+ robdclark@gmail.com, quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org,
+ sean@poorly.run, marijn.suijten@somainline.org, bskeggs@redhat.com,
+ kherbst@redhat.com, lyude@redhat.com, kraxel@redhat.com,
+ gurchetansingh@chromium.org, olvaffe@gmail.com,
+ paulo.miguel.almeida.rodenas@gmail.com, wenjing.liu@amd.com,
+ haoping.liu@amd.com, Charlene.Liu@amd.com, chiahsuan.chung@amd.com,
+ george.shen@amd.com, sancchen@amd.com, tony.tascioglu@amd.com,
+ jaehyun.chung@amd.com, tales.aparecida@gmail.com, drv@mailo.com,
+ aurabindo.pillai@amd.com, quic_vpolimer@quicinc.com, jiasheng@iscas.ac.cn,
+ noralf@tronnes.org, jose.exposito89@gmail.com, javierm@redhat.com,
+ mairacanal@riseup.net, davidgow@google.com, arthurgrillo@riseup.net,
+ amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-arm-kernel@lists.infradead.org, linux-samsung-soc@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+References: <20230809034445.434902-1-ruanjinjie@huawei.com>
+ <20230809034445.434902-6-ruanjinjie@huawei.com>
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+In-Reply-To: <20230809034445.434902-6-ruanjinjie@huawei.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Thu, 17 Aug 2023 07:02:58 +0000
+Subject: Re: [Nouveau] [PATCH -next 5/7] drm/virtio: Remove an unnecessary
+ NULL value
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,27 +78,36 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Takashi Iwai <tiwai@suse.de>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Aug 17, 2023 at 12:14=E2=80=AFAM Borislav Petkov <bp@alien8.de> wro=
-te:
->
-> On Wed, Aug 16, 2023 at 11:27:05PM +0200, Karol Herbst wrote:
-> > that GPU has only a `DMS-59` connector, is that right?
->
-> No clue. How do I figure that out?
->
+On 8/9/23 06:44, Ruan Jinjie wrote:
+> The NULL initialization of the pointer assigned by kzalloc() first is
+> not necessary, because if the kzalloc() failed, the pointer will be
+> assigned NULL, otherwise it works as usual. so remove it.
+> 
+> Signed-off-by: Ruan Jinjie <ruanjinjie@huawei.com>
+> ---
+>  drivers/gpu/drm/virtio/virtgpu_submit.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_submit.c b/drivers/gpu/drm/virtio/virtgpu_submit.c
+> index 3c00135ead45..82563dbec2ab 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_submit.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_submit.c
+> @@ -274,7 +274,7 @@ static int virtio_gpu_fence_event_create(struct drm_device *dev,
+>  					 struct virtio_gpu_fence *fence,
+>  					 u32 ring_idx)
+>  {
+> -	struct virtio_gpu_fence_event *e = NULL;
+> +	struct virtio_gpu_fence_event *e;
+>  	int ret;
+>  
+>  	e = kzalloc(sizeof(*e), GFP_KERNEL);
 
-do you have one of these? https://en.wikipedia.org/wiki/DMS-59
+Reviewed-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 
-> --
-> Regards/Gruss,
->     Boris.
->
-> https://people.kernel.org/tglx/notes-about-netiquette
->
+-- 
+Best regards,
+Dmitry
 
