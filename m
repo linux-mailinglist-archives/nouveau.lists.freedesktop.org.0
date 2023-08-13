@@ -2,43 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C787077ABB8
-	for <lists+nouveau@lfdr.de>; Sun, 13 Aug 2023 23:25:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A24077AC9D
+	for <lists+nouveau@lfdr.de>; Sun, 13 Aug 2023 23:35:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 19C0710E0DD;
-	Sun, 13 Aug 2023 21:25:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 40C6710E0E5;
+	Sun, 13 Aug 2023 21:35:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 47EB410E0DD
- for <nouveau@lists.freedesktop.org>; Sun, 13 Aug 2023 21:24:59 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6180E10E0E5
+ for <nouveau@lists.freedesktop.org>; Sun, 13 Aug 2023 21:35:03 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 7475962913;
- Sun, 13 Aug 2023 21:24:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 893C8C433C7;
- Sun, 13 Aug 2023 21:24:57 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id A034062CCC;
+ Sun, 13 Aug 2023 21:35:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B4F44C433C8;
+ Sun, 13 Aug 2023 21:35:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1691961897;
- bh=cPSuqEhjVSebTno1xrhJL7L9CBGw2VlW4+aC/EksmQU=;
+ s=korg; t=1691962502;
+ bh=hOabV+KorJK9yJKufh1IhqTLOa1UUsSKa8xLx0V0TvE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=2LaK3OZAAAhlacc5v0PSC5if+/TirlSMU2+g0Ez44N1PRE7s8LrM/awscSw6vYmsM
- rjSDxSjBX4hp03TSMG6lTwn4tTupOVjsuFSFcq5g8CkJbWKSfW1fT1XTUVVG+1pjSr
- DZ4XEgRhfLg9BP8xPdQgxcoDM+RoCJ9ZPeNvYchA=
+ b=jJ79xCRZ7CiUnhYxcctadfYveQgIrsnPcvl1Yi0GXV7sKtLvCV/UkGTx5Iqnuwkxy
+ e/WDzcLwk77BN6j4mrqWluHP05F7fkL73VisF+7+6drVXd9V9+7lxoH/rrEgtG0FHC
+ RkpbhmZXxZ9E9K4cIyT3B78z4e6b/Fp2EPGhbWS8=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: stable@vger.kernel.org
-Date: Sun, 13 Aug 2023 23:16:49 +0200
-Message-ID: <20230813211726.114391910@linuxfoundation.org>
+Date: Sun, 13 Aug 2023 23:17:50 +0200
+Message-ID: <20230813211719.554323424@linuxfoundation.org>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230813211724.969019629@linuxfoundation.org>
-References: <20230813211724.969019629@linuxfoundation.org>
+In-Reply-To: <20230813211718.757428827@linuxfoundation.org>
+References: <20230813211718.757428827@linuxfoundation.org>
 User-Agent: quilt/0.67
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 6.4 039/206] drm/nouveau/gr: enable memory loads
+Subject: [Nouveau] [PATCH 6.1 025/149] drm/nouveau/gr: enable memory loads
  on helper invocation on all channels
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -96,7 +97,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h
 +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgf100.h
-@@ -117,6 +117,7 @@ void gk104_grctx_generate_r418800(struct
+@@ -123,6 +123,7 @@ void gk104_grctx_generate_r418800(struct
  
  extern const struct gf100_grctx_func gk110_grctx;
  void gk110_grctx_generate_r419eb0(struct gf100_gr *);
@@ -106,7 +107,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  extern const struct gf100_grctx_func gk208_grctx;
 --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk104.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk104.c
-@@ -906,7 +906,9 @@ static void
+@@ -916,7 +916,9 @@ static void
  gk104_grctx_generate_r419f78(struct gf100_gr *gr)
  {
  	struct nvkm_device *device = gr->base.engine.subdev.device;
@@ -135,7 +136,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  const struct gf100_grctx_func
  gk110_grctx = {
  	.main  = gf100_grctx_generate_main,
-@@ -854,4 +863,5 @@ gk110_grctx = {
+@@ -852,4 +861,5 @@ gk110_grctx = {
  	.gpc_tpc_nr = gk104_grctx_generate_gpc_tpc_nr,
  	.r418800 = gk104_grctx_generate_r418800,
  	.r419eb0 = gk110_grctx_generate_r419eb0,
@@ -143,7 +144,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  };
 --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110b.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk110b.c
-@@ -103,4 +103,5 @@ gk110b_grctx = {
+@@ -101,4 +101,5 @@ gk110b_grctx = {
  	.gpc_tpc_nr = gk104_grctx_generate_gpc_tpc_nr,
  	.r418800 = gk104_grctx_generate_r418800,
  	.r419eb0 = gk110_grctx_generate_r419eb0,
@@ -151,7 +152,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  };
 --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk208.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgk208.c
-@@ -568,4 +568,5 @@ gk208_grctx = {
+@@ -566,4 +566,5 @@ gk208_grctx = {
  	.dist_skip_table = gf117_grctx_generate_dist_skip_table,
  	.gpc_tpc_nr = gk104_grctx_generate_gpc_tpc_nr,
  	.r418800 = gk104_grctx_generate_r418800,
@@ -159,7 +160,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  };
 --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgm107.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/ctxgm107.c
-@@ -988,4 +988,5 @@ gm107_grctx = {
+@@ -991,4 +991,5 @@ gm107_grctx = {
  	.r406500 = gm107_grctx_generate_r406500,
  	.gpc_tpc_nr = gk104_grctx_generate_gpc_tpc_nr,
  	.r419e00 = gm107_grctx_generate_r419e00,
