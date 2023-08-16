@@ -1,76 +1,57 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44E1C77CAA3
-	for <lists+nouveau@lfdr.de>; Tue, 15 Aug 2023 11:42:12 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9526877DD4D
+	for <lists+nouveau@lfdr.de>; Wed, 16 Aug 2023 11:30:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2394B10E247;
-	Tue, 15 Aug 2023 09:42:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CD48610E313;
+	Wed, 16 Aug 2023 09:30:36 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 15DE810E247;
- Tue, 15 Aug 2023 09:42:02 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+Received: from mail.alien8.de (mail.alien8.de [IPv6:2a01:4f9:3051:3f93::2])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8FCF110E30E;
+ Wed, 16 Aug 2023 09:30:34 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 2DFAB40E0140; 
+ Wed, 16 Aug 2023 09:30:30 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+ header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+ by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id d7ePAOSzahNX; Wed, 16 Aug 2023 09:30:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+ t=1692178227; bh=P6NhbwykV33BYuwxgNIWya2/w0ZvTwkFQjVCfw8K6js=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=QU1or508FycqFDuv+O8i4Uny9FoAOlEp0TMZNyRjsBRNGCdiENV3itTqwc0hMe1ub
+ 8JeHBG3g36HkjIHyv3wDgEpBg4vIaC+psLVC1dWIh6sdYLuWIEQDBuxhhF6Rz5tjx2
+ tChu0PgO/WUY7xJzVx03+V+KjqyHJ8MrKfAd6CXbqqxuJtgZcQx/4ZQb0h4bp/a0x4
+ 88pygUnHEzrJKgY/6KHc2aFwq0Rf8+93n+aJvcxl1aPwBREfVYZn57hK0xe4i66Na/
+ Id36jX03n8j2h95wipIXebwkTDLKDvW4sd87iZxZZLEubqDcSawVG/THcpPOWyK3Yp
+ ANY49t/fPoyqDfsPh+kb8t4rYCLjLGMkDTb7U5ges08lV9ay/N3G3jM9mjwWzhMXYn
+ +AChUem+48p6Nf6eoFwUCCggz/3jME4yramG2I/XsWuiArMPsXOlq1UGKQWvudEDzw
+ dVp8RK5QxzUztSFWRrd3WyZH6pc+PzNu6PjjPOxmqpRFHamiYjcbI2w8PBKRw5rtwy
+ k6tPUfylKZk/1b+73KskU6UbrVfD1vvEZ0UlqzW+DTp0j2oYam4KmdKFP84THhLrk0
+ 5o3ohNHNYAwQibZicrdeXGY7KoTVhOi9PpnXh0ZhjX5YgYSVRdzjz3TSk31lqmc7vh
+ 2tp7tSkNWNBMeceEBIc0J4vc=
+Received: from zn.tnic (pd9530d32.dip0.t-ipconnect.de [217.83.13.50])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id B0A6021997;
- Tue, 15 Aug 2023 09:42:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1692092520; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=1ypNg2gbWTIwWkw4Bicbg47Uo2SG/HMjGtFegCigeVI=;
- b=1xnrjiPcttFGXyHfyRm3n5KPDQGSuPUrDZr9DrLyTGFJEjL3MjJhQIzLuS1+LpYKTLyHBf
- X3YkGekrvdPfMUiSZ9RKYudd8+h660DaJXygLg3AOR7SGdk60OJD1UXtrBGITemysM2h3y
- IQHkvyivPIHcKb4m1qpTUARRwiSMrc4=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1692092520;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=1ypNg2gbWTIwWkw4Bicbg47Uo2SG/HMjGtFegCigeVI=;
- b=8bvYMYmo6dVSLtMHr+aT+PepzIi6PvAFVLbmnRHg5qkm6JRkL37weQjqCloWmUOWC64Whd
- VMHsAwFmmq3188Bg==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7278F1353E;
- Tue, 15 Aug 2023 09:42:00 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id M2r+GmhI22TYRQAAMHmgww
- (envelope-from <tiwai@suse.de>); Tue, 15 Aug 2023 09:42:00 +0000
-Date: Tue, 15 Aug 2023 11:42:00 +0200
-Message-ID: <87bkf8zlp3.wl-tiwai@suse.de>
-From: Takashi Iwai <tiwai@suse.de>
+ key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
+ SHA256) (No client certificate requested)
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 9B22140E0196;
+ Wed, 16 Aug 2023 09:30:20 +0000 (UTC)
+Date: Wed, 16 Aug 2023 11:30:15 +0200
+From: Borislav Petkov <bp@alien8.de>
 To: Karol Herbst <kherbst@redhat.com>
-In-Reply-To: <87a5ut1x5x.wl-tiwai@suse.de>
-References: <20230806213107.GFZNARG6moWpFuSJ9W@fat_crate.local>
- <CACO55tvZD5U4J8DawFTRVnV-dLYLngfhuqO29_sWNEGofKfnBg@mail.gmail.com>
- <20230807150521.GGZNEIMQ9rsyCmkpoA@fat_crate.local>
- <CACO55tvWuSdwdirj7S3Dk-r4NAw8jC8g5RHKFd62WXi43iQP-w@mail.gmail.com>
- <87fs4sfu54.wl-tiwai@suse.de>
- <CACO55tszwFEgt=8xn4auAE7KJVs3ybGG68OzL9HJt19XGVhhHQ@mail.gmail.com>
- <874jl8fngo.wl-tiwai@suse.de>
- <CACO55ts9YWF7nLi3Zs4xKySpdHyUFgf4r566cKx3FwNTCaz0Sg@mail.gmail.com>
- <87wmy4e4uk.wl-tiwai@suse.de> <877cq4e0j5.wl-tiwai@suse.de>
- <87r0occhtw.wl-tiwai@suse.de>
- <CACO55tvbLhn5vC=CpcZbuFEj2cja1=Nt=BKsZmU3+SKgbxoE7Q@mail.gmail.com>
- <87zg2t23js.wl-tiwai@suse.de>
- <CACO55tvPGx7npsXg+tpDoz=KXQBs4Pwz3h9Bie-vHithcHV5eA@mail.gmail.com>
- <CACO55tvD_t4y8s_9gj7vO7zOvsYU1iF=5+a4M2g7_qMH9g3EKg@mail.gmail.com>
- <87r0o521d2.wl-tiwai@suse.de>
- <CACO55tuvzXkUSOQh8NEwC6nEUCWYVfkUmmFWHg_miWcAUWvPsw@mail.gmail.com>
- <CACO55tv4a5fHd6H-bg_W4bCP15mxAKhxCVWyR4_LqZiTsAva4Q@mail.gmail.com>
- <87a5ut1x5x.wl-tiwai@suse.de>
-User-Agent: Wanderlust/2.15.9 (Almost Unreal) Emacs/27.2 Mule/6.0
-MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
-Content-Type: text/plain; charset=US-ASCII
-Subject: Re: [Nouveau] 2b5d1c29f6c4 ("drm/nouveau/disp: PIOR DP uses GPIO
- for HPD, not PMGR AUX interrupts")
+Message-ID: <20230816093015.GDZNyXJ28y9uspb4Mr@fat_crate.local>
+References: <20230814144933.3956959-1-kherbst@redhat.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20230814144933.3956959-1-kherbst@redhat.com>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/disp: fix use-after-free in error
+ handling of nouveau_connector_create
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,31 +63,33 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, lkml <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org, regressions@leemhuis.info,
- Borislav Petkov <bp@alien8.de>, Ben Skeggs <bskeggs@redhat.com>
+Cc: Takashi Iwai <tiwai@suse.de>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, 14 Aug 2023 17:06:02 +0200,
-Takashi Iwai wrote:
+On Mon, Aug 14, 2023 at 04:49:32PM +0200, Karol Herbst wrote:
+> We can't simply free the connector after calling drm_connector_init on it.
+> We need to clean up the drm side first.
 > 
-> On Mon, 14 Aug 2023 16:51:08 +0200,
-> Karol Herbst wrote:
-> > 
-> > I've sent a patch out to address this memory corruption
-> > https://patchwork.freedesktop.org/patch/552642/
-> > 
-> > It might or might not fix regressions from the original I2C fix, so
-> > please test and report if there are remaining issues.
+> It might not fix all regressions from 2b5d1c29f6c4 ("drm/nouveau/disp:
+> PIOR DP uses GPIO for HPD, not PMGR AUX interrupts"), but at least it
+> fixes a memory corruption in error handling related to that commit.
 > 
-> Thanks!  I'll build a test kernel and ask the reporter for testing
-> with it.  Let's cross fingers :)
+> Link: https://lore.kernel.org/lkml/20230806213107.GFZNARG6moWpFuSJ9W@fat_crate.local/
+> Fixes: 95983aea8003 ("drm/nouveau/disp: add connector class")
+> Signed-off-by: Karol Herbst <kherbst@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_connector.c | 11 +++++++----
+>  1 file changed, 7 insertions(+), 4 deletions(-)
 
-The feedback is positive, so far.  It seems fixing the regression
-reported for 6.4.8 kernel.
+This one ontop of -rc5 doesn't help, unfortunately.
 
+Thx.
 
-thanks,
+-- 
+Regards/Gruss,
+    Boris.
 
-Takashi
+https://people.kernel.org/tglx/notes-about-netiquette
