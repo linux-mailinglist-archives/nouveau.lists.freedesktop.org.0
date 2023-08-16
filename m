@@ -1,72 +1,70 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3940377EAFC
-	for <lists+nouveau@lfdr.de>; Wed, 16 Aug 2023 22:47:22 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 18DEB77EBC0
+	for <lists+nouveau@lfdr.de>; Wed, 16 Aug 2023 23:27:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A398D10E3BC;
-	Wed, 16 Aug 2023 20:47:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 849DA10E3BF;
+	Wed, 16 Aug 2023 21:27:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 272B010E3BC
- for <nouveau@lists.freedesktop.org>; Wed, 16 Aug 2023 20:47:17 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0948610E100
+ for <nouveau@lists.freedesktop.org>; Wed, 16 Aug 2023 21:27:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1692218836;
+ s=mimecast20190719; t=1692221241;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=lp/ElRMpuHX0ZQF1pFmv/A7hZ/+TiJdwRTSI4ctDg4Q=;
- b=U9V03XlWWEGYWMhiGJgZUsnvasy4jWLY3pHVUhZKtA6Vz+lfnlPYNEZ03pikNnr+vQghXz
- gPW8eATEH2/2rY+Bfi1yoyt26n8/9lnLtEdcPsw+43NtheMt5QZbkvcm5HyirXsZVg/GRT
- H/c5WyGBgjU+45HHeaHiHfhJhaNer10=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=bhlCltG/6J4T9mqv57bOozrctEIXFs/9BESilmBG2aE=;
+ b=fK9pJKDWRtgFildLRHTQRVW8DGmkiE/QSOEeelT82mZJ9xxt6xi1/BQLNljKcqzOBYb0BP
+ 2Mof3pPoXWLygNO+y5S8J/cjzzx0+sk7P/cMoMewgXpnTR9HbaOWds6/CD14Lzi3EjeR+V
+ zYeNI+3GpwVq+risSjc/6qP8G059RuM=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-640-G2Xd4AQeOZqelcWNQA8g1Q-1; Wed, 16 Aug 2023 16:47:14 -0400
-X-MC-Unique: G2Xd4AQeOZqelcWNQA8g1Q-1
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-7659d103147so885422985a.3
- for <nouveau@lists.freedesktop.org>; Wed, 16 Aug 2023 13:47:14 -0700 (PDT)
+ us-mta-605-hehQYpuePRmFV8cSaLSW1A-1; Wed, 16 Aug 2023 17:27:17 -0400
+X-MC-Unique: hehQYpuePRmFV8cSaLSW1A-1
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2a7a6393ba6so12788111fa.1
+ for <nouveau@lists.freedesktop.org>; Wed, 16 Aug 2023 14:27:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692218834; x=1692823634;
- h=mime-version:user-agent:content-transfer-encoding:organization
- :references:in-reply-to:date:cc:to:from:subject:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=e3IvmL0y1viiHXLAUyfip1yCYlhOkZ7NLyhRvcY+CDk=;
- b=NDjn/7hVLwZmlcHuWMdI59ibvlm/znihfWpJj6i9CZ2ZfFLVsd6yixreLHn2YvrzIt
- fMWMIZABv39QwxfyKzTk8LWDVfehfJzrtrNrwx7uGmOZDrg/09OfJDgoEZJm7wXGyUWu
- l2HRLyxlGVV4L8aSfjSBXKHgh/ZgX541/ih+tA1W3M+H+wL1eL938syE3LlFMulv6bHU
- 3F/5JglZesY61OYEcDVCoef0rFajX22hqlUSRq8XponaiVZIVHZrDWIqhpIQn998OQwC
- sFgCdKoXeQKUQTaxbtEOzDw97yvowYyu3J0ik8wvehZHnTcS1Sjj5+oNgLzyt0wcEgkY
- /iPQ==
-X-Gm-Message-State: AOJu0YxrOSpu9SNNoYBzgoIUft08fFQOPDyNW8vM819illJ6fXtdx/vl
- F57fNFbOweeZolCRyyqq+iIbOPKSoV9XOhg9Cg4eDEXuHmBmbDHhlZZ55cWV2ta3QP04rzd95cm
- MmqBpWhYnBx7w8Vpx9s88Tc3QVg==
-X-Received: by 2002:a05:622a:1210:b0:403:e895:155b with SMTP id
- y16-20020a05622a121000b00403e895155bmr3853831qtx.34.1692218834029; 
- Wed, 16 Aug 2023 13:47:14 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEey1QVl493qQLI7bMS4KR7ZC4Pq5U6vCDQZyZMtY+jGAPCQ+P+AzAMGob1aMDWpaV//+fi6g==
-X-Received: by 2002:a05:622a:1210:b0:403:e895:155b with SMTP id
- y16-20020a05622a121000b00403e895155bmr3853816qtx.34.1692218833802; 
- Wed, 16 Aug 2023 13:47:13 -0700 (PDT)
-Received: from ?IPv6:2600:4040:5c7d:5f00::feb? ([2600:4040:5c7d:5f00::feb])
- by smtp.gmail.com with ESMTPSA id
- w8-20020ac84d08000000b0040b8ba13701sm4735297qtv.52.2023.08.16.13.47.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 13:47:13 -0700 (PDT)
-Message-ID: <a612e9d4560aa3827114339b1ea92f0181550eca.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Karol Herbst <kherbst@redhat.com>, linux-kernel@vger.kernel.org
-Date: Wed, 16 Aug 2023 16:47:12 -0400
-In-Reply-To: <20230814144933.3956959-1-kherbst@redhat.com>
-References: <20230814144933.3956959-1-kherbst@redhat.com>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.48.3 (3.48.3-1.fc38)
+ d=1e100.net; s=20221208; t=1692221236; x=1692826036;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=bhlCltG/6J4T9mqv57bOozrctEIXFs/9BESilmBG2aE=;
+ b=YP3xj1ffhAZaavWylnTykLHZpiV2OcstLxTapPRPHXrkR4wFcHvzxm81f5307z9Li4
+ fZ3gdoi8FhgOXSRetMc9MUhyTafLyCmBbD2heHTywQPTTxvypEJCs7vGQvonKPrgCSNz
+ iTdwh6zRPlLoYMgB0Zh7t6NKThjxv4izrlRJ0ng40kd4eXwWIEu47AK9j4qhA1Mlffb/
+ uXtsVt5HqdqnrPc4vawXV7ChxjaQ51PKvWPkZ1UTEYYxShRDkXBv6yxKVNkMUWL8cy+U
+ AnMcuFAZYufHSI07IwT3LDO2gYEhcm618NFW90i4Lw4W5gkNpXaBqm9XoWlKD2NVktjh
+ yBrw==
+X-Gm-Message-State: AOJu0YyShuo/b8UsEPUtQ8ifqaTGQ+Hgx0rWJpdc5XsGRPGePCbk7zHp
+ GgYBf+axe39quBwXJMJO84u1EwBz61T3YHKoRMD0zwcPszeylF/Yi8ifutGwVe2y/1usMEjuXjt
+ lpf+2Fhjx52mILizFcatLBVWxjseYS8hPi4gneOGZ1g==
+X-Received: by 2002:a2e:b53a:0:b0:2b8:3c52:113 with SMTP id
+ z26-20020a2eb53a000000b002b83c520113mr2446680ljm.5.1692221236467; 
+ Wed, 16 Aug 2023 14:27:16 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGqEJkEAo5Pa4rNZ4q8LahYF0AcRVhQvLqoo9MCByspT6ADS2ntaRvd1hh34mL6+q7aFi+DN5uWeOnI1es4zj0=
+X-Received: by 2002:a2e:b53a:0:b0:2b8:3c52:113 with SMTP id
+ z26-20020a2eb53a000000b002b83c520113mr2446668ljm.5.1692221236114; Wed, 16 Aug
+ 2023 14:27:16 -0700 (PDT)
 MIME-Version: 1.0
+References: <20230814144933.3956959-1-kherbst@redhat.com>
+ <20230816093015.GDZNyXJ28y9uspb4Mr@fat_crate.local>
+ <CACO55tu8ab-rxCzxFXbUh4Z=W9E-1f8sH6BVd=P+16dQ9PQNjg@mail.gmail.com>
+ <20230816145338.GIZNzi8o3d9x9bcPzX@fat_crate.local>
+ <CACO55ttasKLxBTmZjN-XBOuJFC7rng2PbLgxCT8WT6ukOZNGzQ@mail.gmail.com>
+ <20230816151252.GKZNzndDNySuWC+Vwz@fat_crate.local>
+In-Reply-To: <20230816151252.GKZNzndDNySuWC+Vwz@fat_crate.local>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Wed, 16 Aug 2023 23:27:05 +0200
+Message-ID: <CACO55tunC5mEu3Tw64rKLqNM6MN6d=N90kYQKYwXWNMB=ahDaw@mail.gmail.com>
+To: Borislav Petkov <bp@alien8.de>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
@@ -85,69 +83,37 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Takashi Iwai <tiwai@suse.de>, nouveau@lists.freedesktop.org,
- Borislav Petkov <bp@alien8.de>, Ben Skeggs <bskeggs@redhat.com>,
- dri-devel@lists.freedesktop.org
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reviewed-by: Lyude Paul <lyude@redhat.com>
+On Wed, Aug 16, 2023 at 5:13=E2=80=AFPM Borislav Petkov <bp@alien8.de> wrot=
+e:
+>
+> On Wed, Aug 16, 2023 at 04:57:28PM +0200, Karol Herbst wrote:
+> > Do you have any connectors listed in "/sys/class/drm"?
+>
+> tree /sys/class/drm/
+> /sys/class/drm/
+> =E2=94=9C=E2=94=80=E2=94=80 card0 -> ../../devices/pci0000:00/0000:00:02.=
+0/0000:03:00.0/drm/card0
+> =E2=94=9C=E2=94=80=E2=94=80 renderD128 -> ../../devices/pci0000:00/0000:0=
+0:02.0/0000:03:00.0/drm/renderD128
+> =E2=94=94=E2=94=80=E2=94=80 version
+>
+> > Also, mind sharing your vbios.rom file from
+> > "/sys/kernel/debug/dri/0/vbios.rom"?
+>
+> Attached.
 
-On Mon, 2023-08-14 at 16:49 +0200, Karol Herbst wrote:
-> We can't simply free the connector after calling drm_connector_init on it=
-.
-> We need to clean up the drm side first.
->=20
-> It might not fix all regressions from 2b5d1c29f6c4 ("drm/nouveau/disp:
-> PIOR DP uses GPIO for HPD, not PMGR AUX interrupts"), but at least it
-> fixes a memory corruption in error handling related to that commit.
->=20
-> Link: https://lore.kernel.org/lkml/20230806213107.GFZNARG6moWpFuSJ9W@fat_=
-crate.local/
-> Fixes: 95983aea8003 ("drm/nouveau/disp: add connector class")
-> Signed-off-by: Karol Herbst <kherbst@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_connector.c | 11 +++++++----
->  1 file changed, 7 insertions(+), 4 deletions(-)
->=20
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/dr=
-m/nouveau/nouveau_connector.c
-> index a2e0033e8a260..622f6eb9a8bfd 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
-> @@ -1408,8 +1408,7 @@ nouveau_connector_create(struct drm_device *dev,
->  =09=09ret =3D nvif_conn_ctor(&disp->disp, nv_connector->base.name, nv_co=
-nnector->index,
->  =09=09=09=09     &nv_connector->conn);
->  =09=09if (ret) {
-> -=09=09=09kfree(nv_connector);
-> -=09=09=09return ERR_PTR(ret);
-> +=09=09=09goto drm_conn_err;
->  =09=09}
-> =20
->  =09=09ret =3D nvif_conn_event_ctor(&nv_connector->conn, "kmsHotplug",
-> @@ -1426,8 +1425,7 @@ nouveau_connector_create(struct drm_device *dev,
->  =09=09=09if (ret) {
->  =09=09=09=09nvif_event_dtor(&nv_connector->hpd);
->  =09=09=09=09nvif_conn_dtor(&nv_connector->conn);
-> -=09=09=09=09kfree(nv_connector);
-> -=09=09=09=09return ERR_PTR(ret);
-> +=09=09=09=09goto drm_conn_err;
->  =09=09=09}
->  =09=09}
->  =09}
-> @@ -1475,4 +1473,9 @@ nouveau_connector_create(struct drm_device *dev,
-> =20
->  =09drm_connector_register(connector);
->  =09return connector;
-> +
-> +drm_conn_err:
-> +=09drm_connector_cleanup(connector);
-> +=09kfree(nv_connector);
-> +=09return ERR_PTR(ret);
->  }
+that GPU has only a `DMS-59` connector, is that right? I have such a
+GPU myself, so maybe I can trigger that bug there, let's see..
 
---=20
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+>
+> --
+> Regards/Gruss,
+>     Boris.
+>
+> https://people.kernel.org/tglx/notes-about-netiquette
 
