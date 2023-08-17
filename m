@@ -2,71 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29A0277F0D6
-	for <lists+nouveau@lfdr.de>; Thu, 17 Aug 2023 09:03:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 201DB77F1DF
+	for <lists+nouveau@lfdr.de>; Thu, 17 Aug 2023 10:11:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8943510E1A3;
-	Thu, 17 Aug 2023 07:03:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1407C10E40E;
+	Thu, 17 Aug 2023 08:10:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4314810E044;
- Sun, 13 Aug 2023 01:14:57 +0000 (UTC)
-Received: from [192.168.2.249] (109-252-150-127.dynamic.spd-mgts.ru
- [109.252.150.127])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- (Authenticated sender: dmitry.osipenko)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id F222866071B8;
- Sun, 13 Aug 2023 02:14:51 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1691889295;
- bh=bPp/hkEoDS0ZxAQiv7IPH0ePMv+YAdVNwR7xflkKTfA=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=Uz8KDonPc/gBgbinrFzsCdc6rgNcwCbXiIogKVRXysqJJtxOGqNEF2OUOR+rVnrXd
- VwOSU59ZkqE9I2R9CNOpO28dhmbVc2RZcZcaxEONC0OAH+wxz6POH8Rza1irhAgWQX
- 3jNxUqWp9qemwwuadE6DSax0voEzK6ad/MwWNwyqoUmdMClJ0GuN+GntG6o/Y2+G20
- US0ec6J00OLr7/jjIhU8IlmjV5yvwReELAfpnaFBKL055tF1xHd83m+Q1gCsxqJfu1
- GvuSjjhWUWtbQvALG3p1XUa66zNV9izcGryYx+W8Bq2+CW9UGz0xQnSZk7uepiAzPw
- 5WLxzXW8kcnpw==
-Message-ID: <325014e7-cb8d-54e0-eead-7727c8ec2f07@collabora.com>
-Date: Sun, 13 Aug 2023 04:14:49 +0300
+Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 37E1110E40A;
+ Thu, 17 Aug 2023 08:10:52 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 3A41E40E0198; 
+ Thu, 17 Aug 2023 08:10:50 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+ header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+ by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id dsaLMhCIx1WX; Thu, 17 Aug 2023 08:10:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+ t=1692259846; bh=KosVJk9TqczkP8Tl2l3dW2XQ5WUolMhM7fcHi7ojzPg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=PU5ypwRfFRuvhSlxCMQUekpfoB5WweTKuJm0mBQoPMOQWdP4n0S9YrfgpFjmKuk1P
+ QWNXdhccvBmrtDS8jXal1WRQ6Cs6ARpOOtfRuyO8bSmMRLWlJYmAWF/EKLPgsOov8s
+ ESaeKMmD/bIe5sQkfrJ4IaDthABIwkc1h+ow5MIZoCmegbEadDfll65SI80znjUSRT
+ aaUtq6C/eRKqayz7C+4hl0cySihMGitBO03J9Eh9pvrauJJRvRCKlL7weImJu+nImm
+ tdqMkMVhK/ajM/RTvuEPMryu+LAR+ZfpxRaxWc/VE8L0pcbCL0ujTzZ2xTngCtnWfp
+ BEOB3tCNijR+xS6C1XF5YLhNmGAWtVFitaSiCoq533MC/U/mm8oMyyR/nbquY0BJGu
+ JB/cfcqAplTAsvaJHEgUmboiXtHcoZ01qJABEGFca8FEtrO/Vqx3fLFnHF8bz9II+a
+ ZkpldKqr9hYrjN84jg2IjvzZ9EPw04f3odYZq6pghCoJPjwqG9DcXGoKoCEeSLKly1
+ neUnP07G1Qh5UeawHGCrMz8Gr0BUzcDtXjC8FP0mFNcnvDyTEEJm/Ta33/T/af/4uN
+ /pkmFrLYGksUf8qL0Y9wwnQZObCJ/scvWds7wCM+ttEmamootGP4i8yb0mepHSh1lm
+ Mb1flELPwQJNd3aXYSOP+ngc=
+Received: from zn.tnic (pd9530d32.dip0.t-ipconnect.de [217.83.13.50])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
+ SHA256) (No client certificate requested)
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 4B8E340E0140;
+ Thu, 17 Aug 2023 08:10:39 +0000 (UTC)
+Date: Thu, 17 Aug 2023 10:10:32 +0200
+From: Borislav Petkov <bp@alien8.de>
+To: Karol Herbst <kherbst@redhat.com>
+Message-ID: <20230817081032.GAZN3V+NQ1blzQC2sU@fat_crate.local>
+References: <20230814144933.3956959-1-kherbst@redhat.com>
+ <20230816093015.GDZNyXJ28y9uspb4Mr@fat_crate.local>
+ <CACO55tu8ab-rxCzxFXbUh4Z=W9E-1f8sH6BVd=P+16dQ9PQNjg@mail.gmail.com>
+ <20230816145338.GIZNzi8o3d9x9bcPzX@fat_crate.local>
+ <CACO55ttasKLxBTmZjN-XBOuJFC7rng2PbLgxCT8WT6ukOZNGzQ@mail.gmail.com>
+ <20230816151252.GKZNzndDNySuWC+Vwz@fat_crate.local>
+ <CACO55tunC5mEu3Tw64rKLqNM6MN6d=N90kYQKYwXWNMB=ahDaw@mail.gmail.com>
+ <20230816221353.GXZN1KIXloRn8cGt5E@fat_crate.local>
+ <CACO55ts7430tAUDC+0qY0EZ5ReO=2Rjwj1SzHaBLodmyBgrUrw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Ruan Jinjie <ruanjinjie@huawei.com>, Felix.Kuehling@amd.com,
- alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
- airlied@gmail.com, daniel@ffwll.ch, harry.wentland@amd.com,
- sunpeng.li@amd.com, Rodrigo.Siqueira@amd.com,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
- inki.dae@samsung.com, sw0312.kim@samsung.com, kyungmin.park@samsung.com,
- krzysztof.kozlowski@linaro.org, alim.akhtar@samsung.com,
- robdclark@gmail.com, quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org,
- sean@poorly.run, marijn.suijten@somainline.org, bskeggs@redhat.com,
- kherbst@redhat.com, lyude@redhat.com, kraxel@redhat.com,
- gurchetansingh@chromium.org, olvaffe@gmail.com,
- paulo.miguel.almeida.rodenas@gmail.com, wenjing.liu@amd.com,
- haoping.liu@amd.com, Charlene.Liu@amd.com, chiahsuan.chung@amd.com,
- george.shen@amd.com, sancchen@amd.com, tony.tascioglu@amd.com,
- jaehyun.chung@amd.com, tales.aparecida@gmail.com, drv@mailo.com,
- aurabindo.pillai@amd.com, quic_vpolimer@quicinc.com, jiasheng@iscas.ac.cn,
- noralf@tronnes.org, jose.exposito89@gmail.com, javierm@redhat.com,
- mairacanal@riseup.net, davidgow@google.com, arthurgrillo@riseup.net,
- amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-arm-kernel@lists.infradead.org, linux-samsung-soc@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, virtualization@lists.linux-foundation.org
-References: <20230809034445.434902-1-ruanjinjie@huawei.com>
- <20230809034445.434902-6-ruanjinjie@huawei.com>
-From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-In-Reply-To: <20230809034445.434902-6-ruanjinjie@huawei.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Thu, 17 Aug 2023 07:02:58 +0000
-Subject: Re: [Nouveau] [PATCH -next 5/7] drm/virtio: Remove an unnecessary
- NULL value
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <CACO55ts7430tAUDC+0qY0EZ5ReO=2Rjwj1SzHaBLodmyBgrUrw@mail.gmail.com>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/disp: fix use-after-free in error
+ handling of nouveau_connector_create
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,36 +71,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: Takashi Iwai <tiwai@suse.de>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 8/9/23 06:44, Ruan Jinjie wrote:
-> The NULL initialization of the pointer assigned by kzalloc() first is
-> not necessary, because if the kzalloc() failed, the pointer will be
-> assigned NULL, otherwise it works as usual. so remove it.
-> 
-> Signed-off-by: Ruan Jinjie <ruanjinjie@huawei.com>
-> ---
->  drivers/gpu/drm/virtio/virtgpu_submit.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_submit.c b/drivers/gpu/drm/virtio/virtgpu_submit.c
-> index 3c00135ead45..82563dbec2ab 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_submit.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_submit.c
-> @@ -274,7 +274,7 @@ static int virtio_gpu_fence_event_create(struct drm_device *dev,
->  					 struct virtio_gpu_fence *fence,
->  					 u32 ring_idx)
->  {
-> -	struct virtio_gpu_fence_event *e = NULL;
-> +	struct virtio_gpu_fence_event *e;
->  	int ret;
->  
->  	e = kzalloc(sizeof(*e), GFP_KERNEL);
+On Thu, Aug 17, 2023 at 01:18:12AM +0200, Karol Herbst wrote:
+> do you have one of these? https://en.wikipedia.org/wiki/DMS-59
 
-Reviewed-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+Ah, DMS == Dual Monitor Solution :-)
+
+Yap, that's exactly what the GPU has. And the Y-cable is 2xDVI. It is
+a Dell workstation and it came this way, meaning I haven't done any
+changes there.
+
+Thx.
 
 -- 
-Best regards,
-Dmitry
+Regards/Gruss,
+    Boris.
 
+https://people.kernel.org/tglx/notes-about-netiquette
