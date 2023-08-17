@@ -1,62 +1,51 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B5DB77F3FC
-	for <lists+nouveau@lfdr.de>; Thu, 17 Aug 2023 12:01:09 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CB5E77F41C
+	for <lists+nouveau@lfdr.de>; Thu, 17 Aug 2023 12:11:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0ABC510E423;
-	Thu, 17 Aug 2023 10:01:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2296A10E42B;
+	Thu, 17 Aug 2023 10:11:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4CA5F10E41E
- for <nouveau@lists.freedesktop.org>; Thu, 17 Aug 2023 10:01:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1692266461;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=SxvFWtLfZHUU3yR6UuCUCdkToTTydlxIuObM2X2y+A0=;
- b=I74Jt8dgG2kPZwinPquctPlMt+MgCT1FuBH/yMRWbtY+Fyf55++fzz+o7NjpGREdlYfZg9
- JRNltwyI3PyNOJH9JOfJcDfYDkE2teCD5MpfUldEQpwwdQt/5ILKkKufwDoaPiRZROKtwP
- J6NPezDCNKh+hdPvMlyO+9N9dH3+siw=
-Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
- [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-672-zQrCnvLgNeqY2LUb-zKgjQ-1; Thu, 17 Aug 2023 06:01:00 -0400
-X-MC-Unique: zQrCnvLgNeqY2LUb-zKgjQ-1
-Received: by mail-lj1-f198.google.com with SMTP id
- 38308e7fff4ca-2b9d5bc6161so13735471fa.0
- for <nouveau@lists.freedesktop.org>; Thu, 17 Aug 2023 03:00:59 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692266458; x=1692871258;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SxvFWtLfZHUU3yR6UuCUCdkToTTydlxIuObM2X2y+A0=;
- b=f11RHtOjchTy+Fxy9sSAwCDvCz8pUlbBdP0thckSGnOoaf1ex5dR0VieC4lhV4ue5+
- JOiztjlBF7ggnbILU9gXW3lgNWqdRElAUcyn9XS8qFCXZpd0+aei776828aTKXlH2tUu
- Ua9vJggwKcGhloQCkRYiuCAg2vAz61kzO0JY7wpHgowkkAxA/R4ZqALs2VMRtdPtxRhV
- 0u4caW1Pu4VMmqXwaMlXXc4thpVs6QwjFInwxZmkRWYr8kDBOPyZCA0QdNU1dX9KieKw
- nNRDim1Jr5GkG+JmkZN16HACZDnAzjsbweyGAI8R2lUZrXI+Fin93o3fZ6UCJQYC0o/z
- NdLA==
-X-Gm-Message-State: AOJu0Yz7Fcc2pvqXLf/fjZ5IXWk9ZbBiwm/4XzHmJGbPXSSxXQAALEZR
- 1KLJ+s7lSNV1ANA7nKgAQTm2uFxPFm6WZ3qJNqxJakuOqg9URG8zLgK5ZLEfh2BMhh74c5KJZMk
- BEs/U07SzFoaVVbdT4cBqX14i155xsDKFlSFggHZS6w==
-X-Received: by 2002:a2e:9043:0:b0:2b9:e10b:a511 with SMTP id
- n3-20020a2e9043000000b002b9e10ba511mr3029745ljg.0.1692266458793; 
- Thu, 17 Aug 2023 03:00:58 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGX6/54OJqwhp3VR3zAVcKja7LAQ8KhRaL+hfdqOgYduGmKxKWNx/Sz3QfKQ1PMt/yuW5leDc5yD5ItStaUNh0=
-X-Received: by 2002:a2e:9043:0:b0:2b9:e10b:a511 with SMTP id
- n3-20020a2e9043000000b002b9e10ba511mr3029732ljg.0.1692266458510; Thu, 17 Aug
- 2023 03:00:58 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230814144933.3956959-1-kherbst@redhat.com>
- <20230816093015.GDZNyXJ28y9uspb4Mr@fat_crate.local>
- <CACO55tu8ab-rxCzxFXbUh4Z=W9E-1f8sH6BVd=P+16dQ9PQNjg@mail.gmail.com>
+Received: from mail.alien8.de (mail.alien8.de [IPv6:2a01:4f9:3051:3f93::2])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B92CC10E421;
+ Thu, 17 Aug 2023 10:11:45 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id CAD7A40E0196; 
+ Thu, 17 Aug 2023 10:11:43 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+ header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+ by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id KfEvzXzcj4JY; Thu, 17 Aug 2023 10:11:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+ t=1692267101; bh=nwRKpw2lLdAbOLqAH3ClWxZ8c53sZrQ8xdbQI4tBrGw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=i3YZ450yxXJoSOZ6sWhxBbqtASp9hjH1tcfbm4vIz4lVagX79hZnSJ33l1X0fLKua
+ V0mcmNBS7/3/SYPV4fNCswxEPfQGlzO1F+mn8Jo+u/+/yGjG9BibKOBZRh+J5WacfR
+ wRbDufBVzLxKj8iSIF2oXbCG8cCeMohRZevM/A2VpRod+zLCgw+C1a4kspYu6LbYVB
+ s6NGGeDo8Cee4/IMG92FDLMVsla0byCbAUWvPRan9uCaXZs1Fol90/1ozMt2Q2JsrU
+ fITHA8YbH2y6gLdtnKHBIYEhZP0jJXF6iDZvYazujX7RmMk8ycr/jDjANbaUVlrFRK
+ djJ1BAfFv3taYdL8OLfeAiD5xYIBKCxCzIv7lWoXIEobrCN1xREzWWbjIZqmBX8iAM
+ yjMXduDYBdhwWSE+MGTqatnP+K27n6yN026l8ULeNcAHH7r78knAxhhuSm5fsMFsKG
+ rs86iRtSwjOxjZ1gM1mnrIXohpE8RuK8TSIawp2l8No/xi/0IXy49HapiyEfk9z8X7
+ fLQUm/Zs2K2Angoli50CsrBZsOH4EuT3cZgY2yj0VHjDVYsPQv1p1XNX/2zxicZrEI
+ rxYQgsOr5g+DzgC/7uzUzWUdUvxDVuoCWkt1GGz7oD4SjRKqCVnGKAoUbvX2lBbPTn
+ fYKuClmwmbIm+LSUt/OrhTWc=
+Received: from zn.tnic (pd9530d32.dip0.t-ipconnect.de [217.83.13.50])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
+ SHA256) (No client certificate requested)
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 22D3740E0140;
+ Thu, 17 Aug 2023 10:11:34 +0000 (UTC)
+Date: Thu, 17 Aug 2023 12:11:29 +0200
+From: Borislav Petkov <bp@alien8.de>
+To: Karol Herbst <kherbst@redhat.com>
+Message-ID: <20230817101129.GCZN3yUTWHkt22Jgec@fat_crate.local>
+References: <CACO55tu8ab-rxCzxFXbUh4Z=W9E-1f8sH6BVd=P+16dQ9PQNjg@mail.gmail.com>
  <20230816145338.GIZNzi8o3d9x9bcPzX@fat_crate.local>
  <CACO55ttasKLxBTmZjN-XBOuJFC7rng2PbLgxCT8WT6ukOZNGzQ@mail.gmail.com>
  <20230816151252.GKZNzndDNySuWC+Vwz@fat_crate.local>
@@ -65,15 +54,11 @@ References: <20230814144933.3956959-1-kherbst@redhat.com>
  <CACO55ts7430tAUDC+0qY0EZ5ReO=2Rjwj1SzHaBLodmyBgrUrw@mail.gmail.com>
  <20230817081032.GAZN3V+NQ1blzQC2sU@fat_crate.local>
  <CACO55tv-dKnDzUYYFW+d2pNoAhEoEniUT=QAmD4-c_xKQw0cfw@mail.gmail.com>
-In-Reply-To: <CACO55tv-dKnDzUYYFW+d2pNoAhEoEniUT=QAmD4-c_xKQw0cfw@mail.gmail.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Thu, 17 Aug 2023 12:00:47 +0200
-Message-ID: <CACO55tuWTYngfw+MZnan+U4eYyE+SvOWgxzffaCMNGQgriq3ig@mail.gmail.com>
-To: Borislav Petkov <bp@alien8.de>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CACO55tuWTYngfw+MZnan+U4eYyE+SvOWgxzffaCMNGQgriq3ig@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <CACO55tuWTYngfw+MZnan+U4eYyE+SvOWgxzffaCMNGQgriq3ig@mail.gmail.com>
 Subject: Re: [Nouveau] [PATCH] drm/nouveau/disp: fix use-after-free in error
  handling of nouveau_connector_create
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -93,37 +78,17 @@ Cc: Takashi Iwai <tiwai@suse.de>, nouveau@lists.freedesktop.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Aug 17, 2023 at 11:58=E2=80=AFAM Karol Herbst <kherbst@redhat.com> =
-wrote:
->
-> On Thu, Aug 17, 2023 at 10:10=E2=80=AFAM Borislav Petkov <bp@alien8.de> w=
-rote:
-> >
-> > On Thu, Aug 17, 2023 at 01:18:12AM +0200, Karol Herbst wrote:
-> > > do you have one of these? https://en.wikipedia.org/wiki/DMS-59
-> >
-> > Ah, DMS =3D=3D Dual Monitor Solution :-)
-> >
-> > Yap, that's exactly what the GPU has. And the Y-cable is 2xDVI. It is
-> > a Dell workstation and it came this way, meaning I haven't done any
-> > changes there.
-> >
-> > Thx.
->
-> right.. seems like on my GPU with such a connector I'm not seeing any
-> issues... let me dig further into the vbios and see if I can figure
-> something out there.
->
+On Thu, Aug 17, 2023 at 12:00:47PM +0200, Karol Herbst wrote:
+> btw, what would help is to know where `nvkm_uconn_uevent` actually
+> fails, or rather, are you running into this "/* TODO: support DP IRQ
+> on ANX9805 and remove this hack. */" condition?
 
-btw, what would help is to know where `nvkm_uconn_uevent` actually
-fails, or rather, are you running into this "/* TODO: support DP IRQ
-on ANX9805 and remove this hack. */" condition?
+Send me a diff, I'll run it here and catch output over serial.
 
-> >
-> > --
-> > Regards/Gruss,
-> >     Boris.
-> >
-> > https://people.kernel.org/tglx/notes-about-netiquette
-> >
+Thx.
 
+-- 
+Regards/Gruss,
+    Boris.
+
+https://people.kernel.org/tglx/notes-about-netiquette
