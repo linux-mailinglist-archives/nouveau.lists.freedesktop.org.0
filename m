@@ -2,61 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 912C477F444
-	for <lists+nouveau@lfdr.de>; Thu, 17 Aug 2023 12:25:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA81A77FA8A
+	for <lists+nouveau@lfdr.de>; Thu, 17 Aug 2023 17:17:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 94D0310E432;
-	Thu, 17 Aug 2023 10:25:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5D6A510E066;
+	Thu, 17 Aug 2023 15:17:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AE78510E42E
- for <nouveau@lists.freedesktop.org>; Thu, 17 Aug 2023 10:25:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1692267899;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=1IRxWEvpry+CMCB1V4M7R9Ft7ALq/o4jMyxueGSdGQE=;
- b=KIH4PzMw33zvBgI3uF7YkDOj/R1xvs1kh++GHbBo4ACLUvCZrISrfO1DMAaXas1DE395qA
- kvETQ19fiQCxxk14FvbNdhKEeos5AQR/wgk6wuzdh7hMcKAC00u0Xk6iWet0vqFs+nx2Ey
- j8RIVx3t72OoNbPZNh9ORNe1LLEmtSY=
-Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com
- [209.85.208.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-390-U7c79bfMP7WAz1Bi3uS44A-1; Thu, 17 Aug 2023 06:24:58 -0400
-X-MC-Unique: U7c79bfMP7WAz1Bi3uS44A-1
-Received: by mail-lj1-f197.google.com with SMTP id
- 38308e7fff4ca-2b9b7375e49so17543901fa.1
- for <nouveau@lists.freedesktop.org>; Thu, 17 Aug 2023 03:24:57 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692267897; x=1692872697;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1IRxWEvpry+CMCB1V4M7R9Ft7ALq/o4jMyxueGSdGQE=;
- b=E7iX0iniGugwU2RVbONJd/rLylnK39TVVT9wM6SY/KixAf3JbubUl3bD2g3F7GeBLo
- 5dStp/58o6VLXSB/tncTkZcNuMrL3891D5hto8km8xBGjI1YS4S4TP758pNvywU0GtxL
- ST6qKPOz5YgK7RRFCLTYgixmCxrB/L8H3ptWdPNsF8hKJmomqWWnO3vqv5hWmQ1X3Zvi
- PXMum3Q2GHQa8iZmnVG4Kw5mrtpedFa+LXhiQzBdMrOB6lo6SN4vmd6oavsLoxVmcVCy
- fNFfRc0gpQeyVfQneBkLRxdpWi6RbiU75UjHJiuUuIFdrreAFJGUFzZjy3cKaiPjPPyH
- C5Rw==
-X-Gm-Message-State: AOJu0YzdOTrDKGtcAsLgD0yamuqNBTweOPsiAOXFjIw211HjqiX5haEL
- yRHmLGuu3aQs5q1zUN44eAWgkXBrII5mzEKFM6cAA2xOG6UQY9vK/W+pUkNd5NZVuJrqGjZu0O/
- q8mBYLkRuAxYpj0Vg+SO8Ha38gVUChIe/GE5NsqEQAQ==
-X-Received: by 2002:a2e:511a:0:b0:2b9:7034:9bbe with SMTP id
- f26-20020a2e511a000000b002b970349bbemr2980383ljb.4.1692267896885; 
- Thu, 17 Aug 2023 03:24:56 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHBgIDULJ6Inl1Pke61/jYkvIRMPsZ4hSRwZSoxXgucJresEcAyxdEKMlWsoFg6hvKo7nHipu3sd9ZNJWFoGNg=
-X-Received: by 2002:a2e:511a:0:b0:2b9:7034:9bbe with SMTP id
- f26-20020a2e511a000000b002b970349bbemr2980368ljb.4.1692267896541; Thu, 17 Aug
- 2023 03:24:56 -0700 (PDT)
-MIME-Version: 1.0
-References: <CACO55tu8ab-rxCzxFXbUh4Z=W9E-1f8sH6BVd=P+16dQ9PQNjg@mail.gmail.com>
- <20230816145338.GIZNzi8o3d9x9bcPzX@fat_crate.local>
- <CACO55ttasKLxBTmZjN-XBOuJFC7rng2PbLgxCT8WT6ukOZNGzQ@mail.gmail.com>
+Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D4ABD10E066;
+ Thu, 17 Aug 2023 15:17:54 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 7341740E00F4; 
+ Thu, 17 Aug 2023 15:17:52 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+ header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+ by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id QmBmwkyxKu7T; Thu, 17 Aug 2023 15:17:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+ t=1692285470; bh=ub9UHmv4k4n9Fnzww3zqDAiez22GxzEYG+O3pBXVSr4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=DJKLdJGakm5QLV1vCz5EbOOXhQVEpm6bNC1dVTHuka1drW77i2q2EJK+4I5XyPcq1
+ f4/AjqEpE7gb7HatHtfd+HzHtigSmxV5v34Btnpq5BnBVj3c8JrY8ttSIfOCV9JTfR
+ dUg3mBiIfN2f/CBUsF8BMgYBUDDcQyeOWvy8/ke39lDBVQMSJBAZjSs3g1N2fe2xIV
+ eTFD82YLIhNSXw9ZldQSArzNJXglxT5m9uZUwg3/XgmYVTYJlPfdVH9EYwYfSh1CmX
+ wJOy/hNBn0T1rgN/45gmWhDVBDhYgtjVaQ29Tm52jphkKKl/FhTflBcaGKHBL0MRGg
+ +o4E0nlspAo1Qc7pcLgrs7WIDcC+r6FrW+ZNtl5A8Ao29I1VKVAEYtcuBL7UdUoLfl
+ eJXqYgTnLApmp/g8IGUtOxC5qQsdR5TvMW0heU2NzoD3dOl/ndjAnFZqdMlJ/rd9xG
+ R3zqnEizgvh3/N7UY5nbESEZ11kqNv12+blNLKGz9tAKwUnS+qP/K76D9i4xnbNlYw
+ n5xCfyNXxaIsR0UZRp4FxWfBgAoSwNIqMJsCedCcPvcsr/Rmu4r96D+NnKdSF0FHf+
+ IubBZQdyEBq6HgXIlTbKK1EQV3IMl3wLMrQTjWMMkNI40oTuY1Aktvr4kr6FdcWyQK
+ RylsoRsiY5MRB2GAFojCiOwY=
+Received: from zn.tnic (pd9530d32.dip0.t-ipconnect.de [217.83.13.50])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
+ SHA256) (No client certificate requested)
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 24CBE40E00B0;
+ Thu, 17 Aug 2023 15:17:43 +0000 (UTC)
+Date: Thu, 17 Aug 2023 17:17:39 +0200
+From: Borislav Petkov <bp@alien8.de>
+To: Karol Herbst <kherbst@redhat.com>
+Message-ID: <20230817151739.GEZN46E2T/1GS+baIZ@fat_crate.local>
+References: <CACO55ttasKLxBTmZjN-XBOuJFC7rng2PbLgxCT8WT6ukOZNGzQ@mail.gmail.com>
  <20230816151252.GKZNzndDNySuWC+Vwz@fat_crate.local>
  <CACO55tunC5mEu3Tw64rKLqNM6MN6d=N90kYQKYwXWNMB=ahDaw@mail.gmail.com>
  <20230816221353.GXZN1KIXloRn8cGt5E@fat_crate.local>
@@ -65,15 +54,11 @@ References: <CACO55tu8ab-rxCzxFXbUh4Z=W9E-1f8sH6BVd=P+16dQ9PQNjg@mail.gmail.com>
  <CACO55tv-dKnDzUYYFW+d2pNoAhEoEniUT=QAmD4-c_xKQw0cfw@mail.gmail.com>
  <CACO55tuWTYngfw+MZnan+U4eYyE+SvOWgxzffaCMNGQgriq3ig@mail.gmail.com>
  <20230817101129.GCZN3yUTWHkt22Jgec@fat_crate.local>
-In-Reply-To: <20230817101129.GCZN3yUTWHkt22Jgec@fat_crate.local>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Thu, 17 Aug 2023 12:24:45 +0200
-Message-ID: <CACO55tt9ZLKjaTyARXQ4VePgd41nYCQBn+wAGGDJRw1QV3hPBQ@mail.gmail.com>
-To: Borislav Petkov <bp@alien8.de>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CACO55tt9ZLKjaTyARXQ4VePgd41nYCQBn+wAGGDJRw1QV3hPBQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <CACO55tt9ZLKjaTyARXQ4VePgd41nYCQBn+wAGGDJRw1QV3hPBQ@mail.gmail.com>
 Subject: Re: [Nouveau] [PATCH] drm/nouveau/disp: fix use-after-free in error
  handling of nouveau_connector_create
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -93,30 +78,61 @@ Cc: Takashi Iwai <tiwai@suse.de>, nouveau@lists.freedesktop.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Aug 17, 2023 at 12:11=E2=80=AFPM Borislav Petkov <bp@alien8.de> wro=
-te:
->
-> On Thu, Aug 17, 2023 at 12:00:47PM +0200, Karol Herbst wrote:
-> > btw, what would help is to know where `nvkm_uconn_uevent` actually
-> > fails, or rather, are you running into this "/* TODO: support DP IRQ
-> > on ANX9805 and remove this hack. */" condition?
->
-> Send me a diff, I'll run it here and catch output over serial.
->
+On Thu, Aug 17, 2023 at 12:24:45PM +0200, Karol Herbst wrote:
+> simply throw a
+> 
+> printk(KERN_WARNING "nvkm_uconn_uevent %u\n", outp->info.location);
+> 
+> inside drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c:104 after that
+> mentioned comment.
 
-simply throw a
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
+index 46b057fe1412..661fd0cf3b3b 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
+@@ -101,6 +101,7 @@ nvkm_uconn_uevent(struct nvkm_object *object, void *argv, u32 argc, struct nvkm_
+        if (args->v0.types & NVIF_CONN_EVENT_V0_UNPLUG) bits |= NVKM_GPIO_LO;
+        if (args->v0.types & NVIF_CONN_EVENT_V0_IRQ) {
+                /* TODO: support DP IRQ on ANX9805 and remove this hack. */
++               printk(KERN_WARNING "nvkm_uconn_uevent %u\n", outp->info.location);
+                if (!outp->info.location)
+                        return -EINVAL;
+        }
 
-printk(KERN_WARNING "nvkm_uconn_uevent %u\n", outp->info.location);
+result:
 
-inside drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c:104 after that
-mentioned comment.
+[   10.566759] ACPI: bus type drm_connector registered
+[   10.591171] Console: switching to colour dummy device 80x25
+[   10.598472] nouveau 0000:03:00.0: vgaarb: deactivate vga console
+[   10.607121] nouveau 0000:03:00.0: NVIDIA GT218 (0a8c00b1)
+[   10.728361] nouveau 0000:03:00.0: bios: version 70.18.83.00.08
+[   10.742137] nouveau 0000:03:00.0: fb: 512 MiB DDR3
+[   11.059848] nouveau 0000:03:00.0: DRM: VRAM: 512 MiB
+[   11.064911] nouveau 0000:03:00.0: DRM: GART: 1048576 MiB
+[   11.070302] nouveau 0000:03:00.0: DRM: TMDS table version 2.0
+[   11.076126] nouveau 0000:03:00.0: DRM: DCB version 4.0
+[   11.081335] nouveau 0000:03:00.0: DRM: DCB outp 00: 02000360 00000000
+[   11.087865] nouveau 0000:03:00.0: DRM: DCB outp 01: 02000362 00020010
+[   11.094395] nouveau 0000:03:00.0: DRM: DCB outp 02: 028003a6 0f220010
+[   11.100912] nouveau 0000:03:00.0: DRM: DCB outp 03: 01011380 00000000
+[   11.107422] nouveau 0000:03:00.0: DRM: DCB outp 04: 08011382 00020010
+[   11.113940] nouveau 0000:03:00.0: DRM: DCB outp 05: 088113c6 0f220010
+[   11.120457] nouveau 0000:03:00.0: DRM: DCB conn 00: 00101064
+[   11.126182] nouveau 0000:03:00.0: DRM: DCB conn 01: 00202165
+[   11.138865] nouveau 0000:03:00.0: DRM: MM: using COPY for buffer copies
+[   11.151291] nvkm_uconn_uevent 0
+[   11.154643] nvkm_uconn_uevent 0
+[   11.157975] nvkm_uconn_uevent 0
+[   11.161298] nvkm_uconn_uevent 0
+[   11.164616] nvkm_uconn_uevent 0
+[   11.167943] nvkm_uconn_uevent 0
+[   11.176010] [drm] Initialized nouveau 1.3.1 20120801 for 0000:03:00.0 on minor 0
+[   11.184186] nouveau 0000:03:00.0: [drm] Cannot find any crtc or sizes
+[   11.260527] megasas: 07.725.01.00-rc1
+[   11.264555] st: Version 20160209, fixed bufsize 32768, s/g segs 256
 
-> Thx.
->
-> --
-> Regards/Gruss,
->     Boris.
->
-> https://people.kernel.org/tglx/notes-about-netiquette
->
+-- 
+Regards/Gruss,
+    Boris.
 
+https://people.kernel.org/tglx/notes-about-netiquette
