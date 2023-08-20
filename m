@@ -1,78 +1,81 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14EED78203E
-	for <lists+nouveau@lfdr.de>; Sun, 20 Aug 2023 23:54:25 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2624978203F
+	for <lists+nouveau@lfdr.de>; Sun, 20 Aug 2023 23:54:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EFB7010E161;
-	Sun, 20 Aug 2023 21:54:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 01D0110E162;
+	Sun, 20 Aug 2023 21:54:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B0C6D10E160
- for <nouveau@lists.freedesktop.org>; Sun, 20 Aug 2023 21:54:12 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 08CF510E160
+ for <nouveau@lists.freedesktop.org>; Sun, 20 Aug 2023 21:54:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1692568451;
+ s=mimecast20190719; t=1692568455;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=M4vIZkwPS+ZQov4UL+Fk7Hf/Kd7fgNhda5kiRYBSffg=;
- b=Eu6G65GJTfRoORZ3BNbvczjvZ4kQeF8pC9lpQKcuZjUbnqHjLa7eIkE8AkT/CL54XrWQT5
- iy5UCIjtvgvEOgpdHScodtxoTKBhfV6sovKj4dIhyLORf36ZvCmShU0IdLoOL2S797wuL3
- JBWTrc7jFvUvTlXCTVaQb+77U5tgFNc=
-Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
- [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+R/sWlMT7wVG64uORegqci3bW98/zYiz5u+hdhEocSI=;
+ b=Cw5naoAjkTrBKX3h/n5b8K2WjxKFL47Lj5mjNHJS8ql881CeO2925DJVw61FwxHLmSX75A
+ yRalZ0YOMat20D40twjjykVGxvoJbAUSgz0JuqBaNdYZupjtXas+GXHGkF8DsTco2g5C2X
+ uqifp2U6zTBKanwf4dG6VAodnKZQX1s=
+Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
+ [209.85.208.199]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-620-LVN9YwFrOFWyHtHSRTrjuQ-1; Sun, 20 Aug 2023 17:54:09 -0400
-X-MC-Unique: LVN9YwFrOFWyHtHSRTrjuQ-1
-Received: by mail-lf1-f69.google.com with SMTP id
- 2adb3069b0e04-4fe38a9f954so2551494e87.3
- for <nouveau@lists.freedesktop.org>; Sun, 20 Aug 2023 14:54:09 -0700 (PDT)
+ us-mta-573-8kAjCqqMNa-TsS_3M4TVng-1; Sun, 20 Aug 2023 17:54:13 -0400
+X-MC-Unique: 8kAjCqqMNa-TsS_3M4TVng-1
+Received: by mail-lj1-f199.google.com with SMTP id
+ 38308e7fff4ca-2bba5d0c68bso25664591fa.3
+ for <nouveau@lists.freedesktop.org>; Sun, 20 Aug 2023 14:54:13 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692568448; x=1693173248;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=M4vIZkwPS+ZQov4UL+Fk7Hf/Kd7fgNhda5kiRYBSffg=;
- b=KeY3+Wm6O4rYPmF3oX/fzLOPix/hkhN1NLSB7/vZwsMwT7XCAD3jw+iLeTdRcygqdC
- E28FXCknOeZvWqc4icRXxUSry6N/KYDB54//+txQiMKX6XrcawAwrzee0VK3jyh2mSZs
- gaPdWI8ckCnX7oqedPVWS+CXWRh9ff8R8ppGDcOY/toJ/Jq2TnA6DEDfbHfgrMcYonht
- QHK3Bg1EAaiQpj6Qd36SkWadjnW/JeM3UaJa9biepHjWv9Yws3P7NEj2ZqJmVtqdG5S+
- rETZIjZeVxp7i3Yo2p3CgrHW7NRuasccNFZwFRjPnWOzw3Bay9eSf2OI8864DBvaWL0f
- rxog==
-X-Gm-Message-State: AOJu0Yx7qEVNuX+B0ojL6v/0/Y1V7a6lHDEp4j0Bj34qAzzqw6GQj7WH
- v9mITh+ASiDwN1cjF939tn5z+TWyWHF3a3wSSPhiZkj4TvVpgotJZx6qHvcSuRHOujEFVNCO2gv
- wb3M/ek2Fj7LaAluzuXBzKwa/Wg==
-X-Received: by 2002:ac2:4f15:0:b0:4fb:8bab:48b6 with SMTP id
- k21-20020ac24f15000000b004fb8bab48b6mr3925846lfr.52.1692568448254; 
- Sun, 20 Aug 2023 14:54:08 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFAZXjzsPM9goXTH3dmZ8rgr6Mp+E+RlZMS0dK0JUhqJLysGLS+LL7CvcluY0OjXk0lsaZwJg==
-X-Received: by 2002:ac2:4f15:0:b0:4fb:8bab:48b6 with SMTP id
- k21-20020ac24f15000000b004fb8bab48b6mr3925827lfr.52.1692568447849; 
- Sun, 20 Aug 2023 14:54:07 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692568452; x=1693173252;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+R/sWlMT7wVG64uORegqci3bW98/zYiz5u+hdhEocSI=;
+ b=GtpR0VJvHCqm3o1MLkAvPdoBLLDhkezuNUV+X0pG+BW7Y13YSrV7KNQqBjW0KxPghN
+ IuO0NsL14ypytcciDDilC/GGE7cbXhYIhQD1nsuYyu9tscAGHQQKXNiYR+gFogdf0777
+ GeRxJNHRSwEV3nIBcjr+BMRWSJ7IeyTw0GeU6w/m5R08UePHaPLcT53/xzXF2qFdYiqk
+ u8lRms2HKMMWcZaPwBu7ghbOqTbfwt1fsaZaQrdBlGayBcK/bE7ByO5NmSR5Xr4OH25n
+ N5/MRvCxp+D1yqwBic7vMUmg1N/roPCgkfsrecEYx+cwZoVSbkwbbNbfWJL0kaUIEJtH
+ Npgw==
+X-Gm-Message-State: AOJu0YzItY12zY2FuFvFkYWeJ6ykP1gSrMxDZu8Hs7npPm3gbqq3+glD
+ c7u1RawyYLwA7KXxNH/siJR8Ink/A4EYqnIJv00BkbSIvX2COGwLcMDFA5cHm0hlJQwd/FGeZ2d
+ 51Q2Sdk2AbccHXLo/sb54SszQ+51KD5buCA==
+X-Received: by 2002:a05:6512:2396:b0:4fd:fafd:1ed4 with SMTP id
+ c22-20020a056512239600b004fdfafd1ed4mr4221919lfv.2.1692568451863; 
+ Sun, 20 Aug 2023 14:54:11 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEQOe6EUHANI7lcqkPBWc4kZcyrIJjTjqCjCwwhLtlytYfuYgg2prfqx79jcLJiK4a6N2mu/w==
+X-Received: by 2002:a05:6512:2396:b0:4fd:fafd:1ed4 with SMTP id
+ c22-20020a056512239600b004fdfafd1ed4mr4221907lfv.2.1692568451672; 
+ Sun, 20 Aug 2023 14:54:11 -0700 (PDT)
 Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- c6-20020a170906170600b0099e05fb8f95sm5298869eje.137.2023.08.20.14.54.06
+ f11-20020aa7d84b000000b005257f2c057fsm4897287eds.33.2023.08.20.14.54.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 20 Aug 2023 14:54:07 -0700 (PDT)
+ Sun, 20 Aug 2023 14:54:11 -0700 (PDT)
 From: Danilo Krummrich <dakr@redhat.com>
 To: airlied@gmail.com, daniel@ffwll.ch, matthew.brost@intel.com,
  thomas.hellstrom@linux.intel.com, sarah.walker@imgtec.com,
  donald.robson@imgtec.com, boris.brezillon@collabora.com,
  christian.koenig@amd.com, faith.ekstrand@collabora.com, bskeggs@redhat.com,
  Liam.Howlett@oracle.com
-Date: Sun, 20 Aug 2023 23:53:07 +0200
-Message-ID: <20230820215320.4187-1-dakr@redhat.com>
+Date: Sun, 20 Aug 2023 23:53:08 +0200
+Message-ID: <20230820215320.4187-2-dakr@redhat.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230820215320.4187-1-dakr@redhat.com>
+References: <20230820215320.4187-1-dakr@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Subject: [Nouveau] [PATCH drm-misc-next 0/3] [RFC] DRM GPUVA Manager GPU-VM
- features
+Subject: [Nouveau] [PATCH drm-misc-next 1/3] drm: drm_exec: build always
+ builtin
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,68 +92,66 @@ Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-So far the DRM GPUVA manager offers common infrastructure to track GPU VA
-allocations and mappings, generically connect GPU VA mappings to their
-backing buffers and perform more complex mapping operations on the GPU VA
-space.
+drm_exec must always be builtin for the DRM GPUVA manager to depend on
+it.
 
-However, there are more design patterns commonly used by drivers, which
-can potentially be generalized in order to make the DRM GPUVA manager
-represent a basic GPU-VM implementation. In this context, this patch series
-aims at generalizing the following elements.
+Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+---
+ drivers/gpu/drm/Kconfig         | 6 ------
+ drivers/gpu/drm/Makefile        | 3 +--
+ drivers/gpu/drm/nouveau/Kconfig | 1 -
+ 3 files changed, 1 insertion(+), 9 deletions(-)
 
-1) Provide a common dma-resv for GEM objects not being used outside of
-   this GPU-VM.
-
-2) Provide tracking of external GEM objects (GEM objects which are
-   shared with other GPU-VMs).
-
-3) Provide functions to efficiently lock all GEM objects dma-resv the
-   GPU-VM contains mappings of.
-
-4) Provide tracking of evicted GEM objects the GPU-VM contains mappings
-   of, such that validation of evicted GEM objects is accelerated.
-
-5) Provide some convinience functions for common patterns.
-
-Rather than being designed as a "framework", the target is to make all
-features appear as a collection of optional helper functions, such that
-drivers are free to make use of the DRM GPUVA managers basic
-functionality and opt-in for other features without setting any feature
-flags, just by making use of the corresponding functions.
-
-The implementation introduces struct drm_gpuva_gem, which serves as abstraction
-combining a struct drm_gpuva_manager and struct drm_gem_object, similar to what
-amdgpu does with struct amdgpu_bo_vm. While this adds a bit of complexity it
-improves the efficiency of tracking evicted GEM objects. [1] provides an
-alternative implementation using a maple_tree, resulting into a fairly simpler
-API. [2] points to the full patch series providing the alternative
-implementation. [3] points to this patch series.
-
-[1] https://gitlab.freedesktop.org/nouvelles/kernel/-/commit/2a7e1b0ece2c3bba43376783b577d97ae6f6e54f
-[2] https://gitlab.freedesktop.org/nouvelles/kernel/-/commits/gpuva-vm-resv
-[3] https://gitlab.freedesktop.org/nouvelles/kernel/-/commits/gpuva-vm-resv-vm-bo
-
-Danilo Krummrich (3):
-  drm: drm_exec: build always builtin
-  drm/gpuva_mgr: generalize dma_resv/extobj handling and GEM validation
-  drm/nouveau: gpuva mgr dma-resv/extobj handling, GEM validation
-
- drivers/gpu/drm/Kconfig                 |   6 -
- drivers/gpu/drm/Makefile                |   3 +-
- drivers/gpu/drm/drm_gpuva_mgr.c         | 688 +++++++++++++++++++++++-
- drivers/gpu/drm/nouveau/Kconfig         |   1 -
- drivers/gpu/drm/nouveau/nouveau_bo.c    |   4 +-
- drivers/gpu/drm/nouveau/nouveau_exec.c  |  51 +-
- drivers/gpu/drm/nouveau/nouveau_gem.c   |   4 +-
- drivers/gpu/drm/nouveau/nouveau_sched.h |   2 -
- drivers/gpu/drm/nouveau/nouveau_uvmm.c  | 191 +++++--
- include/drm/drm_gem.h                   |  48 +-
- include/drm/drm_gpuva_mgr.h             | 302 ++++++++++-
- 11 files changed, 1161 insertions(+), 139 deletions(-)
-
-
-base-commit: 25205087df1ffe06ccea9302944ed1f77dc68c6f
+diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
+index ab9ef1c20349..85122d4bb1e7 100644
+--- a/drivers/gpu/drm/Kconfig
++++ b/drivers/gpu/drm/Kconfig
+@@ -210,12 +210,6 @@ config DRM_TTM_KUNIT_TEST
+ 
+           If in doubt, say "N".
+ 
+-config DRM_EXEC
+-	tristate
+-	depends on DRM
+-	help
+-	  Execution context for command submissions
+-
+ config DRM_BUDDY
+ 	tristate
+ 	depends on DRM
+diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
+index 215e78e79125..388e0964a875 100644
+--- a/drivers/gpu/drm/Makefile
++++ b/drivers/gpu/drm/Makefile
+@@ -23,6 +23,7 @@ drm-y := \
+ 	drm_dumb_buffers.o \
+ 	drm_edid.o \
+ 	drm_encoder.o \
++	drm_exec.o \
+ 	drm_file.o \
+ 	drm_fourcc.o \
+ 	drm_framebuffer.o \
+@@ -80,8 +81,6 @@ obj-$(CONFIG_DRM_PANEL_ORIENTATION_QUIRKS) += drm_panel_orientation_quirks.o
+ # Memory-management helpers
+ #
+ #
+-obj-$(CONFIG_DRM_EXEC) += drm_exec.o
+-
+ obj-$(CONFIG_DRM_BUDDY) += drm_buddy.o
+ 
+ drm_dma_helper-y := drm_gem_dma_helper.o
+diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kconfig
+index c52e8096cca4..2dddedac125b 100644
+--- a/drivers/gpu/drm/nouveau/Kconfig
++++ b/drivers/gpu/drm/nouveau/Kconfig
+@@ -10,7 +10,6 @@ config DRM_NOUVEAU
+ 	select DRM_KMS_HELPER
+ 	select DRM_TTM
+ 	select DRM_TTM_HELPER
+-	select DRM_EXEC
+ 	select DRM_SCHED
+ 	select I2C
+ 	select I2C_ALGOBIT
 -- 
 2.41.0
 
