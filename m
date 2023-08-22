@@ -2,87 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EB4B7830E2
-	for <lists+nouveau@lfdr.de>; Mon, 21 Aug 2023 21:14:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AAE3783765
+	for <lists+nouveau@lfdr.de>; Tue, 22 Aug 2023 03:32:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 52A7B10E0AE;
-	Mon, 21 Aug 2023 19:14:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C61C410E2C0;
+	Tue, 22 Aug 2023 01:32:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 17B8C10E09C
- for <nouveau@lists.freedesktop.org>; Mon, 21 Aug 2023 19:14:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1692645278;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QhOSpxI2PDYs2OJIu7QJVbJYNk9LCU0AkkLRkJu15pg=;
- b=GuPrLB6/ArmvEhwmv5dBIWcrvdKLF7CaEAjeQK48BOI9vn+3f3aqFMas2yWPcXw2yrF3iJ
- vvRax4zGHe7nrR+g43lg85biFZGMkTsqcofZYv4FG9M4K9ntBi++MOgEMvvnl6Ik15z/Am
- qTIaLJdgkZnNVTUdJda/m+bTR0X4GLU=
-Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
- [209.85.167.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-82-b_3JCWN-NuORTPSLwXb1HA-1; Mon, 21 Aug 2023 15:14:36 -0400
-X-MC-Unique: b_3JCWN-NuORTPSLwXb1HA-1
-Received: by mail-lf1-f72.google.com with SMTP id
- 2adb3069b0e04-4fe27502459so3364029e87.3
- for <nouveau@lists.freedesktop.org>; Mon, 21 Aug 2023 12:14:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692645275; x=1693250075;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QhOSpxI2PDYs2OJIu7QJVbJYNk9LCU0AkkLRkJu15pg=;
- b=jqC9kuYs7kfu3Y+ARHpgOqS6og1dIn6gKM1TENgozemRQ3l/OyGddxf7DI3Jf4eZSj
- oN2Agsd0ShRqpDoAiTRjWX/XUeQllUCk9CGuT0hJj3ULgEVc3dN8osxBsd50Zbh028BE
- om74aDPkCZQNK+k7eH3rGE1PFIy0qCd2+gd794ZTfho0f22bVZPAFkdAYJhKpezEwMwx
- zlFVAfWsn3d8Yvv7XInYOzp/qbI79DqxDUqo7nzEClyMBXIakFoyp1bfzpA+ZyS/fM5E
- D0Gy7c2LUwlfc9l31zkrF2fRIGDaaQU0NlnCUUSHyOMBwnKF3dEWJgVRTfB2HUc1vyyX
- nQ7g==
-X-Gm-Message-State: AOJu0YzUlcoWMsckGwNAF+/08fyFBV85y1C15JtmyQ2yTG41FLZBsvZC
- UD246KctwHBYZUIO5qWRDF78xBrEg04ewXxCHbpywHoaq9ME+w9jvmyU3ArlnrAdFx0mYGO5Omq
- /TbQqPO0Vp2yMkV4ZJgLGQmf1gg==
-X-Received: by 2002:a05:6512:1192:b0:4fd:f85d:f67a with SMTP id
- g18-20020a056512119200b004fdf85df67amr6657053lfr.61.1692645275108; 
- Mon, 21 Aug 2023 12:14:35 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEkPlo4TwcFOenNEUGpTvSs1j7u5WzB1RXf9hPFdX9z12+DHZYiX3tXqtVjXcSZ23fl8469ww==
-X-Received: by 2002:a05:6512:1192:b0:4fd:f85d:f67a with SMTP id
- g18-20020a056512119200b004fdf85df67amr6657036lfr.61.1692645274807; 
- Mon, 21 Aug 2023 12:14:34 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
- ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
- by smtp.gmail.com with ESMTPSA id
- mb12-20020a170906eb0c00b0099bd5b72d93sm6980949ejb.43.2023.08.21.12.14.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Aug 2023 12:14:34 -0700 (PDT)
-Message-ID: <3b841ef8-e361-5775-168b-fc6a4417415a@redhat.com>
-Date: Mon, 21 Aug 2023 21:14:32 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- airlied@gmail.com, daniel@ffwll.ch, matthew.brost@intel.com,
- thomas.hellstrom@linux.intel.com, sarah.walker@imgtec.com,
- donald.robson@imgtec.com, boris.brezillon@collabora.com,
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DB3B010E2C0;
+ Tue, 22 Aug 2023 01:32:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1692667963; x=1724203963;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=HdoVJOe6WW5DpqEDgj81IB0yoiTd7hbmfF33SK2xsoE=;
+ b=NUXDaCP8T9e5BYgajhdyHSlIaR6Twy5E1JpQRZ08x7yDg0gLy2M4jNKR
+ mi8K7dXbovhdUEKHnneCL9jp18IyKAV1fO7zBY5EosFJEdvsPIebPy5Ih
+ pD22twCLLl3ZuTQSk3OV+lFkcTbclgoyj9Gd3+2hZiOBZajyrlZeC6qR0
+ q+/3ijaWsf2AxebGbowqqtxjmkMtf6EofJRvqBb6y4gpCT2SYt8CQTrZZ
+ 4zo7CTiREJX+gsMONqApIFHpE+eKbP7hdVf76QPq+ImY2C9cx5A1P92yt
+ 96pOtnt2MRwpgOU33wA28Wxh29CFjwCQyrCL8Wj78vm+uT6Bp2rB1wP/p w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10809"; a="460120041"
+X-IronPort-AV: E=Sophos;i="6.01,191,1684825200"; d="scan'208";a="460120041"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 Aug 2023 18:32:42 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10809"; a="685865351"
+X-IronPort-AV: E=Sophos;i="6.01,191,1684825200"; d="scan'208";a="685865351"
+Received: from lkp-server02.sh.intel.com (HELO 6809aa828f2a) ([10.239.97.151])
+ by orsmga003.jf.intel.com with ESMTP; 21 Aug 2023 18:32:19 -0700
+Received: from kbuild by 6809aa828f2a with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1qYGFi-0001AB-0F;
+ Tue, 22 Aug 2023 01:32:15 +0000
+Date: Tue, 22 Aug 2023 09:31:02 +0800
+From: kernel test robot <lkp@intel.com>
+To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
+ matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
+ sarah.walker@imgtec.com, donald.robson@imgtec.com,
+ boris.brezillon@collabora.com, christian.koenig@amd.com,
  faith.ekstrand@collabora.com, bskeggs@redhat.com, Liam.Howlett@oracle.com
-References: <20230820215320.4187-1-dakr@redhat.com>
- <20230820215320.4187-2-dakr@redhat.com>
- <3462dfaa-96a4-61fd-b31b-fb8d8eb6104c@amd.com>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <3462dfaa-96a4-61fd-b31b-fb8d8eb6104c@amd.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH drm-misc-next 1/3] drm: drm_exec: build always
- builtin
+Message-ID: <202308220935.ik8QPkf4-lkp@intel.com>
+References: <20230820215320.4187-3-dakr@redhat.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230820215320.4187-3-dakr@redhat.com>
+Subject: Re: [Nouveau] [PATCH drm-misc-next 2/3] drm/gpuva_mgr: generalize
+ dma_resv/extobj handling and GEM validation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,85 +63,103 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, llvm@lists.linux.dev,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ oe-kbuild-all@lists.linux.dev
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 8/21/23 11:49, Christian König wrote:
-> Am 20.08.23 um 23:53 schrieb Danilo Krummrich:
->> drm_exec must always be builtin for the DRM GPUVA manager to depend on
->> it.
-> 
-> You should probably go the other way around and not always build in the 
-> GPUVA manager.
+Hi Danilo,
 
-Yes, I think that's reasonable. Currently, I don't see any core 
-dependencies preventing that.
+kernel test robot noticed the following build warnings:
 
-> 
-> We have intentionally and with quite a bit of work moved the DRM_EXEC 
-> and DRM_BUDDY into separate modules.
-> 
-> Regards,
-> Christian.
-> 
->>
->> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
->> ---
->>   drivers/gpu/drm/Kconfig         | 6 ------
->>   drivers/gpu/drm/Makefile        | 3 +--
->>   drivers/gpu/drm/nouveau/Kconfig | 1 -
->>   3 files changed, 1 insertion(+), 9 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
->> index ab9ef1c20349..85122d4bb1e7 100644
->> --- a/drivers/gpu/drm/Kconfig
->> +++ b/drivers/gpu/drm/Kconfig
->> @@ -210,12 +210,6 @@ config DRM_TTM_KUNIT_TEST
->>             If in doubt, say "N".
->> -config DRM_EXEC
->> -    tristate
->> -    depends on DRM
->> -    help
->> -      Execution context for command submissions
->> -
->>   config DRM_BUDDY
->>       tristate
->>       depends on DRM
->> diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
->> index 215e78e79125..388e0964a875 100644
->> --- a/drivers/gpu/drm/Makefile
->> +++ b/drivers/gpu/drm/Makefile
->> @@ -23,6 +23,7 @@ drm-y := \
->>       drm_dumb_buffers.o \
->>       drm_edid.o \
->>       drm_encoder.o \
->> +    drm_exec.o \
->>       drm_file.o \
->>       drm_fourcc.o \
->>       drm_framebuffer.o \
->> @@ -80,8 +81,6 @@ obj-$(CONFIG_DRM_PANEL_ORIENTATION_QUIRKS) += 
->> drm_panel_orientation_quirks.o
->>   # Memory-management helpers
->>   #
->>   #
->> -obj-$(CONFIG_DRM_EXEC) += drm_exec.o
->> -
->>   obj-$(CONFIG_DRM_BUDDY) += drm_buddy.o
->>   drm_dma_helper-y := drm_gem_dma_helper.o
->> diff --git a/drivers/gpu/drm/nouveau/Kconfig 
->> b/drivers/gpu/drm/nouveau/Kconfig
->> index c52e8096cca4..2dddedac125b 100644
->> --- a/drivers/gpu/drm/nouveau/Kconfig
->> +++ b/drivers/gpu/drm/nouveau/Kconfig
->> @@ -10,7 +10,6 @@ config DRM_NOUVEAU
->>       select DRM_KMS_HELPER
->>       select DRM_TTM
->>       select DRM_TTM_HELPER
->> -    select DRM_EXEC
->>       select DRM_SCHED
->>       select I2C
->>       select I2C_ALGOBIT
-> 
+[auto build test WARNING on 25205087df1ffe06ccea9302944ed1f77dc68c6f]
 
+url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-drm_exec-build-always-builtin/20230821-123143
+base:   25205087df1ffe06ccea9302944ed1f77dc68c6f
+patch link:    https://lore.kernel.org/r/20230820215320.4187-3-dakr%40redhat.com
+patch subject: [PATCH drm-misc-next 2/3] drm/gpuva_mgr: generalize dma_resv/extobj handling and GEM validation
+config: i386-randconfig-r024-20230822 (https://download.01.org/0day-ci/archive/20230822/202308220935.ik8QPkf4-lkp@intel.com/config)
+compiler: clang version 16.0.4 (https://github.com/llvm/llvm-project.git ae42196bc493ffe877a7e3dff8be32035dea4d07)
+reproduce: (https://download.01.org/0day-ci/archive/20230822/202308220935.ik8QPkf4-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202308220935.ik8QPkf4-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+>> drivers/gpu/drm/drm_gpuva_mgr.c:750:1: warning: no previous prototype for function 'drm_gpuva_manager_prepare_objects' [-Wmissing-prototypes]
+   drm_gpuva_manager_prepare_objects(struct drm_gpuva_manager *mgr,
+   ^
+   drivers/gpu/drm/drm_gpuva_mgr.c:749:1: note: declare 'static' if the function is not intended to be used outside of this translation unit
+   int
+   ^
+   static 
+   drivers/gpu/drm/drm_gpuva_mgr.c:1744:32: warning: variable 'prev' set but not used [-Wunused-but-set-variable]
+           struct drm_gpuva *va, *next, *prev = NULL;
+                                         ^
+   2 warnings generated.
+--
+>> drivers/gpu/drm/drm_gpuva_mgr.c:1091: warning: Function parameter or member '__vm_bo' not described in 'drm_gpuva_gem_obtain_prealloc'
+
+
+vim +/drm_gpuva_manager_prepare_objects +750 drivers/gpu/drm/drm_gpuva_mgr.c
+
+   734	
+   735	/**
+   736	 * drm_gpuva_manager_prepare_objects() - prepare all assoiciated BOs
+   737	 * @mgr: the &drm_gpuva_manager
+   738	 * @num_fences: the amount of &dma_fences to reserve
+   739	 *
+   740	 * Calls drm_exec_prepare_obj() for all &drm_gem_objects the given
+   741	 * &drm_gpuva_manager contains mappings of.
+   742	 *
+   743	 * Drivers can obtain the corresponding &drm_exec instance through
+   744	 * DRM_GPUVA_EXEC(). It is the drivers responsibility to call drm_exec_init()
+   745	 * and drm_exec_fini() accordingly.
+   746	 *
+   747	 * Returns: 0 on success, negative error code on failure.
+   748	 */
+   749	int
+ > 750	drm_gpuva_manager_prepare_objects(struct drm_gpuva_manager *mgr,
+   751					  unsigned int num_fences)
+   752	{
+   753		struct drm_exec *exec = DRM_GPUVA_EXEC(mgr);
+   754		MA_STATE(mas, &mgr->mt_ext, 0, 0);
+   755		union {
+   756			void *ptr;
+   757			uintptr_t cnt;
+   758		} ref;
+   759		int ret;
+   760	
+   761		ret = drm_exec_prepare_obj(exec, &mgr->d_obj, num_fences);
+   762		if (ret)
+   763			goto out;
+   764	
+   765		rcu_read_lock();
+   766		mas_for_each(&mas, ref.ptr, ULONG_MAX) {
+   767			struct drm_gem_object *obj;
+   768	
+   769			mas_pause(&mas);
+   770			rcu_read_unlock();
+   771	
+   772			obj = (struct drm_gem_object *)(uintptr_t)mas.index;
+   773			ret = drm_exec_prepare_obj(exec, obj, num_fences);
+   774			if (ret)
+   775				goto out;
+   776	
+   777			rcu_read_lock();
+   778		}
+   779		rcu_read_unlock();
+   780	
+   781	out:
+   782		return ret;
+   783	}
+   784	EXPORT_SYMBOL_GPL(drm_gpuva_manager_prepare_objects);
+   785	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
