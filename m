@@ -1,57 +1,75 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EC65783841
-	for <lists+nouveau@lfdr.de>; Tue, 22 Aug 2023 05:02:10 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B9E3784D6B
+	for <lists+nouveau@lfdr.de>; Wed, 23 Aug 2023 01:41:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9307110E190;
-	Tue, 22 Aug 2023 03:02:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2B25910E02D;
+	Tue, 22 Aug 2023 23:41:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 692BF10E2CF;
- Tue, 22 Aug 2023 03:02:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1692673322; x=1724209322;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=DrGmF+TINNE7yZWn9DqTXRdXSL+bSJMmgxeURcbpU0E=;
- b=GZ65t75EIxVQJrRN1RYEo+lQ5oB3w7c3jFx7unnZPV1KFJr8xX21DJXT
- CUAoK1y/Ry7lbgp07ERNZiuIbgf1mWemGb3yTPhcc8yfEP2qvAkG8SyBq
- 2xM+5qqnaAIJGYpMTPNoTPTCDuTviMBEwwfKqIVzz5MhQt6afq/nxaaz6
- oN2CrJp4Le6DTi5fmuFFn1CCWTBHgWHI2V0YOkk9x4Ucnfl8G6X/334aN
- yephIckMx06NYIE4nFQRufaNHEnXhldMFYpR+12vHVemiPGUEmD5suv62
- qBPo2Xgr4xY6A6JIx18qYVOP5r1oF1rDy0lwf6BxL3bfT8oWMY4QngqmQ w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10809"; a="372657354"
-X-IronPort-AV: E=Sophos;i="6.01,191,1684825200"; d="scan'208";a="372657354"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 21 Aug 2023 20:02:01 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10809"; a="801491059"
-X-IronPort-AV: E=Sophos;i="6.01,191,1684825200"; d="scan'208";a="801491059"
-Received: from lkp-server02.sh.intel.com (HELO 6809aa828f2a) ([10.239.97.151])
- by fmsmga008.fm.intel.com with ESMTP; 21 Aug 2023 20:01:57 -0700
-Received: from kbuild by 6809aa828f2a with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1qYHeW-0001H8-1e;
- Tue, 22 Aug 2023 03:01:56 +0000
-Date: Tue, 22 Aug 2023 11:01:08 +0800
-From: kernel test robot <lkp@intel.com>
-To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
- matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
- sarah.walker@imgtec.com, donald.robson@imgtec.com,
- boris.brezillon@collabora.com, christian.koenig@amd.com,
- faith.ekstrand@collabora.com, bskeggs@redhat.com, Liam.Howlett@oracle.com
-Message-ID: <202308221050.kTj8uFMA-lkp@intel.com>
-References: <20230820215320.4187-3-dakr@redhat.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D26E210E02D
+ for <nouveau@lists.freedesktop.org>; Tue, 22 Aug 2023 23:41:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1692747705;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=nsnxJk65dFpflCIpKgOgUQnHPy3UkHdJC4ely2iIRmI=;
+ b=eLCL2o1jPiEsta08Wm+ZnzjEtIwyzqtP44s9/beenrbdOKw6PnwNuPkdkduVFuLNcQCmWL
+ SOjQoUfw3GAj/8UEFsn1EPyz+DSJspbn5fen/vC9VfCWJm9TqaCUG/6u8ERzxR2psclOLb
+ j0ush99u7oRAtGaH8Z2p8ZJRvO8KXbk=
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-657-28dd63ZfOdqJ2715mTLAtg-1; Tue, 22 Aug 2023 19:41:44 -0400
+X-MC-Unique: 28dd63ZfOdqJ2715mTLAtg-1
+Received: by mail-ej1-f72.google.com with SMTP id
+ a640c23a62f3a-9a0955ac1dcso322577066b.0
+ for <nouveau@lists.freedesktop.org>; Tue, 22 Aug 2023 16:41:44 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692747703; x=1693352503;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nsnxJk65dFpflCIpKgOgUQnHPy3UkHdJC4ely2iIRmI=;
+ b=fQ1FXQ53lkc3S59P0bRX1dBFke8/kj2UAfKmGzdFBPilZU6mS5uuU4uRxXrVrYjh/2
+ uOOl6pvtU/IWQJIOgovvlkg29iLp+lzKn8DUPANkROTQnVDJC07MR85eDeo10Kpm8jMt
+ FTCW7/aIAN4hI7YnmLLLjrS2tfZGpJbnWBzclQclYZiFHffO9gZn4dpI2wtaNCG6n2mP
+ T8yL6Z9QFs3Xlpg9cjsvBPBajNxy14ePn3DF30jmD6TYwZPmYU9AyojYMhGx6QRxV2xm
+ gjwNhK3f63I6KMKX90Cr4OiUkDqt89byo4niQ/NHt7+koa3JHxatxBGxisq7bzrJInSD
+ d72Q==
+X-Gm-Message-State: AOJu0YzhhgdLUb4JPYql4JAzhjeV8xfWWtrGJ+IlnJF/LjH0dWMFXWql
+ tPPFMOxBSHp8sawzYjz9KAdhZooTPtQwEU1WgS+vkNW/GVTdXWFzwfYta/07InqU/0Zo2wxG6aU
+ Y2S/+nii8D87MTcH4mRJrAuLLyg==
+X-Received: by 2002:a17:906:3187:b0:9a1:8812:a8a6 with SMTP id
+ 7-20020a170906318700b009a18812a8a6mr3915026ejy.73.1692747703312; 
+ Tue, 22 Aug 2023 16:41:43 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHTK0EjRJ9Yi8oW74L8VpAZuHS3eGC1iNYy3R9uNrDphgrWEnm2dsd/M85riAnQThkGZg2rhw==
+X-Received: by 2002:a17:906:3187:b0:9a1:8812:a8a6 with SMTP id
+ 7-20020a170906318700b009a18812a8a6mr3915007ejy.73.1692747702887; 
+ Tue, 22 Aug 2023 16:41:42 -0700 (PDT)
+Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
+ by smtp.gmail.com with ESMTPSA id
+ u22-20020a170906409600b009929ab17be0sm8947280ejj.162.2023.08.22.16.41.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Aug 2023 16:41:42 -0700 (PDT)
+From: Danilo Krummrich <dakr@redhat.com>
+To: airlied@gmail.com, daniel@ffwll.ch, bskeggs@redhat.com, kherbst@redhat.com,
+ lyude@redhat.com, faith.ekstrand@collabora.com
+Date: Wed, 23 Aug 2023 01:41:36 +0200
+Message-ID: <20230822234139.11185-1-dakr@redhat.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230820215320.4187-3-dakr@redhat.com>
-Subject: Re: [Nouveau] [PATCH drm-misc-next 2/3] drm/gpuva_mgr: generalize
- dma_resv/extobj handling and GEM validation
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
+Subject: [Nouveau] [PATCH drm-misc-next] drm/nouveau: uapi: don't pass
+ NO_PREFETCH flag implicitly
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,97 +82,171 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, oe-kbuild-all@lists.linux.dev
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Danilo,
+Currently, NO_PREFETCH is passed implicitly through
+drm_nouveau_gem_pushbuf_push::length and drm_nouveau_exec_push::va_len.
 
-kernel test robot noticed the following build warnings:
+Since this is a direct representation of how the HW is programmed it
+isn't really future proof for a uAPI. Hence, fix this up for the new
+uAPI and split up the va_len field of struct drm_nouveau_exec_push,
+such that we keep 32bit for va_len and 32bit for flags.
 
-[auto build test WARNING on 25205087df1ffe06ccea9302944ed1f77dc68c6f]
+For drm_nouveau_gem_pushbuf_push::length at least provide
+NOUVEAU_GEM_PUSHBUF_NO_PREFETCH to indicate the bit shift.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-drm_exec-build-always-builtin/20230821-123143
-base:   25205087df1ffe06ccea9302944ed1f77dc68c6f
-patch link:    https://lore.kernel.org/r/20230820215320.4187-3-dakr%40redhat.com
-patch subject: [PATCH drm-misc-next 2/3] drm/gpuva_mgr: generalize dma_resv/extobj handling and GEM validation
-config: arm-randconfig-r014-20230822 (https://download.01.org/0day-ci/archive/20230822/202308221050.kTj8uFMA-lkp@intel.com/config)
-compiler: arm-linux-gnueabi-gcc (GCC) 12.3.0
-reproduce: (https://download.01.org/0day-ci/archive/20230822/202308221050.kTj8uFMA-lkp@intel.com/reproduce)
+While at it, fix up nv50_dma_push() as well, such that the caller
+doesn't need to encode the NO_PREFETCH flag into the length parameter.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202308221050.kTj8uFMA-lkp@intel.com/
+Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_dma.c  |  7 +++++--
+ drivers/gpu/drm/nouveau/nouveau_dma.h  |  8 ++++++--
+ drivers/gpu/drm/nouveau/nouveau_exec.c | 15 ++++++++++++---
+ drivers/gpu/drm/nouveau/nouveau_gem.c  |  6 ++++--
+ include/uapi/drm/nouveau_drm.h         |  8 +++++++-
+ 5 files changed, 34 insertions(+), 10 deletions(-)
 
-All warnings (new ones prefixed by >>):
+diff --git a/drivers/gpu/drm/nouveau/nouveau_dma.c b/drivers/gpu/drm/nouveau/nouveau_dma.c
+index b90cac6d5772..059925e5db6a 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_dma.c
++++ b/drivers/gpu/drm/nouveau/nouveau_dma.c
+@@ -69,16 +69,19 @@ READ_GET(struct nouveau_channel *chan, uint64_t *prev_get, int *timeout)
+ }
+ 
+ void
+-nv50_dma_push(struct nouveau_channel *chan, u64 offset, int length)
++nv50_dma_push(struct nouveau_channel *chan, u64 offset, u32 length,
++	      bool prefetch)
+ {
+ 	struct nvif_user *user = &chan->drm->client.device.user;
+ 	struct nouveau_bo *pb = chan->push.buffer;
+ 	int ip = (chan->dma.ib_put * 2) + chan->dma.ib_base;
+ 
+ 	BUG_ON(chan->dma.ib_free < 1);
++	WARN_ON(length > NV50_DMA_PUSH_MAX_LENGTH);
+ 
+ 	nouveau_bo_wr32(pb, ip++, lower_32_bits(offset));
+-	nouveau_bo_wr32(pb, ip++, upper_32_bits(offset) | length << 8);
++	nouveau_bo_wr32(pb, ip++, upper_32_bits(offset) | length << 8 |
++			(prefetch ? 0 : (1 << 31)));
+ 
+ 	chan->dma.ib_put = (chan->dma.ib_put + 1) & chan->dma.ib_max;
+ 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_dma.h b/drivers/gpu/drm/nouveau/nouveau_dma.h
+index 035a709c7be1..fb471c357336 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_dma.h
++++ b/drivers/gpu/drm/nouveau/nouveau_dma.h
+@@ -31,7 +31,8 @@
+ #include "nouveau_chan.h"
+ 
+ int nouveau_dma_wait(struct nouveau_channel *, int slots, int size);
+-void nv50_dma_push(struct nouveau_channel *, u64 addr, int length);
++void nv50_dma_push(struct nouveau_channel *, u64 addr, u32 length,
++		   bool prefetch);
+ 
+ /*
+  * There's a hw race condition where you can't jump to your PUT offset,
+@@ -45,6 +46,9 @@ void nv50_dma_push(struct nouveau_channel *, u64 addr, int length);
+  */
+ #define NOUVEAU_DMA_SKIPS (128 / 4)
+ 
++/* Maximum push buffer size. */
++#define NV50_DMA_PUSH_MAX_LENGTH 0x7fffff
++
+ /* Object handles - for stuff that's doesn't use handle == oclass. */
+ enum {
+ 	NvDmaFB		= 0x80000002,
+@@ -89,7 +93,7 @@ FIRE_RING(struct nouveau_channel *chan)
+ 
+ 	if (chan->dma.ib_max) {
+ 		nv50_dma_push(chan, chan->push.addr + (chan->dma.put << 2),
+-			      (chan->dma.cur - chan->dma.put) << 2);
++			      (chan->dma.cur - chan->dma.put) << 2, true);
+ 	} else {
+ 		WRITE_PUT(chan->dma.cur);
+ 	}
+diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
+index 0f927adda4ed..a123b07b2adf 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_exec.c
++++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
+@@ -164,8 +164,10 @@ nouveau_exec_job_run(struct nouveau_job *job)
+ 	}
+ 
+ 	for (i = 0; i < exec_job->push.count; i++) {
+-		nv50_dma_push(chan, exec_job->push.s[i].va,
+-			      exec_job->push.s[i].va_len);
++		struct drm_nouveau_exec_push *p = &exec_job->push.s[i];
++		bool prefetch = !(p->flags & DRM_NOUVEAU_EXEC_PUSH_NO_PREFETCH);
++
++		nv50_dma_push(chan, p->va, p->va_len, prefetch);
+ 	}
+ 
+ 	ret = nouveau_fence_emit(fence, chan);
+@@ -223,7 +225,14 @@ nouveau_exec_job_init(struct nouveau_exec_job **pjob,
+ {
+ 	struct nouveau_exec_job *job;
+ 	struct nouveau_job_args args = {};
+-	int ret;
++	int i, ret;
++
++	for (i = 0; i < __args->push.count; i++) {
++		struct drm_nouveau_exec_push *p = &__args->push.s[i];
++
++		if (p->va_len > NV50_DMA_PUSH_MAX_LENGTH)
++			return -EINVAL;
++	}
+ 
+ 	job = *pjob = kzalloc(sizeof(*job), GFP_KERNEL);
+ 	if (!job)
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+index f39360870c70..2f3dc4d71657 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+@@ -856,9 +856,11 @@ nouveau_gem_ioctl_pushbuf(struct drm_device *dev, void *data,
+ 		for (i = 0; i < req->nr_push; i++) {
+ 			struct nouveau_vma *vma = (void *)(unsigned long)
+ 				bo[push[i].bo_index].user_priv;
++			u64 addr = vma->addr + push[i].offset;
++			u32 length = push[i].length & ~NOUVEAU_GEM_PUSHBUF_NO_PREFETCH;
++			bool prefetch = !(push[i].length & NOUVEAU_GEM_PUSHBUF_NO_PREFETCH);
+ 
+-			nv50_dma_push(chan, vma->addr + push[i].offset,
+-				      push[i].length);
++			nv50_dma_push(chan, addr, length, prefetch);
+ 		}
+ 	} else
+ 	if (drm->client.device.info.chipset >= 0x25) {
+diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_drm.h
+index b1ad9d5ffce8..8f16724b5d05 100644
+--- a/include/uapi/drm/nouveau_drm.h
++++ b/include/uapi/drm/nouveau_drm.h
+@@ -138,6 +138,7 @@ struct drm_nouveau_gem_pushbuf_push {
+ 	__u32 pad;
+ 	__u64 offset;
+ 	__u64 length;
++#define NOUVEAU_GEM_PUSHBUF_NO_PREFETCH (1 << 23)
+ };
+ 
+ struct drm_nouveau_gem_pushbuf {
+@@ -338,7 +339,12 @@ struct drm_nouveau_exec_push {
+ 	/**
+ 	 * @va_len: the length of the push buffer mapping
+ 	 */
+-	__u64 va_len;
++	__u32 va_len;
++	/**
++	 * flags: the flags for this push buffer mapping
++	 */
++	__u32 flags;
++#define DRM_NOUVEAU_EXEC_PUSH_NO_PREFETCH 0x1
+ };
+ 
+ /**
 
->> drivers/gpu/drm/drm_gpuva_mgr.c:750:1: warning: no previous prototype for 'drm_gpuva_manager_prepare_objects' [-Wmissing-prototypes]
-     750 | drm_gpuva_manager_prepare_objects(struct drm_gpuva_manager *mgr,
-         | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   drivers/gpu/drm/drm_gpuva_mgr.c: In function '__drm_gpuva_sm_map':
-   drivers/gpu/drm/drm_gpuva_mgr.c:1744:39: warning: variable 'prev' set but not used [-Wunused-but-set-variable]
-    1744 |         struct drm_gpuva *va, *next, *prev = NULL;
-         |                                       ^~~~
---
->> drivers/gpu/drm/drm_gpuva_mgr.c:1091: warning: Function parameter or member '__vm_bo' not described in 'drm_gpuva_gem_obtain_prealloc'
-
-
-vim +/drm_gpuva_manager_prepare_objects +750 drivers/gpu/drm/drm_gpuva_mgr.c
-
-   734	
-   735	/**
-   736	 * drm_gpuva_manager_prepare_objects() - prepare all assoiciated BOs
-   737	 * @mgr: the &drm_gpuva_manager
-   738	 * @num_fences: the amount of &dma_fences to reserve
-   739	 *
-   740	 * Calls drm_exec_prepare_obj() for all &drm_gem_objects the given
-   741	 * &drm_gpuva_manager contains mappings of.
-   742	 *
-   743	 * Drivers can obtain the corresponding &drm_exec instance through
-   744	 * DRM_GPUVA_EXEC(). It is the drivers responsibility to call drm_exec_init()
-   745	 * and drm_exec_fini() accordingly.
-   746	 *
-   747	 * Returns: 0 on success, negative error code on failure.
-   748	 */
-   749	int
- > 750	drm_gpuva_manager_prepare_objects(struct drm_gpuva_manager *mgr,
-   751					  unsigned int num_fences)
-   752	{
-   753		struct drm_exec *exec = DRM_GPUVA_EXEC(mgr);
-   754		MA_STATE(mas, &mgr->mt_ext, 0, 0);
-   755		union {
-   756			void *ptr;
-   757			uintptr_t cnt;
-   758		} ref;
-   759		int ret;
-   760	
-   761		ret = drm_exec_prepare_obj(exec, &mgr->d_obj, num_fences);
-   762		if (ret)
-   763			goto out;
-   764	
-   765		rcu_read_lock();
-   766		mas_for_each(&mas, ref.ptr, ULONG_MAX) {
-   767			struct drm_gem_object *obj;
-   768	
-   769			mas_pause(&mas);
-   770			rcu_read_unlock();
-   771	
-   772			obj = (struct drm_gem_object *)(uintptr_t)mas.index;
-   773			ret = drm_exec_prepare_obj(exec, obj, num_fences);
-   774			if (ret)
-   775				goto out;
-   776	
-   777			rcu_read_lock();
-   778		}
-   779		rcu_read_unlock();
-   780	
-   781	out:
-   782		return ret;
-   783	}
-   784	EXPORT_SYMBOL_GPL(drm_gpuva_manager_prepare_objects);
-   785	
-
+base-commit: ad1367f831f8743746a1f49705c28e36a7c95525
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.41.0
+
