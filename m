@@ -1,50 +1,50 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 544EA7837D0
-	for <lists+nouveau@lfdr.de>; Tue, 22 Aug 2023 04:19:06 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8EC65783841
+	for <lists+nouveau@lfdr.de>; Tue, 22 Aug 2023 05:02:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 270E810E030;
-	Tue, 22 Aug 2023 02:19:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9307110E190;
+	Tue, 22 Aug 2023 03:02:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7F0BF10E030;
- Tue, 22 Aug 2023 02:19:00 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 692BF10E2CF;
+ Tue, 22 Aug 2023 03:02:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1692670740; x=1724206740;
+ t=1692673322; x=1724209322;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=59W+lMeV0W1rOuTl6I7R3yHzdGEmYFfi5zODViwOKR8=;
- b=ChDq4RzswOmIXL8+bNStTbzPWSbW6gsgg/hUAkc/H6mWjhURVDhY2UT2
- Qv7aQMeYQADA4myseHqPPxNry9Oxm/v550S+KS1sJemim+w/XjNAQR6oO
- CqLVI3K67kv5BqPAdP7L5uhOXtMH9tGIrPW6uhBB89tey27VYGWOUTA6W
- VN1uZU1G0LcUpvaoWxwKP+tlKmCVc/+NkJUqKOKnls0lVnpzPNWCz8665
- qsIcvahaYujLZqByUUp9GjaFZ7cumr8S98d+F6+LyxPCoW7fd5itIO/5B
- wMYhPxKU4kBLapaQD7P2fsJamhWq45CJ+loHhfewzhx9BvOA55YC00uIH g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10809"; a="372651399"
-X-IronPort-AV: E=Sophos;i="6.01,191,1684825200"; d="scan'208";a="372651399"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+ bh=DrGmF+TINNE7yZWn9DqTXRdXSL+bSJMmgxeURcbpU0E=;
+ b=GZ65t75EIxVQJrRN1RYEo+lQ5oB3w7c3jFx7unnZPV1KFJr8xX21DJXT
+ CUAoK1y/Ry7lbgp07ERNZiuIbgf1mWemGb3yTPhcc8yfEP2qvAkG8SyBq
+ 2xM+5qqnaAIJGYpMTPNoTPTCDuTviMBEwwfKqIVzz5MhQt6afq/nxaaz6
+ oN2CrJp4Le6DTi5fmuFFn1CCWTBHgWHI2V0YOkk9x4Ucnfl8G6X/334aN
+ yephIckMx06NYIE4nFQRufaNHEnXhldMFYpR+12vHVemiPGUEmD5suv62
+ qBPo2Xgr4xY6A6JIx18qYVOP5r1oF1rDy0lwf6BxL3bfT8oWMY4QngqmQ w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10809"; a="372657354"
+X-IronPort-AV: E=Sophos;i="6.01,191,1684825200"; d="scan'208";a="372657354"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 21 Aug 2023 19:18:59 -0700
+ 21 Aug 2023 20:02:01 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10809"; a="826160291"
-X-IronPort-AV: E=Sophos;i="6.01,191,1684825200"; d="scan'208";a="826160291"
+X-IronPort-AV: E=McAfee;i="6600,9927,10809"; a="801491059"
+X-IronPort-AV: E=Sophos;i="6.01,191,1684825200"; d="scan'208";a="801491059"
 Received: from lkp-server02.sh.intel.com (HELO 6809aa828f2a) ([10.239.97.151])
- by FMSMGA003.fm.intel.com with ESMTP; 21 Aug 2023 19:18:55 -0700
+ by fmsmga008.fm.intel.com with ESMTP; 21 Aug 2023 20:01:57 -0700
 Received: from kbuild by 6809aa828f2a with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1qYGys-0001E5-1U;
- Tue, 22 Aug 2023 02:18:54 +0000
-Date: Tue, 22 Aug 2023 10:18:09 +0800
+ (envelope-from <lkp@intel.com>) id 1qYHeW-0001H8-1e;
+ Tue, 22 Aug 2023 03:01:56 +0000
+Date: Tue, 22 Aug 2023 11:01:08 +0800
 From: kernel test robot <lkp@intel.com>
 To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
  matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
  sarah.walker@imgtec.com, donald.robson@imgtec.com,
  boris.brezillon@collabora.com, christian.koenig@amd.com,
  faith.ekstrand@collabora.com, bskeggs@redhat.com, Liam.Howlett@oracle.com
-Message-ID: <202308221021.jCZejWoy-lkp@intel.com>
+Message-ID: <202308221050.kTj8uFMA-lkp@intel.com>
 References: <20230820215320.4187-3-dakr@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
@@ -78,14 +78,14 @@ url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-drm_
 base:   25205087df1ffe06ccea9302944ed1f77dc68c6f
 patch link:    https://lore.kernel.org/r/20230820215320.4187-3-dakr%40redhat.com
 patch subject: [PATCH drm-misc-next 2/3] drm/gpuva_mgr: generalize dma_resv/extobj handling and GEM validation
-config: sparc-randconfig-r022-20230822 (https://download.01.org/0day-ci/archive/20230822/202308221021.jCZejWoy-lkp@intel.com/config)
-compiler: sparc64-linux-gcc (GCC) 12.3.0
-reproduce: (https://download.01.org/0day-ci/archive/20230822/202308221021.jCZejWoy-lkp@intel.com/reproduce)
+config: arm-randconfig-r014-20230822 (https://download.01.org/0day-ci/archive/20230822/202308221050.kTj8uFMA-lkp@intel.com/config)
+compiler: arm-linux-gnueabi-gcc (GCC) 12.3.0
+reproduce: (https://download.01.org/0day-ci/archive/20230822/202308221050.kTj8uFMA-lkp@intel.com/reproduce)
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202308221021.jCZejWoy-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202308221050.kTj8uFMA-lkp@intel.com/
 
 All warnings (new ones prefixed by >>):
 
@@ -96,6 +96,8 @@ All warnings (new ones prefixed by >>):
    drivers/gpu/drm/drm_gpuva_mgr.c:1744:39: warning: variable 'prev' set but not used [-Wunused-but-set-variable]
     1744 |         struct drm_gpuva *va, *next, *prev = NULL;
          |                                       ^~~~
+--
+>> drivers/gpu/drm/drm_gpuva_mgr.c:1091: warning: Function parameter or member '__vm_bo' not described in 'drm_gpuva_gem_obtain_prealloc'
 
 
 vim +/drm_gpuva_manager_prepare_objects +750 drivers/gpu/drm/drm_gpuva_mgr.c
