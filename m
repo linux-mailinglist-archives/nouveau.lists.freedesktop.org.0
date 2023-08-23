@@ -1,82 +1,74 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE7B4785A89
-	for <lists+nouveau@lfdr.de>; Wed, 23 Aug 2023 16:32:05 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 16403785F75
+	for <lists+nouveau@lfdr.de>; Wed, 23 Aug 2023 20:18:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7298510E42E;
-	Wed, 23 Aug 2023 14:32:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C7C5010E0BF;
+	Wed, 23 Aug 2023 18:17:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 184C010E437
- for <nouveau@lists.freedesktop.org>; Wed, 23 Aug 2023 14:32:01 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CBC7B10E0B8
+ for <nouveau@lists.freedesktop.org>; Wed, 23 Aug 2023 18:17:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1692801121;
+ s=mimecast20190719; t=1692814672;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=GzdoCs2Mn27/sh3oWYgFmEgOxiDPY2yxYeRmbUpWAOY=;
- b=Ul+fLz6cwzESlZIgU9/+1gAJ+F+pwvRic/ILmLJLMYcR4QKw6NL+KMlN3esdcbrCqBTRh9
- E1PednEjmHM0bNLJ22ybM90cR8hpygHHGTYIvYEXm2fLCwbrhP9dnsLXXHb2LUPrnXSNG+
- uhr+qGGr7LmL8TzC8Oa5ursfDVGK2S4=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding;
+ bh=IpGOgmUhWVtfg8Jy3IQADlYUp+uCywa6wHJzm22n/zo=;
+ b=J6SpqVphlJQzK908oAzpz/Pm1BD4V18CtuQp7tiiUWhqp4gxGlQl8ETsX3WjTcAbG+Y8cd
+ dcHvwwD9R8j0BGlKJ1Vx1xmk5mZTXw5emxxQ0GmI/P4DjWi0E3lgg7w6BP0ge6y61Khn5k
+ 3+eP1gJLYncMujUp6dDRWOLHIOk8lRQ=
+Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
+ [209.85.167.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-645-0vS9lvy0MZGlepD-8WSuIg-1; Wed, 23 Aug 2023 10:31:59 -0400
-X-MC-Unique: 0vS9lvy0MZGlepD-8WSuIg-1
-Received: by mail-ej1-f71.google.com with SMTP id
- a640c23a62f3a-99bcf6ae8e1so420880066b.0
- for <nouveau@lists.freedesktop.org>; Wed, 23 Aug 2023 07:31:59 -0700 (PDT)
+ us-mta-625-DGWRBWTgMXSmFyX_87NSxw-1; Wed, 23 Aug 2023 14:17:51 -0400
+X-MC-Unique: DGWRBWTgMXSmFyX_87NSxw-1
+Received: by mail-lf1-f70.google.com with SMTP id
+ 2adb3069b0e04-500983fde5fso854899e87.1
+ for <nouveau@lists.freedesktop.org>; Wed, 23 Aug 2023 11:17:50 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692801118; x=1693405918;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20221208; t=1692814670; x=1693419470;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=GzdoCs2Mn27/sh3oWYgFmEgOxiDPY2yxYeRmbUpWAOY=;
- b=NVd9bme5lPiklIGuC2xfaBUFE2teNtgTOzSNxMONMZLs7tP4gY5ustP/di+xVKONGD
- MJU9RNtmV7DHtxE1OGgVqfI13MNcAZCAgGJpcZdMu+c1d4vibhvPurAVjWE2RKkHN3kr
- oHpYy+ih9lv3+5pZNnjwVyzolTJeYsC8kt0WajTjkmsd1k+LqwGTyrYhWDTXs8AAtj2E
- avizxeFISTbl89w8HtbVk+xyl8ALiyFW2gw/UacB4pElwurlrd4TN3yqPVTrXjwNmUQA
- 8Q0G5bLXELnozjEAV2xdRkoyCN3dkOs58MobkjwXez+zltQmyXLU5WA5OI5gvwO1d5I6
- eS1A==
-X-Gm-Message-State: AOJu0YxuVvP8SOvuPD0/k8GpQxabA9+dudXh9HXVpKJiqkpCEXjf1ifm
- 4njn115xEwGCNL1zmbe2CS7QZNNKZvIcZUMhnWROVuokuyeEjxUQdnbWCgfKsYN73kxRZ910cka
- /5XdoXt3XxxtkS7rwXNnEflehKw==
-X-Received: by 2002:a17:907:b15:b0:99b:ddac:d9d9 with SMTP id
- h21-20020a1709070b1500b0099bddacd9d9mr9977993ejl.53.1692801118467; 
- Wed, 23 Aug 2023 07:31:58 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHZe+M+2IV0Biir6gicbEcM3wtv1kibH9AhosiD4ierXNGvPNyLBv2sq9vftQipzU9U4NlSog==
-X-Received: by 2002:a17:907:b15:b0:99b:ddac:d9d9 with SMTP id
- h21-20020a1709070b1500b0099bddacd9d9mr9977977ejl.53.1692801118169; 
- Wed, 23 Aug 2023 07:31:58 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
- ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
+ bh=IpGOgmUhWVtfg8Jy3IQADlYUp+uCywa6wHJzm22n/zo=;
+ b=ZSfo6xjBYf1Stag61mrjVpOruBO/21VSjC3v/pbNuBaaXNtZ0qwNvDN4nIhgIeD3SU
+ y5fdNkAwSSOVNa1gakHBELvN7mUK9oSVXtlavGYuoXI1tyk106VglGJVQBqalIIXRp1H
+ Vpfw+n28UyqB/xp1UFnJDX/jrvODMhahej87aobOTEiMXvYbVdv9zFRJj7TTfK2I7AOe
+ r554Sknb5DLYnl8/JcNi8bQiL2ZDO4Imsyt7+bwn5OXX4ESRNy4yck7eQJWOw/G+rGwk
+ 59Nbv2V80/qtBAo+0B0UZHeDuLFWIiMMPG4Pu2Iqpv3tx6Xj2Q6OQeT1rJ4VwGF+DfQ9
+ 4NtQ==
+X-Gm-Message-State: AOJu0YzqBxoL+qGzmDM/2kNAwqL0nvvyJFj1tzcqV58ShIIv1TEEfJVh
+ Z58olAmXx3+mNXe8qNu0zngK0ipp1FJOlsp6f1+NQOygyN7NSrkTYrn4aZC1tC5KHogy/hXAqlM
+ /DL1yY0G19eRWlLm1Bq/BGRY9kQ==
+X-Received: by 2002:a05:6512:114d:b0:4fe:551:3d3c with SMTP id
+ m13-20020a056512114d00b004fe05513d3cmr12961861lfg.36.1692814669706; 
+ Wed, 23 Aug 2023 11:17:49 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH6JGjGQ3uz1IK5zG2DuJQq8IbLQzB40mEuCaXuWP4QnqW0uNlzYwWYYNGFOkZYRVm3DCtwBg==
+X-Received: by 2002:a05:6512:114d:b0:4fe:551:3d3c with SMTP id
+ m13-20020a056512114d00b004fe05513d3cmr12961845lfg.36.1692814669303; 
+ Wed, 23 Aug 2023 11:17:49 -0700 (PDT)
+Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- mj14-20020a170906af8e00b0099c53c4407dsm9835727ejb.78.2023.08.23.07.31.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 23 Aug 2023 07:31:57 -0700 (PDT)
-Message-ID: <19d68804-87f4-5f89-4a63-b85a9b204cd0@redhat.com>
-Date: Wed, 23 Aug 2023 14:36:02 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-To: Faith Ekstrand <faith@gfxstrand.net>
-References: <20230822234139.11185-1-dakr@redhat.com>
- <CAOFGe978DoPqTqoFAMv84fcuyLR47fkGZ3NCn4dyD69i4QoobQ@mail.gmail.com>
+ e14-20020a50fb8e000000b00523653295f9sm9652314edq.94.2023.08.23.11.17.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Aug 2023 11:17:48 -0700 (PDT)
 From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <CAOFGe978DoPqTqoFAMv84fcuyLR47fkGZ3NCn4dyD69i4QoobQ@mail.gmail.com>
+To: airlied@gmail.com, daniel@ffwll.ch, bskeggs@redhat.com, kherbst@redhat.com,
+ lyude@redhat.com, faith.ekstrand@collabora.com
+Date: Wed, 23 Aug 2023 20:15:34 +0200
+Message-ID: <20230823181746.3446-1-dakr@redhat.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH drm-misc-next] drm/nouveau: uapi: don't pass
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
+Subject: [Nouveau] [PATCH drm-misc-next v2] drm/nouveau: uapi: don't pass
  NO_PREFETCH flag implicitly
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -90,194 +82,179 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, bskeggs@redhat.com, daniel@ffwll.ch,
- faith.ekstrand@collabora.com
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 8/23/23 04:53, Faith Ekstrand wrote:
-> On Tue, Aug 22, 2023 at 6:41 PM Danilo Krummrich <dakr@redhat.com <mailto:dakr@redhat.com>> wrote:
-> 
->     Currently, NO_PREFETCH is passed implicitly through
->     drm_nouveau_gem_pushbuf_push::length and drm_nouveau_exec_push::va_len.
-> 
->     Since this is a direct representation of how the HW is programmed it
->     isn't really future proof for a uAPI. Hence, fix this up for the new
->     uAPI and split up the va_len field of struct drm_nouveau_exec_push,
->     such that we keep 32bit for va_len and 32bit for flags.
-> 
->     For drm_nouveau_gem_pushbuf_push::length at least provide
->     NOUVEAU_GEM_PUSHBUF_NO_PREFETCH to indicate the bit shift.
-> 
->     While at it, fix up nv50_dma_push() as well, such that the caller
->     doesn't need to encode the NO_PREFETCH flag into the length parameter.
-> 
->     Signed-off-by: Danilo Krummrich <dakr@redhat.com <mailto:dakr@redhat.com>>
->     ---
->       drivers/gpu/drm/nouveau/nouveau_dma.c  |  7 +++++--
->       drivers/gpu/drm/nouveau/nouveau_dma.h  |  8 ++++++--
->       drivers/gpu/drm/nouveau/nouveau_exec.c | 15 ++++++++++++---
->       drivers/gpu/drm/nouveau/nouveau_gem.c  |  6 ++++--
->       include/uapi/drm/nouveau_drm.h         |  8 +++++++-
->       5 files changed, 34 insertions(+), 10 deletions(-)
-> 
->     diff --git a/drivers/gpu/drm/nouveau/nouveau_dma.c b/drivers/gpu/drm/nouveau/nouveau_dma.c
->     index b90cac6d5772..059925e5db6a 100644
->     --- a/drivers/gpu/drm/nouveau/nouveau_dma.c
->     +++ b/drivers/gpu/drm/nouveau/nouveau_dma.c
->     @@ -69,16 +69,19 @@ READ_GET(struct nouveau_channel *chan, uint64_t *prev_get, int *timeout)
->       }
-> 
->       void
->     -nv50_dma_push(struct nouveau_channel *chan, u64 offset, int length)
->     +nv50_dma_push(struct nouveau_channel *chan, u64 offset, u32 length,
->     +             bool prefetch)
->       {
->              struct nvif_user *user = &chan->drm->client.device.user;
->              struct nouveau_bo *pb = chan->push.buffer;
->              int ip = (chan->dma.ib_put * 2) + chan->dma.ib_base;
-> 
->              BUG_ON(chan->dma.ib_free < 1);
->     +       WARN_ON(length > NV50_DMA_PUSH_MAX_LENGTH);
-> 
->              nouveau_bo_wr32(pb, ip++, lower_32_bits(offset));
->     -       nouveau_bo_wr32(pb, ip++, upper_32_bits(offset) | length << 8);
->     +       nouveau_bo_wr32(pb, ip++, upper_32_bits(offset) | length << 8 |
->     +                       (prefetch ? 0 : (1 << 31)));
-> 
-> 
-> It feels a bit weird to be inverting this bit twice. IDK that it matters, though.
+Currently, NO_PREFETCH is passed implicitly through
+drm_nouveau_gem_pushbuf_push::length and drm_nouveau_exec_push::va_len.
 
-I usually avoid negated argument names, in this case it kinda makes sense though.
+Since this is a direct representation of how the HW is programmed it
+isn't really future proof for a uAPI. Hence, fix this up for the new
+uAPI and split up the va_len field of struct drm_nouveau_exec_push,
+such that we keep 32bit for va_len and 32bit for flags.
 
-> 
-> 
->              chan->dma.ib_put = (chan->dma.ib_put + 1) & chan->dma.ib_max;
-> 
->     diff --git a/drivers/gpu/drm/nouveau/nouveau_dma.h b/drivers/gpu/drm/nouveau/nouveau_dma.h
->     index 035a709c7be1..fb471c357336 100644
->     --- a/drivers/gpu/drm/nouveau/nouveau_dma.h
->     +++ b/drivers/gpu/drm/nouveau/nouveau_dma.h
->     @@ -31,7 +31,8 @@
->       #include "nouveau_chan.h"
-> 
->       int nouveau_dma_wait(struct nouveau_channel *, int slots, int size);
->     -void nv50_dma_push(struct nouveau_channel *, u64 addr, int length);
->     +void nv50_dma_push(struct nouveau_channel *, u64 addr, u32 length,
->     +                  bool prefetch);
-> 
->       /*
->        * There's a hw race condition where you can't jump to your PUT offset,
->     @@ -45,6 +46,9 @@ void nv50_dma_push(struct nouveau_channel *, u64 addr, int length);
->        */
->       #define NOUVEAU_DMA_SKIPS (128 / 4)
-> 
->     +/* Maximum push buffer size. */
->     +#define NV50_DMA_PUSH_MAX_LENGTH 0x7fffff
->     +
->       /* Object handles - for stuff that's doesn't use handle == oclass. */
->       enum {
->              NvDmaFB         = 0x80000002,
->     @@ -89,7 +93,7 @@ FIRE_RING(struct nouveau_channel *chan)
-> 
->              if (chan->dma.ib_max) {
->                      nv50_dma_push(chan, chan->push.addr + (chan->dma.put << 2),
->     -                             (chan->dma.cur - chan->dma.put) << 2);
->     +                             (chan->dma.cur - chan->dma.put) << 2, true);
->              } else {
->                      WRITE_PUT(chan->dma.cur);
->              }
->     diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
->     index 0f927adda4ed..a123b07b2adf 100644
->     --- a/drivers/gpu/drm/nouveau/nouveau_exec.c
->     +++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
->     @@ -164,8 +164,10 @@ nouveau_exec_job_run(struct nouveau_job *job)
->              }
-> 
->              for (i = 0; i < exec_job->push.count; i++) {
->     -               nv50_dma_push(chan, exec_job->push.s[i].va,
->     -                             exec_job->push.s[i].va_len);
->     +               struct drm_nouveau_exec_push *p = &exec_job->push.s[i];
->     +               bool prefetch = !(p->flags & DRM_NOUVEAU_EXEC_PUSH_NO_PREFETCH);
->     +
->     +               nv50_dma_push(chan, p->va, p->va_len, prefetch);
->              }
-> 
->              ret = nouveau_fence_emit(fence, chan);
->     @@ -223,7 +225,14 @@ nouveau_exec_job_init(struct nouveau_exec_job **pjob,
->       {
->              struct nouveau_exec_job *job;
->              struct nouveau_job_args args = {};
->     -       int ret;
->     +       int i, ret;
->     +
->     +       for (i = 0; i < __args->push.count; i++) {
->     +               struct drm_nouveau_exec_push *p = &__args->push.s[i];
->     +
->     +               if (p->va_len > NV50_DMA_PUSH_MAX_LENGTH)
->     +                       return -EINVAL;
-> 
-> 
-> This can probably be wrapped in unlikely().  Also, it'd be nice if we printed an error message like we do if you try to push too many things.
+For drm_nouveau_gem_pushbuf_push::length at least provide
+NOUVEAU_GEM_PUSHBUF_NO_PREFETCH to indicate the bit shift.
 
-Yep, will do.
+While at it, fix up nv50_dma_push() as well, such that the caller
+doesn't need to encode the NO_PREFETCH flag into the length parameter.
 
-> 
-> Looks good. Thanks!
-> 
-> Reviewed-by: Faith Ekstrand <faith.ekstrand@collabora.com <mailto:faith.ekstrand@collabora.com>>
-> 
->     +       }
-> 
->              job = *pjob = kzalloc(sizeof(*job), GFP_KERNEL);
->              if (!job)
->     diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
->     index f39360870c70..2f3dc4d71657 100644
->     --- a/drivers/gpu/drm/nouveau/nouveau_gem.c
->     +++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
->     @@ -856,9 +856,11 @@ nouveau_gem_ioctl_pushbuf(struct drm_device *dev, void *data,
->                      for (i = 0; i < req->nr_push; i++) {
->                              struct nouveau_vma *vma = (void *)(unsigned long)
->                                      bo[push[i].bo_index].user_priv;
->     +                       u64 addr = vma->addr + push[i].offset;
->     +                       u32 length = push[i].length & ~NOUVEAU_GEM_PUSHBUF_NO_PREFETCH;
->     +                       bool prefetch = !(push[i].length & NOUVEAU_GEM_PUSHBUF_NO_PREFETCH);
-> 
->     -                       nv50_dma_push(chan, vma->addr + push[i].offset,
->     -                                     push[i].length);
->     +                       nv50_dma_push(chan, addr, length, prefetch);
->                      }
->              } else
->              if (drm->client.device.info <http://client.device.info>.chipset >= 0x25) {
->     diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_drm.h
->     index b1ad9d5ffce8..8f16724b5d05 100644
->     --- a/include/uapi/drm/nouveau_drm.h
->     +++ b/include/uapi/drm/nouveau_drm.h
->     @@ -138,6 +138,7 @@ struct drm_nouveau_gem_pushbuf_push {
->              __u32 pad;
->              __u64 offset;
->              __u64 length;
->     +#define NOUVEAU_GEM_PUSHBUF_NO_PREFETCH (1 << 23)
->       };
-> 
->       struct drm_nouveau_gem_pushbuf {
->     @@ -338,7 +339,12 @@ struct drm_nouveau_exec_push {
->              /**
->               * @va_len: the length of the push buffer mapping
->               */
->     -       __u64 va_len;
->     +       __u32 va_len;
->     +       /**
->     +        * flags: the flags for this push buffer mapping
->     +        */
->     +       __u32 flags;
->     +#define DRM_NOUVEAU_EXEC_PUSH_NO_PREFETCH 0x1
->       };
-> 
->       /**
-> 
->     base-commit: ad1367f831f8743746a1f49705c28e36a7c95525
->     -- 
->     2.41.0
-> 
+Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+---
+Changes in v2:
+  - dma: rename prefetch to no_prefetch in nv50_dma_push() (Faith)
+  - exec: print error message when pushbuf size larger max pushbuf size (Faith)
+---
+ drivers/gpu/drm/nouveau/nouveau_dma.c  |  7 +++++--
+ drivers/gpu/drm/nouveau/nouveau_dma.h  |  8 ++++++--
+ drivers/gpu/drm/nouveau/nouveau_exec.c | 19 ++++++++++++++++---
+ drivers/gpu/drm/nouveau/nouveau_gem.c  |  6 ++++--
+ include/uapi/drm/nouveau_drm.h         |  8 +++++++-
+ 5 files changed, 38 insertions(+), 10 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_dma.c b/drivers/gpu/drm/nouveau/nouveau_dma.c
+index b90cac6d5772..b01c029f3a90 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_dma.c
++++ b/drivers/gpu/drm/nouveau/nouveau_dma.c
+@@ -69,16 +69,19 @@ READ_GET(struct nouveau_channel *chan, uint64_t *prev_get, int *timeout)
+ }
+ 
+ void
+-nv50_dma_push(struct nouveau_channel *chan, u64 offset, int length)
++nv50_dma_push(struct nouveau_channel *chan, u64 offset, u32 length,
++	      bool no_prefetch)
+ {
+ 	struct nvif_user *user = &chan->drm->client.device.user;
+ 	struct nouveau_bo *pb = chan->push.buffer;
+ 	int ip = (chan->dma.ib_put * 2) + chan->dma.ib_base;
+ 
+ 	BUG_ON(chan->dma.ib_free < 1);
++	WARN_ON(length > NV50_DMA_PUSH_MAX_LENGTH);
+ 
+ 	nouveau_bo_wr32(pb, ip++, lower_32_bits(offset));
+-	nouveau_bo_wr32(pb, ip++, upper_32_bits(offset) | length << 8);
++	nouveau_bo_wr32(pb, ip++, upper_32_bits(offset) | length << 8 |
++			(no_prefetch ? (1 << 31) : 0));
+ 
+ 	chan->dma.ib_put = (chan->dma.ib_put + 1) & chan->dma.ib_max;
+ 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_dma.h b/drivers/gpu/drm/nouveau/nouveau_dma.h
+index 035a709c7be1..1744d95b233e 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_dma.h
++++ b/drivers/gpu/drm/nouveau/nouveau_dma.h
+@@ -31,7 +31,8 @@
+ #include "nouveau_chan.h"
+ 
+ int nouveau_dma_wait(struct nouveau_channel *, int slots, int size);
+-void nv50_dma_push(struct nouveau_channel *, u64 addr, int length);
++void nv50_dma_push(struct nouveau_channel *, u64 addr, u32 length,
++		   bool no_prefetch);
+ 
+ /*
+  * There's a hw race condition where you can't jump to your PUT offset,
+@@ -45,6 +46,9 @@ void nv50_dma_push(struct nouveau_channel *, u64 addr, int length);
+  */
+ #define NOUVEAU_DMA_SKIPS (128 / 4)
+ 
++/* Maximum push buffer size. */
++#define NV50_DMA_PUSH_MAX_LENGTH 0x7fffff
++
+ /* Object handles - for stuff that's doesn't use handle == oclass. */
+ enum {
+ 	NvDmaFB		= 0x80000002,
+@@ -89,7 +93,7 @@ FIRE_RING(struct nouveau_channel *chan)
+ 
+ 	if (chan->dma.ib_max) {
+ 		nv50_dma_push(chan, chan->push.addr + (chan->dma.put << 2),
+-			      (chan->dma.cur - chan->dma.put) << 2);
++			      (chan->dma.cur - chan->dma.put) << 2, false);
+ 	} else {
+ 		WRITE_PUT(chan->dma.cur);
+ 	}
+diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
+index 0f927adda4ed..a90c4cd8cbb2 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_exec.c
++++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
+@@ -164,8 +164,10 @@ nouveau_exec_job_run(struct nouveau_job *job)
+ 	}
+ 
+ 	for (i = 0; i < exec_job->push.count; i++) {
+-		nv50_dma_push(chan, exec_job->push.s[i].va,
+-			      exec_job->push.s[i].va_len);
++		struct drm_nouveau_exec_push *p = &exec_job->push.s[i];
++		bool no_prefetch = p->flags & DRM_NOUVEAU_EXEC_PUSH_NO_PREFETCH;
++
++		nv50_dma_push(chan, p->va, p->va_len, no_prefetch);
+ 	}
+ 
+ 	ret = nouveau_fence_emit(fence, chan);
+@@ -223,7 +225,18 @@ nouveau_exec_job_init(struct nouveau_exec_job **pjob,
+ {
+ 	struct nouveau_exec_job *job;
+ 	struct nouveau_job_args args = {};
+-	int ret;
++	int i, ret;
++
++	for (i = 0; i < __args->push.count; i++) {
++		struct drm_nouveau_exec_push *p = &__args->push.s[i];
++
++		if (unlikely(p->va_len > NV50_DMA_PUSH_MAX_LENGTH)) {
++			NV_PRINTK(err, nouveau_cli(__args->file_priv),
++				  "pushbuf size exceeds limit: 0x%x max 0x%x\n",
++				  p->va_len, NV50_DMA_PUSH_MAX_LENGTH);
++			return -EINVAL;
++		}
++	}
+ 
+ 	job = *pjob = kzalloc(sizeof(*job), GFP_KERNEL);
+ 	if (!job)
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+index f39360870c70..c0b10d8d3d03 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+@@ -856,9 +856,11 @@ nouveau_gem_ioctl_pushbuf(struct drm_device *dev, void *data,
+ 		for (i = 0; i < req->nr_push; i++) {
+ 			struct nouveau_vma *vma = (void *)(unsigned long)
+ 				bo[push[i].bo_index].user_priv;
++			u64 addr = vma->addr + push[i].offset;
++			u32 length = push[i].length & ~NOUVEAU_GEM_PUSHBUF_NO_PREFETCH;
++			bool no_prefetch = push[i].length & NOUVEAU_GEM_PUSHBUF_NO_PREFETCH;
+ 
+-			nv50_dma_push(chan, vma->addr + push[i].offset,
+-				      push[i].length);
++			nv50_dma_push(chan, addr, length, no_prefetch);
+ 		}
+ 	} else
+ 	if (drm->client.device.info.chipset >= 0x25) {
+diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_drm.h
+index b1ad9d5ffce8..8f16724b5d05 100644
+--- a/include/uapi/drm/nouveau_drm.h
++++ b/include/uapi/drm/nouveau_drm.h
+@@ -138,6 +138,7 @@ struct drm_nouveau_gem_pushbuf_push {
+ 	__u32 pad;
+ 	__u64 offset;
+ 	__u64 length;
++#define NOUVEAU_GEM_PUSHBUF_NO_PREFETCH (1 << 23)
+ };
+ 
+ struct drm_nouveau_gem_pushbuf {
+@@ -338,7 +339,12 @@ struct drm_nouveau_exec_push {
+ 	/**
+ 	 * @va_len: the length of the push buffer mapping
+ 	 */
+-	__u64 va_len;
++	__u32 va_len;
++	/**
++	 * flags: the flags for this push buffer mapping
++	 */
++	__u32 flags;
++#define DRM_NOUVEAU_EXEC_PUSH_NO_PREFETCH 0x1
+ };
+ 
+ /**
+
+base-commit: b4e9fa933551e51459c634dc4396171dc65284a6
+-- 
+2.41.0
 
