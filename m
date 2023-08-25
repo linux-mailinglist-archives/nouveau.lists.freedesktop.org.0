@@ -1,49 +1,37 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F485786EF5
-	for <lists+nouveau@lfdr.de>; Thu, 24 Aug 2023 14:24:24 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id AC1BC787FFA
+	for <lists+nouveau@lfdr.de>; Fri, 25 Aug 2023 08:36:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 946D810E543;
-	Thu, 24 Aug 2023 12:24:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 23AE710E611;
+	Fri, 25 Aug 2023 06:36:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 06B7410E541;
- Thu, 24 Aug 2023 12:24:13 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 5DFEA60C4F;
- Thu, 24 Aug 2023 12:24:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC2CBC433C7;
- Thu, 24 Aug 2023 12:24:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1692879851;
- bh=rXHeHAFXjN/zA3rYC/1HhA1l11PWkd2Qvj22VCRsCGs=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=CqOlaS/QfUs5XXJTiSG68eVAETcwld0Oyyw2XmGw3vbPcDbOEpspeApsyEBSY0lzY
- BJl4NEsEvECi0Fn66tjoluhCVVSbj/3Fe3eaBPUimBzycU6Ew02hPKbed/8je8CkRf
- 1+WsWnIyZzbwSlIn/6j5RP45+CkV50Bn18C+mlY07Wd9kkPeHC9Xv+VQYWAGMT8iqG
- LXQzMPYXHDBPiYetArnubErS0XhVoCULd5vNPc0T7OZ+5eZRVXxQpCJkyh5R3oVYEa
- qX2bk7/9/M9K5EutOOlmwBQ30zkp0qc/t1PRSgiuL+KJDx47ih8QPQIzlYGQ4Wflwi
- HyIl1AsJiWaIg==
-Date: Thu, 24 Aug 2023 13:24:01 +0100
-From: Lee Jones <lee@kernel.org>
-To: Hamza Mahfooz <hamza.mahfooz@amd.com>
-Message-ID: <20230824122401.GY1380343@google.com>
-References: <20230824073710.2677348-1-lee@kernel.org>
- <87wmxk4xt3.fsf@intel.com> <20230824120735.GS1380343@google.com>
- <a3c4c781-2f74-4b09-9db4-7b947897ef5a@amd.com>
+Received: from out-11.mta1.migadu.com (out-11.mta1.migadu.com
+ [IPv6:2001:41d0:203:375::b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 490E910E60F
+ for <nouveau@lists.freedesktop.org>; Fri, 25 Aug 2023 06:36:32 +0000 (UTC)
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+ t=1692944846;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=z6lCf1m2RyO5hkgphNEZhqasAxN18arSPKN7RCy/gyY=;
+ b=sioG6nFDTUAy8CFxpG2MThcPbp+5KyEr17L9Uls/hwtb2QPUXiazjl+Brl/nDImrMd+Hpl
+ fDCVMataoUSDuIWTtNcfkr1kXbnEtIKwI7qjJqfvu4pQwod98SEZV7YZHEqi36V1RaNbfM
+ u1kUllzdxvMc3XelSI1oDxUiV4dxKQM=
+From: Sui Jingfeng <sui.jingfeng@linux.dev>
+To: Bjorn Helgaas <bhelgaas@google.com>
+Date: Fri, 25 Aug 2023 14:27:09 +0800
+Message-Id: <20230825062714.6325-1-sui.jingfeng@linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <a3c4c781-2f74-4b09-9db4-7b947897ef5a@amd.com>
-Subject: Re: [Nouveau] [PATCH (set 1) 00/20] Rid W=1 warnings from GPU
+X-Migadu-Flow: FLOW_OUT
+Subject: [Nouveau] [PATCH 0/5] Add the pci_get_base_class() helper and use it
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,68 +43,48 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Mikko Perttunen <mperttunen@nvidia.com>,
- =?iso-8859-1?Q?Ma=EDra?= Canal <mairacanal@riseup.net>,
- Thierry Reding <thierry.reding@gmail.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Mario Limonciello <mario.limonciello@amd.com>,
- Shashank Sharma <shashank.sharma@amd.com>,
- Michal Simek <michal.simek@xilinx.com>, amd-gfx@lists.freedesktop.org,
- Luben Tuikov <luben.tuikov@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
- Stanley Yang <Stanley.Yang@amd.com>, linux-media@vger.kernel.org,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Sascha Hauer <s.hauer@pengutronix.de>, Maxime Ripard <mripard@kernel.org>,
- linaro-mm-sig@lists.linaro.org, Jani Nikula <jani.nikula@linux.intel.com>,
- linux-tegra@vger.kernel.org, NXP Linux Team <linux-imx@nxp.com>,
- linux-arm-kernel@lists.infradead.org, Hyun Kwon <hyun.kwon@xilinx.com>, "Pan,
- Xinhui" <Xinhui.Pan@amd.com>, linux-kernel@vger.kernel.org,
- Jerome Glisse <glisse@freedesktop.org>,
- Alex Deucher <alexander.deucher@amd.com>, Gourav Samaiya <gsamaiya@nvidia.com>,
- Shawn Guo <shawnguo@kernel.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Hawking Zhang <Hawking.Zhang@amd.com>
+Cc: alsa-devel@alsa-project.org, Sui Jingfeng <suijingfeng@loongson.cn>,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ linux-pci@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 24 Aug 2023, Hamza Mahfooz wrote:
+From: Sui Jingfeng <suijingfeng@loongson.cn>
 
-> 
-> On 8/24/23 08:07, Lee Jones wrote:
-> > On Thu, 24 Aug 2023, Jani Nikula wrote:
-> > 
-> > > On Thu, 24 Aug 2023, Lee Jones <lee@kernel.org> wrote:
-> > > > This set is part of a larger effort attempting to clean-up W=1
-> > > > kernel builds, which are currently overwhelmingly riddled with
-> > > > niggly little warnings.
-> > > 
-> > > The next question is, how do we keep it W=1 clean going forward?
-> > 
-> > My plan was to fix them all, then move each warning to W=0.
-> > 
-> > Arnd recently submitted a set doing just that for a bunch of them.
-> > 
-> > https://lore.kernel.org/all/20230811140327.3754597-1-arnd@kernel.org/
-> > 
-> > I like to think a bunch of this is built on top of my previous efforts.
-> > 
-> > GPU is a particularly tricky though - the warnings seem to come in faster
-> > than I can squash them.  Maybe the maintainers can find a way to test
-> > new patches on merge?
-> 
-> I guess on that note, do you know if there is a way to run
-> `scripts/kernel-doc` on patches instead of whole files? That would make
-> much easier to block new kernel-doc issues from appearing.
+There is no function that can be used to get all PCI(e) devices in a
+system by matching against its the PCI base class code only, while keep
+the sub-class code and the programming interface ignored. Therefore, add
+the pci_get_base_class() function to suit the need.
 
-Not off hand.
+For example, if an application want to process all PCI(e) display devices
+in a system, it can achieve such goal by writing the code as following:
 
-When I run builds on patches I author, I run them twice concurrently.
-Once on the commit I'm basing on and once on the HEAD of my patchset.  I
-then diff the two.  So as long as the number of errors and warnings stay
-the same or reduce, we're golden.
+    pdev = NULL;
+    do {
+        pdev = pci_get_base_class(PCI_BASE_CLASS_DISPLAY, pdev);
+        if (!pdev)
+            break;
 
-Perhaps the same method could be used with `kernel-doc`?
+        do_something_for_pci_display_device(pdev);
+    } while (1);
+
+Sui Jingfeng (5):
+  PCI: Add the pci_get_base_class() helper
+  ALSA: hda/intel: Use pci_get_base_class() to reduce duplicated code
+  drm/nouveau: Use pci_get_base_class() to reduce duplicated code
+  drm/amdgpu: Use pci_get_base_class() to reduce duplicated code
+  drm/radeon: Use pci_get_base_class() to reduce duplicated code
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c | 11 +++------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_bios.c | 20 ++++-----------
+ drivers/gpu/drm/nouveau/nouveau_acpi.c   | 11 +++------
+ drivers/gpu/drm/radeon/radeon_bios.c     | 20 ++++-----------
+ drivers/pci/search.c                     | 31 ++++++++++++++++++++++++
+ include/linux/pci.h                      |  5 ++++
+ sound/pci/hda/hda_intel.c                | 16 ++++--------
+ 7 files changed, 59 insertions(+), 55 deletions(-)
 
 -- 
-Lee Jones [李琼斯]
+2.34.1
+
