@@ -1,72 +1,72 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E89D378D5F7
-	for <lists+nouveau@lfdr.de>; Wed, 30 Aug 2023 14:49:53 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A9EBE78D607
+	for <lists+nouveau@lfdr.de>; Wed, 30 Aug 2023 15:06:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A596110E148;
-	Wed, 30 Aug 2023 12:49:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 97D9310E526;
+	Wed, 30 Aug 2023 13:06:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B44BF10E148
- for <nouveau@lists.freedesktop.org>; Wed, 30 Aug 2023 12:49:47 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B868010E51E
+ for <nouveau@lists.freedesktop.org>; Wed, 30 Aug 2023 13:06:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1693399786;
+ s=mimecast20190719; t=1693400763;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=CZczhgMtv+NfWj7yDw1AE3SgV7MVcfMCV4bIcEv0st4=;
- b=BU56qOCd/9vyewKshJkgHhVCXRHHsBlYkaWpst0gdRGtrCEuElgDAqMm3mOIXtuKCBlD4N
- AyoOXUYiMFj+BNd9lHTN8fjdXPMKim11MSi9aM8bFd+i1TspPavLkArEpRe2M0yO6lyX/N
- DaIGrfbLNZdA3Xh3dX3feFbfz/AsUyY=
-Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
- [209.85.208.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=CPKNXPGsiBnCVI3cMrPrBzoHlkoYerQGiSS7oux+9Sk=;
+ b=eFFk0MQmBzHOdsikVM2/su++hPRnNxXNlsJfu9ubYHXrjAJSV/Rofnaok+LBZtS33/++cc
+ 7Kq8hTuZBqY5882uNGIurD6XLlPRdJ7xUf2ZFEcAu9oJ/HsyJU0vLOzwRBOE07Fiy4irJx
+ 80B1gg+iqvNx7N468CopD+KmZFvyDSI=
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-198-HltcJlpbNa6ujAX5WL9nLA-1; Wed, 30 Aug 2023 08:49:45 -0400
-X-MC-Unique: HltcJlpbNa6ujAX5WL9nLA-1
-Received: by mail-lj1-f199.google.com with SMTP id
- 38308e7fff4ca-2bcda0aa7ffso60883161fa.1
- for <nouveau@lists.freedesktop.org>; Wed, 30 Aug 2023 05:49:44 -0700 (PDT)
+ us-mta-8-VWQhs8amM0ekBdOMLBdZgA-1; Wed, 30 Aug 2023 09:06:00 -0400
+X-MC-Unique: VWQhs8amM0ekBdOMLBdZgA-1
+Received: by mail-ej1-f72.google.com with SMTP id
+ a640c23a62f3a-99bca0b9234so437574166b.2
+ for <nouveau@lists.freedesktop.org>; Wed, 30 Aug 2023 06:06:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693399784; x=1694004584;
+ d=1e100.net; s=20221208; t=1693400759; x=1694005559;
  h=in-reply-to:content-transfer-encoding:content-disposition
  :mime-version:references:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CZczhgMtv+NfWj7yDw1AE3SgV7MVcfMCV4bIcEv0st4=;
- b=lIpwC2EIoGerEJ3aaxlflI+fT9v+8tOdHU5aqgQoms0ebXISrkqvPumjDaFYcXX3ex
- V4EHoeKAR/cTSgV1Knigyhj9ZbRAZ/1jawSGa17duvY9r5tq0+cPWCIr9HOkuD19g8RG
- h6NXo54VwwtYhShc9pJDuutezhE25TcqucfFfOtkw0AgaaQoLa7zY8yhC24HeCWK7SkX
- 7YaYzB927Lbq+wElLllArD6mmUkfka/YjSnp6m7wNbW17PKA5bqfyogeAyz9NtuqeRsT
- i/sIul1WmKXzzpnRCi/1HnkKDSjpcFX+OlLDt+83R386exNUmcZ6TTISxJHhR9pRbWch
- cUzQ==
-X-Gm-Message-State: AOJu0YwFj4O7B30J1KiAeSpNzqrWtG7GCBC82qb1F/m7zk7XR+UljBnH
- 2wb+g8NvPbJ2Xkm1/Zave9rPMyAnkg8PDzUl7mhgqGU2eJT3TFzvRHN98YGFE3krLS2phnqp71R
- jdOl2WV0uQ9EDVNrmmV2PEtC0Vg==
-X-Received: by 2002:a2e:b053:0:b0:2b9:eeaa:1074 with SMTP id
- d19-20020a2eb053000000b002b9eeaa1074mr1958639ljl.35.1693399783123; 
- Wed, 30 Aug 2023 05:49:43 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEBAZZQjPmDQes1SkQUq7xN058gYNBjXX+t8n2x9JEQl7WxAOKIjG0xbQDt+eSLqR+UBdchVQ==
-X-Received: by 2002:a2e:b053:0:b0:2b9:eeaa:1074 with SMTP id
- d19-20020a2eb053000000b002b9eeaa1074mr1958605ljl.35.1693399782375; 
- Wed, 30 Aug 2023 05:49:42 -0700 (PDT)
+ bh=CPKNXPGsiBnCVI3cMrPrBzoHlkoYerQGiSS7oux+9Sk=;
+ b=A5VVUJylqQmLQWbDMCjt1BQkeVuvwwV7qS3dE8R7ZFvTRAQrCPjzBHsrdlA0eCcI7X
+ Pa/KZmFERHyFaNq4DYhlYac0WbZI9712VPpNKeFlK/s1RWtDXjXnV5ZHPLY1JPz19Z4h
+ k4rlhVte+3heWk1na6UfCTnQLYIBDYMtPbzhJ7DLdVs/iteG3ekT5FGm5rZzncVvEkst
+ KSFnxuyOgCpThnM6SVe9hHEwDQxnvIrV94CudCdNUTmpnhsDh63OHeTH7oZbit+s3QoP
+ KcQXw3MnmUvva8368ZZVbCOBU0uCpqU2NR8S5GEoKU82fz6Sg4g6mP/sZ6jvv+kUuU89
+ yvjg==
+X-Gm-Message-State: AOJu0YxQhMwzQz3vEJOlVTfCKw3WAbQN2Id8HFYTCPrmIM3WsWMJOXFu
+ XqjdTZl4TQqIGdkGsvIAu39/XCEpebQcavALnL7I/YMfyHQ8n+hGFY2qWgY/kj61E9o5qdw5wio
+ aPtyj5Ye3FXzn4vrXR8W+7JvzlQ==
+X-Received: by 2002:a17:906:10b:b0:9a5:b8ca:9b76 with SMTP id
+ 11-20020a170906010b00b009a5b8ca9b76mr1608809eje.72.1693400758651; 
+ Wed, 30 Aug 2023 06:05:58 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF/SbXSK2YBPXJ9dK9DGfOHYHkzF/KSycXMu7WfCy5bWqzd0DpzPNue2o0qXfFBdmFdpbWoLw==
+X-Received: by 2002:a17:906:10b:b0:9a5:b8ca:9b76 with SMTP id
+ 11-20020a170906010b00b009a5b8ca9b76mr1608768eje.72.1693400758004; 
+ Wed, 30 Aug 2023 06:05:58 -0700 (PDT)
 Received: from pollux ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
  by smtp.gmail.com with ESMTPSA id
- bj13-20020a170906b04d00b0099cf9bf4c98sm7141187ejb.8.2023.08.30.05.49.41
+ n23-20020a170906b31700b009894b476310sm7070828ejz.163.2023.08.30.06.05.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 05:49:41 -0700 (PDT)
-Date: Wed, 30 Aug 2023 14:49:39 +0200
+ Wed, 30 Aug 2023 06:05:57 -0700 (PDT)
+Date: Wed, 30 Aug 2023 15:05:55 +0200
 From: Danilo Krummrich <dakr@redhat.com>
-To: Thomas =?iso-8859-1?Q?Hellstr=F6m_=28Intel=29?= <thomas_os@shipmail.org>
-Message-ID: <ZO864yp3UyVEfEjz@pollux>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <ZO8+s0UVRfFAmgz/@pollux>
 References: <20230820215320.4187-1-dakr@redhat.com>
  <20230820215320.4187-3-dakr@redhat.com>
- <0c50ff22-0f11-1e27-c32e-694ce2b1e6c5@shipmail.org>
+ <69484791-b316-8c45-19ff-1fa776e30764@amd.com>
 MIME-Version: 1.0
-In-Reply-To: <0c50ff22-0f11-1e27-c32e-694ce2b1e6c5@shipmail.org>
+In-Reply-To: <69484791-b316-8c45-19ff-1fa776e30764@amd.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=iso-8859-1
@@ -89,22 +89,15 @@ Cc: matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
  sarah.walker@imgtec.com, nouveau@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
  Liam.Howlett@oracle.com, boris.brezillon@collabora.com,
- donald.robson@imgtec.com, daniel@ffwll.ch, christian.koenig@amd.com,
- faith.ekstrand@collabora.com, bskeggs@redhat.com
+ donald.robson@imgtec.com, daniel@ffwll.ch, faith.ekstrand@collabora.com,
+ bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Thomas,
-
-thanks for having a look!
-
-On Wed, Aug 30, 2023 at 09:27:45AM +0200, Thomas Hellström (Intel) wrote:
-> Hi, Danilo.
+On Wed, Aug 30, 2023 at 09:48:02AM +0200, Christian König wrote:
 > 
-> Some quick comments since I'm doing some Xe work in this area. Will probably
-> get back with more.
 > 
-> On 8/20/23 23:53, Danilo Krummrich wrote:
+> Am 20.08.23 um 23:53 schrieb Danilo Krummrich:
 > > So far the DRM GPUVA manager offers common infrastructure to track GPU VA
 > > allocations and mappings, generically connect GPU VA mappings to their
 > > backing buffers and perform more complex mapping operations on the GPU VA
@@ -128,6 +121,40 @@ On Wed, Aug 30, 2023 at 09:27:45AM +0200, Thomas Hellström (Intel) wrote:
 > >     of, such that validation of evicted GEM objects is accelerated.
 > > 
 > > 5) Provide some convinience functions for common patterns.
+> 
+> Interesting work.
+> 
+> You basically implement a bunch of the ideas I came up to improve the amdgpu
+> performance in the common manager now. The was one of the remaining blockers
+> I had for using this in amdgpu.
+> 
+> Question is for example how do you track evictions? E.g. we don't have a
+> common concept of eviction in GEM as far as I know. Or is the driver
+> responsible for giving those notifications to the GPUVA manager?
+
+Right, it is the driver being responsible to adding a drm_gpuva_gem (or VM_BO)
+to the managers evict list.
+
+The idea was that drivers have control about the state of a drm_gpuva_gem, such
+that a driver can move it to driver specific lists as well, like all the ones
+you have in amdgpu.
+
+> 
+> And would it be possible to lock only a specific area of the VM, e.g. every
+> BO mapped in the interval X..Y?
+
+Currently, the drm_gpuva_manager_lock() functions always lock the GPU-VMs
+dma-resv lock, plus all the dma-resv locks of the external objects the manager
+keeps track of.
+
+But surely, we could also add something like drm_gpuva_manager_lock_range()
+where we just iterate all drm_gpuvas between X and Y and lock the dma-resv
+locks of each drm_gpuva's backing BO.
+
+> 
+> Regards,
+> Christian.
+> 
 > > 
 > > Rather than being designed as a "framework", the target is to make all
 > > features appear as a collection of optional helper functions, such that
@@ -225,19 +252,6 @@ On Wed, Aug 30, 2023 at 09:27:45AM +0200, Thomas Hellström (Intel) wrote:
 > > +		goto out;
 > > +
 > > +	rcu_read_lock();
-> In xe we're protecting the external object list with an outer lock, (same as
-> protecting the mgr itself). Do we need a separate lock for this? In theory
-> as  outlined in the VM_BIND locking document draft, one could probably even
-> use the mgr resv for this, but with more complicated code I guess. Also see
-> the comment below about the data structure chosen.
-
-The idea is to protect this list with the GPU-VM lock. The locking here is more
-of an implication of the maple tree. Either you use the internal lock of the
-maple tree or RCU respectively, or you give the maple tree an external lock to
-perform lockdep checks on (mt_set_external_lock()). Basically same as here:
-
-https://elixir.bootlin.com/linux/latest/source/drivers/base/regmap/regcache-maple.c#L124
-
 > > +	mas_for_each(&mas, ref.ptr, ULONG_MAX) {
 > > +		struct drm_gem_object *obj;
 > > +
@@ -1067,44 +1081,6 @@ https://elixir.bootlin.com/linux/latest/source/drivers/base/regmap/regcache-mapl
 > > +	 * @mt_ext: &maple_tree storing external &drm_gem_objects
 > > +	 */
 > > +	struct maple_tree mt_ext;
-> 
-> Why are you using a maple tree here? Insertion and removal is O(log(n))
-> instead of O(1) for a list?
->
-
-Having a list of drm_gem_objects directly wouldn't work, as multiple GPU-VMs
-could have mappings of the same extobj.
-
-I considered using the VM_BO abstraction (struct drm_gpuva_gem) as list entry
-instead, which also seems to be the obvious choice. However, there is a locking
-conflict.
-
-A drm_gem_object keeps a list of drm_gpuva_gems, while each drm_gpuva_gem keeps
-a list of drm_gpuvas. Both lists are either protected with the dma-resv lock of
-the corresponding drm_gem_object, or with an external lock provided by the
-driver (see drm_gem_gpuva_set_lock()). The latter is used by drivers performing
-changes on the GPUVA space directly from the fence signalling path.
-
-Now, similar to what drm_gpuva_link() and drm_gpuva_unlink() are doing already,
-we'd want to add a drm_gpuva_gem to the extobj list for the first mapping being
-linked and we'd want to remove it for the last one being unlinked.
-
-(Actually we'd want to add the drm_gpuva_gem object to the extobj list even
-before, because otherwise we'd not acquire it's dma-resv lock of this GEM object
-through drm_gpuva_manager_lock(). But that's trival, we could do that when we
-create the drm_gpuva_gem, which we need to do anyways.)
-
-Anyway, we'd probably want to keep removing the drm_gpuva_gem from the extobj
-list from drm_gpuva_unlink() when the last mapping of this BO is unlinked. In
-order to do so, we'd (as discussed above) either need to hold the outer GPU-VM
-lock or the GPU-VMs dma-resv lock. Both would be illegal in the case
-drm_gpuva_unlink() is called from within the fence signalling path. For drivers
-like XE or Nouveau, we'd at least need to make sure to not mess up the locking
-hierarchy of GPU-VM lock and dma-resv lock of the corresponding BO.
-
-Considering all that, I thought it's probably better to track extobjs separate
-from the drm_gpuva_gem, hence the maple tree choice.
-
 > > +
 > > +	/**
 > > +	 * @evict: structure holding the evict list and evict list lock
@@ -1135,48 +1111,6 @@ from the drm_gpuva_gem, hence the maple tree choice.
 > > + * @mgr: the &drm_gpuva_managers to return the &drm_exec instance for
 > > + */
 > > +#define DRM_GPUVA_EXEC(mgr)	&(mgr)->exec
-> 
-> A struct ww_acquire_ctx and thus a drm_exec is fundamentally per task and
-> should typically be allocated on the stack. Otherwise you'd need to protect
-> the mgr->exec member with an exclusive lock throughout the locking process,
-> and that's not what we want.
-
-Oh, good point. I think it works in Nouveau, because there it's implicitly
-protected with the job submission lock.
-
-> 
-> Did you consider subclassing a drm_exec for drm_gpuva purposes and add
-> needed ops to it: Like so:
-
-That's a good idea, will take this into V2.
-
-> 
-> struct drm_gpuva_exec_ops {
->     int (*fn) (struct drm_gpuva_exec *exec, int num_fences);
-
-Is this the fn argument from drm_gpuva_manager_lock_extra()?
-
->     int (*bo_validate) (struct drm_gpuva_exec *exec, struct drm_gem_object
-> *obj);
-
-I guess we could also keep that within the drm_gpuva_fn_ops? This should always
-be the same callback, right?
-
-> };
-> 
-> struct drm_gpuva_exec {
->     const struct drm_gpuva_exec_ops *ops;
->     struct drm_exec exec;
->     struct drm_gpuva_manager *mgr;
-> };
-> 
-> Although I'd actually expect bo_validate to be part of fn in the typical
-> case. The drm_gpuva_exec would then be allocated by the caller on the stack.
-
-This doesn't sound like my assumption about fn() above is correct.
-
-> 
-> 
 > > +
 > > +int drm_gpuva_manager_lock_extra(struct drm_gpuva_manager *mgr,
 > > +				 int (*fn)(struct drm_gpuva_manager *mgr,
