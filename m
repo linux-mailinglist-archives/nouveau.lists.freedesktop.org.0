@@ -2,85 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F4EB78FCF3
-	for <lists+nouveau@lfdr.de>; Fri,  1 Sep 2023 14:10:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9088790421
+	for <lists+nouveau@lfdr.de>; Sat,  2 Sep 2023 01:42:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5669710E7B2;
-	Fri,  1 Sep 2023 12:10:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 054B610E805;
+	Fri,  1 Sep 2023 23:42:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A751B10E7A3
- for <nouveau@lists.freedesktop.org>; Fri,  1 Sep 2023 12:10:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1693570242;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DcZ8t/NPF7RntYZXk1pYpgOGq2nneT+avWwiqHKQCt8=;
- b=cz5bsQ/uyRii/F7Qj3cs1BMRoYy0IGkNOTMg//R1pnJOnOIfvoHL6Vkwt3sxA7McsMl1v+
- ajTbBmXbY7F9+/ro6nt0vOc5BFZXuesCzDf5AyHEwFnoUgO5y/A1YPXmCveqP//JibXXEB
- M2NNisfmGbslb+hgp/XfQjvtV3uQGhM=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-155-OL_V0V4ZPI2SpnNil32soQ-1; Fri, 01 Sep 2023 08:10:38 -0400
-X-MC-Unique: OL_V0V4ZPI2SpnNil32soQ-1
-Received: by mail-ej1-f71.google.com with SMTP id
- a640c23a62f3a-9a5cd04315aso138337066b.2
- for <nouveau@lists.freedesktop.org>; Fri, 01 Sep 2023 05:10:38 -0700 (PDT)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1415410E7F8
+ for <nouveau@lists.freedesktop.org>; Fri,  1 Sep 2023 23:42:26 +0000 (UTC)
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-68c3b9f85b7so1896076b3a.2
+ for <nouveau@lists.freedesktop.org>; Fri, 01 Sep 2023 16:42:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1693611745; x=1694216545;
+ darn=lists.freedesktop.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=B9XoCDC9hhqnTfSWxv39xNaYsVGjr9sqIdwDF3cygwY=;
+ b=c2zxao8XwitATPGJUuKH7q6uBRHXh0k54mGys26f4x2as5+yAIeHm28T7YQlRnBJxN
+ ba7ks5BaBiqQV4AUN5YokkJIsth2CETpsbhx3Ir1WQQgFKwqYPedw7gmZrVld+DYVBFm
+ WUluSb21I6HsGgywWZlBqXISdjzdbmhPONBGg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693570237; x=1694175037;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DcZ8t/NPF7RntYZXk1pYpgOGq2nneT+avWwiqHKQCt8=;
- b=Zebnmnu+KIlspFPPIzln2+d1kuri1QLrA3vW7IMpello0yw43DMGGUw7mjulVg0ZZe
- ML6gdBM56OWLNVt6YVvx8FaekKDNJchZzicAapwBoFuxG4B9sUrVeYJ+/7XYcNWKLHqR
- ILTubO9tjrcLnciZMXTudfCBlufExd0j1LKX3Tmpi9LVWTFa7lf5uOkPK8wSsy04QRti
- 2lDZmJXYm7hPC6WHm4tn7M3fC7GL/PubiqRbBllJZw5wDhJ81qSAq+Xame9PpO2dqUnE
- pjDfBnbqc7OlJNx7+3JeH4fwQo8zK9zFVB6bP+c0ayfwHAK5Vbgt/EfVODC/wZWEqtuO
- VKsA==
-X-Gm-Message-State: AOJu0Yx4dsOZXFs4O9vXT0URcozI4vhjUg7Sm+LJQ+xTsFHcAvv+r5xP
- pKuvKECVij+UBCSyiHBuwj5PO1sT12GzLVwhjplCdoknzeBQpkrZqNSVTdyEvJsQMV4cXJWe6SU
- npBb8Hktq4y0jkLUqa6McGPeahw==
-X-Received: by 2002:a17:906:31d4:b0:9a5:e440:38dd with SMTP id
- f20-20020a17090631d400b009a5e44038ddmr1611429ejf.45.1693570237191; 
- Fri, 01 Sep 2023 05:10:37 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEh8udnN2x4FpDpcZsTMWsDttHMUww4d6yC1QNki7+VvUVcMei+dqTzXCRtfOJWLyalPDCc2w==
-X-Received: by 2002:a17:906:31d4:b0:9a5:e440:38dd with SMTP id
- f20-20020a17090631d400b009a5e44038ddmr1611399ejf.45.1693570236675; 
- Fri, 01 Sep 2023 05:10:36 -0700 (PDT)
-Received: from cassiopeiae ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
+ d=1e100.net; s=20221208; t=1693611745; x=1694216545;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=B9XoCDC9hhqnTfSWxv39xNaYsVGjr9sqIdwDF3cygwY=;
+ b=QgGHjY+mtIKKaQtL7iCfNzWF94wtsQ0J66JNCs1/EL3WQqB+gQ3fIOqmbJ4H+0YXD6
+ lRGHz8FIC1LY+O8+1awwL4Omowa8j9ToVWd+Mcdo9UphxVZKs3ol+rVX2To3B2QQAoFQ
+ sTFH0Tdrigs9BnEyYFVnkudoq8R/ztS/fLpgy/y8c0uOaz1nv8gBvANZRIM6FdbEXwRW
+ 56kIGQHoEwdasPPY0rJ45b+e05gFA2G/xYWMAwSLEJnZd70EQsZXh/sOV4cgHSUnBmNd
+ qM0sFuInhfVZBPWbsmagH9y4sPwsb1yg9UIipNbtqyj3SbWUVfkP4edoygRC0/dENQSv
+ L0aA==
+X-Gm-Message-State: AOJu0YwjiltAPMQhrtBIhURLpbMW29yDKQ/XNW17p5fTnEQIzZ9tpih3
+ MLOH5zwJgq7Sthx2l4lU9Fmjpg==
+X-Google-Smtp-Source: AGHT+IF3gOcPwfPrD/s0fytOUG/vRSOI4D+jnCuIcvxglrqeHeLMaTT6rOOv/A4qBfa/r+8zKOWj4g==
+X-Received: by 2002:a05:6a00:1916:b0:68b:fb93:5b4e with SMTP id
+ y22-20020a056a00191600b0068bfb935b4emr4542619pfi.26.1693611745505; 
+ Fri, 01 Sep 2023 16:42:25 -0700 (PDT)
+Received: from tictac2.mtv.corp.google.com
+ ([2620:15c:9d:2:8d94:1fc5:803c:41cc])
  by smtp.gmail.com with ESMTPSA id
- pk28-20020a170906d7bc00b009a1c05bd672sm1894441ejb.127.2023.09.01.05.10.35
+ o9-20020a639a09000000b0056c3a4a3ca5sm3326390pge.36.2023.09.01.16.42.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Sep 2023 05:10:36 -0700 (PDT)
-Date: Fri, 1 Sep 2023 14:10:33 +0200
-From: Danilo Krummrich <dakr@redhat.com>
-To: Thomas =?iso-8859-1?Q?Hellstr=F6m_=28Intel=29?= <thomas_os@shipmail.org>
-Message-ID: <ZPHUuU4L4P2A8gan@cassiopeiae>
-References: <20230820215320.4187-3-dakr@redhat.com>
- <0c50ff22-0f11-1e27-c32e-694ce2b1e6c5@shipmail.org>
- <ZO864yp3UyVEfEjz@pollux>
- <88c45fe6-0942-707c-9ea7-8486c177fcd7@shipmail.org>
- <ZO9Zq2RhbX8EeHrn@pollux>
- <736b6b6d-9e04-a27d-7d60-0c45d696b304@shipmail.org>
- <ZPB26A0/oLHTmyqk@cassiopeiae>
- <a8f28d62-daec-927a-a33d-5be3eec6a1ed@shipmail.org>
- <ZPDk/lao1JlBNGoJ@cassiopeiae>
- <8a8253ae-0b85-df90-b480-64eeebfafc6d@shipmail.org>
+ Fri, 01 Sep 2023 16:42:24 -0700 (PDT)
+From: Douglas Anderson <dianders@chromium.org>
+To: dri-devel@lists.freedesktop.org,
+	Maxime Ripard <mripard@kernel.org>
+Date: Fri,  1 Sep 2023 16:41:11 -0700
+Message-ID: <20230901234202.566951-1-dianders@chromium.org>
+X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 MIME-Version: 1.0
-In-Reply-To: <8a8253ae-0b85-df90-b480-64eeebfafc6d@shipmail.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH drm-misc-next 2/3] drm/gpuva_mgr: generalize
- dma_resv/extobj handling and GEM validation
+Subject: [Nouveau] [RFT PATCH 00/15] drm: non-drm-misc drivers call
+ drm_atomic_helper_shutdown() at the right times
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,396 +70,167 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
- sarah.walker@imgtec.com, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- Liam.Howlett@oracle.com, boris.brezillon@collabora.com,
- donald.robson@imgtec.com, daniel@ffwll.ch, christian.koenig@amd.com,
- faith.ekstrand@collabora.com, bskeggs@redhat.com
+Cc: geert+renesas@glider.be, nouveau@lists.freedesktop.org, Victor.Zhao@amd.com,
+ edmund.j.dea@intel.com, linux-kernel@vger.kernel.org, paul@crapouillou.net,
+ linux-tegra@vger.kernel.org, mdaenzer@redhat.com, YiPeng.Chai@amd.com,
+ laurent.pinchart@ideasonboard.com, alim.akhtar@samsung.com,
+ anitha.chrisanthus@intel.com, linux@armlinux.org.uk, steven.price@arm.com,
+ mario.limonciello@amd.com, robh@kernel.org, linux-samsung-soc@vger.kernel.org,
+ rfoss@kernel.org, festevam@gmail.com, abrodkin@synopsys.com,
+ kyungmin.park@samsung.com, amd-gfx@lists.freedesktop.org,
+ matthias.bgg@gmail.com, bskeggs@redhat.com, sam@ravnborg.org,
+ srinivasan.shanmugam@amd.com, orsonzhai@gmail.com, liviu.dudau@arm.com,
+ linux-mips@vger.kernel.org, linux-imx@nxp.com, p.zabel@pengutronix.de,
+ chunkuang.hu@kernel.org, lijo.lazar@amd.com, kernel@pengutronix.de,
+ mperttunen@nvidia.com, Bokun.Zhang@amd.com,
+ Sascha Hauer <s.hauer@pengutronix.de>, maarten.lankhorst@linux.intel.com,
+ shiwu.zhang@amd.com, inki.dae@samsung.com, le.ma@amd.com,
+ linux-mediatek@lists.infradead.org,
+ Baolin Wang <baolin.wang@linux.alibaba.com>, laurentiu.palcu@oss.nxp.com,
+ biju.das.jz@bp.renesas.com, James.Zhu@amd.com,
+ linux-arm-kernel@lists.infradead.org, angelogioacchino.delregno@collabora.com,
+ Xinhui.Pan@amd.com, sw0312.kim@samsung.com,
+ Douglas Anderson <dianders@chromium.org>, patrik.r.jakobsson@gmail.com,
+ linux-renesas-soc@vger.kernel.org, krzysztof.kozlowski@linaro.org,
+ kieran.bingham+renesas@ideasonboard.com, daniel@ffwll.ch, zhang.lyra@gmail.com,
+ alexander.deucher@amd.com, thierry.reding@gmail.com, l.stach@pengutronix.de,
+ shawnguo@kernel.org, christian.koenig@amd.com, Hawking.Zhang@amd.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Sep 01, 2023 at 07:59:21AM +0200, Thomas Hellström (Intel) wrote:
-> 
-> On 8/31/23 21:07, Danilo Krummrich wrote:
-> > On Thu, Aug 31, 2023 at 06:53:01PM +0200, Thomas Hellström (Intel) wrote:
-> > > Hi,
-> > > 
-> > > On 8/31/23 13:18, Danilo Krummrich wrote:
-> > > > On Thu, Aug 31, 2023 at 11:04:06AM +0200, Thomas Hellström (Intel) wrote:
-> > > > > Hi!
-> > > > > 
-> > > > > On 8/30/23 17:00, Danilo Krummrich wrote:
-> > > > > > On Wed, Aug 30, 2023 at 03:42:08PM +0200, Thomas Hellström (Intel) wrote:
-> > > > > > > On 8/30/23 14:49, Danilo Krummrich wrote:
-> > > > > > > > Hi Thomas,
-> > > > > > > > 
-> > > > > > > > thanks for having a look!
-> > > > > > > > 
-> > > > > > > > On Wed, Aug 30, 2023 at 09:27:45AM +0200, Thomas Hellström (Intel) wrote:
-> > > > > > > > > Hi, Danilo.
-> > > > > > > > > 
-> > > > > > > > > Some quick comments since I'm doing some Xe work in this area. Will probably
-> > > > > > > > > get back with more.
-> > > > > > > > > 
-> > > > > > > > > On 8/20/23 23:53, Danilo Krummrich wrote:
-> > > > <snip>
-> > > > 
-> > > > > > > > > > diff --git a/include/drm/drm_gpuva_mgr.h b/include/drm/drm_gpuva_mgr.h
-> > > > > > > > > > index ed8d50200cc3..693e2da3f425 100644
-> > > > > > > > > > --- a/include/drm/drm_gpuva_mgr.h
-> > > > > > > > > > +++ b/include/drm/drm_gpuva_mgr.h
-> > > > > > > > > > @@ -26,12 +26,16 @@
-> > > > > > > > > >        */
-> > > > > > > > > >       #include <linux/list.h>
-> > > > > > > > > > +#include <linux/dma-resv.h>
-> > > > > > > > > > +#include <linux/maple_tree.h>
-> > > > > > > > > >       #include <linux/rbtree.h>
-> > > > > > > > > >       #include <linux/types.h>
-> > > > > > > > > >       #include <drm/drm_gem.h>
-> > > > > > > > > > +#include <drm/drm_exec.h>
-> > > > > > > > > >       struct drm_gpuva_manager;
-> > > > > > > > > > +struct drm_gpuva_gem;
-> > > > > > > > > >       struct drm_gpuva_fn_ops;
-> > > > > > > > > >       /**
-> > > > > > > > > > @@ -140,7 +144,7 @@ struct drm_gpuva {
-> > > > > > > > > >       int drm_gpuva_insert(struct drm_gpuva_manager *mgr, struct drm_gpuva *va);
-> > > > > > > > > >       void drm_gpuva_remove(struct drm_gpuva *va);
-> > > > > > > > > > -void drm_gpuva_link(struct drm_gpuva *va);
-> > > > > > > > > > +void drm_gpuva_link(struct drm_gpuva *va, struct drm_gpuva_gem *vm_bo);
-> > > > > > > > > >       void drm_gpuva_unlink(struct drm_gpuva *va);
-> > > > > > > > > >       struct drm_gpuva *drm_gpuva_find(struct drm_gpuva_manager *mgr,
-> > > > > > > > > > @@ -240,15 +244,137 @@ struct drm_gpuva_manager {
-> > > > > > > > > >       	 * @ops: &drm_gpuva_fn_ops providing the split/merge steps to drivers
-> > > > > > > > > >       	 */
-> > > > > > > > > >       	const struct drm_gpuva_fn_ops *ops;
-> > > > > > > > > > +
-> > > > > > > > > > +	/**
-> > > > > > > > > > +	 * @d_obj: Dummy GEM object; used internally to pass the GPU VMs
-> > > > > > > > > > +	 * dma-resv to &drm_exec.
-> > > > > > > > > > +	 */
-> > > > > > > > > > +	struct drm_gem_object d_obj;
-> > > > > > > > > > +
-> > > > > > > > > > +	/**
-> > > > > > > > > > +	 * @resv: the &dma_resv for &drm_gem_objects mapped in this GPU VA
-> > > > > > > > > > +	 * space
-> > > > > > > > > > +	 */
-> > > > > > > > > > +	struct dma_resv *resv;
-> > > > > > > > > > +
-> > > > > > > > > > +	/**
-> > > > > > > > > > +	 * @exec: the &drm_exec helper to lock external &drm_gem_objects
-> > > > > > > > > > +	 */
-> > > > > > > > > > +	struct drm_exec exec;
-> > > > > > > > > > +
-> > > > > > > > > > +	/**
-> > > > > > > > > > +	 * @mt_ext: &maple_tree storing external &drm_gem_objects
-> > > > > > > > > > +	 */
-> > > > > > > > > > +	struct maple_tree mt_ext;
-> > > > > > > > > Why are you using a maple tree here? Insertion and removal is O(log(n))
-> > > > > > > > > instead of O(1) for a list?
-> > > > > > > > > 
-> > > > > > > > Having a list of drm_gem_objects directly wouldn't work, as multiple GPU-VMs
-> > > > > > > > could have mappings of the same extobj.
-> > > > > > > > 
-> > > > > > > > I considered using the VM_BO abstraction (struct drm_gpuva_gem) as list entry
-> > > > > > > > instead, which also seems to be the obvious choice. However, there is a locking
-> > > > > > > > conflict.
-> > > > > > > > 
-> > > > > > > > A drm_gem_object keeps a list of drm_gpuva_gems, while each drm_gpuva_gem keeps
-> > > > > > > > a list of drm_gpuvas. Both lists are either protected with the dma-resv lock of
-> > > > > > > > the corresponding drm_gem_object, or with an external lock provided by the
-> > > > > > > > driver (see drm_gem_gpuva_set_lock()). The latter is used by drivers performing
-> > > > > > > > changes on the GPUVA space directly from the fence signalling path.
-> > > > > > > > 
-> > > > > > > > Now, similar to what drm_gpuva_link() and drm_gpuva_unlink() are doing already,
-> > > > > > > > we'd want to add a drm_gpuva_gem to the extobj list for the first mapping being
-> > > > > > > > linked and we'd want to remove it for the last one being unlinked.
-> > > > > > > > 
-> > > > > > > > (Actually we'd want to add the drm_gpuva_gem object to the extobj list even
-> > > > > > > > before, because otherwise we'd not acquire it's dma-resv lock of this GEM object
-> > > > > > > > through drm_gpuva_manager_lock(). But that's trival, we could do that when we
-> > > > > > > > create the drm_gpuva_gem, which we need to do anyways.)
-> > > > > > > > 
-> > > > > > > > Anyway, we'd probably want to keep removing the drm_gpuva_gem from the extobj
-> > > > > > > > list from drm_gpuva_unlink() when the last mapping of this BO is unlinked. In
-> > > > > > > > order to do so, we'd (as discussed above) either need to hold the outer GPU-VM
-> > > > > > > > lock or the GPU-VMs dma-resv lock. Both would be illegal in the case
-> > > > > > > > drm_gpuva_unlink() is called from within the fence signalling path. For drivers
-> > > > > > > > like XE or Nouveau, we'd at least need to make sure to not mess up the locking
-> > > > > > > > hierarchy of GPU-VM lock and dma-resv lock of the corresponding BO.
-> > > > > > > > 
-> > > > > > > > Considering all that, I thought it's probably better to track extobjs separate
-> > > > > > > > from the drm_gpuva_gem, hence the maple tree choice.
-> > > > > > > Hm. OK, in Xe we're having a list of the xe_vmas (drm_gpuvas) that point to
-> > > > > > > external objects, or in the case of multiple mappings to the same gem
-> > > > > > > object, only one of the drm_gpuvas is in the list. These are protected by
-> > > > > > > the GPU-VM lock. I don't see a problem with removing those from the fence
-> > > > > > > signalling path, though?
-> > > > > > I intentionally tried to avoid keeping a list of drm_gpuvas to track extobjs,
-> > > > > > since this is generic code I don't know how much mappings of an external object
-> > > > > > the corresponding driver potentially creates. This could become a pretty large
-> > > > > > list to iterate. Another reason was, that I want to keep the drm_gpuva structure
-> > > > > > as small as possible, hence avoiding another list_head.
-> > > > > Yes, the list might be pretty large, but OTOH you never iterate to access a
-> > > > > single list element. When you need to iterate the whole list you need to do
-> > > > > that regardless of the data structure used. As for the list head, it might
-> > > > > perhaps be aliased (union) with an upcoming userptr list head?
-> > > > > 
-> > > > Oh, I did not mean that I'm concerned about the size of a list of extobjs in
-> > > > general, that would indeed be the same for every data structure chosen. But I
-> > > > would be concerned about keeping a list of *all* mappings being backed by an
-> > > > extobj.
-> > > > 
-> > > > > > Now, it sounds like in XE you're doing some kind of optimization just keeping a
-> > > > > > single mapping of an extobj in the list? How do you know when to remove it? What
-> > > > > > if the mapping from the extobj list gets unmapped, but there is still another
-> > > > > > one left in the GPU-VM being backed by the same BO?
-> > > > > When removing from the lists, we iterate through the object's list of vmas,
-> > > > > and if there is one matching the same vm, we replace the old one with the
-> > > > > new one. A similar iteration is done when adding to avoid adding one that is
-> > > > > already on the list.
-> > > > I see, but wouldn't this be O(n) on insertion and O(m) on removal of an extobj,
-> > > > while using the maple tree is O(log(n))?
-> > > No, insertion and removal is O(m) where m is the number of vms the object is
-> > > currently bound to. Typically a very small number.
-> > Ok, my guess was that on insertion you'd actually walk the extobj list and see
-> > if there's a vma backed by the same BO already, while on removal you said you're
-> > walking the BO's vma list. So I guess on insertion you're also walking the BO's
-> > vma list and see if there's already a mapping for this VM?
-> > 
-> > In your case that might make sense if you expect the extobj list to be larger
-> > than the BO's vma list typically. In general I don't think this is true.
-> 
-> I think we're then optimizing for different scenarios. Our compute driver
-> will use mostly external objects only, and if shared, I don't forsee them
-> bound to many VMs. What saves us currently here is that in compute mode we
-> only really traverse the extobj list after a preempt fence wait, or when a
-> vm is using a new context for the first time. So vm's extobj list is pretty
-> large. Each bo's vma list will typically be pretty small.
 
-Admittedly, I did not had in mind VMs where every GEM is an extobj. However,
-especially for iterating a lot of extobjs a maple tree should perform better
-than a list.
+NOTE: in order to avoid email sending limits on the cover letter, I've
+split this patch series in two. Patches that target drm-misc and ones
+that don't. The cover letter of the two is identical other than this note.
 
-> 
-> Another reason for us to use the list is that one possible, but not yet
-> implemented, workaround for this is the "vm fence", which when attached to
-> external bos pulls them off the extobj list and on "enable_signalling()"
-> splices its sublist of external bos back, and then snapshots the vm's
-> dma_resv and waits for all its fences. (The idea is that it should very
-> seldom be waited for in practice, and largely eliminate the extobj
-> handling). Here a list is an ideal data structure for list removal and
-> splicing. TBH we really want to avoid this optimization but we need to see
-> how bad extobj handling ends up in practice for the compute drivers.
+This patch series came about after a _long_ discussion between me and
+Maxime Ripard in response to a different patch I sent out [1]. As part
+of that discussion, we realized that it would be good if DRM drivers
+consistently called drm_atomic_helper_shutdown() properly at shutdown
+and driver remove time as it's documented that they should do. The
+eventual goal of this would be to enable removing some hacky code from
+panel drivers where they had to hook into shutdown themselves because
+the DRM driver wasn't calling them.
 
-If you end up doing this I highly doubt it'd make sense to use the GPUVA
-manager for that, even if it would implement extobjs as a list of drm_gpuva_gems
-(VM_BOs). It'd probably be a mess. When you remove extobjs from the GPUVA
-manager, not because they're actually gone, but because you want to keep them
-separate, you'd need to make sure to keep the drm_gpuva_gem structure alive,
-which means you would need to increase the GPUVA managers refcount for extobjs
-manually. You could probably also just "steal" them silently, but that'd be
-quite nasty as well.
+It turns out that quite a lot of drivers seemed to be missing
+drm_atomic_helper_shutdown() in one or both places that it was
+supposed to be. This patch series attempts to fix all the drivers that
+I was able to identify.
 
-> 
-> 
-> > 
-> > > > > > Although assuming that's a no-go for GPUVA wouldn't an XArray be a better
-> > > > > > choice, keeping O(1)?
-> > > > > > When tracking extobjs, the address of the drm_gem_object is the key while the
-> > > > > > reference count is the value. I was thinking of an XArray as well, but I was
-> > > > > > worried that the corresponding indices could be too much distributed for an
-> > > > > > XArray to still be efficient. Now that I think about it, it's probably not that
-> > > > > > bad.
-> > > > > > 
-> > > > > > Btw., while I agree trying to make things as efficient as possible, what is the
-> > > > > > magnitue for extobjs to be tracked, do we need to worry about the O(log(n))?
-> > > > > Not sure yet, TBH, but I think one of our UMDs can only use external object,
-> > > > > because they don't know at creation time which ones need exporting. However
-> > > > > if this turns out to be too bad, there are various flavours of "clever but
-> > > > > complicated" optimizations that we could think of to reduce the list size.
-> > > > > Still in our case, we opted for the vma list head for now.
-> > > > Considering the above, I would guess that if your current approach is good
-> > > > enough, a maple tree will work as well.
-> > > Hmm, Yeah it's probably a bikeshed since each drm_exec builds a realloced
-> > > array of all external objects on each exec.
-> > I did a quick sketchy benchmark, which is probably good enough. In a maple tree
-> > with 0xFFFF - 1 existing entries insertion of a random (non-existant) entry
-> > took on average ~530ns over 1k iterations.
-> > 
-> > The average insertion time for each entry to build up a tree with 0xFFFF - 1
-> > entries in the first place was ~1.3us. That's expected since it should hit
-> > memory allocations more often than the previous one. The maximum peak was ~10us.
-> > Inserting already existing entries took ~300ns.
-> > 
-> > That's probably good enough.
-> 
-> That's hard to tell because we have nothing to compare with. For drm_exec,
-> Christian chose a realloced array because of linked list cache locality
-> issues, and Xarray locking requirements causing measurable performance
-> issues. Wouldn't a maple tree suffer from both of these?
+NOTE: fixing this wasn't exactly cookie cutter. Each driver has its
+own unique way of setting itself up and tearing itself down. Some
+drivers also use the component model, which adds extra fun. I've made
+my best guess at solving this and I've run a bunch of compile tests
+(specifically, allmodconfig for amd64, arm64, and powerpc). That being
+said, these code changes are not totally trivial and I've done zero
+real testing on them. Making these patches was also a little mind
+numbing and I'm certain my eyes glazed over at several points when
+writing them. What I'm trying to say is to please double-check that I
+didn't do anything too silly, like cast your driver's drvdata to the
+wrong type. Even better, test these patches!
 
-Maple tree was designed for cache efficient traversal and to replace rbtree and
-linked lists in MM because of their lack of cache efficiency. (That's also why
-it is really unfortunate that we couldn't use maple tree for VMA tracking in the
-GPUVA manager.)
+I've organized this series like this:
+1. One patch for all simple cases of just needing a call at shutdown
+   time for drivers that go through drm-misc.
+2. A separate patch for "drm/vc4", even though it goes through
+   drm-misc, since I wanted to leave an extra note for that one.
+3. Patches for drivers that just needed a call at shutdown time for
+   drivers that _don't_ go through drm-misc.
+4. Patches for the few drivers that had the call at shutdown time but
+   lacked it at remove time.
+5. One patch for all simple cases of needing a call at shutdown and
+   remove (or unbind) time for drivers that go through drm-misc.
+6. A separate patch for "drm/hisilicon/kirin", even though it goes
+   through drm-misc, since I wanted to leave an extra note for that
+   one.
+7. Patches for drivers that needed a call at shutdown and remove (or
+   unbind) time for drivers that _don't_ go through drm-misc.
 
-In terms of locking, I can only imagine an issue because Xarray always seems to
-use RCU and hence you can't get rid of some grace period latency? Otherwise it
-should just be a spinlock.
+I've labeled this patch series as RFT (request for testing) to help
+call attention to the fact that I didn't personally test any of these
+patches.
 
-@Christian: Or was there a different issue?
+If you're a maintainer of one of these drivers and you think that the
+patch for your driver looks fabulous, you've tested it, and you'd like
+to land it right away then please do. For non-drm-misc drivers there
+are no dependencies here. Some of the drm-misc drivers depend on the
+first patch, AKA ("drm/atomic-helper: drm_atomic_helper_shutdown(NULL)
+should be a noop"). I've tried to call this out but it also should be
+obvious once you know to look for it.
 
-Maple tree can disable RCU entirely [1] AFAIK, hence likely we can avoid such an
-issue.
+I'd like to call out a few drivers that I _didn't_ fix in this series
+and why. If any of these drivers should be fixed then please yell.
+- DRM driers backed by usb_driver (like gud, gm12u320, udl): I didn't
+  add the call to drm_atomic_helper_shutdown() at shutdown time
+  because there's no ".shutdown" callback for them USB drivers. Given
+  that USB is hotpluggable, I'm assuming that they are robust against
+  this and the special shutdown callback isn't needed.
+- ofdrm and simpledrm: These didn't have drm_atomic_helper_shutdown()
+  in either shutdown or remove, but I didn't add it. I think that's OK
+  since they're sorta special and not really directly controlling
+  hardware power sequencing.
+- virtio, vkms, vmwgfx, xen: I believe these are all virtual (thus
+  they wouldn't directly drive a panel) and adding the shutdown
+  didn't look straightforward, so I skipped them.
 
-[1] https://elixir.bootlin.com/linux/latest/source/include/linux/maple_tree.h#L612
+I've let each patch in the series get CCed straight from
+get_maintainer. That means not everyone will have received every patch
+but everyone should be on the cover letter. I know some people dislike
+this but when touching this many drivers there's not much
+choice. dri-devel and lkml have been CCed and lore/lei exist, so
+hopefully that's enough for folks. I'm happy to add people to the
+whole series for future posts.
 
-> 
-> In any case if you go for the maple tree would it be possible to hide the
-> implementation in a way as to make it not too hard to replace if real-world
-> workloads prove it necessary?
+[1] https://lore.kernel.org/lkml/20230804140605.RFC.4.I930069a32baab6faf46d6b234f89613b5cec0f14@changeid
 
-Of course, I would want to do that anyway.
 
-> 
-> > 
-> > > > Otherwise, if you want, I could do some experiments with Xarray and see how
-> > > > that works out compared to using a maple tree.
-> > > > 
-> > > > Btw. another nice thing about using Xarray or maple tree for that is that
-> > > > drivers updating the VA space from the fence signalling path don't need to
-> > > > hold a GPU-VM lock to update the extobj list. Actually, they might not need
-> > > > a GPU-VM lock at all.
-> > > I still don't follow why drivers would want to do that. Isn't the VA space /
-> > > fence object list always updated sync from the IOCTL?
-> > For the extobj list I don't see any advantage not doing that in the IOCTL right
-> > away. For the VA space there are a few advantages doing it in the fence
-> > signalling path.
-> > 
-> > (1) No need to allocate drm_gpuva_ops at all. For a given map / unmap request
-> >      the driver can receive the callbacks for map / remap / unmap directly.
-> > (2) No need to unwind VA space updates on failure, also no need for any other
-> >      unwind tricks.
-> > (3) Synchronous bind jobs can be injected at any point of time and don't need to
-> >      be queued up in the scheduler to preserve ordering.
-> > (4) Potentially less error prone ressource management. Although, I admit partly
-> >      this is just the consequence of (1) and (2).
-> > 
-> > Actually, once I get the page table management prepared for that I'd like to
-> > move Nouveau over this approach.
-> 
-> OK. I guess I need to look at the resulting implementation to fully digest
-> this.
-> 
-> Thanks,
-> 
-> Thomas
-> 
-> 
-> > 
-> > > /Thomas
-> > > 
-> > > 
-> > > > > /Thomas
-> > > > > 
-> > > > > 
-> > > > > > > > > > +
-> > > > > > > > > > +	/**
-> > > > > > > > > > +	 * @evict: structure holding the evict list and evict list lock
-> > > > > > > > > > +	 */
-> > > > > > > > > > +	struct {
-> > > > > > > > > > +		/**
-> > > > > > > > > > +		 * @list: &list_head storing &drm_gem_objects currently being
-> > > > > > > > > > +		 * evicted
-> > > > > > > > > > +		 */
-> > > > > > > > > > +		struct list_head list;
-> > > > > > > > > > +
-> > > > > > > > > > +		/**
-> > > > > > > > > > +		 * @lock: spinlock to protect the evict list against concurrent
-> > > > > > > > > > +		 * insertion / removal of different &drm_gpuva_gems
-> > > > > > > > > > +		 */
-> > > > > > > > > > +		spinlock_t lock;
-> > > > > > > > > > +	} evict;
-> > > > > > > > > >       };
-> > > > > > > > > >       void drm_gpuva_manager_init(struct drm_gpuva_manager *mgr,
-> > > > > > > > > > +			    struct drm_device *drm,
-> > > > > > > > > >       			    const char *name,
-> > > > > > > > > >       			    u64 start_offset, u64 range,
-> > > > > > > > > >       			    u64 reserve_offset, u64 reserve_range,
-> > > > > > > > > >       			    const struct drm_gpuva_fn_ops *ops);
-> > > > > > > > > >       void drm_gpuva_manager_destroy(struct drm_gpuva_manager *mgr);
-> > > > > > > > > > +/**
-> > > > > > > > > > + * DRM_GPUVA_EXEC - returns the &drm_gpuva_managers &drm_exec instance
-> > > > > > > > > > + * @mgr: the &drm_gpuva_managers to return the &drm_exec instance for
-> > > > > > > > > > + */
-> > > > > > > > > > +#define DRM_GPUVA_EXEC(mgr)	&(mgr)->exec
-> > > > > > > > > A struct ww_acquire_ctx and thus a drm_exec is fundamentally per task and
-> > > > > > > > > should typically be allocated on the stack. Otherwise you'd need to protect
-> > > > > > > > > the mgr->exec member with an exclusive lock throughout the locking process,
-> > > > > > > > > and that's not what we want.
-> > > > > > > > Oh, good point. I think it works in Nouveau, because there it's implicitly
-> > > > > > > > protected with the job submission lock.
-> > > > > > > > 
-> > > > > > > > > Did you consider subclassing a drm_exec for drm_gpuva purposes and add
-> > > > > > > > > needed ops to it: Like so:
-> > > > > > > > That's a good idea, will take this into V2.
-> > > > > > > Actually, I'm not fully sure that was a good idea: I've now have a working
-> > > > > > > version of Xe ported over to drm_exec, having these helpers in mind and with
-> > > > > > > the intention to start using them as they mature. What I found, though is
-> > > > > > > that open-coding the drm_exec loop is not all that bad, but that building
-> > > > > > > blocks that can be called from within the loop are useful:
-> > > > > > > 
-> > > > > > > Like the drm_gpuva_prepare_objects() and an imaginary
-> > > > > > > drm_gpuva_prepare_gpuva() that locks the vm resv and the resv of the object
-> > > > > > > (if different and the gpuva points to the object. And
-> > > > > > > drm_gpuva_prepare_array() although we don't use it within Xe. That means you
-> > > > > > > can use these building blocks like helpers and avoid the fn() callback by
-> > > > > > > instead open-coding.
-> > > > > > > 
-> > > > > > > But I guess YMMV.
-> > > > > > That's exactly why those building blocks are exported, I already had in mind
-> > > > > > that there might be drivers which still want to open-code the drm_exec loop,
-> > > > > > while others might just want a simple interface to lock everything.
-> > > > > > 
-> > > > > > I still think it is a good idea, but I'd keep that as simple as possible. And
-> > > > > > for everything else just let the driver open-code it and use the "building
-> > > > > > blocks" - will also expand the bulding blocks to what you mentioned above.
-> > > > > > 
-> > > > > > > > > struct drm_gpuva_exec_ops {
-> > > > > > > > >         int (*fn) (struct drm_gpuva_exec *exec, int num_fences);
-> > > > > > > > Is this the fn argument from drm_gpuva_manager_lock_extra()?
-> > > > > > > > 
-> > > > > > > > >         int (*bo_validate) (struct drm_gpuva_exec *exec, struct drm_gem_object
-> > > > > > > > > *obj);
-> > > > > > > > I guess we could also keep that within the drm_gpuva_fn_ops? This should always
-> > > > > > > > be the same callback, right?
-> > > > > > > > 
-> > > > > > > > > };
-> > > > > > > > > 
-> > > > > > > > > struct drm_gpuva_exec {
-> > > > > > > > >         const struct drm_gpuva_exec_ops *ops;
-> > > > > > > > >         struct drm_exec exec;
-> > > > > > > > >         struct drm_gpuva_manager *mgr;
-> > > > > > > > > };
-> > > > > > > > > 
-> > > > > > > > > Although I'd actually expect bo_validate to be part of fn in the typical
-> > > > > > > > > case. The drm_gpuva_exec would then be allocated by the caller on the stack.
-> > > > > > > > This doesn't sound like my assumption about fn() above is correct.
-> > > > > > > Well one important thing in our conversion is that ttm_bo_validate () needs
-> > > > > > > to be in the until_all_locked() loop. We want to be able soon to use
-> > > > > > > sleeping locks for eviction, so a xe_bo_validate() would, at least
-> > > > > > > temporarily, add locked objects to the drm_exec list of locked objects. That
-> > > > > > > means everything that may end up calling validate deep within the call chain
-> > > > > > > needs to be part of the until_all_locked() loop, so our
-> > > > > > > drm_gpuva_manager_lock_extra() fn callback would include those validates and
-> > > > > > > look different all the time. Hence that's why open-coding isn't all that
-> > > > > > > bad...
-> > > > > > Oh, I see. You indeed want to call validate() from within until_all_locked().
-> > > > > > 
-> > > > > > > /Thomas
-> > > > > > > 
-> > > > > > > 
-> > > > <snip>
-> 
+Douglas Anderson (15):
+  drm/armada: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/imx/dcss: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/ingenic: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/kmb: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/mediatek: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/nouveau: Call drm_atomic_helper_shutdown() or equiv at shutdown
+    time
+  drm/tegra: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/arcpgu: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/amdgpu: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/sprd: Call drm_atomic_helper_shutdown() at remove time
+  drm/exynos: Call drm_atomic_helper_shutdown() at shutdown/unbind time
+  drm/gma500: Call drm_helper_force_disable_all() at shutdown/remove
+    time
+  drm/imx/ipuv3: Call drm_atomic_helper_shutdown() at shutdown/unbind
+    time
+  drm/radeon: Call drm_helper_force_disable_all() at shutdown/remove
+    time
+  drm/renesas/shmobile: Call drm_helper_force_disable_all() at
+    shutdown/remove time
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu.h           |  1 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c    | 10 +++
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |  2 +
+ drivers/gpu/drm/armada/armada_drv.c           |  8 +++
+ drivers/gpu/drm/exynos/exynos_drm_drv.c       | 11 ++++
+ drivers/gpu/drm/gma500/psb_drv.c              |  8 +++
+ drivers/gpu/drm/imx/dcss/dcss-drv.c           |  8 +++
+ drivers/gpu/drm/imx/dcss/dcss-kms.c           |  7 ++
+ drivers/gpu/drm/imx/dcss/dcss-kms.h           |  1 +
+ drivers/gpu/drm/imx/ipuv3/imx-drm-core.c      | 11 ++++
+ drivers/gpu/drm/ingenic/ingenic-drm-drv.c     | 66 ++++++++++++-------
+ drivers/gpu/drm/kmb/kmb_drv.c                 |  6 ++
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c        |  9 +++
+ drivers/gpu/drm/nouveau/nouveau_display.c     |  9 +++
+ drivers/gpu/drm/nouveau/nouveau_display.h     |  1 +
+ drivers/gpu/drm/nouveau/nouveau_drm.c         | 13 ++++
+ drivers/gpu/drm/nouveau/nouveau_drv.h         |  1 +
+ drivers/gpu/drm/nouveau/nouveau_platform.c    |  6 ++
+ drivers/gpu/drm/radeon/radeon_drv.c           |  7 +-
+ .../gpu/drm/renesas/shmobile/shmob_drm_drv.c  | 10 +++
+ drivers/gpu/drm/sprd/sprd_drm.c               |  4 +-
+ drivers/gpu/drm/tegra/drm.c                   |  6 ++
+ drivers/gpu/drm/tiny/arcpgu.c                 |  6 ++
+ 23 files changed, 187 insertions(+), 24 deletions(-)
+
+-- 
+2.42.0.283.g2d96d420d3-goog
 
