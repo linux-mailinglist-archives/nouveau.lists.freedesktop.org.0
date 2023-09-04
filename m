@@ -1,47 +1,39 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A27679124E
-	for <lists+nouveau@lfdr.de>; Mon,  4 Sep 2023 09:35:25 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E789791DDD
+	for <lists+nouveau@lfdr.de>; Mon,  4 Sep 2023 21:57:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2BD8C10E2B9;
-	Mon,  4 Sep 2023 07:35:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0C73310E15D;
+	Mon,  4 Sep 2023 19:57:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 431 seconds by postgrey-1.36 at gabe;
- Mon, 04 Sep 2023 07:35:04 UTC
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0B91410E2B9
- for <nouveau@lists.freedesktop.org>; Mon,  4 Sep 2023 07:35:02 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id D647BCE0E16;
- Mon,  4 Sep 2023 07:27:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A6242C433C8;
- Mon,  4 Sep 2023 07:27:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1693812468;
- bh=piU91Jcbu/nw4mkWE2ebzf6Prd/hbd/WAB0XaDvFVKs=;
- h=Date:From:To:Subject:In-Reply-To:References:Cc:From;
- b=Zvb1r76GhELMisX9kegFx6hYvKO9a95ROEtrBeUGlMbCGe6dLBS306Urr9gQ7Y4/O
- RjfMKdnLGbxCogy0Sw7M71edlT+aFPxH+Z52ERTui2cf/2MCtDIQTpRsuO8KUAZ+gj
- UhPAJAp8xsJEuCC1OEYmDrSYMakSkrxSuqnNWimZfR8AAgUePniokMZ9WDo+KhQPGZ
- 1UeKp+Y4eulL+A+VxVQ09/eumfPM+kiPlkxnI4wac8PKcm+PMHlHBGwaZScVNLeurG
- 9bZhX6EBfgW0mneEv6bUiP5l3w/Hi8gz6AGocWmZMqxky1J0imwWFMJ58DF4cHvLj+
- 0ZH5AS8zmDoeg==
-Message-ID: <8a90bc6f4bf16d5aa545e5215f2a5112.mripard@kernel.org>
-Date: Mon, 04 Sep 2023 07:27:45 +0000
-From: "Maxime Ripard" <mripard@kernel.org>
-To: "Douglas Anderson" <dianders@chromium.org>
-In-Reply-To: <20230901164111.RFT.6.Ie7588ec6e0f93e8bc700e76b265ad1a7ad6b15ad@changeid>
-References: <20230901164111.RFT.6.Ie7588ec6e0f93e8bc700e76b265ad1a7ad6b15ad@changeid>
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [RFT PATCH 06/15] drm/nouveau: Call
- drm_atomic_helper_shutdown() or equiv at shutdown time
+Received: from out-214.mta1.migadu.com (out-214.mta1.migadu.com
+ [IPv6:2001:41d0:203:375::d6])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 48A6910E14B
+ for <nouveau@lists.freedesktop.org>; Mon,  4 Sep 2023 19:57:38 +0000 (UTC)
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+ t=1693857456;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=FYKJvWL/qZgH1oNH2DJwbsBn+zY36FSv76Wxof0/Hpw=;
+ b=ahZRccD3k1MiGRI8O0BWNWRD3IedOUtr/0keRN1KW1Sx8oxxGBC/H8Fk52Fj8jEpSRkMCU
+ UHifg3825MK625kjMOhTvVz9nwlZISqtuuktamAc+GlDkFDhz8QxW5+KAoxBAwZGU1L9k4
+ DZC8AnO8nWX01emVpChRA3WXuoiRVQQ=
+From: Sui Jingfeng <sui.jingfeng@linux.dev>
+To: Bjorn Helgaas <bhelgaas@google.com>
+Date: Tue,  5 Sep 2023 03:57:15 +0800
+Message-Id: <20230904195724.633404-1-sui.jingfeng@linux.dev>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
+Subject: [Nouveau] [RFC,
+ drm-misc-next v4 0/9] PCI/VGA: Allowing the user to select the
+ primary video adapter at boot time
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,22 +45,105 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Maxime Ripard <mripard@kernel.org>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- bskeggs@redhat.com, daniel@ffwll.ch
+Cc: Sui Jingfeng <suijingfeng@loongson.cn>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ linux-pci@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 1 Sep 2023 16:41:17 -0700, Douglas Anderson wrote:
-> Based on grepping through the source code this driver appears to be
-> missing a call to drm_atomic_helper_shutdown() (or
-> drm_helper_force_disable_all() if not using atomic) at system shutdown
-> time. Among other things, this means that if a panel is in use that it
-> won't be cleanly powered off at system shutdown time.
-> 
-> [ ... ]
+From: Sui Jingfeng <suijingfeng@loongson.cn>
 
-Reviewed-by: Maxime Ripard <mripard@kernel.org>
+On a machine with multiple GPUs, a Linux user has no control over which
+one is primary at boot time. This series tries to solve above mentioned
+problem by introduced the ->be_primary() function stub. The specific
+device drivers can provide an implementation to hook up with this stub by
+calling the vga_client_register() function.
 
-Thanks!
-Maxime
+Once the driver bound the device successfully, VGAARB will call back to
+the device driver. To query if the device drivers want to be primary or
+not. Device drivers can just pass NULL if have no such needs.
+
+Please note that:
+
+1) The ARM64, Loongarch, Mips servers have a lot PCIe slot, and I would
+   like to mount at least three video cards.
+
+2) Typically, those non-86 machines don't have a good UEFI firmware
+   support, which doesn't support select primary GPU as firmware stage.
+   Even on x86, there are old UEFI firmwares which already made undesired
+   decision for you.
+
+3) This series is attempt to solve the remain problems at the driver level,
+   while another series[1] of me is target to solve the majority of the
+   problems at device level.
+
+Tested (limited) on x86 with four video card mounted, Intel UHD Graphics
+630 is the default boot VGA, successfully override by ast2400 with
+ast.modeset=10 append at the kernel cmd line.
+
+$ lspci | grep VGA
+
+ 00:02.0 VGA compatible controller: Intel Corporation CoffeeLake-S GT2 [UHD Graphics 630]
+ 01:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Caicos XTX [Radeon HD 8490 / R5 235X OEM]
+ 04:00.0 VGA compatible controller: ASPEED Technology, Inc. ASPEED Graphics Family (rev 30)
+ 05:00.0 VGA compatible controller: NVIDIA Corporation GK208B [GeForce GT 720] (rev a1)
+
+$ sudo dmesg | grep vgaarb
+
+ pci 0000:00:02.0: vgaarb: setting as boot VGA device
+ pci 0000:00:02.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+ pci 0000:01:00.0: vgaarb: VGA device added: decodes=io+mem,owns=none,locks=none
+ pci 0000:04:00.0: vgaarb: VGA device added: decodes=io+mem,owns=none,locks=none
+ pci 0000:05:00.0: vgaarb: VGA device added: decodes=io+mem,owns=none,locks=none
+ vgaarb: loaded
+ ast 0000:04:00.0: vgaarb: Override as primary by driver
+ i915 0000:00:02.0: vgaarb: changed VGA decodes: olddecodes=io+mem,decodes=none:owns=io+mem
+ radeon 0000:01:00.0: vgaarb: changed VGA decodes: olddecodes=io+mem,decodes=none:owns=none
+ ast 0000:04:00.0: vgaarb: changed VGA decodes: olddecodes=io+mem,decodes=none:owns=none
+
+v2:
+	* Add a simple implemment for drm/i915 and drm/ast
+	* Pick up all tags (Mario)
+v3:
+	* Fix a mistake for drm/i915 implement
+	* Fix patch can not be applied problem because of merge conflect.
+v4:
+	* Focus on solve the real problem.
+
+v1,v2 at https://patchwork.freedesktop.org/series/120059/
+   v3 at https://patchwork.freedesktop.org/series/120562/
+
+[1] https://patchwork.freedesktop.org/series/122845/
+
+Sui Jingfeng (9):
+  PCI/VGA: Allowing the user to select the primary video adapter at boot
+    time
+  drm/nouveau: Implement .be_primary() callback
+  drm/radeon: Implement .be_primary() callback
+  drm/amdgpu: Implement .be_primary() callback
+  drm/i915: Implement .be_primary() callback
+  drm/loongson: Implement .be_primary() callback
+  drm/ast: Register as a VGA client by calling vga_client_register()
+  drm/hibmc: Register as a VGA client by calling vga_client_register()
+  drm/gma500: Register as a VGA client by calling vga_client_register()
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c    | 11 +++-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       | 13 ++++-
+ drivers/gpu/drm/ast/ast_drv.c                 | 31 ++++++++++
+ drivers/gpu/drm/gma500/psb_drv.c              | 57 ++++++++++++++++++-
+ .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c   | 15 +++++
+ drivers/gpu/drm/i915/display/intel_vga.c      | 15 ++++-
+ drivers/gpu/drm/loongson/loongson_module.c    |  2 +-
+ drivers/gpu/drm/loongson/loongson_module.h    |  1 +
+ drivers/gpu/drm/loongson/lsdc_drv.c           | 10 +++-
+ drivers/gpu/drm/nouveau/nouveau_vga.c         | 11 +++-
+ drivers/gpu/drm/radeon/radeon_device.c        | 10 +++-
+ drivers/pci/vgaarb.c                          | 43 ++++++++++++--
+ drivers/vfio/pci/vfio_pci_core.c              |  2 +-
+ include/linux/vgaarb.h                        |  8 ++-
+ 14 files changed, 210 insertions(+), 19 deletions(-)
+
+-- 
+2.34.1
+
