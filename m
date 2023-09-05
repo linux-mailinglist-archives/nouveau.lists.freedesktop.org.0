@@ -2,60 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9A267921F8
-	for <lists+nouveau@lfdr.de>; Tue,  5 Sep 2023 12:49:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C53C792306
+	for <lists+nouveau@lfdr.de>; Tue,  5 Sep 2023 15:28:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 517BC10E4A4;
-	Tue,  5 Sep 2023 10:49:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4D8A910E520;
+	Tue,  5 Sep 2023 13:28:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [IPv6:2001:67c:2178:6::1d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3241710E49F;
- Tue,  5 Sep 2023 10:49:35 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id E13721F750;
- Tue,  5 Sep 2023 10:49:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1693910973; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=/h7vQ0p06iIl+9hlbDcAIadyTSEFhmGic1bBYO4Q3/U=;
- b=d0WQNptghpH8JEQ/z3U12QGuKi8R8J47rBUAWfHos0sw4if/RkcnufoEHpWZF8gbuyv3gt
- 5Sd3dg58NZiju2B9c8GZZriXxRRSbPhlQ0mHL55Sfczs/JYCaxWC3QxJovkyhvHv3wEAff
- 1N09fmfNW6I8xb7WwJrNmlxDsm6x0bM=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1693910973;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=/h7vQ0p06iIl+9hlbDcAIadyTSEFhmGic1bBYO4Q3/U=;
- b=ayiwjRa2TRnCjH6mDcI3P4P9RIZ+Pvloje05zJyBie1NIp6o0QaHjzXDI9HzSd4UNLt2iY
- ZuCaYWgKa2oIMoCw==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AF31913499;
- Tue,  5 Sep 2023 10:49:33 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id qnzIKb0H92RuXAAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Tue, 05 Sep 2023 10:49:33 +0000
-Message-ID: <151c0429-dbc2-e987-1491-6c733ca159ac@suse.de>
-Date: Tue, 5 Sep 2023 12:49:32 +0200
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1D43510E506;
+ Tue,  5 Sep 2023 13:28:19 +0000 (UTC)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-401da71b83cso24104565e9.2; 
+ Tue, 05 Sep 2023 06:28:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693920497; x=1694525297; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=HO60y5WvecntGMap+7ti8637GtVXXtrbirknYBL6Q24=;
+ b=FlQAyFQNK/BHXuK3A3+GzQ/ahXcyYwEYohsqtdXggwfUDL0di68lxE1t82nWbkHVNH
+ 9H4y598jlcymkjXv5Vl4gMkeo5y1GMKxd3ExeafUnU9cZ/wvkorTWZn36nyfUByraDMn
+ OvJ5zfT9XVkaw8q2082Lbw2pVMLd3kr3bYIfbs8rDDE1v8qqn9fb+NZf/JOplb1ht/Pt
+ MrAJRW9981kBQFpeKWebi44oDMpurtFCVBBUb3pfdC02dPQLWTATDF3L+RrHixrNpKbS
+ ikYs6H6tUSQtKfHN4irN5UVmXRbNtXASU0DDY3y9Q8YaW6gDcY1v6v9coHc1JxRjCENP
+ Iwng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693920497; x=1694525297;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=HO60y5WvecntGMap+7ti8637GtVXXtrbirknYBL6Q24=;
+ b=U2kosq0OW3eYNwdq0iuZldMCNraG5UsZrbCC9Pz3ciGASf/uARiB1T0+HL7MFmmIm1
+ Xb4HfAQeucHX1x5b8ybvDNG+s5Wk6ERMaj5YiOSO1mL+R5Ftkh8rdUCNI2xtHc1cFaA7
+ T3V7pPYeX9bBcJ2mz2Qztl+GcGp1FC2Uizb3atv+x/rMBweA7zkju/p7jrUTstyNzRsq
+ nxUTQlz2mYoxhAAUe5NAh7NDvHDSBevfGpFuNvwRGQsIUFM9sEJiM+HQNserZJiBfB/V
+ xW5g+85kSdISE9nxaEnsJTWg7xctkUtDNUDULK2G00FDZWl+4nkue4kbRB3Ck0zfYOWq
+ ynag==
+X-Gm-Message-State: AOJu0YzuBqVNxothL7dwUwE1iQccaOPqYVDDfXQbdeGynsK2JntTz1BG
+ btGKCONenLtPiInJzWeWfSs=
+X-Google-Smtp-Source: AGHT+IE9N4h9DnLrGBA6w0mD6fm9bBMgaxlwOB4SKAbQC3od7Yg6OmwCuXYoDvsI34rJ37MMdyjrhQ==
+X-Received: by 2002:a5d:4408:0:b0:313:f399:6cea with SMTP id
+ z8-20020a5d4408000000b00313f3996ceamr9182865wrq.4.1693920497247; 
+ Tue, 05 Sep 2023 06:28:17 -0700 (PDT)
+Received: from [10.254.108.106] (munvpn.amd.com. [165.204.72.6])
+ by smtp.gmail.com with ESMTPSA id
+ n10-20020adfe78a000000b0031aca6cc69csm17618765wrm.2.2023.09.05.06.28.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 Sep 2023 06:28:16 -0700 (PDT)
+Message-ID: <b11fedb4-d577-d007-0ef8-ac62775d9eee@gmail.com>
+Date: Tue, 5 Sep 2023 15:28:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
+ Thunderbird/102.13.0
 Content-Language: en-US
-To: Sui Jingfeng <sui.jingfeng@linux.dev>, Bjorn Helgaas <bhelgaas@google.com>
+To: Jani Nikula <jani.nikula@linux.intel.com>,
+ Sui Jingfeng <sui.jingfeng@linux.dev>, Bjorn Helgaas <bhelgaas@google.com>
 References: <20230904195724.633404-1-sui.jingfeng@linux.dev>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-In-Reply-To: <20230904195724.633404-1-sui.jingfeng@linux.dev>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------SZftlnzSQEmkHrhKFKQvdI2G"
+ <874jk8j45s.fsf@intel.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+In-Reply-To: <874jk8j45s.fsf@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 Subject: Re: [Nouveau] [RFC,
  drm-misc-next v4 0/9] PCI/VGA: Allowing the user to select the
  primary video adapter at boot time
@@ -72,149 +81,126 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Sui Jingfeng <suijingfeng@loongson.cn>, nouveau@lists.freedesktop.org,
  intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  linux-pci@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------SZftlnzSQEmkHrhKFKQvdI2G
-Content-Type: multipart/mixed; boundary="------------a08JUWfqX04s0HL1577KPQKl";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Sui Jingfeng <sui.jingfeng@linux.dev>, Bjorn Helgaas <bhelgaas@google.com>
-Cc: Sui Jingfeng <suijingfeng@loongson.cn>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- linux-pci@vger.kernel.org
-Message-ID: <151c0429-dbc2-e987-1491-6c733ca159ac@suse.de>
-Subject: Re: [Nouveau] [RFC, drm-misc-next v4 0/9] PCI/VGA: Allowing the user
- to select the primary video adapter at boot time
-References: <20230904195724.633404-1-sui.jingfeng@linux.dev>
-In-Reply-To: <20230904195724.633404-1-sui.jingfeng@linux.dev>
+Am 05.09.23 um 12:38 schrieb Jani Nikula:
+> On Tue, 05 Sep 2023, Sui Jingfeng <sui.jingfeng@linux.dev> wrote:
+>> From: Sui Jingfeng <suijingfeng@loongson.cn>
+>>
+>> On a machine with multiple GPUs, a Linux user has no control over which
+>> one is primary at boot time. This series tries to solve above mentioned
+>> problem by introduced the ->be_primary() function stub. The specific
+>> device drivers can provide an implementation to hook up with this stub by
+>> calling the vga_client_register() function.
+>>
+>> Once the driver bound the device successfully, VGAARB will call back to
+>> the device driver. To query if the device drivers want to be primary or
+>> not. Device drivers can just pass NULL if have no such needs.
+>>
+>> Please note that:
+>>
+>> 1) The ARM64, Loongarch, Mips servers have a lot PCIe slot, and I would
+>>     like to mount at least three video cards.
 
---------------a08JUWfqX04s0HL1577KPQKl
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Well, you rarely find a board which can actually handle a single one :)
 
-SGkNCg0KQW0gMDQuMDkuMjMgdW0gMjE6NTcgc2NocmllYiBTdWkgSmluZ2Zlbmc6DQo+IEZy
-b206IFN1aSBKaW5nZmVuZyA8c3VpamluZ2ZlbmdAbG9vbmdzb24uY24+DQo+IA0KPiBPbiBh
-IG1hY2hpbmUgd2l0aCBtdWx0aXBsZSBHUFVzLCBhIExpbnV4IHVzZXIgaGFzIG5vIGNvbnRy
-b2wgb3ZlciB3aGljaA0KPiBvbmUgaXMgcHJpbWFyeSBhdCBib290IHRpbWUuIFRoaXMgc2Vy
-aWVzIHRyaWVzIHRvIHNvbHZlIGFib3ZlIG1lbnRpb25lZA0KPiBwcm9ibGVtIGJ5IGludHJv
-ZHVjZWQgdGhlIC0+YmVfcHJpbWFyeSgpIGZ1bmN0aW9uIHN0dWIuIFRoZSBzcGVjaWZpYw0K
-PiBkZXZpY2UgZHJpdmVycyBjYW4gcHJvdmlkZSBhbiBpbXBsZW1lbnRhdGlvbiB0byBob29r
-IHVwIHdpdGggdGhpcyBzdHViIGJ5DQo+IGNhbGxpbmcgdGhlIHZnYV9jbGllbnRfcmVnaXN0
-ZXIoKSBmdW5jdGlvbi4NCj4gDQo+IE9uY2UgdGhlIGRyaXZlciBib3VuZCB0aGUgZGV2aWNl
-IHN1Y2Nlc3NmdWxseSwgVkdBQVJCIHdpbGwgY2FsbCBiYWNrIHRvDQo+IHRoZSBkZXZpY2Ug
-ZHJpdmVyLiBUbyBxdWVyeSBpZiB0aGUgZGV2aWNlIGRyaXZlcnMgd2FudCB0byBiZSBwcmlt
-YXJ5IG9yDQo+IG5vdC4gRGV2aWNlIGRyaXZlcnMgY2FuIGp1c3QgcGFzcyBOVUxMIGlmIGhh
-dmUgbm8gc3VjaCBuZWVkcy4NCj4gDQo+IFBsZWFzZSBub3RlIHRoYXQ6DQo+IA0KPiAxKSBU
-aGUgQVJNNjQsIExvb25nYXJjaCwgTWlwcyBzZXJ2ZXJzIGhhdmUgYSBsb3QgUENJZSBzbG90
-LCBhbmQgSSB3b3VsZA0KPiAgICAgbGlrZSB0byBtb3VudCBhdCBsZWFzdCB0aHJlZSB2aWRl
-byBjYXJkcy4NCj4gDQo+IDIpIFR5cGljYWxseSwgdGhvc2Ugbm9uLTg2IG1hY2hpbmVzIGRv
-bid0IGhhdmUgYSBnb29kIFVFRkkgZmlybXdhcmUNCj4gICAgIHN1cHBvcnQsIHdoaWNoIGRv
-ZXNuJ3Qgc3VwcG9ydCBzZWxlY3QgcHJpbWFyeSBHUFUgYXMgZmlybXdhcmUgc3RhZ2UuDQo+
-ICAgICBFdmVuIG9uIHg4NiwgdGhlcmUgYXJlIG9sZCBVRUZJIGZpcm13YXJlcyB3aGljaCBh
-bHJlYWR5IG1hZGUgdW5kZXNpcmVkDQo+ICAgICBkZWNpc2lvbiBmb3IgeW91Lg0KPiANCj4g
-MykgVGhpcyBzZXJpZXMgaXMgYXR0ZW1wdCB0byBzb2x2ZSB0aGUgcmVtYWluIHByb2JsZW1z
-IGF0IHRoZSBkcml2ZXIgbGV2ZWwsDQo+ICAgICB3aGlsZSBhbm90aGVyIHNlcmllc1sxXSBv
-ZiBtZSBpcyB0YXJnZXQgdG8gc29sdmUgdGhlIG1ham9yaXR5IG9mIHRoZQ0KPiAgICAgcHJv
-YmxlbXMgYXQgZGV2aWNlIGxldmVsLg0KPiANCj4gVGVzdGVkIChsaW1pdGVkKSBvbiB4ODYg
-d2l0aCBmb3VyIHZpZGVvIGNhcmQgbW91bnRlZCwgSW50ZWwgVUhEIEdyYXBoaWNzDQo+IDYz
-MCBpcyB0aGUgZGVmYXVsdCBib290IFZHQSwgc3VjY2Vzc2Z1bGx5IG92ZXJyaWRlIGJ5IGFz
-dDI0MDAgd2l0aA0KPiBhc3QubW9kZXNldD0xMCBhcHBlbmQgYXQgdGhlIGtlcm5lbCBjbWQg
-bGluZS4NCg0KRllJOiBwZXItZHJpdmVyIG1vZGVzZXQgcGFyYW1ldGVycyBhcmUgZGVwcmVj
-YXRlZCBhbmQgbm90IHRvIGJlIHVzZWQuIA0KUGxlYXNlIGRvbid0IHByb21vdGUgdGhlbS4g
-WW91IGNhbiB1c2UgbW9kcHJvYmUuYmxhY2tsaXN0IG9yIA0KaW5pdGNhbGxfYmxhY2tsaXN0
-IG9uIHRoZSBrZXJuZWwgY29tbWFuZCBsaW5lLg0KDQpCZXN0IHJlZ2FyZHMNClRob21hcw0K
-DQo+IA0KPiAkIGxzcGNpIHwgZ3JlcCBWR0ENCj4gDQo+ICAgMDA6MDIuMCBWR0EgY29tcGF0
-aWJsZSBjb250cm9sbGVyOiBJbnRlbCBDb3Jwb3JhdGlvbiBDb2ZmZWVMYWtlLVMgR1QyIFtV
-SEQgR3JhcGhpY3MgNjMwXQ0KPiAgIDAxOjAwLjAgVkdBIGNvbXBhdGlibGUgY29udHJvbGxl
-cjogQWR2YW5jZWQgTWljcm8gRGV2aWNlcywgSW5jLiBbQU1EL0FUSV0gQ2FpY29zIFhUWCBb
-UmFkZW9uIEhEIDg0OTAgLyBSNSAyMzVYIE9FTV0NCj4gICAwNDowMC4wIFZHQSBjb21wYXRp
-YmxlIGNvbnRyb2xsZXI6IEFTUEVFRCBUZWNobm9sb2d5LCBJbmMuIEFTUEVFRCBHcmFwaGlj
-cyBGYW1pbHkgKHJldiAzMCkNCj4gICAwNTowMC4wIFZHQSBjb21wYXRpYmxlIGNvbnRyb2xs
-ZXI6IE5WSURJQSBDb3Jwb3JhdGlvbiBHSzIwOEIgW0dlRm9yY2UgR1QgNzIwXSAocmV2IGEx
-KQ0KPiANCj4gJCBzdWRvIGRtZXNnIHwgZ3JlcCB2Z2FhcmINCj4gDQo+ICAgcGNpIDAwMDA6
-MDA6MDIuMDogdmdhYXJiOiBzZXR0aW5nIGFzIGJvb3QgVkdBIGRldmljZQ0KPiAgIHBjaSAw
-MDAwOjAwOjAyLjA6IHZnYWFyYjogVkdBIGRldmljZSBhZGRlZDogZGVjb2Rlcz1pbyttZW0s
-b3ducz1pbyttZW0sbG9ja3M9bm9uZQ0KPiAgIHBjaSAwMDAwOjAxOjAwLjA6IHZnYWFyYjog
-VkdBIGRldmljZSBhZGRlZDogZGVjb2Rlcz1pbyttZW0sb3ducz1ub25lLGxvY2tzPW5vbmUN
-Cj4gICBwY2kgMDAwMDowNDowMC4wOiB2Z2FhcmI6IFZHQSBkZXZpY2UgYWRkZWQ6IGRlY29k
-ZXM9aW8rbWVtLG93bnM9bm9uZSxsb2Nrcz1ub25lDQo+ICAgcGNpIDAwMDA6MDU6MDAuMDog
-dmdhYXJiOiBWR0EgZGV2aWNlIGFkZGVkOiBkZWNvZGVzPWlvK21lbSxvd25zPW5vbmUsbG9j
-a3M9bm9uZQ0KPiAgIHZnYWFyYjogbG9hZGVkDQo+ICAgYXN0IDAwMDA6MDQ6MDAuMDogdmdh
-YXJiOiBPdmVycmlkZSBhcyBwcmltYXJ5IGJ5IGRyaXZlcg0KPiAgIGk5MTUgMDAwMDowMDow
-Mi4wOiB2Z2FhcmI6IGNoYW5nZWQgVkdBIGRlY29kZXM6IG9sZGRlY29kZXM9aW8rbWVtLGRl
-Y29kZXM9bm9uZTpvd25zPWlvK21lbQ0KPiAgIHJhZGVvbiAwMDAwOjAxOjAwLjA6IHZnYWFy
-YjogY2hhbmdlZCBWR0EgZGVjb2Rlczogb2xkZGVjb2Rlcz1pbyttZW0sZGVjb2Rlcz1ub25l
-Om93bnM9bm9uZQ0KPiAgIGFzdCAwMDAwOjA0OjAwLjA6IHZnYWFyYjogY2hhbmdlZCBWR0Eg
-ZGVjb2Rlczogb2xkZGVjb2Rlcz1pbyttZW0sZGVjb2Rlcz1ub25lOm93bnM9bm9uZQ0KPiAN
-Cj4gdjI6DQo+IAkqIEFkZCBhIHNpbXBsZSBpbXBsZW1tZW50IGZvciBkcm0vaTkxNSBhbmQg
-ZHJtL2FzdA0KPiAJKiBQaWNrIHVwIGFsbCB0YWdzIChNYXJpbykNCj4gdjM6DQo+IAkqIEZp
-eCBhIG1pc3Rha2UgZm9yIGRybS9pOTE1IGltcGxlbWVudA0KPiAJKiBGaXggcGF0Y2ggY2Fu
-IG5vdCBiZSBhcHBsaWVkIHByb2JsZW0gYmVjYXVzZSBvZiBtZXJnZSBjb25mbGVjdC4NCj4g
-djQ6DQo+IAkqIEZvY3VzIG9uIHNvbHZlIHRoZSByZWFsIHByb2JsZW0uDQo+IA0KPiB2MSx2
-MiBhdCBodHRwczovL3BhdGNod29yay5mcmVlZGVza3RvcC5vcmcvc2VyaWVzLzEyMDA1OS8N
-Cj4gICAgIHYzIGF0IGh0dHBzOi8vcGF0Y2h3b3JrLmZyZWVkZXNrdG9wLm9yZy9zZXJpZXMv
-MTIwNTYyLw0KPiANCj4gWzFdIGh0dHBzOi8vcGF0Y2h3b3JrLmZyZWVkZXNrdG9wLm9yZy9z
-ZXJpZXMvMTIyODQ1Lw0KPiANCj4gU3VpIEppbmdmZW5nICg5KToNCj4gICAgUENJL1ZHQTog
-QWxsb3dpbmcgdGhlIHVzZXIgdG8gc2VsZWN0IHRoZSBwcmltYXJ5IHZpZGVvIGFkYXB0ZXIg
-YXQgYm9vdA0KPiAgICAgIHRpbWUNCj4gICAgZHJtL25vdXZlYXU6IEltcGxlbWVudCAuYmVf
-cHJpbWFyeSgpIGNhbGxiYWNrDQo+ICAgIGRybS9yYWRlb246IEltcGxlbWVudCAuYmVfcHJp
-bWFyeSgpIGNhbGxiYWNrDQo+ICAgIGRybS9hbWRncHU6IEltcGxlbWVudCAuYmVfcHJpbWFy
-eSgpIGNhbGxiYWNrDQo+ICAgIGRybS9pOTE1OiBJbXBsZW1lbnQgLmJlX3ByaW1hcnkoKSBj
-YWxsYmFjaw0KPiAgICBkcm0vbG9vbmdzb246IEltcGxlbWVudCAuYmVfcHJpbWFyeSgpIGNh
-bGxiYWNrDQo+ICAgIGRybS9hc3Q6IFJlZ2lzdGVyIGFzIGEgVkdBIGNsaWVudCBieSBjYWxs
-aW5nIHZnYV9jbGllbnRfcmVnaXN0ZXIoKQ0KPiAgICBkcm0vaGlibWM6IFJlZ2lzdGVyIGFz
-IGEgVkdBIGNsaWVudCBieSBjYWxsaW5nIHZnYV9jbGllbnRfcmVnaXN0ZXIoKQ0KPiAgICBk
-cm0vZ21hNTAwOiBSZWdpc3RlciBhcyBhIFZHQSBjbGllbnQgYnkgY2FsbGluZyB2Z2FfY2xp
-ZW50X3JlZ2lzdGVyKCkNCj4gDQo+ICAgZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1k
-Z3B1X2RldmljZS5jICAgIHwgMTEgKysrLQ0KPiAgIGRyaXZlcnMvZ3B1L2RybS9hbWQvYW1k
-Z3B1L2FtZGdwdV9kcnYuYyAgICAgICB8IDEzICsrKystDQo+ICAgZHJpdmVycy9ncHUvZHJt
-L2FzdC9hc3RfZHJ2LmMgICAgICAgICAgICAgICAgIHwgMzEgKysrKysrKysrKw0KPiAgIGRy
-aXZlcnMvZ3B1L2RybS9nbWE1MDAvcHNiX2Rydi5jICAgICAgICAgICAgICB8IDU3ICsrKysr
-KysrKysrKysrKysrKy0NCj4gICAuLi4vZ3B1L2RybS9oaXNpbGljb24vaGlibWMvaGlibWNf
-ZHJtX2Rydi5jICAgfCAxNSArKysrKw0KPiAgIGRyaXZlcnMvZ3B1L2RybS9pOTE1L2Rpc3Bs
-YXkvaW50ZWxfdmdhLmMgICAgICB8IDE1ICsrKystDQo+ICAgZHJpdmVycy9ncHUvZHJtL2xv
-b25nc29uL2xvb25nc29uX21vZHVsZS5jICAgIHwgIDIgKy0NCj4gICBkcml2ZXJzL2dwdS9k
-cm0vbG9vbmdzb24vbG9vbmdzb25fbW9kdWxlLmggICAgfCAgMSArDQo+ICAgZHJpdmVycy9n
-cHUvZHJtL2xvb25nc29uL2xzZGNfZHJ2LmMgICAgICAgICAgIHwgMTAgKysrLQ0KPiAgIGRy
-aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfdmdhLmMgICAgICAgICB8IDExICsrKy0N
-Cj4gICBkcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9kZXZpY2UuYyAgICAgICAgfCAx
-MCArKystDQo+ICAgZHJpdmVycy9wY2kvdmdhYXJiLmMgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHwgNDMgKysrKysrKysrKysrLS0NCj4gICBkcml2ZXJzL3ZmaW8vcGNpL3ZmaW9fcGNp
-X2NvcmUuYyAgICAgICAgICAgICAgfCAgMiArLQ0KPiAgIGluY2x1ZGUvbGludXgvdmdhYXJi
-LmggICAgICAgICAgICAgICAgICAgICAgICB8ICA4ICsrLQ0KPiAgIDE0IGZpbGVzIGNoYW5n
-ZWQsIDIxMCBpbnNlcnRpb25zKCspLCAxOSBkZWxldGlvbnMoLSkNCj4gDQoNCi0tIA0KVGhv
-bWFzIFppbW1lcm1hbm4NCkdyYXBoaWNzIERyaXZlciBEZXZlbG9wZXINClNVU0UgU29mdHdh
-cmUgU29sdXRpb25zIEdlcm1hbnkgR21iSA0KRnJhbmtlbnN0cmFzc2UgMTQ2LCA5MDQ2MSBO
-dWVybmJlcmcsIEdlcm1hbnkNCkdGOiBJdm8gVG90ZXYsIEFuZHJldyBNeWVycywgQW5kcmV3
-IE1jRG9uYWxkLCBCb3VkaWVuIE1vZXJtYW4NCkhSQiAzNjgwOSAoQUcgTnVlcm5iZXJnKQ0K
+>>
+>> 2) Typically, those non-86 machines don't have a good UEFI firmware
+>>     support, which doesn't support select primary GPU as firmware stage.
+>>     Even on x86, there are old UEFI firmwares which already made undesired
+>>     decision for you.
+>>
+>> 3) This series is attempt to solve the remain problems at the driver level,
+>>     while another series[1] of me is target to solve the majority of the
+>>     problems at device level.
+>>
+>> Tested (limited) on x86 with four video card mounted, Intel UHD Graphics
+>> 630 is the default boot VGA, successfully override by ast2400 with
+>> ast.modeset=10 append at the kernel cmd line.
+> The value 10 is incredibly arbitrary, and multiplied as a magic number
+> all over the place.
 
++1
 
---------------a08JUWfqX04s0HL1577KPQKl--
+>
+>> $ lspci | grep VGA
+>>
+>>   00:02.0 VGA compatible controller: Intel Corporation CoffeeLake-S GT2 [UHD Graphics 630]
+>>   01:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Caicos XTX [Radeon HD 8490 / R5 235X OEM]
+>>   04:00.0 VGA compatible controller: ASPEED Technology, Inc. ASPEED Graphics Family (rev 30)
+>>   05:00.0 VGA compatible controller: NVIDIA Corporation GK208B [GeForce GT 720] (rev a1)
+> In this example, all of the GPUs are driven by different drivers. What
+> good does a module parameter do if you have multiple GPUs of the same
+> model, all driven by the same driver module?
 
---------------SZftlnzSQEmkHrhKFKQvdI2G
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+Completely agree. Question is what is the benefit for the end user to 
+actually specify this?
 
------BEGIN PGP SIGNATURE-----
+If you want the initial console on a different device than implement a 
+kernel options for vgaarb and *not* the drivers.
 
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmT3B70FAwAAAAAACgkQlh/E3EQov+AX
-Lw/9F0C7Gkxj5ijEeIjnoVFjFuSwWlTKeLdkEE58cXv1FKXsjLhJvkmU9CJp3Y/QDQO7JEgBX8F9
-ZvuF18ILOyh6+a3GMMN2YhdV123ZhDICHdqlZ0LcszorCLPfmOwkIGVpuqmt0Mhh5x5MF3WkKaF1
-RHrog7KcO5r9xluX2BDlrASgsne8cEfGhwUTMxy6TglgIAgo7RV3A92aRAfCNw+QljxYFLFGUmI5
-Zo74+ULVn7ozCgUM23csJ8YSgPVEnXEKa+PWAlGbwhOnncqYNlFlsICfkFk1/npP9ErPlGyfX2pK
-jwat7ueFnQ1fxwUUtTdx7YZC1KJQCINBuQtwfSTRFt7FQbnZki90hRPk+hCNo0wLx90hc7g29kWC
-kBVDdW73zVC2IPTJ1ZnGseLZnVwdX9rD3RVVlbZ5bOt0GoItFsT6L+MQzB2BL3jpuyjgFzU/HRZP
-LduQUIqUZkKwIpMXpOQIH1fjvxpr0WaSo3zj96BkIJLO7i6dEytc1zSTVJhJaIX6mKzJtIBhyLIS
-LUa5nN9ylr7Qz6Ly/Sc/FhLnsEpn+RESQWZCGJeZmIBmg6IkmuUWErjP9KOyFYb/XFCg5ddHxC9N
-yRI+qx6bv9Cp/WnznUYx+HsSNJ/DesvT1IcUyfjREIiaDDzioKRre/pKkfZ3vln/qHqU+8TaxdYI
-pJ4=
-=Yl0Q
------END PGP SIGNATURE-----
+Regards,
+Christian.
 
---------------SZftlnzSQEmkHrhKFKQvdI2G--
+>
+> BR,
+> Jani.
+>
+>> $ sudo dmesg | grep vgaarb
+>>
+>>   pci 0000:00:02.0: vgaarb: setting as boot VGA device
+>>   pci 0000:00:02.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+>>   pci 0000:01:00.0: vgaarb: VGA device added: decodes=io+mem,owns=none,locks=none
+>>   pci 0000:04:00.0: vgaarb: VGA device added: decodes=io+mem,owns=none,locks=none
+>>   pci 0000:05:00.0: vgaarb: VGA device added: decodes=io+mem,owns=none,locks=none
+>>   vgaarb: loaded
+>>   ast 0000:04:00.0: vgaarb: Override as primary by driver
+>>   i915 0000:00:02.0: vgaarb: changed VGA decodes: olddecodes=io+mem,decodes=none:owns=io+mem
+>>   radeon 0000:01:00.0: vgaarb: changed VGA decodes: olddecodes=io+mem,decodes=none:owns=none
+>>   ast 0000:04:00.0: vgaarb: changed VGA decodes: olddecodes=io+mem,decodes=none:owns=none
+>>
+>> v2:
+>> 	* Add a simple implemment for drm/i915 and drm/ast
+>> 	* Pick up all tags (Mario)
+>> v3:
+>> 	* Fix a mistake for drm/i915 implement
+>> 	* Fix patch can not be applied problem because of merge conflect.
+>> v4:
+>> 	* Focus on solve the real problem.
+>>
+>> v1,v2 at https://patchwork.freedesktop.org/series/120059/
+>>     v3 at https://patchwork.freedesktop.org/series/120562/
+>>
+>> [1] https://patchwork.freedesktop.org/series/122845/
+>>
+>> Sui Jingfeng (9):
+>>    PCI/VGA: Allowing the user to select the primary video adapter at boot
+>>      time
+>>    drm/nouveau: Implement .be_primary() callback
+>>    drm/radeon: Implement .be_primary() callback
+>>    drm/amdgpu: Implement .be_primary() callback
+>>    drm/i915: Implement .be_primary() callback
+>>    drm/loongson: Implement .be_primary() callback
+>>    drm/ast: Register as a VGA client by calling vga_client_register()
+>>    drm/hibmc: Register as a VGA client by calling vga_client_register()
+>>    drm/gma500: Register as a VGA client by calling vga_client_register()
+>>
+>>   drivers/gpu/drm/amd/amdgpu/amdgpu_device.c    | 11 +++-
+>>   drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       | 13 ++++-
+>>   drivers/gpu/drm/ast/ast_drv.c                 | 31 ++++++++++
+>>   drivers/gpu/drm/gma500/psb_drv.c              | 57 ++++++++++++++++++-
+>>   .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c   | 15 +++++
+>>   drivers/gpu/drm/i915/display/intel_vga.c      | 15 ++++-
+>>   drivers/gpu/drm/loongson/loongson_module.c    |  2 +-
+>>   drivers/gpu/drm/loongson/loongson_module.h    |  1 +
+>>   drivers/gpu/drm/loongson/lsdc_drv.c           | 10 +++-
+>>   drivers/gpu/drm/nouveau/nouveau_vga.c         | 11 +++-
+>>   drivers/gpu/drm/radeon/radeon_device.c        | 10 +++-
+>>   drivers/pci/vgaarb.c                          | 43 ++++++++++++--
+>>   drivers/vfio/pci/vfio_pci_core.c              |  2 +-
+>>   include/linux/vgaarb.h                        |  8 ++-
+>>   14 files changed, 210 insertions(+), 19 deletions(-)
+
