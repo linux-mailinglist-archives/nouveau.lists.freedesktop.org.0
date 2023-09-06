@@ -2,30 +2,62 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 643177937B9
-	for <lists+nouveau@lfdr.de>; Wed,  6 Sep 2023 11:08:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EBD4179387C
+	for <lists+nouveau@lfdr.de>; Wed,  6 Sep 2023 11:40:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CA20910E5AD;
-	Wed,  6 Sep 2023 09:08:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4894810E5B6;
+	Wed,  6 Sep 2023 09:40:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
- by gabe.freedesktop.org (Postfix) with ESMTP id CBE3D10E1A5;
- Wed,  6 Sep 2023 09:08:14 +0000 (UTC)
-Received: from loongson.cn (unknown [10.20.42.43])
- by gateway (Coremail) with SMTP id _____8DxVuh8Qfhk0EAgAA--.29532S3;
- Wed, 06 Sep 2023 17:08:12 +0800 (CST)
-Received: from [0.0.0.0] (unknown [10.20.42.43])
- by localhost.localdomain (Coremail) with SMTP id
- AQAAf8CxvM56QfhkpFxuAA--.3166S3; 
- Wed, 06 Sep 2023 17:08:10 +0800 (CST)
-Message-ID: <b51d49f3-e3de-6b8d-9cb4-df5c03f3cdc0@loongson.cn>
-Date: Wed, 6 Sep 2023 17:08:10 +0800
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B7B2010E184;
+ Wed,  6 Sep 2023 09:40:18 +0000 (UTC)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5230a22cfd1so4986161a12.1; 
+ Wed, 06 Sep 2023 02:40:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693993217; x=1694598017; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=X9Vb47gswGc4CRFmCgVTREKIby3QhfxygfFTeY7yqU8=;
+ b=Ao9wuGckfQOQNZwPOzx7K6e9yNXhVQPkqL46S/jz+BEc7PlFwgf2/A7elpqb8oOUr0
+ 8m+cKSLmBoZihy1/oiXUiZJeKhdFo2PpTn2THvHYyxOvCQoMTZ81pfJXUonn5aQ8xIR3
+ tUTsrjA3wVpEXzpaBwNZf+/alUCygXv004qVqsEGSJNBXiZd2eJ2UKns2xryf9UV0ywL
+ +K1lWSQfhF7tudjhRxb9NUcy5pbIraQ9ctJrivU6Q0dxwb3QqKicsVdd2jfb5KgoJVB9
+ VNuV1GFi+rVvabSA+4TVUzGdL8K0jj5Mm+Eus1HUV5g5QyFXdpXxJfElI0i+OAoocQsy
+ 6QqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693993217; x=1694598017;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=X9Vb47gswGc4CRFmCgVTREKIby3QhfxygfFTeY7yqU8=;
+ b=OKCom0vVX+Y7pQFwM5dJxsprj/hOEuChgGyn/L9ifOurqXAioFZd1S5X1iY33VxXfp
+ KAMeLuAohil66wX5wXQELIjGVlsU9AYxkwDCT0O9fWD4JCkjS4w8pqFKtaLqsKLsAex2
+ ECzRMLRqAmiops+dherw4Kx1qIbN9DaVye9BSciqd1upZE/6JK1KryHl5Aq9ls1ol04a
+ lJ6u+WUIpdJ7wYMpzINwv7eyylSmgLi2VfESsQFXbd2wGm/N5QWfXvk6aeNckp+idM5+
+ 1tc8I/zj5AR5Sq7t04MM88TZ9mXPzlxk6KZPDLLOnbT93ZKy66+U6CsuhIlp455+MXzJ
+ aH4g==
+X-Gm-Message-State: AOJu0YwFcoz6faH++xv1tEhBl87VCYV8qozyR3vIgbZuJXVQb/Q7glrD
+ auxxhzSMHAu0LE1RUCbrWYw=
+X-Google-Smtp-Source: AGHT+IGAFjVUBWoiL4jFZIhLJ5+kFxpO6Qwb5IlvPalw7IqLnbbVI5DXHgXOw/07cUZAyzy2ptzREw==
+X-Received: by 2002:aa7:c750:0:b0:522:3ef1:b1d with SMTP id
+ c16-20020aa7c750000000b005223ef10b1dmr1598365eds.6.1693993216912; 
+ Wed, 06 Sep 2023 02:40:16 -0700 (PDT)
+Received: from [192.168.178.25] ([134.19.97.6])
+ by smtp.gmail.com with ESMTPSA id
+ es9-20020a056402380900b0052e9b50dafdsm599052edb.33.2023.09.06.02.40.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 06 Sep 2023 02:40:12 -0700 (PDT)
+Message-ID: <10509692-ce04-e225-5a27-abc955554bdc@gmail.com>
+Date: Wed, 6 Sep 2023 11:40:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
+ Thunderbird/102.13.0
 Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
+To: suijingfeng <suijingfeng@loongson.cn>,
  Thomas Zimmermann <tzimmermann@suse.de>,
  Sui Jingfeng <sui.jingfeng@linux.dev>, Bjorn Helgaas <bhelgaas@google.com>,
  "Koenig, Christian" <Christian.Koenig@amd.com>,
@@ -35,30 +67,11 @@ References: <20230904195724.633404-1-sui.jingfeng@linux.dev>
  <44ec8549-dc36-287e-4359-abd3ec8d22d6@suse.de>
  <5afd2efb-f838-f9b7-02a9-2cf4d4fd2382@loongson.cn>
  <2adfa653-ac35-d560-be52-c92848a1eef5@gmail.com>
-From: suijingfeng <suijingfeng@loongson.cn>
-In-Reply-To: <2adfa653-ac35-d560-be52-c92848a1eef5@gmail.com>
+ <b51d49f3-e3de-6b8d-9cb4-df5c03f3cdc0@loongson.cn>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+In-Reply-To: <b51d49f3-e3de-6b8d-9cb4-df5c03f3cdc0@loongson.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf8CxvM56QfhkpFxuAA--.3166S3
-X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
-X-Coremail-Antispam: 1Uk129KBj93XoWxArWruw1kuFW8Ar4UKF1xJFc_yoWrJw1rpF
- 4YqFyUtr4kGr1rAr4Skw48WFZ5AFsFqFy5GF1vgr1Fv398Xr1Fvr9rtF4UCa4UXrn7Z3W0
- 9rWFqrW7GF4DZFXCm3ZEXasCq-sJn29KB7ZKAUJUUUUx529EdanIXcx71UUUUU7KY7ZEXa
- sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
- 0xBIdaVrnRJUUUP2b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
- IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
- e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
- 0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v2
- 6F4UJVW0owAaw2AFwI0_JF0_Jw1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0c
- Ia020Ex4CE44I27wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_
- Jw1lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrw
- CYjI0SjxkI62AI1cAE67vIY487MxkF7I0En4kS14v26r126r1DMxAIw28IcxkI7VAKI48J
- MxC20s026xCaFVCjc4AY6r1j6r4UMxCIbckI1I0E14v26r126r1DMI8I3I0E5I8CrVAFwI
- 0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y
- 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
- WUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1l
- IxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8uc_3UUUU
- U==
+Content-Transfer-Encoding: 7bit
 Subject: Re: [Nouveau] [RFC,
  drm-misc-next v4 0/9] PCI/VGA: Allowing the user to select the
  primary video adapter at boot time
@@ -79,94 +92,41 @@ Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+Am 06.09.23 um 11:08 schrieb suijingfeng:
+> Well, welcome to correct me if I'm wrong.
 
+You seem to have some very basic misunderstandings here.
 
-On 2023/9/6 14:45, Christian König wrote:
-> Am 05.09.23 um 15:30 schrieb suijingfeng:
->> Hi,
->>
->>
->> On 2023/9/5 18:45, Thomas Zimmermann wrote:
->>> Hi
->>>
->>> Am 04.09.23 um 21:57 schrieb Sui Jingfeng:
->>>> From: Sui Jingfeng <suijingfeng@loongson.cn>
->>>>
->>>> On a machine with multiple GPUs, a Linux user has no control over 
->>>> which
->>>> one is primary at boot time. This series tries to solve above 
->>>> mentioned
->>>
->>> If anything, the primary graphics adapter is the one initialized by 
->>> the firmware. I think our boot-up graphics also make this assumption 
->>> implicitly.
->>>
->>
->> Yes, but by the time of DRM drivers get loaded successfully,the 
->> boot-up graphics already finished.
->
-> This is an incorrect assumption.
->
-> drm_aperture_remove_conflicting_pci_framebuffers() and co don't kill 
-> the framebuffer, 
+The term framebuffer describes some VRAM memory used for scanout.
 
-Well, my original description to this technique point is that
+This framebuffer is exposed to userspace through some framebuffer 
+driver, on UEFI platforms that is usually efifb but can be quite a bunch 
+of different drivers.
 
-1) "Firmware framebuffer device already get killed by the drm_aperture_remove_conflicting_pci_framebuffers() function (or its siblings)"
-2) "By the time of DRM drivers get loaded successfully, the boot-up graphics already finished."
+When the DRM drivers load they remove the previous drivers using 
+drm_aperture_remove_conflicting_pci_framebuffers() (or similar 
+function), but this does not mean that the framebuffer or scanout 
+parameters are modified in any way. It just means that the framebuffer 
+is just no longer exposed through this driver.
 
-The word "killed" here is rough and coarse description about
-how does the drm device driver take over the firmware framebuffer.
-Since there seems have something obscure our communication,
-lets make the things clear. See below for more elaborate description.
+Take over is the perfectly right description here because that's exactly 
+what's happening. The framebuffer configuration including the VRAM 
+memory as well as the parameters for scanout are exposed by the newly 
+loaded DRM driver.
 
+In other words userspace can query through the DRM interfaces which 
+monitors already driven by the hardware and so in your terminology 
+figure out which is the primary one.
 
-> they just remove the current framebuffer driver to avoid further updates.
->
-This statement doesn't sound right, for UEFI environment,
-a correct description is that they remove the platform device, not the framebuffer driver.
-For the machines with the UEFI firmware, framebuffer driver here definitely refer to the efifb.
-The efifb still reside in the system(linux kernel).
+It's just that as Thomas explained as well that this completely 
+irrelevant to any modern desktop. Both X and Wayland both iterate the 
+available devices and start rendering to them which one was used during 
+boot doesn't really matter to them.
 
-Please see the aperture_detach_platform_device() function in video/aperture.c
+Apart from that ranting like this and trying to explain stuff to people 
+who obviously have much better background in the topic is not going to 
+help your patches getting upstream.
 
-> So what happens (at least for amdgpu) is that we take over the 
-> framebuffer,
-
-This statement here is also not an accurate description.
-
-Strictly speaking, drm/amdgpu takes over the device (the VRAM hardware),
-not the framebuffer.
-
-The word "take over" here is also dubious, because drm/amdgpu takes over nothing.
-
- From the perspective of device-driver model, the GPU hardware *belongs* to the amdgpu drivers.
-Why you need to take over a thing originally and belong to you?
-
-If you could build the drm/amdgpu into the kernel and make it get loaded
-before the efifb. Then, there no need to use the firmware framebuffer (
-the talking is limited to the display boot graphics purpose here).
-On such a case, the so-called "take over" will not happen.
-
-The truth is that the efifb create a platform device, which *occupy*
-part of the VRAM hardware resource. Thus, the efifb and the drm/amdgpu
-form the conflict. There are conflict because they share the same
-hardware resource. It is the hardware resources(address ranges) used
-by two different driver are conflict. Not the efifb driver itself
-conflict with drm/amdgpu driver.
-
-Thus, drm_aperture_remove_conflicting_xxxxxx() function have to kill
-one of the device are conflicting. Not to kill the driver. Therefore,
-the correct word would be the "reclaim".
-drm/amdgpu *reclaim* the hardware resource (vram address range) originally belong to you.
-
-The modeset state (including the framebuffer content) still reside in the amdgpu device.
-You just get the dirty framebuffer image in the framebuffer object.
-But the framebuffer object already dirty since it in the UEFI firmware stage.
-
-In conclusion, *reclaim* is more accurate than the "take over".
-And as far as I'm understanding, the drm/amdgpu take over nothing, no gains.
-
-Well, welcome to correct me if I'm wrong.
+Regards,
+Christian.
 
