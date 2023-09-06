@@ -1,77 +1,62 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBD4179387C
-	for <lists+nouveau@lfdr.de>; Wed,  6 Sep 2023 11:40:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2611C7938CD
+	for <lists+nouveau@lfdr.de>; Wed,  6 Sep 2023 11:48:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4894810E5B6;
-	Wed,  6 Sep 2023 09:40:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4B77410E5B9;
+	Wed,  6 Sep 2023 09:48:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B7B2010E184;
- Wed,  6 Sep 2023 09:40:18 +0000 (UTC)
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5230a22cfd1so4986161a12.1; 
- Wed, 06 Sep 2023 02:40:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693993217; x=1694598017; darn=lists.freedesktop.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=X9Vb47gswGc4CRFmCgVTREKIby3QhfxygfFTeY7yqU8=;
- b=Ao9wuGckfQOQNZwPOzx7K6e9yNXhVQPkqL46S/jz+BEc7PlFwgf2/A7elpqb8oOUr0
- 8m+cKSLmBoZihy1/oiXUiZJeKhdFo2PpTn2THvHYyxOvCQoMTZ81pfJXUonn5aQ8xIR3
- tUTsrjA3wVpEXzpaBwNZf+/alUCygXv004qVqsEGSJNBXiZd2eJ2UKns2xryf9UV0ywL
- +K1lWSQfhF7tudjhRxb9NUcy5pbIraQ9ctJrivU6Q0dxwb3QqKicsVdd2jfb5KgoJVB9
- VNuV1GFi+rVvabSA+4TVUzGdL8K0jj5Mm+Eus1HUV5g5QyFXdpXxJfElI0i+OAoocQsy
- 6QqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693993217; x=1694598017;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=X9Vb47gswGc4CRFmCgVTREKIby3QhfxygfFTeY7yqU8=;
- b=OKCom0vVX+Y7pQFwM5dJxsprj/hOEuChgGyn/L9ifOurqXAioFZd1S5X1iY33VxXfp
- KAMeLuAohil66wX5wXQELIjGVlsU9AYxkwDCT0O9fWD4JCkjS4w8pqFKtaLqsKLsAex2
- ECzRMLRqAmiops+dherw4Kx1qIbN9DaVye9BSciqd1upZE/6JK1KryHl5Aq9ls1ol04a
- lJ6u+WUIpdJ7wYMpzINwv7eyylSmgLi2VfESsQFXbd2wGm/N5QWfXvk6aeNckp+idM5+
- 1tc8I/zj5AR5Sq7t04MM88TZ9mXPzlxk6KZPDLLOnbT93ZKy66+U6CsuhIlp455+MXzJ
- aH4g==
-X-Gm-Message-State: AOJu0YwFcoz6faH++xv1tEhBl87VCYV8qozyR3vIgbZuJXVQb/Q7glrD
- auxxhzSMHAu0LE1RUCbrWYw=
-X-Google-Smtp-Source: AGHT+IGAFjVUBWoiL4jFZIhLJ5+kFxpO6Qwb5IlvPalw7IqLnbbVI5DXHgXOw/07cUZAyzy2ptzREw==
-X-Received: by 2002:aa7:c750:0:b0:522:3ef1:b1d with SMTP id
- c16-20020aa7c750000000b005223ef10b1dmr1598365eds.6.1693993216912; 
- Wed, 06 Sep 2023 02:40:16 -0700 (PDT)
-Received: from [192.168.178.25] ([134.19.97.6])
- by smtp.gmail.com with ESMTPSA id
- es9-20020a056402380900b0052e9b50dafdsm599052edb.33.2023.09.06.02.40.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Sep 2023 02:40:12 -0700 (PDT)
-Message-ID: <10509692-ce04-e225-5a27-abc955554bdc@gmail.com>
-Date: Wed, 6 Sep 2023 11:40:11 +0200
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 8658410E5B9;
+ Wed,  6 Sep 2023 09:48:35 +0000 (UTC)
+Received: from loongson.cn (unknown [10.20.42.43])
+ by gateway (Coremail) with SMTP id _____8Ax1fDxSvhkEEggAA--.64833S3;
+ Wed, 06 Sep 2023 17:48:33 +0800 (CST)
+Received: from [0.0.0.0] (unknown [10.20.42.43])
+ by localhost.localdomain (Coremail) with SMTP id
+ AQAAf8Bx3yPvSvhkg2huAA--.28402S3; 
+ Wed, 06 Sep 2023 17:48:31 +0800 (CST)
+Message-ID: <3f41eea5-d441-304d-f441-eaf7ce63d3e1@loongson.cn>
+Date: Wed, 6 Sep 2023 17:48:31 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
+ Thunderbird/102.15.0
 Content-Language: en-US
-To: suijingfeng <suijingfeng@loongson.cn>,
- Thomas Zimmermann <tzimmermann@suse.de>,
+To: Thomas Zimmermann <tzimmermann@suse.de>,
  Sui Jingfeng <sui.jingfeng@linux.dev>, Bjorn Helgaas <bhelgaas@google.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
  "Koenig, Christian" <Christian.Koenig@amd.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Daniel Vetter <daniel@ffwll.ch>,
  "Deucher, Alexander" <Alexander.Deucher@amd.com>
 References: <20230904195724.633404-1-sui.jingfeng@linux.dev>
- <44ec8549-dc36-287e-4359-abd3ec8d22d6@suse.de>
- <5afd2efb-f838-f9b7-02a9-2cf4d4fd2382@loongson.cn>
- <2adfa653-ac35-d560-be52-c92848a1eef5@gmail.com>
- <b51d49f3-e3de-6b8d-9cb4-df5c03f3cdc0@loongson.cn>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <b51d49f3-e3de-6b8d-9cb4-df5c03f3cdc0@loongson.cn>
+ <151c0429-dbc2-e987-1491-6c733ca159ac@suse.de>
+ <3eced3f5-622f-31a6-f8a0-ff0812be74ff@loongson.cn>
+ <6035cf27-1506-dda7-e1ca-d83ce5cb5340@suse.de>
+From: suijingfeng <suijingfeng@loongson.cn>
+In-Reply-To: <6035cf27-1506-dda7-e1ca-d83ce5cb5340@suse.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf8Bx3yPvSvhkg2huAA--.28402S3
+X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
+X-Coremail-Antispam: 1Uk129KBj93XoWxtF4UuFWxWr17Gw47JryrAFc_yoWxJw17pF
+ ykuay5KF4kJrn5C340v3WUuFWFq3y8JFWfJrn3G345ua90kryUZFZFgw4Y9asrCr4fXF15
+ tF4Ut3429343AagCm3ZEXasCq-sJn29KB7ZKAUJUUUUr529EdanIXcx71UUUUU7KY7ZEXa
+ sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+ 0xBIdaVrnRJUUUBFb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+ IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+ e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+ 0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AK
+ xVWxJr0_GcWln4kS14v26r1Y6r17M2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12
+ xvs2x26I8E6xACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1Y
+ 6r17McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr4
+ 1lc7I2V7IY0VAS07AlzVAYIcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWU
+ JVW8JwCFI7km07C267AKxVWUtVW8ZwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4
+ vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IY
+ x2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26c
+ xKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAF
+ wI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07jFa0PUUUUU=
 Subject: Re: [Nouveau] [RFC,
  drm-misc-next v4 0/9] PCI/VGA: Allowing the user to select the
  primary video adapter at boot time
@@ -87,46 +72,172 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org, linux-pci@vger.kernel.org
+ linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-pci@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 06.09.23 um 11:08 schrieb suijingfeng:
-> Well, welcome to correct me if I'm wrong.
+Hi,
 
-You seem to have some very basic misunderstandings here.
 
-The term framebuffer describes some VRAM memory used for scanout.
+On 2023/9/6 16:05, Thomas Zimmermann wrote:
+> Hi
+>
+> Am 05.09.23 um 17:59 schrieb suijingfeng:
+> [...]
+>>> FYI: per-driver modeset parameters are deprecated and not to be 
+>>> used. Please don't promote them.
+>>
+>>
+>> Well, please wait, I want to explain.
+>>
+>>
+>>
+>> drm/nouveau already promote it a little bit.
+>>
+>> Despite no code of conduct or specification guiding how the modules 
+>> parameters should be.
+>> Noticed that there already have a lot of DRM drivers support the 
+>> modeset parameters,
+>
+> Please look at the history and discussion around this parameter. To my 
+> knowledge, 'modeset' got introduced when modesetting with still done 
+> in userspace. It was an easy way of disabling the kernel driver if the 
+> system's Xorg did no yet support kernel mode setting.
+>
+> Fast forward a few years and all Linux' use kernel modesetting, which 
+> make the modeset parameters obsolete. We discussed and decided to keep 
+> them in, because many articles and blog posts refer to them. We didn't 
+> want to invalidate them. BUT modeset is deprecated and not allowed in 
+> new code. If you look at existing modeset usage, you will eventually 
+> come across the comment at [1].
+>
 
-This framebuffer is exposed to userspace through some framebuffer 
-driver, on UEFI platforms that is usually efifb but can be quite a bunch 
-of different drivers.
+OK, no problem. I agree what you said.
 
-When the DRM drivers load they remove the previous drivers using 
-drm_aperture_remove_conflicting_pci_framebuffers() (or similar 
-function), but this does not mean that the framebuffer or scanout 
-parameters are modified in any way. It just means that the framebuffer 
-is just no longer exposed through this driver.
 
-Take over is the perfectly right description here because that's exactly 
-what's happening. The framebuffer configuration including the VRAM 
-memory as well as the parameters for scanout are exposed by the newly 
-loaded DRM driver.
+> There's 'nomodeset', which disables all native drivers. It's useful 
+> for debugging or as a quick-fix if the graphics driver breaks. If you 
+> want to disable a specific driver, please use one of the options for 
+> blacklisting.
+>
+Yeah, the 'nomodeset' disables all native drivers,
+this is a good point of it, but this is also the weak point of it.
 
-In other words userspace can query through the DRM interfaces which 
-monitors already driven by the hardware and so in your terminology 
-figure out which is the primary one.
+Sometimes, when you are developing a drm driver for a new device.
+You will see the pain. Its too often a programmer's modification
+make the entire Linux kernel hang there. The problematic drm
+driver kernel module already in the initrd. Then, the real
+need to disable the ill-functional drm driver kernel module
+only. While what you recommend to disable them all. There
+are subtle difference.
 
-It's just that as Thomas explained as well that this completely 
-irrelevant to any modern desktop. Both X and Wayland both iterate the 
-available devices and start rendering to them which one was used during 
-boot doesn't really matter to them.
+Another limitation of the 'nomodeset' parameter is that
+it is only available on recent upstream kernel. Low version
+downstream kernel don't has this parameter supported yet.
+So this create inconstant developing experience. I believe that
+there always some people need do back-port and upstream work
+for various reasons.
 
-Apart from that ranting like this and trying to explain stuff to people 
-who obviously have much better background in the topic is not going to 
-help your patches getting upstream.
+While (kindly, no offensive) debating, since we have the modprobe.blacklist
+why we still need the 'nomodeset' parameter ?
+why not try modprobe.blacklist="amdgpu,radeon,i915,ast,nouveau,gma500_gfx, ..."
 
-Regards,
-Christian.
+:-/
+
+
+But OK in overall, I will listen to your advice.
+
+
+> Best regards
+> Thomas
+>
+> [1] 
+> https://elixir.bootlin.com/linux/v6.5/source/include/drm/drm_module.h#L83
+>
+>
+>> for the modeset parameter, authors of various device driver try to 
+>> make the usage not
+>> conflict with others. I believe that this is good thing for Linux users.
+>> It is probably the responsibility of the drm core maintainers to 
+>> force various drm
+>> drivers to reach a minimal consensus. Probably it pains to do so and 
+>> doesn't pay off.
+>> But reach a minimal consensus do benefit to Linux users.
+>>
+>>
+>>> You can use modprobe.blacklist or initcall_blacklist on the kernel 
+>>> command line.
+>>>
+>> There are some cases where the modprobe.blacklist doesn't works,
+>> I have come cross several time during the past.
+>> Because the device selected by the VGAARB is device-level thing,
+>> it is not the driver's problem.
+>>
+>> Sometimes when VGAARB has a bug, it will select a wrong device as 
+>> primary.
+>> And the X server will use this wrong device as primary and completely 
+>> crash
+>> there, due to lack a driver. Take my old S3 Graphics as an example:
+>>
+>> $ lspci | grep VGA
+>>
+>>   00:06.1 VGA compatible controller: Loongson Technology LLC DC 
+>> (Display Controller) (rev 01)
+>>   03:00.0 VGA compatible controller: Advanced Micro Devices, Inc. 
+>> [AMD/ATI] Caicos XT [Radeon HD 7470/8470 / R5 235/310 OEM]
+>>   07:00.0 VGA compatible controller: S3 Graphics Ltd. Device 9070 
+>> (rev 01)
+>>   08:00.0 VGA compatible controller: S3 Graphics Ltd. Device 9070 
+>> (rev 01)
+>>
+>> Before apply this patch:
+>>
+>> [    0.361748] pci 0000:00:06.1: vgaarb: setting as boot VGA device
+>> [    0.361753] pci 0000:00:06.1: vgaarb: VGA device added: 
+>> decodes=io+mem,owns=io+mem,locks=none
+>> [    0.361765] pci 0000:03:00.0: vgaarb: VGA device added: 
+>> decodes=io+mem,owns=none,locks=none
+>> [    0.361773] pci 0000:07:00.0: vgaarb: VGA device added: 
+>> decodes=io+mem,owns=none,locks=none
+>> [    0.361779] pci 0000:08:00.0: vgaarb: VGA device added: 
+>> decodes=io+mem,owns=none,locks=none
+>> [    0.361781] vgaarb: loaded
+>> [    0.367838] pci 0000:00:06.1: Overriding boot device as 1002:6778
+>> [    0.367841] pci 0000:00:06.1: Overriding boot device as 5333:9070
+>> [    0.367843] pci 0000:00:06.1: Overriding boot device as 5333:9070
+>>
+>>
+>> For known reason, one of my system select the S3 Graphics as primary 
+>> GPU.
+>> But this S3 Graphics not even have a decent drm upstream driver yet.
+>> Under such a case, I begin to believe that only the device who has a
+>> driver deserve the primary.
+>>
+>> Under such a condition, I want to reboot and enter the graphic 
+>> environment
+>> with other working video cards. Either platform integrated and 
+>> discrete GPU.
+>> This don't means I should compromise by un-mount the S3 graphics card 
+>> from
+>> the motherboard, this also don't means that I should update my BIOS 
+>> setting.
+>> As sometimes, the BIOS is more worse.
+>>
+>> With this series applied, all I need to do is to reboot the computer and
+>> pass a command line. By force override another video card (who has a
+>> decent driver support) as primary, I'm able to do the debugging under
+>> graphic environment. I would like to examine what's wrong with the 
+>> vgaarb
+>> on a specific platform under X server graphic environment.
+>>
+>> Probably try compile a driver for this card and see it works, simply 
+>> reboot
+>> without the need to change anything. It is so efficient. So this is 
+>> probably
+>> the second usage of my patch. It hand the right of control back to the
+>> graphic developer.
+>>
+>>
+>
 
