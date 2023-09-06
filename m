@@ -2,71 +2,68 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6467A793586
-	for <lists+nouveau@lfdr.de>; Wed,  6 Sep 2023 08:47:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B08137935D4
+	for <lists+nouveau@lfdr.de>; Wed,  6 Sep 2023 09:00:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ED37810E3A4;
-	Wed,  6 Sep 2023 06:47:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 25F2C10E584;
+	Wed,  6 Sep 2023 07:00:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 076A310E3A4;
- Wed,  6 Sep 2023 06:47:23 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-40078c4855fso32493425e9.3; 
- Tue, 05 Sep 2023 23:47:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693982841; x=1694587641; darn=lists.freedesktop.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=F8sWie/AS6uY3OK7RU4F+xWFwmy+yKN5/EnMqbo0bWo=;
- b=Z492zrIorqxtLd7DG1q0i2CeUmzYNKvIX/cCl8xiJg/+4/KkqXyCOhu/drRtEbCVB6
- 4Inl4y3FIPYt0hxX3NL70lBJP++B8s/0e5ta5WzxAX8ZpjOA+tMSelCotT8ZTghUe0+O
- zdjb5hhqUNYNzP1HiBasvPCl3PylC078mY0zlVpMyBh+lTieilECrJQZswl+Im6TjRQr
- 4jYl5dmQR/wmsokMp/37WGbK6lr4WRUqZybnOE78hSnV82y8JUXKIH/6WMfgQm5g3qq7
- cYfQ2xYeBH5gbN5AMnHv4g05RwwvndysID+kAi8rpMnWlQjoWGK4KpF+WcGvAapx4KrF
- Dqbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693982841; x=1694587641;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=F8sWie/AS6uY3OK7RU4F+xWFwmy+yKN5/EnMqbo0bWo=;
- b=FuGKBwoP757y8jRC5mfSzZsPJ9gmK/6sBU/zBnY9ll+IZWbn4jKSCOR2132beXnYhI
- 6694AjHooaz77nkuI/0eezP4q+0GSIpm87yGp2/aLWULgH4kCgrmU892sU6DJ2yDlOzM
- mnmzXmD+RDkMjvhb9q7kODspx0S0yf6VRgTPLqZKTey+lB96ecmYuhDwRGSc/nQXOBRy
- aMbz11HcxtdSk70KQkGwTplmrWWE2dkzz8yVM9GksCzS9HRGPrTnDE3p/OnR6dK27/Rk
- sI1ZXI5suRx1e4277hplFuU3+svS9uS30Ex7KEwwTAkESiUY/KvWFVIxUBKRdG+pLhgU
- Nz7A==
-X-Gm-Message-State: AOJu0YzbRX69MNjyTS9b3e5uOfChv4Hu+mfmgfaA8b2CUbB/P2ZmXjbx
- qOW1l4MlhTIQClaaK3b2fvk=
-X-Google-Smtp-Source: AGHT+IF5XtNyYf7L15ODjbW2VFNlEMRZDHuCirLrnpA/NSlI86bWQg0h5niAewTjfoMC8VkyIEtm1w==
-X-Received: by 2002:adf:f144:0:b0:319:8436:d77d with SMTP id
- y4-20020adff144000000b003198436d77dmr1550153wro.37.1693982841358; 
- Tue, 05 Sep 2023 23:47:21 -0700 (PDT)
-Received: from [10.254.108.106] (munvpn.amd.com. [165.204.72.6])
- by smtp.gmail.com with ESMTPSA id
- dd18-20020a0560001e9200b0031f3ad17b2csm11939943wrb.52.2023.09.05.23.47.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 Sep 2023 23:47:14 -0700 (PDT)
-Message-ID: <ffa04976-c2c4-9a63-2b43-7cb7ea3d92ea@gmail.com>
-Date: Wed, 6 Sep 2023 08:47:13 +0200
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 410B110E120;
+ Wed,  6 Sep 2023 07:00:40 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id EC4932241E;
+ Wed,  6 Sep 2023 07:00:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1693983638; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=lxSJsWB1ylv2KntbbZas6fIVYa/2+q6JTBUTnIgymps=;
+ b=Ui5sveWkzp7Z55EkFAN8YDp3EARPttCtZR7fjW/yvcSnanZNZ5FG4sUNm3rkKlf2suhuZN
+ AhYCV2gxkpWPM1nZ/BGvDI599LgqjEYFUPCRbt4gHGPbL/MHrarZNgI0jMkdpfgJjvbTn4
+ ABOgGxHyYmn6sXcYvy5syGW+pTLOP+E=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1693983638;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=lxSJsWB1ylv2KntbbZas6fIVYa/2+q6JTBUTnIgymps=;
+ b=kWmll6OMEDUMrQQssJcEER9bbQMyfF6sv8eT+LzIEa9pnVD0zhg38E5/JTNtVeTikeuPUx
+ Q9RHj6b/vaYQLUDw==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AED1D1333E;
+ Wed,  6 Sep 2023 07:00:38 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id qwfEKZYj+GRPNQAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Wed, 06 Sep 2023 07:00:38 +0000
+Message-ID: <22e8f3a4-63e6-63bd-9e6a-c0a42cb2c33a@suse.de>
+Date: Wed, 6 Sep 2023 09:00:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Sui Jingfeng <sui.jingfeng@linux.dev>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Bjorn Helgaas <bhelgaas@google.com>, Daniel Vetter <daniel@ffwll.ch>
+ Thunderbird/102.14.0
+To: suijingfeng <suijingfeng@loongson.cn>,
+ Sui Jingfeng <sui.jingfeng@linux.dev>, Bjorn Helgaas <bhelgaas@google.com>,
+ "Koenig, Christian" <Christian.Koenig@amd.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ "Deucher, Alexander" <Alexander.Deucher@amd.com>
 References: <20230904195724.633404-1-sui.jingfeng@linux.dev>
- <874jk8j45s.fsf@intel.com> <b11fedb4-d577-d007-0ef8-ac62775d9eee@gmail.com>
- <e3d2d996-a2c1-c4b8-7722-f67aefac8193@linux.dev>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <e3d2d996-a2c1-c4b8-7722-f67aefac8193@linux.dev>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ <44ec8549-dc36-287e-4359-abd3ec8d22d6@suse.de>
+ <5afd2efb-f838-f9b7-02a9-2cf4d4fd2382@loongson.cn>
+ <773be4c6-0b3d-be39-7857-b3e2942007d9@suse.de>
+ <42c907fe-a8c3-5a07-a792-737e45f8134e@loongson.cn>
+Content-Language: en-US
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <42c907fe-a8c3-5a07-a792-737e45f8134e@loongson.cn>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------KYZ86D8lIziF85L0q28xAh3G"
 Subject: Re: [Nouveau] [RFC,
  drm-misc-next v4 0/9] PCI/VGA: Allowing the user to select the
  primary video adapter at boot time
@@ -81,106 +78,115 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sui Jingfeng <suijingfeng@loongson.cn>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- linux-pci@vger.kernel.org
+Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, linux-pci@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 05.09.23 um 16:28 schrieb Sui Jingfeng:
-> Hi,
->
-> On 2023/9/5 21:28, Christian König wrote:
->>>>
->>>> 2) Typically, those non-86 machines don't have a good UEFI firmware
->>>>     support, which doesn't support select primary GPU as firmware 
->>>> stage.
->>>>     Even on x86, there are old UEFI firmwares which already made 
->>>> undesired
->>>>     decision for you.
->>>>
->>>> 3) This series is attempt to solve the remain problems at the 
->>>> driver level,
->>>>     while another series[1] of me is target to solve the majority 
->>>> of the
->>>>     problems at device level.
->>>>
->>>> Tested (limited) on x86 with four video card mounted, Intel UHD 
->>>> Graphics
->>>> 630 is the default boot VGA, successfully override by ast2400 with
->>>> ast.modeset=10 append at the kernel cmd line.
->>> The value 10 is incredibly arbitrary, and multiplied as a magic number
->>> all over the place.
->>
->> +1 
->
->
-> This is the exact reason why I made this series as RFC, because this 
-> is a open-ended problem.
-> The choices of 3,4,5,6,7,8 and 9 are as arbitrary as the number of 
-> '10'. '1' and '2' is
-> definitely not suitable, because the seat has already been taken.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------KYZ86D8lIziF85L0q28xAh3G
+Content-Type: multipart/mixed; boundary="------------LN1ZlLEbEZdmmpEoynl00UYi";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: suijingfeng <suijingfeng@loongson.cn>,
+ Sui Jingfeng <sui.jingfeng@linux.dev>, Bjorn Helgaas <bhelgaas@google.com>,
+ "Koenig, Christian" <Christian.Koenig@amd.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ "Deucher, Alexander" <Alexander.Deucher@amd.com>
+Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-pci@vger.kernel.org
+Message-ID: <22e8f3a4-63e6-63bd-9e6a-c0a42cb2c33a@suse.de>
+Subject: Re: [Nouveau] [RFC, drm-misc-next v4 0/9] PCI/VGA: Allowing the user
+ to select the primary video adapter at boot time
+References: <20230904195724.633404-1-sui.jingfeng@linux.dev>
+ <44ec8549-dc36-287e-4359-abd3ec8d22d6@suse.de>
+ <5afd2efb-f838-f9b7-02a9-2cf4d4fd2382@loongson.cn>
+ <773be4c6-0b3d-be39-7857-b3e2942007d9@suse.de>
+ <42c907fe-a8c3-5a07-a792-737e45f8134e@loongson.cn>
+In-Reply-To: <42c907fe-a8c3-5a07-a792-737e45f8134e@loongson.cn>
 
-Well you are completely missing the point. *DON'T* abuse the modeset 
-module parameters for this!
+--------------LN1ZlLEbEZdmmpEoynl00UYi
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-If you use 10 or any other value doesn't matter.
+SGkNCg0KQW0gMDYuMDkuMjMgdW0gMDQ6MTQgc2NocmllYiBzdWlqaW5nZmVuZzoNCj4gSGks
+DQo+IA0KPiANCj4gT24gMjAyMy85LzUgMjM6MDUsIFRob21hcyBaaW1tZXJtYW5uIHdyb3Rl
+Og0KPj4gSG93ZXZlciwgb24gbW9kZXJuIExpbnV4IHN5c3RlbXMgdGhlIHByaW1hcnkgZGlz
+cGxheSBkb2VzIG5vdCByZWFsbHkgDQo+PiBleGlzdC4NCj4gDQo+IA0KPiBObywgaXQgZG8g
+ZXhpc3QuwqAgWCBzZXJ2ZXIgbmVlZCB0byBrbm93IHdoaWNoIG9uZSBpcyB0aGUgcHJpbWFy
+eSBHUFUuDQo+IFRoZSAnKicgY2hhcmFjdGVyIGF0IHRoZSBvZiAoNEAwOjA6MCkgUENJIGRl
+dmljZcKgaXMgdGhlIFByaW1hcnkuDQo+IFRoZSAnKicgZGVub3RlIHByaW1hcnksIHNlZSB0
+aGUgbG9nIGJlbG93Lg0KPiANCj4gKElJKSB4ZnJlZTg2OiBBZGRpbmcgZHJtIGRldmljZSAo
+L2Rldi9kcmkvY2FyZDIpDQo+IChJSSkgeGZyZWU4NjogQWRkaW5nIGRybSBkZXZpY2UgKC9k
+ZXYvZHJpL2NhcmQwKQ0KPiAoSUkpIFBsYXRmb3JtIHByb2JlIGZvciANCj4gL3N5cy9kZXZp
+Y2VzL3BjaTAwMDA6MDAvMDAwMDowMDoxYy41LzAwMDA6MDAzOjAwLjAvMDAwMDowNDowMC4w
+L2RybS9jYXJkMA0KPiAoSUkpIHhmcmVlODY6IEFkZGluZyBkcm0gZGV2aWNlICgvZGV2L2Ry
+aS9jYXJkMykNCj4gKElJKSBQbGF0Zm9ybSBwcm9iZSBmb3IgDQo+IC9zeXMvZGV2aWNlcy9w
+Y2kwMDAwOjAwLzAwMDA6MDA6MWMuNi8wMDAwOjAwNTowMC4wL2RybS9jYXJkMw0KPiAoLS0p
+IFBDSTogKDBAMDoyOjApIDgwODY6M2U5MTo4MDg2OjNlOTEgcmV2IDAsIE1lbSBAIA0KPiAw
+eGRiMDAwMDAwLzE2Nzc3NzIxNiwgMHhhMDAwMDAwMC81MzY4NzA5MTIsIEkvTyBAIDB4MDAw
+MGYwMDAvNjQsIEJJT1MgQCANCj4gMHg/Pz8/Pz8/Py8xMzEwNzINCj4gKC0tKSBQQ0k6ICgx
+QDA6MDowKSAxMDAyOjY3NzE6MTA0Mzo4NjM2IHJldiAwLCBNZW0gQCANCj4gMHhjMDAwMDAw
+MC8yNjg4NDM1NDU2LCAweGRmMjIwMDAwLzEzMTA3MiwgSS9PIEAgMHgwMDAwZTAwMC8yNTYs
+IEJJT1MgQCANCj4gMHg/Pz8/Pz8/Py8xMzEwNzINCj4gKC0tKSBQQ0k6Kig0QDA6MDowKSAx
+YTAzOjIwMDA6MWEwMzoyMDAwIHJldiA0OCwgTWVtIEAgDQo+IDB4ZGUwMDAwMDAvMTY2Nzc3
+MjE2LCAweGRmMDIwMDAwLzEzMTA3MiwgSS9PIEAgMHgwMDAwYzAwMC8xMjgsIEJJT1MgQCAN
+Cj4gMHg/Pz8/Pz8/Py8xMzEwNzINCj4gKC0tKSBQQ0k6ICg1QDA6MDowKSAxMGRlOjEyODg6
+MTc0YjpiMzI0IHJldiAxNjEsIE1lbSBAIA0KPiAweGRjMDAwMDAwLzExNjc3NzIxNiwgMHhk
+MDAwMDAwMC8xMzQyMTc3MjgsIDB4ZDgwMDAwMDAvMzM1NTQ0MzIsIEkvTyBAIA0KPiAweDAw
+MDBiMDAwLzEyOCwgQklPUyBAQDB4Pz8/Pz8/Pz8vNTI0Mjg4DQo+IA0KPiBUaGUgbW9kZXNl
+dHRpbmcgZHJpdmVyIG9mIFggc2VydmVyIHdpbGwgY3JlYXRlIGZyYW1lYnVmZmVyIG9uIHRo
+ZSANCj4gcHJpbWFyeSB2aWRlbyBhZGFwdGVyLg0KPiBJZiBhIDJEIHZpZGVvIGFkYXB0ZXIg
+KGxpa2UgdGhlIGFzcGVlZCBCTUMpIGlzIG5vdCB0aGUgcHJpbWFyeSwgdGhlbiBpdCANCj4g
+cHJvYmFibHkgd2lsbCBub3QNCj4gYmUgdXNlZC4gVGhlIG9ubHkgY2hhbmNlIHRvIGJlIGFi
+bGUgdG8gZGlzcGxheSBzb21ldGhpbmcgaXMgdG8gDQo+IGZ1bmN0aW9uYWwgYXMgYSBvdXRw
+dXQgc2xhdmUuDQo+IEJ1dCB0aGUgb3V0cHV0IHNsYXZlIHRlY2hub2xvZ3kgbmVlZCB0aGUg
+UFJJTUUgc3VwcG9ydCBmb3IgY3Jvc3MgZHJpdmVyIA0KPiBidWZmZXIgc2hhcmluZy4NCj4g
+DQo+IFNvLCB0aGVyZSBkbyBoYXZlIHNvbWUgZGlmZmVyZW5jZSBiZXR3ZWVuIHRoZSBwcmlt
+YXJ5IGFuZCBub24tcHJpbWFyeSANCj4gdmlkZW8gYWRhcHRlcnMuDQoNClhvcmcgaXMgYSBw
+cmV0dHkgYmFkIGV4YW1wbGUsIGJlY2F1c2UgWCBwYXJzZXMgdGhlIFBDSSBidXMgYW5kIHRo
+ZW4gDQp0cmllcyB0byBtYXRjaCBkZXZpY2VzIHRvIC9kZXYvZHJpLyBmaWxlcy4gVGhhdCdz
+IGFsc28gbm90IGZpeGFibGUgaW4gDQpYb3JnJ3MgY3VycmVudCBjb2RlIGJhc2UuIFBsZWFz
+ZSBkb24ndCBwcm9tb3RlIFhvcmcncyBkZXNpZ24uIEl0IGRhdGVzIA0KYmFjayB0byB0aGUg
+dGltZSB3aGVuIFhvcmcgZGlkIHRoZSBtb2Rlc2V0dGluZyBieSBpdHNlbGYuDQoNClVzZXJz
+cGFjZSBzaG91bGQganVzdCBvcGVuIGV4aXN0aW5nIGRldmljZSBmaWxlcyBhbmQgc3RhcnQg
+cmVuZGVyaW5nLiANCk1heWJlIHBpY2sgdGhlIHByZXZpb3VzIHNldHRpbmdzIGFuZC9vciBk
+byBzb21lIGd1ZXNzIHdvcmsgYWJvdXQgdGhlIA0KYXJyYW5nbWVudCBvZiB0aGVzZSBkZXZp
+Y2VzLiBBRkFJSyB0aGF0J3Mgd2hhdCB0aGUgbW9kZXJuIGNvbXBvc2l0b3JzIGRvLg0KDQpC
+ZXN0IHJlZ2FyZHMNClRob21hcw0KDQo+IA0KPiANCj4+ICdQcmltYXJ5JyBpcyB0aGUgZGV2
+aWNlIHRoYXQgaXMgYXZhaWxhYmxlIHZpYSBWR0EsIFZFU0Egb3IgRUZJLiBPdXIgDQo+PiBk
+cml2ZXJzIGRvbid0IHVzZSB0aGVzZSBpbnRlcmZhY2VzLCBidXQgdGhlIG5hdGl2ZSByZWdp
+c3RlcnMuIEFzIHlvdSANCj4+IHNhaWQgeW91cnNlbGYsIHRoZXNlIGZpcm13YXJlIGRldmlj
+ZXMgKFZHQSwgVkVTQSwgRUZJKSBhcmUgcmVtb3ZlZCANCj4+IEFTQVAgYnkgdGhlIG5hdGl2
+ZSBkcml2ZXJzLiANCj4gDQoNCi0tIA0KVGhvbWFzIFppbW1lcm1hbm4NCkdyYXBoaWNzIERy
+aXZlciBEZXZlbG9wZXINClNVU0UgU29mdHdhcmUgU29sdXRpb25zIEdlcm1hbnkgR21iSA0K
+RnJhbmtlbnN0cmFzc2UgMTQ2LCA5MDQ2MSBOdWVybmJlcmcsIEdlcm1hbnkNCkdGOiBJdm8g
+VG90ZXYsIEFuZHJldyBNeWVycywgQW5kcmV3IE1jRG9uYWxkLCBCb3VkaWVuIE1vZXJtYW4N
+CkhSQiAzNjgwOSAoQUcgTnVlcm5iZXJnKQ0K
 
-Regards,
-Christian.
+--------------LN1ZlLEbEZdmmpEoynl00UYi--
 
->
-> Take the drm/nouveau as an example:
->
->
-> ```
->
-> MODULE_PARM_DESC(modeset, "enable driver (default: auto, "
->                   "0 = disabled, 1 = enabled, 2 = headless)");
-> int nouveau_modeset = -1;
-> module_param_named(modeset, nouveau_modeset, int, 0400);
->
-> ```
->
->
-> '1' is for enable the drm driver, some driver even override the 
-> 'nomodeset' parameter.
->
-> '2' is not suitable, because nouveau use it as headless GPU 
-> (render-only or compute class GPU?)
->
-> '3' is also not likely the best, the concerns is that
-> what if a specific drm driver want to expand the usage in the future?
->
->
-> The reason I pick up the digit '10' is that
->
->
-> 1) The modeset parameter is unlikely to get expanded up to 10 usages.
->
-> Other drm drivers only use the '-1', '0' and 1, choose '2' will 
-> conflict with drm/nouveau.
-> By pick the digit '10', it leave some space(room) to various device 
-> driver authors.
-> It also helps to keep the usage consistent across various drivers.
->
->
-> 2) An int taken up 4 byte, I don't want to waste even a single byte,
->
-> While in the process of defencing my patch, I have to say
-> draft another kernel command line would cause the wasting of precious 
-> RAM storage.
->
-> An int can have 2^31 usage, why we can't improve the utilization rate?
->
-> 3) Please consider the fact that the modeset is the most common and 
-> attractive parameter
->
-> No name is better than the 'modeset', as other name is not easy to 
-> remember.
->
-> Again, this is for Linux user, thus it is not arbitrary.
-> Despite simple and trivial, I think about it more than one week.
->
+--------------KYZ86D8lIziF85L0q28xAh3G
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmT4I5UFAwAAAAAACgkQlh/E3EQov+As
+LBAAywJbx/82a4kzBkPg9aE9JI6eCWr6ObjJU3j0lAb//Khw3fGlnKGYZJm1P/3THDHewIhOgTnv
+IRUH7VGvyEHL770iX4XwWF7noE+TXVqDbButx7V6SMUF9LlcaQmG2nPeX8n/rwzh2IatlrP0bWBm
+7mIAGNnqpWMS0c5tMUS9w4aznXdtuD4QyV/TEWW6/ZlTgmjbi3P7enfs81zpZ6Qvp0FJOqcYdqsv
+Y1cnRpTN1UxDxZgf4nEKlss0cXFp52wOCvUr+EVkRVMftQQhLDgSMlmXLZWYjhRCJpflDU5zoJwt
+tYxxJ7n7iPZPYbe+kNYGyZ8rxJ1I9Atsd3+0ytXP0DHhIrtLTMMbHLB+f2RhpDHp7QRfmKRNCfkZ
+ym6AHDE2Mx70wiBhJtfunyR5IL8WBB+6BN1uqko4Q0lLYp0OOJnAjJIE+lxaHvcxi5+vqhugOXnl
+Sjo516Gd35D+aMhuWX6uFiBXNXxZhl7p3FZ4HXNo8d1rwI0kcENLY6QpYLW3gmOzX+SKNKdh649E
+pYbVaSSoHDbTv/BOKME7WefiychZhRFSEGiPs+pO5Sa7rFlv1zE2LAn5euwMhoTu+jXubxeoBvhG
+Vt3+dB5waqKpQQHfjMNU1h3q1gI8w8k+jwefMmyqIvgUxkMdDoPei7+NuYksfqJi7oOQlahn17yC
+0Bk=
+=2vYu
+-----END PGP SIGNATURE-----
+
+--------------KYZ86D8lIziF85L0q28xAh3G--
