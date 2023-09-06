@@ -2,64 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B22B37940F4
-	for <lists+nouveau@lfdr.de>; Wed,  6 Sep 2023 18:01:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E58A379454F
+	for <lists+nouveau@lfdr.de>; Wed,  6 Sep 2023 23:47:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5109910E6A7;
-	Wed,  6 Sep 2023 16:01:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 320A510E1F9;
+	Wed,  6 Sep 2023 21:47:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 002D410E6A7;
- Wed,  6 Sep 2023 16:01:05 +0000 (UTC)
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-1cc61f514baso2299909fac.1; 
- Wed, 06 Sep 2023 09:01:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694016065; x=1694620865; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=X6LWx34t6RPAjjhmdGIBM9ahXBcms5DV7AzJj+GPzQA=;
- b=LCOALADZCexz0ZRSTQWB57xLnn3JQN68o6kvyvntivnepN2PUlhdJNgb0iXpoZ85k3
- dNQTRCzabFIBP7MfSBNnobpxZ7gucIbytbmV0dNXCRP3dRt5VHXk/wVg+tbcQJlfXHWi
- WqVh7o/ASncKIemBXXHO91vFhX+bFSkOfTrV0R1ko706AaKhiE033dtYiSRJp/cvbd05
- 1lmeNjOZGsI54LqLtr/jn2+ZGsh9Kytd9Dm6HEzoiAfX6eslkU9xbY6OKJ/vtTaeLPq2
- 0t/Db/LDnqWBgXggUYygj+D1REDNbfvkFnDDxVb0Z2JzGfcSQ94cxYFA1QA8GQP5bv6/
- hXxg==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A418210E1C4
+ for <nouveau@lists.freedesktop.org>; Wed,  6 Sep 2023 21:47:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1694036851;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=zKkDRQ9/TqnOPU7efxBBUYLuwd+HL60A99HNBdJUd98=;
+ b=bbZstlTRPXsfdbFYjq35bRUAJk7YedSQeJwgrNYl1fj14aitX8D4pvAkkBqU0OW5z5xrxM
+ 6We0JU2Q7iUz4f7P77B0uMNI/00SOknuj3sEUlsQzuXZt/J+0YHgDBKM3QF5hTIrE5KekO
+ ExZIx/MygPbUjJFD2wgVFp8pWxmhW0s=
+Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
+ [209.85.167.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-315-wAAx4vyXMDqjlNeKVjUAkA-1; Wed, 06 Sep 2023 17:47:28 -0400
+X-MC-Unique: wAAx4vyXMDqjlNeKVjUAkA-1
+Received: by mail-lf1-f71.google.com with SMTP id
+ 2adb3069b0e04-5009796123dso218781e87.1
+ for <nouveau@lists.freedesktop.org>; Wed, 06 Sep 2023 14:47:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694016065; x=1694620865;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=X6LWx34t6RPAjjhmdGIBM9ahXBcms5DV7AzJj+GPzQA=;
- b=OmdoeP09cLpNwtG+KBBjfU8VNicMH9kD9HYr2B8czYZpmkZBs95RqMmfaxavMk5qw7
- VU3UV8cJedNCYHLXABOkc5K4X9k7QeK07USWAH3vHi1pIovFn8IadzW7liILB0A0jFgc
- vA4uIRgeAiSs8eCzh18reKs+g1G6wuJ19jfYRSc3gDWuywy9tT9jZz0EdAGnzhyrg0CM
- B1GQY/At6KyOjEGrEQzfI+/ziKWh2cCQqK39UTyP5Xi0gVShder9VZowwtCkQwqHdBzA
- /Oe4g/a5a7PpcWBBeh/FBbMkIO8rwP3YABN7uzZ2i3bE2CwXdHYp/CYgjKX1BlrGxy37
- Z/VQ==
-X-Gm-Message-State: AOJu0YwAsTdtFVIUQkCT8SUY+oobUe+Gs14LdSeBnkeZP/IKCShqSbLR
- aVOIvBYqPD/UuihfOgCFmPsd5yraqMNv/oMvHhykyTD+b4Y=
-X-Google-Smtp-Source: AGHT+IF+5jWUuhtjXrUwCDU2vqm+oD8PcmuCjMCceh985Ms+NPGpiBmtRG8mj/pojUh/Gya7OusMLGeBbVHAX3QI5GA=
-X-Received: by 2002:a05:6870:d79f:b0:1bc:26d:6664 with SMTP id
- bd31-20020a056870d79f00b001bc026d6664mr17177800oab.16.1694016065112; Wed, 06
- Sep 2023 09:01:05 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1694036847; x=1694641647;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zKkDRQ9/TqnOPU7efxBBUYLuwd+HL60A99HNBdJUd98=;
+ b=Rs8Ohty6zvoQlN/fJs5g+D5lksihq8KNmyqzHmpRhY6XdQ+Cw4hul5CFIqDPxKrMhF
+ TiZEy1TepRe4PEuiKe+CfaRPV/QKmYvOkmZisBS3eR0mQwL31qhKVMFVv+Dxf+5i6Rtz
+ ycVmNU8r2z7s5GOfYbBTNLME+NPQK5A/HWYJZpmZDQCDKbNdh/W1vlXmUJiJ4eEsRfr8
+ wTJedEo39fOZa4ncZqPmi/o4hGtdQ1Z2Cez4b6iNJIIkbBZRLB45zpQ3pcn6TqoxZIJC
+ gh8RoHDxWDYVyVpnOCnrI+vYvxWBMOmWlk+O0AvNQmef/UDsWkj2jFw+r/peKjp6QrRm
+ UKRw==
+X-Gm-Message-State: AOJu0YyB0C041RsC/+Cap1F4zhUEswMMHrBKXWVP9x3QpmNsMobvNzOy
+ i96i/65FuXA5RsIuLdP9XtxIUMGM9dJRbl1C8XhEPgVrBiJksy6+PjC67i/JSqsESzZO6NCgqMr
+ zF1MkBaQvIcKjUyvBPvAS0lb8qA==
+X-Received: by 2002:a19:ae13:0:b0:500:a60d:c677 with SMTP id
+ f19-20020a19ae13000000b00500a60dc677mr3146460lfc.59.1694036847281; 
+ Wed, 06 Sep 2023 14:47:27 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG9vM+HT6JkjFoqnC/5RjtvOildvqPi8k26Fej4Xzn37uwseyzw2k36M3RWZJ5OAgm98jkLTQ==
+X-Received: by 2002:a19:ae13:0:b0:500:a60d:c677 with SMTP id
+ f19-20020a19ae13000000b00500a60dc677mr3146446lfc.59.1694036846940; 
+ Wed, 06 Sep 2023 14:47:26 -0700 (PDT)
+Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
+ by smtp.gmail.com with ESMTPSA id
+ r10-20020a170906c28a00b0099297782aa9sm9446856ejz.49.2023.09.06.14.47.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 Sep 2023 14:47:26 -0700 (PDT)
+From: Danilo Krummrich <dakr@redhat.com>
+To: airlied@gmail.com, daniel@ffwll.ch, matthew.brost@intel.com,
+ thomas.hellstrom@linux.intel.com, sarah.walker@imgtec.com,
+ donald.robson@imgtec.com, boris.brezillon@collabora.com,
+ christian.koenig@amd.com, faith.ekstrand@collabora.com
+Date: Wed,  6 Sep 2023 23:47:08 +0200
+Message-ID: <20230906214723.4393-1-dakr@redhat.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-References: <20230904195724.633404-1-sui.jingfeng@linux.dev>
- <20230904195724.633404-4-sui.jingfeng@linux.dev>
- <d3e6a9ce-1c7a-8e44-3127-413cd471a8e9@amd.com>
- <40f32814-ca87-6e29-0e10-4b4463a2920d@loongson.cn>
-In-Reply-To: <40f32814-ca87-6e29-0e10-4b4463a2920d@loongson.cn>
-From: Alex Deucher <alexdeucher@gmail.com>
-Date: Wed, 6 Sep 2023 12:00:53 -0400
-Message-ID: <CADnq5_OYPha5cGF+tSj4fvSmf-6tObzNSe2__nG-SbjX6v_2vw@mail.gmail.com>
-To: suijingfeng <suijingfeng@loongson.cn>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [RFC,
- drm-misc-next v4 3/9] drm/radeon: Implement .be_primary() callback
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Nouveau] [PATCH drm-misc-next v2 0/7] [RFC] DRM GPUVA Manager
+ GPU-VM features
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,157 +83,100 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sui Jingfeng <sui.jingfeng@linux.dev>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
- amd-gfx@lists.freedesktop.org, linux-pci@vger.kernel.org,
- Bjorn Helgaas <bhelgaas@google.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Sep 5, 2023 at 1:25=E2=80=AFPM suijingfeng <suijingfeng@loongson.cn=
-> wrote:
->
-> Hi,
->
->
-> On 2023/9/5 13:50, Christian K=C3=B6nig wrote:
-> > Am 04.09.23 um 21:57 schrieb Sui Jingfeng:
-> >> From: Sui Jingfeng <suijingfeng@loongson.cn>
-> >>
-> >> On a machine with multiple GPUs, a Linux user has no control over
-> >> which one
-> >> is primary at boot time.
-> >
-> > Question is why is that useful? Should we give users the ability to
-> > control that?
-> >
-> > I don't see an use case for this.
-> >
->
-> On a specific machine with multiple GPUs mounted, only the
-> primary graphics get POST-ed (initialized) by the firmware.
-> Therefore the DRM drivers for the rest video cards have to
-> work without the prerequisite setups done by firmware, This
-> is called as POST.
+So far the DRM GPUVA manager offers common infrastructure to track GPU VA
+allocations and mappings, generically connect GPU VA mappings to their
+backing buffers and perform more complex mapping operations on the GPU VA
+space.
 
-I think that should be regarded as a bug in the driver that should be
-fixed and this would not help with that case.  If a driver can't
-initialize a device without aid from the pre-OS environment, that
-should be fixed in the driver.  This solution also doesn't fix which
-device is selected as the primary by the pre-OS environment.  That can
-only be fixed in the pre-OS environment code.
+However, there are more design patterns commonly used by drivers, which
+can potentially be generalized in order to make the DRM GPUVA manager
+represent a basic GPU-VM implementation. In this context, this patch series
+aims at generalizing the following elements.
 
->
-> One of the use cases is to test if a specific DRM driver
-> would works properly, under the circumstance of not being
-> POST-ed, The ast drm driver is the first one which refused
-> to work if not being POST-ed by the firmware.
->
-> Before apply this series, I was unable make drm/ast as the
-> primary video card easily. The problem is that on a multiple
-> video card configuration, the monitor connected with my
-> AST2400 card not light up. While confusing, a naive programmer
-> may suspect the PRIME is not working.
->
-> After applied this series and passing ast.modeset=3D10 on the
-> kernel cmd line, I found that the monitor connected with my
-> ast2400 video card still black, It doesn't display and It
-> doesn't show image to me.
+1) Provide a common dma-resv for GEM objects not being used outside of
+   this GPU-VM.
 
-The problem with adding modeset=3D10 is that it only helps when you have
-one GPU driven by that driver in the system.  If you have multiple
-GPUs driven by that driver, which one would that apply to?  E.g., what
-if you have 2 AMD GPUs in the system.
+2) Provide tracking of external GEM objects (GEM objects which are
+   shared with other GPU-VMs).
 
->
-> While in the process of study drm/ast, I know that drm/ast
-> driver has the POST code shipped, See the ast_post_gpu() function.
-> Then, I was wondering why this function doesn't works.
->
-> After a short-time (hasty) debugging, I found that the ast_post_gpu()
-> function didn't get run. Because it have something to do with the
-> ast->config_mode. Without thinking too much, I hardcoded the
-> ast->config_mode as ast_use_p2a, the key point is to force the
-> ast_post_gpu() function to run.
->
->
-> ```
->
-> --- a/drivers/gpu/drm/ast/ast_main.c
-> +++ b/drivers/gpu/drm/ast/ast_main.c
-> @@ -132,6 +132,8 @@ static int ast_device_config_init(struct ast_device
-> *ast)
->                  }
->          }
->
-> +       ast->config_mode =3D ast_use_p2a;
-> +
->          switch (ast->config_mode) {
->          case ast_use_defaults:
->                  drm_info(dev, "Using default configuration\n");
->
-> ```
->
-> Then, the monitor light up, it display the Ubuntu greeter to me. Therefor=
-e
-> my patch is useful, at least for the Linux drm driver tester and develope=
-r.
-> It allow programmers to test the specific part of a specific driver witho=
-ut
-> changing a line of the source code and without the need of sudo authority=
-.
->
-> It improves the efficiency of the testing and patch verification. I know
-> the PrimaryGPU option of Xorg conf, but this approach will remember the
-> setup have been made, you need modify it with root authority each time
-> you want to switch the primary. But on the process of rapid developing
-> and/or testing for multiple video drivers, with only one computer hardwar=
-e
-> resource available. What we really want is a one-shot command, as provide=
-d
-> by this series.  So, this is the first use case.
->
->
-> The second use case is that sometime the firmware is not reliable.
-> While there are thousands of ARM64, PowerPC and Mips servers machine,
-> Most of them don't have a good UEFI firmware support. I haven't test the
-> drm/amdgpu and drm/radeon at my ARM64 server yet. Because this ARM64
-> server always use the platform(BMC) integrated display controller as prim=
-ary.
-> The UEFI firmware of it does not provide options menu to tune.
-> So, for the first time, the discrete card because useless, despite more p=
-owerful.
-> I will take time to carry on the testing, so I will be able to tell more
-> in the future.
->
->
-> Even on X86, when select the PEG as primary on the UEFI BIOS menu.
-> There is no way to tell the bios which one of my three
-> discrete video be the primary. Not to mention some old UEFI
-> firmware, which doesn't provide a setting at all.
-> While the benefit of my approach is the flexibility.
-> Yes the i915, amdgpu and radeon are good quality,
-> but there may have programmers want to try nouveau.
->
->
-> The third use case is that VGAARB is also not reliable, It will
-> select a wrong device as primary. Especially on Arm64, Loongarch
-> and mips arch etc. And the X server will use this wrong device
-> as primary and completely crash there. Either because of lacking
-> a driver or the driver has a bug which can not bear the graphic
-> environment up. VGAARB is firmware dependent.
-> My patch provide a temporary method to rescue.
->
+3) Provide functions to efficiently lock all GEM objects dma-resv the
+   GPU-VM contains mappings of.
 
-It sounds like we need a general purpose "primary" selector.  I think
-it's sort of orthogonal to VGA.  VGAARB is just for managing VGA
-routing on PCI.  It's not really directly related to which GPU you
-want to be the primary when the OS loads.  Maybe some new kernel
-parameter, E.g., primary_display=3D<string> where the string would be
-the specific device you wanted to be the primary,  E.g., you could use
-the PCI BDF on PCI devices, primary_display=3D0000:0a:00.0 or some other
-device string for non-PCI devices.
+4) Provide tracking of evicted GEM objects the GPU-VM contains mappings
+   of, such that validation of evicted GEM objects is accelerated.
 
-Alex
+5) Provide some convinience functions for common patterns.
+
+The implementation introduces struct drm_gpuvm_bo, which serves as abstraction
+combining a struct drm_gpuvm and struct drm_gem_object, similar to what
+amdgpu does with struct amdgpu_bo_vm. While this adds a bit of complexity it
+improves the efficiency of tracking external and evicted GEM objects.
+
+This patch series also renames struct drm_gpuva_manager to struct drm_gpuvm
+including corresponding functions. This way the GPUVA manager's structures align
+better with the documentation of VM_BIND [1] and VM_BIND locking [2]. It also
+provides a better foundation for the naming of data structures and functions
+introduced for implementing the features of this patch series.
+
+Rather than being designed as a "framework", the target is to make all
+features appear as a collection of optional helper functions, such that
+drivers are free to make use of the DRM GPUVA managers basic
+functionality and opt-in for other features without setting any feature
+flags, just by making use of the corresponding functions.
+
+This patch series is also available at [3].
+
+[1] Documentation/gpu/drm-vm-bind-async.rst
+[2] Documentation/gpu/drm-vm-bind-locking.rst
+[3] https://gitlab.freedesktop.org/nouvelles/kernel/-/commits/gpuvm-next
+
+Changes in V2:
+==============
+  - rename 'drm_gpuva_manager' -> 'drm_gpuvm' which generally leads to more
+    consistent naming
+  - properly separate commits (introduce common dma-resv, drm_gpuvm_bo
+    abstraction, etc.)
+  - remove maple tree for tracking external objects, use a list drm_gpuvm_bos
+    per drm_gpuvm instead
+  - rework dma-resv locking helpers (Thomas)
+  - add a locking helper for a given range of the VA space (Christian)
+  - make the GPUVA manager buildable as module, rather than drm_exec
+    builtin (Christian)
+
+Danilo Krummrich (7):
+  drm: gpuva_mgr: allow building as module
+  drm/gpuvm: rename struct drm_gpuva_manager to struct drm_gpuvm
+  drm/nouveau: uvmm: rename 'umgr' to 'base'
+  drm/gpuvm: common dma-resv per struct drm_gpuvm
+  drm/gpuvm: add an abstraction for a VM / BO combination
+  drm/gpuvm: generalize dma_resv/extobj handling and GEM validation
+  drm/nouveau: GPUVM dma-resv/extobj handling, GEM validation
+
+ drivers/gpu/drm/Kconfig                   |   7 +
+ drivers/gpu/drm/Makefile                  |   2 +-
+ drivers/gpu/drm/drm_debugfs.c             |  14 +-
+ drivers/gpu/drm/drm_gpuva_mgr.c           | 900 +++++++++++++++++-----
+ drivers/gpu/drm/nouveau/Kconfig           |   1 +
+ drivers/gpu/drm/nouveau/nouveau_bo.c      |   4 +-
+ drivers/gpu/drm/nouveau/nouveau_debugfs.c |   2 +-
+ drivers/gpu/drm/nouveau/nouveau_exec.c    |  52 +-
+ drivers/gpu/drm/nouveau/nouveau_exec.h    |   4 -
+ drivers/gpu/drm/nouveau/nouveau_gem.c     |   4 +-
+ drivers/gpu/drm/nouveau/nouveau_sched.h   |   4 +-
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c    | 216 ++++--
+ drivers/gpu/drm/nouveau/nouveau_uvmm.h    |   6 +-
+ include/drm/drm_debugfs.h                 |   4 +-
+ include/drm/drm_gem.h                     |  48 +-
+ include/drm/drm_gpuva_mgr.h               | 512 ++++++++++--
+ 16 files changed, 1375 insertions(+), 405 deletions(-)
+
+
+base-commit: 6bd3d8da51ca1ec97c724016466606aec7739b9f
+-- 
+2.41.0
+
