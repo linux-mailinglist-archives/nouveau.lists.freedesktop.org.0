@@ -1,26 +1,26 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE8D57933C8
-	for <lists+nouveau@lfdr.de>; Wed,  6 Sep 2023 04:35:04 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 113C47933F0
+	for <lists+nouveau@lfdr.de>; Wed,  6 Sep 2023 05:08:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C9C1210E564;
-	Wed,  6 Sep 2023 02:35:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2469610E149;
+	Wed,  6 Sep 2023 03:08:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
- by gabe.freedesktop.org (Postfix) with ESMTP id 0098B10E55F;
- Wed,  6 Sep 2023 02:34:56 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 6FE0410E06B;
+ Wed,  6 Sep 2023 03:08:21 +0000 (UTC)
 Received: from loongson.cn (unknown [10.20.42.43])
- by gateway (Coremail) with SMTP id _____8AxEvBN5fdkjQggAA--.63656S3;
- Wed, 06 Sep 2023 10:34:53 +0800 (CST)
+ by gateway (Coremail) with SMTP id _____8Ax1fAk7fdkkAsgAA--.64477S3;
+ Wed, 06 Sep 2023 11:08:20 +0800 (CST)
 Received: from [0.0.0.0] (unknown [10.20.42.43])
  by localhost.localdomain (Coremail) with SMTP id
- AQAAf8Bx3yNM5fdkBeZtAA--.27326S3; 
- Wed, 06 Sep 2023 10:34:52 +0800 (CST)
-Message-ID: <6d1d8acc-5140-f710-ac00-cb423d7fce78@loongson.cn>
-Date: Wed, 6 Sep 2023 10:34:52 +0800
+ AQAAf8CxF80j7fdk4u5tAA--.64736S3; 
+ Wed, 06 Sep 2023 11:08:19 +0800 (CST)
+Message-ID: <abf8053d-4c4a-2562-b57f-db92a0cb15a7@loongson.cn>
+Date: Wed, 6 Sep 2023 11:08:19 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
@@ -29,7 +29,8 @@ To: Thomas Zimmermann <tzimmermann@suse.de>,
  Sui Jingfeng <sui.jingfeng@linux.dev>, Bjorn Helgaas <bhelgaas@google.com>,
  "Koenig, Christian" <Christian.Koenig@amd.com>,
  Jani Nikula <jani.nikula@linux.intel.com>, Daniel Vetter <daniel@ffwll.ch>,
- "Deucher, Alexander" <Alexander.Deucher@amd.com>
+ "Deucher, Alexander" <Alexander.Deucher@amd.com>,
+ Alex Williamson <alex.williamson@redhat.com>
 References: <20230904195724.633404-1-sui.jingfeng@linux.dev>
  <44ec8549-dc36-287e-4359-abd3ec8d22d6@suse.de>
  <5afd2efb-f838-f9b7-02a9-2cf4d4fd2382@loongson.cn>
@@ -37,12 +38,12 @@ References: <20230904195724.633404-1-sui.jingfeng@linux.dev>
 From: suijingfeng <suijingfeng@loongson.cn>
 In-Reply-To: <773be4c6-0b3d-be39-7857-b3e2942007d9@suse.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: AQAAf8Bx3yNM5fdkBeZtAA--.27326S3
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf8CxF80j7fdk4u5tAA--.64736S3
 X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
-X-Coremail-Antispam: 1Uk129KBj93XoW7Cw18Kry8Zr4kKw17ZryrGrX_yoW8Aw1rpF
- WYgFWqkrWkGr4rAF4FyF1Fgr1Fqw4kJFWFgr48ZrZayF90v34avrWxtan0ga4UJrnxX3W5
- GrZIgryxGFyDZrXCm3ZEXasCq-sJn29KB7ZKAUJUUUU7529EdanIXcx71UUUUU7KY7ZEXa
+X-Coremail-Antispam: 1Uk129KBj93XoW7Ar4DuFWDJFyUXF1rCF4kAFc_yoW8JFW5pF
+ W5tF18ta95WFWfAr97Jr409Fy0vrn5Jay8Xrn5WryDA3Z8Gr92v3y8t398Za4UC393Z3Wa
+ yr90qas3KayDJabCm3ZEXasCq-sJn29KB7ZKAUJUUUU7529EdanIXcx71UUUUU7KY7ZEXa
  sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
  0xBIdaVrnRJUUUPab4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
  IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
@@ -52,7 +53,7 @@ X-Coremail-Antispam: 1Uk129KBj93XoW7Cw18Kry8Zr4kKw17ZryrGrX_yoW8Aw1rpF
  AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWU
  AVWUtwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI4
  8JMxk0xIA0c2IEe2xFo4CEbIxvr21lc7CjxVAaw2AFwI0_JF0_Jw1l42xK82IYc2Ij64vI
- r41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xFxVAFwI0_Jw0_GFylx2IqxVAqx4xG67
+ r41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xFxVAFwI0_GFv_Wrylx2IqxVAqx4xG67
  AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIY
  rxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14
  v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWx
@@ -78,53 +79,37 @@ Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi,
+
 
 On 2023/9/5 23:05, Thomas Zimmermann wrote:
-> Hi
->
-> Am 05.09.23 um 15:30 schrieb suijingfeng:
->> Hi,
->>
->>
->> On 2023/9/5 18:45, Thomas Zimmermann wrote:
->>> Hi
->>>
->>> Am 04.09.23 um 21:57 schrieb Sui Jingfeng:
->>>> From: Sui Jingfeng <suijingfeng@loongson.cn>
->>>>
->>>> On a machine with multiple GPUs, a Linux user has no control over 
->>>> which
->>>> one is primary at boot time. This series tries to solve above 
->>>> mentioned
->>>
->>> If anything, the primary graphics adapter is the one initialized by 
->>> the firmware. I think our boot-up graphics also make this assumption 
->>> implicitly.
->>>
->>
->> Yes, but by the time of DRM drivers get loaded successfully,the 
->> boot-up graphics already finished.
->> Firmware framebuffer device already get killed by the 
->> drm_aperture_remove_conflicting_pci_framebuffers()
->> function (or its siblings). So, this series is definitely not to 
->> interact with the firmware framebuffer
->
-> Yes and no. The helpers you mention will attempt to remove the 
-> firmware framebuffer on the given PCI device. If you have multiple PCI 
-> devices, the other devices would not be affected.
->
-Yes and no.
+> However, on modern Linux systems the primary display does not really 
+> exist. 'Primary' is the device that is available via VGA, VESA or EFI. 
+
+I may miss the point, what do you means by choose the word "modern"?
+Are you trying to tell me that X server is too old and Wayland is the modern display server?
 
 
-For the yes part: drm_aperture_remove_conflicting_pci_framebuffers() only kill the conflict one.
-But for a specific machine with the modern UEFI firmware,
-there should be only one firmware framebuffer driver.
-That shoudd be the EFIFB(UEFI GOP). I do have multiple PCI devices,
-but I don't understand when and why a system will have more than one firmware framebuffer.
+> Our drivers don't use these interfaces, but the native registers.
 
-Even for the machines with the legacy BIOS, the fixed VGA aperture address range
-can only be owned by one firmware driver. It is just that we need to handle the
-routing, the ->set_decode() callback of vga_client_register() is used to do such
-work. Am I correct?
+
+Yes and no?
+
+Yes for the machine with the UEFI firmware,
+but I not sure if this statement is true for the machine with the legacy firmware.
+
+As the display controller in the ASpeed BMC is VGA compatible.
+Therefore, in theory, it should works with the VGA console on the machine
+with another VGA compatible video card. So the ast_vga_set_decode() function
+provided in the 0007 patch probably useful on legacy firmware environment.
+
+To be honest, I have tested this on various machine with UEFI firmware.
+But I didn't realized that I should do the testing on legacy firmware environment
+before sending this patch. It seems that the testing effort needed are quite
+exhausting, since all my machines come with the UEFI firmware.
+
+So is it OK to leave the legacy part to someone else who interested in it?
+Probably Alex is more professional at legacy VGA routing stuff?
+:-)
 
 
