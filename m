@@ -2,56 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DBF6796DDE
-	for <lists+nouveau@lfdr.de>; Thu,  7 Sep 2023 02:13:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94435796E9E
+	for <lists+nouveau@lfdr.de>; Thu,  7 Sep 2023 03:40:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 04FBE10E202;
-	Thu,  7 Sep 2023 00:13:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D88D210E747;
+	Thu,  7 Sep 2023 01:40:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0554A10E202;
- Thu,  7 Sep 2023 00:13:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1694045606; x=1725581606;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=HB9WRsoIrlGJ+5WpybSh9YtkMLIYFIaTA1DHeFNa7II=;
- b=B2DSNImMFZeM6v9HG/Vys6Zp0+YfHkE8ez+GmCr8XuaaOV0qDz54AOJT
- SQOFuHsGN+uXsXvjjUqWZYPiRvzkASVVUKAEL7AmdiRejxRkidWAoNin5
- 9kNzcBU2z7pZtDp2uMgEIJOr2mUsrGzUb+tIf5157vBEaxXGYpxhX5ySO
- 6/i1WBbfVG3Vp09+q1dsig/+XncD0/Ssb4/dAX2pz0yACoMhC8qXwR1L6
- h4jqpkmNUS+Fcsx0k6u6QAzM4ZsKunLGDMp5bgWQnMl3mmmFKBHiIQCY7
- Avufx56LBaaQlp6U12fDUHq+5qPU7p0Bo4CYHljVL8oy/QnpjslzavDOr w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10825"; a="357532060"
-X-IronPort-AV: E=Sophos;i="6.02,233,1688454000"; d="scan'208";a="357532060"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 06 Sep 2023 17:13:25 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10825"; a="1072624257"
-X-IronPort-AV: E=Sophos;i="6.02,233,1688454000"; d="scan'208";a="1072624257"
-Received: from lkp-server01.sh.intel.com (HELO 59b3c6e06877) ([10.239.97.150])
- by fmsmga005.fm.intel.com with ESMTP; 06 Sep 2023 17:13:22 -0700
-Received: from kbuild by 59b3c6e06877 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1qe2e8-0000iv-0H;
- Thu, 07 Sep 2023 00:13:20 +0000
-Date: Thu, 7 Sep 2023 08:12:58 +0800
-From: kernel test robot <lkp@intel.com>
-To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
- matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
- sarah.walker@imgtec.com, donald.robson@imgtec.com,
- boris.brezillon@collabora.com, christian.koenig@amd.com,
- faith.ekstrand@collabora.com
-Message-ID: <202309070844.arxMNmRa-lkp@intel.com>
-References: <20230906214723.4393-7-dakr@redhat.com>
+Received: from out-216.mta0.migadu.com (out-216.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::d8])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 59D9D10E6A2
+ for <nouveau@lists.freedesktop.org>; Thu,  7 Sep 2023 01:40:28 +0000 (UTC)
+Message-ID: <2da16c01-260b-365d-4651-91d9172e5ed8@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+ t=1694050826;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=fdSJjVdF9N9VyWi8d0E/+tvyLt2iN7wqg3meq10BBqk=;
+ b=ZKxMImLVCYGgQdGo7wEp8md0rexO3whf38TT14IgmeA2I8lJ1+FpCjs5ckzNyIl70hWb0l
+ zhA/AEeUrYoo62kwzMEaVZue9c3989ZAOnT0QDm2vWL4fu5sqETOIWyXlnvsipgb5d/tj2
+ dmoljB5GmkWXZn1QdoOXvE7jhONfgh0=
+Date: Thu, 7 Sep 2023 09:40:15 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230906214723.4393-7-dakr@redhat.com>
-Subject: Re: [Nouveau] [PATCH drm-misc-next v2 6/7] drm/gpuvm: generalize
- dma_resv/extobj handling and GEM validation
+Content-Language: en-US
+To: Alex Deucher <alexdeucher@gmail.com>, suijingfeng <suijingfeng@loongson.cn>
+References: <20230904195724.633404-1-sui.jingfeng@linux.dev>
+ <20230904195724.633404-4-sui.jingfeng@linux.dev>
+ <d3e6a9ce-1c7a-8e44-3127-413cd471a8e9@amd.com>
+ <40f32814-ca87-6e29-0e10-4b4463a2920d@loongson.cn>
+ <CADnq5_OYPha5cGF+tSj4fvSmf-6tObzNSe2__nG-SbjX6v_2vw@mail.gmail.com>
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Sui Jingfeng <sui.jingfeng@linux.dev>
+In-Reply-To: <CADnq5_OYPha5cGF+tSj4fvSmf-6tObzNSe2__nG-SbjX6v_2vw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
+Subject: Re: [Nouveau] [RFC,
+ drm-misc-next v4 3/9] drm/radeon: Implement .be_primary() callback
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,66 +53,158 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, oe-kbuild-all@lists.linux.dev
+Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Alex Williamson <alex.williamson@redhat.com>, amd-gfx@lists.freedesktop.org,
+ linux-pci@vger.kernel.org, Bjorn Helgaas <bhelgaas@google.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Danilo,
 
-kernel test robot noticed the following build warnings:
+On 2023/9/7 00:00, Alex Deucher wrote:
+> On Tue, Sep 5, 2023 at 1:25 PM suijingfeng <suijingfeng@loongson.cn> wrote:
+>> Hi,
+>>
+>>
+>> On 2023/9/5 13:50, Christian König wrote:
+>>> Am 04.09.23 um 21:57 schrieb Sui Jingfeng:
+>>>> From: Sui Jingfeng <suijingfeng@loongson.cn>
+>>>>
+>>>> On a machine with multiple GPUs, a Linux user has no control over
+>>>> which one
+>>>> is primary at boot time.
+>>> Question is why is that useful? Should we give users the ability to
+>>> control that?
+>>>
+>>> I don't see an use case for this.
+>>>
+>> On a specific machine with multiple GPUs mounted, only the
+>> primary graphics get POST-ed (initialized) by the firmware.
+>> Therefore the DRM drivers for the rest video cards have to
+>> work without the prerequisite setups done by firmware, This
+>> is called as POST.
+> I think that should be regarded as a bug in the driver that should be
+> fixed and this would not help with that case.  If a driver can't
+> initialize a device without aid from the pre-OS environment, that
+> should be fixed in the driver.  This solution also doesn't fix which
+> device is selected as the primary by the pre-OS environment.  That can
+> only be fixed in the pre-OS environment code.
+>
+>> One of the use cases is to test if a specific DRM driver
+>> would works properly, under the circumstance of not being
+>> POST-ed, The ast drm driver is the first one which refused
+>> to work if not being POST-ed by the firmware.
+>>
+>> Before apply this series, I was unable make drm/ast as the
+>> primary video card easily. The problem is that on a multiple
+>> video card configuration, the monitor connected with my
+>> AST2400 card not light up. While confusing, a naive programmer
+>> may suspect the PRIME is not working.
+>>
+>> After applied this series and passing ast.modeset=10 on the
+>> kernel cmd line, I found that the monitor connected with my
+>> ast2400 video card still black, It doesn't display and It
+>> doesn't show image to me.
+> The problem with adding modeset=10 is that it only helps when you have
+> one GPU driven by that driver in the system.  If you have multiple
+> GPUs driven by that driver, which one would that apply to?  E.g., what
+> if you have 2 AMD GPUs in the system.
+>
+>> While in the process of study drm/ast, I know that drm/ast
+>> driver has the POST code shipped, See the ast_post_gpu() function.
+>> Then, I was wondering why this function doesn't works.
+>>
+>> After a short-time (hasty) debugging, I found that the ast_post_gpu()
+>> function didn't get run. Because it have something to do with the
+>> ast->config_mode. Without thinking too much, I hardcoded the
+>> ast->config_mode as ast_use_p2a, the key point is to force the
+>> ast_post_gpu() function to run.
+>>
+>>
+>> ```
+>>
+>> --- a/drivers/gpu/drm/ast/ast_main.c
+>> +++ b/drivers/gpu/drm/ast/ast_main.c
+>> @@ -132,6 +132,8 @@ static int ast_device_config_init(struct ast_device
+>> *ast)
+>>                   }
+>>           }
+>>
+>> +       ast->config_mode = ast_use_p2a;
+>> +
+>>           switch (ast->config_mode) {
+>>           case ast_use_defaults:
+>>                   drm_info(dev, "Using default configuration\n");
+>>
+>> ```
+>>
+>> Then, the monitor light up, it display the Ubuntu greeter to me. Therefore
+>> my patch is useful, at least for the Linux drm driver tester and developer.
+>> It allow programmers to test the specific part of a specific driver without
+>> changing a line of the source code and without the need of sudo authority.
+>>
+>> It improves the efficiency of the testing and patch verification. I know
+>> the PrimaryGPU option of Xorg conf, but this approach will remember the
+>> setup have been made, you need modify it with root authority each time
+>> you want to switch the primary. But on the process of rapid developing
+>> and/or testing for multiple video drivers, with only one computer hardware
+>> resource available. What we really want is a one-shot command, as provided
+>> by this series.  So, this is the first use case.
+>>
+>>
+>> The second use case is that sometime the firmware is not reliable.
+>> While there are thousands of ARM64, PowerPC and Mips servers machine,
+>> Most of them don't have a good UEFI firmware support. I haven't test the
+>> drm/amdgpu and drm/radeon at my ARM64 server yet. Because this ARM64
+>> server always use the platform(BMC) integrated display controller as primary.
+>> The UEFI firmware of it does not provide options menu to tune.
+>> So, for the first time, the discrete card because useless, despite more powerful.
+>> I will take time to carry on the testing, so I will be able to tell more
+>> in the future.
+>>
+>>
+>> Even on X86, when select the PEG as primary on the UEFI BIOS menu.
+>> There is no way to tell the bios which one of my three
+>> discrete video be the primary. Not to mention some old UEFI
+>> firmware, which doesn't provide a setting at all.
+>> While the benefit of my approach is the flexibility.
+>> Yes the i915, amdgpu and radeon are good quality,
+>> but there may have programmers want to try nouveau.
+>>
+>>
+>> The third use case is that VGAARB is also not reliable, It will
+>> select a wrong device as primary. Especially on Arm64, Loongarch
+>> and mips arch etc. And the X server will use this wrong device
+>> as primary and completely crash there. Either because of lacking
+>> a driver or the driver has a bug which can not bear the graphic
+>> environment up. VGAARB is firmware dependent.
+>> My patch provide a temporary method to rescue.
+>>
+> It sounds like we need a general purpose "primary" selector.  I think
+> it's sort of orthogonal to VGA.  VGAARB is just for managing VGA
+> routing on PCI.  It's not really directly related to which GPU you
+> want to be the primary when the OS loads.  Maybe some new kernel
+> parameter, E.g., primary_display=<string> where the string would be
+> the specific device you wanted to be the primary,  E.g., you could use
+> the PCI BDF on PCI devices, primary_display=0000:0a:00.0 or some other
+> device string for non-PCI devices.
 
-[auto build test WARNING on 6bd3d8da51ca1ec97c724016466606aec7739b9f]
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-gpuva_mgr-allow-building-as-module/20230907-054931
-base:   6bd3d8da51ca1ec97c724016466606aec7739b9f
-patch link:    https://lore.kernel.org/r/20230906214723.4393-7-dakr%40redhat.com
-patch subject: [PATCH drm-misc-next v2 6/7] drm/gpuvm: generalize dma_resv/extobj handling and GEM validation
-config: riscv-defconfig (https://download.01.org/0day-ci/archive/20230907/202309070844.arxMNmRa-lkp@intel.com/config)
-compiler: riscv64-linux-gcc (GCC) 13.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20230907/202309070844.arxMNmRa-lkp@intel.com/reproduce)
+Indeed, thanks for you give the right direction.
+Bjorn and Willianson also told me something similar,
+but I didn't realized until today.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202309070844.arxMNmRa-lkp@intel.com/
+historically, VGAARB is only for managing VGA compatible device.
+For legacy BIOS environment, the routing related to this need to handled.
+I didn't realized those technique point by the time this series is sending.
+Beside this, It not uncommon that a specific machine ship multiple identical
+GPUs models Or GPUs from the same company (likely a integrated one and a discrete one)
+My naive approach in v4 cannot solve complex problems like this.
+I will try to solve this problems and concerns at the next version.
 
-All warnings (new ones prefixed by >>):
-
->> drivers/gpu/drm/drm_gpuva_mgr.c:998: warning: Function parameter or member 'exec' not described in 'drm_gpuvm_resv_add_fence'
+Thanks.
 
 
-vim +998 drivers/gpu/drm/drm_gpuva_mgr.c
-
-   983	
-   984	/**
-   985	 * drm_gpuvm_resv_add_fence - add fence to private and all extobj
-   986	 * dma-resv
-   987	 * @gpuvm: the &drm_gpuvm to add a fence to
-   988	 * @fence: fence to add
-   989	 * @private_usage: private dma-resv usage
-   990	 * @extobj_usage: extobj dma-resv usage
-   991	 */
-   992	void
-   993	drm_gpuvm_resv_add_fence(struct drm_gpuvm *gpuvm,
-   994				 struct drm_exec *exec,
-   995				 struct dma_fence *fence,
-   996				 enum dma_resv_usage private_usage,
-   997				 enum dma_resv_usage extobj_usage)
- > 998	{
-   999		struct drm_gem_object *obj;
-  1000		unsigned long index;
-  1001	
-  1002		drm_exec_for_each_locked_object(exec, index, obj) {
-  1003				dma_resv_assert_held(obj->resv);
-  1004				dma_resv_add_fence(obj->resv, fence,
-  1005						   drm_gpuvm_is_extobj(gpuvm, obj) ?
-  1006						   private_usage : extobj_usage);
-  1007		}
-  1008	}
-  1009	EXPORT_SYMBOL_GPL(drm_gpuvm_resv_add_fence);
-  1010	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+> Alex
