@@ -2,55 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 853F7796EF4
-	for <lists+nouveau@lfdr.de>; Thu,  7 Sep 2023 04:30:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D954797104
+	for <lists+nouveau@lfdr.de>; Thu,  7 Sep 2023 10:52:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6C28610E74B;
-	Thu,  7 Sep 2023 02:30:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D28BF10E78D;
+	Thu,  7 Sep 2023 08:52:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 129718 seconds by postgrey-1.36 at gabe;
- Thu, 07 Sep 2023 02:30:18 UTC
-Received: from out-221.mta0.migadu.com (out-221.mta0.migadu.com
- [91.218.175.221])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CD91010E74B
- for <nouveau@lists.freedesktop.org>; Thu,  7 Sep 2023 02:30:18 +0000 (UTC)
-Message-ID: <a9af88c5-4509-96ff-a7fd-a0f72d2f1e6a@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1694053816;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=zWKuDI3UfELqoaKOu5alhaGYIMfDF3Uc/CsxX8KNpcw=;
- b=GgeP92P4/naoXz26vwG4GdsQK6IicmdS3p/1rSEio3gSFjQdIr414+XfvCVmk/THfA7ZKv
- 4z62dV1LCO5X2T+9nr7deC3FDvEwA8Rt+pc1TYHpt6j3guxm7EdgbMKutPbEWqVZwt5ffu
- P1CoPAj1PHHuBRbiwyeoXcKFjbqv6Jk=
-Date: Thu, 7 Sep 2023 10:30:05 +0800
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.24])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 45CD910E225;
+ Thu,  7 Sep 2023 08:52:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1694076724; x=1725612724;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=IH5/4Cd8kYqQbuTllI6IJ4teSuxYjc+p/Ds4/npYdFU=;
+ b=g8hllZz/D3QYHnmCb2/3q8LhVm78RRWHkWVWyjGVQzn1LbLnysWf+r7x
+ Xcsz9+hm/2Y/GqOLOj4B4+X+0q12+m/WhqSE/BLJrIeNF+wHvRJyK5Nco
+ +l3opB4ZO2Md1rU3AjzEe8k9leQHixNa09zL8AGU5lQIXLTYAA0/oLtVz
+ y7hwOVQubDkiqSy0XkH3ZNE2oHR3DatqTCfOKNXedLvUPXe2jIyq0qGuf
+ StwDUVpkqgS8xoNZtnel8W8l28mxNmiJw83b4dANsN6I0E8Y0xWemvQ32
+ 4ydRM6ZNUZazTYuKbvTfhE9HeuHEuVghR3ZUeAvf3XM0OsiSlHLX0bn54 g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10825"; a="380013375"
+X-IronPort-AV: E=Sophos;i="6.02,234,1688454000"; d="scan'208";a="380013375"
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+ by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 07 Sep 2023 01:52:00 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10825"; a="812059074"
+X-IronPort-AV: E=Sophos;i="6.02,234,1688454000"; d="scan'208";a="812059074"
+Received: from lkp-server01.sh.intel.com (HELO 59b3c6e06877) ([10.239.97.150])
+ by fmsmga004.fm.intel.com with ESMTP; 07 Sep 2023 01:51:56 -0700
+Received: from kbuild by 59b3c6e06877 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1qeAjy-00013f-2R;
+ Thu, 07 Sep 2023 08:51:54 +0000
+Date: Thu, 7 Sep 2023 16:51:37 +0800
+From: kernel test robot <lkp@intel.com>
+To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
+ matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
+ sarah.walker@imgtec.com, donald.robson@imgtec.com,
+ boris.brezillon@collabora.com, christian.koenig@amd.com,
+ faith.ekstrand@collabora.com
+Message-ID: <202309071613.s6ztMEyU-lkp@intel.com>
+References: <20230906214723.4393-3-dakr@redhat.com>
 MIME-Version: 1.0
-Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
- suijingfeng <suijingfeng@loongson.cn>,
- Thomas Zimmermann <tzimmermann@suse.de>, Bjorn Helgaas
- <bhelgaas@google.com>, "Koenig, Christian" <Christian.Koenig@amd.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Daniel Vetter <daniel@ffwll.ch>,
- "Deucher, Alexander" <Alexander.Deucher@amd.com>
-References: <20230904195724.633404-1-sui.jingfeng@linux.dev>
- <44ec8549-dc36-287e-4359-abd3ec8d22d6@suse.de>
- <5afd2efb-f838-f9b7-02a9-2cf4d4fd2382@loongson.cn>
- <2adfa653-ac35-d560-be52-c92848a1eef5@gmail.com>
- <b51d49f3-e3de-6b8d-9cb4-df5c03f3cdc0@loongson.cn>
- <10509692-ce04-e225-5a27-abc955554bdc@gmail.com>
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Sui Jingfeng <sui.jingfeng@linux.dev>
-In-Reply-To: <10509692-ce04-e225-5a27-abc955554bdc@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
-Subject: Re: [Nouveau] [RFC,
- drm-misc-next v4 0/9] PCI/VGA: Allowing the user to select the
- primary video adapter at boot time
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230906214723.4393-3-dakr@redhat.com>
+Subject: Re: [Nouveau] [PATCH drm-misc-next v2 2/7] drm/gpuvm: rename struct
+ drm_gpuva_manager to struct drm_gpuvm
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,78 +63,115 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org, linux-pci@vger.kernel.org
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, oe-kbuild-all@lists.linux.dev
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+Hi Danilo,
 
+kernel test robot noticed the following build warnings:
 
-On 2023/9/6 17:40, Christian König wrote:
-> Am 06.09.23 um 11:08 schrieb suijingfeng:
->> Well, welcome to correct me if I'm wrong.
->
-> You seem to have some very basic misunderstandings here.
->
-> The term framebuffer describes some VRAM memory used for scanout.
->
-> This framebuffer is exposed to userspace through some framebuffer 
-> driver, on UEFI platforms that is usually efifb but can be quite a 
-> bunch of different drivers.
->
-> When the DRM drivers load they remove the previous drivers using 
-> drm_aperture_remove_conflicting_pci_framebuffers() (or similar 
-> function), but this does not mean that the framebuffer or scanout 
-> parameters are modified in any way. It just means that the framebuffer 
-> is just no longer exposed through this driver.
->
-> Take over is the perfectly right description here because that's 
-> exactly what's happening. The framebuffer configuration including the 
-> VRAM memory as well as the parameters for scanout are exposed by the 
-> newly loaded DRM driver.
->
-> In other words userspace can query through the DRM interfaces which 
-> monitors already driven by the hardware and so in your terminology 
-> figure out which is the primary one.
->
-I'm a little bit of not convinced about this idea, you might be correct.
-But there cases where three are multiple monitors and each video card
-connect one.
+[auto build test WARNING on 6bd3d8da51ca1ec97c724016466606aec7739b9f]
 
-It also quite common that no monitors is connected, let the machine boot
-first, then find a monitors to connect to a random display output. See
-which will display. I don't expect the primary shake with.
-The primary one have to be determined as early as possible, because of
-the VGA console and the framebuffer console may directly output the primary.
-Get the DDC and/or HPD involved may necessary complicated the problem.
+url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-gpuva_mgr-allow-building-as-module/20230907-054931
+base:   6bd3d8da51ca1ec97c724016466606aec7739b9f
+patch link:    https://lore.kernel.org/r/20230906214723.4393-3-dakr%40redhat.com
+patch subject: [PATCH drm-misc-next v2 2/7] drm/gpuvm: rename struct drm_gpuva_manager to struct drm_gpuvm
+reproduce: (https://download.01.org/0day-ci/archive/20230907/202309071613.s6ztMEyU-lkp@intel.com/reproduce)
 
-There are ASpeed BMC who add a virtual connector in order to able display remotely.
-There are also have commands to force a connector to be connected status.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202309071613.s6ztMEyU-lkp@intel.com/
 
+All warnings (new ones prefixed by >>):
 
-> It's just that as Thomas explained as well that this completely 
-> irrelevant to any modern desktop. Both X and Wayland both iterate the 
-> available devices and start rendering to them which one was used 
-> during boot doesn't really matter to them.
->
-You may be correct, but I'm still not sure.
-I probably need more times to investigate.
-Me and my colleagues are mainly using X server,
-the version varies from 1.20.4 and 1.21.1.4.
-Even this is true, the problems still exist for non-modern desktops.
+>> ./include/drm/drm_gpuva_mgr.h:138: warning: Function parameter or member 'vm' not described in 'drm_gpuva'
 
-> Apart from that ranting like this and trying to explain stuff to 
-> people who obviously have much better background in the topic is not 
-> going to help your patches getting upstream.
->
+vim +138 ./include/drm/drm_gpuva_mgr.h
 
-Thanks for you tell me so much knowledge,
-I'm realized where are the problems now.
-I will try to resolve the concerns at the next version.
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   60  
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   61  /**
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   62   * struct drm_gpuva - structure to track a GPU VA mapping
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   63   *
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   64   * This structure represents a GPU VA mapping and is associated with a
+3142f8b7e68331 Danilo Krummrich 2023-09-06   65   * &drm_gpuvm.
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   66   *
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   67   * Typically, this structure is embedded in bigger driver structures.
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   68   */
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   69  struct drm_gpuva {
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   70  	/**
+3142f8b7e68331 Danilo Krummrich 2023-09-06   71  	 * @gpuvm: the &drm_gpuvm this object is associated with
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   72  	 */
+3142f8b7e68331 Danilo Krummrich 2023-09-06   73  	struct drm_gpuvm *vm;
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   74  
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   75  	/**
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   76  	 * @flags: the &drm_gpuva_flags for this mapping
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   77  	 */
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   78  	enum drm_gpuva_flags flags;
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   79  
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   80  	/**
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   81  	 * @va: structure containing the address and range of the &drm_gpuva
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   82  	 */
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   83  	struct {
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   84  		/**
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   85  		 * @addr: the start address
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   86  		 */
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   87  		u64 addr;
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   88  
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   89  		/*
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   90  		 * @range: the range
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   91  		 */
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   92  		u64 range;
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   93  	} va;
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   94  
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   95  	/**
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   96  	 * @gem: structure containing the &drm_gem_object and it's offset
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   97  	 */
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   98  	struct {
+e6303f323b1ad9 Danilo Krummrich 2023-07-20   99  		/**
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  100  		 * @offset: the offset within the &drm_gem_object
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  101  		 */
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  102  		u64 offset;
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  103  
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  104  		/**
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  105  		 * @obj: the mapped &drm_gem_object
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  106  		 */
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  107  		struct drm_gem_object *obj;
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  108  
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  109  		/**
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  110  		 * @entry: the &list_head to attach this object to a &drm_gem_object
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  111  		 */
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  112  		struct list_head entry;
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  113  	} gem;
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  114  
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  115  	/**
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  116  	 * @rb: structure containing data to store &drm_gpuvas in a rb-tree
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  117  	 */
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  118  	struct {
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  119  		/**
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  120  		 * @rb: the rb-tree node
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  121  		 */
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  122  		struct rb_node node;
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  123  
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  124  		/**
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  125  		 * @entry: The &list_head to additionally connect &drm_gpuvas
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  126  		 * in the same order they appear in the interval tree. This is
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  127  		 * useful to keep iterating &drm_gpuvas from a start node found
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  128  		 * through the rb-tree while doing modifications on the rb-tree
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  129  		 * itself.
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  130  		 */
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  131  		struct list_head entry;
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  132  
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  133  		/**
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  134  		 * @__subtree_last: needed by the interval tree, holding last-in-subtree
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  135  		 */
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  136  		u64 __subtree_last;
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  137  	} rb;
+e6303f323b1ad9 Danilo Krummrich 2023-07-20 @138  };
+e6303f323b1ad9 Danilo Krummrich 2023-07-20  139  
 
-
-> Regards,
-> Christian.
->
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
