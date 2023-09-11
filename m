@@ -1,122 +1,77 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CE1379A826
-	for <lists+nouveau@lfdr.de>; Mon, 11 Sep 2023 15:09:41 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B36C79AA12
+	for <lists+nouveau@lfdr.de>; Mon, 11 Sep 2023 18:17:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B025810E2EF;
-	Mon, 11 Sep 2023 13:09:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C79D110E32E;
+	Mon, 11 Sep 2023 16:17:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2063.outbound.protection.outlook.com [40.107.93.63])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0155210E2F0;
- Mon, 11 Sep 2023 13:09:37 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=S0+LvL/ur1UN9j8ZbDmX4SPs6u6FOYoTcBZ7aT94EAWogNmRjYuEk70xscxrXXadGgrliqFARJyn4rlgjSbYDGIvgEqBoyoqR2S79z0B/G09BBq410e+gLHZbezpWcAj2ZTFN/ZmAjtytMQlGS0ip0wbuSxH6ud9UfoBUGzkfOuYaqo4ueVuTFpSDNWz22+42Ce4ZckMTBD/myXgGidSMisMX/YZ67FQFomu3tfdWQJJ+Pj0y5HQL5UBo8k2UtHtgfestKdMJ4TV5IFiT0smA16ukDDNFUu+WUTWOXyuWlbyEAMURhB+aV4lKqJlpdl0q1i+6gLbVHmqV+5RQms5Lw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TMCabexB434PuRwooTe2LtOM9WbB4vZoNo5aozCkbmU=;
- b=fQYAO13mR9leEH7ljT58A2V/W/47yL3cqIKPOq02N0eFzN/9ay5L6Gvyl85n2tPpPqee6wvddPU5Cf+MjWG8+54Kga2FLd/BpjVL4LdMdZfZqBmFObfevbeX01R/3gFvhImH7gOTmchb0C3hSwthG1eh3bcMKR+FbPgRin4oQgu/oFimV3Xs6R+YGsty9RX74EKY/5f7OzOwlPb+dSF1haavzXusltE6j/AbG/rkCBSLfEiFPnZ8+r9VzigvkT2I7+LwWJhuXX0i8YZv+JE7v5kKpxO5n6uPy3GZ51PmVCM/JA9ACq48z/AQzgHyl+WB5AnjcOKjyC3U1Y4UFSBQQw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TMCabexB434PuRwooTe2LtOM9WbB4vZoNo5aozCkbmU=;
- b=J77m754ZGNFbKm2DLpfIALGvtqXs4OrZo/JJ8HF22am6EF5h35Ii1mNAk21T7jhz3tCGHxWF4GBDBcJiHvry2xuqY2fkZoThpiD7z4+vhfKllJliJ/l/RqHkFNhyEZ/vghTtGPdLyQzi+1L+OS022nlsQ/aI4avFbMybocPp+F4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by MN2PR12MB4269.namprd12.prod.outlook.com (2603:10b6:208:1d4::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.34; Mon, 11 Sep
- 2023 13:09:35 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::55cb:215b:389e:eced]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::55cb:215b:389e:eced%5]) with mapi id 15.20.6768.029; Mon, 11 Sep 2023
- 13:09:35 +0000
-Message-ID: <211f3f89-edd8-b2b3-5f51-93066e60ebd6@amd.com>
-Date: Mon, 11 Sep 2023 15:09:28 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Content-Language: en-US
-To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
- matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
- sarah.walker@imgtec.com, donald.robson@imgtec.com,
- boris.brezillon@collabora.com, faith.ekstrand@collabora.com
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4A4B310E32E
+ for <nouveau@lists.freedesktop.org>; Mon, 11 Sep 2023 16:17:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1694449028;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=lAgyEv8v84Vh6tDzXDpI5U6AfJ7ln7UC0vFeWtEv4VA=;
+ b=CjK71LnI950zO9BcUM1q2faJgwa21huKiEo3zxXJcjMtUZA+VGUgO/mkBs4diASju3Bi1+
+ TQwi9jm7cwCGICeD/xmWu8rWG/MjMJ/UPr3Ly+Hlks10Ji7hjoQUQygS/OkPsOUdNm5jIG
+ ol5Grn4v0moNkQkv0Din9DQrU9PmOf8=
+Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
+ [209.85.167.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-295-xltkxITmPf-CJKnRgpP0nA-1; Mon, 11 Sep 2023 12:17:02 -0400
+X-MC-Unique: xltkxITmPf-CJKnRgpP0nA-1
+Received: by mail-lf1-f70.google.com with SMTP id
+ 2adb3069b0e04-500b5641eeaso4933376e87.3
+ for <nouveau@lists.freedesktop.org>; Mon, 11 Sep 2023 09:17:02 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694449021; x=1695053821;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lAgyEv8v84Vh6tDzXDpI5U6AfJ7ln7UC0vFeWtEv4VA=;
+ b=UxBnhWHBS+NKbfKHqzAsSaoeEANBeh3t/GXRqiTEEXqdZ/EmWboCgCcIWCUiGPMKNG
+ skHC2lRm6O2uJ2QGuaer5LnkaduqONS/2slaoIIzWuuf77RuvqpZgENb+hSHNsomKLv8
+ sZgaFNxHklcDy1Fn378cdJijSQHbhowBFlt1xjDh9D4a+HwSHrSbhoABgfGKbpf1SSsU
+ HqSGd/yG7BlsFvcqfkmBtPdOFdY3BEtU/MT3/NRl4j7+PqTXTMZou8idvt9+3u/kIXVM
+ lbe8+fqTDCP4ommgf0+gPVyF0pfGBvOQrIsOvhGiu0eVAch0JEVFLOb8TyPqiietiXHp
+ WhxQ==
+X-Gm-Message-State: AOJu0YyDFz0waojpew1UHkAW4LGUFIeGYCVq1FuCzB2KP9B8vFpSpOJj
+ eqwUmNCpQELgfik8RLtLpR3tmv/G0pqdJkShRdHhF7hyQiXaZ11t+wNiyyWBcwhgQTerJxWfxXL
+ 98bzlmqBtyBQMir1ZIl4P4LrkZA==
+X-Received: by 2002:a05:6512:ad3:b0:4fb:745e:dd01 with SMTP id
+ n19-20020a0565120ad300b004fb745edd01mr8799044lfu.45.1694449021281; 
+ Mon, 11 Sep 2023 09:17:01 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHFT/b800+k5rxjo807GRz9nrW77AzB8A8eqobtwbZiaP3UyedgpDYvLTqnvwcN3x2j75AAdQ==
+X-Received: by 2002:a05:6512:ad3:b0:4fb:745e:dd01 with SMTP id
+ n19-20020a0565120ad300b004fb745edd01mr8799026lfu.45.1694449020980; 
+ Mon, 11 Sep 2023 09:17:00 -0700 (PDT)
+Received: from cassiopeiae ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
+ by smtp.gmail.com with ESMTPSA id
+ bm5-20020a0564020b0500b0052e7e1931e2sm4801801edb.57.2023.09.11.09.17.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Sep 2023 09:17:00 -0700 (PDT)
+Date: Mon, 11 Sep 2023 18:16:58 +0200
+From: Danilo Krummrich <dakr@redhat.com>
+To: Boris Brezillon <boris.brezillon@collabora.com>
+Message-ID: <ZP89eqnqPdvlDoZg@cassiopeiae>
 References: <20230909153125.30032-1-dakr@redhat.com>
- <20230909153125.30032-3-dakr@redhat.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20230909153125.30032-3-dakr@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1PR02CA0047.eurprd02.prod.outlook.com
- (2603:10a6:802:14::18) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
+ <20230909153125.30032-5-dakr@redhat.com>
+ <20230911140035.06159577@collabora.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|MN2PR12MB4269:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7b9ee42a-e8fb-462b-943a-08dbb2c858c9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: IToq6q/5ByhWxSLLftYM19p8uLUHjTGcrG4eT93S9TAdS6Svuc47Pwd7Zhl7qMyrBDJDZa2Q7NG4T/4/+tmyCvuM2b6RgYiHbKxcd2N1gK9CXxV1JpGTs8BpJFDcFZm2O0YLIazIuVDbyp2tB4Ant7EsOpMu6JlxZYDRhKbbQYxDuWJNTuyBHImgegr0ZOU3FkLvglEhexgIsWCliqbp/D2Y2DuP/0lkd1SK9PFMIfECKGIzU+2h8SLODYVNInbQvCOhEloEUCR/qHHmg7GQLivtcGn7s+9ENfb53VCo0VY8jpb4YVx44MAcVj7xUPJnY8qxYLA2wOehbuQrl8rMP0zW4azofiwsQZJJxy3k/kIbl/sHEFcrzTwAuex+XLZAk8TbA0AiQHvXlRxn70KZ7sryDYGugNHVxB7nDxj/7zX13vNDrjv5jQ7OiRmO2GnvM4pw/XK0g+1qeM9KO4wT/YxEw3c0xOAPzzWcZ4GKhMXWfnvnU2z7f8dpzvZ6MwB62+y1pTl39BZ9/BliP+uz6GMlQ/niIFPtETGbOx/hAoDGfY70w9kM9SEu4Wdear7ejHAOLo8f1gWIN5u9Q1CX2ubUgZVYtk2DbDstzeVxYA2QUNhH4nmt9iIZHnrfv3L41x14sInhzJEboA6hcpOBtw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(136003)(396003)(346002)(376002)(366004)(39860400002)(186009)(1800799009)(451199024)(6486002)(6506007)(6666004)(6512007)(478600001)(83380400001)(66574015)(26005)(2616005)(7416002)(66476007)(66556008)(66946007)(4326008)(316002)(2906002)(41300700001)(5660300002)(8936002)(8676002)(86362001)(31696002)(36756003)(38100700002)(31686004)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Q3ZETVU1Rjdaa211eFJWZUJCK05tenp5T0xONW1UeXRQbTUyUGRsZGZGekk1?=
- =?utf-8?B?ZmdnMlN5citHZm1ncGZkaWhzMGREMVNBSm5PRUNUU0pWVjYwdVhsc01NSFB0?=
- =?utf-8?B?T0h1cmdMVU4vbFBybWFkV2xCbHlDd1RZNmZNYzdtU2xOYjFvU2JyMGtETlhr?=
- =?utf-8?B?RHYycVBOMkd2VmxSck5OQmhSbDJDazV5OFk5NjBUOVNvK2NmOW1lTEw2bkxy?=
- =?utf-8?B?S3VDKzYvT1hyVGEyODRRTVVkUGt4bHhVR3ZtVEx3NDU1RlpiS0Flb29NNklh?=
- =?utf-8?B?aEhPRlFWNDdQdHQyWHZwd1RBbVhKR3RUTmZQRTBDYlpCZHE2R2JBYm9TL2JZ?=
- =?utf-8?B?RmJIQWNoOUtKUFI3c1pveC9LQWVKYWh4Nnk1NlpXY2pVKzRjOUlwaU95ZkRk?=
- =?utf-8?B?U2NRT1Nwc3hKbi81Wm5UN2RkNmd5L0dNVFZqa2dXQm5HM0Z4ZmQ5cXBsT21v?=
- =?utf-8?B?dVc5Ukg1SVZqdG9QT3pUaWVZN2VyOGRwdmZwQUJUYlNqVTZqYWZXa3E0SWZG?=
- =?utf-8?B?bys3T3gvQmdTSDJ5ZmVRZEJaak9oV3FaVitKaVhiclRobkt6Zy9qaU1GQ3pv?=
- =?utf-8?B?VmpKR1dGWXZnRUQ4Wm5OR2IzOE1ZRjFyWUtyemdQdkhqc1lSNlJ4eVNrUXNh?=
- =?utf-8?B?eHByZjI1Mmd1TU5FdHVUbkNBdzNwc2VlM3Q1TzNVRHEvMXZyUWt1UGwzRnQr?=
- =?utf-8?B?b2VzYkVQT3hGYTNGRkkxMUdCSXNoVHZOTHpkeGRkUUFrTkdlbUFkRHVZTkZE?=
- =?utf-8?B?dU5GTlJXaU42cCs0c3ZvU3NxcnZkUkNzQytldTFBS3JCMldPWk1EYU9VY1Az?=
- =?utf-8?B?dksza2Y4bVgxRDdmZEFQVmZNSnF6L1Y0ZUlacGFqV2tlZ0RZMVpaUmF6YUxI?=
- =?utf-8?B?Kzd2aVdCMWZlMjJ6UjdLMXo1RHQ5TW1MVlRVYWJyNVJNelNxRXNEZ05HajdL?=
- =?utf-8?B?c2d0cVgxWnhGRnpUZGIvWmpJNzVCUFRWM3pSUzBRNGIrdmxiQ0NOMkhIOHBX?=
- =?utf-8?B?WU5lbkxnT0hLT0R6RHRVZXpaYUNZZ3NqZXpQdyt6RVh5eVp5MTJnekptNTZq?=
- =?utf-8?B?Q0RaZ1ZrUjVSRjYwMEFIeGMrK1AzRjRxTVFZK0lPdERlTkNiTVRHMUZJdUc0?=
- =?utf-8?B?YzVKMER1U1NTUWZ4NWR2NG8wZHBtUjQwVXlFQjFvUUMwZEtaQTBIWmVvaFpt?=
- =?utf-8?B?K1B6QXM0d1F6QjZqaThsaktxZ0FIbGNOT3pQVHlWc3lyckthWXo3RFEzMXY4?=
- =?utf-8?B?bXVTSlorL0J6RGdYc01QQlJSeDRNVFRtK21OUmNaOE5HVkY2NzI3TVRsRis2?=
- =?utf-8?B?TzUyVVJ1UjcwNWYxUFBUYnoyYldmbE9RRGlqUnU1SXg1UUxEcjVwVlBtQUNT?=
- =?utf-8?B?dnFwQVNOU2t3Z3JkMDJzdGw5YTN2c1JVclI2d3U5dFFUdlhXK2pwek1Rc05U?=
- =?utf-8?B?TFFjVU1lcFdxbk55Qms3M2pqRlcyeGQ1d1pWMHZMdE91V1BVZ2dGa25yb3B6?=
- =?utf-8?B?Ry9sVnZ5eUE5UDlRWmk0UStPaC9Qc3dQOHFyRnovRkR5ekRIWXo1MGRzVStD?=
- =?utf-8?B?ZkYxTkdxZkhGbnBJc0tNSnY4TkFWM1lLSDNtelRCRVBGbHE4MWpDTU8zU05P?=
- =?utf-8?B?Vk9yUmRVQk82bjU4NlMyM25teS9VeXBTdldaOW1FMlp3NUE1RG1QN1FJVElJ?=
- =?utf-8?B?LzBCYXNTb1d4Y1ZQbkNwUHRqdkRrNnQvanVvbWR5OGF3R3NSTjMxMkhrRlRC?=
- =?utf-8?B?eUM2UXhESHN1Ujh3SGhFY1ZaU3JTNG5NOUhlV0s4R3hJcFN3RW9BbElUZEcw?=
- =?utf-8?B?cE9FNkhoSnVHMWliZTJ5V09LcTh2cU1pZ2dtd05sSDdHdExQKzVRMDdncGh5?=
- =?utf-8?B?ODYveEJjdmdxMlpYdGZBTnZpMTlDNHUrcGlJQlRnbDQ4eHVYSHc1T0h6ZVJZ?=
- =?utf-8?B?V25pSjc2TzhhNDlEM2tQRXpFMTFkSEJqdVJkQmVoMWlNT0wyRFZxZ0NHd1Jh?=
- =?utf-8?B?cUR5Y0ZobnVxREIzN21nVkI1STFWT1hXellIaXBxVVJLbjAzSi9GdUxCbzYw?=
- =?utf-8?B?L1BoYWdNd3RVbXYyaFgxZ1NYblNBam5GZ1BteWdsLzZmVEk1Y3hId0RiKzRD?=
- =?utf-8?Q?3nGmeoQzMM+L0aMll5JS6wiwf?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7b9ee42a-e8fb-462b-943a-08dbb2c858c9
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2023 13:09:35.7738 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bKBWs7KZ80LiMabBY+qwo8TKdTmEgjsBz+Q+s2Lkph9mHJevyfhySesTTtbFCOEW
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4269
-Subject: Re: [Nouveau] [PATCH drm-misc-next v3 2/7] drm/gpuvm: allow
- building as module
+In-Reply-To: <20230911140035.06159577@collabora.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Subject: Re: [Nouveau] [PATCH drm-misc-next v3 4/7] drm/gpuvm: common
+ dma-resv per struct drm_gpuvm
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -128,94 +83,41 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
+ sarah.walker@imgtec.com, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ donald.robson@imgtec.com, daniel@ffwll.ch, christian.koenig@amd.com,
+ faith.ekstrand@collabora.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 09.09.23 um 17:31 schrieb Danilo Krummrich:
-> Currently, the DRM GPUVM does not have any core dependencies preventing
-> a module build.
->
-> Also, new features from subsequent patches require helpers (namely
-> drm_exec) which can be built as module.
->
-> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+On Mon, Sep 11, 2023 at 02:00:35PM +0200, Boris Brezillon wrote:
+> On Sat,  9 Sep 2023 17:31:11 +0200
+> Danilo Krummrich <dakr@redhat.com> wrote:
+> 
+> > @@ -240,9 +240,22 @@ struct drm_gpuvm {
+> >  	 * @ops: &drm_gpuvm_ops providing the split/merge steps to drivers
+> >  	 */
+> >  	const struct drm_gpuvm_ops *ops;
+> > +
+> > +	/**
+> > +	 * @d_obj: Dummy GEM object; used internally to pass the GPU VMs
+> > +	 * dma-resv to &drm_exec.
+> > +	 */
+> > +	struct drm_gem_object d_obj;
+> > +
+> > +	/**
+> > +	 * @resv: the &dma_resv for &drm_gem_objects mapped in this GPU VA
+> > +	 * space
+> > +	 */
+> > +	struct dma_resv *resv;
+> 
+> Hm, I'd be tempted to drop this field and add a drm_gpuvm_resv() helper
+> returning vm->d_obj.resv;
 
-Reviewed-by: Christian König <christian.koenig@amd.com> for this one here.
+Makes sense, will do that for V4.
 
-I hope that I can get somebody to work on the remaining patches with the 
-end goal of using this in amdgpu as well.
-
-Regards,
-Christian.
-
-> ---
->   drivers/gpu/drm/Kconfig         | 7 +++++++
->   drivers/gpu/drm/Makefile        | 2 +-
->   drivers/gpu/drm/drm_gpuvm.c     | 3 +++
->   drivers/gpu/drm/nouveau/Kconfig | 1 +
->   4 files changed, 12 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
-> index ab9ef1c20349..0f78a03e4e84 100644
-> --- a/drivers/gpu/drm/Kconfig
-> +++ b/drivers/gpu/drm/Kconfig
-> @@ -216,6 +216,13 @@ config DRM_EXEC
->   	help
->   	  Execution context for command submissions
->   
-> +config DRM_GPUVM
-> +	tristate
-> +	depends on DRM && DRM_EXEC
-> +	help
-> +	  GPU-VM representation providing helpers to manage a GPUs virtual
-> +	  address space
-> +
->   config DRM_BUDDY
->   	tristate
->   	depends on DRM
-> diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
-> index 7a84b3cddeab..8e1bde059170 100644
-> --- a/drivers/gpu/drm/Makefile
-> +++ b/drivers/gpu/drm/Makefile
-> @@ -45,7 +45,6 @@ drm-y := \
->   	drm_vblank.o \
->   	drm_vblank_work.o \
->   	drm_vma_manager.o \
-> -	drm_gpuvm.o \
->   	drm_writeback.o
->   drm-$(CONFIG_DRM_LEGACY) += \
->   	drm_agpsupport.o \
-> @@ -81,6 +80,7 @@ obj-$(CONFIG_DRM_PANEL_ORIENTATION_QUIRKS) += drm_panel_orientation_quirks.o
->   #
->   #
->   obj-$(CONFIG_DRM_EXEC) += drm_exec.o
-> +obj-$(CONFIG_DRM_GPUVM) += drm_gpuvm.o
->   
->   obj-$(CONFIG_DRM_BUDDY) += drm_buddy.o
->   
-> diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
-> index de1a69bc4a44..aae086deaa2b 100644
-> --- a/drivers/gpu/drm/drm_gpuvm.c
-> +++ b/drivers/gpu/drm/drm_gpuvm.c
-> @@ -1723,3 +1723,6 @@ drm_gpuva_ops_free(struct drm_gpuvm *gpuvm,
->   	kfree(ops);
->   }
->   EXPORT_SYMBOL_GPL(drm_gpuva_ops_free);
-> +
-> +MODULE_DESCRIPTION("DRM GPUVM");
-> +MODULE_LICENSE("GPL");
-> diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kconfig
-> index c52e8096cca4..1e6aaf95ff7c 100644
-> --- a/drivers/gpu/drm/nouveau/Kconfig
-> +++ b/drivers/gpu/drm/nouveau/Kconfig
-> @@ -11,6 +11,7 @@ config DRM_NOUVEAU
->   	select DRM_TTM
->   	select DRM_TTM_HELPER
->   	select DRM_EXEC
-> +	select DRM_GPUVM
->   	select DRM_SCHED
->   	select I2C
->   	select I2C_ALGOBIT
+> 
+> >  };
+> 
 
