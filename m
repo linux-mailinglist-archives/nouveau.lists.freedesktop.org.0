@@ -1,43 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A4EB79AADD
-	for <lists+nouveau@lfdr.de>; Mon, 11 Sep 2023 20:37:59 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 156F979C866
+	for <lists+nouveau@lfdr.de>; Tue, 12 Sep 2023 09:42:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 19A3E10E066;
-	Mon, 11 Sep 2023 18:37:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6BE3010E3A2;
+	Tue, 12 Sep 2023 07:42:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 248FB10E058;
- Mon, 11 Sep 2023 18:37:51 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.20])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 44A3F10E3A2;
+ Tue, 12 Sep 2023 07:42:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1694457471; x=1725993471;
+ t=1694504570; x=1726040570;
  h=message-id:date:mime-version:subject:to:cc:references:
  from:in-reply-to:content-transfer-encoding;
- bh=ocrIL0ZlmVpB256Jk07u6tj77vPtfJwjxZjpXnxO1+4=;
- b=BvI6+kaRd9Tyitxa5ngvzWBm1CGOFhFP+sIO5gKs5im+UzpvG8Gf5q+x
- N+si2X+feZho7chCQKE0bA1smZo4qZ4BOS94KajmlgDq8thzlhyoPIzdp
- xLgtntdu9sZ49O7FvHna14Bmj7A6yoKHm221fMAqbkPpmC4oadVSNJZ7d
- j7BF1bjmCYJp2ODiANQ+WCww5zchDhw6s7BE+pb+ckQGUi2qfOBhSYxJT
- j9IURms9umhlrsimLT5werVJNOFIN6IYmFj1UE2CRNujikRJJFUacloxK
- cw7f+JqFVMK9IDM9bw6+CI1mVuvxK7sJTfdm3BQQ5Ylgms4L6s22sBflE A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10830"; a="377080345"
-X-IronPort-AV: E=Sophos;i="6.02,244,1688454000"; d="scan'208";a="377080345"
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
- by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 11 Sep 2023 11:37:50 -0700
+ bh=PiPVESGjz4+9B3CmXHVRHfqH0RQNO7dsFUqM+loKVOM=;
+ b=O112YdF4B8sgWFsriIqrfXWFBY7re3Xs/+0KM1TTEXQZp7edh+lz+KI+
+ n1m1NLoTupG/1hxZkp0c0pI4fxzlnC5kUSaDXE95K/Cn92a33KQKvzS8J
+ 2Nb4ezBwCTBCCdTkksCKljW+yv8rHY3a+u/Z887n6Rei0Q/dEY8ZWU4yd
+ HOQxBWkIeBHl4hw+N0mfdGEdIDKtCNv5QCt8jI76qsZcEsjXYZ17AUDaO
+ 7d+fiKqSxOtEGIeiXMI+Vi+iiIt2iAbSRqVvkkaxXMP0W6pUQBLH0csHL
+ G0mmxbTP2O+2NuZ5+Yqk69h3Stcsg9YxWKSojbkPKC6dWWEeQUJr1JHuJ w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10830"; a="368558729"
+X-IronPort-AV: E=Sophos;i="6.02,245,1688454000"; d="scan'208";a="368558729"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Sep 2023 00:42:49 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10830"; a="867051091"
-X-IronPort-AV: E=Sophos;i="6.02,244,1688454000"; d="scan'208";a="867051091"
-Received: from lbinmo2x-mobl1.gar.corp.intel.com (HELO [10.249.254.187])
- ([10.249.254.187])
- by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 11 Sep 2023 11:37:46 -0700
-Message-ID: <f7276c96-7295-d3ac-a838-23924876b48a@linux.intel.com>
-Date: Mon, 11 Sep 2023 20:37:44 +0200
+X-IronPort-AV: E=McAfee;i="6600,9927,10830"; a="886858762"
+X-IronPort-AV: E=Sophos;i="6.02,245,1688454000"; d="scan'208";a="886858762"
+Received: from dhermamx-mobl1.amr.corp.intel.com (HELO [10.249.254.193])
+ ([10.249.254.193])
+ by fmsmga001-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Sep 2023 00:42:20 -0700
+Message-ID: <05b06e5d-03aa-14f4-46b1-6057c4437043@linux.intel.com>
+Date: Tue, 12 Sep 2023 09:42:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
@@ -72,6 +72,7 @@ Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi, Danilo
 
 On 9/11/23 19:49, Danilo Krummrich wrote:
 > Hi Thomas,
@@ -115,14 +116,26 @@ On 9/11/23 19:49, Danilo Krummrich wrote:
 >
 > There are drm_gpuvm_ops::vm_bo_alloc and drm_gpuvm_ops::vm_bo_free 
 > callback for drivers to register for that purpose.
+>
+> - Danilo
 
-Ah OK. Thanks, I'll take a deeper look.
+Now after looking a bit deeper, I think actually the question could be 
+rephrased as, why don't we just use the
+struct drm_gem_object::gpuva struct as the drm_gpuvm_bo in the spirit of 
+keeping things simple? Drivers would then just embed it in their bo 
+subclass and we'd avoid unnecessary fields in the struct drm_gem_object 
+for drivers that don't do VM_BIND yet.
+
+Sure, this won't be per bo and per vm, but it'd really only make a 
+slight difference where we have multiple VMAs per bo, where per-vm 
+per-bo state either needs to be duplicated or attached to a single vma 
+(as in the case of the external bo list).
+
+To me that looks like a substantial amount of less code / complexity?
 
 /Thomas
 
 
->
-> - Danilo
 >
 >>
 >> Thanks,
