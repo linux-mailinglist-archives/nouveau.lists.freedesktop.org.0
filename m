@@ -1,67 +1,67 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89DAF79FECF
-	for <lists+nouveau@lfdr.de>; Thu, 14 Sep 2023 10:47:43 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 83A2079FED0
+	for <lists+nouveau@lfdr.de>; Thu, 14 Sep 2023 10:47:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 116CA10E537;
+	by gabe.freedesktop.org (Postfix) with ESMTP id F400110E53A;
 	Thu, 14 Sep 2023 08:47:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vk1-xa30.google.com (mail-vk1-xa30.google.com
- [IPv6:2607:f8b0:4864:20::a30])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 31D7C10E535
- for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 08:47:39 +0000 (UTC)
-Received: by mail-vk1-xa30.google.com with SMTP id
- 71dfb90a1353d-495c9eb8911so329883e0c.2
- for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 01:47:39 -0700 (PDT)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1A1AD10E537
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 08:47:41 +0000 (UTC)
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-68bed2c786eso633628b3a.0
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 01:47:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694681258; x=1695286058; darn=lists.freedesktop.org;
+ d=gmail.com; s=20221208; t=1694681260; x=1695286060; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q5/u7zRIl9o4VAzUDkpNZn3tE7zbGaDEs1pCQcgiGNk=;
- b=lBds/ROkf2MWrbcQ4hV/7tiBOnBf9awIQa78SURVViH5iW2X/nZtjBA4zs6csCjmqQ
- hUesOQRNeyYGSeJ/zrXbAhfMUtosCvL6quPoA5U8exPLnkapiADLI0rMisZTVm6us+SK
- m77sCkQz45l9RY6EuqCdX79Wu9RDW1PLucFroJ5XzrTiRlwg047hfRHUCNybIQOgjvMH
- W51KSaLW5axo4xQVWdYKWRZkZy9qG+k6hl20IQI3v5wzIDVWPKLu1AgAdmRuYvpDYTw6
- K0qkMyP9xe6sumdXBCXvRu1Mb+UJ6m8octBRcHY2ArN6vquLvLanOgxJsh8BZ0IbifFD
- bD5A==
+ bh=1XngIBmi0KgFj1h3O4ZB0H/nppKUBVweJHwXKhGQTJg=;
+ b=VqJmvEG7jJuPFFAi7S24DukaKEPv59JUNmqsirqU2/COfL7cXeMkiLPP2LHrxSfj3f
+ XBIOYKdfmw4cyir6gTJ9LUE+VwJJb9Ukv61rhJ9EyPderQXenYosr+D3NC7vuRevqAfz
+ 8a4gHEcCMi3WEU24mA2Q5I4nX1rYrd8QnFJrWQM5St6URSsK3Qiy+EaFjyjB/M8Og1qS
+ 3PSXGwdPewXdf0znfeseVmmSsQNrZmlC82MayJwoevdOYa10yawGv8cBui7XqWCVotaX
+ KkUMvrcDwwYdxTOpxgsFMwtUkCm15boKyhSg7fGoJeCJyswgEz6Nd+slpo821SbnNovg
+ H0eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694681258; x=1695286058;
+ d=1e100.net; s=20230601; t=1694681260; x=1695286060;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q5/u7zRIl9o4VAzUDkpNZn3tE7zbGaDEs1pCQcgiGNk=;
- b=Vp//3EKtsDyBwBDkMkh+v9bZnOSWquGqoWwEDjfA2vU3w4eTri7e4Nha32CgOX+oTr
- l/WJwHN7DiMHqG9mU4+8fMkHin2sPrXr7HzQFrZclnKisiWDkNPvt7INLOevQK0sCMtk
- 1SytjMipkTSLaAueF4rAwURA302Jjxc/S51wTCvBQFs/wvxq65dw3dNGQGvXBbmx0aBW
- /NOSuJeG0q+DUqk7+B/5pAGzvJPJaMPc2P1vn47aNdEuHPrxoA3lC30+7t/cSQCeMCTX
- p0g2Zpx7GX+wtHUvp4KPbF8FxZG/338q6HH9DneurTLVErxorI/eE4nfg2ScQZcKKaH0
- Akfw==
-X-Gm-Message-State: AOJu0YyvdiqteitcZLEcT4aZa0zKatS8psyjS7i4gVBi57SW333N0OW+
- 7txJXVJOmgm2VddNFesW5xYNnJRJBXI=
-X-Google-Smtp-Source: AGHT+IF7DFqRasQEsvp8jrY+YT0EMtVKYG86u3kfqLK+9/Hx4ncOy3IkxfEkRCQIq1mF20bZvdFJMA==
-X-Received: by 2002:a1f:e6c3:0:b0:490:ca13:8856 with SMTP id
- d186-20020a1fe6c3000000b00490ca138856mr5411515vkh.13.1694681257710; 
- Thu, 14 Sep 2023 01:47:37 -0700 (PDT)
+ bh=1XngIBmi0KgFj1h3O4ZB0H/nppKUBVweJHwXKhGQTJg=;
+ b=K00JyFTFPYkW1f0fPQt0NQOQe8PLqeNYXO/0rrc9rmJwliGiDYN2ia/Z8HsYqv6UuA
+ JclPipau3Nr7gTR3RWKNCUXuuu3F65S3HvE3uIDo5gyZ3EdelR4+SZ/Nc6wQve9ciADm
+ Zmc1F1cISFyN6vv1LKtn2VkzRaOunBj7+X0//F0yA69VbZB5RLrmnSkAXQRDNYiANxA1
+ thU27ipyXBnnitQmS0AciojxATnkezPapjnb9kbT/XanFzmg6/L5aMgfY/ygVAo6DChP
+ ZYm/zEHwTJoO039uex27SeeM/V4MvAAjRo4NTuL8iax1udbzHDRvOSpcNOYtihEsH/02
+ bnxQ==
+X-Gm-Message-State: AOJu0Ywm68stbOUSjeT7LfQ25E4NCB5P3dplt3mpUuOZ3gQmnqy0NpRM
+ AX6xhuVyrhraDXroXzryKFuk+QOVLIY=
+X-Google-Smtp-Source: AGHT+IEYRrzIcSw0ynzk8K0rF6/nYIWBtnwkIpPIQfcEbwx9dlN1m3gJUcZJccnMs7k5Pcc01OguPw==
+X-Received: by 2002:a05:6a00:d88:b0:690:24ff:c80f with SMTP id
+ bf8-20020a056a000d8800b0069024ffc80fmr1827629pfb.34.1694681260088; 
+ Thu, 14 Sep 2023 01:47:40 -0700 (PDT)
 Received: from localhost.localdomain ([87.121.74.45])
  by smtp.gmail.com with ESMTPSA id
- e23-20020a62ee17000000b006889081281bsm839205pfi.138.2023.09.14.01.47.35
+ e23-20020a62ee17000000b006889081281bsm839205pfi.138.2023.09.14.01.47.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 01:47:37 -0700 (PDT)
+ Thu, 14 Sep 2023 01:47:39 -0700 (PDT)
 From: Ben Skeggs <skeggsb@gmail.com>
 To: nouveau@lists.freedesktop.org
-Date: Thu, 14 Sep 2023 18:45:59 +1000
-Message-ID: <20230914084624.2299765-20-skeggsb@gmail.com>
+Date: Thu, 14 Sep 2023 18:46:00 +1000
+Message-ID: <20230914084624.2299765-21-skeggsb@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230914084624.2299765-2-skeggsb@gmail.com>
 References: <20230914084624.2299765-2-skeggsb@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 18/44] drm/nouveau/kms/nv50-: move audio enable
- post-modeset
+Subject: [Nouveau] [PATCH 19/44] drm/nouveau/disp: add output hdmi config
+ method
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,119 +79,317 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Ben Skeggs <bskeggs@redhat.com>
 
-- adds tracking for post-UPDATE modeset operations, similar to mst[mo]'s
-- audio won't work on RM without this
-- we should probably have been doing this anyway
+- was previously part of acquire()
+- preparation for GSP-RM
 
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 ---
- drivers/gpu/drm/nouveau/dispnv50/disp.c | 35 ++++++++++++++++++++++---
- drivers/gpu/drm/nouveau/dispnv50/disp.h |  3 +++
- 2 files changed, 34 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/nouveau/dispnv50/disp.c       | 10 ++---
+ drivers/gpu/drm/nouveau/include/nvif/if0012.h | 28 ++++++++------
+ drivers/gpu/drm/nouveau/include/nvif/outp.h   |  5 ++-
+ drivers/gpu/drm/nouveau/nvif/outp.c           | 33 +++++++++--------
+ .../gpu/drm/nouveau/nvkm/engine/disp/gm200.c  | 16 ++++++--
+ .../gpu/drm/nouveau/nvkm/engine/disp/ior.h    |  5 ++-
+ .../gpu/drm/nouveau/nvkm/engine/disp/uoutp.c  | 37 +++++++++----------
+ 7 files changed, 74 insertions(+), 60 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 11790ced2b7d..ec63a2413455 100644
+index ec63a2413455..a4e1525ac48e 100644
 --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
 +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -707,6 +707,18 @@ nv50_audio_supported(struct drm_encoder *encoder)
- 	    disp->disp->object.oclass == GT206_DISP)
- 		return false;
+@@ -778,7 +778,6 @@ nv50_hdmi_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
+ 	struct drm_hdmi_info *hdmi = &nv_connector->base.display_info.hdmi;
+ 	union hdmi_infoframe infoframe = { 0 };
+ 	const u8 rekey = 56; /* binary driver, and tegra, constant */
+-	u8 scdc = 0;
+ 	u32 max_ac_packet;
+ 	struct {
+ 		struct nvif_outp_infoframe_v0 infoframe;
+@@ -791,8 +790,9 @@ nv50_hdmi_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
+ 	max_ac_packet -= 18; /* constant from tegra */
+ 	max_ac_packet /= 32;
  
-+	if (encoder->encoder_type != DRM_MODE_ENCODER_DPMST) {
-+		struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
-+
-+		switch (nv_encoder->dcb->type) {
-+		case DCB_OUTPUT_TMDS:
-+		case DCB_OUTPUT_DP:
-+			break;
-+		default:
-+			return false;
-+		}
-+	}
-+
- 	return true;
- }
+-	if (hdmi->scdc.scrambling.supported) {
++	if (nv_encoder->i2c && hdmi->scdc.scrambling.supported) {
+ 		const bool high_tmds_clock_ratio = mode->clock > 340000;
++		u8 scdc;
  
-@@ -829,8 +841,6 @@ nv50_hdmi_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
- 		size = 0;
- 
- 	nvif_outp_infoframe(&nv_encoder->outp, NVIF_OUTP_INFOFRAME_V0_VSI, &args.infoframe, size);
--
--	nv50_audio_enable(encoder, nv_crtc, nv_connector, state, mode);
- }
- 
- /******************************************************************************
-@@ -1658,8 +1668,6 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
- 		else
- 			proto = NV887D_SOR_SET_CONTROL_PROTOCOL_DP_B;
- 
--		nv50_audio_enable(encoder, nv_crtc, nv_connector, state, mode);
--
- #ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
- 		backlight = nv_connector->backlight;
- 		if (backlight && backlight->uses_dpcd)
-@@ -1941,7 +1949,9 @@ nv50_disp_atomic_commit_core(struct drm_atomic_state *state, u32 *interlock)
- 	struct drm_dp_mst_topology_state *mst_state;
- 	struct nouveau_drm *drm = nouveau_drm(state->dev);
- 	struct nv50_disp *disp = nv50_disp(drm->dev);
-+	struct nv50_atom *atom = nv50_atom(state);
- 	struct nv50_core *core = disp->core;
-+	struct nv50_outp_atom *outp;
- 	struct nv50_mstm *mstm;
- 	int i;
- 
-@@ -1964,6 +1974,21 @@ nv50_disp_atomic_commit_core(struct drm_atomic_state *state, u32 *interlock)
- 		if (mstm->modified)
- 			nv50_mstm_cleanup(state, mst_state, mstm);
+ 		ret = drm_scdc_readb(nv_encoder->i2c, SCDC_TMDS_CONFIG, &scdc);
+ 		if (ret < 0) {
+@@ -812,8 +812,9 @@ nv50_hdmi_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
+ 				 scdc, ret);
  	}
+ 
+-	ret = nvif_outp_acquire_tmds(&nv_encoder->outp, nv_crtc->index, true,
+-				     max_ac_packet, rekey, scdc, hda);
++	ret = nvif_outp_hdmi(&nv_encoder->outp, nv_crtc->index, true, max_ac_packet, rekey,
++			     mode->clock, hdmi->scdc.supported, hdmi->scdc.scrambling.supported,
++			     hdmi->scdc.scrambling.low_rates);
+ 	if (ret)
+ 		return;
+ 
+@@ -1850,7 +1851,6 @@ nv50_pior_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *st
+ 	switch (nv_encoder->dcb->type) {
+ 	case DCB_OUTPUT_TMDS:
+ 		ctrl |= NVDEF(NV507D, PIOR_SET_CONTROL, PROTOCOL, EXT_TMDS_ENC);
+-		nvif_outp_acquire_tmds(&nv_encoder->outp, false, false, 0, 0, 0, false);
+ 		break;
+ 	case DCB_OUTPUT_DP:
+ 		ctrl |= NVDEF(NV507D, PIOR_SET_CONTROL, PROTOCOL, EXT_TMDS_ENC);
+diff --git a/drivers/gpu/drm/nouveau/include/nvif/if0012.h b/drivers/gpu/drm/nouveau/include/nvif/if0012.h
+index 57bc4b2f2b17..230084d675ec 100644
+--- a/drivers/gpu/drm/nouveau/include/nvif/if0012.h
++++ b/drivers/gpu/drm/nouveau/include/nvif/if0012.h
+@@ -21,6 +21,8 @@ union nvif_outp_args {
+ 
+ #define NVIF_OUTP_V0_LOAD_DETECT   0x20
+ 
++#define NVIF_OUTP_V0_HDMI          0x50
 +
-+	list_for_each_entry(outp, &atom->outp, head) {
-+		if (outp->encoder->encoder_type != DRM_MODE_ENCODER_DPMST) {
-+			struct nouveau_encoder *nv_encoder = nouveau_encoder(outp->encoder);
+ #define NVIF_OUTP_V0_INFOFRAME     0x60
+ #define NVIF_OUTP_V0_HDA_ELD       0x61
+ 
+@@ -62,7 +64,6 @@ union nvif_outp_acquire_args {
+ #define NVIF_OUTP_ACQUIRE_V0_DAC  0x00
+ #define NVIF_OUTP_ACQUIRE_V0_SOR  0x01
+ #define NVIF_OUTP_ACQUIRE_V0_PIOR 0x02
+-#define NVIF_OUTP_ACQUIRE_V0_TMDS    0x05
+ #define NVIF_OUTP_ACQUIRE_V0_LVDS    0x03
+ #define NVIF_OUTP_ACQUIRE_V0_DP      0x04
+ 		__u8 type;
+@@ -73,17 +74,6 @@ union nvif_outp_acquire_args {
+ 			struct {
+ 				__u8 hda;
+ 			} sor;
+-			struct {
+-				__u8 head;
+-				__u8 hdmi;
+-				__u8 hdmi_max_ac_packet;
+-				__u8 hdmi_rekey;
+-#define NVIF_OUTP_ACQUIRE_V0_TMDS_HDMI_SCDC_SCRAMBLE (1 << 0)
+-#define NVIF_OUTP_ACQUIRE_V0_TMDS_HDMI_SCDC_DIV_BY_4 (1 << 1)
+-				__u8 hdmi_scdc;
+-				__u8 hdmi_hda;
+-				__u8 pad06[2];
+-			} tmds;
+ 			struct {
+ 				__u8 dual;
+ 				__u8 bpc8;
+@@ -128,6 +118,20 @@ union nvif_outp_release_args {
+ 	} vn;
+ };
+ 
++union nvif_outp_hdmi_args {
++	struct nvif_outp_hdmi_v0 {
++		__u8 version;
++		__u8 head;
++		__u8 enable;
++		__u8 max_ac_packet;
++		__u8 rekey;
++		__u8 scdc;
++		__u8 scdc_scrambling;
++		__u8 scdc_low_rates;
++		__u32 khz;
++	} v0;
++};
 +
-+			if (outp->enabled) {
-+				nv50_audio_enable(outp->encoder, nouveau_crtc(nv_encoder->crtc),
-+						  nv_encoder->conn, NULL, NULL);
-+				outp->enabled = outp->disabled = false;
-+			} else {
-+				if (outp->disabled)
-+					outp->disabled = false;
-+			}
-+		}
-+	}
+ union nvif_outp_infoframe_args {
+ 	struct nvif_outp_infoframe_v0 {
+ 		__u8 version;
+diff --git a/drivers/gpu/drm/nouveau/include/nvif/outp.h b/drivers/gpu/drm/nouveau/include/nvif/outp.h
+index a9090424dbf7..ea60d418d7f0 100644
+--- a/drivers/gpu/drm/nouveau/include/nvif/outp.h
++++ b/drivers/gpu/drm/nouveau/include/nvif/outp.h
+@@ -31,8 +31,6 @@ int nvif_outp_load_detect(struct nvif_outp *, u32 loadval);
+ int nvif_outp_acquire_dac(struct nvif_outp *);
+ int nvif_outp_acquire_sor(struct nvif_outp *, bool hda);
+ int nvif_outp_acquire_pior(struct nvif_outp *);
+-int nvif_outp_acquire_tmds(struct nvif_outp *, int head,
+-			   bool hdmi, u8 max_ac_packet, u8 rekey, u8 scdc, bool hda);
+ int nvif_outp_acquire_lvds(struct nvif_outp *, bool dual, bool bpc8);
+ int nvif_outp_acquire_dp(struct nvif_outp *outp, u8 dpcd[DP_RECEIVER_CAP_SIZE],
+ 			 int link_nr, int link_bw, bool hda, bool mst);
+@@ -49,6 +47,9 @@ nvif_outp_acquired(struct nvif_outp *outp)
+ 	return outp->or.id >= 0;
  }
  
- static void
-@@ -2055,6 +2080,7 @@ nv50_disp_atomic_commit_tail(struct drm_atomic_state *state)
- 
- 		if (outp->clr.mask) {
- 			help->atomic_disable(encoder, state);
-+			outp->disabled = true;
- 			interlock[NV50_DISP_INTERLOCK_CORE] |= 1;
- 			if (outp->flush_disable) {
- 				nv50_disp_atomic_commit_wndw(state, interlock);
-@@ -2094,6 +2120,7 @@ nv50_disp_atomic_commit_tail(struct drm_atomic_state *state)
- 
- 		if (outp->set.mask) {
- 			help->atomic_enable(encoder, state);
-+			outp->enabled = true;
- 			interlock[NV50_DISP_INTERLOCK_CORE] = 1;
- 		}
- 	}
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.h b/drivers/gpu/drm/nouveau/dispnv50/disp.h
-index 9d66c9c726c3..42209f5b06f9 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.h
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.h
-@@ -85,6 +85,9 @@ struct nv50_outp_atom {
- 	struct drm_encoder *encoder;
- 	bool flush_disable;
- 
-+	bool disabled;
-+	bool enabled;
++int nvif_outp_hdmi(struct nvif_outp *, int head, bool enable, u8 max_ac_packet, u8 rekey, u32 khz,
++		   bool scdc, bool scdc_scrambling, bool scdc_low_rates);
 +
- 	union nv50_outp_atom_mask {
- 		struct {
- 			bool ctrl:1;
+ int nvif_outp_infoframe(struct nvif_outp *, u8 type, struct nvif_outp_infoframe_v0 *, u32 size);
+ int nvif_outp_hda_eld(struct nvif_outp *, int head, void *data, u32 size);
+ int nvif_outp_dp_aux_pwr(struct nvif_outp *, bool enable);
+diff --git a/drivers/gpu/drm/nouveau/nvif/outp.c b/drivers/gpu/drm/nouveau/nvif/outp.c
+index 81dbda52117e..6e1bcc265d07 100644
+--- a/drivers/gpu/drm/nouveau/nvif/outp.c
++++ b/drivers/gpu/drm/nouveau/nvif/outp.c
+@@ -124,25 +124,28 @@ nvif_outp_infoframe(struct nvif_outp *outp, u8 type, struct nvif_outp_infoframe_
+ }
+ 
+ int
+-nvif_outp_acquire_tmds(struct nvif_outp *outp, int head,
+-		       bool hdmi, u8 max_ac_packet, u8 rekey, u8 scdc, bool hda)
++nvif_outp_hdmi(struct nvif_outp *outp, int head, bool enable, u8 max_ac_packet, u8 rekey,
++	       u32 khz, bool scdc, bool scdc_scrambling, bool scdc_low_rates)
+ {
+-	struct nvif_outp_acquire_v0 args;
++	struct nvif_outp_hdmi_v0 args;
+ 	int ret;
+ 
+-	args.tmds.head = head;
+-	args.tmds.hdmi = hdmi;
+-	args.tmds.hdmi_max_ac_packet = max_ac_packet;
+-	args.tmds.hdmi_rekey = rekey;
+-	args.tmds.hdmi_scdc = scdc;
+-	args.tmds.hdmi_hda = hda;
+-
+-	ret = nvif_outp_acquire(outp, NVIF_OUTP_ACQUIRE_V0_TMDS, &args);
++	args.version = 0;
++	args.head = head;
++	args.enable = enable;
++	args.max_ac_packet = max_ac_packet;
++	args.rekey = rekey;
++	args.khz = khz;
++	args.scdc = scdc;
++	args.scdc_scrambling = scdc_scrambling;
++	args.scdc_low_rates = scdc_low_rates;
++
++	ret = nvif_mthd(&outp->object, NVIF_OUTP_V0_HDMI, &args, sizeof(args));
+ 	NVIF_ERRON(ret, &outp->object,
+-		   "[ACQUIRE proto:TMDS head:%d hdmi:%d max_ac_packet:%d rekey:%d scdc:%d hda:%d]"
+-		   " or:%d link:%d", args.tmds.head, args.tmds.hdmi, args.tmds.hdmi_max_ac_packet,
+-		   args.tmds.hdmi_rekey, args.tmds.hdmi_scdc, args.tmds.hdmi_hda,
+-		   args.or, args.link);
++		   "[HDMI head:%d enable:%d max_ac_packet:%d rekey:%d khz:%d scdc:%d "
++		   "scdc_scrambling:%d scdc_low_rates:%d]",
++		   args.head, args.enable, args.max_ac_packet, args.rekey, args.khz,
++		   args.scdc, args.scdc_scrambling, args.scdc_low_rates);
+ 	return ret;
+ }
+ 
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gm200.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/gm200.c
+index 562ebae57d44..126a90805dee 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gm200.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/gm200.c
+@@ -68,15 +68,23 @@ gm200_sor_dp = {
+ };
+ 
+ void
+-gm200_sor_hdmi_scdc(struct nvkm_ior *ior, u8 scdc)
++gm200_sor_hdmi_scdc(struct nvkm_ior *ior, u32 khz, bool support, bool scrambling,
++		    bool scrambling_low_rates)
+ {
+ 	struct nvkm_device *device = ior->disp->engine.subdev.device;
+ 	const u32 soff = nv50_ior_base(ior);
+-	const u32 ctrl = scdc & 0x3;
++	u32 ctrl = 0;
+ 
+-	nvkm_mask(device, 0x61c5bc + soff, 0x00000003, ctrl);
++	ior->tmds.high_speed = khz > 340000;
++
++	if (support && scrambling) {
++		if (ior->tmds.high_speed)
++			ctrl |= 0x00000002;
++		if (ior->tmds.high_speed || scrambling_low_rates)
++			ctrl |= 0x00000001;
++	}
+ 
+-	ior->tmds.high_speed = !!(scdc & 0x2);
++	nvkm_mask(device, 0x61c5bc + soff, 0x00000003, ctrl);
+ }
+ 
+ const struct nvkm_ior_func_hdmi
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/ior.h b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ior.h
+index da1b1a626ef2..f8b9d16304e9 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/ior.h
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ior.h
+@@ -65,7 +65,8 @@ struct nvkm_ior_func {
+ 
+ 	const struct nvkm_ior_func_hdmi {
+ 		void (*ctrl)(struct nvkm_ior *, int head, bool enable, u8 max_ac_packet, u8 rekey);
+-		void (*scdc)(struct nvkm_ior *, u8 scdc);
++		void (*scdc)(struct nvkm_ior *, u32 khz, bool support, bool scrambling,
++			     bool scrambling_low_rates);
+ 		void (*infoframe_avi)(struct nvkm_ior *, int head, void *data, u32 size);
+ 		void (*infoframe_vsi)(struct nvkm_ior *, int head, void *data, u32 size);
+ 	} *hdmi;
+@@ -167,7 +168,7 @@ void gm107_sor_dp_pattern(struct nvkm_ior *, int);
+ void gm200_sor_route_set(struct nvkm_outp *, struct nvkm_ior *);
+ int gm200_sor_route_get(struct nvkm_outp *, int *);
+ extern const struct nvkm_ior_func_hdmi gm200_sor_hdmi;
+-void gm200_sor_hdmi_scdc(struct nvkm_ior *, u8);
++void gm200_sor_hdmi_scdc(struct nvkm_ior *, u32, bool, bool, bool);
+ extern const struct nvkm_ior_func_dp gm200_sor_dp;
+ void gm200_sor_dp_drive(struct nvkm_ior *, int, int, int, int, int);
+ 
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
+index 042a43c22061..8ba96323e1de 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
+@@ -137,24 +137,28 @@ nvkm_uoutp_mthd_infoframe(struct nvkm_outp *outp, void *argv, u32 argc)
+ }
+ 
+ static int
+-nvkm_uoutp_mthd_acquire_tmds(struct nvkm_outp *outp, u8 head, u8 hdmi, u8 hdmi_max_ac_packet,
+-			     u8 hdmi_rekey, u8 hdmi_scdc, u8 hdmi_hda)
++nvkm_uoutp_mthd_hdmi(struct nvkm_outp *outp, void *argv, u32 argc)
+ {
++	union nvif_outp_hdmi_args *args = argv;
+ 	struct nvkm_ior *ior = outp->ior;
+ 
+-	if (!(outp->asy.head = nvkm_head_find(outp->disp, head)))
++	if (argc != sizeof(args->v0) || args->v0.version != 0)
++		return -ENOSYS;
++
++	if (!(outp->asy.head = nvkm_head_find(outp->disp, args->v0.head)))
+ 		return -EINVAL;
+ 
+-	if (hdmi) {
+-		if (!ior->func->hdmi ||
+-		    hdmi_max_ac_packet > 0x1f || hdmi_rekey > 0x7f ||
+-		    (hdmi_scdc && !ior->func->hdmi->scdc))
+-			return -EINVAL;
++	if (!ior->func->hdmi ||
++	    args->v0.max_ac_packet > 0x1f ||
++	    args->v0.rekey > 0x7f ||
++	    (args->v0.scdc && !ior->func->hdmi->scdc))
++		return -EINVAL;
+ 
+-		ior->func->hdmi->ctrl(ior, head, hdmi, hdmi_max_ac_packet, hdmi_rekey);
+-		if (ior->func->hdmi->scdc)
+-			ior->func->hdmi->scdc(ior, hdmi_scdc);
+-	}
++	ior->func->hdmi->ctrl(ior, args->v0.head, args->v0.enable,
++			      args->v0.max_ac_packet, args->v0.rekey);
++	if (ior->func->hdmi->scdc)
++		ior->func->hdmi->scdc(ior, args->v0.khz, args->v0.scdc, args->v0.scdc_scrambling,
++				      args->v0.scdc_low_rates);
+ 
+ 	return 0;
+ }
+@@ -209,14 +213,6 @@ nvkm_uoutp_mthd_acquire(struct nvkm_outp *outp, void *argv, u32 argc)
+ 	case NVIF_OUTP_ACQUIRE_V0_SOR:
+ 		ret = nvkm_outp_acquire_or(outp, NVKM_OUTP_USER, args->v0.sor.hda);
+ 		break;
+-	case NVIF_OUTP_ACQUIRE_V0_TMDS:
+-		ret = nvkm_uoutp_mthd_acquire_tmds(outp, args->v0.tmds.head,
+-							 args->v0.tmds.hdmi,
+-							 args->v0.tmds.hdmi_max_ac_packet,
+-							 args->v0.tmds.hdmi_rekey,
+-							 args->v0.tmds.hdmi_scdc,
+-							 args->v0.tmds.hdmi_hda);
+-		break;
+ 	case NVIF_OUTP_ACQUIRE_V0_LVDS:
+ 		ret = nvkm_uoutp_mthd_acquire_lvds(outp, args->v0.lvds.dual, args->v0.lvds.bpc8);
+ 		break;
+@@ -370,6 +366,7 @@ nvkm_uoutp_mthd_acquired(struct nvkm_outp *outp, u32 mthd, void *argv, u32 argc)
+ {
+ 	switch (mthd) {
+ 	case NVIF_OUTP_V0_RELEASE      : return nvkm_uoutp_mthd_release      (outp, argv, argc);
++	case NVIF_OUTP_V0_HDMI         : return nvkm_uoutp_mthd_hdmi         (outp, argv, argc);
+ 	case NVIF_OUTP_V0_INFOFRAME    : return nvkm_uoutp_mthd_infoframe    (outp, argv, argc);
+ 	case NVIF_OUTP_V0_HDA_ELD      : return nvkm_uoutp_mthd_hda_eld      (outp, argv, argc);
+ 	case NVIF_OUTP_V0_DP_RETRAIN   : return nvkm_uoutp_mthd_dp_retrain   (outp, argv, argc);
 -- 
 2.41.0
 
