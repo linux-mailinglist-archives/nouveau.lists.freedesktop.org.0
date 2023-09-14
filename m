@@ -1,67 +1,67 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EAE979FEC1
-	for <lists+nouveau@lfdr.de>; Thu, 14 Sep 2023 10:47:14 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id CB0CA79FEC2
+	for <lists+nouveau@lfdr.de>; Thu, 14 Sep 2023 10:47:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5D2CA10E524;
-	Thu, 14 Sep 2023 08:47:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DC02610E528;
+	Thu, 14 Sep 2023 08:47:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 47EA010E523
- for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 08:47:08 +0000 (UTC)
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-68c576d35feso605602b3a.2
- for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 01:47:08 -0700 (PDT)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9DA9610E524
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 08:47:10 +0000 (UTC)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-59bbdb435bfso7928587b3.3
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 01:47:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694681227; x=1695286027; darn=lists.freedesktop.org;
+ d=gmail.com; s=20221208; t=1694681229; x=1695286029; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=unpHSZJYtZTxpGRHUj4GqubrLmd3KPPLBWq5vdXTo6E=;
- b=PZQf8lMD6I3SDsmvLiz1MTCowLBihdcjQ1rUdlRsFC0C6RmwlBqj9zsdBgQ3dOxzOk
- FA5WPj+LzGUv7L3Wk2uWGWT+nv7wYREiPHCnrvb7afR/mBcnsxW04CbzzooBEFvzM/6k
- UZ/hHj7VdAuGpAqTdLXbqNt9z/CU0LvHGFlotZmXAXgC3I0hrpTnndsW9l0V1m6J54sg
- EzRznmaTPZ5JojDvoSJiGL1vYs2oqMSL1TVIopqmbjI2TcJERYv3+IlaX/i7LYo9pn/3
- kOGdHq8wGTGUWbzZQBDk1vqbzy74yOPEoVVhEurne2hf5SttfzZOXdRZ/0iv4CFaus9O
- JFNw==
+ bh=RwlwcpLG5PUQyivoTrttU9WZ7a+bMTsTmlV31CtHP50=;
+ b=ZVPHBpiBEiFIEPfJMq0zz5kwDdBELjNn2ix6hKXs9i0jxBO1n6Gg6qWUbX+vWCh69s
+ IKKmq6oUa+A7Sbv0TKG8+IvcPbv6Sv1ctnnL388sTrECJbzHc4EqzE179QQ2o3FftOU6
+ HxM3oA/K/yiXEP70KOLhs1DIP8UleGgFIpi7groOPtVe0nDO/nkMDG/XVD5Dniqxmk6Y
+ ELBuXUtizDfKJa6YI8Yg1fGW+Srah5rxuPyWVwfAcEkwc1Gz3HR1f+n++zMx6B5F/nih
+ hofeWJNJJhwYA/fiZMY3hRJgn7wGCHixwCY3iClxfK3fSTG2LLTnzfEpu7U1A68OKrmq
+ gW2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694681227; x=1695286027;
+ d=1e100.net; s=20230601; t=1694681229; x=1695286029;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=unpHSZJYtZTxpGRHUj4GqubrLmd3KPPLBWq5vdXTo6E=;
- b=cEoH0LeIPhS3GjtYwEDcW3whVxVIbUmJ2FBWrn/yC8el0BQbMVIromV9+8fazrD0vA
- pa/TaCOeMMiw1ZfnvGSUx8RNbBP7NhRRNvH7QncyO5lpN9MZ4SbZ74J4cBit5PAEm354
- r9GP+WeZ9Q0eqEfw7dSiu975C7lBueyMOcrA7nOOd/EiNaNQBnaJRmkFcPq94Mncbch7
- YkekTFtT/59P7wWwdbxFoFqiUfEglqKklSUevTOQmmOFsVEBzFxP849AGL+Ps0KihwW8
- uFLBMNkTTraHnj6XyxWSkfCPx/3n8qHfJXNNYUG5UTVtxG/Pc7yfgkLn1tvsc4KToca6
- uDuQ==
-X-Gm-Message-State: AOJu0YzHMta/qC3DdzfgSWMUhUZT3LUDaUQdKwve8WtoxzL7RrbrYm3s
- cPPDAxuKTrQidnBgXq7n3SGqky0SqK4=
-X-Google-Smtp-Source: AGHT+IGAvQ34x1970k+goZ23yGpTRO1KQ4JjSX5/7SWn6PU+Biz5R+CjMOZd/nSdsgqGICil1GeAzg==
-X-Received: by 2002:a05:6a20:8f2a:b0:14c:a2e1:65ec with SMTP id
- b42-20020a056a208f2a00b0014ca2e165ecmr5999464pzk.38.1694681227206; 
- Thu, 14 Sep 2023 01:47:07 -0700 (PDT)
+ bh=RwlwcpLG5PUQyivoTrttU9WZ7a+bMTsTmlV31CtHP50=;
+ b=tZDfMOSdWJaNXUKyYex2aQvT8hQMcr0wPEKTFJuG74hgwy1rjaqMGMrZYPPL3m8ekT
+ gW8tw5nToYzLcd1/A486aRYAPj2MxzJNiHDHohnIVn4OCMm+eR2IYN+pm+eIipOn+ORd
+ XL10n6Xz7aaN7pO57aRwO4Q6lT4eJE4k4ZAkS/1dT3CSopuyU2SbRhZxLvCOfS3gGKT4
+ UHdzJJR4SjkqAwhB+rhZk26u/VuLBmf0lWb9JqKWwvISD9LqdmRcDlYOjI5U6Q0J1Fmo
+ ZZUwkvfVgohpxyCgPjSIGEqVwqAmiyHRmwHvl31sFNwus6/ddAcnIdk72PIZ0oBq1CWD
+ 6QCQ==
+X-Gm-Message-State: AOJu0Yw0ajBnlMkg28yxsGM3UYDljU/MPKuQiJh/7cIWfnEMBc1ZoIAZ
+ xs+oson3MXj6GqYSEckZcit1nEFpoAI=
+X-Google-Smtp-Source: AGHT+IFJBsMFOJ+2NJUeno/olP4UmLMHR3UBV6HqzlhDKH/4H60LyDk7RiHREvwmOFgUwlITt5sd1g==
+X-Received: by 2002:a81:49ca:0:b0:59b:e622:f820 with SMTP id
+ w193-20020a8149ca000000b0059be622f820mr2475956ywa.13.1694681229331; 
+ Thu, 14 Sep 2023 01:47:09 -0700 (PDT)
 Received: from localhost.localdomain ([87.121.74.45])
  by smtp.gmail.com with ESMTPSA id
- e23-20020a62ee17000000b006889081281bsm839205pfi.138.2023.09.14.01.47.05
+ e23-20020a62ee17000000b006889081281bsm839205pfi.138.2023.09.14.01.47.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 01:47:06 -0700 (PDT)
+ Thu, 14 Sep 2023 01:47:08 -0700 (PDT)
 From: Ben Skeggs <skeggsb@gmail.com>
 To: nouveau@lists.freedesktop.org
-Date: Thu, 14 Sep 2023 18:45:45 +1000
-Message-ID: <20230914084624.2299765-6-skeggsb@gmail.com>
+Date: Thu, 14 Sep 2023 18:45:46 +1000
+Message-ID: <20230914084624.2299765-7-skeggsb@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230914084624.2299765-2-skeggsb@gmail.com>
 References: <20230914084624.2299765-2-skeggsb@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 04/44] drm/nouveau/mmu/gp100-: always invalidate
- TLBs at CACHE_LEVEL_ALL
+Subject: [Nouveau] [PATCH 05/44] drm/nouveau/kms/nv50-: fix mst payload
+ alloc fail crashing evo
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,40 +79,51 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Ben Skeggs <bskeggs@redhat.com>
 
-Fixes some issues when running on top of RM.
+Programming -1 (vc_start_slot, if alloc fails) into HW probably isn't
+the best idea.
 
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/nouveau/dispnv50/disp.c | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
-index f3630d0e0d55..bddac77f48f0 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
-@@ -558,7 +558,7 @@ gp100_vmm_invalidate_pdb(struct nvkm_vmm *vmm, u64 addr)
- void
- gp100_vmm_flush(struct nvkm_vmm *vmm, int depth)
- {
--	u32 type = (5 /* CACHE_LEVEL_UP_TO_PDE3 */ - depth) << 24;
-+	u32 type = 0;
- 	if (atomic_read(&vmm->engref[NVKM_SUBDEV_BAR]))
- 		type |= 0x00000004; /* HUB_ONLY */
- 	type |= 0x00000001; /* PAGE_ALL */
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
-index 6cb5eefa45e9..0095d58d4d9a 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
-@@ -27,7 +27,7 @@ static void
- tu102_vmm_flush(struct nvkm_vmm *vmm, int depth)
- {
- 	struct nvkm_device *device = vmm->mmu->subdev.device;
--	u32 type = (5 /* CACHE_LEVEL_UP_TO_PDE3 */ - depth) << 24;
-+	u32 type = 0;
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+index 4e7c9c353c51..2911167bf22a 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+@@ -912,6 +912,7 @@ nv50_msto_prepare(struct drm_atomic_state *state,
+ 	struct nv50_mstm *mstm = mstc->mstm;
+ 	struct drm_dp_mst_topology_state *old_mst_state;
+ 	struct drm_dp_mst_atomic_payload *payload, *old_payload;
++	int ret = 0;
  
- 	type |= 0x00000001; /* PAGE_ALL */
- 	if (atomic_read(&vmm->engref[NVKM_SUBDEV_BAR]))
+ 	NV_ATOMIC(drm, "%s: msto prepare\n", msto->encoder.name);
+ 
+@@ -920,18 +921,20 @@ nv50_msto_prepare(struct drm_atomic_state *state,
+ 	payload = drm_atomic_get_mst_payload_state(mst_state, mstc->port);
+ 	old_payload = drm_atomic_get_mst_payload_state(old_mst_state, mstc->port);
+ 
+-	// TODO: Figure out if we want to do a better job of handling VCPI allocation failures here?
+ 	if (msto->disabled) {
+ 		drm_dp_remove_payload(mgr, mst_state, old_payload, payload);
+-
+-		nvif_outp_dp_mst_vcpi(&mstm->outp->outp, msto->head->base.index, 0, 0, 0, 0);
++		ret = 1;
+ 	} else {
+ 		if (msto->enabled)
+-			drm_dp_add_payload_part1(mgr, mst_state, payload);
++			ret = drm_dp_add_payload_part1(mgr, mst_state, payload);
++	}
+ 
++	if (ret == 0) {
+ 		nvif_outp_dp_mst_vcpi(&mstm->outp->outp, msto->head->base.index,
+ 				      payload->vc_start_slot, payload->time_slots,
+ 				      payload->pbn, payload->time_slots * mst_state->pbn_div);
++	} else {
++		nvif_outp_dp_mst_vcpi(&mstm->outp->outp, msto->head->base.index, 0, 0, 0, 0);
+ 	}
+ }
+ 
 -- 
 2.41.0
 
