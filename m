@@ -1,67 +1,67 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 614FE79FEEB
-	for <lists+nouveau@lfdr.de>; Thu, 14 Sep 2023 10:48:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6693F79FEEC
+	for <lists+nouveau@lfdr.de>; Thu, 14 Sep 2023 10:48:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C005910E546;
-	Thu, 14 Sep 2023 08:48:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C528510E54F;
+	Thu, 14 Sep 2023 08:48:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CA75910E546
- for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 08:48:26 +0000 (UTC)
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-68fbd5cd0ceso549595b3a.1
- for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 01:48:26 -0700 (PDT)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EE1B710E54B
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 08:48:28 +0000 (UTC)
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-68fbbb953cfso537467b3a.2
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 01:48:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694681306; x=1695286106; darn=lists.freedesktop.org;
+ d=gmail.com; s=20221208; t=1694681308; x=1695286108; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+qQqa+q8/jCZzMqqRX7RAqkD+9K7qMGIeFVi2NKWE+I=;
- b=RGtyUXdgl6Nhze/GvTDO0pB1CN9xO34Q/8nweTFGLfGySkRTlDHWRu/tnm2QFavjPK
- ZovtiQMPuCAeQFMPEg0UlKkmOGkqpAD8tVeYHnUFPlp/zD3/7Xh0paH1FJpnp/WqKAi0
- OH5XedPgwgSCDBfARSLBR3cPfU/IShOKqh581vp9EEVqQJDgKMp5yzvoeVIaUzLZOC5L
- huZ54pDorHiSAm0v23L6CcS0cxTuMN/DZdiyuBWbSLtkUP5LdDvXHmnqILeUbdwDN2+0
- n+ewpyrHLJwt5CduVrIYb32dX09nTXgLEWzL+g+BUGBn6CP1iOiKJ0YjKBQ9e4rpIweY
- ic0A==
+ bh=8lt1P7azzm7S2HxbXQ0cFUYe/y9YHGKXx9DNxkkgu84=;
+ b=AkA9NiCQp03NL5jIDnmm8bWx7JxxrdmmJ4k1FPb7vv6Wyhg0hVGbb59qcH3Rkh7abu
+ D8j3lKM1oqIuCPD079G0fIiugzdj8hN6Hmv/CUDPEDSAIeyKcMjBbHcQUYGj+PaBcvUQ
+ qafcw8KMWwNlawxS8GGjRRKk4UgKUnrd3j6tkSNIdg4w3HXs61mDBB20mrNqQ9fKhDiU
+ XmwLDYCcQ4OTtg+3zufdKmm/5bbNHmTlR2KwAoHjcE+Z+XTTlPsmcN1qTsVeVGJtUcw3
+ 9teihybQ7T1+rNAkGYRQ3tSQPAfut2eg6MFhLJaMoSewEDGTh3RCHycPN89DG6kKbXlf
+ QWxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694681306; x=1695286106;
+ d=1e100.net; s=20230601; t=1694681308; x=1695286108;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+qQqa+q8/jCZzMqqRX7RAqkD+9K7qMGIeFVi2NKWE+I=;
- b=jWa1WdT1jEz50PqffwrSQNtJSwRrV6mAdedSc8oDofeJ07POwNRLiIzQ/2EdovdcUn
- /+gdPAmZ39su9c7vynBsMVucJHpEdBAXY+fJtJx1HdJoS5b9jGk+yWrqNk7BPQJ9ZIrD
- 6vOiYbkxZXVebJUJcMVLQZq4GQeBaM8/oG6b2LGL30zov9IkJNH1uaatuqm9apNccS8q
- U9BGPS/ZYLT9rkBaBIZuBPC48rv2HIyOXp5fC+QNJjnSpLY3/OyCfHWBzLTogi9mGvkO
- LuG3JhMn/nRZ0vZ8XH6IxTwvZcvzMR7ZzW0VcFrwYjDHGUWh3Hm0pSwEr6ow1MCrdRvH
- 5REw==
-X-Gm-Message-State: AOJu0Yx808CzEyNAhJfaFfpSVoPYpixuRELlxwra0mZvnRzuQz3FjBw/
- exhsoRDAw2dEM4KkeIyvgOWArkCAY/M=
-X-Google-Smtp-Source: AGHT+IG3kVM3LvWWblwQxv1YrAuqpMc072+YoRUQ5VJb5y/aV4Xnueulm0/P1QFMkVNgkGlz8MOfPA==
-X-Received: by 2002:a05:6a20:3254:b0:13a:6bca:7a84 with SMTP id
- hm20-20020a056a20325400b0013a6bca7a84mr3660414pzc.44.1694681305905; 
- Thu, 14 Sep 2023 01:48:25 -0700 (PDT)
+ bh=8lt1P7azzm7S2HxbXQ0cFUYe/y9YHGKXx9DNxkkgu84=;
+ b=Crm80sa5fvc1xBIkOcHAp7LREhpnxny8TqOVVolK6bI0F3DSZY7Xte5FoZ0TRxhKRg
+ 8PMjNUgQyjLQb7QNKMiSINk/yO0AYGEQ7zlpCSENpVW2F2666ZbrulNc9WMKz5nEYp0M
+ ZGQKpyM7OAOC8DiK+kn/S++Lyts8ZEBy6pSdftpa6eFkLoYZSZ2eVyuqJExSs2AgaOb9
+ SN11EyUd63L10CRlXPgwxsBlL7q0DKKErjuupi/2CqOX0/jO5QDYltGYtc3LWvxGiOP0
+ YFfAQWrCrPp7VjqW/5WJj4hUcnu7r8yYgecOKwNjjJV6uuSI8HdcQN05B/vFq+ycXdYE
+ k0Ng==
+X-Gm-Message-State: AOJu0Yy5wdfCrNk6/iCmBauA1Pkq49MLBpc/81nVvVmcYMxyjzNdNxR3
+ ++fLBgTOMCS273JBzUc6HeLX8F6cPCo=
+X-Google-Smtp-Source: AGHT+IFmhYpXbCBDGmiaINtMjFfAPeU85tt0yGYya0iU0H5nFNuywLiDlcAWwemMgIC4J8DIwmKfZQ==
+X-Received: by 2002:aa7:9f85:0:b0:690:2ecd:a597 with SMTP id
+ z5-20020aa79f85000000b006902ecda597mr941295pfr.21.1694681308051; 
+ Thu, 14 Sep 2023 01:48:28 -0700 (PDT)
 Received: from localhost.localdomain ([87.121.74.45])
  by smtp.gmail.com with ESMTPSA id
- e23-20020a62ee17000000b006889081281bsm839205pfi.138.2023.09.14.01.48.24
+ e23-20020a62ee17000000b006889081281bsm839205pfi.138.2023.09.14.01.48.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 01:48:25 -0700 (PDT)
+ Thu, 14 Sep 2023 01:48:27 -0700 (PDT)
 From: Ben Skeggs <skeggsb@gmail.com>
 To: nouveau@lists.freedesktop.org
-Date: Thu, 14 Sep 2023 18:46:21 +1000
-Message-ID: <20230914084624.2299765-42-skeggsb@gmail.com>
+Date: Thu, 14 Sep 2023 18:46:22 +1000
+Message-ID: <20230914084624.2299765-43-skeggsb@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230914084624.2299765-2-skeggsb@gmail.com>
 References: <20230914084624.2299765-2-skeggsb@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 40/44] drm/nouveau/kms/nv50-: create heads after
- outps/conns
+Subject: [Nouveau] [PATCH 41/44] drm/nouveau/kms/nv50-: name aux channels
+ after their connector
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,94 +79,92 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Ben Skeggs <bskeggs@redhat.com>
 
-- output info will be used later to determine MST support
+- removes use of VBIOS data for naming
+- preparation for GSP-RM
 
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 ---
- drivers/gpu/drm/nouveau/dispnv50/disp.c | 64 ++++++++++++-------------
- 1 file changed, 32 insertions(+), 32 deletions(-)
+ drivers/gpu/drm/nouveau/nouveau_connector.c | 25 ++++++++-------------
+ 1 file changed, 9 insertions(+), 16 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 3d9a312838bf..76d3fd1dec77 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -2776,38 +2776,6 @@ nv50_display_create(struct drm_device *dev)
- 		dev->mode_config.cursor_height = 64;
- 	}
- 
--	/* create crtc objects to represent the hw heads */
--	for_each_set_bit(i, &disp->disp->head_mask, sizeof(disp->disp->head_mask) * 8) {
--		struct nv50_head *head;
--
--		head = nv50_head_create(dev, i);
--		if (IS_ERR(head)) {
--			ret = PTR_ERR(head);
--			goto out;
--		}
--
--		if (has_mst) {
--			head->msto = nv50_msto_new(dev, head, i);
--			if (IS_ERR(head->msto)) {
--				ret = PTR_ERR(head->msto);
--				head->msto = NULL;
--				goto out;
--			}
--
--			/*
--			 * FIXME: This is a hack to workaround the following
--			 * issues:
--			 *
--			 * https://gitlab.gnome.org/GNOME/mutter/issues/759
--			 * https://gitlab.freedesktop.org/xorg/xserver/merge_requests/277
--			 *
--			 * Once these issues are closed, this should be
--			 * removed
--			 */
--			head->msto->encoder.possible_crtcs = disp->disp->head_mask;
--		}
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+index c2929ad64b60..34f5ad0fdfd6 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.c
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+@@ -400,10 +400,8 @@ nouveau_connector_destroy(struct drm_connector *connector)
+ 	kfree(nv_connector->edid);
+ 	drm_connector_unregister(connector);
+ 	drm_connector_cleanup(connector);
+-	if (nv_connector->aux.transfer) {
++	if (nv_connector->aux.transfer)
+ 		drm_dp_cec_unregister_connector(&nv_connector->aux);
+-		kfree(nv_connector->aux.name);
 -	}
--
- 	/* create encoder/connector objects based on VBIOS DCB table */
- 	for (i = 0, dcbe = &dcb->entry[0]; i < dcb->entries; i++, dcbe++) {
- 		struct nouveau_encoder *outp;
-@@ -2870,6 +2838,38 @@ nv50_display_create(struct drm_device *dev)
- 		connector->funcs->destroy(connector);
+ 	nvif_conn_dtor(&nv_connector->conn);
+ 	kfree(connector);
+ }
+@@ -1280,13 +1278,11 @@ struct drm_connector *
+ nouveau_connector_create(struct drm_device *dev,
+ 			 const struct dcb_output *dcbe)
+ {
+-	const struct drm_connector_funcs *funcs = &nouveau_connector_funcs;
+ 	struct nouveau_drm *drm = nouveau_drm(dev);
+ 	struct nouveau_display *disp = nouveau_display(dev);
+ 	struct nouveau_connector *nv_connector = NULL;
+ 	struct drm_connector *connector;
+ 	struct drm_connector_list_iter conn_iter;
+-	char aux_name[48] = {0};
+ 	int index = dcbe->connector;
+ 	int type, ret = 0;
+ 	bool dummy;
+@@ -1376,7 +1372,13 @@ nouveau_connector_create(struct drm_device *dev,
+ 		}
  	}
  
-+	/* create crtc objects to represent the hw heads */
-+	for_each_set_bit(i, &disp->disp->head_mask, sizeof(disp->disp->head_mask) * 8) {
-+		struct nv50_head *head;
+-	switch ((type = drm_conntype_from_dcb(nv_connector->type))) {
++	type = drm_conntype_from_dcb(nv_connector->type);
++	if (type == DRM_MODE_CONNECTOR_LVDS)
++		drm_connector_init(dev, connector, &nouveau_connector_funcs_lvds, type);
++	else
++		drm_connector_init(dev, connector, &nouveau_connector_funcs, type);
 +
-+		head = nv50_head_create(dev, i);
-+		if (IS_ERR(head)) {
-+			ret = PTR_ERR(head);
-+			goto out;
-+		}
-+
-+		if (has_mst) {
-+			head->msto = nv50_msto_new(dev, head, i);
-+			if (IS_ERR(head->msto)) {
-+				ret = PTR_ERR(head->msto);
-+				head->msto = NULL;
-+				goto out;
-+			}
-+
-+			/*
-+			 * FIXME: This is a hack to workaround the following
-+			 * issues:
-+			 *
-+			 * https://gitlab.gnome.org/GNOME/mutter/issues/759
-+			 * https://gitlab.freedesktop.org/xorg/xserver/merge_requests/277
-+			 *
-+			 * Once these issues are closed, this should be
-+			 * removed
-+			 */
-+			head->msto->encoder.possible_crtcs = disp->disp->head_mask;
-+		}
-+	}
-+
- 	/* Disable vblank irqs aggressively for power-saving, safe on nv50+ */
- 	dev->vblank_disable_immediate = true;
++	switch (type) {
+ 	case DRM_MODE_CONNECTOR_LVDS:
+ 		ret = nouveau_bios_parse_lvds_table(dev, 0, &dummy, &dummy);
+ 		if (ret) {
+@@ -1385,24 +1387,16 @@ nouveau_connector_create(struct drm_device *dev,
+ 			return ERR_PTR(ret);
+ 		}
+ 
+-		funcs = &nouveau_connector_funcs_lvds;
+ 		break;
+ 	case DRM_MODE_CONNECTOR_DisplayPort:
+ 	case DRM_MODE_CONNECTOR_eDP:
+ 		nv_connector->aux.dev = connector->kdev;
+ 		nv_connector->aux.drm_dev = dev;
+ 		nv_connector->aux.transfer = nouveau_connector_aux_xfer;
+-		snprintf(aux_name, sizeof(aux_name), "sor-%04x-%04x",
+-			 dcbe->hasht, dcbe->hashm);
+-		nv_connector->aux.name = kstrdup(aux_name, GFP_KERNEL);
+-		if (!nv_connector->aux.name) {
+-			kfree(nv_connector);
+-			return ERR_PTR(-ENOMEM);
+-		}
++		nv_connector->aux.name = connector->name;
+ 		drm_dp_aux_init(&nv_connector->aux);
+ 		break;
+ 	default:
+-		funcs = &nouveau_connector_funcs;
+ 		break;
+ 	}
+ 
+@@ -1417,7 +1411,6 @@ nouveau_connector_create(struct drm_device *dev,
+ 	connector->interlace_allowed = false;
+ 	connector->doublescan_allowed = false;
+ 
+-	drm_connector_init(dev, connector, funcs, type);
+ 	drm_connector_helper_add(connector, &nouveau_connector_helper_funcs);
+ 	connector->polled = DRM_CONNECTOR_POLL_CONNECT;
  
 -- 
 2.41.0
