@@ -2,65 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF18379FEF1
-	for <lists+nouveau@lfdr.de>; Thu, 14 Sep 2023 10:48:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 671907A01E4
+	for <lists+nouveau@lfdr.de>; Thu, 14 Sep 2023 12:46:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 36F4210E53B;
-	Thu, 14 Sep 2023 08:48:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3D81410E109;
+	Thu, 14 Sep 2023 10:45:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A3A9A10E555
- for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 08:48:35 +0000 (UTC)
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-68fbbea0dfeso549230b3a.0
- for <nouveau@lists.freedesktop.org>; Thu, 14 Sep 2023 01:48:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694681315; x=1695286115; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1V5wbdA7WGHbaX5xoREZPjHls09ZyZEXST/ddV/NOYM=;
- b=qg/GC6DL/M9GfDEXx3n9dYrp1TjlkTumyl25MR3MPzOtzY96wMDoAuZJQf8RSMdV8g
- A7PyTYR+HruPKGJ6e5Edt8mORyP93e+b1GNF8TfKLp9TYEnnhZCdhBz/kdw9o0Sw8w2V
- wdhXRlfxP4fBAzY6WhrjfksFibnsalS33sxdj4/vF770R36Bgy6XmolXvIlnExUHJAsI
- 5Ocu65aTLtjafUOiq9+FMO/hRk9YIeILndqJOFQKKxjfx5AAgjsmvIJ0dNu5RdX6O7LM
- MMfqcGCYNIvrzWVIuLRn4Cvykn4SGj9xbFLSlQD9tJO4v2b29TCjm8zyEDLvbt9O2oVu
- U2SA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694681315; x=1695286115;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1V5wbdA7WGHbaX5xoREZPjHls09ZyZEXST/ddV/NOYM=;
- b=U4e99yQ8OpcLZxNaAYbBVL9OasPY1CwUw4n8ZG3WfAsY9bI7eDR6OxngPHpRnOa5Rw
- Joijxxnx+WU/CRTZTlm8Oox3xEOMgXd7SmLpj+vsZ7LLnZYeeO6x5O43glgUZrANHdIu
- CqIfadeka8vKKaba9km2FRPAalcdDIR/njs9P4OAxnLYFJ9XRnXsgRs3uQo9mbBmmkCT
- UoE6IB7rNDw5HFfcjaMWtVyAC+BVSBCT/MRAbp6WkVPHyxIyzLfo5/pF2M5p53CdcRog
- PafrP6Vk4qlNGkV92MqSh7I9mJnRRC1tKOCx99HAPjLmdLom/yoN+HpnH8A1/+Z/1go9
- sGcw==
-X-Gm-Message-State: AOJu0YwMG2Ml/1Y0jQ3zcY9VJdZSgg0Zb22D+BqXzNRd+PQFHpF86ne/
- VReMlMSY6TO4Wbn0Bh6LCufqG8f9GGM=
-X-Google-Smtp-Source: AGHT+IGbr7XBOJ7W83nFDLeTqsvhfJmvweTZG1iCxkNqaikyAlMeGuETaIbWKA5pvES6sHpqPw+tEg==
-X-Received: by 2002:a05:6a00:a1f:b0:68f:cba5:412d with SMTP id
- p31-20020a056a000a1f00b0068fcba5412dmr5437812pfh.32.1694681314661; 
- Thu, 14 Sep 2023 01:48:34 -0700 (PDT)
-Received: from localhost.localdomain ([87.121.74.45])
- by smtp.gmail.com with ESMTPSA id
- e23-20020a62ee17000000b006889081281bsm839205pfi.138.2023.09.14.01.48.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 01:48:34 -0700 (PDT)
-From: Ben Skeggs <skeggsb@gmail.com>
-To: nouveau@lists.freedesktop.org
-Date: Thu, 14 Sep 2023 18:46:25 +1000
-Message-ID: <20230914084624.2299765-46-skeggsb@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230914084624.2299765-2-skeggsb@gmail.com>
-References: <20230914084624.2299765-2-skeggsb@gmail.com>
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.20])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C417910E559;
+ Thu, 14 Sep 2023 10:45:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1694688351; x=1726224351;
+ h=message-id:date:mime-version:subject:to:cc:references:
+ from:in-reply-to:content-transfer-encoding;
+ bh=eDCacQltUL4sO4Sp2uHePK7e2K1JX4DVEGzqG99Q/fM=;
+ b=lB5eq9Ii/KYiyPcKFujK0Lj1sb9Cf69POA6fbp60J2hDxLoiruEFJ1b/
+ M3mqR7wf8wtKnToNIdDIQ8ZEwWTYsY0QthP+t8HoF5dH/ZAeNcq7FQKKw
+ 9Qzfn2Ya+L50CFMs1VmwL5f7w0gbPTYdq/opHkPpbVAKSVeECXLx3fq4D
+ H9PudbFc9cBqzL8yrI8SLWMDCNF7RlHQ4Unq4GxPKbPr/SQiORVZdZRh9
+ XvNz6D/8JnPbZmYs4Jc40HYm4cF45w4T/z0/2IPIM5HYSZYMOyyAdioTY
+ YtsovKrVLNASNHPIOy2lKGEaeHbFZM1hUZDLe4v3w7FiBeOzcv4mBg1gL g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="369188499"
+X-IronPort-AV: E=Sophos;i="6.02,145,1688454000"; d="scan'208";a="369188499"
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+ by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Sep 2023 03:45:50 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10832"; a="744491507"
+X-IronPort-AV: E=Sophos;i="6.02,145,1688454000"; d="scan'208";a="744491507"
+Received: from skallurr-mobl1.ger.corp.intel.com (HELO [10.249.254.49])
+ ([10.249.254.49])
+ by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Sep 2023 03:45:47 -0700
+Message-ID: <c32bb890-b06e-6b5d-1ff8-b67f6c9d92a6@linux.intel.com>
+Date: Thu, 14 Sep 2023 12:45:44 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Content-Language: en-US
+To: Boris Brezillon <boris.brezillon@collabora.com>
+References: <20230909153125.30032-1-dakr@redhat.com>
+ <20230909153125.30032-7-dakr@redhat.com>
+ <a9ef04d2-2525-65c0-2eda-45ca9a95a3a0@linux.intel.com>
+ <20230913090311.5eeb026a@collabora.com>
+ <CAPM=9tyf4m6gtUQ0BCraf0gB06_pxXV8gpQQsvWjeJnczmJkQQ@mail.gmail.com>
+ <20230913091918.62c06a30@collabora.com>
+ <df85257a-02ed-4869-2421-0039a9c97db5@linux.intel.com>
+ <20230913133318.15edec7c@collabora.com>
+ <6f4c047d-0e6d-c45b-3092-cd0bc84849dc@linux.intel.com>
+ <20230914102010.628ea823@collabora.com>
+From: =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>
+In-Reply-To: <20230914102010.628ea823@collabora.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 44/44] drm/nouveau/kms/nv50-: disable dcb parsing
+Subject: Re: [Nouveau] [PATCH drm-misc-next v3 6/7] drm/gpuvm: generalize
+ dma_resv/extobj handling and GEM validation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,73 +70,166 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: matthew.brost@intel.com, sarah.walker@imgtec.com,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, donald.robson@imgtec.com, daniel@ffwll.ch,
+ christian.koenig@amd.com, faith.ekstrand@collabora.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Ben Skeggs <bskeggs@redhat.com>
 
-- nvkm should provide all this info now
-- preparation for GSP-RM
+On 9/14/23 10:20, Boris Brezillon wrote:
+> On Wed, 13 Sep 2023 15:22:56 +0200
+> Thomas Hellström <thomas.hellstrom@linux.intel.com> wrote:
+>
+>> On 9/13/23 13:33, Boris Brezillon wrote:
+>>> On Wed, 13 Sep 2023 12:39:01 +0200
+>>> Thomas Hellström <thomas.hellstrom@linux.intel.com> wrote:
+>>>   
+>>>> Hi,
+>>>>
+>>>> On 9/13/23 09:19, Boris Brezillon wrote:
+>>>>> On Wed, 13 Sep 2023 17:05:42 +1000
+>>>>> Dave Airlie <airlied@gmail.com> wrote:
+>>>>>      
+>>>>>> On Wed, 13 Sept 2023 at 17:03, Boris Brezillon
+>>>>>> <boris.brezillon@collabora.com> wrote:
+>>>>>>> On Tue, 12 Sep 2023 18:20:32 +0200
+>>>>>>> Thomas Hellström <thomas.hellstrom@linux.intel.com> wrote:
+>>>>>>>         
+>>>>>>>>> +/**
+>>>>>>>>> + * get_next_vm_bo_from_list() - get the next vm_bo element
+>>>>>>>>> + * @__gpuvm: The GPU VM
+>>>>>>>>> + * @__list_name: The name of the list we're iterating on
+>>>>>>>>> + * @__local_list: A pointer to the local list used to store already iterated items
+>>>>>>>>> + * @__prev_vm_bo: The previous element we got from drm_gpuvm_get_next_cached_vm_bo()
+>>>>>>>>> + *
+>>>>>>>>> + * This helper is here to provide lockless list iteration. Lockless as in, the
+>>>>>>>>> + * iterator releases the lock immediately after picking the first element from
+>>>>>>>>> + * the list, so list insertion deletion can happen concurrently.
+>>>>>>>> Are the list spinlocks needed for that async state update from within
+>>>>>>>> the dma-fence critical section we've discussed previously?
+>>>>>>> Any driver calling _[un]link() from its drm_gpu_scheduler::run_job()
+>>>>>>> hook will be in this situation (Panthor at the moment, PowerVR soon). I
+>>>>>>> get that Xe and Nouveau don't need that because they update the VM
+>>>>>>> state early (in the ioctl path), but I keep thinking this will hurt us
+>>>>>>> if we don't think it through from the beginning, because once you've
+>>>>>>> set this logic to depend only on resv locks, it will be pretty hard to
+>>>>>>> get back to a solution which lets synchronous VM_BINDs take precedence
+>>>>>>> on asynchronous request, and, with vkQueueBindSparse() passing external
+>>>>>>> deps (plus the fact the VM_BIND queue might be pretty deep), it can
+>>>>>>> take a long time to get your synchronous VM_BIND executed...
+>>>> So this would boil down to either (possibly opt-in) keeping the spinlock
+>>>> approach or pushing the unlink out to a wq then?
+>>> Deferred _unlink() would not be an issue, since I already defer the
+>>> drm_gpuva destruction to a wq, it would just a be a matter of moving the
+>>> _unlink() call there as well. But _link() also takes the GEM gpuva list
+>>> lock, and that one is bit tricky, in that sm_map() can trigger 2 more
+>>> _link() calls for the prev/next mappings, which we can't guess until we
+>>> get to execute the VM update. If we mandate the use of the GEM resv
+>>> lock, that simply means async VM updates (AKA calling
+>>> drm_gpuvm_sm_[un]map()) are not an option. And if this is what everyone
+>>> agrees on, then I'd like the APIs that make this sort of async VM
+>>> update possible (drm_gpuvm_sm_[un]map(), the drm_gpuvm_ops::sm_step*
+>>> methods, and probably other things) to be dropped, so we don't make it
+>>> look like it's something we support.
+>>>   
+>>>> BTW, as also asked in a reply to Danilo, how do you call unlink from
+>>>> run_job() when it was requiring the obj->dma_resv lock, or was that a WIP?
+>>> _unlink() makes sure the GEM gpuva list lock is taken, but this can be
+>>> a custom lock (see drm_gem_gpuva_set_lock()). In panthor we have
+>>> panthor_gem_object::gpuva_list_lock that's dedicated the gpuva list
+>>> protection. We make sure we never take this lock while allocating
+>>> memory to guarantee the dma-signalling path can't deadlock.
+>>>   
+>>>>>>>         
+>>>>>> btw what is the use case for this? do we have actual vulkan
+>>>>>> applications we know will have problems here?
+>>>>> I don't, but I think that's a concern Faith raised at some point (dates
+>>>>> back from when I was reading threads describing how VM_BIND on i915
+>>>>> should work, and I was clearly discovering this whole VM_BIND thing at
+>>>>> that time, so maybe I misunderstood).
+>>>>>      
+>>>>>> it feels like a bit of premature optimisation, but maybe we have use cases.
+>>>>> Might be, but that's the sort of thing that would put us in a corner if
+>>>>> we don't have a plan for when the needs arise. Besides, if we don't
+>>>>> want to support that case because it's too complicated, I'd recommend
+>>>>> dropping all the drm_gpuvm APIs that let people think this mode is
+>>>>> valid/supported (map/remap/unmap hooks in drm_gpuvm_ops,
+>>>>> drm_gpuvm_sm_[un]map helpers, etc). Keeping them around just adds to the
+>>>>> confusion.
+>>>> Xe allows bypassing the bind-queue with another bind-queue, but to
+>>>> completely avoid dependencies between queues the Operations may not
+>>>> overlap.
+>>> So, you check the VM state with some VM lock held (would be the VM resv
+>>> in my case), and if the mapping is new (no overlaps with pre-existing
+>>> mappings), you queue it to the fast-track/sync-VM_BIND queue. What would
+>>> be missing I guess is a way to know if the mapping is active (MMU has
+>>> been updated) or pending (MMU update queued to the bind-queue), so I can
+>>> fast-track mapping/unmapping of active mappings.
+> Ok, so I started modifying the implementation, and quickly realized the
+> overlap test can't be done without your xe_range_fence tree because of
+> unmaps. Since we call drm_gpuva_unmap() early/in the IOCTL path (IOW,
+> before the mapping teardown is effective), we lose track of this
+> yet-to-be-executed-unmap operation, and if we do our
+> va_range_overlaps_with_existing_mappings() test after such an unmap has
+> been queued using just the drm_gpuvm tree, we might get false even if
+> the mapping still exists and is expected to be torn down when the
+> VM_BIND(unmap) job is executed on the bind-queue. As a result, this
+> might execute the VM_BIND(map,sync) immediately (because the dependency
+> went undetected), and then the vm_bind_run_job() function kicks in and
+> undoes what the synchronous VM_BIND(map) did. Am I missing something?
+>
+> If I'm correct, that means I'm back to having synchronous VM_BIND ops
+> queued after all asynchronous ones unless I use something like your
+> xe_range_fence solution (which I was hoping I could postpone until we
+> decide to expose multiple bind queues).
 
-Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_bios.c    | 8 +++++---
- drivers/gpu/drm/nouveau/nouveau_display.c | 8 ++++----
- drivers/gpu/drm/nouveau/nvif/disp.c       | 2 +-
- 3 files changed, 10 insertions(+), 8 deletions(-)
+Yes, unfortunately fine-granular async range-tracking comes with a cost. 
+Still, if you are doing page-table updates solely with the CPU, you 
+could probably short-circuit the fence part of the fenced ranges?
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_bios.c b/drivers/gpu/drm/nouveau/nouveau_bios.c
-index 189903b65edc..9e878cdc8e38 100644
---- a/drivers/gpu/drm/nouveau/nouveau_bios.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_bios.c
-@@ -2093,9 +2093,11 @@ nouveau_bios_init(struct drm_device *dev)
- 	if (!NVInitVBIOS(dev))
- 		return -ENODEV;
- 
--	ret = parse_dcb_table(dev, bios);
--	if (ret)
--		return ret;
-+	if (drm->client.device.info.family < NV_DEVICE_INFO_V0_TESLA) {
-+		ret = parse_dcb_table(dev, bios);
-+		if (ret)
-+			return ret;
-+	}
- 
- 	if (!bios->major_version)	/* we don't run version 0 bios */
- 		return 0;
-diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-index 99977e5fe716..d8c92521226d 100644
---- a/drivers/gpu/drm/nouveau/nouveau_display.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-@@ -724,10 +724,10 @@ nouveau_display_create(struct drm_device *dev)
- 	drm_kms_helper_poll_init(dev);
- 	drm_kms_helper_poll_disable(dev);
- 
--	if (nouveau_modeset != 2 && drm->vbios.dcb.entries) {
--		ret = nvif_disp_ctor(&drm->client.device, "kmsDisp", 0,
--				     &disp->disp);
--		if (ret == 0) {
-+	if (nouveau_modeset != 2) {
-+		ret = nvif_disp_ctor(&drm->client.device, "kmsDisp", 0, &disp->disp);
-+
-+		if (!ret && (disp->disp.outp_mask || drm->vbios.dcb.entries)) {
- 			nouveau_display_create_properties(dev);
- 			if (disp->disp.object.oclass < NV50_DISP) {
- 				dev->mode_config.fb_modifiers_not_supported = true;
-diff --git a/drivers/gpu/drm/nouveau/nvif/disp.c b/drivers/gpu/drm/nouveau/nvif/disp.c
-index 09915f2715af..097246e10cdb 100644
---- a/drivers/gpu/drm/nouveau/nvif/disp.c
-+++ b/drivers/gpu/drm/nouveau/nvif/disp.c
-@@ -60,7 +60,7 @@ nvif_disp_ctor(struct nvif_device *device, const char *name, s32 oclass, struct
- 	cid = nvif_sclass(&device->object, disps, oclass);
- 	disp->object.client = NULL;
- 	if (cid < 0) {
--		NVIF_ERRON(cid, &device->object, "[NEW disp%04x] not supported", oclass);
-+		NVIF_DEBUG(&device->object, "[NEW disp%04x] not supported", oclass);
- 		return cid;
- 	}
- 
--- 
-2.41.0
 
+>
+> I'm still a bit skeptical about this 'update VM mappings tree early,
+> defer MMU page table updates' approach, where the VM state and the
+> actual page table tree are temporarily out of sync until all operations
+> have been flushed on all queues targeting a VM. This means any test we
+> do on the gpuvm, like, 'give me the BO mapped at VA xxx', is subject to
+> 'is this the current state or the future state?' questioning. Note that
+> we can't even get the current VM state anymore, because all the
+> drm_gpuvm::tree stores with this solution is the future state, and
+> to-be-unmapped mappings are lost during the transitioning period (when
+> vm_bind jobs are queued but not executed yet).
+
+Understandable. But this is the way we historically have been doing 
+things, (I think the whole async atomic page-flipping is using the same 
+concept), but rather than refering to it as current state and future 
+state, I'd like to think it as Synchronous CPU state (What an API user 
+sees) vs GPU state (What the GPU sees where it's currently executing). 
+To bring them in sync you need to wait for fences. And ideally the async 
+work should never fail.
+
+If one wants to push async work out to be handled solely by the GPU, 
+this is the way things must be done since the GPU can't take locks or 
+allocate memory, but as part or all of async work is sometimes done 
+using the CPU, it might make sense to challenge that to some extent. 
+There are indeed pros and cons with both approaches.
+
+/Thomas
+
+>
+>>> This would leave
+>>> overlapping sync/async VM updates, which can't happen in practice
+>>> unless userspace is doing something wrong (sparse bindings always go
+>>> through vkQueueBindSparse).
+>> User-space is allowed to create new bind queues at will, and they
+>> execute independently save for range overlaps.
+>>
+>> And the overlapping granularity depends very much on the detail of the
+>> range tracking.
+>> We drafted this fenced range utility
+>>
+>> https://gitlab.freedesktop.org/drm/xe/kernel/-/merge_requests/353
+> I'll try to see if there's a way we can have something generic shared
+> at the gpuvm level.
