@@ -1,71 +1,69 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1C267A24E1
-	for <lists+nouveau@lfdr.de>; Fri, 15 Sep 2023 19:35:00 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 925287A29E4
+	for <lists+nouveau@lfdr.de>; Fri, 15 Sep 2023 23:58:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7AE7A10E65E;
-	Fri, 15 Sep 2023 17:34:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0CFCF10E69B;
+	Fri, 15 Sep 2023 21:58:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 18E9E10E65E
- for <nouveau@lists.freedesktop.org>; Fri, 15 Sep 2023 17:34:58 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BB37B10E69B
+ for <nouveau@lists.freedesktop.org>; Fri, 15 Sep 2023 21:57:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1694799297;
+ s=mimecast20190719; t=1694815078;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=XXweTSxb9lF3B3Kz508TxEQymlimekhkNK/jKVtIHZ8=;
- b=NJeKf4L0Wzz2g2RCcYrL2InEwfkk8ulHXFpDmE2O5iwijGNpuvFBe4H33ijaKZqQdOHpO4
- EJJqFmohfr8QG3GZ+R7Sw7N5iIwQhqx/eK+PU9ZP82lc0NGp8muarn+LVfy51PWknuC+0g
- 8qacKEYOC46HOvXZnorIuk0hbDznAGY=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=fHigS+X/SJoQu8/HuEbi1lgyXVRdtZF3Im9gxkEzjM4=;
+ b=BRIFjwuoYn6sghiYuAgDWfNPZbpvgFTeTGFnDsIbwTAG0dDWYFyD6SfaQd/gJ/i9AfBVS7
+ huVGNUUyb8fcO0+6DfD+uaxUtSAMZy1Ct6DY4UI0lvDHywCd+BUgo1oNoU3xzQ396XfHHc
+ ThKHR7y3cGdVsbFn+qMqkKdcBHUBbTQ=
+Received: from mail-oa1-f71.google.com (mail-oa1-f71.google.com
+ [209.85.160.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-646-APfFU56bMgacRl-xJ6bZTw-1; Fri, 15 Sep 2023 13:34:56 -0400
-X-MC-Unique: APfFU56bMgacRl-xJ6bZTw-1
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-76dd2550295so307975685a.1
- for <nouveau@lists.freedesktop.org>; Fri, 15 Sep 2023 10:34:56 -0700 (PDT)
+ us-mta-336-S9TBtke1MiyGEPVcYqz2_Q-1; Fri, 15 Sep 2023 17:57:56 -0400
+X-MC-Unique: S9TBtke1MiyGEPVcYqz2_Q-1
+Received: by mail-oa1-f71.google.com with SMTP id
+ 586e51a60fabf-1ad17b9fcd8so4096932fac.0
+ for <nouveau@lists.freedesktop.org>; Fri, 15 Sep 2023 14:57:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694799295; x=1695404095;
+ d=1e100.net; s=20230601; t=1694815075; x=1695419875;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Wg4EmNZIrmGv1tACZxeJZ0Y5VT57wRFa8YOjLPmyTEA=;
- b=lQN389fzlIlCcRM08t9Pfii4IT1/Bxt81lQvj/XcOloVFnuPolmjvf5eJHQiHSKk7H
- ydBiW1HNNRxnRHygAHXEDW/42pixtY4UwHjpWTmIg0y7fqYQn1X67HGKObTgoOBnzTay
- umyqYGVHLq08bw42PGHcvgY+tO0d8nuBfayxJTkANkrbISqD4hLkmVa59JV29qymOgJj
- w27/wWk5sXR5iQouXeuL0OEdYXINbFWwzBjKNRhzjCy5aKnyPgLDyfCzW9GxLqxLE+rA
- JkzxtcMpk0tmw0JUJ1NwrY8wSmwNQ4ZYEdGW+xHhNYrfFyoGSrpIEN39P4vRC5KvSRIS
- DKYQ==
-X-Gm-Message-State: AOJu0YySZpMbjViBB8RKHhgYaNqXFUtdUo4/9tQsCPtSxRbrq2qnVElo
- UYaeG/YjDxmWlGu0G/2yVj990KyO9JiAglXakZpCRsUZNqzuvIZDs5ig8zB7qq3lz8LIM/bHp9p
- gyR1m3eoHOjYjisXTfSyt3NNScg==
-X-Received: by 2002:a05:620a:31a8:b0:76e:f38b:e87a with SMTP id
- bi40-20020a05620a31a800b0076ef38be87amr2532008qkb.48.1694799295661; 
- Fri, 15 Sep 2023 10:34:55 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHP11ZRbh22ddAzRnfdJhpVYsJBozLWaDGrgjYYQNVtI0psKjUDWcq5Q/AqsDQgs/wMdX3AMQ==
-X-Received: by 2002:a05:620a:31a8:b0:76e:f38b:e87a with SMTP id
- bi40-20020a05620a31a800b0076ef38be87amr2531996qkb.48.1694799295431; 
- Fri, 15 Sep 2023 10:34:55 -0700 (PDT)
+ bh=fHigS+X/SJoQu8/HuEbi1lgyXVRdtZF3Im9gxkEzjM4=;
+ b=ae9WrwiMQRKMoUBc2x6UsPn9Jxdo+TwOA+Mhsn6GoU+qkrsvsHuNwfK5ENB4JBIQjg
+ 2hPPMpPiFTIxBIrFcCcS51HVu1okCfXsq/q0qgb+RdGVkn55PTs1M10Z5lyJxqpcP7C8
+ nkLTVHfMfGO32IrAUyod+IAWowMjLBDbzn4yhxy+DP66lH8up/6Dg+kR+nH2U7i7EwuR
+ lCMuoZeZHZ2JM1XO1BWY3ohVh3qcMR0LTBdJ7pGDY5woCpA1MLiUlbEa4hm/N62I+Qpq
+ XzJsILORPOBzCyJRB4iE4WCri6eQ6FlF7khUALeXc2YcXYNhAUxbMcrlzp4JFn6RycxY
+ 2Kog==
+X-Gm-Message-State: AOJu0YzovS+96V8kZ9oNh2HpWbWQY2vRFVZTM6Et4gMlG/68L0keKGZD
+ Znq5cWNibS+cpL7KhqC6plBIgFH8AlaIdOeFgAipye84ZXjFQaUeYfAgptoBUjWXT/gnB+k0fLw
+ ga4FY72QxDtKL/xZBknT1BcdC3pZ+PEADSg==
+X-Received: by 2002:a05:6870:4250:b0:1ba:466d:5f9e with SMTP id
+ v16-20020a056870425000b001ba466d5f9emr3093978oac.49.1694815075181; 
+ Fri, 15 Sep 2023 14:57:55 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGCVIDnLPN4gaVj8/TaWSXHje2IT43ahIQcZ0wAqtyhOzEVmQGzIcAaNLfs9FjLF2rmqIuUaw==
+X-Received: by 2002:a05:6870:4250:b0:1ba:466d:5f9e with SMTP id
+ v16-20020a056870425000b001ba466d5f9emr3093967oac.49.1694815074944; 
+ Fri, 15 Sep 2023 14:57:54 -0700 (PDT)
 Received: from ?IPv6:2600:4040:5c6c:a300::feb? ([2600:4040:5c6c:a300::feb])
  by smtp.gmail.com with ESMTPSA id
- b1-20020a05620a118100b0076ca401d8c7sm1358150qkk.111.2023.09.15.10.34.54
+ m19-20020a0cf193000000b0064f364f3584sm1561970qvl.97.2023.09.15.14.57.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Sep 2023 10:34:55 -0700 (PDT)
-Message-ID: <0a563e8d6e380e8f89956abc8b17090432a142b5.camel@redhat.com>
+ Fri, 15 Sep 2023 14:57:54 -0700 (PDT)
+Message-ID: <10a6ce00a93bece7fcaab271124cd34cac8f6d10.camel@redhat.com>
 From: Lyude Paul <lyude@redhat.com>
-To: Justin Stitt <justinstitt@google.com>, Ben Skeggs <bskeggs@redhat.com>, 
- Karol Herbst <kherbst@redhat.com>, David Airlie <airlied@gmail.com>, Daniel
- Vetter <daniel@ffwll.ch>
-Date: Fri, 15 Sep 2023 13:34:53 -0400
-In-Reply-To: <20230914-strncpy-drivers-gpu-drm-nouveau-nvif-client-c-v1-1-dc3b3719fcb4@google.com>
-References: <20230914-strncpy-drivers-gpu-drm-nouveau-nvif-client-c-v1-1-dc3b3719fcb4@google.com>
+To: Ben Skeggs <skeggsb@gmail.com>, nouveau@lists.freedesktop.org
+Date: Fri, 15 Sep 2023 17:57:53 -0400
+In-Reply-To: <20230914084624.2299765-2-skeggsb@gmail.com>
+References: <20230914084624.2299765-2-skeggsb@gmail.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.48.4 (3.48.4-1.fc38)
 MIME-Version: 1.0
@@ -73,7 +71,8 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/nvif: refactor deprecated strncpy
+Subject: Re: [Nouveau] [PATCH 00/44] drm/nouveau: display rework to support
+ GSP-RM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,61 +84,134 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-hardening@vger.kernel.org
+Cc: Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+For the whole series:
+
 Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-Will push this and your other patches in just a moment
+Tested on an RTX4000
 
-On Thu, 2023-09-14 at 21:30 +0000, Justin Stitt wrote:
-> `strncpy` is deprecated and as such we should prefer more robust and
-> less ambiguous string interfaces.
+On Thu, 2023-09-14 at 18:45 +1000, Ben Skeggs wrote:
+> From: Ben Skeggs <bskeggs@redhat.com>
 >=20
-> A suitable replacement is `strscpy_pad` due to the fact that it
-> guarantees NUL-termination on the destination buffer whilst also
-> maintaining the NUL-padding behavior that `strncpy` provides. I am not
-> sure whether NUL-padding is strictly needed but I see in
-> `nvif_object_ctor()` args is memcpy'd elsewhere so I figured we'd keep
-> the same functionality.
+> The primary issue being tackled here is that, for historical reasons (we
+> didn't know any better / couldn't make it work reliably otherwise), some
+> operations (SOR routing, DP link training) were performed during the 2nd
+> HW supervisor interrupt.
 >=20
-> Link: https://www.kernel.org/doc/html/latest/process/deprecated.html#strn=
-cpy-on-nul-terminated-strings [1]
-> Link: https://github.com/KSPP/linux/issues/90
-> Cc: linux-hardening@vger.kernel.org
-> Signed-off-by: Justin Stitt <justinstitt@google.com>
-> ---
-> Note: build-tested only.
-> ---
->  drivers/gpu/drm/nouveau/nvif/client.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> We don't have control of the display supervisor when running on top of
+> RM, so this needed to be untangled and fixed - which, is one of the main
+> aims of this patch series.
 >=20
-> diff --git a/drivers/gpu/drm/nouveau/nvif/client.c b/drivers/gpu/drm/nouv=
-eau/nvif/client.c
-> index a3264a0e933a..3a27245f467f 100644
-> --- a/drivers/gpu/drm/nouveau/nvif/client.c
-> +++ b/drivers/gpu/drm/nouveau/nvif/client.c
-> @@ -69,7 +69,7 @@ nvif_client_ctor(struct nvif_client *parent, const char=
- *name, u64 device,
->  =09} nop =3D {};
->  =09int ret;
-> =20
-> -=09strncpy(args.name, name, sizeof(args.name));
-> +=09strscpy_pad(args.name, name, sizeof(args.name));
->  =09ret =3D nvif_object_ctor(parent !=3D client ? &parent->object : NULL,
->  =09=09=09       name ? name : "nvifClient", 0,
->  =09=09=09       NVIF_CLASS_CLIENT, &args, sizeof(args),
+> The ordering of this series is pretty important, so take care if/when
+> backporting patches from it.
 >=20
-> ---
-> base-commit: 3669558bdf354cd352be955ef2764cde6a9bf5ec
-> change-id: 20230914-strncpy-drivers-gpu-drm-nouveau-nvif-client-c-82b023c=
-36953
+> Beyond that main goal, various other interfaces have been added or
+> extended to provide the information that RM will need for its version of
+> similar interfaces.
 >=20
-> Best regards,
-> --
-> Justin Stitt <justinstitt@google.com>
+> Ben Skeggs (43):
+>   drm/nouveau/devinit/tu102-: remove attempt at loading PreOS
+>   drm/nouveau/imem: support allocations not preserved across suspend
+>   drm/nouveau/gr/gf100-: lose contents of global ctxbufs across suspend
+>   drm/nouveau/mmu/gp100-: always invalidate TLBs at CACHE_LEVEL_ALL
+>   drm/nouveau/kms/nv50-: fix mst payload alloc fail crashing evo
+>   drm/nouveau/disp: rearrange output methods
+>   drm/nouveau/disp: add output detect method
+>   drm/nouveau/disp: add output method to fetch edid
+>   drm/nouveau/disp: rename internal output acquire/release functions
+>   drm/nouveau/disp: shuffle to make upcoming diffs prettier
+>   drm/nouveau/disp: add acquire_dac()
+>   drm/nouveau/disp: add acquire_sor/pior()
+>   drm/nouveau/disp: update SOR routing immediately on acquire()
+>   drm/nouveau/kms/nv50-: pull some common init out of OR-specific code
+>   drm/nouveau/kms/nv50-: remove nv_encoder.audio.connector
+>   drm/nouveau/kms/nv50-: keep output state around until modeset complete
+>   drm/nouveau/kms/nv50-: move audio enable post-modeset
+>   drm/nouveau/disp: add output hdmi config method
+>   drm/nouveau/disp: move hdmi disable out of release()
+>   drm/nouveau/disp: release outputs post-modeset
+>   drm/nouveau/disp: remove SOR routing updates from supervisor
+>   drm/nouveau/disp: add output backlight control methods
+>   drm/nouveau/disp: add output lvds config method
+>   drm/nouveau/disp: add hdmi audio hal function
+>   drm/nouveau/disp: move dp aux pwr method to HAL
+>   drm/nouveau/disp: add dp aux xfer method
+>   drm/nouveau/disp: add dp rates method
+>   drm/nouveau/kms/nv50-: split DP disable+enable into two modesets
+>   drm/nouveau/kms/nv50-: flush mst disables together
+>   drm/nouveau/kms/nv50-: fixup sink D3 before tearing down link
+>   drm/nouveau/disp: add dp train method
+>   drm/nouveau/disp: move link training out of supervisor
+>   drm/nouveau/disp: add support for post-LT adjust
+>   drm/nouveau/disp: add dp sst config method
+>   drm/nouveau/disp: add dp mst id get/put methods
+>   drm/nouveau/disp: move outp/conn construction to chipset code
+>   drm/nouveau/disp: move outp init/fini paths to chipset code
+>   drm/nouveau/kms/nv50-: create heads based on nvkm head mask
+>   drm/nouveau/kms/nv50-: create heads after outps/conns
+>   drm/nouveau/kms/nv50-: name aux channels after their connector
+>   drm/nouveau/kms/nv50-: create connectors based on nvkm info
+>   drm/nouveau/kms/nv50-: create outputs based on nvkm info
+>   drm/nouveau/kms/nv50-: disable dcb parsing
+>=20
+> Lyude Paul (1):
+>   drm/nouveau/kms: Add INHERIT ioctl to nvkm/nvif for reading IOR state
+>=20
+>  drivers/gpu/drm/nouveau/dispnv04/disp.c       |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/disp.c       | 512 +++++++++++-------
+>  drivers/gpu/drm/nouveau/dispnv50/disp.h       |   6 +-
+>  drivers/gpu/drm/nouveau/dispnv50/head.h       |   1 +
+>  drivers/gpu/drm/nouveau/dispnv50/headc57d.c   |  14 +
+>  drivers/gpu/drm/nouveau/include/nvif/conn.h   |  20 +-
+>  drivers/gpu/drm/nouveau/include/nvif/if0011.h |  21 +-
+>  drivers/gpu/drm/nouveau/include/nvif/if0012.h | 249 +++++++--
+>  drivers/gpu/drm/nouveau/include/nvif/outp.h   |  96 +++-
+>  .../drm/nouveau/include/nvkm/core/memory.h    |   1 +
+>  .../drm/nouveau/include/nvkm/subdev/instmem.h |   2 +-
+>  drivers/gpu/drm/nouveau/nouveau_backlight.c   |  90 +--
+>  drivers/gpu/drm/nouveau/nouveau_bios.c        |   8 +-
+>  drivers/gpu/drm/nouveau/nouveau_connector.c   | 251 ++++-----
+>  drivers/gpu/drm/nouveau/nouveau_connector.h   |   3 +-
+>  drivers/gpu/drm/nouveau/nouveau_display.c     |   8 +-
+>  drivers/gpu/drm/nouveau/nouveau_dp.c          | 345 ++++++++++--
+>  drivers/gpu/drm/nouveau/nouveau_encoder.h     |  30 +-
+>  drivers/gpu/drm/nouveau/nvif/conn.c           |  36 +-
+>  drivers/gpu/drm/nouveau/nvif/disp.c           |   2 +-
+>  drivers/gpu/drm/nouveau/nvif/outp.c           | 412 ++++++++++++--
+>  drivers/gpu/drm/nouveau/nvkm/core/memory.c    |  15 +-
+>  .../gpu/drm/nouveau/nvkm/engine/disp/base.c   | 146 +----
+>  .../gpu/drm/nouveau/nvkm/engine/disp/conn.c   |  10 -
+>  .../gpu/drm/nouveau/nvkm/engine/disp/conn.h   |   2 -
+>  drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c | 362 ++++---------
+>  .../gpu/drm/nouveau/nvkm/engine/disp/g84.c    |   1 +
+>  .../gpu/drm/nouveau/nvkm/engine/disp/g94.c    |   1 +
+>  .../gpu/drm/nouveau/nvkm/engine/disp/ga102.c  |   1 +
+>  .../gpu/drm/nouveau/nvkm/engine/disp/gf119.c  |   2 +-
+>  .../gpu/drm/nouveau/nvkm/engine/disp/gk104.c  |   1 +
+>  .../gpu/drm/nouveau/nvkm/engine/disp/gm107.c  |   1 +
+>  .../gpu/drm/nouveau/nvkm/engine/disp/gm200.c  |  17 +-
+>  .../gpu/drm/nouveau/nvkm/engine/disp/gp100.c  |   1 +
+>  .../gpu/drm/nouveau/nvkm/engine/disp/gt215.c  |  38 ++
+>  .../gpu/drm/nouveau/nvkm/engine/disp/gv100.c  |   2 +-
+>  .../gpu/drm/nouveau/nvkm/engine/disp/ior.h    |  15 +-
+>  .../gpu/drm/nouveau/nvkm/engine/disp/mcp89.c  |   1 +
+>  .../gpu/drm/nouveau/nvkm/engine/disp/nv50.c   | 182 ++++++-
+>  .../gpu/drm/nouveau/nvkm/engine/disp/outp.c   | 144 ++++-
+>  .../gpu/drm/nouveau/nvkm/engine/disp/outp.h   |  43 +-
+>  .../gpu/drm/nouveau/nvkm/engine/disp/tu102.c  |   1 +
+>  .../gpu/drm/nouveau/nvkm/engine/disp/uconn.c  |  67 +--
+>  .../gpu/drm/nouveau/nvkm/engine/disp/uoutp.c  | 460 +++++++++++++---
+>  .../gpu/drm/nouveau/nvkm/engine/gr/gf100.c    |  10 +-
+>  .../drm/nouveau/nvkm/subdev/devinit/tu102.c   |  12 +-
+>  .../drm/nouveau/nvkm/subdev/instmem/base.c    |  19 +-
+>  .../drm/nouveau/nvkm/subdev/instmem/priv.h    |   1 +
+>  .../drm/nouveau/nvkm/subdev/mmu/vmmgp100.c    |   2 +-
+>  .../drm/nouveau/nvkm/subdev/mmu/vmmtu102.c    |   2 +-
+>  50 files changed, 2461 insertions(+), 1207 deletions(-)
 >=20
 
 --=20
