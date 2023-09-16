@@ -2,84 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78B6B7A30EB
-	for <lists+nouveau@lfdr.de>; Sat, 16 Sep 2023 16:36:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CF647A316B
+	for <lists+nouveau@lfdr.de>; Sat, 16 Sep 2023 18:28:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DAEB910E13C;
-	Sat, 16 Sep 2023 14:36:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 86DCD10E152;
+	Sat, 16 Sep 2023 16:28:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2253D10E128
- for <nouveau@lists.freedesktop.org>; Sat, 16 Sep 2023 14:35:59 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E2FC110E152
+ for <nouveau@lists.freedesktop.org>; Sat, 16 Sep 2023 16:28:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1694874958;
+ s=mimecast20190719; t=1694881723;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/mp9XkH8OUlg5iQgXOIaWNRuMOOZINkri8HGnBg221o=;
- b=J+HfkZFMHTDAC2y9Wdk6UKVLtfqNawJVOfbr04hXSdyU9CjI5ljXW6iXSBZVEer1YVEGGj
- wrik/Y6cJ35ExSUjD2xcOfIOhOD54QMLw+1E5OU66xSsX7pNe/IYNELCsEjiLf39CVlGdU
- ++7JeGuoxNibxwTbkMywMy2K0b4R57A=
-Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
- [209.85.167.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding;
+ bh=EzEI3xj+gOUgP5nEKp+6nJQsJsQAIFG2M2MSfcP5fDg=;
+ b=URU5P9bLxAP+7wiM60+rdJx6msdz2Bfnm7yhEgT2PEn8aaJ3umAyS+vIhhlg5CFDERSTPx
+ oG+p4xfWbKW/yfjp6PavLNbF99t9g66kEj0LiVrHxgqoJ5DD4cv2B4cKk3yT7MKwWA6VjF
+ kNmcJRF8MGLMzFwk6G8y3lx1rm3fAqE=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-381-X2b1NxdfMQ2d7FTZwsB_SQ-1; Sat, 16 Sep 2023 10:35:56 -0400
-X-MC-Unique: X2b1NxdfMQ2d7FTZwsB_SQ-1
-Received: by mail-lf1-f71.google.com with SMTP id
- 2adb3069b0e04-5007f3d3255so1774930e87.3
- for <nouveau@lists.freedesktop.org>; Sat, 16 Sep 2023 07:35:56 -0700 (PDT)
+ us-mta-156-cE2A25lCM7e6ME99_IpM2w-1; Sat, 16 Sep 2023 12:28:41 -0400
+X-MC-Unique: cE2A25lCM7e6ME99_IpM2w-1
+Received: by mail-ed1-f69.google.com with SMTP id
+ 4fb4d7f45d1cf-52a08d02c62so2130895a12.2
+ for <nouveau@lists.freedesktop.org>; Sat, 16 Sep 2023 09:28:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694874955; x=1695479755;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1694881720; x=1695486520;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/mp9XkH8OUlg5iQgXOIaWNRuMOOZINkri8HGnBg221o=;
- b=OQXL5F7vvH58nQq2UInP47fzNGJWsw+KG+M1nTYpl0J9j6/z4ygkLP/dFXGJRz82aF
- QuXcMm+kxc7A7iJxPpxa3O8XiQ4D9I5099e5ULuCtcg0+zmNmJvJS43DRiJjfSAw7YYQ
- pvgFZ6fTGkX1gNoPIYronXRr/aQh1/3Iwxl6OfWhwp3tgh2kh4tnHe0Gd2e98LFIJmEi
- 0XlGfZRCSx6J1WZppb1ZzympjulGfAIM23KWm6HAD4npxoaUov/10h0eFGYiNoa3XypA
- lXPSQsh0yEIJf222xmndRznKOdGZ5/0lCgCZq5sfArNYWSlg1jRH8550xrZw2oObhhPK
- sGzw==
-X-Gm-Message-State: AOJu0Yx62D6RiPBC0PBioAV/e4fZ1DvxW8tLXmGp0WtKoE5CebarQ7TK
- oCX6WJQbUEp28ietXk2cLRi8uQwbpuZXyPSEzCYZUlQkt3qhwEqqdLMdu4u0xiMD3V90iE0VOW3
- Eu7jljagxcD1QCNgM91n9siZoRw==
-X-Received: by 2002:ac2:5f46:0:b0:4fe:af1:c3ae with SMTP id
- 6-20020ac25f46000000b004fe0af1c3aemr3571155lfz.15.1694874954964; 
- Sat, 16 Sep 2023 07:35:54 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGlgl0Ylz4+Dm9kk9jCkqXMN1BHISMu1BMtuNzZkQJVTmUz/b3svV55Beso1XJDaH8pjSaaCQ==
-X-Received: by 2002:ac2:5f46:0:b0:4fe:af1:c3ae with SMTP id
- 6-20020ac25f46000000b004fe0af1c3aemr3571143lfz.15.1694874954578; 
- Sat, 16 Sep 2023 07:35:54 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
- ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
+ bh=EzEI3xj+gOUgP5nEKp+6nJQsJsQAIFG2M2MSfcP5fDg=;
+ b=JcmZ6NkdFq39oe1Wt09uj7KsTkteo8H+HjWC7h5nO7NBDPnVeqhLTC1iHIVMKrAqLb
+ WkIVxcFDcYe8RePBEQPAbMjGIoW3cGIQLfd+pkDe4j21uFbLMW4B6aKfbrqej7DzKVrW
+ rfKLChxQhynjK1AAwD18rZ6aZQSI6ZUdRJYBOZG1qjLKUSvTMgY3A/NQXUjRGBad6/tb
+ rGo0Gqhs4j42DfhohO4hjzMS3UD1573IP8yKRJNbbx7JV9kBmThnQ+TvQRZMfCeWJs8E
+ aCw8hcSexaAyELvMYu68BxU4gSWQJZJTyRzooYP+c0biDi2wd2xZnBF6mposk7+SQ8Y8
+ 9WeA==
+X-Gm-Message-State: AOJu0Yx0vzD7EB9JhNKbO0F0tvEAUjV0b6ujGRGZSTa/W159BaGEwnlp
+ zTXMVQDyfAccPk0I3xN0zSqXlINBctGo7tmKCuLnrBaoWYTyOBHzA0LBFDNe9o3LYLwLn9b1Sah
+ G8uGK7f1jo2bSwCnqJ1Wr9TgksRFpFd/WvHrwkq+kjcnDou3KDCVrhxxdgVkAzh6krgae3u9Wgw
+ 9YHzUB
+X-Received: by 2002:a05:6402:22ee:b0:530:db58:61c8 with SMTP id
+ dn14-20020a05640222ee00b00530db5861c8mr954486edb.23.1694881720234; 
+ Sat, 16 Sep 2023 09:28:40 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFlYPchwFlqQIz/rdAPhlutPoEjabhYgc7OxI5j/ZzoP6b6ZR4Gcr0BriDua40j8SSm3Ns67w==
+X-Received: by 2002:a05:6402:22ee:b0:530:db58:61c8 with SMTP id
+ dn14-20020a05640222ee00b00530db5861c8mr954470edb.23.1694881719851; 
+ Sat, 16 Sep 2023 09:28:39 -0700 (PDT)
+Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- u23-20020aa7d997000000b0052a3edff5c3sm3524909eds.87.2023.09.16.07.35.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 16 Sep 2023 07:35:54 -0700 (PDT)
-Message-ID: <27ce1aa9-ea98-479d-76ab-45aae531b1de@redhat.com>
-Date: Sat, 16 Sep 2023 16:35:52 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-To: Dan Carpenter <dan.carpenter@linaro.org>
-References: <10fd258b-466f-4c5b-9d48-fe61a3f21424@moroto.mountain>
- <91865741-dd19-39ad-9042-d34ed32e0552@redhat.com>
- <813a260a-80ac-4c11-a0c5-f50edb399b5c@kadam.mountain>
- <2ab31d98-931f-4322-8e67-381d21302a7c@kadam.mountain>
+ k7-20020aa7c047000000b0052febc781bfsm3661604edo.36.2023.09.16.09.28.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 16 Sep 2023 09:28:39 -0700 (PDT)
 From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <2ab31d98-931f-4322-8e67-381d21302a7c@kadam.mountain>
+To: nouveau@lists.freedesktop.org
+Date: Sat, 16 Sep 2023 18:28:31 +0200
+Message-ID: <20230916162835.5719-1-dakr@redhat.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH] nouveau/u_memcpya: fix NULL vs error pointer
- bug
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
+Subject: [Nouveau] [PATCH] drm/nouveau: sched: fix leaking memory of
+ timedout job
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,58 +81,63 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, kernel-janitors@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>
+Cc: dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 9/16/23 16:26, Dan Carpenter wrote:
-> On Sat, Sep 16, 2023 at 05:24:04PM +0300, Dan Carpenter wrote:
->> On Sat, Sep 16, 2023 at 01:41:43AM +0200, Danilo Krummrich wrote:
->>> Hi Dan,
->>>
->>> On 9/15/23 14:59, Dan Carpenter wrote:
->>>> The u_memcpya() function is supposed to return error pointers on
->>>> error.  Returning NULL will lead to an Oops.
->>>>
->>>> Fixes: 68132cc6d1bc ("nouveau/u_memcpya: use vmemdup_user")
->>>> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
->>>> ---
->>>>    drivers/gpu/drm/nouveau/nouveau_drv.h | 2 +-
->>>>    1 file changed, 1 insertion(+), 1 deletion(-)
->>>>
->>>> diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
->>>> index 3666a7403e47..52a708a98915 100644
->>>> --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
->>>> +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
->>>> @@ -193,7 +193,7 @@ u_memcpya(uint64_t user, unsigned int nmemb, unsigned int size)
->>>>    	size_t bytes;
->>>>    	if (unlikely(check_mul_overflow(nmemb, size, &bytes)))
->>>> -		return NULL;
->>>> +		return ERR_PTR(-ENOMEM);
->>>
->>> I plan to replace this function with an upcoming vmemdup_array_user() helper,
->>> which returns -EOVERFLOW instead, hence mind using that?
->>>
->>> Unless you disagree, no need to resubmit the patch, I can change it
->>> before applying the patch.
->>
->> Generally, I would say that ENOMEM is the correct error code.  I feel
->> like someone thinks EOVERFLOW means integer overflow and that's not
->> correct.  I means like if you pass a number higher than INT_MAX to
->> kstroint().
-> 
-> The most common error code for integer overflows is EINVAL because the
-> user passed invalid data.
+Always stop and re-start the scheduler in order to let the scheduler
+free up the timedout job in case it got signaled. In case of exec jobs
+the job type specific callback will take care to signal all fences and
+tear down the channel.
 
-I totally agree with that, and my choice would have been EINVAL as well. It's just
-that it seems (v)memdup_array_user() [1] goes with that and hence I'd just go along.
+Fixes: b88baab82871 ("drm/nouveau: implement new VM_BIND uAPI")
+Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_exec.c  |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_sched.c | 12 +++++++++---
+ 2 files changed, 10 insertions(+), 4 deletions(-)
 
-[1] https://lore.kernel.org/lkml/93001a9f3f101be0f374080090f9c32df73ca773.1694202430.git.pstanner@redhat.com/
-
-> 
-> regards,
-> dan carpenter
-> 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
+index 9c031d15fe0b..49d83ac9e036 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_exec.c
++++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
+@@ -185,7 +185,7 @@ nouveau_exec_job_timeout(struct nouveau_job *job)
+ 
+ 	nouveau_sched_entity_fini(job->entity);
+ 
+-	return DRM_GPU_SCHED_STAT_ENODEV;
++	return DRM_GPU_SCHED_STAT_NOMINAL;
+ }
+ 
+ static struct nouveau_job_ops nouveau_exec_job_ops = {
+diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
+index 88217185e0f3..3b7ea5221226 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_sched.c
++++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
+@@ -375,14 +375,20 @@ nouveau_sched_run_job(struct drm_sched_job *sched_job)
+ static enum drm_gpu_sched_stat
+ nouveau_sched_timedout_job(struct drm_sched_job *sched_job)
+ {
++	struct drm_gpu_scheduler *sched = sched_job->sched;
+ 	struct nouveau_job *job = to_nouveau_job(sched_job);
++	enum drm_gpu_sched_stat stat = DRM_GPU_SCHED_STAT_NOMINAL;
+ 
+-	NV_PRINTK(warn, job->cli, "Job timed out.\n");
++	drm_sched_stop(sched, sched_job);
+ 
+ 	if (job->ops->timeout)
+-		return job->ops->timeout(job);
++		stat = job->ops->timeout(job);
++	else
++		NV_PRINTK(warn, job->cli, "Generic job timeout.\n");
++
++	drm_sched_start(sched, true);
+ 
+-	return DRM_GPU_SCHED_STAT_ENODEV;
++	return stat;
+ }
+ 
+ static void
+-- 
+2.41.0
 
