@@ -2,67 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BB567B2E0F
-	for <lists+nouveau@lfdr.de>; Fri, 29 Sep 2023 10:42:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DAD8A7B2E19
+	for <lists+nouveau@lfdr.de>; Fri, 29 Sep 2023 10:42:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7ECC010E6C9;
-	Fri, 29 Sep 2023 08:42:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 21C6310E6E8;
+	Fri, 29 Sep 2023 08:42:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3A94610E328
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 20:23:17 +0000 (UTC)
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-68fb2e9ebcdso3682096b3a.2
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 13:23:17 -0700 (PDT)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 076D810E328
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 20:23:28 +0000 (UTC)
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-68fb79ef55eso4499212b3a.0
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 13:23:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695068596; x=1695673396; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1695068608; x=1695673408; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0bn4fb4IMUqhCx69je/jJOWxti0Rv2O4Re+HJFzQddM=;
- b=V8Yux38YxYb6QvFoZrKKd5OjaoeNsI23KTomfUhKylJuIg+37YCDcdBY10giQBImGf
- yIy44KG0oWGpFIKzjDp9T1c25bdBDwaZSUfrWd1Mofntnm26Izopu4OZGzpywE4l2Vsn
- yCSkR7XKQHx9BQ1Px0z/vqBeSV7EOyuu571oBj7hLEvUG076/xpdcHeXY5B9qBiuNbvA
- txnm2MJBN77oqfxVEF6h3nQIxKLymVBI+TXxf00yxq9+k7be2gLOj4bawcPrrhCtBU79
- qDzhDIQq5OwfrEiC82WPi2ozA+Ow99vP0Fwsa9JcmqIvSphcVPvF3HEXEv2TJwmqnhRt
- LwYQ==
+ bh=dF5dvG4/WpMOjO0H9K2DMbRGBYEupO0bNYI62YbR2fU=;
+ b=VdRxPuJlFfHlY2lE4U/gumndnEqgFhnVesdVEngLcNU9h7TzJFHJLq+AfexEpJO8fg
+ nPdwozDZ9KmAcIonW8Bymv+VYSH/k0BKGM2DipW1JxCFjp1bh+yXeM+4T4N9sOAWS4pC
+ gOcwsqCKO+Y4uZ1WP7fmvWVmfkEb7PxSuJ8ePTvEhta4U3Fog+QMt/gJejWffnYyGNRx
+ 0SuKBbwFnCAI1hrjtgQ809H4Tsp/F5dxk0GbNge3IoN2LDY6rgHvwMPwJIGXQoxmlh2e
+ s6H9QOIhP1Z3JX6XYp3DcSg9XAfn+aDYJqbCbcF2ypHockKm2H+9mFJIMv99SNUslzEF
+ fA4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695068596; x=1695673396;
+ d=1e100.net; s=20230601; t=1695068608; x=1695673408;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0bn4fb4IMUqhCx69je/jJOWxti0Rv2O4Re+HJFzQddM=;
- b=IrUUJdBLGDabGkA5vuvvroo997ZeUeRUpPSs1aRguid3HlCsu6vQnu0MCfDccZOIEe
- MN8CJ6Lc/HPTvfxaqRSaVqQ4UZ3qb0X080C2yECATRhgkkG4z6d7A/oB6XH7yHumNBMQ
- km2K7pRwu/qiQ4ptu9ncVZAVmI70jKCty1FJ+95DSZB6Lr7Dyc2o0PJ8GxkM0+FaBrgv
- 38Bw+f9dpGoSEAlc2dPf09Y9Fx4dmVmjqhtExk9X/bHrftSrg3rHZicOG9WpRCtNA0Uy
- SDbwkfluWyEi8EFwHZ6eZGHmbcRXtVnG6oQfpmTh0yhmK0XUGZjAGixL0y27HGJ0vNLv
- w6yw==
-X-Gm-Message-State: AOJu0Yx9bMWScrLWU8gCetp/xV9XDkgy+d2dLqgYYgWLKFlbPjtsosqA
- sK6IUgGD64NBfPWfqi+ruOe0QGKRtf4=
-X-Google-Smtp-Source: AGHT+IGPmnMSv+bx5HV8cbOeS0yeium+gktMC8MB1hTRRTJTkI/ByryzjZAwvPSe6zDrE17HGC8ruQ==
-X-Received: by 2002:a05:6a00:23c4:b0:68e:29a6:e247 with SMTP id
- g4-20020a056a0023c400b0068e29a6e247mr10872096pfc.10.1695068594455; 
- Mon, 18 Sep 2023 13:23:14 -0700 (PDT)
+ bh=dF5dvG4/WpMOjO0H9K2DMbRGBYEupO0bNYI62YbR2fU=;
+ b=KhWNmnzHCJiqpZXbzaDZFnnG2mr3C5BvNRxxGCPc2br6QaGqH6L1FjcyJA1dTz9daV
+ ibspB/qNdd7HZdRYY5UzPnYA3eujc7iE1ytAZXdS26y7traZnBCqxAMQ/ob6F0iuI1b8
+ YzCRmt1CoZvg3P9D9n2Z8RHwqPOB0jd290fAJfdU6bkCCePSilvida8L7Ey1S0uhxhPp
+ RS3mflYneAMqhyh8typc+3KBeO0JG/GzS3vaIp4rG+23cI9hUK+XKW3cuQ1eIGzHR1Fi
+ V1hxWhzJs00b+ZNMWtemU37eu+4pxtzQ9cesW8Zb4Vy+E1fHVMvVD/sNdup+7TnlzIJK
+ VS9A==
+X-Gm-Message-State: AOJu0YxAxCjZZZIrY0x0Ds/KU+JumuDDERquAYKKuQxVx6qLzpU1ghcq
+ Ow9x/wSMor3aOxBdWC644TkOxnf3Gt4=
+X-Google-Smtp-Source: AGHT+IG+/rOdL/TwDVEFSE/Kc9DsUIeRYI0rb6k/qe5xrnbI58ghV23IybScg6Pnt/TGNTZrwn3HWQ==
+X-Received: by 2002:a05:6a21:3d8b:b0:14d:f087:c0cc with SMTP id
+ bj11-20020a056a213d8b00b0014df087c0ccmr11543287pzc.48.1695068606576; 
+ Mon, 18 Sep 2023 13:23:26 -0700 (PDT)
 Received: from localhost.localdomain (87-121-74-45.dyn.launtel.net.au.
  [87.121.74.45]) by smtp.gmail.com with ESMTPSA id
- p21-20020aa78615000000b006889348ba6asm7446067pfn.81.2023.09.18.13.23.11
+ p21-20020aa78615000000b006889348ba6asm7446067pfn.81.2023.09.18.13.23.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Sep 2023 13:23:13 -0700 (PDT)
+ Mon, 18 Sep 2023 13:23:26 -0700 (PDT)
 From: Ben Skeggs <skeggsb@gmail.com>
 To: nouveau@lists.freedesktop.org
-Date: Tue, 19 Sep 2023 06:21:37 +1000
-Message-ID: <20230918202149.4343-33-skeggsb@gmail.com>
+Date: Tue, 19 Sep 2023 06:21:42 +1000
+Message-ID: <20230918202149.4343-38-skeggsb@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230918202149.4343-1-skeggsb@gmail.com>
 References: <20230918202149.4343-1-skeggsb@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 29 Sep 2023 08:42:15 +0000
-Subject: [Nouveau] [PATCH 32/44] drm/nouveau/gsp/r535: add support for
- booting GSP-RM
+Subject: [Nouveau] [PATCH 37/44] drm/nouveau/disp/r535: initial support
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,984 +79,370 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Ben Skeggs <bskeggs@redhat.com>
 
-This commit adds the initial code needed to boot the GSP-RM firmware
-provided by NVIDIA, bringing with it the beginnings of Ada support.
-
-Until it's had more testing and time to bake, support is disabled by
-default (except on Ada).  GSP-RM usage can be enabled by passing the
-"config=NvGspRm=1" module option.
+Adds support for modesetting on RM.
 
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 ---
- drivers/gpu/drm/nouveau/include/nvif/cl0080.h |    1 +
- .../drm/nouveau/include/nvkm/core/device.h    |    1 +
- .../drm/nouveau/include/nvkm/core/falcon.h    |    4 +
- .../drm/nouveau/include/nvkm/engine/falcon.h  |    2 +
- .../drm/nouveau/include/nvkm/subdev/bios.h    |    1 +
- .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |  171 +-
- .../nvidia/inc/ctrl/ctrl0073/ctrl0073system.h |   31 +
- .../nvidia/inc/ctrl/ctrl2080/ctrl2080gpu.h    |   33 +
- .../common/shared/msgq/inc/msgq/msgq_priv.h   |   46 +
- .../uproc/os/common/include/libos_init_args.h |   52 +
- .../nvalloc/common/inc/gsp/gsp_fw_sr_meta.h   |   79 +
- .../nvalloc/common/inc/gsp/gsp_fw_wpr_meta.h  |  149 ++
- .../arch/nvalloc/common/inc/rmRiscvUcode.h    |   82 +
- .../nvidia/arch/nvalloc/common/inc/rmgspseq.h |  100 ++
- .../nvidia/generated/g_chipset_nvoc.h         |   38 +
- .../535.54.03/nvidia/generated/g_os_nvoc.h    |   44 +
- .../nvidia/generated/g_rpc-structures.h       |   52 +
- .../nvidia/inc/kernel/gpu/gpu_acpi_data.h     |   74 +
- .../nvidia/inc/kernel/gpu/gsp/gsp_fw_heap.h   |   33 +
- .../nvidia/inc/kernel/gpu/gsp/gsp_init_args.h |   57 +
- .../inc/kernel/gpu/gsp/gsp_static_config.h    |   74 +
- .../nvidia/kernel/inc/vgpu/rpc_global_enums.h |  262 +++
- .../gpu/drm/nouveau/include/nvrm/nvtypes.h    |   24 +
- .../gpu/drm/nouveau/nvkm/engine/device/base.c |   66 +
- .../gpu/drm/nouveau/nvkm/engine/device/user.c |    1 +
- drivers/gpu/drm/nouveau/nvkm/falcon/Kbuild    |    1 +
- drivers/gpu/drm/nouveau/nvkm/falcon/base.c    |    9 +
- drivers/gpu/drm/nouveau/nvkm/falcon/ga102.c   |    6 +
- drivers/gpu/drm/nouveau/nvkm/falcon/tu102.c   |   28 +
- .../gpu/drm/nouveau/nvkm/subdev/bios/base.c   |    8 +
- .../gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild    |    5 +
- .../gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c   |   57 +
- .../gpu/drm/nouveau/nvkm/subdev/gsp/base.c    |    1 +
- .../gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c   |  359 ++++
- .../gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c   |   22 +
- .../gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c   |  138 +-
- .../gpu/drm/nouveau/nvkm/subdev/gsp/priv.h    |   42 +
- .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 1561 +++++++++++++++++
- .../gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c   |  162 ++
- .../gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c   |   22 +
- 40 files changed, 3896 insertions(+), 2 deletions(-)
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073system.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080gpu.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/shared/msgq/inc/msgq/msgq_priv.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/uproc/os/common/include/libos_init_args.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/gsp/gsp_fw_sr_meta.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/gsp/gsp_fw_wpr_meta.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/rmRiscvUcode.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/rmgspseq.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_chipset_nvoc.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_os_nvoc.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_rpc-structures.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gpu_acpi_data.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_fw_heap.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_init_args.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_static_config.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/kernel/inc/vgpu/rpc_global_enums.h
- create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/nvtypes.h
- create mode 100644 drivers/gpu/drm/nouveau/nvkm/falcon/tu102.c
- create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c
- create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c
- create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+ drivers/gpu/drm/nouveau/dispnv50/core.c       |    1 +
+ drivers/gpu/drm/nouveau/dispnv50/disp.c       |  141 ++
+ drivers/gpu/drm/nouveau/include/nvif/class.h  |    2 +
+ .../drm/nouveau/include/nvkm/engine/disp.h    |   19 +
+ .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |   35 +
+ .../common/sdk/nvidia/inc/class/cl0005.h      |   38 +
+ .../nvidia/inc/class/cl2080_notification.h    |   42 +
+ .../nvidia/inc/ctrl/ctrl0073/ctrl0073common.h |   39 +
+ .../nvidia/inc/ctrl/ctrl0073/ctrl0073dfp.h    |  166 ++
+ .../sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073dp.h |  335 ++++
+ .../inc/ctrl/ctrl0073/ctrl0073specific.h      |  216 +++
+ .../nvidia/inc/ctrl/ctrl0073/ctrl0073system.h |   34 +
+ .../nvidia/inc/ctrl/ctrl2080/ctrl2080event.h  |   41 +
+ .../inc/ctrl/ctrl2080/ctrl2080internal.h      |   43 +
+ .../535.54.03/common/sdk/nvidia/inc/nvos.h    |   27 +
+ .../535.54.03/nvidia/generated/g_allclasses.h |   33 +
+ .../nvidia/generated/g_mem_desc_nvoc.h        |   32 +
+ .../nvidia/generated/g_rpc-structures.h       |   13 +
+ .../nvidia/inc/kernel/gpu/intr/engine_idx.h   |    2 +
+ .../nvidia/inc/kernel/os/nv_memory_type.h     |   31 +
+ drivers/gpu/drm/nouveau/nvif/disp.c           |    1 +
+ .../gpu/drm/nouveau/nvkm/engine/device/base.c |   10 +
+ .../gpu/drm/nouveau/nvkm/engine/disp/Kbuild   |    3 +
+ .../gpu/drm/nouveau/nvkm/engine/disp/ad102.c  |   52 +
+ .../gpu/drm/nouveau/nvkm/engine/disp/base.c   |    3 +-
+ .../gpu/drm/nouveau/nvkm/engine/disp/chan.h   |    4 +
+ .../gpu/drm/nouveau/nvkm/engine/disp/ga102.c  |    2 +-
+ .../gpu/drm/nouveau/nvkm/engine/disp/gv100.c  |    4 +-
+ .../gpu/drm/nouveau/nvkm/engine/disp/ior.h    |    2 +
+ .../gpu/drm/nouveau/nvkm/engine/disp/outp.c   |    3 +-
+ .../gpu/drm/nouveau/nvkm/engine/disp/priv.h   |    3 +
+ .../gpu/drm/nouveau/nvkm/engine/disp/r535.c   | 1671 +++++++++++++++++
+ .../gpu/drm/nouveau/nvkm/engine/disp/tu102.c  |    2 +-
+ .../gpu/drm/nouveau/nvkm/engine/disp/uconn.c  |   31 +-
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    |  129 ++
+ 35 files changed, 3202 insertions(+), 8 deletions(-)
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/class/cl0005.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/class/cl2080_notification.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073common.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073dfp.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073dp.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073specific.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080event.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_allclasses.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_mem_desc_nvoc.h
+ create mode 100644 drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/os/nv_memory_type.h
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/ad102.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvif/cl0080.h b/drivers/gpu/drm/nouveau/include/nvif/cl0080.h
-index 8b5a240d57e4..8ccc082a4a63 100644
---- a/drivers/gpu/drm/nouveau/include/nvif/cl0080.h
-+++ b/drivers/gpu/drm/nouveau/include/nvif/cl0080.h
-@@ -35,6 +35,7 @@ struct nv_device_info_v0 {
- #define NV_DEVICE_INFO_V0_VOLTA                                            0x0b
- #define NV_DEVICE_INFO_V0_TURING                                           0x0c
- #define NV_DEVICE_INFO_V0_AMPERE                                           0x0d
-+#define NV_DEVICE_INFO_V0_ADA                                              0x0e
- 	__u8  family;
- 	__u8  pad06[2];
- 	__u64 ram_size;
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/device.h b/drivers/gpu/drm/nouveau/include/nvkm/core/device.h
-index f65b5009acf7..f057d348221e 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/core/device.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/core/device.h
-@@ -46,6 +46,7 @@ struct nvkm_device {
- 		GV100    = 0x140,
- 		TU100    = 0x160,
- 		GA100    = 0x170,
-+		AD100    = 0x190,
- 	} card_type;
- 	u32 chipset;
- 	u8  chiprev;
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/falcon.h b/drivers/gpu/drm/nouveau/include/nvkm/core/falcon.h
-index b857cf142c4a..529b8a8cce7b 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/core/falcon.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/core/falcon.h
-@@ -48,6 +48,7 @@ int nvkm_falcon_pio_rd(struct nvkm_falcon *, u8 port, enum nvkm_falcon_mem type,
- 		       const u8 *img, u32 img_base, int len);
- int nvkm_falcon_dma_wr(struct nvkm_falcon *, const u8 *img, u64 dma_addr, u32 dma_base,
- 		       enum nvkm_falcon_mem mem_type, u32 mem_base, int len, bool sec);
-+bool nvkm_falcon_riscv_active(struct nvkm_falcon *);
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/core.c b/drivers/gpu/drm/nouveau/dispnv50/core.c
+index abefc2343443..f045515696cb 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/core.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/core.c
+@@ -42,6 +42,7 @@ nv50_core_new(struct nouveau_drm *drm, struct nv50_core **pcore)
+ 		int version;
+ 		int (*new)(struct nouveau_drm *, s32, struct nv50_core **);
+ 	} cores[] = {
++		{ AD102_DISP_CORE_CHANNEL_DMA, 0, corec57d_new },
+ 		{ GA102_DISP_CORE_CHANNEL_DMA, 0, corec57d_new },
+ 		{ TU102_DISP_CORE_CHANNEL_DMA, 0, corec57d_new },
+ 		{ GV100_DISP_CORE_CHANNEL_DMA, 0, corec37d_new },
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+index 57b6864fb9d0..0f23c2bb814b 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+@@ -1592,6 +1592,146 @@ nv50_sor_atomic_disable(struct drm_encoder *encoder, struct drm_atomic_state *st
+ 	nv_encoder->crtc = NULL;
+ }
  
- int gm200_flcn_reset_wait_mem_scrubbing(struct nvkm_falcon *);
- int gm200_flcn_disable(struct nvkm_falcon *);
-@@ -61,10 +62,13 @@ void gm200_flcn_tracepc(struct nvkm_falcon *);
- int gp102_flcn_reset_eng(struct nvkm_falcon *);
- extern const struct nvkm_falcon_func_pio gp102_flcn_emem_pio;
- 
-+bool tu102_flcn_riscv_active(struct nvkm_falcon *);
++// common/inc/displayport/displayport.h
++#define DP_CONFIG_WATERMARK_ADJUST                   2
++#define DP_CONFIG_WATERMARK_LIMIT                   20
++#define DP_CONFIG_INCREASED_WATERMARK_ADJUST         8
++#define DP_CONFIG_INCREASED_WATERMARK_LIMIT         22
 +
- int ga102_flcn_select(struct nvkm_falcon *);
- int ga102_flcn_reset_prep(struct nvkm_falcon *);
- int ga102_flcn_reset_wait_mem_scrubbing(struct nvkm_falcon *);
- extern const struct nvkm_falcon_func_dma ga102_flcn_dma;
-+bool ga102_flcn_riscv_active(struct nvkm_falcon *);
- 
- void nvkm_falcon_v1_load_imem(struct nvkm_falcon *,
- 			      void *, u32, u32, u16, u8, bool);
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/engine/falcon.h b/drivers/gpu/drm/nouveau/include/nvkm/engine/falcon.h
-index b7bb8a29a729..607eac8474b0 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/engine/falcon.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/engine/falcon.h
-@@ -87,6 +87,8 @@ struct nvkm_falcon_func {
- 		u32 stride;
- 	} cmdq, msgq;
- 
-+	bool (*riscv_active)(struct nvkm_falcon *);
++static bool
++nv50_sor_dp_watermark_sst(struct nouveau_encoder *outp,
++			  struct nv50_head *head, struct nv50_head_atom *asyh)
++{
++	bool enhancedFraming = outp->dp.dpcd[DP_MAX_LANE_COUNT] & DP_ENHANCED_FRAME_CAP;
++	u64 minRate = outp->dp.link_bw * 1000;
++	unsigned tuSize = 64;
++	unsigned waterMark;
++	unsigned hBlankSym;
++	unsigned vBlankSym;
++	unsigned watermarkAdjust = DP_CONFIG_WATERMARK_ADJUST;
++	unsigned watermarkMinimum = DP_CONFIG_WATERMARK_LIMIT;
++	// depth is multiplied by 16 in case of DSC enable
++	s32 hblank_symbols;
++	// number of link clocks per line.
++	int vblank_symbols	  = 0;
++	bool bEnableDsc = false;
++	unsigned surfaceWidth = asyh->mode.h.blanks - asyh->mode.h.blanke;
++	unsigned rasterWidth = asyh->mode.h.active;
++	unsigned depth = asyh->or.bpc * 3;
++	unsigned DSC_FACTOR = bEnableDsc ? 16 : 1;
++	u64 pixelClockHz = asyh->mode.clock * 1000;
++	u64 PrecisionFactor = 100000, ratioF, watermarkF;
++	u32 numLanesPerLink = outp->dp.link_nr;
++	u32 numSymbolsPerLine;
++	u32 BlankingBits;
++	u32 surfaceWidthPerLink;
++	u32 PixelSteeringBits;
++	u64 NumBlankingLinkClocks;
++	u32 MinHBlank;
 +
- 	struct {
- 		u32 *data;
- 		u32  size;
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/bios.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/bios.h
-index b61cfb077533..b4b7841e3b13 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/bios.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/bios.h
-@@ -29,6 +29,7 @@ int nvbios_memcmp(struct nvkm_bios *, u32 addr, const char *, u32 len);
- u8  nvbios_rd08(struct nvkm_bios *, u32 addr);
- u16 nvbios_rd16(struct nvkm_bios *, u32 addr);
- u32 nvbios_rd32(struct nvkm_bios *, u32 addr);
-+void *nvbios_pointer(struct nvkm_bios *, u32 addr);
++	if (outp->outp.info.dp.increased_wm) {
++		watermarkAdjust = DP_CONFIG_INCREASED_WATERMARK_ADJUST;
++		watermarkMinimum = DP_CONFIG_INCREASED_WATERMARK_LIMIT;
++	}
++
++	if ((pixelClockHz * depth) >= (8 * minRate * outp->dp.link_nr * DSC_FACTOR))
++	{
++		return false;
++	}
++
++	//
++	// For DSC, if (pclk * bpp) < (1/64 * orclk * 8 * lanes) then some TU may end up with
++	// 0 active symbols. This may cause HW hang. Bug 200379426
++	//
++	if ((bEnableDsc) &&
++		((pixelClockHz * depth) < ((8 * minRate * outp->dp.link_nr * DSC_FACTOR) / 64)))
++	{
++		return false;
++	}
++
++	//
++	//  Perform the SST calculation.
++	//	For auto mode the watermark calculation does not need to track accumulated error the
++	//	formulas for manual mode will not work.  So below calculation was extracted from the DTB.
++	//
++	ratioF = ((u64)pixelClockHz * depth * PrecisionFactor) / DSC_FACTOR;
++
++	ratioF /= 8 * (u64) minRate * outp->dp.link_nr;
++
++	if (PrecisionFactor < ratioF) // Assert if we will end up with a negative number in below
++		return false;
++
++	watermarkF = ratioF * tuSize * (PrecisionFactor - ratioF)  / PrecisionFactor;
++	waterMark = (unsigned)(watermarkAdjust + ((2 * (depth * PrecisionFactor / (8 * numLanesPerLink * DSC_FACTOR)) + watermarkF) / PrecisionFactor));
++
++	//
++	//  Bounds check the watermark
++	//
++	numSymbolsPerLine = (surfaceWidth * depth) / (8 * outp->dp.link_nr * DSC_FACTOR);
++
++	if (WARN_ON(waterMark > 39 || waterMark > numSymbolsPerLine))
++		return false;
++
++	//
++	//  Clamp the low side
++	//
++	if (waterMark < watermarkMinimum)
++		waterMark = watermarkMinimum;
++
++	//Bits to send BS/BE/Extra symbols due to pixel padding
++	//Also accounts for enhanced framing.
++	BlankingBits = 3*8*numLanesPerLink + (enhancedFraming ? 3*8*numLanesPerLink : 0);
++
++	//VBID/MVID/MAUD sent 4 times all the time
++	BlankingBits += 3*8*4;
++
++	surfaceWidthPerLink = surfaceWidth;
++
++	//Extra bits sent due to pixel steering
++	PixelSteeringBits = (surfaceWidthPerLink % numLanesPerLink) ? (((numLanesPerLink - surfaceWidthPerLink % numLanesPerLink) * depth) / DSC_FACTOR) : 0;
++
++	BlankingBits += PixelSteeringBits;
++	NumBlankingLinkClocks = (u64)BlankingBits * PrecisionFactor / (8 * numLanesPerLink);
++	MinHBlank = (u32)(NumBlankingLinkClocks * pixelClockHz/ minRate / PrecisionFactor);
++	MinHBlank += 12;
++
++	if (WARN_ON(MinHBlank > rasterWidth - surfaceWidth))
++		return false;
++
++	// Bug 702290 - Active Width should be greater than 60
++	if (WARN_ON(surfaceWidth <= 60))
++		return false;
++
++
++	hblank_symbols = (s32)(((u64)(rasterWidth - surfaceWidth - MinHBlank) * minRate) / pixelClockHz);
++
++	//reduce HBlank Symbols to account for secondary data packet
++	hblank_symbols -= 1; //Stuffer latency to send BS
++	hblank_symbols -= 3; //SPKT latency to send data to stuffer
++
++	hblank_symbols -= numLanesPerLink == 1 ? 9  : numLanesPerLink == 2 ? 6 : 3;
++
++	hBlankSym = (hblank_symbols < 0) ? 0 : hblank_symbols;
++
++	// Refer to dev_disp.ref for more information.
++	// # symbols/vblank = ((SetRasterBlankEnd.X + SetRasterSize.Width - SetRasterBlankStart.X - 40) * link_clk / pclk) - Y - 1;
++	// where Y = (# lanes == 4) 12 : (# lanes == 2) ? 21 : 39
++	if (surfaceWidth < 40)
++	{
++		vblank_symbols = 0;
++	}
++	else
++	{
++		vblank_symbols = (s32)(((u64)(surfaceWidth - 40) * minRate) /  pixelClockHz) - 1;
++
++		vblank_symbols -= numLanesPerLink == 1 ? 39  : numLanesPerLink == 2 ? 21 : 12;
++	}
++
++	vBlankSym = (vblank_symbols < 0) ? 0 : vblank_symbols;
++
++	return nvif_outp_dp_sst(&outp->outp, head->base.index, waterMark, hBlankSym, vBlankSym);
++}
++
+ static void
+ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+ {
+@@ -1679,6 +1819,7 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
+ 		break;
+ 	case DCB_OUTPUT_DP:
+ 		nouveau_dp_train(nv_encoder, false, mode->clock, asyh->or.bpc);
++		nv50_sor_dp_watermark_sst(nv_encoder, head, asyh);
+ 		depth = nv50_dp_bpc_to_depth(asyh->or.bpc);
  
- int nvkm_bios_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_bios **);
+ 		if (nv_encoder->outp.or.link & 1)
+diff --git a/drivers/gpu/drm/nouveau/include/nvif/class.h b/drivers/gpu/drm/nouveau/include/nvif/class.h
+index ad1e5de84e80..fa94d69d3eb0 100644
+--- a/drivers/gpu/drm/nouveau/include/nvif/class.h
++++ b/drivers/gpu/drm/nouveau/include/nvif/class.h
+@@ -104,6 +104,7 @@
+ #define GV100_DISP                                    /* if0010.h */ 0x0000c370
+ #define TU102_DISP                                    /* if0010.h */ 0x0000c570
+ #define GA102_DISP                                    /* if0010.h */ 0x0000c670
++#define AD102_DISP                                    /* if0010.h */ 0x0000c770
+ 
+ #define GV100_DISP_CAPS                                              0x0000c373
+ 
+@@ -154,6 +155,7 @@
+ #define GV100_DISP_CORE_CHANNEL_DMA                   /* if0014.h */ 0x0000c37d
+ #define TU102_DISP_CORE_CHANNEL_DMA                   /* if0014.h */ 0x0000c57d
+ #define GA102_DISP_CORE_CHANNEL_DMA                   /* if0014.h */ 0x0000c67d
++#define AD102_DISP_CORE_CHANNEL_DMA                   /* if0014.h */ 0x0000c77d
+ 
+ #define NV50_DISP_OVERLAY_CHANNEL_DMA                 /* if0014.h */ 0x0000507e
+ #define G82_DISP_OVERLAY_CHANNEL_DMA                  /* if0014.h */ 0x0000827e
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/engine/disp.h b/drivers/gpu/drm/nouveau/include/nvkm/engine/disp.h
+index ad9aef2df48f..3e8db8280e2a 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/engine/disp.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/engine/disp.h
+@@ -5,11 +5,29 @@
+ #include <core/engine.h>
+ #include <core/object.h>
+ #include <core/event.h>
++#include <subdev/gsp.h>
+ 
+ struct nvkm_disp {
+ 	const struct nvkm_disp_func *func;
+ 	struct nvkm_engine engine;
+ 
++	struct {
++		struct nvkm_gsp_client client;
++		struct nvkm_gsp_device device;
++
++		struct nvkm_gsp_object objcom;
++		struct nvkm_gsp_object object;
++
++#define NVKM_DPYID_PLUG   BIT(0)
++#define NVKM_DPYID_UNPLUG BIT(1)
++#define NVKM_DPYID_IRQ    BIT(2)
++		struct nvkm_event event;
++		struct nvkm_gsp_event hpd;
++		struct nvkm_gsp_event irq;
++
++		u32 assigned_sors;
++	} rm;
++
+ 	struct list_head heads;
+ 	struct list_head iors;
+ 	struct list_head outps;
+@@ -69,4 +87,5 @@ int gp102_disp_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct
+ int gv100_disp_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_disp **);
+ int tu102_disp_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_disp **);
+ int ga102_disp_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_disp **);
++int ad102_disp_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_disp **);
  #endif
 diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-index 688270f62e09..41fd11822b30 100644
+index f5130f4f4a5a..e7e8b30ceb44 100644
 --- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
 +++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-@@ -3,18 +3,186 @@
- #define nvkm_gsp(p) container_of((p), struct nvkm_gsp, subdev)
- #include <core/subdev.h>
- #include <core/falcon.h>
-+#include <core/firmware.h>
-+
-+#define GSP_PAGE_SHIFT 12
-+#define GSP_PAGE_SIZE  BIT(GSP_PAGE_SHIFT)
-+
-+struct nvkm_gsp_mem {
-+	u32 size;
-+	void *data;
-+	dma_addr_t addr;
-+};
-+
-+struct nvkm_gsp_radix3 {
-+	struct nvkm_gsp_mem mem[3];
-+};
-+
-+int nvkm_gsp_sg(struct nvkm_device *, u64 size, struct sg_table *);
-+void nvkm_gsp_sg_free(struct nvkm_device *, struct sg_table *);
-+
-+typedef int (*nvkm_gsp_msg_ntfy_func)(void *priv, u32 fn, void *repv, u32 repc);
+@@ -23,6 +23,9 @@ void nvkm_gsp_sg_free(struct nvkm_device *, struct sg_table *);
  
+ typedef int (*nvkm_gsp_msg_ntfy_func)(void *priv, u32 fn, void *repv, u32 repc);
+ 
++struct nvkm_gsp_event;
++typedef void (*nvkm_gsp_event_func)(struct nvkm_gsp_event *, void *repv, u32 repc);
++
  struct nvkm_gsp {
  	const struct nvkm_gsp_func *func;
  	struct nvkm_subdev subdev;
+@@ -150,6 +153,8 @@ struct nvkm_gsp {
+ 			} object;
  
- 	struct nvkm_falcon falcon;
+ 			struct nvkm_gsp *gsp;
 +
-+	struct {
-+		struct {
-+			const struct firmware *load;
-+			const struct firmware *unload;
-+		} booter;
-+		const struct firmware *bl;
-+		const struct firmware *rm;
-+	} fws;
-+
-+	struct nvkm_firmware fw;
-+	struct nvkm_gsp_mem sig;
-+	struct nvkm_gsp_radix3 radix3;
-+
-+	struct {
-+		struct {
-+			struct {
-+				u64 addr;
-+				u64 size;
-+			} vga_workspace;
-+			u64 addr;
-+			u64 size;
-+		} bios;
-+		struct {
-+			struct {
-+				u64 addr;
-+				u64 size;
-+			} frts, boot, elf, heap;
-+			u64 addr;
-+			u64 size;
-+		} wpr2;
-+		struct {
-+			u64 addr;
-+			u64 size;
-+		} heap;
-+		u64 addr;
-+		u64 size;
-+	} fb;
-+
-+	struct {
-+		struct nvkm_falcon_fw load;
-+		struct nvkm_falcon_fw unload;
-+	} booter;
-+
-+	struct {
-+		struct nvkm_gsp_mem fw;
-+		u32 code_offset;
-+		u32 data_offset;
-+		u32 manifest_offset;
-+		u32 app_version;
-+	} boot;
-+
-+	struct nvkm_gsp_mem libos;
-+	struct nvkm_gsp_mem loginit;
-+	struct nvkm_gsp_mem logintr;
-+	struct nvkm_gsp_mem logrm;
-+	struct nvkm_gsp_mem rmargs;
-+
-+	struct nvkm_gsp_mem wpr_meta;
-+
-+	struct {
-+		struct sg_table sgt;
-+		struct nvkm_gsp_radix3 radix3;
-+		struct nvkm_gsp_mem meta;
-+	} sr;
-+
-+	struct {
-+		struct nvkm_gsp_mem mem;
-+
-+		struct {
-+			int   nr;
-+			u32 size;
-+			u64 *ptr;
-+		} ptes;
-+
-+		struct {
-+			u32  size;
-+			void *ptr;
-+		} cmdq, msgq;
-+	} shm;
-+
-+	struct nvkm_gsp_cmdq {
-+		struct mutex mutex;
-+		u32 cnt;
-+		u32 seq;
-+		u32 *wptr;
-+		u32 *rptr;
-+	} cmdq;
-+
-+	struct nvkm_gsp_msgq {
-+		struct mutex mutex;
-+		u32 cnt;
-+		u32 *wptr;
-+		u32 *rptr;
-+		struct nvkm_gsp_msgq_ntfy {
-+			u32 fn;
-+			nvkm_gsp_msg_ntfy_func func;
-+			void *priv;
-+		} ntfy[16];
-+		int ntfy_nr;
-+	} msgq;
-+
-+	bool running;
-+
-+	const struct nvkm_gsp_rm {
-+		void *(*rpc_get)(struct nvkm_gsp *, u32 fn, u32 argc);
-+		void *(*rpc_push)(struct nvkm_gsp *, void *argv, bool wait, u32 repc);
-+		void (*rpc_done)(struct nvkm_gsp *gsp, void *repv);
-+	} *rm;
- };
++			struct list_head events;
+ 		} client;
  
- static inline bool
- nvkm_gsp_rm(struct nvkm_gsp *gsp)
- {
--	return false;
-+	return gsp && (gsp->fws.rm || gsp->fw.img);
-+}
+ 		struct nvkm_gsp_device {
+@@ -191,6 +196,10 @@ struct nvkm_gsp {
+ 
+ 		int (*device_ctor)(struct nvkm_gsp_client *, struct nvkm_gsp_device *);
+ 		void (*device_dtor)(struct nvkm_gsp_device *);
 +
-+static inline void *
-+nvkm_gsp_rpc_get(struct nvkm_gsp *gsp, u32 fn, u32 argc)
-+{
-+	return gsp->rm->rpc_get(gsp, fn, argc);
-+}
++		int (*event_ctor)(struct nvkm_gsp_device *, u32 handle, u32 id,
++				  nvkm_gsp_event_func, struct nvkm_gsp_event *);
++		void (*event_dtor)(struct nvkm_gsp_event *);
+ 	} *rm;
+ 
+ 	struct {
+@@ -399,6 +408,32 @@ nvkm_gsp_client_device_ctor(struct nvkm_gsp *gsp,
+ 	return ret;
+ }
+ 
++struct nvkm_gsp_event {
++	struct nvkm_gsp_device *device;
++	u32 id;
++	nvkm_gsp_event_func func;
 +
-+static inline void *
-+nvkm_gsp_rpc_push(struct nvkm_gsp *gsp, void *argv, bool wait, u32 repc)
-+{
-+	return gsp->rm->rpc_push(gsp, argv, wait, repc);
-+}
++	struct nvkm_gsp_object object;
 +
-+static inline void *
-+nvkm_gsp_rpc_rd(struct nvkm_gsp *gsp, u32 fn, u32 argc)
-+{
-+	void *argv = nvkm_gsp_rpc_get(gsp, fn, argc);
-+
-+	if (IS_ERR_OR_NULL(argv))
-+		return argv;
-+
-+	return nvkm_gsp_rpc_push(gsp, argv, true, argc);
-+}
++	struct list_head head;
++};
 +
 +static inline int
-+nvkm_gsp_rpc_wr(struct nvkm_gsp *gsp, void *argv, bool wait)
++nvkm_gsp_device_event_ctor(struct nvkm_gsp_device *device, u32 handle, u32 id,
++			   nvkm_gsp_event_func func, struct nvkm_gsp_event *event)
 +{
-+	void *repv = nvkm_gsp_rpc_push(gsp, argv, wait, 0);
-+
-+	if (IS_ERR(repv))
-+		return PTR_ERR(repv);
-+
-+	return 0;
++	return device->object.client->gsp->rm->event_ctor(device, handle, id, func, event);
 +}
 +
 +static inline void
-+nvkm_gsp_rpc_done(struct nvkm_gsp *gsp, void *repv)
++nvkm_gsp_event_dtor(struct nvkm_gsp_event *event)
 +{
-+	gsp->rm->rpc_done(gsp, repv);
- }
++	struct nvkm_gsp_device *device = event->device;
++
++	if (device)
++		device->object.client->gsp->rm->event_dtor(event);
++}
++
+ int nvkm_gsp_intr_stall(struct nvkm_gsp *, enum nvkm_subdev_type, int);
+ int nvkm_gsp_intr_nonstall(struct nvkm_gsp *, enum nvkm_subdev_type, int);
  
- int gv100_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
-@@ -22,4 +190,5 @@ int tu102_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_
- int tu116_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
- int ga100_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
- int ga102_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
-+int ad102_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
- #endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073system.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073system.h
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/class/cl0005.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/class/cl0005.h
 new file mode 100644
-index 000000000000..c1f1c8881a42
+index 000000000000..987bae11ad91
 --- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073system.h
-@@ -0,0 +1,31 @@
-+#ifndef __src_common_sdk_nvidia_inc_ctrl_ctrl0073_ctrl0073system_h__
-+#define __src_common_sdk_nvidia_inc_ctrl_ctrl0073_ctrl0073system_h__
-+
-+/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
-+
-+/*
-+ * SPDX-FileCopyrightText: Copyright (c) 2005-2021 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-+ * SPDX-License-Identifier: MIT
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ */
-+
-+#define NV0073_CTRL_SYSTEM_ACPI_ID_MAP_MAX_DISPLAYS             (16U)
-+
-+#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080gpu.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080gpu.h
-new file mode 100644
-index 000000000000..a9a287469305
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080gpu.h
-@@ -0,0 +1,33 @@
-+#ifndef __src_common_sdk_nvidia_inc_ctrl_ctrl2080_ctrl2080gpu_h__
-+#define __src_common_sdk_nvidia_inc_ctrl_ctrl2080_ctrl2080gpu_h__
-+
-+/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
-+
-+/*
-+ * SPDX-FileCopyrightText: Copyright (c) 2006-2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-+ * SPDX-License-Identifier: MIT
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ */
-+
-+#define NV2080_CTRL_GPU_SET_POWER_STATE_GPU_LEVEL_0            (0x00000000U)
-+
-+#define NV2080_CTRL_GPU_SET_POWER_STATE_GPU_LEVEL_3            (0x00000003U)
-+
-+#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/shared/msgq/inc/msgq/msgq_priv.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/shared/msgq/inc/msgq/msgq_priv.h
-new file mode 100644
-index 000000000000..26b096d0e225
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/shared/msgq/inc/msgq/msgq_priv.h
-@@ -0,0 +1,46 @@
-+#ifndef __src_common_shared_msgq_inc_msgq_msgq_priv_h__
-+#define __src_common_shared_msgq_inc_msgq_msgq_priv_h__
-+
-+/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
-+
-+/*
-+ * SPDX-FileCopyrightText: Copyright (c) 2018-2019 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-+ * SPDX-License-Identifier: MIT
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ */
-+
-+typedef struct
-+{
-+    NvU32 version;   // queue version
-+    NvU32 size;      // bytes, page aligned
-+    NvU32 msgSize;   // entry size, bytes, must be power-of-2, 16 is minimum
-+    NvU32 msgCount;  // number of entries in queue
-+    NvU32 writePtr;  // message id of next slot
-+    NvU32 flags;     // if set it means "i want to swap RX"
-+    NvU32 rxHdrOff;  // Offset of msgqRxHeader from start of backing store.
-+    NvU32 entryOff;  // Offset of entries from start of backing store.
-+} msgqTxHeader;
-+
-+typedef struct
-+{
-+    NvU32 readPtr; // message id of last message read
-+} msgqRxHeader;
-+
-+#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/uproc/os/common/include/libos_init_args.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/uproc/os/common/include/libos_init_args.h
-new file mode 100644
-index 000000000000..0aa4b26fda09
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/uproc/os/common/include/libos_init_args.h
-@@ -0,0 +1,52 @@
-+#ifndef __src_common_uproc_os_common_include_libos_init_args_h__
-+#define __src_common_uproc_os_common_include_libos_init_args_h__
-+
-+/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
-+
-+/*
-+ * SPDX-FileCopyrightText: Copyright (c) 2018-2022 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-+ * SPDX-License-Identifier: MIT
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ */
-+
-+typedef NvU64 LibosAddress;
-+
-+typedef enum {
-+    LIBOS_MEMORY_REGION_NONE,
-+    LIBOS_MEMORY_REGION_CONTIGUOUS,
-+    LIBOS_MEMORY_REGION_RADIX3
-+} LibosMemoryRegionKind;
-+
-+typedef enum {
-+    LIBOS_MEMORY_REGION_LOC_NONE,
-+    LIBOS_MEMORY_REGION_LOC_SYSMEM,
-+    LIBOS_MEMORY_REGION_LOC_FB
-+} LibosMemoryRegionLoc;
-+
-+typedef struct
-+{
-+    LibosAddress          id8;  // Id tag.
-+    LibosAddress          pa;   // Physical address.
-+    LibosAddress          size; // Size of memory area.
-+    NvU8                  kind; // See LibosMemoryRegionKind above.
-+    NvU8                  loc;  // See LibosMemoryRegionLoc above.
-+} LibosMemoryRegionInitArgument;
-+
-+#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/gsp/gsp_fw_sr_meta.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/gsp/gsp_fw_sr_meta.h
-new file mode 100644
-index 000000000000..e3754a3bfe39
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/gsp/gsp_fw_sr_meta.h
-@@ -0,0 +1,79 @@
-+#ifndef __src_nvidia_arch_nvalloc_common_inc_gsp_gsp_fw_sr_meta_h__
-+#define __src_nvidia_arch_nvalloc_common_inc_gsp_gsp_fw_sr_meta_h__
-+
-+/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
-+
-+/*
-+ * SPDX-FileCopyrightText: Copyright (c) 2022-2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-+ * SPDX-License-Identifier: MIT
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ */
-+
-+#define GSP_FW_SR_META_MAGIC     0x8a3bb9e6c6c39d93ULL
-+#define GSP_FW_SR_META_REVISION  2
-+
-+typedef struct
-+{
-+    //
-+    // Magic
-+    // Use for verification by Booter
-+    //
-+    NvU64 magic;  // = GSP_FW_SR_META_MAGIC;
-+
-+    //
-+    // Revision number
-+    // Bumped up when we change this interface so it is not backward compatible.
-+    // Bumped up when we revoke GSP-RM ucode
-+    //
-+    NvU64 revision;  // = GSP_FW_SR_META_MAGIC_REVISION;
-+
-+    //
-+    // ---- Members regarding data in SYSMEM ----------------------------
-+    // Consumed by Booter for DMA
-+    //
-+    NvU64 sysmemAddrOfSuspendResumeData;
-+    NvU64 sizeOfSuspendResumeData;
-+
-+    // ---- Members for crypto ops across S/R ---------------------------
-+
-+    //
-+    // HMAC over the entire GspFwSRMeta structure (including padding)
-+    // with the hmac field itself zeroed.
-+    //
-+    NvU8 hmac[32];
-+
-+    // Hash over GspFwWprMeta structure
-+    NvU8 wprMetaHash[32];
-+
-+    // Hash over GspFwHeapFreeList structure. All zeros signifies no free list.
-+    NvU8 heapFreeListHash[32];
-+
-+    // Hash over data in WPR2 (skipping over free heap chunks; see Booter for details)
-+    NvU8 dataHash[32];
-+
-+    //
-+    // Pad structure to exactly 256 bytes (1 DMA chunk).
-+    // Padding initialized to zero.
-+    //
-+    NvU32 padding[24];
-+
-+} GspFwSRMeta;
-+
-+#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/gsp/gsp_fw_wpr_meta.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/gsp/gsp_fw_wpr_meta.h
-new file mode 100644
-index 000000000000..65efe8985a72
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/gsp/gsp_fw_wpr_meta.h
-@@ -0,0 +1,149 @@
-+#ifndef __src_nvidia_arch_nvalloc_common_inc_gsp_gsp_fw_wpr_meta_h__
-+#define __src_nvidia_arch_nvalloc_common_inc_gsp_gsp_fw_wpr_meta_h__
-+
-+/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
-+
-+/*
-+ * SPDX-FileCopyrightText: Copyright (c) 2021-2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-+ * SPDX-License-Identifier: MIT
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ */
-+
-+typedef struct
-+{
-+    // Magic
-+    // BL to use for verification (i.e. Booter locked it in WPR2)
-+    NvU64 magic; // = 0xdc3aae21371a60b3;
-+
-+    // Revision number of Booter-BL-Sequencer handoff interface
-+    // Bumped up when we change this interface so it is not backward compatible.
-+    // Bumped up when we revoke GSP-RM ucode
-+    NvU64 revision; // = 1;
-+
-+    // ---- Members regarding data in SYSMEM ----------------------------
-+    // Consumed by Booter for DMA
-+
-+    NvU64 sysmemAddrOfRadix3Elf;
-+    NvU64 sizeOfRadix3Elf;
-+
-+    NvU64 sysmemAddrOfBootloader;
-+    NvU64 sizeOfBootloader;
-+
-+    // Offsets inside bootloader image needed by Booter
-+    NvU64 bootloaderCodeOffset;
-+    NvU64 bootloaderDataOffset;
-+    NvU64 bootloaderManifestOffset;
-+
-+    union
-+    {
-+        // Used only at initial boot
-+        struct
-+        {
-+            NvU64 sysmemAddrOfSignature;
-+            NvU64 sizeOfSignature;
-+        };
-+
-+        //
-+        // Used at suspend/resume to read GspFwHeapFreeList
-+        // Offset relative to GspFwWprMeta FBMEM PA (gspFwWprStart)
-+        //
-+        struct
-+        {
-+            NvU32 gspFwHeapFreeListWprOffset;
-+            NvU32 unused0;
-+            NvU64 unused1;
-+        };
-+    };
-+
-+    // ---- Members describing FB layout --------------------------------
-+    NvU64 gspFwRsvdStart;
-+
-+    NvU64 nonWprHeapOffset;
-+    NvU64 nonWprHeapSize;
-+
-+    NvU64 gspFwWprStart;
-+
-+    // GSP-RM to use to setup heap.
-+    NvU64 gspFwHeapOffset;
-+    NvU64 gspFwHeapSize;
-+
-+    // BL to use to find ELF for jump
-+    NvU64 gspFwOffset;
-+    // Size is sizeOfRadix3Elf above.
-+
-+    NvU64 bootBinOffset;
-+    // Size is sizeOfBootloader above.
-+
-+    NvU64 frtsOffset;
-+    NvU64 frtsSize;
-+
-+    NvU64 gspFwWprEnd;
-+
-+    // GSP-RM to use for fbRegionInfo?
-+    NvU64 fbSize;
-+
-+    // ---- Other members -----------------------------------------------
-+
-+    // GSP-RM to use for fbRegionInfo?
-+    NvU64 vgaWorkspaceOffset;
-+    NvU64 vgaWorkspaceSize;
-+
-+    // Boot count.  Used to determine whether to load the firmware image.
-+    NvU64 bootCount;
-+
-+    // TODO: the partitionRpc* fields below do not really belong in this
-+    //       structure. The values are patched in by the partition bootstrapper
-+    //       when GSP-RM is booted in a partition, and this structure was a
-+    //       convenient place for the bootstrapper to access them. These should
-+    //       be moved to a different comm. mechanism between the bootstrapper
-+    //       and the GSP-RM tasks.
-+
-+    // Shared partition RPC memory (physical address)
-+    NvU64 partitionRpcAddr;
-+
-+    // Offsets relative to partitionRpcAddr
-+    NvU16 partitionRpcRequestOffset;
-+    NvU16 partitionRpcReplyOffset;
-+
-+    // Code section and dataSection offset and size.
-+    NvU32 elfCodeOffset;
-+    NvU32 elfDataOffset;
-+    NvU32 elfCodeSize;
-+    NvU32 elfDataSize;
-+
-+    // Used during GSP-RM resume to check for revocation
-+    NvU32 lsUcodeVersion;
-+
-+    // Number of VF partitions allocating sub-heaps from the WPR heap
-+    // Used during boot to ensure the heap is adequately sized
-+    NvU8 gspFwHeapVfPartitionCount;
-+
-+    // Pad structure to exactly 256 bytes.  Can replace padding with additional
-+    // fields without incrementing revision.  Padding initialized to 0.
-+    NvU8 padding[7];
-+
-+    // BL to use for verification (i.e. Booter says OK to boot)
-+    NvU64 verified;  // 0x0 -> unverified, 0xa0a0a0a0a0a0a0a0 -> verified
-+} GspFwWprMeta;
-+
-+#define GSP_FW_WPR_META_REVISION  1
-+#define GSP_FW_WPR_META_MAGIC     0xdc3aae21371a60b3ULL
-+
-+#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/rmRiscvUcode.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/rmRiscvUcode.h
-new file mode 100644
-index 000000000000..da18e7eab940
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/rmRiscvUcode.h
-@@ -0,0 +1,82 @@
-+#ifndef __src_nvidia_arch_nvalloc_common_inc_rmRiscvUcode_h__
-+#define __src_nvidia_arch_nvalloc_common_inc_rmRiscvUcode_h__
-+
-+/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
-+
-+/*
-+ * SPDX-FileCopyrightText: Copyright (c) 2018-2019 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-+ * SPDX-License-Identifier: MIT
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ */
-+
-+typedef struct {
-+    //
-+    // Version 1
-+    // Version 2
-+    // Version 3 = for Partition boot
-+    // Version 4 = for eb riscv boot
-+    // Version 5 = Support signing entire RISC-V image as "code" in code section for hopper and later.
-+    //
-+    NvU32  version;                         // structure version
-+    NvU32  bootloaderOffset;
-+    NvU32  bootloaderSize;
-+    NvU32  bootloaderParamOffset;
-+    NvU32  bootloaderParamSize;
-+    NvU32  riscvElfOffset;
-+    NvU32  riscvElfSize;
-+    NvU32  appVersion;                      // Changelist number associated with the image
-+    //
-+    // Manifest contains information about Monitor and it is
-+    // input to BR
-+    //
-+    NvU32  manifestOffset;
-+    NvU32  manifestSize;
-+    //
-+    // Monitor Data offset within RISCV image and size
-+    //
-+    NvU32  monitorDataOffset;
-+    NvU32  monitorDataSize;
-+    //
-+    // Monitor Code offset withtin RISCV image and size
-+    //
-+    NvU32  monitorCodeOffset;
-+    NvU32  monitorCodeSize;
-+    NvU32  bIsMonitorEnabled;
-+    //
-+    // Swbrom Code offset within RISCV image and size
-+    //
-+    NvU32  swbromCodeOffset;
-+    NvU32  swbromCodeSize;
-+    //
-+    // Swbrom Data offset within RISCV image and size
-+    //
-+    NvU32  swbromDataOffset;
-+    NvU32  swbromDataSize;
-+    //
-+    // Total size of FB carveout (image and reserved space).  
-+    //
-+    NvU32  fbReservedSize;
-+    //
-+    // Indicates whether the entire RISC-V image is signed as "code" in code section.
-+    //
-+    NvU32  bSignedAsCode;
-+} RM_RISCV_UCODE_DESC;
-+
-+#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/rmgspseq.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/rmgspseq.h
-new file mode 100644
-index 000000000000..1048205a0e46
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/rmgspseq.h
-@@ -0,0 +1,100 @@
-+#ifndef __src_nvidia_arch_nvalloc_common_inc_rmgspseq_h__
-+#define __src_nvidia_arch_nvalloc_common_inc_rmgspseq_h__
-+
-+/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
-+
-+/*
-+ * SPDX-FileCopyrightText: Copyright (c) 2019-2020 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-+ * SPDX-License-Identifier: MIT
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ */
-+
-+typedef enum GSP_SEQ_BUF_OPCODE
-+{
-+    GSP_SEQ_BUF_OPCODE_REG_WRITE = 0,
-+    GSP_SEQ_BUF_OPCODE_REG_MODIFY,
-+    GSP_SEQ_BUF_OPCODE_REG_POLL,
-+    GSP_SEQ_BUF_OPCODE_DELAY_US,
-+    GSP_SEQ_BUF_OPCODE_REG_STORE,
-+    GSP_SEQ_BUF_OPCODE_CORE_RESET,
-+    GSP_SEQ_BUF_OPCODE_CORE_START,
-+    GSP_SEQ_BUF_OPCODE_CORE_WAIT_FOR_HALT,
-+    GSP_SEQ_BUF_OPCODE_CORE_RESUME,
-+} GSP_SEQ_BUF_OPCODE;
-+
-+#define GSP_SEQUENCER_PAYLOAD_SIZE_DWORDS(opcode)                       \
-+    ((opcode == GSP_SEQ_BUF_OPCODE_REG_WRITE)  ? (sizeof(GSP_SEQ_BUF_PAYLOAD_REG_WRITE)  / sizeof(NvU32)) : \
-+     (opcode == GSP_SEQ_BUF_OPCODE_REG_MODIFY) ? (sizeof(GSP_SEQ_BUF_PAYLOAD_REG_MODIFY) / sizeof(NvU32)) : \
-+     (opcode == GSP_SEQ_BUF_OPCODE_REG_POLL)   ? (sizeof(GSP_SEQ_BUF_PAYLOAD_REG_POLL)   / sizeof(NvU32)) : \
-+     (opcode == GSP_SEQ_BUF_OPCODE_DELAY_US)   ? (sizeof(GSP_SEQ_BUF_PAYLOAD_DELAY_US)   / sizeof(NvU32)) : \
-+     (opcode == GSP_SEQ_BUF_OPCODE_REG_STORE)  ? (sizeof(GSP_SEQ_BUF_PAYLOAD_REG_STORE)  / sizeof(NvU32)) : \
-+    /* GSP_SEQ_BUF_OPCODE_CORE_RESET */                                 \
-+    /* GSP_SEQ_BUF_OPCODE_CORE_START */                                 \
-+    /* GSP_SEQ_BUF_OPCODE_CORE_WAIT_FOR_HALT */                         \
-+    /* GSP_SEQ_BUF_OPCODE_CORE_RESUME */                                \
-+    0)
-+
-+typedef struct
-+{
-+    NvU32 addr;
-+    NvU32 val;
-+} GSP_SEQ_BUF_PAYLOAD_REG_WRITE;
-+
-+typedef struct
-+{
-+    NvU32 addr;
-+    NvU32 mask;
-+    NvU32 val;
-+} GSP_SEQ_BUF_PAYLOAD_REG_MODIFY;
-+
-+typedef struct
-+{
-+    NvU32 addr;
-+    NvU32 mask;
-+    NvU32 val;
-+    NvU32 timeout;
-+    NvU32 error;
-+} GSP_SEQ_BUF_PAYLOAD_REG_POLL;
-+
-+typedef struct
-+{
-+    NvU32 val;
-+} GSP_SEQ_BUF_PAYLOAD_DELAY_US;
-+
-+typedef struct
-+{
-+    NvU32 addr;
-+    NvU32 index;
-+} GSP_SEQ_BUF_PAYLOAD_REG_STORE;
-+
-+typedef struct GSP_SEQUENCER_BUFFER_CMD
-+{
-+    GSP_SEQ_BUF_OPCODE opCode;
-+    union
-+    {
-+        GSP_SEQ_BUF_PAYLOAD_REG_WRITE regWrite;
-+        GSP_SEQ_BUF_PAYLOAD_REG_MODIFY regModify;
-+        GSP_SEQ_BUF_PAYLOAD_REG_POLL regPoll;
-+        GSP_SEQ_BUF_PAYLOAD_DELAY_US delayUs;
-+        GSP_SEQ_BUF_PAYLOAD_REG_STORE regStore;
-+    } payload;
-+} GSP_SEQUENCER_BUFFER_CMD;
-+
-+#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_chipset_nvoc.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_chipset_nvoc.h
-new file mode 100644
-index 000000000000..94e79e14cba7
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_chipset_nvoc.h
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/class/cl0005.h
 @@ -0,0 +1,38 @@
-+#ifndef __src_nvidia_generated_g_chipset_nvoc_h__
-+#define __src_nvidia_generated_g_chipset_nvoc_h__
++#ifndef __src_common_sdk_nvidia_inc_class_cl0005_h__
++#define __src_common_sdk_nvidia_inc_class_cl0005_h__
 +
 +/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
 +
 +/*
-+ * SPDX-FileCopyrightText: Copyright (c) 1993-2022 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
++ * SPDX-FileCopyrightText: Copyright (c) 2001-2022 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 + * SPDX-License-Identifier: MIT
 + *
 + * Permission is hereby granted, free of charge, to any person obtaining a
@@ -1079,133 +464,24 @@ index 000000000000..94e79e14cba7
 + * DEALINGS IN THE SOFTWARE.
 + */
 +
-+typedef struct
-+{
-+    NvU16               deviceID;           // deviceID
-+    NvU16               vendorID;           // vendorID
-+    NvU16               subdeviceID;        // subsystem deviceID
-+    NvU16               subvendorID;        // subsystem vendorID
-+    NvU8                revisionID;         // revision ID
-+} BUSINFO;
++typedef struct NV0005_ALLOC_PARAMETERS {
++    NvHandle hParentClient;
++    NvHandle hSrcResource;
++
++    NvV32    hClass;
++    NvV32    notifyIndex;
++    NV_DECLARE_ALIGNED(NvP64 data, 8);
++} NV0005_ALLOC_PARAMETERS;
 +
 +#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_os_nvoc.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_os_nvoc.h
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/class/cl2080_notification.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/class/cl2080_notification.h
 new file mode 100644
-index 000000000000..639adbd99545
+index 000000000000..39652d3b5fa8
 --- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_os_nvoc.h
-@@ -0,0 +1,44 @@
-+#ifndef __src_nvidia_generated_g_os_nvoc_h__
-+#define __src_nvidia_generated_g_os_nvoc_h__
-+
-+/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
-+
-+/*
-+ * SPDX-FileCopyrightText: Copyright (c) 1993-2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-+ * SPDX-License-Identifier: MIT
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ */
-+
-+typedef struct PACKED_REGISTRY_ENTRY
-+{
-+    NvU32                   nameOffset;
-+    NvU8                    type;
-+    NvU32                   data;
-+    NvU32                   length;
-+} PACKED_REGISTRY_ENTRY;
-+
-+typedef struct PACKED_REGISTRY_TABLE
-+{
-+    NvU32                   size;
-+    NvU32                   numEntries;
-+    PACKED_REGISTRY_ENTRY   entries[0];
-+} PACKED_REGISTRY_TABLE;
-+
-+#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_rpc-structures.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_rpc-structures.h
-new file mode 100644
-index 000000000000..ac59ffa4330b
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_rpc-structures.h
-@@ -0,0 +1,52 @@
-+#ifndef __src_nvidia_generated_g_rpc_structures_h__
-+#define __src_nvidia_generated_g_rpc_structures_h__
-+
-+/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
-+
-+/*
-+ * SPDX-FileCopyrightText: Copyright (c) 2008-2022 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-+ * SPDX-License-Identifier: MIT
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ */
-+
-+typedef struct rpc_unloading_guest_driver_v1F_07
-+{
-+    NvBool     bInPMTransition;
-+    NvBool     bGc6Entering;
-+    NvU32      newLevel;
-+} rpc_unloading_guest_driver_v1F_07;
-+
-+typedef struct rpc_run_cpu_sequencer_v17_00
-+{
-+    NvU32      bufferSizeDWord;
-+    NvU32      cmdIndex;
-+    NvU32      regSaveArea[8];
-+    NvU32      commandBuffer[];
-+} rpc_run_cpu_sequencer_v17_00;
-+
-+typedef struct rpc_os_error_log_v17_00
-+{
-+    NvU32      exceptType;
-+    NvU32      runlistId;
-+    NvU32      chid;
-+    char       errString[0x100];
-+} rpc_os_error_log_v17_00;
-+
-+#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gpu_acpi_data.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gpu_acpi_data.h
-new file mode 100644
-index 000000000000..11f822f875d5
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gpu_acpi_data.h
-@@ -0,0 +1,74 @@
-+#ifndef __src_nvidia_inc_kernel_gpu_gpu_acpi_data_h__
-+#define __src_nvidia_inc_kernel_gpu_gpu_acpi_data_h__
-+#include <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073system.h>
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/class/cl2080_notification.h
+@@ -0,0 +1,42 @@
++#ifndef __src_common_sdk_nvidia_inc_class_cl2080_notification_h__
++#define __src_common_sdk_nvidia_inc_class_cl2080_notification_h__
 +
 +/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
 +
@@ -1232,64 +508,33 @@ index 000000000000..11f822f875d5
 + * DEALINGS IN THE SOFTWARE.
 + */
 +
-+typedef struct DOD_METHOD_DATA
-+{
-+    NV_STATUS status;
-+    NvU32     acpiIdListLen;
-+    NvU32     acpiIdList[NV0073_CTRL_SYSTEM_ACPI_ID_MAP_MAX_DISPLAYS];
-+} DOD_METHOD_DATA;
++#define NV2080_NOTIFIERS_HOTPLUG                                   (1)
 +
-+typedef struct JT_METHOD_DATA
-+{
-+    NV_STATUS status;
-+    NvU32     jtCaps;
-+    NvU16     jtRevId;
-+    NvBool    bSBIOSCaps;
-+} JT_METHOD_DATA;
++#define NV2080_NOTIFIERS_DP_IRQ                                    (7)
 +
-+typedef struct MUX_METHOD_DATA_ELEMENT
-+{
-+    NvU32       acpiId;
-+    NvU32       mode;
-+    NV_STATUS   status;
-+} MUX_METHOD_DATA_ELEMENT;
++typedef struct {
++    NvU32 plugDisplayMask;
++    NvU32 unplugDisplayMask;
++} Nv2080HotplugNotification;
 +
-+typedef struct MUX_METHOD_DATA
-+{
-+    NvU32                       tableLen;
-+    MUX_METHOD_DATA_ELEMENT     acpiIdMuxModeTable[NV0073_CTRL_SYSTEM_ACPI_ID_MAP_MAX_DISPLAYS];
-+    MUX_METHOD_DATA_ELEMENT     acpiIdMuxPartTable[NV0073_CTRL_SYSTEM_ACPI_ID_MAP_MAX_DISPLAYS];
-+} MUX_METHOD_DATA;
-+
-+typedef struct CAPS_METHOD_DATA
-+{
-+    NV_STATUS status;
-+    NvU32     optimusCaps;
-+} CAPS_METHOD_DATA;
-+
-+typedef struct ACPI_METHOD_DATA
-+{
-+    NvBool                                               bValid;
-+    DOD_METHOD_DATA                                      dodMethodData;
-+    JT_METHOD_DATA                                       jtMethodData;
-+    MUX_METHOD_DATA                                      muxMethodData;
-+    CAPS_METHOD_DATA                                     capsMethodData;
-+} ACPI_METHOD_DATA;
++typedef struct Nv2080DpIrqNotificationRec {
++    NvU32 displayId;
++} Nv2080DpIrqNotification;
 +
 +#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_fw_heap.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_fw_heap.h
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073common.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073common.h
 new file mode 100644
-index 000000000000..1169ff62160f
+index 000000000000..9f2b8557c79c
 --- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_fw_heap.h
-@@ -0,0 +1,33 @@
-+#ifndef __src_nvidia_inc_kernel_gpu_gsp_gsp_fw_heap_h__
-+#define __src_nvidia_inc_kernel_gpu_gsp_gsp_fw_heap_h__
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073common.h
+@@ -0,0 +1,39 @@
++#ifndef __src_common_sdk_nvidia_inc_ctrl_ctrl0073_ctrl0073common_h__
++#define __src_common_sdk_nvidia_inc_ctrl_ctrl0073_ctrl0073common_h__
 +
 +/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
 +
 +/*
-+ * SPDX-FileCopyrightText: Copyright (c) 2022-2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
++ * SPDX-FileCopyrightText: Copyright (c) 2022 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 + * SPDX-License-Identifier: MIT
 + *
 + * Permission is hereby granted, free of charge, to any person obtaining a
@@ -1311,24 +556,30 @@ index 000000000000..1169ff62160f
 + * DEALINGS IN THE SOFTWARE.
 + */
 +
-+#define GSP_FW_HEAP_PARAM_SIZE_PER_GB_FB                  (96 << 10)   // All architectures
-+
-+#define GSP_FW_HEAP_PARAM_CLIENT_ALLOC_SIZE      ((48 << 10) * 2048)   // Support 2048 channels
++typedef struct NV0073_CTRL_CMD_DSC_CAP_PARAMS {
++    NvBool bDscSupported;
++    NvU32  encoderColorFormatMask;
++    NvU32  lineBufferSizeKB;
++    NvU32  rateBufferSizeKB;
++    NvU32  bitsPerPixelPrecision;
++    NvU32  maxNumHztSlices;
++    NvU32  lineBufferBitDepth;
++} NV0073_CTRL_CMD_DSC_CAP_PARAMS;
 +
 +#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_init_args.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_init_args.h
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073dfp.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073dfp.h
 new file mode 100644
-index 000000000000..cacd46f3208c
+index 000000000000..193f2cbc302b
 --- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_init_args.h
-@@ -0,0 +1,57 @@
-+#ifndef __src_nvidia_inc_kernel_gpu_gsp_gsp_init_args_h__
-+#define __src_nvidia_inc_kernel_gpu_gsp_gsp_init_args_h__
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073dfp.h
+@@ -0,0 +1,166 @@
++#ifndef __src_common_sdk_nvidia_inc_ctrl_ctrl0073_ctrl0073dfp_h__
++#define __src_common_sdk_nvidia_inc_ctrl_ctrl0073_ctrl0073dfp_h__
 +
 +/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
 +
 +/*
-+ * SPDX-FileCopyrightText: Copyright (c) 2020-2022 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
++ * SPDX-FileCopyrightText: Copyright (c) 2005-2022 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 + * SPDX-License-Identifier: MIT
 + *
 + * Permission is hereby granted, free of charge, to any person obtaining a
@@ -1350,50 +601,909 @@ index 000000000000..cacd46f3208c
 + * DEALINGS IN THE SOFTWARE.
 + */
 +
-+typedef struct {
-+    RmPhysAddr sharedMemPhysAddr;
-+    NvU32 pageTableEntryCount;
-+    NvLength cmdQueueOffset;
-+    NvLength statQueueOffset;
-+    NvLength locklessCmdQueueOffset;
-+    NvLength locklessStatQueueOffset;
-+} MESSAGE_QUEUE_INIT_ARGUMENTS;
++#define NV0073_CTRL_CMD_DFP_GET_INFO (0x731140U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DFP_INTERFACE_ID << 8) | NV0073_CTRL_DFP_GET_INFO_PARAMS_MESSAGE_ID" */
 +
-+typedef struct {
-+    NvU32 oldLevel;
++typedef struct NV0073_CTRL_DFP_GET_INFO_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 displayId;
 +    NvU32 flags;
-+    NvBool bInPMTransition;
-+} GSP_SR_INIT_ARGUMENTS;
++    NvU32 flags2;
++} NV0073_CTRL_DFP_GET_INFO_PARAMS;
++
++#define NV0073_CTRL_DFP_FLAGS_SIGNAL                                       2:0
++#define NV0073_CTRL_DFP_FLAGS_SIGNAL_TMDS                       (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_SIGNAL_LVDS                       (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_SIGNAL_SDI                        (0x00000002U)
++#define NV0073_CTRL_DFP_FLAGS_SIGNAL_DISPLAYPORT                (0x00000003U)
++#define NV0073_CTRL_DFP_FLAGS_SIGNAL_DSI                        (0x00000004U)
++#define NV0073_CTRL_DFP_FLAGS_SIGNAL_WRBK                       (0x00000005U)
++#define NV0073_CTRL_DFP_FLAGS_LANE                                         5:3
++#define NV0073_CTRL_DFP_FLAGS_LANE_NONE                         (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_LANE_SINGLE                       (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_LANE_DUAL                         (0x00000002U)
++#define NV0073_CTRL_DFP_FLAGS_LANE_QUAD                         (0x00000003U)
++#define NV0073_CTRL_DFP_FLAGS_LANE_OCT                          (0x00000004U)
++#define NV0073_CTRL_DFP_FLAGS_LIMIT                                        6:6
++#define NV0073_CTRL_DFP_FLAGS_LIMIT_DISABLE                     (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_LIMIT_60HZ_RR                     (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_SLI_SCALER                                   7:7
++#define NV0073_CTRL_DFP_FLAGS_SLI_SCALER_NORMAL                 (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_SLI_SCALER_DISABLE                (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_HDMI_CAPABLE                                 8:8
++#define NV0073_CTRL_DFP_FLAGS_HDMI_CAPABLE_FALSE                (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_HDMI_CAPABLE_TRUE                 (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_RANGE_LIMITED_CAPABLE                        9:9
++#define NV0073_CTRL_DFP_FLAGS_RANGE_LIMITED_CAPABLE_FALSE       (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_RANGE_LIMITED_CAPABLE_TRUE        (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_RANGE_AUTO_CAPABLE                         10:10
++#define NV0073_CTRL_DFP_FLAGS_RANGE_AUTO_CAPABLE_FALSE          (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_RANGE_AUTO_CAPABLE_TRUE           (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_FORMAT_YCBCR422_CAPABLE                    11:11
++#define NV0073_CTRL_DFP_FLAGS_FORMAT_YCBCR422_CAPABLE_FALSE     (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_FORMAT_YCBCR422_CAPABLE_TRUE      (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_FORMAT_YCBCR444_CAPABLE                    12:12
++#define NV0073_CTRL_DFP_FLAGS_FORMAT_YCBCR444_CAPABLE_FALSE     (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_FORMAT_YCBCR444_CAPABLE_TRUE      (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_HDMI_ALLOWED                               14:14
++#define NV0073_CTRL_DFP_FLAGS_HDMI_ALLOWED_FALSE                (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_HDMI_ALLOWED_TRUE                 (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_EMBEDDED_DISPLAYPORT                       15:15
++#define NV0073_CTRL_DFP_FLAGS_EMBEDDED_DISPLAYPORT_FALSE        (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_EMBEDDED_DISPLAYPORT_TRUE         (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_DP_LINK_CONSTRAINT                         16:16
++#define NV0073_CTRL_DFP_FLAGS_DP_LINK_CONSTRAINT_NONE           (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_DP_LINK_CONSTRAINT_PREFER_RBR     (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_DP_LINK_BW                                 19:17
++#define NV0073_CTRL_DFP_FLAGS_DP_LINK_BW_1_62GBPS               (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_DP_LINK_BW_2_70GBPS               (0x00000002U)
++#define NV0073_CTRL_DFP_FLAGS_DP_LINK_BW_5_40GBPS               (0x00000003U)
++#define NV0073_CTRL_DFP_FLAGS_DP_LINK_BW_8_10GBPS               (0x00000004U)
++#define NV0073_CTRL_DFP_FLAGS_LINK                                       21:20
++#define NV0073_CTRL_DFP_FLAGS_LINK_NONE                         (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_LINK_SINGLE                       (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_LINK_DUAL                         (0x00000002U)
++#define NV0073_CTRL_DFP_FLAGS_DP_FORCE_RM_EDID                           22:22
++#define NV0073_CTRL_DFP_FLAGS_DP_FORCE_RM_EDID_FALSE            (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_DP_FORCE_RM_EDID_TRUE             (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_DSI_DEVICE_ID                              24:23
++#define NV0073_CTRL_DFP_FLAGS_DSI_DEVICE_ID_DSI_NONE            (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_DSI_DEVICE_ID_DSI_A               (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_DSI_DEVICE_ID_DSI_B               (0x00000002U)
++#define NV0073_CTRL_DFP_FLAGS_DSI_DEVICE_ID_DSI_GANGED          (0x00000003U)
++#define NV0073_CTRL_DFP_FLAGS_DP_POST_CURSOR2_DISABLED                   25:25
++#define NV0073_CTRL_DFP_FLAGS_DP_POST_CURSOR2_DISABLED_FALSE    (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_DP_POST_CURSOR2_DISABLED_TRUE     (0x00000001U)
++#define NV0073_CTRL_DFP_FLAGS_DP_PHY_REPEATER_COUNT                      29:26
++#define NV0073_CTRL_DFP_FLAGS_DYNAMIC_MUX_CAPABLE                        30:30
++#define NV0073_CTRL_DFP_FLAGS_DYNAMIC_MUX_CAPABLE_FALSE         (0x00000000U)
++#define NV0073_CTRL_DFP_FLAGS_DYNAMIC_MUX_CAPABLE_TRUE          (0x00000001U)
++
++#define NV0073_CTRL_CMD_DFP_SET_ELD_AUDIO_CAPS                         (0x731144U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DFP_INTERFACE_ID << 8) | NV0073_CTRL_DFP_SET_ELD_AUDIO_CAP_PARAMS_MESSAGE_ID" */
++
++#define NV0073_CTRL_DFP_ELD_AUDIO_CAPS_ELD_BUFFER                      96U
++
++typedef struct NV0073_CTRL_DFP_SET_ELD_AUDIO_CAP_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 displayId;
++    NvU32 numELDSize;
++    NvU8  bufferELD[NV0073_CTRL_DFP_ELD_AUDIO_CAPS_ELD_BUFFER];
++    NvU32 maxFreqSupported;
++    NvU32 ctrl;
++    NvU32 deviceEntry;
++} NV0073_CTRL_DFP_SET_ELD_AUDIO_CAP_PARAMS;
++
++#define NV0073_CTRL_DFP_ELD_AUDIO_CAPS_CTRL_PD                                     0:0
++#define NV0073_CTRL_DFP_ELD_AUDIO_CAPS_CTRL_PD_FALSE              (0x00000000U)
++#define NV0073_CTRL_DFP_ELD_AUDIO_CAPS_CTRL_PD_TRUE               (0x00000001U)
++#define NV0073_CTRL_DFP_ELD_AUDIO_CAPS_CTRL_ELDV                                   1:1
++#define NV0073_CTRL_DFP_ELD_AUDIO_CAPS_CTRL_ELDV_FALSE            (0x00000000U)
++#define NV0073_CTRL_DFP_ELD_AUDIO_CAPS_CTRL_ELDV_TRUE             (0x00000001U)
++
++#define NV0073_CTRL_CMD_DFP_SET_AUDIO_ENABLE                (0x731150U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DFP_INTERFACE_ID << 8) | NV0073_CTRL_DFP_SET_AUDIO_ENABLE_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_DFP_SET_AUDIO_ENABLE_PARAMS {
++    NvU32  subDeviceInstance;
++    NvU32  displayId;
++    NvBool enable;
++} NV0073_CTRL_DFP_SET_AUDIO_ENABLE_PARAMS;
++
++typedef NvU32 NV0073_CTRL_DFP_ASSIGN_SOR_LINKCONFIG;
++
++typedef struct NV0073_CTRL_DFP_ASSIGN_SOR_INFO {
++    NvU32 displayMask;
++    NvU32 sorType;
++} NV0073_CTRL_DFP_ASSIGN_SOR_INFO;
++
++#define NV0073_CTRL_CMD_DFP_ASSIGN_SOR           (0x731152U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DFP_INTERFACE_ID << 8) | NV0073_CTRL_DFP_ASSIGN_SOR_PARAMS_MESSAGE_ID" */
++
++#define NV0073_CTRL_CMD_DFP_ASSIGN_SOR_MAX_SORS  4U
++
++typedef struct NV0073_CTRL_DFP_ASSIGN_SOR_PARAMS {
++    NvU32                                 subDeviceInstance;
++    NvU32                                 displayId;
++    NvU8                                  sorExcludeMask;
++    NvU32                                 slaveDisplayId;
++    NV0073_CTRL_DFP_ASSIGN_SOR_LINKCONFIG forceSublinkConfig;
++    NvBool                                bIs2Head1Or;
++    NvU32                                 sorAssignList[NV0073_CTRL_CMD_DFP_ASSIGN_SOR_MAX_SORS];
++    NV0073_CTRL_DFP_ASSIGN_SOR_INFO       sorAssignListWithTag[NV0073_CTRL_CMD_DFP_ASSIGN_SOR_MAX_SORS];
++    NvU8                                  reservedSorMask;
++    NvU32                                 flags;
++} NV0073_CTRL_DFP_ASSIGN_SOR_PARAMS;
++
++#define NV0073_CTRL_DFP_ASSIGN_SOR_FLAGS_AUDIO                                      0:0
++#define NV0073_CTRL_DFP_ASSIGN_SOR_FLAGS_AUDIO_OPTIMAL                    (0x00000001U)
++#define NV0073_CTRL_DFP_ASSIGN_SOR_FLAGS_AUDIO_DEFAULT                    (0x00000000U)
++#define NV0073_CTRL_DFP_ASSIGN_SOR_FLAGS_ACTIVE_SOR_NOT_AUDIO_CAPABLE               1:1
++#define NV0073_CTRL_DFP_ASSIGN_SOR_FLAGS_ACTIVE_SOR_NOT_AUDIO_CAPABLE_NO  (0x00000000U)
++#define NV0073_CTRL_DFP_ASSIGN_SOR_FLAGS_ACTIVE_SOR_NOT_AUDIO_CAPABLE_YES (0x00000001U)
++
++#endif
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073dp.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073dp.h
+new file mode 100644
+index 000000000000..76dafc828064
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073dp.h
+@@ -0,0 +1,335 @@
++#ifndef __src_common_sdk_nvidia_inc_ctrl_ctrl0073_ctrl0073dp_h__
++#define __src_common_sdk_nvidia_inc_ctrl_ctrl0073_ctrl0073dp_h__
++#include <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073common.h>
++
++/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
++
++/*
++ * SPDX-FileCopyrightText: Copyright (c) 2005-2022 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
++ * SPDX-License-Identifier: MIT
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ */
++
++#define NV0073_CTRL_CMD_DP_AUXCH_CTRL      (0x731341U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DP_INTERFACE_ID << 8) | NV0073_CTRL_DP_AUXCH_CTRL_PARAMS_MESSAGE_ID" */
++
++#define NV0073_CTRL_DP_AUXCH_MAX_DATA_SIZE 16U
++
++typedef struct NV0073_CTRL_DP_AUXCH_CTRL_PARAMS {
++    NvU32  subDeviceInstance;
++    NvU32  displayId;
++    NvBool bAddrOnly;
++    NvU32  cmd;
++    NvU32  addr;
++    NvU8   data[NV0073_CTRL_DP_AUXCH_MAX_DATA_SIZE];
++    NvU32  size;
++    NvU32  replyType;
++    NvU32  retryTimeMs;
++} NV0073_CTRL_DP_AUXCH_CTRL_PARAMS;
++
++#define NV0073_CTRL_DP_AUXCH_CMD_TYPE                          3:3
++#define NV0073_CTRL_DP_AUXCH_CMD_TYPE_I2C               (0x00000000U)
++#define NV0073_CTRL_DP_AUXCH_CMD_TYPE_AUX               (0x00000001U)
++#define NV0073_CTRL_DP_AUXCH_CMD_I2C_MOT                       2:2
++#define NV0073_CTRL_DP_AUXCH_CMD_I2C_MOT_FALSE          (0x00000000U)
++#define NV0073_CTRL_DP_AUXCH_CMD_I2C_MOT_TRUE           (0x00000001U)
++#define NV0073_CTRL_DP_AUXCH_CMD_REQ_TYPE                      1:0
++#define NV0073_CTRL_DP_AUXCH_CMD_REQ_TYPE_WRITE         (0x00000000U)
++#define NV0073_CTRL_DP_AUXCH_CMD_REQ_TYPE_READ          (0x00000001U)
++#define NV0073_CTRL_DP_AUXCH_CMD_REQ_TYPE_WRITE_STATUS  (0x00000002U)
++
++#define NV0073_CTRL_CMD_DP_CTRL                     (0x731343U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DP_INTERFACE_ID << 8) | NV0073_CTRL_DP_CTRL_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_DP_CTRL_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 displayId;
++    NvU32 cmd;
++    NvU32 data;
++    NvU32 err;
++    NvU32 retryTimeMs;
++    NvU32 eightLaneDpcdBaseAddr;
++} NV0073_CTRL_DP_CTRL_PARAMS;
++
++#define NV0073_CTRL_DP_CMD_SET_LANE_COUNT                           0:0
++#define NV0073_CTRL_DP_CMD_SET_LANE_COUNT_FALSE                         (0x00000000U)
++#define NV0073_CTRL_DP_CMD_SET_LANE_COUNT_TRUE                          (0x00000001U)
++#define NV0073_CTRL_DP_CMD_SET_LINK_BW                              1:1
++#define NV0073_CTRL_DP_CMD_SET_LINK_BW_FALSE                            (0x00000000U)
++#define NV0073_CTRL_DP_CMD_SET_LINK_BW_TRUE                             (0x00000001U)
++#define NV0073_CTRL_DP_CMD_DISABLE_DOWNSPREAD                       2:2
++#define NV0073_CTRL_DP_CMD_DISABLE_DOWNSPREAD_FALSE                     (0x00000000U)
++#define NV0073_CTRL_DP_CMD_DISABLE_DOWNSPREAD_TRUE                      (0x00000001U)
++#define NV0073_CTRL_DP_CMD_UNUSED                                   3:3
++#define NV0073_CTRL_DP_CMD_SET_FORMAT_MODE                          4:4
++#define NV0073_CTRL_DP_CMD_SET_FORMAT_MODE_SINGLE_STREAM                (0x00000000U)
++#define NV0073_CTRL_DP_CMD_SET_FORMAT_MODE_MULTI_STREAM                 (0x00000001U)
++#define NV0073_CTRL_DP_CMD_FAST_LINK_TRAINING                       5:5
++#define NV0073_CTRL_DP_CMD_FAST_LINK_TRAINING_NO                        (0x00000000U)
++#define NV0073_CTRL_DP_CMD_FAST_LINK_TRAINING_YES                       (0x00000001U)
++#define NV0073_CTRL_DP_CMD_NO_LINK_TRAINING                         6:6
++#define NV0073_CTRL_DP_CMD_NO_LINK_TRAINING_NO                          (0x00000000U)
++#define NV0073_CTRL_DP_CMD_NO_LINK_TRAINING_YES                         (0x00000001U)
++#define NV0073_CTRL_DP_CMD_SET_ENHANCED_FRAMING                     7:7
++#define NV0073_CTRL_DP_CMD_SET_ENHANCED_FRAMING_FALSE                   (0x00000000U)
++#define NV0073_CTRL_DP_CMD_SET_ENHANCED_FRAMING_TRUE                    (0x00000001U)
++#define NV0073_CTRL_DP_CMD_USE_DOWNSPREAD_SETTING                   8:8
++#define NV0073_CTRL_DP_CMD_USE_DOWNSPREAD_SETTING_DEFAULT               (0x00000000U)
++#define NV0073_CTRL_DP_CMD_USE_DOWNSPREAD_SETTING_FORCE                 (0x00000001U)
++#define NV0073_CTRL_DP_CMD_SKIP_HW_PROGRAMMING                      9:9
++#define NV0073_CTRL_DP_CMD_SKIP_HW_PROGRAMMING_NO                       (0x00000000U)
++#define NV0073_CTRL_DP_CMD_SKIP_HW_PROGRAMMING_YES                      (0x00000001U)
++#define NV0073_CTRL_DP_CMD_POST_LT_ADJ_REQ_GRANTED                10:10
++#define NV0073_CTRL_DP_CMD_POST_LT_ADJ_REQ_GRANTED_NO                   (0x00000000U)
++#define NV0073_CTRL_DP_CMD_POST_LT_ADJ_REQ_GRANTED_YES                  (0x00000001U)
++#define NV0073_CTRL_DP_CMD_FAKE_LINK_TRAINING                     12:11
++#define NV0073_CTRL_DP_CMD_FAKE_LINK_TRAINING_NO                        (0x00000000U)
++#define NV0073_CTRL_DP_CMD_FAKE_LINK_TRAINING_DONOT_TOGGLE_TRANSMISSION (0x00000001U)
++#define NV0073_CTRL_DP_CMD_FAKE_LINK_TRAINING_TOGGLE_TRANSMISSION_ON    (0x00000002U)
++#define NV0073_CTRL_DP_CMD_TRAIN_PHY_REPEATER                     13:13
++#define NV0073_CTRL_DP_CMD_TRAIN_PHY_REPEATER_NO                        (0x00000000U)
++#define NV0073_CTRL_DP_CMD_TRAIN_PHY_REPEATER_YES                       (0x00000001U)
++#define NV0073_CTRL_DP_CMD_FALLBACK_CONFIG                        14:14
++#define NV0073_CTRL_DP_CMD_FALLBACK_CONFIG_FALSE                        (0x00000000U)
++#define NV0073_CTRL_DP_CMD_FALLBACK_CONFIG_TRUE                         (0x00000001U)
++#define NV0073_CTRL_DP_CMD_ENABLE_FEC                             15:15
++#define NV0073_CTRL_DP_CMD_ENABLE_FEC_FALSE                             (0x00000000U)
++#define NV0073_CTRL_DP_CMD_ENABLE_FEC_TRUE                              (0x00000001U)
++
++#define NV0073_CTRL_DP_CMD_BANDWIDTH_TEST                         29:29
++#define NV0073_CTRL_DP_CMD_BANDWIDTH_TEST_NO                            (0x00000000U)
++#define NV0073_CTRL_DP_CMD_BANDWIDTH_TEST_YES                           (0x00000001U)
++#define NV0073_CTRL_DP_CMD_LINK_CONFIG_CHECK_DISABLE              30:30
++#define NV0073_CTRL_DP_CMD_LINK_CONFIG_CHECK_DISABLE_FALSE              (0x00000000U)
++#define NV0073_CTRL_DP_CMD_LINK_CONFIG_CHECK_DISABLE_TRUE               (0x00000001U)
++#define NV0073_CTRL_DP_CMD_DISABLE_LINK_CONFIG                    31:31
++#define NV0073_CTRL_DP_CMD_DISABLE_LINK_CONFIG_FALSE                    (0x00000000U)
++#define NV0073_CTRL_DP_CMD_DISABLE_LINK_CONFIG_TRUE                     (0x00000001U)
++
++#define NV0073_CTRL_DP_DATA_SET_LANE_COUNT                          4:0
++#define NV0073_CTRL_DP_DATA_SET_LANE_COUNT_0                            (0x00000000U)
++#define NV0073_CTRL_DP_DATA_SET_LANE_COUNT_1                            (0x00000001U)
++#define NV0073_CTRL_DP_DATA_SET_LANE_COUNT_2                            (0x00000002U)
++#define NV0073_CTRL_DP_DATA_SET_LANE_COUNT_4                            (0x00000004U)
++#define NV0073_CTRL_DP_DATA_SET_LANE_COUNT_8                            (0x00000008U)
++#define NV0073_CTRL_DP_DATA_SET_LINK_BW                            15:8
++#define NV0073_CTRL_DP_DATA_SET_LINK_BW_1_62GBPS                        (0x00000006U)
++#define NV0073_CTRL_DP_DATA_SET_LINK_BW_2_16GBPS                        (0x00000008U)
++#define NV0073_CTRL_DP_DATA_SET_LINK_BW_2_43GBPS                        (0x00000009U)
++#define NV0073_CTRL_DP_DATA_SET_LINK_BW_2_70GBPS                        (0x0000000AU)
++#define NV0073_CTRL_DP_DATA_SET_LINK_BW_3_24GBPS                        (0x0000000CU)
++#define NV0073_CTRL_DP_DATA_SET_LINK_BW_4_32GBPS                        (0x00000010U)
++#define NV0073_CTRL_DP_DATA_SET_LINK_BW_5_40GBPS                        (0x00000014U)
++#define NV0073_CTRL_DP_DATA_SET_LINK_BW_8_10GBPS                        (0x0000001EU)
++#define NV0073_CTRL_DP_DATA_SET_ENHANCED_FRAMING                  18:18
++#define NV0073_CTRL_DP_DATA_SET_ENHANCED_FRAMING_NO                     (0x00000000U)
++#define NV0073_CTRL_DP_DATA_SET_ENHANCED_FRAMING_YES                    (0x00000001U)
++#define NV0073_CTRL_DP_DATA_TARGET                                22:19
++#define NV0073_CTRL_DP_DATA_TARGET_SINK                                 (0x00000000U)
++#define NV0073_CTRL_DP_DATA_TARGET_PHY_REPEATER_0                       (0x00000001U)
++#define NV0073_CTRL_DP_DATA_TARGET_PHY_REPEATER_1                       (0x00000002U)
++#define NV0073_CTRL_DP_DATA_TARGET_PHY_REPEATER_2                       (0x00000003U)
++#define NV0073_CTRL_DP_DATA_TARGET_PHY_REPEATER_3                       (0x00000004U)
++#define NV0073_CTRL_DP_DATA_TARGET_PHY_REPEATER_4                       (0x00000005U)
++#define NV0073_CTRL_DP_DATA_TARGET_PHY_REPEATER_5                       (0x00000006U)
++#define NV0073_CTRL_DP_DATA_TARGET_PHY_REPEATER_6                       (0x00000007U)
++#define NV0073_CTRL_DP_DATA_TARGET_PHY_REPEATER_7                       (0x00000008U)
++
++#define NV0073_CTRL_MAX_LANES                                           8U
++
++typedef struct NV0073_CTRL_DP_LANE_DATA_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 displayId;
++    NvU32 numLanes;
++    NvU32 data[NV0073_CTRL_MAX_LANES];
++} NV0073_CTRL_DP_LANE_DATA_PARAMS;
++
++#define NV0073_CTRL_DP_LANE_DATA_PREEMPHASIS                   1:0
++#define NV0073_CTRL_DP_LANE_DATA_PREEMPHASIS_NONE    (0x00000000U)
++#define NV0073_CTRL_DP_LANE_DATA_PREEMPHASIS_LEVEL1  (0x00000001U)
++#define NV0073_CTRL_DP_LANE_DATA_PREEMPHASIS_LEVEL2  (0x00000002U)
++#define NV0073_CTRL_DP_LANE_DATA_PREEMPHASIS_LEVEL3  (0x00000003U)
++#define NV0073_CTRL_DP_LANE_DATA_DRIVECURRENT                  3:2
++#define NV0073_CTRL_DP_LANE_DATA_DRIVECURRENT_LEVEL0 (0x00000000U)
++#define NV0073_CTRL_DP_LANE_DATA_DRIVECURRENT_LEVEL1 (0x00000001U)
++#define NV0073_CTRL_DP_LANE_DATA_DRIVECURRENT_LEVEL2 (0x00000002U)
++#define NV0073_CTRL_DP_LANE_DATA_DRIVECURRENT_LEVEL3 (0x00000003U)
++
++#define NV0073_CTRL_CMD_DP_SET_LANE_DATA (0x731346U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DP_INTERFACE_ID << 8) | NV0073_CTRL_DP_SET_LANE_DATA_PARAMS_MESSAGE_ID" */
++
++#define NV0073_CTRL_CMD_DP_SET_AUDIO_MUTESTREAM      (0x731359U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DP_INTERFACE_ID << 8) | NV0073_CTRL_DP_SET_AUDIO_MUTESTREAM_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_DP_SET_AUDIO_MUTESTREAM_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 displayId;
++    NvU32 mute;
++} NV0073_CTRL_DP_SET_AUDIO_MUTESTREAM_PARAMS;
++
++#define NV0073_CTRL_CMD_DP_TOPOLOGY_ALLOCATE_DISPLAYID  (0x73135bU) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DP_INTERFACE_ID << 8) | NV0073_CTRL_CMD_DP_TOPOLOGY_ALLOCATE_DISPLAYID_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_CMD_DP_TOPOLOGY_ALLOCATE_DISPLAYID_PARAMS {
++    NvU32  subDeviceInstance;
++    NvU32  displayId;
++    NvU32  preferredDisplayId;
++
++    NvBool force;
++    NvBool useBFM;
++
++    NvU32  displayIdAssigned;
++    NvU32  allDisplayMask;
++} NV0073_CTRL_CMD_DP_TOPOLOGY_ALLOCATE_DISPLAYID_PARAMS;
++
++#define NV0073_CTRL_CMD_DP_TOPOLOGY_FREE_DISPLAYID (0x73135cU) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DP_INTERFACE_ID << 8) | NV0073_CTRL_CMD_DP_TOPOLOGY_FREE_DISPLAYID_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_CMD_DP_TOPOLOGY_FREE_DISPLAYID_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 displayId;
++} NV0073_CTRL_CMD_DP_TOPOLOGY_FREE_DISPLAYID_PARAMS;
++
++#define NV0073_CTRL_CMD_DP_CONFIG_STREAM                   (0x731362U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DP_INTERFACE_ID << 8) | NV0073_CTRL_CMD_DP_CONFIG_STREAM_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_CMD_DP_CONFIG_STREAM_PARAMS {
++    NvU32  subDeviceInstance;
++    NvU32  head;
++    NvU32  sorIndex;
++    NvU32  dpLink;
++
++    NvBool bEnableOverride;
++    NvBool bMST;
++    NvU32  singleHeadMultistreamMode;
++    NvU32  hBlankSym;
++    NvU32  vBlankSym;
++    NvU32  colorFormat;
++    NvBool bEnableTwoHeadOneOr;
++
++    struct {
++        NvU32  slotStart;
++        NvU32  slotEnd;
++        NvU32  PBN;
++        NvU32  Timeslice;
++        NvBool sendACT;          // deprecated -Use NV0073_CTRL_CMD_DP_SEND_ACT
++        NvU32  singleHeadMSTPipeline;
++        NvBool bEnableAudioOverRightPanel;
++    } MST;
++
++    struct {
++        NvBool bEnhancedFraming;
++        NvU32  tuSize;
++        NvU32  waterMark;
++        NvU32  actualPclkHz;     // deprecated  -Use MvidWarParams
++        NvU32  linkClkFreqHz;    // deprecated  -Use MvidWarParams
++        NvBool bEnableAudioOverRightPanel;
++        struct {
++            NvU32  activeCnt;
++            NvU32  activeFrac;
++            NvU32  activePolarity;
++            NvBool mvidWarEnabled;
++            struct {
++                NvU32 actualPclkHz;
++                NvU32 linkClkFreqHz;
++            } MvidWarParams;
++        } Legacy;
++    } SST;
++} NV0073_CTRL_CMD_DP_CONFIG_STREAM_PARAMS;
++
++#define NV0073_CTRL_CMD_DP_SET_MANUAL_DISPLAYPORT                    (0x731365U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DP_INTERFACE_ID << 8) | NV0073_CTRL_CMD_DP_SET_MANUAL_DISPLAYPORT_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_CMD_DP_SET_MANUAL_DISPLAYPORT_PARAMS {
++    NvU32 subDeviceInstance;
++} NV0073_CTRL_CMD_DP_SET_MANUAL_DISPLAYPORT_PARAMS;
++
++#define NV0073_CTRL_CMD_DP_GET_CAPS   (0x731369U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DP_INTERFACE_ID << 8) | NV0073_CTRL_CMD_DP_GET_CAPS_PARAMS_MESSAGE_ID" */
++
++#define NV0073_CTRL_CMD_DP_GET_CAPS_PARAMS_MESSAGE_ID (0x69U)
++
++typedef struct NV0073_CTRL_CMD_DP_GET_CAPS_PARAMS {
++    NvU32                          subDeviceInstance;
++    NvU32                          sorIndex;
++    NvU32                          maxLinkRate;
++    NvU32                          dpVersionsSupported;
++    NvU32                          UHBRSupported;
++    NvBool                         bIsMultistreamSupported;
++    NvBool                         bIsSCEnabled;
++    NvBool                         bHasIncreasedWatermarkLimits;
++    NvBool                         bIsPC2Disabled;
++    NvBool                         isSingleHeadMSTSupported;
++    NvBool                         bFECSupported;
++    NvBool                         bIsTrainPhyRepeater;
++    NvBool                         bOverrideLinkBw;
++    NV0073_CTRL_CMD_DSC_CAP_PARAMS DSC;
++} NV0073_CTRL_CMD_DP_GET_CAPS_PARAMS;
++
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DP_VERSIONS_SUPPORTED_DP1_2                0:0
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DP_VERSIONS_SUPPORTED_DP1_2_NO              (0x00000000U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DP_VERSIONS_SUPPORTED_DP1_2_YES             (0x00000001U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DP_VERSIONS_SUPPORTED_DP1_4                1:1
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DP_VERSIONS_SUPPORTED_DP1_4_NO              (0x00000000U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DP_VERSIONS_SUPPORTED_DP1_4_YES             (0x00000001U)
++
++#define NV0073_CTRL_CMD_DP_GET_CAPS_MAX_LINK_RATE                           2:0
++#define NV0073_CTRL_CMD_DP_GET_CAPS_MAX_LINK_RATE_NONE                          (0x00000000U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_MAX_LINK_RATE_1_62                          (0x00000001U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_MAX_LINK_RATE_2_70                          (0x00000002U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_MAX_LINK_RATE_5_40                          (0x00000003U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_MAX_LINK_RATE_8_10                          (0x00000004U)
++
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DSC_ENCODER_COLOR_FORMAT_RGB                (0x00000001U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DSC_ENCODER_COLOR_FORMAT_Y_CB_CR_444        (0x00000002U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DSC_ENCODER_COLOR_FORMAT_Y_CB_CR_NATIVE_422 (0x00000004U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DSC_ENCODER_COLOR_FORMAT_Y_CB_CR_NATIVE_420 (0x00000008U)
++
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DSC_BITS_PER_PIXEL_PRECISION_1_16           (0x00000001U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DSC_BITS_PER_PIXEL_PRECISION_1_8            (0x00000002U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DSC_BITS_PER_PIXEL_PRECISION_1_4            (0x00000003U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DSC_BITS_PER_PIXEL_PRECISION_1_2            (0x00000004U)
++#define NV0073_CTRL_CMD_DP_GET_CAPS_DSC_BITS_PER_PIXEL_PRECISION_1              (0x00000005U)
++
++#define NV0073_CTRL_CMD_DP_CONFIG_INDEXED_LINK_RATES (0x731377U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_DP_INTERFACE_ID << 8) | NV0073_CTRL_CMD_DP_CONFIG_INDEXED_LINK_RATES_PARAMS_MESSAGE_ID" */
++
++#define NV0073_CTRL_DP_MAX_INDEXED_LINK_RATES        8U
++
++typedef struct NV0073_CTRL_CMD_DP_CONFIG_INDEXED_LINK_RATES_PARAMS {
++    // In
++    NvU32 subDeviceInstance;
++    NvU32 displayId;
++    NvU16 linkRateTbl[NV0073_CTRL_DP_MAX_INDEXED_LINK_RATES];
++
++    // Out
++    NvU8  linkBwTbl[NV0073_CTRL_DP_MAX_INDEXED_LINK_RATES];
++    NvU8  linkBwCount;
++} NV0073_CTRL_CMD_DP_CONFIG_INDEXED_LINK_RATES_PARAMS;
++
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_CMD_STAGE                                   3:0
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_CMD_STAGE_MONITOR_ENABLE_BEGIN     (0x00000000U)
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_CMD_STAGE_MONITOR_ENABLE_CHALLENGE (0x00000001U)
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_CMD_STAGE_MONITOR_ENABLE_CHECK     (0x00000002U)
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_CMD_STAGE_DRIVER_ENABLE_BEGIN      (0x00000003U)
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_CMD_STAGE_DRIVER_ENABLE_CHALLENGE  (0x00000004U)
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_CMD_STAGE_DRIVER_ENABLE_CHECK      (0x00000005U)
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_CMD_STAGE_RESET_MONITOR            (0x00000006U)
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_CMD_STAGE_INIT_PUBLIC_INFO         (0x00000007U)
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_CMD_STAGE_GET_PUBLIC_INFO          (0x00000008U)
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_CMD_STAGE_STATUS_CHECK             (0x00000009U)
++
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_STATUS_OK                          (0x00000000U)
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_STATUS_PENDING                     (0x80000001U)
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_STATUS_READ_ERROR                  (0x80000002U)
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_STATUS_WRITE_ERROR                 (0x80000003U)
++#define NV0073_CTRL_DP_CMD_ENABLE_VRR_STATUS_DEVICE_ERROR                (0x80000004U)
++
++#endif
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073specific.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073specific.h
+new file mode 100644
+index 000000000000..bf44b28e7603
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073specific.h
+@@ -0,0 +1,216 @@
++#ifndef __src_common_sdk_nvidia_inc_ctrl_ctrl0073_ctrl0073specific_h__
++#define __src_common_sdk_nvidia_inc_ctrl_ctrl0073_ctrl0073specific_h__
++
++/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
++
++/*
++ * SPDX-FileCopyrightText: Copyright (c) 1993-2022 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
++ * SPDX-License-Identifier: MIT
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ */
++
++#define NV0073_CTRL_CMD_SPECIFIC_GET_EDID_V2         (0x730245U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SPECIFIC_INTERFACE_ID << 8) | NV0073_CTRL_SPECIFIC_GET_EDID_V2_PARAMS_MESSAGE_ID" */
++
++#define NV0073_CTRL_SPECIFIC_GET_EDID_MAX_EDID_BYTES 2048U
++
++typedef struct NV0073_CTRL_SPECIFIC_GET_EDID_V2_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 displayId;
++    NvU32 bufferSize;
++    NvU32 flags;
++    NvU8  edidBuffer[NV0073_CTRL_SPECIFIC_GET_EDID_MAX_EDID_BYTES];
++} NV0073_CTRL_SPECIFIC_GET_EDID_V2_PARAMS;
++
++#define NV0073_CTRL_CMD_SPECIFIC_GET_CONNECTOR_DATA   (0x730250U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SPECIFIC_INTERFACE_ID << 8) | NV0073_CTRL_SPECIFIC_GET_CONNECTOR_DATA_PARAMS_MESSAGE_ID" */
++
++#define NV0073_CTRL_MAX_CONNECTORS                    4U
++
++typedef struct NV0073_CTRL_SPECIFIC_GET_CONNECTOR_DATA_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 displayId;
++    NvU32 flags;
++    NvU32 DDCPartners;
++    NvU32 count;
++    struct {
++        NvU32 index;
++        NvU32 type;
++        NvU32 location;
++    } data[NV0073_CTRL_MAX_CONNECTORS];
++    NvU32 platform;
++} NV0073_CTRL_SPECIFIC_GET_CONNECTOR_DATA_PARAMS;
++
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_ENABLE (0x730273U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SPECIFIC_INTERFACE_ID << 8) | NV0073_CTRL_SPECIFIC_SET_HDMI_ENABLE_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_SPECIFIC_SET_HDMI_ENABLE_PARAMS {
++    NvU8  subDeviceInstance;
++    NvU32 displayId;
++    NvU8  enable;
++} NV0073_CTRL_SPECIFIC_SET_HDMI_ENABLE_PARAMS;
++
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_AUDIO_MUTESTREAM (0x730275U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SPECIFIC_INTERFACE_ID << 8) | NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_AUDIO_MUTESTREAM_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_AUDIO_MUTESTREAM_PARAMS {
++    NvU8  subDeviceInstance;
++    NvU32 displayId;
++    NvU8  mute;
++} NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_AUDIO_MUTESTREAM_PARAMS;
++
++#define NV0073_CTRL_CMD_SPECIFIC_GET_ALL_HEAD_MASK (0x730287U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SPECIFIC_INTERFACE_ID << 8) | NV0073_CTRL_SPECIFIC_GET_ALL_HEAD_MASK_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_SPECIFIC_GET_ALL_HEAD_MASK_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 headMask;
++} NV0073_CTRL_SPECIFIC_GET_ALL_HEAD_MASK_PARAMS;
++
++#define NV0073_CTRL_CMD_SPECIFIC_SET_OD_PACKET (0x730288U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SPECIFIC_INTERFACE_ID << 8) | NV0073_CTRL_SPECIFIC_SET_OD_PACKET_PARAMS_MESSAGE_ID" */
++
++#define NV0073_CTRL_SET_OD_MAX_PACKET_SIZE     36U
++
++typedef struct NV0073_CTRL_SPECIFIC_SET_OD_PACKET_PARAMS {
++    NvU32  subDeviceInstance;
++    NvU32  displayId;
++    NvU32  transmitControl;
++    NvU32  packetSize;
++    NvU32  targetHead;
++    NvBool bUsePsrHeadforSdp;
++    NvU8   aPacket[NV0073_CTRL_SET_OD_MAX_PACKET_SIZE];
++} NV0073_CTRL_SPECIFIC_SET_OD_PACKET_PARAMS;
++
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_ENABLE                                     0:0
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_ENABLE_NO                      (0x0000000U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_ENABLE_YES                     (0x0000001U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_OTHER_FRAME                                1:1
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_OTHER_FRAME_DISABLE            (0x0000000U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_OTHER_FRAME_ENABLE             (0x0000001U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_SINGLE_FRAME                               2:2
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_SINGLE_FRAME_DISABLE           (0x0000000U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_SINGLE_FRAME_ENABLE            (0x0000001U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_ON_HBLANK                                 3:3
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_ON_HBLANK_DISABLE              (0x0000000U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_ON_HBLANK_ENABLE               (0x0000001U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_IMMEDIATE                                  4:4
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_IMMEDIATE_DISABLE              (0x0000000U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_IMMEDIATE_ENABLE               (0x0000001U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_VIDEO_FMT                                  5:5
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_VIDEO_FMT_SW_CONTROLLED        (0x0000000U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_VIDEO_FMT_HW_CONTROLLED        (0x0000001U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_SET_STEREO_POLARITY                        6:6
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_SET_STEREO_POLARITY_FALSE      (0x0000000U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_SET_STEREO_POLARITY_TRUE       (0x0000001U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_SET_SELF_REFRESH_SETTING                   7:7
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_SET_SELF_REFRESH_SETTING_FALSE (0x0000000U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_SET_SELF_REFRESH_SETTING_TRUE  (0x0000001U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_GEN_INFOFRAME_MODE                         9:8
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_GEN_INFOFRAME_MODE_INFOFRAME0  (0x0000000U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_GEN_INFOFRAME_MODE_INFOFRAME1  (0x0000001U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_RESERVED_LEGACY_MODE                     31:31
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_RESERVED_LEGACY_MODE_NO        (0x0000000U)
++#define NV0073_CTRL_SPECIFIC_SET_OD_PACKET_TRANSMIT_CONTROL_RESERVED_LEGACY_MODE_YES       (0x0000001U)
++
++#define NV0073_CTRL_CMD_SPECIFIC_OR_GET_INFO (0x73028bU) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SPECIFIC_INTERFACE_ID << 8) | NV0073_CTRL_SPECIFIC_OR_GET_INFO_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_SPECIFIC_OR_GET_INFO_PARAMS {
++    NvU32  subDeviceInstance;
++    NvU32  displayId;
++    NvU32  index;
++    NvU32  type;
++    NvU32  protocol;
++    NvU32  ditherType;
++    NvU32  ditherAlgo;
++    NvU32  location;
++    NvU32  rootPortId;
++    NvU32  dcbIndex;
++    NV_DECLARE_ALIGNED(NvU64 vbiosAddress, 8);
++    NvBool bIsLitByVbios;
++    NvBool bIsDispDynamic;
++} NV0073_CTRL_SPECIFIC_OR_GET_INFO_PARAMS;
++
++#define NV0073_CTRL_SPECIFIC_OR_TYPE_NONE                   (0x00000000U)
++#define NV0073_CTRL_SPECIFIC_OR_TYPE_DAC                    (0x00000001U)
++#define NV0073_CTRL_SPECIFIC_OR_TYPE_SOR                    (0x00000002U)
++#define NV0073_CTRL_SPECIFIC_OR_TYPE_PIOR                   (0x00000003U)
++
++#define NV0073_CTRL_SPECIFIC_OR_TYPE_DSI                    (0x00000005U)
++
++#define NV0073_CTRL_SPECIFIC_OR_PROTOCOL_DAC_RGB_CRT        (0x00000000U)
++
++#define NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_LVDS_CUSTOM    (0x00000000U)
++#define NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_SINGLE_TMDS_A  (0x00000001U)
++#define NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_SINGLE_TMDS_B  (0x00000002U)
++#define NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_DUAL_TMDS      (0x00000005U)
++#define NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_DP_A           (0x00000008U)
++#define NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_DP_B           (0x00000009U)
++#define NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_DSI            (0x00000010U)
++
++#define NV0073_CTRL_SPECIFIC_OR_PROTOCOL_DSI                (0x00000011U)
++
++#define NV0073_CTRL_SPECIFIC_OR_PROTOCOL_PIOR_EXT_TMDS_ENC  (0x00000000U)
++
++#define NV0073_CTRL_SPECIFIC_OR_PROTOCOL_UNKNOWN            (0xFFFFFFFFU)
++
++#define NV0073_CTRL_CMD_SPECIFIC_GET_BACKLIGHT_BRIGHTNESS (0x730291U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SPECIFIC_INTERFACE_ID << 8) | NV0073_CTRL_SPECIFIC_GET_BACKLIGHT_BRIGHTNESS_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_SPECIFIC_BACKLIGHT_BRIGHTNESS_PARAMS {
++    NvU32  subDeviceInstance;
++    NvU32  displayId;
++    NvU32  brightness;
++    NvBool bUncalibrated;
++} NV0073_CTRL_SPECIFIC_BACKLIGHT_BRIGHTNESS_PARAMS;
++
++#define NV0073_CTRL_CMD_SPECIFIC_SET_BACKLIGHT_BRIGHTNESS (0x730292U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SPECIFIC_INTERFACE_ID << 8) | NV0073_CTRL_SPECIFIC_SET_BACKLIGHT_BRIGHTNESS_PARAMS_MESSAGE_ID" */
++
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS (0x730293U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SPECIFIC_INTERFACE_ID << 8) | NV0073_CTRL_SPECIFIC_SET_HDMI_SINK_CAPS_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_SPECIFIC_SET_HDMI_SINK_CAPS_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 displayId;
++    NvU32 caps;
++} NV0073_CTRL_SPECIFIC_SET_HDMI_SINK_CAPS_PARAMS;
++
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_GT_340MHZ_CLOCK_SUPPORTED                           0:0
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_GT_340MHZ_CLOCK_SUPPORTED_FALSE       (0x00000000U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_GT_340MHZ_CLOCK_SUPPORTED_TRUE        (0x00000001U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_LTE_340MHZ_SCRAMBLING_SUPPORTED                     1:1
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_LTE_340MHZ_SCRAMBLING_SUPPORTED_FALSE (0x00000000U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_LTE_340MHZ_SCRAMBLING_SUPPORTED_TRUE  (0x00000001U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_SCDC_SUPPORTED                                      2:2
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_SCDC_SUPPORTED_FALSE                  (0x00000000U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_SCDC_SUPPORTED_TRUE                   (0x00000001U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_MAX_FRL_RATE_SUPPORTED                              5:3
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_MAX_FRL_RATE_SUPPORTED_NONE           (0x00000000U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_MAX_FRL_RATE_SUPPORTED_3LANES_3G      (0x00000001U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_MAX_FRL_RATE_SUPPORTED_3LANES_6G      (0x00000002U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_MAX_FRL_RATE_SUPPORTED_4LANES_6G      (0x00000003U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_MAX_FRL_RATE_SUPPORTED_4LANES_8G      (0x00000004U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_MAX_FRL_RATE_SUPPORTED_4LANES_10G     (0x00000005U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_MAX_FRL_RATE_SUPPORTED_4LANES_12G     (0x00000006U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_DSC_12_SUPPORTED                                    6:6
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_DSC_12_SUPPORTED_FALSE                (0x00000000U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_DSC_12_SUPPORTED_TRUE                 (0x00000001U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_DSC_MAX_FRL_RATE_SUPPORTED                          9:7
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_DSC_MAX_FRL_RATE_SUPPORTED_NONE       (0x00000000U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_DSC_MAX_FRL_RATE_SUPPORTED_3LANES_3G  (0x00000001U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_DSC_MAX_FRL_RATE_SUPPORTED_3LANES_6G  (0x00000002U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_DSC_MAX_FRL_RATE_SUPPORTED_4LANES_6G  (0x00000003U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_DSC_MAX_FRL_RATE_SUPPORTED_4LANES_8G  (0x00000004U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_DSC_MAX_FRL_RATE_SUPPORTED_4LANES_10G (0x00000005U)
++#define NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS_DSC_MAX_FRL_RATE_SUPPORTED_4LANES_12G (0x00000006U)
++
++#endif
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073system.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073system.h
+index c1f1c8881a42..1ff22f06dc82 100644
+--- a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073system.h
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073system.h
+@@ -26,6 +26,40 @@
+  * DEALINGS IN THE SOFTWARE.
+  */
+ 
++#define NV0073_CTRL_CMD_SYSTEM_GET_NUM_HEADS (0x730102U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SYSTEM_INTERFACE_ID << 8) | NV0073_CTRL_SYSTEM_GET_NUM_HEADS_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_SYSTEM_GET_NUM_HEADS_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 flags;
++    NvU32 numHeads;
++} NV0073_CTRL_SYSTEM_GET_NUM_HEADS_PARAMS;
++
++#define NV0073_CTRL_CMD_SYSTEM_GET_SUPPORTED (0x730120U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SYSTEM_INTERFACE_ID << 8) | NV0073_CTRL_SYSTEM_GET_SUPPORTED_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_SYSTEM_GET_SUPPORTED_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 displayMask;
++    NvU32 displayMaskDDC;
++} NV0073_CTRL_SYSTEM_GET_SUPPORTED_PARAMS;
++
++#define NV0073_CTRL_CMD_SYSTEM_GET_CONNECT_STATE (0x730122U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SYSTEM_INTERFACE_ID << 8) | NV0073_CTRL_SYSTEM_GET_CONNECT_STATE_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_SYSTEM_GET_CONNECT_STATE_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 flags;
++    NvU32 displayMask;
++    NvU32 retryTimeMs;
++} NV0073_CTRL_SYSTEM_GET_CONNECT_STATE_PARAMS;
++
++#define NV0073_CTRL_CMD_SYSTEM_GET_ACTIVE                (0x730126U) /* finn: Evaluated from "(FINN_NV04_DISPLAY_COMMON_SYSTEM_INTERFACE_ID << 8) | NV0073_CTRL_SYSTEM_GET_ACTIVE_PARAMS_MESSAGE_ID" */
++
++typedef struct NV0073_CTRL_SYSTEM_GET_ACTIVE_PARAMS {
++    NvU32 subDeviceInstance;
++    NvU32 head;
++    NvU32 flags;
++    NvU32 displayId;
++} NV0073_CTRL_SYSTEM_GET_ACTIVE_PARAMS;
++
+ #define NV0073_CTRL_SYSTEM_ACPI_ID_MAP_MAX_DISPLAYS             (16U)
+ 
+ #endif
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080event.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080event.h
+new file mode 100644
+index 000000000000..472702723057
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080event.h
+@@ -0,0 +1,41 @@
++#ifndef __src_common_sdk_nvidia_inc_ctrl_ctrl2080_ctrl2080event_h__
++#define __src_common_sdk_nvidia_inc_ctrl_ctrl2080_ctrl2080event_h__
++
++/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
++
++/*
++ * SPDX-FileCopyrightText: Copyright (c) 2006-2021 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
++ * SPDX-License-Identifier: MIT
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ */
++
++#define NV2080_CTRL_CMD_EVENT_SET_NOTIFICATION (0x20800301) /* finn: Evaluated from "(FINN_NV20_SUBDEVICE_0_EVENT_INTERFACE_ID << 8) | NV2080_CTRL_EVENT_SET_NOTIFICATION_PARAMS_MESSAGE_ID" */
++
++typedef struct NV2080_CTRL_EVENT_SET_NOTIFICATION_PARAMS {
++    NvU32  event;
++    NvU32  action;
++    NvBool bNotifyState;
++    NvU32  info32;
++    NvU16  info16;
++} NV2080_CTRL_EVENT_SET_NOTIFICATION_PARAMS;
++
++#define NV2080_CTRL_EVENT_SET_NOTIFICATION_ACTION_REPEAT  (0x00000002)
++
++#endif
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080internal.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080internal.h
+index e76669fe0453..732f20ee2bbe 100644
+--- a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080internal.h
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080internal.h
+@@ -26,6 +26,39 @@
+  * DEALINGS IN THE SOFTWARE.
+  */
+ 
++#define NV2080_CTRL_CMD_INTERNAL_DISPLAY_GET_STATIC_INFO (0x20800a01) /* finn: Evaluated from "(FINN_NV20_SUBDEVICE_0_INTERNAL_INTERFACE_ID << 8) | NV2080_CTRL_INTERNAL_DISPLAY_GET_STATIC_INFO_PARAMS_MESSAGE_ID" */
++
++typedef struct NV2080_CTRL_INTERNAL_DISPLAY_GET_STATIC_INFO_PARAMS {
++    NvU32  feHwSysCap;
++    NvU32  windowPresentMask;
++    NvBool bFbRemapperEnabled;
++    NvU32  numHeads;
++    NvBool bPrimaryVga;
++    NvU32  i2cPort;
++    NvU32  internalDispActiveMask;
++} NV2080_CTRL_INTERNAL_DISPLAY_GET_STATIC_INFO_PARAMS;
++
++#define NV2080_CTRL_CMD_INTERNAL_DISPLAY_WRITE_INST_MEM (0x20800a49) /* finn: Evaluated from "(FINN_NV20_SUBDEVICE_0_INTERNAL_INTERFACE_ID << 8) | NV2080_CTRL_INTERNAL_DISPLAY_WRITE_INST_MEM_PARAMS_MESSAGE_ID" */
++
++typedef struct NV2080_CTRL_INTERNAL_DISPLAY_WRITE_INST_MEM_PARAMS {
++    NV_DECLARE_ALIGNED(NvU64 instMemPhysAddr, 8);
++    NV_DECLARE_ALIGNED(NvU64 instMemSize, 8);
++    NvU32 instMemAddrSpace;
++    NvU32 instMemCpuCacheAttr;
++} NV2080_CTRL_INTERNAL_DISPLAY_WRITE_INST_MEM_PARAMS;
++
++#define NV2080_CTRL_CMD_INTERNAL_DISPLAY_CHANNEL_PUSHBUFFER (0x20800a58) /* finn: Evaluated from "(FINN_NV20_SUBDEVICE_0_INTERNAL_INTERFACE_ID << 8) | NV2080_CTRL_INTERNAL_DISPLAY_CHANNEL_PUSHBUFFER_PARAMS_MESSAGE_ID" */
++
++typedef struct NV2080_CTRL_INTERNAL_DISPLAY_CHANNEL_PUSHBUFFER_PARAMS {
++    NvU32  addressSpace;
++    NV_DECLARE_ALIGNED(NvU64 physicalAddr, 8);
++    NV_DECLARE_ALIGNED(NvU64 limit, 8);
++    NvU32  cacheSnoop;
++    NvU32  hclass;
++    NvU32  channelInstance;
++    NvBool valid;
++} NV2080_CTRL_INTERNAL_DISPLAY_CHANNEL_PUSHBUFFER_PARAMS;
++
+ #define NV2080_CTRL_CMD_INTERNAL_INTR_GET_KERNEL_TABLE (0x20800a5c) /* finn: Evaluated from "(FINN_NV20_SUBDEVICE_0_INTERNAL_INTERFACE_ID << 8) | NV2080_CTRL_INTERNAL_INTR_GET_KERNEL_TABLE_PARAMS_MESSAGE_ID" */
+ 
+ #define NV2080_CTRL_INTERNAL_INTR_MAX_TABLE_SIZE       128
+@@ -81,4 +114,14 @@ typedef struct NV2080_CTRL_INTERNAL_FBSR_SEND_REGION_INFO_PARAMS {
+     NV_DECLARE_ALIGNED(NvU64 size, 8);
+ } NV2080_CTRL_INTERNAL_FBSR_SEND_REGION_INFO_PARAMS;
+ 
++#define NV2080_CTRL_CMD_INTERNAL_INIT_BRIGHTC_STATE_LOAD (0x20800ac6) /* finn: Evaluated from "(FINN_NV20_SUBDEVICE_0_INTERNAL_INTERFACE_ID << 8) | NV2080_CTRL_INTERNAL_INIT_BRIGHTC_STATE_LOAD_PARAMS_MESSAGE_ID" */
++
++#define NV2080_CTRL_ACPI_DSM_READ_SIZE                   (0x1000) /* finn: Evaluated from "(4 * 1024)" */
++
++typedef struct NV2080_CTRL_INTERNAL_INIT_BRIGHTC_STATE_LOAD_PARAMS {
++    NvU32 status;
++    NvU16 backLightDataSize;
++    NvU8  backLightData[NV2080_CTRL_ACPI_DSM_READ_SIZE];
++} NV2080_CTRL_INTERNAL_INIT_BRIGHTC_STATE_LOAD_PARAMS;
++
+ #endif
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/nvos.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/nvos.h
+index 28f8aaa9da47..e17e48d30a14 100644
+--- a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/nvos.h
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/nvos.h
+@@ -78,6 +78,33 @@
+ #define NVOS02_FLAGS_MAPPING_NO_MAP                                (0x00000001)
+ #define NVOS02_FLAGS_MAPPING_NEVER_MAP                             (0x00000002)
+ 
++#define NV01_EVENT_CLIENT_RM                                       (0x04000000)
 +
 +typedef struct
 +{
-+    MESSAGE_QUEUE_INIT_ARGUMENTS      messageQueueInitArguments;
-+    GSP_SR_INIT_ARGUMENTS             srInitArguments;
-+    NvU32                             gpuInstance;
++    NvV32    channelInstance;            // One of the n channel instances of a given channel type.
++                                         // Note that core channel has only one instance
++                                         // while all others have two (one per head).
++    NvHandle hObjectBuffer;              // ctx dma handle for DMA push buffer
++    NvHandle hObjectNotify;              // ctx dma handle for an area (of type NvNotification defined in sdk/nvidia/inc/nvtypes.h) where RM can write errors/notifications
++    NvU32    offset;                     // Initial offset for put/get, usually zero.
++    NvP64    pControl NV_ALIGN_BYTES(8); // pControl gives virt addr of UDISP GET/PUT regs
 +
-+    struct
-+    {
-+        NvU64                         pa;
-+        NvU64                         size;
-+    } profilerArgs;
-+} GSP_ARGUMENTS_CACHED;
++    NvU32    flags;
++#define NV50VAIO_CHANNELDMA_ALLOCATION_FLAGS_CONNECT_PB_AT_GRAB                1:1
++#define NV50VAIO_CHANNELDMA_ALLOCATION_FLAGS_CONNECT_PB_AT_GRAB_YES            0x00000000
++#define NV50VAIO_CHANNELDMA_ALLOCATION_FLAGS_CONNECT_PB_AT_GRAB_NO             0x00000001
 +
-+#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_static_config.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_static_config.h
++} NV50VAIO_CHANNELDMA_ALLOCATION_PARAMETERS;
++
++typedef struct
++{
++    NvV32    channelInstance;            // One of the n channel instances of a given channel type.
++                                         // All PIO channels have two instances (one per head).
++    NvHandle hObjectNotify;              // ctx dma handle for an area (of type NvNotification defined in sdk/nvidia/inc/nvtypes.h) where RM can write errors.
++    NvP64    pControl NV_ALIGN_BYTES(8); // pControl gives virt addr of control region for PIO channel
++} NV50VAIO_CHANNELPIO_ALLOCATION_PARAMETERS;
++
+ typedef struct
+ {
+     NvU32   index;
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_allclasses.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_allclasses.h
 new file mode 100644
-index 000000000000..ba8cd897ebcc
+index 000000000000..b17520135233
 --- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_static_config.h
-@@ -0,0 +1,74 @@
-+#ifndef __src_nvidia_inc_kernel_gpu_gsp_gsp_static_config_h__
-+#define __src_nvidia_inc_kernel_gpu_gsp_gsp_static_config_h__
-+#include <nvrm/535.54.03/nvidia/generated/g_chipset_nvoc.h>
-+#include <nvrm/535.54.03/nvidia/inc/kernel/gpu/gpu_acpi_data.h>
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_allclasses.h
+@@ -0,0 +1,33 @@
++#ifndef __src_nvidia_generated_g_allclasses_h__
++#define __src_nvidia_generated_g_allclasses_h__
 +
 +/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
 +
 +/*
-+ * SPDX-FileCopyrightText: Copyright (c) 2019-2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
++ * SPDX-FileCopyrightText: Copyright (c) 2021-2021 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 + * SPDX-License-Identifier: MIT
 + *
 + * Permission is hereby granted, free of charge, to any person obtaining a
@@ -1415,505 +1525,204 @@ index 000000000000..ba8cd897ebcc
 + * DEALINGS IN THE SOFTWARE.
 + */
 +
-+typedef struct GSP_VF_INFO
-+{
-+    NvU32  totalVFs;
-+    NvU32  firstVFOffset;
-+    NvU64  FirstVFBar0Address;
-+    NvU64  FirstVFBar1Address;
-+    NvU64  FirstVFBar2Address;
-+    NvBool b64bitBar0;
-+    NvBool b64bitBar1;
-+    NvBool b64bitBar2;
-+} GSP_VF_INFO;
++#define NV01_EVENT_KERNEL_CALLBACK_EX            (0x0000007e)
 +
-+typedef struct GspSystemInfo
-+{
-+    NvU64 gpuPhysAddr;
-+    NvU64 gpuPhysFbAddr;
-+    NvU64 gpuPhysInstAddr;
-+    NvU64 nvDomainBusDeviceFunc;
-+    NvU64 simAccessBufPhysAddr;
-+    NvU64 pcieAtomicsOpMask;
-+    NvU64 consoleMemSize;
-+    NvU64 maxUserVa;
-+    NvU32 pciConfigMirrorBase;
-+    NvU32 pciConfigMirrorSize;
-+    NvU8 oorArch;
-+    NvU64 clPdbProperties;
-+    NvU32 Chipset;
-+    NvBool bGpuBehindBridge;
-+    NvBool bMnocAvailable;
-+    NvBool bUpstreamL0sUnsupported;
-+    NvBool bUpstreamL1Unsupported;
-+    NvBool bUpstreamL1PorSupported;
-+    NvBool bUpstreamL1PorMobileOnly;
-+    NvU8   upstreamAddressValid;
-+    BUSINFO FHBBusInfo;
-+    BUSINFO chipsetIDInfo;
-+    ACPI_METHOD_DATA acpiMethodData;
-+    NvU32 hypervisorType;
-+    NvBool bIsPassthru;
-+    NvU64 sysTimerOffsetNs;
-+    GSP_VF_INFO gspVFInfo;
-+} GspSystemInfo;
++#define NV04_DISPLAY_COMMON                      (0x00000073)
 +
 +#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/kernel/inc/vgpu/rpc_global_enums.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/kernel/inc/vgpu/rpc_global_enums.h
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_mem_desc_nvoc.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_mem_desc_nvoc.h
 new file mode 100644
-index 000000000000..5b7ffd56084b
+index 000000000000..dff4bd362772
 --- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/kernel/inc/vgpu/rpc_global_enums.h
-@@ -0,0 +1,262 @@
-+#ifndef __src_nvidia_kernel_inc_vgpu_rpc_global_enums_h__
-+#define __src_nvidia_kernel_inc_vgpu_rpc_global_enums_h__
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_mem_desc_nvoc.h
+@@ -0,0 +1,32 @@
++#ifndef __src_nvidia_generated_g_mem_desc_nvoc_h__
++#define __src_nvidia_generated_g_mem_desc_nvoc_h__
 +
 +/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
 +
-+#ifndef X
-+#    define X(UNIT, RPC) NV_VGPU_MSG_FUNCTION_##RPC,
-+#    define DEFINING_X_IN_RPC_GLOBAL_ENUMS_H
-+enum {
-+#endif
-+    X(RM, NOP)                             // 0
-+    X(RM, SET_GUEST_SYSTEM_INFO)           // 1
-+    X(RM, ALLOC_ROOT)                      // 2
-+    X(RM, ALLOC_DEVICE)                    // 3 deprecated
-+    X(RM, ALLOC_MEMORY)                    // 4
-+    X(RM, ALLOC_CTX_DMA)                   // 5
-+    X(RM, ALLOC_CHANNEL_DMA)               // 6
-+    X(RM, MAP_MEMORY)                      // 7
-+    X(RM, BIND_CTX_DMA)                    // 8 deprecated
-+    X(RM, ALLOC_OBJECT)                    // 9
-+    X(RM, FREE)                            //10
-+    X(RM, LOG)                             //11
-+    X(RM, ALLOC_VIDMEM)                    //12
-+    X(RM, UNMAP_MEMORY)                    //13
-+    X(RM, MAP_MEMORY_DMA)                  //14
-+    X(RM, UNMAP_MEMORY_DMA)                //15
-+    X(RM, GET_EDID)                        //16
-+    X(RM, ALLOC_DISP_CHANNEL)              //17
-+    X(RM, ALLOC_DISP_OBJECT)               //18
-+    X(RM, ALLOC_SUBDEVICE)                 //19
-+    X(RM, ALLOC_DYNAMIC_MEMORY)            //20
-+    X(RM, DUP_OBJECT)                      //21
-+    X(RM, IDLE_CHANNELS)                   //22
-+    X(RM, ALLOC_EVENT)                     //23
-+    X(RM, SEND_EVENT)                      //24
-+    X(RM, REMAPPER_CONTROL)                //25 deprecated
-+    X(RM, DMA_CONTROL)                     //26
-+    X(RM, DMA_FILL_PTE_MEM)                //27
-+    X(RM, MANAGE_HW_RESOURCE)              //28
-+    X(RM, BIND_ARBITRARY_CTX_DMA)          //29 deprecated
-+    X(RM, CREATE_FB_SEGMENT)               //30
-+    X(RM, DESTROY_FB_SEGMENT)              //31
-+    X(RM, ALLOC_SHARE_DEVICE)              //32
-+    X(RM, DEFERRED_API_CONTROL)            //33
-+    X(RM, REMOVE_DEFERRED_API)             //34
-+    X(RM, SIM_ESCAPE_READ)                 //35
-+    X(RM, SIM_ESCAPE_WRITE)                //36
-+    X(RM, SIM_MANAGE_DISPLAY_CONTEXT_DMA)  //37
-+    X(RM, FREE_VIDMEM_VIRT)                //38
-+    X(RM, PERF_GET_PSTATE_INFO)            //39  deprecated for vGPU, used by GSP
-+    X(RM, PERF_GET_PERFMON_SAMPLE)         //40
-+    X(RM, PERF_GET_VIRTUAL_PSTATE_INFO)    //41  deprecated
-+    X(RM, PERF_GET_LEVEL_INFO)             //42
-+    X(RM, MAP_SEMA_MEMORY)                 //43
-+    X(RM, UNMAP_SEMA_MEMORY)               //44
-+    X(RM, SET_SURFACE_PROPERTIES)          //45
-+    X(RM, CLEANUP_SURFACE)                 //46
-+    X(RM, UNLOADING_GUEST_DRIVER)          //47
-+    X(RM, TDR_SET_TIMEOUT_STATE)           //48
-+    X(RM, SWITCH_TO_VGA)                   //49
-+    X(RM, GPU_EXEC_REG_OPS)                //50
-+    X(RM, GET_STATIC_INFO)                 //51
-+    X(RM, ALLOC_VIRTMEM)                   //52
-+    X(RM, UPDATE_PDE_2)                    //53
-+    X(RM, SET_PAGE_DIRECTORY)              //54
-+    X(RM, GET_STATIC_PSTATE_INFO)          //55
-+    X(RM, TRANSLATE_GUEST_GPU_PTES)        //56
-+    X(RM, RESERVED_57)                     //57
-+    X(RM, RESET_CURRENT_GR_CONTEXT)        //58
-+    X(RM, SET_SEMA_MEM_VALIDATION_STATE)   //59
-+    X(RM, GET_ENGINE_UTILIZATION)          //60
-+    X(RM, UPDATE_GPU_PDES)                 //61
-+    X(RM, GET_ENCODER_CAPACITY)            //62
-+    X(RM, VGPU_PF_REG_READ32)              //63
-+    X(RM, SET_GUEST_SYSTEM_INFO_EXT)       //64
-+    X(GSP, GET_GSP_STATIC_INFO)            //65
-+    X(RM, RMFS_INIT)                       //66
-+    X(RM, RMFS_CLOSE_QUEUE)                //67
-+    X(RM, RMFS_CLEANUP)                    //68
-+    X(RM, RMFS_TEST)                       //69
-+    X(RM, UPDATE_BAR_PDE)                  //70
-+    X(RM, CONTINUATION_RECORD)             //71
-+    X(RM, GSP_SET_SYSTEM_INFO)             //72
-+    X(RM, SET_REGISTRY)                    //73
-+    X(GSP, GSP_INIT_POST_OBJGPU)           //74 deprecated
-+    X(RM, SUBDEV_EVENT_SET_NOTIFICATION)   //75 deprecated
-+    X(GSP, GSP_RM_CONTROL)                 //76
-+    X(RM, GET_STATIC_INFO2)                //77
-+    X(RM, DUMP_PROTOBUF_COMPONENT)         //78
-+    X(RM, UNSET_PAGE_DIRECTORY)            //79
-+    X(RM, GET_CONSOLIDATED_STATIC_INFO)    //80
-+    X(RM, GMMU_REGISTER_FAULT_BUFFER)      //81 deprecated
-+    X(RM, GMMU_UNREGISTER_FAULT_BUFFER)    //82 deprecated
-+    X(RM, GMMU_REGISTER_CLIENT_SHADOW_FAULT_BUFFER)   //83 deprecated
-+    X(RM, GMMU_UNREGISTER_CLIENT_SHADOW_FAULT_BUFFER) //84 deprecated
-+    X(RM, CTRL_SET_VGPU_FB_USAGE)          //85
-+    X(RM, CTRL_NVFBC_SW_SESSION_UPDATE_INFO)    //86
-+    X(RM, CTRL_NVENC_SW_SESSION_UPDATE_INFO)    //87
-+    X(RM, CTRL_RESET_CHANNEL)                   //88
-+    X(RM, CTRL_RESET_ISOLATED_CHANNEL)          //89
-+    X(RM, CTRL_GPU_HANDLE_VF_PRI_FAULT)         //90
-+    X(RM, CTRL_CLK_GET_EXTENDED_INFO)           //91
-+    X(RM, CTRL_PERF_BOOST)                      //92
-+    X(RM, CTRL_PERF_VPSTATES_GET_CONTROL)       //93
-+    X(RM, CTRL_GET_ZBC_CLEAR_TABLE)             //94
-+    X(RM, CTRL_SET_ZBC_COLOR_CLEAR)             //95
-+    X(RM, CTRL_SET_ZBC_DEPTH_CLEAR)             //96
-+    X(RM, CTRL_GPFIFO_SCHEDULE)                 //97
-+    X(RM, CTRL_SET_TIMESLICE)                   //98
-+    X(RM, CTRL_PREEMPT)                         //99
-+    X(RM, CTRL_FIFO_DISABLE_CHANNELS)           //100
-+    X(RM, CTRL_SET_TSG_INTERLEAVE_LEVEL)        //101
-+    X(RM, CTRL_SET_CHANNEL_INTERLEAVE_LEVEL)    //102
-+    X(GSP, GSP_RM_ALLOC)                        //103
-+    X(RM, CTRL_GET_P2P_CAPS_V2)                 //104
-+    X(RM, CTRL_CIPHER_AES_ENCRYPT)              //105
-+    X(RM, CTRL_CIPHER_SESSION_KEY)              //106
-+    X(RM, CTRL_CIPHER_SESSION_KEY_STATUS)       //107
-+    X(RM, CTRL_DBG_CLEAR_ALL_SM_ERROR_STATES)   //108
-+    X(RM, CTRL_DBG_READ_ALL_SM_ERROR_STATES)    //109
-+    X(RM, CTRL_DBG_SET_EXCEPTION_MASK)          //110
-+    X(RM, CTRL_GPU_PROMOTE_CTX)                 //111
-+    X(RM, CTRL_GR_CTXSW_PREEMPTION_BIND)        //112
-+    X(RM, CTRL_GR_SET_CTXSW_PREEMPTION_MODE)    //113
-+    X(RM, CTRL_GR_CTXSW_ZCULL_BIND)             //114
-+    X(RM, CTRL_GPU_INITIALIZE_CTX)              //115
-+    X(RM, CTRL_VASPACE_COPY_SERVER_RESERVED_PDES)    //116
-+    X(RM, CTRL_FIFO_CLEAR_FAULTED_BIT)          //117
-+    X(RM, CTRL_GET_LATEST_ECC_ADDRESSES)        //118
-+    X(RM, CTRL_MC_SERVICE_INTERRUPTS)           //119
-+    X(RM, CTRL_DMA_SET_DEFAULT_VASPACE)         //120
-+    X(RM, CTRL_GET_CE_PCE_MASK)                 //121
-+    X(RM, CTRL_GET_ZBC_CLEAR_TABLE_ENTRY)       //122
-+    X(RM, CTRL_GET_NVLINK_PEER_ID_MASK)         //123
-+    X(RM, CTRL_GET_NVLINK_STATUS)               //124
-+    X(RM, CTRL_GET_P2P_CAPS)                    //125
-+    X(RM, CTRL_GET_P2P_CAPS_MATRIX)             //126
-+    X(RM, RESERVED_0)                           //127
-+    X(RM, CTRL_RESERVE_PM_AREA_SMPC)            //128
-+    X(RM, CTRL_RESERVE_HWPM_LEGACY)             //129
-+    X(RM, CTRL_B0CC_EXEC_REG_OPS)               //130
-+    X(RM, CTRL_BIND_PM_RESOURCES)               //131
-+    X(RM, CTRL_DBG_SUSPEND_CONTEXT)             //132
-+    X(RM, CTRL_DBG_RESUME_CONTEXT)              //133
-+    X(RM, CTRL_DBG_EXEC_REG_OPS)                //134
-+    X(RM, CTRL_DBG_SET_MODE_MMU_DEBUG)          //135
-+    X(RM, CTRL_DBG_READ_SINGLE_SM_ERROR_STATE)  //136
-+    X(RM, CTRL_DBG_CLEAR_SINGLE_SM_ERROR_STATE) //137
-+    X(RM, CTRL_DBG_SET_MODE_ERRBAR_DEBUG)       //138
-+    X(RM, CTRL_DBG_SET_NEXT_STOP_TRIGGER_TYPE)  //139
-+    X(RM, CTRL_ALLOC_PMA_STREAM)                //140
-+    X(RM, CTRL_PMA_STREAM_UPDATE_GET_PUT)       //141
-+    X(RM, CTRL_FB_GET_INFO_V2)                  //142
-+    X(RM, CTRL_FIFO_SET_CHANNEL_PROPERTIES)     //143
-+    X(RM, CTRL_GR_GET_CTX_BUFFER_INFO)          //144
-+    X(RM, CTRL_KGR_GET_CTX_BUFFER_PTES)         //145
-+    X(RM, CTRL_GPU_EVICT_CTX)                   //146
-+    X(RM, CTRL_FB_GET_FS_INFO)                  //147
-+    X(RM, CTRL_GRMGR_GET_GR_FS_INFO)            //148
-+    X(RM, CTRL_STOP_CHANNEL)                    //149
-+    X(RM, CTRL_GR_PC_SAMPLING_MODE)             //150
-+    X(RM, CTRL_PERF_RATED_TDP_GET_STATUS)       //151
-+    X(RM, CTRL_PERF_RATED_TDP_SET_CONTROL)      //152
-+    X(RM, CTRL_FREE_PMA_STREAM)                 //153
-+    X(RM, CTRL_TIMER_SET_GR_TICK_FREQ)          //154
-+    X(RM, CTRL_FIFO_SETUP_VF_ZOMBIE_SUBCTX_PDB) //155
-+    X(RM, GET_CONSOLIDATED_GR_STATIC_INFO)      //156
-+    X(RM, CTRL_DBG_SET_SINGLE_SM_SINGLE_STEP)   //157
-+    X(RM, CTRL_GR_GET_TPC_PARTITION_MODE)       //158
-+    X(RM, CTRL_GR_SET_TPC_PARTITION_MODE)       //159
-+    X(UVM, UVM_PAGING_CHANNEL_ALLOCATE)         //160
-+    X(UVM, UVM_PAGING_CHANNEL_DESTROY)          //161
-+    X(UVM, UVM_PAGING_CHANNEL_MAP)              //162
-+    X(UVM, UVM_PAGING_CHANNEL_UNMAP)            //163
-+    X(UVM, UVM_PAGING_CHANNEL_PUSH_STREAM)      //164
-+    X(UVM, UVM_PAGING_CHANNEL_SET_HANDLES)      //165
-+    X(UVM, UVM_METHOD_STREAM_GUEST_PAGES_OPERATION)  //166
-+    X(RM, CTRL_INTERNAL_QUIESCE_PMA_CHANNEL)    //167
-+    X(RM, DCE_RM_INIT)                          //168
-+    X(RM, REGISTER_VIRTUAL_EVENT_BUFFER)        //169
-+    X(RM, CTRL_EVENT_BUFFER_UPDATE_GET)         //170
-+    X(RM, GET_PLCABLE_ADDRESS_KIND)             //171
-+    X(RM, CTRL_PERF_LIMITS_SET_STATUS_V2)       //172
-+    X(RM, CTRL_INTERNAL_SRIOV_PROMOTE_PMA_STREAM)    //173
-+    X(RM, CTRL_GET_MMU_DEBUG_MODE)              //174
-+    X(RM, CTRL_INTERNAL_PROMOTE_FAULT_METHOD_BUFFERS) //175
-+    X(RM, CTRL_FLCN_GET_CTX_BUFFER_SIZE)        //176
-+    X(RM, CTRL_FLCN_GET_CTX_BUFFER_INFO)        //177
-+    X(RM, DISABLE_CHANNELS)                     //178
-+    X(RM, CTRL_FABRIC_MEMORY_DESCRIBE)          //179
-+    X(RM, CTRL_FABRIC_MEM_STATS)                //180
-+    X(RM, SAVE_HIBERNATION_DATA)                //181
-+    X(RM, RESTORE_HIBERNATION_DATA)             //182
-+    X(RM, CTRL_INTERNAL_MEMSYS_SET_ZBC_REFERENCED) //183
-+    X(RM, CTRL_EXEC_PARTITIONS_CREATE)          //184
-+    X(RM, CTRL_EXEC_PARTITIONS_DELETE)          //185
-+    X(RM, CTRL_GPFIFO_GET_WORK_SUBMIT_TOKEN)    //186
-+    X(RM, CTRL_GPFIFO_SET_WORK_SUBMIT_TOKEN_NOTIF_INDEX) //187
-+    X(RM, PMA_SCRUBBER_SHARED_BUFFER_GUEST_PAGES_OPERATION)  //188
-+    X(RM, CTRL_MASTER_GET_VIRTUAL_FUNCTION_ERROR_CONT_INTR_MASK)    //189
-+    X(RM, SET_SYSMEM_DIRTY_PAGE_TRACKING_BUFFER)  //190
-+    X(RM, CTRL_SUBDEVICE_GET_P2P_CAPS)          // 191
-+    X(RM, CTRL_BUS_SET_P2P_MAPPING)             // 192
-+    X(RM, CTRL_BUS_UNSET_P2P_MAPPING)           // 193
-+    X(RM, CTRL_FLA_SETUP_INSTANCE_MEM_BLOCK)    // 194
-+    X(RM, CTRL_GPU_MIGRATABLE_OPS)              // 195
-+    X(RM, CTRL_GET_TOTAL_HS_CREDITS)            // 196
-+    X(RM, CTRL_GET_HS_CREDITS)                  // 197
-+    X(RM, CTRL_SET_HS_CREDITS)                  // 198
-+    X(RM, CTRL_PM_AREA_PC_SAMPLER)              // 199
-+    X(RM, INVALIDATE_TLB)                       // 200
-+    X(RM, NUM_FUNCTIONS)                        //END
-+#ifdef DEFINING_X_IN_RPC_GLOBAL_ENUMS_H
-+};
-+#   undef X
-+#   undef DEFINING_X_IN_RPC_GLOBAL_ENUMS_H
-+#endif
++/*
++ * SPDX-FileCopyrightText: Copyright (c) 1993-2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
++ * SPDX-License-Identifier: MIT
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ */
 +
-+#ifndef E
-+#    define E(RPC) NV_VGPU_MSG_EVENT_##RPC,
-+#    define DEFINING_E_IN_RPC_GLOBAL_ENUMS_H
-+enum {
-+#endif
-+    E(FIRST_EVENT = 0x1000)                      // 0x1000
-+    E(GSP_INIT_DONE)                             // 0x1001
-+    E(GSP_RUN_CPU_SEQUENCER)                     // 0x1002
-+    E(POST_EVENT)                                // 0x1003
-+    E(RC_TRIGGERED)                              // 0x1004
-+    E(MMU_FAULT_QUEUED)                          // 0x1005
-+    E(OS_ERROR_LOG)                              // 0x1006
-+    E(RG_LINE_INTR)                              // 0x1007
-+    E(GPUACCT_PERFMON_UTIL_SAMPLES)              // 0x1008
-+    E(SIM_READ)                                  // 0x1009
-+    E(SIM_WRITE)                                 // 0x100a
-+    E(SEMAPHORE_SCHEDULE_CALLBACK)               // 0x100b
-+    E(UCODE_LIBOS_PRINT)                         // 0x100c
-+    E(VGPU_GSP_PLUGIN_TRIGGERED)                 // 0x100d
-+    E(PERF_GPU_BOOST_SYNC_LIMITS_CALLBACK)       // 0x100e
-+    E(PERF_BRIDGELESS_INFO_UPDATE)               // 0x100f
-+    E(VGPU_CONFIG)                               // 0x1010
-+    E(DISPLAY_MODESET)                           // 0x1011
-+    E(EXTDEV_INTR_SERVICE)                       // 0x1012
-+    E(NVLINK_INBAND_RECEIVED_DATA_256)           // 0x1013
-+    E(NVLINK_INBAND_RECEIVED_DATA_512)           // 0x1014
-+    E(NVLINK_INBAND_RECEIVED_DATA_1024)          // 0x1015
-+    E(NVLINK_INBAND_RECEIVED_DATA_2048)          // 0x1016
-+    E(NVLINK_INBAND_RECEIVED_DATA_4096)          // 0x1017
-+    E(TIMED_SEMAPHORE_RELEASE)                   // 0x1018
-+    E(NVLINK_IS_GPU_DEGRADED)                    // 0x1019
-+    E(PFM_REQ_HNDLR_STATE_SYNC_CALLBACK)         // 0x101a
-+    E(GSP_SEND_USER_SHARED_DATA)                 // 0x101b
-+    E(NVLINK_FAULT_UP)                           // 0x101c
-+    E(GSP_LOCKDOWN_NOTICE)                       // 0x101d
-+    E(MIG_CI_CONFIG_UPDATE)                      // 0x101e
-+    E(NUM_EVENTS)                                // END
-+#ifdef DEFINING_E_IN_RPC_GLOBAL_ENUMS_H
-+};
-+#   undef E
-+#   undef DEFINING_E_IN_RPC_GLOBAL_ENUMS_H
-+#endif
++#define ADDR_SYSMEM     1         // System memory (PCI)
++#define ADDR_FBMEM      2         // Frame buffer memory space
 +
 +#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/nvtypes.h b/drivers/gpu/drm/nouveau/include/nvrm/nvtypes.h
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_rpc-structures.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_rpc-structures.h
+index 05ac91facca4..9139b34c75d9 100644
+--- a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_rpc-structures.h
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_rpc-structures.h
+@@ -91,6 +91,19 @@ typedef struct rpc_run_cpu_sequencer_v17_00
+     NvU32      commandBuffer[];
+ } rpc_run_cpu_sequencer_v17_00;
+ 
++typedef struct rpc_post_event_v17_00
++{
++    NvHandle   hClient;
++    NvHandle   hEvent;
++    NvU32      notifyIndex;
++    NvU32      data;
++    NvU16      info16;
++    NvU32      status;
++    NvU32      eventDataSize;
++    NvBool     bNotifyList;
++    NvU8       eventData[];
++} rpc_post_event_v17_00;
++
+ typedef struct rpc_os_error_log_v17_00
+ {
+     NvU32      exceptType;
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/intr/engine_idx.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/intr/engine_idx.h
+index 018e5c3f58d6..2cdea853f265 100644
+--- a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/intr/engine_idx.h
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/intr/engine_idx.h
+@@ -26,6 +26,8 @@
+  * DEALINGS IN THE SOFTWARE.
+  */
+ 
++#define MC_ENGINE_IDX_DISP                          2
++
+ #define MC_ENGINE_IDX_GSP                           49
+ 
+ #endif
+diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/os/nv_memory_type.h b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/os/nv_memory_type.h
 new file mode 100644
-index 000000000000..e6833df1ccc7
+index 000000000000..c8f046bb630f
 --- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/nvtypes.h
-@@ -0,0 +1,24 @@
-+/* SPDX-License-Identifier: MIT */
-+#ifndef __NVRM_NVTYPES_H__
-+#define __NVRM_NVTYPES_H__
++++ b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/os/nv_memory_type.h
+@@ -0,0 +1,31 @@
++#ifndef __src_nvidia_inc_kernel_os_nv_memory_type_h__
++#define __src_nvidia_inc_kernel_os_nv_memory_type_h__
 +
-+#define NV_ALIGN_BYTES(a) __attribute__ ((__aligned__(a)))
-+#define NV_DECLARE_ALIGNED(f,a) f __attribute__ ((__aligned__(a)))
++/* Excerpt of RM headers from https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03 */
 +
-+typedef u32 NvV32;
++/*
++ * SPDX-FileCopyrightText: Copyright (c) 2020 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
++ * SPDX-License-Identifier: MIT
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ */
 +
-+typedef u8 NvU8;
-+typedef u16 NvU16;
-+typedef u32 NvU32;
-+typedef u64 NvU64;
++#define NV_MEMORY_WRITECOMBINED      2
 +
-+typedef void* NvP64;
-+
-+typedef NvU8 NvBool;
-+typedef NvU32 NvHandle;
-+typedef NvU64 NvLength;
-+
-+typedef NvU64 RmPhysAddr;
-+
-+typedef NvU32 NV_STATUS;
 +#endif
+diff --git a/drivers/gpu/drm/nouveau/nvif/disp.c b/drivers/gpu/drm/nouveau/nvif/disp.c
+index 097246e10cdb..14da22fa3b5b 100644
+--- a/drivers/gpu/drm/nouveau/nvif/disp.c
++++ b/drivers/gpu/drm/nouveau/nvif/disp.c
+@@ -36,6 +36,7 @@ int
+ nvif_disp_ctor(struct nvif_device *device, const char *name, s32 oclass, struct nvif_disp *disp)
+ {
+ 	static const struct nvif_mclass disps[] = {
++		{ AD102_DISP, 0 },
+ 		{ GA102_DISP, 0 },
+ 		{ TU102_DISP, 0 },
+ 		{ GV100_DISP, 0 },
 diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-index 80ebf2a3a990..ce5652496e2c 100644
+index fc2d896f71ce..1db2ad25f504 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-@@ -2744,6 +2744,66 @@ nv177_chipset = {
+@@ -2758,6 +2758,8 @@ nv192_chipset = {
+ 	.pci      = { 0x00000001, gp100_pci_new },
+ 	.timer    = { 0x00000001, gk20a_timer_new },
+ 	.vfn      = { 0x00000001, ga100_vfn_new },
++	.disp     = { 0x00000001, ad102_disp_new },
++	.dma      = { 0x00000001, gv100_dma_new },
  	.sec2     = { 0x00000001, ga102_sec2_new },
  };
  
-+static const struct nvkm_device_chip
-+nv192_chipset = {
-+	.name = "AD102",
-+	.bios     = { 0x00000001, nvkm_bios_new },
-+	.devinit  = { 0x00000001, ga100_devinit_new },
-+	.fb       = { 0x00000001, ga102_fb_new },
-+	.gsp      = { 0x00000001, ad102_gsp_new },
-+	.pci      = { 0x00000001, gp100_pci_new },
-+	.timer    = { 0x00000001, gk20a_timer_new },
-+	.sec2     = { 0x00000001, ga102_sec2_new },
-+};
-+
-+static const struct nvkm_device_chip
-+nv193_chipset = {
-+	.name = "AD103",
-+	.bios     = { 0x00000001, nvkm_bios_new },
-+	.devinit  = { 0x00000001, ga100_devinit_new },
-+	.fb       = { 0x00000001, ga102_fb_new },
-+	.gsp      = { 0x00000001, ad102_gsp_new },
-+	.pci      = { 0x00000001, gp100_pci_new },
-+	.timer    = { 0x00000001, gk20a_timer_new },
-+	.sec2     = { 0x00000001, ga102_sec2_new },
-+};
-+
-+static const struct nvkm_device_chip
-+nv194_chipset = {
-+	.name = "AD104",
-+	.bios     = { 0x00000001, nvkm_bios_new },
-+	.devinit  = { 0x00000001, ga100_devinit_new },
-+	.fb       = { 0x00000001, ga102_fb_new },
-+	.gsp      = { 0x00000001, ad102_gsp_new },
-+	.pci      = { 0x00000001, gp100_pci_new },
-+	.timer    = { 0x00000001, gk20a_timer_new },
-+	.sec2     = { 0x00000001, ga102_sec2_new },
-+};
-+
-+static const struct nvkm_device_chip
-+nv196_chipset = {
-+	.name = "AD106",
-+	.bios     = { 0x00000001, nvkm_bios_new },
-+	.devinit  = { 0x00000001, ga100_devinit_new },
-+	.fb       = { 0x00000001, ga102_fb_new },
-+	.gsp      = { 0x00000001, ad102_gsp_new },
-+	.pci      = { 0x00000001, gp100_pci_new },
-+	.timer    = { 0x00000001, gk20a_timer_new },
-+	.sec2     = { 0x00000001, ga102_sec2_new },
-+};
-+
-+static const struct nvkm_device_chip
-+nv197_chipset = {
-+	.name = "AD107",
-+	.bios     = { 0x00000001, nvkm_bios_new },
-+	.devinit  = { 0x00000001, ga100_devinit_new },
-+	.fb       = { 0x00000001, ga102_fb_new },
-+	.gsp      = { 0x00000001, ad102_gsp_new },
-+	.pci      = { 0x00000001, gp100_pci_new },
-+	.timer    = { 0x00000001, gk20a_timer_new },
-+	.sec2     = { 0x00000001, ga102_sec2_new },
-+};
-+
- struct nvkm_subdev *
- nvkm_device_subdev(struct nvkm_device *device, int type, int inst)
- {
-@@ -3062,6 +3122,7 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
- 			case 0x140: device->card_type = GV100; break;
- 			case 0x160: device->card_type = TU100; break;
- 			case 0x170: device->card_type = GA100; break;
-+			case 0x190: device->card_type = AD100; break;
- 			default:
- 				break;
- 			}
-@@ -3164,6 +3225,11 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
- 		case 0x174: device->chip = &nv174_chipset; break;
- 		case 0x176: device->chip = &nv176_chipset; break;
- 		case 0x177: device->chip = &nv177_chipset; break;
-+		case 0x192: device->chip = &nv192_chipset; break;
-+		case 0x193: device->chip = &nv193_chipset; break;
-+		case 0x194: device->chip = &nv194_chipset; break;
-+		case 0x196: device->chip = &nv196_chipset; break;
-+		case 0x197: device->chip = &nv197_chipset; break;
- 		default:
- 			if (nvkm_boolopt(device->cfgopt, "NvEnableUnsupportedChipsets", false)) {
- 				switch (device->chipset) {
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/user.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/user.c
-index 9b39ec341615..7fd4800a876a 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/device/user.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/user.c
-@@ -147,6 +147,7 @@ nvkm_udevice_info(struct nvkm_udevice *udev, void *data, u32 size)
- 	case GV100: args->v0.family = NV_DEVICE_INFO_V0_VOLTA; break;
- 	case TU100: args->v0.family = NV_DEVICE_INFO_V0_TURING; break;
- 	case GA100: args->v0.family = NV_DEVICE_INFO_V0_AMPERE; break;
-+	case AD100: args->v0.family = NV_DEVICE_INFO_V0_ADA; break;
- 	default:
- 		args->v0.family = 0;
- 		break;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/Kbuild b/drivers/gpu/drm/nouveau/nvkm/falcon/Kbuild
-index 9ffe7b921ccb..d6b015564401 100644
---- a/drivers/gpu/drm/nouveau/nvkm/falcon/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/falcon/Kbuild
-@@ -8,5 +8,6 @@ nvkm-y += nvkm/falcon/v1.o
+@@ -2775,6 +2777,8 @@ nv193_chipset = {
+ 	.pci      = { 0x00000001, gp100_pci_new },
+ 	.timer    = { 0x00000001, gk20a_timer_new },
+ 	.vfn      = { 0x00000001, ga100_vfn_new },
++	.disp     = { 0x00000001, ad102_disp_new },
++	.dma      = { 0x00000001, gv100_dma_new },
+ 	.sec2     = { 0x00000001, ga102_sec2_new },
+ };
  
- nvkm-y += nvkm/falcon/gm200.o
- nvkm-y += nvkm/falcon/gp102.o
-+nvkm-y += nvkm/falcon/tu102.o
- nvkm-y += nvkm/falcon/ga100.o
- nvkm-y += nvkm/falcon/ga102.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/base.c b/drivers/gpu/drm/nouveau/nvkm/falcon/base.c
-index 235149f73a69..8c4f659e982b 100644
---- a/drivers/gpu/drm/nouveau/nvkm/falcon/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/falcon/base.c
-@@ -25,6 +25,15 @@
- #include <subdev/timer.h>
- #include <subdev/top.h>
+@@ -2792,6 +2796,8 @@ nv194_chipset = {
+ 	.pci      = { 0x00000001, gp100_pci_new },
+ 	.timer    = { 0x00000001, gk20a_timer_new },
+ 	.vfn      = { 0x00000001, ga100_vfn_new },
++	.disp     = { 0x00000001, ad102_disp_new },
++	.dma      = { 0x00000001, gv100_dma_new },
+ 	.sec2     = { 0x00000001, ga102_sec2_new },
+ };
  
-+bool
-+nvkm_falcon_riscv_active(struct nvkm_falcon *falcon)
-+{
-+	if (!falcon->func->riscv_active)
-+		return false;
-+
-+	return falcon->func->riscv_active(falcon);
-+}
-+
- static const struct nvkm_falcon_func_dma *
- nvkm_falcon_dma(struct nvkm_falcon *falcon, enum nvkm_falcon_mem *mem_type, u32 *mem_base)
- {
-diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/ga102.c b/drivers/gpu/drm/nouveau/nvkm/falcon/ga102.c
-index 0ff450fe3590..834afa45f2fd 100644
---- a/drivers/gpu/drm/nouveau/nvkm/falcon/ga102.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/falcon/ga102.c
-@@ -24,6 +24,12 @@
- #include <subdev/mc.h>
- #include <subdev/timer.h>
+@@ -2809,6 +2815,8 @@ nv196_chipset = {
+ 	.pci      = { 0x00000001, gp100_pci_new },
+ 	.timer    = { 0x00000001, gk20a_timer_new },
+ 	.vfn      = { 0x00000001, ga100_vfn_new },
++	.disp     = { 0x00000001, ad102_disp_new },
++	.dma      = { 0x00000001, gv100_dma_new },
+ 	.sec2     = { 0x00000001, ga102_sec2_new },
+ };
  
-+bool
-+ga102_flcn_riscv_active(struct nvkm_falcon *falcon)
-+{
-+	return (nvkm_falcon_rd32(falcon, falcon->addr2 + 0x388) & 0x00000080) != 0;
-+}
+@@ -2826,6 +2834,8 @@ nv197_chipset = {
+ 	.pci      = { 0x00000001, gp100_pci_new },
+ 	.timer    = { 0x00000001, gk20a_timer_new },
+ 	.vfn      = { 0x00000001, ga100_vfn_new },
++	.disp     = { 0x00000001, ad102_disp_new },
++	.dma      = { 0x00000001, gv100_dma_new },
+ 	.sec2     = { 0x00000001, ga102_sec2_new },
+ };
+ 
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild b/drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild
+index e1aecd3fe96c..e346e924fee8 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild
+@@ -27,6 +27,9 @@ nvkm-y += nvkm/engine/disp/gp102.o
+ nvkm-y += nvkm/engine/disp/gv100.o
+ nvkm-y += nvkm/engine/disp/tu102.o
+ nvkm-y += nvkm/engine/disp/ga102.o
++nvkm-y += nvkm/engine/disp/ad102.o
 +
- static bool
- ga102_flcn_dma_done(struct nvkm_falcon *falcon)
- {
-diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/tu102.c b/drivers/gpu/drm/nouveau/nvkm/falcon/tu102.c
++nvkm-y += nvkm/engine/disp/r535.o
+ 
+ nvkm-y += nvkm/engine/disp/udisp.o
+ nvkm-y += nvkm/engine/disp/uconn.o
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/ad102.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ad102.c
 new file mode 100644
-index 000000000000..399918219485
+index 000000000000..7f300a79aa29
 --- /dev/null
-+++ b/drivers/gpu/drm/nouveau/nvkm/falcon/tu102.c
-@@ -0,0 +1,28 @@
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ad102.c
+@@ -0,0 +1,52 @@
 +/*
 + * Copyright 2023 Red Hat Inc.
 + *
@@ -1936,54 +1745,147 @@ index 000000000000..399918219485
 + * OTHER DEALINGS IN THE SOFTWARE.
 + */
 +#include "priv.h"
++#include "chan.h"
 +
-+bool
-+tu102_flcn_riscv_active(struct nvkm_falcon *falcon)
++#include <subdev/gsp.h>
++
++#include <nvif/class.h>
++
++static const struct nvkm_disp_func
++ad102_disp = {
++	.uevent = &gv100_disp_chan_uevent,
++	.ramht_size = 0x2000,
++	.root = {  0, 0,AD102_DISP },
++	.user = {
++		{{-1,-1,GV100_DISP_CAPS                  }, gv100_disp_caps_new },
++		{{ 0, 0,GA102_DISP_CURSOR                }, nvkm_disp_chan_new, &gv100_disp_curs },
++		{{ 0, 0,GA102_DISP_WINDOW_IMM_CHANNEL_DMA}, nvkm_disp_wndw_new, &gv100_disp_wimm },
++		{{ 0, 0,AD102_DISP_CORE_CHANNEL_DMA      }, nvkm_disp_core_new, &gv100_disp_core },
++		{{ 0, 0,GA102_DISP_WINDOW_CHANNEL_DMA    }, nvkm_disp_wndw_new, &gv100_disp_wndw },
++		{}
++	},
++};
++
++int
++ad102_disp_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
++	       struct nvkm_disp **pdisp)
 +{
-+	return (nvkm_falcon_rd32(falcon, falcon->addr2 + 0x240) & 0x00000001) != 0;
++	if (nvkm_gsp_rm(device->gsp))
++		return r535_disp_new(&ad102_disp, device, type, inst, pdisp);
++
++	return -ENODEV;
 +}
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c
-index 6c318e41bde0..91f486ee4c42 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c
-@@ -46,6 +46,14 @@ nvbios_addr(struct nvkm_bios *bios, u32 *addr, u8 size)
- 	return true;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/base.c
+index 7356e20e5770..457ec5db794d 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/base.c
+@@ -137,7 +137,8 @@ nvkm_disp_init(struct nvkm_engine *engine)
+ 	 * each output resource to 'fully enabled'.
+ 	 */
+ 	list_for_each_entry(ior, &disp->iors, head) {
+-		ior->func->power(ior, true, true, true, true, true);
++		if (ior->func->power)
++			ior->func->power(ior, true, true, true, true, true);
+ 	}
+ 
+ 	return 0;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.h b/drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.h
+index 398336ffb685..020290510157 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.h
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.h
+@@ -22,6 +22,10 @@ struct nvkm_disp_chan {
+ 	u64 push;
+ 
+ 	u32 suspend_put;
++
++	struct {
++		struct nvkm_gsp_object object;
++	} rm;
+ };
+ 
+ int nvkm_disp_core_new(const struct nvkm_oclass *, void *, u32, struct nvkm_object **);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/ga102.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ga102.c
+index d632c09d962e..ab0a85c92430 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/ga102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ga102.c
+@@ -149,7 +149,7 @@ ga102_disp_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
+ 	       struct nvkm_disp **pdisp)
+ {
+ 	if (nvkm_gsp_rm(device->gsp))
+-		return -ENODEV;
++		return r535_disp_new(&ga102_disp, device, type, inst, pdisp);
+ 
+ 	return nvkm_disp_new_(&ga102_disp, device, type, inst, pdisp);
+ }
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
+index 9fde83fe2e2f..cfa3698d3a2f 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
+@@ -96,7 +96,7 @@ gv100_sor_dp = {
+ 	.watermark = gv100_sor_dp_watermark,
+ };
+ 
+-static void
++void
+ gv100_sor_hdmi_infoframe_vsi(struct nvkm_ior *ior, int head, void *data, u32 size)
+ {
+ 	struct nvkm_device *device = ior->disp->engine.subdev.device;
+@@ -120,7 +120,7 @@ gv100_sor_hdmi_infoframe_vsi(struct nvkm_ior *ior, int head, void *data, u32 siz
+ 	nvkm_mask(device, 0x6f0100 + hoff, 0x00000001, 0x00000001);
  }
  
-+void *
-+nvbios_pointer(struct nvkm_bios *bios, u32 addr)
-+{
-+	if (likely(nvbios_addr(bios, &addr, 0)))
-+		return &bios->data[addr];
-+	return NULL;
-+}
-+
- u8
- nvbios_rd08(struct nvkm_bios *bios, u32 addr)
+-static void
++void
+ gv100_sor_hdmi_infoframe_avi(struct nvkm_ior *ior, int head, void *data, u32 size)
  {
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
-index 4b497ad9bb91..16bf2f1bb780 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
-@@ -1,7 +1,12 @@
- # SPDX-License-Identifier: MIT
- nvkm-y += nvkm/subdev/gsp/base.o
-+nvkm-y += nvkm/subdev/gsp/fwsec.o
+ 	struct nvkm_device *device = ior->disp->engine.subdev.device;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/ior.h b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ior.h
+index 9beb9d1e8633..3ba04bead2f9 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/ior.h
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ior.h
+@@ -187,6 +187,8 @@ int gp100_sor_new(struct nvkm_disp *, int);
+ int gv100_sor_cnt(struct nvkm_disp *, unsigned long *);
+ void gv100_sor_state(struct nvkm_ior *, struct nvkm_ior_state *);
+ extern const struct nvkm_ior_func_hdmi gv100_sor_hdmi;
++void gv100_sor_hdmi_infoframe_avi(struct nvkm_ior *, int, void *, u32);
++void gv100_sor_hdmi_infoframe_vsi(struct nvkm_ior *, int, void *, u32);
+ void gv100_sor_dp_audio(struct nvkm_ior *, int, bool);
+ void gv100_sor_dp_audio_sym(struct nvkm_ior *, int, u16, u32);
+ void gv100_sor_dp_watermark(struct nvkm_ior *, int, u8);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.c
+index bfb2a4db8d64..28adc5a30f2f 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.c
+@@ -386,7 +386,8 @@ nvkm_outp_new_(const struct nvkm_outp_func *func, struct nvkm_disp *disp,
+ 	outp->disp = disp;
+ 	outp->index = index;
+ 	outp->info = *dcbE;
+-	outp->i2c = nvkm_i2c_bus_find(i2c, dcbE->i2c_index);
++	if (!disp->rm.client.gsp)
++		outp->i2c = nvkm_i2c_bus_find(i2c, dcbE->i2c_index);
+ 
+ 	OUTP_DBG(outp, "type %02x loc %d or %d link %d con %x "
+ 		       "edid %x bus %d head %x",
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/priv.h b/drivers/gpu/drm/nouveau/nvkm/engine/disp/priv.h
+index 13ef71f428b8..a3fd7cb7c488 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/priv.h
+@@ -8,6 +8,9 @@ struct nvkm_head;
+ struct nvkm_outp;
+ struct dcb_output;
+ 
++int r535_disp_new(const struct nvkm_disp_func *, struct nvkm_device *, enum nvkm_subdev_type, int,
++		  struct nvkm_disp **);
 +
- nvkm-y += nvkm/subdev/gsp/gv100.o
- nvkm-y += nvkm/subdev/gsp/tu102.o
- nvkm-y += nvkm/subdev/gsp/tu116.o
- nvkm-y += nvkm/subdev/gsp/ga100.o
- nvkm-y += nvkm/subdev/gsp/ga102.o
-+nvkm-y += nvkm/subdev/gsp/ad102.o
-+
-+nvkm-y += nvkm/subdev/gsp/r535.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c
+ int nvkm_disp_ctor(const struct nvkm_disp_func *, struct nvkm_device *, enum nvkm_subdev_type, int,
+ 		   struct nvkm_disp *);
+ int nvkm_disp_new_(const struct nvkm_disp_func *, struct nvkm_device *, enum nvkm_subdev_type, int,
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
 new file mode 100644
-index 000000000000..0ca6c397de96
+index 000000000000..6c54c473bb6d
 --- /dev/null
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ad102.c
-@@ -0,0 +1,57 @@
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
+@@ -0,0 +1,1671 @@
 +/*
 + * Copyright 2023 Red Hat Inc.
 + *
@@ -2006,2463 +1908,1921 @@ index 000000000000..0ca6c397de96
 + * OTHER DEALINGS IN THE SOFTWARE.
 + */
 +#include "priv.h"
++#include "chan.h"
++#include "conn.h"
++#include "dp.h"
++#include "head.h"
++#include "ior.h"
++#include "outp.h"
 +
-+static const struct nvkm_gsp_func
-+ad102_gsp_r535_54_03 = {
-+	.flcn = &ga102_gsp_flcn,
-+	.fwsec = &ga102_gsp_fwsec,
-+
-+	.sig_section = ".fwsignature_ad10x",
-+
-+	.wpr_heap.os_carveout_size = 20 << 20,
-+	.wpr_heap.base_size = 8 << 20,
-+	.wpr_heap.min_size = 84 << 20,
-+
-+	.booter.ctor = ga102_gsp_booter_ctor,
-+
-+	.dtor = r535_gsp_dtor,
-+	.oneinit = tu102_gsp_oneinit,
-+	.init = r535_gsp_init,
-+	.fini = r535_gsp_fini,
-+	.reset = ga102_gsp_reset,
-+
-+	.rm = &r535_gsp_rm,
-+};
-+
-+static struct nvkm_gsp_fwif
-+ad102_gsps[] = {
-+	{ 0, r535_gsp_load, &ad102_gsp_r535_54_03, "535.54.03", true },
-+	{}
-+};
-+
-+int
-+ad102_gsp_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
-+	      struct nvkm_gsp **pgsp)
-+{
-+	return nvkm_gsp_new_(ad102_gsps, device, type, inst, pgsp);
-+}
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
-index 9424d104f2be..d456ca29c418 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
-@@ -90,6 +90,7 @@ nvkm_gsp_new_(const struct nvkm_gsp_fwif *fwif, struct nvkm_device *device,
- 		return PTR_ERR(fwif);
- 
- 	gsp->func = fwif->func;
-+	gsp->rm = gsp->func->rm;
- 
- 	return nvkm_falcon_ctor(gsp->func->flcn, &gsp->subdev, gsp->subdev.name, 0x110000,
- 				&gsp->falcon);
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c
-new file mode 100644
-index 000000000000..330d72b1a4af
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/fwsec.c
-@@ -0,0 +1,359 @@
-+/*
-+ * Copyright 2023 Red Hat Inc.
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+ * THE COPYRIGHT HOLDER(S) OR AUTHOR(S) BE LIABLE FOR ANY CLAIM, DAMAGES OR
-+ * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-+ * OTHER DEALINGS IN THE SOFTWARE.
-+ */
-+#include "priv.h"
-+
++#include <core/ramht.h>
 +#include <subdev/bios.h>
-+#include <subdev/bios/pmu.h>
-+
-+#include <nvfw/fw.h>
-+
-+union nvfw_falcon_appif_hdr {
-+	struct nvfw_falcon_appif_hdr_v1 {
-+		u8 ver;
-+		u8 hdr;
-+		u8 len;
-+		u8 cnt;
-+	} v1;
-+};
-+
-+union nvfw_falcon_appif {
-+	struct nvfw_falcon_appif_v1 {
-+#define NVFW_FALCON_APPIF_ID_DMEMMAPPER 0x00000004
-+		u32 id;
-+		u32 dmem_base;
-+	} v1;
-+};
-+
-+union nvfw_falcon_appif_dmemmapper {
-+	struct {
-+		u32 signature;
-+		u16 version;
-+		u16 size;
-+		u32 cmd_in_buffer_offset;
-+		u32 cmd_in_buffer_size;
-+		u32 cmd_out_buffer_offset;
-+		u32 cmd_out_buffer_size;
-+		u32 nvf_img_data_buffer_offset;
-+		u32 nvf_img_data_buffer_size;
-+		u32 printf_buffer_hdr;
-+		u32 ucode_build_time_stamp;
-+		u32 ucode_signature;
-+#define NVFW_FALCON_APPIF_DMEMMAPPER_CMD_FRTS 0x00000015
-+#define NVFW_FALCON_APPIF_DMEMMAPPER_CMD_SB   0x00000019
-+		u32 init_cmd;
-+		u32 ucode_feature;
-+		u32 ucode_cmd_mask0;
-+		u32 ucode_cmd_mask1;
-+		u32 multi_tgt_tbl;
-+	} v3;
-+};
-+
-+struct nvfw_fwsec_frts_cmd {
-+	struct {
-+	    u32 ver;
-+	    u32 hdr;
-+	    u64 addr;
-+	    u32 size;
-+	    u32 flags;
-+	} read_vbios;
-+	struct {
-+	    u32 ver;
-+	    u32 hdr;
-+	    u32 addr;
-+	    u32 size;
-+#define NVFW_FRTS_CMD_REGION_TYPE_FB 0x00000002
-+	    u32 type;
-+	} frts_region;
-+};
-+
-+static int
-+nvkm_gsp_fwsec_patch(struct nvkm_gsp *gsp, struct nvkm_falcon_fw *fw, u32 if_offset, u32 init_cmd)
-+{
-+	union nvfw_falcon_appif_hdr *hdr = (void *)(fw->fw.img + fw->dmem_base_img + if_offset);
-+	const u8 *dmem = fw->fw.img + fw->dmem_base_img;
-+	int i;
-+
-+	if (WARN_ON(hdr->v1.ver != 1))
-+		return -EINVAL;
-+
-+	for (i = 0; i < hdr->v1.cnt; i++) {
-+		union nvfw_falcon_appif *app = (void *)((u8 *)hdr + hdr->v1.hdr + i * hdr->v1.len);
-+		union nvfw_falcon_appif_dmemmapper *dmemmap;
-+		struct nvfw_fwsec_frts_cmd *frtscmd;
-+
-+		if (app->v1.id != NVFW_FALCON_APPIF_ID_DMEMMAPPER)
-+			continue;
-+
-+		dmemmap = (void *)(dmem + app->v1.dmem_base);
-+		dmemmap->v3.init_cmd = init_cmd;
-+
-+		frtscmd = (void *)(dmem + dmemmap->v3.cmd_in_buffer_offset);
-+
-+		frtscmd->read_vbios.ver = 1;
-+		frtscmd->read_vbios.hdr = sizeof(frtscmd->read_vbios);
-+		frtscmd->read_vbios.addr = 0;
-+		frtscmd->read_vbios.size = 0;
-+		frtscmd->read_vbios.flags = 2;
-+
-+		if (init_cmd == NVFW_FALCON_APPIF_DMEMMAPPER_CMD_FRTS) {
-+			frtscmd->frts_region.ver = 1;
-+			frtscmd->frts_region.hdr = sizeof(frtscmd->frts_region);
-+			frtscmd->frts_region.addr = gsp->fb.wpr2.frts.addr >> 12;
-+			frtscmd->frts_region.size = gsp->fb.wpr2.frts.size >> 12;
-+			frtscmd->frts_region.type = NVFW_FRTS_CMD_REGION_TYPE_FB;
-+		}
-+
-+		break;
-+	}
-+
-+	if (WARN_ON(i == hdr->v1.cnt))
-+		return -EINVAL;
-+
-+	return 0;
-+}
-+
-+union nvfw_falcon_ucode_desc {
-+	struct nvkm_falcon_ucode_desc_v2 {
-+		u32 Hdr;
-+		u32 StoredSize;
-+		u32 UncompressedSize;
-+		u32 VirtualEntry;
-+		u32 InterfaceOffset;
-+		u32 IMEMPhysBase;
-+		u32 IMEMLoadSize;
-+		u32 IMEMVirtBase;
-+		u32 IMEMSecBase;
-+		u32 IMEMSecSize;
-+		u32 DMEMOffset;
-+		u32 DMEMPhysBase;
-+		u32 DMEMLoadSize;
-+		u32 altIMEMLoadSize;
-+		u32 altDMEMLoadSize;
-+	} v2;
-+
-+	struct nvkm_falcon_ucode_desc_v3 {
-+		u32 Hdr;
-+		u32 StoredSize;
-+		u32 PKCDataOffset;
-+		u32 InterfaceOffset;
-+		u32 IMEMPhysBase;
-+		u32 IMEMLoadSize;
-+		u32 IMEMVirtBase;
-+		u32 DMEMPhysBase;
-+		u32 DMEMLoadSize;
-+		u16 EngineIdMask;
-+		u8  UcodeId;
-+		u8  SignatureCount;
-+		u16 SignatureVersions;
-+		u16 Reserved;
-+	} v3;
-+};
-+
-+static int
-+nvkm_gsp_fwsec_v2(struct nvkm_gsp *gsp, const char *name,
-+		  const struct nvkm_falcon_ucode_desc_v2 *desc, u32 size, u32 init_cmd,
-+		  struct nvkm_falcon_fw *fw)
-+{
-+	struct nvkm_subdev *subdev = &gsp->subdev;
-+	const struct firmware *bl;
-+	const struct nvfw_bin_hdr *hdr;
-+	const struct nvfw_bl_desc *bld;
-+	int ret;
-+
-+	/* Build ucode. */
-+	ret = nvkm_falcon_fw_ctor(gsp->func->fwsec, name, subdev->device, true,
-+				  (u8 *)desc + size, desc->IMEMLoadSize + desc->DMEMLoadSize,
-+				  &gsp->falcon, fw);
-+	if (WARN_ON(ret))
-+		return ret;
-+
-+	fw->nmem_base_img = 0;
-+	fw->nmem_base = desc->IMEMPhysBase;
-+	fw->nmem_size = desc->IMEMLoadSize - desc->IMEMSecSize;
-+
-+	fw->imem_base_img = 0;
-+	fw->imem_base = desc->IMEMSecBase;
-+	fw->imem_size = desc->IMEMSecSize;
-+
-+	fw->dmem_base_img = desc->DMEMOffset;
-+	fw->dmem_base = desc->DMEMPhysBase;
-+	fw->dmem_size = desc->DMEMLoadSize;
-+
-+	/* Bootloader. */
-+	ret = nvkm_firmware_get(subdev, "acr/bl", 0, &bl);
-+	if (ret)
-+		return ret;
-+
-+	hdr = nvfw_bin_hdr(subdev, bl->data);
-+	bld = nvfw_bl_desc(subdev, bl->data + hdr->header_offset);
-+
-+	fw->boot_addr = bld->start_tag << 8;
-+	fw->boot_size = bld->code_size;
-+	fw->boot = kmemdup(bl->data + hdr->data_offset + bld->code_off, fw->boot_size, GFP_KERNEL);
-+	if (!fw->boot)
-+		ret = -ENOMEM;
-+
-+	nvkm_firmware_put(bl);
-+
-+	/* Patch in interface data. */
-+	return nvkm_gsp_fwsec_patch(gsp, fw, desc->InterfaceOffset, init_cmd);
-+}
-+
-+static int
-+nvkm_gsp_fwsec_v3(struct nvkm_gsp *gsp, const char *name,
-+		  const struct nvkm_falcon_ucode_desc_v3 *desc, u32 size, u32 init_cmd,
-+		  struct nvkm_falcon_fw *fw)
-+{
-+	struct nvkm_device *device = gsp->subdev.device;
-+	struct nvkm_bios *bios = device->bios;
-+	int ret;
-+
-+	/* Build ucode. */
-+	ret = nvkm_falcon_fw_ctor(gsp->func->fwsec, name, device, true,
-+				  (u8 *)desc + size, desc->IMEMLoadSize + desc->DMEMLoadSize,
-+				  &gsp->falcon, fw);
-+	if (WARN_ON(ret))
-+		return ret;
-+
-+	fw->imem_base_img = 0;
-+	fw->imem_base = desc->IMEMPhysBase;
-+	fw->imem_size = desc->IMEMLoadSize;
-+	fw->dmem_base_img = desc->IMEMLoadSize;
-+	fw->dmem_base = desc->DMEMPhysBase;
-+	fw->dmem_size = ALIGN(desc->DMEMLoadSize, 256);
-+	fw->dmem_sign = desc->PKCDataOffset;
-+	fw->boot_addr = 0;
-+	fw->fuse_ver = desc->SignatureVersions;
-+	fw->ucode_id = desc->UcodeId;
-+	fw->engine_id = desc->EngineIdMask;
-+
-+	/* Patch in signature. */
-+	ret = nvkm_falcon_fw_sign(fw, fw->dmem_base_img + desc->PKCDataOffset, 96 * 4,
-+				  nvbios_pointer(bios, 0), desc->SignatureCount,
-+				  (u8 *)desc + 0x2c - (u8 *)nvbios_pointer(bios, 0), 0, 0);
-+	if (WARN_ON(ret))
-+		return ret;
-+
-+	/* Patch in interface data. */
-+	return nvkm_gsp_fwsec_patch(gsp, fw, desc->InterfaceOffset, init_cmd);
-+}
-+
-+static int
-+nvkm_gsp_fwsec(struct nvkm_gsp *gsp, const char *name, u32 init_cmd)
-+{
-+	struct nvkm_subdev *subdev = &gsp->subdev;
-+	struct nvkm_device *device = subdev->device;
-+	struct nvkm_bios *bios = device->bios;
-+	const union nvfw_falcon_ucode_desc *desc;
-+	struct nvbios_pmuE flcn_ucode;
-+	u8 idx, ver, hdr;
-+	u32 data;
-+	u16 size, vers;
-+	struct nvkm_falcon_fw fw = {};
-+	u32 mbox0 = 0;
-+	int ret;
-+
-+	/* Lookup in VBIOS. */
-+	for (idx = 0; (data = nvbios_pmuEp(bios, idx, &ver, &hdr, &flcn_ucode)); idx++) {
-+		if (flcn_ucode.type == 0x85)
-+			break;
-+	}
-+
-+	if (WARN_ON(!data))
-+		return -EINVAL;
-+
-+	/* Deteremine version. */
-+	desc = nvbios_pointer(bios, flcn_ucode.data);
-+	if (WARN_ON(!(desc->v2.Hdr & 0x00000001)))
-+		return -EINVAL;
-+
-+	size = (desc->v2.Hdr & 0xffff0000) >> 16;
-+	vers = (desc->v2.Hdr & 0x0000ff00) >> 8;
-+
-+	switch (vers) {
-+	case 2: ret = nvkm_gsp_fwsec_v2(gsp, name, &desc->v2, size, init_cmd, &fw); break;
-+	case 3: ret = nvkm_gsp_fwsec_v3(gsp, name, &desc->v3, size, init_cmd, &fw); break;
-+	default:
-+		nvkm_error(subdev, "%s(v%d): version unknown\n", name, vers);
-+		return -EINVAL;
-+	}
-+
-+	if (ret) {
-+		nvkm_error(subdev, "%s(v%d): %d\n", name, vers, ret);
-+		return ret;
-+	}
-+
-+	/* Boot. */
-+	ret = nvkm_falcon_fw_boot(&fw, subdev, true, &mbox0, NULL, 0, 0);
-+	nvkm_falcon_fw_dtor(&fw);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+int
-+nvkm_gsp_fwsec_sb(struct nvkm_gsp *gsp)
-+{
-+	struct nvkm_subdev *subdev = &gsp->subdev;
-+	struct nvkm_device *device = subdev->device;
-+	int ret;
-+	u32 err;
-+
-+	ret = nvkm_gsp_fwsec(gsp, "fwsec-sb", NVFW_FALCON_APPIF_DMEMMAPPER_CMD_SB);
-+	if (ret)
-+		return ret;
-+
-+	/* Verify. */
-+	err = nvkm_rd32(device, 0x001400 + (0xf * 4)) & 0x0000ffff;
-+	if (err) {
-+		nvkm_error(subdev, "fwsec-sb: 0x%04x\n", err);
-+		return -EIO;
-+	}
-+
-+	return 0;
-+}
-+
-+int
-+nvkm_gsp_fwsec_frts(struct nvkm_gsp *gsp)
-+{
-+	struct nvkm_subdev *subdev = &gsp->subdev;
-+	struct nvkm_device *device = subdev->device;
-+	int ret;
-+	u32 err, wpr2_lo, wpr2_hi;
-+
-+	ret = nvkm_gsp_fwsec(gsp, "fwsec-frts", NVFW_FALCON_APPIF_DMEMMAPPER_CMD_FRTS);
-+	if (ret)
-+		return ret;
-+
-+	/* Verify. */
-+	err = nvkm_rd32(device, 0x001400 + (0xe * 4)) >> 16;
-+	if (err) {
-+		nvkm_error(subdev, "fwsec-frts: 0x%04x\n", err);
-+		return -EIO;
-+	}
-+
-+	wpr2_lo = nvkm_rd32(device, 0x1fa824);
-+	wpr2_hi = nvkm_rd32(device, 0x1fa828);
-+	nvkm_debug(subdev, "fwsec-frts: WPR2 @ %08x - %08x\n", wpr2_lo, wpr2_hi);
-+	return 0;
-+}
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c
-index 73c3676d15a6..be73678607c5 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c
-@@ -21,8 +21,30 @@
-  */
- #include "priv.h"
- 
-+static const struct nvkm_gsp_func
-+ga100_gsp_r535_54_03 = {
-+	.flcn = &tu102_gsp_flcn,
-+	.fwsec = &tu102_gsp_fwsec,
-+
-+	.sig_section = ".fwsignature_ga100",
-+
-+	.wpr_heap.base_size = 8 << 20,
-+	.wpr_heap.min_size = 64 << 20,
-+
-+	.booter.ctor = tu102_gsp_booter_ctor,
-+
-+	.dtor = r535_gsp_dtor,
-+	.oneinit = tu102_gsp_oneinit,
-+	.init = r535_gsp_init,
-+	.fini = r535_gsp_fini,
-+	.reset = tu102_gsp_reset,
-+
-+	.rm = &r535_gsp_rm,
-+};
-+
- static struct nvkm_gsp_fwif
- ga100_gsps[] = {
-+	{  0,  r535_gsp_load, &ga100_gsp_r535_54_03, "535.54.03" },
- 	{ -1, gv100_gsp_nofw, &gv100_gsp },
- 	{}
- };
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c
-index ec6380f8bac5..19a2b582c661 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c
-@@ -21,7 +21,119 @@
-  */
- #include "priv.h"
- 
--static const struct nvkm_falcon_func
-+#include <nvfw/flcn.h>
-+#include <nvfw/fw.h>
-+#include <nvfw/hs.h>
-+
-+int
-+ga102_gsp_reset(struct nvkm_gsp *gsp)
-+{
-+	int ret;
-+
-+	ret = gsp->falcon.func->reset_eng(&gsp->falcon);
-+	if (ret)
-+		return ret;
-+
-+	nvkm_falcon_mask(&gsp->falcon, 0x1668, 0x00000111, 0x00000111);
-+	return 0;
-+}
-+
-+int
-+ga102_gsp_booter_ctor(struct nvkm_gsp *gsp, const char *name, const struct firmware *blob,
-+		      struct nvkm_falcon *falcon, struct nvkm_falcon_fw *fw)
-+{
-+	struct nvkm_subdev *subdev = &gsp->subdev;
-+	const struct nvkm_falcon_fw_func *func = &ga102_flcn_fw;
-+	const struct nvfw_bin_hdr *hdr;
-+	const struct nvfw_hs_header_v2 *hshdr;
-+	const struct nvfw_hs_load_header_v2 *lhdr;
-+	u32 loc, sig, cnt, *meta;
-+	int ret;
-+
-+	hdr = nvfw_bin_hdr(subdev, blob->data);
-+	hshdr = nvfw_hs_header_v2(subdev, blob->data + hdr->header_offset);
-+	meta = (u32 *)(blob->data + hshdr->meta_data_offset);
-+	loc = *(u32 *)(blob->data + hshdr->patch_loc);
-+	sig = *(u32 *)(blob->data + hshdr->patch_sig);
-+	cnt = *(u32 *)(blob->data + hshdr->num_sig);
-+
-+	ret = nvkm_falcon_fw_ctor(func, name, subdev->device, true,
-+				  blob->data + hdr->data_offset, hdr->data_size, falcon, fw);
-+	if (ret)
-+		goto done;
-+
-+	ret = nvkm_falcon_fw_sign(fw, loc, hshdr->sig_prod_size / cnt, blob->data,
-+				  cnt, hshdr->sig_prod_offset + sig, 0, 0);
-+	if (ret)
-+		goto done;
-+
-+	lhdr = nvfw_hs_load_header_v2(subdev, blob->data + hshdr->header_offset);
-+
-+	fw->imem_base_img = lhdr->app[0].offset;
-+	fw->imem_base = 0;
-+	fw->imem_size = lhdr->app[0].size;
-+
-+	fw->dmem_base_img = lhdr->os_data_offset;
-+	fw->dmem_base = 0;
-+	fw->dmem_size = lhdr->os_data_size;
-+	fw->dmem_sign = loc - lhdr->os_data_offset;
-+
-+	fw->boot_addr = lhdr->app[0].offset;
-+
-+	fw->fuse_ver = meta[0];
-+	fw->engine_id = meta[1];
-+	fw->ucode_id = meta[2];
-+
-+done:
-+	if (ret)
-+		nvkm_falcon_fw_dtor(fw);
-+
-+	return ret;
-+}
-+
-+static int
-+ga102_gsp_fwsec_signature(struct nvkm_falcon_fw *fw, u32 *src_base_src)
-+{
-+	struct nvkm_falcon *falcon = fw->falcon;
-+	struct nvkm_device *device = falcon->owner->device;
-+	u32 sig_fuse_version = fw->fuse_ver;
-+	u32 reg_fuse_version;
-+	int idx = 0;
-+
-+	FLCN_DBG(falcon, "brom: %08x %08x", fw->engine_id, fw->ucode_id);
-+	FLCN_DBG(falcon, "sig_fuse_version: %08x", sig_fuse_version);
-+
-+	if (fw->engine_id & 0x00000400) {
-+		reg_fuse_version = nvkm_rd32(device, 0x8241c0 + (fw->ucode_id - 1) * 4);
-+	} else {
-+		WARN_ON(1);
-+		return -ENOSYS;
-+	}
-+
-+	FLCN_DBG(falcon, "reg_fuse_version: %08x", reg_fuse_version);
-+	reg_fuse_version = BIT(fls(reg_fuse_version));
-+	FLCN_DBG(falcon, "reg_fuse_version: %08x", reg_fuse_version);
-+	if (!(reg_fuse_version & fw->fuse_ver))
-+		return -EINVAL;
-+
-+	while (!(reg_fuse_version & sig_fuse_version & 1)) {
-+		idx += (sig_fuse_version & 1);
-+		reg_fuse_version >>= 1;
-+		sig_fuse_version >>= 1;
-+	}
-+
-+	return idx;
-+}
-+
-+const struct nvkm_falcon_fw_func
-+ga102_gsp_fwsec = {
-+	.signature = ga102_gsp_fwsec_signature,
-+	.reset = gm200_flcn_fw_reset,
-+	.load = ga102_flcn_fw_load,
-+	.boot = ga102_flcn_fw_boot,
-+};
-+
-+const struct nvkm_falcon_func
- ga102_gsp_flcn = {
- 	.disable = gm200_flcn_disable,
- 	.enable = gm200_flcn_enable,
-@@ -32,6 +144,29 @@ ga102_gsp_flcn = {
- 	.reset_wait_mem_scrubbing = ga102_flcn_reset_wait_mem_scrubbing,
- 	.imem_dma = &ga102_flcn_dma,
- 	.dmem_dma = &ga102_flcn_dma,
-+	.riscv_active = ga102_flcn_riscv_active,
-+};
-+
-+static const struct nvkm_gsp_func
-+ga102_gsp_r535_54_03 = {
-+	.flcn = &ga102_gsp_flcn,
-+	.fwsec = &ga102_gsp_fwsec,
-+
-+	.sig_section = ".fwsignature_ga10x",
-+
-+	.wpr_heap.os_carveout_size = 20 << 20,
-+	.wpr_heap.base_size = 8 << 20,
-+	.wpr_heap.min_size = 84 << 20,
-+
-+	.booter.ctor = ga102_gsp_booter_ctor,
-+
-+	.dtor = r535_gsp_dtor,
-+	.oneinit = tu102_gsp_oneinit,
-+	.init = r535_gsp_init,
-+	.fini = r535_gsp_fini,
-+	.reset = ga102_gsp_reset,
-+
-+	.rm = &r535_gsp_rm,
- };
- 
- static const struct nvkm_gsp_func
-@@ -41,6 +176,7 @@ ga102_gsp = {
- 
- static struct nvkm_gsp_fwif
- ga102_gsps[] = {
-+	{  0,  r535_gsp_load, &ga102_gsp_r535_54_03, "535.54.03" },
- 	{ -1, gv100_gsp_nofw, &ga102_gsp },
- 	{}
- };
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
-index 351c959476ec..9f4a62375a27 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
-@@ -4,23 +4,65 @@
- #include <subdev/gsp.h>
- enum nvkm_acr_lsf_id;
- 
-+int nvkm_gsp_fwsec_frts(struct nvkm_gsp *);
-+int nvkm_gsp_fwsec_sb(struct nvkm_gsp *);
-+
- struct nvkm_gsp_fwif {
- 	int version;
- 	int (*load)(struct nvkm_gsp *, int ver, const struct nvkm_gsp_fwif *);
- 	const struct nvkm_gsp_func *func;
-+	const char *ver;
-+	bool enable;
- };
- 
- int gv100_gsp_nofw(struct nvkm_gsp *, int, const struct nvkm_gsp_fwif *);
-+int  r535_gsp_load(struct nvkm_gsp *, int, const struct nvkm_gsp_fwif *);
- 
- struct nvkm_gsp_func {
- 	const struct nvkm_falcon_func *flcn;
-+	const struct nvkm_falcon_fw_func *fwsec;
-+
-+	char *sig_section;
-+
-+	struct {
-+		u32 os_carveout_size;
-+		u32 base_size;
-+		u64 min_size;
-+	} wpr_heap;
-+
-+	struct {
-+		int (*ctor)(struct nvkm_gsp *, const char *name, const struct firmware *,
-+			    struct nvkm_falcon *, struct nvkm_falcon_fw *);
-+	} booter;
- 
- 	void (*dtor)(struct nvkm_gsp *);
- 	int (*oneinit)(struct nvkm_gsp *);
- 	int (*init)(struct nvkm_gsp *);
- 	int (*fini)(struct nvkm_gsp *, bool suspend);
-+	int (*reset)(struct nvkm_gsp *);
-+
-+	const struct nvkm_gsp_rm *rm;
- };
- 
-+extern const struct nvkm_falcon_func tu102_gsp_flcn;
-+extern const struct nvkm_falcon_fw_func tu102_gsp_fwsec;
-+int tu102_gsp_booter_ctor(struct nvkm_gsp *, const char *, const struct firmware *,
-+			  struct nvkm_falcon *, struct nvkm_falcon_fw *);
-+int tu102_gsp_oneinit(struct nvkm_gsp *);
-+int tu102_gsp_reset(struct nvkm_gsp *);
-+
-+extern const struct nvkm_falcon_func ga102_gsp_flcn;
-+extern const struct nvkm_falcon_fw_func ga102_gsp_fwsec;
-+int ga102_gsp_booter_ctor(struct nvkm_gsp *, const char *, const struct firmware *,
-+			  struct nvkm_falcon *, struct nvkm_falcon_fw *);
-+int ga102_gsp_reset(struct nvkm_gsp *);
-+
-+void r535_gsp_dtor(struct nvkm_gsp *);
-+int r535_gsp_oneinit(struct nvkm_gsp *);
-+int r535_gsp_init(struct nvkm_gsp *);
-+int r535_gsp_fini(struct nvkm_gsp *, bool suspend);
-+extern const struct nvkm_gsp_rm r535_gsp_rm;
-+
- int nvkm_gsp_new_(const struct nvkm_gsp_fwif *, struct nvkm_device *, enum nvkm_subdev_type, int,
- 		  struct nvkm_gsp **);
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-new file mode 100644
-index 000000000000..4aaceb65217d
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-@@ -0,0 +1,1561 @@
-+/*
-+ * Copyright 2023 Red Hat Inc.
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+ * THE COPYRIGHT HOLDER(S) OR AUTHOR(S) BE LIABLE FOR ANY CLAIM, DAMAGES OR
-+ * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-+ * OTHER DEALINGS IN THE SOFTWARE.
-+ */
-+#include "priv.h"
-+
-+#include <core/pci.h>
-+#include <subdev/timer.h>
-+#include <engine/sec2.h>
-+
-+#include <nvfw/fw.h>
++#include <subdev/bios/conn.h>
++#include <subdev/gsp.h>
++#include <subdev/mmu.h>
++#include <subdev/vfn.h>
++
++#include <nvhw/drf.h>
 +
 +#include <nvrm/nvtypes.h>
-+#include <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080gpu.h>
-+#include <nvrm/535.54.03/common/shared/msgq/inc/msgq/msgq_priv.h>
-+#include <nvrm/535.54.03/common/uproc/os/common/include/libos_init_args.h>
-+#include <nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/gsp/gsp_fw_sr_meta.h>
-+#include <nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/gsp/gsp_fw_wpr_meta.h>
-+#include <nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/rmRiscvUcode.h>
-+#include <nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/rmgspseq.h>
-+#include <nvrm/535.54.03/nvidia/generated/g_os_nvoc.h>
-+#include <nvrm/535.54.03/nvidia/generated/g_rpc-structures.h>
-+#include <nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_fw_heap.h>
-+#include <nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_init_args.h>
-+#include <nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_static_config.h>
-+#include <nvrm/535.54.03/nvidia/kernel/inc/vgpu/rpc_global_enums.h>
++#include <nvrm/535.54.03/common/sdk/nvidia/inc/class/cl2080_notification.h>
++#include <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073dfp.h>
++#include <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073dp.h>
++#include <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073specific.h>
++#include <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0073/ctrl0073system.h>
++#include <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080internal.h>
++#include <nvrm/535.54.03/common/sdk/nvidia/inc/nvos.h>
++#include <nvrm/535.54.03/nvidia/generated/g_allclasses.h>
++#include <nvrm/535.54.03/nvidia/generated/g_mem_desc_nvoc.h>
++#include <nvrm/535.54.03/nvidia/inc/kernel/os/nv_memory_type.h>
 +
 +#include <linux/acpi.h>
 +
-+struct r535_gsp_msg {
-+	u32 checksum;
-+	u32 sequence;
-+	u8  data[];
-+};
-+
-+static void *
-+r535_gsp_msgq_wait(struct nvkm_gsp *gsp, u32 repc, u32 *prepc, int *ptime)
++static u64
++r535_chan_user(struct nvkm_disp_chan *chan, u64 *psize)
 +{
-+	struct r535_gsp_msg *mqe;
-+	u32 size, rptr = *gsp->msgq.rptr;
-+	int used;
-+	u8 *msg;
-+	u32 len;
-+
-+	size = DIV_ROUND_UP(sizeof(*mqe) + repc, GSP_PAGE_SIZE);
-+	if (WARN_ON(!size || size >= gsp->msgq.cnt))
-+		return ERR_PTR(-EINVAL);
-+
-+	do {
-+		u32 wptr = *gsp->msgq.wptr;
-+
-+		used = wptr + gsp->msgq.cnt - rptr;
-+		if (used >= gsp->msgq.cnt)
-+			used -= gsp->msgq.cnt;
-+		if (used >= size)
-+			break;
-+
-+		usleep_range(1, 2);
-+	} while (--(*ptime));
-+
-+	if (WARN_ON(!*ptime))
-+		return ERR_PTR(-ETIMEDOUT);
-+
-+	mqe = (void *)((u8 *)gsp->shm.msgq.ptr + 0x1000 + rptr * 0x1000);
-+
-+	if (prepc) {
-+		*prepc = (used * GSP_PAGE_SIZE) - sizeof(*mqe);
-+		return mqe->data;
++	switch (chan->object.oclass & 0xff) {
++	case 0x7d: *psize = 0x10000; return 0x680000;
++	case 0x7e: *psize = 0x01000; return 0x690000 + (chan->head * *psize);
++	case 0x7b: *psize = 0x01000; return 0x6b0000 + (chan->head * *psize);
++	case 0x7a: *psize = 0x01000; return 0x6d8000 + (chan->head * *psize);
++	default:
++		BUG_ON(1);
++		break;
 +	}
 +
-+	msg = kvmalloc(repc, GFP_KERNEL);
-+	if (!msg)
-+		return ERR_PTR(-ENOMEM);
-+
-+	len = ((gsp->msgq.cnt - rptr) * GSP_PAGE_SIZE) - sizeof(*mqe);
-+	len = min_t(u32, repc, len);
-+	memcpy(msg, mqe->data, len);
-+
-+	rptr += DIV_ROUND_UP(len, GSP_PAGE_SIZE);
-+	if (rptr == gsp->msgq.cnt)
-+		rptr = 0;
-+
-+	repc -= len;
-+
-+	if (repc) {
-+		mqe = (void *)((u8 *)gsp->shm.msgq.ptr + 0x1000 + 0 * 0x1000);
-+		memcpy(msg + len, mqe, repc);
-+
-+		rptr += DIV_ROUND_UP(repc, GSP_PAGE_SIZE);
-+	}
-+
-+	mb();
-+	(*gsp->msgq.rptr) = rptr;
-+	return msg;
++	return 0ULL;
 +}
 +
-+static void *
-+r535_gsp_msgq_recv(struct nvkm_gsp *gsp, u32 repc, int *ptime)
++static void
++r535_chan_intr(struct nvkm_disp_chan *chan, bool en)
 +{
-+	return r535_gsp_msgq_wait(gsp, repc, NULL, ptime);
++}
++
++static void
++r535_chan_fini(struct nvkm_disp_chan *chan)
++{
++	nvkm_gsp_rm_free(&chan->rm.object);
 +}
 +
 +static int
-+r535_gsp_cmdq_push(struct nvkm_gsp *gsp, void *argv)
++r535_chan_push(struct nvkm_disp_chan *chan)
 +{
-+	struct r535_gsp_msg *cmd = container_of(argv, typeof(*cmd), data);
-+	struct r535_gsp_msg *cqe;
-+	u32 argc = cmd->checksum;
-+	u64 *ptr = (void *)cmd;
-+	u64 *end = (void *)cmd->data + argc;
-+	u64 csum = 0;
-+	int free, time = 1000000;
-+	u32 wptr, size;
-+	u32 off = 0;
++	struct nvkm_gsp *gsp = chan->disp->engine.subdev.device->gsp;
++	NV2080_CTRL_INTERNAL_DISPLAY_CHANNEL_PUSHBUFFER_PARAMS *ctrl;
 +
-+	cmd->checksum = 0;
-+	cmd->sequence = gsp->cmdq.seq++;
-+	while (ptr < end)
-+		csum ^= *ptr++;
++	ctrl = nvkm_gsp_rm_ctrl_get(&gsp->internal.device.subdevice,
++				    NV2080_CTRL_CMD_INTERNAL_DISPLAY_CHANNEL_PUSHBUFFER,
++				    sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
 +
-+	cmd->checksum = upper_32_bits(csum) ^ lower_32_bits(csum);
-+
-+	argc = sizeof(*cmd) + argc;
-+	wptr = *gsp->cmdq.wptr;
-+	do {
-+		do {
-+			free = *gsp->cmdq.rptr + gsp->cmdq.cnt - wptr - 1;
-+			if (free >= gsp->cmdq.cnt)
-+				free -= gsp->cmdq.cnt;
-+			if (free >= 1)
-+				break;
-+
-+			usleep_range(1, 2);
-+		} while(--time);
-+
-+		if (WARN_ON(!time)) {
-+			kvfree(cmd);
-+			return -ETIMEDOUT;
++	if (chan->memory) {
++		switch (nvkm_memory_target(chan->memory)) {
++		case NVKM_MEM_TARGET_NCOH:
++			ctrl->addressSpace = ADDR_SYSMEM;
++			ctrl->cacheSnoop = 0;
++			break;
++		case NVKM_MEM_TARGET_HOST:
++			ctrl->addressSpace = ADDR_SYSMEM;
++			ctrl->cacheSnoop = 1;
++			break;
++		case NVKM_MEM_TARGET_VRAM:
++			ctrl->addressSpace = ADDR_FBMEM;
++			break;
++		default:
++			WARN_ON(1);
++			return -EINVAL;
 +		}
 +
-+		cqe = (void *)((u8 *)gsp->shm.cmdq.ptr + 0x1000 + wptr * 0x1000);
-+		size = min_t(u32, argc, (gsp->cmdq.cnt - wptr) * GSP_PAGE_SIZE);
-+		memcpy(cqe, (u8 *)cmd + off, size);
++		ctrl->physicalAddr = nvkm_memory_addr(chan->memory);
++		ctrl->limit = nvkm_memory_size(chan->memory) - 1;
++	}
 +
-+		wptr += DIV_ROUND_UP(size, 0x1000);
-+		if (wptr == gsp->cmdq.cnt)
-+			wptr = 0;
++	ctrl->hclass = chan->object.oclass;
++	ctrl->channelInstance = chan->head;
++	ctrl->valid = ((chan->object.oclass & 0xff) != 0x7a) ? 1 : 0;
 +
-+		off  += size;
-+		argc -= size;
-+	} while(argc);
++	return nvkm_gsp_rm_ctrl_wr(&gsp->internal.device.subdevice, ctrl);
++}
 +
-+	nvkm_trace(&gsp->subdev, "cmdq: wptr %d\n", wptr);
-+	wmb();
-+	(*gsp->cmdq.wptr) = wptr;
-+	mb();
++static int
++r535_curs_init(struct nvkm_disp_chan *chan)
++{
++	NV50VAIO_CHANNELPIO_ALLOCATION_PARAMETERS *args;
++	int ret;
 +
-+	nvkm_falcon_wr32(&gsp->falcon, 0xc00, 0x00000000);
++	ret = r535_chan_push(chan);
++	if (ret)
++		return ret;
 +
-+	kvfree(cmd);
++	args = nvkm_gsp_rm_alloc_get(&chan->disp->rm.object,
++				     (chan->object.oclass << 16) | chan->head,
++				     chan->object.oclass, sizeof(*args), &chan->rm.object);
++	if (IS_ERR(args))
++		return PTR_ERR(args);
++
++	args->channelInstance = chan->head;
++
++	return nvkm_gsp_rm_alloc_wr(&chan->rm.object, args);
++}
++
++static const struct nvkm_disp_chan_func
++r535_curs_func = {
++	.init = r535_curs_init,
++	.fini = r535_chan_fini,
++	.intr = r535_chan_intr,
++	.user = r535_chan_user,
++};
++
++static const struct nvkm_disp_chan_user
++r535_curs = {
++	.func = &r535_curs_func,
++	.user = 73,
++};
++
++static int
++r535_dmac_bind(struct nvkm_disp_chan *chan, struct nvkm_object *object, u32 handle)
++{
++	return nvkm_ramht_insert(chan->disp->ramht, object, chan->chid.user, -9, handle,
++				 chan->chid.user << 25 |
++				 (chan->disp->rm.client.object.handle & 0x3fff));
++}
++
++static void
++r535_dmac_fini(struct nvkm_disp_chan *chan)
++{
++	struct nvkm_device *device = chan->disp->engine.subdev.device;
++	const u32 uoff = (chan->chid.user - 1) * 0x1000;
++
++	chan->suspend_put = nvkm_rd32(device, 0x690000 + uoff);
++	r535_chan_fini(chan);
++}
++
++static int
++r535_dmac_init(struct nvkm_disp_chan *chan)
++{
++	NV50VAIO_CHANNELDMA_ALLOCATION_PARAMETERS *args;
++	int ret;
++
++	ret = r535_chan_push(chan);
++	if (ret)
++		return ret;
++
++	args = nvkm_gsp_rm_alloc_get(&chan->disp->rm.object,
++				     (chan->object.oclass << 16) | chan->head,
++				     chan->object.oclass, sizeof(*args), &chan->rm.object);
++	if (IS_ERR(args))
++		return PTR_ERR(args);
++
++	args->channelInstance = chan->head;
++	args->offset = chan->suspend_put;
++
++	return nvkm_gsp_rm_alloc_wr(&chan->rm.object, args);
++}
++
++static int
++r535_dmac_push(struct nvkm_disp_chan *chan, u64 memory)
++{
++	chan->memory = nvkm_umem_search(chan->object.client, memory);
++	if (IS_ERR(chan->memory))
++		return PTR_ERR(chan->memory);
++
 +	return 0;
 +}
 +
-+static void *
-+r535_gsp_cmdq_get(struct nvkm_gsp *gsp, u32 argc)
-+{
-+	struct r535_gsp_msg *cmd;
++static const struct nvkm_disp_chan_func
++r535_dmac_func = {
++	.push = r535_dmac_push,
++	.init = r535_dmac_init,
++	.fini = r535_dmac_fini,
++	.intr = r535_chan_intr,
++	.user = r535_chan_user,
++	.bind = r535_dmac_bind,
++};
 +
-+	cmd = kvzalloc(sizeof(*cmd) + argc, GFP_KERNEL);
-+	if (!cmd)
-+		return ERR_PTR(-ENOMEM);
++static const struct nvkm_disp_chan_func
++r535_wimm_func = {
++	.push = r535_dmac_push,
++	.init = r535_dmac_init,
++	.fini = r535_dmac_fini,
++	.intr = r535_chan_intr,
++	.user = r535_chan_user,
++};
 +
-+	cmd->checksum = argc;
-+	return cmd->data;
-+}
++static const struct nvkm_disp_chan_user
++r535_wimm = {
++	.func = &r535_wimm_func,
++	.user = 33,
++};
 +
-+struct nvfw_gsp_rpc {
-+	u32 header_version;
-+	u32 signature;
-+	u32 length;
-+	u32 function;
-+	u32 rpc_result;
-+	u32 rpc_result_private;
-+	u32 sequence;
-+	union {
-+		u32 spare;
-+		u32 cpuRmGfid;
-+	};
-+	u8  data[];
++static const struct nvkm_disp_chan_user
++r535_wndw = {
++	.func = &r535_dmac_func,
++	.user = 1,
 +};
 +
 +static void
-+r535_gsp_msg_done(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg)
++r535_core_fini(struct nvkm_disp_chan *chan)
 +{
-+	kvfree(msg);
++	struct nvkm_device *device = chan->disp->engine.subdev.device;
++
++	chan->suspend_put = nvkm_rd32(device, 0x680000);
++	r535_chan_fini(chan);
++}
++
++static const struct nvkm_disp_chan_func
++r535_core_func = {
++	.push = r535_dmac_push,
++	.init = r535_dmac_init,
++	.fini = r535_core_fini,
++	.intr = r535_chan_intr,
++	.user = r535_chan_user,
++	.bind = r535_dmac_bind,
++};
++
++static const struct nvkm_disp_chan_user
++r535_core = {
++	.func = &r535_core_func,
++	.user = 0,
++};
++
++static int
++r535_sor_bl_set(struct nvkm_ior *sor, int lvl)
++{
++	struct nvkm_disp *disp = sor->disp;
++	NV0073_CTRL_SPECIFIC_BACKLIGHT_BRIGHTNESS_PARAMS *ctrl;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_SPECIFIC_SET_BACKLIGHT_BRIGHTNESS,
++				    sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->displayId = BIT(sor->asy.outp->index);
++	ctrl->brightness = lvl;
++
++	return nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl);
++}
++
++static int
++r535_sor_bl_get(struct nvkm_ior *sor)
++{
++	struct nvkm_disp *disp = sor->disp;
++	NV0073_CTRL_SPECIFIC_BACKLIGHT_BRIGHTNESS_PARAMS *ctrl;
++	int lvl;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_SPECIFIC_GET_BACKLIGHT_BRIGHTNESS,
++				    sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->displayId = BIT(sor->asy.outp->index);
++
++	ctrl = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, ctrl, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	lvl = ctrl->brightness;
++	nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++	return lvl;
++}
++
++static const struct nvkm_ior_func_bl
++r535_sor_bl = {
++	.get = r535_sor_bl_get,
++	.set = r535_sor_bl_set,
++};
++
++static void
++r535_sor_hda_eld(struct nvkm_ior *sor, int head, u8 *data, u8 size)
++{
++	struct nvkm_disp *disp = sor->disp;
++	NV0073_CTRL_DFP_SET_ELD_AUDIO_CAP_PARAMS *ctrl;
++
++	if (WARN_ON(size > sizeof(ctrl->bufferELD)))
++		return;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_DFP_SET_ELD_AUDIO_CAPS, sizeof(*ctrl));
++	if (WARN_ON(IS_ERR(ctrl)))
++		return;
++
++	ctrl->displayId = BIT(sor->asy.outp->index);
++	ctrl->numELDSize = size;
++	memcpy(ctrl->bufferELD, data, size);
++	ctrl->maxFreqSupported = 0; //XXX
++	ctrl->ctrl  = NVDEF(NV0073, CTRL_DFP_ELD_AUDIO_CAPS_CTRL, PD, TRUE);
++	ctrl->ctrl |= NVDEF(NV0073, CTRL_DFP_ELD_AUDIO_CAPS_CTRL, ELDV, TRUE);
++	ctrl->deviceEntry = head;
++
++	WARN_ON(nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl));
 +}
 +
 +static void
-+r535_gsp_msg_dump(struct nvkm_gsp *gsp, struct nvfw_gsp_rpc *msg, int lvl)
++r535_sor_hda_hpd(struct nvkm_ior *sor, int head, bool present)
 +{
-+	if (gsp->subdev.debug >= lvl) {
-+		nvkm_printk__(&gsp->subdev, lvl, info,
-+			      "msg fn:%d len:0x%x/0x%zx res:0x%x resp:0x%x\n",
-+			      msg->function, msg->length, msg->length - sizeof(*msg),
-+			      msg->rpc_result, msg->rpc_result_private);
-+		print_hex_dump(KERN_INFO, "msg: ", DUMP_PREFIX_OFFSET, 16, 1,
-+			       msg->data, msg->length - sizeof(*msg), true);
-+	}
++	struct nvkm_disp *disp = sor->disp;
++	NV0073_CTRL_DFP_SET_ELD_AUDIO_CAP_PARAMS *ctrl;
++
++	if (present)
++		return;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_DFP_SET_ELD_AUDIO_CAPS, sizeof(*ctrl));
++	if (WARN_ON(IS_ERR(ctrl)))
++		return;
++
++	ctrl->displayId = BIT(sor->asy.outp->index);
++	ctrl->deviceEntry = head;
++
++	WARN_ON(nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl));
 +}
 +
-+static struct nvfw_gsp_rpc *
-+r535_gsp_msg_recv(struct nvkm_gsp *gsp, int fn, u32 repc)
++static const struct nvkm_ior_func_hda
++r535_sor_hda = {
++	.hpd = r535_sor_hda_hpd,
++	.eld = r535_sor_hda_eld,
++};
++
++static void
++r535_sor_dp_audio_mute(struct nvkm_ior *sor, bool mute)
 +{
-+	struct nvkm_subdev *subdev = &gsp->subdev;
-+	struct nvfw_gsp_rpc *msg;
-+	int time = 4000000, i;
-+	u32 size;
++	struct nvkm_disp *disp = sor->disp;
++	NV0073_CTRL_DP_SET_AUDIO_MUTESTREAM_PARAMS *ctrl;
 +
-+retry:
-+	msg = r535_gsp_msgq_wait(gsp, sizeof(*msg), &size, &time);
-+	if (IS_ERR_OR_NULL(msg))
-+		return msg;
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_DP_SET_AUDIO_MUTESTREAM, sizeof(*ctrl));
++	if (WARN_ON(IS_ERR(ctrl)))
++		return;
 +
-+	msg = r535_gsp_msgq_recv(gsp, msg->length, &time);
-+	if (IS_ERR_OR_NULL(msg))
-+		return msg;
++	ctrl->displayId = BIT(sor->asy.outp->index);
++	ctrl->mute = mute;
++	WARN_ON(nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl));
++}
 +
-+	if (msg->rpc_result) {
-+		r535_gsp_msg_dump(gsp, msg, NV_DBG_ERROR);
-+		r535_gsp_msg_done(gsp, msg);
-+		return ERR_PTR(-EINVAL);
-+	}
++static void
++r535_sor_dp_audio(struct nvkm_ior *sor, int head, bool enable)
++{
++	struct nvkm_disp *disp = sor->disp;
++	NV0073_CTRL_DFP_SET_AUDIO_ENABLE_PARAMS *ctrl;
 +
-+	r535_gsp_msg_dump(gsp, msg, NV_DBG_TRACE);
++	if (!enable)
++		r535_sor_dp_audio_mute(sor, true);
 +
-+	if (fn && msg->function == fn) {
-+		if (repc) {
-+			if (msg->length < sizeof(*msg) + repc) {
-+				nvkm_error(subdev, "msg len %d < %zd\n",
-+					   msg->length, sizeof(*msg) + repc);
-+				r535_gsp_msg_dump(gsp, msg, NV_DBG_ERROR);
-+				r535_gsp_msg_done(gsp, msg);
-+				return ERR_PTR(-EIO);
-+			}
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_DFP_SET_AUDIO_ENABLE, sizeof(*ctrl));
++	if (WARN_ON(IS_ERR(ctrl)))
++		return;
 +
-+			return msg;
++	ctrl->displayId = BIT(sor->asy.outp->index);
++	ctrl->enable = enable;
++	WARN_ON(nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl));
++
++	if (enable)
++		r535_sor_dp_audio_mute(sor, false);
++}
++
++static void
++r535_sor_dp_vcpi(struct nvkm_ior *sor, int head, u8 slot, u8 slot_nr, u16 pbn, u16 aligned_pbn)
++{
++	struct nvkm_disp *disp = sor->disp;
++	struct NV0073_CTRL_CMD_DP_CONFIG_STREAM_PARAMS *ctrl;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_DP_CONFIG_STREAM, sizeof(*ctrl));
++	if (WARN_ON(IS_ERR(ctrl)))
++		return;
++
++	ctrl->subDeviceInstance = 0;
++	ctrl->head = head;
++	ctrl->sorIndex = sor->id;
++	ctrl->dpLink = sor->asy.link == 2;
++	ctrl->bEnableOverride = 1;
++	ctrl->bMST = 1;
++	ctrl->hBlankSym = 0;
++	ctrl->vBlankSym = 0;
++	ctrl->colorFormat = 0;
++	ctrl->bEnableTwoHeadOneOr = 0;
++	ctrl->singleHeadMultistreamMode = 0;
++	ctrl->MST.slotStart = slot;
++	ctrl->MST.slotEnd = slot + slot_nr - 1;
++	ctrl->MST.PBN = pbn;
++	ctrl->MST.Timeslice = aligned_pbn;
++	ctrl->MST.sendACT = 0;
++	ctrl->MST.singleHeadMSTPipeline = 0;
++	ctrl->MST.bEnableAudioOverRightPanel = 0;
++	WARN_ON(nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl));
++}
++
++static int
++r535_sor_dp_sst(struct nvkm_ior *sor, int head, bool ef,
++		u32 watermark, u32 hblanksym, u32 vblanksym)
++{
++	struct nvkm_disp *disp = sor->disp;
++	struct NV0073_CTRL_CMD_DP_CONFIG_STREAM_PARAMS *ctrl;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_DP_CONFIG_STREAM, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->subDeviceInstance = 0;
++	ctrl->head = head;
++	ctrl->sorIndex = sor->id;
++	ctrl->dpLink = sor->asy.link == 2;
++	ctrl->bEnableOverride = 1;
++	ctrl->bMST = 0;
++	ctrl->hBlankSym = hblanksym;
++	ctrl->vBlankSym = vblanksym;
++	ctrl->colorFormat = 0;
++	ctrl->bEnableTwoHeadOneOr = 0;
++	ctrl->SST.bEnhancedFraming = ef;
++	ctrl->SST.tuSize = 64;
++	ctrl->SST.waterMark = watermark;
++	ctrl->SST.bEnableAudioOverRightPanel = 0;
++	return nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl);
++}
++
++static const struct nvkm_ior_func_dp
++r535_sor_dp = {
++	.sst = r535_sor_dp_sst,
++	.vcpi = r535_sor_dp_vcpi,
++	.audio = r535_sor_dp_audio,
++};
++
++static void
++r535_sor_hdmi_scdc(struct nvkm_ior *sor, u32 khz, bool support, bool scrambling,
++		   bool scrambling_low_rates)
++{
++	struct nvkm_outp *outp = sor->asy.outp;
++	struct nvkm_disp *disp = outp->disp;
++	NV0073_CTRL_SPECIFIC_SET_HDMI_SINK_CAPS_PARAMS *ctrl;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_SINK_CAPS, sizeof(*ctrl));
++	if (WARN_ON(IS_ERR(ctrl)))
++		return;
++
++	ctrl->displayId = BIT(outp->index);
++	ctrl->caps = 0;
++	if (support)
++		ctrl->caps |= NVDEF(NV0073_CTRL_CMD_SPECIFIC, SET_HDMI_SINK_CAPS, SCDC_SUPPORTED, TRUE);
++	if (scrambling)
++		ctrl->caps |= NVDEF(NV0073_CTRL_CMD_SPECIFIC, SET_HDMI_SINK_CAPS, GT_340MHZ_CLOCK_SUPPORTED, TRUE);
++	if (scrambling_low_rates)
++		ctrl->caps |= NVDEF(NV0073_CTRL_CMD_SPECIFIC, SET_HDMI_SINK_CAPS, LTE_340MHZ_SCRAMBLING_SUPPORTED, TRUE);
++
++	WARN_ON(nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl));
++}
++
++static void
++r535_sor_hdmi_ctrl_audio_mute(struct nvkm_outp *outp, bool mute)
++{
++	struct nvkm_disp *disp = outp->disp;
++	NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_AUDIO_MUTESTREAM_PARAMS *ctrl;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_AUDIO_MUTESTREAM, sizeof(*ctrl));
++	if (WARN_ON(IS_ERR(ctrl)))
++		return;
++
++	ctrl->displayId = BIT(outp->index);
++	ctrl->mute = mute;
++	WARN_ON(nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl));
++}
++
++static void
++r535_sor_hdmi_ctrl_audio(struct nvkm_outp *outp, bool enable)
++{
++	struct nvkm_disp *disp = outp->disp;
++	NV0073_CTRL_SPECIFIC_SET_OD_PACKET_PARAMS *ctrl;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_SPECIFIC_SET_OD_PACKET, sizeof(*ctrl));
++	if (WARN_ON(IS_ERR(ctrl)))
++		return;
++
++	ctrl->displayId = BIT(outp->index);
++	ctrl->transmitControl =
++		NVDEF(NV0073_CTRL_SPECIFIC, SET_OD_PACKET_TRANSMIT_CONTROL, ENABLE, YES) |
++		NVDEF(NV0073_CTRL_SPECIFIC, SET_OD_PACKET_TRANSMIT_CONTROL, OTHER_FRAME, DISABLE) |
++		NVDEF(NV0073_CTRL_SPECIFIC, SET_OD_PACKET_TRANSMIT_CONTROL, SINGLE_FRAME, DISABLE) |
++		NVDEF(NV0073_CTRL_SPECIFIC, SET_OD_PACKET_TRANSMIT_CONTROL, ON_HBLANK, DISABLE) |
++		NVDEF(NV0073_CTRL_SPECIFIC, SET_OD_PACKET_TRANSMIT_CONTROL, VIDEO_FMT, SW_CONTROLLED) |
++		NVDEF(NV0073_CTRL_SPECIFIC, SET_OD_PACKET_TRANSMIT_CONTROL, RESERVED_LEGACY_MODE, NO);
++	ctrl->packetSize = 10;
++	ctrl->aPacket[0] = 0x03;
++	ctrl->aPacket[1] = 0x00;
++	ctrl->aPacket[2] = 0x00;
++	ctrl->aPacket[3] = enable ? 0x10 : 0x01;
++	ctrl->aPacket[4] = 0x00;
++	ctrl->aPacket[5] = 0x00;
++	ctrl->aPacket[6] = 0x00;
++	ctrl->aPacket[7] = 0x00;
++	ctrl->aPacket[8] = 0x00;
++	ctrl->aPacket[9] = 0x00;
++	WARN_ON(nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl));
++}
++
++static void
++r535_sor_hdmi_audio(struct nvkm_ior *sor, int head, bool enable)
++{
++	struct nvkm_device *device = sor->disp->engine.subdev.device;
++	const u32 hdmi = head * 0x400;
++
++	r535_sor_hdmi_ctrl_audio(sor->asy.outp, enable);
++	r535_sor_hdmi_ctrl_audio_mute(sor->asy.outp, !enable);
++
++	/* General Control (GCP). */
++	nvkm_mask(device, 0x6f00c0 + hdmi, 0x00000001, 0x00000000);
++	nvkm_wr32(device, 0x6f00cc + hdmi, !enable ? 0x00000001 : 0x00000010);
++	nvkm_mask(device, 0x6f00c0 + hdmi, 0x00000001, 0x00000001);
++}
++
++static void
++r535_sor_hdmi_ctrl(struct nvkm_ior *sor, int head, bool enable, u8 max_ac_packet, u8 rekey)
++{
++	struct nvkm_disp *disp = sor->disp;
++	NV0073_CTRL_SPECIFIC_SET_HDMI_ENABLE_PARAMS *ctrl;
++
++	if (!enable)
++		return;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_SPECIFIC_SET_HDMI_ENABLE, sizeof(*ctrl));
++	if (WARN_ON(IS_ERR(ctrl)))
++		return;
++
++	ctrl->displayId = BIT(sor->asy.outp->index);
++	ctrl->enable = enable;
++
++	WARN_ON(nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl));
++}
++
++static const struct nvkm_ior_func_hdmi
++r535_sor_hdmi = {
++	.ctrl = r535_sor_hdmi_ctrl,
++	.scdc = r535_sor_hdmi_scdc,
++	/*TODO: SF_USER -> KMS. */
++	.infoframe_avi = gv100_sor_hdmi_infoframe_avi,
++	.infoframe_vsi = gv100_sor_hdmi_infoframe_vsi,
++	.audio = r535_sor_hdmi_audio,
++};
++
++static const struct nvkm_ior_func
++r535_sor = {
++	.hdmi = &r535_sor_hdmi,
++	.dp = &r535_sor_dp,
++	.hda = &r535_sor_hda,
++	.bl = &r535_sor_bl,
++};
++
++static int
++r535_sor_new(struct nvkm_disp *disp, int id)
++{
++	return nvkm_ior_new_(&r535_sor, disp, SOR, id, true/*XXX: hda cap*/);
++}
++
++static int
++r535_sor_cnt(struct nvkm_disp *disp, unsigned long *pmask)
++{
++	*pmask = 0xf;
++	return 4;
++}
++
++static void
++r535_head_vblank_put(struct nvkm_head *head)
++{
++	struct nvkm_device *device = head->disp->engine.subdev.device;
++
++	nvkm_mask(device, 0x611d80 + (head->id * 4), 0x00000002, 0x00000000);
++}
++
++static void
++r535_head_vblank_get(struct nvkm_head *head)
++{
++	struct nvkm_device *device = head->disp->engine.subdev.device;
++
++	nvkm_wr32(device, 0x611800 + (head->id * 4), 0x00000002);
++	nvkm_mask(device, 0x611d80 + (head->id * 4), 0x00000002, 0x00000002);
++}
++
++static void
++r535_head_state(struct nvkm_head *head, struct nvkm_head_state *state)
++{
++}
++
++static const struct nvkm_head_func
++r535_head = {
++	.state = r535_head_state,
++	.vblank_get = r535_head_vblank_get,
++	.vblank_put = r535_head_vblank_put,
++};
++
++static struct nvkm_conn *
++r535_conn_new(struct nvkm_disp *disp, u32 id)
++{
++	NV0073_CTRL_SPECIFIC_GET_CONNECTOR_DATA_PARAMS *ctrl;
++	struct nvbios_connE dcbE = {};
++	struct nvkm_conn *conn;
++	int ret, index;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_SPECIFIC_GET_CONNECTOR_DATA, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return (void *)ctrl;
++
++	ctrl->subDeviceInstance = 0;
++	ctrl->displayId = BIT(id);
++
++	ctrl = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, ctrl, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return (void *)ctrl;
++
++	list_for_each_entry(conn, &disp->conns, head) {
++		if (conn->index == ctrl->data[0].index) {
++			nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++			return conn;
 +		}
-+
-+		r535_gsp_msg_done(gsp, msg);
-+		return NULL;
 +	}
 +
-+	for (i = 0; i < gsp->msgq.ntfy_nr; i++) {
-+		struct nvkm_gsp_msgq_ntfy *ntfy = &gsp->msgq.ntfy[i];
++	dcbE.type = ctrl->data[0].type;
++	index = ctrl->data[0].index;
++	nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
 +
-+		if (ntfy->fn == msg->function) {
-+			ntfy->func(ntfy->priv, ntfy->fn, msg->data, msg->length - sizeof(*msg));
++	ret = nvkm_conn_new(disp, index, &dcbE, &conn);
++	if (ret)
++		return ERR_PTR(ret);
++
++	list_add_tail(&conn->head, &disp->conns);
++	return conn;
++}
++
++static void
++r535_outp_release(struct nvkm_outp *outp)
++{
++	outp->disp->rm.assigned_sors &= ~BIT(outp->ior->id);
++	outp->ior->asy.outp = NULL;
++	outp->ior = NULL;
++}
++
++static int
++r535_outp_acquire(struct nvkm_outp *outp, bool hda)
++{
++	struct nvkm_disp *disp = outp->disp;
++	struct nvkm_ior *ior;
++	NV0073_CTRL_DFP_ASSIGN_SOR_PARAMS *ctrl;
++	int or;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_DFP_ASSIGN_SOR, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->subDeviceInstance = 0;
++	ctrl->displayId = BIT(outp->index);
++	ctrl->sorExcludeMask = disp->rm.assigned_sors;
++	if (hda)
++		ctrl->flags |= NVDEF(NV0073_CTRL, DFP_ASSIGN_SOR_FLAGS, AUDIO, OPTIMAL);
++
++	ctrl = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, ctrl, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	for (or = 0; or < ARRAY_SIZE(ctrl->sorAssignListWithTag); or++) {
++		if (ctrl->sorAssignListWithTag[or].displayMask & BIT(outp->index)) {
++			disp->rm.assigned_sors |= BIT(or);
 +			break;
 +		}
 +	}
 +
-+	if (i == gsp->msgq.ntfy_nr)
-+		r535_gsp_msg_dump(gsp, msg, NV_DBG_WARN);
++	nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
 +
-+	r535_gsp_msg_done(gsp, msg);
-+	if (fn)
-+		goto retry;
++	if (WARN_ON(or == ARRAY_SIZE(ctrl->sorAssignListWithTag)))
++		return -EINVAL;
 +
-+	if (*gsp->msgq.rptr != *gsp->msgq.wptr)
-+		goto retry;
++	ior = nvkm_ior_find(disp, SOR, or);
++	if (WARN_ON(!ior))
++		return -EINVAL;
++
++	nvkm_outp_acquire_ior(outp, NVKM_OUTP_USER, ior);
++	return 0;
++}
++
++static int
++r535_disp_head_displayid(struct nvkm_disp *disp, int head, u32 *displayid)
++{
++	NV0073_CTRL_SYSTEM_GET_ACTIVE_PARAMS *ctrl;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_SYSTEM_GET_ACTIVE, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->subDeviceInstance = 0;
++	ctrl->head = head;
++
++	ctrl = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, ctrl, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	*displayid = ctrl->displayId;
++	nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++	return 0;
++}
++
++static struct nvkm_ior *
++r535_outp_inherit(struct nvkm_outp *outp)
++{
++	struct nvkm_disp *disp = outp->disp;
++	struct nvkm_head *head;
++	u32 displayid;
++	int ret;
++
++	list_for_each_entry(head, &disp->heads, head) {
++		ret = r535_disp_head_displayid(disp, head->id, &displayid);
++		if (WARN_ON(ret))
++			return NULL;
++
++		if (displayid == BIT(outp->index)) {
++			NV0073_CTRL_SPECIFIC_OR_GET_INFO_PARAMS *ctrl;
++			u32 id, proto;
++			struct nvkm_ior *ior;
++
++			ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++						    NV0073_CTRL_CMD_SPECIFIC_OR_GET_INFO,
++						    sizeof(*ctrl));
++			if (IS_ERR(ctrl))
++				return NULL;
++
++			ctrl->subDeviceInstance = 0;
++			ctrl->displayId = displayid;
++
++			ctrl = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, ctrl, sizeof(*ctrl));
++			if (IS_ERR(ctrl))
++				return NULL;
++
++			id = ctrl->index;
++			proto = ctrl->protocol;
++			nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++
++			ior = nvkm_ior_find(disp, SOR, id);
++			if (WARN_ON(!ior))
++				return NULL;
++
++			switch (proto) {
++			case NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_SINGLE_TMDS_A:
++				ior->arm.proto = TMDS;
++				ior->arm.link = 1;
++				break;
++			case NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_SINGLE_TMDS_B:
++				ior->arm.proto = TMDS;
++				ior->arm.link = 2;
++				break;
++			case NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_DUAL_TMDS:
++				ior->arm.proto = TMDS;
++				ior->arm.link = 3;
++				break;
++			case NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_DP_A:
++				ior->arm.proto = DP;
++				ior->arm.link = 1;
++				break;
++			case NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_DP_B:
++				ior->arm.proto = DP;
++				ior->arm.link = 2;
++				break;
++			default:
++				WARN_ON(1);
++				return NULL;
++			}
++
++			ior->arm.proto_evo = proto;
++			ior->arm.head = BIT(head->id);
++			disp->rm.assigned_sors |= BIT(ior->id);
++			return ior;
++		}
++	}
 +
 +	return NULL;
 +}
 +
 +static int
-+r535_gsp_msg_ntfy_add(struct nvkm_gsp *gsp, u32 fn, nvkm_gsp_msg_ntfy_func func, void *priv)
++r535_outp_dfp_get_info(struct nvkm_outp *outp)
 +{
-+	int ret = 0;
++	NV0073_CTRL_DFP_GET_INFO_PARAMS *ctrl;
++	struct nvkm_disp *disp = outp->disp;
 +
-+	mutex_lock(&gsp->msgq.mutex);
-+	if (WARN_ON(gsp->msgq.ntfy_nr >= ARRAY_SIZE(gsp->msgq.ntfy))) {
-+		ret = -ENOSPC;
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom, NV0073_CTRL_CMD_DFP_GET_INFO, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->displayId = BIT(outp->index);
++
++	ctrl = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, ctrl, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	nvkm_debug(&disp->engine.subdev, "DFP %08x: flags:%08x flags2:%08x\n",
++		   ctrl->displayId, ctrl->flags, ctrl->flags2);
++
++	nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++	return 0;
++}
++
++static int
++r535_outp_detect(struct nvkm_outp *outp)
++{
++	NV0073_CTRL_SYSTEM_GET_CONNECT_STATE_PARAMS *ctrl;
++	struct nvkm_disp *disp = outp->disp;
++	int ret;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_SYSTEM_GET_CONNECT_STATE, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->subDeviceInstance = 0;
++	ctrl->displayMask = BIT(outp->index);
++
++	ctrl = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, ctrl, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	if (ctrl->displayMask & BIT(outp->index)) {
++		ret = r535_outp_dfp_get_info(outp);
++		if (ret == 0)
++			ret = 1;
 +	} else {
-+		gsp->msgq.ntfy[gsp->msgq.ntfy_nr].fn = fn;
-+		gsp->msgq.ntfy[gsp->msgq.ntfy_nr].func = func;
-+		gsp->msgq.ntfy[gsp->msgq.ntfy_nr].priv = priv;
-+		gsp->msgq.ntfy_nr++;
++		ret = 0;
 +	}
-+	mutex_unlock(&gsp->msgq.mutex);
++
++	nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
 +	return ret;
 +}
 +
 +static int
-+r535_gsp_rpc_poll(struct nvkm_gsp *gsp, u32 fn)
++r535_dp_mst_id_put(struct nvkm_outp *outp, u32 id)
 +{
-+	void *repv;
++	NV0073_CTRL_CMD_DP_TOPOLOGY_FREE_DISPLAYID_PARAMS *ctrl;
++	struct nvkm_disp *disp = outp->disp;
 +
-+	mutex_lock(&gsp->cmdq.mutex);
-+	repv = r535_gsp_msg_recv(gsp, fn, 0);
-+	mutex_unlock(&gsp->cmdq.mutex);
-+	if (IS_ERR(repv))
-+		return PTR_ERR(repv);
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_DP_TOPOLOGY_FREE_DISPLAYID, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->subDeviceInstance = 0;
++	ctrl->displayId = id;
++	return nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl);
++}
++
++static int
++r535_dp_mst_id_get(struct nvkm_outp *outp, u32 *pid)
++{
++	NV0073_CTRL_CMD_DP_TOPOLOGY_ALLOCATE_DISPLAYID_PARAMS *ctrl;
++	struct nvkm_disp *disp = outp->disp;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_DP_TOPOLOGY_ALLOCATE_DISPLAYID,
++				    sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->subDeviceInstance = 0;
++	ctrl->displayId = BIT(outp->index);
++	ctrl = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, ctrl, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	*pid = ctrl->displayIdAssigned;
++	nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++	return 0;
++}
++
++static int
++r535_dp_drive(struct nvkm_outp *outp, u8 lanes, u8 pe[4], u8 vs[4])
++{
++	NV0073_CTRL_DP_LANE_DATA_PARAMS *ctrl;
++	struct nvkm_disp *disp = outp->disp;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_DP_SET_LANE_DATA, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->displayId = BIT(outp->index);
++	ctrl->numLanes = lanes;
++	for (int i = 0; i < lanes; i++)
++		ctrl->data[i] = NVVAL(NV0073_CTRL, DP_LANE_DATA,  PREEMPHASIS, pe[i]) |
++				NVVAL(NV0073_CTRL, DP_LANE_DATA, DRIVECURRENT, vs[i]);
++
++	return nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl);
++}
++
++static int
++r535_dp_train_target(struct nvkm_outp *outp, u8 target, bool mst, u8 link_nr, u8 link_bw)
++{
++	struct nvkm_disp *disp = outp->disp;
++	NV0073_CTRL_DP_CTRL_PARAMS *ctrl;
++	int ret;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom, NV0073_CTRL_CMD_DP_CTRL, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->subDeviceInstance = 0;
++	ctrl->displayId = BIT(outp->index);
++	ctrl->cmd = NVDEF(NV0073_CTRL, DP_CMD, SET_LANE_COUNT, TRUE) |
++		    NVDEF(NV0073_CTRL, DP_CMD, SET_LINK_BW, TRUE) |
++		    NVDEF(NV0073_CTRL, DP_CMD, TRAIN_PHY_REPEATER, YES);
++	ctrl->data = NVVAL(NV0073_CTRL, DP_DATA, SET_LANE_COUNT, link_nr) |
++		     NVVAL(NV0073_CTRL, DP_DATA, SET_LINK_BW, link_bw) |
++		     NVVAL(NV0073_CTRL, DP_DATA, TARGET, target);
++
++	if (mst)
++		ctrl->cmd |= NVDEF(NV0073_CTRL, DP_CMD, SET_FORMAT_MODE, MULTI_STREAM);
++
++	if (outp->dp.dpcd[DPCD_RC02] & DPCD_RC02_ENHANCED_FRAME_CAP)
++		ctrl->cmd |= NVDEF(NV0073_CTRL, DP_CMD, SET_ENHANCED_FRAMING, TRUE);
++
++	if (target == 0 &&
++	     (outp->dp.dpcd[DPCD_RC02] & 0x20) &&
++	    !(outp->dp.dpcd[DPCD_RC03] & DPCD_RC03_TPS4_SUPPORTED))
++	    ctrl->cmd |= NVDEF(NV0073_CTRL, DP_CMD, POST_LT_ADJ_REQ_GRANTED, YES);
++
++	ctrl = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, ctrl, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ret = ctrl->err ? -EIO : 0;
++	nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++	return ret;
++}
++
++static int
++r535_dp_train(struct nvkm_outp *outp, bool retrain)
++{
++	for (int target = outp->dp.lttprs; target >= 0; target--) {
++		int ret = r535_dp_train_target(outp, target, outp->dp.lt.mst,
++							     outp->dp.lt.nr,
++							     outp->dp.lt.bw);
++		if (ret)
++			return ret;
++	}
 +
 +	return 0;
 +}
 +
-+static void *
-+r535_gsp_rpc_send(struct nvkm_gsp *gsp, void *argv, bool wait, u32 repc)
++static int
++r535_dp_rates(struct nvkm_outp *outp)
 +{
-+	struct nvfw_gsp_rpc *rpc = container_of(argv, typeof(*rpc), data);
-+	struct nvfw_gsp_rpc *msg;
-+	u32 fn = rpc->function;
-+	void *repv = NULL;
++	NV0073_CTRL_CMD_DP_CONFIG_INDEXED_LINK_RATES_PARAMS *ctrl;
++	struct nvkm_disp *disp = outp->disp;
++
++	if (outp->conn->info.type != DCB_CONNECTOR_eDP ||
++	    !outp->dp.rates || outp->dp.rate[0].dpcd < 0)
++		return 0;
++
++	if (WARN_ON(outp->dp.rates > ARRAY_SIZE(ctrl->linkRateTbl)))
++		return -EINVAL;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_DP_CONFIG_INDEXED_LINK_RATES, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->displayId = BIT(outp->index);
++	for (int i = 0; i < outp->dp.rates; i++)
++		ctrl->linkRateTbl[outp->dp.rate[i].dpcd] = outp->dp.rate[i].rate * 10 / 200;
++
++	return nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl);
++}
++
++static int
++r535_dp_aux_xfer(struct nvkm_outp *outp, u8 type, u32 addr, u8 *data, u8 *psize)
++{
++	struct nvkm_disp *disp = outp->disp;
++	NV0073_CTRL_DP_AUXCH_CTRL_PARAMS *ctrl;
++	u8 size = *psize;
 +	int ret;
 +
-+	if (gsp->subdev.debug >= NV_DBG_TRACE) {
-+		nvkm_trace(&gsp->subdev, "rpc fn:%d len:0x%x/0x%zx\n", rpc->function,
-+			   rpc->length, rpc->length - sizeof(*rpc));
-+		print_hex_dump(KERN_INFO, "rpc: ", DUMP_PREFIX_OFFSET, 16, 1,
-+			       rpc->data, rpc->length - sizeof(*rpc), true);
-+	}
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom, NV0073_CTRL_CMD_DP_AUXCH_CTRL, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
 +
-+	ret = r535_gsp_cmdq_push(gsp, rpc);
-+	if (ret) {
-+		mutex_unlock(&gsp->cmdq.mutex);
-+		return ERR_PTR(ret);
++	ctrl->subDeviceInstance = 0;
++	ctrl->displayId = BIT(outp->index);
++	ctrl->bAddrOnly = !size;
++	ctrl->cmd = type;
++	if (ctrl->bAddrOnly) {
++		ctrl->cmd = NVDEF_SET(ctrl->cmd, NV0073_CTRL, DP_AUXCH_CMD, REQ_TYPE, WRITE);
++		ctrl->cmd = NVDEF_SET(ctrl->cmd, NV0073_CTRL, DP_AUXCH_CMD,  I2C_MOT, FALSE);
 +	}
++	ctrl->addr = addr;
++	ctrl->size = !ctrl->bAddrOnly ? (size - 1) : 0;
++	memcpy(ctrl->data, data, size);
 +
-+	if (wait) {
-+		msg = r535_gsp_msg_recv(gsp, fn, repc);
-+		if (!IS_ERR_OR_NULL(msg))
-+			repv = msg->data;
-+		else
-+			repv = msg;
-+	}
++	ctrl = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, ctrl, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
 +
-+	return repv;
++	memcpy(data, ctrl->data, size);
++	*psize = ctrl->size;
++	ret = ctrl->replyType;
++	nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++	return ret;
++}
++
++static int
++r535_dp_aux_pwr(struct nvkm_outp *outp, bool pu)
++{
++	return 0;
 +}
 +
 +static void
-+r535_gsp_rpc_done(struct nvkm_gsp *gsp, void *repv)
++r535_dp_release(struct nvkm_outp *outp)
 +{
-+	struct nvfw_gsp_rpc *rpc = container_of(repv, typeof(*rpc), data);
-+
-+	r535_gsp_msg_done(gsp, rpc);
-+}
-+
-+static void *
-+r535_gsp_rpc_get(struct nvkm_gsp *gsp, u32 fn, u32 argc)
-+{
-+	struct nvfw_gsp_rpc *rpc;
-+
-+	rpc = r535_gsp_cmdq_get(gsp, ALIGN(sizeof(*rpc) + argc, sizeof(u64)));
-+	if (!rpc)
-+		return NULL;
-+
-+	rpc->header_version = 0x03000000;
-+	rpc->signature = ('V' << 24) | ('R' << 16) | ('P' << 8) | 'C';
-+	rpc->function = fn;
-+	rpc->rpc_result = 0xffffffff;
-+	rpc->rpc_result_private = 0xffffffff;
-+	rpc->length = sizeof(*rpc) + argc;
-+	return rpc->data;
-+}
-+
-+static void *
-+r535_gsp_rpc_push(struct nvkm_gsp *gsp, void *argv, bool wait, u32 repc)
-+{
-+	struct nvfw_gsp_rpc *rpc = container_of(argv, typeof(*rpc), data);
-+	struct r535_gsp_msg *cmd = container_of((void *)rpc, typeof(*cmd), data);
-+	const u32 max_msg_size = (16 * 0x1000) - sizeof(struct r535_gsp_msg);
-+	const u32 max_rpc_size = max_msg_size - sizeof(*rpc);
-+	u32 rpc_size = rpc->length - sizeof(*rpc);
-+	void *repv;
-+
-+	mutex_lock(&gsp->cmdq.mutex);
-+	if (rpc_size > max_rpc_size) {
-+		const u32 fn = rpc->function;
-+
-+		/* Adjust length, and send initial RPC. */
-+		rpc->length = sizeof(*rpc) + max_rpc_size;
-+		cmd->checksum = rpc->length;
-+
-+		repv = r535_gsp_rpc_send(gsp, argv, false, 0);
-+		if (IS_ERR(repv))
-+			goto done;
-+
-+		argv += max_rpc_size;
-+		rpc_size -= max_rpc_size;
-+
-+		/* Remaining chunks sent as CONTINUATION_RECORD RPCs. */
-+		while (rpc_size) {
-+			u32 size = min(rpc_size, max_rpc_size);
-+			void *next;
-+
-+			next = r535_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_CONTINUATION_RECORD, size);
-+			if (IS_ERR(next)) {
-+				repv = next;
-+				goto done;
-+			}
-+
-+			memcpy(next, argv, size);
-+
-+			repv = r535_gsp_rpc_send(gsp, next, false, 0);
-+			if (IS_ERR(repv))
-+				goto done;
-+
-+			argv += size;
-+			rpc_size -= size;
-+		}
-+
-+		/* Wait for reply. */
-+		if (wait) {
-+			rpc = r535_gsp_msg_recv(gsp, fn, repc);
-+			if (!IS_ERR_OR_NULL(rpc))
-+				repv = rpc->data;
-+			else
-+				repv = rpc;
-+		} else {
-+			repv = NULL;
-+		}
-+	} else {
-+		repv = r535_gsp_rpc_send(gsp, argv, wait, repc);
++	if (!outp->dp.lt.bw) {
++		if (!WARN_ON(!outp->dp.rates))
++			outp->dp.lt.bw = outp->dp.rate[0].rate / 27000;
++		else
++			outp->dp.lt.bw = 0x06;
 +	}
 +
-+done:
-+	mutex_unlock(&gsp->cmdq.mutex);
-+	return repv;
++	outp->dp.lt.nr = 0;
++
++	r535_dp_train_target(outp, 0, outp->dp.lt.mst, outp->dp.lt.nr, outp->dp.lt.bw);
++	r535_outp_release(outp);
 +}
 +
-+const struct nvkm_gsp_rm
-+r535_gsp_rm = {
-+	.rpc_get = r535_gsp_rpc_get,
-+	.rpc_push = r535_gsp_rpc_push,
-+	.rpc_done = r535_gsp_rpc_done,
++static int
++r535_dp_acquire(struct nvkm_outp *outp, bool hda)
++{
++	int ret;
++
++	ret = r535_outp_acquire(outp, hda);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++static const struct nvkm_outp_func
++r535_dp = {
++	.detect = r535_outp_detect,
++	.inherit = r535_outp_inherit,
++	.acquire = r535_dp_acquire,
++	.release = r535_dp_release,
++	.dp.aux_pwr = r535_dp_aux_pwr,
++	.dp.aux_xfer = r535_dp_aux_xfer,
++	.dp.mst_id_get = r535_dp_mst_id_get,
++	.dp.mst_id_put = r535_dp_mst_id_put,
++	.dp.rates = r535_dp_rates,
++	.dp.train = r535_dp_train,
++	.dp.drive = r535_dp_drive,
 +};
 +
 +static int
-+r535_gsp_rpc_unloading_guest_driver(struct nvkm_gsp *gsp, bool suspend)
++r535_tmds_edid_get(struct nvkm_outp *outp, u8 *data, u16 *psize)
 +{
-+	rpc_unloading_guest_driver_v1F_07 *rpc;
++	NV0073_CTRL_SPECIFIC_GET_EDID_V2_PARAMS *ctrl;
++	struct nvkm_disp *disp = outp->disp;
++	int ret = -E2BIG;
 +
-+	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_UNLOADING_GUEST_DRIVER, sizeof(*rpc));
-+	if (IS_ERR(rpc))
-+		return PTR_ERR(rpc);
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_SPECIFIC_GET_EDID_V2, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
 +
-+	if (suspend) {
-+		rpc->bInPMTransition = 1;
-+		rpc->bGc6Entering = 0;
-+		rpc->newLevel = NV2080_CTRL_GPU_SET_POWER_STATE_GPU_LEVEL_3;
++	ctrl->subDeviceInstance = 0;
++	ctrl->displayId = BIT(outp->index);
++
++	ctrl = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, ctrl, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	if (ctrl->bufferSize <= *psize) {
++		memcpy(data, ctrl->edidBuffer, ctrl->bufferSize);
++		*psize = ctrl->bufferSize;
++		ret = 0;
++	}
++
++	nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++	return ret;
++}
++
++static const struct nvkm_outp_func
++r535_tmds = {
++	.detect = r535_outp_detect,
++	.inherit = r535_outp_inherit,
++	.acquire = r535_outp_acquire,
++	.release = r535_outp_release,
++	.edid_get = r535_tmds_edid_get,
++};
++
++static int
++r535_outp_new(struct nvkm_disp *disp, u32 id)
++{
++	NV0073_CTRL_SPECIFIC_OR_GET_INFO_PARAMS *ctrl;
++	enum nvkm_ior_proto proto;
++	struct dcb_output dcbE = {};
++	struct nvkm_conn *conn;
++	struct nvkm_outp *outp;
++	u8 locn, link = 0;
++	int ret;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++				    NV0073_CTRL_CMD_SPECIFIC_OR_GET_INFO, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->subDeviceInstance = 0;
++	ctrl->displayId = BIT(id);
++
++	ctrl = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, ctrl, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	switch (ctrl->type) {
++	case NV0073_CTRL_SPECIFIC_OR_TYPE_NONE:
++		return 0;
++	case NV0073_CTRL_SPECIFIC_OR_TYPE_SOR:
++		switch (ctrl->protocol) {
++		case NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_SINGLE_TMDS_A:
++			proto = TMDS;
++			link = 1;
++			break;
++		case NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_SINGLE_TMDS_B:
++			proto = TMDS;
++			link = 2;
++			break;
++		case NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_DUAL_TMDS:
++			proto = TMDS;
++			link = 3;
++			break;
++		case NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_DP_A:
++			proto = DP;
++			link = 1;
++			break;
++		case NV0073_CTRL_SPECIFIC_OR_PROTOCOL_SOR_DP_B:
++			proto = DP;
++			link = 2;
++			break;
++		default:
++			WARN_ON(1);
++			return -EINVAL;
++		}
++
++		break;
++	default:
++		WARN_ON(1);
++		return -EINVAL;
++	}
++
++	locn = ctrl->location;
++	nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++
++	conn = r535_conn_new(disp, id);
++	if (IS_ERR(conn))
++		return PTR_ERR(conn);
++
++	switch (proto) {
++	case TMDS: dcbE.type = DCB_OUTPUT_TMDS; break;
++	case   DP: dcbE.type = DCB_OUTPUT_DP; break;
++	default:
++		WARN_ON(1);
++		return -EINVAL;
++	}
++
++	dcbE.location = locn;
++	dcbE.connector = conn->index;
++	dcbE.heads = disp->head.mask;
++	dcbE.i2c_index = 0xff;
++	dcbE.link = dcbE.sorconf.link = link;
++
++	if (proto == TMDS) {
++		ret = nvkm_outp_new_(&r535_tmds, disp, id, &dcbE, &outp);
++		if (ret)
++			return ret;
 +	} else {
-+		rpc->bInPMTransition = 0;
-+		rpc->bGc6Entering = 0;
-+		rpc->newLevel = NV2080_CTRL_GPU_SET_POWER_STATE_GPU_LEVEL_0;
++		NV0073_CTRL_CMD_DP_GET_CAPS_PARAMS *ctrl;
++		bool mst, wm;
++
++		ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++					    NV0073_CTRL_CMD_DP_GET_CAPS, sizeof(*ctrl));
++		if (IS_ERR(ctrl))
++			return PTR_ERR(ctrl);
++
++		ctrl->sorIndex = ~0;
++
++		ctrl = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, ctrl, sizeof(*ctrl));
++		if (IS_ERR(ctrl))
++			return PTR_ERR(ctrl);
++
++		switch (NVVAL_GET(ctrl->maxLinkRate, NV0073_CTRL_CMD, DP_GET_CAPS, MAX_LINK_RATE)) {
++		case NV0073_CTRL_CMD_DP_GET_CAPS_MAX_LINK_RATE_1_62:
++			dcbE.dpconf.link_bw = 0x06;
++			break;
++		case NV0073_CTRL_CMD_DP_GET_CAPS_MAX_LINK_RATE_2_70:
++			dcbE.dpconf.link_bw = 0x0a;
++			break;
++		case NV0073_CTRL_CMD_DP_GET_CAPS_MAX_LINK_RATE_5_40:
++			dcbE.dpconf.link_bw = 0x14;
++			break;
++		case NV0073_CTRL_CMD_DP_GET_CAPS_MAX_LINK_RATE_8_10:
++			dcbE.dpconf.link_bw = 0x1e;
++			break;
++		default:
++			dcbE.dpconf.link_bw = 0x00;
++			break;
++		}
++
++		mst = ctrl->bIsMultistreamSupported;
++		wm = ctrl->bHasIncreasedWatermarkLimits;
++		nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++
++		if (WARN_ON(!dcbE.dpconf.link_bw))
++			return -EINVAL;
++
++		dcbE.dpconf.link_nr = 4;
++
++		ret = nvkm_outp_new_(&r535_dp, disp, id, &dcbE, &outp);
++		if (ret)
++			return ret;
++
++		outp->dp.mst = mst;
++		outp->dp.increased_wm = wm;
 +	}
 +
-+	return nvkm_gsp_rpc_wr(gsp, rpc, true);
++
++	outp->conn = conn;
++	list_add_tail(&outp->head, &disp->outps);
++	return 0;
++}
++
++static void
++r535_disp_irq(struct nvkm_gsp_event *event, void *repv, u32 repc)
++{
++	struct nvkm_disp *disp = container_of(event, typeof(*disp), rm.irq);
++	Nv2080DpIrqNotification *irq = repv;
++
++	if (WARN_ON(repc < sizeof(*irq)))
++		return;
++
++	nvkm_debug(&disp->engine.subdev, "event: dp irq displayId %08x\n", irq->displayId);
++
++	if (irq->displayId)
++		nvkm_event_ntfy(&disp->rm.event, fls(irq->displayId) - 1, NVKM_DPYID_IRQ);
++}
++
++static void
++r535_disp_hpd(struct nvkm_gsp_event *event, void *repv, u32 repc)
++{
++	struct nvkm_disp *disp = container_of(event, typeof(*disp), rm.hpd);
++	Nv2080HotplugNotification *hpd = repv;
++
++	if (WARN_ON(repc < sizeof(*hpd)))
++		return;
++
++	nvkm_debug(&disp->engine.subdev, "event: hpd plug %08x unplug %08x\n",
++		   hpd->plugDisplayMask, hpd->unplugDisplayMask);
++
++	for (int i = 0; i < 31; i++) {
++		u32 mask = 0;
++
++		if (hpd->plugDisplayMask & BIT(i))
++			mask |= NVKM_DPYID_PLUG;
++		if (hpd->unplugDisplayMask & BIT(i))
++			mask |= NVKM_DPYID_UNPLUG;
++
++		if (mask)
++			nvkm_event_ntfy(&disp->rm.event, i, mask);
++	}
++}
++
++static const struct nvkm_event_func
++r535_disp_event = {
++};
++
++static void
++r535_disp_intr_head_timing(struct nvkm_disp *disp, int head)
++{
++	struct nvkm_subdev *subdev = &disp->engine.subdev;
++	struct nvkm_device *device = subdev->device;
++	u32 stat = nvkm_rd32(device, 0x611c00 + (head * 0x04));
++
++	if (stat & 0x00000002) {
++		nvkm_disp_vblank(disp, head);
++
++		nvkm_wr32(device, 0x611800 + (head * 0x04), 0x00000002);
++	}
++}
++
++static irqreturn_t
++r535_disp_intr(struct nvkm_inth *inth)
++{
++	struct nvkm_disp *disp = container_of(inth, typeof(*disp), engine.subdev.inth);
++	struct nvkm_subdev *subdev = &disp->engine.subdev;
++	struct nvkm_device *device = subdev->device;
++	unsigned long mask = nvkm_rd32(device, 0x611ec0) & 0x000000ff;
++	int head;
++
++	for_each_set_bit(head, &mask, 8)
++		r535_disp_intr_head_timing(disp, head);
++
++	return IRQ_HANDLED;
++}
++
++static void
++r535_disp_fini(struct nvkm_disp *disp, bool suspend)
++{
++	if (!disp->engine.subdev.use.enabled)
++		return;
++
++	nvkm_gsp_rm_free(&disp->rm.object);
++
++	if (!suspend) {
++		nvkm_gsp_event_dtor(&disp->rm.irq);
++		nvkm_gsp_event_dtor(&disp->rm.hpd);
++		nvkm_event_fini(&disp->rm.event);
++
++		nvkm_gsp_rm_free(&disp->rm.objcom);
++		nvkm_gsp_device_dtor(&disp->rm.device);
++		nvkm_gsp_client_dtor(&disp->rm.client);
++	}
 +}
 +
 +static int
-+r535_gsp_rpc_set_registry(struct nvkm_gsp *gsp)
++r535_disp_init(struct nvkm_disp *disp)
 +{
-+	PACKED_REGISTRY_TABLE *rpc;
-+	char *strings;
++	int ret;
 +
-+	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_SET_REGISTRY,
-+			       sizeof(*rpc) + sizeof(rpc->entries[0]) + 1);
-+	if (IS_ERR(rpc))
-+		return PTR_ERR(rpc);
++	ret = nvkm_gsp_rm_alloc(&disp->rm.device.object, disp->func->root.oclass << 16,
++				disp->func->root.oclass, 0, &disp->rm.object);
++	if (ret)
++		return ret;
 +
-+	rpc->size = sizeof(*rpc);
-+	rpc->numEntries = 1;
-+	rpc->entries[0].nameOffset = offsetof(typeof(*rpc), entries[1]);
-+	rpc->entries[0].type = 1;
-+	rpc->entries[0].data = 0;
-+	rpc->entries[0].length = 4;
-+
-+	strings = (char *)&rpc->entries[1];
-+	strings[0] = '\0';
-+
-+	return nvkm_gsp_rpc_wr(gsp, rpc, false);
++	return 0;
 +}
 +
++static int
++r535_disp_oneinit(struct nvkm_disp *disp)
++{
++	struct nvkm_device *device = disp->engine.subdev.device;
++	struct nvkm_gsp *gsp = device->gsp;
++	NV2080_CTRL_INTERNAL_DISPLAY_WRITE_INST_MEM_PARAMS *ctrl;
++	int ret, i;
++
++	/* RAMIN. */
++	ret = nvkm_gpuobj_new(device, 0x10000, 0x10000, false, NULL, &disp->inst);
++	if (ret)
++		return ret;
++
++	if (WARN_ON(nvkm_memory_target(disp->inst->memory) != NVKM_MEM_TARGET_VRAM))
++		return -EINVAL;
++
++	ctrl = nvkm_gsp_rm_ctrl_get(&gsp->internal.device.subdevice,
++				    NV2080_CTRL_CMD_INTERNAL_DISPLAY_WRITE_INST_MEM,
++				    sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
++
++	ctrl->instMemPhysAddr = nvkm_memory_addr(disp->inst->memory);
++	ctrl->instMemSize = nvkm_memory_size(disp->inst->memory);
++	ctrl->instMemAddrSpace = ADDR_FBMEM;
++	ctrl->instMemCpuCacheAttr = NV_MEMORY_WRITECOMBINED;
++
++	ret = nvkm_gsp_rm_ctrl_wr(&gsp->internal.device.subdevice, ctrl);
++	if (ret)
++		return ret;
++
++	/* OBJs. */
++	ret = nvkm_gsp_client_device_ctor(gsp, &disp->rm.client, &disp->rm.device);
++	if (ret)
++		return ret;
++
++	ret = nvkm_gsp_rm_alloc(&disp->rm.device.object, 0x00730000, NV04_DISPLAY_COMMON, 0,
++				&disp->rm.objcom);
++	if (ret)
++		return ret;
++
++	{
++		NV2080_CTRL_INTERNAL_DISPLAY_GET_STATIC_INFO_PARAMS *ctrl;
++
++		ctrl = nvkm_gsp_rm_ctrl_rd(&gsp->internal.device.subdevice,
++					   NV2080_CTRL_CMD_INTERNAL_DISPLAY_GET_STATIC_INFO,
++					   sizeof(*ctrl));
++		if (IS_ERR(ctrl))
++			return PTR_ERR(ctrl);
++
++		disp->wndw.mask = ctrl->windowPresentMask;
++		disp->wndw.nr = fls(disp->wndw.mask);
++		nvkm_gsp_rm_ctrl_done(&gsp->internal.device.subdevice, ctrl);
++	}
++
++	/* */
++	{
 +#if defined(CONFIG_ACPI) && defined(CONFIG_X86)
-+static void
-+r535_gsp_acpi_caps(acpi_handle handle, CAPS_METHOD_DATA *caps)
-+{
-+	const guid_t NVOP_DSM_GUID =
-+		GUID_INIT(0xA486D8F8, 0x0BDA, 0x471B,
-+			  0xA7, 0x2B, 0x60, 0x42, 0xA6, 0xB5, 0xBE, 0xE0);
-+	u64 NVOP_DSM_REV = 0x00000100;
-+	union acpi_object argv4 = {
-+		.buffer.type    = ACPI_TYPE_BUFFER,
-+		.buffer.length  = 4,
-+		.buffer.pointer = kmalloc(argv4.buffer.length, GFP_KERNEL),
-+	}, *obj;
++		NV2080_CTRL_INTERNAL_INIT_BRIGHTC_STATE_LOAD_PARAMS *ctrl;
++		struct nvkm_gsp_object *subdevice = &disp->rm.client.gsp->internal.device.subdevice;
 +
-+	caps->status = 0xffff;
++		ctrl = nvkm_gsp_rm_ctrl_get(subdevice,
++					    NV2080_CTRL_CMD_INTERNAL_INIT_BRIGHTC_STATE_LOAD,
++					    sizeof(*ctrl));
++		if (IS_ERR(ctrl))
++			return PTR_ERR(ctrl);
 +
-+	if (!acpi_check_dsm(handle, &NVOP_DSM_GUID, NVOP_DSM_REV, BIT_ULL(0x1a)))
-+		return;
++		ctrl->status = 0x56; /* NV_ERR_NOT_SUPPORTED */
 +
-+	obj = acpi_evaluate_dsm(handle, &NVOP_DSM_GUID, NVOP_DSM_REV, 0x1a, &argv4);
-+	if (!obj)
-+		return;
++		{
++			const guid_t NBCI_DSM_GUID =
++				GUID_INIT(0xD4A50B75, 0x65C7, 0x46F7,
++					  0xBF, 0xB7, 0x41, 0x51, 0x4C, 0xEA, 0x02, 0x44);
++			u64 NBCI_DSM_REV = 0x00000102;
++			const guid_t NVHG_DSM_GUID =
++				GUID_INIT(0x9D95A0A0, 0x0060, 0x4D48,
++					  0xB3, 0x4D, 0x7E, 0x5F, 0xEA, 0x12, 0x9F, 0xD4);
++			u64 NVHG_DSM_REV = 0x00000102;
++			acpi_handle handle = ACPI_HANDLE(device->dev);
 +
-+	printk(KERN_ERR "nvop: obj type %d\n", obj->type);
-+	printk(KERN_ERR "nvop: obj len %d\n", obj->buffer.length);
++			if (handle && acpi_has_method(handle, "_DSM")) {
++				bool nbci = acpi_check_dsm(handle, &NBCI_DSM_GUID, NBCI_DSM_REV,
++						           1ULL << 0x00000014);
++				bool nvhg = acpi_check_dsm(handle, &NVHG_DSM_GUID, NVHG_DSM_REV,
++						           1ULL << 0x00000014);
 +
-+	if (WARN_ON(obj->type != ACPI_TYPE_BUFFER) ||
-+	    WARN_ON(obj->buffer.length != 4))
-+		return;
++				printk(KERN_ERR "bl: nbci:%d nvhg:%d\n", nbci, nvhg);
 +
-+	caps->status = 0;
-+	caps->optimusCaps = *(u32 *)obj->buffer.pointer;
-+	printk(KERN_ERR "nvop: caps %08x\n", caps->optimusCaps);
++				if (nbci || nvhg) {
++					union acpi_object argv4 = {
++						.buffer.type    = ACPI_TYPE_BUFFER,
++						.buffer.length  = sizeof(ctrl->backLightData),
++						.buffer.pointer = kmalloc(argv4.buffer.length, GFP_KERNEL),
++					}, *obj;
 +
-+	ACPI_FREE(obj);
++					obj = acpi_evaluate_dsm(handle, nbci ? &NBCI_DSM_GUID : &NVHG_DSM_GUID,
++								0x00000102, 0x14, &argv4);
++					if (!obj) {
++						acpi_handle_info(handle, "failed to evaluate _DSM\n");
++					} else {
++						printk(KERN_ERR "bl: obj type %d\n", obj->type);
++						printk(KERN_ERR "bl: obj len %d\n", obj->package.count);
 +
-+	kfree(argv4.buffer.pointer);
++						for (int i = 0; i < obj->package.count; i++) {
++							union acpi_object *elt = &obj->package.elements[i];
++							u32 size;
++
++							if (elt->integer.value & ~0xffffffffULL)
++								size = 8;
++							else
++								size = 4;
++
++							printk(KERN_ERR "elt %03d: type %d size %d\n", i, elt->type, size);
++							memcpy(&ctrl->backLightData[ctrl->backLightDataSize], &elt->integer.value, size);
++							ctrl->backLightDataSize += size;
++						}
++
++						printk(KERN_ERR "bl: data size %d\n", ctrl->backLightDataSize);
++						ctrl->status = 0;
++						ACPI_FREE(obj);
++					}
++
++					kfree(argv4.buffer.pointer);
++				}
++			}
++		}
++
++		ret = nvkm_gsp_rm_ctrl_wr(subdevice, ctrl);
++		if (ret)
++			return ret;
++#endif
++	}
++
++	/* */
++	{
++		NV0073_CTRL_CMD_DP_SET_MANUAL_DISPLAYPORT_PARAMS *ctrl;
++
++		ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
++					    NV0073_CTRL_CMD_DP_SET_MANUAL_DISPLAYPORT,
++					    sizeof(*ctrl));
++		if (IS_ERR(ctrl))
++			return PTR_ERR(ctrl);
++
++		ret = nvkm_gsp_rm_ctrl_wr(&disp->rm.objcom, ctrl);
++		if (ret)
++			return ret;
++	}
++
++	/* */
++	{
++		NV0073_CTRL_SYSTEM_GET_NUM_HEADS_PARAMS *ctrl;
++
++		ctrl = nvkm_gsp_rm_ctrl_rd(&disp->rm.objcom,
++					   NV0073_CTRL_CMD_SYSTEM_GET_NUM_HEADS, sizeof(*ctrl));
++		if (IS_ERR(ctrl))
++			return PTR_ERR(ctrl);
++
++		disp->head.nr = ctrl->numHeads;
++		nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++	}
++
++	/* */
++	{
++		NV0073_CTRL_SPECIFIC_GET_ALL_HEAD_MASK_PARAMS *ctrl;
++
++		ctrl = nvkm_gsp_rm_ctrl_rd(&disp->rm.objcom,
++					   NV0073_CTRL_CMD_SPECIFIC_GET_ALL_HEAD_MASK,
++					   sizeof(*ctrl));
++		if (IS_ERR(ctrl))
++			return PTR_ERR(ctrl);
++
++		disp->head.mask = ctrl->headMask;
++		nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++
++		for_each_set_bit(i, &disp->head.mask, disp->head.nr) {
++			ret = nvkm_head_new_(&r535_head, disp, i);
++			if (ret)
++				return ret;
++		}
++	}
++
++	disp->sor.nr = disp->func->sor.cnt(disp, &disp->sor.mask);
++	nvkm_debug(&disp->engine.subdev, "   SOR(s): %d (%02lx)\n", disp->sor.nr, disp->sor.mask);
++	for_each_set_bit(i, &disp->sor.mask, disp->sor.nr) {
++		ret = disp->func->sor.new(disp, i);
++		if (ret)
++			return ret;
++	}
++
++	/* */
++	{
++		NV0073_CTRL_SYSTEM_GET_SUPPORTED_PARAMS *ctrl;
++		unsigned long mask;
++		int i;
++
++		ctrl = nvkm_gsp_rm_ctrl_rd(&disp->rm.objcom,
++					   NV0073_CTRL_CMD_SYSTEM_GET_SUPPORTED, sizeof(*ctrl));
++		if (IS_ERR(ctrl))
++			return PTR_ERR(ctrl);
++
++		mask = ctrl->displayMask;
++		nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
++
++		for_each_set_bit(i, &mask, 32) {
++			ret = r535_outp_new(disp, i);
++			if (ret)
++				return ret;
++		}
++	}
++
++	ret = nvkm_event_init(&r535_disp_event, &gsp->subdev, 3, 32, &disp->rm.event);
++	if (WARN_ON(ret))
++		return ret;
++
++	ret = nvkm_gsp_device_event_ctor(&disp->rm.device, 0x007e0000, NV2080_NOTIFIERS_HOTPLUG,
++					 r535_disp_hpd, &disp->rm.hpd);
++	if (ret)
++		return ret;
++
++	ret = nvkm_gsp_device_event_ctor(&disp->rm.device, 0x007e0001, NV2080_NOTIFIERS_DP_IRQ,
++					 r535_disp_irq, &disp->rm.irq);
++	if (ret)
++		return ret;
++
++	/* RAMHT. */
++	ret = nvkm_ramht_new(device, disp->func->ramht_size ? disp->func->ramht_size :
++			     0x1000, 0, disp->inst, &disp->ramht);
++	if (ret)
++		return ret;
++
++	ret = nvkm_gsp_intr_stall(gsp, disp->engine.subdev.type, disp->engine.subdev.inst);
++	if (ret < 0)
++		return ret;
++
++	ret = nvkm_inth_add(&device->vfn->intr, ret, NVKM_INTR_PRIO_NORMAL, &disp->engine.subdev,
++			    r535_disp_intr, &disp->engine.subdev.inth);
++	if (ret)
++		return ret;
++
++	nvkm_inth_allow(&disp->engine.subdev.inth);
++	return 0;
 +}
 +
 +static void
-+r535_gsp_acpi_jt(acpi_handle handle, JT_METHOD_DATA *jt)
++r535_disp_dtor(struct nvkm_disp *disp)
 +{
-+	const guid_t JT_DSM_GUID =
-+		GUID_INIT(0xCBECA351L, 0x067B, 0x4924,
-+			  0x9C, 0xBD, 0xB4, 0x6B, 0x00, 0xB8, 0x6F, 0x34);
-+	u64 JT_DSM_REV = 0x00000103;
-+	u32 caps;
-+	union acpi_object argv4 = {
-+		.buffer.type    = ACPI_TYPE_BUFFER,
-+		.buffer.length  = sizeof(caps),
-+		.buffer.pointer = kmalloc(argv4.buffer.length, GFP_KERNEL),
-+	}, *obj;
-+
-+	jt->status = 0xffff;
-+
-+	obj = acpi_evaluate_dsm(handle, &JT_DSM_GUID, JT_DSM_REV, 0x1, &argv4);
-+	if (!obj)
-+		return;
-+
-+	printk(KERN_ERR "jt: obj type %d\n", obj->type);
-+	printk(KERN_ERR "jt: obj len %d\n", obj->buffer.length);
-+
-+	if (WARN_ON(obj->type != ACPI_TYPE_BUFFER) ||
-+	    WARN_ON(obj->buffer.length != 4))
-+		return;
-+
-+	jt->status = 0;
-+	jt->jtCaps = *(u32 *)obj->buffer.pointer;
-+	jt->jtRevId = (jt->jtCaps & 0xfff00000) >> 20;
-+	jt->bSBIOSCaps = 0;
-+	printk(KERN_ERR "jt: caps %08x rev:%04x\n", jt->jtCaps, jt->jtRevId);
-+
-+	ACPI_FREE(obj);
-+
-+	kfree(argv4.buffer.pointer);
++	kfree(disp->func);
 +}
 +
-+static void
-+r535_gsp_acpi_mux_id(acpi_handle handle, u32 id, MUX_METHOD_DATA_ELEMENT *mode,
-+						 MUX_METHOD_DATA_ELEMENT *part)
++int
++r535_disp_new(const struct nvkm_disp_func *hw, struct nvkm_device *device,
++	      enum nvkm_subdev_type type, int inst, struct nvkm_disp **pdisp)
 +{
-+	acpi_handle iter = NULL, handle_mux;
-+	acpi_status status;
-+	unsigned long long value;
++	struct nvkm_disp_func *rm;
++	int ret;
 +
-+	mode->status = 0xffff;
-+	part->status = 0xffff;
++	if (!(rm = kzalloc(sizeof(*rm) + 6 * sizeof(rm->user[0]), GFP_KERNEL)))
++		return -ENOMEM;
 +
-+	do {
-+		status = acpi_get_next_object(ACPI_TYPE_DEVICE, handle, iter, &iter);
-+		if (ACPI_FAILURE(status) || !iter)
-+			return;
++	rm->dtor = r535_disp_dtor;
++	rm->oneinit = r535_disp_oneinit;
++	rm->init = r535_disp_init;
++	rm->fini = r535_disp_fini;
++	rm->uevent = hw->uevent;
++	rm->sor.cnt = r535_sor_cnt;
++	rm->sor.new = r535_sor_new;
++	rm->ramht_size = hw->ramht_size;
 +
-+		status = acpi_evaluate_integer(iter, "_ADR", NULL, &value);
-+		if (ACPI_FAILURE(status) || value != id)
++	rm->root = hw->root;
++
++	for (int i = 0; hw->user[i].ctor; i++) {
++		switch (hw->user[i].base.oclass & 0xff) {
++		case 0x73: rm->user[i] = hw->user[i]; break;
++		case 0x7d: rm->user[i] = hw->user[i]; rm->user[i].chan = &r535_core; break;
++		case 0x7e: rm->user[i] = hw->user[i]; rm->user[i].chan = &r535_wndw; break;
++		case 0x7b: rm->user[i] = hw->user[i]; rm->user[i].chan = &r535_wimm; break;
++		case 0x7a: rm->user[i] = hw->user[i]; rm->user[i].chan = &r535_curs; break;
++		default:
++			WARN_ON(1);
 +			continue;
-+
-+		handle_mux = iter;
-+	} while (!handle_mux);
-+
-+	if (!handle_mux)
-+		return;
-+
-+	status = acpi_evaluate_integer(handle_mux, "MXDM", NULL, &value);
-+	if (ACPI_SUCCESS(status)) {
-+		mode->acpiId = id;
-+		mode->mode   = value;
-+		mode->status = 0;
++		}
 +	}
 +
-+	status = acpi_evaluate_integer(handle_mux, "MXDS", NULL, &value);
-+	if (ACPI_SUCCESS(status)) {
-+		part->acpiId = id;
-+		part->mode   = value;
-+		part->status = 0;
-+	}
++	ret = nvkm_disp_new_(rm, device, type, inst, pdisp);
++	if (ret)
++		kfree(rm);
++
++	mutex_init(&(*pdisp)->super.mutex); //XXX
++	return ret;
++}
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/tu102.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/tu102.c
+index 02b6c9fcb973..dcb9f8ba374c 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/tu102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/tu102.c
+@@ -235,7 +235,7 @@ tu102_disp_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
+ 	       struct nvkm_disp **pdisp)
+ {
+ 	if (nvkm_gsp_rm(device->gsp))
+-		return -ENODEV;
++		return r535_disp_new(&tu102_disp, device, type, inst, pdisp);
+ 
+ 	return nvkm_disp_new_(&tu102_disp, device, type, inst, pdisp);
+ }
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
+index ff82bb248492..9f2b8c8de62c 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
+@@ -30,6 +30,23 @@
+ 
+ #include <nvif/if0011.h>
+ 
++static int
++nvkm_uconn_uevent_gsp(struct nvkm_object *object, u64 token, u32 bits)
++{
++	union nvif_conn_event_args args;
++
++	args.v0.version = 0;
++	args.v0.types = 0;
++	if (bits & NVKM_DPYID_PLUG)
++		args.v0.types |= NVIF_CONN_EVENT_V0_PLUG;
++	if (bits & NVKM_DPYID_UNPLUG)
++		args.v0.types |= NVIF_CONN_EVENT_V0_UNPLUG;
++	if (bits & NVKM_DPYID_IRQ)
++		args.v0.types |= NVIF_CONN_EVENT_V0_IRQ;
++
++	return object->client->event(token, &args, sizeof(args.v0));
 +}
 +
-+static void
-+r535_gsp_acpi_mux(acpi_handle handle, DOD_METHOD_DATA *dod, MUX_METHOD_DATA *mux)
-+{
-+	mux->tableLen = dod->acpiIdListLen / sizeof(dod->acpiIdList[0]);
+ static int
+ nvkm_uconn_uevent_aux(struct nvkm_object *object, u64 token, u32 bits)
+ {
+@@ -66,13 +83,14 @@ static int
+ nvkm_uconn_uevent(struct nvkm_object *object, void *argv, u32 argc, struct nvkm_uevent *uevent)
+ {
+ 	struct nvkm_conn *conn = nvkm_uconn(object);
+-	struct nvkm_device *device = conn->disp->engine.subdev.device;
++	struct nvkm_disp *disp = conn->disp;
++	struct nvkm_device *device = disp->engine.subdev.device;
+ 	struct nvkm_outp *outp;
+ 	union nvif_conn_event_args *args = argv;
+ 	u64 bits = 0;
+ 
+ 	if (!uevent) {
+-		if (conn->info.hpd == DCB_GPIO_UNUSED)
++		if (!disp->rm.client.gsp && conn->info.hpd == DCB_GPIO_UNUSED)
+ 			return -ENOSYS;
+ 		return 0;
+ 	}
+@@ -88,6 +106,15 @@ nvkm_uconn_uevent(struct nvkm_object *object, void *argv, u32 argc, struct nvkm_
+ 	if (&outp->head == &conn->disp->outps)
+ 		return -EINVAL;
+ 
++	if (disp->rm.client.gsp) {
++		if (args->v0.types & NVIF_CONN_EVENT_V0_PLUG  ) bits |= NVKM_DPYID_PLUG;
++		if (args->v0.types & NVIF_CONN_EVENT_V0_UNPLUG) bits |= NVKM_DPYID_UNPLUG;
++		if (args->v0.types & NVIF_CONN_EVENT_V0_IRQ   ) bits |= NVKM_DPYID_IRQ;
 +
-+	for (int i = 0; i < mux->tableLen; i++) {
-+		r535_gsp_acpi_mux_id(handle, dod->acpiIdList[i], &mux->acpiIdMuxModeTable[i],
-+								 &mux->acpiIdMuxPartTable[i]);
-+	}
-+}
-+
-+static void
-+r535_gsp_acpi_dod(acpi_handle handle, DOD_METHOD_DATA *dod)
-+{
-+	acpi_status status;
-+	struct acpi_buffer output = { ACPI_ALLOCATE_BUFFER, NULL };
-+	union acpi_object *_DOD;
-+
-+	dod->status = 0xffff;
-+
-+	status = acpi_evaluate_object(handle, "_DOD", NULL, &output);
-+	if (ACPI_FAILURE(status))
-+		return;
-+
-+	_DOD = output.pointer;
-+
-+	if (WARN_ON(_DOD->type != ACPI_TYPE_PACKAGE) ||
-+	    WARN_ON(_DOD->package.count > ARRAY_SIZE(dod->acpiIdList)))
-+		return;
-+
-+	for (int i = 0; i < _DOD->package.count; i++) {
-+		if (WARN_ON(_DOD->package.elements[i].type != ACPI_TYPE_INTEGER))
-+			return;
-+
-+		dod->acpiIdList[i] = _DOD->package.elements[i].integer.value;
-+		dod->acpiIdListLen += sizeof(dod->acpiIdList[0]);
++		return nvkm_uevent_add(uevent, &disp->rm.event, outp->index, bits,
++				       nvkm_uconn_uevent_gsp);
 +	}
 +
-+	printk(KERN_ERR "_DOD: ok! len:%d\n", dod->acpiIdListLen);
-+	dod->status = 0;
-+}
-+#endif
-+
+ 	if (outp->dp.aux && !outp->info.location) {
+ 		if (args->v0.types & NVIF_CONN_EVENT_V0_PLUG  ) bits |= NVKM_I2C_PLUG;
+ 		if (args->v0.types & NVIF_CONN_EVENT_V0_UNPLUG) bits |= NVKM_I2C_UNPLUG;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+index a3f3db4d312b..acc689c336c5 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+@@ -30,16 +30,20 @@
+ 
+ #include <nvrm/nvtypes.h>
+ #include <nvrm/535.54.03/common/sdk/nvidia/inc/class/cl0000.h>
++#include <nvrm/535.54.03/common/sdk/nvidia/inc/class/cl0005.h>
+ #include <nvrm/535.54.03/common/sdk/nvidia/inc/class/cl0080.h>
+ #include <nvrm/535.54.03/common/sdk/nvidia/inc/class/cl2080.h>
++#include <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080event.h>
+ #include <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080gpu.h>
+ #include <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080internal.h>
++#include <nvrm/535.54.03/common/sdk/nvidia/inc/nvos.h>
+ #include <nvrm/535.54.03/common/shared/msgq/inc/msgq/msgq_priv.h>
+ #include <nvrm/535.54.03/common/uproc/os/common/include/libos_init_args.h>
+ #include <nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/gsp/gsp_fw_sr_meta.h>
+ #include <nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/gsp/gsp_fw_wpr_meta.h>
+ #include <nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/rmRiscvUcode.h>
+ #include <nvrm/535.54.03/nvidia/arch/nvalloc/common/inc/rmgspseq.h>
++#include <nvrm/535.54.03/nvidia/generated/g_allclasses.h>
+ #include <nvrm/535.54.03/nvidia/generated/g_os_nvoc.h>
+ #include <nvrm/535.54.03/nvidia/generated/g_rpc-structures.h>
+ #include <nvrm/535.54.03/nvidia/inc/kernel/gpu/gsp/gsp_fw_heap.h>
+@@ -360,6 +364,81 @@ r535_gsp_rpc_send(struct nvkm_gsp *gsp, void *argv, bool wait, u32 repc)
+ 	return repv;
+ }
+ 
 +static void
-+r535_gsp_acpi_info(struct nvkm_gsp *gsp, ACPI_METHOD_DATA *acpi)
++r535_gsp_event_dtor(struct nvkm_gsp_event *event)
 +{
-+#if defined(CONFIG_ACPI) && defined(CONFIG_X86)
-+	acpi_handle handle = ACPI_HANDLE(gsp->subdev.device->dev);
++	struct nvkm_gsp_device *device = event->device;
++	struct nvkm_gsp_client *client = device->object.client;
++	struct nvkm_gsp *gsp = client->gsp;
 +
-+	if (!handle)
-+		return;
++	mutex_lock(&gsp->client_id.mutex);
++	if (event->func) {
++		list_del(&event->head);
++		event->func = NULL;
++	}
++	mutex_unlock(&gsp->client_id.mutex);
 +
-+	acpi->bValid = 1;
-+
-+	r535_gsp_acpi_dod(handle, &acpi->dodMethodData);
-+	if (acpi->dodMethodData.status == 0)
-+		r535_gsp_acpi_mux(handle, &acpi->dodMethodData, &acpi->muxMethodData);
-+
-+	r535_gsp_acpi_jt(handle, &acpi->jtMethodData);
-+	r535_gsp_acpi_caps(handle, &acpi->capsMethodData);
-+#endif
++	nvkm_gsp_rm_free(&event->object);
++	event->device = NULL;
 +}
 +
 +static int
-+r535_gsp_rpc_set_system_info(struct nvkm_gsp *gsp)
++r535_gsp_device_event_get(struct nvkm_gsp_event *event)
 +{
-+	struct nvkm_device *device = gsp->subdev.device;
-+	struct nvkm_device_pci *pdev = container_of(device, typeof(*pdev), device);
-+	GspSystemInfo *info;
++	struct nvkm_gsp_device *device = event->device;
++	NV2080_CTRL_EVENT_SET_NOTIFICATION_PARAMS *ctrl;
 +
-+	if (WARN_ON(device->type == NVKM_DEVICE_TEGRA))
-+		return -ENOSYS;
++	ctrl = nvkm_gsp_rm_ctrl_get(&device->subdevice,
++				    NV2080_CTRL_CMD_EVENT_SET_NOTIFICATION, sizeof(*ctrl));
++	if (IS_ERR(ctrl))
++		return PTR_ERR(ctrl);
 +
-+	info = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_GSP_SET_SYSTEM_INFO, sizeof(*info));
-+	if (IS_ERR(info))
-+		return PTR_ERR(info);
-+
-+	info->gpuPhysAddr = device->func->resource_addr(device, 0);
-+	info->gpuPhysFbAddr = device->func->resource_addr(device, 1);
-+	info->gpuPhysInstAddr = device->func->resource_addr(device, 3);
-+	info->nvDomainBusDeviceFunc = pci_dev_id(pdev->pdev);
-+	info->maxUserVa = TASK_SIZE;
-+	info->pciConfigMirrorBase = 0x088000;
-+	info->pciConfigMirrorSize = 0x001000;
-+	r535_gsp_acpi_info(gsp, &info->acpiMethodData);
-+
-+	return nvkm_gsp_rpc_wr(gsp, info, false);
++	ctrl->event = event->id;
++	ctrl->action = NV2080_CTRL_EVENT_SET_NOTIFICATION_ACTION_REPEAT;
++	return nvkm_gsp_rm_ctrl_wr(&device->subdevice, ctrl);
 +}
 +
 +static int
-+r535_gsp_msg_os_error_log(void *priv, u32 fn, void *repv, u32 repc)
++r535_gsp_device_event_ctor(struct nvkm_gsp_device *device, u32 handle, u32 id,
++			   nvkm_gsp_event_func func, struct nvkm_gsp_event *event)
++{
++	struct nvkm_gsp_client *client = device->object.client;
++	struct nvkm_gsp *gsp = client->gsp;
++	NV0005_ALLOC_PARAMETERS *args;
++	int ret;
++
++	args = nvkm_gsp_rm_alloc_get(&device->subdevice, handle,
++				     NV01_EVENT_KERNEL_CALLBACK_EX, sizeof(*args),
++				     &event->object);
++	if (IS_ERR(args))
++		return PTR_ERR(args);
++
++	args->hParentClient = client->object.handle;
++	args->hSrcResource = 0;
++	args->hClass = NV01_EVENT_KERNEL_CALLBACK_EX;
++	args->notifyIndex = NV01_EVENT_CLIENT_RM | id;
++	args->data = NULL;
++
++	ret = nvkm_gsp_rm_alloc_wr(&event->object, args);
++	if (ret)
++		return ret;
++
++	event->device = device;
++	event->id = id;
++
++	ret = r535_gsp_device_event_get(event);
++	if (ret) {
++		nvkm_gsp_event_dtor(event);
++		return ret;
++	}
++
++	mutex_lock(&gsp->client_id.mutex);
++	event->func = func;
++	list_add(&event->head, &client->events);
++	mutex_unlock(&gsp->client_id.mutex);
++	return 0;
++}
++
+ static void
+ r535_gsp_device_dtor(struct nvkm_gsp_device *device)
+ {
+@@ -428,6 +507,7 @@ r535_gsp_client_ctor(struct nvkm_gsp *gsp, struct nvkm_gsp_client *client)
+ 
+ 	client->gsp = gsp;
+ 	client->object.client = client;
++	INIT_LIST_HEAD(&client->events);
+ 
+ 	args = nvkm_gsp_rm_alloc_get(&client->object, 0xc1d00000 | ret, NV01_ROOT, sizeof(*args),
+ 				     &client->object);
+@@ -690,6 +770,9 @@ r535_gsp_rm = {
+ 
+ 	.device_ctor = r535_gsp_device_ctor,
+ 	.device_dtor = r535_gsp_device_dtor,
++
++	.event_ctor = r535_gsp_device_event_ctor,
++	.event_dtor = r535_gsp_event_dtor,
+ };
+ 
+ static void
+@@ -763,6 +846,10 @@ r535_gsp_intr_get_table(struct nvkm_gsp *gsp)
+ 			type = NVKM_SUBDEV_GSP;
+ 			inst = 0;
+ 			break;
++		case MC_ENGINE_IDX_DISP:
++			type = NVKM_ENGINE_DISP;
++			inst = 0;
++			break;
+ 		default:
+ 			continue;
+ 		}
+@@ -1151,6 +1238,47 @@ r535_gsp_msg_mmu_fault_queued(void *priv, u32 fn, void *repv, u32 repc)
+ 	return 0;
+ }
+ 
++static int
++r535_gsp_msg_post_event(void *priv, u32 fn, void *repv, u32 repc)
 +{
 +	struct nvkm_gsp *gsp = priv;
++	struct nvkm_gsp_client *client;
 +	struct nvkm_subdev *subdev = &gsp->subdev;
-+	rpc_os_error_log_v17_00 *msg = repv;
++	rpc_post_event_v17_00 *msg = repv;
 +
 +	if (WARN_ON(repc < sizeof(*msg)))
 +		return -EINVAL;
-+
-+	nvkm_error(subdev, "Xid:%d %s\n", msg->exceptType, msg->errString);
-+	return 0;
-+}
-+
-+static int
-+r535_gsp_msg_run_cpu_sequencer(void *priv, u32 fn, void *repv, u32 repc)
-+{
-+	struct nvkm_gsp *gsp = priv;
-+	struct nvkm_subdev *subdev = &gsp->subdev;
-+	struct nvkm_device *device = subdev->device;
-+	rpc_run_cpu_sequencer_v17_00 *seq = repv;
-+	int ptr = 0, ret;
-+
-+	nvkm_debug(subdev, "seq: %08x %08x\n", seq->bufferSizeDWord, seq->cmdIndex);
-+
-+	while (ptr < seq->cmdIndex) {
-+		GSP_SEQUENCER_BUFFER_CMD *cmd = (void *)&seq->commandBuffer[ptr];
-+
-+		ptr += 1;
-+		ptr += GSP_SEQUENCER_PAYLOAD_SIZE_DWORDS(cmd->opCode);
-+
-+		switch (cmd->opCode) {
-+		case GSP_SEQ_BUF_OPCODE_REG_WRITE: {
-+			u32 addr = cmd->payload.regWrite.addr;
-+			u32 data = cmd->payload.regWrite.val;
-+
-+			nvkm_trace(subdev, "seq wr32 %06x %08x\n", addr, data);
-+			nvkm_wr32(device, addr, data);
-+		}
-+			break;
-+		case GSP_SEQ_BUF_OPCODE_REG_MODIFY: {
-+			u32 addr = cmd->payload.regModify.addr;
-+			u32 mask = cmd->payload.regModify.mask;
-+			u32 data = cmd->payload.regModify.val;
-+
-+			nvkm_trace(subdev, "seq mask %06x %08x %08x\n", addr, mask, data);
-+			nvkm_mask(device, addr, mask, data);
-+		}
-+			break;
-+		case GSP_SEQ_BUF_OPCODE_REG_POLL: {
-+			u32 addr = cmd->payload.regPoll.addr;
-+			u32 mask = cmd->payload.regPoll.mask;
-+			u32 data = cmd->payload.regPoll.val;
-+			u32 usec = cmd->payload.regPoll.timeout ?: 4000000;
-+			//u32 error = cmd->payload.regPoll.error;
-+
-+			nvkm_trace(subdev, "seq poll %06x %08x %08x %d\n", addr, mask, data, usec);
-+			nvkm_rd32(device, addr);
-+			nvkm_usec(device, usec,
-+				if ((nvkm_rd32(device, addr) & mask) == data)
-+					break;
-+			);
-+		}
-+			break;
-+		case GSP_SEQ_BUF_OPCODE_DELAY_US: {
-+			u32 usec = cmd->payload.delayUs.val;
-+
-+			nvkm_trace(subdev, "seq usec %d\n", usec);
-+			udelay(usec);
-+		}
-+			break;
-+		case GSP_SEQ_BUF_OPCODE_REG_STORE: {
-+			u32 addr = cmd->payload.regStore.addr;
-+			u32 slot = cmd->payload.regStore.index;
-+
-+			seq->regSaveArea[slot] = nvkm_rd32(device, addr);
-+			nvkm_trace(subdev, "seq save %08x -> %d: %08x\n", addr, slot,
-+				   seq->regSaveArea[slot]);
-+		}
-+			break;
-+		case GSP_SEQ_BUF_OPCODE_CORE_RESET:
-+			nvkm_trace(subdev, "seq core reset\n");
-+			nvkm_falcon_reset(&gsp->falcon);
-+			nvkm_falcon_mask(&gsp->falcon, 0x624, 0x00000080, 0x00000080);
-+			nvkm_falcon_wr32(&gsp->falcon, 0x10c, 0x00000000);
-+			break;
-+		case GSP_SEQ_BUF_OPCODE_CORE_START:
-+			nvkm_trace(subdev, "seq core start\n");
-+			if (nvkm_falcon_rd32(&gsp->falcon, 0x100) & 0x00000040)
-+				nvkm_falcon_wr32(&gsp->falcon, 0x130, 0x00000002);
-+			else
-+				nvkm_falcon_wr32(&gsp->falcon, 0x100, 0x00000002);
-+			break;
-+		case GSP_SEQ_BUF_OPCODE_CORE_WAIT_FOR_HALT:
-+			nvkm_trace(subdev, "seq core wait halt\n");
-+			nvkm_msec(device, 2000,
-+				if (nvkm_falcon_rd32(&gsp->falcon, 0x100) & 0x00000010)
-+					break;
-+			);
-+			break;
-+		case GSP_SEQ_BUF_OPCODE_CORE_RESUME: {
-+			struct nvkm_sec2 *sec2 = device->sec2;
-+			u32 mbox0;
-+
-+			nvkm_trace(subdev, "seq core resume\n");
-+
-+			ret = gsp->func->reset(gsp);
-+			if (WARN_ON(ret))
-+				return ret;
-+
-+			nvkm_falcon_wr32(&gsp->falcon, 0x040, lower_32_bits(gsp->libos.addr));
-+			nvkm_falcon_wr32(&gsp->falcon, 0x044, upper_32_bits(gsp->libos.addr));
-+
-+			nvkm_falcon_start(&sec2->falcon);
-+
-+			if (nvkm_msec(device, 2000,
-+				if (nvkm_rd32(device, 0x1180f8) & 0x04000000)
-+					break;
-+			) < 0)
-+				return -ETIMEDOUT;
-+
-+			mbox0 = nvkm_falcon_rd32(&sec2->falcon, 0x040);
-+			if (WARN_ON(mbox0)) {
-+				nvkm_error(&gsp->subdev, "seq core resume sec2: 0x%x\n", mbox0);
-+				return -EIO;
-+			}
-+
-+			nvkm_falcon_wr32(&gsp->falcon, 0x080, gsp->boot.app_version);
-+
-+			if (WARN_ON(!nvkm_falcon_riscv_active(&gsp->falcon)))
-+				return -EIO;
-+		}
-+			break;
-+		default:
-+			nvkm_error(subdev, "unknown sequencer opcode %08x\n", cmd->opCode);
-+			return -EINVAL;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+static void
-+nvkm_gsp_mem_dtor(struct nvkm_gsp *gsp, struct nvkm_gsp_mem *mem)
-+{
-+	if (mem->data) {
-+		dma_free_coherent(gsp->subdev.device->dev, mem->size, mem->data, mem->addr);
-+		mem->data = NULL;
-+	}
-+}
-+
-+static int
-+nvkm_gsp_mem_ctor(struct nvkm_gsp *gsp, u32 size, struct nvkm_gsp_mem *mem)
-+{
-+	mem->size = size;
-+	mem->data = dma_alloc_coherent(gsp->subdev.device->dev, size, &mem->addr, GFP_KERNEL);
-+	if (WARN_ON(!mem->data))
-+		return -ENOMEM;
-+
-+	return 0;
-+}
-+
-+
-+static int
-+r535_gsp_booter_unload(struct nvkm_gsp *gsp, u32 mbox0, u32 mbox1)
-+{
-+	struct nvkm_subdev *subdev = &gsp->subdev;
-+	struct nvkm_device *device = subdev->device;
-+	u32 wpr2_hi;
-+	int ret;
-+
-+	wpr2_hi = nvkm_rd32(device, 0x1fa828);
-+	if (!wpr2_hi) {
-+		nvkm_debug(subdev, "WPR2 not set - skipping booter unload\n");
-+		return 0;
-+	}
-+
-+	ret = nvkm_falcon_fw_boot(&gsp->booter.unload, &gsp->subdev, true, &mbox0, &mbox1, 0, 0);
-+	if (WARN_ON(ret))
-+		return ret;
-+
-+	wpr2_hi = nvkm_rd32(device, 0x1fa828);
-+	if (WARN_ON(wpr2_hi))
-+		return -EIO;
-+
-+	return 0;
-+}
-+
-+static int
-+r535_gsp_booter_load(struct nvkm_gsp *gsp, u32 mbox0, u32 mbox1)
-+{
-+	int ret;
-+
-+	ret = nvkm_falcon_fw_boot(&gsp->booter.load, &gsp->subdev, true, &mbox0, &mbox1, 0, 0);
-+	if (ret)
-+		return ret;
-+
-+	nvkm_falcon_wr32(&gsp->falcon, 0x080, gsp->boot.app_version);
-+
-+	if (WARN_ON(!nvkm_falcon_riscv_active(&gsp->falcon)))
-+		return -EIO;
-+
-+	return 0;
-+}
-+
-+static int
-+r535_gsp_wpr_meta_init(struct nvkm_gsp *gsp)
-+{
-+	GspFwWprMeta *meta;
-+	int ret;
-+
-+	ret = nvkm_gsp_mem_ctor(gsp, 0x1000, &gsp->wpr_meta);
-+	if (ret)
-+		return ret;
-+
-+	meta = gsp->wpr_meta.data;
-+
-+	meta->magic = GSP_FW_WPR_META_MAGIC;
-+	meta->revision = GSP_FW_WPR_META_REVISION;
-+
-+	meta->sysmemAddrOfRadix3Elf = gsp->radix3.mem[0].addr;
-+	meta->sizeOfRadix3Elf = gsp->fb.wpr2.elf.size;
-+
-+	meta->sysmemAddrOfBootloader = gsp->boot.fw.addr;
-+	meta->sizeOfBootloader = gsp->boot.fw.size;
-+	meta->bootloaderCodeOffset = gsp->boot.code_offset;
-+	meta->bootloaderDataOffset = gsp->boot.data_offset;
-+	meta->bootloaderManifestOffset = gsp->boot.manifest_offset;
-+
-+	meta->sysmemAddrOfSignature = gsp->sig.addr;
-+	meta->sizeOfSignature = gsp->sig.size;
-+
-+	meta->gspFwRsvdStart = gsp->fb.heap.addr;
-+	meta->nonWprHeapOffset = gsp->fb.heap.addr;
-+	meta->nonWprHeapSize = gsp->fb.heap.size;
-+	meta->gspFwWprStart = gsp->fb.wpr2.addr;
-+	meta->gspFwHeapOffset = gsp->fb.wpr2.heap.addr;
-+	meta->gspFwHeapSize = gsp->fb.wpr2.heap.size;
-+	meta->gspFwOffset = gsp->fb.wpr2.elf.addr;
-+	meta->bootBinOffset = gsp->fb.wpr2.boot.addr;
-+	meta->frtsOffset = gsp->fb.wpr2.frts.addr;
-+	meta->frtsSize = gsp->fb.wpr2.frts.size;
-+	meta->gspFwWprEnd = ALIGN_DOWN(gsp->fb.bios.vga_workspace.addr, 0x20000);
-+	meta->fbSize = gsp->fb.size;
-+	meta->vgaWorkspaceOffset = gsp->fb.bios.vga_workspace.addr;
-+	meta->vgaWorkspaceSize = gsp->fb.bios.vga_workspace.size;
-+	meta->bootCount = 0;
-+	meta->partitionRpcAddr = 0;
-+	meta->partitionRpcRequestOffset = 0;
-+	meta->partitionRpcReplyOffset = 0;
-+	meta->verified = 0;
-+	return 0;
-+}
-+
-+static int
-+r535_gsp_shared_init(struct nvkm_gsp *gsp)
-+{
-+	struct {
-+		msgqTxHeader tx;
-+		msgqRxHeader rx;
-+	} *cmdq, *msgq;
-+	int ret, i;
-+
-+	gsp->shm.cmdq.size = 0x40000;
-+	gsp->shm.msgq.size = 0x40000;
-+
-+	gsp->shm.ptes.nr  = (gsp->shm.cmdq.size + gsp->shm.msgq.size) >> GSP_PAGE_SHIFT;
-+	gsp->shm.ptes.nr += DIV_ROUND_UP(gsp->shm.ptes.nr * sizeof(u64), GSP_PAGE_SIZE);
-+	gsp->shm.ptes.size = ALIGN(gsp->shm.ptes.nr * sizeof(u64), GSP_PAGE_SIZE);
-+
-+	ret = nvkm_gsp_mem_ctor(gsp, gsp->shm.ptes.size +
-+				     gsp->shm.cmdq.size +
-+				     gsp->shm.msgq.size,
-+				&gsp->shm.mem);
-+	if (ret)
-+		return ret;
-+
-+	gsp->shm.ptes.ptr = gsp->shm.mem.data;
-+	gsp->shm.cmdq.ptr = (u8 *)gsp->shm.ptes.ptr + gsp->shm.ptes.size;
-+	gsp->shm.msgq.ptr = (u8 *)gsp->shm.cmdq.ptr + gsp->shm.cmdq.size;
-+
-+	for (i = 0; i < gsp->shm.ptes.nr; i++)
-+		gsp->shm.ptes.ptr[i] = gsp->shm.mem.addr + (i << GSP_PAGE_SHIFT);
-+
-+	cmdq = gsp->shm.cmdq.ptr;
-+	cmdq->tx.version = 0;
-+	cmdq->tx.size = gsp->shm.cmdq.size;
-+	cmdq->tx.entryOff = GSP_PAGE_SIZE;
-+	cmdq->tx.msgSize = GSP_PAGE_SIZE;
-+	cmdq->tx.msgCount = (cmdq->tx.size - cmdq->tx.entryOff) / cmdq->tx.msgSize;
-+	cmdq->tx.writePtr = 0;
-+	cmdq->tx.flags = 1;
-+	cmdq->tx.rxHdrOff = offsetof(typeof(*cmdq), rx.readPtr);
-+
-+	msgq = gsp->shm.msgq.ptr;
-+
-+	gsp->cmdq.cnt = cmdq->tx.msgCount;
-+	gsp->cmdq.wptr = &cmdq->tx.writePtr;
-+	gsp->cmdq.rptr = &msgq->rx.readPtr;
-+	gsp->msgq.cnt = cmdq->tx.msgCount;
-+	gsp->msgq.wptr = &msgq->tx.writePtr;
-+	gsp->msgq.rptr = &cmdq->rx.readPtr;
-+	return 0;
-+}
-+
-+static int
-+r535_gsp_rmargs_init(struct nvkm_gsp *gsp, bool resume)
-+{
-+	GSP_ARGUMENTS_CACHED *args;
-+	int ret;
-+
-+	if (!resume) {
-+		ret = r535_gsp_shared_init(gsp);
-+		if (ret)
-+			return ret;
-+
-+		ret = nvkm_gsp_mem_ctor(gsp, 0x1000, &gsp->rmargs);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	args = gsp->rmargs.data;
-+	args->messageQueueInitArguments.sharedMemPhysAddr = gsp->shm.mem.addr;
-+	args->messageQueueInitArguments.pageTableEntryCount = gsp->shm.ptes.nr;
-+	args->messageQueueInitArguments.cmdQueueOffset =
-+		(u8 *)gsp->shm.cmdq.ptr - (u8 *)gsp->shm.mem.data;
-+	args->messageQueueInitArguments.statQueueOffset =
-+		(u8 *)gsp->shm.msgq.ptr - (u8 *)gsp->shm.mem.data;
-+
-+	if (!resume) {
-+		args->srInitArguments.oldLevel = 0;
-+		args->srInitArguments.flags = 0;
-+		args->srInitArguments.bInPMTransition = 0;
-+	} else {
-+		args->srInitArguments.oldLevel = NV2080_CTRL_GPU_SET_POWER_STATE_GPU_LEVEL_3;
-+		args->srInitArguments.flags = 0;
-+		args->srInitArguments.bInPMTransition = 1;
-+	}
-+
-+	return 0;
-+}
-+
-+static inline u64
-+r535_gsp_libos_id8(const char *name)
-+{
-+	u64 id = 0;
-+
-+	for (int i = 0; i < sizeof(id) && *name; i++, name++)
-+		id = (id << 8) | *name;
-+
-+	return id;
-+}
-+
-+static void create_pte_array(u64 *ptes, dma_addr_t addr, size_t size)
-+{
-+	unsigned int num_pages = DIV_ROUND_UP_ULL(size, GSP_PAGE_SIZE);
-+	unsigned int i;
-+
-+	for (i = 0; i < num_pages; i++)
-+		ptes[i] = (u64)addr + (i << GSP_PAGE_SHIFT);
-+}
-+
-+static int
-+r535_gsp_libos_init(struct nvkm_gsp *gsp)
-+{
-+	LibosMemoryRegionInitArgument *args;
-+	int ret;
-+
-+	ret = nvkm_gsp_mem_ctor(gsp, 0x1000, &gsp->libos);
-+	if (ret)
-+		return ret;
-+
-+	args = gsp->libos.data;
-+
-+	ret = nvkm_gsp_mem_ctor(gsp, 0x10000, &gsp->loginit);
-+	if (ret)
-+		return ret;
-+
-+	args[0].id8  = r535_gsp_libos_id8("LOGINIT");
-+	args[0].pa   = gsp->loginit.addr;
-+	args[0].size = gsp->loginit.size;
-+	args[0].kind = LIBOS_MEMORY_REGION_CONTIGUOUS;
-+	args[0].loc  = LIBOS_MEMORY_REGION_LOC_SYSMEM;
-+	create_pte_array(gsp->loginit.data + sizeof(u64), gsp->loginit.addr, gsp->loginit.size);
-+
-+	ret = nvkm_gsp_mem_ctor(gsp, 0x10000, &gsp->logintr);
-+	if (ret)
-+		return ret;
-+
-+	args[1].id8  = r535_gsp_libos_id8("LOGINTR");
-+	args[1].pa   = gsp->logintr.addr;
-+	args[1].size = gsp->logintr.size;
-+	args[1].kind = LIBOS_MEMORY_REGION_CONTIGUOUS;
-+	args[1].loc  = LIBOS_MEMORY_REGION_LOC_SYSMEM;
-+	create_pte_array(gsp->logintr.data + sizeof(u64), gsp->logintr.addr, gsp->logintr.size);
-+
-+	ret = nvkm_gsp_mem_ctor(gsp, 0x10000, &gsp->logrm);
-+	if (ret)
-+		return ret;
-+
-+	args[2].id8  = r535_gsp_libos_id8("LOGRM");
-+	args[2].pa   = gsp->logrm.addr;
-+	args[2].size = gsp->logrm.size;
-+	args[2].kind = LIBOS_MEMORY_REGION_CONTIGUOUS;
-+	args[2].loc  = LIBOS_MEMORY_REGION_LOC_SYSMEM;
-+	create_pte_array(gsp->logrm.data + sizeof(u64), gsp->logrm.addr, gsp->logrm.size);
-+
-+	ret = r535_gsp_rmargs_init(gsp, false);
-+	if (ret)
-+		return ret;
-+
-+	args[3].id8  = r535_gsp_libos_id8("RMARGS");
-+	args[3].pa   = gsp->rmargs.addr;
-+	args[3].size = gsp->rmargs.size;
-+	args[3].kind = LIBOS_MEMORY_REGION_CONTIGUOUS;
-+	args[3].loc  = LIBOS_MEMORY_REGION_LOC_SYSMEM;
-+	return 0;
-+}
-+
-+void
-+nvkm_gsp_sg_free(struct nvkm_device *device, struct sg_table *sgt)
-+{
-+	struct scatterlist *sgl;
-+	int i;
-+
-+	dma_unmap_sgtable(device->dev, sgt, DMA_BIDIRECTIONAL, 0);
-+
-+	for_each_sgtable_sg(sgt, sgl, i) {
-+		struct page *page = sg_page(sgl);
-+
-+		__free_page(page);
-+	}
-+
-+	sg_free_table(sgt);
-+}
-+
-+int
-+nvkm_gsp_sg(struct nvkm_device *device, u64 size, struct sg_table *sgt)
-+{
-+	const u64 pages = DIV_ROUND_UP(size, PAGE_SIZE);
-+	struct scatterlist *sgl;
-+	int ret, i;
-+
-+	ret = sg_alloc_table(sgt, pages, GFP_KERNEL);
-+	if (ret)
-+		return ret;
-+
-+	for_each_sgtable_sg(sgt, sgl, i) {
-+		struct page *page = alloc_page(GFP_KERNEL);
-+
-+		if (!page) {
-+			nvkm_gsp_sg_free(device, sgt);
-+			return -ENOMEM;
-+		}
-+
-+		sg_set_page(sgl, page, PAGE_SIZE, 0);
-+	}
-+
-+	ret = dma_map_sgtable(device->dev, sgt, DMA_BIDIRECTIONAL, 0);
-+	if (ret)
-+		nvkm_gsp_sg_free(device, sgt);
-+
-+	return ret;
-+}
-+
-+static void
-+nvkm_gsp_radix3_dtor(struct nvkm_gsp *gsp, struct nvkm_gsp_radix3 *rx3)
-+{
-+	for (int i = ARRAY_SIZE(rx3->mem) - 1; i >= 0; i--)
-+		nvkm_gsp_mem_dtor(gsp, &rx3->mem[i]);
-+}
-+
-+static int
-+nvkm_gsp_radix3_sg(struct nvkm_device *device, struct sg_table *sgt, u64 size,
-+		   struct nvkm_gsp_radix3 *rx3)
-+{
-+	u64 addr;
-+
-+	for (int i = ARRAY_SIZE(rx3->mem) - 1; i >= 0; i--) {
-+		u64 *ptes;
-+		int idx;
-+
-+		rx3->mem[i].size = ALIGN((size / GSP_PAGE_SIZE) * sizeof(u64), GSP_PAGE_SIZE);
-+		rx3->mem[i].data = dma_alloc_coherent(device->dev, rx3->mem[i].size,
-+						      &rx3->mem[i].addr, GFP_KERNEL);
-+		if (WARN_ON(!rx3->mem[i].data))
-+			return -ENOMEM;
-+
-+		ptes = rx3->mem[i].data;
-+		if (i == 2) {
-+			struct scatterlist *sgl;
-+
-+			for_each_sgtable_dma_sg(sgt, sgl, idx) {
-+				for (int j = 0; j < sg_dma_len(sgl) / GSP_PAGE_SIZE; j++)
-+					*ptes++ = sg_dma_address(sgl) + (GSP_PAGE_SIZE * j);
-+			}
-+		} else {
-+			for (int j = 0; j < size / GSP_PAGE_SIZE; j++)
-+				*ptes++ = addr + GSP_PAGE_SIZE * j;
-+		}
-+
-+		size = rx3->mem[i].size;
-+		addr = rx3->mem[i].addr;
-+	}
-+
-+	return 0;
-+}
-+
-+int
-+r535_gsp_fini(struct nvkm_gsp *gsp, bool suspend)
-+{
-+	u32 mbox0 = 0xff, mbox1 = 0xff;
-+	int ret;
-+
-+	if (!gsp->running)
-+		return 0;
-+
-+	if (suspend) {
-+		GspFwWprMeta *meta = gsp->wpr_meta.data;
-+		u64 len = meta->gspFwWprEnd - meta->gspFwWprStart;
-+		GspFwSRMeta *sr;
-+
-+		ret = nvkm_gsp_sg(gsp->subdev.device, len, &gsp->sr.sgt);
-+		if (ret)
-+			return ret;
-+
-+		ret = nvkm_gsp_radix3_sg(gsp->subdev.device, &gsp->sr.sgt, len, &gsp->sr.radix3);
-+		if (ret)
-+			return ret;
-+
-+		ret = nvkm_gsp_mem_ctor(gsp, sizeof(*sr), &gsp->sr.meta);
-+		if (ret)
-+			return ret;
-+
-+		sr = gsp->sr.meta.data;
-+		sr->magic = GSP_FW_SR_META_MAGIC;
-+		sr->revision = GSP_FW_SR_META_REVISION;
-+		sr->sysmemAddrOfSuspendResumeData = gsp->sr.radix3.mem[0].addr;
-+		sr->sizeOfSuspendResumeData = len;
-+
-+		mbox0 = lower_32_bits(gsp->sr.meta.addr);
-+		mbox1 = upper_32_bits(gsp->sr.meta.addr);
-+	}
-+
-+	ret = r535_gsp_rpc_unloading_guest_driver(gsp, suspend);
-+	if (WARN_ON(ret))
-+		return ret;
-+
-+	nvkm_msec(gsp->subdev.device, 2000,
-+		if (nvkm_falcon_rd32(&gsp->falcon, 0x040) & 0x80000000)
-+			break;
-+	);
-+
-+	nvkm_falcon_reset(&gsp->falcon);
-+
-+	ret = nvkm_gsp_fwsec_sb(gsp);
-+	WARN_ON(ret);
-+
-+	ret = r535_gsp_booter_unload(gsp, mbox0, mbox1);
-+	WARN_ON(ret);
-+
-+	gsp->running = false;
-+	return 0;
-+}
-+
-+int
-+r535_gsp_init(struct nvkm_gsp *gsp)
-+{
-+	u32 mbox0, mbox1;
-+	int ret;
-+
-+	if (!gsp->sr.meta.data) {
-+		mbox0 = lower_32_bits(gsp->wpr_meta.addr);
-+		mbox1 = upper_32_bits(gsp->wpr_meta.addr);
-+	} else {
-+		r535_gsp_rmargs_init(gsp, true);
-+
-+		mbox0 = lower_32_bits(gsp->sr.meta.addr);
-+		mbox1 = upper_32_bits(gsp->sr.meta.addr);
-+	}
-+
-+	/* Execute booter to handle (eventually...) booting GSP-RM. */
-+	ret = r535_gsp_booter_load(gsp, mbox0, mbox1);
-+	if (WARN_ON(ret))
-+		goto done;
-+
-+	ret = r535_gsp_rpc_poll(gsp, NV_VGPU_MSG_EVENT_GSP_INIT_DONE);
-+	if (ret)
-+		goto done;
-+
-+	gsp->running = true;
-+
-+done:
-+	if (gsp->sr.meta.data) {
-+		nvkm_gsp_mem_dtor(gsp, &gsp->sr.meta);
-+		nvkm_gsp_radix3_dtor(gsp, &gsp->sr.radix3);
-+		nvkm_gsp_sg_free(gsp->subdev.device, &gsp->sr.sgt);
-+	}
-+
-+	return ret;
-+}
-+
-+static int
-+r535_gsp_rm_boot_ctor(struct nvkm_gsp *gsp)
-+{
-+	const struct firmware *fw = gsp->fws.bl;
-+	const struct nvfw_bin_hdr *hdr;
-+	RM_RISCV_UCODE_DESC *desc;
-+	int ret;
-+
-+	hdr = nvfw_bin_hdr(&gsp->subdev, fw->data);
-+	desc = (void *)fw->data + hdr->header_offset;
-+
-+	ret = nvkm_gsp_mem_ctor(gsp, hdr->data_size, &gsp->boot.fw);
-+	if (ret)
-+		return ret;
-+
-+	memcpy(gsp->boot.fw.data, fw->data + hdr->data_offset, hdr->data_size);
-+
-+	gsp->boot.code_offset = desc->monitorCodeOffset;
-+	gsp->boot.data_offset = desc->monitorDataOffset;
-+	gsp->boot.manifest_offset = desc->manifestOffset;
-+	gsp->boot.app_version = desc->appVersion;
-+	return 0;
-+}
-+
-+static const struct nvkm_firmware_func
-+r535_gsp_fw = {
-+	.type = NVKM_FIRMWARE_IMG_SGT,
-+};
-+
-+static int
-+r535_gsp_elf_section(struct nvkm_gsp *gsp, const char *name, const u8 **pdata, u64 *psize)
-+{
-+	const u8 *img = gsp->fws.rm->data;
-+	const struct elf64_hdr *ehdr = (const struct elf64_hdr *)img;
-+	const struct elf64_shdr *shdr = (const struct elf64_shdr *)&img[ehdr->e_shoff];
-+	const char *names = &img[shdr[ehdr->e_shstrndx].sh_offset];
-+
-+	for (int i = 0; i < ehdr->e_shnum; i++, shdr++) {
-+		if (!strcmp(&names[shdr->sh_name], name)) {
-+			*pdata = &img[shdr->sh_offset];
-+			*psize = shdr->sh_size;
-+			return 0;
-+		}
-+	}
-+
-+	nvkm_error(&gsp->subdev, "section '%s' not found\n", name);
-+	return -ENOENT;
-+}
-+
-+static void
-+r535_gsp_dtor_fws(struct nvkm_gsp *gsp)
-+{
-+	nvkm_firmware_put(gsp->fws.bl);
-+	gsp->fws.bl = NULL;
-+	nvkm_firmware_put(gsp->fws.booter.unload);
-+	gsp->fws.booter.unload = NULL;
-+	nvkm_firmware_put(gsp->fws.booter.load);
-+	gsp->fws.booter.load = NULL;
-+	nvkm_firmware_put(gsp->fws.rm);
-+	gsp->fws.rm = NULL;
-+}
-+
-+void
-+r535_gsp_dtor(struct nvkm_gsp *gsp)
-+{
-+	nvkm_gsp_radix3_dtor(gsp, &gsp->radix3);
-+	nvkm_gsp_mem_dtor(gsp, &gsp->sig);
-+	nvkm_firmware_dtor(&gsp->fw);
-+
-+	nvkm_falcon_fw_dtor(&gsp->booter.unload);
-+	nvkm_falcon_fw_dtor(&gsp->booter.load);
-+
-+	mutex_destroy(&gsp->msgq.mutex);
-+	mutex_destroy(&gsp->cmdq.mutex);
-+
-+	r535_gsp_dtor_fws(gsp);
-+}
-+
-+int
-+r535_gsp_oneinit(struct nvkm_gsp *gsp)
-+{
-+	struct nvkm_device *device = gsp->subdev.device;
-+	const u8 *data;
-+	u64 size;
-+	int ret;
-+
-+	mutex_init(&gsp->cmdq.mutex);
-+	mutex_init(&gsp->msgq.mutex);
-+
-+	ret = gsp->func->booter.ctor(gsp, "booter-load", gsp->fws.booter.load,
-+				     &device->sec2->falcon, &gsp->booter.load);
-+	if (ret)
-+		return ret;
-+
-+	ret = gsp->func->booter.ctor(gsp, "booter-unload", gsp->fws.booter.unload,
-+				     &device->sec2->falcon, &gsp->booter.unload);
-+	if (ret)
-+		return ret;
-+
-+	/* Load GSP firmware from ELF image into DMA-accessible memory. */
-+	ret = r535_gsp_elf_section(gsp, ".fwimage", &data, &size);
-+	if (ret)
-+		return ret;
-+
-+	ret = nvkm_firmware_ctor(&r535_gsp_fw, "gsp-rm", device, data, size, &gsp->fw);
-+	if (ret)
-+		return ret;
-+
-+	/* Load relevant signature from ELF image. */
-+	ret = r535_gsp_elf_section(gsp, gsp->func->sig_section, &data, &size);
-+	if (ret)
-+		return ret;
-+
-+	ret = nvkm_gsp_mem_ctor(gsp, ALIGN(size, 256), &gsp->sig);
-+	if (ret)
-+		return ret;
-+
-+	memcpy(gsp->sig.data, data, size);
-+
-+	/* Build radix3 page table for ELF image. */
-+	ret = nvkm_gsp_radix3_sg(device, &gsp->fw.mem.sgt, gsp->fw.len, &gsp->radix3);
-+	if (ret)
-+		return ret;
-+
-+	r535_gsp_msg_ntfy_add(gsp, NV_VGPU_MSG_EVENT_GSP_RUN_CPU_SEQUENCER,
-+			      r535_gsp_msg_run_cpu_sequencer, gsp);
-+	r535_gsp_msg_ntfy_add(gsp, NV_VGPU_MSG_EVENT_OS_ERROR_LOG, r535_gsp_msg_os_error_log, gsp);
-+
-+	ret = r535_gsp_rm_boot_ctor(gsp);
-+	if (ret)
-+		return ret;
-+
-+	/* Release FW images - we've copied them to DMA buffers now. */
-+	r535_gsp_dtor_fws(gsp);
-+
-+	/* Calculate FB layout. */
-+	gsp->fb.wpr2.frts.size = 0x100000;
-+	gsp->fb.wpr2.frts.addr = ALIGN_DOWN(gsp->fb.bios.addr, 0x20000) - gsp->fb.wpr2.frts.size;
-+
-+	gsp->fb.wpr2.boot.size = gsp->boot.fw.size;
-+	gsp->fb.wpr2.boot.addr = ALIGN_DOWN(gsp->fb.wpr2.frts.addr - gsp->fb.wpr2.boot.size, 0x1000);
-+
-+	gsp->fb.wpr2.elf.size = gsp->fw.len;
-+	gsp->fb.wpr2.elf.addr = ALIGN_DOWN(gsp->fb.wpr2.boot.addr - gsp->fb.wpr2.elf.size, 0x10000);
-+
-+	{
-+		u32 fb_size_gb = DIV_ROUND_UP_ULL(gsp->fb.size, 1 << 30);
-+
-+		gsp->fb.wpr2.heap.size =
-+			gsp->func->wpr_heap.os_carveout_size +
-+			gsp->func->wpr_heap.base_size +
-+			ALIGN(GSP_FW_HEAP_PARAM_SIZE_PER_GB_FB * fb_size_gb, 1 << 20) +
-+			ALIGN(GSP_FW_HEAP_PARAM_CLIENT_ALLOC_SIZE, 1 << 20);
-+
-+		gsp->fb.wpr2.heap.size = max(gsp->fb.wpr2.heap.size, gsp->func->wpr_heap.min_size);
-+	}
-+
-+	gsp->fb.wpr2.heap.addr = ALIGN_DOWN(gsp->fb.wpr2.elf.addr - gsp->fb.wpr2.heap.size, 0x100000);
-+	gsp->fb.wpr2.heap.size = ALIGN_DOWN(gsp->fb.wpr2.elf.addr - gsp->fb.wpr2.heap.addr, 0x100000);
-+
-+	gsp->fb.wpr2.addr = ALIGN_DOWN(gsp->fb.wpr2.heap.addr - sizeof(GspFwWprMeta), 0x100000);
-+	gsp->fb.wpr2.size = gsp->fb.wpr2.frts.addr + gsp->fb.wpr2.frts.size - gsp->fb.wpr2.addr;
-+
-+	gsp->fb.heap.size = 0x100000;
-+	gsp->fb.heap.addr = gsp->fb.wpr2.addr - gsp->fb.heap.size;
-+
-+	ret = nvkm_gsp_fwsec_frts(gsp);
-+	if (WARN_ON(ret))
-+		return ret;
-+
-+	ret = r535_gsp_libos_init(gsp);
-+	if (WARN_ON(ret))
-+		return ret;
-+
-+	ret = r535_gsp_wpr_meta_init(gsp);
-+	if (WARN_ON(ret))
-+		return ret;
-+
-+	ret = r535_gsp_rpc_set_system_info(gsp);
-+	if (WARN_ON(ret))
-+		return ret;
-+
-+	ret = r535_gsp_rpc_set_registry(gsp);
-+	if (WARN_ON(ret))
-+		return ret;
-+
-+	/* Reset GSP into RISC-V mode. */
-+	ret = gsp->func->reset(gsp);
-+	if (WARN_ON(ret))
-+		return ret;
-+
-+	nvkm_falcon_wr32(&gsp->falcon, 0x040, lower_32_bits(gsp->libos.addr));
-+	nvkm_falcon_wr32(&gsp->falcon, 0x044, upper_32_bits(gsp->libos.addr));
-+	return 0;
-+}
-+
-+static int
-+r535_gsp_load_fw(struct nvkm_gsp *gsp, const char *name, const char *ver,
-+		 const struct firmware **pfw)
-+{
-+	char fwname[64];
-+
-+	snprintf(fwname, sizeof(fwname), "gsp/%s-%s", name, ver);
-+	return nvkm_firmware_get(&gsp->subdev, fwname, 0, pfw);
-+}
-+
-+int
-+r535_gsp_load(struct nvkm_gsp *gsp, int ver, const struct nvkm_gsp_fwif *fwif)
-+{
-+	struct nvkm_subdev *subdev = &gsp->subdev;
-+	int ret;
-+
-+	if (!nvkm_boolopt(subdev->device->cfgopt, "NvGspRm", fwif->enable))
++	if (WARN_ON(repc != sizeof(*msg) + msg->eventDataSize))
 +		return -EINVAL;
 +
-+	if ((ret = r535_gsp_load_fw(gsp, "gsp", fwif->ver, &gsp->fws.rm)) ||
-+	    (ret = r535_gsp_load_fw(gsp, "booter_load", fwif->ver, &gsp->fws.booter.load)) ||
-+	    (ret = r535_gsp_load_fw(gsp, "booter_unload", fwif->ver, &gsp->fws.booter.unload)) ||
-+	    (ret = r535_gsp_load_fw(gsp, "bootloader", fwif->ver, &gsp->fws.bl))) {
-+		r535_gsp_dtor_fws(gsp);
-+		return ret;
-+	}
++	nvkm_debug(subdev, "event: %08x %08x %d %08x %08x %d %d\n",
++		   msg->hClient, msg->hEvent, msg->notifyIndex, msg->data,
++		   msg->status, msg->eventDataSize, msg->bNotifyList);
 +
++	mutex_lock(&gsp->client_id.mutex);
++	client = idr_find(&gsp->client_id.idr, msg->hClient & 0xffff);
++	if (client) {
++		struct nvkm_gsp_event *event;
++		bool handled = false;
++
++		list_for_each_entry(event, &client->events, head) {
++			if (event->object.handle == msg->hEvent) {
++				event->func(event, msg->eventData, msg->eventDataSize);
++				handled = true;
++			}
++		}
++
++		if (!handled) {
++			nvkm_error(subdev, "event: cid 0x%08x event 0x%08x not found!\n",
++				   msg->hClient, msg->hEvent);
++		}
++	} else {
++		nvkm_error(subdev, "event: cid 0x%08x not found!\n", msg->hClient);
++	}
++	mutex_unlock(&gsp->client_id.mutex);
 +	return 0;
 +}
 +
-+#define NVKM_GSP_FIRMWARE(chip)                                  \
-+MODULE_FIRMWARE("nvidia/"#chip"/gsp/booter_load-535.54.03.bin");   \
-+MODULE_FIRMWARE("nvidia/"#chip"/gsp/booter_unload-535.54.03.bin"); \
-+MODULE_FIRMWARE("nvidia/"#chip"/gsp/bootloader-535.54.03.bin");    \
-+MODULE_FIRMWARE("nvidia/"#chip"/gsp/gsp-535.54.03.bin")
-+
-+NVKM_GSP_FIRMWARE(tu102);
-+NVKM_GSP_FIRMWARE(tu104);
-+NVKM_GSP_FIRMWARE(tu106);
-+
-+NVKM_GSP_FIRMWARE(tu116);
-+NVKM_GSP_FIRMWARE(tu117);
-+
-+NVKM_GSP_FIRMWARE(ga100);
-+
-+NVKM_GSP_FIRMWARE(ga102);
-+NVKM_GSP_FIRMWARE(ga103);
-+NVKM_GSP_FIRMWARE(ga104);
-+NVKM_GSP_FIRMWARE(ga106);
-+NVKM_GSP_FIRMWARE(ga107);
-+
-+NVKM_GSP_FIRMWARE(ad102);
-+NVKM_GSP_FIRMWARE(ad103);
-+NVKM_GSP_FIRMWARE(ad104);
-+NVKM_GSP_FIRMWARE(ad106);
-+NVKM_GSP_FIRMWARE(ad107);
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
-index be3c4deafaaa..b9b0e5989bd3 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
-@@ -21,8 +21,170 @@
-  */
- #include "priv.h"
+ static int
+ r535_gsp_msg_run_cpu_sequencer(void *priv, u32 fn, void *repv, u32 repc)
+ {
+@@ -1872,6 +2000,7 @@ r535_gsp_oneinit(struct nvkm_gsp *gsp)
  
-+#include <subdev/fb.h>
-+
-+#include <nvfw/flcn.h>
-+#include <nvfw/fw.h>
-+#include <nvfw/hs.h>
-+
-+int
-+tu102_gsp_booter_ctor(struct nvkm_gsp *gsp, const char *name, const struct firmware *blob,
-+		      struct nvkm_falcon *falcon, struct nvkm_falcon_fw *fw)
-+{
-+	struct nvkm_subdev *subdev = &gsp->subdev;
-+	const struct nvkm_falcon_fw_func *func = &gm200_flcn_fw;
-+	const struct nvfw_bin_hdr *hdr;
-+	const struct nvfw_hs_header_v2 *hshdr;
-+	const struct nvfw_hs_load_header_v2 *lhdr;
-+	u32 loc, sig, cnt;
-+	int ret;
-+
-+	hdr = nvfw_bin_hdr(subdev, blob->data);
-+	hshdr = nvfw_hs_header_v2(subdev, blob->data + hdr->header_offset);
-+	loc = *(u32 *)(blob->data + hshdr->patch_loc);
-+	sig = *(u32 *)(blob->data + hshdr->patch_sig);
-+	cnt = *(u32 *)(blob->data + hshdr->num_sig);
-+
-+	ret = nvkm_falcon_fw_ctor(func, name, subdev->device, true,
-+				  blob->data + hdr->data_offset, hdr->data_size, falcon, fw);
-+	if (ret)
-+		goto done;
-+
-+	ret = nvkm_falcon_fw_sign(fw, loc, hshdr->sig_prod_size / cnt, blob->data,
-+				  cnt, hshdr->sig_prod_offset + sig, 0, 0);
-+	if (ret)
-+		goto done;
-+
-+	lhdr = nvfw_hs_load_header_v2(subdev, blob->data + hshdr->header_offset);
-+
-+	fw->nmem_base_img = 0;
-+	fw->nmem_base = lhdr->os_code_offset;
-+	fw->nmem_size = lhdr->os_code_size;
-+	fw->imem_base_img = fw->nmem_size;
-+	fw->imem_base = lhdr->app[0].offset;
-+	fw->imem_size = lhdr->app[0].size;
-+	fw->dmem_base_img = lhdr->os_data_offset;
-+	fw->dmem_base = 0;
-+	fw->dmem_size = lhdr->os_data_size;
-+	fw->dmem_sign = loc - fw->dmem_base_img;
-+	fw->boot_addr = lhdr->os_code_offset;
-+
-+done:
-+	if (ret)
-+		nvkm_falcon_fw_dtor(fw);
-+
-+	return ret;
-+}
-+
-+static int
-+tu102_gsp_fwsec_load_bld(struct nvkm_falcon_fw *fw)
-+{
-+	struct flcn_bl_dmem_desc_v2 desc = {
-+		.ctx_dma = FALCON_DMAIDX_PHYS_SYS_NCOH,
-+		.code_dma_base = fw->fw.phys,
-+		.non_sec_code_off = fw->nmem_base,
-+		.non_sec_code_size = fw->nmem_size,
-+		.sec_code_off = fw->imem_base,
-+		.sec_code_size = fw->imem_size,
-+		.code_entry_point = 0,
-+		.data_dma_base = fw->fw.phys + fw->dmem_base_img,
-+		.data_size = fw->dmem_size,
-+		.argc = 0,
-+		.argv = 0,
-+	};
-+
-+	flcn_bl_dmem_desc_v2_dump(fw->falcon->user, &desc);
-+
-+	nvkm_falcon_mask(fw->falcon, 0x600 + desc.ctx_dma * 4, 0x00000007, 0x00000005);
-+
-+	return nvkm_falcon_pio_wr(fw->falcon, (u8 *)&desc, 0, 0, DMEM, 0, sizeof(desc), 0, 0);
-+}
-+
-+const struct nvkm_falcon_fw_func
-+tu102_gsp_fwsec = {
-+	.reset = gm200_flcn_fw_reset,
-+	.load = gm200_flcn_fw_load,
-+	.load_bld = tu102_gsp_fwsec_load_bld,
-+	.boot = gm200_flcn_fw_boot,
-+};
-+
-+int
-+tu102_gsp_reset(struct nvkm_gsp *gsp)
-+{
-+	return gsp->falcon.func->reset_eng(&gsp->falcon);
-+}
-+
-+static u64
-+tu102_gsp_vga_workspace_addr(struct nvkm_gsp *gsp, u64 fb_size)
-+{
-+	struct nvkm_device *device = gsp->subdev.device;
-+	const u64 base = fb_size - 0x100000;
-+	u64 addr = 0;
-+
-+	if (device->disp)
-+		addr = nvkm_rd32(gsp->subdev.device, 0x625f04);
-+	if (!(addr & 0x00000008))
-+		return base;
-+
-+	addr = (addr & 0xffffff00) << 8;
-+	if (addr < base)
-+		return fb_size - 0x20000;
-+
-+	return addr;
-+}
-+
-+int
-+tu102_gsp_oneinit(struct nvkm_gsp *gsp)
-+{
-+	gsp->fb.size = nvkm_fb_vidmem_size(gsp->subdev.device);
-+
-+	gsp->fb.bios.vga_workspace.addr = tu102_gsp_vga_workspace_addr(gsp, gsp->fb.size);
-+	gsp->fb.bios.vga_workspace.size = gsp->fb.size - gsp->fb.bios.vga_workspace.addr;
-+	gsp->fb.bios.addr = gsp->fb.bios.vga_workspace.addr;
-+	gsp->fb.bios.size = gsp->fb.bios.vga_workspace.size;
-+
-+	return r535_gsp_oneinit(gsp);
-+}
-+
-+const struct nvkm_falcon_func
-+tu102_gsp_flcn = {
-+	.disable = gm200_flcn_disable,
-+	.enable = gm200_flcn_enable,
-+	.addr2 = 0x1000,
-+	.reset_eng = gp102_flcn_reset_eng,
-+	.reset_wait_mem_scrubbing = gm200_flcn_reset_wait_mem_scrubbing,
-+	.bind_inst = gm200_flcn_bind_inst,
-+	.bind_stat = gm200_flcn_bind_stat,
-+	.bind_intr = true,
-+	.imem_pio = &gm200_flcn_imem_pio,
-+	.dmem_pio = &gm200_flcn_dmem_pio,
-+	.riscv_active = tu102_flcn_riscv_active,
-+};
-+
-+static const struct nvkm_gsp_func
-+tu102_gsp_r535_54_03 = {
-+	.flcn = &tu102_gsp_flcn,
-+	.fwsec = &tu102_gsp_fwsec,
-+
-+	.sig_section = ".fwsignature_tu10x",
-+
-+	.wpr_heap.base_size = 8 << 20,
-+	.wpr_heap.min_size = 64 << 20,
-+
-+	.booter.ctor = tu102_gsp_booter_ctor,
-+
-+	.dtor = r535_gsp_dtor,
-+	.oneinit = tu102_gsp_oneinit,
-+	.init = r535_gsp_init,
-+	.fini = r535_gsp_fini,
-+	.reset = tu102_gsp_reset,
-+
-+	.rm = &r535_gsp_rm,
-+};
-+
- static struct nvkm_gsp_fwif
- tu102_gsps[] = {
-+	{  0,  r535_gsp_load, &tu102_gsp_r535_54_03, "535.54.03" },
- 	{ -1, gv100_gsp_nofw, &gv100_gsp },
- 	{}
- };
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c
-index d4a94c115b1b..e9f0605abbfd 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c
-@@ -21,8 +21,30 @@
-  */
- #include "priv.h"
- 
-+static const struct nvkm_gsp_func
-+tu116_gsp_r535_54_03 = {
-+	.flcn = &tu102_gsp_flcn,
-+	.fwsec = &tu102_gsp_fwsec,
-+
-+	.sig_section = ".fwsignature_tu11x",
-+
-+	.wpr_heap.base_size = 8 << 20,
-+	.wpr_heap.min_size = 64 << 20,
-+
-+	.booter.ctor = tu102_gsp_booter_ctor,
-+
-+	.dtor = r535_gsp_dtor,
-+	.oneinit = tu102_gsp_oneinit,
-+	.init = r535_gsp_init,
-+	.fini = r535_gsp_fini,
-+	.reset = tu102_gsp_reset,
-+
-+	.rm = &r535_gsp_rm,
-+};
-+
- static struct nvkm_gsp_fwif
- tu116_gsps[] = {
-+	{  0,  r535_gsp_load, &tu116_gsp_r535_54_03, "535.54.03" },
- 	{ -1, gv100_gsp_nofw, &gv100_gsp },
- 	{}
- };
+ 	r535_gsp_msg_ntfy_add(gsp, NV_VGPU_MSG_EVENT_GSP_RUN_CPU_SEQUENCER,
+ 			      r535_gsp_msg_run_cpu_sequencer, gsp);
++	r535_gsp_msg_ntfy_add(gsp, NV_VGPU_MSG_EVENT_POST_EVENT, r535_gsp_msg_post_event, gsp);
+ 	r535_gsp_msg_ntfy_add(gsp, NV_VGPU_MSG_EVENT_MMU_FAULT_QUEUED,
+ 			      r535_gsp_msg_mmu_fault_queued, gsp);
+ 	r535_gsp_msg_ntfy_add(gsp, NV_VGPU_MSG_EVENT_OS_ERROR_LOG, r535_gsp_msg_os_error_log, gsp);
 -- 
 2.41.0
 
