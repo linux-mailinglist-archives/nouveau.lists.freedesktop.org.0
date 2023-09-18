@@ -2,66 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8BEB37A53B2
-	for <lists+nouveau@lfdr.de>; Mon, 18 Sep 2023 22:15:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 218CA7A53B3
+	for <lists+nouveau@lfdr.de>; Mon, 18 Sep 2023 22:15:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0CDB410E304;
-	Mon, 18 Sep 2023 20:15:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9FB6D10E2FF;
+	Mon, 18 Sep 2023 20:15:53 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D014110E300
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 20:15:49 +0000 (UTC)
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1c4586b12feso13857295ad.2
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 13:15:49 -0700 (PDT)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 29BD810E305
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 20:15:52 +0000 (UTC)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1c3bd829b86so36148025ad.0
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 13:15:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695068149; x=1695672949; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1695068151; x=1695672951; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=M3oroFOwaf7d9VtHjhXAOpGT/uTBLWGHcZg32AUfXxg=;
- b=dFZsVDfQiNYhc1N3mZ74Topm0XBMwJfiRy6ebhSow9KSLItplB24Q/A0+6PIHV5VRf
- WX1pMZuQ1njc/Wnc+cpCwjUUBJ2RP0GnjMeoBZPMKx4xAKrHmAg/enCRLsU+IuFW+hBN
- A7FGfcF76PT9AV2e5lbF3WfNrrD4Pk7AYB2bNmMGw8qkRG3EoGi6I9Uo1GOasnBFa20W
- rHvvcJc/GROh56PWm/0jgv9kSseNl565WrBp9mdT3m8f6EAo6rO4xnvqPsiHqD1jZwX7
- fePdywD62HVImMSEmwDD3P6aSzFNCvMaTAEeTWOOIIouzQ/vw/mQZG17GZqNrnIPJCK0
- h/qg==
+ bh=umpbVtEc7XWCUvA2Rbbb8/22K15RUVEXYcsqos35agk=;
+ b=I4ptq/o0wNASashLpA/8tr+waPp5WkLT7FMxaXn9fjwZlBSuKjWgWBUgIybYd2qi2A
+ 5dAlA/00mAU/LD2/VGlVP2IM3HdrDFtvX07xbxbBE8cH3AiPCQ/IvdYLNRE/zE3LRkN/
+ s91nseP+Ws//XFhsiJkAv4/FNUrOoVHkVtNMPCvpoilk3L2oRnzHL+pD1kV/QRjPQ2iN
+ 4cFZSOGi5z19/vOXQQCO4X9F7/ZdIzScNUJnMHZpODISsDuAyFgZCvBJmxRplPLWt1nl
+ 6J7lzOITo5exq8dJ172cvZDQJqkJ18CYn7PazE+h4Zade9TM29pFexeUj9XJZDhfNJSS
+ ZGKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695068149; x=1695672949;
+ d=1e100.net; s=20230601; t=1695068151; x=1695672951;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=M3oroFOwaf7d9VtHjhXAOpGT/uTBLWGHcZg32AUfXxg=;
- b=SXTOTSow9lzjEcQGte49SP8dWdr2gbqrjHGFKa2uG5lht9+CreMe9R/TfnG7I+Dpw7
- wRUA/wrR5aZMCobhXYrxy149IxKX7t5hxbWWayBWScj5XZTKkMrCKsxvSU6TQvV6JZ2J
- U5M9RCwQkBDoxKfBwtkfHVuL/TXy7OdEG5cj7jRlPz/LVKFskVe9U8/5D9HudiOl0mUr
- Z8sh3dM7iPtj2ZD6/NUYUVrjZa7+WPSnLXz3Pr0/N4lw8Lgfb3axR+FBV/MCfqPCnvXK
- 3O7nwPrxTF5abnKqS1mbDi9HEHaBLGr91H/f1nsxjV3IAKBJVutDU312gFJwoR7euUq4
- 6YHQ==
-X-Gm-Message-State: AOJu0YyNX+tXlTF83+c9gNWx1X9gG3QVAci+TmnSNSA9ECa212nY6SBl
- war4+GMGODUCca9hulZXzD5UNZJOaTo=
-X-Google-Smtp-Source: AGHT+IGrxehozEc1NdyyC6P7FwlCf4uh3hw7lu54M2x3xWdyBJTBqSw6PDWU41dtMP+j/LzXsSia8w==
-X-Received: by 2002:a17:903:4294:b0:1c0:e6e1:4a11 with SMTP id
- ju20-20020a170903429400b001c0e6e14a11mr7043745plb.54.1695068148826; 
- Mon, 18 Sep 2023 13:15:48 -0700 (PDT)
+ bh=umpbVtEc7XWCUvA2Rbbb8/22K15RUVEXYcsqos35agk=;
+ b=JtYmsF3vJ5I8hmVeZBGtQHPJGhzfHT31CosWeE7b+byHQZBTrWUzPA9OByAYC63FiN
+ 3lD9tBozn/u7Qo9c6UIPXvTaS02e7bBxQ7j0BHmIVABuo0c7TxKGwjCiQp+Ll8YNyAAE
+ f/alFdVNzLm5VUzGdk/LngS84OyuZEeaWX+CitLiTpEwGXnkFD3lEeh6f7cmX/HmiG6f
+ zxeDtPq7k6gqI0p5n2uPxjG0eMi1TJlE30kjwnkHYdbQLluPCG7jVk6cIZbpMxPmkHsu
+ txhX1qJHi1vRs7/3n+dKkHCjWA9Z+Q5s0C40j59QFRoFQ7E/9MDVVbpB8JSAMfhZn/vW
+ sD0A==
+X-Gm-Message-State: AOJu0YzzIqjOfuDFT8mlWB2D9hYlaQzxrsvUbOlmGsbCQPobOEC9gTFs
+ T6Ntxn3TNS/b2NOq477NG7WzRi6/4hs=
+X-Google-Smtp-Source: AGHT+IGxeR5Bd+FEVARf/ighoiITxGZGj7Bqq4Od/WhCsZYbfdwnpt9Mf0Ve6LcBcasGgJN+BLMFWw==
+X-Received: by 2002:a17:902:f689:b0:1c3:2ee6:380d with SMTP id
+ l9-20020a170902f68900b001c32ee6380dmr10482224plg.48.1695068151256; 
+ Mon, 18 Sep 2023 13:15:51 -0700 (PDT)
 Received: from localhost.localdomain (87-121-74-45.dyn.launtel.net.au.
  [87.121.74.45]) by smtp.gmail.com with ESMTPSA id
- p21-20020a170902ead500b001b8c6890623sm8706858pld.7.2023.09.18.13.15.46
+ p21-20020a170902ead500b001b8c6890623sm8706858pld.7.2023.09.18.13.15.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Sep 2023 13:15:48 -0700 (PDT)
+ Mon, 18 Sep 2023 13:15:50 -0700 (PDT)
 From: Ben Skeggs <skeggsb@gmail.com>
 To: nouveau@lists.freedesktop.org
-Date: Tue, 19 Sep 2023 06:13:56 +1000
-Message-ID: <20230918201404.3765-37-skeggsb@gmail.com>
+Date: Tue, 19 Sep 2023 06:13:57 +1000
+Message-ID: <20230918201404.3765-38-skeggsb@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230918201404.3765-1-skeggsb@gmail.com>
 References: <20230918201404.3765-1-skeggsb@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH v2 36/44] drm/nouveau/disp: move outp/conn
- construction to chipset code
+Subject: [Nouveau] [PATCH v2 37/44] drm/nouveau/disp: move outp init/fini
+ paths to chipset code
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,310 +79,224 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Ben Skeggs <bskeggs@redhat.com>
 
-- pre-nv5x doesn't use any of this, has its own version DRM-side
+- pre-nv5x doesn't use any of this
 - preparation for GSP-RM
 
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 Reviewed-by: Lyude Paul <lyude@redhat.com>
 ---
- .../gpu/drm/nouveau/nvkm/engine/disp/base.c   | 117 +----------------
- .../gpu/drm/nouveau/nvkm/engine/disp/nv50.c   | 122 +++++++++++++++++-
- 2 files changed, 121 insertions(+), 118 deletions(-)
+ .../gpu/drm/nouveau/nvkm/engine/disp/base.c   | 31 +++----------------
+ .../gpu/drm/nouveau/nvkm/engine/disp/conn.c   | 10 ------
+ .../gpu/drm/nouveau/nvkm/engine/disp/conn.h   |  2 --
+ drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c |  1 +
+ .../gpu/drm/nouveau/nvkm/engine/disp/nv50.c   | 14 +++++++++
+ .../gpu/drm/nouveau/nvkm/engine/disp/outp.c   | 20 ++----------
+ 6 files changed, 22 insertions(+), 56 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/base.c
-index 73104b59f97f..1dbe68f9a0e0 100644
+index 1dbe68f9a0e0..39f7e7ce9f4a 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/base.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/base.c
-@@ -23,15 +23,12 @@
-  */
- #include "priv.h"
- #include "conn.h"
--#include "dp.h"
- #include "head.h"
- #include "ior.h"
- #include "outp.h"
+@@ -102,18 +102,14 @@ static int
+ nvkm_disp_fini(struct nvkm_engine *engine, bool suspend)
+ {
+ 	struct nvkm_disp *disp = nvkm_disp(engine);
+-	struct nvkm_conn *conn;
+ 	struct nvkm_outp *outp;
  
- #include <core/client.h>
- #include <core/ramht.h>
--#include <subdev/bios.h>
--#include <subdev/bios/dcb.h>
+ 	if (disp->func->fini)
+ 		disp->func->fini(disp);
  
- #include <nvif/class.h>
- #include <nvif/cl0046.h>
-@@ -159,123 +156,11 @@ nvkm_disp_oneinit(struct nvkm_engine *engine)
+ 	list_for_each_entry(outp, &disp->outps, head) {
+-		nvkm_outp_fini(outp);
+-	}
+-
+-	list_for_each_entry(conn, &disp->conns, head) {
+-		nvkm_conn_fini(conn);
++		if (outp->func->fini)
++			outp->func->fini(outp);
+ 	}
+ 
+ 	return 0;
+@@ -123,16 +119,12 @@ static int
+ nvkm_disp_init(struct nvkm_engine *engine)
+ {
+ 	struct nvkm_disp *disp = nvkm_disp(engine);
+-	struct nvkm_conn *conn;
+ 	struct nvkm_outp *outp;
+ 	struct nvkm_ior *ior;
+ 
+-	list_for_each_entry(conn, &disp->conns, head) {
+-		nvkm_conn_init(conn);
+-	}
+-
+ 	list_for_each_entry(outp, &disp->outps, head) {
+-		nvkm_outp_init(outp);
++		if (outp->func->init)
++			outp->func->init(outp);
+ 	}
+ 
+ 	if (disp->func->init) {
+@@ -156,9 +148,7 @@ nvkm_disp_oneinit(struct nvkm_engine *engine)
  {
  	struct nvkm_disp *disp = nvkm_disp(engine);
  	struct nvkm_subdev *subdev = &disp->engine.subdev;
--	struct nvkm_bios *bios = subdev->device->bios;
--	struct nvkm_outp *outp, *outt, *pair;
--	struct nvkm_conn *conn;
-+	struct nvkm_outp *outp;
+-	struct nvkm_outp *outp;
  	struct nvkm_head *head;
- 	struct nvkm_ior *ior;
--	struct nvbios_connE connE;
--	struct dcb_output dcbE;
--	u8  hpd = 0, ver, hdr;
--	u32 data;
+-	struct nvkm_ior *ior;
  	int ret, i;
  
--	/* Create output path objects for each VBIOS display path. */
--	i = -1;
--	while ((data = dcb_outp_parse(bios, ++i, &ver, &hdr, &dcbE))) {
--		if (ver < 0x40) /* No support for chipsets prior to NV50. */
--			break;
--		if (dcbE.type == DCB_OUTPUT_UNUSED)
--			continue;
--		if (dcbE.type == DCB_OUTPUT_EOL)
--			break;
--		outp = NULL;
--
--		switch (dcbE.type) {
--		case DCB_OUTPUT_ANALOG:
--		case DCB_OUTPUT_TV:
--		case DCB_OUTPUT_TMDS:
--		case DCB_OUTPUT_LVDS:
--			ret = nvkm_outp_new(disp, i, &dcbE, &outp);
--			break;
--		case DCB_OUTPUT_DP:
--			ret = nvkm_dp_new(disp, i, &dcbE, &outp);
--			break;
--		case DCB_OUTPUT_WFD:
--			/* No support for WFD yet. */
--			ret = -ENODEV;
--			continue;
--		default:
--			nvkm_warn(subdev, "dcb %d type %d unknown\n",
--				  i, dcbE.type);
--			continue;
--		}
--
--		if (ret) {
--			if (outp) {
--				if (ret != -ENODEV)
--					OUTP_ERR(outp, "ctor failed: %d", ret);
--				else
--					OUTP_DBG(outp, "not supported");
--				nvkm_outp_del(&outp);
--				continue;
--			}
--			nvkm_error(subdev, "failed to create outp %d\n", i);
--			continue;
--		}
--
--		list_add_tail(&outp->head, &disp->outps);
--		hpd = max(hpd, (u8)(dcbE.connector + 1));
--	}
--
--	/* Create connector objects based on available output paths. */
--	list_for_each_entry_safe(outp, outt, &disp->outps, head) {
--		/* VBIOS data *should* give us the most useful information. */
--		data = nvbios_connEp(bios, outp->info.connector, &ver, &hdr,
--				     &connE);
--
--		/* No bios connector data... */
--		if (!data) {
--			/* Heuristic: anything with the same ccb index is
--			 * considered to be on the same connector, any
--			 * output path without an associated ccb entry will
--			 * be put on its own connector.
--			 */
--			int ccb_index = outp->info.i2c_index;
--			if (ccb_index != 0xf) {
--				list_for_each_entry(pair, &disp->outps, head) {
--					if (pair->info.i2c_index == ccb_index) {
--						outp->conn = pair->conn;
--						break;
--					}
--				}
--			}
--
--			/* Connector shared with another output path. */
--			if (outp->conn)
--				continue;
--
--			memset(&connE, 0x00, sizeof(connE));
--			connE.type = DCB_CONNECTOR_NONE;
--			i = -1;
--		} else {
--			i = outp->info.connector;
--		}
--
--		/* Check that we haven't already created this connector. */
--		list_for_each_entry(conn, &disp->conns, head) {
--			if (conn->index == outp->info.connector) {
--				outp->conn = conn;
--				break;
--			}
--		}
--
--		if (outp->conn)
--			continue;
--
--		/* Apparently we need to create a new one! */
--		ret = nvkm_conn_new(disp, i, &connE, &outp->conn);
--		if (ret) {
--			nvkm_error(subdev, "failed to create outp %d conn: %d\n", outp->index, ret);
--			nvkm_conn_del(&outp->conn);
--			list_del(&outp->head);
--			nvkm_outp_del(&outp);
--			continue;
--		}
--
--		list_add_tail(&outp->conn->head, &disp->conns);
--	}
--
  	if (disp->func->oneinit) {
- 		ret = disp->func->oneinit(disp);
- 		if (ret)
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.c
-index e9d0a9b715d4..7343b24f10eb 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.c
-@@ -23,7 +23,9 @@
-  */
- #include "priv.h"
- #include "chan.h"
-+#include "conn.h"
- #include "head.h"
-+#include "dp.h"
- #include "ior.h"
- #include "outp.h"
+@@ -167,19 +157,6 @@ nvkm_disp_oneinit(struct nvkm_engine *engine)
+ 			return ret;
+ 	}
  
-@@ -1581,7 +1583,14 @@ nv50_disp_oneinit(struct nvkm_disp *disp)
- 	const struct nvkm_disp_func *func = disp->func;
- 	struct nvkm_subdev *subdev = &disp->engine.subdev;
- 	struct nvkm_device *device = subdev->device;
-+	struct nvkm_bios *bios = device->bios;
-+	struct nvkm_outp *outp, *outt, *pair;
-+	struct nvkm_conn *conn;
- 	int ret, i;
-+	u8  ver, hdr;
-+	u32 data;
-+	struct dcb_output dcbE;
-+	struct nvbios_connE connE;
+-	/* Enforce identity-mapped SOR assignment for panels, which have
+-	 * certain bits (ie. backlight controls) wired to a specific SOR.
+-	 */
+-	list_for_each_entry(outp, &disp->outps, head) {
+-		if (outp->conn->info.type == DCB_CONNECTOR_LVDS ||
+-		    outp->conn->info.type == DCB_CONNECTOR_eDP) {
+-			ior = nvkm_ior_find(disp, SOR, ffs(outp->info.or) - 1);
+-			if (!WARN_ON(!ior))
+-				ior->identity = true;
+-			outp->identity = true;
+-		}
+-	}
+-
+ 	i = 0;
+ 	list_for_each_entry(head, &disp->heads, head)
+ 		i = max(i, head->id + 1);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/conn.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/conn.c
+index fbdae1137864..ff88a5a5253a 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/conn.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/conn.c
+@@ -29,16 +29,6 @@
  
- 	if (func->wndw.cnt) {
- 		disp->wndw.nr = func->wndw.cnt(disp, &disp->wndw.mask);
-@@ -1628,8 +1637,117 @@ nv50_disp_oneinit(struct nvkm_disp *disp)
- 	if (ret)
- 		return ret;
+ #include <nvif/event.h>
  
--	return nvkm_ramht_new(device, func->ramht_size ? func->ramht_size :
--			      0x1000, 0, disp->inst, &disp->ramht);
-+	ret = nvkm_ramht_new(device, func->ramht_size ? func->ramht_size : 0x1000, 0, disp->inst,
-+			     &disp->ramht);
-+	if (ret)
-+		return ret;
-+
-+	/* Create output path objects for each VBIOS display path. */
-+	i = -1;
-+	while ((data = dcb_outp_parse(bios, ++i, &ver, &hdr, &dcbE))) {
-+		if (WARN_ON((ver & 0xf0) != 0x40))
-+			return -EINVAL;
-+		if (dcbE.type == DCB_OUTPUT_UNUSED)
-+			continue;
-+		if (dcbE.type == DCB_OUTPUT_EOL)
-+			break;
-+		outp = NULL;
-+
-+		switch (dcbE.type) {
-+		case DCB_OUTPUT_ANALOG:
-+		case DCB_OUTPUT_TV:
-+		case DCB_OUTPUT_TMDS:
-+		case DCB_OUTPUT_LVDS:
-+			ret = nvkm_outp_new(disp, i, &dcbE, &outp);
-+			break;
-+		case DCB_OUTPUT_DP:
-+			ret = nvkm_dp_new(disp, i, &dcbE, &outp);
-+			break;
-+		case DCB_OUTPUT_WFD:
-+			/* No support for WFD yet. */
-+			ret = -ENODEV;
-+			continue;
-+		default:
-+			nvkm_warn(subdev, "dcb %d type %d unknown\n",
-+				  i, dcbE.type);
-+			continue;
-+		}
-+
-+		if (ret) {
-+			if (outp) {
-+				if (ret != -ENODEV)
-+					OUTP_ERR(outp, "ctor failed: %d", ret);
-+				else
-+					OUTP_DBG(outp, "not supported");
-+				nvkm_outp_del(&outp);
-+				continue;
-+			}
-+			nvkm_error(subdev, "failed to create outp %d\n", i);
-+			continue;
-+		}
-+
-+		list_add_tail(&outp->head, &disp->outps);
-+	}
-+
-+	/* Create connector objects based on available output paths. */
-+	list_for_each_entry_safe(outp, outt, &disp->outps, head) {
-+		/* VBIOS data *should* give us the most useful information. */
-+		data = nvbios_connEp(bios, outp->info.connector, &ver, &hdr,
-+				     &connE);
-+
-+		/* No bios connector data... */
-+		if (!data) {
-+			/* Heuristic: anything with the same ccb index is
-+			 * considered to be on the same connector, any
-+			 * output path without an associated ccb entry will
-+			 * be put on its own connector.
-+			 */
-+			int ccb_index = outp->info.i2c_index;
-+			if (ccb_index != 0xf) {
-+				list_for_each_entry(pair, &disp->outps, head) {
-+					if (pair->info.i2c_index == ccb_index) {
-+						outp->conn = pair->conn;
-+						break;
-+					}
-+				}
-+			}
-+
-+			/* Connector shared with another output path. */
-+			if (outp->conn)
-+				continue;
-+
-+			memset(&connE, 0x00, sizeof(connE));
-+			connE.type = DCB_CONNECTOR_NONE;
-+			i = -1;
-+		} else {
-+			i = outp->info.connector;
-+		}
-+
-+		/* Check that we haven't already created this connector. */
-+		list_for_each_entry(conn, &disp->conns, head) {
-+			if (conn->index == outp->info.connector) {
-+				outp->conn = conn;
-+				break;
-+			}
-+		}
-+
-+		if (outp->conn)
-+			continue;
-+
-+		/* Apparently we need to create a new one! */
-+		ret = nvkm_conn_new(disp, i, &connE, &outp->conn);
-+		if (ret) {
-+			nvkm_error(subdev, "failed to create outp %d conn: %d\n", outp->index, ret);
-+			nvkm_conn_del(&outp->conn);
-+			list_del(&outp->head);
-+			nvkm_outp_del(&outp);
-+			continue;
-+		}
-+
-+		list_add_tail(&outp->conn->head, &disp->conns);
-+	}
-+
-+	return 0;
+-void
+-nvkm_conn_fini(struct nvkm_conn *conn)
+-{
+-}
+-
+-void
+-nvkm_conn_init(struct nvkm_conn *conn)
+-{
+-}
+-
+ void
+ nvkm_conn_del(struct nvkm_conn **pconn)
+ {
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/conn.h b/drivers/gpu/drm/nouveau/nvkm/engine/disp/conn.h
+index a0600e72b0ec..01c3146c7066 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/conn.h
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/conn.h
+@@ -19,8 +19,6 @@ struct nvkm_conn {
+ int nvkm_conn_new(struct nvkm_disp *, int index, struct nvbios_connE *,
+ 		  struct nvkm_conn **);
+ void nvkm_conn_del(struct nvkm_conn **);
+-void nvkm_conn_init(struct nvkm_conn *);
+-void nvkm_conn_fini(struct nvkm_conn *);
+ 
+ #define CONN_MSG(c,l,f,a...) do {                                              \
+ 	struct nvkm_conn *_conn = (c);                                    \
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
+index aaa7796946ce..b35fae96d855 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
+@@ -603,6 +603,7 @@ nvkm_dp_fini(struct nvkm_outp *outp)
+ static void
+ nvkm_dp_init(struct nvkm_outp *outp)
+ {
++	nvkm_outp_init(outp);
+ 	nvkm_dp_enable(outp, outp->dp.enabled);
  }
  
- static const struct nvkm_disp_func
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.c
+index 7343b24f10eb..4be09ec4fd5c 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.c
+@@ -1586,6 +1586,7 @@ nv50_disp_oneinit(struct nvkm_disp *disp)
+ 	struct nvkm_bios *bios = device->bios;
+ 	struct nvkm_outp *outp, *outt, *pair;
+ 	struct nvkm_conn *conn;
++	struct nvkm_ior *ior;
+ 	int ret, i;
+ 	u8  ver, hdr;
+ 	u32 data;
+@@ -1747,6 +1748,19 @@ nv50_disp_oneinit(struct nvkm_disp *disp)
+ 		list_add_tail(&outp->conn->head, &disp->conns);
+ 	}
+ 
++	/* Enforce identity-mapped SOR assignment for panels, which have
++	 * certain bits (ie. backlight controls) wired to a specific SOR.
++	 */
++	list_for_each_entry(outp, &disp->outps, head) {
++		if (outp->conn->info.type == DCB_CONNECTOR_LVDS ||
++		    outp->conn->info.type == DCB_CONNECTOR_eDP) {
++			ior = nvkm_ior_find(disp, SOR, ffs(outp->info.or) - 1);
++			if (!WARN_ON(!ior))
++				ior->identity = true;
++			outp->identity = true;
++		}
++	}
++
+ 	return 0;
+ }
+ 
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.c
+index f1a3e623bb22..bfb2a4db8d64 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.c
+@@ -287,13 +287,6 @@ nvkm_outp_acquire(struct nvkm_outp *outp, bool hda)
+ 	return 0;
+ }
+ 
+-void
+-nvkm_outp_fini(struct nvkm_outp *outp)
+-{
+-	if (outp->func->fini)
+-		outp->func->fini(outp);
+-}
+-
+ struct nvkm_ior *
+ nvkm_outp_inherit(struct nvkm_outp *outp)
+ {
+@@ -332,8 +325,8 @@ nvkm_outp_inherit(struct nvkm_outp *outp)
+ 	return ior;
+ }
+ 
+-static void
+-nvkm_outp_init_route(struct nvkm_outp *outp)
++void
++nvkm_outp_init(struct nvkm_outp *outp)
+ {
+ 	enum nvkm_ior_proto proto;
+ 	enum nvkm_ior_type type;
+@@ -365,14 +358,6 @@ nvkm_outp_init_route(struct nvkm_outp *outp)
+ 	ior->arm.outp = outp;
+ }
+ 
+-void
+-nvkm_outp_init(struct nvkm_outp *outp)
+-{
+-	nvkm_outp_init_route(outp);
+-	if (outp->func->init)
+-		outp->func->init(outp);
+-}
+-
+ void
+ nvkm_outp_del(struct nvkm_outp **poutp)
+ {
+@@ -420,6 +405,7 @@ nvkm_outp_new_(const struct nvkm_outp_func *func, struct nvkm_disp *disp,
+ 
+ static const struct nvkm_outp_func
+ nvkm_outp = {
++	.init = nvkm_outp_init,
+ 	.detect = nvkm_outp_detect,
+ 	.inherit = nvkm_outp_inherit,
+ 	.acquire = nvkm_outp_acquire,
 -- 
 2.41.0
 
