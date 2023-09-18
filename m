@@ -2,74 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CF647A316B
-	for <lists+nouveau@lfdr.de>; Sat, 16 Sep 2023 18:28:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60C7E7A3EE2
+	for <lists+nouveau@lfdr.de>; Mon, 18 Sep 2023 02:02:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 86DCD10E152;
-	Sat, 16 Sep 2023 16:28:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0D38010E087;
+	Mon, 18 Sep 2023 00:02:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E2FC110E152
- for <nouveau@lists.freedesktop.org>; Sat, 16 Sep 2023 16:28:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1694881723;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=EzEI3xj+gOUgP5nEKp+6nJQsJsQAIFG2M2MSfcP5fDg=;
- b=URU5P9bLxAP+7wiM60+rdJx6msdz2Bfnm7yhEgT2PEn8aaJ3umAyS+vIhhlg5CFDERSTPx
- oG+p4xfWbKW/yfjp6PavLNbF99t9g66kEj0LiVrHxgqoJ5DD4cv2B4cKk3yT7MKwWA6VjF
- kNmcJRF8MGLMzFwk6G8y3lx1rm3fAqE=
-Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
- [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-156-cE2A25lCM7e6ME99_IpM2w-1; Sat, 16 Sep 2023 12:28:41 -0400
-X-MC-Unique: cE2A25lCM7e6ME99_IpM2w-1
-Received: by mail-ed1-f69.google.com with SMTP id
- 4fb4d7f45d1cf-52a08d02c62so2130895a12.2
- for <nouveau@lists.freedesktop.org>; Sat, 16 Sep 2023 09:28:41 -0700 (PDT)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 582AD10E087
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 00:02:48 +0000 (UTC)
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2c012232792so2460041fa.0
+ for <nouveau@lists.freedesktop.org>; Sun, 17 Sep 2023 17:02:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1694995366; x=1695600166; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/Eb3fOx1ew6uXDKDbUqmE2zZWYt/wbhQmFHJ6nzEER4=;
+ b=Ok3sOM3cw0iaHJy9RpI0+6uaocefTlX92x1o/olvGpMB+/Ex1ZCc1gvxOy9LgdwW1m
+ cODsKNpGbWhD/pu8bkuTXTLOr6hKNeVbtVFv5+4swCraRWF4RX7ErqvDw4149WR8MNKv
+ lNAuiHj9D2qbr22wUEMZDpxD8pRaECuJvB9IVJCoKygBPh6dDohI8RjGeYoukQ3euNl8
+ Uer1mhpTR0aoqTBUWTAApYQ0BxZapwPXb5LqvFzRqEkkXzWQa9hJhqEaeH2+FOvnpz3q
+ JMLCmwQJt4qR8i1bUu9IbpGjSWFKMLfv5tIk5hHPaxU/qTRWbX2uE6uFATJQUE+XZLn+
+ qkGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694881720; x=1695486520;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1694995366; x=1695600166;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EzEI3xj+gOUgP5nEKp+6nJQsJsQAIFG2M2MSfcP5fDg=;
- b=JcmZ6NkdFq39oe1Wt09uj7KsTkteo8H+HjWC7h5nO7NBDPnVeqhLTC1iHIVMKrAqLb
- WkIVxcFDcYe8RePBEQPAbMjGIoW3cGIQLfd+pkDe4j21uFbLMW4B6aKfbrqej7DzKVrW
- rfKLChxQhynjK1AAwD18rZ6aZQSI6ZUdRJYBOZG1qjLKUSvTMgY3A/NQXUjRGBad6/tb
- rGo0Gqhs4j42DfhohO4hjzMS3UD1573IP8yKRJNbbx7JV9kBmThnQ+TvQRZMfCeWJs8E
- aCw8hcSexaAyELvMYu68BxU4gSWQJZJTyRzooYP+c0biDi2wd2xZnBF6mposk7+SQ8Y8
- 9WeA==
-X-Gm-Message-State: AOJu0Yx0vzD7EB9JhNKbO0F0tvEAUjV0b6ujGRGZSTa/W159BaGEwnlp
- zTXMVQDyfAccPk0I3xN0zSqXlINBctGo7tmKCuLnrBaoWYTyOBHzA0LBFDNe9o3LYLwLn9b1Sah
- G8uGK7f1jo2bSwCnqJ1Wr9TgksRFpFd/WvHrwkq+kjcnDou3KDCVrhxxdgVkAzh6krgae3u9Wgw
- 9YHzUB
-X-Received: by 2002:a05:6402:22ee:b0:530:db58:61c8 with SMTP id
- dn14-20020a05640222ee00b00530db5861c8mr954486edb.23.1694881720234; 
- Sat, 16 Sep 2023 09:28:40 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFlYPchwFlqQIz/rdAPhlutPoEjabhYgc7OxI5j/ZzoP6b6ZR4Gcr0BriDua40j8SSm3Ns67w==
-X-Received: by 2002:a05:6402:22ee:b0:530:db58:61c8 with SMTP id
- dn14-20020a05640222ee00b00530db5861c8mr954470edb.23.1694881719851; 
- Sat, 16 Sep 2023 09:28:39 -0700 (PDT)
-Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
- by smtp.gmail.com with ESMTPSA id
- k7-20020aa7c047000000b0052febc781bfsm3661604edo.36.2023.09.16.09.28.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Sep 2023 09:28:39 -0700 (PDT)
-From: Danilo Krummrich <dakr@redhat.com>
-To: nouveau@lists.freedesktop.org
-Date: Sat, 16 Sep 2023 18:28:31 +0200
-Message-ID: <20230916162835.5719-1-dakr@redhat.com>
-X-Mailer: git-send-email 2.41.0
+ bh=/Eb3fOx1ew6uXDKDbUqmE2zZWYt/wbhQmFHJ6nzEER4=;
+ b=oySX8jPQzgzHby4+1OKlCS4Y0EpgCRvBcHK1Mt/FH0loEUfpILlbf7qQnQcTPGIHF/
+ 2eoIx0YGrnBdm/hEkFnyrT2X7J7tfHn6J6L+CIZGcjLPQQUd+j+I0gxIZYJQyDsv4X8M
+ Ntphk5KBGNxQ1/mz8+Wi0YJXpDQr3m1p//I/mBYwuQRMDXFY+WL+fKRogJouVA7gibO3
+ FmcXfClmzAGQi891GcRC5WWdlMrM8SzbKdG5rwvSKEurulumJBsDDoY3na0d7tspAq6t
+ 5THUU+pJemUXChSKRaPk0IkGVWnDo3z0J37SxbXULo9JjjTUnZgQ0gSk+9ajgG79Ml+L
+ ztPQ==
+X-Gm-Message-State: AOJu0YyA9VqHnUlX9URd3nQpCpVD6FwRkPGKD4okmxnRq1tAQnOLAoJ0
+ YIPK1mMaLgS8oznB2I6iUoKUQBqPNqkZ38U27jE=
+X-Google-Smtp-Source: AGHT+IGswMiwj86cmSMAUsQ4UWFnNfeM6/fTYbYTtzRhjy2BK62WY2TGd7My3gZDjNYjO+fau0HupzlBhH9m0FSiUo8=
+X-Received: by 2002:a2e:be28:0:b0:2c0:cd8:2bdc with SMTP id
+ z40-20020a2ebe28000000b002c00cd82bdcmr1183329ljq.24.1694995366017; Sun, 17
+ Sep 2023 17:02:46 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Subject: [Nouveau] [PATCH] drm/nouveau: sched: fix leaking memory of
- timedout job
+References: <20230914084624.2299765-2-skeggsb@gmail.com>
+ <20230914084624.2299765-6-skeggsb@gmail.com>
+ <3e46a803-1ed6-63e7-909e-053cb7425af3@dakr.org>
+In-Reply-To: <3e46a803-1ed6-63e7-909e-053cb7425af3@dakr.org>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Mon, 18 Sep 2023 10:02:34 +1000
+Message-ID: <CACAvsv4xT_+=XQO6_aUK3MzkS1nkc2tiFjgkXS2fiLz=ghcKHA@mail.gmail.com>
+To: Danilo Krummrich <me@dakr.org>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH 04/44] drm/nouveau/mmu/gp100-: always
+ invalidate TLBs at CACHE_LEVEL_ALL
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,63 +68,60 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Always stop and re-start the scheduler in order to let the scheduler
-free up the timedout job in case it got signaled. In case of exec jobs
-the job type specific callback will take care to signal all fences and
-tear down the channel.
+On Sat, 16 Sept 2023 at 08:34, Danilo Krummrich <me@dakr.org> wrote:
+>
+> On 9/14/23 10:45, Ben Skeggs wrote:
+> > From: Ben Skeggs <bskeggs@redhat.com>
+> >
+> > Fixes some issues when running on top of RM.
+>
+> Which issues have you seen in particular?
+"random" mmu faults.
 
-Fixes: b88baab82871 ("drm/nouveau: implement new VM_BIND uAPI")
-Signed-off-by: Danilo Krummrich <dakr@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_exec.c  |  2 +-
- drivers/gpu/drm/nouveau/nouveau_sched.c | 12 +++++++++---
- 2 files changed, 10 insertions(+), 4 deletions(-)
+>
+> Also, would it make sense to only invalidate TLBs at CACHE_LEVEL_ALL
+> when actually running on top of RM?
+I don't think so, I'm not entirely sure we should have been using it
+to begin with.  Last I looked, RM didn't use this either (except
+perhaps on UVM).
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
-index 9c031d15fe0b..49d83ac9e036 100644
---- a/drivers/gpu/drm/nouveau/nouveau_exec.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
-@@ -185,7 +185,7 @@ nouveau_exec_job_timeout(struct nouveau_job *job)
- 
- 	nouveau_sched_entity_fini(job->entity);
- 
--	return DRM_GPU_SCHED_STAT_ENODEV;
-+	return DRM_GPU_SCHED_STAT_NOMINAL;
- }
- 
- static struct nouveau_job_ops nouveau_exec_job_ops = {
-diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
-index 88217185e0f3..3b7ea5221226 100644
---- a/drivers/gpu/drm/nouveau/nouveau_sched.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-@@ -375,14 +375,20 @@ nouveau_sched_run_job(struct drm_sched_job *sched_job)
- static enum drm_gpu_sched_stat
- nouveau_sched_timedout_job(struct drm_sched_job *sched_job)
- {
-+	struct drm_gpu_scheduler *sched = sched_job->sched;
- 	struct nouveau_job *job = to_nouveau_job(sched_job);
-+	enum drm_gpu_sched_stat stat = DRM_GPU_SCHED_STAT_NOMINAL;
- 
--	NV_PRINTK(warn, job->cli, "Job timed out.\n");
-+	drm_sched_stop(sched, sched_job);
- 
- 	if (job->ops->timeout)
--		return job->ops->timeout(job);
-+		stat = job->ops->timeout(job);
-+	else
-+		NV_PRINTK(warn, job->cli, "Generic job timeout.\n");
-+
-+	drm_sched_start(sched, true);
- 
--	return DRM_GPU_SCHED_STAT_ENODEV;
-+	return stat;
- }
- 
- static void
--- 
-2.41.0
+Ben.
 
+>
+> >
+> > Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
+> > ---
+> >   drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c | 2 +-
+> >   drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c | 2 +-
+> >   2 files changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
+> > index f3630d0e0d55..bddac77f48f0 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
+> > @@ -558,7 +558,7 @@ gp100_vmm_invalidate_pdb(struct nvkm_vmm *vmm, u64 addr)
+> >   void
+> >   gp100_vmm_flush(struct nvkm_vmm *vmm, int depth)
+> >   {
+> > -     u32 type = (5 /* CACHE_LEVEL_UP_TO_PDE3 */ - depth) << 24;
+> > +     u32 type = 0;
+> >       if (atomic_read(&vmm->engref[NVKM_SUBDEV_BAR]))
+> >               type |= 0x00000004; /* HUB_ONLY */
+> >       type |= 0x00000001; /* PAGE_ALL */
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
+> > index 6cb5eefa45e9..0095d58d4d9a 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
+> > @@ -27,7 +27,7 @@ static void
+> >   tu102_vmm_flush(struct nvkm_vmm *vmm, int depth)
+> >   {
+> >       struct nvkm_device *device = vmm->mmu->subdev.device;
+> > -     u32 type = (5 /* CACHE_LEVEL_UP_TO_PDE3 */ - depth) << 24;
+> > +     u32 type = 0;
+> >
+> >       type |= 0x00000001; /* PAGE_ALL */
+> >       if (atomic_read(&vmm->engref[NVKM_SUBDEV_BAR]))
