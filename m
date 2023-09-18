@@ -1,67 +1,67 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03D0A7A539A
-	for <lists+nouveau@lfdr.de>; Mon, 18 Sep 2023 22:15:04 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id EAFEB7A539B
+	for <lists+nouveau@lfdr.de>; Mon, 18 Sep 2023 22:15:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 60BDB10E2E0;
-	Mon, 18 Sep 2023 20:15:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F074010E2E9;
+	Mon, 18 Sep 2023 20:15:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C345010E2EC
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 20:15:00 +0000 (UTC)
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1c4194f7635so30639955ad.0
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 13:15:00 -0700 (PDT)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 60C4110E2E9
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 20:15:03 +0000 (UTC)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1c43fe0c0bfso20633785ad.1
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 13:15:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695068100; x=1695672900; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1695068102; x=1695672902; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Xm7MalA/Hl0IL8mYSfHKvrHbLA9j4A/NHUNDFtutCDQ=;
- b=gMXPzQDUi1XzF1qWEAvQNEJhbRobYbGCz0igQDuGs0TaVgrP+lCx/4SYHeKIzDGJbG
- de7ba4S9nGBTVxvYeeQQ4EQaDuCJRdsFGb0909GMSrRwKk2iOQePewfsvt8ZmVR+60r5
- oBxpK5SZWojU+slUtP61tf2aMLiiRZniHS7Kle2l26Mbk6WpBy058uTBNncIyftKFQwK
- ZzcI44aq0vO+0FJ1w1L5AYee32mgJKPQ7xP92YOFxtH1Z8S7qmCzwt/TG6c94u2us3xe
- TCC8q3IbjfKqmPzz3Xol/1GZl1Uqft632DIxHvzb3WbMFusdxMftP1XBBB7jCrI/OUxv
- dIbg==
+ bh=V30HlKC9H6rviVJ0kMhGfMPhAULyVPgNj1GQXJfileY=;
+ b=A4ogBkyJcaxzte77eiWbPut5jrHia+GiewCXowoHorNFJZd7gE9YQsb9sBK8wEIL55
+ Yvzxzz9L8d6glflySuEThEO7kEEI5HpRZR8yU50TErgJBGUUWZmuBwrA/H9FlVkUEqy/
+ ceT6/J6Sx80WXHmF5qE24dpCpgEuFLdH5jKc17iukcpoWLDS41oyWmsu3o3h/TdOvBRa
+ RTD4jFpL0lOGEVZBiNw4n3QVCOxbjkkqgyIfsuz1SQ5ZYpTY0aM3ugkKY8LwS4lvcZ3L
+ nSJu11YglOCS1UfWBpfD/hZ5GiD9CBLc59ec/a3CtQ+rnr5Jv6Dp/+6cVpkH4ijaqTU3
+ qj2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695068100; x=1695672900;
+ d=1e100.net; s=20230601; t=1695068102; x=1695672902;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Xm7MalA/Hl0IL8mYSfHKvrHbLA9j4A/NHUNDFtutCDQ=;
- b=J/QJRyVi/eXsCvKiQ+DNsjo8d8P7uWSeEgntBXaFSq8BaYBNZHtFTv/mV940gvRlSH
- Mg6DU8yGyOz7SY7338oiA/QEmFKMBaluCqah4vibFmwipcfH0SqdiA7om9lMS+iwJo+/
- uLITfnlbUT1RCzjVFTRmELo0343+ASekhpFM6/4NGA3Qwcs5UBBB/fWViNg9mv1/m+gL
- 8Afh+sP+xGLnWS+AO2Hh9lNS57Szl1dcDbLQvBm1IVksZWDDXXSqPg+IZ/X7Gaz0VphS
- yEbgnR7eI1htoK1rJdH184ydeTkkrsGUdPGHme7AOPXf2WiLNWmb2VOgPpyjwnz5S9Oi
- ixzw==
-X-Gm-Message-State: AOJu0YxsOnQujwPYwUVSpNapFVd9twBifcM6I1IeTLZ4hLrL5OvC7CHH
- NYseiQtSRvGRK1cFIS4KoyQO2bSRt6o=
-X-Google-Smtp-Source: AGHT+IHSiyXWWYX2aYd3dTMujrlGN7nMCJOXXhiF8heHGPZyWl4hM+U3ugYk/CqIFcETZRyNgbR3XQ==
-X-Received: by 2002:a17:903:22c3:b0:1c4:1cd3:8068 with SMTP id
- y3-20020a17090322c300b001c41cd38068mr808625plg.5.1695068099886; 
- Mon, 18 Sep 2023 13:14:59 -0700 (PDT)
+ bh=V30HlKC9H6rviVJ0kMhGfMPhAULyVPgNj1GQXJfileY=;
+ b=X0KqPd+eNaWXpA7kTPJEFT7fFNH3WWdBxhpROh+I150OF1jF4tcn6tIbQqJe5uIYJA
+ AUtiLvYN/iMUlgkW4CrnHJ1V3P4gHxHXbDp8D/tB1dZIt7LbPPQgtEmEGStRMJpQW/Xq
+ 3iFJmoMlw0k7JvpsZUyHmBzAMBzoxNPOrLWTUSHdjPOI+Bl+Na/MuivEPbDFwfQJAoON
+ V1CsIJgetSYAHlSqSn6uNP/NUFR/lYOMW0VVVmA2s+0nBWe/Gd9Uueo7UbQ9142Jahwb
+ yX7NJE2OfBpL9VPwdAyoc8kioCWHKASiu0a35Mq53R9Ktgj2z5BN9+9lraycGsu4kntY
+ HgNg==
+X-Gm-Message-State: AOJu0YxAgWMhF+lR3wGqfN2PDtSDTHaa3SMzh52JY1rm9MaY8Tjyc8Fw
+ EC7BtB51EOiEwdtl3Achg3KEvxia/xs=
+X-Google-Smtp-Source: AGHT+IGLhilBpYG0C1tR7F89kklzjEODBZtm1PfHfP9yvZLe2CFrqHTEu3arKqtbhZY7QTw2SQ/CXQ==
+X-Received: by 2002:a17:902:bcc8:b0:1bd:b8c8:98f8 with SMTP id
+ o8-20020a170902bcc800b001bdb8c898f8mr7976311pls.4.1695068102322; 
+ Mon, 18 Sep 2023 13:15:02 -0700 (PDT)
 Received: from localhost.localdomain (87-121-74-45.dyn.launtel.net.au.
  [87.121.74.45]) by smtp.gmail.com with ESMTPSA id
- p21-20020a170902ead500b001b8c6890623sm8706858pld.7.2023.09.18.13.14.57
+ p21-20020a170902ead500b001b8c6890623sm8706858pld.7.2023.09.18.13.15.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Sep 2023 13:14:59 -0700 (PDT)
+ Mon, 18 Sep 2023 13:15:01 -0700 (PDT)
 From: Ben Skeggs <skeggsb@gmail.com>
 To: nouveau@lists.freedesktop.org
-Date: Tue, 19 Sep 2023 06:13:36 +1000
-Message-ID: <20230918201404.3765-17-skeggsb@gmail.com>
+Date: Tue, 19 Sep 2023 06:13:37 +1000
+Message-ID: <20230918201404.3765-18-skeggsb@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230918201404.3765-1-skeggsb@gmail.com>
 References: <20230918201404.3765-1-skeggsb@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH v2 16/44] drm/nouveau/kms/nv50-: remove
- nv_encoder.audio.connector
+Subject: [Nouveau] [PATCH v2 17/44] drm/nouveau/kms/nv50-: keep output state
+ around until modeset complete
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,56 +79,49 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Ben Skeggs <bskeggs@redhat.com>
 
-- use nv_encoder.conn instead, outp->conn never changes
+- we'll want this info post-UPDATE for later patches
 
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 Reviewed-by: Lyude Paul <lyude@redhat.com>
 ---
- drivers/gpu/drm/nouveau/dispnv50/disp.c   | 4 +---
- drivers/gpu/drm/nouveau/nouveau_encoder.h | 1 -
- 2 files changed, 1 insertion(+), 4 deletions(-)
+ drivers/gpu/drm/nouveau/dispnv50/disp.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 1123d25be77d..165bc6a0d563 100644
+index 165bc6a0d563..11790ced2b7d 100644
 --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
 +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -611,7 +611,7 @@ nv50_audio_component_get_eld(struct device *kdev, int port, int dev_id,
- 			continue; /* TODO */
+@@ -2082,7 +2082,7 @@ nv50_disp_atomic_commit_tail(struct drm_atomic_state *state)
+ 	nv50_crc_atomic_init_notifier_contexts(state);
  
- 		nv_encoder = nouveau_encoder(encoder);
--		nv_connector = nouveau_connector(nv_encoder->audio.connector);
-+		nv_connector = nv_encoder->conn;
- 		nv_crtc = nouveau_crtc(nv_encoder->crtc);
+ 	/* Update output path(s). */
+-	list_for_each_entry_safe(outp, outt, &atom->outp, head) {
++	list_for_each_entry(outp, &atom->outp, head) {
+ 		const struct drm_encoder_helper_funcs *help;
+ 		struct drm_encoder *encoder;
  
- 		if (!nv_crtc || nv_encoder->outp.or.id != port || nv_crtc->index != dev_id)
-@@ -723,7 +723,6 @@ nv50_audio_disable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc)
- 	mutex_lock(&drm->audio.lock);
- 	if (nv_encoder->audio.enabled) {
- 		nv_encoder->audio.enabled = false;
--		nv_encoder->audio.connector = NULL;
- 		nvif_outp_hda_eld(&nv_encoder->outp, nv_crtc->index, NULL, 0);
+@@ -2096,9 +2096,6 @@ nv50_disp_atomic_commit_tail(struct drm_atomic_state *state)
+ 			help->atomic_enable(encoder, state);
+ 			interlock[NV50_DISP_INTERLOCK_CORE] = 1;
+ 		}
+-
+-		list_del(&outp->head);
+-		kfree(outp);
  	}
- 	mutex_unlock(&drm->audio.lock);
-@@ -748,7 +747,6 @@ nv50_audio_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
- 	nvif_outp_hda_eld(&nv_encoder->outp, nv_crtc->index, nv_connector->base.eld,
- 			  drm_eld_size(nv_connector->base.eld));
- 	nv_encoder->audio.enabled = true;
--	nv_encoder->audio.connector = &nv_connector->base;
  
- 	mutex_unlock(&drm->audio.lock);
+ 	/* Update head(s). */
+@@ -2196,6 +2193,11 @@ nv50_disp_atomic_commit_tail(struct drm_atomic_state *state)
+ 	if (atom->lock_core)
+ 		mutex_unlock(&disp->mutex);
  
-diff --git a/drivers/gpu/drm/nouveau/nouveau_encoder.h b/drivers/gpu/drm/nouveau/nouveau_encoder.h
-index b1554ad9d929..ea8ef10e71aa 100644
---- a/drivers/gpu/drm/nouveau/nouveau_encoder.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_encoder.h
-@@ -62,7 +62,6 @@ struct nouveau_encoder {
- 	/* Protected by nouveau_drm.audio.lock */
- 	struct {
- 		bool enabled;
--		struct drm_connector *connector;
- 	} audio;
- 
- 	struct drm_display_mode mode;
++	list_for_each_entry_safe(outp, outt, &atom->outp, head) {
++		list_del(&outp->head);
++		kfree(outp);
++	}
++
+ 	/* Wait for HW to signal completion. */
+ 	for_each_new_plane_in_state(state, plane, new_plane_state, i) {
+ 		struct nv50_wndw_atom *asyw = nv50_wndw_atom(new_plane_state);
 -- 
 2.41.0
 
