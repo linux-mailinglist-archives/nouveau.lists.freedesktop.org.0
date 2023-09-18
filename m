@@ -1,63 +1,78 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D2427A55B3
-	for <lists+nouveau@lfdr.de>; Tue, 19 Sep 2023 00:22:49 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 771FE7A55B9
+	for <lists+nouveau@lfdr.de>; Tue, 19 Sep 2023 00:25:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7001610E0FB;
-	Mon, 18 Sep 2023 22:22:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 78C3110E123;
+	Mon, 18 Sep 2023 22:25:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A44A710E0FB
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 22:22:45 +0000 (UTC)
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-578af21ff50so272326a12.1
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 15:22:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695075765; x=1695680565; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=eHXzHVlPhPsqU4LGpmEYwiP2/oyieF/yUcwsVeTWH14=;
- b=NtiubCpEvtDeq1E6P5v0t/9gykLPCb3L07rdvA5wrx03r3kGt6dDb3t7PgA3Qz5U8u
- UAH9H4zeB8Qc5eSjdMxmarpjsFXFWO2Ff4vfTmaTASmFnxC8nu+seIQPw64sSXc9v9GH
- UKE4+nFkz246GdP2cPwp+twTRivE7B+zCdfgWbGB78kX9PKFLe2zVi2amISFGMPFlK0v
- o2SdvuJUvji9Kxc57N3E3SbJjwrmy/vKeNcjsgJ+foaM2yKO6tra3cZdWvtlw2fYfSA1
- eoJp8AeDigH759PoQDuW8swEX9eMo/YE/saHTe0Z9oJuz95LDlPVAA+fPSMYfh8RK3kT
- b9fA==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B9AA389F4F
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 22:25:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1695075900;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=QPyNutSLkkHTZxI3B0PY2u8QnFtvmNqTwCfplTU4uRc=;
+ b=CNwpgxBgPkGeSaQEypP8MI+tNevSGGkzzGQCRBrEZvv3nNdEcc+lhvrGXDeJsnJfzCUjsc
+ hL/6B1NgP8QXZ8S2Pi4qe/mZtH367Nhfjas/ZHJEb1/nPOAifsiuDmIpriWXfk+MLHDPeE
+ 7VcRFSpGlGxjnKN1BPn9A8TqTvirMoM=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-606-_h99nmPEPDK3dKO-IQBoGQ-1; Mon, 18 Sep 2023 18:24:58 -0400
+X-MC-Unique: _h99nmPEPDK3dKO-IQBoGQ-1
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-6581f856b2eso14386516d6.1
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 15:24:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695075765; x=1695680565;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=eHXzHVlPhPsqU4LGpmEYwiP2/oyieF/yUcwsVeTWH14=;
- b=GNctuIuzSTBWsKdg/rgqswcDnkJWgFmrBLPf103fr28bgITRUEto+CDfQfBpCYObws
- FqNDPEvk/9XwiSN9k50yfLR2oBYXbqtsWdutzn+cvHunuGg2L1TB4zQZ0rWy3GuWKtc/
- Oad3Vj7B8Cd+vXVt0iAvaAFxv7mTUkkD6oaIwctqJzca0uyXXtKJg5vBPfh8GgqFLWS9
- GT1tU+0OFpTs7Or+xeSkBlbrmq0aDksmU6JmKDAH37sgw/pU6RxQo30yVUDmvQz00bRC
- 124Hg3bcm1ir1ASDciJyibONtEzZZ5/AXnhVdyyVEuBN8IH6ajdJKHyscN6k4gfLuBOb
- W88w==
-X-Gm-Message-State: AOJu0YzKttN1aPt6wDTmGIyK2SEJNlDoajmI74snGUumZbhGO+NHr2EB
- 7QvXSu8QhmEiiUxzI2GUefZZU9Unx4o=
-X-Google-Smtp-Source: AGHT+IGJhqrPygpKUNHQKyEbKZx90wbGtQ+liVxqubuzAASDb5WEcjt6ADBcDdwNz0SJ7V1itWhBzQ==
-X-Received: by 2002:a17:90b:4a4a:b0:26d:287f:a545 with SMTP id
- lb10-20020a17090b4a4a00b0026d287fa545mr7135472pjb.29.1695075764683; 
- Mon, 18 Sep 2023 15:22:44 -0700 (PDT)
-Received: from localhost.localdomain (87-121-74-45.dyn.launtel.net.au.
- [87.121.74.45]) by smtp.gmail.com with ESMTPSA id
- j17-20020a170902da9100b001bf095dfb79sm8686629plx.235.2023.09.18.15.22.42
+ d=1e100.net; s=20230601; t=1695075898; x=1695680698;
+ h=mime-version:user-agent:content-transfer-encoding:organization
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=WG8Pu+Mw6aXgo3oVLCA7cZJ3LSi2mKUayS+JlD6Q7jo=;
+ b=cwP9BRfhKhRKHS5SR9ztkWR89cL+77QCVQUtHJmculbaC736uyR/P/QKo9UpYuddHN
+ 4ukrUxTBt/1Y6uWcY2JJdsJ9ILUJPNP9qG8/6J1PYX+a2UL6G2dipoUptLCQ75NOuc0r
+ Y+Rcd3nFaBTUHy+ydfYQ9Qg40bB8zC9lqzxS+XzGILVeO2BKo2fXFSq6TIYcxyy5zkMG
+ 5qcFYnipjyh7U3AMBqn4eAHb7aNRajMrCvpZgnC6dZAcCUFHbIsNmZDL2e2uTC9fHmgv
+ xqjw6ZC2/Ng7bzLZo9f+Z7B5ZF5HPDrLx+lvjp4nf3hn1RIB387Z8jlykdsozcG8Ojs/
+ 4GcQ==
+X-Gm-Message-State: AOJu0YzYp/m0KuEaR7oXzRGKqciDkBW80rvaz+vGB+ECPPadoAnKwn9L
+ jckKSluP/2pZwUbBhNNkHRQdsB908FKU2JlbZRwfEKGr5RGI9ypisSOv3msrvxngvbFqf2sIflO
+ rrxQTHrVQPenlVmh810ckzvfDoQ==
+X-Received: by 2002:a0c:cdcd:0:b0:655:88e9:1b0c with SMTP id
+ a13-20020a0ccdcd000000b0065588e91b0cmr10311582qvn.38.1695075898341; 
+ Mon, 18 Sep 2023 15:24:58 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHj7nahJ/IxATPNQUGSshqEPQ29nHykvjD/+zTI+gGvnxe5EWaVWGI/vQ9GRABMAcnfQ+LBUg==
+X-Received: by 2002:a0c:cdcd:0:b0:655:88e9:1b0c with SMTP id
+ a13-20020a0ccdcd000000b0065588e91b0cmr10311573qvn.38.1695075898129; 
+ Mon, 18 Sep 2023 15:24:58 -0700 (PDT)
+Received: from ?IPv6:2600:4040:5c6c:a300::feb? ([2600:4040:5c6c:a300::feb])
+ by smtp.gmail.com with ESMTPSA id
+ o10-20020a0cf4ca000000b00656329bb3b1sm3217669qvm.10.2023.09.18.15.24.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Sep 2023 15:22:44 -0700 (PDT)
-From: Ben Skeggs <skeggsb@gmail.com>
-To: nouveau@lists.freedesktop.org
-Date: Tue, 19 Sep 2023 08:22:25 +1000
-Message-ID: <20230918222225.8629-1-skeggsb@gmail.com>
-X-Mailer: git-send-email 2.41.0
+ Mon, 18 Sep 2023 15:24:57 -0700 (PDT)
+Message-ID: <10db3f25dc671ca0b8f50be548d409fcd3fc896c.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Dan Carpenter <dan.carpenter@linaro.org>, Dave Airlie <airlied@redhat.com>
+Date: Mon, 18 Sep 2023 18:24:56 -0400
+In-Reply-To: <10fd258b-466f-4c5b-9d48-fe61a3f21424@moroto.mountain>
+References: <10fd258b-466f-4c5b-9d48-fe61a3f21424@moroto.mountain>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.48.4 (3.48.4-1.fc38)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH] MAINTAINERS: remove myself as nouveau maintainer
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [PATCH] nouveau/u_memcpya: fix NULL vs error pointer
+ bug
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,32 +84,44 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org, kernel-janitors@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Ben Skeggs <bskeggs@redhat.com>
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-I have resigned, and will no longer be taking as active a role in
-nouveau development.
+I assume you need me to push this to drm-misc?
 
-Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
----
- MAINTAINERS | 1 -
- 1 file changed, 1 deletion(-)
+On Fri, 2023-09-15 at 15:59 +0300, Dan Carpenter wrote:
+> The u_memcpya() function is supposed to return error pointers on
+> error.  Returning NULL will lead to an Oops.
+>=20
+> Fixes: 68132cc6d1bc ("nouveau/u_memcpya: use vmemdup_user")
+> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_drv.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouv=
+eau/nouveau_drv.h
+> index 3666a7403e47..52a708a98915 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> @@ -193,7 +193,7 @@ u_memcpya(uint64_t user, unsigned int nmemb, unsigned=
+ int size)
+>  =09size_t bytes;
+> =20
+>  =09if (unlikely(check_mul_overflow(nmemb, size, &bytes)))
+> -=09=09return NULL;
+> +=09=09return ERR_PTR(-ENOMEM);
+>  =09return vmemdup_user(userptr, bytes);
+>  }
+> =20
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 90f13281d297..2494455c0801 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -6646,7 +6646,6 @@ F:	Documentation/devicetree/bindings/display/panel/novatek,nt36672a.yaml
- F:	drivers/gpu/drm/panel/panel-novatek-nt36672a.c
- 
- DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS
--M:	Ben Skeggs <bskeggs@redhat.com>
- M:	Karol Herbst <kherbst@redhat.com>
- M:	Lyude Paul <lyude@redhat.com>
- L:	dri-devel@lists.freedesktop.org
--- 
-2.41.0
+--=20
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
