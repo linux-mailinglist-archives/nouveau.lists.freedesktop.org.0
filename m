@@ -1,66 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09E7E7A53F9
-	for <lists+nouveau@lfdr.de>; Mon, 18 Sep 2023 22:23:09 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 62E657A53FA
+	for <lists+nouveau@lfdr.de>; Mon, 18 Sep 2023 22:23:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 98DCA10E334;
-	Mon, 18 Sep 2023 20:23:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EFE7210E322;
+	Mon, 18 Sep 2023 20:23:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
  [IPv6:2607:f8b0:4864:20::430])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D539B10E32D
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 20:23:05 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F07C910E32D
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 20:23:07 +0000 (UTC)
 Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-68cbbff84f6so4171225b3a.1
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 13:23:05 -0700 (PDT)
+ d2e1a72fcca58-68fdd6011f2so3682980b3a.3
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 13:23:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695068585; x=1695673385; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1695068587; x=1695673387; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NS0Z3nZA7AIUwLklUu30/IVmr0mR2LR5HTq1eohTlXg=;
- b=Klv4WrSk7c1im0zmljlk6tfesTJz1DJGQAOBKHlGkKrijJVqtCrI53laQYZtZbkN0Q
- bI6uhvwJdDZtqru64ho343eKEbIj0x0U0HtFFFOOAW8aPI+jNGbTDXaRsOPaiwaWHd0d
- AWKl+629d60S2XSdz6JurNWcQHRdzcdfdwhImqYcRk/9jjUSvRfriecDh1ZtMl1+HMZR
- je10q3kgl59h/NLFC2yV1mC5d1b8KoqIH85vYcbQB3djFJ6SbEKAm/fshTU1G/fgRGik
- 8Rv+680ADGvabRrhoidWZ0tJPBrCf7jydG7rNox8CyYd4U1TStiL0lie9YTdWIeI2n9w
- 6ZKg==
+ bh=7iDsZRuXeYrSpCAi/gvyAS50C7GMjmVC6AMYPEpuePc=;
+ b=BSw7WGN/GZRaJ6dhpeQ/1kx3HHiBEm71rx5lGE1Cn/lALta8zfQziE6reiH2xx61cl
+ 8n2sKNNsJaQSe2UoDc3Gm2XeKVxm40xaEXTN21qll3od4QovN0v7Ba2XKjCSIDb/SnSg
+ J0Wfjll+AK2pArppDfSwAVr4rq8teH1yVhV5kkt7Izz+Wcy5W/sRAQWW2qKv4YdQ8CqD
+ w/p6OZkIrNR6dPvnCRlUfv/dqkkKEBqhQM6HUM1gZyTSXYOMbZl85x/HOwsyAChxhy/h
+ BBXpof6mgEjyVRyKmBJTy5MmMpR00rAxpgI8enYDhc0ratlh4ik6n/xWHJQUTqdlpoJi
+ 6RhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695068585; x=1695673385;
+ d=1e100.net; s=20230601; t=1695068587; x=1695673387;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NS0Z3nZA7AIUwLklUu30/IVmr0mR2LR5HTq1eohTlXg=;
- b=paEC1Pk06jDlNQV3JW/aG1KFRdMuSkejfssqiXl3hQvkv0eD086MzLzZOwWP3OkO5x
- R4zBIJf/PV5DOa75u2d6eAEBUycoQ5g3iE0vRm8rSEfWeM89gRg0Lv498h83aPnnVC1L
- CgpeTgQyiWuEBOz51qb3ndTDSbxgJFA0kjq/TXi/JcP7gAeUiHWsTsi15+mLrWxqVkVY
- TZPo3G7rCS0923wqt9Gqcb7dj8jlPd5n/52uOcIso9Y9WfXC7z6zLBmd52Epb+WHZU/A
- wlIJNGJOyXiGjVDcNrpyX5zHEGR4QSBmIHlGbrSsrkYmzQlHNiPDvDywEr06Ge8o8cjL
- fhHg==
-X-Gm-Message-State: AOJu0YxFgOdOxawc0qqzF+hAh6q/Y9yUQZIcYSKyMMFlEcRYrxuEf8E8
- MsF0XrZ1Vq0YZ+sidODYXjKnwPVswkk=
-X-Google-Smtp-Source: AGHT+IFeg1Ap4fRGNyLOETtc878uTCJ2Wypa5gwSBXamHSjWFLOa3O1hJBVDVPfTKERGtyvKvVsBig==
-X-Received: by 2002:a05:6a20:a124:b0:154:8d7a:aeb3 with SMTP id
- q36-20020a056a20a12400b001548d7aaeb3mr673395pzk.28.1695068584832; 
- Mon, 18 Sep 2023 13:23:04 -0700 (PDT)
+ bh=7iDsZRuXeYrSpCAi/gvyAS50C7GMjmVC6AMYPEpuePc=;
+ b=fx5AHu+zobfhUkt+ljoqm9nC/t+089f8Y8mqyI8YHnJQY93gsOiuFDnRqBUl2fdx+r
+ XKB+lOKlDmUDCsLS0AnCQ4R+eqFSl9Cvl4gqmJRLvPVHssdvWUgbQylLpfiPs44nrEhA
+ 32aVXDMAvZ5iiLnughdice36OxWZRy/G9pgiOc4EXFklY8VYqAn2v1ATREfqZObANGyg
+ IKV5V8ZUvcL7cRDT4nfe65nxL9CQYHRhQzWbKdIUiL/ADAVpBF7XSUWG9tN+MjHNCB/7
+ Q1l5aP1c9dbRiWh5CLeRJjbOX0/TJxb5pN2gqZhp9cEUwTgXW0tZjA6qJojRFxf/jpZO
+ eszQ==
+X-Gm-Message-State: AOJu0YxdbAfiRaimuLcvFcKS17C0tgrvQ3xiwcqg1MlNsc1g7+KrPvna
+ m0wCNJf86P4gSWYmMIgb421WVk2Z0Lg=
+X-Google-Smtp-Source: AGHT+IEY/M7HkWIqBNGfv4MwSCwIrDRs8ti+5wabmVctsNE7EFJ10YO4fOtR9AZ8r2SKy+sZgNJOUA==
+X-Received: by 2002:a05:6a00:a1f:b0:68f:e810:e87e with SMTP id
+ p31-20020a056a000a1f00b0068fe810e87emr11097374pfh.31.1695068587021; 
+ Mon, 18 Sep 2023 13:23:07 -0700 (PDT)
 Received: from localhost.localdomain (87-121-74-45.dyn.launtel.net.au.
  [87.121.74.45]) by smtp.gmail.com with ESMTPSA id
- p21-20020aa78615000000b006889348ba6asm7446067pfn.81.2023.09.18.13.23.03
+ p21-20020aa78615000000b006889348ba6asm7446067pfn.81.2023.09.18.13.23.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Sep 2023 13:23:04 -0700 (PDT)
+ Mon, 18 Sep 2023 13:23:06 -0700 (PDT)
 From: Ben Skeggs <skeggsb@gmail.com>
 To: nouveau@lists.freedesktop.org
-Date: Tue, 19 Sep 2023 06:21:33 +1000
-Message-ID: <20230918202149.4343-29-skeggsb@gmail.com>
+Date: Tue, 19 Sep 2023 06:21:34 +1000
+Message-ID: <20230918202149.4343-30-skeggsb@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230918202149.4343-1-skeggsb@gmail.com>
 References: <20230918202149.4343-1-skeggsb@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH 28/44] drm/nouveau/nvenc/tu102-: prepare for GSP-RM
+Subject: [Nouveau] [PATCH 29/44] drm/nouveau/sec2/tu102-: prepare for GSP-RM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,140 +78,72 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Ben Skeggs <bskeggs@redhat.com>
 
-- (temporarily) disable if GSP-RM detected, will be added later
-- provide empty class list for non-GSP paths
-- split tu102 from gm107, it will provide host classes later
+- add (initial) R535 implementation of SEC2, needed for boot
 
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 ---
- .../drm/nouveau/include/nvkm/engine/nvenc.h   |  1 +
- .../gpu/drm/nouveau/nvkm/engine/device/base.c | 10 +++---
- .../gpu/drm/nouveau/nvkm/engine/nvenc/Kbuild  |  1 +
- .../gpu/drm/nouveau/nvkm/engine/nvenc/base.c  |  3 +-
- .../gpu/drm/nouveau/nvkm/engine/nvenc/gm107.c |  2 +-
- .../gpu/drm/nouveau/nvkm/engine/nvenc/priv.h  |  2 ++
- .../gpu/drm/nouveau/nvkm/engine/nvenc/tu102.c | 34 +++++++++++++++++++
- 7 files changed, 46 insertions(+), 7 deletions(-)
- create mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/nvenc/tu102.c
+ .../gpu/drm/nouveau/nvkm/engine/sec2/Kbuild   |  2 +
+ .../gpu/drm/nouveau/nvkm/engine/sec2/ga102.c  |  8 ++-
+ .../gpu/drm/nouveau/nvkm/engine/sec2/priv.h   |  3 ++
+ .../gpu/drm/nouveau/nvkm/engine/sec2/r535.c   | 54 +++++++++++++++++++
+ .../gpu/drm/nouveau/nvkm/engine/sec2/tu102.c  |  8 ++-
+ 5 files changed, 73 insertions(+), 2 deletions(-)
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/sec2/r535.c
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/engine/nvenc.h b/drivers/gpu/drm/nouveau/include/nvkm/engine/nvenc.h
-index 1a259c5c9a71..1f6eef13f872 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/engine/nvenc.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/engine/nvenc.h
-@@ -12,4 +12,5 @@ struct nvkm_nvenc {
- };
- 
- int gm107_nvenc_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_nvenc **);
-+int tu102_nvenc_new(struct nvkm_device *, enum nvkm_subdev_type, int inst, struct nvkm_nvenc **);
- #endif
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-index c0f1a8110452..80ebf2a3a990 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-@@ -2427,7 +2427,7 @@ nv162_chipset = {
- 	.fifo     = { 0x00000001, tu102_fifo_new },
- 	.gr       = { 0x00000001, tu102_gr_new },
- 	.nvdec    = { 0x00000001, tu102_nvdec_new },
--	.nvenc    = { 0x00000001, gm107_nvenc_new },
-+	.nvenc    = { 0x00000001, tu102_nvenc_new },
- 	.sec2     = { 0x00000001, tu102_sec2_new },
- };
- 
-@@ -2462,7 +2462,7 @@ nv164_chipset = {
- 	.fifo     = { 0x00000001, tu102_fifo_new },
- 	.gr       = { 0x00000001, tu102_gr_new },
- 	.nvdec    = { 0x00000003, tu102_nvdec_new },
--	.nvenc    = { 0x00000001, gm107_nvenc_new },
-+	.nvenc    = { 0x00000001, tu102_nvenc_new },
- 	.sec2     = { 0x00000001, tu102_sec2_new },
- };
- 
-@@ -2497,7 +2497,7 @@ nv166_chipset = {
- 	.fifo     = { 0x00000001, tu102_fifo_new },
- 	.gr       = { 0x00000001, tu102_gr_new },
- 	.nvdec    = { 0x00000007, tu102_nvdec_new },
--	.nvenc    = { 0x00000001, gm107_nvenc_new },
-+	.nvenc    = { 0x00000001, tu102_nvenc_new },
- 	.sec2     = { 0x00000001, tu102_sec2_new },
- };
- 
-@@ -2532,7 +2532,7 @@ nv167_chipset = {
- 	.fifo     = { 0x00000001, tu102_fifo_new },
- 	.gr       = { 0x00000001, tu102_gr_new },
- 	.nvdec    = { 0x00000001, tu102_nvdec_new },
--	.nvenc    = { 0x00000001, gm107_nvenc_new },
-+	.nvenc    = { 0x00000001, tu102_nvenc_new },
- 	.sec2     = { 0x00000001, tu102_sec2_new },
- };
- 
-@@ -2567,7 +2567,7 @@ nv168_chipset = {
- 	.fifo     = { 0x00000001, tu102_fifo_new },
- 	.gr       = { 0x00000001, tu102_gr_new },
- 	.nvdec    = { 0x00000001, tu102_nvdec_new },
--	.nvenc    = { 0x00000001, gm107_nvenc_new },
-+	.nvenc    = { 0x00000001, tu102_nvenc_new },
- 	.sec2     = { 0x00000001, tu102_sec2_new },
- };
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/Kbuild b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/Kbuild
-index 75bf4436bf3f..6dcb20d1d156 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/Kbuild
-@@ -1,3 +1,4 @@
- # SPDX-License-Identifier: MIT
- nvkm-y += nvkm/engine/nvenc/base.o
- nvkm-y += nvkm/engine/nvenc/gm107.o
-+nvkm-y += nvkm/engine/nvenc/tu102.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c
-index cf5dcfda7b25..d45dbb42a0db 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c
-@@ -34,6 +34,7 @@ nvkm_nvenc_dtor(struct nvkm_engine *engine)
- static const struct nvkm_engine_func
- nvkm_nvenc = {
- 	.dtor = nvkm_nvenc_dtor,
-+	.sclass = { {} },
- };
- 
- int
-@@ -59,4 +60,4 @@ nvkm_nvenc_new_(const struct nvkm_nvenc_fwif *fwif, struct nvkm_device *device,
- 
- 	return nvkm_falcon_ctor(nvenc->func->flcn, &nvenc->engine.subdev,
- 				nvenc->engine.subdev.name, 0, &nvenc->falcon);
--};
-+}
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/gm107.c b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/gm107.c
-index ad27d8b97569..922abb647ad3 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/gm107.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/gm107.c
-@@ -38,7 +38,7 @@ gm107_nvenc_nofw(struct nvkm_nvenc *nvenc, int ver,
- 	return 0;
- }
- 
--static const struct nvkm_nvenc_fwif
-+const struct nvkm_nvenc_fwif
- gm107_nvenc_fwif[] = {
- 	{ -1, gm107_nvenc_nofw, &gm107_nvenc },
- 	{}
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/priv.h b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/priv.h
-index 4130a2bfbb4f..b097e3f2867b 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/priv.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/priv.h
-@@ -14,6 +14,8 @@ struct nvkm_nvenc_fwif {
- 	const struct nvkm_nvenc_func *func;
- };
- 
-+extern const struct nvkm_nvenc_fwif gm107_nvenc_fwif[];
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sec2/Kbuild b/drivers/gpu/drm/nouveau/nvkm/engine/sec2/Kbuild
+index 19feadb1f67b..b43b7e5e2733 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/sec2/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/sec2/Kbuild
+@@ -4,3 +4,5 @@ nvkm-y += nvkm/engine/sec2/gp102.o
+ nvkm-y += nvkm/engine/sec2/gp108.o
+ nvkm-y += nvkm/engine/sec2/tu102.o
+ nvkm-y += nvkm/engine/sec2/ga102.o
 +
- int nvkm_nvenc_new_(const struct nvkm_nvenc_fwif *, struct nvkm_device *, enum nvkm_subdev_type,
- 		    int, struct nvkm_nvenc **pnvenc);
- #endif
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/tu102.c b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/tu102.c
++nvkm-y += nvkm/engine/sec2/r535.o
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sec2/ga102.c b/drivers/gpu/drm/nouveau/nvkm/engine/sec2/ga102.c
+index 945abb8156d7..54be7596b046 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/sec2/ga102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/sec2/ga102.c
+@@ -21,6 +21,7 @@
+  */
+ #include "priv.h"
+ #include <subdev/acr.h>
++#include <subdev/gsp.h>
+ #include <subdev/vfn.h>
+ 
+ #include <nvfw/flcn.h>
+@@ -193,5 +194,10 @@ ga102_sec2_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
+ 	/* TOP info wasn't updated on Turing to reflect the PRI
+ 	 * address change for some reason.  We override it here.
+ 	 */
+-	return nvkm_sec2_new_(ga102_sec2_fwif, device, type, inst, 0x840000, psec2);
++	const u32 addr = 0x840000;
++
++	if (nvkm_gsp_rm(device->gsp))
++		return r535_sec2_new(&ga102_sec2, device, type, inst, addr, psec2);
++
++	return nvkm_sec2_new_(ga102_sec2_fwif, device, type, inst, addr, psec2);
+ }
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sec2/priv.h b/drivers/gpu/drm/nouveau/nvkm/engine/sec2/priv.h
+index 172d2705c199..e158a40a4f09 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/sec2/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/sec2/priv.h
+@@ -4,6 +4,9 @@
+ #include <engine/sec2.h>
+ struct nvkm_acr_lsfw;
+ 
++int r535_sec2_new(const struct nvkm_sec2_func *,
++		  struct nvkm_device *, enum nvkm_subdev_type, int, u32 addr, struct nvkm_sec2 **);
++
+ struct nvkm_sec2_func {
+ 	const struct nvkm_falcon_func *flcn;
+ 	u8 unit_unload;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sec2/r535.c b/drivers/gpu/drm/nouveau/nvkm/engine/sec2/r535.c
 new file mode 100644
-index 000000000000..8a436b398749
+index 000000000000..83a6bad5967e
 --- /dev/null
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/tu102.c
-@@ -0,0 +1,34 @@
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/sec2/r535.c
+@@ -0,0 +1,54 @@
 +/*
 + * Copyright 2023 Red Hat Inc.
 + *
@@ -235,17 +167,61 @@ index 000000000000..8a436b398749
 + */
 +#include "priv.h"
 +
-+#include <subdev/gsp.h>
++static void *
++r535_sec2_dtor(struct nvkm_engine *engine)
++{
++	struct nvkm_sec2 *sec2 = nvkm_sec2(engine);
++
++	nvkm_falcon_dtor(&sec2->falcon);
++	return sec2;
++}
++
++static const struct nvkm_engine_func
++r535_sec2 = {
++	.dtor = r535_sec2_dtor,
++};
 +
 +int
-+tu102_nvenc_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
-+		struct nvkm_nvenc **pnvenc)
++r535_sec2_new(const struct nvkm_sec2_func *func, struct nvkm_device *device,
++	      enum nvkm_subdev_type type, int inst, u32 addr, struct nvkm_sec2 **psec2)
 +{
-+	if (nvkm_gsp_rm(device->gsp))
-+		return -ENODEV;
++	struct nvkm_sec2 *sec2;
++	int ret;
 +
-+	return nvkm_nvenc_new_(gm107_nvenc_fwif, device, type, inst, pnvenc);
++	if (!(sec2 = *psec2 = kzalloc(sizeof(*sec2), GFP_KERNEL)))
++		return -ENOMEM;
++
++	ret = nvkm_engine_ctor(&r535_sec2, device, type, inst, true, &sec2->engine);
++	if (ret)
++		return ret;
++
++	return nvkm_falcon_ctor(func->flcn, &sec2->engine.subdev, sec2->engine.subdev.name,
++				addr, &sec2->falcon);
 +}
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sec2/tu102.c b/drivers/gpu/drm/nouveau/nvkm/engine/sec2/tu102.c
+index 0afc4b2fa529..20452046d7d1 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/sec2/tu102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/sec2/tu102.c
+@@ -21,6 +21,7 @@
+  */
+ #include "priv.h"
+ #include <subdev/acr.h>
++#include <subdev/gsp.h>
+ 
+ #include <nvfw/sec2.h>
+ 
+@@ -82,5 +83,10 @@ tu102_sec2_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
+ 	/* TOP info wasn't updated on Turing to reflect the PRI
+ 	 * address change for some reason.  We override it here.
+ 	 */
+-	return nvkm_sec2_new_(tu102_sec2_fwif, device, type, inst, 0x840000, psec2);
++	const u32 addr = 0x840000;
++
++	if (nvkm_gsp_rm(device->gsp))
++		return r535_sec2_new(&tu102_sec2, device, type, inst, addr, psec2);
++
++	return nvkm_sec2_new_(tu102_sec2_fwif, device, type, inst, addr, psec2);
+ }
 -- 
 2.41.0
 
