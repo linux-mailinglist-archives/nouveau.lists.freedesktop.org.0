@@ -1,67 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2BB57A53AA
-	for <lists+nouveau@lfdr.de>; Mon, 18 Sep 2023 22:15:41 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A3E3F7A53AC
+	for <lists+nouveau@lfdr.de>; Mon, 18 Sep 2023 22:15:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EA02F10E2F6;
-	Mon, 18 Sep 2023 20:15:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2981510E2FB;
+	Mon, 18 Sep 2023 20:15:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7399B10E2FB
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 20:15:37 +0000 (UTC)
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1c43166b7e5so32111375ad.3
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 13:15:37 -0700 (PDT)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4155E10E2FB
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 20:15:40 +0000 (UTC)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1c434c33ec0so24885855ad.3
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 13:15:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695068136; x=1695672936; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1695068139; x=1695672939; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oCwQrrWehKceZ772r9BuFv4x0Ot6Zo5GQJ19ONaqPRw=;
- b=E43wdXM+jImDlin6BD4sQiz1KN02Zo/Yis8jWOoWbS52crfm648M0qVlu+paKUS/j9
- joXRq3PH781+rZDV99yC2qOOfQQHf2GjALKJ6fQg+bElG55uKZHN636shQ4u0LrGBqfD
- KlcgTGkKXKWKr4mk8HjpFXSnvedJ6DopngSQGRgxZI7yuffu8ODqQV5IzdQQBFYbapzC
- pb5YUzZUDqNkUGR3WBO7kZsMFIOwjg6ZrgOATuwoAzhtHk/9iUBRl8syH7azlqP+ektz
- QO7XKPKDH6NtOZTiKREVRaMsqFXLHHj23A5DK+/il2XXhILGqL+Z7EZaB5LBvyOGx8Y3
- 0zSA==
+ bh=5UgtPfmDDLtJoSECre+EJkRTlFP6v8jOff/bjf3OIww=;
+ b=P6GKLczzKP5+h8qoj/JfH9xgPAoAGMclbl6aK68wh19Oa3jsuIj/JUdIjOYnwf2WKN
+ 7HOLVblwShbqxJVsVAyljvdPhOIWZgdsYU9o4BL6xXrmrbjoaUg3PtClwNfezPlQA/7N
+ 9WVDLMKevONQ2fqQu9IRtifBdfYDSW1Fhl3OiFlFl4dwfX1fsUQ2lZ/EStq8amD7sHgC
+ GCPgbNaGqBOPHUuDvVd0z18V/LC0O45EWxrtlmCb3NkHtKnsofFZpPQvqZgc7zh48mTf
+ FBnh0YX19m0pBt+tTKcZaOJ7BdJU5Tuj7UhrLu0kz7Kd5nj765krCOL1L2+EwLBi5Jh3
+ zs3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695068136; x=1695672936;
+ d=1e100.net; s=20230601; t=1695068139; x=1695672939;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oCwQrrWehKceZ772r9BuFv4x0Ot6Zo5GQJ19ONaqPRw=;
- b=ayvpKmUEW0Rt5u+UrMa2S/gFEJVmbNzJJ7mDT3Ddy+z/Y1nUUOxzjBRd1b+CKCMLtO
- mG14iuqqLCtTUkKFofVY6sZ1Ip+xVm4fCZ4/BFCIrqKfvnIOgvK1bzxjl2DMQdXCz9oc
- aKoWj/pNYUeJS42+MnZmmSn2T+1uKgUyFOvA+ChlQjCd5QY44bgMqyfmuuFvLioAE2zQ
- NovxDavBgdwyuJNXTtZS3dJk3cTbCPo6mAlP4+QKeb/KT3XcvEfu+1GDcL0b5d4r4iaO
- tYNOR6THV8xDq+a3pZ5YOmin07brKgf8ziR1eCtEAtTmIXoOKAroR6Dp1zPKrQo2taV6
- nl9g==
-X-Gm-Message-State: AOJu0YxBYT8jUc2nrPpeK567m4uI9cuNPj/gSvD0AwK/E3IwdS2+vKcf
- JQ0uw+qQmokhBM2cDXXOtcg9wRBnWGU=
-X-Google-Smtp-Source: AGHT+IGIqCFBMZCJDVdzSpjxagBTcVrMB91XnJYjHb2s7od5UAuaIhZWksIcGhaKynfy5nqOVzwOIA==
-X-Received: by 2002:a17:902:b60f:b0:1bc:671d:6d31 with SMTP id
- b15-20020a170902b60f00b001bc671d6d31mr9716554pls.3.1695068136600; 
- Mon, 18 Sep 2023 13:15:36 -0700 (PDT)
+ bh=5UgtPfmDDLtJoSECre+EJkRTlFP6v8jOff/bjf3OIww=;
+ b=a1pi2hGwCiPT7+0m4K+k8MegVCb1bE3+vaIwGvjbwTND4M8e+h1Do63kP9ALZeYgMn
+ uh25rwK2TfFHwPIAvjpswSCcXH54cKQWzO/JrTE3Q4dZWBAZADiWgSECiNbUixh3/5a+
+ +74tS8l9kUomN5fvAthAXa9R5LmB/xRWB5Hb8LNRN0rGbQ4ye7FqYUjLQYcohTuk8xcN
+ W/CMCHfcZOqh2j9c4bSbdi81js3M8u3F6Tn3apGA7DiOxSgdEXJOHJofX0M4HfJZaVs6
+ waolF3bO7qpo0Y+g9E1ACGFRo3R9LEr9flgZw38itudTmMXT83xsUqvrO6xdkEMlA3la
+ Xp/g==
+X-Gm-Message-State: AOJu0YzApittT0E748RPlOawtnXpIJovCq80M3sl71j7nYQzFHbZGXiH
+ EjcCOdilXQqpMEQs/BdVU1SoXPpbbxg=
+X-Google-Smtp-Source: AGHT+IG2EwjyEbK0KM7gp7O4kpBILlo/PRbUxivsTvlEK29XZdydaAMN4k1t58iqdp+2c6WT4B74DQ==
+X-Received: by 2002:a17:902:d485:b0:1c3:9764:764f with SMTP id
+ c5-20020a170902d48500b001c39764764fmr9440437plg.48.1695068139088; 
+ Mon, 18 Sep 2023 13:15:39 -0700 (PDT)
 Received: from localhost.localdomain (87-121-74-45.dyn.launtel.net.au.
  [87.121.74.45]) by smtp.gmail.com with ESMTPSA id
- p21-20020a170902ead500b001b8c6890623sm8706858pld.7.2023.09.18.13.15.34
+ p21-20020a170902ead500b001b8c6890623sm8706858pld.7.2023.09.18.13.15.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Sep 2023 13:15:36 -0700 (PDT)
+ Mon, 18 Sep 2023 13:15:38 -0700 (PDT)
 From: Ben Skeggs <skeggsb@gmail.com>
 To: nouveau@lists.freedesktop.org
-Date: Tue, 19 Sep 2023 06:13:51 +1000
-Message-ID: <20230918201404.3765-32-skeggsb@gmail.com>
+Date: Tue, 19 Sep 2023 06:13:52 +1000
+Message-ID: <20230918201404.3765-33-skeggsb@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230918201404.3765-1-skeggsb@gmail.com>
 References: <20230918201404.3765-1-skeggsb@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH v2 31/44] drm/nouveau/kms/nv50-: fixup sink D3
- before tearing down link
+Subject: [Nouveau] [PATCH v2 32/44] drm/nouveau/disp: add dp train method
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,93 +78,580 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Ben Skeggs <bskeggs@redhat.com>
 
-- fixes bug preventing this on SST
-- implement for MST
+- passes DPCD information from DRM to NVKM
+- removes NVKM's own sink caps handling
+- link still trained from supervisor, more patches to come
 
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 Reviewed-by: Lyude Paul <lyude@redhat.com>
 ---
- drivers/gpu/drm/nouveau/dispnv50/disp.c   | 13 +++----------
- drivers/gpu/drm/nouveau/nouveau_dp.c      | 15 +++++++++++++++
- drivers/gpu/drm/nouveau/nouveau_encoder.h |  1 +
- 3 files changed, 19 insertions(+), 10 deletions(-)
+ drivers/gpu/drm/nouveau/dispnv50/disp.c       |   6 +-
+ drivers/gpu/drm/nouveau/include/nvif/if0012.h |  25 ++--
+ drivers/gpu/drm/nouveau/include/nvif/outp.h   |   7 +-
+ drivers/gpu/drm/nouveau/nouveau_dp.c          |  75 +++++++++--
+ drivers/gpu/drm/nouveau/nouveau_encoder.h     |   7 ++
+ drivers/gpu/drm/nouveau/nvif/outp.c           |  38 +++---
+ drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c | 118 +++---------------
+ .../gpu/drm/nouveau/nvkm/engine/disp/outp.h   |   2 +
+ .../gpu/drm/nouveau/nvkm/engine/disp/uoutp.c  |  41 +++---
+ 9 files changed, 143 insertions(+), 176 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index d52320965b50..be4c45fd3999 100644
+index be4c45fd3999..9cce1323338b 100644
 --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
 +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -1298,6 +1298,7 @@ nv50_mstm_cleanup(struct drm_atomic_state *state,
+@@ -1036,7 +1036,7 @@ nv50_msto_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *st
+ 
+ 	if (!mstm->links++) {
+ 		nvif_outp_acquire_sor(&mstm->outp->outp, false /*TODO: MST audio... */);
+-		nvif_outp_acquire_dp(&mstm->outp->outp, mstm->outp->dp.dpcd, 0, 0, false, true);
++		nouveau_dp_train(mstm->outp, true, 0, 0);
  	}
  
- 	if (mstm->disabled) {
-+		nouveau_dp_power_down(mstm->outp);
- 		nvif_outp_release(&mstm->outp->outp);
- 		mstm->disabled = false;
- 	}
-@@ -1549,7 +1550,6 @@ nv50_sor_atomic_disable(struct drm_encoder *encoder, struct drm_atomic_state *st
- #endif
- 	struct drm_dp_aux *aux = &nv_connector->aux;
- 	int ret;
--	u8 pwr;
+ 	if (mstm->outp->outp.or.link & 1)
+@@ -1659,7 +1659,7 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
+ 		nvif_outp_lvds(&nv_encoder->outp, lvds_dual, lvds_8bpc);
+ 		break;
+ 	case DCB_OUTPUT_DP:
+-		nvif_outp_acquire_dp(&nv_encoder->outp, nv_encoder->dp.dpcd, 0, 0, hda, false);
++		nouveau_dp_train(nv_encoder, false, mode->clock, asyh->or.bpc);
+ 		depth = nv50_dp_bpc_to_depth(asyh->or.bpc);
  
- #ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
- 	if (backlight && backlight->uses_dpcd) {
-@@ -1566,15 +1566,8 @@ nv50_sor_atomic_disable(struct drm_encoder *encoder, struct drm_atomic_state *st
- 		nv_encoder->hdmi.enabled = false;
- 	}
+ 		if (nv_encoder->outp.or.link & 1)
+@@ -1850,7 +1850,7 @@ nv50_pior_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *st
+ 		break;
+ 	case DCB_OUTPUT_DP:
+ 		ctrl |= NVDEF(NV507D, PIOR_SET_CONTROL, PROTOCOL, EXT_TMDS_ENC);
+-		nvif_outp_acquire_dp(&nv_encoder->outp, nv_encoder->dp.dpcd, 0, 0, false, false);
++		nouveau_dp_train(nv_encoder, false, asyh->state.adjusted_mode.clock, 6);
+ 		break;
+ 	default:
+ 		BUG();
+diff --git a/drivers/gpu/drm/nouveau/include/nvif/if0012.h b/drivers/gpu/drm/nouveau/include/nvif/if0012.h
+index ddc8e3d85823..14972b942be7 100644
+--- a/drivers/gpu/drm/nouveau/include/nvif/if0012.h
++++ b/drivers/gpu/drm/nouveau/include/nvif/if0012.h
+@@ -34,7 +34,7 @@ union nvif_outp_args {
+ #define NVIF_OUTP_V0_DP_AUX_PWR    0x70
+ #define NVIF_OUTP_V0_DP_AUX_XFER   0x71
+ #define NVIF_OUTP_V0_DP_RATES      0x72
+-#define NVIF_OUTP_V0_DP_RETRAIN    0x73
++#define NVIF_OUTP_V0_DP_TRAIN      0x73
+ #define NVIF_OUTP_V0_DP_MST_VCPI   0x78
  
--	if (nv_encoder->dcb->type == DCB_OUTPUT_DP) {
--		ret = drm_dp_dpcd_readb(aux, DP_SET_POWER, &pwr);
+ union nvif_outp_detect_args {
+@@ -71,7 +71,6 @@ union nvif_outp_acquire_args {
+ #define NVIF_OUTP_ACQUIRE_V0_DAC  0x00
+ #define NVIF_OUTP_ACQUIRE_V0_SOR  0x01
+ #define NVIF_OUTP_ACQUIRE_V0_PIOR 0x02
+-#define NVIF_OUTP_ACQUIRE_V0_DP      0x04
+ 		__u8 type;
+ 		__u8 or;
+ 		__u8 link;
+@@ -80,14 +79,6 @@ union nvif_outp_acquire_args {
+ 			struct {
+ 				__u8 hda;
+ 			} sor;
+-			struct {
+-				__u8 link_nr; /* 0 = highest possible. */
+-				__u8 link_bw; /* 0 = highest possible, DP BW code otherwise. */
+-				__u8 hda;
+-				__u8 mst;
+-				__u8 pad04[4];
+-				__u8 dpcd[DP_RECEIVER_CAP_SIZE];
+-			} dp;
+ 		};
+ 	} v0;
+ };
+@@ -207,9 +198,17 @@ union nvif_outp_dp_rates_args {
+ 	} v0;
+ };
+ 
+-union nvif_outp_dp_retrain_args {
+-	struct nvif_outp_dp_retrain_vn {
+-	} vn;
++union nvif_outp_dp_train_args {
++	struct nvif_outp_dp_train_v0 {
++		__u8  version;
++		__u8  retrain;
++		__u8  mst;
++		__u8  lttprs;
++		__u8  post_lt_adj;
++		__u8  link_nr;
++		__u32 link_bw;
++		__u8 dpcd[DP_RECEIVER_CAP_SIZE];
++	} v0;
+ };
+ 
+ union nvif_outp_dp_mst_vcpi_args {
+diff --git a/drivers/gpu/drm/nouveau/include/nvif/outp.h b/drivers/gpu/drm/nouveau/include/nvif/outp.h
+index 596d543acd30..9a78483e0289 100644
+--- a/drivers/gpu/drm/nouveau/include/nvif/outp.h
++++ b/drivers/gpu/drm/nouveau/include/nvif/outp.h
+@@ -31,8 +31,6 @@ int nvif_outp_load_detect(struct nvif_outp *, u32 loadval);
+ int nvif_outp_acquire_dac(struct nvif_outp *);
+ int nvif_outp_acquire_sor(struct nvif_outp *, bool hda);
+ int nvif_outp_acquire_pior(struct nvif_outp *);
+-int nvif_outp_acquire_dp(struct nvif_outp *outp, u8 dpcd[DP_RECEIVER_CAP_SIZE],
+-			 int link_nr, int link_bw, bool hda, bool mst);
+ int nvif_outp_inherit_rgb_crt(struct nvif_outp *outp, u8 *proto_out);
+ int nvif_outp_inherit_lvds(struct nvif_outp *outp, u8 *proto_out);
+ int nvif_outp_inherit_tmds(struct nvif_outp *outp, u8 *proto_out);
+@@ -66,8 +64,9 @@ struct nvif_outp_dp_rate {
+ };
+ 
+ int nvif_outp_dp_rates(struct nvif_outp *, struct nvif_outp_dp_rate *rate, int rate_nr);
 -
--		if (ret == 0) {
--			pwr &= ~DP_SET_POWER_MASK;
--			pwr |=  DP_SET_POWER_D3;
--			drm_dp_dpcd_writeb(aux, DP_SET_POWER, pwr);
--		}
--	}
-+	if (nv_encoder->dcb->type == DCB_OUTPUT_DP)
-+		nouveau_dp_power_down(nv_encoder);
- 
- 	nv_encoder->update(nv_encoder, nv_crtc->index, NULL, 0, 0);
- 	nv50_audio_disable(encoder, nv_crtc);
+-int nvif_outp_dp_retrain(struct nvif_outp *);
++int nvif_outp_dp_train(struct nvif_outp *, u8 dpcd[DP_RECEIVER_CAP_SIZE],
++		       u8 lttprs, u8 link_nr, u32 link_bw, bool mst, bool post_lt_adj,
++		       bool retrain);
+ int nvif_outp_dp_mst_vcpi(struct nvif_outp *, int head,
+ 			  u8 start_slot, u8 num_slots, u16 pbn, u16 aligned_pbn);
+ #endif
 diff --git a/drivers/gpu/drm/nouveau/nouveau_dp.c b/drivers/gpu/drm/nouveau/nouveau_dp.c
-index f26769bca195..1c0b992fe241 100644
+index 1c0b992fe241..9280daf32534 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_dp.c
 +++ b/drivers/gpu/drm/nouveau/nouveau_dp.c
-@@ -284,6 +284,21 @@ nouveau_dp_detect(struct nouveau_connector *nv_connector,
- 	return ret;
- }
+@@ -79,8 +79,21 @@ nouveau_dp_probe_dpcd(struct nouveau_connector *nv_connector,
+ 	    !drm_dp_read_lttpr_common_caps(aux, dpcd, outp->dp.lttpr.caps)) {
+ 		int nr = drm_dp_lttpr_count(outp->dp.lttpr.caps);
  
-+void
-+nouveau_dp_power_down(struct nouveau_encoder *outp)
-+{
-+	struct drm_dp_aux *aux = &outp->conn->aux;
-+	int ret;
-+	u8 pwr;
+-		if (nr > 0)
+-			outp->dp.lttpr.nr = nr;
++		if (nr) {
++			drm_dp_dpcd_writeb(aux, DP_PHY_REPEATER_MODE,
++						DP_PHY_REPEATER_MODE_TRANSPARENT);
 +
-+	ret = drm_dp_dpcd_readb(aux, DP_SET_POWER, &pwr);
-+	if (ret == 1) {
-+		pwr &= ~DP_SET_POWER_MASK;
-+		pwr |=  DP_SET_POWER_D3;
-+		drm_dp_dpcd_writeb(aux, DP_SET_POWER, pwr);
-+	}
++			if (nr > 0) {
++				ret = drm_dp_dpcd_writeb(aux, DP_PHY_REPEATER_MODE,
++							      DP_PHY_REPEATER_MODE_NON_TRANSPARENT);
++				if (ret != 1) {
++					drm_dp_dpcd_writeb(aux, DP_PHY_REPEATER_MODE,
++								DP_PHY_REPEATER_MODE_TRANSPARENT);
++				} else {
++					outp->dp.lttpr.nr = nr;
++				}
++			}
++		}
+ 	}
+ 
+ 	ret = drm_dp_read_dpcd_caps(aux, dpcd);
+@@ -291,23 +304,71 @@ nouveau_dp_power_down(struct nouveau_encoder *outp)
+ 	int ret;
+ 	u8 pwr;
+ 
++	mutex_lock(&outp->dp.hpd_irq_lock);
++
+ 	ret = drm_dp_dpcd_readb(aux, DP_SET_POWER, &pwr);
+ 	if (ret == 1) {
+ 		pwr &= ~DP_SET_POWER_MASK;
+ 		pwr |=  DP_SET_POWER_D3;
+ 		drm_dp_dpcd_writeb(aux, DP_SET_POWER, pwr);
+ 	}
++
++	outp->dp.lt.nr = 0;
++	mutex_unlock(&outp->dp.hpd_irq_lock);
 +}
 +
++static bool
++nouveau_dp_train_link(struct nouveau_encoder *outp, bool retrain)
++{
++	int ret;
++
++	ret = nvif_outp_dp_train(&outp->outp, outp->dp.dpcd,
++					      outp->dp.lttpr.nr,
++					      outp->dp.lt.nr,
++					      outp->dp.lt.bw,
++					      outp->dp.lt.mst,
++					      false,
++					      retrain);
++
++	return ret == 0;
+ }
+ 
  bool
- nouveau_dp_link_check(struct nouveau_connector *nv_connector)
+-nouveau_dp_link_check(struct nouveau_connector *nv_connector)
++nouveau_dp_train(struct nouveau_encoder *outp, bool mst, u32 khz, u8 bpc)
  {
+-	struct nouveau_encoder *nv_encoder = find_encoder(&nv_connector->base, DCB_OUTPUT_DP);
++	bool ret;
+ 
+-	if (!nv_encoder || nv_encoder->outp.or.id < 0)
+-		return true;
++	mutex_lock(&outp->dp.hpd_irq_lock);
++
++	outp->dp.lt.nr = outp->dp.link_nr;
++	outp->dp.lt.bw = 0;
++	outp->dp.lt.mst = mst;
++	ret = nouveau_dp_train_link(outp, false);
++
++	mutex_unlock(&outp->dp.hpd_irq_lock);
++	return ret;
++}
++
++static bool
++nouveau_dp_link_check_locked(struct nouveau_encoder *outp)
++{
++	return nouveau_dp_train_link(outp, true);
++}
++
++bool
++nouveau_dp_link_check(struct nouveau_connector *nv_connector)
++{
++	struct nouveau_encoder *outp = nv_connector->dp_encoder;
++	bool link_ok = true;
++
++	if (outp) {
++		mutex_lock(&outp->dp.hpd_irq_lock);
++		if (outp->dp.lt.nr)
++			link_ok = nouveau_dp_link_check_locked(outp);
++		mutex_unlock(&outp->dp.hpd_irq_lock);
++	}
+ 
+-	return nvif_outp_dp_retrain(&nv_encoder->outp) == 0;
++	return link_ok;
+ }
+ 
+ void
 diff --git a/drivers/gpu/drm/nouveau/nouveau_encoder.h b/drivers/gpu/drm/nouveau/nouveau_encoder.h
-index 123d0ecf5f58..ed31db58176c 100644
+index ed31db58176c..333042fc493f 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_encoder.h
 +++ b/drivers/gpu/drm/nouveau/nouveau_encoder.h
-@@ -155,6 +155,7 @@ enum nouveau_dp_status {
+@@ -89,6 +89,12 @@ struct nouveau_encoder {
+ 			int link_nr;
+ 			int link_bw;
+ 
++			struct {
++				bool mst;
++				u8   nr;
++				u32  bw;
++			} lt;
++
+ 			/* Protects DP state that needs to be accessed outside
+ 			 * connector reprobing contexts
+ 			 */
+@@ -155,6 +161,7 @@ enum nouveau_dp_status {
  };
  
  int nouveau_dp_detect(struct nouveau_connector *, struct nouveau_encoder *);
-+void nouveau_dp_power_down(struct nouveau_encoder *);
++bool nouveau_dp_train(struct nouveau_encoder *, bool mst, u32 khz, u8 bpc);
+ void nouveau_dp_power_down(struct nouveau_encoder *);
  bool nouveau_dp_link_check(struct nouveau_connector *);
  void nouveau_dp_irq(struct work_struct *);
- enum drm_mode_status nv50_dp_mode_valid(struct nouveau_encoder *,
+diff --git a/drivers/gpu/drm/nouveau/nvif/outp.c b/drivers/gpu/drm/nouveau/nvif/outp.c
+index 050d5cd303ad..7ffd57d82f89 100644
+--- a/drivers/gpu/drm/nouveau/nvif/outp.c
++++ b/drivers/gpu/drm/nouveau/nvif/outp.c
+@@ -47,32 +47,26 @@ nvif_outp_dp_mst_vcpi(struct nvif_outp *outp, int head,
+ }
+ 
+ int
+-nvif_outp_dp_retrain(struct nvif_outp *outp)
++nvif_outp_dp_train(struct nvif_outp *outp, u8 dpcd[DP_RECEIVER_CAP_SIZE], u8 lttprs,
++		   u8 link_nr, u32 link_bw, bool mst, bool post_lt_adj, bool retrain)
+ {
+-	int ret = nvif_object_mthd(&outp->object, NVIF_OUTP_V0_DP_RETRAIN, NULL, 0);
+-	NVIF_ERRON(ret, &outp->object, "[DP_RETRAIN]");
+-	return ret;
+-}
+-
+-static inline int nvif_outp_acquire(struct nvif_outp *, u8, struct nvif_outp_acquire_v0 *);
+-
+-int
+-nvif_outp_acquire_dp(struct nvif_outp *outp, u8 dpcd[DP_RECEIVER_CAP_SIZE],
+-		     int link_nr, int link_bw, bool hda, bool mst)
+-{
+-	struct nvif_outp_acquire_v0 args;
++	struct nvif_outp_dp_train_v0 args;
+ 	int ret;
+ 
+-	args.dp.link_nr = link_nr;
+-	args.dp.link_bw = link_bw;
+-	args.dp.hda = hda;
+-	args.dp.mst = mst;
+-	memcpy(args.dp.dpcd, dpcd, sizeof(args.dp.dpcd));
+-
+-	ret = nvif_outp_acquire(outp, NVIF_OUTP_ACQUIRE_V0_DP, &args);
++	args.version = 0;
++	args.retrain = retrain;
++	args.mst = mst;
++	args.lttprs = lttprs;
++	args.post_lt_adj = post_lt_adj;
++	args.link_nr = link_nr;
++	args.link_bw = link_bw;
++	memcpy(args.dpcd, dpcd, sizeof(args.dpcd));
++
++	ret = nvif_object_mthd(&outp->object, NVIF_OUTP_V0_DP_TRAIN, &args, sizeof(args));
+ 	NVIF_ERRON(ret, &outp->object,
+-		   "[ACQUIRE proto:DP link_nr:%d link_bw:%02x hda:%d mst:%d] or:%d link:%d",
+-		   args.dp.link_nr, args.dp.link_bw, args.dp.hda, args.dp.mst, args.or, args.link);
++		   "[DP_TRAIN retrain:%d mst:%d lttprs:%d post_lt_adj:%d nr:%d bw:%d]",
++		   args.retrain, args.mst, args.lttprs, args.post_lt_adj, args.link_nr,
++		   args.link_bw);
+ 	return ret;
+ }
+ 
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
+index af0f81a2834b..b59cd2d4550f 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
+@@ -303,26 +303,13 @@ nvkm_dp_train_link(struct nvkm_outp *outp, int rate)
+ 	struct lt_state lt = {
+ 		.outp = outp,
+ 		.pc2 = outp->dp.dpcd[DPCD_RC02] & DPCD_RC02_TPS3_SUPPORTED,
++		.repeaters = outp->dp.lttprs,
+ 	};
+-	u8 sink[2], data;
++	u8 sink[2];
+ 	int ret;
+ 
+ 	OUTP_DBG(outp, "training %dx%02x", ior->dp.nr, ior->dp.bw);
+ 
+-	/* Select LTTPR non-transparent mode if we have a valid configuration,
+-	 * use transparent mode otherwise.
+-	 */
+-	if (outp->dp.lttpr[0] >= 0x14) {
+-		data = DPCD_LTTPR_MODE_TRANSPARENT;
+-		nvkm_wraux(outp->dp.aux, DPCD_LTTPR_MODE, &data, sizeof(data));
+-
+-		if (outp->dp.lttprs) {
+-			data = DPCD_LTTPR_MODE_NON_TRANSPARENT;
+-			nvkm_wraux(outp->dp.aux, DPCD_LTTPR_MODE, &data, sizeof(data));
+-			lt.repeaters = outp->dp.lttprs;
+-		}
+-	}
+-
+ 	/* Set desired link configuration on the sink. */
+ 	sink[0] = (outp->dp.rate[rate].dpcd < 0) ? ior->dp.bw : 0;
+ 	sink[1] = ior->dp.nr;
+@@ -467,6 +454,19 @@ nvkm_dp_train_init(struct nvkm_outp *outp)
+ 	}
+ }
+ 
++static int
++nvkm_dp_train_(struct nvkm_outp *outp, bool retrain)
++{
++	if (retrain) {
++		if (!atomic_read(&outp->dp.lt.done))
++			return 0;
++
++		return outp->func->acquire(outp);
++	}
++
++	return 0;
++}
++
+ static int
+ nvkm_dp_train(struct nvkm_outp *outp, u32 dataKBps)
+ {
+@@ -501,19 +501,6 @@ nvkm_dp_train(struct nvkm_outp *outp, u32 dataKBps)
+ 	OUTP_DBG(outp, "training");
+ 	nvkm_dp_train_init(outp);
+ 
+-	/* Validate and train at configuration requested (if any) on ACQUIRE. */
+-	if (outp->dp.lt.nr) {
+-		for (nr = outp->dp.links; ret < 0 && nr; nr >>= 1) {
+-			for (rate = 0; nr == outp->dp.lt.nr && rate < outp->dp.rates; rate++) {
+-				if (outp->dp.rate[rate].rate / 27000 == outp->dp.lt.bw) {
+-					ior->dp.bw = outp->dp.rate[rate].rate / 27000;
+-					ior->dp.nr = nr;
+-					ret = nvkm_dp_train_links(outp, rate);
+-				}
+-			}
+-		}
+-	}
+-
+ 	/* Otherwise, loop through all valid link configurations that support the data rate. */
+ 	for (nr = outp->dp.links; ret < 0 && nr; nr >>= 1) {
+ 		for (rate = 0; ret < 0 && rate < outp->dp.rates; rate++) {
+@@ -615,50 +602,6 @@ nvkm_dp_acquire(struct nvkm_outp *outp)
+ 	return ret;
+ }
+ 
+-/* XXX: This is a big fat hack, and this is just drm_dp_read_dpcd_caps()
+- * converted to work inside nvkm. This is a temporary holdover until we start
+- * passing the drm_dp_aux device through NVKM
+- */
+-static int
+-nvkm_dp_read_dpcd_caps(struct nvkm_outp *outp)
+-{
+-	struct nvkm_i2c_aux *aux = outp->dp.aux;
+-	u8 dpcd_ext[DP_RECEIVER_CAP_SIZE];
+-	int ret;
+-
+-	ret = nvkm_rdaux(aux, DPCD_RC00_DPCD_REV, outp->dp.dpcd, DP_RECEIVER_CAP_SIZE);
+-	if (ret < 0)
+-		return ret;
+-
+-	/*
+-	 * Prior to DP1.3 the bit represented by
+-	 * DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT was reserved.
+-	 * If it is set DP_DPCD_REV at 0000h could be at a value less than
+-	 * the true capability of the panel. The only way to check is to
+-	 * then compare 0000h and 2200h.
+-	 */
+-	if (!(outp->dp.dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
+-	      DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT))
+-		return 0;
+-
+-	ret = nvkm_rdaux(aux, DP_DP13_DPCD_REV, dpcd_ext, sizeof(dpcd_ext));
+-	if (ret < 0)
+-		return ret;
+-
+-	if (outp->dp.dpcd[DP_DPCD_REV] > dpcd_ext[DP_DPCD_REV]) {
+-		OUTP_DBG(outp, "Extended DPCD rev less than base DPCD rev (%d > %d)\n",
+-			 outp->dp.dpcd[DP_DPCD_REV], dpcd_ext[DP_DPCD_REV]);
+-		return 0;
+-	}
+-
+-	if (!memcmp(outp->dp.dpcd, dpcd_ext, sizeof(dpcd_ext)))
+-		return 0;
+-
+-	memcpy(outp->dp.dpcd, dpcd_ext, sizeof(dpcd_ext));
+-
+-	return 0;
+-}
+-
+ void
+ nvkm_dp_enable(struct nvkm_outp *outp, bool auxpwr)
+ {
+@@ -690,36 +633,6 @@ nvkm_dp_enable(struct nvkm_outp *outp, bool auxpwr)
+ 		OUTP_DBG(outp, "aux power -> always");
+ 		nvkm_i2c_aux_monitor(aux, true);
+ 		outp->dp.aux_pwr = true;
+-
+-		/* Detect any LTTPRs before reading DPCD receiver caps. */
+-		if (!nvkm_rdaux(aux, DPCD_LTTPR_REV, outp->dp.lttpr, sizeof(outp->dp.lttpr)) &&
+-		    outp->dp.lttpr[0] >= 0x14 && outp->dp.lttpr[2]) {
+-			switch (outp->dp.lttpr[2]) {
+-			case 0x80: outp->dp.lttprs = 1; break;
+-			case 0x40: outp->dp.lttprs = 2; break;
+-			case 0x20: outp->dp.lttprs = 3; break;
+-			case 0x10: outp->dp.lttprs = 4; break;
+-			case 0x08: outp->dp.lttprs = 5; break;
+-			case 0x04: outp->dp.lttprs = 6; break;
+-			case 0x02: outp->dp.lttprs = 7; break;
+-			case 0x01: outp->dp.lttprs = 8; break;
+-			default:
+-				/* Unknown LTTPR count, we'll switch to transparent mode. */
+-				WARN_ON(1);
+-				outp->dp.lttprs = 0;
+-				break;
+-			}
+-		} else {
+-			/* No LTTPR support, or zero LTTPR count - don't touch it at all. */
+-			memset(outp->dp.lttpr, 0x00, sizeof(outp->dp.lttpr));
+-		}
+-
+-		if (!nvkm_dp_read_dpcd_caps(outp)) {
+-			outp->dp.links = outp->dp.dpcd[DPCD_RC02] & DPCD_RC02_MAX_LANE_COUNT;
+-			outp->dp.links = min(outp->dp.links, outp->info.dpconf.link_nr);
+-			if (outp->dp.lttprs && outp->dp.lttpr[4])
+-				outp->dp.links = min_t(int, outp->dp.links, outp->dp.lttpr[4]);
+-		}
+ 	} else
+ 	if (!auxpwr && outp->dp.aux_pwr) {
+ 		OUTP_DBG(outp, "aux power -> demand");
+@@ -771,6 +684,7 @@ nvkm_dp_func = {
+ 	.bl.set = nvkm_outp_bl_set,
+ 	.dp.aux_pwr = nvkm_dp_aux_pwr,
+ 	.dp.aux_xfer = nvkm_dp_aux_xfer,
++	.dp.train = nvkm_dp_train_,
+ };
+ 
+ int
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.h b/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.h
+index 5cef5933e7f2..5ac4cf596bc3 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.h
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.h
+@@ -58,6 +58,7 @@ struct nvkm_outp {
+ 				u8 nr;
+ 				u8 bw;
+ 				bool mst;
++				bool post_adj;
+ 			} lt;
+ 		} dp;
+ 	};
+@@ -109,6 +110,7 @@ struct nvkm_outp_func {
+ 		int (*aux_pwr)(struct nvkm_outp *, bool pu);
+ 		int (*aux_xfer)(struct nvkm_outp *, u8 type, u32 addr, u8 *data, u8 *size);
+ 		int (*rates)(struct nvkm_outp *);
++		int (*train)(struct nvkm_outp *, bool retrain);
+ 	} dp;
+ };
+ 
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
+index fd756e4599da..16a1536d13aa 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
+@@ -46,28 +46,26 @@ nvkm_uoutp_mthd_dp_mst_vcpi(struct nvkm_outp *outp, void *argv, u32 argc)
+ }
+ 
+ static int
+-nvkm_uoutp_mthd_dp_retrain(struct nvkm_outp *outp, void *argv, u32 argc)
++nvkm_uoutp_mthd_dp_train(struct nvkm_outp *outp, void *argv, u32 argc)
+ {
+-	union nvif_outp_dp_retrain_args *args = argv;
++	union nvif_outp_dp_train_args *args = argv;
+ 
+-	if (argc != sizeof(args->vn))
++	if (argc != sizeof(args->v0) || args->v0.version != 0)
+ 		return -ENOSYS;
++	if (!outp->func->dp.train)
++		return -EINVAL;
+ 
+-	if (!atomic_read(&outp->dp.lt.done))
+-		return 0;
+-
+-	return outp->func->acquire(outp);
+-}
++	if (!args->v0.retrain) {
++		memcpy(outp->dp.dpcd, args->v0.dpcd, sizeof(outp->dp.dpcd));
++		outp->dp.lttprs = args->v0.lttprs;
++		outp->dp.links = args->v0.link_nr;
++		outp->dp.lt.nr = 0;
++		outp->dp.lt.bw = 0;
++		outp->dp.lt.mst = args->v0.mst;
++		outp->dp.lt.post_adj = args->v0.post_lt_adj;
++	}
+ 
+-static int
+-nvkm_uoutp_mthd_acquire_dp(struct nvkm_outp *outp, u8 dpcd[DP_RECEIVER_CAP_SIZE],
+-			   u8 link_nr, u8 link_bw, bool hda, bool mst)
+-{
+-	memcpy(outp->dp.dpcd, dpcd, sizeof(outp->dp.dpcd));
+-	outp->dp.lt.nr = link_nr;
+-	outp->dp.lt.bw = link_bw;
+-	outp->dp.lt.mst = mst;
+-	return 0;
++	return outp->func->dp.train(outp, args->v0.retrain);
+ }
+ 
+ static int
+@@ -304,13 +302,6 @@ nvkm_uoutp_mthd_acquire(struct nvkm_outp *outp, void *argv, u32 argc)
+ 	case NVIF_OUTP_ACQUIRE_V0_SOR:
+ 		ret = nvkm_outp_acquire_or(outp, NVKM_OUTP_USER, args->v0.sor.hda);
+ 		break;
+-	case NVIF_OUTP_ACQUIRE_V0_DP:
+-		ret = nvkm_uoutp_mthd_acquire_dp(outp, args->v0.dp.dpcd,
+-						       args->v0.dp.link_nr,
+-						       args->v0.dp.link_bw,
+-						       args->v0.dp.hda != 0,
+-						       args->v0.dp.mst != 0);
+-		break;
+ 	default:
+ 		ret = -EINVAL;
+ 		break;
+@@ -458,7 +449,7 @@ nvkm_uoutp_mthd_acquired(struct nvkm_outp *outp, u32 mthd, void *argv, u32 argc)
+ 	case NVIF_OUTP_V0_HDMI         : return nvkm_uoutp_mthd_hdmi         (outp, argv, argc);
+ 	case NVIF_OUTP_V0_INFOFRAME    : return nvkm_uoutp_mthd_infoframe    (outp, argv, argc);
+ 	case NVIF_OUTP_V0_HDA_ELD      : return nvkm_uoutp_mthd_hda_eld      (outp, argv, argc);
+-	case NVIF_OUTP_V0_DP_RETRAIN   : return nvkm_uoutp_mthd_dp_retrain   (outp, argv, argc);
++	case NVIF_OUTP_V0_DP_TRAIN     : return nvkm_uoutp_mthd_dp_train     (outp, argv, argc);
+ 	case NVIF_OUTP_V0_DP_MST_VCPI  : return nvkm_uoutp_mthd_dp_mst_vcpi  (outp, argv, argc);
+ 	default:
+ 		break;
 -- 
 2.41.0
 
