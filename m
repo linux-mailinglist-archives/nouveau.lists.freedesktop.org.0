@@ -1,62 +1,93 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C2CD7A3EE3
-	for <lists+nouveau@lfdr.de>; Mon, 18 Sep 2023 02:04:55 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D378A7A4838
+	for <lists+nouveau@lfdr.de>; Mon, 18 Sep 2023 13:21:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A58D410E1A3;
-	Mon, 18 Sep 2023 00:04:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8755310E26A;
+	Mon, 18 Sep 2023 11:21:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4033C10E1A3
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 00:04:50 +0000 (UTC)
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2bfc1d8f2d2so47228761fa.0
- for <nouveau@lists.freedesktop.org>; Sun, 17 Sep 2023 17:04:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1694995488; x=1695600288; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8E0vFfwwbtKGBshccDHuPpqjh50GodEz86Ywd+m046o=;
- b=Db0blYzOIQVKqoHS/ILIDqo8SkWaf4/P+GFdtCqaPy87elD+Ywyw1I4EAmRP/kav4I
- S5nSFwoQiusGY9YUAZNnhVadequMUzju0S7L3uKilHdiJTQss3B8KbvuuNWT6H8xepVw
- vlV7e3ASDxL6w80nyYz4WrjTbHfejWGLNOfzKUFk+UHqD2k8v2UqitcdvHY8lnQgYQac
- ZJ72anzjsVByMOu7kAATExc6qRKIr5pSuzMMj5GuxS7DybIUsDiHcjlcioFKw6KiArKg
- r8fjdNdOk0+YqvQzA30z5IqnTak8ewYhVTkEgKAm3u/yS41ASwJGaQAQrLMC7uQniCzH
- D97w==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EDECB10E271
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 11:21:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1695036090;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=caZBuHO02JTq4izkwN1/2mH03NPW+7BFGaAKa0BCkPU=;
+ b=YNhD5BybBrzql7oC2vQsRcL3kw7hP78iSTZntQUFgO0u3+J3Nb/MGYMG6cppA/VCS7945q
+ s/UnE+eX8xDN/UQoj9h0ekXj9DGTYPBgWKqE3EKnZr2jwXCEoRW4JNcfQmTHgREk1xTfVn
+ /xWiEh9m4RcSeENjGRfNEVezrkfvsw0=
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-364-uSMqfgEFM-inWMV6jJkF7g-1; Mon, 18 Sep 2023 07:21:28 -0400
+X-MC-Unique: uSMqfgEFM-inWMV6jJkF7g-1
+Received: by mail-ed1-f72.google.com with SMTP id
+ 4fb4d7f45d1cf-52a40e282d9so3202691a12.2
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 04:21:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694995488; x=1695600288;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1695036088; x=1695640888;
+ h=content-transfer-encoding:in-reply-to:organization:references:cc:to
+ :from:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8E0vFfwwbtKGBshccDHuPpqjh50GodEz86Ywd+m046o=;
- b=h5ZfuQrSZsFTn2kMglht3gncnbrlLTNM0Yay6a6aI9y3h5+S0n0Hih+ifAdDiKczot
- CJcwKyOayov4T8KMplBDS+ZCcfPQ0qAv1g1xHBEvrrRz1LLX2eMnBUiuJTkzyTmlv62N
- NLhlb0xllYn86YWN040/+Cu2ZTB819YwUlHZK7h5JHMRvndVza0SP3UuJZDTvjVG5eMg
- 498QpyTHLA0BMBEBS4L3N57Vep6V/icPgNfgNGFycn0p1vwtpET6rIcPm4450N0+NyL+
- tj94pKpPjG7RJlJqFThJ8CO9fyL3bncRCKK49vYnSZCXEv1YWQkWZDd3DbLpEZ3F9x/v
- ajSQ==
-X-Gm-Message-State: AOJu0YxoqHNtfx6oxuEWDfOiiAsXd8CvCV0OpcbzZGe0+1xRaoSibJJa
- czLUupnyDnv8vfR7in53DKOu0beq9YSJtbgurLijsY1b
-X-Google-Smtp-Source: AGHT+IFI2pG+1Q6aQsksm3Ov8VEp/p0pv55fBYyE6MDs6J7AOm5rjsbKcELsbbyCBrgeJ6nTQN8S1BVRIK1MVtQAvAM=
-X-Received: by 2002:a2e:7306:0:b0:2c0:8fe:95b1 with SMTP id
- o6-20020a2e7306000000b002c008fe95b1mr569174ljc.21.1694995487842; Sun, 17 Sep
- 2023 17:04:47 -0700 (PDT)
+ bh=caZBuHO02JTq4izkwN1/2mH03NPW+7BFGaAKa0BCkPU=;
+ b=dp7reEaMqJ8rEF68e7x1gvY7OwNcm49zSa1r6LEccY6VIBxvr28hUZtr6sFu4W0xO+
+ +N9jn30/GmuI7murK9qJ47ekVIcNRFedNGvTCjNn5VVxGe9a8SRYZLUlYnqr51r0Fe47
+ ZQ0DDQ5f4l4y5uMpnkFqWvLkTNglsK+BGbwZN2PTGPBQ04bpt6gs4DTjv8orA51572tR
+ 1Px3dkeX7KipeuqkpX2am5kNn9wJPoLJIdMjDtgxldzirau3Ge7bWmVe4PhzvdJvpM9r
+ QO7W8dBj9b+hfmWVqPfKrOFOV5UNVBjFZVIM/cDEXZQvguwz/xhKjj7hMWU0sekFXYnU
+ QnFA==
+X-Gm-Message-State: AOJu0YyDxl1Hu88l+G18sciW9fR1tQNEYi3XOsns9hSz1F4okfslDdgV
+ QC05mVOq3Xy3GDWfoQgDGMguD5QJhZLRBLkaPeVGsRqPc4yWCeifpk6UZAEICiHjSO3MYZB4TDy
+ WL1SqRKtiM4Ulyi73JcEN3Imecg==
+X-Received: by 2002:a17:906:ef8b:b0:99e:f3b:2f78 with SMTP id
+ ze11-20020a170906ef8b00b0099e0f3b2f78mr6887996ejb.67.1695036087510; 
+ Mon, 18 Sep 2023 04:21:27 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFKBeaIMtKSN+PQ9xk2jJqYcltfzlDVIZ/zML2GbxV4AM0vQzV2UBQOLUiQN5WboaLzn81l9w==
+X-Received: by 2002:a17:906:ef8b:b0:99e:f3b:2f78 with SMTP id
+ ze11-20020a170906ef8b00b0099e0f3b2f78mr6887978ejb.67.1695036087099; 
+ Mon, 18 Sep 2023 04:21:27 -0700 (PDT)
+Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
+ ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
+ by smtp.gmail.com with ESMTPSA id
+ kg11-20020a17090776eb00b009a1a653770bsm6341125ejc.87.2023.09.18.04.21.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Sep 2023 04:21:26 -0700 (PDT)
+Message-ID: <d8a61464-b3f5-ca9b-4852-ec6ee2b85ce2@redhat.com>
+Date: Mon, 18 Sep 2023 13:21:25 +0200
 MIME-Version: 1.0
-References: <20230914084624.2299765-2-skeggsb@gmail.com>
- <20230914084624.2299765-36-skeggsb@gmail.com>
- <ad009bcf-f5d2-4f75-0ed0-41d731305557@redhat.com>
-In-Reply-To: <ad009bcf-f5d2-4f75-0ed0-41d731305557@redhat.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Mon, 18 Sep 2023 10:04:36 +1000
-Message-ID: <CACAvsv5TVyq3aLz9qOUw64O4gFZOWCBLiwNtnmpUZxGe19Acig@mail.gmail.com>
-To: Danilo Krummrich <dakr@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH 34/44] drm/nouveau/disp: add support for
- post-LT adjust
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+From: Danilo Krummrich <dakr@redhat.com>
+To: =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>
+References: <20230909153125.30032-1-dakr@redhat.com>
+ <20230909153125.30032-7-dakr@redhat.com>
+ <a9ef04d2-2525-65c0-2eda-45ca9a95a3a0@linux.intel.com>
+ <ZQCW6wzHYVdxl/IV@pollux>
+ <701dfead-e240-b3fb-422c-d49fc7e04595@linux.intel.com>
+ <ZQD2FFLP28bFgHXT@pollux>
+ <cbff08ca845655dee44fbf498cdb37a3d5251bf3.camel@linux.intel.com>
+ <ZQGoNovGz/4Y3xvf@pollux> <ef29b21d-157c-ead7-4b09-edf763d1f8b0@redhat.com>
+ <e8b9a298-d4ea-9ee7-69fe-eb8ea1f9dc3d@linux.intel.com>
+ <bdca7ebe-bc65-1db1-a247-490286a31307@redhat.com>
+ <7c8c606dbf515bfe9aa3dc3ed6c23ae00d84ef9d.camel@linux.intel.com>
+ <2c4bbd8c-ec2c-91ad-9f27-5476b7e65b4f@redhat.com>
+Organization: RedHat
+In-Reply-To: <2c4bbd8c-ec2c-91ad-9f27-5476b7e65b4f@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH drm-misc-next v3 6/7] drm/gpuvm: generalize
+ dma_resv/extobj handling and GEM validation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,286 +99,411 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
+Cc: matthew.brost@intel.com, sarah.walker@imgtec.com,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, boris.brezillon@collabora.com,
+ donald.robson@imgtec.com, daniel@ffwll.ch, christian.koenig@amd.com,
+ faith.ekstrand@collabora.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, 16 Sept 2023 at 08:47, Danilo Krummrich <dakr@redhat.com> wrote:
->
-> On 9/14/23 10:46, Ben Skeggs wrote:
-> > From: Ben Skeggs <bskeggs@redhat.com>
-> >
-> > - fixes regression from previous commit
->
->  From "drm/nouveau/disp: move link training out of supervisor"?
->
-> I'd probably prefer to either re-order or combine them rather than having a
-> regression in the series.
-I would prefer that too, but it's not really possible in this case
-without implementing post-LT adjust in two different places during the
-transition.  The prior commit doesn't introduce a bug, it exposes a
-pre-existing one.
+On 9/14/23 19:15, Danilo Krummrich wrote:
+> On 9/14/23 19:13, Thomas Hellström wrote:
+>> On Thu, 2023-09-14 at 17:27 +0200, Danilo Krummrich wrote:
+>>> On 9/14/23 13:32, Thomas Hellström wrote:
+>>>>
+>>>> On 9/14/23 12:57, Danilo Krummrich wrote:
+>>>>> On 9/13/23 14:16, Danilo Krummrich wrote:
+>>>>>
+>>>>> <snip>
+>>>>>
+>>>>>>>> And validate() can remove it while still holding all dma-
+>>>>>>>> resv locks,
+>>>>>>>> neat!
+>>>>>>>> However, what if two tasks are trying to lock the VA space
+>>>>>>>> concurrently? What
+>>>>>>>> do we do when the drm_gpuvm_bo's refcount drops to zero in
+>>>>>>>> drm_gpuva_unlink()?
+>>>>>>>> Are we guaranteed that at this point of time the
+>>>>>>>> drm_gpuvm_bo is not
+>>>>>>>> on the
+>>>>>>>> evicted list? Because otherwise we would call
+>>>>>>>> drm_gpuvm_bo_destroy()
+>>>>>>>> with the
+>>>>>>>> dma-resv lock held, which wouldn't be allowed, since
+>>>>>>>> drm_gpuvm_bo_destroy()
+>>>>>>>> might drop the last reference to the drm_gem_object and
+>>>>>>>> hence we'd
+>>>>>>>> potentially
+>>>>>>>> free the dma-resv lock while holding it, at least if it's
+>>>>>>>> an external
+>>>>>>>> object.
+>>>>>>>
+>>>>>>> Easiest way in this scheme is to think of the lists as being
+>>>>>>> protected
+>>>>>>> by the vm's resv lock. That means anybody calling unlink()
+>>>>>>> must also
+>>>>>>> hold the vm's resv lock. (Which is OK from an UAF point of
+>>>>>>> view, but
+>>>>>>> perhaps not from a locking inversion POW from an async list
+>>>>>>> update).
+>>>>>>
+>>>>>> This would mean that on unlink() we'd need to hold the VM's
+>>>>>> resv lock and the
+>>>>>> corresponding GEM's resv lock (in case they're not the same
+>>>>>> anyways) because the
+>>>>>> VM's resv lock would protect the external / evicted object
+>>>>>> lists and the GEM
+>>>>>> objects resv lock protects the GEM's list of drm_gpuvm_bos and
+>>>>>> the
+>>>>>> drm_gpuvm_bo's list of drm_gpuvas.
+>>>>>
+>>>>> As mentioned below the same applies for drm_gpuvm_bo_put() since
+>>>>> it might
+>>>>> destroy the vm_bo, which includes removing the vm_bo from
+>>>>> external / evicted
+>>>>> object lists and the GEMs list of vm_bos.
+>>>>>
+>>>>> As mentioned, if the GEM's dma-resv is different from the VM's
+>>>>> dma-resv we need
+>>>>> to take both locks. Ultimately, this would mean we need a
+>>>>> drm_exec loop, because
+>>>>> we can't know the order in which to take these locks. Doing a
+>>>>> full drm_exec loop
+>>>>> just to put() a vm_bo doesn't sound reasonable to me.
+>>>>>
+>>>>> Can we instead just have an internal mutex for locking the lists
+>>>>> such that we
+>>>>> avoid taking and dropping the spinlocks, which we use currently,
+>>>>> in a loop?
+>>>>
+>>>> You'd have the same locking inversion problem with a mutex, right?
+>>>> Since in the eviction path you have resv->mutex, from exec you have
+>>>> resv->mutex->resv because validate would attempt to grab resv.
+>>>
+>>> Both lists, evict and extobj, would need to have a separate mutex,
+>>> not a common one.
+>>> We'd also need a dedicated GEM gpuva lock. Then the only rule would
+>>> be that you can't
+>>> hold the dma-resv lock when calling put(). Which I admit is not that
+>>> nice.
+>>>
+>>> With the current spinlock solution drivers wouldn't need to worry
+>>> about anything locking
+>>> related though. So maybe I come back to your proposal of having a
+>>> switch for external
+>>> locking with dma-resv locks entirely. Such that with external dma-
+>>> resv locking I skip
+>>> all the spinlocks and add lockdep checks instead.
+>>>
+>>> I think that makes the most sense in terms of taking advantage of
+>>> external dma-resv locking
+>>> where possible and on the other hand having a self-contained solution
+>>> if not. This should
+>>> get all concerns out of the way, yours, Christian's and Boris'.
+>>
+>> If we need additional locks yes, I'd prefer the opt-in/opt-out spinlock
+>> solution, and check back after a while to see if we can remove either
+>> option once most pitfalls are hit.
+> 
+> Sounds good, I'll prepare this for a V4.
 
-I'm happy to squash the two commits though, and will unless there are
-any objections before I get to it.  I mostly wanted Lyude to be able
-to review them independently.
+I was considering getting rid of the spinlocks using srcu for both external and
+evicted objects instead. This would get us rid of taking/dropping the spinlock in
+every iteration step of the lists, limiting it to a single srcu_read_{lock,unlock}
+call per list walk. Plus, obviously the list_add_rcu() and list_del_rcu() variants
+as accessors. The accessors, would probably still need a spinlock to protect against
+concurrent list_add_rcu()/list_del_rcu() calls, but I think those are not a concern.
 
-Ben.
->
-> >
-> > Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
-> > ---
-> >   drivers/gpu/drm/nouveau/include/nvif/if0012.h | 11 +++
-> >   drivers/gpu/drm/nouveau/include/nvif/outp.h   |  1 +
-> >   drivers/gpu/drm/nouveau/nouveau_dp.c          | 72 ++++++++++++++++++-
-> >   drivers/gpu/drm/nouveau/nvif/outp.c           | 16 +++++
-> >   drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c | 17 +++++
-> >   .../gpu/drm/nouveau/nvkm/engine/disp/outp.h   |  1 +
-> >   .../gpu/drm/nouveau/nvkm/engine/disp/uoutp.c  | 14 ++++
-> >   7 files changed, 130 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/drivers/gpu/drm/nouveau/include/nvif/if0012.h b/drivers/gpu/drm/nouveau/include/nvif/if0012.h
-> > index 14972b942be7..00ce0a46c152 100644
-> > --- a/drivers/gpu/drm/nouveau/include/nvif/if0012.h
-> > +++ b/drivers/gpu/drm/nouveau/include/nvif/if0012.h
-> > @@ -35,6 +35,7 @@ union nvif_outp_args {
-> >   #define NVIF_OUTP_V0_DP_AUX_XFER   0x71
-> >   #define NVIF_OUTP_V0_DP_RATES      0x72
-> >   #define NVIF_OUTP_V0_DP_TRAIN      0x73
-> > +#define NVIF_OUTP_V0_DP_DRIVE      0x74
-> >   #define NVIF_OUTP_V0_DP_MST_VCPI   0x78
-> >
-> >   union nvif_outp_detect_args {
-> > @@ -211,6 +212,16 @@ union nvif_outp_dp_train_args {
-> >       } v0;
-> >   };
-> >
-> > +union nvif_outp_dp_drive_args {
-> > +     struct nvif_outp_dp_drive_v0 {
-> > +             __u8  version;
-> > +             __u8  pad01[2];
-> > +             __u8  lanes;
-> > +             __u8  pe[4];
-> > +             __u8  vs[4];
-> > +     } v0;
-> > +};
-> > +
-> >   union nvif_outp_dp_mst_vcpi_args {
-> >       struct nvif_outp_dp_mst_vcpi_v0 {
-> >               __u8  version;
-> > diff --git a/drivers/gpu/drm/nouveau/include/nvif/outp.h b/drivers/gpu/drm/nouveau/include/nvif/outp.h
-> > index 9a78483e0289..b4f97fabecbd 100644
-> > --- a/drivers/gpu/drm/nouveau/include/nvif/outp.h
-> > +++ b/drivers/gpu/drm/nouveau/include/nvif/outp.h
-> > @@ -67,6 +67,7 @@ int nvif_outp_dp_rates(struct nvif_outp *, struct nvif_outp_dp_rate *rate, int r
-> >   int nvif_outp_dp_train(struct nvif_outp *, u8 dpcd[DP_RECEIVER_CAP_SIZE],
-> >                      u8 lttprs, u8 link_nr, u32 link_bw, bool mst, bool post_lt_adj,
-> >                      bool retrain);
-> > +int nvif_outp_dp_drive(struct nvif_outp *, u8 link_nr, u8 pe[4], u8 vs[4]);
-> >   int nvif_outp_dp_mst_vcpi(struct nvif_outp *, int head,
-> >                         u8 start_slot, u8 num_slots, u16 pbn, u16 aligned_pbn);
-> >   #endif
-> > diff --git a/drivers/gpu/drm/nouveau/nouveau_dp.c b/drivers/gpu/drm/nouveau/nouveau_dp.c
-> > index cd03c29c1063..7de7707ec6a8 100644
-> > --- a/drivers/gpu/drm/nouveau/nouveau_dp.c
-> > +++ b/drivers/gpu/drm/nouveau/nouveau_dp.c
-> > @@ -320,15 +320,83 @@ nouveau_dp_power_down(struct nouveau_encoder *outp)
-> >   static bool
-> >   nouveau_dp_train_link(struct nouveau_encoder *outp, bool retrain)
-> >   {
-> > -     int ret;
-> > +     struct drm_dp_aux *aux = &outp->conn->aux;
-> > +     bool post_lt = false;
-> > +     int ret, retries = 0;
-> >
-> > +     if ( (outp->dp.dpcd[DP_MAX_LANE_COUNT] & 0x20) &&
-> > +         !(outp->dp.dpcd[DP_MAX_DOWNSPREAD] & DP_TPS4_SUPPORTED))
-> > +         post_lt = true;
-> > +
-> > +retry:
-> >       ret = nvif_outp_dp_train(&outp->outp, outp->dp.dpcd,
-> >                                             outp->dp.lttpr.nr,
-> >                                             outp->dp.lt.nr,
-> >                                             outp->dp.lt.bw,
-> >                                             outp->dp.lt.mst,
-> > -                                           false,
-> > +                                           post_lt,
-> >                                             retrain);
-> > +     if (ret)
-> > +             return false;
-> > +
-> > +     if (post_lt) {
-> > +             u8 stat[DP_LINK_STATUS_SIZE];
-> > +             u8 prev[2];
-> > +             u8 time = 0, adjusts = 0, tmp;
-> > +
-> > +             ret = drm_dp_dpcd_read_phy_link_status(aux, DP_PHY_DPRX, stat);
-> > +             if (ret)
-> > +                     return false;
-> > +
-> > +             for (;;) {
-> > +                     if (!drm_dp_channel_eq_ok(stat, outp->dp.lt.nr)) {
-> > +                             ret = 1;
-> > +                             break;
-> > +                     }
-> > +
-> > +                     if (!(stat[2] & 0x02))
-> > +                             break;
-> > +
-> > +                     msleep(5);
-> > +                     time += 5;
-> > +
-> > +                     memcpy(prev, &stat[4], sizeof(prev));
-> > +                     ret = drm_dp_dpcd_read_phy_link_status(aux, DP_PHY_DPRX, stat);
-> > +                     if (ret)
-> > +                             break;
-> > +
-> > +                     if (!memcmp(prev, &stat[4], sizeof(prev))) {
-> > +                             if (time > 200)
-> > +                                     break;
-> > +                     } else {
-> > +                             u8 pe[4], vs[4];
-> > +
-> > +                             if (adjusts++ == 6)
-> > +                                     break;
-> > +
-> > +                             for (int i = 0; i < outp->dp.lt.nr; i++) {
-> > +                                     pe[i] = drm_dp_get_adjust_request_pre_emphasis(stat, i) >>
-> > +                                                     DP_TRAIN_PRE_EMPHASIS_SHIFT;
-> > +                                     vs[i] = drm_dp_get_adjust_request_voltage(stat, i) >>
-> > +                                                     DP_TRAIN_VOLTAGE_SWING_SHIFT;
-> > +                             }
-> > +
-> > +                             ret = nvif_outp_dp_drive(&outp->outp, outp->dp.lt.nr, pe, vs);
-> > +                             if (ret)
-> > +                                     break;
-> > +
-> > +                             time = 0;
-> > +                     }
-> > +             }
-> > +
-> > +             if (drm_dp_dpcd_readb(aux, DP_LANE_COUNT_SET, &tmp) == 1) {
-> > +                     tmp &= ~0x20;
-> > +                     drm_dp_dpcd_writeb(aux, DP_LANE_COUNT_SET, tmp);
-> > +             }
-> > +     }
-> > +
-> > +     if (ret == 1 && retries++ < 3)
-> > +             goto retry;
-> >
-> >       return ret == 0;
-> >   }
-> > diff --git a/drivers/gpu/drm/nouveau/nvif/outp.c b/drivers/gpu/drm/nouveau/nvif/outp.c
-> > index 7ffd57d82f89..5fe5523587e6 100644
-> > --- a/drivers/gpu/drm/nouveau/nvif/outp.c
-> > +++ b/drivers/gpu/drm/nouveau/nvif/outp.c
-> > @@ -46,6 +46,22 @@ nvif_outp_dp_mst_vcpi(struct nvif_outp *outp, int head,
-> >       return ret;
-> >   }
-> >
-> > +int
-> > +nvif_outp_dp_drive(struct nvif_outp *outp, u8 link_nr, u8 pe[4], u8 vs[4])
-> > +{
-> > +     struct nvif_outp_dp_drive_v0 args;
-> > +     int ret;
-> > +
-> > +     args.version = 0;
-> > +     args.lanes   = link_nr;
-> > +     memcpy(args.pe, pe, sizeof(args.pe));
-> > +     memcpy(args.vs, vs, sizeof(args.vs));
-> > +
-> > +     ret = nvif_object_mthd(&outp->object, NVIF_OUTP_V0_DP_DRIVE, &args, sizeof(args));
-> > +     NVIF_ERRON(ret, &outp->object, "[DP_DRIVE lanes:%d]", args.lanes);
-> > +     return ret;
-> > +}
-> > +
-> >   int
-> >   nvif_outp_dp_train(struct nvif_outp *outp, u8 dpcd[DP_RECEIVER_CAP_SIZE], u8 lttprs,
-> >                  u8 link_nr, u32 link_bw, bool mst, bool post_lt_adj, bool retrain)
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
-> > index 6f08ff8b1fba..77a91d42b977 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/dp.c
-> > @@ -315,6 +315,8 @@ nvkm_dp_train_link(struct nvkm_outp *outp, int rate)
-> >       sink[1] = ior->dp.nr;
-> >       if (ior->dp.ef)
-> >               sink[1] |= DPCD_LC01_ENHANCED_FRAME_EN;
-> > +     if (outp->dp.lt.post_adj)
-> > +             sink[1] |= 0x20;
-> >
-> >       ret = nvkm_wraux(outp->dp.aux, DPCD_LC00_LINK_BW_SET, sink, 2);
-> >       if (ret)
-> > @@ -454,6 +456,20 @@ nvkm_dp_train_init(struct nvkm_outp *outp)
-> >       }
-> >   }
-> >
-> > +static int
-> > +nvkm_dp_drive(struct nvkm_outp *outp, u8 lanes, u8 pe[4], u8 vs[4])
-> > +{
-> > +     struct lt_state lt = {
-> > +             .outp = outp,
-> > +             .stat[4] = (pe[0] << 2) | (vs[0] << 0) |
-> > +                        (pe[1] << 6) | (vs[1] << 4),
-> > +             .stat[5] = (pe[2] << 2) | (vs[2] << 0) |
-> > +                        (pe[3] << 6) | (vs[3] << 4),
-> > +     };
-> > +
-> > +     return nvkm_dp_train_drive(&lt, false);
-> > +}
-> > +
-> >   static int
-> >   nvkm_dp_train(struct nvkm_outp *outp, bool retrain)
-> >   {
-> > @@ -597,6 +613,7 @@ nvkm_dp_func = {
-> >       .dp.aux_pwr = nvkm_dp_aux_pwr,
-> >       .dp.aux_xfer = nvkm_dp_aux_xfer,
-> >       .dp.train = nvkm_dp_train,
-> > +     .dp.drive = nvkm_dp_drive,
-> >   };
-> >
-> >   int
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.h b/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.h
-> > index 014b95b0f561..cda17941de89 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.h
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/outp.h
-> > @@ -108,6 +108,7 @@ struct nvkm_outp_func {
-> >               int (*aux_xfer)(struct nvkm_outp *, u8 type, u32 addr, u8 *data, u8 *size);
-> >               int (*rates)(struct nvkm_outp *);
-> >               int (*train)(struct nvkm_outp *, bool retrain);
-> > +             int (*drive)(struct nvkm_outp *, u8 lanes, u8 pe[4], u8 vs[4]);
-> >       } dp;
-> >   };
-> >
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
-> > index a256b35ce79c..b634e76c2a9b 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uoutp.c
-> > @@ -45,6 +45,19 @@ nvkm_uoutp_mthd_dp_mst_vcpi(struct nvkm_outp *outp, void *argv, u32 argc)
-> >       return 0;
-> >   }
-> >
-> > +static int
-> > +nvkm_uoutp_mthd_dp_drive(struct nvkm_outp *outp, void *argv, u32 argc)
-> > +{
-> > +     union nvif_outp_dp_drive_args *args = argv;
-> > +
-> > +     if (argc != sizeof(args->v0) || args->v0.version != 0)
-> > +             return -ENOSYS;
-> > +     if (!outp->func->dp.drive)
-> > +             return -EINVAL;
-> > +
-> > +     return outp->func->dp.drive(outp, args->v0.lanes, args->v0.pe, args->v0.vs);
-> > +}
-> > +
-> >   static int
-> >   nvkm_uoutp_mthd_dp_train(struct nvkm_outp *outp, void *argv, u32 argc)
-> >   {
-> > @@ -447,6 +460,7 @@ nvkm_uoutp_mthd_acquired(struct nvkm_outp *outp, u32 mthd, void *argv, u32 argc)
-> >       case NVIF_OUTP_V0_INFOFRAME    : return nvkm_uoutp_mthd_infoframe    (outp, argv, argc);
-> >       case NVIF_OUTP_V0_HDA_ELD      : return nvkm_uoutp_mthd_hda_eld      (outp, argv, argc);
-> >       case NVIF_OUTP_V0_DP_TRAIN     : return nvkm_uoutp_mthd_dp_train     (outp, argv, argc);
-> > +     case NVIF_OUTP_V0_DP_DRIVE     : return nvkm_uoutp_mthd_dp_drive     (outp, argv, argc);
-> >       case NVIF_OUTP_V0_DP_MST_VCPI  : return nvkm_uoutp_mthd_dp_mst_vcpi  (outp, argv, argc);
-> >       default:
-> >               break;
->
+Any concerns from your side with variant?
+
+> 
+> - Danilo
+> 
+>>
+>> Thanks,
+>> /Thomas
+>>
+>>
+>>>
+>>>>
+>>>> That said, xe currently indeed does the vm+bo exec dance on vma
+>>>> put.
+>>>>
+>>>> One reason why that seemingly horrible construct is good, is that
+>>>> when evicting an extobj and you need to access individual vmas to
+>>>> Zap page table entries or TLB flush, those VMAs are not allowed to
+>>>> go away (we're not refcounting them). Holding the bo resv on gpuva
+>>>> put prevents that from happening. Possibly one could use another
+>>>> mutex to protect the gem->vm_bo list to achieve the same, but we'd
+>>>> need to hold it on gpuva put.
+>>>>
+>>>> /Thomas
+>>>>
+>>>>
+>>>>>
+>>>>> - Danilo
+>>>>>
+>>>>>>
+>>>>>>>
+>>>>>>>>
+>>>>>>>>>>
+>>>>>>>>>> For extobjs an outer lock would be enough in case of
+>>>>>>>>>> Xe, but I
+>>>>>>>>>> really would not
+>>>>>>>>>> like to add even more complexity just to get the
+>>>>>>>>>> spinlock out of
+>>>>>>>>>> the way in case
+>>>>>>>>>> the driver already has an outer lock protecting this
+>>>>>>>>>> path.
+>>>>>>>>>
+>>>>>>>>> I must disagree here. These spinlocks and atomic
+>>>>>>>>> operations are
+>>>>>>>>> pretty
+>>>>>>>>> costly and as discussed earlier this type of locking was
+>>>>>>>>> the reason
+>>>>>>>>> (at
+>>>>>>>>> least according to the commit message) that made
+>>>>>>>>> Christian drop the
+>>>>>>>>> XArray
+>>>>>>>>> use in drm_exec for the same set of objects: "The locking
+>>>>>>>>> overhead
+>>>>>>>>> is
+>>>>>>>>> unecessary and measurable". IMHO the spinlock is the
+>>>>>>>>> added
+>>>>>>>>> complexity and a
+>>>>>>>>> single wide lock following the drm locking guidelines set
+>>>>>>>>> out by
+>>>>>>>>> Daniel and
+>>>>>>>>> David should really be the default choice with an opt-in
+>>>>>>>>> for a
+>>>>>>>>> spinlock if
+>>>>>>>>> needed for async and pushing out to a wq is not an
+>>>>>>>>> option.
+>>>>>>>>
+>>>>>>>> For the external object list an outer lock would work as
+>>>>>>>> long as it's
+>>>>>>>> not the
+>>>>>>>> dma-resv lock of the corresponding GEM object, since here
+>>>>>>>> we actually
+>>>>>>>> need to
+>>>>>>>> remove the list entry from the external object list on
+>>>>>>>> drm_gpuvm_bo_destroy().
+>>>>>>>> It's just a bit weird design wise that drivers would need
+>>>>>>>> to take
+>>>>>>>> this outer
+>>>>>>>> lock on:
+>>>>>>>>
+>>>>>>>> - drm_gpuvm_bo_extobj_add()
+>>>>>>>> - drm_gpuvm_bo_destroy()        (and hence also
+>>>>>>>> drm_gpuvm_bo_put())
+>>>>>>>> - drm_gpuva_unlink()            (because it needs to call
+>>>>>>>> drm_gpuvm_bo_put())
+>>>>>>>> - drm_gpuvm_exec_lock()
+>>>>>>>> - drm_gpuvm_exec_lock_array()
+>>>>>>>> - drm_gpuvm_prepare_range()
+>>>>>>>>
+>>>>>>>> Given that it seems reasonable to do all the required
+>>>>>>>> locking
+>>>>>>>> internally.
+>>>>>>>
+>>>>>>>   From a design POW, there has been a clear direction in XE to
+>>>>>>> make
+>>>>>>> things similar to mmap() / munmap(), so this outer lock,
+>>>>>>> which in Xe is
+>>>>>>> an rwsem, is used in a similar way as the mmap_lock. It's
+>>>>>>> protecting
+>>>>>>> the page-table structures and vma rb tree, the userptr
+>>>>>>> structures and
+>>>>>>> the extobj list. Basically it's taken early in the exec
+>>>>>>> IOCTL, the
+>>>>>>> VM_BIND ioctl, the compute rebind worker and the pagefault
+>>>>>>> handler, so
+>>>>>>> all of the above are just asserting that it is taken in the
+>>>>>>> correct
+>>>>>>> mode.
+>>>>>>>
+>>>>>>> But strictly with this scheme one could also use the vm's
+>>>>>>> dma_resv for
+>>>>>>> the extobj list since with drm_exec, it's locked before
+>>>>>>> traversing the
+>>>>>>> list.
+>>>>>>>
+>>>>>>> The whole point of this scheme is to rely on locks that you
+>>>>>>> already are
+>>>>>>> supposed to be holding for various reasons and is simple to
+>>>>>>> comprehend.
+>>>>>>
+>>>>>> I don't agree that we're supposed to hold the VM's resv lock
+>>>>>> anyways for
+>>>>>> functions like drm_gpuvm_bo_put() or drm_gpuva_unlink(), but
+>>>>>> I'm fine using it
+>>>>>> for that purpose nevertheless.
+>>>>>>
+>>>>>>>
+>>>>>>>>
+>>>>>>>> In order to at least place lockdep checks, the driver would
+>>>>>>>> need to
+>>>>>>>> supply the
+>>>>>>>> corresponding lock's lockdep_map, because the GPUVM
+>>>>>>>> otherwise doesn't
+>>>>>>>> know about
+>>>>>>>> the lock.
+>>>>>>>
+>>>>>>> Yes, that sounds reasonable. One lockdep map per list.
+>>>>>>
+>>>>>> I'd really like to avoid that, especially now that everything
+>>>>>> got simpler. We
+>>>>>> should define the actual locks to take instead.
+>>>>>>
+>>>>>>>
+>>>>>>>>
+>>>>>>>> Out of curiosity, what is the overhead of a spin_lock()
+>>>>>>>> that doesn't
+>>>>>>>> need to
+>>>>>>>> spin?
+>>>>>>>
+>>>>>>> I guess it's hard to tell exactly, but it is much lower on
+>>>>>>> modern x86
+>>>>>>> than what it used to be. Not sure about ARM, which is the
+>>>>>>> other
+>>>>>>> architecture important to us. I figure if there is little
+>>>>>>> cache-line
+>>>>>>> bouncing the main overhead comes from the implied barriers.
+>>>>>>>
+>>>>>>>>
+>>>>>>>>>
+>>>>>>>>> A pretty simple way that would not add much code would be
+>>>>>>>>>
+>>>>>>>>> static void gpuvm_cond_spin_lock(const struct drm_gpuvm
+>>>>>>>>> *gpuvm,
+>>>>>>>>> spinlock_t
+>>>>>>>>> *lock)
+>>>>>>>>>
+>>>>>>>>> {
+>>>>>>>>>
+>>>>>>>>>       if (!gpuvm->resv_protected_lists)
+>>>>>>>>>           spin_lock(lock);
+>>>>>>>>>
+>>>>>>>>> }
+>>>>>>>>>
+>>>>>>>>>>> For such drivers, that would require anybody calling
+>>>>>>>>>>> unlink to
+>>>>>>>>>>> hold the vm's
+>>>>>>>>>>> resv, though.
+>>>>>>>>>> In V4 I want to go back to having a dedicated lock for
+>>>>>>>>>> the GEMs
+>>>>>>>>>> gpuva list (or
+>>>>>>>>>> VM_BO list to be more precise). We can't just use the
+>>>>>>>>>> dma-resv
+>>>>>>>>>> lock for that
+>>>>>>>>>> with VM_BO abstractions, because on destruction of a
+>>>>>>>>>> VM_BO we
+>>>>>>>>>> otherwise wouldn't
+>>>>>>>>>> be allowed to already hold the dma-resv lock. That's
+>>>>>>>>>> the fix I
+>>>>>>>>>> was referring to
+>>>>>>>>>> earlier.
+>>>>>>>>>
+>>>>>>>>> Yeah, I can see the need for a dedicated lock for the
+>>>>>>>>> GEM's gpuva
+>>>>>>>>> list, but
+>>>>>>>>> holding the vm's dma-resv lock across the unlink
+>>>>>>>>> shouldn't be a
+>>>>>>>>> problem. We
+>>>>>>>>> may free the object and a pointer to the vm's resv during
+>>>>>>>>> unlink
+>>>>>>>>> but we
+>>>>>>>>> don't free the vm's resv.  It'd be a matter of ensuring
+>>>>>>>>> that any
+>>>>>>>>> calls to
+>>>>>>>>> unlink from *within* drm_gpuvm allows it to be held.
+>>>>>>>>
+>>>>>>>> Drivers calling unlink() from the fence signaling path
+>>>>>>>> can't use the
+>>>>>>>> VM's
+>>>>>>>> dma-resv lock.
+>>>>>>>
+>>>>>>> Yes, that made me a bit curious because in the current
+>>>>>>> version the code
+>>>>>>> required the object's dma_resv for unlink() which can't be
+>>>>>>> grabbed
+>>>>>>> either from the fence signaling path. So are there any
+>>>>>>> drivers actually
+>>>>>>> wanting to do that? If so, they will either need to resort to
+>>>>>>> the
+>>>>>>> current spinlock solution or they will need to call unlink
+>>>>>>> from a
+>>>>>>> workqueue item.
+>>>>>>
+>>>>>> As Boris already mentioned we have the dma-resv lock by default
+>>>>>> or a driver
+>>>>>> specific GEM gpuva lock as opt-in. Now, we can get rid of the
+>>>>>> latter.
+>>>>>>
+>>>>>>>>
+>>>>>>>> Also, what if the object is an external object? We can't
+>>>>>>>> use the VM's
+>>>>>>>> dma-resv
+>>>>>>>> lock here.
+>>>>>>>
+>>>>>>> Why? Typically (sync) unlink is only ever called from an
+>>>>>>> unbind-like
+>>>>>>> operation where it should be trivial to grab the vm's resv.
+>>>>>>> Or, for
+>>>>>>> that matter any outer lock protecting the extobj list. Rule
+>>>>>>> would be
+>>>>>>> the drm_gpuvm_bo::entry::extobj  and
+>>>>>>> drm_gpuvm_bo::entry::evict would
+>>>>>>> be protected by either the vm's dma_resv (or possibly an
+>>>>>>> outer lock in
+>>>>>>> the case of the extobj list).
+>>>>>>
+>>>>>> Outer lock wouldn't have been working for updates in the async
+>>>>>> path, but
+>>>>>> shouldn't be relevant anymore. We could use the VM's resv for
+>>>>>> that.
+>>>>>>
+>>>>>>>
+>>>>>>>>    And we can't have the GEM objs dma-resv lock held when
+>>>>>>>> calling
+>>>>>>>> unlink(), since unlink() calls drm_gpuvm_bo_put(), which if
+>>>>>>>> the
+>>>>>>>> refcount drops
+>>>>>>>> to zero calls drm_gpuvm_bo_destroy() and
+>>>>>>>> drm_gpuvm_bo_destroy() might
+>>>>>>>> drop the
+>>>>>>>> last reference of the GEM object.
+>>>>>>>
+>>>>>>> Yes, but this is a different problem as to what exactly
+>>>>>>> protects
+>>>>>>> drm_gpuvm_bo::entry::gem. Either as you suggest an internal
+>>>>>>> per bo list
+>>>>>>> lock, or if we want to keep the bo's dma_resv we need to
+>>>>>>> ensure that
+>>>>>>> the caller of dma_resv_unlock(obj->resv) actually refcounts
+>>>>>>> its obj
+>>>>>>> pointer, and doesn't implicitly rely on the gpuvm_bo's
+>>>>>>> refcount (I know
+>>>>>>> Boris didn't like that, but requiring an explicit refcount
+>>>>>>> for a
+>>>>>>> pointer you dereference unless you're under a lock that
+>>>>>>> ensures keeping
+>>>>>>> the object alive is pretty much required?) But anyway for the
+>>>>>>> drm_gpuvm_bo::entry::gem list protection (bo resv or internal
+>>>>>>> spinlock)
+>>>>>>> I don't have a strong preference.
+>>>>>>
+>>>>>> We can keep the GEM objects dma-resv lock, however as mentioned
+>>>>>> above
+>>>>>> drm_gpuva_unlink() and drm_gpuvm_bo_put() then requires both
+>>>>>> the VM's resv lock
+>>>>>> and the GEM's resv lock in case they differ.
+>>>>>>
+>>>>>
+>>>>>>>>>
+>>>>>
+>>>>
+>>>
+>>
+
