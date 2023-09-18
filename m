@@ -1,29 +1,83 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEC817A54AF
-	for <lists+nouveau@lfdr.de>; Mon, 18 Sep 2023 23:00:31 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E39FB7A54B8
+	for <lists+nouveau@lfdr.de>; Mon, 18 Sep 2023 23:02:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C3CA510E008;
-	Mon, 18 Sep 2023 21:00:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4EF9910E0B4;
+	Mon, 18 Sep 2023 21:02:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hs01.dakr.org (hs01.dk-develop.de [173.249.23.66])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3460F10E008
- for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 21:00:25 +0000 (UTC)
-Message-ID: <0906d07c-bdf5-37f5-d02c-025f329ea8b5@dakr.org>
-Date: Mon, 18 Sep 2023 23:00:12 +0200
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E237810E0B4
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 21:02:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1695070948;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=vYq9GddjfhWls7cBVEUs/koAj+ZZ9XbPFD8PuuKxtTE=;
+ b=TIOdVCHa9n2Yu/gSTZclw+dThCUOY6cx0kr5l3oSo96jiM6rrYewzwGbsL9kp+i1RFBvFu
+ g4A5g3DNXSYFyd5nc9vYV9UY1sRxwF98bjLjHltR5wXqgak2iyeYum6qYbwbymu8F60w+0
+ qZjUVjqwAaHoCpDfiVWshlb55MPd8S4=
+Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
+ [209.85.167.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-491-P7Knd80SMWGKFZHF1xdoOw-1; Mon, 18 Sep 2023 17:02:26 -0400
+X-MC-Unique: P7Knd80SMWGKFZHF1xdoOw-1
+Received: by mail-lf1-f72.google.com with SMTP id
+ 2adb3069b0e04-5009ee2287aso5841183e87.2
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Sep 2023 14:02:26 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695070945; x=1695675745;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vYq9GddjfhWls7cBVEUs/koAj+ZZ9XbPFD8PuuKxtTE=;
+ b=sLFLBY4Ts85DKpCBFU5vtZ/SfA7woo2ohbgsoGVzFxKPWRMkGqxEkook1PnwBUfEJ6
+ tDy2rQeZoMsxLKZXiL/tCyVpc1X/AR0EQuAKRFBKVOjWcuF681rb9Oc+MyhWqr5vxWvT
+ jGh6LClJLc8p2e5JhR+gFrXkn8R/1GZ9omXOFjPTzmEefQX6kDb6RuARm5lac1DrIC88
+ 6WwICl/DLzg797bVCmQuxPb1ZLR+UeqxbnyvmSgktHiir8rtJWzGl6r42bBYEx4tbxX7
+ dDA1oV3bIKP8B+3JLffG/aRydskbpic+YQWUdTGpBTT3HJVf8/4dHQL+mxp6xme/gK1t
+ 03dQ==
+X-Gm-Message-State: AOJu0YxpbTMYU1AyslRqM9Aa3q0wbllYPi85jNZYbo7kGm3nuzodoiLF
+ XA1JbMZ10RvyRSFrU4nM3Jb9it6GJf/f/QmBEEs+L0OQoghDF5HGbsWFf+ZTNxoMu8xmJuyhi1F
+ UnHB6wRCTs0i75mtgaY7Az4TXzQ==
+X-Received: by 2002:ac2:4f0a:0:b0:503:522:9ca5 with SMTP id
+ k10-20020ac24f0a000000b0050305229ca5mr6740095lfr.27.1695070945121; 
+ Mon, 18 Sep 2023 14:02:25 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH3ZS8O7wyj71x9Z/hnKf+yermslQa2LZH54c8YO2xFrV/cd58DQesK7/34LlmnHz6X6yU0Ig==
+X-Received: by 2002:ac2:4f0a:0:b0:503:522:9ca5 with SMTP id
+ k10-20020ac24f0a000000b0050305229ca5mr6740085lfr.27.1695070944766; 
+ Mon, 18 Sep 2023 14:02:24 -0700 (PDT)
+Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
+ ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
+ by smtp.gmail.com with ESMTPSA id
+ d4-20020a056402516400b0052fc0832e08sm6602084ede.1.2023.09.18.14.02.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Sep 2023 14:02:24 -0700 (PDT)
+Message-ID: <568006bf-c380-87b4-057e-26205d7484af@redhat.com>
+Date: Mon, 18 Sep 2023 23:02:20 +0200
 MIME-Version: 1.0
-Content-Language: en-US
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
 To: Ben Skeggs <skeggsb@gmail.com>, nouveau@lists.freedesktop.org
 References: <20230918202149.4343-1-skeggsb@gmail.com>
- <20230918202149.4343-5-skeggsb@gmail.com>
-From: Danilo Krummrich <me@dakr.org>
-In-Reply-To: <20230918202149.4343-5-skeggsb@gmail.com>
+ <20230918202149.4343-9-skeggsb@gmail.com>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <20230918202149.4343-9-skeggsb@gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH 04/44] drm/nouveau/gsp: prepare for GSP-RM
+Subject: Re: [Nouveau] [PATCH 08/44] drm/nouveau/devinit/tu102-: prepare for
+ GSP-RM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -42,334 +96,96 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 On 9/18/23 22:21, Ben Skeggs wrote:
 > From: Ben Skeggs <bskeggs@redhat.com>
 > 
-> - move TOP after GSP, so we can disable TOP if GSP is in use
-> - provide plumbing to support falcon-only and GSP-RM paths
-> - provide a method for subdevs to detect GSP-RM paths
-> - split tu102/tu116/ga100 paths from gv100, which can't support GSP-RM
+> - add R535 implementation of DEVINIT, we need some of this for boot
+> - add display disable fuse for ga100-
 > 
 > Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 > ---
->   .../drm/nouveau/include/nvkm/core/layout.h    |  2 +-
->   .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |  9 ++++
->   .../gpu/drm/nouveau/nvkm/engine/device/base.c | 11 +++--
->   .../gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild    |  3 ++
->   .../gpu/drm/nouveau/nvkm/subdev/gsp/base.c    | 47 +++++++++++++++++--
->   .../gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c   | 35 ++++++++++++++
->   .../gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c   |  8 +---
->   .../gpu/drm/nouveau/nvkm/subdev/gsp/gv100.c   |  4 +-
->   .../gpu/drm/nouveau/nvkm/subdev/gsp/priv.h    | 17 +++++--
->   .../gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c   | 35 ++++++++++++++
->   .../gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c   | 35 ++++++++++++++
->   11 files changed, 182 insertions(+), 24 deletions(-)
->   create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c
->   create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
->   create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c
+>   .../drm/nouveau/nvkm/subdev/devinit/Kbuild    |  2 +
+>   .../drm/nouveau/nvkm/subdev/devinit/ga100.c   | 15 ++++++
+>   .../drm/nouveau/nvkm/subdev/devinit/priv.h    |  3 ++
+>   .../drm/nouveau/nvkm/subdev/devinit/r535.c    | 51 +++++++++++++++++++
+>   .../drm/nouveau/nvkm/subdev/devinit/tu102.c   |  4 ++
+>   5 files changed, 75 insertions(+)
+>   create mode 100644 drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c
 > 
-> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/layout.h b/drivers/gpu/drm/nouveau/include/nvkm/core/layout.h
-> index 6af0352a4873..30c17db483cb 100644
-> --- a/drivers/gpu/drm/nouveau/include/nvkm/core/layout.h
-> +++ b/drivers/gpu/drm/nouveau/include/nvkm/core/layout.h
-> @@ -1,6 +1,6 @@
->   /* SPDX-License-Identifier: MIT */
-> -NVKM_LAYOUT_ONCE(NVKM_SUBDEV_TOP     , struct nvkm_top     ,      top)
->   NVKM_LAYOUT_ONCE(NVKM_SUBDEV_GSP     , struct nvkm_gsp     ,      gsp)
-> +NVKM_LAYOUT_ONCE(NVKM_SUBDEV_TOP     , struct nvkm_top     ,      top)
->   NVKM_LAYOUT_ONCE(NVKM_SUBDEV_VFN     , struct nvkm_vfn     ,      vfn)
->   NVKM_LAYOUT_ONCE(NVKM_SUBDEV_PCI     , struct nvkm_pci     ,      pci)
->   NVKM_LAYOUT_ONCE(NVKM_SUBDEV_VBIOS   , struct nvkm_bios    ,     bios)
-> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> index 72619d7df73e..688270f62e09 100644
-> --- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> +++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> @@ -11,6 +11,15 @@ struct nvkm_gsp {
->   	struct nvkm_falcon falcon;
->   };
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/Kbuild
+> index d1abb64841da..5f97bffca979 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/Kbuild
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/Kbuild
+> @@ -16,3 +16,5 @@ nvkm-y += nvkm/subdev/devinit/gm200.o
+>   nvkm-y += nvkm/subdev/devinit/gv100.o
+>   nvkm-y += nvkm/subdev/devinit/tu102.o
+>   nvkm-y += nvkm/subdev/devinit/ga100.o
+> +
+> +nvkm-y += nvkm/subdev/devinit/r535.o
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/ga100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/ga100.c
+> index 6b280b05c4ca..5f0b12a1fc38 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/ga100.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/ga100.c
+> @@ -24,6 +24,7 @@
+>   #include <subdev/bios.h>
+>   #include <subdev/bios/pll.h>
+>   #include <subdev/clk/pll.h>
+> +#include <subdev/gsp.h>
 >   
-> +static inline bool
-> +nvkm_gsp_rm(struct nvkm_gsp *gsp)
-> +{
-> +	return false;
-> +}
-> +
->   int gv100_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
-> +int tu102_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
-> +int tu116_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
-> +int ga100_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
->   int ga102_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_gsp **);
->   #endif
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-> index 1c81e5b34d29..395702870872 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-> @@ -2408,7 +2408,7 @@ nv162_chipset = {
->   	.fb       = { 0x00000001, tu102_fb_new },
->   	.fuse     = { 0x00000001, gm107_fuse_new },
->   	.gpio     = { 0x00000001, gk104_gpio_new },
-> -	.gsp      = { 0x00000001, gv100_gsp_new },
-> +	.gsp      = { 0x00000001, tu102_gsp_new },
->   	.i2c      = { 0x00000001, gm200_i2c_new },
->   	.imem     = { 0x00000001, nv50_instmem_new },
->   	.ltc      = { 0x00000001, gp102_ltc_new },
-> @@ -2443,7 +2443,7 @@ nv164_chipset = {
->   	.fb       = { 0x00000001, tu102_fb_new },
->   	.fuse     = { 0x00000001, gm107_fuse_new },
->   	.gpio     = { 0x00000001, gk104_gpio_new },
-> -	.gsp      = { 0x00000001, gv100_gsp_new },
-> +	.gsp      = { 0x00000001, tu102_gsp_new },
->   	.i2c      = { 0x00000001, gm200_i2c_new },
->   	.imem     = { 0x00000001, nv50_instmem_new },
->   	.ltc      = { 0x00000001, gp102_ltc_new },
-> @@ -2478,7 +2478,7 @@ nv166_chipset = {
->   	.fb       = { 0x00000001, tu102_fb_new },
->   	.fuse     = { 0x00000001, gm107_fuse_new },
->   	.gpio     = { 0x00000001, gk104_gpio_new },
-> -	.gsp      = { 0x00000001, gv100_gsp_new },
-> +	.gsp      = { 0x00000001, tu102_gsp_new },
->   	.i2c      = { 0x00000001, gm200_i2c_new },
->   	.imem     = { 0x00000001, nv50_instmem_new },
->   	.ltc      = { 0x00000001, gp102_ltc_new },
-> @@ -2513,7 +2513,7 @@ nv167_chipset = {
->   	.fb       = { 0x00000001, tu102_fb_new },
->   	.fuse     = { 0x00000001, gm107_fuse_new },
->   	.gpio     = { 0x00000001, gk104_gpio_new },
-> -	.gsp      = { 0x00000001, gv100_gsp_new },
-> +	.gsp      = { 0x00000001, tu116_gsp_new },
->   	.i2c      = { 0x00000001, gm200_i2c_new },
->   	.imem     = { 0x00000001, nv50_instmem_new },
->   	.ltc      = { 0x00000001, gp102_ltc_new },
-> @@ -2548,7 +2548,7 @@ nv168_chipset = {
->   	.fb       = { 0x00000001, tu102_fb_new },
->   	.fuse     = { 0x00000001, gm107_fuse_new },
->   	.gpio     = { 0x00000001, gk104_gpio_new },
-> -	.gsp      = { 0x00000001, gv100_gsp_new },
-> +	.gsp      = { 0x00000001, tu116_gsp_new },
->   	.i2c      = { 0x00000001, gm200_i2c_new },
->   	.imem     = { 0x00000001, nv50_instmem_new },
->   	.ltc      = { 0x00000001, gp102_ltc_new },
-> @@ -2580,6 +2580,7 @@ nv170_chipset = {
->   	.fault    = { 0x00000001, tu102_fault_new },
->   	.fb       = { 0x00000001, ga100_fb_new },
->   	.gpio     = { 0x00000001, gk104_gpio_new },
-> +	.gsp      = { 0x00000001, ga100_gsp_new },
->   	.i2c      = { 0x00000001, gm200_i2c_new },
->   	.imem     = { 0x00000001, nv50_instmem_new },
->   	.mc       = { 0x00000001, ga100_mc_new },
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
-> index 7f61a1ed158b..4b497ad9bb91 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/Kbuild
-> @@ -1,4 +1,7 @@
->   # SPDX-License-Identifier: MIT
->   nvkm-y += nvkm/subdev/gsp/base.o
->   nvkm-y += nvkm/subdev/gsp/gv100.o
-> +nvkm-y += nvkm/subdev/gsp/tu102.o
-> +nvkm-y += nvkm/subdev/gsp/tu116.o
-> +nvkm-y += nvkm/subdev/gsp/ga100.o
->   nvkm-y += nvkm/subdev/gsp/ga102.o
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
-> index 591ac95c2669..9424d104f2be 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
-> @@ -20,15 +20,48 @@
->    * OTHER DEALINGS IN THE SOFTWARE.
->    */
->   #include "priv.h"
-> -#include <core/falcon.h>
-> -#include <core/firmware.h>
-> -#include <subdev/acr.h>
-> -#include <subdev/top.h>
-> +
-> +static int
-> +nvkm_gsp_fini(struct nvkm_subdev *subdev, bool suspend)
-> +{
-> +	struct nvkm_gsp *gsp = nvkm_gsp(subdev);
-> +
-> +	if (!gsp->func->fini)
-> +		return 0;
-> +
-> +	return gsp->func->fini(gsp, suspend);
-> +}
-> +
-> +static int
-> +nvkm_gsp_init(struct nvkm_subdev *subdev)
-> +{
-> +	struct nvkm_gsp *gsp = nvkm_gsp(subdev);
-> +
-> +	if (!gsp->func->init)
-> +		return 0;
-> +
-> +	return gsp->func->init(gsp);
-> +}
-> +
-> +static int
-> +nvkm_gsp_oneinit(struct nvkm_subdev *subdev)
-> +{
-> +	struct nvkm_gsp *gsp = nvkm_gsp(subdev);
-> +
-> +	if (!gsp->func->oneinit)
-> +		return 0;
-> +
-> +	return gsp->func->oneinit(gsp);
-> +}
->   
->   static void *
->   nvkm_gsp_dtor(struct nvkm_subdev *subdev)
->   {
->   	struct nvkm_gsp *gsp = nvkm_gsp(subdev);
-> +
-> +	if (gsp->func && gsp->func->dtor)
-> +		gsp->func->dtor(gsp);
-> +
->   	nvkm_falcon_dtor(&gsp->falcon);
->   	return gsp;
+>   static int
+>   ga100_devinit_pll_set(struct nvkm_devinit *init, u32 type, u32 freq)
+> @@ -62,8 +63,19 @@ ga100_devinit_pll_set(struct nvkm_devinit *init, u32 type, u32 freq)
+>   	return ret;
 >   }
-> @@ -36,6 +69,9 @@ nvkm_gsp_dtor(struct nvkm_subdev *subdev)
->   static const struct nvkm_subdev_func
->   nvkm_gsp = {
->   	.dtor = nvkm_gsp_dtor,
-> +	.oneinit = nvkm_gsp_oneinit,
-> +	.init = nvkm_gsp_init,
-> +	.fini = nvkm_gsp_fini,
->   };
 >   
->   int
-> @@ -55,5 +91,6 @@ nvkm_gsp_new_(const struct nvkm_gsp_fwif *fwif, struct nvkm_device *device,
->   
->   	gsp->func = fwif->func;
->   
-> -	return nvkm_falcon_ctor(gsp->func->flcn, &gsp->subdev, gsp->subdev.name, 0, &gsp->falcon);
-> +	return nvkm_falcon_ctor(gsp->func->flcn, &gsp->subdev, gsp->subdev.name, 0x110000,
-
-Is this the GSP Falcon base register offset?
-
-> +				&gsp->falcon);
->   }
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c
-> new file mode 100644
-> index 000000000000..73c3676d15a6
-> --- /dev/null
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga100.c
-> @@ -0,0 +1,35 @@
-> +/*
-> + * Copyright 2022 Red Hat Inc.
-> + *
-> + * Permission is hereby granted, free of charge, to any person obtaining a
-> + * copy of this software and associated documentation files (the "Software"),
-> + * to deal in the Software without restriction, including without limitation
-> + * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-> + * and/or sell copies of the Software, and to permit persons to whom the
-> + * Software is furnished to do so, subject to the following conditions:
-> + *
-> + * The above copyright notice and this permission notice shall be included in
-> + * all copies or substantial portions of the Software.
-> + *
-> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-> + * THE COPYRIGHT HOLDER(S) OR AUTHOR(S) BE LIABLE FOR ANY CLAIM, DAMAGES OR
-> + * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-> + * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-> + * OTHER DEALINGS IN THE SOFTWARE.
-> + */
-
-Should probably prefer SPDX licence tags here, below and in quite a few other places.
-
-> +#include "priv.h"
-> +
-> +static struct nvkm_gsp_fwif
-> +ga100_gsps[] = {
-> +	{ -1, gv100_gsp_nofw, &gv100_gsp },
-> +	{}
-> +};
-> +
-> +int
-> +ga100_gsp_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
-> +	      struct nvkm_gsp **pgsp)
+> +static void
+> +ga100_devinit_disable(struct nvkm_devinit *init)
 > +{
-> +	return nvkm_gsp_new_(ga100_gsps, device, type, inst, pgsp);
+> +	struct nvkm_device *device = init->subdev.device;
+> +	u32 r820c04 = nvkm_rd32(device, 0x820c04);
+
+I'd probably prefer to use NV_FUSE_STATUS_OPT_DISPLAY or a custom define.
+'r820c04' could just be data, reg, val or similar.
+
+> +
+> +	if (r820c04 & 0x00000001)
+> +		nvkm_subdev_disable(device, NVKM_ENGINE_DISP, 0);
 > +}
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c
-> index a3996ceca995..ec6380f8bac5 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/ga102.c
-> @@ -39,15 +39,9 @@ ga102_gsp = {
->   	.flcn = &ga102_gsp_flcn,
->   };
->   
-> -static int
-> -ga102_gsp_nofw(struct nvkm_gsp *gsp, int ver, const struct nvkm_gsp_fwif *fwif)
-> -{
-> -	return 0;
-> -}
-> -
->   static struct nvkm_gsp_fwif
->   ga102_gsps[] = {
-> -	{ -1, ga102_gsp_nofw, &ga102_gsp },
-> +	{ -1, gv100_gsp_nofw, &ga102_gsp },
->   	{}
->   };
->   
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/gv100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/gv100.c
-> index da6a809cd317..62d9289bcaa5 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/gv100.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/gv100.c
-> @@ -34,12 +34,12 @@ gv100_gsp_flcn = {
->   	.dmem_pio = &gm200_flcn_dmem_pio,
->   };
->   
-> -static const struct nvkm_gsp_func
-> +const struct nvkm_gsp_func
->   gv100_gsp = {
->   	.flcn = &gv100_gsp_flcn,
->   };
->   
-> -static int
-> +int
->   gv100_gsp_nofw(struct nvkm_gsp *gsp, int ver, const struct nvkm_gsp_fwif *fwif)
+> +
+>   static const struct nvkm_devinit_func
+>   ga100_devinit = {
+> +	.disable = ga100_devinit_disable,
+>   	.init = nv50_devinit_init,
+>   	.post = tu102_devinit_post,
+>   	.pll_set = ga100_devinit_pll_set,
+> @@ -73,5 +85,8 @@ int
+>   ga100_devinit_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
+>   		  struct nvkm_devinit **pinit)
 >   {
->   	return 0;
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
-> index 89749a40203c..351c959476ec 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/priv.h
-> @@ -4,16 +4,25 @@
->   #include <subdev/gsp.h>
->   enum nvkm_acr_lsf_id;
+> +	if (nvkm_gsp_rm(device->gsp))
+> +		return r535_devinit_new(&ga100_devinit, device, type, inst, pinit);
+> +
+>   	return nv50_devinit_new_(&ga100_devinit, device, type, inst, pinit);
+>   }
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/priv.h
+> index a648482d06e9..06bbfdcc788c 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/priv.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/priv.h
+> @@ -4,6 +4,9 @@
+>   #define nvkm_devinit(p) container_of((p), struct nvkm_devinit, subdev)
+>   #include <subdev/devinit.h>
 >   
-> -struct nvkm_gsp_func {
-> -	const struct nvkm_falcon_func *flcn;
-> -};
-> -
->   struct nvkm_gsp_fwif {
->   	int version;
->   	int (*load)(struct nvkm_gsp *, int ver, const struct nvkm_gsp_fwif *);
->   	const struct nvkm_gsp_func *func;
->   };
->   
-> +int gv100_gsp_nofw(struct nvkm_gsp *, int, const struct nvkm_gsp_fwif *);
+> +int r535_devinit_new(const struct nvkm_devinit_func *,
+> +		     struct nvkm_device *, enum nvkm_subdev_type, int, struct nvkm_devinit **);
 > +
-> +struct nvkm_gsp_func {
-> +	const struct nvkm_falcon_func *flcn;
-> +
-> +	void (*dtor)(struct nvkm_gsp *);
-> +	int (*oneinit)(struct nvkm_gsp *);
-> +	int (*init)(struct nvkm_gsp *);
-> +	int (*fini)(struct nvkm_gsp *, bool suspend);
-> +};
-> +
->   int nvkm_gsp_new_(const struct nvkm_gsp_fwif *, struct nvkm_device *, enum nvkm_subdev_type, int,
->   		  struct nvkm_gsp **);
-> +
-> +extern const struct nvkm_gsp_func gv100_gsp;
->   #endif
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
+>   struct nvkm_devinit_func {
+>   	void *(*dtor)(struct nvkm_devinit *);
+>   	void (*preinit)(struct nvkm_devinit *);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c
 > new file mode 100644
-> index 000000000000..be3c4deafaaa
+> index 000000000000..666eb93b1742
 > --- /dev/null
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu102.c
-> @@ -0,0 +1,35 @@
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c
+> @@ -0,0 +1,51 @@
 > +/*
-> + * Copyright 2022 Red Hat Inc.
+> + * Copyright 2023 Red Hat Inc.
 > + *
 > + * Permission is hereby granted, free of charge, to any person obtaining a
 > + * copy of this software and associated documentation files (the "Software"),
@@ -388,59 +204,55 @@ Should probably prefer SPDX licence tags here, below and in quite a few other pl
 > + * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 > + * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 > + * OTHER DEALINGS IN THE SOFTWARE.
-> + */
-> +#include "priv.h"
+> + */> +#include "nv50.h"
 > +
-> +static struct nvkm_gsp_fwif
-> +tu102_gsps[] = {
-> +	{ -1, gv100_gsp_nofw, &gv100_gsp },
-> +	{}
-> +};
+> +static void *
+> +r535_devinit_dtor(struct nvkm_devinit *devinit)
+> +{
+> +	kfree(devinit->func);
+> +	return devinit;
+> +}
 > +
 > +int
-> +tu102_gsp_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
-> +	      struct nvkm_gsp **pgsp)
+> +r535_devinit_new(const struct nvkm_devinit_func *hw,
+> +		 struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
+> +		 struct nvkm_devinit **pdevinit)
 > +{
-> +	return nvkm_gsp_new_(tu102_gsps, device, type, inst, pgsp);
-> +}
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c
-> new file mode 100644
-> index 000000000000..d4a94c115b1b
-> --- /dev/null
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/tu116.c
-> @@ -0,0 +1,35 @@
-> +/*
-> + * Copyright 2022 Red Hat Inc.
-> + *
-> + * Permission is hereby granted, free of charge, to any person obtaining a
-> + * copy of this software and associated documentation files (the "Software"),
-> + * to deal in the Software without restriction, including without limitation
-> + * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-> + * and/or sell copies of the Software, and to permit persons to whom the
-> + * Software is furnished to do so, subject to the following conditions:
-> + *
-> + * The above copyright notice and this permission notice shall be included in
-> + * all copies or substantial portions of the Software.
-> + *
-> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-> + * THE COPYRIGHT HOLDER(S) OR AUTHOR(S) BE LIABLE FOR ANY CLAIM, DAMAGES OR
-> + * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-> + * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-> + * OTHER DEALINGS IN THE SOFTWARE.
-> + */
-> +#include "priv.h"
+> +	struct nvkm_devinit_func *rm;
+> +	int ret;
 > +
-> +static struct nvkm_gsp_fwif
-> +tu116_gsps[] = {
-> +	{ -1, gv100_gsp_nofw, &gv100_gsp },
-> +	{}
-> +};
+> +	if (!(rm = kzalloc(sizeof(*rm), GFP_KERNEL)))
+> +		return -ENOMEM;
 > +
-> +int
-> +tu116_gsp_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
-> +	      struct nvkm_gsp **pgsp)
-> +{
-> +	return nvkm_gsp_new_(tu116_gsps, device, type, inst, pgsp);
+> +	rm->dtor = r535_devinit_dtor;
+> +	rm->post = hw->post;
+> +	rm->disable = hw->disable;
+> +
+> +	ret = nv50_devinit_new_(rm, device, type, inst, pdevinit);
+> +	if (ret)
+> +		kfree(rm);
+> +
+> +	return ret;
 > +}
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/tu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/tu102.c
+> index 40997ad1d101..f406b1525a4a 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/tu102.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/tu102.c
+> @@ -24,6 +24,7 @@
+>   #include <subdev/bios.h>
+>   #include <subdev/bios/pll.h>
+>   #include <subdev/clk/pll.h>
+> +#include <subdev/gsp.h>
+>   
+>   static int
+>   tu102_devinit_pll_set(struct nvkm_devinit *init, u32 type, u32 freq)
+> @@ -100,5 +101,8 @@ int
+>   tu102_devinit_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
+>   		  struct nvkm_devinit **pinit)
+>   {
+> +	if (nvkm_gsp_rm(device->gsp))
+> +		return r535_devinit_new(&tu102_devinit, device, type, inst, pinit);
+> +
+>   	return nv50_devinit_new_(&tu102_devinit, device, type, inst, pinit);
+>   }
+
