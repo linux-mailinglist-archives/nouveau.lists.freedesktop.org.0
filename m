@@ -2,58 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E644B7A5702
-	for <lists+nouveau@lfdr.de>; Tue, 19 Sep 2023 03:34:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D9DB7A573F
+	for <lists+nouveau@lfdr.de>; Tue, 19 Sep 2023 04:12:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F359210E38F;
-	Tue, 19 Sep 2023 01:34:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5E38C10E093;
+	Tue, 19 Sep 2023 02:12:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1BAF410E388;
- Tue, 19 Sep 2023 01:34:12 +0000 (UTC)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-986d8332f50so698675966b.0; 
- Mon, 18 Sep 2023 18:34:11 -0700 (PDT)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A263A10E093;
+ Tue, 19 Sep 2023 02:12:37 +0000 (UTC)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-9a9d82d73f9so641139266b.3; 
+ Mon, 18 Sep 2023 19:12:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695087250; x=1695692050; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1695089556; x=1695694356; darn=lists.freedesktop.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UUAxPmCBMOuqnkmkQnHd5T3QJ8jY1TpkFSSePjQMDNs=;
- b=WNxMzMjMl3hKq6id9YB5+DTHexGjdXp7I3lt7193+ro9ZdkiXUeAUtCBRnvUnf2WKg
- 53xmzdMXt8Lr8O+fmVHveu1pgxsKfucZHtEoQeMa/pshzQ2vfsH4+1KBKTT32cxuleUR
- LV6kF6ijMTg0SBJzHXE87+7LrR9TxyRdy08Saiuu1OZg0/qoL004j+tz17RaOa91DnJI
- QcJTNDipmTbAzieOKzmPdLwiWjBHlVTEWLrSu6DkJQ9KSxa6VMCqlxzXoeAwYITmEgJR
- 0LpWuLHsU9jJucjmv7W9ozPscVgIbWNe5nZR2eCATPXozOCCmv0V3jNlmhV1tLjHJB1E
- 5JnA==
+ bh=40NqUZgTce6juBv+5wOCuwqouQ4QSlT9XQeJDB/bLPI=;
+ b=HoClTTVbnJ4iCt7zmpkzks5W9BwlrAJ1LbRBo+BbPnMxBjLWS37Ah9n0ZJeO3gRdG9
+ NtDGnKhQ0EaC+u2mMte7yDjCShtEXr9LDtDLaDft6FrKn33sfaPW7ro7yK80Q7Nq/3ee
+ 6uWMK4YnEbjUbDsWGOBq2Lm7uLZFl2Y4AiiPFnO5uYMiaO1S+lHp6BgRVX6rk9GPWwTT
+ XouNlNR5cwxLZ9Mz4XKSvqx8Od77aeXr0eef/IwBkc/wui/ipKpu41jrfLTtW0pQkBDd
+ w8U0rIYbUxSFy0MvhtI6eZ+x4OYitZNm+UzBSqDpN3mXI3DZgjulwW3pSUs98xzXc7qn
+ 7gxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695087250; x=1695692050;
+ d=1e100.net; s=20230601; t=1695089556; x=1695694356;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UUAxPmCBMOuqnkmkQnHd5T3QJ8jY1TpkFSSePjQMDNs=;
- b=rOFiuDNRv7/gbx0YEynaxe7yuEagfYvOwmNRuFpgg7b1T8cPqVpqoGFU5MCF64CFxu
- nFUvaI1EIlsAc4Xypgdk+JJ1qmdPIOVdGk/q5m1XB7cQIIuz0R8x0HruSGqQB4j2HNed
- X7qsLeygkpuUZguo+8mkeOymkRWZCYkW4wa5b3k+dXxLMFIJni/XH56lfW5HMfYoaFE+
- FbXx0EZAXABbc/bd6rke3jR5M9YG0I/tY61Dmcpkh5rTyRN8zMtfEmMZRRIVgCa0T0VU
- maBWwMZRyubFIe5VC5q/E7mU1PEbPqHhf5R/LUkErxJROLX4mcNW//9KTTZpSmQOLlUP
- rDPw==
-X-Gm-Message-State: AOJu0Yydff2FniqFf6oVA2LjiAdGAuNW8YKScVSr0IOjOEe16z7zT8mI
- av2dbqp2xo0lM+MG7Q0SaWrF9QxQsYwkrhhwfzU=
-X-Google-Smtp-Source: AGHT+IEWEtULaociDohtB1JgqvShTVraFOt8WqGFtPWe6Zq6yxpwx4Tzfvw8q5FApkB8GUtUvwKxlxLrPzEOf+y3IjQ=
-X-Received: by 2002:a17:907:ca29:b0:9ad:e389:4bf5 with SMTP id
- uk41-20020a170907ca2900b009ade3894bf5mr6607948ejc.3.1695087250230; Mon, 18
- Sep 2023 18:34:10 -0700 (PDT)
+ bh=40NqUZgTce6juBv+5wOCuwqouQ4QSlT9XQeJDB/bLPI=;
+ b=lGbT2LXnNnYw8D7t+Z68h2H1xCJsvW79URVDmNHNxdjJQ3U1mWftkV03q/iZdkf/TE
+ WzhMxBkBMpyK2RP0SFQu+eDNXvQO0HGhhoucDGGhsh01+rNPKXKVXplez5R7bNZbCWl5
+ 5ln/9+X0Y+N4eFZDys6KjgRp+hwx91WaJRcArbaKVlh5nVH6shyKpoHaFXKWqDFaLXi6
+ cvXDjXGp8RI003GTuzBKhjzEdhVc8a3WfeW1YCXsYykMRiz0pvxo5vPryPT5LATNkk6c
+ loOQV+dnYzyjf/40IT0BeABzEeLneoc2vQqWQRSAWGw8QH9kEQRG/6/2cDABp7yqvVxs
+ srRw==
+X-Gm-Message-State: AOJu0Yxz6ib46HoEEEhPDNaQ97piDWSHwNa8O3JBgnKDw57gfBYHAtUO
+ BVQqljEVwuwx6fuf7dz3FDuTVhnRmdiJrpumfNk=
+X-Google-Smtp-Source: AGHT+IHovgGWywuQrz9JuMTR3KuK5p0DftEIeDiu9firG24pkZrQ0WJl9g3PB7XZfMhFeU3sC3YMZlcFc/EQN/oL6no=
+X-Received: by 2002:a17:906:8a4c:b0:9a1:c3ae:b014 with SMTP id
+ gx12-20020a1709068a4c00b009a1c3aeb014mr7720042ejc.20.1695089556002; Mon, 18
+ Sep 2023 19:12:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <CACAvsv6c78-K4UQ-vduBoYCqAsQ9Xn2XPzAyJY8A_8EAhv8Vgw@mail.gmail.com>
-In-Reply-To: <CACAvsv6c78-K4UQ-vduBoYCqAsQ9Xn2XPzAyJY8A_8EAhv8Vgw@mail.gmail.com>
+References: <20230916011501.15813-1-dakr@redhat.com>
+In-Reply-To: <20230916011501.15813-1-dakr@redhat.com>
 From: Dave Airlie <airlied@gmail.com>
-Date: Tue, 19 Sep 2023 11:33:58 +1000
-Message-ID: <CAPM=9txPwQEoaiSJKToVKgqPDDVz9DcOs_-20V8BLkh1mCeb3g@mail.gmail.com>
-To: Ben Skeggs <skeggsb@gmail.com>
+Date: Tue, 19 Sep 2023 12:12:24 +1000
+Message-ID: <CAPM=9tx3y22Q8LTz25j_UOebaXtNG2RTwiTFXdWAJmVChO6yMA@mail.gmail.com>
+To: Danilo Krummrich <dakr@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] Stepping away.
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: fence: fix type cast warning in
+ nouveau_fence_emit()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,38 +66,46 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: ML nouveau <nouveau@lists.freedesktop.org>,
- dri-devel <dri-devel@lists.freedesktop.org>
+Cc: nouveau@lists.freedesktop.org, kernel test robot <lkp@intel.com>,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Sat, 16 Sept 2023 at 11:15, Danilo Krummrich <dakr@redhat.com> wrote:
 >
-> As you may have gathered from the MAINTAINERS patch I just sent out, I
-> have resigned from my position at Red Hat, and will be stepping back
-> from nouveau development.
+> Fix the following warning.
 >
-> This is a personal decision that I've been mulling over for a number
-> of years now, and I feel that with GSP-RM greatly simplifying support
-> of future HW, and the community being built around NVK, that things
-> are in good hands and this is the right time for me to take some time
-> away to explore other avenues.
+>   drivers/gpu/drm/nouveau/nouveau_fence.c:210:45: sparse: sparse:
+>   incorrect type in initializer (different address spaces)
+>   @@     expected struct nouveau_channel *chan
+>   @@     got struct nouveau_channel [noderef] __rcu *channel
+
+Reviewed-by: Dave Airlie <airlied@redhat.com>
 >
-> I still have a personal system with an RTX 4070, which I've been using
-> the nouveau GSP-RM code on for the past couple of weeks, so chances
-> are I'll be poking my nose in every so often :)
+> We're just about to emit the fence, there is nothing to protect against
+> yet, hence it is safe to just cast __rcu away.
 >
-> I wish everyone the best, and look forward to seeing the progress you
-> all make on nouveau in the future.
-
-With upstream maintainer hat,
-
-Thanks for all the work over the years, Cambridge XDS 2007, and Sydney
-LCA 2007 were quite the era ago when you started down this road, and
-you will probably remain the greatest single authority on NVIDIA
-hardware for many years to come,
-
-I'm cc'ing dri-devel for wider coverage, we do have some contingencies
-in place, which we will roll out over next few days, nouveau will
-continue with the headstart Ben has given us with the GSP work.
-
-Dave.
+> Reported-by: kernel test robot <lkp@intel.com>
+> Closes: https://lore.kernel.org/oe-kbuild-all/202309140340.BwKXzaDx-lkp@intel.com/
+> Fixes: 978474dc8278 ("drm/nouveau: fence: fix undefined fence state after emit")
+> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_fence.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> index 61d9e70da9fd..ca762ea55413 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> @@ -207,7 +207,7 @@ nouveau_fence_context_new(struct nouveau_channel *chan, struct nouveau_fence_cha
+>  int
+>  nouveau_fence_emit(struct nouveau_fence *fence)
+>  {
+> -       struct nouveau_channel *chan = fence->channel;
+> +       struct nouveau_channel *chan = unrcu_pointer(fence->channel);
+>         struct nouveau_fence_chan *fctx = chan->fence;
+>         struct nouveau_fence_priv *priv = (void*)chan->drm->fence;
+>         int ret;
+> --
+> 2.41.0
+>
