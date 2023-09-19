@@ -1,60 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D9DB7A573F
-	for <lists+nouveau@lfdr.de>; Tue, 19 Sep 2023 04:12:42 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 643207A5743
+	for <lists+nouveau@lfdr.de>; Tue, 19 Sep 2023 04:13:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5E38C10E093;
-	Tue, 19 Sep 2023 02:12:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CBA9D10E1FC;
+	Tue, 19 Sep 2023 02:13:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A263A10E093;
- Tue, 19 Sep 2023 02:12:37 +0000 (UTC)
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-9a9d82d73f9so641139266b.3; 
- Mon, 18 Sep 2023 19:12:37 -0700 (PDT)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A62CF10E1FC;
+ Tue, 19 Sep 2023 02:13:52 +0000 (UTC)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-523100882f2so6578304a12.2; 
+ Mon, 18 Sep 2023 19:13:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695089556; x=1695694356; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1695089631; x=1695694431; darn=lists.freedesktop.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=40NqUZgTce6juBv+5wOCuwqouQ4QSlT9XQeJDB/bLPI=;
- b=HoClTTVbnJ4iCt7zmpkzks5W9BwlrAJ1LbRBo+BbPnMxBjLWS37Ah9n0ZJeO3gRdG9
- NtDGnKhQ0EaC+u2mMte7yDjCShtEXr9LDtDLaDft6FrKn33sfaPW7ro7yK80Q7Nq/3ee
- 6uWMK4YnEbjUbDsWGOBq2Lm7uLZFl2Y4AiiPFnO5uYMiaO1S+lHp6BgRVX6rk9GPWwTT
- XouNlNR5cwxLZ9Mz4XKSvqx8Od77aeXr0eef/IwBkc/wui/ipKpu41jrfLTtW0pQkBDd
- w8U0rIYbUxSFy0MvhtI6eZ+x4OYitZNm+UzBSqDpN3mXI3DZgjulwW3pSUs98xzXc7qn
- 7gxA==
+ bh=8enow6g+/RJmfm+Tb3h+OWjZ+y5LOoFSVEtB17XBSXQ=;
+ b=KoYqNB26NPDiWXhPeLqKAXhV0wKNjcohTxeQtzpSCcNqFiO4ELd00WPTuG4IzmJ9MX
+ zNY1rA0r9QPMyNWgLkWkllhQqGNjhiS2Vt6ZBnVRXQkMLyMGrsz01B/u7oXTSEFZesW+
+ odOzCaN9hSlPvw5vf38IStGC41muWFUj7IYtpOfbisAi3DNENUVOlNnEfrqWxbpr/+y0
+ A2ECQCQAmbBkKWWHX/1/Y464I4tP4t12PfIpTyR+R3ce12bzavrm/TQZwyPfu5k1wzby
+ /yfS3GlcQH01bGliN16GR5bUwdQnZVzLpPYYOlS5VBcT0wSlsYEZ9FcQivEQeoE6oOMA
+ WhoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695089556; x=1695694356;
+ d=1e100.net; s=20230601; t=1695089631; x=1695694431;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=40NqUZgTce6juBv+5wOCuwqouQ4QSlT9XQeJDB/bLPI=;
- b=lGbT2LXnNnYw8D7t+Z68h2H1xCJsvW79URVDmNHNxdjJQ3U1mWftkV03q/iZdkf/TE
- WzhMxBkBMpyK2RP0SFQu+eDNXvQO0HGhhoucDGGhsh01+rNPKXKVXplez5R7bNZbCWl5
- 5ln/9+X0Y+N4eFZDys6KjgRp+hwx91WaJRcArbaKVlh5nVH6shyKpoHaFXKWqDFaLXi6
- cvXDjXGp8RI003GTuzBKhjzEdhVc8a3WfeW1YCXsYykMRiz0pvxo5vPryPT5LATNkk6c
- loOQV+dnYzyjf/40IT0BeABzEeLneoc2vQqWQRSAWGw8QH9kEQRG/6/2cDABp7yqvVxs
- srRw==
-X-Gm-Message-State: AOJu0Yxz6ib46HoEEEhPDNaQ97piDWSHwNa8O3JBgnKDw57gfBYHAtUO
- BVQqljEVwuwx6fuf7dz3FDuTVhnRmdiJrpumfNk=
-X-Google-Smtp-Source: AGHT+IHovgGWywuQrz9JuMTR3KuK5p0DftEIeDiu9firG24pkZrQ0WJl9g3PB7XZfMhFeU3sC3YMZlcFc/EQN/oL6no=
-X-Received: by 2002:a17:906:8a4c:b0:9a1:c3ae:b014 with SMTP id
- gx12-20020a1709068a4c00b009a1c3aeb014mr7720042ejc.20.1695089556002; Mon, 18
- Sep 2023 19:12:36 -0700 (PDT)
+ bh=8enow6g+/RJmfm+Tb3h+OWjZ+y5LOoFSVEtB17XBSXQ=;
+ b=fRB2KUhyhcveEwNR9M5JzHntjuo4vbJ/VPLQ4CSivf+3Rhz32yPKVX8smadue+ruz/
+ o16KUmzABw1h9imND+1eiXXTbhCuLdZK+AOlnYkJ7hSjRmSywGo9Pv1Sa+dR8voV9osJ
+ fFhx0zW8TKZI0mFEdKV9DsVm4j1WlaZnX5lG6VUSKXfg/uPnLXVy/gMi8g5zmcKohD9z
+ RvJ3oB7JQjBrXgH2qBd19tGLWcbNU+A7C6ixCjJtl647KxCdrkJEU32KtA3aLTcUJhYu
+ Qkmx14tra3XBruQ1LBElH7JaZgeZz9x226fTHED1l3+dkzqvNlhgJ69WO+OUIWuutEF7
+ QAhQ==
+X-Gm-Message-State: AOJu0YxgS1+ocyYbIMEKbUPDu3ASNlqvJIvABMiKRHtSK+beDHuVVJwy
+ n36EKYJ6vMDc4lDnqUPJ/BwReIbV+faKy7q5Mbf0a6X61BA=
+X-Google-Smtp-Source: AGHT+IGje2NOLWZyBvTbOKFz2RQvOvf3tGEdMWOIivPGExiKqzKydUmMnill6Bh8Ml4MIQCJU1H6jPwjffcE6nLb3R4=
+X-Received: by 2002:a17:906:101b:b0:9a1:f21e:cdff with SMTP id
+ 27-20020a170906101b00b009a1f21ecdffmr9585879ejm.23.1695089630839; Mon, 18 Sep
+ 2023 19:13:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230916011501.15813-1-dakr@redhat.com>
-In-Reply-To: <20230916011501.15813-1-dakr@redhat.com>
+References: <20230916162835.5719-1-dakr@redhat.com>
+In-Reply-To: <20230916162835.5719-1-dakr@redhat.com>
 From: Dave Airlie <airlied@gmail.com>
-Date: Tue, 19 Sep 2023 12:12:24 +1000
-Message-ID: <CAPM=9tx3y22Q8LTz25j_UOebaXtNG2RTwiTFXdWAJmVChO6yMA@mail.gmail.com>
+Date: Tue, 19 Sep 2023 12:13:39 +1000
+Message-ID: <CAPM=9tz=-KE-CVJtDYtHQf8A_tXNZ4yoOj31reiDYob_MtaEXQ@mail.gmail.com>
 To: Danilo Krummrich <dakr@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: fence: fix type cast warning in
- nouveau_fence_emit()
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: sched: fix leaking memory of
+ timedout job
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,46 +66,67 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, kernel test robot <lkp@intel.com>,
- dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, 16 Sept 2023 at 11:15, Danilo Krummrich <dakr@redhat.com> wrote:
+On Sun, 17 Sept 2023 at 02:28, Danilo Krummrich <dakr@redhat.com> wrote:
 >
-> Fix the following warning.
->
->   drivers/gpu/drm/nouveau/nouveau_fence.c:210:45: sparse: sparse:
->   incorrect type in initializer (different address spaces)
->   @@     expected struct nouveau_channel *chan
->   @@     got struct nouveau_channel [noderef] __rcu *channel
+> Always stop and re-start the scheduler in order to let the scheduler
+> free up the timedout job in case it got signaled. In case of exec jobs
+> the job type specific callback will take care to signal all fences and
+> tear down the channel.
 
 Reviewed-by: Dave Airlie <airlied@redhat.com>
 >
-> We're just about to emit the fence, there is nothing to protect against
-> yet, hence it is safe to just cast __rcu away.
->
-> Reported-by: kernel test robot <lkp@intel.com>
-> Closes: https://lore.kernel.org/oe-kbuild-all/202309140340.BwKXzaDx-lkp@intel.com/
-> Fixes: 978474dc8278 ("drm/nouveau: fence: fix undefined fence state after emit")
+> Fixes: b88baab82871 ("drm/nouveau: implement new VM_BIND uAPI")
 > Signed-off-by: Danilo Krummrich <dakr@redhat.com>
 > ---
->  drivers/gpu/drm/nouveau/nouveau_fence.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  drivers/gpu/drm/nouveau/nouveau_exec.c  |  2 +-
+>  drivers/gpu/drm/nouveau/nouveau_sched.c | 12 +++++++++---
+>  2 files changed, 10 insertions(+), 4 deletions(-)
 >
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
-> index 61d9e70da9fd..ca762ea55413 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
-> @@ -207,7 +207,7 @@ nouveau_fence_context_new(struct nouveau_channel *chan, struct nouveau_fence_cha
->  int
->  nouveau_fence_emit(struct nouveau_fence *fence)
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
+> index 9c031d15fe0b..49d83ac9e036 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_exec.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
+> @@ -185,7 +185,7 @@ nouveau_exec_job_timeout(struct nouveau_job *job)
+>
+>         nouveau_sched_entity_fini(job->entity);
+>
+> -       return DRM_GPU_SCHED_STAT_ENODEV;
+> +       return DRM_GPU_SCHED_STAT_NOMINAL;
+>  }
+>
+>  static struct nouveau_job_ops nouveau_exec_job_ops = {
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
+> index 88217185e0f3..3b7ea5221226 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_sched.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
+> @@ -375,14 +375,20 @@ nouveau_sched_run_job(struct drm_sched_job *sched_job)
+>  static enum drm_gpu_sched_stat
+>  nouveau_sched_timedout_job(struct drm_sched_job *sched_job)
 >  {
-> -       struct nouveau_channel *chan = fence->channel;
-> +       struct nouveau_channel *chan = unrcu_pointer(fence->channel);
->         struct nouveau_fence_chan *fctx = chan->fence;
->         struct nouveau_fence_priv *priv = (void*)chan->drm->fence;
->         int ret;
+> +       struct drm_gpu_scheduler *sched = sched_job->sched;
+>         struct nouveau_job *job = to_nouveau_job(sched_job);
+> +       enum drm_gpu_sched_stat stat = DRM_GPU_SCHED_STAT_NOMINAL;
+>
+> -       NV_PRINTK(warn, job->cli, "Job timed out.\n");
+> +       drm_sched_stop(sched, sched_job);
+>
+>         if (job->ops->timeout)
+> -               return job->ops->timeout(job);
+> +               stat = job->ops->timeout(job);
+> +       else
+> +               NV_PRINTK(warn, job->cli, "Generic job timeout.\n");
+> +
+> +       drm_sched_start(sched, true);
+>
+> -       return DRM_GPU_SCHED_STAT_ENODEV;
+> +       return stat;
+>  }
+>
+>  static void
 > --
 > 2.41.0
 >
