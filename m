@@ -2,56 +2,124 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 228A47A89A6
-	for <lists+nouveau@lfdr.de>; Wed, 20 Sep 2023 18:41:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C53C97A8CE7
+	for <lists+nouveau@lfdr.de>; Wed, 20 Sep 2023 21:30:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7416310E263;
-	Wed, 20 Sep 2023 16:41:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 32EB910E543;
+	Wed, 20 Sep 2023 19:30:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 40ED510E263;
- Wed, 20 Sep 2023 16:41:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1695228087; x=1726764087;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=624sNm//FBgltBdHDHv3/pdXOCBHeESxANslKi0+4IE=;
- b=BuL6eWJj72p22nXRMJteVF8oElJ8T7BVhd9PfrY98W2EKitA5Or+3c+r
- XWPgA8q+740eqX96D0QVNjFfaTwd5805mw6bZm2Mxakkh5mQECGqda911
- LXeav7vP0Lr3qMUDfs0j7EHRDKwzv+jY9oPpjZ/fAWn81CxrWO2l7wffH
- 5FUyYp0+xnNqOaeAqIdqRKdM//u1i2dAt+LobKQ4vhEL8oGKJxBkX5NLh
- fYdXKhzSsYBKmgfjvmSg6pc3BJ5wRjlQj4U4MaBVhBUE+IIsXuOrClg31
- nNlnUlIvgHMCr9m1llq/hTlVGe+enUeKCmrpFULNGlYrTWcfj2LgptKzU A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10839"; a="466584295"
-X-IronPort-AV: E=Sophos;i="6.03,162,1694761200"; d="scan'208";a="466584295"
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
- by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Sep 2023 09:40:39 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10839"; a="749981294"
-X-IronPort-AV: E=Sophos;i="6.03,162,1694761200"; d="scan'208";a="749981294"
-Received: from lkp-server02.sh.intel.com (HELO 9ef86b2655e5) ([10.239.97.151])
- by fmsmga007.fm.intel.com with ESMTP; 20 Sep 2023 09:40:35 -0700
-Received: from kbuild by 9ef86b2655e5 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1qj0Fd-0008xG-0W;
- Wed, 20 Sep 2023 16:40:33 +0000
-Date: Thu, 21 Sep 2023 00:40:13 +0800
-From: kernel test robot <lkp@intel.com>
-To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
- matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
- sarah.walker@imgtec.com, donald.robson@imgtec.com,
- boris.brezillon@collabora.com, christian.koenig@amd.com,
- faith.ekstrand@collabora.com
-Message-ID: <202309210041.Ypce0gUk-lkp@intel.com>
-References: <20230920144343.64830-7-dakr@redhat.com>
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on2080.outbound.protection.outlook.com [40.107.237.80])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 98EDE10E542;
+ Wed, 20 Sep 2023 19:30:00 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Of9BrFpEKYrcEReAvBMRYw/BcJfPPMuuPuDjwrzF4MoT0yrpqvKelVi9L4QKGFD/DBUD1Gkk0Dizr+kizYHueoXx3jY+loJko2EHE7dheat+6fnn/KNVhBbr1Q+YudoNhUbyCRUtLgJGDTU0Gz3SN0Sn7lBiJtUzaGqF+wc3ctI+RHh21RlRw3pTOHMIkY3xIDwoDZiDdnm0mSTNVJ4bor3iojjPCvvQWI+kE6vnSXgn34RoYMKahW9FaFdRbB0jtVnHXEMBjveW9CZ8htzxYaa52gpm9kw8Hy0rrxBlraBfyLdNVGdhAwhyeWJ3Cdz8LOvNlwnu6c4/Dj1kYQNMhA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4OTGXgWcMVLRJhOMF4H8KpNJ2wrnUf9Pt4EB9CpU5vs=;
+ b=mjxnG6nC/hAfvTOKokXLzQUWcqRj2iPXaQU/i91Kxdm/S2eABywFRYfg+P7siRZsweymIFpeY0QWfGzvtd8UbvwkilitBCsgYhY1WpjetzyYNAp1MhhK2O6NhwvH8B/xdvbmeisPnz+CKbK8602BR6wRsSfatZuvtc7yopY6mOcKdVnAsaRqDV9G14/JIv19uhmS1RyJ9BpVyAs4TUmYMLzck2ovkPWWRZ7016qx7yt5RnRsJzsgb1kvQkcPsouvK3PL9dCrYX1NiL43VqUX6aUE4aFHaRrjLpWKmPlnM3q0gm/UybfpxIOexu6ZblssiwRceRKcohErwklHB2IsGA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4OTGXgWcMVLRJhOMF4H8KpNJ2wrnUf9Pt4EB9CpU5vs=;
+ b=VRvbPe6wGXPyesqn6zcNoj775Vz0VyJ+MqblKI0c1aBaVXIynlz0eUi2mTHw83wwqHRzvO9bxqBZnjpHvfrMlilPiG9TYFc8bUQeJ3E/50aKD1EoshNRCsOulwv2jMz+490Fj921UOkAGR9HEdNiVE+i0P3lJo6IPss296NH0p+aHSKyyKUaQ4Z+SzLD506RTEGf5hjg+issMtksFSAu4e+5aHQiDt4GCVsGxhs/92/0+cGeJkB58hJD02wtWgfT4ARugJlzD1VfXQxgnnkPgPEPqnq05xMNTaiaax9o3PHKd8UVGsMTueWnTFObWKLVFbPyHpQO10aptX81tTDKpQ==
+Received: from DS0PR12MB6391.namprd12.prod.outlook.com (2603:10b6:8:cd::16) by
+ DS0PR12MB9446.namprd12.prod.outlook.com (2603:10b6:8:192::16) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6813.20; Wed, 20 Sep 2023 19:29:57 +0000
+Received: from DS0PR12MB6391.namprd12.prod.outlook.com
+ ([fe80::76bc:2a16:6e0f:72b6]) by DS0PR12MB6391.namprd12.prod.outlook.com
+ ([fe80::76bc:2a16:6e0f:72b6%4]) with mapi id 15.20.6792.026; Wed, 20 Sep 2023
+ 19:29:57 +0000
+From: Timur Tabi <ttabi@nvidia.com>
+To: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "lyude@redhat.com" <lyude@redhat.com>
+Thread-Topic: [Nouveau] [PATCH v3 23/44] drm/nouveau/disp: add output
+ backlight control methods
+Thread-Index: AQHZ60WVhNkCDmHJXkKprwZ0JCI6l7AkGyAA
+Date: Wed, 20 Sep 2023 19:29:56 +0000
+Message-ID: <855a4931c8a652f97e83d911b76ccf98a3655c17.camel@nvidia.com>
+References: <20230919220442.202488-1-lyude@redhat.com>
+ <20230919220442.202488-24-lyude@redhat.com>
+In-Reply-To: <20230919220442.202488-24-lyude@redhat.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.44.4-0ubuntu2 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DS0PR12MB6391:EE_|DS0PR12MB9446:EE_
+x-ms-office365-filtering-correlation-id: 8727c6d7-b954-47f1-7050-08dbba0ff92a
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: FpwUJivH2gqHizwlbzfYnpv5zzzX43F8wP/xDmu5OKOuLQCCcYM8k8s6MpP9pupUuQJl8a9EoekogQyQlRWshssF5xWycwZpNU9KJaBdacyMWFLqjH9T+p49eQ9HuGwg59oMxelm3IOJjbVj0sKd5j+H58DyNNSlqMxOS8bmwU1tBl5I0lfwgqXQUyBjqJ4P5anb4MnvlHMUUMSeHLsh76sZxthzWy2dHtt0y1MZ49MIoCmHZPStuBZTlFX7dESOFXGoN0846P0EvctPfbT6SrXeguI7JM+lX+HMIhmEJaruwvZ5kll2pQLXtncfcnNHqbZ/BUBfWvDBMDc+4uJ9ljjd67V3uoOez/mQ4IOXIwHBEtrDduGLUgme+P09PN/uByPh1B11BWRUwuDtMXFfAf8S5GWgEqUwit32wHRw8x+/BBNxn6Uxq79Qmq2VWaf3coiQmOFzAJn6iHYDAtGe6GEQzNQqMebtXTDVqzxfGyBkUGjhKgSpZumQrmIHSsB6wln9Xq9Ra8r/MHWh3OFk++B1GfamItUqNDhe3yF2OgjtkrlFcJMpWNN3oi5Mqc+JoaAj10gtT/6s6s4oIdjSNWqx82pdmcbwjGKTLVKlfTG3Vlak2K4vGaJ4fTOEr85B
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DS0PR12MB6391.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376002)(366004)(346002)(39860400002)(396003)(136003)(186009)(1800799009)(451199024)(83380400001)(26005)(71200400001)(2616005)(6486002)(6506007)(6512007)(38070700005)(478600001)(86362001)(36756003)(122000001)(38100700002)(41300700001)(316002)(54906003)(64756008)(66446008)(66946007)(91956017)(66556008)(66476007)(76116006)(110136005)(4744005)(2906002)(4326008)(8936002)(5660300002)(8676002);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?T2NNRlExWWg3b2NTcllrTCtxL0VZVnVYYUFzZkFaSlB3ZHZnMG1IQ2hsQmV6?=
+ =?utf-8?B?S3VCbml6Y1NQSnVOTTRCNlFMSUJtR1locld0cUpFZy94b20yaENRQUhqSGlF?=
+ =?utf-8?B?ZmJNOEo2Um5MRzFvS3NQQWhjNzZlME1xOTNndjQ2Z0ZOZllzRFVrTEdueDMy?=
+ =?utf-8?B?NElwTnVqZk9QRGxSRzZJUHRhbXVnUkI1ZnV0Nk10ZGFValowVDdEZjlianVR?=
+ =?utf-8?B?eDEvNWNJa2wwb2tFSlZ2NnZCRTBndC85aUorN05iV3Y1RVdlaGZ0NEd2dW40?=
+ =?utf-8?B?RTcyYSt2MEMrNW44MmpldWJOS0pWTnFXa0M3dXZpc2JYZVFtUFdHYWp1SjhU?=
+ =?utf-8?B?UG8rS3Q4TVQvYTk4NDNTbG5pQnZ2YktHWmFYcnA0WHpWV1AxdC9MT1ZoTWhG?=
+ =?utf-8?B?a3BRZk9kQmdqaVZVT1Q2Ynl1RFpudk1yL21BdDg5endqdSthbHNGZ1hqcGxQ?=
+ =?utf-8?B?Sm9Gdi93UHUrdW84R2x6QzdDWFd4VlhUVTlOZnJVMHptUklaa0l0YW1IL3E1?=
+ =?utf-8?B?eXM0RmIrRTFqUWl1Tm44bkMwblV4ZXh5cHNSL0pwOUFFU01UMlVUd2R2QnJO?=
+ =?utf-8?B?WExaMktXSysyMmY2VjIwY015azNjcmtnRHRvVEMwUGFpb1pRVlZLTitUeVBD?=
+ =?utf-8?B?aXAvazBYb1pYQzNxcTFsWjAxRmpHTVVuNHVmNVZ0VjRFcnBocUR0OUgxdjNz?=
+ =?utf-8?B?YTFTZXVPcEpkOHNIRHRqaDBmaHdNeGFQaTdKUm5YYmUzbFlTbmNyUWx2OGV4?=
+ =?utf-8?B?dmJ4cGdzSXJHT3QzOVJ0c3hYL0RaZDNWM2tIWHlYZy9NcC9tTGNEQzFsM1RP?=
+ =?utf-8?B?SHpxUjE5RFF0R1l4aHBqZHg4RUVPZHY4NXNHZ29OUUhIUVdabHRIRGRrU2Jv?=
+ =?utf-8?B?NTFMa1JSQnVPR1lyTGRnTVAwbi9LNVpSa0hLUXlOZlc3WGdac0NDbW1nMkNH?=
+ =?utf-8?B?MFBxSHR6cjFpMVZlRC9tdC9OWW9tZ2JiTmNZbS8zQUd4SDVDVnRQN3ZLMXRv?=
+ =?utf-8?B?Sk5GbzNZZUFBcGZibEkvOThMUDVCMXc2NzNOUnFRTmZ2RFVERTYxQjI2UHRH?=
+ =?utf-8?B?a1MzQVNNakJHc3hrYzZCUUNTOG5yZjQvSkpML0kyMlNwL29TQ1RpbUczdjUr?=
+ =?utf-8?B?WmQwZm83eDJTRkJYQU1hV3BNMnlxTktVcVVYSWdOY2tFbFpUWmpjLzVxc0lV?=
+ =?utf-8?B?b3VtMzJsdHhGdVg0SUlrZ1FVYjE3NG82QTJmK3M5Y2oyTzRGNDhKdmdia1lL?=
+ =?utf-8?B?dC9Ocjg2aEV6S3FIZ0VJdlR0NVFZbUs0WEdnTlBsbU5xZk1DSVBlZlBrUEtj?=
+ =?utf-8?B?U3krSUlEVU9OQjE5UVY5eFFmMVZIK3N1RW9GZXhXcm9PUnJDN085WTFwWmM4?=
+ =?utf-8?B?Zk1CTmN1cGhCQ2FENmttSmpNSmp2aDFlQVBOSlZCREVBZTdTTUxVdlpQMm1h?=
+ =?utf-8?B?ZkpFYSs4Z29nV3pZcWpENDZ2d1NGOUpuSVBwNjRPWHNNeCttZkZvRjc0bnE1?=
+ =?utf-8?B?WVR0YmZ3eEFEdW1UZlFsZ0ZDQmlKNnVQd3NLY1ozVmRnakp5aWRvYVpTdFZh?=
+ =?utf-8?B?UGgwdm1PK1VUT1JVc2I3QmJuTlJWTmdqdHZBbXllVU5LTHE5Y3V5OFFhbk1H?=
+ =?utf-8?B?RSs0VlRwVGxGbzJiL25vVHVUUlBFMTZyNDR6UG9uL29QQVpYbGhqdVJTOXpP?=
+ =?utf-8?B?d0FpVjFTdU96MXQ5RW9YMUZTTEpwRWNJOUtBNGhyRUduQlVBUmR1NnZHQVR3?=
+ =?utf-8?B?M1lPTHBXTStpWlUrdkN1WkxhT2pVaVJFWExSb2VxSnBYREpBL2VTZ05FcFlW?=
+ =?utf-8?B?aTNMVnViMy9SNlBEbXBGbDN6NU5TS3cwSzVKc1d6UHBJMHMvVERubjc1R2JL?=
+ =?utf-8?B?VXl4Vi9adWh3dFkrZUw3NnMvMXFHVG9sRjdyUUhnVnR4ZzBOblZwMm9LMHBC?=
+ =?utf-8?B?NUVPcVJ3alc4R3Z0VmI5YUFzZkU5aEY5TzdJMm9sS3FTUklUVkpoR1Zqa3Rh?=
+ =?utf-8?B?UmZnblIvcTBKdVpoNG53V3JVaU9BUGdFSjZuNklKUGpIdGRkYzdSMlVJTkFz?=
+ =?utf-8?B?ZTR6RjNZaUtwMXJndWMwNzdkdXhrOVl3ZFBZUjl0aEZrelRVTDBKdVNJSlBW?=
+ =?utf-8?Q?ry1IJRU73ezQUm2L9VK2jccyT?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <8BEF0A74A7F6A84E9065D50577BCA5ED@namprd12.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230920144343.64830-7-dakr@redhat.com>
-Subject: Re: [Nouveau] [PATCH drm-misc-next v4 6/8] drm/gpuvm: add
- drm_gpuvm_flags to drm_gpuvm
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB6391.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8727c6d7-b954-47f1-7050-08dbba0ff92a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Sep 2023 19:29:57.0218 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: g+pXFBbIoRE2PtoW/IP5btYrh0svNmEReiHWKGOmPh2j37+RXdaFIpqBlY9MVwyLRSgiz2E6vQQKWc/8QLz+Ow==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB9446
+Subject: Re: [Nouveau] [PATCH v3 23/44] drm/nouveau/disp: add output
+ backlight control methods
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,88 +131,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, oe-kbuild-all@lists.linux.dev
+Cc: "bskeggs@redhat.com" <bskeggs@redhat.com>,
+ "ruanjinjie@huawei.com" <ruanjinjie@huawei.com>,
+ "keescook@chromium.org" <keescook@chromium.org>,
+ "daniel@ffwll.ch" <daniel@ffwll.ch>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Danilo,
-
-kernel test robot noticed the following build warnings:
-
-[auto build test WARNING on 1c7a387ffef894b1ab3942f0482dac7a6e0a909c]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-gpuvm-rename-struct-drm_gpuva_manager-to-struct-drm_gpuvm/20230920-224605
-base:   1c7a387ffef894b1ab3942f0482dac7a6e0a909c
-patch link:    https://lore.kernel.org/r/20230920144343.64830-7-dakr%40redhat.com
-patch subject: [PATCH drm-misc-next v4 6/8] drm/gpuvm: add drm_gpuvm_flags to drm_gpuvm
-config: alpha-allyesconfig (https://download.01.org/0day-ci/archive/20230921/202309210041.Ypce0gUk-lkp@intel.com/config)
-compiler: alpha-linux-gcc (GCC) 13.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20230921/202309210041.Ypce0gUk-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202309210041.Ypce0gUk-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
->> drivers/gpu/drm/drm_gpuvm.c:712: warning: Function parameter or member 'flags' not described in 'drm_gpuvm_init'
-
-
-vim +712 drivers/gpu/drm/drm_gpuvm.c
-
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  689  
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  690  /**
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  691   * drm_gpuvm_init() - initialize a &drm_gpuvm
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  692   * @gpuvm: pointer to the &drm_gpuvm to initialize
-52ef25512ca721 drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  693   * @drm: the drivers &drm_device
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  694   * @name: the name of the GPU VA space
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  695   * @start_offset: the start offset of the GPU VA space
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  696   * @range: the size of the GPU VA space
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  697   * @reserve_offset: the start of the kernel reserved GPU VA area
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  698   * @reserve_range: the size of the kernel reserved GPU VA area
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  699   * @ops: &drm_gpuvm_ops called on &drm_gpuvm_sm_map / &drm_gpuvm_sm_unmap
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  700   *
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  701   * The &drm_gpuvm must be initialized with this function before use.
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  702   *
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  703   * Note that @gpuvm must be cleared to 0 before calling this function. The given
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  704   * &name is expected to be managed by the surrounding driver structures.
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  705   */
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  706  void
-52ef25512ca721 drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  707  drm_gpuvm_init(struct drm_gpuvm *gpuvm, struct drm_device *drm,
-790facc6dac6ef drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  708  	       const char *name, enum drm_gpuva_flags flags,
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  709  	       u64 start_offset, u64 range,
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  710  	       u64 reserve_offset, u64 reserve_range,
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  711  	       const struct drm_gpuvm_ops *ops)
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20 @712  {
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  713  	gpuvm->rb.tree = RB_ROOT_CACHED;
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  714  	INIT_LIST_HEAD(&gpuvm->rb.list);
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  715  
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  716  	drm_gpuvm_check_overflow(start_offset, range);
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  717  	gpuvm->mm_start = start_offset;
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  718  	gpuvm->mm_range = range;
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  719  
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  720  	gpuvm->name = name ? name : "unknown";
-790facc6dac6ef drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  721  	gpuvm->flags = flags;
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  722  	gpuvm->ops = ops;
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  723  
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  724  	memset(&gpuvm->kernel_alloc_node, 0, sizeof(struct drm_gpuva));
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  725  
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  726  	if (reserve_range) {
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  727  		gpuvm->kernel_alloc_node.va.addr = reserve_offset;
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  728  		gpuvm->kernel_alloc_node.va.range = reserve_range;
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  729  
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  730  		if (likely(!drm_gpuvm_check_overflow(reserve_offset,
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  731  						     reserve_range)))
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  732  			__drm_gpuva_insert(gpuvm, &gpuvm->kernel_alloc_node);
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  733  	}
-52ef25512ca721 drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  734  
-52ef25512ca721 drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  735  	drm_gem_private_object_init(drm, &gpuvm->d_obj, 0);
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  736  }
-06f9274d201d5d drivers/gpu/drm/drm_gpuvm.c     Danilo Krummrich 2023-09-20  737  EXPORT_SYMBOL_GPL(drm_gpuvm_init);
-e6303f323b1ad9 drivers/gpu/drm/drm_gpuva_mgr.c Danilo Krummrich 2023-07-20  738  
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+T24gVHVlLCAyMDIzLTA5LTE5IGF0IDE3OjU2IC0wNDAwLCBMeXVkZSBQYXVsIHdyb3RlOg0KPiAr
+c3RhdGljIGludA0KPiArZ3QyMTVfc29yX2JsX3NldChzdHJ1Y3QgbnZrbV9pb3IgKmlvciwgaW50
+IGx2bCkNCj4gK3sNCj4gK8KgwqDCoMKgwqDCoMKgc3RydWN0IG52a21fZGV2aWNlICpkZXZpY2Ug
+PSBpb3ItPmRpc3AtPmVuZ2luZS5zdWJkZXYuZGV2aWNlOw0KPiArwqDCoMKgwqDCoMKgwqBjb25z
+dCB1MzIgc29mZiA9IG52NTBfaW9yX2Jhc2UoaW9yKTsNCj4gK8KgwqDCoMKgwqDCoMKgdTMyIGRp
+diwgdmFsOw0KPiArDQo+ICvCoMKgwqDCoMKgwqDCoGRpdiA9IG52a21fcmQzMihkZXZpY2UsIDB4
+NjFjMDgwICsgc29mZik7DQo+ICvCoMKgwqDCoMKgwqDCoHZhbCA9IChsdmwgKiBkaXYpIC8gMTAw
+Ow0KDQpJbnRlZ2VyIHByb21vdGlvbiBydWxlcyBhbHdheXMgdGhyb3cgbWUgZm9yIGEgbG9vcCwg
+YnV0IHNpbmNlICdsdmwnIGlzIGENCnNpZ25lZCBpbnRlZ2VyLCBhbmQgZGl2IGlzIGEgdTMyLCBh
+cmUgd2Ugc3VyZSB0aGlzIHdvbid0IG92ZXJmbG93PyAgTWF5YmUNCmx2bCBzaG91bGQgYmUgdW5z
+aWduZWQgYW5kIHZhbCBzaG91bGQgYmUgYSB1NjQ/DQoNCg0KPiArwqDCoMKgwqDCoMKgwqBpZiAo
+ZGl2KQ0KPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgbnZrbV93cjMyKGRldmljZSwg
+MHg2MWMwODQgKyBzb2ZmLCAweGMwMDAwMDAwIHwgdmFsKTsNCg0KQWxzbywgbWF5YmUgY2FsY3Vs
+YXRlICd2YWwnIGluIHRoaXMgaWYtYmxvY2s/DQoNCg==
