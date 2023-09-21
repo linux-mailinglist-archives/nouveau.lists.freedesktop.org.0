@@ -2,87 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 584DC7A958A
-	for <lists+nouveau@lfdr.de>; Thu, 21 Sep 2023 17:31:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB2BE7A9D0D
+	for <lists+nouveau@lfdr.de>; Thu, 21 Sep 2023 21:28:18 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3FFDD10E5E6;
-	Thu, 21 Sep 2023 15:31:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9337610E5EC;
+	Thu, 21 Sep 2023 19:28:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C70DD10E122
- for <nouveau@lists.freedesktop.org>; Thu, 21 Sep 2023 15:30:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1695310258;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=sXnMf1W75YQNgEBB3g7F1jD12M4QhXb2+vUMggzeZAQ=;
- b=SMXebTTMc7RbEVni0LI8QGrpIYUWj5wi/G9blAVK59tsAvdXXCoatvXUcYnzYLcevMjzGQ
- BasnKXGfSWpCNtOPBseZMeia2ExohfnGngCyEZH5YKc9HsaQYHkwymR4Sr4onZPRztEQnd
- qazi/RRb/InkzsHjPOPQkbNa5AtDYk8=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-669-MzKsGzjQMcmSrmiCErulkA-1; Thu, 21 Sep 2023 11:30:54 -0400
-X-MC-Unique: MzKsGzjQMcmSrmiCErulkA-1
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-403ca0e2112so8616415e9.0
- for <nouveau@lists.freedesktop.org>; Thu, 21 Sep 2023 08:30:54 -0700 (PDT)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 75FDE10E5EE
+ for <nouveau@lists.freedesktop.org>; Thu, 21 Sep 2023 19:28:15 +0000 (UTC)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-690bfd4f3ebso1139840b3a.3
+ for <nouveau@lists.freedesktop.org>; Thu, 21 Sep 2023 12:28:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1695324495; x=1695929295;
+ darn=lists.freedesktop.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TaaYKX/WzN2yAJiXuwCzXo10Y+Z2eYCI0rB7JbtaKbk=;
+ b=YFxhyTZHuJzCYbtJKMhKmI43jPtDWfqrmT/BKKfX2SUmtdi7RuYkvTm3DJmMt0u46c
+ XRDf5vMv66daoCh5wMWKhu7KW7rItja6WRPrTRh5UDxxj+7qTWjPO6od+HIUn04l2wyR
+ NiuQxlFUCnDvOqVN5+kxSYQJ6QYEV1l/HZQBg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695310253; x=1695915053;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1695324495; x=1695929295;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=sXnMf1W75YQNgEBB3g7F1jD12M4QhXb2+vUMggzeZAQ=;
- b=S0fOkd2h54swbMjiFapC7rZ8nGw/C/9zs3iy4ADhAi828znwPVVYze5cO0Qjh08nHs
- cd3RfC4sxX7+5jjp7zXmadyFVfNZWis16Jg9m8ir+OxaTqqArcHw62oMS0vKhl6m98/u
- Q4e6oYWxDZPbOy3blTPBou269zbrxH2HzSuzcKASkiPEoDCQLDwWYwWb8XTPT9mJl9RC
- 5jLYMHzby/0I759rMVMlCqhFaUWkVsPriLJgXIdItzrfZcz7MOPNEUaPoA8Wfwp2iTcO
- hl3VbEu9gAQZJqSKwPttt0C5oVBwKE6s3xHQd2qJA9IH/hK863OKqdyyhojOjaMB+SRK
- gxIg==
-X-Gm-Message-State: AOJu0Yx/No5/xB6hbDcfz9JaqjzPBne/sBGliaP1Qw8O2LDr6i3PrCxE
- WeZgY67CGXbFQvmXJNHPYjHLZuHyuL+TD4zXJRGZbNTWNXaXsH6gUdbabZC123XoizZIEPD+Q9Q
- VF3k3Njft/QvU6Cx9D7qtBNccnQ==
-X-Received: by 2002:a05:600c:3152:b0:405:34e4:14e3 with SMTP id
- h18-20020a05600c315200b0040534e414e3mr1543989wmo.3.1695310253457; 
- Thu, 21 Sep 2023 08:30:53 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEtxQnMWHUY0qp9Q/0QzRCwEuK/ltsO8A/Hn6c8CvGt58bCdo3sRqK2fNxy7s9Yy6dTf3IqDA==
-X-Received: by 2002:a05:600c:3152:b0:405:34e4:14e3 with SMTP id
- h18-20020a05600c315200b0040534e414e3mr1543959wmo.3.1695310252952; 
- Thu, 21 Sep 2023 08:30:52 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
- ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
+ bh=TaaYKX/WzN2yAJiXuwCzXo10Y+Z2eYCI0rB7JbtaKbk=;
+ b=ExoMFax2tr7TyRPOCpgoZrbEKgkGdTPI2FiToagbCp7kD9S0XZG3H5o41wrrANQ5DW
+ m2Otc9s9mWrfSv1f8gItCqXcGgu6mmufhmWjsX62L09iKQzTvFOam9EyZAbd/etqFUqH
+ RoLakXHX8YkfE10pEbWlNQ1y934Lq5YDhZESH6zKZe94o11KBVd0P1XgFXE7k8LGnFwL
+ PFcfVnmlyPOotiR6vAeCCe6hkF1jF8mfyrYP11Yn7NdDlseXs3HNQhW1Ev6I08l2+8Yi
+ bQKukwwf15h6V4RVBCYUqvUQvlgDspRJXT7bnvWh+ItnxQRO+Enxo5+kx3A6QDZHhdCo
+ T/CA==
+X-Gm-Message-State: AOJu0YxTj9OxClbH7cO6aNDTQiI44glNYmujauo7ruO4ySadFRRXv1Jn
+ XaBorUpTqAjpLBP7DXbZCfbn+w==
+X-Google-Smtp-Source: AGHT+IEMW+st7pK1ERCOwxwoalcSvIpW84hrr+4hW9zDszK+PkTuQiJ5+HlDQX/MBJ7tT52BBQ4d4g==
+X-Received: by 2002:a05:6a21:4985:b0:151:991c:84b6 with SMTP id
+ ax5-20020a056a21498500b00151991c84b6mr6676548pzc.59.1695324494675; 
+ Thu, 21 Sep 2023 12:28:14 -0700 (PDT)
+Received: from tictac2.mtv.corp.google.com
+ ([2620:15c:9d:2:e6ed:6d49:f262:8041])
  by smtp.gmail.com with ESMTPSA id
- y4-20020a05600c20c400b003fc0505be19sm2234610wmm.37.2023.09.21.08.30.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Sep 2023 08:30:52 -0700 (PDT)
-Message-ID: <817b1d65-3a3a-4d00-7995-ef5a552bfe5d@redhat.com>
-Date: Thu, 21 Sep 2023 17:30:51 +0200
+ w8-20020a1709029a8800b001b9f032bb3dsm1892875plp.3.2023.09.21.12.28.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Sep 2023 12:28:13 -0700 (PDT)
+From: Douglas Anderson <dianders@chromium.org>
+To: dri-devel@lists.freedesktop.org,
+	Maxime Ripard <mripard@kernel.org>
+Date: Thu, 21 Sep 2023 12:26:43 -0700
+Message-ID: <20230921192749.1542462-1-dianders@chromium.org>
+X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Boris Brezillon <boris.brezillon@collabora.com>
-References: <20230920144343.64830-1-dakr@redhat.com>
- <20230920144343.64830-5-dakr@redhat.com>
- <7951dc11-6047-6beb-8ef8-98c862e26ec3@amd.com>
- <964a1bdd-549d-7850-9a8c-8278c4cd32ec@redhat.com>
- <20230921162510.10903d90@collabora.com>
- <72ea51ca-f7b0-2e2a-b276-6c6c7413374b@amd.com>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <72ea51ca-f7b0-2e2a-b276-6c6c7413374b@amd.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH drm-misc-next v4 4/8] drm/gpuvm: add common
- dma-resv per struct drm_gpuvm
+Subject: [Nouveau] [RFT PATCH v2 00/12] drm: call
+ drm_atomic_helper_shutdown() at the right times
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,166 +70,141 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
- sarah.walker@imgtec.com, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- donald.robson@imgtec.com, daniel@ffwll.ch, faith.ekstrand@collabora.com
+Cc: geert+renesas@glider.be, nouveau@lists.freedesktop.org, Victor.Zhao@amd.com,
+ edmund.j.dea@intel.com, linux-kernel@vger.kernel.org, paul@crapouillou.net,
+ linux-tegra@vger.kernel.org, mdaenzer@redhat.com, thierry.reding@gmail.com,
+ laurent.pinchart@ideasonboard.com, alim.akhtar@samsung.com,
+ anitha.chrisanthus@intel.com, srinivasan.shanmugam@amd.com,
+ steven.price@arm.com, mario.limonciello@amd.com, robh@kernel.org,
+ linux-samsung-soc@vger.kernel.org, festevam@gmail.com, abrodkin@synopsys.com,
+ kyungmin.park@samsung.com, amd-gfx@lists.freedesktop.org,
+ matthias.bgg@gmail.com, bskeggs@redhat.com, sam@ravnborg.org,
+ orsonzhai@gmail.com, linux-imx@nxp.com, p.zabel@pengutronix.de,
+ chunkuang.hu@kernel.org, lijo.lazar@amd.com, kernel@pengutronix.de,
+ mperttunen@nvidia.com, Bokun.Zhang@amd.com,
+ Sascha Hauer <s.hauer@pengutronix.de>, maarten.lankhorst@linux.intel.com,
+ shiwu.zhang@amd.com, inki.dae@samsung.com, le.ma@amd.com,
+ linux-mediatek@lists.infradead.org,
+ Baolin Wang <baolin.wang@linux.alibaba.com>, laurentiu.palcu@oss.nxp.com,
+ biju.das.jz@bp.renesas.com, James.Zhu@amd.com,
+ linux-arm-kernel@lists.infradead.org, angelogioacchino.delregno@collabora.com,
+ jim.cromie@gmail.com, felix.kuehling@amd.com, Xinhui.Pan@amd.com,
+ sw0312.kim@samsung.com, Douglas Anderson <dianders@chromium.org>,
+ patrik.r.jakobsson@gmail.com, linux-renesas-soc@vger.kernel.org,
+ krzysztof.kozlowski@linaro.org, kieran.bingham+renesas@ideasonboard.com,
+ daniel@ffwll.ch, zhang.lyra@gmail.com, alexander.deucher@amd.com,
+ l.stach@pengutronix.de, shawnguo@kernel.org, christian.koenig@amd.com,
+ Hawking.Zhang@amd.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 9/21/23 16:34, Christian König wrote:
-> 
-> 
-> Am 21.09.23 um 16:25 schrieb Boris Brezillon:
->> On Thu, 21 Sep 2023 15:34:44 +0200
->> Danilo Krummrich <dakr@redhat.com> wrote:
->>
->>> On 9/21/23 09:39, Christian König wrote:
->>>> Am 20.09.23 um 16:42 schrieb Danilo Krummrich:
->>>>> Provide a common dma-resv for GEM objects not being used outside of this
->>>>> GPU-VM. This is used in a subsequent patch to generalize dma-resv,
->>>>> external and evicted object handling and GEM validation.
->>>>>
->>>>> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
->>>>> ---
->>>>>    drivers/gpu/drm/drm_gpuvm.c            |  9 +++++++--
->>>>>    drivers/gpu/drm/nouveau/nouveau_uvmm.c |  2 +-
->>>>>    include/drm/drm_gpuvm.h                | 17 ++++++++++++++++-
->>>>>    3 files changed, 24 insertions(+), 4 deletions(-)
->>>>>
->>>>> diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
->>>>> index bfea4a8a19ec..cbf4b738a16c 100644
->>>>> --- a/drivers/gpu/drm/drm_gpuvm.c
->>>>> +++ b/drivers/gpu/drm/drm_gpuvm.c
->>>>> @@ -655,6 +655,7 @@ drm_gpuva_range_valid(struct drm_gpuvm *gpuvm,
->>>>>    /**
->>>>>     * drm_gpuvm_init() - initialize a &drm_gpuvm
->>>>>     * @gpuvm: pointer to the &drm_gpuvm to initialize
->>>>> + * @drm: the drivers &drm_device
->>>>>     * @name: the name of the GPU VA space
->>>>>     * @start_offset: the start offset of the GPU VA space
->>>>>     * @range: the size of the GPU VA space
->>>>> @@ -668,7 +669,7 @@ drm_gpuva_range_valid(struct drm_gpuvm *gpuvm,
->>>>>     * &name is expected to be managed by the surrounding driver structures.
->>>>>     */
->>>>>    void
->>>>> -drm_gpuvm_init(struct drm_gpuvm *gpuvm,
->>>>> +drm_gpuvm_init(struct drm_gpuvm *gpuvm, struct drm_device *drm,
->>>>>               const char *name,
->>>>>               u64 start_offset, u64 range,
->>>>>               u64 reserve_offset, u64 reserve_range,
->>>>> @@ -694,6 +695,8 @@ drm_gpuvm_init(struct drm_gpuvm *gpuvm,
->>>>>                                 reserve_range)))
->>>>>                __drm_gpuva_insert(gpuvm, &gpuvm->kernel_alloc_node);
->>>>>        }
->>>>> +
->>>>> +    drm_gem_private_object_init(drm, &gpuvm->d_obj, 0);
->>>>>    }
->>>>>    EXPORT_SYMBOL_GPL(drm_gpuvm_init);
->>>>> @@ -713,7 +716,9 @@ drm_gpuvm_destroy(struct drm_gpuvm *gpuvm)
->>>>>            __drm_gpuva_remove(&gpuvm->kernel_alloc_node);
->>>>>        WARN(!RB_EMPTY_ROOT(&gpuvm->rb.tree.rb_root),
->>>>> -         "GPUVA tree is not empty, potentially leaking memory.");
->>>>> +         "GPUVA tree is not empty, potentially leaking memory.\n");
->>>>> +
->>>>> +    drm_gem_private_object_fini(&gpuvm->d_obj);
->>>>>    }
->>>>>    EXPORT_SYMBOL_GPL(drm_gpuvm_destroy);
->>>>> diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
->>>>> index 6c86b64273c3..a80ac8767843 100644
->>>>> --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
->>>>> +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
->>>>> @@ -1836,7 +1836,7 @@ nouveau_uvmm_init(struct nouveau_uvmm *uvmm, struct nouveau_cli *cli,
->>>>>        uvmm->kernel_managed_addr = kernel_managed_addr;
->>>>>        uvmm->kernel_managed_size = kernel_managed_size;
->>>>> -    drm_gpuvm_init(&uvmm->base, cli->name,
->>>>> +    drm_gpuvm_init(&uvmm->base, cli->drm->dev, cli->name,
->>>>>                   NOUVEAU_VA_SPACE_START,
->>>>>                   NOUVEAU_VA_SPACE_END,
->>>>>                   kernel_managed_addr, kernel_managed_size,
->>>>> diff --git a/include/drm/drm_gpuvm.h b/include/drm/drm_gpuvm.h
->>>>> index 0e802676e0a9..6666c07d7c3e 100644
->>>>> --- a/include/drm/drm_gpuvm.h
->>>>> +++ b/include/drm/drm_gpuvm.h
->>>>> @@ -240,14 +240,29 @@ struct drm_gpuvm {
->>>>>         * @ops: &drm_gpuvm_ops providing the split/merge steps to drivers
->>>>>         */
->>>>>        const struct drm_gpuvm_ops *ops;
->>>>> +
->>>>> +    /**
->>>>> +     * @d_obj: Dummy GEM object; used internally to pass the GPU VMs
->>>>> +     * dma-resv to &drm_exec. Provides the GPUVM's &dma-resv.
->>>>> +     */
->>>>> +    struct drm_gem_object d_obj;
->>>> Yeah, as pointed out in the other mail that won't work like this.
->>> Which one? Seems that I missed it.
->>>
->>>> The GPUVM contains GEM objects and therefore should probably have a reference to those objects.
->>>>
->>>> When those GEM objects now use the dma-resv object embedded inside the GPUVM then they also need a reference to the GPUVM to make sure the dma-resv object won't be freed before they are freed.
->>> My assumption here is that GEM objects being local to a certain VM never out-live the VM. We never share it with anyone, otherwise it would be external and hence wouldn't carray the VM's dma-resv. The only references I see are from the VM itself (which is fine) and from userspace. The latter isn't a problem as long as all GEM handles are closed before the VM is destroyed on FD close.
->> But we don't want to rely on userspace doing the right thing (calling
->> GEM_CLOSE before releasing the VM), do we?
->>
->> BTW, even though my private BOs have a ref to their exclusive VM, I just
->> ran into a bug because drm_gem_shmem_free() acquires the resv lock
->> (which is questionable, but that's not the topic :-)) and
->> I was calling vm_put(bo->exclusive_vm) before drm_gem_shmem_free(),
->> leading to a use-after-free when the gem->resv is acquired. This has
->> nothing to do with drm_gpuvm, but it proves that this sort of bug is
->> likely to happen if we don't pay attention.
->>
->>> Do I miss something? Do we have use cases where this isn't true?
->> The other case I can think of is GEM being v[un]map-ed (kernel
->> mapping) after the VM was released.
-> 
-> I think the file reference and the VM stays around in those cases as well, but yes I also think we have use cases which won't work.
-> 
->>
->>>> This is a circle reference dependency.
->> FWIW, I solved that by having a vm_destroy() function that kills all the
->> mappings in a VM, which in turn releases all the refs the VM had on
->> private BOs. Then, it's just a matter of waiting for all private GEMs
->> to be destroyed to get the final steps of the VM destruction, which is
->> really just about releasing resources (it's called panthor_vm_release()
->> in my case) executed when the VM refcount drops to zero.
->>
->>>> The simplest solution I can see is to let the driver provide the GEM object to use. Amdgpu uses the root page directory object for this.
->>> Sure, we can do that, if we see cases where VM local GEM objects can out-live the VM.
->>>> Apart from that I strongly think that we shouldn't let the GPUVM code create a driver GEM object. We did that in TTM for the ghost objects and it turned out to be a bad idea.
->> Would that really solve the circular ref issue? I mean, if you're
->> taking the root page dir object as your VM resv, you still have to make
->> sure it outlives the private GEMs, which means, you either need
->> to take a ref on the object, leading to the same circular ref mess, or
->> you need to reset private GEMs resvs before destroying this root page
->> dir GEM (whose lifecyle is likely the same as your VM object which
->> embeds the drm_gpuvm instance).
-> 
-> Yes it does help, see how amdgpu does it:
-> 
-> The VM references all BOs, e.g. page tables as well as user BOs.
-> 
-> The BOs which use the dma-resv of the root page directory also reference the root page directorys BO.
-> 
-> So when the VM drops all references the page tables and user BO are released first and the root page directory which everybody references last.
 
-I think that works, unfortunately it's all driver specific. I it seems like that's just how it is.
+This patch series came about after a _long_ discussion between me and
+Maxime Ripard in response to a different patch I sent out [1]. As part
+of that discussion, we realized that it would be good if DRM drivers
+consistently called drm_atomic_helper_shutdown() properly at shutdown
+and driver remove time as it's documented that they should do. The
+eventual goal of this would be to enable removing some hacky code from
+panel drivers where they had to hook into shutdown themselves because
+the DRM driver wasn't calling them.
 
-> 
->> Making it driver-specific just moves the responsibility back to drivers
->> (and also allows re-using an real GEM object instead of a dummy one,
->> but I'm not sure we care about saving a few hundreds bytes at that
->> point), which is a good way to not take the blame if the driver does
->> something wrong, but also doesn't really help people do the right thing.
-> 
-> The additional memory usage is irrelevant, but we have very very bad experience with TTM using dummy objects similar to this here.
-> 
-> They tend to end up in driver specific functions and then the driver will try to upcast those dummy to driver specific BOs. In the end you get really hard to figure out memory corruptions.
+It turns out that quite a lot of drivers seemed to be missing
+drm_atomic_helper_shutdown() in one or both places that it was
+supposed to be. This patch series attempts to fix all the drivers that
+I was able to identify.
 
-I fully agree, however for some drivers it might just be necessary to pass a dummy GEM in case they don't have a real one to pass.
+NOTE: fixing this wasn't exactly cookie cutter. Each driver has its
+own unique way of setting itself up and tearing itself down. Some
+drivers also use the component model, which adds extra fun. I've made
+my best guess at solving this and I've run a bunch of compile tests
+(specifically, allmodconfig for amd64, arm64, and powerpc). That being
+said, these code changes are not totally trivial and I've done zero
+real testing on them. Making these patches was also a little mind
+numbing and I'm certain my eyes glazed over at several points when
+writing them. What I'm trying to say is to please double-check that I
+didn't do anything too silly, like cast your driver's drvdata to the
+wrong type. Even better, test these patches!
 
-> 
-> Regards,
-> Christian.
-> 
+I've labeled this patch series as RFT (request for testing) to help
+call attention to the fact that I didn't personally test any of these
+patches.
+
+I'd like to call out a few drivers that I _didn't_ fix in this series
+and why. If any of these drivers should be fixed then please yell.
+- DRM drivers backed by usb_driver (like gud, gm12u320, udl): I didn't
+  add the call to drm_atomic_helper_shutdown() at shutdown time
+  because there's no ".shutdown" callback for them USB drivers. Given
+  that USB is hotpluggable, I'm assuming that they are robust against
+  this and the special shutdown callback isn't needed.
+- ofdrm and simpledrm: These didn't have drm_atomic_helper_shutdown()
+  in either shutdown or remove, but I didn't add it. I think that's OK
+  since they're sorta special and not really directly controlling
+  hardware power sequencing.
+- virtio, vkms, vmwgfx, xen: I believe these are all virtual (thus
+  they wouldn't directly drive a panel) and adding the shutdown
+  didn't look straightforward, so I skipped them.
+
+I've let each patch in the series get CCed straight from
+get_maintainer. That means not everyone will have received every patch
+but everyone should be on the cover letter. I know some people dislike
+this but when touching this many drivers there's not much
+choice. dri-devel and lkml have been CCed and lore/lei exist, so
+hopefully that's enough for folks. I'm happy to add people to the
+whole series for future posts.
+
+NOTE: I landed everything I could from v1 of the patch series [2] [3]
+to drm-misc. This v2 is everyone that is still left. If you'd like me
+to land one of the patches here to drm-misc for you, please say
+so. Otherwise I will assume maintainers will pick patches for their
+particular driver and land them. There are no dependencies.
+
+[1] https://lore.kernel.org/lkml/20230804140605.RFC.4.I930069a32baab6faf46d6b234f89613b5cec0f14@changeid
+[2] https://lore.kernel.org/r/20230901234015.566018-1-dianders@chromium.org
+[3] https://lore.kernel.org/r/20230901234202.566951-1-dianders@chromium.org
+
+Changes in v2:
+- Rebased and resolved conflicts.
+
+Douglas Anderson (12):
+  drm/imx/dcss: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/kmb: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/mediatek: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/nouveau: Call drm_atomic_helper_shutdown() or equiv at shutdown
+    time
+  drm/tegra: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/arcpgu: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/amdgpu: Call drm_atomic_helper_shutdown() at shutdown time
+  drm/sprd: Call drm_atomic_helper_shutdown() at remove time
+  drm/exynos: Call drm_atomic_helper_shutdown() at shutdown/unbind time
+  drm/gma500: Call drm_helper_force_disable_all() at shutdown/remove
+    time
+  drm/radeon: Call drm_helper_force_disable_all() at shutdown/remove
+    time
+  drm/renesas/shmobile: Call drm_helper_force_disable_all() at
+    shutdown/remove time
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu.h              |  1 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c       | 10 ++++++++++
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c          |  2 ++
+ drivers/gpu/drm/exynos/exynos_drm_drv.c          | 11 +++++++++++
+ drivers/gpu/drm/gma500/psb_drv.c                 |  8 ++++++++
+ drivers/gpu/drm/imx/dcss/dcss-drv.c              |  8 ++++++++
+ drivers/gpu/drm/imx/dcss/dcss-kms.c              |  7 +++++++
+ drivers/gpu/drm/imx/dcss/dcss-kms.h              |  1 +
+ drivers/gpu/drm/kmb/kmb_drv.c                    |  6 ++++++
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c           |  9 +++++++++
+ drivers/gpu/drm/nouveau/nouveau_display.c        |  9 +++++++++
+ drivers/gpu/drm/nouveau/nouveau_display.h        |  1 +
+ drivers/gpu/drm/nouveau/nouveau_drm.c            | 13 +++++++++++++
+ drivers/gpu/drm/nouveau/nouveau_drv.h            |  1 +
+ drivers/gpu/drm/nouveau/nouveau_platform.c       |  6 ++++++
+ drivers/gpu/drm/radeon/radeon_drv.c              |  7 ++++++-
+ drivers/gpu/drm/renesas/shmobile/shmob_drm_drv.c | 10 ++++++++++
+ drivers/gpu/drm/sprd/sprd_drm.c                  |  4 +++-
+ drivers/gpu/drm/tegra/drm.c                      |  6 ++++++
+ drivers/gpu/drm/tiny/arcpgu.c                    |  6 ++++++
+ 20 files changed, 124 insertions(+), 2 deletions(-)
+
+-- 
+2.42.0.515.g380fc7ccd1-goog
 
