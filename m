@@ -2,66 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A59F7A9D17
-	for <lists+nouveau@lfdr.de>; Thu, 21 Sep 2023 21:28:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 157D97AB77F
+	for <lists+nouveau@lfdr.de>; Fri, 22 Sep 2023 19:32:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1AB0A10E5F8;
-	Thu, 21 Sep 2023 19:28:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E497D10E6B1;
+	Fri, 22 Sep 2023 17:32:23 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 11F9B10E5F6
- for <nouveau@lists.freedesktop.org>; Thu, 21 Sep 2023 19:28:27 +0000 (UTC)
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-690bc3f82a7so1285073b3a.0
- for <nouveau@lists.freedesktop.org>; Thu, 21 Sep 2023 12:28:27 -0700 (PDT)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F37E710E6B2
+ for <nouveau@lists.freedesktop.org>; Fri, 22 Sep 2023 17:32:18 +0000 (UTC)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1c328b53aeaso21920585ad.2
+ for <nouveau@lists.freedesktop.org>; Fri, 22 Sep 2023 10:32:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695324506; x=1695929306;
+ d=chromium.org; s=google; t=1695403937; x=1696008737;
  darn=lists.freedesktop.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XHA8WV61h1sCTUoopvu6jUmhZo1/0sc2wBZa91YnlqI=;
- b=FiaARAKeySvDrEEDMpN9tDIaZSRTKBTUxEcLENrZUYG2Uuh80yWYVRZgyq+1uAvIql
- EHcjAplEfmc8n04TzJASaqasPY3fGfAg431GEAxCBBjZakPaXmTO/HZ+2HcZgFL1+uug
- KpY1Kd0F4vyrdkJ+GUiodNei4pM/2QATXrM/U=
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=maP8YXhB08F9LY5OG0jMprTbidCF0YS16nloYI5WUaA=;
+ b=PhHSuC1wjXTZo6C6EONzQQR73/4KIT4V+Dk30na4BzElBNJ8xT97dRy064hbzVrLqZ
+ 8KqDuCJYmW+yxw41I1gRn0F8kmzaMdq+9p1qj5W2MUmZp1IOHGuG+HT7OSf4DxyI8K53
+ QRYsmpJnMH6odYkxDLC0bk+kBqRH8/iNWTbl0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695324506; x=1695929306;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XHA8WV61h1sCTUoopvu6jUmhZo1/0sc2wBZa91YnlqI=;
- b=bmEndY8NOKfLziHM8RcPhI/7TGn2ixhwrbdKmKrkC5ohH0Qo2NCWB/gvevbNoW/tHZ
- hthvZG8o9hdyPoztSWAklvNnMxyHzSgjsTY+aIjEInK5Tj5bkKZUTDEPeJBHhqcUM0QZ
- r/8cYEbYGdXeRbzIXhca0PXtgwpMcDYqIdahLc6QDWyRYIlMTMU0+drkvhhpZKRgIwQF
- mvpnbe+gP4z3MGMLg1cQULorPtj7kzo8jZA98xSSuv1ODTFfVP0eseb3hXQc7bTpltfv
- vLtNqOtkPPGd2UAt0R/2wX4llLA/vrDt8a/gIlK41Xpv2X9jI9FTLmDFWN3zDFXf3q7C
- vgjw==
-X-Gm-Message-State: AOJu0Yzt45QzbvmU6sqcLnmuGVWVzsl10EEwDmemFT5rEsk5gg57jRFl
- Iv4Erh19aTxAQMEjZek3lvHRhA==
-X-Google-Smtp-Source: AGHT+IHqTEJgRF5kJ5LaOV5RP1ReQKOtcWcO7Dx6XuYKQwxO/AtAnwFW/vbvFSlG1XFJXQbmien+fA==
-X-Received: by 2002:a05:6a20:3ca8:b0:15c:e0bf:40ec with SMTP id
- b40-20020a056a203ca800b0015ce0bf40ecmr5940561pzj.17.1695324506566; 
- Thu, 21 Sep 2023 12:28:26 -0700 (PDT)
-Received: from tictac2.mtv.corp.google.com
- ([2620:15c:9d:2:e6ed:6d49:f262:8041])
- by smtp.gmail.com with ESMTPSA id
- w8-20020a1709029a8800b001b9f032bb3dsm1892875plp.3.2023.09.21.12.28.23
+ d=1e100.net; s=20230601; t=1695403937; x=1696008737;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=maP8YXhB08F9LY5OG0jMprTbidCF0YS16nloYI5WUaA=;
+ b=UP+ahm/yiRiMTJsfaq/P31dIlsJ/Sa8aYGTKr3WWB6XCDcgHqEtj6vSyRDE13mKiie
+ cH9H90Xppd3FjYqVHW3amTRBJ7X8ZSc2ZLegoQpWzrVCa3LYS9pE4pMH5W+a41d/Xhq5
+ BCXjHnAFTSmuPyID7+aVrUpde5BXf3Tgcl3nqnzyS1nxrZiSgd/UjWNFuHtVYfF/Jvv4
+ f3VJeoQyg3Cbq9TbzvBGcRhott5ckdPuV0zRG08dTPELZhrHQSV9Wlp1VUEp4srtoaxW
+ aQ5nOiEKQxFj/mXAWuPUmULo93yHCc279zwB8HGLfcG4QEcEEqbPCLt3cCtn3ck+TEcD
+ JSQQ==
+X-Gm-Message-State: AOJu0Yyg50fFMxsyPGTOnG+sSshWGokx87ei//ph6RbatZ0KV+hroxSQ
+ SzD6RPPBsz0zfr0q8cOq5OpOhg==
+X-Google-Smtp-Source: AGHT+IEElaiJXwd+cHN0UEyfbPuovVQdbx97tEz5jWVvCwnMzBcyrsLzHF1i0U0dBU7w1PZYxVLT7w==
+X-Received: by 2002:a17:903:1cf:b0:1bd:d911:2a85 with SMTP id
+ e15-20020a17090301cf00b001bdd9112a85mr102054plh.12.1695403937531; 
+ Fri, 22 Sep 2023 10:32:17 -0700 (PDT)
+Received: from www.outflux.net (198-0-35-241-static.hfc.comcastbusiness.net.
+ [198.0.35.241]) by smtp.gmail.com with ESMTPSA id
+ v10-20020a1709029a0a00b001b53953f306sm3755352plp.178.2023.09.22.10.32.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Sep 2023 12:28:24 -0700 (PDT)
-From: Douglas Anderson <dianders@chromium.org>
-To: dri-devel@lists.freedesktop.org,
-	Maxime Ripard <mripard@kernel.org>
-Date: Thu, 21 Sep 2023 12:26:47 -0700
-Message-ID: <20230921122641.RFT.v2.4.Ie7588ec6e0f93e8bc700e76b265ad1a7ad6b15ad@changeid>
-X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
-In-Reply-To: <20230921192749.1542462-1-dianders@chromium.org>
-References: <20230921192749.1542462-1-dianders@chromium.org>
+ Fri, 22 Sep 2023 10:32:17 -0700 (PDT)
+From: Kees Cook <keescook@chromium.org>
+To: David Airlie <airlied@gmail.com>
+Date: Fri, 22 Sep 2023 10:32:05 -0700
+Message-Id: <20230922173110.work.084-kees@kernel.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2029; i=keescook@chromium.org; 
+ h=from:subject:message-id;
+ bh=YV47XR+Dr1NybdP/JWrsHmoQYKkqVQbnuP88RsqPU7s=; 
+ b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBlDc+dsj3+Vh5qemjuEPg29sGFlFmzA+yi/v3Rh
+ XtvZqOfqaGJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCZQ3PnQAKCRCJcvTf3G3A
+ JiHwEACLzTcgywMl1i+ngflg0YluRoEeJQAxOBHxuE5H6DZMdzVg2q1O7AYcZvuFgGEob07505+
+ PzEtpDzTZH/46SXLgI4Sgl0XmudzghRjlp0XTK1UC22xnOBNM9k0OIJif5wStFA/0uiZLRrHII7
+ A/+AqzgBiY88gBa4O+x8Vj0+JBJGnDCr0QudEO6XyIcvvmLLgiRCce78vOKBXTXq6Dktknkayr7
+ GSRsmx3ZTid9GiUDFYYu7/JLETFdk3ZPoT0iX6O1OocWU9VVd8IE71u38u38X+AdokHQtuEXbCe
+ GXNdGJrLV9VqJ6qvypVr3S1EhagL/Z+f7Xz/GMY6nMu+6H9YM0Nbh7PQ8fyD/y9rlT2jcsSJY3r
+ eqE3X+ATIdov/4puub/Z5OUm9R4z3dXWHGfnc/vb5l24ZPzLfhFdjlnbl4LYKnZyxK/lH0OGSkH
+ 9Wks6MuSdRE+bNJFV0VibfzZlV0+wemFXXSlAxxVQGcZ7CWgQaV2w7wE1Y3AMJLRthOuVUU6Kts
+ VfGI7p8XZRScEI6mnWSh8w9zLZOftTtdiCxcVj1gdXRTx2/K3Xfv0UkoHgdzOBqTTEPqGetCOjs
+ WS30PIjoUXxpO+DRvCTjySDsnQXksC7AsjBRhvnXyIR8tgFSEAywP6FcLYaX3ltdG79BvgAkkzq
+ Bs7QmlF kGRGYttQ==
+X-Developer-Key: i=keescook@chromium.org; a=openpgp;
+ fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [RFT PATCH v2 04/12] drm/nouveau: Call
- drm_atomic_helper_shutdown() or equiv at shutdown time
+Subject: [Nouveau] [PATCH 0/9] drm: Annotate structs with __counted_by
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,135 +85,85 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- Douglas Anderson <dianders@chromium.org>, bskeggs@redhat.com, daniel@ffwll.ch
+Cc: Tejas Upadhyay <tejas.upadhyay@intel.com>, Emma Anholt <emma@anholt.net>,
+ Tom Rix <trix@redhat.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ llvm@lists.linux.dev, dri-devel@lists.freedesktop.org,
+ Chris Wilson <chris@chris-wilson.co.uk>, Prike Liang <Prike.Liang@amd.com>,
+ Huang Rui <ray.huang@amd.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Andrzej Hajda <andrzej.hajda@intel.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Matthew Brost <matthew.brost@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, amd-gfx@lists.freedesktop.org,
+ Kuogee Hsieh <quic_khsieh@quicinc.com>, Nathan Chancellor <nathan@kernel.org>,
+ VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Andi Shyti <andi.shyti@linux.intel.com>,
+ nouveau@lists.freedesktop.org, David Airlie <airlied@redhat.com>,
+ virtualization@lists.linux-foundation.org, Chia-I Wu <olvaffe@gmail.com>,
+ linux-hardening@vger.kernel.org, Lijo Lazar <lijo.lazar@amd.com>,
+ Kees Cook <keescook@chromium.org>, Yifan Zhang <yifan1.zhang@amd.com>,
+ linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ Kevin Wang <kevin1.wang@amd.com>, Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Melissa Wen <mwen@igalia.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Evan Quan <evan.quan@amd.com>, Sean Paul <sean@poorly.run>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Xiaojian Du <Xiaojian.Du@amd.com>, Le Ma <le.ma@amd.com>,
+ freedreno@lists.freedesktop.org, Bjorn Andersson <andersson@kernel.org>, "Pan,
+ Xinhui" <Xinhui.Pan@amd.com>, Nick Desaulniers <ndesaulniers@google.com>,
+ linux-kernel@vger.kernel.org, Rob Clark <robdclark@gmail.com>,
+ Zack Rusin <zackr@vmware.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Nirmoy Das <nirmoy.das@intel.com>, Lang Yu <Lang.Yu@amd.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ John Harrison <john.c.harrison@Intel.com>,
+ Hawking Zhang <Hawking.Zhang@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Based on grepping through the source code this driver appears to be
-missing a call to drm_atomic_helper_shutdown() (or
-drm_helper_force_disable_all() if not using atomic) at system shutdown
-time. Among other things, this means that if a panel is in use that it
-won't be cleanly powered off at system shutdown time.
+Hi,
 
-The fact that we should call drm_atomic_helper_shutdown() in the case
-of OS shutdown/restart comes straight out of the kernel doc "driver
-instance overview" in drm_drv.c.
+This is a batch of patches touching drm for preparing for the coming
+implementation by GCC and Clang of the __counted_by attribute. Flexible
+array members annotated with __counted_by can have their accesses
+bounds-checked at run-time checking via CONFIG_UBSAN_BOUNDS (for array
+indexing) and CONFIG_FORTIFY_SOURCE (for strcpy/memcpy-family functions).
 
-Suggested-by: Maxime Ripard <mripard@kernel.org>
-Reviewed-by: Maxime Ripard <mripard@kernel.org>
-Signed-off-by: Douglas Anderson <dianders@chromium.org>
----
-This commit is only compile-time tested. I made my best guess about
-how to fit this into the existing code. If someone wishes a different
-style, please yell.
+As found with Coccinelle[1], add __counted_by to structs that would
+benefit from the annotation.
 
-(no changes since v1)
+Since the element count member must be set before accessing the annotated
+flexible array member, some patches also move the member's initialization
+earlier. (These are noted in the individual patches.)
 
- drivers/gpu/drm/nouveau/nouveau_display.c  |  9 +++++++++
- drivers/gpu/drm/nouveau/nouveau_display.h  |  1 +
- drivers/gpu/drm/nouveau/nouveau_drm.c      | 13 +++++++++++++
- drivers/gpu/drm/nouveau/nouveau_drv.h      |  1 +
- drivers/gpu/drm/nouveau/nouveau_platform.c |  6 ++++++
- 5 files changed, 30 insertions(+)
+-Kees
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-index d8c92521226d..05c3688ccb76 100644
---- a/drivers/gpu/drm/nouveau/nouveau_display.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-@@ -642,6 +642,15 @@ nouveau_display_fini(struct drm_device *dev, bool suspend, bool runtime)
- 	disp->fini(dev, runtime, suspend);
- }
- 
-+void
-+nouveau_display_shutdown(struct drm_device *dev)
-+{
-+	if (drm_drv_uses_atomic_modeset(dev))
-+		drm_atomic_helper_shutdown(dev);
-+	else
-+		drm_helper_force_disable_all(dev);
-+}
-+
- static void
- nouveau_display_create_properties(struct drm_device *dev)
- {
-diff --git a/drivers/gpu/drm/nouveau/nouveau_display.h b/drivers/gpu/drm/nouveau/nouveau_display.h
-index 2ab2ddb1eadf..9df62e833cda 100644
---- a/drivers/gpu/drm/nouveau/nouveau_display.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_display.h
-@@ -47,6 +47,7 @@ void nouveau_display_destroy(struct drm_device *dev);
- int  nouveau_display_init(struct drm_device *dev, bool resume, bool runtime);
- void nouveau_display_hpd_resume(struct drm_device *dev);
- void nouveau_display_fini(struct drm_device *dev, bool suspend, bool runtime);
-+void nouveau_display_shutdown(struct drm_device *dev);
- int  nouveau_display_suspend(struct drm_device *dev, bool runtime);
- void nouveau_display_resume(struct drm_device *dev, bool runtime);
- int  nouveau_display_vblank_enable(struct drm_crtc *crtc);
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-index 50589f982d1a..8ecfd66b7aab 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-@@ -879,6 +879,18 @@ nouveau_drm_remove(struct pci_dev *pdev)
- 	pci_disable_device(pdev);
- }
- 
-+void
-+nouveau_drm_device_shutdown(struct drm_device *dev)
-+{
-+	nouveau_display_shutdown(dev);
-+}
-+
-+static void
-+nouveau_drm_shutdown(struct pci_dev *pdev)
-+{
-+	nouveau_drm_device_shutdown(pci_get_drvdata(pdev));
-+}
-+
- static int
- nouveau_do_suspend(struct drm_device *dev, bool runtime)
- {
-@@ -1346,6 +1358,7 @@ nouveau_drm_pci_driver = {
- 	.id_table = nouveau_drm_pci_table,
- 	.probe = nouveau_drm_probe,
- 	.remove = nouveau_drm_remove,
-+	.shutdown = nouveau_drm_shutdown,
- 	.driver.pm = &nouveau_pm_ops,
- };
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
-index 3666a7403e47..aa936cabb6cf 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drv.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-@@ -327,6 +327,7 @@ struct drm_device *
- nouveau_platform_device_create(const struct nvkm_device_tegra_func *,
- 			       struct platform_device *, struct nvkm_device **);
- void nouveau_drm_device_remove(struct drm_device *dev);
-+void nouveau_drm_device_shutdown(struct drm_device *dev);
- 
- #define NV_PRINTK(l,c,f,a...) do {                                             \
- 	struct nouveau_cli *_cli = (c);                                        \
-diff --git a/drivers/gpu/drm/nouveau/nouveau_platform.c b/drivers/gpu/drm/nouveau/nouveau_platform.c
-index 23cd43a7fd19..b2e82a96411c 100644
---- a/drivers/gpu/drm/nouveau/nouveau_platform.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_platform.c
-@@ -50,6 +50,11 @@ static int nouveau_platform_remove(struct platform_device *pdev)
- 	return 0;
- }
- 
-+static void nouveau_platform_shutdown(struct platform_device *pdev)
-+{
-+	nouveau_drm_device_shutdown(platform_get_drvdata(pdev));
-+}
-+
- #if IS_ENABLED(CONFIG_OF)
- static const struct nvkm_device_tegra_func gk20a_platform_data = {
- 	.iommu_bit = 34,
-@@ -94,4 +99,5 @@ struct platform_driver nouveau_platform_driver = {
- 	},
- 	.probe = nouveau_platform_probe,
- 	.remove = nouveau_platform_remove,
-+	.shutdown = nouveau_platform_shutdown,
- };
+[1] https://github.com/kees/kernel-tools/blob/trunk/coccinelle/examples/counted_by.cocci
+
+Kees Cook (9):
+  drm/amd/pm: Annotate struct smu10_voltage_dependency_table with
+    __counted_by
+  drm/amdgpu/discovery: Annotate struct ip_hw_instance with __counted_by
+  drm/i915/selftests: Annotate struct perf_series with __counted_by
+  drm/msm/dpu: Annotate struct dpu_hw_intr with __counted_by
+  drm/nouveau/pm: Annotate struct nvkm_perfdom with __counted_by
+  drm/vc4: Annotate struct vc4_perfmon with __counted_by
+  drm/virtio: Annotate struct virtio_gpu_object_array with __counted_by
+  drm/vmwgfx: Annotate struct vmw_surface_dirty with __counted_by
+  drm/v3d: Annotate struct v3d_perfmon with __counted_by
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu_discovery.c        | 2 +-
+ drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h | 2 +-
+ drivers/gpu/drm/i915/selftests/i915_request.c        | 2 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h    | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/engine/pm/priv.h        | 2 +-
+ drivers/gpu/drm/v3d/v3d_drv.h                        | 2 +-
+ drivers/gpu/drm/vc4/vc4_drv.h                        | 2 +-
+ drivers/gpu/drm/virtio/virtgpu_drv.h                 | 2 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_surface.c              | 2 +-
+ 9 files changed, 9 insertions(+), 9 deletions(-)
+
 -- 
-2.42.0.515.g380fc7ccd1-goog
+2.34.1
 
