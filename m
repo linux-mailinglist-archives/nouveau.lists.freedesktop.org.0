@@ -1,63 +1,79 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B784E7AB7F5
-	for <lists+nouveau@lfdr.de>; Fri, 22 Sep 2023 19:42:50 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 113B17AB9B5
+	for <lists+nouveau@lfdr.de>; Fri, 22 Sep 2023 21:01:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3449A10E6D1;
-	Fri, 22 Sep 2023 17:42:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 69DE010E08D;
+	Fri, 22 Sep 2023 19:01:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8030310E07E;
- Fri, 22 Sep 2023 17:42:32 +0000 (UTC)
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-57b7256ebfeso595495eaf.3; 
- Fri, 22 Sep 2023 10:42:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695404551; x=1696009351; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=O1mscbgmaMFCH+sggQx7YqczyCptW8ney4CIT5DP64U=;
- b=Nid5vX/6+tGpA85yEA4giXMXpAAyiQ9SCc/aGnTuavVEatDoooale0DpPI8vn2QyMZ
- 3bVD5bQP5jjIRxmvFw5wwVN5AR5X6TsaWz3eEK8jijpxbFDENic6Q8R2U6g6XKtRqWNo
- OqGym2tinP7O0b6ckGdUdyy1IfkR2pZ+DmgYPwE+aToUwjM3onB/S6SJlyNvC92lqg5V
- flhx7LCNBxa5mIIdr/+/3KigZWxO/C1uWGE6ZvyronhsDqBcMPFdrlguzJo+CHKQWU0X
- U0RZ/+1tlcQLadn+L8Qw4bKtkC+bUVJe5RlImq2L2DY/mzYzXe7tDk6Xmw7lofC9l6Ah
- SQMg==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1B50910E6FD
+ for <nouveau@lists.freedesktop.org>; Fri, 22 Sep 2023 19:00:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1695409252;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=NE66f7DfP4/A2VOZXmvxuXHt1FmCuY2Q51yLIoHLwck=;
+ b=VK9ia1C69p2AuLThkIIK0LKPkgnCxZHYupo7R9S74tkSAk8r6gwbVDQYYrsAM0Ip6iNFy9
+ j4M8VDrWQznepxL1eNNSw8ofkdCPXkJuawhjH+UUt6dWoENcXeICIbyE5BfWbZ8nOwiciT
+ z+uoTgfOxo+fBYy6496qiNDjRRGDQYM=
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-466-sK2u3HGsNM60Yp40Ar8m3Q-1; Fri, 22 Sep 2023 15:00:51 -0400
+X-MC-Unique: sK2u3HGsNM60Yp40Ar8m3Q-1
+Received: by mail-qv1-f70.google.com with SMTP id
+ 6a1803df08f44-65648d20aeeso24657256d6.1
+ for <nouveau@lists.freedesktop.org>; Fri, 22 Sep 2023 12:00:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695404551; x=1696009351;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=O1mscbgmaMFCH+sggQx7YqczyCptW8ney4CIT5DP64U=;
- b=klHgi3N5rc4l6h8fM33YjTkprLcNigl81AEHIEBx5klRKQ5jWUdWwC7eaRt5Lm+yqV
- qgwSOAj8t07g4ajFfaEsIKGq5MYbdrvpRD45HpTo8NRT3zm1V06XHs/l7+cIRM/mlmgU
- SzKIGx6NmGQZalbd2U6N89GNjXNqjCNmQShsRSYglGBsda6gh7P2xUd1vDAjBUzC/lDX
- IeMA/f2tb992zTSIwEWJnNuYc7kbcGD3f/FRCaXrXyBWK7W3+BcxeAp4jqi0rsyFnmGv
- WMStiZOYIytn7lFg+nkaZqp01P55PQp44RR0M5UHFOiPTGp7pMu0gsovNeStZq02bxPI
- geNw==
-X-Gm-Message-State: AOJu0Yx8LtOgiMdVMRqi+ejEj3vo+Xd+3fy1rdOfDI1xS1wIGJD03pfr
- 3To0tYaVRhL6vHcUwwbjh4TAgwxT+E7VA8Qf7h4=
-X-Google-Smtp-Source: AGHT+IFPsM3Hdk+pcYqT5bpsUWbwTA0MpnAJeoAQZ6o66BtolUGO//OpOOgoyvfV1ya4MzJTleibWsMBwKq26jjzaO8=
-X-Received: by 2002:a05:6870:2383:b0:1dc:33a:40d8 with SMTP id
- e3-20020a056870238300b001dc033a40d8mr162032oap.4.1695404551639; Fri, 22 Sep
- 2023 10:42:31 -0700 (PDT)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1695409250; x=1696014050;
+ h=mime-version:user-agent:content-transfer-encoding:organization
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=llC9/wUzzd4JVzDSD0PHMCO4lX+W74lZOeDntPKMIjc=;
+ b=qf9y3g1aFsQOv84g/+bkn8JUXDfoEF1ZZnNZ/dtk4alLX1geOTcvhx93STp8xfZJ+Z
+ xtM3giuUOJ3hcltIeqfYFJIkwMk9X6ANb56BE7cDMk6rjxkqN6Ch503EjZE0D5Nvv1Ir
+ /TvvNLi/+EtMC0x551deraMbDQbLump4Fbnt3GnzFGadf6Adi+EmYHCIS+weXIwiMIkN
+ hZhh8TtjrJHs9cQDIrBfCwEFIWeVkTkLU3YsRPlKnFcYYebTiqzl2uQU1g4Tli9oVGr3
+ N7tmvq2Cu5b8oUgm68VidYDqvmmCTM1mcSfqDttAKgiba6yhUdzh5JmAxmJuzSK6cWRE
+ m6yg==
+X-Gm-Message-State: AOJu0YypPDmC5ngWFRjNmLve8abfk1cvP3vC5LZILr8+h5D1uWUXbVrM
+ Qh7RuUfak+5X+EASBqHk5bup9kYnsTuSKiGNFDAh8P0lL7VWAwIhJ4FcGUNFUG+h4uhQHDmhs2G
+ kU+6Eis/QGWIWg0AvFN/bdBtAwA==
+X-Received: by 2002:a05:6214:1845:b0:655:d2c7:a9d1 with SMTP id
+ d5-20020a056214184500b00655d2c7a9d1mr187734qvy.14.1695409250670; 
+ Fri, 22 Sep 2023 12:00:50 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHcAhYi3agHEIh1mExaRpOkIAUDfxEWkbuUfbk0Y5Ex6ReRQkYaRYp/G33/F11gHisOBD3h3Q==
+X-Received: by 2002:a05:6214:1845:b0:655:d2c7:a9d1 with SMTP id
+ d5-20020a056214184500b00655d2c7a9d1mr187719qvy.14.1695409250417; 
+ Fri, 22 Sep 2023 12:00:50 -0700 (PDT)
+Received: from ?IPv6:2600:4040:5c6c:a300::feb? ([2600:4040:5c6c:a300::feb])
+ by smtp.gmail.com with ESMTPSA id
+ w6-20020a0ce106000000b0064f50e2c551sm1671895qvk.1.2023.09.22.12.00.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Sep 2023 12:00:49 -0700 (PDT)
+Message-ID: <1fc22ed54041660dfff5b7f3cc69708fd4ac0472.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Kees Cook <keescook@chromium.org>, David Airlie <airlied@gmail.com>
+Date: Fri, 22 Sep 2023 15:00:47 -0400
+In-Reply-To: <20230922173216.3823169-5-keescook@chromium.org>
 References: <20230922173110.work.084-kees@kernel.org>
- <20230922173216.3823169-2-keescook@chromium.org>
-In-Reply-To: <20230922173216.3823169-2-keescook@chromium.org>
-From: Alex Deucher <alexdeucher@gmail.com>
-Date: Fri, 22 Sep 2023 13:42:20 -0400
-Message-ID: <CADnq5_OV7L4_z5mhAq8x8nV4+yp_wGhyVeg1MrKAVoSbMVV1uw@mail.gmail.com>
-To: Kees Cook <keescook@chromium.org>
+ <20230922173216.3823169-5-keescook@chromium.org>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.48.4 (3.48.4-1.fc38)
+MIME-Version: 1.0
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH 2/9] drm/amdgpu/discovery: Annotate struct
- ip_hw_instance with __counted_by
+Subject: Re: [Nouveau] [PATCH 5/9] drm/nouveau/pm: Annotate struct
+ nvkm_perfdom with __counted_by
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,42 +85,47 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Pan, Xinhui" <Xinhui.Pan@amd.com>, Tom Rix <trix@redhat.com>,
- llvm@lists.linux.dev, dri-devel@lists.freedesktop.org,
- Chris Wilson <chris@chris-wilson.co.uk>, Prike Liang <Prike.Liang@amd.com>,
- Huang Rui <ray.huang@amd.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Andrzej Hajda <andrzej.hajda@intel.com>,
+Cc: Tejas Upadhyay <tejas.upadhyay@intel.com>, nouveau@lists.freedesktop.org,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, llvm@lists.linux.dev,
+ dri-devel@lists.freedesktop.org, Chris Wilson <chris@chris-wilson.co.uk>,
+ Prike Liang <Prike.Liang@amd.com>, Huang Rui <ray.huang@amd.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Andrzej Hajda <andrzej.hajda@intel.com>,
  Marijn Suijten <marijn.suijten@somainline.org>,
- Matthew Brost <matthew.brost@intel.com>, Evan Quan <evan.quan@amd.com>,
- Emma Anholt <emma@anholt.net>, amd-gfx@lists.freedesktop.org,
- Kuogee Hsieh <quic_khsieh@quicinc.com>,
+ Matthew Brost <matthew.brost@intel.com>, Emma Anholt <emma@anholt.net>,
+ Neil Armstrong <neil.armstrong@linaro.org>, amd-gfx@lists.freedesktop.org,
+ Kuogee Hsieh <quic_khsieh@quicinc.com>, Nathan Chancellor <nathan@kernel.org>,
  VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
  Ben Skeggs <bskeggs@redhat.com>, Andi Shyti <andi.shyti@linux.intel.com>,
- nouveau@lists.freedesktop.org, David Airlie <airlied@redhat.com>,
- Alex Deucher <alexander.deucher@amd.com>, Lijo Lazar <lijo.lazar@amd.com>,
+ Tom Rix <trix@redhat.com>, David Airlie <airlied@redhat.com>,
+ virtualization@lists.linux-foundation.org, Chia-I Wu <olvaffe@gmail.com>,
+ linux-hardening@vger.kernel.org, Lijo Lazar <lijo.lazar@amd.com>,
  Yifan Zhang <yifan1.zhang@amd.com>, linux-arm-msm@vger.kernel.org,
  intel-gfx@lists.freedesktop.org, Kevin Wang <kevin1.wang@amd.com>,
- Abhinav Kumar <quic_abhinavk@quicinc.com>, Maxime Ripard <mripard@kernel.org>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Nathan Chancellor <nathan@kernel.org>, Le Ma <le.ma@amd.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- virtualization@lists.linux-foundation.org, Sean Paul <sean@poorly.run>,
- Neil Armstrong <neil.armstrong@linaro.org>, Xiaojian Du <Xiaojian.Du@amd.com>,
- Lang Yu <Lang.Yu@amd.com>, Bjorn Andersson <andersson@kernel.org>,
- Tejas Upadhyay <tejas.upadhyay@intel.com>,
- Nick Desaulniers <ndesaulniers@google.com>, linux-kernel@vger.kernel.org,
- Hawking Zhang <Hawking.Zhang@amd.com>, Melissa Wen <mwen@igalia.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Melissa Wen <mwen@igalia.com>,
  Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Nirmoy Das <nirmoy.das@intel.com>, freedreno@lists.freedesktop.org,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- John Harrison <john.c.harrison@intel.com>, linux-hardening@vger.kernel.org
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Evan Quan <evan.quan@amd.com>, Sean Paul <sean@poorly.run>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Xiaojian Du <Xiaojian.Du@amd.com>, Le Ma <le.ma@amd.com>,
+ freedreno@lists.freedesktop.org, Bjorn Andersson <andersson@kernel.org>, "Pan,
+ Xinhui" <Xinhui.Pan@amd.com>, Nick Desaulniers <ndesaulniers@google.com>,
+ linux-kernel@vger.kernel.org, Rob Clark <robdclark@gmail.com>,
+ Zack Rusin <zackr@vmware.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Alex Deucher <alexander.deucher@amd.com>, Nirmoy Das <nirmoy.das@intel.com>,
+ Lang Yu <Lang.Yu@amd.com>,
+ Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ John Harrison <john.c.harrison@Intel.com>,
+ Hawking Zhang <Hawking.Zhang@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Sep 22, 2023 at 1:33=E2=80=AFPM Kees Cook <keescook@chromium.org> w=
-rote:
->
+Reviewed-by: Lyude Paul <lyude@redhat.com>
+
+Thanks!
+
+On Fri, 2023-09-22 at 10:32 -0700, Kees Cook wrote:
 > Prepare for the coming implementation by GCC and Clang of the __counted_b=
 y
 > attribute. Flexible array members annotated with __counted_by can have
@@ -112,42 +133,41 @@ y
 S
 > (for array indexing) and CONFIG_FORTIFY_SOURCE (for strcpy/memcpy-family
 > functions).
->
-> As found with Coccinelle[1], add __counted_by for struct ip_hw_instance.
->
+>=20
+> As found with Coccinelle[1], add __counted_by for struct nvkm_perfdom.
+>=20
 > [1] https://github.com/kees/kernel-tools/blob/trunk/coccinelle/examples/c=
 ounted_by.cocci
->
-> Cc: Alex Deucher <alexander.deucher@amd.com>
-> Cc: "Christian K=C3=B6nig" <christian.koenig@amd.com>
-> Cc: "Pan, Xinhui" <Xinhui.Pan@amd.com>
+>=20
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: Karol Herbst <kherbst@redhat.com>
+> Cc: Lyude Paul <lyude@redhat.com>
 > Cc: David Airlie <airlied@gmail.com>
 > Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: Hawking Zhang <Hawking.Zhang@amd.com>
-> Cc: amd-gfx@lists.freedesktop.org
 > Cc: dri-devel@lists.freedesktop.org
+> Cc: nouveau@lists.freedesktop.org
 > Signed-off-by: Kees Cook <keescook@chromium.org>
-
-Acked-by: Alex Deucher <alexander.deucher@amd.com>
-
 > ---
->  drivers/gpu/drm/amd/amdgpu/amdgpu_discovery.c | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/pm/priv.h | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_discovery.c b/drivers/gpu/=
-drm/amd/amdgpu/amdgpu_discovery.c
-> index d1bc7b212520..be4c97a3d7bf 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_discovery.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_discovery.c
-> @@ -662,7 +662,7 @@ struct ip_hw_instance {
->         u8  harvest;
->
->         int num_base_addresses;
-> -       u32 base_addr[];
-> +       u32 base_addr[] __counted_by(num_base_addresses);
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/pm/priv.h b/drivers/gpu/=
+drm/nouveau/nvkm/engine/pm/priv.h
+> index 6ae25d3e7f45..c011227f7052 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/pm/priv.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/pm/priv.h
+> @@ -82,7 +82,7 @@ struct nvkm_perfdom {
+>  =09u8  mode;
+>  =09u32 clk;
+>  =09u16 signal_nr;
+> -=09struct nvkm_perfsig signal[];
+> +=09struct nvkm_perfsig signal[] __counted_by(signal_nr);
 >  };
->
->  struct ip_hw_id {
-> --
-> 2.34.1
->
+> =20
+>  struct nvkm_funcdom {
+
+--=20
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
+
