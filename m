@@ -1,61 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D6ED7ABA86
-	for <lists+nouveau@lfdr.de>; Fri, 22 Sep 2023 22:29:34 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D4F7A7ABC1C
+	for <lists+nouveau@lfdr.de>; Sat, 23 Sep 2023 01:01:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CABD310E70F;
-	Fri, 22 Sep 2023 20:29:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8C20E10E71C;
+	Fri, 22 Sep 2023 23:01:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 453 seconds by postgrey-1.36 at gabe;
- Fri, 22 Sep 2023 20:29:13 UTC
-Received: from omta036.useast.a.cloudfilter.net
- (omta036.useast.a.cloudfilter.net [44.202.169.35])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 016AB10E70F;
- Fri, 22 Sep 2023 20:29:13 +0000 (UTC)
-Received: from eig-obgw-5010a.ext.cloudfilter.net ([10.0.29.199])
+Received: from omta038.useast.a.cloudfilter.net
+ (omta038.useast.a.cloudfilter.net [44.202.169.37])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B99C310E57D;
+ Fri, 22 Sep 2023 23:01:38 +0000 (UTC)
+Received: from eig-obgw-5005a.ext.cloudfilter.net ([10.0.29.234])
  by cmsmtp with ESMTP
- id jm9xqZ0f2DKaKjmehqEjuC; Fri, 22 Sep 2023 20:21:39 +0000
+ id jjHdqyFK7WU1cjp9VqQfF7; Fri, 22 Sep 2023 23:01:37 +0000
 Received: from gator4166.hostgator.com ([108.167.133.22]) by cmsmtp with ESMTPS
- id jmegqraPwIDdmjmegq25ta; Fri, 22 Sep 2023 20:21:39 +0000
-X-Authority-Analysis: v=2.4 cv=HcYH8wI8 c=1 sm=1 tr=0 ts=650df753
+ id jp9UqhWgEU8Krjp9UqliwD; Fri, 22 Sep 2023 23:01:37 +0000
+X-Authority-Analysis: v=2.4 cv=Qt9NYH+d c=1 sm=1 tr=0 ts=650e1cd1
  a=1YbLdUo/zbTtOZ3uB5T3HA==:117 a=P7XfKmiOJ4/qXqHZrN7ymg==:17
  a=OWjo9vPv0XrRhIrVQ50Ab3nP57M=:19 a=dLZJa+xiwSxG16/P+YVxDGlgEgI=:19
  a=IkcTkHD0fZMA:10 a=zNV7Rl7Rt7sA:10 a=wYkD_t78qR0A:10 a=NEAV23lmAAAA:8
- a=QyXUC8HyAAAA:8 a=pGLkceISAAAA:8 a=taGs_qngAAAA:8 a=e5mUnYsNAAAA:8
- a=cm27Pg_UAAAA:8 a=VwQbUJbxAAAA:8 a=HvF037n1xESchLcPDVoA:9 a=QEXdDO2ut3YA:10
- a=DM_PlaNYpjARcMQr2apF:22 a=Vxmtnl_E_bksehYqCbjh:22 a=xmb-EsYY8bH0VWELuYED:22
- a=AjGcO6oz07-iQ99wixmX:22
+ a=pGLkceISAAAA:8 a=COk6AnOGAAAA:8 a=KKAkSRfTAAAA:8 a=tVI0ZWmoAAAA:8
+ a=VwQbUJbxAAAA:8 a=e5mUnYsNAAAA:8 a=cm27Pg_UAAAA:8 a=HSIKE4f6JIY9BbnNq1MA:9
+ a=QEXdDO2ut3YA:10 a=TjNXssC_j7lpFel5tvFf:22 a=cvBusfyB2V15izCimMoJ:22
+ a=-BPWgnxRz2uhmvdm1NTO:22 a=AjGcO6oz07-iQ99wixmX:22 a=Vxmtnl_E_bksehYqCbjh:22
+ a=xmb-EsYY8bH0VWELuYED:22
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
  In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
  :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
  List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5CZfeSfhVDdG7js/oL8luePAjmy7SVUuGo6ktj3BCGU=; b=eTuJfvywo6DWZd+lB5E62XGp81
- 52RafMEQrw+IvXaGOipkv/jAwnqlJIjEqGWWSVqnjuJ1oUzn0kui852bg12vld7VilT7KTQCA9+9/
- zr4s099Uyvv/SEYB08E/h1Oq8xy3yM/bkraCwyFAyTdZPYWz27LU6CoPiR+zevWgOS4Ch6ZuLkhTN
- 6OEb6LgtnbgPmMsDYkZ7Jr7Ur5T/k3FkuU+ZRRIQIY6a7D+BSFR7WQLZL0ztkNT6eBRgLFWu1FZIU
- NUmvFgfJb6EN0cvDue5TyJvAzSQCFiHT2shFOYxBedm+35vuFcSoY02lo/bpAUcWe+C4bLS/48Jf+
- ln9JUBGA==;
-Received: from [94.239.20.48] (port=57726 helo=[192.168.1.98])
+ bh=2zK48vQolMqlRSqjrCvSBXgjsAGsv6hepauhi4xjwpA=; b=b/1EYxIBUgGg9cZaaUjjmBS/mU
+ T2yEbpC2AZEdHIQFce+UFklWWGOgixs7mO+CKHnf06Wj3lTM9QRuwhvK+2SO19wHzObu9CLwmmvSS
+ 4dOgYBpfteeN/G8IiOP4ZVetuaf5o6Cy9KGmXGoMaNauY6O+iPFWV0fV72EvQ5mwZxC6Dkg74SA3E
+ a1ZrEaqFYpIJ55vv142MQF2bE+tdbkhAmX54s4nIsXKbLS3bfQ6DgLPLnRPaxA9M/AEuH5ImPeV23
+ yMuu/BVEnGSt08kaloGvrDygEYGGLJx2ejKtsDLcRnMTXbeCrWUvyxpWiIU8XvzTw4kSnqosp+LIZ
+ IWwif/Wg==;
+Received: from [94.239.20.48] (port=43798 helo=[192.168.1.98])
  by gator4166.hostgator.com with esmtpsa (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <gustavo@embeddedor.com>) id 1qjkfA-000Nms-2z;
- Fri, 22 Sep 2023 13:14:01 -0500
-Message-ID: <7ad534fe-3494-9915-1663-a3aafcb41b0e@embeddedor.com>
-Date: Fri, 22 Sep 2023 20:14:52 -0600
+ (envelope-from <gustavo@embeddedor.com>) id 1qjkfx-000PVa-1n;
+ Fri, 22 Sep 2023 13:14:49 -0500
+Message-ID: <ebf2ca90-2582-4221-5aa2-45e0d98602a0@embeddedor.com>
+Date: Fri, 22 Sep 2023 20:15:40 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
 Content-Language: en-US
 To: Kees Cook <keescook@chromium.org>, David Airlie <airlied@gmail.com>
 References: <20230922173110.work.084-kees@kernel.org>
- <20230922173216.3823169-3-keescook@chromium.org>
+ <20230922173216.3823169-4-keescook@chromium.org>
 From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
-In-Reply-To: <20230922173216.3823169-3-keescook@chromium.org>
+In-Reply-To: <20230922173216.3823169-4-keescook@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-AntiAbuse: This header was added to track abuse,
@@ -67,22 +66,22 @@ X-AntiAbuse: Sender Address Domain - embeddedor.com
 X-BWhitelist: no
 X-Source-IP: 94.239.20.48
 X-Source-L: No
-X-Exim-ID: 1qjkfA-000Nms-2z
+X-Exim-ID: 1qjkfx-000PVa-1n
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-X-Source-Sender: ([192.168.1.98]) [94.239.20.48]:57726
+X-Source-Sender: ([192.168.1.98]) [94.239.20.48]:43798
 X-Source-Auth: gustavo@embeddedor.com
 X-Email-Count: 0
 X-Org: HG=hgshared;ORG=hostgator;
 X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
 X-Local-Domain: yes
-X-CMAE-Envelope: MS4xfAY8rV2me6F2mDt66pQHEuC+vtaVKa3wVbK9rBNbPMa0TznnFiUVIHaNG6O9nEd6j0mneUGz+URBy95vU15OHkcsR6v2DqGXOmKPGFSUWhv91A9Ue6TS
- Ouhgb1MO+0WBgaA+LT+0E5mdw0N86tLkJwArkYETXDhPl979GhQreptXVBZ5GIbbrSoI9snd2w/1ldP+eh9mmtJzs3lbZxrUb6Sj9l5QzHyRF50V13qtR9zG
- mvb85Y5+sFK6FG99FcoJxdCmLoyXZIrlZBvEBQhf2RNm620Y4wFxMur5xrGcbfsdqAKHgsKsqqNUH9bxkBawuXO+ogHoqTz+oFgxJHcU6jrRnnjZkYn3tyIK
- bYEBZdT5m6+KBTKIvVmV9kJZS/DYWwZEOq7JTbifTE+cmd1z6nU=
-Subject: Re: [Nouveau] [PATCH 3/9] drm/i915/selftests: Annotate struct
- perf_series with __counted_by
+X-CMAE-Envelope: MS4xfPyUJAjXOAA9VU8QimzoFGWt+Jwe/XgwOunYd7S+fJd+ogfjscifNL1zGc1fDH0bgMJbWTuoJrWNrWn1RrfnJ6P1DFgHXw8qH++6HTbFSheZq31lLerO
+ YDj1vpFxdbzKlPFHqssmxQ4CWiW0ijlFfKn4ZILehYsbu6i9s+bKi1RvFqPe44DBex5uhg/KqKHX/nKc4ZZo8c6GDKLXFo4F3GDGSS3IgZSGOzkNmPDcZBrH
+ l6L0cOGfBBasTN0KwQ02QQjSk+f2n5VKmf5O9KRGuY37b7wdezHahd6gGS60Cfhk1q6Cezizg/cMfWlwb/+i6+VKGNx+CiI0vPpfYteVXi/q5R1a5EhmO53C
+ ITs8wrButGZ3QAFCpoLiJt+JT0VdBx1wLvzxF4rm4pSMr8QRya4=
+Subject: Re: [Nouveau] [PATCH 4/9] drm/msm/dpu: Annotate struct dpu_hw_intr
+ with __counted_by
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -119,12 +118,12 @@ Cc: Tejas Upadhyay <tejas.upadhyay@intel.com>, Emma Anholt <emma@anholt.net>,
  Evan Quan <evan.quan@amd.com>, Sean Paul <sean@poorly.run>,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Xiaojian Du <Xiaojian.Du@amd.com>, Le Ma <le.ma@amd.com>,
- freedreno@lists.freedesktop.org, Bjorn Andersson <andersson@kernel.org>, "Pan,
+ Lang Yu <Lang.Yu@amd.com>, Bjorn Andersson <andersson@kernel.org>, "Pan,
  Xinhui" <Xinhui.Pan@amd.com>, Nick Desaulniers <ndesaulniers@google.com>,
  linux-kernel@vger.kernel.org, Rob Clark <robdclark@gmail.com>,
  Zack Rusin <zackr@vmware.com>, Daniel Vetter <daniel@ffwll.ch>,
  Alex Deucher <alexander.deucher@amd.com>, Nirmoy Das <nirmoy.das@intel.com>,
- Lang Yu <Lang.Yu@amd.com>,
+ freedreno@lists.freedesktop.org,
  =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
  John Harrison <john.c.harrison@Intel.com>,
  Hawking Zhang <Hawking.Zhang@amd.com>
@@ -140,22 +139,21 @@ On 9/22/23 11:32, Kees Cook wrote:
 > (for array indexing) and CONFIG_FORTIFY_SOURCE (for strcpy/memcpy-family
 > functions).
 > 
-> As found with Coccinelle[1], add __counted_by for struct perf_series.
+> As found with Coccinelle[1], add __counted_by for struct dpu_hw_intr.
 > 
 > [1] https://github.com/kees/kernel-tools/blob/trunk/coccinelle/examples/counted_by.cocci
 > 
-> Cc: Jani Nikula <jani.nikula@linux.intel.com>
-> Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
-> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-> Cc: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+> Cc: Rob Clark <robdclark@gmail.com>
+> Cc: Abhinav Kumar <quic_abhinavk@quicinc.com>
+> Cc: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+> Cc: Sean Paul <sean@poorly.run>
+> Cc: Marijn Suijten <marijn.suijten@somainline.org>
 > Cc: David Airlie <airlied@gmail.com>
 > Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: Chris Wilson <chris@chris-wilson.co.uk>
-> Cc: John Harrison <john.c.harrison@Intel.com>
-> Cc: Andi Shyti <andi.shyti@linux.intel.com>
-> Cc: Matthew Brost <matthew.brost@intel.com>
-> Cc: intel-gfx@lists.freedesktop.org
+> Cc: Bjorn Andersson <andersson@kernel.org>
+> Cc: linux-arm-msm@vger.kernel.org
 > Cc: dri-devel@lists.freedesktop.org
+> Cc: freedreno@lists.freedesktop.org
 > Signed-off-by: Kees Cook <keescook@chromium.org>
 
 Reviewed-by: Gustavo A. R. Silva <gustavoars@kernel.org>
@@ -165,19 +163,19 @@ Thanks
 Gustavo
 
 > ---
->   drivers/gpu/drm/i915/selftests/i915_request.c | 2 +-
+>   drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h | 2 +-
 >   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/gpu/drm/i915/selftests/i915_request.c b/drivers/gpu/drm/i915/selftests/i915_request.c
-> index a9b79888c193..acae30a04a94 100644
-> --- a/drivers/gpu/drm/i915/selftests/i915_request.c
-> +++ b/drivers/gpu/drm/i915/selftests/i915_request.c
-> @@ -1924,7 +1924,7 @@ struct perf_stats {
->   struct perf_series {
->   	struct drm_i915_private *i915;
->   	unsigned int nengines;
-> -	struct intel_context *ce[];
-> +	struct intel_context *ce[] __counted_by(nengines);
+> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h
+> index dab761e54863..50cf9523d367 100644
+> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h
+> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h
+> @@ -61,7 +61,7 @@ struct dpu_hw_intr {
+>   		void (*cb)(void *arg, int irq_idx);
+>   		void *arg;
+>   		atomic_t count;
+> -	} irq_tbl[];
+> +	} irq_tbl[] __counted_by(total_irqs);
 >   };
 >   
->   static int cmp_u32(const void *A, const void *B)
+>   /**
