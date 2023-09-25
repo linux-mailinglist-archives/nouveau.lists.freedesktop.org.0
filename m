@@ -1,61 +1,120 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 716F27ACD49
-	for <lists+nouveau@lfdr.de>; Mon, 25 Sep 2023 02:43:41 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 00A3D7AD030
+	for <lists+nouveau@lfdr.de>; Mon, 25 Sep 2023 08:30:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B6BF910E1BC;
-	Mon, 25 Sep 2023 00:43:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6E77B10E1FA;
+	Mon, 25 Sep 2023 06:30:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1368610E1BC;
- Mon, 25 Sep 2023 00:43:37 +0000 (UTC)
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-9b275afb6abso331528666b.1; 
- Sun, 24 Sep 2023 17:43:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695602615; x=1696207415; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=voLpRV9BzDd7KFcn1zScjesjTJxbnSzvVJd4Ts99MQs=;
- b=bU3b3EYQlrJF9b9sNY4CWD+WTgeVN7aCHGBnxv+fabd90CoWNglWpwkyVwjMuadIve
- +FxnM/sCAbJiSuD4PuCdDtBa81SNnMTVuHz/EZfecM8joVVb8pOJ0A3C4iZh3esxJFuw
- DrGfqev/eCziaDEfthlAR22FoUcbzuECmBw+g4yONgEvakMvXmeautY0dNdQrNrLkpUE
- A9RPc7LVa3+XQkB08LkGd8PZc9yeQCahx0X72Zshu5fvtSYZJWecQw5JyjEILsdIBjf2
- 0LR+ITEbqm5gyL6ZFRSXzhrPYJ18QV1tJpydz0GSuYCCk+NsT/0VySA5m0CiI2uQ6t7N
- 4cZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695602615; x=1696207415;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=voLpRV9BzDd7KFcn1zScjesjTJxbnSzvVJd4Ts99MQs=;
- b=F8ueQJabOiB56cHbUaexTEcK/F/pLse/pWU1WBRT0zROyEiRzBcgNmS+vK6fXKulws
- owQ8VeU5gZ7MGNJxcoH0ndwRtco5VizYKQa+/en/Tvk1telkU5gLu7Q4/5EySbUrskPJ
- HDrXOdXfX7gkVz3dZuFpqN8PqVhLFtxhGZBSZBbIzubZpWhsTg1xVeLIOxAXhx/61u4x
- QQHENm7Qdt+GPGIcxDlejBoDqBFWn2hGF40R/rTvp3aA47N1+6qrLm8pTgoqz2r7vJa9
- 8Mv76sznurlTrE+uo2rQyr2lN3cgNJDLtR0rjbGmBimCy5NvJ7LaaHlgLEYWrv5l1ai2
- 4I4A==
-X-Gm-Message-State: AOJu0YwQcYnzfsBALRYFPvT7v3WFHULjcyi4k18YGafR9hOWNamZEUVY
- mWPkhSy88xoE4UZEOXgpQE01Cwz38w9bIvJmFxVArFs1e/BUrQ==
-X-Google-Smtp-Source: AGHT+IEaESKn3LhZPlfSbobeZNZQTAicxTBJOIIaFkSdoe4C6shOEgEdtRfmXOhL86rO6SVgWD2YYaBjDP2lHVuToCo=
-X-Received: by 2002:a17:906:ca08:b0:9a5:aa43:1c7c with SMTP id
- jt8-20020a170906ca0800b009a5aa431c7cmr8856060ejb.26.1695602615372; Sun, 24
- Sep 2023 17:43:35 -0700 (PDT)
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on2060.outbound.protection.outlook.com [40.107.212.60])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EA8F410E1E9;
+ Mon, 25 Sep 2023 06:30:46 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=L4x/AWK6vQaP95qcUrx8+b2Z+WshKKiJySseIKrHEM2i5vuhzHXEEQqQ10U7r+2HxGc8IU7S6SW+dZSCEj1Ju+vGToUxd1ovluZOUf2ioYEMkOKkSxNe8vVe/U7ijqV6kncedF1D0vmJwJxMI5vjpKYcQOfgKMgyRHX2NSLl4J4QNJmpQ4n5MC/Lz7u343Ej4G9Aw/+UKJnyRYr+uHOLJlh2DVtP+PqWlcuj5Pi19QaMLQEWsF522OVI61G50rdcy2CAEeWQX+zbEE5j0OuyciaFe1elf0ICdLZ/Ahygvn/1BduvFV6B6oMWDk0dpSiig+W4FKoKpvQfY/ELCwA7eg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jrYlWSstY2oM9E2gKHkKl91tKusbuhZyFFqDaskVno4=;
+ b=VQY8mUgAS7ggoTgVZUQNoLS6Pu0qfCAuhHbF8QHiQSSHM1aAVZfY5zt40NJZI5H4TEnONHKeuSGkZXGOkNAJcgDmomIfcA5oI0S0mC4P9p3JdhRdcMTOHtpqGnVuwDo3o3CZ63AYjxp/doeeOCULf1E/PZ2dvlYdSc13ibNUK7xc7tv4LYLUZbgtMR1jK4jBW0ehfyDdGPWwwA+BRZtwx+uRCQYu1FxxN5W5sO57Cz+feBcQ/xK/a6U/anFUJ6418LGYh6JZ/7723tiEww0r2EkIsV2Qrj0Voep4clA1dPj8hz/+0azynqbjekjLqu9eYueUoiJZuheXXbnN1qYKcQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jrYlWSstY2oM9E2gKHkKl91tKusbuhZyFFqDaskVno4=;
+ b=Q3MgY7E4ulobKORtdFNEkYbSPHx6cJWGhq1aBrhAPtV3+DrZrq34zmYWwbbTRLxqghMJhEGXvOww90PoDARbzJVOLpQKFUGIvFz6e0OMTPeIVeWNgblf/8G5mX1AAhBzDhpwRkBVybuOmr1rMPuHvNAQpUCS1HzKZa8JlKZlous=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by SN7PR12MB6862.namprd12.prod.outlook.com (2603:10b6:806:265::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.20; Mon, 25 Sep
+ 2023 06:30:42 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::a7fa:4411:67a3:131d]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::a7fa:4411:67a3:131d%4]) with mapi id 15.20.6813.027; Mon, 25 Sep 2023
+ 06:30:42 +0000
+Message-ID: <2635922e-f52a-4e91-40c6-4f1358972786@amd.com>
+Date: Mon, 25 Sep 2023 08:30:30 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Content-Language: en-US
+To: Alex Deucher <alexdeucher@gmail.com>, Kees Cook <keescook@chromium.org>
+References: <20230922173110.work.084-kees@kernel.org>
+ <20230922173216.3823169-1-keescook@chromium.org>
+ <CADnq5_P2p3bmczci=pU+pG6f9+hqn=-xp1EynP2345CJZRW08w@mail.gmail.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <CADnq5_P2p3bmczci=pU+pG6f9+hqn=-xp1EynP2345CJZRW08w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR3P281CA0132.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:94::12) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
 MIME-Version: 1.0
-References: <20230920144343.64830-1-dakr@redhat.com>
- <20230920144343.64830-4-dakr@redhat.com>
-In-Reply-To: <20230920144343.64830-4-dakr@redhat.com>
-From: Dave Airlie <airlied@gmail.com>
-Date: Mon, 25 Sep 2023 10:43:23 +1000
-Message-ID: <CAPM=9txPkeaTb3sRMqdmDDKmMgaL4eNvSZ64tkfDDTr-ULjVmw@mail.gmail.com>
-To: Danilo Krummrich <dakr@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH drm-misc-next v4 3/8] drm/nouveau: uvmm:
- rename 'umgr' to 'base'
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|SN7PR12MB6862:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3aba28b0-3b4b-4b86-ba15-08dbbd90f13a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: C65ak+mOIk4p5X3XRlJQxrrgMAQPBX9ek+i4FnRenQkrPN4gka8rLf/Vxbev1aE1OnitnikeUxqapEbbRQA0LHIocv/sCxFbF2fI8y36ve6+SIg8OI2GJ361jVQH5J598LaCMuiI/cstNEFGw9H1a3RaOh41JPYZ8MD9tpl+EosioMr+1azW/iubtJR95kvKj1FhvDlba9KlCkt2fYu++c5Uv/SMiHg1xKJkB2CtpxVcOzZamKfzGBaHYWvQBUyCFrgmEheZmN3PRhGWXA6l0FO4P/yxFUJsXNr+kei+b4BlA9mOz4R88dwk9VqJi7jc5iaTENN5GFv4iztyViWDcF9+nGccAqsm4G+eS16dmGVUTS1YAWeYcqPE3hj5+lFbrK8SoAqkEHFKDolPfX0/zhP52QDhX0KCGzIW7VWZLz3hUbRpa7uR/Jr/OXtsrjdQGNhT92B3DoCOCyk1XfPnijgSeXi18mMxHOzXNDTce1sJzsvKd37cFJchnSl/Oc3fUVLNnEWzPydJo30taywVIiP1By5QnxNICUbyVT7Q1Vs93XQsU4wE/URXO2aTS9sqksUhP2SaA1V0QL/DHn0gZdObm79nsadFjRko0cgEwVxdTvshcYVDSd8z1HaKt5kuq7NrWueskKhBHgjaYM2gPQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(136003)(346002)(366004)(39860400002)(376002)(396003)(230922051799003)(186009)(1800799009)(451199024)(66946007)(6512007)(316002)(38100700002)(26005)(110136005)(66476007)(54906003)(66556008)(36756003)(53546011)(478600001)(966005)(41300700001)(6506007)(2616005)(6486002)(7416002)(6666004)(2906002)(7406005)(83380400001)(86362001)(31696002)(31686004)(8936002)(8676002)(4326008)(66574015)(5660300002)(45980500001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?a1gydmFKQ2ppRml4NG5SR3NwS1dkaE05WENyNGorK0RCWXpVbkJiMlZXamJ6?=
+ =?utf-8?B?MXpaU2F2YU9uZ0Z0eWlNLzN0NHdibmF1NmZCZnBGbDJ6dHBMTVF3MDluZHFu?=
+ =?utf-8?B?Vnk4azdZZ2FJUVV4TExhZlQ5TGxJYTFvNHI5VUJYSlBHUG1RS1lpRTJzMmRn?=
+ =?utf-8?B?bk5FdldwYVBva016bE5CR2kzU0VNN3pzMjJiaU54ZHJUYksrOGUyditSRXY3?=
+ =?utf-8?B?OTFmdmVWQTlDM1JvSUVCWjh5cytsMXVBeUdoUjVINzJrY08xZm9iaElMNGFS?=
+ =?utf-8?B?b3hRQXdSYnFRQyt2UGpoeUlHNVVTa1cvcW4rQXVjQkRNRDlvMHcwU01sUEd1?=
+ =?utf-8?B?QVY2YXpHV2JTdmVhS2VPK1kzYmJKc1hwTFlKYzVyRkZTU1VwRkoydGtXemFX?=
+ =?utf-8?B?MXJ0UWY0eERGME1NM0tLaFVoaDczdVRTUmxzMkljcHlta2RuZXMrVEhEOUQ1?=
+ =?utf-8?B?THB2dnJZNGg2Z1NBNVdxZVhMd2RybnRoWk5iKzBnemxGSVNRMkl3RUd5bGJh?=
+ =?utf-8?B?WFZxYWkzNm8wOWlUd1dNQVI0SXRBOUV1U0RqS3dacDB1eDVXOUhnVFpYeWdt?=
+ =?utf-8?B?RXlwT1ZYQzJoSkU2SlZVTENzUUkwMXJXeG5yRzZ6MUl0b2d1TXRLZU9MSUxL?=
+ =?utf-8?B?cEJnS1A0bHd2cGNLTk5GNFBoVHYvTHFMU3JVVzI4LzIvV0UwekNBZXg1V1Jy?=
+ =?utf-8?B?RzF0c1JydjVBQks4Z1hJR2dyem1sVmRPNVBvQnhzQzIxRkFtYkZIRjI1STNw?=
+ =?utf-8?B?Nis5cVhoRjJ0RUhBM21GRDgzRk1LTmZmY2VzaG5nUDU0OWY3ejJ1d1hEMWtC?=
+ =?utf-8?B?c1lwU0FyZ0UrVEJWenBIZjBVS1RTOEQ1VE9SSStjcmpxK1hxSXA2Y010dXFw?=
+ =?utf-8?B?cllwYkh0L2hUcWhJSmk0NVZMWXpNRGl4VzFaVWhGWjE2dlBoYUlzbm1rdXJl?=
+ =?utf-8?B?cDNOREFZYXJ2bWlkZld4TFpMbiswUkVQTjlzSytTTGVRamFUUFVvaEZEVUZT?=
+ =?utf-8?B?VkVrckF0T01jdE13MDZmelVlVFYzK2NabGk0U29pRW44NTgya05GdlBvbEF5?=
+ =?utf-8?B?Kzhmd1VKTVEvb2pMUGYvWUpQR2RKNHNwdGZyWWtKc1d3QzF0NENNWE5FdjR2?=
+ =?utf-8?B?Z0IyZng5L2c4RDh4ck53cWlDL2RVSDFXR3dsa3VnK2R4d3pwV0xjUTNUUnFU?=
+ =?utf-8?B?dTltVW50Y2FPdTJiK0xRZGkvZ2NJSUlZelpkS0tkbWcyZG4wa0J3RFk3b2ZZ?=
+ =?utf-8?B?eWFrSS9UV2JBQzVLTjdoSzhGSUkxZm5vbGg4aEFJdHB4SXlmR245R1R0ckFi?=
+ =?utf-8?B?aUthWDRPcG9xcXpBejRIQVFyTkpuM2FoVU1qMkVQVkdodXN2MDRuMFBWZGQy?=
+ =?utf-8?B?a0tSdzJFQnIrMzVMeHloK2ZLb0h2YXlCbTEwUmx4T1psMzl6emFzQURvTUJ5?=
+ =?utf-8?B?K1U3RU4zdnRiSXpvcXYxaXN5UGMyTmRIVVBFa3ljbzlVWVBaWnQ5TU4yVjdu?=
+ =?utf-8?B?THZTQzlwLzFFR282UCtGY0xkdHdSQ3dBZ0djSVVkZXdTRVRkYWRmVUgremxv?=
+ =?utf-8?B?S2lNd0hzc2pla3U5WUJhVy92cUVkb3p6NGpiVElkOGNaRXNBc3ZvK045QWdT?=
+ =?utf-8?B?OG9DMEtEMEJDWHl3MXRKNVVCUXZralFodjN0eWFlMURoUkFuWUFndWZ5S1Ji?=
+ =?utf-8?B?UW5VUElLRDk4N01EbG11YnArakNHUzcyWG4zSks4a3V1WlJuSjBHQjZBMm1q?=
+ =?utf-8?B?R0Q1TkEyWmNjazZUdDBvNTZZeURFSkJxazV1OStrblNBbXlxK3NyQXRISFJi?=
+ =?utf-8?B?dk9SKzlHcThUQzF1U2RaRlJFeTdoTStZUmpmL3JCZ3ZaRy8yaW1YYWdtb0xp?=
+ =?utf-8?B?bkhvWlg2MWd1ci9iZmMwSXVzN0t0R1pwWkUrRmNTOEJMWUFYRE9jblhzQmFF?=
+ =?utf-8?B?Y1NZSWNkQm9hZUp6TE04NGpXTGNzck9aSXFMeC9xRU1ERDFEbVhEaXJhSnVP?=
+ =?utf-8?B?OVNMbXlETGZtMjNJQ1FnNEFwYTVZa3ZpMUhQdzhZQjVZVlB0S2E4MU5YbjNn?=
+ =?utf-8?B?c0xmQktmWlRaQ1lWU0NaVlpaUmQrdlJVSUM0Z3MrY1F0TEdQazRISUE2YUFI?=
+ =?utf-8?Q?BVDdWhKml9/7vQbbdQvRlGU8A?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3aba28b0-3b4b-4b86-ba15-08dbbd90f13a
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2023 06:30:42.5809 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: eeredeeq8QPNAhRn5tTSES0nxTZt7SAE45bJJ3BKVkAKNa80Xf0GwsxPR7FBj1RY
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6862
+Subject: Re: [Nouveau] [PATCH 1/9] drm/amd/pm: Annotate struct
+ smu10_voltage_dependency_table with __counted_by
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,229 +126,92 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
- sarah.walker@imgtec.com, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- boris.brezillon@collabora.com, donald.robson@imgtec.com, daniel@ffwll.ch,
- christian.koenig@amd.com, faith.ekstrand@collabora.com
+Cc: "Pan, Xinhui" <Xinhui.Pan@amd.com>, Tom Rix <trix@redhat.com>,
+ llvm@lists.linux.dev, dri-devel@lists.freedesktop.org,
+ Chris Wilson <chris@chris-wilson.co.uk>, Prike Liang <Prike.Liang@amd.com>,
+ Huang Rui <ray.huang@amd.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Andrzej Hajda <andrzej.hajda@intel.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Matthew Brost <matthew.brost@intel.com>, Evan Quan <evan.quan@amd.com>,
+ Emma Anholt <emma@anholt.net>, amd-gfx@lists.freedesktop.org,
+ Kuogee Hsieh <quic_khsieh@quicinc.com>,
+ VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Andi Shyti <andi.shyti@linux.intel.com>,
+ nouveau@lists.freedesktop.org, David Airlie <airlied@redhat.com>,
+ Alex Deucher <alexander.deucher@amd.com>, Lijo Lazar <lijo.lazar@amd.com>,
+ Yifan Zhang <yifan1.zhang@amd.com>, linux-arm-msm@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, Kevin Wang <kevin1.wang@amd.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>, Maxime Ripard <mripard@kernel.org>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Nathan Chancellor <nathan@kernel.org>, Le Ma <le.ma@amd.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ virtualization@lists.linux-foundation.org, Sean Paul <sean@poorly.run>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Xiaojian Du <Xiaojian.Du@amd.com>,
+ Lang Yu <Lang.Yu@amd.com>, Bjorn Andersson <andersson@kernel.org>,
+ Tejas Upadhyay <tejas.upadhyay@intel.com>,
+ Nick Desaulniers <ndesaulniers@google.com>, linux-kernel@vger.kernel.org,
+ Hawking Zhang <Hawking.Zhang@amd.com>, Melissa Wen <mwen@igalia.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Nirmoy Das <nirmoy.das@intel.com>, freedreno@lists.freedesktop.org,
+ John Harrison <john.c.harrison@intel.com>, linux-hardening@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 21 Sept 2023 at 00:44, Danilo Krummrich <dakr@redhat.com> wrote:
->
-> Rename struct drm_gpuvm within struct nouveau_uvmm from 'umgr' to base.
->
-> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+Am 22.09.23 um 19:41 schrieb Alex Deucher:
+> On Fri, Sep 22, 2023 at 1:32 PM Kees Cook <keescook@chromium.org> wrote:
+>> Prepare for the coming implementation by GCC and Clang of the __counted_by
+>> attribute. Flexible array members annotated with __counted_by can have
+>> their accesses bounds-checked at run-time checking via CONFIG_UBSAN_BOUNDS
+>> (for array indexing) and CONFIG_FORTIFY_SOURCE (for strcpy/memcpy-family
+>> functions).
+>>
+>> As found with Coccinelle[1], add __counted_by for struct smu10_voltage_dependency_table.
+>>
+>> [1] https://github.com/kees/kernel-tools/blob/trunk/coccinelle/examples/counted_by.cocci
+>>
+>> Cc: Evan Quan <evan.quan@amd.com>
+>> Cc: Alex Deucher <alexander.deucher@amd.com>
+>> Cc: "Christian König" <christian.koenig@amd.com>
+>> Cc: "Pan, Xinhui" <Xinhui.Pan@amd.com>
+>> Cc: David Airlie <airlied@gmail.com>
+>> Cc: Daniel Vetter <daniel@ffwll.ch>
+>> Cc: Xiaojian Du <Xiaojian.Du@amd.com>
+>> Cc: Huang Rui <ray.huang@amd.com>
+>> Cc: Kevin Wang <kevin1.wang@amd.com>
+>> Cc: amd-gfx@lists.freedesktop.org
+>> Cc: dri-devel@lists.freedesktop.org
+>> Signed-off-by: Kees Cook <keescook@chromium.org>
+> Acked-by: Alex Deucher <alexander.deucher@amd.com>
 
-Reviewed-by: Dave Airlie <airlied@redhat.com>
+Mhm, I'm not sure if this is a good idea. That is a structure filled in 
+by the firmware, isn't it?
 
+That would imply that we might need to byte swap count before it is 
+checkable.
 
-> ---
->  drivers/gpu/drm/nouveau/nouveau_debugfs.c |  2 +-
->  drivers/gpu/drm/nouveau/nouveau_exec.c    |  4 +--
->  drivers/gpu/drm/nouveau/nouveau_uvmm.c    | 32 +++++++++++------------
->  drivers/gpu/drm/nouveau/nouveau_uvmm.h    |  6 ++---
->  4 files changed, 22 insertions(+), 22 deletions(-)
+Regards,
+Christian.
+
 >
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-> index 053f703f2f68..e83db051e851 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-> @@ -231,7 +231,7 @@ nouveau_debugfs_gpuva(struct seq_file *m, void *data)
->                         continue;
->
->                 nouveau_uvmm_lock(uvmm);
-> -               drm_debugfs_gpuva_info(m, &uvmm->umgr);
-> +               drm_debugfs_gpuva_info(m, &uvmm->base);
->                 seq_puts(m, "\n");
->                 nouveau_debugfs_gpuva_regions(m, uvmm);
->                 nouveau_uvmm_unlock(uvmm);
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
-> index c001952cd678..b4239af29e5a 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_exec.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
-> @@ -106,8 +106,8 @@ nouveau_exec_job_submit(struct nouveau_job *job)
->         drm_exec_until_all_locked(exec) {
->                 struct drm_gpuva *va;
->
-> -               drm_gpuvm_for_each_va(va, &uvmm->umgr) {
-> -                       if (unlikely(va == &uvmm->umgr.kernel_alloc_node))
-> +               drm_gpuvm_for_each_va(va, &uvmm->base) {
-> +                       if (unlikely(va == &uvmm->base.kernel_alloc_node))
->                                 continue;
->
->                         ret = drm_exec_prepare_obj(exec, va->gem.obj, 1);
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> index c750072cb268..6c86b64273c3 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> @@ -329,7 +329,7 @@ nouveau_uvma_region_create(struct nouveau_uvmm *uvmm,
->         struct nouveau_uvma_region *reg;
->         int ret;
->
-> -       if (!drm_gpuva_interval_empty(&uvmm->umgr, addr, range))
-> +       if (!drm_gpuva_interval_empty(&uvmm->base, addr, range))
->                 return -ENOSPC;
->
->         ret = nouveau_uvma_region_alloc(&reg);
-> @@ -384,7 +384,7 @@ nouveau_uvma_region_empty(struct nouveau_uvma_region *reg)
->  {
->         struct nouveau_uvmm *uvmm = reg->uvmm;
->
-> -       return drm_gpuva_interval_empty(&uvmm->umgr,
-> +       return drm_gpuva_interval_empty(&uvmm->base,
->                                         reg->va.addr,
->                                         reg->va.range);
->  }
-> @@ -589,7 +589,7 @@ op_map_prepare(struct nouveau_uvmm *uvmm,
->         uvma->region = args->region;
->         uvma->kind = args->kind;
->
-> -       drm_gpuva_map(&uvmm->umgr, &uvma->va, op);
-> +       drm_gpuva_map(&uvmm->base, &uvma->va, op);
->
->         /* Keep a reference until this uvma is destroyed. */
->         nouveau_uvma_gem_get(uvma);
-> @@ -1194,7 +1194,7 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job)
->                                 goto unwind_continue;
->                         }
->
-> -                       op->ops = drm_gpuvm_sm_unmap_ops_create(&uvmm->umgr,
-> +                       op->ops = drm_gpuvm_sm_unmap_ops_create(&uvmm->base,
->                                                                 op->va.addr,
->                                                                 op->va.range);
->                         if (IS_ERR(op->ops)) {
-> @@ -1205,7 +1205,7 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job)
->                         ret = nouveau_uvmm_sm_unmap_prepare(uvmm, &op->new,
->                                                             op->ops);
->                         if (ret) {
-> -                               drm_gpuva_ops_free(&uvmm->umgr, op->ops);
-> +                               drm_gpuva_ops_free(&uvmm->base, op->ops);
->                                 op->ops = NULL;
->                                 op->reg = NULL;
->                                 goto unwind_continue;
-> @@ -1240,7 +1240,7 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job)
->                                 }
->                         }
->
-> -                       op->ops = drm_gpuvm_sm_map_ops_create(&uvmm->umgr,
-> +                       op->ops = drm_gpuvm_sm_map_ops_create(&uvmm->base,
->                                                               op->va.addr,
->                                                               op->va.range,
->                                                               op->gem.obj,
-> @@ -1256,7 +1256,7 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job)
->                                                           op->va.range,
->                                                           op->flags & 0xff);
->                         if (ret) {
-> -                               drm_gpuva_ops_free(&uvmm->umgr, op->ops);
-> +                               drm_gpuva_ops_free(&uvmm->base, op->ops);
->                                 op->ops = NULL;
->                                 goto unwind_continue;
->                         }
-> @@ -1264,7 +1264,7 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job)
->                         break;
->                 }
->                 case OP_UNMAP:
-> -                       op->ops = drm_gpuvm_sm_unmap_ops_create(&uvmm->umgr,
-> +                       op->ops = drm_gpuvm_sm_unmap_ops_create(&uvmm->base,
->                                                                 op->va.addr,
->                                                                 op->va.range);
->                         if (IS_ERR(op->ops)) {
-> @@ -1275,7 +1275,7 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job)
->                         ret = nouveau_uvmm_sm_unmap_prepare(uvmm, &op->new,
->                                                             op->ops);
->                         if (ret) {
-> -                               drm_gpuva_ops_free(&uvmm->umgr, op->ops);
-> +                               drm_gpuva_ops_free(&uvmm->base, op->ops);
->                                 op->ops = NULL;
->                                 goto unwind_continue;
->                         }
-> @@ -1404,7 +1404,7 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job)
->                         break;
->                 }
->
-> -               drm_gpuva_ops_free(&uvmm->umgr, op->ops);
-> +               drm_gpuva_ops_free(&uvmm->base, op->ops);
->                 op->ops = NULL;
->                 op->reg = NULL;
->         }
-> @@ -1509,7 +1509,7 @@ nouveau_uvmm_bind_job_free_work_fn(struct work_struct *work)
->                 }
->
->                 if (!IS_ERR_OR_NULL(op->ops))
-> -                       drm_gpuva_ops_free(&uvmm->umgr, op->ops);
-> +                       drm_gpuva_ops_free(&uvmm->base, op->ops);
->
->                 if (obj)
->                         drm_gem_object_put(obj);
-> @@ -1836,7 +1836,7 @@ nouveau_uvmm_init(struct nouveau_uvmm *uvmm, struct nouveau_cli *cli,
->         uvmm->kernel_managed_addr = kernel_managed_addr;
->         uvmm->kernel_managed_size = kernel_managed_size;
->
-> -       drm_gpuvm_init(&uvmm->umgr, cli->name,
-> +       drm_gpuvm_init(&uvmm->base, cli->name,
->                        NOUVEAU_VA_SPACE_START,
->                        NOUVEAU_VA_SPACE_END,
->                        kernel_managed_addr, kernel_managed_size,
-> @@ -1855,7 +1855,7 @@ nouveau_uvmm_init(struct nouveau_uvmm *uvmm, struct nouveau_cli *cli,
->         return 0;
->
->  out_free_gpuva_mgr:
-> -       drm_gpuvm_destroy(&uvmm->umgr);
-> +       drm_gpuvm_destroy(&uvmm->base);
->  out_unlock:
->         mutex_unlock(&cli->mutex);
->         return ret;
-> @@ -1877,11 +1877,11 @@ nouveau_uvmm_fini(struct nouveau_uvmm *uvmm)
->         wait_event(entity->job.wq, list_empty(&entity->job.list.head));
->
->         nouveau_uvmm_lock(uvmm);
-> -       drm_gpuvm_for_each_va_safe(va, next, &uvmm->umgr) {
-> +       drm_gpuvm_for_each_va_safe(va, next, &uvmm->base) {
->                 struct nouveau_uvma *uvma = uvma_from_va(va);
->                 struct drm_gem_object *obj = va->gem.obj;
->
-> -               if (unlikely(va == &uvmm->umgr.kernel_alloc_node))
-> +               if (unlikely(va == &uvmm->base.kernel_alloc_node))
->                         continue;
->
->                 drm_gpuva_remove(va);
-> @@ -1910,7 +1910,7 @@ nouveau_uvmm_fini(struct nouveau_uvmm *uvmm)
->
->         mutex_lock(&cli->mutex);
->         nouveau_vmm_fini(&uvmm->vmm);
-> -       drm_gpuvm_destroy(&uvmm->umgr);
-> +       drm_gpuvm_destroy(&uvmm->base);
->         mutex_unlock(&cli->mutex);
->
->         dma_resv_fini(&uvmm->resv);
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.h b/drivers/gpu/drm/nouveau/nouveau_uvmm.h
-> index e96c9919d1bd..a308c59760a5 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.h
-> @@ -8,8 +8,8 @@
->  #include "nouveau_drv.h"
->
->  struct nouveau_uvmm {
-> +       struct drm_gpuvm base;
->         struct nouveau_vmm vmm;
-> -       struct drm_gpuvm umgr;
->         struct maple_tree region_mt;
->         struct mutex mutex;
->         struct dma_resv resv;
-> @@ -41,10 +41,10 @@ struct nouveau_uvma {
->         u8 kind;
->  };
->
-> -#define uvmm_from_mgr(x) container_of((x), struct nouveau_uvmm, umgr)
-> +#define uvmm_from_gpuvm(x) container_of((x), struct nouveau_uvmm, base)
->  #define uvma_from_va(x) container_of((x), struct nouveau_uvma, va)
->
-> -#define to_uvmm(x) uvmm_from_mgr((x)->va.vm)
-> +#define to_uvmm(x) uvmm_from_gpuvm((x)->va.vm)
->
->  struct nouveau_uvmm_bind_job {
->         struct nouveau_job base;
-> --
-> 2.41.0
->
+>> ---
+>>   drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h b/drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h
+>> index 808e0ecbe1f0..42adc2a3dcbc 100644
+>> --- a/drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h
+>> +++ b/drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h
+>> @@ -192,7 +192,7 @@ struct smu10_clock_voltage_dependency_record {
+>>
+>>   struct smu10_voltage_dependency_table {
+>>          uint32_t count;
+>> -       struct smu10_clock_voltage_dependency_record entries[];
+>> +       struct smu10_clock_voltage_dependency_record entries[] __counted_by(count);
+>>   };
+>>
+>>   struct smu10_clock_voltage_information {
+>> --
+>> 2.34.1
+>>
+
