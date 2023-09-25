@@ -1,60 +1,61 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F03037AD9BE
-	for <lists+nouveau@lfdr.de>; Mon, 25 Sep 2023 16:07:47 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 246C47AD9DD
+	for <lists+nouveau@lfdr.de>; Mon, 25 Sep 2023 16:14:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BABD210E257;
-	Mon, 25 Sep 2023 14:07:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AC6E210E25B;
+	Mon, 25 Sep 2023 14:14:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0120010E255;
- Mon, 25 Sep 2023 14:07:39 +0000 (UTC)
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-1dcfe9cd337so1391449fac.2; 
- Mon, 25 Sep 2023 07:07:39 -0700 (PDT)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 618BE10E267;
+ Mon, 25 Sep 2023 14:14:40 +0000 (UTC)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-6bc9c01e154so3968990a34.0; 
+ Mon, 25 Sep 2023 07:14:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695650859; x=1696255659; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1695651279; x=1696256079; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eOm71FSa/a54JWdPxFTdFQYbsSYB0XKCvLJel7l+Bek=;
- b=McjGwReCQ1nxjRLosXccjj55zfNgDMs/cRMW7pOy0VMWV571PF45AHcTkKsb+FzSkl
- RgSWzt4BQwteGgvZEyqqIMvOAbreWAIFowSAzlcT7ZTJVeaxMm82o1O5nauDiic9RCXj
- ORigul7MDLviLmkHSBSVK+GvCXDRinW2E7xapb4VReWpZgtOwV7x6etECiyUeHC/26Ao
- mRQEIYHtx++HeXso/h7bYQPXTupFTb/t8J8XxoQj9nrxwRKhVOauJ8AS0kNYJTzlhZWV
- 984HNd3SKAjjkiYRrytHrThpCvq+d++WyN1fcfIK8tvB8eNcFUvcXuun2SeU9ruBiXMW
- 7vyg==
+ bh=MJfyUt1ShfjZl6t8cnVtNZYV0Rqi3aBl3H7mr80x/Gw=;
+ b=HbzGOfmX5V1PBc3LDrc9JaBREVN9OzGh5a1IDxjZRN5HXsye60PbL4CAOGB6Hhi11D
+ PCkkL7uU6Lb6147bHKsl0VjRNQkXxIu212M9wcoyVQU2N2hSsJu5pUWs0NY5FoI/w87B
+ Y8FZW1g++9NqIMsmQaazeX+724ZGMAUn4RzP6Kt8u8JzCL7km/oNp4vWvGbHIyYU3+Hy
+ KHRtgeJZG8EwW3p0V3ZxBc0atoZznTlPhDt3/5tAnc21fqpL+SMXT30BSDnKCNNNJT6N
+ pdq2Tv8dsvUS4ab8k9FIsSrvjVQergCgaT8z1q4kk98bzN/0Pm8AcXjTp862g3ET2UJc
+ NXjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695650859; x=1696255659;
+ d=1e100.net; s=20230601; t=1695651279; x=1696256079;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eOm71FSa/a54JWdPxFTdFQYbsSYB0XKCvLJel7l+Bek=;
- b=pNX6UPoi41G7vmYk3X5IIZyohMw0bUXUq4Y+VZ9e4b9qCABAxTfaGUt7enK1LyYNzN
- vQR/0ECKDhF/zwk6DdM7PwikaBkqKWHS8UwRssm5uh3Vf7lr0SN8c0O+cRUeL9dlrIA4
- dLAD21T19AafV0Muymk/GmrIIFRMnK5LgZ3mesHEeEBg33cTdsy8XybThP5qqxsQ6Fii
- AW0uLQ4VBclJdHu0p663Hpk2fTE0cQS582Byz4XPiR16HcuO8wWkhBE7a7TAw9/r3bMn
- BDjpaYB5rtNM1fRpP/m4jtm/xjvn1oPeXHTfNLC0JlspvwPXqJnUWwvRzT4VCM0bLO70
- XLFg==
-X-Gm-Message-State: AOJu0YwT5kLrqIb3e8zoyRE1Tntp7c4AG+2YsYrjgXh0NEuyBk3XMpb/
- X9nvPDJunkpJY2rWf0eHRCGRUXKazpQuc/Jskow=
-X-Google-Smtp-Source: AGHT+IEAGihrK0Fxy+zmQS+jCavrD8i0S0F6RPaTyUWR0Tsr+swWkiWj17Z4gpkbPnpNw9W+uaTcvGPHY2GFxPPQ6jk=
-X-Received: by 2002:a05:6870:b68b:b0:19e:fa1f:fc2f with SMTP id
- cy11-20020a056870b68b00b0019efa1ffc2fmr7668945oab.38.1695650859043; Mon, 25
- Sep 2023 07:07:39 -0700 (PDT)
+ bh=MJfyUt1ShfjZl6t8cnVtNZYV0Rqi3aBl3H7mr80x/Gw=;
+ b=jJVH16tGg3zGV/up7voeA/Rbj50Hr0o2yYY/bbwW04HwhaI9XvF1VCG/PIEz4er7fF
+ qbV5ukAwwIyyhDjuGSLrnP2llS1MybcXmdQwqUuBh2tk9d6nhA5kGm80Fcc7rQC7R6JT
+ Y/DIYPfWdC5Pn28WDXvGa4t0O9lFF6QZdsyLGwTPmQn4qya4AFGJAxaGRLWRIP+cRKJd
+ ZaIlMclcWhgPKmC12Q3bJKW+SBnsUABoVGpALQMH5adQgA5IEL3LYo/sge5qJPLsQ5TH
+ 8T6vCau+r/Z4ZdIzSb+ZbOlEs0YfIAMM9LkfKlG29xuAZgsQ/+0mxVI/0GgUsA/MldRc
+ w4iQ==
+X-Gm-Message-State: AOJu0YxW5ZkMp2oUKdmJSVNIMTAiPnWvFiXwjohDvZGcOiOHJbrar2rV
+ rTkU7/ch1A0TXvky9NuDEpnYikn4nz9olQZPtog=
+X-Google-Smtp-Source: AGHT+IGzozeIAKQxxu15vnXC4O0U2/wFx2Ttdhu1Ykj7GBRveGIst2ctDf9dvYvaREsBKdttLh7p7tRIuZBiTVLnOX8=
+X-Received: by 2002:a05:6871:c10:b0:1dc:dcf9:18d8 with SMTP id
+ ve16-20020a0568710c1000b001dcdcf918d8mr4061353oab.24.1695651279489; Mon, 25
+ Sep 2023 07:14:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230922173110.work.084-kees@kernel.org>
  <20230922173216.3823169-1-keescook@chromium.org>
  <CADnq5_P2p3bmczci=pU+pG6f9+hqn=-xp1EynP2345CJZRW08w@mail.gmail.com>
  <2635922e-f52a-4e91-40c6-4f1358972786@amd.com>
-In-Reply-To: <2635922e-f52a-4e91-40c6-4f1358972786@amd.com>
+ <CADnq5_P1tg2-rWUmsRAy3aPJLT7ZmaZORMSOrPa6t6oSc5xS3g@mail.gmail.com>
+In-Reply-To: <CADnq5_P1tg2-rWUmsRAy3aPJLT7ZmaZORMSOrPa6t6oSc5xS3g@mail.gmail.com>
 From: Alex Deucher <alexdeucher@gmail.com>
-Date: Mon, 25 Sep 2023 10:07:27 -0400
-Message-ID: <CADnq5_P1tg2-rWUmsRAy3aPJLT7ZmaZORMSOrPa6t6oSc5xS3g@mail.gmail.com>
+Date: Mon, 25 Sep 2023 10:14:28 -0400
+Message-ID: <CADnq5_P3xDDi-MS2PkAA7paAOQ3f7DQ8+sL6W7O5HcWTFQ0BSg@mail.gmail.com>
 To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -103,76 +104,85 @@ Cc: "Pan, Xinhui" <Xinhui.Pan@amd.com>, Emma Anholt <emma@anholt.net>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Sep 25, 2023 at 2:30=E2=80=AFAM Christian K=C3=B6nig
-<christian.koenig@amd.com> wrote:
+On Mon, Sep 25, 2023 at 10:07=E2=80=AFAM Alex Deucher <alexdeucher@gmail.co=
+m> wrote:
 >
-> Am 22.09.23 um 19:41 schrieb Alex Deucher:
-> > On Fri, Sep 22, 2023 at 1:32=E2=80=AFPM Kees Cook <keescook@chromium.or=
-g> wrote:
-> >> Prepare for the coming implementation by GCC and Clang of the __counte=
-d_by
-> >> attribute. Flexible array members annotated with __counted_by can have
-> >> their accesses bounds-checked at run-time checking via CONFIG_UBSAN_BO=
-UNDS
-> >> (for array indexing) and CONFIG_FORTIFY_SOURCE (for strcpy/memcpy-fami=
-ly
-> >> functions).
-> >>
-> >> As found with Coccinelle[1], add __counted_by for struct smu10_voltage=
-_dependency_table.
-> >>
-> >> [1] https://github.com/kees/kernel-tools/blob/trunk/coccinelle/example=
-s/counted_by.cocci
-> >>
-> >> Cc: Evan Quan <evan.quan@amd.com>
-> >> Cc: Alex Deucher <alexander.deucher@amd.com>
-> >> Cc: "Christian K=C3=B6nig" <christian.koenig@amd.com>
-> >> Cc: "Pan, Xinhui" <Xinhui.Pan@amd.com>
-> >> Cc: David Airlie <airlied@gmail.com>
-> >> Cc: Daniel Vetter <daniel@ffwll.ch>
-> >> Cc: Xiaojian Du <Xiaojian.Du@amd.com>
-> >> Cc: Huang Rui <ray.huang@amd.com>
-> >> Cc: Kevin Wang <kevin1.wang@amd.com>
-> >> Cc: amd-gfx@lists.freedesktop.org
-> >> Cc: dri-devel@lists.freedesktop.org
-> >> Signed-off-by: Kees Cook <keescook@chromium.org>
-> > Acked-by: Alex Deucher <alexander.deucher@amd.com>
+> On Mon, Sep 25, 2023 at 2:30=E2=80=AFAM Christian K=C3=B6nig
+> <christian.koenig@amd.com> wrote:
+> >
+> > Am 22.09.23 um 19:41 schrieb Alex Deucher:
+> > > On Fri, Sep 22, 2023 at 1:32=E2=80=AFPM Kees Cook <keescook@chromium.=
+org> wrote:
+> > >> Prepare for the coming implementation by GCC and Clang of the __coun=
+ted_by
+> > >> attribute. Flexible array members annotated with __counted_by can ha=
+ve
+> > >> their accesses bounds-checked at run-time checking via CONFIG_UBSAN_=
+BOUNDS
+> > >> (for array indexing) and CONFIG_FORTIFY_SOURCE (for strcpy/memcpy-fa=
+mily
+> > >> functions).
+> > >>
+> > >> As found with Coccinelle[1], add __counted_by for struct smu10_volta=
+ge_dependency_table.
+> > >>
+> > >> [1] https://github.com/kees/kernel-tools/blob/trunk/coccinelle/examp=
+les/counted_by.cocci
+> > >>
+> > >> Cc: Evan Quan <evan.quan@amd.com>
+> > >> Cc: Alex Deucher <alexander.deucher@amd.com>
+> > >> Cc: "Christian K=C3=B6nig" <christian.koenig@amd.com>
+> > >> Cc: "Pan, Xinhui" <Xinhui.Pan@amd.com>
+> > >> Cc: David Airlie <airlied@gmail.com>
+> > >> Cc: Daniel Vetter <daniel@ffwll.ch>
+> > >> Cc: Xiaojian Du <Xiaojian.Du@amd.com>
+> > >> Cc: Huang Rui <ray.huang@amd.com>
+> > >> Cc: Kevin Wang <kevin1.wang@amd.com>
+> > >> Cc: amd-gfx@lists.freedesktop.org
+> > >> Cc: dri-devel@lists.freedesktop.org
+> > >> Signed-off-by: Kees Cook <keescook@chromium.org>
+> > > Acked-by: Alex Deucher <alexander.deucher@amd.com>
+> >
+> > Mhm, I'm not sure if this is a good idea. That is a structure filled in
+> > by the firmware, isn't it?
+> >
+> > That would imply that we might need to byte swap count before it is
+> > checkable.
 >
-> Mhm, I'm not sure if this is a good idea. That is a structure filled in
-> by the firmware, isn't it?
->
-> That would imply that we might need to byte swap count before it is
-> checkable.
+> True. Good point.  Same for the other amdgpu patch.
 
-True. Good point.  Same for the other amdgpu patch.
+Actually the other patch is fine.  That's just a local structure.
 
 Alex
 
 >
-> Regards,
-> Christian.
+> Alex
 >
 > >
-> >> ---
-> >>   drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h | 2 +-
-> >>   1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h b/dr=
-ivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h
-> >> index 808e0ecbe1f0..42adc2a3dcbc 100644
-> >> --- a/drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h
-> >> +++ b/drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h
-> >> @@ -192,7 +192,7 @@ struct smu10_clock_voltage_dependency_record {
-> >>
-> >>   struct smu10_voltage_dependency_table {
-> >>          uint32_t count;
-> >> -       struct smu10_clock_voltage_dependency_record entries[];
-> >> +       struct smu10_clock_voltage_dependency_record entries[] __count=
-ed_by(count);
-> >>   };
-> >>
-> >>   struct smu10_clock_voltage_information {
-> >> --
-> >> 2.34.1
-> >>
->
+> > Regards,
+> > Christian.
+> >
+> > >
+> > >> ---
+> > >>   drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h | 2 +-
+> > >>   1 file changed, 1 insertion(+), 1 deletion(-)
+> > >>
+> > >> diff --git a/drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h b/=
+drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h
+> > >> index 808e0ecbe1f0..42adc2a3dcbc 100644
+> > >> --- a/drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h
+> > >> +++ b/drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h
+> > >> @@ -192,7 +192,7 @@ struct smu10_clock_voltage_dependency_record {
+> > >>
+> > >>   struct smu10_voltage_dependency_table {
+> > >>          uint32_t count;
+> > >> -       struct smu10_clock_voltage_dependency_record entries[];
+> > >> +       struct smu10_clock_voltage_dependency_record entries[] __cou=
+nted_by(count);
+> > >>   };
+> > >>
+> > >>   struct smu10_clock_voltage_information {
+> > >> --
+> > >> 2.34.1
+> > >>
+> >
