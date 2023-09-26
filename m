@@ -1,83 +1,74 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C8ED7AE183
-	for <lists+nouveau@lfdr.de>; Tue, 26 Sep 2023 00:06:18 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 793707AE373
+	for <lists+nouveau@lfdr.de>; Tue, 26 Sep 2023 03:49:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B25C810E332;
-	Mon, 25 Sep 2023 22:06:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5CCFA10E342;
+	Tue, 26 Sep 2023 01:49:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DC72210E332
- for <nouveau@lists.freedesktop.org>; Mon, 25 Sep 2023 22:06:14 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7F74A10E343
+ for <nouveau@lists.freedesktop.org>; Tue, 26 Sep 2023 01:49:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1695679574;
+ s=mimecast20190719; t=1695692959;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=tY5bcSFTLxhrJq0wnGX1DBWHzjbAl0iR3STf9o5hxaQ=;
- b=Pn62VgF9Hwhu/sZjPC7xQUyVIjjudYclDHUsjKggn1m7/c6QypemzGU1Hh/t0SxwqXFkhM
- 37sNW/bbwPKGCjBmJwgrCU96hvefEJf+zntZYgSSGpkMY2D3TUAjM2Qu91Zanb5EpqmH2F
- ofrl6vdcptNo7b0kpKSfhicDhxPG/3Y=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding;
+ bh=77DcS0RLex3b0FqcF2W/+UG/Ff7GD8W5vNdoLnbokow=;
+ b=eYks15xZkPGv+eqmr6+YsPtDnolhSynq283rraAaD2vjFiBiGERyiXat9QbG2oVPBRRTSJ
+ xeb1o46G1H0EsfJrkIIiRIxV4heryWU/aOoxRWMCr5VRYcGggLH5wE0vt5R5ky4uttJOrE
+ 6ZnqqwKxw7jteHVA5XW1LsWXHWZsZow=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-39-xNVXXqeeML2cDcQYtGWYHw-1; Mon, 25 Sep 2023 18:06:11 -0400
-X-MC-Unique: xNVXXqeeML2cDcQYtGWYHw-1
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-3231f43fc5eso3006421f8f.2
- for <nouveau@lists.freedesktop.org>; Mon, 25 Sep 2023 15:06:11 -0700 (PDT)
+ us-mta-283-SidViF4eMSm6czICUVfQgQ-1; Mon, 25 Sep 2023 21:49:18 -0400
+X-MC-Unique: SidViF4eMSm6czICUVfQgQ-1
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-31fd49d8f2aso6442653f8f.1
+ for <nouveau@lists.freedesktop.org>; Mon, 25 Sep 2023 18:49:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695679570; x=1696284370;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1695692957; x=1696297757;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=tY5bcSFTLxhrJq0wnGX1DBWHzjbAl0iR3STf9o5hxaQ=;
- b=epsPv38lzrPpcUB3ez8v+4B5yNsIxNba+67TdMyUBSl98iVbMvr00nK4vUSVCGrDRY
- 7lpf0v3YTyDkTSgqT0EltRS1wVLFfjTcyOt6KFoA1mjrtlv9EPZIQD2zhMNaZMZlf+Ok
- rj9uB1S+1zdZR3tl0Ex4782kXTLvQlRK+9+3mA5PAlrz78sEU1sDjEhKCrz99xqbeeV5
- 0b93rpjSdI6VAM5SeBCxHYTK7euK+mH4EO33DcqckmfrTZkADIm/Z1ZmY6LXpi3dow7Q
- mzDT1hfAID9aTI1XLYnmN8iqYg+Xmna8/TC+mUxXVuLjihqIxratchPDClRm+1etS8+N
- QCbA==
-X-Gm-Message-State: AOJu0YwUutQTfksc5pP2sxBnQYtaKeyyFiRGGs/dK9YUEkhi6TCJfVyk
- Q8gxwSHLhFZgd4zLjX3LUtFCSd+RQ8f+nCmOuH9cKeG1FE3b4wAQFAYXfbaKx84Z4pb0Gj/ypsg
- fCOR5PpU6iT7RZ5Let0cIEciK8g==
-X-Received: by 2002:a5d:6382:0:b0:319:8c35:378 with SMTP id
- p2-20020a5d6382000000b003198c350378mr6912286wru.44.1695679570578; 
- Mon, 25 Sep 2023 15:06:10 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHmeSIEMwFLWmZGGbq/ZzwRhXqWOvyeod0GnC31lUWRsM0brD8Xc2qSB7EvUpkx5KUb+zHPbw==
-X-Received: by 2002:a5d:6382:0:b0:319:8c35:378 with SMTP id
- p2-20020a5d6382000000b003198c350378mr6912272wru.44.1695679570272; 
- Mon, 25 Sep 2023 15:06:10 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
- ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
+ bh=77DcS0RLex3b0FqcF2W/+UG/Ff7GD8W5vNdoLnbokow=;
+ b=T9wwyWDbIIK8YSlpCe+gziMlAMg8SyLoExSrZ2oD+6VrtgaZ6k10SyIiglFAEHts70
+ gVxoVfUX0mKjp230eCOTPWetEUx3kQOb00vagGSO6Yu3eu4rOZrKIZ5spT2nCKKwz7PY
+ W415QljlIk13hT8NGWrhs743ZXLLrU9IpC7Y0+2MsxAthjSLtl3wCpi9ynRTNmzQJJgY
+ dX7p1wbaSFKQm46333Rh4YV2rNXsKZZl0D04jUUlQYf9inZHlrK0YhSBgPwxjjYm+G8d
+ 32ChSbkg7dt17yDmhZS1erz9SS4mQeMwvabPIX/VysiYPr3fTJ76x0FHpxL/4mSwHmsp
+ zNCQ==
+X-Gm-Message-State: AOJu0YykMt9BdZvJCkc0wduMN8g70n+ozqn3Gl7iUqShIXs0/f0llGWf
+ P1OnMYGUmpQ3YGVySdgqAgAAWha/vvFl9iPDI7x7bksBAZrUWmtZaua7Q9v67/zHarY6VJEY1z5
+ FWQ7ZOzS6haJEUtGRuOeZun+wiDAgafz1iLu+f3Pzx4D+OOf/pvGgEAFsOvvZ1GD+m772lvClqH
+ sfb1tI
+X-Received: by 2002:adf:f746:0:b0:320:6db:3548 with SMTP id
+ z6-20020adff746000000b0032006db3548mr6476910wrp.55.1695692956998; 
+ Mon, 25 Sep 2023 18:49:16 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHXlakOE0lZUrP/5jkAm89s5JUyx/7ZmQVk052x7sut2qAHqqXQA0xx55aKZwz4vWl9jc92zw==
+X-Received: by 2002:adf:f746:0:b0:320:6db:3548 with SMTP id
+ z6-20020adff746000000b0032006db3548mr6476897wrp.55.1695692956564; 
+ Mon, 25 Sep 2023 18:49:16 -0700 (PDT)
+Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- b12-20020a5d634c000000b0031773a8e5c4sm12875356wrw.37.2023.09.25.15.06.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Sep 2023 15:06:09 -0700 (PDT)
-Message-ID: <e2072b46-11a4-a146-e984-70be30514fe1@redhat.com>
-Date: Tue, 26 Sep 2023 00:06:08 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-To: Arnd Bergmann <arnd@kernel.org>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>
-References: <20230925155930.677620-1-arnd@kernel.org>
+ rp5-20020a170906d96500b0098e78ff1a87sm7052623ejb.120.2023.09.25.18.49.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Sep 2023 18:49:16 -0700 (PDT)
 From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <20230925155930.677620-1-arnd@kernel.org>
+To: nouveau@lists.freedesktop.org
+Date: Tue, 26 Sep 2023 03:49:03 +0200
+Message-ID: <20230926014913.7721-1-dakr@redhat.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/kms/nv50: hide unused variables
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
+Subject: [Nouveau] [PATCH] MAINTAINERS: update nouveau maintainers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,56 +80,31 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Arnd Bergmann <arnd@arndb.de>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Wayne Lin <Wayne.Lin@amd.com>
+Cc: dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 9/25/23 17:59, Arnd Bergmann wrote:
-> From: Arnd Bergmann <arnd@arndb.de>
-> 
-> After a recent change, two variables are only used in an #ifdef:
-> 
-> drivers/gpu/drm/nouveau/dispnv50/disp.c: In function 'nv50_sor_atomic_disable':
-> drivers/gpu/drm/nouveau/dispnv50/disp.c:1569:13: error: unused variable 'ret' [-Werror=unused-variable]
->   1569 |         int ret;
->        |             ^~~
-> drivers/gpu/drm/nouveau/dispnv50/disp.c:1568:28: error: unused variable 'aux' [-Werror=unused-variable]
->   1568 |         struct drm_dp_aux *aux = &nv_connector->aux;
->        |                            ^~~
-> 
-> Move them into the same conditional block, along with the nv_connector variable
-> that becomes unused during that fix.
-> 
-> Fixes: 757033808c95b ("drm/nouveau/kms/nv50-: fixup sink D3 before tearing down link")
-> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+Since I will continue to work on Nouveau consistently, also beyond my
+former and still ongoing VM_BIND/EXEC work, add myself to the list of
+Nouveau maintainers.
 
-Reviewed-by: Danilo Krummrich <dakr@redhat.com>
+Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+---
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
-> ---
->   drivers/gpu/drm/nouveau/dispnv50/disp.c | 4 +---
->   1 file changed, 1 insertion(+), 3 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> index 52f1569ee37c1..a0ac8c258d9ff 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> @@ -1560,15 +1560,13 @@ nv50_sor_atomic_disable(struct drm_encoder *encoder, struct drm_atomic_state *st
->   {
->   	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
->   	struct nv50_head *head = nv50_head(nv_encoder->crtc);
-> -	struct nouveau_connector *nv_connector = nv50_outp_get_old_connector(state, nv_encoder);
->   #ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
-> +	struct nouveau_connector *nv_connector = nv50_outp_get_old_connector(state, nv_encoder);
->   	struct nouveau_drm *drm = nouveau_drm(nv_encoder->base.base.dev);
->   	struct nouveau_backlight *backlight = nv_connector->backlight;
-> -#endif
->   	struct drm_dp_aux *aux = &nv_connector->aux;
->   	int ret;
->   
-> -#ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
->   	if (backlight && backlight->uses_dpcd) {
->   		ret = drm_edp_backlight_disable(aux, &backlight->edp_info);
->   		if (ret < 0)
+diff --git a/MAINTAINERS b/MAINTAINERS
+index b19995690904..67ce91c8778a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -6647,6 +6647,7 @@ F:	drivers/gpu/drm/panel/panel-novatek-nt36672a.c
+ DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS
+ M:	Karol Herbst <kherbst@redhat.com>
+ M:	Lyude Paul <lyude@redhat.com>
++M:	Danilo Krummrich <dakr@redhat.com>
+ L:	dri-devel@lists.freedesktop.org
+ L:	nouveau@lists.freedesktop.org
+ S:	Supported
+-- 
+2.41.0
 
