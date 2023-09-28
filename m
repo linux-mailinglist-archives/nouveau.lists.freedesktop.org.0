@@ -2,44 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12BD57B2E15
-	for <lists+nouveau@lfdr.de>; Fri, 29 Sep 2023 10:42:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80ED97B2E18
+	for <lists+nouveau@lfdr.de>; Fri, 29 Sep 2023 10:42:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5777710E6E5;
-	Fri, 29 Sep 2023 08:42:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AB6A210E6E7;
+	Fri, 29 Sep 2023 08:42:18 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from madras.collabora.co.uk (madras.collabora.co.uk
- [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AA94810E08F;
- Wed, 27 Sep 2023 21:55:58 +0000 (UTC)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4C06210E021;
+ Thu, 28 Sep 2023 03:19:09 +0000 (UTC)
 Received: from beaker.gfxstrand.net
  (2603-8080-2102-63d7-019e-342e-5881-a163.res6.spectrum.com
  [IPv6:2603:8080:2102:63d7:19e:342e:5881:a163])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: gfxstrand)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id 811BC66072C1;
- Wed, 27 Sep 2023 22:55:56 +0100 (BST)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id AED7D66072B4;
+ Thu, 28 Sep 2023 04:19:05 +0100 (BST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1695851757;
- bh=vAFduTKqpXIgT0NAKTy2WvhQtBCk9fC4JnKYokknVxw=;
+ s=mail; t=1695871147;
+ bh=5BEscn0ws4QNDcrG5BtZVdJagVL1kgCG2aPdT960IP8=;
  h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=WI++RJeF0Q9iPG36CCjjYOSAY/VakW8Q7LuWBW1FJYW+dSudBOaj5edNIReUnv14b
- RYNPLZM+jaVyih4Gkk6kYTH49DWPHjXcYdmaSWMMjA65aGLKkPh9YED+J7UjoKEVv9
- bmPUpJtULhT/OYLOK/WF0dr7jO2BBFaUrt80Bipk2gWI/rUc301l4eFcEjOgiEPuau
- 6kBiomijr9DBs+i5obHDa87vIYstKfSHqwoYCeKaw314Cd5vpML1+hQjHQ7YKwLizi
- RwHAx/bdKUlbaF1NRXJSYb0i8fjWEhyflcvZcA3KQd30rVb/ZwBtWgRzyHyi7fvgIH
- yBuwOVBtccQFw==
-Message-ID: <75bef0bd769c139b647335ba2e3c341928442740.camel@collabora.com>
+ b=GFiQsVKiM/cI4x5d0NxaafRppRDbgJnYa2RsfIKOrr0SK8pB45ElEk/eM3rabXyki
+ VeiP8UdciUYeJxaPSVBYGSlq1Rgy3LFQt4/6QjgnIk5yG/76mbubqBPFZ9t4JOH7/r
+ m5Ws965JBkJxweEsaP6Cf/15n70RE8eHQ6d9kt0MFUnJCKM8OrebA5KwTpDpKXbtlD
+ 7kbfE/rq90toCDRzvHcblCAXK/Jd7hDan4X9ZqSY3LiE+yxlPmH9x03exNW6wREFsb
+ qsdyogRAXmS7zSaQOfSA9RhjHtKwpVTglD9pWtqzHLvGPlsknKdR96ZZexXhc5y9oc
+ vNm4ZUQfvMR6g==
+Message-ID: <d560fbac130608a78921d11688a85a9a299d92f6.camel@collabora.com>
 From: Faith Ekstrand <faith.ekstrand@collabora.com>
-To: Danilo Krummrich <dakr@redhat.com>, nouveau@lists.freedesktop.org
-Date: Wed, 27 Sep 2023 16:55:52 -0500
-In-Reply-To: <20230927012303.23525-3-dakr@redhat.com>
+To: Dave Airlie <airlied@gmail.com>
+Date: Wed, 27 Sep 2023 22:19:01 -0500
+In-Reply-To: <CAPM=9twT+Kvmyv2GxnZ=Y6FPnwc9xzTcWyeykL0rjGmOu4FONA@mail.gmail.com>
 References: <20230927012303.23525-1-dakr@redhat.com>
  <20230927012303.23525-3-dakr@redhat.com>
+ <75bef0bd769c139b647335ba2e3c341928442740.camel@collabora.com>
+ <CAPM=9twT+Kvmyv2GxnZ=Y6FPnwc9xzTcWyeykL0rjGmOu4FONA@mail.gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.48.4 (3.48.4-1.fc38) 
 MIME-Version: 1.0
 X-Mailman-Approved-At: Fri, 29 Sep 2023 08:42:15 +0000
@@ -56,141 +57,270 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gV2VkLCAyMDIzLTA5LTI3IGF0IDAzOjIyICswMjAwLCBEYW5pbG8gS3J1bW1yaWNoIHdyb3Rl
-Ogo+IFJlcG9ydCB0aGUgbWF4aW11bSBudW1iZXIgb2YgSUJzIHRoYXQgY2FuIGJlIHB1c2hlZCB3
-aXRoIGEgc2luZ2xlCj4gRFJNX0lPQ1RMX05PVVZFQVVfRVhFQyB0aHJvdWdoIERSTV9JT0NUTF9O
-T1VWRUFVX0dFVFBBUkFNLgo+IAo+IFdoaWxlIHRoZSBtYXhpbXVtIG51bWJlciBvZiBJQnMgcGVy
-IHJpbmcgbWlnaHQgdmFyeSBiZXR3ZWVuIGNoaXBzZXRzLAo+IHRoZSBrZXJuZWwgd2lsbCBtYWtl
-IHN1cmUgdGhhdCB1c2Vyc3BhY2UgY2FuIG9ubHkgcHVzaCBhIGZyYWN0aW9uIG9mCj4gdGhlCj4g
-bWF4aW11bSBudW1iZXIgb2YgSUJzIHBlciByaW5nIHBlciBqb2IsIHN1Y2ggdGhhdCB3ZSBhdm9p
-ZCBhCj4gc2l0dWF0aW9uCj4gd2hlcmUgdGhlcmUncyBvbmx5IGEgc2luZ2xlIGpvYiBvY2N1cHlp
-bmcgdGhlIHJpbmcsIHdoaWNoIGNvdWxkCj4gcG90ZW50aWFsbHkgbGVhZCB0byB0aGUgcmluZyBy
-dW4gZHJ5Lgo+IAo+IFVzaW5nIERSTV9JT0NUTF9OT1VWRUFVX0dFVFBBUkFNIHRvIHJlcG9ydCB0
-aGUgbWF4aW11bSBudW1iZXIgb2YgSUJzCj4gdGhhdCBjYW4gYmUgcHVzaGVkIHdpdGggYSBzaW5n
-bGUgRFJNX0lPQ1RMX05PVVZFQVVfRVhFQyBpbXBsaWVzIHRoYXQKPiBhbGwgY2hhbm5lbHMgb2Yg
-YSBnaXZlbiBkZXZpY2UgaGF2ZSB0aGUgc2FtZSByaW5nIHNpemUuCgpUaGVyZSdzIGEgYnVuY2gg
-b2Ygbm91dmVhdSBrZXJuZWwgZGV0YWlscyBJIGRvbid0IGtub3cgaGVyZSBidXQgdGhlCmludGVy
-ZmFjZSBsb29rcyBnb29kIGFuZCBJIHByZWZlciBpdCB0byBhICNkZWZpbmUgaW4gdGhlIGhlYWRl
-ci4KCkFja2VkLWJ5OiBGYWl0aCBFa3N0cmFuZCA8ZmFpdGguZWtzdHJhbmRAY29sbGFib3JhLmNv
-bT4KCgo+IFNpZ25lZC1vZmYtYnk6IERhbmlsbyBLcnVtbXJpY2ggPGRha3JAcmVkaGF0LmNvbT4K
-PiAtLS0KPiDCoGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYWJpMTYuYyB8IDE5ICsr
-KysrKysrKysrKysrKysrKysKPiDCoGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfY2hh
-bi5jwqAgfMKgIDIgKy0KPiDCoGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZG1hLmjC
-oMKgIHzCoCAzICsrKwo+IMKgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9leGVjLmPC
-oCB8wqAgNyArKysrLS0tCj4gwqBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2V4ZWMu
-aMKgIHzCoCA1ICsrKysrCj4gwqBpbmNsdWRlL3VhcGkvZHJtL25vdXZlYXVfZHJtLmjCoMKgwqDC
-oMKgwqDCoMKgwqAgfCAxMCArKysrKysrKysrCj4gwqA2IGZpbGVzIGNoYW5nZWQsIDQyIGluc2Vy
-dGlvbnMoKyksIDQgZGVsZXRpb25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2Ry
-bS9ub3V2ZWF1L25vdXZlYXVfYWJpMTYuYwo+IGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
-dmVhdV9hYmkxNi5jCj4gaW5kZXggMzBhZmJlYzllM2IxLi4xYTE5ODY4OWIzOTEgMTAwNjQ0Cj4g
-LS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9hYmkxNi5jCj4gKysrIGIvZHJp
-dmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9hYmkxNi5jCj4gQEAgLTMxLDYgKzMxLDcgQEAK
-PiDCoAo+IMKgI2luY2x1ZGUgIm5vdXZlYXVfZHJ2LmgiCj4gwqAjaW5jbHVkZSAibm91dmVhdV9k
-bWEuaCIKPiArI2luY2x1ZGUgIm5vdXZlYXVfZXhlYy5oIgo+IMKgI2luY2x1ZGUgIm5vdXZlYXVf
-Z2VtLmgiCj4gwqAjaW5jbHVkZSAibm91dmVhdV9jaGFuLmgiCj4gwqAjaW5jbHVkZSAibm91dmVh
-dV9hYmkxNi5oIgo+IEBAIC0xODMsNiArMTg0LDIwIEBAIG5vdXZlYXVfYWJpMTZfZmluaShzdHJ1
-Y3Qgbm91dmVhdV9hYmkxNiAqYWJpMTYpCj4gwqDCoMKgwqDCoMKgwqDCoGNsaS0+YWJpMTYgPSBO
-VUxMOwo+IMKgfQo+IMKgCj4gK3N0YXRpYyBpbmxpbmUgdW5zaWduZWQgaW50Cj4gK2dldHBhcmFt
-X2RtYV9pYl9tYXgoc3RydWN0IG52aWZfZGV2aWNlICpkZXZpY2UpCj4gK3sKPiArwqDCoMKgwqDC
-oMKgwqBjb25zdCBzdHJ1Y3QgbnZpZl9tY2xhc3MgZG1hc1tdID0gewo+ICvCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqB7IE5WMDNfQ0hBTk5FTF9ETUEsIDAgfSwKPiArwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgeyBOVjEwX0NIQU5ORUxfRE1BLCAwIH0sCj4gK8KgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoHsgTlYxN19DSEFOTkVMX0RNQSwgMCB9LAo+ICvCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqB7IE5WNDBfQ0hBTk5FTF9ETUEsIDAgfSwKPiArwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKge30KPiArwqDCoMKgwqDCoMKgwqB9Owo+ICsKPiArwqDCoMKg
-wqDCoMKgwqByZXR1cm4gbnZpZl9tY2xhc3MoJmRldmljZS0+b2JqZWN0LCBkbWFzKSA8IDAgPwo+
-IE5WNTBfRE1BX0lCX01BWCA6IDA7Cj4gK30KPiArCj4gwqBpbnQKPiDCoG5vdXZlYXVfYWJpMTZf
-aW9jdGxfZ2V0cGFyYW0oQUJJMTZfSU9DVExfQVJHUykKPiDCoHsKPiBAQCAtMjQ3LDYgKzI2Miwx
-MCBAQCBub3V2ZWF1X2FiaTE2X2lvY3RsX2dldHBhcmFtKEFCSTE2X0lPQ1RMX0FSR1MpCj4gwqDC
-oMKgwqDCoMKgwqDCoGNhc2UgTk9VVkVBVV9HRVRQQVJBTV9HUkFQSF9VTklUUzoKPiDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGdldHBhcmFtLT52YWx1ZSA9IG52a21fZ3JfdW5pdHMo
-Z3IpOwo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYnJlYWs7Cj4gK8KgwqDCoMKg
-wqDCoMKgY2FzZSBOT1VWRUFVX0dFVFBBUkFNX0VYRUNfUFVTSF9NQVg6Cj4gK8KgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoGdldHBhcmFtLT52YWx1ZSA9IGdldHBhcmFtX2RtYV9pYl9tYXgo
-ZGV2aWNlKSAvCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqAgTk9VVkVBVV9FWEVDX1BVU0hfTUFYX0RJVjsKPiArwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYnJlYWs7Cj4gwqDCoMKgwqDCoMKgwqDCoGRlZmF1bHQ6
-Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBOVl9QUklOVEsoZGJnLCBjbGksICJ1
-bmtub3duIHBhcmFtZXRlciAlbGxkXG4iLAo+IGdldHBhcmFtLT5wYXJhbSk7Cj4gwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqByZXR1cm4gLUVJTlZBTDsKPiBkaWZmIC0tZ2l0IGEvZHJp
-dmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9jaGFuLmMKPiBiL2RyaXZlcnMvZ3B1L2RybS9u
-b3V2ZWF1L25vdXZlYXVfY2hhbi5jCj4gaW5kZXggYWM1NmY0Njg5ZWUzLi5jM2MyYWI4ODc5Nzgg
-MTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9jaGFuLmMKPiAr
-KysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2NoYW4uYwo+IEBAIC00NTYsNyAr
-NDU2LDcgQEAgbm91dmVhdV9jaGFubmVsX2luaXQoc3RydWN0IG5vdXZlYXVfY2hhbm5lbAo+ICpj
-aGFuLCB1MzIgdnJhbSwgdTMyIGdhcnQpCj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqBjaGFuLT51c2VyX2dldCA9IDB4NDQ7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqBjaGFuLT51c2VyX2dldF9oaSA9IDB4NjA7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqBjaGFuLT5kbWEuaWJfYmFzZSA9wqAgMHgxMDAwMCAvIDQ7Cj4gLcKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoGNoYW4tPmRtYS5pYl9tYXjCoCA9ICgweDAyMDAwIC8gOCkgLSAxOwo+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBjaGFuLT5kbWEuaWJfbWF4wqAgPSBOVjUw
-X0RNQV9JQl9NQVg7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBjaGFuLT5kbWEu
-aWJfcHV0wqAgPSAwOwo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgY2hhbi0+ZG1h
-LmliX2ZyZWUgPSBjaGFuLT5kbWEuaWJfbWF4IC0gY2hhbi0KPiA+ZG1hLmliX3B1dDsKPiDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGNoYW4tPmRtYS5tYXggPSBjaGFuLT5kbWEuaWJf
-YmFzZTsKPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kbWEu
-aAo+IGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kbWEuaAo+IGluZGV4IDE3NDRk
-OTViMjMzZS4uYzUyY2RhODIzNTNlIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2
-ZWF1L25vdXZlYXVfZG1hLmgKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1
-X2RtYS5oCj4gQEAgLTQ5LDYgKzQ5LDkgQEAgdm9pZCBudjUwX2RtYV9wdXNoKHN0cnVjdCBub3V2
-ZWF1X2NoYW5uZWwgKiwgdTY0Cj4gYWRkciwgdTMyIGxlbmd0aCwKPiDCoC8qIE1heGltdW0gcHVz
-aCBidWZmZXIgc2l6ZS4gKi8KPiDCoCNkZWZpbmUgTlY1MF9ETUFfUFVTSF9NQVhfTEVOR1RIIDB4
-N2ZmZmZmCj4gwqAKPiArLyogTWF4aW11bSBJQnMgcGVyIHJpbmcuICovCj4gKyNkZWZpbmUgTlY1
-MF9ETUFfSUJfTUFYICgoMHgwMjAwMCAvIDgpIC0gMSkKPiArCj4gwqAvKiBPYmplY3QgaGFuZGxl
-cyAtIGZvciBzdHVmZiB0aGF0J3MgZG9lc24ndCB1c2UgaGFuZGxlID09IG9jbGFzcy4KPiAqLwo+
-IMKgZW51bSB7Cj4gwqDCoMKgwqDCoMKgwqDCoE52RG1hRkLCoMKgwqDCoMKgwqDCoMKgwqA9IDB4
-ODAwMDAwMDIsCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVf
-ZXhlYy5jCj4gYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2V4ZWMuYwo+IGluZGV4
-IGJhNjkxM2EzZWZiNi4uNWI1YzRhNzdiOGU2IDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2Ry
-bS9ub3V2ZWF1L25vdXZlYXVfZXhlYy5jCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
-bm91dmVhdV9leGVjLmMKPiBAQCAtMzQ2LDcgKzM0Niw3IEBAIG5vdXZlYXVfZXhlY19pb2N0bF9l
-eGVjKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsCj4gwqDCoMKgwqDCoMKgwqDCoHN0cnVjdCBub3V2
-ZWF1X2NoYW5uZWwgKmNoYW4gPSBOVUxMOwo+IMKgwqDCoMKgwqDCoMKgwqBzdHJ1Y3Qgbm91dmVh
-dV9leGVjX2pvYl9hcmdzIGFyZ3MgPSB7fTsKPiDCoMKgwqDCoMKgwqDCoMKgc3RydWN0IGRybV9u
-b3V2ZWF1X2V4ZWMgKnJlcSA9IGRhdGE7Cj4gLcKgwqDCoMKgwqDCoMKgaW50IHJldCA9IDA7Cj4g
-K8KgwqDCoMKgwqDCoMKgaW50IHB1c2hfbWF4LCByZXQgPSAwOwo+IMKgCj4gwqDCoMKgwqDCoMKg
-wqDCoGlmICh1bmxpa2VseSghYWJpMTYpKQo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgcmV0dXJuIC1FTk9NRU07Cj4gQEAgLTM3MSw5ICszNzEsMTAgQEAgbm91dmVhdV9leGVjX2lv
-Y3RsX2V4ZWMoc3RydWN0IGRybV9kZXZpY2UgKmRldiwKPiDCoMKgwqDCoMKgwqDCoMKgaWYgKCFj
-aGFuLT5kbWEuaWJfbWF4KQo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJu
-IG5vdXZlYXVfYWJpMTZfcHV0KGFiaTE2LCAtRU5PU1lTKTsKPiDCoAo+IC3CoMKgwqDCoMKgwqDC
-oGlmICh1bmxpa2VseShyZXEtPnB1c2hfY291bnQgPiBOT1VWRUFVX0dFTV9NQVhfUFVTSCkpIHsK
-PiArwqDCoMKgwqDCoMKgwqBwdXNoX21heCA9IGNoYW4tPmRtYS5pYl9tYXggLyBOT1VWRUFVX0VY
-RUNfUFVTSF9NQVhfRElWOwo+ICvCoMKgwqDCoMKgwqDCoGlmICh1bmxpa2VseShyZXEtPnB1c2hf
-Y291bnQgPiBwdXNoX21heCkpIHsKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE5W
-X1BSSU5USyhlcnIsIGNsaSwgInB1c2hidWYgcHVzaCBjb3VudCBleGNlZWRzCj4gbGltaXQ6ICVk
-IG1heCAlZFxuIiwKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoCByZXEtPnB1c2hfY291bnQsIE5PVVZFQVVfR0VNX01BWF9QVVNIKTsKPiArwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJlcS0+cHVzaF9jb3VudCwg
-cHVzaF9tYXgpOwo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJuIG5vdXZl
-YXVfYWJpMTZfcHV0KGFiaTE2LCAtRUlOVkFMKTsKPiDCoMKgwqDCoMKgwqDCoMKgfQo+IMKgCj4g
-ZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZXhlYy5oCj4gYi9k
-cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2V4ZWMuaAo+IGluZGV4IGI4MTVkZTI0Mjhm
-My4uYzYyNzA0NTJlNGI1IDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25v
-dXZlYXVfZXhlYy5oCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9leGVj
-LmgKPiBAQCAtNiw2ICs2LDExIEBACj4gwqAjaW5jbHVkZSAibm91dmVhdV9kcnYuaCIKPiDCoCNp
-bmNsdWRlICJub3V2ZWF1X3NjaGVkLmgiCj4gwqAKPiArLyogRGl2aWRlciB0byBsaW1pdCB0aGUg
-bnVtYmVyIG9mIElCcyBwZXIgam9iIHRvIGhhbGYgdGhlIHNpemUgb2YKPiB0aGUgcmluZyBpbgo+
-ICsgKiBvcmRlciB0byBhdm9pZCB0aGUgcmluZyBydW5uaW5nIGRyeSBiZXR3ZWVuIHN1Ym1pc3Np
-b25zLgo+ICsgKi8KPiArI2RlZmluZSBOT1VWRUFVX0VYRUNfUFVTSF9NQVhfRElWIDIKPiArCj4g
-wqBzdHJ1Y3Qgbm91dmVhdV9leGVjX2pvYl9hcmdzIHsKPiDCoMKgwqDCoMKgwqDCoMKgc3RydWN0
-IGRybV9maWxlICpmaWxlX3ByaXY7Cj4gwqDCoMKgwqDCoMKgwqDCoHN0cnVjdCBub3V2ZWF1X3Nj
-aGVkX2VudGl0eSAqc2NoZWRfZW50aXR5Owo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL3VhcGkvZHJt
-L25vdXZlYXVfZHJtLmgKPiBiL2luY2x1ZGUvdWFwaS9kcm0vbm91dmVhdV9kcm0uaAo+IGluZGV4
-IDhkNzQwMmMxM2U1Ni4uZWFmOWYyNDg2MTlmIDEwMDY0NAo+IC0tLSBhL2luY2x1ZGUvdWFwaS9k
-cm0vbm91dmVhdV9kcm0uaAo+ICsrKyBiL2luY2x1ZGUvdWFwaS9kcm0vbm91dmVhdV9kcm0uaAo+
-IEBAIC00NCw2ICs0NCwxNiBAQCBleHRlcm4gIkMiIHsKPiDCoCNkZWZpbmUgTk9VVkVBVV9HRVRQ
-QVJBTV9QVElNRVJfVElNRcKgwqDCoMKgIDE0Cj4gwqAjZGVmaW5lIE5PVVZFQVVfR0VUUEFSQU1f
-SEFTX0JPX1VTQUdFwqDCoMKgIDE1Cj4gwqAjZGVmaW5lIE5PVVZFQVVfR0VUUEFSQU1fSEFTX1BB
-R0VGTElQwqDCoMKgIDE2Cj4gKwo+ICsvKioKPiArICogQE5PVVZFQVVfR0VUUEFSQU1fRVhFQ19Q
-VVNIX01BWAo+ICsgKgo+ICsgKiBRdWVyeSB0aGUgbWF4aW11bSBhbW91bnQgb2YgSUJzIHRoYXQg
-Y2FuIGJlIHB1c2hlZCB0aHJvdWdoIGEKPiBzaW5nbGUKPiArICogJmRybV9ub3V2ZWF1X2V4ZWMg
-c3RydWN0dXJlIGFuZCBoZW5jZSBhIHNpbmdsZQo+ICZEUk1fSU9DVExfTk9VVkVBVV9FWEVDCj4g
-KyAqIGlvY3RsKCkuCj4gKyAqLwo+ICsjZGVmaW5lIE5PVVZFQVVfR0VUUEFSQU1fRVhFQ19QVVNI
-X01BWMKgwqAgMTcKPiArCj4gwqBzdHJ1Y3QgZHJtX25vdXZlYXVfZ2V0cGFyYW0gewo+IMKgwqDC
-oMKgwqDCoMKgwqBfX3U2NCBwYXJhbTsKPiDCoMKgwqDCoMKgwqDCoMKgX191NjQgdmFsdWU7Cgo=
+On Thu, 2023-09-28 at 11:12 +1000, Dave Airlie wrote:
+> On Thu, 28 Sept 2023 at 07:55, Faith Ekstrand
+> <faith.ekstrand@collabora.com> wrote:
+> >=20
+> > On Wed, 2023-09-27 at 03:22 +0200, Danilo Krummrich wrote:
+> > > Report the maximum number of IBs that can be pushed with a single
+> > > DRM_IOCTL_NOUVEAU_EXEC through DRM_IOCTL_NOUVEAU_GETPARAM.
+> > >=20
+> > > While the maximum number of IBs per ring might vary between
+> > > chipsets,
+> > > the kernel will make sure that userspace can only push a fraction
+> > > of
+> > > the
+> > > maximum number of IBs per ring per job, such that we avoid a
+> > > situation
+> > > where there's only a single job occupying the ring, which could
+> > > potentially lead to the ring run dry.
+> > >=20
+> > > Using DRM_IOCTL_NOUVEAU_GETPARAM to report the maximum number of
+> > > IBs
+> > > that can be pushed with a single DRM_IOCTL_NOUVEAU_EXEC implies
+> > > that
+> > > all channels of a given device have the same ring size.
+> >=20
+> > There's a bunch of nouveau kernel details I don't know here but the
+> > interface looks good and I prefer it to a #define in the header.
+> >=20
+> > Acked-by: Faith Ekstrand <faith.ekstrand@collabora.com>
+>=20
+> For the series
+>=20
+> Reviewed-by: Dave Airlie <airlied@redhat.com>
+>=20
+> we should probably land this in drm-misc-fixes, since it would be
+> good
+> to have in 6.6
+
+Agreed.  My Mesa patch should handle both the case where we have the
+getparam and when we don't.  However, I'd rather just make it part of
+the new UAPI from the start and have a hard requirement on it since it
+may reduce the current maximum in the header.
+
+~Faith
+
+
+> Dave.
+>=20
+> >=20
+> >=20
+> > > Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+> > > ---
+> > > =C2=A0drivers/gpu/drm/nouveau/nouveau_abi16.c | 19 ++++++++++++++++++=
++
+> > > =C2=A0drivers/gpu/drm/nouveau/nouveau_chan.c=C2=A0 |=C2=A0 2 +-
+> > > =C2=A0drivers/gpu/drm/nouveau/nouveau_dma.h=C2=A0=C2=A0 |=C2=A0 3 +++
+> > > =C2=A0drivers/gpu/drm/nouveau/nouveau_exec.c=C2=A0 |=C2=A0 7 ++++---
+> > > =C2=A0drivers/gpu/drm/nouveau/nouveau_exec.h=C2=A0 |=C2=A0 5 +++++
+> > > =C2=A0include/uapi/drm/nouveau_drm.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 | 10 ++++++++++
+> > > =C2=A06 files changed, 42 insertions(+), 4 deletions(-)
+> > >=20
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> > > b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> > > index 30afbec9e3b1..1a198689b391 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> > > @@ -31,6 +31,7 @@
+> > >=20
+> > > =C2=A0#include "nouveau_drv.h"
+> > > =C2=A0#include "nouveau_dma.h"
+> > > +#include "nouveau_exec.h"
+> > > =C2=A0#include "nouveau_gem.h"
+> > > =C2=A0#include "nouveau_chan.h"
+> > > =C2=A0#include "nouveau_abi16.h"
+> > > @@ -183,6 +184,20 @@ nouveau_abi16_fini(struct nouveau_abi16
+> > > *abi16)
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cli->abi16 =3D NULL;
+> > > =C2=A0}
+> > >=20
+> > > +static inline unsigned int
+> > > +getparam_dma_ib_max(struct nvif_device *device)
+> > > +{
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 const struct nvif_mclass dmas[]=
+ =3D {
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 { NV03_CHANNEL_DMA, 0 },
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 { NV10_CHANNEL_DMA, 0 },
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 { NV17_CHANNEL_DMA, 0 },
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 { NV40_CHANNEL_DMA, 0 },
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 {}
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 };
+> > > +
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return nvif_mclass(&device->obj=
+ect, dmas) < 0 ?
+> > > NV50_DMA_IB_MAX : 0;
+> > > +}
+> > > +
+> > > =C2=A0int
+> > > =C2=A0nouveau_abi16_ioctl_getparam(ABI16_IOCTL_ARGS)
+> > > =C2=A0{
+> > > @@ -247,6 +262,10 @@
+> > > nouveau_abi16_ioctl_getparam(ABI16_IOCTL_ARGS)
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 case NOUVEAU_GETPARAM_GRAP=
+H_UNITS:
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 getparam->value =3D nvkm_gr_units(gr);
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 break;
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 case NOUVEAU_GETPARAM_EXEC_PUSH=
+_MAX:
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 getparam->value =3D getparam_dma_ib_max(device) /
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 NOUVEAU_EXEC_PUSH_MAX_D=
+IV;
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 break;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 default:
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 NV_PRINTK(dbg, cli, "unknown parameter %lld\n",
+> > > getparam->param);
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 return -EINVAL;
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.c
+> > > b/drivers/gpu/drm/nouveau/nouveau_chan.c
+> > > index ac56f4689ee3..c3c2ab887978 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_chan.c
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_chan.c
+> > > @@ -456,7 +456,7 @@ nouveau_channel_init(struct nouveau_channel
+> > > *chan, u32 vram, u32 gart)
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 chan->user_get =3D 0x44;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 chan->user_get_hi =3D 0x60;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 chan->dma.ib_base =3D=C2=A0 0x10000 / 4;
+> > > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 chan->dma.ib_max=C2=A0 =3D (0x02000 / 8) - 1;
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 chan->dma.ib_max=C2=A0 =3D NV50_DMA_IB_MAX;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 chan->dma.ib_put=C2=A0 =3D 0;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 chan->dma.ib_free =3D chan->dma.ib_max - chan-
+> > > > dma.ib_put;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 chan->dma.max =3D chan->dma.ib_base;
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_dma.h
+> > > b/drivers/gpu/drm/nouveau/nouveau_dma.h
+> > > index 1744d95b233e..c52cda82353e 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_dma.h
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_dma.h
+> > > @@ -49,6 +49,9 @@ void nv50_dma_push(struct nouveau_channel *,
+> > > u64
+> > > addr, u32 length,
+> > > =C2=A0/* Maximum push buffer size. */
+> > > =C2=A0#define NV50_DMA_PUSH_MAX_LENGTH 0x7fffff
+> > >=20
+> > > +/* Maximum IBs per ring. */
+> > > +#define NV50_DMA_IB_MAX ((0x02000 / 8) - 1)
+> > > +
+> > > =C2=A0/* Object handles - for stuff that's doesn't use handle =3D=3D
+> > > oclass.
+> > > */
+> > > =C2=A0enum {
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 NvDmaFB=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D 0x80000002,
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c
+> > > b/drivers/gpu/drm/nouveau/nouveau_exec.c
+> > > index ba6913a3efb6..5b5c4a77b8e6 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_exec.c
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
+> > > @@ -346,7 +346,7 @@ nouveau_exec_ioctl_exec(struct drm_device
+> > > *dev,
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct nouveau_channel *ch=
+an =3D NULL;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct nouveau_exec_job_ar=
+gs args =3D {};
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct drm_nouveau_exec *r=
+eq =3D data;
+> > > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int ret =3D 0;
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int push_max, ret =3D 0;
+> > >=20
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (unlikely(!abi16))
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 return -ENOMEM;
+> > > @@ -371,9 +371,10 @@ nouveau_exec_ioctl_exec(struct drm_device
+> > > *dev,
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!chan->dma.ib_max)
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 return nouveau_abi16_put(abi16, -ENOSYS);
+> > >=20
+> > > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (unlikely(req->push_count > =
+NOUVEAU_GEM_MAX_PUSH)) {
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 push_max =3D chan->dma.ib_max /=
+ NOUVEAU_EXEC_PUSH_MAX_DIV;
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (unlikely(req->push_count > =
+push_max)) {
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 NV_PRINTK(err, cli, "pushbuf push count exceeds
+> > > limit: %d max %d\n",
+> > > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 re=
+q->push_count, NOUVEAU_GEM_MAX_PUSH);
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 req->push_count, push_max);
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 return nouveau_abi16_put(abi16, -EINVAL);
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+> > >=20
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.h
+> > > b/drivers/gpu/drm/nouveau/nouveau_exec.h
+> > > index b815de2428f3..c6270452e4b5 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_exec.h
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_exec.h
+> > > @@ -6,6 +6,11 @@
+> > > =C2=A0#include "nouveau_drv.h"
+> > > =C2=A0#include "nouveau_sched.h"
+> > >=20
+> > > +/* Divider to limit the number of IBs per job to half the size
+> > > of
+> > > the ring in
+> > > + * order to avoid the ring running dry between submissions.
+> > > + */
+> > > +#define NOUVEAU_EXEC_PUSH_MAX_DIV 2
+> > > +
+> > > =C2=A0struct nouveau_exec_job_args {
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct drm_file *file_priv=
+;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct nouveau_sched_entit=
+y *sched_entity;
+> > > diff --git a/include/uapi/drm/nouveau_drm.h
+> > > b/include/uapi/drm/nouveau_drm.h
+> > > index 8d7402c13e56..eaf9f248619f 100644
+> > > --- a/include/uapi/drm/nouveau_drm.h
+> > > +++ b/include/uapi/drm/nouveau_drm.h
+> > > @@ -44,6 +44,16 @@ extern "C" {
+> > > =C2=A0#define NOUVEAU_GETPARAM_PTIMER_TIME=C2=A0=C2=A0=C2=A0=C2=A0 14
+> > > =C2=A0#define NOUVEAU_GETPARAM_HAS_BO_USAGE=C2=A0=C2=A0=C2=A0 15
+> > > =C2=A0#define NOUVEAU_GETPARAM_HAS_PAGEFLIP=C2=A0=C2=A0=C2=A0 16
+> > > +
+> > > +/**
+> > > + * @NOUVEAU_GETPARAM_EXEC_PUSH_MAX
+> > > + *
+> > > + * Query the maximum amount of IBs that can be pushed through a
+> > > single
+> > > + * &drm_nouveau_exec structure and hence a single
+> > > &DRM_IOCTL_NOUVEAU_EXEC
+> > > + * ioctl().
+> > > + */
+> > > +#define NOUVEAU_GETPARAM_EXEC_PUSH_MAX=C2=A0=C2=A0 17
+> > > +
+> > > =C2=A0struct drm_nouveau_getparam {
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 __u64 param;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 __u64 value;
+> >=20
 
