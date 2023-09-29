@@ -2,65 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 362307B3AB8
-	for <lists+nouveau@lfdr.de>; Fri, 29 Sep 2023 21:34:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A34F47B3B38
+	for <lists+nouveau@lfdr.de>; Fri, 29 Sep 2023 22:24:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1307A10E1B2;
-	Fri, 29 Sep 2023 19:34:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1731310E13A;
+	Fri, 29 Sep 2023 20:24:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A3C8010E1B2
- for <nouveau@lists.freedesktop.org>; Fri, 29 Sep 2023 19:34:02 +0000 (UTC)
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1c328b53aeaso130498685ad.2
- for <nouveau@lists.freedesktop.org>; Fri, 29 Sep 2023 12:34:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696016042; x=1696620842;
- darn=lists.freedesktop.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ym+ucW6MHQZimVVr4/aWJAbaMhbjuFeNaLImS0cTOp0=;
- b=TixVQg9xRTeGHwlfS9n7MYmhEjXR+UZBfzh37C5jBHYIYqFoQfwdyK1wK+Tatkhd2E
- 0h85oIfUEYFLzsfSV9ee8gE63919elODziLyRQ2VU4R6CyT0ZhWmfXgTpT+gha4ejyuS
- HiFdd1skfdqQsWthB0iAnmt3peidGawHG0cXo=
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0C50110E133
+ for <nouveau@lists.freedesktop.org>; Fri, 29 Sep 2023 20:24:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1696019064;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ewZiFHUKmV9xtcbcuN23GQRTu/CBTIx2ARUrFl0HY20=;
+ b=PNqVMtfiRNeCkEvXJSrQ9m4ozYETE6hR2zn9hvIHCeDa0nUqhz1I0+r5uRaTqCsPL2IDGm
+ yE9SKYjJe1qLDXm7Nsr/89tl8uCtaPOddsiO4SjyTu0vT7Qw/o+Y1ywuWL2yH4/Hx0SeQc
+ aABc0cy/1eYDKlfQyat1vUYjU1fJqpE=
+Received: from mail-oa1-f71.google.com (mail-oa1-f71.google.com
+ [209.85.160.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-468-VKA2Fc_OP5eQAe3kuNO5VQ-1; Fri, 29 Sep 2023 16:24:21 -0400
+X-MC-Unique: VKA2Fc_OP5eQAe3kuNO5VQ-1
+Received: by mail-oa1-f71.google.com with SMTP id
+ 586e51a60fabf-1b728bfb372so30791963fac.2
+ for <nouveau@lists.freedesktop.org>; Fri, 29 Sep 2023 13:24:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696016042; x=1696620842;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ym+ucW6MHQZimVVr4/aWJAbaMhbjuFeNaLImS0cTOp0=;
- b=MA1DbZviIy5k4vfOlo72LHz5tB/HmPzH/NDGwEoRqznzYj/rJnDA7caGgytD2bdGSI
- GO1JmTBLBlJ0kXZsSFtZuTf25mgW28lXvmBDfS5bYAIwMytQNS2galNljDUF5LCnpwNF
- nj/FKzXYclMOYwsgSdyvIzgmoCqfHNbEM6Z1oTCc7M5UNcTpMjiI0ie1eENooVlVndtz
- qNlyQfdWHGPKsoqjKhprX2kB43ZUHQh40M2RHuKQeqVD4l3Pm94WyLAggR45TGF64cx1
- xx2NCu5LBQ2p9eKvUjn5vcc+jCuNAcKbKxFFsvY9sxHmtP5LIuNbG4kjQet2dPt96v1E
- GymA==
-X-Gm-Message-State: AOJu0YyRvGCc7L1k9kg1JDa0dUigyM21UCmsEgijoQV0+sLj4XAaLJ+7
- KZahfNb+U2YWsrLfcKL5+hRKIw==
-X-Google-Smtp-Source: AGHT+IGQWTdEpdWeBEvd5foAb6HBvD/EqemA8SP9BycZ81OPm2PcYAndv1e0P5bQalrHP7ERsAZdBw==
-X-Received: by 2002:a17:902:720a:b0:1c1:dbd6:9bf6 with SMTP id
- ba10-20020a170902720a00b001c1dbd69bf6mr4494391plb.41.1696016042045; 
- Fri, 29 Sep 2023 12:34:02 -0700 (PDT)
-Received: from www.outflux.net (198-0-35-241-static.hfc.comcastbusiness.net.
- [198.0.35.241]) by smtp.gmail.com with ESMTPSA id
- jg6-20020a17090326c600b001c61df93afdsm10225856plb.59.2023.09.29.12.34.01
+ d=1e100.net; s=20230601; t=1696019061; x=1696623861;
+ h=mime-version:user-agent:content-transfer-encoding:organization
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6AMpb+2gDgq7RlPrOwXqsC5rvICGHGcOSn62cpzrOUk=;
+ b=jwJm4dyLy/lJhLOIeYThNcGwyBxWpqMwhslvTVeJBo2w3tHt5bmmnyLY6Jc0jGujnX
+ L+8DKHY0oAP2x7j/7DZ7wSjGlVq0kyr6ZnwWmYHNnYcwWf1MdbJ8iuyffuWDy/w9Fweb
+ zo/ivvBhp1LxwPqT9SC/nsy2Spw1KwJulkMjnnr5DFwRmOLE5WdYh69tt4CfUvQmf8Yb
+ 86uau+Lw+pVJdUwOd8Zj75GESbaJxoQjqYmZJj1N++egfE9L3m2OBm8o3CtrsPLkvLfa
+ 28Zn5sZOI4pzJP8iDOVfIxfXNpllCPdYgS/D2qKbXL6TIsrp5MozInrLld9MNbJaj4F/
+ lOig==
+X-Gm-Message-State: AOJu0Yw6CN8JfZ9nLKSFmQDF9IiN4+HJxpJIh1sgShcEPAhdKaZc6Ob2
+ YdORS7fwxz+wxejDNxXiAhrNWGSaI7At5TYGzEhQSAL7RY2uojVP4iRCnjAPx1Y461p0yrC2EZU
+ bsL+DZU+N36qfz4zdlHys0T/FnA==
+X-Received: by 2002:a05:6870:b507:b0:1c0:d0e8:8fda with SMTP id
+ v7-20020a056870b50700b001c0d0e88fdamr6227162oap.16.1696019060831; 
+ Fri, 29 Sep 2023 13:24:20 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHvm09Ewxw9lUjDhCKZhnPdCxi8jwKEnZc5hS6eklkvEm8RJG8FijD4Ce7C0XS6xgeA7v/m9A==
+X-Received: by 2002:a05:6870:b507:b0:1c0:d0e8:8fda with SMTP id
+ v7-20020a056870b50700b001c0d0e88fdamr6227152oap.16.1696019060595; 
+ Fri, 29 Sep 2023 13:24:20 -0700 (PDT)
+Received: from ?IPv6:2600:4040:5c6c:a300::feb? ([2600:4040:5c6c:a300::feb])
+ by smtp.gmail.com with ESMTPSA id
+ vu4-20020a05620a560400b00774309d3e89sm4398580qkn.7.2023.09.29.13.24.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Sep 2023 12:34:01 -0700 (PDT)
-From: Kees Cook <keescook@chromium.org>
-To: David Airlie <airlied@gmail.com>,
-	Kees Cook <keescook@chromium.org>
-Date: Fri, 29 Sep 2023 12:33:24 -0700
-Message-Id: <169601600138.3014939.8511343741428844249.b4-ty@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230922173110.work.084-kees@kernel.org>
-References: <20230922173110.work.084-kees@kernel.org>
+ Fri, 29 Sep 2023 13:24:20 -0700 (PDT)
+Message-ID: <9e699068d5cb644201a8b9be113a94a90299ac39.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Danilo Krummrich <dakr@redhat.com>, nouveau@lists.freedesktop.org
+Date: Fri, 29 Sep 2023 16:24:19 -0400
+In-Reply-To: <20230916011501.15813-1-dakr@redhat.com>
+References: <20230916011501.15813-1-dakr@redhat.com>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.48.4 (3.48.4-1.fc38)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH 0/9] drm: Annotate structs with __counted_by
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: fence: fix type cast warning in
+ nouveau_fence_emit()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,81 +84,51 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Tejas Upadhyay <tejas.upadhyay@intel.com>, Emma Anholt <emma@anholt.net>,
- Tom Rix <trix@redhat.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- llvm@lists.linux.dev, dri-devel@lists.freedesktop.org,
- Chris Wilson <chris@chris-wilson.co.uk>, Prike Liang <Prike.Liang@amd.com>,
- Huang Rui <ray.huang@amd.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Andrzej Hajda <andrzej.hajda@intel.com>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Matthew Brost <matthew.brost@intel.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, amd-gfx@lists.freedesktop.org,
- Kuogee Hsieh <quic_khsieh@quicinc.com>, Nathan Chancellor <nathan@kernel.org>,
- VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
- Ben Skeggs <bskeggs@redhat.com>, Andi Shyti <andi.shyti@linux.intel.com>,
- nouveau@lists.freedesktop.org, David Airlie <airlied@redhat.com>,
- virtualization@lists.linux-foundation.org, Chia-I Wu <olvaffe@gmail.com>,
- linux-hardening@vger.kernel.org, Lijo Lazar <lijo.lazar@amd.com>,
- Yifan Zhang <yifan1.zhang@amd.com>, linux-arm-msm@vger.kernel.org,
- intel-gfx@lists.freedesktop.org, Kevin Wang <kevin1.wang@amd.com>,
- Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Melissa Wen <mwen@igalia.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>,
- Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Evan Quan <evan.quan@amd.com>, Sean Paul <sean@poorly.run>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Xiaojian Du <Xiaojian.Du@amd.com>, Le Ma <le.ma@amd.com>,
- freedreno@lists.freedesktop.org, Bjorn Andersson <andersson@kernel.org>, "Pan,
- Xinhui" <Xinhui.Pan@amd.com>, Nick Desaulniers <ndesaulniers@google.com>,
- linux-kernel@vger.kernel.org, Rob Clark <robdclark@gmail.com>,
- Zack Rusin <zackr@vmware.com>, Daniel Vetter <daniel@ffwll.ch>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Nirmoy Das <nirmoy.das@intel.com>, Lang Yu <Lang.Yu@amd.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- John Harrison <john.c.harrison@Intel.com>,
- Hawking Zhang <Hawking.Zhang@amd.com>
+Cc: dri-devel@lists.freedesktop.org, kernel test robot <lkp@intel.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 22 Sep 2023 10:32:05 -0700, Kees Cook wrote:
-> This is a batch of patches touching drm for preparing for the coming
-> implementation by GCC and Clang of the __counted_by attribute. Flexible
-> array members annotated with __counted_by can have their accesses
-> bounds-checked at run-time checking via CONFIG_UBSAN_BOUNDS (for array
-> indexing) and CONFIG_FORTIFY_SOURCE (for strcpy/memcpy-family functions).
-> 
-> As found with Coccinelle[1], add __counted_by to structs that would
-> benefit from the annotation.
-> 
-> [...]
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-Since this got Acks, I figure I should carry it in my tree. Let me know
-if this should go via drm instead.
+On Sat, 2023-09-16 at 03:14 +0200, Danilo Krummrich wrote:
+> Fix the following warning.
+>=20
+>   drivers/gpu/drm/nouveau/nouveau_fence.c:210:45: sparse: sparse:
+>   incorrect type in initializer (different address spaces)
+>   @@     expected struct nouveau_channel *chan
+>   @@     got struct nouveau_channel [noderef] __rcu *channel
+>=20
+> We're just about to emit the fence, there is nothing to protect against
+> yet, hence it is safe to just cast __rcu away.
+>=20
+> Reported-by: kernel test robot <lkp@intel.com>
+> Closes: https://lore.kernel.org/oe-kbuild-all/202309140340.BwKXzaDx-lkp@i=
+ntel.com/
+> Fixes: 978474dc8278 ("drm/nouveau: fence: fix undefined fence state after=
+ emit")
+> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_fence.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/no=
+uveau/nouveau_fence.c
+> index 61d9e70da9fd..ca762ea55413 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> @@ -207,7 +207,7 @@ nouveau_fence_context_new(struct nouveau_channel *cha=
+n, struct nouveau_fence_cha
+>  int
+>  nouveau_fence_emit(struct nouveau_fence *fence)
+>  {
+> -=09struct nouveau_channel *chan =3D fence->channel;
+> +=09struct nouveau_channel *chan =3D unrcu_pointer(fence->channel);
+>  =09struct nouveau_fence_chan *fctx =3D chan->fence;
+>  =09struct nouveau_fence_priv *priv =3D (void*)chan->drm->fence;
+>  =09int ret;
 
-Applied to for-next/hardening, thanks!
-
-[1/9] drm/amd/pm: Annotate struct smu10_voltage_dependency_table with __counted_by
-      https://git.kernel.org/kees/c/a6046ac659d6
-[2/9] drm/amdgpu/discovery: Annotate struct ip_hw_instance with __counted_by
-      https://git.kernel.org/kees/c/4df33089b46f
-[3/9] drm/i915/selftests: Annotate struct perf_series with __counted_by
-      https://git.kernel.org/kees/c/ffd3f823bdf6
-[4/9] drm/msm/dpu: Annotate struct dpu_hw_intr with __counted_by
-      https://git.kernel.org/kees/c/2de35a989b76
-[5/9] drm/nouveau/pm: Annotate struct nvkm_perfdom with __counted_by
-      https://git.kernel.org/kees/c/188aeb08bfaa
-[6/9] drm/vc4: Annotate struct vc4_perfmon with __counted_by
-      https://git.kernel.org/kees/c/59a54dc896c3
-[7/9] drm/virtio: Annotate struct virtio_gpu_object_array with __counted_by
-      https://git.kernel.org/kees/c/5cd476de33af
-[8/9] drm/vmwgfx: Annotate struct vmw_surface_dirty with __counted_by
-      https://git.kernel.org/kees/c/b426f2e5356a
-[9/9] drm/v3d: Annotate struct v3d_perfmon with __counted_by
-      https://git.kernel.org/kees/c/dc662fa1b0e4
-
-Take care,
-
--- 
-Kees Cook
+--=20
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
