@@ -2,56 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 876907B4B84
-	for <lists+nouveau@lfdr.de>; Mon,  2 Oct 2023 08:34:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 11BA87B4EE9
+	for <lists+nouveau@lfdr.de>; Mon,  2 Oct 2023 11:21:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7174A10E135;
-	Mon,  2 Oct 2023 06:34:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4864E10E270;
+	Mon,  2 Oct 2023 09:20:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2363410E122;
- Mon,  2 Oct 2023 06:34:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1696228475; x=1727764475;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=ohMoN0O13vl59/T1Y4daJDp+6LTZG589rbJO6FTJaDA=;
- b=JiFrxD+p/fQnQoAwocTEp53E8IY/om3ErfRtkJhwZ1kcBQq/SQbErDfa
- C3gxSOEGZLPlFWpylJC4qbv4aBrOJ9LYuq42yt2gWoLn4OuLaSPBoTREd
- 7cohv6b12rBom+F6H69KSfhm9KheVlonF2iYeXTTJiegTbYLrp+eMvMOd
- I+0swh17rvT1CEVwjOitmuvHgnpLAZLeinF2Hwopt8mdqlPhRqa0C3Otd
- aE86Bimvr6bI2d4XFxxMAm4S4pW2AvKKWr0rMagyLw8uM2lkUC1ViV4hV
- Aa4NWFceSUxooi6XTeDPONFUbgkBf5T7q7ah1gM/c+MWyU+kAzK1R5YzV w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10850"; a="468868675"
-X-IronPort-AV: E=Sophos;i="6.03,193,1694761200"; d="scan'208";a="468868675"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
- by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Oct 2023 23:34:34 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10850"; a="840902494"
-X-IronPort-AV: E=Sophos;i="6.03,193,1694761200"; d="scan'208";a="840902494"
-Received: from lkp-server02.sh.intel.com (HELO c3b01524d57c) ([10.239.97.151])
- by FMSMGA003.fm.intel.com with ESMTP; 01 Oct 2023 23:34:30 -0700
-Received: from kbuild by c3b01524d57c with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1qnCVg-0005p5-24;
- Mon, 02 Oct 2023 06:34:28 +0000
-Date: Mon, 2 Oct 2023 14:34:02 +0800
-From: kernel test robot <lkp@intel.com>
-To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
- matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
- sarah.walker@imgtec.com, donald.robson@imgtec.com,
- boris.brezillon@collabora.com, christian.koenig@amd.com,
- faith@gfxstrand.net
-Message-ID: <202310021416.3jqeZtQG-lkp@intel.com>
-References: <20230928191624.13703-4-dakr@redhat.com>
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C751D10E26C;
+ Mon,  2 Oct 2023 09:20:17 +0000 (UTC)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-31427ddd3fbso14945850f8f.0; 
+ Mon, 02 Oct 2023 02:20:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1696238416; x=1696843216; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vNiEun8BJgZFmuZelXrrpN/XVazT12AxKny5brwsu7w=;
+ b=hpul48jc5wRgYuuq7rjWOuldRr3Cz9nGdNrRFKhLCSavyavqMoagsUnusKybAJHuKA
+ xE046GUSPsZTRflARG4QV+okYn9/EzkY3povCmvJ5Ik1GrCj5Ln9lbAmh48xN4moydyS
+ Ob0E2wJN29J2EQksMeSZ09nE0LGVTMfQwQYSuQk0qsMjIhriV7625WbkTiavmwYjaLqD
+ UHXgnOE3qWqbwPTE1XChcntGdNGGp7w49mOcrOfHtkSnNRlfSSMvU1dMNWke9VL0l3zU
+ sCHGzEt0FvM1pGp6qohTFb5z2sf0rVb6W87Vmo3P3pPk/heYC/hymC4KcrnC0WYc0EL+
+ MVCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696238416; x=1696843216;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vNiEun8BJgZFmuZelXrrpN/XVazT12AxKny5brwsu7w=;
+ b=EV+IoY/hoj/U/elpIXBrMJjo2eti6i/r6uC0vZ7zP36Ogv4Ehbm+OV2vjkvsAHmIcN
+ DYEslUo4u6DNhyJOUEWXr2dJPqFSu24/OZiG36ERZus5uME1+uPKJK16ycwjwDRVokMu
+ h5eF68WrC1H59Y9xt1X4nbNZcWn3T068qLW4JiowOcH0He62g2zwsxhbn2GST4BcXNh9
+ 3ayItguHqMVMyj8uyBQ8MfYpTPkqGPRqzHEJLdHQWGOPlLsw3vHG9yE2TVK/A4LDNVzu
+ 0Ez17qAq9s+Hxrgd3DAvWjFmnidUAdES7WVwSff99TOeMYrKboJ5az85F6wByCnvwSXu
+ Gb1w==
+X-Gm-Message-State: AOJu0Yxuxi6j+6ZPC8jWUDKviP1iS9xz8P3l4OeXzr1B/1a65fSaNCnL
+ dOiz5T1a81XUOektcnKGqU8=
+X-Google-Smtp-Source: AGHT+IHbGguNFjowt/WUg4Hv4Wpy0nhMxW4/Lz37ilFeyba8QPT16aUDMsJeXvW8elMT4DQ7Chc9QA==
+X-Received: by 2002:adf:ee10:0:b0:319:71be:9248 with SMTP id
+ y16-20020adfee10000000b0031971be9248mr9703358wrn.19.1696238415942; 
+ Mon, 02 Oct 2023 02:20:15 -0700 (PDT)
+Received: from [10.254.108.106] (munvpn.amd.com. [165.204.72.6])
+ by smtp.gmail.com with ESMTPSA id
+ t3-20020a5d5343000000b0030ae53550f5sm27500038wrv.51.2023.10.02.02.20.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Oct 2023 02:20:15 -0700 (PDT)
+Message-ID: <83cd056c-52ae-01dd-7576-42d41da64c26@gmail.com>
+Date: Mon, 2 Oct 2023 11:20:09 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230928191624.13703-4-dakr@redhat.com>
-Subject: Re: [Nouveau] [PATCH drm-misc-next v5 3/6] drm/gpuvm: add an
- abstraction for a VM / BO combination
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Content-Language: en-US
+To: Kees Cook <keescook@chromium.org>, David Airlie <airlied@gmail.com>
+References: <20230922173110.work.084-kees@kernel.org>
+ <169601600138.3014939.8511343741428844249.b4-ty@chromium.org>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+In-Reply-To: <169601600138.3014939.8511343741428844249.b4-ty@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH 0/9] drm: Annotate structs with __counted_by
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,74 +76,91 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, oe-kbuild-all@lists.linux.dev
+Cc: "Pan, Xinhui" <Xinhui.Pan@amd.com>, Tom Rix <trix@redhat.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, Chris Wilson <chris@chris-wilson.co.uk>,
+ Prike Liang <Prike.Liang@amd.com>, Huang Rui <ray.huang@amd.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Andrzej Hajda <andrzej.hajda@intel.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Matthew Brost <matthew.brost@intel.com>, Evan Quan <evan.quan@amd.com>,
+ Emma Anholt <emma@anholt.net>, amd-gfx@lists.freedesktop.org,
+ Kuogee Hsieh <quic_khsieh@quicinc.com>, Lijo Lazar <lijo.lazar@amd.com>,
+ VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Andi Shyti <andi.shyti@linux.intel.com>,
+ nouveau@lists.freedesktop.org, David Airlie <airlied@redhat.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Chia-I Wu <olvaffe@gmail.com>,
+ llvm@lists.linux.dev, Yifan Zhang <yifan1.zhang@amd.com>,
+ linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ Kevin Wang <kevin1.wang@amd.com>, Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Nathan Chancellor <nathan@kernel.org>, Le Ma <le.ma@amd.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ virtualization@lists.linux-foundation.org, Sean Paul <sean@poorly.run>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Xiaojian Du <Xiaojian.Du@amd.com>,
+ Lang Yu <Lang.Yu@amd.com>, Bjorn Andersson <andersson@kernel.org>,
+ Tejas Upadhyay <tejas.upadhyay@intel.com>,
+ Nick Desaulniers <ndesaulniers@google.com>, linux-kernel@vger.kernel.org,
+ Hawking Zhang <Hawking.Zhang@amd.com>, Rob Clark <robdclark@gmail.com>,
+ Melissa Wen <mwen@igalia.com>, John Harrison <john.c.harrison@Intel.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
+ Nirmoy Das <nirmoy.das@intel.com>, freedreno@lists.freedesktop.org,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Zack Rusin <zackr@vmware.com>, linux-hardening@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Danilo,
+Am 29.09.23 um 21:33 schrieb Kees Cook:
+> On Fri, 22 Sep 2023 10:32:05 -0700, Kees Cook wrote:
+>> This is a batch of patches touching drm for preparing for the coming
+>> implementation by GCC and Clang of the __counted_by attribute. Flexible
+>> array members annotated with __counted_by can have their accesses
+>> bounds-checked at run-time checking via CONFIG_UBSAN_BOUNDS (for array
+>> indexing) and CONFIG_FORTIFY_SOURCE (for strcpy/memcpy-family functions).
+>>
+>> As found with Coccinelle[1], add __counted_by to structs that would
+>> benefit from the annotation.
+>>
+>> [...]
+> Since this got Acks, I figure I should carry it in my tree. Let me know
+> if this should go via drm instead.
+>
+> Applied to for-next/hardening, thanks!
+>
+> [1/9] drm/amd/pm: Annotate struct smu10_voltage_dependency_table with __counted_by
+>        https://git.kernel.org/kees/c/a6046ac659d6
 
-kernel test robot noticed the following build warnings:
+STOP! In a follow up discussion Alex and I figured out that this won't work.
 
-[auto build test WARNING on a4ead6e37e3290cff399e2598d75e98777b69b37]
+The value in the structure is byte swapped based on some firmware 
+endianness which not necessary matches the CPU endianness.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Danilo-Krummrich/drm-gpuvm-add-common-dma-resv-per-struct-drm_gpuvm/20230929-031831
-base:   a4ead6e37e3290cff399e2598d75e98777b69b37
-patch link:    https://lore.kernel.org/r/20230928191624.13703-4-dakr%40redhat.com
-patch subject: [PATCH drm-misc-next v5 3/6] drm/gpuvm: add an abstraction for a VM / BO combination
-reproduce: (https://download.01.org/0day-ci/archive/20231002/202310021416.3jqeZtQG-lkp@intel.com/reproduce)
+Please revert that one from going upstream if it's already on it's way.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202310021416.3jqeZtQG-lkp@intel.com/
+And because of those reasons I strongly think that patches like this 
+should go through the DRM tree :)
 
-All warnings (new ones prefixed by >>):
+Regards,
+Christian.
 
->> ./include/drm/drm_gpuvm.h:464: warning: Function parameter or member 'vm' not described in 'drm_gpuvm_bo'
+> [2/9] drm/amdgpu/discovery: Annotate struct ip_hw_instance with __counted_by
+>        https://git.kernel.org/kees/c/4df33089b46f
+> [3/9] drm/i915/selftests: Annotate struct perf_series with __counted_by
+>        https://git.kernel.org/kees/c/ffd3f823bdf6
+> [4/9] drm/msm/dpu: Annotate struct dpu_hw_intr with __counted_by
+>        https://git.kernel.org/kees/c/2de35a989b76
+> [5/9] drm/nouveau/pm: Annotate struct nvkm_perfdom with __counted_by
+>        https://git.kernel.org/kees/c/188aeb08bfaa
+> [6/9] drm/vc4: Annotate struct vc4_perfmon with __counted_by
+>        https://git.kernel.org/kees/c/59a54dc896c3
+> [7/9] drm/virtio: Annotate struct virtio_gpu_object_array with __counted_by
+>        https://git.kernel.org/kees/c/5cd476de33af
+> [8/9] drm/vmwgfx: Annotate struct vmw_surface_dirty with __counted_by
+>        https://git.kernel.org/kees/c/b426f2e5356a
+> [9/9] drm/v3d: Annotate struct v3d_perfmon with __counted_by
+>        https://git.kernel.org/kees/c/dc662fa1b0e4
+>
+> Take care,
+>
 
-vim +464 ./include/drm/drm_gpuvm.h
-
-   427	
-   428		/**
-   429		 * @gpuvm: The &drm_gpuvm the @obj is mapped in.
-   430		 */
-   431		struct drm_gpuvm *vm;
-   432	
-   433		/**
-   434		 * @obj: The &drm_gem_object being mapped in the @gpuvm.
-   435		 */
-   436		struct drm_gem_object *obj;
-   437	
-   438		/**
-   439		 * @kref: The reference count for this &drm_gpuvm_bo.
-   440		 */
-   441		struct kref kref;
-   442	
-   443		/**
-   444		 * @list: Structure containing all &list_heads.
-   445		 */
-   446		struct {
-   447			/**
-   448			 * @gpuva: The list of linked &drm_gpuvas.
-   449			 */
-   450			struct list_head gpuva;
-   451	
-   452			/**
-   453			 * @entry: Structure containing all &list_heads serving as
-   454			 * entry.
-   455			 */
-   456			struct {
-   457				/**
-   458				 * @gem: List entry to attach to the &drm_gem_objects
-   459				 * gpuva list.
-   460				 */
-   461				struct list_head gem;
-   462			} entry;
-   463		} list;
- > 464	};
-   465	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
