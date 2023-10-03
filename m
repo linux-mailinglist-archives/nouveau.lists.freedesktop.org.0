@@ -1,55 +1,81 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C82A37B68EF
-	for <lists+nouveau@lfdr.de>; Tue,  3 Oct 2023 14:26:13 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4370C7B6EFD
+	for <lists+nouveau@lfdr.de>; Tue,  3 Oct 2023 18:55:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 43BFC10E284;
-	Tue,  3 Oct 2023 12:26:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9EB9710E2F6;
+	Tue,  3 Oct 2023 16:55:23 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1B58C10E04E;
- Tue,  3 Oct 2023 12:26:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1696335963; x=1727871963;
- h=message-id:subject:from:to:cc:date:in-reply-to:
- references:content-transfer-encoding:mime-version;
- bh=h+SKNqPou1zwDxYZgK8h0KS06+1YNpO5fxzYV7YI4q0=;
- b=AoyfzlPxpnAbYxRUt8nbgvqMzwm3yfzQ0DmYjB+6Msl/Ab+EQlYXvlvO
- IGOYW3uaEQtSybJK9na8nUfFznUhXQz1uh8/Ek6XaTkbDaAjvjNZvv6fF
- SsgE0XzrPC/LPC1ga5kGMc+QkgfTLN7hvvDjQARLwpUvH+JCDcpUxj3DX
- vrX8Tr9wH4f79AVpWGNOTtGuefjG2etDFOIdDzF8usAUrnbX8hRFufu+5
- YoyuWDIv4B1X7N9wwia7/iANPITm7mu84DJ95Q4a4ZFEbu7bOuYt1kBLD
- /nHRwkdDnTuqneLtEDSJiOVijaHVZE8Ra0DcmsjCWKcjsS+JkiXjuspe2 A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="449350387"
-X-IronPort-AV: E=Sophos;i="6.03,197,1694761200"; d="scan'208";a="449350387"
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
- by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Oct 2023 05:26:02 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10851"; a="997997355"
-X-IronPort-AV: E=Sophos;i="6.03,197,1694761200"; d="scan'208";a="997997355"
-Received: from fhoeg-mobl1.ger.corp.intel.com (HELO [10.249.254.234])
- ([10.249.254.234])
- by fmsmga006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Oct 2023 05:25:58 -0700
-Message-ID: <f551ee9059e52d46343f5fa997b7d9f8ab6654d9.camel@linux.intel.com>
-From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
-To: Boris Brezillon <boris.brezillon@collabora.com>
-Date: Tue, 03 Oct 2023 14:25:56 +0200
-In-Reply-To: <20231003120554.547090bc@collabora.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EFDD010E2F6
+ for <nouveau@lists.freedesktop.org>; Tue,  3 Oct 2023 16:55:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1696352121;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=U7tfHP4kmRXiaICtPd4tqtaPxNkyYEUzIvHl3BC2KeQ=;
+ b=Zii5WNc2/BedwAaH7hCkNdrRtpx7mbCtz+7NDCgHz/dL0Drdqi151m85fv2MCertMPHwz4
+ j3x9lnLyxsWTGdxUBxH50sp0Efrq9k3tf5I4sQud6Sl0l2fMmJz6a75nPsO1sBQRPSMJ+l
+ DbYlffEPi3JVkozBTWwfYVYQC96IfRI=
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-554-76gXJWWyN-uXl2ACajJ-lg-1; Tue, 03 Oct 2023 12:55:19 -0400
+X-MC-Unique: 76gXJWWyN-uXl2ACajJ-lg-1
+Received: by mail-ed1-f72.google.com with SMTP id
+ 4fb4d7f45d1cf-531373ea109so944587a12.3
+ for <nouveau@lists.freedesktop.org>; Tue, 03 Oct 2023 09:55:19 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696352118; x=1696956918;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=U7tfHP4kmRXiaICtPd4tqtaPxNkyYEUzIvHl3BC2KeQ=;
+ b=CNGrdt3N8xA5IxJgdHylxZHTk9LP265XkupmmQv+EztjDld3bzk5RVjZYP4Cxc0eq/
+ UN1y05O+1VYuXiTFLc3Bj3N5hARgRU5GAJP2sAl2y97zCrwFxOxjDYr2gI8k+NAMGRcT
+ Svx/CQnpi04CrTO7Eyrq6SQhNKgkyA5TxmhrtA0Vls7vtkdJdikubjYQOIfqCX7THyF/
+ YRuDRqKVm4XPb4IQJTgIiujf26EXQSEuoVye3mwyQgqdNSdamEIXXmCEIwtGZ6FijWF4
+ +lclOc431Eai6sz/1UjDauHFdkWjeNel+5qzZkpdAAEAKKh1XURHe5PmvehkZJ+9S57y
+ HGhQ==
+X-Gm-Message-State: AOJu0YwNkI196IST8wUNEXDNjYRw7MSvolX8qmXWTajSB8Huf2RGhOQw
+ B6n0w7/tWm1hdX6eEWZDxSYpA5cxOf3dXICqpLRB2P52fZ4oUhQ8Hfh6WYelpKAVFmu2I569b9D
+ baw42xMEsvgFy6f0/nH1Jhi6vcQ==
+X-Received: by 2002:a17:906:3582:b0:9b2:9e44:222e with SMTP id
+ o2-20020a170906358200b009b29e44222emr13969002ejb.19.1696352118549; 
+ Tue, 03 Oct 2023 09:55:18 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG0BlhYJTy/eGpPg/g7Kj2hxrX0S6xOFKK/n+JvzSroe+HOFvr7h1DKLjxtdlUBZaQYPZuHxw==
+X-Received: by 2002:a17:906:3582:b0:9b2:9e44:222e with SMTP id
+ o2-20020a170906358200b009b29e44222emr13968962ejb.19.1696352117956; 
+ Tue, 03 Oct 2023 09:55:17 -0700 (PDT)
+Received: from pollux ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
+ by smtp.gmail.com with ESMTPSA id
+ sb8-20020a170906edc800b0099cf840527csm1321057ejb.153.2023.10.03.09.55.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Oct 2023 09:55:17 -0700 (PDT)
+Date: Tue, 3 Oct 2023 18:55:15 +0200
+From: Danilo Krummrich <dakr@redhat.com>
+To: Boris Brezillon <boris.brezillon@collabora.com>,
+ Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
+Message-ID: <ZRxHcwYUbp5/fS+v@pollux>
 References: <20230928191624.13703-1-dakr@redhat.com>
  <20230928191624.13703-5-dakr@redhat.com>
  <e4e68970-c7c9-55e2-9483-01252f38c956@linux.intel.com>
  <20231003120554.547090bc@collabora.com>
-Organization: Intel Sweden AB, Registration Number: 556189-6027
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
-User-Agent: Evolution 3.46.4 (3.46.4-1.fc37) 
+ <f551ee9059e52d46343f5fa997b7d9f8ab6654d9.camel@linux.intel.com>
+ <20231003162143.490e3ef0@collabora.com>
 MIME-Version: 1.0
+In-Reply-To: <20231003162143.490e3ef0@collabora.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 Subject: Re: [Nouveau] [PATCH drm-misc-next v5 4/6] drm/gpuvm:
  track/lock/validate external/evicted objects
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -70,201 +96,335 @@ Cc: matthew.brost@intel.com, sarah.walker@imgtec.com,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGksIEJvcmlzLAoKT24gVHVlLCAyMDIzLTEwLTAzIGF0IDEyOjA1ICswMjAwLCBCb3JpcyBCcmV6
-aWxsb24gd3JvdGU6Cj4gSGVsbG8gVGhvbWFzLAo+IAo+IE9uIFR1ZSwgMyBPY3QgMjAyMyAxMDoz
-NjoxMCArMDIwMAo+IFRob21hcyBIZWxsc3Ryw7ZtIDx0aG9tYXMuaGVsbHN0cm9tQGxpbnV4Lmlu
-dGVsLmNvbT4gd3JvdGU6Cj4gCj4gPiA+ICsvKioKPiA+ID4gKyAqIGdldF9uZXh0X3ZtX2JvX2Zy
-b21fbGlzdCgpIC0gZ2V0IHRoZSBuZXh0IHZtX2JvIGVsZW1lbnQKPiA+ID4gKyAqIEBfX2dwdXZt
-OiBUaGUgR1BVIFZNCj4gPiA+ICsgKiBAX19saXN0X25hbWU6IFRoZSBuYW1lIG9mIHRoZSBsaXN0
-IHdlJ3JlIGl0ZXJhdGluZyBvbgo+ID4gPiArICogQF9fbG9jYWxfbGlzdDogQSBwb2ludGVyIHRv
-IHRoZSBsb2NhbCBsaXN0IHVzZWQgdG8gc3RvcmUKPiA+ID4gYWxyZWFkeSBpdGVyYXRlZCBpdGVt
-cwo+ID4gPiArICogQF9fcHJldl92bV9ibzogVGhlIHByZXZpb3VzIGVsZW1lbnQgd2UgZ290IGZy
-b20KPiA+ID4gZHJtX2dwdXZtX2dldF9uZXh0X2NhY2hlZF92bV9ibygpCj4gPiA+ICsgKgo+ID4g
-PiArICogVGhpcyBoZWxwZXIgaXMgaGVyZSB0byBwcm92aWRlIGxvY2tsZXNzIGxpc3QgaXRlcmF0
-aW9uLgo+ID4gPiBMb2NrbGVzcyBhcyBpbiwgdGhlCj4gPiA+ICsgKiBpdGVyYXRvciByZWxlYXNl
-cyB0aGUgbG9jayBpbW1lZGlhdGVseSBhZnRlciBwaWNraW5nIHRoZQo+ID4gPiBmaXJzdCBlbGVt
-ZW50IGZyb20KPiA+ID4gKyAqIHRoZSBsaXN0LCBzbyBsaXN0IGluc2VydGlvbiBkZWxldGlvbiBj
-YW4gaGFwcGVuIGNvbmN1cnJlbnRseS4KPiA+ID4gKyAqCj4gPiA+ICsgKiBFbGVtZW50cyBwb3Bw
-ZWQgZnJvbSB0aGUgb3JpZ2luYWwgbGlzdCBhcmUga2VwdCBpbiBhIGxvY2FsCj4gPiA+IGxpc3Qs
-IHNvIHJlbW92YWwKPiA+ID4gKyAqIGFuZCBpc19lbXB0eSBjaGVja3MgY2FuIHN0aWxsIGhhcHBl
-biB3aGlsZSB3ZSdyZSBpdGVyYXRpbmcKPiA+ID4gdGhlIGxpc3QuCj4gPiA+ICsgKi8KPiA+ID4g
-KyNkZWZpbmUgZ2V0X25leHRfdm1fYm9fZnJvbV9saXN0KF9fZ3B1dm0sIF9fbGlzdF9uYW1lLAo+
-ID4gPiBfX2xvY2FsX2xpc3QsIF9fcHJldl92bV9ibynCoMKgwqDCoMKgXAo+ID4gPiArwqDCoMKg
-wqDCoMKgwqAoe8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgCj4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqBcCj4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBzdHJ1Y3QgZHJtX2dwdXZt
-X2JvICpfX3ZtX2JvID0KPiA+ID4gTlVMTDvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBcCj4gPiA+ICvCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoAo+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgXAo+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJtX2dwdXZtX2JvX3B1
-dChfX3ByZXZfdm1fYm8pO8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoAo+ID4g
-PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgXAo+ID4gPiAr
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAKPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoFwKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHNwaW5fbG9j
-aygmKF9fZ3B1dm0pLQo+ID4gPiA+X19saXN0X25hbWUubG9jayk7wqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoFzCoCAKPiA+IAo+
-ID4gSGVyZSB3ZSB1bmNvbmRpdGlvbmFsbHkgdGFrZSB0aGUgc3BpbmxvY2tzIHdoaWxlIGl0ZXJh
-dGluZywgYW5kIHRoZQo+ID4gbWFpbiAKPiA+IHBvaW50IG9mIERSTV9HUFVWTV9SRVNWX1BST1RF
-Q1RFRCB3YXMgcmVhbGx5IHRvIGF2b2lkIHRoYXQ/Cj4gPiAKPiA+IAo+ID4gPiArwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgaWYgKCEoX19ncHV2bSktCj4gPiA+ID5fX2xpc3RfbmFtZS5s
-b2NhbF9saXN0KcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoFwKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAoX19ncHV2bSktPl9fbGlzdF9uYW1lLmxvY2FsX2xpc3QgPQo+ID4g
-PiBfX2xvY2FsX2xpc3Q7wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgXAo+ID4gPiArwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZWxzZcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoAo+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgXAo+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oFdBUk5fT04oKF9fZ3B1dm0pLT5fX2xpc3RfbmFtZS5sb2NhbF9saXN0Cj4gPiA+ICE9IF9fbG9j
-YWxfbGlzdCk7wqDCoMKgwqDCoFwKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgCj4gPiA+IMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBcCj4gPiA+ICvCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqB3aGlsZSAoIWxpc3RfZW1wdHkoJihfX2dwdXZtKS0+X19saXN0
-X25hbWUubGlzdCkpCj4gPiA+IHvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqBcCj4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgX192bV9ibyA9IGxpc3RfZmlyc3RfZW50cnkoJihfX2dwdXZtKS0KPiA+ID4gPl9fbGlzdF9u
-YW1lLmxpc3QswqDCoMKgwqDCoMKgwqDCoFwKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIHN0cnVjdAo+ID4gPiBkcm1fZ3B1dm1fYm8swqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoFwKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgCj4gPiA+IGxpc3QuZW50cnkuX19saXN0X25hbWUpO8KgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgXAo+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoGlmIChrcmVmX2dldF91bmxlc3NfemVybygmX192bV9iby0+a3JlZikpCj4g
-PiA+IHvCoCAKPiA+IEFuZCB1bm5lY2Vzc2FyaWx5IGdyYWIgYSByZWZlcmVuY2UgaW4gdGhlIFJF
-U1ZfUFJPVEVDVEVEIGNhc2UuCj4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoFwKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgbGlzdF9tb3ZlX3RhaWwoJihfX3ZtX2JvKS0K
-PiA+ID4gPmxpc3QuZW50cnkuX19saXN0X25hbWUswqDCoMKgwqDCoMKgXAo+ID4gPiArwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgCj4gPiA+IF9fbG9jYWxfbGlzdCk7wqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgXAo+ID4gPiArwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqBicmVhazvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAKPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oFwKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB9
-IGVsc2UKPiA+ID4ge8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqBcCj4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGxpc3RfZGVsX2luaXQoJihfX3ZtX2JvKS0KPiA+ID4g
-Pmxpc3QuZW50cnkuX19saXN0X25hbWUpO8KgwqDCoMKgwqDCoFwKPiA+ID4gK8KgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgX192bV9i
-byA9Cj4gPiA+IE5VTEw7wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoFwKPiA+ID4gK8KgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB9wqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAKPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oFwKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoH3CoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAKPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoFwKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oHNwaW5fdW5sb2NrKCYoX19ncHV2bSktCj4gPiA+ID5fX2xpc3RfbmFtZS5sb2NrKTvCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBcCj4g
-PiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoAo+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgXAo+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgX192
-bV9ibzvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgCj4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBcCj4gPiA+ICvCoMKgwqDCoMKgwqDCoH0pwqAgCj4g
-PiAKPiA+IElNSE8gdGhpcyBsb2NrbGVzcyBsaXN0IGl0ZXJhdGlvbiBsb29rcyB2ZXJ5IGNvbXBs
-ZXggYW5kIHNob3VsZCBiZSAKPiA+IHByZXR0eSBkaWZmaWN1bHQgdG8gbWFpbnRhaW4gd2hpbGUg
-bW92aW5nIGZvcndhcmQsIGFsc28gc2luY2UgaXQKPiA+IHB1bGxzIAo+ID4gdGhlIGdwdXZtX2Jv
-cyBvZmYgdGhlIGxpc3QsIGxpc3QgaXRlcmF0aW9uIG5lZWRzIHRvIGJlIHByb3RlY3RlZCBieQo+
-ID4gYW4gCj4gPiBvdXRlciBsb2NrIGFueXdheS4KPiAKPiBBcyBiZWluZyBwYXJ0bHkgcmVzcG9u
-c2libGUgZm9yIHRoaXMgY29udm9sdXRlZCBsaXN0IGl0ZXJhdG9yLCBJIG11c3QKPiBzYXkgSSBh
-Z3JlZSB3aXRoIHlvdS4gVGhlcmUncyBzbyBtYW55IHdheXMgdGhpcyBjYW4gZ28gd3JvbmcgaWYg
-dGhlCj4gdXNlciBkb2Vzbid0IGNhbGwgaXQgdGhlIHJpZ2h0IHdheSwgb3IgZG9lc24ndCBwcm90
-ZWN0IGNvbmN1cnJlbnQKPiBsaXN0Cj4gaXRlcmF0aW9ucyB3aXRoIGEgc2VwYXJhdGUgbG9jayAo
-bHVja2lseSwgdGhpcyBpcyBhIHByaXZhdGUKPiBpdGVyYXRvcikuIEkKPiBtZWFuLCBpdCB3b3Jr
-cywgc28gdGhlcmUncyBjZXJ0YWlubHkgYSB3YXkgdG8gZ2V0IGl0IHJpZ2h0LCBidXQgZ29zaCwK
-PiB0aGlzIGlzIHNvIGZhciBmcm9tIHRoZSBzaW1wbGUgQVBJIEkgaGFkIGhvcGVkIGZvci4KPiAK
-PiA+IEFsc28gZnJvbSB3aGF0IEkgdW5kZXJzdGFuZCBmcm9tIEJvcmlzLCB0aGUgZXh0b2JqIAo+
-ID4gbGlzdCB3b3VsZCB0eXBpY2FsbHkgbm90IG5lZWQgdGhlIGZpbmUtZ3JhaW5lZCBsb2NraW5n
-OyBvbmx5IHRoZQo+ID4gZXZpY3QgCj4gPiBsaXN0Pwo+IAo+IFJpZ2h0LCBJJ20gYWRkaW5nIHRo
-ZSBncHV2bV9ibyB0byBleHRvYmogbGlzdCBpbiB0aGUgaW9jdGwgcGF0aCwgd2hlbgo+IHRoZSBH
-RU0gYW5kIFZNIHJlc3ZzIGFyZSBoZWxkLCBhbmQgSSdtIGRlZmVycmluZyB0aGUKPiBkcm1fZ3B1
-dm1fYm9fcHV0KCkKPiBjYWxsIHRvIGEgd29yayB0aGF0J3Mgbm90IGluIHRoZSBkbWEtc2lnbmFs
-bGluZyBwYXRoLiBUaGlzIGJlaW5nCj4gc2FpZCwKPiBJJ20gc3RpbGwgbm90IGNvbWZvcnRhYmxl
-IHdpdGggdGhlCj4gCj4gZ2VtID0gZHJtX2dlbV9vYmplY3RfZ2V0KHZtX2JvLT5nZW0pOwo+IGRt
-YV9yZXN2X2xvY2soZ2VtLT5yZXN2KTsKPiBkcm1fZ3B1dm1fYm9fcHV0KHZtX2JvKTsKPiBkbWFf
-cmVzdl91bmxvY2soZ2VtLT5yZXN2KTsKPiBkcm1fZ2VtX29iamVjdF9wdXQoZ2VtKTsKPiAKPiBk
-YW5jZSB0aGF0J3MgbmVlZGVkIHRvIGF2b2lkIGEgVUFGIHdoZW4gdGhlIGdwdXZtX2JvIGlzIHRo
-ZSBsYXN0IEdFTQo+IG93bmVyLCBub3QgdG8gbWVudGlvbiB0aGF0IGRybV9ncHV2YV91bmxpbmso
-KSBjYWxscwo+IGRybV9ncHV2bV9ib19wdXQoKQo+IGFmdGVyIG1ha2luZyBzdXJlIHRoZSBHRU0g
-Z3B1dm1fbGlzdCBsb2NrIGlzIGhlbGQsIGJ1dCB0aGlzIGxvY2sKPiBtaWdodAo+IGRpZmZlciBm
-cm9tIHRoZSByZXN2IGxvY2sgKGN1c3RvbSBsb2NraW5nIHNvIHdlIGNhbiBjYWxsCj4gZ3B1dm1f
-dW5saW5rKCkgaW4gdGhlIGRtYS1zaWduYWxsaW5nIHBhdGgpLiBTbyB3ZSBub3cgaGF2ZSBwYXRo
-cwo+IHdoZXJlCj4gZHJtX2dwdXZtX2JvX3B1dCgpIGFyZSBjYWxsZWQgd2l0aCB0aGUgcmVzdiBs
-b2NrIGhlbGQsIGFuZCBvdGhlcnMKPiB3aGVyZQo+IHRoZXkgYXJlIG5vdCwgYW5kIHRoYXQgb25s
-eSB3b3JrcyBiZWNhdXNlIHdlJ3JlIHJlbHlpbmcgb24gdGhlIHRoZQo+IGZhY3QKPiB0aG9zZSBk
-cm1fZ3B1dm1fYm9fcHV0KCkgY2FsbHMgd29uJ3QgbWFrZSB0aGUgcmVmY291bnQgZHJvcCB0byB6
-ZXJvLAo+IGJlY2F1c2UgdGhlIGRlZmVycmVkIHZtX2JvX3B1dCgpIHdvcmsgc3RpbGwgb3ducyBh
-IHZtX2JvIHJlZi4KCkknbSBub3Qgc3VyZSBJIGZvbGxvdyB0byAxMDAlIGhlcmUsIGJ1dCBpbiB0
-aGUgY29kZSBzbmlwcGV0IGFib3ZlIGl0J3MKcHJldHR5IGNsZWFyIHRvIG1lIHRoYXQgaXQgbmVl
-ZHMgdG8gaG9sZCBhbiBleHBsaWNpdCBnZW0gb2JqZWN0CnJlZmVyZW5jZSB3aGVuIGNhbGxpbmcg
-ZG1hX3Jlc3ZfdW5sb2NrKGdlbS0+cmVzdikuIEVhY2ggdGltZSB5b3UgY29weSBhCnJlZmVyZW5j
-ZWQgcG9pbnRlciAoaGVyZSBmcm9tIHZtX2JvLT5nZW0gdG8gZ2VtKSB5b3UgbmVlZCB0byB1cCB0
-aGUKcmVmY291bnQgdW5sZXNzIHlvdSBtYWtlIHN1cmUgKGJ5IGxvY2tzIG9yIG90aGVyIG1lYW5z
-KSB0aGF0IHRoZSBzb3VyY2UKb2YgdGhlIGNvcHkgaGFzIGEgc3Ryb25nIHJlZmNvdW50IGFuZCBz
-dGF5cyBhbGl2ZSwgc28gdGhhdCdzIG5vIHdlaXJkCmFjdGlvbiB0byBtZS4gQ291bGQgcG9zc2li
-bHkgYWRkIGEgZHJtX2dwdXZtX2JvX2dldF9nZW0oKSB0byBhY2Nlc3MgdGhlCmdlbSBtZW1iZXIg
-KGFuZCB0aGF0IGFsc28gdGFrZXMgYSByZWZjb3VudCkgZm9yIGRyaXZlciB1c2VycyB0byBhdm9p
-ZAp0aGUgcG90ZW50aWFsIHBpdGZhbGwuCgo+IAo+IEFsbCB0aGVzZSB0aW55IGRldGFpbHMgYWRk
-IHRvIHRoZSBvdmVyYWxsIGNvbXBsZXhpdHkgb2YgdGhpcyBjb21tb24KPiBsYXllciwgYW5kIHRv
-IG1lLCB0aGF0J3Mgbm90IGFueSBiZXR0ZXIgdGhhbiB0aGUKPiBnZXRfbmV4dF92bV9ib19mcm9t
-X2xpc3QoKSBjb21wbGV4aXR5IHlvdSB3ZXJlIGNvbXBsYWluaW5nIGFib3V0Cj4gKG1pZ2h0Cj4g
-YmUgZXZlbiB3b3J0aCwgYmVjYXVzZSB0aGlzIHNvcnQgb2YgdGhpbmdzIGxlYWsgdG8gdXNlcnMp
-Lgo+IAo+IEhhdmluZyBhbiBpbnRlcm5hbCBsb2NrIHBhcnRseSBzb2x2ZXMgdGhhdCwgaW4gdGhh
-dCB0aGUgbG9ja2luZyBvZgo+IHRoZQo+IGV4dG9iaiBsaXN0IGlzIG5vdyBlbnRpcmVseSBvcnRo
-b2dvbmFsIHRvIHRoZSBHRU0gdGhhdCdzIGJlaW5nCj4gcmVtb3ZlZAo+IGZyb20gdGhpcyBsaXN0
-LCBhbmQgd2UgY2FuIGxvY2svdW5sb2NrIGludGVybmFsbHkgd2l0aG91dCBmb3JjaW5nIHRoZQo+
-IGNhbGxlciB0byB0YWtlIHdlaXJkIGFjdGlvbnMgdG8gbWFrZSBzdXJlIHRoaW5ncyBkb24ndCBl
-eHBsb2RlLiBEb24ndAo+IGdldCBtZSB3cm9uZywgSSBnZXQgdGhhdCB0aGlzIGxvY2tpbmcgb3Zl
-cmhlYWQgaXMgbm90IGFjY2VwdGFibGUgZm9yCj4gWGUsIGJ1dCBJIGZlZWwgbGlrZSB3ZSdyZSB0
-dXJuaW5nIGRybV9ncHV2bSBpbnRvIGEgd2hpdGUgZWxlcGhhbnQKPiB0aGF0Cj4gb25seSBmZXcg
-cGVvcGxlIHdpbGwgZ2V0IHJpZ2h0LgoKSSB0ZW5kIHRvIGFncmVlLCBidXQgdG8gbWUgdGhlIGJp
-ZyBjb21wbGljYXRpb24gY29tZXMgZnJvbSB0aGUgYXN5bmMKKGRtYSBzaWduYWxsaW5nIHBhdGgp
-IHN0YXRlIHVwZGF0ZXMuCgpMZXQncyBzYXkgZm9yIGV4YW1wbGUgd2UgaGF2ZSBhIGxvd2VyIGxl
-dmVsIGxvY2sgZm9yIHRoZSBnZW0gb2JqZWN0J3MKZ3B1dm1fYm8gbGlzdC4gU29tZSBkcml2ZXJz
-IGdyYWIgaXQgZnJvbSB0aGUgZG1hIGZlbmNlIHNpZ25hbGxpbmcgcGF0aCwKb3RoZXIgZHJpdmVy
-cyBuZWVkIHRvIGFjY2VzcyBhbGwgdm0ncyBvZiBhIGJvIHRvIGdyYWIgdGhlaXIgZG1hX3Jlc3YK
-bG9ja3MgdXNpbmcgYSBXVyB0cmFuc2FjdGlvbi4gVGhlcmUgd2lsbCBiZSBwcm9ibGVtcywgYWx0
-aG91Z2ggcHJvYmFibHkKc29sdmVhYmxlLgoKPiAKPiBUaGlzIGlzIGp1c3QgbXkgcGVyc29uYWwg
-dmlldyBvbiB0aGlzLCBhbmQgSSBjZXJ0YWlubHkgZG9uJ3Qgd2FudCB0bwo+IGJsb2NrIG9yIGRl
-bGF5IHRoZSBtZXJnaW5nIG9mIHRoaXMgcGF0Y2hzZXQsIGJ1dCBJIHRob3VnaHQgSSdkIHNoYXJl
-Cj4gbXkKPiBjb25jZXJucy4gQXMgc29tZW9uZSB3aG8ncyBiZWVuIGZvbGxvd2luZyB0aGUgZXZv
-bHV0aW9uIG9mIHRoaXMKPiBkcm1fZ3B1dmEvdm0gc2VyaWVzIGZvciB3ZWVrcywgYW5kIHdobydz
-IHN0aWxsIHNvbWV0aW1lcyBnZXR0aW5nCj4gbG9zdCwKPiBJIGNhbid0IGltYWdpbmUgaG93IG5l
-dyBkcm1fZ3B1dm0gdXNlcnMgd291bGQgZmVlbC4uLgoKCj4gCj4gPiBBbHNvIGl0IHNlZW1zIHRo
-YXQgaWYgd2UgYXJlIHRvIG1haW50YWluIHR3byBtb2RlcyBoZXJlLCBmb3IgCj4gPiByZWFzb25h
-Ymx5IGNsZWFuIGNvZGUgd2UnZCBuZWVkIHR3byBzZXBhcmF0ZSBpbnN0YW5jZXMgb2YgCj4gPiBn
-ZXRfbmV4dF9ib19mcm9tX2xpc3QoKS4KPiA+IAo+ID4gRm9yIHRoZSAhUkVTVl9QUk9URUNURUQg
-Y2FzZSwgcGVyaGFwcyBvbmUgd291bGQgd2FudCB0byBjb25zaWRlcgo+ID4gdGhlIAo+ID4gc29s
-dXRpb24gdXNlZCBjdXJyZW50bHkgaW4geGUsIHdoZXJlIHRoZSBWTSBtYWludGFpbnMgdHdvIGV2
-aWN0Cj4gPiBsaXN0cy4gCj4gPiBPbmUgcHJvdGVjdGVkIGJ5IGEgc3BpbmxvY2sgYW5kIG9uZSBw
-cm90ZWN0ZWQgYnkgdGhlIFZNIHJlc3YuIFdoZW4KPiA+IHRoZSAKPiA+IFZNIHJlc3YgaXMgbG9j
-a2VkIHRvIGJlZ2luIGxpc3QgdHJhdmVyc2FsLCB0aGUgc3BpbmxvY2sgaXMgbG9ja2VkCj4gPiAq
-b25jZSogCj4gPiBhbmQgdGhlIHNwaW5sb2NrLXByb3RlY3RlZCBsaXN0IGlzIGxvb3BlZCBvdmVy
-IGFuZCBjb3BpZWQgaW50byB0aGUKPiA+IHJlc3YgCj4gPiBwcm90ZWN0ZWQgb25lLiBGb3IgdHJh
-dmVyc2FsLCB0aGUgcmVzdiBwcm90ZWN0ZWQgb25lIGlzIHVzZWQuCj4gCj4gT2gsIHNvIHlvdSBk
-byBoYXZlIHRoZSBzYW1lIHNvcnQgb2YgdHJpY2sgd2hlcmUgeW91IG1vdmUgdGhlIGVudGlyZQo+
-IGxpc3QgdG8gYW5vdGhlciBsaXN0LCBzdWNoIHRoYXQgeW91IGNhbiBsZXQgb3RoZXIgcGF0aHMg
-dXBkYXRlIHRoZQo+IGxpc3QKPiB3aGlsZSB5b3UncmUgaXRlcmF0aW5nIHlvdXIgb3duIHNuYXBz
-aG90LiBUaGF0J3MgaW50ZXJlc3RpbmcuLi4KClllcywgaXQncyBpbnN0ZWFkIG9mIHRoZSAiZXZp
-Y3RlZCIgYm9vbCBzdWdnZXN0ZWQgaGVyZS4gSSB0aG91Z2h0IHRoZQpsYXR0ZXIgd291bGQgYmUg
-c2ltcGxlci4gQWx0aG91Z2ggdGhhdCByZW1haW5zIHRvIGJlIHNlZW4gYWZ0ZXIgYWxsCnVzZS1j
-YXNlcyBhcmUgaW1wbGVtZW50ZWQuCgpCdXQgaW4gZ2VuZXJhbCBJIHRoaW5rIHRoZSBjb25jZXB0
-IG9mIGNvcHlpbmcgZnJvbSBhIHN0YWdpbmcgbGlzdCB0bwphbm90aGVyIHdpdGggZGlmZmVyZW50
-IHByb3RlY3Rpb24gcmF0aGVyIHRoYW4gdHJhdmVyc2luZyB0aGUgZmlyc3QgbGlzdAphbmQgdW5s
-b2NraW5nIGJldHdlZW4gaXRlbXMgaXMgYSBnb29kIHdheSBvZiBzb2x2aW5nIHRoZSBsb2NraW5n
-CmludmVyc2lvbiBwcm9ibGVtIHdpdGggbWluaW1hbCBvdmVyaGVhZC4gV2UgdXNlIGl0IGFsc28g
-Zm9yIE8oMSkKdXNlcnB0ciB2YWxpZGF0aW9uLgoKL1Rob21hcwoKCj4gCj4gUmVnYXJkcywKPiAK
-PiBCb3JpcwoK
+It seems like we're mostly aligned on this series, except for the key
+controversy we're discussing for a few versions now: locking of the internal
+lists. Hence, let's just re-iterate the options we have to get this out of the
+way.
+
+(1) The spinlock dance. This basically works for every use case, updating the VA
+    space from the IOCTL, from the fence signaling path or anywhere else.
+    However, it has the downside of requiring spin_lock() / spin_unlock() for
+    *each* list element when locking all external objects and validating all
+    evicted objects. Typically, the amount of extobjs and evicted objects
+    shouldn't be excessive, but there might be exceptions, e.g. Xe.
+
+(2) The dma-resv lock dance. This is convinient for drivers updating the VA
+    space from a VM_BIND ioctl() and is especially efficient if such drivers
+    have a huge amount of external and/or evicted objects to manage. However,
+    the downsides are that it requires a few tricks in drivers updating the VA
+    space from the fence signaling path (e.g. job_run()). Design wise, I'm still
+    skeptical that it is a good idea to protect internal data structures with
+    external locks in a way that it's not clear to callers that a certain
+    function would access one of those resources and hence needs protection.
+    E.g. it is counter intuitive that drm_gpuvm_bo_put() would require both the
+    dma-resv lock of the corresponding object and the VM's dma-resv lock held.
+    (Additionally, there were some concerns from amdgpu regarding flexibility in
+    terms of using GPUVM for non-VM_BIND uAPIs and compute, however, AFAICS
+    those discussions did not complete and to me it's still unclear why it
+    wouldn't work.)
+
+(3) Simply use an internal mutex per list. This adds a tiny (IMHO negligible)
+    overhead for drivers updating the VA space from a VM_BIND ioctl(), namely
+    a *single* mutex_lock()/mutex_unlock() when locking all external objects
+    and validating all evicted objects. And it still requires some tricks for
+    drivers updating the VA space from the fence signaling path. However, it's
+    as simple as it can be and hence way less error prone as well as
+    self-contained and hence easy to use. Additionally, it's flexible in a way
+    that we don't have any expections on drivers to already hold certain locks
+    that the driver in some situation might not be able to acquire in the first
+    place.
+
+(4) Arbitrary combinations of the above. For instance, the current V5 implements
+    both (1) and (2) (as either one or the other). But also (1) and (3) (as in
+    (1) additionally to (3)) would be an option, where a driver could opt-in for
+    the spinlock dance in case it updates the VA space from the fence signaling
+    path.
+
+I also considered a few other options as well, however, they don't seem to be
+flexible enough. For instance, as by now we could use SRCU for the external
+object list. However, this falls apart once a driver wants to remove and re-add
+extobjs for the same VM_BO instance. (For the same reason it wouldn't work for
+evicted objects.)
+
+Personally, after seeing the weird implications of (1), (2) and a combination of
+both, I tend to go with (3). Optionally, with an opt-in for (1). The reason for
+the latter is that with (3) the weirdness of (1) by its own mostly disappears.
+
+Please let me know what you think, and, of course, other ideas than the
+mentioned ones above are still welcome.
+
+- Danilo
+
+On Tue, Oct 03, 2023 at 04:21:43PM +0200, Boris Brezillon wrote:
+> On Tue, 03 Oct 2023 14:25:56 +0200
+> Thomas Hellström <thomas.hellstrom@linux.intel.com> wrote:
+> 
+> > > > > +/**
+> > > > > + * get_next_vm_bo_from_list() - get the next vm_bo element
+> > > > > + * @__gpuvm: The GPU VM
+> > > > > + * @__list_name: The name of the list we're iterating on
+> > > > > + * @__local_list: A pointer to the local list used to store
+> > > > > already iterated items
+> > > > > + * @__prev_vm_bo: The previous element we got from
+> > > > > drm_gpuvm_get_next_cached_vm_bo()
+> > > > > + *
+> > > > > + * This helper is here to provide lockless list iteration.
+> > > > > Lockless as in, the
+> > > > > + * iterator releases the lock immediately after picking the
+> > > > > first element from
+> > > > > + * the list, so list insertion deletion can happen concurrently.
+> > > > > + *
+> > > > > + * Elements popped from the original list are kept in a local
+> > > > > list, so removal
+> > > > > + * and is_empty checks can still happen while we're iterating
+> > > > > the list.
+> > > > > + */
+> > > > > +#define get_next_vm_bo_from_list(__gpuvm, __list_name,
+> > > > > __local_list, __prev_vm_bo)     \
+> > > > > +       ({                                                       
+> > > > >                        \
+> > > > > +               struct drm_gpuvm_bo *__vm_bo =
+> > > > > NULL;                                    \
+> > > > > +                                                                
+> > > > >                        \
+> > > > > +               drm_gpuvm_bo_put(__prev_vm_bo);                  
+> > > > >                        \
+> > > > > +                                                                
+> > > > >                        \
+> > > > > +               spin_lock(&(__gpuvm)-  
+> > > > > >__list_name.lock);                                \    
+> > > > 
+> > > > Here we unconditionally take the spinlocks while iterating, and the
+> > > > main 
+> > > > point of DRM_GPUVM_RESV_PROTECTED was really to avoid that?
+> > > > 
+> > > >   
+> > > > > +               if (!(__gpuvm)-  
+> > > > > >__list_name.local_list)                                 \  
+> > > > > +                       (__gpuvm)->__list_name.local_list =
+> > > > > __local_list;               \
+> > > > > +               else                                             
+> > > > >                        \
+> > > > > +                       WARN_ON((__gpuvm)->__list_name.local_list
+> > > > > != __local_list);     \
+> > > > > +                                                                
+> > > > >                        \
+> > > > > +               while (!list_empty(&(__gpuvm)->__list_name.list))
+> > > > > {                     \
+> > > > > +                       __vm_bo = list_first_entry(&(__gpuvm)-  
+> > > > > >__list_name.list,        \  
+> > > > > +                                                  struct
+> > > > > drm_gpuvm_bo,                 \
+> > > > > +                                                 
+> > > > > list.entry.__list_name);             \
+> > > > > +                       if (kref_get_unless_zero(&__vm_bo->kref))
+> > > > > {    
+> > > > And unnecessarily grab a reference in the RESV_PROTECTED case.  
+> > > > >                         \
+> > > > > +                               list_move_tail(&(__vm_bo)-  
+> > > > > >list.entry.__list_name,      \  
+> > > > > +                                             
+> > > > > __local_list);                           \
+> > > > > +                               break;                           
+> > > > >                        \
+> > > > > +                       } else
+> > > > > {                                                        \
+> > > > > +                               list_del_init(&(__vm_bo)-  
+> > > > > >list.entry.__list_name);      \  
+> > > > > +                               __vm_bo =
+> > > > > NULL;                                         \
+> > > > > +                       }                                        
+> > > > >                        \
+> > > > > +               }                                                
+> > > > >                        \
+> > > > > +               spin_unlock(&(__gpuvm)-  
+> > > > > >__list_name.lock);                              \  
+> > > > > +                                                                
+> > > > >                        \
+> > > > > +               __vm_bo;                                         
+> > > > >                        \
+> > > > > +       })    
+> > > > 
+> > > > IMHO this lockless list iteration looks very complex and should be 
+> > > > pretty difficult to maintain while moving forward, also since it
+> > > > pulls 
+> > > > the gpuvm_bos off the list, list iteration needs to be protected by
+> > > > an 
+> > > > outer lock anyway.  
+> > > 
+> > > As being partly responsible for this convoluted list iterator, I must
+> > > say I agree with you. There's so many ways this can go wrong if the
+> > > user doesn't call it the right way, or doesn't protect concurrent
+> > > list
+> > > iterations with a separate lock (luckily, this is a private
+> > > iterator). I
+> > > mean, it works, so there's certainly a way to get it right, but gosh,
+> > > this is so far from the simple API I had hoped for.
+> > >   
+> > > > Also from what I understand from Boris, the extobj 
+> > > > list would typically not need the fine-grained locking; only the
+> > > > evict 
+> > > > list?  
+> > > 
+> > > Right, I'm adding the gpuvm_bo to extobj list in the ioctl path, when
+> > > the GEM and VM resvs are held, and I'm deferring the
+> > > drm_gpuvm_bo_put()
+> > > call to a work that's not in the dma-signalling path. This being
+> > > said,
+> > > I'm still not comfortable with the
+> > > 
+> > > gem = drm_gem_object_get(vm_bo->gem);
+> > > dma_resv_lock(gem->resv);
+> > > drm_gpuvm_bo_put(vm_bo);
+> > > dma_resv_unlock(gem->resv);
+> > > drm_gem_object_put(gem);
+> > > 
+> > > dance that's needed to avoid a UAF when the gpuvm_bo is the last GEM
+> > > owner, not to mention that drm_gpuva_unlink() calls
+> > > drm_gpuvm_bo_put()
+> > > after making sure the GEM gpuvm_list lock is held, but this lock
+> > > might
+> > > differ from the resv lock (custom locking so we can call
+> > > gpuvm_unlink() in the dma-signalling path). So we now have paths
+> > > where
+> > > drm_gpuvm_bo_put() are called with the resv lock held, and others
+> > > where
+> > > they are not, and that only works because we're relying on the the
+> > > fact
+> > > those drm_gpuvm_bo_put() calls won't make the refcount drop to zero,
+> > > because the deferred vm_bo_put() work still owns a vm_bo ref.  
+> > 
+> > I'm not sure I follow to 100% here, but in the code snippet above it's
+> > pretty clear to me that it needs to hold an explicit gem object
+> > reference when calling dma_resv_unlock(gem->resv). Each time you copy a
+> > referenced pointer (here from vm_bo->gem to gem) you need to up the
+> > refcount unless you make sure (by locks or other means) that the source
+> > of the copy has a strong refcount and stays alive, so that's no weird
+> > action to me. Could possibly add a drm_gpuvm_bo_get_gem() to access the
+> > gem member (and that also takes a refcount) for driver users to avoid
+> > the potential pitfall.
+> 
+> Except this is only needed because of the GEM-resv-must-be-held locking
+> constraint that was added on vm_bo_put(). I mean, the usual way we do
+> object un-referencing is by calling _put() and letting the internal
+> logic undo things when the refcount drops to zero. If the object needs
+> to be removed from some list, it's normally the responsibility of the
+> destruction method to lock the list, remove the object and unlock the
+> list. Now, we have a refcounted object that's referenced by vm_bo, and
+> whose lock needs to be taken when the destruction happens, which leads
+> to this weird dance described above, when, in normal situations, we'd
+> just call drm_gpuvm_bo_put(vm_bo) and let drm_gpuvm do its thing.
+> 
+> > 
+> > > 
+> > > All these tiny details add to the overall complexity of this common
+> > > layer, and to me, that's not any better than the
+> > > get_next_vm_bo_from_list() complexity you were complaining about
+> > > (might
+> > > be even worth, because this sort of things leak to users).
+> > > 
+> > > Having an internal lock partly solves that, in that the locking of
+> > > the
+> > > extobj list is now entirely orthogonal to the GEM that's being
+> > > removed
+> > > from this list, and we can lock/unlock internally without forcing the
+> > > caller to take weird actions to make sure things don't explode. Don't
+> > > get me wrong, I get that this locking overhead is not acceptable for
+> > > Xe, but I feel like we're turning drm_gpuvm into a white elephant
+> > > that
+> > > only few people will get right.  
+> > 
+> > I tend to agree, but to me the big complication comes from the async
+> > (dma signalling path) state updates.
+> 
+> I don't deny updating the VM state from the dma signalling path adds
+> some amount of complexity, but the fact we're trying to use dma_resv
+> locks for everything, including protection of internal datasets doesn't
+> help. Anyway, I think both of us are biased when it comes to judging
+> which approach adds the most complexity :P.
+> 
+> Also note that, right now, the only thing I'd like to be able to update
+> from the dma signalling path is the VM mapping tree. Everything else
+> (drm_gpuva_[un]link(), add/remove extobj), we could do outside this
+> path:
+> 
+> - for MAP operations, we could call drm_gpuva_link() in the ioctl path
+>   (we'd just need to initialize the drm_gpuva object)
+> - for MAP operations, we're already calling drm_gpuvm_bo_obtain() from
+>   the ioctl path
+> - for UNMAP operations, we could add the drm_gpuva_unlink() call to the
+>   VM op cleanup worker
+> 
+> The only problem we'd have is that drm_gpuva_link() needs to be called
+> inside drm_gpuvm_ops::sm_step_remap() when a remap with next/prev !=
+> NULL occurs, otherwise we lose track of these mappings.
+> 
+> > 
+> > Let's say for example we have a lower level lock for the gem object's
+> > gpuvm_bo list. Some drivers grab it from the dma fence signalling path,
+> > other drivers need to access all vm's of a bo to grab their dma_resv
+> > locks using a WW transaction. There will be problems, although probably
+> > solveable.
+> 
+> To me, the gpuvm extobj vm_bo list is just an internal list and has an
+> internal lock associated. The lock that's protecting the GEM vm_bo list
+> is a bit different in that the driver gets to decide when a vm_bo is
+> inserted/removed by calling drm_gpuvm_[un]link(), and can easily make
+> sure the lock is held when this happens, while the gpuvm internal lists
+> are kinda transparently updated (for instance, the first caller of
+> drm_gpuvm_bo_obtain() adds the vm_bo to the extobj and the last vm_bo
+> owner calling drm_gpuvm_bo_put() removes it from this list, which is
+> certainly not obvious based on the name of these functions).
+> 
+> If we want to let drivers iterate over the extobj/evict lists, and
+> assuming they are considered internal lists maintained by the core and
+> protected with an internal lock, we should indeed provide iteration
+> helpers that:
+> 
+> 1/ make sure all the necessary external locks are held (VM resv, I
+>    guess)
+> 2/ make sure the internal lock is not held during iteration (the sort
+>    of snapshot list trick you're using for the evict list in Xe)
+> 
+> > > > Also it seems that if we are to maintain two modes here, for 
+> > > > reasonably clean code we'd need two separate instances of 
+> > > > get_next_bo_from_list().
+> > > > 
+> > > > For the !RESV_PROTECTED case, perhaps one would want to consider
+> > > > the 
+> > > > solution used currently in xe, where the VM maintains two evict
+> > > > lists. 
+> > > > One protected by a spinlock and one protected by the VM resv. When
+> > > > the 
+> > > > VM resv is locked to begin list traversal, the spinlock is locked
+> > > > *once* 
+> > > > and the spinlock-protected list is looped over and copied into the
+> > > > resv 
+> > > > protected one. For traversal, the resv protected one is used.  
+> > > 
+> > > Oh, so you do have the same sort of trick where you move the entire
+> > > list to another list, such that you can let other paths update the
+> > > list
+> > > while you're iterating your own snapshot. That's interesting...  
+> > 
+> > Yes, it's instead of the "evicted" bool suggested here. I thought the
+> > latter would be simpler. Although that remains to be seen after all
+> > use-cases are implemented.
+> > 
+> > But in general I think the concept of copying from a staging list to
+> > another with different protection rather than traversing the first list
+> > and unlocking between items is a good way of solving the locking
+> > inversion problem with minimal overhead. We use it also for O(1)
+> > userptr validation.
+> 
+> That's more or less the idea behind get_next_vm_bo_from_list() except
+> it's dequeuing one element at a time, instead of moving all items at
+> once. Note that, if you allow concurrent removal protected only by the
+> spinlock, you still need to take/release this spinlock when iterating
+> over elements of this snapshot list, because all the remover needs to
+> remove an element is the element itself, and it doesn't care in which
+> list it's currently inserted (real or snapshot/staging list), so you'd
+> be iterating over a moving target if you don't protect the iteration
+> with the spinlock.
+> 
 
