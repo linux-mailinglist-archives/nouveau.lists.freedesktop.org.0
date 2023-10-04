@@ -1,60 +1,86 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 087887B7164
-	for <lists+nouveau@lfdr.de>; Tue,  3 Oct 2023 20:57:40 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 472087B7FF5
+	for <lists+nouveau@lfdr.de>; Wed,  4 Oct 2023 14:57:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9462010E316;
-	Tue,  3 Oct 2023 18:57:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AF3ED10E363;
+	Wed,  4 Oct 2023 12:57:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E14A810E2E2;
- Tue,  3 Oct 2023 18:57:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1696359456; x=1727895456;
- h=message-id:date:mime-version:subject:to:cc:references:
- from:in-reply-to:content-transfer-encoding;
- bh=2RmLHXlDrvpms2MO/iCl0m6YdD9Afj1b4iuJowttADI=;
- b=RMt24Z2satFHFN/hr7GO/jCd5AAgWoPDruZse2W1xA1ZLPEBczb12FXC
- dDXEYIBGZEWyM440k6lsLR22h6zv3Seqm3ejhLNPTyzVDGDIEmPiNzSvr
- 38c8/MjKJpaG+q55n77dfH4bp0CIvoqrSgvURAwjEL1ecl/nuEIkxz7R3
- +iCgK0KkeQ17A0WGh9gvA9P/OIjoQ3lXcfRO7oRi93C4begs4Dv3JGhHR
- 8255SVFJnWEeKkgVAOTrfB2ukRmM7u6A3Zr71OooNkrROTNQRqbqLG4Se
- l9uSNrMRtvK5DgVN1wnyTqjRco5gWtwuZ4kaDR1H6GhWx5mP3eyNl98ME Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10852"; a="1549146"
-X-IronPort-AV: E=Sophos;i="6.03,198,1694761200"; 
-   d="scan'208";a="1549146"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Oct 2023 11:57:35 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10852"; a="816808372"
-X-IronPort-AV: E=Sophos;i="6.03,198,1694761200"; d="scan'208";a="816808372"
-Received: from fhoeg-mobl1.ger.corp.intel.com (HELO [10.249.254.234])
- ([10.249.254.234])
- by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Oct 2023 11:57:31 -0700
-Message-ID: <b01f77e2-a885-af0e-ef9b-265e93b2dee0@linux.intel.com>
-Date: Tue, 3 Oct 2023 20:57:29 +0200
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EFB0410E109
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Oct 2023 12:57:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1696424243;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=UocplIidO7zTE/4ZN7c3P31bQ70zOq+bV6Role3kEz0=;
+ b=IYZWPiepPI3PVPYLMjmFlDHyqMT3UfEE5QEH3i/BvLgrFT3J/TMWft36sG6mDljaXGo5z4
+ /NIVu+BrHpKu1IqwpX9l/Vqkz2im9++yorD38mg2744eWGXgXPSwkCABG/RL1lU8ASb9L0
+ iNXc6g9h1ZHr9/JAdDMyGd/FnntnJ9Q=
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-561-PxPKFIQiP6KyLBMnGAiCKg-1; Wed, 04 Oct 2023 08:57:12 -0400
+X-MC-Unique: PxPKFIQiP6KyLBMnGAiCKg-1
+Received: by mail-ej1-f69.google.com with SMTP id
+ a640c23a62f3a-99bebfada8cso187384766b.1
+ for <nouveau@lists.freedesktop.org>; Wed, 04 Oct 2023 05:57:11 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696424231; x=1697029031;
+ h=content-transfer-encoding:in-reply-to:organization:content-language
+ :references:cc:to:subject:from:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UocplIidO7zTE/4ZN7c3P31bQ70zOq+bV6Role3kEz0=;
+ b=X9tUMkEYgjUQAn44x2KUl8/DrL2K1HhwRtuJObqaLbmkcHnl3kwQN+1F4YKAlZoYPy
+ bmz9nnkWk2wkMu7kOToYaN4pK3EXqq7rEwv2nO1+RPG3Uc5MgvJWRvgXXVc9xvWb1eZA
+ tw86MjfjAdObRZIXhv/kA3/LN8u57njrc2pXM45fXB+M6S2wUMqfdUmTUx7ndCuvJCPi
+ YEmzWJXLTC4M9TAgOSUKjGH6h3qyHd1SgTjw/sNkTcHvxiVxz9EFKddB2HH0JyCJfLsh
+ bmaoU2eEvU/PJ4mSAoiayduMdLImNd73cN+S1nmwpE0vRY1jYVnwWix2vUwp65qCSELN
+ Qa9w==
+X-Gm-Message-State: AOJu0YwnWECxNWqb6W5oDb8hMQTKpE6SHnICsGwJCriEXblrZ4CR1ni9
+ wn4IBIkl4oh9NYkjJTuIwL/+M9AhKxCi7Sgr23If+FYX5C7jPv0/bdfUH6O7eTw7axnjvs74MTm
+ 9jf8nLXOfyVWSrH5MUHciCLM7rg==
+X-Received: by 2002:a17:906:4d2:b0:9a2:26d8:f184 with SMTP id
+ g18-20020a17090604d200b009a226d8f184mr1535494eja.51.1696424230989; 
+ Wed, 04 Oct 2023 05:57:10 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHmt8ptQ+NpMGEA8WwD3MopWfb9O4X8+QQKV5V2rPVZNgpUR9p7BK5+q5JqnyoFPOngtFGAoA==
+X-Received: by 2002:a17:906:4d2:b0:9a2:26d8:f184 with SMTP id
+ g18-20020a17090604d200b009a226d8f184mr1535481eja.51.1696424230614; 
+ Wed, 04 Oct 2023 05:57:10 -0700 (PDT)
+Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
+ ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
+ by smtp.gmail.com with ESMTPSA id
+ va17-20020a17090711d100b0099d804da2e9sm2828850ejb.225.2023.10.04.05.57.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Oct 2023 05:57:09 -0700 (PDT)
+Message-ID: <6489f31f-8929-3e59-fbef-a22049cccbe3@redhat.com>
+Date: Wed, 4 Oct 2023 14:57:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-Content-Language: en-US
-To: Danilo Krummrich <dakr@redhat.com>,
- Boris Brezillon <boris.brezillon@collabora.com>
+From: Danilo Krummrich <dakr@redhat.com>
+To: =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>,
+ airlied@gmail.com, daniel@ffwll.ch, matthew.brost@intel.com,
+ sarah.walker@imgtec.com, donald.robson@imgtec.com,
+ boris.brezillon@collabora.com, christian.koenig@amd.com, faith@gfxstrand.net
 References: <20230928191624.13703-1-dakr@redhat.com>
  <20230928191624.13703-5-dakr@redhat.com>
  <e4e68970-c7c9-55e2-9483-01252f38c956@linux.intel.com>
- <20231003120554.547090bc@collabora.com>
- <f551ee9059e52d46343f5fa997b7d9f8ab6654d9.camel@linux.intel.com>
- <20231003162143.490e3ef0@collabora.com> <ZRxHcwYUbp5/fS+v@pollux>
-From: =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>
-In-Reply-To: <ZRxHcwYUbp5/fS+v@pollux>
+ <6b16ab6f-b1a2-efdb-04bf-5af4c3de381b@linux.intel.com>
+Organization: RedHat
+In-Reply-To: <6b16ab6f-b1a2-efdb-04bf-5af4c3de381b@linux.intel.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Subject: Re: [Nouveau] [PATCH drm-misc-next v5 4/6] drm/gpuvm:
  track/lock/validate external/evicted objects
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -68,93 +94,52 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, sarah.walker@imgtec.com,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, faith@gfxstrand.net, donald.robson@imgtec.com,
- daniel@ffwll.ch, christian.koenig@amd.com
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On 10/3/23 11:11, Thomas Hellström wrote:
 
-On 10/3/23 18:55, Danilo Krummrich wrote:
-> It seems like we're mostly aligned on this series, except for the key
-> controversy we're discussing for a few versions now: locking of the internal
-> lists. Hence, let's just re-iterate the options we have to get this out of the
-> way.
->
-> (1) The spinlock dance. This basically works for every use case, updating the VA
->      space from the IOCTL, from the fence signaling path or anywhere else.
->      However, it has the downside of requiring spin_lock() / spin_unlock() for
->      *each* list element when locking all external objects and validating all
->      evicted objects. Typically, the amount of extobjs and evicted objects
->      shouldn't be excessive, but there might be exceptions, e.g. Xe.
->
-> (2) The dma-resv lock dance. This is convinient for drivers updating the VA
->      space from a VM_BIND ioctl() and is especially efficient if such drivers
->      have a huge amount of external and/or evicted objects to manage. However,
->      the downsides are that it requires a few tricks in drivers updating the VA
->      space from the fence signaling path (e.g. job_run()). Design wise, I'm still
->      skeptical that it is a good idea to protect internal data structures with
->      external locks in a way that it's not clear to callers that a certain
->      function would access one of those resources and hence needs protection.
->      E.g. it is counter intuitive that drm_gpuvm_bo_put() would require both the
->      dma-resv lock of the corresponding object and the VM's dma-resv lock held.
->      (Additionally, there were some concerns from amdgpu regarding flexibility in
->      terms of using GPUVM for non-VM_BIND uAPIs and compute, however, AFAICS
->      those discussions did not complete and to me it's still unclear why it
->      wouldn't work.)
->
-> (3) Simply use an internal mutex per list. This adds a tiny (IMHO negligible)
->      overhead for drivers updating the VA space from a VM_BIND ioctl(), namely
->      a *single* mutex_lock()/mutex_unlock() when locking all external objects
->      and validating all evicted objects. And it still requires some tricks for
->      drivers updating the VA space from the fence signaling path. However, it's
->      as simple as it can be and hence way less error prone as well as
->      self-contained and hence easy to use. Additionally, it's flexible in a way
->      that we don't have any expections on drivers to already hold certain locks
->      that the driver in some situation might not be able to acquire in the first
->      place.
->
-> (4) Arbitrary combinations of the above. For instance, the current V5 implements
->      both (1) and (2) (as either one or the other). But also (1) and (3) (as in
->      (1) additionally to (3)) would be an option, where a driver could opt-in for
->      the spinlock dance in case it updates the VA space from the fence signaling
->      path.
->
-> I also considered a few other options as well, however, they don't seem to be
-> flexible enough. For instance, as by now we could use SRCU for the external
-> object list. However, this falls apart once a driver wants to remove and re-add
-> extobjs for the same VM_BO instance. (For the same reason it wouldn't work for
-> evicted objects.)
->
-> Personally, after seeing the weird implications of (1), (2) and a combination of
-> both, I tend to go with (3). Optionally, with an opt-in for (1). The reason for
-> the latter is that with (3) the weirdness of (1) by its own mostly disappears.
->
-> Please let me know what you think, and, of course, other ideas than the
-> mentioned ones above are still welcome.
->
-> - Danilo
->
-Here are the locking principles Daniel put together and Dave once called 
-out for us to be applying when reviewing DRM code. These were prompted 
-by very fragile and hard to understand locking patterns in the i915 
-driver and I think the xe vm_bind locking design was made with these in 
-mind, (not sure exactly who wrote what, though so can't say for sure).
+<snip>
 
-https://blog.ffwll.ch/2022/07/locking-engineering.html
-https://blog.ffwll.ch/2022/08/locking-hierarchy.html
+>>> +
+>>> +/**
+>>> + * drm_gpuvm_bo_evict() - add / remove a &drm_gpuvm_bo to / from the &drm_gpuvms
+>>> + * evicted list
+>>> + * @vm_bo: the &drm_gpuvm_bo to add or remove
+>>> + * @evict: indicates whether the object is evicted
+>>> + *
+>>> + * Adds a &drm_gpuvm_bo to or removes it from the &drm_gpuvms evicted list.
+>>> + */
+>>> +void
+>>> +drm_gpuvm_bo_evict(struct drm_gpuvm_bo *vm_bo, bool evict)
+>>> +{
+>>> +    struct drm_gem_object *obj = vm_bo->obj;
+>>> +
+>>> +    dma_resv_assert_held(obj->resv);
+>>> +
+>>> +    /* Always lock list transactions, even if DRM_GPUVM_RESV_PROTECTED is
+>>> +     * set. This is required to protect multiple concurrent calls to
+>>> +     * drm_gpuvm_bo_evict() with BOs with different dma_resv.
+>>> +     */
+>>
+>> This doesn't work. The RESV_PROTECTED case requires the evicted flag we discussed before. The list is either protected by the spinlock or the resv. Otherwise a list add could race with a list removal elsewhere.
 
-At least to me, this motivates using the resv design unless we strictly 
-need lower level locks that are taken in the eviction paths or userptr 
-invalidation paths, but doesn't rule out spinlocks or lock dropping 
-tricks where these are really necessary. But pretty much rules out RCU / 
-SRCU from what I can tell.
+I think it does unless I miss something, but it might be a bit subtle though.
 
-It also calls for documenting how individual members of structs are 
-protected when ever possible.
+Concurrent drm_gpuvm_bo_evict() are protected by the spinlock. Additionally, when
+drm_gpuvm_bo_evict() is called we hold the dma-resv of the corresponding GEM object.
 
-Thanks,
-Thomas
+In drm_gpuvm_validate() I assert that we hold *all* dma-resv, which implies that no
+one can call drm_gpuvm_bo_evict() on any of the VM's objects and no one can add a new
+one and directly call drm_gpuvm_bo_evict() on it either.
 
+>>
+>> Thanks,
+>>
+>> Thomas
+>>
+>>
+> 
 
