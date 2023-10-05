@@ -2,57 +2,73 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5589A7B9CD5
-	for <lists+nouveau@lfdr.de>; Thu,  5 Oct 2023 13:55:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A92F7BA558
+	for <lists+nouveau@lfdr.de>; Thu,  5 Oct 2023 18:16:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1624810E3DD;
-	Thu,  5 Oct 2023 11:55:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0F60610E42A;
+	Thu,  5 Oct 2023 16:16:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5495410E3DB;
- Thu,  5 Oct 2023 11:55:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1696506929; x=1728042929;
- h=message-id:date:mime-version:subject:to:cc:references:
- from:in-reply-to:content-transfer-encoding;
- bh=zs5rwGbndy4epzi93fEGO0AT0AknuIE70HJKj8Or+S8=;
- b=QNHXEB+9ZMg6VgnlxmaWc7ugskmfyO9wEH0VYJhEi59VxBHy9xTZRps5
- paXBsjFT0B+XaIeqIrLqcP1BLzj84CtEAgd8J+ICQItf4ecYSGkwFujcP
- Ous6h1q/xbR8h4kCDzJ6x6PqY5Xt5cu/BQij5SZ2xClMW0gzWUJZcXC36
- 5XsnUYhcSct30JfxyXdib/0t4E6xgfkYwh/xeUYWWcmP6NCIo/RjtmTKz
- 8zoLJNloQrsCRPYAB3oZgB08LyUGcaqbwraHYqMWTWFr9fhfEqfeSWCHB
- +H29zuvjo18ZGNI5tchfD+re+YEyIttgUZAk6v3PjtI6EljmPELrjw9Kv Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10853"; a="387348303"
-X-IronPort-AV: E=Sophos;i="6.03,203,1694761200"; d="scan'208";a="387348303"
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
- by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Oct 2023 04:55:28 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10853"; a="755413827"
-X-IronPort-AV: E=Sophos;i="6.03,203,1694761200"; d="scan'208";a="755413827"
-Received: from lapeders-mobl1.ger.corp.intel.com (HELO [10.249.254.36])
- ([10.249.254.36])
- by fmsmga007-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Oct 2023 04:55:25 -0700
-Message-ID: <937138da-35fe-f135-e13d-0ac75bc3ef5d@linux.intel.com>
-Date: Thu, 5 Oct 2023 13:55:22 +0200
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D76B310E428
+ for <nouveau@lists.freedesktop.org>; Thu,  5 Oct 2023 16:16:23 +0000 (UTC)
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-6969b391791so905474b3a.3
+ for <nouveau@lists.freedesktop.org>; Thu, 05 Oct 2023 09:16:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1696522583; x=1697127383;
+ darn=lists.freedesktop.org; 
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=xpZu6lqlyEvAN7T4WQyZZbFvUnbP262xmkxGmbRAMgI=;
+ b=R4aGLuFVebVY+lCBlJ+k0wRGf9TtF80WpFxII0nsVbe1M69zwkBEC+6IaEZqfNS61Q
+ GnRhvmPEPdWBeLeL738JgsM1cZYycVzK26nT32E6y5ez0lhfppfijxAkRYh0jdz/dm5D
+ 7ygr4qt4A7vx45HaMaPKID2z9z9oNGNoOMSiA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696522583; x=1697127383;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=xpZu6lqlyEvAN7T4WQyZZbFvUnbP262xmkxGmbRAMgI=;
+ b=UAkQmoSki+QydDIRTCXYoNUOwyjWmzAT2tY8bS6wbA/tEJLZFBaR0r0VsXPfBY7ybI
+ kdovnxJKfFqztTtYS9QhOWzv45bmbICtfm5GUox5jFTPdsqjBxwbWsE7GfW2rJyOiSMe
+ 5XFS4TeDsn1E774T0n0TXfVmeHkMncPfHF2eNBwOIkIMXr92h2jBGFfpII12ykCz4Qj4
+ MF3+yrLoS2useBObC5kZorf16wNGFMakdSimP8t7Av41cCoAz5vDraMWCzUYzd+awbOo
+ jB6L8NZ/K9s7bwkp9rP4hlRP/2jwtBiMXZfxpMKStCw0EV84WJggYgXj1EyVJWyVYoRb
+ BBVw==
+X-Gm-Message-State: AOJu0YxMOQmtDCcfaVJCiCTjT5I/uhHILiH5ePRCLxfDkNbF886rZ6+v
+ y3pdaCiZLv25F5JjaS+r6hB3dA==
+X-Google-Smtp-Source: AGHT+IFXrkOsf8NbaVIJ+XbxUqZLmBzsbpEzEa+s/qtoOV9I4bEmWp8zGBhz1z3Jkv2V6R2XFzEStQ==
+X-Received: by 2002:a05:6a20:9152:b0:14e:509:1d7b with SMTP id
+ x18-20020a056a20915200b0014e05091d7bmr6301990pzc.8.1696522583218; 
+ Thu, 05 Oct 2023 09:16:23 -0700 (PDT)
+Received: from www.outflux.net (198-0-35-241-static.hfc.comcastbusiness.net.
+ [198.0.35.241]) by smtp.gmail.com with ESMTPSA id
+ a26-20020a62e21a000000b00672ea40b8a9sm1612998pfi.170.2023.10.05.09.16.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Oct 2023 09:16:23 -0700 (PDT)
+Date: Thu, 5 Oct 2023 09:16:21 -0700
+From: Kees Cook <keescook@chromium.org>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <202310050915.ABB0419C@keescook>
+References: <20230922173110.work.084-kees@kernel.org>
+ <169601600138.3014939.8511343741428844249.b4-ty@chromium.org>
+ <83cd056c-52ae-01dd-7576-42d41da64c26@gmail.com>
+ <CADnq5_Ma2CrLYggJHKFEObsNmUoqJwb2p1xai5DfL=m43U6zEA@mail.gmail.com>
+ <202310020952.E7DE0948C0@keescook>
+ <10644b5f-b0a7-85ef-0658-2353ee14df0d@gmail.com>
+ <202310021107.9BB46FB8E@keescook>
+ <0be2dfa4-b6c1-f62a-66e1-615da7aa3c76@amd.com>
+ <202310021122.B6DA850FB0@keescook>
+ <d58bbe17-efa7-4548-9c7d-bf0310d31ef5@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
- matthew.brost@intel.com, sarah.walker@imgtec.com, donald.robson@imgtec.com,
- boris.brezillon@collabora.com, christian.koenig@amd.com, faith@gfxstrand.net
-References: <20230928191624.13703-1-dakr@redhat.com>
- <20230928191624.13703-5-dakr@redhat.com>
-From: =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>
-In-Reply-To: <20230928191624.13703-5-dakr@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH drm-misc-next v5 4/6] drm/gpuvm:
- track/lock/validate external/evicted objects
+In-Reply-To: <d58bbe17-efa7-4548-9c7d-bf0310d31ef5@gmail.com>
+Subject: Re: [Nouveau] [PATCH 0/9] drm: Annotate structs with __counted_by
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,182 +80,116 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: Tejas Upadhyay <tejas.upadhyay@intel.com>, Emma Anholt <emma@anholt.net>,
+ Tom Rix <trix@redhat.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ llvm@lists.linux.dev, dri-devel@lists.freedesktop.org,
+ Chris Wilson <chris@chris-wilson.co.uk>, Prike Liang <Prike.Liang@amd.com>,
+ Huang Rui <ray.huang@amd.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Andrzej Hajda <andrzej.hajda@intel.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Matthew Brost <matthew.brost@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, amd-gfx@lists.freedesktop.org,
+ Kuogee Hsieh <quic_khsieh@quicinc.com>,
+ VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Andi Shyti <andi.shyti@linux.intel.com>,
+ nouveau@lists.freedesktop.org, David Airlie <airlied@redhat.com>,
+ virtualization@lists.linux-foundation.org, Chia-I Wu <olvaffe@gmail.com>,
+ linux-hardening@vger.kernel.org, Alex Deucher <alexander.deucher@amd.com>,
+ Lijo Lazar <lijo.lazar@amd.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, linux-arm-msm@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, Kevin Wang <kevin1.wang@amd.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Nathan Chancellor <nathan@kernel.org>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Evan Quan <evan.quan@amd.com>, Sean Paul <sean@poorly.run>,
+ Yifan Zhang <yifan1.zhang@amd.com>, Xiaojian Du <Xiaojian.Du@amd.com>,
+ Le Ma <le.ma@amd.com>, freedreno@lists.freedesktop.org,
+ Bjorn Andersson <andersson@kernel.org>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ Nick Desaulniers <ndesaulniers@google.com>, linux-kernel@vger.kernel.org,
+ Rob Clark <robdclark@gmail.com>, Melissa Wen <mwen@igalia.com>,
+ Zack Rusin <zackr@vmware.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Alex Deucher <alexdeucher@gmail.com>, Nirmoy Das <nirmoy.das@intel.com>,
+ Lang Yu <Lang.Yu@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ John Harrison <john.c.harrison@intel.com>,
+ Hawking Zhang <Hawking.Zhang@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Thu, Oct 05, 2023 at 11:42:38AM +0200, Christian König wrote:
+> Am 02.10.23 um 20:22 schrieb Kees Cook:
+> > On Mon, Oct 02, 2023 at 08:11:41PM +0200, Christian König wrote:
+> > > Am 02.10.23 um 20:08 schrieb Kees Cook:
+> > > > On Mon, Oct 02, 2023 at 08:01:57PM +0200, Christian König wrote:
+> > > > > Am 02.10.23 um 18:53 schrieb Kees Cook:
+> > > > > > On Mon, Oct 02, 2023 at 11:06:19AM -0400, Alex Deucher wrote:
+> > > > > > > On Mon, Oct 2, 2023 at 5:20 AM Christian König
+> > > > > > > <ckoenig.leichtzumerken@gmail.com> wrote:
+> > > > > > > > Am 29.09.23 um 21:33 schrieb Kees Cook:
+> > > > > > > > > On Fri, 22 Sep 2023 10:32:05 -0700, Kees Cook wrote:
+> > > > > > > > > > This is a batch of patches touching drm for preparing for the coming
+> > > > > > > > > > implementation by GCC and Clang of the __counted_by attribute. Flexible
+> > > > > > > > > > array members annotated with __counted_by can have their accesses
+> > > > > > > > > > bounds-checked at run-time checking via CONFIG_UBSAN_BOUNDS (for array
+> > > > > > > > > > indexing) and CONFIG_FORTIFY_SOURCE (for strcpy/memcpy-family functions).
+> > > > > > > > > > 
+> > > > > > > > > > As found with Coccinelle[1], add __counted_by to structs that would
+> > > > > > > > > > benefit from the annotation.
+> > > > > > > > > > 
+> > > > > > > > > > [...]
+> > > > > > > > > Since this got Acks, I figure I should carry it in my tree. Let me know
+> > > > > > > > > if this should go via drm instead.
+> > > > > > > > > 
+> > > > > > > > > Applied to for-next/hardening, thanks!
+> > > > > > > > > 
+> > > > > > > > > [1/9] drm/amd/pm: Annotate struct smu10_voltage_dependency_table with __counted_by
+> > > > > > > > >           https://git.kernel.org/kees/c/a6046ac659d6
+> > > > > > > > STOP! In a follow up discussion Alex and I figured out that this won't work.
+> > > > > > I'm so confused; from the discussion I saw that Alex said both instances
+> > > > > > were false positives?
+> > > > > > 
+> > > > > > > > The value in the structure is byte swapped based on some firmware
+> > > > > > > > endianness which not necessary matches the CPU endianness.
+> > > > > > > SMU10 is APU only so the endianess of the SMU firmware and the CPU
+> > > > > > > will always match.
+> > > > > > Which I think is what is being said here?
+> > > > > > 
+> > > > > > > > Please revert that one from going upstream if it's already on it's way.
+> > > > > > > > 
+> > > > > > > > And because of those reasons I strongly think that patches like this
+> > > > > > > > should go through the DRM tree :)
+> > > > > > Sure, that's fine -- please let me know. It was others Acked/etc. Who
+> > > > > > should carry these patches?
+> > > > > Probably best if the relevant maintainer pick them up individually.
+> > > > > 
+> > > > > Some of those structures are filled in by firmware/hardware and only the
+> > > > > maintainers can judge if that value actually matches what the compiler
+> > > > > needs.
+> > > > > 
+> > > > > We have cases where individual bits are used as flags or when the size is
+> > > > > byte swapped etc...
+> > > > > 
+> > > > > Even Alex and I didn't immediately say how and where that field is actually
+> > > > > used and had to dig that up. That's where the confusion came from.
+> > > > Okay, I've dropped them all from my tree. Several had Acks/Reviews, so
+> > > > hopefully those can get picked up for the DRM tree?
+> > > I will pick those up to go through drm-misc-next.
+> > > 
+> > > Going to ping maintainers once more when I'm not sure if stuff is correct or
+> > > not.
+> > Sounds great; thanks!
+> 
+> I wasn't 100% sure for the VC4 patch, but pushed the whole set to
+> drm-misc-next anyway.
+> 
+> This also means that the patches are now auto merged into the drm-tip
+> integration branch and should any build or unit test go boom we should
+> notice immediately and can revert it pretty easily.
 
-On 9/28/23 21:16, Danilo Krummrich wrote:
-> Currently the DRM GPUVM offers common infrastructure to track GPU VA
-> allocations and mappings, generically connect GPU VA mappings to their
-> backing buffers and perform more complex mapping operations on the GPU VA
-> space.
->
-> However, there are more design patterns commonly used by drivers, which
-> can potentially be generalized in order to make the DRM GPUVM represent
-> a basis for GPU-VM implementations. In this context, this patch aims
-> at generalizing the following elements.
->
-> 1) Provide a common dma-resv for GEM objects not being used outside of
->     this GPU-VM.
->
-> 2) Provide tracking of external GEM objects (GEM objects which are
->     shared with other GPU-VMs).
->
-> 3) Provide functions to efficiently lock all GEM objects dma-resv the
->     GPU-VM contains mappings of.
->
-> 4) Provide tracking of evicted GEM objects the GPU-VM contains mappings
->     of, such that validation of evicted GEM objects is accelerated.
->
-> 5) Provide some convinience functions for common patterns.
->
-> Big thanks to Boris Brezillon for his help to figure out locking for
-> drivers updating the GPU VA space within the fence signalling path.
->
-> Suggested-by: Matthew Brost <matthew.brost@intel.com>
-> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
-> ---
->   drivers/gpu/drm/drm_gpuvm.c | 642 ++++++++++++++++++++++++++++++++++++
->   include/drm/drm_gpuvm.h     | 240 ++++++++++++++
->   2 files changed, 882 insertions(+)
->
-> diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
-> index 27100423154b..770bb3d68d1f 100644
-> --- a/drivers/gpu/drm/drm_gpuvm.c
-> +++ b/drivers/gpu/drm/drm_gpuvm.c
-> @@ -82,6 +82,21 @@
->    * &drm_gem_object list of &drm_gpuvm_bos for an existing instance of this
->    * particular combination. If not existent a new instance is created and linked
->    * to the &drm_gem_object.
-> + *
-> + * &drm_gpuvm_bo structures, since unique for a given &drm_gpuvm, are also used
-> + * as entry for the &drm_gpuvm's lists of external and evicted objects. Those
-> + * list are maintained in order to accelerate locking of dma-resv locks and
-> + * validation of evicted objects bound in a &drm_gpuvm. For instance, all
-> + * &drm_gem_object's &dma_resv of a given &drm_gpuvm can be locked by calling
-> + * drm_gpuvm_exec_lock(). Once locked drivers can call drm_gpuvm_validate() in
-> + * order to validate all evicted &drm_gem_objects. It is also possible to lock
-> + * additional &drm_gem_objects by providing the corresponding parameters to
-> + * drm_gpuvm_exec_lock() as well as open code the &drm_exec loop while making
-> + * use of helper functions such as drm_gpuvm_prepare_range() or
-> + * drm_gpuvm_prepare_objects().
-> + *
-> + * Every bound &drm_gem_object is treated as external object when its &dma_resv
-> + * structure is different than the &drm_gpuvm's common &dma_resv structure.
->    */
->   
->   /**
-> @@ -429,6 +444,20 @@
->    * Subsequent calls to drm_gpuvm_bo_obtain() for the same &drm_gpuvm and
->    * &drm_gem_object must be able to observe previous creations and destructions
->    * of &drm_gpuvm_bos in order to keep instances unique.
-> + *
-> + * The &drm_gpuvm's lists for keeping track of external and evicted objects are
-> + * protected against concurrent insertion / removal and iteration internally.
-> + *
-> + * However, drivers still need ensure to protect concurrent calls to functions
-> + * iterating those lists, namely drm_gpuvm_prepare_objects() and
-> + * drm_gpuvm_validate().
-> + *
-> + * Alternatively, drivers can set the &DRM_GPUVM_RESV_PROTECTED flag to indicate
-> + * that the corresponding &dma_resv locks are held in order to protect the
-> + * lists. If &DRM_GPUVM_RESV_PROTECTED is set, internal locking is disabled and
-> + * the corresponding lockdep checks are enabled. This is an optimization for
-> + * drivers which are capable of taking the corresponding &dma_resv locks and
-> + * hence do not require internal locking.
->    */
->   
->   /**
-> @@ -641,6 +670,195 @@
->    *	}
->    */
->   
-> +/**
-> + * get_next_vm_bo_from_list() - get the next vm_bo element
-> + * @__gpuvm: The GPU VM
-> + * @__list_name: The name of the list we're iterating on
-> + * @__local_list: A pointer to the local list used to store already iterated items
-> + * @__prev_vm_bo: The previous element we got from drm_gpuvm_get_next_cached_vm_bo()
-> + *
-> + * This helper is here to provide lockless list iteration. Lockless as in, the
-> + * iterator releases the lock immediately after picking the first element from
-> + * the list, so list insertion deletion can happen concurrently.
-> + *
-> + * Elements popped from the original list are kept in a local list, so removal
-> + * and is_empty checks can still happen while we're iterating the list.
-> + */
-> +#define get_next_vm_bo_from_list(__gpuvm, __list_name, __local_list, __prev_vm_bo)	\
-> +	({										\
-> +		struct drm_gpuvm_bo *__vm_bo = NULL;					\
-> +											\
-> +		drm_gpuvm_bo_put(__prev_vm_bo);						\
-> +											\
-> +		spin_lock(&(__gpuvm)->__list_name.lock);				\
-> +		if (!(__gpuvm)->__list_name.local_list)					\
-> +			(__gpuvm)->__list_name.local_list = __local_list;		\
-> +		else									\
-> +			WARN_ON((__gpuvm)->__list_name.local_list != __local_list);	\
-> +											\
-> +		while (!list_empty(&(__gpuvm)->__list_name.list)) {			\
-> +			__vm_bo = list_first_entry(&(__gpuvm)->__list_name.list,	\
-> +						   struct drm_gpuvm_bo,			\
-> +						   list.entry.__list_name);		\
-> +			if (kref_get_unless_zero(&__vm_bo->kref)) {			\
-> +				list_move_tail(&(__vm_bo)->list.entry.__list_name,	\
-> +					       __local_list);				\
-> +				break;							\
-> +			} else {							\
-> +				list_del_init(&(__vm_bo)->list.entry.__list_name);	\
-> +				__vm_bo = NULL;						\
-> +			}								\
-> +		}									\
-> +		spin_unlock(&(__gpuvm)->__list_name.lock);				\
-> +											\
-> +		__vm_bo;								\
-> +	})
-> +
-> +/**
-> + * for_each_vm_bo_in_list() - internal vm_bo list iterator
-> + *
-> + * This helper is here to provide lockless list iteration. Lockless as in, the
-> + * iterator releases the lock immediately after picking the first element from the
-> + * list, hence list insertion and deletion can happen concurrently.
-> + *
-> + * It is not allowed to re-assign the vm_bo pointer from inside this loop.
-> + *
-> + * Typical use:
-> + *
-> + *	struct drm_gpuvm_bo *vm_bo;
-> + *	LIST_HEAD(my_local_list);
-> + *
-> + *	ret = 0;
-> + *	for_each_vm_bo_in_list(gpuvm, <list_name>, &my_local_list, vm_bo) {
-> + *		ret = do_something_with_vm_bo(..., vm_bo);
-> + *		if (ret)
-> + *			break;
-> + *	}
-> + *	drm_gpuvm_bo_put(vm_bo);
-> + *	restore_vm_bo_list(gpuvm, <list_name>, &my_local_list);
-> + *
-> + *
-> + * Only used for internal list iterations, not meant to be exposed to the outside
-> + * world.
-> + */
-> +#define for_each_vm_bo_in_list(__gpuvm, __list_name, __local_list, __vm_bo)	\
-> +	for (__vm_bo = get_next_vm_bo_from_list(__gpuvm, __list_name,		\
-> +						__local_list, NULL);		\
-> +	     __vm_bo;								\
-> +	     __vm_bo = get_next_vm_bo_from_list(__gpuvm, __list_name,		\
-> +						__local_list, __vm_bo))
-> +
-> +static inline void
-> +__restore_vm_bo_list(struct drm_gpuvm *gpuvm, spinlock_t *lock,
-> +		     struct list_head *list, struct list_head **local_list)
-s/static inline void/static void/?  In .c files, the compiler is 
-typically trusted to inline where needed.
+Thanks very much; I'll keep an eye out for any reports.
 
-/Thomas
-
-
+-- 
+Kees Cook
