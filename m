@@ -2,69 +2,84 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57FB27BCEE1
-	for <lists+nouveau@lfdr.de>; Sun,  8 Oct 2023 16:11:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B10F07BD101
+	for <lists+nouveau@lfdr.de>; Mon,  9 Oct 2023 00:49:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 42B5210E195;
-	Sun,  8 Oct 2023 14:11:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A309010E07F;
+	Sun,  8 Oct 2023 22:49:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 75CEF10E192;
- Sun,  8 Oct 2023 14:11:15 +0000 (UTC)
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-57eaaba78d0so1766001eaf.0; 
- Sun, 08 Oct 2023 07:11:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696774274; x=1697379074; darn=lists.freedesktop.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XyEKxcvwY7znmPwndnO8wEBvpz3VAnMCyGn/RSrU7oc=;
- b=Kp09/160u21wzAHTQINzhqw9LmWoHj576S0fihpYnfDt5P8s/aQEq69q3wA4gkuBIk
- 0HElGi9413E0B4gkNShnrwH5l/cubckSg7jdctXNRtQj2GFvO/UYwlozDBT1tJNAkghf
- l+x19ViKRWK9ynG4xgazgrAki41L48knaUeaHUnbUP6TjUB4SQ8jIl+bA6qbYaOBb9Cz
- y6UyNptpYn2OW6BeoyW+6Y9bfJIqXuSHKXeEa/USMBY3xBEMlz++7seOUkoXNLI2/loo
- OMpq/62oMzPKlNdNfiOwSHju8OQ3opCvrGi0AGdirjb4uuc3/e5Td3Zs/nPvftJVLKIG
- vvlw==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 855AB10E07F
+ for <nouveau@lists.freedesktop.org>; Sun,  8 Oct 2023 22:49:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1696805344;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+RoCeCoMX24/5hVyJobJrqkSrDRXDwE+1UdG/KoqV90=;
+ b=N8jbRgWa9JtgtwWZLcAvu4chtRLzWylRwXvqdzn1rIOC6lJdAo3JSDNd7a+VHnHYl0Atoc
+ rDQ4TZRTxYe+9i4g/hCcCDT0REtLoXb1O1GlPdNoYSqaPCIldAlleC6qOtgy5AJBINaHhK
+ pwUEBGD0LxKIpiGeAfsEvj2I0DPIzHs=
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-612-RZnCENQIP9KifpH7u46yww-1; Sun, 08 Oct 2023 18:49:03 -0400
+X-MC-Unique: RZnCENQIP9KifpH7u46yww-1
+Received: by mail-ej1-f69.google.com with SMTP id
+ a640c23a62f3a-9ae70250ef5so540827466b.0
+ for <nouveau@lists.freedesktop.org>; Sun, 08 Oct 2023 15:49:02 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696774274; x=1697379074;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XyEKxcvwY7znmPwndnO8wEBvpz3VAnMCyGn/RSrU7oc=;
- b=TRTCWcft1kIr9uvd3ESw8b5++tSr3/ycApPq3oj2Ay7cyxA+xmwHD6cjShWjkB8o9X
- AbzIR0nrfN0NgPM4+amRTdKrznAROh7XouTAhjW8FGORDiiBAMBCOCzf2nmIQJQ8x6R6
- gLrjRjQBgCNGPOxLZ+b4kNkv4dr5tSBIH0jpW5oc9G8WVFY/+RSbS28/iPxSdHep9him
- uzWOD1Hjcy0vbW3LZEpWvIDl+KUW3QJEJq/KmlPlrRynSfd+q8d/9KbKy8BKAIz2BTYT
- yjYsB7c4g/8ky4NcZivdoGl7p9WLMbV9+uXUSuQYZo5KK72hwomDVxLOBznvwkyANKBw
- XrJw==
-X-Gm-Message-State: AOJu0Yy7QvDL9rPQXAB7+lse1UaZThHlmLMN2+4JGTr6Nfu/D27bBXWG
- +pKwBmG3SKCkC76om3UqndQ=
-X-Google-Smtp-Source: AGHT+IG+CkVWDZM4qbJZPGKsfqeGKlF2EUxOaaCzInK5BXwAXjPI7BtZrZDAcVJa8xl9T/W6Kr6cOQ==
-X-Received: by 2002:a05:6358:918b:b0:14f:3874:2746 with SMTP id
- j11-20020a056358918b00b0014f38742746mr10423698rwa.23.1696774274421; 
- Sun, 08 Oct 2023 07:11:14 -0700 (PDT)
-Received: from debian.me ([103.131.18.64]) by smtp.gmail.com with ESMTPSA id
- l19-20020a639853000000b0056b6d1ac949sm6374825pgo.13.2023.10.08.07.11.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Oct 2023 07:11:13 -0700 (PDT)
-Received: by debian.me (Postfix, from userid 1000)
- id 3F79F81B12C1; Sun,  8 Oct 2023 21:11:04 +0700 (WIB)
-Date: Sun, 8 Oct 2023 21:11:04 +0700
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Bragatheswaran Manickavel <bragathemanick0908@gmail.com>,
- kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch
-Message-ID: <ZSK4eNUPYIqPF3fM@debian.me>
-References: <20231008070618.20640-1-bragathemanick0908@gmail.com>
+ d=1e100.net; s=20230601; t=1696805342; x=1697410142;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+RoCeCoMX24/5hVyJobJrqkSrDRXDwE+1UdG/KoqV90=;
+ b=Jtu8DqsOXjDqbtvxhBfbm/LeWrWDGMHZR4LE7fPKZslsoh1t+Gh3PQLI9jnucVvBzP
+ meyogMcYUXvaMaoMOw2wadqIhSTKGKAY5byjOmdwVr2Ra7QoZza4hBP8Y/9GF6l7ckGj
+ zgSl3bf5kx5G5I2iIR8KkHT72DZ8iRwIDIv0yYLyAywa8LAnqMkktXbj/OfRiE7hBtEF
+ rqKkPR7UkKCG8joHmw1y6VHZg+3K16JLRAQwkePv0atN2EZPHmqCUXHyeTX3eMDKJTZZ
+ kO7ka1TpWb8b/xQ2OA7TGVEb/2ZB1eyxFFxuvY6ET7S4aqyxKhy47uqt3uDJVuYos9jL
+ 5tJg==
+X-Gm-Message-State: AOJu0YzGQ3vG+gfoPeKlcS9aXuCmX5yTkt0t1+HqqMOE7e5kw3qO4hhh
+ M0ZdbWv2CL/t+YkimYM28772aSBFlNjpebjKAVc8vKyj/eKKY56OoomOk18w9Npu8Q+SZQY+4z8
+ yi7uFUJ/jmKfbDQzmI7sQetxNXg==
+X-Received: by 2002:a17:907:9491:b0:9a5:962c:cb6c with SMTP id
+ dm17-20020a170907949100b009a5962ccb6cmr9517875ejc.31.1696805341890; 
+ Sun, 08 Oct 2023 15:49:01 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHxCqadhL+eBtO1UnN5jQ0+5sVr4DxJPJn1QuUXhLYYWy1tVT37JkrCntS4Ig7ahTqbpbyayg==
+X-Received: by 2002:a17:907:9491:b0:9a5:962c:cb6c with SMTP id
+ dm17-20020a170907949100b009a5962ccb6cmr9517865ejc.31.1696805341476; 
+ Sun, 08 Oct 2023 15:49:01 -0700 (PDT)
+Received: from ?IPV6:2a02:810d:4b3f:de9c:642:1aff:fe31:a15c?
+ ([2a02:810d:4b3f:de9c:642:1aff:fe31:a15c])
+ by smtp.gmail.com with ESMTPSA id
+ p7-20020a056402074700b0052f3471ccf6sm5426490edy.6.2023.10.08.15.49.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 08 Oct 2023 15:49:00 -0700 (PDT)
+Message-ID: <ec74271d-93b3-1c37-969b-aecc2d3deb7d@redhat.com>
+Date: Mon, 9 Oct 2023 00:48:59 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NyY6YWaxLzVX3FT9"
-Content-Disposition: inline
-In-Reply-To: <20231008070618.20640-1-bragathemanick0908@gmail.com>
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: fix kernel-doc warning
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+To: =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>,
+ airlied@gmail.com, daniel@ffwll.ch, matthew.brost@intel.com,
+ sarah.walker@imgtec.com, donald.robson@imgtec.com,
+ boris.brezillon@collabora.com, christian.koenig@amd.com, faith@gfxstrand.net
+References: <20230928191624.13703-1-dakr@redhat.com>
+ <95bfbf5c-286c-57a4-0170-19d775cf8d6b@linux.intel.com>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <95bfbf5c-286c-57a4-0170-19d775cf8d6b@linux.intel.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH drm-misc-next v5 0/6] [RFC] DRM GPUVM features
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,61 +96,137 @@ Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi Thomas,
 
---NyY6YWaxLzVX3FT9
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 10/5/23 11:35, Thomas Hellström wrote:
+> Hi, Danilo
+> 
+> On 9/28/23 21:16, Danilo Krummrich wrote:
+>> Currently GPUVM offers common infrastructure to track GPU VA allocations
+>> and mappings, generically connect GPU VA mappings to their backing
+>> buffers and perform more complex mapping operations on the GPU VA space.
+>>
+>> However, there are more design patterns commonly used by drivers, which
+>> can potentially be generalized in order to make GPUVM represent the
+>> basis of a VM implementation. In this context, this patch series aims at
+>> generalizing the following elements.
+>>
+>> 1) Provide a common dma-resv for GEM objects not being used outside of
+>>     this GPU-VM.
+>>
+>> 2) Provide tracking of external GEM objects (GEM objects which are
+>>     shared with other GPU-VMs).
+>>
+>> 3) Provide functions to efficiently lock all GEM objects dma-resv the
+>>     GPU-VM contains mappings of.
+>>
+>> 4) Provide tracking of evicted GEM objects the GPU-VM contains mappings
+>>     of, such that validation of evicted GEM objects is accelerated.
+>>
+>> 5) Provide some convinience functions for common patterns.
+>>
+>> The implementation introduces struct drm_gpuvm_bo, which serves as abstraction
+>> combining a struct drm_gpuvm and struct drm_gem_object, similar to what
+>> amdgpu does with struct amdgpu_bo_vm. While this adds a bit of complexity it
+>> improves the efficiency of tracking external and evicted GEM objects.
+>>
+>> This patch series is also available at [3].
+>>
+>> [1] https://gitlab.freedesktop.org/nouvelles/kernel/-/commits/gpuvm-next
+>>
+>> Changes in V2:
+>> ==============
+>>    - rename 'drm_gpuva_manager' -> 'drm_gpuvm' which generally leads to more
+>>      consistent naming
+>>    - properly separate commits (introduce common dma-resv, drm_gpuvm_bo
+>>      abstraction, etc.)
+>>    - remove maple tree for tracking external objects, use a list drm_gpuvm_bos
+>>      per drm_gpuvm instead
+>>    - rework dma-resv locking helpers (Thomas)
+>>    - add a locking helper for a given range of the VA space (Christian)
+>>    - make the GPUVA manager buildable as module, rather than drm_exec
+>>      builtin (Christian)
+>>
+>> Changes in V3:
+>> ==============
+>>    - rename missing function and files (Boris)
+>>    - warn if vm_obj->obj != obj in drm_gpuva_link() (Boris)
+>>    - don't expose drm_gpuvm_bo_destroy() (Boris)
+>>    - unlink VM_BO from GEM in drm_gpuvm_bo_destroy() rather than
+>>      drm_gpuva_unlink() and link within drm_gpuvm_bo_obtain() to keep
+>>      drm_gpuvm_bo instances unique
+>>    - add internal locking to external and evicted object lists to support drivers
+>>      updating the VA space from within the fence signalling critical path (Boris)
+>>    - unlink external objects and evicted objects from the GPUVM's list in
+>>      drm_gpuvm_bo_destroy()
+>>    - add more documentation and fix some kernel doc issues
+>>
+>> Changes in V4:
+>> ==============
+>>    - add a drm_gpuvm_resv() helper (Boris)
+>>    - add a drm_gpuvm::<list_name>::local_list field (Boris)
+>>    - remove drm_gpuvm_bo_get_unless_zero() helper (Boris)
+>>    - fix missing NULL assignment in get_next_vm_bo_from_list() (Boris)
+>>    - keep a drm_gem_object reference on potential vm_bo destroy (alternatively we
+>>      could free the vm_bo and drop the vm_bo's drm_gem_object reference through
+>>      async work)
+>>    - introduce DRM_GPUVM_RESV_PROTECTED flag to indicate external locking through
+>>      the corresponding dma-resv locks to optimize for drivers already holding
+>>      them when needed; add the corresponding lock_assert_held() calls (Thomas)
+>>    - make drm_gpuvm_bo_evict() per vm_bo and add a drm_gpuvm_bo_gem_evict()
+>>      helper (Thomas)
+>>    - pass a drm_gpuvm_bo in drm_gpuvm_ops::vm_bo_validate() (Thomas)
+>>    - documentation fixes
+>>
+>> Changes in V5:
+>> ==============
+>>    - use a root drm_gem_object provided by the driver as a base for the VM's
+>>      common dma-resv (Christian)
+>>    - provide a helper to allocate a "dummy" root GEM object in case a driver
+>>      specific root GEM object isn't available
+>>    - add a dedicated patch for nouveau to make use of the GPUVM's shared dma-resv
+>>    - improve documentation (Boris)
+>>    - the following patches are removed from the series, since they already landed
+>>      in drm-misc-next
+>>      - f72c2db47080 ("drm/gpuvm: rename struct drm_gpuva_manager to struct drm_gpuvm")
+>>      - fe7acaa727e1 ("drm/gpuvm: allow building as module")
+>>      - 78f54469b871 ("drm/nouveau: uvmm: rename 'umgr' to 'base'")
+>>
+>> Danilo Krummrich (6):
+>>    drm/gpuvm: add common dma-resv per struct drm_gpuvm
+>>    drm/gpuvm: add drm_gpuvm_flags to drm_gpuvm
+>>    drm/gpuvm: add an abstraction for a VM / BO combination
+>>    drm/gpuvm: track/lock/validate external/evicted objects
+>>    drm/nouveau: make use of the GPUVM's shared dma-resv
+>>    drm/nouveau: use GPUVM common infrastructure
+>>
+>>   drivers/gpu/drm/drm_gpuvm.c             | 1036 +++++++++++++++++++++--
+>>   drivers/gpu/drm/nouveau/nouveau_bo.c    |   15 +-
+>>   drivers/gpu/drm/nouveau/nouveau_bo.h    |    5 +
+>>   drivers/gpu/drm/nouveau/nouveau_exec.c  |   52 +-
+>>   drivers/gpu/drm/nouveau/nouveau_exec.h  |    4 -
+>>   drivers/gpu/drm/nouveau/nouveau_gem.c   |   10 +-
+>>   drivers/gpu/drm/nouveau/nouveau_sched.h |    4 +-
+>>   drivers/gpu/drm/nouveau/nouveau_uvmm.c  |  183 ++--
+>>   drivers/gpu/drm/nouveau/nouveau_uvmm.h  |    1 -
+>>   include/drm/drm_gem.h                   |   32 +-
+>>   include/drm/drm_gpuvm.h                 |  465 +++++++++-
+>>   11 files changed, 1625 insertions(+), 182 deletions(-)
+>>
+>>
+>> base-commit: a4ead6e37e3290cff399e2598d75e98777b69b37
+> 
+> One comment I had before on the GPUVM code in general was the licensing, but I'm not sure there was a reply. Is it possible to have this code dual MIT / GPLV2?
 
-On Sun, Oct 08, 2023 at 12:36:18PM +0530, Bragatheswaran Manickavel wrote:
-> @@ -458,15 +458,15 @@ struct drm_nouveau_svm_bind {
-> =20
->  #define DRM_IOCTL_NOUVEAU_GETPARAM           DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_GETPARAM, struct drm_nouveau_getparam)
->  #define DRM_IOCTL_NOUVEAU_CHANNEL_ALLOC      DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_CHANNEL_ALLOC, struct drm_nouveau_channel_alloc)
-> -#define DRM_IOCTL_NOUVEAU_CHANNEL_FREE       DRM_IOW (DRM_COMMAND_BASE +=
- DRM_NOUVEAU_CHANNEL_FREE, struct drm_nouveau_channel_free)
-> +#define DRM_IOCTL_NOUVEAU_CHANNEL_FREE       DRM_IOW(DRM_COMMAND_BASE + =
-DRM_NOUVEAU_CHANNEL_FREE, struct drm_nouveau_channel_free)
-> =20
->  #define DRM_IOCTL_NOUVEAU_SVM_INIT           DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_SVM_INIT, struct drm_nouveau_svm_init)
->  #define DRM_IOCTL_NOUVEAU_SVM_BIND           DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_SVM_BIND, struct drm_nouveau_svm_bind)
-> =20
->  #define DRM_IOCTL_NOUVEAU_GEM_NEW            DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_GEM_NEW, struct drm_nouveau_gem_new)
->  #define DRM_IOCTL_NOUVEAU_GEM_PUSHBUF        DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_GEM_PUSHBUF, struct drm_nouveau_gem_pushbuf)
-> -#define DRM_IOCTL_NOUVEAU_GEM_CPU_PREP       DRM_IOW (DRM_COMMAND_BASE +=
- DRM_NOUVEAU_GEM_CPU_PREP, struct drm_nouveau_gem_cpu_prep)
-> -#define DRM_IOCTL_NOUVEAU_GEM_CPU_FINI       DRM_IOW (DRM_COMMAND_BASE +=
- DRM_NOUVEAU_GEM_CPU_FINI, struct drm_nouveau_gem_cpu_fini)
-> +#define DRM_IOCTL_NOUVEAU_GEM_CPU_PREP       DRM_IOW(DRM_COMMAND_BASE + =
-DRM_NOUVEAU_GEM_CPU_PREP, struct drm_nouveau_gem_cpu_prep)
-> +#define DRM_IOCTL_NOUVEAU_GEM_CPU_FINI       DRM_IOW(DRM_COMMAND_BASE + =
-DRM_NOUVEAU_GEM_CPU_FINI, struct drm_nouveau_gem_cpu_fini)
->  #define DRM_IOCTL_NOUVEAU_GEM_INFO           DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_GEM_INFO, struct drm_nouveau_gem_info)
-> =20
->  #define DRM_IOCTL_NOUVEAU_VM_INIT            DRM_IOWR(DRM_COMMAND_BASE +=
- DRM_NOUVEAU_VM_INIT, struct drm_nouveau_vm_init)
+Personally, I don't have any objections. Please feel free to send a patch to change it, I'm happy to ACK it.
 
-Can you please split checkpatch fix above into separate patch?
+- Danilo
 
---=20
-An old man doll... just what I always wanted! - Clara
+> 
+> Thanks,
+> 
+> Thomas
+> 
+> 
+> 
 
---NyY6YWaxLzVX3FT9
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCZSK4dwAKCRD2uYlJVVFO
-ow1cAQDVcS0V99/qpu73ULyxIv/J+8DZ7JV9q172/0v22KhgWQEA4slaxL7vNv9D
-tEdpFPiHgSg5FsYifzU9Rtf8fy38fAs=
-=INQ7
------END PGP SIGNATURE-----
-
---NyY6YWaxLzVX3FT9--
