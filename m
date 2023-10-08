@@ -1,47 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79B997BD4DB
-	for <lists+nouveau@lfdr.de>; Mon,  9 Oct 2023 10:05:58 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1597E7BD4D9
+	for <lists+nouveau@lfdr.de>; Mon,  9 Oct 2023 10:05:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4D0FC10E222;
-	Mon,  9 Oct 2023 08:05:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CC79110E21D;
+	Mon,  9 Oct 2023 08:05:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 933 seconds by postgrey-1.36 at gabe;
- Sat, 07 Oct 2023 03:39:52 UTC
-Received: from m12.mail.163.com (m12.mail.163.com [220.181.12.214])
- by gabe.freedesktop.org (Postfix) with ESMTP id 6384E10E562
- for <nouveau@lists.freedesktop.org>; Sat,  7 Oct 2023 03:39:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=7aZx2
- QKxrK4aACi0XwiI3PbFPdSP9h54OxsoE6ZvLhw=; b=I3nu3INgoTCiVl0F60AUk
- qx0F2E6Iy+qkt6b+b3oBnq/6petdfTX+AxsOC0Hu9GVeisSrCke64IBtARnVNQxU
- kL2pXVtMaNQKjPmS7XFKA3EU56Ud0BMDxYlVElZ+VkDi1L5r461qLJ5BCsdejvaQ
- epwUD1N/SwehPkz5pmhLpg=
-Received: from icess-ProLiant-DL380-Gen10.. (unknown [183.174.60.14])
- by zwqz-smtp-mta-g3-2 (Coremail) with SMTP id _____wCnnYRGzyBlPFAgEA--.50459S4;
- Sat, 07 Oct 2023 11:24:00 +0800 (CST)
-From: Ma Ke <make_ruc2021@163.com>
-To: kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com, airlied@gmail.com,
- daniel@ffwll.ch, noralf@tronnes.org, tzimmermann@suse.de,
- mripard@kernel.org, jani.nikula@intel.com, make_ruc2021@163.com
-Date: Sat,  7 Oct 2023 11:23:49 +0800
-Message-Id: <20231007032349.3997387-1-make_ruc2021@163.com>
-X-Mailer: git-send-email 2.37.2
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3AF0A10E086;
+ Sun,  8 Oct 2023 07:06:52 +0000 (UTC)
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-57b74782be6so1987893eaf.2; 
+ Sun, 08 Oct 2023 00:06:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1696748811; x=1697353611; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xaaQmfAOdlMr/G3DN8Nw6V4MkQHgrZFbaXHumsVfrFA=;
+ b=MB3E+YKvM8HnnbLKGqS0fkuQ6+B8xC7a/yBifXwNZU3QWZNnSM58YJUjiB1asfaeG7
+ YxEM0z7NAjS86syLcuRsJuEIsdFAndlrVCRswWimR/oiWZpGMToBtiq3w1GnNy+DXL7Z
+ sxym6aj3rRNHun3uemAWFFX2Bw2O8lQ8uKSP4otnsR46yzmkmEgnDdYwRyH7ZDV81VJT
+ STXbtWwJsdKAu8B9RtjW20Ns7vxUgIRghr3ZJP+W3oE5dHmVcgGMh0hFdO7tdjD/pH2B
+ s1x6eq98n+bQKCONw1bT4ryPeIAa0P4hIAb8RCRe5bvWVLJdYr4zWYqLEWg0TnNOOZi6
+ yTXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696748811; x=1697353611;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xaaQmfAOdlMr/G3DN8Nw6V4MkQHgrZFbaXHumsVfrFA=;
+ b=kH0T07cVJtFghcbnjQV5mwXNQSlH51SDPr+ugcMwTiOH7upvBvIYgn5WsGPVig1wFX
+ OYTNAJeq1JOafFUqSmsD0Ph5qWeCoe1e383t4vvf2jBB9/ZjZH/yYZRkBlArgcvQ0Rkd
+ j9ju/uaP/w6V0QhoCE56imnXWfaoH8PLe5wTZyV3NRrFoSNz3dQJCwsNzJpUKxN0NgHJ
+ Q/asIy6/9pmG/Kb38GX4GxIMfjKq8oCYhpQETY5pYBr2Gj69UHrYn6QHcihxeyTByY5V
+ cYnqqKJamuLtiuHbp9l9oPcLSULMasxNHC4ZeSZaVEo584WyVqTUsGFQMUNcwHBuvz7l
+ V4Jg==
+X-Gm-Message-State: AOJu0YxizT5riD5hnHqOwvkc6zoiaW4qk/IKKTSZL2k12Ff6gnJW2SPv
+ T+HwReRs9fL0WvbPNPWhsYqswYqzOd0=
+X-Google-Smtp-Source: AGHT+IHjlQJlc1v/QJINcsLjzBlw3z4Y2om9X4TNhRdSRpyR3bjky2WaVc7uXpVm3uLtbUZ8+CZ6UQ==
+X-Received: by 2002:a05:6358:63a7:b0:14b:d9de:3008 with SMTP id
+ k39-20020a05635863a700b0014bd9de3008mr14338878rwh.5.1696748811195; 
+ Sun, 08 Oct 2023 00:06:51 -0700 (PDT)
+Received: from localhost.localdomain ([27.5.160.191])
+ by smtp.gmail.com with ESMTPSA id
+ c24-20020a637258000000b0055c178a8df1sm2290356pgn.94.2023.10.08.00.06.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 08 Oct 2023 00:06:50 -0700 (PDT)
+From: Bragatheswaran Manickavel <bragathemanick0908@gmail.com>
+To: kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
+ airlied@gmail.com, daniel@ffwll.ch
+Date: Sun,  8 Oct 2023 12:36:18 +0530
+Message-Id: <20231008070618.20640-1-bragathemanick0908@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wCnnYRGzyBlPFAgEA--.50459S4
-X-Coremail-Antispam: 1Uf129KBjvdXoWrtF1rZr4fAF45tF47AF4Dtwb_yoWfArcEkr
- y8Zr97Gr17ua1vyr4DAw1xAr9Ikw4Uua1Iy3Z2gFy0yF9rJrn0qry7K34rXFyUuFy8WFyD
- JanrZw15KrnrGjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUvcSsGvfC2KfnxnUUI43ZEXa7xRK6wZ7UUUUU==
-X-Originating-IP: [183.174.60.14]
-X-CM-SenderInfo: 5pdnvshuxfjiisr6il2tof0z/1tbivhACC1ZcjAJZEgAAso
 X-Mailman-Approved-At: Mon, 09 Oct 2023 08:05:46 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/dispnv04: fix a possible null pointer
- dereference
+Subject: [Nouveau] [PATCH] drm/nouveau: fix kernel-doc warning
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,32 +73,55 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+ dri-devel@lists.freedesktop.org,
+ Bragatheswaran Manickavel <bragathemanick0908@gmail.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-In nv17_tv_get_ld_modes(), the return value of drm_mode_duplicate()
-is assigned to mode, which will lead to a NULL pointer dereference
-on failure of drm_mode_duplicate(). Add a check to avoid npd.
+Identified below document warning in latest linux-next.
+./include/uapi/drm/nouveau_drm.h:49: warning: Cannot understand
+* @NOUVEAU_GETPARAM_EXEC_PUSH_MAX: on line 49 - I thought it was a doc line
 
-Signed-off-by: Ma Ke <make_ruc2021@163.com>
+Also, on running checkpatch.pl to nouveau_drm.h identified
+few more warnings/errors and fixing them in this patch
+
+Signed-off-by: Bragatheswaran Manickavel <bragathemanick0908@gmail.com>
 ---
- drivers/gpu/drm/nouveau/dispnv04/tvnv17.c | 2 ++
- 1 file changed, 2 insertions(+)
+ include/uapi/drm/nouveau_drm.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
-index 670c9739e5e1..4a08e61f3336 100644
---- a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
-+++ b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
-@@ -209,6 +209,8 @@ static int nv17_tv_get_ld_modes(struct drm_encoder *encoder,
- 		struct drm_display_mode *mode;
+diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_drm.h
+index eaf9f248619f..a523ca5aa865 100644
+--- a/include/uapi/drm/nouveau_drm.h
++++ b/include/uapi/drm/nouveau_drm.h
+@@ -46,7 +46,7 @@ extern "C" {
+ #define NOUVEAU_GETPARAM_HAS_PAGEFLIP    16
  
- 		mode = drm_mode_duplicate(encoder->dev, tv_mode);
-+		if (!mode)
-+			continue;
+ /**
+- * @NOUVEAU_GETPARAM_EXEC_PUSH_MAX
++ * NOUVEAU_GETPARAM_EXEC_PUSH_MAX:
+  *
+  * Query the maximum amount of IBs that can be pushed through a single
+  * &drm_nouveau_exec structure and hence a single &DRM_IOCTL_NOUVEAU_EXEC
+@@ -458,15 +458,15 @@ struct drm_nouveau_svm_bind {
  
- 		mode->clock = tv_norm->tv_enc_mode.vrefresh *
- 			mode->htotal / 1000 *
+ #define DRM_IOCTL_NOUVEAU_GETPARAM           DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_GETPARAM, struct drm_nouveau_getparam)
+ #define DRM_IOCTL_NOUVEAU_CHANNEL_ALLOC      DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_CHANNEL_ALLOC, struct drm_nouveau_channel_alloc)
+-#define DRM_IOCTL_NOUVEAU_CHANNEL_FREE       DRM_IOW (DRM_COMMAND_BASE + DRM_NOUVEAU_CHANNEL_FREE, struct drm_nouveau_channel_free)
++#define DRM_IOCTL_NOUVEAU_CHANNEL_FREE       DRM_IOW(DRM_COMMAND_BASE + DRM_NOUVEAU_CHANNEL_FREE, struct drm_nouveau_channel_free)
+ 
+ #define DRM_IOCTL_NOUVEAU_SVM_INIT           DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_SVM_INIT, struct drm_nouveau_svm_init)
+ #define DRM_IOCTL_NOUVEAU_SVM_BIND           DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_SVM_BIND, struct drm_nouveau_svm_bind)
+ 
+ #define DRM_IOCTL_NOUVEAU_GEM_NEW            DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_NEW, struct drm_nouveau_gem_new)
+ #define DRM_IOCTL_NOUVEAU_GEM_PUSHBUF        DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_PUSHBUF, struct drm_nouveau_gem_pushbuf)
+-#define DRM_IOCTL_NOUVEAU_GEM_CPU_PREP       DRM_IOW (DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_CPU_PREP, struct drm_nouveau_gem_cpu_prep)
+-#define DRM_IOCTL_NOUVEAU_GEM_CPU_FINI       DRM_IOW (DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_CPU_FINI, struct drm_nouveau_gem_cpu_fini)
++#define DRM_IOCTL_NOUVEAU_GEM_CPU_PREP       DRM_IOW(DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_CPU_PREP, struct drm_nouveau_gem_cpu_prep)
++#define DRM_IOCTL_NOUVEAU_GEM_CPU_FINI       DRM_IOW(DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_CPU_FINI, struct drm_nouveau_gem_cpu_fini)
+ #define DRM_IOCTL_NOUVEAU_GEM_INFO           DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_GEM_INFO, struct drm_nouveau_gem_info)
+ 
+ #define DRM_IOCTL_NOUVEAU_VM_INIT            DRM_IOWR(DRM_COMMAND_BASE + DRM_NOUVEAU_VM_INIT, struct drm_nouveau_vm_init)
 -- 
-2.37.2
+2.34.1
 
