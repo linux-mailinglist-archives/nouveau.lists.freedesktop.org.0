@@ -2,57 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C3357BF333
-	for <lists+nouveau@lfdr.de>; Tue, 10 Oct 2023 08:40:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 600BA7C4113
+	for <lists+nouveau@lfdr.de>; Tue, 10 Oct 2023 22:23:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7FA1510E1B9;
-	Tue, 10 Oct 2023 06:40:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9566610E3DD;
+	Tue, 10 Oct 2023 20:23:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 21A0F10E317;
- Tue, 10 Oct 2023 06:40:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1696920027; x=1728456027;
- h=message-id:date:mime-version:subject:to:cc:references:
- from:in-reply-to:content-transfer-encoding;
- bh=qyS78X6kgyN72gNbojsrXZvOfLJcf47vxLUxZFdsRK0=;
- b=NlZm0Ww+w7zGkGyicDohqKOAA9v8ydx2N1kTmoqKw4utdyPOKOcKS3bY
- 07yWEHWTo0ZSobryBUA0cx0GyIm86PJm+8TOeMA69VVtbI/cMnwgRBF9/
- TEFCF+frjXRRy/SS37MAaiK22G8R8iuQYSwB8MnDANohXnRA+zuY5W7zE
- kGkpdOm+liNqx4WfCmDLziZQ9osQYAWIUVKYSrvlZGVWljVVGeyMUiJgs
- WKCzKDM+FId52YkxPawh7c5wzmE02Y0xd2rw1LZlSqv+SxV+aE1KYHwCU
- //XITgWYsKTj9NAzvXQcacBve7f+ZnmF01nkMZyos4pVt15Zlvjhek3vi A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10858"; a="369390602"
-X-IronPort-AV: E=Sophos;i="6.03,211,1694761200"; d="scan'208";a="369390602"
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2023 23:40:26 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10858"; a="746962821"
-X-IronPort-AV: E=Sophos;i="6.03,211,1694761200"; d="scan'208";a="746962821"
-Received: from agargas-mobl.ger.corp.intel.com (HELO [10.249.254.164])
- ([10.249.254.164])
- by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2023 23:40:21 -0700
-Message-ID: <c6ce663d-dd69-46a2-7b55-359169b6c03c@linux.intel.com>
-Date: Tue, 10 Oct 2023 08:40:17 +0200
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BA71810E3D7;
+ Tue, 10 Oct 2023 20:23:30 +0000 (UTC)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-53b962f09e0so5565117a12.0; 
+ Tue, 10 Oct 2023 13:23:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1696969409; x=1697574209; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Q9K/39pYVDB63ZN/U40w9C502En4aUTJoZoW8PKDMTc=;
+ b=flT6kBIMJK1sCskugNg6/szqXf7r3hNjli+2gbs5TqJHnl6eQINcfIMLfzK++Hxe2j
+ Xl/xCTwhBDvjXlY8UQlFrL7yaHOcw9UU6Wox7T5RjjWLLisQVkHZ/BkJDulmDh4a+rwh
+ tsfYMqxdtuOvT1P3B9IDnn7CEGTdNkU1aSyEux3jsaYfz63+zwNummsu7RYXF06fNV+c
+ Xv9g8ZBKhXgbR8EnubgG04fHXt05gJTa7VjckJBXiq/bKc9TMLWVOZja9wr/Wka9qL4U
+ 6sPKEy6DFehshqgf64WDAp4IV4is6H6UfYDFq23e2rXHmJ4yYMTc4WapZ+GaPjdCwVMW
+ srWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696969409; x=1697574209;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Q9K/39pYVDB63ZN/U40w9C502En4aUTJoZoW8PKDMTc=;
+ b=SSTT03Zb5PxOfTIh8cCLzlNauD2r/glnNi+ejxEned1SjUO1hDf+C31JCdu3F8ssVU
+ 8XEyYOgS575w8yTpQ8WaIWaDfI1mh7hj4qwFWFBBnH/tLxSHGjJRLpumxNrWhCcxAyDk
+ 14OQvc0Rg8rbWPFQYReIH/Rp50DVHL8pULxDkXmPI0TvM2TlLhkRDoKhmgiAQ13UlWdc
+ z3sQbQQkxJpaiUCQr+KBWmP6NYf5TKvPI+JPU2AjGx3ElBxh09Nj3GRme6ewy8xWywdj
+ fooi6ghMLcW1dhjFBP9Gv4/6SvrULrUxXRIwK/fPMbAFBDuelJNtwlrLRUflzU73OIck
+ gwAA==
+X-Gm-Message-State: AOJu0YwGy4VbCJSW8a4YFADwWe76y/3uHWPw2BdWqd3ptVwPjPKVCVyv
+ KPvIPYT0Nnr7Vf4HfNX6SuU/+gAgzCxBAnUVz40=
+X-Google-Smtp-Source: AGHT+IGllDkDZOXntggqqiPf3dVIEhRfn/puLAvLIPz+t1Q0k06Gc6OysEHoI/3TNpo+v9866aIG21AyO2mZjaS6mW4=
+X-Received: by 2002:a17:906:7398:b0:9b1:aa5d:5d1f with SMTP id
+ f24-20020a170906739800b009b1aa5d5d1fmr15193521ejl.73.1696969408945; Tue, 10
+ Oct 2023 13:23:28 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
- matthew.brost@intel.com, sarah.walker@imgtec.com, donald.robson@imgtec.com,
- boris.brezillon@collabora.com, christian.koenig@amd.com, faith@gfxstrand.net
-References: <20231008233212.13815-1-dakr@redhat.com>
- <20231008233212.13815-5-dakr@redhat.com>
-From: =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>
-In-Reply-To: <20231008233212.13815-5-dakr@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH drm-misc-next v6 4/6] drm/gpuvm:
- track/lock/validate external/evicted objects
+References: <20230820215320.4187-1-dakr@redhat.com>
+ <20230820215320.4187-3-dakr@redhat.com>
+ <0c50ff22-0f11-1e27-c32e-694ce2b1e6c5@shipmail.org> <ZO864yp3UyVEfEjz@pollux>
+ <88c45fe6-0942-707c-9ea7-8486c177fcd7@shipmail.org> <ZO9Zq2RhbX8EeHrn@pollux>
+ <736b6b6d-9e04-a27d-7d60-0c45d696b304@shipmail.org>
+ <ZPB26A0/oLHTmyqk@cassiopeiae>
+ <a8f28d62-daec-927a-a33d-5be3eec6a1ed@shipmail.org>
+ <ZPDk/lao1JlBNGoJ@cassiopeiae>
+ <8a8253ae-0b85-df90-b480-64eeebfafc6d@shipmail.org>
+In-Reply-To: <8a8253ae-0b85-df90-b480-64eeebfafc6d@shipmail.org>
+From: Dave Airlie <airlied@gmail.com>
+Date: Wed, 11 Oct 2023 06:23:16 +1000
+Message-ID: <CAPM=9tz3o-m+8VJJ6hxWhykat0kpp1UE7dBJE3X91aHHo1Y2VA@mail.gmail.com>
+To: =?UTF-8?Q?Thomas_Hellstr=C3=B6m_=28Intel=29?= <thomas_os@shipmail.org>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH drm-misc-next 2/3] drm/gpuva_mgr: generalize
+ dma_resv/extobj handling and GEM validation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,78 +74,33 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
+ sarah.walker@imgtec.com, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ Liam.Howlett@oracle.com, boris.brezillon@collabora.com,
+ donald.robson@imgtec.com, daniel@ffwll.ch, christian.koenig@amd.com,
+ faith.ekstrand@collabora.com, bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+> I think we're then optimizing for different scenarios. Our compute
+> driver will use mostly external objects only, and if shared, I don't
+> forsee them bound to many VMs. What saves us currently here is that in
+> compute mode we only really traverse the extobj list after a preempt
+> fence wait, or when a vm is using a new context for the first time. So
+> vm's extobj list is pretty large. Each bo's vma list will typically be
+> pretty small.
 
-On 10/9/23 01:32, Danilo Krummrich wrote:
-> Currently the DRM GPUVM offers common infrastructure to track GPU VA
-> allocations and mappings, generically connect GPU VA mappings to their
-> backing buffers and perform more complex mapping operations on the GPU VA
-> space.
->
-> However, there are more design patterns commonly used by drivers, which
-> can potentially be generalized in order to make the DRM GPUVM represent
-> a basis for GPU-VM implementations. In this context, this patch aims
-> at generalizing the following elements.
->
-> 1) Provide a common dma-resv for GEM objects not being used outside of
->     this GPU-VM.
->
-> 2) Provide tracking of external GEM objects (GEM objects which are
->     shared with other GPU-VMs).
->
-> 3) Provide functions to efficiently lock all GEM objects dma-resv the
->     GPU-VM contains mappings of.
->
-> 4) Provide tracking of evicted GEM objects the GPU-VM contains mappings
->     of, such that validation of evicted GEM objects is accelerated.
->
-> 5) Provide some convinience functions for common patterns.
->
-> Big thanks to Boris Brezillon for his help to figure out locking for
-> drivers updating the GPU VA space within the fence signalling path.
->
-> Suggested-by: Matthew Brost <matthew.brost@intel.com>
-> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
->
-> +/**
-> + * drm_gpuvm_resv_add_fence - add fence to private and all extobj
-> + * dma-resv
-> + * @gpuvm: the &drm_gpuvm to add a fence to
-> + * @exec: the &drm_exec locking context
-> + * @fence: fence to add
-> + * @private_usage: private dma-resv usage
-> + * @extobj_usage: extobj dma-resv usage
-> + */
-> +void
-> +drm_gpuvm_resv_add_fence(struct drm_gpuvm *gpuvm,
-> +			 struct drm_exec *exec,
-> +			 struct dma_fence *fence,
-> +			 enum dma_resv_usage private_usage,
-> +			 enum dma_resv_usage extobj_usage)
-> +{
-> +	struct drm_gem_object *obj;
-> +	unsigned long index;
-> +
-> +	drm_exec_for_each_locked_object(exec, index, obj) {
-> +		dma_resv_assert_held(obj->resv);
-> +		dma_resv_add_fence(obj->resv, fence,
-> +				   drm_gpuvm_is_extobj(gpuvm, obj) ?
-> +				   private_usage : extobj_usage);
+Can I ask why we are optimising for this userspace, this seems
+incredibly broken.
 
-It looks like private_usage and extobj_usage are mixed up above?
+We've has this sort of problem in the past with Intel letting the tail
+wag the horse, does anyone remember optimising relocations for a
+userspace that didn't actually need to use relocations?
 
+We need to ask why this userspace is doing this, can we get some
+pointers to it? compute driver should have no reason to use mostly
+external objects, the OpenCL and level0 APIs should be good enough to
+figure this out.
 
-> +	}
-> +}
-> +EXPORT_SYMBOL_GPL(drm_gpuvm_resv_add_fence);
-> +
-
-Thanks,
-
-Thomas
-
-
+Dave.
