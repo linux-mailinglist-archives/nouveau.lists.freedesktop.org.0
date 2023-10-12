@@ -1,73 +1,72 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 485C57C524E
-	for <lists+nouveau@lfdr.de>; Wed, 11 Oct 2023 13:41:55 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 794457C6B34
+	for <lists+nouveau@lfdr.de>; Thu, 12 Oct 2023 12:33:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C20B510E724;
-	Wed, 11 Oct 2023 11:41:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 209AA10E4A7;
+	Thu, 12 Oct 2023 10:33:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9ECAB10E724
- for <nouveau@lists.freedesktop.org>; Wed, 11 Oct 2023 11:41:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1697024511;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=8NURkiBAbS6tTinRtwOYWNtz0h6Ztp9Eip3YWpE10Qw=;
- b=LZVx5Mt3VgIgces9Ge3MwFYpM8zPbvqA0RN5XhNCPHjYhIZMA23KVr5Zxkq8MZH6fxQ/Uh
- 02MtGWD+5GieBNJhoRjJsLNGLJ7/GmiRdVPUnPuxwW3wEch844FJzVSVC+gNpXu/SZvSNc
- t9Wst8iPdfF69E2Jo9X3Prq+aW8dZc0=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-306-uoEqpGcKOiy5_TBkWXlr6w-1; Wed, 11 Oct 2023 07:41:40 -0400
-X-MC-Unique: uoEqpGcKOiy5_TBkWXlr6w-1
-Received: by mail-qt1-f200.google.com with SMTP id
- d75a77b69052e-41b19426eedso9803301cf.1
- for <nouveau@lists.freedesktop.org>; Wed, 11 Oct 2023 04:41:40 -0700 (PDT)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7FA8310E49E;
+ Thu, 12 Oct 2023 10:33:27 +0000 (UTC)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-9a6190af24aso135358166b.0; 
+ Thu, 12 Oct 2023 03:33:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697106806; x=1697711606; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+trYhH6pdvjtTzpwC/GNcRs1Ixqq8ebN0gecPy8EoRE=;
+ b=IgoeBI5ayUOrNFLIgTuWUdQwzHoNGmKgtWzBRUeeDpFnEOTWXs8mjPGSlC+bh3Vjty
+ wW1y/yVShNmaWA6YougTpjozUiI1dLG+BZZxMKPnjuqBExEZOjL6sgwvDeWnP44sIrdp
+ hNgLKZTP3RkjsWPd7Qq8Ze9oB6CBdhCzYeBFV4gWmiBCPbYVqfLDUdMEbFUYNDYadzjX
+ WVPR8NxMaSHobFGNPANt7sK8i5R0jLNdZZOUiF9r3jEWENi22jURj/qwZWssOHm/6pU8
+ 2ZvVL9fh8hTyfJ+Pb0/R3MWYRL2IZJqKe9Lmrd+N5cx5qFbXmXt9SUBZ5hoW63c3pOr8
+ 0O9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697024500; x=1697629300;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8NURkiBAbS6tTinRtwOYWNtz0h6Ztp9Eip3YWpE10Qw=;
- b=cLrXzx3iAZPbHPpl/7/n2hy1dXmPtoKsQgXdsN8cn6y+zrNKabMbg4lUhZr8mnuNQy
- gsdpHW0ZWnjOwlsXJN7RSWLNzr9uLzPmJe8KfvIYLladUgS+B9/q9lBYRynGvQbs73BR
- u0dGiyA7EBbYn66+fQXYLglehC47yVVrk43rByPmT1RUPJm33Ut2jSLXuNNW9WQdedvS
- biLYjqtkFj9VnswEnh/jAB32+BLsorcex1ODerI89tZiyJP5kMjdssKIPKHq6ZpSYHzf
- QlUM7ohH0a5j/7JOAvT1MAruu8q2M8fX2bhQog6cpXyHjgwtqhHakyADaKvAhcVQKNN8
- rVPg==
-X-Gm-Message-State: AOJu0YxK81f55nH7bTtSwzCLV7V+873daWsGFmSDXhrNReRw+2lBiCNM
- AqrjxU21YFX2RzMUd/L8XyxHWGuJfyUvIWvwXerJ1vjRHMtQ+5XnFk6gWCv6PZaFWP+C32KP5xp
- OdUBcyLq/FpcsuPzmiK33YXuNdQ==
-X-Received: by 2002:a05:6214:c6a:b0:65a:fd40:b79 with SMTP id
- t10-20020a0562140c6a00b0065afd400b79mr23067468qvj.5.1697024500038; 
- Wed, 11 Oct 2023 04:41:40 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH/PJFqEzyZ8u0zaKxnpGRj7gcP1T2JeVyTubg38E45fbagYfNnX/UGlmnBkSjQ63uUN62XNg==
-X-Received: by 2002:a05:6214:c6a:b0:65a:fd40:b79 with SMTP id
- t10-20020a0562140c6a00b0065afd400b79mr23067452qvj.5.1697024499781; 
- Wed, 11 Oct 2023 04:41:39 -0700 (PDT)
-Received: from kherbst.pingu.com ([178.24.169.250])
- by smtp.gmail.com with ESMTPSA id
- d1-20020a05620a136100b00774309d3e89sm5153179qkl.7.2023.10.11.04.41.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 04:41:38 -0700 (PDT)
-From: Karol Herbst <kherbst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Date: Wed, 11 Oct 2023 13:41:34 +0200
-Message-ID: <20231011114134.861818-1-kherbst@redhat.com>
-X-Mailer: git-send-email 2.41.0
+ d=1e100.net; s=20230601; t=1697106806; x=1697711606;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+trYhH6pdvjtTzpwC/GNcRs1Ixqq8ebN0gecPy8EoRE=;
+ b=tE+N2mm2NtTPQeahgPTPiOR++7MGDDhkzkz4x/riOkzvqx5IPGBq0QkESKStdRTue/
+ l3O7zZUJk/mD9Omojqwx2+MP1rc+DJK1xD+Y7DUh+/fD6R7IOs5fVqgr+A6Ia0yGsOdx
+ gyIQnpm4GCBlfVh2/tBdHnkVGp0ga4TnHjWhVXOScU9PJicCq4Z+v9j9NDj/jScE7Dei
+ lrENrvGBnaM642SlXVkrYg7K2MGmGx/LkI+qBwmMFSCxeG+UcraAyp7IkKm37A8nA/DT
+ 7nJS9WUz60qa/AesfWrToHQmrKx1RuummZPb9Q5upkr4rMvmel062FV9d8wDHGL5Z5F6
+ inCw==
+X-Gm-Message-State: AOJu0YxkmKjUGWrzXKX4xeB0irSBn2hBagWzf0DulZN63YCAUtbg90rc
+ Rrqj/86UUXm4YY15Th7ytvxnRCOGLnOwvdEituA=
+X-Google-Smtp-Source: AGHT+IEoaB7SxZK8hFiCbD0c+W1n4JETZOdvrlo3gJ+KsJAs7mMU2QDRBvipZgMugULsUgkZhMfURFQaMQedjh8/nA0=
+X-Received: by 2002:a17:906:8b:b0:9b2:bb02:a543 with SMTP id
+ 11-20020a170906008b00b009b2bb02a543mr23857083ejc.74.1697106805715; Thu, 12
+ Oct 2023 03:33:25 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Subject: [Nouveau] [PATCH] drm/nouveau/disp: fix DP capable DSM connectors
+References: <20230820215320.4187-1-dakr@redhat.com>
+ <20230820215320.4187-3-dakr@redhat.com>
+ <0c50ff22-0f11-1e27-c32e-694ce2b1e6c5@shipmail.org> <ZO864yp3UyVEfEjz@pollux>
+ <88c45fe6-0942-707c-9ea7-8486c177fcd7@shipmail.org> <ZO9Zq2RhbX8EeHrn@pollux>
+ <736b6b6d-9e04-a27d-7d60-0c45d696b304@shipmail.org>
+ <ZPB26A0/oLHTmyqk@cassiopeiae>
+ <a8f28d62-daec-927a-a33d-5be3eec6a1ed@shipmail.org>
+ <ZPDk/lao1JlBNGoJ@cassiopeiae>
+ <8a8253ae-0b85-df90-b480-64eeebfafc6d@shipmail.org>
+ <CAPM=9tz3o-m+8VJJ6hxWhykat0kpp1UE7dBJE3X91aHHo1Y2VA@mail.gmail.com>
+ <76963abd-77a1-4bbd-9537-7b230e648a90@amd.com>
+In-Reply-To: <76963abd-77a1-4bbd-9537-7b230e648a90@amd.com>
+From: Dave Airlie <airlied@gmail.com>
+Date: Thu, 12 Oct 2023 20:33:13 +1000
+Message-ID: <CAPM=9twSHGRoSoXxG+hz1T8iBX2VgPFvFsNCDnK_nHW9WJYBtw@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [PATCH drm-misc-next 2/3] drm/gpuva_mgr: generalize
+ dma_resv/extobj handling and GEM validation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,58 +78,63 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, stable@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
+ sarah.walker@imgtec.com, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org,
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m_=28Intel=29?= <thomas_os@shipmail.org>,
+ linux-kernel@vger.kernel.org, Liam.Howlett@oracle.com,
+ boris.brezillon@collabora.com, donald.robson@imgtec.com, daniel@ffwll.ch,
+ faith.ekstrand@collabora.com, bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Just special case DP DSM connectors until we properly figure out how to
-deal with this.
+On Wed, 11 Oct 2023 at 17:07, Christian K=C3=B6nig <christian.koenig@amd.co=
+m> wrote:
+>
+> Am 10.10.23 um 22:23 schrieb Dave Airlie:
+> >> I think we're then optimizing for different scenarios. Our compute
+> >> driver will use mostly external objects only, and if shared, I don't
+> >> forsee them bound to many VMs. What saves us currently here is that in
+> >> compute mode we only really traverse the extobj list after a preempt
+> >> fence wait, or when a vm is using a new context for the first time. So
+> >> vm's extobj list is pretty large. Each bo's vma list will typically be
+> >> pretty small.
+> > Can I ask why we are optimising for this userspace, this seems
+> > incredibly broken.
+> >
+> > We've has this sort of problem in the past with Intel letting the tail
+> > wag the horse, does anyone remember optimising relocations for a
+> > userspace that didn't actually need to use relocations?
+> >
+> > We need to ask why this userspace is doing this, can we get some
+> > pointers to it? compute driver should have no reason to use mostly
+> > external objects, the OpenCL and level0 APIs should be good enough to
+> > figure this out.
+>
+> Well that is pretty normal use case, AMD works the same way.
+>
+> In a multi GPU compute stack you have mostly all the data shared between
+> different hardware devices.
+>
+> As I said before looking at just the Vulcan use case is not a good idea
+> at all.
+>
 
-This resolves user regressions on GPUs with such connectors without
-reverting the original fix.
+It's okay, I don't think anyone is doing that, some of the these
+use-cases are buried in server land and you guys don't communicate
+them very well.
 
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: stable@vger.kernel.org # 6.4+
-Closes: https://gitlab.freedesktop.org/drm/nouveau/-/issues/255
-Fixes: 2b5d1c29f6c4 ("drm/nouveau/disp: PIOR DP uses GPIO for HPD, not PMGR AUX interrupts")
-Signed-off-by: Karol Herbst <kherbst@redhat.com>
----
- drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+multi-gpu compute would I'd hope be moving towards HMM/SVM type
+solutions though?
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
-index 46b057fe1412e..3249e5c1c8930 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/uconn.c
-@@ -62,6 +62,18 @@ nvkm_uconn_uevent_gpio(struct nvkm_object *object, u64 token, u32 bits)
- 	return object->client->event(token, &args, sizeof(args.v0));
- }
- 
-+static bool
-+nvkm_connector_is_dp_dms(u8 type)
-+{
-+	switch (type) {
-+	case DCB_CONNECTOR_DMS59_DP0:
-+	case DCB_CONNECTOR_DMS59_DP1:
-+		return true;
-+	default:
-+		return false;
-+	}
-+}
-+
- static int
- nvkm_uconn_uevent(struct nvkm_object *object, void *argv, u32 argc, struct nvkm_uevent *uevent)
- {
-@@ -101,7 +113,7 @@ nvkm_uconn_uevent(struct nvkm_object *object, void *argv, u32 argc, struct nvkm_
- 	if (args->v0.types & NVIF_CONN_EVENT_V0_UNPLUG) bits |= NVKM_GPIO_LO;
- 	if (args->v0.types & NVIF_CONN_EVENT_V0_IRQ) {
- 		/* TODO: support DP IRQ on ANX9805 and remove this hack. */
--		if (!outp->info.location)
-+		if (!outp->info.location && !nvkm_connector_is_dp_dms(conn->info.type))
- 			return -EINVAL;
- 	}
- 
--- 
-2.41.0
+I'm also not into looking at use-cases that used to be important but
+might not as important going forward.
 
+Dave.
+
+
+> Christian.
+>
+> >
+> > Dave.
+>
