@@ -2,45 +2,52 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 001817C7B35
-	for <lists+nouveau@lfdr.de>; Fri, 13 Oct 2023 03:35:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C95A97C7CF6
+	for <lists+nouveau@lfdr.de>; Fri, 13 Oct 2023 07:20:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 97BEE10E580;
-	Fri, 13 Oct 2023 01:35:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5BE3410E59C;
+	Fri, 13 Oct 2023 05:20:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 929 seconds by postgrey-1.36 at gabe;
- Fri, 13 Oct 2023 01:35:53 UTC
-Received: from m15.mail.163.com (m15.mail.163.com [45.254.50.219])
- by gabe.freedesktop.org (Postfix) with ESMTP id 70B8610E580
- for <nouveau@lists.freedesktop.org>; Fri, 13 Oct 2023 01:35:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=aLj4B
- qY2YBYcmIcxL988YnyhrGGYNyKmp6Yo5wsu3R0=; b=k02fwX3vSjsWETELM6crX
- ZMmYLuGEkbZoN087Yix4cq1B3lVzOf6oKzAwgmnFEMRyMDfYZGkXf4Lkhac1HCg6
- sx9Yu7j6d1TbC1MGVYpwIGXgHA0Iq3CUKQuVEt79MjG4fdj6AZkwCy7oO5rg7Wpo
- tpOWdUA70P26mGaC5Od4ZM=
-Received: from icess-ProLiant-DL380-Gen10.. (unknown [183.174.60.14])
- by zwqz-smtp-mta-g2-0 (Coremail) with SMTP id _____wD3_1P7mihlaruYAQ--.37582S4;
- Fri, 13 Oct 2023 09:18:59 +0800 (CST)
-From: Ma Ke <make_ruc2021@163.com>
-To: kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com, airlied@gmail.com,
- daniel@ffwll.ch, tzimmermann@suse.de, noralf@tronnes.org,
- mripard@kernel.org, jani.nikula@intel.com, make_ruc2021@163.com
-Date: Fri, 13 Oct 2023 09:18:50 +0800
-Message-Id: <20231013011850.103967-1-make_ruc2021@163.com>
-X-Mailer: git-send-email 2.37.2
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:3::133])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8DC5B10E59C;
+ Fri, 13 Oct 2023 05:20:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Transfer-Encoding
+ :Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
+ Sender:Reply-To:Content-ID:Content-Description;
+ bh=IM1xqhQiNvzRJZGajZrRp+LdnwXH066EKRxfyQrcNi8=; b=ZvyTrqkrAN7Qc7crzmwXDnKrHa
+ waG3CZZS3FecTquZSP1nPPg7fQ9RryHLefYK6MQRdKgX+V4OSBJZB/fwlA8y5y4FLxkgPzfBn3wCA
+ HAn8SMW4bhBIqo74p36tlscFvOhFauHnQznGcB6kvjEMnXff5hNcUIRdMAGfFaey8LfUQOhUcU8K6
+ cYPCtARqnK/d8376LDNJJyx1nziN7Hj0DYuE7Vgm14aXSI/f9wEfYDuThMn/v+XCLvi4kTjRiFa4S
+ ND+itvx2zadRaF8SlF16h9qX/L3GA/I9j10NWddxZBB0e04tFm+ba+J8/K9M3Dr1Sp+4H+5Uvnqmo
+ Jqb2zzEQ==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat
+ Linux)) id 1qrAaH-002VYo-2L; Fri, 13 Oct 2023 05:19:37 +0000
+Date: Thu, 12 Oct 2023 22:19:37 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <ZSjTaYSbegbhon2v@infradead.org>
+References: <ZO9Zq2RhbX8EeHrn@pollux>
+ <736b6b6d-9e04-a27d-7d60-0c45d696b304@shipmail.org>
+ <ZPB26A0/oLHTmyqk@cassiopeiae>
+ <a8f28d62-daec-927a-a33d-5be3eec6a1ed@shipmail.org>
+ <ZPDk/lao1JlBNGoJ@cassiopeiae>
+ <8a8253ae-0b85-df90-b480-64eeebfafc6d@shipmail.org>
+ <CAPM=9tz3o-m+8VJJ6hxWhykat0kpp1UE7dBJE3X91aHHo1Y2VA@mail.gmail.com>
+ <76963abd-77a1-4bbd-9537-7b230e648a90@amd.com>
+ <CAPM=9twSHGRoSoXxG+hz1T8iBX2VgPFvFsNCDnK_nHW9WJYBtw@mail.gmail.com>
+ <1333e15b-f229-460a-8965-01ff3e778a4d@amd.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wD3_1P7mihlaruYAQ--.37582S4
-X-Coremail-Antispam: 1Uf129KBjvJXoW7JrykAryftw43ur1ruF17Jrb_yoW8JF1fpF
- 4xGFyYvr1DJFykKa40y3WDWFWY9a1kKFWvkw1ak39I93Z0yr1qqryDAr98Wry7JFW5GFy3
- trn3Ja4qgr18Zr7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0ziTGQkUUUUU=
-X-Originating-IP: [183.174.60.14]
-X-CM-SenderInfo: 5pdnvshuxfjiisr6il2tof0z/xtbBFQIHC2B9oe1JLgAGsr
-Subject: [Nouveau] [PATCH] drm/nouveau/dispnv04: fix a possible null pointer
- dereference
+In-Reply-To: <1333e15b-f229-460a-8965-01ff3e778a4d@amd.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Subject: Re: [Nouveau] [PATCH drm-misc-next 2/3] drm/gpuva_mgr: generalize
+ dma_resv/extobj handling and GEM validation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,43 +59,19 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: matthew.brost@intel.com, thomas.hellstrom@linux.intel.com,
+ sarah.walker@imgtec.com, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org,
+ Thomas =?iso-8859-1?Q?Hellstr=F6m_=28Intel=29?= <thomas_os@shipmail.org>,
+ linux-kernel@vger.kernel.org, Liam.Howlett@oracle.com,
+ boris.brezillon@collabora.com, donald.robson@imgtec.com, daniel@ffwll.ch,
+ faith.ekstrand@collabora.com, bskeggs@redhat.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-In nv17_tv_get_hd_modes(), the return value of drm_mode_duplicate()
-is assigned to mode, which will lead to a NULL pointer dereference on
-failure of drm_mode_duplicate(). The same applies to drm_cvt_mode().
-Add a check to avoid null pointer dereference.
+On Thu, Oct 12, 2023 at 02:35:15PM +0200, Christian König wrote:
+> Additional to that from the software side Felix summarized it in the HMM
+> peer2peer discussion thread recently quite well.
 
-Signed-off-by: Ma Ke <make_ruc2021@163.com>
----
- drivers/gpu/drm/nouveau/dispnv04/tvnv17.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
-index 670c9739e5e1..9c3dc9a5bb46 100644
---- a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
-+++ b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
-@@ -258,6 +258,8 @@ static int nv17_tv_get_hd_modes(struct drm_encoder *encoder,
- 		if (modes[i].hdisplay == output_mode->hdisplay &&
- 		    modes[i].vdisplay == output_mode->vdisplay) {
- 			mode = drm_mode_duplicate(encoder->dev, output_mode);
-+			if (!mode)
-+				continue;
- 			mode->type |= DRM_MODE_TYPE_PREFERRED;
- 
- 		} else {
-@@ -265,6 +267,8 @@ static int nv17_tv_get_hd_modes(struct drm_encoder *encoder,
- 					    modes[i].vdisplay, 60, false,
- 					    (output_mode->flags &
- 					     DRM_MODE_FLAG_INTERLACE), false);
-+			if (!mode)
-+				continue;
- 		}
- 
- 		/* CVT modes are sometimes unsuitable... */
--- 
-2.37.2
+Do you have a pointer to that discussion?
 
