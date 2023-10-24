@@ -2,77 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 924427D4C64
-	for <lists+nouveau@lfdr.de>; Tue, 24 Oct 2023 11:31:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE19A7D4CEE
+	for <lists+nouveau@lfdr.de>; Tue, 24 Oct 2023 11:51:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 789EB10E30C;
-	Tue, 24 Oct 2023 09:31:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E9E0210E316;
+	Tue, 24 Oct 2023 09:51:20 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C977D10E204
- for <nouveau@lists.freedesktop.org>; Tue, 24 Oct 2023 09:31:46 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 57C2810E316
+ for <nouveau@lists.freedesktop.org>; Tue, 24 Oct 2023 09:51:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1698139905;
+ s=mimecast20190719; t=1698141078;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=7XoCO//3ctv80DF3OL47Qti7mbqVaoNG2x1mfjVkYb8=;
- b=VJb+y4fq6V90ZpKh/3Qeoo+wgopZ9wuijajFxRlF72K8GGMXbcIVwg/S70oEQMrdOOaorT
- 8i5faW8jWqqW/kI3fh2y+t6rOOiXLsLAOZzKyHMMV5+kJV+TgOr0MmyaL5O31DyblkSl/A
- 3N87S6ugStiJtYKWFKq13qShHZZIjKY=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=FOzjr1C3fzwl7289cP87IkUZKHiUGNGKJQfQI7FgVak=;
+ b=b/FuWJXcnaQg5ReXMw3jljqzrtzzeDQEJkE+2nq4ndJfsv2a2Ek4gYXIDQIImFWjtqHdRo
+ WHOtMYTjDxsgMh9jRkhnfIOcWpNBs9YSCrN1UNemuaUVLUCeeci3tbHdexjHmbZ1pJ/HkS
+ 33UDVqjLuLtK48OlRBnM0RAbhwT5R3I=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-590-joe0qXooMGu32zEQGPQUzg-1; Tue, 24 Oct 2023 05:31:29 -0400
-X-MC-Unique: joe0qXooMGu32zEQGPQUzg-1
-Received: by mail-qt1-f200.google.com with SMTP id
- d75a77b69052e-41e1ecf3350so5193431cf.1
- for <nouveau@lists.freedesktop.org>; Tue, 24 Oct 2023 02:31:29 -0700 (PDT)
+ us-mta-214-SdwlE640NXSsldSi_kb1sg-1; Tue, 24 Oct 2023 05:51:17 -0400
+X-MC-Unique: SdwlE640NXSsldSi_kb1sg-1
+Received: by mail-qv1-f71.google.com with SMTP id
+ 6a1803df08f44-66d48cfd295so15965556d6.0
+ for <nouveau@lists.freedesktop.org>; Tue, 24 Oct 2023 02:51:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698139889; x=1698744689;
+ d=1e100.net; s=20230601; t=1698141076; x=1698745876;
  h=mime-version:user-agent:content-transfer-encoding:references
  :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=7XoCO//3ctv80DF3OL47Qti7mbqVaoNG2x1mfjVkYb8=;
- b=X7ILugaRUTxLq8YRZKxxPDyOBQDIURNHRpv+nxGFoCijszevahftcvQ6uXP1ZX8JPu
- RkV+HTQWRbsAMRaNcYEEcAkceN93mNSFxzy7wZgsW8s1DTxn/KiodpF0WQCVuaCHNOBQ
- pMlKDfhww19OTakP738bcPDx2BpVQZSTm4s9Br3qtPUs8D/hY4yXEa1kGZYI+0xW7zcC
- Byz5X794A8udHPwr9pE6OFT24eu6sp7+Kh8w1uv9NGGxJGGK5mUCrAdAEMvijSsqLyo0
- K5L+c77AXf4njVIu39HrRL5DSHiF+PaJ6A3xb7msXLtZQi84/WmsWaYKSKOlg57UgxDd
- 2+UA==
-X-Gm-Message-State: AOJu0YxsY099NFFfn1waAyAC2TiypNmh1tgUd31ruIHDbxlTSL/O2O8l
- tA2UzjikiUGoEmeaaFy/ydcDrhpSzJvxGHh1ZgY4ZN7pbFBgef54l3T7rDoRKKWOZpUQuZJO0Kk
- LcBisFsXZhLBoMbWKigAHvH6UYtdb/bw0zw==
-X-Received: by 2002:a05:620a:3e8b:b0:778:6059:c368 with SMTP id
- tv11-20020a05620a3e8b00b007786059c368mr10335613qkn.7.1698139888575; 
- Tue, 24 Oct 2023 02:31:28 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGYTz8iBSP8kaA46wS1iL0pp84skb9FDHXAw8pq5DY7l0Sme2MtZmbqkjoALWmf4BCjS+5SCQ==
-X-Received: by 2002:a05:620a:3e8b:b0:778:6059:c368 with SMTP id
- tv11-20020a05620a3e8b00b007786059c368mr10335602qkn.7.1698139888014; 
- Tue, 24 Oct 2023 02:31:28 -0700 (PDT)
+ bh=FOzjr1C3fzwl7289cP87IkUZKHiUGNGKJQfQI7FgVak=;
+ b=oBPdMoXa8LeI+4d9CDfCdFpTJsoC1Wqwf+2xAYOR/W4nKcz2mDL7SSKuo5HByytqi6
+ /SEFfoknMTkiqg5GiJbH8XnxK3HoUlVAMwtCNHfK/p8cEoa4/8ah115Z8QDhXsPADJBl
+ GEFs53Q4tWxjueYGAerT2qgDsxeZSCa0O+UmtbUhoiGwFJeTfrWpk3cdB+SH43T1Q8/z
+ 2CfIhA9jmqzJUw4ZQY+pT40LecpBtpszsq0as6ERL5mZpHWccYtQUS1FNau0kLwsjUpm
+ 8/ckLcZNM/C2ZT6NbZCVQ+9b3x4iNMZZ86pSOIy2rF/yQaxop5g/5ySJXVzwCzbzb2xV
+ nkWQ==
+X-Gm-Message-State: AOJu0YzlQnFymSpc1DFziTwRc1nWi4egDuy4dNmcOsETwwjfAgiGeHI3
+ svQup9uWRj5d1nLL4VFzdDRCpauZWqsnXGxMxqHDgXfH3tJzND6/JFOLzhvy0Flsi3ozfU/QdSa
+ z4FhpWry8Np7MUNA1DIrCCaE+pQ==
+X-Received: by 2002:a0c:e7d1:0:b0:66d:1b9b:196c with SMTP id
+ c17-20020a0ce7d1000000b0066d1b9b196cmr12691867qvo.2.1698141076565; 
+ Tue, 24 Oct 2023 02:51:16 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHNldCIQs5wpm02rxZkQHgG/7HhakuzVClnd+x7QowPigMWPl03XKsBcUdX0HJKkfLlSahWgw==
+X-Received: by 2002:a0c:e7d1:0:b0:66d:1b9b:196c with SMTP id
+ c17-20020a0ce7d1000000b0066d1b9b196cmr12691853qvo.2.1698141076067; 
+ Tue, 24 Oct 2023 02:51:16 -0700 (PDT)
 Received: from [10.32.64.210] (nat-pool-muc-t.redhat.com. [149.14.88.26])
  by smtp.gmail.com with ESMTPSA id
- d11-20020a05620a140b00b00767d4a3f4d9sm3332150qkj.29.2023.10.24.02.31.26
+ k6-20020ac80746000000b004199f47ccdbsm3353465qth.51.2023.10.24.02.51.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 02:31:27 -0700 (PDT)
-Message-ID: <aea85c345e3857d3d94e3b8b3de20a6f463ee140.camel@redhat.com>
+ Tue, 24 Oct 2023 02:51:15 -0700 (PDT)
+Message-ID: <a8948198c085246bff4bbc3ca696461523180545.camel@redhat.com>
 From: Philipp Stanner <pstanner@redhat.com>
 To: Ben Skeggs <skeggsb@gmail.com>, nouveau@lists.freedesktop.org
-Date: Tue, 24 Oct 2023 11:31:25 +0200
-In-Reply-To: <20230918202149.4343-34-skeggsb@gmail.com>
+Date: Tue, 24 Oct 2023 11:51:14 +0200
+In-Reply-To: <20230918202149.4343-43-skeggsb@gmail.com>
 References: <20230918202149.4343-1-skeggsb@gmail.com>
- <20230918202149.4343-34-skeggsb@gmail.com>
+ <20230918202149.4343-43-skeggsb@gmail.com>
 User-Agent: Evolution 3.48.4 (3.48.4-1.fc38)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH 33/44] drm/nouveau/gsp/r535: add support for
- rm control
+Content-Transfer-Encoding: base64
+Subject: Re: [Nouveau] [PATCH 42/44] drm/nouveau/nvenc/r535: initial support
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,1441 +87,406 @@ Cc: Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 2023-09-19 at 06:21 +1000, Ben Skeggs wrote:
-> From: Ben Skeggs <bskeggs@redhat.com>
->=20
-> Adds the plumbing to start making RM control calls, and initialises
-> objects to represent internal RM objects provided to us during init.
->=20
-> These will be used by subsequent patches.
->=20
-> Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
-> ---
-> =C2=A0.../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |=C2=A0 62 ++++++++++=
-+
-> =C2=A0.../nvidia/inc/ctrl/ctrl0080/ctrl0080gpu.h=C2=A0=C2=A0=C2=A0 |=C2=
-=A0 48 +++++++++
-> =C2=A0.../sdk/nvidia/inc/ctrl/ctrl0080/ctrl0080gr.h |=C2=A0 31 ++++++
-> =C2=A0.../nvidia/inc/ctrl/ctrl2080/ctrl2080bios.h=C2=A0=C2=A0 |=C2=A0 40 =
-+++++++
-> =C2=A0.../sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080fb.h |=C2=A0 51 +++++++++
-> =C2=A0.../nvidia/inc/ctrl/ctrl2080/ctrl2080gpu.h=C2=A0=C2=A0=C2=A0 |=C2=
-=A0 25 +++++
-> =C2=A0.../sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080gr.h |=C2=A0 41 +++++++
-> =C2=A0.../535.54.03/nvidia/generated/g_gpu_nvoc.h=C2=A0=C2=A0 |=C2=A0 35 =
-++++++
-> =C2=A0.../nvidia/generated/g_rpc-structures.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 |=C2=A0 11 ++
-> =C2=A0.../nvidia/inc/kernel/gpu/gpu_engine_type.h=C2=A0=C2=A0 |=C2=A0 86 =
-+++++++++++++++
-> =C2=A0.../inc/kernel/gpu/gsp/gsp_static_config.h=C2=A0=C2=A0=C2=A0 | 100
-> +++++++++++++++++
-> =C2=A0.../nvidia/inc/kernel/gpu/nvbitmask.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 |=C2=A0 33 ++++++
-> =C2=A0.../nvidia/kernel/inc/vgpu/rpc_headers.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 |=C2=A0 44 ++++++++
-> =C2=A0.../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c=C2=A0=C2=A0=C2=A0 | 101
-> ++++++++++++++++++
-> =C2=A014 files changed, 708 insertions(+)
-> =C2=A0create mode 100644
-> drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/
-> ctrl/ctrl0080/ctrl0080gpu.h
-> =C2=A0create mode 100644
-> drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/
-> ctrl/ctrl0080/ctrl0080gr.h
-> =C2=A0create mode 100644
-> drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/
-> ctrl/ctrl2080/ctrl2080bios.h
-> =C2=A0create mode 100644
-> drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/
-> ctrl/ctrl2080/ctrl2080fb.h
-> =C2=A0create mode 100644
-> drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/inc/
-> ctrl/ctrl2080/ctrl2080gr.h
-> =C2=A0create mode 100644
-> drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_gpu
-> _nvoc.h
-> =C2=A0create mode 100644
-> drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/
-> gpu_engine_type.h
-> =C2=A0create mode 100644
-> drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gpu/
-> nvbitmask.h
-> =C2=A0create mode 100644
-> drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/kernel/inc/vgpu
-> /rpc_headers.h
->=20
-> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> index 41fd11822b30..8f0805474981 100644
-> --- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> +++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> @@ -132,10 +132,32 @@ struct nvkm_gsp {
-> =C2=A0
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bool running;
-> =C2=A0
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* Internal GSP-RM control han=
-dles. */
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct {
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0struct nvkm_gsp_client {
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct nv=
-km_gsp_object {
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct nvkm_gsp_client *client;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct nvkm_gsp_object *parent;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u32 handle;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0} object;
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct nv=
-km_gsp *gsp;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0} client;
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0struct nvkm_gsp_device {
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct nv=
-km_gsp_object object;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct nv=
-km_gsp_object subdevice;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0} device;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0} internal;
-> +
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0const struct nvkm_gsp_rm =
-{
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0void *(*rpc_get)(struct nvkm_gsp *, u32 fn, u32
-> argc);
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0void *(*rpc_push)(struct nvkm_gsp *, void *argv, bo=
-ol
-> wait, u32 repc);
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0void (*rpc_done)(struct nvkm_gsp *gsp, void *repv);
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0void *(*rm_ctrl_get)(struct nvkm_gsp_object *, u32
-> cmd, u32 argc);
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0void *(*rm_ctrl_push)(struct nvkm_gsp_object *, void
-> *argv, u32 repc);
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0void (*rm_ctrl_done)(struct nvkm_gsp_object *, void
-> *repv);
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0} *rm;
-> =C2=A0};
-> =C2=A0
-> @@ -185,6 +207,46 @@ nvkm_gsp_rpc_done(struct nvkm_gsp *gsp, void
-> *repv)
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gsp->rm->rpc_done(gsp, re=
-pv);
-> =C2=A0}
-> =C2=A0
-> +static inline void *
-> +nvkm_gsp_rm_ctrl_get(struct nvkm_gsp_object *object, u32 cmd, u32
-> argc)
-> +{
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return object->client->gsp->rm=
-->rm_ctrl_get(object, cmd,
-> argc);
-> +}
-> +
-> +static inline void *
-> +nvkm_gsp_rm_ctrl_push(struct nvkm_gsp_object *object, void *argv,
-> u32 repc)
-> +{
-
-What's repc? Repitition-count? See below:
-
-
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return object->client->gsp->rm=
-->rm_ctrl_push(object, argv,
-> repc);
-> +}
-> +
-> +static inline void *
-> +nvkm_gsp_rm_ctrl_rd(struct nvkm_gsp_object *object, u32 cmd, u32
-> repc)
-> +{
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0void *argv =3D nvkm_gsp_rm_ctr=
-l_get(object, cmd, repc);
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (IS_ERR(argv))
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0return argv;
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return nvkm_gsp_rm_ctrl_push(o=
-bject, argv, repc);
-> +}
-> +
-> +static inline int
-> +nvkm_gsp_rm_ctrl_wr(struct nvkm_gsp_object *object, void *argv)
-> +{
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0void *repv =3D nvkm_gsp_rm_ctr=
-l_push(object, argv, 0);
-
-Why 0? For a generic flags-field I think 0 is indeed intuitive, but
-this does not seem to be flags.
-
-Maybe write a comment or make it:
-u32 do_obvious_thing =3D 0;
-void *repv =3D nvkm_gsp_rm_ctrl_push(object, argv, do_obvious_thing);
-
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (IS_ERR(repv))
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0return PTR_ERR(repv);
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return 0;
-> +}
-> +
-> +static inline void
-> +nvkm_gsp_rm_ctrl_done(struct nvkm_gsp_object *object, void *repv)
-> +{
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0object->client->gsp->rm->rm_ct=
-rl_done(object, repv);
-> +}
-> +
-> =C2=A0int gv100_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int,
-> struct nvkm_gsp **);
-> =C2=A0int tu102_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int,
-> struct nvkm_gsp **);
-> =C2=A0int tu116_gsp_new(struct nvkm_device *, enum nvkm_subdev_type, int,
-> struct nvkm_gsp **);
-> diff --git
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl0080/ctrl0080gpu.h
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl0080/ctrl0080gpu.h
-> new file mode 100644
-> index 000000000000..60ba4967dcd9
-> --- /dev/null
-> +++
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl0080/ctrl0080gpu.h
-> @@ -0,0 +1,48 @@
-> +#ifndef __src_common_sdk_nvidia_inc_ctrl_ctrl0080_ctrl0080gpu_h__
-> +#define __src_common_sdk_nvidia_inc_ctrl_ctrl0080_ctrl0080gpu_h__
-> +
-> +/* Excerpt of RM headers from
-> https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03=C2=A0*/
-> +
-> +/*
-> + * SPDX-FileCopyrightText: Copyright (c) 2004-2022 NVIDIA
-> CORPORATION & AFFILIATES. All rights reserved.
-> + * SPDX-License-Identifier: MIT
-> + *
-> + * Permission is hereby granted, free of charge, to any person
-> obtaining a
-> + * copy of this software and associated documentation files (the
-> "Software"),
-> + * to deal in the Software without restriction, including without
-> limitation
-> + * the rights to use, copy, modify, merge, publish, distribute,
-> sublicense,
-> + * and/or sell copies of the Software, and to permit persons to whom
-> the
-> + * Software is furnished to do so, subject to the following
-> conditions:
-> + *
-> + * The above copyright notice and this permission notice shall be
-> included in
-> + * all copies or substantial portions of the Software.
-> + *
-> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-> EXPRESS OR
-> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-> MERCHANTABILITY,
-> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
-> SHALL
-> + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
-> OR OTHER
-> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-> ARISING
-> + * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-> OTHER
-> + * DEALINGS IN THE SOFTWARE.
-> + */
-> +
-> +typedef struct NV0080_CTRL_GPU_GET_SRIOV_CAPS_PARAMS {
-> +=C2=A0=C2=A0=C2=A0 NvU32=C2=A0 totalVFs;
-> +=C2=A0=C2=A0=C2=A0 NvU32=C2=A0 firstVfOffset;
-> +=C2=A0=C2=A0=C2=A0 NvU32=C2=A0 vfFeatureMask;
-> +=C2=A0=C2=A0=C2=A0 NV_DECLARE_ALIGNED(NvU64 FirstVFBar0Address, 8);
-> +=C2=A0=C2=A0=C2=A0 NV_DECLARE_ALIGNED(NvU64 FirstVFBar1Address, 8);
-> +=C2=A0=C2=A0=C2=A0 NV_DECLARE_ALIGNED(NvU64 FirstVFBar2Address, 8);
-> +=C2=A0=C2=A0=C2=A0 NV_DECLARE_ALIGNED(NvU64 bar0Size, 8);
-> +=C2=A0=C2=A0=C2=A0 NV_DECLARE_ALIGNED(NvU64 bar1Size, 8);
-> +=C2=A0=C2=A0=C2=A0 NV_DECLARE_ALIGNED(NvU64 bar2Size, 8);
-> +=C2=A0=C2=A0=C2=A0 NvBool b64bitBar0;
-> +=C2=A0=C2=A0=C2=A0 NvBool b64bitBar1;
-> +=C2=A0=C2=A0=C2=A0 NvBool b64bitBar2;
-> +=C2=A0=C2=A0=C2=A0 NvBool bSriovEnabled;
-> +=C2=A0=C2=A0=C2=A0 NvBool bSriovHeavyEnabled;
-> +=C2=A0=C2=A0=C2=A0 NvBool bEmulateVFBar0TlbInvalidationRegister;
-> +=C2=A0=C2=A0=C2=A0 NvBool bClientRmAllocatedCtxBuffer;
-> +} NV0080_CTRL_GPU_GET_SRIOV_CAPS_PARAMS;
-> +
-> +#endif
-> diff --git
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl0080/ctrl0080gr.h
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl0080/ctrl0080gr.h
-> new file mode 100644
-> index 000000000000..c08e2fcb4979
-> --- /dev/null
-> +++
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl0080/ctrl0080gr.h
-> @@ -0,0 +1,31 @@
-> +#ifndef __src_common_sdk_nvidia_inc_ctrl_ctrl0080_ctrl0080gr_h__
-> +#define __src_common_sdk_nvidia_inc_ctrl_ctrl0080_ctrl0080gr_h__
-> +
-> +/* Excerpt of RM headers from
-> https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03=C2=A0*/
-> +
-> +/*
-> + * SPDX-FileCopyrightText: Copyright (c) 2004-2022 NVIDIA
-> CORPORATION & AFFILIATES. All rights reserved.
-> + * SPDX-License-Identifier: MIT
-> + *
-> + * Permission is hereby granted, free of charge, to any person
-> obtaining a
-> + * copy of this software and associated documentation files (the
-> "Software"),
-> + * to deal in the Software without restriction, including without
-> limitation
-> + * the rights to use, copy, modify, merge, publish, distribute,
-> sublicense,
-> + * and/or sell copies of the Software, and to permit persons to whom
-> the
-> + * Software is furnished to do so, subject to the following
-> conditions:
-> + *
-> + * The above copyright notice and this permission notice shall be
-> included in
-> + * all copies or substantial portions of the Software.
-> + *
-> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-> EXPRESS OR
-> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-> MERCHANTABILITY,
-> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
-> SHALL
-> + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
-> OR OTHER
-> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-> ARISING
-> + * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-> OTHER
-> + * DEALINGS IN THE SOFTWARE.
-> + */
-> +
-> +#define NV0080_CTRL_GR_CAPS_TBL_SIZE=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 23
-> +
-> +#endif
-> diff --git
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl2080/ctrl2080bios.h
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl2080/ctrl2080bios.h
-> new file mode 100644
-> index 000000000000..9c61a6f74aa4
-> --- /dev/null
-> +++
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl2080/ctrl2080bios.h
-> @@ -0,0 +1,40 @@
-> +#ifndef __src_common_sdk_nvidia_inc_ctrl_ctrl2080_ctrl2080bios_h__
-> +#define __src_common_sdk_nvidia_inc_ctrl_ctrl2080_ctrl2080bios_h__
-> +
-> +/* Excerpt of RM headers from
-> https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03=C2=A0*/
-> +
-> +/*
-> + * SPDX-FileCopyrightText: Copyright (c) 2005-2021 NVIDIA
-> CORPORATION & AFFILIATES. All rights reserved.
-> + * SPDX-License-Identifier: MIT
-> + *
-> + * Permission is hereby granted, free of charge, to any person
-> obtaining a
-> + * copy of this software and associated documentation files (the
-> "Software"),
-> + * to deal in the Software without restriction, including without
-> limitation
-> + * the rights to use, copy, modify, merge, publish, distribute,
-> sublicense,
-> + * and/or sell copies of the Software, and to permit persons to whom
-> the
-> + * Software is furnished to do so, subject to the following
-> conditions:
-> + *
-> + * The above copyright notice and this permission notice shall be
-> included in
-> + * all copies or substantial portions of the Software.
-> + *
-> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-> EXPRESS OR
-> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-> MERCHANTABILITY,
-> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
-> SHALL
-> + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
-> OR OTHER
-> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-> ARISING
-> + * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-> OTHER
-> + * DEALINGS IN THE SOFTWARE.
-> + */
-> +
-> +typedef struct NV2080_CTRL_BIOS_GET_SKU_INFO_PARAMS {
-> +=C2=A0=C2=A0=C2=A0 NvU32 BoardID;
-> +=C2=A0=C2=A0=C2=A0 char=C2=A0 chipSKU[4];
-> +=C2=A0=C2=A0=C2=A0 char=C2=A0 chipSKUMod[2];
-> +=C2=A0=C2=A0=C2=A0 char=C2=A0 project[5];
-> +=C2=A0=C2=A0=C2=A0 char=C2=A0 projectSKU[5];
-> +=C2=A0=C2=A0=C2=A0 char=C2=A0 CDP[6];
-> +=C2=A0=C2=A0=C2=A0 char=C2=A0 projectSKUMod[2];
-> +=C2=A0=C2=A0=C2=A0 NvU32 businessCycle;
-> +} NV2080_CTRL_BIOS_GET_SKU_INFO_PARAMS;
-> +
-> +#endif
-> diff --git
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl2080/ctrl2080fb.h
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl2080/ctrl2080fb.h
-> new file mode 100644
-> index 000000000000..20a50a22e748
-> --- /dev/null
-> +++
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl2080/ctrl2080fb.h
-> @@ -0,0 +1,51 @@
-> +#ifndef __src_common_sdk_nvidia_inc_ctrl_ctrl2080_ctrl2080fb_h__
-> +#define __src_common_sdk_nvidia_inc_ctrl_ctrl2080_ctrl2080fb_h__
-> +
-> +/* Excerpt of RM headers from
-> https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03=C2=A0*/
-> +
-> +/*
-> + * SPDX-FileCopyrightText: Copyright (c) 2006-2021 NVIDIA
-> CORPORATION & AFFILIATES. All rights reserved.
-> + * SPDX-License-Identifier: MIT
-> + *
-> + * Permission is hereby granted, free of charge, to any person
-> obtaining a
-> + * copy of this software and associated documentation files (the
-> "Software"),
-> + * to deal in the Software without restriction, including without
-> limitation
-> + * the rights to use, copy, modify, merge, publish, distribute,
-> sublicense,
-> + * and/or sell copies of the Software, and to permit persons to whom
-> the
-> + * Software is furnished to do so, subject to the following
-> conditions:
-> + *
-> + * The above copyright notice and this permission notice shall be
-> included in
-> + * all copies or substantial portions of the Software.
-> + *
-> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-> EXPRESS OR
-> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-> MERCHANTABILITY,
-> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
-> SHALL
-> + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
-> OR OTHER
-> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-> ARISING
-> + * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-> OTHER
-> + * DEALINGS IN THE SOFTWARE.
-> + */
-> +
-> +#define NV2080_CTRL_CMD_FB_GET_FB_REGION_INFO_MEM_TYPES=C2=A0=C2=A0 17U
-> +
-> +typedef NvBool
-> NV2080_CTRL_CMD_FB_GET_FB_REGION_SURFACE_MEM_TYPE_FLAG[NV2080_CTRL_CM
-> D_FB_GET_FB_REGION_INFO_MEM_TYPES];
-> +
-> +typedef struct NV2080_CTRL_CMD_FB_GET_FB_REGION_FB_REGION_INFO {
-> +=C2=A0=C2=A0=C2=A0 NV_DECLARE_ALIGNED(NvU64 base, 8);
-> +=C2=A0=C2=A0=C2=A0 NV_DECLARE_ALIGNED(NvU64 limit, 8);
-> +=C2=A0=C2=A0=C2=A0 NV_DECLARE_ALIGNED(NvU64 reserved, 8);
-> +=C2=A0=C2=A0=C2=A0 NvU32=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0
-> performance;
-> +=C2=A0=C2=A0=C2=A0 NvBool=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0
-> supportCompressed;
-> +=C2=A0=C2=A0=C2=A0 NvBool=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0
-> supportISO;
-> +=C2=A0=C2=A0=C2=A0 NvBool=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0
-> bProtected;
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_CMD_FB_GET_FB_REGION_SURFACE_MEM_TYPE_FLA=
-G
-> blackList;
-> +} NV2080_CTRL_CMD_FB_GET_FB_REGION_FB_REGION_INFO;
-> +
-> +#define NV2080_CTRL_CMD_FB_GET_FB_REGION_INFO_MAX_ENTRIES 16U
-> +
-> +typedef struct NV2080_CTRL_CMD_FB_GET_FB_REGION_INFO_PARAMS {
-> +=C2=A0=C2=A0=C2=A0 NvU32 numFBRegions;
-> +=C2=A0=C2=A0=C2=A0
-> NV_DECLARE_ALIGNED(NV2080_CTRL_CMD_FB_GET_FB_REGION_FB_REGION_INFO
-> fbRegion[NV2080_CTRL_CMD_FB_GET_FB_REGION_INFO_MAX_ENTRIES], 8);
-> +} NV2080_CTRL_CMD_FB_GET_FB_REGION_INFO_PARAMS;
-> +
-> +#endif
-> diff --git
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl2080/ctrl2080gpu.h
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl2080/ctrl2080gpu.h
-> index a9a287469305..49a1390743c4 100644
-> ---
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl2080/ctrl2080gpu.h
-> +++
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl2080/ctrl2080gpu.h
-> @@ -26,8 +26,33 @@
-> =C2=A0 * DEALINGS IN THE SOFTWARE.
-> =C2=A0 */
-> =C2=A0
-> +#define NV2080_GPU_MAX_NAME_STRING_LENGTH=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
-> (0x0000040U)
-> +
-> =C2=A0#define NV2080_CTRL_GPU_SET_POWER_STATE_GPU_LEVEL_0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
-> (0x00000000U)
-> =C2=A0
-> =C2=A0#define NV2080_CTRL_GPU_SET_POWER_STATE_GPU_LEVEL_3=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
-> (0x00000003U)
-> =C2=A0
-> +typedef struct NV2080_CTRL_GPU_GET_FERMI_GPC_INFO_PARAMS {
-> +=C2=A0=C2=A0=C2=A0 NvU32 gpcMask;
-> +} NV2080_CTRL_GPU_GET_FERMI_GPC_INFO_PARAMS;
-> +
-> +typedef struct NV2080_CTRL_GPU_GET_FERMI_TPC_INFO_PARAMS {
-> +=C2=A0=C2=A0=C2=A0 NvU32 gpcId;
-> +=C2=A0=C2=A0=C2=A0 NvU32 tpcMask;
-> +} NV2080_CTRL_GPU_GET_FERMI_TPC_INFO_PARAMS;
-> +
-> +typedef struct NV2080_CTRL_GPU_GET_FERMI_ZCULL_INFO_PARAMS {
-> +=C2=A0=C2=A0=C2=A0 NvU32 gpcId;
-> +=C2=A0=C2=A0=C2=A0 NvU32 zcullMask;
-> +} NV2080_CTRL_GPU_GET_FERMI_ZCULL_INFO_PARAMS;
-> +
-> +#define NV2080_GPU_MAX_GID_LENGTH=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x000000100ULL)
-> +
-> +typedef struct NV2080_CTRL_GPU_GET_GID_INFO_PARAMS {
-> +=C2=A0=C2=A0=C2=A0 NvU32 index;
-> +=C2=A0=C2=A0=C2=A0 NvU32 flags;
-> +=C2=A0=C2=A0=C2=A0 NvU32 length;
-> +=C2=A0=C2=A0=C2=A0 NvU8=C2=A0 data[NV2080_GPU_MAX_GID_LENGTH];
-> +} NV2080_CTRL_GPU_GET_GID_INFO_PARAMS;
-> +
-> =C2=A0#endif
-> diff --git
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl2080/ctrl2080gr.h
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl2080/ctrl2080gr.h
-> new file mode 100644
-> index 000000000000..6f99038d6e16
-> --- /dev/null
-> +++
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/common/sdk/nvidia/in
-> c/ctrl/ctrl2080/ctrl2080gr.h
-> @@ -0,0 +1,41 @@
-> +#ifndef __src_common_sdk_nvidia_inc_ctrl_ctrl2080_ctrl2080gr_h__
-> +#define __src_common_sdk_nvidia_inc_ctrl_ctrl2080_ctrl2080gr_h__
-> +
-> +/* Excerpt of RM headers from
-> https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03=C2=A0*/
-> +
-> +/*
-> + * SPDX-FileCopyrightText: Copyright (c) 2006-2023 NVIDIA
-> CORPORATION & AFFILIATES. All rights reserved.
-> + * SPDX-License-Identifier: MIT
-> + *
-> + * Permission is hereby granted, free of charge, to any person
-> obtaining a
-> + * copy of this software and associated documentation files (the
-> "Software"),
-> + * to deal in the Software without restriction, including without
-> limitation
-> + * the rights to use, copy, modify, merge, publish, distribute,
-> sublicense,
-> + * and/or sell copies of the Software, and to permit persons to whom
-> the
-> + * Software is furnished to do so, subject to the following
-> conditions:
-> + *
-> + * The above copyright notice and this permission notice shall be
-> included in
-> + * all copies or substantial portions of the Software.
-> + *
-> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-> EXPRESS OR
-> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-> MERCHANTABILITY,
-> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
-> SHALL
-> + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
-> OR OTHER
-> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-> ARISING
-> + * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-> OTHER
-> + * DEALINGS IN THE SOFTWARE.
-> + */
-> +
-> +typedef enum NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS {
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS_MAIN=
- =3D 0,
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS_SPIL=
-L =3D 1,
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS_PAGE=
-POOL =3D 2,
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS_BETA=
-CB =3D 3,
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS_RTV =
-=3D 4,
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS_CONT=
-EXT_POOL =3D
-> 5,
-> +=C2=A0=C2=A0=C2=A0
-> NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS_CONTEXT_POOL_CONTROL
-> =3D 6,
-> +=C2=A0=C2=A0=C2=A0
-> NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS_CONTEXT_POOL_CONTROL
-> _CPU =3D 7,
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS_END =
-=3D 8,
-> +} NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS;
-> +
-> +#endif
-> diff --git
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_g
-> pu_nvoc.h
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_g
-> pu_nvoc.h
-> new file mode 100644
-> index 000000000000..7194a8f02909
-> --- /dev/null
-> +++
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_g
-> pu_nvoc.h
-> @@ -0,0 +1,35 @@
-> +#ifndef __src_nvidia_generated_g_gpu_nvoc_h__
-> +#define __src_nvidia_generated_g_gpu_nvoc_h__
-> +
-> +/* Excerpt of RM headers from
-> https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03=C2=A0*/
-> +
-> +/*
-> + * SPDX-FileCopyrightText: Copyright (c) 2004-2023 NVIDIA
-> CORPORATION & AFFILIATES. All rights reserved.
-> + * SPDX-License-Identifier: MIT
-> + *
-> + * Permission is hereby granted, free of charge, to any person
-> obtaining a
-> + * copy of this software and associated documentation files (the
-> "Software"),
-> + * to deal in the Software without restriction, including without
-> limitation
-> + * the rights to use, copy, modify, merge, publish, distribute,
-> sublicense,
-> + * and/or sell copies of the Software, and to permit persons to whom
-> the
-> + * Software is furnished to do so, subject to the following
-> conditions:
-> + *
-> + * The above copyright notice and this permission notice shall be
-> included in
-> + * all copies or substantial portions of the Software.
-> + *
-> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-> EXPRESS OR
-> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-> MERCHANTABILITY,
-> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
-> SHALL
-> + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
-> OR OTHER
-> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-> ARISING
-> + * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-> OTHER
-> + * DEALINGS IN THE SOFTWARE.
-> + */
-> +
-> +typedef enum
-> +{
-> +=C2=A0=C2=A0=C2=A0 COMPUTE_BRANDING_TYPE_NONE,
-> +=C2=A0=C2=A0=C2=A0 COMPUTE_BRANDING_TYPE_TESLA,
-> +} COMPUTE_BRANDING_TYPE;
-> +
-> +#endif
-> diff --git
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_r
-> pc-structures.h
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_r
-> pc-structures.h
-> index ac59ffa4330b..1ae0a97df392 100644
-> ---
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_r
-> pc-structures.h
-> +++
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/generated/g_r
-> pc-structures.h
-> @@ -33,6 +33,17 @@ typedef struct rpc_unloading_guest_driver_v1F_07
-> =C2=A0=C2=A0=C2=A0=C2=A0 NvU32=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 newLevel;
-> =C2=A0} rpc_unloading_guest_driver_v1F_07;
-> =C2=A0
-> +typedef struct rpc_gsp_rm_control_v03_00
-> +{
-> +=C2=A0=C2=A0=C2=A0 NvHandle=C2=A0=C2=A0 hClient;
-> +=C2=A0=C2=A0=C2=A0 NvHandle=C2=A0=C2=A0 hObject;
-> +=C2=A0=C2=A0=C2=A0 NvU32=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cmd;
-> +=C2=A0=C2=A0=C2=A0 NvU32=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 status;
-> +=C2=A0=C2=A0=C2=A0 NvU32=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 paramsSize;
-> +=C2=A0=C2=A0=C2=A0 NvU32=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 flags;
-> +=C2=A0=C2=A0=C2=A0 NvU8=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 params[];
-> +} rpc_gsp_rm_control_v03_00;
-> +
-> =C2=A0typedef struct rpc_run_cpu_sequencer_v17_00
-> =C2=A0{
-> =C2=A0=C2=A0=C2=A0=C2=A0 NvU32=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bufferSizeDW=
-ord;
-> diff --git
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gp
-> u/gpu_engine_type.h
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gp
-> u/gpu_engine_type.h
-> new file mode 100644
-> index 000000000000..90cd9f6c4d9a
-> --- /dev/null
-> +++
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gp
-> u/gpu_engine_type.h
-> @@ -0,0 +1,86 @@
-> +#ifndef __src_nvidia_inc_kernel_gpu_gpu_engine_type_h__
-> +#define __src_nvidia_inc_kernel_gpu_gpu_engine_type_h__
-> +
-> +/* Excerpt of RM headers from
-> https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03=C2=A0*/
-> +
-> +/*
-> + * SPDX-FileCopyrightText: Copyright (c) 2021-2022 NVIDIA
-> CORPORATION & AFFILIATES. All rights reserved.
-> + * SPDX-License-Identifier: MIT
-> + *
-> + * Permission is hereby granted, free of charge, to any person
-> obtaining a
-> + * copy of this software and associated documentation files (the
-> "Software"),
-> + * to deal in the Software without restriction, including without
-> limitation
-> + * the rights to use, copy, modify, merge, publish, distribute,
-> sublicense,
-> + * and/or sell copies of the Software, and to permit persons to whom
-> the
-> + * Software is furnished to do so, subject to the following
-> conditions:
-> + *
-> + * The above copyright notice and this permission notice shall be
-> included in
-> + * all copies or substantial portions of the Software.
-> + *
-> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-> EXPRESS OR
-> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-> MERCHANTABILITY,
-> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
-> SHALL
-> + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
-> OR OTHER
-> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-> ARISING
-> + * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-> OTHER
-> + * DEALINGS IN THE SOFTWARE.
-> + */
-> +
-> +typedef enum
-> +{
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NULL=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000000),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_GR0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000001),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_GR1=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000002),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_GR2=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000003),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_GR3=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000004),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_GR4=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000005),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_GR5=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000006),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_GR6=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000007),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_GR7=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000008),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_COPY0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000009),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_COPY1=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000000a),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_COPY2=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000000b),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_COPY3=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000000c),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_COPY4=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000000d),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_COPY5=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000000e),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_COPY6=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000000f),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_COPY7=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000010),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_COPY8=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000011),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_COPY9=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000012),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVDEC0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 (0x0000001d),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVDEC1=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 (0x0000001e),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVDEC2=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 (0x0000001f),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVDEC3=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 (0x00000020),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVDEC4=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 (0x00000021),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVDEC5=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 (0x00000022),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVDEC6=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 (0x00000023),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVDEC7=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 (0x00000024),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVENC0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 (0x00000025),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVENC1=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 (0x00000026),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVENC2=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 (0x00000027),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_VP=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
-=3D=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000028),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_ME=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
-=3D=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000029),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_PPP=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000002a),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_MPEG=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000002b),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_SW=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
-=3D=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000002c),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_TSEC=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000002d),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_VIC=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000002e),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_MP=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
-=3D=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000002f),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_SEC2=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000030),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_HOST=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000031),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_DPU=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000032),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_PMU=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x00000033),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_FBFLCN=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 (0x00000034),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVJPEG0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 (0x00000035),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVJPEG1=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 (0x00000036),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVJPEG2=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 (0x00000037),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVJPEG3=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 (0x00000038),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVJPEG4=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 (0x00000039),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVJPEG5=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 (0x0000003a),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVJPEG6=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 (0x0000003b),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_NVJPEG7=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 (0x0000003c),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_OFA=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000003d),
-> +=C2=A0=C2=A0=C2=A0 RM_ENGINE_TYPE_LAST=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (0x0000003e),
-> +} RM_ENGINE_TYPE;
-> +
-> +#endif
-> diff --git
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gp
-> u/gsp/gsp_static_config.h
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gp
-> u/gsp/gsp_static_config.h
-> index ba8cd897ebcc..3f99cab47a13 100644
-> ---
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gp
-> u/gsp/gsp_static_config.h
-> +++
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gp
-> u/gsp/gsp_static_config.h
-> @@ -1,7 +1,16 @@
-> =C2=A0#ifndef __src_nvidia_inc_kernel_gpu_gsp_gsp_static_config_h__
-> =C2=A0#define __src_nvidia_inc_kernel_gpu_gsp_gsp_static_config_h__
-> +#include
-> <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0080/ctrl0080gpu.h>
-> +#include
-> <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl0080/ctrl0080gr.h>
-> +#include
-> <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080bios.h>
-> +#include
-> <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080fb.h>
-> +#include
-> <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080gpu.h>
-> +#include
-> <nvrm/535.54.03/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080gr.h>
-> =C2=A0#include <nvrm/535.54.03/nvidia/generated/g_chipset_nvoc.h>
-> +#include <nvrm/535.54.03/nvidia/generated/g_gpu_nvoc.h>
-> =C2=A0#include <nvrm/535.54.03/nvidia/inc/kernel/gpu/gpu_acpi_data.h>
-> +#include <nvrm/535.54.03/nvidia/inc/kernel/gpu/nvbitmask.h>
-> +#include <nvrm/535.54.03/nvidia/kernel/inc/vgpu/rpc_headers.h>
-> =C2=A0
-> =C2=A0/* Excerpt of RM headers from
-> https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03=C2=A0*/
-> =C2=A0
-> @@ -40,6 +49,97 @@ typedef struct GSP_VF_INFO
-> =C2=A0=C2=A0=C2=A0=C2=A0 NvBool b64bitBar2;
-> =C2=A0} GSP_VF_INFO;
-> =C2=A0
-> +typedef struct GspSMInfo_t
-> +{
-> +=C2=A0=C2=A0=C2=A0 NvU32 version;
-> +=C2=A0=C2=A0=C2=A0 NvU32 regBankCount;
-> +=C2=A0=C2=A0=C2=A0 NvU32 regBankRegCount;
-> +=C2=A0=C2=A0=C2=A0 NvU32 maxWarpsPerSM;
-> +=C2=A0=C2=A0=C2=A0 NvU32 maxThreadsPerWarp;
-> +=C2=A0=C2=A0=C2=A0 NvU32 geomGsObufEntries;
-> +=C2=A0=C2=A0=C2=A0 NvU32 geomXbufEntries;
-> +=C2=A0=C2=A0=C2=A0 NvU32 maxSPPerSM;
-> +=C2=A0=C2=A0=C2=A0 NvU32 rtCoreCount;
-> +} GspSMInfo;
-> +
-> +typedef struct GspStaticConfigInfo_t
-> +{
-> +=C2=A0=C2=A0=C2=A0 NvU8 grCapsBits[NV0080_CTRL_GR_CAPS_TBL_SIZE];
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_GPU_GET_GID_INFO_PARAMS gidInfo;
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_GPU_GET_FERMI_GPC_INFO_PARAMS gpcInfo;
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_GPU_GET_FERMI_TPC_INFO_PARAMS
-> tpcInfo[MAX_GPC_COUNT];
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_GPU_GET_FERMI_ZCULL_INFO_PARAMS
-> zcullInfo[MAX_GPC_COUNT];
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_BIOS_GET_SKU_INFO_PARAMS SKUInfo;
-> +=C2=A0=C2=A0=C2=A0 NV2080_CTRL_CMD_FB_GET_FB_REGION_INFO_PARAMS fbRegion=
-InfoParams;
-> +=C2=A0=C2=A0=C2=A0 COMPUTE_BRANDING_TYPE computeBranding;
-> +
-> +=C2=A0=C2=A0=C2=A0 NV0080_CTRL_GPU_GET_SRIOV_CAPS_PARAMS sriovCaps;
-> +=C2=A0=C2=A0=C2=A0 NvU32 sriovMaxGfid;
-> +
-> +=C2=A0=C2=A0=C2=A0 NvU32 engineCaps[NVGPU_ENGINE_CAPS_MASK_ARRAY_MAX];
-> +
-> +=C2=A0=C2=A0=C2=A0 GspSMInfo SM_info;
-> +
-> +=C2=A0=C2=A0=C2=A0 NvBool poisonFuseEnabled;
-> +
-> +=C2=A0=C2=A0=C2=A0 NvU64 fb_length;
-> +=C2=A0=C2=A0=C2=A0 NvU32 fbio_mask;
-> +=C2=A0=C2=A0=C2=A0 NvU32 fb_bus_width;
-> +=C2=A0=C2=A0=C2=A0 NvU32 fb_ram_type;
-> +=C2=A0=C2=A0=C2=A0 NvU32 fbp_mask;
-> +=C2=A0=C2=A0=C2=A0 NvU32 l2_cache_size;
-> +
-> +=C2=A0=C2=A0=C2=A0 NvU32
-> gfxpBufferSize[NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS_CONTE
-> XT_POOL];
-> +=C2=A0=C2=A0=C2=A0 NvU32
-> gfxpBufferAlignment[NV2080_CTRL_CMD_GR_CTXSW_PREEMPTION_BIND_BUFFERS_
-> CONTEXT_POOL];
-> +
-> +=C2=A0=C2=A0=C2=A0 NvU8 gpuNameString[NV2080_GPU_MAX_NAME_STRING_LENGTH]=
-;
-> +=C2=A0=C2=A0=C2=A0 NvU8 gpuShortNameString[NV2080_GPU_MAX_NAME_STRING_LE=
-NGTH];
-> +=C2=A0=C2=A0=C2=A0 NvU16 gpuNameString_Unicode[NV2080_GPU_MAX_NAME_STRIN=
-G_LENGTH];
-> +=C2=A0=C2=A0=C2=A0 NvBool bGpuInternalSku;
-> +=C2=A0=C2=A0=C2=A0 NvBool bIsQuadroGeneric;
-> +=C2=A0=C2=A0=C2=A0 NvBool bIsQuadroAd;
-> +=C2=A0=C2=A0=C2=A0 NvBool bIsNvidiaNvs;
-> +=C2=A0=C2=A0=C2=A0 NvBool bIsVgx;
-> +=C2=A0=C2=A0=C2=A0 NvBool bGeforceSmb;
-> +=C2=A0=C2=A0=C2=A0 NvBool bIsTitan;
-> +=C2=A0=C2=A0=C2=A0 NvBool bIsTesla;
-> +=C2=A0=C2=A0=C2=A0 NvBool bIsMobile;
-> +=C2=A0=C2=A0=C2=A0 NvBool bIsGc6Rtd3Allowed;
-> +=C2=A0=C2=A0=C2=A0 NvBool bIsGcOffRtd3Allowed;
-> +=C2=A0=C2=A0=C2=A0 NvBool bIsGcoffLegacyAllowed;
-> +
-> +=C2=A0=C2=A0=C2=A0 NvU64 bar1PdeBase;
-> +=C2=A0=C2=A0=C2=A0 NvU64 bar2PdeBase;
-> +
-> +=C2=A0=C2=A0=C2=A0 NvBool bVbiosValid;
-> +=C2=A0=C2=A0=C2=A0 NvU32 vbiosSubVendor;
-> +=C2=A0=C2=A0=C2=A0 NvU32 vbiosSubDevice;
-> +
-> +=C2=A0=C2=A0=C2=A0 NvBool bPageRetirementSupported;
-> +
-> +=C2=A0=C2=A0=C2=A0 NvBool bSplitVasBetweenServerClientRm;
-> +
-> +=C2=A0=C2=A0=C2=A0 NvBool bClRootportNeedsNosnoopWAR;
-> +
-> +=C2=A0=C2=A0=C2=A0 VIRTUAL_DISPLAY_GET_NUM_HEADS_PARAMS displaylessMaxHe=
-ads;
-> +=C2=A0=C2=A0=C2=A0 VIRTUAL_DISPLAY_GET_MAX_RESOLUTION_PARAMS
-> displaylessMaxResolution;
-> +=C2=A0=C2=A0=C2=A0 NvU64 displaylessMaxPixels;
-> +
-> +=C2=A0=C2=A0=C2=A0 // Client handle for internal RMAPI control.
-> +=C2=A0=C2=A0=C2=A0 NvHandle hInternalClient;
-> +
-> +=C2=A0=C2=A0=C2=A0 // Device handle for internal RMAPI control.
-> +=C2=A0=C2=A0=C2=A0 NvHandle hInternalDevice;
-> +
-> +=C2=A0=C2=A0=C2=A0 // Subdevice handle for internal RMAPI control.
-> +=C2=A0=C2=A0=C2=A0 NvHandle hInternalSubdevice;
-> +
-> +=C2=A0=C2=A0=C2=A0 NvBool bSelfHostedMode;
-> +=C2=A0=C2=A0=C2=A0 NvBool bAtsSupported;
-> +
-> +=C2=A0=C2=A0=C2=A0 NvBool bIsGpuUefi;
-> +} GspStaticConfigInfo;
-> +
-> =C2=A0typedef struct GspSystemInfo
-> =C2=A0{
-> =C2=A0=C2=A0=C2=A0=C2=A0 NvU64 gpuPhysAddr;
-> diff --git
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gp
-> u/nvbitmask.h
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gp
-> u/nvbitmask.h
-> new file mode 100644
-> index 000000000000..16168294e524
-> --- /dev/null
-> +++
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/inc/kernel/gp
-> u/nvbitmask.h
-> @@ -0,0 +1,33 @@
-> +#ifndef __src_nvidia_inc_kernel_gpu_nvbitmask_h__
-> +#define __src_nvidia_inc_kernel_gpu_nvbitmask_h__
-> +#include <nvrm/535.54.03/nvidia/inc/kernel/gpu/gpu_engine_type.h>
-> +
-> +/* Excerpt of RM headers from
-> https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03=C2=A0*/
-> +
-> +/*
-> + * SPDX-FileCopyrightText: Copyright (c) 2021-2022 NVIDIA
-> CORPORATION & AFFILIATES. All rights reserved.
-> + * SPDX-License-Identifier: MIT
-> + *
-> + * Permission is hereby granted, free of charge, to any person
-> obtaining a
-> + * copy of this software and associated documentation files (the
-> "Software"),
-> + * to deal in the Software without restriction, including without
-> limitation
-> + * the rights to use, copy, modify, merge, publish, distribute,
-> sublicense,
-> + * and/or sell copies of the Software, and to permit persons to whom
-> the
-> + * Software is furnished to do so, subject to the following
-> conditions:
-> + *
-> + * The above copyright notice and this permission notice shall be
-> included in
-> + * all copies or substantial portions of the Software.
-> + *
-> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-> EXPRESS OR
-> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-> MERCHANTABILITY,
-> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
-> SHALL
-> + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
-> OR OTHER
-> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-> ARISING
-> + * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-> OTHER
-> + * DEALINGS IN THE SOFTWARE.
-> + */
-> +
-> +#define NVGPU_ENGINE_CAPS_MASK_BITS=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 32
-> +#define NVGPU_ENGINE_CAPS_MASK_ARRAY_MAX=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
-> ((RM_ENGINE_TYPE_LAST-1)/NVGPU_ENGINE_CAPS_MASK_BITS + 1)
-> +
-> +#endif
-> diff --git
-> a/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/kernel/inc/vg
-> pu/rpc_headers.h
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/kernel/inc/vg
-> pu/rpc_headers.h
-> new file mode 100644
-> index 000000000000..b48b26049b9d
-> --- /dev/null
-> +++
-> b/drivers/gpu/drm/nouveau/include/nvrm/535.54.03/nvidia/kernel/inc/vg
-> pu/rpc_headers.h
-> @@ -0,0 +1,44 @@
-> +#ifndef __src_nvidia_kernel_inc_vgpu_rpc_headers_h__
-> +#define __src_nvidia_kernel_inc_vgpu_rpc_headers_h__
-> +
-> +/* Excerpt of RM headers from
-> https://github.com/NVIDIA/open-gpu-kernel-modules/tree/535.54.03=C2=A0*/
-> +
-> +/*
-> + * SPDX-FileCopyrightText: Copyright (c) 2017-2022 NVIDIA
-> CORPORATION & AFFILIATES. All rights reserved.
-> + * SPDX-License-Identifier: MIT
-> + *
-> + * Permission is hereby granted, free of charge, to any person
-> obtaining a
-> + * copy of this software and associated documentation files (the
-> "Software"),
-> + * to deal in the Software without restriction, including without
-> limitation
-> + * the rights to use, copy, modify, merge, publish, distribute,
-> sublicense,
-> + * and/or sell copies of the Software, and to permit persons to whom
-> the
-> + * Software is furnished to do so, subject to the following
-> conditions:
-> + *
-> + * The above copyright notice and this permission notice shall be
-> included in
-> + * all copies or substantial portions of the Software.
-> + *
-> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-> EXPRESS OR
-> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-> MERCHANTABILITY,
-> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
-> SHALL
-> + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
-> OR OTHER
-> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-> ARISING
-> + * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-> OTHER
-> + * DEALINGS IN THE SOFTWARE.
-> + */
-> +
-> +#define MAX_GPC_COUNT=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 32
-> +
-> +typedef struct VIRTUAL_DISPLAY_GET_MAX_RESOLUTION_PARAMS=20
-> +{
-> +=C2=A0=C2=A0=C2=A0 NvU32 headIndex;
-> +=C2=A0=C2=A0=C2=A0 NvU32 maxHResolution;
-> +=C2=A0=C2=A0=C2=A0 NvU32 maxVResolution;
-> +} VIRTUAL_DISPLAY_GET_MAX_RESOLUTION_PARAMS;
-> +
-> +typedef struct VIRTUAL_DISPLAY_GET_NUM_HEADS_PARAMS=20
-> +{
-> +=C2=A0=C2=A0=C2=A0 NvU32 numHeads;
-> +=C2=A0=C2=A0=C2=A0 NvU32 maxNumHeads;
-> +} VIRTUAL_DISPLAY_GET_NUM_HEADS_PARAMS;
-> +
-> +#endif
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> index 4aaceb65217d..0fafb8f1e88d 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> @@ -354,6 +354,61 @@ r535_gsp_rpc_send(struct nvkm_gsp *gsp, void
-> *argv, bool wait, u32 repc)
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return repv;
-> =C2=A0}
-> =C2=A0
-> +static void
-> +r535_gsp_rpc_rm_ctrl_done(struct nvkm_gsp_object *object, void
-> *repv)
-> +{
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0rpc_gsp_rm_control_v03_00 *rpc=
- =3D container_of(repv,
-> typeof(*rpc), params);
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0nvkm_gsp_rpc_done(object->clie=
-nt->gsp, rpc);
-> +}
-> +
-> +static void *
-> +r535_gsp_rpc_rm_ctrl_push(struct nvkm_gsp_object *object, void
-> *argv, u32 repc)
-> +{
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0rpc_gsp_rm_control_v03_00 *rpc=
- =3D container_of(argv,
-> typeof(*rpc), params);
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct nvkm_gsp *gsp =3D objec=
-t->client->gsp;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0void *ret;
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0rpc =3D nvkm_gsp_rpc_push(gsp,=
- rpc, true, repc);
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (IS_ERR_OR_NULL(rpc))
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0return rpc;
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (rpc->status) {
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0nvkm_error(&gsp->subdev, "cli:0x%08x obj:0x%08x ctrl
-> cmd:0x%08x failed: 0x%08x\n",
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 object->client->object.handle, object-
-> >handle, rpc->cmd, rpc->status);
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0ret =3D ERR_PTR(-EINVAL);
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0} else {
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0ret =3D repc ? rpc->params : NULL;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (IS_ERR_OR_NULL(ret))
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0nvkm_gsp_rpc_done(gsp, rpc);
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return ret;
-> +}
-> +
-> +static void *
-> +r535_gsp_rpc_rm_ctrl_get(struct nvkm_gsp_object *object, u32 cmd,
-> u32 argc)
-> +{
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct nvkm_gsp_client *client=
- =3D object->client;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct nvkm_gsp *gsp =3D clien=
-t->gsp;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0rpc_gsp_rm_control_v03_00 *rpc=
-;
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0nvkm_debug(&gsp->subdev, "cli:=
-0x%08x obj:0x%08x ctrl
-> cmd:0x%08x argc:%d\n",
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 client->object.handle, object->handle, cmd, =
-argc);
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0rpc =3D nvkm_gsp_rpc_get(gsp,
-> NV_VGPU_MSG_FUNCTION_GSP_RM_CONTROL, sizeof(*rpc) + argc);
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (IS_ERR(rpc))
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0return rpc;
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0rpc->hClient=C2=A0=C2=A0=C2=A0=
- =3D client->object.handle;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0rpc->hObject=C2=A0=C2=A0=C2=A0=
- =3D object->handle;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0rpc->cmd=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=3D cmd;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0rpc->status=C2=A0=C2=A0=C2=A0=
-=C2=A0 =3D 0;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0rpc->paramsSize =3D argc;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return rpc->params;
-> +}
-> +
-> =C2=A0static void
-> =C2=A0r535_gsp_rpc_done(struct nvkm_gsp *gsp, void *repv)
-> =C2=A0{
-> @@ -450,8 +505,50 @@ r535_gsp_rm =3D {
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0.rpc_get =3D r535_gsp_rpc=
-_get,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0.rpc_push =3D r535_gsp_rp=
-c_push,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0.rpc_done =3D r535_gsp_rp=
-c_done,
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0.rm_ctrl_get =3D r535_gsp_rpc_=
-rm_ctrl_get,
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0.rm_ctrl_push =3D r535_gsp_rpc=
-_rm_ctrl_push,
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0.rm_ctrl_done =3D r535_gsp_rpc=
-_rm_ctrl_done,
-> =C2=A0};
-> =C2=A0
-> +static int
-> +r535_gsp_rpc_get_gsp_static_info(struct nvkm_gsp *gsp)
-> +{
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0GspStaticConfigInfo *rpc;
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0rpc =3D nvkm_gsp_rpc_rd(gsp,
-> NV_VGPU_MSG_FUNCTION_GET_GSP_STATIC_INFO, sizeof(*rpc));
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (IS_ERR(rpc))
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0return PTR_ERR(rpc);
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gsp->internal.client.object.cl=
-ient =3D &gsp->internal.client;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gsp->internal.client.object.pa=
-rent =3D NULL;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gsp->internal.client.object.ha=
-ndle =3D rpc->hInternalClient;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gsp->internal.client.gsp =3D g=
-sp;
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gsp->internal.device.object.cl=
-ient =3D &gsp->internal.client;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gsp->internal.device.object.pa=
-rent =3D &gsp-
-> >internal.client.object;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gsp->internal.device.object.ha=
-ndle =3D rpc->hInternalDevice;
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gsp->internal.device.subdevice=
-.client =3D &gsp-
-> >internal.client;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gsp->internal.device.subdevice=
-.parent =3D &gsp-
-> >internal.device.object;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gsp->internal.device.subdevice=
-.handle =3D rpc-
-> >hInternalSubdevice;
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0nvkm_gsp_rpc_done(gsp, rpc);
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return 0;
-> +}
-> +
-> +static int
-> +r535_gsp_postinit(struct nvkm_gsp *gsp)
-> +{
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret;
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D r535_gsp_rpc_get_gsp_s=
-tatic_info(gsp);
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (WARN_ON(ret))
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0return ret;
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return ret;
-> +}
-> +
-> =C2=A0static int
-> =C2=A0r535_gsp_rpc_unloading_guest_driver(struct nvkm_gsp *gsp, bool
-> suspend)
-> =C2=A0{
-> @@ -1302,8 +1399,12 @@ r535_gsp_init(struct nvkm_gsp *gsp)
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0nvkm_gsp_mem_dtor(gsp, &gsp->sr.meta);
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0nvkm_gsp_radix3_dtor(gsp, &gsp->sr.radix3);
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0nvkm_gsp_sg_free(gsp->subdev.device, &gsp->sr.sgt);
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0return ret;
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
-> =C2=A0
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret =3D=3D 0)
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0ret =3D r535_gsp_postinit(gsp);
-> +
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return ret;
-> =C2=A0}
-> =C2=A0
+T24gVHVlLCAyMDIzLTA5LTE5IGF0IDA2OjIxICsxMDAwLCBCZW4gU2tlZ2dzIHdyb3RlOgo+IEZy
+b206IEJlbiBTa2VnZ3MgPGJza2VnZ3NAcmVkaGF0LmNvbT4KPiAKPiBBZGRzIHN1cHBvcnQgZm9y
+IGFsbG9jYXRpbmcgVklERU9fRU5DT0RFUiBjbGFzc2VzIGZyb20gUk0uCj4gCj4gU2lnbmVkLW9m
+Zi1ieTogQmVuIFNrZWdncyA8YnNrZWdnc0ByZWRoYXQuY29tPgo+IC0tLQo+IMKgZHJpdmVycy9n
+cHUvZHJtL25vdXZlYXUvaW5jbHVkZS9udmlmL2NsYXNzLmjCoCB8wqDCoCA0ICsKPiDCoC4uLi9k
+cm0vbm91dmVhdS9pbmNsdWRlL252a20vZW5naW5lL252ZW5jLmjCoMKgIHzCoMKgIDIgKwo+IMKg
+Li4uLzUzNS41NC4wMy9jb21tb24vc2RrL252aWRpYS9pbmMvbnZvcy5owqDCoMKgIHzCoMKgIDcg
+KysKPiDCoC4uLi9udmlkaWEvaW5jL2tlcm5lbC9ncHUvaW50ci9lbmdpbmVfaWR4LmjCoMKgIHzC
+oMKgIDQgKwo+IMKgLi4uL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kZXZpY2UvYmFzZS5j
+IHzCoCAxMCArKwo+IMKgLi4uL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9maWZvL3I1MzUu
+Y8KgwqAgfMKgwqAgMSArCj4gwqAuLi4vZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL252ZW5j
+L0tidWlsZMKgIHzCoMKgIDQgKwo+IMKgLi4uL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9u
+dmVuYy9hZDEwMi5jIHzCoCA0NCArKysrKysrCj4gwqAuLi4vZ3B1L2RybS9ub3V2ZWF1L252a20v
+ZW5naW5lL252ZW5jL2dhMTAyLmMgfMKgIDQ0ICsrKysrKysKPiDCoC4uLi9ncHUvZHJtL25vdXZl
+YXUvbnZrbS9lbmdpbmUvbnZlbmMvcHJpdi5owqAgfMKgwqAgMyArCj4gwqAuLi4vZ3B1L2RybS9u
+b3V2ZWF1L252a20vZW5naW5lL252ZW5jL3I1MzUuY8KgIHwgMTEwCj4gKysrKysrKysrKysrKysr
+KysrCj4gwqAuLi4vZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL252ZW5jL3R1MTAyLmMgfMKg
+IDEyICstCj4gwqAuLi4vZ3B1L2RybS9ub3V2ZWF1L252a20vc3ViZGV2L2dzcC9yNTM1LmPCoMKg
+wqAgfMKgwqAgNCArCj4gwqAxMyBmaWxlcyBjaGFuZ2VkLCAyNDggaW5zZXJ0aW9ucygrKSwgMSBk
+ZWxldGlvbigtKQo+IMKgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
+L252a20vZW5naW5lL252ZW5jL2FkMTAyLmMKPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJz
+L2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9udmVuYy9nYTEwMi5jCj4gwqBjcmVhdGUgbW9k
+ZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvbnZlbmMvcjUzNS5j
+Cj4gCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2luY2x1ZGUvbnZpZi9j
+bGFzcy5oCj4gYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9pbmNsdWRlL252aWYvY2xhc3MuaAo+
+IGluZGV4IDE3YTg4Njc2NDhiOS4uODY2NDhjNWQwZGJhIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMv
+Z3B1L2RybS9ub3V2ZWF1L2luY2x1ZGUvbnZpZi9jbGFzcy5oCj4gKysrIGIvZHJpdmVycy9ncHUv
+ZHJtL25vdXZlYXUvaW5jbHVkZS9udmlmL2NsYXNzLmgKPiBAQCAtMjMxLDYgKzIzMSwxMCBAQAo+
+IMKgI2RlZmluZSBBTVBFUkVfRE1BX0NPUFlfQcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+Cj4gMHgwMDAwYzZiNQo+IMKgI2RlZmluZSBBTVBFUkVfRE1BX0NPUFlfQsKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgCj4gMHgwMDAwYzdiNQo+IMKgCj4gKyNkZWZpbmUgTlZDNEI3X1ZJREVP
+X0VOQ09ERVLCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoAo+IDB4MDAwMGM0YjcKPiArI2RlZmluZSBO
+VkM3QjdfVklERU9fRU5DT0RFUsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgCj4gMHgwMDAwYzdiNwo+
+ICsjZGVmaW5lIE5WQzlCN19WSURFT19FTkNPREVSwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAKPiAw
+eDAwMDBjOWI3Cj4gKwo+IMKgI2RlZmluZSBGRVJNSV9ERUNPTVBSRVNTwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoAo+IDB4MDAwMDkwYjgKPiDCoAo+IMKgI2RlZmluZSBOVjUwX0NPTVBV
+VEXCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAKPiAweDAwMDA1MGMwCj4g
+ZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2luY2x1ZGUvbnZrbS9lbmdpbmUv
+bnZlbmMuaAo+IGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvaW5jbHVkZS9udmttL2VuZ2luZS9u
+dmVuYy5oCj4gaW5kZXggMWY2ZWVmMTNmODcyLi4wMThjNThmYzMyYmEgMTAwNjQ0Cj4gLS0tIGEv
+ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvaW5jbHVkZS9udmttL2VuZ2luZS9udmVuYy5oCj4gKysr
+IGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvaW5jbHVkZS9udmttL2VuZ2luZS9udmVuYy5oCj4g
+QEAgLTEzLDQgKzEzLDYgQEAgc3RydWN0IG52a21fbnZlbmMgewo+IMKgCj4gwqBpbnQgZ20xMDdf
+bnZlbmNfbmV3KHN0cnVjdCBudmttX2RldmljZSAqLCBlbnVtIG52a21fc3ViZGV2X3R5cGUsIGlu
+dAo+IGluc3QsIHN0cnVjdCBudmttX252ZW5jICoqKTsKPiDCoGludCB0dTEwMl9udmVuY19uZXco
+c3RydWN0IG52a21fZGV2aWNlICosIGVudW0gbnZrbV9zdWJkZXZfdHlwZSwgaW50Cj4gaW5zdCwg
+c3RydWN0IG52a21fbnZlbmMgKiopOwo+ICtpbnQgZ2ExMDJfbnZlbmNfbmV3KHN0cnVjdCBudmtt
+X2RldmljZSAqLCBlbnVtIG52a21fc3ViZGV2X3R5cGUsIGludAo+IGluc3QsIHN0cnVjdCBudmtt
+X252ZW5jICoqKTsKPiAraW50IGFkMTAyX252ZW5jX25ldyhzdHJ1Y3QgbnZrbV9kZXZpY2UgKiwg
+ZW51bSBudmttX3N1YmRldl90eXBlLCBpbnQKPiBpbnN0LCBzdHJ1Y3QgbnZrbV9udmVuYyAqKik7
+Cj4gwqAjZW5kaWYKPiBkaWZmIC0tZ2l0Cj4gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9pbmNs
+dWRlL252cm0vNTM1LjU0LjAzL2NvbW1vbi9zZGsvbnZpZGlhL2luCj4gYy9udm9zLmgKPiBiL2Ry
+aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2luY2x1ZGUvbnZybS81MzUuNTQuMDMvY29tbW9uL3Nkay9u
+dmlkaWEvaW4KPiBjL252b3MuaAo+IGluZGV4IDVjMWNhZDliYzVkYi4uNjFiOTgxMDlhMWM4IDEw
+MDY0NAo+IC0tLQo+IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvaW5jbHVkZS9udnJtLzUzNS41
+NC4wMy9jb21tb24vc2RrL252aWRpYS9pbgo+IGMvbnZvcy5oCj4gKysrCj4gYi9kcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9pbmNsdWRlL252cm0vNTM1LjU0LjAzL2NvbW1vbi9zZGsvbnZpZGlhL2lu
+Cj4gYy9udm9zLmgKPiBAQCAtMTEyLDYgKzExMiwxMyBAQCB0eXBlZGVmIHN0cnVjdAo+IMKgwqDC
+oMKgIE52VTMyIGVuZ2luZUluc3RhbmNlO8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgLy8g
+U2VsZWN0IE5WREVDMCBvciBOVkRFQzEKPiBvciBOVkRFQzIKPiDCoH0gTlZfQlNQX0FMTE9DQVRJ
+T05fUEFSQU1FVEVSUzsKPiDCoAo+ICt0eXBlZGVmIHN0cnVjdAo+ICt7Cj4gK8KgwqDCoCBOdlUz
+MiBzaXplOwo+ICvCoMKgwqAgTnZVMzIgcHJvaGliaXRNdWx0aXBsZUluc3RhbmNlczvCoCAvLyBQ
+cm9oaWJpdCBtdWx0aXBsZQo+IGFsbG9jYXRpb25zIG9mIE1TRU5DPwo+ICvCoMKgwqAgTnZVMzIg
+ZW5naW5lSW5zdGFuY2U7wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIC8vIFNlbGVjdCBNU0VOQy9O
+VkVOQzAgb3IKPiBOVkVOQzEgb3IgTlZFTkMyCj4gK30gTlZfTVNFTkNfQUxMT0NBVElPTl9QQVJB
+TUVURVJTOwo+ICsKPiDCoHR5cGVkZWYgc3RydWN0Cj4gwqB7Cj4gwqDCoMKgwqAgTnZVMzLCoMKg
+IGluZGV4Owo+IGRpZmYgLS1naXQKPiBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2luY2x1ZGUv
+bnZybS81MzUuNTQuMDMvbnZpZGlhL2luYy9rZXJuZWwvZ3AKPiB1L2ludHIvZW5naW5lX2lkeC5o
+Cj4gYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9pbmNsdWRlL252cm0vNTM1LjU0LjAzL252aWRp
+YS9pbmMva2VybmVsL2dwCj4gdS9pbnRyL2VuZ2luZV9pZHguaAo+IGluZGV4IGI1Y2M3N2FiMDVh
+My4uNWVkMjkyMDAwMDM2IDEwMDY0NAo+IC0tLQo+IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
+aW5jbHVkZS9udnJtLzUzNS41NC4wMy9udmlkaWEvaW5jL2tlcm5lbC9ncAo+IHUvaW50ci9lbmdp
+bmVfaWR4LmgKPiArKysKPiBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2luY2x1ZGUvbnZybS81
+MzUuNTQuMDMvbnZpZGlhL2luYy9rZXJuZWwvZ3AKPiB1L2ludHIvZW5naW5lX2lkeC5oCj4gQEAg
+LTMyLDYgKzMyLDEwIEBACj4gwqAKPiDCoCNkZWZpbmUgTUNfRU5HSU5FX0lEWF9DRTnCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDI0Cj4gwqAKPiAr
+I2RlZmluZSBNQ19FTkdJTkVfSURYX01TRU5DwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIDM4Cj4gKwo+ICsjZGVmaW5lIE1DX0VOR0lORV9JRFhfTVNFTkMy
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA0MAo+ICsKPiDC
+oCNkZWZpbmUgTUNfRU5HSU5FX0lEWF9HU1DCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIDQ5Cj4gwqAKPiDCoCNkZWZpbmUgTUNfRU5HSU5FX0lEWF9C
+U1DCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDY0
+Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2Rldmlj
+ZS9iYXNlLmMKPiBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2RldmljZS9i
+YXNlLmMKPiBpbmRleCBjYzU0Y2IzMzY1ZDAuLmFmMDcyZWJjYzhmYSAxMDA2NDQKPiAtLS0gYS9k
+cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kZXZpY2UvYmFzZS5jCj4gKysrIGIv
+ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvZGV2aWNlL2Jhc2UuYwo+IEBAIC0y
+NjIyLDYgKzI2MjIsNyBAQCBudjE3Ml9jaGlwc2V0ID0gewo+IMKgwqDCoMKgwqDCoMKgwqAuZmlm
+b8KgwqDCoMKgID0geyAweDAwMDAwMDAxLCBnYTEwMl9maWZvX25ldyB9LAo+IMKgwqDCoMKgwqDC
+oMKgwqAuZ3LCoMKgwqDCoMKgwqAgPSB7IDB4MDAwMDAwMDEsIGdhMTAyX2dyX25ldyB9LAo+IMKg
+wqDCoMKgwqDCoMKgwqAubnZkZWPCoMKgwqAgPSB7IDB4MDAwMDAwMDMsIGdhMTAyX252ZGVjX25l
+dyB9LAo+ICvCoMKgwqDCoMKgwqDCoC5udmVuY8KgwqDCoCA9IHsgMHgwMDAwMDAwMSwgZ2ExMDJf
+bnZlbmNfbmV3IH0sCj4gwqDCoMKgwqDCoMKgwqDCoC5zZWMywqDCoMKgwqAgPSB7IDB4MDAwMDAw
+MDEsIGdhMTAyX3NlYzJfbmV3IH0sCj4gwqB9Owo+IMKgCj4gQEAgLTI2NTIsNiArMjY1Myw3IEBA
+IG52MTczX2NoaXBzZXQgPSB7Cj4gwqDCoMKgwqDCoMKgwqDCoC5maWZvwqDCoMKgwqAgPSB7IDB4
+MDAwMDAwMDEsIGdhMTAyX2ZpZm9fbmV3IH0sCj4gwqDCoMKgwqDCoMKgwqDCoC5ncsKgwqDCoMKg
+wqDCoCA9IHsgMHgwMDAwMDAwMSwgZ2ExMDJfZ3JfbmV3IH0sCj4gwqDCoMKgwqDCoMKgwqDCoC5u
+dmRlY8KgwqDCoCA9IHsgMHgwMDAwMDAwMywgZ2ExMDJfbnZkZWNfbmV3IH0sCj4gK8KgwqDCoMKg
+wqDCoMKgLm52ZW5jwqDCoMKgID0geyAweDAwMDAwMDAxLCBnYTEwMl9udmVuY19uZXcgfSwKPiDC
+oMKgwqDCoMKgwqDCoMKgLnNlYzLCoMKgwqDCoCA9IHsgMHgwMDAwMDAwMSwgZ2ExMDJfc2VjMl9u
+ZXcgfSwKPiDCoH07Cj4gwqAKPiBAQCAtMjY4Miw2ICsyNjg0LDcgQEAgbnYxNzRfY2hpcHNldCA9
+IHsKPiDCoMKgwqDCoMKgwqDCoMKgLmZpZm/CoMKgwqDCoCA9IHsgMHgwMDAwMDAwMSwgZ2ExMDJf
+Zmlmb19uZXcgfSwKPiDCoMKgwqDCoMKgwqDCoMKgLmdywqDCoMKgwqDCoMKgID0geyAweDAwMDAw
+MDAxLCBnYTEwMl9ncl9uZXcgfSwKPiDCoMKgwqDCoMKgwqDCoMKgLm52ZGVjwqDCoMKgID0geyAw
+eDAwMDAwMDAzLCBnYTEwMl9udmRlY19uZXcgfSwKPiArwqDCoMKgwqDCoMKgwqAubnZlbmPCoMKg
+wqAgPSB7IDB4MDAwMDAwMDEsIGdhMTAyX252ZW5jX25ldyB9LAo+IMKgwqDCoMKgwqDCoMKgwqAu
+c2VjMsKgwqDCoMKgID0geyAweDAwMDAwMDAxLCBnYTEwMl9zZWMyX25ldyB9LAo+IMKgfTsKPiDC
+oAo+IEBAIC0yNzEyLDYgKzI3MTUsNyBAQCBudjE3Nl9jaGlwc2V0ID0gewo+IMKgwqDCoMKgwqDC
+oMKgwqAuZmlmb8KgwqDCoMKgID0geyAweDAwMDAwMDAxLCBnYTEwMl9maWZvX25ldyB9LAo+IMKg
+wqDCoMKgwqDCoMKgwqAuZ3LCoMKgwqDCoMKgwqAgPSB7IDB4MDAwMDAwMDEsIGdhMTAyX2dyX25l
+dyB9LAo+IMKgwqDCoMKgwqDCoMKgwqAubnZkZWPCoMKgwqAgPSB7IDB4MDAwMDAwMDMsIGdhMTAy
+X252ZGVjX25ldyB9LAo+ICvCoMKgwqDCoMKgwqDCoC5udmVuY8KgwqDCoCA9IHsgMHgwMDAwMDAw
+MSwgZ2ExMDJfbnZlbmNfbmV3IH0sCj4gwqDCoMKgwqDCoMKgwqDCoC5zZWMywqDCoMKgwqAgPSB7
+IDB4MDAwMDAwMDEsIGdhMTAyX3NlYzJfbmV3IH0sCj4gwqB9Owo+IMKgCj4gQEAgLTI3NDIsNiAr
+Mjc0Niw3IEBAIG52MTc3X2NoaXBzZXQgPSB7Cj4gwqDCoMKgwqDCoMKgwqDCoC5maWZvwqDCoMKg
+wqAgPSB7IDB4MDAwMDAwMDEsIGdhMTAyX2ZpZm9fbmV3IH0sCj4gwqDCoMKgwqDCoMKgwqDCoC5n
+csKgwqDCoMKgwqDCoCA9IHsgMHgwMDAwMDAwMSwgZ2ExMDJfZ3JfbmV3IH0sCj4gwqDCoMKgwqDC
+oMKgwqDCoC5udmRlY8KgwqDCoCA9IHsgMHgwMDAwMDAwMywgZ2ExMDJfbnZkZWNfbmV3IH0sCj4g
+K8KgwqDCoMKgwqDCoMKgLm52ZW5jwqDCoMKgID0geyAweDAwMDAwMDAxLCBnYTEwMl9udmVuY19u
+ZXcgfSwKPiDCoMKgwqDCoMKgwqDCoMKgLnNlYzLCoMKgwqDCoCA9IHsgMHgwMDAwMDAwMSwgZ2Ex
+MDJfc2VjMl9uZXcgfSwKPiDCoH07Cj4gwqAKPiBAQCAtMjc2NSw2ICsyNzcwLDcgQEAgbnYxOTJf
+Y2hpcHNldCA9IHsKPiDCoMKgwqDCoMKgwqDCoMKgLmZpZm/CoMKgwqDCoCA9IHsgMHgwMDAwMDAw
+MSwgZ2ExMDJfZmlmb19uZXcgfSwKPiDCoMKgwqDCoMKgwqDCoMKgLmdywqDCoMKgwqDCoMKgID0g
+eyAweDAwMDAwMDAxLCBhZDEwMl9ncl9uZXcgfSwKPiDCoMKgwqDCoMKgwqDCoMKgLm52ZGVjwqDC
+oMKgID0geyAweDAwMDAwMDBmLCBhZDEwMl9udmRlY19uZXcgfSwKPiArwqDCoMKgwqDCoMKgwqAu
+bnZlbmPCoMKgwqAgPSB7IDB4MDAwMDAwMDcsIGFkMTAyX252ZW5jX25ldyB9LAo+IMKgwqDCoMKg
+wqDCoMKgwqAuc2VjMsKgwqDCoMKgID0geyAweDAwMDAwMDAxLCBnYTEwMl9zZWMyX25ldyB9LAo+
+IMKgfTsKPiDCoAo+IEBAIC0yNzg4LDYgKzI3OTQsNyBAQCBudjE5M19jaGlwc2V0ID0gewo+IMKg
+wqDCoMKgwqDCoMKgwqAuZmlmb8KgwqDCoMKgID0geyAweDAwMDAwMDAxLCBnYTEwMl9maWZvX25l
+dyB9LAo+IMKgwqDCoMKgwqDCoMKgwqAuZ3LCoMKgwqDCoMKgwqAgPSB7IDB4MDAwMDAwMDEsIGFk
+MTAyX2dyX25ldyB9LAo+IMKgwqDCoMKgwqDCoMKgwqAubnZkZWPCoMKgwqAgPSB7IDB4MDAwMDAw
+MGYsIGFkMTAyX252ZGVjX25ldyB9LAo+ICvCoMKgwqDCoMKgwqDCoC5udmVuY8KgwqDCoCA9IHsg
+MHgwMDAwMDAwNywgYWQxMDJfbnZlbmNfbmV3IH0sCj4gwqDCoMKgwqDCoMKgwqDCoC5zZWMywqDC
+oMKgwqAgPSB7IDB4MDAwMDAwMDEsIGdhMTAyX3NlYzJfbmV3IH0sCj4gwqB9Owo+IMKgCj4gQEAg
+LTI4MTEsNiArMjgxOCw3IEBAIG52MTk0X2NoaXBzZXQgPSB7Cj4gwqDCoMKgwqDCoMKgwqDCoC5m
+aWZvwqDCoMKgwqAgPSB7IDB4MDAwMDAwMDEsIGdhMTAyX2ZpZm9fbmV3IH0sCj4gwqDCoMKgwqDC
+oMKgwqDCoC5ncsKgwqDCoMKgwqDCoCA9IHsgMHgwMDAwMDAwMSwgYWQxMDJfZ3JfbmV3IH0sCj4g
+wqDCoMKgwqDCoMKgwqDCoC5udmRlY8KgwqDCoCA9IHsgMHgwMDAwMDAwZiwgYWQxMDJfbnZkZWNf
+bmV3IH0sCj4gK8KgwqDCoMKgwqDCoMKgLm52ZW5jwqDCoMKgID0geyAweDAwMDAwMDA3LCBhZDEw
+Ml9udmVuY19uZXcgfSwKPiDCoMKgwqDCoMKgwqDCoMKgLnNlYzLCoMKgwqDCoCA9IHsgMHgwMDAw
+MDAwMSwgZ2ExMDJfc2VjMl9uZXcgfSwKPiDCoH07Cj4gwqAKPiBAQCAtMjgzNCw2ICsyODQyLDcg
+QEAgbnYxOTZfY2hpcHNldCA9IHsKPiDCoMKgwqDCoMKgwqDCoMKgLmZpZm/CoMKgwqDCoCA9IHsg
+MHgwMDAwMDAwMSwgZ2ExMDJfZmlmb19uZXcgfSwKPiDCoMKgwqDCoMKgwqDCoMKgLmdywqDCoMKg
+wqDCoMKgID0geyAweDAwMDAwMDAxLCBhZDEwMl9ncl9uZXcgfSwKPiDCoMKgwqDCoMKgwqDCoMKg
+Lm52ZGVjwqDCoMKgID0geyAweDAwMDAwMDBmLCBhZDEwMl9udmRlY19uZXcgfSwKPiArwqDCoMKg
+wqDCoMKgwqAubnZlbmPCoMKgwqAgPSB7IDB4MDAwMDAwMDcsIGFkMTAyX252ZW5jX25ldyB9LAo+
+IMKgwqDCoMKgwqDCoMKgwqAuc2VjMsKgwqDCoMKgID0geyAweDAwMDAwMDAxLCBnYTEwMl9zZWMy
+X25ldyB9LAo+IMKgfTsKPiDCoAo+IEBAIC0yODU3LDYgKzI4NjYsNyBAQCBudjE5N19jaGlwc2V0
+ID0gewo+IMKgwqDCoMKgwqDCoMKgwqAuZmlmb8KgwqDCoMKgID0geyAweDAwMDAwMDAxLCBnYTEw
+Ml9maWZvX25ldyB9LAo+IMKgwqDCoMKgwqDCoMKgwqAuZ3LCoMKgwqDCoMKgwqAgPSB7IDB4MDAw
+MDAwMDEsIGFkMTAyX2dyX25ldyB9LAo+IMKgwqDCoMKgwqDCoMKgwqAubnZkZWPCoMKgwqAgPSB7
+IDB4MDAwMDAwMGYsIGFkMTAyX252ZGVjX25ldyB9LAo+ICvCoMKgwqDCoMKgwqDCoC5udmVuY8Kg
+wqDCoCA9IHsgMHgwMDAwMDAwNywgYWQxMDJfbnZlbmNfbmV3IH0sCj4gwqDCoMKgwqDCoMKgwqDC
+oC5zZWMywqDCoMKgwqAgPSB7IDB4MDAwMDAwMDEsIGdhMTAyX3NlYzJfbmV3IH0sCj4gwqB9Owo+
+IMKgCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2Zp
+Zm8vcjUzNS5jCj4gYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9maWZvL3I1
+MzUuYwo+IGluZGV4IDU1MzY1OGEyMDAyNS4uNzI1NzEyMDM4NmU4IDEwMDY0NAo+IC0tLSBhL2Ry
+aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2ZpZm8vcjUzNS5jCj4gKysrIGIvZHJp
+dmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvZmlmby9yNTM1LmMKPiBAQCAtNTk2LDYg
+KzU5Niw3IEBAIHI1MzVfZmlmb19ydW5sX2N0b3Ioc3RydWN0IG52a21fZmlmbyAqZmlmbykKPiDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBlbmduID0gbnZr
+bV9ydW5sX2FkZChydW5sLCBudjIwODAsICZyNTM1X2dyLAo+IHR5cGUsIGluc3QpOwo+IMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGJyZWFrOwo+IMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgY2FzZSBOVktNX0VOR0lORV9OVkRFQzoKPiArwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgY2FzZSBOVktNX0VOR0lORV9OVkVOQzoKPiDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBlbmduID0gbnZrbV9y
+dW5sX2FkZChydW5sLCBudjIwODAsCj4gJnI1MzVfZmxjbiwgdHlwZSwgaW5zdCk7Cj4gwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYnJlYWs7Cj4gwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBjYXNlIE5WS01fRU5HSU5FX1NXOgo+IGRpZmYgLS1n
+aXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9udmVuYy9LYnVpbGQKPiBi
+L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL252ZW5jL0tidWlsZAo+IGluZGV4
+IDZkY2IyMGQxZDE1Ni4uMmMxNDk1YjczMGYzIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2Ry
+bS9ub3V2ZWF1L252a20vZW5naW5lL252ZW5jL0tidWlsZAo+ICsrKyBiL2RyaXZlcnMvZ3B1L2Ry
+bS9ub3V2ZWF1L252a20vZW5naW5lL252ZW5jL0tidWlsZAo+IEBAIC0yLDMgKzIsNyBAQAo+IMKg
+bnZrbS15ICs9IG52a20vZW5naW5lL252ZW5jL2Jhc2Uubwo+IMKgbnZrbS15ICs9IG52a20vZW5n
+aW5lL252ZW5jL2dtMTA3Lm8KPiDCoG52a20teSArPSBudmttL2VuZ2luZS9udmVuYy90dTEwMi5v
+Cj4gK252a20teSArPSBudmttL2VuZ2luZS9udmVuYy9nYTEwMi5vCj4gK252a20teSArPSBudmtt
+L2VuZ2luZS9udmVuYy9hZDEwMi5vCj4gKwo+ICtudmttLXkgKz0gbnZrbS9lbmdpbmUvbnZlbmMv
+cjUzNS5vCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5l
+L252ZW5jL2FkMTAyLmMKPiBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL252
+ZW5jL2FkMTAyLmMKPiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+IGluZGV4IDAwMDAwMDAwMDAwMC4u
+MWI0NjE5ZmY5ZThlCj4gLS0tIC9kZXYvbnVsbAo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2
+ZWF1L252a20vZW5naW5lL252ZW5jL2FkMTAyLmMKPiBAQCAtMCwwICsxLDQ0IEBACj4gKy8qCj4g
+KyAqIENvcHlyaWdodCAyMDIzIFJlZCBIYXQgSW5jLgo+ICsgKgo+ICsgKiBQZXJtaXNzaW9uIGlz
+IGhlcmVieSBncmFudGVkLCBmcmVlIG9mIGNoYXJnZSwgdG8gYW55IHBlcnNvbgo+IG9idGFpbmlu
+ZyBhCj4gKyAqIGNvcHkgb2YgdGhpcyBzb2Z0d2FyZSBhbmQgYXNzb2NpYXRlZCBkb2N1bWVudGF0
+aW9uIGZpbGVzICh0aGUKPiAiU29mdHdhcmUiKSwKPiArICogdG8gZGVhbCBpbiB0aGUgU29mdHdh
+cmUgd2l0aG91dCByZXN0cmljdGlvbiwgaW5jbHVkaW5nIHdpdGhvdXQKPiBsaW1pdGF0aW9uCj4g
+KyAqIHRoZSByaWdodHMgdG8gdXNlLCBjb3B5LCBtb2RpZnksIG1lcmdlLCBwdWJsaXNoLCBkaXN0
+cmlidXRlLAo+IHN1YmxpY2Vuc2UsCj4gKyAqIGFuZC9vciBzZWxsIGNvcGllcyBvZiB0aGUgU29m
+dHdhcmUsIGFuZCB0byBwZXJtaXQgcGVyc29ucyB0byB3aG9tCj4gdGhlCj4gKyAqIFNvZnR3YXJl
+IGlzIGZ1cm5pc2hlZCB0byBkbyBzbywgc3ViamVjdCB0byB0aGUgZm9sbG93aW5nCj4gY29uZGl0
+aW9uczoKPiArICoKPiArICogVGhlIGFib3ZlIGNvcHlyaWdodCBub3RpY2UgYW5kIHRoaXMgcGVy
+bWlzc2lvbiBub3RpY2Ugc2hhbGwgYmUKPiBpbmNsdWRlZCBpbgo+ICsgKiBhbGwgY29waWVzIG9y
+IHN1YnN0YW50aWFsIHBvcnRpb25zIG9mIHRoZSBTb2Z0d2FyZS4KPiArICoKPiArICogVEhFIFNP
+RlRXQVJFIElTIFBST1ZJREVEICJBUyBJUyIsIFdJVEhPVVQgV0FSUkFOVFkgT0YgQU5ZIEtJTkQs
+Cj4gRVhQUkVTUyBPUgo+ICsgKiBJTVBMSUVELCBJTkNMVURJTkcgQlVUIE5PVCBMSU1JVEVEIFRP
+IFRIRSBXQVJSQU5USUVTIE9GCj4gTUVSQ0hBTlRBQklMSVRZLAo+ICsgKiBGSVRORVNTIEZPUiBB
+IFBBUlRJQ1VMQVIgUFVSUE9TRSBBTkQgTk9OSU5GUklOR0VNRU5ULsKgIElOIE5PCj4gRVZFTlQg
+U0hBTEwKPiArICogVEhFIENPUFlSSUdIVCBIT0xERVIoUykgT1IgQVVUSE9SKFMpIEJFIExJQUJM
+RSBGT1IgQU5ZIENMQUlNLAo+IERBTUFHRVMgT1IKPiArICogT1RIRVIgTElBQklMSVRZLCBXSEVU
+SEVSIElOIEFOIEFDVElPTiBPRiBDT05UUkFDVCwgVE9SVCBPUgo+IE9USEVSV0lTRSwKPiArICog
+QVJJU0lORyBGUk9NLCBPVVQgT0YgT1IgSU4gQ09OTkVDVElPTiBXSVRIIFRIRSBTT0ZUV0FSRSBP
+UiBUSEUKPiBVU0UgT1IKPiArICogT1RIRVIgREVBTElOR1MgSU4gVEhFIFNPRlRXQVJFLgo+ICsg
+Ki8KPiArI2luY2x1ZGUgInByaXYuaCIKPiArCj4gKyNpbmNsdWRlIDxzdWJkZXYvZ3NwLmg+Cj4g
+Kwo+ICsjaW5jbHVkZSA8bnZpZi9jbGFzcy5oPgo+ICsKPiArc3RhdGljIGNvbnN0IHN0cnVjdCBu
+dmttX2VuZ2luZV9mdW5jCj4gK2FkMTAyX252ZW5jID0gewo+ICvCoMKgwqDCoMKgwqDCoC5zY2xh
+c3MgPSB7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHsgLTEsIC0xLCBOVkM5Qjdf
+VklERU9fRU5DT0RFUiB9LAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB7fQo+ICvC
+oMKgwqDCoMKgwqDCoH0KPiArfTsKPiArCj4gK2ludAo+ICthZDEwMl9udmVuY19uZXcoc3RydWN0
+IG52a21fZGV2aWNlICpkZXZpY2UsIGVudW0gbnZrbV9zdWJkZXZfdHlwZQo+IHR5cGUsIGludCBp
+bnN0LAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBzdHJ1Y3QgbnZrbV9udmVuYyAq
+KnBudmVuYykKPiArewo+ICvCoMKgwqDCoMKgwqDCoGlmIChudmttX2dzcF9ybShkZXZpY2UtPmdz
+cCkpCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJldHVybiByNTM1X252ZW5jX25l
+dygmYWQxMDJfbnZlbmMsIGRldmljZSwgdHlwZSwKPiBpbnN0LCBwbnZlbmMpOwo+ICsKPiArwqDC
+oMKgwqDCoMKgwqByZXR1cm4gLUVOT0RFVjsKPiArfQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9udmVuYy9nYTEwMi5jCj4gYi9kcml2ZXJzL2dwdS9k
+cm0vbm91dmVhdS9udmttL2VuZ2luZS9udmVuYy9nYTEwMi5jCj4gbmV3IGZpbGUgbW9kZSAxMDA2
+NDQKPiBpbmRleCAwMDAwMDAwMDAwMDAuLjY0NjNhYjhlNTg3MQo+IC0tLSAvZGV2L251bGwKPiAr
+KysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9udmVuYy9nYTEwMi5jCj4g
+QEAgLTAsMCArMSw0NCBAQAo+ICsvKgo+ICsgKiBDb3B5cmlnaHQgMjAyMyBSZWQgSGF0IEluYy4K
+PiArICoKPiArICogUGVybWlzc2lvbiBpcyBoZXJlYnkgZ3JhbnRlZCwgZnJlZSBvZiBjaGFyZ2Us
+IHRvIGFueSBwZXJzb24KPiBvYnRhaW5pbmcgYQo+ICsgKiBjb3B5IG9mIHRoaXMgc29mdHdhcmUg
+YW5kIGFzc29jaWF0ZWQgZG9jdW1lbnRhdGlvbiBmaWxlcyAodGhlCj4gIlNvZnR3YXJlIiksCj4g
+KyAqIHRvIGRlYWwgaW4gdGhlIFNvZnR3YXJlIHdpdGhvdXQgcmVzdHJpY3Rpb24sIGluY2x1ZGlu
+ZyB3aXRob3V0Cj4gbGltaXRhdGlvbgo+ICsgKiB0aGUgcmlnaHRzIHRvIHVzZSwgY29weSwgbW9k
+aWZ5LCBtZXJnZSwgcHVibGlzaCwgZGlzdHJpYnV0ZSwKPiBzdWJsaWNlbnNlLAo+ICsgKiBhbmQv
+b3Igc2VsbCBjb3BpZXMgb2YgdGhlIFNvZnR3YXJlLCBhbmQgdG8gcGVybWl0IHBlcnNvbnMgdG8g
+d2hvbQo+IHRoZQo+ICsgKiBTb2Z0d2FyZSBpcyBmdXJuaXNoZWQgdG8gZG8gc28sIHN1YmplY3Qg
+dG8gdGhlIGZvbGxvd2luZwo+IGNvbmRpdGlvbnM6Cj4gKyAqCj4gKyAqIFRoZSBhYm92ZSBjb3B5
+cmlnaHQgbm90aWNlIGFuZCB0aGlzIHBlcm1pc3Npb24gbm90aWNlIHNoYWxsIGJlCj4gaW5jbHVk
+ZWQgaW4KPiArICogYWxsIGNvcGllcyBvciBzdWJzdGFudGlhbCBwb3J0aW9ucyBvZiB0aGUgU29m
+dHdhcmUuCj4gKyAqCj4gKyAqIFRIRSBTT0ZUV0FSRSBJUyBQUk9WSURFRCAiQVMgSVMiLCBXSVRI
+T1VUIFdBUlJBTlRZIE9GIEFOWSBLSU5ELAo+IEVYUFJFU1MgT1IKPiArICogSU1QTElFRCwgSU5D
+TFVESU5HIEJVVCBOT1QgTElNSVRFRCBUTyBUSEUgV0FSUkFOVElFUyBPRgo+IE1FUkNIQU5UQUJJ
+TElUWSwKPiArICogRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UgQU5EIE5PTklORlJJ
+TkdFTUVOVC7CoCBJTiBOTwo+IEVWRU5UIFNIQUxMCj4gKyAqIFRIRSBDT1BZUklHSFQgSE9MREVS
+KFMpIE9SIEFVVEhPUihTKSBCRSBMSUFCTEUgRk9SIEFOWSBDTEFJTSwKPiBEQU1BR0VTIE9SCj4g
+KyAqIE9USEVSIExJQUJJTElUWSwgV0hFVEhFUiBJTiBBTiBBQ1RJT04gT0YgQ09OVFJBQ1QsIFRP
+UlQgT1IKPiBPVEhFUldJU0UsCj4gKyAqIEFSSVNJTkcgRlJPTSwgT1VUIE9GIE9SIElOIENPTk5F
+Q1RJT04gV0lUSCBUSEUgU09GVFdBUkUgT1IgVEhFCj4gVVNFIE9SCj4gKyAqIE9USEVSIERFQUxJ
+TkdTIElOIFRIRSBTT0ZUV0FSRS4KPiArICovCj4gKyNpbmNsdWRlICJwcml2LmgiCj4gKwo+ICsj
+aW5jbHVkZSA8c3ViZGV2L2dzcC5oPgo+ICsKPiArI2luY2x1ZGUgPG52aWYvY2xhc3MuaD4KPiAr
+Cj4gK3N0YXRpYyBjb25zdCBzdHJ1Y3QgbnZrbV9lbmdpbmVfZnVuYwo+ICtnYTEwMl9udmVuYyA9
+IHsKPiArwqDCoMKgwqDCoMKgwqAuc2NsYXNzID0gewo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqB7IC0xLCAtMSwgTlZDN0I3X1ZJREVPX0VOQ09ERVIgfSwKPiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKge30KPiArwqDCoMKgwqDCoMKgwqB9Cj4gK307Cj4gKwo+ICtpbnQK
+PiArZ2ExMDJfbnZlbmNfbmV3KHN0cnVjdCBudmttX2RldmljZSAqZGV2aWNlLCBlbnVtIG52a21f
+c3ViZGV2X3R5cGUKPiB0eXBlLCBpbnQgaW5zdCwKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgc3RydWN0IG52a21fbnZlbmMgKipwbnZlbmMpCj4gK3sKPiArwqDCoMKgwqDCoMKgwqBp
+ZiAobnZrbV9nc3Bfcm0oZGV2aWNlLT5nc3ApKQo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqByZXR1cm4gcjUzNV9udmVuY19uZXcoJmdhMTAyX252ZW5jLCBkZXZpY2UsIHR5cGUsCj4g
+aW5zdCwgcG52ZW5jKTsKPiArCj4gK8KgwqDCoMKgwqDCoMKgcmV0dXJuIC1FTk9ERVY7Cj4gK30K
+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvbnZlbmMv
+cHJpdi5oCj4gYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9udmVuYy9wcml2
+LmgKPiBpbmRleCBiMDk3ZTNmMjg2N2IuLjc5MTdhZmZjNjUwNSAxMDA2NDQKPiAtLS0gYS9kcml2
+ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9udmVuYy9wcml2LmgKPiArKysgYi9kcml2
+ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9udmVuYy9wcml2LmgKPiBAQCAtMTgsNCAr
+MTgsNyBAQCBleHRlcm4gY29uc3Qgc3RydWN0IG52a21fbnZlbmNfZndpZgo+IGdtMTA3X252ZW5j
+X2Z3aWZbXTsKPiDCoAo+IMKgaW50IG52a21fbnZlbmNfbmV3Xyhjb25zdCBzdHJ1Y3QgbnZrbV9u
+dmVuY19md2lmICosIHN0cnVjdAo+IG52a21fZGV2aWNlICosIGVudW0gbnZrbV9zdWJkZXZfdHlw
+ZSwKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpbnQsIHN0cnVjdCBu
+dmttX252ZW5jICoqcG52ZW5jKTsKPiArCj4gK2ludCByNTM1X252ZW5jX25ldyhjb25zdCBzdHJ1
+Y3QgbnZrbV9lbmdpbmVfZnVuYyAqLCBzdHJ1Y3QKPiBudmttX2RldmljZSAqLAo+ICvCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGVudW0gbnZrbV9zdWJkZXZfdHlwZSwgaW50LCBz
+dHJ1Y3QgbnZrbV9udmVuYyAqKik7Cj4gwqAjZW5kaWYKPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9n
+cHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvbnZlbmMvcjUzNS5jCj4gYi9kcml2ZXJzL2dwdS9k
+cm0vbm91dmVhdS9udmttL2VuZ2luZS9udmVuYy9yNTM1LmMKPiBuZXcgZmlsZSBtb2RlIDEwMDY0
+NAo+IGluZGV4IDAwMDAwMDAwMDAwMC4uODQ0OWI0MWM3MmRiCj4gLS0tIC9kZXYvbnVsbAo+ICsr
+KyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL252ZW5jL3I1MzUuYwo+IEBA
+IC0wLDAgKzEsMTEwIEBACj4gKy8qCj4gKyAqIENvcHlyaWdodCAyMDIzIFJlZCBIYXQgSW5jLgo+
+ICsgKgo+ICsgKiBQZXJtaXNzaW9uIGlzIGhlcmVieSBncmFudGVkLCBmcmVlIG9mIGNoYXJnZSwg
+dG8gYW55IHBlcnNvbgo+IG9idGFpbmluZyBhCj4gKyAqIGNvcHkgb2YgdGhpcyBzb2Z0d2FyZSBh
+bmQgYXNzb2NpYXRlZCBkb2N1bWVudGF0aW9uIGZpbGVzICh0aGUKPiAiU29mdHdhcmUiKSwKPiAr
+ICogdG8gZGVhbCBpbiB0aGUgU29mdHdhcmUgd2l0aG91dCByZXN0cmljdGlvbiwgaW5jbHVkaW5n
+IHdpdGhvdXQKPiBsaW1pdGF0aW9uCj4gKyAqIHRoZSByaWdodHMgdG8gdXNlLCBjb3B5LCBtb2Rp
+ZnksIG1lcmdlLCBwdWJsaXNoLCBkaXN0cmlidXRlLAo+IHN1YmxpY2Vuc2UsCj4gKyAqIGFuZC9v
+ciBzZWxsIGNvcGllcyBvZiB0aGUgU29mdHdhcmUsIGFuZCB0byBwZXJtaXQgcGVyc29ucyB0byB3
+aG9tCj4gdGhlCj4gKyAqIFNvZnR3YXJlIGlzIGZ1cm5pc2hlZCB0byBkbyBzbywgc3ViamVjdCB0
+byB0aGUgZm9sbG93aW5nCj4gY29uZGl0aW9uczoKPiArICoKPiArICogVGhlIGFib3ZlIGNvcHly
+aWdodCBub3RpY2UgYW5kIHRoaXMgcGVybWlzc2lvbiBub3RpY2Ugc2hhbGwgYmUKPiBpbmNsdWRl
+ZCBpbgo+ICsgKiBhbGwgY29waWVzIG9yIHN1YnN0YW50aWFsIHBvcnRpb25zIG9mIHRoZSBTb2Z0
+d2FyZS4KPiArICoKPiArICogVEhFIFNPRlRXQVJFIElTIFBST1ZJREVEICJBUyBJUyIsIFdJVEhP
+VVQgV0FSUkFOVFkgT0YgQU5ZIEtJTkQsCj4gRVhQUkVTUyBPUgo+ICsgKiBJTVBMSUVELCBJTkNM
+VURJTkcgQlVUIE5PVCBMSU1JVEVEIFRPIFRIRSBXQVJSQU5USUVTIE9GCj4gTUVSQ0hBTlRBQklM
+SVRZLAo+ICsgKiBGSVRORVNTIEZPUiBBIFBBUlRJQ1VMQVIgUFVSUE9TRSBBTkQgTk9OSU5GUklO
+R0VNRU5ULsKgIElOIE5PCj4gRVZFTlQgU0hBTEwKPiArICogVEhFIENPUFlSSUdIVCBIT0xERVIo
+UykgT1IgQVVUSE9SKFMpIEJFIExJQUJMRSBGT1IgQU5ZIENMQUlNLAo+IERBTUFHRVMgT1IKPiAr
+ICogT1RIRVIgTElBQklMSVRZLCBXSEVUSEVSIElOIEFOIEFDVElPTiBPRiBDT05UUkFDVCwgVE9S
+VCBPUgo+IE9USEVSV0lTRSwKPiArICogQVJJU0lORyBGUk9NLCBPVVQgT0YgT1IgSU4gQ09OTkVD
+VElPTiBXSVRIIFRIRSBTT0ZUV0FSRSBPUiBUSEUKPiBVU0UgT1IKPiArICogT1RIRVIgREVBTElO
+R1MgSU4gVEhFIFNPRlRXQVJFLgo+ICsgKi8KPiArI2luY2x1ZGUgInByaXYuaCIKPiArCj4gKyNp
+bmNsdWRlIDxjb3JlL29iamVjdC5oPgo+ICsjaW5jbHVkZSA8c3ViZGV2L2dzcC5oPgo+ICsjaW5j
+bHVkZSA8ZW5naW5lL2ZpZm8uaD4KPiArCj4gKyNpbmNsdWRlIDxudnJtL252dHlwZXMuaD4KPiAr
+I2luY2x1ZGUgPG52cm0vNTM1LjU0LjAzL2NvbW1vbi9zZGsvbnZpZGlhL2luYy9udm9zLmg+Cj4g
+Kwo+ICtzdHJ1Y3QgcjUzNV9udmVuY19vYmogewo+ICvCoMKgwqDCoMKgwqDCoHN0cnVjdCBudmtt
+X29iamVjdCBvYmplY3Q7Cj4gK8KgwqDCoMKgwqDCoMKgc3RydWN0IG52a21fZ3NwX29iamVjdCBy
+bTsKPiArfTsKPiArCj4gK3N0YXRpYyB2b2lkICoKPiArcjUzNV9udmVuY19vYmpfZHRvcihzdHJ1
+Y3QgbnZrbV9vYmplY3QgKm9iamVjdCkKPiArewo+ICvCoMKgwqDCoMKgwqDCoHN0cnVjdCByNTM1
+X252ZW5jX29iaiAqb2JqID0gY29udGFpbmVyX29mKG9iamVjdCwKPiB0eXBlb2YoKm9iaiksIG9i
+amVjdCk7Cj4gKwo+ICvCoMKgwqDCoMKgwqDCoG52a21fZ3NwX3JtX2ZyZWUoJm9iai0+cm0pOwo+
+ICvCoMKgwqDCoMKgwqDCoHJldHVybiBvYmo7Cj4gK30KPiArCj4gK3N0YXRpYyBjb25zdCBzdHJ1
+Y3QgbnZrbV9vYmplY3RfZnVuYwo+ICtyNTM1X252ZW5jX29iaiA9IHsKPiArwqDCoMKgwqDCoMKg
+wqAuZHRvciA9IHI1MzVfbnZlbmNfb2JqX2R0b3IsCj4gK307Cj4gKwo+ICtzdGF0aWMgaW50Cj4g
+K3I1MzVfbnZlbmNfb2JqX2N0b3IoY29uc3Qgc3RydWN0IG52a21fb2NsYXNzICpvY2xhc3MsIHZv
+aWQgKmFyZ3YsCj4gdTMyIGFyZ2MsCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBz
+dHJ1Y3QgbnZrbV9vYmplY3QgKipwb2JqZWN0KQo+ICt7Cj4gK8KgwqDCoMKgwqDCoMKgc3RydWN0
+IG52a21fY2hhbiAqY2hhbiA9IG52a21fdWNoYW5fY2hhbihvY2xhc3MtPnBhcmVudCk7Cj4gK8Kg
+wqDCoMKgwqDCoMKgc3RydWN0IHI1MzVfbnZlbmNfb2JqICpvYmo7Cj4gK8KgwqDCoMKgwqDCoMKg
+TlZfTVNFTkNfQUxMT0NBVElPTl9QQVJBTUVURVJTICphcmdzOwo+ICsKPiArwqDCoMKgwqDCoMKg
+wqBpZiAoIShvYmogPSBremFsbG9jKHNpemVvZigqb2JqKSwgR0ZQX0tFUk5FTCkpKQo+ICvCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqByZXR1cm4gLUVOT01FTTsKPiArCj4gK8KgwqDCoMKg
+wqDCoMKgbnZrbV9vYmplY3RfY3RvcigmcjUzNV9udmVuY19vYmosIG9jbGFzcywgJm9iai0+b2Jq
+ZWN0KTsKPiArwqDCoMKgwqDCoMKgwqAqcG9iamVjdCA9ICZvYmotPm9iamVjdDsKPiArCj4gK8Kg
+wqDCoMKgwqDCoMKgYXJncyA9IG52a21fZ3NwX3JtX2FsbG9jX2dldCgmY2hhbi0+cm0ub2JqZWN0
+LCBvY2xhc3MtCj4gPmhhbmRsZSwgb2NsYXNzLT5iYXNlLm9jbGFzcywKPiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBzaXplb2YoKmFyZ3MpLCAmb2JqLT5ybSk7Cj4gK8KgwqDCoMKgwqDCoMKgaWYgKFdBUk5fT04o
+SVNfRVJSKGFyZ3MpKSkKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJuIFBU
+Ul9FUlIoYXJncyk7Cj4gKwo+ICvCoMKgwqDCoMKgwqDCoGFyZ3MtPnNpemUgPSBzaXplb2YoKmFy
+Z3MpOwo+ICvCoMKgwqDCoMKgwqDCoGFyZ3MtPmVuZ2luZUluc3RhbmNlID0gb2NsYXNzLT5lbmdp
+bmUtPnN1YmRldi5pbnN0Owo+ICsKPiArwqDCoMKgwqDCoMKgwqByZXR1cm4gbnZrbV9nc3Bfcm1f
+YWxsb2Nfd3IoJm9iai0+cm0sIGFyZ3MpOwo+ICt9Cj4gKwo+ICtzdGF0aWMgdm9pZCAqCj4gK3I1
+MzVfbnZlbmNfZHRvcihzdHJ1Y3QgbnZrbV9lbmdpbmUgKmVuZ2luZSkKPiArewo+ICvCoMKgwqDC
+oMKgwqDCoHN0cnVjdCBudmttX252ZW5jICpudmVuYyA9IG52a21fbnZlbmMoZW5naW5lKTsKPiAr
+Cj4gK8KgwqDCoMKgwqDCoMKga2ZyZWUobnZlbmMtPmVuZ2luZS5mdW5jKTsKPiArwqDCoMKgwqDC
+oMKgwqByZXR1cm4gbnZlbmM7Cj4gK30KCldoeSBpcyBudmVuYyByZXR1cm5lZCBhcyB2b2lkICog
+d2hlbiBpdCdzIGNsZWFybHkgYWx3YXlzIG9mIHR5cGUKc3RydWN0IG52a21fbnZlbmMgKiA/CgpJ
+ZiBpdCdzIHNvbWV0aW1lcyBuZWNlc3NhcnkgdG8gY29udmVydCBpdCB0byBhIHZvaWQtcG9pbnRl
+ciBJIHRoaW5rIGl0CndvdWxkIGJlIGJldHRlciB0byBkbyB0aGF0IGJ5IGFzc2lnbmluZyB0byBh
+IHZvaWQtcG9pbnRlciBhdCB0aGUgcGxhY2UKd2hlcmUgcjUzNV9udmVuY19kdG9yKCkgaXMgYWN0
+dWFsbHkgY2FsbGVkLiBUaGlzIHZvaWQtcG9pbnRlcidzCnN1YnNlcXVlbnQgdXNhZ2UgdGhlbiB3
+b3VsZCBtYWtlIGl0IG9idmlvdXMgd2h5IGl0J3Mgdm9pZCAqCgpJcyBpdCBuZWNlc3NhcnkgdG8g
+cmV0dXJuIGl0IGluIGFuIG9wYXF1ZSBmb3JtPyBJZiBzbywgdGhhdCBzaG91bGQgYmUKY29tbWVu
+dGVkLgoKPiArCj4gK2ludAo+ICtyNTM1X252ZW5jX25ldyhjb25zdCBzdHJ1Y3QgbnZrbV9lbmdp
+bmVfZnVuYyAqaHcsIHN0cnVjdCBudmttX2RldmljZQo+ICpkZXZpY2UsCj4gK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIGVudW0gbnZrbV9zdWJkZXZfdHlwZSB0eXBlLCBpbnQgaW5zdCwgc3Ry
+dWN0Cj4gbnZrbV9udmVuYyAqKnBudmVuYykKPiArewo+ICvCoMKgwqDCoMKgwqDCoHN0cnVjdCBu
+dmttX2VuZ2luZV9mdW5jICpybTsKPiArwqDCoMKgwqDCoMKgwqBpbnQgbmNsYXNzOwo+ICsKPiAr
+wqDCoMKgwqDCoMKgwqBmb3IgKG5jbGFzcyA9IDA7IGh3LT5zY2xhc3NbbmNsYXNzXS5vY2xhc3M7
+IG5jbGFzcysrKTsKPiArCj4gK8KgwqDCoMKgwqDCoMKgaWYgKCEocm0gPSBremFsbG9jKHNpemVv
+Zigqcm0pICsgKG5jbGFzcyArIDEpICogc2l6ZW9mKHJtLQo+ID5zY2xhc3NbMF0pLCBHRlBfS0VS
+TkVMKSkpCgpBIHZhcmlhYmxlIGZvciB0aGUgc2l6ZSBpbmNyZWFzZXMgcmVhZGFiaWxpdHkgZ3Jl
+YXRseSBoZXJlLgplLmcuLCBzaXplX3QgbnZrbV9lbmdpbmVfdG90YWxfc2l6ZSA9IC4uLgoKCj4g
+K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJldHVybiAtRU5PTUVNOwo+ICsKPiArwqDC
+oMKgwqDCoMKgwqBybS0+ZHRvciA9IHI1MzVfbnZlbmNfZHRvcjsKPiArwqDCoMKgwqDCoMKgwqBm
+b3IgKGludCBpID0gMDsgaSA8IG5jbGFzczsgaSsrKSB7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoHJtLT5zY2xhc3NbaV0ubWludmVyID0gaHctPnNjbGFzc1tpXS5taW52ZXI7Cj4g
+K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJtLT5zY2xhc3NbaV0ubWF4dmVyID0gaHct
+PnNjbGFzc1tpXS5tYXh2ZXI7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJtLT5z
+Y2xhc3NbaV0ub2NsYXNzID0gaHctPnNjbGFzc1tpXS5vY2xhc3M7Cj4gK8KgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoHJtLT5zY2xhc3NbaV0uY3RvciA9IHI1MzVfbnZlbmNfb2JqX2N0b3I7
+Cj4gK8KgwqDCoMKgwqDCoMKgfQo+ICsKPiArwqDCoMKgwqDCoMKgwqBpZiAoISgqcG52ZW5jID0g
+a3phbGxvYyhzaXplb2YoKipwbnZlbmMpLCBHRlBfS0VSTkVMKSkpIHsKPiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKga2ZyZWUocm0pOwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqByZXR1cm4gLUVOT01FTTsKPiArwqDCoMKgwqDCoMKgwqB9Cj4gKwo+ICvCoMKgwqDCoMKg
+wqDCoHJldHVybiBudmttX2VuZ2luZV9jdG9yKHJtLCBkZXZpY2UsIHR5cGUsIGluc3QsIHRydWUs
+Cj4gJigqcG52ZW5jKS0+ZW5naW5lKTsKPiArfQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9k
+cm0vbm91dmVhdS9udmttL2VuZ2luZS9udmVuYy90dTEwMi5jCj4gYi9kcml2ZXJzL2dwdS9kcm0v
+bm91dmVhdS9udmttL2VuZ2luZS9udmVuYy90dTEwMi5jCj4gaW5kZXggOGE0MzZiMzk4NzQ5Li45
+MzM4NjQ0MjNiYjMgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9l
+bmdpbmUvbnZlbmMvdHUxMDIuYwo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20v
+ZW5naW5lL252ZW5jL3R1MTAyLmMKPiBAQCAtMjMsMTIgKzIzLDIyIEBACj4gwqAKPiDCoCNpbmNs
+dWRlIDxzdWJkZXYvZ3NwLmg+Cj4gwqAKPiArI2luY2x1ZGUgPG52aWYvY2xhc3MuaD4KPiArCj4g
+K3N0YXRpYyBjb25zdCBzdHJ1Y3QgbnZrbV9lbmdpbmVfZnVuYwo+ICt0dTEwMl9udmVuYyA9IHsK
+PiArwqDCoMKgwqDCoMKgwqAuc2NsYXNzID0gewo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqB7IC0xLCAtMSwgTlZDNEI3X1ZJREVPX0VOQ09ERVIgfSwKPiArwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKge30KPiArwqDCoMKgwqDCoMKgwqB9Cj4gK307Cj4gKwo+IMKgaW50Cj4g
+wqB0dTEwMl9udmVuY19uZXcoc3RydWN0IG52a21fZGV2aWNlICpkZXZpY2UsIGVudW0gbnZrbV9z
+dWJkZXZfdHlwZQo+IHR5cGUsIGludCBpbnN0LAo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgc3RydWN0IG52a21fbnZlbmMgKipwbnZlbmMpCj4gwqB7Cj4gwqDCoMKgwqDCoMKgwqDC
+oGlmIChudmttX2dzcF9ybShkZXZpY2UtPmdzcCkpCj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoHJldHVybiAtRU5PREVWOwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBy
+ZXR1cm4gcjUzNV9udmVuY19uZXcoJnR1MTAyX252ZW5jLCBkZXZpY2UsIHR5cGUsCj4gaW5zdCwg
+cG52ZW5jKTsKPiDCoAo+IMKgwqDCoMKgwqDCoMKgwqByZXR1cm4gbnZrbV9udmVuY19uZXdfKGdt
+MTA3X252ZW5jX2Z3aWYsIGRldmljZSwgdHlwZSwgaW5zdCwKPiBwbnZlbmMpOwo+IMKgfQo+IGRp
+ZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9nc3AvcjUzNS5j
+Cj4gYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9nc3AvcjUzNS5jCj4gaW5k
+ZXggZWI4MmRhZDFmNzRlLi44YTFmN2VmOTEzZTYgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy9ncHUv
+ZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvZ3NwL3I1MzUuYwo+ICsrKyBiL2RyaXZlcnMvZ3B1L2Ry
+bS9ub3V2ZWF1L252a20vc3ViZGV2L2dzcC9yNTM1LmMKPiBAQCAtODYzLDYgKzg2MywxMCBAQCBy
+NTM1X2dzcF9pbnRyX2dldF90YWJsZShzdHJ1Y3QgbnZrbV9nc3AgKmdzcCkKPiDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB0eXBlID0gTlZLTV9FTkdJTkVf
+TlZERUM7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+aW5zdCA9IGN0cmwtPnRhYmxlW2ldLmVuZ2luZUlkeCAtCj4gTUNfRU5HSU5FX0lEWF9OVkRFQzA7
+Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYnJlYWs7
+Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGNhc2UgTUNfRU5HSU5FX0lEWF9NU0VO
+QyAuLi4gTUNfRU5HSU5FX0lEWF9NU0VOQzI6Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqB0eXBlID0gTlZLTV9FTkdJTkVfTlZFTkM7Cj4gK8KgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBpbnN0ID0gY3RybC0+dGFibGVb
+aV0uZW5naW5lSWR4IC0KPiBNQ19FTkdJTkVfSURYX01TRU5DOwo+ICvCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYnJlYWs7Cj4gwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqBkZWZhdWx0Ogo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoGNvbnRpbnVlOwo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgfQoK
 
