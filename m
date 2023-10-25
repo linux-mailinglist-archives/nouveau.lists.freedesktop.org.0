@@ -2,46 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 329F57D66D2
-	for <lists+nouveau@lfdr.de>; Wed, 25 Oct 2023 11:31:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB8887D66F8
+	for <lists+nouveau@lfdr.de>; Wed, 25 Oct 2023 11:35:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EF09410E595;
-	Wed, 25 Oct 2023 09:31:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3CF1110E617;
+	Wed, 25 Oct 2023 09:35:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [IPv6:2a01:e0c:1:1599::13])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A9C5810E595
- for <nouveau@lists.freedesktop.org>; Wed, 25 Oct 2023 09:31:06 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A21E410E617
+ for <nouveau@lists.freedesktop.org>; Wed, 25 Oct 2023 09:35:24 +0000 (UTC)
 Received: from [192.168.0.33] (unknown [91.156.66.55])
  (Authenticated sender: martin.peres@free.fr)
- by smtp4-g21.free.fr (Postfix) with ESMTPSA id DE7C519F5AF;
- Wed, 25 Oct 2023 11:31:01 +0200 (CEST)
+ by smtp4-g21.free.fr (Postfix) with ESMTPSA id E920019F553;
+ Wed, 25 Oct 2023 11:35:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1698226265;
- bh=2vRrbiOvTm5Cl/C1L4BUZpQTbPFcyIRkozr7IvidHvA=;
+ s=smtp-20201208; t=1698226523;
+ bh=P3+lsoAwPDLOikEC8R/jnyDMtVyY0yS0lV93729cfW4=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=uAFYW1bNHjTftOkmfup6ewKdpkLQJgW/VsIlMP9Lu6nid5IGcO8wwGa1E909mhpm1
- GWzQ8rXoK/8haDhO+E9HKAUEVaKOUPZIYbAN6og+7nLnAVwo5VF+cVHjycEvGIrTPD
- BLVszLjs6MnqomFmXWWkWfbDLvxD+Xh7aGScWmFT8cW1vEV9KRcJPwqk9OmzozZn+c
- Hs8wWbSiGRTbpMxBL1XQUiLZPume8A4jBGNb/PAwH86hMpusdzg1m+UdDNeHEdDB6o
- xK7RoeCWcHd37HwZs+jaLzObaDKSQmFgZ8tM/rz5yn2S9y7HEz55DCNYJaYEb2ODos
- LSrW2ppOfY8lA==
-Message-ID: <e99346c4-8190-4403-82b1-19ee637c56dd@free.fr>
-Date: Wed, 25 Oct 2023 12:31:01 +0300
+ b=qh74f4x29gG+E1pCUP8Q/EFHufdXfivZyPEm7uKs7X8kKW65WIKAI7/MFPtn/eY0R
+ w/Ik80ax6T+94K5zsLFZxf6u9GvdnkAuvY3YPn1MrxV7y+n75dZ+JK0qEUC5Gc2oY8
+ m9T7HUr/M+CqDYk/hWFvtcrk37bxExiKEGlulIvNu7QeyhJdIlbQIuVwfMbtrCRU0K
+ Ky3Wn2GMRUFOaKFL30Sf5Fp8hRBpB9jQUI7/8Uc77KyPkTrzjKPL/6lp/PiVmLNRkt
+ XMAo6qgshifcolLrewexoprTHXB/GKl09Rw5GMDkRwI+GR1WCcisa+tUE0hfbjqpsk
+ uWFPRMbVIuehw==
+Message-ID: <f2483b59-2f77-4cbb-8e73-cae7246191d9@free.fr>
+Date: Wed, 25 Oct 2023 12:35:19 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
 To: Philipp Stanner <pstanner@redhat.com>, Ben Skeggs <skeggsb@gmail.com>,
  nouveau@lists.freedesktop.org
 References: <20230918202149.4343-1-skeggsb@gmail.com>
- <20230918202149.4343-18-skeggsb@gmail.com>
- <80febd889ec89a42796d1df39146e838cc06ac0e.camel@redhat.com>
+ <20230918202149.4343-43-skeggsb@gmail.com>
+ <a8948198c085246bff4bbc3ca696461523180545.camel@redhat.com>
 From: Martin Roukala <martin.peres@free.fr>
-In-Reply-To: <80febd889ec89a42796d1df39146e838cc06ac0e.camel@redhat.com>
+In-Reply-To: <a8948198c085246bff4bbc3ca696461523180545.camel@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH 17/44] drm/nouveau/mmu/tu102-: prepare for
- GSP-RM
+Subject: Re: [Nouveau] [PATCH 42/44] drm/nouveau/nvenc/r535: initial support
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,60 +56,47 @@ Cc: Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 10/24/23 12:05, Philipp Stanner wrote:
+On 10/24/23 12:51, Philipp Stanner wrote:
 > On Tue, 2023-09-19 at 06:21 +1000, Ben Skeggs wrote:
 >> From: Ben Skeggs <bskeggs@redhat.com>
 >>
->> - (temporarily) disable if GSP-RM detected, will be added later
+>> Adds support for allocating VIDEO_ENCODER classes from RM.
+>>
+>> Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
+
+[...]
+
+>> +static void *
+>> +r535_nvenc_dtor(struct nvkm_engine *engine)
+>> +{
+>> +       struct nvkm_nvenc *nvenc = nvkm_nvenc(engine);
+>> +
+>> +       kfree(nvenc->engine.func);
+>> +       return nvenc;
+>> +}
 > 
-> disable _what_?
-> The other commit messages at least briefly name the component. This one
-> should as well.
+> Why is nvenc returned as void * when it's clearly always of type
+> struct nvkm_nvenc * ?
 > 
-> Furthermore, I'd say that the wording should be something like "will be
-> enabled again later, after XXX has been done".
+> If it's sometimes necessary to convert it to a void-pointer I think it
+> would be better to do that by assigning to a void-pointer at the place
+> where r535_nvenc_dtor() is actually called. This void-pointer's
+> subsequent usage then would make it obvious why it's void *
+> 
+> Is it necessary to return it in an opaque form? If so, that should be
+> commented.
 
-True. However, I think the clue is in the commit title: mmu/tu102
+This is part of Nouveau's conventions for object-oriented programming. 
+This would be part of the so-called "core". It's been a while since I 
+worked with it, but the reason why it is a `void *` is because it makes 
+other functions easier to write.
 
-So, here is how I would rewrite this commit message:
-
-Disable kernel-side MMU management when using the GSP firmware. This 
-will be re-introduced as a call to the GSP firmware in a future commit.
-
-The latter is partial speculation, but I hope this helps!
+I hope this helps!
 
 Cheers,
 Martin
-> 
-> P.
-> 
->>
->> Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
->> ---
->>   drivers/gpu/drm/nouveau/nvkm/subdev/mmu/tu102.c | 4 ++++
->>   1 file changed, 4 insertions(+)
->>
->> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/tu102.c
->> b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/tu102.c
->> index 8d060ce47f86..87979952df4b 100644
->> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/tu102.c
->> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/tu102.c
->> @@ -24,6 +24,7 @@
->>   #include "vmm.h"
->>   
->>   #include <core/option.h>
->> +#include <subdev/gsp.h>
->>   
->>   #include <nvif/class.h>
->>   
->> @@ -54,5 +55,8 @@ int
->>   tu102_mmu_new(struct nvkm_device *device, enum nvkm_subdev_type
->> type, int inst,
->>                struct nvkm_mmu **pmmu)
->>   {
->> +       if (nvkm_gsp_rm(device->gsp))
->> +               return -ENODEV;
->> +
->>          return nvkm_mmu_new_(&tu102_mmu, device, type, inst, pmmu);
->>   }
-> 
+
+PS: I am not checking out Nouveau's mailing list often, so if anyone has 
+some questions related to the kernel driver, feel free to ping me 
+(mupuf) on #nouveau and I will try my best to provide some context or a 
+pointer to someone else could be a good person to answer :)
