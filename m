@@ -1,33 +1,63 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12F827D8E30
-	for <lists+nouveau@lfdr.de>; Fri, 27 Oct 2023 07:35:16 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 84D477D9E46
+	for <lists+nouveau@lfdr.de>; Fri, 27 Oct 2023 18:59:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 64BA010E921;
-	Fri, 27 Oct 2023 05:35:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A9FA910EA13;
+	Fri, 27 Oct 2023 16:59:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from ciao.gmane.io (ciao.gmane.io [116.202.254.214])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6091B10E921
- for <nouveau@lists.freedesktop.org>; Fri, 27 Oct 2023 05:35:12 +0000 (UTC)
-Received: from list by ciao.gmane.io with local (Exim 4.92)
- (envelope-from <gcfxn-nouveau@m.gmane-mx.org>) id 1qwFV0-0007EP-3b
- for nouveau@lists.freedesktop.org; Fri, 27 Oct 2023 07:35:10 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: nouveau@lists.freedesktop.org
-From: Timothy Maden <terminatorul@gmail.com>
-Date: Fri, 27 Oct 2023 08:35:05 +0300
-Message-ID: <uhfi69$eil$1@ciao.gmane.io>
-References: <CA+rFky5Swae3E7jtEi-abHHd9VJ+WaQhqM99L5zP0_r-T_Yneg@mail.gmail.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 23DDC10E141;
+ Fri, 27 Oct 2023 16:59:15 +0000 (UTC)
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-5a9bc2ec556so1850151a12.0; 
+ Fri, 27 Oct 2023 09:59:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1698425954; x=1699030754; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=l2XOiyO7ELntzgtLuOwOBKhVQExybEKPgHk4URVDgho=;
+ b=FjFy+FOkCP9RMiPr369zyKzQ1BLB4JhIXhoRIKSHIzm0J6M5x/oq8tbctibYaN50Dp
+ yiPjYbqP0WoWuycO9Z3Waw3ETGZl8p9D7kHwKTlS8BU841D1ZfybT+Gj6CRS9ibcj/xY
+ ZFMOeTklBCn/EK96GnHX5Md5jfMlJ4WEe+yZWgsaPBhAWvTdCmj14BPalH1hGYboXWjR
+ m3/qJtWLuhsWltsfkuRgN3UusznHbdTBWTzX1eO9LO1nVYb7u3zDwDfq/p8hW+TR8qXK
+ /181Q74YuYiawQQ/GoPJEWcekgwUzMG6xSsUG0wcWvStDggvTeGL5RpImD9nCDsBRjcU
+ Rfsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698425954; x=1699030754;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=l2XOiyO7ELntzgtLuOwOBKhVQExybEKPgHk4URVDgho=;
+ b=BdRvSKw+zrFDBInmsv1/tdPX0ZN2Diwh+M+KQKeh+n9hoTTiwJGPNwMqiYBO2U13RK
+ B2Al1rRx1ML7ZE9Se29O94g8oztGWis57Jzby1kPPzwjpjRUKAxUbWaObLyqckseKazq
+ nFh8EkW8QqcuuAHgvknk8iCQrqS1D3n6MFOLz4L/fR4gRY3Gft/df9pzwVSm/Jc1MBKD
+ wO/I1y1tn2/7uPR9ZKFZCamCkRCTd/vIlZTmABoDS/MWBikuj6JELNz/n4TznZAV+uYl
+ pY+jTShMkW/0qsC8MokmGf+G4YUy/Ukwkm6d7FZD+AKZcv8Z0G2b9xNeQ9w0wH60KZBH
+ Ep4g==
+X-Gm-Message-State: AOJu0Yz/mYPD5eLw1tpQYSj9G51QqYiGIbW6LwVafq/RGgVg8lhmUQnZ
+ 3oF9u4d8cl9GPKA7EgC6cyJJuM9TZAc=
+X-Google-Smtp-Source: AGHT+IGmj0N9Vkha046UwwcpchKPTTZ+UtBOMnjmz7YeYZi5yoFGRN7OlD9zVh2noyVB62tlU/Jayw==
+X-Received: by 2002:a17:90a:1a0b:b0:280:1022:f00e with SMTP id
+ 11-20020a17090a1a0b00b002801022f00emr1807988pjk.29.1698425954002; 
+ Fri, 27 Oct 2023 09:59:14 -0700 (PDT)
+Received: from localhost ([2a00:79e1:abd:4a00:6c80:7c10:75a0:44f4])
+ by smtp.gmail.com with ESMTPSA id
+ s31-20020a17090a2f2200b0028017a2a8fasm733629pjd.3.2023.10.27.09.59.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 27 Oct 2023 09:59:13 -0700 (PDT)
+From: Rob Clark <robdclark@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Date: Fri, 27 Oct 2023 09:58:34 -0700
+Message-ID: <20231027165859.395638-1-robdclark@gmail.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-In-Reply-To: <CA+rFky5Swae3E7jtEi-abHHd9VJ+WaQhqM99L5zP0_r-T_Yneg@mail.gmail.com>
-Subject: Re: [Nouveau] How to enable OpenCL device in Clover ?
+Subject: [Nouveau] [PATCH 0/7] drm/msm/gem: drm_exec conversion
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -39,62 +69,62 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: "Rafael J. Wysocki" <rafael@kernel.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>, Mario Limonciello <mario.limonciello@amd.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Rob Clark <robdclark@chromium.org>, Guchun Chen <guchun.chen@amd.com>,
+ Shashank Sharma <shashank.sharma@amd.com>,
+ "open list:SUSPEND TO RAM" <linux-pm@vger.kernel.org>,
+ "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ Dong Chenchen <dongchenchen2@huawei.com>, Luben Tuikov <luben.tuikov@amd.com>,
+ Philip Yang <Philip.Yang@amd.com>,
+ Srinivasan Shanmugam <srinivasan.shanmugam@amd.com>,
+ Arunpravin Paneer Selvam <Arunpravin.PaneerSelvam@amd.com>,
+ linux-arm-msm@vger.kernel.org, James Zhu <James.Zhu@amd.com>,
+ Sean Paul <sean@poorly.run>, Jack Xiao <Jack.Xiao@amd.com>,
+ Jonathan Kim <jonathan.kim@amd.com>, freedreno@lists.freedesktop.org,
+ Felix Kuehling <Felix.Kuehling@amd.com>,
+ open list <linux-kernel@vger.kernel.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Lang Yu <Lang.Yu@amd.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 10/23/23 20:54, Andrew Randrianasulu wrote:
-> I think you can use
-> NOUVEAU_ENABLE_CL=1 clpeak for example
-> 
-> it skips memory-hungry bandwidth test but then runs partially:
-> 
-> Platform: Clover
->    Device: NV106
->      Driver version  : 23.3.0-devel (Linux x86)
->      Compute units   : 1
->      Clock frequency : 512 MHz
-> SPIR-V WARNING:
->      In file ../src/compiler/spirv/spirv_to_nir.c:4681
->      Unsupported SPIR-V capability: SpvCapabilityLinkage (5)
->      28 bytes into the SPIR-V binary
-> 
->      Global memory bandwidth (GBPS)
->        float   : nve4_launch_grid:905 - Failed to launch grid !
-> 
-> [..]
-> 
-> Single-precision compute (GFLOPS)
->        float   : 80.74
->        float2  : 41.38
->        float4  : 50.49
->        float8  : 51.32
->        float16 : 53.58
-> 
-> on unreclocked NVIDIA GK208B (2gb ddr3 memory - ha!)
+From: Rob Clark <robdclark@chromium.org>
 
-Oh, thank you !
+Simplify the exec path (removing a legacy optimization) and convert to
+drm_exec.  One drm_exec patch to allow passing in the expected # of GEM
+objects to avoid re-allocation.
 
-Maybe this variable should be documented, like for example the new 
-variable I_WANT_A_BROKEN_VULKAN_DRIVER is documented.
+I'd be a bit happier if I could avoid the extra objects table allocation
+in drm_exec in the first place, but wasn't really happy with any of the
+things I tried to get rid of that.
 
-I have a GK208B chip, that I replaced with a GA102.
+Rob Clark (7):
+  drm/msm/gem: Remove "valid" tracking
+  drm/msm/gem: Remove submit_unlock_unpin_bo()
+  drm/msm/gem: Don't queue job to sched in error cases
+  drm/msm/gem: Split out submit_unpin_objects() helper
+  drm/msm/gem: Cleanup submit_cleanup_bo()
+  drm/exec: Pass in initial # of objects
+  drm/msm/gem: Convert to drm_exec
 
-When I try to use the OpenCL device I get the following error on GA102:
+ drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c  |   2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_csa.c |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_mes.c |   4 +-
+ drivers/gpu/drm/drm_exec.c              |  15 +-
+ drivers/gpu/drm/msm/Kconfig             |   1 +
+ drivers/gpu/drm/msm/msm_gem.h           |  13 +-
+ drivers/gpu/drm/msm/msm_gem_submit.c    | 197 ++++++------------------
+ drivers/gpu/drm/msm/msm_ringbuffer.c    |   3 +-
+ drivers/gpu/drm/nouveau/nouveau_exec.c  |   2 +-
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c  |   2 +-
+ include/drm/drm_exec.h                  |   2 +-
+ 12 files changed, 79 insertions(+), 170 deletions(-)
 
-     Build Log: <built-in>:1:10: fatal error: 'opencl-c.h' file not found
-
-this happens with both Mesa 23.2.1 and latest Mesa 24.0.0-devel from git.
-
-The missing header in the message is found in clang-libs package on 
-Fedora for example, and if I add the needed -I flag to clBuildProgram(), 
-the error goes away. So it looks like a missing include directory inside 
-Clover ... ?
-
-Unfortunately I can not add the missing -I flag to OpenCL compiler when 
-using clpeak or LuxMark ... without recompiling. Is there an environment 
-variable or some other way ?
-
---
-Thank you,
-Timothy Madden
+-- 
+2.41.0
 
