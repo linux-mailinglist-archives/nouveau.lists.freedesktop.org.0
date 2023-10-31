@@ -2,45 +2,39 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 445267DC5D2
-	for <lists+nouveau@lfdr.de>; Tue, 31 Oct 2023 06:20:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 186A87DC9C4
+	for <lists+nouveau@lfdr.de>; Tue, 31 Oct 2023 10:39:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A4A0110E3F9;
-	Tue, 31 Oct 2023 05:19:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0213010E10F;
+	Tue, 31 Oct 2023 09:39:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [205.139.111.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 72C1A10E3F7
- for <nouveau@lists.freedesktop.org>; Tue, 31 Oct 2023 05:19:55 +0000 (UTC)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-544-5BeEYA72Obazo_n9NKduBA-1; Tue,
- 31 Oct 2023 01:19:53 -0400
-X-MC-Unique: 5BeEYA72Obazo_n9NKduBA-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id AE51C3810B0B;
- Tue, 31 Oct 2023 05:19:52 +0000 (UTC)
-Received: from dreadlord.redhat.com (unknown [10.64.136.133])
- by smtp.corp.redhat.com (Postfix) with ESMTP id AE9D440C6EB9;
- Tue, 31 Oct 2023 05:19:51 +0000 (UTC)
-From: Dave Airlie <airlied@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Date: Tue, 31 Oct 2023 15:18:47 +1000
-Message-ID: <20231031051943.1957328-4-airlied@gmail.com>
-In-Reply-To: <20231031051943.1957328-1-airlied@gmail.com>
-References: <20231031051943.1957328-1-airlied@gmail.com>
+X-Greylist: delayed 1247 seconds by postgrey-1.36 at gabe;
+ Tue, 31 Oct 2023 09:39:41 UTC
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de
+ [80.237.130.52])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7651510E10F
+ for <nouveau@lists.freedesktop.org>; Tue, 31 Oct 2023 09:39:41 +0000 (UTC)
+Received: from [2a02:8108:8980:2478:8cde:aa2c:f324:937e]; authenticated
+ by wp530.webpack.hosteurope.de running ExIM with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ id 1qxktf-0002kf-K2; Tue, 31 Oct 2023 10:18:51 +0100
+Message-ID: <5ecf0eac-a089-4da9-b76e-b45272c98393@leemhuis.info>
+Date: Tue, 31 Oct 2023 10:18:50 +0100
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: gmail.com
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
-Subject: [Nouveau] [PATCH 3/3] nouveau/gsp: add some basic registry entries.
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US, de-DE
+To: "Owen T. Heisler" <writer@owenh.net>, stable@vger.kernel.org
+References: <6f027566-c841-4415-bc85-ce11a5832b14@owenh.net>
+From: "Linux regression tracking (Thorsten Leemhuis)"
+ <regressions@leemhuis.info>
+In-Reply-To: <6f027566-c841-4415-bc85-ce11a5832b14@owenh.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-bounce-key: webpack.hosteurope.de; regressions@leemhuis.info; 1698745181;
+ f839e281; 
+X-HE-SMSGID: 1qxktf-0002kf-K2
+Subject: Re: [Nouveau] [REGRESSION]: nouveau: Asynchronous wait on fence
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,91 +46,47 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org
+Reply-To: Linux regressions mailing list <regressions@lists.linux.dev>
+Cc: Sasha Levin <sashal@kernel.org>, regressions@lists.linux.dev,
+ nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
+On 28.10.23 04:46, Owen T. Heisler wrote:
+> #regzbot introduced: d386a4b54607cf6f76e23815c2c9a3abc1d66882
+> #regzbot link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/180
+> 
+> ## Problem
+> 
+> 1. Connect external display to DVI port on dock and run X with both
+>    displays in use.
+> 2. Wait hours or days.
+> 3. Suddenly the secondary Nvidia-connected display turns off and X stops
+>    responding to keyboard/mouse input. In *some* cases it is possible to
+>    switch to a virtual TTY with Ctrl+Alt+Fn and log in there. In any
+>    case, shutdown/reboot after this happens is *usually* not successful
+>    (forced power-off is required).
+> 
+> This started happening after the upgrade to Debian bullseye, and the
+> problem remains with Debian bookworm.
+> [...] 
 
-The nvidia driver sets these two basic registry entries always,
-so copy it.
+Thanks for your report. With a bit of luck someone will look into this,
+But I doubt it, as this report has some aspects why it might be ignored.
+Mainly: (a) the report was about a stable/longterm kernel and (b)it's
+afaics unclear if the problem even happens with the latest mainline
+kernel. For details about these aspects, see:
+https://linux-regtracking.leemhuis.info/post/frequent-reasons-why-linux-kernel-bug-reports-are-ignored/
 
-Signed-off-by: Dave Airlie <airlied@redhat.com>
----
- .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 45 ++++++++++++++-----
- 1 file changed, 35 insertions(+), 10 deletions(-)
+You thus might want to check if the problem occurs with 6.6 -- and
+ideally also check if reverting the culprit there fixes things for you.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/d=
-rm/nouveau/nvkm/subdev/gsp/r535.c
-index b6f6b5e747d4..5bd38b1de226 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-@@ -1029,26 +1029,51 @@ r535_gsp_rpc_unloading_guest_driver(struct nvkm_gsp=
- *gsp, bool suspend)
- =09return nvkm_gsp_rpc_wr(gsp, rpc, true);
- }
-=20
-+/* dword only */
-+struct nv_gsp_registry_entries {
-+=09const char *name;
-+=09uint32_t value;
-+};
-+
-+#define NV_GSP_REG_NUM_ENTRIES 2
-+
-+static const struct nv_gsp_registry_entries r535_registry_entries[NV_GSP_R=
-EG_NUM_ENTRIES] =3D {
-+=09{ "RMSecBusResetEnable", 1 },
-+=09{ "RMForcePcieConfigSave", 1 },
-+};
-+
- static int
- r535_gsp_rpc_set_registry(struct nvkm_gsp *gsp)
- {
- =09PACKED_REGISTRY_TABLE *rpc;
- =09char *strings;
-+=09int str_offset;
-+=09int i;
-+=09size_t rpc_size =3D sizeof(*rpc) + sizeof(rpc->entries[0]) * NV_GSP_REG=
-_NUM_ENTRIES;
-=20
--=09rpc =3D nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_SET_REGISTRY,
--=09=09=09       sizeof(*rpc) + sizeof(rpc->entries[0]) + 1);
-+=09/* add strings + null terminator */
-+=09for (i =3D 0; i < NV_GSP_REG_NUM_ENTRIES; i++)
-+=09=09rpc_size +=3D strlen(r535_registry_entries[i].name) + 1;
-+
-+=09rpc =3D nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_SET_REGISTRY, rpc_si=
-ze);
- =09if (IS_ERR(rpc))
- =09=09return PTR_ERR(rpc);
-=20
- =09rpc->size =3D sizeof(*rpc);
--=09rpc->numEntries =3D 1;
--=09rpc->entries[0].nameOffset =3D offsetof(typeof(*rpc), entries[1]);
--=09rpc->entries[0].type =3D 1;
--=09rpc->entries[0].data =3D 0;
--=09rpc->entries[0].length =3D 4;
--
--=09strings =3D (char *)&rpc->entries[1];
--=09strings[0] =3D '\0';
-+=09rpc->numEntries =3D NV_GSP_REG_NUM_ENTRIES;
-+
-+=09str_offset =3D offsetof(typeof(*rpc), entries[NV_GSP_REG_NUM_ENTRIES]);
-+=09strings =3D (char *)&rpc->entries[NV_GSP_REG_NUM_ENTRIES];
-+=09for (i =3D 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
-+=09=09int name_len =3D strlen(r535_registry_entries[i].name) + 1;
-+=09=09rpc->entries[i].nameOffset =3D str_offset;
-+=09=09rpc->entries[i].type =3D 1;
-+=09=09rpc->entries[i].data =3D r535_registry_entries[i].value;
-+=09=09rpc->entries[i].length =3D 4;
-+=09=09memcpy(strings, r535_registry_entries[i].name, name_len);
-+=09=09strings +=3D name_len;
-+=09=09str_offset +=3D name_len;
-+=09}
-=20
- =09return nvkm_gsp_rpc_wr(gsp, rpc, false);
- }
---=20
-2.41.0
+That might help getting things rolling, but it's a pretty old
+regression, which complicates things.
+
+Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
+--
+Everything you wanna know about Linux kernel regression tracking:
+https://linux-regtracking.leemhuis.info/about/#tldr
+If I did something stupid, please tell me, as explained on that page.
 
