@@ -1,70 +1,70 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADA677DE8E8
-	for <lists+nouveau@lfdr.de>; Thu,  2 Nov 2023 00:31:45 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4181B7DE8EA
+	for <lists+nouveau@lfdr.de>; Thu,  2 Nov 2023 00:31:49 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8509910E7E3;
-	Wed,  1 Nov 2023 23:31:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3834B10E7E5;
+	Wed,  1 Nov 2023 23:31:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5B91710E7E2
- for <nouveau@lists.freedesktop.org>; Wed,  1 Nov 2023 23:31:30 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 484C510E7E2
+ for <nouveau@lists.freedesktop.org>; Wed,  1 Nov 2023 23:31:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1698881489;
+ s=mimecast20190719; t=1698881492;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HHqLLAc60dwamxaygC2L/egQsbDCJ0kydHBon+KAuxI=;
- b=LfOBG/c3gaWDXBo2JKHtCcP9pqEVDR2mA4qrXBECOeneurpGZNbFbDWDLs8rGk6Tuh1QXM
- 9KrgMqzyuu/VhaipEATVU/vgC4m/xmbGueOXjEK05d+S6kILQLqCGcpAIqrn3P1FxJzdXy
- Hd1zPd8mXAdGjNf/r7r072ngA48GwGw=
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=B/VNYdgSll2ACKqst9EYQmPz34iqqPWKPy+dBFz8o6o=;
+ b=YQRhEbsn9DX1gpBm9FGF/Fc1x6MBmYIqygdYVqIDtcbzYYYCptOSWcsN4vyqhf7G18JuyC
+ qlLeIJmMm8gj58mE9B/b4Ca601GXAI9GTG2XzCiwFaSHh4caZn1S6TLQrqelACqlxNoKea
+ RwFilGYNJEn/bWXshj7HecAZ76q0Jjk=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-190-40U84uNvOs-XmD_De8M9sg-1; Wed, 01 Nov 2023 19:31:27 -0400
-X-MC-Unique: 40U84uNvOs-XmD_De8M9sg-1
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-9a681c3470fso20212166b.1
- for <nouveau@lists.freedesktop.org>; Wed, 01 Nov 2023 16:31:27 -0700 (PDT)
+ us-mta-63-H5vVKXp7NFC-iHdKZ3uZ_w-1; Wed, 01 Nov 2023 19:31:31 -0400
+X-MC-Unique: H5vVKXp7NFC-iHdKZ3uZ_w-1
+Received: by mail-ed1-f71.google.com with SMTP id
+ 4fb4d7f45d1cf-54366567af4so358106a12.1
+ for <nouveau@lists.freedesktop.org>; Wed, 01 Nov 2023 16:31:30 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698881486; x=1699486286;
+ d=1e100.net; s=20230601; t=1698881490; x=1699486290;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HHqLLAc60dwamxaygC2L/egQsbDCJ0kydHBon+KAuxI=;
- b=Bo4nTmAKFP/4KJ1egpeZJNbcpgnlispgWQ3hUPbyTtAzhQ3QswxtnvKf8z+pee3g87
- bFQuf4o9Y2YmFnhMeBCmF1uizZBTmgajm99uFvA+3nUF2RpGMThC3GDKVLaqQbiqSzsw
- AlfdcPEu7Ew47tuHqpOe2RVGAFWoNQPYd7aDRqTkDUA4lbPjym75+IViizDa3hE2rQwe
- XwQsf3lQvvFneysgcJHkS9u7573QWM3Zzsp1V4c4b2FpSio3bHmGjOtXFqKhi2/4DPyJ
- scVtVGjc/9oAWCw+wwjSZWq6ZOkMZgNiFvl4JoCU8xQ73CxUVZeWqFhugNYLHSe31vg9
- Ubgw==
-X-Gm-Message-State: AOJu0YyqhjS10u6JTCPVgBGy0NKvmFJBwtyn3fSy7kqFP4LXIX1k7sBq
- i5+nLWhV/Phk/qU6JXsrx/4/Ix4KEjuxClEg+NDI9ITubbyCetPOeqNMt7SUtY37umsLtvz44JW
- 3IoPRlxmtmRUjfEd6I4tYb1fbEA==
-X-Received: by 2002:a17:907:31c3:b0:9bf:122a:7db2 with SMTP id
- xf3-20020a17090731c300b009bf122a7db2mr3474698ejb.66.1698881486550; 
- Wed, 01 Nov 2023 16:31:26 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH/5E8sRENo9jAXHprVwNPsovyn+OIgRlppVqqGsSqi1Rdc/suX6QYRwvYBLU9eNRAS4LTetg==
-X-Received: by 2002:a17:907:31c3:b0:9bf:122a:7db2 with SMTP id
- xf3-20020a17090731c300b009bf122a7db2mr3474685ejb.66.1698881486291; 
- Wed, 01 Nov 2023 16:31:26 -0700 (PDT)
+ bh=B/VNYdgSll2ACKqst9EYQmPz34iqqPWKPy+dBFz8o6o=;
+ b=TnkS1r9TXH2fQO1+VfqvRTuYI6UEUl0ScYprH8ArSluIPmXWiTxlKhqN4S1lZFpz/v
+ HctmXOsbm4IAW6ELOjmrShNi3Be/fa3oy4Ok29xh0Hz4YXviheC39wgphOoHLxewBJnr
+ l2J6nrCM4HLLyAliZJyCFEYe+w4ZgWbBYEjQYLnKwDBnWAKOpPuM/BS3anqkJLyPUsVh
+ 0yq6rmiInnlj7f+8haA7PX4MaK6o6VKa1VM869rGfGQzjPeAkO8zePCyjwDLQGkgmbnt
+ Nf82D0Vzqw8Mmn47xDpsj1BkFgKXgkgFy3sN8z+lliXVIKv5aN87V8+FPN6uUAivbNvo
+ QVyg==
+X-Gm-Message-State: AOJu0YxssJbNgkFU8Uu/Xt8o0eCXNDfB/w8g4wdzfDJEEVa6SlmfwjBB
+ dQkhUd+gyVixi7hCuuENds2aRe0+kOw2v01V+neBFxkmOj8/KRZRTTXZY0OnLGR6a/cuYRzTgAS
+ QOPGiaPFCJu6DLhJSTED612kiEQ==
+X-Received: by 2002:aa7:d6c4:0:b0:543:42ac:c9f3 with SMTP id
+ x4-20020aa7d6c4000000b0054342acc9f3mr3612979edr.19.1698881490023; 
+ Wed, 01 Nov 2023 16:31:30 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFRYXLwVkzVGPU7LguN6QpCv28Yb/7P5U0T7qrfr5WzCGdt3zscx7X5wozPytxOnq0whY0MOA==
+X-Received: by 2002:aa7:d6c4:0:b0:543:42ac:c9f3 with SMTP id
+ x4-20020aa7d6c4000000b0054342acc9f3mr3612974edr.19.1698881489858; 
+ Wed, 01 Nov 2023 16:31:29 -0700 (PDT)
 Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- h4-20020a170906718400b00997e99a662bsm463484ejk.20.2023.11.01.16.31.25
+ c2-20020a50d642000000b0053635409213sm1641016edj.34.2023.11.01.16.31.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Nov 2023 16:31:25 -0700 (PDT)
+ Wed, 01 Nov 2023 16:31:29 -0700 (PDT)
 From: Danilo Krummrich <dakr@redhat.com>
 To: airlied@gmail.com, daniel@ffwll.ch, matthew.brost@intel.com,
  thomas.hellstrom@linux.intel.com, sarah.walker@imgtec.com,
  donald.robson@imgtec.com, boris.brezillon@collabora.com,
  christian.koenig@amd.com, faith@gfxstrand.net
-Date: Thu,  2 Nov 2023 00:30:54 +0100
-Message-ID: <20231101233113.8059-3-dakr@redhat.com>
+Date: Thu,  2 Nov 2023 00:30:55 +0100
+Message-ID: <20231101233113.8059-4-dakr@redhat.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231101233113.8059-1-dakr@redhat.com>
 References: <20231101233113.8059-1-dakr@redhat.com>
@@ -73,8 +73,8 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Subject: [Nouveau] [PATCH drm-misc-next v8 02/12] drm/gpuvm: don't always
- WARN in drm_gpuvm_check_overflow()
+Subject: [Nouveau] [PATCH drm-misc-next v8 03/12] drm/gpuvm: export
+ drm_gpuvm_range_valid()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,72 +91,59 @@ Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Don't always WARN in drm_gpuvm_check_overflow() and separate it into a
-drm_gpuvm_check_overflow() and a dedicated
-drm_gpuvm_warn_check_overflow() variant.
-
-This avoids printing warnings due to invalid userspace requests.
+Drivers may use this function to validate userspace requests in advance,
+hence export it.
 
 Signed-off-by: Danilo Krummrich <dakr@redhat.com>
 ---
- drivers/gpu/drm/drm_gpuvm.c | 20 +++++++++++++-------
- 1 file changed, 13 insertions(+), 7 deletions(-)
+ drivers/gpu/drm/drm_gpuvm.c | 14 +++++++++++++-
+ include/drm/drm_gpuvm.h     |  1 +
+ 2 files changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
-index d7367a202fee..445767f8fbc4 100644
+index 445767f8fbc4..2669f9bbc377 100644
 --- a/drivers/gpu/drm/drm_gpuvm.c
 +++ b/drivers/gpu/drm/drm_gpuvm.c
-@@ -614,12 +614,18 @@ static int __drm_gpuva_insert(struct drm_gpuvm *gpuvm,
- static void __drm_gpuva_remove(struct drm_gpuva *va);
- 
- static bool
--drm_gpuvm_check_overflow(struct drm_gpuvm *gpuvm, u64 addr, u64 range)
-+drm_gpuvm_check_overflow(u64 addr, u64 range)
- {
- 	u64 end;
- 
--	return drm_WARN(gpuvm->drm, check_add_overflow(addr, range, &end),
--			"GPUVA address limited to %zu bytes.\n", sizeof(end));
-+	return check_add_overflow(addr, range, &end);
-+}
-+
-+static bool
-+drm_gpuvm_warn_check_overflow(struct drm_gpuvm *gpuvm, u64 addr, u64 range)
-+{
-+	return drm_WARN(gpuvm->drm, drm_gpuvm_check_overflow(addr, range),
-+			"GPUVA address limited to %zu bytes.\n", sizeof(addr));
+@@ -649,7 +649,18 @@ drm_gpuvm_in_kernel_node(struct drm_gpuvm *gpuvm, u64 addr, u64 range)
+ 	return krange && addr < kend && kstart < end;
  }
  
- static bool
-@@ -647,7 +653,7 @@ static bool
+-static bool
++/**
++ * drm_gpuvm_range_valid() - checks whether the given range is valid for the
++ * given &drm_gpuvm
++ * @gpuvm: the GPUVM to check the range for
++ * @addr: the base address
++ * @range: the range starting from the base address
++ *
++ * Checks whether the range is within the GPUVM's managed boundaries.
++ *
++ * Returns: true for a valid range, false otherwise
++ */
++bool
  drm_gpuvm_range_valid(struct drm_gpuvm *gpuvm,
  		      u64 addr, u64 range)
  {
--	return !drm_gpuvm_check_overflow(gpuvm, addr, range) &&
-+	return !drm_gpuvm_check_overflow(addr, range) &&
+@@ -657,6 +668,7 @@ drm_gpuvm_range_valid(struct drm_gpuvm *gpuvm,
  	       drm_gpuvm_in_mm_range(gpuvm, addr, range) &&
  	       !drm_gpuvm_in_kernel_node(gpuvm, addr, range);
  }
-@@ -682,7 +688,7 @@ drm_gpuvm_init(struct drm_gpuvm *gpuvm, const char *name,
- 	gpuvm->ops = ops;
- 	gpuvm->drm = drm;
++EXPORT_SYMBOL_GPL(drm_gpuvm_range_valid);
  
--	drm_gpuvm_check_overflow(gpuvm, start_offset, range);
-+	drm_gpuvm_warn_check_overflow(gpuvm, start_offset, range);
- 	gpuvm->mm_start = start_offset;
- 	gpuvm->mm_range = range;
+ /**
+  * drm_gpuvm_init() - initialize a &drm_gpuvm
+diff --git a/include/drm/drm_gpuvm.h b/include/drm/drm_gpuvm.h
+index 687fd5893624..13eac6f70061 100644
+--- a/include/drm/drm_gpuvm.h
++++ b/include/drm/drm_gpuvm.h
+@@ -253,6 +253,7 @@ void drm_gpuvm_init(struct drm_gpuvm *gpuvm, const char *name,
+ 		    const struct drm_gpuvm_ops *ops);
+ void drm_gpuvm_destroy(struct drm_gpuvm *gpuvm);
  
-@@ -691,8 +697,8 @@ drm_gpuvm_init(struct drm_gpuvm *gpuvm, const char *name,
- 		gpuvm->kernel_alloc_node.va.addr = reserve_offset;
- 		gpuvm->kernel_alloc_node.va.range = reserve_range;
++bool drm_gpuvm_range_valid(struct drm_gpuvm *gpuvm, u64 addr, u64 range);
+ bool drm_gpuvm_interval_empty(struct drm_gpuvm *gpuvm, u64 addr, u64 range);
  
--		if (likely(!drm_gpuvm_check_overflow(gpuvm, reserve_offset,
--						     reserve_range)))
-+		if (likely(!drm_gpuvm_warn_check_overflow(gpuvm, reserve_offset,
-+							  reserve_range)))
- 			__drm_gpuva_insert(gpuvm, &gpuvm->kernel_alloc_node);
- 	}
- }
+ static inline struct drm_gpuva *
 -- 
 2.41.0
 
