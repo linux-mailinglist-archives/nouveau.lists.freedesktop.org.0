@@ -2,124 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1C337DD6DF
-	for <lists+nouveau@lfdr.de>; Tue, 31 Oct 2023 21:02:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D421A7DDB0F
+	for <lists+nouveau@lfdr.de>; Wed,  1 Nov 2023 03:37:43 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 72AFF10E4DE;
-	Tue, 31 Oct 2023 20:02:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BFE0410E61E;
+	Wed,  1 Nov 2023 02:37:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2073.outbound.protection.outlook.com [40.107.223.73])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3BAA710E4DE;
- Tue, 31 Oct 2023 20:02:45 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dGn0zIb8U7qz/CN5pAl52p2V/wR25GFGX8q1MWnxNPvPM658rzT14DY5nM/jwOXTw/EX/oXExTYE4pswx2ROkJnBKRA0XUHHgJGBEZwvrn9SVBXyyYSqwxUjmM9ncHhNh2KiBaV4zHDSdROlVjx9pzwCVCRW2gPigpHO14+5tJpS9s/VQki0kl1s2NJHvDNGMPPE2IZIANtKS6aXM2SBcBPqJHtVrNLBbGkmG3frMFQxc2p5BYtRXspYID2FYcP3gwI4joJtGru9i6ghdjYxb4valLWxj+CUYakzVn9odnWRlICnAYJZ3N8+5TYqcNRLn6HGsMk2k1L/aQ+hXcy8UA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4wx1iQf/fP+Y+Ez+vwXF4Lf3eZw2duNWSOOhkG+d6M4=;
- b=RB/ViDyw/E3ExL8qbzSqfp9Q+79Xm7GSoPYZ/0fnXfqrZh5ycyvEm4zeMYfsH1WlUql4PNVITlpFC3ud5y0D3C130gQd0LXCa4nTXJzZ4YJLp8eckZ9ru/jG8msLRjrBkSp216hdU6QkjumxdNLRf+e4x28SD1wVHYHAIGEiT0NyQBlnuoMT9kV/O6F9AO2mnMCQXRW8nBs9mrP7wfoTa2QRG8N4Y9TW2H7HDanYT7wBZ6WyUkRv2bJR1DLZvXK7gNruRaFe+KUrrc17EPGsj5erxyBmzMkErgvPI/2CmOk/7nOURJdR0njsrCu5cWaxZ6LWb133UQdxgb/9S9t0xQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4wx1iQf/fP+Y+Ez+vwXF4Lf3eZw2duNWSOOhkG+d6M4=;
- b=Cy41Y5tLDtnlWyl4wHRwgVKpMbPSNtIvp+zCfRluJKReo2QuT3lniyEU8PC50F8+A7Z8BMVDh3sc1u+Q99oAxjOUQ61UrkvRt9rULgEOs/AE+/La+jZee8H5mzn9seIKUIg8juxDjnJL8Y6dfXpino1Jtm9JiizFLvNI5fNKvmo90f5zYYOumX416IFcpLa/eDNIgUTLmDUSpHm5/ZsYEssOgppMRIcj/SQwtdeR8LyFi8W/0R81+K2D3uWjQ2AMPYbSX59hCUXCrQl1FysHgNrHos8yGpzslkuEoEJUgaOLm0w2gVItS8QobbErw4rB/mzbDJ0tZgFqDpXZq9dEQQ==
-Received: from SN7PR12MB8769.namprd12.prod.outlook.com (2603:10b6:806:34b::12)
- by BL1PR12MB5923.namprd12.prod.outlook.com (2603:10b6:208:39a::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.28; Tue, 31 Oct
- 2023 20:02:42 +0000
-Received: from SN7PR12MB8769.namprd12.prod.outlook.com
- ([fe80::6799:dc7a:e121:1af6]) by SN7PR12MB8769.namprd12.prod.outlook.com
- ([fe80::6799:dc7a:e121:1af6%6]) with mapi id 15.20.6933.028; Tue, 31 Oct 2023
- 20:02:42 +0000
-From: Timur Tabi <ttabi@nvidia.com>
-To: "airlied@gmail.com" <airlied@gmail.com>
-Thread-Topic: [Nouveau] [PATCH 3/3] nouveau/gsp: add some basic registry
- entries.
-Thread-Index: AQHaC7nrqx09z4mpykGvaUaC4Zd97LBkSa9kgAAJRYA=
-Date: Tue, 31 Oct 2023 20:02:42 +0000
-Message-ID: <1b84e30b689947e48d14aecb6787944d98699999.camel@nvidia.com>
-References: <20231031051943.1957328-1-airlied@gmail.com>
- <20231031051943.1957328-4-airlied@gmail.com>
- <CAOZdJXXXf3RUc3d1STyZtAENHe_DqC7sXoWZZhk7p2wo=t7SVA@mail.gmail.com>
- <CAPM=9twkLVo4aF5exWLXVfRxewcDvb17k9O3L1uB3-KG4g4FMw@mail.gmail.com>
-In-Reply-To: <CAPM=9twkLVo4aF5exWLXVfRxewcDvb17k9O3L1uB3-KG4g4FMw@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.44.4-0ubuntu2 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SN7PR12MB8769:EE_|BL1PR12MB5923:EE_
-x-ms-office365-filtering-correlation-id: 520438cd-56fd-45bc-71ec-08dbda4c578a
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 8fGla7EskdIShGIWc0mqPXDgGrxJedWilpsWmctop/6PcuBv8J5JZws6PDqxPvCQzygwERecGlEI3XPyJQRK9WlNKF7FlBlCZhCsV43BZmwNbtzU/KaFBTEM7TIMYivCM2bNb02Gb7/Qg5dh9i/P89Xz3TNP67ti7K36gIFNrwYrw6HqAC3AFp9gXNdb+0+Mf/v9iLdwHXnPvMFkkspB8HofYXz7pIQdkyvTYvZyhyA7xWU15JFFt57Foa8hdsIE7FBXyNFXc6NZ91QWzZOwgIj9RovAQaaMq1yCNmlXhowEDUulz0Vrskd4q1pKBngLbN0uEjZ5h6EwMOxCo9G0SBOQdXtxOcixBZv3xrxE2GK9o1sCgCJVBd2YPp2NOqI22LWJye9ojwBk9l3qsnD2foGEQ5z01glOawFOhdK0HRIy90Ayth7p/tYSGT9pi1zmfyAuLkAzUUV3Mlt3IedQudWjunX33OGaUWMEVyNagPLrsd9OcWLEeY9sUXYWIvCnLZyBelS7ObRPaArrunM0AJtvZEf6hy5UQoVIgXehH+HKHyHnmuR6fydlLbjo8gH4zzK7z/04x1QmIaIr+7P29jA+dEcfowPEW8UfD3++j06hkZU14qkmJnQMD2rYwuYM
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN7PR12MB8769.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39860400002)(346002)(396003)(376002)(136003)(366004)(230922051799003)(1800799009)(186009)(64100799003)(451199024)(2616005)(6512007)(26005)(38100700002)(6506007)(71200400001)(478600001)(4744005)(6486002)(8676002)(41300700001)(66946007)(66476007)(66556008)(76116006)(6916009)(66446008)(54906003)(8936002)(91956017)(316002)(4326008)(64756008)(5660300002)(38070700009)(36756003)(122000001)(86362001)(2906002);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?UGVUcDBkSGFuY0JhQWV2RnBzNUxGdUpsMXFEaE52bXBHSjN4ZVdnam9RNXJ6?=
- =?utf-8?B?RnV2WVZ0dmJ6Vjl6UWVZRWdMNzkyZHNuZDROaUVISE11TGlMTEJjc3R5ajlU?=
- =?utf-8?B?bmdOU2lOTktCaCt1UnQxeU9CNUpnQllBemI5VURrdDdySFhGVUxSaGY5M2JX?=
- =?utf-8?B?cnJpYUtIbVJyU2VYYld1OFAvanZ3Y1c1ZUpBVkdVdVNIQVNCeUhDdWFkSnY3?=
- =?utf-8?B?RWQzMmJTemVya0NiMS9JYlZzbExTcVlpOE9FN294MTBrUGVNemt5WVVQT3I2?=
- =?utf-8?B?c0luMUZvK0FnbkhJYmc0YmdiRmw1ZFZteEdIWWRBQzFEYjVHbDhoenFDdW9x?=
- =?utf-8?B?dmJxWTNSUTFzOGY3MlZMQjVFbEtNVkhDdDRHODNjd1R6a1J6eGgzaS9zS0t6?=
- =?utf-8?B?SUZ6ZXEwVzVncDUzTHhLTFFHZ2U3aGQ2VUNlN1M0RXBTSkIxVGZ1UnQrYitG?=
- =?utf-8?B?d0J6cnJrdnk3blpYL0Q4djFzTzBRVjNPVjNlaTFQYWxoaUVkcnVCdnloR0lw?=
- =?utf-8?B?TjRaOU5jM3JGbDROZFZGRldFTHdRaFZ1b09Ga1ZqVEJWNWswOVczdklxbHFG?=
- =?utf-8?B?Um80aDlzY1NVZXBIMEMreUN3RDgxbEZON1lwVzJ1M1VYOXkzMnZlMG42OTR0?=
- =?utf-8?B?c2JBT0cyY2l5T01DQTZ0R1JOTDI0YnpScElKLzNjRGJvbHZCOEdCSGZqMmI4?=
- =?utf-8?B?K3ljSFByMStvdWJieE4xV1lvd3k3NnVZWXBGNkdSbVUwUVpmcEFSTkxVRnJE?=
- =?utf-8?B?TFpKQ01xWVRkY0tYUkhhbkpCMkc3YkwxQjRWWTVRWGUrVmpNQytpZ3YzZWl5?=
- =?utf-8?B?RnJlQW11ejNyMGkrR3UrWmRsVzVVL0FuL3pld2hTeGoyNGJuaWpZNlhIN2t6?=
- =?utf-8?B?OUYyU0xIS1Zpa2J3YWFna2hzZThBdlVzVTRLd1VQWGJJVDNjQ2hGSDVqTlA0?=
- =?utf-8?B?a1N1OE1jNy9OcDc0Q25UQzVveEpSRUVXV2FkLzlIMFQ1SDAzUGFwOTlVNEh4?=
- =?utf-8?B?Z1pTSTZaYXI1Q0wzNWtVR3hyV3pKTVl0aUJucDh5MC93QS8yQWdEUGRhdlRH?=
- =?utf-8?B?T0w1T3cwMUpJT3RhdTdLUTA1ejhGckN0eUpVeUJGRll3T2FsaXFDK1FyV05s?=
- =?utf-8?B?b0hFNzhyQStoQWgvNnh4Rk1mNnY5OWwxbk55ekZieUltQlJVNVhXWXNHQm90?=
- =?utf-8?B?RmFJS28rRDNGclNWa211SG1TaWRFQUxTOFZWZEUwajZuYlhTMm9qakFhYWV4?=
- =?utf-8?B?MUZKbkZmeCtMTHIrUi8weGNRMGJzSVEzMkFibGF3WTI2Z1grVzNZTkxiTzlT?=
- =?utf-8?B?NlhPdU5KeERESjBGQU8zVHlQYndsREprTC9JcGR4SEt2OWxBWUlqWlNVbER4?=
- =?utf-8?B?Ujl5UG04WXBGN0t1VGhPRjFrcGkrOVVMYUVtOWN6ZWVBekNMOC8yaHF5V0Y1?=
- =?utf-8?B?cXhTZU9UWXlhNTA0N3VZelY1Yjd1eHJmeEZ5bTh4T1lZY1BDaDVrR3JORVli?=
- =?utf-8?B?T1U4RmlZNkRYMHkxcmU3Z2pXVHdYV3pUVGxHNFdkUXN4bEZ3SW9jY2wycSs0?=
- =?utf-8?B?NE9lSUErSlFoUjB2eFZpeTVvYWx3QW4rellJVW1VcUFqc3Fsa2ZxZ09LNmxx?=
- =?utf-8?B?OWloMzlKNGkvQ1kwZldvTC9EZElWNFVaTzFZRHFqRHZicHlrS3RvYUpsc0cw?=
- =?utf-8?B?VDM5ZWI1TW05RnVjOGJWSkhVa295NkNRQ1ZGZ1IyN2FNVHVacWI1VTdpdDdP?=
- =?utf-8?B?K2FQNUVZVUdKb3h5blN6QzNrSkdabkxpZlBLR0dwTTdWZzRpeHYzWFFvR1FE?=
- =?utf-8?B?VDkxYXE3VGRGVmp4bmsxL3Z3M0VUTmF4NWh5NjRJNGE3Q3pIS0djMUNVVy9s?=
- =?utf-8?B?SG9XKzlTKzg1REV1ODdPaTNBL0xaSm0ySE0vd2dlMndiVHE1ajRpTEg1NFlw?=
- =?utf-8?B?eWtCbDVsUVVlZjhmQld1eG1wTnAwWm1VWGpkdDloOXBXbGRYRDI5WlgxNTF4?=
- =?utf-8?B?OHB4eWJlV3Y2aStGZXJrdUt3UUgrK0h2dFpEdllvMHJKaFNTOHdIb25maUtt?=
- =?utf-8?B?Z0hlekloVWFoUXVOZGwwbEl5ZTlJTGo4dlY4cnJlNW9zY00ra3JvUkFMaTVv?=
- =?utf-8?Q?wwaHU0Lfu3im/o1by/pJgqdMX?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <79591E86A21D1F49863F6897B5AE5D44@namprd12.prod.outlook.com>
-Content-Transfer-Encoding: base64
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 437AC10E099;
+ Wed,  1 Nov 2023 02:37:32 +0000 (UTC)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-50939d39d0fso990199e87.1; 
+ Tue, 31 Oct 2023 19:37:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1698806250; x=1699411050; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RhToUgDGewUPgf6OgyTbPtKvOyKo7IWG8IUQAlqOJOY=;
+ b=P35+hqu12tiZ8QK+re9+advRRW/PEt4Jw0NXnADV4pNB6c3f0FF/TR/8V4XWIOo2yn
+ i0lePYn7r5ds+TAu6i58aoilsaU5HxmnZcw7q9OuA5CZxw+1vKWHkbjECJ6iVcClY44M
+ I02UbFv/naXj2PWzWDXe99sejKSC30qMjoQ0ZQxrwUipmaRaJNWnRTwMCazzmHpb51xp
+ NtXraME1FRxTRwjt+p/iFyDtTChj6qm7nbvdF1oVqUbFDZYwf9rCAaZc6CMDmxLHSnEg
+ HF/ca1YKQ9d9fz081zLMDwqpbWqvV2lrB1T+18xFRmtTeBYrDgF+AijuXnQD7ceezglq
+ b67A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698806250; x=1699411050;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RhToUgDGewUPgf6OgyTbPtKvOyKo7IWG8IUQAlqOJOY=;
+ b=kgQTvZrh1qS7rd+9PxD4OEzO2hb/SLGDjymU4zvx1r9swfFvMdbbbxK3XarPzvbnAg
+ GJ1NJ+QSjYheUX59Is/gixr4jhCmaqtz+YMKc40ntBCYOjYBQk80U3fHr7EWyWVK/NlK
+ iLCoyi5aJwF5ABMKBicDV+y3Rzf2IC8MnDAxNK888HkXmIOFAOheKHK0SDszYTz0m+i1
+ /8jS2+nts3TfO0ihVWfHd6XWoLQfUgX9XP1BjoQ5/j2eQssu2hMOwO8G2gl6TCx3RsAl
+ VYMQhbzHrP/9wnvE/KLHYV2C02tWWhbLl02vubYzmuzge1bfjMJFwYKSwEWDW6dL3xVn
+ s4OA==
+X-Gm-Message-State: AOJu0YyxaZl7S2n1DqllTx/qSfJqkWOXwI8Iv/XJyxXVsLJEHSmfoVWs
+ 5Wz2WY1qL1ExN4YeQb2wnTjtot29dX6mVMsE+5E=
+X-Google-Smtp-Source: AGHT+IFeh9ikxIDnkDlTHkH1PXpR/kgi5gze/lZYbODyZgaDnbprmcGirGJlGwiGQ95RhKrHlfaYPFytDVNE91zQ2Q8=
+X-Received: by 2002:a05:6512:4845:b0:500:acf1:b432 with SMTP id
+ ep5-20020a056512484500b00500acf1b432mr11708881lfb.63.1698806250074; Tue, 31
+ Oct 2023 19:37:30 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8769.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 520438cd-56fd-45bc-71ec-08dbda4c578a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 31 Oct 2023 20:02:42.3882 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: X7GwWBxNPyKGbw5FnGGDsXitvko7h1VY9EX12i4qB/PGeedHfG0kBTjTtDVlaxQPnCBlNxbJHrWnjcVuY/gqiw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5923
-Subject: Re: [Nouveau] [PATCH 3/3] nouveau/gsp: add some basic registry
- entries.
+References: <20231023032251.164775-1-luben.tuikov@amd.com>
+ <8f53f7ef-7621-4f0b-bdef-d8d20bc497ff@redhat.com>
+ <6f3e9b93-2be5-46b2-bbd9-d61d2603c14a@gmail.com>
+ <c57c7217-bfb9-4770-b17e-587f3b8a038c@redhat.com>
+ <bef15942-9543-4118-89c9-62c63c6215d4@gmail.com>
+In-Reply-To: <bef15942-9543-4118-89c9-62c63c6215d4@gmail.com>
+From: Dave Airlie <airlied@gmail.com>
+Date: Wed, 1 Nov 2023 12:37:18 +1000
+Message-ID: <CAPM=9ty3X6ods9e9g47PNEZO0Kr35a36ffq+o4b0wNg6B+zsyQ@mail.gmail.com>
+To: Luben Tuikov <ltuikov89@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH] drm/sched: Convert the GPU scheduler to
+ variable number of run-queues
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -131,24 +70,90 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
+Cc: Matthew Brost <matthew.brost@intel.com>, Emma Anholt <emma@anholt.net>,
+ lima@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Direct Rendering Infrastructure - Development
+ <dri-devel@lists.freedesktop.org>, etnaviv@lists.freedesktop.org,
+ Alex Deucher <alexander.deucher@amd.com>, Luben Tuikov <luben.tuikov@amd.com>,
+ Qiang Yu <yuq825@gmail.com>, Russell King <linux+etnaviv@armlinux.org.uk>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ freedreno@lists.freedesktop.org,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gV2VkLCAyMDIzLTExLTAxIGF0IDA1OjI5ICsxMDAwLCBEYXZlIEFpcmxpZSB3cm90ZToNCj4g
-PiANCj4gPiBzdGF0aWMgY29uc3Qgc3RydWN0IG52X2dzcF9yZWdpc3RyeV9lbnRyaWVzIHI1MzVf
-cmVnaXN0cnlfZW50cmllc1tdID0gew0KPiA+IMKgwqDCoMKgwqDCoMKgIHsgIlJNU2VjQnVzUmVz
-ZXRFbmFibGUiLCAxIH0sDQo+ID4gwqDCoMKgwqDCoMKgwqAgeyAiUk1Gb3JjZVBjaWVDb25maWdT
-YXZlIiwgMSB9LA0KPiA+IH07DQo+ID4gDQo+ID4gI2RlZmluZSBOVl9HU1BfUkVHX05VTV9FTlRS
-SUVTIEFSUkFZX1NJWkUocjUzNV9yZWdpc3RyeV9lbnRyaWVzKQ0KPiANCj4gR29vZCBwbGFuLiBJ
-J2xsIGNoYW5nZSB0aGF0IG5vdy4NCg0KQlRXLCBJIGxvb2tlZCBpbnRvIHRoZXNlIHR3byBvcHRp
-b25zLiAgQmFzaWNhbGx5LCB0aGVzZSBvcHRpb25zIGVuYWJsZQ0KInNlY29uZGFyeSBidXMgcmVz
-ZXQiLCBhbHRob3VnaCBJJ20gbm90IGV4YWN0bHkgc3VyZSB3aGF0IHRoYXQgbWVhbnMuICBJdA0K
-ZG9lcyBlbmFibGUgc2F2aW5nIG9mIFBDSSBjb25maWcgcmVnaXN0ZXJzLCBzbyBwZXJoYXBzIGl0
-IHByZXNlcnZlcyB0aG9zZQ0KcmVnaXN0ZXJzIGZvciBOb3V2ZWF1IHdoZW4gR1NQLVJNIGRvZXMg
-YSBQQ0kgcmVzZXQuDQoNCkFsc28sIGxpa2UgSSBtZW50aW9uZWQgb24gSVJDIGVhcmxpZXIsIEkn
-dmUgZ290IGEgYnVuY2ggb2YgcGF0Y2hlcyB0aGF0DQpwcm92aWRlIG1yb2Ugcm9idXN0IHJlZ2lz
-dHJ5IGNvbnRyb2wsIGluY2x1ZGluZyBzZXR0aW5nIG9wdGlvbnMgZnJvbSB0aGUNCmNvbW1hbmQt
-bGluZS4gIEknbGwgcG9zdCB0aG9zZSB1cHN0cmVhbSBvbmNlIHRoZSBkdXN0IGhhcyBzZXR0bGVk
-Lg0KDQo=
+On Wed, 1 Nov 2023 at 11:46, Luben Tuikov <ltuikov89@gmail.com> wrote:
+>
+> On 2023-10-31 09:33, Danilo Krummrich wrote:
+> >
+> > On 10/26/23 19:25, Luben Tuikov wrote:
+> >> On 2023-10-26 12:39, Danilo Krummrich wrote:
+> >>> On 10/23/23 05:22, Luben Tuikov wrote:
+> >>>> The GPU scheduler has now a variable number of run-queues, which are set up at
+> >>>> drm_sched_init() time. This way, each driver announces how many run-queues it
+> >>>> requires (supports) per each GPU scheduler it creates. Note, that run-queues
+> >>>> correspond to scheduler "priorities", thus if the number of run-queues is set
+> >>>> to 1 at drm_sched_init(), then that scheduler supports a single run-queue,
+> >>>> i.e. single "priority". If a driver further sets a single entity per
+> >>>> run-queue, then this creates a 1-to-1 correspondence between a scheduler and
+> >>>> a scheduled entity.
+> >>>
+> >>> Generally, I'm fine with this patch and how it replaces / generalizes the single
+> >>> entity approach.
+> >>
+> >> Great!
+> >>
+> >>> However, I'm not quite sure how to properly use this. What is a driver supposed to
+> >>> do, which previously took advantage of DRM_SCHED_POLICY_SINGLE_ENTITY?
+> >>>
+> >>> Is it supposed to call drm_sched_init() with num_rqs=1? If so, what's the correct way
+> >>
+> >> Yes, you call drm_sched_init() with num_rqs set to 1.
+> >>
+> >>> to initialize the drm_sched_entity then? Calling drm_sched_entity_init() with priority=0?
+> >>
+> >> Yes, with priority set to 0.
+> >>
+> >> One unfortunate fact I noticed when doing this patch is that the numerical values
+> >> assigned to enum drm_sched_priority is that the names to values are upside down.
+> >> Instead of min being 0, normal:1, high:2, kernel:3, it should've been kernel:0 (highest),
+> >> high:1, normal:2, low:4, and so on.
+> >>
+> >> The reason for this is absolutely clear: if you had a single priority, it would be
+> >> 0, the kernel, one, highest one. This is similar to how lanes in a highway are counted:
+> >> you always have lane 1. Similarly to nice(1) and kernel priorities...
+> >>
+> >>> Any other priority consequently faults in drm_sched_job_arm().
+> >>
+> >> drm_sched_job_arm() faults on !ENTITY, but the "priority" is just
+> >> assigned to s_priority:
+> >>      job->s_priority = entity->priority;
+> >>
+> >>
+> >>> While I might sound like a broken record (sorry for that), I really think everything
+> >>> related to Matt's series needs documentation, as in:
+> >>
+> >> Yes, I agree.
+> >
+> > Great! Do you plan to send a subsequent patch adding some documentation for this one? I
+> > think it'd be good to get all the above documented.
+>
+> A lot of this would be the magic sauce of drivers and hardware--as we've seen with Xe,
+> and it would be presumptuous of me to write down to the detail of what and how this
+> and that should be used.
+
+Nope it wouldn't be. Please feel free to persume how drivers might
+work in the form of documentation.
+
+At some point the scheduler needs to be documented and so far two
+maintainers have avoided doing so, and it's causing no end of
+problems.
+
+Write documentation, this goes for Xe scheduler patches, Danilo's work.
+
+When someone asks you for docs, consider it a blocker on getting stuff
+merged, because this stuff isn't obvious.
+
+Dave.
