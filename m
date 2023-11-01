@@ -2,63 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D421A7DDB0F
-	for <lists+nouveau@lfdr.de>; Wed,  1 Nov 2023 03:37:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEB147DDE9F
+	for <lists+nouveau@lfdr.de>; Wed,  1 Nov 2023 10:42:03 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BFE0410E61E;
-	Wed,  1 Nov 2023 02:37:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0534510E68F;
+	Wed,  1 Nov 2023 09:41:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 437AC10E099;
- Wed,  1 Nov 2023 02:37:32 +0000 (UTC)
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-50939d39d0fso990199e87.1; 
- Tue, 31 Oct 2023 19:37:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698806250; x=1699411050; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RhToUgDGewUPgf6OgyTbPtKvOyKo7IWG8IUQAlqOJOY=;
- b=P35+hqu12tiZ8QK+re9+advRRW/PEt4Jw0NXnADV4pNB6c3f0FF/TR/8V4XWIOo2yn
- i0lePYn7r5ds+TAu6i58aoilsaU5HxmnZcw7q9OuA5CZxw+1vKWHkbjECJ6iVcClY44M
- I02UbFv/naXj2PWzWDXe99sejKSC30qMjoQ0ZQxrwUipmaRaJNWnRTwMCazzmHpb51xp
- NtXraME1FRxTRwjt+p/iFyDtTChj6qm7nbvdF1oVqUbFDZYwf9rCAaZc6CMDmxLHSnEg
- HF/ca1YKQ9d9fz081zLMDwqpbWqvV2lrB1T+18xFRmtTeBYrDgF+AijuXnQD7ceezglq
- b67A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698806250; x=1699411050;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RhToUgDGewUPgf6OgyTbPtKvOyKo7IWG8IUQAlqOJOY=;
- b=kgQTvZrh1qS7rd+9PxD4OEzO2hb/SLGDjymU4zvx1r9swfFvMdbbbxK3XarPzvbnAg
- GJ1NJ+QSjYheUX59Is/gixr4jhCmaqtz+YMKc40ntBCYOjYBQk80U3fHr7EWyWVK/NlK
- iLCoyi5aJwF5ABMKBicDV+y3Rzf2IC8MnDAxNK888HkXmIOFAOheKHK0SDszYTz0m+i1
- /8jS2+nts3TfO0ihVWfHd6XWoLQfUgX9XP1BjoQ5/j2eQssu2hMOwO8G2gl6TCx3RsAl
- VYMQhbzHrP/9wnvE/KLHYV2C02tWWhbLl02vubYzmuzge1bfjMJFwYKSwEWDW6dL3xVn
- s4OA==
-X-Gm-Message-State: AOJu0YyxaZl7S2n1DqllTx/qSfJqkWOXwI8Iv/XJyxXVsLJEHSmfoVWs
- 5Wz2WY1qL1ExN4YeQb2wnTjtot29dX6mVMsE+5E=
-X-Google-Smtp-Source: AGHT+IFeh9ikxIDnkDlTHkH1PXpR/kgi5gze/lZYbODyZgaDnbprmcGirGJlGwiGQ95RhKrHlfaYPFytDVNE91zQ2Q8=
-X-Received: by 2002:a05:6512:4845:b0:500:acf1:b432 with SMTP id
- ep5-20020a056512484500b00500acf1b432mr11708881lfb.63.1698806250074; Tue, 31
- Oct 2023 19:37:30 -0700 (PDT)
-MIME-Version: 1.0
-References: <20231023032251.164775-1-luben.tuikov@amd.com>
- <8f53f7ef-7621-4f0b-bdef-d8d20bc497ff@redhat.com>
- <6f3e9b93-2be5-46b2-bbd9-d61d2603c14a@gmail.com>
- <c57c7217-bfb9-4770-b17e-587f3b8a038c@redhat.com>
- <bef15942-9543-4118-89c9-62c63c6215d4@gmail.com>
-In-Reply-To: <bef15942-9543-4118-89c9-62c63c6215d4@gmail.com>
-From: Dave Airlie <airlied@gmail.com>
-Date: Wed, 1 Nov 2023 12:37:18 +1000
-Message-ID: <CAPM=9ty3X6ods9e9g47PNEZO0Kr35a36ffq+o4b0wNg6B+zsyQ@mail.gmail.com>
-To: Luben Tuikov <ltuikov89@gmail.com>
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F2ED310E68D;
+ Wed,  1 Nov 2023 09:41:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1698831715; x=1730367715;
+ h=message-id:subject:from:to:cc:date:in-reply-to:
+ references:content-transfer-encoding:mime-version;
+ bh=OoaIkugwOcHNspHG5GL+6xzuR+FtZlARttrxfo5ccek=;
+ b=Sbfkoy8I6/7MMZxjmejmEAHcdn+YNuznvrRVZBp2DC96QOhW4xH2pBOU
+ LCBNk9m02AOxVZwcaibIFNSSqmNzbtFgC8UBiVJ/YrlrUakVyn3Bs1bzV
+ STvixEeZzA7cA9dVCq7EmKWRS7x+PrCAHvFv9s1JYx1n2nS3cvj2A6bEd
+ 5gQHZUKYH58r2L7Uk8TyZCE+2jxYz3g3iUIPCFiU6q/QabtPftRxQEeK/
+ YGUHQid9mrfXaKP/2i+YabTt+3QeXwS0FUAtxbM2ikvP408Qy0c2h6sUw
+ oftkZfSDD7CqI+hVtM6WGGI3DIv9NLyuIXR6C6bHNLWx1/krxImqa1hcA Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10880"; a="392326873"
+X-IronPort-AV: E=Sophos;i="6.03,267,1694761200"; d="scan'208";a="392326873"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+ by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 01 Nov 2023 02:41:54 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10880"; a="1092297687"
+X-IronPort-AV: E=Sophos;i="6.03,267,1694761200"; d="scan'208";a="1092297687"
+Received: from olindum-mobl1.ger.corp.intel.com (HELO [10.249.254.59])
+ ([10.249.254.59])
+ by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 01 Nov 2023 02:41:50 -0700
+Message-ID: <1043bb3c1156d08015db5478183888892dfeda88.camel@linux.intel.com>
+From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
+To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch, 
+ matthew.brost@intel.com, sarah.walker@imgtec.com, donald.robson@imgtec.com,
+ boris.brezillon@collabora.com, christian.koenig@amd.com,
+ faith@gfxstrand.net
+Date: Wed, 01 Nov 2023 10:41:48 +0100
+In-Reply-To: <b09e37f3-33f6-4ea8-876b-f0bee9627ced@redhat.com>
+References: <20231023201659.25332-1-dakr@redhat.com>
+ <20231023201659.25332-5-dakr@redhat.com>
+ <4a51c1cd9e2435332e033f9426bac8fae1c21c60.camel@linux.intel.com>
+ <980754a3-7f5a-465e-88a9-62a40c82cae8@redhat.com>
+ <ab8f30452540171447118d64931e66da96b6e85e.camel@linux.intel.com>
+ <b09e37f3-33f6-4ea8-876b-f0bee9627ced@redhat.com>
+Organization: Intel Sweden AB, Registration Number: 556189-6027
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH] drm/sched: Convert the GPU scheduler to
- variable number of run-queues
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.46.4 (3.46.4-1.fc37) 
+MIME-Version: 1.0
+Subject: Re: [Nouveau] [PATCH drm-misc-next v7 4/7] drm/gpuvm: add an
+ abstraction for a VM / BO combination
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,90 +68,155 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Matthew Brost <matthew.brost@intel.com>, Emma Anholt <emma@anholt.net>,
- lima@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Direct Rendering Infrastructure - Development
- <dri-devel@lists.freedesktop.org>, etnaviv@lists.freedesktop.org,
- Alex Deucher <alexander.deucher@amd.com>, Luben Tuikov <luben.tuikov@amd.com>,
- Qiang Yu <yuq825@gmail.com>, Russell King <linux+etnaviv@armlinux.org.uk>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Boris Brezillon <boris.brezillon@collabora.com>,
- freedreno@lists.freedesktop.org,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 1 Nov 2023 at 11:46, Luben Tuikov <ltuikov89@gmail.com> wrote:
->
-> On 2023-10-31 09:33, Danilo Krummrich wrote:
-> >
-> > On 10/26/23 19:25, Luben Tuikov wrote:
-> >> On 2023-10-26 12:39, Danilo Krummrich wrote:
-> >>> On 10/23/23 05:22, Luben Tuikov wrote:
-> >>>> The GPU scheduler has now a variable number of run-queues, which are set up at
-> >>>> drm_sched_init() time. This way, each driver announces how many run-queues it
-> >>>> requires (supports) per each GPU scheduler it creates. Note, that run-queues
-> >>>> correspond to scheduler "priorities", thus if the number of run-queues is set
-> >>>> to 1 at drm_sched_init(), then that scheduler supports a single run-queue,
-> >>>> i.e. single "priority". If a driver further sets a single entity per
-> >>>> run-queue, then this creates a 1-to-1 correspondence between a scheduler and
-> >>>> a scheduled entity.
-> >>>
-> >>> Generally, I'm fine with this patch and how it replaces / generalizes the single
-> >>> entity approach.
-> >>
-> >> Great!
-> >>
-> >>> However, I'm not quite sure how to properly use this. What is a driver supposed to
-> >>> do, which previously took advantage of DRM_SCHED_POLICY_SINGLE_ENTITY?
-> >>>
-> >>> Is it supposed to call drm_sched_init() with num_rqs=1? If so, what's the correct way
-> >>
-> >> Yes, you call drm_sched_init() with num_rqs set to 1.
-> >>
-> >>> to initialize the drm_sched_entity then? Calling drm_sched_entity_init() with priority=0?
-> >>
-> >> Yes, with priority set to 0.
-> >>
-> >> One unfortunate fact I noticed when doing this patch is that the numerical values
-> >> assigned to enum drm_sched_priority is that the names to values are upside down.
-> >> Instead of min being 0, normal:1, high:2, kernel:3, it should've been kernel:0 (highest),
-> >> high:1, normal:2, low:4, and so on.
-> >>
-> >> The reason for this is absolutely clear: if you had a single priority, it would be
-> >> 0, the kernel, one, highest one. This is similar to how lanes in a highway are counted:
-> >> you always have lane 1. Similarly to nice(1) and kernel priorities...
-> >>
-> >>> Any other priority consequently faults in drm_sched_job_arm().
-> >>
-> >> drm_sched_job_arm() faults on !ENTITY, but the "priority" is just
-> >> assigned to s_priority:
-> >>      job->s_priority = entity->priority;
-> >>
-> >>
-> >>> While I might sound like a broken record (sorry for that), I really think everything
-> >>> related to Matt's series needs documentation, as in:
-> >>
-> >> Yes, I agree.
-> >
-> > Great! Do you plan to send a subsequent patch adding some documentation for this one? I
-> > think it'd be good to get all the above documented.
->
-> A lot of this would be the magic sauce of drivers and hardware--as we've seen with Xe,
-> and it would be presumptuous of me to write down to the detail of what and how this
-> and that should be used.
+Hi, Danilo,
 
-Nope it wouldn't be. Please feel free to persume how drivers might
-work in the form of documentation.
+On Tue, 2023-10-31 at 18:52 +0100, Danilo Krummrich wrote:
+> On 10/31/23 17:45, Thomas Hellstr=C3=B6m wrote:
+> > On Tue, 2023-10-31 at 17:39 +0100, Danilo Krummrich wrote:
+> > > On 10/31/23 12:25, Thomas Hellstr=C3=B6m wrote:
+> > > > On Mon, 2023-10-23 at 22:16 +0200, Danilo Krummrich wrote:
+> > > > > Add an abstraction layer between the drm_gpuva mappings of a
+> > > > > particular
+> > > > > drm_gem_object and this GEM object itself. The abstraction
+> > > > > represents
+> > > > > a
+> > > > > combination of a drm_gem_object and drm_gpuvm. The
+> > > > > drm_gem_object
+> > > > > holds
+> > > > > a list of drm_gpuvm_bo structures (the structure representing
+> > > > > this
+> > > > > abstraction), while each drm_gpuvm_bo contains list of
+> > > > > mappings
+> > > > > of
+> > > > > this
+> > > > > GEM object.
+> > > > >=20
+> > > > > This has multiple advantages:
+> > > > >=20
+> > > > > 1) We can use the drm_gpuvm_bo structure to attach it to
+> > > > > various
+> > > > > lists
+> > > > > =C2=A0=C2=A0=C2=A0=C2=A0 of the drm_gpuvm. This is useful for tra=
+cking external
+> > > > > and
+> > > > > evicted
+> > > > > =C2=A0=C2=A0=C2=A0=C2=A0 objects per VM, which is introduced in s=
+ubsequent
+> > > > > patches.
+> > > > >=20
+> > > > > 2) Finding mappings of a certain drm_gem_object mapped in a
+> > > > > certain
+> > > > > =C2=A0=C2=A0=C2=A0=C2=A0 drm_gpuvm becomes much cheaper.
+> > > > >=20
+> > > > > 3) Drivers can derive and extend the structure to easily
+> > > > > represent
+> > > > > =C2=A0=C2=A0=C2=A0=C2=A0 driver specific states of a BO for a cer=
+tain GPUVM.
+> > > > >=20
+> > > > > The idea of this abstraction was taken from amdgpu, hence the
+> > > > > credit
+> > > > > for
+> > > > > this idea goes to the developers of amdgpu.
+> > > > >=20
+> > > > > Cc: Christian K=C3=B6nig <christian.koenig@amd.com>
+> > > > > Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+> > > > > ---
+> > > > > =C2=A0=C2=A0=C2=A0drivers/gpu/drm/drm_gpuvm.c=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 335
+> > > > > +++++++++++++++++++++--
+> > > > > --
+> > > > > =C2=A0=C2=A0=C2=A0drivers/gpu/drm/nouveau/nouveau_uvmm.c |=C2=A0 =
+64 +++--
+> > > > > =C2=A0=C2=A0=C2=A0include/drm/drm_gem.h=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 |=C2=A0 32 +--
+> > > > > =C2=A0=C2=A0=C2=A0include/drm/drm_gpuvm.h=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 188
+> > > > > +++++++++++++-
+> > > > > =C2=A0=C2=A0=C2=A04 files changed, 533 insertions(+), 86 deletion=
+s(-)
+> > > >=20
+> > > > That checkpatch.pl error still remains as well.
+> > >=20
+> > > I guess you refer to:
+> > >=20
+> > > ERROR: do not use assignment in if condition
+> > > #633: FILE: drivers/gpu/drm/nouveau/nouveau_uvmm.c:1165:
+> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!(op=
+->gem.obj =3D obj))
+> > >=20
+> > > This was an intentional decision, since in this specific case it
+> > > seems to
+> > > be more readable than the alternatives.
+> > >=20
+> > > However, if we consider this to be a hard rule, which we never
+> > > ever
+> > > break,
+> > > I'm fine changing it too.
+> >=20
+> > With the errors, sooner or later they are going to start generate
+> > patches to "fix" them. In this particular case also Xe CI is
+> > complaining and abort building when I submit the Xe adaptation, so
+> > it'd
+> > be good to be checkpatch.pl conformant IMHO.
+>=20
+> Ok, I will change this one.
+>=20
+> However, in general my opinion on coding style is that we should
+> preserve us
+> the privilege to deviate from it when we agree it makes sense and
+> improves
+> the code quality.
+>=20
+> Having a CI forcing people to *blindly* follow certain rules and even
+> abort
+> building isn't very beneficial in that respect.
+>=20
+> Also, consider patches which partially change a line of code that
+> already
+> contains a coding style "issue" - the CI would also block you on that
+> one I
+> guess. Besides that it seems to block you on unrelated code, note
+> that the
+> assignment in question is from Nouveau and not from GPUVM.
 
-At some point the scheduler needs to be documented and so far two
-maintainers have avoided doing so, and it's causing no end of
-problems.
+Yes, I completely agree that having CI enforce error free coding style
+checks is bad, and I'll see if I can get that changed on Xe CI. To my
+Knowledge It hasn't always been like that.
 
-Write documentation, this goes for Xe scheduler patches, Danilo's work.
+But OTOH my take on this is that if there are coding style rules and
+recommendations we should try to follow them unless there are *strong*
+reasons not to. Sometimes that may result in code that may be a little
+harder to read, but OTOH a reviewer won't have to read up on the
+component's style flavor before reviewing and it will avoid future
+style fix patches.
 
-When someone asks you for docs, consider it a blocker on getting stuff
-merged, because this stuff isn't obvious.
+Thanks,
+Thomas
 
-Dave.
+
+>=20
+> - Danilo
+>=20
+> >=20
+> > Thanks,
+> > Thomas
+> >=20
+> >=20
+> >=20
+> >=20
+> > >=20
+> > > >=20
+> > > > Thanks,
+> > > > Thomas
+> > > >=20
+> > >=20
+> >=20
+>=20
+
