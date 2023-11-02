@@ -1,62 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7C1C7DF819
-	for <lists+nouveau@lfdr.de>; Thu,  2 Nov 2023 17:57:34 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A8E367DF85E
+	for <lists+nouveau@lfdr.de>; Thu,  2 Nov 2023 18:09:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C98E610E942;
-	Thu,  2 Nov 2023 16:57:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A684510E953;
+	Thu,  2 Nov 2023 17:09:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from metis.whiteo.stw.pengutronix.de
- (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0C8F110E940
- for <nouveau@lists.freedesktop.org>; Thu,  2 Nov 2023 16:57:22 +0000 (UTC)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
- by metis.whiteo.stw.pengutronix.de with esmtps
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <ukl@pengutronix.de>)
- id 1qyb0I-00039M-MP; Thu, 02 Nov 2023 17:57:10 +0100
-Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
- by drehscheibe.grey.stw.pengutronix.de with esmtps (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <ukl@pengutronix.de>)
- id 1qyb0I-0067Fa-7R; Thu, 02 Nov 2023 17:57:10 +0100
-Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
- (envelope-from <ukl@pengutronix.de>)
- id 1qyb0H-00Bjcp-UO; Thu, 02 Nov 2023 17:57:09 +0100
-From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
-To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>
-Date: Thu,  2 Nov 2023 17:56:55 +0100
-Message-ID: <20231102165640.3307820-32-u.kleine-koenig@pengutronix.de>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231102165640.3307820-18-u.kleine-koenig@pengutronix.de>
-References: <20231102165640.3307820-18-u.kleine-koenig@pengutronix.de>
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3439110E952;
+ Thu,  2 Nov 2023 17:09:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1698944989; x=1730480989;
+ h=message-id:subject:from:to:cc:date:in-reply-to:
+ references:content-transfer-encoding:mime-version;
+ bh=ixv1gqTE6NMEVp9rSy3R/MD7Rj2NhBzFX+brakK1hbk=;
+ b=bPUIfkORZvjjsfS/b8zNZtz0gGU9/UYfpNYCaLaRTIEcAnRjMZJGnsPG
+ eWF3t0lB7AAP9/oqo6HLIRUqI+shwRsSMoXtbRzl+vNWRDTSl+oifeaAZ
+ ihMjb4XEQbIlY+g+zDTOd1P2ChQwn8BpS6zADFL0fDLs/QVGGw4qnLdTN
+ W5zwqUCTPh7tmFgpV9jE326fO3fEQe8FwXMHFBKIh5OHDhpwuldpQW+By
+ D3ysDZSiNn9T0yBnHbXSaM5YP3CKYdVK4hRdsg/EwZrYigCosSVGYHgJW
+ lrc7cy4WMWXBuCHB3acxK/6pGJ57JuZJdCmNknkw0Dq5FZYPjvp4l6E8L Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10882"; a="455245406"
+X-IronPort-AV: E=Sophos;i="6.03,272,1694761200"; d="scan'208";a="455245406"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+ by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Nov 2023 10:09:47 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10882"; a="851986291"
+X-IronPort-AV: E=Sophos;i="6.03,272,1694761200"; d="scan'208";a="851986291"
+Received: from binsumax-mobl.gar.corp.intel.com (HELO [10.249.254.171])
+ ([10.249.254.171])
+ by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Nov 2023 10:09:44 -0700
+Message-ID: <f95dd975acc6c82e4e6cd0596c14072799eb5a20.camel@linux.intel.com>
+From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
+To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch, 
+ matthew.brost@intel.com, sarah.walker@imgtec.com, donald.robson@imgtec.com,
+ boris.brezillon@collabora.com, christian.koenig@amd.com,
+ faith@gfxstrand.net
+Date: Thu, 02 Nov 2023 18:09:41 +0100
+In-Reply-To: <20231101233113.8059-10-dakr@redhat.com>
+References: <20231101233113.8059-1-dakr@redhat.com>
+ <20231101233113.8059-10-dakr@redhat.com>
+Organization: Intel Sweden AB, Registration Number: 556189-6027
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.46.4 (3.46.4-1.fc37) 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1738;
- i=u.kleine-koenig@pengutronix.de; h=from:subject;
- bh=XPVoJBbMBUSvYyjx4uw4bxZxhwzLEYZRiBurlJ1CeFE=;
- b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBlQ9TZxTgPSo6BtSM42ZJD90Vg269nthAoWtIoB
- xljx+SeDTuJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCZUPU2QAKCRCPgPtYfRL+
- TrBWCACq5Sq8orLY/rMi5HzQmXpTYwnpbfEeQgUhhO/sPIobjUehgobUEuKAfyQ4YiJcChNshO8
- kVuFSRiQSQAGcc5fKNXAPWSH0ddymXhukVRrdfnHgkE9WEvPYHv19evsDkhLLnPff/VeVtzANOM
- eWEF2Of0LPyAXSddI6FM/zG1uBw6z5DBAwBVRpAscXRn6W/dzHCzK4QvKdMNiTW7FqKeBfpdtks
- mguaiuv5AO9EpiLtM2cU2YKWE9CezTsmcl1+QBijsVQzmPfHwnm9qhEe1VdAnRQ+SV5NzTxaHPl
- 0YL7bP85wTIG7/QIR1kiseQR+Z0xmHBFh/5dpiwLnMPy6Ya/
-X-Developer-Key: i=u.kleine-koenig@pengutronix.de; a=openpgp;
- fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ukl@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: nouveau@lists.freedesktop.org
-Subject: [Nouveau] [PATCH v3 14/16] drm/nouveau: Convert to platform remove
- callback returning void
+Subject: Re: [Nouveau] [PATCH drm-misc-next v8 09/12] drm/gpuvm: reference
+ count drm_gpuvm structures
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,53 +64,136 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Jyri Sarha <jyri.sarha@iki.fi>,
- kernel@pengutronix.de, dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The .remove() callback for a platform driver returns an int which makes
-many driver authors wrongly assume it's possible to do error handling by
-returning an error code. However the value returned is (mostly) ignored
-and this typically results in resource leaks. To improve here there is a
-quest to make the remove callback return void. In the first step of this
-quest all drivers are converted to .remove_new() which already returns
-void.
+On Thu, 2023-11-02 at 00:31 +0100, Danilo Krummrich wrote:
+> Implement reference counting for struct drm_gpuvm.
+>=20
+> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+> ---
+> =C2=A0drivers/gpu/drm/drm_gpuvm.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 44 +++++++++++++++++++-----
+> --
+> =C2=A0drivers/gpu/drm/nouveau/nouveau_uvmm.c | 20 +++++++++---
+> =C2=A0include/drm/drm_gpuvm.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 31 +++++++++++++++++-
+> =C2=A03 files changed, 78 insertions(+), 17 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/drm_gpuvm.c
+> b/drivers/gpu/drm/drm_gpuvm.c
+> index 53e2c406fb04..6a88eafc5229 100644
+> --- a/drivers/gpu/drm/drm_gpuvm.c
+> +++ b/drivers/gpu/drm/drm_gpuvm.c
+> @@ -746,6 +746,8 @@ drm_gpuvm_init(struct drm_gpuvm *gpuvm, const
+> char *name,
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gpuvm->rb.tree =3D RB_ROO=
+T_CACHED;
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0INIT_LIST_HEAD(&gpuvm->rb=
+.list);
+> =C2=A0
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0kref_init(&gpuvm->kref);
+> +
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gpuvm->name =3D name ? na=
+me : "unknown";
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gpuvm->flags =3D flags;
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gpuvm->ops =3D ops;
+> @@ -770,15 +772,8 @@ drm_gpuvm_init(struct drm_gpuvm *gpuvm, const
+> char *name,
+> =C2=A0}
+> =C2=A0EXPORT_SYMBOL_GPL(drm_gpuvm_init);
+> =C2=A0
+> -/**
+> - * drm_gpuvm_destroy() - cleanup a &drm_gpuvm
+> - * @gpuvm: pointer to the &drm_gpuvm to clean up
+> - *
+> - * Note that it is a bug to call this function on a manager that
+> still
+> - * holds GPU VA mappings.
+> - */
+> -void
+> -drm_gpuvm_destroy(struct drm_gpuvm *gpuvm)
+> +static void
+> +drm_gpuvm_fini(struct drm_gpuvm *gpuvm)
+> =C2=A0{
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gpuvm->name =3D NULL;
+> =C2=A0
+> @@ -790,7 +785,33 @@ drm_gpuvm_destroy(struct drm_gpuvm *gpuvm)
+> =C2=A0
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0drm_gem_object_put(gpuvm-=
+>r_obj);
+> =C2=A0}
+> -EXPORT_SYMBOL_GPL(drm_gpuvm_destroy);
+> +
+> +static void
+> +drm_gpuvm_free(struct kref *kref)
+> +{
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct drm_gpuvm *gpuvm =3D co=
+ntainer_of(kref, struct
+> drm_gpuvm, kref);
+> +
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (drm_WARN_ON(gpuvm->drm, !g=
+puvm->ops->vm_free))
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0return;
+> +
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0drm_gpuvm_fini(gpuvm);
+> +
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0gpuvm->ops->vm_free(gpuvm);
+> +}
+> +
+> +/**
+> + * drm_gpuvm_bo_put() - drop a struct drm_gpuvm reference
+copy-paste error in function name.
 
-Trivially convert this driver from always returning zero in the remove
-callback to the void returning variant.
+Also it appears like xe might put a vm from irq context so we should
+document the context where this function call is allowable, and if
+applicable add a might_sleep().
 
-Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reviewed-by: Jyri Sarha <jyri.sarha@iki.fi>
-Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
----
- drivers/gpu/drm/nouveau/nouveau_platform.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+If this function needs to sleep we can work around that in Xe by
+keeping an xe-private refcount for the xe vm container, but I'd like to
+avoid that if possible and piggy-back on the refcount introduced here.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_platform.c b/drivers/gpu/drm/nouveau/nouveau_platform.c
-index 23cd43a7fd19..bf2dc7567ea4 100644
---- a/drivers/gpu/drm/nouveau/nouveau_platform.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_platform.c
-@@ -43,11 +43,10 @@ static int nouveau_platform_probe(struct platform_device *pdev)
- 	return 0;
- }
- 
--static int nouveau_platform_remove(struct platform_device *pdev)
-+static void nouveau_platform_remove(struct platform_device *pdev)
- {
- 	struct drm_device *dev = platform_get_drvdata(pdev);
- 	nouveau_drm_device_remove(dev);
--	return 0;
- }
- 
- #if IS_ENABLED(CONFIG_OF)
-@@ -93,5 +92,5 @@ struct platform_driver nouveau_platform_driver = {
- 		.of_match_table = of_match_ptr(nouveau_platform_match),
- 	},
- 	.probe = nouveau_platform_probe,
--	.remove = nouveau_platform_remove,
-+	.remove_new = nouveau_platform_remove,
- };
--- 
-2.42.0
+> + * @gpuvm: the &drm_gpuvm to release the reference of
+> + *
+> + * This releases a reference to @gpuvm.
+> + */
+> +void
+> +drm_gpuvm_put(struct drm_gpuvm *gpuvm)
+> +{
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (gpuvm)
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0kref_put(&gpuvm->kref, drm_gpuvm_free);
+> +}
+> +EXPORT_SYMBOL_GPL(drm_gpuvm_put);
+> =C2=A0
+> =C2=A0static int
+> =C2=A0__drm_gpuva_insert(struct drm_gpuvm *gpuvm,
+> @@ -843,7 +864,7 @@ drm_gpuva_insert(struct drm_gpuvm *gpuvm,
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (unlikely(!drm_gpuvm_r=
+ange_valid(gpuvm, addr, range)))
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0return -EINVAL;
+> =C2=A0
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return __drm_gpuva_insert(gpuv=
+m, va);
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return __drm_gpuva_insert(drm_=
+gpuvm_get(gpuvm), va);
+
+Here we leak a reference if __drm_gpuva_insert() fails, and IMO the
+reference should be taken where the pointer holding the reference is
+assigned (in this case in __drm_gpuva_insert()), or document the
+reference transfer from the argument close to the assignment.
+
+But since a va itself is not refcounted it clearly can't outlive the
+vm, so is a reference really needed here?
+
+I'd suggest using an accessor that instead of using va->vm uses va-
+>vm_bo->vm, to avoid needing to worry about the vm->vm refcount
+altoghether.
+
+Thanks,
+Thomas
 
