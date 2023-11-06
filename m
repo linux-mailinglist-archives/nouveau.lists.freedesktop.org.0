@@ -2,126 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC76682EE57
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:49:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7108082EE2B
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:48:02 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1109910E4F5;
-	Tue, 16 Jan 2024 11:47:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E0A2710E45E;
+	Tue, 16 Jan 2024 11:47:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2089.outbound.protection.outlook.com [40.107.223.89])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 77F0710E1F6;
- Sat,  4 Nov 2023 06:57:42 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Awr5OqHnvV1hmC29geWUbSlec4qzr4u9TGgQvdheDfnWvRMW030gWPLnBkIT2mJb/oF0EOfbKz9KRee7ITZfrm1o2VwI/tbZW6x/OJ6YmjzJOrvhrYOHUoi2iOTUW1AUeUVV30NGJRtVOLjHX6MyVYekTb1oZQVHip6ubONq1pQEgJLgsD82DcSC85uOAeONj1pgZD9cPYRreS/+1dVt8TmPAtorrP7/WoaOfp9FWfCQ/2MIk68QZwNPXNrai7x9iCNw1rsLjD/dl5+kL1MNhDu9LQRRRXLzSE/5a7iy/f30SBw531FtegRCtSju47VLHGXndHnT29LABL4ERzzgSw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dxiayzGVQs0Dlew/58DoZQz3IwGgGxDbtVfrFx/w480=;
- b=Ucl+ltdX0TB//dxxVrmu2snnUD8/rwHoiOpLqoeoZzFbHBM1ZA+hnkChSOIswOuXVPNfnUZFN0DhIeh8vTjT808/1c4m3mdHyQgicGA/Lux/WcYrxtbOJWf7WtDTeBFPjX6Nh/EmOp5fR+p1j92psi67qd1JfDDzzz42lcKl2dx84IJXJdTFyznxvoKakfpg2QvOjEPYpcnprV2QRH2RHrzt52yggxwMMoacwXvca7Psj3Th2YMgB4wIhubbY3TaPqDB6W1YbodNk57cjGNgAAYut47l0nAxey8DpaUHkA/mnz6CQs4LArwJaxJ/9cy4kdmJ8v1q01je/0DAdNOI6Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dxiayzGVQs0Dlew/58DoZQz3IwGgGxDbtVfrFx/w480=;
- b=r+RoXsvLAvHMrU7CbpY91pgOCUTdR8Fd5GMIPiYhtbfLxoalBRcRPPRQg87Hx67KHHaUtu6yvSwsKwdW6iWyIC3we9jN88wCbgOUW7MsDVRgPaHjRD4Ud7kOFSZaPo3zWhdf7q7JxXQwJswMc4dSV8sIw84RP7ysnDuwXTtoyos=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BYAPR12MB4614.namprd12.prod.outlook.com (2603:10b6:a03:a6::22)
- by MW6PR12MB8899.namprd12.prod.outlook.com (2603:10b6:303:248::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.21; Sat, 4 Nov
- 2023 06:57:38 +0000
-Received: from BYAPR12MB4614.namprd12.prod.outlook.com
- ([fe80::ce36:81fc:9c50:c892]) by BYAPR12MB4614.namprd12.prod.outlook.com
- ([fe80::ce36:81fc:9c50:c892%6]) with mapi id 15.20.6954.024; Sat, 4 Nov 2023
- 06:57:38 +0000
-Message-ID: <b8097564-dcba-e4bc-2d65-5c6936373772@amd.com>
-Date: Sat, 4 Nov 2023 12:27:22 +0530
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.1
-Subject: Re: [PATCH v2 8/9] PCI: Exclude PCIe ports used for tunneling in
- pcie_bandwidth_available()
-Content-Language: en-US
-To: Mario Limonciello <mario.limonciello@amd.com>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Bjorn Helgaas <bhelgaas@google.com>, Hans de Goede <hdegoede@redhat.com>,
- =?UTF-8?Q?Ilpo_J=c3=a4rvinen?= <ilpo.jarvinen@linux.intel.com>,
- Mika Westerberg <mika.westerberg@linux.intel.com>,
- Lukas Wunner <lukas@wunner.de>
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.88])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CAD6110E061;
+ Mon,  6 Nov 2023 12:25:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1699273536; x=1730809536;
+ h=date:from:to:cc:subject:in-reply-to:message-id:
+ references:mime-version;
+ bh=2pR8X4BMVcOGKWPNkgcioekUqSx5/pk8Jhwvb4ict+4=;
+ b=i1ILJryameQME2wCRiiRbVH+TQb/wd1dauLPCNARzBp00uPXWi8Scw5z
+ 1PKdTA9jabyoy9/DLJWxDsU7i/1t6mIraTua7+YHkF1YFmd08tQG/YkQV
+ 6kFQqMUsV1QpBQWl/sZQgBvOhG9I/lKWHAE7A9q3mHG+T2H5qxzphMs9n
+ oh6mFO4jU8hLWO/cUJbHw+mKEi5KH1u9gGVexCfS6s5eh05rAz9nATEK5
+ XY4U9JB6/7PRs+pryVjUn0EXe3hOFhEAAgMNFLY2XjPWxuDS4s+2QGZyn
+ voVw4s1RDMdkqSQd8ObwX6ioj8qAPohuGbclSgHI6FrqzVTsVcTLA1e58 A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10885"; a="420376188"
+X-IronPort-AV: E=Sophos;i="6.03,281,1694761200"; d="scan'208";a="420376188"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+ by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 06 Nov 2023 04:25:36 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10885"; a="828193825"
+X-IronPort-AV: E=Sophos;i="6.03,281,1694761200"; d="scan'208";a="828193825"
+Received: from rmstoi-mobl.ger.corp.intel.com ([10.251.216.76])
+ by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 06 Nov 2023 04:25:27 -0800
+Date: Mon, 6 Nov 2023 14:25:24 +0200 (EET)
+From: =?ISO-8859-15?Q?Ilpo_J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>
+To: Mario Limonciello <mario.limonciello@amd.com>
+Subject: Re: [PATCH v2 1/9] drm/nouveau: Switch from
+ pci_is_thunderbolt_attached() to dev_is_removable()
+In-Reply-To: <20231103190758.82911-2-mario.limonciello@amd.com>
+Message-ID: <55563d57-60c3-1789-1e7c-5e618fbd6253@linux.intel.com>
 References: <20231103190758.82911-1-mario.limonciello@amd.com>
- <20231103190758.82911-9-mario.limonciello@amd.com>
-From: "Lazar, Lijo" <lijo.lazar@amd.com>
-In-Reply-To: <20231103190758.82911-9-mario.limonciello@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BMXP287CA0009.INDP287.PROD.OUTLOOK.COM
- (2603:1096:b00:2c::15) To BYAPR12MB4614.namprd12.prod.outlook.com
- (2603:10b6:a03:a6::22)
+ <20231103190758.82911-2-mario.limonciello@amd.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB4614:EE_|MW6PR12MB8899:EE_
-X-MS-Office365-Filtering-Correlation-Id: 770d3860-f64f-433a-68ba-08dbdd03548d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 3W83KYT0vAGW0hDnzK57G8/eSxaTQ7d2aBtMbTbaoA/Bcqy+ljZL714yiuOBt2bMuJ3Zr86WN7mUNj3iBr/fpM2feKONYDg0jyMsNUjK6aS+7cEoe43C+Xx2wrzPJwqB+l0KCtAwRpmpNSbTjFi6+psufw9ePOix2sz8+3PApLvJI7qiyzEkfKZMRRBKq0knEsZP5kkIwhCgf5xFgCw2EBISIKhr7y5EykUG9Wv3our/9+bNhXDN4ikgpPWvkDzOAZfPl32MCR6f8ziMCmPENq725hP9qyuN5TFmnRhkyhMKziwFCirVKJb6WqnHzF47aWCNzUQRsyHQS2x4UsujmNpUPvWCytYuop68RXf+Zqz3r6ImIPhkLmY6v5Riey1/SjY5z9WURunZlpH7f/HF52FlWng/4t2/JTd8NIM+lwbTCt2FAFopMzd/DX1UmLHPQQNkXCYP00+u2OoWuI9SNSMuiHhJprFRJj5GpV5CJdx7RQce6dQ75P4/Cg/xm4mptkZjLeEfNQ6WK7z63WOm+mhUvWF9ub68lLzxPAGTb2xLPDFvKul2cdQm4Yq+AmQgGT7m+ggAmX7zAsqP7D2ZJVaxkGdToVRCwkd++pZ8Wtlv6gBj+FEK1ulUo1wGSwBnigQX7STs6XAtGgVAXu5a5w==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR12MB4614.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(136003)(39860400002)(376002)(346002)(366004)(396003)(230922051799003)(1800799009)(186009)(451199024)(64100799003)(31686004)(26005)(53546011)(2616005)(6512007)(38100700002)(86362001)(36756003)(921008)(31696002)(2906002)(8676002)(7416002)(478600001)(6506007)(6666004)(4326008)(66476007)(6486002)(66556008)(316002)(54906003)(8936002)(41300700001)(5660300002)(110136005)(66946007)(83380400001)(966005)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VGhpZ1ZJLzJ2QWZlVjZHdkl5ZWduVmlMU2cvM1R5VkVTUURack84ZEZMc3dl?=
- =?utf-8?B?Sk5wcGdWM0hBL2FJaTRMejVIQ3ZIaHFURUNkMWtkRVZ1cEdLMXdPams5d29m?=
- =?utf-8?B?a2Y2TWxPUjZDU1ZBUCtIV21IUkZjcVdXRUwxYTdTV1RKY1Z1eDZjMTdXQVFi?=
- =?utf-8?B?RmZ1OVJVMC81V1hwZUd4QXVIbVJjV2xkY3ozNklCV0p1TGFCQzNlNzVZQmN2?=
- =?utf-8?B?MFY3L3VxbDdZK3pVRDU3ZEErSXJOcnZock5PM05YTFdZUGlWU202L1RIQ0xW?=
- =?utf-8?B?WVpjLzdWSzNKTk5lM1ROaVRGclo5RzhoSmVIcVJLM1JNV3Nxa3JTN2xhWXpw?=
- =?utf-8?B?SjNUNzg2SE9RUnExTk5VaDZ3bE5XczhOYzFRdWQxMUJsSERtWlJxTmhVeXcx?=
- =?utf-8?B?TnlzVWZSNzNwVGIxa0JtMkpmUThIR0dnd21SZW5XSjUyNmdSVmdJcU1TRk14?=
- =?utf-8?B?NWRGcVRpcHg3VlROZGlWOHc2aENEdCtvc3RuWm0ySXhQVXdTYkMrS0VpZEN5?=
- =?utf-8?B?d2VsaFplRENrUVpZUXhNODVwRUN6Q3oyVGVTSnI5TUtoeWFxc3EzWlIxbnNl?=
- =?utf-8?B?MHBqVjh3akRtL0QwN0N2TndqbW9KNnJXMGdpOWhRVG9aS2JhZld3NVIwMzE3?=
- =?utf-8?B?MmlmR3d4VE9HS01NQVVqQSs3Z1J6dEtUVGJlU1B5M1NxMkFmQzN4ckREZURW?=
- =?utf-8?B?RCs0R2JnZHlDbk5vU3JxUVpVZ05IZGpuUjFvRzJmNGNSS3lZQUozd0FOVVJk?=
- =?utf-8?B?eXBKMnduYXVDbmplRnNLY3BpZEhwZm1LWlc0NXRiTkdzbWdSdk5EODFETEM2?=
- =?utf-8?B?VHVOOXNZNER0ZlVyaUtwTVBqZTZENTdDZTVlUnBqMDBZSk93dkk4QjB5MlRn?=
- =?utf-8?B?Y2dyZXg2MUx3cUlkejBuT05HTEVSQ1hXdlN0MStJQXJBTWVNWXhOTWNBenI2?=
- =?utf-8?B?R1RCSEdSNlFRWmdKSHZBejVTVlAxTkhlRCtoa29qZ05ob0xkbnJuRG5ncXVo?=
- =?utf-8?B?WUJ5UjRYcDBaNVczRkFncG16a0dIVUJtbWxZSWs2NmZFc0lzeTZNbHhyQVN6?=
- =?utf-8?B?Mk9nSktxaFNjQkxMUWswaUZVNWhVVkUyRStpRHBaK0Z5VS80aDZuWmZSRXVV?=
- =?utf-8?B?Z0h5YzRsdmw3aTI2UHpQd0h1M0t5N2JmZTA0dzhqY2N4elJIdWUrQm5pNDd6?=
- =?utf-8?B?QWJCa1lIU1ZkV0JSdlRzT3I0OTFIaTdKUUsvaDF2Q0JXb3AvTTRGTFpuNk1y?=
- =?utf-8?B?ekZENWFodFVQVUMvMDNYYnBLOHFvdEo3R2s3WEF3YjBtRFdxVDV0bDhOdU0r?=
- =?utf-8?B?WkJac0NhVWtIV3J0cXFQRDh6ZU03QkJDREJEbm9NTHBLY21kZmdpUDhSM0dw?=
- =?utf-8?B?Slpsd3pOSmphTlVOM3p3QzRTMkp1Q1Nyb3ZBSGtLakhodzNLcVhhQjhubXEv?=
- =?utf-8?B?cjk5L09xS05jdGxsazlRdGFuVTB0aTJZdUNwKy9mSFZMaElpMjZ3RUpYc1Ur?=
- =?utf-8?B?ZVRORnlxVk5lM1FuUHZ0RWc0S0RxL0MxWkFDZE5wODdhTFNwVmNhOEp2RWdB?=
- =?utf-8?B?L1VmMHVjZ3UwaDR0U1dlL0QvK3MzaUFOY1owdmtmaloyT21qY094N2Jpcisv?=
- =?utf-8?B?RzdUSUdhMGlzSHFjd0ZnVzNycmJic3pObU9UeWZKQldhUnJaaUs2dTZzWFNa?=
- =?utf-8?B?UzF1ZS9pVHpKS1BWM0pFREU0K3N6OWpNMlg5MkR6dlRjSkRMTXBEMmtKVXlF?=
- =?utf-8?B?WkZiMnBvLy9Fdk1Ock9hL1U5dzl5UU9pMk96WlA2YkFCTmViQkJQQ2QzQ1ZO?=
- =?utf-8?B?cnFPeEN1dUt2OHUxZE8wdkpqSCtYQWZFdkJrU2VsWTAzSHJVSlJ1MUxxR3RK?=
- =?utf-8?B?WXQzc1JXQ2tZWk83dlIzVHJUU05IbzRGQ0tkbklZYzJCK21BRmRWcGxuUFp2?=
- =?utf-8?B?N0N3N2Jqa0h6Tm1KaCtUZ1BZQjVHYW9RUGQ5TXNHMXQzYit5VE1JNk1FT1dC?=
- =?utf-8?B?SUZXd0txUUxBdjN0L0hySE9QL0IvRnJXM2dXd1ZTQVJDbjZWZU5OU1pwNnJh?=
- =?utf-8?B?cE0rb3p1MkFGNW10dUdHdmlQckJ0eHdIemNjdE83UXZ1eE1CVW9LeXc4emdR?=
- =?utf-8?Q?+K88K9LCO9Jyk3+gOE7Fbzh26?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 770d3860-f64f-433a-68ba-08dbdd03548d
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4614.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2023 06:57:38.0334 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PyJ0pRlwA/k8XKAkIoRBW6B0gkDQ2SwjiDarsWw3DTo71MWvnNMP05Br+ABeokQB
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8899
-X-Mailman-Approved-At: Tue, 16 Jan 2024 11:47:28 +0000
+Content-Type: text/plain; charset=US-ASCII
+X-Mailman-Approved-At: Tue, 16 Jan 2024 11:47:29 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -133,173 +58,71 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: =?UTF-8?Q?Marek_Beh=c3=ban?= <kabel@kernel.org>,
- Xinhui Pan <Xinhui.Pan@amd.com>, Daniel Vetter <daniel@ffwll.ch>,
+Cc: "open list:THUNDERBOLT DRIVER" <linux-usb@vger.kernel.org>,
  "Rafael J . Wysocki" <rafael@kernel.org>,
- Michael Jamet <michael.jamet@intel.com>,
- "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
- Yehezkel Bernat <YehezkelShB@gmail.com>,
- "open list:THUNDERBOLT DRIVER" <linux-usb@vger.kernel.org>,
- open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>,
  "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
  <dri-devel@lists.freedesktop.org>,
  "open list:X86 PLATFORM DRIVERS" <platform-driver-x86@vger.kernel.org>,
- Mark Gross <markgross@kernel.org>,
- "open list:ACPI" <linux-acpi@vger.kernel.org>,
+ Andreas Noever <andreas.noever@gmail.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?ISO-8859-15?Q?Marek_Beh=FAn?= <kabel@kernel.org>,
  "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ "open list:ACPI" <linux-acpi@vger.kernel.org>,
+ "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
  Manivannan Sadhasivam <mani@kernel.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, Andreas Noever <andreas.noever@gmail.com>,
- =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>,
+ Michael Jamet <michael.jamet@intel.com>, Mark Gross <markgross@kernel.org>,
+ Hans de Goede <hdegoede@redhat.com>, Bjorn Helgaas <bhelgaas@google.com>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>,
+ Xinhui Pan <Xinhui.Pan@amd.com>, open list <linux-kernel@vger.kernel.org>,
+ Daniel Vetter <daniel@ffwll.ch>, Yehezkel Bernat <YehezkelShB@gmail.com>,
+ =?ISO-8859-15?Q?Pali_Roh=E1r?= <pali@kernel.org>,
+ =?ISO-8859-15?Q?Christian_K=F6nig?= <christian.koenig@amd.com>,
  "Maciej W . Rozycki" <macro@orcam.me.uk>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Fri, 3 Nov 2023, Mario Limonciello wrote:
+
+> pci_is_thunderbolt_attached() only works for Intel TBT devices. Switch to
+> using dev_is_removable() to be able to detect USB4 devices as well.
+
+Please extend this with more details. I had to lookup the TBT change to 
+be able to make any guess why you're doing this (and it's still a guess 
+at best).
+
+-- 
+ i.
 
 
-On 11/4/2023 12:37 AM, Mario Limonciello wrote:
-> The USB4 spec specifies that PCIe ports that are used for tunneling
-> PCIe traffic over USB4 fabric will be hardcoded to advertise 2.5GT/s and
-> behave as a PCIe Gen1 device. The actual performance of these ports is
-> controlled by the fabric implementation.
-
-The code below ties a generic term 'tunneling' to USB4 spec. I think it 
-should be something like if (is_USB4 && is_tunneled), exclude from 
-bandwidth calculations - it should specifically identify usb4 based 
-tunneling rather than applying to all 'tunneled' cases.
-
-Thanks,
-Lijo
-
-> 
-> Downstream drivers such as amdgpu which utilize pcie_bandwidth_available()
-> to program the device will always find the PCIe ports used for
-> tunneling as a limiting factor potentially leading to incorrect
-> performance decisions.
-> 
-> To prevent problems in downstream drivers check explicitly for ports
-> being used for PCIe tunneling and skip them when looking for bandwidth
-> limitations of the hierarchy. If the only device connected is a root port
-> used for tunneling then report that device.
-> 
-> Downstream drivers could make this change on their own but then they
-> wouldn't be able to detect other potential speed bottlenecks from the
-> hierarchy without duplicating pcie_bandwidth_available() logic.
-> 
-> Link: https://gitlab.freedesktop.org/drm/amd/-/issues/2925#note_2145860
-> Link: https://www.usb.org/document-library/usb4r-specification-v20
->        USB4 V2 with Errata and ECN through June 2023
->        Section 11.2.1
 > Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
 > ---
->   drivers/pci/pci.c | 74 +++++++++++++++++++++++++++++++----------------
->   1 file changed, 49 insertions(+), 25 deletions(-)
+>  drivers/gpu/drm/nouveau/nouveau_vga.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 > 
-> diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
-> index d9aa5a39f585..15e37164ce56 100644
-> --- a/drivers/pci/pci.c
-> +++ b/drivers/pci/pci.c
-> @@ -6223,6 +6223,35 @@ int pcie_set_mps(struct pci_dev *dev, int mps)
->   }
->   EXPORT_SYMBOL(pcie_set_mps);
->   
-> +static u32 pcie_calc_bw_limits(struct pci_dev *dev, u32 bw,
-> +			       struct pci_dev **limiting_dev,
-> +			       enum pci_bus_speed *speed,
-> +			       enum pcie_link_width *width)
-> +{
-> +	enum pcie_link_width next_width;
-> +	enum pci_bus_speed next_speed;
-> +	u32 next_bw;
-> +	u16 lnksta;
-> +
-> +	pcie_capability_read_word(dev, PCI_EXP_LNKSTA, &lnksta);
-> +	next_speed = pcie_link_speed[lnksta & PCI_EXP_LNKSTA_CLS];
-> +	next_width = (lnksta & PCI_EXP_LNKSTA_NLW) >> PCI_EXP_LNKSTA_NLW_SHIFT;
-> +	next_bw = next_width * PCIE_SPEED2MBS_ENC(next_speed);
-> +
-> +	/* Check if current device limits the total bandwidth */
-> +	if (!bw || next_bw <= bw) {
-> +		bw = next_bw;
-> +		if (limiting_dev)
-> +			*limiting_dev = dev;
-> +		if (speed)
-> +			*speed = next_speed;
-> +		if (width)
-> +			*width = next_width;
-> +	}
-> +
-> +	return bw;
-> +}
-> +
->   /**
->    * pcie_bandwidth_available - determine minimum link settings of a PCIe
->    *			      device and its bandwidth limitation
-> @@ -6236,47 +6265,42 @@ EXPORT_SYMBOL(pcie_set_mps);
->    * limiting_dev, speed, and width pointers are supplied) information about
->    * that point.  The bandwidth returned is in Mb/s, i.e., megabits/second of
->    * raw bandwidth.
-> + *
-> + * This excludes the bandwidth calculation that has been returned from a
-> + * PCIe device used for transmitting tunneled PCIe traffic over a Thunderbolt
-> + * or USB4 link that is part of larger hierarchy. The calculation is excluded
-> + * because the USB4 specification specifies that the max speed returned from
-> + * PCIe configuration registers for the tunneling link is always PCI 1x 2.5 GT/s.
-> + * When only tunneled devices are present, the bandwidth returned is the
-> + * bandwidth available from the first tunneled device.
->    */
->   u32 pcie_bandwidth_available(struct pci_dev *dev, struct pci_dev **limiting_dev,
->   			     enum pci_bus_speed *speed,
->   			     enum pcie_link_width *width)
->   {
-> -	u16 lnksta;
-> -	enum pci_bus_speed next_speed;
-> -	enum pcie_link_width next_width;
-> -	u32 bw, next_bw;
-> +	struct pci_dev *tdev = NULL;
-> +	u32 bw = 0;
->   
->   	if (speed)
->   		*speed = PCI_SPEED_UNKNOWN;
->   	if (width)
->   		*width = PCIE_LNK_WIDTH_UNKNOWN;
->   
-> -	bw = 0;
-> -
->   	while (dev) {
-> -		pcie_capability_read_word(dev, PCI_EXP_LNKSTA, &lnksta);
-> -
-> -		next_speed = pcie_link_speed[lnksta & PCI_EXP_LNKSTA_CLS];
-> -		next_width = (lnksta & PCI_EXP_LNKSTA_NLW) >>
-> -			PCI_EXP_LNKSTA_NLW_SHIFT;
-> -
-> -		next_bw = next_width * PCIE_SPEED2MBS_ENC(next_speed);
-> -
-> -		/* Check if current device limits the total bandwidth */
-> -		if (!bw || next_bw <= bw) {
-> -			bw = next_bw;
-> -
-> -			if (limiting_dev)
-> -				*limiting_dev = dev;
-> -			if (speed)
-> -				*speed = next_speed;
-> -			if (width)
-> -				*width = next_width;
-> +		if (dev->is_tunneled) {
-> +			if (!tdev)
-> +				tdev = dev;
-> +			goto skip;
->   		}
-> -
-> +		bw = pcie_calc_bw_limits(dev, bw, limiting_dev, speed, width);
-> +skip:
->   		dev = pci_upstream_bridge(dev);
->   	}
->   
-> +	/* If nothing "faster" found on link, limit to first tunneled device */
-> +	if (tdev && !bw)
-> +		bw = pcie_calc_bw_limits(tdev, bw, limiting_dev, speed, width);
-> +
->   	return bw;
->   }
->   EXPORT_SYMBOL(pcie_bandwidth_available);
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_vga.c b/drivers/gpu/drm/nouveau/nouveau_vga.c
+> index f8bf0ec26844..14215b7ca187 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_vga.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_vga.c
+> @@ -94,8 +94,8 @@ nouveau_vga_init(struct nouveau_drm *drm)
+>  
+>  	vga_client_register(pdev, nouveau_vga_set_decode);
+>  
+> -	/* don't register Thunderbolt eGPU with vga_switcheroo */
+> -	if (pci_is_thunderbolt_attached(pdev))
+> +	/* don't register USB4/Thunderbolt eGPU with vga_switcheroo */
+> +	if (dev_is_removable(&pdev->dev))
+>  		return;
+>  
+>  	vga_switcheroo_register_client(pdev, &nouveau_switcheroo_ops, runtime);
+> @@ -118,7 +118,7 @@ nouveau_vga_fini(struct nouveau_drm *drm)
+>  
+>  	vga_client_unregister(pdev);
+>  
+> -	if (pci_is_thunderbolt_attached(pdev))
+> +	if (dev_is_removable(&pdev->dev))
+>  		return;
+>  
+>  	vga_switcheroo_unregister_client(pdev);
+> 
