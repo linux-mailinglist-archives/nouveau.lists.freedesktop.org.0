@@ -2,61 +2,28 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3637F7E48D2
-	for <lists+nouveau@lfdr.de>; Tue,  7 Nov 2023 19:54:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33D467E48E6
+	for <lists+nouveau@lfdr.de>; Tue,  7 Nov 2023 20:00:45 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C207610E659;
-	Tue,  7 Nov 2023 18:54:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F1CDC10E65C;
+	Tue,  7 Nov 2023 19:00:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 70B4910E659;
- Tue,  7 Nov 2023 18:54:43 +0000 (UTC)
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-991c786369cso913789066b.1; 
- Tue, 07 Nov 2023 10:54:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699383282; x=1699988082; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=B2hvz0OzI5g7bYGlIcmckfX24uIYxMQQKtI3lgxHhmw=;
- b=hynOTXxPHxbnkWX1BQi/+aHfHQVRX4IpqsCuaDSoDq7HIbR+MkNU4UK6DSUBRALyyj
- wWdmKkrR1gzmC11nBKL6IsEJS7xj+fNP9+mlBWlS2fG6xqiM1KXJtRWaiDz/MH/dcani
- AwJT3doe5zQow9dWiISSnfzgOxGWFQbaIQpwEqppROwZ+JLhzQj/UNM0B66qWDbpHC2z
- hSmIqzU1gb+vaRdQBO+wDAYGVungegyvHrCLVo7HPMTibc6otHCcqxMVRoS6ks9wimaD
- wMZH7p2pRfxkeuca28XUYrmW5mwvgIm2I/0UJZYMVnjl2K/Yaue6lDFkkKuw8fJHBJ0c
- oMDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699383282; x=1699988082;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=B2hvz0OzI5g7bYGlIcmckfX24uIYxMQQKtI3lgxHhmw=;
- b=pyu+uMax9tv5CdtMzRZINWrDa5gSfzBJS0hKRiy5tw8fy7ChbptdopvtinLj3YOTsV
- EgINfUySIib+l9i269jeEHzwyoAts+12j6RdvAIHNsO9SLQmCpJhd0H9lGch8CEmQDk1
- Um0SB5BTmlhImNI27kq3PlhEyeBZEVOKsbgyQFIyTBM8W3GXIkkxf7xOmef6mK7HyLkn
- Ur1I9PPZNALu0eJ8HQvBGPHNdMiFIDaYyR/zlEgLy6nJsidyalZMo1PQhnUY8PjQvSBV
- HVlSwP8AoJNMQZsS1CaA01qsFGkn+35CISYsigcmGsuR6u+Q8tonXgsA5JAdbR8zWsmd
- B5ng==
-X-Gm-Message-State: AOJu0Yy3nyr2qt8aQ5xtQZcJkos+JHYFXHK5eoo31LWvb9K4ZNn+ulGy
- /UnIDsPsBEk5h2yr5SgVGHnP5zo6jmXle9oL6w/K9qLi
-X-Google-Smtp-Source: AGHT+IEF4+87zNKhRij8dkcbr1vcGbTCGZbpDbxrvh5hQS/PSRbxwz/Qz9sd+PBu5xNIpqeRrrxyOrrpb18hqynK66c=
-X-Received: by 2002:a17:907:1c22:b0:9e2:9809:203d with SMTP id
- nc34-20020a1709071c2200b009e29809203dmr1897565ejc.5.1699383281574; Tue, 07
- Nov 2023 10:54:41 -0800 (PST)
+Received: from hs01.dakr.org (hs01.dk-develop.de [173.249.23.66])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 299EA10E65C
+ for <nouveau@lists.freedesktop.org>; Tue,  7 Nov 2023 19:00:41 +0000 (UTC)
+Message-ID: <a5f0d138-413d-4a21-876a-c51b89caaca2@dakr.org>
+Date: Tue, 7 Nov 2023 20:00:23 +0100
 MIME-Version: 1.0
-References: <20231031051943.1957328-1-airlied@gmail.com>
- <20231031051943.1957328-4-airlied@gmail.com>
- <5b0b5a7fefa8aac31659e7ade0811f835c576511.camel@nvidia.com>
-In-Reply-To: <5b0b5a7fefa8aac31659e7ade0811f835c576511.camel@nvidia.com>
-From: Dave Airlie <airlied@gmail.com>
-Date: Wed, 8 Nov 2023 04:54:29 +1000
-Message-ID: <CAPM=9tyvAPf2iNZ6utEN9FuE_wo17u4D9uCMXJSd0+w3VPHcLw@mail.gmail.com>
-To: Timur Tabi <ttabi@nvidia.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH 3/3] nouveau/gsp: add some basic registry
- entries.
+Content-Language: en-US
+To: Dan Carpenter <dan.carpenter@linaro.org>
+References: <3554c52a-d500-4c8e-913f-c2a32a1f7a4d@moroto.mountain>
+From: Danilo Krummrich <me@dakr.org>
+In-Reply-To: <3554c52a-d500-4c8e-913f-c2a32a1f7a4d@moroto.mountain>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [bug report] drm/nouveau/gsp/r535: add support for
+ booting GSP-RM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,40 +35,48 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
+Cc: nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 8 Nov 2023 at 04:51, Timur Tabi <ttabi@nvidia.com> wrote:
->
-> On Tue, 2023-10-31 at 15:18 +1000, Dave Airlie wrote:
->
-> +       strings = (char *)&rpc->entries[NV_GSP_REG_NUM_ENTRIES];
->
->
-> I get a UBSAN index-out-of-bounds error on boot at this line.
->
-> [ 17.765746] nouveau 0000:65:00.0: gsp: cmdq: wptr 1
-> [ 17.765748] ================================================================================
-> [ 17.774170] UBSAN: array-index-out-of-bounds in drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1065:33
-> [ 17.783449] index 2 is out of range for type 'PACKED_REGISTRY_ENTRY [*]'
-> [ 17.790132] CPU: 0 PID: 234 Comm: kworker/0:4 Not tainted 6.6.0-rc5+ #1
-> [ 17.790135] Hardware name: ASUS X299-A/PRIME X299-A, BIOS 2002 09/25/2019
-> [ 17.790136] Workqueue: events work_for_cpu_fn
-> [ 17.790143] Call Trace:
-> [ 17.790145] <TASK>
-> [ 17.790148] dump_stack_lvl+0x48/0x70
-> [ 17.790155] dump_stack+0x10/0x20
-> [ 17.790156] __ubsan_handle_out_of_bounds+0xc6/0x110
-> [ 17.790160] r535_gsp_oneinit+0xf81/0x1530 [nouveau]
-> [ 17.790292] ? __dev_printk+0x39/0xa0
-> [ 17.790295] ? _dev_info+0x75/0xa0
-> [ 17.790298] tu102_gsp_oneinit+0x9b/0xd0 [nouveau]
->
-> I'm not sure what the fix is.  Do we need __attribute__((no_sanitize("array-bounds"))) on PACKED_REGISTRY_TABLE?
+On 11/7/23 15:34, Dan Carpenter wrote:
+> Hello Ben Skeggs,
+> 
+> The patch 176fdcbddfd2: "drm/nouveau/gsp/r535: add support for
+> booting GSP-RM" from Sep 19, 2023 (linux-next), leads to the
+> following Smatch static checker warning:
+> 
+> 	drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1016 r535_gsp_rpc_unloading_guest_driver()
+> 	warn: 'rpc' isn't an ERR_PTR
+> 
+> drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+>      1010 static int
+>      1011 r535_gsp_rpc_unloading_guest_driver(struct nvkm_gsp *gsp, bool suspend)
+>      1012 {
+>      1013         rpc_unloading_guest_driver_v1F_07 *rpc;
+>      1014
+>      1015         rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_UNLOADING_GUEST_DRIVER, sizeof(*rpc));
+> 
+> nvkm_gsp_rpc_get() returns NULL on error.
 
-yes that is probably the right answer for this, if we want to reuse
-the structs that we get from the nvidia driver.
+There are also code paths where it can return an ERR_PTR. I think we need to check for IS_ERR_OR_NULL()...
 
-Dave.
+> 
+> --> 1016         if (IS_ERR(rpc))
+>      1017                 return PTR_ERR(rpc);
+>      1018
+>      1019         if (suspend) {
+>      1020                 rpc->bInPMTransition = 1;
+>      1021                 rpc->bGc6Entering = 0;
+>      1022                 rpc->newLevel = NV2080_CTRL_GPU_SET_POWER_STATE_GPU_LEVEL_3;
+>      1023         } else {
+>      1024                 rpc->bInPMTransition = 0;
+>      1025                 rpc->bGc6Entering = 0;
+>      1026                 rpc->newLevel = NV2080_CTRL_GPU_SET_POWER_STATE_GPU_LEVEL_0;
+>      1027         }
+>      1028
+>      1029         return nvkm_gsp_rpc_wr(gsp, rpc, true);
+>      1030 }
+> 
+> regards,
+> dan carpenter
