@@ -2,43 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 025147E34DF
-	for <lists+nouveau@lfdr.de>; Tue,  7 Nov 2023 06:33:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39F5C7E34F4
+	for <lists+nouveau@lfdr.de>; Tue,  7 Nov 2023 06:45:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1DF0B10E4B1;
-	Tue,  7 Nov 2023 05:33:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DEE3610E4B4;
+	Tue,  7 Nov 2023 05:45:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [205.139.111.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D6B9C10E063
- for <nouveau@lists.freedesktop.org>; Tue,  7 Nov 2023 05:33:01 +0000 (UTC)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-58-vE9TmfmlNkOun5wjdUAS9Q-1; Tue,
- 07 Nov 2023 00:32:58 -0500
-X-MC-Unique: vE9TmfmlNkOun5wjdUAS9Q-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8B87A280FEC7;
- Tue,  7 Nov 2023 05:32:58 +0000 (UTC)
-Received: from dreadlord.redhat.com (unknown [10.64.136.133])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 4F9EC2026D66;
- Tue,  7 Nov 2023 05:32:57 +0000 (UTC)
-From: Dave Airlie <airlied@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Date: Tue,  7 Nov 2023 15:32:55 +1000
-Message-ID: <20231107053255.2257079-1-airlied@gmail.com>
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.93])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 158CD10E4B4;
+ Tue,  7 Nov 2023 05:45:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1699335936; x=1730871936;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=ulbDZvz1gkMd0q7p/mpQrgQlpVcd7at70sX5zqHvqBA=;
+ b=cOlG4fpzk8v8Pl7mZVg8wylLQ/j/812fOWoxVRdbxqg7LxLAlXmtUINp
+ oiFIsEdWRn29gEdHheS/CwK4bal9oDxJex9OpOAU/99sFe1K+F4G2zJTD
+ 7vVZkofr3DgEWSu5MRMlAn0MnpL5sjjWpX7AIEKVrbGm2DPAyT8vhAYRm
+ JJZfbRoxfERICeCWIUWhppZghwEao9dKSMXUi8ub/WJWdO7cgTvjwUVcP
+ +S6KuZ1htemBG5NV/6F9ND5Tf8c1TEepC0Spw+W8FDx4qIS+cQu9tJfxP
+ UC2ddEDHNlv1M1TSTTdcyC6WrA6/ybTup8v+s37AQ402ARaJ2VR1LsjBC g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10886"; a="386609232"
+X-IronPort-AV: E=Sophos;i="6.03,282,1694761200"; d="scan'208";a="386609232"
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 06 Nov 2023 21:45:35 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10886"; a="886176112"
+X-IronPort-AV: E=Sophos;i="6.03,282,1694761200"; d="scan'208";a="886176112"
+Received: from black.fi.intel.com ([10.237.72.28])
+ by orsmga004.jf.intel.com with ESMTP; 06 Nov 2023 21:45:27 -0800
+Received: by black.fi.intel.com (Postfix, from userid 1001)
+ id 6642D3CC; Tue,  7 Nov 2023 07:45:26 +0200 (EET)
+Date: Tue, 7 Nov 2023 07:45:26 +0200
+From: Mika Westerberg <mika.westerberg@linux.intel.com>
+To: Lukas Wunner <lukas@wunner.de>
+Message-ID: <20231107054526.GT17433@black.fi.intel.com>
+References: <20231103190758.82911-1-mario.limonciello@amd.com>
+ <20231103190758.82911-9-mario.limonciello@amd.com>
+ <20231106181022.GA18564@wunner.de>
+ <712ebb25-3fc0-49b5-96a1-a13c3c4c4921@amd.com>
+ <20231106185652.GA3360@wunner.de>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.4
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: gmail.com
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
-Subject: [Nouveau] [PATCH] nouveau: use an rwlock for the event lock.
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20231106185652.GA3360@wunner.de>
+Subject: Re: [Nouveau] [PATCH v2 8/9] PCI: Exclude PCIe ports used for
+ tunneling in pcie_bandwidth_available()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,274 +62,61 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org
+Cc: "open list:THUNDERBOLT DRIVER" <linux-usb@vger.kernel.org>,
+ "Rafael J . Wysocki" <rafael@kernel.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <dri-devel@lists.freedesktop.org>,
+ "open list:X86 PLATFORM DRIVERS" <platform-driver-x86@vger.kernel.org>,
+ Mario Limonciello <mario.limonciello@amd.com>,
+ Andreas Noever <andreas.noever@gmail.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Marek =?utf-8?B?QmVow7pu?= <kabel@kernel.org>,
+ "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ "open list:ACPI" <linux-acpi@vger.kernel.org>,
+ "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
+ Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>,
+ Manivannan Sadhasivam <mani@kernel.org>,
+ Michael Jamet <michael.jamet@intel.com>, Mark Gross <markgross@kernel.org>,
+ Hans de Goede <hdegoede@redhat.com>, Bjorn Helgaas <bhelgaas@google.com>,
+ Xinhui Pan <Xinhui.Pan@amd.com>, open list <linux-kernel@vger.kernel.org>,
+ Daniel Vetter <daniel@ffwll.ch>, Yehezkel Bernat <YehezkelShB@gmail.com>,
+ Pali =?utf-8?B?Um9ow6Fy?= <pali@kernel.org>,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ "Maciej W . Rozycki" <macro@orcam.me.uk>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
+Hi,
 
-This allows it to break the following circular locking dependency.
+On Mon, Nov 06, 2023 at 07:56:52PM +0100, Lukas Wunner wrote:
+> On Mon, Nov 06, 2023 at 12:44:25PM -0600, Mario Limonciello wrote:
+> > Tangentially related; the link speed is currently symmetric but there are
+> > two sysfs files.  Mika left a comment in drivers/thunderbolt/switch.c it may
+> > be asymmetric in the future. So we may need to keep that in mind on any
+> > design that builds on top of them.
+> 
+> Aren't asymmetric Thunderbolt speeds just a DisplayPort thing?
 
-Aug 10 07:01:29 dg1test kernel: =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Aug 10 07:01:29 dg1test kernel: WARNING: possible circular locking dependen=
-cy detected
-Aug 10 07:01:29 dg1test kernel: 6.4.0-rc7+ #10 Not tainted
-Aug 10 07:01:29 dg1test kernel: -------------------------------------------=
------------
-Aug 10 07:01:29 dg1test kernel: wireplumber/2236 is trying to acquire lock:
-Aug 10 07:01:29 dg1test kernel: ffff8fca5320da18 (&fctx->lock){-...}-{2:2},=
- at: nouveau_fence_wait_uevent_handler+0x2b/0x100 [nouveau]
-Aug 10 07:01:29 dg1test kernel:
-                                but task is already holding lock:
-Aug 10 07:01:29 dg1test kernel: ffff8fca41208610 (&event->list_lock#2){-...=
-}-{2:2}, at: nvkm_event_ntfy+0x50/0xf0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:
-                                which lock already depends on the new lock.
-Aug 10 07:01:29 dg1test kernel:
-                                the existing dependency chain (in reverse o=
-rder) is:
-Aug 10 07:01:29 dg1test kernel:
-                                -> #3 (&event->list_lock#2){-...}-{2:2}:
-Aug 10 07:01:29 dg1test kernel:        _raw_spin_lock_irqsave+0x4b/0x70
-Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy+0x50/0xf0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        ga100_fifo_nonstall_intr+0x24/0x30 [=
-nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_intr+0x12c/0x240 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        __handle_irq_event_percpu+0x88/0x240
-Aug 10 07:01:29 dg1test kernel:        handle_irq_event+0x38/0x80
-Aug 10 07:01:29 dg1test kernel:        handle_edge_irq+0xa3/0x240
-Aug 10 07:01:29 dg1test kernel:        __common_interrupt+0x72/0x160
-Aug 10 07:01:29 dg1test kernel:        common_interrupt+0x60/0xe0
-Aug 10 07:01:29 dg1test kernel:        asm_common_interrupt+0x26/0x40
-Aug 10 07:01:29 dg1test kernel:
-                                -> #2 (&device->intr.lock){-...}-{2:2}:
-Aug 10 07:01:29 dg1test kernel:        _raw_spin_lock_irqsave+0x4b/0x70
-Aug 10 07:01:29 dg1test kernel:        nvkm_inth_allow+0x2c/0x80 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy_state+0x181/0x250 [n=
-ouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy_allow+0x63/0xd0 [nou=
-veau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_uevent_mthd+0x4d/0x70 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_ioctl+0x10b/0x250 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvif_object_mthd+0xa8/0x1f0 [nouveau=
-]
-Aug 10 07:01:29 dg1test kernel:        nvif_event_allow+0x2a/0xa0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nouveau_fence_enable_signaling+0x78/=
-0x80 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        __dma_fence_enable_signaling+0x5e/0x=
-100
-Aug 10 07:01:29 dg1test kernel:        dma_fence_add_callback+0x4b/0xd0
-Aug 10 07:01:29 dg1test kernel:        nouveau_cli_work_queue+0xae/0x110 [n=
-ouveau]
-Aug 10 07:01:29 dg1test kernel:        nouveau_gem_object_close+0x1d1/0x2a0=
- [nouveau]
-Aug 10 07:01:29 dg1test kernel:        drm_gem_handle_delete+0x70/0xe0 [drm=
-]
-Aug 10 07:01:29 dg1test kernel:        drm_ioctl_kernel+0xa5/0x150 [drm]
-Aug 10 07:01:29 dg1test kernel:        drm_ioctl+0x256/0x490 [drm]
-Aug 10 07:01:29 dg1test kernel:        nouveau_drm_ioctl+0x5a/0xb0 [nouveau=
-]
-Aug 10 07:01:29 dg1test kernel:        __x64_sys_ioctl+0x91/0xd0
-Aug 10 07:01:29 dg1test kernel:        do_syscall_64+0x3c/0x90
-Aug 10 07:01:29 dg1test kernel:        entry_SYSCALL_64_after_hwframe+0x72/=
-0xdc
-Aug 10 07:01:29 dg1test kernel:
-                                -> #1 (&event->refs_lock#4){....}-{2:2}:
-Aug 10 07:01:29 dg1test kernel:        _raw_spin_lock_irqsave+0x4b/0x70
-Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy_state+0x37/0x250 [no=
-uveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy_allow+0x63/0xd0 [nou=
-veau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_uevent_mthd+0x4d/0x70 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_ioctl+0x10b/0x250 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvif_object_mthd+0xa8/0x1f0 [nouveau=
-]
-Aug 10 07:01:29 dg1test kernel:        nvif_event_allow+0x2a/0xa0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nouveau_fence_enable_signaling+0x78/=
-0x80 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        __dma_fence_enable_signaling+0x5e/0x=
-100
-Aug 10 07:01:29 dg1test kernel:        dma_fence_add_callback+0x4b/0xd0
-Aug 10 07:01:29 dg1test kernel:        nouveau_cli_work_queue+0xae/0x110 [n=
-ouveau]
-Aug 10 07:01:29 dg1test kernel:        nouveau_gem_object_close+0x1d1/0x2a0=
- [nouveau]
-Aug 10 07:01:29 dg1test kernel:        drm_gem_handle_delete+0x70/0xe0 [drm=
-]
-Aug 10 07:01:29 dg1test kernel:        drm_ioctl_kernel+0xa5/0x150 [drm]
-Aug 10 07:01:29 dg1test kernel:        drm_ioctl+0x256/0x490 [drm]
-Aug 10 07:01:29 dg1test kernel:        nouveau_drm_ioctl+0x5a/0xb0 [nouveau=
-]
-Aug 10 07:01:29 dg1test kernel:        __x64_sys_ioctl+0x91/0xd0
-Aug 10 07:01:29 dg1test kernel:        do_syscall_64+0x3c/0x90
-Aug 10 07:01:29 dg1test kernel:        entry_SYSCALL_64_after_hwframe+0x72/=
-0xdc
-Aug 10 07:01:29 dg1test kernel:
-                                -> #0 (&fctx->lock){-...}-{2:2}:
-Aug 10 07:01:29 dg1test kernel:        __lock_acquire+0x14e3/0x2240
-Aug 10 07:01:29 dg1test kernel:        lock_acquire+0xc8/0x2a0
-Aug 10 07:01:29 dg1test kernel:        _raw_spin_lock_irqsave+0x4b/0x70
-Aug 10 07:01:29 dg1test kernel:        nouveau_fence_wait_uevent_handler+0x=
-2b/0x100 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_client_event+0xf/0x20 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy+0x9b/0xf0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        ga100_fifo_nonstall_intr+0x24/0x30 [=
-nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_intr+0x12c/0x240 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        __handle_irq_event_percpu+0x88/0x240
-Aug 10 07:01:29 dg1test kernel:        handle_irq_event+0x38/0x80
-Aug 10 07:01:29 dg1test kernel:        handle_edge_irq+0xa3/0x240
-Aug 10 07:01:29 dg1test kernel:        __common_interrupt+0x72/0x160
-Aug 10 07:01:29 dg1test kernel:        common_interrupt+0x60/0xe0
-Aug 10 07:01:29 dg1test kernel:        asm_common_interrupt+0x26/0x40
-Aug 10 07:01:29 dg1test kernel:
-                                other info that might help us debug this:
-Aug 10 07:01:29 dg1test kernel: Chain exists of:
-                                  &fctx->lock --> &device->intr.lock --> &e=
-vent->list_lock#2
-Aug 10 07:01:29 dg1test kernel:  Possible unsafe locking scenario:
-Aug 10 07:01:29 dg1test kernel:        CPU0                    CPU1
-Aug 10 07:01:29 dg1test kernel:        ----                    ----
-Aug 10 07:01:29 dg1test kernel:   lock(&event->list_lock#2);
-Aug 10 07:01:29 dg1test kernel:                                lock(&device=
-->intr.lock);
-Aug 10 07:01:29 dg1test kernel:                                lock(&event-=
->list_lock#2);
-Aug 10 07:01:29 dg1test kernel:   lock(&fctx->lock);
-Aug 10 07:01:29 dg1test kernel:
-                                 *** DEADLOCK ***
-Aug 10 07:01:29 dg1test kernel: 2 locks held by wireplumber/2236:
-Aug 10 07:01:29 dg1test kernel:  #0: ffff8fca53177bf8 (&device->intr.lock){=
--...}-{2:2}, at: nvkm_intr+0x29/0x240 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  #1: ffff8fca41208610 (&event->list_lock#2)=
-{-...}-{2:2}, at: nvkm_event_ntfy+0x50/0xf0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:
-                                stack backtrace:
-Aug 10 07:01:29 dg1test kernel: CPU: 6 PID: 2236 Comm: wireplumber Not tain=
-ted 6.4.0-rc7+ #10
-Aug 10 07:01:29 dg1test kernel: Hardware name: Gigabyte Technology Co., Ltd=
-. Z390 I AORUS PRO WIFI/Z390 I AORUS PRO WIFI-CF, BIOS F8 11/05/2021
-Aug 10 07:01:29 dg1test kernel: Call Trace:
-Aug 10 07:01:29 dg1test kernel:  <TASK>
-Aug 10 07:01:29 dg1test kernel:  dump_stack_lvl+0x5b/0x90
-Aug 10 07:01:29 dg1test kernel:  check_noncircular+0xe2/0x110
-Aug 10 07:01:29 dg1test kernel:  __lock_acquire+0x14e3/0x2240
-Aug 10 07:01:29 dg1test kernel:  lock_acquire+0xc8/0x2a0
-Aug 10 07:01:29 dg1test kernel:  ? nouveau_fence_wait_uevent_handler+0x2b/0=
-x100 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  ? lock_acquire+0xc8/0x2a0
-Aug 10 07:01:29 dg1test kernel:  _raw_spin_lock_irqsave+0x4b/0x70
-Aug 10 07:01:29 dg1test kernel:  ? nouveau_fence_wait_uevent_handler+0x2b/0=
-x100 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  nouveau_fence_wait_uevent_handler+0x2b/0x1=
-00 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  nvkm_client_event+0xf/0x20 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  nvkm_event_ntfy+0x9b/0xf0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  ga100_fifo_nonstall_intr+0x24/0x30 [nouvea=
-u]
-Aug 10 07:01:29 dg1test kernel:  nvkm_intr+0x12c/0x240 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  __handle_irq_event_percpu+0x88/0x240
-Aug 10 07:01:29 dg1test kernel:  handle_irq_event+0x38/0x80
-Aug 10 07:01:29 dg1test kernel:  handle_edge_irq+0xa3/0x240
-Aug 10 07:01:29 dg1test kernel:  __common_interrupt+0x72/0x160
-Aug 10 07:01:29 dg1test kernel:  common_interrupt+0x60/0xe0
-Aug 10 07:01:29 dg1test kernel:  asm_common_interrupt+0x26/0x40
-Aug 10 07:01:29 dg1test kernel: RIP: 0033:0x7fb66174d700
-Aug 10 07:01:29 dg1test kernel: Code: c1 e2 05 29 ca 8d 0c 10 0f be 07 84 c=
-0 75 eb 89 c8 c3 0f 1f 84 00 00 00 00 00 f3 0f 1e fa e9 d7 0f fc ff 0f 1f 8=
-0 00 00 00 00 <f3> 0f 1e fa e9 c7 0f fc>
-Aug 10 07:01:29 dg1test kernel: RSP: 002b:00007ffdd3c48438 EFLAGS: 00000206
-Aug 10 07:01:29 dg1test kernel: RAX: 000055bb758763c0 RBX: 000055bb758752c0=
- RCX: 00000000000028b0
-Aug 10 07:01:29 dg1test kernel: RDX: 000055bb758752c0 RSI: 000055bb75887490=
- RDI: 000055bb75862950
-Aug 10 07:01:29 dg1test kernel: RBP: 00007ffdd3c48490 R08: 000055bb75873b10=
- R09: 0000000000000001
-Aug 10 07:01:29 dg1test kernel: R10: 0000000000000004 R11: 000055bb7587f000=
- R12: 000055bb75887490
-Aug 10 07:01:29 dg1test kernel: R13: 000055bb757f6280 R14: 000055bb758875c0=
- R15: 000055bb757f6280
-Aug 10 07:01:29 dg1test kernel:  </TASK>
+No, they affect the whole fabric. We have the initial code for
+asymmetric switching in v6.7-rc1.
 
-Signed-off-by: Dave Airlie <airlied@redhat.com>
----
- drivers/gpu/drm/nouveau/include/nvkm/core/event.h |  4 ++--
- drivers/gpu/drm/nouveau/nvkm/core/event.c         | 12 ++++++------
- 2 files changed, 8 insertions(+), 8 deletions(-)
+> > As 'thunderbolt' can be a module or built in, we need to bring code into PCI
+> > core so that it works in early boot before it loads.
+> 
+> tb_switch_get_generation() is small enough that it could be moved to the
+> PCI core.  I doubt that we need to make thunderbolt built-in only
+> or move a large amount of code to the PCI core.
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/event.h b/drivers/gp=
-u/drm/nouveau/include/nvkm/core/event.h
-index 82b267c11147..460459af272d 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/core/event.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/core/event.h
-@@ -14,7 +14,7 @@ struct nvkm_event {
- =09int index_nr;
-=20
- =09spinlock_t refs_lock;
--=09spinlock_t list_lock;
-+=09rwlock_t list_lock;
- =09int *refs;
-=20
- =09struct list_head ntfy;
-@@ -38,7 +38,7 @@ nvkm_event_init(const struct nvkm_event_func *func, struc=
-t nvkm_subdev *subdev,
- =09=09int types_nr, int index_nr, struct nvkm_event *event)
- {
- =09spin_lock_init(&event->refs_lock);
--=09spin_lock_init(&event->list_lock);
-+=09rwlock_init(&event->list_lock);
- =09return __nvkm_event_init(func, subdev, types_nr, index_nr, event);
- }
-=20
-diff --git a/drivers/gpu/drm/nouveau/nvkm/core/event.c b/drivers/gpu/drm/no=
-uveau/nvkm/core/event.c
-index a6c877135598..61fed7792e41 100644
---- a/drivers/gpu/drm/nouveau/nvkm/core/event.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/core/event.c
-@@ -81,17 +81,17 @@ nvkm_event_ntfy_state(struct nvkm_event_ntfy *ntfy)
- static void
- nvkm_event_ntfy_remove(struct nvkm_event_ntfy *ntfy)
- {
--=09spin_lock_irq(&ntfy->event->list_lock);
-+=09write_lock_irq(&ntfy->event->list_lock);
- =09list_del_init(&ntfy->head);
--=09spin_unlock_irq(&ntfy->event->list_lock);
-+=09write_unlock_irq(&ntfy->event->list_lock);
- }
-=20
- static void
- nvkm_event_ntfy_insert(struct nvkm_event_ntfy *ntfy)
- {
--=09spin_lock_irq(&ntfy->event->list_lock);
-+=09write_lock_irq(&ntfy->event->list_lock);
- =09list_add_tail(&ntfy->head, &ntfy->event->ntfy);
--=09spin_unlock_irq(&ntfy->event->list_lock);
-+=09write_unlock_irq(&ntfy->event->list_lock);
- }
-=20
- static void
-@@ -176,7 +176,7 @@ nvkm_event_ntfy(struct nvkm_event *event, int id, u32 b=
-its)
- =09=09return;
-=20
- =09nvkm_trace(event->subdev, "event: ntfy %08x on %d\n", bits, id);
--=09spin_lock_irqsave(&event->list_lock, flags);
-+=09read_lock_irqsave(&event->list_lock, flags);
-=20
- =09list_for_each_entry_safe(ntfy, ntmp, &event->ntfy, head) {
- =09=09if (ntfy->id =3D=3D id && ntfy->bits & bits) {
-@@ -185,7 +185,7 @@ nvkm_event_ntfy(struct nvkm_event *event, int id, u32 b=
-its)
- =09=09}
- =09}
-=20
--=09spin_unlock_irqrestore(&event->list_lock, flags);
-+=09read_unlock_irqrestore(&event->list_lock, flags);
- }
-=20
- void
---=20
-2.41.0
+If at all possible I would like to avoid this and littering PCI side
+with non-PCI stuff. There could be other similar "mediums" in the future
+where you can transfer packets of "native" protocols such as PCIe so
+instead of making it Thunderbolt/USB4 specific it should be generic
+enough to support future extensions.
 
+In case of Thunderbolt/USB4 there is no real way to figure out how much
+bandwidth each PCIe tunnel gets (it is kind of bulk traffic that gets
+what is left from isochronous protocols) so I would not even try that
+and instead use the real PCIe links in pcie_bandwidth_available() and
+skip all the "virtual" ones.
