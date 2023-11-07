@@ -1,67 +1,63 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B455D7E4334
-	for <lists+nouveau@lfdr.de>; Tue,  7 Nov 2023 16:17:53 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 21F697E433E
+	for <lists+nouveau@lfdr.de>; Tue,  7 Nov 2023 16:18:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5E7E510E054;
-	Tue,  7 Nov 2023 15:17:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5873B10E12F;
+	Tue,  7 Nov 2023 15:18:38 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 728ED10E054
- for <nouveau@lists.freedesktop.org>; Tue,  7 Nov 2023 15:17:48 +0000 (UTC)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-9d216597f64so885544366b.3
- for <nouveau@lists.freedesktop.org>; Tue, 07 Nov 2023 07:17:48 -0800 (PST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5620B10E12F
+ for <nouveau@lists.freedesktop.org>; Tue,  7 Nov 2023 15:18:36 +0000 (UTC)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-9de7a43bd1aso482910166b.3
+ for <nouveau@lists.freedesktop.org>; Tue, 07 Nov 2023 07:18:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699370267; x=1699975067; darn=lists.freedesktop.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=PytzvdSPNnpR71udgBfeBRoR4KeYQBs+pot/fdzukjc=;
- b=KDSIwkJe9ar2jEQakkauj6SD9Y2HFB9n56NYq221ddfE4upha05YEGpSQr6KZ2sCvy
- wCCAj8VIo9CDglca439jBszC3fisTB4P1nvC/i8vfFHnIfzGiEgidqIdF1hcPUG3mB97
- uqNSb301ubfNgbXQb4CW7iOeAoTfgFCt8/qavI3ABcWMBqizpEBpDAuF3YQBAb6cALB8
- Ux8BeZQbDwzYDG2xREP+yEWPDVKCg3vSSQaDph9LAJSnDWkup7t15hc9BYllIx6AH+on
- JLw8sPXZs2cIDz4e3RZOUEBHGnKOeCDHSZ7tiCpDf9jS3UEDytGyVzEPoiFBbIq/Jr1n
- T0xw==
+ d=linaro.org; s=google; t=1699370315; x=1699975115; darn=lists.freedesktop.org;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=BUSa9JJh+Y2Tsk/ZlJbgPDREcy0mvtW6TANBnqjh1wQ=;
+ b=uT3r8Qjfg8lIn5qF+IoAOsgzrmB6IrbhcFnN0+qJN9OUZMprNNopxTBbOKFz+nrTPp
+ wvxoEBkDRaoNjEiZeICCr35RETPmJ8nDj5VpkRdLI8yP1RFu00vFxAiARPmwOtzIizCb
+ bP59Cn7IrfK9Trwt1s0NqCzVSOvAvuES9y88ZVMn30iGxcqJvZj81RPQBkrzdSB0mZU7
+ lS15PDx1BPnkMAakK0nz4YHh9A+g3GVittrh3/8wsI5t13wCvAnVWY6pJvi6TyCJCArj
+ V1jbTH44oEFoTFu5GtSkqpakisGghtFt6p52shgiv++b2YxmOKkIbFjd2XzuVALOmQE5
+ 4fWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699370267; x=1699975067;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
+ d=1e100.net; s=20230601; t=1699370315; x=1699975115;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PytzvdSPNnpR71udgBfeBRoR4KeYQBs+pot/fdzukjc=;
- b=KKdX8/sKfg08Q881HoZUzRIGixznom8eOUo6Pgq3ulbYeoTeHyP+LsgBsENMvxsqb2
- cZJGHDIOMoBz09xWCg/3jS507Xwbtw1vUqvRlGvcCDYfARyr/EWCjUvRQcqTUW+opnJc
- n1DHABxp5E3f2kNF7rVhRRQVK7ssqdfzRNzxXmB24vBAVLE4WPsAwQR0cdPOitVrlE9t
- AqAK5TGqT3g0v4BI9NqoILeS4EA+/zlK4Zqzs56VxnGqrqeaBKDbpdYS1CRla7by5hzY
- r6K/FxSDEX5hU9SARFU7//gPhoeMvAsb3Y4uKAPfb9B/ffC6XFpJbY/aRoqFfD/tDG4L
- RvhA==
-X-Gm-Message-State: AOJu0Ywwb0Qnyvqz68J3PpIBff81We5R3Xi3Fd/qO3su3ThFQPDoJAy9
- aHXV4truKbTLEgrP67rRwQo3ig==
-X-Google-Smtp-Source: AGHT+IGGxWk0On6DQZjKTrFSAQZ1tQEdD8Os1udp0Tm//0UElKcJ4Gh8mBrUWXRfofmslwOAmL8Fnw==
-X-Received: by 2002:a17:906:d797:b0:9c7:58cd:b57 with SMTP id
- pj23-20020a170906d79700b009c758cd0b57mr12485956ejb.37.1699370266770; 
- Tue, 07 Nov 2023 07:17:46 -0800 (PST)
+ bh=BUSa9JJh+Y2Tsk/ZlJbgPDREcy0mvtW6TANBnqjh1wQ=;
+ b=i1j5z+ae7fiWTQkckeSAWKYmzlDERSfazqbwcbMIdq9t27wLVCZaFy/8stZsfjbEPr
+ 1L35WDRUiAAqmikCUbIT56JMiRNgPStRxRtZlHnc2EowISsLMzR79xMPoF00U/zv2x9l
+ SnHeNHd2iIDH2S7Ypea0H65yQa0dfzdGmgq/NfLxFjmoE02n+UtUt4/6aJQ3nv/TymDP
+ y0f1f3tH0ceVfpx+Pa64FIdl3HvI0bOcwEF6/ynH7n/aWy2sFKnVua/3Fb22cfuqvWqi
+ 6aUiwyxHI22+UD5ke9kpC9HVLIswqTOJCiZZtrfuh3A7tPsDUNpaQHtEsNYSmbml8RqT
+ OKdA==
+X-Gm-Message-State: AOJu0YxoNripKt3mB6o0jXfuo1H+nB/dI/I7gpdgdlVyOBTuuJGAnPlE
+ 5jImQ2L4xwD5/cmyqyYJxtrmiQ==
+X-Google-Smtp-Source: AGHT+IFg6GPZSi72q4OKki21JP9gaI3a9ZForMI5DrtJhxl7g78VZhTmgTSiHs8/MHjFffQFk6b3jw==
+X-Received: by 2002:a17:907:7fac:b0:9c1:9b3a:4cd1 with SMTP id
+ qk44-20020a1709077fac00b009c19b3a4cd1mr20872644ejc.3.1699370314775; 
+ Tue, 07 Nov 2023 07:18:34 -0800 (PST)
 Received: from localhost ([102.36.222.112]) by smtp.gmail.com with ESMTPSA id
- cb11-20020a170906a44b00b00985ed2f1584sm1133792ejb.187.2023.11.07.07.17.45
+ lg20-20020a170906f89400b0099290e2c163sm1131200ejb.204.2023.11.07.07.18.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 07:17:46 -0800 (PST)
-Date: Tue, 7 Nov 2023 18:17:43 +0300
+ Tue, 07 Nov 2023 07:18:34 -0800 (PST)
+Date: Tue, 7 Nov 2023 18:18:31 +0300
 From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Timur Tabi <ttabi@nvidia.com>
-Message-ID: <f6381720-3b0b-40be-a705-0decdf0a3800@kadam.mountain>
-References: <b9a97887-9b58-4518-8dd8-3865afb9279b@moroto.mountain>
- <f9a53aa8399313a323232744be57c9908f674f1b.camel@nvidia.com>
+To: Karol Herbst <kherbst@redhat.com>
+Message-ID: <1d864f6e-43e9-43d8-9d90-30e76c9c843b@moroto.mountain>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <f9a53aa8399313a323232744be57c9908f674f1b.camel@nvidia.com>
-Subject: Re: [Nouveau] [bug report] drm/nouveau/mmu/r535: initial support
+X-Mailer: git-send-email haha only kidding
+Subject: [Nouveau] [PATCH] nouveau/gsp/r535: uninitialized variable in
+ r535_gsp_acpi_mux_id()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,39 +69,35 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
+Cc: nouveau@lists.freedesktop.org, kernel-janitors@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
+ Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Nov 07, 2023 at 03:06:27PM +0000, Timur Tabi wrote:
-> On Tue, 2023-11-07 at 17:32 +0300, Dan Carpenter wrote:
-> >     170         ret = gf100_bar_new_(rm, device, type, inst, &bar);
-> > --> 171         *pbar = bar;
-> >     172         if (ret) {
-> >     173                 if (!bar)
-> >                             ^^^^
-> > If gf100_bar_new_() fails then bar isn't initialized.  Do we really
-> > need to initialize bar to NULL on error?  If so then we should do it
-> > before the "rm = kzalloc()".
-> 
-> We can just do this:
-> 
-> struct nvkm_bar *bar = NULL;
+The if we hit the "continue" statement on the first iteration through
+the loop then "handle_mux" needs to be set to NULL so we continue
+looping.
 
-I mean that will silence the warning, but why are we setting *pbar to
-NULL?  If it's necessary then there is still a bug because the first
-error path doesn't do it.  If not, then just do:
+Fixes: 176fdcbddfd2 ("drm/nouveau/gsp/r535: add support for booting GSP-RM")
+Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-	ret = gf100_bar_new_(rm, device, type, inst, &bar);
-	if (ret) {
-		kfree(rm);
-		return ret;
-	}
-	*pbar = bar;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+index e31f9641114b..afa8e7377a76 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+@@ -1159,7 +1159,7 @@ static void
+ r535_gsp_acpi_mux_id(acpi_handle handle, u32 id, MUX_METHOD_DATA_ELEMENT *mode,
+ 						 MUX_METHOD_DATA_ELEMENT *part)
+ {
+-	acpi_handle iter = NULL, handle_mux;
++	acpi_handle iter = NULL, handle_mux = NULL;
+ 	acpi_status status;
+ 	unsigned long long value;
+ 
+-- 
+2.42.0
 
-It really depends on what we're doing with *pbar.  I looked at the
-context before I sent the bug report and it kind of looked like this
-function is dead code honestly...
-
-regards,
-dan carpenter
