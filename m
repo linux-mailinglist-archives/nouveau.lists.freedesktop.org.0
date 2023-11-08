@@ -2,124 +2,75 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84AC47E4DA3
-	for <lists+nouveau@lfdr.de>; Wed,  8 Nov 2023 01:00:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD2B77E4DC6
+	for <lists+nouveau@lfdr.de>; Wed,  8 Nov 2023 01:13:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DCCC710E6C2;
-	Wed,  8 Nov 2023 00:00:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8AE3B10E6D2;
+	Wed,  8 Nov 2023 00:13:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2069.outbound.protection.outlook.com [40.107.93.69])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F051810E6C2;
- Wed,  8 Nov 2023 00:00:17 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FC2oIw8Yz9OwjNgEL8aFENjFOc+oqjYJnsi3c3WalzmggP4oUM1wWy+frD4A5fDKWXIIBAdqgI+NS101Mu+IFraBCVhd26hNSCPYeoMQGqlvH3Hpm1X3PghgO2b8V9gs2drNhghZqJmzmL7qByBkFge7hKt4iCICb3K9vMBfjFtFJLIpq3mIKknuTV8qLVQdoGaNiAx66Nq9Gt4h3cbiH3Sxfj08JuhS3E84paAjB4GTjhlsJM3fP7vdvb2/U45SDhRTIITGQmk5Y5Ah9l/THZk69yCNG2nxt5pVZFTEoIt2Ra3EXbkcvvno6Q+eQOmLb2pgkC0ottQIm56fyCqVeg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=b0e0g3i4cjWAPJIbOHdxpIayfmC2I66P/Df808Pw4YM=;
- b=LuvVqyjXruhQtFprl0v4hUG4mJGGuAKAsyUH06PqAt/yHcj3ZhSvie5q0u8W8NM/Xrx3wdpyyjSh7B7lBQQMPyLKEA0Csc1YM+isIjFTsOK4nFABCvXDg4n15iMtiFAXce2Df20Jv1Dxy4o6vfKUbCDJUzi+QA4TCsYUxSordcB16l2Paz5Wxo8Y1tVkzPJPP/GDQjQD2E2tGS+Yj49BA9dNr+W2AWupLz3b5KxAB5NHEpMqGUhhz+cZmonF1miVDchbo25wudut/Yh7hep7Zh8M21haL1cs1v5y1+Y38ELcNO7z9Wu/DJBxJeyd4Cpxd9WHIVgljrNN/WPJjlA4JQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=b0e0g3i4cjWAPJIbOHdxpIayfmC2I66P/Df808Pw4YM=;
- b=PhEyYXrglCrmxSeoYDeEXLFcMUjPD5ms9f2vY5dv3hR7zw3cQ46ZHW5POzUj6IkeZAxXdeyWF8XS9GnuaDapYlGinVGpmKNLdUY6SGBdTKecJzUSfc8qcd5PDvFVLhZPJ+Q8wKkijKcitC7RS2g2tCMlZUX7Ft3hJ5X4v1+6BK0X8MoLyehhZAp533nfbGwGHfqBUgY0Hsdp7UgcSrrbH/pYfp/ljmRDVzqge3Oeny3oERJ3gWJjvx6A94SUa/gq5cTjtdCY3rBdFLU2W53tWewr2fJaE+R4iaxnRMS+F6L3sphN45QOaB++ee9s1KFbxTwGw9V99xinKrMKMBCZpw==
-Received: from SN7PR12MB8769.namprd12.prod.outlook.com (2603:10b6:806:34b::12)
- by CH2PR12MB4167.namprd12.prod.outlook.com (2603:10b6:610:7a::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.29; Wed, 8 Nov
- 2023 00:00:15 +0000
-Received: from SN7PR12MB8769.namprd12.prod.outlook.com
- ([fe80::6799:dc7a:e121:1af6]) by SN7PR12MB8769.namprd12.prod.outlook.com
- ([fe80::6799:dc7a:e121:1af6%7]) with mapi id 15.20.6954.028; Wed, 8 Nov 2023
- 00:00:15 +0000
-From: Timur Tabi <ttabi@nvidia.com>
-To: "airlied@redhat.com" <airlied@redhat.com>, "nouveau@lists.freedesktop.org"
- <nouveau@lists.freedesktop.org>, "dri-devel@lists.freedesktop.org"
- <dri-devel@lists.freedesktop.org>, "me@dakr.org" <me@dakr.org>
-Thread-Topic: [Nouveau] [PATCH] nouveau/gsp: fix UBSAN array bounds warning in
- PACKED_REGISTRY_TABLE
-Thread-Index: AQHaEdTQHf5llqm/9kyYeml7BAMiM7Bvh2AAgAACEIA=
-Date: Wed, 8 Nov 2023 00:00:15 +0000
-Message-ID: <5905396653318954faeddcd8356f25644cccbb55.camel@nvidia.com>
-References: <20231107234726.854248-1-ttabi@nvidia.com>
- <04fd39a8-174d-44e7-a910-5e808d8563b5@dakr.org>
-In-Reply-To: <04fd39a8-174d-44e7-a910-5e808d8563b5@dakr.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.44.4-0ubuntu2 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SN7PR12MB8769:EE_|CH2PR12MB4167:EE_
-x-ms-office365-filtering-correlation-id: 51c98506-8908-44f0-1e9f-08dbdfedb01a
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: jVP3XpLzdX3gUyEC228OVzH64MpbOhyVWD3ouoo6+u4LhgYWKnMdK8HzyN9FaAU+d5VH/WgxRwffF8yaM8woIahdI8ruf6Vz3B90NfbzDzWU8BrTyMa3N6q2//JtzeLIot89AYY1FjubdKd4V5dS7arEDF+NrhIn1Idaeoh9YamMtfwCv9CYvIBQIKw5MWP6sUyZVauaWFn7pNM56HkX/MSHDeqMpuqck0sPJip9CZLu8jfMXzKEgj8UfkKFH5ithLF3Npcvc+wO6nLG2I8Bm8Z27TcV0ZkdByTkEt+l/5aevnTZ8jYu62OcSitRbYtrC68lQ9wp5mCj/Uz4gpcdkk9xMg2254pHJix+wKDrTR/zLN5gX8b3v6aZrB7XDytMXvhva4mKtGejXzGC9kxdNKVdaMiDCWktBnyKyUFxhakpu9Y6a7tdNfGR6snHaQ0QOhWKik2MTm0rsSxFQuW1pho0EmB1+xFMQSmS6/CeQkko6boJ+acJoDYBwykNMgxHnciNoUC6q9tDrJ1vcPW3J7aipUacaGQsHz5O4MIkaYZ6EUdym7Nv1G6//5pQfSzrqomEbKlUOlrME5sctjNQpDrwon8XgdWT3/llJ2zusSY5hmIvpSokTXvvbFe0n+0u
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN7PR12MB8769.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39860400002)(396003)(346002)(366004)(376002)(136003)(230922051799003)(1800799009)(186009)(64100799003)(451199024)(4744005)(2906002)(122000001)(41300700001)(8936002)(5660300002)(38070700009)(36756003)(8676002)(86362001)(2616005)(478600001)(26005)(6486002)(71200400001)(53546011)(6512007)(6506007)(38100700002)(110136005)(76116006)(66946007)(66556008)(66446008)(66476007)(64756008)(316002);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?UDZhSm9XaEVpN0pqdmY1QUV3ZW1rMStqVy9WZ2czeko0UmdUOTAwMkdzSDlH?=
- =?utf-8?B?b2dkNW8rVTVpTlUxa0dHWE9CaFJpd1U2MU1PbEFuTS9CNk16aHRzd1kwZVp6?=
- =?utf-8?B?UlMwS240S1ZRbThIYmFpTG00R1VkY2l5OVN2SFQ3NHU2eHJMc3doSkFOREEz?=
- =?utf-8?B?OEdldGV4VStLSHhtai9Pck9RTGtSMVFUbDVubUozUXFmbWhRVGVESUx1SGFC?=
- =?utf-8?B?Zlc1YnNmMVNTZWJ1Z2VwMGhoSE5jTEVsN2hRSWNZSWlKY1htTXVDTEVxVUZQ?=
- =?utf-8?B?RFVlTmIrVDlUcmhvenJTWFprV1hRc00vL0NCeUxkSndFQ2RyRVl0S0xCbTI1?=
- =?utf-8?B?Ny9tamhWNlZ4b3E5Q282YkxHY1gyZG00L2szQ2NVakRJOFpCVjFSQTJEb25J?=
- =?utf-8?B?NWh1dVFEb0Z2bnplY3k4VUg4S0hicTR1NmdrRWVNaXJVSzhFSFZ3Q3hPZ0VG?=
- =?utf-8?B?dDNjMFFpUFEvRW8zSFRrbmpwVURmZUdyUHc0NFZtclVsRzdGVG44MGpwZWo3?=
- =?utf-8?B?NHBmcTZzZ1E1OXpaQWtEZXhhNllBQ3ZNeUFMYyt1c01aWlY2YU1ZN3Z5OWtT?=
- =?utf-8?B?OE1udmQveDgrRkVZci9FYWFRYWlLSjdWeDZvYmJOSnNtckU4d1NYT2ppQVRG?=
- =?utf-8?B?SmdSamM5WDJsTENMcUczYTFGTHJvbzUyY21iUmgxclNqZSt2aEdHU3lteXBz?=
- =?utf-8?B?bldGUmNUUDJyMytLUEtUbHRFRDNPQkVpNUZwWmxON21rTnBnbVlqdks2Qk9W?=
- =?utf-8?B?a0xLWHVaLy9hdXFseCt0VTY4MjlYL1ltMGpYSUUvekI5MTBFOVZkcWpmT2hE?=
- =?utf-8?B?L2ZoblE3TFI3TGZWaUdNTFNFektkdHkyOU9NbzdOWStYMmZjcUpVVkJyaWd0?=
- =?utf-8?B?RG8vNDhBL2dydnI5bnkyaVQyYjBFZkp5eEFkWDNqdEwvRzZaenhDZDlVL3dZ?=
- =?utf-8?B?bjVGVnF6YnM1bG9CVVhxcmE0ekhVQXljSE1heFFJaUlEYVdWV0FLZElLenhn?=
- =?utf-8?B?aHlKRktWUmlIem1tUkl0bzZ5ZHBOS2IwcTV6azhyUzhpNUtQN0tyeTJrVVRs?=
- =?utf-8?B?Rm5POXI2UC9lekRjMWZtYVpzb0Jiak9iQ2RYN1BEcE9NaUpXVGZ1YmVuNW9O?=
- =?utf-8?B?VXA4aWhLZkNEL0hqd3BRT2NuMDNJZGNvSGlwOEtYNTVOZzZJaTBRcFlDNElE?=
- =?utf-8?B?OG02clVpdnJtVnkwckVDazl3a3pueW5acG1aVTVUNWlZbWluNExLV3ZPL2RK?=
- =?utf-8?B?WEltd1BtM3BMbjRZc0ZmWmxoV0hRL2x6NjVMMXpmTzd0eFZnNXZhM0ErQXha?=
- =?utf-8?B?VVlFdlFYVjV6UGExVFFhNWU4SjQ3RllPWFVTVk83L1BZWHY5bHhFUXlVQUtO?=
- =?utf-8?B?SmNHbFlybytrUGU5d3IrNzJvT053aFNjbTdiRTlUUjZ1b0g4d3Y4M09ZbTl6?=
- =?utf-8?B?TWpQNVhXZHVGS1FrcFV4TkNEdFVldUpTeFdLdEZCVnlnYkZCRDM0cXpJTkc3?=
- =?utf-8?B?NDdhcG81Zm5sb254TldFMFFIY05YVzhRczdnODdUZmY3aWdHV25GVUxib2o2?=
- =?utf-8?B?MnpYTHV2Nk5CSHNSckpBS0FIRm5NcTg2OWFXQmxJNkZ1RjlWV3lTOE9RYWVB?=
- =?utf-8?B?RjM0aWlpeC95RnVtQ1pzUFNNVmtFYnNhdjNGUi9JK3JiQW5GSjIxb1o4OTJa?=
- =?utf-8?B?a290NjhySzNjb0NGYnRHRi9uc0hUbWpLVHhZakxEV1RMUzk0WTUzcDFuOXlF?=
- =?utf-8?B?KzZ5OVJlejBDUVpCSGh3R1kvTWRMNkpMTU8xNnNkOElYTFhQZWs3NGdiaEE0?=
- =?utf-8?B?ZG02NHYrTFZhMklzVWJjSThVeDYwZTVLNlM0dmw4MmwxQWpZbnUrd0VEZGRE?=
- =?utf-8?B?RGtDVDlkOUE2KzcyMlU0ZExNbjNGb3YzYUJKZjE2Y0JVWUxtb2NUQ3ozWTd5?=
- =?utf-8?B?ZFFlbEVLaFdPYWREQXVVNEx2aFVzTTNEelRXWDE0eGorNjFjRHl5YTRUWDFL?=
- =?utf-8?B?NFNkczczREdabWt4MnE5T003QjhHRFhyMjNDQXNpcmVva2NlWGxuOEZVTWN1?=
- =?utf-8?B?K0pyTGJrbnFiRzFhYXNYWTJ6VVpHR24vdDNtNnRjTEk0M1BzcXJDSkUyK28y?=
- =?utf-8?Q?bM3b0YpLyJHUntn2AtTRLMg+K?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <9EC0C16402B917489BF5FCFBF9B9CD9E@namprd12.prod.outlook.com>
-Content-Transfer-Encoding: base64
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F26C210E6CE
+ for <nouveau@lists.freedesktop.org>; Wed,  8 Nov 2023 00:13:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1699402385;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=QDPEL4iVJPFZK2iXJb5jKSkwqhK7nY72hfLQyykrdHc=;
+ b=PFBpMy8JhRIEPNNG4gGUPgNkVrb8hgggh4P3RMMHX936f/RQw1iID+HtjuDZqw7FqJieyr
+ 3FfRLRn6rwwSGfSIeSoQfmZbXR2i4zuchNw+atH7AZHxPEg4QAdjtKbJwjQp/wkhlkrWIl
+ 7GKOoQNUxhY/F+pkLl1zpyfJzA4Onr0=
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-685-DDGzExn-M5WDsL6h3ywlGw-1; Tue, 07 Nov 2023 19:13:03 -0500
+X-MC-Unique: DDGzExn-M5WDsL6h3ywlGw-1
+Received: by mail-ed1-f72.google.com with SMTP id
+ 4fb4d7f45d1cf-543d2bc7d9dso4812988a12.1
+ for <nouveau@lists.freedesktop.org>; Tue, 07 Nov 2023 16:13:03 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699402383; x=1700007183;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QDPEL4iVJPFZK2iXJb5jKSkwqhK7nY72hfLQyykrdHc=;
+ b=diu7Y+2AVG/LpHUY6uPSPOppT6rrgW21QtNyFMVmm40xgx8SuswWKCLLMQCozsq/Sq
+ Rg9FrcKQpR4T8zU7Wfo9Zi2vQSZQlyz50+oIXw6O+cfpy0XXq1GpCoth6SqhPIPZkVQb
+ 0HFsyg+5rLMTPz4ENSBhud01zjJ8zO75d1n+pQlKPkHXr4a4n1/znUJjyzF0vvE8ba6t
+ yR4vqjlPKOnQQUG1/ajrJyQMdOWPaImLGacbbSmcCVp9k1MXGP9HYlgB9+ui8YDIbQCH
+ sNHnd9jQShsOjf4TCXjBrTMKfqSZyyr/xBNtUX2h9Vj4wCkyOy4GVjF0WhEPQ5QNhVgw
+ 95xg==
+X-Gm-Message-State: AOJu0YzyDxbZgsIPdbTkcJZql3zkH+toG1mZRIMkvWyA0LBUtJpiCfig
+ nLTnSyjUT0l8sT05aV/n7WSxizYrQH92uO+orJlz5+tzhP/pVkimHwEiMh5G0qfGUHFyPJFMYLL
+ /uQ1C3nOAFgDdeztBc070v08CrQ==
+X-Received: by 2002:a50:cdcf:0:b0:53f:aa86:e839 with SMTP id
+ h15-20020a50cdcf000000b0053faa86e839mr190087edj.30.1699402382753; 
+ Tue, 07 Nov 2023 16:13:02 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEL6L0idg0kOvMQqkRgQQc2bfd7vJZ3kGHvtGHptLQzuKHlUNhsYcL916vBEA8gRc5dnr6WqQ==
+X-Received: by 2002:a50:cdcf:0:b0:53f:aa86:e839 with SMTP id
+ h15-20020a50cdcf000000b0053faa86e839mr190067edj.30.1699402382420; 
+ Tue, 07 Nov 2023 16:13:02 -0800 (PST)
+Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
+ by smtp.gmail.com with ESMTPSA id
+ n23-20020a5099d7000000b00542db304680sm6030817edb.63.2023.11.07.16.13.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Nov 2023 16:13:02 -0800 (PST)
+From: Danilo Krummrich <dakr@redhat.com>
+To: airlied@gmail.com, daniel@ffwll.ch, matthew.brost@intel.com,
+ thomas.hellstrom@linux.intel.com, sarah.walker@imgtec.com,
+ donald.robson@imgtec.com, boris.brezillon@collabora.com,
+ christian.koenig@amd.com, faith@gfxstrand.net
+Date: Wed,  8 Nov 2023 01:12:30 +0100
+Message-ID: <20231108001259.15123-1-dakr@redhat.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8769.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 51c98506-8908-44f0-1e9f-08dbdfedb01a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Nov 2023 00:00:15.7245 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: hxQGEPYdPmDWG0aU63pSavCBsYRrQg/Ri+KUWL0aKe8qnroGDFUhZdA9uGc9rM63ZYWj0tk1MIOEeeF4ii4jow==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4167
-Subject: Re: [Nouveau] [PATCH] nouveau/gsp: fix UBSAN array bounds warning
- in PACKED_REGISTRY_TABLE
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Nouveau] [PATCH drm-misc-next v9 00/12] [RFC] DRM GPUVM features
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -131,19 +82,179 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gV2VkLCAyMDIzLTExLTA4IGF0IDAwOjUyICswMTAwLCBEYW5pbG8gS3J1bW1yaWNoIHdyb3Rl
-Og0KPiBPbiAxMS84LzIzIDAwOjQ3LCBUaW11ciBUYWJpIHdyb3RlOg0KPiA+IENoYW5nZSBQQUNL
-RURfUkVHSVNUUllfVEFCTEUgc28gdGhhdCBpdHMgbGFzdCBtZW1iZXIgaXMgYSB2YXJpYWJsZS0N
-Cj4gPiBsZW5ndGgNCj4gPiBhcnJheSBpbnN0ZWFkIG9mIGEgemVyby1sZW5ndGggYXJyYXkuwqAg
-VUJTQU4gdHJlYXRzIHplcm8tbGVuZ3RoIGFycmF5cw0KPiA+IGxpdGVyYWxseSBhbmQgd2FybnMg
-aWYgdGhleSBhcmUgZGVyZWZlcmVuY2VkLsKgIENoYW5naW5nIHRoZSAiWzBdIiB0bw0KPiA+ICJb
-XSINCj4gPiB0ZWxscyB0aGUgY29tcGlsZXIgdGhhdCB0aGUgYXJyYXkgaXMgdmFyaWFibGUtbGVu
-Z3RoLg0KPiANCj4gRG8geW91IGFsc28gaW50ZW5kIHRvIGZpeCB0aGlzIHVwc3RyZWFtPyAoQW5k
-IHdpdGggdXBzdHJlYW0gSSBtZWFuIHRoZQ0KPiBvcGVuLWdwdS1rZXJuZWwtbW9kdWxlcyBpbiB0
-aGlzIGNhc2UuKQ0KDQpIbW1tLCBJIGhhZG4ndCB0aG91Z2h0IGFib3V0IHRoYXQuICBJIHdvdWxk
-IG5lZWQgdG8gcmVwcm8gKG9yIHNlZSBhIHJlcHJvKQ0Kd2l0aCBPcGVuUk0gdG8ganVzdGlmeSBj
-aGFuZ2luZyBpdC4gIE9wZW5STSBkb2Vzbid0IGJ1aWxkIHRoZSByZWdpc3RyeSB0aGUNCndheSBO
-b3V2ZWF1IGRvZXMuDQoNCg0K
+Currently GPUVM offers common infrastructure to track GPU VA allocations
+and mappings, generically connect GPU VA mappings to their backing
+buffers and perform more complex mapping operations on the GPU VA space.
+
+However, there are more design patterns commonly used by drivers, which
+can potentially be generalized in order to make GPUVM represent the
+basis of a VM implementation. In this context, this patch series aims at
+generalizing the following elements.
+
+1) Provide a common dma-resv for GEM objects not being used outside of
+   this GPU-VM.
+
+2) Provide tracking of external GEM objects (GEM objects which are
+   shared with other GPU-VMs).
+
+3) Provide functions to efficiently lock all GEM objects dma-resv the
+   GPU-VM contains mappings of.
+
+4) Provide tracking of evicted GEM objects the GPU-VM contains mappings
+   of, such that validation of evicted GEM objects is accelerated.
+
+5) Provide some convinience functions for common patterns.
+
+The implementation introduces struct drm_gpuvm_bo, which serves as abstraction
+combining a struct drm_gpuvm and struct drm_gem_object, similar to what
+amdgpu does with struct amdgpu_bo_vm. While this adds a bit of complexity it
+improves the efficiency of tracking external and evicted GEM objects.
+
+This patch series is also available at [3].
+
+[1] https://gitlab.freedesktop.org/nouvelles/kernel/-/commits/gpuvm-next
+
+Changes in V2:
+==============
+  - rename 'drm_gpuva_manager' -> 'drm_gpuvm' which generally leads to more
+    consistent naming
+  - properly separate commits (introduce common dma-resv, drm_gpuvm_bo
+    abstraction, etc.)
+  - remove maple tree for tracking external objects, use a list drm_gpuvm_bos
+    per drm_gpuvm instead
+  - rework dma-resv locking helpers (Thomas)
+  - add a locking helper for a given range of the VA space (Christian)
+  - make the GPUVA manager buildable as module, rather than drm_exec
+    builtin (Christian)
+
+Changes in V3:
+==============
+  - rename missing function and files (Boris)
+  - warn if vm_obj->obj != obj in drm_gpuva_link() (Boris)
+  - don't expose drm_gpuvm_bo_destroy() (Boris)
+  - unlink VM_BO from GEM in drm_gpuvm_bo_destroy() rather than
+    drm_gpuva_unlink() and link within drm_gpuvm_bo_obtain() to keep
+    drm_gpuvm_bo instances unique
+  - add internal locking to external and evicted object lists to support drivers
+    updating the VA space from within the fence signalling critical path (Boris)
+  - unlink external objects and evicted objects from the GPUVM's list in
+    drm_gpuvm_bo_destroy()
+  - add more documentation and fix some kernel doc issues
+
+Changes in V4:
+==============
+  - add a drm_gpuvm_resv() helper (Boris)
+  - add a drm_gpuvm::<list_name>::local_list field (Boris)
+  - remove drm_gpuvm_bo_get_unless_zero() helper (Boris)
+  - fix missing NULL assignment in get_next_vm_bo_from_list() (Boris)
+  - keep a drm_gem_object reference on potential vm_bo destroy (alternatively we
+    could free the vm_bo and drop the vm_bo's drm_gem_object reference through
+    async work)
+  - introduce DRM_GPUVM_RESV_PROTECTED flag to indicate external locking through
+    the corresponding dma-resv locks to optimize for drivers already holding
+    them when needed; add the corresponding lock_assert_held() calls (Thomas)
+  - make drm_gpuvm_bo_evict() per vm_bo and add a drm_gpuvm_bo_gem_evict()
+    helper (Thomas)
+  - pass a drm_gpuvm_bo in drm_gpuvm_ops::vm_bo_validate() (Thomas)
+  - documentation fixes
+
+Changes in V5:
+==============
+  - use a root drm_gem_object provided by the driver as a base for the VM's
+    common dma-resv (Christian)
+  - provide a helper to allocate a "dummy" root GEM object in case a driver
+    specific root GEM object isn't available
+  - add a dedicated patch for nouveau to make use of the GPUVM's shared dma-resv
+  - improve documentation (Boris)
+  - the following patches are removed from the series, since they already landed
+    in drm-misc-next
+    - f72c2db47080 ("drm/gpuvm: rename struct drm_gpuva_manager to struct drm_gpuvm")
+    - fe7acaa727e1 ("drm/gpuvm: allow building as module")
+    - 78f54469b871 ("drm/nouveau: uvmm: rename 'umgr' to 'base'")
+
+Changes in V6:
+==============
+  - add drm_gpuvm_bo::evicted field protected by the drm_gem_object's dma-resv
+    lock (Thomas)
+    - additionally to the original proposal, always use drm_gpuvm_bo::evicted
+      regardless of the used locking scheme and always keep it up to date
+  - remove unneccesary get->put dance in drm_gpuva_unlink() (Thomas)
+  - fix commit message wording (Thomas)
+  - fix kernel doc warnings (kernel test robot)
+
+Changes in V7:
+==============
+  - add a patch converting WARN() macros to drm_WARN() variants
+  - allow drivers to pass the number of fences to reserve and the drm_exec flags
+    through struct drm_gpuvm_exec
+  - rename 'root' GEM object to 'resv' GEM object
+  - fix order of private_usage and extobj_usage in drm_gpuvm_resv_add_fence()
+  - always set drm_gpuvm_bo::evicted accordingly
+  - explicitly clear drm_gpuvm_bo from evict list after successful validation
+  - group reference get() calls with pointer assignments
+  - call drm_gem_object_put() after vm_bo_free() callback
+  - make lockdep checks explicit for drm_gpuvm_bo_* functions
+  - improve documentation of struct drm_gpuvm_bo
+  - fix a few documentation typos and style issues
+  - use BIT() instead of shift ops for enum drm_gpuvm_flags
+
+Changes in V8:
+==============
+  - do not always WARN on drm_gpuvm_check_overflow() to avoid userspace being
+    able to spam the system log (Christian)
+  - fix checkpath warning ENOTSUPP -> EOPNOTSUPP (Thomas)
+  - fix another checkpatch error (assignment in if condition) (Thomas)
+  - fix missing doc comment regarding a drm_gpuvm_bo's gpuva list (Thomas)
+  - reference count struct drm_gpuvm, this avoids having (odd) rules when
+    dealing with a drm_gpuvm_bo's gpuvm pointer
+
+Changes in V9:
+==============
+  - in drm_gpuvm_free() call drm_gpuvm_fini() before checking for
+    gpuvm->ops->vm_free
+  - fix doc comment of drm_gpuvm_put()
+  - fix reference leak in drm_gpuva_insert()
+  - document drm_gpuvm_put() may be called from atomic context
+  - document drm_gpuvm_bo_put() may only be called from non-atomic context + add
+    a might_sleep()
+
+Danilo Krummrich (12):
+  drm/gpuvm: convert WARN() to drm_WARN() variants
+  drm/gpuvm: don't always WARN in drm_gpuvm_check_overflow()
+  drm/gpuvm: export drm_gpuvm_range_valid()
+  drm/nouveau: make use of drm_gpuvm_range_valid()
+  drm/gpuvm: add common dma-resv per struct drm_gpuvm
+  drm/nouveau: make use of the GPUVM's shared dma-resv
+  drm/gpuvm: add drm_gpuvm_flags to drm_gpuvm
+  drm/nouveau: separately allocate struct nouveau_uvmm
+  drm/gpuvm: reference count drm_gpuvm structures
+  drm/gpuvm: add an abstraction for a VM / BO combination
+  drm/gpuvm: track/lock/validate external/evicted objects
+  drm/nouveau: use GPUVM common infrastructure
+
+ drivers/gpu/drm/drm_gpuvm.c             | 1131 +++++++++++++++++++++--
+ drivers/gpu/drm/nouveau/nouveau_bo.c    |   15 +-
+ drivers/gpu/drm/nouveau/nouveau_bo.h    |    5 +
+ drivers/gpu/drm/nouveau/nouveau_drm.c   |    5 +-
+ drivers/gpu/drm/nouveau/nouveau_drv.h   |   10 +-
+ drivers/gpu/drm/nouveau/nouveau_exec.c  |   57 +-
+ drivers/gpu/drm/nouveau/nouveau_exec.h  |    4 -
+ drivers/gpu/drm/nouveau/nouveau_gem.c   |   10 +-
+ drivers/gpu/drm/nouveau/nouveau_sched.c |    9 +-
+ drivers/gpu/drm/nouveau/nouveau_sched.h |    7 +-
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c  |  269 +++---
+ drivers/gpu/drm/nouveau/nouveau_uvmm.h  |    8 -
+ include/drm/drm_gem.h                   |   32 +-
+ include/drm/drm_gpuvm.h                 |  521 ++++++++++-
+ 14 files changed, 1812 insertions(+), 271 deletions(-)
+
+
+base-commit: c015fb6d01adb616fb54824feb55ce5ab18e8ca1
+-- 
+2.41.0
+
