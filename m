@@ -2,64 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A03827E7AFE
-	for <lists+nouveau@lfdr.de>; Fri, 10 Nov 2023 10:40:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1549C7E7B70
+	for <lists+nouveau@lfdr.de>; Fri, 10 Nov 2023 11:40:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A240210E95A;
-	Fri, 10 Nov 2023 09:40:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D753910E971;
+	Fri, 10 Nov 2023 10:40:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 44B3F10E95A;
- Fri, 10 Nov 2023 09:40:06 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0B47710E984;
+ Fri, 10 Nov 2023 10:40:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1699609206; x=1731145206;
+ t=1699612801; x=1731148801;
  h=message-id:date:mime-version:subject:to:cc:references:
  from:in-reply-to:content-transfer-encoding;
- bh=KSYtIowPTOFzxauX4JUkX/8mXpoYMUvd3xexE6SC60M=;
- b=jwlccOtGjw/8OwyaoJudAbVQd2qBqqNuFO4k2vFhtdNtxoXqX0SCJkXb
- hlRUXP4Hwt30EUhi1xh5hvBYY/JHGiB5yBOXYJdCmZnbb+lp35aafXip1
- 4QsxKMJjvk8U+BZEXfHtu2ZtTGuSIzUW0aoHmR1lru1hGr1kFuPrkJUBX
- 2ku2VhI2fSm3WlsL+050sdSLTreYoOFOx2BP+xGZxgGjiDalsmy8cacco
- zC2aZe/cPa5HDOeLbTUDtgIIBt/+XgeuYUe8eUNhi9oLxnjgo94cJvz2r
- h28yEaAnbqnxqYQUXujMwHl707jpWtW7o5NhWcNg+1hIMdBMMSt3NefiG g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10889"; a="421253174"
-X-IronPort-AV: E=Sophos;i="6.03,291,1694761200"; d="scan'208";a="421253174"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Nov 2023 01:40:05 -0800
+ bh=aiWafxryBwfpkTrcwmhJTaMpDr70Q1+h/+e7js8bdjA=;
+ b=BhJoglGvCy0jTyoghGa9uWqgoJ0Unm7M8+FDlwcIrIeTLnLBVUw9hL7U
+ lJc6juEYP/7Tl4+jv8BRV/18jSnbv9dYXRHgYJXhtHhBZ/+u0ppA8JP+n
+ ui49TzNYZ28P9vbStJCdtGLELOTSFJjpaUKe/tRedZbTGGUI9ttxIBK0n
+ PEmCizx1/TloOkxjGwNaUJje6RbHMiQXNY1LfQxY5kPxN5cT59MnmvnDF
+ fdx77hs/vG9oxOFgl6r9o4w7Ofac5TNJCaZ/rjKT65HiTrKEd6hyQ2v39
+ mVc5baKWcpa8O8Xx/gRO/WNGUeKWlhIe1pjLHHpfu4DyhR7EZs1hiAraQ A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10889"; a="375207255"
+X-IronPort-AV: E=Sophos;i="6.03,291,1694761200"; d="scan'208";a="375207255"
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+ by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 Nov 2023 02:40:00 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10889"; a="740113471"
-X-IronPort-AV: E=Sophos;i="6.03,291,1694761200"; d="scan'208";a="740113471"
+X-IronPort-AV: E=McAfee;i="6600,9927,10889"; a="887327528"
+X-IronPort-AV: E=Sophos;i="6.03,291,1694761200"; d="scan'208";a="887327528"
 Received: from amirafax-mobl4.gar.corp.intel.com (HELO [10.249.254.223])
  ([10.249.254.223])
- by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Nov 2023 01:40:01 -0800
-Message-ID: <f7a64e17-d8b0-a20a-4e27-46f448a10bd4@linux.intel.com>
-Date: Fri, 10 Nov 2023 10:39:59 +0100
+ by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 Nov 2023 02:39:57 -0800
+Message-ID: <92cfbfd9-b9d0-68b4-6375-a0d460f23dbc@linux.intel.com>
+Date: Fri, 10 Nov 2023 11:39:54 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
 Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Danilo Krummrich <dakr@redhat.com>
-References: <20231101233113.8059-10-dakr@redhat.com>
- <be93d9ef-3d3e-4262-a280-d2922b983ca1@amd.com> <ZUTyGTxcH7WlHKsv@pollux>
- <a2e13a27-d2e5-4ae3-9c11-c18b425b69cc@amd.com>
- <b533af44-0404-49c9-9879-3414d0964acc@redhat.com>
- <51dea5f3-a18b-4797-b4fa-87da7db4624a@amd.com> <ZUjZFFtLM435tTxJ@pollux>
- <8e87d962-c80c-40d9-94d7-58b6cd9dd794@amd.com> <ZUj0DdYZUgjhcvf5@pollux>
- <6d3c48f6-a92d-49b3-b836-ee1bc95b56bf@amd.com> <ZUkXkJ+zT7OFGosC@pollux>
- <44bc28c7-05f4-4419-5183-453c4951aac0@linux.intel.com>
- <6c536c94-7072-403c-9c63-d932252fd66b@amd.com>
- <4532d9d5-4c5a-4639-8136-d3ba9995d7b6@redhat.com>
- <1d4ca394-ee0c-4617-adbe-1d47e295c8fb@amd.com>
+To: Danilo Krummrich <dakr@redhat.com>, airlied@gmail.com, daniel@ffwll.ch,
+ matthew.brost@intel.com, sarah.walker@imgtec.com, donald.robson@imgtec.com,
+ boris.brezillon@collabora.com, christian.koenig@amd.com, faith@gfxstrand.net
+References: <20231108001259.15123-1-dakr@redhat.com>
+ <20231108001259.15123-10-dakr@redhat.com>
 From: =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>
-In-Reply-To: <1d4ca394-ee0c-4617-adbe-1d47e295c8fb@amd.com>
+In-Reply-To: <20231108001259.15123-10-dakr@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH drm-misc-next v8 09/12] drm/gpuvm: reference
+Subject: Re: [Nouveau] [PATCH drm-misc-next v9 09/12] drm/gpuvm: reference
  count drm_gpuvm structures
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -72,228 +64,229 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, sarah.walker@imgtec.com,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, faith@gfxstrand.net,
- boris.brezillon@collabora.com, donald.robson@imgtec.com, daniel@ffwll.ch
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
-On 11/10/23 09:50, Christian König wrote:
-> Am 09.11.23 um 19:34 schrieb Danilo Krummrich:
->> On 11/9/23 17:03, Christian König wrote:
->>> Am 09.11.23 um 16:50 schrieb Thomas Hellström:
->>>> [SNIP]
->>>>>>
->>>> Did we get any resolution on this?
->>>>
->>>> FWIW, my take on this is that it would be possible to get GPUVM to 
->>>> work both with and without internal refcounting; If with, the 
->>>> driver needs a vm close to resolve cyclic references, if without 
->>>> that's not necessary. If GPUVM is allowed to refcount in mappings 
->>>> and vm_bos, that comes with a slight performance drop but as Danilo 
->>>> pointed out, the VM lifetime problem iterating over a vm_bo's 
->>>> mapping becomes much easier and the code thus becomes easier to 
->>>> maintain moving forward. That convinced me it's a good thing.
->>>
->>> I strongly believe you guys stumbled over one of the core problems 
->>> with the VM here and I think that reference counting is the right 
->>> answer to solving this.
->>>
->>> The big question is that what is reference counted and in which 
->>> direction does the dependency points, e.g. we have here VM, BO, 
->>> BO_VM and Mapping objects.
->>>
->>> Those patches here suggest a counted Mapping -> VM reference and I'm 
->>> pretty sure that this isn't a good idea. What we should rather 
->>> really have is a BO -> VM or BO_VM ->VM reference. In other words 
->>> that each BO which is part of the VM keeps a reference to the VM.
->>
->> We have both. Please see the subsequent patch introducing VM_BO 
->> structures for that.
->>
->> As I explained, mappings (struct drm_gpuva) keep a pointer to their 
->> VM they're mapped
->> in and besides that it doesn't make sense to free a VM that still 
->> contains mappings,
->> the reference count ensures that. This simply ensures memory safety.
->>
->>>
->>> BTW: At least in amdgpu we can have BOs which (temporary) doesn't 
->>> have any mappings, but are still considered part of the VM.
->>
->> That should be possible.
->>
->>>
->>>>
->>>> Another issue Christian brought up is that something intended to be 
->>>> embeddable (a base class) shouldn't really have its own refcount. I 
->>>> think that's a valid point. If you at some point need to derive 
->>>> from multiple such structs each having its own refcount, things 
->>>> will start to get weird. One way to resolve that would be to have 
->>>> the driver's subclass provide get() and put() ops, and export a 
->>>> destructor for the base-class, rather than to have the base-class 
->>>> provide the refcount and a destructor  ops.
->>
->> GPUVM simply follows the same pattern we have with drm_gem_objects. 
->> And I think it makes
->> sense. Why would we want to embed two struct drm_gpuvm in a single 
->> driver structure?
+On 11/8/23 01:12, Danilo Krummrich wrote:
+> Implement reference counting for struct drm_gpuvm.
 >
-> Because you need one drm_gpuvm structure for each application using 
-> the driver? Or am I missing something?
->
-> As far as I can see a driver would want to embed that into your fpriv 
-> structure which is allocated during drm_driver.open callback.
+> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
 
-I was thinking more of the general design of a base-class that needs to 
-be refcounted. Say a driver vm that inherits from gpu-vm, gem_object and 
-yet another base-class that supplies its own refcount. What's the 
-best-practice way to do refcounting? All base-classes supplying a 
-refcount of its own, or the subclass supplying a refcount and the 
-base-classes supply destroy helpers.
-
-But to be clear this is nothing I see needing urgent attention.
-
->
->>
->>>
->>> Well, I have never seen stuff like that in the kernel. Might be that 
->>> this works, but I would rather not try if avoidable.
->>>
->>>>
->>>> That would also make it possible for the driver to decide the 
->>>> context for the put() call: If the driver needs to be able to call 
->>>> put() from irq / atomic context but the base-class'es destructor 
->>>> doesn't allow atomic context, the driver can push freeing out to a 
->>>> work item if needed.
->>>>
->>>> Finally, the refcount overflow Christian pointed out. Limiting the 
->>>> number of mapping sounds like a reasonable remedy to me.
->>>
->>> Well that depends, I would rather avoid having a dependency for 
->>> mappings.
->>>
->>> Taking the CPU VM handling as example as far as I know 
->>> vm_area_structs doesn't grab a reference to their mm_struct either. 
->>> Instead they get automatically destroyed when the mm_struct is 
->>> destroyed.
->>
->> Certainly, that would be possible. However, thinking about it, this 
->> might call for
->> huge trouble.
->>
->> First of all, we'd still need to reference count a GPUVM and take a 
->> reference for each
->> VM_BO, as we do already. Now instead of simply increasing the 
->> reference count for each
->> mapping as well, we'd need a *mandatory* driver callback that is 
->> called when the GPUVM
->> reference count drops to zero. Maybe something like vm_destroy().
->>
->> The reason is that GPUVM can't just remove all mappings from the tree 
->> nor can it free them
->> by itself, since drivers might use them for tracking their allocated 
->> page tables and/or
->> other stuff.
->>
->> Now, let's think about the scope this callback might be called from. 
->> When a VM_BO is destroyed
->> the driver might hold a couple of locks (for Xe it would be the VM's 
->> shared dma-resv lock and
->> potentially the corresponding object's dma-resv lock if they're not 
->> the same already). If
->> destroying this VM_BO leads to the VM being destroyed, the drivers 
->> vm_destroy() callback would
->> be called with those locks being held as well.
->>
->> I feel like doing this finally opens the doors of the locking hell 
->> entirely. I think we should
->> really avoid that.
-
-I don't think we need to worry much about this particular locking hell 
-because if we hold, for example a vm and bo resv when putting the vm_bo, 
-we need to keep additional strong references for the bo / vm pointer we 
-use for unlocking. Hence putting the vm_bo under those locks can never 
-lead to the vm getting destroyed.
-
-Also, don't we already sort of have a mandatory vm_destroy callback?
-
-+	if (drm_WARN_ON(gpuvm->drm, !gpuvm->ops->vm_free))
-+		return;
+Reviewed-by: Thomas Hellström <thomas.hellstrom@linux.intel.com>
 
 
-
+> ---
+>   drivers/gpu/drm/drm_gpuvm.c            | 56 +++++++++++++++++++++-----
+>   drivers/gpu/drm/nouveau/nouveau_uvmm.c | 20 ++++++---
+>   include/drm/drm_gpuvm.h                | 31 +++++++++++++-
+>   3 files changed, 90 insertions(+), 17 deletions(-)
 >
-> That's a really good point, but I fear exactly that's the use case.
->
-> I would expect that VM_BO structures are added in the 
-> drm_gem_object_funcs.open callback and freed in 
-> drm_gem_object_funcs.close.
->
-> Since it is perfectly legal for userspace to close a BO while there 
-> are still mappings (can trivial be that the app is killed) I would 
-> expect that the drm_gem_object_funcs.close handling is something like 
-> asking drm_gpuvm destroying the VM_BO and getting the mappings which 
-> should be cleared in the page table in return.
->
-> In amdgpu we even go a step further and the VM structure keeps track 
-> of all the mappings of deleted VM_BOs so that higher level can query 
-> those and clear them later on.
->
-> Background is that the drm_gem_object_funcs.close can't fail, but it 
-> can perfectly be that the app is killed because of an OOM situation 
-> and we can't do page tables updates in that moment because of this.
->
->>
->>>
->>> Which makes sense in that case because when the mm_struct is gone 
->>> the vm_area_struct doesn't make sense any more either.
->>>
->>> What we clearly need is a reference to prevent the VM or at least 
->>> the shared resv to go away to early.
->>
->> Yeah, that was a good hint and we've covered that.
->>
->>>
->>> Regards,
->>> Christian.
->>>
->>>>
->>>> But I think all of this is fixable as follow-ups if needed, unless 
->>>> I'm missing something crucial.
->>
->> Fully agree, I think at this point we should go ahead and land this 
->> series.
-
-+1.
-
-/Thomas
-
-
->>
->
-> Yeah, agree this is not UAPI so not nailed in stone. Feel free to add 
-> my acked-by as well if you want.
->
-> Only keep in mind that when you give drivers some functionality in a 
-> common component they usually expect to keep that functionality.
->
-> For example changing the dma_resv object to make sure that drivers 
-> can't cause use after free errors any more was an extremely annoying 
-> experience since every user of those interface had to change at once.
->
-> Regards,
-> Christian.
->
->>
->>>>
->>>> Just my 2 cents.
->>>>
->>>> /Thomas
->>>>
->>>>
->>>
->>
->
+> diff --git a/drivers/gpu/drm/drm_gpuvm.c b/drivers/gpu/drm/drm_gpuvm.c
+> index 53e2c406fb04..ef968eba6fe6 100644
+> --- a/drivers/gpu/drm/drm_gpuvm.c
+> +++ b/drivers/gpu/drm/drm_gpuvm.c
+> @@ -746,6 +746,8 @@ drm_gpuvm_init(struct drm_gpuvm *gpuvm, const char *name,
+>   	gpuvm->rb.tree = RB_ROOT_CACHED;
+>   	INIT_LIST_HEAD(&gpuvm->rb.list);
+>   
+> +	kref_init(&gpuvm->kref);
+> +
+>   	gpuvm->name = name ? name : "unknown";
+>   	gpuvm->flags = flags;
+>   	gpuvm->ops = ops;
+> @@ -770,15 +772,8 @@ drm_gpuvm_init(struct drm_gpuvm *gpuvm, const char *name,
+>   }
+>   EXPORT_SYMBOL_GPL(drm_gpuvm_init);
+>   
+> -/**
+> - * drm_gpuvm_destroy() - cleanup a &drm_gpuvm
+> - * @gpuvm: pointer to the &drm_gpuvm to clean up
+> - *
+> - * Note that it is a bug to call this function on a manager that still
+> - * holds GPU VA mappings.
+> - */
+> -void
+> -drm_gpuvm_destroy(struct drm_gpuvm *gpuvm)
+> +static void
+> +drm_gpuvm_fini(struct drm_gpuvm *gpuvm)
+>   {
+>   	gpuvm->name = NULL;
+>   
+> @@ -790,7 +785,35 @@ drm_gpuvm_destroy(struct drm_gpuvm *gpuvm)
+>   
+>   	drm_gem_object_put(gpuvm->r_obj);
+>   }
+> -EXPORT_SYMBOL_GPL(drm_gpuvm_destroy);
+> +
+> +static void
+> +drm_gpuvm_free(struct kref *kref)
+> +{
+> +	struct drm_gpuvm *gpuvm = container_of(kref, struct drm_gpuvm, kref);
+> +
+> +	drm_gpuvm_fini(gpuvm);
+> +
+> +	if (drm_WARN_ON(gpuvm->drm, !gpuvm->ops->vm_free))
+> +		return;
+> +
+> +	gpuvm->ops->vm_free(gpuvm);
+> +}
+> +
+> +/**
+> + * drm_gpuvm_put() - drop a struct drm_gpuvm reference
+> + * @gpuvm: the &drm_gpuvm to release the reference of
+> + *
+> + * This releases a reference to @gpuvm.
+> + *
+> + * This function may be called from atomic context.
+> + */
+> +void
+> +drm_gpuvm_put(struct drm_gpuvm *gpuvm)
+> +{
+> +	if (gpuvm)
+> +		kref_put(&gpuvm->kref, drm_gpuvm_free);
+> +}
+> +EXPORT_SYMBOL_GPL(drm_gpuvm_put);
+>   
+>   static int
+>   __drm_gpuva_insert(struct drm_gpuvm *gpuvm,
+> @@ -839,11 +862,21 @@ drm_gpuva_insert(struct drm_gpuvm *gpuvm,
+>   {
+>   	u64 addr = va->va.addr;
+>   	u64 range = va->va.range;
+> +	int ret;
+>   
+>   	if (unlikely(!drm_gpuvm_range_valid(gpuvm, addr, range)))
+>   		return -EINVAL;
+>   
+> -	return __drm_gpuva_insert(gpuvm, va);
+> +	ret = __drm_gpuva_insert(gpuvm, va);
+> +	if (likely(!ret))
+> +		/* Take a reference of the GPUVM for the successfully inserted
+> +		 * drm_gpuva. We can't take the reference in
+> +		 * __drm_gpuva_insert() itself, since we don't want to increse
+> +		 * the reference count for the GPUVM's kernel_alloc_node.
+> +		 */
+> +		drm_gpuvm_get(gpuvm);
+> +
+> +	return ret;
+>   }
+>   EXPORT_SYMBOL_GPL(drm_gpuva_insert);
+>   
+> @@ -876,6 +909,7 @@ drm_gpuva_remove(struct drm_gpuva *va)
+>   	}
+>   
+>   	__drm_gpuva_remove(va);
+> +	drm_gpuvm_put(va->vm);
+>   }
+>   EXPORT_SYMBOL_GPL(drm_gpuva_remove);
+>   
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> index 54be12c1272f..cb2f06565c46 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> @@ -1780,6 +1780,18 @@ nouveau_uvmm_bo_unmap_all(struct nouveau_bo *nvbo)
+>   	}
+>   }
+>   
+> +static void
+> +nouveau_uvmm_free(struct drm_gpuvm *gpuvm)
+> +{
+> +	struct nouveau_uvmm *uvmm = uvmm_from_gpuvm(gpuvm);
+> +
+> +	kfree(uvmm);
+> +}
+> +
+> +static const struct drm_gpuvm_ops gpuvm_ops = {
+> +	.vm_free = nouveau_uvmm_free,
+> +};
+> +
+>   int
+>   nouveau_uvmm_ioctl_vm_init(struct drm_device *dev,
+>   			   void *data,
+> @@ -1830,7 +1842,7 @@ nouveau_uvmm_ioctl_vm_init(struct drm_device *dev,
+>   		       NOUVEAU_VA_SPACE_END,
+>   		       init->kernel_managed_addr,
+>   		       init->kernel_managed_size,
+> -		       NULL);
+> +		       &gpuvm_ops);
+>   	/* GPUVM takes care from here on. */
+>   	drm_gem_object_put(r_obj);
+>   
+> @@ -1849,8 +1861,7 @@ nouveau_uvmm_ioctl_vm_init(struct drm_device *dev,
+>   	return 0;
+>   
+>   out_gpuvm_fini:
+> -	drm_gpuvm_destroy(&uvmm->base);
+> -	kfree(uvmm);
+> +	drm_gpuvm_put(&uvmm->base);
+>   out_unlock:
+>   	mutex_unlock(&cli->mutex);
+>   	return ret;
+> @@ -1902,7 +1913,6 @@ nouveau_uvmm_fini(struct nouveau_uvmm *uvmm)
+>   
+>   	mutex_lock(&cli->mutex);
+>   	nouveau_vmm_fini(&uvmm->vmm);
+> -	drm_gpuvm_destroy(&uvmm->base);
+> -	kfree(uvmm);
+> +	drm_gpuvm_put(&uvmm->base);
+>   	mutex_unlock(&cli->mutex);
+>   }
+> diff --git a/include/drm/drm_gpuvm.h b/include/drm/drm_gpuvm.h
+> index 0c2e24155a93..4e6e1fd3485a 100644
+> --- a/include/drm/drm_gpuvm.h
+> +++ b/include/drm/drm_gpuvm.h
+> @@ -247,6 +247,11 @@ struct drm_gpuvm {
+>   		struct list_head list;
+>   	} rb;
+>   
+> +	/**
+> +	 * @kref: reference count of this object
+> +	 */
+> +	struct kref kref;
+> +
+>   	/**
+>   	 * @kernel_alloc_node:
+>   	 *
+> @@ -273,7 +278,23 @@ void drm_gpuvm_init(struct drm_gpuvm *gpuvm, const char *name,
+>   		    u64 start_offset, u64 range,
+>   		    u64 reserve_offset, u64 reserve_range,
+>   		    const struct drm_gpuvm_ops *ops);
+> -void drm_gpuvm_destroy(struct drm_gpuvm *gpuvm);
+> +
+> +/**
+> + * drm_gpuvm_get() - acquire a struct drm_gpuvm reference
+> + * @gpuvm: the &drm_gpuvm to acquire the reference of
+> + *
+> + * This function acquires an additional reference to @gpuvm. It is illegal to
+> + * call this without already holding a reference. No locks required.
+> + */
+> +static inline struct drm_gpuvm *
+> +drm_gpuvm_get(struct drm_gpuvm *gpuvm)
+> +{
+> +	kref_get(&gpuvm->kref);
+> +
+> +	return gpuvm;
+> +}
+> +
+> +void drm_gpuvm_put(struct drm_gpuvm *gpuvm);
+>   
+>   bool drm_gpuvm_range_valid(struct drm_gpuvm *gpuvm, u64 addr, u64 range);
+>   bool drm_gpuvm_interval_empty(struct drm_gpuvm *gpuvm, u64 addr, u64 range);
+> @@ -673,6 +694,14 @@ static inline void drm_gpuva_init_from_op(struct drm_gpuva *va,
+>    * operations to drivers.
+>    */
+>   struct drm_gpuvm_ops {
+> +	/**
+> +	 * @vm_free: called when the last reference of a struct drm_gpuvm is
+> +	 * dropped
+> +	 *
+> +	 * This callback is mandatory.
+> +	 */
+> +	void (*vm_free)(struct drm_gpuvm *gpuvm);
+> +
+>   	/**
+>   	 * @op_alloc: called when the &drm_gpuvm allocates
+>   	 * a struct drm_gpuva_op
