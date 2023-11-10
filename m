@@ -1,68 +1,80 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 705C17E7B80
-	for <lists+nouveau@lfdr.de>; Fri, 10 Nov 2023 11:52:27 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F3877E7C19
+	for <lists+nouveau@lfdr.de>; Fri, 10 Nov 2023 13:19:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5468110E98B;
-	Fri, 10 Nov 2023 10:52:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C9B1010E244;
+	Fri, 10 Nov 2023 12:19:18 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F296210E98B;
- Fri, 10 Nov 2023 10:52:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1699613544; x=1731149544;
- h=message-id:date:mime-version:subject:to:cc:references:
- from:in-reply-to:content-transfer-encoding;
- bh=3hq0ievJzHlchjQcTAPvyBfb9ZI31LlhKF5Es7wNgxQ=;
- b=X1Wsf5sAm5xj65rePQClFnxo7Tdewbi8tM+zwcimf2ahRPY0h6G3HIPJ
- WA+VR4fj/qdPu55nUj4GxM64/7wJUmqqNHuqPEofNMMRRaUSIGPBAMZBw
- QTb7X22QqUVBqrYWnslnYNrFQ6NlbKq6K0g5c88dQsBHelwOb9iMfXIuV
- m99QEwwFmrXwZt3LhUSIqBJ493gisRgduwo8wmzTUIYLEilUpW0pVYGZJ
- KQBCkHl+Sw10QdMy66qQaJKicYYrat05iFQJkwfzgn2CJA9AttpZmax6i
- jqecFunMMbyTGc2DpSSgJuVIQw6x5R0URbsup3u3qF5XOxdrW7lfJTqR5 w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10889"; a="421261756"
-X-IronPort-AV: E=Sophos;i="6.03,291,1694761200"; d="scan'208";a="421261756"
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Nov 2023 02:52:20 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10889"; a="880938827"
-X-IronPort-AV: E=Sophos;i="6.03,291,1694761200"; d="scan'208";a="880938827"
-Received: from amirafax-mobl4.gar.corp.intel.com (HELO [10.249.254.223])
- ([10.249.254.223])
- by fmsmga002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Nov 2023 02:52:17 -0800
-Message-ID: <7b5b3a51-6b70-b5ba-1017-b79f1519ed09@linux.intel.com>
-Date: Fri, 10 Nov 2023 11:52:14 +0100
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 46ACD10E113
+ for <nouveau@lists.freedesktop.org>; Fri, 10 Nov 2023 12:19:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1699618753;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=fZNPs/Uul8pbzP8wCMTLsg8p6INnBbpXPZnHGet45DI=;
+ b=c/LKBwJwN0RoZoMzEt8pkWvFhIxHCpicBXMRpSE/2qlmnl5tLWJvkXbuTsmAx0zoGfWAvF
+ t27+n34TbfwS078i0faGMkgWAezX87K6XFf2tVjJRPf/Lp2NBEQorGI1h7u/F9Xndb1l54
+ aBPYOuX887Ah725F52Xnu9fRL9qNu+g=
+Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
+ [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-433-tijO_THzMCS7aUueFs5GOA-1; Fri, 10 Nov 2023 07:19:09 -0500
+X-MC-Unique: tijO_THzMCS7aUueFs5GOA-1
+Received: by mail-ej1-f71.google.com with SMTP id
+ a640c23a62f3a-9bea60bd1adso354246166b.0
+ for <nouveau@lists.freedesktop.org>; Fri, 10 Nov 2023 04:19:09 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699618748; x=1700223548;
+ h=in-reply-to:from:references:cc:to:content-language:subject
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=d1whh53T9s+HtqGbyLHv3NqyFPtaLB/zMBiip1Dm8eo=;
+ b=WNfyr5gcSMVn8VPCbTqjZIKvVasZr6hZrPTGvmS/UrJHPVOaz1/cSGfpxpM5exM6DF
+ gkyphXzy6cPWhC7Al0O71iWc8Z6gNs4fhYiQWPkVQaEmu8mrN3i2JCBJ1LKrjXe2ilFY
+ 1vLtGLXxzdQDQTA+46pCKretqMGxpW8VJ0O2PWHLe0eJHKmj+MpHEU3ZHeBepj/O3hb8
+ 463Tuslc+0sze1iYleDxHvA2kZveg8W2yC4bgrrMlQwOCmF6sL2U3IMmTwIuhfN0mLpT
+ eK0rcYBhPrvbty/E3XzcSxDjj1mTavMbqPmOKiwcKlPdo26eMOsne5dJyuxKkGgx5psZ
+ la3Q==
+X-Gm-Message-State: AOJu0Yy7NabeawB7zIr5rdCJCzZIsKylsjOFma51Fx3SSrfAu54qhwFu
+ 3Pf9UQbu4srBLwWlMUGjBv6AtR71yfFNH4ane27SLOGoSoWGXVAlAoSFlfT+ZjNHPfj+k+FarqQ
+ 9kX7+4jAJDAxBufw/C+zthXe8gQ==
+X-Received: by 2002:a17:906:348f:b0:9ad:e3fd:d46c with SMTP id
+ g15-20020a170906348f00b009ade3fdd46cmr1983870ejb.10.1699618748797; 
+ Fri, 10 Nov 2023 04:19:08 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFFUJSuoTddDVUnMW1xL9VJXCGY/Zir1gl4CSrzPZps3UPSDo0azFQEhVUlzVS/F/HdESVfYg==
+X-Received: by 2002:a17:906:348f:b0:9ad:e3fd:d46c with SMTP id
+ g15-20020a170906348f00b009ade3fdd46cmr1983844ejb.10.1699618748423; 
+ Fri, 10 Nov 2023 04:19:08 -0800 (PST)
+Received: from ?IPV6:2001:1c00:c32:7800:5bfa:a036:83f0:f9ec?
+ (2001-1c00-0c32-7800-5bfa-a036-83f0-f9ec.cable.dynamic.v6.ziggo.nl.
+ [2001:1c00:c32:7800:5bfa:a036:83f0:f9ec])
+ by smtp.gmail.com with ESMTPSA id
+ e14-20020a1709061e8e00b00977cad140a8sm3867371ejj.218.2023.11.10.04.19.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 10 Nov 2023 04:19:07 -0800 (PST)
+Message-ID: <a592ce0c-64f0-477d-80fa-8f5a52ba29ea@redhat.com>
+Date: Fri, 10 Nov 2023 13:19:06 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Danilo Krummrich <dakr@redhat.com>
-References: <20231101233113.8059-10-dakr@redhat.com>
- <be93d9ef-3d3e-4262-a280-d2922b983ca1@amd.com> <ZUTyGTxcH7WlHKsv@pollux>
- <a2e13a27-d2e5-4ae3-9c11-c18b425b69cc@amd.com>
- <b533af44-0404-49c9-9879-3414d0964acc@redhat.com>
- <51dea5f3-a18b-4797-b4fa-87da7db4624a@amd.com> <ZUjZFFtLM435tTxJ@pollux>
- <8e87d962-c80c-40d9-94d7-58b6cd9dd794@amd.com> <ZUj0DdYZUgjhcvf5@pollux>
- <6d3c48f6-a92d-49b3-b836-ee1bc95b56bf@amd.com> <ZUkXkJ+zT7OFGosC@pollux>
- <44bc28c7-05f4-4419-5183-453c4951aac0@linux.intel.com>
- <6c536c94-7072-403c-9c63-d932252fd66b@amd.com>
- <4532d9d5-4c5a-4639-8136-d3ba9995d7b6@redhat.com>
- <1d4ca394-ee0c-4617-adbe-1d47e295c8fb@amd.com>
- <f7a64e17-d8b0-a20a-4e27-46f448a10bd4@linux.intel.com>
- <e9da2add-20e0-437a-b325-2d3309f84eaa@amd.com>
-From: =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>
-In-Reply-To: <e9da2add-20e0-437a-b325-2d3309f84eaa@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH drm-misc-next v8 09/12] drm/gpuvm: reference
- count drm_gpuvm structures
+User-Agent: Mozilla Thunderbird
+To: Kai-Heng Feng <kai.heng.feng@canonical.com>,
+ "Owen T. Heisler" <writer@owenh.net>
+References: <9f36fb06-64c4-4264-aaeb-4e1289e764c4@owenh.net>
+ <CAAd53p7BSesx=a1igTohoSkxrW+Hq8O7ArONFCK7uoDi12-T4A@mail.gmail.com>
+From: Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <CAAd53p7BSesx=a1igTohoSkxrW+Hq8O7ArONFCK7uoDi12-T4A@mail.gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/mixed; boundary="------------iOgSsRA60Wlx910hYRXi01Ux"
+Content-Language: en-US, nl
+Subject: Re: [Nouveau] [REGRESSION]: acpi/nouveau: Hardware unavailable upon
+ resume or suspend fails
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,200 +86,152 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, sarah.walker@imgtec.com,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, faith@gfxstrand.net,
- boris.brezillon@collabora.com, donald.robson@imgtec.com, daniel@ffwll.ch
+Cc: regressions@lists.linux.dev, nouveau@lists.freedesktop.org,
+ "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>, stable@vger.kernel.org,
+ linux-acpi@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+This is a multi-part message in MIME format.
+--------------iOgSsRA60Wlx910hYRXi01Ux
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 11/10/23 11:42, Christian König wrote:
-> Am 10.11.23 um 10:39 schrieb Thomas Hellström:
->>
->> [SNIP]
->
->> I was thinking more of the general design of a base-class that needs 
->> to be refcounted. Say a driver vm that inherits from gpu-vm, 
->> gem_object and yet another base-class that supplies its own refcount. 
->> What's the best-practice way to do refcounting? All base-classes 
->> supplying a refcount of its own, or the subclass supplying a refcount 
->> and the base-classes supply destroy helpers.
->
-> From my experience the most common design pattern in the Linux kernel 
-> is that you either have reference counted objects which contain a 
-> private pointer (like struct file, struct inode etc..) or the lifetime 
-> is defined by the user of the object instead of reference counting and 
-> in this case you can embed it into your own object.
->
->>
->> But to be clear this is nothing I see needing urgent attention.
->>
->>>
->>>>
->>>>>
->>>>> Well, I have never seen stuff like that in the kernel. Might be 
->>>>> that this works, but I would rather not try if avoidable.
->>>>>
->>>>>>
->>>>>> That would also make it possible for the driver to decide the 
->>>>>> context for the put() call: If the driver needs to be able to 
->>>>>> call put() from irq / atomic context but the base-class'es 
->>>>>> destructor doesn't allow atomic context, the driver can push 
->>>>>> freeing out to a work item if needed.
->>>>>>
->>>>>> Finally, the refcount overflow Christian pointed out. Limiting 
->>>>>> the number of mapping sounds like a reasonable remedy to me.
->>>>>
->>>>> Well that depends, I would rather avoid having a dependency for 
->>>>> mappings.
->>>>>
->>>>> Taking the CPU VM handling as example as far as I know 
->>>>> vm_area_structs doesn't grab a reference to their mm_struct 
->>>>> either. Instead they get automatically destroyed when the 
->>>>> mm_struct is destroyed.
->>>>
->>>> Certainly, that would be possible. However, thinking about it, this 
->>>> might call for
->>>> huge trouble.
->>>>
->>>> First of all, we'd still need to reference count a GPUVM and take a 
->>>> reference for each
->>>> VM_BO, as we do already. Now instead of simply increasing the 
->>>> reference count for each
->>>> mapping as well, we'd need a *mandatory* driver callback that is 
->>>> called when the GPUVM
->>>> reference count drops to zero. Maybe something like vm_destroy().
->>>>
->>>> The reason is that GPUVM can't just remove all mappings from the 
->>>> tree nor can it free them
->>>> by itself, since drivers might use them for tracking their 
->>>> allocated page tables and/or
->>>> other stuff.
->>>>
->>>> Now, let's think about the scope this callback might be called 
->>>> from. When a VM_BO is destroyed
->>>> the driver might hold a couple of locks (for Xe it would be the 
->>>> VM's shared dma-resv lock and
->>>> potentially the corresponding object's dma-resv lock if they're not 
->>>> the same already). If
->>>> destroying this VM_BO leads to the VM being destroyed, the drivers 
->>>> vm_destroy() callback would
->>>> be called with those locks being held as well.
->>>>
->>>> I feel like doing this finally opens the doors of the locking hell 
->>>> entirely. I think we should
->>>> really avoid that.
->>
->> I don't think we need to worry much about this particular locking 
->> hell because if we hold
->
-> I have to agree with Danilo here. Especially you have cases where you 
-> usually lock BO->VM (for example eviction) as well as cases where you 
-> need to lock VM->BO (command submission).
->
-> Because of this in amdgpu we used (or abused?) the dma_resv of the 
-> root BO as lock for the VM. Since this is a ww_mutex locking it in 
-> both VM, BO as well as BO, VM order works.
+Hi All,
 
-Yes, gpuvm is doing the same. (although not necessarily using the 
-page-table root bo, but any bo of the driver's choice). But I read it as 
-Danilo feared the case where the VM destructor was called with a VM resv 
-(or possibly bo resv) held. I meant the driver can easily ensure that's 
-not happening, and in some cases it can't happen.
+On 11/10/23 07:09, Kai-Heng Feng wrote:
+> Hi Owen,
+> 
+> On Fri, Nov 10, 2023 at 5:55 AM Owen T. Heisler <writer@owenh.net> wrote:
+>>
+>> #regzbot introduced: 89c290ea758911e660878e26270e084d862c03b0
+>> #regzbot link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/273
+>> #regzbot link: https://bugzilla.kernel.org/show_bug.cgi?id=218124
+> 
+> Thanks for the bug report. Do you prefer to continue the discussion
+> here, on gitlab or on bugzilla?
 
-Thanks,
+Owen, as Kai-Heng said thank you for reporting this.
 
-Thomas
+>> ## Reproducing
+>>
+>> 1. Boot system to framebuffer console.
+>> 2. Run `systemctl suspend`. If undocked without secondary display,
+>> suspend fails. If docked with secondary display, suspend succeeds.
+>> 3. Resume from suspend if applicable.
+>> 4. System is now in a broken state.
+> 
+> So I guess we need to put those devices to ACPI D3 for suspend. Let's
+> discuss this on your preferred platform.
+
+Ok, so I was already sort of afraid we might see something like this
+happening because of:
+
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=89c290ea758911e660878e26270e084d862c03b0
+
+As I mentioned during the review of that, it might be better to
+not touch the video-card ACPI power-state at all and instead
+only do acpi_device_fix_up_power() on the child devices.
+
+Owen, attached are 2 patches which implement only
+calling acpi_device_fix_up_power() on the child devices,
+can you build a v6.6 kernel with these 2 patches added
+on top please and see if that fixes things ?
+
+Kai-Heng can you test that the issue on the HP ZBook Fury 16 G10
+is still resolved after applying these patches ?
+
+Regards,
+
+Hans
 
 
+--------------iOgSsRA60Wlx910hYRXi01Ux
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0001-ACPI-PM-Add-acpi_device_fix_up_power_children-functi.patch"
+Content-Disposition: attachment;
+ filename*0="0001-ACPI-PM-Add-acpi_device_fix_up_power_children-functi.pa";
+ filename*1="tch"
+Content-Transfer-Encoding: base64
 
->
-> Regards,
-> Christian.
->
->> , for example a vm and bo resv when putting the vm_bo, we need to 
->> keep additional strong references for the bo / vm pointer we use for 
->> unlocking. Hence putting the vm_bo under those locks can never lead 
->> to the vm getting destroyed.
->>
->> Also, don't we already sort of have a mandatory vm_destroy callback?
->>
->> +    if (drm_WARN_ON(gpuvm->drm, !gpuvm->ops->vm_free))
->> +        return;
->>
->>
->>
->>>
->>> That's a really good point, but I fear exactly that's the use case.
->>>
->>> I would expect that VM_BO structures are added in the 
->>> drm_gem_object_funcs.open callback and freed in 
->>> drm_gem_object_funcs.close.
->>>
->>> Since it is perfectly legal for userspace to close a BO while there 
->>> are still mappings (can trivial be that the app is killed) I would 
->>> expect that the drm_gem_object_funcs.close handling is something 
->>> like asking drm_gpuvm destroying the VM_BO and getting the mappings 
->>> which should be cleared in the page table in return.
->>>
->>> In amdgpu we even go a step further and the VM structure keeps track 
->>> of all the mappings of deleted VM_BOs so that higher level can query 
->>> those and clear them later on.
->>>
->>> Background is that the drm_gem_object_funcs.close can't fail, but it 
->>> can perfectly be that the app is killed because of an OOM situation 
->>> and we can't do page tables updates in that moment because of this.
->>>
->>>>
->>>>>
->>>>> Which makes sense in that case because when the mm_struct is gone 
->>>>> the vm_area_struct doesn't make sense any more either.
->>>>>
->>>>> What we clearly need is a reference to prevent the VM or at least 
->>>>> the shared resv to go away to early.
->>>>
->>>> Yeah, that was a good hint and we've covered that.
->>>>
->>>>>
->>>>> Regards,
->>>>> Christian.
->>>>>
->>>>>>
->>>>>> But I think all of this is fixable as follow-ups if needed, 
->>>>>> unless I'm missing something crucial.
->>>>
->>>> Fully agree, I think at this point we should go ahead and land this 
->>>> series.
->>
->> +1.
->>
->> /Thomas
->>
->>
->>>>
->>>
->>> Yeah, agree this is not UAPI so not nailed in stone. Feel free to 
->>> add my acked-by as well if you want.
->>>
->>> Only keep in mind that when you give drivers some functionality in a 
->>> common component they usually expect to keep that functionality.
->>>
->>> For example changing the dma_resv object to make sure that drivers 
->>> can't cause use after free errors any more was an extremely annoying 
->>> experience since every user of those interface had to change at once.
->>>
->>> Regards,
->>> Christian.
->>>
->>>>
->>>>>>
->>>>>> Just my 2 cents.
->>>>>>
->>>>>> /Thomas
->>>>>>
->>>>>>
->>>>>
->>>>
->>>
->
+RnJvbSA2OGE4MTkxMDFjNTgwYmI4OWYzNGEzMTE5NmFjZTgxMjQ0Y2E4ZWI1IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBIYW5zIGRlIEdvZWRlIDxoZGVnb2VkZUByZWRoYXQuY29tPgpE
+YXRlOiBGcmksIDEwIE5vdiAyMDIzIDEyOjUyOjM5ICswMTAwClN1YmplY3Q6IFtQQVRDSCAxLzJd
+IEFDUEk6IFBNOiBBZGQgYWNwaV9kZXZpY2VfZml4X3VwX3Bvd2VyX2NoaWxkcmVuKCkKIGZ1bmN0
+aW9uCgpJbiBzb21lIGNhc2VzIGl0IGlzIG5lY2Vzc2FyeSB0byBmaXgtdXAgdGhlIHBvd2VyLXN0
+YXRlIG9mIGFuIEFDUEkKZGV2aWNlJ3MgY2hpbGRyZW4gd2l0aG91dCB0b3VjaGluZyB0aGUgQUNQ
+SSBkZXZpY2UgaXRzZWxmIGFkZAphIG5ldyBhY3BpX2RldmljZV9maXhfdXBfcG93ZXJfY2hpbGRy
+ZW4oKSBmdW5jdGlvbiBmb3IgdGhpcy4KClNpZ25lZC1vZmYtYnk6IEhhbnMgZGUgR29lZGUgPGhk
+ZWdvZWRlQHJlZGhhdC5jb20+Ci0tLQogZHJpdmVycy9hY3BpL2RldmljZV9wbS5jIHwgMTMgKysr
+KysrKysrKysrKwogaW5jbHVkZS9hY3BpL2FjcGlfYnVzLmggIHwgIDEgKwogMiBmaWxlcyBjaGFu
+Z2VkLCAxNCBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9hY3BpL2RldmljZV9w
+bS5jIGIvZHJpdmVycy9hY3BpL2RldmljZV9wbS5jCmluZGV4IGYwMDcxMTZhODQyNy4uM2I0ZDA0
+OGM0OTQxIDEwMDY0NAotLS0gYS9kcml2ZXJzL2FjcGkvZGV2aWNlX3BtLmMKKysrIGIvZHJpdmVy
+cy9hY3BpL2RldmljZV9wbS5jCkBAIC0zOTcsNiArMzk3LDE5IEBAIHZvaWQgYWNwaV9kZXZpY2Vf
+Zml4X3VwX3Bvd2VyX2V4dGVuZGVkKHN0cnVjdCBhY3BpX2RldmljZSAqYWRldikKIH0KIEVYUE9S
+VF9TWU1CT0xfR1BMKGFjcGlfZGV2aWNlX2ZpeF91cF9wb3dlcl9leHRlbmRlZCk7CiAKKy8qKgor
+ICogYWNwaV9kZXZpY2VfZml4X3VwX3Bvd2VyX2NoaWxkcmVuIC0gRm9yY2UgYSBkZXZpY2UncyBj
+aGlsZHJlbiBpbnRvIEQwLgorICogQGFkZXY6IFBhcmVudCBkZXZpY2Ugb2JqZWN0IHdob3NlIGNo
+aWxkcmVuJ3MgcG93ZXIgc3RhdGUgaXMgdG8gYmUgZml4ZWQgdXAuCisgKgorICogQ2FsbCBhY3Bp
+X2RldmljZV9maXhfdXBfcG93ZXIoKSBmb3IgQGFkZXYncyBjaGlsZHJlbiBzbyBsb25nIGFzIHRo
+ZXkKKyAqIGFyZSByZXBvcnRlZCBhcyBwcmVzZW50IGFuZCBlbmFibGVkLgorICovCit2b2lkIGFj
+cGlfZGV2aWNlX2ZpeF91cF9wb3dlcl9jaGlsZHJlbihzdHJ1Y3QgYWNwaV9kZXZpY2UgKmFkZXYp
+Cit7CisJYWNwaV9kZXZfZm9yX2VhY2hfY2hpbGQoYWRldiwgZml4X3VwX3Bvd2VyX2lmX2FwcGxp
+Y2FibGUsIE5VTEwpOworfQorRVhQT1JUX1NZTUJPTF9HUEwoYWNwaV9kZXZpY2VfZml4X3VwX3Bv
+d2VyX2NoaWxkcmVuKTsKKwogaW50IGFjcGlfZGV2aWNlX3VwZGF0ZV9wb3dlcihzdHJ1Y3QgYWNw
+aV9kZXZpY2UgKmRldmljZSwgaW50ICpzdGF0ZV9wKQogewogCWludCBzdGF0ZTsKZGlmZiAtLWdp
+dCBhL2luY2x1ZGUvYWNwaS9hY3BpX2J1cy5oIGIvaW5jbHVkZS9hY3BpL2FjcGlfYnVzLmgKaW5k
+ZXggMjU0Njg1MDg1YzgyLi4wYjdlYWIwZWY3ZDcgMTAwNjQ0Ci0tLSBhL2luY2x1ZGUvYWNwaS9h
+Y3BpX2J1cy5oCisrKyBiL2luY2x1ZGUvYWNwaS9hY3BpX2J1cy5oCkBAIC01MzksNiArNTM5LDcg
+QEAgaW50IGFjcGlfZGV2aWNlX3NldF9wb3dlcihzdHJ1Y3QgYWNwaV9kZXZpY2UgKmRldmljZSwg
+aW50IHN0YXRlKTsKIGludCBhY3BpX2J1c19pbml0X3Bvd2VyKHN0cnVjdCBhY3BpX2RldmljZSAq
+ZGV2aWNlKTsKIGludCBhY3BpX2RldmljZV9maXhfdXBfcG93ZXIoc3RydWN0IGFjcGlfZGV2aWNl
+ICpkZXZpY2UpOwogdm9pZCBhY3BpX2RldmljZV9maXhfdXBfcG93ZXJfZXh0ZW5kZWQoc3RydWN0
+IGFjcGlfZGV2aWNlICphZGV2KTsKK3ZvaWQgYWNwaV9kZXZpY2VfZml4X3VwX3Bvd2VyX2NoaWxk
+cmVuKHN0cnVjdCBhY3BpX2RldmljZSAqYWRldik7CiBpbnQgYWNwaV9idXNfdXBkYXRlX3Bvd2Vy
+KGFjcGlfaGFuZGxlIGhhbmRsZSwgaW50ICpzdGF0ZV9wKTsKIGludCBhY3BpX2RldmljZV91cGRh
+dGVfcG93ZXIoc3RydWN0IGFjcGlfZGV2aWNlICpkZXZpY2UsIGludCAqc3RhdGVfcCk7CiBib29s
+IGFjcGlfYnVzX3Bvd2VyX21hbmFnZWFibGUoYWNwaV9oYW5kbGUgaGFuZGxlKTsKLS0gCjIuNDEu
+MAoK
+--------------iOgSsRA60Wlx910hYRXi01Ux
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0002-ACPI-video-Use-acpi_device_fix_up_power_children.patch"
+Content-Disposition: attachment;
+ filename*0="0002-ACPI-video-Use-acpi_device_fix_up_power_children.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbSAzM2UyZDU1OTE3YWM3MDgyZThkOThkYzJhNjc4YTg1NmY4ZDQ4MzUyIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBIYW5zIGRlIEdvZWRlIDxoZGVnb2VkZUByZWRoYXQuY29tPgpE
+YXRlOiBGcmksIDEwIE5vdiAyMDIzIDEzOjEwOjAyICswMTAwClN1YmplY3Q6IFtQQVRDSCAyLzJd
+IEFDUEk6IHZpZGVvOiBVc2UgYWNwaV9kZXZpY2VfZml4X3VwX3Bvd2VyX2NoaWxkcmVuKCkKCkNv
+bW1pdCA4OWMyOTBlYTc1ODkgKCJBQ1BJOiB2aWRlbzogUHV0IEFDUEkgdmlkZW8gYW5kIGl0cyBj
+aGlsZCBkZXZpY2VzCmludG8gRDAgb24gYm9vdCIpIGludHJvZHVjZWQgY2FsbGluZyBhY3BpX2Rl
+dmljZV9maXhfdXBfcG93ZXJfZXh0ZW5kZWQoKQpvbiB0aGUgdmlkZW8gY2FyZCBmb3Igd2hpY2gg
+dGhlIEFDUEkgdmlkZW8gYnVzIGlzIHRoZSBjb21wYW5pb24gZGV2aWNlLgoKVGhpcyB1bm5lY2Vz
+c2FyaWx5IHRvdWNoZXMgdGhlIHBvd2VyLXN0YXRlIG9mIHRoZSBHUFUgaXRzZWxmLCB3aGlsZQp0
+aGUgaXNzdWUgaXQgdHJpZXMgdG8gYWRkcmVzcyBvbmx5IHJlcXVpcmVzIGNhbGxpbmcgX1BTMCBv
+biB0aGUgY2hpbGQKZGV2aWNlcy4KClRvdWNoaW5nIHRoZSBwb3dlci1zdGF0ZSBvZiB0aGUgR1BV
+IGl0c2VsZiBpcyBjYXVzaW5nIHN1c3BlbmQgLyByZXN1bWUKaXNzdWVzIG9uIGUuZy4gYSBMZW5v
+dm8gVGhpbmtQYWQgVzUzMC4KCkluc3RlYWQgdXNlIGFjcGlfZGV2aWNlX2ZpeF91cF9wb3dlcl9j
+aGlsZHJlbigpLCB3aGljaCBvbmx5IHRvdWNoZXMKdGhlIGNoaWxkIGRldmljZXMsIHRvIGZpeCB0
+aGlzLgoKRml4ZXM6IDg5YzI5MGVhNzU4OSAoIkFDUEk6IHZpZGVvOiBQdXQgQUNQSSB2aWRlbyBh
+bmQgaXRzIGNoaWxkIGRldmljZXMgaW50byBEMCBvbiBib290IikKUmVwb3J0ZWQtYnk6IE93ZW4g
+VC4gSGVpc2xlciA8d3JpdGVyQG93ZW5oLm5ldD4KQ2xvc2VzOiBodHRwczovL2dpdGxhYi5mcmVl
+ZGVza3RvcC5vcmcvZHJtL25vdXZlYXUvLS9pc3N1ZXMvMjczCkNsb3NlczogaHR0cHM6Ly9idWd6
+aWxsYS5rZXJuZWwub3JnL3Nob3dfYnVnLmNnaT9pZD0yMTgxMjQKU2lnbmVkLW9mZi1ieTogSGFu
+cyBkZSBHb2VkZSA8aGRlZ29lZGVAcmVkaGF0LmNvbT4KLS0tCiBkcml2ZXJzL2FjcGkvYWNwaV92
+aWRlby5jIHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9u
+KC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9hY3BpL2FjcGlfdmlkZW8uYyBiL2RyaXZlcnMvYWNw
+aS9hY3BpX3ZpZGVvLmMKaW5kZXggYjQxMTk0ODU5NGZmLi40ZTg2ODQ1NGIzOGQgMTAwNjQ0Ci0t
+LSBhL2RyaXZlcnMvYWNwaS9hY3BpX3ZpZGVvLmMKKysrIGIvZHJpdmVycy9hY3BpL2FjcGlfdmlk
+ZW8uYwpAQCAtMjAzMSw3ICsyMDMxLDcgQEAgc3RhdGljIGludCBhY3BpX3ZpZGVvX2J1c19hZGQo
+c3RydWN0IGFjcGlfZGV2aWNlICpkZXZpY2UpCiAJICogSFAgWkJvb2sgRnVyeSAxNiBHMTAgcmVx
+dWlyZXMgQUNQSSB2aWRlbydzIGNoaWxkIGRldmljZXMgaGF2ZSBfUFMwCiAJICogZXZhbHVhdGVk
+IHRvIGhhdmUgZnVuY3Rpb25hbCBwYW5lbCBicmlnaHRuZXNzIGNvbnRyb2wuCiAJICovCi0JYWNw
+aV9kZXZpY2VfZml4X3VwX3Bvd2VyX2V4dGVuZGVkKGRldmljZSk7CisJYWNwaV9kZXZpY2VfZml4
+X3VwX3Bvd2VyX2NoaWxkcmVuKGRldmljZSk7CiAKIAlwcl9pbmZvKCIlcyBbJXNdIChtdWx0aS1o
+ZWFkOiAlcyAgcm9tOiAlcyAgcG9zdDogJXMpXG4iLAogCSAgICAgICBBQ1BJX1ZJREVPX0RFVklD
+RV9OQU1FLCBhY3BpX2RldmljZV9iaWQoZGV2aWNlKSwKLS0gCjIuNDEuMAoK
+--------------iOgSsRA60Wlx910hYRXi01Ux--
+
