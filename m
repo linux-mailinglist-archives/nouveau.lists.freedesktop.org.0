@@ -2,51 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2002382EE42
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:48:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 56BB482EE32
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:48:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BA70F10E4E4;
-	Tue, 16 Jan 2024 11:47:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7CC2C10E4A4;
+	Tue, 16 Jan 2024 11:47:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 69BDA10E2F8;
- Mon,  6 Nov 2023 12:52:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1699275162; x=1730811162;
- h=date:from:to:cc:subject:in-reply-to:message-id:
- references:mime-version;
- bh=ksjO7REBXQEKPi1wlrbUj9HrMuDV2WJEcaQRc/T5UtQ=;
- b=BaGPnJFd3IMzqLJIUZ25eFc0yma06tIJupE4ZNDjm9TyN12B8P25ZzQc
- FGK6cap/MM1NZ6mIW8vjtGyka4Fz4IcZjB0LXDFOTKreVGdjPtL8vo2/r
- QahJdRoBrz29G1p4La7jPe7EL9cUZfXO2FcfFCkRZkm3CFblsDs23GUp4
- FNuKPM/wikH/jN4jmYFsDurGwxdvZDL6//ycqTFdZm93yL4nR/riWDfjG
- uwPjQtjU2dMGChhrxjJrZVkZDXrQIxsEYEv3ZVVnUJmUNvf97O4ssqtnZ
- UbMCH+X+uUIdNlBGwLRX2/+fN7p6TojAeeyiv9K4TunWFMPS5Kcv+CkFp A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10885"; a="2176888"
-X-IronPort-AV: E=Sophos;i="6.03,281,1694761200"; 
-   d="scan'208";a="2176888"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
- by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 06 Nov 2023 04:52:41 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10885"; a="852989745"
-X-IronPort-AV: E=Sophos;i="6.03,281,1694761200"; d="scan'208";a="852989745"
-Received: from rmstoi-mobl.ger.corp.intel.com ([10.251.216.76])
- by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 06 Nov 2023 04:52:33 -0800
-Date: Mon, 6 Nov 2023 14:52:31 +0200 (EET)
-From: =?ISO-8859-15?Q?Ilpo_J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>
-To: Mario Limonciello <mario.limonciello@amd.com>
-Subject: Re: [PATCH v2 8/9] PCI: Exclude PCIe ports used for tunneling in
- pcie_bandwidth_available()
-In-Reply-To: <20231103190758.82911-9-mario.limonciello@amd.com>
-Message-ID: <bdae1a8-d62-6af6-316d-1e3a5ac15bc@linux.intel.com>
-References: <20231103190758.82911-1-mario.limonciello@amd.com>
- <20231103190758.82911-9-mario.limonciello@amd.com>
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A069910E642
+ for <nouveau@lists.freedesktop.org>; Fri, 10 Nov 2023 03:55:15 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4SRQ2S0zBvz9scN;
+ Fri, 10 Nov 2023 04:55:12 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=owenh.net; s=MBO0001; 
+ t=1699588512;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=+mYWcVAli9GCc4vPf2eDB3X2wHHEc2PFC+6KilCNEcA=;
+ b=qoHS2aXxsUcpqJPKJdC4SI2fQWD6CvHKZd8rgtalJQ45BHmCBDsStfHNnHSu8PLqXeZKPX
+ 3Wj+RmMzerw3iIO1vcSWmri07ckQ8LlA2IsEPbkkFSS4j4yyREWIxIyNfM5owqOUvmw8wJ
+ ycE8DKReVnsEcY/xBRqXHcDXOhshiUQJ3TGfWyzO8ihjGhcDpqLspeX5r53oHdDnjuzj7T
+ /kxYjemXrPEERerMX25HLj/Ck8uBBcRsq6f6cHz0vCCWsqVaHEcw/ZImjw+VKs1ENVMoAq
+ ykVk2v699lp4qBjo/vfan+boUAgxQO/dtXDSjnYlq2jYjZ3UxYlckAVe2HMM9Q==
+Message-ID: <9f36fb06-64c4-4264-aaeb-4e1289e764c4@owenh.net>
+Date: Thu, 9 Nov 2023 21:55:01 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Language: en-US
+To: stable@vger.kernel.org
+From: "Owen T. Heisler" <writer@owenh.net>
+Subject: [REGRESSION]: acpi/nouveau: Hardware unavailable upon resume or
+ suspend fails
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 4SRQ2S0zBvz9scN
 X-Mailman-Approved-At: Tue, 16 Jan 2024 11:47:29 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -59,178 +53,51 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "open list:THUNDERBOLT DRIVER" <linux-usb@vger.kernel.org>,
- "Rafael J . Wysocki" <rafael@kernel.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>,
- "open list:X86 PLATFORM DRIVERS" <platform-driver-x86@vger.kernel.org>,
- Andreas Noever <andreas.noever@gmail.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- =?ISO-8859-15?Q?Marek_Beh=FAn?= <kabel@kernel.org>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
- "open list:ACPI" <linux-acpi@vger.kernel.org>,
- "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
- Manivannan Sadhasivam <mani@kernel.org>,
- Michael Jamet <michael.jamet@intel.com>, Mark Gross <markgross@kernel.org>,
- Hans de Goede <hdegoede@redhat.com>, Bjorn Helgaas <bhelgaas@google.com>,
- Mika Westerberg <mika.westerberg@linux.intel.com>,
- Xinhui Pan <Xinhui.Pan@amd.com>, open list <linux-kernel@vger.kernel.org>,
- Daniel Vetter <daniel@ffwll.ch>, Yehezkel Bernat <YehezkelShB@gmail.com>,
- =?ISO-8859-15?Q?Pali_Roh=E1r?= <pali@kernel.org>,
- =?ISO-8859-15?Q?Christian_K=F6nig?= <christian.koenig@amd.com>,
- "Maciej W . Rozycki" <macro@orcam.me.uk>
+Cc: regressions@lists.linux.dev, nouveau@lists.freedesktop.org,
+ "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
+ dri-devel@lists.freedesktop.org, linux-acpi@vger.kernel.org,
+ Kai-Heng Feng <kai.heng.feng@canonical.com>, Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 3 Nov 2023, Mario Limonciello wrote:
+#regzbot introduced: 89c290ea758911e660878e26270e084d862c03b0
+#regzbot link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/273
+#regzbot link: https://bugzilla.kernel.org/show_bug.cgi?id=218124
 
-> The USB4 spec specifies that PCIe ports that are used for tunneling
-> PCIe traffic over USB4 fabric will be hardcoded to advertise 2.5GT/s and
-> behave as a PCIe Gen1 device. The actual performance of these ports is
-> controlled by the fabric implementation.
-> 
-> Downstream drivers such as amdgpu which utilize pcie_bandwidth_available()
-> to program the device will always find the PCIe ports used for
-> tunneling as a limiting factor potentially leading to incorrect
-> performance decisions.
-> 
-> To prevent problems in downstream drivers check explicitly for ports
-> being used for PCIe tunneling and skip them when looking for bandwidth
-> limitations of the hierarchy. If the only device connected is a root port
-> used for tunneling then report that device.
-> 
-> Downstream drivers could make this change on their own but then they
-> wouldn't be able to detect other potential speed bottlenecks from the
-> hierarchy without duplicating pcie_bandwidth_available() logic.
-> 
-> Link: https://gitlab.freedesktop.org/drm/amd/-/issues/2925#note_2145860
-> Link: https://www.usb.org/document-library/usb4r-specification-v20
->       USB4 V2 with Errata and ECN through June 2023
->       Section 11.2.1
-> Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
-> ---
->  drivers/pci/pci.c | 74 +++++++++++++++++++++++++++++++----------------
->  1 file changed, 49 insertions(+), 25 deletions(-)
-> 
-> diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
-> index d9aa5a39f585..15e37164ce56 100644
-> --- a/drivers/pci/pci.c
-> +++ b/drivers/pci/pci.c
-> @@ -6223,6 +6223,35 @@ int pcie_set_mps(struct pci_dev *dev, int mps)
->  }
->  EXPORT_SYMBOL(pcie_set_mps);
->  
-> +static u32 pcie_calc_bw_limits(struct pci_dev *dev, u32 bw,
-> +			       struct pci_dev **limiting_dev,
-> +			       enum pci_bus_speed *speed,
-> +			       enum pcie_link_width *width)
-> +{
-> +	enum pcie_link_width next_width;
-> +	enum pci_bus_speed next_speed;
-> +	u32 next_bw;
-> +	u16 lnksta;
-> +
-> +	pcie_capability_read_word(dev, PCI_EXP_LNKSTA, &lnksta);
-> +	next_speed = pcie_link_speed[lnksta & PCI_EXP_LNKSTA_CLS];
-> +	next_width = (lnksta & PCI_EXP_LNKSTA_NLW) >> PCI_EXP_LNKSTA_NLW_SHIFT;
-> +	next_bw = next_width * PCIE_SPEED2MBS_ENC(next_speed);
-> +
-> +	/* Check if current device limits the total bandwidth */
-> +	if (!bw || next_bw <= bw) {
-> +		bw = next_bw;
-> +		if (limiting_dev)
-> +			*limiting_dev = dev;
-> +		if (speed)
-> +			*speed = next_speed;
-> +		if (width)
-> +			*width = next_width;
-> +	}
-> +
-> +	return bw;
-> +}
-> +
->  /**
->   * pcie_bandwidth_available - determine minimum link settings of a PCIe
->   *			      device and its bandwidth limitation
-> @@ -6236,47 +6265,42 @@ EXPORT_SYMBOL(pcie_set_mps);
->   * limiting_dev, speed, and width pointers are supplied) information about
->   * that point.  The bandwidth returned is in Mb/s, i.e., megabits/second of
->   * raw bandwidth.
-> + *
-> + * This excludes the bandwidth calculation that has been returned from a
-> + * PCIe device used for transmitting tunneled PCIe traffic over a Thunderbolt
-> + * or USB4 link that is part of larger hierarchy. The calculation is excluded
-> + * because the USB4 specification specifies that the max speed returned from
-> + * PCIe configuration registers for the tunneling link is always PCI 1x 2.5 GT/s.
-> + * When only tunneled devices are present, the bandwidth returned is the
-> + * bandwidth available from the first tunneled device.
->   */
->  u32 pcie_bandwidth_available(struct pci_dev *dev, struct pci_dev **limiting_dev,
->  			     enum pci_bus_speed *speed,
->  			     enum pcie_link_width *width)
->  {
-> -	u16 lnksta;
-> -	enum pci_bus_speed next_speed;
-> -	enum pcie_link_width next_width;
-> -	u32 bw, next_bw;
-> +	struct pci_dev *tdev = NULL;
-> +	u32 bw = 0;
->  
->  	if (speed)
->  		*speed = PCI_SPEED_UNKNOWN;
->  	if (width)
->  		*width = PCIE_LNK_WIDTH_UNKNOWN;
->  
-> -	bw = 0;
-> -
->  	while (dev) {
-> -		pcie_capability_read_word(dev, PCI_EXP_LNKSTA, &lnksta);
-> -
-> -		next_speed = pcie_link_speed[lnksta & PCI_EXP_LNKSTA_CLS];
-> -		next_width = (lnksta & PCI_EXP_LNKSTA_NLW) >>
-> -			PCI_EXP_LNKSTA_NLW_SHIFT;
-> -
-> -		next_bw = next_width * PCIE_SPEED2MBS_ENC(next_speed);
-> -
-> -		/* Check if current device limits the total bandwidth */
-> -		if (!bw || next_bw <= bw) {
-> -			bw = next_bw;
-> -
-> -			if (limiting_dev)
-> -				*limiting_dev = dev;
-> -			if (speed)
-> -				*speed = next_speed;
-> -			if (width)
-> -				*width = next_width;
-> +		if (dev->is_tunneled) {
-> +			if (!tdev)
-> +				tdev = dev;
-> +			goto skip;
->  		}
-> -
-> +		bw = pcie_calc_bw_limits(dev, bw, limiting_dev, speed, width);
-> +skip:
->  		dev = pci_upstream_bridge(dev);
->  	}
->  
-> +	/* If nothing "faster" found on link, limit to first tunneled device */
-> +	if (tdev && !bw)
-> +		bw = pcie_calc_bw_limits(tdev, bw, limiting_dev, speed, width);
-> +
->  	return bw;
->  }
->  EXPORT_SYMBOL(pcie_bandwidth_available);
-> 
+## Reproducing
 
-This patch should be split into two, where one just moves the code to the 
-new function.
+1. Boot system to framebuffer console.
+2. Run `systemctl suspend`. If undocked without secondary display, 
+suspend fails. If docked with secondary display, suspend succeeds.
+3. Resume from suspend if applicable.
+4. System is now in a broken state.
 
-Also note that this will conflict with the FIELD_GET() changes (try to 
-not reintroduce non-FIELD_GET() code when you rebase this on top of 
-v6.7-rc1 :-)).
+## Testing
 
--- 
- i.
+- culprit commit is 89c290ea758911e660878e26270e084d862c03b0
+- v6.6 fails
+- v6.6 with culprit commit reverted does not fail
+- Compiled with 
+<https://gitlab.freedesktop.org/drm/nouveau/uploads/788d7faf22ba2884dcc09d7be931e813/v6.6-config1>
 
+## Hardware
+
+- ThinkPad W530 2438-52U
+- Dock with Nvidia-connected DVI ports
+- Secondary display connected via DVI
+- Nvidia Optimus GPU switching system
+
+```console
+$ lspci | grep -i vga
+00:02.0 VGA compatible controller: Intel Corporation 3rd Gen Core 
+processor Graphics Controller (rev 09)
+01:00.0 VGA compatible controller: NVIDIA Corporation GK107GLM [Quadro 
+K2000M] (rev a1)
+```
+
+## Decoded logs from v6.6
+
+- System is not docked and fails to suspend: 
+<https://gitlab.freedesktop.org/drm/nouveau/uploads/fb8fdf5a6bed1b1491d2544ab67fa257/undocked.log>
+- System is docked and fails after resume: 
+<https://gitlab.freedesktop.org/drm/nouveau/uploads/cb3d5ac55c01f663cd80fa000cd6a3b5/docked.log>
