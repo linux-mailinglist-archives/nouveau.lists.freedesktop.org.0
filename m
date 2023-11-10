@@ -2,45 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56BB482EE32
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:48:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF21682EE49
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:49:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7CC2C10E4A4;
-	Tue, 16 Jan 2024 11:47:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1EB0110E4EE;
+	Tue, 16 Jan 2024 11:47:38 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A069910E642
- for <nouveau@lists.freedesktop.org>; Fri, 10 Nov 2023 03:55:15 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+X-Greylist: delayed 46993 seconds by postgrey-1.36 at gabe;
+ Fri, 10 Nov 2023 16:58:29 UTC
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5E41310E125;
+ Fri, 10 Nov 2023 16:58:29 +0000 (UTC)
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4SRQ2S0zBvz9scN;
- Fri, 10 Nov 2023 04:55:12 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4SRlQ95myqz9spj;
+ Fri, 10 Nov 2023 17:58:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=owenh.net; s=MBO0001; 
- t=1699588512;
+ t=1699635505;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=+mYWcVAli9GCc4vPf2eDB3X2wHHEc2PFC+6KilCNEcA=;
- b=qoHS2aXxsUcpqJPKJdC4SI2fQWD6CvHKZd8rgtalJQ45BHmCBDsStfHNnHSu8PLqXeZKPX
- 3Wj+RmMzerw3iIO1vcSWmri07ckQ8LlA2IsEPbkkFSS4j4yyREWIxIyNfM5owqOUvmw8wJ
- ycE8DKReVnsEcY/xBRqXHcDXOhshiUQJ3TGfWyzO8ihjGhcDpqLspeX5r53oHdDnjuzj7T
- /kxYjemXrPEERerMX25HLj/Ck8uBBcRsq6f6cHz0vCCWsqVaHEcw/ZImjw+VKs1ENVMoAq
- ykVk2v699lp4qBjo/vfan+boUAgxQO/dtXDSjnYlq2jYjZ3UxYlckAVe2HMM9Q==
-Message-ID: <9f36fb06-64c4-4264-aaeb-4e1289e764c4@owenh.net>
-Date: Thu, 9 Nov 2023 21:55:01 -0600
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Xv0RmDooG3JgDJHA2SqaAIpBFKQ0UuIqzPA46XswMys=;
+ b=0NFLEqpKQmJbLf7s0Gu6qlXSi//AhUQ95naoWkj4WMZu2Fq78Lrb32fYcpQCffzlf8RA0O
+ Hc8Zj/uR3VEYWUO52IUz6PEZxdwn7pKAlS4oyVSQODoUo+0e40cwxCe5wXcLS6cFFbZxZP
+ sRsYUfYj8b4g01I8bgO9sO+4pzx3+6W6oCBqwW7AaorjYgDhFRntPTKvKhvPvKveLBAMEf
+ 3qEHo/6UMMtETriDJfJfR1488Y2IGRoZGmpc9fviXWw5XaxCxjZLB/EtvYXGw9/X59bO29
+ op1UQfJ+OV+1sNIKwHRbI5a/Y1UFO6bcyJbXhAcCgdpDAnZk1WUtjFLz0/CCeA==
+Message-ID: <d1ac9c1e-f3fe-4d06-ba2e-2c049841d19b@owenh.net>
+Date: Fri, 10 Nov 2023 10:58:07 -0600
 MIME-Version: 1.0
-Content-Language: en-US
-To: stable@vger.kernel.org
 From: "Owen T. Heisler" <writer@owenh.net>
-Subject: [REGRESSION]: acpi/nouveau: Hardware unavailable upon resume or
+Subject: Re: [REGRESSION]: acpi/nouveau: Hardware unavailable upon resume or
  suspend fails
+To: Kai-Heng Feng <kai.heng.feng@canonical.com>,
+ Hans de Goede <hdegoede@redhat.com>
+References: <9f36fb06-64c4-4264-aaeb-4e1289e764c4@owenh.net>
+ <CAAd53p7BSesx=a1igTohoSkxrW+Hq8O7ArONFCK7uoDi12-T4A@mail.gmail.com>
+ <a592ce0c-64f0-477d-80fa-8f5a52ba29ea@redhat.com>
+ <CAAd53p608qmC3pvz=F+y2UZ9O39f2aq-pE-1_He1j8PGQmM=tg@mail.gmail.com>
+Content-Language: en-US
+In-Reply-To: <CAAd53p608qmC3pvz=F+y2UZ9O39f2aq-pE-1_He1j8PGQmM=tg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 4SRQ2S0zBvz9scN
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4SRlQ95myqz9spj
 X-Mailman-Approved-At: Tue, 16 Jan 2024 11:47:29 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -54,50 +63,77 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: regressions@lists.linux.dev, nouveau@lists.freedesktop.org,
- "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
- dri-devel@lists.freedesktop.org, linux-acpi@vger.kernel.org,
- Kai-Heng Feng <kai.heng.feng@canonical.com>, Len Brown <lenb@kernel.org>
+ "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>, stable@vger.kernel.org,
+ linux-acpi@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-#regzbot introduced: 89c290ea758911e660878e26270e084d862c03b0
-#regzbot link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/273
-#regzbot link: https://bugzilla.kernel.org/show_bug.cgi?id=218124
+Hi everyone,
 
-## Reproducing
+On 11/10/23 06:52, Kai-Heng Feng wrote:
+> On Fri, Nov 10, 2023 at 2:19 PM Hans de Goede <hdegoede@redhat.com> wrote:
+>> On 11/10/23 07:09, Kai-Heng Feng wrote:
+>>> On Fri, Nov 10, 2023 at 5:55 AM Owen T. Heisler <writer@owenh.net> wrote:
+>>>> #regzbot introduced: 89c290ea758911e660878e26270e084d862c03b0
+>>>> #regzbot link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/273
+>>>> #regzbot link: https://bugzilla.kernel.org/show_bug.cgi?id=218124
+>>>
+>>> Thanks for the bug report. Do you prefer to continue the discussion
+>>> here, on gitlab or on bugzilla?
 
-1. Boot system to framebuffer console.
-2. Run `systemctl suspend`. If undocked without secondary display, 
-suspend fails. If docked with secondary display, suspend succeeds.
-3. Resume from suspend if applicable.
-4. System is now in a broken state.
+Kai-Heng, you're welcome and thank you too. By email is fine with me.
 
-## Testing
+>> Owen, as Kai-Heng said thank you for reporting this.
 
-- culprit commit is 89c290ea758911e660878e26270e084d862c03b0
-- v6.6 fails
-- v6.6 with culprit commit reverted does not fail
-- Compiled with 
-<https://gitlab.freedesktop.org/drm/nouveau/uploads/788d7faf22ba2884dcc09d7be931e813/v6.6-config1>
+Hans, you're welcome, and thanks for your help too.
 
-## Hardware
+>>>> ## Reproducing
+>>>>
+>>>> 1. Boot system to framebuffer console.
+>>>> 2. Run `systemctl suspend`. If undocked without secondary display,
+>>>> suspend fails. If docked with secondary display, suspend succeeds.
+>>>> 3. Resume from suspend if applicable.
+>>>> 4. System is now in a broken state.
+>>>
+>>> So I guess we need to put those devices to ACPI D3 for suspend. Let's
+>>> discuss this on your preferred platform.
+>>
+>> Ok, so I was already sort of afraid we might see something like this
+>> happening because of:
+>>
+>> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=89c290ea758911e660878e26270e084d862c03b0
+>>
+>> As I mentioned during the review of that, it might be better to
+>> not touch the video-card ACPI power-state at all and instead
+>> only do acpi_device_fix_up_power() on the child devices.
+> 
+> Or the child devices need to be put to D3 during suspend.
+> 
+>> Owen, attached are 2 patches which implement only
+>> calling acpi_device_fix_up_power() on the child devices,
+>> can you build a v6.6 kernel with these 2 patches added
+>> on top please and see if that fixes things ?
 
-- ThinkPad W530 2438-52U
-- Dock with Nvidia-connected DVI ports
-- Secondary display connected via DVI
-- Nvidia Optimus GPU switching system
+Yes, with those patches v6.6 suspend works normally. That's great, thanks!
 
-```console
-$ lspci | grep -i vga
-00:02.0 VGA compatible controller: Intel Corporation 3rd Gen Core 
-processor Graphics Controller (rev 09)
-01:00.0 VGA compatible controller: NVIDIA Corporation GK107GLM [Quadro 
-K2000M] (rev a1)
-```
+I tested with v6.6 with the 2 patches at 
+<https://lore.kernel.org/regressions/a592ce0c-64f0-477d-80fa-8f5a52ba29ea@redhat.com/> 
+using 
+<https://gitlab.freedesktop.org/drm/nouveau/uploads/788d7faf22ba2884dcc09d7be931e813/v6.6-config1>. 
+I tested both docked and un-docked, just in case.
 
-## Decoded logs from v6.6
+Tested-by: Owen T. Heisler <writer@owenh.net>
 
-- System is not docked and fails to suspend: 
-<https://gitlab.freedesktop.org/drm/nouveau/uploads/fb8fdf5a6bed1b1491d2544ab67fa257/undocked.log>
-- System is docked and fails after resume: 
-<https://gitlab.freedesktop.org/drm/nouveau/uploads/cb3d5ac55c01f663cd80fa000cd6a3b5/docked.log>
+>> Kai-Heng can you test that the issue on the HP ZBook Fury 16 G10
+>> is still resolved after applying these patches ?
+> 
+> Yes. Thanks for the patch.
+> 
+> If this patch also fixes Owen's issue, then
+> Tested-by: Kai-Heng Feng <kai.heng.feng@canonical.com
+
+Please let me know if anything else is needed from me.
+
+Many thanks,
+Owen
