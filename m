@@ -1,90 +1,74 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FEA57E7197
-	for <lists+nouveau@lfdr.de>; Thu,  9 Nov 2023 19:35:03 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C247B7E7920
+	for <lists+nouveau@lfdr.de>; Fri, 10 Nov 2023 07:19:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8D17410E0F7;
-	Thu,  9 Nov 2023 18:34:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6C80C10E694;
+	Fri, 10 Nov 2023 06:19:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5ED3210E0F7
- for <nouveau@lists.freedesktop.org>; Thu,  9 Nov 2023 18:34:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1699554890;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=HXjSy5YA5D8YncNtofbDL87rfXXmUD1aZWvjINGfVIE=;
- b=CxVdb91oYIgILMgcAJbl9OnHC5wdFjxIX9k2mrI0OxQACDUCKACqG6zkxqqLrfNzrpofeb
- gJqyN4qNEigy9NgMwxe49hGM2up2CNZLxyIkRcPkSUuy1UARlTdAwnZ0m40SKrSP6mEi7h
- virglcvJuqzBf5hna2IoNIyEZdbF5Ek=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-433-iD7atOHkP6CnckuLCZnwXA-1; Thu, 09 Nov 2023 13:34:48 -0500
-X-MC-Unique: iD7atOHkP6CnckuLCZnwXA-1
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-32fd5f7b674so568274f8f.0
- for <nouveau@lists.freedesktop.org>; Thu, 09 Nov 2023 10:34:48 -0800 (PST)
+X-Greylist: delayed 566 seconds by postgrey-1.36 at gabe;
+ Fri, 10 Nov 2023 06:19:13 UTC
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 067C010E694
+ for <nouveau@lists.freedesktop.org>; Fri, 10 Nov 2023 06:19:13 +0000 (UTC)
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id A14C040C51
+ for <nouveau@lists.freedesktop.org>; Fri, 10 Nov 2023 06:09:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1699596585;
+ bh=dbMwBXBmEotT6dk1rDXulRhL3RKiFgxFvFzDuEEcJx8=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=KZM9uTxedJKiGXsELffIS/EpGGq5PCy6sEcg7yGMzuYDs7q2U3LhdT0a2xYjwo4Q0
+ qysXrhOCgaDgXqyVAOM3oonLI5lCPq2Q/Zr6c5DLdHv15OnvFmEEmxTfGJlj3RVCt1
+ UCeb7chPeGX4ugVH1xtOmr+sIfevvV4QOtsJjxcIAteoiEHZA8e1tPFUQwD2Bvd/Sg
+ 9QS5EE/NpPOY3jlf02EdiSNYk43mLJQJIwIaFACL9LOrjRVsiARyUurdPCo8nrvSdC
+ LRozsIJGj16Ay1HdAr8eraT6N/v0Kv/d8dQPw6zsTRWmArDVOgHbVLfDf1iRLgZkj1
+ WlOrssekXx8pA==
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-27ffe79ec25so1686977a91.2
+ for <nouveau@lists.freedesktop.org>; Thu, 09 Nov 2023 22:09:45 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699554887; x=1700159687;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=HXjSy5YA5D8YncNtofbDL87rfXXmUD1aZWvjINGfVIE=;
- b=gJSCYQYHglGv98RFOR0fMPEnKweErgYOJtPqS/1Q/QdfIL33cB2CiYmN1vXMKWftSJ
- wJ9yfJePc8OvENzRPKwFvG5AgfrPnlU8nCsQUZQwMLIBbJUX/LTeagTzWyOz/ZAwS7oz
- 51FD2pMkPpianj9UROiI0W+iRFRG+8XG0+QZYbbBK0d4q4vTLcuG0pOrRoL3Ru+Wyy5l
- FYU0Dz3Z/fNwEcVAP1/37dLUfiEkcT4RBvJi6SUegEbPZHt8k0yN1VrUzoOWhlUzN8c7
- uoQxEngZIApIYBWYBsTzBa+ppb9mFsCSJZ67QMgSndhRu9nyE629mc6U/3tEFTnwHnBi
- h3Eg==
-X-Gm-Message-State: AOJu0YwWwwIlo09xdLDMJu/y+aC87/Ptf35JgLwRvjAv9EPF99uTXTf3
- Zsk3ru0C32qHLdf+7WGDjSTXaTPSE5E4QECYv/+snKhIGZyecN4O2YdNwTMgfrPUrp/gyzkdMRv
- 1nvx6uEAE6fd0D4fDVSe37MlIhg==
-X-Received: by 2002:a5d:5504:0:b0:32f:b1ea:db78 with SMTP id
- b4-20020a5d5504000000b0032fb1eadb78mr4844243wrv.59.1699554887526; 
- Thu, 09 Nov 2023 10:34:47 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHZe8hfJ4Prnto9BFitiesz+qXT9MkRCFMEQZ5Ti4xGYe7R9GwbGcG2vTv7B7AR26dmUADt2Q==
-X-Received: by 2002:a5d:5504:0:b0:32f:b1ea:db78 with SMTP id
- b4-20020a5d5504000000b0032fb1eadb78mr4844226wrv.59.1699554887146; 
- Thu, 09 Nov 2023 10:34:47 -0800 (PST)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:abf:b8ff:feee:998b?
- ([2a02:810d:4b3f:de9c:abf:b8ff:feee:998b])
- by smtp.gmail.com with ESMTPSA id
- o13-20020a5d670d000000b0032d8354fb43sm239003wru.76.2023.11.09.10.34.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 Nov 2023 10:34:46 -0800 (PST)
-Message-ID: <4532d9d5-4c5a-4639-8136-d3ba9995d7b6@redhat.com>
-Date: Thu, 9 Nov 2023 19:34:45 +0100
+ d=1e100.net; s=20230601; t=1699596584; x=1700201384;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dbMwBXBmEotT6dk1rDXulRhL3RKiFgxFvFzDuEEcJx8=;
+ b=kT5Yb7nlOt+9TpntNasPCW4ySy1QyJABNFL302ojsDPXjwmx0mEV391jd87NK2R+RA
+ 2xxFb3RqyAAqFkAQ4MTDbR5JsCfBCx14f6Bl+k5A0WOhdh6tTXfy1ZaKp5GJVAxYLZTq
+ O5SZmidoNnzjWoOIuA9Fg2gW5o7NOIBmLtPf2A3YdGkfFjVt41X6alXUVkL9orAUfbcy
+ ArQUPSa/qoXFok3L0UYyo1AL+WeVFnkOvDgLhpvJ5BcYmbAVsKGJ7Uzkpu5TczV6kI9S
+ BKBAhV6uJs0b8KUDAhs7eCuzQbJpEyeGHiB4OO823FAibEC1KA6YYQxkaZkx5F8f0ztH
+ UYiA==
+X-Gm-Message-State: AOJu0Yy+nXLNOf6ErfUbUlcU0X0jjAQ2UARLzMh5i53Id6EvEBlxENS2
+ KshhV+RtHKmxU59j5ROV+d1/pY8zlcgcPhNlRo8ZTJydmSzmuEXaa85NQD6v/IP4eYAHIqVYcXS
+ ae/R8Bb/4YmT0ttMnBkDUhmJcjBYbgkrgypeWOoeXS+TnPLJgixKdWEZLkOI=
+X-Received: by 2002:a17:90b:4c85:b0:280:6296:3d96 with SMTP id
+ my5-20020a17090b4c8500b0028062963d96mr3622956pjb.41.1699596583968; 
+ Thu, 09 Nov 2023 22:09:43 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG1wROyFVtufgqw/ZeSGGAbm8xifOocKozGCKWAhapxnMtc++Zwn+hYm7Zub9ci/y6pKeOOqpv3+EKkV4NfDoY=
+X-Received: by 2002:a17:90b:4c85:b0:280:6296:3d96 with SMTP id
+ my5-20020a17090b4c8500b0028062963d96mr3622942pjb.41.1699596583634; Thu, 09
+ Nov 2023 22:09:43 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>
-References: <20231101233113.8059-10-dakr@redhat.com>
- <be93d9ef-3d3e-4262-a280-d2922b983ca1@amd.com> <ZUTyGTxcH7WlHKsv@pollux>
- <a2e13a27-d2e5-4ae3-9c11-c18b425b69cc@amd.com>
- <b533af44-0404-49c9-9879-3414d0964acc@redhat.com>
- <51dea5f3-a18b-4797-b4fa-87da7db4624a@amd.com> <ZUjZFFtLM435tTxJ@pollux>
- <8e87d962-c80c-40d9-94d7-58b6cd9dd794@amd.com> <ZUj0DdYZUgjhcvf5@pollux>
- <6d3c48f6-a92d-49b3-b836-ee1bc95b56bf@amd.com> <ZUkXkJ+zT7OFGosC@pollux>
- <44bc28c7-05f4-4419-5183-453c4951aac0@linux.intel.com>
- <6c536c94-7072-403c-9c63-d932252fd66b@amd.com>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <6c536c94-7072-403c-9c63-d932252fd66b@amd.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH drm-misc-next v8 09/12] drm/gpuvm: reference
- count drm_gpuvm structures
+References: <9f36fb06-64c4-4264-aaeb-4e1289e764c4@owenh.net>
+In-Reply-To: <9f36fb06-64c4-4264-aaeb-4e1289e764c4@owenh.net>
+From: Kai-Heng Feng <kai.heng.feng@canonical.com>
+Date: Fri, 10 Nov 2023 08:09:11 +0200
+Message-ID: <CAAd53p7BSesx=a1igTohoSkxrW+Hq8O7ArONFCK7uoDi12-T4A@mail.gmail.com>
+To: "Owen T. Heisler" <writer@owenh.net>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [REGRESSION]: acpi/nouveau: Hardware unavailable upon
+ resume or suspend fails
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -96,99 +80,69 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, sarah.walker@imgtec.com,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, faith@gfxstrand.net,
- boris.brezillon@collabora.com, donald.robson@imgtec.com, daniel@ffwll.ch
+Cc: regressions@lists.linux.dev, nouveau@lists.freedesktop.org,
+ "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>, stable@vger.kernel.org,
+ linux-acpi@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 11/9/23 17:03, Christian König wrote:
-> Am 09.11.23 um 16:50 schrieb Thomas Hellström:
->> [SNIP]
->>>>
->> Did we get any resolution on this?
->>
->> FWIW, my take on this is that it would be possible to get GPUVM to work both with and without internal refcounting; If with, the driver needs a vm close to resolve cyclic references, if without that's not necessary. If GPUVM is allowed to refcount in mappings and vm_bos, that comes with a slight performance drop but as Danilo pointed out, the VM lifetime problem iterating over a vm_bo's mapping becomes much easier and the code thus becomes easier to maintain moving forward. That convinced me it's a good thing.
-> 
-> I strongly believe you guys stumbled over one of the core problems with the VM here and I think that reference counting is the right answer to solving this.
-> 
-> The big question is that what is reference counted and in which direction does the dependency points, e.g. we have here VM, BO, BO_VM and Mapping objects.
-> 
-> Those patches here suggest a counted Mapping -> VM reference and I'm pretty sure that this isn't a good idea. What we should rather really have is a BO -> VM or BO_VM ->VM reference. In other words that each BO which is part of the VM keeps a reference to the VM.
+Hi Owen,
 
-We have both. Please see the subsequent patch introducing VM_BO structures for that.
+On Fri, Nov 10, 2023 at 5:55=E2=80=AFAM Owen T. Heisler <writer@owenh.net> =
+wrote:
+>
+> #regzbot introduced: 89c290ea758911e660878e26270e084d862c03b0
+> #regzbot link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/273
+> #regzbot link: https://bugzilla.kernel.org/show_bug.cgi?id=3D218124
 
-As I explained, mappings (struct drm_gpuva) keep a pointer to their VM they're mapped
-in and besides that it doesn't make sense to free a VM that still contains mappings,
-the reference count ensures that. This simply ensures memory safety.
+Thanks for the bug report. Do you prefer to continue the discussion
+here, on gitlab or on bugzilla?
 
-> 
-> BTW: At least in amdgpu we can have BOs which (temporary) doesn't have any mappings, but are still considered part of the VM.
+>
+> ## Reproducing
+>
+> 1. Boot system to framebuffer console.
+> 2. Run `systemctl suspend`. If undocked without secondary display,
+> suspend fails. If docked with secondary display, suspend succeeds.
+> 3. Resume from suspend if applicable.
+> 4. System is now in a broken state.
 
-That should be possible.
+So I guess we need to put those devices to ACPI D3 for suspend. Let's
+discuss this on your preferred platform.
 
-> 
->>
->> Another issue Christian brought up is that something intended to be embeddable (a base class) shouldn't really have its own refcount. I think that's a valid point. If you at some point need to derive from multiple such structs each having its own refcount, things will start to get weird. One way to resolve that would be to have the driver's subclass provide get() and put() ops, and export a destructor for the base-class, rather than to have the base-class provide the refcount and a destructor  ops.
+Kai-Heng
 
-GPUVM simply follows the same pattern we have with drm_gem_objects. And I think it makes
-sense. Why would we want to embed two struct drm_gpuvm in a single driver structure?
-
-> 
-> Well, I have never seen stuff like that in the kernel. Might be that this works, but I would rather not try if avoidable.
-> 
->>
->> That would also make it possible for the driver to decide the context for the put() call: If the driver needs to be able to call put() from irq / atomic context but the base-class'es destructor doesn't allow atomic context, the driver can push freeing out to a work item if needed.
->>
->> Finally, the refcount overflow Christian pointed out. Limiting the number of mapping sounds like a reasonable remedy to me.
-> 
-> Well that depends, I would rather avoid having a dependency for mappings.
-> 
-> Taking the CPU VM handling as example as far as I know vm_area_structs doesn't grab a reference to their mm_struct either. Instead they get automatically destroyed when the mm_struct is destroyed.
-
-Certainly, that would be possible. However, thinking about it, this might call for
-huge trouble.
-
-First of all, we'd still need to reference count a GPUVM and take a reference for each
-VM_BO, as we do already. Now instead of simply increasing the reference count for each
-mapping as well, we'd need a *mandatory* driver callback that is called when the GPUVM
-reference count drops to zero. Maybe something like vm_destroy().
-
-The reason is that GPUVM can't just remove all mappings from the tree nor can it free them
-by itself, since drivers might use them for tracking their allocated page tables and/or
-other stuff.
-
-Now, let's think about the scope this callback might be called from. When a VM_BO is destroyed
-the driver might hold a couple of locks (for Xe it would be the VM's shared dma-resv lock and
-potentially the corresponding object's dma-resv lock if they're not the same already). If
-destroying this VM_BO leads to the VM being destroyed, the drivers vm_destroy() callback would
-be called with those locks being held as well.
-
-I feel like doing this finally opens the doors of the locking hell entirely. I think we should
-really avoid that.
-
-> 
-> Which makes sense in that case because when the mm_struct is gone the vm_area_struct doesn't make sense any more either.
-> 
-> What we clearly need is a reference to prevent the VM or at least the shared resv to go away to early.
-
-Yeah, that was a good hint and we've covered that.
-
-> 
-> Regards,
-> Christian.
-> 
->>
->> But I think all of this is fixable as follow-ups if needed, unless I'm missing something crucial.
-
-Fully agree, I think at this point we should go ahead and land this series.
-
->>
->> Just my 2 cents.
->>
->> /Thomas
->>
->>
-> 
-
+>
+> ## Testing
+>
+> - culprit commit is 89c290ea758911e660878e26270e084d862c03b0
+> - v6.6 fails
+> - v6.6 with culprit commit reverted does not fail
+> - Compiled with
+> <https://gitlab.freedesktop.org/drm/nouveau/uploads/788d7faf22ba2884dcc09=
+d7be931e813/v6.6-config1>
+>
+> ## Hardware
+>
+> - ThinkPad W530 2438-52U
+> - Dock with Nvidia-connected DVI ports
+> - Secondary display connected via DVI
+> - Nvidia Optimus GPU switching system
+>
+> ```console
+> $ lspci | grep -i vga
+> 00:02.0 VGA compatible controller: Intel Corporation 3rd Gen Core
+> processor Graphics Controller (rev 09)
+> 01:00.0 VGA compatible controller: NVIDIA Corporation GK107GLM [Quadro
+> K2000M] (rev a1)
+> ```
+>
+> ## Decoded logs from v6.6
+>
+> - System is not docked and fails to suspend:
+> <https://gitlab.freedesktop.org/drm/nouveau/uploads/fb8fdf5a6bed1b1491d25=
+44ab67fa257/undocked.log>
+> - System is docked and fails after resume:
+> <https://gitlab.freedesktop.org/drm/nouveau/uploads/cb3d5ac55c01f663cd80f=
+a000cd6a3b5/docked.log>
