@@ -1,67 +1,67 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD84C7E7DDB
-	for <lists+nouveau@lfdr.de>; Fri, 10 Nov 2023 17:43:40 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BAE67E7DE4
+	for <lists+nouveau@lfdr.de>; Fri, 10 Nov 2023 17:50:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2C39810E0CD;
-	Fri, 10 Nov 2023 16:43:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 40D8210E122;
+	Fri, 10 Nov 2023 16:50:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3DDF910E103
- for <nouveau@lists.freedesktop.org>; Fri, 10 Nov 2023 16:43:37 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4E4DD10E120
+ for <nouveau@lists.freedesktop.org>; Fri, 10 Nov 2023 16:50:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1699634616;
+ s=mimecast20190719; t=1699635004;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=8eSqnXtcIXrPq6GHt4g8iPFkhbDhqTIANdoSOzK1UFI=;
- b=PM6E2q1mJqLASs205A8num5VKs2XhmZJsMUqACdtZvRfiuDtsoSPH/ljIKb9+vA/+PZrh5
- +V5Aozr3C4GVktPDU08rpQr12xArnPZvl8XLGXFk/yQUcYS0gwyqdHHTcA9imdDJtfB4gE
- sxxL0amzhxh02E7VO7s81LOipaWlviM=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=/MqxqWzAGv5fAoXTt67WoZDzwOtx7uJzJ1csLkrDayk=;
+ b=DB0KCRViPZQTnyGMHaCF0PawJdHS4qN2G1BIb0qg/In8iaq9JBYZmbRKoRGKFEMOMt+d29
+ WJm07I/+POcF18Mn+uoTxPnkjmtkZa+U9MvUHCsnFmtvMNuf5RlelJuCEQ5GxZcI4gHsYG
+ JxfQhxi8JpORzsBqKhxYavKYZHNAI98=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-455-h5buZqEbMr-tlp4z3mvcbw-1; Fri, 10 Nov 2023 11:43:34 -0500
-X-MC-Unique: h5buZqEbMr-tlp4z3mvcbw-1
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-32cef5f8af5so2138762f8f.1
- for <nouveau@lists.freedesktop.org>; Fri, 10 Nov 2023 08:43:34 -0800 (PST)
+ us-mta-424-29_3oUtlM--dl-mqginsQQ-1; Fri, 10 Nov 2023 11:50:02 -0500
+X-MC-Unique: 29_3oUtlM--dl-mqginsQQ-1
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-32da7983d20so1484999f8f.1
+ for <nouveau@lists.freedesktop.org>; Fri, 10 Nov 2023 08:50:02 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699634614; x=1700239414;
+ d=1e100.net; s=20230601; t=1699635001; x=1700239801;
  h=content-transfer-encoding:in-reply-to:organization:from:references
  :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8eSqnXtcIXrPq6GHt4g8iPFkhbDhqTIANdoSOzK1UFI=;
- b=fVJF3wLbEVsSO2AGLho8DlxYm7YFqr0q+Uk4YVOj7XW3MKtfGBxCKGK70Q+NmyzyAs
- YeFGN1R6xOuwXCZx6zntiPkRVEqjMo2VcfFMHd4jLV1lhCaKH+5WGLmNLwvMkCpDrJBo
- aNN3dc7OKF8ys5d452auDSF6quslSH2Pjbl9SmXsaNkjED+SE/3M0KsQhjSFMVZe9YO+
- gLYBRhgQ421SvVRAouxwBPUs6c7wuGD47+pytMmswV6BVZhIIdd4dZ98d1LWYzmbWR2n
- rLgcl+MHqA3rvDSAO1u5KpI6U8CTFIL5MQDwoudZ4OgK5p9r3sJ39qVpdQCGsTuTHFcW
- QgZA==
-X-Gm-Message-State: AOJu0YzNY/X5QlYb690mkC/+X3Po4VDiJrFgzeD/6yoEcvstV3VQOVb4
- FM3ah5EVpqpLbh5R5Aiq68lb8GNVhfK62mDogR43nIAz8MYXRVXCXeZbfM6wR2DNJ3MGqNrv+16
- 0PU3ylvqtzKchydLlHy5iPHVhOA==
-X-Received: by 2002:a5d:64ae:0:b0:32d:d2aa:ed21 with SMTP id
- m14-20020a5d64ae000000b0032dd2aaed21mr3366095wrp.28.1699634613785; 
- Fri, 10 Nov 2023 08:43:33 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEshZwp1b4wYLbwnbJwTIrDjpK4sffhd5PPHlSOV1hLyZqrd6bemiltJSoPkbT/N4PLUdJ37Q==
-X-Received: by 2002:a5d:64ae:0:b0:32d:d2aa:ed21 with SMTP id
- m14-20020a5d64ae000000b0032dd2aaed21mr3366065wrp.28.1699634613180; 
- Fri, 10 Nov 2023 08:43:33 -0800 (PST)
+ bh=/MqxqWzAGv5fAoXTt67WoZDzwOtx7uJzJ1csLkrDayk=;
+ b=oJN8ychOt+uqIINTANIzPeN7baY0AcjdFPSMHFzug083BW1X8wkMbc80zEm6G9kenj
+ FEpd7Faf8fx6/7B4bq+zjAaZRy9GbTvRjjWB5M1ikUkyLn9tkD52+rt5C+IQlaFqZT/1
+ Y2m7a60+fo9dysGnqT/WH7WbnT7k5sgTNQ4tSb7hEhYxiGjt1PTGSuzfbwswARmZt5tk
+ WvdZ+v2vQAXbwcaEM/3k/aP0gjIpDIDQ7Bsx/FDQjHpIMorcokctjiE+2dYd278WA4CE
+ cPaYBO1L4uWZl/z3gdbd8yujvlC5fEbl7CYfUiWWtd3P/DUG0/GVbMg1nAODuBIk56YZ
+ 25tA==
+X-Gm-Message-State: AOJu0YxyAbzfIAHkEq8JsvR7PDjUsyhlmokbdgv+Ca9bIihOzOPLWc4I
+ 2SadKKkxHkshJssJhDt8sGIYGo7tYcMjteYDtLXM9GTyx24m9Mb2EUheYomePhudws7pVrQ+dXk
+ MSdLP8bA1NMCR8KpBy/8lkYSiRQ==
+X-Received: by 2002:a5d:6c65:0:b0:331:3d55:ebcb with SMTP id
+ r5-20020a5d6c65000000b003313d55ebcbmr2366073wrz.24.1699635001750; 
+ Fri, 10 Nov 2023 08:50:01 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH++7Tz4VWFO0D3PcP4B0LxW7JEEViGQisWX5q3UOeSjzyRnxQ4E20jZar4BcXAFi5u69IOWQ==
+X-Received: by 2002:a5d:6c65:0:b0:331:3d55:ebcb with SMTP id
+ r5-20020a5d6c65000000b003313d55ebcbmr2366057wrz.24.1699635001427; 
+ Fri, 10 Nov 2023 08:50:01 -0800 (PST)
 Received: from ?IPV6:2a02:810d:4b3f:de9c:abf:b8ff:feee:998b?
  ([2a02:810d:4b3f:de9c:abf:b8ff:feee:998b])
  by smtp.gmail.com with ESMTPSA id
- l4-20020adfa384000000b0031fd849e797sm2244692wrb.105.2023.11.10.08.43.32
+ p5-20020adfe605000000b0032db8f7f378sm2257722wrm.71.2023.11.10.08.50.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Nov 2023 08:43:32 -0800 (PST)
-Message-ID: <fe31edb5-8a82-4af9-9a2a-d0531f540814@redhat.com>
-Date: Fri, 10 Nov 2023 17:43:31 +0100
+ Fri, 10 Nov 2023 08:50:01 -0800 (PST)
+Message-ID: <49456cc4-5ec6-47bb-bbc6-b6a78b45dd8c@redhat.com>
+Date: Fri, 10 Nov 2023 17:49:59 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
@@ -78,9 +78,11 @@ References: <20231101233113.8059-10-dakr@redhat.com>
  <4532d9d5-4c5a-4639-8136-d3ba9995d7b6@redhat.com>
  <1d4ca394-ee0c-4617-adbe-1d47e295c8fb@amd.com>
  <f7a64e17-d8b0-a20a-4e27-46f448a10bd4@linux.intel.com>
+ <e9da2add-20e0-437a-b325-2d3309f84eaa@amd.com>
+ <7b5b3a51-6b70-b5ba-1017-b79f1519ed09@linux.intel.com>
 From: Danilo Krummrich <dakr@redhat.com>
 Organization: RedHat
-In-Reply-To: <f7a64e17-d8b0-a20a-4e27-46f448a10bd4@linux.intel.com>
+In-Reply-To: <7b5b3a51-6b70-b5ba-1017-b79f1519ed09@linux.intel.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -106,154 +108,141 @@ Cc: matthew.brost@intel.com, sarah.walker@imgtec.com,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 11/10/23 10:39, Thomas Hellström wrote:
+On 11/10/23 11:52, Thomas Hellström wrote:
 > 
-> On 11/10/23 09:50, Christian König wrote:
->> Am 09.11.23 um 19:34 schrieb Danilo Krummrich:
->>> On 11/9/23 17:03, Christian König wrote:
->>>> Am 09.11.23 um 16:50 schrieb Thomas Hellström:
->>>>> [SNIP]
+> On 11/10/23 11:42, Christian König wrote:
+>> Am 10.11.23 um 10:39 schrieb Thomas Hellström:
+>>>
+>>> [SNIP]
+>>
+>>> I was thinking more of the general design of a base-class that needs to be refcounted. Say a driver vm that inherits from gpu-vm, gem_object and yet another base-class that supplies its own refcount. What's the best-practice way to do refcounting? All base-classes supplying a refcount of its own, or the subclass supplying a refcount and the base-classes supply destroy helpers.
+>>
+>> From my experience the most common design pattern in the Linux kernel is that you either have reference counted objects which contain a private pointer (like struct file, struct inode etc..) or the lifetime is defined by the user of the object instead of reference counting and in this case you can embed it into your own object.
+>>
+>>>
+>>> But to be clear this is nothing I see needing urgent attention.
+>>>
+>>>>
+>>>>>
+>>>>>>
+>>>>>> Well, I have never seen stuff like that in the kernel. Might be that this works, but I would rather not try if avoidable.
+>>>>>>
 >>>>>>>
->>>>> Did we get any resolution on this?
+>>>>>>> That would also make it possible for the driver to decide the context for the put() call: If the driver needs to be able to call put() from irq / atomic context but the base-class'es destructor doesn't allow atomic context, the driver can push freeing out to a work item if needed.
+>>>>>>>
+>>>>>>> Finally, the refcount overflow Christian pointed out. Limiting the number of mapping sounds like a reasonable remedy to me.
+>>>>>>
+>>>>>> Well that depends, I would rather avoid having a dependency for mappings.
+>>>>>>
+>>>>>> Taking the CPU VM handling as example as far as I know vm_area_structs doesn't grab a reference to their mm_struct either. Instead they get automatically destroyed when the mm_struct is destroyed.
 >>>>>
->>>>> FWIW, my take on this is that it would be possible to get GPUVM to work both with and without internal refcounting; If with, the driver needs a vm close to resolve cyclic references, if without that's not necessary. If GPUVM is allowed to refcount in mappings and vm_bos, that comes with a slight performance drop but as Danilo pointed out, the VM lifetime problem iterating over a vm_bo's mapping becomes much easier and the code thus becomes easier to maintain moving forward. That convinced me it's a good thing.
->>>>
->>>> I strongly believe you guys stumbled over one of the core problems with the VM here and I think that reference counting is the right answer to solving this.
->>>>
->>>> The big question is that what is reference counted and in which direction does the dependency points, e.g. we have here VM, BO, BO_VM and Mapping objects.
->>>>
->>>> Those patches here suggest a counted Mapping -> VM reference and I'm pretty sure that this isn't a good idea. What we should rather really have is a BO -> VM or BO_VM ->VM reference. In other words that each BO which is part of the VM keeps a reference to the VM.
->>>
->>> We have both. Please see the subsequent patch introducing VM_BO structures for that.
->>>
->>> As I explained, mappings (struct drm_gpuva) keep a pointer to their VM they're mapped
->>> in and besides that it doesn't make sense to free a VM that still contains mappings,
->>> the reference count ensures that. This simply ensures memory safety.
->>>
->>>>
->>>> BTW: At least in amdgpu we can have BOs which (temporary) doesn't have any mappings, but are still considered part of the VM.
->>>
->>> That should be possible.
->>>
->>>>
+>>>>> Certainly, that would be possible. However, thinking about it, this might call for
+>>>>> huge trouble.
 >>>>>
->>>>> Another issue Christian brought up is that something intended to be embeddable (a base class) shouldn't really have its own refcount. I think that's a valid point. If you at some point need to derive from multiple such structs each having its own refcount, things will start to get weird. One way to resolve that would be to have the driver's subclass provide get() and put() ops, and export a destructor for the base-class, rather than to have the base-class provide the refcount and a destructor  ops.
+>>>>> First of all, we'd still need to reference count a GPUVM and take a reference for each
+>>>>> VM_BO, as we do already. Now instead of simply increasing the reference count for each
+>>>>> mapping as well, we'd need a *mandatory* driver callback that is called when the GPUVM
+>>>>> reference count drops to zero. Maybe something like vm_destroy().
+>>>>>
+>>>>> The reason is that GPUVM can't just remove all mappings from the tree nor can it free them
+>>>>> by itself, since drivers might use them for tracking their allocated page tables and/or
+>>>>> other stuff.
+>>>>>
+>>>>> Now, let's think about the scope this callback might be called from. When a VM_BO is destroyed
+>>>>> the driver might hold a couple of locks (for Xe it would be the VM's shared dma-resv lock and
+>>>>> potentially the corresponding object's dma-resv lock if they're not the same already). If
+>>>>> destroying this VM_BO leads to the VM being destroyed, the drivers vm_destroy() callback would
+>>>>> be called with those locks being held as well.
+>>>>>
+>>>>> I feel like doing this finally opens the doors of the locking hell entirely. I think we should
+>>>>> really avoid that.
 >>>
->>> GPUVM simply follows the same pattern we have with drm_gem_objects. And I think it makes
->>> sense. Why would we want to embed two struct drm_gpuvm in a single driver structure?
+>>> I don't think we need to worry much about this particular locking hell because if we hold
 >>
->> Because you need one drm_gpuvm structure for each application using the driver? Or am I missing something?
+>> I have to agree with Danilo here. Especially you have cases where you usually lock BO->VM (for example eviction) as well as cases where you need to lock VM->BO (command submission).
 >>
->> As far as I can see a driver would want to embed that into your fpriv structure which is allocated during drm_driver.open callback.
+>> Because of this in amdgpu we used (or abused?) the dma_resv of the root BO as lock for the VM. Since this is a ww_mutex locking it in both VM, BO as well as BO, VM order works.
 > 
-> I was thinking more of the general design of a base-class that needs to be refcounted. Say a driver vm that inherits from gpu-vm, gem_object and yet another base-class that supplies its own refcount. What's the best-practice way to do refcounting? All base-classes supplying a refcount of its own, or the subclass supplying a refcount and the base-classes supply destroy helpers.
-> 
-> But to be clear this is nothing I see needing urgent attention.
-> 
->>
->>>
->>>>
->>>> Well, I have never seen stuff like that in the kernel. Might be that this works, but I would rather not try if avoidable.
->>>>
->>>>>
->>>>> That would also make it possible for the driver to decide the context for the put() call: If the driver needs to be able to call put() from irq / atomic context but the base-class'es destructor doesn't allow atomic context, the driver can push freeing out to a work item if needed.
->>>>>
->>>>> Finally, the refcount overflow Christian pointed out. Limiting the number of mapping sounds like a reasonable remedy to me.
->>>>
->>>> Well that depends, I would rather avoid having a dependency for mappings.
->>>>
->>>> Taking the CPU VM handling as example as far as I know vm_area_structs doesn't grab a reference to their mm_struct either. Instead they get automatically destroyed when the mm_struct is destroyed.
->>>
->>> Certainly, that would be possible. However, thinking about it, this might call for
->>> huge trouble.
->>>
->>> First of all, we'd still need to reference count a GPUVM and take a reference for each
->>> VM_BO, as we do already. Now instead of simply increasing the reference count for each
->>> mapping as well, we'd need a *mandatory* driver callback that is called when the GPUVM
->>> reference count drops to zero. Maybe something like vm_destroy().
->>>
->>> The reason is that GPUVM can't just remove all mappings from the tree nor can it free them
->>> by itself, since drivers might use them for tracking their allocated page tables and/or
->>> other stuff.
->>>
->>> Now, let's think about the scope this callback might be called from. When a VM_BO is destroyed
->>> the driver might hold a couple of locks (for Xe it would be the VM's shared dma-resv lock and
->>> potentially the corresponding object's dma-resv lock if they're not the same already). If
->>> destroying this VM_BO leads to the VM being destroyed, the drivers vm_destroy() callback would
->>> be called with those locks being held as well.
->>>
->>> I feel like doing this finally opens the doors of the locking hell entirely. I think we should
->>> really avoid that.
-> 
-> I don't think we need to worry much about this particular locking hell because if we hold, for example a vm and bo resv when putting the vm_bo, we need to keep additional strong references for the bo / vm pointer we use for unlocking. Hence putting the vm_bo under those locks can never lead to the vm getting destroyed.
-> 
-> Also, don't we already sort of have a mandatory vm_destroy callback?
+> Yes, gpuvm is doing the same. (although not necessarily using the page-table root bo, but any bo of the driver's choice). But I read it as Danilo feared the case where the VM destructor was called with a VM resv (or possibly bo resv) held. I meant the driver can easily ensure that's not happening, and in some cases it can't happen.
 
-Sure, I just wanted to say that we'd then have a mandatory callback where drivers *must* ensure
-to remove *all* mappings before returning from this callback. I could imagine that there could
-be some pitfalls with that.
-
-So I'm not worried about the callback itself being mandatory, but about enforcing this semantics
-on it. Maybe I didn't phrase this very well.
+Right, that's what I meant. However, this also comes down to what Christian means. When the callback
+is called with the resv locks held, we'd potentially have this locking inversion between
+VM lock -> resv lock and resv lock -> VM lock.
 
 > 
-> +    if (drm_WARN_ON(gpuvm->drm, !gpuvm->ops->vm_free))
-> +        return;> 
+> Thanks,
+> 
+> Thomas
 > 
 > 
+> 
 >>
->> That's a really good point, but I fear exactly that's the use case.
+>> Regards,
+>> Christian.
 >>
->> I would expect that VM_BO structures are added in the drm_gem_object_funcs.open callback and freed in drm_gem_object_funcs.close.
->>
->> Since it is perfectly legal for userspace to close a BO while there are still mappings (can trivial be that the app is killed) I would expect that the drm_gem_object_funcs.close handling is something like asking drm_gpuvm destroying the VM_BO and getting the mappings which should be cleared in the page table in return.
->>
->> In amdgpu we even go a step further and the VM structure keeps track of all the mappings of deleted VM_BOs so that higher level can query those and clear them later on.
->>
->> Background is that the drm_gem_object_funcs.close can't fail, but it can perfectly be that the app is killed because of an OOM situation and we can't do page tables updates in that moment because of this.
->>
+>>> , for example a vm and bo resv when putting the vm_bo, we need to keep additional strong references for the bo / vm pointer we use for unlocking. Hence putting the vm_bo under those locks can never lead to the vm getting destroyed.
+>>>
+>>> Also, don't we already sort of have a mandatory vm_destroy callback?
+>>>
+>>> +    if (drm_WARN_ON(gpuvm->drm, !gpuvm->ops->vm_free))
+>>> +        return;
+>>>
+>>>
 >>>
 >>>>
->>>> Which makes sense in that case because when the mm_struct is gone the vm_area_struct doesn't make sense any more either.
+>>>> That's a really good point, but I fear exactly that's the use case.
 >>>>
->>>> What we clearly need is a reference to prevent the VM or at least the shared resv to go away to early.
+>>>> I would expect that VM_BO structures are added in the drm_gem_object_funcs.open callback and freed in drm_gem_object_funcs.close.
+>>>>
+>>>> Since it is perfectly legal for userspace to close a BO while there are still mappings (can trivial be that the app is killed) I would expect that the drm_gem_object_funcs.close handling is something like asking drm_gpuvm destroying the VM_BO and getting the mappings which should be cleared in the page table in return.
+>>>>
+>>>> In amdgpu we even go a step further and the VM structure keeps track of all the mappings of deleted VM_BOs so that higher level can query those and clear them later on.
+>>>>
+>>>> Background is that the drm_gem_object_funcs.close can't fail, but it can perfectly be that the app is killed because of an OOM situation and we can't do page tables updates in that moment because of this.
+>>>>
+>>>>>
+>>>>>>
+>>>>>> Which makes sense in that case because when the mm_struct is gone the vm_area_struct doesn't make sense any more either.
+>>>>>>
+>>>>>> What we clearly need is a reference to prevent the VM or at least the shared resv to go away to early.
+>>>>>
+>>>>> Yeah, that was a good hint and we've covered that.
+>>>>>
+>>>>>>
+>>>>>> Regards,
+>>>>>> Christian.
+>>>>>>
+>>>>>>>
+>>>>>>> But I think all of this is fixable as follow-ups if needed, unless I'm missing something crucial.
+>>>>>
+>>>>> Fully agree, I think at this point we should go ahead and land this series.
 >>>
->>> Yeah, that was a good hint and we've covered that.
+>>> +1.
 >>>
+>>> /Thomas
+>>>
+>>>
+>>>>>
+>>>>
+>>>> Yeah, agree this is not UAPI so not nailed in stone. Feel free to add my acked-by as well if you want.
+>>>>
+>>>> Only keep in mind that when you give drivers some functionality in a common component they usually expect to keep that functionality.
+>>>>
+>>>> For example changing the dma_resv object to make sure that drivers can't cause use after free errors any more was an extremely annoying experience since every user of those interface had to change at once.
 >>>>
 >>>> Regards,
 >>>> Christian.
 >>>>
 >>>>>
->>>>> But I think all of this is fixable as follow-ups if needed, unless I'm missing something crucial.
->>>
->>> Fully agree, I think at this point we should go ahead and land this series.
-> 
-> +1.
-> 
-> /Thomas
-> 
-> 
->>>
->>
->> Yeah, agree this is not UAPI so not nailed in stone. Feel free to add my acked-by as well if you want.
->>
->> Only keep in mind that when you give drivers some functionality in a common component they usually expect to keep that functionality.
->>
->> For example changing the dma_resv object to make sure that drivers can't cause use after free errors any more was an extremely annoying experience since every user of those interface had to change at once.
->>
->> Regards,
->> Christian.
->>
->>>
->>>>>
->>>>> Just my 2 cents.
->>>>>
->>>>> /Thomas
->>>>>
+>>>>>>>
+>>>>>>> Just my 2 cents.
+>>>>>>>
+>>>>>>> /Thomas
+>>>>>>>
+>>>>>>>
+>>>>>>
 >>>>>
 >>>>
->>>
 >>
 > 
 
