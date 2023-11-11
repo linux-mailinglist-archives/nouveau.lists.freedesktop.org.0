@@ -2,91 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 926297E7DEB
-	for <lists+nouveau@lfdr.de>; Fri, 10 Nov 2023 17:57:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AD2737E8AD2
+	for <lists+nouveau@lfdr.de>; Sat, 11 Nov 2023 13:10:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A683010E124;
-	Fri, 10 Nov 2023 16:57:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E089710E288;
+	Sat, 11 Nov 2023 12:10:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1D64210E124
- for <nouveau@lists.freedesktop.org>; Fri, 10 Nov 2023 16:57:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1699635431;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=eidH9VhysXxXOjL2K7PZ7XLnXajkR8QsCCnv8XsasRs=;
- b=Us9OaBn9JEMRyGv9Bi3yBlhyZuwo/LhV0AXPwNzzxtV/e/UsWADRTZ2FQ7WbNIjwIGxFhp
- UlaFVsTzaLGlRYHFHvppVliTydlmPTRgoGDMasqzym7lnsTu9F8EyUyWfXdWn0h/Ls+N5w
- Htm8gRu0dNqmfPeJZ8RQMo1XUpiuRJg=
-Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
- [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-352-egiWxybzMXW2VbPpJcc7-g-1; Fri, 10 Nov 2023 11:57:09 -0500
-X-MC-Unique: egiWxybzMXW2VbPpJcc7-g-1
-Received: by mail-lj1-f198.google.com with SMTP id
- 38308e7fff4ca-2c50cec5d29so20293201fa.2
- for <nouveau@lists.freedesktop.org>; Fri, 10 Nov 2023 08:57:08 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699635427; x=1700240227;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=eidH9VhysXxXOjL2K7PZ7XLnXajkR8QsCCnv8XsasRs=;
- b=LAaze1Gwk/Kv68PuXEtVI8FFppzJmZJ3cnHowXp/3vNO3LeHylBRrMabR/0btdfGPB
- dw0jOEj0W0PsvBz77fDWrEgDmHyoxuiOQ/BViBJmELrcnu+Wlg2HvFTbSAz6tRrlha9w
- ugSjX+SkjOvKltmcVH4gboyKEtrQZgHdvtG2+9xk0rl0l9107OlkhFaJargd1wluAb1C
- d0PxwCfg4U55U3CcmVn3EqW9U0zwOI8HCYCGx+zk+IWZy8WKAdynvUB9ugTcEmF4UbX8
- jI7sKq0nZkmKmkvqQBXd/6cS54vtliRb4rZq/2z5gmwHM6ju7nfxd3dVdAoG0fPzwLDT
- 1K4Q==
-X-Gm-Message-State: AOJu0YyfGUhxu6wkbAxDaOQSlPVzjDuMVKndgHVJpdz5ihX5ctzvs06o
- 7C9l9e+gqpAtHcZZUyLoAKlmqf3r7GJt3balGdLvVv3VGt+6+1xWpc729/b6+gGbiyjLO76kk+8
- /LSz9voBwza4Gy497o0YtOMVUjQ==
-X-Received: by 2002:a05:651c:222:b0:2c6:f173:7d90 with SMTP id
- z2-20020a05651c022200b002c6f1737d90mr7732734ljn.12.1699635427706; 
- Fri, 10 Nov 2023 08:57:07 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFyrdH0+LrM5PreEp7tQxlkcT5aqvmj57o3zbMLeMYRB2XWK4I69R2ZHSV/6VMU42JDaix4kw==
-X-Received: by 2002:a05:651c:222:b0:2c6:f173:7d90 with SMTP id
- z2-20020a05651c022200b002c6f1737d90mr7732720ljn.12.1699635427265; 
- Fri, 10 Nov 2023 08:57:07 -0800 (PST)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:abf:b8ff:feee:998b?
- ([2a02:810d:4b3f:de9c:abf:b8ff:feee:998b])
- by smtp.gmail.com with ESMTPSA id
- r9-20020a05600c320900b00407b93d8085sm5570467wmp.27.2023.11.10.08.57.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Nov 2023 08:57:06 -0800 (PST)
-Message-ID: <987ac707-8f9b-4e33-86c3-decdc1c48a3a@redhat.com>
-Date: Fri, 10 Nov 2023 17:57:05 +0100
+X-Greylist: delayed 421 seconds by postgrey-1.36 at gabe;
+ Sat, 11 Nov 2023 12:10:47 UTC
+Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A01E510E288;
+ Sat, 11 Nov 2023 12:10:47 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 9F92C40E0176; 
+ Sat, 11 Nov 2023 12:03:41 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+ header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+ by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id 02PzBCe1tIYh; Sat, 11 Nov 2023 12:03:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+ t=1699704218; bh=mnLg2AFo7cZ77HTtx0K5iZojbFqgyb/zAT0td59x9aQ=;
+ h=Date:From:To:Cc:Subject:From;
+ b=OG82pIYpt34ZvrDM+b5xlw88HDBzTd9XIhAVkZanBvaUgp1s/Os7aZj2E0XgmHosU
+ Qi9occJ6BHCpMoS5YjP1Tfl0XIHewMgh1ognZSYib3/28O3N60uKU4VIfjqrSUPri6
+ M/+97PmtFHNZr8F97YaKQCvcn8RPa18UdDgxtn+oV6waABDbijt2ZBjwzIosXqN8Bw
+ vJtO664TKu0aNa+W2S2cmi6uUZa/sphNJ7yX2ueT7ORHDa7p7Nbda2THvFXOE7alRU
+ OEZlL5tZcsCNGTngbQVwWIEfOlKxOsugG8k+18iQJDUnGK8ZE31ajoG+lHZ7X9Exz5
+ KmwF7vY8gVCjk7uq6vTL1dfj9dUW2RPU3iUR5NRrM98DD3hpBZPlvFkpI2xBx4+oj9
+ MTjOa+O+rKUz2j4vcn8eTpza6pnSKXExrppGqx1HCo2XQpXCjPyks40H4LV6fo3PhF
+ EIro3YLmi7SLZbDt9kTnqwWl3ToHSojQtdXoJh+391C7XLFlEyX2DMTzxIwSNbIz8t
+ YsblvcTBR1eqYu4+fs6PPEpuhMqZsVCQop10DwXFZS9B4ggnMXiioKwJHRqnASysM0
+ znyinIGp4O+iBNSUkkPXn0OP/VHK98YeDq+VGufPhiaML61Q6AI1RD4Uh5RC1rB8hV
+ tTZmzMBqYcWUdEmqyat63W9E=
+Received: from zn.tnic (pd95304da.dip0.t-ipconnect.de [217.83.4.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
+ SHA256) (No client certificate requested)
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 7DDFB40E0032;
+ Sat, 11 Nov 2023 12:03:29 +0000 (UTC)
+Date: Sat, 11 Nov 2023 13:03:23 +0100
+From: Borislav Petkov <bp@alien8.de>
+To: nouveau@lists.freedesktop.org
+Message-ID: <20231111120323.GAZU9tiw8e0RSzCGB9@fat_crate.local>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>
-References: <20231101233113.8059-10-dakr@redhat.com>
- <be93d9ef-3d3e-4262-a280-d2922b983ca1@amd.com> <ZUTyGTxcH7WlHKsv@pollux>
- <a2e13a27-d2e5-4ae3-9c11-c18b425b69cc@amd.com>
- <b533af44-0404-49c9-9879-3414d0964acc@redhat.com>
- <51dea5f3-a18b-4797-b4fa-87da7db4624a@amd.com> <ZUjZFFtLM435tTxJ@pollux>
- <8e87d962-c80c-40d9-94d7-58b6cd9dd794@amd.com> <ZUj0DdYZUgjhcvf5@pollux>
- <6d3c48f6-a92d-49b3-b836-ee1bc95b56bf@amd.com> <ZUkXkJ+zT7OFGosC@pollux>
- <44bc28c7-05f4-4419-5183-453c4951aac0@linux.intel.com>
- <6c536c94-7072-403c-9c63-d932252fd66b@amd.com>
- <4532d9d5-4c5a-4639-8136-d3ba9995d7b6@redhat.com>
- <1d4ca394-ee0c-4617-adbe-1d47e295c8fb@amd.com>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <1d4ca394-ee0c-4617-adbe-1d47e295c8fb@amd.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH drm-misc-next v8 09/12] drm/gpuvm: reference
- count drm_gpuvm structures
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Subject: [Nouveau] nouveau 0000:01:00.0: drm_WARN_ON(!found_head)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,137 +62,93 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, sarah.walker@imgtec.com,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, faith@gfxstrand.net,
- boris.brezillon@collabora.com, donald.robson@imgtec.com, daniel@ffwll.ch
+Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 11/10/23 09:50, Christian König wrote:
-> Am 09.11.23 um 19:34 schrieb Danilo Krummrich:
->> On 11/9/23 17:03, Christian König wrote:
->>> Am 09.11.23 um 16:50 schrieb Thomas Hellström:
->>>> [SNIP]
->>>>>>
->>>> Did we get any resolution on this?
->>>>
->>>> FWIW, my take on this is that it would be possible to get GPUVM to work both with and without internal refcounting; If with, the driver needs a vm close to resolve cyclic references, if without that's not necessary. If GPUVM is allowed to refcount in mappings and vm_bos, that comes with a slight performance drop but as Danilo pointed out, the VM lifetime problem iterating over a vm_bo's mapping becomes much easier and the code thus becomes easier to maintain moving forward. That convinced me it's a good thing.
->>>
->>> I strongly believe you guys stumbled over one of the core problems with the VM here and I think that reference counting is the right answer to solving this.
->>>
->>> The big question is that what is reference counted and in which direction does the dependency points, e.g. we have here VM, BO, BO_VM and Mapping objects.
->>>
->>> Those patches here suggest a counted Mapping -> VM reference and I'm pretty sure that this isn't a good idea. What we should rather really have is a BO -> VM or BO_VM ->VM reference. In other words that each BO which is part of the VM keeps a reference to the VM.
->>
->> We have both. Please see the subsequent patch introducing VM_BO structures for that.
->>
->> As I explained, mappings (struct drm_gpuva) keep a pointer to their VM they're mapped
->> in and besides that it doesn't make sense to free a VM that still contains mappings,
->> the reference count ensures that. This simply ensures memory safety.
->>
->>>
->>> BTW: At least in amdgpu we can have BOs which (temporary) doesn't have any mappings, but are still considered part of the VM.
->>
->> That should be possible.
->>
->>>
->>>>
->>>> Another issue Christian brought up is that something intended to be embeddable (a base class) shouldn't really have its own refcount. I think that's a valid point. If you at some point need to derive from multiple such structs each having its own refcount, things will start to get weird. One way to resolve that would be to have the driver's subclass provide get() and put() ops, and export a destructor for the base-class, rather than to have the base-class provide the refcount and a destructor  ops.
->>
->> GPUVM simply follows the same pattern we have with drm_gem_objects. And I think it makes
->> sense. Why would we want to embed two struct drm_gpuvm in a single driver structure?
-> 
-> Because you need one drm_gpuvm structure for each application using the driver? Or am I missing something?
+Hi,
 
-Right, *one*, but not more than one. Wasn't that the concern? Maybe I misunderstood something. :)
+this is ontop of Linus' tree from the 4th (lemme know if I should try
+the latest) on one of my test boxes:
 
-> 
-> As far as I can see a driver would want to embed that into your fpriv structure which is allocated during drm_driver.open callback.
-> 
->>
->>>
->>> Well, I have never seen stuff like that in the kernel. Might be that this works, but I would rather not try if avoidable.
->>>
->>>>
->>>> That would also make it possible for the driver to decide the context for the put() call: If the driver needs to be able to call put() from irq / atomic context but the base-class'es destructor doesn't allow atomic context, the driver can push freeing out to a work item if needed.
->>>>
->>>> Finally, the refcount overflow Christian pointed out. Limiting the number of mapping sounds like a reasonable remedy to me.
->>>
->>> Well that depends, I would rather avoid having a dependency for mappings.
->>>
->>> Taking the CPU VM handling as example as far as I know vm_area_structs doesn't grab a reference to their mm_struct either. Instead they get automatically destroyed when the mm_struct is destroyed.
->>
->> Certainly, that would be possible. However, thinking about it, this might call for
->> huge trouble.
->>
->> First of all, we'd still need to reference count a GPUVM and take a reference for each
->> VM_BO, as we do already. Now instead of simply increasing the reference count for each
->> mapping as well, we'd need a *mandatory* driver callback that is called when the GPUVM
->> reference count drops to zero. Maybe something like vm_destroy().
->>
->> The reason is that GPUVM can't just remove all mappings from the tree nor can it free them
->> by itself, since drivers might use them for tracking their allocated page tables and/or
->> other stuff.
->>
->> Now, let's think about the scope this callback might be called from. When a VM_BO is destroyed
->> the driver might hold a couple of locks (for Xe it would be the VM's shared dma-resv lock and
->> potentially the corresponding object's dma-resv lock if they're not the same already). If
->> destroying this VM_BO leads to the VM being destroyed, the drivers vm_destroy() callback would
->> be called with those locks being held as well.
->>
->> I feel like doing this finally opens the doors of the locking hell entirely. I think we should
->> really avoid that.
-> 
-> That's a really good point, but I fear exactly that's the use case.
-> 
-> I would expect that VM_BO structures are added in the drm_gem_object_funcs.open callback and freed in drm_gem_object_funcs.close.
-> 
-> Since it is perfectly legal for userspace to close a BO while there are still mappings (can trivial be that the app is killed) I would expect that the drm_gem_object_funcs.close handling is something like asking drm_gpuvm destroying the VM_BO and getting the mappings which should be cleared in the page table in return.
+nouveau 0000:01:00.0: vgaarb: deactivate vga console
+Console: switching to colour dummy device 80x25
+nouveau 0000:01:00.0: NVIDIA GT218 (0a8280b1)
+CE: hpet increased min_delta_ns to 20115 nsec
+nouveau 0000:01:00.0: bios: version 70.18.49.00.00
+nouveau 0000:01:00.0: fb: 1024 MiB DDR3
+nouveau 0000:01:00.0: DRM: VRAM: 1024 MiB
+nouveau 0000:01:00.0: DRM: GART: 1048576 MiB
+nouveau 0000:01:00.0: DRM: TMDS table version 2.0
+nouveau 0000:01:00.0: DRM: MM: using COPY for buffer copies
+------------[ cut here ]------------
+nouveau 0000:01:00.0: drm_WARN_ON(!found_head)
+WARNING: CPU: 4 PID: 786 at drivers/gpu/drm/nouveau/dispnv50/disp.c:2731 nv50_display_init+0x28c/0x4f0 [nouveau]
+Modules linked in: nouveau(+) drm_ttm_helper ttm video drm_exec drm_gpuvm gpu_sched drm_display_helper wmi
+CPU: 4 PID: 786 Comm: systemd-udevd Not tainted 6.6.0+ #1
+Hardware name: MICRO-STAR INTERNATIONAL CO.,LTD MS-7599/870-C45 (MS-7599), BIOS V1.15 03/04/2011
+RIP: 0010:nv50_display_init+0x28c/0x4f0 [nouveau]
+Code: 4c 8b 6f 50 4d 85 ed 75 03 4c 8b 2f e8 6d 47 37 e1 48 c7 c1 4c 55 2d a0 48 89 c6 4c 89 ea 48 c7 c7 42 55 2d a0 e8 44 83 e8 e0 <0f> 0b 48 8b 43 08 49 39 c6 48 8d 58 f8 0f 85 41 ff ff ff 48 8d 7c
+RSP: 0018:ffffc9000031ba98 EFLAGS: 00010286
+RAX: 000000000000002e RBX: ffff888100a21400 RCX: 0000000000000000
+RDX: 0000000000000002 RSI: ffffc9000031b9b0 RDI: 0000000000000001
+RBP: ffff888104eadad0 R08: ffff888136ffdfe8 R09: 0000000000000058
+R10: 0000000000000289 R11: ffff888136401cd8 R12: ffff888104ead800
+R13: ffff888100abddf0 R14: ffff888104eadab0 R15: 0000000000000000
+FS:  00007fef9c8e38c0(0000) GS:ffff88812f500000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007fef9ce9d258 CR3: 000000010330e000 CR4: 00000000000006f0
+Call Trace:
+ <TASK>
+ ? __warn+0x97/0x160
+ ? nv50_display_init+0x28c/0x4f0 [nouveau]
+ ? report_bug+0x1ec/0x200
+ ? handle_bug+0x3c/0x70
+ ? exc_invalid_op+0x1f/0x90
+ ? asm_exc_invalid_op+0x16/0x20
+ ? nv50_display_init+0x28c/0x4f0 [nouveau]
+ ? nv50_display_init+0x28c/0x4f0 [nouveau]
+ ? sched_set_fifo+0x46/0x60
+ nouveau_display_init+0xa0/0xd0 [nouveau]
+ nouveau_drm_device_init+0x42a/0x990 [nouveau]
+ nouveau_drm_probe+0x105/0x240 [nouveau]
+ ? __pm_runtime_resume+0x68/0xa0
+ pci_device_probe+0xaa/0x140
+ really_probe+0xc2/0x2d0
+ __driver_probe_device+0x73/0x120
+ driver_probe_device+0x2c/0xb0
+ __driver_attach+0xa0/0x150
+ ? __device_attach_driver+0xc0/0xc0
+ bus_for_each_dev+0x67/0xa0
+ bus_add_driver+0x10e/0x210
+ driver_register+0x5c/0x120
+ ? 0xffffffffa0336000
+ do_one_initcall+0x44/0x200
+ ? kmalloc_trace+0x37/0xc0
+ do_init_module+0x64/0x230
+ init_module_from_file+0x8d/0xd0
+ idempotent_init_module+0x15a/0x210
+ __x64_sys_finit_module+0x67/0xb0
+ do_syscall_64+0x41/0xf0
+ entry_SYSCALL_64_after_hwframe+0x4b/0x53
+RIP: 0033:0x7fef9cda5ee9
+Code: 08 44 89 e0 5b 41 5c c3 66 0f 1f 84 00 00 00 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d f7 ee 0e 00 f7 d8 64 89 01 48
+RSP: 002b:00007ffeb60299e8 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
+RAX: ffffffffffffffda RBX: 000055b322ddf5a0 RCX: 00007fef9cda5ee9
+RDX: 0000000000000000 RSI: 00007fef9cf45e2d RDI: 0000000000000012
+RBP: 0000000000020000 R08: 0000000000000000 R09: 000055b322ddf690
+R10: 0000000000000012 R11: 0000000000000246 R12: 00007fef9cf45e2d
+R13: 0000000000000000 R14: 000055b322dcb940 R15: 000055b322ddf5a0
+ </TASK>
+---[ end trace 0000000000000000 ]---
+[drm] Initialized nouveau 1.4.0 20120801 for 0000:01:00.0 on minor 0
+fbcon: nouveaudrmfb (fb0) is primary device
+Console: switching to colour frame buffer device 210x65
+nouveau 0000:01:00.0: [drm] fb0: nouveaudrmfb frame buffer device
 
-Yes, you can do that. You can ask GPUVM to create a set of operations for you to shut down all
-mappings of a given VM_BO. But until this is done the VM_BO structure is kept alive. Semantically,
-it's exactly the same though.
+-- 
+Regards/Gruss,
+    Boris.
 
-> 
-> In amdgpu we even go a step further and the VM structure keeps track of all the mappings of deleted VM_BOs so that higher level can query those and clear them later on.
-> 
-> Background is that the drm_gem_object_funcs.close can't fail, but it can perfectly be that the app is killed because of an OOM situation and we can't do page tables updates in that moment because of this.
-> 
->>
->>>
->>> Which makes sense in that case because when the mm_struct is gone the vm_area_struct doesn't make sense any more either.
->>>
->>> What we clearly need is a reference to prevent the VM or at least the shared resv to go away to early.
->>
->> Yeah, that was a good hint and we've covered that.
->>
->>>
->>> Regards,
->>> Christian.
->>>
->>>>
->>>> But I think all of this is fixable as follow-ups if needed, unless I'm missing something crucial.
->>
->> Fully agree, I think at this point we should go ahead and land this series.
-> 
-> Yeah, agree this is not UAPI so not nailed in stone. Feel free to add my acked-by as well if you want.
-> 
-> Only keep in mind that when you give drivers some functionality in a common component they usually expect to keep that functionality.
-> 
-> For example changing the dma_resv object to make sure that drivers can't cause use after free errors any more was an extremely annoying experience since every user of those interface had to change at once.
-> 
-> Regards,
-> Christian.
-> 
->>
->>>>
->>>> Just my 2 cents.
->>>>
->>>> /Thomas
->>>>
->>>>
->>>
->>
-> 
-
+https://people.kernel.org/tglx/notes-about-netiquette
