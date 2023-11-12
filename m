@@ -1,56 +1,85 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD2737E8AD2
-	for <lists+nouveau@lfdr.de>; Sat, 11 Nov 2023 13:10:51 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id CA77F7E92BF
+	for <lists+nouveau@lfdr.de>; Sun, 12 Nov 2023 21:43:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E089710E288;
-	Sat, 11 Nov 2023 12:10:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D36D210E31B;
+	Sun, 12 Nov 2023 20:43:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 421 seconds by postgrey-1.36 at gabe;
- Sat, 11 Nov 2023 12:10:47 UTC
-Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A01E510E288;
- Sat, 11 Nov 2023 12:10:47 +0000 (UTC)
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 9F92C40E0176; 
- Sat, 11 Nov 2023 12:03:41 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
- header.d=alien8.de
-Received: from mail.alien8.de ([127.0.0.1])
- by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id 02PzBCe1tIYh; Sat, 11 Nov 2023 12:03:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
- t=1699704218; bh=mnLg2AFo7cZ77HTtx0K5iZojbFqgyb/zAT0td59x9aQ=;
- h=Date:From:To:Cc:Subject:From;
- b=OG82pIYpt34ZvrDM+b5xlw88HDBzTd9XIhAVkZanBvaUgp1s/Os7aZj2E0XgmHosU
- Qi9occJ6BHCpMoS5YjP1Tfl0XIHewMgh1ognZSYib3/28O3N60uKU4VIfjqrSUPri6
- M/+97PmtFHNZr8F97YaKQCvcn8RPa18UdDgxtn+oV6waABDbijt2ZBjwzIosXqN8Bw
- vJtO664TKu0aNa+W2S2cmi6uUZa/sphNJ7yX2ueT7ORHDa7p7Nbda2THvFXOE7alRU
- OEZlL5tZcsCNGTngbQVwWIEfOlKxOsugG8k+18iQJDUnGK8ZE31ajoG+lHZ7X9Exz5
- KmwF7vY8gVCjk7uq6vTL1dfj9dUW2RPU3iUR5NRrM98DD3hpBZPlvFkpI2xBx4+oj9
- MTjOa+O+rKUz2j4vcn8eTpza6pnSKXExrppGqx1HCo2XQpXCjPyks40H4LV6fo3PhF
- EIro3YLmi7SLZbDt9kTnqwWl3ToHSojQtdXoJh+391C7XLFlEyX2DMTzxIwSNbIz8t
- YsblvcTBR1eqYu4+fs6PPEpuhMqZsVCQop10DwXFZS9B4ggnMXiioKwJHRqnASysM0
- znyinIGp4O+iBNSUkkPXn0OP/VHK98YeDq+VGufPhiaML61Q6AI1RD4Uh5RC1rB8hV
- tTZmzMBqYcWUdEmqyat63W9E=
-Received: from zn.tnic (pd95304da.dip0.t-ipconnect.de [217.83.4.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
- SHA256) (No client certificate requested)
- by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 7DDFB40E0032;
- Sat, 11 Nov 2023 12:03:29 +0000 (UTC)
-Date: Sat, 11 Nov 2023 13:03:23 +0100
-From: Borislav Petkov <bp@alien8.de>
-To: nouveau@lists.freedesktop.org
-Message-ID: <20231111120323.GAZU9tiw8e0RSzCGB9@fat_crate.local>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7010F10E31A
+ for <nouveau@lists.freedesktop.org>; Sun, 12 Nov 2023 20:43:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1699821802;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=R/lZSLfHSJ3lgfaPtLw9pH3ZZ2OWkdNMAIZm5OTZRi4=;
+ b=PW7Gm/5fJ6YFe+7grXiQH5Xz0O214ZsZWIxSjDsTQHPXj35jINtXZTaQd34446f2lYWack
+ /NK56oAu232xf2J0rYV0Zf1rsQvp98Pu9dk+7OwWjQUpBXQKw2vnVG1zSWcYa0SciS8w87
+ dBtHBWYk6bxz7rUGV6gvMrZW9+XaDQo=
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-15-d5iFyhC4OCygXOFxPw98QQ-1; Sun, 12 Nov 2023 15:43:19 -0500
+X-MC-Unique: d5iFyhC4OCygXOFxPw98QQ-1
+Received: by mail-ej1-f69.google.com with SMTP id
+ a640c23a62f3a-9e8b2d32d88so31748466b.0
+ for <nouveau@lists.freedesktop.org>; Sun, 12 Nov 2023 12:43:18 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699821798; x=1700426598;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=R/lZSLfHSJ3lgfaPtLw9pH3ZZ2OWkdNMAIZm5OTZRi4=;
+ b=v6ujnx8HVgsw0NRlztnL3yammWeCP4s15GAqbrVxFtyO5LB4vmgDblCE1wWKCPb7s9
+ s+AR/9v3k9JKhz0E/WHafazRc6J8Kn25ILQ1jkAjrG31qpjP6XhH67jgXyPh/qFi7xfc
+ C5c+R/how3c/owya1rjalgk8DcbjwzNYl3G3CKZPOACaTerLWLUona46Z9HZ7vi7HWT5
+ ZzbnTwxZJ6mDTAKyd6WfAKgIh7rngJJXebSfkMI1wIHAyxs0g6xJFfmbF58yI0bPChT4
+ ZJJf736ebqYpsOTgPof/XmE1m2d/sj7nySTOCizRgVJ3sGa6BczV1xT2R1qk/9OvGmVk
+ 85hw==
+X-Gm-Message-State: AOJu0YxzqbPToMioor4bG9qvckqmDvqjmLkIYg+w847/X7/RiC3M2inB
+ GPHnRq5DrJyJL0D5uGluY14Fz+xreFyDuleU6evbdQwhik2vliMfEq/s4dMrEgj/ntaU7AtbgrO
+ 6DBMwp2hUQmSmiXyO3iWQ+BYtjg==
+X-Received: by 2002:a17:906:300b:b0:9ba:a38:531e with SMTP id
+ 11-20020a170906300b00b009ba0a38531emr3544788ejz.52.1699821798016; 
+ Sun, 12 Nov 2023 12:43:18 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFpZkasG8Lh5Q8a2Bx2iRoNIZThOCEb3KwkB/3fA6F8wH2CFJrCrtz7uQQMTLVT5JttMyI6IA==
+X-Received: by 2002:a17:906:300b:b0:9ba:a38:531e with SMTP id
+ 11-20020a170906300b00b009ba0a38531emr3544777ejz.52.1699821797566; 
+ Sun, 12 Nov 2023 12:43:17 -0800 (PST)
+Received: from ?IPV6:2001:1c00:c32:7800:5bfa:a036:83f0:f9ec?
+ (2001-1c00-0c32-7800-5bfa-a036-83f0-f9ec.cable.dynamic.v6.ziggo.nl.
+ [2001:1c00:c32:7800:5bfa:a036:83f0:f9ec])
+ by smtp.gmail.com with ESMTPSA id
+ h8-20020a170906260800b009dd98089a48sm2973331ejc.43.2023.11.12.12.43.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 12 Nov 2023 12:43:16 -0800 (PST)
+Message-ID: <55698544-8cba-4413-bdd3-79cfaa1f3c44@redhat.com>
+Date: Sun, 12 Nov 2023 21:43:15 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Subject: [Nouveau] nouveau 0000:01:00.0: drm_WARN_ON(!found_head)
+User-Agent: Mozilla Thunderbird
+To: "Owen T. Heisler" <writer@owenh.net>,
+ Kai-Heng Feng <kai.heng.feng@canonical.com>
+References: <9f36fb06-64c4-4264-aaeb-4e1289e764c4@owenh.net>
+ <CAAd53p7BSesx=a1igTohoSkxrW+Hq8O7ArONFCK7uoDi12-T4A@mail.gmail.com>
+ <a592ce0c-64f0-477d-80fa-8f5a52ba29ea@redhat.com>
+ <CAAd53p608qmC3pvz=F+y2UZ9O39f2aq-pE-1_He1j8PGQmM=tg@mail.gmail.com>
+ <d1ac9c1e-f3fe-4d06-ba2e-2c049841d19b@owenh.net>
+From: Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <d1ac9c1e-f3fe-4d06-ba2e-2c049841d19b@owenh.net>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US, nl
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [REGRESSION]: acpi/nouveau: Hardware unavailable upon
+ resume or suspend fails
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,93 +91,81 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: regressions@lists.linux.dev, nouveau@lists.freedesktop.org,
+ "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>, stable@vger.kernel.org,
+ linux-acpi@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Len Brown <lenb@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Hi,
 
-this is ontop of Linus' tree from the 4th (lemme know if I should try
-the latest) on one of my test boxes:
+On 11/10/23 17:58, Owen T. Heisler wrote:
+> Hi everyone,
+> 
+> On 11/10/23 06:52, Kai-Heng Feng wrote:
+>> On Fri, Nov 10, 2023 at 2:19 PM Hans de Goede <hdegoede@redhat.com> wrote:
+>>> On 11/10/23 07:09, Kai-Heng Feng wrote:
+>>>> On Fri, Nov 10, 2023 at 5:55 AM Owen T. Heisler <writer@owenh.net> wrote:
+>>>>> #regzbot introduced: 89c290ea758911e660878e26270e084d862c03b0
+>>>>> #regzbot link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/273
+>>>>> #regzbot link: https://bugzilla.kernel.org/show_bug.cgi?id=218124
+>>>>
+>>>> Thanks for the bug report. Do you prefer to continue the discussion
+>>>> here, on gitlab or on bugzilla?
+> 
+> Kai-Heng, you're welcome and thank you too. By email is fine with me.
+> 
+>>> Owen, as Kai-Heng said thank you for reporting this.
+> 
+> Hans, you're welcome, and thanks for your help too.
+> 
+>>>>> ## Reproducing
+>>>>>
+>>>>> 1. Boot system to framebuffer console.
+>>>>> 2. Run `systemctl suspend`. If undocked without secondary display,
+>>>>> suspend fails. If docked with secondary display, suspend succeeds.
+>>>>> 3. Resume from suspend if applicable.
+>>>>> 4. System is now in a broken state.
+>>>>
+>>>> So I guess we need to put those devices to ACPI D3 for suspend. Let's
+>>>> discuss this on your preferred platform.
+>>>
+>>> Ok, so I was already sort of afraid we might see something like this
+>>> happening because of:
+>>>
+>>> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=89c290ea758911e660878e26270e084d862c03b0
+>>>
+>>> As I mentioned during the review of that, it might be better to
+>>> not touch the video-card ACPI power-state at all and instead
+>>> only do acpi_device_fix_up_power() on the child devices.
+>>
+>> Or the child devices need to be put to D3 during suspend.
+>>
+>>> Owen, attached are 2 patches which implement only
+>>> calling acpi_device_fix_up_power() on the child devices,
+>>> can you build a v6.6 kernel with these 2 patches added
+>>> on top please and see if that fixes things ?
+> 
+> Yes, with those patches v6.6 suspend works normally. That's great, thanks!
+> 
+> I tested with v6.6 with the 2 patches at <https://lore.kernel.org/regressions/a592ce0c-64f0-477d-80fa-8f5a52ba29ea@redhat.com/> using <https://gitlab.freedesktop.org/drm/nouveau/uploads/788d7faf22ba2884dcc09d7be931e813/v6.6-config1>. I tested both docked and un-docked, just in case.
+> 
+> Tested-by: Owen T. Heisler <writer@owenh.net>
+> 
+>>> Kai-Heng can you test that the issue on the HP ZBook Fury 16 G10
+>>> is still resolved after applying these patches ?
+>>
+>> Yes. Thanks for the patch.
+>>
+>> If this patch also fixes Owen's issue, then
+>> Tested-by: Kai-Heng Feng <kai.heng.feng@canonical.com
 
-nouveau 0000:01:00.0: vgaarb: deactivate vga console
-Console: switching to colour dummy device 80x25
-nouveau 0000:01:00.0: NVIDIA GT218 (0a8280b1)
-CE: hpet increased min_delta_ns to 20115 nsec
-nouveau 0000:01:00.0: bios: version 70.18.49.00.00
-nouveau 0000:01:00.0: fb: 1024 MiB DDR3
-nouveau 0000:01:00.0: DRM: VRAM: 1024 MiB
-nouveau 0000:01:00.0: DRM: GART: 1048576 MiB
-nouveau 0000:01:00.0: DRM: TMDS table version 2.0
-nouveau 0000:01:00.0: DRM: MM: using COPY for buffer copies
-------------[ cut here ]------------
-nouveau 0000:01:00.0: drm_WARN_ON(!found_head)
-WARNING: CPU: 4 PID: 786 at drivers/gpu/drm/nouveau/dispnv50/disp.c:2731 nv50_display_init+0x28c/0x4f0 [nouveau]
-Modules linked in: nouveau(+) drm_ttm_helper ttm video drm_exec drm_gpuvm gpu_sched drm_display_helper wmi
-CPU: 4 PID: 786 Comm: systemd-udevd Not tainted 6.6.0+ #1
-Hardware name: MICRO-STAR INTERNATIONAL CO.,LTD MS-7599/870-C45 (MS-7599), BIOS V1.15 03/04/2011
-RIP: 0010:nv50_display_init+0x28c/0x4f0 [nouveau]
-Code: 4c 8b 6f 50 4d 85 ed 75 03 4c 8b 2f e8 6d 47 37 e1 48 c7 c1 4c 55 2d a0 48 89 c6 4c 89 ea 48 c7 c7 42 55 2d a0 e8 44 83 e8 e0 <0f> 0b 48 8b 43 08 49 39 c6 48 8d 58 f8 0f 85 41 ff ff ff 48 8d 7c
-RSP: 0018:ffffc9000031ba98 EFLAGS: 00010286
-RAX: 000000000000002e RBX: ffff888100a21400 RCX: 0000000000000000
-RDX: 0000000000000002 RSI: ffffc9000031b9b0 RDI: 0000000000000001
-RBP: ffff888104eadad0 R08: ffff888136ffdfe8 R09: 0000000000000058
-R10: 0000000000000289 R11: ffff888136401cd8 R12: ffff888104ead800
-R13: ffff888100abddf0 R14: ffff888104eadab0 R15: 0000000000000000
-FS:  00007fef9c8e38c0(0000) GS:ffff88812f500000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007fef9ce9d258 CR3: 000000010330e000 CR4: 00000000000006f0
-Call Trace:
- <TASK>
- ? __warn+0x97/0x160
- ? nv50_display_init+0x28c/0x4f0 [nouveau]
- ? report_bug+0x1ec/0x200
- ? handle_bug+0x3c/0x70
- ? exc_invalid_op+0x1f/0x90
- ? asm_exc_invalid_op+0x16/0x20
- ? nv50_display_init+0x28c/0x4f0 [nouveau]
- ? nv50_display_init+0x28c/0x4f0 [nouveau]
- ? sched_set_fifo+0x46/0x60
- nouveau_display_init+0xa0/0xd0 [nouveau]
- nouveau_drm_device_init+0x42a/0x990 [nouveau]
- nouveau_drm_probe+0x105/0x240 [nouveau]
- ? __pm_runtime_resume+0x68/0xa0
- pci_device_probe+0xaa/0x140
- really_probe+0xc2/0x2d0
- __driver_probe_device+0x73/0x120
- driver_probe_device+0x2c/0xb0
- __driver_attach+0xa0/0x150
- ? __device_attach_driver+0xc0/0xc0
- bus_for_each_dev+0x67/0xa0
- bus_add_driver+0x10e/0x210
- driver_register+0x5c/0x120
- ? 0xffffffffa0336000
- do_one_initcall+0x44/0x200
- ? kmalloc_trace+0x37/0xc0
- do_init_module+0x64/0x230
- init_module_from_file+0x8d/0xd0
- idempotent_init_module+0x15a/0x210
- __x64_sys_finit_module+0x67/0xb0
- do_syscall_64+0x41/0xf0
- entry_SYSCALL_64_after_hwframe+0x4b/0x53
-RIP: 0033:0x7fef9cda5ee9
-Code: 08 44 89 e0 5b 41 5c c3 66 0f 1f 84 00 00 00 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d f7 ee 0e 00 f7 d8 64 89 01 48
-RSP: 002b:00007ffeb60299e8 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
-RAX: ffffffffffffffda RBX: 000055b322ddf5a0 RCX: 00007fef9cda5ee9
-RDX: 0000000000000000 RSI: 00007fef9cf45e2d RDI: 0000000000000012
-RBP: 0000000000020000 R08: 0000000000000000 R09: 000055b322ddf690
-R10: 0000000000000012 R11: 0000000000000246 R12: 00007fef9cf45e2d
-R13: 0000000000000000 R14: 000055b322dcb940 R15: 000055b322ddf5a0
- </TASK>
----[ end trace 0000000000000000 ]---
-[drm] Initialized nouveau 1.4.0 20120801 for 0000:01:00.0 on minor 0
-fbcon: nouveaudrmfb (fb0) is primary device
-Console: switching to colour frame buffer device 210x65
-nouveau 0000:01:00.0: [drm] fb0: nouveaudrmfb frame buffer device
+Owen, Kai-Heng thank you for testing. I've submitted these patches
+to Rafael (the ACPI maintainer) now (with you on the Cc).
+Hopefully they will get merged soon.
 
--- 
-Regards/Gruss,
-    Boris.
+Regards,
 
-https://people.kernel.org/tglx/notes-about-netiquette
+Hans
+
