@@ -2,93 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74F477E9C7E
-	for <lists+nouveau@lfdr.de>; Mon, 13 Nov 2023 13:57:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C8907EA1B2
+	for <lists+nouveau@lfdr.de>; Mon, 13 Nov 2023 18:10:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A5EF310E36F;
-	Mon, 13 Nov 2023 12:57:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AF97D10E16F;
+	Mon, 13 Nov 2023 17:10:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ADFF510E36F
- for <nouveau@lists.freedesktop.org>; Mon, 13 Nov 2023 12:57:25 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0162D10E16F
+ for <nouveau@lists.freedesktop.org>; Mon, 13 Nov 2023 17:10:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1699880244;
+ s=mimecast20190719; t=1699895412;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=99HQPaexgy0VlHo7G+FMrZBwsYGZqGO7/PNoylZTCAo=;
- b=GgnCfXgkwjUJWoureE5sOUdMqq6HrAWc612/PtOja0hdSx5vDsWhIZ9Fz6P3Xa/80cE/37
- iX01TGT1qxo3vI3pt2Q9tYxl1VwfL8qz2PXPbIbmhrs+1PgkRZoKtUha45+4+bfVDJ3prz
- HofECLGYcsuLdsUNivZvDbTE0LZ7TPo=
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=G65WustLE2dEQVp8ysLE58NJMc/t5tEbPzYhJeMqn9s=;
+ b=BM/zZdltFX665drRbvAQcli70L7aEfT9Vc+ZcQDPG7p1zN3y7Yqt/n+u5EqJX6T+m3J+SN
+ eY0G9O4hhqIGn/YnWmmvEkAFCySAwC4RHxZijRybxvsgPh9SM2wdG5WB65QC5FLkl1o3Us
+ YPqP5Vc84euMUn6N74Fz5y6IP4II5Jg=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-610-qqso0nttNwSgy9WX4fLMcQ-1; Mon, 13 Nov 2023 07:57:23 -0500
-X-MC-Unique: qqso0nttNwSgy9WX4fLMcQ-1
-Received: by mail-ej1-f69.google.com with SMTP id
- a640c23a62f3a-9c797b497e8so287823666b.0
- for <nouveau@lists.freedesktop.org>; Mon, 13 Nov 2023 04:57:23 -0800 (PST)
+ us-mta-437-WnNwdjoLO5S0P6cAHmZnVA-1; Mon, 13 Nov 2023 12:10:10 -0500
+X-MC-Unique: WnNwdjoLO5S0P6cAHmZnVA-1
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2c51a7df557so37034491fa.0
+ for <nouveau@lists.freedesktop.org>; Mon, 13 Nov 2023 09:10:10 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699880242; x=1700485042;
+ d=1e100.net; s=20230601; t=1699895409; x=1700500209;
  h=content-transfer-encoding:in-reply-to:organization:from:references
  :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=99HQPaexgy0VlHo7G+FMrZBwsYGZqGO7/PNoylZTCAo=;
- b=iC7GzcbN5eD6vw/5bWD6Pz7dPKLWuWdH5Tg/fbbtK8zv3lElUJPwgDUwPlis5vIDtz
- PjPmTNfnnTyFeDhJ05y7qdwzUqKn3iPqPtWk18Tp/IdHjqmdehngl1/fhlF5V0fkXQmh
- dDn9oYoJy13ko/aRRmHfmUAWWWD3exMaCx3aJ/AxLiuold0n5LPgXcnFzI/ztepkzWls
- kHMILe6wQ4ItrcG+2SOJ3mlB1V1DBw8Idkkg/l3ZSL2UW8dFlBGPA53qObrE3vk/b2GF
- a0tG2jfmu2W5fqqVBbG6FZfHxYJ2mainqaMH1TG5LlVyxYFx3PszDgbrr/Z8DLRQHPL0
- 1uzA==
-X-Gm-Message-State: AOJu0YxsxOYe27r012z6tV/0RBUUSuqZAnwysLXgTwPl5xY8kq7n35ae
- iXmCnt/Vv7ypN/QRcwS+VFgqHa9Lp9aCyImMKZdNoZVJu8C8j//HONaFyVR2mFEIrfzYY+ixYrb
- nHAsJrGbNk1JWplazNUzQXe9zlw==
-X-Received: by 2002:a17:906:340c:b0:9d8:27e2:4c12 with SMTP id
- c12-20020a170906340c00b009d827e24c12mr4300051ejb.63.1699880242346; 
- Mon, 13 Nov 2023 04:57:22 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHhqSC5pNXAAfTn2Ku8ibOoV0faQFodi6FP8YDestjtCGX+ELhgazhdKJkF80CqKfD4FjEM0g==
-X-Received: by 2002:a17:906:340c:b0:9d8:27e2:4c12 with SMTP id
- c12-20020a170906340c00b009d827e24c12mr4300043ejb.63.1699880241912; 
- Mon, 13 Nov 2023 04:57:21 -0800 (PST)
+ bh=G65WustLE2dEQVp8ysLE58NJMc/t5tEbPzYhJeMqn9s=;
+ b=olwl/GvvESDlltVNHyMoudV3qczyJvFRIH9iLSoWvonvAlD/a2mzDnVagIARpoOpVG
+ 1QWAh1OLguXroxrBomx+BBAmse7epNfQLx5kUUXv6aZ6q9d+F4r/Lcddn7zJDs7x/QFV
+ m7IVed6EPIYr58BzOIHUklK15RkN8hdBFbaZ9gk7Z0ex17d97PlweBKMWpKXRYJksWJ2
+ EeTIPvGyfGuipX6+Crb8hu5gzb1zsqfBw3Rc/eendcOJD+c5LZz7tOl+iEUeB44TM4YF
+ Eq+3u6kR3YlCuRKzs9p4Xcuqwzz6YvbiJP6HN8XnVce1n86OoQzKsGqBWkXGLQ+7lywJ
+ ZRFw==
+X-Gm-Message-State: AOJu0YwEIqGpG+w/s2C8Za9IK5R4mhBqpvT35yhYHXgZtKauF1qbHHPr
+ G8rwAIN3OL8UmT4AgQfk9HCbwH3sOqIyt/odQAEB9T44BQ7IR2Rhs229mUcroocVUGLKIb/ds4J
+ otnqGkw1uz1rqL/oO5cDJ2Cyp0A==
+X-Received: by 2002:a05:6512:4014:b0:500:7a21:3e78 with SMTP id
+ br20-20020a056512401400b005007a213e78mr6100261lfb.55.1699895409173; 
+ Mon, 13 Nov 2023 09:10:09 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH/xPxDvcc33kOc3ZeaYYvr9EKONgzFQPtiIPoNDj3O2aUw5WCUYtxdrDIZshZQrDyJOu4hpw==
+X-Received: by 2002:a05:6512:4014:b0:500:7a21:3e78 with SMTP id
+ br20-20020a056512401400b005007a213e78mr6100236lfb.55.1699895408838; 
+ Mon, 13 Nov 2023 09:10:08 -0800 (PST)
 Received: from ?IPV6:2a02:810d:4b3f:de9c:abf:b8ff:feee:998b?
  ([2a02:810d:4b3f:de9c:abf:b8ff:feee:998b])
  by smtp.gmail.com with ESMTPSA id
- s10-20020a1709066c8a00b009dbe08bc793sm4108212ejr.18.2023.11.13.04.57.20
+ b1-20020a0565120b8100b004fdde1db756sm1029983lfv.26.2023.11.13.09.10.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Nov 2023 04:57:21 -0800 (PST)
-Message-ID: <45ba5373-6454-4687-b21c-46748a3a6e5d@redhat.com>
-Date: Mon, 13 Nov 2023 13:57:20 +0100
+ Mon, 13 Nov 2023 09:10:08 -0800 (PST)
+Message-ID: <d33fc41b-5a1f-4186-a0b2-3c82dcb8f00b@redhat.com>
+Date: Mon, 13 Nov 2023 18:10:06 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>
-References: <20231101233113.8059-10-dakr@redhat.com>
- <be93d9ef-3d3e-4262-a280-d2922b983ca1@amd.com> <ZUTyGTxcH7WlHKsv@pollux>
- <a2e13a27-d2e5-4ae3-9c11-c18b425b69cc@amd.com>
- <b533af44-0404-49c9-9879-3414d0964acc@redhat.com>
- <51dea5f3-a18b-4797-b4fa-87da7db4624a@amd.com> <ZUjZFFtLM435tTxJ@pollux>
- <8e87d962-c80c-40d9-94d7-58b6cd9dd794@amd.com> <ZUj0DdYZUgjhcvf5@pollux>
- <6d3c48f6-a92d-49b3-b836-ee1bc95b56bf@amd.com> <ZUkXkJ+zT7OFGosC@pollux>
- <44bc28c7-05f4-4419-5183-453c4951aac0@linux.intel.com>
- <6c536c94-7072-403c-9c63-d932252fd66b@amd.com>
- <4532d9d5-4c5a-4639-8136-d3ba9995d7b6@redhat.com>
- <1d4ca394-ee0c-4617-adbe-1d47e295c8fb@amd.com>
- <987ac707-8f9b-4e33-86c3-decdc1c48a3a@redhat.com>
- <71a50cac-3253-480f-adff-da475738ae6b@amd.com>
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Abhinav Singh <singhabhinav9051571833@gmail.com>, kherbst@redhat.com,
+ lyude@redhat.com, airlied@gmail.com, daniel@ffwll.ch
+References: <20231113081040.2947143-1-singhabhinav9051571833@gmail.com>
+ <f229d1ed-b71e-434a-acca-06ee81826260@linux.intel.com>
 From: Danilo Krummrich <dakr@redhat.com>
 Organization: RedHat
-In-Reply-To: <71a50cac-3253-480f-adff-da475738ae6b@amd.com>
+In-Reply-To: <f229d1ed-b71e-434a-acca-06ee81826260@linux.intel.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH drm-misc-next v8 09/12] drm/gpuvm: reference
- count drm_gpuvm structures
+Subject: Re: [Nouveau] [PATCH] driver: gpu: Fixing warning directly
+ dereferencing a rcu pointer
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,38 +90,73 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: matthew.brost@intel.com, sarah.walker@imgtec.com,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, faith@gfxstrand.net,
- boris.brezillon@collabora.com, donald.robson@imgtec.com, daniel@ffwll.ch
+Cc: nouveau@lists.freedesktop.org,
+ linux-kernel-mentees@lists.linuxfoundation.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 11/13/23 08:22, Christian König wrote:
-> Am 10.11.23 um 17:57 schrieb Danilo Krummrich:
->> On 11/10/23 09:50, Christian König wrote:
->>> [SNIP]
->>>>>
->>>>>>
->>>>>> Another issue Christian brought up is that something intended to be embeddable (a base class) shouldn't really have its own refcount. I think that's a valid point. If you at some point need to derive from multiple such structs each having its own refcount, things will start to get weird. One way to resolve that would be to have the driver's subclass provide get() and put() ops, and export a destructor for the base-class, rather than to have the base-class provide the refcount and a destructor  ops.
->>>>
->>>> GPUVM simply follows the same pattern we have with drm_gem_objects. And I think it makes
->>>> sense. Why would we want to embed two struct drm_gpuvm in a single driver structure?
->>>
->>> Because you need one drm_gpuvm structure for each application using the driver? Or am I missing something?
+On 11/13/23 09:24, Maarten Lankhorst wrote:
+> Hey,
+> 
+> Den 2023-11-13 kl. 09:10, skrev Abhinav Singh:
+>> This patch fixes a sparse warning with this message
+>> "warning:dereference of noderef expression". In this context it means we
+>> are dereferencing a __rcu tagged pointer directly.
 >>
->> Right, *one*, but not more than one. Wasn't that the concern? Maybe I misunderstood something. :)
+>> We should not be directly dereferencing a rcu pointer, rather we should
+>> be using rcu helper function rcu_dereferece() inside rcu read critical
+>> section to get a normal pointer which can be dereferenced.
+>>
+>> I tested with qemu with this command
+>> qemu-system-x86_64 \
+>>     -m 2G \
+>>     -smp 2 \
+>>     -kernel bzImage \
+>>     -append "console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0" \
+>>     -drive file=bullseye.img,format=raw \
+>>     -net user,host=10.0.2.10,hostfwd=tcp:127.0.0.1:10021-:22 \
+>>     -net nic,model=e1000 \
+>>     -enable-kvm \
+>>     -nographic \
+>>     -pidfile vm.pid \
+>>     2>&1 | tee vm.log
+>> with lockdep enabled.
+>>
+>> Signed-off-by: Abhinav Singh <singhabhinav9051571833@gmail.com>
+>> ---
+>>   drivers/gpu/drm/nouveau/nv04_fence.c | 4 +++-
+>>   1 file changed, 3 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/gpu/drm/nouveau/nv04_fence.c b/drivers/gpu/drm/nouveau/nv04_fence.c
+>> index 5b71a5a5cd85..e62bad1ac720 100644
+>> --- a/drivers/gpu/drm/nouveau/nv04_fence.c
+>> +++ b/drivers/gpu/drm/nouveau/nv04_fence.c
+>> @@ -39,7 +39,9 @@ struct nv04_fence_priv {
+>>   static int
+>>   nv04_fence_emit(struct nouveau_fence *fence)
+>>   {
+>> -    struct nvif_push *push = fence->channel->chan.push;
+>> +    rcu_read_lock();
+>> +    struct nvif_push *push = rcu_dereference(fence->channel)->chan.push;
+>> +    rcu_read_unlock();
+>>       int ret = PUSH_WAIT(push, 2);
+>>       if (ret == 0) {
+>>           PUSH_NVSQ(push, NV_SW, 0x0150, fence->base.seqno);
 > 
-> Well, there is the use case of native context with XEN/KVM. In that situation QEMU opens tons of driver file descriptors on behalves of the virtual environment clients.
-> 
-> In this use case you have many drm_gpuvm instances for a single application. So you can't assume that you only have one VM per PID/TGID or something like that.
+> I'm not an expert in nouveau fence channel lifetime, but I'm pretty sure this should probably be a rcu_dereference_protected, since a fence likely can't lose its channel before its command to signal is submitted.
 
-Well, that's fine. I think Xe can have multiple VMs per PID as well. In this case you'd keep creating driver VM structures with a single GPUVM as base class. But not multiple GPUVMs serving as base class for a single driver structure, which I thought was the concern here. For the latter I can't see a use case.
+Yes, before nouveau_fence_emit() did not add this fence to the fence context's
+pending list ->channel doesn't need any protection. We can probably just use
+unrcu_pointer(), as in [1].
+
+[1] https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/nouveau/nouveau_fence.c#L210
 
 > 
-> AMD already made that mistake with KFD and I strongly suggest not to repeat it :)
+> But in case it's not, I would at least advise to check for fence->channel lifetime before submitting a patch like this. At least the original code warned about it not being 100% correct.
 > 
-> Regards,
-> Christian.
+> Cheers,
+> 
+> ~Maarten
 > 
 
