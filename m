@@ -2,61 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F4A482EE4F
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:49:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 01A3982EE24
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:47:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7FFDD10E4F7;
-	Tue, 16 Jan 2024 11:47:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 28D6510E49F;
+	Tue, 16 Jan 2024 11:47:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AE5C410E095;
- Mon, 13 Nov 2023 08:10:54 +0000 (UTC)
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-6bb744262caso923209b3a.0; 
- Mon, 13 Nov 2023 00:10:54 -0800 (PST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C220410E180;
+ Mon, 13 Nov 2023 18:37:51 +0000 (UTC)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-58962bf3f89so316435a12.0; 
+ Mon, 13 Nov 2023 10:37:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699863054; x=1700467854; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DDB5Cfhe2/Np2buAc13fG3d5R3/QsQEtB/l9Kg+8Kto=;
- b=Y6PfZNBJD4B2OXycrfGw3r85t1he9qXrsOlE2Y0mihHeQqBZS9hL2nCuTu+sD0gPIo
- CsDEGNnKcXY9KzZwfVfiVxmdcsjJQmb0VuHx+vf5AVFZydfiUO7RjG3VZGNhfacFPaN1
- ch6QBta8ss6YlvxgiuZ9mvpPGVo2Xd/Ggmq+O8zuy15AIhE2j8XBkoBxwDAA7PIbbo6O
- NY91VJ3PCM1dRgBaj2uv7mrtuRIdJCi+w6w6qOw0AJnAjbg/RmhLrcL766C3WfErVL3v
- M2RtXwmy9F91VyQtyo6gV8Qfbxqhc46u4EeFBPc4y2Tr1DlZQ8TZ4eputPia+RNhfDqx
- bxUg==
+ d=gmail.com; s=20230601; t=1699900671; x=1700505471; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2mtmd09hFYXnVdRkrFU6g3p7HtLLyzcUAB+w/A7AON4=;
+ b=JPyMzLS9x0pfWQ+xi9ExoQq2clcrrCTSjScaTfbNHQeucb+Bv1IW5vTgDWnL7WCRwK
+ ASchlPSTXq0OIEQthdFl77WKBtUE+u/cNZLfoNAvx/A3doVWjHqi33iRyMbZXsSKiCo2
+ 4O3qUjtYEQyT9K8ViQRrM3y16PaUVnHvjZKvsyhq7Xap3NY/ghpHw0mlxZkM0pEe57sE
+ NlIOoBazAMmSQA1sDx1PFgJL2k7CTOLqZhixbmXWBv+3IUQBQad/3jr5mLtWxOc2dP6M
+ fh7HU8m2mPcgjCRtN2ZAinSvElOfYqesb/8O0JdMVqgG4h+jcKu+63cixy/RxWqeh0Ll
+ 9CYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699863054; x=1700467854;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DDB5Cfhe2/Np2buAc13fG3d5R3/QsQEtB/l9Kg+8Kto=;
- b=cxEjITcMWUTeBLmGUbk/RSxW8lGbg58STYtwuR8a+vc8iC6TxMObsNrKKih3wXLXky
- HLYsVjZ+KA1LCyjJHaZeAXhILqR2/4Fd7ZxVIDHTi7+Q+1FDBvz3yf12a7kgH/slTeXX
- Q40d1AThtMLXoRnix+Vek02tj1CSFTpIont9ckGStsYkZ+jZJBhu0ARaa6Jm/1VLGzXz
- nA0hRonnKOogUytMKJ8QCBm2nxVMz7DXHegbL9vGH77OMXkNqC2m6pXgVwkb00MUDOMz
- gLYOM9BEgWrPFlRg5kDVXGL5/bE2rVnVUybNiedOfyqnwLM6IDnaK7byQidJ1I3cfx5X
- K+Rw==
-X-Gm-Message-State: AOJu0YwbZ4VwvVwqamll/TmeoHPGZ02JEEkdzQdCRtVeMJsVE6PuOJ5+
- rEtBGEmf5Gwva5+D2ukXmDZake50o+S4TA==
-X-Google-Smtp-Source: AGHT+IErgwyh6IU6A+XEPWZwt7rqHwWnNiCEmJoA9K52qeb/PCG71hHkTbQiGJ2i3IckahwFnygwlw==
-X-Received: by 2002:a05:6a21:9995:b0:186:10ae:152a with SMTP id
- ve21-20020a056a21999500b0018610ae152amr7949073pzb.4.1699863054195; 
- Mon, 13 Nov 2023 00:10:54 -0800 (PST)
-Received: from abhinav.. ([103.75.161.210]) by smtp.gmail.com with ESMTPSA id
- 22-20020a17090a01d600b0027d0a60b9c9sm5793629pjd.28.2023.11.13.00.10.49
+ d=1e100.net; s=20230601; t=1699900671; x=1700505471;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2mtmd09hFYXnVdRkrFU6g3p7HtLLyzcUAB+w/A7AON4=;
+ b=FtwRp2FJ4Sk9IpcTwi7IGpirhy06OYwE9WpBs1fuf8aM2ozJwoKnqm+7M/QnHUI1RG
+ 7tslnbsCEXThSECXaP3M87alzVlrwGjKl/Liyp4ePmddpqKfnZwNLq4GgrrrKQpCCgF1
+ 93Y/kAz/yUB1913QOz4pUYRkPDVoQRvgHUq8ysh1hXbn68TdLPWvsCOtXEXZmcK7gtb8
+ GHPu0bWP4o3UntQBLye0GH1/ry9FuEeYLNz3eJAk6SRDzF2Tu1gRV1rkJc+7CayqIqzQ
+ baF8ObmsIbzCmi3LMyfpo+Js5CZ9SDkST696vVkX63pAtPwpwl+ISIlOtXPwqw/ZOALF
+ D7PA==
+X-Gm-Message-State: AOJu0YxZxoNW4eGPjpwWoGl0R+X6GuNjaLRACuh6yxkvALJLuiEPlFaI
+ 9kLCa13L8xAt7sE7CO6QmUY=
+X-Google-Smtp-Source: AGHT+IF8WqLZR69KCm/civDjgFUbwk1ZPnhnTXEboXMHqRlLQMHKjR9oiG6PqIPphLBYkQjDkLbheg==
+X-Received: by 2002:a05:6a21:9981:b0:17a:d292:25d1 with SMTP id
+ ve1-20020a056a21998100b0017ad29225d1mr93125pzb.6.1699900671212; 
+ Mon, 13 Nov 2023 10:37:51 -0800 (PST)
+Received: from abhinav.. ([103.75.161.208]) by smtp.gmail.com with ESMTPSA id
+ e13-20020a056a001a8d00b006b8ffc49ba5sm4058507pfv.38.2023.11.13.10.37.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Nov 2023 00:10:53 -0800 (PST)
+ Mon, 13 Nov 2023 10:37:50 -0800 (PST)
 From: Abhinav Singh <singhabhinav9051571833@gmail.com>
 To: kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com, airlied@gmail.com,
  daniel@ffwll.ch
-Subject: [PATCH] driver: gpu: Fixing warning directly dereferencing a rcu
- pointer
-Date: Mon, 13 Nov 2023 13:40:40 +0530
-Message-Id: <20231113081040.2947143-1-singhabhinav9051571833@gmail.com>
+Subject: [PATCH v2] drivers: gpu: Fixing warning directly dereferencing a rcu
+ pointer v2
+Date: Tue, 14 Nov 2023 00:07:37 +0530
+Message-Id: <20231113183737.3276419-1-singhabhinav9051571833@gmail.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <d33fc41b-5a1f-4186-a0b2-3c82dcb8f00b@redhat.com>
+References: <d33fc41b-5a1f-4186-a0b2-3c82dcb8f00b@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 16 Jan 2024 11:47:29 +0000
@@ -103,21 +106,22 @@ with lockdep enabled.
 
 Signed-off-by: Abhinav Singh <singhabhinav9051571833@gmail.com>
 ---
- drivers/gpu/drm/nouveau/nv04_fence.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+v1 -> v2 : Replaced the rcu_dereference(...) with unrcu_pointer(...) and
+also removed the rcu locking and unlocking function call.
+
+ drivers/gpu/drm/nouveau/nv04_fence.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nv04_fence.c b/drivers/gpu/drm/nouveau/nv04_fence.c
-index 5b71a5a5cd85..e62bad1ac720 100644
+index 5b71a5a5cd85..cdbc75e3d1f6 100644
 --- a/drivers/gpu/drm/nouveau/nv04_fence.c
 +++ b/drivers/gpu/drm/nouveau/nv04_fence.c
-@@ -39,7 +39,9 @@ struct nv04_fence_priv {
+@@ -39,7 +39,7 @@ struct nv04_fence_priv {
  static int
  nv04_fence_emit(struct nouveau_fence *fence)
  {
 -	struct nvif_push *push = fence->channel->chan.push;
-+	rcu_read_lock();
-+	struct nvif_push *push = rcu_dereference(fence->channel)->chan.push;
-+	rcu_read_unlock();
++	struct nvif_push *push = unrcu_pointer(fence->channel)->chan.push;
  	int ret = PUSH_WAIT(push, 2);
  	if (ret == 0) {
  		PUSH_NVSQ(push, NV_SW, 0x0150, fence->base.seqno);
