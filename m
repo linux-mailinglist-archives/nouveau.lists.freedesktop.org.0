@@ -2,54 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF21682EE49
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:49:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F4A482EE4F
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:49:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1EB0110E4EE;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7FFDD10E4F7;
 	Tue, 16 Jan 2024 11:47:38 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 46993 seconds by postgrey-1.36 at gabe;
- Fri, 10 Nov 2023 16:58:29 UTC
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5E41310E125;
- Fri, 10 Nov 2023 16:58:29 +0000 (UTC)
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4SRlQ95myqz9spj;
- Fri, 10 Nov 2023 17:58:25 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=owenh.net; s=MBO0001; 
- t=1699635505;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Xv0RmDooG3JgDJHA2SqaAIpBFKQ0UuIqzPA46XswMys=;
- b=0NFLEqpKQmJbLf7s0Gu6qlXSi//AhUQ95naoWkj4WMZu2Fq78Lrb32fYcpQCffzlf8RA0O
- Hc8Zj/uR3VEYWUO52IUz6PEZxdwn7pKAlS4oyVSQODoUo+0e40cwxCe5wXcLS6cFFbZxZP
- sRsYUfYj8b4g01I8bgO9sO+4pzx3+6W6oCBqwW7AaorjYgDhFRntPTKvKhvPvKveLBAMEf
- 3qEHo/6UMMtETriDJfJfR1488Y2IGRoZGmpc9fviXWw5XaxCxjZLB/EtvYXGw9/X59bO29
- op1UQfJ+OV+1sNIKwHRbI5a/Y1UFO6bcyJbXhAcCgdpDAnZk1WUtjFLz0/CCeA==
-Message-ID: <d1ac9c1e-f3fe-4d06-ba2e-2c049841d19b@owenh.net>
-Date: Fri, 10 Nov 2023 10:58:07 -0600
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AE5C410E095;
+ Mon, 13 Nov 2023 08:10:54 +0000 (UTC)
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-6bb744262caso923209b3a.0; 
+ Mon, 13 Nov 2023 00:10:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699863054; x=1700467854; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DDB5Cfhe2/Np2buAc13fG3d5R3/QsQEtB/l9Kg+8Kto=;
+ b=Y6PfZNBJD4B2OXycrfGw3r85t1he9qXrsOlE2Y0mihHeQqBZS9hL2nCuTu+sD0gPIo
+ CsDEGNnKcXY9KzZwfVfiVxmdcsjJQmb0VuHx+vf5AVFZydfiUO7RjG3VZGNhfacFPaN1
+ ch6QBta8ss6YlvxgiuZ9mvpPGVo2Xd/Ggmq+O8zuy15AIhE2j8XBkoBxwDAA7PIbbo6O
+ NY91VJ3PCM1dRgBaj2uv7mrtuRIdJCi+w6w6qOw0AJnAjbg/RmhLrcL766C3WfErVL3v
+ M2RtXwmy9F91VyQtyo6gV8Qfbxqhc46u4EeFBPc4y2Tr1DlZQ8TZ4eputPia+RNhfDqx
+ bxUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699863054; x=1700467854;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DDB5Cfhe2/Np2buAc13fG3d5R3/QsQEtB/l9Kg+8Kto=;
+ b=cxEjITcMWUTeBLmGUbk/RSxW8lGbg58STYtwuR8a+vc8iC6TxMObsNrKKih3wXLXky
+ HLYsVjZ+KA1LCyjJHaZeAXhILqR2/4Fd7ZxVIDHTi7+Q+1FDBvz3yf12a7kgH/slTeXX
+ Q40d1AThtMLXoRnix+Vek02tj1CSFTpIont9ckGStsYkZ+jZJBhu0ARaa6Jm/1VLGzXz
+ nA0hRonnKOogUytMKJ8QCBm2nxVMz7DXHegbL9vGH77OMXkNqC2m6pXgVwkb00MUDOMz
+ gLYOM9BEgWrPFlRg5kDVXGL5/bE2rVnVUybNiedOfyqnwLM6IDnaK7byQidJ1I3cfx5X
+ K+Rw==
+X-Gm-Message-State: AOJu0YwbZ4VwvVwqamll/TmeoHPGZ02JEEkdzQdCRtVeMJsVE6PuOJ5+
+ rEtBGEmf5Gwva5+D2ukXmDZake50o+S4TA==
+X-Google-Smtp-Source: AGHT+IErgwyh6IU6A+XEPWZwt7rqHwWnNiCEmJoA9K52qeb/PCG71hHkTbQiGJ2i3IckahwFnygwlw==
+X-Received: by 2002:a05:6a21:9995:b0:186:10ae:152a with SMTP id
+ ve21-20020a056a21999500b0018610ae152amr7949073pzb.4.1699863054195; 
+ Mon, 13 Nov 2023 00:10:54 -0800 (PST)
+Received: from abhinav.. ([103.75.161.210]) by smtp.gmail.com with ESMTPSA id
+ 22-20020a17090a01d600b0027d0a60b9c9sm5793629pjd.28.2023.11.13.00.10.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Nov 2023 00:10:53 -0800 (PST)
+From: Abhinav Singh <singhabhinav9051571833@gmail.com>
+To: kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com, airlied@gmail.com,
+ daniel@ffwll.ch
+Subject: [PATCH] driver: gpu: Fixing warning directly dereferencing a rcu
+ pointer
+Date: Mon, 13 Nov 2023 13:40:40 +0530
+Message-Id: <20231113081040.2947143-1-singhabhinav9051571833@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-From: "Owen T. Heisler" <writer@owenh.net>
-Subject: Re: [REGRESSION]: acpi/nouveau: Hardware unavailable upon resume or
- suspend fails
-To: Kai-Heng Feng <kai.heng.feng@canonical.com>,
- Hans de Goede <hdegoede@redhat.com>
-References: <9f36fb06-64c4-4264-aaeb-4e1289e764c4@owenh.net>
- <CAAd53p7BSesx=a1igTohoSkxrW+Hq8O7ArONFCK7uoDi12-T4A@mail.gmail.com>
- <a592ce0c-64f0-477d-80fa-8f5a52ba29ea@redhat.com>
- <CAAd53p608qmC3pvz=F+y2UZ9O39f2aq-pE-1_He1j8PGQmM=tg@mail.gmail.com>
-Content-Language: en-US
-In-Reply-To: <CAAd53p608qmC3pvz=F+y2UZ9O39f2aq-pE-1_He1j8PGQmM=tg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4SRlQ95myqz9spj
 X-Mailman-Approved-At: Tue, 16 Jan 2024 11:47:29 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -62,78 +71,56 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: regressions@lists.linux.dev, nouveau@lists.freedesktop.org,
- "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>, stable@vger.kernel.org,
- linux-acpi@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Len Brown <lenb@kernel.org>
+Cc: nouveau@lists.freedesktop.org,
+ linux-kernel-mentees@lists.linuxfoundation.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org,
+ Abhinav Singh <singhabhinav9051571833@gmail.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi everyone,
+This patch fixes a sparse warning with this message 
+"warning:dereference of noderef expression". In this context it means we
+are dereferencing a __rcu tagged pointer directly.
 
-On 11/10/23 06:52, Kai-Heng Feng wrote:
-> On Fri, Nov 10, 2023 at 2:19 PM Hans de Goede <hdegoede@redhat.com> wrote:
->> On 11/10/23 07:09, Kai-Heng Feng wrote:
->>> On Fri, Nov 10, 2023 at 5:55 AM Owen T. Heisler <writer@owenh.net> wrote:
->>>> #regzbot introduced: 89c290ea758911e660878e26270e084d862c03b0
->>>> #regzbot link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/273
->>>> #regzbot link: https://bugzilla.kernel.org/show_bug.cgi?id=218124
->>>
->>> Thanks for the bug report. Do you prefer to continue the discussion
->>> here, on gitlab or on bugzilla?
+We should not be directly dereferencing a rcu pointer, rather we should
+be using rcu helper function rcu_dereferece() inside rcu read critical
+section to get a normal pointer which can be dereferenced.
 
-Kai-Heng, you're welcome and thank you too. By email is fine with me.
+I tested with qemu with this command 
+qemu-system-x86_64 \
+	-m 2G \
+	-smp 2 \
+	-kernel bzImage \
+	-append "console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0" \
+	-drive file=bullseye.img,format=raw \
+	-net user,host=10.0.2.10,hostfwd=tcp:127.0.0.1:10021-:22 \
+	-net nic,model=e1000 \
+	-enable-kvm \
+	-nographic \
+	-pidfile vm.pid \
+	2>&1 | tee vm.log
+with lockdep enabled.
 
->> Owen, as Kai-Heng said thank you for reporting this.
+Signed-off-by: Abhinav Singh <singhabhinav9051571833@gmail.com>
+---
+ drivers/gpu/drm/nouveau/nv04_fence.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Hans, you're welcome, and thanks for your help too.
+diff --git a/drivers/gpu/drm/nouveau/nv04_fence.c b/drivers/gpu/drm/nouveau/nv04_fence.c
+index 5b71a5a5cd85..e62bad1ac720 100644
+--- a/drivers/gpu/drm/nouveau/nv04_fence.c
++++ b/drivers/gpu/drm/nouveau/nv04_fence.c
+@@ -39,7 +39,9 @@ struct nv04_fence_priv {
+ static int
+ nv04_fence_emit(struct nouveau_fence *fence)
+ {
+-	struct nvif_push *push = fence->channel->chan.push;
++	rcu_read_lock();
++	struct nvif_push *push = rcu_dereference(fence->channel)->chan.push;
++	rcu_read_unlock();
+ 	int ret = PUSH_WAIT(push, 2);
+ 	if (ret == 0) {
+ 		PUSH_NVSQ(push, NV_SW, 0x0150, fence->base.seqno);
+-- 
+2.39.2
 
->>>> ## Reproducing
->>>>
->>>> 1. Boot system to framebuffer console.
->>>> 2. Run `systemctl suspend`. If undocked without secondary display,
->>>> suspend fails. If docked with secondary display, suspend succeeds.
->>>> 3. Resume from suspend if applicable.
->>>> 4. System is now in a broken state.
->>>
->>> So I guess we need to put those devices to ACPI D3 for suspend. Let's
->>> discuss this on your preferred platform.
->>
->> Ok, so I was already sort of afraid we might see something like this
->> happening because of:
->>
->> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=89c290ea758911e660878e26270e084d862c03b0
->>
->> As I mentioned during the review of that, it might be better to
->> not touch the video-card ACPI power-state at all and instead
->> only do acpi_device_fix_up_power() on the child devices.
-> 
-> Or the child devices need to be put to D3 during suspend.
-> 
->> Owen, attached are 2 patches which implement only
->> calling acpi_device_fix_up_power() on the child devices,
->> can you build a v6.6 kernel with these 2 patches added
->> on top please and see if that fixes things ?
-
-Yes, with those patches v6.6 suspend works normally. That's great, thanks!
-
-I tested with v6.6 with the 2 patches at 
-<https://lore.kernel.org/regressions/a592ce0c-64f0-477d-80fa-8f5a52ba29ea@redhat.com/> 
-using 
-<https://gitlab.freedesktop.org/drm/nouveau/uploads/788d7faf22ba2884dcc09d7be931e813/v6.6-config1>. 
-I tested both docked and un-docked, just in case.
-
-Tested-by: Owen T. Heisler <writer@owenh.net>
-
->> Kai-Heng can you test that the issue on the HP ZBook Fury 16 G10
->> is still resolved after applying these patches ?
-> 
-> Yes. Thanks for the patch.
-> 
-> If this patch also fixes Owen's issue, then
-> Tested-by: Kai-Heng Feng <kai.heng.feng@canonical.com
-
-Please let me know if anything else is needed from me.
-
-Many thanks,
-Owen
