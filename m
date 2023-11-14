@@ -1,78 +1,81 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA8187EA77F
-	for <lists+nouveau@lfdr.de>; Tue, 14 Nov 2023 01:27:51 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A0FEE7EB4B3
+	for <lists+nouveau@lfdr.de>; Tue, 14 Nov 2023 17:24:09 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6E85D10E41B;
-	Tue, 14 Nov 2023 00:27:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 287F710E461;
+	Tue, 14 Nov 2023 16:24:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8C02510E433
- for <nouveau@lists.freedesktop.org>; Tue, 14 Nov 2023 00:27:45 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8B6EF10E46F
+ for <nouveau@lists.freedesktop.org>; Tue, 14 Nov 2023 16:24:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1699921664;
+ s=mimecast20190719; t=1699979045;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=b5J4fqodbbCYSL/h4xMoPpkN5Vptab7PnzhqWcgRnbA=;
- b=ITSdgsq4t7Yuma6CFYc3ClKVgPgKLqcdoxZfOtSdDoXSBrKVCmCmQLknAsSbiywUC+19A4
- 6dC73ykhdcFpzCQlC8tSlylnmM8rSMJXrPSPhwfxkhYDnROLBWSIp1h2iJIoAiEV4pd8OQ
- hqQgZ6mT0jwBj+SW/oQo05wGaYQLBuc=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=OMAt2bbB2OtDJnSmDdv+SlogJ2MSXP9BdKgitEjjES4=;
+ b=MOBhll3t70mujD+V3M6p6KdQro+7Ycw5hYiOhhdGMsMshPkfC6L9yWklMZQmJPu0Ty2gG/
+ k/6I+s2QNBHbFnEoS38oTelU9LexWA+chTe1ANEES6HFbJpLTD6Ck0lH3TWD4cr2YEYskD
+ J2zNsc8t9ymHmBqsOwYwWb3ElnC8Wnc=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-641-2qjCA4ErMhmyDbLmq9VvLQ-1; Mon, 13 Nov 2023 19:27:38 -0500
-X-MC-Unique: 2qjCA4ErMhmyDbLmq9VvLQ-1
-Received: by mail-ej1-f71.google.com with SMTP id
- a640c23a62f3a-9e649334131so206338766b.2
- for <nouveau@lists.freedesktop.org>; Mon, 13 Nov 2023 16:27:37 -0800 (PST)
+ us-mta-103-0G8J3smyOXe9H2ZtgGdDWw-1; Tue, 14 Nov 2023 11:24:04 -0500
+X-MC-Unique: 0G8J3smyOXe9H2ZtgGdDWw-1
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-66fbd3bc8ebso73792886d6.1
+ for <nouveau@lists.freedesktop.org>; Tue, 14 Nov 2023 08:24:04 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699921656; x=1700526456;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=b5J4fqodbbCYSL/h4xMoPpkN5Vptab7PnzhqWcgRnbA=;
- b=wPxhCnWS3aWWOOKeoP1ugFByl+tcvEDjDCnv/4A1kukupuTtd4bX47Uthzz5FeCMEW
- uOekICUex/J93tcGfi+37RH3T5OszXtWmvKHh94nBIS7RHM3PlpD9s8LrUHS6OCEarJ7
- lyudJUDHgEH63ifE5sWiW2lEMkY9p/aOSapG5Inv601SI76rJu9QVm43LbojlDI1LeRf
- v3PARA8wZ6MUMkREv2gJzOcVDmnAlAK6zcfrM+9Kq4oX6s9PYIpVgfz32FfQWUJHUrcF
- RmnpiC1ofysgC7G0FUOfVy9I1n5jy3QeX9bMdoUYxzbLsvsnZrC7YLwdh2K53Qe9sZnc
- c9Tw==
-X-Gm-Message-State: AOJu0YxTcNPxODpcnpg/kzIeWmxvlIi1PtpeT/yaThDiexGxbV39/Hq5
- OYsxLbMP/hS/u7QgaVCFFkMWejMqGGVD2bfWWIwN5SyJKwakQXJlra9ZRa+JrkTN+3Fj5ROf8YL
- rldk2PkuFBKq63pFyvq7t8DDagc+AV+0JejeRFX9G4WHIqjm+WcaOG89Ugsf4OcmTYWFhBlJIvq
- /TLUXe
-X-Received: by 2002:a17:906:d297:b0:9e6:b18c:15dd with SMTP id
- ay23-20020a170906d29700b009e6b18c15ddmr5781305ejb.13.1699921656047; 
- Mon, 13 Nov 2023 16:27:36 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF2vz3plUYhsrnU15w+dZzmrvHd/ehz5xDUmZBiywTDbKJ3n2MY8zG9ow9+gfZaeFU8vEqVAQ==
-X-Received: by 2002:a17:906:d297:b0:9e6:b18c:15dd with SMTP id
- ay23-20020a170906d29700b009e6b18c15ddmr5781290ejb.13.1699921655695; 
- Mon, 13 Nov 2023 16:27:35 -0800 (PST)
-Received: from cassiopeiae.. ([2a02:810d:4b3f:de9c:642:1aff:fe31:a19f])
+ d=1e100.net; s=20230601; t=1699979043; x=1700583843;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=OMAt2bbB2OtDJnSmDdv+SlogJ2MSXP9BdKgitEjjES4=;
+ b=wHtnEbPOiEvihQauHpU0JQZ22G/HEUV21g0wn1hquxY5YjmvDwOQpG7mFgu/h+O2uu
+ DcaIMmkX5pBrI61xf2QVUBeBt+vIh6Fy19MS+Co3u1w07hh5icwuShKrv0oimPg2tgMa
+ kydWRWlGsWUuP1CfgV+iYTsbPA3swgjdzlXxcgei2frSvpIpeB4nunGP4z9zhnLjqLoB
+ OM6vfV7o3ofJIVL1na3cZnq1a0FaPR/lZnHtZIWx++RkmEDPte9EdKBvVN1jLg/Zyo1k
+ 43A5gSHQZ7E6ohUTSK347FFlcvD0g0KqU7ArN6epYb891AKKuoGzVPXFB5YywJXSCcSo
+ q/NQ==
+X-Gm-Message-State: AOJu0YzPPjZGEWTkv7D9KgnxiD97a2/m451g1L1Tm3KlfXJlvi7lNZ5d
+ rX9BJGNvRFj0Q4vgsbxFS/c/umppJcW5ROYQ88YU/fZxgIMtMguYXc5rK2Obbg0sh/nLNaXW5rb
+ VmOdSd817Ne1Sy/0Evz3RcleucOG6D9ZDlQ==
+X-Received: by 2002:a05:6214:326:b0:66d:630a:79b9 with SMTP id
+ j6-20020a056214032600b0066d630a79b9mr2571510qvu.40.1699979043485; 
+ Tue, 14 Nov 2023 08:24:03 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHi30kHAx5KL8eGl/LlTeExArejiri6J6i2eS/UN/F1fLR88NH5AhNiHw7NXj2GlJ54m2/4ew==
+X-Received: by 2002:a05:6214:326:b0:66d:630a:79b9 with SMTP id
+ j6-20020a056214032600b0066d630a79b9mr2571490qvu.40.1699979043228; 
+ Tue, 14 Nov 2023 08:24:03 -0800 (PST)
+Received: from ?IPV6:2a02:810d:4b3f:de9c:abf:b8ff:feee:998b?
+ ([2a02:810d:4b3f:de9c:abf:b8ff:feee:998b])
  by smtp.gmail.com with ESMTPSA id
- ov22-20020a170906fc1600b0098951bb4dc3sm4696732ejb.184.2023.11.13.16.27.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Nov 2023 16:27:35 -0800 (PST)
-From: Danilo Krummrich <dakr@redhat.com>
-To: nouveau@lists.freedesktop.org
-Date: Tue, 14 Nov 2023 01:27:25 +0100
-Message-ID: <20231114002728.3491-2-dakr@redhat.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231114002728.3491-1-dakr@redhat.com>
-References: <20231114002728.3491-1-dakr@redhat.com>
+ ee11-20020a0562140a4b00b0066d0ab215b5sm3054571qvb.13.2023.11.14.08.24.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 Nov 2023 08:24:02 -0800 (PST)
+Message-ID: <6a1ebcef-bade-45a0-9bd9-c05f0226eb88@redhat.com>
+Date: Tue, 14 Nov 2023 17:23:59 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Yuran Pereira <yuran.pereira@hotmail.com>, airlied@gmail.com
+References: <DB3PR10MB6835FA6E15F3C830FC793D2EE8DDA@DB3PR10MB6835.EURPRD10.PROD.OUTLOOK.COM>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <DB3PR10MB6835FA6E15F3C830FC793D2EE8DDA@DB3PR10MB6835.EURPRD10.PROD.OUTLOOK.COM>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
-Subject: [Nouveau] [PATCH drm-misc-next 2/2] drm/nouveau: enable dynamic
- job-flow control
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Prevents NULL pointer
+ dereference in nouveau_uvmm_sm_prepare
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,150 +87,130 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, sumit.semwal@linaro.org,
+ linaro-mm-sig@lists.linaro.org, daniel@ffwll.ch,
+ linux-kernel-mentees@lists.linuxfoundation.org, christian.koenig@amd.com,
+ linux-media@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Make use of the scheduler's credit limit and scheduler job's credit
-count to account for the actual size of a job, such that we fill up the
-ring efficiently.
+Hi Yuran,
 
-Signed-off-by: Danilo Krummrich <dakr@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_abi16.c | 3 ++-
- drivers/gpu/drm/nouveau/nouveau_drm.c   | 2 +-
- drivers/gpu/drm/nouveau/nouveau_exec.c  | 4 +++-
- drivers/gpu/drm/nouveau/nouveau_sched.c | 9 ++++-----
- drivers/gpu/drm/nouveau/nouveau_sched.h | 3 ++-
- drivers/gpu/drm/nouveau/nouveau_uvmm.c  | 4 +++-
- 6 files changed, 15 insertions(+), 10 deletions(-)
+On 10/26/23 19:03, Yuran Pereira wrote:
+> There are instances where the "args" argument passed to
+> nouveau_uvmm_sm_prepare() is NULL.
+> 
+> I.e. when nouveau_uvmm_sm_prepare() is called from
+> nouveau_uvmm_sm_unmap_prepare()
+> 
+> ```
+> static int
+> nouveau_uvmm_sm_unmap_prepare(struct nouveau_uvmm *uvmm,
+> ...
+> {
+>      return nouveau_uvmm_sm_prepare(uvmm, new, ops, NULL);
+> }
+> ```
+> 
+> The problem is that op_map_prepare() which nouveau_uvmm_sm_prepare
+> calls, dereferences this value, which can lead to a NULL pointer
+> dereference.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-index f8e59cfb1d34..207945700c94 100644
---- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-@@ -316,7 +316,8 @@ nouveau_abi16_ioctl_channel_alloc(ABI16_IOCTL_ARGS)
- 	if (ret)
- 		goto done;
- 
--	ret = nouveau_sched_init(&chan->sched, drm, drm->sched_wq);
-+	ret = nouveau_sched_init(&chan->sched, drm, drm->sched_wq,
-+				 chan->chan->dma.ib_max);
- 	if (ret)
- 		goto done;
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-index 7e5f19153829..6f6c31a9937b 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-@@ -320,7 +320,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
- 	 * locks which indirectly or directly are held for allocations
- 	 * elsewhere.
- 	 */
--	ret = nouveau_sched_init(&cli->sched, drm, NULL);
-+	ret = nouveau_sched_init(&cli->sched, drm, NULL, 1);
- 	if (ret)
- 		goto done;
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
-index 388831c53551..63c344f4f78e 100644
---- a/drivers/gpu/drm/nouveau/nouveau_exec.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
-@@ -258,10 +258,12 @@ nouveau_exec_job_init(struct nouveau_exec_job **pjob,
- 		}
- 	}
- 
-+	args.file_priv = __args->file_priv;
- 	job->chan = __args->chan;
- 
- 	args.sched = __args->sched;
--	args.file_priv = __args->file_priv;
-+	/* Plus one to account for the HW fence. */
-+	args.credits = job->push.count + 1;
- 
- 	args.in_sync.count = __args->in_sync.count;
- 	args.in_sync.s = __args->in_sync.s;
-diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
-index faabd662b165..6406d6659361 100644
---- a/drivers/gpu/drm/nouveau/nouveau_sched.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-@@ -12,7 +12,6 @@
- #include "nouveau_abi16.h"
- #include "nouveau_sched.h"
- 
--#define NOUVEAU_SCHED_HW_SUBMISSIONS		1
- #define NOUVEAU_SCHED_JOB_TIMEOUT_MS		10000
- 
- /* Starts at 0, since the DRM scheduler interprets those parameters as (initial)
-@@ -85,10 +84,10 @@ nouveau_job_init(struct nouveau_job *job,
- 			ret = -ENOMEM;
- 			goto err_free_objs;
- 		}
--
- 	}
- 
--	ret = drm_sched_job_init(&job->base, &sched->entity, 1, NULL);
-+	ret = drm_sched_job_init(&job->base, &sched->entity,
-+				 args->credits, NULL);
- 	if (ret)
- 		goto err_free_chains;
- 
-@@ -396,7 +395,7 @@ static const struct drm_sched_backend_ops nouveau_sched_ops = {
- 
- int
- nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
--		   struct workqueue_struct *wq)
-+		   struct workqueue_struct *wq, u32 credit_limit)
- {
- 	struct drm_gpu_scheduler *drm_sched = &sched->base;
- 	struct drm_sched_entity *entity = &sched->entity;
-@@ -414,7 +413,7 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
- 
- 	ret = drm_sched_init(drm_sched, &nouveau_sched_ops, wq,
- 			     NOUVEAU_SCHED_PRIORITY_COUNT,
--			     NOUVEAU_SCHED_HW_SUBMISSIONS, 0, job_hang_limit,
-+			     credit_limit, 0, job_hang_limit,
- 			     NULL, NULL, "nouveau_sched", drm->dev->dev);
- 	if (ret)
- 		goto fail_wq;
-diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.h b/drivers/gpu/drm/nouveau/nouveau_sched.h
-index 026f33d9b70c..7ba8ffec135a 100644
---- a/drivers/gpu/drm/nouveau/nouveau_sched.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_sched.h
-@@ -27,6 +27,7 @@ enum nouveau_job_state {
- struct nouveau_job_args {
- 	struct drm_file *file_priv;
- 	struct nouveau_sched *sched;
-+	u32 credits;
- 
- 	enum dma_resv_usage resv_usage;
- 	bool sync;
-@@ -112,7 +113,7 @@ struct nouveau_sched {
- };
- 
- int nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
--		       struct workqueue_struct *wq);
-+		       struct workqueue_struct *wq, u32 credit_limit);
- void nouveau_sched_fini(struct nouveau_sched *sched);
- 
- #endif
-diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-index c95186b34ea0..708cd5f43cb9 100644
---- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-@@ -1606,9 +1606,11 @@ nouveau_uvmm_bind_job_init(struct nouveau_uvmm_bind_job **pjob,
- 
- 	init_completion(&job->complete);
- 
--	args.sched = __args->sched;
- 	args.file_priv = __args->file_priv;
- 
-+	args.sched = __args->sched;
-+	args.credits = 1;
-+
- 	args.in_sync.count = __args->in_sync.count;
- 	args.in_sync.s = __args->in_sync.s;
- 
--- 
-2.41.0
+op_map_prepare() can't be called with `args` being NULL, since when called
+through nouveau_uvmm_sm_unmap_prepare() we can't hit the DRM_GPUVA_OP_MAP
+case at all.
+
+Unmapping something never leads to a new mapping being created, it can lead
+to remaps though.
+
+> 
+> ```
+> static int
+> op_map_prepare(struct nouveau_uvmm *uvmm,
+> ...
+> {
+>      ...
+>      uvma->region = args->region; <-- Dereferencing of possibly NULL pointer
+>      uvma->kind = args->kind;     <--
+>      ...
+> }
+> ```
+> 
+> ```
+> static int
+> nouveau_uvmm_sm_prepare(struct nouveau_uvmm *uvmm,
+> ...
+>              struct uvmm_map_args *args)
+> {
+>      struct drm_gpuva_op *op;
+>      u64 vmm_get_start = args ? args->addr : 0;
+>      u64 vmm_get_end = args ? args->addr + args->range : 0;
+>      int ret;
+> 
+>      drm_gpuva_for_each_op(op, ops) {
+>          switch (op->op) {
+>          case DRM_GPUVA_OP_MAP: {
+>              u64 vmm_get_range = vmm_get_end - vmm_get_start;
+> 
+>              ret = op_map_prepare(uvmm, &new->map, &op->map, args); <---
+>              if (ret)
+>                  goto unwind;
+> 
+>              if (args && vmm_get_range) {
+>                  ret = nouveau_uvmm_vmm_get(uvmm, vmm_get_start,
+>                                 vmm_get_range);
+>                  if (ret) {
+>                      op_map_prepare_unwind(new->map);
+>                      goto unwind;
+>                  }
+>              }
+>      ...
+> ```
+> 
+> Since the switch "case DRM_GPUVA_OP_MAP", also NULL checks "args"
+
+This check is not required for the reason given above. If you like, you
+can change this patch up to remove the args check and add a comment like:
+
+/* args can't be NULL when called for a map operation. */
+
+> after the call to op_map_prepare(), my guess is that we should
+> probably relocate this check to a point before op_map_prepare()
+> is called.
+
+Yeah, I see how this unnecessary check made you think so.
+
+- Danilo
+
+> 
+> This patch ensures that the value of args is checked before
+> calling op_map_prepare()
+> 
+> Addresses-Coverity-ID: 1544574 ("Dereference after null check")
+> Signed-off-by: Yuran Pereira <yuran.pereira@hotmail.com>
+> ---
+>   drivers/gpu/drm/nouveau/nouveau_uvmm.c | 5 ++++-
+>   1 file changed, 4 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> index aae780e4a4aa..6baa481eb2c8 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> @@ -620,11 +620,14 @@ nouveau_uvmm_sm_prepare(struct nouveau_uvmm *uvmm,
+>   		case DRM_GPUVA_OP_MAP: {
+>   			u64 vmm_get_range = vmm_get_end - vmm_get_start;
+>   
+> +			if (!args)
+> +				goto unwind;
+> +
+>   			ret = op_map_prepare(uvmm, &new->map, &op->map, args);
+>   			if (ret)
+>   				goto unwind;
+>   
+> -			if (args && vmm_get_range) {
+> +			if (vmm_get_range) {
+>   				ret = nouveau_uvmm_vmm_get(uvmm, vmm_get_start,
+>   							   vmm_get_range);
+>   				if (ret) {
 
