@@ -1,97 +1,82 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D7D77EB778
-	for <lists+nouveau@lfdr.de>; Tue, 14 Nov 2023 21:09:05 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 520AE7EB8B3
+	for <lists+nouveau@lfdr.de>; Tue, 14 Nov 2023 22:39:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E438010E4CE;
-	Tue, 14 Nov 2023 20:08:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DD0AE10E213;
+	Tue, 14 Nov 2023 21:38:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on2087.outbound.protection.outlook.com [40.107.101.87])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A21F110E4C6;
- Tue, 14 Nov 2023 20:08:42 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=H/hfy5NfHD7sAMP/irV7tQQoDswq5E8nLa8kaZfJonOJGKTN87NVSmBtRoY33OHAcBfQ/TSn2fb/2AXXCYGU0rkAwkv97s2UgThI4a022Yjnv+EE+KeUUtRbTm5+4C2LFVawZDa2r6PN+r6mMqyy6lyE4EEsEgmpLY8Tc+0fkoGu66TfvP3fYC5AlYZKRXFnlki7Rh2k8QZH9WrqvqkXN1LXgZAEKqo9H4khrWEekeyRcG0gwhTu8E8xMLA4ZU+sT/JtM3RWQQuiKbUagFQKZfdYWqeJY7iQ5DIkS5WIRRM0MADt4vk1hPHizewFbxnk2E3hvKIcyuJtfcEETbr40A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JGQJ2s9aczHwLlKwGw5MbAsL0y0CXVt2bqkXEOEvYPE=;
- b=I9x3QWCO6J/SOwGWsHRigxPqstIyqyC/ZUaU8zaF6rlK/4NOQc1ldlXmqHGX3rQ8gKPVJGpMir+3F5eu21tERAomS3RSuVGm7Lc93g5v8ZFtmTrrXOET2Qy8q5H+IxSJQ1lTiGOPnBr3h8vcIQeGfj4UOEr7iGv2aBKA7PdBkZm6iSVR7PH4SUGENbMlv3Ah9I5y1NPMjnGAX3cYVos4hRcgrbIK9GCxb5kdHMhw4ttH6bS71WqQENEloXAJ7fIH8RZEOmx8kjOMzxQXN4wVJefCYy9zxdNz8Xqh5RpA8WnI0eba4yvxYA03vzIq7NAj2mbGzRnuwzIuZbR9lAav1g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=redhat.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JGQJ2s9aczHwLlKwGw5MbAsL0y0CXVt2bqkXEOEvYPE=;
- b=m4gWFlrWMMUv9/vnDDQkKzY5AzbWqD0gn4E1bF2n/ry8zz0Q8JtB5FhvyPN+6/sek7PgEoZtTx9GVgfva8IvhUR//F2hWzxrGWJuNpX1/GzH+/P0D1FQA8d0cUhdPcHIY2SC2KtCvtOPLwrn6BQvT2vdL58ZwxxBUq3B22r1bpY=
-Received: from BLAPR03CA0156.namprd03.prod.outlook.com (2603:10b6:208:32f::29)
- by CY5PR12MB6275.namprd12.prod.outlook.com (2603:10b6:930:20::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.31; Tue, 14 Nov
- 2023 20:08:38 +0000
-Received: from BL02EPF0001A103.namprd05.prod.outlook.com
- (2603:10b6:208:32f:cafe::36) by BLAPR03CA0156.outlook.office365.com
- (2603:10b6:208:32f::29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.31 via Frontend
- Transport; Tue, 14 Nov 2023 20:08:38 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BL02EPF0001A103.mail.protection.outlook.com (10.167.241.133) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7002.13 via Frontend Transport; Tue, 14 Nov 2023 20:08:38 +0000
-Received: from test-TBI1100B.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Tue, 14 Nov
- 2023 14:08:36 -0600
-From: Mario Limonciello <mario.limonciello@amd.com>
-To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, "Alex
- Deucher" <alexander.deucher@amd.com>, =?UTF-8?q?Christian=20K=C3=B6nig?=
- <christian.koenig@amd.com>, Bjorn Helgaas <bhelgaas@google.com>, "Mika
- Westerberg" <mika.westerberg@linux.intel.com>, Lukas Wunner <lukas@wunner.de>
-Date: Tue, 14 Nov 2023 14:07:55 -0600
-Message-ID: <20231114200755.14911-8-mario.limonciello@amd.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20231114200755.14911-1-mario.limonciello@amd.com>
-References: <20231114200755.14911-1-mario.limonciello@amd.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7BE7210E213
+ for <nouveau@lists.freedesktop.org>; Tue, 14 Nov 2023 21:38:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1699997935;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=fxB7ExxiHdS0NZmPKiG+1iSonlk/ZPL9t612T7W2Wvs=;
+ b=U1vwk2vik+J7Y9uZzndKTHji2ZcnBM3BFJKdzkhRXfJLGGWJMkOSr43OTH7AgRsCF68Gr0
+ dUD/Zko0HqXvJj86u/z/4xs5WKyr9GcmHPSZ6Ibe5Zswib2XZOEn0II1GCZHVeCMmwE2cv
+ v5R66/y5jz+rwvZrPnNzG9ZHZJERrJ4=
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-266-47Ap7bxOMW2SR9yeRz_lJQ-1; Tue, 14 Nov 2023 16:38:54 -0500
+X-MC-Unique: 47Ap7bxOMW2SR9yeRz_lJQ-1
+Received: by mail-ej1-f69.google.com with SMTP id
+ a640c23a62f3a-9e1020e2996so414896466b.0
+ for <nouveau@lists.freedesktop.org>; Tue, 14 Nov 2023 13:38:54 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699997933; x=1700602733;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fxB7ExxiHdS0NZmPKiG+1iSonlk/ZPL9t612T7W2Wvs=;
+ b=Q20olgCFNxN0dZ4jNkZSRp4I8PydKb8Vcl+dSBE/9KWhHxFJKjmX7dpMs1k/ILbc8x
+ LLmLs7L3qB/Ng47AC6mh6FQn4Px9boMtB9nouKjZKCKDeqHUJ+bEN/9YjBZr4AqGOAew
+ 9V9huoED772AtL1OH8shSCwg9ZdCkO2ggeTrhCq41PFJh2yxBab4ck7B5yOR2RK5NnwC
+ yCAwDAUgKFWh7hyFExWrPAw9iRtLahW0qkFg0VoPMDtyHj18jlGgFcf80WnpyxTnlJKS
+ RjD99brXeTB4s5BEAcUp/z6nh9JJSL+QlJEQJPkxY3q9j64ZGofm+llq6N9eG8Rh8els
+ bynw==
+X-Gm-Message-State: AOJu0Yxt3ahZh4croNoX8QBDFZSxLGV9rmimLV9DaBgCFX06l2a2LWUZ
+ kIgBkr8/HAyKl4zySynfaHBP9ybk/VHb6U+9XtpTSAP2LnGBnSLBuBY1O/knhpfDlXqObJqFNCU
+ 1kN2IdY1yM2d44a7z7Hl8Zue83F76yxIZAg==
+X-Received: by 2002:a17:906:1cd7:b0:9bf:60f9:9b7c with SMTP id
+ i23-20020a1709061cd700b009bf60f99b7cmr7074757ejh.62.1699997932936; 
+ Tue, 14 Nov 2023 13:38:52 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH/9iRKgXF6DJ3fn43Xtb+gxWEoFWTgaYWdvlj3Io7rcxIF4OMTWAGkrBbxvkMRlsAxzGi7Qw==
+X-Received: by 2002:a17:906:1cd7:b0:9bf:60f9:9b7c with SMTP id
+ i23-20020a1709061cd700b009bf60f99b7cmr7074754ejh.62.1699997932665; 
+ Tue, 14 Nov 2023 13:38:52 -0800 (PST)
+Received: from ?IPV6:2a02:810d:4b3f:de9c:abf:b8ff:feee:998b?
+ ([2a02:810d:4b3f:de9c:abf:b8ff:feee:998b])
+ by smtp.gmail.com with ESMTPSA id
+ f17-20020a170906085100b009b654751c14sm5992443ejd.47.2023.11.14.13.38.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 Nov 2023 13:38:52 -0800 (PST)
+Message-ID: <a5b76425-1fe7-4031-8b88-d163e6e78dc2@redhat.com>
+Date: Tue, 14 Nov 2023 22:38:50 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A103:EE_|CY5PR12MB6275:EE_
-X-MS-Office365-Filtering-Correlation-Id: 48817130-7df4-4be1-d229-08dbe54d7d89
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: qAEcpAVAXE9PXfFweQl4igx5vpKZd0ofDnpX0YV1pNSqDaCySAQp0y9Ur4zDYhUM7tStS82ffe2XSKYoRwoEIINxzyMpFVwKs0yLdlmwzfRNcPwzsOhxT85sXtEQvdLYd0qK2l9iZYlpc2IRalPaJEQVv8xREhLaEIH2SzPr4Fmm4q+ET0jHerwQYmJ4EoWWlg+Y3KTSOumnC6Drw5XEeRZIvdjLQ2bTWsCBmxE9O0FiPTJWiA8dkor06HXQ/i7+eAyVviuGONqmAb0lzkAKbkqOqF9UOh5IBdWTSZRDpMjoFy6UmTtru2kno/pLYoO4tjaibjmVEjqFezgEi3XfAuSOg6DAaE+rbzhdV3SLEQwLWK7r4mc8XUuaufDF+xzZeUDAP0DXkbYxXTCjsJsubCvpxECHhC78dC0Q2ufhNzGdnZ3MOwol4/UZa3p8vSIDftwOVCGtHgetLPGij0XsayxntsEHge0JbJgkz19oFxeCj3Qaml3BzeW+nIvyrSgrvLbCQjRtfDZzZ3o13uDC9BTwWFwrx/L+++MkSFkTm9F6xI2YGf0P6+vFFNR6tcEO3rOqrXEsLenzBVLHEdtHoJFwSQlh1ukOiN5fXQnEb+r+mJaYnvxhlODakorZkF2v/A+LSLZBpDvnZhhpre5JUI6w0Uxpc72KJSUsM8YwkRjKSoqkmFwKAEn+KnUFBcaS0dPvQzomDp/QRCcBip1HPwCQvr3wg3B+Q4NmCNp8OVe13S3KoFkRjJ+K6gfgC063
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(396003)(39860400002)(376002)(136003)(346002)(230922051799003)(1800799009)(186009)(64100799003)(451199024)(82310400011)(40470700004)(36840700001)(46966006)(40460700003)(41300700001)(36860700001)(966005)(86362001)(36756003)(70586007)(70206006)(110136005)(316002)(54906003)(356005)(81166007)(478600001)(82740400003)(1076003)(2616005)(5660300002)(7416002)(2906002)(26005)(16526019)(7696005)(44832011)(6666004)(47076005)(426003)(336012)(8936002)(4326008)(8676002)(83380400001)(40480700001)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2023 20:08:38.2765 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 48817130-7df4-4be1-d229-08dbe54d7d89
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A103.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6275
-Subject: [Nouveau] [PATCH v3 7/7] PCI: Exclude PCIe ports used for virtual
- links in pcie_bandwidth_available()
+User-Agent: Mozilla Thunderbird
+To: Dan Carpenter <dan.carpenter@linaro.org>,
+ Karol Herbst <kherbst@redhat.com>, Danilo Krummrich <me@dakr.org>
+References: <f71996d9-d1cb-45ea-a4b2-2dfc21312d8c@kili.mountain>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <f71996d9-d1cb-45ea-a4b2-2dfc21312d8c@kili.mountain>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH] nouveau/gsp/r535: Fix a NULL vs error pointer
+ bug
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -103,102 +88,40 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- "open list:RADEON and AMDGPU DRM
- DRIVERS" <amd-gfx@lists.freedesktop.org>, "Rafael J .
- Wysocki" <rafael@kernel.org>,
- "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
- =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
- Xinhui Pan <Xinhui.Pan@amd.com>, Manivannan Sadhasivam <mani@kernel.org>, open
- list <linux-kernel@vger.kernel.org>, "open list:DRM DRIVER FOR
- NVIDIA GEFORCE/QUADRO GPUS" <dri-devel@lists.freedesktop.org>,
- "open list:ACPI" <linux-acpi@vger.kernel.org>,
- Mario Limonciello <mario.limonciello@amd.com>, Daniel Vetter <daniel@ffwll.ch>,
- "open list:DRM
- DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS" <nouveau@lists.freedesktop.org>,
- =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, "Maciej
- W . Rozycki" <macro@orcam.me.uk>
+Cc: nouveau@lists.freedesktop.org, kernel-janitors@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
+ Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The USB4 spec specifies that PCIe ports that are used for tunneling
-PCIe traffic over USB4 fabric will be hardcoded to advertise 2.5GT/s and
-behave as a PCIe Gen1 device. The actual performance of these ports is
-controlled by the fabric implementation.
+On 11/8/23 08:40, Dan Carpenter wrote:
+> The r535_gsp_cmdq_get() function returns error pointers but this code
+> checks for NULL.  Also we need to propagate the error pointer back to
+> the callers in r535_gsp_rpc_get().  Returning NULL will lead to a NULL
+> pointer dereference.
+> 
+> Fixes: 176fdcbddfd2 ("drm/nouveau/gsp/r535: add support for booting GSP-RM")
+> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
 
-Callers for pcie_bandwidth_available() will always find the PCIe ports
-used for tunneling as a limiting factor potentially leading to incorrect
-performance decisions.
+Reviewed-by: Danilo Krummrich <dakr@redhat.com>
 
-To prevent such problems check explicitly for ports that are marked as
-virtual links or as thunderbolt controllers and skip them when looking
-for bandwidth limitations of the hierarchy. If the only device connected
-is a port used for tunneling then report that device.
-
-Callers to pcie_bandwidth_available() could make this change on their
-own as well but then they wouldn't be able to detect other potential
-speed bottlenecks from the hierarchy without duplicating
-pcie_bandwidth_available() logic.
-
-Link: https://gitlab.freedesktop.org/drm/amd/-/issues/2925#note_2145860
-Link: https://www.usb.org/document-library/usb4r-specification-v20
-      USB4 V2 with Errata and ECN through June 2023
-      Section 11.2.1
-Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
----
-v2->v3:
- * Split from previous patch version
- * Look for thunderbolt or virtual link
----
- drivers/pci/pci.c | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
-
-diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
-index 0ff7883cc774..b1fb2258b211 100644
---- a/drivers/pci/pci.c
-+++ b/drivers/pci/pci.c
-@@ -6269,11 +6269,20 @@ static u32 pcie_calc_bw_limits(struct pci_dev *dev, u32 bw,
-  * limiting_dev, speed, and width pointers are supplied) information about
-  * that point.  The bandwidth returned is in Mb/s, i.e., megabits/second of
-  * raw bandwidth.
-+ *
-+ * This excludes the bandwidth calculation that has been returned from a
-+ * PCIe device that is used for transmitting tunneled PCIe traffic over a virtual
-+ * link part of larger hierarchy. Examples include Thunderbolt3 and USB4 links.
-+ * The calculation is excluded because the USB4 specification specifies that the
-+ * max speed returned from PCIe configuration registers for the tunneling link is
-+ * always PCI 1x 2.5 GT/s.  When only tunneled devices are present, the bandwidth
-+ * returned is the bandwidth available from the first tunneled device.
-  */
- u32 pcie_bandwidth_available(struct pci_dev *dev, struct pci_dev **limiting_dev,
- 			     enum pci_bus_speed *speed,
- 			     enum pcie_link_width *width)
- {
-+	struct pci_dev *vdev = NULL;
- 	u32 bw = 0;
- 
- 	if (speed)
-@@ -6282,10 +6291,20 @@ u32 pcie_bandwidth_available(struct pci_dev *dev, struct pci_dev **limiting_dev,
- 		*width = PCIE_LNK_WIDTH_UNKNOWN;
- 
- 	while (dev) {
-+		if (dev->is_virtual_link || dev->is_thunderbolt) {
-+			if (!vdev)
-+				vdev = dev;
-+			goto skip;
-+		}
- 		bw = pcie_calc_bw_limits(dev, bw, limiting_dev, speed, width);
-+skip:
- 		dev = pci_upstream_bridge(dev);
- 	}
- 
-+	/* If nothing "faster" found on hierarchy, limit to first virtual link */
-+	if (vdev && !bw)
-+		bw = pcie_calc_bw_limits(vdev, bw, limiting_dev, speed, width);
-+
- 	return bw;
- }
- EXPORT_SYMBOL(pcie_bandwidth_available);
--- 
-2.34.1
+> ---
+>   drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> index e31f9641114b..f8409e2f9fef 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> @@ -689,8 +689,8 @@ r535_gsp_rpc_get(struct nvkm_gsp *gsp, u32 fn, u32 argc)
+>   	struct nvfw_gsp_rpc *rpc;
+>   
+>   	rpc = r535_gsp_cmdq_get(gsp, ALIGN(sizeof(*rpc) + argc, sizeof(u64)));
+> -	if (!rpc)
+> -		return NULL;
+> +	if (IS_ERR(rpc))
+> +		return ERR_CAST(rpc);
+>   
+>   	rpc->header_version = 0x03000000;
+>   	rpc->signature = ('C' << 24) | ('P' << 16) | ('R' << 8) | 'V';
 
