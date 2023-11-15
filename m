@@ -1,82 +1,122 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 520AE7EB8B3
-	for <lists+nouveau@lfdr.de>; Tue, 14 Nov 2023 22:39:01 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id BFB577EBF6D
+	for <lists+nouveau@lfdr.de>; Wed, 15 Nov 2023 10:27:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DD0AE10E213;
-	Tue, 14 Nov 2023 21:38:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EB7A510E505;
+	Wed, 15 Nov 2023 09:27:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7BE7210E213
- for <nouveau@lists.freedesktop.org>; Tue, 14 Nov 2023 21:38:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1699997935;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=fxB7ExxiHdS0NZmPKiG+1iSonlk/ZPL9t612T7W2Wvs=;
- b=U1vwk2vik+J7Y9uZzndKTHji2ZcnBM3BFJKdzkhRXfJLGGWJMkOSr43OTH7AgRsCF68Gr0
- dUD/Zko0HqXvJj86u/z/4xs5WKyr9GcmHPSZ6Ibe5Zswib2XZOEn0II1GCZHVeCMmwE2cv
- v5R66/y5jz+rwvZrPnNzG9ZHZJERrJ4=
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-266-47Ap7bxOMW2SR9yeRz_lJQ-1; Tue, 14 Nov 2023 16:38:54 -0500
-X-MC-Unique: 47Ap7bxOMW2SR9yeRz_lJQ-1
-Received: by mail-ej1-f69.google.com with SMTP id
- a640c23a62f3a-9e1020e2996so414896466b.0
- for <nouveau@lists.freedesktop.org>; Tue, 14 Nov 2023 13:38:54 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699997933; x=1700602733;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fxB7ExxiHdS0NZmPKiG+1iSonlk/ZPL9t612T7W2Wvs=;
- b=Q20olgCFNxN0dZ4jNkZSRp4I8PydKb8Vcl+dSBE/9KWhHxFJKjmX7dpMs1k/ILbc8x
- LLmLs7L3qB/Ng47AC6mh6FQn4Px9boMtB9nouKjZKCKDeqHUJ+bEN/9YjBZr4AqGOAew
- 9V9huoED772AtL1OH8shSCwg9ZdCkO2ggeTrhCq41PFJh2yxBab4ck7B5yOR2RK5NnwC
- yCAwDAUgKFWh7hyFExWrPAw9iRtLahW0qkFg0VoPMDtyHj18jlGgFcf80WnpyxTnlJKS
- RjD99brXeTB4s5BEAcUp/z6nh9JJSL+QlJEQJPkxY3q9j64ZGofm+llq6N9eG8Rh8els
- bynw==
-X-Gm-Message-State: AOJu0Yxt3ahZh4croNoX8QBDFZSxLGV9rmimLV9DaBgCFX06l2a2LWUZ
- kIgBkr8/HAyKl4zySynfaHBP9ybk/VHb6U+9XtpTSAP2LnGBnSLBuBY1O/knhpfDlXqObJqFNCU
- 1kN2IdY1yM2d44a7z7Hl8Zue83F76yxIZAg==
-X-Received: by 2002:a17:906:1cd7:b0:9bf:60f9:9b7c with SMTP id
- i23-20020a1709061cd700b009bf60f99b7cmr7074757ejh.62.1699997932936; 
- Tue, 14 Nov 2023 13:38:52 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IH/9iRKgXF6DJ3fn43Xtb+gxWEoFWTgaYWdvlj3Io7rcxIF4OMTWAGkrBbxvkMRlsAxzGi7Qw==
-X-Received: by 2002:a17:906:1cd7:b0:9bf:60f9:9b7c with SMTP id
- i23-20020a1709061cd700b009bf60f99b7cmr7074754ejh.62.1699997932665; 
- Tue, 14 Nov 2023 13:38:52 -0800 (PST)
-Received: from ?IPV6:2a02:810d:4b3f:de9c:abf:b8ff:feee:998b?
- ([2a02:810d:4b3f:de9c:abf:b8ff:feee:998b])
- by smtp.gmail.com with ESMTPSA id
- f17-20020a170906085100b009b654751c14sm5992443ejd.47.2023.11.14.13.38.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Nov 2023 13:38:52 -0800 (PST)
-Message-ID: <a5b76425-1fe7-4031-8b88-d163e6e78dc2@redhat.com>
-Date: Tue, 14 Nov 2023 22:38:50 +0100
-MIME-Version: 1.0
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2084.outbound.protection.outlook.com [40.107.244.84])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B50FE10E505;
+ Wed, 15 Nov 2023 09:27:43 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=KB4jXWaMHQocntYZYp4+TiuX4tQAFA4GUgw9ALQBvDliUvqSXrt84dGFNkg3wTHIsxmGklB4V54TOFQ3hACH/meww69hVUcLWCbz767bQtsU6xlzNKt6WBhkGybxHwp6JTLtrYQRCAfwX+YLzrbZedvP0ioGcEUqFBNOKAbEfdGRLH7OjOvzFLiPa3pZO1eVmBrzq4xNkMDeQg+CexpiEuDxlTvGTnfxYnx9wGKCy6iNHmWgTZH4QTiwJgWpRPM5GTelf0m9cwse7N7sKN0Og4fls+Uau17rr2Fn2Px2nOEMplaGUgy3hw4pvD+zKKq1ideWIc9YyLxXow9PR69Jtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=BZPyNGxoeVgDtj8QVEiAyklHT19cFxs3qEW/nOdus/o=;
+ b=cuWge0SW8jQS4tld9IZLoWqGAF1E/9ckLNmB8TFRdNxrr32IyhSJl0ePfi9zgRZtPT+ggPUGlwvjBn6rFBbBgH7hD/nlMvty91iEKoEf7PCyt8g/JXKgWLFuGkq9fNVtd20MvNxvlL7JVZFBuUndSqp5a8XJtdd6WdXWYvdsJTvm3iyjmhLaZ9hoMxumFpi5qsdH33uhpDdwM2VIQJCNaFXKuQz9ntwEWaj8Ja2S4JYWP3wIlpfLf3ew1UfoCYNF4CX45Q9WONPXqBRQ5ajusw2GQ9Aw88iSr1G0oubgU0D5lRtG1o/ZmjsT25dRd20PBi2TBNMukeGr0Na/+QOjyg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BZPyNGxoeVgDtj8QVEiAyklHT19cFxs3qEW/nOdus/o=;
+ b=t1yyerzs38ZUckQVafeEfpDapJNb3rsGau2B6i4ne91LNcd8rWgXQDcycWAhZTuzNtWOYClxXHTMizSfGjlDR/7H8XKFvYOHQtM45Mx2tF0nONoKztjWyn+myf9Sx3Yg5o2xQPGkTXl2mjBk5m0JfBJrXKl5TlF7cuB1G3THp70=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by CY5PR12MB6406.namprd12.prod.outlook.com (2603:10b6:930:3d::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.31; Wed, 15 Nov
+ 2023 09:27:41 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::ca80:8f1c:c11:ded3]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::ca80:8f1c:c11:ded3%7]) with mapi id 15.20.6977.033; Wed, 15 Nov 2023
+ 09:27:41 +0000
+Message-ID: <5fa7aab7-3bf9-4491-a822-fd686efa5376@amd.com>
+Date: Wed, 15 Nov 2023 10:27:31 +0100
 User-Agent: Mozilla Thunderbird
-To: Dan Carpenter <dan.carpenter@linaro.org>,
- Karol Herbst <kherbst@redhat.com>, Danilo Krummrich <me@dakr.org>
-References: <f71996d9-d1cb-45ea-a4b2-2dfc21312d8c@kili.mountain>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <f71996d9-d1cb-45ea-a4b2-2dfc21312d8c@kili.mountain>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+To: Mario Limonciello <mario.limonciello@amd.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Alex Deucher <alexander.deucher@amd.com>, Bjorn Helgaas
+ <bhelgaas@google.com>, Mika Westerberg <mika.westerberg@linux.intel.com>,
+ Lukas Wunner <lukas@wunner.de>
+References: <20231114200755.14911-1-mario.limonciello@amd.com>
+ <20231114200755.14911-3-mario.limonciello@amd.com>
 Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20231114200755.14911-3-mario.limonciello@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [PATCH] nouveau/gsp/r535: Fix a NULL vs error pointer
- bug
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR4P281CA0030.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:c9::7) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|CY5PR12MB6406:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9838de35-dc39-486e-96b5-08dbe5bd1d7f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: LK3jqHBnRo450t+gkHEjXGxCcJQUQgLWMQ0+JMk5b6KIVgVwNSHwoZvk2a4isChY5PZyYS0kOV7JUqbddO5WbWWcac+qT9z5b1d9VoMJqrAn1DbjDRdZNedAc7kE1IUdetsm9tPke7shKLaKfYefSR0YRSBGDX40nisy3HrKyspyuaQ2CY4Gcgr5hCaMrCbaLuPWD6jXiP9GBIYuLcw+QE8N0HXwBMaZt8WE7J3p6P+N5UzeJGkJnUsbDcYON7R2lZBVsJa2MOm2AFalSxoU2+IRH6U2Tq4VjIFyam0eiix0/k5vKSMuLy8tTeodeOgvNleL2P5WhDTErLPk/Jsran4guktZ3tYHLI2BNm9gq5j1ZkQxah36XJgpBIdOMPp8Xv779OJeDkeAx8+h/lhUK7R6zdQmv75BXw5zYkvsEED4JQpvjkSSBFPCuZmPwgqaCtRqQc29zmN40zfOok4EcanGJ1Drx6c3B+bDAX+GEmPOb9hNy/g0Zj4Z+Sb9N9djwt0HyYZVcmR7twC8cdq0KOhmUG+BfvN/z0O+NNyT9bSiLFmgs+9+UtuSuRPD1dBGlWGjukkY6U5Hxa/8Xw38+/ZPvtzgeh8qdF4W2jcIxPRdPIKX4RUaG+JhapCzUoedzyzf82RiXYvNfWzJxnC8oLUxD+ko2bYU4r5D7zR5mv+f0dzJRM3ag/PrcOycih3a
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(346002)(376002)(396003)(366004)(136003)(39860400002)(230273577357003)(230173577357003)(230922051799003)(451199024)(1800799009)(186009)(64100799003)(66556008)(66476007)(6506007)(41300700001)(26005)(2616005)(6666004)(66574015)(6512007)(83380400001)(4326008)(8676002)(7416002)(5660300002)(8936002)(2906002)(6486002)(316002)(478600001)(110136005)(66946007)(54906003)(36756003)(86362001)(31696002)(38100700002)(31686004)(45980500001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NXJYdjRlODYwQkFaN253QkNlRUVmWEtrd1dGenQ3V3JGbXhhN216dm9UTUMz?=
+ =?utf-8?B?MDN6eGsrZlhockZOREQ3eUJ6OE9ueE83NnVUZ29Camp0eWlWSFpxa2hXM0tr?=
+ =?utf-8?B?YUFxdjg3c3hrRmEvVTBta0licXljQzA1M21TL2IvczRSN3NYNXVucWI2UTQy?=
+ =?utf-8?B?YTNiYVdzV3dOeDNqUnNwRXB0eER0ZFI3WlNYcGxtQUpwdy81bHgyeHFrUjRZ?=
+ =?utf-8?B?bE1VT085dGRudlNXOVdwVVdRZDB5TGlTTlowR1JjQVEzdEZKZkc1dFFWZDB6?=
+ =?utf-8?B?dEFHUHpucGZkcGc5MXFOVHR5OVdnRzhIckZSQzBlVFVFd0ZYUzNBcFltWkEx?=
+ =?utf-8?B?NldlTVduVWZrWHFaUmNWT0EwTVArNTJnTkdGYmVhY3pEOG5aWFJGa0puRmdw?=
+ =?utf-8?B?dHM1eTc2VlFPTitHRWNrZkEvNDRhWFNwZFgzUE42cFhKYUlXVUxIVjVnOEw0?=
+ =?utf-8?B?RmxaVGNyMmk4Rk1IZlZjcldkQmhZU3RmL3RWc0VmRGpxbmc2UStSYjRaYTNx?=
+ =?utf-8?B?c0N3K3ZGdFhZemxac2tSQmQ0eC9VNXh5cER3SjFMTVFMaEc2ZG10bE9IOUsv?=
+ =?utf-8?B?dnJZVUhTckhjM3pUQ0EzUEZLSmZzcnhtZXRXNTdsbGMwRm8ybEYxRVkrQXhp?=
+ =?utf-8?B?ZVJTWDN6SHBsRzJjQXBjR3d6MkowZnFveVdIRVgxTWt2TEFscWluWUJKb25C?=
+ =?utf-8?B?cWNmZ0hnMDR4T0tFaDk3cjRBclBTN01jZ2RjalowUXZmVFlaM1dOYWJtQVpP?=
+ =?utf-8?B?NnQ1YzRsd2llQ0pvc2RrNjd3ODk0VmhaMm1BeGMrQTBhVExWVzM1MXhYcUt0?=
+ =?utf-8?B?TlJqeDlEbGdyNldoQTlPWFpnTkdEb2NYZVJjRTZadERTeWw2Ny9FN0pTcDFq?=
+ =?utf-8?B?ejVPSHBJdGVva0I3WUQ3R0tidHU2RHUwd2V2WVJnYlYvc3Z3Yk54N1lickN2?=
+ =?utf-8?B?SVBQR3pIR2w3ZlA2eVd5K1JJYlppazVNbWNvYlhaVC85VDdVRmtiUnNxNXNi?=
+ =?utf-8?B?ZXZtK044RElrRi9FS0RFUTV3MEtxTExCRkszc1FoRUptZVBPYkNBVk5pdkZU?=
+ =?utf-8?B?Vm1Od1F2UVhmQjBtWmkreHRZQUV5cUxmUGtSOXRMbFBZKzYyYWpvRlA5WjRC?=
+ =?utf-8?B?eVVibGU5eldyYXJ2UEwrSUpnZHZnOE9FUDYyZ2ROM0k5RGRZL1lsTTRtTXFG?=
+ =?utf-8?B?ZTdUVjB2Y3JvRTB1NU5QaXB6RUlENm5jbVNqbDRZQ2RxKzM2Y01hZEFaUEJa?=
+ =?utf-8?B?aDQ1b3RPamdjakRicDNPeWJCQlRsamRCbGFlYWhUQ0RreUZ3dG9Cd29UZTlI?=
+ =?utf-8?B?Z29meHVPZmNBMStxait2TVFXMUxwQzdRK0F0S2hPY0IzeHhmcmJPRzh2THpw?=
+ =?utf-8?B?NGoybHJCMXZpNjhTT1JxdTY0c2x0Y3lJS0ZTWFpSNTVmYW5YK0kvYjR2a0xS?=
+ =?utf-8?B?dm9aeERDbXp6dE9Pd25DZVlMenRCeGVBbmtOSnlURnE4MXNzRGRWcGRiUFZv?=
+ =?utf-8?B?VVlFVU04anUycFhZUnA5LzY1TjZjQ0NFRGZjYTROb3FjYVNiNExqVHV0UEVE?=
+ =?utf-8?B?aGx6bHpyOEF4dk0zUmdzVWtGK0tpMUwyN1VOaDhVUStwYXYxUlJ3Uk9FZ0M4?=
+ =?utf-8?B?T1Z0Uk03ZzZUSTc1a1ZxQ3NEZ2Y5Mzg0OVowZk1BNTA3YjhpQzBTenRTS0hO?=
+ =?utf-8?B?T0pBVllhcTRJU01OdkR3ZnAvUWNCVXhvNGlFWWlEVEVyVGNKcndaR01GVkFa?=
+ =?utf-8?B?U1hBSzJ4cllaQWNpNk1YYWVLMkRhQVZrbERBaHdFSCtSTkpLT0RBakQ2MG81?=
+ =?utf-8?B?TGZBTXFLTnpmNEJ3Rysra3VlQWo3YkUxL09LeVpuTkg4RkR3WE1IakZrcW9v?=
+ =?utf-8?B?Z1JjRkJnWHQ1YVlETVhFS3BMNEFQVWcvSkNLcEpiRDYvMTlPcEIzVm1PNU9z?=
+ =?utf-8?B?a1RocTBJMnJxN2dSWnRrcElJdmNWVkJnUmNwcHFDb2xDakRTdmdqTDZjMzNn?=
+ =?utf-8?B?YllReWl2N1NlK0ZoWG8zRXNoYUNJYjRVcUtjOGF2ZFI1ZUlYTFhrN1lINEYy?=
+ =?utf-8?B?SDBGa2FBYmxFcGE4dkEva0pXTFhyR1d5cElZTlArSUhteHB1K3A2dmlIQkp5?=
+ =?utf-8?Q?OjVY=3D?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9838de35-dc39-486e-96b5-08dbe5bd1d7f
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Nov 2023 09:27:41.1544 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: dvgEbFTAbdDZz3cgVD6DopAkmg9xa5k20G41pCVcC3cF2DRqBDrj/tbP0cPLQhcl
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6406
+Subject: Re: [Nouveau] [PATCH v3 2/7] drm/radeon: Switch from
+ pci_is_thunderbolt_attached() to dev_is_removable()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,40 +128,83 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, kernel-janitors@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
- Dave Airlie <airlied@redhat.com>
+Cc: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
+ "Rafael J . Wysocki" <rafael@kernel.org>,
+ "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
+ =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, Xinhui Pan <Xinhui.Pan@amd.com>,
+ Manivannan Sadhasivam <mani@kernel.org>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <dri-devel@lists.freedesktop.org>,
+ "open list:ACPI" <linux-acpi@vger.kernel.org>,
+ "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>,
+ =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+ "Maciej W . Rozycki" <macro@orcam.me.uk>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 11/8/23 08:40, Dan Carpenter wrote:
-> The r535_gsp_cmdq_get() function returns error pointers but this code
-> checks for NULL.  Also we need to propagate the error pointer back to
-> the callers in r535_gsp_rpc_get().  Returning NULL will lead to a NULL
-> pointer dereference.
-> 
-> Fixes: 176fdcbddfd2 ("drm/nouveau/gsp/r535: add support for booting GSP-RM")
-> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+Am 14.11.23 um 21:07 schrieb Mario Limonciello:
+> pci_is_thunderbolt_attached() looks at the hierarchy of the PCIe device
+> to determine if any bridge along the way has the is_thunderbolt bit set.
+> This bit will only be set when one of the devices in the hierarchy is an
+> Intel Thunderbolt device.
+>
+> However PCIe devices can be connected to USB4 hubs and routers which won't
+> necessarily set the is_thunderbolt bit. These devices will however be
+> marked as externally facing which means they are marked removable by
+> pci_set_removable().
+>
+> Look whether the device is marked removable to determine it's
+> connected to a Thunderbolt controller or USB4 router.
+>
+> Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
 
-Reviewed-by: Danilo Krummrich <dakr@redhat.com>
+Acked-by: Christian König <christian.koenig@amd.com> for this one.
 
 > ---
->   drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> index e31f9641114b..f8409e2f9fef 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> @@ -689,8 +689,8 @@ r535_gsp_rpc_get(struct nvkm_gsp *gsp, u32 fn, u32 argc)
->   	struct nvfw_gsp_rpc *rpc;
+> v2->v3:
+>   * Update commit message
+> ---
+>   drivers/gpu/drm/radeon/radeon_device.c | 4 ++--
+>   drivers/gpu/drm/radeon/radeon_kms.c    | 2 +-
+>   2 files changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/radeon/radeon_device.c b/drivers/gpu/drm/radeon/radeon_device.c
+> index afbb3a80c0c6..ba0ca0694d18 100644
+> --- a/drivers/gpu/drm/radeon/radeon_device.c
+> +++ b/drivers/gpu/drm/radeon/radeon_device.c
+> @@ -1429,7 +1429,7 @@ int radeon_device_init(struct radeon_device *rdev,
 >   
->   	rpc = r535_gsp_cmdq_get(gsp, ALIGN(sizeof(*rpc) + argc, sizeof(u64)));
-> -	if (!rpc)
-> -		return NULL;
-> +	if (IS_ERR(rpc))
-> +		return ERR_CAST(rpc);
+>   	if (rdev->flags & RADEON_IS_PX)
+>   		runtime = true;
+> -	if (!pci_is_thunderbolt_attached(rdev->pdev))
+> +	if (!dev_is_removable(&rdev->pdev->dev))
+>   		vga_switcheroo_register_client(rdev->pdev,
+>   					       &radeon_switcheroo_ops, runtime);
+>   	if (runtime)
+> @@ -1519,7 +1519,7 @@ void radeon_device_fini(struct radeon_device *rdev)
+>   	radeon_bo_evict_vram(rdev);
+>   	radeon_audio_component_fini(rdev);
+>   	radeon_fini(rdev);
+> -	if (!pci_is_thunderbolt_attached(rdev->pdev))
+> +	if (!dev_is_removable(&rdev->pdev->dev))
+>   		vga_switcheroo_unregister_client(rdev->pdev);
+>   	if (rdev->flags & RADEON_IS_PX)
+>   		vga_switcheroo_fini_domain_pm_ops(rdev->dev);
+> diff --git a/drivers/gpu/drm/radeon/radeon_kms.c b/drivers/gpu/drm/radeon/radeon_kms.c
+> index a16590c6247f..ead912a58ab8 100644
+> --- a/drivers/gpu/drm/radeon/radeon_kms.c
+> +++ b/drivers/gpu/drm/radeon/radeon_kms.c
+> @@ -138,7 +138,7 @@ int radeon_driver_load_kms(struct drm_device *dev, unsigned long flags)
+>   	if ((radeon_runtime_pm != 0) &&
+>   	    radeon_has_atpx() &&
+>   	    ((flags & RADEON_IS_IGP) == 0) &&
+> -	    !pci_is_thunderbolt_attached(pdev))
+> +	    !dev_is_removable(&pdev->dev))
+>   		flags |= RADEON_IS_PX;
 >   
->   	rpc->header_version = 0x03000000;
->   	rpc->signature = ('C' << 24) | ('P' << 16) | ('R' << 8) | 'V';
+>   	/* radeon_device_init should report only fatal error
 
