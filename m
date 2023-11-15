@@ -1,45 +1,61 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3FF57EC57E
-	for <lists+nouveau@lfdr.de>; Wed, 15 Nov 2023 15:39:51 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id DF5F37EC5B6
+	for <lists+nouveau@lfdr.de>; Wed, 15 Nov 2023 15:41:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 06AE010E05E;
-	Wed, 15 Nov 2023 14:39:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CD09F10E03F;
+	Wed, 15 Nov 2023 14:41:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [205.139.111.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CF48D10E033
- for <nouveau@lists.freedesktop.org>; Wed, 15 Nov 2023 14:39:43 +0000 (UTC)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-70-LmN1Ew95OaCIF7_Q0vhODw-1; Wed, 15 Nov 2023 09:39:40 -0500
-X-MC-Unique: LmN1Ew95OaCIF7_Q0vhODw-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
- [10.11.54.6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id C7FFF867900;
- Wed, 15 Nov 2023 14:39:39 +0000 (UTC)
-Received: from ultimate.redhat.com (unknown [10.64.136.11])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 42BA22166B28;
- Wed, 15 Nov 2023 14:39:36 +0000 (UTC)
-From: airlied@gmail.com
-To: dri-devel@lists.freedesktop.org
-Date: Thu, 16 Nov 2023 00:39:33 +1000
-Message-ID: <20231115143933.261287-1-airlied@gmail.com>
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D92B510E036;
+ Wed, 15 Nov 2023 14:41:27 +0000 (UTC)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-507a29c7eefso9619475e87.1; 
+ Wed, 15 Nov 2023 06:41:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1700059286; x=1700664086; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Tassi+FTzJA+tFwkfZiIfCitIuDh5wKNY34PFKXnhdQ=;
+ b=EI3M0GQSuhOpVEDZoayw9LHaV+FTVxqLTqSvXMuAmTVbXDfsLLVRwGX8GLDeYhghfh
+ aJlsR5EFgAyqa9D8zqoD1HJa4jkYtNjeknJRiGuxCOEWLy8NO9nYyx3TMnUsq6YzoR27
+ X3lulbDpnhqjrNNnTRNiSNfmzsq9RheRO2nipCPbAWlYEmMrlavpW0j63cqW2/r5m6FZ
+ G8OdZlU2v+XKDdy3ELKHwAC/PvUnybC0v6BGMHK4cZOB6hJSt6vXwkZPqrfUE56opTJt
+ qjK3pCK0Yad6n8sBjrkFpLLm8AF/bxjBxXKZQBs5CGdijeCc7jJPiM3f5WfLUS7MrXHs
+ bN7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700059286; x=1700664086;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Tassi+FTzJA+tFwkfZiIfCitIuDh5wKNY34PFKXnhdQ=;
+ b=ezWSURsNDiya+RZhQW5DUpz7RoVy8KkP4rDiHU4b6dpTybycvblGsn37KtAvC8Rouo
+ z2xzjDOafRUqhEw2lkF50U658KQGxPKOvJdkgpQiQ2+h++BqscKzvVSoHVCrpXNm52pj
+ jwNOfbwrzW2eGtlT8vNmZGQU6LM6hlGlYx7KK0ltlo3uwkO8n4XV3aMHjoqx3TGh30kR
+ 8ZwqTsp5vUj0D0obUhWr8k/5hOzDqY22IV6rLNGnpcPJVd4WTawe8buU+gyWTD+/YldT
+ sAg3nojSs5ocSANCfisxaW7qlxJc2UH3WnMm864DUOT8moBbe2pF/rKbzgG+dGl06ksf
+ axSA==
+X-Gm-Message-State: AOJu0YxybOjjQCvikLosGiZ2+mSzdRWDvgOPu0kwS/mIxtPgRFFm27w4
+ rPGZ7SIGgjoQVGyEZHLEEqS/0aTAvPF6yJByDtOvNgesX5PoTQ==
+X-Google-Smtp-Source: AGHT+IEnpIXQ0xUlxPwEJJhyl2bYo/SWJiSV9GhtKCrPso/yzNTtZGcZLkn+oPhdSoo0a8kks45HCjgXrIvvf08dHzo=
+X-Received: by 2002:ac2:54b3:0:b0:507:b14f:e3bc with SMTP id
+ w19-20020ac254b3000000b00507b14fe3bcmr8888624lfk.33.1700059285589; Wed, 15
+ Nov 2023 06:41:25 -0800 (PST)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: gmail.com
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
-Subject: [Nouveau] [PATCH] nouveau: don't fail driver load if no display hw
- present.
+References: <20231105203700.2152487-1-airlied@gmail.com>
+ <39561fc8-185b-4430-b051-2eebc865838d@dakr.org>
+In-Reply-To: <39561fc8-185b-4430-b051-2eebc865838d@dakr.org>
+From: Dave Airlie <airlied@gmail.com>
+Date: Thu, 16 Nov 2023 00:41:13 +1000
+Message-ID: <CAPM=9txp4v2RTupGHjJihS8rb-kfdB_r+d5XaSiy1=2p82Kr-Q@mail.gmail.com>
+To: Danilo Krummrich <me@dakr.org>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH] nouveau: don't fail driver load if no display
+ hw present.
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,40 +67,32 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
+On Wed, 15 Nov 2023 at 05:54, Danilo Krummrich <me@dakr.org> wrote:
+>
+> On 11/5/23 21:37, Dave Airlie wrote:
+> > From: Dave Airlie <airlied@redhat.com>
+> >
+> > If we get back ENODEV don't fail load.
+>
+> Maybe worth to note why this is OK in this case, might not be obvious
+> to future readers of the code.
 
-If we get back ENODEV don't fail load. There are nvidia devices
-that don't have display blocks and the driver should work on those.
+Sent an updated version with that fixed.
+>
+> >
+> > Fixes: 15740541e8f0 ("drm/nouveau/devinit/tu102-: prepare for GSP-RM")
+>
+> Maybe I'm missing something subtle here, but did you maybe pick the wrong
+> commit here? At a first glance it looks like commit 073bde453635
+> ("drm/nouveau/kms/nv50-: disable dcb parsing") introduced the issue.
+>
 
-Fixes: 15740541e8f0 ("drm/nouveau/devinit/tu102-: prepare for GSP-RM")
-Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/270
-Signed-off-by: Dave Airlie <airlied@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_display.c | 5 +++++
- 1 file changed, 5 insertions(+)
+Nope this commit causes the regression, as it powers off the display
+core in devinit, which means later we don't detect it because GSP
+doesn't power it back on.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/no=
-uveau/nouveau_display.c
-index d8c92521226d9..f28f9a8574586 100644
---- a/drivers/gpu/drm/nouveau/nouveau_display.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-@@ -726,6 +726,11 @@ nouveau_display_create(struct drm_device *dev)
-=20
- =09if (nouveau_modeset !=3D 2) {
- =09=09ret =3D nvif_disp_ctor(&drm->client.device, "kmsDisp", 0, &disp->dis=
-p);
-+=09=09/* no display hw */
-+=09=09if (ret =3D=3D -ENODEV) {
-+=09=09=09ret =3D 0;
-+=09=09=09goto disp_create_err;
-+=09=09}
-=20
- =09=09if (!ret && (disp->disp.outp_mask || drm->vbios.dcb.entries)) {
- =09=09=09nouveau_display_create_properties(dev);
---=20
-2.41.0
-
+Dave.
