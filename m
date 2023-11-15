@@ -2,52 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43D1C7EC0DC
-	for <lists+nouveau@lfdr.de>; Wed, 15 Nov 2023 11:40:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3FF57EC57E
+	for <lists+nouveau@lfdr.de>; Wed, 15 Nov 2023 15:39:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D3E4D10E548;
-	Wed, 15 Nov 2023 10:40:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 06AE010E05E;
+	Wed, 15 Nov 2023 14:39:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.24])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 236FD10E544;
- Wed, 15 Nov 2023 10:40:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1700044827; x=1731580827;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=WhUgLMg4fPuk0HcHV6kkPoQlTphUx0dqokHvR43C3OQ=;
- b=DqAHXMexfBurmC/XzfmKuCx86GMZeLwTWhfh6NI1Tue8xJikvQ7WDI89
- wAG/2auxIdgZPwXiA8iVWjCLl4Um1GYfWi+mU+0XB5kSch6/j4K7o9F2Q
- OQvQhIAH+oPHGjZ74xA9a24VC6FNFPWAQ1n50MLMJHGBOr55lq2P0x4hG
- ABaqOeKqvss2uxIGxwUw2HLM0LSU2YkO+XOn4cyEfLEIPRAES+4/Ro/SC
- 5BeHcepThfV/0eplCInxvOE5MYVykHvkibXqcdNSjIy28MO2gkG+CuJ1k
- Nzu5ta5iot4ir+IU67QyIHFBPRysT4V/TCNNH6tA9Br/NXawTD8JsaVCo w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10894"; a="393711587"
-X-IronPort-AV: E=Sophos;i="6.03,304,1694761200"; d="scan'208";a="393711587"
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Nov 2023 02:40:26 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10894"; a="768552987"
-X-IronPort-AV: E=Sophos;i="6.03,304,1694761200"; d="scan'208";a="768552987"
-Received: from black.fi.intel.com ([10.237.72.28])
- by fmsmga007.fm.intel.com with ESMTP; 15 Nov 2023 02:40:20 -0800
-Received: by black.fi.intel.com (Postfix, from userid 1001)
- id 3653C305; Wed, 15 Nov 2023 12:40:19 +0200 (EET)
-Date: Wed, 15 Nov 2023 12:40:19 +0200
-From: Mika Westerberg <mika.westerberg@linux.intel.com>
-To: Mario Limonciello <mario.limonciello@amd.com>
-Message-ID: <20231115104019.GY17433@black.fi.intel.com>
-References: <20231114200755.14911-1-mario.limonciello@amd.com>
- <20231114200755.14911-6-mario.limonciello@amd.com>
+Received: from us-smtp-delivery-44.mimecast.com
+ (us-smtp-delivery-44.mimecast.com [205.139.111.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CF48D10E033
+ for <nouveau@lists.freedesktop.org>; Wed, 15 Nov 2023 14:39:43 +0000 (UTC)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-70-LmN1Ew95OaCIF7_Q0vhODw-1; Wed, 15 Nov 2023 09:39:40 -0500
+X-MC-Unique: LmN1Ew95OaCIF7_Q0vhODw-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id C7FFF867900;
+ Wed, 15 Nov 2023 14:39:39 +0000 (UTC)
+Received: from ultimate.redhat.com (unknown [10.64.136.11])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 42BA22166B28;
+ Wed, 15 Nov 2023 14:39:36 +0000 (UTC)
+From: airlied@gmail.com
+To: dri-devel@lists.freedesktop.org
+Date: Thu, 16 Nov 2023 00:39:33 +1000
+Message-ID: <20231115143933.261287-1-airlied@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20231114200755.14911-6-mario.limonciello@amd.com>
-Subject: Re: [Nouveau] [PATCH v3 5/7] PCI: ACPI: Detect PCIe root ports that
- are used for tunneling
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: gmail.com
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
+Subject: [Nouveau] [PATCH] nouveau: don't fail driver load if no display hw
+ present.
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,53 +51,40 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Rafael J . Wysocki" <rafael@kernel.org>,
- "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>,
- Marek =?utf-8?B?QmVow7pu?= <kabel@kernel.org>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
- "open list:ACPI" <linux-acpi@vger.kernel.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>,
- Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>,
- Manivannan Sadhasivam <mani@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
- Xinhui Pan <Xinhui.Pan@amd.com>, open list <linux-kernel@vger.kernel.org>,
- Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
- Pali =?utf-8?B?Um9ow6Fy?= <pali@kernel.org>,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
- "Maciej W . Rozycki" <macro@orcam.me.uk>
+Cc: nouveau@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Mario,
+From: Dave Airlie <airlied@redhat.com>
 
-On Tue, Nov 14, 2023 at 02:07:53PM -0600, Mario Limonciello wrote:
-> USB4 routers support a feature called "PCIe tunneling". This
-> allows PCIe traffic to be transmitted over USB4 fabric.
-> 
-> PCIe root ports that are used in this fashion can be discovered
-> by device specific data that specifies the USB4 router they are
-> connected to. For the PCI core, the specific connection information
-> doesn't matter, but it's interesting to know that this root port is
-> used for tunneling traffic. This will allow other decisions to be
-> made based upon it.
-> 
-> Detect the `usb4-host-interface` _DSD and if it's found save it
-> into a new `is_virtual_link` bit in `struct pci_device`.
+If we get back ENODEV don't fail load. There are nvidia devices
+that don't have display blocks and the driver should work on those.
 
-While this is fine for the "first" tunneled link, this does not take
-into account possible other "virtual" links that lead to the endpoint in
-question. Typically for eGPU it only makes sense to plug it directly to
-the host but say there is a USB4 hub (with PCIe tunneling capabilities)
-in the middle. Now the link from the hub to the eGPU that is also
-"virtual" is not marked as such and the bandwidth calculations may not
-get what is expected.
+Fixes: 15740541e8f0 ("drm/nouveau/devinit/tu102-: prepare for GSP-RM")
+Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/270
+Signed-off-by: Dave Airlie <airlied@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_display.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-It should be possible to map the PCIe ports that go over USB4 links
-through router port operation "Get PCIe Downstream Entry Mapping" and
-for the Thunderbolt 3 there is the DROM entries (I believe Lukas has
-patches for this part already) but I guess it is outside of the scope of
-this series. Out of curiosity I tried to look in Windows documentation
-if there is such interface for GPUs as we have in Linux but could not
-find (which does not mean it does not exist, though).
+diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/no=
+uveau/nouveau_display.c
+index d8c92521226d9..f28f9a8574586 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_display.c
++++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+@@ -726,6 +726,11 @@ nouveau_display_create(struct drm_device *dev)
+=20
+ =09if (nouveau_modeset !=3D 2) {
+ =09=09ret =3D nvif_disp_ctor(&drm->client.device, "kmsDisp", 0, &disp->dis=
+p);
++=09=09/* no display hw */
++=09=09if (ret =3D=3D -ENODEV) {
++=09=09=09ret =3D 0;
++=09=09=09goto disp_create_err;
++=09=09}
+=20
+ =09=09if (!ret && (disp->disp.outp_mask || drm->vbios.dcb.entries)) {
+ =09=09=09nouveau_display_create_properties(dev);
+--=20
+2.41.0
+
