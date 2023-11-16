@@ -1,62 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A77AD7ED712
-	for <lists+nouveau@lfdr.de>; Wed, 15 Nov 2023 23:19:06 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id AD8997EDD35
+	for <lists+nouveau@lfdr.de>; Thu, 16 Nov 2023 10:01:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7E5F410E15E;
-	Wed, 15 Nov 2023 22:19:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F2B0D10E139;
+	Thu, 16 Nov 2023 09:01:13 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6E17C10E15E;
- Wed, 15 Nov 2023 22:19:02 +0000 (UTC)
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-586ae6edf77so91378eaf.1; 
- Wed, 15 Nov 2023 14:19:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700086741; x=1700691541; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oi5d2nfQsyWJ6Cl5654DEWfBpi+oqUq6KQecwyT1JVA=;
- b=idVe3YKx6Sr5QmwOFbw1JMTl5W63+BQfrmvWV4ebJQZs1mXGdjgqtHmG6hObBQUYm3
- SYHjJV7e5d0GxCsi5RghQtO2/PFjwjZJQ88XlE3aE3JXiczapQSlVURihgHDvKZuZHtE
- g731Ykf7OI9wcjzd/9rGYWVcG6hPPlQytqz/6G9RjzUhlk4vcOQp1yyDObBgQhcHnNJA
- 8WJWr9SH/EgJCIE1wnTS3x0tHhnbjPlBAQYpwFEA/IgUatsnHXOy5yNgMVGifnqz6yl8
- yAdyqQ1uh5+g/LSk2m0HTLPorKJqVo7SfC60Fs7/anYwbIzVfelnLUAGaXaPHJFOPjYb
- k0ag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700086741; x=1700691541;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oi5d2nfQsyWJ6Cl5654DEWfBpi+oqUq6KQecwyT1JVA=;
- b=Fcwx7k3letGa/HCGGRq4dk+jzfalp725mc/usqK7/6BeznKtG8iy4f7BqgasXaB6rJ
- eSDskZp8kQKH8NZ1rK1GaXjYcJ16O+uKTZJrWuFpyt2AA9xCevQIZ5f4/iJvkzizrhYZ
- 0gZqn2lTB9lZVOhNxVz/RgYs3QDrpdYRqXtePyiqB6hKgioUmB8iTn/CFkZovn+x/vHO
- lZktbQmAxY84+0mQl+xcT6C90SAARjLucAVv9Sn3ttAmthbFYvZYK/yyRtyO2ReZ6P50
- GmWvvojwNGJnoAlrta0S7a7/f6citlDBMNpPGFN0QBr5t+EJMUz9ixh1xv0UtzP+vFLE
- zKVA==
-X-Gm-Message-State: AOJu0YzFKXilZpx8JmDxwVbqHABPxwmB+EuH6+ajhC+TamzoHnmRtJjj
- 2iyBTtu3SVw8mD3Jibn43y3J9+7KQelVh7oL8YY=
-X-Google-Smtp-Source: AGHT+IFDHG7TFOj1M6G82jXF7/qMb+lq03AZmJ0wqThx1Gfl8ngW6icByI+INXqHMngodqtbyZC6aBvEqmmngv08fVQ=
-X-Received: by 2002:a4a:6342:0:b0:581:f6b9:30d9 with SMTP id
- r2-20020a4a6342000000b00581f6b930d9mr10690905oof.8.1700086741532; Wed, 15 Nov
- 2023 14:19:01 -0800 (PST)
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AE24410E139;
+ Thu, 16 Nov 2023 09:01:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1700125272; x=1731661272;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=/STXsbosH6Rz9sQMt/crvGrrS9Z0X1RfO/fEtM3K5Z0=;
+ b=c2kzmUqqgVbWi66PCkg97xzHjwQPrQKrLSfj3J8/qfkajdvh9ev+0N5V
+ Rd7C8WL+L/g1UKaLioI58MDaVetS4sC1GUj48APtoP5cKM1xAYNT1GELU
+ 8u1J5BFwTB7DgLlFwOBx9lmEgl1ER3vxBiHhjm3C7lS2QI5+XEGR7nLTy
+ N+lhGic8FQMUL/JGcYk30yavq2EW3JqLY+McWkvBKJemIxzZE6a2CqyLX
+ ECYM3fGM+b1oTkERX3328ppqNJY8fS4GVTowcc9231721PlJaKE/QFY9V
+ UcPpil7sEwDELNzPYG6OUm1/l847Eq5oXpbQ54GBFAmpG8eT9u6uJthbi A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10895"; a="457542989"
+X-IronPort-AV: E=Sophos;i="6.03,307,1694761200"; d="scan'208";a="457542989"
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+ by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 16 Nov 2023 01:00:50 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10895"; a="768851613"
+X-IronPort-AV: E=Sophos;i="6.03,307,1694761200"; d="scan'208";a="768851613"
+Received: from black.fi.intel.com ([10.237.72.28])
+ by fmsmga007.fm.intel.com with ESMTP; 16 Nov 2023 01:00:43 -0800
+Received: by black.fi.intel.com (Postfix, from userid 1001)
+ id 9BFF0209; Thu, 16 Nov 2023 11:00:42 +0200 (EET)
+Date: Thu, 16 Nov 2023 11:00:42 +0200
+From: Mika Westerberg <mika.westerberg@linux.intel.com>
+To: Mario Limonciello <mario.limonciello@amd.com>
+Message-ID: <20231116090042.GF17433@black.fi.intel.com>
+References: <20231114200755.14911-1-mario.limonciello@amd.com>
+ <20231114200755.14911-6-mario.limonciello@amd.com>
+ <20231115104019.GY17433@black.fi.intel.com>
+ <70b35a0e-5ccd-4e19-a8ac-4cf095007a69@amd.com>
 MIME-Version: 1.0
-References: <20231115143933.261287-1-airlied@gmail.com>
-In-Reply-To: <20231115143933.261287-1-airlied@gmail.com>
-From: Nicolas Chauvet <kwizart@gmail.com>
-Date: Wed, 15 Nov 2023 23:18:50 +0100
-Message-ID: <CABr+WTmq8v1yGkrvRhxSr4XFtm+54g1E0_8X1CS+NrZF2h+yYw@mail.gmail.com>
-To: airlied@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] nouveau: don't fail driver load if no display
- hw present.
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <70b35a0e-5ccd-4e19-a8ac-4cf095007a69@amd.com>
+Subject: Re: [Nouveau] [PATCH v3 5/7] PCI: ACPI: Detect PCIe root ports that
+ are used for tunneling
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,49 +61,64 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>
+Cc: "Rafael J . Wysocki" <rafael@kernel.org>,
+ "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <dri-devel@lists.freedesktop.org>,
+ Marek =?utf-8?B?QmVow7pu?= <kabel@kernel.org>,
+ "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ "open list:ACPI" <linux-acpi@vger.kernel.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>,
+ Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>,
+ Manivannan Sadhasivam <mani@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ Xinhui Pan <Xinhui.Pan@amd.com>, open list <linux-kernel@vger.kernel.org>,
+ Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
+ Pali =?utf-8?B?Um9ow6Fy?= <pali@kernel.org>,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ "Maciej W . Rozycki" <macro@orcam.me.uk>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Le mer. 15 nov. 2023 =C3=A0 15:40, <airlied@gmail.com> a =C3=A9crit :
->
-> From: Dave Airlie <airlied@redhat.com>
->
-> If we get back ENODEV don't fail load. There are nvidia devices
-> that don't have display blocks and the driver should work on those.
->
-> Fixes: 15740541e8f0 ("drm/nouveau/devinit/tu102-: prepare for GSP-RM")
-> Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/270
-> Signed-off-by: Dave Airlie <airlied@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_display.c | 5 +++++
->  1 file changed, 5 insertions(+)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/=
-nouveau/nouveau_display.c
-> index d8c92521226d9..f28f9a8574586 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-> @@ -726,6 +726,11 @@ nouveau_display_create(struct drm_device *dev)
->
->         if (nouveau_modeset !=3D 2) {
->                 ret =3D nvif_disp_ctor(&drm->client.device, "kmsDisp", 0,=
- &disp->disp);
-> +               /* no display hw */
-> +               if (ret =3D=3D -ENODEV) {
-> +                       ret =3D 0;
-> +                       goto disp_create_err;
-> +               }
->
->                 if (!ret && (disp->disp.outp_mask || drm->vbios.dcb.entri=
-es)) {
->                         nouveau_display_create_properties(dev);
-> --
-> 2.41.0
+Hi Mario,
 
-I have tested this patch on top of 6.7-rc1+ and this doesn't change
-the situation on jetson-tx1 (gm20b)
-Could it be that something else similar is missing on arm64 ?
+On Wed, Nov 15, 2023 at 11:08:43AM -0600, Mario Limonciello wrote:
+> On 11/15/2023 04:40, Mika Westerberg wrote:
+> > Hi Mario,
+> > 
+> > On Tue, Nov 14, 2023 at 02:07:53PM -0600, Mario Limonciello wrote:
+> > > USB4 routers support a feature called "PCIe tunneling". This
+> > > allows PCIe traffic to be transmitted over USB4 fabric.
+> > > 
+> > > PCIe root ports that are used in this fashion can be discovered
+> > > by device specific data that specifies the USB4 router they are
+> > > connected to. For the PCI core, the specific connection information
+> > > doesn't matter, but it's interesting to know that this root port is
+> > > used for tunneling traffic. This will allow other decisions to be
+> > > made based upon it.
+> > > 
+> > > Detect the `usb4-host-interface` _DSD and if it's found save it
+> > > into a new `is_virtual_link` bit in `struct pci_device`.
+> > 
+> > While this is fine for the "first" tunneled link, this does not take
+> > into account possible other "virtual" links that lead to the endpoint in
+> > question. Typically for eGPU it only makes sense to plug it directly to
+> > the host but say there is a USB4 hub (with PCIe tunneling capabilities)
+> > in the middle. Now the link from the hub to the eGPU that is also
+> > "virtual" is not marked as such and the bandwidth calculations may not
+> > get what is expected.
+> 
+> Right; you mentioned the DVSEC available for hubs in this case.  As I don't
+> have one of these to validate it works properly I was thinking that should
+> be a follow up.
+> 
+> If you think it should be part of the same series I'll add it, but I'd ask
+> if you can please check I did it right on one that reports the DVSEC?
 
-Thanks
+I don't think it should be part of this series. I just checked and DVSEC
+is only required for hosts so kind of hardware equivalent for the _DSD
+property you are using here. For hubs there is no such luxury
+unfortunately.
+
+I think I do have hardware here with the DVSEC in place so if you
+decide to add it, I should be able to try it.
