@@ -1,43 +1,64 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06B7E7EE676
-	for <lists+nouveau@lfdr.de>; Thu, 16 Nov 2023 19:11:56 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 072B47EE6B3
+	for <lists+nouveau@lfdr.de>; Thu, 16 Nov 2023 19:28:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E9FCB10E2B1;
-	Thu, 16 Nov 2023 18:11:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4151410E657;
+	Thu, 16 Nov 2023 18:28:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C480E10E2B1;
- Thu, 16 Nov 2023 18:11:49 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id E3AE4CE2150;
- Thu, 16 Nov 2023 18:11:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E2C7C433C9;
- Thu, 16 Nov 2023 18:11:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1700158307;
- bh=Ry4mQQ1q/vn/j3+Dj1Ms0K/kq2DMCGX9s61dOISwTRo=;
- h=Date:From:To:Cc:Subject:From;
- b=la6R0gS4A9sua9wheZyCxfbRGCUfMXibabY/Ch7ODIveMD52xRHRGABVg9QniPV3L
- /5Z5+C+0ck49xRi+27ggYHvoNZ3Oq4AxSk6SqMgLOYo+Q56/tu7/awDVwGKwQU3SG3
- VEgi/EuHhu7B8nSgTEx7dl4Q7xjz2zJL6LLENK82zgRCCPA5RZYClmRkDBA7TsP1+5
- 8LkS2PdipAWqokVc9o8iBKQ3B0Z0al6fKdNvMtOHlA3MylPEzhnCFMQhedTPgQd9Bs
- ka46ygRkuiJqgbpkdHucUNQ2Vj94TTjKwtYlHTz8Wu4/J3Wm9yRZztnQU8cgsHZ9CS
- Jcg/Mtvj3mylA==
-Date: Thu, 16 Nov 2023 12:11:43 -0600
-From: "Gustavo A. R. Silva" <gustavoars@kernel.org>
-To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>
-Message-ID: <ZVZbX7C5suLMiBf+@work>
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9318810E663
+ for <nouveau@lists.freedesktop.org>; Thu, 16 Nov 2023 18:28:38 +0000 (UTC)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1cc53d0030fso8735415ad.0
+ for <nouveau@lists.freedesktop.org>; Thu, 16 Nov 2023 10:28:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1700159318; x=1700764118;
+ darn=lists.freedesktop.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=7reBGJiccGvFEPh84DNhsMy+d8d0VEfZ803Vs8wYx6A=;
+ b=C++qO4tx/HxtIn9XdRiJzvnjuROcf/PVIZNJKvyDMFXrtn+cqIjufFgu2TOVnhVdNq
+ Gix/z6NRxnHt6jlap/rqbob9I66145RXiU9T3n7Tj1yWoqzZ2svaAqlGT/l0z2wq2V1M
+ 8U++XFsqywh6B7t2merVbNNUe6KcTxi1QVkGA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700159318; x=1700764118;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7reBGJiccGvFEPh84DNhsMy+d8d0VEfZ803Vs8wYx6A=;
+ b=Hb5gp5QELQtU5CXxoQNuGJlycFQk6Cq89BUDHe/nWP5v4dha2MLkirH5CPQTLyel2x
+ /ytRlZcUF3LHZMgnHqSJLOgxkVn3aoz7wcRnvP0Hh6MUS+fo2JIo8WlHPDTahB9thK5g
+ YNKA517vS23fXkDI0ZuJ/2AeU+Hm7OBcqCRBpSCNLurHy7GFT2z8O3VSyot1JE4BaVoe
+ FyBzncUO8yAdMZadhCTR4c9HUopiIXhGPeYij8sChRewKNzjf8+YQ8w9m0+GT4N6APEW
+ lxBZxhuqc1lWItjg4z7OtWwgw/r6nrK0prxSiKDnaVmI1YRULdIohHg3cdPAplExKD4j
+ 0YZQ==
+X-Gm-Message-State: AOJu0YxG1f86DU0Yy/IIZk3cXvcpBqP7PtO/w80dT9nrJhWacqpTvphM
+ stfmKjTumQbMawJW5OSYZjc7QQ==
+X-Google-Smtp-Source: AGHT+IGAIJ1flNjVNFt30991BeOzVwdm7nFOpSj7aipBLifSRgBzIDb+/MN7TcTVw7PDSnp4FgwR1Q==
+X-Received: by 2002:a17:903:485:b0:1cc:38e6:f097 with SMTP id
+ jj5-20020a170903048500b001cc38e6f097mr3076987plb.7.1700159318125; 
+ Thu, 16 Nov 2023 10:28:38 -0800 (PST)
+Received: from www.outflux.net (198-0-35-241-static.hfc.comcastbusiness.net.
+ [198.0.35.241]) by smtp.gmail.com with ESMTPSA id
+ t18-20020a1709028c9200b001bdeedd8579sm9514614plo.252.2023.11.16.10.28.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Nov 2023 10:28:37 -0800 (PST)
+Date: Thu, 16 Nov 2023 10:28:37 -0800
+From: Kees Cook <keescook@chromium.org>
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+Message-ID: <202311161028.E780FBB146@keescook>
+References: <ZVZbX7C5suLMiBf+@work>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Subject: [Nouveau] [PATCH][next] nouveau/gsp: replace zero-length array with
- flex-array member and use __counted_by
+In-Reply-To: <ZVZbX7C5suLMiBf+@work>
+Subject: Re: [Nouveau] [PATCH][next] nouveau/gsp: replace zero-length array
+ with flex-array member and use __counted_by
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -49,83 +70,41 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-hardening@vger.kernel.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-hardening@vger.kernel.org,
+ Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Fake flexible arrays (zero-length and one-element arrays) are deprecated,
-and should be replaced by flexible-array members. So, replace
-zero-length array with a flexible-array member in `struct
-PACKED_REGISTRY_TABLE`.
+On Thu, Nov 16, 2023 at 12:11:43PM -0600, Gustavo A. R. Silva wrote:
+> Fake flexible arrays (zero-length and one-element arrays) are deprecated,
+> and should be replaced by flexible-array members. So, replace
+> zero-length array with a flexible-array member in `struct
+> PACKED_REGISTRY_TABLE`.
+> 
+> Also annotate array `entries` with `__counted_by()` to prepare for the
+> coming implementation by GCC and Clang of the `__counted_by` attribute.
+> Flexible array members annotated with `__counted_by` can have their
+> accesses bounds-checked at run-time via `CONFIG_UBSAN_BOUNDS` (for array
+> indexing) and `CONFIG_FORTIFY_SOURCE` (for strcpy/memcpy-family functions).
+> 
+> This fixes multiple -Warray-bounds warnings:
+> drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1069:29: warning: array subscript 0 is outside array bounds of 'PACKED_REGISTRY_ENTRY[0]' [-Warray-bounds=]
+> drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1070:29: warning: array subscript 0 is outside array bounds of 'PACKED_REGISTRY_ENTRY[0]' [-Warray-bounds=]
+> drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1071:29: warning: array subscript 0 is outside array bounds of 'PACKED_REGISTRY_ENTRY[0]' [-Warray-bounds=]
+> drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1072:29: warning: array subscript 0 is outside array bounds of 'PACKED_REGISTRY_ENTRY[0]' [-Warray-bounds=]
+> 
+> While there, also make use of the struct_size() helper, and address
+> checkpatch.pl warning:
+> WARNING: please, no spaces at the start of a line
+> 
+> This results in no differences in binary output.
+> 
+> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
 
-Also annotate array `entries` with `__counted_by()` to prepare for the
-coming implementation by GCC and Clang of the `__counted_by` attribute.
-Flexible array members annotated with `__counted_by` can have their
-accesses bounds-checked at run-time via `CONFIG_UBSAN_BOUNDS` (for array
-indexing) and `CONFIG_FORTIFY_SOURCE` (for strcpy/memcpy-family functions).
+Looks nice to me.
 
-This fixes multiple -Warray-bounds warnings:
-drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1069:29: warning: array subscript 0 is outside array bounds of 'PACKED_REGISTRY_ENTRY[0]' [-Warray-bounds=]
-drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1070:29: warning: array subscript 0 is outside array bounds of 'PACKED_REGISTRY_ENTRY[0]' [-Warray-bounds=]
-drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1071:29: warning: array subscript 0 is outside array bounds of 'PACKED_REGISTRY_ENTRY[0]' [-Warray-bounds=]
-drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1072:29: warning: array subscript 0 is outside array bounds of 'PACKED_REGISTRY_ENTRY[0]' [-Warray-bounds=]
+Reviewed-by: Kees Cook <keescook@chromium.org>
 
-While there, also make use of the struct_size() helper, and address
-checkpatch.pl warning:
-WARNING: please, no spaces at the start of a line
-
-This results in no differences in binary output.
-
-Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
----
- .../nvrm/535.113.01/nvidia/generated/g_os_nvoc.h   | 14 +++++++-------
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c     |  2 +-
- 2 files changed, 8 insertions(+), 8 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.113.01/nvidia/generated/g_os_nvoc.h b/drivers/gpu/drm/nouveau/include/nvrm/535.113.01/nvidia/generated/g_os_nvoc.h
-index 754c6af42f30..259b25c2ac6b 100644
---- a/drivers/gpu/drm/nouveau/include/nvrm/535.113.01/nvidia/generated/g_os_nvoc.h
-+++ b/drivers/gpu/drm/nouveau/include/nvrm/535.113.01/nvidia/generated/g_os_nvoc.h
-@@ -28,17 +28,17 @@
- 
- typedef struct PACKED_REGISTRY_ENTRY
- {
--    NvU32                   nameOffset;
--    NvU8                    type;
--    NvU32                   data;
--    NvU32                   length;
-+	NvU32                   nameOffset;
-+	NvU8                    type;
-+	NvU32                   data;
-+	NvU32                   length;
- } PACKED_REGISTRY_ENTRY;
- 
- typedef struct PACKED_REGISTRY_TABLE
- {
--    NvU32                   size;
--    NvU32                   numEntries;
--    PACKED_REGISTRY_ENTRY   entries[0];
-+	NvU32                   size;
-+	NvU32                   numEntries;
-+	PACKED_REGISTRY_ENTRY   entries[] __counted_by(numEntries);
- } PACKED_REGISTRY_TABLE;
- 
- #endif
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-index dc44f5c7833f..228335487af5 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-@@ -1048,7 +1048,7 @@ r535_gsp_rpc_set_registry(struct nvkm_gsp *gsp)
- 	char *strings;
- 	int str_offset;
- 	int i;
--	size_t rpc_size = sizeof(*rpc) + sizeof(rpc->entries[0]) * NV_GSP_REG_NUM_ENTRIES;
-+	size_t rpc_size = struct_size(rpc, entries, NV_GSP_REG_NUM_ENTRIES);
- 
- 	/* add strings + null terminator */
- 	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++)
 -- 
-2.34.1
-
+Kees Cook
