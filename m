@@ -2,46 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DF2282EE56
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:49:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6ADE382EE46
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:49:07 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A442D10E4E3;
-	Tue, 16 Jan 2024 11:47:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 656C210E4DD;
+	Tue, 16 Jan 2024 11:47:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.nppct.ru (mail.nppct.ru [195.133.245.4])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EE68810E249
- for <nouveau@lists.freedesktop.org>; Thu, 16 Nov 2023 06:52:13 +0000 (UTC)
-Received: from mail.nppct.ru (localhost [127.0.0.1])
- by mail.nppct.ru (Postfix) with ESMTP id 6CC601C0DFA
- for <nouveau@lists.freedesktop.org>; Thu, 16 Nov 2023 09:52:11 +0300 (MSK)
-Authentication-Results: mail.nppct.ru (amavisd-new); dkim=pass (1024-bit key)
- reason="pass (just generated,
- assumed good)" header.d=nppct.ru
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nppct.ru; h=
- content-transfer-encoding:mime-version:x-mailer:message-id:date
- :date:subject:subject:to:from:from; s=dkim; t=1700117531; x=
- 1700981532; bh=K3YRmKofc6N6uINNSmeFkKZnxYRW32B+l0K9TQS6g74=; b=U
- Dm5YGD4RJRs8GMnd8OzlQQbsYbsA5huKtEjGNwskRhlRVrlMyvhmHfYQnGlFkhEt
- v/aQfY6Rj1aPHzaRe3ruo5F431EfIrhEYC8RTrKphkwdIpZB/weL+cQZ8CR/+FKJ
- Iz0HPAPClYYvycH58zj53eR2R/X4xzn5nn3QemY0rQ=
-X-Virus-Scanned: Debian amavisd-new at mail.nppct.ru
-Received: from mail.nppct.ru ([127.0.0.1])
- by mail.nppct.ru (mail.nppct.ru [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id P4IoRbYRtm-0 for <nouveau@lists.freedesktop.org>;
- Thu, 16 Nov 2023 09:52:11 +0300 (MSK)
-Received: from localhost.localdomain (mail.dev-ai-melanoma.ru
- [185.130.227.204])
- by mail.nppct.ru (Postfix) with ESMTPSA id D04BC1C061A;
- Thu, 16 Nov 2023 09:52:07 +0300 (MSK)
-From: Andrey Shumilin <shum.sdl@nppct.ru>
-To: Karol Herbst <kherbst@redhat.com>
-Subject: [PATCH] tvnv17.c: Adding a NULL pointer check.
-Date: Thu, 16 Nov 2023 09:51:59 +0300
-Message-Id: <20231116065159.37876-1-shum.sdl@nppct.ru>
-X-Mailer: git-send-email 2.30.2
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.24])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5F86710E281;
+ Thu, 16 Nov 2023 12:30:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1700137838; x=1731673838;
+ h=date:from:to:cc:subject:in-reply-to:message-id:
+ references:mime-version;
+ bh=Zb8EkOCoEXSVYt6JBVTP/C88txRSmKBaT8vzI6Rweaw=;
+ b=CXEf3kVFbyCfn2/Npb9aQwtAyGEoZnu09487ec8dN4o0ASVj4sYa714V
+ xj54azKzxiILd3rc0TXAHRtDErwby/VtKiIcIOeaZ4dPu6elXG+RvVjX3
+ hxPZH/cqZYpNhse8Y/swYaOrmaS7McNo8n0PR6YhMqwC+BgElenGz4AT4
+ +FWvtq3So/sptLGoqfIAb6yDRcPLaHWIaUixbCJKYovJrstkbT92XL5iP
+ p/PA4b7QJraXAnVXWf0kuODgSZzvUSCb/AFSF+vy047CqCVZo06rb03Vk
+ Oxnh3f58rqlBCeyGtE9U1iOlyLdUaclPIVG7x6XHuveb2hGFv0p4zeELZ Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10895"; a="393930205"
+X-IronPort-AV: E=Sophos;i="6.04,308,1695711600"; d="scan'208";a="393930205"
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+ by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 16 Nov 2023 04:30:37 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10895"; a="835736305"
+X-IronPort-AV: E=Sophos;i="6.04,308,1695711600"; d="scan'208";a="835736305"
+Received: from jhsteyn-mobl1.ger.corp.intel.com ([10.252.40.9])
+ by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 16 Nov 2023 04:30:31 -0800
+Date: Thu, 16 Nov 2023 14:30:28 +0200 (EET)
+From: =?ISO-8859-15?Q?Ilpo_J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>
+To: Mario Limonciello <mario.limonciello@amd.com>
+Subject: Re: [PATCH v3 4/7] PCI: pciehp: Move check for is_thunderbolt into
+ a quirk
+In-Reply-To: <20231114200755.14911-5-mario.limonciello@amd.com>
+Message-ID: <8ade60ab-881b-8046-5d3a-ad82fe16d49@linux.intel.com>
+References: <20231114200755.14911-1-mario.limonciello@amd.com>
+ <20231114200755.14911-5-mario.limonciello@amd.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/mixed; boundary="8323329-35208055-1700137836=:1886"
 X-Mailman-Approved-At: Tue, 16 Jan 2024 11:47:29 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -54,47 +58,121 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jani Nikula <jani.nikula@intel.com>, nouveau@lists.freedesktop.org,
- Andrey Shumilin <shum.sdl@nppct.ru>, linux-kernel@vger.kernel.org,
- Maxime Ripard <mripard@kernel.org>, vefanov@ispras.ru, ykarpov@ispras.ru,
- =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>,
- dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
- vmerzlyakov@ispras.ru, khoroshilov@ispras.ru
+Cc: "Rafael J . Wysocki" <rafael@kernel.org>,
+ "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <dri-devel@lists.freedesktop.org>,
+ =?ISO-8859-15?Q?Marek_Beh=FAn?= <kabel@kernel.org>,
+ "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ "open list:ACPI" <linux-acpi@vger.kernel.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>, Manivannan Sadhasivam <mani@kernel.org>,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>,
+ Xinhui Pan <Xinhui.Pan@amd.com>, open list <linux-kernel@vger.kernel.org>,
+ Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
+ =?ISO-8859-15?Q?Pali_Roh=E1r?= <pali@kernel.org>,
+ =?ISO-8859-15?Q?Christian_K=F6nig?= <christian.koenig@amd.com>,
+ "Maciej W . Rozycki" <macro@orcam.me.uk>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-It is possible to dereference a null pointer if drm_mode_duplicate() returns NULL.
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-Found by Linux Verification Center (linuxtesting.org) with SVACE.
+--8323329-35208055-1700137836=:1886
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: 8BIT
 
-Signed-off-by: Andrey Shumilin <shum.sdl@nppct.ru>
----
- drivers/gpu/drm/nouveau/dispnv04/tvnv17.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+On Tue, 14 Nov 2023, Mario Limonciello wrote:
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
-index 670c9739e5e1..1f0c5f4a5fd2 100644
---- a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
-+++ b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
-@@ -209,7 +209,8 @@ static int nv17_tv_get_ld_modes(struct drm_encoder *encoder,
- 		struct drm_display_mode *mode;
- 
- 		mode = drm_mode_duplicate(encoder->dev, tv_mode);
--
-+		if (mode == NULL)
-+			continue;
- 		mode->clock = tv_norm->tv_enc_mode.vrefresh *
- 			mode->htotal / 1000 *
- 			mode->vtotal / 1000;
-@@ -258,6 +259,8 @@ static int nv17_tv_get_hd_modes(struct drm_encoder *encoder,
- 		if (modes[i].hdisplay == output_mode->hdisplay &&
- 		    modes[i].vdisplay == output_mode->vdisplay) {
- 			mode = drm_mode_duplicate(encoder->dev, output_mode);
-+			if (mode == NULL)
-+				continue;
- 			mode->type |= DRM_MODE_TYPE_PREFERRED;
- 
- 		} else {
+> commit 493fb50e958c ("PCI: pciehp: Assume NoCompl+ for Thunderbolt
+> ports") added a check into pciehp code to explicitly set NoCompl+
+> for all Intel Thunderbolt controllers, including those that don't
+> need it.
+> 
+> This overloaded the purpose of the `is_thunderbolt` member of
+> `struct pci_device` because that means that any controller that
+> identifies as thunderbolt would set NoCompl+ even if it doesn't
+> suffer this deficiency. As that commit helpfully specifies all the
+> controllers with the problem, move them into a PCI quirk.
+> 
+> Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
+> ---
+> v2->v3:
+>  * Reword commit message
+>  * Update comments
+> ---
+>  drivers/pci/hotplug/pciehp_hpc.c |  6 +-----
+>  drivers/pci/quirks.c             | 20 ++++++++++++++++++++
+>  include/linux/pci.h              |  1 +
+>  3 files changed, 22 insertions(+), 5 deletions(-)
+> 
+> diff --git a/drivers/pci/hotplug/pciehp_hpc.c b/drivers/pci/hotplug/pciehp_hpc.c
+> index b1d0a1b3917d..40f7a26fb98f 100644
+> --- a/drivers/pci/hotplug/pciehp_hpc.c
+> +++ b/drivers/pci/hotplug/pciehp_hpc.c
+> @@ -992,11 +992,7 @@ struct controller *pcie_init(struct pcie_device *dev)
+>  	if (pdev->hotplug_user_indicators)
+>  		slot_cap &= ~(PCI_EXP_SLTCAP_AIP | PCI_EXP_SLTCAP_PIP);
+>  
+> -	/*
+> -	 * We assume no Thunderbolt controllers support Command Complete events,
+> -	 * but some controllers falsely claim they do.
+> -	 */
+> -	if (pdev->is_thunderbolt)
+> +	if (pdev->no_command_complete)
+>  		slot_cap |= PCI_EXP_SLTCAP_NCCS;
+>  
+>  	ctrl->slot_cap = slot_cap;
+> diff --git a/drivers/pci/quirks.c b/drivers/pci/quirks.c
+> index ea476252280a..fa9b82cd7b3b 100644
+> --- a/drivers/pci/quirks.c
+> +++ b/drivers/pci/quirks.c
+> @@ -3809,6 +3809,26 @@ DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_CACTUS_RIDGE_4C
+>  DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_PORT_RIDGE,
+>  			quirk_thunderbolt_hotplug_msi);
+>  
+> +/*
+> + * Certain Thunderbolt 1 controllers falsely claim to support Command
+> + * Completed events.
+> + */
+> +static void quirk_thunderbolt_command_complete(struct pci_dev *pdev)
+> +{
+> +	pdev->no_command_complete = 1;
+> +}
+> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_LIGHT_RIDGE,
+> +			quirk_thunderbolt_command_complete);
+> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EAGLE_RIDGE,
+> +			quirk_thunderbolt_command_complete);
+> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_LIGHT_PEAK,
+> +			quirk_thunderbolt_command_complete);
+> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_CACTUS_RIDGE_4C,
+> +			quirk_thunderbolt_command_complete);
+> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_CACTUS_RIDGE_2C,
+> +			quirk_thunderbolt_command_complete);
+> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_PORT_RIDGE,
+> +			quirk_thunderbolt_command_complete);
+>  #ifdef CONFIG_ACPI
+>  /*
+>   * Apple: Shutdown Cactus Ridge Thunderbolt controller.
+> diff --git a/include/linux/pci.h b/include/linux/pci.h
+> index 1fbca2bd92e8..20a6e4fc3060 100644
+> --- a/include/linux/pci.h
+> +++ b/include/linux/pci.h
+> @@ -441,6 +441,7 @@ struct pci_dev {
+>  	unsigned int	is_hotplug_bridge:1;
+>  	unsigned int	shpc_managed:1;		/* SHPC owned by shpchp */
+>  	unsigned int	is_thunderbolt:1;	/* Thunderbolt controller */
+> +	unsigned int	no_command_complete:1;	/* No command completion */
+>  	/*
+>  	 * Devices marked being untrusted are the ones that can potentially
+>  	 * execute DMA attacks and similar. They are typically connected
+> 
+
+Reviewed-by: Ilpo Järvinen <ilpo.jarvinen@linux.intel.com>
+
 -- 
-2.30.2
+ i.
 
+--8323329-35208055-1700137836=:1886--
