@@ -2,74 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDD1C7EFBF3
-	for <lists+nouveau@lfdr.de>; Sat, 18 Nov 2023 00:00:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D80C27F0A74
+	for <lists+nouveau@lfdr.de>; Mon, 20 Nov 2023 03:07:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5B2BA10E779;
-	Fri, 17 Nov 2023 23:00:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D36F910E1F5;
+	Mon, 20 Nov 2023 02:07:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0694E10E779
- for <nouveau@lists.freedesktop.org>; Fri, 17 Nov 2023 23:00:31 +0000 (UTC)
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-9e4675c7a5fso347539066b.0
- for <nouveau@lists.freedesktop.org>; Fri, 17 Nov 2023 15:00:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700262028; x=1700866828;
- darn=lists.freedesktop.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CMkvkcQ13fcCiTw6RuM4WY/Bg/hY3XQDUqCeInYeZG0=;
- b=FV3/QGNMOqGenigNJ8122A3jCTKYSSpUubtBnj7png+qB0TDOhwGO9j/vKVpCfDxKe
- ysUy/7mJ2whYIqMKTS+ZOCTIjEQydfxAnK9CJDGXL4WnjQHeaYv7W3BNEyGYbx4eIuV7
- 2bed+PJHdKpGMsz3vGlPwlLB5p9uxamI4WQkg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700262028; x=1700866828;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CMkvkcQ13fcCiTw6RuM4WY/Bg/hY3XQDUqCeInYeZG0=;
- b=xEMZ3bqYvypdwMy5jeu8f8i8iYfvFyBMDavbpYiVBGcZaDckHtAEB+i7GNEMSA9UQd
- oD/OFfxIFWwmrwPrE1am57VCLIyPvjktSYVdZndr/5Ms3Njm0xh12B990mQ57XskNzii
- r+8L5noTiqHCpB7zXezhemwlqEbK79vYXQAeEtNu5/bYY6QK/xMdDAV4LgjparwS0pDP
- T0vwIFx6Zb7uav9c1pp5weBBy2FDfm3bvGoEo8xsFNZ87mhyp33QBODBkeyGER20VMKT
- IeYmfef/MxGmFTc4uIYuEE33XjqA83L308Cl8J9fsocj/CH6qkSr47f0AF8Ni+P5Mn8c
- 8h6A==
-X-Gm-Message-State: AOJu0YzNZQWCq/O5S6aUxK6ZwMzUFj1vh8I9aNWx4l0RxRQlX5/gqebx
- gbVps4WN8q8QF7Zke/sGrO1ScCpMToOWRIHJPUrqnVTQ
-X-Google-Smtp-Source: AGHT+IHoD/lI3vMs/xC7cr11nwmWbJ8bpDxKujrs0Mk36uZU7VRAPvlqclwKyCivgHJWllqpVUspsg==
-X-Received: by 2002:a17:907:c24b:b0:9ae:6ad0:f6db with SMTP id
- tj11-20020a170907c24b00b009ae6ad0f6dbmr550743ejc.71.1700262027832; 
- Fri, 17 Nov 2023 15:00:27 -0800 (PST)
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com.
- [209.85.208.49]) by smtp.gmail.com with ESMTPSA id
- v27-20020a170906489b00b009d2eb40ff9dsm1250896ejq.33.2023.11.17.15.00.26
- for <nouveau@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Nov 2023 15:00:27 -0800 (PST)
-Received: by mail-ed1-f49.google.com with SMTP id
- 4fb4d7f45d1cf-54366bb1c02so1496a12.1
- for <nouveau@lists.freedesktop.org>; Fri, 17 Nov 2023 15:00:26 -0800 (PST)
-X-Received: by 2002:a05:6402:ea1:b0:544:f741:62f4 with SMTP id
- h33-20020a0564020ea100b00544f74162f4mr65555eda.0.1700262026298; Fri, 17 Nov
- 2023 15:00:26 -0800 (PST)
+Received: from us-smtp-delivery-44.mimecast.com
+ (us-smtp-delivery-44.mimecast.com [207.211.30.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3816210E1D4
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Nov 2023 02:07:40 +0000 (UTC)
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-175-5ske6PDSOnyNBDT9uNJ2HA-1; Sun,
+ 19 Nov 2023 21:07:37 -0500
+X-MC-Unique: 5ske6PDSOnyNBDT9uNJ2HA-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1C4641C05AAC;
+ Mon, 20 Nov 2023 02:07:37 +0000 (UTC)
+Received: from dreadlord.redhat.com (unknown [10.64.136.121])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 1C9F71121308;
+ Mon, 20 Nov 2023 02:07:35 +0000 (UTC)
+From: Dave Airlie <airlied@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Date: Mon, 20 Nov 2023 12:07:33 +1000
+Message-ID: <20231120020734.2505094-1-airlied@gmail.com>
 MIME-Version: 1.0
-References: <20230921192749.1542462-1-dianders@chromium.org>
- <20230921122641.RFT.v2.4.Ie7588ec6e0f93e8bc700e76b265ad1a7ad6b15ad@changeid>
- <2f7fbd1b606b4d08b8c8c6eefff5898c8faa697c.camel@redhat.com>
-In-Reply-To: <2f7fbd1b606b4d08b8c8c6eefff5898c8faa697c.camel@redhat.com>
-From: Doug Anderson <dianders@chromium.org>
-Date: Fri, 17 Nov 2023 15:00:09 -0800
-X-Gmail-Original-Message-ID: <CAD=FV=XkeicQ3Gq4yaFtXsF7yM_7pXbpNKB56DbOwBmsEsrF_g@mail.gmail.com>
-Message-ID: <CAD=FV=XkeicQ3Gq4yaFtXsF7yM_7pXbpNKB56DbOwBmsEsrF_g@mail.gmail.com>
-To: Lyude Paul <lyude@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.3
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: gmail.com
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [RFT PATCH v2 04/12] drm/nouveau: Call
- drm_atomic_helper_shutdown() or equiv at shutdown time
+Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
+Subject: [Nouveau] [PATCH] nouveau/gsp: fix getting max channel id for GSP
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,24 +50,93 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- Maxime Ripard <mripard@kernel.org>, dri-devel@lists.freedesktop.org,
- daniel@ffwll.ch, bskeggs@redhat.com
+Cc: nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+From: Dave Airlie <airlied@redhat.com>
 
-On Fri, Sep 22, 2023 at 2:06=E2=80=AFPM Lyude Paul <lyude@redhat.com> wrote=
-:
->
-> actually very glad to see this because I think I've seen one bug in the w=
-ild
-> as a result of things not getting shut down :)
->
-> Reviewed-by: Lyude Paul <lyude@redhat.com>
-> Tested-by: Lyude Paul <lyude@redhat.com>
+The fence code uses the total number of channel ids to allocate a
+bunch of memory for fencing. This is probably not the best way to
+do this, but it's hard to fix right now.
 
-Any idea of where / how this patch should land. Would you expect me to
-land it through drm-misc, or would you expect it to go through someone
-else's tree?
+The GSP code realises it can fit 8 channels into a USERD
+page, so it claims it can support 256 channels max, but it then
+allocates channel ids sparsely (0, 8, 16 etc).
+
+This just exposes the multiplier to userspace so the fence code
+gets things right, however I think this might all need more thought.
+
+Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/274
+Signed-off-by: Dave Airlie <airlied@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c | 7 ++++++-
+ drivers/gpu/drm/nouveau/nvkm/engine/fifo/priv.h | 2 ++
+ drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c | 7 +++++++
+ 3 files changed, 15 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/fifo/base.c
+index 22443fe4a39f..8e36cdd0e5fb 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c
+@@ -178,7 +178,12 @@ nvkm_fifo_info(struct nvkm_engine *engine, u64 mthd, u=
+64 *data)
+ =09=09return ret;
+=20
+ =09switch (mthd) {
+-=09case NV_DEVICE_HOST_CHANNELS: *data =3D fifo->chid ? fifo->chid->nr : 0=
+; return 0;
++=09case NV_DEVICE_HOST_CHANNELS:
++=09=09if (fifo->func->chid_total)
++=09=09=09*data =3D fifo->func->chid_total(fifo);
++=09=09else
++=09=09=09*data =3D fifo->chid ? fifo->chid->nr : 0;
++=09=09return 0;
+ =09case NV_DEVICE_HOST_RUNLISTS:
+ =09=09*data =3D 0;
+ =09=09nvkm_runl_foreach(runl, fifo)
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/priv.h b/drivers/gpu/=
+drm/nouveau/nvkm/engine/fifo/priv.h
+index a0f3277605a5..c21e982b03a5 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/priv.h
+@@ -17,6 +17,8 @@ struct nvkm_fifo_func {
+=20
+ =09int (*chid_nr)(struct nvkm_fifo *);
+ =09int (*chid_ctor)(struct nvkm_fifo *, int nr);
++
++=09int (*chid_total)(struct nvkm_fifo *);
+ =09int (*runq_nr)(struct nvkm_fifo *);
+ =09int (*runl_ctor)(struct nvkm_fifo *);
+=20
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/fifo/r535.c
+index b374d72fd1c1..1e9c0b113cb5 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c
+@@ -641,6 +641,12 @@ r535_fifo_dtor(struct nvkm_fifo *fifo)
+ =09kfree(fifo->func);
+ }
+=20
++static int
++r535_fifo_chid_total(struct nvkm_fifo *fifo)
++{
++=09return fifo->chid->nr * CHID_PER_USERD;
++}
++
+ int
+ r535_fifo_new(const struct nvkm_fifo_func *hw, struct nvkm_device *device,
+ =09      enum nvkm_subdev_type type, int inst, struct nvkm_fifo **pfifo)
+@@ -652,6 +658,7 @@ r535_fifo_new(const struct nvkm_fifo_func *hw, struct n=
+vkm_device *device,
+=20
+ =09rm->dtor =3D r535_fifo_dtor;
+ =09rm->runl_ctor =3D r535_fifo_runl_ctor;
++=09rm->chid_total =3D r535_fifo_chid_total;
+ =09rm->runl =3D &r535_runl;
+ =09rm->cgrp =3D hw->cgrp;
+ =09rm->cgrp.func =3D &r535_cgrp;
+--=20
+2.42.0
+
