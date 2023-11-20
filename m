@@ -1,44 +1,81 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D80C27F0A74
-	for <lists+nouveau@lfdr.de>; Mon, 20 Nov 2023 03:07:50 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 666A87F12B6
+	for <lists+nouveau@lfdr.de>; Mon, 20 Nov 2023 13:06:43 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D36F910E1F5;
-	Mon, 20 Nov 2023 02:07:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C936E10E3AF;
+	Mon, 20 Nov 2023 12:06:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [207.211.30.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3816210E1D4
- for <nouveau@lists.freedesktop.org>; Mon, 20 Nov 2023 02:07:40 +0000 (UTC)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-175-5ske6PDSOnyNBDT9uNJ2HA-1; Sun,
- 19 Nov 2023 21:07:37 -0500
-X-MC-Unique: 5ske6PDSOnyNBDT9uNJ2HA-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
- [10.11.54.3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1C4641C05AAC;
- Mon, 20 Nov 2023 02:07:37 +0000 (UTC)
-Received: from dreadlord.redhat.com (unknown [10.64.136.121])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 1C9F71121308;
- Mon, 20 Nov 2023 02:07:35 +0000 (UTC)
-From: Dave Airlie <airlied@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Date: Mon, 20 Nov 2023 12:07:33 +1000
-Message-ID: <20231120020734.2505094-1-airlied@gmail.com>
+Received: from metis.whiteo.stw.pengutronix.de
+ (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 17D0510E3AC
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Nov 2023 12:06:37 +0000 (UTC)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+ by metis.whiteo.stw.pengutronix.de with esmtps
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1r5329-0000qA-BQ; Mon, 20 Nov 2023 13:05:45 +0100
+Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
+ by drehscheibe.grey.stw.pengutronix.de with esmtps (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1r5322-00AL9N-2Y; Mon, 20 Nov 2023 13:05:38 +0100
+Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1r5321-004MKG-NA; Mon, 20 Nov 2023 13:05:37 +0100
+Date: Mon, 20 Nov 2023 13:05:37 +0100
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+To: Andrzej Hajda <andrzej.hajda@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Sam Ravnborg <sam@ravnborg.org>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Alexey Brodkin <abrodkin@synopsys.com>,
+ Russell King <linux@armlinux.org.uk>, Aradhya Bhatia <a-bhatia1@ti.com>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Zhu Wang <wangzhu9@huawei.com>, Rob Herring <robh@kernel.org>,
+ Lucas Stach <l.stach@pengutronix.de>, Inki Dae <inki.dae@samsung.com>,
+ Seung-Woo Kim <sw0312.kim@samsung.com>,
+ Kyungmin Park <kyungmin.park@samsung.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ Jingoo Han <jingoohan1@gmail.com>,
+ Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
+ Shawn Guo <shawnguo@kernel.org>, Sascha Hauer <s.hauer@pengutronix.de>,
+ Philipp Zabel <p.zabel@pengutronix.de>,
+ Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>,
+ Thierry Reding <treding@nvidia.com>, Dan Carpenter <error27@gmail.com>,
+ Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
+ Chun-Kuang Hu <chunkuang.hu@kernel.org>,
+ Matthias Brugger <matthias.bgg@gmail.com>,
+ Kevin Hilman <khilman@baylibre.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Orson Zhai <orsonzhai@gmail.com>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Chunyan Zhang <zhang.lyra@gmail.com>,
+ Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+ Deepak R Varma <drv@mailo.com>, Jani Nikula <jani.nikula@intel.com>,
+ Jyri Sarha <jyri.sarha@iki.fi>,
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+Message-ID: <20231120120537.c22pbb2zovxvpdkf@pengutronix.de>
+References: <20231102165640.3307820-18-u.kleine-koenig@pengutronix.de>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.3
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: gmail.com
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
-Subject: [Nouveau] [PATCH] nouveau/gsp: fix getting max channel id for GSP
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ufcnet56kc2kty3a"
+Content-Disposition: inline
+In-Reply-To: <20231102165640.3307820-18-u.kleine-koenig@pengutronix.de>
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ukl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: nouveau@lists.freedesktop.org
+Subject: Re: [Nouveau] [PATCH v3 00/16] drm: Convert to platform remove
+ callback returning void
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,93 +87,77 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org
+Cc: linux-samsung-soc@vger.kernel.org, kernel@pengutronix.de,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+ nouveau@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, NXP Linux Team <linux-imx@nxp.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org,
+ Alim Akhtar <alim.akhtar@samsung.com>,
+ Russell King <linux+etnaviv@armlinux.org.uk>,
+ linux-amlogic@lists.infradead.org, Jerome Brunet <jbrunet@baylibre.com>,
+ Fabio Estevam <festevam@gmail.com>, linux-arm-kernel@lists.infradead.org,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
 
-The fence code uses the total number of channel ids to allocate a
-bunch of memory for fencing. This is probably not the best way to
-do this, but it's hard to fix right now.
+--ufcnet56kc2kty3a
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The GSP code realises it can fit 8 channels into a USERD
-page, so it claims it can support 256 channels max, but it then
-allocates channel ids sparsely (0, 8, 16 etc).
+[Dropped a few people from To that resulted in bounces before.]
 
-This just exposes the multiplier to userspace so the fence code
-gets things right, however I think this might all need more thought.
+On Thu, Nov 02, 2023 at 05:56:41PM +0100, Uwe Kleine-K=F6nig wrote:
+> Hello,
+>=20
+> this series converts all platform drivers below drivers/gpu/drm to use
+> .remove_new(). It starts with a fix for a problem that potentially might
+> crash the kernel that I stumbled over while implementing the conversion.
+>=20
+> Some of the conversion patches following this fix were already send in
+> earlier series:
+>=20
+> 	https://lore.kernel.org/dri-devel/20230801110239.831099-1-u.kleine-koeni=
+g@pengutronix.de
+> 	https://lore.kernel.org/dri-devel/20230318190804.234610-1-u.kleine-koeni=
+g@pengutronix.de
+>=20
+> and three patches (bridge/tpd12s015, exynos + tilcdc) are new. Parts of
+> the above series were picked up, the patches resend here are not.
 
-Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/274
-Signed-off-by: Dave Airlie <airlied@redhat.com>
----
- drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c | 7 ++++++-
- drivers/gpu/drm/nouveau/nvkm/engine/fifo/priv.h | 2 ++
- drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c | 7 +++++++
- 3 files changed, 15 insertions(+), 1 deletion(-)
+Apart from a Reviewed-by: by Toni Valkeinen for patch #16 and Inki Dae
+who wrote to have taken patch #8 (but that didn't appear in neither next
+nor drm-misc-next yet).
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c b/drivers/gpu/=
-drm/nouveau/nvkm/engine/fifo/base.c
-index 22443fe4a39f..8e36cdd0e5fb 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/base.c
-@@ -178,7 +178,12 @@ nvkm_fifo_info(struct nvkm_engine *engine, u64 mthd, u=
-64 *data)
- =09=09return ret;
+Also in v2 they didn't result in euphoric replies.
+
+Can someone who cares about drm as a whole please care for this series
+apply it?
+
+Best regards
+Uwe
 =20
- =09switch (mthd) {
--=09case NV_DEVICE_HOST_CHANNELS: *data =3D fifo->chid ? fifo->chid->nr : 0=
-; return 0;
-+=09case NV_DEVICE_HOST_CHANNELS:
-+=09=09if (fifo->func->chid_total)
-+=09=09=09*data =3D fifo->func->chid_total(fifo);
-+=09=09else
-+=09=09=09*data =3D fifo->chid ? fifo->chid->nr : 0;
-+=09=09return 0;
- =09case NV_DEVICE_HOST_RUNLISTS:
- =09=09*data =3D 0;
- =09=09nvkm_runl_foreach(runl, fifo)
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/priv.h b/drivers/gpu/=
-drm/nouveau/nvkm/engine/fifo/priv.h
-index a0f3277605a5..c21e982b03a5 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/priv.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/priv.h
-@@ -17,6 +17,8 @@ struct nvkm_fifo_func {
-=20
- =09int (*chid_nr)(struct nvkm_fifo *);
- =09int (*chid_ctor)(struct nvkm_fifo *, int nr);
-+
-+=09int (*chid_total)(struct nvkm_fifo *);
- =09int (*runq_nr)(struct nvkm_fifo *);
- =09int (*runl_ctor)(struct nvkm_fifo *);
-=20
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c b/drivers/gpu/=
-drm/nouveau/nvkm/engine/fifo/r535.c
-index b374d72fd1c1..1e9c0b113cb5 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c
-@@ -641,6 +641,12 @@ r535_fifo_dtor(struct nvkm_fifo *fifo)
- =09kfree(fifo->func);
- }
-=20
-+static int
-+r535_fifo_chid_total(struct nvkm_fifo *fifo)
-+{
-+=09return fifo->chid->nr * CHID_PER_USERD;
-+}
-+
- int
- r535_fifo_new(const struct nvkm_fifo_func *hw, struct nvkm_device *device,
- =09      enum nvkm_subdev_type type, int inst, struct nvkm_fifo **pfifo)
-@@ -652,6 +658,7 @@ r535_fifo_new(const struct nvkm_fifo_func *hw, struct n=
-vkm_device *device,
-=20
- =09rm->dtor =3D r535_fifo_dtor;
- =09rm->runl_ctor =3D r535_fifo_runl_ctor;
-+=09rm->chid_total =3D r535_fifo_chid_total;
- =09rm->runl =3D &r535_runl;
- =09rm->cgrp =3D hw->cgrp;
- =09rm->cgrp.func =3D &r535_cgrp;
 --=20
-2.42.0
+Pengutronix e.K.                           | Uwe Kleine-K=F6nig            |
+Industrial Linux Solutions                 | https://www.pengutronix.de/ |
 
+--ufcnet56kc2kty3a
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmVbS5AACgkQj4D7WH0S
+/k5ljwf/fbUqzZ6qYDVQTFo8CLF29RFHPtXKCYzB3ACPuZW1XDZ0nqpyOaOYlJTM
+m/UywEGAcpJBi6xYedgzANfhEeHClU7sVWTu3FtErEmvMEdL6cRv3iGUUYJMJKaz
+jaJgPT2edHjnQagw6EQVf35DRBHzIDAb+bAnGi35nLYit5bXGOUblE3/t/91GW0b
+v7scQQKZizofPiQxmwS1ifbOZ0SrXDF6qQXCswjS21FAo0P96L1jUpoCIwiv6Cgk
+0yQ8QkqHSbesIkzwtMwiAGA2iyF0CbMQziBwuCZEZqQHfinJK7BqJF+94UBXDaDj
+DPQvaMnGHvaZZyw7O3SbZx8wAfxaLQ==
+=KndO
+-----END PGP SIGNATURE-----
+
+--ufcnet56kc2kty3a--
