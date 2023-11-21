@@ -1,42 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6721B7F321C
-	for <lists+nouveau@lfdr.de>; Tue, 21 Nov 2023 16:16:48 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A36137F3722
+	for <lists+nouveau@lfdr.de>; Tue, 21 Nov 2023 21:11:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B549E10E4E0;
-	Tue, 21 Nov 2023 15:16:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 192A510E4F7;
+	Tue, 21 Nov 2023 20:11:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de
- [80.237.130.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A958E10E4E0;
- Tue, 21 Nov 2023 15:16:44 +0000 (UTC)
-Received: from [2a02:8108:8980:2478:8cde:aa2c:f324:937e]; authenticated
- by wp530.webpack.hosteurope.de running ExIM with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
- id 1r5SUU-00049x-3B; Tue, 21 Nov 2023 16:16:42 +0100
-Message-ID: <c72ca99e-8657-4ed8-9999-5702ebeb5b8c@leemhuis.info>
-Date: Tue, 21 Nov 2023 16:16:40 +0100
+Received: from us-smtp-delivery-44.mimecast.com
+ (us-smtp-delivery-44.mimecast.com [205.139.111.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 63DEC10E4F7
+ for <nouveau@lists.freedesktop.org>; Tue, 21 Nov 2023 20:11:15 +0000 (UTC)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-34-GGFD2MBzMaKzLGUI1ZKrUw-1; Tue, 21 Nov 2023 15:11:12 -0500
+X-MC-Unique: GGFD2MBzMaKzLGUI1ZKrUw-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 2D6C285A59D;
+ Tue, 21 Nov 2023 20:11:12 +0000 (UTC)
+Received: from dreadlord.redhat.com (unknown [10.64.136.121])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 2CBB72026D4C;
+ Tue, 21 Nov 2023 20:11:10 +0000 (UTC)
+From: Dave Airlie <airlied@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Date: Wed, 22 Nov 2023 06:11:09 +1000
+Message-ID: <20231121201109.2988516-1-airlied@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US, de-DE
-To: "Owen T. Heisler" <writer@owenh.net>,
- Linux regressions mailing list <regressions@lists.linux.dev>,
- stable@vger.kernel.org
-References: <6f027566-c841-4415-bc85-ce11a5832b14@owenh.net>
- <5ecf0eac-a089-4da9-b76e-b45272c98393@leemhuis.info>
- <6b7a71b4-c8a2-46f4-a995-0c63e7745ca3@owenh.net>
-From: "Linux regression tracking (Thorsten Leemhuis)"
- <regressions@leemhuis.info>
-In-Reply-To: <6b7a71b4-c8a2-46f4-a995-0c63e7745ca3@owenh.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-bounce-key: webpack.hosteurope.de; regressions@leemhuis.info; 1700579805;
- cb741553; 
-X-HE-SMSGID: 1r5SUU-00049x-3B
-Subject: Re: [Nouveau] [REGRESSION]: nouveau: Asynchronous wait on fence
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.4
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: gmail.com
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
+Subject: [Nouveau] [PATCH] nouveau/gsp: allocate enough space for all
+ channel ids.
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,50 +51,41 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: Linux regressions mailing list <regressions@lists.linux.dev>
-Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 15.11.23 07:19, Owen T. Heisler wrote:
-> On 10/31/23 04:18, Linux regression tracking (Thorsten Leemhuis) wrote:
->> On 28.10.23 04:46, Owen T. Heisler wrote:
->>> #regzbot introduced: d386a4b54607cf6f76e23815c2c9a3abc1d66882
->>> #regzbot link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/180
->>>
->>> ## Problem
->>>
->>> 1. Connect external display to DVI port on dock and run X with both
->>>     displays in use.
->>> 2. Wait hours or days.
->>> 3. Suddenly the secondary Nvidia-connected display turns off and X stops
->>>     responding to keyboard/mouse input. In *some* cases it is
->>> possible to
->>>     switch to a virtual TTY with Ctrl+Alt+Fn and log in there.
-> 
->> You thus might want to check if the problem occurs with 6.6 -- and
->> ideally also check if reverting the culprit there fixes things for you.
-> 
-> The problem also occurs with v6.6.
+From: Dave Airlie <airlied@redhat.com>
 
-You meanwhile might want to give 6.7-rc as well on the off chance that
-it improves things, even if that is unlikely.
+This probably isn't the ideal fix, but we ended up using chids
+sparsely, and lots of things rely on indexing into the full range,
+so just allocate the full range up front.
 
-> Here is a decoded kernel log from an
-> untainted kernel:
-> 
-> https://gitlab.freedesktop.org/drm/nouveau/uploads/c120faf09da46f9c74006df9f1d14442/async-wait-on-fence-180.log
-> 
-> The culprit commit does not revert cleanly on v6.6. I have not yet
-> attempted to resolve the conflicts.
-> 
-> I have also updated the bug description at
-> <https://gitlab.freedesktop.org/drm/nouveau/-/issues/180>.
+The GSP code fixes 8 channels into a userd page, but we end up using
+a single userd page per channel so end up sparsely using the range.
 
-Maybe one of the nouveau developer can take a quick look at
-d386a4b54607cf and suggest a simple way to revert it in latest mainline.
-Maybe just removing the main chunk of code that is added is all that it
-takes.
+Fixes a few crashes seen with multiple channels.
 
-Ciao, Thorsten
+Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/277
+Signed-off-by: Dave Airlie <airlied@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/fifo/r535.c
+index 3adbb05ff587..d088e636edc3 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c
+@@ -539,7 +539,7 @@ r535_fifo_runl_ctor(struct nvkm_fifo *fifo)
+ =09struct nvkm_runl *runl;
+ =09struct nvkm_engn *engn;
+ =09u32 cgids =3D 2048;
+-=09u32 chids =3D 2048 / CHID_PER_USERD;
++=09u32 chids =3D 2048;
+ =09int ret;
+ =09NV2080_CTRL_FIFO_GET_DEVICE_INFO_TABLE_PARAMS *ctrl;
+=20
+--=20
+2.42.0
+
