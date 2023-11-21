@@ -2,65 +2,82 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD9D27F2261
-	for <lists+nouveau@lfdr.de>; Tue, 21 Nov 2023 01:40:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D0177F2302
+	for <lists+nouveau@lfdr.de>; Tue, 21 Nov 2023 02:20:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3861410E226;
-	Tue, 21 Nov 2023 00:40:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CE89F10E248;
+	Tue, 21 Nov 2023 01:20:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
- [IPv6:2607:f8b0:4864:20::42b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6151610E012;
- Tue, 21 Nov 2023 00:40:31 +0000 (UTC)
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-6cb55001124so1566494b3a.0; 
- Mon, 20 Nov 2023 16:40:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700527230; x=1701132030; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IqnPDeT1YoL9rNB4A1jsKDn6H/sLGf7y+LZ/0+TfYww=;
- b=Bds2ij9PBFUNlKFeeZR94E3OXbm7zAwOIMGkzJmWFlo4E9IqVbAgQaih+/EP356obC
- CYrlqc/SRV1RP08r5MmVAJd3891/bvMKbiot5u6ymniIQWOY95T3XrCXKk5VKhAc3y7D
- pVCftqnSRn1F3VR54QMEezbs0KTLMiuZfq+s2hPnXaem2w+Wn4/oRfE968XqfkRiv2ac
- uYB7x2PDAYJNq2LTA3qvzkyn2vDwsY0lU1Q80MZXRHmnx0PnSNeTvBOaV2juyQII7W5r
- y1fCbZnCaeGw6QUjlPze4+F8YsCRvn8O3j2ZG3pKddaND24kxCUUn+p8JuOg1DK0Vodo
- CEaw==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1179510E248
+ for <nouveau@lists.freedesktop.org>; Tue, 21 Nov 2023 01:20:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1700529650;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kCIj+Yck5hQUwyiYPGShSSX7xq3O6mmynZaUoJB6T40=;
+ b=BpNSQjRIRB9TcxoqSB8m7P6F1HKoswoaSXB82Cj/4R7TkV11MIVdmYODKio/aeSBCPtgFH
+ RNghLu4TioYUbgRTnhgGbk1yxhEWmhsL/RNDlh/xKczQOHc/8Av4suJfcwsNhuqabwV43k
+ +44V/gZJfuvTVDyPwUdArYCOwsHeOEs=
+Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
+ [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-638-IkfWQZpCMKixE1M9ETTXNw-1; Mon, 20 Nov 2023 20:20:48 -0500
+X-MC-Unique: IkfWQZpCMKixE1M9ETTXNw-1
+Received: by mail-ej1-f71.google.com with SMTP id
+ a640c23a62f3a-a00dd93a5fcso52346466b.3
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Nov 2023 17:20:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700527230; x=1701132030;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IqnPDeT1YoL9rNB4A1jsKDn6H/sLGf7y+LZ/0+TfYww=;
- b=jsWgWUrsEFD5o7COBCqwWHjEk2TnBhn31Qsa1kq97gRHcqGm2Bj4Gn4fkrivJYPuE/
- 82u9i1ZB2lPtfs+f0V3PBQD8k9EACUFduWSxwC/2uSMHkcgux1+eoDqK+cXdTZYUxjzV
- GWbNYoeD6KSZyXh8nfq/Bh23GZVw+p43UydysokGfQRsiWTjeNVxCc4H0WKmXM0L94d+
- NBeZSWaRTI31LBSPSrxC85iNnVRsVz11DuO0dT7Pl7jI5gz+sAabJNndYHybe8SI53tO
- tZRNzAgexICIOVC5bOcFVQcj8VSseYJ5UvL8Ax0ZWyZnFIiBYrVY9qu3fPSPnbWJugC1
- B7pg==
-X-Gm-Message-State: AOJu0YxLDaK+idNZVg9T99Jv4cAQ8HBLGlbWzYvKNCE8kd/SzkI98RuZ
- TIEnJz2NgYYzj+wTwcBWNE6PNsTbGjCK3A==
-X-Google-Smtp-Source: AGHT+IEdMYmXseGPjw5igm2guOY42XEWsmT2PS9nDaTFF8MnEWea9REnHW9MVjovgwoeMbDg2kIzIQ==
-X-Received: by 2002:a05:6a20:3d13:b0:187:962d:746b with SMTP id
- y19-20020a056a203d1300b00187962d746bmr1577161pzi.9.1700527229910; 
- Mon, 20 Nov 2023 16:40:29 -0800 (PST)
-Received: from localhost ([47.215.232.245]) by smtp.gmail.com with ESMTPSA id
- fd26-20020a056a002e9a00b00688435a9915sm6659357pfb.189.2023.11.20.16.40.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Nov 2023 16:40:29 -0800 (PST)
-From: Rob Clark <robdclark@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Date: Mon, 20 Nov 2023 16:38:50 -0800
-Message-ID: <20231121003935.5868-7-robdclark@gmail.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231121003935.5868-1-robdclark@gmail.com>
-References: <20231121003935.5868-1-robdclark@gmail.com>
+ d=1e100.net; s=20230601; t=1700529647; x=1701134447;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kCIj+Yck5hQUwyiYPGShSSX7xq3O6mmynZaUoJB6T40=;
+ b=QF4GUgP+2JOiSwpc+ZZjZy+FT2e+RqnYqBR+TaXJ8p4svCcmX4XwbwM0R6DR29B0j8
+ 4Rsj2q/0+XCGaMAqLqyyY/xlRXKmYSbrrC4JLSp6QbXbIkZMV2Z6oE6w/o4IuoVYfHSw
+ k7+J8OsoCVXYWYvCf0+PooTsNTtfn5nviwNTEQxL2BztvbkySFmY8Y7e+GuVvx/gWxnX
+ gYkJzxrPMJUW1TssQBN+GjGtRIhIDfeygAGuJbo65QxOgcgEQAumdJOSMhc5owjrz70r
+ WUD6GaQA8VkGBlwbGBs9J6WvuX1Ymu7v/uxDJV2UokhOkFH/w503O0JWZ6i/yrXjKc9d
+ H08g==
+X-Gm-Message-State: AOJu0YwIRGf79HO0TuYsLY7xj2ufM/iRHYEbEm/tI4p9hF7IlC9Y5fcr
+ TGoCTB684kgb3pqN8f79QdNAHsNFnRpEdvO5LZFTonmzHtLiKeAHmud+0Pig2XTSRu4EuEezqoV
+ BbplSb6+cE7U8KUKZ4LqkXG7vFg==
+X-Received: by 2002:a17:907:75c2:b0:a00:5a2:1270 with SMTP id
+ jl2-20020a17090775c200b00a0005a21270mr1978742ejc.21.1700529647759; 
+ Mon, 20 Nov 2023 17:20:47 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEyBCCXNkml7//Jq8+SMQnK5DKpWB+c9i7u+CTdreYkrRUsU87iIOGRCYGYKmhOrD1fz3e5Zg==
+X-Received: by 2002:a17:907:75c2:b0:a00:5a2:1270 with SMTP id
+ jl2-20020a17090775c200b00a0005a21270mr1978732ejc.21.1700529647502; 
+ Mon, 20 Nov 2023 17:20:47 -0800 (PST)
+Received: from ?IPV6:2a02:810d:4b3f:de9c:abf:b8ff:feee:998b?
+ ([2a02:810d:4b3f:de9c:abf:b8ff:feee:998b])
+ by smtp.gmail.com with ESMTPSA id
+ s2-20020a1709066c8200b009e656ce2930sm4468816ejr.60.2023.11.20.17.20.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 20 Nov 2023 17:20:46 -0800 (PST)
+Message-ID: <0754e669-8b00-461c-b6fe-79c659bf59a3@redhat.com>
+Date: Tue, 21 Nov 2023 02:20:45 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH v2 6/7] drm/exec: Pass in initial # of objects
+User-Agent: Mozilla Thunderbird
+To: Abhinav Singh <singhabhinav9051571833@gmail.com>, kherbst@redhat.com,
+ lyude@redhat.com, airlied@gmail.com, daniel@ffwll.ch
+References: <8e9efe54-2799-4539-a8b0-aa199f8052f6@redhat.com>
+ <20231113191303.3277733-1-singhabhinav9051571833@gmail.com>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <20231113191303.3277733-1-singhabhinav9051571833@gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH v3] driver: gpu: Fixing warning directly
+ dereferencing a rcu pointer
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,351 +89,66 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, Lijo Lazar <lijo.lazar@amd.com>,
- Mario Limonciello <mario.limonciello@amd.com>,
- Srinivasan Shanmugam <srinivasan.shanmugam@amd.com>,
- Arthur Grillo <arthurgrillo@riseup.net>, Rob Clark <robdclark@chromium.org>,
- Leo Liu <leo.liu@amd.com>, Guchun Chen <guchun.chen@amd.com>,
- Shashank Sharma <shashank.sharma@amd.com>,
- "open list:AMD KFD" <amd-gfx@lists.freedesktop.org>,
- Luben Tuikov <luben.tuikov@amd.com>,
- Veerabadhran Gopalakrishnan <Veerabadhran.Gopalakrishnan@amd.com>,
- Philip Yang <Philip.Yang@amd.com>, Daniel Vetter <daniel@ffwll.ch>,
- linux-arm-msm@vger.kernel.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Jack Xiao <Jack.Xiao@amd.com>,
- Jonathan Kim <jonathan.kim@amd.com>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>,
- freedreno@lists.freedesktop.org, Felix Kuehling <Felix.Kuehling@amd.com>, "Pan,
- Xinhui" <Xinhui.Pan@amd.com>, open list <linux-kernel@vger.kernel.org>,
- Boris Brezillon <boris.brezillon@collabora.com>,
- Yang Li <yang.lee@linux.alibaba.com>, Alex Deucher <alexander.deucher@amd.com>,
- Lang Yu <Lang.Yu@amd.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: nouveau@lists.freedesktop.org,
+ linux-kernel-mentees@lists.linuxfoundation.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Rob Clark <robdclark@chromium.org>
+On 11/13/23 20:13, Abhinav Singh wrote:
+> This patch fixes a sparse warning with this message
+> "warning:dereference of noderef expression". In this context it means we
+> are dereferencing a __rcu tagged pointer directly.
+> 
+> We should not be directly dereferencing a rcu pointer. To get a normal
+> (non __rcu tagged pointer) from a __rcu tagged pointer we are using the
+> function unrcu_pointer(...). The non __rcu tagged pointer then can be
+> dereferenced just like a normal pointer.
+> 
+> I tested with qemu with this command
+> qemu-system-x86_64 \
+> 	-m 2G \
+> 	-smp 2 \
+> 	-kernel bzImage \
+> 	-append "console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0" \
+> 	-drive file=bullseye.img,format=raw \
+> 	-net user,host=10.0.2.10,hostfwd=tcp:127.0.0.1:10021-:22 \
+> 	-net nic,model=e1000 \
+> 	-enable-kvm \
+> 	-nographic \
+> 	-pidfile vm.pid \
+> 	2>&1 | tee vm.log
+> with lockdep enabled.
+> 
+> Signed-off-by: Abhinav Singh <singhabhinav9051571833@gmail.com>
 
-In cases where the # is known ahead of time, it is silly to do the table
-resize dance.
+Applied, thanks!
 
-Signed-off-by: Rob Clark <robdclark@chromium.org>
-Reviewed-by: Christian König <christian.koenig@amd.com>
----
- drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c |  8 ++++----
- drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c           |  2 +-
- drivers/gpu/drm/amd/amdgpu/amdgpu_csa.c          |  4 ++--
- drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c          |  4 ++--
- drivers/gpu/drm/amd/amdgpu/amdgpu_mes.c          |  4 ++--
- drivers/gpu/drm/amd/amdgpu/amdgpu_umsch_mm.c     |  4 ++--
- drivers/gpu/drm/amd/amdkfd/kfd_svm.c             |  2 +-
- drivers/gpu/drm/drm_exec.c                       | 13 ++++++++++---
- drivers/gpu/drm/nouveau/nouveau_exec.c           |  2 +-
- drivers/gpu/drm/nouveau/nouveau_uvmm.c           |  2 +-
- drivers/gpu/drm/tests/drm_exec_test.c            | 16 ++++++++--------
- include/drm/drm_exec.h                           |  2 +-
- 12 files changed, 35 insertions(+), 28 deletions(-)
+There are a few more such occurrences. [1][2] Plan to fix them as well?
 
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c
-index 41fbc4fd0fac..0bd3c4a6267a 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c
-@@ -1137,7 +1137,7 @@ static int reserve_bo_and_vm(struct kgd_mem *mem,
- 
- 	ctx->n_vms = 1;
- 	ctx->sync = &mem->sync;
--	drm_exec_init(&ctx->exec, DRM_EXEC_INTERRUPTIBLE_WAIT);
-+	drm_exec_init(&ctx->exec, DRM_EXEC_INTERRUPTIBLE_WAIT, 0);
- 	drm_exec_until_all_locked(&ctx->exec) {
- 		ret = amdgpu_vm_lock_pd(vm, &ctx->exec, 2);
- 		drm_exec_retry_on_contention(&ctx->exec);
-@@ -1176,7 +1176,7 @@ static int reserve_bo_and_cond_vms(struct kgd_mem *mem,
- 	int ret;
- 
- 	ctx->sync = &mem->sync;
--	drm_exec_init(&ctx->exec, DRM_EXEC_INTERRUPTIBLE_WAIT);
-+	drm_exec_init(&ctx->exec, DRM_EXEC_INTERRUPTIBLE_WAIT, 0);
- 	drm_exec_until_all_locked(&ctx->exec) {
- 		ctx->n_vms = 0;
- 		list_for_each_entry(entry, &mem->attachments, list) {
-@@ -2552,7 +2552,7 @@ static int validate_invalid_user_pages(struct amdkfd_process_info *process_info)
- 
- 	amdgpu_sync_create(&sync);
- 
--	drm_exec_init(&exec, 0);
-+	drm_exec_init(&exec, 0, 0);
- 	/* Reserve all BOs and page tables for validation */
- 	drm_exec_until_all_locked(&exec) {
- 		/* Reserve all the page directories */
-@@ -2793,7 +2793,7 @@ int amdgpu_amdkfd_gpuvm_restore_process_bos(void *info, struct dma_fence **ef)
- 
- 	mutex_lock(&process_info->lock);
- 
--	drm_exec_init(&exec, 0);
-+	drm_exec_init(&exec, 0, 0);
- 	drm_exec_until_all_locked(&exec) {
- 		list_for_each_entry(peer_vm, &process_info->vm_list_head,
- 				    vm_list_node) {
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c
-index df3ecfa9e13f..2464606494d4 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c
-@@ -66,7 +66,7 @@ static int amdgpu_cs_parser_init(struct amdgpu_cs_parser *p,
- 
- 	amdgpu_sync_create(&p->sync);
- 	drm_exec_init(&p->exec, DRM_EXEC_INTERRUPTIBLE_WAIT |
--		      DRM_EXEC_IGNORE_DUPLICATES);
-+		      DRM_EXEC_IGNORE_DUPLICATES, 0);
- 	return 0;
- }
- 
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_csa.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_csa.c
-index 720011019741..796fa6f1420b 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_csa.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_csa.c
-@@ -70,7 +70,7 @@ int amdgpu_map_static_csa(struct amdgpu_device *adev, struct amdgpu_vm *vm,
- 	struct drm_exec exec;
- 	int r;
- 
--	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT);
-+	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT, 0);
- 	drm_exec_until_all_locked(&exec) {
- 		r = amdgpu_vm_lock_pd(vm, &exec, 0);
- 		if (likely(!r))
-@@ -110,7 +110,7 @@ int amdgpu_unmap_static_csa(struct amdgpu_device *adev, struct amdgpu_vm *vm,
- 	struct drm_exec exec;
- 	int r;
- 
--	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT);
-+	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT, 0);
- 	drm_exec_until_all_locked(&exec) {
- 		r = amdgpu_vm_lock_pd(vm, &exec, 0);
- 		if (likely(!r))
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c
-index 84beeaa4d21c..49a5f1c73b3e 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c
-@@ -203,7 +203,7 @@ static void amdgpu_gem_object_close(struct drm_gem_object *obj,
- 	struct drm_exec exec;
- 	long r;
- 
--	drm_exec_init(&exec, DRM_EXEC_IGNORE_DUPLICATES);
-+	drm_exec_init(&exec, DRM_EXEC_IGNORE_DUPLICATES, 0);
- 	drm_exec_until_all_locked(&exec) {
- 		r = drm_exec_prepare_obj(&exec, &bo->tbo.base, 1);
- 		drm_exec_retry_on_contention(&exec);
-@@ -739,7 +739,7 @@ int amdgpu_gem_va_ioctl(struct drm_device *dev, void *data,
- 	}
- 
- 	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT |
--		      DRM_EXEC_IGNORE_DUPLICATES);
-+		      DRM_EXEC_IGNORE_DUPLICATES, 0);
- 	drm_exec_until_all_locked(&exec) {
- 		if (gobj) {
- 			r = drm_exec_lock_obj(&exec, gobj);
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_mes.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_mes.c
-index 9ddbf1494326..abd0b9763904 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_mes.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_mes.c
-@@ -1122,7 +1122,7 @@ int amdgpu_mes_ctx_map_meta_data(struct amdgpu_device *adev,
- 
- 	amdgpu_sync_create(&sync);
- 
--	drm_exec_init(&exec, 0);
-+	drm_exec_init(&exec, 0, 0);
- 	drm_exec_until_all_locked(&exec) {
- 		r = drm_exec_lock_obj(&exec,
- 				      &ctx_data->meta_data_obj->tbo.base);
-@@ -1193,7 +1193,7 @@ int amdgpu_mes_ctx_unmap_meta_data(struct amdgpu_device *adev,
- 	struct drm_exec exec;
- 	long r;
- 
--	drm_exec_init(&exec, 0);
-+	drm_exec_init(&exec, 0, 0);
- 	drm_exec_until_all_locked(&exec) {
- 		r = drm_exec_lock_obj(&exec,
- 				      &ctx_data->meta_data_obj->tbo.base);
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_umsch_mm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_umsch_mm.c
-index ca45ba8ac171..bfbf59326ee1 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_umsch_mm.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_umsch_mm.c
-@@ -86,7 +86,7 @@ static int map_ring_data(struct amdgpu_device *adev, struct amdgpu_vm *vm,
- 
- 	amdgpu_sync_create(&sync);
- 
--	drm_exec_init(&exec, 0);
-+	drm_exec_init(&exec, 0, 0);
- 	drm_exec_until_all_locked(&exec) {
- 		r = drm_exec_lock_obj(&exec, &bo->tbo.base);
- 		drm_exec_retry_on_contention(&exec);
-@@ -149,7 +149,7 @@ static int unmap_ring_data(struct amdgpu_device *adev, struct amdgpu_vm *vm,
- 	struct drm_exec exec;
- 	long r;
- 
--	drm_exec_init(&exec, 0);
-+	drm_exec_init(&exec, 0, 0);
- 	drm_exec_until_all_locked(&exec) {
- 		r = drm_exec_lock_obj(&exec, &bo->tbo.base);
- 		drm_exec_retry_on_contention(&exec);
-diff --git a/drivers/gpu/drm/amd/amdkfd/kfd_svm.c b/drivers/gpu/drm/amd/amdkfd/kfd_svm.c
-index f2f3c338fd94..76d9f14ccc7c 100644
---- a/drivers/gpu/drm/amd/amdkfd/kfd_svm.c
-+++ b/drivers/gpu/drm/amd/amdkfd/kfd_svm.c
-@@ -1529,7 +1529,7 @@ static int svm_range_reserve_bos(struct svm_validate_context *ctx, bool intr)
- 	uint32_t gpuidx;
- 	int r;
- 
--	drm_exec_init(&ctx->exec, intr ? DRM_EXEC_INTERRUPTIBLE_WAIT: 0);
-+	drm_exec_init(&ctx->exec, intr ? DRM_EXEC_INTERRUPTIBLE_WAIT: 0, 0);
- 	drm_exec_until_all_locked(&ctx->exec) {
- 		for_each_set_bit(gpuidx, ctx->bitmap, MAX_GPU_INSTANCE) {
- 			pdd = kfd_process_device_from_gpuidx(ctx->process, gpuidx);
-diff --git a/drivers/gpu/drm/drm_exec.c b/drivers/gpu/drm/drm_exec.c
-index 5d2809de4517..48ee851b61d9 100644
---- a/drivers/gpu/drm/drm_exec.c
-+++ b/drivers/gpu/drm/drm_exec.c
-@@ -69,16 +69,23 @@ static void drm_exec_unlock_all(struct drm_exec *exec)
-  * drm_exec_init - initialize a drm_exec object
-  * @exec: the drm_exec object to initialize
-  * @flags: controls locking behavior, see DRM_EXEC_* defines
-+ * @nr: the initial # of objects
-  *
-  * Initialize the object and make sure that we can track locked objects.
-+ *
-+ * If nr is non-zero then it is used as the initial objects table size.
-+ * In either case, the table will grow (be re-allocated) on demand.
-  */
--void drm_exec_init(struct drm_exec *exec, uint32_t flags)
-+void drm_exec_init(struct drm_exec *exec, uint32_t flags, unsigned nr)
- {
-+	if (!nr)
-+		nr = PAGE_SIZE / sizeof(void *);
-+
- 	exec->flags = flags;
--	exec->objects = kmalloc(PAGE_SIZE, GFP_KERNEL);
-+	exec->objects = kvmalloc_array(nr, sizeof(void *), GFP_KERNEL);
- 
- 	/* If allocation here fails, just delay that till the first use */
--	exec->max_objects = exec->objects ? PAGE_SIZE / sizeof(void *) : 0;
-+	exec->max_objects = exec->objects ? nr : 0;
- 	exec->num_objects = 0;
- 	exec->contended = DRM_EXEC_DUMMY;
- 	exec->prelocked = NULL;
-diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
-index 9a5ef574744b..769392276e4f 100644
---- a/drivers/gpu/drm/nouveau/nouveau_exec.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
-@@ -103,7 +103,7 @@ nouveau_exec_job_submit(struct nouveau_job *job)
- 
- 	nouveau_uvmm_lock(uvmm);
- 	drm_exec_init(exec, DRM_EXEC_INTERRUPTIBLE_WAIT |
--			    DRM_EXEC_IGNORE_DUPLICATES);
-+			    DRM_EXEC_IGNORE_DUPLICATES, 0);
- 	drm_exec_until_all_locked(exec) {
- 		struct drm_gpuva *va;
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-index 5cf892c50f43..f93cfccc2c93 100644
---- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-@@ -1288,7 +1288,7 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job)
- 	}
- 
- 	drm_exec_init(exec, DRM_EXEC_INTERRUPTIBLE_WAIT |
--			    DRM_EXEC_IGNORE_DUPLICATES);
-+			    DRM_EXEC_IGNORE_DUPLICATES, 0);
- 	drm_exec_until_all_locked(exec) {
- 		list_for_each_op(op, &bind_job->ops) {
- 			struct drm_gpuva_op *va_op;
-diff --git a/drivers/gpu/drm/tests/drm_exec_test.c b/drivers/gpu/drm/tests/drm_exec_test.c
-index 563949d777dd..81f928a429ba 100644
---- a/drivers/gpu/drm/tests/drm_exec_test.c
-+++ b/drivers/gpu/drm/tests/drm_exec_test.c
-@@ -46,7 +46,7 @@ static void sanitycheck(struct kunit *test)
- {
- 	struct drm_exec exec;
- 
--	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT);
-+	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT, 0);
- 	drm_exec_fini(&exec);
- 	KUNIT_SUCCEED(test);
- }
-@@ -60,7 +60,7 @@ static void test_lock(struct kunit *test)
- 
- 	drm_gem_private_object_init(priv->drm, &gobj, PAGE_SIZE);
- 
--	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT);
-+	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT, 0);
- 	drm_exec_until_all_locked(&exec) {
- 		ret = drm_exec_lock_obj(&exec, &gobj);
- 		drm_exec_retry_on_contention(&exec);
-@@ -80,7 +80,7 @@ static void test_lock_unlock(struct kunit *test)
- 
- 	drm_gem_private_object_init(priv->drm, &gobj, PAGE_SIZE);
- 
--	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT);
-+	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT, 0);
- 	drm_exec_until_all_locked(&exec) {
- 		ret = drm_exec_lock_obj(&exec, &gobj);
- 		drm_exec_retry_on_contention(&exec);
-@@ -107,7 +107,7 @@ static void test_duplicates(struct kunit *test)
- 
- 	drm_gem_private_object_init(priv->drm, &gobj, PAGE_SIZE);
- 
--	drm_exec_init(&exec, DRM_EXEC_IGNORE_DUPLICATES);
-+	drm_exec_init(&exec, DRM_EXEC_IGNORE_DUPLICATES, 0);
- 	drm_exec_until_all_locked(&exec) {
- 		ret = drm_exec_lock_obj(&exec, &gobj);
- 		drm_exec_retry_on_contention(&exec);
-@@ -134,7 +134,7 @@ static void test_prepare(struct kunit *test)
- 
- 	drm_gem_private_object_init(priv->drm, &gobj, PAGE_SIZE);
- 
--	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT);
-+	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT, 0);
- 	drm_exec_until_all_locked(&exec) {
- 		ret = drm_exec_prepare_obj(&exec, &gobj, 1);
- 		drm_exec_retry_on_contention(&exec);
-@@ -159,7 +159,7 @@ static void test_prepare_array(struct kunit *test)
- 	drm_gem_private_object_init(priv->drm, &gobj1, PAGE_SIZE);
- 	drm_gem_private_object_init(priv->drm, &gobj2, PAGE_SIZE);
- 
--	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT);
-+	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT, 0);
- 	drm_exec_until_all_locked(&exec)
- 		ret = drm_exec_prepare_array(&exec, array, ARRAY_SIZE(array),
- 					     1);
-@@ -174,14 +174,14 @@ static void test_multiple_loops(struct kunit *test)
- {
- 	struct drm_exec exec;
- 
--	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT);
-+	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT, 0);
- 	drm_exec_until_all_locked(&exec)
- 	{
- 		break;
- 	}
- 	drm_exec_fini(&exec);
- 
--	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT);
-+	drm_exec_init(&exec, DRM_EXEC_INTERRUPTIBLE_WAIT, 0);
- 	drm_exec_until_all_locked(&exec)
- 	{
- 		break;
-diff --git a/include/drm/drm_exec.h b/include/drm/drm_exec.h
-index b5bf0b6da791..f1a66c048721 100644
---- a/include/drm/drm_exec.h
-+++ b/include/drm/drm_exec.h
-@@ -135,7 +135,7 @@ static inline bool drm_exec_is_contended(struct drm_exec *exec)
- 	return !!exec->contended;
- }
- 
--void drm_exec_init(struct drm_exec *exec, uint32_t flags);
-+void drm_exec_init(struct drm_exec *exec, uint32_t flags, unsigned nr);
- void drm_exec_fini(struct drm_exec *exec);
- bool drm_exec_cleanup(struct drm_exec *exec);
- int drm_exec_lock_obj(struct drm_exec *exec, struct drm_gem_object *obj);
--- 
-2.42.0
+[1] https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/nouveau/nv10_fence.c#L35
+[2] https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/nouveau/nv84_fence.c#L88
+
+> ---
+> v1 -> v2 : Replaced the rcu_dereference(...) with unrcu_pointer(...) and
+>             also removed the rcu locking and unlocking function call.
+> v2 -> v3 : Changed the description of the patch to match it with the actual
+> 	   implementation.
+> 
+>   drivers/gpu/drm/nouveau/nv04_fence.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nv04_fence.c b/drivers/gpu/drm/nouveau/nv04_fence.c
+> index 5b71a5a5cd85..cdbc75e3d1f6 100644
+> --- a/drivers/gpu/drm/nouveau/nv04_fence.c
+> +++ b/drivers/gpu/drm/nouveau/nv04_fence.c
+> @@ -39,7 +39,7 @@ struct nv04_fence_priv {
+>   static int
+>   nv04_fence_emit(struct nouveau_fence *fence)
+>   {
+> -	struct nvif_push *push = fence->channel->chan.push;
+> +	struct nvif_push *push = unrcu_pointer(fence->channel)->chan.push;
+>   	int ret = PUSH_WAIT(push, 2);
+>   	if (ret == 0) {
+>   		PUSH_NVSQ(push, NV_SW, 0x0150, fence->base.seqno);
 
