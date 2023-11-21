@@ -1,55 +1,63 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B29CD7F16E3
-	for <lists+nouveau@lfdr.de>; Mon, 20 Nov 2023 16:12:45 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B93647F2246
+	for <lists+nouveau@lfdr.de>; Tue, 21 Nov 2023 01:40:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 32E8010E036;
-	Mon, 20 Nov 2023 15:12:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F0DBC10E13B;
+	Tue, 21 Nov 2023 00:40:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.24])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D09EE10E036;
- Mon, 20 Nov 2023 15:12:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1700493161; x=1732029161;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=/lGaMHB7Ik53mAZY4BE6T0PxVXB5I+f7V6+NjxCVQFM=;
- b=Rg/G4G6lDSZR/lJkupNSGPdquk7M67yI+3nLurPbbFDPyhWDl8bKdEhS
- X2cuwpVxlZ6zW0uFY9thCS7mTjNpWY41TftAVZ7GbuH9CyI26uq5v1rIo
- 3pq6Kmj1MTSVLge+L8sgInQ85o5VSgwYoI34FF3681Mdh7KTKVNEO6LgM
- F745GU4L6W/wycrLOLzbdfCZVUivJm6IYc57+q+LPe1kn5luFJzteUhuT
- AKhYywgex5LUntR6xTKivz1sdyqljcw+Ku+/nGSS/Xai++/qttYM0BPgE
- uRnLZzAqokWEtqTDQL0LW5fgFgPPnz/RG1M9/fP0iBfLE1uup7QsRYOEy w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10900"; a="394486067"
-X-IronPort-AV: E=Sophos;i="6.04,214,1695711600"; d="scan'208";a="394486067"
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Nov 2023 07:12:40 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10900"; a="759803563"
-X-IronPort-AV: E=Sophos;i="6.04,214,1695711600"; d="scan'208";a="759803563"
-Received: from stinkpipe.fi.intel.com (HELO stinkbox) ([10.237.72.74])
- by orsmga007.jf.intel.com with SMTP; 20 Nov 2023 07:12:35 -0800
-Received: by stinkbox (sSMTP sendmail emulation);
- Mon, 20 Nov 2023 17:12:34 +0200
-Date: Mon, 20 Nov 2023 17:12:34 +0200
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Edward Adam Davis <eadavis@qq.com>
-Message-ID: <ZVt3Yv2q8w0PjsMP@intel.com>
-References: <875y1wpsp3.fsf@intel.com>
- <tencent_DCCE6C78766FE82D816F9C94F0EAC2ED260A@qq.com>
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0CA0E10E00B;
+ Tue, 21 Nov 2023 00:40:03 +0000 (UTC)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1ce3084c2d1so42367565ad.3; 
+ Mon, 20 Nov 2023 16:40:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1700527203; x=1701132003; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bWNEMhZS/K0TJv2uoFh3uKzFoySYNwsIpa4bcavYV+M=;
+ b=UNIMvzUXuR88ShzjHhxLwBPY0k3sB/U/qIBadD+f3ycteOl+Itl7oqWznB894V07Tr
+ Yla2SqW4BHVx/TnbMt/ayVYMtoST1SfgrvdRzjzZDAM+9yHm9SAMn5TONN9ouoh0hY6I
+ 9CDC9Zyp8O3DLrQdn5V8wwVdl3GaeTpjdbwLSF0aeoQI4xW7WuWmpaLyY2eALcTWrxxf
+ XOUHdAHhNbY0iz6XDyeBhFFIuYuvn6eYxJwB4GniNkQ/drv9zjnmuv42UbyX8U8JMEX8
+ 7Kb+tNpMQ431p08tNHRQMLvCJmASGkIH2jGAV5PgakO5dxc7DX8culphs+91TY6JVzvz
+ +43Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700527203; x=1701132003;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bWNEMhZS/K0TJv2uoFh3uKzFoySYNwsIpa4bcavYV+M=;
+ b=kzMuZotExaQ+qdaiIxAfYh6A1IXq/WmJou0tqabrMSFtuzxPS2P0tR6TXgEE4YgJBx
+ Ekybtzw5laHByB7MCj/fewFop0brCM79cickj/Zh0p7c3KfrgbOF2puXkN0EA1PBqNd8
+ H/k3YpJD4SovtUmzz3FTb2S+3ormoFEZq4uWE02DQy9NTbAD5EJs1dEyByT0KUFa/l5f
+ ySfJODzSn7h6fonhrnv9ewh8nMTwwrJu2YYK4/hr96ncXeacaD7KlzZJBwkJ8OUYfkSu
+ b24lqSWbrk7PXOHb1Y36Yx7fRaB685exEPJu+CNOF7Igm9SsGNnq+/U+x3rtJt5bJq/B
+ IjUg==
+X-Gm-Message-State: AOJu0YygpVR/nkE9W+8tktFu7h+V00l9p1QXXX1Pgj5cweVlyI/VuERt
+ SCLjrflgJmDagsAAQPHm0ta5n3xbP3A=
+X-Google-Smtp-Source: AGHT+IFXhiAAFyErJlqOO1DTQVYb7f74uon84kYLMLdTjeTRCnwI6JR3VAOwwCqryfnQrGSMB9oxFQ==
+X-Received: by 2002:a17:902:eccd:b0:1cf:54e1:8c8c with SMTP id
+ a13-20020a170902eccd00b001cf54e18c8cmr9016957plh.63.1700527202832; 
+ Mon, 20 Nov 2023 16:40:02 -0800 (PST)
+Received: from localhost ([47.215.232.245]) by smtp.gmail.com with ESMTPSA id
+ g3-20020a170902868300b001cc436e9806sm6636258plo.81.2023.11.20.16.40.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Nov 2023 16:40:02 -0800 (PST)
+From: Rob Clark <robdclark@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Date: Mon, 20 Nov 2023 16:38:44 -0800
+Message-ID: <20231121003935.5868-1-robdclark@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <tencent_DCCE6C78766FE82D816F9C94F0EAC2ED260A@qq.com>
-X-Patchwork-Hint: comment
-Subject: Re: [Nouveau] [PATCH V2] drm/modes: Fix divide error in
- drm_mode_debug_printmodeline
+Subject: [Nouveau] [PATCH v2 0/7] drm/msm/gem: drm_exec conversion
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,98 +69,71 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: mripard@kernel.org, airlied@linux.ie, syzkaller-bugs@googlegroups.com,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- melissa.srw@gmail.com, jani.nikula@linux.intel.com,
- nouveau@lists.freedesktop.org, daniel.vetter@intel.com,
- syzbot+2e93e6fb36e6fdc56574@syzkaller.appspotmail.com
+Cc: Philip Yang <Philip.Yang@amd.com>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>, Lijo Lazar <lijo.lazar@amd.com>,
+ Mario Limonciello <mario.limonciello@amd.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Arthur Grillo <arthurgrillo@riseup.net>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, Rob Clark <robdclark@chromium.org>,
+ Guchun Chen <guchun.chen@amd.com>, Shashank Sharma <shashank.sharma@amd.com>,
+ Suren Baghdasaryan <surenb@google.com>,
+ "open list:POWER MANAGEMENT CORE" <linux-pm@vger.kernel.org>,
+ "open list:AMD KFD" <amd-gfx@lists.freedesktop.org>,
+ Veerabadhran Gopalakrishnan <Veerabadhran.Gopalakrishnan@amd.com>,
+ freedreno@lists.freedesktop.org,
+ Srinivasan Shanmugam <srinivasan.shanmugam@amd.com>,
+ Arunpravin Paneer Selvam <Arunpravin.PaneerSelvam@amd.com>,
+ linux-arm-msm@vger.kernel.org, Sean Paul <sean@poorly.run>,
+ Jack Xiao <Jack.Xiao@amd.com>, Jonathan Kim <jonathan.kim@amd.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Lang Yu <Lang.Yu@amd.com>,
+ Felix Kuehling <Felix.Kuehling@amd.com>,
+ open list <linux-kernel@vger.kernel.org>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Alex Deucher <alexander.deucher@amd.com>, Leo Liu <leo.liu@amd.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Nov 20, 2023 at 10:41:18PM +0800, Edward Adam Davis wrote:
-> [Syz Log]
-> divide error: 0000 [#1] PREEMPT SMP KASAN
-> CPU: 0 PID: 5068 Comm: syz-executor357 Not tainted 6.6.0-syzkaller-16039-gac347a0655db #0
-> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 10/09/2023
-> RIP: 0010:drm_mode_vrefresh drivers/gpu/drm/drm_modes.c:1303 [inline]
-> RIP: 0010:drm_mode_debug_printmodeline+0x118/0x4e0 drivers/gpu/drm/drm_modes.c:60
-> Code: 00 41 0f b7 07 66 83 f8 02 b9 01 00 00 00 0f 43 c8 0f b7 c1 0f af e8 44 89 f0 48 69 c8 e8 03 00 00 89 e8 d1 e8 48 01 c8 31 d2 <48> f7 f5 49 89 c6 eb 0c e8 fb 07 66 fc eb 05 e8 f4 07 66 fc 48 89
-> RSP: 0018:ffffc9000391f8d0 EFLAGS: 00010246
-> RAX: 000000000001f400 RBX: ffff888025045000 RCX: 000000000001f400
-> RDX: 0000000000000000 RSI: 0000000000008000 RDI: ffff888025045018
-> RBP: 0000000000000000 R08: ffffffff8528b9af R09: 0000000000000000
-> R10: ffffc9000391f8a0 R11: fffff52000723f17 R12: 0000000000000080
-> R13: dffffc0000000000 R14: 0000000000000080 R15: ffff888025045016
-> FS:  0000555556932380(0000) GS:ffff8880b9800000(0000) knlGS:0000000000000000
-> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> CR2: 00000000005fdeb8 CR3: 000000007fcff000 CR4: 00000000003506f0
-> DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-> DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-> Call Trace:
->  <TASK>
->  drm_mode_setcrtc+0x83b/0x1880 drivers/gpu/drm/drm_crtc.c:794
->  drm_ioctl_kernel+0x362/0x500 drivers/gpu/drm/drm_ioctl.c:792
->  drm_ioctl+0x636/0xb00 drivers/gpu/drm/drm_ioctl.c:895
->  vfs_ioctl fs/ioctl.c:51 [inline]
->  __do_sys_ioctl fs/ioctl.c:871 [inline]
->  __se_sys_ioctl+0xf8/0x170 fs/ioctl.c:857
->  do_syscall_x64 arch/x86/entry/common.c:51 [inline]
->  do_syscall_64+0x44/0x110 arch/x86/entry/common.c:82
->  entry_SYSCALL_64_after_hwframe+0x63/0x6b
-> 
-> [Analysis]
-> When calculating den in drm_mode_vrefresh(), if the vscan value is too large, 
-> there is a probability of unsigned integer overflow.
-> 
-> [Fix]
-> Before multiplying by vscan, first check if their product will overflow. 
-> If overflow occurs, return 0 and exit the subsequent process.
-> 
-> Reported-and-tested-by: syzbot+2e93e6fb36e6fdc56574@syzkaller.appspotmail.com
-> Fixes: ea40d7857d52 ("drm/vkms: fbdev emulation support")
-> Signed-off-by: Edward Adam Davis <eadavis@qq.com>
-> ---
->  drivers/gpu/drm/drm_modes.c | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/drm_modes.c b/drivers/gpu/drm/drm_modes.c
-> index ac9a406250c5..60739d861da2 100644
-> --- a/drivers/gpu/drm/drm_modes.c
-> +++ b/drivers/gpu/drm/drm_modes.c
-> @@ -36,6 +36,7 @@
->  #include <linux/list.h>
->  #include <linux/list_sort.h>
->  #include <linux/of.h>
-> +#include <linux/overflow.h>
->  
->  #include <video/of_display_timing.h>
->  #include <video/of_videomode.h>
-> @@ -1297,8 +1298,10 @@ int drm_mode_vrefresh(const struct drm_display_mode *mode)
->  		num *= 2;
->  	if (mode->flags & DRM_MODE_FLAG_DBLSCAN)
->  		den *= 2;
-> -	if (mode->vscan > 1)
-> -		den *= mode->vscan;
-> +	if (mode->vscan > 1) {
-> +		if (unlikely(check_mul_overflow(den, mode->vscan, &den)))
-> +			return 0;
-> +	}
+From: Rob Clark <robdclark@chromium.org>
 
-I can't see any driver that actually supports vscan>1. Only
-nouveau has some code for it, but doesn't look like it does
-anything sensible. All other drivers for sure should be
-rejecting vscan>1 outright. Which driver is this?
+Simplify the exec path (removing a legacy optimization) and convert to
+drm_exec.  One drm_exec patch to allow passing in the expected # of GEM
+objects to avoid re-allocation.
 
-Is there an actual usecase where nouveau needs this (and does
-it even work?) or could we just rip out the whole thing and
-reject vscan>1 globally?
+I'd be a bit happier if I could avoid the extra objects table allocation
+in drm_exec in the first place, but wasn't really happy with any of the
+things I tried to get rid of that.
 
->  
->  	return DIV_ROUND_CLOSEST_ULL(mul_u32_u32(num, 1000), den);
->  }
-> -- 
-> 2.25.1
+v2: updates in 6/7 and other nit-addressing
+
+Rob Clark (7):
+  drm/msm/gem: Remove "valid" tracking
+  drm/msm/gem: Remove submit_unlock_unpin_bo()
+  drm/msm/gem: Don't queue job to sched in error cases
+  drm/msm/gem: Split out submit_unpin_objects() helper
+  drm/msm/gem: Cleanup submit_cleanup_bo()
+  drm/exec: Pass in initial # of objects
+  drm/msm/gem: Convert to drm_exec
+
+ .../gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c  |   8 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c        |   2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_csa.c       |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c       |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_mes.c       |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_umsch_mm.c  |   4 +-
+ drivers/gpu/drm/amd/amdkfd/kfd_svm.c          |   2 +-
+ drivers/gpu/drm/drm_exec.c                    |  13 +-
+ drivers/gpu/drm/msm/Kconfig                   |   1 +
+ drivers/gpu/drm/msm/msm_gem.h                 |  13 +-
+ drivers/gpu/drm/msm/msm_gem_submit.c          | 199 +++++-------------
+ drivers/gpu/drm/msm/msm_ringbuffer.c          |   3 +-
+ drivers/gpu/drm/nouveau/nouveau_exec.c        |   2 +-
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c        |   2 +-
+ drivers/gpu/drm/tests/drm_exec_test.c         |  16 +-
+ include/drm/drm_exec.h                        |   2 +-
+ 16 files changed, 92 insertions(+), 187 deletions(-)
 
 -- 
-Ville Syrjälä
-Intel
+2.42.0
+
