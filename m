@@ -1,70 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 336D97F3ADA
-	for <lists+nouveau@lfdr.de>; Wed, 22 Nov 2023 01:52:27 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 12F917F3B0A
+	for <lists+nouveau@lfdr.de>; Wed, 22 Nov 2023 02:10:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A543E10E5C0;
-	Wed, 22 Nov 2023 00:52:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3F21B10E5CA;
+	Wed, 22 Nov 2023 01:10:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 806D510E5C0
- for <nouveau@lists.freedesktop.org>; Wed, 22 Nov 2023 00:52:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1700614343;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7laoJg9Xp8AklvG70yxYljtwxtLOkLS57rqSL5LIl0s=;
- b=hLNNiPXBqmNbUbO+6LMuuryYMHEW99xRjJJQ/FA2U7mesQ2d0EjXr6cdH2fwHkeGwA/X84
- uPu5HiTKJnKYggVev74nwlL+Dn0jo5wSLeGUVKgnhJM5CHfK4oZBvSIbDaXAEFav7OgM6B
- 8rwqFvCBuH6uz7siFRzAD/Ja6G06YQw=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-449-M-MPfDXuPCyImRcNBNBW4Q-1; Tue, 21 Nov 2023 19:52:20 -0500
-X-MC-Unique: M-MPfDXuPCyImRcNBNBW4Q-1
-Received: by mail-qt1-f199.google.com with SMTP id
- d75a77b69052e-421b4bc2a80so75064271cf.3
- for <nouveau@lists.freedesktop.org>; Tue, 21 Nov 2023 16:52:20 -0800 (PST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7198410E5CA;
+ Wed, 22 Nov 2023 01:10:31 +0000 (UTC)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a0039ea30e0so322335966b.2; 
+ Tue, 21 Nov 2023 17:10:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1700615430; x=1701220230; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zRWGrawMSV+6Xgv01Y36HXSNYngChWCIAznOh5AjQlE=;
+ b=HvXhsNrd6plqcuoJfdOgkGa8DrG7sE0KvnjMv6eMdguaG1fxudO+rvjBtOCIUYJeuZ
+ urC47zc8DwjF7oK1mTjv/7f/RIGHxzJKrTxyrTHmVfLg7QxtTQSzr/R2Ar8ZUuFyJJ7h
+ uGMRUO9H8AWeAbYwjNAQRWJ5pcGOo1B7NNAlq5XAxaIakqxi+cMLnJM6iQ8YG/HGjj8V
+ YGwJpKhvfYgK1txmzJ2aqELD7MQ5EBUycyf6sEOSuhb3j0AQ6+kpTfeZauEp4aMwNGPa
+ sb+9o0RzUYISGBcTl9W0Ck+6PA5rMwEX8VjcVdFlXpSzLxURckBb9shjOPRBGwU8VGw8
+ AxQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700614340; x=1701219140;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7laoJg9Xp8AklvG70yxYljtwxtLOkLS57rqSL5LIl0s=;
- b=U2LdXE/XKSQMfZOyTNE7VzOgcxFxlLvIyQxU0uz2IPSgKWqnyavcGFmp4DSjfnycT5
- PvWnV486nXW8rM7BOi0NRTJLRhOAhCv6Tb8z7eYnovFs0pjCTwuCpLodoa5CLyI90ZHA
- 2KLkSj3WKnlCFGyL7n+sMPfhJGifLC4yUlL3cJC1wo0AJ5dvVq3dL6NMFKYsPDTNHNTH
- Ezpzy19xYon/91cVIFxql+P1i8tNUz/NNRqYcvpOf+dUeR9tXYUsIHL8103kT9+AtFTZ
- /gqqlx5eIivyyOfHDKHiL9R2JFF2cz5sABtRI4GYV8q60k/jKSEOIuAo7Gg2wSeCr1xp
- lTUw==
-X-Gm-Message-State: AOJu0YwltvwDpHDtaHYhTFG2OY3L2ucOdxsSh92hKHNY/73vWIyku4H6
- UDeuT+qarLTZ1wJhRI6gRojbqXS7nOTKmgDdT0+hKJxkVxyJMHOrOPajZHk0Gw0mHM19Ui1F7K2
- nN6LINez0azK5vugonalPr/5HkqCQX3D4QNYb4l40xg==
-X-Received: by 2002:ac8:4cdc:0:b0:423:7d72:6c8 with SMTP id
- l28-20020ac84cdc000000b004237d7206c8mr180289qtv.53.1700614339674; 
- Tue, 21 Nov 2023 16:52:19 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHTvd1khL9EBXRoBQIOsb7atvt3hejstP2DbWO8f/Mp9BhkMoN3CSLE5BQdAObd9F78nXh+J7DVGx/k1IMYLLg=
-X-Received: by 2002:ac8:4cdc:0:b0:423:7d72:6c8 with SMTP id
- l28-20020ac84cdc000000b004237d7206c8mr180279qtv.53.1700614339375; Tue, 21 Nov
- 2023 16:52:19 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700615430; x=1701220230;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zRWGrawMSV+6Xgv01Y36HXSNYngChWCIAznOh5AjQlE=;
+ b=nFEpEfWpB1fQ+4fTKW4w0VN48qVyDyvFrE7pFLYWsb+p2sqeLnp0z4992FFpkdeNHB
+ eBRhZtxt1EGSBMLkxmQANJRq70sOG7xsyDWVN0/ox+bduqiem4uZShEyyYNRDept+GqA
+ tsJ8uRo3ovN6RQBf7lQqPIISFGk+3RzRodoTHsF4BV/Pomj93NdbRVi10uBX4glCd2dg
+ 5/UnmNYaBEzc0OWaOzZuM+mwTkh3vpYD2e2UG6byiyZtNg4z7MNHHaiV5MLbmmRXSR/g
+ s7lt4M97AlZamKOcKAq1mrn1YR/8zUDB9yBfcx0qHXzFwZ15vzK63waikxbIq+EnFyhC
+ n5RQ==
+X-Gm-Message-State: AOJu0Yzabi4XxnuD12Bn93Lnq2kx30652+/nmYMDjkDErCzbFfNMIVMX
+ GzSd7e4LZ7k87UdtXnjyjml8E5fzGgSh0/bSePFOXb5J
+X-Google-Smtp-Source: AGHT+IFFL9OvxNAARqb807A0CCGpwcpZ9g3tIy4bwCsMulCtjjtPtnLbO27xrODmZmgpkMF5FOSVnpyypEDVojOa5P4=
+X-Received: by 2002:a17:906:cec9:b0:9b2:b691:9b5f with SMTP id
+ si9-20020a170906cec900b009b2b6919b5fmr390800ejb.41.1700615429487; Tue, 21 Nov
+ 2023 17:10:29 -0800 (PST)
 MIME-Version: 1.0
-References: <20231121235300.2406522-1-ttabi@nvidia.com>
-In-Reply-To: <20231121235300.2406522-1-ttabi@nvidia.com>
-From: David Airlie <airlied@redhat.com>
-Date: Wed, 22 Nov 2023 10:52:08 +1000
-Message-ID: <CAMwc25oK9xXoNW0z8A7=O+tRqUvcxAKy4rfUAzAOjOgESVhj2Q@mail.gmail.com>
-To: Timur Tabi <ttabi@nvidia.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+References: <20231113221202.7203-1-dakr@redhat.com>
+In-Reply-To: <20231113221202.7203-1-dakr@redhat.com>
+From: Dave Airlie <airlied@gmail.com>
+Date: Wed, 22 Nov 2023 11:10:17 +1000
+Message-ID: <CAPM=9twd8FQUdSGFtz78iqwZ7SzWuXeJ5+hXtW4amm6nLkHWZw@mail.gmail.com>
+To: Danilo Krummrich <dakr@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] nouveau/gsp: document some aspects of GSP-RM
+Subject: Re: [Nouveau] [PATCH drm-misc-next] drm/nouveau: use GPUVM common
+ infrastructure
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,313 +66,484 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Nov 22, 2023 at 9:53=E2=80=AFAM Timur Tabi <ttabi@nvidia.com> wrote=
-:
+On Tue, 14 Nov 2023 at 08:12, Danilo Krummrich <dakr@redhat.com> wrote:
 >
-> Document a few aspects of communication with GSP-RM.  These comments
-> are derived from notes made during early development of GSP-RM
-> support in Nouveau, but were not included in the initial patch set.
+> GPUVM provides common infrastructure to track external and evicted GEM
+> objects as well as locking and validation helpers.
 >
-> Signed-off-by: Timur Tabi <ttabi@nvidia.com>
+> Especially external and evicted object tracking is a huge improvement
+> compared to the current brute force approach of iterating all mappings
+> in order to lock and validate the GPUVM's GEM objects. Hence, make us of
+> it.
+>
+> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+
+Reviewed-by: Dave Airlie <airlied@redhat.com>
+
 > ---
->  .../common/shared/msgq/inc/msgq/msgq_priv.h   | 79 +++++++++++++++--
->  .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 86 ++++++++++++++++++-
->  2 files changed, 154 insertions(+), 11 deletions(-)
+> Originally, this patch was part of [1]. However, while applying the series,
+> I noticed that this patch needs another iteration, hence I held it back to
+> rework it and send it separately.
 >
-> diff --git a/drivers/gpu/drm/nouveau/include/nvrm/535.113.01/common/share=
-d/msgq/inc/msgq/msgq_priv.h b/drivers/gpu/drm/nouveau/include/nvrm/535.113.=
-01/common/shared/msgq/inc/msgq/msgq_priv.h
-> index 5a2f273d95c8..1e94bf087b23 100644
-> --- a/drivers/gpu/drm/nouveau/include/nvrm/535.113.01/common/shared/msgq/=
-inc/msgq/msgq_priv.h
-> +++ b/drivers/gpu/drm/nouveau/include/nvrm/535.113.01/common/shared/msgq/=
-inc/msgq/msgq_priv.h
-> @@ -26,21 +26,82 @@
->   * DEALINGS IN THE SOFTWARE.
+> Changes since detached from [1]:
+> ================================
+> - Don't use drm_gpuvm_exec_lock() since it would, unnecessarily, lock all the
+>   backing buffer's dma-resv locks. Instead, lock only the GEMs affected by the
+>   requested mapping operations, directly or indirectly through map, remap or
+>   unmap.
+> - Validate backing buffers in drm_exec loop directly.
+>
+> [1] https://lore.kernel.org/dri-devel/20231108001259.15123-1-dakr@redhat.com/T/#u
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_bo.c    |   4 +-
+>  drivers/gpu/drm/nouveau/nouveau_exec.c  |  57 +++-------
+>  drivers/gpu/drm/nouveau/nouveau_exec.h  |   4 -
+>  drivers/gpu/drm/nouveau/nouveau_sched.c |   9 +-
+>  drivers/gpu/drm/nouveau/nouveau_sched.h |   7 +-
+>  drivers/gpu/drm/nouveau/nouveau_uvmm.c  | 134 +++++++++++++-----------
+>  6 files changed, 100 insertions(+), 115 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> index 7afad86da64b..b7dda486a7ea 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> @@ -1061,17 +1061,18 @@ nouveau_bo_move(struct ttm_buffer_object *bo, bool evict,
+>  {
+>         struct nouveau_drm *drm = nouveau_bdev(bo->bdev);
+>         struct nouveau_bo *nvbo = nouveau_bo(bo);
+> +       struct drm_gem_object *obj = &bo->base;
+>         struct ttm_resource *old_reg = bo->resource;
+>         struct nouveau_drm_tile *new_tile = NULL;
+>         int ret = 0;
+>
+> -
+>         if (new_reg->mem_type == TTM_PL_TT) {
+>                 ret = nouveau_ttm_tt_bind(bo->bdev, bo->ttm, new_reg);
+>                 if (ret)
+>                         return ret;
+>         }
+>
+> +       drm_gpuvm_bo_gem_evict(obj, evict);
+>         nouveau_bo_move_ntfy(bo, new_reg);
+>         ret = ttm_bo_wait_ctx(bo, ctx);
+>         if (ret)
+> @@ -1136,6 +1137,7 @@ nouveau_bo_move(struct ttm_buffer_object *bo, bool evict,
+>  out_ntfy:
+>         if (ret) {
+>                 nouveau_bo_move_ntfy(bo, bo->resource);
+> +               drm_gpuvm_bo_gem_evict(obj, !evict);
+>         }
+>         return ret;
+>  }
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
+> index bf6c12f4342a..9d9835fb5970 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_exec.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
+> @@ -1,7 +1,5 @@
+>  // SPDX-License-Identifier: MIT
+>
+> -#include <drm/drm_exec.h>
+> -
+>  #include "nouveau_drv.h"
+>  #include "nouveau_gem.h"
+>  #include "nouveau_mem.h"
+> @@ -86,14 +84,12 @@
 >   */
 >
-> +#define GSP_MESSAGE_COMMAND_QUEUE_SIZE 0x40000
-> +#define GSP_MESSAGE_STATUS_QUEUE_SIZE  0x40000
-> +
-> +/**
-> + * msgqTxHeader -- TX queue data structure
-> + * @version: the version of this structure, must be 0
-> + * @size: the size of the entire queue, including this header
-> + * @msgSize: the padded size of queue element, must be power-of-2, 16 is
-> + *         minimum
-
-I don't think this is true anymore, I think 4k is the minimum size
-since one of the 535 series.
-
-
-> + * @msgCount: the number of elements in this queue
-> + * @writePtr: head index of this queue
-> + * @flags: 1 =3D swap the RX pointers
-> + * @rxHdrOff: offset of readPtr in this structure
-> + * @entryOff: offset of beginning of queue (msgqRxHeader), relative to
-> + *          beginning of this structure
-> + *
-> + * The command queue is a queue of RPCs that are sent from the driver to=
- the
-> + * GSP.  The status queue is a queue of messages/responses from the GSP =
-to the
-> + * driver.  Although the driver allocates memory for both queues (inside=
- the
-> + * same memory block), the command queue is owned by the driver and the =
-status
-> + * queue is owned by the GSP.  In addition, the two headers must not sha=
-re the
-> + * same 4K page.
-> + *
-> + * Unfortunately, depsite the fact that the queue size is a field in thi=
-s
-
-^ typo
-
-> + * structure, the GSP has a hard-coded expectation of the sizes.  So the
-> + * command queue size must be GSP_MESSAGE_COMMAND_QUEUE_SIZE and the sta=
-tus
-> + * queue size must be GSP_MESSAGE_STATUS_QUEUE_SIZE.
-> + *
-> + * Each queue is prefixed with this data structure.  The idea is that a =
-queue
-> + * and its header are written to only by their owner.  That is, only the
-> + * driver writes to the command queue and command queue header, and only=
- the
-> + * GSP writes to the status (receive) queue and its header.
-> + *
-> + * This is enforced by the concept of "swapping" the RX pointers.  This =
-is
-> + * why the 'flags' field must be set to 1.  'rxHdrOff' is how the GSP kn=
-ows
-> + * where the where the tail pointer of its status queue.
-> + *
-> + * When the driver writes a new RPC to the command queue, it updates wri=
-tePtr.
-> + * When it reads a new message from the status queue, it updates readPtr=
-.  In
-> + * this way, the GSP knows when a new command is in the queue (it polls
-> + * writePtr) and it knows how much free space is in the status queue (it
-> + * checks readPtr).  The driver never cares about how much free space is=
- in
-> + * the status queue.
-> + *
-> + * As usual, producers write to the head pointer, and consumers read fro=
-m the
-> + * tail pointer.  When head =3D=3D tail, the queue is empty.
-> + *
-> + * So to summarize:
-> + * command.writePtr =3D head of command queue
-> + * command.readPtr =3D tail of status queue
-> + * status.writePtr =3D head of status queue
-> + * status.readPtr =3D tail of command queue
-> + */
->  typedef struct
+>  static int
+> -nouveau_exec_job_submit(struct nouveau_job *job)
+> +nouveau_exec_job_submit(struct nouveau_job *job,
+> +                       struct drm_gpuvm_exec *vme)
 >  {
-> -    NvU32 version;   // queue version
-> -    NvU32 size;      // bytes, page aligned
-> -    NvU32 msgSize;   // entry size, bytes, must be power-of-2, 16 is min=
-imum
-> -    NvU32 msgCount;  // number of entries in queue
-> -    NvU32 writePtr;  // message id of next slot
-> -    NvU32 flags;     // if set it means "i want to swap RX"
-> -    NvU32 rxHdrOff;  // Offset of msgqRxHeader from start of backing sto=
-re.
-> -    NvU32 entryOff;  // Offset of entries from start of backing store.
-> +       NvU32 version;
-> +       NvU32 size;
-> +       NvU32 msgSize;
-> +       NvU32 msgCount;
-> +       NvU32 writePtr;
-> +       NvU32 flags;
-> +       NvU32 rxHdrOff;
-> +       NvU32 entryOff;
->  } msgqTxHeader;
+>         struct nouveau_exec_job *exec_job = to_nouveau_exec_job(job);
+>         struct nouveau_cli *cli = job->cli;
+>         struct nouveau_uvmm *uvmm = nouveau_cli_uvmm(cli);
+> -       struct drm_exec *exec = &job->exec;
+> -       struct drm_gem_object *obj;
+> -       unsigned long index;
+>         int ret;
 >
-> +/**
-> + * msgqRxHeader - RX queue data structure
-> + * @readPtr: tail index of the other queue
-> + *
-> + * Although this is a separate struct, it could easily be merged into
-> + * msgqTxHeader.  msgqTxHeader.rxHdrOff is simply the offset of readPtr
-> + * from the beginning of msgqTxHeader.
-> + */
->  typedef struct
->  {
-> -    NvU32 readPtr; // message id of last message read
-> +       NvU32 readPtr;
->  } msgqRxHeader;
+>         /* Create a new fence, but do not emit yet. */
+> @@ -102,52 +98,29 @@ nouveau_exec_job_submit(struct nouveau_job *job)
+>                 return ret;
 >
->  #endif
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu=
-/drm/nouveau/nvkm/subdev/gsp/r535.c
-> index dc44f5c7833f..265c0a413ea8 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> @@ -1379,6 +1379,13 @@ r535_gsp_msg_post_event(void *priv, u32 fn, void *=
-repv, u32 repc)
+>         nouveau_uvmm_lock(uvmm);
+> -       drm_exec_init(exec, DRM_EXEC_INTERRUPTIBLE_WAIT |
+> -                           DRM_EXEC_IGNORE_DUPLICATES);
+> -       drm_exec_until_all_locked(exec) {
+> -               struct drm_gpuva *va;
+> -
+> -               drm_gpuvm_for_each_va(va, &uvmm->base) {
+> -                       if (unlikely(va == &uvmm->base.kernel_alloc_node))
+> -                               continue;
+> -
+> -                       ret = drm_exec_prepare_obj(exec, va->gem.obj, 1);
+> -                       drm_exec_retry_on_contention(exec);
+> -                       if (ret)
+> -                               goto err_uvmm_unlock;
+> -               }
+> +       ret = drm_gpuvm_exec_lock(vme);
+> +       if (ret) {
+> +               nouveau_uvmm_unlock(uvmm);
+> +               return ret;
+>         }
+>         nouveau_uvmm_unlock(uvmm);
+>
+> -       drm_exec_for_each_locked_object(exec, index, obj) {
+> -               struct nouveau_bo *nvbo = nouveau_gem_object(obj);
+> -
+> -               ret = nouveau_bo_validate(nvbo, true, false);
+> -               if (ret)
+> -                       goto err_exec_fini;
+> +       ret = drm_gpuvm_exec_validate(vme);
+> +       if (ret) {
+> +               drm_gpuvm_exec_unlock(vme);
+> +               return ret;
+>         }
+>
 >         return 0;
+> -
+> -err_uvmm_unlock:
+> -       nouveau_uvmm_unlock(uvmm);
+> -err_exec_fini:
+> -       drm_exec_fini(exec);
+> -       return ret;
+> -
 >  }
 >
-> +/**
-> + * r535_gsp_msg_run_cpu_sequencer() -- process I/O commands from the GSP
-> + *
-> + * The GSP sequencer is a list of I/O commands that the GSP can send to
-> + * the driver to perform for various purposes.  The most common usage is=
- to
-> + * perform a special mid-initialization reset.
-> + */
->  static int
->  r535_gsp_msg_run_cpu_sequencer(void *priv, u32 fn, void *repv, u32 repc)
+>  static void
+> -nouveau_exec_job_armed_submit(struct nouveau_job *job)
+> +nouveau_exec_job_armed_submit(struct nouveau_job *job,
+> +                             struct drm_gpuvm_exec *vme)
 >  {
-> @@ -1628,8 +1635,8 @@ r535_gsp_shared_init(struct nvkm_gsp *gsp)
->         } *cmdq, *msgq;
->         int ret, i;
->
-> -       gsp->shm.cmdq.size =3D 0x40000;
-> -       gsp->shm.msgq.size =3D 0x40000;
-> +       gsp->shm.cmdq.size =3D GSP_MESSAGE_COMMAND_QUEUE_SIZE;
-> +       gsp->shm.msgq.size =3D GSP_MESSAGE_STATUS_QUEUE_SIZE;
->
->         gsp->shm.ptes.nr  =3D (gsp->shm.cmdq.size + gsp->shm.msgq.size) >=
-> GSP_PAGE_SHIFT;
->         gsp->shm.ptes.nr +=3D DIV_ROUND_UP(gsp->shm.ptes.nr * sizeof(u64)=
-, GSP_PAGE_SIZE);
-> @@ -1718,6 +1725,23 @@ r535_gsp_libos_id8(const char *name)
->         return id;
+> -       struct drm_exec *exec = &job->exec;
+> -       struct drm_gem_object *obj;
+> -       unsigned long index;
+> -
+> -       drm_exec_for_each_locked_object(exec, index, obj)
+> -               dma_resv_add_fence(obj->resv, job->done_fence, job->resv_usage);
+> -
+> -       drm_exec_fini(exec);
+> +       drm_gpuvm_exec_resv_add_fence(vme, job->done_fence,
+> +                                     job->resv_usage, job->resv_usage);
+> +       drm_gpuvm_exec_unlock(vme);
 >  }
 >
-> +/**
-> + * create_pte_array() - creates a PTE array of a physically contiguous b=
-uffer
-> + * @ptes: pointer to the array
-> + * @addr: base address of physically contiguous buffer (GSP_PAGE_SIZE al=
-igned)
-> + * @size: size of the buffer
-> + *
-> + * GSP-RM sometimes expects physically-contiguous buffers to have an arr=
-ay of
-> + * "PTEs" for each page in that buffer.  Although in theory that allows =
-for
-> + * the buffer to be physically discontiguous, GSP-RM does not currently
-> + * support that.
-> + *
-> + * In this case, the PTEs are DMA addresses of each page of the buffer. =
- Since
-> + * the buffer is physically contiguous, calculating all the PTEs is simp=
-le
-> + * math.
-> + *
-> + * See memdescGetPhysAddrsForGpu()
-> + */
->  static void create_pte_array(u64 *ptes, dma_addr_t addr, size_t size)
+>  static struct dma_fence *
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.h b/drivers/gpu/drm/nouveau/nouveau_exec.h
+> index 778cacd90f65..b815de2428f3 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_exec.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_exec.h
+> @@ -3,16 +3,12 @@
+>  #ifndef __NOUVEAU_EXEC_H__
+>  #define __NOUVEAU_EXEC_H__
+>
+> -#include <drm/drm_exec.h>
+> -
+>  #include "nouveau_drv.h"
+>  #include "nouveau_sched.h"
+>
+>  struct nouveau_exec_job_args {
+>         struct drm_file *file_priv;
+>         struct nouveau_sched_entity *sched_entity;
+> -
+> -       struct drm_exec exec;
+>         struct nouveau_channel *chan;
+>
+>         struct {
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
+> index 1b2cc3f2e1c7..c0fa94db9972 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_sched.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
+> @@ -263,6 +263,11 @@ nouveau_job_submit(struct nouveau_job *job)
 >  {
->         unsigned int num_pages =3D DIV_ROUND_UP_ULL(size, GSP_PAGE_SIZE);
-> @@ -1727,6 +1751,35 @@ static void create_pte_array(u64 *ptes, dma_addr_t=
- addr, size_t size)
->                 ptes[i] =3D (u64)addr + (i << GSP_PAGE_SHIFT);
->  }
+>         struct nouveau_sched_entity *entity = to_nouveau_sched_entity(job->base.entity);
+>         struct dma_fence *done_fence = NULL;
+> +       struct drm_gpuvm_exec vm_exec = {
+> +               .vm = &nouveau_cli_uvmm(job->cli)->base,
+> +               .flags = DRM_EXEC_IGNORE_DUPLICATES,
+> +               .num_fences = 1,
+> +       };
+>         int ret;
 >
-> +/**
-> + * r535_gsp_libos_init() -- create the libos arguments structure
-> + *
-> + * The logging buffers are byte queues that contain encoded printf-like
-> + * messages from GSP-RM.  They need to be decoded by a special applicati=
-on
-> + * that can parse the buffers.
-> + *
-> + * The 'loginit' buffer contains logs from early GSP-RM init and
-> + * exception dumps.  The 'logrm' buffer contains the subsequent logs. Bo=
-th are
-> + * written to directly by GSP-RM and can be any multiple of GSP_PAGE_SIZ=
-E.
-> + *
-> + * The physical address map for the log buffer is stored in the buffer
-> + * itself, starting with offset 1. Offset 0 contains the "put" pointer.
-> + *
-> + * The GSP only understands 4K pages (GSP_PAGE_SIZE), so even if the ker=
-nel is
-> + * configured for a larger page size (e.g. 64K pages), we need to give
-> + * the GSP an array of 4K pages. Fortunately, since the buffer is
-> + * physically contiguous, it's simple math to calculate the addresses.
-> + *
-> + * The buffers must be a multiple of GSP_PAGE_SIZE.  GSP-RM also current=
-ly
-> + * ignores the @kind field for LOGINIT, LOGINTR, and LOGRM, but expects =
-the
-> + * buffers to be physically contiguous anyway.
-> + *
-> + * The memory allocated for the arguments must remain until the GSP send=
-s the
-> + * init_done RPC.
-> + *
-> + * See _kgspInitLibosLoggingStructures (allocates memory for buffers)
-> + * See kgspSetupLibosInitArgs_IMPL (creates pLibosInitArgs[] array)
-> + */
->  static int
->  r535_gsp_libos_init(struct nvkm_gsp *gsp)
+>         ret = nouveau_job_add_deps(job);
+> @@ -282,7 +287,7 @@ nouveau_job_submit(struct nouveau_job *job)
+>          * successfully.
+>          */
+>         if (job->ops->submit) {
+> -               ret = job->ops->submit(job);
+> +               ret = job->ops->submit(job, &vm_exec);
+>                 if (ret)
+>                         goto err_cleanup;
+>         }
+> @@ -315,7 +320,7 @@ nouveau_job_submit(struct nouveau_job *job)
+>         set_bit(DRM_SCHED_FENCE_DONT_PIPELINE, &job->done_fence->flags);
+>
+>         if (job->ops->armed_submit)
+> -               job->ops->armed_submit(job);
+> +               job->ops->armed_submit(job, &vm_exec);
+>
+>         nouveau_job_fence_attach(job);
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.h b/drivers/gpu/drm/nouveau/nouveau_sched.h
+> index 27ac19792597..0f87697dbc9e 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_sched.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_sched.h
+> @@ -5,7 +5,7 @@
+>
+>  #include <linux/types.h>
+>
+> -#include <drm/drm_exec.h>
+> +#include <drm/drm_gpuvm.h>
+>  #include <drm/gpu_scheduler.h>
+>
+>  #include "nouveau_drv.h"
+> @@ -54,7 +54,6 @@ struct nouveau_job {
+>         struct drm_file *file_priv;
+>         struct nouveau_cli *cli;
+>
+> -       struct drm_exec exec;
+>         enum dma_resv_usage resv_usage;
+>         struct dma_fence *done_fence;
+>
+> @@ -76,8 +75,8 @@ struct nouveau_job {
+>                 /* If .submit() returns without any error, it is guaranteed that
+>                  * armed_submit() is called.
+>                  */
+> -               int (*submit)(struct nouveau_job *);
+> -               void (*armed_submit)(struct nouveau_job *);
+> +               int (*submit)(struct nouveau_job *, struct drm_gpuvm_exec *);
+> +               void (*armed_submit)(struct nouveau_job *, struct drm_gpuvm_exec *);
+>                 struct dma_fence *(*run)(struct nouveau_job *);
+>                 void (*free)(struct nouveau_job *);
+>                 enum drm_gpu_sched_stat (*timeout)(struct nouveau_job *);
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> index eda7bb8624f1..90e6732ee9b5 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> @@ -438,8 +438,9 @@ nouveau_uvma_region_complete(struct nouveau_uvma_region *reg)
+>  static void
+>  op_map_prepare_unwind(struct nouveau_uvma *uvma)
 >  {
-> @@ -1837,6 +1890,35 @@ nvkm_gsp_radix3_dtor(struct nvkm_gsp *gsp, struct =
-nvkm_gsp_radix3 *rx3)
->                 nvkm_gsp_mem_dtor(gsp, &rx3->mem[i]);
+> +       struct drm_gpuva *va = &uvma->va;
+>         nouveau_uvma_gem_put(uvma);
+> -       drm_gpuva_remove(&uvma->va);
+> +       drm_gpuva_remove(va);
+>         nouveau_uvma_free(uvma);
 >  }
 >
-> +/**
-> + * nvkm_gsp_radix3_sg - build a radix3 table from a S/G list
-> + *
-> + * The GSP uses a three-level page table, called radix3, to map the firm=
-ware.
-> + * Each 64-bit "pointer" in the table is either the bus address of an en=
-try in
-> + * the next table (for levels 0 and 1) or the bus address of the next pa=
-ge in
-> + * the GSP firmware image itself.
-> + *
-> + * Level 0 contains a single entry in one page that points to the first =
-page
-> + * of level 1.
-> + *
-> + * Level 1, since it's also only one page in size, contains up to 512 en=
-tries,
-> + * one for each page in Level 2.
-> + *
-> + * Level 2 can be up to 512 pages in size, and each of those entries poi=
-nts to
-> + * the next page of the firmware image.  Since there can be up to 512*51=
-2
-> + * pages, that limits the size of the firmware to 512*512*GSP_PAGE_SIZE =
-=3D 1GB.
-> + *
-> + * Internally, the GSP has its window into system memory, but the base
-> + * physical address of the aperture is not 0.  In fact, it varies depend=
-ing on
-> + * the GPU architure.  Since the GPU is a PCI device, this window is acc=
-essed
-
-^ typo
-
-> + * via DMA and is therefore bound by IOMMU translation.  The end result =
-is
-> + * that GSP-RM must translate the bus addresses in the table to GSP phys=
-ical
-> + * addresses.  All this should happen transparently.
-> + *
-> + * Returns 0 on success, or negative error code
-> + *
-> + * See kgspCreateRadix3_IMPL
-> + */
->  static int
->  nvkm_gsp_radix3_sg(struct nvkm_device *device, struct sg_table *sgt, u64=
- size,
+> @@ -468,6 +469,7 @@ nouveau_uvmm_sm_prepare_unwind(struct nouveau_uvmm *uvmm,
+>                         break;
+>                 case DRM_GPUVA_OP_REMAP: {
+>                         struct drm_gpuva_op_remap *r = &op->remap;
+> +                       struct drm_gpuva *va = r->unmap->va;
 >
-
-Otherwise seems fine, with those fixed feel free to resend and add
-
-a Reviewed-by: Dave Airlie <airlied@redhat.com> tag.
-
-Dave.
-
+>                         if (r->next)
+>                                 op_map_prepare_unwind(new->next);
+> @@ -475,7 +477,7 @@ nouveau_uvmm_sm_prepare_unwind(struct nouveau_uvmm *uvmm,
+>                         if (r->prev)
+>                                 op_map_prepare_unwind(new->prev);
+>
+> -                       op_unmap_prepare_unwind(r->unmap->va);
+> +                       op_unmap_prepare_unwind(va);
+>                         break;
+>                 }
+>                 case DRM_GPUVA_OP_UNMAP:
+> @@ -634,6 +636,7 @@ nouveau_uvmm_sm_prepare(struct nouveau_uvmm *uvmm,
+>                                         goto unwind;
+>                                 }
+>                         }
+> +
+>                         break;
+>                 }
+>                 case DRM_GPUVA_OP_REMAP: {
+> @@ -1135,12 +1138,53 @@ bind_link_gpuvas(struct bind_job_op *bop)
+>  }
+>
+>  static int
+> -nouveau_uvmm_bind_job_submit(struct nouveau_job *job)
+> +bind_lock_validate(struct nouveau_job *job, struct drm_exec *exec,
+> +                  unsigned int num_fences)
+> +{
+> +       struct nouveau_uvmm_bind_job *bind_job = to_uvmm_bind_job(job);
+> +       struct bind_job_op *op;
+> +       int ret;
+> +
+> +       list_for_each_op(op, &bind_job->ops) {
+> +               struct drm_gpuva_op *va_op;
+> +
+> +               if (!op->ops)
+> +                       continue;
+> +
+> +               drm_gpuva_for_each_op(va_op, op->ops) {
+> +                       struct drm_gem_object *obj = op_gem_obj(va_op);
+> +
+> +                       if (unlikely(!obj))
+> +                               continue;
+> +
+> +                       ret = drm_exec_prepare_obj(exec, obj, num_fences);
+> +                       if (ret)
+> +                               return ret;
+> +
+> +                       /* Don't validate GEMs backing mappings we're about to
+> +                        * unmap, it's not worth the effort.
+> +                        */
+> +                       if (va_op->op == DRM_GPUVA_OP_UNMAP)
+> +                               continue;
+> +
+> +                       ret = nouveau_bo_validate(nouveau_gem_object(obj),
+> +                                                 true, false);
+> +                       if (ret)
+> +                               return ret;
+> +               }
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +static int
+> +nouveau_uvmm_bind_job_submit(struct nouveau_job *job,
+> +                            struct drm_gpuvm_exec *vme)
+>  {
+>         struct nouveau_uvmm *uvmm = nouveau_cli_uvmm(job->cli);
+>         struct nouveau_uvmm_bind_job *bind_job = to_uvmm_bind_job(job);
+>         struct nouveau_sched_entity *entity = job->entity;
+> -       struct drm_exec *exec = &job->exec;
+> +       struct drm_exec *exec = &vme->exec;
+>         struct bind_job_op *op;
+>         int ret;
+>
+> @@ -1157,6 +1201,8 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job)
+>                         dma_resv_unlock(obj->resv);
+>                         if (IS_ERR(op->vm_bo))
+>                                 return PTR_ERR(op->vm_bo);
+> +
+> +                       drm_gpuvm_bo_extobj_add(op->vm_bo);
+>                 }
+>
+>                 ret = bind_validate_op(job, op);
+> @@ -1179,6 +1225,7 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job)
+>          * unwind all GPU VA space changes on failure.
+>          */
+>         nouveau_uvmm_lock(uvmm);
+> +
+>         list_for_each_op(op, &bind_job->ops) {
+>                 switch (op->op) {
+>                 case OP_MAP_SPARSE:
+> @@ -1290,55 +1337,13 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job)
+>                 }
+>         }
+>
+> -       drm_exec_init(exec, DRM_EXEC_INTERRUPTIBLE_WAIT |
+> -                           DRM_EXEC_IGNORE_DUPLICATES);
+> +       drm_exec_init(exec, vme->flags);
+>         drm_exec_until_all_locked(exec) {
+> -               list_for_each_op(op, &bind_job->ops) {
+> -                       struct drm_gpuva_op *va_op;
+> -
+> -                       if (IS_ERR_OR_NULL(op->ops))
+> -                               continue;
+> -
+> -                       drm_gpuva_for_each_op(va_op, op->ops) {
+> -                               struct drm_gem_object *obj = op_gem_obj(va_op);
+> -
+> -                               if (unlikely(!obj))
+> -                                       continue;
+> -
+> -                               ret = drm_exec_prepare_obj(exec, obj, 1);
+> -                               drm_exec_retry_on_contention(exec);
+> -                               if (ret) {
+> -                                       op = list_last_op(&bind_job->ops);
+> -                                       goto unwind;
+> -                               }
+> -                       }
+> -               }
+> -       }
+> -
+> -       list_for_each_op(op, &bind_job->ops) {
+> -               struct drm_gpuva_op *va_op;
+> -
+> -               if (IS_ERR_OR_NULL(op->ops))
+> -                       continue;
+> -
+> -               drm_gpuva_for_each_op(va_op, op->ops) {
+> -                       struct drm_gem_object *obj = op_gem_obj(va_op);
+> -
+> -                       if (unlikely(!obj))
+> -                               continue;
+> -
+> -                       /* Don't validate GEMs backing mappings we're about to
+> -                        * unmap, it's not worth the effort.
+> -                        */
+> -                       if (unlikely(va_op->op == DRM_GPUVA_OP_UNMAP))
+> -                               continue;
+> -
+> -                       ret = nouveau_bo_validate(nouveau_gem_object(obj),
+> -                                                 true, false);
+> -                       if (ret) {
+> -                               op = list_last_op(&bind_job->ops);
+> -                               goto unwind;
+> -                       }
+> +               ret = bind_lock_validate(job, exec, vme->num_fences);
+> +               drm_exec_retry_on_contention(exec);
+> +               if (ret) {
+> +                       op = list_last_op(&bind_job->ops);
+> +                       goto unwind;
+>                 }
+>         }
+>
+> @@ -1413,21 +1418,17 @@ nouveau_uvmm_bind_job_submit(struct nouveau_job *job)
+>         }
+>
+>         nouveau_uvmm_unlock(uvmm);
+> -       drm_exec_fini(exec);
+> +       drm_gpuvm_exec_unlock(vme);
+>         return ret;
+>  }
+>
+>  static void
+> -nouveau_uvmm_bind_job_armed_submit(struct nouveau_job *job)
+> +nouveau_uvmm_bind_job_armed_submit(struct nouveau_job *job,
+> +                                  struct drm_gpuvm_exec *vme)
+>  {
+> -       struct drm_exec *exec = &job->exec;
+> -       struct drm_gem_object *obj;
+> -       unsigned long index;
+> -
+> -       drm_exec_for_each_locked_object(exec, index, obj)
+> -               dma_resv_add_fence(obj->resv, job->done_fence, job->resv_usage);
+> -
+> -       drm_exec_fini(exec);
+> +       drm_gpuvm_exec_resv_add_fence(vme, job->done_fence,
+> +                                     job->resv_usage, job->resv_usage);
+> +       drm_gpuvm_exec_unlock(vme);
+>  }
+>
+>  static struct dma_fence *
+> @@ -1815,8 +1816,17 @@ nouveau_uvmm_free(struct drm_gpuvm *gpuvm)
+>         kfree(uvmm);
+>  }
+>
+> +static int
+> +nouveau_uvmm_bo_validate(struct drm_gpuvm_bo *vm_bo, struct drm_exec *exec)
+> +{
+> +       struct nouveau_bo *nvbo = nouveau_gem_object(vm_bo->obj);
+> +
+> +       return nouveau_bo_validate(nvbo, true, false);
+> +}
+> +
+>  static const struct drm_gpuvm_ops gpuvm_ops = {
+>         .vm_free = nouveau_uvmm_free,
+> +       .vm_bo_validate = nouveau_uvmm_bo_validate,
+>  };
+>
+>  int
+>
+> base-commit: 50c1a36f594bb3dd33f3f9386c5d960cd12327d8
+> --
+> 2.41.0
+>
