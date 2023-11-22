@@ -2,60 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 498E27F3B26
-	for <lists+nouveau@lfdr.de>; Wed, 22 Nov 2023 02:19:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA58C7F4A59
+	for <lists+nouveau@lfdr.de>; Wed, 22 Nov 2023 16:32:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B537D10E2EB;
-	Wed, 22 Nov 2023 01:19:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 587B810E097;
+	Wed, 22 Nov 2023 15:32:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5ADD510E0DC;
- Wed, 22 Nov 2023 01:19:25 +0000 (UTC)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a00cbb83c82so286630666b.2; 
- Tue, 21 Nov 2023 17:19:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700615963; x=1701220763; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vZGhQL4OBe/w6Y5dH1V9yZe8yI/e7FkVl7hC3fRwMhU=;
- b=R6+YohoruuXXCz7zgZP2wJMgwQm1QKV9mk6v6ssDoNw97dSuJdYpk8Ko/BnIgHEMw2
- mW5gWWz9W5EW4RGcg7FClWsItn/QXuZftHTZwuw9FqaF4NLzG30FddTV2eDsRXEIBvxb
- wSWWXepv+gdYBhxzMcRj3XCIHD0OMDfrWhmEtI8Z2nLcG12M/xvW6QnAq2ZwJw4RYLQ+
- 3Scf9XPC+mwgaY6S1IogaIwQPdKLlpGESJ5W6Fu8xCsw0pEiBr5yt4TKfJb2P0Gway4M
- UhKPFHHNUcb7bNZYSMeCOilLf84baVI3dAitquatjrRoi8G1Trz7F0bCaZ+3lI3ex129
- qO+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700615963; x=1701220763;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vZGhQL4OBe/w6Y5dH1V9yZe8yI/e7FkVl7hC3fRwMhU=;
- b=BLkiyi/22vMx5lwWHG+G0MrmmxOWLxjhQFlL3NDYai5TSva2qq4b6j/SbCxAOlUrHk
- 9+JtWPtlcJACrf6DeaJw7TH0+EJJDvRgtxEwtwhVNbljyIM8zUqEy1MIWas9n643FtwH
- LIKwF0SWSYINzrh0mhV2yCbrOV3YlDb8KbsBRiTtV6jSS4pKxcks8dS6eq49tvTL0Y0D
- OZJ0tXaUprx36xc860pvLEBsiILfRAPrmh1BA1yBKor3Pi96ykHLSXd4aHOOzoiG1Rn+
- Ig6nm/g8V+2UqT9vb+D0r7vPOaM/1v2lpfd+QYSToauJVq6Ryr+VmnswweygS3K2PiwT
- o8Bg==
-X-Gm-Message-State: AOJu0Yw4WhEPB3YwlT/jUAavSRy6U1N0DXeBEll/TpqtMW4iUtYAIw3A
- KbhFICpgMbRTDnapXetFykrzSA0RM1RQ3Suf1UQ=
-X-Google-Smtp-Source: AGHT+IEgAQWOGk+SDijL13R5w4xsY8EMQK2JoQ1fTbGs4e02B5hyIfPSjFGGzLRi1hch7qTNpuuuR9MgasnRRFsER/g=
-X-Received: by 2002:a17:906:1cf:b0:a02:99b5:d0dc with SMTP id
- 15-20020a17090601cf00b00a0299b5d0dcmr505803ejj.10.1700615963182; Tue, 21 Nov
- 2023 17:19:23 -0800 (PST)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B733710E097;
+ Wed, 22 Nov 2023 15:32:43 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id E375ACE0EAC;
+ Wed, 22 Nov 2023 15:32:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C714C433C9;
+ Wed, 22 Nov 2023 15:32:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1700667160;
+ bh=EpjLjyqXy9J2BjjoAI8hwuINf00k9PhkqMusJqG7GiY=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=uDLshkhAVrCXSAjQEQK9dqtoIfDOLZlNdmc4ncfvg5odd3dzC/ndS5F/LIMhd54SD
+ 6/kPBSlIwjKFpzHOBLqT7anE6gcFtRGUAikY2KZk2C+ANb0sTuIW3FrFal7j0BTm1k
+ 9bv7onuuxXujl/67o5MAhzAYGUgMAHvrQ3hC/gL1uDuvEwy4uQ9yA7o2RUgYzgWUv9
+ hL8dHo9FBMvh9y9vPBwPjMCbKRI4FDUjRKORHZJ3MYbh/ZpIFS/qkj+7fT5TSyEO3m
+ wHzI4IqqhisR0f6InPMUbi9PrSPN8qh1QBlYnTGohvbv53lmay8US67hFB+27z8Wcv
+ R7GRsVHXT9txA==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Wed, 22 Nov 2023 10:31:36 -0500
+Message-ID: <20231122153212.852040-7-sashal@kernel.org>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231122153212.852040-1-sashal@kernel.org>
+References: <20231122153212.852040-1-sashal@kernel.org>
 MIME-Version: 1.0
-References: <20231114002728.3491-1-dakr@redhat.com>
- <20231114002728.3491-2-dakr@redhat.com>
-In-Reply-To: <20231114002728.3491-2-dakr@redhat.com>
-From: Dave Airlie <airlied@gmail.com>
-Date: Wed, 22 Nov 2023 11:19:11 +1000
-Message-ID: <CAPM=9twZwCyaSOsew_sXgmp4-5JqjZGTHiR+0xN94enwrgR9=Q@mail.gmail.com>
-To: Danilo Krummrich <dakr@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH drm-misc-next 2/2] drm/nouveau: enable dynamic
- job-flow control
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-stable-base: Linux 6.6.2
+Content-Transfer-Encoding: 8bit
+Subject: [Nouveau] [PATCH AUTOSEL 6.6 07/17] nouveau: use an rwlock for the
+ event lock.
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,157 +54,230 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, daniel@ffwll.ch,
+ Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 14 Nov 2023 at 10:27, Danilo Krummrich <dakr@redhat.com> wrote:
->
-> Make use of the scheduler's credit limit and scheduler job's credit
-> count to account for the actual size of a job, such that we fill up the
-> ring efficiently.
+From: Dave Airlie <airlied@redhat.com>
 
-For the two:
+[ Upstream commit a2e36cd56041e277d7d81d35638fd8d9731e21f5 ]
 
-Reviewed-by: Dave Airlie <airlied@redhat.com>
+This allows it to break the following circular locking dependency.
 
->
-> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_abi16.c | 3 ++-
->  drivers/gpu/drm/nouveau/nouveau_drm.c   | 2 +-
->  drivers/gpu/drm/nouveau/nouveau_exec.c  | 4 +++-
->  drivers/gpu/drm/nouveau/nouveau_sched.c | 9 ++++-----
->  drivers/gpu/drm/nouveau/nouveau_sched.h | 3 ++-
->  drivers/gpu/drm/nouveau/nouveau_uvmm.c  | 4 +++-
->  6 files changed, 15 insertions(+), 10 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-> index f8e59cfb1d34..207945700c94 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-> @@ -316,7 +316,8 @@ nouveau_abi16_ioctl_channel_alloc(ABI16_IOCTL_ARGS)
->         if (ret)
->                 goto done;
->
-> -       ret = nouveau_sched_init(&chan->sched, drm, drm->sched_wq);
-> +       ret = nouveau_sched_init(&chan->sched, drm, drm->sched_wq,
-> +                                chan->chan->dma.ib_max);
->         if (ret)
->                 goto done;
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> index 7e5f19153829..6f6c31a9937b 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> @@ -320,7 +320,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
->          * locks which indirectly or directly are held for allocations
->          * elsewhere.
->          */
-> -       ret = nouveau_sched_init(&cli->sched, drm, NULL);
-> +       ret = nouveau_sched_init(&cli->sched, drm, NULL, 1);
->         if (ret)
->                 goto done;
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
-> index 388831c53551..63c344f4f78e 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_exec.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
-> @@ -258,10 +258,12 @@ nouveau_exec_job_init(struct nouveau_exec_job **pjob,
->                 }
->         }
->
-> +       args.file_priv = __args->file_priv;
->         job->chan = __args->chan;
->
->         args.sched = __args->sched;
-> -       args.file_priv = __args->file_priv;
-> +       /* Plus one to account for the HW fence. */
-> +       args.credits = job->push.count + 1;
->
->         args.in_sync.count = __args->in_sync.count;
->         args.in_sync.s = __args->in_sync.s;
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
-> index faabd662b165..6406d6659361 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_sched.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-> @@ -12,7 +12,6 @@
->  #include "nouveau_abi16.h"
->  #include "nouveau_sched.h"
->
-> -#define NOUVEAU_SCHED_HW_SUBMISSIONS           1
->  #define NOUVEAU_SCHED_JOB_TIMEOUT_MS           10000
->
->  /* Starts at 0, since the DRM scheduler interprets those parameters as (initial)
-> @@ -85,10 +84,10 @@ nouveau_job_init(struct nouveau_job *job,
->                         ret = -ENOMEM;
->                         goto err_free_objs;
->                 }
-> -
->         }
->
-> -       ret = drm_sched_job_init(&job->base, &sched->entity, 1, NULL);
-> +       ret = drm_sched_job_init(&job->base, &sched->entity,
-> +                                args->credits, NULL);
->         if (ret)
->                 goto err_free_chains;
->
-> @@ -396,7 +395,7 @@ static const struct drm_sched_backend_ops nouveau_sched_ops = {
->
->  int
->  nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
-> -                  struct workqueue_struct *wq)
-> +                  struct workqueue_struct *wq, u32 credit_limit)
->  {
->         struct drm_gpu_scheduler *drm_sched = &sched->base;
->         struct drm_sched_entity *entity = &sched->entity;
-> @@ -414,7 +413,7 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
->
->         ret = drm_sched_init(drm_sched, &nouveau_sched_ops, wq,
->                              NOUVEAU_SCHED_PRIORITY_COUNT,
-> -                            NOUVEAU_SCHED_HW_SUBMISSIONS, 0, job_hang_limit,
-> +                            credit_limit, 0, job_hang_limit,
->                              NULL, NULL, "nouveau_sched", drm->dev->dev);
->         if (ret)
->                 goto fail_wq;
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.h b/drivers/gpu/drm/nouveau/nouveau_sched.h
-> index 026f33d9b70c..7ba8ffec135a 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_sched.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_sched.h
-> @@ -27,6 +27,7 @@ enum nouveau_job_state {
->  struct nouveau_job_args {
->         struct drm_file *file_priv;
->         struct nouveau_sched *sched;
-> +       u32 credits;
->
->         enum dma_resv_usage resv_usage;
->         bool sync;
-> @@ -112,7 +113,7 @@ struct nouveau_sched {
->  };
->
->  int nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
-> -                      struct workqueue_struct *wq);
-> +                      struct workqueue_struct *wq, u32 credit_limit);
->  void nouveau_sched_fini(struct nouveau_sched *sched);
->
->  #endif
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> index c95186b34ea0..708cd5f43cb9 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> @@ -1606,9 +1606,11 @@ nouveau_uvmm_bind_job_init(struct nouveau_uvmm_bind_job **pjob,
->
->         init_completion(&job->complete);
->
-> -       args.sched = __args->sched;
->         args.file_priv = __args->file_priv;
->
-> +       args.sched = __args->sched;
-> +       args.credits = 1;
-> +
->         args.in_sync.count = __args->in_sync.count;
->         args.in_sync.s = __args->in_sync.s;
->
-> --
-> 2.41.0
->
+Aug 10 07:01:29 dg1test kernel: ======================================================
+Aug 10 07:01:29 dg1test kernel: WARNING: possible circular locking dependency detected
+Aug 10 07:01:29 dg1test kernel: 6.4.0-rc7+ #10 Not tainted
+Aug 10 07:01:29 dg1test kernel: ------------------------------------------------------
+Aug 10 07:01:29 dg1test kernel: wireplumber/2236 is trying to acquire lock:
+Aug 10 07:01:29 dg1test kernel: ffff8fca5320da18 (&fctx->lock){-...}-{2:2}, at: nouveau_fence_wait_uevent_handler+0x2b/0x100 [nouveau]
+Aug 10 07:01:29 dg1test kernel:
+                                but task is already holding lock:
+Aug 10 07:01:29 dg1test kernel: ffff8fca41208610 (&event->list_lock#2){-...}-{2:2}, at: nvkm_event_ntfy+0x50/0xf0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:
+                                which lock already depends on the new lock.
+Aug 10 07:01:29 dg1test kernel:
+                                the existing dependency chain (in reverse order) is:
+Aug 10 07:01:29 dg1test kernel:
+                                -> #3 (&event->list_lock#2){-...}-{2:2}:
+Aug 10 07:01:29 dg1test kernel:        _raw_spin_lock_irqsave+0x4b/0x70
+Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy+0x50/0xf0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        ga100_fifo_nonstall_intr+0x24/0x30 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvkm_intr+0x12c/0x240 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        __handle_irq_event_percpu+0x88/0x240
+Aug 10 07:01:29 dg1test kernel:        handle_irq_event+0x38/0x80
+Aug 10 07:01:29 dg1test kernel:        handle_edge_irq+0xa3/0x240
+Aug 10 07:01:29 dg1test kernel:        __common_interrupt+0x72/0x160
+Aug 10 07:01:29 dg1test kernel:        common_interrupt+0x60/0xe0
+Aug 10 07:01:29 dg1test kernel:        asm_common_interrupt+0x26/0x40
+Aug 10 07:01:29 dg1test kernel:
+                                -> #2 (&device->intr.lock){-...}-{2:2}:
+Aug 10 07:01:29 dg1test kernel:        _raw_spin_lock_irqsave+0x4b/0x70
+Aug 10 07:01:29 dg1test kernel:        nvkm_inth_allow+0x2c/0x80 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy_state+0x181/0x250 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy_allow+0x63/0xd0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvkm_uevent_mthd+0x4d/0x70 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvkm_ioctl+0x10b/0x250 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvif_object_mthd+0xa8/0x1f0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvif_event_allow+0x2a/0xa0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nouveau_fence_enable_signaling+0x78/0x80 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        __dma_fence_enable_signaling+0x5e/0x100
+Aug 10 07:01:29 dg1test kernel:        dma_fence_add_callback+0x4b/0xd0
+Aug 10 07:01:29 dg1test kernel:        nouveau_cli_work_queue+0xae/0x110 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nouveau_gem_object_close+0x1d1/0x2a0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        drm_gem_handle_delete+0x70/0xe0 [drm]
+Aug 10 07:01:29 dg1test kernel:        drm_ioctl_kernel+0xa5/0x150 [drm]
+Aug 10 07:01:29 dg1test kernel:        drm_ioctl+0x256/0x490 [drm]
+Aug 10 07:01:29 dg1test kernel:        nouveau_drm_ioctl+0x5a/0xb0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        __x64_sys_ioctl+0x91/0xd0
+Aug 10 07:01:29 dg1test kernel:        do_syscall_64+0x3c/0x90
+Aug 10 07:01:29 dg1test kernel:        entry_SYSCALL_64_after_hwframe+0x72/0xdc
+Aug 10 07:01:29 dg1test kernel:
+                                -> #1 (&event->refs_lock#4){....}-{2:2}:
+Aug 10 07:01:29 dg1test kernel:        _raw_spin_lock_irqsave+0x4b/0x70
+Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy_state+0x37/0x250 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy_allow+0x63/0xd0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvkm_uevent_mthd+0x4d/0x70 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvkm_ioctl+0x10b/0x250 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvif_object_mthd+0xa8/0x1f0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvif_event_allow+0x2a/0xa0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nouveau_fence_enable_signaling+0x78/0x80 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        __dma_fence_enable_signaling+0x5e/0x100
+Aug 10 07:01:29 dg1test kernel:        dma_fence_add_callback+0x4b/0xd0
+Aug 10 07:01:29 dg1test kernel:        nouveau_cli_work_queue+0xae/0x110 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nouveau_gem_object_close+0x1d1/0x2a0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        drm_gem_handle_delete+0x70/0xe0 [drm]
+Aug 10 07:01:29 dg1test kernel:        drm_ioctl_kernel+0xa5/0x150 [drm]
+Aug 10 07:01:29 dg1test kernel:        drm_ioctl+0x256/0x490 [drm]
+Aug 10 07:01:29 dg1test kernel:        nouveau_drm_ioctl+0x5a/0xb0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        __x64_sys_ioctl+0x91/0xd0
+Aug 10 07:01:29 dg1test kernel:        do_syscall_64+0x3c/0x90
+Aug 10 07:01:29 dg1test kernel:        entry_SYSCALL_64_after_hwframe+0x72/0xdc
+Aug 10 07:01:29 dg1test kernel:
+                                -> #0 (&fctx->lock){-...}-{2:2}:
+Aug 10 07:01:29 dg1test kernel:        __lock_acquire+0x14e3/0x2240
+Aug 10 07:01:29 dg1test kernel:        lock_acquire+0xc8/0x2a0
+Aug 10 07:01:29 dg1test kernel:        _raw_spin_lock_irqsave+0x4b/0x70
+Aug 10 07:01:29 dg1test kernel:        nouveau_fence_wait_uevent_handler+0x2b/0x100 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvkm_client_event+0xf/0x20 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy+0x9b/0xf0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        ga100_fifo_nonstall_intr+0x24/0x30 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        nvkm_intr+0x12c/0x240 [nouveau]
+Aug 10 07:01:29 dg1test kernel:        __handle_irq_event_percpu+0x88/0x240
+Aug 10 07:01:29 dg1test kernel:        handle_irq_event+0x38/0x80
+Aug 10 07:01:29 dg1test kernel:        handle_edge_irq+0xa3/0x240
+Aug 10 07:01:29 dg1test kernel:        __common_interrupt+0x72/0x160
+Aug 10 07:01:29 dg1test kernel:        common_interrupt+0x60/0xe0
+Aug 10 07:01:29 dg1test kernel:        asm_common_interrupt+0x26/0x40
+Aug 10 07:01:29 dg1test kernel:
+                                other info that might help us debug this:
+Aug 10 07:01:29 dg1test kernel: Chain exists of:
+                                  &fctx->lock --> &device->intr.lock --> &event->list_lock#2
+Aug 10 07:01:29 dg1test kernel:  Possible unsafe locking scenario:
+Aug 10 07:01:29 dg1test kernel:        CPU0                    CPU1
+Aug 10 07:01:29 dg1test kernel:        ----                    ----
+Aug 10 07:01:29 dg1test kernel:   lock(&event->list_lock#2);
+Aug 10 07:01:29 dg1test kernel:                                lock(&device->intr.lock);
+Aug 10 07:01:29 dg1test kernel:                                lock(&event->list_lock#2);
+Aug 10 07:01:29 dg1test kernel:   lock(&fctx->lock);
+Aug 10 07:01:29 dg1test kernel:
+                                 *** DEADLOCK ***
+Aug 10 07:01:29 dg1test kernel: 2 locks held by wireplumber/2236:
+Aug 10 07:01:29 dg1test kernel:  #0: ffff8fca53177bf8 (&device->intr.lock){-...}-{2:2}, at: nvkm_intr+0x29/0x240 [nouveau]
+Aug 10 07:01:29 dg1test kernel:  #1: ffff8fca41208610 (&event->list_lock#2){-...}-{2:2}, at: nvkm_event_ntfy+0x50/0xf0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:
+                                stack backtrace:
+Aug 10 07:01:29 dg1test kernel: CPU: 6 PID: 2236 Comm: wireplumber Not tainted 6.4.0-rc7+ #10
+Aug 10 07:01:29 dg1test kernel: Hardware name: Gigabyte Technology Co., Ltd. Z390 I AORUS PRO WIFI/Z390 I AORUS PRO WIFI-CF, BIOS F8 11/05/2021
+Aug 10 07:01:29 dg1test kernel: Call Trace:
+Aug 10 07:01:29 dg1test kernel:  <TASK>
+Aug 10 07:01:29 dg1test kernel:  dump_stack_lvl+0x5b/0x90
+Aug 10 07:01:29 dg1test kernel:  check_noncircular+0xe2/0x110
+Aug 10 07:01:29 dg1test kernel:  __lock_acquire+0x14e3/0x2240
+Aug 10 07:01:29 dg1test kernel:  lock_acquire+0xc8/0x2a0
+Aug 10 07:01:29 dg1test kernel:  ? nouveau_fence_wait_uevent_handler+0x2b/0x100 [nouveau]
+Aug 10 07:01:29 dg1test kernel:  ? lock_acquire+0xc8/0x2a0
+Aug 10 07:01:29 dg1test kernel:  _raw_spin_lock_irqsave+0x4b/0x70
+Aug 10 07:01:29 dg1test kernel:  ? nouveau_fence_wait_uevent_handler+0x2b/0x100 [nouveau]
+Aug 10 07:01:29 dg1test kernel:  nouveau_fence_wait_uevent_handler+0x2b/0x100 [nouveau]
+Aug 10 07:01:29 dg1test kernel:  nvkm_client_event+0xf/0x20 [nouveau]
+Aug 10 07:01:29 dg1test kernel:  nvkm_event_ntfy+0x9b/0xf0 [nouveau]
+Aug 10 07:01:29 dg1test kernel:  ga100_fifo_nonstall_intr+0x24/0x30 [nouveau]
+Aug 10 07:01:29 dg1test kernel:  nvkm_intr+0x12c/0x240 [nouveau]
+Aug 10 07:01:29 dg1test kernel:  __handle_irq_event_percpu+0x88/0x240
+Aug 10 07:01:29 dg1test kernel:  handle_irq_event+0x38/0x80
+Aug 10 07:01:29 dg1test kernel:  handle_edge_irq+0xa3/0x240
+Aug 10 07:01:29 dg1test kernel:  __common_interrupt+0x72/0x160
+Aug 10 07:01:29 dg1test kernel:  common_interrupt+0x60/0xe0
+Aug 10 07:01:29 dg1test kernel:  asm_common_interrupt+0x26/0x40
+Aug 10 07:01:29 dg1test kernel: RIP: 0033:0x7fb66174d700
+Aug 10 07:01:29 dg1test kernel: Code: c1 e2 05 29 ca 8d 0c 10 0f be 07 84 c0 75 eb 89 c8 c3 0f 1f 84 00 00 00 00 00 f3 0f 1e fa e9 d7 0f fc ff 0f 1f 80 00 00 00 00 <f3> 0f 1e fa e9 c7 0f fc>
+Aug 10 07:01:29 dg1test kernel: RSP: 002b:00007ffdd3c48438 EFLAGS: 00000206
+Aug 10 07:01:29 dg1test kernel: RAX: 000055bb758763c0 RBX: 000055bb758752c0 RCX: 00000000000028b0
+Aug 10 07:01:29 dg1test kernel: RDX: 000055bb758752c0 RSI: 000055bb75887490 RDI: 000055bb75862950
+Aug 10 07:01:29 dg1test kernel: RBP: 00007ffdd3c48490 R08: 000055bb75873b10 R09: 0000000000000001
+Aug 10 07:01:29 dg1test kernel: R10: 0000000000000004 R11: 000055bb7587f000 R12: 000055bb75887490
+Aug 10 07:01:29 dg1test kernel: R13: 000055bb757f6280 R14: 000055bb758875c0 R15: 000055bb757f6280
+Aug 10 07:01:29 dg1test kernel:  </TASK>
+
+Signed-off-by: Dave Airlie <airlied@redhat.com>
+Tested-by: Danilo Krummrich <dakr@redhat.com>
+Reviewed-by: Danilo Krummrich <dakr@redhat.com>
+Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+Link: https://patchwork.freedesktop.org/patch/msgid/20231107053255.2257079-1-airlied@gmail.com
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/gpu/drm/nouveau/include/nvkm/core/event.h |  4 ++--
+ drivers/gpu/drm/nouveau/nvkm/core/event.c         | 12 ++++++------
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/event.h b/drivers/gpu/drm/nouveau/include/nvkm/core/event.h
+index 82b267c111470..460459af272d6 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/core/event.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/core/event.h
+@@ -14,7 +14,7 @@ struct nvkm_event {
+ 	int index_nr;
+ 
+ 	spinlock_t refs_lock;
+-	spinlock_t list_lock;
++	rwlock_t list_lock;
+ 	int *refs;
+ 
+ 	struct list_head ntfy;
+@@ -38,7 +38,7 @@ nvkm_event_init(const struct nvkm_event_func *func, struct nvkm_subdev *subdev,
+ 		int types_nr, int index_nr, struct nvkm_event *event)
+ {
+ 	spin_lock_init(&event->refs_lock);
+-	spin_lock_init(&event->list_lock);
++	rwlock_init(&event->list_lock);
+ 	return __nvkm_event_init(func, subdev, types_nr, index_nr, event);
+ }
+ 
+diff --git a/drivers/gpu/drm/nouveau/nvkm/core/event.c b/drivers/gpu/drm/nouveau/nvkm/core/event.c
+index a6c877135598f..61fed7792e415 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/core/event.c
++++ b/drivers/gpu/drm/nouveau/nvkm/core/event.c
+@@ -81,17 +81,17 @@ nvkm_event_ntfy_state(struct nvkm_event_ntfy *ntfy)
+ static void
+ nvkm_event_ntfy_remove(struct nvkm_event_ntfy *ntfy)
+ {
+-	spin_lock_irq(&ntfy->event->list_lock);
++	write_lock_irq(&ntfy->event->list_lock);
+ 	list_del_init(&ntfy->head);
+-	spin_unlock_irq(&ntfy->event->list_lock);
++	write_unlock_irq(&ntfy->event->list_lock);
+ }
+ 
+ static void
+ nvkm_event_ntfy_insert(struct nvkm_event_ntfy *ntfy)
+ {
+-	spin_lock_irq(&ntfy->event->list_lock);
++	write_lock_irq(&ntfy->event->list_lock);
+ 	list_add_tail(&ntfy->head, &ntfy->event->ntfy);
+-	spin_unlock_irq(&ntfy->event->list_lock);
++	write_unlock_irq(&ntfy->event->list_lock);
+ }
+ 
+ static void
+@@ -176,7 +176,7 @@ nvkm_event_ntfy(struct nvkm_event *event, int id, u32 bits)
+ 		return;
+ 
+ 	nvkm_trace(event->subdev, "event: ntfy %08x on %d\n", bits, id);
+-	spin_lock_irqsave(&event->list_lock, flags);
++	read_lock_irqsave(&event->list_lock, flags);
+ 
+ 	list_for_each_entry_safe(ntfy, ntmp, &event->ntfy, head) {
+ 		if (ntfy->id == id && ntfy->bits & bits) {
+@@ -185,7 +185,7 @@ nvkm_event_ntfy(struct nvkm_event *event, int id, u32 bits)
+ 		}
+ 	}
+ 
+-	spin_unlock_irqrestore(&event->list_lock, flags);
++	read_unlock_irqrestore(&event->list_lock, flags);
+ }
+ 
+ void
+-- 
+2.42.0
+
