@@ -2,46 +2,121 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26CAC7F4A87
-	for <lists+nouveau@lfdr.de>; Wed, 22 Nov 2023 16:34:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89B727F5141
+	for <lists+nouveau@lfdr.de>; Wed, 22 Nov 2023 21:09:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C3CDD10E659;
-	Wed, 22 Nov 2023 15:34:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8CF8610E14B;
+	Wed, 22 Nov 2023 20:09:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8053A10E655;
- Wed, 22 Nov 2023 15:34:04 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id AF23E61E4A;
- Wed, 22 Nov 2023 15:34:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0120C433CC;
- Wed, 22 Nov 2023 15:34:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1700667243;
- bh=EpjLjyqXy9J2BjjoAI8hwuINf00k9PhkqMusJqG7GiY=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=pP1V0iYcOqB0NbFIrZyg7hFrMsMaUVk9ESK4jg6fDo04hIgn61E4KovZbDQTgsGwa
- 9HGBILLTFOjvCrQhzW87SXJICZvgYJFqCw9MHDrAR/DJlj1RR6T2j6RM4Ov5YLs53P
- 4hQ0JSnmyvcFYEGu9GdRirXOx8BGYolQyU5RKZXZ51Cowt98ZlTbYZ4T/XiFwDxk+Z
- 8A+wVsRe7PK4GwiosfgWyuG2//4l40XtU9Pis6SRhXOE5dJfz+ggLiKRJ1ilNiluSR
- 8Cet3d5QRLbGpX5vZvj2dF6eKOwozOLN97HXnVi6dMTNDlOWaMwShNAFVxTqb5xV/Z
- 29LAtACBTkIHA==
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Wed, 22 Nov 2023 10:33:08 -0500
-Message-ID: <20231122153340.852434-6-sashal@kernel.org>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231122153340.852434-1-sashal@kernel.org>
-References: <20231122153340.852434-1-sashal@kernel.org>
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20608.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5a::608])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A500210E14B
+ for <nouveau@lists.freedesktop.org>; Wed, 22 Nov 2023 20:09:50 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=VWX+3r27ehva+wTZzuIAOewa7bd/kAOAM1f2JBDpxQoySTtj47XitvcKPYMzf5ugoJvM0FthKoF9iPFkAz/TDmzG7s5QGakF4ijbvlsemswg5To3LzXWN4AKa9XRl9Vqf9kToXh11Zm9brjd/DlIMvooQpac2Wbc8It8TGBZ0XvDMljSVb/lHu99KqtUShRa8k/Te0E3NA+LnzPCGsp6DdjDjs1kFLG3dgNAMShFpPl7j2wj290M5e5eC+hI0vmJMMUoQrEw9ih+ETjoe0UhtHIUdddeo3mGF5NJ/qJFMPgI8at2T9kOHm/M6kA8KA58cYe1fhipPjr1Q8eOKnBqIg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9+uWi7jtIGFyIeS0LG77y2MQZiL2CIRrjFMbFWhKFIs=;
+ b=KjGlrCSRgWXExdjH0dLuUtKf/XYNbnRaGhi/DwMmMwkdoTjGIjXG57SKoJU/JH/OH51zoBh2lDv7eMw4Zor/l9OQruxHyCSrVn+g7a4m8QemJSfZLjTxdjF+2MkO1kHQ2zBUPihV9RnRmxJBVOlqRXWpwtT9goFxznUPZ7q4qaYrQHSeuOxWrt7Ze06EGipas55kDt4Z1kA8A+JukDkGR6afF7SyuECBhnLIbCX5sIytgYyXE11v4yIHLIjkFmbGCnwZVlkJIxlkCAbzmVp4Db/ChEu6cxG887yEb/V7/HtMWCJUIEiabhiW4i+WNk0E5NAqUM6MMri4hQAklvBOFQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9+uWi7jtIGFyIeS0LG77y2MQZiL2CIRrjFMbFWhKFIs=;
+ b=HR624ei7tNHDNOPLMKNnmWzH9tRwvzMAMkmt9iGMjPftuz8nb0DGrr7fooHfN17FbEvZtNuEaqGcWhG32C1P9M5KEsXYm+vtggsSDlR+u5yLTzl38+KwwIad2Aj3x8LiShe8KTY+PFHgKKmG9bX+5GzNzGiGR1LBKQaA4u8OWhBXlSRwNy2wZsZdL6Cnck86LFFa3S237Yoj42Zfhhm/YriK5nN+RUuoBKICMNH/njYwOppIPiMeNFsGwnzUA6HPzSWvabRzfodPUM9D/iqFBrYZttHB8sBoLRBWJBVQskhfRqGcDP5bqvWSufsSra5UpGi6XNfer9x1oYaiM2vBEw==
+Received: from SN7PR12MB8769.namprd12.prod.outlook.com (2603:10b6:806:34b::12)
+ by PH7PR12MB8796.namprd12.prod.outlook.com (2603:10b6:510:272::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7002.27; Wed, 22 Nov
+ 2023 20:09:48 +0000
+Received: from SN7PR12MB8769.namprd12.prod.outlook.com
+ ([fe80::6799:dc7a:e121:1af6]) by SN7PR12MB8769.namprd12.prod.outlook.com
+ ([fe80::6799:dc7a:e121:1af6%7]) with mapi id 15.20.7025.017; Wed, 22 Nov 2023
+ 20:09:47 +0000
+From: Timur Tabi <ttabi@nvidia.com>
+To: "airlied@redhat.com" <airlied@redhat.com>
+Thread-Topic: [PATCH] nouveau/gsp: document some aspects of GSP-RM
+Thread-Index: AQHaHNXmRrixmDFLZU+K94JKZiPt7bCFgpEAgAFDcYA=
+Date: Wed, 22 Nov 2023 20:09:47 +0000
+Message-ID: <250b090dd7bd61c882283f51b5889053a668003c.camel@nvidia.com>
+References: <20231121235300.2406522-1-ttabi@nvidia.com>
+ <CAMwc25oK9xXoNW0z8A7=O+tRqUvcxAKy4rfUAzAOjOgESVhj2Q@mail.gmail.com>
+In-Reply-To: <CAMwc25oK9xXoNW0z8A7=O+tRqUvcxAKy4rfUAzAOjOgESVhj2Q@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.44.4-0ubuntu2 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SN7PR12MB8769:EE_|PH7PR12MB8796:EE_
+x-ms-office365-filtering-correlation-id: c615919b-4659-4374-4e74-08dbeb96fa39
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: PQHBB4mdiTYSbSF7PtRTZQ10agZ2G5TGjerNvdgGEUqQe+NPFnE60fqUb/1c5t3RCZ0t9W0yNmX9qg7BcfsipQRGcQtBhyLTk0E4ELrO21dR3VwLdoRq8kjWnQCTEp9EL2gTzEndTMcH+pn2yG352eAk6hx8dHAgQ3luQknO1w74vs0uj2IBjO29VixF14GrSaXP4GwkKHLlWbiM3zP8wYzZXINdh+qCxXJr1ZpX5x/QDf7hSRRMW7iTupmrJieowIrr2rDKAHnaAXyQxADbS/bLJ8WHBhXh+HgFtUQ0KBmQ1bZSekKAXwvPTL5PehqfJ/jaVDYXJ4J/x2dQXj3uIP766MiKxTFjoCzSgCkvkWQzVKjFzaD7yfpeXO2e6AWyIobo3P04Hz3oXqgkNRlzKa9WhaCkDxEBTrCl1vkAxSdoK1FYlJpcUs3ETZY044ewUoSrBb6RD3ZtHJt8eF2JY2ml7myYK1WFcZcfDWsHPOdn/gneYRIMBAdgc4YUeMJAbyAsTQLnKXxxWqCE490Phzi9t0V3lGHlAqxF89hLk6Bya6EZc9/PI4B8PmgioZZv7lNP4iveeWhVJFOUJRphWFRA7/DfBENXjdZDFfLlPYXRXMywy8RE9wQyef5QGJF7
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SN7PR12MB8769.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376002)(396003)(39860400002)(136003)(346002)(366004)(230922051799003)(1800799012)(186009)(451199024)(64100799003)(4001150100001)(4744005)(5660300002)(2906002)(4326008)(66556008)(64756008)(76116006)(8676002)(66446008)(316002)(8936002)(66476007)(6486002)(71200400001)(6506007)(478600001)(66946007)(54906003)(2616005)(26005)(6512007)(83380400001)(38100700002)(41300700001)(6916009)(38070700009)(122000001)(36756003)(86362001);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?amtvSThUVVhMLzRxMkY5ZkdER0FsOGkzWjBZSVFZNnBSNlZ6RjBEZGJVSVVT?=
+ =?utf-8?B?L2RmL09YcEFxVXp6ZndvMTB1WTE4VldHUDNBVEIyV3pIUUovZW1haGJucEhE?=
+ =?utf-8?B?NXg1aTJKcXhsRmxBKzRPd3p3QStPaWZ0UEc5Y29iVzgzaVBtU1lWT2ZQQ3Q1?=
+ =?utf-8?B?dXhKSGRaMVVUdXdYcTBRbkxVeUJXYmJ0MlRhaDZFckZ5WHhTS29XSThzQ2oz?=
+ =?utf-8?B?OGUzRjFPNHE2QkoyV2U4QVpTOFFMdjA5SXp2c2VhMnB5SHg4VGYvWXEyVDJp?=
+ =?utf-8?B?WVlVODFKWkdqWjJtelc4UHN6UUI2cFpYZ1V3bStoUVh0ZDVMVEkvKzdNT1N3?=
+ =?utf-8?B?WVY0eWo2anRHU0tBUVpBMkxFVXp3QnZtc3AzNytSOHdSb0cxdE94UzlVbjV2?=
+ =?utf-8?B?b3FtQ1MvelhUM0xEU1U4dXNGTHRiZVhJbVc0ZTZLOU94L0FWT2ZqWFcyNzIv?=
+ =?utf-8?B?OHBpTlNiRlNZOXR3OTY4eTYraHhWWmdqUDg5SHhvdXcvcHFMdG5wU2RyTWsw?=
+ =?utf-8?B?dGNpRk1PV0lvRGJmWnRGY2tnVjAvcEdlemtaSGZ3MkxSMlppZHBGbWpWZWpk?=
+ =?utf-8?B?cUdad2VkdmY3Q3greFpUZi84dWlRK3diSkl3K040bkdLSGlObERxcnRyazdB?=
+ =?utf-8?B?ZVFObGdpTDhXSlQxNDVxT0FZYWJ6V0xsYi9zOFRwUGJFakZzVGNHa1BWZndU?=
+ =?utf-8?B?Mno4UGx6dkFtN2F1aVM1bnMwY2xRU1BoV2taSUE0R3hDMFFZdHMxenYxVzlD?=
+ =?utf-8?B?RTRUQlRZVnVMRUR3T2l0cFVNSENaTDlhOFIxU2o5ZEVURTZtMlNHUTF4aGNa?=
+ =?utf-8?B?V3E3eTlMR2M4UFJzTHo2UXpwTFB6ejVmV0VlUEpNTzZkUE5pN1liTXk3bXFD?=
+ =?utf-8?B?M21nKzNHelVmem9iUkphZjJHcUNzZUxoVlZHS1pDTUN6SFl3RlcwUGNTMHNo?=
+ =?utf-8?B?dG14b0F2SE5qSFQ1NVdqcG9vams1R2tvT3hSRnQ3TEo3eDRKVEdkUzQvUjNW?=
+ =?utf-8?B?Q1ltVWtUN2tuM0NvUHg3Y1pzUmhzcFdHVytyb1lORk9CelovZTNGUGxQUHlx?=
+ =?utf-8?B?M045RVVReXpXaVdxWUxrRWZnbC9pQWoyS1M1Z1RKeC9DbDZDeDFFNUkwemdO?=
+ =?utf-8?B?RERNUCtTQTU3RStFN0dZUm1TeDdraDl5NEhkTVh6MmRLWUF5b0xhNC9ad0hI?=
+ =?utf-8?B?OEJUakVkSm1RU3I1ZXpEV1dXVTFGOEZKaCsvOU5Ka1k2VE9STmFJeDlXUFd6?=
+ =?utf-8?B?b2xVbWdFa3Bva2tRczR3YnpkMStJYlY4Nmk1Ukg0WXNuMC9mZ1hxc0VicVRo?=
+ =?utf-8?B?eFREN2NCb1hxZm9ycU9vL2lzQlIzZjRuY2tsMVVoMTZaOXU2WmNtaWhkMjlH?=
+ =?utf-8?B?ck9oU201UGlyWkFWbkZOQVllcTY2Tmt2b2RPQkcwQnNZd0FleDhBVkJlbStr?=
+ =?utf-8?B?VzRpNXNNR2FHUGMreXplYnpUcnRWYVlGenBab1F4KzIxcXYyZTZtdVdLN1Fy?=
+ =?utf-8?B?YVF1ZmYzZGl3R0h5Zm5BWi9Dbml6WjlKcTF5V2VDdlQzZDZVNCtFbFZvR25u?=
+ =?utf-8?B?WjhtamxvUXd4Y2ltY2xXcGxONGZHZFlHSXZGZ3JtdkFnRktMOXpscDlISEw5?=
+ =?utf-8?B?emNjTDUyRGpMdENlVEdPaUZkL3dBRUs4L25KRllxNWJTMGFSUy9sbHlkZVdr?=
+ =?utf-8?B?L1hnVzlobUh2YjFETVBtZS9Gc25JcWF4cDI5UnMyWnM1ZlF1dWNZTlZpMk9D?=
+ =?utf-8?B?NzhmZVpXL0duVHBsZy80aWptZGN0eCtzQ3pTSVdrRFYyTkxpNXVRZit3YnBk?=
+ =?utf-8?B?d3ZDN2owMUFLNGswSHpoQmExSnY4V3pMU2MvM3Q2WFBTditRVHNzcjA1aGZD?=
+ =?utf-8?B?ZzEzT3ZITWExemc3Z3pSenI4UVZjWXd0dnhhNFNhNGp4THlnS0V4OUp6QWhV?=
+ =?utf-8?B?ZlBEZ0dIakcrMmROaE5mRnVMWmg1bTBLbzJXTjl3Y1RvSUtaYkUrM01KS3Iy?=
+ =?utf-8?B?RWFSRHIvUUltTnlqcWV3UTVzRnBjZ0JIbERHZDREcVNRZ1doUk15Vy85UVBl?=
+ =?utf-8?B?Q2VuY0E5eEIwTnU4NTlSK2poTW1pRXNqbWdPS1d4ck1RVDB0M0F0ajJWVlZx?=
+ =?utf-8?Q?1c/lZ88zluD73IfAoj82CpGib?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <E54C9219DE54DF4B8B48E9F35559C959@namprd12.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.5.12
-Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH AUTOSEL 6.5 06/15] nouveau: use an rwlock for the
- event lock.
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8769.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c615919b-4659-4374-4e74-08dbeb96fa39
+X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Nov 2023 20:09:47.8728 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ulYmovzmPrESuCWv2UWUymYQ8cTZEqoX0XwWkoscxfCHsN9IxhgY7bUuqGD0mXoYhURkowoBrAVUE6cHdHJwLQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8796
+Subject: Re: [Nouveau] [PATCH] nouveau/gsp: document some aspects of GSP-RM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,230 +128,16 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, daniel@ffwll.ch,
- Dave Airlie <airlied@redhat.com>
+Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
-
-[ Upstream commit a2e36cd56041e277d7d81d35638fd8d9731e21f5 ]
-
-This allows it to break the following circular locking dependency.
-
-Aug 10 07:01:29 dg1test kernel: ======================================================
-Aug 10 07:01:29 dg1test kernel: WARNING: possible circular locking dependency detected
-Aug 10 07:01:29 dg1test kernel: 6.4.0-rc7+ #10 Not tainted
-Aug 10 07:01:29 dg1test kernel: ------------------------------------------------------
-Aug 10 07:01:29 dg1test kernel: wireplumber/2236 is trying to acquire lock:
-Aug 10 07:01:29 dg1test kernel: ffff8fca5320da18 (&fctx->lock){-...}-{2:2}, at: nouveau_fence_wait_uevent_handler+0x2b/0x100 [nouveau]
-Aug 10 07:01:29 dg1test kernel:
-                                but task is already holding lock:
-Aug 10 07:01:29 dg1test kernel: ffff8fca41208610 (&event->list_lock#2){-...}-{2:2}, at: nvkm_event_ntfy+0x50/0xf0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:
-                                which lock already depends on the new lock.
-Aug 10 07:01:29 dg1test kernel:
-                                the existing dependency chain (in reverse order) is:
-Aug 10 07:01:29 dg1test kernel:
-                                -> #3 (&event->list_lock#2){-...}-{2:2}:
-Aug 10 07:01:29 dg1test kernel:        _raw_spin_lock_irqsave+0x4b/0x70
-Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy+0x50/0xf0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        ga100_fifo_nonstall_intr+0x24/0x30 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_intr+0x12c/0x240 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        __handle_irq_event_percpu+0x88/0x240
-Aug 10 07:01:29 dg1test kernel:        handle_irq_event+0x38/0x80
-Aug 10 07:01:29 dg1test kernel:        handle_edge_irq+0xa3/0x240
-Aug 10 07:01:29 dg1test kernel:        __common_interrupt+0x72/0x160
-Aug 10 07:01:29 dg1test kernel:        common_interrupt+0x60/0xe0
-Aug 10 07:01:29 dg1test kernel:        asm_common_interrupt+0x26/0x40
-Aug 10 07:01:29 dg1test kernel:
-                                -> #2 (&device->intr.lock){-...}-{2:2}:
-Aug 10 07:01:29 dg1test kernel:        _raw_spin_lock_irqsave+0x4b/0x70
-Aug 10 07:01:29 dg1test kernel:        nvkm_inth_allow+0x2c/0x80 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy_state+0x181/0x250 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy_allow+0x63/0xd0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_uevent_mthd+0x4d/0x70 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_ioctl+0x10b/0x250 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvif_object_mthd+0xa8/0x1f0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvif_event_allow+0x2a/0xa0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nouveau_fence_enable_signaling+0x78/0x80 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        __dma_fence_enable_signaling+0x5e/0x100
-Aug 10 07:01:29 dg1test kernel:        dma_fence_add_callback+0x4b/0xd0
-Aug 10 07:01:29 dg1test kernel:        nouveau_cli_work_queue+0xae/0x110 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nouveau_gem_object_close+0x1d1/0x2a0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        drm_gem_handle_delete+0x70/0xe0 [drm]
-Aug 10 07:01:29 dg1test kernel:        drm_ioctl_kernel+0xa5/0x150 [drm]
-Aug 10 07:01:29 dg1test kernel:        drm_ioctl+0x256/0x490 [drm]
-Aug 10 07:01:29 dg1test kernel:        nouveau_drm_ioctl+0x5a/0xb0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        __x64_sys_ioctl+0x91/0xd0
-Aug 10 07:01:29 dg1test kernel:        do_syscall_64+0x3c/0x90
-Aug 10 07:01:29 dg1test kernel:        entry_SYSCALL_64_after_hwframe+0x72/0xdc
-Aug 10 07:01:29 dg1test kernel:
-                                -> #1 (&event->refs_lock#4){....}-{2:2}:
-Aug 10 07:01:29 dg1test kernel:        _raw_spin_lock_irqsave+0x4b/0x70
-Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy_state+0x37/0x250 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy_allow+0x63/0xd0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_uevent_mthd+0x4d/0x70 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_ioctl+0x10b/0x250 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvif_object_mthd+0xa8/0x1f0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvif_event_allow+0x2a/0xa0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nouveau_fence_enable_signaling+0x78/0x80 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        __dma_fence_enable_signaling+0x5e/0x100
-Aug 10 07:01:29 dg1test kernel:        dma_fence_add_callback+0x4b/0xd0
-Aug 10 07:01:29 dg1test kernel:        nouveau_cli_work_queue+0xae/0x110 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nouveau_gem_object_close+0x1d1/0x2a0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        drm_gem_handle_delete+0x70/0xe0 [drm]
-Aug 10 07:01:29 dg1test kernel:        drm_ioctl_kernel+0xa5/0x150 [drm]
-Aug 10 07:01:29 dg1test kernel:        drm_ioctl+0x256/0x490 [drm]
-Aug 10 07:01:29 dg1test kernel:        nouveau_drm_ioctl+0x5a/0xb0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        __x64_sys_ioctl+0x91/0xd0
-Aug 10 07:01:29 dg1test kernel:        do_syscall_64+0x3c/0x90
-Aug 10 07:01:29 dg1test kernel:        entry_SYSCALL_64_after_hwframe+0x72/0xdc
-Aug 10 07:01:29 dg1test kernel:
-                                -> #0 (&fctx->lock){-...}-{2:2}:
-Aug 10 07:01:29 dg1test kernel:        __lock_acquire+0x14e3/0x2240
-Aug 10 07:01:29 dg1test kernel:        lock_acquire+0xc8/0x2a0
-Aug 10 07:01:29 dg1test kernel:        _raw_spin_lock_irqsave+0x4b/0x70
-Aug 10 07:01:29 dg1test kernel:        nouveau_fence_wait_uevent_handler+0x2b/0x100 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_client_event+0xf/0x20 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_event_ntfy+0x9b/0xf0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        ga100_fifo_nonstall_intr+0x24/0x30 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        nvkm_intr+0x12c/0x240 [nouveau]
-Aug 10 07:01:29 dg1test kernel:        __handle_irq_event_percpu+0x88/0x240
-Aug 10 07:01:29 dg1test kernel:        handle_irq_event+0x38/0x80
-Aug 10 07:01:29 dg1test kernel:        handle_edge_irq+0xa3/0x240
-Aug 10 07:01:29 dg1test kernel:        __common_interrupt+0x72/0x160
-Aug 10 07:01:29 dg1test kernel:        common_interrupt+0x60/0xe0
-Aug 10 07:01:29 dg1test kernel:        asm_common_interrupt+0x26/0x40
-Aug 10 07:01:29 dg1test kernel:
-                                other info that might help us debug this:
-Aug 10 07:01:29 dg1test kernel: Chain exists of:
-                                  &fctx->lock --> &device->intr.lock --> &event->list_lock#2
-Aug 10 07:01:29 dg1test kernel:  Possible unsafe locking scenario:
-Aug 10 07:01:29 dg1test kernel:        CPU0                    CPU1
-Aug 10 07:01:29 dg1test kernel:        ----                    ----
-Aug 10 07:01:29 dg1test kernel:   lock(&event->list_lock#2);
-Aug 10 07:01:29 dg1test kernel:                                lock(&device->intr.lock);
-Aug 10 07:01:29 dg1test kernel:                                lock(&event->list_lock#2);
-Aug 10 07:01:29 dg1test kernel:   lock(&fctx->lock);
-Aug 10 07:01:29 dg1test kernel:
-                                 *** DEADLOCK ***
-Aug 10 07:01:29 dg1test kernel: 2 locks held by wireplumber/2236:
-Aug 10 07:01:29 dg1test kernel:  #0: ffff8fca53177bf8 (&device->intr.lock){-...}-{2:2}, at: nvkm_intr+0x29/0x240 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  #1: ffff8fca41208610 (&event->list_lock#2){-...}-{2:2}, at: nvkm_event_ntfy+0x50/0xf0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:
-                                stack backtrace:
-Aug 10 07:01:29 dg1test kernel: CPU: 6 PID: 2236 Comm: wireplumber Not tainted 6.4.0-rc7+ #10
-Aug 10 07:01:29 dg1test kernel: Hardware name: Gigabyte Technology Co., Ltd. Z390 I AORUS PRO WIFI/Z390 I AORUS PRO WIFI-CF, BIOS F8 11/05/2021
-Aug 10 07:01:29 dg1test kernel: Call Trace:
-Aug 10 07:01:29 dg1test kernel:  <TASK>
-Aug 10 07:01:29 dg1test kernel:  dump_stack_lvl+0x5b/0x90
-Aug 10 07:01:29 dg1test kernel:  check_noncircular+0xe2/0x110
-Aug 10 07:01:29 dg1test kernel:  __lock_acquire+0x14e3/0x2240
-Aug 10 07:01:29 dg1test kernel:  lock_acquire+0xc8/0x2a0
-Aug 10 07:01:29 dg1test kernel:  ? nouveau_fence_wait_uevent_handler+0x2b/0x100 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  ? lock_acquire+0xc8/0x2a0
-Aug 10 07:01:29 dg1test kernel:  _raw_spin_lock_irqsave+0x4b/0x70
-Aug 10 07:01:29 dg1test kernel:  ? nouveau_fence_wait_uevent_handler+0x2b/0x100 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  nouveau_fence_wait_uevent_handler+0x2b/0x100 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  nvkm_client_event+0xf/0x20 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  nvkm_event_ntfy+0x9b/0xf0 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  ga100_fifo_nonstall_intr+0x24/0x30 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  nvkm_intr+0x12c/0x240 [nouveau]
-Aug 10 07:01:29 dg1test kernel:  __handle_irq_event_percpu+0x88/0x240
-Aug 10 07:01:29 dg1test kernel:  handle_irq_event+0x38/0x80
-Aug 10 07:01:29 dg1test kernel:  handle_edge_irq+0xa3/0x240
-Aug 10 07:01:29 dg1test kernel:  __common_interrupt+0x72/0x160
-Aug 10 07:01:29 dg1test kernel:  common_interrupt+0x60/0xe0
-Aug 10 07:01:29 dg1test kernel:  asm_common_interrupt+0x26/0x40
-Aug 10 07:01:29 dg1test kernel: RIP: 0033:0x7fb66174d700
-Aug 10 07:01:29 dg1test kernel: Code: c1 e2 05 29 ca 8d 0c 10 0f be 07 84 c0 75 eb 89 c8 c3 0f 1f 84 00 00 00 00 00 f3 0f 1e fa e9 d7 0f fc ff 0f 1f 80 00 00 00 00 <f3> 0f 1e fa e9 c7 0f fc>
-Aug 10 07:01:29 dg1test kernel: RSP: 002b:00007ffdd3c48438 EFLAGS: 00000206
-Aug 10 07:01:29 dg1test kernel: RAX: 000055bb758763c0 RBX: 000055bb758752c0 RCX: 00000000000028b0
-Aug 10 07:01:29 dg1test kernel: RDX: 000055bb758752c0 RSI: 000055bb75887490 RDI: 000055bb75862950
-Aug 10 07:01:29 dg1test kernel: RBP: 00007ffdd3c48490 R08: 000055bb75873b10 R09: 0000000000000001
-Aug 10 07:01:29 dg1test kernel: R10: 0000000000000004 R11: 000055bb7587f000 R12: 000055bb75887490
-Aug 10 07:01:29 dg1test kernel: R13: 000055bb757f6280 R14: 000055bb758875c0 R15: 000055bb757f6280
-Aug 10 07:01:29 dg1test kernel:  </TASK>
-
-Signed-off-by: Dave Airlie <airlied@redhat.com>
-Tested-by: Danilo Krummrich <dakr@redhat.com>
-Reviewed-by: Danilo Krummrich <dakr@redhat.com>
-Signed-off-by: Danilo Krummrich <dakr@redhat.com>
-Link: https://patchwork.freedesktop.org/patch/msgid/20231107053255.2257079-1-airlied@gmail.com
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/gpu/drm/nouveau/include/nvkm/core/event.h |  4 ++--
- drivers/gpu/drm/nouveau/nvkm/core/event.c         | 12 ++++++------
- 2 files changed, 8 insertions(+), 8 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/event.h b/drivers/gpu/drm/nouveau/include/nvkm/core/event.h
-index 82b267c111470..460459af272d6 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/core/event.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/core/event.h
-@@ -14,7 +14,7 @@ struct nvkm_event {
- 	int index_nr;
- 
- 	spinlock_t refs_lock;
--	spinlock_t list_lock;
-+	rwlock_t list_lock;
- 	int *refs;
- 
- 	struct list_head ntfy;
-@@ -38,7 +38,7 @@ nvkm_event_init(const struct nvkm_event_func *func, struct nvkm_subdev *subdev,
- 		int types_nr, int index_nr, struct nvkm_event *event)
- {
- 	spin_lock_init(&event->refs_lock);
--	spin_lock_init(&event->list_lock);
-+	rwlock_init(&event->list_lock);
- 	return __nvkm_event_init(func, subdev, types_nr, index_nr, event);
- }
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/core/event.c b/drivers/gpu/drm/nouveau/nvkm/core/event.c
-index a6c877135598f..61fed7792e415 100644
---- a/drivers/gpu/drm/nouveau/nvkm/core/event.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/core/event.c
-@@ -81,17 +81,17 @@ nvkm_event_ntfy_state(struct nvkm_event_ntfy *ntfy)
- static void
- nvkm_event_ntfy_remove(struct nvkm_event_ntfy *ntfy)
- {
--	spin_lock_irq(&ntfy->event->list_lock);
-+	write_lock_irq(&ntfy->event->list_lock);
- 	list_del_init(&ntfy->head);
--	spin_unlock_irq(&ntfy->event->list_lock);
-+	write_unlock_irq(&ntfy->event->list_lock);
- }
- 
- static void
- nvkm_event_ntfy_insert(struct nvkm_event_ntfy *ntfy)
- {
--	spin_lock_irq(&ntfy->event->list_lock);
-+	write_lock_irq(&ntfy->event->list_lock);
- 	list_add_tail(&ntfy->head, &ntfy->event->ntfy);
--	spin_unlock_irq(&ntfy->event->list_lock);
-+	write_unlock_irq(&ntfy->event->list_lock);
- }
- 
- static void
-@@ -176,7 +176,7 @@ nvkm_event_ntfy(struct nvkm_event *event, int id, u32 bits)
- 		return;
- 
- 	nvkm_trace(event->subdev, "event: ntfy %08x on %d\n", bits, id);
--	spin_lock_irqsave(&event->list_lock, flags);
-+	read_lock_irqsave(&event->list_lock, flags);
- 
- 	list_for_each_entry_safe(ntfy, ntmp, &event->ntfy, head) {
- 		if (ntfy->id == id && ntfy->bits & bits) {
-@@ -185,7 +185,7 @@ nvkm_event_ntfy(struct nvkm_event *event, int id, u32 bits)
- 		}
- 	}
- 
--	spin_unlock_irqrestore(&event->list_lock, flags);
-+	read_unlock_irqrestore(&event->list_lock, flags);
- }
- 
- void
--- 
-2.42.0
-
+T24gV2VkLCAyMDIzLTExLTIyIGF0IDEwOjUyICsxMDAwLCBEYXZpZCBBaXJsaWUgd3JvdGU6DQo+
+ID4gKyAqIFVuZm9ydHVuYXRlbHksIGRlcHNpdGUgdGhlIGZhY3QgdGhhdCB0aGUgcXVldWUgc2l6
+ZSBpcyBhIGZpZWxkIGluDQo+ID4gdGhpcw0KPiANCj4gXiB0eXBvDQo+IA0KPiA+ICsgKiBzdHJ1
+Y3R1cmUsIHRoZSBHU1AgaGFzIGEgaGFyZC1jb2RlZCBleHBlY3RhdGlvbiBvZiB0aGUgc2l6ZXMu
+wqAgU28NCj4gPiB0aGUNCj4gPiArICogY29tbWFuZCBxdWV1ZSBzaXplIG11c3QgYmUgR1NQX01F
+U1NBR0VfQ09NTUFORF9RVUVVRV9TSVpFIGFuZCB0aGUNCj4gPiBzdGF0dXMNCj4gPiArICogcXVl
+dWUgc2l6ZSBtdXN0IGJlIEdTUF9NRVNTQUdFX1NUQVRVU19RVUVVRV9TSVpFLg0KDQpTbyBpdCB0
+dXJucyBvdXQgdGhhdCB0aGlzIHNpemUgcmVxdWlyZW1lbnQgaXMgbm8gbG9uZ2VyIHRydWUgZWl0
+aGVyLg0KDQo=
