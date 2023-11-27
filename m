@@ -2,50 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 704FC7FABF2
-	for <lists+nouveau@lfdr.de>; Mon, 27 Nov 2023 21:48:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7758E7FAC92
+	for <lists+nouveau@lfdr.de>; Mon, 27 Nov 2023 22:32:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9E64110E2F7;
-	Mon, 27 Nov 2023 20:48:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8DC0B10E3FC;
+	Mon, 27 Nov 2023 21:32:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1A8D610E151;
- Mon, 27 Nov 2023 20:48:20 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 703F8B8379B;
- Mon, 27 Nov 2023 20:48:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9FF6C433C7;
- Mon, 27 Nov 2023 20:48:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1701118097;
- bh=F+DixVQHqnZfFWplCVsKeDl8KieaAO0CwhsSrf5zwc8=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=huRLyeI3wMnPtr/FMRJBUfGoMiI2V//3OQCHJKme42RHApPqVTXBjV7ZLUQpFdaBY
- 9kgTQ+dl8s+kW0oEwC3huqqxibyjnZ3Rxx91XqRdwDLvMxQRD/Dn+YtG7+diFIXXir
- j2p2mvo97Co9laJv/5TqBcU3d81O80SE294iJv1YsVwJKO4mHr5MB0iDnrlZSy7c97
- 2OG0lkgWV8cjvrhlA+3eTe7CpqJ6UAJvC7b9v75+tgwV7nW+J9kucdiApZMhNcQh8k
- 4ERGZJa9Ll+tBLx8Qg8YHkdeeYT83CEJceTkJ420/MfonN0VaInBX/yrTPfxAvqwya
- lRIZ0acMPzQyQ==
-Received: by mail-ed1-f49.google.com with SMTP id
- 4fb4d7f45d1cf-54b18c9b21bso3180524a12.0; 
- Mon, 27 Nov 2023 12:48:17 -0800 (PST)
-X-Gm-Message-State: AOJu0YyZ+S37jz5+F3yCKjVT8u6Jm4FHkMPpnUbzYC/RSwvMdOtPhbeJ
- Iyo3+sp4+PPrNaMV+m7z5nY7/7ivT/96LnI0vDs=
-X-Google-Smtp-Source: AGHT+IGHVAOgiSfNiBUMoBzciRv2pya3/IYbvyUyGZifhXAh/Ggz0yVMKeH1VsB0efnUD7XNV2BfLrLZRCVfkYSajrc=
-X-Received: by 2002:a17:906:224c:b0:9e5:3a0:8610 with SMTP id
- 12-20020a170906224c00b009e503a08610mr4354261ejr.30.1701118096273; Mon, 27 Nov
- 2023 12:48:16 -0800 (PST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1942310E307;
+ Mon, 27 Nov 2023 21:32:19 +0000 (UTC)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-54acdd65c88so4835581a12.2; 
+ Mon, 27 Nov 2023 13:32:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1701120737; x=1701725537; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GMXt/QjcB0PpuNepHtXYY7nCcTRfB6opzAYutejmCyg=;
+ b=QQtQLHVDW258MIxmgYq4d0DmQvCgRTqScM8BjhOpM5vh3p/V2iucg0dd2TqovZqNje
+ T3FSc4LBa05z2YPzIvUvsPYvq18wU8C0eLW6PMIs/eYeahDwPWf7v5OUY/EZUuM5cTPN
+ /4jrzQM7Nh8tD3DYbBprrZMHux2OdRixoRherdOTa/RUP3azikGVCp8C6pGouzjdMEj3
+ E9nnQFBRETBgdmhyR3WXqgfMqPiDG8mkia4xGEIR88PHjmA0xU7TzWqthe2X4Aod3bid
+ zrdJzVlr1euoz9xL7VWCuqzWHCyBJn1Rx7XbfYaP1pJEoXDFWQnh1HAvj3Tw737d1g4O
+ 3Keg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701120737; x=1701725537;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GMXt/QjcB0PpuNepHtXYY7nCcTRfB6opzAYutejmCyg=;
+ b=I00fMldHUEnKRx8jN8QG7g1MMhjm2RkTc6RdP5svI5XAAfK2zrGkZcketsjiF/h4ML
+ P4Uzj65m8SW7NK4fy/BV9P7yWSDQJzWPTwQpFpdhW2u4b4mZ9qNK2v7EE7RTs+o3rcUf
+ RocWnimSjmSOvqVV83Brxt3RYs5fxXipuLqDl4Dg3HWcwcaXrHtNUgSR6Ev8G7vUGIF3
+ kjtwfibg9qvgTCBZ9FtggQEu5bumpMcr5cxW9BEBzWqR0o+d04EzFTvWUWNs4/niRNkw
+ 6BlwoCqg4m5jYKyylax/IEG5+Z96/O8XDsf3rkTvbjudDKuIZqdRqzYCgteF6eY0V5uN
+ C0rg==
+X-Gm-Message-State: AOJu0YwTQ1PqM5uhLYiuHPvpOR4Slz2UdUZNIfZBXnVMTMlU/fTM3Qdc
+ 3ccjm05eyQ5RmUTIJfVtgFiGfcsUBhjOegztgoXIJt+i
+X-Google-Smtp-Source: AGHT+IHpXenmf965VvBUb4xFNCHgEsV2WxRxqKXOum4qkVw+gL1gGfQMh7KwpXT11oBNNP0Yi1HINgh9NvDRfsUB+Ms=
+X-Received: by 2002:a17:907:b011:b0:9bd:bbc1:1c5f with SMTP id
+ fu17-20020a170907b01100b009bdbbc11c5fmr7510864ejc.35.1701120736901; Mon, 27
+ Nov 2023 13:32:16 -0800 (PST)
 MIME-Version: 1.0
 References: <20231031051943.1957328-1-airlied@gmail.com>
  <20231031051943.1957328-4-airlied@gmail.com>
-In-Reply-To: <20231031051943.1957328-4-airlied@gmail.com>
-From: Timur Tabi <timur@kernel.org>
-Date: Mon, 27 Nov 2023 14:47:39 -0600
-X-Gmail-Original-Message-ID: <CAOZdJXXxd2RhsZ10D9gotcTk-4CUussRgwKceSvEroivj9Pn1A@mail.gmail.com>
-Message-ID: <CAOZdJXXxd2RhsZ10D9gotcTk-4CUussRgwKceSvEroivj9Pn1A@mail.gmail.com>
-To: Dave Airlie <airlied@gmail.com>
+ <CAOZdJXXxd2RhsZ10D9gotcTk-4CUussRgwKceSvEroivj9Pn1A@mail.gmail.com>
+In-Reply-To: <CAOZdJXXxd2RhsZ10D9gotcTk-4CUussRgwKceSvEroivj9Pn1A@mail.gmail.com>
+From: Dave Airlie <airlied@gmail.com>
+Date: Tue, 28 Nov 2023 07:32:05 +1000
+Message-ID: <CAPM=9txvgGnC26hTOqR=7zsX8OUcR5vc87x88u8jk5Tm7EG8+A@mail.gmail.com>
+To: Timur Tabi <timur@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 Subject: Re: [Nouveau] [PATCH 3/3] nouveau/gsp: add some basic registry
@@ -65,39 +74,53 @@ Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Oct 31, 2023 at 12:20=E2=80=AFAM Dave Airlie <airlied@gmail.com> wr=
-ote:
->         rpc->size =3D sizeof(*rpc);
-> -       rpc->numEntries =3D 1;
-> -       rpc->entries[0].nameOffset =3D offsetof(typeof(*rpc), entries[1])=
+On Tue, 28 Nov 2023 at 06:48, Timur Tabi <timur@kernel.org> wrote:
+>
+> On Tue, Oct 31, 2023 at 12:20=E2=80=AFAM Dave Airlie <airlied@gmail.com> =
+wrote:
+> >         rpc->size =3D sizeof(*rpc);
+> > -       rpc->numEntries =3D 1;
+> > -       rpc->entries[0].nameOffset =3D offsetof(typeof(*rpc), entries[1=
+]);
+> > -       rpc->entries[0].type =3D 1;
+> > -       rpc->entries[0].data =3D 0;
+> > -       rpc->entries[0].length =3D 4;
+> > -
+> > -       strings =3D (char *)&rpc->entries[1];
+> > -       strings[0] =3D '\0';
+> > +       rpc->numEntries =3D NV_GSP_REG_NUM_ENTRIES;
+> > +
+> > +       str_offset =3D offsetof(typeof(*rpc), entries[NV_GSP_REG_NUM_EN=
+TRIES]);
+> > +       strings =3D (char *)&rpc->entries[NV_GSP_REG_NUM_ENTRIES];
+> > +       for (i =3D 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
+> > +               int name_len =3D strlen(r535_registry_entries[i].name) =
++ 1;
+> > +               rpc->entries[i].nameOffset =3D str_offset;
+> > +               rpc->entries[i].type =3D 1;
+> > +               rpc->entries[i].data =3D r535_registry_entries[i].value=
 ;
-> -       rpc->entries[0].type =3D 1;
-> -       rpc->entries[0].data =3D 0;
-> -       rpc->entries[0].length =3D 4;
-> -
-> -       strings =3D (char *)&rpc->entries[1];
-> -       strings[0] =3D '\0';
-> +       rpc->numEntries =3D NV_GSP_REG_NUM_ENTRIES;
-> +
-> +       str_offset =3D offsetof(typeof(*rpc), entries[NV_GSP_REG_NUM_ENTR=
-IES]);
-> +       strings =3D (char *)&rpc->entries[NV_GSP_REG_NUM_ENTRIES];
-> +       for (i =3D 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
-> +               int name_len =3D strlen(r535_registry_entries[i].name) + =
-1;
-> +               rpc->entries[i].nameOffset =3D str_offset;
-> +               rpc->entries[i].type =3D 1;
-> +               rpc->entries[i].data =3D r535_registry_entries[i].value;
-> +               rpc->entries[i].length =3D 4;
-> +               memcpy(strings, r535_registry_entries[i].name, name_len);
-> +               strings +=3D name_len;
-> +               str_offset +=3D name_len;
-> +       }
+> > +               rpc->entries[i].length =3D 4;
+> > +               memcpy(strings, r535_registry_entries[i].name, name_len=
+);
+> > +               strings +=3D name_len;
+> > +               str_offset +=3D name_len;
+> > +       }
+>
+> I'm working on a patch that replaces this code with a
+> dynamically-generated registry so that we can set registry keys via
+> the driver's command-line (like the Nvidia driver).
 
-I'm working on a patch that replaces this code with a
-dynamically-generated registry so that we can set registry keys via
-the driver's command-line (like the Nvidia driver).  However, you have
-a bug here.  rpc->size must be the total size of the RPC, including
-all the PACKED_REGISTRY_ENTRY structs and the strings that follow
-them.  You can see this by looking at RmPackageRegistry() and
-regCountEntriesAndSize() in OpenRM.
+I'm not sure we'd want that, except maybe as a debugging aid, I'd
+really like to have nouveau just pick the correct set of registry
+entries, but I suppose there might be some cases where setting the
+from the command line would be good for testing.
+
+> a bug here.  rpc->size must be the total size of the RPC, including
+> all the PACKED_REGISTRY_ENTRY structs and the strings that follow
+> them.  You can see this by looking at RmPackageRegistry() and
+> regCountEntriesAndSize() in OpenRM.
+
+Oh interesting, I'll take a look today.
+
+Dave.
