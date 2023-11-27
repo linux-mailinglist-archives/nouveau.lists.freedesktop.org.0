@@ -1,63 +1,70 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F63F7FA018
-	for <lists+nouveau@lfdr.de>; Mon, 27 Nov 2023 13:56:47 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A7DA37FA3AA
+	for <lists+nouveau@lfdr.de>; Mon, 27 Nov 2023 15:54:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 12C8310E25F;
-	Mon, 27 Nov 2023 12:56:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5149810E2C8;
+	Mon, 27 Nov 2023 14:54:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D063A10E25F
- for <nouveau@lists.freedesktop.org>; Mon, 27 Nov 2023 12:56:37 +0000 (UTC)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-40a4848c6e1so29001555e9.1
- for <nouveau@lists.freedesktop.org>; Mon, 27 Nov 2023 04:56:37 -0800 (PST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 22F5A10E2C6;
+ Mon, 27 Nov 2023 14:54:41 +0000 (UTC)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-543c3756521so5899110a12.2; 
+ Mon, 27 Nov 2023 06:54:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701089796; x=1701694596; darn=lists.freedesktop.org;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OIYOB2eU2H+bluz3T89WDZtEixLUpIjEWJSjNBKPfQM=;
- b=G6QxIhaJV9BVgb+e4xa7j14bogl1llp0lw72u8Fqiet/Llxwy/CW8pg3Lp3P8q3Dts
- lFgvP7BNNkfEqhu0qhHeBi3BGDk+bXLIhLt/bfSUN/WS8PWwbC2quWqfhoYDpZn59UIn
- 6gjjBQOxYi+FGPCcnGyTStrrniE8kNCF2WHo8wIMIi1WnUA5LL285GoGBKRKDfmWrHGA
- kMUmW1y7K7ZbQ8D9OwaiQo0zs8zDoqth7YxLs00YiEaUSH2M748sTrPpbZyAR0SHTF/t
- 2PdINBJlB56MX9ZF+CsqGeFCqZQ7jPQmJmhfrC5wihUJzFULCZ0fgsJdA1iApsTz8vla
- mgEw==
+ d=gmail.com; s=20230601; t=1701096879; x=1701701679; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vKtyx+UMuR8/33vOi2Ysy2TZL9FV3DMoqu+lFty52DE=;
+ b=caxmRnv/CiYs4Zx3uQIauydLDFAtqK/JRxb8QkoaXzoF92O4p3W1KqBvScMqxSg1MB
+ n5hZZRvUNFOlySrnI27WmEGe+Eg4CQTft+b0449ZT9/m8uQxh5iyzMYwMrvzg8KLVha/
+ lbf5HmymaiWKxFkDG3b5yyijJsQwTrN09OXWd1TaYjsMafn6aAQRlEFEeg1zk66JDhmk
+ aRqI6xVmqKZdkbJipz1h+XCYUcIK789oR+OU/aCmteVIqkZ6A8C0N9T7seo3qNAdPPz3
+ uRTQ8FmdQaxvz1xqNQBy2JLotm4QNcZH4svqKle2xtXqNdn5V64m7tvJlfha3I36uE9i
+ KuBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701089796; x=1701694596;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OIYOB2eU2H+bluz3T89WDZtEixLUpIjEWJSjNBKPfQM=;
- b=RT2th2GS1URa3VxqPejReP0tsTLfVtm31Ns+wo+yOr7QxiK1sZa1ZuHPRyEb72D6Cl
- g4PRHvEwQj0ik1PAY4zpU//qiMxYuMoNQF8MACrODzZyY2/CZtgf0+48r0W5Quq3P8Pp
- SUZaf8sHNmqgzNg6ZFe8sw2tIDDuJ9W0a+YukUDVzPHmILQ+rGjL8YnheycAoPW8iqMi
- z/KFsG7pKozwfRHV1ZFFwono1Dk7z+TAfvdS/GnPLncQUNzFYF8aXaH7529GTF0jf15G
- 1AcIZbzyJsyXlyB8VoaEY9f0VqlJJDQ3pYj49nV9f5pIvGuPULbA4oqoIQcLYqK96Hai
- 7nsA==
-X-Gm-Message-State: AOJu0Yyf5+1fckMbVuoU62Te0CQ9EN965MKXVbfwiYNhFa18bZIdzeFj
- JcnfTq+/KrfzJ+kxBhJ5QkySTg==
-X-Google-Smtp-Source: AGHT+IFPPTGfLzqzJNgYs1IpQL1hsJuI8oapdRcXNEpwBLbJewMCagBAP3dI7Z2zilUHv4TqflpLPA==
-X-Received: by 2002:a05:600c:45cf:b0:3f6:58ad:ed85 with SMTP id
- s15-20020a05600c45cf00b003f658aded85mr8311151wmo.10.1701089796257; 
- Mon, 27 Nov 2023 04:56:36 -0800 (PST)
-Received: from localhost ([102.36.222.112]) by smtp.gmail.com with ESMTPSA id
- z15-20020a05600c220f00b003fe1fe56202sm13576241wml.33.2023.11.27.04.56.35
+ d=1e100.net; s=20230601; t=1701096879; x=1701701679;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vKtyx+UMuR8/33vOi2Ysy2TZL9FV3DMoqu+lFty52DE=;
+ b=crEetndLmye0+ZeMHuKBQIGyqiNqVMPdF4BDVWFAhoCJaBwjtrqJOCR3lKQTzz4mDZ
+ hhJy4fQbq4e+8EVGGOuRiP8OxP424B+sHxarzPThzqk7IBW9Z7FPKiP2LrRg0oN7cKVa
+ ckiqNjhd92FImccJ4s0LcmX4KE+vn5M04u8gLX5a2gKb0HSdrag9MzCTJbK7DFvUT8QT
+ T38nktrfyRPCUxGGiSeqcSNoPDaFWh44F+9ChxCmyHTJDK1CP/LPtw6lvaLXotJUMhdq
+ nXBL8a720Gd5X/1bPgIwZF1+bynwHGvyXcPvcbIZn5ot5hpNk2X7tb6niad1y9lB2DR3
+ pbww==
+X-Gm-Message-State: AOJu0YyH81jO2Xda7c319FkOqL3FO99AAn/x3u7be+NEEYoxtXoX8I2W
+ KvNmDmoUWaDBNH1crtNaGpY=
+X-Google-Smtp-Source: AGHT+IHVEZfCfaD/cpM2uQc6CXbmyZRdVVIlu3vcaSF26lgLfvjs55eOZX8pqw2IBlAtYb9Lq5pZtA==
+X-Received: by 2002:a17:906:130a:b0:a0e:e58:42fb with SMTP id
+ w10-20020a170906130a00b00a0e0e5842fbmr3415840ejb.14.1701096879392; 
+ Mon, 27 Nov 2023 06:54:39 -0800 (PST)
+Received: from able.fritz.box ([2a00:e180:158f:ed00:5d13:a893:4139:6a08])
+ by smtp.gmail.com with ESMTPSA id
+ z13-20020a170906074d00b00a0c3b122a1esm2888763ejb.63.2023.11.27.06.54.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 04:56:36 -0800 (PST)
-Date: Mon, 27 Nov 2023 15:56:33 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Karol Herbst <kherbst@redhat.com>
-Message-ID: <a0293812-c05d-45f0-a535-3f24fe582c02@moroto.mountain>
+ Mon, 27 Nov 2023 06:54:38 -0800 (PST)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
+ <christian.koenig@amd.com>
+To: jani.nikula@linux.intel.com, kherbst@redhat.com, dakr@redhat.com,
+ zackr@vmware.com, marek.olsak@amd.com,
+ linux-graphics-maintainer@vmware.com, amd-gfx@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org
+Date: Mon, 27 Nov 2023 15:54:35 +0100
+Message-Id: <20231127145437.15060-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
-Subject: [Nouveau] [PATCH] nouveau/gsp/r535: remove a stray unlock in
- r535_gsp_rpc_send()
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Nouveau] TTM improvement and amdgpu fix
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,37 +76,20 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, kernel-janitors@vger.kernel.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This unlock doesn't belong here and it leads to a double unlock in
-the caller, r535_gsp_rpc_push().
+Hi guys,
 
-Fixes: 176fdcbddfd2 ("drm/nouveau/gsp/r535: add support for booting GSP-RM")
-Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+TTM has a feature which allows to specify placements for normal operation as well as when all domains are "busy" and don't have free space.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-index dc44f5c7833f..818e5c73b7a6 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-@@ -365,10 +365,8 @@ r535_gsp_rpc_send(struct nvkm_gsp *gsp, void *argv, bool wait, u32 repc)
- 	}
- 
- 	ret = r535_gsp_cmdq_push(gsp, rpc);
--	if (ret) {
--		mutex_unlock(&gsp->cmdq.mutex);
-+	if (ret)
- 		return ERR_PTR(ret);
--	}
- 
- 	if (wait) {
- 		msg = r535_gsp_msg_recv(gsp, fn, repc);
--- 
-2.42.0
+Not very widely used since it was a bit inflexible and required making multiple placement lists. Replace the multiple lists with flags and start to use this in amdgpu as well.
+
+As future improvement we should probably re-work was "busy" means for a domain as well.
+
+Please comment and/or test.
+
+Thanks,
+Christian.
+
 
