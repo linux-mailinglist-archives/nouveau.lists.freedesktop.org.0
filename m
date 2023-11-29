@@ -2,109 +2,80 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8E157FE048
-	for <lists+nouveau@lfdr.de>; Wed, 29 Nov 2023 20:26:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6F467FE457
+	for <lists+nouveau@lfdr.de>; Thu, 30 Nov 2023 00:52:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9BE0E10E65E;
-	Wed, 29 Nov 2023 19:26:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AFBEA10E3EA;
+	Wed, 29 Nov 2023 23:52:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2085.outbound.protection.outlook.com [40.107.243.85])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EB6B210E65E;
- Wed, 29 Nov 2023 19:26:08 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IPngBYLIfJOMmj1JEZ9anFgmA8XfohgsJFsG9dJqkZGvFTfuQG8EJmBl1SBGNWaZf7ou96bDgjBO0VAxv/yti8tAKhTYttg0MAs0qiABC3h+945H7mPIppb3kc/nFO+TiIiWV7vOQhovTfwY4/xmGlmRV9H3c/kz5aTyEEsQE8S89R1LqR/MoO6R3abWkeZF4/re3a1QW4Wr8D44onbG6wNKcQwf+Lg+wmj/74LDm3Z2f2c+VD770+oXCcMurQilJ3qINEoinTRSR63070ipKQvW30KcjjMZQ1w1ARjm2Yd9zISQzNlgXKvQ3xY70ZrZLYTiWezKY2SXhV0cgfdS+A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DCEOJM6r+XvWrMfoFRBxwenF80/v0lWdRUy5zPbPphs=;
- b=kctR6ppXdGWj3Fz3qAUPnouXa5iU0I7D4K1D+OmjLxw9EYps2JG/8lLQNrPcrpaPmoz2et8+9R9tk0fo834AuiFDBmb9aPLuLICn48vaJQ6CpwK1syZ0VzwTchp94Aq3otK6AMeEIbYcR/0UtDkD6vk6I3FXwJwFINgZem8sigGhH9FT22lctRNsp/NtekowI/Y8Dd/0TrKw+igdcXZPX/GPexUA84RkNVnLLPKZu/IqHqjIn2L8X+xdwc7LX6Y4R8Qwkfsrt2Y6mFF3n664g/h185A/EOFsmlcM1OdAj2O9LfrUkta3EwL5PJSMNwnR12+iI5cWpkeAbN7YG0NfTw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DCEOJM6r+XvWrMfoFRBxwenF80/v0lWdRUy5zPbPphs=;
- b=mW10LyMfl3p9lAsXkCq2SYhk2rVDJehSMnpez8LXC9bedFRN62t/DL4CwmbtzOtgd5Z1JeVMxCklzaAK0hG3xuq97IffNmbNBwrI7uqeov9+tANzing9981WsSElUW2JhE9MByKzMwYXQVcdL6YbFDPHb/+tGq29Eeg74MmrujZrt+kO+eyMpLP7rXJNwaV2L2Q+WYPSiEFsLQk2lOWDkqNock1zVbbVrC6qaubnv/zXnxhpMTV6fVOrqvPvRJ7s1kJ02J+OBiLKRiYuM51UXhVnar758yZKKsWaMqwRj0QF6Xd8hjaP+sE1jn98H9wspCVdvQR9X3lDU11bvumB/w==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from LV2PR12MB5869.namprd12.prod.outlook.com (2603:10b6:408:176::16)
- by PH7PR12MB9104.namprd12.prod.outlook.com (2603:10b6:510:2f3::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.29; Wed, 29 Nov
- 2023 19:26:05 +0000
-Received: from LV2PR12MB5869.namprd12.prod.outlook.com
- ([fe80::60d4:c1e3:e1aa:8f93]) by LV2PR12MB5869.namprd12.prod.outlook.com
- ([fe80::60d4:c1e3:e1aa:8f93%4]) with mapi id 15.20.7046.015; Wed, 29 Nov 2023
- 19:26:04 +0000
-Date: Wed, 29 Nov 2023 15:26:03 -0400
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Thierry Reding <thierry.reding@gmail.com>
-Message-ID: <20231129192603.GA1387263@nvidia.com>
-References: <0-v1-720585788a7d+811b-iommu_fwspec_p1_jgg@nvidia.com>
- <8-v1-720585788a7d+811b-iommu_fwspec_p1_jgg@nvidia.com>
- <ZWdlcboM4Xzs38NI@orome.fritz.box>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ZWdlcboM4Xzs38NI@orome.fritz.box>
-X-ClientProxiedBy: SN4PR0501CA0109.namprd05.prod.outlook.com
- (2603:10b6:803:42::26) To LV2PR12MB5869.namprd12.prod.outlook.com
- (2603:10b6:408:176::16)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7353710E3EA
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Nov 2023 23:52:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1701301967;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=0DMKF7ZGyx5GoQuAFp4AyN/BySHZDI7ZFOdXRc26u9o=;
+ b=VIqUmKuyXbOicdjbwOY6o1VSdPqzvgcDkfFwShk8ojjAbSQlBCvtrhSdlXOX8oIUSg0Ehi
+ tkMh2GCw6KPa6thxvNp7JPHI4ZoGxvV3i2lBGbCaOF56uJiPhVEwT/Qvg93Aoml0XdgOjB
+ n4EtVHN8BmdVdzXZNZCLs5uemA900gE=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-684-0sEFwdj5MM61Y22tsgtg3Q-1; Wed, 29 Nov 2023 18:52:45 -0500
+X-MC-Unique: 0sEFwdj5MM61Y22tsgtg3Q-1
+Received: by mail-ed1-f71.google.com with SMTP id
+ 4fb4d7f45d1cf-54af5527a17so116083a12.3
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Nov 2023 15:52:45 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701301964; x=1701906764;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0DMKF7ZGyx5GoQuAFp4AyN/BySHZDI7ZFOdXRc26u9o=;
+ b=ddr65LPGBrHTKWOdUF7s7yTi4mmqJFRVsqP4htLzc3HxiuxNOzUJiRcaqww7J7Ng5K
+ HLVZ5TYqWTsDFpCz/H8WWVlVE20GVN4qx8WeplMyOB2ocbTTn4AXezkVIrTDxQ1qXcvY
+ zFU0fERKBazrzzyeZuDnhbWoUYpQorf0Sfo/NuEbRenV5M3AFHjCzMoIoNJeDUrAswz/
+ pFlxs8GqFOu+bgYdUub2oJFQO9imxRHte4SK/fe+u5tgeBxZCursKXjQQV5nnJMRcTeM
+ 4P/0twCnTF9TcGyaTl/ZfcKdwUgwia/TMs4UQ+7NVY9+sqd9kzGVG/bi24dRK3IZjqyo
+ sRvA==
+X-Gm-Message-State: AOJu0YyI4IBJq1zJPArjOVTmrRjbAUajreipDI2G3/tSz5SNGFx2Gg61
+ Uxa+fxmwxcrDtbLP829YIydp5myRXutqe+p3w0bSKDJ43K/YfZ2fcZcnhAftb9Wf+O8qPLShf0n
+ hFkB2VQ8yfJiyvS/YoU+c464klg==
+X-Received: by 2002:a17:907:d407:b0:a02:ad84:3ab3 with SMTP id
+ vi7-20020a170907d40700b00a02ad843ab3mr14530385ejc.44.1701301964731; 
+ Wed, 29 Nov 2023 15:52:44 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH7Ukuv1GKWzasfo9LAPEUmsG843xaS5Q/R1hpoDiLL/MvrRWEV6+4Y1JuxN9p0wrwz093U2A==
+X-Received: by 2002:a17:907:d407:b0:a02:ad84:3ab3 with SMTP id
+ vi7-20020a170907d40700b00a02ad843ab3mr14530375ejc.44.1701301964478; 
+ Wed, 29 Nov 2023 15:52:44 -0800 (PST)
+Received: from ?IPV6:2a02:810d:4b3f:de9c:abf:b8ff:feee:998b?
+ ([2a02:810d:4b3f:de9c:abf:b8ff:feee:998b])
+ by smtp.gmail.com with ESMTPSA id
+ qc14-20020a170906d8ae00b009a9fbeb15f2sm15030ejb.62.2023.11.29.15.52.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 29 Nov 2023 15:52:44 -0800 (PST)
+Message-ID: <f5a69710-f1a6-444d-9d2a-7c07589a2bdc@redhat.com>
+Date: Thu, 30 Nov 2023 00:52:42 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV2PR12MB5869:EE_|PH7PR12MB9104:EE_
-X-MS-Office365-Filtering-Correlation-Id: 450f25c9-f8bb-4b4a-a3ba-08dbf1110760
-X-LD-Processed: 43083d15-7273-40c1-b7db-39efd9ccc17a,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: kml3tOxUKByyMYMKjHOmjxnAf+/gOuuwq5Z346QBScvllEoCYi2SYycwqjD2bmo0JfkPMJQp0KwS1mXxODEEeE+4wfeN31GaS5snt1awWRwKkDr+Ojfe4bCO57Letm7VS/tjgsdVf/o/IyUXjyRbIZseQ4HhJI8kGUztKHRHM1pgMpS5IgGQHPgDrLtIUWbrIS9UkH2e5FqT5PlxYusnWemOq1/+xVkChTPXv42Ys73Z0FhxhrFeavoi8REqOdUy7RUjDV1I2upml+CVUvQY4u8NvPgLGLnCQz3BxkjZ5Kg5dgAqybJnj/3Gzt9XQGDyasioHbVrRO1d6Bldw9kt03HGn67V9X8vnlmV6ro1Ne1/RIg2YkLPFgwtFYI+Ef0+Oq/USRugNIGBdMnV7oFivMPxWj3SFP3jpVgiT7h2tadcvtFZcvhXjqH36SBVaq9CXQL+BdG6HLMVK6iiUMozAwbDSBamzxOrWUjHlw4rvb3MGOSMUGiu1uSU3dZu10ipIfdlHjPn7pZHNjvRRlJuBOefF/kES29pkJacH0rvdB5Z4o782H4a2M4gtShHReeZmN97EY332t+jHKi7X5Cne951OOk8Z0O/LtrB39OX2Jm9Etb5aRI69wwy+8MKXIB7
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV2PR12MB5869.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(346002)(376002)(39860400002)(136003)(396003)(230922051799003)(1800799012)(186009)(64100799003)(451199024)(5660300002)(2906002)(8936002)(8676002)(4326008)(7366002)(7406005)(7416002)(41300700001)(202311291699002)(316002)(6916009)(66556008)(54906003)(66946007)(66476007)(86362001)(1076003)(2616005)(478600001)(36756003)(6512007)(83380400001)(6506007)(26005)(33656002)(38100700002)(6486002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?oCUIZHsjahC5JloA1Q9ynCPrhqjiYrctnOM4OsExXwdty32uQd4TAh9d8F1V?=
- =?us-ascii?Q?CnZ3MHk8Ka68Ab2ppqe6OpYn3QM8JrGeCHNVUwFG0DFWUKBt6SsB+pmAmnIJ?=
- =?us-ascii?Q?VXCfetQ+8htCUkORGSv8JS/3KA0ucMxEvGWZcIKkRxU7ClDvWROsJyD9G5ea?=
- =?us-ascii?Q?o/DYUWDOy5kBXbhaYus1SUnddEGbBRIuCIZ/qmdk26Eik/Zch4IgnGBT8r5R?=
- =?us-ascii?Q?/MGIrKJIxqwOHfZUqAGBqQy0+hIDO5vFxnrJkKihLp1JwpvtO3Hu4Xg8Kwu2?=
- =?us-ascii?Q?6VmujoM+b2yYBFWj0hhtg8RwvgjB3QQyBCU61KBP21vqjkra7dPjuMwptHHW?=
- =?us-ascii?Q?HJgFXSkIcxnYhp+6Yu24pVF6RGDga3ml33FUsJfS4mIYMeMcer0tQelMZzaL?=
- =?us-ascii?Q?AUhJ8JV6qGwmnar5fcO9rI0u4uWX9ZVprj0bkL8iBCsL/xiS9uJnafqYB2zz?=
- =?us-ascii?Q?PyHLy1wFBm78YJX17a8hW/eeK/uZNYHzd1XD83Vk9sTXpF/oOaoljSIng2Ry?=
- =?us-ascii?Q?+IIi7ecbf8BnbaDGvXZQ6WfwmFaTPTt5aD8R3IOFyGc7LRzjCt5GLfKh6wNm?=
- =?us-ascii?Q?cMy9E5uZGQyWQBS7554aXo/dj1tEzE6qKxPzFXXRTQe3ceblMtUg3hX7AjYZ?=
- =?us-ascii?Q?32a2jwFn5KXXT4bmGLH5bX3/6NQOHiTldFj9b9c6ZQMwEL2Sc7EU3LPDb7U2?=
- =?us-ascii?Q?3DdxrJURGBH6+1EAUIf4aqWoLuKtd1kiEwOMRJ5DUN8W1aXN1Gmis9+vMaPy?=
- =?us-ascii?Q?nABttKX2HvwGge6Ta8w50UnIrzliwgu+S0pqB5lSOhyqf/TBKIbNmnqHSu1g?=
- =?us-ascii?Q?rRwfDDiWWD47RCicAS+sCPpEYHnleFYSiKxLx4Enbdz/NBhYJAdis13y9ew+?=
- =?us-ascii?Q?k/ro9RD8Ysv7mPlPHOCycryxvTI1kiUT3p0HAx/6K62HRTMGo1lthkKBQPhm?=
- =?us-ascii?Q?6LqgQpe9rAfUcl/lrBbpy7ZVUsDB+hZLdIv8zggxqC2V4bpe5QGrCVYnx28d?=
- =?us-ascii?Q?Ws3Kyno1FyDFMj8Zwgxm7wLzFo+Yri6rAWZMaFNd9MijrVukteC+wccjcy01?=
- =?us-ascii?Q?b0TmfMQggIrdxy55TSKk/QTSxVnLyDYrVfbx2Uda4Owimt1jumQTtDVXG2VU?=
- =?us-ascii?Q?0/5IrTqWBwamHeivEhsnWP3fj3QSr7FgXPYI+noogSkJywAjMFERxVysfGGS?=
- =?us-ascii?Q?qkXNVjKusL4SWVupTBJ93yliRZI4udDlOKaUxjo6J9OLiikK4ZN+zmwr+AKg?=
- =?us-ascii?Q?KwZgtlYksl2t3vFANZOoteXa73tRWg8dLllYynTM+gbTk2AQ/CU9FfQO0fdu?=
- =?us-ascii?Q?5nzhR/AOMWTQDZ5nCb2AW3nOdYEfsQqxT7UpWYficRNFuBlSPph+D1uKofQz?=
- =?us-ascii?Q?fV/ri0yaF5JW6zRW8f3lwhxIUMPETXqdIzkQrLerc6Kx+VIWhgvTPvfE9y8S?=
- =?us-ascii?Q?9ijlsQbNA8yIIb83i8oaAIqw3eRcXgrEg+5sqdO60oQlEZuswbRvp+I19HnL?=
- =?us-ascii?Q?pX3jWV3cdka5CY3hDanO6OKkdSfXA34xTK3Qoikz8iZexWAfmLE0y10A9ZxH?=
- =?us-ascii?Q?XG7UrQloRR3pYXiswA4XTq0QHnCGkPKgR9BW2wQq?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 450f25c9-f8bb-4b4a-a3ba-08dbf1110760
-X-MS-Exchange-CrossTenant-AuthSource: LV2PR12MB5869.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Nov 2023 19:26:04.4798 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: j40MoGI9vgBO6YGWnhciTVERoQiP4Byhom55WAYSOj9yHuosD3BYYu5jJ/YbEew9
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB9104
-Subject: Re: [Nouveau] [PATCH 08/10] iommu/tegra: Use
- tegra_dev_iommu_get_stream_id() in the remaining places
+User-Agent: Mozilla Thunderbird
+To: Abhinav Singh <singhabhinav9051571833@gmail.com>
+References: <20231126145723.388162-1-singhabhinav9051571833@gmail.com>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <20231126145723.388162-1-singhabhinav9051571833@gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH] driver: gpu: Fix warning directly
+ dereferencing a rcu pointer
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -116,76 +87,78 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-hyperv@vger.kernel.org, "Rafael J. Wysocki" <rafael@kernel.org>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Lorenzo Pieralisi <lpieralisi@kernel.org>,
- Jerry Snitselaar <jsnitsel@redhat.com>, dri-devel@lists.freedesktop.org,
- patches@lists.linux.dev, Laxman Dewangan <ldewangan@nvidia.com>,
- Hanjun Guo <guohanjun@huawei.com>, linux-riscv@lists.infradead.org,
- "K. Y. Srinivasan" <kys@microsoft.com>, Frank Rowand <frowand.list@gmail.com>,
- Christoph Hellwig <hch@lst.de>, Alyssa Rosenzweig <alyssa@rosenzweig.io>,
- Marek Szyprowski <m.szyprowski@samsung.com>, Rob Herring <robh@kernel.org>,
- Wei Liu <wei.liu@kernel.org>, Joerg Roedel <joro@8bytes.org>,
- "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
- Dexuan Cui <decui@microsoft.com>, Russell King <linux@armlinux.org.uk>,
- linux-acpi@vger.kernel.org, iommu@lists.linux.dev,
- nouveau@lists.freedesktop.org, linux-snps-arc@lists.infradead.org,
- Len Brown <lenb@kernel.org>, devicetree@vger.kernel.org,
- Albert Ou <aou@eecs.berkeley.edu>,
- Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
- Will Deacon <will@kernel.org>, Sven Peter <sven@svenpeter.dev>,
- Haiyang Zhang <haiyangz@microsoft.com>, Vineet Gupta <vgupta@kernel.org>,
- Rob Herring <robh+dt@kernel.org>, Moritz Fischer <mdf@kernel.org>,
- Paul Walmsley <paul.walmsley@sifive.com>, linux-tegra@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, Vinod Koul <vkoul@kernel.org>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- Robin Murphy <robin.murphy@arm.com>, Hector Martin <marcan@marcan.st>,
- linux-mips@vger.kernel.org,
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, asahi@lists.linux.dev,
- Daniel Vetter <daniel@ffwll.ch>, Sudeep Holla <sudeep.holla@arm.com>,
- dmaengine@vger.kernel.org, David Woodhouse <dwmw2@infradead.org>,
- Lu Baolu <baolu.lu@linux.intel.com>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ daniel@ffwll.ch, linux-kernel-mentees@lists.linuxfoundation.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Nov 29, 2023 at 05:23:13PM +0100, Thierry Reding wrote:
-> > diff --git a/drivers/memory/tegra/tegra186.c b/drivers/memory/tegra/tegra186.c
-> > index 533f85a4b2bdb7..3e4fbe94dd666e 100644
-> > --- a/drivers/memory/tegra/tegra186.c
-> > +++ b/drivers/memory/tegra/tegra186.c
-> > @@ -111,21 +111,21 @@ static void tegra186_mc_client_sid_override(struct tegra_mc *mc,
-> >  static int tegra186_mc_probe_device(struct tegra_mc *mc, struct device *dev)
-> >  {
-> >  #if IS_ENABLED(CONFIG_IOMMU_API)
-> > -	struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
-> >  	struct of_phandle_args args;
-> >  	unsigned int i, index = 0;
-> > +	u32 sid;
-> >  
-> > +	WARN_ON(!tegra_dev_iommu_get_stream_id(dev, &sid));
+Hi Abhinav,
+
+Thanks for sending this follow-up patch.
+
+On 11/26/23 15:57, Abhinav Singh wrote:
+> Fix a sparse warning with this message
+> "warning:dereference of noderef expression". In this context it means we
+> are dereferencing a __rcu tagged pointer directly.
 > 
-> I know the code previously didn't check for any errors, but we may want
-> to do so now. If tegra_dev_iommu_get_stream_id() ever fails we may end
-> up writing some undefined value into the override register.
+> We should not be directly dereferencing a rcu pointer. To get a normal
+> (non __rcu tagged pointer) from a __rcu tagged pointer we are using the
+> function unrcu_pointer(...). The non __rcu tagged pointer then can be
+> dereferenced just like a normal pointer.
 
-My assumption was it never fails otherwise this probably already
-doesn't work?
+Can you please add a brief explanation why unrcu_pointer() is fine here?
 
-> I'm also unsure if WARN_ON() is appropriate here. I vaguely recall that
-> ->probe_device() was called for all devices on the bus and not all of
-> them may have been associated with the IOMMU. Not all of them may in
-> fact access memory in the first place.
+> 
+> I tested with qemu with this command
+> qemu-system-x86_64 \
+> 	-m 2G \
+> 	-smp 2 \
+> 	-kernel bzImage \
+> 	-append "console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0" \
+> 	-drive file=bullseye.img,format=raw \
+> 	-net user,host=10.0.2.10,hostfwd=tcp:127.0.0.1:10021-:22 \
+> 	-net nic,model=e1000 \
+> 	-enable-kvm \
+> 	-nographic \
+> 	-pidfile vm.pid \
+> 	2>&1 | tee vm.log
+> with lockdep enabled.
 
-So you are thinkin that of_parse_phandle_with_args() is a NOP
-sometimes so it will tolerate the failure?
+How is that relevant for this patch?
 
-Seems like the best thing to do is just continue to ignore it then?
+- Danilo
 
-> Perhaps I'm misremembering and the IOMMU core now takes care of only
-> calling this when fwspec is indeed valid?
-
-Can't advise, I have no idea what tegra_mc_ops is for :)
-
-Jason
+> 
+> Signed-off-by: Abhinav Singh <singhabhinav9051571833@gmail.com>
+> ---
+>   drivers/gpu/drm/nouveau/nv10_fence.c | 2 +-
+>   drivers/gpu/drm/nouveau/nv84_fence.c | 2 +-
+>   2 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nv10_fence.c b/drivers/gpu/drm/nouveau/nv10_fence.c
+> index c6a0db5b9e21..845b64c079ed 100644
+> --- a/drivers/gpu/drm/nouveau/nv10_fence.c
+> +++ b/drivers/gpu/drm/nouveau/nv10_fence.c
+> @@ -32,7 +32,7 @@
+>   int
+>   nv10_fence_emit(struct nouveau_fence *fence)
+>   {
+> -	struct nvif_push *push = fence->channel->chan.push;
+> +	struct nvif_push *push = unrcu_pointer(fence->channel)->chan.push;
+>   	int ret = PUSH_WAIT(push, 2);
+>   	if (ret == 0) {
+>   		PUSH_MTHD(push, NV06E, SET_REFERENCE, fence->base.seqno);
+> diff --git a/drivers/gpu/drm/nouveau/nv84_fence.c b/drivers/gpu/drm/nouveau/nv84_fence.c
+> index 812b8c62eeba..d42e72e23dec 100644
+> --- a/drivers/gpu/drm/nouveau/nv84_fence.c
+> +++ b/drivers/gpu/drm/nouveau/nv84_fence.c
+> @@ -85,7 +85,7 @@ nv84_fence_chid(struct nouveau_channel *chan)
+>   static int
+>   nv84_fence_emit(struct nouveau_fence *fence)
+>   {
+> -	struct nouveau_channel *chan = fence->channel;
+> +	struct nouveau_channel *chan = unrcu_pointer(fence->channel);
+>   	struct nv84_fence_chan *fctx = chan->fence;
+>   	u64 addr = fctx->vma->addr + nv84_fence_chid(chan) * 16;
+>   
 
