@@ -2,63 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7758E7FAC92
-	for <lists+nouveau@lfdr.de>; Mon, 27 Nov 2023 22:32:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BFFB67FCB84
+	for <lists+nouveau@lfdr.de>; Wed, 29 Nov 2023 01:38:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8DC0B10E3FC;
-	Mon, 27 Nov 2023 21:32:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5028C10E36C;
+	Wed, 29 Nov 2023 00:38:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1942310E307;
- Mon, 27 Nov 2023 21:32:19 +0000 (UTC)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-54acdd65c88so4835581a12.2; 
- Mon, 27 Nov 2023 13:32:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701120737; x=1701725537; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GMXt/QjcB0PpuNepHtXYY7nCcTRfB6opzAYutejmCyg=;
- b=QQtQLHVDW258MIxmgYq4d0DmQvCgRTqScM8BjhOpM5vh3p/V2iucg0dd2TqovZqNje
- T3FSc4LBa05z2YPzIvUvsPYvq18wU8C0eLW6PMIs/eYeahDwPWf7v5OUY/EZUuM5cTPN
- /4jrzQM7Nh8tD3DYbBprrZMHux2OdRixoRherdOTa/RUP3azikGVCp8C6pGouzjdMEj3
- E9nnQFBRETBgdmhyR3WXqgfMqPiDG8mkia4xGEIR88PHjmA0xU7TzWqthe2X4Aod3bid
- zrdJzVlr1euoz9xL7VWCuqzWHCyBJn1Rx7XbfYaP1pJEoXDFWQnh1HAvj3Tw737d1g4O
- 3Keg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701120737; x=1701725537;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GMXt/QjcB0PpuNepHtXYY7nCcTRfB6opzAYutejmCyg=;
- b=I00fMldHUEnKRx8jN8QG7g1MMhjm2RkTc6RdP5svI5XAAfK2zrGkZcketsjiF/h4ML
- P4Uzj65m8SW7NK4fy/BV9P7yWSDQJzWPTwQpFpdhW2u4b4mZ9qNK2v7EE7RTs+o3rcUf
- RocWnimSjmSOvqVV83Brxt3RYs5fxXipuLqDl4Dg3HWcwcaXrHtNUgSR6Ev8G7vUGIF3
- kjtwfibg9qvgTCBZ9FtggQEu5bumpMcr5cxW9BEBzWqR0o+d04EzFTvWUWNs4/niRNkw
- 6BlwoCqg4m5jYKyylax/IEG5+Z96/O8XDsf3rkTvbjudDKuIZqdRqzYCgteF6eY0V5uN
- C0rg==
-X-Gm-Message-State: AOJu0YwTQ1PqM5uhLYiuHPvpOR4Slz2UdUZNIfZBXnVMTMlU/fTM3Qdc
- 3ccjm05eyQ5RmUTIJfVtgFiGfcsUBhjOegztgoXIJt+i
-X-Google-Smtp-Source: AGHT+IHpXenmf965VvBUb4xFNCHgEsV2WxRxqKXOum4qkVw+gL1gGfQMh7KwpXT11oBNNP0Yi1HINgh9NvDRfsUB+Ms=
-X-Received: by 2002:a17:907:b011:b0:9bd:bbc1:1c5f with SMTP id
- fu17-20020a170907b01100b009bdbbc11c5fmr7510864ejc.35.1701120736901; Mon, 27
- Nov 2023 13:32:16 -0800 (PST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 366D510E36C;
+ Wed, 29 Nov 2023 00:38:10 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Sg0mG3rxFz9sWP;
+ Wed, 29 Nov 2023 01:38:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=owenh.net; s=MBO0001; 
+ t=1701218286;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=HDQWK+L4QLJnAgN2GgVFGTEwc8e2Mtybcb9ST9HqB+8=;
+ b=WnY1Ruo4L5LiWWP1gUvFZ0Ed0EvP7ttGZp4KMHb+r6kf232wgjRhDWjeBViDhPLSFS638k
+ 8e0waub8mZfgTf/6dJ8+REQuYXbEuwkn7LgpX9IbmUkD2a+NcMkcsGvEveBdRcvLH0PPRa
+ QaQA82l1TpaampBfToUXdEYL53D8QqbSLFP/UB6DhQwIe5NgwLw7DScRnwAsGmub1UCYAO
+ BxJFUikjRgiV9/7KeQWSvrdde5QTt0aVvv5sGCV3jDh3zvTI6zhwAWBXZ68Y5QkbLrmgAf
+ n3U8we9aiWiqCQ6R+nkBF3vs/2H9pe6sNvWGf3qx5I3tdbAUvhEFGl1EY7j3Rg==
+Message-ID: <c1dd675d-cb3e-4c4c-8dc4-dd561ef4950b@owenh.net>
+Date: Tue, 28 Nov 2023 18:37:58 -0600
 MIME-Version: 1.0
-References: <20231031051943.1957328-1-airlied@gmail.com>
- <20231031051943.1957328-4-airlied@gmail.com>
- <CAOZdJXXxd2RhsZ10D9gotcTk-4CUussRgwKceSvEroivj9Pn1A@mail.gmail.com>
-In-Reply-To: <CAOZdJXXxd2RhsZ10D9gotcTk-4CUussRgwKceSvEroivj9Pn1A@mail.gmail.com>
-From: Dave Airlie <airlied@gmail.com>
-Date: Tue, 28 Nov 2023 07:32:05 +1000
-Message-ID: <CAPM=9txvgGnC26hTOqR=7zsX8OUcR5vc87x88u8jk5Tm7EG8+A@mail.gmail.com>
-To: Timur Tabi <timur@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH 3/3] nouveau/gsp: add some basic registry
- entries.
+From: "Owen T. Heisler" <writer@owenh.net>
+To: Linux regressions mailing list <regressions@lists.linux.dev>,
+ stable@vger.kernel.org
+References: <6f027566-c841-4415-bc85-ce11a5832b14@owenh.net>
+ <5ecf0eac-a089-4da9-b76e-b45272c98393@leemhuis.info>
+ <6b7a71b4-c8a2-46f4-a995-0c63e7745ca3@owenh.net>
+ <c72ca99e-8657-4ed8-9999-5702ebeb5b8c@leemhuis.info>
+ <9bce5d00-8db6-4c8b-9817-06502492b44a@owenh.net>
+Content-Language: en-US
+In-Reply-To: <9bce5d00-8db6-4c8b-9817-06502492b44a@owenh.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 4Sg0mG3rxFz9sWP
+Subject: Re: [Nouveau] [REGRESSION]: nouveau: Asynchronous wait on fence
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,57 +60,33 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 28 Nov 2023 at 06:48, Timur Tabi <timur@kernel.org> wrote:
->
-> On Tue, Oct 31, 2023 at 12:20=E2=80=AFAM Dave Airlie <airlied@gmail.com> =
-wrote:
-> >         rpc->size =3D sizeof(*rpc);
-> > -       rpc->numEntries =3D 1;
-> > -       rpc->entries[0].nameOffset =3D offsetof(typeof(*rpc), entries[1=
-]);
-> > -       rpc->entries[0].type =3D 1;
-> > -       rpc->entries[0].data =3D 0;
-> > -       rpc->entries[0].length =3D 4;
-> > -
-> > -       strings =3D (char *)&rpc->entries[1];
-> > -       strings[0] =3D '\0';
-> > +       rpc->numEntries =3D NV_GSP_REG_NUM_ENTRIES;
-> > +
-> > +       str_offset =3D offsetof(typeof(*rpc), entries[NV_GSP_REG_NUM_EN=
-TRIES]);
-> > +       strings =3D (char *)&rpc->entries[NV_GSP_REG_NUM_ENTRIES];
-> > +       for (i =3D 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
-> > +               int name_len =3D strlen(r535_registry_entries[i].name) =
-+ 1;
-> > +               rpc->entries[i].nameOffset =3D str_offset;
-> > +               rpc->entries[i].type =3D 1;
-> > +               rpc->entries[i].data =3D r535_registry_entries[i].value=
-;
-> > +               rpc->entries[i].length =3D 4;
-> > +               memcpy(strings, r535_registry_entries[i].name, name_len=
-);
-> > +               strings +=3D name_len;
-> > +               str_offset +=3D name_len;
-> > +       }
->
-> I'm working on a patch that replaces this code with a
-> dynamically-generated registry so that we can set registry keys via
-> the driver's command-line (like the Nvidia driver).
+On 11/21/23 14:23, Owen T. Heisler wrote:
+> On 11/21/23 09:16, Linux regression tracking (Thorsten Leemhuis) wrote:
+>> On 15.11.23 07:19, Owen T. Heisler wrote:
+>>> On 10/31/23 04:18, Linux regression tracking (Thorsten Leemhuis) wrote:
+>>>> On 28.10.23 04:46, Owen T. Heisler wrote:
+>>>>> #regzbot introduced: d386a4b54607cf6f76e23815c2c9a3abc1d66882
+>>>>> #regzbot link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/180
+>>>>>
+>>>>> 3. Suddenly the secondary Nvidia-connected display turns off and X 
+>>>>> stops responding to keyboard/mouse input.
 
-I'm not sure we'd want that, except maybe as a debugging aid, I'd
-really like to have nouveau just pick the correct set of registry
-entries, but I suppose there might be some cases where setting the
-from the command line would be good for testing.
+> I am currently testing v6.6 with the culprit commit reverted.
 
-> a bug here.  rpc->size must be the total size of the RPC, including
-> all the PACKED_REGISTRY_ENTRY structs and the strings that follow
-> them.  You can see this by looking at RmPackageRegistry() and
-> regCountEntriesAndSize() in OpenRM.
+- v6.6: fails
+- v6.6 with the culprit commit reverted: works
 
-Oh interesting, I'll take a look today.
+See <https://gitlab.freedesktop.org/drm/nouveau/-/issues/180> for full 
+details including a decoded kernel log.
 
-Dave.
+Thanks,
+Owen
+
+--
+Owen T. Heisler
+<https://owenh.net>
