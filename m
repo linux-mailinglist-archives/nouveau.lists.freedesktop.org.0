@@ -2,59 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85CE182EE55
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:49:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A21D382EE4C
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:49:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A181A10E4E2;
-	Tue, 16 Jan 2024 11:47:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0525810E4FC;
+	Tue, 16 Jan 2024 11:47:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
  [IPv6:2607:f8b0:4864:20::114a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 33B9B10E336
- for <nouveau@lists.freedesktop.org>; Wed, 29 Nov 2023 06:09:08 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9FDEE10E33A
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Nov 2023 06:18:27 +0000 (UTC)
 Received: by mail-yw1-x114a.google.com with SMTP id
- 00721157ae682-5cef61289fdso63994047b3.1
- for <nouveau@lists.freedesktop.org>; Tue, 28 Nov 2023 22:09:08 -0800 (PST)
+ 00721157ae682-5cfe0b63eeeso51359737b3.0
+ for <nouveau@lists.freedesktop.org>; Tue, 28 Nov 2023 22:18:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1701238147; x=1701842947;
+ d=google.com; s=20230601; t=1701238707; x=1701843507;
  darn=lists.freedesktop.org; 
  h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
  :date:from:to:cc:subject:date:message-id:reply-to;
- bh=KtrAPaslMvSrZFznq3cpY4nyS514mOCdxUhLK1bsTtI=;
- b=fZFuFMGTHHI+2S3GkZRdB7djsxMSSARAGmJ4f/x5HADSOOrfnNL6N67bmgpQhWFZCA
- swq+Zx1zYMIlhQEa3OwqT2mSbUPzuNxSZkdPIVKqA2PJ86jV3YHRvWa7zyJoiwXXzZAM
- NVUU6A0aN1DogD2azFxUv4vTS0IKnCfvMy0aYIDvtTYpjHwOBJlrOu0/e/1EYr7rp11L
- cbsACTMlIWEBzxIPuji9npGm1ASUS2YnU0b8YnP7eicCBRdJyj4NcsBZWhhKqJ0fh40r
- J4FzYbQm5LOu+ilUCYP2JJefo364zrPFsB7vuZ4SrMaZbtO7qo2D3afM1Jav2w1B6J2P
- su3Q==
+ bh=8J4qMZXxn7dMNLyiBgKsZSJFUlenzauaBGTwqmqEkBs=;
+ b=MRCjpCW7klTyEc/eu7MlSblUjdlGeLAipB0RxGT8pVry5joDlDYm/8J6sHYpK7t73R
+ vUgkis4vBa8Vz10RScQDzQNIkCGUM4wMub1jt5jLEJFhNaj2DVzCcBJgW63mCcyxbxOM
+ MOAQi/EHjmAYwOuYZYEAwV4s4Kkl51v56U+ePUtCPbMKlfg1RYTCzMLJBjQf/Xz+XEcO
+ 36JkQMamQCWPZEDimIFc8+bafr3RgbA2xjb7/iMy+NvddwcHMTLzNTCZl0HPS2oPUw7G
+ ryqzaET91hi0W9We9WuT3gdXC6sHA6+WoJsOrPbQr9m4BJbTr62dpRuSj3NkppO5cMnX
+ 2Q6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701238147; x=1701842947;
+ d=1e100.net; s=20230601; t=1701238707; x=1701843507;
  h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
  :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=KtrAPaslMvSrZFznq3cpY4nyS514mOCdxUhLK1bsTtI=;
- b=cfp7GVx0cyGzymxxFhq02acslWCO82m3U1G3iEXH3+WAcwcznHTMiLSiwqxFhWi6Q5
- 1fhL6OvQMa5uvqcpP/xmzWuYea3kf+X/siDs6IdAT4NTIXXqMG1CIZ2h7xlFFTHdXQMZ
- ciir+H8BZM86YjUMYAoVforpFN4IJeWlhE+uJm3pRQcvoRxFrl2SNpfTJsYf+LPbDNhm
- sG0xaKUx+aMe5BtHcc5uKT1oe0tC2aybmh6yxWPkk2qm8Eurs6V7GXI34Jr3C9Qoo3uQ
- IR0TVEuynid7Mh5YmaoLja51DhwEUV66+LNHYr18a7s+h4LHWbhtpUiHO50dgmnvjHWt
- n5eA==
-X-Gm-Message-State: AOJu0YzXJM0SaN/JYIyLn1BA4j4HtoK1o5rbgcSinDOzDClhlDDJdvM1
- +PmxaoweiMlcosihiql7QkJ/iBqJskXd
-X-Google-Smtp-Source: AGHT+IErKpR33sSuZDb458AGzbTTTl+rmkeUZNxvoUYyius6/ySrcsirHg/Fcs0NR9CFHutX0EyL3PHfE3h2
+ bh=8J4qMZXxn7dMNLyiBgKsZSJFUlenzauaBGTwqmqEkBs=;
+ b=TY7qHsTzf1WU9BgDLAAV4k02J5wWtjcuC6VRTztxTJEeAEHm25sa+S+DdZ4oQP09tS
+ 7yjWqBesesNgCfvBFU5uLmHylP2eGLTre5EJ7Zbln9OCZ/Xtqog7iqwvSs5ISmY3CHmp
+ 39jHCWD7pNJlO9MEmzrsROukVKwWMTPktFzsPhqHijjcoo2/4VMhCNyStFNi82UScvrW
+ em4gvKDZJOM97i6yNCkQzgcq+DPZ5NQ9k5yOp+j6Ok/sLosv53qm5KN1yUZlJSAwhe2A
+ FQATsJn59K2yEfo9AdARsDhL+4/Lrz3eXPv9dMAMCxtU+QWtmJzQ3tWsoALpsahH3PED
+ ojdA==
+X-Gm-Message-State: AOJu0Yy6J1KPeG6k5CUL2RIFOCucuXcDhlrf0aLSPQaXSYGN46Y1b8Rp
+ 2IZmFu5DtrCEtz21jyqOD6u+Pkz8kFR8
+X-Google-Smtp-Source: AGHT+IFcUygGdfS95PQxvEDzLlpossLvNyVov+P9EiIyJqoPwhfNYT1rdzAgRP7ca8iJPDCSOmBZ7cELCldp
 X-Received: from morats.c.googlers.com ([fda3:e722:ac3:cc00:14:4d90:c0a8:d9e])
- (user=moritzf job=sendgmr) by 2002:a25:3741:0:b0:db5:2a4:aef1 with
- SMTP id
- e62-20020a253741000000b00db502a4aef1mr107973yba.13.1701238147290; Tue, 28 Nov
- 2023 22:09:07 -0800 (PST)
-Date: Wed, 29 Nov 2023 06:09:06 +0000
-In-Reply-To: <7-v1-720585788a7d+811b-iommu_fwspec_p1_jgg@nvidia.com>
+ (user=moritzf job=sendgmr) by 2002:a25:d287:0:b0:db3:8b00:22eb
+ with SMTP id
+ j129-20020a25d287000000b00db38b0022ebmr482941ybg.6.1701238706756; Tue, 28 Nov
+ 2023 22:18:26 -0800 (PST)
+Date: Wed, 29 Nov 2023 06:18:25 +0000
+In-Reply-To: <9-v1-720585788a7d+811b-iommu_fwspec_p1_jgg@nvidia.com>
 Mime-Version: 1.0
 References: <0-v1-720585788a7d+811b-iommu_fwspec_p1_jgg@nvidia.com>
- <7-v1-720585788a7d+811b-iommu_fwspec_p1_jgg@nvidia.com>
-Message-ID: <20231129060906.qti7uztsk2u7ehlp@google.com>
-Subject: Re: [PATCH 07/10] acpi: Do not return struct iommu_ops from
- acpi_iommu_configure_id()
+ <9-v1-720585788a7d+811b-iommu_fwspec_p1_jgg@nvidia.com>
+Message-ID: <20231129061825.altvhmgltws2bvhh@google.com>
+Subject: Re: [PATCH 09/10] ACPI: IORT: Cast from ULL to phys_addr_t
 From: Moritz Fischer <moritzf@google.com>
 To: Jason Gunthorpe <jgg@nvidia.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
@@ -103,112 +102,60 @@ Cc: linux-hyperv@vger.kernel.org, "Rafael J. Wysocki" <rafael@kernel.org>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Nov 28, 2023 at 08:48:03PM -0400, Jason Gunthorpe wrote:
-> Nothing needs this pointer. Return a normal error code with the usual
-> IOMMU semantic that ENODEV means 'there is no IOMMU driver'.
+On Tue, Nov 28, 2023 at 08:48:05PM -0400, Jason Gunthorpe wrote:
+> gcc on i386 (when compile testing) warns:
 
-> Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-> Reviewed-by: Jerry Snitselaar <jsnitsel@redhat.com>
-> Tested-by: Hector Martin <marcan@marcan.st>
+This is a weird test. The Makefile for drivers/acpi/arm64 is conditional
+on CONFIG_ARM64. How does this happen?
+
+> 8->8
+obj-$(CONFIG_ARM64)		+= arm64/
+> 8->8
+
+
+>   drivers/acpi/arm64/iort.c:2014:18: warning: implicit conversion  
+> from 'unsigned long long' to 'phys_addr_t' (aka 'unsigned int') changes  
+> value from 18446744073709551615 to 4294967295 [-Wconstant-conversion]
+>                             local_limit =  
+> DMA_BIT_MASK(ncomp->memory_address_limit);
+
+> Because DMA_BIT_MASK returns a large ULL constant. Explicitly truncate it
+> to phys_addr_t.
+
 > Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
 > ---
->   drivers/acpi/scan.c | 29 +++++++++++++++++------------
->   1 file changed, 17 insertions(+), 12 deletions(-)
+>   drivers/acpi/arm64/iort.c | 6 ++++--
+>   1 file changed, 4 insertions(+), 2 deletions(-)
 
-> diff --git a/drivers/acpi/scan.c b/drivers/acpi/scan.c
-> index 444a0b3c72f2d8..340ba720c72129 100644
-> --- a/drivers/acpi/scan.c
-> +++ b/drivers/acpi/scan.c
-> @@ -1562,8 +1562,7 @@ static inline const struct iommu_ops  
-> *acpi_iommu_fwspec_ops(struct device *dev)
->   	return fwspec ? fwspec->ops : NULL;
->   }
+> diff --git a/drivers/acpi/arm64/iort.c b/drivers/acpi/arm64/iort.c
+> index 6496ff5a6ba20d..bdaf9256870d92 100644
+> --- a/drivers/acpi/arm64/iort.c
+> +++ b/drivers/acpi/arm64/iort.c
+> @@ -2011,7 +2011,8 @@ phys_addr_t __init  
+> acpi_iort_dma_get_max_cpu_address(void)
 
-> -static const struct iommu_ops *acpi_iommu_configure_id(struct device  
-> *dev,
-> -						       const u32 *id_in)
-> +static int acpi_iommu_configure_id(struct device *dev, const u32 *id_in)
->   {
->   	int err;
->   	const struct iommu_ops *ops;
-> @@ -1577,7 +1576,7 @@ static const struct iommu_ops  
-> *acpi_iommu_configure_id(struct device *dev,
->   	ops = acpi_iommu_fwspec_ops(dev);
->   	if (ops) {
->   		mutex_unlock(&iommu_probe_device_lock);
-> -		return ops;
-> +		return 0;
->   	}
+>   		case ACPI_IORT_NODE_NAMED_COMPONENT:
+>   			ncomp = (struct acpi_iort_named_component *)node->node_data;
+> -			local_limit = DMA_BIT_MASK(ncomp->memory_address_limit);
+> +			local_limit = (phys_addr_t)DMA_BIT_MASK(
+> +				ncomp->memory_address_limit);
+>   			limit = min_not_zero(limit, local_limit);
+>   			break;
 
->   	err = iort_iommu_configure_id(dev, id_in);
-> @@ -1594,12 +1593,14 @@ static const struct iommu_ops  
-> *acpi_iommu_configure_id(struct device *dev,
+> @@ -2020,7 +2021,8 @@ phys_addr_t __init  
+> acpi_iort_dma_get_max_cpu_address(void)
+>   				break;
 
->   	/* Ignore all other errors apart from EPROBE_DEFER */
->   	if (err == -EPROBE_DEFER) {
-> -		return ERR_PTR(err);
-> +		return err;
->   	} else if (err) {
->   		dev_dbg(dev, "Adding to IOMMU failed: %d\n", err);
-> -		return NULL;
-> +		return -ENODEV;
->   	}
-> -	return acpi_iommu_fwspec_ops(dev);
-> +	if (!acpi_iommu_fwspec_ops(dev))
-> +		return -ENODEV;
-> +	return 0;
->   }
-
->   #else /* !CONFIG_IOMMU_API */
-> @@ -1611,10 +1612,9 @@ int acpi_iommu_fwspec_init(struct device *dev, u32  
-> id,
->   	return -ENODEV;
->   }
-
-> -static const struct iommu_ops *acpi_iommu_configure_id(struct device  
-> *dev,
-> -						       const u32 *id_in)
-> +static int acpi_iommu_configure_id(struct device *dev, const u32 *id_in)
->   {
-> -	return NULL;
-> +	return -ENODEV;
->   }
-
->   #endif /* !CONFIG_IOMMU_API */
-> @@ -1628,7 +1628,7 @@ static const struct iommu_ops  
-> *acpi_iommu_configure_id(struct device *dev,
->   int acpi_dma_configure_id(struct device *dev, enum dev_dma_attr attr,
->   			  const u32 *input_id)
->   {
-> -	const struct iommu_ops *iommu;
-> +	int ret;
-
->   	if (attr == DEV_DMA_NOT_SUPPORTED) {
->   		set_dma_ops(dev, &dma_dummy_ops);
-> @@ -1637,10 +1637,15 @@ int acpi_dma_configure_id(struct device *dev,  
-> enum dev_dma_attr attr,
-
->   	acpi_arch_dma_setup(dev);
-
-> -	iommu = acpi_iommu_configure_id(dev, input_id);
-> -	if (PTR_ERR(iommu) == -EPROBE_DEFER)
-> +	ret = acpi_iommu_configure_id(dev, input_id);
-> +	if (ret == -EPROBE_DEFER)
->   		return -EPROBE_DEFER;
-
-> +	/*
-> +	 * Historically this routine doesn't fail driver probing due to errors
-> +	 * in acpi_iommu_configure_id()
-> +	 */
-> +
->   	arch_setup_dma_ops(dev, 0, U64_MAX, attr == DEV_DMA_COHERENT);
-
->   	return 0;
+>   			rc = (struct acpi_iort_root_complex *)node->node_data;
+> -			local_limit = DMA_BIT_MASK(rc->memory_address_limit);
+> +			local_limit = (phys_addr_t)DMA_BIT_MASK(
+> +				rc->memory_address_limit);
+>   			limit = min_not_zero(limit, local_limit);
+>   			break;
+>   		}
 > --
 > 2.42.0
 
-
-Reviewed-by: Moritz Fischer <moritzf@google.com>
 
 Cheers,
 Moritz
