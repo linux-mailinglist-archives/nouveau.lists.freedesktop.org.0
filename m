@@ -2,53 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15F7A8025A9
-	for <lists+nouveau@lfdr.de>; Sun,  3 Dec 2023 17:51:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AF9F280267E
+	for <lists+nouveau@lfdr.de>; Sun,  3 Dec 2023 20:04:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4739D10E2A4;
-	Sun,  3 Dec 2023 16:51:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B1F2210E034;
+	Sun,  3 Dec 2023 19:04:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from sender4-pp-o90.zoho.com (sender4-pp-o90.zoho.com
  [136.143.188.90])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A62B910E2A4
- for <nouveau@lists.freedesktop.org>; Sun,  3 Dec 2023 16:51:53 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1701622311; cv=none; 
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B0F0810E034
+ for <nouveau@lists.freedesktop.org>; Sun,  3 Dec 2023 19:04:22 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1701630259; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=hWNWKKuRGOZ2GNeCmySNwUuIrshB0g0bsohQ9bo3N1e54Jwomu6BNbTQPY+meZFK5lTB9N9TfvWLZEHItEborog87+LgPV8i2Cf5BxeMjLeZKQPtQEunpw8Hxoy5HgFpyGS1TtRkLIzhtECCcMkuwlEDdTOqPPhNkNlGeU8z6RA=
+ b=TB7oS2KWeD8fvYXfedQrXKdxGk/RCarx53DahNrs/07SxbQ5/GLUbNTxB9zKOBHMFRX0wNlt6XgcRP/TpU8RqjklVvKrTLo8lz6wgYCzQixXxK/ZW7pfAT7p5pagbWttkELZ2wqL60jBtUMp4rW5Z3v8aU+VdBwfhaFascbOnRU=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1701622311;
- h=Content-Type:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To:Cc;
- bh=+Nw+vnLUvF+DajApC1Uv0eFgPt0IGBm/6BuG5J5LSR4=; 
- b=Xu8nFxISui2R9I0Itbhwt98EeHoE9FZCesEDFXfGif0VVx3wOi0qBoPzniipdob4kjbWvDMgnWfdHBZ6K21RTv6auir+dYFSypm6WzDfgCd/Ngix1I/8pIA2LohQukQD0DlNtuYMnserBMa5jFllREChU3ZOPr4eFNRT2gPaU6A=
+ s=zohoarc; t=1701630259;
+ h=Content-Type:Content-Transfer-Encoding:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To:Cc;
+ bh=xC4n2VmQzZedhQdl4nDZGrESJImIFD3hCAiBWMdNLno=; 
+ b=CUSDLnW3SmjBzSNVQyDA0DEVxUcm6sKfRP5VW5pYquzNqajeElrAwA9I2xVJ/QoqkqTHFuE7lwE/uV1zGV3SAjBuxYVQKnNvhOmXifwL9m9NzccHB7MO2BnuXUt1cJISkvB38EtrL9jtKPBiKaPkvmraE7K3iipZYNu2GSeZf1E=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=zoho.com;
  spf=pass  smtp.mailfrom=dufresnep@zoho.com;
  dmarc=pass header.from=<dufresnep@zoho.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1701622311; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1701630259; 
  s=zm2022; d=zoho.com; i=dufresnep@zoho.com;
- h=Date:Date:From:From:To:To:Message-Id:Message-Id:In-Reply-To:Subject:Subject:MIME-Version:Content-Type:Feedback-ID:Reply-To:Cc;
- bh=+Nw+vnLUvF+DajApC1Uv0eFgPt0IGBm/6BuG5J5LSR4=;
- b=Yj1rDEyRJ0JOPwvaDB1mDH0A2tyzJ+fIHJ7dQSwgDhuaWbb1gwQDHRgv8EO1+ulq
- 5EHhueuUPAnHQjLGOOIdARDW5VJyfXN8kV0gikXqXEaPgzHDTxOkdygN33fD4u7IdF7
- Ah2H5C4I5xnfrJ4n5c+3UcazWZ1KnNMGKt10vwaQ=
+ h=Date:Date:From:From:To:To:Message-ID:In-Reply-To:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID:Message-Id:Reply-To:Cc;
+ bh=xC4n2VmQzZedhQdl4nDZGrESJImIFD3hCAiBWMdNLno=;
+ b=KvP9SVLp7Hfn9rPaOcxBfRtUxkzQXzYcJ3bY+AlOl98BC9PKtfFPDzjmhNRUpiCh
+ 2Xb6XsPxwd6qKE+OJD+Oykum121Qk05Rx/YIlWWba4xVBBznVEQeMWBPxbm/oyUKaZc
+ 4odO26TnlY+z/X8YS2gXOdzoL0b5FnoNHAcQDB24=
 Received: from mail.zoho.com by mx.zohomail.com
- with SMTP id 1701622305113580.2214701951027;
- Sun, 3 Dec 2023 08:51:45 -0800 (PST)
+ with SMTP id 17016302524691022.4740106589879;
+ Sun, 3 Dec 2023 11:04:12 -0800 (PST)
 Received: from  [66.129.153.16] by mail.zoho.com
- with HTTP;Sun, 3 Dec 2023 08:51:45 -0800 (PST)
-Date: Sun, 03 Dec 2023 11:51:45 -0500
+ with HTTP;Sun, 3 Dec 2023 11:04:12 -0800 (PST)
+Date: Sun, 03 Dec 2023 14:04:12 -0500
 From: Paul Dufresne <dufresnep@zoho.com>
 To: "nouveau" <nouveau@lists.freedesktop.org>
-Message-Id: <18c3097d144.f5b40a2d3930.7461400275770948859@zoho.com>
+Message-ID: <18c311115a3.b63b522e4445.755018207880528406@zoho.com>
 In-Reply-To: 
 MIME-Version: 1.0
-Content-Type: multipart/alternative; 
- boundary="----=_Part_10163_773292255.1701622305092"
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 Importance: Medium
 User-Agent: Zoho Mail
 X-Mailer: Zoho Mail
-Feedback-ID: rr080112284f724fc33bc53ab4cb3d2c1400008a161cc237ed37a2bb0324bd35626e14a01e1cbd8c843f113e46:zu0801122787502089b890672248a8d15c0000361b6e9f133af681646a3ecefb780a6567aa0660e80f708a26:rf08011232ef9a02ddc135917d81d5781f00007e9c0da7f02909371733bf9c37c49ba33f975ec01b08a6da2163d81fdbcf93e829d38a8b:ZohoMail
-Subject: [Nouveau] nouveau-next stalled to august 30?
+Feedback-ID: rr080112281ec818654e073c220b2699ff0000eed200877de412202b5b60ab989104fe2f2310f0dddae1120901:zu0801122762037a569480663dcc86dd4d00007cfb97efc595d32a4452d496584063c09ee317e66e79ad9ffd:rf080112328ff2b40d0d00e7d28368efad0000ddcc8b0d5e0a6fe8ec8ad88f777d03bf124969f20bf2205ad6ed3ab1086e8941e8e5ebd9:ZohoMail
+Subject: [Nouveau] Meaning of the engines in paramaters of nouveau module
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,63 +63,56 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-------=_Part_10163_773292255.1701622305092
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+In https://nouveau.freedesktop.org/KernelModuleParameters.html, there is:
+Here is a list of engines:
+    DEVICE
+    DMAOBJ
+    PBSP
+    PCE0
+    PCE1
+    PCE2
+    PCRYPT
+    PDISP
+    PFIFO
+    PGRAPH
+    PMPEG
+    PPM
+    PPPP
+    PVP
+    SW
+Also, in debug:
+   CLIENT
 
-According to:
+I have tried to find a description of those.
+https://envytools.readthedocs.io/en/latest/
+help a bit, but I don't find a precise correlation.
 
-https://nouveau.freedesktop.org/InstallNouveau.html
+https://nouveau.freedesktop.org/NouveauTerms.html
+does not seems to have most of these terms.
 
-the project use the kernel at:
+I am particularly curious about PCE[0-3].
+But also about CLIENT, that seems different and mysterious.
 
-https://gitlab.freedesktop.org/drm/nouveau
+I wonder if it is possible to write:
+nouveau.debug=info,PDISP=debug
+to have the info debug level as the default, but for PDISP have the debug level
 
-but history shows that it stalled at August 30:
+Also, my interest is linked to the state of GPU graph given after a context switch timeout that looks like:
+[ 1696.780305] nouveau 0000:01:00.0: fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT]
+[ 1696.780361] nouveau 0000:01:00.0: fifo:000000:00[      gr]: 8006e005: busy 1 faulted 0 chsw 1 save 1 load 1 chid 5*-> chid 6 
+[ 1696.780422] nouveau 0000:01:00.0: fifo:000000:07[     ce2]: 00050005: busy 0 faulted 0 chsw 0 save 0 load 0 chid 5 -> chid 5 
+[ 1696.780476] nouveau 0000:01:00.0: fifo:000004:04[     ce0]: 00000000: busy 0 faulted 0 chsw 0 save 0 load 0 chid 0 -> chid 0 
+[ 1696.780529] nouveau 0000:01:00.0: fifo:000001:01[  mspdec]: 00000000: busy 0 faulted 0 chsw 0 save 0 load 0 chid 0 -> chid 0 
+[ 1696.780581] nouveau 0000:01:00.0: fifo:000002:02[   msppp]: 00000000: busy 0 faulted 0 chsw 0 save 0 load 0 chid 0 -> chid 0 
+[ 1696.780633] nouveau 0000:01:00.0: fifo:000003:03[   msvld]: 00000000: busy 0 faulted 0 chsw 0 save 0 load 0 chid 0 -> chid 0 
+[ 1696.780689] nouveau 0000:01:00.0: fifo:000000:00[      gr]: 8006e005: busy 1 faulted 0 chsw 1 save 1 load 1 chid 5*-> chid 6 
+[ 1696.780744] nouveau 0000:01:00.0: fifo:000000:00[      gr]: 8006e005: busy 1 faulted 0 chsw 1 save 1 load 1 chid 5*-> chid 6 
+[ 1696.780795] nouveau 0000:01:00.0: fifo:000000:00[      gr]: triggering mmu fault on 0x00
+[ 1696.780835] nouveau 0000:01:00.0: fifo:000000:07[     ce2]: 00050005: busy 0 faulted 0 chsw 0 save 0 load 0 chid 5 -> chid 5 
+[ 1696.780942] nouveau 0000:01:00.0: fifo:000000:00[      gr]: 00000100: mmu fault triggered
+[ 1696.780987] nouveau 0000:01:00.0: fifo:000000:00[      gr]: c006e005: busy 1 faulted 1 chsw 1 save 1 load 1 chid 5*-> chid 6 
+[ 1696.781040] nouveau 0000:01:00.0: fifo:000000:0005:[Renderer[13701]] rc scheduled
 
-https://gitlab.freedesktop.org/drm/nouveau/-/commits/nouveau-next
+where I suspect ce2, is linked to PCE2.
 
-because of this patch that cannot be push:
-
-https://gitlab.freedesktop.org/drm/nouveau/-/commit/775b8212e839213b335594cd5cef084d6a88a3af/pipelines?ref=nouveau-next
-
-
-
-So... I just don't understand where all the patches on this mailing list goes into which repository.
-
-
-
-BTW: https://nouveau.freedesktop.org/ shows in Software section to use:
-
-https://github.com/skeggsb/linux/
-
-but this seems to be 8 years behind.
-------=_Part_10163_773292255.1701622305092
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head>=
-<meta content=3D"text/html;charset=3DUTF-8" http-equiv=3D"Content-Type"></h=
-ead><body ><div style=3D"font-family: Verdana, Arial, Helvetica, sans-serif=
-; font-size: 10pt;"><div>According to:<br></div><div><a target=3D"_blank" h=
-ref=3D"https://nouveau.freedesktop.org/InstallNouveau.html">https://nouveau=
-.freedesktop.org/InstallNouveau.html</a><br></div><div>the project use the =
-kernel at:<br></div><div><a target=3D"_blank" href=3D"https://gitlab.freede=
-sktop.org/drm/nouveau">https://gitlab.freedesktop.org/drm/nouveau</a><br></=
-div><div>but history shows that it stalled at August 30:<br></div><div><a t=
-arget=3D"_blank" href=3D"https://gitlab.freedesktop.org/drm/nouveau/-/commi=
-ts/nouveau-next">https://gitlab.freedesktop.org/drm/nouveau/-/commits/nouve=
-au-next</a><br></div><div>because of this patch that cannot be push:<br></d=
-iv><div><a target=3D"_blank" href=3D"https://gitlab.freedesktop.org/drm/nou=
-veau/-/commit/775b8212e839213b335594cd5cef084d6a88a3af/pipelines?ref=3Dnouv=
-eau-next">https://gitlab.freedesktop.org/drm/nouveau/-/commit/775b8212e8392=
-13b335594cd5cef084d6a88a3af/pipelines?ref=3Dnouveau-next</a><br></div><div>=
-<br></div><div>So... I just don't understand where all the patches on this =
-mailing list goes into which repository.<br></div><div><br></div><div>BTW: =
-<a target=3D"_blank" href=3D"https://nouveau.freedesktop.org/">https://nouv=
-eau.freedesktop.org/</a> shows in Software section to use:<br></div><div><a=
- target=3D"_blank" href=3D"https://github.com/skeggsb/linux/">https://githu=
-b.com/skeggsb/linux/</a><br></div><div>but this seems to be 8 years behind.=
-<br></div></div><br></body></html>
-------=_Part_10163_773292255.1701622305092--
-
+Is there a documentation that describes those "engines"?
