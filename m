@@ -2,69 +2,109 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29E9B82EE34
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:48:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82F8D82EE40
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:48:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0A1D310E4D4;
+	by gabe.freedesktop.org (Postfix) with ESMTP id A560910E4E1;
 	Tue, 16 Jan 2024 11:47:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D1A9710E26E;
- Sun,  3 Dec 2023 08:12:06 +0000 (UTC)
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-27fe16e8e02so636134a91.0; 
- Sun, 03 Dec 2023 00:12:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701591126; x=1702195926; darn=lists.freedesktop.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=o/vcuqZ4fJLLKaosyQPQg2UkPXyexycK32D3E42tjTI=;
- b=m/4PW/pER7mLQMNkJy/QvGCNmGHk7EWUy3L389JH5/vfzbri0nc63TmXL4951Pnxsj
- S8Y5UHPGfm+Ssb5uA17jd7evwKIWjtM75+VQioXF+rzyBzBF+KSSICxZ6HtEgao0QR71
- ohKz1VLmMSkY43fr4sANtW0peIb69ADfPN16kSfuORHiIEivvTzk26iTbxje6ECEUgxM
- HJ0pB5C/yPLYuZSmDMpRCH9okoFtYspPg7XxXmohvZJGE3GkeQkDeE9nmlO3VEwoTufj
- 4MbXCqGsDm1//GZ9pnYXr2mJO+UPItij1wIu+P4BjXw8SyAUmAfEL6qvZ2WwkIWDcNrt
- mJyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701591126; x=1702195926;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=o/vcuqZ4fJLLKaosyQPQg2UkPXyexycK32D3E42tjTI=;
- b=tEsEvkv8MsTslBIvm4PVH2rUDW9TEyh407KGMBvTKjLcK1rlxXElq5HOvAA7N57S3a
- A6KzDDA8H5fCoDCd78drhMg66CVTu3IMN4AE2o7uBwd0gq98MJfX8tfMfqC4WA0VUfnv
- 3/Gcs62tTZRnxm+XxHtRKGMLY2XNK7ssR1nML9YH0q1kEPT4iDg/UKdUtbaYtglOAxEw
- 0xUMHJODNQGHU8C518qvl4/S9I816TQfauOH7UaqnJGcIALLOPU0xG8u5SMFRHyjhv2B
- STQvgFXrAHOWMhXgd/07oWhUQa8Ib19VwZ5SdDJRb8vMGUsB/FaS/6VlJDhKkGRfQKK8
- yrSw==
-X-Gm-Message-State: AOJu0Yzacc4ol5wXwHUOxDznajjgQI0UpSL4kfRRdodM0+1lKvF3Qs6i
- dAP2+f/CK69CZ0pFG3Fj7F0=
-X-Google-Smtp-Source: AGHT+IE6jDWJnhDlocs06VpaYFk7tPb3o8MK+SewA2ckAVy/M4/ZakP8Bj6Mei+J9VnyXmmjhg+BTQ==
-X-Received: by 2002:a17:903:2308:b0:1ce:63bf:e4c9 with SMTP id
- d8-20020a170903230800b001ce63bfe4c9mr34229294plh.0.1701591126293; 
- Sun, 03 Dec 2023 00:12:06 -0800 (PST)
-Received: from [192.168.0.152] ([103.75.161.210])
- by smtp.gmail.com with ESMTPSA id
- ay7-20020a1709028b8700b001acae9734c0sm6216064plb.266.2023.12.03.00.12.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 03 Dec 2023 00:12:05 -0800 (PST)
-Message-ID: <b5b06804-a8a1-44d9-8e85-063d2cca2f91@gmail.com>
-Date: Sun, 3 Dec 2023 13:41:59 +0530
-MIME-Version: 1.0
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04olkn0818.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0d::818])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B0C0610E14F;
+ Mon,  4 Dec 2023 09:51:30 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=gVh87JtCuiSxJ6paZO51Q/Q3xckY9rGKhzvrlGLJWZzDtb4Ffayf8eA5b8P7VujpV2apZvUFGCOFpcHA3JO2hYp5XgiqFePoRgXXbA8Y9HYH1J99DxAWsZoBRXw9OZAD7BYgcW7KLlXQW/rVkBTFifvBU2JK7V0ohlweN3IzF3Iz7vdG1XAtpzUn6e7VzTQ94g+mDEq6FGwoSb/nVEYnu4zmOEOAoIzmkiA7WaBxWZBIys+PpgbkhLNEI+GdoRwv6Kg+Q9cALFn/KieC6M/1PSGXcpVQJ2qt3oOjLev0CLWFs+nRd69YUffeXPvx+CP7oCcKb0uPLFZ+ToEJblsPXw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tSRKFeX11ALtc4DWYo74WMF4MhGRbSjv9T6obHItYqA=;
+ b=gyi1asmf5NAfUsY2GI1ScWArG9PZpo9oWBbDYxrWQOe2a3qeo4e5G7SjJv5y+hW0VqPwODm9xz2vRGGHwu35DNPChhsKwY8KlWNldxgqjMaEGw5JUhqS5+rV2ctX0LfHE1Fy5yihB5EokKhKG9MSr8hmxGeP93V/x33hjv7WoZFCOQvfKMHCFXf8aqk8pGnUENT7ahb6QSDIoOOC4b5lS6lIS+UbTYxHJCu6kNzqqbqfIUt+nXEoaIjGmAp0WC+ImbgPXtShFx538THtNH+zj3nmL/KgM/A2ANfWXXZEdonTFidQBUpM7Rvebf6+U/uMc/Rcgt35sSlTQ4mWoYwRZg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tSRKFeX11ALtc4DWYo74WMF4MhGRbSjv9T6obHItYqA=;
+ b=jVIzlvBmCcoVsxAKSjHT8M1BmQt5CqGv4OPo7QYM2VD5wwXo6v8QRFC6XQZpX7K0iS9SMkjG6w49VIjsmCxvZs162YrMm4/m9YCunbCWoMIYMcYcFheM/oHTTuE48Tb/z/xe6iMIax3ONMQasOHJ/g827E7hjxAub6wAA2GBbInURMAt6QQijmqa2toYVwnh/qoXBrr8noywlGiUJFL/J6iawHtHNbx3FJgNbhLZ0+EB63t3eeV5eO/B2plrAVJR5bBCRASekFhqoe731O1GF+fKGBT5iCEXNgYDvfr91tSAbFO+whe4O7Ve3NrJ+Rte9aBi+WN92HK3SPnNwx0JDg==
+Received: from AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:172::24)
+ by GV2PR10MB6043.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:a8::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.33; Mon, 4 Dec
+ 2023 09:51:27 +0000
+Received: from AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::1fc4:7df9:3d95:eb28]) by AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::1fc4:7df9:3d95:eb28%6]) with mapi id 15.20.7046.033; Mon, 4 Dec 2023
+ 09:51:27 +0000
+Content-Type: multipart/alternative;
+ boundary="------------HA840JhN1vZdbRgLxjXR55lP"
+Message-ID: <AM7PR10MB39235076485E2E3905F422508E86A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
+Date: Mon, 4 Dec 2023 09:51:28 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] driver: gpu: Fix warning directly dereferencing a rcu
- pointer
-To: Danilo Krummrich <dakr@redhat.com>
-References: <20231126145723.388162-1-singhabhinav9051571833@gmail.com>
- <f5a69710-f1a6-444d-9d2a-7c07589a2bdc@redhat.com>
-Content-Language: en-US
-From: Abhinav Singh <singhabhinav9051571833@gmail.com>
-In-Reply-To: <f5a69710-f1a6-444d-9d2a-7c07589a2bdc@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] Kernel problem with multiseat on one card
+To: Timur Tabi <ttabi@nvidia.com>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "bagasdotme@gmail.com" <bagasdotme@gmail.com>
+References: <AM7PR10MB39235DD53D163910E88FDB938E82A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
+ <AM7PR10MB3923E07D6024434077E95EBA8E82A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
+ <ZWsuiq7zrYS-pDli@archie.me>
+ <655a02097e9b49c2da7a2be60d7c154a48a916f4.camel@nvidia.com>
+Content-Language: nl
+From: Gert Vanhaerents <gert.vanhaerents@hotmail.com>
+In-Reply-To: <655a02097e9b49c2da7a2be60d7c154a48a916f4.camel@nvidia.com>
+X-TMN: [1DPUg5eiHiLEaNexU8zwBsbq0OqbQa3a]
+X-ClientProxiedBy: AM0PR10CA0043.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:150::23) To AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:172::24)
+X-Microsoft-Original-Message-ID: <b09af675-3d0e-447f-86e3-3a37fbe51e6d@hotmail.com>
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM7PR10MB3923:EE_|GV2PR10MB6043:EE_
+X-MS-Office365-Filtering-Correlation-Id: 69fd448a-0aed-42f2-af34-08dbf4ae9550
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: iLakt7l46XD//M7nKAmCmdyLmr+r7fr9rq1xwUJtGaZy8IoWlHGR2UPsC+IwLK58VEL5LuswvlanjRzkj0Bv33WYjgkMiVVZHtVbEv2khoXKDQz0DcwcmqDn4vW2Y0EgJcQBGdlYX4QGkB9Jf1plPbn7ZYcCwlXjEvDeDqaWYk5jbVWAkDuQtVcxwUUg/r2Eq8lOhc8SQSOlvNEygby+MtLGsdPD1Lv4D/K6dJWkX5X9rO7T/efc7dfirnQZgvXd6TAdmtnogVGgI7/6mTwYGcvg9Mt9gaRJ33y8N3dlofviXSn6TfHwz9Jzo0ECWpcyme4cTOnYK+Xk7s4IjissnjnSK5tQPqgejrEZYaqbjpK3uq8kZP+tSFjhpU0KZx5fmerNoNJaNuFCr3ByKfJdTlzwXzKm17Anw6QD6xEJamxILBuD6ORPe5WVw/K4LJPOq4MeZVTZzL5pAVJVuuQFvANmOHiUqQZ1+OhgdSNyNsLCL5C2k7T8tEDF2zCgC2G5HLJwzkBYvBMMlV574KjCAA3zdBlm19iST7NmbgWdYXAesynBHtknY70hYVrnAHs4xjuXrA826iIKym+kgLj90MlyYocYN60S4L0KdaPICEPfcc5KuwKMg3xjyqnOsb4z
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UlBXMml4MjBNZ01jalBZandaSytOa0VEMFZmVFkxTElHanNrUk1YTUlDT2c2?=
+ =?utf-8?B?V0hiQnhnM0I3djFRT0lIR1pyWFVlNHZwZVV3NDEvWW4raEFKUnd5U2NKYm4r?=
+ =?utf-8?B?WkJ0Qmw1VU9mOXo4ejBYUmVuY2MrR3BSaElUZHFJaHRKUWlSK2U5OVk2ckRM?=
+ =?utf-8?B?QktMT2x4RHgyc3k2dXRBb2JOalRLTll2RloxclZ3aHdwTVQ1K05FU2U4cUVk?=
+ =?utf-8?B?aE9ENjUwbWErOUorWVo1OS9VTkNsSHZadGRacDVmRUxFbnNyWGtEbW00Sk85?=
+ =?utf-8?B?UHUwNW9SNE9xc1EwWmcxSGlVVkVNcGY4dUFUbFY1OWRmWE5pNEt6L202MnZG?=
+ =?utf-8?B?dWpKcjJoNGxLSXVSQ2tVQVFGR1dsNGhBMmU4MnVrcEV2aUhYM2NLbDhEZjQy?=
+ =?utf-8?B?MUtjeXZoZTZlM25CaHhpUlF3NDE3WnB1RVRwVy9yL3FoNUlLYmFDei9OK0sz?=
+ =?utf-8?B?VUplZEhMYzFNVURYK1J2cndVajZ6RTBuZVdwUGR0QUFiTzlkWDNDL0dkMW9x?=
+ =?utf-8?B?MHpLd2I1YzErTTh5bjdqUE5ZWDVJcm1QeDFkMjZucVBvUFBjaFdrMTVkL3pL?=
+ =?utf-8?B?dE1vanVZeUlrSEJFaWhpSVRsamJmT0lCYnBHOEZQV2lMN2g1TEo1VFo5Q21M?=
+ =?utf-8?B?YUFVOHkwR0NCaEpCR252U0IyV2RIdUxreCtCS3VaZmxWUUpxRFB5S09Iem5D?=
+ =?utf-8?B?NFlnUUZIRlkxNVhVNy9seVJ4ckJIR3dMeTkxZk16c2tFQmFkdW9OVjVwUFlZ?=
+ =?utf-8?B?NEg3MmUxekJPbkdjeHpkN0tBRW00Z1JhdTkyeTF5dW5kT0JKTUNFM2dqeWp4?=
+ =?utf-8?B?VzN4Ym82YUdYUWZ0UjBmcTh6dEoyUVptRnZ1RktFaVpoU3VjSENiOWdqN2tk?=
+ =?utf-8?B?Q3gwQkMydDBmVHl3bTlNTjc3YVhMRmU0dGEyVHJ4VElZNlBEeWlPdFdJa2N5?=
+ =?utf-8?B?UUF2dkE5ak1RUlVyV2xmcjhEZVRIeC9Jemt0V0poSlp2dlB2ZHkyVVQrWFRa?=
+ =?utf-8?B?VmM1ZytIZkRwT01hUHE5amRvK2doYnNTcWNGdllVdHZEOHJ5ZWVaU3lRd0Zu?=
+ =?utf-8?B?aUxkMUg3ZEo2K05QMlR5TllmMXpLaVpHNEkrZDgzR0Z6c2cxZnFEc3pvWi94?=
+ =?utf-8?B?QThGN3J1bGpyNXprZnU2bzFmOTBrYXMzYmVid1BpQjFUTzhQVnQ5aWN1aTMv?=
+ =?utf-8?B?S05TakJxOWY1dzUvWEtERmIzOWkycVoyQlVMQ2l0UWtuVWtOSGJkUkZUUDBl?=
+ =?utf-8?B?REN1NUkzTkRJejJ5OVI5T1JPTDBPd1RBVVIyRXdVSU02dERldGMvQ2JNMkpa?=
+ =?utf-8?B?UzZPeXAxTFkvZytGd2x5NGVJTEhWeUdzTVJxSkdJZkZycWdNWkowVVplUk44?=
+ =?utf-8?B?Lzcrd0NmcFQrVXczVzVESmN6R2VucnpFVCtURURGQWdMbHdHazMza2dGNExF?=
+ =?utf-8?B?TFkyejlQNDk3THpWdnMxQXFoSW9NODVGTlgvL09hZjJXUmFCWFpFZE1sZkU0?=
+ =?utf-8?B?SlNwc01pRlhKL01VWEN1SHFTelJQYXRGV1VtcldTRlNFaTJ5cDZDcnJPQkZ6?=
+ =?utf-8?B?aFZZT0MwYkI0ZFA2aGpVTXpVVkoyaktiMjdpcUx5RTNPcWNpa2VqRmpZVFgy?=
+ =?utf-8?Q?C0oGomi/39Fz0D0ejFb6UVI3UutZFOF1HF6qtK13DoqY=3D?=
+X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-6b909.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 69fd448a-0aed-42f2-af34-08dbf4ae9550
+X-MS-Exchange-CrossTenant-AuthSource: AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2023 09:51:27.3764 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB6043
 X-Mailman-Approved-At: Tue, 16 Jan 2024 11:47:29 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -77,97 +117,120 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- daniel@ffwll.ch, linux-kernel-mentees@lists.linuxfoundation.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 11/30/23 05:22, Danilo Krummrich wrote:
-> Hi Abhinav,
-> 
-> Thanks for sending this follow-up patch.
-> 
-> On 11/26/23 15:57, Abhinav Singh wrote:
->> Fix a sparse warning with this message
->> "warning:dereference of noderef expression". In this context it means we
->> are dereferencing a __rcu tagged pointer directly.
->>
->> We should not be directly dereferencing a rcu pointer. To get a normal
->> (non __rcu tagged pointer) from a __rcu tagged pointer we are using the
->> function unrcu_pointer(...). The non __rcu tagged pointer then can be
->> dereferenced just like a normal pointer.
-> 
-> Can you please add a brief explanation why unrcu_pointer() is fine here?
-Is this description okay
-"The reason for using unrcu_pointer(...) instead of rcu_dereference(...)
-or rcu_dereference_protected(...) is because, before nv10_fence_emit() 
-and nv_04_fence_emit() did not add this fence to the fence context's
-pending list, thus channel doesn't need any protection" ?
-> 
->>
->> I tested with qemu with this command
->> qemu-system-x86_64 \
->>     -m 2G \
->>     -smp 2 \
->>     -kernel bzImage \
->>     -append "console=ttyS0 root=/dev/sda earlyprintk=serial 
->> net.ifnames=0" \
->>     -drive file=bullseye.img,format=raw \
->>     -net user,host=10.0.2.10,hostfwd=tcp:127.0.0.1:10021-:22 \
->>     -net nic,model=e1000 \
->>     -enable-kvm \
->>     -nographic \
->>     -pidfile vm.pid \
->>     2>&1 | tee vm.log
->> with lockdep enabled.
-> 
-> How is that relevant for this patch?
-> 
-> - Danilo
-To test rcu related code lockdep must be enabled, it gives any warning 
-or error message if we are dealing inappropriately with rcu pointers. So 
-I tested this lockdep enabled. I added the test description in this 
-patch as well 
-https://lore.kernel.org/all/0754e669-8b00-461c-b6fe-79c659bf59a3@redhat.com/ 
-which is very similar to this patch so I thought I should here as well. 
-Is it not relevant here?
+--------------HA840JhN1vZdbRgLxjXR55lP
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Thank You,
-Abhinav Singh
-> 
->>
->> Signed-off-by: Abhinav Singh <singhabhinav9051571833@gmail.com>
->> ---
->>   drivers/gpu/drm/nouveau/nv10_fence.c | 2 +-
->>   drivers/gpu/drm/nouveau/nv84_fence.c | 2 +-
->>   2 files changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/nouveau/nv10_fence.c 
->> b/drivers/gpu/drm/nouveau/nv10_fence.c
->> index c6a0db5b9e21..845b64c079ed 100644
->> --- a/drivers/gpu/drm/nouveau/nv10_fence.c
->> +++ b/drivers/gpu/drm/nouveau/nv10_fence.c
->> @@ -32,7 +32,7 @@
->>   int
->>   nv10_fence_emit(struct nouveau_fence *fence)
->>   {
->> -    struct nvif_push *push = fence->channel->chan.push;
->> +    struct nvif_push *push = unrcu_pointer(fence->channel)->chan.push;
->>       int ret = PUSH_WAIT(push, 2);
->>       if (ret == 0) {
->>           PUSH_MTHD(push, NV06E, SET_REFERENCE, fence->base.seqno);
->> diff --git a/drivers/gpu/drm/nouveau/nv84_fence.c 
->> b/drivers/gpu/drm/nouveau/nv84_fence.c
->> index 812b8c62eeba..d42e72e23dec 100644
->> --- a/drivers/gpu/drm/nouveau/nv84_fence.c
->> +++ b/drivers/gpu/drm/nouveau/nv84_fence.c
->> @@ -85,7 +85,7 @@ nv84_fence_chid(struct nouveau_channel *chan)
->>   static int
->>   nv84_fence_emit(struct nouveau_fence *fence)
->>   {
->> -    struct nouveau_channel *chan = fence->channel;
->> +    struct nouveau_channel *chan = unrcu_pointer(fence->channel);
->>       struct nv84_fence_chan *fctx = chan->fence;
->>       u64 addr = fctx->vma->addr + nv84_fence_chid(chan) * 16;
-> 
 
+Op 2/12/2023 om 16:28 schreef Timur Tabi:
+> On Sat, 2023-12-02 at 20:18 +0700, Bagas Sanjaya wrote:
+>>> When i install the proprietary Nvidia drivers, i have the following:
+>>>
+>>> [MASTER] pci:0000:08:00.0
+>>>            │ ├─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0
+>>>            │ │ [MASTER] drm:card0
+>>>            │
+>>> └─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/renderD128
+>>>            │   drm:renderD128
+>>>
+>>> ─/sys/devices/platform/efi-framebuffer.0/graphics/fb0
+>>>            │ graphics:fb0 "EFI VGA"
+>>>
+>>> So no VGA, DVI or HDMI items.
+>> Then report to the GitHub tracker [1].
+>>
+>> Thanks.
+>>
+>> [1]:https://github.com/NVIDIA/open-gpu-kernel-modules/issues
+>>
+> No, do NOT report this on the Github tracker!
+>
+> That github tracker is ONLY for bugs that occur with OpenRM (the "Open GPU
+> Kernel Module") but not with the the proprietary driver.  If you have a bug
+> with the the Nvidia proprietary driver, that must be reported on the Nvidia
+> forum instead:
+>
+> https://forums.developer.nvidia.com/c/gpu-graphics/linux/148
+
+OK  i will report it to nvidia. But with the nouveau drivers it's also 
+not working. Are you sure it's not a kernel problem?
+
+Because according to systemd it would be a kernel problem.  (personaly i 
+am also thinking it's a driver problem)
+
+--------------HA840JhN1vZdbRgLxjXR55lP
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html><html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">Op 2/12/2023 om 16:28 schreef Timur
+      Tabi:<br>
+    </div>
+    <blockquote type="cite" cite="mid:655a02097e9b49c2da7a2be60d7c154a48a916f4.camel@nvidia.com">
+      <pre class="moz-quote-pre" wrap="">On Sat, 2023-12-02 at 20:18 +0700, Bagas Sanjaya wrote:
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+      <blockquote type="cite">
+        <blockquote type="cite">
+          <pre class="moz-quote-pre" wrap="">When i install the proprietary Nvidia drivers, i have the following:
+
+[MASTER] pci:0000:08:00.0
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; │ ├─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; │ │ [MASTER] drm:card0
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; │
+└─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/renderD128
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; │&nbsp;&nbsp; drm:renderD128
+
+─/sys/devices/platform/efi-framebuffer.0/graphics/fb0
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; │ graphics:fb0 &quot;EFI VGA&quot;
+
+So no VGA, DVI or HDMI items.
+</pre>
+        </blockquote>
+        <pre class="moz-quote-pre" wrap="">
+Then report to the GitHub tracker [1].
+
+Thanks.
+
+[1]: <a class="moz-txt-link-freetext" href="https://github.com/NVIDIA/open-gpu-kernel-modules/issues">https://github.com/NVIDIA/open-gpu-kernel-modules/issues</a>
+
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+No, do NOT report this on the Github tracker!
+
+That github tracker is ONLY for bugs that occur with OpenRM (the &quot;Open GPU
+Kernel Module&quot;) but not with the the proprietary driver.  If you have a bug
+with the the Nvidia proprietary driver, that must be reported on the Nvidia
+forum instead: 
+
+<a class="moz-txt-link-freetext" href="https://forums.developer.nvidia.com/c/gpu-graphics/linux/148">https://forums.developer.nvidia.com/c/gpu-graphics/linux/148</a>
+</pre>
+    </blockquote>
+    <p>OK&nbsp; i will report it to nvidia. But with the nouveau drivers it's
+      also not working. Are you sure it's not a kernel problem? <br>
+    </p>
+    <p><span class="HwtZe" lang="en"><span class="jCAhz ChMk0b"><span class="ryNqvb">Because according to systemd it would be a
+            kernel problem.&nbsp; (personaly i am also thinking it's a driver
+            problem)<br>
+          </span></span></span></p>
+    <blockquote type="cite" cite="mid:655a02097e9b49c2da7a2be60d7c154a48a916f4.camel@nvidia.com">
+      <pre class="moz-quote-pre" wrap=""></pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------HA840JhN1vZdbRgLxjXR55lP--
