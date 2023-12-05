@@ -2,106 +2,87 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76EB782EE70
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:50:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 19AE182EE72
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:50:58 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 86E2F10E50A;
-	Tue, 16 Jan 2024 11:47:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0820510E521;
+	Tue, 16 Jan 2024 11:47:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05olkn2040.outbound.protection.outlook.com [40.92.90.40])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7E12F10E196;
- Mon,  4 Dec 2023 10:25:03 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cSp0XJVMFER4VhbzkPHrYXGgAMSW1DxNX22JFxa1A5hYiFIaj21iaWA3PE2ksWfUymHDgoGLKpL2PKECUxnO7fiR3Z8UvT3o7q8qorC3ynYkmFf2tadiDgL/AeqR5OqaR7HKHg72nAvAJAFYRFDYpmSFiM0G5fj5XAKhqo62pDuGfK7+yWR5ReV38oz8jgJi2EbdsK8QdP5nAdlp+XYP8VEUVJGuk5cvP4sG+3P7Duh5MgGKw5LVavPel6JGeK1zMDs3JSJtjElmMsK+y0/+wxxZUq0AmkpdiJ2UTISCg6OWmTRud56WrxyMhPgfCWrSLqELedEOhoOCSwGaZujuVw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7S1XkJ12r3tYiK+krXdX8A5bV5jNuPbqBXyZ46qgkd0=;
- b=nGnHyBEUsbE7r/LN/BcGJVCPmhv5OxnJ1aCN4gSgZQahQfEoyP1s0q3KSDYnt9Fv7rD1ym3SZaJxD7rVXo/vgHjIS/11obwldJ+ZmAkfrbB2nIf8b3ScWHrdCSCaEynyrkt9YnaMzPVrxJPF3jFNexAet19QfSqOvJ3GNssgXdgDDTAkvK0rHuvzStYBPUxP0pc7eX53Ju+yYzFp3N3FcgBtFVdhiri9G5yV984bkgLM+Vx8FDKJNSXxnA76aqo++jr51SuFG0dDBLkI2tDaKyXKqvVuYQiUpr73jo/z7rJYaJJdhZzsbs+E2ScOEgnTCNtevTJUlGtzByfxe/ZHKA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7S1XkJ12r3tYiK+krXdX8A5bV5jNuPbqBXyZ46qgkd0=;
- b=oMUnfWDkn9jnV89H2rz+OdZ2eu0sao2KIPcMyAUpUVef6xIG3ZPowoBdEDMkj/+2Gl2HhjfNa7vccPj7f4l6HywjH0u0m5r5d0tl08EuyPgZcd78ydK19aWWet3HY8TStl23s0AmmC3uGzbejIP7Qe0+I1Aea0F/wDuxvCsjjQmu5xa8KQMV8REOQ/6XG+m4w7xhZm/iorbvXPOdZvSau7wlxo07uE7vpJ6E1tK6GFIjvDLeGsGiulEiBoKEgDScNuXt+Gt6C7+K9H8gBV6P9nSCoXAFAnjl0Yt5Oa248Xp47QWHnxKSt+l+jUu9nYmmRPbhi9dLOsqL+e1Qxjy8uw==
-Received: from AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:172::24)
- by AS8PR10MB6844.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b6::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.33; Mon, 4 Dec
- 2023 10:25:01 +0000
-Received: from AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::1fc4:7df9:3d95:eb28]) by AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::1fc4:7df9:3d95:eb28%6]) with mapi id 15.20.7046.033; Mon, 4 Dec 2023
- 10:25:01 +0000
-Message-ID: <AM7PR10MB392310DEF1A19822E722843D8E86A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
-Date: Mon, 4 Dec 2023 11:25:00 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: Kernel problem with multiseat on one card
-Content-Language: nl
-From: Gert Vanhaerents <gert.vanhaerents@hotmail.com>
-To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux DRI Development <dri-devel@lists.freedesktop.org>,
- Linux Nouveau <nouveau@lists.freedesktop.org>
-References: <AM7PR10MB39235DD53D163910E88FDB938E82A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
- <AM7PR10MB3923E07D6024434077E95EBA8E82A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
- <ZWsuiq7zrYS-pDli@archie.me>
- <AM7PR10MB39234D1B9700492A3D10DB1C8E86A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
-In-Reply-To: <AM7PR10MB39234D1B9700492A3D10DB1C8E86A@AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-TMN: [EqRXoId7wOjnKdngLk9hTyB03hr9lLCy]
-X-ClientProxiedBy: AS4P191CA0030.EURP191.PROD.OUTLOOK.COM
- (2603:10a6:20b:5d9::16) To AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:172::24)
-X-Microsoft-Original-Message-ID: <93f79670-bc25-44fa-b829-60efb7820d72@hotmail.com>
+X-Greylist: delayed 2306 seconds by postgrey-1.36 at gabe;
+ Tue, 05 Dec 2023 13:12:20 UTC
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de
+ [80.237.130.52])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2714810E51E;
+ Tue,  5 Dec 2023 13:12:20 +0000 (UTC)
+Received: from [2a02:8108:8980:2478:8cde:aa2c:f324:937e]; authenticated
+ by wp530.webpack.hosteurope.de running ExIM with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ id 1rAUca-0002hB-L7; Tue, 05 Dec 2023 13:33:52 +0100
+Message-ID: <66bf26bf-250e-43dd-ae70-e88bb709e272@leemhuis.info>
+Date: Tue, 5 Dec 2023 13:33:52 +0100
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM7PR10MB3923:EE_|AS8PR10MB6844:EE_
-X-MS-Office365-Filtering-Correlation-Id: b17ecebc-3e71-4c38-54dc-08dbf4b34599
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: etDJT3BT74Ag4Mq1HqNubnnj3pB3VQ0lxP/y61h+MI5BMLtRLk0FpShIQiBXPH0edOfjC5qRfBuzlT2jehq9s2qgP2bvU7ZNALfaezjZhlrOMowMOy1yHjBRT4H6oNgII8gE8XagtsnSXTUrnLjqTZKL5dOIh8KYzudH7MLJTH9IuA8tFh/nMYGRQv54JjFf6YmTE26rMG0UUhRZg0FMDIeOL3BsN+Iyx3OdPJSaNjF0nwqK3uyzTH+l66vLGwiSCAHZZen/oXIdQ7IKbTJ4dE8fMifSeurplmaI7BP1j0KTK2RaBwcjcg7HjW1F9RzVbEeYOqr3APzT1k0fybJH1+daau0ru6OsCiRrWMMkpz3YtodkVxVEtDA9nB1DkrYNHQqjeKUvPUctfr2PV4wBKGRJl7i+5ffWIzvFjaX6XOtuOOygTdur1ppXWmOMEvgPsWFgSgY7VeBzQ+CQW3rXSkYXep7hsPNu8uoS+wyON939JFb2101O+MJHaapnRxOnd0fQ+k0ZpL0A93lZiZpsZ5d1Dqp+6e1HFiab0AM0WMmf1IKU0YxP/yaoyrR2C3q3opwRQ3vO7p6r1g0YoD4/XT6sZkL+2SZ+of97rBicEhY=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MkxFYk5HbVJYWjBGcWdSN1hkclBDbjY2NS9KSFB6K3hKMnJEYnlMN0k2YTBw?=
- =?utf-8?B?OFBmQWcvVWZzd1BSNy94WlpBYUl0dnlqRnpJRE01WmJMOTVFamk4aWxPOWM1?=
- =?utf-8?B?cXA5cXQ4b1FXSmFsQXVGb2tVeFI3WUNjL2dpd0VMYXNVekJINW8zSm5xa3Fv?=
- =?utf-8?B?R3RXWVk5Z2xycjFmQ3JGQmtqS3UxREdid2FwRTI0Rk05WW5NV0NKYXBSNUJ3?=
- =?utf-8?B?eStPN2JmZjQ2R1pDVm1tcHlQVHJlVVh0Z2NIUFFWdzlMT0tQbUVLazhmbVdM?=
- =?utf-8?B?ejh3UmtYTWZmNjNQZDF2MWRhNHJVY09lSXR5c1RXRmZsWFFrVjh3b0lOM1JF?=
- =?utf-8?B?R0N6WFFHQWllckJhb3U3OEgrUWo1ZFFGRE9rNFZyWFpRWU0wa2dldGlnemtv?=
- =?utf-8?B?a0RHdzZWMlhySTJhSzNLZGJCczJYNDVIY29Nd2w2ZEdBNmRlT2VTTTBQSS9Q?=
- =?utf-8?B?NXNCUW9sdFAyV1JlRUZwdHB1ZlVhaXNwMmNhaDJpODlGOWZBczZPL05CSlky?=
- =?utf-8?B?ZFZkYmFoSStzVDBRUlEyZTEybUp6K1BWVEhBY3R6NVE3Skk1cndueUFyMjdy?=
- =?utf-8?B?eFlsYzJFeTBGK3kzMzhLNHIxOGdITWs5RFJTSVUvTERZZWFMMzVNbi9ybEMv?=
- =?utf-8?B?Q0hDcW5PZ1FCaGQrODZWVGVyYkdqT3prNlhad3ErRnVhNlJ4WDZDS2VkSENC?=
- =?utf-8?B?NWZPY2p2ZXpWUVpua0QrWDlLVSsrRXc0emRkMUt4ZEFOTEtTVDkxcXBubnQy?=
- =?utf-8?B?VHNUOHNsaFBrcTJQMFJvTFVWdFVRZ1FCcFJKeld4ZldCNmVuU1N5a2ljL2x1?=
- =?utf-8?B?eFlpcEZjVys4Y1NzR3RrQi8xMlRWWGh4K2ZqSXpRREJCN0Z3bkgwSUNPdGlE?=
- =?utf-8?B?LzZ0aldSNlJHRTB2cVRDYkVHQzVjQ0IvRVg4dWZKK000L1J1VGRzL2RCVmxZ?=
- =?utf-8?B?MUFTVGdGYldHQTM0a1pHdVlLWjBIaU5GeHZlWUJOUW9NV3l0T0kxZlZSb0ty?=
- =?utf-8?B?K3pKQk9oRnRJODVXb00zVVN4T2JCNCsxVGNaSWhuQTZsdVVBZkttaDhNYXhI?=
- =?utf-8?B?ZFh6emFjUHc2TVVNR2MvVzArbVAwYnlGZmpJMy9NUkp5ZVN1cDBBUitzYjgx?=
- =?utf-8?B?Z20raFY2RTJDOUxaWE5xMTRjMjR5QjBBa1BkRmFwVnFLUCtreHd0aWRqQ0Iz?=
- =?utf-8?B?T1MwT1BmZnEwS3MrcXM1N2JBd1lPaE4vU0k0dms3VThIcG56Q1ZnRXk2YlFH?=
- =?utf-8?B?Y25NUUNaTmZTSGp4Q2lUUFhrek5PMHVqaXRiK0hJdVhDRXNwL0N5WWtBTDRF?=
- =?utf-8?B?UFlLOCtTSWJQU1lsbDRuMmM5bnNPYUV2ZldhbDdncXlaRHA2NDZFSWkvYmxB?=
- =?utf-8?B?Qngyd2hQblRWSUpiRFhEUTdEdHJLUmlTNHVMWGlDbEo5UnBzdU5CYTZoTk1a?=
- =?utf-8?B?OEpVVkxGMmlYWS9QbDFWem5PalV4eTFFdUlqME5HMTVmSjRsL08wSHRnUiti?=
- =?utf-8?B?VmFHdldURGhKcXFsSzdLS3duSUZKNkx0bTc2TTlQMHllYVBiVjVNclZKck5m?=
- =?utf-8?B?aFRuaXRkVTNubG1XQTR3ckNWeHNGS1dIbjVSVlFETm9HRTBLd2kvdzlVVC9a?=
- =?utf-8?Q?+VuSk1h665XGHemJTJWk/CctQ8oR3I8Y22PktBjIR8PY=3D?=
-X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-6b909.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: b17ecebc-3e71-4c38-54dc-08dbf4b34599
-X-MS-Exchange-CrossTenant-AuthSource: AM7PR10MB3923.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2023 10:25:00.9926 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB6844
+User-Agent: Mozilla Thunderbird
+From: Thorsten Leemhuis <linux@leemhuis.info>
+Subject: Re: [REGRESSION]: nouveau: Asynchronous wait on fence
+To: "Owen T. Heisler" <writer@owenh.net>,
+ Linux regressions mailing list <regressions@lists.linux.dev>,
+ stable@vger.kernel.org
+References: <6f027566-c841-4415-bc85-ce11a5832b14@owenh.net>
+ <5ecf0eac-a089-4da9-b76e-b45272c98393@leemhuis.info>
+ <6b7a71b4-c8a2-46f4-a995-0c63e7745ca3@owenh.net>
+ <c72ca99e-8657-4ed8-9999-5702ebeb5b8c@leemhuis.info>
+ <9bce5d00-8db6-4c8b-9817-06502492b44a@owenh.net>
+ <c1dd675d-cb3e-4c4c-8dc4-dd561ef4950b@owenh.net>
+Content-Language: en-US, de-DE
+Autocrypt: addr=linux@leemhuis.info; keydata=
+ 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 n7RI
+In-Reply-To: <c1dd675d-cb3e-4c4c-8dc4-dd561ef4950b@owenh.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1701781940;4d4b30f7;
+X-HE-SMSGID: 1rAUca-0002hB-L7
 X-Mailman-Approved-At: Tue, 16 Jan 2024 11:47:29 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -114,98 +95,48 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Karol, Lyude, and Daniel:
 
->>> Hi Kernel list,
->>> I'm the IT person of a school, earlier we used multiseatcomputers 
->>> for the
->>> school, i have maded with a XGL implementation and it works fine but 
->>> not so
->>> fantastic. The school wants that i build new computers but the XGL 
->>> project
->>> is too outdated so i can't use it anymore.
->>>
->>> How can i make a multiseatcomputer with more then one user on one 
->>> card with
->>> systemd? I have asked already to the makers of systemd but they said 
->>> it's a
->>> kernel problem.
->>>
->>> With Systemd loginctl and the nouveau drivers you have this:
->>>
->>> ─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0
->>>            │ [MASTER] drm:card0
->>>            │
->>> ├─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-DVI-D-1 
->>>
->>>            │ │ [MASTER] drm:card0-DVI-D-1
->>>            │
->>> ├─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-HDMI-A-1 
->>>
->>>            │ │ [MASTER] drm:card0-HDMI-A-1
->>>            │
->>> └─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-VGA-1 
->>>
->>>            │   [MASTER] drm:card0-VGA-1
->>> ├─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/renderD128
->>>            │ drm:renderD128
->>> ├─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/graphics/fb0
->>>            │ graphics:fb0 "nouveaudrmfb"
->>>
->>> So it will be:
->>>
->>> loginctl attach seat1 
->>> /sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-VGA-1
->>>
->>> For the seat1 (the VGA d-sub output for seat1 and the other HDMI 
->>> output for
->>> seat0) and of course the mouse and keyboard.
->>>
->>> When you do this, all the graphics outputs are on the second seat 
->>> (seat1)
->>> and not anymore on the first seat. So i need to move only the VGA 
->>> output to
->>> seat1 and not all the outputs.
->> Do you expect that GUI output is on both seats?
->
-> I want the result that i have one seat (seat0) on the VGA/D-sub output 
-> of the graphic card
->
-> a second seat (seat1) on the HDMI output of the graphic card
->
-> and a third seat (seat2) on the DVI output of the graphic card
->
-> In theory it should work with the following:
-> loginctl attach seat1 
-> /sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-HDMI-A-1
->
-> loginctl attach seat2 
-> /sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-DVI-D-1
->
-> But when i do this all the outputs will be used on seat2 (because they 
-> do all the outputs automaticly to the latest attached seat)
->
->
->>>
->>> When i install the proprietary Nvidia drivers, i have the following:
->>>
->>> [MASTER] pci:0000:08:00.0
->>>            │ 
->>> ├─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0
->>>            │ │ [MASTER] drm:card0
->>>            │
->>> └─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/renderD128
->>>            │   drm:renderD128
->>>
->>> ─/sys/devices/platform/efi-framebuffer.0/graphics/fb0
->>>            │ graphics:fb0 "EFI VGA"
->>>
->>> So no VGA, DVI or HDMI items.
->> Then report to the GitHub tracker [1].
->>
->> Thanks.
->>
->> [1]: https://github.com/NVIDIA/open-gpu-kernel-modules/issues
->>
+On 29.11.23 01:37, Owen T. Heisler wrote:
+> On 11/21/23 14:23, Owen T. Heisler wrote:
+>> On 11/21/23 09:16, Linux regression tracking (Thorsten Leemhuis) wrote:
+>>> On 15.11.23 07:19, Owen T. Heisler wrote:
+>>>> On 10/31/23 04:18, Linux regression tracking (Thorsten Leemhuis) wrote:
+>>>>> On 28.10.23 04:46, Owen T. Heisler wrote:
+>>>>>> #regzbot introduced: d386a4b54607cf6f76e23815c2c9a3abc1d66882
+>>>>>> #regzbot link:
+>>>>>> https://gitlab.freedesktop.org/drm/nouveau/-/issues/180
+>>>>>>
+>>>>>> 3. Suddenly the secondary Nvidia-connected display turns off and X
+>>>>>> stops responding to keyboard/mouse input.
+> 
+>> I am currently testing v6.6 with the culprit commit reverted.
+> 
+> - v6.6: fails
+> - v6.6 with the culprit commit reverted: works
+> 
+> See <https://gitlab.freedesktop.org/drm/nouveau/-/issues/180> for full
+> details including a decoded kernel log.
+
+Not sure about the others, but it's kind of confusing that you update
+the issue descriptions all the time and never add a comment to that ticket.
+
+Anyway: Nouveau maintainers, could any of you at least comment on this?
+Sure, it's the regression is caused by an old commit (6eaa1f3c59a707 was
+merged for v5.14-rc7) and reverting it likely is not a option, but it
+nevertheless it would be great if this could be solved somehow.
+
+Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
+--
+Everything you wanna know about Linux kernel regression tracking:
+https://linux-regtracking.leemhuis.info/about/#tldr
+If I did something stupid, please tell me, as explained on that page.
+
+#regzbot poke
+
+
