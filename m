@@ -1,44 +1,59 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B57880451F
-	for <lists+nouveau@lfdr.de>; Tue,  5 Dec 2023 03:41:14 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 81C1C804663
+	for <lists+nouveau@lfdr.de>; Tue,  5 Dec 2023 04:27:09 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AFEFE10E0EA;
-	Tue,  5 Dec 2023 02:41:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D395110E478;
+	Tue,  5 Dec 2023 03:27:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [205.139.111.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9E43610E0EA
- for <nouveau@lists.freedesktop.org>; Tue,  5 Dec 2023 02:41:09 +0000 (UTC)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-544-2mzi4511N1KI3JvboE3Xpg-1; Mon,
- 04 Dec 2023 21:41:05 -0500
-X-MC-Unique: 2mzi4511N1KI3JvboE3Xpg-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 517113C025C8;
- Tue,  5 Dec 2023 02:41:05 +0000 (UTC)
-Received: from dreadlord.lan (unknown [10.64.136.20])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 5243240C6EB9;
- Tue,  5 Dec 2023 02:41:04 +0000 (UTC)
-From: Dave Airlie <airlied@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Date: Tue,  5 Dec 2023 12:41:02 +1000
-Message-ID: <20231205024102.788908-1-airlied@gmail.com>
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 27BFE10E055
+ for <nouveau@lists.freedesktop.org>; Tue,  5 Dec 2023 03:27:04 +0000 (UTC)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-33338c67d20so2535934f8f.0
+ for <nouveau@lists.freedesktop.org>; Mon, 04 Dec 2023 19:27:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1701746822; x=1702351622; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1pVW3+okb5k3ajoiAIGpvbpEMFmIStK2BI7Et/t1t94=;
+ b=DEZlqWpPJv2CEfBJZWNMbhba4cFpyfFoTcYR36TEtQqLJfpG1G4sICA9xY6jQW11jX
+ riMDDSV0PHenkCvi1f8Cfx+LIoLuG4YzqTCrTzO85koJGjUvCWtzicMWpBD3QYLzb/wW
+ PiDvFy2pYSdchk5TurAX1LTv1HuMNqEVmJDomDIKRZcK7of9RDKezaZrJstlyXFG0isU
+ 6Bi0CNtVAyq/WvO0A+xngkjgWFLSLy2v9ovh3uyc4KeiM6IjUi79DZ42bFASi295rzV2
+ qPbr4Bv99LCEf8mdGC8Jws/lkNVRRdhw3IlDx/XavH7jAVk91ssdgYJYEiKCM2WM7Ant
+ k/YA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701746822; x=1702351622;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1pVW3+okb5k3ajoiAIGpvbpEMFmIStK2BI7Et/t1t94=;
+ b=nIrm9CpSMgXKSKMB/xqG58sH+hnPsV1UonhN89C/RLHnDOeNYpkBx2gE4gw3obiZ+B
+ P1ShMWNN05LuQUrV/jBWvJe/a534O2wbqBT5FK/EoSbrOlvY0kId+sUWRmzup/SiVON+
+ okxiqYU8TzhY1zFeC+jBU0vFU9oLuDWnaxjLiItVBU7m9a32+vsIlL9cV8aXvJvhGLyJ
+ OpQGiKmzFs0biBciGuBV5CN8hoQjAJ5ctGw4hL2ut8OewsuTfDMSgF17y4/gBNUufy0q
+ PG8R3RLnjZxnr6QJqWsJ/8zN9pm8vab8esTs8lTbiv0UApdvkaBBtlPfHlmThoBaS0/O
+ b6vw==
+X-Gm-Message-State: AOJu0Yy+ZksFFlKf3sfr6e0pmZQpnl2Ti8jYPgbYDnUnAhtpOksB2QZu
+ IJwlTlEnNJdiw0DnBLIHFyQndooQZop4Eg/HsFw=
+X-Google-Smtp-Source: AGHT+IELDX0kERz+YGkFoDNCXezdsg0e+hI6h69S7tW4rdB+ATZgQTubJkiSiCU6+Ue5NyOzJBRxBMxTB56bXFQCvfw=
+X-Received: by 2002:a5d:460b:0:b0:332:d309:a9fb with SMTP id
+ t11-20020a5d460b000000b00332d309a9fbmr4081002wrq.2.1701746822327; Mon, 04 Dec
+ 2023 19:27:02 -0800 (PST)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: gmail.com
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
-Subject: [Nouveau] [PATCH] nouveau/gsp: drop some acpi related debug
+References: <18c3097d144.f5b40a2d3930.7461400275770948859@zoho.com>
+In-Reply-To: <18c3097d144.f5b40a2d3930.7461400275770948859@zoho.com>
+From: Dave Airlie <airlied@gmail.com>
+Date: Tue, 5 Dec 2023 13:26:50 +1000
+Message-ID: <CAPM=9tzu7YGEBaMUq6wkU16Xvz7Q0NO7pHX_Kgq89vUfOcmQsQ@mail.gmail.com>
+To: Paul Dufresne <dufresnep@zoho.com>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] nouveau-next stalled to august 30?
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,70 +65,29 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org
+Cc: nouveau <nouveau@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-These were leftover debug, if we need to bring them back do so
-for debugging later.
+On Mon, 4 Dec 2023 at 02:51, Paul Dufresne <dufresnep@zoho.com> wrote:
+>
+> According to:
+> https://nouveau.freedesktop.org/InstallNouveau.html
+> the project use the kernel at:
+> https://gitlab.freedesktop.org/drm/nouveau
+> but history shows that it stalled at August 30:
+> https://gitlab.freedesktop.org/drm/nouveau/-/commits/nouveau-next
+> because of this patch that cannot be push:
+> https://gitlab.freedesktop.org/drm/nouveau/-/commit/775b8212e839213b335594cd5cef084d6a88a3af/pipelines?ref=nouveau-next
+>
+> So... I just don't understand where all the patches on this mailing list goes into which repository.
+>
+> BTW: https://nouveau.freedesktop.org/ shows in Software section to use:
+> https://github.com/skeggsb/linux/
+> but this seems to be 8 years behind.
 
-Signed-off-by: Dave Airlie <airlied@redhat.com>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 9 ---------
- 1 file changed, 9 deletions(-)
+We are just using drm-misc to stage things now, there might be
+branches outside that, but upstreaming is done via drm-misc-next and
+drm-misc-fixes.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/d=
-rm/nouveau/nvkm/subdev/gsp/r535.c
-index 6c0a8fbf0061..1dba7c49bd9a 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-@@ -1100,16 +1100,12 @@ r535_gsp_acpi_caps(acpi_handle handle, CAPS_METHOD_=
-DATA *caps)
- =09if (!obj)
- =09=09return;
-=20
--=09printk(KERN_ERR "nvop: obj type %d\n", obj->type);
--=09printk(KERN_ERR "nvop: obj len %d\n", obj->buffer.length);
--
- =09if (WARN_ON(obj->type !=3D ACPI_TYPE_BUFFER) ||
- =09    WARN_ON(obj->buffer.length !=3D 4))
- =09=09return;
-=20
- =09caps->status =3D 0;
- =09caps->optimusCaps =3D *(u32 *)obj->buffer.pointer;
--=09printk(KERN_ERR "nvop: caps %08x\n", caps->optimusCaps);
-=20
- =09ACPI_FREE(obj);
-=20
-@@ -1136,9 +1132,6 @@ r535_gsp_acpi_jt(acpi_handle handle, JT_METHOD_DATA *=
-jt)
- =09if (!obj)
- =09=09return;
-=20
--=09printk(KERN_ERR "jt: obj type %d\n", obj->type);
--=09printk(KERN_ERR "jt: obj len %d\n", obj->buffer.length);
--
- =09if (WARN_ON(obj->type !=3D ACPI_TYPE_BUFFER) ||
- =09    WARN_ON(obj->buffer.length !=3D 4))
- =09=09return;
-@@ -1147,7 +1140,6 @@ r535_gsp_acpi_jt(acpi_handle handle, JT_METHOD_DATA *=
-jt)
- =09jt->jtCaps =3D *(u32 *)obj->buffer.pointer;
- =09jt->jtRevId =3D (jt->jtCaps & 0xfff00000) >> 20;
- =09jt->bSBIOSCaps =3D 0;
--=09printk(KERN_ERR "jt: caps %08x rev:%04x\n", jt->jtCaps, jt->jtRevId);
-=20
- =09ACPI_FREE(obj);
-=20
-@@ -1233,7 +1225,6 @@ r535_gsp_acpi_dod(acpi_handle handle, DOD_METHOD_DATA=
- *dod)
- =09=09dod->acpiIdListLen +=3D sizeof(dod->acpiIdList[0]);
- =09}
-=20
--=09printk(KERN_ERR "_DOD: ok! len:%d\n", dod->acpiIdListLen);
- =09dod->status =3D 0;
- }
- #endif
---=20
-2.43.0
-
+Dave.
