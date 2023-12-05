@@ -1,45 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 165E0804467
-	for <lists+nouveau@lfdr.de>; Tue,  5 Dec 2023 03:01:14 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B57880451F
+	for <lists+nouveau@lfdr.de>; Tue,  5 Dec 2023 03:41:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 996F210E461;
-	Tue,  5 Dec 2023 02:01:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AFEFE10E0EA;
+	Tue,  5 Dec 2023 02:41:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-44.mimecast.com
  (us-smtp-delivery-44.mimecast.com [205.139.111.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7045E10E461
- for <nouveau@lists.freedesktop.org>; Tue,  5 Dec 2023 02:01:06 +0000 (UTC)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-384-DFZ8RA9BOmmUbF1YbWpbLA-1; Mon, 04 Dec 2023 21:01:03 -0500
-X-MC-Unique: DFZ8RA9BOmmUbF1YbWpbLA-1
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
- [10.11.54.9])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9E43610E0EA
+ for <nouveau@lists.freedesktop.org>; Tue,  5 Dec 2023 02:41:09 +0000 (UTC)
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-544-2mzi4511N1KI3JvboE3Xpg-1; Mon,
+ 04 Dec 2023 21:41:05 -0500
+X-MC-Unique: 2mzi4511N1KI3JvboE3Xpg-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9475C101A53B;
- Tue,  5 Dec 2023 02:01:03 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 517113C025C8;
+ Tue,  5 Dec 2023 02:41:05 +0000 (UTC)
 Received: from dreadlord.lan (unknown [10.64.136.20])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 95F10492BE0;
- Tue,  5 Dec 2023 02:01:02 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 5243240C6EB9;
+ Tue,  5 Dec 2023 02:41:04 +0000 (UTC)
 From: Dave Airlie <airlied@gmail.com>
 To: dri-devel@lists.freedesktop.org
-Date: Tue,  5 Dec 2023 12:01:01 +1000
-Message-ID: <20231205020101.746744-1-airlied@gmail.com>
+Date: Tue,  5 Dec 2023 12:41:02 +1000
+Message-ID: <20231205024102.788908-1-airlied@gmail.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.9
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: gmail.com
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
-Subject: [Nouveau] [PATCH] nouveau/gsp: drop the gsp failure message to a
- debug.
+Subject: [Nouveau] [PATCH] nouveau/gsp: drop some acpi related debug
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,39 +54,66 @@ Cc: nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
+These were leftover debug, if we need to bring them back do so
+for debugging later.
 
-These can happen in normal operations esp with auxch transactions.
-
-Gets rid of
-nouveau 0000:01:00.0: gsp: cli:0xc1d00002 obj:0x00730000 ctrl cmd:0x0073134=
-1 failed: 0x0000ffff
-in logs.
-
-Cc: Lyude <lyude@redhat.com>
 Signed-off-by: Dave Airlie <airlied@redhat.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 9 ---------
+ 1 file changed, 9 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/d=
 rm/nouveau/nvkm/subdev/gsp/r535.c
-index 72c14e7f6566..e72fe1ed0e8f 100644
+index 6c0a8fbf0061..1dba7c49bd9a 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-@@ -641,7 +641,7 @@ r535_gsp_rpc_rm_ctrl_push(struct nvkm_gsp_object *objec=
-t, void *argv, u32 repc)
- =09=09return rpc;
+@@ -1100,16 +1100,12 @@ r535_gsp_acpi_caps(acpi_handle handle, CAPS_METHOD_=
+DATA *caps)
+ =09if (!obj)
+ =09=09return;
 =20
- =09if (rpc->status) {
--=09=09nvkm_error(&gsp->subdev, "cli:0x%08x obj:0x%08x ctrl cmd:0x%08x fail=
-ed: 0x%08x\n",
-+=09=09nvkm_debug(&gsp->subdev, "cli:0x%08x obj:0x%08x ctrl cmd:0x%08x fail=
-ed: 0x%08x\n",
- =09=09=09   object->client->object.handle, object->handle, rpc->cmd, rpc->=
-status);
- =09=09ret =3D ERR_PTR(-EINVAL);
- =09} else {
+-=09printk(KERN_ERR "nvop: obj type %d\n", obj->type);
+-=09printk(KERN_ERR "nvop: obj len %d\n", obj->buffer.length);
+-
+ =09if (WARN_ON(obj->type !=3D ACPI_TYPE_BUFFER) ||
+ =09    WARN_ON(obj->buffer.length !=3D 4))
+ =09=09return;
+=20
+ =09caps->status =3D 0;
+ =09caps->optimusCaps =3D *(u32 *)obj->buffer.pointer;
+-=09printk(KERN_ERR "nvop: caps %08x\n", caps->optimusCaps);
+=20
+ =09ACPI_FREE(obj);
+=20
+@@ -1136,9 +1132,6 @@ r535_gsp_acpi_jt(acpi_handle handle, JT_METHOD_DATA *=
+jt)
+ =09if (!obj)
+ =09=09return;
+=20
+-=09printk(KERN_ERR "jt: obj type %d\n", obj->type);
+-=09printk(KERN_ERR "jt: obj len %d\n", obj->buffer.length);
+-
+ =09if (WARN_ON(obj->type !=3D ACPI_TYPE_BUFFER) ||
+ =09    WARN_ON(obj->buffer.length !=3D 4))
+ =09=09return;
+@@ -1147,7 +1140,6 @@ r535_gsp_acpi_jt(acpi_handle handle, JT_METHOD_DATA *=
+jt)
+ =09jt->jtCaps =3D *(u32 *)obj->buffer.pointer;
+ =09jt->jtRevId =3D (jt->jtCaps & 0xfff00000) >> 20;
+ =09jt->bSBIOSCaps =3D 0;
+-=09printk(KERN_ERR "jt: caps %08x rev:%04x\n", jt->jtCaps, jt->jtRevId);
+=20
+ =09ACPI_FREE(obj);
+=20
+@@ -1233,7 +1225,6 @@ r535_gsp_acpi_dod(acpi_handle handle, DOD_METHOD_DATA=
+ *dod)
+ =09=09dod->acpiIdListLen +=3D sizeof(dod->acpiIdList[0]);
+ =09}
+=20
+-=09printk(KERN_ERR "_DOD: ok! len:%d\n", dod->acpiIdListLen);
+ =09dod->status =3D 0;
+ }
+ #endif
 --=20
 2.43.0
 
