@@ -1,54 +1,49 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B04968065F6
-	for <lists+nouveau@lfdr.de>; Wed,  6 Dec 2023 05:08:50 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3440C80693A
+	for <lists+nouveau@lfdr.de>; Wed,  6 Dec 2023 09:14:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2B65E10E661;
-	Wed,  6 Dec 2023 04:08:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6FC4710E035;
+	Wed,  6 Dec 2023 08:14:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8D2DA10E661
- for <nouveau@lists.freedesktop.org>; Wed,  6 Dec 2023 04:08:43 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4SlP5y3W6mz9sbC;
- Wed,  6 Dec 2023 05:08:38 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=owenh.net; s=MBO0001; 
- t=1701835718;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9tHKdQ0J5iT5fwEMnNKTPB4w/ZnjVg983tzlHAk/F6g=;
- b=wT3khbfO9H/TaacQ5aL+cvBIYjl+eR+b35Ai0l7Vrntg74jMOx4LGb/IWaJFQPT2kLEHA4
- ToVaqsC32nBEj57aDgY04oGHzvuqkH3aKMg0NvLqXD1XjpECgvyNOp92dlRZZcK4oACUJp
- oUJwV5Pg3NsxILQaynj+Hl/UqvIEWlQttRsI7FcaNcvzw5wTLEORM/kaUZurdzIzIn11bE
- VMEyPKH/UFA7UMXdsiA7VXuepG3VU8a0ZFYS20WZikNjCWpPWS2J2cVDdENMUYtEaYKgB5
- tARo3aSKnOCfr4pWGwVHnyEBmrb1KSGxZdECdCAZvHZkS3TMHI43eWvuxTefsA==
-Message-ID: <652eec09-1942-4d29-bf90-2911d4223894@owenh.net>
-Date: Tue, 5 Dec 2023 22:08:28 -0600
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C211210E056;
+ Wed,  6 Dec 2023 08:14:49 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 1500261ACE;
+ Wed,  6 Dec 2023 08:14:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A2E6C433C8;
+ Wed,  6 Dec 2023 08:14:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1701850488;
+ bh=ECvUPXaxDahnjrvxTOPA4LHdQIbds1Vq8tr+lgMn6iU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=mJPT280Bp2c35reI7j/CneCSeRdqkP/kmmsw+yXKVPxyUpKHmpffnxPQM7dcZIZXz
+ Zb2w/vSKNoP5KE9LGE/c4UnwzOHVJXmIKVyHbSWBsES0rlCKe5NFtArhKR5TWrjevv
+ Yx3c64IOO/UWWIfJND6bhN1W/w4Gc/97gcXyVbRAwJc5Ps9uKtRPivTgAwpumBYTsb
+ ZyEBEt2AfnJj1JypKonSFVjNYV6z+ZIOoriWuCxfkCd1WgJ+5YkxdLkQixap7jf1Hy
+ pIN9FdoDM+AId0WjfyNvoXezCN0xz9Imk4b4BRwYdJIB4Z8sqFucSxiw8/PQiNY9dX
+ zu3locPC5EL8g==
+Date: Wed, 6 Dec 2023 09:14:45 +0100
+From: Maxime Ripard <mripard@kernel.org>
+To: Doug Anderson <dianders@chromium.org>
+Message-ID: <6va36dxrtvniondowm73ehuxp7pbo23bssuob7trmbq22rq4lg@ug3i7abmri3a>
+References: <20230921192749.1542462-1-dianders@chromium.org>
+ <20230921122641.RFT.v2.4.Ie7588ec6e0f93e8bc700e76b265ad1a7ad6b15ad@changeid>
+ <2f7fbd1b606b4d08b8c8c6eefff5898c8faa697c.camel@redhat.com>
+ <CAD=FV=XkeicQ3Gq4yaFtXsF7yM_7pXbpNKB56DbOwBmsEsrF_g@mail.gmail.com>
+ <CAD=FV=XDhkstFX3e2qPGeYGkFWefRMH24BjNgRujBX5PQyE6MA@mail.gmail.com>
 MIME-Version: 1.0
-To: Thorsten Leemhuis <linux@leemhuis.info>,
- Linux regressions mailing list <regressions@lists.linux.dev>,
- stable@vger.kernel.org
-References: <6f027566-c841-4415-bc85-ce11a5832b14@owenh.net>
- <5ecf0eac-a089-4da9-b76e-b45272c98393@leemhuis.info>
- <6b7a71b4-c8a2-46f4-a995-0c63e7745ca3@owenh.net>
- <c72ca99e-8657-4ed8-9999-5702ebeb5b8c@leemhuis.info>
- <9bce5d00-8db6-4c8b-9817-06502492b44a@owenh.net>
- <c1dd675d-cb3e-4c4c-8dc4-dd561ef4950b@owenh.net>
- <66bf26bf-250e-43dd-ae70-e88bb709e272@leemhuis.info>
-Content-Language: en-US
-From: "Owen T. Heisler" <writer@owenh.net>
-In-Reply-To: <66bf26bf-250e-43dd-ae70-e88bb709e272@leemhuis.info>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [REGRESSION]: nouveau: Asynchronous wait on fence
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="stsdakm3fnwfmzzj"
+Content-Disposition: inline
+In-Reply-To: <CAD=FV=XDhkstFX3e2qPGeYGkFWefRMH24BjNgRujBX5PQyE6MA@mail.gmail.com>
+Subject: Re: [Nouveau] [RFT PATCH v2 04/12] drm/nouveau: Call
+ drm_atomic_helper_shutdown() or equiv at shutdown time
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,59 +55,56 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, bskeggs@redhat.com, daniel@ffwll.ch
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Thorsten and others,
 
-On 12/5/23 06:33, Thorsten Leemhuis wrote:
-> On 29.11.23 01:37, Owen T. Heisler wrote:
->> On 11/21/23 14:23, Owen T. Heisler wrote:
->>> On 11/21/23 09:16, Linux regression tracking (Thorsten Leemhuis) wrote:
->>>> On 15.11.23 07:19, Owen T. Heisler wrote:
->>>>> On 10/31/23 04:18, Linux regression tracking (Thorsten Leemhuis) wrote:
->>>>>> On 28.10.23 04:46, Owen T. Heisler wrote:
->>>>>>> #regzbot introduced: d386a4b54607cf6f76e23815c2c9a3abc1d66882
->>>>>>> #regzbot link:
->>>>>>> https://gitlab.freedesktop.org/drm/nouveau/-/issues/180
->>>>>>>
->>>>>>> 3. Suddenly the secondary Nvidia-connected display turns off and X
->>>>>>> stops responding to keyboard/mouse input.
->>
->>> I am currently testing v6.6 with the culprit commit reverted.
->>
->> - v6.6: fails
->> - v6.6 with the culprit commit reverted: works
->>
->> See <https://gitlab.freedesktop.org/drm/nouveau/-/issues/180> for full
->> details including a decoded kernel log.
-> 
-> Not sure about the others, but it's kind of confusing that you update
-> the issue descriptions all the time and never add a comment to that ticket.
+--stsdakm3fnwfmzzj
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for the feedback; I will use comments more for future updates 
-there. I didn't know anyone was following that issue (I haven't received 
-any reply from nouveau developers on the nouveau list [1] or on gitlab 
-[2]) so I have tried to keep that issue description succinct and 
-up-to-date for anyone reading it for the first time.
+On Tue, Dec 05, 2023 at 12:45:07PM -0800, Doug Anderson wrote:
+> Hi,
+>=20
+> On Fri, Nov 17, 2023 at 3:00=E2=80=AFPM Doug Anderson <dianders@chromium.=
+org> wrote:
+> >
+> > Hi,
+> >
+> > On Fri, Sep 22, 2023 at 2:06=E2=80=AFPM Lyude Paul <lyude@redhat.com> w=
+rote:
+> > >
+> > > actually very glad to see this because I think I've seen one bug in t=
+he wild
+> > > as a result of things not getting shut down :)
+> > >
+> > > Reviewed-by: Lyude Paul <lyude@redhat.com>
+> > > Tested-by: Lyude Paul <lyude@redhat.com>
+> >
+> > Any idea of where / how this patch should land. Would you expect me to
+> > land it through drm-misc, or would you expect it to go through someone
+> > else's tree?
+>=20
+> Still hoping to find a way to land this patch, since it's been
+> reviewed and tested. Would anyone object if I landed it via drm-misc?
 
-[1]: 
-<https://lists.freedesktop.org/archives/nouveau/2022-September/041001.html>
-[2]: But Karol Herbst did add the "regression" label.
+Nouveau isn't maintained in drm-misc, so I would expect it to go through
+the usual nouveau tree. Lyude, Karol, Danilo?
 
-> Anyway: Nouveau maintainers, could any of you at least comment on this?
-> Sure, it's the regression is caused by an old commit (6eaa1f3c59a707 was
-> merged for v5.14-rc7) and reverting it likely is not a option, but it
-> nevertheless it would be great if this could be solved somehow.
+Maxime
 
-Also if anyone has any ideas about any stress-tests or anything else 
-that I might be able to trigger the crash with, please share.
+--stsdakm3fnwfmzzj
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Thanks,
-Owen
+-----BEGIN PGP SIGNATURE-----
 
---
-Owen T. Heisler
-<https://owenh.net>
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZXAtdQAKCRDj7w1vZxhR
+xRMQAQCWR+dGU9QsUAh5lhsGtHlIvbeZ8HKnfwtiDyQDjYRfmAD/cBVkFywpfJZB
+pjlMXQGCtMREy8SFYZ6QzfGK508D/A8=
+=jJKl
+-----END PGP SIGNATURE-----
+
+--stsdakm3fnwfmzzj--
