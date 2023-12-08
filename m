@@ -1,54 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40055809D06
-	for <lists+nouveau@lfdr.de>; Fri,  8 Dec 2023 08:23:22 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E2A4580A16B
+	for <lists+nouveau@lfdr.de>; Fri,  8 Dec 2023 11:47:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 50C2210E9D9;
-	Fri,  8 Dec 2023 07:23:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8ED8410EA21;
+	Fri,  8 Dec 2023 10:47:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sender4-pp-o90.zoho.com (sender4-pp-o90.zoho.com
- [136.143.188.90])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5247A10E9D9
- for <nouveau@lists.freedesktop.org>; Fri,  8 Dec 2023 07:23:19 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1702020197; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=RmnQbJsT0HJg5Ji2X6l2ZIP9b2JFUf6II/rpLK2zubBALwNykpp4j4WMFG1/hRXhm2aU1WzqqE0f9AMFv/yN3xhdcTW31Br+gIFN15KysXfAojh4dZvfL0lFDVxKWrifn6fx7h0Ylzmsxhfv44Ke3L/5gBvJgmBG/20P4eS0EIQ=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1702020197;
- h=Content-Type:Content-Transfer-Encoding:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To:Cc;
- bh=69u/obFqYQ0txPNr5c0ChfsmJT/Giqpx4aHjcidHWPM=; 
- b=YQmw1gAfHdqVBAwaB6OGJV3A0n31fnqZ2gavcVZl6xoX9Z0NpjtqfL9c3p3vaP+nbXM4puZJD7U/iS3Qz2z39GLBu6cv0ChzmX63jLtV06UOxJ7Pu26yXMpCWAOC3J4L9abWn0pBMEvNK+69fZBTUUXnXT+51Kjcq7dCspgLSos=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=zoho.com;
- spf=pass  smtp.mailfrom=dufresnep@zoho.com;
- dmarc=pass header.from=<dufresnep@zoho.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1702020197; 
- s=zm2022; d=zoho.com; i=dufresnep@zoho.com;
- h=Date:Date:From:From:To:To:Message-ID:In-Reply-To:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID:Message-Id:Reply-To:Cc;
- bh=69u/obFqYQ0txPNr5c0ChfsmJT/Giqpx4aHjcidHWPM=;
- b=ZajqfO51flKlO9rnXULA0SG6iAY7SIxazQqvKnW/wu7Tp1TBl9EEcF8tR5lek86c
- bDDgtbj8QWJH2AioIwf02Okh+TsI8LUhtGHoQAYwTD/JCYh4qNVjiVUwNcSmZxvwzoI
- 02D9buejJ4bwfSD32Cvsh0o4ZWsu0aQAWL0mFVfk=
-Received: from mail.zoho.com by mx.zohomail.com
- with SMTP id 1702020191124263.4457058642803;
- Thu, 7 Dec 2023 23:23:11 -0800 (PST)
-Received: from  [66.129.153.16] by mail.zoho.com
- with HTTP;Thu, 7 Dec 2023 23:23:11 -0800 (PST)
-Date: Fri, 08 Dec 2023 02:23:11 -0500
-From: Paul Dufresne <dufresnep@zoho.com>
-To: "nouveau" <nouveau@lists.freedesktop.org>
-Message-ID: <18c484f1384.11597f7f962762.3209073694936907261@zoho.com>
-In-Reply-To: 
-Subject: fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT]
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C952F10EA21;
+ Fri,  8 Dec 2023 10:47:01 +0000 (UTC)
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2c9c18e7990so25460171fa.2; 
+ Fri, 08 Dec 2023 02:47:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702032420; x=1702637220; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Rid1cCUMEyVF8y19rRf6254xafs3vXmofvO0HSqkkDU=;
+ b=PW3cptxxkG8MeHhULNuasc3M0l6/EP3een2/eGdxOi5aPB46il3qM3KrGUGJnOOFzS
+ URaJL3YoKNoU9JQJEHsnz7FU64g6CFQqh8kVMvCDmAE5F/ophYugQXxb/gA6UueiEI3j
+ WoxEUOQKs8naY9o5yf9WgWGsH3v5XJWAURPgFbpGIMZuKTFzTccvwvwDJtPleurVE0vi
+ 5HKY+NE/TbQYVzkUr0VNByVyBSfIcRsmEamXsE50XgNhXEaMkljjRODRJxvNyv0coiWg
+ 0NocICtnNiu5NXDeWvND+jjB2ahqZf/24MbWOguIlVIrfCn3t5kvQ5OtHruU90LfJJA0
+ 8mNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702032420; x=1702637220;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Rid1cCUMEyVF8y19rRf6254xafs3vXmofvO0HSqkkDU=;
+ b=P76iPBNFMr57hsW4Jqm0DvMiTlfgJ+l7y8pwnn9TZh48iwhX0L7MMpA8esCsPuWzgr
+ RDX+GnvYzjcBcbw9ppBK50FNFcUyVJ5IUY9UthUPj8m8jRCK2xSXUPSUzLmVrmcni7xu
+ jWfdshTMpcp+BH0ewK1Jp22pQI9nzCSxF1GHX2h0MMv0L0nGs0KKlpcAqdTXNJRbp7rp
+ TzKHnwEFOyxEJ82zp3mdhCYnB1cboRCsbJg7deI/xvEvCBdJBXyUSCfmKjkiHnp7tnVP
+ QJRD+Kh5WnGARbtoJhkS+2ZKI8DUgMETsInnAKgXMCriESgCFQhQq2/VF0ZGrqojzr70
+ xsoQ==
+X-Gm-Message-State: AOJu0YxM+8/+VYuYZ7MO9l4LBABI7Byh7bFZbAAJKcoB3vefTcZciHaP
+ rVqXIzdD65KUkF9TNQy46s4=
+X-Google-Smtp-Source: AGHT+IHGn0Atxtb+mtyw4irxA91R0XgE1uTQR5LEeSA4hwjWEuF+oLUdeLBeIVEkcv//oQAo/ET1vQ==
+X-Received: by 2002:a2e:9e46:0:b0:2ca:1282:d62a with SMTP id
+ g6-20020a2e9e46000000b002ca1282d62amr1876340ljk.93.1702032419288; 
+ Fri, 08 Dec 2023 02:46:59 -0800 (PST)
+Received: from localhost
+ (p200300e41f0fa600f22f74fffe1f3a53.dip0.t-ipconnect.de.
+ [2003:e4:1f0f:a600:f22f:74ff:fe1f:3a53])
+ by smtp.gmail.com with ESMTPSA id
+ ub27-20020a170907c81b00b00a1df4387f16sm866457ejc.95.2023.12.08.02.46.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Dec 2023 02:46:58 -0800 (PST)
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>
+Subject: [PATCH] drm/nouveau: Fixup gk20a instobj hierarchy
+Date: Fri,  8 Dec 2023 11:46:53 +0100
+Message-ID: <20231208104653.1917055-1-thierry.reding@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-Importance: Medium
-User-Agent: Zoho Mail
-X-Mailer: Zoho Mail
-Feedback-ID: rr0801122814aa8d556ab9aa9645e8290800009b6732db38bc25a9f248d3d605dd8fd5d3ff34a47226f088592d:zu08011227b2345434ae2263e8065288e500003339015d995b620d4570df1056b492544978cb940c1a19c66d:rf0801123294ea3642e673945ef85a9b910000b69e02f81c87a97ba96eaaa18fd93b220df2f51acbc4f995677495361dd9370623a1bfe3:ZohoMail
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,78 +72,110 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: linux-tegra@vger.kernel.org, nouveau@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I begin to find a way that help me investigate fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT] errors.
-See https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/-/issues/339
+From: Thierry Reding <treding@nvidia.com>
 
-I believe this affects mostly Fermi, Kepler and Maxwell1 graphic cards.
+Commit 12c9b05da918 ("drm/nouveau/imem: support allocations not
+preserved across suspend") uses container_of() to cast from struct
+nvkm_memory to struct nvkm_instobj, assuming that all instance objects
+are derived from struct nvkm_instobj. For the gk20a family that's not
+the case and they are derived from struct nvkm_memory instead. This
+causes some subtle data corruption (nvkm_instobj.preserve ends up
+mapping to gk20a_instobj.vaddr) that causes a NULL pointer dereference
+in gk20a_instobj_acquire_iommu() (and possibly elsewhere) and also
+prevents suspend/resume from working.
 
-I'd like first to describe a bit how I proceed, then talk about separating this issue in many.
+Fix this by making struct gk20a_instobj derive from struct nvkm_instobj
+instead.
 
-I am working on Gnome Debian Testing.
-This environment react well (no freeze) when programs or XWayland are killed from the error.
+Fixes: 12c9b05da918 ("drm/nouveau/imem: support allocations not preserved across suspend")
+Reported-by: Jonathan Hunter <jonathanh@nvidia.com>
+Signed-off-by: Thierry Reding <treding@nvidia.com>
+---
+Note that this was probably subtly wrong before the above-mentioned
+commit already, but I don't think we've seen any reports that would
+indicate any actual failures related to this before. So I think it's
+good enough to apply this fix for v6.7. The next closest thing would
+be commit d8e83994aaf6 ("drm/nouveau/imem: improve management of
+instance memory"), but that's 8 years old (Linux v4.3)...
+---
+ .../drm/nouveau/nvkm/subdev/instmem/gk20a.c    | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-I am using drm-misc, from: https://cgit.freedesktop.org/drm-misc/tree/
-that I got with git clone git://cgit.freedesktop.org/drm-misc/tree/
-and have compiled.
-
-my kernel command line in /etc/grub/default have:
-GRUB_CMDLINE_LINUX="pcie_aspm=off nouveau.debug=info nouveau.noaccel=0 drm.debug=0 log_buf_len=8M"
-Not sure if only me need pcie_aspm=off to remove some AER errors on PCIe bus.
-
-The first thing I do is:
-su -
-the - allows to have access to programs in /usr/sbin
-
-dmesg --console-off
-because I will generate a lot of messages, and I want them only in log files, not on console screen.
-
-I launch Firefox, most of the bugs I get by browsing the web.
-
-When ready to debug I do:
-echo 255 > /sys/module/drm/parameters/debug
-
-[At first was using 2, then 1 as suggested by /usr/sbin/modinfo drm, but then concluded 255 for all is the
- best to have all the cases that could cause the timeout]
-
-I browse the web.
-
-When Firefox stop, or everything goes away and return to the gdm (login screen), first thing I do is:
-echo 0 > /sys/modules/drm/parameters/debug
-to stop logging so much messages.
-
-Then I do:
-journalctl -b -g SCHED
-to find at which second, the CTXSW_TIMEOUT message is.
-
-Suppose it is at 08:21:14.
-journalctl -b --since 08:21:13 --until 08:21:14
-until the CTXSW_TIMEOUT is not the first line, I do it again with minus 1 sec on --since
-
-Let's say I get up to: 08:21:09:
-journalctl -b --since 08:21:09 --until 08:21:14 -o short-monotone > err.txt
-
-cp err.txt /home/paul
-mv /home/paul/err.txt /home/paul/journalctl_no1.txt
-chown paul:paul /home/paul/journalctl_no1.txt
-
-And then, as normal user paul:
-gnome-text-editor journalctl_no1.txt &
-and I search for: SCHED again...
-and I looks the lines before to try to figure out the cause of the timeout.
-
-If you take a look at: See https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/-/issues/339
-you can see that what is before vary quite a bit each time.
-I suspect there is many causes that can result in a MMU error on the GPU and so cause a timeout.
-
-There is the possibility of a non-related memory corruption... I suppose.
-But if not, it would make some sense to open a different issue for each different things happening before the timeout message.
-
-Not sure, if is is really the good thing to do. So in part why I am writing this message to ask opinion(s).
-
-
-
-
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c
+index 1b811d6972a1..201022ae9214 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/gk20a.c
+@@ -49,14 +49,14 @@
+ #include <subdev/mmu.h>
+ 
+ struct gk20a_instobj {
+-	struct nvkm_memory memory;
++	struct nvkm_instobj base;
+ 	struct nvkm_mm_node *mn;
+ 	struct gk20a_instmem *imem;
+ 
+ 	/* CPU mapping */
+ 	u32 *vaddr;
+ };
+-#define gk20a_instobj(p) container_of((p), struct gk20a_instobj, memory)
++#define gk20a_instobj(p) container_of((p), struct gk20a_instobj, base.memory)
+ 
+ /*
+  * Used for objects allocated using the DMA API
+@@ -148,7 +148,7 @@ gk20a_instobj_iommu_recycle_vaddr(struct gk20a_instobj_iommu *obj)
+ 	list_del(&obj->vaddr_node);
+ 	vunmap(obj->base.vaddr);
+ 	obj->base.vaddr = NULL;
+-	imem->vaddr_use -= nvkm_memory_size(&obj->base.memory);
++	imem->vaddr_use -= nvkm_memory_size(&obj->base.base.memory);
+ 	nvkm_debug(&imem->base.subdev, "vaddr used: %x/%x\n", imem->vaddr_use,
+ 		   imem->vaddr_max);
+ }
+@@ -283,7 +283,7 @@ gk20a_instobj_map(struct nvkm_memory *memory, u64 offset, struct nvkm_vmm *vmm,
+ {
+ 	struct gk20a_instobj *node = gk20a_instobj(memory);
+ 	struct nvkm_vmm_map map = {
+-		.memory = &node->memory,
++		.memory = &node->base.memory,
+ 		.offset = offset,
+ 		.mem = node->mn,
+ 	};
+@@ -391,8 +391,8 @@ gk20a_instobj_ctor_dma(struct gk20a_instmem *imem, u32 npages, u32 align,
+ 		return -ENOMEM;
+ 	*_node = &node->base;
+ 
+-	nvkm_memory_ctor(&gk20a_instobj_func_dma, &node->base.memory);
+-	node->base.memory.ptrs = &gk20a_instobj_ptrs;
++	nvkm_memory_ctor(&gk20a_instobj_func_dma, &node->base.base.memory);
++	node->base.base.memory.ptrs = &gk20a_instobj_ptrs;
+ 
+ 	node->base.vaddr = dma_alloc_attrs(dev, npages << PAGE_SHIFT,
+ 					   &node->handle, GFP_KERNEL,
+@@ -438,8 +438,8 @@ gk20a_instobj_ctor_iommu(struct gk20a_instmem *imem, u32 npages, u32 align,
+ 	*_node = &node->base;
+ 	node->dma_addrs = (void *)(node->pages + npages);
+ 
+-	nvkm_memory_ctor(&gk20a_instobj_func_iommu, &node->base.memory);
+-	node->base.memory.ptrs = &gk20a_instobj_ptrs;
++	nvkm_memory_ctor(&gk20a_instobj_func_iommu, &node->base.base.memory);
++	node->base.base.memory.ptrs = &gk20a_instobj_ptrs;
+ 
+ 	/* Allocate backing memory */
+ 	for (i = 0; i < npages; i++) {
+@@ -533,7 +533,7 @@ gk20a_instobj_new(struct nvkm_instmem *base, u32 size, u32 align, bool zero,
+ 	else
+ 		ret = gk20a_instobj_ctor_dma(imem, size >> PAGE_SHIFT,
+ 					     align, &node);
+-	*pmemory = node ? &node->memory : NULL;
++	*pmemory = node ? &node->base.memory : NULL;
+ 	if (ret)
+ 		return ret;
+ 
+-- 
+2.43.0
 
