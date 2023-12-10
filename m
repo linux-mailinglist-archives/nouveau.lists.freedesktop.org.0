@@ -2,54 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C60E80B502
-	for <lists+nouveau@lfdr.de>; Sat,  9 Dec 2023 16:16:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6140580B960
+	for <lists+nouveau@lfdr.de>; Sun, 10 Dec 2023 07:40:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9562610E15F;
-	Sat,  9 Dec 2023 15:16:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8DFAE10E0FA;
+	Sun, 10 Dec 2023 06:40:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sender4-pp-o90.zoho.com (sender4-pp-o90.zoho.com
- [136.143.188.90])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2C1B010E15F
- for <nouveau@lists.freedesktop.org>; Sat,  9 Dec 2023 15:16:14 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1702134971; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=KPAiKe1SP9TpEGT2QuXImB1Fefhy3cKbYnZ0kOZjJv0lGhxmbl6yTN4Ww1U5T3C3pV17GSmUZv8Br/eqNB48AFtMqyuEpf+rP6oZ0tv49dveC/xly4bLpHeK1R+w7M5n3wExI9lkz6a6J3daloMQZtLjCvFNhM0yGWnZLJ5cIcY=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1702134971;
- h=Content-Type:Content-Transfer-Encoding:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To:Cc;
- bh=LG4VKu04y6GwnKOYSBb/+9d2KxO8vRINGvrJEMKTUoE=; 
- b=dhDnI8xdiZd8M+4QvAquCK8OMQ2RW0hHXmTTAG9Y1h0yJG92CBlA8Dvwfm4smAmLuPiFkbP5Vd7GJ0PvQiStWVIPboPLf3pwKTlCrM6JhBURGHAJXWGeETGG4Qorsx4XvnPvxbH4Mb6Jb18WsTh9QpXBNP6aKj7AEy0jMGoDzr0=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=zoho.com;
- spf=pass  smtp.mailfrom=dufresnep@zoho.com;
- dmarc=pass header.from=<dufresnep@zoho.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1702134971; 
- s=zm2022; d=zoho.com; i=dufresnep@zoho.com;
- h=Date:Date:From:From:To:To:Message-ID:In-Reply-To:References:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID:Message-Id:Reply-To:Cc;
- bh=LG4VKu04y6GwnKOYSBb/+9d2KxO8vRINGvrJEMKTUoE=;
- b=PZJcXt9dICpwHQGqnho9riL88dCUCeZdLFn//DFAOM4fiNHWkbcLpFMtcQxWMjBA
- kqcLZofidVTIHptXA9m1gnhRB1swpb4m//xq2Bm2LEYrWt1wzUGOg993YpfA8MARjae
- DiATpICb1afWEeH4+Q+PUMTkVWaIZNT3wZQMwLbc=
-Received: from mail.zoho.com by mx.zohomail.com
- with SMTP id 1702134964384433.3117820403917;
- Sat, 9 Dec 2023 07:16:04 -0800 (PST)
-Received: from  [66.129.153.16] by mail.zoho.com
- with HTTP;Sat, 9 Dec 2023 07:16:04 -0800 (PST)
-Date: Sat, 09 Dec 2023 10:16:04 -0500
-From: Paul Dufresne <dufresnep@zoho.com>
-To: "nouveau" <nouveau@lists.freedesktop.org>
-Message-ID: <18c4f26608f.ff996d4011046.2126342314715462323@zoho.com>
-In-Reply-To: <18c484f1384.11597f7f962762.3209073694936907261@zoho.com>
-References: <18c484f1384.11597f7f962762.3209073694936907261@zoho.com>
-Subject: =?UTF-8?Q?R=C3=A9=C2=A0:_fifo:_SCHED=5FERROR_0a_[CTXSW=5FTIMEOUT]?=
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CF08310E0F2;
+ Sun, 10 Dec 2023 06:40:41 +0000 (UTC)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-7b7020f03c9so128399939f.3; 
+ Sat, 09 Dec 2023 22:40:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702190441; x=1702795241; darn=lists.freedesktop.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zwGRPrCoVtYtP/8YMKF8dl0aRzTIJ031wO80hG9EGz4=;
+ b=fDEZvxr2hOI/gOavDMWOYL2xKfecjDubsTfQBSHYPtpewdNT6sJlwrM2EnnsyAO0Vf
+ rcsBedHNp0faTEw03o8zoxryfWllziCIp7KRPBD1Ouo5EP6TjZyPQ4Bp3KuOIB7Nb5PY
+ PDu5iKH/c9qn89qWYyWZwdvYYafc8VhwSOTbggyRMy76BEb64S0u3P+GxdbIrNXrJ1DS
+ 0ttitWNsCnO0UXvM5gy6FFiuiPKxjlhEbrSLdwVdh/zN2XqOqD5AFD04nHXBBCmTOVJb
+ 9lDZk5CioyY9FUAwFXeE+1HPyzVppKK5wjk9wTW2oaC2EB92E1p2TRwJpH72Y+Nj5Ajx
+ 41Gg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702190441; x=1702795241;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zwGRPrCoVtYtP/8YMKF8dl0aRzTIJ031wO80hG9EGz4=;
+ b=JOxJujageFuEJbqE9cRbG2QugUfhJC1xnc1j1Xb577F2PYN5B/to0sL+p+0PYQD94h
+ N5Vub/h0aNXUowNs9MozGtKjlPl/ZrW3HhUVUexIaiRdx3qKjko4HqvQPVxlLWiAzwDR
+ RlmPMTEMsiXV7oKqtRHs9eXjYzPZBkIGVI/buu45rN1IJTmWeBktT5VqmxDRhggwiclr
+ p7KhFVK5Nx8yVj6J3YudjifNJLYW4en5EwEhgpzwMwR+xwDkLy6pLJbX0zbFUNkVcdfk
+ QagY72qfmbBACqYmxn6AR43TskKgJn93CZesdZsddqN7z08hfi+SxCWEsV7MXJfMyq1m
+ Qx0g==
+X-Gm-Message-State: AOJu0Ywrp9yvTBChTpiPt/sgchYzhs49rKkWupDEGuXyy3+c7Aa+UfQX
+ YWzYI97mFAItWynji9ol8gY=
+X-Google-Smtp-Source: AGHT+IEifI7MN9YJEI6ra1cirsdo98LCVrV8vcB+XW9ZnTq3rQ1rfTw/up67VZJZuVnTYrJKhUmycg==
+X-Received: by 2002:a05:6e02:1809:b0:35d:59a2:68f8 with SMTP id
+ a9-20020a056e02180900b0035d59a268f8mr4041390ilv.37.1702190440961; 
+ Sat, 09 Dec 2023 22:40:40 -0800 (PST)
+Received: from archie.me ([103.131.18.64]) by smtp.gmail.com with ESMTPSA id
+ r12-20020a6560cc000000b005bdd8dcfe19sm3522368pgv.10.2023.12.09.22.40.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 09 Dec 2023 22:40:39 -0800 (PST)
+Received: by archie.me (Postfix, from userid 1000)
+ id 6581B1021255E; Sun, 10 Dec 2023 13:40:36 +0700 (WIB)
+Date: Sun, 10 Dec 2023 13:40:36 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux Regressions <regressions@lists.linux.dev>,
+ Linux Memory Management List <linux-mm@kvack.org>,
+ Linux DRI Development <dri-devel@lists.freedesktop.org>,
+ Linux Nouveau <nouveau@lists.freedesktop.org>
+Subject: Re: Fwd: Kernel 6.6.1 hangs on "loading initial ramdisk"
+Message-ID: <ZXVdZE3D-KFBqPnj@archie.me>
+References: <9057d7de-f2e0-44ba-bec7-8b0861b2a850@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-Importance: Medium
-User-Agent: Zoho Mail
-X-Mailer: Zoho Mail
-Feedback-ID: rr08011228544a8270287eee17bab4a30000008135cc679cbb1594a43f7b8c505b1d883bd37e03f1d5769c5bb4:zu080112271f2d87225325ef6538b8c93300002a1b5a2049e1bf72d41daf98471d6753881a7040c264e40f47:rf08011231961e27ebdf432672ef2b56ad0000421b4288e208182735f3f5c3dd263a001fe6d1dcf81a22a4687a3802825fe2aa1d7dc6:ZohoMail
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="gXx8QI5a8w8OQ7EJ"
+Content-Disposition: inline
+In-Reply-To: <9057d7de-f2e0-44ba-bec7-8b0861b2a850@gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,20 +77,88 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: Christian Brauner <brauner@kernel.org>, River <shibedrill1@gmail.com>,
+ Randy Dunlap <rdunlap@infradead.org>, Borislav Petkov <bp@alien8.de>,
+ Andrew Morton <akpm@linux-foundation.org>, Ard Biesheuvel <ardb@kernel.org>,
+ Mike Rapoport <rppt@kernel.org>, bwg <whirl@mniotilta.ca>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I said:
- > When Firefox stop, or everything goes away and return to the gdm (login screen), first thing I do is: 
- > echo 0 > /sys/modules/drm/parameters/debug 
- > to stop logging so much messages. 
- >  
-It is better to reboot using nouveau.noaccel=1 on the linux line when a bug arrive.
-That way, the system is much more stable during investigation and report.
 
-Is you cannot 'systemctl reboot', you might:
-Alt-PrintScreen (a.k.a. Magic SysReq) s  to Synchronize
-Alt-PrintScreen u to Unmount
-Alt-PrintScreen b to reBoot
+--gXx8QI5a8w8OQ7EJ
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-After reboot, use -b -1 on the command line rather than -b, to access previous boot session.
+On Wed, Nov 22, 2023 at 07:06:50AM +0700, Bagas Sanjaya wrote:
+> Hi,
+>=20
+> I notice a regression report on Bugzilla [1]. Quoting from it:
+>=20
+> > After upgrading from 6.5.9 to 6.6.1 on my Dell Latitude E6420 (Intel i5=
+-2520M) with EndeavourOS, the boot process would hang at "loading initial r=
+amdisk". The issue is present on the 6.6.1 release of both Linux and Linux-=
+zen, but not the 6.5.9 release, which makes me think this is somehow upstre=
+am in the kernel, rather than to do with packaging. My current workaround i=
+s using the Linux LTS kernel.
+> >=20
+> > I have been unable to consistently reproduce this bug. Between 50 and 3=
+0 percent of the time, the "loading initial ramdisk" will display, the disk=
+ activity indicator will turn off briefly and then resume blinking, and the=
+n the kernel boots as expected. The other 50 to 70 percent of the time, the=
+ boot stops at "loading initial ramdisk" and the disk activity indicator tu=
+rns off, and does not resume blinking. The disk activity light is constantl=
+y flashing during normal system operation, so I know it's not secretly boot=
+ing but not updating the display. I haven't been able to replicate this iss=
+ue in QEMU. I have seen similar bugs that have been solved by disabling IOM=
+MU, but this has not had any effect. Neither has disabling graphics drivers=
+ and modesetting. I have been able to reproduce it while using Nouveau, so =
+I don't believe it has to do with Nvidia's proprietary drivers.
+> >=20
+> > Examining dmesg and journalctl, there doesn't appear to be ANY logs fro=
+m the failed boots. I don't believe the kernel even is started on these fai=
+led boots. Enabling GRUB debug messages (linux,loader,init,fs,device,disk,p=
+artition) shows that the hang occurs after GRUB attempts to start the loade=
+d image- it's able to load the image into memory, but the boot stalls after=
+ "Starting image" with a hex address (presumably the start addr of the kern=
+el). =20
+> >=20
+> > I've been trying to compile the kernel myself to see if I can solve the=
+ issue, or at least aid in reproduceability, but this is not easy or fast t=
+o do on a 2012 i5 processor. I'll update if I can successfully recompile th=
+e kernel and if it yields any information. =20
+> >=20
+> > Please let me know if I should provide any additional information. This=
+ is my first time filing a bug here.
+>=20
+> See Bugzilla for the full thread and attached grub output.
+>=20
+> Anyway, I'm adding this regression to regzbot:
+>=20
+> #regzbot introduced: v6.5..v6.6 https://bugzilla.kernel.org/show_bug.cgi?=
+id=3D218173
+> #regzbot title: initramfs loading hang on nouveau system (Dell Latitude E=
+6420)
+>=20
+
+Another reporter on Bugzilla had bisected the regression, so:
+
+#regzbot introduced: a1b87d54f4e45f
+
+Thanks.
+
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--gXx8QI5a8w8OQ7EJ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCZXVdYAAKCRD2uYlJVVFO
+o7pFAP9pEeG9YYfrU018mAj4G3ZZwP4KRlBl3jIY8I/6/oQCSgEAoSNNgg6UoN4V
+UwYNKa6CBSB8/Ylo9b3GxsN9zH+kjQ0=
+=g92L
+-----END PGP SIGNATURE-----
+
+--gXx8QI5a8w8OQ7EJ--
