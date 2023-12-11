@@ -1,45 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4321080CC78
-	for <lists+nouveau@lfdr.de>; Mon, 11 Dec 2023 15:01:54 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E47380CC9B
+	for <lists+nouveau@lfdr.de>; Mon, 11 Dec 2023 15:02:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8B14410E40A;
-	Mon, 11 Dec 2023 14:01:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 96EC110E454;
+	Mon, 11 Dec 2023 14:02:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2E36510E0FC;
- Mon, 11 Dec 2023 14:01:50 +0000 (UTC)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AF01A10E454;
+ Mon, 11 Dec 2023 14:02:43 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A89CB612AC;
- Mon, 11 Dec 2023 14:01:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E38C8C433C7;
- Mon, 11 Dec 2023 14:01:47 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTP id 45092B80E61;
+ Mon, 11 Dec 2023 14:02:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E86A6C433C8;
+ Mon, 11 Dec 2023 14:02:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1702303309;
- bh=GeLieXMdTEPp3y1zHXzWOaEk7VsGXiSBemRxR4+gZic=;
+ s=k20201202; t=1702303361;
+ bh=dwADcyDW2WetwqIR+D9TN1Bko6rQzL3C8eVoG+twuIM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=aUGMiQnt1Wda6asgAbSvHLa1BCbJTBoGCurkxLoYLMQ+iLFq5vqcVvdBF6nLzPskZ
- sj/o0YcsS+6Gll06WlrvwgkGqR3NRj48iVXPd2GXBVbLgD1WDYcDVN5fLii8P5a9us
- //yPcoIxdyXlBVlAtbroQDkdlQw5/S+nIlzc88cxmk1VSovJ+aph8HHuRfj80+kR1X
- HMEUurR9E50jp2D6w6aCcOHgN8cggRysNyCrKsh5pI94STNeV8x+JWE6N0bSjmX5MM
- 3CUPDKzDJdsbq52t0Kdpmaia361cbJOna4cRhXjQvx5agVCgI0OwNjNUWRvW6z7GUZ
- rjPnwGVFvFNxw==
+ b=ou+HrEbRml9VFOMv2ULe/9Mmm7HNDGvmaEz2TAX/ujlWUf2PpL1sjJkgjXLX5g8kc
+ z6ZozXwFsDoJrwRVEAyVIZXri0iVgJRcyq89BIIPGsiok3exLmcplzWWE58fPSNvJO
+ NHgGQNYFQ1nE+vWMOrtFZ19TA98lYnA9tcCgCHHCYB6ZsUOZLpk6DKJvmm2vEfZvpz
+ n43QPgJln4hOoi5G2XIdyYsLJ3FQYwURe7N3gRVffyVngSJGIkNykYd5b9e1InGjfs
+ PXZ2uqih42ykbu7MTWC9fzh1iYoEJEji+CsczFQfUPtg7hOSYs8pZQjx1Pt+cDRbQ1
+ xZSd7fKrC7Jxw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.10 09/16] nouveau/tu102: flush all pdbs on vmm flush
-Date: Mon, 11 Dec 2023 09:00:33 -0500
-Message-ID: <20231211140116.391986-9-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.4 07/12] nouveau/tu102: flush all pdbs on vmm flush
+Date: Mon, 11 Dec 2023 09:02:00 -0500
+Message-ID: <20231211140219.392379-7-sashal@kernel.org>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231211140116.391986-1-sashal@kernel.org>
-References: <20231211140116.391986-1-sashal@kernel.org>
+In-Reply-To: <20231211140219.392379-1-sashal@kernel.org>
+References: <20231211140219.392379-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 5.10.203
+X-stable-base: Linux 5.4.263
 Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -76,12 +76,12 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
-index b1294d0076c08..72449bf613bf1 100644
+index be91cffc3b52a..315000b2f8e3e 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
 @@ -32,7 +32,7 @@ tu102_vmm_flush(struct nvkm_vmm *vmm, int depth)
  
- 	type |= 0x00000001; /* PAGE_ALL */
+ 	type = 0x00000001; /* PAGE_ALL */
  	if (atomic_read(&vmm->engref[NVKM_SUBDEV_BAR]))
 -		type |= 0x00000004; /* HUB_ONLY */
 +		type |= 0x00000006; /* HUB_ONLY | ALL PDB (hack) */
