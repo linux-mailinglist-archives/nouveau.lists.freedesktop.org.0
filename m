@@ -1,45 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F360B80CBEB
-	for <lists+nouveau@lfdr.de>; Mon, 11 Dec 2023 14:55:51 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 485D080CC51
+	for <lists+nouveau@lfdr.de>; Mon, 11 Dec 2023 15:00:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 32AA810E42D;
-	Mon, 11 Dec 2023 13:55:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7433710E460;
+	Mon, 11 Dec 2023 14:00:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 71A4610E41A;
- Mon, 11 Dec 2023 13:55:45 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2720D10E43D;
+ Mon, 11 Dec 2023 14:00:02 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id DDC7E6123C;
- Mon, 11 Dec 2023 13:55:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F037C433CC;
- Mon, 11 Dec 2023 13:55:43 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 84308612AC;
+ Mon, 11 Dec 2023 14:00:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5AA8C433C7;
+ Mon, 11 Dec 2023 13:59:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1702302944;
+ s=k20201202; t=1702303201;
  bh=Z4zFiJy8nVOqQvwvU48WTvdbUM9MltSNX1w9qcMnUeU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=jPb+mGFqgCqBXZeAWYED8WF5ytJBtR1L0OSIO0Neq+wjAJwKMNBpfh3jS0ihwCgd4
- C72PqJbN7chu5Bs4YNMg/NncPChX2hFukhLt+2XxMPZ8Xa8zW2eHDHeXw+p62z6crI
- yHA2KNsNO2299tmn/NXS4yCVd1MBIj4qeGZhqvaBo5P3M+TI+FI/SXyHrZ+d+xyoke
- RtQfipAgfV0HuATpGuOR8Zow4CsTX/LH8mvNrL+9rEAniKI9XBsyTK8pwqHDd9Yflh
- Dx2wIOYQ6VhW0bBA3ex1JMqkOi1MiklPCeeSrj2/gqOjpOpysHL3u84FYXGSMjiK05
- 3A4Z3GztBTexw==
+ b=DCOd6P5K/KzVXOR7bragkvYZLTfwnsrl7Edz0EQ5dwNG899bMBKbyUOVqJB1UqX2L
+ Y1tdv13kcPS9A4pKc1Z8LoRgF+vERQ9289HcjvoxZUb2qbsiR/dHLSMAEya+sLITck
+ LugL1+sAEGXhtVvcDJFIMxRt3aq+AyQIlLLZBQMyiY6rtFLr0fMqyiSdJR/7v2AdBK
+ LAUegGclr3N2TtcpsSJ8P0WZ3cLGNxNc5XeTakAiWAn3cCdoO5F6vmaBlf2/sXd1q2
+ KQdsr9+gYSkZtUJQWeQ2CN7IwhJgb3vara+WHh9m2vAvTl57hhKfz3NLwwjK/B56CP
+ wxnQdr1KC2AUw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.1 13/29] nouveau/tu102: flush all pdbs on vmm flush
-Date: Mon, 11 Dec 2023 08:53:57 -0500
-Message-ID: <20231211135457.381397-13-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.15 09/19] nouveau/tu102: flush all pdbs on vmm flush
+Date: Mon, 11 Dec 2023 08:57:43 -0500
+Message-ID: <20231211135908.385694-9-sashal@kernel.org>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231211135457.381397-1-sashal@kernel.org>
-References: <20231211135457.381397-1-sashal@kernel.org>
+In-Reply-To: <20231211135908.385694-1-sashal@kernel.org>
+References: <20231211135908.385694-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.1.66
+X-stable-base: Linux 5.15.142
 Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
