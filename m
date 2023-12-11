@@ -2,36 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7446F80C2E9
-	for <lists+nouveau@lfdr.de>; Mon, 11 Dec 2023 09:19:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2792B80CB7E
+	for <lists+nouveau@lfdr.de>; Mon, 11 Dec 2023 14:52:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4C37C10E350;
-	Mon, 11 Dec 2023 08:19:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 41B1710E3EF;
+	Mon, 11 Dec 2023 13:52:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de
- [80.237.130.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 62B9010E350
- for <nouveau@lists.freedesktop.org>; Mon, 11 Dec 2023 08:19:24 +0000 (UTC)
-Received: from [2a02:8108:8980:2478:8cde:aa2c:f324:937e]; authenticated
- by wp530.webpack.hosteurope.de running ExIM with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
- id 1rCbVa-0003vM-TW; Mon, 11 Dec 2023 09:19:22 +0100
-Message-ID: <e27cb00e-ee44-4c1a-b738-17c3b15fb99f@leemhuis.info>
-Date: Mon, 11 Dec 2023 09:19:22 +0100
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 91F9310E3EF;
+ Mon, 11 Dec 2023 13:52:47 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 0F240CE1265;
+ Mon, 11 Dec 2023 13:52:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C8479C433C7;
+ Mon, 11 Dec 2023 13:52:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1702302764;
+ bh=Z4zFiJy8nVOqQvwvU48WTvdbUM9MltSNX1w9qcMnUeU=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Y3MOLufTBcFy5IJPKYIEmGGxlqaX+f8/BbOD7N/vEMotV90qbFIi05sVDkUOpai/5
+ FbMDMongn800zVzXonIvOfBvqxHPDar1oV6T2WtSNVgyxNYn8hTcFcz+ov7pS4BzRn
+ 5wsoXYiKH83svg+RPWoZvYDQDew6IJLh7pOAmr1LCOJwPjFr3XITu2K8BpUTUCSw0Y
+ PcO3G733rgdNBJGEqiS9Gt33a3shHXbqa3NmH5bfw+X3Uh5TiDJxNxcuThpcwlYwK0
+ YfenhsG2/8+SL2vNAX9kYH6pWlmEJBaPwr5VPJm1lnLU5smyZ4a/7ymiq6Ej5o072c
+ MOztx7w5BTksQ==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH AUTOSEL 6.6 19/47] nouveau/tu102: flush all pdbs on vmm flush
+Date: Mon, 11 Dec 2023 08:50:20 -0500
+Message-ID: <20231211135147.380223-19-sashal@kernel.org>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231211135147.380223-1-sashal@kernel.org>
+References: <20231211135147.380223-1-sashal@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [REGRESSION]: nouveau: Asynchronous wait on fence
-Content-Language: en-US, de-DE
-References: <6f027566-c841-4415-bc85-ce11a5832b14@owenh.net>
-From: "Linux regression tracking #update (Thorsten Leemhuis)"
- <regressions@leemhuis.info>
-In-Reply-To: <6f027566-c841-4415-bc85-ce11a5832b14@owenh.net>
-Content-Type: text/plain; charset=UTF-8
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-stable-base: Linux 6.6.5
 Content-Transfer-Encoding: 8bit
-X-bounce-key: webpack.hosteurope.de; regressions@leemhuis.info; 1702282764;
- 95228306; 
-X-HE-SMSGID: 1rCbVa-0003vM-TW
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -43,38 +53,42 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: Linux regressions mailing list <regressions@lists.linux.dev>
-Cc: nouveau@lists.freedesktop.org, regressions@lists.linux.dev
+Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, bskeggs@redhat.com, daniel@ffwll.ch,
+ Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-[TLDR: This mail in primarily relevant for Linux kernel regression
-tracking. See link in footer if these mails annoy you.]
+From: Dave Airlie <airlied@redhat.com>
 
-On 28.10.23 04:46, Owen T. Heisler wrote:
-> #regzbot introduced: d386a4b54607cf6f76e23815c2c9a3abc1d66882
-> #regzbot link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/180
-> 
-> ## Problem
-> 
-> 1. Connect external display to DVI port on dock and run X with both
->    displays in use.
-> 2. Wait hours or days.
-> 3. Suddenly the secondary Nvidia-connected display turns off and X stops
->    responding to keyboard/mouse input. In *some* cases it is possible to
->    switch to a virtual TTY with Ctrl+Alt+Fn and log in there. In any
->    case, shutdown/reboot after this happens is *usually* not successful
->    (forced power-off is required).
-> [...]
+[ Upstream commit cb9c919364653eeafb49e7ff5cd32f1ad64063ac ]
 
-It turned out to be a problem that also happens in mainline, so update
-the tracking:
+This is a hack around a bug exposed with the GSP code, I'm not sure
+what is happening exactly, but it appears some of our flushes don't
+result in proper tlb invalidation for out BAR2 and we get a BAR2
+fault from GSP and it all dies.
 
-#regzbot introduced: 6eaa1f3c59a707332e921e32782ffcad49915c5e
-#regzbot ignore-activity
+Signed-off-by: Dave Airlie <airlied@redhat.com>
+Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+Link: https://patchwork.freedesktop.org/patch/msgid/20231130010852.4034774-1-airlied@gmail.com
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
---
-Everything you wanna know about Linux kernel regression tracking:
-https://linux-regtracking.leemhuis.info/about/#tldr
-That page also explains what to do if mails like this annoy you.
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
+index 6cb5eefa45e9a..5a08458fe1b7f 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmtu102.c
+@@ -31,7 +31,7 @@ tu102_vmm_flush(struct nvkm_vmm *vmm, int depth)
+ 
+ 	type |= 0x00000001; /* PAGE_ALL */
+ 	if (atomic_read(&vmm->engref[NVKM_SUBDEV_BAR]))
+-		type |= 0x00000004; /* HUB_ONLY */
++		type |= 0x00000006; /* HUB_ONLY | ALL PDB (hack) */
+ 
+ 	mutex_lock(&vmm->mmu->mutex);
+ 
+-- 
+2.42.0
+
