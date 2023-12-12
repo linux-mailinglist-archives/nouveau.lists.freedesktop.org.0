@@ -2,44 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A03580E786
-	for <lists+nouveau@lfdr.de>; Tue, 12 Dec 2023 10:26:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D449D80EE25
+	for <lists+nouveau@lfdr.de>; Tue, 12 Dec 2023 14:54:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 51C3710E178;
-	Tue, 12 Dec 2023 09:26:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5B31B10E5C2;
+	Tue, 12 Dec 2023 13:54:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 400 seconds by postgrey-1.36 at gabe;
- Tue, 12 Dec 2023 09:26:08 UTC
-Received: from mail.8bytes.org (mail.8bytes.org [85.214.250.239])
- by gabe.freedesktop.org (Postfix) with ESMTP id 3815E10E105;
- Tue, 12 Dec 2023 09:26:08 +0000 (UTC)
-Received: from 8bytes.org (p4ffe1e67.dip0.t-ipconnect.de [79.254.30.103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.8bytes.org (Postfix) with ESMTPSA id 985681A4F1D;
- Tue, 12 Dec 2023 10:19:26 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=8bytes.org;
- s=default; t=1702372767;
- bh=bEwFfSnf2RFnsUSszwfjtJnyVAQAG+2ku4jSVsqYtho=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=abG4gKivOGRZ/AI3r3S4ykAogD7/67qJfPpecLXixxPdCLvNaaHplc2zY7kr49dVW
- //lK3CmDXn8kgeq/V0CZR9ktKlB8X0k+ITJm0ltQTznpuMo6Vb74aQpMwh3nTTGVkp
- Vy6AfWo4XcQNBdkAhhR+006eTJRikgSpnu1zxfyJ76UClAzcqQ5x8fI3bS/syUfk5j
- 4EzlogNC4F5cinu2gbIPFhhEV/M0hyHlrd2XxZSENppE6ttNDQtHQ8JgEKvxnsEjaT
- tGQK7YmKPtfzARKk+wVIW1dNCyoJC63TSQbXOzaQtz4LM+81hJrx/weWcfjW4iINH9
- K1OBYT39fG51A==
-Date: Tue, 12 Dec 2023 10:19:25 +0100
-From: Joerg Roedel <joro@8bytes.org>
-To: Jason Gunthorpe <jgg@nvidia.com>
-Subject: Re: [PATCH v2 0/7] IOMMU related FW parsing cleanup
-Message-ID: <ZXglne-jYLXHZbtn@8bytes.org>
-References: <0-v2-16e4def25ebb+820-iommu_fwspec_p1_jgg@nvidia.com>
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.24])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BAE4210E5C2;
+ Tue, 12 Dec 2023 13:54:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1702389265; x=1733925265;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=tSqPSorFmXo+w01WoQeLqUBWdzdqBRyMP4YT34m1xKw=;
+ b=e0t7xQbdOqkUevawndWp1PjcmTfnCNN1gcuy2TEoFpKFJbXteMyrG4Hx
+ 3nu3OUk1l3s2FWHl+NPibyCA1I+L5M/7QzwAcf7e0LwJBV64+aZlbHZAT
+ HD16NfQorT7gTOCStltdIYN89qCBLwZDgxbFE/KfJfPyj+BLMbFSgAeJR
+ 2LXZ5TSdVSJTcfZMEmoQRzC51s9ra3lQLSv2nGQNt9ANlns8ICxF1/cK0
+ THxa0zU3atIJ2VQhTDcykvEgA/LytzBnug7Fzh48JuMrQiqOwTqL8f7DF
+ HiVSwbV7N8mNK/65gIJr7fjAAmh8qiR8I5RwxdC9vEaIY+7N8soJsaaLZ g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10922"; a="397595312"
+X-IronPort-AV: E=Sophos;i="6.04,270,1695711600"; d="scan'208";a="397595312"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+ by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Dec 2023 05:54:25 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10922"; a="749737461"
+X-IronPort-AV: E=Sophos;i="6.04,270,1695711600"; d="scan'208";a="749737461"
+Received: from ggilardi-mobl1.amr.corp.intel.com (HELO localhost)
+ ([10.252.49.147])
+ by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Dec 2023 05:54:23 -0800
+From: Jani Nikula <jani.nikula@intel.com>
+To: nouveau@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org
+Subject: [PATCH] drm/nouveau: include drm/drm_edid.h only where needed
+Date: Tue, 12 Dec 2023 15:54:18 +0200
+Message-Id: <20231212135418.3816792-1-jani.nikula@intel.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <0-v2-16e4def25ebb+820-iommu_fwspec_p1_jgg@nvidia.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,46 +57,52 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-hyperv@vger.kernel.org, "Rafael J. Wysocki" <rafael@kernel.org>,
- Catalin Marinas <catalin.marinas@arm.com>, Moritz Fischer <moritzf@google.com>,
- Jerry Snitselaar <jsnitsel@redhat.com>, dri-devel@lists.freedesktop.org,
- patches@lists.linux.dev, Laxman Dewangan <ldewangan@nvidia.com>,
- linux-riscv@lists.infradead.org, "K. Y. Srinivasan" <kys@microsoft.com>,
- Frank Rowand <frowand.list@gmail.com>, Christoph Hellwig <hch@lst.de>,
- Alyssa Rosenzweig <alyssa@rosenzweig.io>,
- Marek Szyprowski <m.szyprowski@samsung.com>, Rob Herring <robh@kernel.org>,
- Wei Liu <wei.liu@kernel.org>, "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
- Dexuan Cui <decui@microsoft.com>, Russell King <linux@armlinux.org.uk>,
- linux-acpi@vger.kernel.org, iommu@lists.linux.dev,
- nouveau@lists.freedesktop.org, linux-snps-arc@lists.infradead.org,
- Len Brown <lenb@kernel.org>, devicetree@vger.kernel.org,
- Albert Ou <aou@eecs.berkeley.edu>,
- Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
- Will Deacon <will@kernel.org>, Sven Peter <sven@svenpeter.dev>,
- Haiyang Zhang <haiyangz@microsoft.com>, Vineet Gupta <vgupta@kernel.org>,
- Rob Herring <robh+dt@kernel.org>, Moritz Fischer <mdf@kernel.org>,
- Paul Walmsley <paul.walmsley@sifive.com>, linux-tegra@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, Vinod Koul <vkoul@kernel.org>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- Robin Murphy <robin.murphy@arm.com>, Hector Martin <marcan@marcan.st>,
- linux-mips@vger.kernel.org, Thierry Reding <treding@nvidia.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
- Thierry Reding <thierry.reding@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- asahi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
- dmaengine@vger.kernel.org, David Woodhouse <dwmw2@infradead.org>,
- Lu Baolu <baolu.lu@linux.intel.com>
+Cc: Jani Nikula <jani.nikula@intel.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Dec 07, 2023 at 02:03:07PM -0400, Jason Gunthorpe wrote:
-> Jason Gunthorpe (7):
->   iommu: Remove struct iommu_ops *iommu from arch_setup_dma_ops()
->   iommmu/of: Do not return struct iommu_ops from of_iommu_configure()
->   iommu/of: Use -ENODEV consistently in of_iommu_configure()
->   iommu: Mark dev_iommu_get() with lockdep
->   iommu: Mark dev_iommu_priv_set() with a lockdep
->   acpi: Do not return struct iommu_ops from acpi_iommu_configure_id()
->   iommu/tegra: Use tegra_dev_iommu_get_stream_id() in the remaining
->     places
+Including drm_edid.h from nouveau_connector.h causes the rebuild of 15
+files when drm_edid.h is modified, while there are only a few files that
+actually need to include drm_edid.h.
 
-Applied, thanks.
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+---
+ drivers/gpu/drm/nouveau/dispnv50/head.c     | 1 +
+ drivers/gpu/drm/nouveau/nouveau_connector.h | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
+index 5f490fbf1877..83355dbc15ee 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/head.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
+@@ -32,6 +32,7 @@
+ 
+ #include <drm/drm_atomic.h>
+ #include <drm/drm_atomic_helper.h>
++#include <drm/drm_edid.h>
+ #include <drm/drm_vblank.h>
+ #include "nouveau_connector.h"
+ 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.h b/drivers/gpu/drm/nouveau/nouveau_connector.h
+index a2df4918340c..0608cabed058 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.h
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.h
+@@ -35,7 +35,6 @@
+ 
+ #include <drm/display/drm_dp_helper.h>
+ #include <drm/drm_crtc.h>
+-#include <drm/drm_edid.h>
+ #include <drm/drm_encoder.h>
+ #include <drm/drm_util.h>
+ 
+@@ -44,6 +43,7 @@
+ 
+ struct nvkm_i2c_port;
+ struct dcb_output;
++struct edid;
+ 
+ #ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
+ struct nouveau_backlight {
+-- 
+2.39.2
+
