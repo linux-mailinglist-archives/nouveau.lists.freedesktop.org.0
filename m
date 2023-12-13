@@ -2,59 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DAE0811190
-	for <lists+nouveau@lfdr.de>; Wed, 13 Dec 2023 13:50:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C271812332
+	for <lists+nouveau@lfdr.de>; Thu, 14 Dec 2023 00:37:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A763F10E294;
-	Wed, 13 Dec 2023 12:49:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BFB6710E89D;
+	Wed, 13 Dec 2023 23:37:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C098D10E28A;
- Wed, 13 Dec 2023 12:49:54 +0000 (UTC)
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id D4CB540E00CB; 
- Wed, 13 Dec 2023 12:49:52 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
- header.d=alien8.de
-Received: from mail.alien8.de ([127.0.0.1])
- by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id wLZBCQYyXgKT; Wed, 13 Dec 2023 12:49:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
- t=1702471790; bh=d6/WJ4YGI+jyt5pi/YBaJSCHvFgSbXE/GIoeVHXiKYA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=kUSDFGgys4sDCIa7PGsKyvy+gM1VsHPua6qqQO6CZuklDTqj8f+FHflztybGPYhTz
- Z1Td7xgUNxtJXkjsGD5chNmdPzvfn7uhs6PaO31TX37FEsr2pB2J0sfhAUIcRdP6L8
- FoOXmhMGSVphdfqaVRH7+/FbvlabU8laHNYSjScwaEb9aenV02MQKNIdIYvNslebgR
- 4J5Q5L4ROJC1nkcXDTrt6O++b6otbmTYsYSafoJUz06+KpDudMDE0NII1gx8LV2AEK
- zZtnbGycpZH7LlLMBlztdfxvzZTUcGmAr52haEBHmCQ6Od7RkMuHQoVKkaM39ilN/1
- VIImH8Xol79PJq7Px833ca8RQtNMwq624WKcdn97x+2e2egfJb9Nmee4W8PYK4Aj64
- m2tJjKLqVub0XL5gFjbRyKxEn4uf++muJWwlRRCI59IB21lM3Fnoq8Kv443u+ePizS
- OAsqspqgR/6ZEqxoODVGKPh14+9/pZtxkZTgHwj4Y7NFDsN8l/rdqJcDE0GYHxpgYj
- +EJtmDPQCBJ1ylja+Kj9ddQkyfuJcbvO62gRjLohm49r3C0w8c8YAL0lL1gPbQYQ/K
- /fWd+009RVWkX2DHYPTRk+usjIUcm/bEuxJMmm41h5u6OJV3Rf3fqsd78xQdcURpLZ
- CblmCs2YpydqfZxwib/qX/1s=
-Received: from zn.tnic (pd95304da.dip0.t-ipconnect.de [217.83.4.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
- SHA256) (No client certificate requested)
- by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id B947740E0195;
- Wed, 13 Dec 2023 12:49:42 +0000 (UTC)
-Date: Wed, 13 Dec 2023 13:49:36 +0100
-From: Borislav Petkov <bp@alien8.de>
-To: Paul Dufresne <dufresnep@zoho.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <me@dakr.org>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 24B6210E876
+ for <nouveau@lists.freedesktop.org>; Wed, 13 Dec 2023 23:37:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1702510646;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=2bM5SMenaJ88uFf7XU2jdKzO8ftktLKCbuzz3KkFPnI=;
+ b=Z379D3z3ZVFdfpMtzBNEqKDYh36ldqXHHjAlTd8BVg8PHs9j52XgoN+hu/BRCvwoTST+i3
+ WXQZ6LRA8KI8qqZevc2P3pLb0SN182PBaUeYPuvG3BAWnhawS/vvy+vF9976ADYYT0asTo
+ Z11z9HyeZgHR6w/z1hcpTehRKMEecrE=
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-265-6r-1y0mdOUGNM4xkijMvLg-1; Wed, 13 Dec 2023 18:37:24 -0500
+X-MC-Unique: 6r-1y0mdOUGNM4xkijMvLg-1
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-77f96e14ee2so129259585a.1
+ for <nouveau@lists.freedesktop.org>; Wed, 13 Dec 2023 15:37:24 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702510644; x=1703115444;
+ h=mime-version:user-agent:content-transfer-encoding:organization
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=2bM5SMenaJ88uFf7XU2jdKzO8ftktLKCbuzz3KkFPnI=;
+ b=rMA/A/HB5G828WwiTIlmtDVWBXdVw6dXsnh52k5u27BQnw0XYmnoRZSDHSETSnmhFX
+ zewChcBMWSFbofyJw3pCYu9ImXA+7+jbOFPwNZTDSCJa6QMXtHA/dYmb+Bappisqqz0a
+ W76x7I7eZNR+6wqscw6WF9JTOfZ7f6YRi/J9L5kbtS2K5EWLRoRcmS68lpYwoZcSSc93
+ Ep7bDsmWunPh59O6Kau/EXCCq8cZpskFqVh19Hbgb0gyCWeCEHa8tlO42iXdWuiFlFyo
+ MRHw6HzbNEcLdRjjsKy1Qjk31suXj2lrsLjbBUUeCxMGlUY3GN/SzmAZfPqwbmbCW8KS
+ 8RBw==
+X-Gm-Message-State: AOJu0YzNx39Oht8n1UrjXrWMYGXEIzgJy1hzAWbILPBal0TO8oIIii9U
+ EK6K9i4g3wmQdieybBtJaUcIb0pDKW5iT1wXTwdsdrNGYrxQHsdxAaP6k1p3opNXNXgroS7iacL
+ Ocnh4KYQqjXHaA2olgj8Nx4jgoQ==
+X-Received: by 2002:a05:620a:2603:b0:77b:e2ae:934c with SMTP id
+ z3-20020a05620a260300b0077be2ae934cmr10952568qko.12.1702510644401; 
+ Wed, 13 Dec 2023 15:37:24 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHUVH/OQpyNoeiuSGiiYho89l/+ehiBCwR+TccPGs5nC6eWuLzhfay1fvd3HpT8GnD42ZeXXA==
+X-Received: by 2002:a05:620a:2603:b0:77b:e2ae:934c with SMTP id
+ z3-20020a05620a260300b0077be2ae934cmr10952558qko.12.1702510644183; 
+ Wed, 13 Dec 2023 15:37:24 -0800 (PST)
+Received: from ?IPv6:2600:4040:5c6c:a300::feb? ([2600:4040:5c6c:a300::feb])
+ by smtp.gmail.com with ESMTPSA id
+ b5-20020a05620a270500b0076ce061f44dsm4878672qkp.25.2023.12.13.15.37.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Dec 2023 15:37:23 -0800 (PST)
+Message-ID: <114bf9f5790f637a6cdec4957244192d3bd76a04.camel@redhat.com>
 Subject: Re: nouveau 0000:01:00.0: drm_WARN_ON(!found_head)
-Message-ID: <20231213124936.GCZXmoYDq8nMRs75XM@fat_crate.local>
+From: Lyude Paul <lyude@redhat.com>
+To: Borislav Petkov <bp@alien8.de>, Paul Dufresne <dufresnep@zoho.com>, 
+ Danilo Krummrich <me@dakr.org>
+Date: Wed, 13 Dec 2023 18:37:22 -0500
+In-Reply-To: <20231213124936.GCZXmoYDq8nMRs75XM@fat_crate.local>
 References: <20231111120323.GAZU9tiw8e0RSzCGB9@fat_crate.local>
  <20231212224037.GAZXjhZUDeoq50xKJ5@fat_crate.local>
  <18c613ec092.ae61cf7d6029.4389632938517239705@zoho.com>
  <20231213113936.GBZXmX+MKqX/qOnPn1@fat_crate.local>
+ <20231213124936.GCZXmoYDq8nMRs75XM@fat_crate.local>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.48.4 (3.48.4-1.fc38)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20231213113936.GBZXmX+MKqX/qOnPn1@fat_crate.local>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,15 +94,39 @@ Cc: Daniel Vetter <daniel@ffwll.ch>, nouveau <nouveau@lists.freedesktop.org>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Dec 13, 2023 at 12:39:36PM +0100, Borislav Petkov wrote:
-> We're getting close to releasing so I guess we either debug this or shut
-> up the WARN.
+agh - thank you for repeatedly poking on this, I've been busy enough with G=
+SP
+work I totally missed this. Yes - I'm quite surprised that this is blowing =
+up,
+but considering that looks to be a GT218 I guess display state readback mus=
+t
+just work a bit differently there since that's really early on into the NV5=
+0
+days.
 
-Not only that - panic_on_warn turns this into an explosion so you don't
-want that in a released kernel.
+The reason that was a drm_WARN_ON() was because it indicates that we're not
+reading back OR -> head assignments properly. But, I'm confused how we're e=
+ven
+getting that far on a non-GSP platform. I'm going to dig into this now, but=
+ if
+I don't figure out a good fix by the end of the day I'll just send a patch =
+to
+silent the warning.
 
--- 
-Regards/Gruss,
-    Boris.
+Thanks again for bugging me about this!
 
-https://people.kernel.org/tglx/notes-about-netiquette
+On Wed, 2023-12-13 at 13:49 +0100, Borislav Petkov wrote:
+> On Wed, Dec 13, 2023 at 12:39:36PM +0100, Borislav Petkov wrote:
+> > We're getting close to releasing so I guess we either debug this or shu=
+t
+> > up the WARN.
+>=20
+> Not only that - panic_on_warn turns this into an explosion so you don't
+> want that in a released kernel.
+>=20
+
+--=20
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
+
