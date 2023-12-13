@@ -1,56 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58FF280FA7E
-	for <lists+nouveau@lfdr.de>; Tue, 12 Dec 2023 23:41:01 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D843E8108C5
+	for <lists+nouveau@lfdr.de>; Wed, 13 Dec 2023 04:36:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 11B1510E6B9;
-	Tue, 12 Dec 2023 22:40:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A276810E241;
+	Wed, 13 Dec 2023 03:36:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D03C410E6B9;
- Tue, 12 Dec 2023 22:40:56 +0000 (UTC)
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id EBFB540E00CC; 
- Tue, 12 Dec 2023 22:40:53 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
- header.d=alien8.de
-Received: from mail.alien8.de ([127.0.0.1])
- by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id x24XXjbKmf7F; Tue, 12 Dec 2023 22:40:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
- t=1702420851; bh=EAkMLeIiRvKz4MWTsYFVSwx0Xpd0WR2ZKKQgaMckL54=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=L7w1WFcil7CmodzOwfF1K2GIRPImVnrE7deGVLSH9PVkSbG2elSXIBhrvvHienNoM
- DFUXE7FSrGL6H2qxWEu2iR7Bp5vQc/L1SOzwxERfmR2ZXK/EBN8mJfEAvNJ5m8u0wI
- 3EoI9f8f/vTRFLpqtJrniaHYRTlCqgXWstZUUBnGu1eDnx0CMDzX5sGxm84UPRZfrw
- QOeIX7ebFCEXN+5n9pvQ7+2hBETVkDuRwEdyygUkCW/foKbw/oEyMYyPneqOttFnqH
- 8qN/7Fr9WgMNCzgOr73PvhqAjJeyxEdGna/93grPNfyrfGrlD77T1usPe7r8JNSDug
- 5ZEuCJpq+9vW8N21oAh2TUmVmn21ezakJiuyiiLKoMNsCEHOUjRCamNs94wk4MwjdU
- TfeV1TfjGx+rm4ZmJfZ2HdFoecJynbMBXVx1FTb6l8M07gegXf42PKjz1KrHL6LI43
- Sni0smlkFKrPb5QpJyH+iEWZUUe0UiPAW/pGUViOLmr6jJkiK1q2MXlbWwoJiqqYi0
- ZsyAq15bP/c41x9BH0D/nBa1h3/qUVpWFO7evphFn8t+0REKmqITWyF2P2rtkzhxE6
- IfrhZccYSR43wzstyG1bKwEd9hN9pmYXtUl4mWG2cBaGuIUaj5WSGxiKsdGw4D305N
- uiiPT1zQ7bkk/9qobr12Dk9w=
-Received: from zn.tnic (pd95304da.dip0.t-ipconnect.de [217.83.4.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
- SHA256) (No client certificate requested)
- by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id AF09A40E00CD;
- Tue, 12 Dec 2023 22:40:42 +0000 (UTC)
-Date: Tue, 12 Dec 2023 23:40:37 +0100
-From: Borislav Petkov <bp@alien8.de>
-To: nouveau@lists.freedesktop.org
-Subject: Re: nouveau 0000:01:00.0: drm_WARN_ON(!found_head)
-Message-ID: <20231212224037.GAZXjhZUDeoq50xKJ5@fat_crate.local>
+Received: from sender4-pp-o90.zoho.com (sender4-pp-o90.zoho.com
+ [136.143.188.90])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B811510E241
+ for <nouveau@lists.freedesktop.org>; Wed, 13 Dec 2023 03:36:02 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1702438559; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=hK4Hiz4nx65ev563xX5ZencFyZCpZWoPwq23hysUuWFbyfwDbrAFhSK9/SW8fxVoftF+9gLEXAKGVkRj2vSqKKnK3hgIDuiDMtqy4gsHgg9to3PRyF4KSDVUKeS9k+EQ9bnSyxU1d2KKi/1RhrOCrukdbl7vvXtHZkHxeHpN2To=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1702438559;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=HuWh4qmbphVRX+L76rSigHxLLbTFyvF8fa701hSY5lI=; 
+ b=IinN9cnI340BhT1jdek2J2vT8j1vxk5f/NCCu896ZzLx/Gbm7+HgjE/z1yCMj2opJU4sou6hk4E/ChwJt7ijsiyNlQON/3GGqVM+WRRthtnw7WaeKD47L+dTge1/8vx5y37Z+x7DFmBS7I/kZp5Tm1oSnJgIVSGe4f0zzAgHvlo=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=zoho.com;
+ spf=pass  smtp.mailfrom=dufresnep@zoho.com;
+ dmarc=pass header.from=<dufresnep@zoho.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1702438559; 
+ s=zm2022; d=zoho.com; i=dufresnep@zoho.com;
+ h=Date:Date:From:From:To:To:Cc:Cc:Message-Id:Message-Id:In-Reply-To:References:Subject:Subject:MIME-Version:Content-Type:Feedback-ID:Reply-To;
+ bh=HuWh4qmbphVRX+L76rSigHxLLbTFyvF8fa701hSY5lI=;
+ b=WZHV/Vq/oDEQXpufllSG7HohB+e1c2yvu9eh7o+DgFbMxG6srqP+RKWNFugs7Bs1
+ c6NBCEW80d6aFLSXgCOg8nb6CCjv10IBg47H0FZpWeAV+O1337Gg3rvJW6k1wulV3Ns
+ QgreJiKxK7jzzbJJTKb45Cb/bJ3S2jH0F3oG8X8w=
+Received: from mail.zoho.com by mx.zohomail.com
+ with SMTP id 1702438551717925.4699308920207;
+ Tue, 12 Dec 2023 19:35:51 -0800 (PST)
+Received: from  [66.129.153.16] by mail.zoho.com
+ with HTTP;Tue, 12 Dec 2023 19:35:51 -0800 (PST)
+Date: Tue, 12 Dec 2023 22:35:51 -0500
+From: Paul Dufresne <dufresnep@zoho.com>
+To: "Borislav Petkov" <bp@alien8.de>
+Message-Id: <18c613ec092.ae61cf7d6029.4389632938517239705@zoho.com>
+In-Reply-To: <20231212224037.GAZXjhZUDeoq50xKJ5@fat_crate.local>
 References: <20231111120323.GAZU9tiw8e0RSzCGB9@fat_crate.local>
+ <20231212224037.GAZXjhZUDeoq50xKJ5@fat_crate.local>
+Subject: Re: nouveau 0000:01:00.0: drm_WARN_ON(!found_head)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20231111120323.GAZU9tiw8e0RSzCGB9@fat_crate.local>
+Content-Type: multipart/alternative; 
+ boundary="----=_Part_16953_1356003501.1702438551698"
+Importance: Medium
+User-Agent: Zoho Mail
+X-Mailer: Zoho Mail
+Feedback-ID: rr080112285d827e5c45a13e041e214f7600003d7743f64b06437c4050045f5d38a4372176b890d177f49fd626:zu08011227b40ee59a3be902460748c0e500009f5484675823e4de5a17e0694872081b8547938c4338ecfc0f:rf08011231b7c4bcf7de8aa555d2d80ec70000a8b4cc4c8d64552c0936069b6604e8a64c5b13f1030e0ee2d9b6a5465d1ef24c1f2a64:ZohoMail
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,119 +62,21 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: Daniel Vetter <daniel@ffwll.ch>, nouveau <nouveau@lists.freedesktop.org>,
+ linux-kernel <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Nov 11, 2023 at 01:03:23PM +0100, Borislav Petkov wrote:
-> Hi,
-> 
-> this is ontop of Linus' tree from the 4th (lemme know if I should try
-> the latest) on one of my test boxes:
-> 
-> nouveau 0000:01:00.0: vgaarb: deactivate vga console
-> Console: switching to colour dummy device 80x25
-> nouveau 0000:01:00.0: NVIDIA GT218 (0a8280b1)
-> CE: hpet increased min_delta_ns to 20115 nsec
-> nouveau 0000:01:00.0: bios: version 70.18.49.00.00
-> nouveau 0000:01:00.0: fb: 1024 MiB DDR3
-> nouveau 0000:01:00.0: DRM: VRAM: 1024 MiB
-> nouveau 0000:01:00.0: DRM: GART: 1048576 MiB
-> nouveau 0000:01:00.0: DRM: TMDS table version 2.0
-> nouveau 0000:01:00.0: DRM: MM: using COPY for buffer copies
-> ------------[ cut here ]------------
-> nouveau 0000:01:00.0: drm_WARN_ON(!found_head)
-> WARNING: CPU: 4 PID: 786 at drivers/gpu/drm/nouveau/dispnv50/disp.c:2731 nv50_display_init+0x28c/0x4f0 [nouveau]
-> Modules linked in: nouveau(+) drm_ttm_helper ttm video drm_exec drm_gpuvm gpu_sched drm_display_helper wmi
-> CPU: 4 PID: 786 Comm: systemd-udevd Not tainted 6.6.0+ #1
+------=_Part_16953_1356003501.1702438551698
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-This still fires on -rc5:
+https://gitlab.freedesktop.org/drm/nouveau/-/issues/282
+------=_Part_16953_1356003501.1702438551698
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-[    4.577348] nouveau 0000:01:00.0: vgaarb: deactivate vga console
-[    4.584482] Console: switching to colour dummy device 80x25
-[    4.590120] nouveau 0000:01:00.0: NVIDIA GT218 (0a8280b1)
-[    4.718171] nouveau 0000:01:00.0: bios: version 70.18.49.00.00
-[    4.724788] nouveau 0000:01:00.0: fb: 1024 MiB DDR3
-[    6.047984] nouveau 0000:01:00.0: DRM: VRAM: 1024 MiB
-[    6.053031] nouveau 0000:01:00.0: DRM: GART: 1048576 MiB
-[    6.058340] nouveau 0000:01:00.0: DRM: TMDS table version 2.0
-[    6.065892] nouveau 0000:01:00.0: DRM: MM: using COPY for buffer copies
-[    6.078375] ------------[ cut here ]------------
-[    6.082994] nouveau 0000:01:00.0: drm_WARN_ON(!found_head)
-[    6.083023] WARNING: CPU: 3 PID: 779 at drivers/gpu/drm/nouveau/dispnv50/disp.c:2731 nv50_display_init+0x28c/0x4f0 [nouve
-au]
-[    6.099800] Modules linked in: nouveau(+) drm_ttm_helper ttm video drm_exec drm_gpuvm gpu_sched drm_display_helper wmi
-[    6.110490] CPU: 3 PID: 779 Comm: systemd-udevd Not tainted 6.7.0-rc5+ #2
-[    6.117272] Hardware name: MICRO-STAR INTERNATIONAL CO.,LTD MS-7599/870-C45 (MS-7599), BIOS V1.15 03/04/2011
-[    6.127087] RIP: 0010:nv50_display_init+0x28c/0x4f0 [nouveau]
-[    6.132915] Code: 4c 8b 6f 50 4d 85 ed 75 03 4c 8b 2f e8 cd 16 37 e1 48 c7 c1 4c 55 2d a0 48 89 c6 4c 89 ea 48 c7 c7 42 5
-5 2d a0 e8 44 5a e8 e0 <0f> 0b 48 8b 43 08 49 39 c6 48 8d 58 f8 0f 85 41 ff ff ff 48 8d 7c
-[    6.151660] RSP: 0018:ffffc9000036ba98 EFLAGS: 00010286
-[    6.156885] RAX: 000000000000002e RBX: ffff8881009fbc00 RCX: 0000000000000000
-[    6.164013] RDX: 0000000000000002 RSI: ffffc9000036b9b0 RDI: 0000000000000001
-[    6.171141] RBP: ffff888103fc8ad0 R08: ffff888136ffdfe8 R09: 0000000000000058
-[    6.178263] R10: 000000000000027a R11: ffff888136401b70 R12: ffff888103fc8800
-[    6.185393] R13: ffff888100abddf0 R14: ffff888103fc8ab0 R15: 0000000000000000
-[    6.192521] FS:  00007fdc144858c0(0000) GS:ffff88812f4c0000(0000) knlGS:0000000000000000
-[    6.200601] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[    6.206339] CR2: 000055676cc01000 CR3: 0000000103f6c000 CR4: 00000000000006f0
-[    6.213466] Call Trace:
-[    6.215921]  <TASK>
-[    6.218015]  ? __warn+0x96/0x160
-[    6.221240]  ? nv50_display_init+0x28c/0x4f0 [nouveau]
-[    6.226461]  ? report_bug+0x1ec/0x200
-[    6.230119]  ? handle_bug+0x3c/0x70
-[    6.233611]  ? exc_invalid_op+0x1f/0x90
-[    6.237442]  ? asm_exc_invalid_op+0x16/0x20
-[    6.241622]  ? nv50_display_init+0x28c/0x4f0 [nouveau]
-[    6.246840]  ? nv50_display_init+0x28c/0x4f0 [nouveau]
-[    6.252058]  ? sched_set_fifo+0x46/0x60
-[    6.255897]  nouveau_display_init+0xa0/0xd0 [nouveau]
-[    6.261031]  nouveau_drm_device_init+0x42a/0x990 [nouveau]
-[    6.266604]  nouveau_drm_probe+0x105/0x240 [nouveau]
-[    6.271651]  ? __pm_runtime_resume+0x68/0xa0
-[    6.275920]  pci_device_probe+0xaa/0x140
-[    6.279840]  really_probe+0xc2/0x2d0
-[    6.283411]  __driver_probe_device+0x73/0x120
-[    6.287761]  driver_probe_device+0x2c/0xb0
-[    6.291851]  __driver_attach+0xa0/0x150
-[    6.295683]  ? __device_attach_driver+0xc0/0xc0
-[    6.300205]  bus_for_each_dev+0x67/0xa0
-[    6.304044]  bus_add_driver+0x10e/0x210
-[    6.307874]  driver_register+0x5c/0x120
-[    6.311706]  ? 0xffffffffa0336000
-[    6.315017]  do_one_initcall+0x44/0x200
-[    6.318851]  ? kmalloc_trace+0x37/0xc0
-[    6.322595]  do_init_module+0x64/0x230
-[    6.326344]  init_module_from_file+0x8d/0xd0
-[    6.330609]  idempotent_init_module+0x15a/0x210
-[    6.335136]  __x64_sys_finit_module+0x67/0xb0
-[    6.339490]  do_syscall_64+0x41/0xf0
-[    6.343066]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
-[    6.348118] RIP: 0033:0x7fdc14947ee9
-[    6.351691] Code: 08 44 89 e0 5b 41 5c c3 66 0f 1f 84 00 00 00 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d f7 ee 0e 00 f7 d8 64 89 01 48
-[    6.370433] RSP: 002b:00007ffe228d74b8 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
-[    6.377993] RAX: ffffffffffffffda RBX: 000055676cc11d60 RCX: 00007fdc14947ee9
-[    6.385116] RDX: 0000000000000000 RSI: 00007fdc14ae7e2d RDI: 0000000000000012
-[    6.392245] RBP: 0000000000020000 R08: 0000000000000000 R09: 000055676cc0f170
-[    6.399368] R10: 0000000000000012 R11: 0000000000000246 R12: 00007fdc14ae7e2d
-[    6.406496] R13: 0000000000000000 R14: 000055676cc0c230 R15: 000055676cc11d60
-[    6.413621]  </TASK>
-[    6.415803] ---[ end trace 0000000000000000 ]---
-[    6.420697] [drm] Initialized nouveau 1.4.0 20120801 for 0000:01:00.0 on minor 0
-[    6.469632] fbcon: nouveaudrmfb (fb0) is primary device
-[    6.548495] Console: switching to colour frame buffer device 210x65
-[    6.563870] nouveau 0000:01:00.0: [drm] fb0: nouveaudrmfb frame buffer device
-[    6.660166] EXT4-fs (sda5): mounted filesystem 6fe02972-f7b5-4f2d-9796-e78fe2d6b511 ro with ordered data mode. Quota mode: disabled.
-[    7.226100] acpi_cpufreq: overriding BIOS provided _PSD data
-[    7.609728] kvm_amd: Nested Virtualization enabled
-[    7.614585] kvm_amd: Nested Paging enabled
-[    7.618825] kvm_amd: LBR virtualization supported
-[    7.656480] MCE: In-kernel MCE decoding enabled.
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><meta content="text/html;charset=UTF-8" http-equiv="Content-Type"></head><body ><div style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt;"><div><a target="_blank" href="https://gitlab.freedesktop.org/drm/nouveau/-/issues/282">https://gitlab.freedesktop.org/drm/nouveau/-/issues/282</a><br></div><div><br></div><div><br></div></div><br></body></html>
+------=_Part_16953_1356003501.1702438551698--
 
--- 
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
