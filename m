@@ -1,56 +1,59 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D843E8108C5
-	for <lists+nouveau@lfdr.de>; Wed, 13 Dec 2023 04:36:05 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FB4A811052
+	for <lists+nouveau@lfdr.de>; Wed, 13 Dec 2023 12:40:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A276810E241;
-	Wed, 13 Dec 2023 03:36:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3181F10E772;
+	Wed, 13 Dec 2023 11:39:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sender4-pp-o90.zoho.com (sender4-pp-o90.zoho.com
- [136.143.188.90])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B811510E241
- for <nouveau@lists.freedesktop.org>; Wed, 13 Dec 2023 03:36:02 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1702438559; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=hK4Hiz4nx65ev563xX5ZencFyZCpZWoPwq23hysUuWFbyfwDbrAFhSK9/SW8fxVoftF+9gLEXAKGVkRj2vSqKKnK3hgIDuiDMtqy4gsHgg9to3PRyF4KSDVUKeS9k+EQ9bnSyxU1d2KKi/1RhrOCrukdbl7vvXtHZkHxeHpN2To=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1702438559;
- h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=HuWh4qmbphVRX+L76rSigHxLLbTFyvF8fa701hSY5lI=; 
- b=IinN9cnI340BhT1jdek2J2vT8j1vxk5f/NCCu896ZzLx/Gbm7+HgjE/z1yCMj2opJU4sou6hk4E/ChwJt7ijsiyNlQON/3GGqVM+WRRthtnw7WaeKD47L+dTge1/8vx5y37Z+x7DFmBS7I/kZp5Tm1oSnJgIVSGe4f0zzAgHvlo=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=zoho.com;
- spf=pass  smtp.mailfrom=dufresnep@zoho.com;
- dmarc=pass header.from=<dufresnep@zoho.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1702438559; 
- s=zm2022; d=zoho.com; i=dufresnep@zoho.com;
- h=Date:Date:From:From:To:To:Cc:Cc:Message-Id:Message-Id:In-Reply-To:References:Subject:Subject:MIME-Version:Content-Type:Feedback-ID:Reply-To;
- bh=HuWh4qmbphVRX+L76rSigHxLLbTFyvF8fa701hSY5lI=;
- b=WZHV/Vq/oDEQXpufllSG7HohB+e1c2yvu9eh7o+DgFbMxG6srqP+RKWNFugs7Bs1
- c6NBCEW80d6aFLSXgCOg8nb6CCjv10IBg47H0FZpWeAV+O1337Gg3rvJW6k1wulV3Ns
- QgreJiKxK7jzzbJJTKb45Cb/bJ3S2jH0F3oG8X8w=
-Received: from mail.zoho.com by mx.zohomail.com
- with SMTP id 1702438551717925.4699308920207;
- Tue, 12 Dec 2023 19:35:51 -0800 (PST)
-Received: from  [66.129.153.16] by mail.zoho.com
- with HTTP;Tue, 12 Dec 2023 19:35:51 -0800 (PST)
-Date: Tue, 12 Dec 2023 22:35:51 -0500
-From: Paul Dufresne <dufresnep@zoho.com>
-To: "Borislav Petkov" <bp@alien8.de>
-Message-Id: <18c613ec092.ae61cf7d6029.4389632938517239705@zoho.com>
-In-Reply-To: <20231212224037.GAZXjhZUDeoq50xKJ5@fat_crate.local>
+Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C0C3610E731;
+ Wed, 13 Dec 2023 11:39:54 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id E4D8F40E0140; 
+ Wed, 13 Dec 2023 11:39:52 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+ header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+ by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id 1XUgfF27Zh13; Wed, 13 Dec 2023 11:39:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+ t=1702467589; bh=SJ9D000oUxGHcSdtKN/FU2dMnMwR5Do1+n4O+7VfCGo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=f+8lb30ld/y2ZXfOcVrxOYsC2g6TNQhIsRt5wY7hxUj1rVaPVqLaRU833CDt7Y5o1
+ tIW+ABOfPVVVnqLIdKyYicH7/aMvDtKp0zoZHgSLpEISW4LodLIr0UzrypWW2U+J8z
+ b34PfdZFeNZlTZEMF//IGDNf/JKByn8v3dFE61OgayxcFf3R/ERAUIm70eHVKT2R/3
+ 0a5MUo50KB11kYe1dEet0QRdVn6eYCJW/yTY3YYDigcio6GABCKBvU5YDOLSG37bI0
+ KNkEjyLFXDP2O54WzE2e4B7rFb8yqwIlfGBcO25UwmhX5Z36sS9KclRQTm/uXLsaxI
+ 0H0vSI6xuTgLYNAJgwBvZELycoCW7FWsJCny3WqjYCH3wIjuqwOdzI7n0tDTCpf0Rs
+ nBnSWlvv6Laf8I6xL/NVQPNdr+su3tbKEWHNG3jwWfQkdlRoFqBOVP+EtBZGR8zPYP
+ Ykiw1PA0V+35ZAPg4F/hp2HuBVV9nOcvJ7CREFZueobKYLQG3ga4TM0N1G1tL3Zu0p
+ HmaPLMkb+WLsKxuEK6bwdUrys19Q3ipxr4SLi6tuSyTQhO7+paVMxvyGGgBsAaxr26
+ OgnyPYQuNLGRdw3mQvvdG/dZ4UVnGwQfIScRuPX+KcynbxKjuPoID7gjXTUJkZbxtk
+ L9wmAxte9HeodXPxAf9Zlegs=
+Received: from zn.tnic (pd95304da.dip0.t-ipconnect.de [217.83.4.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
+ SHA256) (No client certificate requested)
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 858AD40E00CB;
+ Wed, 13 Dec 2023 11:39:41 +0000 (UTC)
+Date: Wed, 13 Dec 2023 12:39:36 +0100
+From: Borislav Petkov <bp@alien8.de>
+To: Paul Dufresne <dufresnep@zoho.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <me@dakr.org>
+Subject: Re: nouveau 0000:01:00.0: drm_WARN_ON(!found_head)
+Message-ID: <20231213113936.GBZXmX+MKqX/qOnPn1@fat_crate.local>
 References: <20231111120323.GAZU9tiw8e0RSzCGB9@fat_crate.local>
  <20231212224037.GAZXjhZUDeoq50xKJ5@fat_crate.local>
-Subject: Re: nouveau 0000:01:00.0: drm_WARN_ON(!found_head)
+ <18c613ec092.ae61cf7d6029.4389632938517239705@zoho.com>
 MIME-Version: 1.0
-Content-Type: multipart/alternative; 
- boundary="----=_Part_16953_1356003501.1702438551698"
-Importance: Medium
-User-Agent: Zoho Mail
-X-Mailer: Zoho Mail
-Feedback-ID: rr080112285d827e5c45a13e041e214f7600003d7743f64b06437c4050045f5d38a4372176b890d177f49fd626:zu08011227b40ee59a3be902460748c0e500009f5484675823e4de5a17e0694872081b8547938c4338ecfc0f:rf08011231b7c4bcf7de8aa555d2d80ec70000a8b4cc4c8d64552c0936069b6604e8a64c5b13f1030e0ee2d9b6a5465d1ef24c1f2a64:ZohoMail
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <18c613ec092.ae61cf7d6029.4389632938517239705@zoho.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,15 +71,25 @@ Cc: Daniel Vetter <daniel@ffwll.ch>, nouveau <nouveau@lists.freedesktop.org>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-------=_Part_16953_1356003501.1702438551698
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+On Tue, Dec 12, 2023 at 10:35:51PM -0500, Paul Dufresne wrote:
+> https://gitlab.freedesktop.org/drm/nouveau/-/issues/282
 
-https://gitlab.freedesktop.org/drm/nouveau/-/issues/282
-------=_Part_16953_1356003501.1702438551698
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Let's add more folks who were involved in
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><meta content="text/html;charset=UTF-8" http-equiv="Content-Type"></head><body ><div style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt;"><div><a target="_blank" href="https://gitlab.freedesktop.org/drm/nouveau/-/issues/282">https://gitlab.freedesktop.org/drm/nouveau/-/issues/282</a><br></div><div><br></div><div><br></div></div><br></body></html>
-------=_Part_16953_1356003501.1702438551698--
+1b477f42285e ("drm/nouveau/kms: Add INHERIT ioctl to nvkm/nvif for reading IOR state")
 
+Apparently, someone wants to know that the loop over the crtcs in
+nv50_display_read_hw_or_state() didn't find a head.
+
+Holler if you need me to run a debug patch to figure out why.
+
+We're getting close to releasing so I guess we either debug this or shut
+up the WARN.
+
+Thx.
+
+-- 
+Regards/Gruss,
+    Boris.
+
+https://people.kernel.org/tglx/notes-about-netiquette
