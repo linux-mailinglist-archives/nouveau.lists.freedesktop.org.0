@@ -2,75 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C809812386
-	for <lists+nouveau@lfdr.de>; Thu, 14 Dec 2023 00:48:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6EFC8123E5
+	for <lists+nouveau@lfdr.de>; Thu, 14 Dec 2023 01:29:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 441AF10E86C;
-	Wed, 13 Dec 2023 23:48:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6235E10E895;
+	Thu, 14 Dec 2023 00:29:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8EA0B10E86C
- for <nouveau@lists.freedesktop.org>; Wed, 13 Dec 2023 23:48:27 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D286210E893
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Dec 2023 00:29:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1702511306;
+ s=mimecast20190719; t=1702513784;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=nlH0hEer7+Nk19Vq61ytYQm6EsTqNJlYAMHbJqXd6yE=;
- b=Fx4HY9aHvS2iHzTOM0jHTetw7jdDVxX/MauFhP4hKpWdTWaEHH+ixgysT+2dnhaEiNty6K
- gQ3EEERmoD8o2HWY2QbGAb9jCS+0XAnu6PYLUp249Hs7Z3QaoQquQgiiYKId8LlBz86813
- Z26A+PqDytvEm5iUXpGOyVI73HZk2rQ=
-Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com
- [209.85.221.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=oN4Rq76T2MU78KSmZ3OnQmRSJOzHsfBPUD6PRxAotV0=;
+ b=GgF/206owCVa3yjb137/oOxXNM3NmA792b+6j7UxnDnI0nJoCpEQ9e+o6vHXqYDg6qjr2K
+ OBn/8EJ5GV8ZMxITbo41EJvCH8o44rh3lxRSWXvG8RRJOBCl1pAmR2HQE3hPGc29z0a4Pk
+ USpt5Em49+JTBuAHg7i2KzrV9i6NGQY=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-628-99k7XJMsPDe533nxTuwG8A-1; Wed, 13 Dec 2023 18:48:24 -0500
-X-MC-Unique: 99k7XJMsPDe533nxTuwG8A-1
-Received: by mail-vk1-f199.google.com with SMTP id
- 71dfb90a1353d-4b288467e05so2025594e0c.2
- for <nouveau@lists.freedesktop.org>; Wed, 13 Dec 2023 15:48:24 -0800 (PST)
+ us-mta-529-ryLQEI58NQagcPdyhvdOUg-1; Wed, 13 Dec 2023 19:29:42 -0500
+X-MC-Unique: ryLQEI58NQagcPdyhvdOUg-1
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-67ef11ee39bso24568086d6.3
+ for <nouveau@lists.freedesktop.org>; Wed, 13 Dec 2023 16:29:42 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702511304; x=1703116104;
+ d=1e100.net; s=20230601; t=1702513782; x=1703118582;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=nlH0hEer7+Nk19Vq61ytYQm6EsTqNJlYAMHbJqXd6yE=;
- b=LcbVtP1aK3kpfjNrApuBqDB1+ZwhrVRdytV2ppOCaJCu4CL+X9rAmw+W9fGfWlx4Zi
- by6O1Id0derYzk5mjO4Zp+L3YfJv/DdCG1m/6tpP5OmpjJDPjWZFbvXKVdUeOnVBHmzT
- p2lWlXd/vh3e2Qn68/lnORbpXybPmQYX+c08OaaL4tiNhY9iHOdoEyuaUaxHegYM293r
- StfK8sJ7ax4QU021YGGik+G0a0CqUEmXKLAvcMpj0rXOOwBx2BxRdDHoscgrv0bGgQDh
- I0Eo5W47Bas0Mi9XjwwdKlmYiaJ0C5+XxGOxSOecwI4alHMlpycjOK0qWjMpo2R3eO7j
- E0hQ==
-X-Gm-Message-State: AOJu0YzfPG1LXNRCoSfs243TpHpRHVKQ7rFEJxskOUqXqRAy8bMH5PZ3
- +EuQt3iOuAjlLEfzjn3+Ve37k6Bi9eVmJ6qvabuAXhtV1PAeNh/fkb2vhUxqeKt5FPGJA12lQGF
- GO3q9kbDhvqAsFBHHkz2I9LnzAA==
-X-Received: by 2002:a1f:f4c9:0:b0:4b2:884d:60ef with SMTP id
- s192-20020a1ff4c9000000b004b2884d60efmr6453505vkh.9.1702511304466; 
- Wed, 13 Dec 2023 15:48:24 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHdScfcgntZWOMNXTw3/v7+E4FVhmTkodlicMCAD2tYLEyL4jcsSSdQlpenRfQ9H4cIjARGMQ==
-X-Received: by 2002:a1f:f4c9:0:b0:4b2:884d:60ef with SMTP id
- s192-20020a1ff4c9000000b004b2884d60efmr6453500vkh.9.1702511304155; 
- Wed, 13 Dec 2023 15:48:24 -0800 (PST)
+ bh=oN4Rq76T2MU78KSmZ3OnQmRSJOzHsfBPUD6PRxAotV0=;
+ b=h+y1YnWs1euXWpZRo6d0JCZiuTz25M2V0C4qXStg61cpttXBcMuiWntBpDGSG9dWHH
+ jKaZt88rqRvBRBDhwIJ8kI2n8lu6dFHWW5BkyzaYC5sIsU6elc5UIHMhWQIYFZfy9BnX
+ 7b2C55v6gxehRdBm9QIveWCrW2xBvrs+V6BK6wQ+WkluE4GXOk41g87qsKQ33MkL3Uz2
+ eb3q4eTAZYOnyY+YQGADNj46yOQfJR9Tpo9TG0YpucgWTJ6TyYxpC0ObM/Ng33go31wf
+ T6cXJUOzcYcrFbbTizZ2oBUxuo3RPmBIPui07HM/SVBAUzolE2v/gTamc+6WZKPXQoDo
+ YL2A==
+X-Gm-Message-State: AOJu0YwdBC4zdaQ1O6YSvw3fSyT3SSHNnpR8i/Bd0sF+iRAZfAOvh58W
+ dgj1zeqrDZlS8NlQkpEX1wBcRGkeia7VPT5C3ZhhozJniZPsz1hjik3+Kz20alK1NLfa901n7OZ
+ phuvPfNzuNkEGWp0jv4uHkR6UeA==
+X-Received: by 2002:a0c:c302:0:b0:67e:f0c6:f63c with SMTP id
+ f2-20020a0cc302000000b0067ef0c6f63cmr3127421qvi.73.1702513782082; 
+ Wed, 13 Dec 2023 16:29:42 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFT8NAo/e6k3ZstcJUfz2WKPCzwDFukF/FeEkwM1oBWivWpyuN2Q5+EAT9+mBMJfs08TgmRBQ==
+X-Received: by 2002:a0c:c302:0:b0:67e:f0c6:f63c with SMTP id
+ f2-20020a0cc302000000b0067ef0c6f63cmr3127411qvi.73.1702513781828; 
+ Wed, 13 Dec 2023 16:29:41 -0800 (PST)
 Received: from ?IPv6:2600:4040:5c6c:a300::feb? ([2600:4040:5c6c:a300::feb])
  by smtp.gmail.com with ESMTPSA id
- ej8-20020ad45a48000000b0067a4396f9cdsm5449659qvb.8.2023.12.13.15.48.23
+ qh10-20020a05620a668a00b0076cbcf8ad3bsm4853219qkn.55.2023.12.13.16.29.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Dec 2023 15:48:23 -0800 (PST)
-Message-ID: <f10791773520f85857749c080af999821dd41a0d.camel@redhat.com>
+ Wed, 13 Dec 2023 16:29:41 -0800 (PST)
+Message-ID: <f1a33f9001bc642fd71280559ec0f612936db2a8.camel@redhat.com>
 Subject: Re: nouveau 0000:01:00.0: drm_WARN_ON(!found_head)
 From: Lyude Paul <lyude@redhat.com>
 To: Borislav Petkov <bp@alien8.de>, Paul Dufresne <dufresnep@zoho.com>, 
  Danilo Krummrich <me@dakr.org>
-Date: Wed, 13 Dec 2023 18:48:22 -0500
-In-Reply-To: <114bf9f5790f637a6cdec4957244192d3bd76a04.camel@redhat.com>
+Date: Wed, 13 Dec 2023 19:29:40 -0500
+In-Reply-To: <f10791773520f85857749c080af999821dd41a0d.camel@redhat.com>
 References: <20231111120323.GAZU9tiw8e0RSzCGB9@fat_crate.local>
  <20231212224037.GAZXjhZUDeoq50xKJ5@fat_crate.local>
  <18c613ec092.ae61cf7d6029.4389632938517239705@zoho.com>
  <20231213113936.GBZXmX+MKqX/qOnPn1@fat_crate.local>
  <20231213124936.GCZXmoYDq8nMRs75XM@fat_crate.local>
  <114bf9f5790f637a6cdec4957244192d3bd76a04.camel@redhat.com>
+ <f10791773520f85857749c080af999821dd41a0d.camel@redhat.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.48.4 (3.48.4-1.fc38)
 MIME-Version: 1.0
@@ -95,52 +96,62 @@ Cc: Daniel Vetter <daniel@ffwll.ch>, nouveau <nouveau@lists.freedesktop.org>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hopefully you're still on at this point - if you are, could you try startin=
-g
-the machine up with the following kernel module arguments passed to nouveau=
-?
+Nevermind - I don't think I'll need the logs, I stared at the code for long
+enough and I think I realized what's happening.
 
-debug=3Ddisp=3Dtrace
+I will have a patch for you to test in just a moment, just waiting for it t=
+o
+compile so I can verify nothing else breaks
 
-Then see if you can find any lines that mention INHERIT? I have a feeling I=
-'m
-just going to have to add a workaround for the time being, but I'd really l=
-ove
-to know how we're managing to get that far on a hardware generation we neve=
-r
-implemented that nvkm ioctl for=E2=80=A6
-
-On Wed, 2023-12-13 at 18:37 -0500, Lyude Paul wrote:
-> agh - thank you for repeatedly poking on this, I've been busy enough with=
- GSP
-> work I totally missed this. Yes - I'm quite surprised that this is blowin=
-g up,
-> but considering that looks to be a GT218 I guess display state readback m=
-ust
-> just work a bit differently there since that's really early on into the N=
-V50
-> days.
+On Wed, 2023-12-13 at 18:48 -0500, Lyude Paul wrote:
+> Hopefully you're still on at this point - if you are, could you try start=
+ing
+> the machine up with the following kernel module arguments passed to nouve=
+au?
 >=20
-> The reason that was a drm_WARN_ON() was because it indicates that we're n=
-ot
-> reading back OR -> head assignments properly. But, I'm confused how we're=
- even
-> getting that far on a non-GSP platform. I'm going to dig into this now, b=
-ut if
-> I don't figure out a good fix by the end of the day I'll just send a patc=
-h to
-> silent the warning.
+> debug=3Ddisp=3Dtrace
 >=20
-> Thanks again for bugging me about this!
+> Then see if you can find any lines that mention INHERIT? I have a feeling=
+ I'm
+> just going to have to add a workaround for the time being, but I'd really=
+ love
+> to know how we're managing to get that far on a hardware generation we ne=
+ver
+> implemented that nvkm ioctl for=E2=80=A6
 >=20
-> On Wed, 2023-12-13 at 13:49 +0100, Borislav Petkov wrote:
-> > On Wed, Dec 13, 2023 at 12:39:36PM +0100, Borislav Petkov wrote:
-> > > We're getting close to releasing so I guess we either debug this or s=
-hut
-> > > up the WARN.
+> On Wed, 2023-12-13 at 18:37 -0500, Lyude Paul wrote:
+> > agh - thank you for repeatedly poking on this, I've been busy enough wi=
+th GSP
+> > work I totally missed this. Yes - I'm quite surprised that this is blow=
+ing up,
+> > but considering that looks to be a GT218 I guess display state readback=
+ must
+> > just work a bit differently there since that's really early on into the=
+ NV50
+> > days.
 > >=20
-> > Not only that - panic_on_warn turns this into an explosion so you don't
-> > want that in a released kernel.
+> > The reason that was a drm_WARN_ON() was because it indicates that we're=
+ not
+> > reading back OR -> head assignments properly. But, I'm confused how we'=
+re even
+> > getting that far on a non-GSP platform. I'm going to dig into this now,=
+ but if
+> > I don't figure out a good fix by the end of the day I'll just send a pa=
+tch to
+> > silent the warning.
+> >=20
+> > Thanks again for bugging me about this!
+> >=20
+> > On Wed, 2023-12-13 at 13:49 +0100, Borislav Petkov wrote:
+> > > On Wed, Dec 13, 2023 at 12:39:36PM +0100, Borislav Petkov wrote:
+> > > > We're getting close to releasing so I guess we either debug this or=
+ shut
+> > > > up the WARN.
+> > >=20
+> > > Not only that - panic_on_warn turns this into an explosion so you don=
+'t
+> > > want that in a released kernel.
+> > >=20
 > >=20
 >=20
 
