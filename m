@@ -2,50 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 961C681872E
-	for <lists+nouveau@lfdr.de>; Tue, 19 Dec 2023 13:14:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B18E818ABF
+	for <lists+nouveau@lfdr.de>; Tue, 19 Dec 2023 16:03:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1690E10E489;
-	Tue, 19 Dec 2023 12:14:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4958C10E4D0;
+	Tue, 19 Dec 2023 15:03:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0A08410E488;
- Tue, 19 Dec 2023 12:14:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1702988092; x=1734524092;
- h=from:to:cc:subject:in-reply-to:references:date:
- message-id:mime-version;
- bh=MzXwOKF36dSLvD7SAiEMA9wsT0Rd8g3q7N4ec+ws4cI=;
- b=Bf59oeaakCBqdI4kc2dPu7Y6nIdzOLciUjAdaGWj9DeXfDzZH3slkEOz
- zDNXKS0z86HFX0e2J4JmFo3YBcG8vPvlEfFNoPSej8Mi2+7GVl2ExzHNF
- xvvhtMq+bAUNkMRPLyH9ckfQQPCe2PgptLMtXgSbDwJUuz/A3eaZhzeOv
- LBi0LELoNK+zvjs9eU3emmuWDG+7sXi14ff+nz4PDyi1L8uLVNYXxR7t4
- mHA1sRlJZ/YRldtWUrnKnz6qGXzeSps2doSTe89sotqWrtYcsKkUkhq9C
- jZGT+jtaXQXBBOkO4V/Gpg3Z75GLtGNgh8y6XBvjyPEZOOyGFOtGe15oK w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10928"; a="459991812"
-X-IronPort-AV: E=Sophos;i="6.04,288,1695711600"; d="scan'208";a="459991812"
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Dec 2023 04:14:51 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10928"; a="810216191"
-X-IronPort-AV: E=Sophos;i="6.04,288,1695711600"; d="scan'208";a="810216191"
-Received: from alexeyze-mobl.ger.corp.intel.com (HELO localhost)
- ([10.252.34.118])
- by orsmga001-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Dec 2023 04:14:49 -0800
-From: Jani Nikula <jani.nikula@intel.com>
-To: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Subject: Re: [PATCH] drm/nouveau: include drm/drm_edid.h only where needed
-In-Reply-To: <20231212135418.3816792-1-jani.nikula@intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20231212135418.3816792-1-jani.nikula@intel.com>
-Date: Tue, 19 Dec 2023 14:14:46 +0200
-Message-ID: <87il4utmmh.fsf@intel.com>
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2126210E4C2;
+ Tue, 19 Dec 2023 15:03:22 +0000 (UTC)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40c2db2ee28so58607525e9.2; 
+ Tue, 19 Dec 2023 07:03:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702998200; x=1703603000; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=j+2uydkqP7/GP5xpG18IqG/AnXLR2V5zI/Eof83ojXM=;
+ b=LqmC1MtbZMXcAIu9FC9Pfjiz1FAkxwH9lSxwtUQkHbCGF7xB1M/zCJ9zhRmG/Qh0bG
+ pJijtJrXmQwGEbpeX95hWiYNCYc7/Iup1O0oG4C+UfzOiDcOiWfz2cJQQVdk1Pl0jtcn
+ 8Z+DAIi/r3j16zqfsaIxxz4LXv0t39dVGjaXlwPx/gYkCOQLU0Szsr8Qel75NYrJ0jgV
+ cQcbgTd/sMz5a3cz5eM8piKXaemp/2gbCEI4v2j6LITOwymE28NRVHTfR/4ahb2qE/Rg
+ GmdBw+eN9dtgWTs8NKVPUAN1nXTpD5Hblp0Ew/rVkXJBbB0yCh/asA1XIZ6DQ+k3SxnU
+ YLgQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702998200; x=1703603000;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=j+2uydkqP7/GP5xpG18IqG/AnXLR2V5zI/Eof83ojXM=;
+ b=J6JV+rNV6i2ubPilBXqIwqBv4uSnOVFD515vl14C4xO+a7yRldNlKvuWs1cY/qdXal
+ xqfsoUO/sEki5AGrs7mXZ62gOb/oaNfS1drwZaViWd2ZeIFrouWlJoR7HKoGElw/5t1u
+ 5ezkUoCWrKj7XRV+zbBVMu5VrCRtrSi+rChd1OSpliwZ6OMyIxtRfAjGCYhfrDYeqxM/
+ LKISIA9T5vyo5ALr4GFSj2dzhv1OfNFVvKMkJJ33uPmO+haExu0TD15tUcge2kaIL+Sd
+ 1O+te9Qter7wa0oPem+tfxqoYCYqUSKaZxGqq9xDLpzYkXBIvQwC2kt+9ROe8rYukMPy
+ AVIA==
+X-Gm-Message-State: AOJu0Yzx20lDTPbvoP6gyeEEz4ROrCflMmhimc0TQFFNYBQbnLpxR24G
+ Ns13fkxyThysLdNhpat40KsFukIBCfVXwA==
+X-Google-Smtp-Source: AGHT+IGxnNsXzTz9OUKp2xip5KTPq0mzABVaftCPhQeLID8u1htUaLAIfs8yDDd4UNZQPtmE2nIdMQ==
+X-Received: by 2002:a05:600c:46c6:b0:40c:2ba6:809 with SMTP id
+ q6-20020a05600c46c600b0040c2ba60809mr10002784wmo.157.1702998200183; 
+ Tue, 19 Dec 2023 07:03:20 -0800 (PST)
+Received: from localhost (cpc154979-craw9-2-0-cust193.16-3.cable.virginm.net.
+ [80.193.200.194]) by smtp.gmail.com with ESMTPSA id
+ n7-20020a05600c4f8700b0040b45282f88sm3190226wmq.36.2023.12.19.07.03.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Dec 2023 07:03:19 -0800 (PST)
+From: Colin Ian King <colin.i.king@gmail.com>
+To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Subject: [PATCH] drm/nouveau/therm: remove redundant duty == target check
+Date: Tue, 19 Dec 2023 15:03:18 +0000
+Message-Id: <20231219150318.368398-1-colin.i.king@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,55 +73,37 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 12 Dec 2023, Jani Nikula <jani.nikula@intel.com> wrote:
-> Including drm_edid.h from nouveau_connector.h causes the rebuild of 15
-> files when drm_edid.h is modified, while there are only a few files that
-> actually need to include drm_edid.h.
+The check for duty == target is always false because it is in an if block
+where duty != target. A previous change added the duty != target check
+and so the check duty == target check is now redundant and can be removed.
+Cleans up a cppcheck warning:
 
-Ping?
+drivers/gpu/drm/nouveau/nvkm/subdev/therm/fan.c:93:17: warning: Opposite
+inner 'if' condition leads to a dead code block. [oppositeInnerCondition]
 
->
-> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
-> ---
->  drivers/gpu/drm/nouveau/dispnv50/head.c     | 1 +
->  drivers/gpu/drm/nouveau/nouveau_connector.h | 2 +-
->  2 files changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
-> index 5f490fbf1877..83355dbc15ee 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/head.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
-> @@ -32,6 +32,7 @@
->  
->  #include <drm/drm_atomic.h>
->  #include <drm/drm_atomic_helper.h>
-> +#include <drm/drm_edid.h>
->  #include <drm/drm_vblank.h>
->  #include "nouveau_connector.h"
->  
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.h b/drivers/gpu/drm/nouveau/nouveau_connector.h
-> index a2df4918340c..0608cabed058 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_connector.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.h
-> @@ -35,7 +35,6 @@
->  
->  #include <drm/display/drm_dp_helper.h>
->  #include <drm/drm_crtc.h>
-> -#include <drm/drm_edid.h>
->  #include <drm/drm_encoder.h>
->  #include <drm/drm_util.h>
->  
-> @@ -44,6 +43,7 @@
->  
->  struct nvkm_i2c_port;
->  struct dcb_output;
-> +struct edid;
->  
->  #ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
->  struct nouveau_backlight {
+Fixes: e4311ee51d1e ("drm/nouveau/therm: remove ineffective workarounds for alarm bugs")
+Signed-off-by: Colin Ian King <colin.i.king@gmail.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/therm/fan.c | 2 --
+ 1 file changed, 2 deletions(-)
 
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/fan.c b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/fan.c
+index f8fa43c8a7d2..c4aaf7473065 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/fan.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/fan.c
+@@ -90,8 +90,6 @@ nvkm_fan_update(struct nvkm_fan *fan, bool immediate, int target)
+ 
+ 		if (duty > target)
+ 			delay = slow_down_period;
+-		else if (duty == target)
+-			delay = min(bump_period, slow_down_period) ;
+ 		else
+ 			delay = bump_period;
+ 
 -- 
-Jani Nikula, Intel
+2.39.2
+
