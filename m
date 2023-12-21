@@ -2,39 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BF0882EE5D
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:50:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 028B382EE71
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:50:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AEF3610E501;
-	Tue, 16 Jan 2024 11:47:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C1CE010E51D;
+	Tue, 16 Jan 2024 11:47:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 993 seconds by postgrey-1.36 at gabe;
- Fri, 15 Dec 2023 10:19:19 UTC
-Received: from wxsgout04.xfusion.com (wxsgout03.xfusion.com [36.139.52.80])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6972410E31C
- for <nouveau@lists.freedesktop.org>; Fri, 15 Dec 2023 10:19:19 +0000 (UTC)
-Received: from wuxshcsitd00600.xfusion.com (unknown [10.32.133.213])
- by wxsgout04.xfusion.com (SkyGuard) with ESMTPS id 4Ss4SQ6ZQgzB2753;
- Fri, 15 Dec 2023 17:59:18 +0800 (CST)
-Received: from localhost (10.82.147.3) by wuxshcsitd00600.xfusion.com
- (10.32.133.213) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Fri, 15 Dec
- 2023 18:02:41 +0800
-Date: Fri, 15 Dec 2023 18:02:41 +0800
-From: Wang Jinchao <wangjinchao@xfusion.com>
-To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, Danilo
- Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>, Daniel Vetter
- <daniel@ffwll.ch>, <dri-devel@lists.freedesktop.org>,
- <nouveau@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
-Subject: [PATCH] drm/nouveau/fifo: remove duplicated including
-Message-ID: <202312151802+0800-wangjinchao@xfusion.com>
+X-Greylist: delayed 401 seconds by postgrey-1.36 at gabe;
+ Thu, 21 Dec 2023 10:50:32 UTC
+Received: from forward203a.mail.yandex.net (forward203a.mail.yandex.net
+ [IPv6:2a02:6b8:c0e:500:1:45:d181:d203])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3513010E696;
+ Thu, 21 Dec 2023 10:50:32 +0000 (UTC)
+Received: from forward101a.mail.yandex.net (forward101a.mail.yandex.net
+ [IPv6:2a02:6b8:c0e:500:1:45:d181:d101])
+ by forward203a.mail.yandex.net (Yandex) with ESMTP id ABA616B1CF;
+ Thu, 21 Dec 2023 13:43:53 +0300 (MSK)
+Received: from mail-nwsmtp-smtp-production-main-39.vla.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-39.vla.yp-c.yandex.net
+ [IPv6:2a02:6b8:c1d:3e29:0:640:6566:0])
+ by forward101a.mail.yandex.net (Yandex) with ESMTP id 2052A608FC;
+ Thu, 21 Dec 2023 13:43:48 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-39.vla.yp-c.yandex.net
+ (smtp/Yandex) with ESMTPSA id lhLioBTTsqM0-Z4CLrQXm; 
+ Thu, 21 Dec 2023 13:43:47 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.ru; s=mail;
+ t=1703155427; bh=KxttoY911M9pQ6nQTQMh2QMpx7SWhFqshPKl0r8C8w4=;
+ h=Message-ID:Date:Cc:Subject:To:From;
+ b=EQWEIWkfhP4quQgbPKMu9QrPVVOWh7KeMiBk7EgCwXCIe7jbesrzQJhNxAGndYdif
+ vAMVx4g/T8OZAKOJkzejRGZJFe+oMZ2s/+Z6kaxF9tBBuAnz4dYp2g51NsUgTR+7FH
+ FVTzCmTG392M7ZJY8pqB1DsTKL6/l98L7E1e2H8Q=
+Authentication-Results: mail-nwsmtp-smtp-production-main-39.vla.yp-c.yandex.net;
+ dkim=pass header.i=@yandex.ru
+From: Dmitry Antipov <dmantipov@yandex.ru>
+To: David Airlie <airlied@gmail.com>
+Subject: [PATCH] drm/nouveau: svm: fix kvcalloc() arguments order
+Date: Thu, 21 Dec 2023 13:40:49 +0300
+Message-ID: <20231221104051.23680-1-dmantipov@yandex.ru>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-X-Originating-IP: [10.82.147.3]
-X-ClientProxiedBy: wuxshcsitd00602.xfusion.com (10.32.132.250) To
- wuxshcsitd00600.xfusion.com (10.32.133.213)
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 16 Jan 2024 11:47:29 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -47,29 +56,43 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: wangjinchao@xfusion.com, stone.xulei@xfusion.com
+Cc: nouveau@lists.freedesktop.org, Dmitry Antipov <dmantipov@yandex.ru>,
+ "Gustavo A . R . Silva" <gustavoars@kernel.org>,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-rm second including of chid.h
+When compiling with gcc version 14.0.0 20231220 (experimental)
+and W=1, I've noticed the following warning:
 
-Signed-off-by: Wang Jinchao <wangjinchao@xfusion.com>
+drivers/gpu/drm/nouveau/nouveau_svm.c: In function 'nouveau_svm_fault_buffer_ctor':
+drivers/gpu/drm/nouveau/nouveau_svm.c:1014:40: warning: 'kvcalloc' sizes specified with
+'sizeof' in the earlier argument and not in the later argument [-Wcalloc-transposed-args]
+ 1014 |         buffer->fault = kvcalloc(sizeof(*buffer->fault), buffer->entries, GFP_KERNEL);
+      |                                        ^
+
+Since 'n' and 'size' arguments of 'kvcalloc()' are multiplied to
+calculate the final size, their actual order doesn't affect the
+result and so this is not a bug. But it's still worth to fix it.
+
+Signed-off-by: Dmitry Antipov <dmantipov@yandex.ru>
 ---
- drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/gpu/drm/nouveau/nouveau_svm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
-index 87a62d4ff4bd..7d4716dcd512 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
-@@ -24,7 +24,6 @@
- #include "chan.h"
- #include "chid.h"
- #include "cgrp.h"
--#include "chid.h"
- #include "runl.h"
- #include "priv.h"
+diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
+index cc03e0c22ff3..5e4565c5011a 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_svm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
+@@ -1011,7 +1011,7 @@ nouveau_svm_fault_buffer_ctor(struct nouveau_svm *svm, s32 oclass, int id)
+ 	if (ret)
+ 		return ret;
+ 
+-	buffer->fault = kvcalloc(sizeof(*buffer->fault), buffer->entries, GFP_KERNEL);
++	buffer->fault = kvcalloc(buffer->entries, sizeof(*buffer->fault), GFP_KERNEL);
+ 	if (!buffer->fault)
+ 		return -ENOMEM;
  
 -- 
-2.40.0
+2.43.0
 
