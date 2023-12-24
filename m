@@ -2,47 +2,40 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 028B382EE71
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:50:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7999C82EE59
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:49:57 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C1CE010E51D;
-	Tue, 16 Jan 2024 11:47:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B1F9510E515;
+	Tue, 16 Jan 2024 11:47:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 401 seconds by postgrey-1.36 at gabe;
- Thu, 21 Dec 2023 10:50:32 UTC
-Received: from forward203a.mail.yandex.net (forward203a.mail.yandex.net
- [IPv6:2a02:6b8:c0e:500:1:45:d181:d203])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3513010E696;
- Thu, 21 Dec 2023 10:50:32 +0000 (UTC)
-Received: from forward101a.mail.yandex.net (forward101a.mail.yandex.net
- [IPv6:2a02:6b8:c0e:500:1:45:d181:d101])
- by forward203a.mail.yandex.net (Yandex) with ESMTP id ABA616B1CF;
- Thu, 21 Dec 2023 13:43:53 +0300 (MSK)
-Received: from mail-nwsmtp-smtp-production-main-39.vla.yp-c.yandex.net
- (mail-nwsmtp-smtp-production-main-39.vla.yp-c.yandex.net
- [IPv6:2a02:6b8:c1d:3e29:0:640:6566:0])
- by forward101a.mail.yandex.net (Yandex) with ESMTP id 2052A608FC;
- Thu, 21 Dec 2023 13:43:48 +0300 (MSK)
-Received: by mail-nwsmtp-smtp-production-main-39.vla.yp-c.yandex.net
- (smtp/Yandex) with ESMTPSA id lhLioBTTsqM0-Z4CLrQXm; 
- Thu, 21 Dec 2023 13:43:47 +0300
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.ru; s=mail;
- t=1703155427; bh=KxttoY911M9pQ6nQTQMh2QMpx7SWhFqshPKl0r8C8w4=;
- h=Message-ID:Date:Cc:Subject:To:From;
- b=EQWEIWkfhP4quQgbPKMu9QrPVVOWh7KeMiBk7EgCwXCIe7jbesrzQJhNxAGndYdif
- vAMVx4g/T8OZAKOJkzejRGZJFe+oMZ2s/+Z6kaxF9tBBuAnz4dYp2g51NsUgTR+7FH
- FVTzCmTG392M7ZJY8pqB1DsTKL6/l98L7E1e2H8Q=
-Authentication-Results: mail-nwsmtp-smtp-production-main-39.vla.yp-c.yandex.net;
- dkim=pass header.i=@yandex.ru
-From: Dmitry Antipov <dmantipov@yandex.ru>
-To: David Airlie <airlied@gmail.com>
-Subject: [PATCH] drm/nouveau: svm: fix kvcalloc() arguments order
-Date: Thu, 21 Dec 2023 13:40:49 +0300
-Message-ID: <20231221104051.23680-1-dmantipov@yandex.ru>
-X-Mailer: git-send-email 2.43.0
+Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [IPv6:2a01:e0c:1:1599::15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9932710E068
+ for <nouveau@lists.freedesktop.org>; Sun, 24 Dec 2023 10:18:59 +0000 (UTC)
+Received: from [IPV6:2a01:cb1d:8db4:28d1:7100:86ca:ab5d:d433] (unknown
+ [IPv6:2a01:cb1d:8db4:28d1:7100:86ca:ab5d:d433])
+ (Authenticated sender: pierrejove@free.fr)
+ by smtp6-g21.free.fr (Postfix) with ESMTPSA id 9E382780333
+ for <nouveau@lists.freedesktop.org>; Sun, 24 Dec 2023 11:18:57 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1703413137;
+ bh=kc+nKceDpmvxcxCS84XbXX1yi6k4clx/4AsDeg0Suqs=;
+ h=Date:To:From:Subject:From;
+ b=ptwkIxqU38JWL/SstAXz8BZ42v+ElsA95jjkXg3vQxbZKFMqRycNYEm/lTtzq6wBi
+ 5of8Cn8k7IzVdHChXFsQViSHBfVhG8BL2qIpVYkPOO63fu9ozaqSNLoEqjp0Vz8Qzh
+ mXWoU9ntjvpw5NMFAn3MkKFTSimPEYhIWeCSLCbnNJyJ6U9ka0E+zlSeFctbmNwajI
+ lIj/hO+fF7u1NhVQpzAOQtjt0iVTa+47af/bhqq/XeVYfGAhiGFHSMv6+x1PolWtPp
+ /7Ds0Hvk426Gs5D4eqp+3hlKvLAu4KJ6XtMQPuCOwWBSMPflB60+Z5Bb2a9bFOE8XW
+ Do//1P97BidcQ==
+Message-ID: <75d066dd-e825-4a80-ae3d-f6fe06184ad2@free.fr>
+Date: Sun, 24 Dec 2023 11:18:57 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: nouveau@lists.freedesktop.org
+Content-Language: en-US
+From: niepce <pierrejove@free.fr>
+Subject: Driver Nvidia 535
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 16 Jan 2024 11:47:29 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -56,43 +49,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Dmitry Antipov <dmantipov@yandex.ru>,
- "Gustavo A . R . Silva" <gustavoars@kernel.org>,
- dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-When compiling with gcc version 14.0.0 20231220 (experimental)
-and W=1, I've noticed the following warning:
+you need to translate...sorry
 
-drivers/gpu/drm/nouveau/nouveau_svm.c: In function 'nouveau_svm_fault_buffer_ctor':
-drivers/gpu/drm/nouveau/nouveau_svm.c:1014:40: warning: 'kvcalloc' sizes specified with
-'sizeof' in the earlier argument and not in the later argument [-Wcalloc-transposed-args]
- 1014 |         buffer->fault = kvcalloc(sizeof(*buffer->fault), buffer->entries, GFP_KERNEL);
-      |                                        ^
+Bonjour; j'utilise un Dell G3-15 (intel core i5 9th Gen) & (Nvidia 
+GEforce GTX)
 
-Since 'n' and 'size' arguments of 'kvcalloc()' are multiplied to
-calculate the final size, their actual order doesn't affect the
-result and so this is not a bug. But it's still worth to fix it.
+Mon OS est Linux Mint 21.2 Victoria (sous Ubuntu 22.04 Jammy Jellyfish )
 
-Signed-off-by: Dmitry Antipov <dmantipov@yandex.ru>
----
- drivers/gpu/drm/nouveau/nouveau_svm.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+J'utilise un pilote vidéo générique; mais si je tente d'utiliser le 
+pilote Propriétaire Nvidia 535
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
-index cc03e0c22ff3..5e4565c5011a 100644
---- a/drivers/gpu/drm/nouveau/nouveau_svm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
-@@ -1011,7 +1011,7 @@ nouveau_svm_fault_buffer_ctor(struct nouveau_svm *svm, s32 oclass, int id)
- 	if (ret)
- 		return ret;
- 
--	buffer->fault = kvcalloc(sizeof(*buffer->fault), buffer->entries, GFP_KERNEL);
-+	buffer->fault = kvcalloc(buffer->entries, sizeof(*buffer->fault), GFP_KERNEL);
- 	if (!buffer->fault)
- 		return -ENOMEM;
- 
--- 
-2.43.0
+mon WiFi cesse de fonctionner ce qui est un problème sur un ordinateur 
+"gamming"
+
+Je ne connais rien a la programmation,je voulais seulement partager 
+l'information.
+
+Merci d'avoir pris le temps de me lire.
+
 
