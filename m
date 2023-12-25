@@ -2,41 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7999C82EE59
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:49:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A00182EE3B
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jan 2024 12:48:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B1F9510E515;
-	Tue, 16 Jan 2024 11:47:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0B81E10E4D7;
+	Tue, 16 Jan 2024 11:47:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [IPv6:2a01:e0c:1:1599::15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9932710E068
- for <nouveau@lists.freedesktop.org>; Sun, 24 Dec 2023 10:18:59 +0000 (UTC)
-Received: from [IPV6:2a01:cb1d:8db4:28d1:7100:86ca:ab5d:d433] (unknown
- [IPv6:2a01:cb1d:8db4:28d1:7100:86ca:ab5d:d433])
- (Authenticated sender: pierrejove@free.fr)
- by smtp6-g21.free.fr (Postfix) with ESMTPSA id 9E382780333
- for <nouveau@lists.freedesktop.org>; Sun, 24 Dec 2023 11:18:57 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1703413137;
- bh=kc+nKceDpmvxcxCS84XbXX1yi6k4clx/4AsDeg0Suqs=;
- h=Date:To:From:Subject:From;
- b=ptwkIxqU38JWL/SstAXz8BZ42v+ElsA95jjkXg3vQxbZKFMqRycNYEm/lTtzq6wBi
- 5of8Cn8k7IzVdHChXFsQViSHBfVhG8BL2qIpVYkPOO63fu9ozaqSNLoEqjp0Vz8Qzh
- mXWoU9ntjvpw5NMFAn3MkKFTSimPEYhIWeCSLCbnNJyJ6U9ka0E+zlSeFctbmNwajI
- lIj/hO+fF7u1NhVQpzAOQtjt0iVTa+47af/bhqq/XeVYfGAhiGFHSMv6+x1PolWtPp
- /7Ds0Hvk426Gs5D4eqp+3hlKvLAu4KJ6XtMQPuCOwWBSMPflB60+Z5Bb2a9bFOE8XW
- Do//1P97BidcQ==
-Message-ID: <75d066dd-e825-4a80-ae3d-f6fe06184ad2@free.fr>
-Date: Sun, 24 Dec 2023 11:18:57 +0100
+Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
+ [205.220.165.32])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8DC5B10E0AD;
+ Mon, 25 Dec 2023 06:52:32 +0000 (UTC)
+Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 3BONlFCB031298; Mon, 25 Dec 2023 06:52:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding;
+ s=corp-2023-11-20; bh=FQZNYX+urMxp/YMleW1fr576KolT4Mh4EiS0z2ulfVc=;
+ b=Cjx4i/O3Ifu/YhhHIs/Y3taoSSIJD4ip9DOHCwQDIxUQ6dxooyGG4cipqpTJitS5SJbw
+ btbEw34v56LhbvJRHBWGF7FHmJPHlpw2IhUqVCbVzeWR1VWB0Clo50Kv7fiXYCKb8URx
+ T3/o8jhQp0Ti96Iz4o59DxpWRMxUhFniNjGuKT45MOJFFp2SBEWYeIUQxRlzKzpLZP6u
+ uP5ffjbLnL6OPcQLQJYbgjUafsQqpbSSgrHIS44AtdWiZMeGKORkazb7nMesLSmmBiZX
+ mxaNvcsev8meNV1fi9YjtVNYxSa1E/L8aFuqCrZ7YZKPRxK8eIRiocNb7tgcN44zjFyN Bw== 
+Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta01.appoci.oracle.com [138.1.114.2])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3v5qeb22qx-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 25 Dec 2023 06:52:05 +0000
+Received: from pps.filterd
+ (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
+ with ESMTP id 3BP6n5xY005487; Mon, 25 Dec 2023 06:52:05 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
+ 3v73a6m1bk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 25 Dec 2023 06:52:05 +0000
+Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 3BP6q4Md015576;
+ Mon, 25 Dec 2023 06:52:04 GMT
+Received: from localhost.localdomain (dhcp-10-175-53-209.vpn.oracle.com
+ [10.175.53.209])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
+ 3v73a6m172-1; Mon, 25 Dec 2023 06:52:04 +0000
+From: Vegard Nossum <vegard.nossum@oracle.com>
+To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>
+Subject: [PATCH -next] drm/nouveau: uapi: fix kerneldoc warnings
+Date: Mon, 25 Dec 2023 07:51:45 +0100
+Message-Id: <20231225065145.3060754-1-vegard.nossum@oracle.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: nouveau@lists.freedesktop.org
-Content-Language: en-US
-From: niepce <pierrejove@free.fr>
-Subject: Driver Nvidia 535
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-12-25_03,2023-12-22_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ phishscore=0 adultscore=0
+ mlxlogscore=999 bulkscore=0 malwarescore=0 mlxscore=0 suspectscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2311290000
+ definitions=main-2312250049
+X-Proofpoint-GUID: 8Qnq6aKAqnTJiQcG022k2VjpaDP0PE9u
+X-Proofpoint-ORIG-GUID: 8Qnq6aKAqnTJiQcG022k2VjpaDP0PE9u
 X-Mailman-Approved-At: Tue, 16 Jan 2024 11:47:29 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -49,25 +78,140 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: Jonathan Corbet <corbet@lwn.net>, Vegard Nossum <vegard.nossum@oracle.com>,
+ linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ Randy Dunlap <rdunlap@infradead.org>,
+ Jani Nikula <jani.nikula@linux.intel.com>, dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-you need to translate...sorry
+As of commit b77fdd6a48e6 ("scripts/kernel-doc: restore warning for
+Excess struct/union"), we see the following warnings when running 'make
+htmldocs':
 
-Bonjour; j'utilise un Dell G3-15 (intel core i5 9th Gen) & (Nvidia 
-GEforce GTX)
+  ./include/uapi/drm/nouveau_drm.h:292: warning: Excess struct member 'DRM_NOUVEAU_VM_BIND_OP_MAP' description in 'drm_nouveau_vm_bind_op'
+  ./include/uapi/drm/nouveau_drm.h:292: warning: Excess struct member 'DRM_NOUVEAU_VM_BIND_OP_UNMAP' description in 'drm_nouveau_vm_bind_op'
+  ./include/uapi/drm/nouveau_drm.h:292: warning: Excess struct member 'DRM_NOUVEAU_VM_BIND_SPARSE' description in 'drm_nouveau_vm_bind_op'
+  ./include/uapi/drm/nouveau_drm.h:336: warning: Excess struct member 'DRM_NOUVEAU_VM_BIND_RUN_ASYNC' description in 'drm_nouveau_vm_bind'
 
-Mon OS est Linux Mint 21.2 Victoria (sous Ubuntu 22.04 Jammy Jellyfish )
+The problem is that these values are #define constants, but had kerneldoc
+comments attached to them as if they were actual struct members.
 
-J'utilise un pilote vidéo générique; mais si je tente d'utiliser le 
-pilote Propriétaire Nvidia 535
+There are a number of ways we could fix this, but I chose to draw
+inspiration from include/uapi/drm/i915_drm.h, which pulls them into the
+corresponding kerneldoc comment for the struct member that they are
+intended to be used with.
 
-mon WiFi cesse de fonctionner ce qui est un problème sur un ordinateur 
-"gamming"
+To keep the diff readable, there are a number of things I _didn't_ do in
+this patch, but which we should also consider:
 
-Je ne connais rien a la programmation,je voulais seulement partager 
-l'information.
+- This is pretty good documentation, but it ends up in gpu/driver-uapi,
+  which is part of subsystem-apis/ when it really ought to display under
+  userspace-api/ (the "Linux kernel user-space API guide" book of the
+  documentation).
 
-Merci d'avoir pris le temps de me lire.
+- More generally, we might want a warning if include/uapi/ files are
+  kerneldoc'd outside userspace-api/.
 
+- I'd consider it cleaner if the #defines appeared between the kerneldoc
+  for the member and the member itself (which is something other DRM-
+  related UAPI docs do).
+
+- The %IDENTIFIER kerneldoc syntax is intended for "constants", and is
+  more appropriate in this context than ``IDENTIFIER`` or &IDENTIFIER.
+  The DRM docs aren't very consistent on this.
+
+Cc: Randy Dunlap <rdunlap@infradead.org>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Signed-off-by: Vegard Nossum <vegard.nossum@oracle.com>
+---
+ include/uapi/drm/nouveau_drm.h | 56 ++++++++++++++++------------------
+ 1 file changed, 27 insertions(+), 29 deletions(-)
+
+diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_drm.h
+index 0bade1592f34..c95ef8a4d94a 100644
+--- a/include/uapi/drm/nouveau_drm.h
++++ b/include/uapi/drm/nouveau_drm.h
+@@ -238,34 +238,32 @@ struct drm_nouveau_vm_init {
+ struct drm_nouveau_vm_bind_op {
+ 	/**
+ 	 * @op: the operation type
++	 *
++	 * Supported values:
++	 *
++	 * %DRM_NOUVEAU_VM_BIND_OP_MAP - Map a GEM object to the GPU's VA
++	 * space. Optionally, the &DRM_NOUVEAU_VM_BIND_SPARSE flag can be
++	 * passed to instruct the kernel to create sparse mappings for the
++	 * given range.
++	 *
++	 * %DRM_NOUVEAU_VM_BIND_OP_UNMAP - Unmap an existing mapping in the
++	 * GPU's VA space. If the region the mapping is located in is a
++	 * sparse region, new sparse mappings are created where the unmapped
++	 * (memory backed) mapping was mapped previously. To remove a sparse
++	 * region the &DRM_NOUVEAU_VM_BIND_SPARSE must be set.
+ 	 */
+ 	__u32 op;
+-/**
+- * @DRM_NOUVEAU_VM_BIND_OP_MAP:
+- *
+- * Map a GEM object to the GPU's VA space. Optionally, the
+- * &DRM_NOUVEAU_VM_BIND_SPARSE flag can be passed to instruct the kernel to
+- * create sparse mappings for the given range.
+- */
+ #define DRM_NOUVEAU_VM_BIND_OP_MAP 0x0
+-/**
+- * @DRM_NOUVEAU_VM_BIND_OP_UNMAP:
+- *
+- * Unmap an existing mapping in the GPU's VA space. If the region the mapping
+- * is located in is a sparse region, new sparse mappings are created where the
+- * unmapped (memory backed) mapping was mapped previously. To remove a sparse
+- * region the &DRM_NOUVEAU_VM_BIND_SPARSE must be set.
+- */
+ #define DRM_NOUVEAU_VM_BIND_OP_UNMAP 0x1
+ 	/**
+ 	 * @flags: the flags for a &drm_nouveau_vm_bind_op
++	 *
++	 * Supported values:
++	 *
++	 * %DRM_NOUVEAU_VM_BIND_SPARSE - Indicates that an allocated VA
++	 * space region should be sparse.
+ 	 */
+ 	__u32 flags;
+-/**
+- * @DRM_NOUVEAU_VM_BIND_SPARSE:
+- *
+- * Indicates that an allocated VA space region should be sparse.
+- */
+ #define DRM_NOUVEAU_VM_BIND_SPARSE (1 << 8)
+ 	/**
+ 	 * @handle: the handle of the DRM GEM object to map
+@@ -301,17 +299,17 @@ struct drm_nouveau_vm_bind {
+ 	__u32 op_count;
+ 	/**
+ 	 * @flags: the flags for a &drm_nouveau_vm_bind ioctl
++	 *
++	 * Supported values:
++	 *
++	 * %DRM_NOUVEAU_VM_BIND_RUN_ASYNC - Indicates that the given VM_BIND
++	 * operation should be executed asynchronously by the kernel.
++	 *
++	 * If this flag is not supplied the kernel executes the associated
++	 * operations synchronously and doesn't accept any &drm_nouveau_sync
++	 * objects.
+ 	 */
+ 	__u32 flags;
+-/**
+- * @DRM_NOUVEAU_VM_BIND_RUN_ASYNC:
+- *
+- * Indicates that the given VM_BIND operation should be executed asynchronously
+- * by the kernel.
+- *
+- * If this flag is not supplied the kernel executes the associated operations
+- * synchronously and doesn't accept any &drm_nouveau_sync objects.
+- */
+ #define DRM_NOUVEAU_VM_BIND_RUN_ASYNC 0x1
+ 	/**
+ 	 * @wait_count: the number of wait &drm_nouveau_syncs
+-- 
+2.34.1
 
