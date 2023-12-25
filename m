@@ -1,52 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CFCC81D2A2
-	for <lists+nouveau@lfdr.de>; Sat, 23 Dec 2023 07:20:24 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B0C381DED9
+	for <lists+nouveau@lfdr.de>; Mon, 25 Dec 2023 08:40:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 43AB710E08F;
-	Sat, 23 Dec 2023 06:20:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4456510E02E;
+	Mon, 25 Dec 2023 07:40:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 085CC10E086;
- Sat, 23 Dec 2023 06:20:19 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 230AD608C1;
- Sat, 23 Dec 2023 06:20:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8566C433C8;
- Sat, 23 Dec 2023 06:20:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1703312417;
- bh=reDZvGjlO+iBGplMJj/6eDRmk8mNnCJLmcblb0YbRNk=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=VVsnJWq3GsE8C+0DblkEoGqENVkAUl2oKSs1mgU7Hq2DSwstrzLI4mYOUFF7vtLh5
- IX3qrwIq+A84/Y9ubgRZQDDNssGVvWbDjKWaY87YOFez6XjkgrpPYcS3f7kj+CNtlI
- S/jwAmsb0oAeAwUBJPNIK6zDrkVKUlTkZboM4yCbcptRNUNbqRbPVPQm8tOYW+Z18n
- RR5PmtiEGRbq/QypQGMFkfjr65SLnXoyIdlNE9UdRCfSO1WqvHVOT5anmbuoJ1uW6H
- isFh+u49qvd34tTk0C+vTuedmgmW/4iW9khfv93oQtLUoAb95ABFjtf2LDKGeaT8vd
- f/is2IWAx1zHw==
-Received: by mail-ej1-f43.google.com with SMTP id
- a640c23a62f3a-a23566e91d5so293889466b.0; 
- Fri, 22 Dec 2023 22:20:17 -0800 (PST)
-X-Gm-Message-State: AOJu0YwaGg0mdn3AsiLlMeFHMAiDsOlRcoky45ATVVB5dG3L4/bDkSd4
- czfGBzSp+C36FNpqt0XjJtgdeVR4EPmRBI8Xc/A=
-X-Google-Smtp-Source: AGHT+IEAV5HXB0+Ozv/qhH3l6SMNoZhPYWpbngaP3jDI2sLK/C0GvBIiZ8md3Y4DfBubMJyhqh2cPhSRTB0DLPh0x9Y=
-X-Received: by 2002:a17:906:3659:b0:a23:6215:47a with SMTP id
- r25-20020a170906365900b00a236215047amr942739ejb.60.1703312416436; Fri, 22 Dec
- 2023 22:20:16 -0800 (PST)
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:3::133])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0B71510E02E;
+ Mon, 25 Dec 2023 07:40:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+ Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+ bh=fuas5bPzOn9MZEW/fGo0qm2zTQtEOJAGCSSJzEQDXqU=; b=YAAmsBdVJB16MYQ9rG2ieV8wE6
+ OdNhR8sSgZDbMgBwuNiDmodRQGSvWI72hbz5krTOtOe9hBQ8ZTqHB70h/t4/AnRlMnM+N/bC17TCZ
+ W3ZteqWJC7dA4gB+cF4TR8jfMRf1tzrBtW4iMXMaguUkV9jXHSyrmmcZsdNcDLElQ2miTkVi+bJB+
+ ABCUyIxD8tUWQGY91mmOQZi4lncYQqqVJ877Vx5Mn6+2akIUSsSiJoW49C7b01ZOANWyDsZnC9MwD
+ alpfmRVc+zmfqvAd08OXJOsqIRcl/GzvAXdcKdcFg0XgtF8xvvvcguIGUaZFS9BuZMpb8sgAysn4W
+ E+/NXKjA==;
+Received: from [50.53.46.231] (helo=[192.168.254.15])
+ by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1rHfZt-00AM72-13; Mon, 25 Dec 2023 07:40:45 +0000
+Message-ID: <009fcdc4-b10a-4ab9-b368-7cea75bb74e2@infradead.org>
+Date: Sun, 24 Dec 2023 23:40:44 -0800
 MIME-Version: 1.0
-References: <20231222043308.3090089-1-airlied@gmail.com>
- <20231222043308.3090089-8-airlied@gmail.com>
-In-Reply-To: <20231222043308.3090089-8-airlied@gmail.com>
-From: Timur Tabi <timur@kernel.org>
-Date: Sat, 23 Dec 2023 00:20:03 -0600
-X-Gmail-Original-Message-ID: <CAOZdJXU+aj1YhfGDqHh2Gqd=Rktn_biM6uTGNvvwDg_zz6s+eA@mail.gmail.com>
-Message-ID: <CAOZdJXU+aj1YhfGDqHh2Gqd=Rktn_biM6uTGNvvwDg_zz6s+eA@mail.gmail.com>
-Subject: Re: [PATCH 07/11] nouveau/gsp: convert gsp errors to generic errors
-To: Dave Airlie <airlied@gmail.com>
-Content-Type: multipart/alternative; boundary="00000000000085f96b060d27539b"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH -next] drm/nouveau: uapi: fix kerneldoc warnings
+Content-Language: en-US
+To: Vegard Nossum <vegard.nossum@oracle.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>
+References: <20231225065145.3060754-1-vegard.nossum@oracle.com>
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20231225065145.3060754-1-vegard.nossum@oracle.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,71 +51,91 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, Jonathan Corbet <corbet@lwn.net>,
+ Jani Nikula <jani.nikula@linux.intel.com>, dri-devel@lists.freedesktop.org,
+ linux-doc@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---00000000000085f96b060d27539b
-Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Dec 21, 2023, 10:33 PM Dave Airlie <airlied@gmail.com> wrote:
 
-> This should let the upper layers retry as needed on EAGAIN.
->
-> There may be other values we will care about in the future, but
-> this covers our present needs.
->
-> Signed-off-by: Dave Airlie <airlied@redhat.com>
->
-> +static int
-> +r535_rpc_status_to_errno(uint32_t rpc_status)
-> +{
-> +       switch (rpc_status) {
-> +       case 0x55: /* NV_ERR_NOT_READY */
-> +       case 0x66: /* NV_ERR_TIMEOUT_RETRY */
-> +              return -EAGAIN;
-> +       case 0x51: /* NV_ERR_NO_MEMORY */
-> +               return -ENOMEM;
-> +       default:
-> +               return -EINVAL;
-> +       }
->
+On 12/24/23 22:51, Vegard Nossum wrote:
+> As of commit b77fdd6a48e6 ("scripts/kernel-doc: restore warning for
+> Excess struct/union"), we see the following warnings when running 'make
+> htmldocs':
+> 
+>   ./include/uapi/drm/nouveau_drm.h:292: warning: Excess struct member 'DRM_NOUVEAU_VM_BIND_OP_MAP' description in 'drm_nouveau_vm_bind_op'
+>   ./include/uapi/drm/nouveau_drm.h:292: warning: Excess struct member 'DRM_NOUVEAU_VM_BIND_OP_UNMAP' description in 'drm_nouveau_vm_bind_op'
+>   ./include/uapi/drm/nouveau_drm.h:292: warning: Excess struct member 'DRM_NOUVEAU_VM_BIND_SPARSE' description in 'drm_nouveau_vm_bind_op'
+>   ./include/uapi/drm/nouveau_drm.h:336: warning: Excess struct member 'DRM_NOUVEAU_VM_BIND_RUN_ASYNC' description in 'drm_nouveau_vm_bind'
+> 
+> The problem is that these values are #define constants, but had kerneldoc
+> comments attached to them as if they were actual struct members.
+> 
+> There are a number of ways we could fix this, but I chose to draw
+> inspiration from include/uapi/drm/i915_drm.h, which pulls them into the
+> corresponding kerneldoc comment for the struct member that they are
+> intended to be used with.
+> 
+> To keep the diff readable, there are a number of things I _didn't_ do in
+> this patch, but which we should also consider:
+> 
+> - This is pretty good documentation, but it ends up in gpu/driver-uapi,
+>   which is part of subsystem-apis/ when it really ought to display under
+>   userspace-api/ (the "Linux kernel user-space API guide" book of the
+>   documentation).
+> 
+> - More generally, we might want a warning if include/uapi/ files are
+>   kerneldoc'd outside userspace-api/.
+> 
+> - I'd consider it cleaner if the #defines appeared between the kerneldoc
+>   for the member and the member itself (which is something other DRM-
+>   related UAPI docs do).
+> 
+> - The %IDENTIFIER kerneldoc syntax is intended for "constants", and is
+>   more appropriate in this context than ``IDENTIFIER`` or &IDENTIFIER.
+>   The DRM docs aren't very consistent on this.
+> 
+> Cc: Randy Dunlap <rdunlap@infradead.org>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Signed-off-by: Vegard Nossum <vegard.nossum@oracle.com>
 
-Shouldn't you also have this:
 
-case 0:
-    return 0;
+This all looks good to me. Thanks for your help.
 
---00000000000085f96b060d27539b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
+Tested-by: Randy Dunlap <rdunlap@infradead.org>
 
-<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">On Thu, Dec 21, 2023, 10:33 PM Dave Airlie &lt;<a href=
-=3D"mailto:airlied@gmail.com">airlied@gmail.com</a>&gt; wrote:<br></div><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #=
-ccc solid;padding-left:1ex">This should let the upper layers retry as neede=
-d on EAGAIN.<br>
-<br>
-There may be other values we will care about in the future, but<br>
-this covers our present needs.<br>
-<br>
-Signed-off-by: Dave Airlie &lt;<a href=3D"mailto:airlied@redhat.com" target=
-=3D"_blank" rel=3D"noreferrer">airlied@redhat.com</a>&gt;<br><br>
-+static int<br>
-+r535_rpc_status_to_errno(uint32_t rpc_status)<br>
-+{<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0switch (rpc_status) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0case 0x55: /* NV_ERR_NOT_READY */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0case 0x66: /* NV_ERR_TIMEOUT_RETRY */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return -EAGAIN;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0case 0x51: /* NV_ERR_NO_MEMORY */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -ENOMEM;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0default:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -EINVAL;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br></blockquote></div></div><div dir=3D"auto"=
-><br></div><div dir=3D"auto">Shouldn&#39;t you also have this:</div><div di=
-r=3D"auto"><br></div><div dir=3D"auto">case 0:</div><div dir=3D"auto">=C2=
-=A0 =C2=A0 return 0;</div></div>
+I do see one thing that I don't like in the generated html output.
+It's not a problem with this patch.
+The #defines for DRM_NOUVEAU_VM_BIND_OP_MAP etc. have a ';' at the
+end of each line:
 
---00000000000085f96b060d27539b--
+struct drm_nouveau_vm_bind_op {
+    __u32 op;
+#define DRM_NOUVEAU_VM_BIND_OP_MAP 0x0;
+#define DRM_NOUVEAU_VM_BIND_OP_UNMAP 0x1;
+    __u32 flags;
+#define DRM_NOUVEAU_VM_BIND_SPARSE (1 << 8);
+    __u32 handle;
+    __u32 pad;
+    __u64 addr;
+    __u64 bo_offset;
+    __u64 range;
+};
+
+so something else to look into one of these days....
+
+
+> ---
+>  include/uapi/drm/nouveau_drm.h | 56 ++++++++++++++++------------------
+>  1 file changed, 27 insertions(+), 29 deletions(-)
+> 
+> diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_drm.h
+> index 0bade1592f34..c95ef8a4d94a 100644
+
+
+-- 
+#Randy
+https://people.kernel.org/tglx/notes-about-netiquette
+https://subspace.kernel.org/etiquette.html
