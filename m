@@ -1,46 +1,38 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F4E481E1AB
-	for <lists+nouveau@lfdr.de>; Mon, 25 Dec 2023 18:08:34 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id ACFA082113B
+	for <lists+nouveau@lfdr.de>; Mon,  1 Jan 2024 00:36:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4AB6E10E0E8;
-	Mon, 25 Dec 2023 17:08:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D5F8410E085;
+	Sun, 31 Dec 2023 23:36:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:3::133])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D288210E009;
- Mon, 25 Dec 2023 17:08:28 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9099410E070;
+ Sun, 31 Dec 2023 23:36:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
- Message-ID:Sender:Reply-To:Content-ID:Content-Description;
- bh=xFIKp49g9qtmgLHHMQDPljPyQKT4HBMsbNmu6sA9PR8=; b=iAp5UAUk7p6ad0qrzYfv6hy2pn
- rCpp3wPlDwi5qInqm+10NcE4U/ulDeWFRXxXAWQuVjHu7Gw5S5oIP9XkhBiJ04HI9QqIZ03JRvJWJ
- 4laG5NxSMycfFfTqmiNb+WPgH1n5tF6+5VbTDHqilM1UP96amyC2NiUZpMDjEoq+ZCbesfnfDaccZ
- DZzq8r2Kv0vzzvmZox2EjgjdedE+NY4KQXl7qfsVSQnAiWihVlhUFW11cLKj2wlSyntnguO8CMOXt
- KNc5xmUsrRVs9m5IWIfNKkY+IvxIWCzCErqpmlklm0TqToNrfE6uSrmgnK3F7CibH14tZuqnKucWw
- ZIN1pn4Q==;
-Received: from [50.53.46.231] (helo=[192.168.254.15])
+ MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=DQQOq7uMuqC+LUmYlsu8L+wWzEZWSGnRaRM1vF458w8=; b=jD0bKOK5DR9L4enLf/EHEUGkYb
+ Db1VFFkRgEEqmhO62Bv/HRTURxaPOfokmOl7iC1GPpFY2tA52os0IKB8RKTY+T/SI3rWVQbZq7D1x
+ ST91eSLiMAZbeuhWgtwSA79W1KB6SrAeUdG7puTcUTiyaYgkbOHqdrJmeNCfoasGm+sNhnRfd085J
+ GFEyHl5SYld9h4sHRUJVb88yvymVXJviiY5VOfa7me5IryQlGmmnj0ITIjJe7oDCmfFEPYQNAW2J/
+ 6iNxIe0n15SVWePV6eRJnkTNXXo45bPU4/xuUhAV/9217EJ8h61xpHIdxJFZwgsjm/8WSVGTVISIB
+ hAy8V8Fw==;
+Received: from [50.53.46.231] (helo=bombadil.infradead.org)
  by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1rHoRC-00B6zo-35; Mon, 25 Dec 2023 17:08:23 +0000
-Message-ID: <df7d110b-a50c-4293-b5d4-45913fa6909e@infradead.org>
-Date: Mon, 25 Dec 2023 09:08:22 -0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH -next] drm/nouveau: uapi: fix kerneldoc warnings
-Content-Language: en-US
-To: Vegard Nossum <vegard.nossum@oracle.com>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>
-References: <20231225065145.3060754-1-vegard.nossum@oracle.com>
- <009fcdc4-b10a-4ab9-b368-7cea75bb74e2@infradead.org>
- <0f04dd81-1b0f-4408-b4de-63a01895b0a5@oracle.com>
+ id 1rK5MA-005MeM-0G; Sun, 31 Dec 2023 23:36:34 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <0f04dd81-1b0f-4408-b4de-63a01895b0a5@oracle.com>
-Content-Type: text/plain; charset=UTF-8
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH 1/4] drm/nouveau/disp: don't misuse kernel-doc comments
+Date: Sun, 31 Dec 2023 15:36:30 -0800
+Message-ID: <20231231233633.6596-1-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -53,62 +45,54 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Jonathan Corbet <corbet@lwn.net>,
- Jani Nikula <jani.nikula@linux.intel.com>, dri-devel@lists.freedesktop.org,
- linux-doc@vger.kernel.org
+Cc: nouveau@lists.freedesktop.org, Randy Dunlap <rdunlap@infradead.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Change kernel-doc "/**" comments to common "/*" comments to prevent
+kernel-doc warnings:
 
+crtc.c:453: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+ * Sets up registers for the given mode/adjusted_mode pair.
+crtc.c:453: warning: missing initial short description on line:
+ * Sets up registers for the given mode/adjusted_mode pair.
+crtc.c:629: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+ * Sets up registers for the given mode/adjusted_mode pair.
+crtc.c:629: warning: missing initial short description on line:
+ * Sets up registers for the given mode/adjusted_mode pair.
 
-On 12/25/23 00:30, Vegard Nossum wrote:
-> 
-> On 25/12/2023 08:40, Randy Dunlap wrote:
->> I do see one thing that I don't like in the generated html output.
->> It's not a problem with this patch.
->> The #defines for DRM_NOUVEAU_VM_BIND_OP_MAP etc. have a ';' at the
->> end of each line:
->>
->> struct drm_nouveau_vm_bind_op {
->>      __u32 op;
->> #define DRM_NOUVEAU_VM_BIND_OP_MAP 0x0;
->> #define DRM_NOUVEAU_VM_BIND_OP_UNMAP 0x1;
->>      __u32 flags;
->> #define DRM_NOUVEAU_VM_BIND_SPARSE (1 << 8);
->>      __u32 handle;
->>      __u32 pad;
->>      __u64 addr;
->>      __u64 bo_offset;
->>      __u64 range;
->> };
-> 
-> Do we actually ever want preprocessor directives to appear inside
-> definitions in the output? If not, I think this should work:
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Danilo Krummrich <dakr@redhat.com>
+Cc: nouveau@lists.freedesktop.org
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Cc: Maxime Ripard <mripard@kernel.org>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>
+---
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Not necessarily.
-
-> diff --git a/scripts/kernel-doc b/scripts/kernel-doc
-> index 3cdc7dba37e3..61425fc9645e 100755
-> --- a/scripts/kernel-doc
-> +++ b/scripts/kernel-doc
-> @@ -1259,6 +1259,8 @@ sub dump_struct($$) {
->                 $clause =~ s/\s+$//;
->                 $clause =~ s/\s+/ /;
->                 next if (!$clause);
-> +               # skip preprocessor directives
-> +               next if $clause =~ m/^#/;
->                 $level-- if ($clause =~ m/(\})/ && $level > 1);
->                 if (!($clause =~ m/^\s*#/)) {
->                         $declaration .= "\t" x $level;
-> 
-> 
-
-but that didn't work for me.
-I don't have time to look into it any more today.  :)
-
-Thanks.
-
--- 
-#Randy
-https://people.kernel.org/tglx/notes-about-netiquette
-https://subspace.kernel.org/etiquette.html
+diff -- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+--- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
++++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+@@ -449,7 +449,7 @@ nv_crtc_mode_set_vga(struct drm_crtc *cr
+ 	regp->Attribute[NV_CIO_AR_CSEL_INDEX] = 0x00;
+ }
+ 
+-/**
++/*
+  * Sets up registers for the given mode/adjusted_mode pair.
+  *
+  * The clocks, CRTCs and outputs attached to this CRTC must be off.
+@@ -625,7 +625,7 @@ nv_crtc_swap_fbs(struct drm_crtc *crtc,
+ 	return ret;
+ }
+ 
+-/**
++/*
+  * Sets up registers for the given mode/adjusted_mode pair.
+  *
+  * The clocks, CRTCs and outputs attached to this CRTC must be off.
