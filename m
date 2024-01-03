@@ -2,63 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2411F821E75
-	for <lists+nouveau@lfdr.de>; Tue,  2 Jan 2024 16:12:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BB6F822765
+	for <lists+nouveau@lfdr.de>; Wed,  3 Jan 2024 04:10:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2890110E1B4;
-	Tue,  2 Jan 2024 15:12:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EAF8810E161;
+	Wed,  3 Jan 2024 03:10:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8856010E1B2
- for <nouveau@lists.freedesktop.org>; Tue,  2 Jan 2024 15:12:43 +0000 (UTC)
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-dbd029beef4so7763670276.0
- for <nouveau@lists.freedesktop.org>; Tue, 02 Jan 2024 07:12:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=raspberrypi.com; s=google; t=1704208362; x=1704813162;
- darn=lists.freedesktop.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DETzKFn+RNOmM0nC/CwezQoH3E46aIzh480BZFUjCe0=;
- b=Rm5bG9n8QB2DDK1Ym8smOgBAQRVgzINcVn6ghgH815ozKAEVaREVmJCqWUaXyt1HzU
- TTTTfP1IPO00zHHmmNSSD2tprde+n4cvEwV3fq4Thi8GA71mCiwhHOA9h2Dm58lWzKAD
- gjnq3R5TQLcZbP93h2qP/X4bPZ4/e9JmogFddQqZHIDq46vpgCJSrXTWsY+Q01BbLuVi
- LX3xka8suFvkeoPdcjQ637EYBPUiNMOS633xkSR+uM+ZinGZ6qxc9xXjfrWF2QCJhmiQ
- KSquOUgCt11BwUcZLetQXWzYMp4X2HAzkfPZRT+wPBv1fdkhzYpvvbfrYYhRyWXqCins
- paNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704208362; x=1704813162;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=DETzKFn+RNOmM0nC/CwezQoH3E46aIzh480BZFUjCe0=;
- b=pFa2LXcuN9FBKgM+eNUlfSYJz93dafE9B/MY3Sosk4kE8WTYrTIEPOy7SsHs/Wu4hG
- hqPkiS3xHxUSNiFGIa6Ld9zRwFy7l+5eCokj3iX5UeaBF1AvVB1/XqLQ+JP9+e12luuZ
- IzR834H8Q6LsULLGl/wfv1AZqQHKY9LFbI8vovC7WBT8WDvDJNF3ses5DD7hyqNSDdOB
- MmALtUrUp15LDusoAs+O5HOvAPGXUOHMIn4gLpCugIXNUqavrV+YY9Wv/w+mT8BuKQzU
- QP3Umic3JYP1d8zEFnXb2dcZKcdHnDsMyci+A2laBCNKR6ijo2x7yJAVFWwTNPhqJY4a
- 56gg==
-X-Gm-Message-State: AOJu0Yw/QEXKhKfUTaQ8nYycf8Vvv7q0mI+e2LQgox0bxu9LHgs4FeRx
- xjmeavGy9CeBT6NMfyGkHKL5PAIM02QluEDCB+3ggngMBa+9Ug==
-X-Google-Smtp-Source: AGHT+IGRpeH+ulCpq2/CqActcdg5ra5CWJ9lXcPK7CIYy8JkK0sx9W7zDyxU3/x4g+WaKSqbAQ0nQ6n2LGD5JROwu9w=
-X-Received: by 2002:a25:860c:0:b0:dbc:519b:8415 with SMTP id
- y12-20020a25860c000000b00dbc519b8415mr12386888ybk.41.1704208362422; Tue, 02
- Jan 2024 07:12:42 -0800 (PST)
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:3::133])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7642F10E161;
+ Wed,  3 Jan 2024 03:10:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ Content-Type:In-Reply-To:References:Cc:To:From:Subject:MIME-Version:Date:
+ Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+ bh=+wqhVrLRvZUgx/4O+BPqigJfeuY9KmuscSyp/l86YBk=; b=SDj6v7c05qdR+rdoLIzSylvMHD
+ dSZVgKLaxVFQ5SV0gUZKJqwnX0RkffIzAI8qEmn4KEGbkXOVnEtS/3ZQuIoXFaEjNH7CHbo7Ay+Gt
+ /6L0RG2vp8UTX73uqWvyUuyEP+5xqo3cz6/15WtMND5mBdQPU8cxV1u/d6wIsqvrxDkSpBM5MH3JD
+ Zc/xa7ErX3wAdob8wjtHhn1MZAORk7hftuduzs3x2mU35yqyUKogP4cFc5q0NQ1yWsav2Eiqpt2Dh
+ nPZ3zvDu2iyeQ5v7Yzp7/Ev8RvPrCD2g5T6ehi09YDkJCQh9dWth9sgHZ5L/xWd0zjf+xIg7V/MlL
+ LNFqBs2w==;
+Received: from [50.53.46.231] (helo=[192.168.254.15])
+ by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1rKrdt-009eXx-0t; Wed, 03 Jan 2024 03:10:05 +0000
+Message-ID: <70b16de0-b213-464f-a318-d9b96b76b967@infradead.org>
+Date: Tue, 2 Jan 2024 19:10:04 -0800
 MIME-Version: 1.0
-References: <20220728-rpi-analog-tv-properties-v9-0-24b168e5bcd5@cerno.tech>
- <20220728-rpi-analog-tv-properties-v9-9-24b168e5bcd5@cerno.tech>
-In-Reply-To: <20220728-rpi-analog-tv-properties-v9-9-24b168e5bcd5@cerno.tech>
-From: Dave Stevenson <dave.stevenson@raspberrypi.com>
-Date: Tue, 2 Jan 2024 15:12:26 +0000
-Message-ID: <CAPY8ntD4oz9A1H7Ek1YSLRicLprz1ev5YeAqP2Ah=DMPk84KRQ@mail.gmail.com>
-Subject: Re: [PATCH v9 09/25] drm/modes: Move named modes parsing to a
- separate function
-To: Maxime Ripard <maxime@cerno.tech>, Maxime Ripard <mripard@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH -next] drm/nouveau: uapi: fix kerneldoc warnings
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+To: Vegard Nossum <vegard.nossum@oracle.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>
+References: <20231225065145.3060754-1-vegard.nossum@oracle.com>
+ <009fcdc4-b10a-4ab9-b368-7cea75bb74e2@infradead.org>
+ <0f04dd81-1b0f-4408-b4de-63a01895b0a5@oracle.com>
+ <df7d110b-a50c-4293-b5d4-45913fa6909e@infradead.org>
+In-Reply-To: <df7d110b-a50c-4293-b5d4-45913fa6909e@infradead.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,203 +54,67 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Phil Elwell <phil@raspberrypi.com>,
- Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux-sunxi@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Hans de Goede <hdegoede@redhat.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, linux-arm-kernel@lists.infradead.org,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Dom Cobley <dom@raspberrypi.com>, linux-kernel@vger.kernel.org,
- Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>,
- =?UTF-8?Q?Noralf_Tr=C3=B8nnes?= <noralf@tronnes.org>
+Cc: nouveau@lists.freedesktop.org, Jonathan Corbet <corbet@lwn.net>,
+ Jani Nikula <jani.nikula@linux.intel.com>, dri-devel@lists.freedesktop.org,
+ linux-doc@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Maxime
+Hi Vegard,
 
-On Mon, 14 Nov 2022 at 13:00, Maxime Ripard <maxime@cerno.tech> wrote:
->
-> The current construction of the named mode parsing doesn't allow to exten=
-d
-> it easily. Let's move it to a separate function so we can add more
-> parameters and modes.
->
-> In order for the tests to still pass, some extra checks are needed, so
-> it's not a 1:1 move.
->
-> Reviewed-by: Noralf Tr=C3=B8nnes <noralf@tronnes.org>
-> Tested-by: Mateusz Kwiatkowski <kfyatek+publicgit@gmail.com>
-> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
->
-> ---
-> Changes in v7:
-> - Add Noralf Reviewed-by
->
-> Changes in v6:
-> - Simplify the test for connection status extras
-> - Simplify the code path to call drm_mode_parse_cmdline_named_mode
->
-> Changes in v4:
-> - Fold down all the named mode patches that were split into a single
->   patch again to maintain bisectability
-> ---
->  drivers/gpu/drm/drm_modes.c | 70 +++++++++++++++++++++++++++++++++++++--=
-------
->  1 file changed, 58 insertions(+), 12 deletions(-)
->
-> diff --git a/drivers/gpu/drm/drm_modes.c b/drivers/gpu/drm/drm_modes.c
-> index 71c050c3ee6b..37542612912b 100644
-> --- a/drivers/gpu/drm/drm_modes.c
-> +++ b/drivers/gpu/drm/drm_modes.c
-> @@ -2229,6 +2229,51 @@ static const char * const drm_named_modes_whitelis=
-t[] =3D {
->         "PAL",
->  };
->
-> +static int drm_mode_parse_cmdline_named_mode(const char *name,
-> +                                            unsigned int name_end,
-> +                                            struct drm_cmdline_mode *cmd=
-line_mode)
-> +{
-> +       unsigned int i;
-> +
-> +       if (!name_end)
-> +               return 0;
-> +
-> +       /* If the name starts with a digit, it's not a named mode */
-> +       if (isdigit(name[0]))
-> +               return 0;
-> +
-> +       /*
-> +        * If there's an equal sign in the name, the command-line
-> +        * contains only an option and no mode.
-> +        */
-> +       if (strnchr(name, name_end, '=3D'))
-> +               return 0;
-> +
-> +       /* The connection status extras can be set without a mode. */
-> +       if (name_end =3D=3D 1 &&
-> +           (name[0] =3D=3D 'd' || name[0] =3D=3D 'D' || name[0] =3D=3D '=
-e'))
-> +               return 0;
-> +
-> +       /*
-> +        * We're sure we're a named mode at this point, iterate over the
-> +        * list of modes we're aware of.
-> +        */
-> +       for (i =3D 0; i < ARRAY_SIZE(drm_named_modes_whitelist); i++) {
-> +               int ret;
-> +
-> +               ret =3D str_has_prefix(name, drm_named_modes_whitelist[i]=
-);
-> +               if (ret !=3D name_end)
-> +                       continue;
-> +
-> +               strcpy(cmdline_mode->name, drm_named_modes_whitelist[i]);
-> +               cmdline_mode->specified =3D true;
-> +
-> +               return 1;
-> +       }
-> +
-> +       return -EINVAL;
-> +}
-> +
->  /**
->   * drm_mode_parse_command_line_for_connector - parse command line modeli=
-ne for connector
->   * @mode_option: optional per connector mode option
-> @@ -2265,7 +2310,7 @@ bool drm_mode_parse_command_line_for_connector(cons=
-t char *mode_option,
->         const char *bpp_ptr =3D NULL, *refresh_ptr =3D NULL, *extra_ptr =
-=3D NULL;
->         const char *options_ptr =3D NULL;
->         char *bpp_end_ptr =3D NULL, *refresh_end_ptr =3D NULL;
-> -       int i, len, ret;
-> +       int len, ret;
->
->         memset(mode, 0, sizeof(*mode));
->         mode->panel_orientation =3D DRM_MODE_PANEL_ORIENTATION_UNKNOWN;
-> @@ -2306,18 +2351,19 @@ bool drm_mode_parse_command_line_for_connector(co=
-nst char *mode_option,
->                 parse_extras =3D true;
->         }
->
-> -       /* First check for a named mode */
-> -       for (i =3D 0; i < ARRAY_SIZE(drm_named_modes_whitelist); i++) {
-> -               ret =3D str_has_prefix(name, drm_named_modes_whitelist[i]=
-);
-> -               if (ret =3D=3D mode_end) {
-> -                       if (refresh_ptr)
-> -                               return false; /* named + refresh is inval=
-id */
-> +       if (!mode_end)
-> +               return false;
+On 12/25/23 09:08, Randy Dunlap wrote:
+> 
+> 
+> On 12/25/23 00:30, Vegard Nossum wrote:
+>>
+>> On 25/12/2023 08:40, Randy Dunlap wrote:
+>>> I do see one thing that I don't like in the generated html output.
+>>> It's not a problem with this patch.
+>>> The #defines for DRM_NOUVEAU_VM_BIND_OP_MAP etc. have a ';' at the
+>>> end of each line:
+>>>
+>>> struct drm_nouveau_vm_bind_op {
+>>>      __u32 op;
+>>> #define DRM_NOUVEAU_VM_BIND_OP_MAP 0x0;
+>>> #define DRM_NOUVEAU_VM_BIND_OP_UNMAP 0x1;
+>>>      __u32 flags;
+>>> #define DRM_NOUVEAU_VM_BIND_SPARSE (1 << 8);
+>>>      __u32 handle;
+>>>      __u32 pad;
+>>>      __u64 addr;
+>>>      __u64 bo_offset;
+>>>      __u64 range;
+>>> };
+>>
+>> Do we actually ever want preprocessor directives to appear inside
+>> definitions in the output? If not, I think this should work:
+> 
+> Not necessarily.
+> 
+>> diff --git a/scripts/kernel-doc b/scripts/kernel-doc
+>> index 3cdc7dba37e3..61425fc9645e 100755
+>> --- a/scripts/kernel-doc
+>> +++ b/scripts/kernel-doc
+>> @@ -1259,6 +1259,8 @@ sub dump_struct($$) {
+>>                 $clause =~ s/\s+$//;
+>>                 $clause =~ s/\s+/ /;
+>>                 next if (!$clause);
+>> +               # skip preprocessor directives
+>> +               next if $clause =~ m/^#/;
+>>                 $level-- if ($clause =~ m/(\})/ && $level > 1);
+>>                 if (!($clause =~ m/^\s*#/)) {
+>>                         $declaration .= "\t" x $level;
+>>
+>>
+> 
+> but that didn't work for me.
+> I don't have time to look into it any more today.  :)
 
-I'm chasing down a change in behaviour between 6.1 and 6.6, and this
-patch seems to be at least part of the cause.
+I retested this patch. I must have really messed up my testing
+in the first round. This now LGTM. Thanks.
 
-Since [1] we've had the emulated framebuffer on Pi being 16bpp to save
-memory. All good.
+Acked-by: Randy Dunlap <rdunlap@infradead.org>
+Tested-by: Randy Dunlap <rdunlap@infradead.org>
 
-It used to be possible to use "video=3DHDMI-A-1:-32" on the kernel
-command line to set it back to 32bpp.
-
-After this patch that is no longer possible. "mode_end =3D bpp_off", and
-"bpp_off =3D bpp_ptr - name", so with bpp_ptr =3D name we get mode_end
-being 0. That fails this conditional.
-drm_mode_parse_cmdline_named_mode already aborts early but with no
-error if name_end / mode_end is 0, so this "if" clause seems
-redundant, and is a change in behaviour.
-
-We do then get a second parsing failure due to the check if (bpp_ptr
-|| refresh_ptr) at [2].
-Prior to this patch my video=3D line would get mode->specified set via
-"if (ret =3D=3D mode_end)" removed above, as ret =3D mode_end =3D 0. We
-therefore didn't evaluate the conditional that now fails.
-
-So I guess my question is whether my command line is valid or not, and
-therefore is this a regression?
-If considered invalid, then presumably there is no way to update the
-bpp without also having to specify the resolution. That is rather
-annoying as almost everything else can be updated without having to
-set the resolution, so this one property would be the odd one out.
-
-Thanks, and Happy New Year.
-  Dave
-
-[1] https://github.com/torvalds/linux/commit/f741b28fb299263d2d03a0fb701bfe=
-648927cd47
-[2] https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/drm_mode=
-s.c#L2441
-[3] https://github.com/torvalds/linux/commit/a631bf30eb914affc0a574f4457683=
-3477346ad6
-
->
-> -                       strcpy(mode->name, drm_named_modes_whitelist[i]);
-> -                       mode->specified =3D true;
-> -                       break;
-> -               }
-> -       }
-> +       ret =3D drm_mode_parse_cmdline_named_mode(name, mode_end, mode);
-> +       if (ret < 0)
-> +               return false;
-> +
-> +       /*
-> +        * Having a mode that starts by a letter (and thus is named) and
-> +        * an at-sign (used to specify a refresh rate) is disallowed.
-> +        */
-> +       if (ret && refresh_ptr)
-> +               return false;
->
->         /* No named mode? Check for a normal mode argument, e.g. 1024x768=
- */
->         if (!mode->specified && isdigit(name[0])) {
->
-> --
-> b4 0.11.0-dev-99e3a
+-- 
+#Randy
