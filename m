@@ -1,60 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E5CC8239BF
-	for <lists+nouveau@lfdr.de>; Thu,  4 Jan 2024 01:42:11 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 50E6D8240C3
+	for <lists+nouveau@lfdr.de>; Thu,  4 Jan 2024 12:38:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 57F2A10E2D6;
-	Thu,  4 Jan 2024 00:42:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0204010E421;
+	Thu,  4 Jan 2024 11:38:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A59A410E0B1;
- Thu,  4 Jan 2024 00:42:03 +0000 (UTC)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a28bf46ea11so82973666b.1; 
- Wed, 03 Jan 2024 16:42:03 -0800 (PST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 91C3310E43C
+ for <nouveau@lists.freedesktop.org>; Thu,  4 Jan 2024 11:38:11 +0000 (UTC)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-50e7dd8bce8so445369e87.1
+ for <nouveau@lists.freedesktop.org>; Thu, 04 Jan 2024 03:38:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704328922; x=1704933722; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Uvc23dpXpHqY1dPGQelfcNuv5lz83JAZe/DEXvpEDEA=;
- b=DYQcPIfszy4WPQVR+22lmp+ES5i3NxrsIaz3/+JaCkXzmQCpQU21dM3Z+mPGlJaJQh
- 2ISd3C7dWM3quUdEaOD4l/GDX7ZxdDzmzE7vIIXaXnO5Gs/45mHRT2YrtKKJOUV5QjFk
- XOBjlqdoZDmNPVbrHYf8FdQbCC7iLlaWrfMHTBXdGWKXSdSonuYYE5vgsHLH0oTJTRbx
- Pqm8A4h+Ys5LIqns5Qsd8pdNmXK2ZIO+vpDJ8H207W+B6svIb14CVZ7fHXKAnWiCjFLr
- z2T+ZNsMGGJN9I6jy98pMi5LgoIqh+/xaRV1sJBzXr+ljJm9gjRE6Uvldis8g63NcL4w
- 2EOw==
+ d=linaro.org; s=google; t=1704368290; x=1704973090; darn=lists.freedesktop.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=3aSj2Wvbjbi5E5bDKrVHlCSPZkdk0j/7KkRsBSDvxsw=;
+ b=tBRLn8PLbiUSf4spUauMJuZxZG4p4r9LaLiFqFj8o6HOnTGjUuWRXgdpbW6tnfySb7
+ LmgNSKxi0AQaVmRyNsBuh2AMH4yzpeWEQMRdOU0VAUY0bh5LYoF44ameCC1tvSdLjATf
+ wVtfykSEzeKn3Wp8S9+fZASp2CNnraFOSXCnUjbpN86aJizxxexG0nMxW4qHwqMccdwk
+ gr9KHnIwXhpiIJ+lT7bWAeRFrROmiz2pekHpRiYt3BKScSzMf4hzsJWynWkYsHZjytfi
+ pNC3vwTdvVqDATvbh2GxgOrRoDR+C0N4kqctWheDYTb45UBt1UZx/cGtsAZLp0/TjE21
+ 6qew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704328922; x=1704933722;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Uvc23dpXpHqY1dPGQelfcNuv5lz83JAZe/DEXvpEDEA=;
- b=UrshM5vHTvmLfC9vqoYjxWme7STTYnEaNipOuQ3nQT+pixmFtdR0bIMHz+0TgQh8Jf
- +HkBEo/dFXJN/a7ZRl0oxKpt9bgdKwelSSs7kSFvjErKKrxK93BCJi/0WIra6KaNamGb
- ouDwzc2PrcE96Fc9hDDJkxf+Ug6B7U7AZF0FCFxLlGHsZKRoljIMXzHfTbay4AESzQIT
- RWXcBLAIkH4U7X1mc4j+IpuimzAmcjVCWWoSY2HGE8fx6NR50E3wmDxkkv9ZxdYf0Lfj
- 5SPGAVLKH6lNPs/4tiCKpqKDt5q9C9ohxG5DxUsB393GhZ1egyR0V3LiTu1rIMXS+/1m
- NvJQ==
-X-Gm-Message-State: AOJu0Yy+Js/as/h5nmgNM+C1AhyKwgEDIN8OwYHqus+yI7wf6Lm0SJ9s
- TrrxSvEipY7dFJbGUmSBi1KGhMwm7H7WsHETgys=
-X-Google-Smtp-Source: AGHT+IFvICkj21iJ/z9l3iQ0XLjxtVI/HKqcIzua/MxUvlJc0w1EtMthq89sml2MufmrHCuneqQXLEZLIly4yBwppYw=
-X-Received: by 2002:a17:906:6bca:b0:a23:1b07:5c1b with SMTP id
- t10-20020a1709066bca00b00a231b075c1bmr1802836ejs.10.1704328921723; Wed, 03
- Jan 2024 16:42:01 -0800 (PST)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1704368290; x=1704973090;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3aSj2Wvbjbi5E5bDKrVHlCSPZkdk0j/7KkRsBSDvxsw=;
+ b=sMCVjyl1LsaYEQJkhKhBLR8lDH1YTdj63DuAkfiZZJk4UGd5CugLpiFYbe8DR7G0bW
+ dK9fp3ppO6MExPZe7bU3udzc+CXJX6T5MR0u6+ajdXWKEtIkHC5lEEq7cgoEu6jlqeF1
+ sRHREuaWt/+RlWbHx8ylu8TgLamZhiZr+ggAYXISUO0++dwBtDM2PAiY4nyGkd+mrXIf
+ WFdHkbTNjl+tVGIhcAQN7TVBWwQJVw+w48/VVnO0/uXe8ZCTrW95q+m2uO3lRnC7jrAk
+ 5Zk9Zp5BI794soUeburLfJdlriwOZjlwBwZ8BcKqTOGEsTTvoMd4rU1e8PzguF/bBWqt
+ Pi3Q==
+X-Gm-Message-State: AOJu0Yz+Ywf6xCfpu+AZnXcxYnSdAprxpS690VJwEAGJl7nBUFGoiefi
+ ZdQIn+nuxb17TlvwnrLcKYtlZT3L1iIBBg==
+X-Google-Smtp-Source: AGHT+IEvl/qWWM+TJNFvW9USIRn2xPrQUlGgqQcM8IEfQZNkvJzxQiI8+wx96bRXJq5GGPpxXAf35w==
+X-Received: by 2002:a05:6512:3050:b0:50e:7718:d4b8 with SMTP id
+ b16-20020a056512305000b0050e7718d4b8mr319633lfb.96.1704368289559; 
+ Thu, 04 Jan 2024 03:38:09 -0800 (PST)
+Received: from localhost ([102.140.209.237]) by smtp.gmail.com with ESMTPSA id
+ zz16-20020a170907351000b00a26e0236191sm10694696ejb.208.2024.01.04.03.38.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Jan 2024 03:38:09 -0800 (PST)
+Date: Thu, 4 Jan 2024 14:38:06 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Dave Airlie <airlied@gmail.com>
+Subject: Re: [PATCH 08/11] nouveau/gsp: don't free ctrl messages on errors
+Message-ID: <da677c9a-1863-4ee7-904f-5226276c4102@moroto.mountain>
 References: <20231222043308.3090089-9-airlied@gmail.com>
  <f8594217-59b7-431c-9fdc-15e2ef6197ab@moroto.mountain>
-In-Reply-To: <f8594217-59b7-431c-9fdc-15e2ef6197ab@moroto.mountain>
-From: Dave Airlie <airlied@gmail.com>
-Date: Thu, 4 Jan 2024 10:41:50 +1000
-Message-ID: <CAPM=9txv+ULnX-f-dG=Ki2iZH5L7Sge-Jcd-asyPiBpVH962=g@mail.gmail.com>
-Subject: Re: [PATCH 08/11] nouveau/gsp: don't free ctrl messages on errors
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+ <CAPM=9txv+ULnX-f-dG=Ki2iZH5L7Sge-Jcd-asyPiBpVH962=g@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAPM=9txv+ULnX-f-dG=Ki2iZH5L7Sge-Jcd-asyPiBpVH962=g@mail.gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,83 +77,54 @@ Cc: nouveau@lists.freedesktop.org, oe-kbuild-all@lists.linux.dev,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 4 Jan 2024 at 00:47, Dan Carpenter <dan.carpenter@linaro.org> wrote:
->
-> Hi Dave,
->
-> kernel test robot noticed the following build warnings:
->
-> https://git-scm.com/docs/git-format-patch#_base_tree_information]
->
-> url:    https://github.com/intel-lab-lkp/linux/commits/Dave-Airlie/nouveau-gsp-drop-some-acpi-related-debug/20231222-180432
-> base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
-> patch link:    https://lore.kernel.org/r/20231222043308.3090089-9-airlied%40gmail.com
-> patch subject: [PATCH 08/11] nouveau/gsp: don't free ctrl messages on errors
-> config: powerpc-randconfig-r071-20231226 (https://download.01.org/0day-ci/archive/20231227/202312271917.55xuDMdc-lkp@intel.com/config)
-> compiler: clang version 18.0.0git (https://github.com/llvm/llvm-project d3ef86708241a3bee902615c190dead1638c4e09)
->
-> If you fix the issue in a separate patch/commit (i.e. not just a new version of
-> the same patch/commit), kindly add following tags
-> | Reported-by: kernel test robot <lkp@intel.com>
-> | Reported-by: Dan Carpenter <dan.carpenter@linaro.org>
-> | Closes: https://lore.kernel.org/r/202312271917.55xuDMdc-lkp@intel.com/
+On Thu, Jan 04, 2024 at 10:41:50AM +1000, Dave Airlie wrote:
+> On Thu, 4 Jan 2024 at 00:47, Dan Carpenter <dan.carpenter@linaro.org> wrote:
+> >
+> > Hi Dave,
+> >
+> > kernel test robot noticed the following build warnings:
+> >
+> > https://git-scm.com/docs/git-format-patch#_base_tree_information]
+> >
+> > url:    https://github.com/intel-lab-lkp/linux/commits/Dave-Airlie/nouveau-gsp-drop-some-acpi-related-debug/20231222-180432
+> > base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
+> > patch link:    https://lore.kernel.org/r/20231222043308.3090089-9-airlied%40gmail.com
+> > patch subject: [PATCH 08/11] nouveau/gsp: don't free ctrl messages on errors
+> > config: powerpc-randconfig-r071-20231226 (https://download.01.org/0day-ci/archive/20231227/202312271917.55xuDMdc-lkp@intel.com/config)
+> > compiler: clang version 18.0.0git (https://github.com/llvm/llvm-project d3ef86708241a3bee902615c190dead1638c4e09)
+> >
+> > If you fix the issue in a separate patch/commit (i.e. not just a new version of
+> > the same patch/commit), kindly add following tags
+> > | Reported-by: kernel test robot <lkp@intel.com>
+> > | Reported-by: Dan Carpenter <dan.carpenter@linaro.org>
+> > | Closes: https://lore.kernel.org/r/202312271917.55xuDMdc-lkp@intel.com/
+> 
+> This is a false positive, I think the code is operating like I'd
+> expect, we maybe could restructure it to avoid this warning?
+> 
+> The idea is you send an rpc msg, if there's a reply you get a reply,
+> if no reply you get NULL and if an error you get an error.
+> 
+> So in the case you get an error or NULL you just want to return 0 for
+> the NULL as it's successful, and error otherwise.
+> 
+> Would using PTR_ERR_OR_ZERO make smatch happy? (even if it's not
+> really what we want).
 
-This is a false positive, I think the code is operating like I'd
-expect, we maybe could restructure it to avoid this warning?
+Hm...  You're using the API correctly.  Linus has complained about this
+warning before but in new code over 90% of the warnings are correct.
+It's a high quality warning.
 
-The idea is you send an rpc msg, if there's a reply you get a reply,
-if no reply you get NULL and if an error you get an error.
+I looked around for an explanation to see what the NULL meant but
+couldn't find it documented in the code.  The NULL vs error pointer comes
+from a function pointer and it's not always clear where the
+documentation should be with a function pointer.  So perhaps I missed it.
 
-So in the case you get an error or NULL you just want to return 0 for
-the NULL as it's successful, and error otherwise.
+Let's not use PTR_ERR_OR_ZERO.  Perhaps I should introduce a
+PTR_ERR_OR_NULL() macro to silence this warning.  But most of the code
+which does this correctly is in fs/ and they probably are like Linus and
+would be surprised to learn that people get it wrong...
 
-Would using PTR_ERR_OR_ZERO make smatch happy? (even if it's not
-really what we want).
+regards,
+dan carpenter
 
-Dave.
->
-> New smatch warnings:
-> drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:659 r535_gsp_rpc_rm_ctrl_push() warn: passing zero to 'PTR_ERR'
-> drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c:1063 r535_dp_aux_xfer() warn: passing a valid pointer to 'PTR_ERR'
->
-> Old smatch warnings:
-> drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1887 nvkm_gsp_radix3_sg() error: uninitialized symbol 'addr'.
->
-> vim +/PTR_ERR +659 drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
->
-> af265ee961627a Dave Airlie 2023-12-22  649  static int
-> af265ee961627a Dave Airlie 2023-12-22  650  r535_gsp_rpc_rm_ctrl_push(struct nvkm_gsp_object *object, void **argv, u32 repc)
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  651  {
-> af265ee961627a Dave Airlie 2023-12-22  652      rpc_gsp_rm_control_v03_00 *rpc = container_of((*argv), typeof(*rpc), params);
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  653      struct nvkm_gsp *gsp = object->client->gsp;
-> af265ee961627a Dave Airlie 2023-12-22  654      int ret = 0;
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  655
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  656      rpc = nvkm_gsp_rpc_push(gsp, rpc, true, repc);
-> af265ee961627a Dave Airlie 2023-12-22  657      if (IS_ERR_OR_NULL(rpc)) {
-> af265ee961627a Dave Airlie 2023-12-22  658              *argv = NULL;
-> af265ee961627a Dave Airlie 2023-12-22 @659              return PTR_ERR(rpc);
->
-> If nvkm_gsp_rpc_push() returns NULL (probably a failure) then this
-> returns PTR_ERR(NULL) which is zero/success.
->
-> af265ee961627a Dave Airlie 2023-12-22  660      }
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  661
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  662      if (rpc->status) {
-> af265ee961627a Dave Airlie 2023-12-22  663              ret = r535_rpc_status_to_errno(rpc->status);
-> 555bb9c29a45be Dave Airlie 2023-12-22  664              if (ret != -EAGAIN)
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  665                      nvkm_error(&gsp->subdev, "cli:0x%08x obj:0x%08x ctrl cmd:0x%08x failed: 0x%08x\n",
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  666                                 object->client->object.handle, object->handle, rpc->cmd, rpc->status);
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  667      }
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  668
-> af265ee961627a Dave Airlie 2023-12-22  669      if (repc)
-> af265ee961627a Dave Airlie 2023-12-22  670              *argv = rpc->params;
-> af265ee961627a Dave Airlie 2023-12-22  671      else
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  672              nvkm_gsp_rpc_done(gsp, rpc);
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  673
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  674      return ret;
-> 4cf2c83eb3a4c4 Ben Skeggs  2023-09-19  675  }
->
-> --
-> 0-DAY CI Kernel Test Service
-> https://github.com/intel/lkp-tests/wiki
->
