@@ -1,70 +1,50 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24A2582448F
-	for <lists+nouveau@lfdr.de>; Thu,  4 Jan 2024 16:06:10 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B9829824976
+	for <lists+nouveau@lfdr.de>; Thu,  4 Jan 2024 21:16:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5411910E4A6;
-	Thu,  4 Jan 2024 15:05:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 22BA010E52F;
+	Thu,  4 Jan 2024 20:16:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 33F0910E4B5;
- Thu,  4 Jan 2024 15:05:52 +0000 (UTC)
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3368b9bbeb4so514970f8f.2; 
- Thu, 04 Jan 2024 07:05:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704380750; x=1704985550; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=EZGJdA0F++2P/K37coEne46KHwvd4SnYzLgJWUGLPe8=;
- b=QFeiOa2Ot3+XdU4a6F6UY1naDx/oVJsqWkvcKrsC/OKKrI5UjonXfwEg56YQTcbJy0
- ylLLxUe4I1pGaXgeGXzSpI8pj6zcaobGhiv++Q8z3y0SaKD/oqL3jXlNhsc5ASwgrrf4
- LSp9gcZzjZ1IpefNJx6HgTYJsjN1bHMTUvDxFBnIWA0jVCT7aitIDu+1LSiTeEusueT+
- QAH0h7X2n43AISDHnBAq0l6efL8aDHWYmQLeS8E9ef/dVzZrW2nGuzwCUfRSWMOqsYtJ
- sfvKW1gqJXXSHwr10tWCS4QlMQVrofcadyFyjW5cOigmvgb6pZB0XXhtyDs3pssoKEIj
- MjWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704380750; x=1704985550;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EZGJdA0F++2P/K37coEne46KHwvd4SnYzLgJWUGLPe8=;
- b=eNHAC5aMUK43ZkvieXXW0BRDHKfn/afg2JomT/kDgbP85xDhKiOs2sznsxfWKW4WDv
- QRKX0WE/C3rL0DdmTJYZsI0BVH++414g3oc5mGI0JsI/qE/IHcPSgPdGkSLN+OdcG23b
- 6Ho079NNX74glKTPK371lXOloao1TLFhIqsJMAKEORGWXsbZh5OnqChG6Ct4DKa3JAHn
- WYerHt9zdE2zdp3PUMmWa7z/hBDrrQahuWnp9O2uvQqns45l4fOypHvEF/1SBXSnitOo
- 5YDp6d5arQWtYXQSw4ssjb+BeFIX1+VRh+eUnUlhmmiD5yE7C29iu7laij0fURQ1mvCX
- bIzg==
-X-Gm-Message-State: AOJu0YyBO4htLLu35VkjmeTgJLo2B2onOyReQDGMKwrVTXp3wGeWIp6/
- uhqqvPL/YPqRE6oM/S0G10EGT7D9vHRWog==
-X-Google-Smtp-Source: AGHT+IEc58ZfDngHbkbasrUQBXqnOTzZTE4uzQn8sHPDPvUEA3msJaN8eQLqmcS555VOwAWRPMMmxw==
-X-Received: by 2002:a05:600c:219a:b0:40d:57d7:6388 with SMTP id
- e26-20020a05600c219a00b0040d57d76388mr214361wme.302.1704380750622; 
- Thu, 04 Jan 2024 07:05:50 -0800 (PST)
-Received: from able.fritz.box ([2a00:e180:157f:4100:7224:7d9c:a8ca:3fe9])
- by smtp.gmail.com with ESMTPSA id
- hn33-20020a05600ca3a100b0040d5ae2905asm5845420wmb.30.2024.01.04.07.05.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 07:05:50 -0800 (PST)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
- <christian.koenig@amd.com>
-To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- thomas.hellstrom@linux.intel.com, nouveau@lists.freedesktop.org,
- jani.nikula@linux.intel.com, kherbst@redhat.com, lyude@redhat.com,
- zackr@vmware.com
-Subject: [PATCH 4/4] drm/amdgpu: use GTT only as fallback for VRAM|GTT
-Date: Thu,  4 Jan 2024 16:05:45 +0100
-Message-Id: <20240104150545.1483-5-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240104150545.1483-1-christian.koenig@amd.com>
-References: <20240104150545.1483-1-christian.koenig@amd.com>
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A1F6710E528;
+ Thu,  4 Jan 2024 20:16:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1704399402; x=1735935402;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=iCiR11dc21Je8OO+gWFpIf72HFFFNP8Kiuq0KCAT0DQ=;
+ b=CvgdOpATAqH3QuWTNXRVqp8SRbKmAPxrU7L+Cf4ncU0olgiUTtP11jM/
+ zl7WPafZnqeXFnSyYFQ2++k4C5BNYG5/n15FEn2mVNyxMrKJcH3iKi111
+ P/ZOHPGDn4IhWuofcVzxuHU79XLZ6NH6QEhEOaBkDx8Kk2fCKCl8Y70A9
+ igrZSMZwWekxGzmXtVXrrPg5ZlTpq5y15FN6F+jjineBW6lfDaaKmaKYS
+ wDBqxNROx1qogysAXluMIFw5RrseZrUt9B399ys0duCBAV5nDnxetq2/j
+ BnFPIowRSpLb2rCR+aZvmV5WKxBmdDY5kx0gFJL5QB3PgI6LuB2RHW2kY A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10943"; a="15976672"
+X-IronPort-AV: E=Sophos;i="6.04,331,1695711600"; d="scan'208";a="15976672"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+ by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Jan 2024 12:16:42 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10943"; a="871037866"
+X-IronPort-AV: E=Sophos;i="6.04,331,1695711600"; d="scan'208";a="871037866"
+Received: from pdelarag-mobl.ger.corp.intel.com (HELO localhost)
+ ([10.252.36.32])
+ by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Jan 2024 12:16:38 -0800
+From: Jani Nikula <jani.nikula@intel.com>
+To: dri-devel@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org
+Subject: [PATCH 1/3] drm/nouveau: include drm/drm_edid.h only where needed
+Date: Thu,  4 Jan 2024 22:16:30 +0200
+Message-Id: <20240104201632.1100753-1-jani.nikula@intel.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -77,36 +57,56 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: jani.nikula@intel.com, nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Try to fill up VRAM as well by setting the busy flag on GTT allocations.
+Including drm_edid.h from nouveau_connector.h causes the rebuild of 15
+files when drm_edid.h is modified, while there are only a few files that
+actually need to include drm_edid.h.
 
-This fixes the issue that when VRAM was evacuated for suspend it's never
-filled up again unless the application is restarted.
-
-Signed-off-by: Christian König <christian.koenig@amd.com>
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Danilo Krummrich <dakr@redhat.com>
+Cc: nouveau@lists.freedesktop.org
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
 ---
- drivers/gpu/drm/amd/amdgpu/amdgpu_object.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/gpu/drm/nouveau/dispnv50/head.c     | 1 +
+ drivers/gpu/drm/nouveau/nouveau_connector.h | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-index f110dfdc4feb..979cecf18f17 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-@@ -173,6 +173,12 @@ void amdgpu_bo_placement_from_domain(struct amdgpu_bo *abo, u32 domain)
- 			abo->flags & AMDGPU_GEM_CREATE_PREEMPTIBLE ?
- 			AMDGPU_PL_PREEMPT : TTM_PL_TT;
- 		places[c].flags = 0;
-+		/*
-+		 * When GTT is just an alternative to VRAM make sure that we
-+		 * only use it as fallback and still try to fill up VRAM first.
-+		 */
-+		if (domain & abo->preferred_domains & AMDGPU_GEM_DOMAIN_VRAM)
-+			places[c].flags |= TTM_PL_FLAG_BUSY;
- 		c++;
- 	}
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
+index 5f490fbf1877..83355dbc15ee 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/head.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
+@@ -32,6 +32,7 @@
  
+ #include <drm/drm_atomic.h>
+ #include <drm/drm_atomic_helper.h>
++#include <drm/drm_edid.h>
+ #include <drm/drm_vblank.h>
+ #include "nouveau_connector.h"
+ 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.h b/drivers/gpu/drm/nouveau/nouveau_connector.h
+index a2df4918340c..0608cabed058 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.h
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.h
+@@ -35,7 +35,6 @@
+ 
+ #include <drm/display/drm_dp_helper.h>
+ #include <drm/drm_crtc.h>
+-#include <drm/drm_edid.h>
+ #include <drm/drm_encoder.h>
+ #include <drm/drm_util.h>
+ 
+@@ -44,6 +43,7 @@
+ 
+ struct nvkm_i2c_port;
+ struct dcb_output;
++struct edid;
+ 
+ #ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
+ struct nouveau_backlight {
 -- 
-2.34.1
+2.39.2
 
