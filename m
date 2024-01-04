@@ -2,65 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50E6D8240C3
-	for <lists+nouveau@lfdr.de>; Thu,  4 Jan 2024 12:38:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72A80824459
+	for <lists+nouveau@lfdr.de>; Thu,  4 Jan 2024 16:02:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0204010E421;
-	Thu,  4 Jan 2024 11:38:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 73FF210E493;
+	Thu,  4 Jan 2024 15:02:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 91C3310E43C
- for <nouveau@lists.freedesktop.org>; Thu,  4 Jan 2024 11:38:11 +0000 (UTC)
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-50e7dd8bce8so445369e87.1
- for <nouveau@lists.freedesktop.org>; Thu, 04 Jan 2024 03:38:11 -0800 (PST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D655110E427;
+ Thu,  4 Jan 2024 15:02:07 +0000 (UTC)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-3368d1c7b23so465526f8f.0; 
+ Thu, 04 Jan 2024 07:02:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704368290; x=1704973090; darn=lists.freedesktop.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3aSj2Wvbjbi5E5bDKrVHlCSPZkdk0j/7KkRsBSDvxsw=;
- b=tBRLn8PLbiUSf4spUauMJuZxZG4p4r9LaLiFqFj8o6HOnTGjUuWRXgdpbW6tnfySb7
- LmgNSKxi0AQaVmRyNsBuh2AMH4yzpeWEQMRdOU0VAUY0bh5LYoF44ameCC1tvSdLjATf
- wVtfykSEzeKn3Wp8S9+fZASp2CNnraFOSXCnUjbpN86aJizxxexG0nMxW4qHwqMccdwk
- gr9KHnIwXhpiIJ+lT7bWAeRFrROmiz2pekHpRiYt3BKScSzMf4hzsJWynWkYsHZjytfi
- pNC3vwTdvVqDATvbh2GxgOrRoDR+C0N4kqctWheDYTb45UBt1UZx/cGtsAZLp0/TjE21
- 6qew==
+ d=gmail.com; s=20230601; t=1704380526; x=1704985326; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nz6wgSvtDxdn5W5MMKrsDHjNFgiWM0XnkScPndx0kOc=;
+ b=iHul9tuP7DI/Ny1zgY0qbct1f+7a7i8lfXsZYTe3K8rj4DETo6E0gzSNbXjC3MCiMj
+ 3a1fhdVVLfO4ekzN84wQhUKuFRffHmgyN+LawJfY6nwWdAyMqbWLzqAkrWfp+hQAHXhm
+ BWG2g2DwxK8Kk+eH77ZuI9MO8yd47/NDoFnvkNYOwGONekg2uIYMPhERN+Ids6nef5el
+ VVcxQJ3Poj3/Vbg0jidw2fiwDDcm+IVnBrHk6aNqpY/HksQBh+GtD/2NQrnWcSu/LODY
+ Byc2kgKCi+jFNHIZ7W2Eyx1UDy1ytAwQN0ebhKxAiNBLbpcGAX03tSchMmyPqvvssqWU
+ BsGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704368290; x=1704973090;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3aSj2Wvbjbi5E5bDKrVHlCSPZkdk0j/7KkRsBSDvxsw=;
- b=sMCVjyl1LsaYEQJkhKhBLR8lDH1YTdj63DuAkfiZZJk4UGd5CugLpiFYbe8DR7G0bW
- dK9fp3ppO6MExPZe7bU3udzc+CXJX6T5MR0u6+ajdXWKEtIkHC5lEEq7cgoEu6jlqeF1
- sRHREuaWt/+RlWbHx8ylu8TgLamZhiZr+ggAYXISUO0++dwBtDM2PAiY4nyGkd+mrXIf
- WFdHkbTNjl+tVGIhcAQN7TVBWwQJVw+w48/VVnO0/uXe8ZCTrW95q+m2uO3lRnC7jrAk
- 5Zk9Zp5BI794soUeburLfJdlriwOZjlwBwZ8BcKqTOGEsTTvoMd4rU1e8PzguF/bBWqt
- Pi3Q==
-X-Gm-Message-State: AOJu0Yz+Ywf6xCfpu+AZnXcxYnSdAprxpS690VJwEAGJl7nBUFGoiefi
- ZdQIn+nuxb17TlvwnrLcKYtlZT3L1iIBBg==
-X-Google-Smtp-Source: AGHT+IEvl/qWWM+TJNFvW9USIRn2xPrQUlGgqQcM8IEfQZNkvJzxQiI8+wx96bRXJq5GGPpxXAf35w==
-X-Received: by 2002:a05:6512:3050:b0:50e:7718:d4b8 with SMTP id
- b16-20020a056512305000b0050e7718d4b8mr319633lfb.96.1704368289559; 
- Thu, 04 Jan 2024 03:38:09 -0800 (PST)
-Received: from localhost ([102.140.209.237]) by smtp.gmail.com with ESMTPSA id
- zz16-20020a170907351000b00a26e0236191sm10694696ejb.208.2024.01.04.03.38.08
+ d=1e100.net; s=20230601; t=1704380526; x=1704985326;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nz6wgSvtDxdn5W5MMKrsDHjNFgiWM0XnkScPndx0kOc=;
+ b=gLHWOy0ArYk/pb64YYtV7YRCqHyEvzSobQXAjbjvF8Ynvz9P1gzMl8avP6GNcdMnCt
+ uTk/Iu2G97YOCwVSosFa+oH1w//MjfRdX8+r2CB8KX4iau/odO9bkDmoNO1EYlbUZZoj
+ wJS+OecN3irLRWlvwLTawhF8Euh3y0esNTcq3k2cOW49+jiS4+vU15ZLXGjk5bUg3k+m
+ P4Tb80fKiSKvANZIxoBHmuy3EmX34ZBoAfpAHUtAPiVU0vFCgcUaTueLZMGup4SgYfV4
+ F0i/vOn6st3gY8SyzvpSOqSVwC8yi+PtoTwZFVTRusQZovnWTxGzgDb0nS912UjJZsr7
+ Uuww==
+X-Gm-Message-State: AOJu0YzeZa/0aYUvDNwpy/uIyLIOkCmXy4A3egb9QYtRw6ZR5OuhpfqD
+ ECCnpANCqobtuWt34kiwfkdH4e3Bpcc=
+X-Google-Smtp-Source: AGHT+IG5HiC0x4W+n+qys8FBgYK9JxkdZTlC7eENA/zhPd+9bPgbzVBM0HzLlRg3cdOo8Q82wYtCeA==
+X-Received: by 2002:adf:f7c8:0:b0:333:492b:e5e1 with SMTP id
+ a8-20020adff7c8000000b00333492be5e1mr410943wrq.22.1704380525958; 
+ Thu, 04 Jan 2024 07:02:05 -0800 (PST)
+Received: from able.fritz.box ([2a00:e180:157f:4100:7224:7d9c:a8ca:3fe9])
+ by smtp.gmail.com with ESMTPSA id
+ n14-20020a5d51ce000000b00336765e9babsm33020998wrv.83.2024.01.04.07.02.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 03:38:09 -0800 (PST)
-Date: Thu, 4 Jan 2024 14:38:06 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Dave Airlie <airlied@gmail.com>
-Subject: Re: [PATCH 08/11] nouveau/gsp: don't free ctrl messages on errors
-Message-ID: <da677c9a-1863-4ee7-904f-5226276c4102@moroto.mountain>
-References: <20231222043308.3090089-9-airlied@gmail.com>
- <f8594217-59b7-431c-9fdc-15e2ef6197ab@moroto.mountain>
- <CAPM=9txv+ULnX-f-dG=Ki2iZH5L7Sge-Jcd-asyPiBpVH962=g@mail.gmail.com>
+ Thu, 04 Jan 2024 07:02:05 -0800 (PST)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
+ <christian.koenig@amd.com>
+To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ thomas.hellstrom@linux.intel.com, nouveau@lists.freedesktop.org,
+ jani.nikula@linux.intel.com, kherbst@redhat.com, lyude@redhat.com,
+ zackr@vmware.com
+Subject: [PATCH 1/4] drm/ttm: return ENOSPC from ttm_bo_mem_space
+Date: Thu,  4 Jan 2024 16:02:01 +0100
+Message-Id: <20240104150204.1466-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAPM=9txv+ULnX-f-dG=Ki2iZH5L7Sge-Jcd-asyPiBpVH962=g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,59 +74,39 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, oe-kbuild-all@lists.linux.dev,
- oe-kbuild@lists.linux.dev, dri-devel@lists.freedesktop.org, lkp@intel.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jan 04, 2024 at 10:41:50AM +1000, Dave Airlie wrote:
-> On Thu, 4 Jan 2024 at 00:47, Dan Carpenter <dan.carpenter@linaro.org> wrote:
-> >
-> > Hi Dave,
-> >
-> > kernel test robot noticed the following build warnings:
-> >
-> > https://git-scm.com/docs/git-format-patch#_base_tree_information]
-> >
-> > url:    https://github.com/intel-lab-lkp/linux/commits/Dave-Airlie/nouveau-gsp-drop-some-acpi-related-debug/20231222-180432
-> > base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
-> > patch link:    https://lore.kernel.org/r/20231222043308.3090089-9-airlied%40gmail.com
-> > patch subject: [PATCH 08/11] nouveau/gsp: don't free ctrl messages on errors
-> > config: powerpc-randconfig-r071-20231226 (https://download.01.org/0day-ci/archive/20231227/202312271917.55xuDMdc-lkp@intel.com/config)
-> > compiler: clang version 18.0.0git (https://github.com/llvm/llvm-project d3ef86708241a3bee902615c190dead1638c4e09)
-> >
-> > If you fix the issue in a separate patch/commit (i.e. not just a new version of
-> > the same patch/commit), kindly add following tags
-> > | Reported-by: kernel test robot <lkp@intel.com>
-> > | Reported-by: Dan Carpenter <dan.carpenter@linaro.org>
-> > | Closes: https://lore.kernel.org/r/202312271917.55xuDMdc-lkp@intel.com/
-> 
-> This is a false positive, I think the code is operating like I'd
-> expect, we maybe could restructure it to avoid this warning?
-> 
-> The idea is you send an rpc msg, if there's a reply you get a reply,
-> if no reply you get NULL and if an error you get an error.
-> 
-> So in the case you get an error or NULL you just want to return 0 for
-> the NULL as it's successful, and error otherwise.
-> 
-> Would using PTR_ERR_OR_ZERO make smatch happy? (even if it's not
-> really what we want).
+Only convert it to ENOMEM in ttm_bo_validate.
 
-Hm...  You're using the API correctly.  Linus has complained about this
-warning before but in new code over 90% of the warnings are correct.
-It's a high quality warning.
+Signed-off-by: Christian König <christian.koenig@amd.com>
+---
+ drivers/gpu/drm/ttm/ttm_bo.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-I looked around for an explanation to see what the NULL meant but
-couldn't find it documented in the code.  The NULL vs error pointer comes
-from a function pointer and it's not always clear where the
-documentation should be with a function pointer.  So perhaps I missed it.
-
-Let's not use PTR_ERR_OR_ZERO.  Perhaps I should introduce a
-PTR_ERR_OR_NULL() macro to silence this warning.  But most of the code
-which does this correctly is in fs/ and they probably are like Linus and
-would be surprised to learn that people get it wrong...
-
-regards,
-dan carpenter
+diff --git a/drivers/gpu/drm/ttm/ttm_bo.c b/drivers/gpu/drm/ttm/ttm_bo.c
+index edf10618fe2b..8c1eaa74fa21 100644
+--- a/drivers/gpu/drm/ttm/ttm_bo.c
++++ b/drivers/gpu/drm/ttm/ttm_bo.c
+@@ -830,7 +830,7 @@ int ttm_bo_mem_space(struct ttm_buffer_object *bo,
+ 			goto error;
+ 	}
+ 
+-	ret = -ENOMEM;
++	ret = -ENOSPC;
+ 	if (!type_found) {
+ 		pr_err(TTM_PFX "No compatible memory type found\n");
+ 		ret = -EINVAL;
+@@ -916,6 +916,9 @@ int ttm_bo_validate(struct ttm_buffer_object *bo,
+ 		return -EINVAL;
+ 
+ 	ret = ttm_bo_move_buffer(bo, placement, ctx);
++	/* For backward compatibility with userspace */
++	if (ret == -ENOSPC)
++		return -ENOMEM;
+ 	if (ret)
+ 		return ret;
+ 
+-- 
+2.34.1
 
