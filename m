@@ -1,75 +1,76 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51B73827673
-	for <lists+nouveau@lfdr.de>; Mon,  8 Jan 2024 18:42:01 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E8C3A8276E1
+	for <lists+nouveau@lfdr.de>; Mon,  8 Jan 2024 19:04:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B4DCE10E292;
-	Mon,  8 Jan 2024 17:41:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 857CB10E2A5;
+	Mon,  8 Jan 2024 18:04:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6B18C10E292
- for <nouveau@lists.freedesktop.org>; Mon,  8 Jan 2024 17:41:55 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AEB5E10E2A5
+ for <nouveau@lists.freedesktop.org>; Mon,  8 Jan 2024 18:04:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1704735714;
+ s=mimecast20190719; t=1704737076;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=4Cc6o/r7V7THIXz7aSYkP1CbgO44iRjJZbOTNyl9Eck=;
- b=UzViSAAajJc9+eYpj4vJsJkuFEbNcsrvWJK4R8cvRoph3XqeofQS5+ZOZOnQ51ukFrjbOc
- 1OMt9+9kk64tIATkH26y3hEXu9sGwX5G5gsp42URS9v6/TSwY8KDY7lE64gX1F/4D26a78
- hdoIxPWjc3Vcrqk7aMd1IlXm61osjhE=
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=IAnYP1H5LzGuNWIcYJpBhogfe2D1SDeWJ9NEft7q0Oo=;
+ b=XaqC/QlzZ9SUoFFnfRi/ZGFdrxsKo3dqwD7IDlvpY/J6LJKBKN6HDqybvCKKwc/IEzWs5i
+ wfp58vlOo4FP18aH4tMyh7y5CM2+llT8ZGra30OXAq4cGckuWbUXh4pNRI+rOgDnfutzCD
+ hHLwu8UnB39E2x74wQyPUaCJTPbYLWA=
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-335-2plm1iJpNGeqRDjA_U2nLg-1; Mon, 08 Jan 2024 12:41:51 -0500
-X-MC-Unique: 2plm1iJpNGeqRDjA_U2nLg-1
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-78323d441c6so177807185a.0
- for <nouveau@lists.freedesktop.org>; Mon, 08 Jan 2024 09:41:51 -0800 (PST)
+ us-mta-55-Jbuara1rPTmMRpyTR6r0Mw-1; Mon, 08 Jan 2024 13:04:35 -0500
+X-MC-Unique: Jbuara1rPTmMRpyTR6r0Mw-1
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-7832023ed21so96348885a.0
+ for <nouveau@lists.freedesktop.org>; Mon, 08 Jan 2024 10:04:35 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704735711; x=1705340511;
+ d=1e100.net; s=20230601; t=1704737074; x=1705341874;
  h=content-transfer-encoding:in-reply-to:organization:from:references
  :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4Cc6o/r7V7THIXz7aSYkP1CbgO44iRjJZbOTNyl9Eck=;
- b=Ha9Anmisu6rZxRVyIqk09vRN+rjiutsHJG2361jd/C9vX8JQXLIe6sGbG1kwmEx50B
- VDdbJCY2hT7nQlMpin6qN0Ws976dSt+T/i5WoKZjI7Oe0WkDbNYpelI96UzZvjKp10nW
- zcjp0AZWhs+8rMtNOUgK3GC8+dV/c1kxqSzKDQ7mZb4lxftD74hJ/i1ZQ7LDL1yQTebz
- WEIRRfYpoKDuDLt6OSJfxL6DSMti4QgdKDrF5QdknCHaUrxduZ9sKrTOS8to4qTY2rYH
- SXWP9UTEGcREuXTtsRT0w6Xca8wAO0itA+bR+zfnnySfNYWSeg4FY54R2F7s9uBfghAb
- eUtg==
-X-Gm-Message-State: AOJu0YzedUcS/UgbfNQw1eorpAAeItiQ0p3ElFx8hEzovpEa9mNTUapH
- ivlg06eVCnGABO4xL90sNnqLSQ6JNXiRK5m+RjnLdnyNwKyjJqou76PeGY96OBxiMaj7jJlgZ3G
- s9EHLWQEtE7jwD7AxZKJ5P1iC9n1T+biNag==
-X-Received: by 2002:a05:620a:2495:b0:783:2408:b546 with SMTP id
- i21-20020a05620a249500b007832408b546mr208504qkn.37.1704735710974; 
- Mon, 08 Jan 2024 09:41:50 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEi1cNkajQ03cO87hYrOZRH5WctfJOBHkDNumVftm6BT+1/26AYiKg1TD144u21NlOQqM6zMA==
-X-Received: by 2002:a05:620a:2495:b0:783:2408:b546 with SMTP id
- i21-20020a05620a249500b007832408b546mr208489qkn.37.1704735710712; 
- Mon, 08 Jan 2024 09:41:50 -0800 (PST)
+ bh=IAnYP1H5LzGuNWIcYJpBhogfe2D1SDeWJ9NEft7q0Oo=;
+ b=ruqkj5um4reV7IgVyrKE14e46sqKP1Qj4SrLeDLjlEtidfLal+jxY8yrcMjxBmaKlS
+ +0LzltFhboZv8x5z7dHhJ0TYVIsB8z//GWuGPSM1KHsirHRQfWrNvkFStrSDUD18F3xW
+ 07oS4xcD/zIatSpo12qhl9/1QaNlg1io64kzJzgSsWkFMJruh6YufLEL1AuH6AbQUsFW
+ 2JhR+wZ5l62eyXwZ9OF+U8JqFjwWI+Nff8KXZRWXQ5iP7fexvfPjCedeJukbjhe2Hjcx
+ z9TzfoI4zM4rRSS1rUpQvegTaoHNbeR6UbUrX/mm1XfyfSZMJ9suO3ptoMnUJPfn+B+F
+ 8kcQ==
+X-Gm-Message-State: AOJu0YzGszcNU1wJrPUk17ZloH3a3qGHhKu8T4f9wI+n36dGmlxdZveX
+ pibuRjpDmO5P0mHV6IwcJUWNM8vbrg03o9vQ5figQpSo78O1OEZad9uM2sxRnf1ClvtY1c9GlcF
+ U9cVl/ejq2En3vcal7qA4RgSVH9s0Iu3HTQ==
+X-Received: by 2002:a05:620a:3788:b0:781:eb20:d230 with SMTP id
+ pi8-20020a05620a378800b00781eb20d230mr2596825qkn.45.1704737074746; 
+ Mon, 08 Jan 2024 10:04:34 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHe5P5jzlUukysDtp2eDu5oCiQ76sfdGCeZVFi+NgyWwJPXZChIHHNghe8BZwRPbo3NDsflGQ==
+X-Received: by 2002:a05:620a:3788:b0:781:eb20:d230 with SMTP id
+ pi8-20020a05620a378800b00781eb20d230mr2596810qkn.45.1704737074488; 
+ Mon, 08 Jan 2024 10:04:34 -0800 (PST)
 Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
  ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
  by smtp.gmail.com with ESMTPSA id
- h5-20020a0ceda5000000b00680b34d52f8sm148827qvr.13.2024.01.08.09.41.49
+ a10-20020a05620a066a00b007815c55cdf9sm75313qkh.105.2024.01.08.10.04.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Jan 2024 09:41:50 -0800 (PST)
-Message-ID: <7d70d892-6b72-4460-b036-ed9d3f555b1b@redhat.com>
-Date: Mon, 8 Jan 2024 18:41:48 +0100
+ Mon, 08 Jan 2024 10:04:34 -0800 (PST)
+Message-ID: <95f6815c-1ff5-4c89-b8c6-0445834a0083@redhat.com>
+Date: Mon, 8 Jan 2024 19:04:31 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] drm/nouveau/disp: don't misuse kernel-doc comments
-To: Randy Dunlap <rdunlap@infradead.org>
-References: <20231231233633.6596-1-rdunlap@infradead.org>
+Subject: Re: [PATCH 1/3] drm/nouveau: include drm/drm_edid.h only where needed
+To: Jani Nikula <jani.nikula@intel.com>, dri-devel@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org
+References: <20240104201632.1100753-1-jani.nikula@intel.com>
 From: Danilo Krummrich <dakr@redhat.com>
 Organization: RedHat
-In-Reply-To: <20231231233633.6596-1-rdunlap@infradead.org>
+In-Reply-To: <20240104201632.1100753-1-jani.nikula@intel.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -86,60 +87,58 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Maxime Ripard <mripard@kernel.org>
+Cc: nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 1/1/24 00:36, Randy Dunlap wrote:
-> Change kernel-doc "/**" comments to common "/*" comments to prevent
-> kernel-doc warnings:
+On 1/4/24 21:16, Jani Nikula wrote:
+> Including drm_edid.h from nouveau_connector.h causes the rebuild of 15
+> files when drm_edid.h is modified, while there are only a few files that
+> actually need to include drm_edid.h.
 > 
-> crtc.c:453: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
->   * Sets up registers for the given mode/adjusted_mode pair.
-> crtc.c:453: warning: missing initial short description on line:
->   * Sets up registers for the given mode/adjusted_mode pair.
-> crtc.c:629: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
->   * Sets up registers for the given mode/adjusted_mode pair.
-> crtc.c:629: warning: missing initial short description on line:
->   * Sets up registers for the given mode/adjusted_mode pair.
-> 
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 > Cc: Karol Herbst <kherbst@redhat.com>
 > Cc: Lyude Paul <lyude@redhat.com>
 > Cc: Danilo Krummrich <dakr@redhat.com>
 > Cc: nouveau@lists.freedesktop.org
-> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-> Cc: Maxime Ripard <mripard@kernel.org>
-> Cc: Thomas Zimmermann <tzimmermann@suse.de>
+> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
 
-Series applied to drm-misc-next, thanks!
+Reviewed-by: Danilo Krummrich <dakr@redhat.com>
 
 > ---
->   drivers/gpu/drm/nouveau/dispnv04/crtc.c |    4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+>   drivers/gpu/drm/nouveau/dispnv50/head.c     | 1 +
+>   drivers/gpu/drm/nouveau/nouveau_connector.h | 2 +-
+>   2 files changed, 2 insertions(+), 1 deletion(-)
 > 
-> diff -- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
-> --- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
-> @@ -449,7 +449,7 @@ nv_crtc_mode_set_vga(struct drm_crtc *cr
->   	regp->Attribute[NV_CIO_AR_CSEL_INDEX] = 0x00;
->   }
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
+> index 5f490fbf1877..83355dbc15ee 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/head.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
+> @@ -32,6 +32,7 @@
 >   
-> -/**
-> +/*
->    * Sets up registers for the given mode/adjusted_mode pair.
->    *
->    * The clocks, CRTCs and outputs attached to this CRTC must be off.
-> @@ -625,7 +625,7 @@ nv_crtc_swap_fbs(struct drm_crtc *crtc,
->   	return ret;
->   }
+>   #include <drm/drm_atomic.h>
+>   #include <drm/drm_atomic_helper.h>
+> +#include <drm/drm_edid.h>
+>   #include <drm/drm_vblank.h>
+>   #include "nouveau_connector.h"
 >   
-> -/**
-> +/*
->    * Sets up registers for the given mode/adjusted_mode pair.
->    *
->    * The clocks, CRTCs and outputs attached to this CRTC must be off.
-> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.h b/drivers/gpu/drm/nouveau/nouveau_connector.h
+> index a2df4918340c..0608cabed058 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_connector.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.h
+> @@ -35,7 +35,6 @@
+>   
+>   #include <drm/display/drm_dp_helper.h>
+>   #include <drm/drm_crtc.h>
+> -#include <drm/drm_edid.h>
+>   #include <drm/drm_encoder.h>
+>   #include <drm/drm_util.h>
+>   
+> @@ -44,6 +43,7 @@
+>   
+>   struct nvkm_i2c_port;
+>   struct dcb_output;
+> +struct edid;
+>   
+>   #ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
+>   struct nouveau_backlight {
 
