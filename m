@@ -1,76 +1,75 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F30882762E
-	for <lists+nouveau@lfdr.de>; Mon,  8 Jan 2024 18:19:08 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EB7D82763F
+	for <lists+nouveau@lfdr.de>; Mon,  8 Jan 2024 18:24:09 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7C4E910E27F;
-	Mon,  8 Jan 2024 17:19:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 022F610E284;
+	Mon,  8 Jan 2024 17:24:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CFCB910E27F
- for <nouveau@lists.freedesktop.org>; Mon,  8 Jan 2024 17:19:00 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 804EB10E284
+ for <nouveau@lists.freedesktop.org>; Mon,  8 Jan 2024 17:24:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1704734339;
+ s=mimecast20190719; t=1704734645;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=4n0GXMevIXNEHu349Rlctj8rXBEsAzbKnDlggCcCpro=;
- b=TPiFBAFSzfnEEXpZ3pd05NwdwS7oiNBu4mFLvTzYrtsw4ogSZcpPSqBKethWDBlJUq6prp
- +NcWxhFHR1DGMYHYJqm+j2Vp5O8gIwPZRNAjvM/Hii2e++IzQqXyiksIlZGLmDCpbxDIvv
- +9+TnC9YKj+ibLvooc2Bz4FvDAl51XI=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=nOy7rPmBJeQA7S2Ya6yzPxUkyXWk0XWROf8BC/z6Uqc=;
+ b=JeIrWYuDRl4uwJ4Mq7l477hekcqZHVQUz0vODl/O2CuGQoMY+IiMUYQQA98Zgx2WiIiiya
+ KKqkiXbJ/bNw5mzncPBZ807L8ESVhaJEHpQolrhcQGQPRmxGEsMxXRxX73xzD+ae858TOu
+ 1AJkGK2PtHKlXZEXovGS1f9H1VRCzg0=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-616-fX1lhKxiOSeqWfoXEQNkmw-1; Mon, 08 Jan 2024 12:18:58 -0500
-X-MC-Unique: fX1lhKxiOSeqWfoXEQNkmw-1
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-7831be985c0so223015185a.3
- for <nouveau@lists.freedesktop.org>; Mon, 08 Jan 2024 09:18:57 -0800 (PST)
+ us-mta-164-f0VZS0E2PQele7GV1kcpOw-1; Mon, 08 Jan 2024 12:23:20 -0500
+X-MC-Unique: f0VZS0E2PQele7GV1kcpOw-1
+Received: by mail-qv1-f71.google.com with SMTP id
+ 6a1803df08f44-680b2c9b0ccso42896346d6.1
+ for <nouveau@lists.freedesktop.org>; Mon, 08 Jan 2024 09:23:20 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704734337; x=1705339137;
+ d=1e100.net; s=20230601; t=1704734599; x=1705339399;
  h=content-transfer-encoding:in-reply-to:organization:from:references
  :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4n0GXMevIXNEHu349Rlctj8rXBEsAzbKnDlggCcCpro=;
- b=xQD7qde6WoBxbDK9aJuXz1CrTEFIXELRnwuPMS0MTCj0s9FgwBZzJrcQab0D7ka/tr
- 93U1cOKE3ccR7XBpiq5hZyEk0DweCLqi73ZeVASlKVI2YeX0CX1YbT5bxtbTbdXw1cWf
- hyRtkUoXkcolpVXZNwt0XGYIbhJ6o9ary0mb+i7LNmh2C9fg2JZQ2GlfAoFNRq/+mNT/
- +qIbM2s6oOtZhpb+ZQWTvhuxn1N42k2mo+lYjf4w0vV5V88lcjLxrQD1cWyvQ+Uw5y6N
- t64oz7+9TbLTr1fQ9KpQPGNXTtW1GbcStfZN4yMcbcbFR07HdZA8ndgBvjm8U7zI2O3z
- sOSg==
-X-Gm-Message-State: AOJu0YwyeYrpRnSA1zvCPeLXHG6a4JoXvYmF01MpuYuuCApOIlt4BaN6
- IeEpjwJ+vtgVa0GxnXrHEu1Nqh5yyIxlZOQ7Ya35Kp7URBal1OS5p5mXKqAFFHIWpU6wzd9kvk0
- 2+2l585bMPybRXqm3ImYz20/myTlpNdSCxA==
-X-Received: by 2002:a05:620a:470a:b0:783:2607:13f5 with SMTP id
- bs10-20020a05620a470a00b00783260713f5mr1285294qkb.20.1704734337503; 
- Mon, 08 Jan 2024 09:18:57 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEbsXsbxoXlECp8+ORoJitLSD8fGeGAumNZ2yTKrmI2VxodrvKisab55OD1FQr1IN7iJllKVQ==
-X-Received: by 2002:a05:620a:470a:b0:783:2607:13f5 with SMTP id
- bs10-20020a05620a470a00b00783260713f5mr1285278qkb.20.1704734337276; 
- Mon, 08 Jan 2024 09:18:57 -0800 (PST)
+ bh=nOy7rPmBJeQA7S2Ya6yzPxUkyXWk0XWROf8BC/z6Uqc=;
+ b=B/DpIsre1Dk3GEY9itlnOkACOd91azMLMlBWTU0DOdv/vpDaOZX22qfxLSAPhzWome
+ VLkOPTbG1BU7xv4Nn474dVtuHrkC0Pm7XCnkvIgIB2TG4SBuGckiFWBNGGb5MeD4MISM
+ pCUUngPMsfwEhPAcqMqi4PTocRqP+BrHhS5XfE0BO9oO96VDZBugNxVBVdi6FhmhZ3uD
+ i2pKF1HR0T/gis4QWd09qvLOOyZcgN+RectSqTegThzYhM4gyMdoWWCx9DQK8eluNoyT
+ iZDf7T/NhFDdjGh8KEV1XlTXTDjBJxxc6phrQ52kbbwc2azm11Q7RTeGHttCfca6nGq5
+ hhaQ==
+X-Gm-Message-State: AOJu0YwvaxxoV1M09WNlSlrXsqDDM+K42TpLUGd5UJqFQCQodjCGU/c+
+ 4Q7k1coC73YKnlvOpuroX3fxcFLmJWIacJ7rA32mC+DMDCjGbo7BqFY4pwtwWI+gv9CdW2YttBj
+ xoFuJPpNMf20Cd6amf485u9tZUJMA3ydszg==
+X-Received: by 2002:a0c:eb8b:0:b0:680:f8a6:bcf9 with SMTP id
+ x11-20020a0ceb8b000000b00680f8a6bcf9mr3295222qvo.13.1704734599748; 
+ Mon, 08 Jan 2024 09:23:19 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEUqoB7J6lI/Dv2EV3jEiEvSKUSF711d35mvJLCRr099kSHpmF+L6Jmb7nH/7EYRnhpbK2MHQ==
+X-Received: by 2002:a0c:eb8b:0:b0:680:f8a6:bcf9 with SMTP id
+ x11-20020a0ceb8b000000b00680f8a6bcf9mr3295212qvo.13.1704734599460; 
+ Mon, 08 Jan 2024 09:23:19 -0800 (PST)
 Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
  ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
  by smtp.gmail.com with ESMTPSA id
- y11-20020a05620a25cb00b007830ce180basm43109qko.120.2024.01.08.09.18.54
+ t7-20020ad45bc7000000b0067f789a59c8sm127305qvt.113.2024.01.08.09.23.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Jan 2024 09:18:56 -0800 (PST)
-Message-ID: <9413ee17-70d6-4c27-ad8c-2cd4e0f7bb0b@redhat.com>
-Date: Mon, 8 Jan 2024 18:18:53 +0100
+ Mon, 08 Jan 2024 09:23:19 -0800 (PST)
+Message-ID: <3b3a1c92-8c1f-4812-95ce-b5431114e154@redhat.com>
+Date: Mon, 8 Jan 2024 18:23:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH linux-next] drm/nouveau/disp: switch to use kmemdup()
- helper
-To: yang.guang5@zte.com.cn
-References: <202312142003220684160@zte.com.cn>
+Subject: Re: [PATCH] drm/nouveau/fifo: remove duplicated including
+To: Wang Jinchao <wangjinchao@xfusion.com>
+References: <202312151802+0800-wangjinchao@xfusion.com>
 From: Danilo Krummrich <dakr@redhat.com>
 Organization: RedHat
-In-Reply-To: <202312142003220684160@zte.com.cn>
+In-Reply-To: <202312151802+0800-wangjinchao@xfusion.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -87,53 +86,38 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: jiang.xuexin@zte.com.cn, cgel.zte@gmail.com, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, chen.haonan2@zte.com.cn, bskeggs@redhat.com,
- daniel@ffwll.ch, nouveau@lists.freedesktop.org, keescook@chromium.org
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
+ stone.xulei@xfusion.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Yang,
+Hi Wang,
 
-On 12/14/23 13:03, yang.guang5@zte.com.cn wrote:
-> From: Yang Guang <yang.guang5@zte.com.cn>
-> 
-> Use kmemdup() helper instead of open-coding to
-> simplify the code.
-> 
-> Signed-off-by: Chen Haonan <chen.haonan2@zte.com.cn>
-
-Please add your "Signed-off-by" tag to this patch. If the above is intended to indicate
-that Chan was involved in creating this patch (e.g. as co-author, reporter, etc.) please
-use the corresponding tag instead. See also [1].
-
-Once this is fixed, I'll apply the patch.
+there is another patch [1] to fix this, which already made it upstream.
 
 - Danilo
 
-[1] https://www.kernel.org/doc/html/v4.17/process/submitting-patches.html#sign-your-work-the-developer-s-certificate-of-origin
+[1] https://patchwork.freedesktop.org/patch/msgid/20231122004926.84933-1-yang.lee@linux.alibaba.com
 
+On 12/15/23 11:02, Wang Jinchao wrote:
+> rm second including of chid.h
+> 
+> Signed-off-by: Wang Jinchao <wangjinchao@xfusion.com>
 > ---
->   drivers/gpu/drm/nouveau/nvif/outp.c | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
+>   drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c | 1 -
+>   1 file changed, 1 deletion(-)
 > 
-> diff --git a/drivers/gpu/drm/nouveau/nvif/outp.c b/drivers/gpu/drm/nouveau/nvif/outp.c
-> index 5d3190c05250..6daeb7f0b09b 100644
-> --- a/drivers/gpu/drm/nouveau/nvif/outp.c
-> +++ b/drivers/gpu/drm/nouveau/nvif/outp.c
-> @@ -452,13 +452,12 @@ nvif_outp_edid_get(struct nvif_outp *outp, u8 **pedid)
->   	if (ret)
->   		goto done;
-> 
-> -	*pedid = kmalloc(args->size, GFP_KERNEL);
-> +	*pedid = kmemdup(args->data, args->size, GFP_KERNEL);
->   	if (!*pedid) {
->   		ret = -ENOMEM;
->   		goto done;
->   	}
-> 
-> -	memcpy(*pedid, args->data, args->size);
->   	ret = args->size;
->   done:
->   	kfree(args);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
+> index 87a62d4ff4bd..7d4716dcd512 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
+> @@ -24,7 +24,6 @@
+>   #include "chan.h"
+>   #include "chid.h"
+>   #include "cgrp.h"
+> -#include "chid.h"
+>   #include "runl.h"
+>   #include "priv.h"
+>   
 
