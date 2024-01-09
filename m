@@ -2,57 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68C3B8282D3
-	for <lists+nouveau@lfdr.de>; Tue,  9 Jan 2024 10:17:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 019A082839B
+	for <lists+nouveau@lfdr.de>; Tue,  9 Jan 2024 11:00:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0C13810E0AD;
-	Tue,  9 Jan 2024 09:17:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 77AC310E3DB;
+	Tue,  9 Jan 2024 09:59:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DA1D310E0AD;
- Tue,  9 Jan 2024 09:17:14 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8C23010E3C3;
+ Tue,  9 Jan 2024 09:59:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1704791835; x=1736327835;
- h=message-id:subject:from:to:date:in-reply-to:references:
- content-transfer-encoding:mime-version;
- bh=UuORAX7I9MxlSVr5DSq/uhcxoKFIHBwxLkIKZamftmI=;
- b=RkrwIH8NVFqpxRLD4J/HWlpgeQI9ijr11D95CKYgPrT0ZTnSeHpTvUtH
- OyseTlJaiWcCNj3gk/1L3/VMWqXRKCYP9UDW8ATCCjoXRyaFtT6hbtmrb
- wCMfNkK/aJo8/s0MV1sRPZDYAlj1L7dbZtUKvGZt1xQPmIFFGMrEWCmPO
- oHUiTB6L8XU96ojrW+CQwX8Wl9MhyS3OSkHRM4Xu+oeyK2XEpcY3FPCkt
- o77hDgcnAgHC46pzPutQGfz7ghVYu/yrVMFNgelgubzHoANDI1WJfMcqj
- NRCUx4vw9WYZu0eRrk+Ngv0aI1YEqSNVQF5clxwIIzUl85g30VNrQ5jBO g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10947"; a="4896538"
+ t=1704794397; x=1736330397;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version;
+ bh=aPHyUKUyHXed8656ZhEm3Uv9sPN5tlk1/6xGtbFguzs=;
+ b=GK4VpKQn/ABPyb/+dq4jx0wtER+p39KVvKpy/tXqPzzhtKekir3DNSpG
+ UiUeyC0gMHW9glceIrKYE6PT95GLzfQQcJ6YmLjH7TEcm5WPQt4odWIki
+ pu7PKU9WfEe7+VKc1hyyNNjVLnF5ctx7NqWIkeu9OviebG5Jh8MRUTLmr
+ ifSjaz3L04gE6wNtBBf9edipQ4QwUrwyzjhYDjmT3awOesRYaq6X/aRfz
+ QUTlKWcWvu652MCDIVxm8YX01QEFcOGRQ8Hi68v6hUu61tS6Dki7AVTUi
+ KyzJ2/3eeXG+q05JdwOxFRkGt1YFn+qjSXyAZZwyOOK/GlezafshXeqsO g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10947"; a="4898847"
 X-IronPort-AV: E=Sophos;i="6.04,182,1695711600"; 
-   d="scan'208";a="4896538"
+   d="scan'208";a="4898847"
 Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Jan 2024 01:17:14 -0800
+ by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Jan 2024 01:59:57 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10947"; a="1113021567"
-X-IronPort-AV: E=Sophos;i="6.04,182,1695711600"; d="scan'208";a="1113021567"
-Received: from djustese-mobl.ger.corp.intel.com (HELO [10.249.254.147])
- ([10.249.254.147])
+X-IronPort-AV: E=McAfee;i="6600,9927,10947"; a="1113029294"
+X-IronPort-AV: E=Sophos;i="6.04,182,1695711600"; d="scan'208";a="1113029294"
+Received: from aakinrin-mobl2.amr.corp.intel.com (HELO localhost)
+ ([10.252.36.188])
  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Jan 2024 01:17:12 -0800
-Message-ID: <1edac68920a5927281c6757d9f78b6045f10602c.camel@linux.intel.com>
-Subject: Re: [PATCH 2/5] drm/ttm: return ENOSPC from ttm_bo_mem_space
-From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>, 
- zack.rusin@broadcom.com, lyude@redhat.com, kherbst@redhat.com, 
- jani.nikula@linux.intel.com, nouveau@lists.freedesktop.org, 
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Date: Tue, 09 Jan 2024 10:17:09 +0100
-In-Reply-To: <20240109074729.3646-3-christian.koenig@amd.com>
-References: <20240109074729.3646-1-christian.koenig@amd.com>
- <20240109074729.3646-3-christian.koenig@amd.com>
-Organization: Intel Sweden AB, Registration Number: 556189-6027
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.2 (3.50.2-1.fc39) 
+ 09 Jan 2024 01:59:54 -0800
+From: Jani Nikula <jani.nikula@intel.com>
+To: Danilo Krummrich <dakr@redhat.com>, dri-devel@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org
+Subject: Re: [PATCH 1/3] drm/nouveau: include drm/drm_edid.h only where needed
+In-Reply-To: <95f6815c-1ff5-4c89-b8c6-0445834a0083@redhat.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20240104201632.1100753-1-jani.nikula@intel.com>
+ <95f6815c-1ff5-4c89-b8c6-0445834a0083@redhat.com>
+Date: Tue, 09 Jan 2024 11:59:52 +0200
+Message-ID: <87ttnmx1wn.fsf@intel.com>
 MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,44 +60,69 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 2024-01-09 at 08:47 +0100, Christian K=C3=B6nig wrote:
-> Only convert it to ENOMEM in ttm_bo_validate.
->=20
+On Mon, 08 Jan 2024, Danilo Krummrich <dakr@redhat.com> wrote:
+> On 1/4/24 21:16, Jani Nikula wrote:
+>> Including drm_edid.h from nouveau_connector.h causes the rebuild of 15
+>> files when drm_edid.h is modified, while there are only a few files that
+>> actually need to include drm_edid.h.
+>> 
+>> Cc: Karol Herbst <kherbst@redhat.com>
+>> Cc: Lyude Paul <lyude@redhat.com>
+>> Cc: Danilo Krummrich <dakr@redhat.com>
+>> Cc: nouveau@lists.freedesktop.org
+>> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+>
+> Reviewed-by: Danilo Krummrich <dakr@redhat.com>
 
-Could we have a more elaborate commit description here, (why is this
-change needed)?
+Are you going to pick this up via the nouveau tree, or shall I apply it
+to drm-misc-next?
 
-> Signed-off-by: Christian K=C3=B6nig <christian.koenig@amd.com>
-> ---
-> =C2=A0drivers/gpu/drm/ttm/ttm_bo.c | 5 ++++-
-> =C2=A01 file changed, 4 insertions(+), 1 deletion(-)
->=20
-> diff --git a/drivers/gpu/drm/ttm/ttm_bo.c
-> b/drivers/gpu/drm/ttm/ttm_bo.c
-> index edf10618fe2b..8c1eaa74fa21 100644
-> --- a/drivers/gpu/drm/ttm/ttm_bo.c
-> +++ b/drivers/gpu/drm/ttm/ttm_bo.c
-> @@ -830,7 +830,7 @@ int ttm_bo_mem_space(struct ttm_buffer_object
-> *bo,
-> =C2=A0			goto error;
-> =C2=A0	}
-> =C2=A0
-> -	ret =3D -ENOMEM;
-> +	ret =3D -ENOSPC;
-> =C2=A0	if (!type_found) {
-> =C2=A0		pr_err(TTM_PFX "No compatible memory type found\n");
-> =C2=A0		ret =3D -EINVAL;
-> @@ -916,6 +916,9 @@ int ttm_bo_validate(struct ttm_buffer_object *bo,
-> =C2=A0		return -EINVAL;
-> =C2=A0
-> =C2=A0	ret =3D ttm_bo_move_buffer(bo, placement, ctx);
-> +	/* For backward compatibility with userspace */
-> +	if (ret =3D=3D -ENOSPC)
-> +		return -ENOMEM;
-> =C2=A0	if (ret)
-> =C2=A0		return ret;
-> =C2=A0
+BR,
+Jani.
 
+>
+>> ---
+>>   drivers/gpu/drm/nouveau/dispnv50/head.c     | 1 +
+>>   drivers/gpu/drm/nouveau/nouveau_connector.h | 2 +-
+>>   2 files changed, 2 insertions(+), 1 deletion(-)
+>> 
+>> diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
+>> index 5f490fbf1877..83355dbc15ee 100644
+>> --- a/drivers/gpu/drm/nouveau/dispnv50/head.c
+>> +++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
+>> @@ -32,6 +32,7 @@
+>>   
+>>   #include <drm/drm_atomic.h>
+>>   #include <drm/drm_atomic_helper.h>
+>> +#include <drm/drm_edid.h>
+>>   #include <drm/drm_vblank.h>
+>>   #include "nouveau_connector.h"
+>>   
+>> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.h b/drivers/gpu/drm/nouveau/nouveau_connector.h
+>> index a2df4918340c..0608cabed058 100644
+>> --- a/drivers/gpu/drm/nouveau/nouveau_connector.h
+>> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.h
+>> @@ -35,7 +35,6 @@
+>>   
+>>   #include <drm/display/drm_dp_helper.h>
+>>   #include <drm/drm_crtc.h>
+>> -#include <drm/drm_edid.h>
+>>   #include <drm/drm_encoder.h>
+>>   #include <drm/drm_util.h>
+>>   
+>> @@ -44,6 +43,7 @@
+>>   
+>>   struct nvkm_i2c_port;
+>>   struct dcb_output;
+>> +struct edid;
+>>   
+>>   #ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
+>>   struct nouveau_backlight {
+>
+
+-- 
+Jani Nikula, Intel
