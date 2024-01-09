@@ -1,53 +1,81 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 551E58283B6
-	for <lists+nouveau@lfdr.de>; Tue,  9 Jan 2024 11:10:28 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6FABB828AA0
+	for <lists+nouveau@lfdr.de>; Tue,  9 Jan 2024 18:01:25 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 237CD10E3DC;
-	Tue,  9 Jan 2024 10:10:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 41E2110E49A;
+	Tue,  9 Jan 2024 17:01:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 51B5A10E3D4;
- Tue,  9 Jan 2024 10:10:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1704795020; x=1736331020;
- h=from:to:cc:subject:in-reply-to:references:date:
- message-id:mime-version;
- bh=ldm5WxS6kpLPSDpnf1qqA4H1af3L/INN+aDvbII5ms0=;
- b=ieR/QY3n+YQZVvtfeCTpX/nHpUi1YmKbSFaRHxY1xicmLsPIw87upwm6
- pKdL7HW4+QeADcQVe6hmu4yuLWzAOyqWTPW+rT6ouf44Be0dXLqFwUaMt
- VNI7wkFP2hSzQCRwk+pgq2OcCnXSFzFKYwmKCJTbVcu7eYV5aP5l71OP7
- oVTDZa8rAzmcaa2BLMMxvObdnxw/zksHabXniuqeJRhdT0l2I5H3vEd9A
- aBms0G4fLDxEkx6pl3tvDLFdTy54ZftnryNkDq4a8h4XWNA67XI6iSRf4
- q4vG3mdHod6PATMac4uwIAmwzNtTVHMPB/VWYLe5TDZTBImRtH/VPVnP5 A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10947"; a="464549260"
-X-IronPort-AV: E=Sophos;i="6.04,182,1695711600"; d="scan'208";a="464549260"
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Jan 2024 02:10:19 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10947"; a="954963988"
-X-IronPort-AV: E=Sophos;i="6.04,182,1695711600"; d="scan'208";a="954963988"
-Received: from aakinrin-mobl2.amr.corp.intel.com (HELO localhost)
- ([10.252.36.188])
- by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Jan 2024 02:10:16 -0800
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Danilo Krummrich <dakr@redhat.com>, Vegard Nossum
- <vegard.nossum@oracle.com>, "daniel@ffwll.ch" <daniel@ffwll.ch>
-Subject: Re: [PATCH -next] drm/nouveau: uapi: fix kerneldoc warnings
-In-Reply-To: <724fdfaf-0e38-408b-a2d6-e3f39f28743d@redhat.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20231225065145.3060754-1-vegard.nossum@oracle.com>
- <724fdfaf-0e38-408b-a2d6-e3f39f28743d@redhat.com>
-Date: Tue, 09 Jan 2024 12:10:13 +0200
-Message-ID: <87r0iqx1fe.fsf@intel.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 59F7210E496
+ for <nouveau@lists.freedesktop.org>; Tue,  9 Jan 2024 17:01:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1704819679;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=iPJD5Y/JUAijIAEh4AaeHvftl8qt3fo8LRS92q+SjAo=;
+ b=TbNSw0wW88w6SXfflWvjissYCBf+OYONnygycHAlTASGgemNgk3ieogqr1gA1IdA+1Er3o
+ 6Pi/5N5nVta+1nq8jmDcNq617RF1Z1QnDnm3A9xdogb8M/ZPxfwIrb2ttJIpGe72KZB+wR
+ LGdQ/1pA55aGaDkrg6ck0bnREHg3o9w=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-251-MfN78LGnOhC3exJ6-bEI3Q-1; Tue, 09 Jan 2024 12:01:16 -0500
+X-MC-Unique: MfN78LGnOhC3exJ6-bEI3Q-1
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-6800714a149so66201056d6.0
+ for <nouveau@lists.freedesktop.org>; Tue, 09 Jan 2024 09:01:16 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704819676; x=1705424476;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iPJD5Y/JUAijIAEh4AaeHvftl8qt3fo8LRS92q+SjAo=;
+ b=GutD1mMfyN+3knLS0ki6n40Bj+ACR0cGsg0YNT4jcI5gQV9W4bklcpbpLOFYMJkJ+m
+ j2MEQYuKiKQ63h9aPw2FHWW+9Sp89q25sbbmqWsO7jOIofBaiQaNc3nunjvIcgLPMSZv
+ 8DEOliKzI3m94Q/IZXEOjh7ZFofiA36rwl3OE6ZXAtLtJaAVkY9I2JZKPSljV+sCUhrN
+ u/GzI3XQbiNcJv4zU+Nnm6DpJ6JrmLraRZxzvVxzoZw309RphIXjho0HQQIP64QbINf5
+ kmM1tzw846jFv4vk5qSDMxTr1jltaw+FmrCN1gtZ+4Rn17ypwN95AZgcHMOE24cmdbXo
+ SOEg==
+X-Gm-Message-State: AOJu0YwWghw8ZKFbkAi+9oc3D6cIef3SEdNSzusCTJW2MXYRrHXX7DkV
+ LZdvPkkHVnyAmNC9Nkre2V5tngblFE8XT0pIoMsNcWMSkh5yQ+6Mi27DgUQ3Qe9OTi0XiZdezTV
+ YnsDNbMOXhX1jRtsnV+7+ETFBQ4WySrvJeQ==
+X-Received: by 2002:ad4:5d61:0:b0:67f:7109:786e with SMTP id
+ fn1-20020ad45d61000000b0067f7109786emr8107862qvb.123.1704819676340; 
+ Tue, 09 Jan 2024 09:01:16 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHnUqM22+GhVZwe7FhzzDIvyc0qfTBRQqUSGBfzFwlIRvdJVaCiNeoegRcDWdEXvKLK5p4oRA==
+X-Received: by 2002:ad4:5d61:0:b0:67f:7109:786e with SMTP id
+ fn1-20020ad45d61000000b0067f7109786emr8107837qvb.123.1704819675939; 
+ Tue, 09 Jan 2024 09:01:15 -0800 (PST)
+Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
+ ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
+ by smtp.gmail.com with ESMTPSA id
+ bo4-20020a05621414a400b00680ce23bc29sm1032598qvb.71.2024.01.09.09.01.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 09 Jan 2024 09:01:15 -0800 (PST)
+Message-ID: <6f343c87-fbb4-4779-aced-2e0df7b18e63@redhat.com>
+Date: Tue, 9 Jan 2024 18:01:13 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] drm/nouveau: include drm/drm_edid.h only where needed
+To: Jani Nikula <jani.nikula@intel.com>
+References: <20240104201632.1100753-1-jani.nikula@intel.com>
+ <95f6815c-1ff5-4c89-b8c6-0445834a0083@redhat.com> <87ttnmx1wn.fsf@intel.com>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <87ttnmx1wn.fsf@intel.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,159 +87,75 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jonathan Corbet <corbet@lwn.net>, nouveau@lists.freedesktop.org,
- Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
+Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, 08 Jan 2024, Danilo Krummrich <dakr@redhat.com> wrote:
-> On 12/25/23 07:51, Vegard Nossum wrote:
->> As of commit b77fdd6a48e6 ("scripts/kernel-doc: restore warning for
->> Excess struct/union"), we see the following warnings when running 'make
->> htmldocs':
->> 
->>    ./include/uapi/drm/nouveau_drm.h:292: warning: Excess struct member 'DRM_NOUVEAU_VM_BIND_OP_MAP' description in 'drm_nouveau_vm_bind_op'
->>    ./include/uapi/drm/nouveau_drm.h:292: warning: Excess struct member 'DRM_NOUVEAU_VM_BIND_OP_UNMAP' description in 'drm_nouveau_vm_bind_op'
->>    ./include/uapi/drm/nouveau_drm.h:292: warning: Excess struct member 'DRM_NOUVEAU_VM_BIND_SPARSE' description in 'drm_nouveau_vm_bind_op'
->>    ./include/uapi/drm/nouveau_drm.h:336: warning: Excess struct member 'DRM_NOUVEAU_VM_BIND_RUN_ASYNC' description in 'drm_nouveau_vm_bind'
->> 
->> The problem is that these values are #define constants, but had kerneldoc
->> comments attached to them as if they were actual struct members.
->> 
->> There are a number of ways we could fix this, but I chose to draw
->> inspiration from include/uapi/drm/i915_drm.h, which pulls them into the
->> corresponding kerneldoc comment for the struct member that they are
->> intended to be used with.
->> 
->> To keep the diff readable, there are a number of things I _didn't_ do in
->> this patch, but which we should also consider:
->> 
->> - This is pretty good documentation, but it ends up in gpu/driver-uapi,
->>    which is part of subsystem-apis/ when it really ought to display under
->>    userspace-api/ (the "Linux kernel user-space API guide" book of the
->>    documentation).
->
-> I agree, it indeed looks like this would make sense, same goes for
-> gpu/drm-uapi.rst.
->
-> @Jani, Sima: Was this intentional? Or can we change it?
+On 1/9/24 10:59, Jani Nikula wrote:
+> On Mon, 08 Jan 2024, Danilo Krummrich <dakr@redhat.com> wrote:
+>> On 1/4/24 21:16, Jani Nikula wrote:
+>>> Including drm_edid.h from nouveau_connector.h causes the rebuild of 15
+>>> files when drm_edid.h is modified, while there are only a few files that
+>>> actually need to include drm_edid.h.
+>>>
+>>> Cc: Karol Herbst <kherbst@redhat.com>
+>>> Cc: Lyude Paul <lyude@redhat.com>
+>>> Cc: Danilo Krummrich <dakr@redhat.com>
+>>> Cc: nouveau@lists.freedesktop.org
+>>> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+>>
+>> Reviewed-by: Danilo Krummrich <dakr@redhat.com>
+> 
+> Are you going to pick this up via the nouveau tree, or shall I apply it
+> to drm-misc-next?
 
-I have no recollection of this, but overall I'd say do what makes sense,
-and where things are easiest to find.
+We don't maintain a separate tree, hence feel free to apply it to drm-misc-next.
 
-BR,
-Jani.
+- Danilo
 
+> 
+> BR,
+> Jani.
+> 
+>>
+>>> ---
+>>>    drivers/gpu/drm/nouveau/dispnv50/head.c     | 1 +
+>>>    drivers/gpu/drm/nouveau/nouveau_connector.h | 2 +-
+>>>    2 files changed, 2 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
+>>> index 5f490fbf1877..83355dbc15ee 100644
+>>> --- a/drivers/gpu/drm/nouveau/dispnv50/head.c
+>>> +++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
+>>> @@ -32,6 +32,7 @@
+>>>    
+>>>    #include <drm/drm_atomic.h>
+>>>    #include <drm/drm_atomic_helper.h>
+>>> +#include <drm/drm_edid.h>
+>>>    #include <drm/drm_vblank.h>
+>>>    #include "nouveau_connector.h"
+>>>    
+>>> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.h b/drivers/gpu/drm/nouveau/nouveau_connector.h
+>>> index a2df4918340c..0608cabed058 100644
+>>> --- a/drivers/gpu/drm/nouveau/nouveau_connector.h
+>>> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.h
+>>> @@ -35,7 +35,6 @@
+>>>    
+>>>    #include <drm/display/drm_dp_helper.h>
+>>>    #include <drm/drm_crtc.h>
+>>> -#include <drm/drm_edid.h>
+>>>    #include <drm/drm_encoder.h>
+>>>    #include <drm/drm_util.h>
+>>>    
+>>> @@ -44,6 +43,7 @@
+>>>    
+>>>    struct nvkm_i2c_port;
+>>>    struct dcb_output;
+>>> +struct edid;
+>>>    
+>>>    #ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
+>>>    struct nouveau_backlight {
+>>
+> 
 
->
->> 
->> - More generally, we might want a warning if include/uapi/ files are
->>    kerneldoc'd outside userspace-api/.
->> 
->> - I'd consider it cleaner if the #defines appeared between the kerneldoc
->>    for the member and the member itself (which is something other DRM-
->>    related UAPI docs do).
->> 
->> - The %IDENTIFIER kerneldoc syntax is intended for "constants", and is
->>    more appropriate in this context than ``IDENTIFIER`` or &IDENTIFIER.
->>    The DRM docs aren't very consistent on this.
->> 
->> Cc: Randy Dunlap <rdunlap@infradead.org>
->> Cc: Jonathan Corbet <corbet@lwn.net>
->> Signed-off-by: Vegard Nossum <vegard.nossum@oracle.com>
->
-> Applied to drm-misc-next, thanks!
->
->> ---
->>   include/uapi/drm/nouveau_drm.h | 56 ++++++++++++++++------------------
->>   1 file changed, 27 insertions(+), 29 deletions(-)
->> 
->> diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_drm.h
->> index 0bade1592f34..c95ef8a4d94a 100644
->> --- a/include/uapi/drm/nouveau_drm.h
->> +++ b/include/uapi/drm/nouveau_drm.h
->> @@ -238,34 +238,32 @@ struct drm_nouveau_vm_init {
->>   struct drm_nouveau_vm_bind_op {
->>   	/**
->>   	 * @op: the operation type
->> +	 *
->> +	 * Supported values:
->> +	 *
->> +	 * %DRM_NOUVEAU_VM_BIND_OP_MAP - Map a GEM object to the GPU's VA
->> +	 * space. Optionally, the &DRM_NOUVEAU_VM_BIND_SPARSE flag can be
->> +	 * passed to instruct the kernel to create sparse mappings for the
->> +	 * given range.
->> +	 *
->> +	 * %DRM_NOUVEAU_VM_BIND_OP_UNMAP - Unmap an existing mapping in the
->> +	 * GPU's VA space. If the region the mapping is located in is a
->> +	 * sparse region, new sparse mappings are created where the unmapped
->> +	 * (memory backed) mapping was mapped previously. To remove a sparse
->> +	 * region the &DRM_NOUVEAU_VM_BIND_SPARSE must be set.
->>   	 */
->>   	__u32 op;
->> -/**
->> - * @DRM_NOUVEAU_VM_BIND_OP_MAP:
->> - *
->> - * Map a GEM object to the GPU's VA space. Optionally, the
->> - * &DRM_NOUVEAU_VM_BIND_SPARSE flag can be passed to instruct the kernel to
->> - * create sparse mappings for the given range.
->> - */
->>   #define DRM_NOUVEAU_VM_BIND_OP_MAP 0x0
->> -/**
->> - * @DRM_NOUVEAU_VM_BIND_OP_UNMAP:
->> - *
->> - * Unmap an existing mapping in the GPU's VA space. If the region the mapping
->> - * is located in is a sparse region, new sparse mappings are created where the
->> - * unmapped (memory backed) mapping was mapped previously. To remove a sparse
->> - * region the &DRM_NOUVEAU_VM_BIND_SPARSE must be set.
->> - */
->>   #define DRM_NOUVEAU_VM_BIND_OP_UNMAP 0x1
->>   	/**
->>   	 * @flags: the flags for a &drm_nouveau_vm_bind_op
->> +	 *
->> +	 * Supported values:
->> +	 *
->> +	 * %DRM_NOUVEAU_VM_BIND_SPARSE - Indicates that an allocated VA
->> +	 * space region should be sparse.
->>   	 */
->>   	__u32 flags;
->> -/**
->> - * @DRM_NOUVEAU_VM_BIND_SPARSE:
->> - *
->> - * Indicates that an allocated VA space region should be sparse.
->> - */
->>   #define DRM_NOUVEAU_VM_BIND_SPARSE (1 << 8)
->>   	/**
->>   	 * @handle: the handle of the DRM GEM object to map
->> @@ -301,17 +299,17 @@ struct drm_nouveau_vm_bind {
->>   	__u32 op_count;
->>   	/**
->>   	 * @flags: the flags for a &drm_nouveau_vm_bind ioctl
->> +	 *
->> +	 * Supported values:
->> +	 *
->> +	 * %DRM_NOUVEAU_VM_BIND_RUN_ASYNC - Indicates that the given VM_BIND
->> +	 * operation should be executed asynchronously by the kernel.
->> +	 *
->> +	 * If this flag is not supplied the kernel executes the associated
->> +	 * operations synchronously and doesn't accept any &drm_nouveau_sync
->> +	 * objects.
->>   	 */
->>   	__u32 flags;
->> -/**
->> - * @DRM_NOUVEAU_VM_BIND_RUN_ASYNC:
->> - *
->> - * Indicates that the given VM_BIND operation should be executed asynchronously
->> - * by the kernel.
->> - *
->> - * If this flag is not supplied the kernel executes the associated operations
->> - * synchronously and doesn't accept any &drm_nouveau_sync objects.
->> - */
->>   #define DRM_NOUVEAU_VM_BIND_RUN_ASYNC 0x1
->>   	/**
->>   	 * @wait_count: the number of wait &drm_nouveau_syncs
->
-
--- 
-Jani Nikula, Intel
