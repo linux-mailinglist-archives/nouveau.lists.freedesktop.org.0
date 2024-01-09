@@ -2,71 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DE1E8281A5
-	for <lists+nouveau@lfdr.de>; Tue,  9 Jan 2024 09:34:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 68C3B8282D3
+	for <lists+nouveau@lfdr.de>; Tue,  9 Jan 2024 10:17:19 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2264B10E3A9;
-	Tue,  9 Jan 2024 08:34:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0C13810E0AD;
+	Tue,  9 Jan 2024 09:17:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A45B810E398;
- Tue,  9 Jan 2024 08:34:21 +0000 (UTC)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-40e4f7119eeso3099775e9.1; 
- Tue, 09 Jan 2024 00:34:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704789260; x=1705394060; darn=lists.freedesktop.org;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=3YGwl375Lp2NNLBp7zhtQjo0BnEm9qfsqG+R+PAs65Y=;
- b=RvWcYOjpYcIn4p4hOrFzldi0IP/cqKBl8ArhATl2SXagWP19GJ3bD88XvUVrOUTHN0
- 686rEpAeyjuxD34S9+eXU6hxwxHmi5GofwK7mDOQ6iXt/hit7BlpyTtR7OIN20Avowv3
- n+EKx/qLShecgc3XOOTg+lKbaqzxFGys6ERBtQ81KqDXu1rSK/r8Wol/fWhfLIzi4eIb
- R/vfO2cf9axkH40cDT4AN1FsfjA6AzJ/EqJvfZPhr1O3fEjpMabBs4mT2RHAoL0M26g1
- JBa3m1tKItMfAGXELy+9xznJhKO9ZG18ygmTx4/HStgH86yxgW7gfJf1CBQ/kY4eWzEy
- pKwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704789260; x=1705394060;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3YGwl375Lp2NNLBp7zhtQjo0BnEm9qfsqG+R+PAs65Y=;
- b=nj4UNSLcIMbMcWc/5PL4Elo6oF29qOWZA5cxzOOSuAHumntHcqm9ywI6ydYr/pNw0c
- z2yleUp6uYaZr9LGBZa+xl0ebT22wFDstd+8Vk4r2lZfV69ha8uubEAuRlnMcwMSVgjH
- 4yLmjgfMqyJQR3FR+Ciw6RFS2ahMNMlp2Ls46cEgtGvenNoXxhhw6+7Gz+Qnx1gPkNhx
- QczzjJzP9/TA9JCHa5aB9ZbEZDHkBNBaRzR/H0UGteK8MUXw8IJOfsRhroi2f/Dd7kTT
- usgLy5f83lmoky30BcQWeRIlNCUD7ISreootAWgc1YN3khtuyZoXWz7HdxsbRlC9WAmL
- 74NQ==
-X-Gm-Message-State: AOJu0YyxSsu71NcjxWzUUWmV036F/SsgkpQFREsnSdjzYpjeTsDntyL8
- dgR4NeVhU6vmDSzRhnJJFXaMx2D7ld4=
-X-Google-Smtp-Source: AGHT+IH9uU5FYn/hx5pejffF/o/AB6v9PgXWJhqOoc4vJ1uvrzcd7P6Lfh9aQNlgULSSSxGJLIPHtQ==
-X-Received: by 2002:a05:600c:4587:b0:40e:50ac:d24e with SMTP id
- r7-20020a05600c458700b0040e50acd24emr213842wmo.13.1704789259806; 
- Tue, 09 Jan 2024 00:34:19 -0800 (PST)
-Received: from [10.254.108.81] (munvpn.amd.com. [165.204.72.6])
- by smtp.gmail.com with ESMTPSA id
- hn25-20020a05600ca39900b0040d91fa270fsm2559527wmb.36.2024.01.09.00.34.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Jan 2024 00:34:19 -0800 (PST)
-Message-ID: <6eff58f4-7956-47cf-9a66-92456d5577d3@gmail.com>
-Date: Tue, 9 Jan 2024 09:34:17 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Rework TTMs busy handling
-Content-Language: en-US
-To: =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- zack.rusin@broadcom.com, lyude@redhat.com, kherbst@redhat.com,
- jani.nikula@linux.intel.com, nouveau@lists.freedesktop.org,
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DA1D310E0AD;
+ Tue,  9 Jan 2024 09:17:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1704791835; x=1736327835;
+ h=message-id:subject:from:to:date:in-reply-to:references:
+ content-transfer-encoding:mime-version;
+ bh=UuORAX7I9MxlSVr5DSq/uhcxoKFIHBwxLkIKZamftmI=;
+ b=RkrwIH8NVFqpxRLD4J/HWlpgeQI9ijr11D95CKYgPrT0ZTnSeHpTvUtH
+ OyseTlJaiWcCNj3gk/1L3/VMWqXRKCYP9UDW8ATCCjoXRyaFtT6hbtmrb
+ wCMfNkK/aJo8/s0MV1sRPZDYAlj1L7dbZtUKvGZt1xQPmIFFGMrEWCmPO
+ oHUiTB6L8XU96ojrW+CQwX8Wl9MhyS3OSkHRM4Xu+oeyK2XEpcY3FPCkt
+ o77hDgcnAgHC46pzPutQGfz7ghVYu/yrVMFNgelgubzHoANDI1WJfMcqj
+ NRCUx4vw9WYZu0eRrk+Ngv0aI1YEqSNVQF5clxwIIzUl85g30VNrQ5jBO g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10947"; a="4896538"
+X-IronPort-AV: E=Sophos;i="6.04,182,1695711600"; 
+   d="scan'208";a="4896538"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+ by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Jan 2024 01:17:14 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10947"; a="1113021567"
+X-IronPort-AV: E=Sophos;i="6.04,182,1695711600"; d="scan'208";a="1113021567"
+Received: from djustese-mobl.ger.corp.intel.com (HELO [10.249.254.147])
+ ([10.249.254.147])
+ by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Jan 2024 01:17:12 -0800
+Message-ID: <1edac68920a5927281c6757d9f78b6045f10602c.camel@linux.intel.com>
+Subject: Re: [PATCH 2/5] drm/ttm: return ENOSPC from ttm_bo_mem_space
+From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
+To: Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>, 
+ zack.rusin@broadcom.com, lyude@redhat.com, kherbst@redhat.com, 
+ jani.nikula@linux.intel.com, nouveau@lists.freedesktop.org, 
  intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Date: Tue, 09 Jan 2024 10:17:09 +0100
+In-Reply-To: <20240109074729.3646-3-christian.koenig@amd.com>
 References: <20240109074729.3646-1-christian.koenig@amd.com>
- <70484d976d3af4286652a6b26ed8783a9362f403.camel@linux.intel.com>
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <70484d976d3af4286652a6b26ed8783a9362f403.camel@linux.intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ <20240109074729.3646-3-christian.koenig@amd.com>
+Organization: Intel Sweden AB, Registration Number: 556189-6027
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.50.2 (3.50.2-1.fc39) 
+MIME-Version: 1.0
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,55 +67,41 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 09.01.24 um 09:14 schrieb Thomas Hellström:
-> Hi, Christian
->
-> On Tue, 2024-01-09 at 08:47 +0100, Christian König wrote:
->> Hi guys,
->>
->> I'm trying to make this functionality a bit more useful for years now
->> since we multiple reports that behavior of drivers can be suboptimal
->> when multiple placements be given.
->>
->> So basically instead of hacking around the TTM behavior in the driver
->> once more I've gone ahead and changed the idle/busy placement list
->> into idle/busy placement flags. This not only saves a bunch of code,
->> but also allows setting some placements as fallback which are used if
->> allocating from the preferred ones didn't worked.
->>
->> Zack pointed out that some removed VMWGFX code was brought back
->> because
->> of rebasing, fixed in this version.
->>
->> Intel CI seems to be happy with those patches, so any more comments?
-> Looks like Xe changes are missing? (xe is now in drm-tip).
->
-> I also have some doubts about the naming "idle" vs "busy", since an
-> elaborate eviction mechanism would probably at some point want to check
-> for gpu idle vs gpu busy, and this might create some confusion moving
-> forward for people confusing busy as in memory overcommit with busy as
-> in gpu activity.
->
-> I can't immediately think of something better, though.
+On Tue, 2024-01-09 at 08:47 +0100, Christian K=C3=B6nig wrote:
+> Only convert it to ENOMEM in ttm_bo_validate.
+>=20
 
-Yeah, I was wondering about that as well. Especially since I wanted to 
-add some more flags in the future when for example a bandwidth quota how 
-much memory can be moved in/out is exceeded.
+Could we have a more elaborate commit description here, (why is this
+change needed)?
 
-Something like phase1, phase2, phase3 etc..., but that's also not very 
-descriptive either.
-
-Going to take a look at XE as well, thanks for the notice.
-
-Regards,
-Christian.
-
->
-> /Thomas
->
->
->> Regards,
->> Christian.
->>
->>
+> Signed-off-by: Christian K=C3=B6nig <christian.koenig@amd.com>
+> ---
+> =C2=A0drivers/gpu/drm/ttm/ttm_bo.c | 5 ++++-
+> =C2=A01 file changed, 4 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/gpu/drm/ttm/ttm_bo.c
+> b/drivers/gpu/drm/ttm/ttm_bo.c
+> index edf10618fe2b..8c1eaa74fa21 100644
+> --- a/drivers/gpu/drm/ttm/ttm_bo.c
+> +++ b/drivers/gpu/drm/ttm/ttm_bo.c
+> @@ -830,7 +830,7 @@ int ttm_bo_mem_space(struct ttm_buffer_object
+> *bo,
+> =C2=A0			goto error;
+> =C2=A0	}
+> =C2=A0
+> -	ret =3D -ENOMEM;
+> +	ret =3D -ENOSPC;
+> =C2=A0	if (!type_found) {
+> =C2=A0		pr_err(TTM_PFX "No compatible memory type found\n");
+> =C2=A0		ret =3D -EINVAL;
+> @@ -916,6 +916,9 @@ int ttm_bo_validate(struct ttm_buffer_object *bo,
+> =C2=A0		return -EINVAL;
+> =C2=A0
+> =C2=A0	ret =3D ttm_bo_move_buffer(bo, placement, ctx);
+> +	/* For backward compatibility with userspace */
+> +	if (ret =3D=3D -ENOSPC)
+> +		return -ENOMEM;
+> =C2=A0	if (ret)
+> =C2=A0		return ret;
+> =C2=A0
 
