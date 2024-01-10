@@ -2,80 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FABB828AA0
-	for <lists+nouveau@lfdr.de>; Tue,  9 Jan 2024 18:01:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06500829201
+	for <lists+nouveau@lfdr.de>; Wed, 10 Jan 2024 02:18:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 41E2110E49A;
-	Tue,  9 Jan 2024 17:01:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C424C10E025;
+	Wed, 10 Jan 2024 01:18:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 59F7210E496
- for <nouveau@lists.freedesktop.org>; Tue,  9 Jan 2024 17:01:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1704819679;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=iPJD5Y/JUAijIAEh4AaeHvftl8qt3fo8LRS92q+SjAo=;
- b=TbNSw0wW88w6SXfflWvjissYCBf+OYONnygycHAlTASGgemNgk3ieogqr1gA1IdA+1Er3o
- 6Pi/5N5nVta+1nq8jmDcNq617RF1Z1QnDnm3A9xdogb8M/ZPxfwIrb2ttJIpGe72KZB+wR
- LGdQ/1pA55aGaDkrg6ck0bnREHg3o9w=
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
+Received: from us-smtp-delivery-44.mimecast.com
+ (us-smtp-delivery-44.mimecast.com [205.139.111.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2855710E025
+ for <nouveau@lists.freedesktop.org>; Wed, 10 Jan 2024 01:18:33 +0000 (UTC)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-251-MfN78LGnOhC3exJ6-bEI3Q-1; Tue, 09 Jan 2024 12:01:16 -0500
-X-MC-Unique: MfN78LGnOhC3exJ6-bEI3Q-1
-Received: by mail-qv1-f72.google.com with SMTP id
- 6a1803df08f44-6800714a149so66201056d6.0
- for <nouveau@lists.freedesktop.org>; Tue, 09 Jan 2024 09:01:16 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704819676; x=1705424476;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=iPJD5Y/JUAijIAEh4AaeHvftl8qt3fo8LRS92q+SjAo=;
- b=GutD1mMfyN+3knLS0ki6n40Bj+ACR0cGsg0YNT4jcI5gQV9W4bklcpbpLOFYMJkJ+m
- j2MEQYuKiKQ63h9aPw2FHWW+9Sp89q25sbbmqWsO7jOIofBaiQaNc3nunjvIcgLPMSZv
- 8DEOliKzI3m94Q/IZXEOjh7ZFofiA36rwl3OE6ZXAtLtJaAVkY9I2JZKPSljV+sCUhrN
- u/GzI3XQbiNcJv4zU+Nnm6DpJ6JrmLraRZxzvVxzoZw309RphIXjho0HQQIP64QbINf5
- kmM1tzw846jFv4vk5qSDMxTr1jltaw+FmrCN1gtZ+4Rn17ypwN95AZgcHMOE24cmdbXo
- SOEg==
-X-Gm-Message-State: AOJu0YwWghw8ZKFbkAi+9oc3D6cIef3SEdNSzusCTJW2MXYRrHXX7DkV
- LZdvPkkHVnyAmNC9Nkre2V5tngblFE8XT0pIoMsNcWMSkh5yQ+6Mi27DgUQ3Qe9OTi0XiZdezTV
- YnsDNbMOXhX1jRtsnV+7+ETFBQ4WySrvJeQ==
-X-Received: by 2002:ad4:5d61:0:b0:67f:7109:786e with SMTP id
- fn1-20020ad45d61000000b0067f7109786emr8107862qvb.123.1704819676340; 
- Tue, 09 Jan 2024 09:01:16 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHnUqM22+GhVZwe7FhzzDIvyc0qfTBRQqUSGBfzFwlIRvdJVaCiNeoegRcDWdEXvKLK5p4oRA==
-X-Received: by 2002:ad4:5d61:0:b0:67f:7109:786e with SMTP id
- fn1-20020ad45d61000000b0067f7109786emr8107837qvb.123.1704819675939; 
- Tue, 09 Jan 2024 09:01:15 -0800 (PST)
-Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
- ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
- by smtp.gmail.com with ESMTPSA id
- bo4-20020a05621414a400b00680ce23bc29sm1032598qvb.71.2024.01.09.09.01.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Jan 2024 09:01:15 -0800 (PST)
-Message-ID: <6f343c87-fbb4-4779-aced-2e0df7b18e63@redhat.com>
-Date: Tue, 9 Jan 2024 18:01:13 +0100
+ us-mta-510-whklFtzLPHiLzAUd4BFuFg-1; Tue, 09 Jan 2024 20:18:30 -0500
+X-MC-Unique: whklFtzLPHiLzAUd4BFuFg-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8F59282DFE0;
+ Wed, 10 Jan 2024 01:18:29 +0000 (UTC)
+Received: from dreadlord.redhat.com (unknown [10.64.136.90])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 8964C2166B35;
+ Wed, 10 Jan 2024 01:18:28 +0000 (UTC)
+From: Dave Airlie <airlied@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH] nouveau/gsp: handle engines in runl without nonstall
+ interrupts.
+Date: Wed, 10 Jan 2024 11:18:26 +1000
+Message-ID: <20240110011826.3996289-1-airlied@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] drm/nouveau: include drm/drm_edid.h only where needed
-To: Jani Nikula <jani.nikula@intel.com>
-References: <20240104201632.1100753-1-jani.nikula@intel.com>
- <95f6815c-1ff5-4c89-b8c6-0445834a0083@redhat.com> <87ttnmx1wn.fsf@intel.com>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <87ttnmx1wn.fsf@intel.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
 X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-Mimecast-Originator: gmail.com
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,75 +51,79 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 1/9/24 10:59, Jani Nikula wrote:
-> On Mon, 08 Jan 2024, Danilo Krummrich <dakr@redhat.com> wrote:
->> On 1/4/24 21:16, Jani Nikula wrote:
->>> Including drm_edid.h from nouveau_connector.h causes the rebuild of 15
->>> files when drm_edid.h is modified, while there are only a few files that
->>> actually need to include drm_edid.h.
->>>
->>> Cc: Karol Herbst <kherbst@redhat.com>
->>> Cc: Lyude Paul <lyude@redhat.com>
->>> Cc: Danilo Krummrich <dakr@redhat.com>
->>> Cc: nouveau@lists.freedesktop.org
->>> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
->>
->> Reviewed-by: Danilo Krummrich <dakr@redhat.com>
-> 
-> Are you going to pick this up via the nouveau tree, or shall I apply it
-> to drm-misc-next?
+From: Dave Airlie <airlied@redhat.com>
 
-We don't maintain a separate tree, hence feel free to apply it to drm-misc-next.
+It appears on TU106 GPUs (2070), that some of the nvdec engines
+are in the runlist but have no valid nonstall interrupt, nouveau
+didn't handle that too well.
 
-- Danilo
+This should let nouveau/gsp work on those.
 
-> 
-> BR,
-> Jani.
-> 
->>
->>> ---
->>>    drivers/gpu/drm/nouveau/dispnv50/head.c     | 1 +
->>>    drivers/gpu/drm/nouveau/nouveau_connector.h | 2 +-
->>>    2 files changed, 2 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
->>> index 5f490fbf1877..83355dbc15ee 100644
->>> --- a/drivers/gpu/drm/nouveau/dispnv50/head.c
->>> +++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
->>> @@ -32,6 +32,7 @@
->>>    
->>>    #include <drm/drm_atomic.h>
->>>    #include <drm/drm_atomic_helper.h>
->>> +#include <drm/drm_edid.h>
->>>    #include <drm/drm_vblank.h>
->>>    #include "nouveau_connector.h"
->>>    
->>> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.h b/drivers/gpu/drm/nouveau/nouveau_connector.h
->>> index a2df4918340c..0608cabed058 100644
->>> --- a/drivers/gpu/drm/nouveau/nouveau_connector.h
->>> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.h
->>> @@ -35,7 +35,6 @@
->>>    
->>>    #include <drm/display/drm_dp_helper.h>
->>>    #include <drm/drm_crtc.h>
->>> -#include <drm/drm_edid.h>
->>>    #include <drm/drm_encoder.h>
->>>    #include <drm/drm_util.h>
->>>    
->>> @@ -44,6 +43,7 @@
->>>    
->>>    struct nvkm_i2c_port;
->>>    struct dcb_output;
->>> +struct edid;
->>>    
->>>    #ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
->>>    struct nouveau_backlight {
->>
-> 
+Cc: stable@vger.kernel.org # v6.7+
+---
+ drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga100.c | 4 ++++
+ drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c  | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c   | 8 ++------
+ 3 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga100.c b/drivers/gpu=
+/drm/nouveau/nvkm/engine/fifo/ga100.c
+index c8ce7ff18713..e74493a4569e 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/ga100.c
+@@ -550,6 +550,10 @@ ga100_fifo_nonstall_ctor(struct nvkm_fifo *fifo)
+ =09=09struct nvkm_engn *engn =3D list_first_entry(&runl->engns, typeof(*en=
+gn), head);
+=20
+ =09=09runl->nonstall.vector =3D engn->func->nonstall(engn);
++
++=09=09/* if no nonstall vector just keep going */
++=09=09if (runl->nonstall.vector =3D=3D -1)
++=09=09=09continue;
+ =09=09if (runl->nonstall.vector < 0) {
+ =09=09=09RUNL_ERROR(runl, "nonstall %d", runl->nonstall.vector);
+ =09=09=09return runl->nonstall.vector;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c b/drivers/gpu/=
+drm/nouveau/nvkm/engine/fifo/r535.c
+index b903785056b5..3454c7d29502 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/r535.c
+@@ -351,7 +351,7 @@ r535_engn_nonstall(struct nvkm_engn *engn)
+ =09int ret;
+=20
+ =09ret =3D nvkm_gsp_intr_nonstall(subdev->device->gsp, subdev->type, subde=
+v->inst);
+-=09WARN_ON(ret < 0);
++=09WARN_ON(ret =3D=3D -ENOENT);
+ =09return ret;
+ }
+=20
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c b/drivers/gpu/d=
+rm/nouveau/nvkm/subdev/gsp/base.c
+index 04bceaa28a19..da1bebb896f7 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/base.c
+@@ -25,12 +25,8 @@ int
+ nvkm_gsp_intr_nonstall(struct nvkm_gsp *gsp, enum nvkm_subdev_type type, i=
+nt inst)
+ {
+ =09for (int i =3D 0; i < gsp->intr_nr; i++) {
+-=09=09if (gsp->intr[i].type =3D=3D type && gsp->intr[i].inst =3D=3D inst) =
+{
+-=09=09=09if (gsp->intr[i].nonstall !=3D ~0)
+-=09=09=09=09return gsp->intr[i].nonstall;
+-
+-=09=09=09return -EINVAL;
+-=09=09}
++=09=09if (gsp->intr[i].type =3D=3D type && gsp->intr[i].inst =3D=3D inst)
++=09=09=09return gsp->intr[i].nonstall;
+ =09}
+=20
+ =09return -ENOENT;
+--=20
+2.43.0
 
