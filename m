@@ -2,70 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19B1D82C01C
-	for <lists+nouveau@lfdr.de>; Fri, 12 Jan 2024 13:52:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4AACD82C1DC
+	for <lists+nouveau@lfdr.de>; Fri, 12 Jan 2024 15:31:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5440D10EBC6;
-	Fri, 12 Jan 2024 12:52:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BB60C10E0C7;
+	Fri, 12 Jan 2024 14:31:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7676C10EB03;
- Fri, 12 Jan 2024 12:52:08 +0000 (UTC)
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-555f581aed9so7487762a12.3; 
- Fri, 12 Jan 2024 04:52:08 -0800 (PST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 98C7A10E0C7
+ for <nouveau@lists.freedesktop.org>; Fri, 12 Jan 2024 14:31:14 +0000 (UTC)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-336990fb8fbso5144080f8f.1
+ for <nouveau@lists.freedesktop.org>; Fri, 12 Jan 2024 06:31:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705063927; x=1705668727; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=9gqe6zt+K1SwL5LJS94hj5/KUX3LpPHn8y08oK/nAmQ=;
- b=ejpp6/TQ2dRTFUIlYSu3Nhvjyd6URh36M4DWvXwGTmmFw3CEMjrkLX9/4DnrJk+Ccz
- HSL7bZscC10D8KmPWnEokuq5XOmjVR/ggqbfOBtTK9h9NySw0HJ/1mFSUwEOXVsGIYtV
- jvsIb45GMa2RtylDVl1u49671czEf55jc5pbTu1pzLXeXVoofFsySXA0jram4kkof1qE
- w0yoDjuI6NbweXGBBrMeIr9slairv0ZylaqTZECzNA0Z0iSg+C5E8FhazMU4j3yRTCbz
- aqN3i4LNY51WmT01sFBok3mtimdaKESquOO7sz+OcN/P866c5CHooV3fxZfSA9Ky9WoM
- 6Eyg==
+ d=linaro.org; s=google; t=1705069873; x=1705674673; darn=lists.freedesktop.org;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=aw07nAMv5oGDdJtDs7MOtSYaErH1ufSaIcr/61fVq1Y=;
+ b=IUj1zU2cAiIrQlOByUtzZvSKz2baBkSXwwvcVNN5A+ancUBg1nR/8mSCtpHkMK1J1a
+ 78N61fJ3o9ZBMcJtlGvka8LW/jnnsyxkDDQSDC0TIJeALdaJpLstB3isPFsT2qfpXQrH
+ FfFHKEpCu0Nwc5OsBWtQHB4u579KQcEifLBb205oe0NhGtBAjdSpT65jUtCCbL7I6QPQ
+ B9dvZ73Or42Nz5bumMe9vjyBIGcEy3eBX8viDQ1pJl3e9DGnqrQQRIGpEOwstkVJQpM2
+ yflX6EyztQU3fB787gPa/maGIydiyCPJii6GpQJD3JAvEySqHKYYh/Q52mK3ImS3RbWK
+ EKiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705063927; x=1705668727;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9gqe6zt+K1SwL5LJS94hj5/KUX3LpPHn8y08oK/nAmQ=;
- b=Ze6YVIHPQ7rRtLpDyg6tK5VP78SdGEdHiXmrzuxyOnEKfYIiBtt8SYuvNQKpd+qqlU
- mAeH740qh3gKTRqekiVESkmY134zeAHC4largJ3bKbkEkwRK6H7kl5fzUOWD70KdMVNE
- QNNogzWYSk/0nrpNdFbV5m4aOqVMrwaZaioCfdcUFUrQgr6U7+SCNVCXsLxDrLnDkSgz
- H+QbThZfDkoD2sSHGWkvDta0YlR6MekCEUfBfqZ+eDJKHpPG633gOAZj9qb7M1823cDn
- mFq8wiGP4SP19Jy+dT/wEKUqN0V2Lf8WdTTWe3mxBwZWycJ6/zgYdFlePM3z27sJqeEE
- XIvA==
-X-Gm-Message-State: AOJu0Yzy9RYi8t09EbsuthGez82EVudGxixliGfCZa6FDmRS4AAe7bYS
- R/79V/5WEMftSDb4WSac+xTWUa7csztRQfor
-X-Google-Smtp-Source: AGHT+IHVk055NGr7VOr6JLLMuYJwLHJQBa+mA0jKkUCa+2/s2SoSr9i41bE6ESRSyGiXXKKa0sQGrw==
-X-Received: by 2002:aa7:c485:0:b0:557:63f0:1eff with SMTP id
- m5-20020aa7c485000000b0055763f01effmr603584edq.9.1705063926964; 
- Fri, 12 Jan 2024 04:52:06 -0800 (PST)
-Received: from able.fritz.box ([2a00:e180:152a:5d00:a6e1:95b5:7596:5333])
- by smtp.gmail.com with ESMTPSA id
- y10-20020aa7ccca000000b005572a1159b9sm1752427edt.22.2024.01.12.04.52.06
+ d=1e100.net; s=20230601; t=1705069873; x=1705674673;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=aw07nAMv5oGDdJtDs7MOtSYaErH1ufSaIcr/61fVq1Y=;
+ b=aTnB2J1gMwXrsdgfjuesLvQhjq3ZbTvT7x47hPfS3lkZcHYcGIFY1YlUXia25SNgd+
+ 7w+3Z89FEbucEMVyaGHT6+p0wyxsvONh3uthVg+5bM+g9BvrEMBMW26BXXehV6kC01cC
+ 9IWW7/4+/A6RiKIwOaAyCbhD45KO7qhJRSBXEpYe6936gGc8HY7WMD+Q+DEmK4I4Aw1F
+ uE1v0RMhHdjOrZ6bFOQHovzTTl37TKIHwDrrfJEOwFZHN9FDTX5OqI0bnt597xaX/PO2
+ ufybOiliDORAgk4JCSViqhRtqyQC+obI6EQBXsuIBwvexQFZEFTqsQ3wrM9SnnataI7L
+ m0ow==
+X-Gm-Message-State: AOJu0YxNMS/RcroynGT9bfUrSns124uiFE2go8v0kSanzf/278zY9BY7
+ fzBbwt2ZIiQWsY6/uEDZIl1dYQBzG4GRhQ==
+X-Google-Smtp-Source: AGHT+IFXMCPqgdEgsPkqLjC6vO/Vvti/WhxuK2GBHGBXb1gKi2FF2DFsgVScc5hicSE+pHcaXwfSew==
+X-Received: by 2002:a5d:590f:0:b0:337:7680:8ccf with SMTP id
+ v15-20020a5d590f000000b0033776808ccfmr817239wrd.56.1705069873001; 
+ Fri, 12 Jan 2024 06:31:13 -0800 (PST)
+Received: from localhost ([102.140.209.237]) by smtp.gmail.com with ESMTPSA id
+ x9-20020adfec09000000b00336b8461a5esm4028872wrn.88.2024.01.12.06.31.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jan 2024 04:52:06 -0800 (PST)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
- <christian.koenig@amd.com>
-To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- thomas.hellstrom@linux.intel.com, nouveau@lists.freedesktop.org,
- jani.nikula@linux.intel.com, kherbst@redhat.com, lyude@redhat.com,
- zackr@vmware.com, michel.daenzer@mailbox.org
-Subject: [PATCH 5/5] drm/amdgpu: use GTT only as fallback for VRAM|GTT
-Date: Fri, 12 Jan 2024 13:51:58 +0100
-Message-Id: <20240112125158.2748-6-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240112125158.2748-1-christian.koenig@amd.com>
-References: <20240112125158.2748-1-christian.koenig@amd.com>
+ Fri, 12 Jan 2024 06:31:12 -0800 (PST)
+Date: Fri, 12 Jan 2024 17:31:09 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Dave Airlie <airlied@gmail.com>
+Subject: [PATCH] drm/nouveau/disp/r535: fix error code in r535_dp_aux_xfer()
+Message-ID: <5e2be90e-c7b8-4366-ab93-69040734742e@moroto.mountain>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Mailer: git-send-email haha only kidding
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,36 +68,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: nouveau@lists.freedesktop.org, kernel-janitors@vger.kernel.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Try to fill up VRAM as well by setting the busy flag on GTT allocations.
+This code was shuffled around but the return wasn't updated.  It should
+return "ret" instead of "ctrl".
 
-This fixes the issue that when VRAM was evacuated for suspend it's never
-filled up again unless the application is restarted.
-
-Signed-off-by: Christian König <christian.koenig@amd.com>
+Fixes: 4ae3a20102b2 ("nouveau/gsp: don't free ctrl messages on errors")
+Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
 ---
- drivers/gpu/drm/amd/amdgpu/amdgpu_object.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-index 06fb3fc47eaa..2752f2a67a44 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-@@ -173,6 +173,12 @@ void amdgpu_bo_placement_from_domain(struct amdgpu_bo *abo, u32 domain)
- 			abo->flags & AMDGPU_GEM_CREATE_PREEMPTIBLE ?
- 			AMDGPU_PL_PREEMPT : TTM_PL_TT;
- 		places[c].flags = 0;
-+		/*
-+		 * When GTT is just an alternative to VRAM make sure that we
-+		 * only use it as fallback and still try to fill up VRAM first.
-+		 */
-+		if (domain & abo->preferred_domains & AMDGPU_GEM_DOMAIN_VRAM)
-+			places[c].flags |= TTM_PL_FLAG_FALLBACK;
- 		c++;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
+index 6a0a4d3b8902..027867c2a8c5 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
+@@ -1080,7 +1080,7 @@ r535_dp_aux_xfer(struct nvkm_outp *outp, u8 type, u32 addr, u8 *data, u8 *psize)
+ 	ret = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, &ctrl, sizeof(*ctrl));
+ 	if (ret) {
+ 		nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
+-		return PTR_ERR(ctrl);
++		return ret;
  	}
  
+ 	memcpy(data, ctrl->data, size);
 -- 
-2.34.1
+2.43.0
 
