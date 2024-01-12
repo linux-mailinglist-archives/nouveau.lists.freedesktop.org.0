@@ -2,61 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AACD82C1DC
-	for <lists+nouveau@lfdr.de>; Fri, 12 Jan 2024 15:31:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 66FED82C3EE
+	for <lists+nouveau@lfdr.de>; Fri, 12 Jan 2024 17:50:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BB60C10E0C7;
-	Fri, 12 Jan 2024 14:31:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7003B10E0CB;
+	Fri, 12 Jan 2024 16:50:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 98C7A10E0C7
- for <nouveau@lists.freedesktop.org>; Fri, 12 Jan 2024 14:31:14 +0000 (UTC)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-336990fb8fbso5144080f8f.1
- for <nouveau@lists.freedesktop.org>; Fri, 12 Jan 2024 06:31:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705069873; x=1705674673; darn=lists.freedesktop.org;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=aw07nAMv5oGDdJtDs7MOtSYaErH1ufSaIcr/61fVq1Y=;
- b=IUj1zU2cAiIrQlOByUtzZvSKz2baBkSXwwvcVNN5A+ancUBg1nR/8mSCtpHkMK1J1a
- 78N61fJ3o9ZBMcJtlGvka8LW/jnnsyxkDDQSDC0TIJeALdaJpLstB3isPFsT2qfpXQrH
- FfFHKEpCu0Nwc5OsBWtQHB4u579KQcEifLBb205oe0NhGtBAjdSpT65jUtCCbL7I6QPQ
- B9dvZ73Or42Nz5bumMe9vjyBIGcEy3eBX8viDQ1pJl3e9DGnqrQQRIGpEOwstkVJQpM2
- yflX6EyztQU3fB787gPa/maGIydiyCPJii6GpQJD3JAvEySqHKYYh/Q52mK3ImS3RbWK
- EKiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705069873; x=1705674673;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=aw07nAMv5oGDdJtDs7MOtSYaErH1ufSaIcr/61fVq1Y=;
- b=aTnB2J1gMwXrsdgfjuesLvQhjq3ZbTvT7x47hPfS3lkZcHYcGIFY1YlUXia25SNgd+
- 7w+3Z89FEbucEMVyaGHT6+p0wyxsvONh3uthVg+5bM+g9BvrEMBMW26BXXehV6kC01cC
- 9IWW7/4+/A6RiKIwOaAyCbhD45KO7qhJRSBXEpYe6936gGc8HY7WMD+Q+DEmK4I4Aw1F
- uE1v0RMhHdjOrZ6bFOQHovzTTl37TKIHwDrrfJEOwFZHN9FDTX5OqI0bnt597xaX/PO2
- ufybOiliDORAgk4JCSViqhRtqyQC+obI6EQBXsuIBwvexQFZEFTqsQ3wrM9SnnataI7L
- m0ow==
-X-Gm-Message-State: AOJu0YxNMS/RcroynGT9bfUrSns124uiFE2go8v0kSanzf/278zY9BY7
- fzBbwt2ZIiQWsY6/uEDZIl1dYQBzG4GRhQ==
-X-Google-Smtp-Source: AGHT+IFXMCPqgdEgsPkqLjC6vO/Vvti/WhxuK2GBHGBXb1gKi2FF2DFsgVScc5hicSE+pHcaXwfSew==
-X-Received: by 2002:a5d:590f:0:b0:337:7680:8ccf with SMTP id
- v15-20020a5d590f000000b0033776808ccfmr817239wrd.56.1705069873001; 
- Fri, 12 Jan 2024 06:31:13 -0800 (PST)
-Received: from localhost ([102.140.209.237]) by smtp.gmail.com with ESMTPSA id
- x9-20020adfec09000000b00336b8461a5esm4028872wrn.88.2024.01.12.06.31.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jan 2024 06:31:12 -0800 (PST)
-Date: Fri, 12 Jan 2024 17:31:09 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Dave Airlie <airlied@gmail.com>
-Subject: [PATCH] drm/nouveau/disp/r535: fix error code in r535_dp_aux_xfer()
-Message-ID: <5e2be90e-c7b8-4366-ab93-69040734742e@moroto.mountain>
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E0A8C10E0CB;
+ Fri, 12 Jan 2024 16:50:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1705078211; x=1736614211;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=nifqKiDfFO+liY3Ml1I1zDRExYkmjtBY13GnYwpbdM8=;
+ b=jO0uaQgRooGK9zrXPA8b7frY8Z8G0zwhmCwBDhRWD2kU+wwd09/yNX1U
+ po5egDX8+eC1tfjeidnGDv9yI2imBIzHuG24qPVimnB7TWL4QX1PtH0rq
+ XHhY5am8VtcPjsrRKoRgy+1QUvXzSeubQsiub3QlYmDKI6f0CpjemJhNj
+ OYVE1896Zd7aH0W33ApEf+8dtADplqZ8djo/V+llDYsqyO7kbnVND31dQ
+ 7cFmR80fPO4strnMtYYuMcGied1hrt67IplBVcGl57wko2B9rpbaY66M+
+ cetoTJCmiBBTBBOllxqzrPOLnuYKtYOmkWVvXyRiB/8IFzTo4vqKo3J5O A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10951"; a="12583269"
+X-IronPort-AV: E=Sophos;i="6.04,190,1695711600"; d="scan'208";a="12583269"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+ by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Jan 2024 08:50:11 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10951"; a="776044178"
+X-IronPort-AV: E=Sophos;i="6.04,190,1695711600"; d="scan'208";a="776044178"
+Received: from tsenx-mobl.ger.corp.intel.com (HELO localhost) ([10.252.38.158])
+ by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Jan 2024 08:50:08 -0800
+From: Jani Nikula <jani.nikula@intel.com>
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH 1/6] drm/nouveau: convert to using is_hdmi and has_audio from
+ display info
+Date: Fri, 12 Jan 2024 18:49:53 +0200
+Message-Id: <924db0d9debec057fe15e820bc470a966a3401b0.1705078136.git.jani.nikula@intel.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <cover.1705078136.git.jani.nikula@intel.com>
+References: <cover.1705078136.git.jani.nikula@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,34 +58,108 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, kernel-janitors@vger.kernel.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>
+Cc: jani.nikula@intel.com, nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This code was shuffled around but the return wasn't updated.  It should
-return "ret" instead of "ctrl".
+Prefer the parsed results for is_hdmi and has_audio in display info over
+calling drm_detect_hdmi_monitor() and drm_detect_monitor_audio(),
+respectively.
 
-Fixes: 4ae3a20102b2 ("nouveau/gsp: don't free ctrl messages on errors")
-Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+Conveniently, this also removes the need to use edid_blob_ptr.
+
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Danilo Krummrich <dakr@redhat.com>
+Cc: nouveau@lists.freedesktop.org
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/dispnv50/disp.c     | 8 ++++----
+ drivers/gpu/drm/nouveau/dispnv50/head.c     | 8 +-------
+ drivers/gpu/drm/nouveau/nouveau_connector.c | 2 +-
+ 3 files changed, 6 insertions(+), 12 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
-index 6a0a4d3b8902..027867c2a8c5 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
-@@ -1080,7 +1080,7 @@ r535_dp_aux_xfer(struct nvkm_outp *outp, u8 type, u32 addr, u8 *data, u8 *psize)
- 	ret = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, &ctrl, sizeof(*ctrl));
- 	if (ret) {
- 		nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
--		return PTR_ERR(ctrl);
-+		return ret;
- 	}
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+index 8d37a694b772..908b1042669c 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+@@ -750,7 +750,7 @@ nv50_audio_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
+ 	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
+ 	struct nvif_outp *outp = &nv_encoder->outp;
  
- 	memcpy(data, ctrl->data, size);
+-	if (!nv50_audio_supported(encoder) || !drm_detect_monitor_audio(nv_connector->edid))
++	if (!nv50_audio_supported(encoder) || !nv_connector->base.display_info.has_audio)
+ 		return;
+ 
+ 	mutex_lock(&drm->audio.lock);
+@@ -1764,7 +1764,7 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
+ 	if ((disp->disp->object.oclass == GT214_DISP ||
+ 	     disp->disp->object.oclass >= GF110_DISP) &&
+ 	    nv_encoder->dcb->type != DCB_OUTPUT_LVDS &&
+-	    drm_detect_monitor_audio(nv_connector->edid))
++	    nv_connector->base.display_info.has_audio)
+ 		hda = true;
+ 
+ 	if (!nvif_outp_acquired(outp))
+@@ -1773,7 +1773,7 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
+ 	switch (nv_encoder->dcb->type) {
+ 	case DCB_OUTPUT_TMDS:
+ 		if (disp->disp->object.oclass != NV50_DISP &&
+-		    drm_detect_hdmi_monitor(nv_connector->edid))
++		    !nv_connector->base.display_info.is_hdmi)
+ 			nv50_hdmi_enable(encoder, nv_crtc, nv_connector, state, mode, hda);
+ 
+ 		if (nv_encoder->outp.or.link & 1) {
+@@ -1786,7 +1786,7 @@ nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *sta
+ 			 */
+ 			if (mode->clock >= 165000 &&
+ 			    nv_encoder->dcb->duallink_possible &&
+-			    !drm_detect_hdmi_monitor(nv_connector->edid))
++			    !nv_connector->base.display_info.is_hdmi)
+ 				proto = NV507D_SOR_SET_CONTROL_PROTOCOL_DUAL_TMDS;
+ 		} else {
+ 			proto = NV507D_SOR_SET_CONTROL_PROTOCOL_SINGLE_TMDS_B;
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
+index 83355dbc15ee..d7c74cc43ba5 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/head.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
+@@ -127,14 +127,8 @@ nv50_head_atomic_check_view(struct nv50_head_atom *armh,
+ 	struct drm_display_mode *omode = &asyh->state.adjusted_mode;
+ 	struct drm_display_mode *umode = &asyh->state.mode;
+ 	int mode = asyc->scaler.mode;
+-	struct edid *edid;
+ 	int umode_vdisplay, omode_hdisplay, omode_vdisplay;
+ 
+-	if (connector->edid_blob_ptr)
+-		edid = (struct edid *)connector->edid_blob_ptr->data;
+-	else
+-		edid = NULL;
+-
+ 	if (!asyc->scaler.full) {
+ 		if (mode == DRM_MODE_SCALE_NONE)
+ 			omode = umode;
+@@ -162,7 +156,7 @@ nv50_head_atomic_check_view(struct nv50_head_atom *armh,
+ 	 */
+ 	if ((asyc->scaler.underscan.mode == UNDERSCAN_ON ||
+ 	    (asyc->scaler.underscan.mode == UNDERSCAN_AUTO &&
+-	     drm_detect_hdmi_monitor(edid)))) {
++	     connector->display_info.is_hdmi))) {
+ 		u32 bX = asyc->scaler.underscan.hborder;
+ 		u32 bY = asyc->scaler.underscan.vborder;
+ 		u32 r = (asyh->view.oH << 19) / asyh->view.oW;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+index 856b3ef5edb8..938832a6af15 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.c
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+@@ -1034,7 +1034,7 @@ get_tmds_link_bandwidth(struct drm_connector *connector)
+ 	unsigned duallink_scale =
+ 		nouveau_duallink && nv_encoder->dcb->duallink_possible ? 2 : 1;
+ 
+-	if (drm_detect_hdmi_monitor(nv_connector->edid)) {
++	if (nv_connector->base.display_info.is_hdmi) {
+ 		info = &nv_connector->base.display_info;
+ 		duallink_scale = 1;
+ 	}
 -- 
-2.43.0
+2.39.2
 
