@@ -2,50 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BEFD5829F5C
-	for <lists+nouveau@lfdr.de>; Wed, 10 Jan 2024 18:39:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 637F282C009
+	for <lists+nouveau@lfdr.de>; Fri, 12 Jan 2024 13:52:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B3CC510E779;
-	Wed, 10 Jan 2024 17:39:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D5B7D10E114;
+	Fri, 12 Jan 2024 12:52:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3469410E669;
- Wed, 10 Jan 2024 17:39:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1704908372; x=1736444372;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=2z4G7ayANmd3AttgTkRDlrCJNrBsUpZOQMgDuxHVslg=;
- b=ICMY3cLg+cpqTyp5yyiGHZF8zrfFSOO48vm+bxTjLralxeYANUirMJYo
- bv5dxkgpJw8V5x6ERYyrTjAGybEzN5lAg6U31SkzQL390yDUcwWf01McH
- VcpHmXKJEUxXizEp7e6ES+WEH+VOhxy3SKmLMHHLGahkp+Na5ig3q7XzQ
- /ZWXgBU2SwmxerummeZzMZbIV89R3KYL9dYuFTlMeST15OM2JYENRDCe3
- kgD+y8MEOIpPP686DUNADD30qCegOSE+Z6L+sR0FbMq9bBMnu6h4BNQdC
- EoA/EAePuD2oiW99DVvOlmLFKqYeNqETERb8MXAwr5BTSSJ0CkKH3j17P Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10949"; a="462878553"
-X-IronPort-AV: E=Sophos;i="6.04,184,1695711600"; d="scan'208";a="462878553"
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Jan 2024 09:39:31 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10949"; a="1029221825"
-X-IronPort-AV: E=Sophos;i="6.04,184,1695711600"; d="scan'208";a="1029221825"
-Received: from fpallare-mobl3.ger.corp.intel.com (HELO localhost)
- ([10.252.36.240])
- by fmsmga006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Jan 2024 09:39:30 -0800
-From: Jani Nikula <jani.nikula@intel.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH 2/6] drm/nouveau/svm: remove unused but set variables
-Date: Wed, 10 Jan 2024 19:39:12 +0200
-Message-Id: <8b133e7ec0e9aef728be301ac019c5ddcb3bbf51.1704908087.git.jani.nikula@intel.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <cover.1704908087.git.jani.nikula@intel.com>
-References: <cover.1704908087.git.jani.nikula@intel.com>
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B880F10EADF;
+ Fri, 12 Jan 2024 12:52:03 +0000 (UTC)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-55783b7b47aso6653417a12.0; 
+ Fri, 12 Jan 2024 04:52:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1705063922; x=1705668722; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+sPKYiwjeusGEFOnn/mGfYmsok0eRyUbkI90h5/qLXg=;
+ b=fXJuiMI4DlKUNmwasYc8u+3CXJcok1BCcZuPI9Q2NjJiLU+7nDqLBqdKwlxKMhm1co
+ F0SjBAueA7+SzrC3K8A+UXv7hDk7ucQ1V1mX7TJpNaAAJQeXoR/sNumDfA2Engl7YLER
+ ySYFEmxAzCm0L/58Jd4beHoFaLruxDJYJdkl7YaukxVIcTKf6KftX+CbaVlA1dNx4Exf
+ h03MHnlcKX5Ng3tQ0Izsngosl3UoPWrDUDuc6YPqOpQzDbtL6jwP8gExp6XOPG2cvKRt
+ Ipn93d5Pn8Ujfgi7SEPtd/m30rX82NhQsXGZ4fP6kAISfGOCayQoBAAf6U+mdDTYoijs
+ gkjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705063922; x=1705668722;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+sPKYiwjeusGEFOnn/mGfYmsok0eRyUbkI90h5/qLXg=;
+ b=XJBdK7IQGAal+IOGRMTN+zE1QIqGmRwgqPLh47yDhnHAolpHq0VeOp456iX/kneLsn
+ R2n3FKOlnHoHtuEkzea+XlFQagzZiPIAaM/mNzDcMiWqVj8rrKrorfy4zX7X3pOHpXrL
+ LoChrs0xL476gTqJOUYU0I6gITOFt+YZo8C7YVjucfZNYF1bFSBdIcjuauJE05/h5hEl
+ VFggE1molM6P20bRljIqNOQXjVDUJn7J0pb+6WEhSGhJmOzvDiswsTBy9vXT67PK6tBk
+ UVJZNo5O8a/NsHSIczNW2NfkUlAs8D0vvdfk+vQhFJK8VP7xlU2nZbemTPJqQ2hz275s
+ Bk0A==
+X-Gm-Message-State: AOJu0Yym890BmhBLowOSRdZBJnD51RhT9eNYj8HF/6enUhAKQeJw4a+2
+ sR7DD6TbcFuKmBT+H5TM8PBibpM3qLoGMg==
+X-Google-Smtp-Source: AGHT+IEjEAwsSFN2y+GjzEbopjsKTHYYaYd/1KoxoPfq0R/D/tlJNKIo4Hgzrs0UdBLPTg/gXqa6uQ==
+X-Received: by 2002:a05:6402:3182:b0:557:bee6:4dac with SMTP id
+ di2-20020a056402318200b00557bee64dacmr527166edb.27.1705063921870; 
+ Fri, 12 Jan 2024 04:52:01 -0800 (PST)
+Received: from able.fritz.box ([2a00:e180:152a:5d00:a6e1:95b5:7596:5333])
+ by smtp.gmail.com with ESMTPSA id
+ y10-20020aa7ccca000000b005572a1159b9sm1752427edt.22.2024.01.12.04.52.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Jan 2024 04:52:00 -0800 (PST)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
+ <christian.koenig@amd.com>
+To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ thomas.hellstrom@linux.intel.com, nouveau@lists.freedesktop.org,
+ jani.nikula@linux.intel.com, kherbst@redhat.com, lyude@redhat.com,
+ zackr@vmware.com, michel.daenzer@mailbox.org
+Subject: Rework TTMs busy handling
+Date: Fri, 12 Jan 2024 13:51:53 +0100
+Message-Id: <20240112125158.2748-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -58,63 +74,22 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: jani.nikula@intel.com, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Fix the W=1 warning -Wunused-but-set-variable.
+Hi guys,
 
-Cc: Karol Herbst <kherbst@redhat.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Cc: Danilo Krummrich <dakr@redhat.com>
-Cc: nouveau@lists.freedesktop.org
-Signed-off-by: Jani Nikula <jani.nikula@intel.com>
----
- drivers/gpu/drm/nouveau/nouveau_svm.c | 10 +++-------
- 1 file changed, 3 insertions(+), 7 deletions(-)
+same as the last time. Things I've changed:
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
-index cc03e0c22ff3..4d1008915499 100644
---- a/drivers/gpu/drm/nouveau/nouveau_svm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
-@@ -112,7 +112,7 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
- {
- 	struct nouveau_cli *cli = nouveau_cli(file_priv);
- 	struct drm_nouveau_svm_bind *args = data;
--	unsigned target, cmd, priority;
-+	unsigned target, cmd;
- 	unsigned long addr, end;
- 	struct mm_struct *mm;
- 
-@@ -136,9 +136,6 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
- 		return -EINVAL;
- 	}
- 
--	priority = args->header >> NOUVEAU_SVM_BIND_PRIORITY_SHIFT;
--	priority &= NOUVEAU_SVM_BIND_PRIORITY_MASK;
--
- 	/* FIXME support CPU target ie all target value < GPU_VRAM */
- 	target = args->header >> NOUVEAU_SVM_BIND_TARGET_SHIFT;
- 	target &= NOUVEAU_SVM_BIND_TARGET_MASK;
-@@ -926,15 +923,14 @@ nouveau_pfns_map(struct nouveau_svmm *svmm, struct mm_struct *mm,
- 		 unsigned long addr, u64 *pfns, unsigned long npages)
- {
- 	struct nouveau_pfnmap_args *args = nouveau_pfns_to_args(pfns);
--	int ret;
- 
- 	args->p.addr = addr;
- 	args->p.size = npages << PAGE_SHIFT;
- 
- 	mutex_lock(&svmm->mutex);
- 
--	ret = nvif_object_ioctl(&svmm->vmm->vmm.object, args,
--				struct_size(args, p.phys, npages), NULL);
-+	nvif_object_ioctl(&svmm->vmm->vmm.object, args,
-+			  struct_size(args, p.phys, npages), NULL);
- 
- 	mutex_unlock(&svmm->mutex);
- }
--- 
-2.39.2
+Implemented the requirements from Zack to correctly fill in the busy
+placements for VMWGFX.
+
+Renamed the placement flags to desired and fallback as suggested by
+Michel.
+
+Rebased on drm-tip instead of drm-misc-next and fixed XE as well.
+
+Please review and comment,
+Christian.
+
 
