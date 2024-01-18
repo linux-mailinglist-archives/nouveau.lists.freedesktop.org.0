@@ -2,43 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2122830EB5
-	for <lists+nouveau@lfdr.de>; Wed, 17 Jan 2024 22:39:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A73F4831B46
+	for <lists+nouveau@lfdr.de>; Thu, 18 Jan 2024 15:24:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 27FBE10E877;
-	Wed, 17 Jan 2024 21:39:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4101910E81F;
+	Thu, 18 Jan 2024 14:24:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [207.211.30.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DB10E10E0CF
- for <nouveau@lists.freedesktop.org>; Wed, 17 Jan 2024 21:39:01 +0000 (UTC)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-651-_7m55WSSM6ea0bTA-9nxEA-1; Wed, 17 Jan 2024 16:38:55 -0500
-X-MC-Unique: _7m55WSSM6ea0bTA-9nxEA-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8C5EF811E86;
- Wed, 17 Jan 2024 21:38:54 +0000 (UTC)
-Received: from dreadlord.redhat.com (unknown [10.64.136.44])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 8545D40C6EB9;
- Wed, 17 Jan 2024 21:38:53 +0000 (UTC)
-From: Dave Airlie <airlied@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH] nouveau/vmm: don't set addr on the fail path to avoid warning
-Date: Thu, 18 Jan 2024 07:38:52 +1000
-Message-ID: <20240117213852.295565-1-airlied@gmail.com>
-MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: gmail.com
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C1E7410E7EC;
+ Thu, 18 Jan 2024 14:24:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1705587893; x=1737123893;
+ h=message-id:subject:from:to:date:in-reply-to:references:
+ content-transfer-encoding:mime-version;
+ bh=uG/63xjLCGEhJv+GS8FqGJDmilEizHhjWXRTqPSSRts=;
+ b=PCVG3sgMnJd5or95fmgimWSEWpaVTjakiKPKBnmMS7uXY51XH0KPEbkk
+ lEWhGA/qqtsHVPI54QD3yynH8PuEwDVEqGUfOKMT1ORjM3h8g1rjio7Gk
+ 4xEUPPZA+Q6UQeXqQ0ailiTlKqWxhO7q8KND9IU0odN3ollQfqFbyAE4P
+ OilY6jgv20xit8fz4FyFm50UFlML2JF5siAWXw0db+2nlGRVoSo2EyAT6
+ uPg4S44WTSZeu7iGhH1SAkyyVELN1sI36NfJ/Y8s6UwyPJbhxrtpyL7GN
+ FXjoly90+hORfV483Sqy4rV8e9Iupg20V9zld4F5chewiWx4yAAQ9WKwd g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10956"; a="7152646"
+X-IronPort-AV: E=Sophos;i="6.05,203,1701158400"; 
+   d="scan'208";a="7152646"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 Jan 2024 06:24:53 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.05,203,1701158400"; 
+   d="scan'208";a="367673"
+Received: from clanggaa-mobl.ger.corp.intel.com (HELO [10.249.254.203])
+ ([10.249.254.203])
+ by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 Jan 2024 06:24:50 -0800
+Message-ID: <1b984027fcd36e9a7196834e4727da98391e5caa.camel@linux.intel.com>
+Subject: Re: [PATCH 4/5] drm/ttm: improve idle/busy handling v3
+From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
+To: Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>, 
+ dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, jani.nikula@linux.intel.com,
+ kherbst@redhat.com,  lyude@redhat.com, zackr@vmware.com,
+ michel.daenzer@mailbox.org
+Date: Thu, 18 Jan 2024 15:24:48 +0100
+In-Reply-To: <20240112125158.2748-5-christian.koenig@amd.com>
+References: <20240112125158.2748-1-christian.koenig@amd.com>
+ <20240112125158.2748-5-christian.koenig@amd.com>
+Autocrypt: addr=thomas.hellstrom@linux.intel.com; prefer-encrypt=mutual;
+ keydata=mDMEZaWU6xYJKwYBBAHaRw8BAQdAj/We1UBCIrAm9H5t5Z7+elYJowdlhiYE8zUXgxcFz360SFRob21hcyBIZWxsc3Ryw7ZtIChJbnRlbCBMaW51eCBlbWFpbCkgPHRob21hcy5oZWxsc3Ryb21AbGludXguaW50ZWwuY29tPoiTBBMWCgA7FiEEbJFDO8NaBua8diGTuBaTVQrGBr8FAmWllOsCGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgkQuBaTVQrGBr/yQAD/Z1B+Kzy2JTuIy9LsKfC9FJmt1K/4qgaVeZMIKCAxf2UBAJhmZ5jmkDIf6YghfINZlYq6ixyWnOkWMuSLmELwOsgPuDgEZaWU6xIKKwYBBAGXVQEFAQEHQF9v/LNGegctctMWGHvmV/6oKOWWf/vd4MeqoSYTxVBTAwEIB4h4BBgWCgAgFiEEbJFDO8NaBua8diGTuBaTVQrGBr8FAmWllOsCGwwACgkQuBaTVQrGBr/P2QD9Gts6Ee91w3SzOelNjsus/DcCTBb3fRugJoqcfxjKU0gBAKIFVMvVUGbhlEi6EFTZmBZ0QIZEIzOOVfkaIgWelFEH
+Organization: Intel Sweden AB, Registration Number: 556189-6027
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
+User-Agent: Evolution 3.50.2 (3.50.2-1.fc39) 
+MIME-Version: 1.0
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,116 +67,470 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
+On Fri, 2024-01-12 at 13:51 +0100, Christian K=C3=B6nig wrote:
+> Previously we would never try to move a BO into the preferred
+> placements
+> when it ever landed in a busy placement since those were considered
+> compatible.
+>=20
+> Rework the whole handling and finally unify the idle and busy
+> handling.
+> ttm_bo_validate() is now responsible to try idle placement first and
+> then
+> use the busy placement if that didn't worked.
+>=20
+> Drawback is that we now always try the idle placement first for each
+> validation which might cause some additional CPU overhead on
+> overcommit.
 
-nvif_vmm_put gets called if addr is set, but if the allocation
-fails we don't need to call put, otherwise we get a warning like
 
-[523232.435671] ------------[ cut here ]------------
-[523232.435674] WARNING: CPU: 8 PID: 1505697 at drivers/gpu/drm/nouveau/nvi=
-f/vmm.c:68 nvif_vmm_put+0x72/0x80 [nouveau]
-[523232.435795] Modules linked in: uinput rfcomm snd_seq_dummy snd_hrtimer =
-nf_conntrack_netbios_ns nf_conntrack_broadcast nft_fib_inet nft_fib_ipv4 nf=
-t_fib_ipv6 nft_fib nft_reject_inet nf_reject_ipv4 nf_reject_ipv6 nft_reject=
- nft_ct nft_chain_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 ip_=
-set nf_tables nfnetlink qrtr bnep sunrpc binfmt_misc intel_rapl_msr intel_r=
-apl_common intel_uncore_frequency intel_uncore_frequency_common isst_if_com=
-mon iwlmvm nfit libnvdimm vfat fat x86_pkg_temp_thermal intel_powerclamp ma=
-c80211 snd_soc_avs snd_soc_hda_codec coretemp snd_hda_ext_core snd_soc_core=
- snd_hda_codec_realtek kvm_intel snd_hda_codec_hdmi snd_compress snd_hda_co=
-dec_generic ac97_bus snd_pcm_dmaengine snd_hda_intel libarc4 snd_intel_dspc=
-fg snd_intel_sdw_acpi snd_hda_codec kvm iwlwifi snd_hda_core btusb snd_hwde=
-p btrtl snd_seq btintel irqbypass btbcm rapl snd_seq_device eeepc_wmi btmtk=
- intel_cstate iTCO_wdt cfg80211 snd_pcm asus_wmi bluetooth intel_pmc_bxt iT=
-CO_vendor_support snd_timer ledtrig_audio pktcdvd snd mei_me
-[523232.435828]  sparse_keymap intel_uncore i2c_i801 platform_profile wmi_b=
-mof mei pcspkr ioatdma soundcore i2c_smbus rfkill idma64 dca joydev acpi_ta=
-d loop zram nouveau drm_ttm_helper ttm video drm_exec drm_gpuvm gpu_sched c=
-rct10dif_pclmul i2c_algo_bit nvme crc32_pclmul crc32c_intel drm_display_hel=
-per polyval_clmulni nvme_core polyval_generic e1000e mxm_wmi cec ghash_clmu=
-lni_intel r8169 sha512_ssse3 nvme_common wmi pinctrl_sunrisepoint uas usb_s=
-torage ip6_tables ip_tables fuse
-[523232.435849] CPU: 8 PID: 1505697 Comm: gnome-shell Tainted: G        W  =
-        6.6.0-rc7-nvk-uapi+ #12
-[523232.435851] Hardware name: System manufacturer System Product Name/ROG =
-STRIX X299-E GAMING II, BIOS 1301 09/24/2021
-[523232.435852] RIP: 0010:nvif_vmm_put+0x72/0x80 [nouveau]
-[523232.435934] Code: 00 00 48 89 e2 be 02 00 00 00 48 c7 04 24 00 00 00 00=
- 48 89 44 24 08 e8 fc bf ff ff 85
-c0 75 0a 48 c7 43 08 00 00 00 00 eb b3 <0f> 0b eb f2 e8 f5 c9 b2 e6 0f 1f 4=
-4 00 00 90 90 90 90 90 90 90 90
-[523232.435936] RSP: 0018:ffffc900077ffbd8 EFLAGS: 00010282
-[523232.435937] RAX: 00000000fffffffe RBX: ffffc900077ffc00 RCX: 0000000000=
-000010
-[523232.435938] RDX: 0000000000000010 RSI: ffffc900077ffb38 RDI: ffffc90007=
-7ffbd8
-[523232.435940] RBP: ffff888e1c4f2140 R08: 0000000000000000 R09: 0000000000=
-000000
-[523232.435940] R10: 0000000000000000 R11: 0000000000000000 R12: ffff888503=
-811800
-[523232.435941] R13: ffffc900077ffca0 R14: ffff888e1c4f2140 R15: ffff888103=
-17e1e0
-[523232.435942] FS:  00007f933a769640(0000) GS:ffff88905fa00000(0000) knlGS=
-:0000000000000000
-[523232.435943] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[523232.435944] CR2: 00007f930bef7000 CR3: 00000005d0322001 CR4: 0000000000=
-3706e0
-[523232.435945] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000=
-000000
-[523232.435946] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000=
-000400
-[523232.435964] Call Trace:
-[523232.435965]  <TASK>
-[523232.435966]  ? nvif_vmm_put+0x72/0x80 [nouveau]
-[523232.436051]  ? __warn+0x81/0x130
-[523232.436055]  ? nvif_vmm_put+0x72/0x80 [nouveau]
-[523232.436138]  ? report_bug+0x171/0x1a0
-[523232.436142]  ? handle_bug+0x3c/0x80
-[523232.436144]  ? exc_invalid_op+0x17/0x70
-[523232.436145]  ? asm_exc_invalid_op+0x1a/0x20
-[523232.436149]  ? nvif_vmm_put+0x72/0x80 [nouveau]
-[523232.436230]  ? nvif_vmm_put+0x64/0x80 [nouveau]
-[523232.436342]  nouveau_vma_del+0x80/0xd0 [nouveau]
-[523232.436506]  nouveau_vma_new+0x1a0/0x210 [nouveau]
-[523232.436671]  nouveau_gem_object_open+0x1d0/0x1f0 [nouveau]
-[523232.436835]  drm_gem_handle_create_tail+0xd1/0x180
-[523232.436840]  drm_prime_fd_to_handle_ioctl+0x12e/0x200
-[523232.436844]  ? __pfx_drm_prime_fd_to_handle_ioctl+0x10/0x10
-[523232.436847]  drm_ioctl_kernel+0xd3/0x180
-[523232.436849]  drm_ioctl+0x26d/0x4b0
-[523232.436851]  ? __pfx_drm_prime_fd_to_handle_ioctl+0x10/0x10
-[523232.436855]  nouveau_drm_ioctl+0x5a/0xb0 [nouveau]
-[523232.437032]  __x64_sys_ioctl+0x94/0xd0
-[523232.437036]  do_syscall_64+0x5d/0x90
-[523232.437040]  ? syscall_exit_to_user_mode+0x2b/0x40
-[523232.437044]  ? do_syscall_64+0x6c/0x90
-[523232.437046]  entry_SYSCALL_64_after_hwframe+0x6e/0xd8
 
-Signed-off-by: Dave Airlie <airlied@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_vmm.c | 3 +++
- 1 file changed, 3 insertions(+)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_vmm.c b/drivers/gpu/drm/nouvea=
-u/nouveau_vmm.c
-index a6602c012671..3dda885df5b2 100644
---- a/drivers/gpu/drm/nouveau/nouveau_vmm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_vmm.c
-@@ -108,6 +108,9 @@ nouveau_vma_new(struct nouveau_bo *nvbo, struct nouveau=
-_vmm *vmm,
- =09} else {
- =09=09ret =3D nvif_vmm_get(&vmm->vmm, PTES, false, mem->mem.page, 0,
- =09=09=09=09   mem->mem.size, &tmp);
-+=09=09if (ret)
-+=09=09=09goto done;
-+
- =09=09vma->addr =3D tmp.addr;
- =09}
-=20
---=20
-2.43.0
+
+>=20
+> v2: fix kerneldoc warning and coding style
+> v3: take care of XE as well
+>=20
+> Signed-off-by: Christian K=C3=B6nig <christian.koenig@amd.com>
+> ---
+> =C2=A0drivers/gpu/drm/amd/amdgpu/amdgpu_object.c |=C2=A0=C2=A0 2 +-
+> =C2=A0drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c=C2=A0=C2=A0=C2=A0 |=C2=A0=
+=C2=A0 2 +-
+> =C2=A0drivers/gpu/drm/ttm/ttm_bo.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 131 ++++++++-----------
+> --
+> =C2=A0drivers/gpu/drm/ttm/ttm_resource.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 |=C2=A0 16 ++-
+> =C2=A0drivers/gpu/drm/xe/xe_bo.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 4 +=
+-
+> =C2=A0include/drm/ttm/ttm_bo.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=
+=C2=A0 3 +-
+> =C2=A0include/drm/ttm/ttm_resource.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 3 +-
+> =C2=A07 files changed, 68 insertions(+), 93 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+> b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+> index b671b0665492..06fb3fc47eaa 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+> @@ -404,7 +404,7 @@ int amdgpu_bo_create_kernel_at(struct
+> amdgpu_device *adev,
+> =C2=A0		(*bo_ptr)->placements[i].lpfn =3D (offset + size) >>
+> PAGE_SHIFT;
+> =C2=A0	}
+> =C2=A0	r =3D ttm_bo_mem_space(&(*bo_ptr)->tbo, &(*bo_ptr)->placement,
+> -			=C2=A0=C2=A0=C2=A0=C2=A0 &(*bo_ptr)->tbo.resource, &ctx);
+> +			=C2=A0=C2=A0=C2=A0=C2=A0 &(*bo_ptr)->tbo.resource, &ctx, false);
+> =C2=A0	if (r)
+> =C2=A0		goto error;
+> =C2=A0
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> index 8722beba494e..f23cdc7c5b08 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> @@ -966,7 +966,7 @@ int amdgpu_ttm_alloc_gart(struct
+> ttm_buffer_object *bo)
+> =C2=A0	placements.mem_type =3D TTM_PL_TT;
+> =C2=A0	placements.flags =3D bo->resource->placement;
+> =C2=A0
+> -	r =3D ttm_bo_mem_space(bo, &placement, &tmp, &ctx);
+> +	r =3D ttm_bo_mem_space(bo, &placement, &tmp, &ctx, true);
+> =C2=A0	if (unlikely(r))
+> =C2=A0		return r;
+> =C2=A0
+> diff --git a/drivers/gpu/drm/ttm/ttm_bo.c
+> b/drivers/gpu/drm/ttm/ttm_bo.c
+> index a5e11a92e0b9..3783be24d832 100644
+> --- a/drivers/gpu/drm/ttm/ttm_bo.c
+> +++ b/drivers/gpu/drm/ttm/ttm_bo.c
+> @@ -414,7 +414,7 @@ static int ttm_bo_bounce_temp_buffer(struct
+> ttm_buffer_object *bo,
+> =C2=A0	hop_placement.placement =3D hop;
+> =C2=A0
+> =C2=A0	/* find space in the bounce domain */
+> -	ret =3D ttm_bo_mem_space(bo, &hop_placement, &hop_mem, ctx);
+> +	ret =3D ttm_bo_mem_space(bo, &hop_placement, &hop_mem, ctx,
+> true);
+> =C2=A0	if (ret)
+> =C2=A0		return ret;
+> =C2=A0	/* move to the bounce domain */
+> @@ -454,7 +454,7 @@ static int ttm_bo_evict(struct ttm_buffer_object
+> *bo,
+> =C2=A0		return ttm_bo_pipeline_gutting(bo);
+> =C2=A0	}
+> =C2=A0
+> -	ret =3D ttm_bo_mem_space(bo, &placement, &evict_mem, ctx);
+> +	ret =3D ttm_bo_mem_space(bo, &placement, &evict_mem, ctx,
+> true);
+
+This is what breaks xe's selftest since the evict-flags preferred
+placement is never tried so it changes the behavior.=C2=A0
+
+The xe evict flags were set up to "Try to evict to TT first, but if
+that causes recursive eviction, try to evict to system". This here
+ignores the preferred eviction placement.
+
+So "Preferred" in effect changes meaning from "Don't try this if it
+will cause an eviction", to "Don't try this in the evict path", which
+is hard for the driver to have any knowledge about.
+
+Then also it sounds from the commit message with this patch "Preferred"
+also gets overloaded with "Always retry preferred on validate", but
+shouldn't that really be a dynamic driver decision and not something
+TTM should try to enforce in a static way? Drivers could have short-
+circuited the ttm_bo_validate() call if it succeeded once, and have a
+deeper thought about when to migrate from, say TT to VRAM and vice
+versa.
+
+For the specific behaviour sought here, there is (or at least used to
+be) a construct in the vmwgfx driver that first called
+ttm_bo_validate() with VRAM as preferred placement and no fallback. If
+that failed due to VRAM being full, it called ttm_bo_validate() again,
+this time with fallback and VRAM allowing eviction.
+
+/Thomas
+
+
+
+
+> =C2=A0	if (ret) {
+> =C2=A0		if (ret !=3D -ERESTARTSYS) {
+> =C2=A0			pr_err("Failed to find memory space for
+> buffer 0x%p eviction\n",
+> @@ -724,37 +724,6 @@ static int ttm_bo_add_move_fence(struct
+> ttm_buffer_object *bo,
+> =C2=A0	return ret;
+> =C2=A0}
+> =C2=A0
+> -/*
+> - * Repeatedly evict memory from the LRU for @mem_type until we
+> create enough
+> - * space, or we've evicted everything and there isn't enough space.
+> - */
+> -static int ttm_bo_mem_force_space(struct ttm_buffer_object *bo,
+> -				=C2=A0 const struct ttm_place *place,
+> -				=C2=A0 struct ttm_resource **mem,
+> -				=C2=A0 struct ttm_operation_ctx *ctx)
+> -{
+> -	struct ttm_device *bdev =3D bo->bdev;
+> -	struct ttm_resource_manager *man;
+> -	struct ww_acquire_ctx *ticket;
+> -	int ret;
+> -
+> -	man =3D ttm_manager_type(bdev, place->mem_type);
+> -	ticket =3D dma_resv_locking_ctx(bo->base.resv);
+> -	do {
+> -		ret =3D ttm_resource_alloc(bo, place, mem);
+> -		if (likely(!ret))
+> -			break;
+> -		if (unlikely(ret !=3D -ENOSPC))
+> -			return ret;
+> -		ret =3D ttm_mem_evict_first(bdev, man, place, ctx,
+> -					=C2=A0 ticket);
+> -		if (unlikely(ret !=3D 0))
+> -			return ret;
+> -	} while (1);
+> -
+> -	return ttm_bo_add_move_fence(bo, man, *mem, ctx-
+> >no_wait_gpu);
+> -}
+> -
+> =C2=A0/**
+> =C2=A0 * ttm_bo_mem_space
+> =C2=A0 *
+> @@ -763,6 +732,7 @@ static int ttm_bo_mem_force_space(struct
+> ttm_buffer_object *bo,
+> =C2=A0 * @placement: Proposed new placement for the buffer object.
+> =C2=A0 * @mem: A struct ttm_resource.
+> =C2=A0 * @ctx: if and how to sleep, lock buffers and alloc memory
+> + * @force_space: If we should evict buffers to force space
+> =C2=A0 *
+> =C2=A0 * Allocate memory space for the buffer object pointed to by @bo,
+> using
+> =C2=A0 * the placement flags in @placement, potentially evicting other
+> idle buffer objects.
+> @@ -776,12 +746,14 @@ static int ttm_bo_mem_force_space(struct
+> ttm_buffer_object *bo,
+> =C2=A0int ttm_bo_mem_space(struct ttm_buffer_object *bo,
+> =C2=A0			struct ttm_placement *placement,
+> =C2=A0			struct ttm_resource **mem,
+> -			struct ttm_operation_ctx *ctx)
+> +			struct ttm_operation_ctx *ctx,
+> +			bool force_space)
+> =C2=A0{
+> =C2=A0	struct ttm_device *bdev =3D bo->bdev;
+> -	bool type_found =3D false;
+> +	struct ww_acquire_ctx *ticket;
+> =C2=A0	int i, ret;
+> =C2=A0
+> +	ticket =3D dma_resv_locking_ctx(bo->base.resv);
+> =C2=A0	ret =3D dma_resv_reserve_fences(bo->base.resv, 1);
+> =C2=A0	if (unlikely(ret))
+> =C2=A0		return ret;
+> @@ -790,19 +762,30 @@ int ttm_bo_mem_space(struct ttm_buffer_object
+> *bo,
+> =C2=A0		const struct ttm_place *place =3D &placement-
+> >placement[i];
+> =C2=A0		struct ttm_resource_manager *man;
+> =C2=A0
+> -		if (place->flags & TTM_PL_FLAG_FALLBACK)
+> -			continue;
+> -
+> =C2=A0		man =3D ttm_manager_type(bdev, place->mem_type);
+> =C2=A0		if (!man || !ttm_resource_manager_used(man))
+> =C2=A0			continue;
+> =C2=A0
+> -		type_found =3D true;
+> -		ret =3D ttm_resource_alloc(bo, place, mem);
+> -		if (ret =3D=3D -ENOSPC)
+> +		if (place->flags & (force_space ?
+> TTM_PL_FLAG_DESIRED :
+> +				=C2=A0=C2=A0=C2=A0 TTM_PL_FLAG_FALLBACK))
+> +			continue;
+> +
+> +		do {
+> +			ret =3D ttm_resource_alloc(bo, place, mem);
+> +			if (unlikely(ret !=3D -ENOSPC))
+> +				return ret;
+> +			if (likely(!ret) || !force_space)
+> +				break;
+> +
+> +			ret =3D ttm_mem_evict_first(bdev, man, place,
+> ctx,
+> +						=C2=A0 ticket);
+> +			if (unlikely(ret =3D=3D -EBUSY))
+> +				break;
+> +			if (unlikely(ret))
+> +				return ret;
+> +		} while (1);
+> +		if (ret)
+> =C2=A0			continue;
+> -		if (unlikely(ret))
+> -			goto error;
+> =C2=A0
+> =C2=A0		ret =3D ttm_bo_add_move_fence(bo, man, *mem, ctx-
+> >no_wait_gpu);
+> =C2=A0		if (unlikely(ret)) {
+> @@ -810,45 +793,19 @@ int ttm_bo_mem_space(struct ttm_buffer_object
+> *bo,
+> =C2=A0			if (ret =3D=3D -EBUSY)
+> =C2=A0				continue;
+> =C2=A0
+> -			goto error;
+> +			return ret;
+> =C2=A0		}
+> =C2=A0		return 0;
+> =C2=A0	}
+> =C2=A0
+> -	for (i =3D 0; i < placement->num_placement; ++i) {
+> -		const struct ttm_place *place =3D &placement-
+> >placement[i];
+> -		struct ttm_resource_manager *man;
+> -
+> -		if (place->flags & TTM_PL_FLAG_DESIRED)
+> -			continue;
+> -
+> -		man =3D ttm_manager_type(bdev, place->mem_type);
+> -		if (!man || !ttm_resource_manager_used(man))
+> -			continue;
+> -
+> -		type_found =3D true;
+> -		ret =3D ttm_bo_mem_force_space(bo, place, mem, ctx);
+> -		if (likely(!ret))
+> -			return 0;
+> -
+> -		if (ret && ret !=3D -EBUSY)
+> -			goto error;
+> -	}
+> -
+> -	ret =3D -ENOSPC;
+> -	if (!type_found) {
+> -		pr_err(TTM_PFX "No compatible memory type found\n");
+> -		ret =3D -EINVAL;
+> -	}
+> -
+> -error:
+> -	return ret;
+> +	return -ENOSPC;
+> =C2=A0}
+> =C2=A0EXPORT_SYMBOL(ttm_bo_mem_space);
+> =C2=A0
+> =C2=A0static int ttm_bo_move_buffer(struct ttm_buffer_object *bo,
+> =C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct ttm_placement *placement,
+> -			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct ttm_operation_ctx *ctx)
+> +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct ttm_operation_ctx *ctx,
+> +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool force_space)
+> =C2=A0{
+> =C2=A0	struct ttm_resource *mem;
+> =C2=A0	struct ttm_place hop;
+> @@ -865,7 +822,7 @@ static int ttm_bo_move_buffer(struct
+> ttm_buffer_object *bo,
+> =C2=A0	 * stop and the driver will be called to make
+> =C2=A0	 * the second hop.
+> =C2=A0	 */
+> -	ret =3D ttm_bo_mem_space(bo, placement, &mem, ctx);
+> +	ret =3D ttm_bo_mem_space(bo, placement, &mem, ctx,
+> force_space);
+> =C2=A0	if (ret)
+> =C2=A0		return ret;
+> =C2=A0bounce:
+> @@ -902,6 +859,7 @@ int ttm_bo_validate(struct ttm_buffer_object *bo,
+> =C2=A0		=C2=A0=C2=A0=C2=A0 struct ttm_placement *placement,
+> =C2=A0		=C2=A0=C2=A0=C2=A0 struct ttm_operation_ctx *ctx)
+> =C2=A0{
+> +	bool force_space;
+> =C2=A0	int ret;
+> =C2=A0
+> =C2=A0	dma_resv_assert_held(bo->base.resv);
+> @@ -912,20 +870,27 @@ int ttm_bo_validate(struct ttm_buffer_object
+> *bo,
+> =C2=A0	if (!placement->num_placement)
+> =C2=A0		return ttm_bo_pipeline_gutting(bo);
+> =C2=A0
+> -	/* Check whether we need to move buffer. */
+> -	if (bo->resource && ttm_resource_compatible(bo->resource,
+> placement))
+> -		return 0;
+> +	force_space =3D false;
+> +	do {
+> +		/* Check whether we need to move buffer. */
+> +		if (bo->resource &&
+> +		=C2=A0=C2=A0=C2=A0 ttm_resource_compatible(bo->resource, placement,
+> +					=C2=A0=C2=A0=C2=A0 force_space))
+> +			return 0;
+> +
+> +		/* Moving of pinned BOs is forbidden */
+> +		if (bo->pin_count)
+> +			return -EINVAL;
+> =C2=A0
+> -	/* Moving of pinned BOs is forbidden */
+> -	if (bo->pin_count)
+> -		return -EINVAL;
+> +		ret =3D ttm_bo_move_buffer(bo, placement, ctx,
+> force_space);
+> +		if (ret && ret !=3D -ENOSPC)
+> +			return ret;
+> =C2=A0
+> -	ret =3D ttm_bo_move_buffer(bo, placement, ctx);
+> +		force_space =3D !force_space;
+> +	} while (force_space);
+> =C2=A0	/* For backward compatibility with userspace */
+> =C2=A0	if (ret =3D=3D -ENOSPC)
+> =C2=A0		return -ENOMEM;
+> -	if (ret)
+> -		return ret;
+> =C2=A0
+> =C2=A0	/*
+> =C2=A0	 * We might need to add a TTM.
+> diff --git a/drivers/gpu/drm/ttm/ttm_resource.c
+> b/drivers/gpu/drm/ttm/ttm_resource.c
+> index fb14f7716cf8..65155f2013ca 100644
+> --- a/drivers/gpu/drm/ttm/ttm_resource.c
+> +++ b/drivers/gpu/drm/ttm/ttm_resource.c
+> @@ -295,11 +295,13 @@ bool ttm_resource_intersects(struct ttm_device
+> *bdev,
+> =C2=A0 *
+> =C2=A0 * @res: the resource to check
+> =C2=A0 * @placement: the placement to check against
+> + * @evicting: true if the caller is doing evictions
+> =C2=A0 *
+> =C2=A0 * Returns true if the placement is compatible.
+> =C2=A0 */
+> =C2=A0bool ttm_resource_compatible(struct ttm_resource *res,
+> -			=C2=A0=C2=A0=C2=A0=C2=A0 struct ttm_placement *placement)
+> +			=C2=A0=C2=A0=C2=A0=C2=A0 struct ttm_placement *placement,
+> +			=C2=A0=C2=A0=C2=A0=C2=A0 bool evicting)
+> =C2=A0{
+> =C2=A0	struct ttm_buffer_object *bo =3D res->bo;
+> =C2=A0	struct ttm_device *bdev =3D bo->bdev;
+> @@ -315,14 +317,20 @@ bool ttm_resource_compatible(struct
+> ttm_resource *res,
+> =C2=A0		if (res->mem_type !=3D place->mem_type)
+> =C2=A0			continue;
+> =C2=A0
+> +		if (place->flags & (evicting ? TTM_PL_FLAG_DESIRED :
+> +				=C2=A0=C2=A0=C2=A0 TTM_PL_FLAG_FALLBACK))
+> +			continue;
+> +
+> +		if (place->flags & TTM_PL_FLAG_CONTIGUOUS &&
+> +		=C2=A0=C2=A0=C2=A0 !(res->placement & TTM_PL_FLAG_CONTIGUOUS))
+> +			continue;
+> +
+> =C2=A0		man =3D ttm_manager_type(bdev, res->mem_type);
+> =C2=A0		if (man->func->compatible &&
+> =C2=A0		=C2=A0=C2=A0=C2=A0 !man->func->compatible(man, res, place, bo-
+> >base.size))
+> =C2=A0			continue;
+> =C2=A0
+> -		if ((!(place->flags & TTM_PL_FLAG_CONTIGUOUS) ||
+> -		=C2=A0=C2=A0=C2=A0=C2=A0 (res->placement & TTM_PL_FLAG_CONTIGUOUS)))
+> -			return true;
+> +		return true;
+> =C2=A0	}
+> =C2=A0	return false;
+> =C2=A0}
+> diff --git a/drivers/gpu/drm/xe/xe_bo.c b/drivers/gpu/drm/xe/xe_bo.c
+> index 1e5edc7f0b85..d4b8bd774ada 100644
+> --- a/drivers/gpu/drm/xe/xe_bo.c
+> +++ b/drivers/gpu/drm/xe/xe_bo.c
+> @@ -828,7 +828,7 @@ int xe_bo_evict_pinned(struct xe_bo *bo)
+> =C2=A0	if (WARN_ON(!xe_bo_is_vram(bo)))
+> =C2=A0		return -EINVAL;
+> =C2=A0
+> -	ret =3D ttm_bo_mem_space(&bo->ttm, &placement, &new_mem,
+> &ctx);
+> +	ret =3D ttm_bo_mem_space(&bo->ttm, &placement, &new_mem, &ctx,
+> false);
+> =C2=A0	if (ret)
+> =C2=A0		return ret;
+> =C2=A0
+> @@ -893,7 +893,7 @@ int xe_bo_restore_pinned(struct xe_bo *bo)
+> =C2=A0	if (WARN_ON(xe_bo_is_vram(bo) || !bo->ttm.ttm))
+> =C2=A0		return -EINVAL;
+> =C2=A0
+> -	ret =3D ttm_bo_mem_space(&bo->ttm, &bo->placement, &new_mem,
+> &ctx);
+> +	ret =3D ttm_bo_mem_space(&bo->ttm, &bo->placement, &new_mem,
+> &ctx, false);
+> =C2=A0	if (ret)
+> =C2=A0		return ret;
+> =C2=A0
+> diff --git a/include/drm/ttm/ttm_bo.h b/include/drm/ttm/ttm_bo.h
+> index 0223a41a64b2..64d738f152d1 100644
+> --- a/include/drm/ttm/ttm_bo.h
+> +++ b/include/drm/ttm/ttm_bo.h
+> @@ -397,7 +397,8 @@ vm_fault_t ttm_bo_vm_dummy_page(struct vm_fault
+> *vmf, pgprot_t prot);
+> =C2=A0int ttm_bo_mem_space(struct ttm_buffer_object *bo,
+> =C2=A0		=C2=A0=C2=A0=C2=A0=C2=A0 struct ttm_placement *placement,
+> =C2=A0		=C2=A0=C2=A0=C2=A0=C2=A0 struct ttm_resource **mem,
+> -		=C2=A0=C2=A0=C2=A0=C2=A0 struct ttm_operation_ctx *ctx);
+> +		=C2=A0=C2=A0=C2=A0=C2=A0 struct ttm_operation_ctx *ctx,
+> +		=C2=A0=C2=A0=C2=A0=C2=A0 bool force_space);
+> =C2=A0
+> =C2=A0void ttm_bo_unmap_virtual(struct ttm_buffer_object *bo);
+> =C2=A0/*
+> diff --git a/include/drm/ttm/ttm_resource.h
+> b/include/drm/ttm/ttm_resource.h
+> index 1afa13f0c22b..7561023db43d 100644
+> --- a/include/drm/ttm/ttm_resource.h
+> +++ b/include/drm/ttm/ttm_resource.h
+> @@ -366,7 +366,8 @@ bool ttm_resource_intersects(struct ttm_device
+> *bdev,
+> =C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0 const struct ttm_place *place,
+> =C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0 size_t size);
+> =C2=A0bool ttm_resource_compatible(struct ttm_resource *res,
+> -			=C2=A0=C2=A0=C2=A0=C2=A0 struct ttm_placement *placement);
+> +			=C2=A0=C2=A0=C2=A0=C2=A0 struct ttm_placement *placement,
+> +			=C2=A0=C2=A0=C2=A0=C2=A0 bool evicting);
+> =C2=A0void ttm_resource_set_bo(struct ttm_resource *res,
+> =C2=A0			 struct ttm_buffer_object *bo);
+> =C2=A0
 
