@@ -2,43 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05D4A8387F1
-	for <lists+nouveau@lfdr.de>; Tue, 23 Jan 2024 08:26:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9063B838814
+	for <lists+nouveau@lfdr.de>; Tue, 23 Jan 2024 08:39:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3748F10E1DF;
-	Tue, 23 Jan 2024 07:25:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9AFE710E39C;
+	Tue, 23 Jan 2024 07:39:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [207.211.30.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 30A7910E32F
- for <nouveau@lists.freedesktop.org>; Tue, 23 Jan 2024 07:25:47 +0000 (UTC)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-235-ZbVuWzwbMlWUt0MHVum_PQ-1; Tue, 23 Jan 2024 02:25:41 -0500
-X-MC-Unique: ZbVuWzwbMlWUt0MHVum_PQ-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 6049510135ED;
- Tue, 23 Jan 2024 07:25:41 +0000 (UTC)
-Received: from dreadlord.redhat.com (unknown [10.64.136.44])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 58402C0FDCA;
- Tue, 23 Jan 2024 07:25:40 +0000 (UTC)
-From: Dave Airlie <airlied@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Subject: [PATCH] nouveau: rip out fence irq allow/block sequences.
-Date: Tue, 23 Jan 2024 17:25:38 +1000
-Message-ID: <20240123072538.1290035-1-airlied@gmail.com>
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+ [209.85.221.54])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 08E1A10E39C
+ for <nouveau@lists.freedesktop.org>; Tue, 23 Jan 2024 07:39:46 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-33922d2cb92so3574833f8f.1
+ for <nouveau@lists.freedesktop.org>; Mon, 22 Jan 2024 23:39:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1705995525; x=1706600325; darn=lists.freedesktop.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yETxiGG3CveSvMqCA4PglMWiCajZsQqRtEiheWi+x/Q=;
+ b=i9WLwJJrj2vhe800wRmoQ2tSTvKUa3ZKg0pX2mCH2fyarvT1Im/1h9DJ0WFQtEb6De
+ 7qI6z28BG5Ql/J/+Ar1XPnjnt5CenHBEGNAwfCRlUkiWqUxX92L1tgIHtTLyrpat35CO
+ Jy20tnCUhid52wM6Rx4kaWwprHZ0LmfKim7EwuFUYLQN0o/4vSljfD5lJpl3M+am6dFE
+ VNaCBniQBt5svDEbC3ukPurHwG/Ylf4MWjswF86P2Zss87KwWmGWEUZdQeJxcTuCtsTN
+ fmAtAfNxXueTE5DCFCzysG4bmKT6SS3DX3Y0S4sc2yxylrCM9QaiMT9inglcTAaFr56T
+ zkbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705995525; x=1706600325;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yETxiGG3CveSvMqCA4PglMWiCajZsQqRtEiheWi+x/Q=;
+ b=mjdrba/xfhJPbIikJoEVPuMluSYbrUyUBEF03t+4Qa5eQpEEVCHaLEH0NKYl7bcmJy
+ CnuBjLxzPOF4aFgLMSrqzpYQJwcbKHn/bW0Ey4VXBIh97mGCabyRBo8iV3B4vkRUViKD
+ FP7Ajdrv9hpQeS+WQRqrvnvVEFos3gh5/E1Xh4s9MPuggTVSufxgADNBPn0Oc8XpSfmx
+ M9SuJa6ehyj3M2JqcFJUhHbSmvjnkrxBqofmlkP7ehhZlRuICZmPm0S+k092eBm1tlFS
+ fd4cUk+WG87l57lKeECVa2j9JlGgEb0gR4O7jPSXHI6kdujBVRARAQHpQZY5BghYXEvI
+ D4TQ==
+X-Gm-Message-State: AOJu0Ywvyn+74u+G2IvYhtjHrfqE3T7SP6BiH5lF1QY7yr0/EbkZzapu
+ DPZe7BHNBdJ5LocOauvfe0Ji2tqJ8xoD0/Hz5lrIK0tmDkP6mRFGg3USJLTvR54=
+X-Google-Smtp-Source: AGHT+IEYd35MOW7sUO6WnjHIiHJYGzUljxDUCiR4Ck+ZRIreA3QvtDPNOG4m6ojWM4vS49RBrPxWhA==
+X-Received: by 2002:a5d:6882:0:b0:336:768d:1b90 with SMTP id
+ h2-20020a5d6882000000b00336768d1b90mr1758406wru.168.1705995525330; 
+ Mon, 22 Jan 2024 23:38:45 -0800 (PST)
+Received: from localhost ([102.140.209.237]) by smtp.gmail.com with ESMTPSA id
+ t8-20020adff048000000b003366c058509sm7565004wro.23.2024.01.22.23.38.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Jan 2024 23:38:44 -0800 (PST)
+Date: Tue, 23 Jan 2024 10:38:41 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Danilo Krummrich <dakr@redhat.com>
+Subject: Re: [PATCH][next] drm/nouveau/fifo/gk104: remove redundant variable
+ ret
+Message-ID: <55f0983a-300e-40bb-9142-6f4683914402@moroto.mountain>
+References: <20240116111609.2258675-1-colin.i.king@gmail.com>
+ <aafe669f-b322-4f22-a48e-564e3eb3447f@moroto.mountain>
+ <bdc7e401-a676-4040-9138-8dc5cf35bd05@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: gmail.com
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <bdc7e401-a676-4040-9138-8dc5cf35bd05@redhat.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,247 +73,102 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, kernel-janitors@vger.kernel.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Daniel Vetter <daniel@ffwll.ch>, Colin Ian King <colin.i.king@gmail.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
+On Tue, Jan 23, 2024 at 12:04:23AM +0100, Danilo Krummrich wrote:
+> On 1/16/24 13:31, Dan Carpenter wrote:
+> > On Tue, Jan 16, 2024 at 11:16:09AM +0000, Colin Ian King wrote:
+> > > The variable ret is being assigned a value but it isn't being
+> > > read afterwards. The assignment is redundant and so ret can be
+> > > removed.
+> > > 
+> > > Cleans up clang scan build warning:
+> > > warning: Although the value stored to 'ret' is used in the enclosing
+> > > expression, the value is never actually read from 'ret'
+> > > [deadcode.DeadStores]
+> > > 
+> > > Signed-off-by: Colin Ian King <colin.i.king@gmail.com>
+> > > ---
+> > >   drivers/gpu/drm/nouveau/nvif/fifo.c | 4 ++--
+> > >   1 file changed, 2 insertions(+), 2 deletions(-)
+> > > 
+> > > diff --git a/drivers/gpu/drm/nouveau/nvif/fifo.c b/drivers/gpu/drm/nouveau/nvif/fifo.c
+> > > index a463289962b2..e96de14ce87e 100644
+> > > --- a/drivers/gpu/drm/nouveau/nvif/fifo.c
+> > > +++ b/drivers/gpu/drm/nouveau/nvif/fifo.c
+> > > @@ -73,9 +73,9 @@ u64
+> > >   nvif_fifo_runlist(struct nvif_device *device, u64 engine)
+> > >   {
+> > >   	u64 runm = 0;
+> > > -	int ret, i;
+> > > +	int i;
+> > > -	if ((ret = nvif_fifo_runlists(device)))
+> > > +	if (nvif_fifo_runlists(device))
+> > >   		return runm;
+> > 
+> > Could we return a literal zero here?  Otherwise, I'm surprised this
+> > doesn't trigger a static checker warning.
+> 
+> Why do you think so? Conditionally, runm is used later on as well. I don't
+> think the checker should complain about keeping the value single source.
+> 
+> If you agree, want to offer your RB?
 
-fences are signalled on nvidia hw using non-stall interrupts.
+If you look at v6.7 then probably 300 patches were from static
+analysis.  The syzbot gets credit for 63 bugs and those bugs are more
+important because those are real life bugs.  But static analysis is a
+huge in terms of just quantity.
 
-non-stall interrupts are not latched from my reading.
+One of the most common bugs that static checkers complain about is
+missing error codes.  It's a super common bug.  Returning success
+instead of failure almost always results in NULL dereference or a use
+after free or some kind of crash.  Fortunately, error paths seldom
+affect real life users.
 
-When nouveau emits a fence, it requests a NON_STALL signalling,
-but it only calls the interface to allow the non-stall irq to happen
-after it has already emitted the fence. A recent change
-eacabb546271 ("nouveau: push event block/allowing out of the fence context"=
-)
-made this worse by pushing out the fence allow/block to a workqueue.
+My published Smatch checks only complain about:
 
-However I can't see how this could ever work great, since when
-enable signalling is called, the semaphore has already been emitted
-to the ring, and the hw could already have tried to set the bits,
-but it's been masked off. Changing the allowed mask later won't make
-the interrupt get called again.
+	if (ret)
+		return ret;
 
-For now rip all of this out.
+	if (failure)
+		return ret;
 
-This fixes a bunch of stalls seen running VK CTS sync tests.
+I have a different check that I haven't published but I wish that I
+could which looks like:
 
-Signed-off-by: Dave Airlie <airlied@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_fence.c | 77 +++++--------------------
- drivers/gpu/drm/nouveau/nouveau_fence.h |  2 -
- 2 files changed, 16 insertions(+), 63 deletions(-)
+	if (!ret)
+		return ret;
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouv=
-eau/nouveau_fence.c
-index 5057d976fa57..d6d50cdccf75 100644
---- a/drivers/gpu/drm/nouveau/nouveau_fence.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
-@@ -50,24 +50,14 @@ nouveau_fctx(struct nouveau_fence *fence)
- =09return container_of(fence->base.lock, struct nouveau_fence_chan, lock);
- }
-=20
--static int
-+static void
- nouveau_fence_signal(struct nouveau_fence *fence)
- {
--=09int drop =3D 0;
--
- =09dma_fence_signal_locked(&fence->base);
- =09list_del(&fence->head);
- =09rcu_assign_pointer(fence->channel, NULL);
-=20
--=09if (test_bit(DMA_FENCE_FLAG_USER_BITS, &fence->base.flags)) {
--=09=09struct nouveau_fence_chan *fctx =3D nouveau_fctx(fence);
--
--=09=09if (atomic_dec_and_test(&fctx->notify_ref))
--=09=09=09drop =3D 1;
--=09}
--
- =09dma_fence_put(&fence->base);
--=09return drop;
- }
-=20
- static struct nouveau_fence *
-@@ -93,8 +83,7 @@ nouveau_fence_context_kill(struct nouveau_fence_chan *fct=
-x, int error)
- =09=09if (error)
- =09=09=09dma_fence_set_error(&fence->base, error);
-=20
--=09=09if (nouveau_fence_signal(fence))
--=09=09=09nvif_event_block(&fctx->event);
-+=09=09nouveau_fence_signal(fence);
- =09}
- =09fctx->killed =3D 1;
- =09spin_unlock_irqrestore(&fctx->lock, flags);
-@@ -103,8 +92,8 @@ nouveau_fence_context_kill(struct nouveau_fence_chan *fc=
-tx, int error)
- void
- nouveau_fence_context_del(struct nouveau_fence_chan *fctx)
- {
--=09cancel_work_sync(&fctx->allow_block_work);
- =09nouveau_fence_context_kill(fctx, 0);
-+=09nvif_event_block(&fctx->event);
- =09nvif_event_dtor(&fctx->event);
- =09fctx->dead =3D 1;
-=20
-@@ -127,11 +116,10 @@ nouveau_fence_context_free(struct nouveau_fence_chan =
-*fctx)
- =09kref_put(&fctx->fence_ref, nouveau_fence_context_put);
- }
-=20
--static int
-+static void
- nouveau_fence_update(struct nouveau_channel *chan, struct nouveau_fence_ch=
-an *fctx)
- {
- =09struct nouveau_fence *fence;
--=09int drop =3D 0;
- =09u32 seq =3D fctx->read(chan);
-=20
- =09while (!list_empty(&fctx->pending)) {
-@@ -140,10 +128,8 @@ nouveau_fence_update(struct nouveau_channel *chan, str=
-uct nouveau_fence_chan *fc
- =09=09if ((int)(seq - fence->base.seqno) < 0)
- =09=09=09break;
-=20
--=09=09drop |=3D nouveau_fence_signal(fence);
-+=09=09nouveau_fence_signal(fence);
- =09}
--
--=09return drop;
- }
-=20
- static int
-@@ -160,26 +146,13 @@ nouveau_fence_wait_uevent_handler(struct nvif_event *=
-event, void *repv, u32 repc
-=20
- =09=09fence =3D list_entry(fctx->pending.next, typeof(*fence), head);
- =09=09chan =3D rcu_dereference_protected(fence->channel, lockdep_is_held(&=
-fctx->lock));
--=09=09if (nouveau_fence_update(chan, fctx))
--=09=09=09ret =3D NVIF_EVENT_DROP;
-+=09=09nouveau_fence_update(chan, fctx);
- =09}
- =09spin_unlock_irqrestore(&fctx->lock, flags);
-=20
- =09return ret;
- }
-=20
--static void
--nouveau_fence_work_allow_block(struct work_struct *work)
--{
--=09struct nouveau_fence_chan *fctx =3D container_of(work, struct nouveau_f=
-ence_chan,
--=09=09=09=09=09=09       allow_block_work);
--
--=09if (atomic_read(&fctx->notify_ref) =3D=3D 0)
--=09=09nvif_event_block(&fctx->event);
--=09else
--=09=09nvif_event_allow(&fctx->event);
--}
--
- void
- nouveau_fence_context_new(struct nouveau_channel *chan, struct nouveau_fen=
-ce_chan *fctx)
- {
-@@ -191,7 +164,6 @@ nouveau_fence_context_new(struct nouveau_channel *chan,=
- struct nouveau_fence_cha
- =09} args;
- =09int ret;
-=20
--=09INIT_WORK(&fctx->allow_block_work, nouveau_fence_work_allow_block);
- =09INIT_LIST_HEAD(&fctx->flip);
- =09INIT_LIST_HEAD(&fctx->pending);
- =09spin_lock_init(&fctx->lock);
-@@ -216,6 +188,12 @@ nouveau_fence_context_new(struct nouveau_channel *chan=
-, struct nouveau_fence_cha
- =09=09=09      &args.base, sizeof(args), &fctx->event);
-=20
- =09WARN_ON(ret);
-+
-+=09/*
-+=09 * Always allow non-stall irq events - previously this code tried to
-+=09 * enable/disable them, but that just seems racy as nonstall irqs are u=
-nlatched.
-+=09 */
-+=09nvif_event_allow(&fctx->event);
- }
-=20
- int
-@@ -247,8 +225,7 @@ nouveau_fence_emit(struct nouveau_fence *fence)
- =09=09=09return -ENODEV;
- =09=09}
-=20
--=09=09if (nouveau_fence_update(chan, fctx))
--=09=09=09nvif_event_block(&fctx->event);
-+=09=09nouveau_fence_update(chan, fctx);
-=20
- =09=09list_add_tail(&fence->head, &fctx->pending);
- =09=09spin_unlock_irq(&fctx->lock);
-@@ -271,8 +248,8 @@ nouveau_fence_done(struct nouveau_fence *fence)
-=20
- =09=09spin_lock_irqsave(&fctx->lock, flags);
- =09=09chan =3D rcu_dereference_protected(fence->channel, lockdep_is_held(&=
-fctx->lock));
--=09=09if (chan && nouveau_fence_update(chan, fctx))
--=09=09=09nvif_event_block(&fctx->event);
-+=09=09if (chan)
-+=09=09=09nouveau_fence_update(chan, fctx);
- =09=09spin_unlock_irqrestore(&fctx->lock, flags);
- =09}
- =09return dma_fence_is_signaled(&fence->base);
-@@ -530,32 +507,10 @@ static const struct dma_fence_ops nouveau_fence_ops_l=
-egacy =3D {
- =09.release =3D nouveau_fence_release
- };
-=20
--static bool nouveau_fence_enable_signaling(struct dma_fence *f)
--{
--=09struct nouveau_fence *fence =3D from_fence(f);
--=09struct nouveau_fence_chan *fctx =3D nouveau_fctx(fence);
--=09bool ret;
--=09bool do_work;
--
--=09if (atomic_inc_return(&fctx->notify_ref) =3D=3D 0)
--=09=09do_work =3D true;
--
--=09ret =3D nouveau_fence_no_signaling(f);
--=09if (ret)
--=09=09set_bit(DMA_FENCE_FLAG_USER_BITS, &fence->base.flags);
--=09else if (atomic_dec_and_test(&fctx->notify_ref))
--=09=09do_work =3D true;
--
--=09if (do_work)
--=09=09schedule_work(&fctx->allow_block_work);
--
--=09return ret;
--}
--
- static const struct dma_fence_ops nouveau_fence_ops_uevent =3D {
- =09.get_driver_name =3D nouveau_fence_get_get_driver_name,
- =09.get_timeline_name =3D nouveau_fence_get_timeline_name,
--=09.enable_signaling =3D nouveau_fence_enable_signaling,
-+=09.enable_signaling =3D nouveau_fence_no_signaling,
- =09.signaled =3D nouveau_fence_is_signaled,
- =09.release =3D nouveau_fence_release
- };
-diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.h b/drivers/gpu/drm/nouv=
-eau/nouveau_fence.h
-index 28f5cf013b89..380bb0397ed2 100644
---- a/drivers/gpu/drm/nouveau/nouveau_fence.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_fence.h
-@@ -46,8 +46,6 @@ struct nouveau_fence_chan {
- =09char name[32];
-=20
- =09struct nvif_event event;
--=09struct work_struct allow_block_work;
--=09atomic_t notify_ref;
- =09int dead, killed;
- };
-=20
---=20
-2.43.0
+Here is a bug that check found recently.
+https://lore.kernel.org/all/9c81251b-bc87-4ca3-bb86-843dc85e5145@moroto.mountain/
+
+I have a different unpublished check for every time ret is zero and we
+do:
+	return ret;
+
+But I only review those warnings for specific code.  Perhaps, I could
+make a warning for:
+
+	if (failure)
+		return ret;
+
+I'm sure I tried this in the past and it had more false positives than
+when we have an "if (ret) return ret;" like in the first example, but I
+can't remember.  I could experiment with that a bit...
+
+To me, if "return ret;" and "return 0;" are the same, then "return 0;"
+is obviously more clear and looks more intentional.  When I was looking
+at the code here, I had to consider the context.  Especially when the
+patch was dealing with the "ret" variable it seemed suspicous.  But
+"return 0;" is unamibuous.
+
+I don't have a problem with this patch, it's correct.  But I really do
+think that "return 0;" is clearer than "return ret;"
+
+regards,
+dan carpenter
 
