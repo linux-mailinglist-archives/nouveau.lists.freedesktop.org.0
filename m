@@ -2,82 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D54183775A
-	for <lists+nouveau@lfdr.de>; Tue, 23 Jan 2024 00:04:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48CFD83795E
+	for <lists+nouveau@lfdr.de>; Tue, 23 Jan 2024 01:37:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E021D10F0E8;
-	Mon, 22 Jan 2024 23:04:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D9A4010F19E;
+	Tue, 23 Jan 2024 00:37:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 28A2F10F0E8
- for <nouveau@lists.freedesktop.org>; Mon, 22 Jan 2024 23:04:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1705964668;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7c3FgscPu0lXJFm3GTXyVD6XcnpcGhNdTIze30CTggI=;
- b=GYrB/epGPdEDDORJ9eq/thNRIr2OB+pECdR0KORkAh4SJX6seMGoFmDC1Bf1u3h0W1HNFI
- herYPRxBR4QJyJGLBHbKVeRrnDRv6z0tiKV5zLRaDVu9qALibLGlKXTI5vo3JFInhd/JGe
- Ykc1ePF3ttD3zv2DOml59rdZ1XUyZ94=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-695-0rL9FjvaN_K92puiWpH8Ug-1; Mon, 22 Jan 2024 18:04:26 -0500
-X-MC-Unique: 0rL9FjvaN_K92puiWpH8Ug-1
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-40e74860cb0so15686665e9.3
- for <nouveau@lists.freedesktop.org>; Mon, 22 Jan 2024 15:04:26 -0800 (PST)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
+ [209.85.214.177])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7B62C10F1A5
+ for <nouveau@lists.freedesktop.org>; Tue, 23 Jan 2024 00:37:15 +0000 (UTC)
+Received: by mail-pl1-f177.google.com with SMTP id
+ d9443c01a7336-1d720c7fc04so19130035ad.2
+ for <nouveau@lists.freedesktop.org>; Mon, 22 Jan 2024 16:37:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1705970175; x=1706574975;
+ darn=lists.freedesktop.org; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FQ7xzZ4X+f3NMzxQv1jPrp9LwmGb/TMGKf+Qoe38F3w=;
+ b=jlsP/qc0A3uVQM77vCpCfUNwLuEXrKBYzgarlyPq1ASik1K2tBBvb2GgNbce9wTpoY
+ PkzoZnIY7D0LvT/InKA8cdE0OkHUkJ3brPXipyrkUW4qjVA4378zGjItJ4WS/azhxaDB
+ M71K5xWxNE0aMvw0X+M5Y1dv7xSIBHXNOJkoI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705964665; x=1706569465;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7c3FgscPu0lXJFm3GTXyVD6XcnpcGhNdTIze30CTggI=;
- b=wdaebfW4m3T5pRDowK9o93OYZ4u1DzVtALHTR2AtdP89ooE8iS0lXY92mD/q2l0DuT
- 7MTiGiqb55k+CP4NDT/8wbLvKWl4F+VJbwzoYPU3T2kq+OSWc6rp45fqALMMFNwJYUIr
- C8NF1LlGAii3Pq7NeVowe92lNV4YDjvh6bO4pdOHrexQnC8N3s7bUTc821Jq1vywxUXe
- Mt3SpsCdWIIEmw64NKOaDEShCwNO1nCpnzcGxNw0z46b+/+kTloV9sq4guNL3nIRhbSF
- Lv6AVzFPdbloDD25b39DA+QBvpQ5HN8ANxKT2bqVaxrdRFHaEP7XQzk65MjrxZjdyLiN
- +aXQ==
-X-Gm-Message-State: AOJu0YwYCxPE+oTseAeAPArhqRZEi/H+Ppc2IaBmZDM1Z8Ubymx9/mOP
- vioAGN767pJERwjUnpvKANCnyYhhVYJTXO76DPgO9Dhfl+A6OeLDFqMSiaJ56YamIcn7bTYtdzS
- Vb9VTVYdC2k1vQG/AR3sULeEZs5dBc8u9QWSaJYsFGvph23JuSs7nmip+yR4/p9g=
-X-Received: by 2002:a05:600c:19d0:b0:40e:47f5:c74e with SMTP id
- u16-20020a05600c19d000b0040e47f5c74emr2213230wmq.23.1705964665582; 
- Mon, 22 Jan 2024 15:04:25 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG8352cOmaMtQLEHn07VgcDYdo9jNcXTeLbFnRyNs5Xa66msABsScIDJEFKORTq82yXMRla/w==
-X-Received: by 2002:a05:600c:19d0:b0:40e:47f5:c74e with SMTP id
- u16-20020a05600c19d000b0040e47f5c74emr2213221wmq.23.1705964665204; 
- Mon, 22 Jan 2024 15:04:25 -0800 (PST)
-Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
- ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
+ d=1e100.net; s=20230601; t=1705970175; x=1706574975;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FQ7xzZ4X+f3NMzxQv1jPrp9LwmGb/TMGKf+Qoe38F3w=;
+ b=FixT/01w2kQPwg4epN15xNXnMB7e0/9r+UwCEjaI6drnpIh4SuffU93mi9QWbXjU+x
+ MsGuSNaDS17tUA60E8DxaL6GipQ0ZL35aVE+/YlTmPN60+/5lhO0Dmc+tf7mC8RhvRHW
+ RPOeNG6GPfoX2+pFJZRCAXZq0DjRl4wkq9FMX7SsFYbm8whOWjBq2nFZsxt+wUvg6gk0
+ Z4Ojb7Bz8r83D8IlCtqx8/HKGlhk8vwZfqH3t7MVuDQU2wJ3iecwPGjbGgh+Zq0C7d8D
+ XsZC4azgxIszvuGjVems7rBVfuE7dIOMBEKsLvDTkAEUu37Ws4zntOtsu72mRvvV/N7r
+ b5Iw==
+X-Gm-Message-State: AOJu0YzkJizEDHCExxC8kle2s4o00gXu1gDca+uw2+a/j1euJ9MobxB1
+ 69JbmneDzpKI4IZayhYpyxpxJUihgtAV70LDXlDN3qMpMIP+d/Q0dQs8osj7gQ==
+X-Google-Smtp-Source: AGHT+IGexDA3GyNiC5HHivGPyYUFrDZgx/vvv3FbvTr4ymfT6W6OqPvq3tmWlk5gIBMYJDFDEGWKhQ==
+X-Received: by 2002:a17:903:2b0e:b0:1d7:2f55:c8a2 with SMTP id
+ mc14-20020a1709032b0e00b001d72f55c8a2mr2946552plb.11.1705970175230; 
+ Mon, 22 Jan 2024 16:36:15 -0800 (PST)
+Received: from www.outflux.net ([198.0.35.241])
  by smtp.gmail.com with ESMTPSA id
- j8-20020a05600c190800b0040d7b340e07sm40645479wmq.45.2024.01.22.15.04.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Jan 2024 15:04:24 -0800 (PST)
-Message-ID: <bdc7e401-a676-4040-9138-8dc5cf35bd05@redhat.com>
-Date: Tue, 23 Jan 2024 00:04:23 +0100
+ e6-20020a170902784600b001d70125ebcdsm8018696pln.277.2024.01.22.16.36.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Jan 2024 16:36:09 -0800 (PST)
+From: Kees Cook <keescook@chromium.org>
+To: linux-hardening@vger.kernel.org
+Subject: [PATCH 16/82] drm/nouveau/mmu: Refactor intentional wrap-around
+ calculation
+Date: Mon, 22 Jan 2024 16:26:51 -0800
+Message-Id: <20240123002814.1396804-16-keescook@chromium.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240122235208.work.748-kees@kernel.org>
+References: <20240122235208.work.748-kees@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH][next] drm/nouveau/fifo/gk104: remove redundant variable
- ret
-To: Dan Carpenter <dan.carpenter@linaro.org>,
- Colin Ian King <colin.i.king@gmail.com>
-References: <20240116111609.2258675-1-colin.i.king@gmail.com>
- <aafe669f-b322-4f22-a48e-564e3eb3447f@moroto.mountain>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <aafe669f-b322-4f22-a48e-564e3eb3447f@moroto.mountain>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2914; i=keescook@chromium.org; 
+ h=from:subject;
+ bh=GfYx3pgFmjHNgd1GYzBGO0bWTMyDF98VVZ9Uwwibr6I=; 
+ b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBlrwgF0R3cMIb0bEJahqxzDH8aYuSuLtzDbLBcK
+ MwJi5ln/oiJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCZa8IBQAKCRCJcvTf3G3A
+ JiWKD/9QgeDTjHor+aVubrm/891iXDAk7jazHlj5v3/F2SnXTi+bmLLP4OtopjBdUMsPCx2UIAX
+ 2Op2QtDm8HkUK+QQ6zmG4KUaapZRcdeqnGmu9M0qvSuxvVVcJJI7xJUumjx7Q6vhbwjQGSQ5PHx
+ tw7o/vHgfuo8HqWcIQlyDVJeim5ZIIs6Qsa/2lGfMnyEf6ggYmPPgDdwi3q8gy/Z2R5EmQXitFZ
+ 02jYxw8yJtqK7iQMIw/+DdCmJga+zhFwFiajePglGFS280vfynresbsR/Ab5I9K/mF6hoaW5Nzj
+ /9JADfxQJ+B/7RwcqVQt9//klWcituWydCxmm2pAJKa5qB1+5bM1cNbZfS+7Gqg7d5DQbpkhWvR
+ FCz4RotvOZUU11+L/g0NMZhLFyUrsoS3XnWMJPQKLzLuqMIEwYdpUHTsgp2fGFgbJo6v8zILL3/
+ K7cq5u/axld11AryCmtQE6Xcl/NUaROikBH/clnZ621DMh6R2SgfHqHLq8LeFb+PV40D1lpjTUv
+ KfPtyyrZh7N+9mj3AvF1kzruNYxNyozqGbZnhobgBHDiUh3Nc49GDnZWn5rot0j/cj4bNCHrvDK
+ mkRTpRNTiSCzx1W+apGBT6IE6vC71q+Jq/tE64KklEKJ7L0Jq24pax9Z2T6UMrnNYMaRk8d5pT9
+ b0LSPqP/mgvSy0A==
+X-Developer-Key: i=keescook@chromium.org; a=openpgp;
+ fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,55 +88,84 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Daniel Vetter <daniel@ffwll.ch>, nouveau@lists.freedesktop.org,
- kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: Kees Cook <keescook@chromium.org>, nouveau@lists.freedesktop.org,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, Julia Lawall <Julia.Lawall@inria.fr>,
+ Jiang Jian <jiangjian@cdjrlc.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Justin Stitt <justinstitt@google.com>,
+ Dave Airlie <airlied@redhat.com>, Bill Wendling <morbo@google.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 1/16/24 13:31, Dan Carpenter wrote:
-> On Tue, Jan 16, 2024 at 11:16:09AM +0000, Colin Ian King wrote:
->> The variable ret is being assigned a value but it isn't being
->> read afterwards. The assignment is redundant and so ret can be
->> removed.
->>
->> Cleans up clang scan build warning:
->> warning: Although the value stored to 'ret' is used in the enclosing
->> expression, the value is never actually read from 'ret'
->> [deadcode.DeadStores]
->>
->> Signed-off-by: Colin Ian King <colin.i.king@gmail.com>
->> ---
->>   drivers/gpu/drm/nouveau/nvif/fifo.c | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/nouveau/nvif/fifo.c b/drivers/gpu/drm/nouveau/nvif/fifo.c
->> index a463289962b2..e96de14ce87e 100644
->> --- a/drivers/gpu/drm/nouveau/nvif/fifo.c
->> +++ b/drivers/gpu/drm/nouveau/nvif/fifo.c
->> @@ -73,9 +73,9 @@ u64
->>   nvif_fifo_runlist(struct nvif_device *device, u64 engine)
->>   {
->>   	u64 runm = 0;
->> -	int ret, i;
->> +	int i;
->>   
->> -	if ((ret = nvif_fifo_runlists(device)))
->> +	if (nvif_fifo_runlists(device))
->>   		return runm;
-> 
-> Could we return a literal zero here?  Otherwise, I'm surprised this
-> doesn't trigger a static checker warning.
+In an effort to separate intentional arithmetic wrap-around from
+unexpected wrap-around, we need to refactor places that depend on this
+kind of math. One of the most common code patterns of this is:
 
-Why do you think so? Conditionally, runm is used later on as well. I don't
-think the checker should complain about keeping the value single source.
+	VAR + value < VAR
 
-If you agree, want to offer your RB?
+Notably, this is considered "undefined behavior" for signed and pointer
+types, which the kernel works around by using the -fno-strict-overflow
+option in the build[1] (which used to just be -fwrapv). Regardless, we
+want to get the kernel source to the position where we can meaningfully
+instrument arithmetic wrap-around conditions and catch them when they
+are unexpected, regardless of whether they are signed[2], unsigned[3],
+or pointer[4] types.
 
-- Danilo
+Refactor open-coded unsigned wrap-around addition test to use
+check_add_overflow(), retaining the result for later usage (which removes
+the redundant open-coded addition). This paves the way to enabling the
+wrap-around sanitizers in the future.
 
-> 
-> regards,
-> dan carpenter
-> 
+Link: https://git.kernel.org/linus/68df3755e383e6fecf2354a67b08f92f18536594 [1]
+Link: https://github.com/KSPP/linux/issues/26 [2]
+Link: https://github.com/KSPP/linux/issues/27 [3]
+Link: https://github.com/KSPP/linux/issues/344 [4]
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Danilo Krummrich <dakr@redhat.com>
+Cc: David Airlie <airlied@gmail.com>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Julia Lawall <Julia.Lawall@inria.fr>
+Cc: Jiang Jian <jiangjian@cdjrlc.com>
+Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Signed-off-by: Kees Cook <keescook@chromium.org>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
+index 9c97800fe037..6ca1a82ccbc1 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
+@@ -1149,13 +1149,15 @@ nvkm_vmm_ctor(const struct nvkm_vmm_func *func, struct nvkm_mmu *mmu,
+ 	vmm->root = RB_ROOT;
+ 
+ 	if (managed) {
++		u64 sum;
++
+ 		/* Address-space will be managed by the client for the most
+ 		 * part, except for a specified area where NVKM allocations
+ 		 * are allowed to be placed.
+ 		 */
+ 		vmm->start = 0;
+ 		vmm->limit = 1ULL << bits;
+-		if (addr + size < addr || addr + size > vmm->limit)
++		if (check_add_overflow(addr, size, &sum) || sum > vmm->limit)
+ 			return -EINVAL;
+ 
+ 		/* Client-managed area before the NVKM-managed area. */
+@@ -1174,7 +1176,7 @@ nvkm_vmm_ctor(const struct nvkm_vmm_func *func, struct nvkm_mmu *mmu,
+ 		}
+ 
+ 		/* Client-managed area after the NVKM-managed area. */
+-		addr = addr + size;
++		addr = sum;
+ 		size = vmm->limit - addr;
+ 		if (size && (ret = nvkm_vmm_ctor_managed(vmm, addr, size)))
+ 			return ret;
+-- 
+2.34.1
 
