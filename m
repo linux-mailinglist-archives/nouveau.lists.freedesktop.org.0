@@ -2,78 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48CFD83795E
-	for <lists+nouveau@lfdr.de>; Tue, 23 Jan 2024 01:37:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DAFC837928
+	for <lists+nouveau@lfdr.de>; Tue, 23 Jan 2024 01:30:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D9A4010F19E;
-	Tue, 23 Jan 2024 00:37:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 055DF10F1A9;
+	Tue, 23 Jan 2024 00:30:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
- [209.85.214.177])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7B62C10F1A5
- for <nouveau@lists.freedesktop.org>; Tue, 23 Jan 2024 00:37:15 +0000 (UTC)
-Received: by mail-pl1-f177.google.com with SMTP id
- d9443c01a7336-1d720c7fc04so19130035ad.2
- for <nouveau@lists.freedesktop.org>; Mon, 22 Jan 2024 16:37:15 -0800 (PST)
+Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com
+ [209.85.161.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9B09110F1AB
+ for <nouveau@lists.freedesktop.org>; Tue, 23 Jan 2024 00:30:09 +0000 (UTC)
+Received: by mail-oo1-f42.google.com with SMTP id
+ 006d021491bc7-5999ec531dcso267720eaf.3
+ for <nouveau@lists.freedesktop.org>; Mon, 22 Jan 2024 16:30:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1705970175; x=1706574975;
+ d=chromium.org; s=google; t=1705969749; x=1706574549;
  darn=lists.freedesktop.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FQ7xzZ4X+f3NMzxQv1jPrp9LwmGb/TMGKf+Qoe38F3w=;
- b=jlsP/qc0A3uVQM77vCpCfUNwLuEXrKBYzgarlyPq1ASik1K2tBBvb2GgNbce9wTpoY
- PkzoZnIY7D0LvT/InKA8cdE0OkHUkJ3brPXipyrkUW4qjVA4378zGjItJ4WS/azhxaDB
- M71K5xWxNE0aMvw0X+M5Y1dv7xSIBHXNOJkoI=
+ bh=HbagvK/BQHg13GLlZBGhyNRG5sgL74HVCqkvwUtdz7s=;
+ b=jCl7DvjriEIX7xTSssi7UZbrLRJvnL/YtwbsqQc6AFttHymQ+fGgVSus/d2LbQftBM
+ CSU/eYMn/wicKYjd8FEUBwTZbA3wEYGJHFNv3pv1WV4F/+OSGhWtrfXXm6whSiP2of0W
+ 9OzXpABiwsOjJEeqfBv1eZZi8sBnGEnd+7wSM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705970175; x=1706574975;
+ d=1e100.net; s=20230601; t=1705969749; x=1706574549;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FQ7xzZ4X+f3NMzxQv1jPrp9LwmGb/TMGKf+Qoe38F3w=;
- b=FixT/01w2kQPwg4epN15xNXnMB7e0/9r+UwCEjaI6drnpIh4SuffU93mi9QWbXjU+x
- MsGuSNaDS17tUA60E8DxaL6GipQ0ZL35aVE+/YlTmPN60+/5lhO0Dmc+tf7mC8RhvRHW
- RPOeNG6GPfoX2+pFJZRCAXZq0DjRl4wkq9FMX7SsFYbm8whOWjBq2nFZsxt+wUvg6gk0
- Z4Ojb7Bz8r83D8IlCtqx8/HKGlhk8vwZfqH3t7MVuDQU2wJ3iecwPGjbGgh+Zq0C7d8D
- XsZC4azgxIszvuGjVems7rBVfuE7dIOMBEKsLvDTkAEUu37Ws4zntOtsu72mRvvV/N7r
- b5Iw==
-X-Gm-Message-State: AOJu0YzkJizEDHCExxC8kle2s4o00gXu1gDca+uw2+a/j1euJ9MobxB1
- 69JbmneDzpKI4IZayhYpyxpxJUihgtAV70LDXlDN3qMpMIP+d/Q0dQs8osj7gQ==
-X-Google-Smtp-Source: AGHT+IGexDA3GyNiC5HHivGPyYUFrDZgx/vvv3FbvTr4ymfT6W6OqPvq3tmWlk5gIBMYJDFDEGWKhQ==
-X-Received: by 2002:a17:903:2b0e:b0:1d7:2f55:c8a2 with SMTP id
- mc14-20020a1709032b0e00b001d72f55c8a2mr2946552plb.11.1705970175230; 
- Mon, 22 Jan 2024 16:36:15 -0800 (PST)
+ bh=HbagvK/BQHg13GLlZBGhyNRG5sgL74HVCqkvwUtdz7s=;
+ b=lzuBD/HRSleKXud+uJCOfDGvoUWO1FXcl+QoO+b8MxbvsFrYEdJcbOETjJqA8TLtHl
+ V7ysmrQCGfg7gl3c4fl4SFwbIipJ9Qk2QZTPDov9CYoFvc+RwOIgVPWA+OjDhiwtu0k9
+ zBWvxpx5UnKiQ1JJfsKdeSsdX6IZCumfuXzhPzc2DBpwwl+3c0qiEzzDw3p0VxhpWk2B
+ MnC4tndjrICvUhQpvYLeR9N7JLtITzkFvd+E7sCpIuOVPRxV9/ds/0NXrgMO/KqnF10v
+ 8ALNu6bU2aQNWxaf3NyK8aq5A8Iq8bIV2Mrw2Tqj+A6PHPS29lufsN5izlrvpYn0ZFxD
+ Orrw==
+X-Gm-Message-State: AOJu0Yw4iSwCAqUeeCBfGYeHJe6klZMNhRUPDTwM5nPsEwG3cfyJRJ0M
+ d1fPrZ7G3RAc9eJHL/i5DovEb5hTJn1Hp55NvitZCQwtgBM1wB60V46qS9xp1A==
+X-Google-Smtp-Source: AGHT+IE3YZZUAbSaTl6FBGOnqrae/sTpKUCuHtMEUe62rjmX2GkYQhqBolPrkv+LnabYxlrO3YWYvg==
+X-Received: by 2002:a05:6358:916:b0:176:5d73:376f with SMTP id
+ r22-20020a056358091600b001765d73376fmr1694130rwi.48.1705969748687; 
+ Mon, 22 Jan 2024 16:29:08 -0800 (PST)
 Received: from www.outflux.net ([198.0.35.241])
  by smtp.gmail.com with ESMTPSA id
- e6-20020a170902784600b001d70125ebcdsm8018696pln.277.2024.01.22.16.36.05
+ h3-20020a056a00218300b006dbd341379dsm4094216pfi.68.2024.01.22.16.28.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jan 2024 16:36:09 -0800 (PST)
+ Mon, 22 Jan 2024 16:28:53 -0800 (PST)
 From: Kees Cook <keescook@chromium.org>
 To: linux-hardening@vger.kernel.org
-Subject: [PATCH 16/82] drm/nouveau/mmu: Refactor intentional wrap-around
- calculation
-Date: Mon, 22 Jan 2024 16:26:51 -0800
-Message-Id: <20240123002814.1396804-16-keescook@chromium.org>
+Subject: [PATCH 48/82] drm/nouveau/mmu: Refactor intentional wrap-around test
+Date: Mon, 22 Jan 2024 16:27:23 -0800
+Message-Id: <20240123002814.1396804-48-keescook@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240122235208.work.748-kees@kernel.org>
 References: <20240122235208.work.748-kees@kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2914; i=keescook@chromium.org; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2285; i=keescook@chromium.org; 
  h=from:subject;
- bh=GfYx3pgFmjHNgd1GYzBGO0bWTMyDF98VVZ9Uwwibr6I=; 
- b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBlrwgF0R3cMIb0bEJahqxzDH8aYuSuLtzDbLBcK
- MwJi5ln/oiJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCZa8IBQAKCRCJcvTf3G3A
- JiWKD/9QgeDTjHor+aVubrm/891iXDAk7jazHlj5v3/F2SnXTi+bmLLP4OtopjBdUMsPCx2UIAX
- 2Op2QtDm8HkUK+QQ6zmG4KUaapZRcdeqnGmu9M0qvSuxvVVcJJI7xJUumjx7Q6vhbwjQGSQ5PHx
- tw7o/vHgfuo8HqWcIQlyDVJeim5ZIIs6Qsa/2lGfMnyEf6ggYmPPgDdwi3q8gy/Z2R5EmQXitFZ
- 02jYxw8yJtqK7iQMIw/+DdCmJga+zhFwFiajePglGFS280vfynresbsR/Ab5I9K/mF6hoaW5Nzj
- /9JADfxQJ+B/7RwcqVQt9//klWcituWydCxmm2pAJKa5qB1+5bM1cNbZfS+7Gqg7d5DQbpkhWvR
- FCz4RotvOZUU11+L/g0NMZhLFyUrsoS3XnWMJPQKLzLuqMIEwYdpUHTsgp2fGFgbJo6v8zILL3/
- K7cq5u/axld11AryCmtQE6Xcl/NUaROikBH/clnZ621DMh6R2SgfHqHLq8LeFb+PV40D1lpjTUv
- KfPtyyrZh7N+9mj3AvF1kzruNYxNyozqGbZnhobgBHDiUh3Nc49GDnZWn5rot0j/cj4bNCHrvDK
- mkRTpRNTiSCzx1W+apGBT6IE6vC71q+Jq/tE64KklEKJ7L0Jq24pax9Z2T6UMrnNYMaRk8d5pT9
- b0LSPqP/mgvSy0A==
+ bh=uRCkCvFsyXVpf/RtG8GCWMvVuyi59RVZ9Ft/3XBajpQ=; 
+ b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBlrwgJXxmYjo3BZJuP6sKHQxKb/M3OqOpXccNUZ
+ qhhlaPYu4iJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCZa8ICQAKCRCJcvTf3G3A
+ Jh/nD/91bB80GL2rgD2Qu9VZOfFU0YicaQRtXMeoaSbnOb9C6bplAraUcHoNvH0F/nzlJcxXU25
+ tdFLoL0nVtuTpAc0QwLgnxaobRa9aNgWmW3DUkrO812C5TjVwlXYjliSrA5pLSd1FCOwfEGcLUB
+ OasKeE6baUkZj6ytjNign6jV35ncfvu3y/C2MxtKBkts8n1Zwzi540pe8I5UtlySd6rBQjtelTV
+ w6SFBV5r1npI2fEZqGplZzZO7EajApmc7jJz1thGgwOaC77JZl1JuklmvrMC4ret/lDs/ycUAAk
+ D8MK5b6uevWOPdEY7obK82UJzkJkmcTaxAOtZlX95h01L7rkYBfeFsMYiZxSkbcDNRIQoWxack0
+ kuRc0oFbZDU4aaCtjbvKo6CHFYuBsv1B3qzy/dUdlEfz7Q8x7GSiUp1v2zZMHdUUy9zFSFFvHoE
+ kZoHAeuRu/Gh7kJhCX7dMPQXqmh1IyQcF7QoTRKQyay+Kirq8rSRKVyOK6qdr+F/8jCxx92g3nD
+ 2liBspnno23rcfzBqyJV5XbpEehmcvR0R30g5ubq4aeUy2+NIh26YpvJYBT9PIeuAR6WWh7/jm3
+ dRFK6//1Q7sP6hjFLcugQJcs/LAqMyL9p1u+btGAthR59AQsdV1I6mj3Cqxb1SXG6UXNsaiPyRb
+ lV4UD0ZObcOgDAQ==
 X-Developer-Key: i=keescook@chromium.org; a=openpgp;
  fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Content-Transfer-Encoding: 8bit
@@ -90,8 +89,7 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Kees Cook <keescook@chromium.org>, nouveau@lists.freedesktop.org,
  "Gustavo A. R. Silva" <gustavoars@kernel.org>, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Julia Lawall <Julia.Lawall@inria.fr>,
- Jiang Jian <jiangjian@cdjrlc.com>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-kernel@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>,
  Daniel Vetter <daniel@ffwll.ch>, Justin Stitt <justinstitt@google.com>,
  Dave Airlie <airlied@redhat.com>, Bill Wendling <morbo@google.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
@@ -111,10 +109,8 @@ instrument arithmetic wrap-around conditions and catch them when they
 are unexpected, regardless of whether they are signed[2], unsigned[3],
 or pointer[4] types.
 
-Refactor open-coded unsigned wrap-around addition test to use
-check_add_overflow(), retaining the result for later usage (which removes
-the redundant open-coded addition). This paves the way to enabling the
-wrap-around sanitizers in the future.
+Refactor open-coded wrap-around addition test to use add_would_overflow().
+This paves the way to enabling the wrap-around sanitizers in the future.
 
 Link: https://git.kernel.org/linus/68df3755e383e6fecf2354a67b08f92f18536594 [1]
 Link: https://github.com/KSPP/linux/issues/26 [2]
@@ -125,47 +121,28 @@ Cc: Lyude Paul <lyude@redhat.com>
 Cc: Danilo Krummrich <dakr@redhat.com>
 Cc: David Airlie <airlied@gmail.com>
 Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: Ben Skeggs <bskeggs@redhat.com>
 Cc: Dave Airlie <airlied@redhat.com>
-Cc: Julia Lawall <Julia.Lawall@inria.fr>
-Cc: Jiang Jian <jiangjian@cdjrlc.com>
+Cc: Ben Skeggs <bskeggs@redhat.com>
 Cc: dri-devel@lists.freedesktop.org
 Cc: nouveau@lists.freedesktop.org
 Signed-off-by: Kees Cook <keescook@chromium.org>
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-index 9c97800fe037..6ca1a82ccbc1 100644
+index 6ca1a82ccbc1..87c0903be9a7 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-@@ -1149,13 +1149,15 @@ nvkm_vmm_ctor(const struct nvkm_vmm_func *func, struct nvkm_mmu *mmu,
- 	vmm->root = RB_ROOT;
+@@ -1291,7 +1291,7 @@ nvkm_vmm_pfn_map(struct nvkm_vmm *vmm, u8 shift, u64 addr, u64 size, u64 *pfn)
  
- 	if (managed) {
-+		u64 sum;
-+
- 		/* Address-space will be managed by the client for the most
- 		 * part, except for a specified area where NVKM allocations
- 		 * are allowed to be placed.
- 		 */
- 		vmm->start = 0;
- 		vmm->limit = 1ULL << bits;
--		if (addr + size < addr || addr + size > vmm->limit)
-+		if (check_add_overflow(addr, size, &sum) || sum > vmm->limit)
- 			return -EINVAL;
- 
- 		/* Client-managed area before the NVKM-managed area. */
-@@ -1174,7 +1176,7 @@ nvkm_vmm_ctor(const struct nvkm_vmm_func *func, struct nvkm_mmu *mmu,
- 		}
- 
- 		/* Client-managed area after the NVKM-managed area. */
--		addr = addr + size;
-+		addr = sum;
- 		size = vmm->limit - addr;
- 		if (size && (ret = nvkm_vmm_ctor_managed(vmm, addr, size)))
- 			return ret;
+ 	if (!page->shift || !IS_ALIGNED(addr, 1ULL << shift) ||
+ 			    !IS_ALIGNED(size, 1ULL << shift) ||
+-	    addr + size < addr || addr + size > vmm->limit) {
++	    add_would_overflow(addr, size) || addr + size > vmm->limit) {
+ 		VMM_DEBUG(vmm, "paged map %d %d %016llx %016llx\n",
+ 			  shift, page->shift, addr, size);
+ 		return -EINVAL;
 -- 
 2.34.1
 
