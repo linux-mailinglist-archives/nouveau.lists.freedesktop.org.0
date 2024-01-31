@@ -2,80 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D312D8447D0
-	for <lists+nouveau@lfdr.de>; Wed, 31 Jan 2024 20:11:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89119844866
+	for <lists+nouveau@lfdr.de>; Wed, 31 Jan 2024 21:06:21 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E4DD210FC6D;
-	Wed, 31 Jan 2024 19:10:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 044DD10E28F;
+	Wed, 31 Jan 2024 20:06:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D7EC810FC62
- for <nouveau@lists.freedesktop.org>; Wed, 31 Jan 2024 19:10:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706728242;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=BVxUbMWh6nuUV7HAlwwrXn49k8LjkIFOKFR9DwoBMVA=;
- b=EgdIbQGwz58cXIT3lvuhCugB0ISm1aWEeeyysr2wUUTYDHDUqn/UxYvmTxdG6A1qnFCUvQ
- QWey50Yx7e5FRWKPYeuU+n9qrsXZmZ/adJB1e9XmeN8jtQht4eBmg2M9FDKkq1cbidM06G
- UFcDHZq0IyYDpX7SgEjJe3u4iFttuO8=
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-488-77xwZgN6N3iHwwu0Ihc0yQ-1; Wed, 31 Jan 2024 14:10:40 -0500
-X-MC-Unique: 77xwZgN6N3iHwwu0Ihc0yQ-1
-Received: by mail-ej1-f69.google.com with SMTP id
- a640c23a62f3a-a2f71c9f5d2so3391166b.2
- for <nouveau@lists.freedesktop.org>; Wed, 31 Jan 2024 11:10:40 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706728239; x=1707333039;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=BVxUbMWh6nuUV7HAlwwrXn49k8LjkIFOKFR9DwoBMVA=;
- b=llMfy1pif+Qnz3N8Ye2aQ43ePL34xJaCzIhXBGOAokle3ngdVdAKNzXW1ofqbbooB8
- NVGT4gbsk1rPs+tTrPkJDFhog1fcbHZPkMytI49F2P2aYeDYsoLUnfVuWI/v6yJ8+KEG
- 39hPBZ8f9VOBRPRPbYl5KHutUAWTSgLCPL913Gdw4zwDjy0z4NUOxvTBFst4kGBcfw0d
- XVIQroWbFYPxIxh1zAfq7iNE745x9YQDHyibc02CkifxBSVEFeWQylG3y8ozwl4CqJHn
- DgIIJtIhL06yXKzYzcPMWHKb0aysXFbmFsGtOkolW8wPZcy6ralAsQ+F2khndCDaDbR6
- qAfA==
-X-Gm-Message-State: AOJu0YzKi0CenG1WlRMkOzNPlySSdvLALFlJXp5tcJi5MX0xDkaUkgGC
- bTXlwuvU3b9ZEtCv3QRTQ8+zeswERXFCTaB0STNZTl+v8eu9mcYShhzC/XJJbmL10oTNHP6RyMM
- 7nXe9sgH161TWRKArht2AnG+oW5o/CRK1iJgQ7S1cuvyvdRX/xxMvQEE3r+reH+k=
-X-Received: by 2002:a17:907:171b:b0:a35:b2b1:5372 with SMTP id
- le27-20020a170907171b00b00a35b2b15372mr1869965ejc.68.1706728239404; 
- Wed, 31 Jan 2024 11:10:39 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEu38E4u4tFn+VorqkD/WncuomGRye9/IU/vt9+7QV1Ygj3N6RHb83/ZusPyTNmHK3yPi6BQg==
-X-Received: by 2002:a17:907:171b:b0:a35:b2b1:5372 with SMTP id
- le27-20020a170907171b00b00a35b2b15372mr1869951ejc.68.1706728239152; 
- Wed, 31 Jan 2024 11:10:39 -0800 (PST)
-Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
- ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
- by smtp.gmail.com with ESMTPSA id
- o14-20020a1709061d4e00b00a2c70ec1533sm6410851ejh.66.2024.01.31.11.10.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 31 Jan 2024 11:10:38 -0800 (PST)
-Message-ID: <4ba66e36-f4a8-4c5e-af88-bc47157b5c03@redhat.com>
-Date: Wed, 31 Jan 2024 20:10:37 +0100
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6BE1A10E28F
+ for <nouveau@lists.freedesktop.org>; Wed, 31 Jan 2024 20:06:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+ s=s31663417; t=1706731567; x=1707336367; i=linuxuser330250@gmx.net;
+ bh=c3ydkZouiPJ6UWktyOVo11Fplj+0ueiqjXRK+8GimwY=;
+ h=X-UI-Sender-Class:Date:Subject:To:References:From:In-Reply-To;
+ b=q+CLbHQHfbSDWddSPCLLwm1/sZugD0w3MqrdZF3mO+kSUsdlhAv8JXxLOZS2fbqH
+ eTQ1JwOgzTJbDU+DdxrypzjU+coGRtjJkMDEWPnH3/JLYsy07zh7LWe2b+42AUAIM
+ Q+0IgIrfwN6tOUEh35VV07yb2kufVRzZ4h06xM+a3kOTmjPcSNhqab4m8Bh7gsSzL
+ Qos383sensVwaTJDnaxBA1ATWIKxeiLXTm5YZQA3BhZ1P35pvb7/WI0wTBEl4oq4f
+ dLZvPBlo+gmFeB7FkwgwpcQfKP2VufWGExvQSiPu3FYVxQLRFRAohzT35T2M8eS4n
+ MFP15fHpKwGO9i1Jrg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.45.71] ([90.146.247.13]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MplXz-1qhtKM0VTx-00q8yd; Wed, 31
+ Jan 2024 21:06:07 +0100
+Message-ID: <f5e55792-522d-441f-89d2-0bfddc4f8515@gmx.net>
+Date: Wed, 31 Jan 2024 21:06:04 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] drm/nouveau/svm: remove unused but set variables
-To: Jani Nikula <jani.nikula@intel.com>, dri-devel@lists.freedesktop.org
-References: <cover.1704908087.git.jani.nikula@intel.com>
- <8b133e7ec0e9aef728be301ac019c5ddcb3bbf51.1704908087.git.jani.nikula@intel.com>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <8b133e7ec0e9aef728be301ac019c5ddcb3bbf51.1704908087.git.jani.nikula@intel.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
+Subject: Re: [Nouveau] Thinkpad P17 gen 2 kernel 6.4 and 6.6 lack of support
+ for nvidia GA104GLM [RTX A5000 Mobile] and missing module firmware
+Content-Language: de-AT, en-US
+To: marc_nouveau@merlins.org, nouveau@lists.freedesktop.org
+References: <20231202171326.GB24486@merlins.org>
+From: Linux User #330250 <linuxuser330250@gmx.net>
+In-Reply-To: <20231202171326.GB24486@merlins.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:qhI75h+UNUmmg3HTJYA5Sg3gviuBLZivV6l0n/9O9Ms1oydzsEi
+ n85xCwOyNPruBmZIjp4qXJ82KFRaWrBv5S/kSYIBMo1zFnebPlzsnIneaJKO2tRS+CrakDj
+ XFB6ur3abHbS7t6u/UdfeTtGsIDs0zBwkU1tya6/Cb2MhU5Lcv0TU6T2BoLrbSNZPZmXM8n
+ 4OzcmY3uvYznh9/o20Q7A==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:nZuwqSmd9QQ=;0KUpKWLX+ZMB4O9z5cAxGjkzO/V
+ mOg/8WmIBb5SIVNcUmCYyLQaWV3cLu95o3CGSt55CZsrdud2kKuv0aBIWhcEfG5QiD9oQcU5x
+ qvIfIb8mL49vhrg+LR9umLqfj1sh7//mzIUQVO9VKprWw0AHfcYFmRyCU5SKfHt4J9chSBXpG
+ r14NkfiyE9J61IE4Z/lhi45WVFuhayQqe+G81e7GIWpKcDrAzPQ2uhuDW5CBAZtLmhBbK+QX7
+ KufUzsqOnX13vhdpklkpcxdBYdH/kdX6dAgiSkCB/eFdMXdVhDyUkt7ez0zFuERNJxsarU6c9
+ MREVaIfGBa55PigN+FCargBWsh3+jAj8OvpR0zcHEzjRtGz1C6oiV1iMZFDUwjTKnp/sEc91V
+ 7+8SPf+BGuL0YOXeE56L1MTmkApydJN2XGS1oka5GmkQ2z3VDCAAVFC7+LaO8RJz18fnMIU2Y
+ QByAUtxvFK/0p0Tvyza3BWgiDNTqievqn4vYj2pSvzzFSrRDJ+h0B+TRReKTetX8gzwuJeOQs
+ QlHP0SZVV+1mCoLGBVjBGBQPnIo3nxbM/Dg7RIaiLTX9QYhnLnzW+9q/bMxFJ3H1pzu2YnwIG
+ EHB/VRhsVDbLAkCsKOEni5DS2S06BnXo/ZHP19t3LyqNlcPYg9tJFKKxWxoJi8jSYP962M0Q2
+ 1L+/DHGU7uXIPefQnpXOwb+Wo+JR1za8T/kLRlpxgroBVE/ZYzFFxB6hgRnW6E16m7hy8/chj
+ 8vJVpQy/QAtJQ6szSy3vVzNiiPKCus5Nf0DlAcvhjYAIHiVyCLzfwUROdRRrfnVVyyNIGAdMw
+ vt4gMhyrgiQqmmi1YAeK4320CYSMizwmum3b8QQllfJeM=
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,64 +68,80 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 1/10/24 18:39, Jani Nikula wrote:
-> Fix the W=1 warning -Wunused-but-set-variable.
-> 
-> Cc: Karol Herbst <kherbst@redhat.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: Danilo Krummrich <dakr@redhat.com>
-> Cc: nouveau@lists.freedesktop.org
-> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+On 12/02/23 Marc MERLIN wrote:
+> Howdy,
 
-Reviewed-by: Danilo Krummrich <dakr@redhat.com>
+Howdy!
 
-> ---
->   drivers/gpu/drm/nouveau/nouveau_svm.c | 10 +++-------
->   1 file changed, 3 insertions(+), 7 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
-> index cc03e0c22ff3..4d1008915499 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
-> @@ -112,7 +112,7 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
->   {
->   	struct nouveau_cli *cli = nouveau_cli(file_priv);
->   	struct drm_nouveau_svm_bind *args = data;
-> -	unsigned target, cmd, priority;
-> +	unsigned target, cmd;
->   	unsigned long addr, end;
->   	struct mm_struct *mm;
->   
-> @@ -136,9 +136,6 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
->   		return -EINVAL;
->   	}
->   
-> -	priority = args->header >> NOUVEAU_SVM_BIND_PRIORITY_SHIFT;
-> -	priority &= NOUVEAU_SVM_BIND_PRIORITY_MASK;
-> -
->   	/* FIXME support CPU target ie all target value < GPU_VRAM */
->   	target = args->header >> NOUVEAU_SVM_BIND_TARGET_SHIFT;
->   	target &= NOUVEAU_SVM_BIND_TARGET_MASK;
-> @@ -926,15 +923,14 @@ nouveau_pfns_map(struct nouveau_svmm *svmm, struct mm_struct *mm,
->   		 unsigned long addr, u64 *pfns, unsigned long npages)
->   {
->   	struct nouveau_pfnmap_args *args = nouveau_pfns_to_args(pfns);
-> -	int ret;
->   
->   	args->p.addr = addr;
->   	args->p.size = npages << PAGE_SHIFT;
->   
->   	mutex_lock(&svmm->mutex);
->   
-> -	ret = nvif_object_ioctl(&svmm->vmm->vmm.object, args,
-> -				struct_size(args, p.phys, npages), NULL);
-> +	nvif_object_ioctl(&svmm->vmm->vmm.object, args,
-> +			  struct_size(args, p.phys, npages), NULL);
->   
->   	mutex_unlock(&svmm->mutex);
->   }
+> I'm trying a Thnkpad P17 gen2, the last thinkpad that still comes in 17"
+> 4K (newer ones are 16" only, so I'm looking for other worthwhile linux
+> laptops with 17" or bigger LCD that also does 4K, the alienware I saw
+> was 18" but not 4K)
+>
+> Unfortunately I seem to need the nouveau driver to turn off the nvidia
+> chip I don't plan on using (intel graphics is fine for me), and bios
+> only allows 'bybrid' or nvidia only)
+> On my P73, nouveau never really worked in the 3 years I've had it, but
+> it could at least turn off the nvidia chip. On P17gen2 it does not seem
+> to be able to do so.
 
+At the moment you'd have to use the proprietary Nvidia driver for
+graphics support. But there are, and have been for a long time, ways to
+disable the additional dedicated graphics device completely and save
+power, which is nice thing on a laptop...
+
+> sauron:~# lspci | grep VGA
+> 00:02.0 VGA compatible controller: Intel Corporation Tiger Lake-H GT1 [U=
+HD Graphics] (rev 01)
+> 01:00.0 VGA compatible controller: NVIDIA Corporation GA104GLM [RTX A500=
+0 Mobile] (rev a1)
+
+Note the Nvidia card's PCI address is 01:00.0...
+
+> What is the next recommended step?
+
+STEP #1: disable nouveau by blacklisting the module.
+
+There's more than one way to do this:
+
+* Add it to /etc/modprobe.d/<someconfigfilename>.conf
+E.g. /etc/modprobe.d/blacklist-nouveau.conf, run in a root shell (if the
+file doesn't already exist!):
+echo "blacklist nouveau" > /etc/modprobe.d/blacklist-nouveau.conf
+
+* Add a kernel command line parameter: modprobe.blacklist=3Dnouveau
+How you do this depends on which Linux (distribution) you're running.
+E.g. GRUB's command line may be used, if GRUB /is/ used, or dracut and
+so on...
+
+STEP #2: you could power down the PCI device (only after you've disabled
+the driver in step #1).
+
+Try it out first by disabling the PCI device you noted above on a
+running system (as root!), e.g. like this:
+
+echo 1 > /sys/bus/pci/devices/0000\:01\:00.0/remove
+
+If that works, you'd do something like adding a new udev rule in e.g.
+/etc/udev/rules.d/00-remove-nvidia.rules with contents of the sort:
+ACTION=3D=3D"add", SUBSYSTEM=3D=3D"pci", ATTR{vendor}=3D=3D"0x10de",
+ATTR{class}=3D=3D"0x03[0-9]*", ATTR{power/control}=3D"auto", ATTR{remove}=
+=3D"1"
+
+Take a full example from the Arch Wiki:
+https://wiki.archlinux.org/title/Hybrid_graphics
+
+Other resouces:
+https://github.com/bayasdev/nvidia-gpu-off
+https://unix.stackexchange.com/questions/702774/how-to-disable-pcie-device=
+-at-boot
+
+> Thanks,
+> Marc
+
+Welcome! Hope this helps, and I also hope it's not too late. I just saw
+your posting and thought, better late than never...
+Linux User #330250
