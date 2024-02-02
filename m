@@ -2,123 +2,80 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB882846296
-	for <lists+nouveau@lfdr.de>; Thu,  1 Feb 2024 22:26:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 644558464D6
+	for <lists+nouveau@lfdr.de>; Fri,  2 Feb 2024 01:06:19 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ACD1210E7C4;
-	Thu,  1 Feb 2024 21:26:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D8C7110E61B;
+	Fri,  2 Feb 2024 00:06:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="ZWcL0trZ";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="QsasnM3x";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2074.outbound.protection.outlook.com [40.107.243.74])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6B95510E95D
- for <nouveau@lists.freedesktop.org>; Thu,  1 Feb 2024 21:26:53 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mpUFgX6gXxmmz6FV3Ls0Y6unraXy6c5/7Fg5EL6J2SOUEWjvqFMkrsywVDoIGrJWyRTzsJwlOjYDOH8zRyA3BDu+nx9TWkfUpNsQiaNfsrx15dx79svKYvIP3CrrmI94QBDe9shxo28OisVSyki58XwwFAoFc1bb7q2QfpQQ59hJ2SwR6hAzkfCvBE6k9iz3ZEPlOipcHqpytcKVCt8amxpL7j55byQHpo9Z6ZvQM37IuPM6cgLJ5uxCF4PbUgwOL8FX0c9GqAS5dK2SbYXqavTLkeyi5VM6lWspNg6K6JnW8oCb6DZ6pF9wIUlDnreappd6hKsORNdYq4mhzOTtFg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ADbFn265J91OH+sFeyXJZ31fUKzrWewDVh/YHseiBuo=;
- b=SZu43/fFajj6DzNb6an2g7gDEv+4d+VxlqzwaBKoBkFxMX7Uzdj/o5YELXwG6OG8ScQEGohX+UkBpReZmxOUN3dz2He3s80fkrZoL68pLmo07OyITva+u78gS20gMuiBYFvodFy5iQ1kbXNHFwr7NWVy57+9R64tQRZSlp+mpZ4hy7U1LXw53kwIpX6LUXk1m2KMcmmsZcugIfykS5A+bjPqQiNBc8+3rvinbWdBL48GCdSbkYroytaatcAd6fR06lu0aKn6RpQbzhi1b+xoNo2rw0+WrX6gKHBlmlytzYWy6Gp0p3s6yLEb3PJJbWuqqvaYGjgNsGLGaoR7b3laiQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ADbFn265J91OH+sFeyXJZ31fUKzrWewDVh/YHseiBuo=;
- b=ZWcL0trZGz4J+lyigdB/TPX1ybJZ7H7OEA+wDtOGLkrwQK2GGYW0alevPa2YoX7Tec1OZjPcblq+VGuV/1mMF9/DAxldkYvmuKvDaLlwKKGPY1/qdGdHh0HbLztJ/WfCV5vOKKWHPG9MRg7LtDRNyX9SA1t3FBTyvGOmlOqDpMNjgFSVCbsyNzSO6gtqHM/9yK/Nfh7vSAKBEhiVHGnipX8DHls9cBC/tmKyN3Buw/jzbqXFWBLo4y4/34j/BCYqhKj1OpRv/m0GkKQ2P5kRHJbdKvv4x0Xp5AyuUe3FABkzd7zGULjwzzBKEwgVCpRUY/n873BMGy9oNv8E1RMrmg==
-Received: from SN7PR12MB8769.namprd12.prod.outlook.com (2603:10b6:806:34b::12)
- by CH2PR12MB4969.namprd12.prod.outlook.com (2603:10b6:610:68::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.24; Thu, 1 Feb
- 2024 21:26:49 +0000
-Received: from SN7PR12MB8769.namprd12.prod.outlook.com
- ([fe80::9f0f:632e:815c:f953]) by SN7PR12MB8769.namprd12.prod.outlook.com
- ([fe80::9f0f:632e:815c:f953%7]) with mapi id 15.20.7228.029; Thu, 1 Feb 2024
- 21:26:49 +0000
-From: Timur Tabi <ttabi@nvidia.com>
-To: "airlied@redhat.com" <airlied@redhat.com>, "nouveau@lists.freedesktop.org"
- <nouveau@lists.freedesktop.org>
-Subject: Re: [PATCH] drm/nouveau: fix several DMA buffer leaks
-Thread-Topic: [PATCH] drm/nouveau: fix several DMA buffer leaks
-Thread-Index: AQHaVUiZd14XnRH680S/yXd3SXn/vrD2ACmA
-Date: Thu, 1 Feb 2024 21:26:49 +0000
-Message-ID: <668e68a40a81d751682033684e049dda07ab049d.camel@nvidia.com>
-References: <20240201195502.1706490-1-ttabi@nvidia.com>
-In-Reply-To: <20240201195502.1706490-1-ttabi@nvidia.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.44.4-0ubuntu2 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SN7PR12MB8769:EE_|CH2PR12MB4969:EE_
-x-ms-office365-filtering-correlation-id: e13c4d49-01d1-48ca-3648-08dc236c805f
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: NzOI+iXazIqJow8uhUzKuVRPYEJGvATZTi/GkwiQBZ2idQY/AJCrSbZZyD2kimLu1YbjuNNrWgkAXftpPSevQA2y8oW0UZN4SX6MBc0vB364Qnv+EA523P7Df29W2BEqm3fdZpMT/5liZtyf0c5t3lzsdFDOnlkmae3xMEY254afviwe5IhFpyW+wx13Xv4p/FupnRAiUcm5tpz0bR7uz9Qi9qmGXtewoNYmcr0wUmXaPTnaBundK5o64KrKgiAy2xXlE9YabKDscDU3QY6XGVroBlbDrwgVYoJF1vcGmiPiFPATV0XQoecS8pH4/LGlzQHKAKDKxoLlgn6i9zqVwyegk2zJcXlTOPHJ9GckPr1mDnAkBZiFOz1WxFEpAaJlybfqYxqem7LTmuyUu/qySRTW1v6P7N0JlOmr1xoN2b2h5jg/sKS7ER8SahA7VVXlyHkcIZ5kYqwPu9dp9aAuSzWTvzOeiCKiMp3Ov88I1lR1VJn87yGOVJzUoA0ls2XejiYJ+Y3pLLpCD7DfYt0q5waNkB7ZmBibt6vAn4YnvKEeldeOK6LBY1dbuBVUnLYDtqJhSaHm8pLkrc+Ef1PcVfTn++4G02TTUrbDSzrvitbKraVmxp96fDN6IqybD1/Z
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN7PR12MB8769.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(39860400002)(346002)(136003)(396003)(376002)(230922051799003)(186009)(64100799003)(451199024)(1800799012)(83380400001)(41300700001)(86362001)(36756003)(38070700009)(38100700002)(122000001)(2616005)(26005)(6512007)(6506007)(4744005)(66556008)(66946007)(2906002)(478600001)(110136005)(316002)(66476007)(71200400001)(76116006)(64756008)(66446008)(8936002)(8676002)(5660300002)(6486002);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Smg3eHVHU1g4eURpdG9wSGVlQWU5VWg1Z2owcXMxcE8yZEFsSWFJdXpXM05p?=
- =?utf-8?B?cXU4T3JYa3RBeWd1aHpVbDM4dnRiVEUyY0E3dE9wTFQ1S1ZYSy80Qkg2UlNQ?=
- =?utf-8?B?dXRMUGV2M0d6UjZTNzA4TE1FdVUwQW9PMW93SzljVGN0Z2syV29PcU9WWlNR?=
- =?utf-8?B?NDNac2VWTFdpZkxYT3gza2JIOUlzNEpVak9SQ2VoUC8ra2sySklrMUtKQlNL?=
- =?utf-8?B?K1o3dFdDKzk4MlJXMDd6ZnBvdElrLy80QzZ0Zy9FZzFrUHBQUjc2MlMzTmVz?=
- =?utf-8?B?c29QWGdCMHBBRFNnUnNaVzFxYnBGdzQ0ejcrUnFLZlBjMEJaWDlWOGlNbHpa?=
- =?utf-8?B?T3laMUlvNjJPcnJFOERvSUI2V1h4WFIxeDhweVlkMklzZnFnQ05ZQXNzOHhV?=
- =?utf-8?B?VVlTT0pyaVFxM0lsNU5QeWpKYTV3cHFBUHhZbEtIbE5JT2haYm5jTE5mTk9N?=
- =?utf-8?B?NDlnWU1aT0pQazVYMndqci9SQjc1Ri9VdkdoRmFadCs0V2V1TmplL0NFMk5S?=
- =?utf-8?B?OHhtbWVGdEptWjNaUEdxZ0RwQWRBNys1aTliVU14MnB2MitFNFBUend2QUNV?=
- =?utf-8?B?Q2F6RE1tNTJwQ1ozc1ZyenU3VzdtVkxsWjBTbUlEZTBzMjJ0TEVuQ3NaMmJ0?=
- =?utf-8?B?bXM4TW1CZXdoNDBGbFFhUEUzSXpvTXUraVF1N3FQTFdOLzJGNDlPOFprdWhO?=
- =?utf-8?B?YUpLRThISkNVK2FOZ1NZNjI3V3RuZVJYTkFpNlBJeXdWMVo0T0ZpcGZCcFlo?=
- =?utf-8?B?b0xMVHZ3WFJuTVVVNHM5WnFXN0F5YUIyOVk4WklSRE5Md0wreEVJU1NrQkZq?=
- =?utf-8?B?MGo3TTA4cUZGTWpqbG9KT05GV0VFYW1sWWwwckZZYWJMWUZobmxJbWorMm1n?=
- =?utf-8?B?QllBYzRiWVF2Ly8xamZjR3JzS0VpR2JIK1VremRyRzNhYXoxU1hrVVFtRUlz?=
- =?utf-8?B?NFIxR3JRbEsxNTJjWVlDaGQwWkxza3RtUmdWTWlJN05veEJHOWxTaWd2NUVj?=
- =?utf-8?B?MG5GRU9uZUxJYXJwYVJHWnZCR2swMldGd3lzRHY1YkExd2lnbTRiSmFrS2I4?=
- =?utf-8?B?amtmK0RNQnJFa21oZ2Fyek8wZFJDcWFNYS9VMW0vWmtaVU85aUF6VW9COExP?=
- =?utf-8?B?L0hzcFFOSTNwVzZTejFocFZ2VHppT2NLdmRkUkNtaGxBRnlzWGtCVTNjSjVn?=
- =?utf-8?B?YnhqRG9La1JyclJ5eG9qUnVjeVdJK0ZjWmhKV3QvK3ZoM0wwM0h6bm5XMzNy?=
- =?utf-8?B?ZTNGOWxad0w0SXRCSWxZV2FnSDJlUithNkVMZzcvaHJwc3QrbUlNbWRpaUY2?=
- =?utf-8?B?MnVOMEQvOWdjcGM5SCtudHdPTUtpREo3UXVJM3lHUWloVnMzMEQwbnF2WlJM?=
- =?utf-8?B?d3MwQ1ZmWE82UUd2bUl6c2M3c2VDaitWeXN0VGFoeDE0N3dqMXJ2aXh4dnFu?=
- =?utf-8?B?UDByN3JrYjM5RHNmNW02UmYyUjJyZ1dNSWt1VFpINGlQdEo0dFMraWQ5RzUv?=
- =?utf-8?B?b1JLUnZVdHAzb2EyQk5HS00vMG9IaTRCT0pFRlVrVmZkMmgxbXpyaU9lY0p4?=
- =?utf-8?B?NWtZWmdQdE5tWGtsSFpLQVBGdmsvNlpQNVlYcVovV3A5N0xLQXNySXN1ekJR?=
- =?utf-8?B?aEwrUWlGQUJicW9JNTlaeTZsQ1lqYXZjSkdvVFVmN0tjcmVTMzh0VzM4RnZL?=
- =?utf-8?B?OFJycG82dGRRVDZmbjdOTmJKNUU1Q0k1MzZOcWhMMVFBRC9GNGk1ZFU3TTJE?=
- =?utf-8?B?SzFEOWp3QVNpdXN0MDUvN3FPRlROZUF2bkx3SEJOZlUzejQ3aERpbHFOOTJ0?=
- =?utf-8?B?d3Y1QnlIN3ExOHR3TUxya3dDS2sveVZkc2hpQnB0MjQ1TFV5L1g5bjZEYndx?=
- =?utf-8?B?ME5JRzRFdTJQa0ZOTmU2cG16ejFDcXdmZHBqd3JWTWdpb244bHFCRXdJRHRY?=
- =?utf-8?B?VXNDQ3p0clN6TW9vandBUFdFL2phYVFuOXQzNFEyV3BndUJlS0M3Qm9YZjRJ?=
- =?utf-8?B?MVI1STZjUy9BMWNFYWFRcWRBM0ZvYjNhVWUvdTNad0JIN1k2TEx6S1BrLzVN?=
- =?utf-8?B?SThKMzErVFZyQTduWnB5YXI3SVE5U2R6bEZ6emszOXAyWmJCcnBVM3RQemhq?=
- =?utf-8?Q?dhRCHjwdhJfLX4d9MSyOrsmPh?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <7D04F46583D7D7468F63AA92D18BDC51@namprd12.prod.outlook.com>
-Content-Transfer-Encoding: base64
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 92C0A10E61B
+ for <nouveau@lists.freedesktop.org>; Fri,  2 Feb 2024 00:06:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1706832373;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=E3CJiMNs4ugkpjLFrDvRR7BQuWqPEMuBpVE7vPmdHD4=;
+ b=QsasnM3x4l5MrylDfot6Wir0rcfhIJWFbanoVYNkns+/6N+gZIQP8IPUcuFsDB4/8KInzF
+ 0irBBP4WNXM7bWdVS9dNV1jRG0I1DvgXZtOCB3yrZ9ARXqFR7Stp8fI4RvSoOG0iXvSufk
+ rNV6TSVpKYP28vNOPtkc72maZp/rayE=
+Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
+ [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-384-YV9-N9b1MxS0HMrAgPrCcQ-1; Thu, 01 Feb 2024 19:06:11 -0500
+X-MC-Unique: YV9-N9b1MxS0HMrAgPrCcQ-1
+Received: by mail-ej1-f71.google.com with SMTP id
+ a640c23a62f3a-a27eddc1c27so88224066b.3
+ for <nouveau@lists.freedesktop.org>; Thu, 01 Feb 2024 16:06:11 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706832370; x=1707437170;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=E3CJiMNs4ugkpjLFrDvRR7BQuWqPEMuBpVE7vPmdHD4=;
+ b=aO0RlTLkseJdCRbahyAulu8eA8WYVgAXw4Lsv+H30Ic6wEVuyMtcKqWJ4XD4FtJVjZ
+ Oe0c8bjAgG3bkczs29c2xJ3PyWu4fK4lUUO64X9ryktXuIxraLnQD94BJYHusEN2drLl
+ cZmiQfrlz10GmrOfDy+pHISoBmvuB/v7JzNxE7ALdraf9ORK6LloeOsNMYKe1zab66Qb
+ lZI4yrHcVxwxbPjy8i0kjNepUeqkzzHVTj3t2VZrBVWwf3wtfwkYCqjWJKEkkHyqKkv3
+ JHDRZuxx/rGphHT58muGbZLSuBIAsqudc/2PlrsJITIwCCqHj3WSduBNVND/nVPpdqjJ
+ UKlQ==
+X-Gm-Message-State: AOJu0YxkqJGnJQSX5FMzb5bK8WOxOKneW9ivfhKCzNAyiUubN7chQLz6
+ /sgfuiSJTt1/qiXp7Qne8lNAsew0bW/hEglhE32RC/6yqxRL0IcnBshf/png04VJOhvu3MKLLg1
+ hj9n9S7Wc9k98CVBdv5K16yfR2OLACJNJjLuYI3L1FMmaBX4TFWjDvjGfc+BAHQUJ8NZzk/t2Wl
+ Q1xdTvrRilKrHGxFZTRiKt7LEz3SRvp2bbN0z3ZwplWA==
+X-Received: by 2002:a17:906:f8cd:b0:a35:a71d:81fe with SMTP id
+ lh13-20020a170906f8cd00b00a35a71d81femr2670252ejb.43.1706832369904; 
+ Thu, 01 Feb 2024 16:06:09 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFWHGhR6q0dC6KwkKvQ+4/Y2FQBr8d6rvG7fkyezcA4RHD3MTUmjFD/7HadrmyFyd8vNpBWiA==
+X-Received: by 2002:a17:906:f8cd:b0:a35:a71d:81fe with SMTP id
+ lh13-20020a170906f8cd00b00a35a71d81femr2670238ejb.43.1706832369422; 
+ Thu, 01 Feb 2024 16:06:09 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCW2KxX1NIB2pd/1K2DpT2qO9jLIH3aYLznMYbo1PpNIa7VpVx8P3B4MfwOLEwwp+EynPTtHzul/JZwWjV7TcmiszyFvuZ+Gw1Cq9FhF8UAN0KEgwTmTSOPmKmD3BW3DIBonztgtVCW0/b5fSGy1H0/ZEpKrmBzgRNHRrSyUgleb9XcIeMcs/DSvLqUmN5N0S1TAowroKu2A6e4=
+Received: from cassiopeiae.. ([2a02:810d:4b3f:ee94:642:1aff:fe31:a19f])
+ by smtp.gmail.com with ESMTPSA id
+ s12-20020a170906454c00b00a360eb62afdsm286025ejq.32.2024.02.01.16.06.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Feb 2024 16:06:08 -0800 (PST)
+From: Danilo Krummrich <dakr@redhat.com>
+To: nouveau@lists.freedesktop.org
+Cc: lyude@redhat.com, kherbst@redhat.com, airlied@gmail.com, ttabi@nvidia.com,
+ dri-devel@lists.freedesktop.org, Danilo Krummrich <dakr@redhat.com>
+Subject: [PATCH 1/2] drm/nouveau: don't fini scheduler if not initialized
+Date: Fri,  2 Feb 2024 01:05:50 +0100
+Message-ID: <20240202000606.3526-1-dakr@redhat.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8769.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e13c4d49-01d1-48ca-3648-08dc236c805f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Feb 2024 21:26:49.6663 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: tBXbFc+4fX/kAXhXFTdAvxSXVBm83jW5OdInK3tA5JYdTLP0kwT+pfhF13sZrMZfZ+8dohNW+k9qkAhZWpe9lQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4969
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -133,17 +90,230 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVGh1LCAyMDI0LTAyLTAxIGF0IDEzOjU1IC0wNjAwLCBUaW11ciBUYWJpIHdyb3RlOg0KPiAr
-c3RhdGljIHZvaWQNCj4gK252a21fZ3NwX21lbV9kdG9yKHN0cnVjdCBudmttX2dzcCAqZ3NwLCBz
-dHJ1Y3QgbnZrbV9nc3BfbWVtICptZW0pDQo+ICt7DQo+ICvCoMKgwqDCoMKgwqDCoGlmIChtZW0t
-PmRhdGEpIHsNCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRtYV9mcmVlX2NvaGVy
-ZW50KGdzcC0+c3ViZGV2LmRldmljZS0+ZGV2LCBtZW0tPnNpemUsIG1lbS0NCj4gPmRhdGEsIG1l
-bS0+YWRkcik7DQo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBtZW0tPmRhdGEgPSBO
-VUxMOw0KPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgbWVtLT5hZGRyID0gMDsNCj4g
-K8KgwqDCoMKgwqDCoMKgfQ0KPiArfQ0KDQpEYXZlLCB3aGF0IGRvIHlvdSB0aGluayBhYm91dCBk
-b2luZyB0aGlzOg0KDQppZiAobWVtLT5kYXRhKSB7DQoNCgltZW1zZXQobWVtLT5kYXRhLCAwLCBt
-ZW0tPnNpemUpOyAgIDwtLS0tLS0tDQoNCglkbWFfZnJlZV9jb2hlcmVudChnc3AtPnN1YmRldi5k
-ZXZpY2UtPmRldiwgbWVtLT5zaXplLA0KbWVtLT5kYXRhLCBtZW0tPmFkZHIpOw0KCW1lbS0+ZGF0
-YSA9IE5VTEw7DQoJbWVtLT5hZGRyID0gMDsNCn0NCg0KVGhpcyB3b3VsZCBoZWxwIHNpdHVhdGlv
-bnMgd2hlcmUgYSBidWZmZXIgaXMgYWNjZXNzIGJ5IEdTUC1STSBhZnRlciB3ZSB0aGluaw0KaXQn
-cyBzYWZlIHRvIGZyZWUgaXQuDQo=
+nouveau_abi16_ioctl_channel_alloc() and nouveau_cli_init() simply call
+their corresponding *_fini() counterpart. This can lead to
+nouveau_sched_fini() being called without struct nouveau_sched ever
+being initialized in the first place.
+
+Instead of embedding struct nouveau_sched into struct nouveau_cli and
+struct nouveau_chan_abi16, allocate struct nouveau_sched separately,
+such that we can check for the corresponding pointer to be NULL in the
+particular *_fini() functions.
+
+It makes sense to allocate struct nouveau_sched separately anyway, since
+in a subsequent commit we can also avoid to allocate a struct
+nouveau_sched in nouveau_abi16_ioctl_channel_alloc() at all, if the
+VM_BIND uAPI has been disabled due to the legacy uAPI being used.
+
+Fixes: 5f03a507b29e ("drm/nouveau: implement 1:1 scheduler - entity relationship")
+Reported-by: Timur Tabi <ttabi@nvidia.com>
+Closes: https://lore.kernel.org/nouveau/20240131213917.1545604-1-ttabi@nvidia.com/
+Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_abi16.c | 10 ++++---
+ drivers/gpu/drm/nouveau/nouveau_abi16.h |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_drm.c   |  7 +++--
+ drivers/gpu/drm/nouveau/nouveau_drv.h   |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_exec.c  |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_sched.c | 38 +++++++++++++++++++++++--
+ drivers/gpu/drm/nouveau/nouveau_sched.h |  6 ++--
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c  |  2 +-
+ 8 files changed, 53 insertions(+), 16 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+index a04156ca8390..ca4b5ab3e59e 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
++++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+@@ -128,12 +128,14 @@ nouveau_abi16_chan_fini(struct nouveau_abi16 *abi16,
+ 	struct nouveau_abi16_ntfy *ntfy, *temp;
+ 
+ 	/* Cancel all jobs from the entity's queue. */
+-	drm_sched_entity_fini(&chan->sched.entity);
++	if (chan->sched)
++		drm_sched_entity_fini(&chan->sched->entity);
+ 
+ 	if (chan->chan)
+ 		nouveau_channel_idle(chan->chan);
+ 
+-	nouveau_sched_fini(&chan->sched);
++	if (chan->sched)
++		nouveau_sched_destroy(&chan->sched);
+ 
+ 	/* cleanup notifier state */
+ 	list_for_each_entry_safe(ntfy, temp, &chan->notifiers, head) {
+@@ -337,8 +339,8 @@ nouveau_abi16_ioctl_channel_alloc(ABI16_IOCTL_ARGS)
+ 	if (ret)
+ 		goto done;
+ 
+-	ret = nouveau_sched_init(&chan->sched, drm, drm->sched_wq,
+-				 chan->chan->dma.ib_max);
++	ret = nouveau_sched_create(&chan->sched, drm, drm->sched_wq,
++				   chan->chan->dma.ib_max);
+ 	if (ret)
+ 		goto done;
+ 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.h b/drivers/gpu/drm/nouveau/nouveau_abi16.h
+index 1f5e243c0c75..11c8c4a80079 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_abi16.h
++++ b/drivers/gpu/drm/nouveau/nouveau_abi16.h
+@@ -26,7 +26,7 @@ struct nouveau_abi16_chan {
+ 	struct nouveau_bo *ntfy;
+ 	struct nouveau_vma *ntfy_vma;
+ 	struct nvkm_mm  heap;
+-	struct nouveau_sched sched;
++	struct nouveau_sched *sched;
+ };
+ 
+ struct nouveau_abi16 {
+diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+index 6f6c31a9937b..a947e1d5f309 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_drm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+@@ -201,7 +201,8 @@ nouveau_cli_fini(struct nouveau_cli *cli)
+ 	WARN_ON(!list_empty(&cli->worker));
+ 
+ 	usif_client_fini(cli);
+-	nouveau_sched_fini(&cli->sched);
++	if (cli->sched)
++		nouveau_sched_destroy(&cli->sched);
+ 	if (uvmm)
+ 		nouveau_uvmm_fini(uvmm);
+ 	nouveau_vmm_fini(&cli->svm);
+@@ -311,7 +312,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
+ 	cli->mem = &mems[ret];
+ 
+ 	/* Don't pass in the (shared) sched_wq in order to let
+-	 * nouveau_sched_init() create a dedicated one for VM_BIND jobs.
++	 * nouveau_sched_create() create a dedicated one for VM_BIND jobs.
+ 	 *
+ 	 * This is required to ensure that for VM_BIND jobs free_job() work and
+ 	 * run_job() work can always run concurrently and hence, free_job() work
+@@ -320,7 +321,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
+ 	 * locks which indirectly or directly are held for allocations
+ 	 * elsewhere.
+ 	 */
+-	ret = nouveau_sched_init(&cli->sched, drm, NULL, 1);
++	ret = nouveau_sched_create(&cli->sched, drm, NULL, 1);
+ 	if (ret)
+ 		goto done;
+ 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
+index 8a6d94c8b163..e239c6bf4afa 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_drv.h
++++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
+@@ -98,7 +98,7 @@ struct nouveau_cli {
+ 		bool disabled;
+ 	} uvmm;
+ 
+-	struct nouveau_sched sched;
++	struct nouveau_sched *sched;
+ 
+ 	const struct nvif_mclass *mem;
+ 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
+index bc5d71b79ab2..e65c0ef23bc7 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_exec.c
++++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
+@@ -389,7 +389,7 @@ nouveau_exec_ioctl_exec(struct drm_device *dev,
+ 	if (ret)
+ 		goto out;
+ 
+-	args.sched = &chan16->sched;
++	args.sched = chan16->sched;
+ 	args.file_priv = file_priv;
+ 	args.chan = chan;
+ 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
+index dd98f6910f9c..32fa2e273965 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_sched.c
++++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
+@@ -398,7 +398,7 @@ static const struct drm_sched_backend_ops nouveau_sched_ops = {
+ 	.free_job = nouveau_sched_free_job,
+ };
+ 
+-int
++static int
+ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
+ 		   struct workqueue_struct *wq, u32 credit_limit)
+ {
+@@ -453,7 +453,30 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
+ 	return ret;
+ }
+ 
+-void
++int
++nouveau_sched_create(struct nouveau_sched **psched, struct nouveau_drm *drm,
++		     struct workqueue_struct *wq, u32 credit_limit)
++{
++	struct nouveau_sched *sched;
++	int ret;
++
++	sched = kzalloc(sizeof(*sched), GFP_KERNEL);
++	if (!sched)
++		return -ENOMEM;
++
++	ret = nouveau_sched_init(sched, drm, wq, credit_limit);
++	if (ret) {
++		kfree(sched);
++		return ret;
++	}
++
++	*psched = sched;
++
++	return 0;
++}
++
++
++static void
+ nouveau_sched_fini(struct nouveau_sched *sched)
+ {
+ 	struct drm_gpu_scheduler *drm_sched = &sched->base;
+@@ -471,3 +494,14 @@ nouveau_sched_fini(struct nouveau_sched *sched)
+ 	if (sched->wq)
+ 		destroy_workqueue(sched->wq);
+ }
++
++void
++nouveau_sched_destroy(struct nouveau_sched **psched)
++{
++	struct nouveau_sched *sched = *psched;
++
++	nouveau_sched_fini(sched);
++	kfree(sched);
++
++	*psched = NULL;
++}
+diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.h b/drivers/gpu/drm/nouveau/nouveau_sched.h
+index a6528f5981e6..e1f01a23e6f6 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_sched.h
++++ b/drivers/gpu/drm/nouveau/nouveau_sched.h
+@@ -111,8 +111,8 @@ struct nouveau_sched {
+ 	} job;
+ };
+ 
+-int nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
+-		       struct workqueue_struct *wq, u32 credit_limit);
+-void nouveau_sched_fini(struct nouveau_sched *sched);
++int nouveau_sched_create(struct nouveau_sched **psched, struct nouveau_drm *drm,
++			 struct workqueue_struct *wq, u32 credit_limit);
++void nouveau_sched_destroy(struct nouveau_sched **psched);
+ 
+ #endif
+diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+index 4f223c972c6a..0a0a11dc9ec0 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+@@ -1740,7 +1740,7 @@ nouveau_uvmm_ioctl_vm_bind(struct drm_device *dev,
+ 	if (ret)
+ 		return ret;
+ 
+-	args.sched = &cli->sched;
++	args.sched = cli->sched;
+ 	args.file_priv = file_priv;
+ 
+ 	ret = nouveau_uvmm_vm_bind(&args);
+
+base-commit: 041261ac4c365e03b07427569d6735f8adfd21c8
+-- 
+2.43.0
+
