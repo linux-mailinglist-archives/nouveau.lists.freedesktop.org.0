@@ -2,72 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F42784B750
-	for <lists+nouveau@lfdr.de>; Tue,  6 Feb 2024 15:03:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FD8E84BFD9
+	for <lists+nouveau@lfdr.de>; Tue,  6 Feb 2024 23:13:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B8228112C1E;
-	Tue,  6 Feb 2024 14:03:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C15CF10E6FA;
+	Tue,  6 Feb 2024 22:13:48 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="S5yY7zuL";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Wge5kC78";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
- [209.85.221.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DDC02112C1F
- for <nouveau@lists.freedesktop.org>; Tue,  6 Feb 2024 14:03:09 +0000 (UTC)
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-33b182249a1so703234f8f.1
- for <nouveau@lists.freedesktop.org>; Tue, 06 Feb 2024 06:03:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google; t=1707228188; x=1707832988; darn=lists.freedesktop.org; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8ZY3ZSy4MqyrWF0Gi/O8EdtJLuEtpnz4rpqRHN33pQM=;
- b=S5yY7zuLOwNQHVgsHkesRhTVpmRxLRTEqn6VrzzqVTLaGpaql4pV+bQIN9zwLCPCp3
- qgQ1BUFWrm2P206ALv9rntXyRtceNYq0gU11UdcH7L/q1Pt0IZzni2HcZ8oM7CQwf1/w
- aPL0eK/rrbkoh8m7SPE9iskJ+z7ya8cnlVdR0=
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 96D0A10E6CD
+ for <nouveau@lists.freedesktop.org>; Tue,  6 Feb 2024 22:13:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1707257625;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=oV38p0ChUDVFsbxCUF3CmIWxJt8WWKYIrHTwY79TP1s=;
+ b=Wge5kC78CCezqXDmYv+KLn8r7kGo2xsEs5CQ2bzYC7pB/YiPl52WjQRP83HgU/CBhB3koh
+ kBpne4CAHsXGYCKDWbU08UhuEiJAw1AGNCclC/m8CAWCCw99XavMRXXjexJkzvIUAfFPgS
+ bCRbecOvQVEFNbht+/8lyuF3z78dvFM=
+Received: from mail-ot1-f72.google.com (mail-ot1-f72.google.com
+ [209.85.210.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-328-hufw8oLGP1e87ZKUhF7eug-1; Tue, 06 Feb 2024 17:13:44 -0500
+X-MC-Unique: hufw8oLGP1e87ZKUhF7eug-1
+Received: by mail-ot1-f72.google.com with SMTP id
+ 46e09a7af769-6e12d22c2e3so1251003a34.1
+ for <nouveau@lists.freedesktop.org>; Tue, 06 Feb 2024 14:13:44 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707228188; x=1707832988;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8ZY3ZSy4MqyrWF0Gi/O8EdtJLuEtpnz4rpqRHN33pQM=;
- b=dicP+4hw4y+5ZigyQtY2pOKFKNRcfafpoYsfkc7sJaEUlVyAWmB+rMw0qZY2CVmYTW
- hPCoklBnh38WrhASimDssNGIEekHBXFyL+6XodKCq2/C9uCtL0QrWOLooBGbMQ5hStEo
- 8kDhlc9bLonLoMxCD+CFD7oEkYbJsVh+lN254xASJO2uhAbub8pATACHEBv+mWuj7GWD
- YvQiW9Fa5BSiC1yPm5n5wF8qwfLefGmKTnYEV0k5K/aa4DNr4Tf3VUAdzvCinsTeRsG1
- lo8/CMckgBUTq6oGN1NprSRZpgx0x/lFCTZnIRLGYMCiAUCfWI7p1CRfHDgW+AxFBjtZ
- UZIQ==
-X-Gm-Message-State: AOJu0YxTH8MmzF3QqLwXyRQ8vBeQoE9J2BVTJXSKx9D6qtNmzIDXsMf6
- D2AEH/XbUMX1fCBtfZuE5hWTv+Nb4g21OXojBHPx3+FqTz80oN+m5sjb9Ni8YMI=
-X-Google-Smtp-Source: AGHT+IHg97DmEZfUt5yro36rUPzgT85vlHitOoX6kk2/ZXF2r5AcB0hK7+/bFdaZoamyoLkQOySFPA==
-X-Received: by 2002:a05:6000:100c:b0:33b:364c:e83d with SMTP id
- a12-20020a056000100c00b0033b364ce83dmr2060497wrx.1.1707228187938; 
- Tue, 06 Feb 2024 06:03:07 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707257623; x=1707862423;
+ h=mime-version:user-agent:content-transfer-encoding:organization:date
+ :to:from:subject:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=oV38p0ChUDVFsbxCUF3CmIWxJt8WWKYIrHTwY79TP1s=;
+ b=HdnTg/2C4MBMPRAqCrRho+2+pcdp+RABsHPyWWiVmyasqvPav8JuXp1yzXOqh0mSuz
+ ufZ9p6/Ir4zEHohRAviAw/YaW2KrzNXFAmcY4SOzQ9u1CfnHqwVubjLlYulD+8SQp6tp
+ Sz1Jld+1Ri5+j3/PBwiNmqZaOIKBjltDE//eBzkpukiZJQZP3mc9MH3mAh9EoUwX9fWd
+ yXCqmUginjGzw52JQ/KXlD87AMTeoHZ3MAtL3wDxDQxBYmj/rkq80HKz5bOzAM57TNz/
+ 64ziBSiGIULlROI8ieXCSFm/w5Ul8ugTo57sEswf6AP6U3d2GFv8rKSjO890FT3tzHN/
+ g10g==
+X-Gm-Message-State: AOJu0YxWee1a74QCtzi+ssndbKlPlA8156K6wEhCsb0WRwfdbbzBbA7L
+ FiiUaJz5ij5dZgmCT0FJYZzJgnsRgUMdKwuk+/NWG/8DDb/+ypavR23GxnxHDTvg92C7Whb6cht
+ +SKOEqLQH4GRPNuNGdU7kcVU6ifKT76sCPN4VYNpG3xJbEXuRqHbYxq6nQQmwVwGHWUyAjzI=
+X-Received: by 2002:a05:6830:1395:b0:6dc:3dad:a540 with SMTP id
+ d21-20020a056830139500b006dc3dada540mr4223793otq.36.1707257623248; 
+ Tue, 06 Feb 2024 14:13:43 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGUqH7ndIvYHGVn8LPUcMZX5DarQZKP9KJ6Tf9U6BoXFRFM4jZeRSt2Jx4weAJpnpJS9i17rg==
+X-Received: by 2002:a05:6830:1395:b0:6dc:3dad:a540 with SMTP id
+ d21-20020a056830139500b006dc3dada540mr4223780otq.36.1707257622909; 
+ Tue, 06 Feb 2024 14:13:42 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCW1PdNA6fWUxsT1WcOtlPlmhKukj+wn7i8kA0huUecBZHIttCfVUorZtW+Vpt1uR4VL3XchjMBaRYX/zLSHaMX6iu9K5ZtcpRjITnl9NEaU+rwQMiQjGDi1T7HKfROABT+cd4eqSfo2YDkTDFFqMA==
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ AJvYcCVhux5Q1H8vnJKUYkTsUJD1bjl2TlPdmo6yYn9wd1MmTJ4Gtvi22bGl5Y4ujVvZSBLrXaDSzP4eMUaVzCYsOwk/8U7tDYFbVBbBw7BWwg==
+Received: from ?IPv6:2600:4040:5c6c:a300::feb? ([2600:4040:5c6c:a300::feb])
  by smtp.gmail.com with ESMTPSA id
- u8-20020a5d5148000000b0033b28a784dcsm2163863wrt.114.2024.02.06.06.03.07
+ g24-20020ac84b78000000b0042a25f3950esm1288220qts.75.2024.02.06.14.13.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Feb 2024 06:03:07 -0800 (PST)
-Date: Tue, 6 Feb 2024 15:03:05 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Danilo Krummrich <dakr@redhat.com>
-Cc: Dave Airlie <airlied@gmail.com>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
-Subject: Re: [PATCH] nouveau: offload fence uevents work to workqueue
-Message-ID: <ZcI8GScBEJ0SsuA5@phenom.ffwll.local>
-References: <20240129015053.1687418-1-airlied@gmail.com>
- <133266ac-7239-4233-a19d-cdc7563d401c@redhat.com>
- <CAPM=9tyc3zWRhm4xSnnHprU-v7prdZ2fkkLDEfjC_t_2wM-8Kg@mail.gmail.com>
- <3d967763-8f8f-4451-9927-33395e1b4d70@redhat.com>
+ Tue, 06 Feb 2024 14:13:42 -0800 (PST)
+Message-ID: <3ed356488c9b0ca93845501425d427309f4cf616.camel@redhat.com>
+Subject: Future of nouveau/nova's display driver, and rvkms introduction!
+From: Lyude Paul <lyude@redhat.com>
+To: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Date: Tue, 06 Feb 2024 17:13:41 -0500
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.48.4 (3.48.4-1.fc38)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <3d967763-8f8f-4451-9927-33395e1b4d70@redhat.com>
-X-Operating-System: Linux phenom 6.6.11-amd64 
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,61 +88,83 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Feb 05, 2024 at 11:00:04PM +0100, Danilo Krummrich wrote:
-> On 2/5/24 22:08, Dave Airlie wrote:
-> > On Tue, 6 Feb 2024 at 02:22, Danilo Krummrich <dakr@redhat.com> wrote:
-> > > 
-> > > On 1/29/24 02:50, Dave Airlie wrote:
-> > > > From: Dave Airlie <airlied@redhat.com>
-> > > > 
-> > > > This should break the deadlock between the fctx lock and the irq lock.
-> > > > 
-> > > > This offloads the processing off the work from the irq into a workqueue.
-> > > > 
-> > > > Signed-off-by: Dave Airlie <airlied@redhat.com>
-> > > 
-> > > Nouveau's scheduler uses a dedicated wq, hence from this perspective it's
-> > > safe deferring fence signalling to the kernel global wq. However, I wonder
-> > > if we could create deadlocks by building dependency chains into other
-> > > drivers / kernel code that, by chance, makes use of the kernel global wq as
-> > > well.
-> > > 
-> > > Admittedly, even if, it's gonna be extremely unlikely given that
-> > > WQ_MAX_ACTIVE == 512. But maybe it'd be safer to use a dedicated wq.
-> > > 
-> > > Also, do we need to CC stable?
-> > 
-> > I pushed this to Linus at the end of last week, since the hangs in 6.7
-> > take out the complete system and I wanted it in stable.
-> > 
-> > It might be safer to use a dedicated wq, is the concern someone is
-> > waiting on a fence in a workqueue somewhere else so we will never
-> > signal it?
-> 
-> Yes, if some other work is waiting for this fence (or something else in the same
-> dependency chain) to signal it can prevent executing the work signaling this fence,
-> in case both are scheduled on the same wq. As mentioned, with the kernel global wq
-> this would be rather unlikely to lead to an actual stall with WQ_MAX_ACTIVE == 512,
-> but formally the race condition exists. I guess a malicious attacker could try to
-> intentionally push jobs directly or indirectly depending on this fence to a driver
-> which queues them up on a scheduler using the kernel global wq.
+Hi everyone! As I'm sure a number of you are aware, since Nvidia's release =
+of
+the GSP firmware a lot of things have changed for nouveau. In particular, t=
+he
+interfaces which we use for controlling the hardware from nouveau have chan=
+ged
+pretty dramatically in many areas as a result of going through the GSP inst=
+ead
+of directly interfacing with various hardware registers. Enough so that at
+least outside of modesetting, there isn't much potential for codesharing
+between non-GSP devices and GSP devices.
 
-I think if you add dma_fence_signalling annotations (aside, there's some
-patch from iirc Thomas Hellstrom to improve them and cut down on some
-false positives, but I lost track) then I think you won't get any splats
-because the wq subsystem assumes that WC_MAX_ACTIVE is close enough to
-infinity to not matter.
+As such a few folks at Red Hat, myself included, have been working on writi=
+ng
+up a new kernel driver intended solely for GSP devices known as nova:
 
-I'm not sure we should care differently, but I guess it'd be good to
-annotate it all in case the wq subsystem's idea of how much such deadlocks
-are real changes.
+https://gitlab.freedesktop.org/dakr/nova
 
-Also Teo is on a mission to get rid of all the global wq flushes, so there
-should also be no source of deadlocks from that kind of cross-driver
-dependency. Or at least shouldn't be in the future, I'm not sure it all
-landed.
--Sima
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+As well, nova is a rust based driver - something we're hoping will become m=
+uch
+more common in the kernel as a result of this project (and the efforts of
+other projects like Asahi!).
+
+Of course, you'll notice I mentioned earlier that most of the GSP changes h=
+ave
+been outside of the area of modesetting. This is to say that while modesett=
+ing
+with nvidia hardware hasn't remained totally the same, it's mostly the same=
+:
+we've only had a small number of modesetting interfaces moved into the GSP,
+and the evo/nvdisplay architecture remains largely identical to what it loo=
+ked
+like pre-GSP. This of course led us to the question of whether we should tr=
+y
+sharing a modesetting driver with nouveau, or if the effort of having a C
+based modesetting driver alongside a rust counterpart would be too much wor=
+k.
+
+Eventually, while it would have been nice to have done code sharing here - =
+we
+ended up deciding that it probably would be more work then it's worth, and
+that it wouldn't be a bad idea for us also to write up a new modesetting
+driver for nova in rust so that we don't have to maintain a Rust <-> C laye=
+r
+within nova. It's going to be a while before writing this driver starts
+though, since there's not much we can do without having nova a bit further
+ahead in the driver bringup-process. So=E2=80=A6
+
+For the time being, to figure out a set of rust bindings for KMS drivers in
+the kernel I've been working on a small project called rvkms!
+
+https://gitlab.freedesktop.org/lyudess/linux/-/commits/rvkms
+
+The basic idea is to figure out as much of the KMS bindings as we can befor=
+e
+we're at a point where it's possible to start writing up a modesetting driv=
+er
+for nova. RVKMS as you may have guessed, is intended to be a port of VKMS t=
+o
+rust. We choose VKMS since it's got a very small codebase, and only really
+implements the minimum requirements for an atomic KMS driver. Currently I'm
+not planning on upstreaming rvkms itself, however if there's actually enoug=
+h
+interest in such a driver being upstreamed I certainly wouldn't be against =
+it
+:).
+
+At the moment I don't have much more then a basic skeleton driver that's ba=
+sed
+off the nova development branch (currently the 6.6 branch, but I'm currentl=
+y
+rebasing it to the latest 6.7 branch), but I hope to have more in the near
+future as I'm currently working on writing up KMS bindings.
+
+If anyone has any questions or comments feel free to reply :)!
+--=20
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
+
