@@ -2,76 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 381E184B5AB
-	for <lists+nouveau@lfdr.de>; Tue,  6 Feb 2024 13:56:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F42784B750
+	for <lists+nouveau@lfdr.de>; Tue,  6 Feb 2024 15:03:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8CDE3112B9F;
-	Tue,  6 Feb 2024 12:56:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B8228112C1E;
+	Tue,  6 Feb 2024 14:03:10 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lL6onsG9";
+	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="S5yY7zuL";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
- [209.85.128.54])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A8448112B9C;
- Tue,  6 Feb 2024 12:56:31 +0000 (UTC)
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-40fe33fb7a1so4201805e9.2; 
- Tue, 06 Feb 2024 04:56:31 -0800 (PST)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+ [209.85.221.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DDC02112C1F
+ for <nouveau@lists.freedesktop.org>; Tue,  6 Feb 2024 14:03:09 +0000 (UTC)
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-33b182249a1so703234f8f.1
+ for <nouveau@lists.freedesktop.org>; Tue, 06 Feb 2024 06:03:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707224190; x=1707828990; darn=lists.freedesktop.org;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=cDlMUc3yO61JWG8E+u3k9CVmDsnEHJ0G60P9CRMkirQ=;
- b=lL6onsG9OlzWPX/B9/dgpl7MafwwJXAwGiF7nw8fdreKX5AmuaxFSeigqNQsD9XyvD
- i4GS1h4CrTMXldpRt/dGEBbDhqP5xiSZX2vs8WJlV3+lplt37c4HapsoUMLnpM1qJL3q
- NHX21mUPmTUVqzuQmbkh8hPhFtOKgBR5VzAyje02L4+vdKflHEl2iNwLCh78PlWZLTXG
- JHq21oO+cumahyLZ/pato8l2/yVdvbuoo1xe6ics+UwfIkpQKY7RaFzwr8FGT25OinDI
- nnhyGGbTGi7vHd17QPs4QuCvLgtySypu9/+dZHvOapjCkxdiMtWS/MNA7tGL1NLIdGwO
- j0AA==
+ d=ffwll.ch; s=google; t=1707228188; x=1707832988; darn=lists.freedesktop.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=8ZY3ZSy4MqyrWF0Gi/O8EdtJLuEtpnz4rpqRHN33pQM=;
+ b=S5yY7zuLOwNQHVgsHkesRhTVpmRxLRTEqn6VrzzqVTLaGpaql4pV+bQIN9zwLCPCp3
+ qgQ1BUFWrm2P206ALv9rntXyRtceNYq0gU11UdcH7L/q1Pt0IZzni2HcZ8oM7CQwf1/w
+ aPL0eK/rrbkoh8m7SPE9iskJ+z7ya8cnlVdR0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707224190; x=1707828990;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cDlMUc3yO61JWG8E+u3k9CVmDsnEHJ0G60P9CRMkirQ=;
- b=q1RgYjNW5xg5BFqwOu9yyr9HrSiRp6L6pPcwCYDiHBvsLKQ1m9CF9tanY0erAj6G68
- 2nnAlY41lwtbv6Fl523cdTIJSkqt3Nq7s27Mme3fH5R9qOCMq8Et5k7GPKDVMuHusNgl
- uuLA5sdWiddpEPbbEfwL/AAG4jbKj5QBOGGFIKZXQIViKN67rnpIg/dT/J7pnVHObBUX
- xmScTu+L+3iAXfmJf1mLjjBWYYCGYA+G6q57UY5rtpjvLLZsLlrxx4w6nsggfHyPc1/Q
- Te1M44ndbhAzmA5+PvH31/b7e4vO+RsCZVSlzBNwtAx7s7d8ZirpXlzHJqO//d39gO8w
- 5S7g==
-X-Gm-Message-State: AOJu0Yw3xmSGc7GCCuyH9ApT5cdc9JioO3C9agbnLSBqLwUyLxzojkHf
- z3n0H+ssX53dgmcLnROVSdRUmaz9eeL62qEu3NL6bZlMG1cE8JRw
-X-Google-Smtp-Source: AGHT+IE0AOSaW6FlZMECei7Wv0fyypGHIgna7g11BuxYBqwOXtfaLuyBmYNM6lEjrGB+iIv3zXY44g==
-X-Received: by 2002:a05:600c:3d8e:b0:40f:e930:9eb8 with SMTP id
- bi14-20020a05600c3d8e00b0040fe9309eb8mr845981wmb.0.1707224189774; 
- Tue, 06 Feb 2024 04:56:29 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCW7ZPO55moCC1VzScOT1yZGFBQehBl/y1RCnuUQM2ruQLYySl0R42hGwTdNnyO6JVssyG627N5Dh/0j1T/LbcoFhgsYBo49Pgig8fI+fUdEP9w1OMRqLxP8/UE8nhtbZy/VENP3M1juv6JNFvuTSp4xiS/NijCKm2QIP68WXYvHmB8FLav4fM4bZoqDLK10TQ==
-Received: from [10.254.108.81] (munvpn.amd.com. [165.204.72.6])
+ d=1e100.net; s=20230601; t=1707228188; x=1707832988;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8ZY3ZSy4MqyrWF0Gi/O8EdtJLuEtpnz4rpqRHN33pQM=;
+ b=dicP+4hw4y+5ZigyQtY2pOKFKNRcfafpoYsfkc7sJaEUlVyAWmB+rMw0qZY2CVmYTW
+ hPCoklBnh38WrhASimDssNGIEekHBXFyL+6XodKCq2/C9uCtL0QrWOLooBGbMQ5hStEo
+ 8kDhlc9bLonLoMxCD+CFD7oEkYbJsVh+lN254xASJO2uhAbub8pATACHEBv+mWuj7GWD
+ YvQiW9Fa5BSiC1yPm5n5wF8qwfLefGmKTnYEV0k5K/aa4DNr4Tf3VUAdzvCinsTeRsG1
+ lo8/CMckgBUTq6oGN1NprSRZpgx0x/lFCTZnIRLGYMCiAUCfWI7p1CRfHDgW+AxFBjtZ
+ UZIQ==
+X-Gm-Message-State: AOJu0YxTH8MmzF3QqLwXyRQ8vBeQoE9J2BVTJXSKx9D6qtNmzIDXsMf6
+ D2AEH/XbUMX1fCBtfZuE5hWTv+Nb4g21OXojBHPx3+FqTz80oN+m5sjb9Ni8YMI=
+X-Google-Smtp-Source: AGHT+IHg97DmEZfUt5yro36rUPzgT85vlHitOoX6kk2/ZXF2r5AcB0hK7+/bFdaZoamyoLkQOySFPA==
+X-Received: by 2002:a05:6000:100c:b0:33b:364c:e83d with SMTP id
+ a12-20020a056000100c00b0033b364ce83dmr2060497wrx.1.1707228187938; 
+ Tue, 06 Feb 2024 06:03:07 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCW1PdNA6fWUxsT1WcOtlPlmhKukj+wn7i8kA0huUecBZHIttCfVUorZtW+Vpt1uR4VL3XchjMBaRYX/zLSHaMX6iu9K5ZtcpRjITnl9NEaU+rwQMiQjGDi1T7HKfROABT+cd4eqSfo2YDkTDFFqMA==
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
  by smtp.gmail.com with ESMTPSA id
- p7-20020a05600c358700b0040fe308ff25sm1908352wmq.24.2024.02.06.04.56.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Feb 2024 04:56:29 -0800 (PST)
-Message-ID: <e59e4c53-7c22-4162-9ef5-cb399383782e@gmail.com>
-Date: Tue, 6 Feb 2024 13:56:27 +0100
+ u8-20020a5d5148000000b0033b28a784dcsm2163863wrt.114.2024.02.06.06.03.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Feb 2024 06:03:07 -0800 (PST)
+Date: Tue, 6 Feb 2024 15:03:05 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Danilo Krummrich <dakr@redhat.com>
+Cc: Dave Airlie <airlied@gmail.com>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org
+Subject: Re: [PATCH] nouveau: offload fence uevents work to workqueue
+Message-ID: <ZcI8GScBEJ0SsuA5@phenom.ffwll.local>
+References: <20240129015053.1687418-1-airlied@gmail.com>
+ <133266ac-7239-4233-a19d-cdc7563d401c@redhat.com>
+ <CAPM=9tyc3zWRhm4xSnnHprU-v7prdZ2fkkLDEfjC_t_2wM-8Kg@mail.gmail.com>
+ <3d967763-8f8f-4451-9927-33395e1b4d70@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] drm/ttm: improve idle/busy handling v4
-Content-Language: en-US
-To: =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-References: <20240126140916.1577-1-christian.koenig@amd.com>
- <20240126140916.1577-2-christian.koenig@amd.com>
- <ce167d0a18781733eeb4974b92ff5038a5241a70.camel@linux.intel.com>
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <ce167d0a18781733eeb4974b92ff5038a5241a70.camel@linux.intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3d967763-8f8f-4451-9927-33395e1b4d70@redhat.com>
+X-Operating-System: Linux phenom 6.6.11-amd64 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,442 +82,61 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 06.02.24 um 13:53 schrieb Thomas Hellström:
-> Hi, Christian,
->
-> On Fri, 2024-01-26 at 15:09 +0100, Christian König wrote:
->> Previously we would never try to move a BO into the preferred
->> placements
->> when it ever landed in a busy placement since those were considered
->> compatible.
->>
->> Rework the whole handling and finally unify the idle and busy
->> handling.
->> ttm_bo_validate() is now responsible to try idle placement first and
->> then
->> use the busy placement if that didn't worked.
->>
->> Drawback is that we now always try the idle placement first for each
->> validation which might cause some additional CPU overhead on
->> overcommit.
->>
->> v2: fix kerneldoc warning and coding style
->> v3: take care of XE as well
->> v4: keep the ttm_bo_mem_space functionality as it is for now, only
->> add
->>      new handling for ttm_bo_validate as suggested by Thomas
->>
->> Signed-off-by: Christian König <christian.koenig@amd.com>
->> Reviewed-by: Zack Rusin <zack.rusin@broadcom.com> v3
-> Sending this through xe CI, will try to review asap.
+On Mon, Feb 05, 2024 at 11:00:04PM +0100, Danilo Krummrich wrote:
+> On 2/5/24 22:08, Dave Airlie wrote:
+> > On Tue, 6 Feb 2024 at 02:22, Danilo Krummrich <dakr@redhat.com> wrote:
+> > > 
+> > > On 1/29/24 02:50, Dave Airlie wrote:
+> > > > From: Dave Airlie <airlied@redhat.com>
+> > > > 
+> > > > This should break the deadlock between the fctx lock and the irq lock.
+> > > > 
+> > > > This offloads the processing off the work from the irq into a workqueue.
+> > > > 
+> > > > Signed-off-by: Dave Airlie <airlied@redhat.com>
+> > > 
+> > > Nouveau's scheduler uses a dedicated wq, hence from this perspective it's
+> > > safe deferring fence signalling to the kernel global wq. However, I wonder
+> > > if we could create deadlocks by building dependency chains into other
+> > > drivers / kernel code that, by chance, makes use of the kernel global wq as
+> > > well.
+> > > 
+> > > Admittedly, even if, it's gonna be extremely unlikely given that
+> > > WQ_MAX_ACTIVE == 512. But maybe it'd be safer to use a dedicated wq.
+> > > 
+> > > Also, do we need to CC stable?
+> > 
+> > I pushed this to Linus at the end of last week, since the hangs in 6.7
+> > take out the complete system and I wanted it in stable.
+> > 
+> > It might be safer to use a dedicated wq, is the concern someone is
+> > waiting on a fence in a workqueue somewhere else so we will never
+> > signal it?
+> 
+> Yes, if some other work is waiting for this fence (or something else in the same
+> dependency chain) to signal it can prevent executing the work signaling this fence,
+> in case both are scheduled on the same wq. As mentioned, with the kernel global wq
+> this would be rather unlikely to lead to an actual stall with WQ_MAX_ACTIVE == 512,
+> but formally the race condition exists. I guess a malicious attacker could try to
+> intentionally push jobs directly or indirectly depending on this fence to a driver
+> which queues them up on a scheduler using the kernel global wq.
 
-Take your time. At the moment people are bombarding me with work and I 
-have only two hands and one head as well :(
+I think if you add dma_fence_signalling annotations (aside, there's some
+patch from iirc Thomas Hellstrom to improve them and cut down on some
+false positives, but I lost track) then I think you won't get any splats
+because the wq subsystem assumes that WC_MAX_ACTIVE is close enough to
+infinity to not matter.
 
-Christian.
+I'm not sure we should care differently, but I guess it'd be good to
+annotate it all in case the wq subsystem's idea of how much such deadlocks
+are real changes.
 
->
-> /Thomas
->
->
->> ---
->>   drivers/gpu/drm/ttm/ttm_bo.c       | 231 +++++++++++++--------------
->> --
->>   drivers/gpu/drm/ttm/ttm_resource.c |  16 +-
->>   include/drm/ttm/ttm_resource.h     |   3 +-
->>   3 files changed, 121 insertions(+), 129 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/ttm/ttm_bo.c
->> b/drivers/gpu/drm/ttm/ttm_bo.c
->> index ba3f09e2d7e6..b12f435542a9 100644
->> --- a/drivers/gpu/drm/ttm/ttm_bo.c
->> +++ b/drivers/gpu/drm/ttm/ttm_bo.c
->> @@ -724,64 +724,36 @@ static int ttm_bo_add_move_fence(struct
->> ttm_buffer_object *bo,
->>   	return ret;
->>   }
->>   
->> -/*
->> - * Repeatedly evict memory from the LRU for @mem_type until we
->> create enough
->> - * space, or we've evicted everything and there isn't enough space.
->> - */
->> -static int ttm_bo_mem_force_space(struct ttm_buffer_object *bo,
->> -				  const struct ttm_place *place,
->> -				  struct ttm_resource **mem,
->> -				  struct ttm_operation_ctx *ctx)
->> -{
->> -	struct ttm_device *bdev = bo->bdev;
->> -	struct ttm_resource_manager *man;
->> -	struct ww_acquire_ctx *ticket;
->> -	int ret;
->> -
->> -	man = ttm_manager_type(bdev, place->mem_type);
->> -	ticket = dma_resv_locking_ctx(bo->base.resv);
->> -	do {
->> -		ret = ttm_resource_alloc(bo, place, mem);
->> -		if (likely(!ret))
->> -			break;
->> -		if (unlikely(ret != -ENOSPC))
->> -			return ret;
->> -		ret = ttm_mem_evict_first(bdev, man, place, ctx,
->> -					  ticket);
->> -		if (unlikely(ret != 0))
->> -			return ret;
->> -	} while (1);
->> -
->> -	return ttm_bo_add_move_fence(bo, man, *mem, ctx-
->>> no_wait_gpu);
->> -}
->> -
->>   /**
->> - * ttm_bo_mem_space
->> + * ttm_bo_alloc_resource - Allocate backing store for a BO
->>    *
->> - * @bo: Pointer to a struct ttm_buffer_object. the data of which
->> - * we want to allocate space for.
->> - * @placement: Proposed new placement for the buffer object.
->> - * @mem: A struct ttm_resource.
->> + * @bo: Pointer to a struct ttm_buffer_object of which we want a
->> resource for
->> + * @placement: Proposed new placement for the buffer object
->>    * @ctx: if and how to sleep, lock buffers and alloc memory
->> + * @force_space: If we should evict buffers to force space
->> + * @res: The resulting struct ttm_resource.
->>    *
->> - * Allocate memory space for the buffer object pointed to by @bo,
->> using
->> - * the placement flags in @placement, potentially evicting other
->> idle buffer objects.
->> - * This function may sleep while waiting for space to become
->> available.
->> + * Allocates a resource for the buffer object pointed to by @bo,
->> using the
->> + * placement flags in @placement, potentially evicting other buffer
->> objects when
->> + * @force_space is true.
->> + * This function may sleep while waiting for resources to become
->> available.
->>    * Returns:
->> - * -EBUSY: No space available (only if no_wait == 1).
->> + * -EBUSY: No space available (only if no_wait == true).
->>    * -ENOSPC: Could not allocate space for the buffer object, either
->> due to
->>    * fragmentation or concurrent allocators.
->>    * -ERESTARTSYS: An interruptible sleep was interrupted by a signal.
->>    */
->> -int ttm_bo_mem_space(struct ttm_buffer_object *bo,
->> -			struct ttm_placement *placement,
->> -			struct ttm_resource **mem,
->> -			struct ttm_operation_ctx *ctx)
->> +static int ttm_bo_alloc_resource(struct ttm_buffer_object *bo,
->> +				 struct ttm_placement *placement,
->> +				 struct ttm_operation_ctx *ctx,
->> +				 bool force_space,
->> +				 struct ttm_resource **res)
->>   {
->>   	struct ttm_device *bdev = bo->bdev;
->> -	bool type_found = false;
->> +	struct ww_acquire_ctx *ticket;
->>   	int i, ret;
->>   
->> +	ticket = dma_resv_locking_ctx(bo->base.resv);
->>   	ret = dma_resv_reserve_fences(bo->base.resv, 1);
->>   	if (unlikely(ret))
->>   		return ret;
->> @@ -790,98 +762,73 @@ int ttm_bo_mem_space(struct ttm_buffer_object
->> *bo,
->>   		const struct ttm_place *place = &placement-
->>> placement[i];
->>   		struct ttm_resource_manager *man;
->>   
->> -		if (place->flags & TTM_PL_FLAG_FALLBACK)
->> -			continue;
->> -
->>   		man = ttm_manager_type(bdev, place->mem_type);
->>   		if (!man || !ttm_resource_manager_used(man))
->>   			continue;
->>   
->> -		type_found = true;
->> -		ret = ttm_resource_alloc(bo, place, mem);
->> -		if (ret == -ENOSPC)
->> +		if (place->flags & (force_space ?
->> TTM_PL_FLAG_DESIRED :
->> +				    TTM_PL_FLAG_FALLBACK))
->> +			continue;
->> +
->> +		do {
->> +			ret = ttm_resource_alloc(bo, place, res);
->> +			if (unlikely(ret != -ENOSPC))
->> +				return ret;
->> +			if (likely(!ret) || !force_space)
->> +				break;
->> +
->> +			ret = ttm_mem_evict_first(bdev, man, place,
->> ctx,
->> +						  ticket);
->> +			if (unlikely(ret == -EBUSY))
->> +				break;
->> +			if (unlikely(ret))
->> +				return ret;
->> +		} while (1);
->> +		if (ret)
->>   			continue;
->> -		if (unlikely(ret))
->> -			goto error;
->>   
->> -		ret = ttm_bo_add_move_fence(bo, man, *mem, ctx-
->>> no_wait_gpu);
->> +		ret = ttm_bo_add_move_fence(bo, man, *res, ctx-
->>> no_wait_gpu);
->>   		if (unlikely(ret)) {
->> -			ttm_resource_free(bo, mem);
->> +			ttm_resource_free(bo, res);
->>   			if (ret == -EBUSY)
->>   				continue;
->>   
->> -			goto error;
->> +			return ret;
->>   		}
->>   		return 0;
->>   	}
->>   
->> -	for (i = 0; i < placement->num_placement; ++i) {
->> -		const struct ttm_place *place = &placement-
->>> placement[i];
->> -		struct ttm_resource_manager *man;
->> -
->> -		if (place->flags & TTM_PL_FLAG_DESIRED)
->> -			continue;
->> -
->> -		man = ttm_manager_type(bdev, place->mem_type);
->> -		if (!man || !ttm_resource_manager_used(man))
->> -			continue;
->> -
->> -		type_found = true;
->> -		ret = ttm_bo_mem_force_space(bo, place, mem, ctx);
->> -		if (likely(!ret))
->> -			return 0;
->> -
->> -		if (ret && ret != -EBUSY)
->> -			goto error;
->> -	}
->> -
->> -	ret = -ENOSPC;
->> -	if (!type_found) {
->> -		pr_err(TTM_PFX "No compatible memory type found\n");
->> -		ret = -EINVAL;
->> -	}
->> -
->> -error:
->> -	return ret;
->> +	return -ENOSPC;
->>   }
->> -EXPORT_SYMBOL(ttm_bo_mem_space);
->>   
->> -static int ttm_bo_move_buffer(struct ttm_buffer_object *bo,
->> -			      struct ttm_placement *placement,
->> -			      struct ttm_operation_ctx *ctx)
->> +/*
->> + * ttm_bo_mem_space - Wrapper around ttm_bo_alloc_resource
->> + *
->> + * @bo: Pointer to a struct ttm_buffer_object of which we want a
->> resource for
->> + * @placement: Proposed new placement for the buffer object
->> + * @res: The resulting struct ttm_resource.
->> + * @ctx: if and how to sleep, lock buffers and alloc memory
->> + *
->> + * Tries both idle allocation and forcefully eviction of buffers.
->> See
->> + * ttm_bo_alloc_resource for details.
->> + */
->> +int ttm_bo_mem_space(struct ttm_buffer_object *bo,
->> +		     struct ttm_placement *placement,
->> +		     struct ttm_resource **res,
->> +		     struct ttm_operation_ctx *ctx)
->>   {
->> -	struct ttm_resource *mem;
->> -	struct ttm_place hop;
->> +	bool force_space = false;
->>   	int ret;
->>   
->> -	dma_resv_assert_held(bo->base.resv);
->> +	do {
->> +		ret = ttm_bo_alloc_resource(bo, placement, ctx,
->> +					    force_space, res);
->> +		force_space = !force_space;
->> +	} while (ret == -ENOSPC && force_space);
->>   
->> -	/*
->> -	 * Determine where to move the buffer.
->> -	 *
->> -	 * If driver determines move is going to need
->> -	 * an extra step then it will return -EMULTIHOP
->> -	 * and the buffer will be moved to the temporary
->> -	 * stop and the driver will be called to make
->> -	 * the second hop.
->> -	 */
->> -	ret = ttm_bo_mem_space(bo, placement, &mem, ctx);
->> -	if (ret)
->> -		return ret;
->> -bounce:
->> -	ret = ttm_bo_handle_move_mem(bo, mem, false, ctx, &hop);
->> -	if (ret == -EMULTIHOP) {
->> -		ret = ttm_bo_bounce_temp_buffer(bo, &mem, ctx,
->> &hop);
->> -		if (ret)
->> -			goto out;
->> -		/* try and move to final place now. */
->> -		goto bounce;
->> -	}
->> -out:
->> -	if (ret)
->> -		ttm_resource_free(bo, &mem);
->>   	return ret;
->>   }
->> +EXPORT_SYMBOL(ttm_bo_mem_space);
->>   
->>   /**
->>    * ttm_bo_validate
->> @@ -902,6 +849,9 @@ int ttm_bo_validate(struct ttm_buffer_object *bo,
->>   		    struct ttm_placement *placement,
->>   		    struct ttm_operation_ctx *ctx)
->>   {
->> +	struct ttm_resource *res;
->> +	struct ttm_place hop;
->> +	bool force_space;
->>   	int ret;
->>   
->>   	dma_resv_assert_held(bo->base.resv);
->> @@ -912,20 +862,53 @@ int ttm_bo_validate(struct ttm_buffer_object
->> *bo,
->>   	if (!placement->num_placement)
->>   		return ttm_bo_pipeline_gutting(bo);
->>   
->> -	/* Check whether we need to move buffer. */
->> -	if (bo->resource && ttm_resource_compatible(bo->resource,
->> placement))
->> -		return 0;
->> +	force_space = false;
->> +	do {
->> +		/* Check whether we need to move buffer. */
->> +		if (bo->resource &&
->> +		    ttm_resource_compatible(bo->resource, placement,
->> +					    force_space))
->> +			return 0;
->>   
->> -	/* Moving of pinned BOs is forbidden */
->> -	if (bo->pin_count)
->> -		return -EINVAL;
->> +		/* Moving of pinned BOs is forbidden */
->> +		if (bo->pin_count)
->> +			return -EINVAL;
->> +
->> +		/*
->> +		 * Determine where to move the buffer.
->> +		 *
->> +		 * If driver determines move is going to need
->> +		 * an extra step then it will return -EMULTIHOP
->> +		 * and the buffer will be moved to the temporary
->> +		 * stop and the driver will be called to make
->> +		 * the second hop.
->> +		 */
->> +		ret = ttm_bo_alloc_resource(bo, placement, ctx,
->> force_space,
->> +					    &res);
->> +		force_space = !force_space;
->> +		if (ret == -ENOSPC)
->> +			continue;
->> +		if (ret)
->> +			return ret;
->> +
->> +bounce:
->> +		ret = ttm_bo_handle_move_mem(bo, res, false, ctx,
->> &hop);
->> +		if (ret == -EMULTIHOP) {
->> +			ret = ttm_bo_bounce_temp_buffer(bo, &res,
->> ctx, &hop);
->> +			/* try and move to final place now. */
->> +			if (!ret)
->> +				goto bounce;
->> +		}
->> +		if (ret) {
->> +			ttm_resource_free(bo, &res);
->> +			return ret;
->> +		}
->> +
->> +	} while (ret && force_space);
->>   
->> -	ret = ttm_bo_move_buffer(bo, placement, ctx);
->>   	/* For backward compatibility with userspace */
->>   	if (ret == -ENOSPC)
->>   		return -ENOMEM;
->> -	if (ret)
->> -		return ret;
->>   
->>   	/*
->>   	 * We might need to add a TTM.
->> diff --git a/drivers/gpu/drm/ttm/ttm_resource.c
->> b/drivers/gpu/drm/ttm/ttm_resource.c
->> index fb14f7716cf8..65155f2013ca 100644
->> --- a/drivers/gpu/drm/ttm/ttm_resource.c
->> +++ b/drivers/gpu/drm/ttm/ttm_resource.c
->> @@ -295,11 +295,13 @@ bool ttm_resource_intersects(struct ttm_device
->> *bdev,
->>    *
->>    * @res: the resource to check
->>    * @placement: the placement to check against
->> + * @evicting: true if the caller is doing evictions
->>    *
->>    * Returns true if the placement is compatible.
->>    */
->>   bool ttm_resource_compatible(struct ttm_resource *res,
->> -			     struct ttm_placement *placement)
->> +			     struct ttm_placement *placement,
->> +			     bool evicting)
->>   {
->>   	struct ttm_buffer_object *bo = res->bo;
->>   	struct ttm_device *bdev = bo->bdev;
->> @@ -315,14 +317,20 @@ bool ttm_resource_compatible(struct
->> ttm_resource *res,
->>   		if (res->mem_type != place->mem_type)
->>   			continue;
->>   
->> +		if (place->flags & (evicting ? TTM_PL_FLAG_DESIRED :
->> +				    TTM_PL_FLAG_FALLBACK))
->> +			continue;
->> +
->> +		if (place->flags & TTM_PL_FLAG_CONTIGUOUS &&
->> +		    !(res->placement & TTM_PL_FLAG_CONTIGUOUS))
->> +			continue;
->> +
->>   		man = ttm_manager_type(bdev, res->mem_type);
->>   		if (man->func->compatible &&
->>   		    !man->func->compatible(man, res, place, bo-
->>> base.size))
->>   			continue;
->>   
->> -		if ((!(place->flags & TTM_PL_FLAG_CONTIGUOUS) ||
->> -		     (res->placement & TTM_PL_FLAG_CONTIGUOUS)))
->> -			return true;
->> +		return true;
->>   	}
->>   	return false;
->>   }
->> diff --git a/include/drm/ttm/ttm_resource.h
->> b/include/drm/ttm/ttm_resource.h
->> index 1afa13f0c22b..7561023db43d 100644
->> --- a/include/drm/ttm/ttm_resource.h
->> +++ b/include/drm/ttm/ttm_resource.h
->> @@ -366,7 +366,8 @@ bool ttm_resource_intersects(struct ttm_device
->> *bdev,
->>   			     const struct ttm_place *place,
->>   			     size_t size);
->>   bool ttm_resource_compatible(struct ttm_resource *res,
->> -			     struct ttm_placement *placement);
->> +			     struct ttm_placement *placement,
->> +			     bool evicting);
->>   void ttm_resource_set_bo(struct ttm_resource *res,
->>   			 struct ttm_buffer_object *bo);
->>   
-
+Also Teo is on a mission to get rid of all the global wq flushes, so there
+should also be no source of deadlocks from that kind of cross-driver
+dependency. Or at least shouldn't be in the future, I'm not sure it all
+landed.
+-Sima
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
