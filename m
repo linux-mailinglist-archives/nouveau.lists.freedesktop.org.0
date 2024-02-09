@@ -2,54 +2,89 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC50584EFE2
-	for <lists+nouveau@lfdr.de>; Fri,  9 Feb 2024 06:24:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F13884FB2D
+	for <lists+nouveau@lfdr.de>; Fri,  9 Feb 2024 18:41:49 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 517E110F200;
-	Fri,  9 Feb 2024 05:24:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8E0B710EC52;
+	Fri,  9 Feb 2024 17:41:46 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="fMbaip6F";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="cq0iKiAR";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 32E6A10F1FF;
- Fri,  9 Feb 2024 05:24:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1707456271; x=1738992271;
- h=date:from:to:cc:subject:message-id;
- bh=c1/XL0fuCk61P+XaDFL5G1fGzCP0F8x1OPxDwThFcWI=;
- b=fMbaip6FnU9jgkyveOzE9zp6oTT2P4xEJ/JnRHCxhoMgvmeqDVYzTZ0b
- TYsy3LakS7XqoYDvJZdM2GGt+HbQ8LbMZmAN3tBr7JyRU80/HBKItLaFH
- zBrNrFKR1J/vvemUrwohS+1i7JAyzBJokZ302Z9TMHLeMoj4qqrlEgO5o
- lSXt5PB/G0l7vtwOwS8MsVPDnIZQseyyxljdLXBt/xE+ZUkAddnkG3+PC
- 6rBTYXsKzv+mNllXZxLJ7UivRpx/VcR7g4cVBSY5DTmtQlw+cSAtUC2Iv
- /PKKzk6TquN11LOTdedj121HB1suBUIM0lTtxxR/zOnXNLEifkQWthqhl g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10978"; a="18789100"
-X-IronPort-AV: E=Sophos;i="6.05,255,1701158400"; d="scan'208";a="18789100"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
- by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Feb 2024 21:24:16 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.05,255,1701158400"; 
-   d="scan'208";a="1845879"
-Received: from lkp-server01.sh.intel.com (HELO 01f0647817ea) ([10.239.97.150])
- by fmviesa009.fm.intel.com with ESMTP; 08 Feb 2024 21:24:14 -0800
-Received: from kbuild by 01f0647817ea with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1rYJMx-0004Pu-2K;
- Fri, 09 Feb 2024 05:24:11 +0000
-Date: Fri, 09 Feb 2024 13:23:54 +0800
-From: kernel test robot <lkp@intel.com>
-To: Andrew Morton <akpm@linux-foundation.org>
-Cc: Linux Memory Management List <linux-mm@kvack.org>,
- ceph-devel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-bcachefs@vger.kernel.org, linux-um@lists.infradead.org,
- nouveau@lists.freedesktop.org, ntfs3@lists.linux.dev
-Subject: [linux-next:master] BUILD REGRESSION
- b1d3a0e70c3881d2f8cf6692ccf7c2a4fb2d030d
-Message-ID: <202402091347.tL48EEe7-lkp@intel.com>
-User-Agent: s-nail v14.9.24
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D1A7910EC52
+ for <nouveau@lists.freedesktop.org>; Fri,  9 Feb 2024 17:41:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1707500503;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Q8cXBiboRfo0of98MkHU2Vfc0DFLaOgC0qAVl8Vrox4=;
+ b=cq0iKiARZ/bhwbmjXk6kVvCafTL9ZxaH2Rnh61YcjYQ5q/BWvMNs6HjhPqCaPhyAEiz6gz
+ 5sVKLF/Lm/TIqXgj2kf3gty9twgw3/mvBkrqg37ymnOTb5oCcPfrHvpoQJ4e2sjvxAZCd0
+ JmAlhOEnTFMWhZvC5xK2/Id/+YgWNdE=
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-194-10qfjpSGN0SkcPctFP5qfQ-1; Fri, 09 Feb 2024 12:41:37 -0500
+X-MC-Unique: 10qfjpSGN0SkcPctFP5qfQ-1
+Received: by mail-ej1-f69.google.com with SMTP id
+ a640c23a62f3a-a388c223625so64499066b.2
+ for <nouveau@lists.freedesktop.org>; Fri, 09 Feb 2024 09:41:37 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707500496; x=1708105296;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Q8cXBiboRfo0of98MkHU2Vfc0DFLaOgC0qAVl8Vrox4=;
+ b=h+9xtpDEdr0+K79MQGLGuSyQ0SHpgdEgiErI8b6ZAYXeNq2N4JvooiKiFAHDII0EbR
+ EycXDRLPrLahfztBlTHoZJ/XjzWObyRSm2M8vpVy8U7ieDSs1w/mj7WJCJ9KuUIVpnP/
+ 3ev+B7FQuxPnXOHoV1QC7tE87/cPifIlYZfO2Ex/6kEy22FKqeA6p6VitXY6sh6IEExZ
+ ji8H4TyInP7Sgq65eNN+Qu8R+9IXsUdYiiobcj8RMSAGOY9vBErOAAfIyEO30dsG5thI
+ Oq4l0F+3T85WgLFPsod/gQnLLBnEDFF01hI5Fyr+QS/YbrWZJGv9bkzjBOCVylfZ8fGi
+ Nzdw==
+X-Gm-Message-State: AOJu0YwQR8tl6zRBk5pPTWb6tRN/meghO9jlTITFPELWvcO06E/flVEm
+ FemCMH0hRPsZOJcEwBJEbah4G56ED2r0JZxjUpaibDsB861db/rAGxN5gJmM3s67Mk8nztkouBT
+ o/oTSli4B/WatG9/DIVUleCBi3i0jUsgmdv0kwuH88wXlzMMU1LMHze/8LxSpc7nD6XPyFZs=
+X-Received: by 2002:a17:906:4a59:b0:a3b:b021:57de with SMTP id
+ a25-20020a1709064a5900b00a3bb02157demr1622772ejv.1.1707500496144; 
+ Fri, 09 Feb 2024 09:41:36 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IE4BLqGxaw+J2KCDiFAKvA8Y2np5p5tVtIPTiuNc65jwhq42iS9D8ldpllWAeE6VMNQ5GCIeQ==
+X-Received: by 2002:a17:906:4a59:b0:a3b:b021:57de with SMTP id
+ a25-20020a1709064a5900b00a3bb02157demr1622762ejv.1.1707500495795; 
+ Fri, 09 Feb 2024 09:41:35 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWQPiLVfXpkISblVZchHlkpfuHTMzVz5Xsu9LLNgEGAJ0rfP8aJjcltB7QY0Ceflkk7aqoIkFhP8R0hEOlB8nt3KlvUgIZ4KvNFOpifEDIKVCC/phGWbXoPOmwrg+N4EWBiZw==
+Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
+ ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
+ by smtp.gmail.com with ESMTPSA id
+ r16-20020a1709062cd000b00a36c3e2e52dsm968511ejr.61.2024.02.09.09.41.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 09 Feb 2024 09:41:35 -0800 (PST)
+Message-ID: <a2174cc2-ea65-4bcf-a112-f60f26b7213c@redhat.com>
+Date: Fri, 9 Feb 2024 18:41:32 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] nouveau: offload fence uevents work to workqueue
+To: Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@gmail.com>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+References: <20240129015053.1687418-1-airlied@gmail.com>
+ <133266ac-7239-4233-a19d-cdc7563d401c@redhat.com>
+ <CAPM=9tyc3zWRhm4xSnnHprU-v7prdZ2fkkLDEfjC_t_2wM-8Kg@mail.gmail.com>
+ <3d967763-8f8f-4451-9927-33395e1b4d70@redhat.com>
+ <ZcI8GScBEJ0SsuA5@phenom.ffwll.local>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <ZcI8GScBEJ0SsuA5@phenom.ffwll.local>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,380 +99,72 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
-branch HEAD: b1d3a0e70c3881d2f8cf6692ccf7c2a4fb2d030d  Add linux-next specific files for 20240208
+On 2/6/24 15:03, Daniel Vetter wrote:
+> On Mon, Feb 05, 2024 at 11:00:04PM +0100, Danilo Krummrich wrote:
+>> On 2/5/24 22:08, Dave Airlie wrote:
+>>> On Tue, 6 Feb 2024 at 02:22, Danilo Krummrich <dakr@redhat.com> wrote:
+>>>>
+>>>> On 1/29/24 02:50, Dave Airlie wrote:
+>>>>> From: Dave Airlie <airlied@redhat.com>
+>>>>>
+>>>>> This should break the deadlock between the fctx lock and the irq lock.
+>>>>>
+>>>>> This offloads the processing off the work from the irq into a workqueue.
+>>>>>
+>>>>> Signed-off-by: Dave Airlie <airlied@redhat.com>
+>>>>
+>>>> Nouveau's scheduler uses a dedicated wq, hence from this perspective it's
+>>>> safe deferring fence signalling to the kernel global wq. However, I wonder
+>>>> if we could create deadlocks by building dependency chains into other
+>>>> drivers / kernel code that, by chance, makes use of the kernel global wq as
+>>>> well.
+>>>>
+>>>> Admittedly, even if, it's gonna be extremely unlikely given that
+>>>> WQ_MAX_ACTIVE == 512. But maybe it'd be safer to use a dedicated wq.
+>>>>
+>>>> Also, do we need to CC stable?
+>>>
+>>> I pushed this to Linus at the end of last week, since the hangs in 6.7
+>>> take out the complete system and I wanted it in stable.
+>>>
+>>> It might be safer to use a dedicated wq, is the concern someone is
+>>> waiting on a fence in a workqueue somewhere else so we will never
+>>> signal it?
+>>
+>> Yes, if some other work is waiting for this fence (or something else in the same
+>> dependency chain) to signal it can prevent executing the work signaling this fence,
+>> in case both are scheduled on the same wq. As mentioned, with the kernel global wq
+>> this would be rather unlikely to lead to an actual stall with WQ_MAX_ACTIVE == 512,
+>> but formally the race condition exists. I guess a malicious attacker could try to
+>> intentionally push jobs directly or indirectly depending on this fence to a driver
+>> which queues them up on a scheduler using the kernel global wq.
+> 
+> I think if you add dma_fence_signalling annotations (aside, there's some
+> patch from iirc Thomas Hellstrom to improve them and cut down on some
+> false positives, but I lost track) then I think you won't get any splats
+> because the wq subsystem assumes that WC_MAX_ACTIVE is close enough to
+> infinity to not matter.
 
-Error/Warning: (recently discovered and may have been fixed)
+As mentioned, for the kernel global wq it's 512. (Intentionally) feeding the kernel
+with enough jobs to to provoke a deadlock doesn't seem impossible to me.
 
-arch/sh/boot/compressed/../../../../lib/decompress_bunzip2.c:145:(.text+0x15c): undefined reference to `__ubsan_handle_shift_out_of_bounds'
-arch/x86/um/vdso/vdso.so.dbg: undefined symbols found
-make[2]: *** kselftest/livepatch/test_modules: No such file or directory.  Stop.
-sh4-linux-ld: arch/sh/boot/compressed/ashldi3.o:(.debug_addr+0x18): undefined reference to `__ubsan_handle_shift_out_of_bounds'
+I think it'd be safer to just establish not to use the kernel global wq for executing
+work in the fence signalling critical path.
 
-Unverified Error/Warning (likely false positive, please contact us if interested):
+We could also run into similar problems with a dedicated wq, e.g. when drivers share
+a wq between drm_gpu_scheduler instances (see [1]), however, I'm not sure we can catch
+that with lockdep.
 
-lib/test_ubsan.c:30:18: sparse: sparse: shift count is negative (-1)
-{standard input}:885: Warning: overflow in branch to .L102; converted into longer instruction sequence
+[1] https://elixir.bootlin.com/linux/v6.8-rc3/source/drivers/gpu/drm/nouveau/nouveau_drm.c#L313
 
-Error/Warning ids grouped by kconfigs:
+> 
+> I'm not sure we should care differently, but I guess it'd be good to
+> annotate it all in case the wq subsystem's idea of how much such deadlocks
+> are real changes.
+> 
+> Also Teo is on a mission to get rid of all the global wq flushes, so there
+> should also be no source of deadlocks from that kind of cross-driver
+> dependency. Or at least shouldn't be in the future, I'm not sure it all
+> landed.
+> -Sima
 
-gcc_recent_errors
-|-- alpha-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- arc-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- arc-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- arc-randconfig-001-20240208
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- arc-randconfig-002-20240208
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- arm-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- arm-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- arm-randconfig-002-20240208
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- arm-tegra_defconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- arm64-defconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- csky-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- csky-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- csky-randconfig-001-20240208
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- csky-randconfig-002-20240208
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- i386-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- i386-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- i386-buildonly-randconfig-001-20240208
-|   `-- fs-ceph-locks.c:warning:unused-variable-lock
-|-- i386-buildonly-randconfig-004-20240208
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- i386-randconfig-002-20240208
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- i386-randconfig-005-20240208
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- loongarch-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- loongarch-randconfig-001-20240208
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- loongarch-randconfig-002-20240208
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- loongarch-randconfig-r051-20240208
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- microblaze-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- microblaze-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- mips-allyesconfig
-|   |-- (.ref.text):relocation-truncated-to-fit:R_MIPS_26-against-start_secondary
-|   |-- (.text):relocation-truncated-to-fit:R_MIPS_26-against-kernel_entry
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- nios2-randconfig-002-20240208
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- openrisc-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- parisc-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- parisc-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- parisc-defconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- parisc-generic-64bit_defconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- parisc64-defconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- powerpc-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- powerpc-randconfig-002-20240208
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- powerpc-randconfig-003-20240208
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- powerpc64-randconfig-001-20240208
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- powerpc64-randconfig-002-20240208
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- powerpc64-randconfig-003-20240208
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- powerpc64-randconfig-r113-20240208
-|   `-- lib-test_ubsan.c:sparse:sparse:shift-count-is-negative
-|-- s390-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- sh-randconfig-c023-20220323
-|   `-- standard-input:Warning:overflow-in-branch-to-.L102-converted-into-longer-instruction-sequence
-|-- sh-randconfig-r022-20230624
-|   |-- arch-sh-boot-compressed-..-..-..-..-lib-decompress_bunzip2.c:(.text):undefined-reference-to-__ubsan_handle_shift_out_of_bounds
-|   `-- sh4-linux-ld:arch-sh-boot-compressed-ashldi3.o:(.debug_addr):undefined-reference-to-__ubsan_handle_shift_out_of_bounds
-|-- sparc-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- sparc-randconfig-001-20240208
-|   `-- (.head.text):relocation-truncated-to-fit:R_SPARC_WDISP22-against-init.text
-|-- sparc64-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- sparc64-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- um-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- um-randconfig-r024-20230824
-|   `-- arch-x86-um-vdso-vdso.so.dbg:undefined-symbols-found
-|-- x86_64-buildonly-randconfig-003-20240208
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- x86_64-randconfig-011-20240208
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- x86_64-randconfig-073-20240208
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- x86_64-randconfig-076-20240208
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- x86_64-randconfig-161-20240208
-|   |-- fs-bcachefs-btree_locking.c-bch2_trans_relock()-warn:passing-zero-to-PTR_ERR
-|   `-- fs-bcachefs-buckets.c-bch2_trans_account_disk_usage_change()-error:we-previously-assumed-trans-disk_res-could-be-null-(see-line-)
-`-- x86_64-rhel-8.3-bpf
-    `-- make:kselftest-livepatch-test_modules:No-such-file-or-directory.-Stop.
-clang_recent_errors
-|-- arm-defconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- arm-randconfig-004-20240208
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- arm64-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- arm64-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- arm64-randconfig-002-20240208
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- i386-randconfig-011-20240208
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- i386-randconfig-013-20240208
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- i386-randconfig-014-20240208
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- powerpc-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- powerpc-randconfig-001-20240208
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- powerpc64-randconfig-r052-20240208
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- riscv-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- riscv-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- riscv-defconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- s390-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- s390-randconfig-001-20240208
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- x86_64-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- x86_64-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- x86_64-buildonly-randconfig-001-20240208
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- x86_64-randconfig-014-20240208
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- x86_64-randconfig-016-20240208
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-`-- x86_64-randconfig-r063-20240208
-    `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-
-elapsed time: 1454m
-
-configs tested: 179
-configs skipped: 3
-
-tested configs:
-alpha                             allnoconfig   gcc  
-alpha                            allyesconfig   gcc  
-alpha                               defconfig   gcc  
-arc                              allmodconfig   gcc  
-arc                               allnoconfig   gcc  
-arc                              allyesconfig   gcc  
-arc                                 defconfig   gcc  
-arc                   randconfig-001-20240208   gcc  
-arc                   randconfig-002-20240208   gcc  
-arm                              allmodconfig   gcc  
-arm                               allnoconfig   clang
-arm                              allyesconfig   gcc  
-arm                                 defconfig   clang
-arm                         mv78xx0_defconfig   clang
-arm                         orion5x_defconfig   clang
-arm                   randconfig-001-20240208   gcc  
-arm                   randconfig-002-20240208   gcc  
-arm                   randconfig-003-20240208   gcc  
-arm                   randconfig-004-20240208   clang
-arm                           tegra_defconfig   gcc  
-arm64                            allmodconfig   clang
-arm64                             allnoconfig   gcc  
-arm64                               defconfig   gcc  
-arm64                 randconfig-001-20240208   clang
-arm64                 randconfig-002-20240208   clang
-arm64                 randconfig-003-20240208   clang
-arm64                 randconfig-004-20240208   gcc  
-csky                             allmodconfig   gcc  
-csky                              allnoconfig   gcc  
-csky                             allyesconfig   gcc  
-csky                                defconfig   gcc  
-csky                  randconfig-001-20240208   gcc  
-csky                  randconfig-002-20240208   gcc  
-hexagon                          allmodconfig   clang
-hexagon                           allnoconfig   clang
-hexagon                          allyesconfig   clang
-hexagon                             defconfig   clang
-hexagon               randconfig-001-20240208   clang
-hexagon               randconfig-002-20240208   clang
-i386                             allmodconfig   gcc  
-i386                              allnoconfig   gcc  
-i386                             allyesconfig   gcc  
-i386         buildonly-randconfig-001-20240208   gcc  
-i386         buildonly-randconfig-002-20240208   clang
-i386         buildonly-randconfig-003-20240208   gcc  
-i386         buildonly-randconfig-004-20240208   gcc  
-i386         buildonly-randconfig-005-20240208   gcc  
-i386         buildonly-randconfig-006-20240208   gcc  
-i386                                defconfig   clang
-i386                  randconfig-001-20240208   gcc  
-i386                  randconfig-002-20240208   gcc  
-i386                  randconfig-003-20240208   gcc  
-i386                  randconfig-004-20240208   clang
-i386                  randconfig-005-20240208   gcc  
-i386                  randconfig-006-20240208   gcc  
-i386                  randconfig-011-20240208   clang
-i386                  randconfig-012-20240208   clang
-i386                  randconfig-013-20240208   clang
-i386                  randconfig-014-20240208   clang
-i386                  randconfig-015-20240208   clang
-i386                  randconfig-016-20240208   gcc  
-loongarch                        allmodconfig   gcc  
-loongarch                         allnoconfig   gcc  
-loongarch                           defconfig   gcc  
-loongarch             randconfig-001-20240208   gcc  
-loongarch             randconfig-002-20240208   gcc  
-m68k                             allmodconfig   gcc  
-m68k                              allnoconfig   gcc  
-m68k                             allyesconfig   gcc  
-m68k                          amiga_defconfig   gcc  
-m68k                                defconfig   gcc  
-microblaze                       allmodconfig   gcc  
-microblaze                        allnoconfig   gcc  
-microblaze                       allyesconfig   gcc  
-microblaze                          defconfig   gcc  
-mips                              allnoconfig   gcc  
-mips                             allyesconfig   gcc  
-mips                          ath25_defconfig   clang
-mips                      pic32mzda_defconfig   gcc  
-nios2                            allmodconfig   gcc  
-nios2                             allnoconfig   gcc  
-nios2                            allyesconfig   gcc  
-nios2                               defconfig   gcc  
-nios2                 randconfig-001-20240208   gcc  
-nios2                 randconfig-002-20240208   gcc  
-openrisc                          allnoconfig   gcc  
-openrisc                         allyesconfig   gcc  
-openrisc                            defconfig   gcc  
-openrisc                    or1ksim_defconfig   gcc  
-parisc                           allmodconfig   gcc  
-parisc                            allnoconfig   gcc  
-parisc                           allyesconfig   gcc  
-parisc                              defconfig   gcc  
-parisc                generic-64bit_defconfig   gcc  
-parisc                randconfig-001-20240208   gcc  
-parisc                randconfig-002-20240208   gcc  
-parisc64                            defconfig   gcc  
-powerpc                          allmodconfig   gcc  
-powerpc                           allnoconfig   gcc  
-powerpc                          allyesconfig   clang
-powerpc                       eiger_defconfig   clang
-powerpc                 mpc8315_rdb_defconfig   clang
-powerpc                      pcm030_defconfig   clang
-powerpc               randconfig-001-20240208   clang
-powerpc               randconfig-002-20240208   gcc  
-powerpc               randconfig-003-20240208   gcc  
-powerpc                     tqm8560_defconfig   gcc  
-powerpc64                        alldefconfig   clang
-powerpc64             randconfig-001-20240208   gcc  
-powerpc64             randconfig-002-20240208   gcc  
-powerpc64             randconfig-003-20240208   gcc  
-riscv                            allmodconfig   clang
-riscv                             allnoconfig   gcc  
-riscv                            allyesconfig   clang
-riscv                               defconfig   clang
-riscv                 randconfig-001-20240208   gcc  
-riscv                 randconfig-002-20240208   clang
-s390                             allmodconfig   clang
-s390                              allnoconfig   clang
-s390                             allyesconfig   gcc  
-s390                                defconfig   clang
-s390                  randconfig-001-20240208   clang
-s390                  randconfig-002-20240208   gcc  
-sh                               allmodconfig   gcc  
-sh                                allnoconfig   gcc  
-sh                               allyesconfig   gcc  
-sh                                  defconfig   gcc  
-sh                        edosk7705_defconfig   gcc  
-sh                     magicpanelr2_defconfig   gcc  
-sh                    randconfig-001-20240208   gcc  
-sh                    randconfig-002-20240208   gcc  
-sparc                            allmodconfig   gcc  
-sparc                             allnoconfig   gcc  
-sparc                               defconfig   gcc  
-sparc64                          allmodconfig   gcc  
-sparc64                          allyesconfig   gcc  
-sparc64                             defconfig   gcc  
-sparc64               randconfig-001-20240208   gcc  
-sparc64               randconfig-002-20240208   gcc  
-um                               allmodconfig   clang
-um                                allnoconfig   clang
-um                               allyesconfig   gcc  
-um                                  defconfig   clang
-um                    randconfig-001-20240208   clang
-um                    randconfig-002-20240208   gcc  
-um                           x86_64_defconfig   clang
-x86_64                            allnoconfig   clang
-x86_64                           allyesconfig   clang
-x86_64       buildonly-randconfig-001-20240208   clang
-x86_64       buildonly-randconfig-002-20240208   clang
-x86_64       buildonly-randconfig-003-20240208   gcc  
-x86_64       buildonly-randconfig-004-20240208   clang
-x86_64       buildonly-randconfig-005-20240208   clang
-x86_64       buildonly-randconfig-006-20240208   clang
-x86_64                              defconfig   gcc  
-x86_64                randconfig-001-20240208   gcc  
-x86_64                randconfig-002-20240208   gcc  
-x86_64                randconfig-003-20240208   gcc  
-x86_64                randconfig-004-20240208   clang
-x86_64                randconfig-005-20240208   gcc  
-x86_64                randconfig-006-20240208   gcc  
-x86_64                randconfig-011-20240208   gcc  
-x86_64                randconfig-012-20240208   gcc  
-x86_64                randconfig-013-20240208   clang
-x86_64                randconfig-014-20240208   clang
-x86_64                randconfig-015-20240208   clang
-x86_64                randconfig-016-20240208   clang
-x86_64                randconfig-071-20240208   clang
-x86_64                randconfig-072-20240208   clang
-x86_64                randconfig-073-20240208   gcc  
-x86_64                randconfig-074-20240208   clang
-x86_64                randconfig-075-20240208   gcc  
-x86_64                randconfig-076-20240208   gcc  
-x86_64                          rhel-8.3-rust   clang
-xtensa                            allnoconfig   gcc  
-xtensa                       common_defconfig   gcc  
-xtensa                          iss_defconfig   gcc  
-xtensa                randconfig-001-20240208   gcc  
-xtensa                randconfig-002-20240208   gcc  
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
