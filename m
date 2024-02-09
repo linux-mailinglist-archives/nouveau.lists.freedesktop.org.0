@@ -2,74 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6AA884FC50
-	for <lists+nouveau@lfdr.de>; Fri,  9 Feb 2024 19:52:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71ACB84FCFF
+	for <lists+nouveau@lfdr.de>; Fri,  9 Feb 2024 20:39:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5C07510FA47;
-	Fri,  9 Feb 2024 18:52:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8377D10FB87;
+	Fri,  9 Feb 2024 19:39:32 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="Hd7FBvwr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FqRXyGE6";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com
- [209.85.167.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3A58210FA46
- for <nouveau@lists.freedesktop.org>; Fri,  9 Feb 2024 18:52:06 +0000 (UTC)
-Received: by mail-lf1-f44.google.com with SMTP id
- 2adb3069b0e04-51160d4ca59so155611e87.0
- for <nouveau@lists.freedesktop.org>; Fri, 09 Feb 2024 10:52:06 -0800 (PST)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com
+ [209.85.208.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B093E10FB7D;
+ Fri,  9 Feb 2024 19:39:25 +0000 (UTC)
+Received: by mail-ed1-f42.google.com with SMTP id
+ 4fb4d7f45d1cf-561606f21e9so18249a12.2; 
+ Fri, 09 Feb 2024 11:39:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google; t=1707504724; x=1708109524; darn=lists.freedesktop.org; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hVDL4Y4chRQ0ke/Q0YKtotMeeLMSO2VdgB7U7pXepJA=;
- b=Hd7FBvwryRsG//JVpu4VuEMDY9gwf33JctKQG9Az2UDzvo3QxBM8OIWYyXvaywAWjy
- /rOmyK8en18ogAUHtg2HaXzuTDeLK6Itk1GoB1nKvQO9BBoV8NUZzffm4CzpRCGnAn5p
- UUI8uuZpaTEZiRjQaoulz/Gy4hDmBf/N+9kQE=
+ d=gmail.com; s=20230601; t=1707507563; x=1708112363; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=kAL/NpE4O0N28eJZjVn0anRvoGT/wAMj1jeLhmNnWis=;
+ b=FqRXyGE6t1BSkmgeLT7F9eijgPreHsyJHHio9lLVeN4uGJCyAEdKEvt/ZFKAzUS9Pk
+ 3JmjWlkEf4OLviZH34Jk1s8qlVrAgTtIXA7Q/g+UAjrnM/gkmTu3Gej3aFWfa3sHFBU2
+ e4IpP3423p77IvyNBcmNwaaH309AREC/NgSdezywdZdL1tjQzkJvkg8kPEDKL6eExZgR
+ F+iJRBzsXFMKm7w9Jnqy9aSAy4RggGpxNvn7jwSg8klZgd+ZvIDxXL5Z6ypb5NHqljdr
+ hlwrI/CN9aXHA44RIw20xuOZqX9W556fhBdDoBjFxewU6jNCKIocXyVlD6UaGymMNmxJ
+ A9ZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707504724; x=1708109524;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hVDL4Y4chRQ0ke/Q0YKtotMeeLMSO2VdgB7U7pXepJA=;
- b=dLnyw/g2pSEXH6Zui5MqOE5AdB8/ALzxurdrEuWMCFeM37h2gxO/gVb0ZeEf2Uwn2w
- ayoZ2fAWik9rTbAlJSotzTUpUODXdJA+3ls+WZLMoQ7V0cw2NnkX2SEf8GDyQHxOvMmV
- Aa4N12CS/VKHXolst/x3KKNaPf+BZWjJEHvFkR+emvu9PiWlHb+GRx7Vy4da7cLY8h3K
- L7lZ+U6i6Lid5pvrgafCF251UasEZ36d1iN9A55YbtqDnzCFyxP+v8HZnFQXEcG9Kqmi
- QfZxREBib9rOWW1Dkaw108x2sse7zyzTbJqdrweOJDtKpwmLOXO1M8dL5XchU6Kt/oo5
- ys9g==
-X-Gm-Message-State: AOJu0Yw1GbE19RfTv148b9f68UAhTYgofzMHfOaNxmZFAZ/l1JdX9VwK
- W52WSzTlG7IDZOajB7ihuAThoCwusak0YUKaDX7BQ1prGaehR0YZmZerZOH3LKU=
-X-Google-Smtp-Source: AGHT+IHSThTUGnn3UqrOHE1PbDd138iJT6mX3YpuYGEImiPsRJ9yOxyChBx8y6f5ZCAwcc7zhyc12Q==
-X-Received: by 2002:a05:6512:3c81:b0:511:5778:c5d9 with SMTP id
- h1-20020a0565123c8100b005115778c5d9mr1793415lfv.3.1707504724081; 
- Fri, 09 Feb 2024 10:52:04 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707507563; x=1708112363;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kAL/NpE4O0N28eJZjVn0anRvoGT/wAMj1jeLhmNnWis=;
+ b=IZzsxNcBJdpIeHEGHXosWBj+SoW00Oq3TVXwVdDA4KUOd6zi6ZYoqqlm5ugR1ndMOW
+ j+yd91z5hBOYgkPqjhFUhSKXKnwXCpU+O5iNnnTyX1DWXOE3PqDo9IKm0ekaIHmABMMu
+ rVjGwY2ygfMV+zW6kVJn8mMpV4iO2TWY8mMoMhWa7gRwY1xiyCjj4HVN5l0mOXU+QAeQ
+ wKz2J6DaeesU0WKk9g3TJMczL1wdnX4d7LPBIJv18flEnLWUZZRk06hs/IMJi7p7gLsZ
+ v5Sq4yv6Co3gY2XBaN+4I9RNZUhDygqIgD+cPyzxqrP5NujBtIPTl1RSTHHnAEI7uii/
+ /WDw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVQqfgSNVFs8gOldqrMJ89N+y5frDxIeEyvT2W2togX6f10Krry1LYHDvWrsxNOX2M0BbAurbdw4bS3DtiFDPbkvmKKMwYZPx1ygQgbHAqIvUgyCplQKLt15iL/KuvriNDAcD5PaGM2e3K0/Q4IMJtgrjTZza1bLWz3un1qsSrpGn8=
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id
- p15-20020a05600c204f00b0041044e130bfsm1366450wmg.33.2024.02.09.10.52.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Feb 2024 10:52:03 -0800 (PST)
-Date: Fri, 9 Feb 2024 19:52:01 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Danilo Krummrich <dakr@redhat.com>
-Cc: Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@gmail.com>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Subject: Re: [PATCH] nouveau: offload fence uevents work to workqueue
-Message-ID: <ZcZ0UXfbKYNhhBiC@phenom.ffwll.local>
-References: <20240129015053.1687418-1-airlied@gmail.com>
- <133266ac-7239-4233-a19d-cdc7563d401c@redhat.com>
- <CAPM=9tyc3zWRhm4xSnnHprU-v7prdZ2fkkLDEfjC_t_2wM-8Kg@mail.gmail.com>
- <3d967763-8f8f-4451-9927-33395e1b4d70@redhat.com>
- <ZcI8GScBEJ0SsuA5@phenom.ffwll.local>
- <a2174cc2-ea65-4bcf-a112-f60f26b7213c@redhat.com>
+ AJvYcCXHpo649qEQqWH89Glr9wke81+pkMLs5XCqTUfhzOaKeFglNVPpvferuWQfdtR7ZwEjeN5zVZr9Oe5MkgwKa90y3FFFhmmPNTNy5pmbL8MT
+X-Gm-Message-State: AOJu0YzfF9qCMBq1GCWAfVZDrjRrfxGil0u4bTHKfomx3iih+adnNYsI
+ Gu2RToAiaJXy/tYy/UCXXQIjqE1akBJRwks/hth+Lvw6NXDDTduXFH4aQf1NRMUoBiHr/UBrzdu
+ S7j1uGH265Wn4MbhYUaVJEXbylU9xBl64e2g=
+X-Google-Smtp-Source: AGHT+IGwKNx5cO534Cy9V5UzAzNAR9J2g0bcAl0tlmX+Gfpl8IhLK4ddgKFKvnlwuMiUnngbCyp8VFUtleS7nBiwdcY=
+X-Received: by 2002:a17:906:168d:b0:a39:e059:e632 with SMTP id
+ s13-20020a170906168d00b00a39e059e632mr65651ejd.3.1707507563196; Fri, 09 Feb
+ 2024 11:39:23 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <a2174cc2-ea65-4bcf-a112-f60f26b7213c@redhat.com>
-X-Operating-System: Linux phenom 6.6.11-amd64 
+References: <20240202000606.3526-1-dakr@redhat.com>
+In-Reply-To: <20240202000606.3526-1-dakr@redhat.com>
+From: Dave Airlie <airlied@gmail.com>
+Date: Sat, 10 Feb 2024 05:39:11 +1000
+Message-ID: <CAPM=9tzKwbX6KFaa-DhKQJfPBbCyP80aEHY5b+MtkGkByx7YPg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] drm/nouveau: don't fini scheduler if not initialized
+To: Danilo Krummrich <dakr@redhat.com>
+Cc: nouveau@lists.freedesktop.org, lyude@redhat.com, kherbst@redhat.com, 
+ ttabi@nvidia.com, dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,97 +76,238 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Feb 09, 2024 at 06:41:32PM +0100, Danilo Krummrich wrote:
-> On 2/6/24 15:03, Daniel Vetter wrote:
-> > On Mon, Feb 05, 2024 at 11:00:04PM +0100, Danilo Krummrich wrote:
-> > > On 2/5/24 22:08, Dave Airlie wrote:
-> > > > On Tue, 6 Feb 2024 at 02:22, Danilo Krummrich <dakr@redhat.com> wrote:
-> > > > > 
-> > > > > On 1/29/24 02:50, Dave Airlie wrote:
-> > > > > > From: Dave Airlie <airlied@redhat.com>
-> > > > > > 
-> > > > > > This should break the deadlock between the fctx lock and the irq lock.
-> > > > > > 
-> > > > > > This offloads the processing off the work from the irq into a workqueue.
-> > > > > > 
-> > > > > > Signed-off-by: Dave Airlie <airlied@redhat.com>
-> > > > > 
-> > > > > Nouveau's scheduler uses a dedicated wq, hence from this perspective it's
-> > > > > safe deferring fence signalling to the kernel global wq. However, I wonder
-> > > > > if we could create deadlocks by building dependency chains into other
-> > > > > drivers / kernel code that, by chance, makes use of the kernel global wq as
-> > > > > well.
-> > > > > 
-> > > > > Admittedly, even if, it's gonna be extremely unlikely given that
-> > > > > WQ_MAX_ACTIVE == 512. But maybe it'd be safer to use a dedicated wq.
-> > > > > 
-> > > > > Also, do we need to CC stable?
-> > > > 
-> > > > I pushed this to Linus at the end of last week, since the hangs in 6.7
-> > > > take out the complete system and I wanted it in stable.
-> > > > 
-> > > > It might be safer to use a dedicated wq, is the concern someone is
-> > > > waiting on a fence in a workqueue somewhere else so we will never
-> > > > signal it?
-> > > 
-> > > Yes, if some other work is waiting for this fence (or something else in the same
-> > > dependency chain) to signal it can prevent executing the work signaling this fence,
-> > > in case both are scheduled on the same wq. As mentioned, with the kernel global wq
-> > > this would be rather unlikely to lead to an actual stall with WQ_MAX_ACTIVE == 512,
-> > > but formally the race condition exists. I guess a malicious attacker could try to
-> > > intentionally push jobs directly or indirectly depending on this fence to a driver
-> > > which queues them up on a scheduler using the kernel global wq.
-> > 
-> > I think if you add dma_fence_signalling annotations (aside, there's some
-> > patch from iirc Thomas Hellstrom to improve them and cut down on some
-> > false positives, but I lost track) then I think you won't get any splats
-> > because the wq subsystem assumes that WC_MAX_ACTIVE is close enough to
-> > infinity to not matter.
-> 
-> As mentioned, for the kernel global wq it's 512. (Intentionally) feeding the kernel
-> with enough jobs to to provoke a deadlock doesn't seem impossible to me.
-> 
-> I think it'd be safer to just establish not to use the kernel global wq for executing
-> work in the fence signalling critical path.
-> 
-> We could also run into similar problems with a dedicated wq, e.g. when drivers share
-> a wq between drm_gpu_scheduler instances (see [1]), however, I'm not sure we can catch
-> that with lockdep.
+On Fri, 2 Feb 2024 at 10:06, Danilo Krummrich <dakr@redhat.com> wrote:
+>
+> nouveau_abi16_ioctl_channel_alloc() and nouveau_cli_init() simply call
+> their corresponding *_fini() counterpart. This can lead to
+> nouveau_sched_fini() being called without struct nouveau_sched ever
+> being initialized in the first place.
+>
+> Instead of embedding struct nouveau_sched into struct nouveau_cli and
+> struct nouveau_chan_abi16, allocate struct nouveau_sched separately,
+> such that we can check for the corresponding pointer to be NULL in the
+> particular *_fini() functions.
+>
+> It makes sense to allocate struct nouveau_sched separately anyway, since
+> in a subsequent commit we can also avoid to allocate a struct
+> nouveau_sched in nouveau_abi16_ioctl_channel_alloc() at all, if the
+> VM_BIND uAPI has been disabled due to the legacy uAPI being used.
 
-I think if you want to fix it perfectly you'd need to set the max number
-of wq to the number of engines (or for dynamic/fw scheduled engines to the
-number of context) you have. Or whatever limit to the number of parallel
-timelines there is.
+Looks good,
 
-I guess this would need a new wq function to update? drm/sched code could
-be able to set that for drivers, so drivers cannot get this wrong.
+for the series
+Reviewed-by: Dave Airlie <airlied@redhat.com>
 
-If we don't do something like that then I'm not sure there's really much
-benefit - instead of carefully timing 512 dma_fence on the global wq you
-just need to create a pile of context (at least on intel's guc that's
-absolutely no issue) and then careful time them.
-
-I still feel like we have bigger fish to fry ... But might be worth the
-effort to at least make the parallel timeline limit a lot more explicit?
-
-Cheers, Sima
-
-> 
-> [1] https://elixir.bootlin.com/linux/v6.8-rc3/source/drivers/gpu/drm/nouveau/nouveau_drm.c#L313
-> 
-> > 
-> > I'm not sure we should care differently, but I guess it'd be good to
-> > annotate it all in case the wq subsystem's idea of how much such deadlocks
-> > are real changes.
-> > 
-> > Also Teo is on a mission to get rid of all the global wq flushes, so there
-> > should also be no source of deadlocks from that kind of cross-driver
-> > dependency. Or at least shouldn't be in the future, I'm not sure it all
-> > landed.
-> > -Sima
-> 
-
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+>
+> Fixes: 5f03a507b29e ("drm/nouveau: implement 1:1 scheduler - entity relationship")
+> Reported-by: Timur Tabi <ttabi@nvidia.com>
+> Closes: https://lore.kernel.org/nouveau/20240131213917.1545604-1-ttabi@nvidia.com/
+> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_abi16.c | 10 ++++---
+>  drivers/gpu/drm/nouveau/nouveau_abi16.h |  2 +-
+>  drivers/gpu/drm/nouveau/nouveau_drm.c   |  7 +++--
+>  drivers/gpu/drm/nouveau/nouveau_drv.h   |  2 +-
+>  drivers/gpu/drm/nouveau/nouveau_exec.c  |  2 +-
+>  drivers/gpu/drm/nouveau/nouveau_sched.c | 38 +++++++++++++++++++++++--
+>  drivers/gpu/drm/nouveau/nouveau_sched.h |  6 ++--
+>  drivers/gpu/drm/nouveau/nouveau_uvmm.c  |  2 +-
+>  8 files changed, 53 insertions(+), 16 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> index a04156ca8390..ca4b5ab3e59e 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> @@ -128,12 +128,14 @@ nouveau_abi16_chan_fini(struct nouveau_abi16 *abi16,
+>         struct nouveau_abi16_ntfy *ntfy, *temp;
+>
+>         /* Cancel all jobs from the entity's queue. */
+> -       drm_sched_entity_fini(&chan->sched.entity);
+> +       if (chan->sched)
+> +               drm_sched_entity_fini(&chan->sched->entity);
+>
+>         if (chan->chan)
+>                 nouveau_channel_idle(chan->chan);
+>
+> -       nouveau_sched_fini(&chan->sched);
+> +       if (chan->sched)
+> +               nouveau_sched_destroy(&chan->sched);
+>
+>         /* cleanup notifier state */
+>         list_for_each_entry_safe(ntfy, temp, &chan->notifiers, head) {
+> @@ -337,8 +339,8 @@ nouveau_abi16_ioctl_channel_alloc(ABI16_IOCTL_ARGS)
+>         if (ret)
+>                 goto done;
+>
+> -       ret = nouveau_sched_init(&chan->sched, drm, drm->sched_wq,
+> -                                chan->chan->dma.ib_max);
+> +       ret = nouveau_sched_create(&chan->sched, drm, drm->sched_wq,
+> +                                  chan->chan->dma.ib_max);
+>         if (ret)
+>                 goto done;
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.h b/drivers/gpu/drm/nouveau/nouveau_abi16.h
+> index 1f5e243c0c75..11c8c4a80079 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.h
+> @@ -26,7 +26,7 @@ struct nouveau_abi16_chan {
+>         struct nouveau_bo *ntfy;
+>         struct nouveau_vma *ntfy_vma;
+>         struct nvkm_mm  heap;
+> -       struct nouveau_sched sched;
+> +       struct nouveau_sched *sched;
+>  };
+>
+>  struct nouveau_abi16 {
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> index 6f6c31a9937b..a947e1d5f309 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> @@ -201,7 +201,8 @@ nouveau_cli_fini(struct nouveau_cli *cli)
+>         WARN_ON(!list_empty(&cli->worker));
+>
+>         usif_client_fini(cli);
+> -       nouveau_sched_fini(&cli->sched);
+> +       if (cli->sched)
+> +               nouveau_sched_destroy(&cli->sched);
+>         if (uvmm)
+>                 nouveau_uvmm_fini(uvmm);
+>         nouveau_vmm_fini(&cli->svm);
+> @@ -311,7 +312,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
+>         cli->mem = &mems[ret];
+>
+>         /* Don't pass in the (shared) sched_wq in order to let
+> -        * nouveau_sched_init() create a dedicated one for VM_BIND jobs.
+> +        * nouveau_sched_create() create a dedicated one for VM_BIND jobs.
+>          *
+>          * This is required to ensure that for VM_BIND jobs free_job() work and
+>          * run_job() work can always run concurrently and hence, free_job() work
+> @@ -320,7 +321,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
+>          * locks which indirectly or directly are held for allocations
+>          * elsewhere.
+>          */
+> -       ret = nouveau_sched_init(&cli->sched, drm, NULL, 1);
+> +       ret = nouveau_sched_create(&cli->sched, drm, NULL, 1);
+>         if (ret)
+>                 goto done;
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> index 8a6d94c8b163..e239c6bf4afa 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> @@ -98,7 +98,7 @@ struct nouveau_cli {
+>                 bool disabled;
+>         } uvmm;
+>
+> -       struct nouveau_sched sched;
+> +       struct nouveau_sched *sched;
+>
+>         const struct nvif_mclass *mem;
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
+> index bc5d71b79ab2..e65c0ef23bc7 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_exec.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
+> @@ -389,7 +389,7 @@ nouveau_exec_ioctl_exec(struct drm_device *dev,
+>         if (ret)
+>                 goto out;
+>
+> -       args.sched = &chan16->sched;
+> +       args.sched = chan16->sched;
+>         args.file_priv = file_priv;
+>         args.chan = chan;
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
+> index dd98f6910f9c..32fa2e273965 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_sched.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
+> @@ -398,7 +398,7 @@ static const struct drm_sched_backend_ops nouveau_sched_ops = {
+>         .free_job = nouveau_sched_free_job,
+>  };
+>
+> -int
+> +static int
+>  nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
+>                    struct workqueue_struct *wq, u32 credit_limit)
+>  {
+> @@ -453,7 +453,30 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
+>         return ret;
+>  }
+>
+> -void
+> +int
+> +nouveau_sched_create(struct nouveau_sched **psched, struct nouveau_drm *drm,
+> +                    struct workqueue_struct *wq, u32 credit_limit)
+> +{
+> +       struct nouveau_sched *sched;
+> +       int ret;
+> +
+> +       sched = kzalloc(sizeof(*sched), GFP_KERNEL);
+> +       if (!sched)
+> +               return -ENOMEM;
+> +
+> +       ret = nouveau_sched_init(sched, drm, wq, credit_limit);
+> +       if (ret) {
+> +               kfree(sched);
+> +               return ret;
+> +       }
+> +
+> +       *psched = sched;
+> +
+> +       return 0;
+> +}
+> +
+> +
+> +static void
+>  nouveau_sched_fini(struct nouveau_sched *sched)
+>  {
+>         struct drm_gpu_scheduler *drm_sched = &sched->base;
+> @@ -471,3 +494,14 @@ nouveau_sched_fini(struct nouveau_sched *sched)
+>         if (sched->wq)
+>                 destroy_workqueue(sched->wq);
+>  }
+> +
+> +void
+> +nouveau_sched_destroy(struct nouveau_sched **psched)
+> +{
+> +       struct nouveau_sched *sched = *psched;
+> +
+> +       nouveau_sched_fini(sched);
+> +       kfree(sched);
+> +
+> +       *psched = NULL;
+> +}
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.h b/drivers/gpu/drm/nouveau/nouveau_sched.h
+> index a6528f5981e6..e1f01a23e6f6 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_sched.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_sched.h
+> @@ -111,8 +111,8 @@ struct nouveau_sched {
+>         } job;
+>  };
+>
+> -int nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
+> -                      struct workqueue_struct *wq, u32 credit_limit);
+> -void nouveau_sched_fini(struct nouveau_sched *sched);
+> +int nouveau_sched_create(struct nouveau_sched **psched, struct nouveau_drm *drm,
+> +                        struct workqueue_struct *wq, u32 credit_limit);
+> +void nouveau_sched_destroy(struct nouveau_sched **psched);
+>
+>  #endif
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> index 4f223c972c6a..0a0a11dc9ec0 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+> @@ -1740,7 +1740,7 @@ nouveau_uvmm_ioctl_vm_bind(struct drm_device *dev,
+>         if (ret)
+>                 return ret;
+>
+> -       args.sched = &cli->sched;
+> +       args.sched = cli->sched;
+>         args.file_priv = file_priv;
+>
+>         ret = nouveau_uvmm_vm_bind(&args);
+>
+> base-commit: 041261ac4c365e03b07427569d6735f8adfd21c8
+> --
+> 2.43.0
+>
