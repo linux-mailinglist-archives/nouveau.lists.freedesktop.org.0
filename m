@@ -2,66 +2,102 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71ACB84FCFF
-	for <lists+nouveau@lfdr.de>; Fri,  9 Feb 2024 20:39:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9630F85011F
+	for <lists+nouveau@lfdr.de>; Sat, 10 Feb 2024 01:29:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8377D10FB87;
-	Fri,  9 Feb 2024 19:39:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 21BB410EF7C;
+	Sat, 10 Feb 2024 00:29:26 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FqRXyGE6";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="UzxgbQxv";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com
- [209.85.208.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B093E10FB7D;
- Fri,  9 Feb 2024 19:39:25 +0000 (UTC)
-Received: by mail-ed1-f42.google.com with SMTP id
- 4fb4d7f45d1cf-561606f21e9so18249a12.2; 
- Fri, 09 Feb 2024 11:39:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707507563; x=1708112363; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kAL/NpE4O0N28eJZjVn0anRvoGT/wAMj1jeLhmNnWis=;
- b=FqRXyGE6t1BSkmgeLT7F9eijgPreHsyJHHio9lLVeN4uGJCyAEdKEvt/ZFKAzUS9Pk
- 3JmjWlkEf4OLviZH34Jk1s8qlVrAgTtIXA7Q/g+UAjrnM/gkmTu3Gej3aFWfa3sHFBU2
- e4IpP3423p77IvyNBcmNwaaH309AREC/NgSdezywdZdL1tjQzkJvkg8kPEDKL6eExZgR
- F+iJRBzsXFMKm7w9Jnqy9aSAy4RggGpxNvn7jwSg8klZgd+ZvIDxXL5Z6ypb5NHqljdr
- hlwrI/CN9aXHA44RIw20xuOZqX9W556fhBdDoBjFxewU6jNCKIocXyVlD6UaGymMNmxJ
- A9ZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707507563; x=1708112363;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kAL/NpE4O0N28eJZjVn0anRvoGT/wAMj1jeLhmNnWis=;
- b=IZzsxNcBJdpIeHEGHXosWBj+SoW00Oq3TVXwVdDA4KUOd6zi6ZYoqqlm5ugR1ndMOW
- j+yd91z5hBOYgkPqjhFUhSKXKnwXCpU+O5iNnnTyX1DWXOE3PqDo9IKm0ekaIHmABMMu
- rVjGwY2ygfMV+zW6kVJn8mMpV4iO2TWY8mMoMhWa7gRwY1xiyCjj4HVN5l0mOXU+QAeQ
- wKz2J6DaeesU0WKk9g3TJMczL1wdnX4d7LPBIJv18flEnLWUZZRk06hs/IMJi7p7gLsZ
- v5Sq4yv6Co3gY2XBaN+4I9RNZUhDygqIgD+cPyzxqrP5NujBtIPTl1RSTHHnAEI7uii/
- /WDw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXHpo649qEQqWH89Glr9wke81+pkMLs5XCqTUfhzOaKeFglNVPpvferuWQfdtR7ZwEjeN5zVZr9Oe5MkgwKa90y3FFFhmmPNTNy5pmbL8MT
-X-Gm-Message-State: AOJu0YzfF9qCMBq1GCWAfVZDrjRrfxGil0u4bTHKfomx3iih+adnNYsI
- Gu2RToAiaJXy/tYy/UCXXQIjqE1akBJRwks/hth+Lvw6NXDDTduXFH4aQf1NRMUoBiHr/UBrzdu
- S7j1uGH265Wn4MbhYUaVJEXbylU9xBl64e2g=
-X-Google-Smtp-Source: AGHT+IGwKNx5cO534Cy9V5UzAzNAR9J2g0bcAl0tlmX+Gfpl8IhLK4ddgKFKvnlwuMiUnngbCyp8VFUtleS7nBiwdcY=
-X-Received: by 2002:a17:906:168d:b0:a39:e059:e632 with SMTP id
- s13-20020a170906168d00b00a39e059e632mr65651ejd.3.1707507563196; Fri, 09 Feb
- 2024 11:39:23 -0800 (PST)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2041.outbound.protection.outlook.com [40.107.236.41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4BE0610EF7C
+ for <nouveau@lists.freedesktop.org>; Sat, 10 Feb 2024 00:29:19 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=MsRcH0ElIsYUFNo8uI7NjXbU6vlX9FiT11+tchwIate3g+WGvDeVOIMs5fxJnCRTboDSUHa24hRMv6Z12gkNfn6c3HDXYzWsMsFdrqngfLYu+oUCQPrXpjAopPsH0LH7JEWhOJPEhnPNm43ZHynBgvbvLEx7o2npZFSH/7oh/nWcswZCEHg5caDfOfpMbJ67A2WK+DdwQAeQaYlPATZrLjAEXHNdtxyMLSC1mg9ImkdnzAeJNf766H6JNV+8Ex+GFcVm+wf4CyCNb1oDGlz3v8xk0D0mR2iNMVO0NFCldMJ8On/pRTdqi2LIfT+WUVQ9wIrZkUa6WdUVjQ/Ed7Vw5Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ncc413Y0xv0JCWVP74Y3o8K1G8I4N3Y0Cu/EVoKlozk=;
+ b=UgLgQrtyFjW1EeKg0exbn9NoT5LzlH+5qg7FoyVyryJjKqhFyq0vf9H8/eSitqEoKCnbhonBh/4aX2lqF3DXhwFG5iTn9z8oucP6DJ/oVLWsoyMIKWlO9bAyQTg5u98ajVSB8TmdAIPfUrqRf3TYBwc+AvpenaMiDSC4uTeX0u+5pJveDCYdaiJMkCcHRgnNCTXbrIUlHMpZwmL+1R3rSHHWiWPM2i87/BTEILQeIL055xQM5BM+OS59x/Vqm/3rfxurRPwu1lFjXg7b0kh6loBHcxhy44RHNeJ2N5erCPx3REeQ9f6itWQ03oIjFfMGC4qRbliDstEx26OseKf9cg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ncc413Y0xv0JCWVP74Y3o8K1G8I4N3Y0Cu/EVoKlozk=;
+ b=UzxgbQxvAgvqhs9ThM/IllEhEHP0cbYply//YfwsJmNv291Rdz5/pkMc0kx1tdKEYgx+lQKnrYRxeOWf48QA6VwYyUbztgdBQoEj2gGDzcwDhP9jAKf+0yBCYUoHNNas8ztFeshbHNH1qRS3IkNf6vW0HH4J01LBKzdRrPZ1lzYPB77Jbj2Cj6fT+GBnvgVVc/+Sl1WFE7IxI/xWyTnHwfn2r2bNDdSusMsD70kq9RcTRJjtTZCuxChsaFI8n1BvU31cZKX9J4fcZNuITaJGqb0JhGVX8FjYP1LFzj7G103Re5Nqq5WcdytBTPED/BpX+iOrzVPy8LsSTKJ980/14w==
+Received: from DS7PR07CA0004.namprd07.prod.outlook.com (2603:10b6:5:3af::13)
+ by CY8PR12MB8195.namprd12.prod.outlook.com (2603:10b6:930:77::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7270.17; Sat, 10 Feb
+ 2024 00:29:13 +0000
+Received: from DS3PEPF000099E2.namprd04.prod.outlook.com
+ (2603:10b6:5:3af:cafe::ea) by DS7PR07CA0004.outlook.office365.com
+ (2603:10b6:5:3af::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7270.26 via Frontend
+ Transport; Sat, 10 Feb 2024 00:29:13 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ DS3PEPF000099E2.mail.protection.outlook.com (10.167.17.201) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7249.19 via Frontend Transport; Sat, 10 Feb 2024 00:29:12 +0000
+Received: from rnnvmail204.nvidia.com (10.129.68.6) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.41; Fri, 9 Feb 2024
+ 16:29:04 -0800
+Received: from rnnvmail204.nvidia.com (10.129.68.6) by rnnvmail204.nvidia.com
+ (10.129.68.6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.12; Fri, 9 Feb
+ 2024 16:29:03 -0800
+Received: from ttabi.nvidia.com (10.127.8.13) by mail.nvidia.com (10.129.68.6)
+ with Microsoft SMTP Server id 15.2.1258.12 via Frontend Transport;
+ Fri, 9 Feb 2024 16:29:03 -0800
+From: Timur Tabi <ttabi@nvidia.com>
+To: Dave Airlie <airlied@redhat.com>, <nouveau@lists.freedesktop.org>,
+ <akpm@linux-foundation.org>
+Subject: [PATCH] drm/nouveau: fix kerneldoc warnings
+Date: Fri, 9 Feb 2024 18:29:00 -0600
+Message-ID: <20240210002900.148982-1-ttabi@nvidia.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240202000606.3526-1-dakr@redhat.com>
-In-Reply-To: <20240202000606.3526-1-dakr@redhat.com>
-From: Dave Airlie <airlied@gmail.com>
-Date: Sat, 10 Feb 2024 05:39:11 +1000
-Message-ID: <CAPM=9tzKwbX6KFaa-DhKQJfPBbCyP80aEHY5b+MtkGkByx7YPg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] drm/nouveau: don't fini scheduler if not initialized
-To: Danilo Krummrich <dakr@redhat.com>
-Cc: nouveau@lists.freedesktop.org, lyude@redhat.com, kherbst@redhat.com, 
- ttabi@nvidia.com, dri-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
+X-NVConfidentiality: public
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099E2:EE_|CY8PR12MB8195:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1a3d43bf-2243-4d31-01e1-08dc29cf4e6d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: r5u6o2I4APoPDl5xZ/P8hRPCf34hQaOiUvhMxxk+GvbJs0SU1aX0ozmpD9iqdOvfxoKqqhK+OABGHAPtKUSbk5hLrF0m7qruT2YyyICJvOfsliKwC/VIM94KHNXFmmj2KoRzVZX2k09s5A1xsdB7prkIASWKw83PHjDeuk7XriyLn3JKNEpb0Iid1J284vkoOyhmWf+1y1QP1rbRbtXebMLAq79UjTMS2rsGq8KggxzRMd49WWQEJFZegqjAfcqOqRseLJSQ8MkSm0d6ImjdEWBR5aySrfBFy5OuVqUYYMeABPN1lnv1xit48MoJmB/Qh3844fwo0IoW/Jfdp6zlqBWgCBTpcaZoOlo/7mXcQouEqmEMhx3wAaRQA1vW+vTS6mLcnr53T4GpvRheS93ACW0aax/2zHw0PsnGfC3sIsDi22RT/t0Hlh/PTTfuIfpTEBBBSQsdq9k1uNS5Ri6ZbN20Eh1oya/KjM7fT4dmyZR+f8mlz0FVZt+QaB3tCfknN5N9rmDCjI9tZ1OAGgzh+Fg8NTnMm6d+vJk4dT7TYxa/+yoz6XF3KQBPTBsZ3wSASP7heaJ9B3Qq3P5H8yETkEaqhGdhHXdGg9fZZK6zlZw=
+X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
+ SFS:(13230031)(4636009)(346002)(39860400002)(396003)(376002)(136003)(230273577357003)(230922051799003)(451199024)(82310400011)(1800799012)(186009)(64100799003)(46966006)(36840700001)(40470700004)(426003)(336012)(83380400001)(1076003)(26005)(2906002)(82740400003)(41300700001)(70206006)(110136005)(86362001)(7696005)(478600001)(70586007)(8676002)(2616005)(7636003)(356005)(5660300002)(316002)(8936002)(36756003);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2024 00:29:12.9097 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1a3d43bf-2243-4d31-01e1-08dc29cf4e6d
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099E2.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB8195
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,238 +112,50 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 2 Feb 2024 at 10:06, Danilo Krummrich <dakr@redhat.com> wrote:
->
-> nouveau_abi16_ioctl_channel_alloc() and nouveau_cli_init() simply call
-> their corresponding *_fini() counterpart. This can lead to
-> nouveau_sched_fini() being called without struct nouveau_sched ever
-> being initialized in the first place.
->
-> Instead of embedding struct nouveau_sched into struct nouveau_cli and
-> struct nouveau_chan_abi16, allocate struct nouveau_sched separately,
-> such that we can check for the corresponding pointer to be NULL in the
-> particular *_fini() functions.
->
-> It makes sense to allocate struct nouveau_sched separately anyway, since
-> in a subsequent commit we can also avoid to allocate a struct
-> nouveau_sched in nouveau_abi16_ioctl_channel_alloc() at all, if the
-> VM_BIND uAPI has been disabled due to the legacy uAPI being used.
+kernel test robot complains about missing kerneldoc entries:
 
-Looks good,
+  drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:
+    Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
 
-for the series
-Reviewed-by: Dave Airlie <airlied@redhat.com>
+Signed-off-by: Timur Tabi <ttabi@nvidia.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
->
-> Fixes: 5f03a507b29e ("drm/nouveau: implement 1:1 scheduler - entity relationship")
-> Reported-by: Timur Tabi <ttabi@nvidia.com>
-> Closes: https://lore.kernel.org/nouveau/20240131213917.1545604-1-ttabi@nvidia.com/
-> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_abi16.c | 10 ++++---
->  drivers/gpu/drm/nouveau/nouveau_abi16.h |  2 +-
->  drivers/gpu/drm/nouveau/nouveau_drm.c   |  7 +++--
->  drivers/gpu/drm/nouveau/nouveau_drv.h   |  2 +-
->  drivers/gpu/drm/nouveau/nouveau_exec.c  |  2 +-
->  drivers/gpu/drm/nouveau/nouveau_sched.c | 38 +++++++++++++++++++++++--
->  drivers/gpu/drm/nouveau/nouveau_sched.h |  6 ++--
->  drivers/gpu/drm/nouveau/nouveau_uvmm.c  |  2 +-
->  8 files changed, 53 insertions(+), 16 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-> index a04156ca8390..ca4b5ab3e59e 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-> @@ -128,12 +128,14 @@ nouveau_abi16_chan_fini(struct nouveau_abi16 *abi16,
->         struct nouveau_abi16_ntfy *ntfy, *temp;
->
->         /* Cancel all jobs from the entity's queue. */
-> -       drm_sched_entity_fini(&chan->sched.entity);
-> +       if (chan->sched)
-> +               drm_sched_entity_fini(&chan->sched->entity);
->
->         if (chan->chan)
->                 nouveau_channel_idle(chan->chan);
->
-> -       nouveau_sched_fini(&chan->sched);
-> +       if (chan->sched)
-> +               nouveau_sched_destroy(&chan->sched);
->
->         /* cleanup notifier state */
->         list_for_each_entry_safe(ntfy, temp, &chan->notifiers, head) {
-> @@ -337,8 +339,8 @@ nouveau_abi16_ioctl_channel_alloc(ABI16_IOCTL_ARGS)
->         if (ret)
->                 goto done;
->
-> -       ret = nouveau_sched_init(&chan->sched, drm, drm->sched_wq,
-> -                                chan->chan->dma.ib_max);
-> +       ret = nouveau_sched_create(&chan->sched, drm, drm->sched_wq,
-> +                                  chan->chan->dma.ib_max);
->         if (ret)
->                 goto done;
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.h b/drivers/gpu/drm/nouveau/nouveau_abi16.h
-> index 1f5e243c0c75..11c8c4a80079 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.h
-> @@ -26,7 +26,7 @@ struct nouveau_abi16_chan {
->         struct nouveau_bo *ntfy;
->         struct nouveau_vma *ntfy_vma;
->         struct nvkm_mm  heap;
-> -       struct nouveau_sched sched;
-> +       struct nouveau_sched *sched;
->  };
->
->  struct nouveau_abi16 {
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> index 6f6c31a9937b..a947e1d5f309 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> @@ -201,7 +201,8 @@ nouveau_cli_fini(struct nouveau_cli *cli)
->         WARN_ON(!list_empty(&cli->worker));
->
->         usif_client_fini(cli);
-> -       nouveau_sched_fini(&cli->sched);
-> +       if (cli->sched)
-> +               nouveau_sched_destroy(&cli->sched);
->         if (uvmm)
->                 nouveau_uvmm_fini(uvmm);
->         nouveau_vmm_fini(&cli->svm);
-> @@ -311,7 +312,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
->         cli->mem = &mems[ret];
->
->         /* Don't pass in the (shared) sched_wq in order to let
-> -        * nouveau_sched_init() create a dedicated one for VM_BIND jobs.
-> +        * nouveau_sched_create() create a dedicated one for VM_BIND jobs.
->          *
->          * This is required to ensure that for VM_BIND jobs free_job() work and
->          * run_job() work can always run concurrently and hence, free_job() work
-> @@ -320,7 +321,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
->          * locks which indirectly or directly are held for allocations
->          * elsewhere.
->          */
-> -       ret = nouveau_sched_init(&cli->sched, drm, NULL, 1);
-> +       ret = nouveau_sched_create(&cli->sched, drm, NULL, 1);
->         if (ret)
->                 goto done;
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
-> index 8a6d94c8b163..e239c6bf4afa 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-> @@ -98,7 +98,7 @@ struct nouveau_cli {
->                 bool disabled;
->         } uvmm;
->
-> -       struct nouveau_sched sched;
-> +       struct nouveau_sched *sched;
->
->         const struct nvif_mclass *mem;
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_exec.c b/drivers/gpu/drm/nouveau/nouveau_exec.c
-> index bc5d71b79ab2..e65c0ef23bc7 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_exec.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_exec.c
-> @@ -389,7 +389,7 @@ nouveau_exec_ioctl_exec(struct drm_device *dev,
->         if (ret)
->                 goto out;
->
-> -       args.sched = &chan16->sched;
-> +       args.sched = chan16->sched;
->         args.file_priv = file_priv;
->         args.chan = chan;
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
-> index dd98f6910f9c..32fa2e273965 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_sched.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-> @@ -398,7 +398,7 @@ static const struct drm_sched_backend_ops nouveau_sched_ops = {
->         .free_job = nouveau_sched_free_job,
->  };
->
-> -int
-> +static int
->  nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
->                    struct workqueue_struct *wq, u32 credit_limit)
->  {
-> @@ -453,7 +453,30 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
->         return ret;
->  }
->
-> -void
-> +int
-> +nouveau_sched_create(struct nouveau_sched **psched, struct nouveau_drm *drm,
-> +                    struct workqueue_struct *wq, u32 credit_limit)
-> +{
-> +       struct nouveau_sched *sched;
-> +       int ret;
-> +
-> +       sched = kzalloc(sizeof(*sched), GFP_KERNEL);
-> +       if (!sched)
-> +               return -ENOMEM;
-> +
-> +       ret = nouveau_sched_init(sched, drm, wq, credit_limit);
-> +       if (ret) {
-> +               kfree(sched);
-> +               return ret;
-> +       }
-> +
-> +       *psched = sched;
-> +
-> +       return 0;
-> +}
-> +
-> +
-> +static void
->  nouveau_sched_fini(struct nouveau_sched *sched)
->  {
->         struct drm_gpu_scheduler *drm_sched = &sched->base;
-> @@ -471,3 +494,14 @@ nouveau_sched_fini(struct nouveau_sched *sched)
->         if (sched->wq)
->                 destroy_workqueue(sched->wq);
->  }
-> +
-> +void
-> +nouveau_sched_destroy(struct nouveau_sched **psched)
-> +{
-> +       struct nouveau_sched *sched = *psched;
-> +
-> +       nouveau_sched_fini(sched);
-> +       kfree(sched);
-> +
-> +       *psched = NULL;
-> +}
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.h b/drivers/gpu/drm/nouveau/nouveau_sched.h
-> index a6528f5981e6..e1f01a23e6f6 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_sched.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_sched.h
-> @@ -111,8 +111,8 @@ struct nouveau_sched {
->         } job;
->  };
->
-> -int nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
-> -                      struct workqueue_struct *wq, u32 credit_limit);
-> -void nouveau_sched_fini(struct nouveau_sched *sched);
-> +int nouveau_sched_create(struct nouveau_sched **psched, struct nouveau_drm *drm,
-> +                        struct workqueue_struct *wq, u32 credit_limit);
-> +void nouveau_sched_destroy(struct nouveau_sched **psched);
->
->  #endif
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> index 4f223c972c6a..0a0a11dc9ec0 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-> @@ -1740,7 +1740,7 @@ nouveau_uvmm_ioctl_vm_bind(struct drm_device *dev,
->         if (ret)
->                 return ret;
->
-> -       args.sched = &cli->sched;
-> +       args.sched = cli->sched;
->         args.file_priv = file_priv;
->
->         ret = nouveau_uvmm_vm_bind(&args);
->
-> base-commit: 041261ac4c365e03b07427569d6735f8adfd21c8
-> --
-> 2.43.0
->
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+index a41735ab6068..1c46e3f919be 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+@@ -1432,6 +1432,10 @@ r535_gsp_msg_post_event(void *priv, u32 fn, void *repv, u32 repc)
+ 
+ /**
+  * r535_gsp_msg_run_cpu_sequencer() -- process I/O commands from the GSP
++ * @priv: gsp pointer
++ * @fn: function number (ignored)
++ * @repv: pointer to libos print RPC
++ * @repc: message size
+  *
+  * The GSP sequencer is a list of I/O commands that the GSP can send to
+  * the driver to perform for various purposes.  The most common usage is to
+@@ -1783,6 +1787,7 @@ static void create_pte_array(u64 *ptes, dma_addr_t addr, size_t size)
+ 
+ /**
+  * r535_gsp_libos_init() -- create the libos arguments structure
++ * @gsp: gsp pointer
+  *
+  * The logging buffers are byte queues that contain encoded printf-like
+  * messages from GSP-RM.  They need to be decoded by a special application
+@@ -1922,6 +1927,10 @@ nvkm_gsp_radix3_dtor(struct nvkm_gsp *gsp, struct nvkm_gsp_radix3 *rx3)
+ 
+ /**
+  * nvkm_gsp_radix3_sg - build a radix3 table from a S/G list
++ * @gsp: gsp pointer
++ * @sgt: S/G list to traverse
++ * @size: size of the image, in bytes
++ * @rx3: radix3 array to update
+  *
+  * The GSP uses a three-level page table, called radix3, to map the firmware.
+  * Each 64-bit "pointer" in the table is either the bus address of an entry in
+-- 
+2.34.1
+
