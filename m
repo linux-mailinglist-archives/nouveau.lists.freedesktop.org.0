@@ -2,61 +2,103 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8093C851E35
-	for <lists+nouveau@lfdr.de>; Mon, 12 Feb 2024 20:56:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 910A5851F52
+	for <lists+nouveau@lfdr.de>; Mon, 12 Feb 2024 22:16:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4CCE610E253;
-	Mon, 12 Feb 2024 19:56:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 95D8310E1DF;
+	Mon, 12 Feb 2024 21:16:16 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="WjIgjePG";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="NSa0EzbE";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A785A10E253;
- Mon, 12 Feb 2024 19:56:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1707767814; x=1739303814;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=VbiWwUlRwFGEs9WFueIKvPJkqFyBrhzz4cOYE4POKHY=;
- b=WjIgjePGgReMaUlODe6zZvGNM0Ryup60UlnFsi7eLBkGKjCmRS5lMeft
- DpcoN4lPSNwujcS9cZWMVsnxDq1rvZwKznWr1giRqbCj1NLBvVzodVem8
- Vmo/eV2EpK5CTL6x9dICKX+PTlSMDiVZASdssl+d5xdNv2ip+mnND55Ni
- rAV/DROdgXaX1l1Dx2UuDiUyDNbxODcYlSvnLaMHoRpRuQUhqn+cgR+NT
- HvwRvQczFuF7a9iAaosW9hcfkBV7fm1hOo47zIdUNZppVs6glrdmPxUtT
- eMSvw1+mTIBFVIuEfp1SnoqR0r92eTbpoAgtz5RzwCrcbxGWItibj0428 g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10982"; a="1898410"
-X-IronPort-AV: E=Sophos;i="6.06,155,1705392000"; 
-   d="scan'208";a="1898410"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
- by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Feb 2024 11:56:53 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.06,155,1705392000"; 
-   d="scan'208";a="2986160"
-Received: from lkp-server01.sh.intel.com (HELO 01f0647817ea) ([10.239.97.150])
- by orviesa007.jf.intel.com with ESMTP; 12 Feb 2024 11:56:50 -0800
-Received: from kbuild by 01f0647817ea with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1rZcQ3-0007LE-12;
- Mon, 12 Feb 2024 19:56:47 +0000
-Date: Tue, 13 Feb 2024 03:56:06 +0800
-From: kernel test robot <lkp@intel.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>, deller@gmx.de,
- kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com,
- daniel@ffwll.ch, airlied@gmail.com
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
- linux-fbdev@vger.kernel.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH 2/7] fbdev: Do not include <linux/backlight.h> in header
-Message-ID: <202402130346.2iGNwgDE-lkp@intel.com>
-References: <20240212101712.23675-3-tzimmermann@suse.de>
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2082.outbound.protection.outlook.com [40.107.223.82])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 679AC10E1DF;
+ Mon, 12 Feb 2024 21:16:10 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=aIOxvSH6GoTVRVCQMliV+06ezfNN1hJ1Seki8DRNkV24epbf4+dnidFe+lujHnonjnEBgD6pVxrNJmsOsNwuZjXz7ojS6rVlDEa7yXMv7ogIrm66D+FBKljrY8DHZgkpN+r1q/QPSpHnSO+s25WdFWX1SnPNdU3AEm+gaKPK2oJmcn6ZqeGDYXehKQJ+tYBfycj0FzmHBJnz17RmCTrg/dObn1yEDXfxrOUnScigvNPEQ1j4mSOXkGlO9DdAsylO0pfinn96JMhGFvHd9OqUpfpf/j8sFV3dDtoVz75XUrpGqE2Xeen1P0QJpMUujF66ncBKGUTzeHT20DoIYpIbOw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=f8WZgnS6sU1pSyGQwEw0zoM0TA94kxW/XJbtK1275ns=;
+ b=gv9jL/QyUe9CCXZVV83opo4hhEy28eVmgxwJOJvzuKhjUS5SQiWEraPaXa1pZrWEnGwlSTpsLmN94EZ3bEX4Byis0Hw5jAbP8ZXJRejZrUw5OIdaPNRlNeTtT7F6AMqOqW9OY1Ce0LcMrdU8SWyib7tYec4uY5GF5FX2OY833kIfNsi6PNJoUj4C+OkIPlVZ0mOPxd2Huz+wT0+pwERKZTIwnuDNvHWQT7nerLS/M1vAnfOukd4woi8nCvcIX4V2QlcZ8UvGmNd8b5viB9LOFyfC1nFCQfFvpF+IEm7JirH+0vb3n48kj1OjAApVh6CafE6PNpYW2O8gv2gR23xt0w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.160) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=f8WZgnS6sU1pSyGQwEw0zoM0TA94kxW/XJbtK1275ns=;
+ b=NSa0EzbEMedPOB8IGB4hs+/zfn9YdpHMS1abGoPq7NXy7ylUYwVGyBJE1rzTCLjXN7C4yDTYhYur4y6eFUB4mTT/PhdrBGC4VFZpHABLNPSBNrXR3n5+1eJJI9KdAhB5Y8M/ZWiPwhD0dcAch2b3b6XVWXMwtATn3eMNk6alQAjlZIZS2gIedIlyQRDShzl+FfaH0xH7KJQn7jHKhX4XCkvs/Ekqw1BuPes+qxGilutoZ45AL1LtSPjfmj+SVsgS6iGxC0z+f3zvzELITl8Y8BLqIUiy2OJvcxpefBmHmSqqW1uMNIuJM6l/XuYZ6zaBC9sXErtRt0W4T+Nfjic8Pg==
+Received: from PH8PR07CA0015.namprd07.prod.outlook.com (2603:10b6:510:2cd::20)
+ by DM6PR12MB4204.namprd12.prod.outlook.com (2603:10b6:5:212::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.10; Mon, 12 Feb
+ 2024 21:16:06 +0000
+Received: from SN1PEPF000252A2.namprd05.prod.outlook.com
+ (2603:10b6:510:2cd:cafe::c3) by PH8PR07CA0015.outlook.office365.com
+ (2603:10b6:510:2cd::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7270.39 via Frontend
+ Transport; Mon, 12 Feb 2024 21:16:06 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ SN1PEPF000252A2.mail.protection.outlook.com (10.167.242.9) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7249.19 via Frontend Transport; Mon, 12 Feb 2024 21:16:06 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.41; Mon, 12 Feb
+ 2024 13:15:52 -0800
+Received: from rnnvmail205.nvidia.com (10.129.68.10) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.12; Mon, 12 Feb
+ 2024 13:15:52 -0800
+Received: from ttabi.nvidia.com (10.127.8.13) by mail.nvidia.com
+ (10.129.68.10) with Microsoft SMTP Server id 15.2.1258.12 via Frontend
+ Transport; Mon, 12 Feb 2024 13:15:51 -0800
+From: Timur Tabi <ttabi@nvidia.com>
+To: Dave Airlie <airlied@redhat.com>, Lyude Paul <lyude@redhat.com>, "Danilo
+ Krummrich" <dakr@redhat.com>, <nouveau@lists.freedesktop.org>,
+ <dri-devel@lists.freedesktop.org>
+Subject: [drm-next][PATCH 0/2] command-line registry and gsp-rm logging
+Date: Mon, 12 Feb 2024 15:15:46 -0600
+Message-ID: <20240212211548.1094496-1-ttabi@nvidia.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-NVConfidentiality: public
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240212101712.23675-3-tzimmermann@suse.de>
+Content-Type: text/plain
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF000252A2:EE_|DM6PR12MB4204:EE_
+X-MS-Office365-Filtering-Correlation-Id: 81e2c506-69bb-4811-c326-08dc2c0fd363
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: m0oukp5sFsdpqfQKq4u+hypYciEbqhIQyDkW1NriM6FlH6oYqEElJe4ImrUU3lDgz18tLMGHrLZqnHZWueUSg5Gx9PPWc/+h8vgnNhpEX+HeYNNmhY5eGp3LgRmXKbGx6Es8ik2hVSoUhFlLxZwq3alZYb8ayqDYb9TXUz4Vmor9lj/K5LSl/UcjRZimSk+Yd1c2lfrA9VOc7vHR24d0wlcUcKsKJH9lIyyxlPSBGLvE/188qTEcQG3TGN4bfYO+ndfTOd4BNGJ8CvUTMj4/Z3m6WZvDMGji2yzl9mysHzOl7743iFvgr7ZxixiG90Bv7PIRLcplNhbeiTtg9JBs8xevNtvuiVe9GMGDSi4kEInCQlcDi5bOKOWTA+YQ+xl2AebK9YQf3NfxuZhTkrRyJ4IVHtOwUQ23YNTLnfxxGSdA15k3IDo7kB+1CJkUmsZDperbRHe85PM/TUB7RcLWV1AMB7NIwKpZ+riBeoCp6yNzMR6REqM2fERozeUDlJkZUaacOa4mAD3HcblyQ33RgbT7pKIPXyJ8PGnAhzeIGFFRTNIMekkmNFLRiY7pmj32V+eK8dBC0Bz4B3ZQ4HI+xwnr4bRhbbmpdrJJ0O09xhA=
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230031)(4636009)(346002)(136003)(396003)(39860400002)(376002)(230922051799003)(186009)(451199024)(82310400011)(1800799012)(64100799003)(40470700004)(46966006)(36840700001)(6666004)(7696005)(4744005)(110136005)(2906002)(5660300002)(316002)(41300700001)(8676002)(70586007)(70206006)(478600001)(86362001)(1076003)(356005)(336012)(426003)(83380400001)(8936002)(7636003)(36756003)(82740400003)(26005)(2616005);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Feb 2024 21:16:06.1023 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 81e2c506-69bb-4811-c326-08dc2c0fd363
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000252A2.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4204
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,142 +113,16 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Thomas,
+Two patches that were previosly posted, but now updated for drm-next.
 
-kernel test robot noticed the following build errors:
+Timur Tabi (2):
+  [v3] nouveau: add command-line GSP-RM registry support
+  [v3] drm/nouveau: expose GSP-RM logging buffers via debugfs
 
-[auto build test ERROR on drm-misc/drm-misc-next]
-[also build test ERROR on linus/master v6.8-rc4 next-20240212]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Thomas-Zimmermann/drm-nouveau-Include-linux-backlight-h/20240212-181930
-base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
-patch link:    https://lore.kernel.org/r/20240212101712.23675-3-tzimmermann%40suse.de
-patch subject: [PATCH 2/7] fbdev: Do not include <linux/backlight.h> in header
-config: riscv-allmodconfig (https://download.01.org/0day-ci/archive/20240213/202402130346.2iGNwgDE-lkp@intel.com/config)
-compiler: clang version 19.0.0git (https://github.com/llvm/llvm-project c08b90c50bcac9f3f563c79491c8dbcbe7c3b574)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240213/202402130346.2iGNwgDE-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202402130346.2iGNwgDE-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
->> drivers/staging/fbtft/fb_ssd1351.c:192:26: error: call to undeclared function 'bl_get_data'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     192 |         struct fbtft_par *par = bl_get_data(bd);
-         |                                 ^
->> drivers/staging/fbtft/fb_ssd1351.c:192:20: error: incompatible integer to pointer conversion initializing 'struct fbtft_par *' with an expression of type 'int' [-Wint-conversion]
-     192 |         struct fbtft_par *par = bl_get_data(bd);
-         |                           ^     ~~~~~~~~~~~~~~~
->> drivers/staging/fbtft/fb_ssd1351.c:197:21: error: incomplete definition of type 'struct backlight_device'
-     197 |                       __func__, bd->props.power, bd->props.fb_blank);
-         |                                 ~~^
-   drivers/staging/fbtft/fbtft.h:433:43: note: expanded from macro 'fbtft_par_dbg'
-     433 |                 dev_info((par)->info->device, format, ##arg);  \
-         |                                                         ^~~
-   include/linux/dev_printk.h:150:67: note: expanded from macro 'dev_info'
-     150 |         dev_printk_index_wrap(_dev_info, KERN_INFO, dev, dev_fmt(fmt), ##__VA_ARGS__)
-         |                                                                          ^~~~~~~~~~~
-   include/linux/dev_printk.h:110:23: note: expanded from macro 'dev_printk_index_wrap'
-     110 |                 _p_func(dev, fmt, ##__VA_ARGS__);                       \
-         |                                     ^~~~~~~~~~~
-   include/linux/fb.h:20:8: note: forward declaration of 'struct backlight_device'
-      20 | struct backlight_device;
-         |        ^
-   drivers/staging/fbtft/fb_ssd1351.c:197:38: error: incomplete definition of type 'struct backlight_device'
-     197 |                       __func__, bd->props.power, bd->props.fb_blank);
-         |                                                  ~~^
-   drivers/staging/fbtft/fbtft.h:433:43: note: expanded from macro 'fbtft_par_dbg'
-     433 |                 dev_info((par)->info->device, format, ##arg);  \
-         |                                                         ^~~
-   include/linux/dev_printk.h:150:67: note: expanded from macro 'dev_info'
-     150 |         dev_printk_index_wrap(_dev_info, KERN_INFO, dev, dev_fmt(fmt), ##__VA_ARGS__)
-         |                                                                          ^~~~~~~~~~~
-   include/linux/dev_printk.h:110:23: note: expanded from macro 'dev_printk_index_wrap'
-     110 |                 _p_func(dev, fmt, ##__VA_ARGS__);                       \
-         |                                     ^~~~~~~~~~~
-   include/linux/fb.h:20:8: note: forward declaration of 'struct backlight_device'
-      20 | struct backlight_device;
-         |        ^
->> drivers/staging/fbtft/fb_ssd1351.c:199:8: error: call to undeclared function 'backlight_is_blank'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     199 |         on = !backlight_is_blank(bd);
-         |               ^
->> drivers/staging/fbtft/fb_ssd1351.c:206:35: error: variable has incomplete type 'const struct backlight_ops'
-     206 | static const struct backlight_ops bl_ops = {
-         |                                   ^
-   drivers/staging/fbtft/fb_ssd1351.c:206:21: note: forward declaration of 'struct backlight_ops'
-     206 | static const struct backlight_ops bl_ops = {
-         |                     ^
->> drivers/staging/fbtft/fb_ssd1351.c:213:30: error: variable has incomplete type 'struct backlight_properties'
-     213 |         struct backlight_properties bl_props = { 0, };
-         |                                     ^
-   drivers/staging/fbtft/fb_ssd1351.c:213:9: note: forward declaration of 'struct backlight_properties'
-     213 |         struct backlight_properties bl_props = { 0, };
-         |                ^
->> drivers/staging/fbtft/fb_ssd1351.c:215:18: error: use of undeclared identifier 'BACKLIGHT_RAW'
-     215 |         bl_props.type = BACKLIGHT_RAW;
-         |                         ^
->> drivers/staging/fbtft/fb_ssd1351.c:218:7: error: call to undeclared function 'backlight_device_register'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     218 |         bd = backlight_device_register(dev_driver_string(par->info->device),
-         |              ^
-   drivers/staging/fbtft/fb_ssd1351.c:218:7: note: did you mean '__root_device_register'?
-   include/linux/device.h:1143:16: note: '__root_device_register' declared here
-    1143 | struct device *__root_device_register(const char *name, struct module *owner);
-         |                ^
-   9 errors generated.
-
-
-vim +197 drivers/staging/fbtft/fb_ssd1351.c
-
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  189  
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  190  static int update_onboard_backlight(struct backlight_device *bd)
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  191  {
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31 @192  	struct fbtft_par *par = bl_get_data(bd);
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  193  	bool on;
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  194  
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  195  	fbtft_par_dbg(DEBUG_BACKLIGHT, par,
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  196  		      "%s: power=%d, fb_blank=%d\n",
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31 @197  		      __func__, bd->props.power, bd->props.fb_blank);
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  198  
-66d653c37228cb Stephen Kitt     2022-06-07 @199  	on = !backlight_is_blank(bd);
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  200  	/* Onboard backlight connected to GPIO0 on SSD1351, GPIO1 unused */
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  201  	write_reg(par, 0xB5, on ? 0x03 : 0x02);
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  202  
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  203  	return 0;
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  204  }
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  205  
-23801e3438f6ce Mike Rapoport    2015-09-03 @206  static const struct backlight_ops bl_ops = {
-23801e3438f6ce Mike Rapoport    2015-09-03  207  	.update_status = update_onboard_backlight,
-23801e3438f6ce Mike Rapoport    2015-09-03  208  };
-23801e3438f6ce Mike Rapoport    2015-09-03  209  
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  210  static void register_onboard_backlight(struct fbtft_par *par)
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  211  {
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  212  	struct backlight_device *bd;
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31 @213  	struct backlight_properties bl_props = { 0, };
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  214  
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31 @215  	bl_props.type = BACKLIGHT_RAW;
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  216  	bl_props.power = FB_BLANK_POWERDOWN;
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  217  
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31 @218  	bd = backlight_device_register(dev_driver_string(par->info->device),
-333c7b940526be Leonardo Brás    2018-08-07  219  				       par->info->device, par, &bl_ops,
-333c7b940526be Leonardo Brás    2018-08-07  220  				       &bl_props);
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  221  	if (IS_ERR(bd)) {
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  222  		dev_err(par->info->device,
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  223  			"cannot register backlight device (%ld)\n",
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  224  			PTR_ERR(bd));
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  225  		return;
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  226  	}
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  227  	par->info->bl_dev = bd;
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  228  
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  229  	if (!par->fbtftops.unregister_backlight)
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  230  		par->fbtftops.unregister_backlight = fbtft_unregister_backlight;
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  231  }
-883daf0a5c35c8 Thomas Petazzoni 2014-12-31  232  
+ .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |  18 +
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 494 +++++++++++++++++-
+ 2 files changed, 484 insertions(+), 28 deletions(-)
 
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.34.1
+
