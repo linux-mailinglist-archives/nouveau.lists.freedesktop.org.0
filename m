@@ -2,128 +2,94 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 538358536DF
-	for <lists+nouveau@lfdr.de>; Tue, 13 Feb 2024 18:10:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2076A8538A0
+	for <lists+nouveau@lfdr.de>; Tue, 13 Feb 2024 18:39:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B9AA510E859;
-	Tue, 13 Feb 2024 17:10:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B310310E0E2;
+	Tue, 13 Feb 2024 17:39:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="pb02ZQBI";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Zi9OTKMn";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on2081.outbound.protection.outlook.com [40.107.100.81])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0DEAE10E859;
- Tue, 13 Feb 2024 17:10:38 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HHcwY+o5T6EHcMRkwFNjGBOBJdGtMC3nFQsQzOT4yU5+AXmPErQyLj/B8O6/zpKrNbZJpmh8la5ZMH4KmlW54lOFznt3TQObEQ8Tz3ApVgamDVUQs9bPyW6sQwLnA2QPIffEWh1kV18ye9uhQ/smJDDLj24c7xcVBZUGg+mb99d49zMDu4jP6Hh48AAldGCl2gXXZKTxThaFY7GY6pDDd5CZe9dcdpH2hFUn4YyuCVNdypmnt+fnm13cROnS/f15TBrJJ/kbiSQNdkbX1ayFRzZFfvJKrqcVoQxQCd9XB/m0qzFhesLSqduvqzydV7HvuIXfS6vidvHJOBMznktd/A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hqZyxUI6yBXW5ahZ7fPh6V4HWYvC9w2DOCurEgGYUpI=;
- b=QGjenVi6aayItzhE6+mjH86K+KfoY2m3RKCY1aQnPwkfrnWSRWY7zKi8CFwTLK88eqFUamPk98ccjMVM4hS0JVUn13943kYzExzSUjVupJIm15J70Gro+HnjHIEoL04HCH0gEQ/wNYRVbaFO9bW81uZQ7yzbSuy6hafFIwDfvgXAv5aSN3JTWw1y3PA/DKHEYt5K5wEnc8ma+8smH2XHU2k4Ra5lqgofBzCV6nY49XVd0dk3EVA6kXd5hmdHbG7MIMZY3s/UaKjqezv6TvqY1bdS19GulZRvS84ewjOULHPP4yiY9PU1B2I/Az+FkETlMMZ9C7C/rb/mQ8CgvLpidQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hqZyxUI6yBXW5ahZ7fPh6V4HWYvC9w2DOCurEgGYUpI=;
- b=pb02ZQBIIWG9NJU+bf8k7mDBaVtWve8i7kgYxPqIbpjCYrxhLNVagJP3RYx4mktIQFbCzjFGQRCmPDPVWo66OVRW3zD9nioz2+6yOeXL2u2Bw084rf53AcpjN/APR3oZDFCRod2HF5m6NAA1kikMK7lYBQjb4+FDdN/xTL/EsHH0nN/zPM10MbrueKPGvQ4TRsubtxKUbG1P/Ncpmamk0bLNQqjjUCVLYJrc7/9d3/NiC9CrDcGdqg3gyePmH1Z+hRoTLLyke9FvquPqGBQvfCzb9HhbwMMuEH//gUWi9kRlYmSgjuXgMILvz2VZF+4tnQOIM0dLAwh1sH7JB2uuWQ==
-Received: from SN7PR12MB8769.namprd12.prod.outlook.com (2603:10b6:806:34b::12)
- by BL3PR12MB6449.namprd12.prod.outlook.com (2603:10b6:208:3b8::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.25; Tue, 13 Feb
- 2024 17:10:31 +0000
-Received: from SN7PR12MB8769.namprd12.prod.outlook.com
- ([fe80::a969:afd:ee0a:796b]) by SN7PR12MB8769.namprd12.prod.outlook.com
- ([fe80::a969:afd:ee0a:796b%7]) with mapi id 15.20.7292.018; Tue, 13 Feb 2024
- 17:10:30 +0000
-From: Timur Tabi <ttabi@nvidia.com>
-To: "dakr@redhat.com" <dakr@redhat.com>
-CC: "airlied@redhat.com" <airlied@redhat.com>, "nouveau@lists.freedesktop.org"
- <nouveau@lists.freedesktop.org>, "lyude@redhat.com" <lyude@redhat.com>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
-Subject: Re: [PATCH 2/2] [v3] drm/nouveau: expose GSP-RM logging buffers via
- debugfs
-Thread-Topic: [PATCH 2/2] [v3] drm/nouveau: expose GSP-RM logging buffers via
- debugfs
-Thread-Index: AQHaXfi0C1yXUD8KJkWmK69z9IKf+LEIf5kAgAADjQA=
-Date: Tue, 13 Feb 2024 17:10:30 +0000
-Message-ID: <42cbb398d41273d8f743fff24015bbd0e535b151.camel@nvidia.com>
-References: <20240212211548.1094496-1-ttabi@nvidia.com>
- <20240212211548.1094496-3-ttabi@nvidia.com>
- <62204be5-9367-4e52-9d25-be9c99a1a856@redhat.com>
-In-Reply-To: <62204be5-9367-4e52-9d25-be9c99a1a856@redhat.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.44.4-0ubuntu2 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SN7PR12MB8769:EE_|BL3PR12MB6449:EE_
-x-ms-office365-filtering-correlation-id: 86d024b7-b0d5-4983-a40a-08dc2cb6aed4
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: kPjjqvpN3h9WUhyhElo9zkrSjwIQBKgqVhm5D/TRldxy8wZ/RpjDquJTpNCKomkRksMpOKNpzBl4S4FDIDvlzKIORrhLGDFxoobhQIZncO1B5KuXARHlzVnvun31o495HdB4g0s3Z5ijJRKZvqKuQTLossprlCK7jXje8ln+vIa1Le78M7a3ASu1RPGHzoHhiUmfKXp+KL5P+yfPEHurTithGaqvtVpYAEZIO5mmmezmax6+KfKBMEXQO8DZQSwFTFuUuFxLVtLLAJDiDsXh/4h1rkn9JDKA9xgMIK/42qchM4uSZvkIMWAo0sv3oUulG7pS7I8uV21P/6iqsHr06AHJ4OG2Xj4b7wudyJBS5o2S/RtV1HDaln3x5Ud1AjIyQ5uWePkmLwVxhAMCl5ppGzWATqqRkiCqioj5ocQrWPy9Uiw0lW+pPdYm9m/FYhOTNqrEstJnQ3StNsRsr2Ac36xHuTQxiifFOR+g6PNCy/c5lbSxC1HgjyMMnZbsyaRGfczxUmFFqA6bABjdcwU9AbRg7gO02z6hN9XscE6dr74eauVtDpw8gGVqpwhPBP/QCS8DJ7xh6H9gonPf8Z1JovC9m2SnZRw/twVj0oTNxySesJN1yGKwzirEX1qa77hz
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN7PR12MB8769.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(346002)(136003)(376002)(366004)(396003)(39860400002)(230922051799003)(1800799012)(451199024)(186009)(64100799003)(2906002)(122000001)(64756008)(5660300002)(38100700002)(6916009)(86362001)(2616005)(6506007)(71200400001)(6512007)(38070700009)(26005)(66946007)(36756003)(54906003)(316002)(76116006)(66476007)(66446008)(66556008)(8676002)(4326008)(8936002)(6486002)(478600001)(41300700001);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?blF4cnIwaG1RV2RrRnF3UUluS3FKUTdHTC9mMmJrTjVtTVB6b2w5VTRWWXVB?=
- =?utf-8?B?dkFqR3k5bUZ4enk3NGpzYzhjQXZRWWdERnlCN1BtcWdDMHVON1NoRGFVN000?=
- =?utf-8?B?bUdiNTdOUitIOFU2bDJNNXhoeWY3R1U4YTczclFPKzJhSGxoUW1qYkhXeC9L?=
- =?utf-8?B?U3RreHVsdFQxd2FyNk5vK05WaFFNWVhTeW5hNXFMQ21ncjJVWHlIQnlCS0g4?=
- =?utf-8?B?SHVpUDNiaUp2RjRMd2QyalVXaDNoYlM0TG14NHZoNVJabU5aQzRzYzBUZ1I3?=
- =?utf-8?B?SEx3K3BUVDFyQ3pCSWp1V2pCc05DR0JVU2JacXJCYWNpckhpSlBjTjlhZCto?=
- =?utf-8?B?R2dBZDAvUEJuWVl1cTBWZUZ6cktGTzRwaFl4VHk3ejV2VG5iWU1pUnI2YkpW?=
- =?utf-8?B?Q2RMWEhIeWFqdGU2bHMzWU9DeHpPZTNJa1hRWnRUdVRWYVNxcm1wOXhjL2o3?=
- =?utf-8?B?TzFQek8xZzZTN0pqR2RIQ0l5VXIzMS9lQXlzekNDUjhOUU9KMkEreGwyU1Jw?=
- =?utf-8?B?QVM3bWJiOEtqc0dsWTFOVGJzR2YzUFBDY0FUekN1QXNlWkxVVFRBeU90UzRw?=
- =?utf-8?B?V2ZEaGVQY0tjL3BGZmxWOHFvTmFJUFUvR1FJYUhmV2x1QUk2aWlHMTdRUFZz?=
- =?utf-8?B?SEQ1NU1WRXkzNkRSYW9ta3N1MHlvdXJCb1ZDeXB5b1FYajY0YVl0VXQ0Nm9o?=
- =?utf-8?B?WkJMbU9pcVFiTUt5UGJRYk56NWgrdm9EeElFTC9Yd1BlMlNCaXAxZFNyeE5S?=
- =?utf-8?B?QWl1M3lGNkMxa3hUM3NNWFc1TU42dTc0NFgyYVEreDdlcHNObU5IaS9wRXZX?=
- =?utf-8?B?a2NVZmlhbG83MmZXMG9RMWJLeTVJWFZwdHB1NU52MUQra3FSZGQ1VGtIdG9U?=
- =?utf-8?B?dzVUWGQ5b09LbEc5SnUweS9wSExLTHdhWTVKL1R4aTVXWHJGWjR0SmJodEdt?=
- =?utf-8?B?QXpsbi9taStRSHluS1JjMnVnWnphaTZlbjdEaFBuUDNKWmpERFBwa0pQYURH?=
- =?utf-8?B?ZjdNQW1PTitxcnVGeEpNV0hpa1ZJdk0xcSsyV3kreWVqYW1tUFgwblBBZDNW?=
- =?utf-8?B?bm9Sd2l2K1RUWmhGMTVKbWFJUDZSV25QKzB5ZVM1MHdHSDd2TFJFK25iRFYy?=
- =?utf-8?B?eTBYYkljK3RHOG81eGd4ejhheituOG1Nei9DWTQ0Q0N6Y3F1MWJZODR0b0Fp?=
- =?utf-8?B?bG9FMkVoZ2pIWGY3aG01a1NSV2xHQ1AzS0ZlenRmWGlnNm4vTDUrWmNEL25h?=
- =?utf-8?B?L3RhS1RmS2ZpQU9VcnlFZmgxeFZGNG1pOUdMS0R0M0Vod044WUUzcG1vb2lp?=
- =?utf-8?B?VFJnZUNoc1NaUGZqT1FUWksxbHp0R0Npd2lnRU5oVitPRVkvWVkxNzRlTyt5?=
- =?utf-8?B?SUJwbDFJamlUN0c2NTB5U1ZQcjliS0p5OURQL2ljNkNaZFJ5VllnUWw1bVNr?=
- =?utf-8?B?Vmk5Mml5a1RLWVAyY2VDUWFQNDhPVjBLZjRTdkdRYUQ2blduUFZ5czQ5bWhT?=
- =?utf-8?B?R3JrMHk1dW5SbzFYWTc4bWp3SHpSSmtIS1JjUWpvRENuS1Nqbkx0dEk5aXp4?=
- =?utf-8?B?aWhMdWhwU3Z0Nk5pUXpvNjAxcnVodGFkMHhOOGNwVmhHWmc1N3VyaktsUjl3?=
- =?utf-8?B?MkhtdGFvTjBzazNIV3ZIU3lpNksyV1g0cXpkWlJLbWloNHkvblZxWEJLTWVG?=
- =?utf-8?B?WEFGbWlZSWhOZFk5Y0hMbzBreS90THp6RHB2Q2t5NzdtL1hnU2kwbDFMajZP?=
- =?utf-8?B?Y00wUVdCTUFtb3BTMlZINkZLUTUzM05NVnRhWnBadWFQMDdLd3llbVhHaFpa?=
- =?utf-8?B?SExaeWNId1Z4c0JYc2laMDdFc3U2S1ZlTXF5Y3FycnUyQ0dzdUF1NngrWDI0?=
- =?utf-8?B?R092TDFnV1N6MDliVUtpcGZUL05RTW5TS2hKQ3h2NG1Sbmd2T0tXYzAzK0Rn?=
- =?utf-8?B?VTFRZ0NHaUxzelFpUnMrZkY1Sk9ZTDdOYkIxREVWVFRzSkxTRmxmSUJWWWtr?=
- =?utf-8?B?azZLSnJ4dElSVHdqa1ZrbFNQVmUvdTIzMnJwL1A0UHhaMXYrdTh4N2hzOUZU?=
- =?utf-8?B?YTlEcThoNkJwM05kUUVHNnh0RlpKRnZhUWZSY3l2NHJEdnAzcFpOazZzcEEv?=
- =?utf-8?Q?Zyj2fiZ2s5f9tI9aGb8YKWxJE?=
-Content-Type: multipart/alternative;
- boundary="_000_42cbb398d41273d8f743fff24015bbd0e535b151camelnvidiacom_"
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3BF6710E08F
+ for <nouveau@lists.freedesktop.org>; Tue, 13 Feb 2024 17:39:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1707845964;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=7p4JDbtJm1cogqhFZW34xhMu5zMD7LEdMdg/0QPw0Cw=;
+ b=Zi9OTKMnyxhwMZEOml048h+zuI7CSl3wd1qM52uO+QbTrC9NjJThqNhoe5yP0Qj+bnt9vt
+ Da5/ALsd+/wgWO2u2qc9f2msm3jKTjeKYSKVsg8Hq7iEyC/rMcyAORhgvbU4q+h9jDnLcF
+ V7xYeaejt8q0Q0crL2XR2PihzQyXzTs=
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-277-4LBgWlCiPIGZujKGsdmhHA-1; Tue, 13 Feb 2024 12:39:22 -0500
+X-MC-Unique: 4LBgWlCiPIGZujKGsdmhHA-1
+Received: by mail-ed1-f72.google.com with SMTP id
+ 4fb4d7f45d1cf-560a5f882c5so5790368a12.1
+ for <nouveau@lists.freedesktop.org>; Tue, 13 Feb 2024 09:39:22 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707845961; x=1708450761;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7p4JDbtJm1cogqhFZW34xhMu5zMD7LEdMdg/0QPw0Cw=;
+ b=Lax2QOuukkiSzRpJthY2LgD4X3dVIrIKTHpPiRkMHZl45NbGOpFaP17wzh0SKTawdN
+ AQdAZTwfQWVUUFcisyAUxfG2dVPOBCwSF6qoFVm03JwGMp7+yXT8fEFKvbOdh8ZlMosa
+ IgG4VaSSrnwfh4J8Cir6pNAjZwdHAR5J3jp3VRfLhNkdFtngH06TXvmFPmNc2Nc49f0i
+ EwEkebhUPmdOIbKsMn+yaJk2AFBbKvdEMCCYVVcnblphrQfHLVL1Ioj4+N6zYCYgbZ6F
+ y9AVzZ+h2bGIiB3x45e+Pr2ZrtmLeNLlS0SG57Wp63yC0xB5Gr+fFQq8B75qDGTl40S5
+ 7m7A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV6j0igZ7n4mo8sFP/VuOBfLRhz/NH90TZUNHaK/0x8SKCSlEE7AzofJjGEEdgLT9CENC6aOFIvykE5s66b5Iw944txR/VX5pHgqU5v1Q==
+X-Gm-Message-State: AOJu0YxV1LEGsdLc6lkmm9x75Sg9XWnSsWpZiiFAu9cxqsLgR70Hf/Vs
+ 72x00SW0RsotLrQS/SWof5kkThRg1efmNx0i9YOiNHaI/VuXEjkZEJUgUHlZqFa9E1bcT+5DeJK
+ pL807tXi7wdmKqvIq/Wl93tNIGPikgvL7dNOla+hZwiW79N62kovmH76MXGxXs24=
+X-Received: by 2002:a05:6402:1f03:b0:55f:ce14:337a with SMTP id
+ b3-20020a0564021f0300b0055fce14337amr3370958edb.11.1707845961519; 
+ Tue, 13 Feb 2024 09:39:21 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEgrdfmK0g+Ywab6m3Flje1TWrp4F6K+oXf5dXG9V6kAdl3FWJz/RFUgY54zRXSoj+gGM5t8g==
+X-Received: by 2002:a05:6402:1f03:b0:55f:ce14:337a with SMTP id
+ b3-20020a0564021f0300b0055fce14337amr3370943edb.11.1707845961155; 
+ Tue, 13 Feb 2024 09:39:21 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX9j/9qClzTVGDZpurtbdHmr3dv+QQWJ+XFT3AvRwmEgHHbcrJgMtIIuKgg3fe7r5Oy64c3kSL2cnFAMqB6rihu0Di1mOjMkUWTixru2UosXa7WnPdIkrTBJOlMr9X3C8K7FdVTFlTRwvXSdOFEGw==
+Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
+ ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
+ by smtp.gmail.com with ESMTPSA id
+ c19-20020aa7c993000000b0056211a1635esm242219edt.47.2024.02.13.09.39.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 13 Feb 2024 09:39:20 -0800 (PST)
+Message-ID: <c13596a5-f672-46e4-8ca6-4f1e449f3267@redhat.com>
+Date: Tue, 13 Feb 2024 18:39:20 +0100
 MIME-Version: 1.0
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8769.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 86d024b7-b0d5-4983-a40a-08dc2cb6aed4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Feb 2024 17:10:30.8403 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: HMCIMeyxL4SGzLO8vrQ2s4/DdJC5+0ZriEedqS74+jIwobS9+YGFFwfBRd3ntEw1JxjvLIWTUMaLdDV1Ow960A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR12MB6449
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] nouveau: offload fence uevents work to workqueue
+To: Daniel Vetter <daniel@ffwll.ch>
+Cc: Dave Airlie <airlied@gmail.com>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org
+References: <20240129015053.1687418-1-airlied@gmail.com>
+ <133266ac-7239-4233-a19d-cdc7563d401c@redhat.com>
+ <CAPM=9tyc3zWRhm4xSnnHprU-v7prdZ2fkkLDEfjC_t_2wM-8Kg@mail.gmail.com>
+ <3d967763-8f8f-4451-9927-33395e1b4d70@redhat.com>
+ <ZcI8GScBEJ0SsuA5@phenom.ffwll.local>
+ <a2174cc2-ea65-4bcf-a112-f60f26b7213c@redhat.com>
+ <ZcZ0UXfbKYNhhBiC@phenom.ffwll.local>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <ZcZ0UXfbKYNhhBiC@phenom.ffwll.local>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -138,76 +104,117 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---_000_42cbb398d41273d8f743fff24015bbd0e535b151camelnvidiacom_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+On 2/9/24 19:52, Daniel Vetter wrote:
+> On Fri, Feb 09, 2024 at 06:41:32PM +0100, Danilo Krummrich wrote:
+>> On 2/6/24 15:03, Daniel Vetter wrote:
+>>> On Mon, Feb 05, 2024 at 11:00:04PM +0100, Danilo Krummrich wrote:
+>>>> On 2/5/24 22:08, Dave Airlie wrote:
+>>>>> On Tue, 6 Feb 2024 at 02:22, Danilo Krummrich <dakr@redhat.com> wrote:
+>>>>>>
+>>>>>> On 1/29/24 02:50, Dave Airlie wrote:
+>>>>>>> From: Dave Airlie <airlied@redhat.com>
+>>>>>>>
+>>>>>>> This should break the deadlock between the fctx lock and the irq lock.
+>>>>>>>
+>>>>>>> This offloads the processing off the work from the irq into a workqueue.
+>>>>>>>
+>>>>>>> Signed-off-by: Dave Airlie <airlied@redhat.com>
+>>>>>>
+>>>>>> Nouveau's scheduler uses a dedicated wq, hence from this perspective it's
+>>>>>> safe deferring fence signalling to the kernel global wq. However, I wonder
+>>>>>> if we could create deadlocks by building dependency chains into other
+>>>>>> drivers / kernel code that, by chance, makes use of the kernel global wq as
+>>>>>> well.
+>>>>>>
+>>>>>> Admittedly, even if, it's gonna be extremely unlikely given that
+>>>>>> WQ_MAX_ACTIVE == 512. But maybe it'd be safer to use a dedicated wq.
+>>>>>>
+>>>>>> Also, do we need to CC stable?
+>>>>>
+>>>>> I pushed this to Linus at the end of last week, since the hangs in 6.7
+>>>>> take out the complete system and I wanted it in stable.
+>>>>>
+>>>>> It might be safer to use a dedicated wq, is the concern someone is
+>>>>> waiting on a fence in a workqueue somewhere else so we will never
+>>>>> signal it?
+>>>>
+>>>> Yes, if some other work is waiting for this fence (or something else in the same
+>>>> dependency chain) to signal it can prevent executing the work signaling this fence,
+>>>> in case both are scheduled on the same wq. As mentioned, with the kernel global wq
+>>>> this would be rather unlikely to lead to an actual stall with WQ_MAX_ACTIVE == 512,
+>>>> but formally the race condition exists. I guess a malicious attacker could try to
+>>>> intentionally push jobs directly or indirectly depending on this fence to a driver
+>>>> which queues them up on a scheduler using the kernel global wq.
+>>>
+>>> I think if you add dma_fence_signalling annotations (aside, there's some
+>>> patch from iirc Thomas Hellstrom to improve them and cut down on some
+>>> false positives, but I lost track) then I think you won't get any splats
+>>> because the wq subsystem assumes that WC_MAX_ACTIVE is close enough to
+>>> infinity to not matter.
+>>
+>> As mentioned, for the kernel global wq it's 512. (Intentionally) feeding the kernel
+>> with enough jobs to to provoke a deadlock doesn't seem impossible to me.
+>>
+>> I think it'd be safer to just establish not to use the kernel global wq for executing
+>> work in the fence signalling critical path.
+>>
+>> We could also run into similar problems with a dedicated wq, e.g. when drivers share
+>> a wq between drm_gpu_scheduler instances (see [1]), however, I'm not sure we can catch
+>> that with lockdep.
+> 
+> I think if you want to fix it perfectly you'd need to set the max number
+> of wq to the number of engines (or for dynamic/fw scheduled engines to the
+> number of context) you have. Or whatever limit to the number of parallel
+> timelines there is.> 
+> I guess this would need a new wq function to update? drm/sched code could
+> be able to set that for drivers, so drivers cannot get this wrong.
 
-T24gVHVlLCAyMDI0LTAyLTEzIGF0IDE3OjU3ICswMTAwLCBEYW5pbG8gS3J1bW1yaWNoIHdyb3Rl
-Og0KDQorICAgICAgIHN0cnVjdCBkZWJ1Z2ZzX2Jsb2Jfd3JhcHBlciBibG9iX2luaXQ7DQoNCisg
-ICAgICAgc3RydWN0IGRlYnVnZnNfYmxvYl93cmFwcGVyIGJsb2JfaW50cjsNCg0KKyAgICAgICBz
-dHJ1Y3QgZGVidWdmc19ibG9iX3dyYXBwZXIgYmxvYl9ybTsNCg0KKyAgICAgICBzdHJ1Y3QgZGVi
-dWdmc19ibG9iX3dyYXBwZXIgYmxvYl9wbXU7DQoNCisgICAgICAgc3RydWN0IGRlbnRyeSAqZGVi
-dWdmc19sb2dnaW5nX2RpcjsNCg0KDQpJIHRoaW5rIHdlIHNob3VsZCBub3QgY3JlYXRlIHRob3Nl
-IGZyb20gd2l0aGluIHRoZSBudmttIGxheWVyLCBidXQgcmF0aGVyIHBhc3MNCg0KdGhlbSBkb3du
-IHRocm91Z2ggbnZrbV9kZXZpY2VfcGNpX25ldygpLg0KDQpTaG91bGQgdGhleSBiZSBjcmVhdGVk
-IGluIG52a21fZGV2aWNlX3BjaV9uZXcoKSBhbHNvLCBldmVuIHRob3VnaCB3ZSBoYXZlIG5vIGlk
-ZWEgd2hldGhlciBHU1AgaXMgaW52b2x2ZWQgYXQgdGhhdCBwb2ludD8NCg0KDQoNCkxpZmVjeWNs
-ZSB3aXNlIEkgdGhpbmsgd2Ugc2hvdWxkIGVuc3VyZSB0aGF0IHJlbW92aW5nIHRoZSBOb3V2ZWF1
-IGtlcm5lbCBtb2R1bGUNCg0KYWxzbyBjbGVhbnMgdXAgdGhvc2UgYnVmZmVycy4gRXZlbiB0aG91
-Z2gga2VlcC1nc3AtbG9nZ2luZyBpcyBjb25zaWRlcmVkIHVuc2FmZSwNCg0Kd2Ugc2hvdWxkbid0
-IGxlYWsgbWVtb3J5Lg0KDQpJIGFncmVlLCBidXQgdGhlbiB0aGVyZSBuZWVkcyB0byBiZSBzb21l
-IHdheSB0byBrZWVwIHRoZXNlIGRlYnVnZnMgZW50cmllcyB1bnRpbCB0aGUgZHJpdmVyIHVubG9h
-ZHMuICBJIGRvbid0IGtub3cgaG93IHRvIGRvIHRoYXQgd2l0aG91dCBjcmVhdGluZyBzb21lIHVn
-bHkgZ2xvYmFsIHZhcmlhYmxlcy4NCg0KDQoNCkZvciBpbnN0YW5jZSwgY2FuIHdlIGFsbG9jYXRl
-IGNvcnJlc3BvbmRpbmcgYnVmZmVycyBpbiB0aGUgZHJpdmVyIGxheWVyLCBjb3B5DQoNCnRoaW5n
-cyBvdmVyIGFuZCBrZWVwIHRob3NlIGJ1ZmZlcnMgdW50aWwgbm91dmVhdV9kcm1fZXhpdCgpPyBU
-aGlzIHdvdWxkIGFsc28NCg0KYXZvaWQgZXhwb3NpbmcgdGhvc2UgRE1BIGJ1ZmZlcnMgdmlhIGRl
-YnVnZnMuDQoNClRoZSB3aG9sZSBwb2ludCBiZWhpbmQgdGhpcyBwYXRjaCBpcyB0byBleHBvc2Ug
-dGhlIGJ1ZmZlcnMgdmlhIGRlYnVnZnMuICBIb3cgZWxzZSBzaG91bGQgdGhleSBiZSBleHBvc2Vk
-Pw0KDQo=
+Not sure I can follow. The scheduler instance might be per context and bind
+queue. In this case it gets the shared wq passed, but doesn't know how many
+other scheduler instances share the same one.
 
---_000_42cbb398d41273d8f743fff24015bbd0e535b151camelnvidiacom_
-Content-Type: text/html; charset="utf-8"
-Content-ID: <E3BE048DEA72134D8B20381CDB8CC184@namprd12.prod.outlook.com>
-Content-Transfer-Encoding: base64
+Additionally, there might be drivers not using the DRM scheduler for for bind
+queues at all (I think Xe does not).
 
-PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
-dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjwvaGVhZD4NCjxib2R5Pg0KPGRpdj5PbiBUdWUs
-IDIwMjQtMDItMTMgYXQgMTc6NTcgKzAxMDAsIERhbmlsbyBLcnVtbXJpY2ggd3JvdGU6PC9kaXY+
-DQo8YmxvY2txdW90ZSB0eXBlPSJjaXRlIiBzdHlsZT0ibWFyZ2luOjAgMCAwIC44ZXg7IGJvcmRl
-ci1sZWZ0OjJweCAjNzI5ZmNmIHNvbGlkO3BhZGRpbmctbGVmdDoxZXgiPg0KPGJsb2NrcXVvdGUg
-dHlwZT0iY2l0ZSIgc3R5bGU9Im1hcmdpbjowIDAgMCAuOGV4OyBib3JkZXItbGVmdDoycHggIzcy
-OWZjZiBzb2xpZDtwYWRkaW5nLWxlZnQ6MWV4Ij4NCjxwcmU+KwlzdHJ1Y3QgZGVidWdmc19ibG9i
-X3dyYXBwZXIgYmxvYl9pbml0OzwvcHJlPg0KPHByZT4rCXN0cnVjdCBkZWJ1Z2ZzX2Jsb2Jfd3Jh
-cHBlciBibG9iX2ludHI7PC9wcmU+DQo8cHJlPisJc3RydWN0IGRlYnVnZnNfYmxvYl93cmFwcGVy
-IGJsb2Jfcm07PC9wcmU+DQo8cHJlPisJc3RydWN0IGRlYnVnZnNfYmxvYl93cmFwcGVyIGJsb2Jf
-cG11OzwvcHJlPg0KPHByZT4rCXN0cnVjdCBkZW50cnkgKmRlYnVnZnNfbG9nZ2luZ19kaXI7PC9w
-cmU+DQo8L2Jsb2NrcXVvdGU+DQo8cHJlPjxicj48L3ByZT4NCjxwcmU+SSB0aGluayB3ZSBzaG91
-bGQgbm90IGNyZWF0ZSB0aG9zZSBmcm9tIHdpdGhpbiB0aGUgbnZrbSBsYXllciwgYnV0IHJhdGhl
-ciBwYXNzPC9wcmU+DQo8cHJlPnRoZW0gZG93biB0aHJvdWdoIG52a21fZGV2aWNlX3BjaV9uZXco
-KS48L3ByZT4NCjwvYmxvY2txdW90ZT4NCjxkaXY+PGJyPg0KPC9kaXY+DQo8ZGl2PlNob3VsZCB0
-aGV5IGJlIGNyZWF0ZWQgaW4gbnZrbV9kZXZpY2VfcGNpX25ldygpIGFsc28sIGV2ZW4gdGhvdWdo
-IHdlIGhhdmUgbm8gaWRlYSB3aGV0aGVyIEdTUCBpcyBpbnZvbHZlZCBhdCB0aGF0IHBvaW50Pzwv
-ZGl2Pg0KPGRpdj48YnI+DQo8L2Rpdj4NCjxibG9ja3F1b3RlIHR5cGU9ImNpdGUiIHN0eWxlPSJt
-YXJnaW46MCAwIDAgLjhleDsgYm9yZGVyLWxlZnQ6MnB4ICM3MjlmY2Ygc29saWQ7cGFkZGluZy1s
-ZWZ0OjFleCI+DQo8cHJlPjxicj48L3ByZT4NCjxwcmU+TGlmZWN5Y2xlIHdpc2UgSSB0aGluayB3
-ZSBzaG91bGQgZW5zdXJlIHRoYXQgcmVtb3ZpbmcgdGhlIE5vdXZlYXUga2VybmVsIG1vZHVsZTwv
-cHJlPg0KPHByZT5hbHNvIGNsZWFucyB1cCB0aG9zZSBidWZmZXJzLiBFdmVuIHRob3VnaCBrZWVw
-LWdzcC1sb2dnaW5nIGlzIGNvbnNpZGVyZWQgdW5zYWZlLDwvcHJlPg0KPHByZT53ZSBzaG91bGRu
-J3QgbGVhayBtZW1vcnkuPC9wcmU+DQo8L2Jsb2NrcXVvdGU+DQo8ZGl2Pjxicj4NCjwvZGl2Pg0K
-PGRpdj5JIGFncmVlLCBidXQgdGhlbiB0aGVyZSBuZWVkcyB0byBiZSBzb21lIHdheSB0byBrZWVw
-IHRoZXNlIGRlYnVnZnMgZW50cmllcyB1bnRpbCB0aGUgZHJpdmVyIHVubG9hZHMuICZuYnNwO0kg
-ZG9uJ3Qga25vdyBob3cgdG8gZG8gdGhhdCB3aXRob3V0IGNyZWF0aW5nIHNvbWUgdWdseSBnbG9i
-YWwgdmFyaWFibGVzLjwvZGl2Pg0KPGRpdj48YnI+DQo8L2Rpdj4NCjxibG9ja3F1b3RlIHR5cGU9
-ImNpdGUiIHN0eWxlPSJtYXJnaW46MCAwIDAgLjhleDsgYm9yZGVyLWxlZnQ6MnB4ICM3MjlmY2Yg
-c29saWQ7cGFkZGluZy1sZWZ0OjFleCI+DQo8cHJlPjxicj48L3ByZT4NCjxwcmU+Rm9yIGluc3Rh
-bmNlLCBjYW4gd2UgYWxsb2NhdGUgY29ycmVzcG9uZGluZyBidWZmZXJzIGluIHRoZSBkcml2ZXIg
-bGF5ZXIsIGNvcHk8L3ByZT4NCjxwcmU+dGhpbmdzIG92ZXIgYW5kIGtlZXAgdGhvc2UgYnVmZmVy
-cyB1bnRpbCBub3V2ZWF1X2RybV9leGl0KCk/IFRoaXMgd291bGQgYWxzbzwvcHJlPg0KPHByZT5h
-dm9pZCBleHBvc2luZyB0aG9zZSBETUEgYnVmZmVycyB2aWEgZGVidWdmcy48L3ByZT4NCjwvYmxv
-Y2txdW90ZT4NCjxkaXY+PGJyPg0KPC9kaXY+DQo8ZGl2PlRoZSB3aG9sZSBwb2ludCBiZWhpbmQg
-dGhpcyBwYXRjaCBpcyB0byBleHBvc2UgdGhlIGJ1ZmZlcnMgdmlhIGRlYnVnZnMuICZuYnNwO0hv
-dyBlbHNlIHNob3VsZCB0aGV5IGJlIGV4cG9zZWQ/PC9kaXY+DQo8ZGl2Pjxicj4NCjwvZGl2Pg0K
-PGRpdj48c3Bhbj48L3NwYW4+PC9kaXY+DQo8L2JvZHk+DQo8L2h0bWw+DQo=
+> 
+> If we don't do something like that then I'm not sure there's really much
+> benefit - instead of carefully timing 512 dma_fence on the global wq you
+> just need to create a pile of context (at least on intel's guc that's
+> absolutely no issue) and then careful time them.
 
---_000_42cbb398d41273d8f743fff24015bbd0e535b151camelnvidiacom_--
+Well, that's true. I'd still argue that there is a slight difference. From a
+drivers isolated perspective using the global kernel wq might be entirely fine,
+as in this patch. However, in combination with another driver doing the same
+thing, things can blow up. For the case you illustrated it's at least possible
+to spot it from a driver's perspective.
+
+> 
+> I still feel like we have bigger fish to fry ... But might be worth the
+> effort to at least make the parallel timeline limit a lot more explicit?
+
+I agree, and it'd be great if we can find a solution such bugs can be detected
+systematically (e.g. through lockdep), but maybe we can start to at least
+document that we should never use the kernel global wq and where we need to be
+careful in sharing driver wqs.
+
+- Danilo
+
+> 
+> Cheers, Sima
+> 
+>>
+>> [1] https://elixir.bootlin.com/linux/v6.8-rc3/source/drivers/gpu/drm/nouveau/nouveau_drm.c#L313
+>>
+>>>
+>>> I'm not sure we should care differently, but I guess it'd be good to
+>>> annotate it all in case the wq subsystem's idea of how much such deadlocks
+>>> are real changes.
+>>>
+>>> Also Teo is on a mission to get rid of all the global wq flushes, so there
+>>> should also be no source of deadlocks from that kind of cross-driver
+>>> dependency. Or at least shouldn't be in the future, I'm not sure it all
+>>> landed.
+>>> -Sima
+>>
+> 
+
