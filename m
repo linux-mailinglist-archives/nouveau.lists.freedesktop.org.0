@@ -2,82 +2,85 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AFD78534F4
-	for <lists+nouveau@lfdr.de>; Tue, 13 Feb 2024 16:44:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2A308536AD
+	for <lists+nouveau@lfdr.de>; Tue, 13 Feb 2024 17:58:07 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3E81510E7C8;
-	Tue, 13 Feb 2024 15:43:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 160E410E889;
+	Tue, 13 Feb 2024 16:58:00 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="f14VceYX";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="WHGWcr1W";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B021510E7C8
- for <nouveau@lists.freedesktop.org>; Tue, 13 Feb 2024 15:43:55 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5F67810E886
+ for <nouveau@lists.freedesktop.org>; Tue, 13 Feb 2024 16:57:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1707839034;
+ s=mimecast20190719; t=1707843473;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DvFdww0sUH0VEiyLkggkdre2/6HC0kSSjcb5GZAg18E=;
- b=f14VceYXgCmocHcxvhBHFexlVooeBA8JNNTrrxzSTdQTv7z2EGwzibbIyqO69s5lR6PAES
- N0rTtrL3lI69KqpWtUgPly+na017bAFUvT8F+CPvnTzbmXxiXTrZiDxLRHACRgZwt57tiN
- pQl/QWydGI3bC6bKYccLn7V0AQbIkGs=
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=8e0DccU/KeSr/q5ONRNWJlNTzavT2616Q3HcyER/HV4=;
+ b=WHGWcr1W8lVqoIfuzI5i3o8hXw43XCrHitqYciCXZiR6gcqMrghF+eYREVr4L6omBfu4H4
+ z2qoZueY4g9qTaQZz3jpqsdRecrEEXpj7AlRP1BkLYheqDjseMqwU9oh6iJ6hlgE1PloTj
+ EZBOK5XJHNQsf3QkzCKiLPjQNz58PMc=
+Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
+ [209.85.167.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-151-M8vuIosdMRqSf2yhJDVqAw-1; Tue, 13 Feb 2024 10:43:53 -0500
-X-MC-Unique: M8vuIosdMRqSf2yhJDVqAw-1
-Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-a3bdd99a243so371630766b.0
- for <nouveau@lists.freedesktop.org>; Tue, 13 Feb 2024 07:43:53 -0800 (PST)
+ us-mta-452-ZSqIDAfTOsee6QvgubEM4g-1; Tue, 13 Feb 2024 11:57:51 -0500
+X-MC-Unique: ZSqIDAfTOsee6QvgubEM4g-1
+Received: by mail-lf1-f72.google.com with SMTP id
+ 2adb3069b0e04-511a02e2094so176913e87.3
+ for <nouveau@lists.freedesktop.org>; Tue, 13 Feb 2024 08:57:51 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707839032; x=1708443832;
+ d=1e100.net; s=20230601; t=1707843470; x=1708448270;
  h=content-transfer-encoding:in-reply-to:cc:organization:from
  :references:to:content-language:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DvFdww0sUH0VEiyLkggkdre2/6HC0kSSjcb5GZAg18E=;
- b=M9a+Vq5JE/jd+QBHs45HVB+cLa4egwYYamOy0QDl2XZbiwt2sNz5V6NVW3GB+QyFmX
- RrQ2UR77HS7h0w2tBLcR3oWPcYoTpTuhsiMzeQzXJ0vkFsgi5HohER3KLenfCAhpgyRT
- ZdfXia80xHHPoJqjHxcnvf5UqxKlQGVe9uWVERmBcdoJsI52xk2CCLM3NLTdAyV0aIRU
- 17LDB279FqZj8fdDw+08sUK01KpLjawmSTj4XLIwFQVWaEGg48zlozvokVdXgJld+87Y
- CWxL4vU4eDQU0zvZI6XJ9HkUXnGU9AGZCEPbEZNZ9m6ohn8nM6mo8UekocW0NAghVegI
- dtcg==
-X-Gm-Message-State: AOJu0YzaNipPAS5K5MHte+QzEPDCqhPKa1i4MHsEPTd+5pZvxaI30UiZ
- 0DZI6mekg9kaYAuBmkhqr7CKMmuYwNUxTxx/fosfyusGSAIQB4FKtCUKROSr23+4l1ho2HcWWWR
- AKSLpcCoVW80gUX49ALd5JZlMgjMVQquJWCh32ddjjDZO1Fx5OFA9ezkMwWtv7jw=
-X-Received: by 2002:a17:906:f9cb:b0:a3c:f4e8:ac43 with SMTP id
- lj11-20020a170906f9cb00b00a3cf4e8ac43mr2605079ejb.21.1707839032328; 
- Tue, 13 Feb 2024 07:43:52 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEc7SjscpGEcn3fKHxkgJ3ZUunzTu93kwcdYqS9oKsNg9r76J+L5UVuYJPbiXX0sJV92kiOhA==
-X-Received: by 2002:a17:906:f9cb:b0:a3c:f4e8:ac43 with SMTP id
- lj11-20020a170906f9cb00b00a3cf4e8ac43mr2605040ejb.21.1707839031824; 
- Tue, 13 Feb 2024 07:43:51 -0800 (PST)
+ bh=8e0DccU/KeSr/q5ONRNWJlNTzavT2616Q3HcyER/HV4=;
+ b=UOiNG8rd+R9yjpAnoCjFMdUiSsiESWBR9KfDlU0JeMAn/mbF7bRBj/6nnudShwqy38
+ aE/H5IsG0/HriSlGChkSg3XXDlD6uSB1rwcyiWJ8tnymN9WZQ7+jtfPAZTLDjUmVEb3J
+ 7Xxty8UDOKyJ4BRXl8lKPtJhicd62VMNQ8R5UHWE2qewRQnylv/cNav3mSJIof3IAAej
+ b2w5NmRxXi3PdmdLnJHE6HPEzBt6pmSeTTAa+IoAuajlzzu27a8Q5u5wphmYRJX6CrWw
+ rz4iD/VeYuEJWFZrn8fEatDxLiDOXalTnyhdxi/kka8XZO4v57khj/U3BkaWVHZ22mWh
+ xutA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUgWKVgL4Repd10j6kqbCtKCiFSzqHZ/forM/2HZ6y3xtHnX4lm8DT7EBZtglhJkC0jXznSs0cGv23oxHSDma19fvFCFkn01q9yM/G0RA5dns25/8/ktBCcI4qSqQOR3d1kM1GWU6G5Dv5auA/OqRj8SPa90RpP8ISLmOAKInDnqw==
+ AJvYcCXIcYsp5Ni8rdh4YY0Az2GiOF+XyfzO5bRNFqQYA7m/bz2P6sLrANNwP+sE3FQbFPv3xHr9pIXkUF8EjkbZPH0+GHPIHe18gTJQ3tFURg==
+X-Gm-Message-State: AOJu0YyfRWh8K7Y7muSYxfYt7/I3RzOSopSEZ0cOIdlo13D+cPWv6IS3
+ YX8qV97XsNwkZkwu0Uxzavz+sR5ormuGg7GCfUxiRFdpyDaQ0yqqMhi1x26r0scrRbD9KHWr8pU
+ sdYKa668p/Fe2qAfoFq/LPXg1PmsM+3+gxNGQrMmHkaUoO5oQXYjAgYTAZd28c2A=
+X-Received: by 2002:a19:7419:0:b0:511:79ce:8a01 with SMTP id
+ v25-20020a197419000000b0051179ce8a01mr80762lfe.46.1707843470170; 
+ Tue, 13 Feb 2024 08:57:50 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEDJhQ5kLgZ/agbkRZYBqnnyin+Pp0rbzaCzgdlXwu0gyQ1ItE0UcyuImEXW2oI1LYyWVChVg==
+X-Received: by 2002:a19:7419:0:b0:511:79ce:8a01 with SMTP id
+ v25-20020a197419000000b0051179ce8a01mr80740lfe.46.1707843469716; 
+ Tue, 13 Feb 2024 08:57:49 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXzYw0AJvw1+lot2iI9yjCOzIsrof6tL3ODL9MryRcaI8jxvoMbseu1RZfyozqPLj17pCCXzUvphNkQGvJs8vuz8tXjZZhmjQo06KhqTXktwYVdVAq3ec6E533v6JYIH71bafMvBm598irwzc6QyhhlJ9SyfkE9GYrQYKsupYPbUA==
 Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
  ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
  by smtp.gmail.com with ESMTPSA id
- gv20-20020a170906f11400b00a3c9bd8e1c9sm1385430ejb.76.2024.02.13.07.43.50
+ ca23-20020a170906a3d700b00a3caccb8f66sm1456401ejb.44.2024.02.13.08.57.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Feb 2024 07:43:51 -0800 (PST)
-Message-ID: <824eea2e-30df-45e3-a357-daaad4b8ce57@redhat.com>
-Date: Tue, 13 Feb 2024 16:43:50 +0100
+ Tue, 13 Feb 2024 08:57:49 -0800 (PST)
+Message-ID: <62204be5-9367-4e52-9d25-be9c99a1a856@redhat.com>
+Date: Tue, 13 Feb 2024 17:57:48 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] [v3] nouveau: add command-line GSP-RM registry support
+Subject: Re: [PATCH 2/2] [v3] drm/nouveau: expose GSP-RM logging buffers via
+ debugfs
 To: Timur Tabi <ttabi@nvidia.com>
 References: <20240212211548.1094496-1-ttabi@nvidia.com>
- <20240212211548.1094496-2-ttabi@nvidia.com>
+ <20240212211548.1094496-3-ttabi@nvidia.com>
 From: Danilo Krummrich <dakr@redhat.com>
 Organization: RedHat
 Cc: Dave Airlie <airlied@redhat.com>, Lyude Paul <lyude@redhat.com>,
  nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-In-Reply-To: <20240212211548.1094496-2-ttabi@nvidia.com>
+In-Reply-To: <20240212211548.1094496-3-ttabi@nvidia.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -98,387 +101,368 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On 2/12/24 22:15, Timur Tabi wrote:
-> Add the NVreg_RegistryDwords command line parameter, which allows
-> specifying additional registry keys to be sent to GSP-RM.  This
-> allows additional configuration, debugging, and experimentation
-> with GSP-RM, which uses these keys to alter its behavior.
+> The LOGINIT, LOGINTR, LOGRM, and LOGPMU buffers are circular buffers
+> that have printf-like logs from GSP-RM and PMU encoded in them.
 > 
-> Note that these keys are passed as-is to GSP-RM, and Nouveau does
-> not parse them.  This is in contrast to the Nvidia driver, which may
-> parse some of the keys to configure some functionality in concert with
-> GSP-RM.  Therefore, any keys which also require action by the driver
-> may not function correctly when passed by Nouveau.  Caveat emptor.
+> LOGINIT, LOGINTR, and LOGRM are allocated by Nouveau and their DMA
+> addresses are passed to GSP-RM during initialization.  The buffers are
+> required for GSP-RM to initialize properly.
 > 
-> The name and format of NVreg_RegistryDwords is the same as used by
-> the Nvidia driver, to maintain compatibility.
+> LOGPMU is also allocated by Nouveau, but its contents are updated
+> when Nouveau receives an NV_VGPU_MSG_EVENT_UCODE_LIBOS_PRINT RPC from
+> GSP-RM.  Nouveau then copies the RPC to the buffer.
+> 
+> The messages are encoded as an array of variable-length structures that
+> contain the parameters to an NV_PRINTF call.  The format string and
+> parameter count are stored in a special ELF image that contains only
+> logging strings.  This image is not currently shipped with the Nvidia
+> driver.
+> 
+> There are two methods to extract the logs.
+> 
+> OpenRM tries to load the logging ELF, and if present, parses the log
+> buffers in real time and outputs the strings to the kernel console.
+> 
+> Alternatively, and this is the method used by this patch, the buffers
+> can be exposed to user space, and a user-space tool (along with the
+> logging ELF image) can parse the buffer and dump the logs.
+> 
+> This method has the advantage that it allows the buffers to be parsed
+> even when the logging ELF file is not available to the user.  However,
+> it has the disadvantage the debubfs entries need to remain until the
+> driver is unloaded.
+> 
+> The buffers are exposed via debugfs.  The debugfs entries must be
+> created before GSP-RM is started, to ensure that they are available
+> during GSP-RM initialization.
+> 
+> If GSP-RM fails to initialize, then Nouveau immediately shuts down
+> the GSP interface.  This would normally also deallocate the logging
+> buffers, thereby preventing the user from capturing the debug logs.
+> To avoid this, the keep-gsp-logging command line parameter can be
+> specified.  This parmater is marked as *unsafe* (thereby taining the
+> kernel) because the DMA buffer and debugfs entries are never
+> deallocated, even if the driver unloads.  This gives the user the
+> time to capture the logs, but it also means that resources can only
+> be recovered by a reboot.
+> 
+> An end-user can capture the logs using the following commands:
+> 
+>      cp /sys/kernel/debug/dri/<path>/loginit loginit
+>      cp /sys/kernel/debug/dri/<path>/logrm logrm
+>      cp /sys/kernel/debug/dri/<path>/logintr logintr
+>      cp /sys/kernel/debug/dri/<path>/logpmu logpmu
+> 
+> where <path> is the PCI ID of the GPU (e.g. 0000:65:00.0).  If
+> keep-gsp-logging is specified, then the <path> is the same but with
+> -debug appended (e.g. 0000:65:00.0-debug).
+> 
+> Since LOGPMU is not needed for normal GSP-RM operation, it is only
+> created if debugfs is available.  Otherwise, the
+> NV_VGPU_MSG_EVENT_UCODE_LIBOS_PRINT RPCs are ignored.
 > 
 > Signed-off-by: Timur Tabi <ttabi@nvidia.com>
 > ---
-> v3: rebased to drm-next
+> v3: reworked r535_gsp_libos_debugfs_init, rebased for drm-next
 > 
->   .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |   6 +
->   .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 279 ++++++++++++++++--
->   2 files changed, 261 insertions(+), 24 deletions(-)
+>   .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |  12 +
+>   .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 215 +++++++++++++++++-
+>   2 files changed, 223 insertions(+), 4 deletions(-)
 > 
 > diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> index 6f5d376d8fcc..3fbc57b16a05 100644
+> index 3fbc57b16a05..2ee44bdf8be7 100644
 > --- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
 > +++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> @@ -211,6 +211,12 @@ struct nvkm_gsp {
->   		struct mutex mutex;;
->   		struct idr idr;
->   	} client_id;
+> @@ -5,6 +5,8 @@
+>   #include <core/falcon.h>
+>   #include <core/firmware.h>
+>   
+> +#include <linux/debugfs.h>
 > +
-> +	/* A linked list of registry items. The registry RPC will be built from it. */
-> +	struct list_head registry_list;
+>   #define GSP_PAGE_SHIFT 12
+>   #define GSP_PAGE_SIZE  BIT(GSP_PAGE_SHIFT)
+>   
+> @@ -217,6 +219,16 @@ struct nvkm_gsp {
+>   
+>   	/* The size of the registry RPC */
+>   	size_t registry_rpc_size;
 > +
-> +	/* The size of the registry RPC */
-> +	size_t registry_rpc_size;
+> +	/*
+> +	 * Logging buffers in debugfs.  The wrapper objects need to remain
+> +	 * in memory until the dentry is deleted.
+> +	 */
+> +	struct debugfs_blob_wrapper blob_init;
+> +	struct debugfs_blob_wrapper blob_intr;
+> +	struct debugfs_blob_wrapper blob_rm;
+> +	struct debugfs_blob_wrapper blob_pmu;
+> +	struct dentry *debugfs_logging_dir;
+
+I think we should not create those from within the nvkm layer, but rather pass
+them down through nvkm_device_pci_new().
+
+Lifecycle wise I think we should ensure that removing the Nouveau kernel module
+also cleans up those buffers. Even though keep-gsp-logging is considered unsafe,
+we shouldn't leak memory.
+
+For instance, can we allocate corresponding buffers in the driver layer, copy
+things over and keep those buffers until nouveau_drm_exit()? This would also
+avoid exposing those DMA buffers via debugfs.
+
 >   };
 >   
 >   static inline bool
 > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> index 1c46e3f919be..86b62c7e1229 100644
+> index 86b62c7e1229..56209bf81360 100644
 > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
 > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> @@ -54,6 +54,8 @@
->   #include <nvrm/535.113.01/nvidia/kernel/inc/vgpu/rpc_global_enums.h>
+> @@ -26,6 +26,7 @@
+>   #include <subdev/vfn.h>
+>   #include <engine/fifo/chan.h>
+>   #include <engine/sec2.h>
+> +#include <drm/drm_device.h>
 >   
->   #include <linux/acpi.h>
-> +#include <linux/ctype.h>
-> +#include <linux/parser.h>
+>   #include <nvfw/fw.h>
 >   
->   #define GSP_MSG_MIN_SIZE GSP_PAGE_SIZE
->   #define GSP_MSG_MAX_SIZE GSP_PAGE_MIN_SIZE * 16
-> @@ -1082,51 +1084,280 @@ r535_gsp_rpc_unloading_guest_driver(struct nvkm_gsp *gsp, bool suspend)
->   	return nvkm_gsp_rpc_wr(gsp, rpc, true);
+> @@ -1979,6 +1980,196 @@ r535_gsp_rmargs_init(struct nvkm_gsp *gsp, bool resume)
+>   	return 0;
 >   }
 >   
-> +struct registry_list_entry {
-> +	struct list_head list;
-
-Nit: 'head' or 'entry' might be more suitable.
-
-> +	size_t name_len;
-> +	u32 type;
-
-I prefer to represent type as enum or use a define for '1 = integer' instead.
-This also gets you rid of the need to explicitly explain it's meaning in the
-documentation of add_registry().
-
-> +	u32 data;
-> +	u32 length;
-> +	char name[];
-> +};
+> +#define NV_GSP_MSG_EVENT_UCODE_LIBOS_CLASS_PMU		0xf3d722
 > +
 > +/**
-> + * add_registry -- adds a registry entry
-> + * @gsp: gsp pointer
-> + * @name: name of the registry key
-> + * @type: type of data (1 = integer)
-> + * @data: value
-> + * @length: size of data, in bytes
+> + * r535_gsp_msg_libos_print - capture log message from the PMU
+> + * @priv: gsp pointer
+> + * @fn: function number (ignored)
+> + * @repv: pointer to libos print RPC
+> + * @repc: message size
 > + *
-> + * Adds a registry key/value pair to the registry database.
-> + *
-> + * Currently, only 32-bit integers (type == 1, length == 4) are supported.
-
-What if we pass something else? This function doesn't seem to ensure nothing
-else is accepted. Although I recognize that it's only used by add_registry_num()
-enforcing this limitation by it's function signature.
-
-> + *
-> + * This function collects the registry information in a linked list.  After
-> + * all registry keys have been added, build_registry() is used to create the
-> + * RPC data structure.
-> + *
-> + * registry_rpc_size is a running total of the size of all registry keys.
-> + * It's used to avoid an O(n) calculation of the size when the RPC is built.
-> + *
-> + * Returns 0 on success, or negative error code on error.
+> + * See _kgspRpcUcodeLibosPrint
 > + */
-> +static int add_registry(struct nvkm_gsp *gsp, const char *name, u32 type, u32 data, u32 length)
+> +static int r535_gsp_msg_libos_print(void *priv, u32 fn, void *repv, u32 repc)
 > +{
-> +	struct registry_list_entry *reg;
-> +	size_t nlen = strlen(name) + 1;
+> +	struct nvkm_gsp *gsp = priv;
+> +	struct nvkm_subdev *subdev = &gsp->subdev;
+> +	struct {
+> +		u32 ucodeEngDesc;
+> +		u32 libosPrintBufSize;
+> +		u8 libosPrintBuf[];
+> +	} *rpc = repv;
+> +	unsigned int class = rpc->ucodeEngDesc >> 8;
 > +
-> +	/* Set an arbitrary limit to avoid problems with broken command lines */
-> +	if (strlen(name) > 64)
-
-Could re-use nlen for this check.
-
-> +		return -EFBIG;
-
-This error code doesn't seem to apply here, prefer EINVAL.
-
+> +	nvkm_debug(subdev, "received libos print from class 0x%x for %u bytes\n",
+> +		   class, rpc->libosPrintBufSize);
 > +
-> +	reg = kmalloc(sizeof(struct registry_list_entry) + nlen, GFP_KERNEL);
-> +	if (!reg)
-> +		return -ENOMEM;
+> +	if (class != NV_GSP_MSG_EVENT_UCODE_LIBOS_CLASS_PMU) {
+> +		nvkm_warn(subdev,
+> +			  "received libos print from unknown class 0x%x\n",
+> +			  class);
+> +		return -ENOMSG;
+> +	}
+> +	if (rpc->libosPrintBufSize > GSP_PAGE_SIZE) {
+> +		nvkm_error(subdev, "libos print is too large (%u bytes)\n",
+> +			   rpc->libosPrintBufSize);
+> +		return -E2BIG;
 > +
-> +	memcpy(reg->name, name, nlen);
-> +	reg->name_len = nlen;
-> +	reg->type = type;
-> +	reg->data = data;
-> +	reg->length = length;
-> +
-> +	nvkm_debug(&gsp->subdev, "adding GSP-RM registry '%s=%u'\n", name, data);
-> +	list_add_tail(&reg->list, &gsp->registry_list);
-> +	gsp->registry_rpc_size += sizeof(PACKED_REGISTRY_ENTRY) + nlen;
+> +	}
+> +	memcpy(gsp->blob_pmu.data, rpc->libosPrintBuf, rpc->libosPrintBufSize);
 > +
 > +	return 0;
 > +}
 > +
-> +static int add_registry_num(struct nvkm_gsp *gsp, const char *name, u32 value)
-> +{
-> +	return add_registry(gsp, name, 1, value, sizeof(u32));
-> +}
-> +
-> +/**
-> + * build_registry -- create the registry RPC data
-> + * @gsp: gsp pointer
-> + * @registry: pointer to the RPC payload to fill
-> + *
-> + * After all registry key/value pairs have been added, call this function to
-> + * build the RPC.
-> + *
-> + * The registry RPC looks like this:
-> + *
-> + * +-----------------+
-> + * |NvU32 size;      |
-> + * |NvU32 numEntries;|
-> + * +-----------------+
-> + * +---------------------+
-> + * |PACKED_REGISTRY_ENTRY|
-> + * +---------------------+
-> + * |PACKED_REGISTRY_ENTRY|
-> + * +---------------------+
-> + * ... (one copy for each entry)
-> + *
-> + * +----------------------------------+
-> + * |Null-terminated string for entry 0|
-> + * +----------------------------------+
-> + * |Null-terminated string for entry 1|
-> + * +----------------------------------+
-> + * ... (one copy for each entry)
-> + *
-> + * All memory allocated by add_registry() is released.
+> +/*
+> + * If GSP-RM load fails, then the GSP nvkm object will be deleted, the
+> + * logging debugfs entries will be deleted, and it will not be possible to
+> + * debug the load failure.  The keep_gsp_logging parameter tells Nouveau
+> + * not to free these resources, even if the driver is unloading.  In this
+> + * case, the only recovery is a reboot.
 > + */
-> +static void build_registry(struct nvkm_gsp *gsp, PACKED_REGISTRY_TABLE *registry)
-> +{
-> +	struct registry_list_entry *reg, *n;
-> +	size_t str_offset;
-> +	unsigned int i = 0;
-> +
-> +	registry->numEntries = list_count_nodes(&gsp->registry_list);
-> +	str_offset = struct_size(registry, entries, registry->numEntries);
-> +
-> +	list_for_each_entry_safe(reg, n, &gsp->registry_list, list) {
-> +		registry->entries[i].type = reg->type;
-> +		registry->entries[i].data = reg->data;
-> +		registry->entries[i].length = reg->length;
-> +		registry->entries[i].nameOffset = str_offset;
-> +		memcpy((void *)registry + str_offset, reg->name, reg->name_len);
-> +		str_offset += reg->name_len;
-> +		i++;
-> +
-> +		list_del(&reg->list);
-> +		kfree(reg);
-> +	}
-> +
-> +	/* Double-check that we calculated the sizes correctly */
-> +	WARN_ON(gsp->registry_rpc_size != str_offset);
-> +
-> +	registry->size = gsp->registry_rpc_size;
-> +}
+> +static bool keep_gsp_logging;
+> +module_param_unsafe(keep_gsp_logging, bool, 0444);
+> +MODULE_PARM_DESC(keep_gsp_logging,
+> +		 "Do not remove the GSP-RM logging debugfs entries upon exit");
 > +
 > +/**
-> + * clean_registry -- clean up registry memory in case of error
+> + * r535_gsp_libos_debugfs_init - create logging debugfs entries
 > + * @gsp: gsp pointer
 > + *
-> + * Call this function to clean up all memory allocated by add_registry()
-> + * in case of error and build_registry() is not called.
+> + * Create the debugfs entries.  This exposes the log buffers to
+> + * userspace so that an external tool can parse it.
+> + *
+> + * The 'logpmu' contains exception dumps from the PMU. It is written via an
+> + * RPC sent from GSP-RM and must be only 4KB.  We create it here because it's
+> + * only useful if there is a debugfs entry to expose it.  If we get the PMU
+> + * logging RPC and there is no debugfs entry, the RPC is just ignored.
+> + *
+> + * The blob_init, blob_rm, and blob_pmu objects can't be transient
+> + * because debugfs_create_blob doesn't copy them.
+> + *
+> + * NOTE: OpenRM loads the logging elf image and prints the log messages
+> + * in real-time. We may add that capability in the future, but that
+> + * requires loading an ELF images that are not distributed with the driver,
+> + * and adding the parsing code to Nouveau.
+> + *
+> + * Ideally, this should be part of nouveau_debugfs_init(), but that function
+> + * is called too late.  We really want to create these debugfs entries before
+> + * r535_gsp_booter_load() is called, so that if GSP-RM fails to initialize,
+> + * there could still be a log to capture.
+> + *
+> + * If the unsafe command line pararameter 'keep-gsp-logging' is specified,
+> + * then the logging buffer and debugfs entries will be retained when the
+> + * driver shuts down.  This is necessary to debug initialization failures,
+> + * because otherwise the buffers will disappear before the logs can be
+> + * captured.
 > + */
-> +static void clean_registry(struct nvkm_gsp *gsp)
+> +static void r535_gsp_libos_debugfs_init(struct nvkm_gsp *gsp)
 > +{
-> +	struct registry_list_entry *reg, *n;
-> +
-> +	list_for_each_entry_safe(reg, n, &gsp->registry_list, list) {
-> +		list_del(&reg->list);
-> +		kfree(reg);
-> +	}
-> +
-> +	gsp->registry_rpc_size = sizeof(PACKED_REGISTRY_TABLE);
-> +}
-> +
-> +MODULE_PARM_DESC(NVreg_RegistryDwords,
-> +		 "A semicolon-separated list of key=integer pairs of GSP-RM registry keys");
-> +static char *NVreg_RegistryDwords;
-> +module_param(NVreg_RegistryDwords, charp, 0400);
-> +
->   /* dword only */
->   struct nv_gsp_registry_entries {
->   	const char *name;
->   	u32 value;
->   };
->   
-> +/**
-> + * r535_registry_entries - required registry entries for GSP-RM
-> + *
-> + * This array lists registry entries that are required for GSP-RM to
-> + * function correctly.
-> + *
-> + * RMSecBusResetEnable - enables PCI secondary bus reset
-> + * RMForcePcieConfigSave - forces GSP-RM to preserve PCI configuration
-> + *   registers on any PCI reset.
-> + */
->   static const struct nv_gsp_registry_entries r535_registry_entries[] = {
->   	{ "RMSecBusResetEnable", 1 },
->   	{ "RMForcePcieConfigSave", 1 },
->   };
->   #define NV_GSP_REG_NUM_ENTRIES ARRAY_SIZE(r535_registry_entries)
->   
-> +/**
-> + * strip - strips all characters in 'reject' from 's'
-> + * @s: string to strip
-> + * @reject: string of characters to remove
-> + *
-> + * 's' is modified.
-> + *
-> + * Returns the length of the new string.
-> + */
-> +static size_t strip(char *s, const char *reject)
-> +{
-> +	char *p = s, *p2 = s;
-> +	size_t length = 0;
-> +	char c;
-> +
-> +	do {
-> +		while ((c = *p2) && strchr(reject, c))
-> +			p2++;
-> +
-> +		*p++ = c = *p2++;
-> +		length++;
-> +	} while (c);
-> +
-> +	return length;
-> +}
-> +
-> +/**
-> + * r535_gsp_rpc_set_registry - build registry RPC and call GSP-RM
-> + * @gsp: gsp pointer
-> + *
-> + * The GSP-RM registry is a set of key/value pairs that configure some aspects
-> + * of GSP-RM. The keys are strings, and the values are 32-bit integers.
-> + *
-> + * The registry is built from a combination of a static hard-coded list (see
-> + * above) and entries passed on the driver's command line.
-> + */
->   static int
->   r535_gsp_rpc_set_registry(struct nvkm_gsp *gsp)
->   {
->   	PACKED_REGISTRY_TABLE *rpc;
-> -	char *strings;
-> -	int str_offset;
-> -	int i;
-> -	size_t rpc_size = struct_size(rpc, entries, NV_GSP_REG_NUM_ENTRIES);
-> +	unsigned int i;
-> +	int ret;
->   
-> -	/* add strings + null terminator */
-> -	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++)
-> -		rpc_size += strlen(r535_registry_entries[i].name) + 1;
-> +	INIT_LIST_HEAD(&gsp->registry_list);
-> +	gsp->registry_rpc_size = sizeof(PACKED_REGISTRY_TABLE);
->   
-> -	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_SET_REGISTRY, rpc_size);
-> -	if (IS_ERR(rpc))
-> -		return PTR_ERR(rpc);
-> +	/* Add the required registry entries first */
-> +	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
-> +		ret = add_registry_num(gsp, r535_registry_entries[i].name,
-> +				 r535_registry_entries[i].value);
-> +		if (ret) {
-> +			clean_registry(gsp);
-> +			return ret;
-> +		}
-> +	}
+> +	struct dentry *dir_init, *dir_intr, *dir_rm, *dir_pmu;
+> +	struct dentry *root, *dir;
+> +	struct device *dev = gsp->subdev.device->dev;
 > +
 > +	/*
-> +	 * The NVreg_RegistryDwords parameter is a string of key=value
-> +	 * pairs separated by semicolons. We need to extract and trim each
-> +	 * substring, and then parse the substring to extract the key and
-> +	 * value.
+> +	 * Under normal circumstances, we add our debugfs entries to the dentry
+> +	 * created by the DRM layer when the driver registered.  However, this
+> +	 * dentry and everything in it is deleted if GSP fails to initialize.
+> +	 *
+> +	 * If keep-gsp-logging is specified, then a different top-entry dentry
+> +	 * is created and that is used.  This dentry is never deleted, even if
+> +	 * the driver exits.
 > +	 */
-> +	if (NVreg_RegistryDwords) {
-> +		char *p = kstrdup(NVreg_RegistryDwords, GFP_KERNEL);
-> +		char *start, *next = p, *equal;
-> +		size_t length;
+> +	if (keep_gsp_logging) {
+> +		char temp[64];
 > +
-> +		/* Remove any whitespace from the parameter string */
-> +		length = strip(p, " \t\n");
-> +
-> +		while ((start = strsep(&next, ";"))) {
-> +			long value;
-> +
-> +			equal = strchr(start, '=');
-> +			if (!equal || (equal == start) || !isdigit(equal[1])) {
-> +				nvkm_error(&gsp->subdev,
-> +					"ignoring invalid registry string '%s'\n", start);
-> +				continue;
-> +			}
->   
-> -	rpc->numEntries = NV_GSP_REG_NUM_ENTRIES;
-> +			ret = kstrtol(equal + 1, 0, &value);
-> +			if (ret) {
-> +				nvkm_error(&gsp->subdev,
-> +					"ignoring invalid registry value in '%s'\n", start);
-> +				continue;
-> +			}
-
-At a first glance, the string parsing looks correct to me. Did you test with invalid
-strings as well?
-
->   
-> -	str_offset = offsetof(typeof(*rpc), entries[NV_GSP_REG_NUM_ENTRIES]);
-> -	strings = (char *)&rpc->entries[NV_GSP_REG_NUM_ENTRIES];
-> -	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
-> -		int name_len = strlen(r535_registry_entries[i].name) + 1;
-> -
-> -		rpc->entries[i].nameOffset = str_offset;
-> -		rpc->entries[i].type = 1;
-> -		rpc->entries[i].data = r535_registry_entries[i].value;
-> -		rpc->entries[i].length = 4;
-> -		memcpy(strings, r535_registry_entries[i].name, name_len);
-> -		strings += name_len;
-> -		str_offset += name_len;
-> +			/* Truncate the key=value string to just key */
-> +			*equal = 0;
-
-What's the purpose for that?
-
-> +
-> +			ret = add_registry_num(gsp, start, value);
-> +			if (ret) {
-> +				nvkm_error(&gsp->subdev,
-> +					"ignoring invalid registry key/value '%s=%lu'\n",
-> +					start, value);
-> +				continue;
-> +			}
+> +		/* Find the 'dri' root debugfs entry. Every GPU has a dentry under it */
+> +		root = debugfs_lookup("dri", NULL);
+> +		if (IS_ERR(root)) {
+> +			/* No debugfs, or no root dentry for DRM */
+> +			return;
 > +		}
 > +
-> +		kfree(p);
->   	}
-> -	rpc->size = str_offset;
+> +		scnprintf(temp, sizeof(temp), "%s-debug", dev_name(dev));
+> +		dir = debugfs_create_dir(temp, root);
+> +		dput(root);
+> +		if (IS_ERR(dir)) {
+> +			nvkm_error(&gsp->subdev,
+> +				"failed to create %s debugfs entry\n", temp);
+> +			return;
+> +		}
 > +
-> +	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_SET_REGISTRY, gsp->registry_rpc_size);
-> +	if (IS_ERR(rpc)) {
-> +		clean_registry(gsp);
-> +		return PTR_ERR(rpc);
+> +		gsp->debugfs_logging_dir = dir;
+> +	} else {
+> +		/* Each GPU has a subdir based on its device name, so find it */
+> +		struct drm_device *drm_dev = dev_get_drvdata(dev);
+> +
+> +		if (!drm_dev || !drm_dev->debugfs_root) {
+> +			nvkm_error(&gsp->subdev, "could not find debugfs path\n");
+> +			return;
+> +		}
+> +
+> +		dir = drm_dev->debugfs_root;
 > +	}
 > +
-> +	build_registry(gsp, rpc);
->   
->   	return nvkm_gsp_rpc_wr(gsp, rpc, false);
+> +	gsp->blob_init.data = gsp->loginit.data;
+> +	gsp->blob_init.size = gsp->loginit.size;
+> +	gsp->blob_intr.data = gsp->logintr.data;
+> +	gsp->blob_intr.size = gsp->logintr.size;
+> +	gsp->blob_rm.data = gsp->logrm.data;
+> +	gsp->blob_rm.size = gsp->logrm.size;
+> +
+> +	/*
+> +	 * Since the PMU buffer is copied from an RPC, it doesn't need to be
+> +	 * a DMA buffer.
+> +	 */
+> +	gsp->blob_pmu.size = GSP_PAGE_SIZE;
+> +	gsp->blob_pmu.data = kzalloc(gsp->blob_pmu.size, GFP_KERNEL);
+> +	if (!gsp->blob_pmu.data)
+> +		goto error;
+> +
+> +	dir_init = debugfs_create_blob("loginit", 0444, dir, &gsp->blob_init);
+> +	if (IS_ERR(dir_init)) {
+> +		nvkm_error(&gsp->subdev, "failed to create loginit debugfs entry\n");
+> +		goto error;
+> +	}
+> +
+> +	dir_intr = debugfs_create_blob("logintr", 0444, dir, &gsp->blob_intr);
+> +	if (IS_ERR(dir_intr)) {
+> +		nvkm_error(&gsp->subdev, "failed to create logintr debugfs entry\n");
+> +		goto error;
+> +	}
+> +
+> +	dir_rm = debugfs_create_blob("logrm", 0444, dir, &gsp->blob_rm);
+> +	if (IS_ERR(dir_rm)) {
+> +		nvkm_error(&gsp->subdev, "failed to create logrm debugfs entry\n");
+> +		goto error;
+> +	}
+> +
+> +	dir_pmu = debugfs_create_blob("logpmu", 0444, dir, &gsp->blob_pmu);
+> +	if (IS_ERR(dir_pmu)) {
+> +		nvkm_error(&gsp->subdev, "failed to create logpmu debugfs entry\n");
+> +		goto error;
+> +	}
+> +
+> +	i_size_write(d_inode(dir_init), gsp->blob_init.size);
+> +	i_size_write(d_inode(dir_intr), gsp->blob_intr.size);
+> +	i_size_write(d_inode(dir_rm), gsp->blob_rm.size);
+> +	i_size_write(d_inode(dir_pmu), gsp->blob_pmu.size);
+> +
+> +	r535_gsp_msg_ntfy_add(gsp, 0x0000100C, r535_gsp_msg_libos_print, gsp);
+> +
+> +	nvkm_debug(&gsp->subdev, "created debugfs GSP-RM logging entries\n");
+> +	return;
+> +
+> +error:
+> +	debugfs_remove(gsp->debugfs_logging_dir);
+> +	gsp->debugfs_logging_dir = NULL;
+> +
+> +	kfree(gsp->blob_pmu.data);
+> +	gsp->blob_pmu.data = NULL;
+> +}
+> +
+>   static inline u64
+>   r535_gsp_libos_id8(const char *name)
+>   {
+> @@ -2029,7 +2220,11 @@ static void create_pte_array(u64 *ptes, dma_addr_t addr, size_t size)
+>    * written to directly by GSP-RM and can be any multiple of GSP_PAGE_SIZE.
+>    *
+>    * The physical address map for the log buffer is stored in the buffer
+> - * itself, starting with offset 1. Offset 0 contains the "put" pointer.
+> + * itself, starting with offset 1. Offset 0 contains the "put" pointer (pp).
+> + * Initially, pp is equal to 0.  If the buffer has valid logging data in it,
+> + * then pp points to index into the buffer where the next logging entry will
+> + * be written.  Therefore, the logging data is valid if:
+> + *   1 <= pp < sizeof(buffer)/sizeof(u64)
+>    *
+>    * The GSP only understands 4K pages (GSP_PAGE_SIZE), so even if the kernel is
+>    * configured for a larger page size (e.g. 64K pages), we need to give
+> @@ -2100,6 +2295,9 @@ r535_gsp_libos_init(struct nvkm_gsp *gsp)
+>   	args[3].size = gsp->rmargs.size;
+>   	args[3].kind = LIBOS_MEMORY_REGION_CONTIGUOUS;
+>   	args[3].loc  = LIBOS_MEMORY_REGION_LOC_SYSMEM;
+> +
+> +	r535_gsp_libos_debugfs_init(gsp);
+> +
+>   	return 0;
 >   }
+>   
+> @@ -2404,9 +2602,18 @@ r535_gsp_dtor(struct nvkm_gsp *gsp)
+>   	r535_gsp_dtor_fws(gsp);
+>   
+>   	nvkm_gsp_mem_dtor(gsp, &gsp->shm.mem);
+> -	nvkm_gsp_mem_dtor(gsp, &gsp->loginit);
+> -	nvkm_gsp_mem_dtor(gsp, &gsp->logintr);
+> -	nvkm_gsp_mem_dtor(gsp, &gsp->logrm);
+> +
+> +	if (keep_gsp_logging && gsp->debugfs_logging_dir)
+> +		nvkm_warn(&gsp->subdev,
+> +			"GSP-RM logging buffers retained, reboot required to recover\n");
+> +	else {
+> +		kfree(gsp->blob_pmu.data);
+> +		gsp->blob_pmu.data = NULL;
+> +
+> +		nvkm_gsp_mem_dtor(gsp, &gsp->loginit);
+> +		nvkm_gsp_mem_dtor(gsp, &gsp->logintr);
+> +		nvkm_gsp_mem_dtor(gsp, &gsp->logrm);
+> +	}
+>   }
+>   
+>   int
 
