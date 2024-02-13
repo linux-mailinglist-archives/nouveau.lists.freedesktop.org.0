@@ -2,59 +2,97 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECF7E852854
-	for <lists+nouveau@lfdr.de>; Tue, 13 Feb 2024 06:44:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 29853852B6A
+	for <lists+nouveau@lfdr.de>; Tue, 13 Feb 2024 09:44:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6CF7F10E83F;
-	Tue, 13 Feb 2024 05:44:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 99DDC10E1D3;
+	Tue, 13 Feb 2024 08:44:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="jqapkzhh";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="o+4m7vdC";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="r2i4WuDH";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="o+4m7vdC";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="r2i4WuDH";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B8F3910E830;
- Tue, 13 Feb 2024 05:44:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1707803062; x=1739339062;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=XwYxTCi3Vrffvqu5sWo94/cUOA0oYGVkWlFbOTubhzg=;
- b=jqapkzhhmZhqGLWVv4Rs1h+ezacS6q1P+Lst6Px1MER1AbVIVeoQP1Dk
- ECSuzY80JsPdLkH0PXkIGpMZ1Qnm/rNtzRL95KNFny2U2m13zvAk7XKTa
- 2qsKzhoOfkEdqo99tXe5VWhjwSEJQHkgg+ddMS3E6pI3oW1G9LKZqZRZy
- JKDkNIy7CBPCxqqTUG77lKsw/Qm4Ifm5v0O8j1+ReIemyGMGlskacd2aD
- nvLIiF3SgimB8VdA/aPhWQuxddq1dwUSPcYmXJSXGQ0dO1NPvCJ+JSAvq
- G0j5vxvbzaaJ4XvrWDT5C2tYOTcQSp2sSZa4di9+nZvXa93Ap+m3huSAk Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10982"; a="1924497"
-X-IronPort-AV: E=Sophos;i="6.06,156,1705392000"; 
-   d="scan'208";a="1924497"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
- by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Feb 2024 21:44:22 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.06,156,1705392000"; d="scan'208";a="33876227"
-Received: from lkp-server01.sh.intel.com (HELO 01f0647817ea) ([10.239.97.150])
- by fmviesa001.fm.intel.com with ESMTP; 12 Feb 2024 21:44:19 -0800
-Received: from kbuild by 01f0647817ea with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1rZlaa-0007Xe-37;
- Tue, 13 Feb 2024 05:44:16 +0000
-Date: Tue, 13 Feb 2024 13:43:30 +0800
-From: kernel test robot <lkp@intel.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>, deller@gmx.de,
- kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com,
- daniel@ffwll.ch, airlied@gmail.com
-Cc: oe-kbuild-all@lists.linux.dev, linux-fbdev@vger.kernel.org,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A9D5D10E0E9;
+ Tue, 13 Feb 2024 08:44:07 +0000 (UTC)
+Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org [10.150.64.98])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 447C41FC29;
+ Tue, 13 Feb 2024 08:44:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1707813846; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=vM/MI9GQVcz0kQq4kuMC8GufU8ZlfC4eQUgNWb4/vqs=;
+ b=o+4m7vdCMQ1oQJGHgg9R9ZAbeqsKqs+xisXdoLzNFytGQsP5y76kF+0w3h5f26OaLKpQEG
+ VWZn0LejH6A8I7IgrtSaQU3TrjYIf/zUx11LAdZbcYqmAnWlg+3+T4YsXwvEa1zBZXGOc2
+ AyTd42hsBrkdTooLAVXDhr50ZwMEsIo=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1707813846;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=vM/MI9GQVcz0kQq4kuMC8GufU8ZlfC4eQUgNWb4/vqs=;
+ b=r2i4WuDHFqcpPOtI5fXgZJOuSWIYvH5YMM0gfu8lJr6vNaOu+kFjSd+0QEfEfxLtzt+7Sa
+ x8gveR1Xo1Pa8sDg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1707813846; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=vM/MI9GQVcz0kQq4kuMC8GufU8ZlfC4eQUgNWb4/vqs=;
+ b=o+4m7vdCMQ1oQJGHgg9R9ZAbeqsKqs+xisXdoLzNFytGQsP5y76kF+0w3h5f26OaLKpQEG
+ VWZn0LejH6A8I7IgrtSaQU3TrjYIf/zUx11LAdZbcYqmAnWlg+3+T4YsXwvEa1zBZXGOc2
+ AyTd42hsBrkdTooLAVXDhr50ZwMEsIo=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1707813846;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=vM/MI9GQVcz0kQq4kuMC8GufU8ZlfC4eQUgNWb4/vqs=;
+ b=r2i4WuDHFqcpPOtI5fXgZJOuSWIYvH5YMM0gfu8lJr6vNaOu+kFjSd+0QEfEfxLtzt+7Sa
+ x8gveR1Xo1Pa8sDg==
+Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id E21DF1329E;
+ Tue, 13 Feb 2024 08:44:05 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([10.150.64.162])
+ by imap2.dmz-prg2.suse.org with ESMTPSA id lNu2NdUry2VOFwAAn2gu4w
+ (envelope-from <tzimmermann@suse.de>); Tue, 13 Feb 2024 08:44:05 +0000
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: deller@gmx.de, kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com,
+ jani.nikula@linux.intel.com, daniel@ffwll.ch, airlied@gmail.com,
+ gregkh@linuxfoundation.org
+Cc: linux-fbdev@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-staging@lists.linux.dev,
  Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH 2/7] fbdev: Do not include <linux/backlight.h> in header
-Message-ID: <202402131349.eg8DJ3MB-lkp@intel.com>
-References: <20240212101712.23675-3-tzimmermann@suse.de>
+Subject: [PATCH v2 0/8] fbdev: Clean up include dependencies in header
+Date: Tue, 13 Feb 2024 09:42:18 +0100
+Message-ID: <20240213084403.20995-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240212101712.23675-3-tzimmermann@suse.de>
+Content-Transfer-Encoding: 8bit
+Authentication-Results: smtp-out2.suse.de;
+	none
+X-Spam-Level: ***
+X-Spam-Score: 3.70
+X-Spamd-Result: default: False [3.70 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; FROM_HAS_DN(0.00)[];
+ TO_DN_SOME(0.00)[]; R_MISSING_CHARSET(2.50)[];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de];
+ MIME_GOOD(-0.10)[text/plain]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ BROKEN_CONTENT_TYPE(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; RCPT_COUNT_TWELVE(0.00)[13];
+ MID_CONTAINS_FROM(1.00)[];
+ FREEMAIL_TO(0.00)[gmx.de,redhat.com,linux.intel.com,ffwll.ch,gmail.com,linuxfoundation.org];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
+ MIME_TRACE(0.00)[0:+]; RCVD_TLS_ALL(0.00)[];
+ BAYES_HAM(-0.00)[14.48%]
+X-Spam-Flag: NO
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,123 +107,30 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Thomas,
+Remove unnecessary dependencies in the include statements of the
+header file <linux/fb.h>. Several files throughout the kernel include
+the fbdev header, so reducing dependencies positively affects other
+subsystems as well. Also fix up nouveau and fbtft, which need backlight.h
+in some their source files.
 
-kernel test robot noticed the following build warnings:
+v2:
+	* include backlight.h in fbtft (kernel test robot)
 
-[auto build test WARNING on drm-misc/drm-misc-next]
-[also build test WARNING on linus/master v6.8-rc4 next-20240212]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Thomas Zimmermann (8):
+  drm/nouveau: Include <linux/backlight.h>
+  staging/fbtft: Include <linux/backlight.h>
+  fbdev: Do not include <linux/backlight.h> in header
+  fbdev: Do not include <linux/fs.h> in header
+  fbdev: Do not include <linux/notifier.h> in header
+  fbdev: Do not include <linux/slab.h> in header
+  fbdev: Clean up forward declarations in header file
+  fbdev: Clean up include statements in header file
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Thomas-Zimmermann/drm-nouveau-Include-linux-backlight-h/20240212-181930
-base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
-patch link:    https://lore.kernel.org/r/20240212101712.23675-3-tzimmermann%40suse.de
-patch subject: [PATCH 2/7] fbdev: Do not include <linux/backlight.h> in header
-config: powerpc-ppc6xx_defconfig (https://download.01.org/0day-ci/archive/20240213/202402131349.eg8DJ3MB-lkp@intel.com/config)
-compiler: powerpc-linux-gcc (GCC) 13.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240213/202402131349.eg8DJ3MB-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202402131349.eg8DJ3MB-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
-   drivers/macintosh/via-pmu-backlight.c: In function '__pmu_backlight_update_status':
-   drivers/macintosh/via-pmu-backlight.c:74:21: error: implicit declaration of function 'backlight_get_brightness'; did you mean 'pmu_backlight_get_level_brightness'? [-Werror=implicit-function-declaration]
-      74 |         int level = backlight_get_brightness(bd);
-         |                     ^~~~~~~~~~~~~~~~~~~~~~~~
-         |                     pmu_backlight_get_level_brightness
-   drivers/macintosh/via-pmu-backlight.c: At top level:
-   drivers/macintosh/via-pmu-backlight.c:108:21: error: variable 'pmu_backlight_data' has initializer but incomplete type
-     108 | static const struct backlight_ops pmu_backlight_data = {
-         |                     ^~~~~~~~~~~~~
-   drivers/macintosh/via-pmu-backlight.c:109:10: error: 'const struct backlight_ops' has no member named 'update_status'
-     109 |         .update_status  = pmu_backlight_update_status,
-         |          ^~~~~~~~~~~~~
->> drivers/macintosh/via-pmu-backlight.c:109:27: warning: excess elements in struct initializer
-     109 |         .update_status  = pmu_backlight_update_status,
-         |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-   drivers/macintosh/via-pmu-backlight.c:109:27: note: (near initialization for 'pmu_backlight_data')
-   drivers/macintosh/via-pmu-backlight.c: In function 'pmu_backlight_init':
-   drivers/macintosh/via-pmu-backlight.c:136:37: error: storage size of 'props' isn't known
-     136 |         struct backlight_properties props;
-         |                                     ^~~~~
-   drivers/macintosh/via-pmu-backlight.c:154:34: error: invalid application of 'sizeof' to incomplete type 'struct backlight_properties'
-     154 |         memset(&props, 0, sizeof(struct backlight_properties));
-         |                                  ^~~~~~
-   drivers/macintosh/via-pmu-backlight.c:155:22: error: 'BACKLIGHT_PLATFORM' undeclared (first use in this function)
-     155 |         props.type = BACKLIGHT_PLATFORM;
-         |                      ^~~~~~~~~~~~~~~~~~
-   drivers/macintosh/via-pmu-backlight.c:155:22: note: each undeclared identifier is reported only once for each function it appears in
-   drivers/macintosh/via-pmu-backlight.c:157:14: error: implicit declaration of function 'backlight_device_register'; did you mean 'root_device_register'? [-Werror=implicit-function-declaration]
-     157 |         bd = backlight_device_register(name, NULL, NULL, &pmu_backlight_data,
-         |              ^~~~~~~~~~~~~~~~~~~~~~~~~
-         |              root_device_register
-   drivers/macintosh/via-pmu-backlight.c:166:19: error: invalid use of undefined type 'struct backlight_device'
-     166 |         level = bd->props.max_brightness;
-         |                   ^~
-   drivers/macintosh/via-pmu-backlight.c:176:35: error: invalid use of undefined type 'struct backlight_device'
-     176 |                                 bd->props.max_brightness / 15);
-         |                                   ^~
-   drivers/macintosh/via-pmu-backlight.c:179:11: error: invalid use of undefined type 'struct backlight_device'
-     179 |         bd->props.brightness = level;
-         |           ^~
-   drivers/macintosh/via-pmu-backlight.c:180:11: error: invalid use of undefined type 'struct backlight_device'
-     180 |         bd->props.power = FB_BLANK_UNBLANK;
-         |           ^~
-   drivers/macintosh/via-pmu-backlight.c:181:9: error: implicit declaration of function 'backlight_update_status'; did you mean 'pmu_backlight_update_status'? [-Werror=implicit-function-declaration]
-     181 |         backlight_update_status(bd);
-         |         ^~~~~~~~~~~~~~~~~~~~~~~
-         |         pmu_backlight_update_status
->> drivers/macintosh/via-pmu-backlight.c:136:37: warning: unused variable 'props' [-Wunused-variable]
-     136 |         struct backlight_properties props;
-         |                                     ^~~~~
-   drivers/macintosh/via-pmu-backlight.c: At top level:
-   drivers/macintosh/via-pmu-backlight.c:108:35: error: storage size of 'pmu_backlight_data' isn't known
-     108 | static const struct backlight_ops pmu_backlight_data = {
-         |                                   ^~~~~~~~~~~~~~~~~~
-   drivers/macintosh/via-pmu-backlight.c:108:35: error: storage size of 'pmu_backlight_data' isn't known
-   cc1: some warnings being treated as errors
-
-
-vim +109 drivers/macintosh/via-pmu-backlight.c
-
-0094f2cdcfb6f2 Benjamin Herrenschmidt 2007-12-20  106  
-0094f2cdcfb6f2 Benjamin Herrenschmidt 2007-12-20  107  
-acc2472ed33fc5 Lionel Debroux         2010-11-16  108  static const struct backlight_ops pmu_backlight_data = {
-5474c120aafe78 Michael Hanselmann     2006-06-25 @109  	.update_status	= pmu_backlight_update_status,
-599a52d1262939 Richard Purdie         2007-02-10  110  
-5474c120aafe78 Michael Hanselmann     2006-06-25  111  };
-5474c120aafe78 Michael Hanselmann     2006-06-25  112  
-4b755999d6e0c1 Michael Hanselmann     2006-07-30  113  #ifdef CONFIG_PM
-d565dd3b0824b6 Benjamin Herrenschmidt 2006-08-31  114  void pmu_backlight_set_sleep(int sleep)
-4b755999d6e0c1 Michael Hanselmann     2006-07-30  115  {
-4b755999d6e0c1 Michael Hanselmann     2006-07-30  116  	unsigned long flags;
-4b755999d6e0c1 Michael Hanselmann     2006-07-30  117  
-4b755999d6e0c1 Michael Hanselmann     2006-07-30  118  	spin_lock_irqsave(&pmu_backlight_lock, flags);
-d565dd3b0824b6 Benjamin Herrenschmidt 2006-08-31  119  	sleeping = sleep;
-fa19d63488bd10 Benjamin Herrenschmidt 2008-03-03  120  	if (pmac_backlight && uses_pmu_bl) {
-0094f2cdcfb6f2 Benjamin Herrenschmidt 2007-12-20  121  		if (sleep) {
-0094f2cdcfb6f2 Benjamin Herrenschmidt 2007-12-20  122  			struct adb_request req;
-0094f2cdcfb6f2 Benjamin Herrenschmidt 2007-12-20  123  
-0094f2cdcfb6f2 Benjamin Herrenschmidt 2007-12-20  124  			pmu_request(&req, NULL, 2, PMU_POWER_CTRL,
-0094f2cdcfb6f2 Benjamin Herrenschmidt 2007-12-20  125  				    PMU_POW_BACKLIGHT | PMU_POW_OFF);
-0094f2cdcfb6f2 Benjamin Herrenschmidt 2007-12-20  126  			pmu_wait_complete(&req);
-0094f2cdcfb6f2 Benjamin Herrenschmidt 2007-12-20  127  		} else
-0094f2cdcfb6f2 Benjamin Herrenschmidt 2007-12-20  128  			__pmu_backlight_update_status(pmac_backlight);
-0094f2cdcfb6f2 Benjamin Herrenschmidt 2007-12-20  129  	}
-4b755999d6e0c1 Michael Hanselmann     2006-07-30  130  	spin_unlock_irqrestore(&pmu_backlight_lock, flags);
-4b755999d6e0c1 Michael Hanselmann     2006-07-30  131  }
-d565dd3b0824b6 Benjamin Herrenschmidt 2006-08-31  132  #endif /* CONFIG_PM */
-4b755999d6e0c1 Michael Hanselmann     2006-07-30  133  
-00f7b29f6e9b8a Mathieu Malaterre      2017-12-26  134  void __init pmu_backlight_init(void)
-5474c120aafe78 Michael Hanselmann     2006-06-25  135  {
-a19a6ee6cad2b2 Matthew Garrett        2010-02-17 @136  	struct backlight_properties props;
+ drivers/gpu/drm/nouveau/dispnv50/disp.c |  1 +
+ drivers/staging/fbtft/fb_ssd1351.c      |  2 ++
+ include/linux/fb.h                      | 24 +++++++++++++-----------
+ 3 files changed, 16 insertions(+), 11 deletions(-)
 
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.43.0
+
