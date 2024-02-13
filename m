@@ -2,74 +2,94 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFAC1853986
-	for <lists+nouveau@lfdr.de>; Tue, 13 Feb 2024 19:10:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9826C8539DC
+	for <lists+nouveau@lfdr.de>; Tue, 13 Feb 2024 19:26:02 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8933210E8F4;
-	Tue, 13 Feb 2024 18:10:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 22C4610E8DF;
+	Tue, 13 Feb 2024 18:25:58 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qCD4CH3e";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="XFAZjafF";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
- [209.85.208.49])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BE48910E8CC
- for <nouveau@lists.freedesktop.org>; Tue, 13 Feb 2024 18:10:09 +0000 (UTC)
-Received: by mail-ed1-f49.google.com with SMTP id
- 4fb4d7f45d1cf-561f4bc306fso1163242a12.1
- for <nouveau@lists.freedesktop.org>; Tue, 13 Feb 2024 10:10:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707847808; x=1708452608; darn=lists.freedesktop.org;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ziAomXuWT8MH5zr/8s5imuynSnI7dntU0jZc1Z9tS6w=;
- b=qCD4CH3eWEsn4qzwS4VCSlZIfdpyrNYmnkRPiyr8FHaRC2sXrIPoXjRboUA0fZPZZ8
- 65AnXg98H0dTg2+hhxjw8Y3s8TNQVSeXaFzrH0VOYUQ4F6pjN9espHecdUR/V7Q90GnD
- FFJg0E7uMCaWVVBPh3S0XX2sukShH35s9rpd5Qm5kM81KM/KKSbAjyxuTYfsidjNzZU0
- Jgo4FWWZx1/nHm4ADWOVX8Ogicjj79cgA+fyWRqmwF169I5RUK2+oxnSKwKIb00wGGxH
- mYFvVNStqVp6hUf0XBsiWuoWRKQa+JRZDBuN0l/ZKDgqQpfStGRgcFK3tCRb+d7jNsdI
- BtYw==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1EAD610E8CC
+ for <nouveau@lists.freedesktop.org>; Tue, 13 Feb 2024 18:25:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1707848755;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=0+lItpgF1xlay88BZPDVmR2YqVIquoyLBDxcxYTZTL0=;
+ b=XFAZjafF6bhtBSKaiUw1MEbLvPWaUqmAdNEtivJ4aU4O0VJj6lgxODYTC83PEKLn+Ild7B
+ L/htixSO11MNfZ8AcCcrTS9GcTT5BRNeEeXI/EdhH5hEsYxeLvGv8/+AZHAXSD5pgd47QX
+ nmMPjLtQ4DpxDr/xDO25e5YQWYJUGU8=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-483-4cNsVJdAMo-RfaJM5UA-_A-1; Tue, 13 Feb 2024 13:25:54 -0500
+X-MC-Unique: 4cNsVJdAMo-RfaJM5UA-_A-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ 4fb4d7f45d1cf-5621b24876dso72690a12.1
+ for <nouveau@lists.freedesktop.org>; Tue, 13 Feb 2024 10:25:53 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707847808; x=1708452608;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ziAomXuWT8MH5zr/8s5imuynSnI7dntU0jZc1Z9tS6w=;
- b=KIOcFIfdE9B8DIfbLNahC5QpWsMIXzoZReTCBOfDVJ9lLPikYeX1nFja63jXngIatX
- 58b7kesU2+tEauQkQltZoEyfqcrXXUhaJs4ZxGuRhzJLT13G2qVwd5dtLqp6iPxMFe2k
- DL7xKq9YDspd7ceUcrG8dX9um/yM6GYuI0hBaLLscSHcznDHjT8KuSOIWLSYt6Lr01w5
- ttvsfvKTuBFOgDR4EZVjo1g7MNDStrpbcDrOmGwoRi8aQAYfKHWgNBsxtgfkRSoLPYYb
- A0PDH3YJ1zdS/pUEbBUaZBxU1qmOsr8+Z5rHfqxpEq+gXwLM6NNXWA1zUz64wAP+0js2
- xn+g==
+ d=1e100.net; s=20230601; t=1707848753; x=1708453553;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0+lItpgF1xlay88BZPDVmR2YqVIquoyLBDxcxYTZTL0=;
+ b=Wgq+UXim5C0t/O0u6zJMIiMcM2DLqgqznEQEgPiePC7bLa+/cb+Hfj2etXlKJx/ubp
+ qXfniR7KgbzO9qL3+sXmTNz3z6be1YRkFJrKPAph54bwTdqyVZ4UZ87RIHQdAjzUl/1y
+ cvxuqacwDoOUiQo6ObKRHMQ4w8otSg4ltxT7c5Donwl1OKr0N0C9rjVLgLKlJUfA8KpO
+ tp8c/6p2T61hPPQz3l9tmEhMvz4Prmhi4W1Z1ngjd7P8k6zrdj0ttHjOu8VjHptK9ntV
+ fUEWuElBi1lS1DiDpFy1pg5rztJqIbj/yjHBaAHbVIYc8fmR1/OBqqZxnYw5QVG0/cdb
+ rVJg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXe39CfYQShx1rueck6a77UPbM3pbTY9laS8TS2bqLhdFc9fopKsmiqyRFHZEOKrwkQzZGbdKKOQQe5QdwoUrvwt2qYKIsHd7qFnHeAJA==
-X-Gm-Message-State: AOJu0YwC7b8T+XJPEw0ii/siNxULEJ1H7PP9ruNAdUCNTqLMSezquVOe
- IorFhsEiTljLpWupMKMi7GeajTnwuFPNbJcMxbG4BFaAMYpQ4nGoh0nuGuBQIZA=
-X-Google-Smtp-Source: AGHT+IEEYP79160/4gREQSMT99NQJR66fKb5tUCe7r25eVUrmQpy2NIZzr9MrcCjSU/z8yF+NtlVDg==
-X-Received: by 2002:a05:6402:2c9:b0:561:a444:8e49 with SMTP id
- b9-20020a05640202c900b00561a4448e49mr321854edx.0.1707847807927; 
- Tue, 13 Feb 2024 10:10:07 -0800 (PST)
+ AJvYcCWwJwAEv8JDVQpjdnjwhO00a6gPOFmmXF7P+sa9lGnRcB51bsb7U6ow+C0Eu1Z0t+foQ+OvanXmKSetdfwdZQ/q5aEfeS329am9m/nsGA==
+X-Gm-Message-State: AOJu0Yw6XBl6xBTt4OqpUg7vUAUq6hXBKmvvTfslOabBNN6IEfMbdWlN
+ kc6uUoc5xeeu9jrNxlTb9weItHgOm5gKq9ZKiTtCGcGZQvVsbU83ejbgSXslUCviV6E02fa3hwf
+ A728wHxsidVVT5t7CujNIaKi1vX8zaOTm3hm6KD/n0VTCwj1FA9lenS8WbB07SYk=
+X-Received: by 2002:aa7:c48c:0:b0:560:c9b5:c440 with SMTP id
+ m12-20020aa7c48c000000b00560c9b5c440mr355387edq.11.1707848752820; 
+ Tue, 13 Feb 2024 10:25:52 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEGvG/ugCy95i+6QJDIT+zqNvQ1nPRmrp7FznbPCU6OYd2A88lvUcIert84/4Y0uAfaVTg0jg==
+X-Received: by 2002:aa7:c48c:0:b0:560:c9b5:c440 with SMTP id
+ m12-20020aa7c48c000000b00560c9b5c440mr355374edq.11.1707848752541; 
+ Tue, 13 Feb 2024 10:25:52 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCWKqe9LXaXCTJL+0+XDewhVE3YzUr7ESGe3puDPcSskby8iGkPYz0oTenO+aCQtAlemdNeKRkzKYJlPZOsdV/bkrYnGTABsLqMej8xFl5Venr0cVbu+kUwioToW0tuN37GrnXm1zl8RNNt+PmS9NRMOlig5wSYbq4nHSKJpn1Gxs+/FrLQnUB+R+1pZL8dayot7Z/MxtO8CbqlbZbNekuTO8DqhNqGbw5LLLxeAvovKEdJcQctLm/+1+ctUpF5TT2LAMp/333ubfflOQkXZxMefbY8cKqI/KPZcGSN/N9/5Knu6C059CGx3T0q9AbJAMzqc4sRCchCipGb6gWHlYZ6n/fkcMtUhnfoy5BIRRfR6rQ==
-Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
- y24-20020a056402135800b005606b3d835fsm3935468edw.50.2024.02.13.10.10.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Feb 2024 10:10:07 -0800 (PST)
-Date: Tue, 13 Feb 2024 21:09:57 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Karol Herbst <kherbst@redhat.com>
-Cc: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@redhat.com>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Dave Airlie <airlied@redhat.com>, Dan Carpenter <dan.carpenter@linaro.org>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
-Subject: [PATCH] drm/nouveau/mmu/r535: uninitialized variable in
- r535_bar_new_()
-Message-ID: <dab21df7-4d90-4479-97d8-97e5d228c714@moroto.mountain>
+ AJvYcCXVeA4+7ORknTp4+q9DNEB2b+kfn820bd4LxEzlAZFd/Ay4nVQi0oyx7D+TSmkNJ0z8u1iqLmJU6O0mpeMUs2+C8otYqBr6WVbjPoRs+hYHU7B2MMvENZUhMGmvVAF7IAT+ibPiDiNIHA4/aV770+1VYAQwNSj3XhTEDRhSwNMVEA==
+Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
+ ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
+ by smtp.gmail.com with ESMTPSA id
+ ef13-20020a05640228cd00b005612025465asm3932829edb.74.2024.02.13.10.25.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 13 Feb 2024 10:25:52 -0800 (PST)
+Message-ID: <65c06619-9078-4be7-8fb8-0c57e11ec756@redhat.com>
+Date: Tue, 13 Feb 2024 19:25:50 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] [v3] drm/nouveau: expose GSP-RM logging buffers via
+ debugfs
+To: Timur Tabi <ttabi@nvidia.com>
+Cc: "airlied@redhat.com" <airlied@redhat.com>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "lyude@redhat.com" <lyude@redhat.com>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
+References: <20240212211548.1094496-1-ttabi@nvidia.com>
+ <20240212211548.1094496-3-ttabi@nvidia.com>
+ <62204be5-9367-4e52-9d25-be9c99a1a856@redhat.com>
+ <42cbb398d41273d8f743fff24015bbd0e535b151.camel@nvidia.com>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <42cbb398d41273d8f743fff24015bbd0e535b151.camel@nvidia.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,37 +104,50 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-If gf100_bar_new_() fails then "bar" is not initialized.
+On 2/13/24 18:10, Timur Tabi wrote:
+> On Tue, 2024-02-13 at 17:57 +0100, Danilo Krummrich wrote:
+>>> +	struct debugfs_blob_wrapper blob_init;
+>>> +	struct debugfs_blob_wrapper blob_intr;
+>>> +	struct debugfs_blob_wrapper blob_rm;
+>>> +	struct debugfs_blob_wrapper blob_pmu;
+>>> +	struct dentry *debugfs_logging_dir;
+>>
+>> I think we should not create those from within the nvkm layer, but rather pass
+>> them down through nvkm_device_pci_new().
+> 
+> Should they be created in nvkm_device_pci_new() also, even though we have no idea whether GSP is involved at that point?
 
-Fixes: 5bf0257136a2 ("drm/nouveau/mmu/r535: initial support")
-Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
----
-It looks like this was intended to handle a failure from the "rm" func
-but "rm" can't actually fail so it's easier to write the error handling
-for the code as-is.
+We can pass some structure to nvkm_device_pci_new() where GSP sets the pointers to
+the buffers and maybe a callback to clean them up. Once nvkm_device_pci_new() returns
+we'd see if something has been set or not. If so, we can go ahead and create the
+debugfs nodes.
 
- drivers/gpu/drm/nouveau/nvkm/subdev/bar/r535.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+> 
+>>
+>> Lifecycle wise I think we should ensure that removing the Nouveau kernel module
+>> also cleans up those buffers. Even though keep-gsp-logging is considered unsafe,
+>> we shouldn't leak memory.
+> 
+> I agree, but then there needs to be some way to keep these debugfs entries until the driver unloads.  I don't know how to do that without creating some ugly global variables.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bar/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bar/r535.c
-index 4135690326f4..3a30bea30e36 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/bar/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bar/r535.c
-@@ -168,12 +168,11 @@ r535_bar_new_(const struct nvkm_bar_func *hw, struct nvkm_device *device,
- 	rm->flush = r535_bar_flush;
- 
- 	ret = gf100_bar_new_(rm, device, type, inst, &bar);
--	*pbar = bar;
- 	if (ret) {
--		if (!bar)
--			kfree(rm);
-+		kfree(rm);
- 		return ret;
- 	}
-+	*pbar = bar;
- 
- 	bar->flushBAR2PhysMode = ioremap(device->func->resource_addr(device, 3), PAGE_SIZE);
- 	if (!bar->flushBAR2PhysMode)
--- 
-2.43.0
+I fear that might be the only option. However, I still prefer a global list over a
+memory leak.
+
+> 
+>>
+>> For instance, can we allocate corresponding buffers in the driver layer, copy
+>> things over and keep those buffers until nouveau_drm_exit()? This would also
+>> avoid exposing those DMA buffers via debugfs.
+> 
+> The whole point behind this patch is to expose the buffers via debugfs.  How else should they be exposed?
+> 
+
+I think I only thought about the fail case where we could just copy over the data from
+the DMA buffer to another buffer and expose that one instead. However, that doesn't
+work if GSP loads successfully.
+
+Hence, as mentioned above, we might just want to have some structure that we can add to
+the global list that contains the pointers to the DMA buffers and maybe a callback
+function to clean them up defined by the GSP code that we can simply call from
+nouveau_drm_exit().
 
