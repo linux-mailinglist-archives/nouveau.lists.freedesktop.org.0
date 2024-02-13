@@ -2,57 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A63F9852B77
-	for <lists+nouveau@lfdr.de>; Tue, 13 Feb 2024 09:44:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB982852D36
+	for <lists+nouveau@lfdr.de>; Tue, 13 Feb 2024 10:58:02 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7749710E442;
-	Tue, 13 Feb 2024 08:44:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6C17C10E08B;
+	Tue, 13 Feb 2024 09:58:01 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZD68QcUv";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CAE4F10E258;
- Tue, 13 Feb 2024 08:44:10 +0000 (UTC)
-Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:98])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 7BEFA1FC31;
- Tue, 13 Feb 2024 08:44:09 +0000 (UTC)
-Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id 225DD1329E;
- Tue, 13 Feb 2024 08:44:09 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([10.150.64.162])
- by imap2.dmz-prg2.suse.org with ESMTPSA id OHYiB9kry2VOFwAAn2gu4w
- (envelope-from <tzimmermann@suse.de>); Tue, 13 Feb 2024 08:44:09 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: deller@gmx.de, kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com,
- jani.nikula@linux.intel.com, daniel@ffwll.ch, airlied@gmail.com,
- gregkh@linuxfoundation.org
-Cc: linux-fbdev@vger.kernel.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-staging@lists.linux.dev,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Jani Nikula <jani.nikula@intel.com>
-Subject: [PATCH v2 8/8] fbdev: Clean up include statements in header file
-Date: Tue, 13 Feb 2024 09:42:26 +0100
-Message-ID: <20240213084403.20995-9-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240213084403.20995-1-tzimmermann@suse.de>
-References: <20240213084403.20995-1-tzimmermann@suse.de>
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 36A3710E083;
+ Tue, 13 Feb 2024 09:58:00 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id AC2BA61252;
+ Tue, 13 Feb 2024 09:57:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E178C433F1;
+ Tue, 13 Feb 2024 09:57:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1707818279;
+ bh=Glcc2MGW7elmBxt2g9iRaVB3TCJHQ7FpBrYtJp1jN/s=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ZD68QcUv2ZwGhDjFT+aX2PpfQ0DNORu4GNAQoEqkZcUP5+/AKgE8mLG6d5P+Ala/2
+ JgsEzVcOHxTLoiZS/JJa0v+ed59naCZ+hJgCDf/8QvC+C8+QfIXm+SnV1ol1EfdYgU
+ 69ueNLZZTxa9OsqmWkri/TRLM7yaydQIeYZDTIMQqGfqV+XiCEQo3nf3oJaYUvwT6D
+ hx92u6Dd/yAG6nP2/dJ5Je9ptkKV4AGtYYCyxqNzOYkLgZReLTChxkUMtJ4dSIszum
+ kUZ0r1tK7DZoezWKznY/o55nG1ArKoFbSH/fWYOxK/rliNgBuPgNX/ech4pFC6lb1Q
+ APD1uBMpOdQmw==
+From: Arnd Bergmann <arnd@kernel.org>
+To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>
+Cc: Arnd Bergmann <arnd@arndb.de>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <ndesaulniers@google.com>,
+ Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ llvm@lists.linux.dev
+Subject: [PATCH] nouveau: fix function cast warnings
+Date: Tue, 13 Feb 2024 10:57:37 +0100
+Message-Id: <20240213095753.455062-1-arnd@kernel.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spam-Level: 
-Authentication-Results: smtp-out2.suse.de;
-	none
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-4.00 / 50.00];
-	 REPLY(-4.00)[]
-X-Spam-Score: -4.00
-X-Rspamd-Queue-Id: 7BEFA1FC31
-X-Spam-Flag: NO
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,39 +60,47 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Include mutex.h, printk.h and types.h, remove several unnecessary
-include statements, and sort the list alphabetically.
+From: Arnd Bergmann <arnd@arndb.de>
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reviewed-by: Jani Nikula <jani.nikula@intel.com>
+clang-16 warns about casting between incompatible function types:
+
+drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c:161:10: error: cast from 'void (*)(const struct firmware *)' to 'void (*)(void *)' converts to incompatible function type [-Werror,-Wcast-function-type-strict]
+  161 |         .fini = (void(*)(void *))release_firmware,
+
+This one was done to use the generic shadow_fw_release() function as a
+callback for struct nvbios_source. Change it to use the same prototype
+as the other five instances, with a trivial helper function that actually
+calls release_firmware.
+
+Fixes: 70c0f263cc2e ("drm/nouveau/bios: pull in basic vbios subdev, more to come later")
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
 ---
- include/linux/fb.h | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/include/linux/fb.h b/include/linux/fb.h
-index 8f70ca727a30d..708e6a177b1be 100644
---- a/include/linux/fb.h
-+++ b/include/linux/fb.h
-@@ -2,15 +2,15 @@
- #ifndef _LINUX_FB_H
- #define _LINUX_FB_H
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
+index 19188683c8fc..8c2bf1c16f2a 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
+@@ -154,11 +154,17 @@ shadow_fw_init(struct nvkm_bios *bios, const char *name)
+ 	return (void *)fw;
+ }
  
--#include <linux/refcount.h>
--#include <linux/kgdb.h>
- #include <uapi/linux/fb.h>
- 
- #define FBIO_CURSOR            _IOWR('F', 0x08, struct fb_cursor_user)
- 
--#include <linux/init.h>
-+#include <linux/mutex.h>
-+#include <linux/printk.h>
-+#include <linux/refcount.h>
-+#include <linux/types.h>
- #include <linux/workqueue.h>
--#include <linux/list.h>
- 
- #include <asm/fb.h>
- 
++static void
++shadow_fw_release(void *fw)
++{
++	release_firmware(fw);
++}
++
+ static const struct nvbios_source
+ shadow_fw = {
+ 	.name = "firmware",
+ 	.init = shadow_fw_init,
+-	.fini = (void(*)(void *))release_firmware,
++	.fini = shadow_fw_release,
+ 	.read = shadow_fw_read,
+ 	.rw = false,
+ };
 -- 
-2.43.0
+2.39.2
 
