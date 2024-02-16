@@ -2,76 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C37848582CB
-	for <lists+nouveau@lfdr.de>; Fri, 16 Feb 2024 17:41:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A6148583AE
+	for <lists+nouveau@lfdr.de>; Fri, 16 Feb 2024 18:12:39 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4B25110E6E1;
-	Fri, 16 Feb 2024 16:41:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3A32610EC55;
+	Fri, 16 Feb 2024 17:12:35 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="D/rLBYrg";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="ZOgeLvgS";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com
- [209.85.208.180])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 73D7E10EC30
- for <nouveau@lists.freedesktop.org>; Fri, 16 Feb 2024 16:41:35 +0000 (UTC)
-Received: by mail-lj1-f180.google.com with SMTP id
- 38308e7fff4ca-2d0ed7c27a2so6610671fa.0
- for <nouveau@lists.freedesktop.org>; Fri, 16 Feb 2024 08:41:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google; t=1708101693; x=1708706493; darn=lists.freedesktop.org; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KVDi/d4ah8IbM1EwMcbmIT+mFBd7vvbM9q1eVOsBF08=;
- b=D/rLBYrgdWb4h5/vwrY0LDYsWvft7Lf5uEai0mAJeJdix5skttIBDqbGLcYH8Ik0au
- +p0EZbxeY8X4G+BWJtv5MZ3KuGxCZ4KJHpwe6muzFjiJdGEa4lofVS3Ur8NI5mIbMr7y
- /v1V5hpLG8OMJcb76eiOyFzIjV9ZHPPzvoLU8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708101693; x=1708706493;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KVDi/d4ah8IbM1EwMcbmIT+mFBd7vvbM9q1eVOsBF08=;
- b=r8rdSl0w62SGN1oBiDl8nAPZzgQQg7mbVeYiSA7Qdec2+BXknQ2/rDN+apP1w+Rw9N
- eltHALlpGF3RT+y7nWhLH16I0Id0O2WUdWqCjDDgKV9aiFDE+Zjr0DMV+86Jejabp2AF
- Qmpg6Ws6PkKd6P6MLCxMrM92PLst4ma18Ol1+XQHZfQCof/WO05OGsU83eWMarsdXq5I
- LWh9dNSwgYe1Uo/te7KB4r2/vvgg5BHPEWKYxMEjbemwk90AJQGaSMa9XwnYUIOUehlT
- mmilcXSPq4wLDezjrARLpBRjZZzwcDUntt9McJBRajDaLp77rik/fA54FD6UZ51uOiFF
- E7iQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUZR01eJnCdz5CORgxYV+QIDQJnNFooM56Vho0GvXSak+Io6CCM+x4Vk/PMzWkl3zkTypprVvc3AqQIASXgBOBxMZ6I+bAonUOzomK2uQ==
-X-Gm-Message-State: AOJu0Yy7UQHT72Qa1Jefxr4O7/kbhl7e/Ovd9tlw77eGi9dPy9Yh+MER
- urhpK4XzX7zI5WwtPGmsEubsXdg/ikhQn2hu5lQKLE6SabUWzW7HeU1ZC5Ee/no=
-X-Google-Smtp-Source: AGHT+IEtHb3gXEr4AgB/unD+Bk3+nXxQVMrChUVLiCKEWe73GhgcOMNyqfkbhPru6y+piC1oPHpweA==
-X-Received: by 2002:a2e:9956:0:b0:2d0:eb9e:eee7 with SMTP id
- r22-20020a2e9956000000b002d0eb9eeee7mr1914872ljj.3.1708101693471; 
- Fri, 16 Feb 2024 08:41:33 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id
- f8-20020a05600c4e8800b0040f0219c371sm2883732wmq.19.2024.02.16.08.41.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Feb 2024 08:41:33 -0800 (PST)
-Date: Fri, 16 Feb 2024 17:41:31 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Danilo Krummrich <dakr@redhat.com>
-Cc: Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@gmail.com>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Subject: Re: [PATCH] nouveau: offload fence uevents work to workqueue
-Message-ID: <Zc-QO3vFRIUKSIhT@phenom.ffwll.local>
-References: <20240129015053.1687418-1-airlied@gmail.com>
- <133266ac-7239-4233-a19d-cdc7563d401c@redhat.com>
- <CAPM=9tyc3zWRhm4xSnnHprU-v7prdZ2fkkLDEfjC_t_2wM-8Kg@mail.gmail.com>
- <3d967763-8f8f-4451-9927-33395e1b4d70@redhat.com>
- <ZcI8GScBEJ0SsuA5@phenom.ffwll.local>
- <a2174cc2-ea65-4bcf-a112-f60f26b7213c@redhat.com>
- <ZcZ0UXfbKYNhhBiC@phenom.ffwll.local>
- <c13596a5-f672-46e4-8ca6-4f1e449f3267@redhat.com>
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3A72310EC49;
+ Fri, 16 Feb 2024 17:12:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1708103554; x=1739639554;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=K6UtEVBR6uRkR+4SVn/AX4Wfv7U6gUrkLF6U4slDXBs=;
+ b=ZOgeLvgSqXRDg5YIdquXteiQtNS7F01FTZ6ijKAioHRRSZyRLiWK8UBN
+ eJWajmZr2UOO5mJvFIMqLs1ujUOw3L0vIXJcQB9NQtzeIEMQwaDu16szQ
+ EIv0OgkwAnuhlLfivI3f0/eCKIkPmQ5AuiRAynZpDPW88KBGnKkCYtKr/
+ hJZdY7jUP39NzDqTK8LBJzw/J8vnR3hi4BGg2T8eIMBKVz3es/ocOQ1dA
+ Zg+6oWytl6SrgFBCZ4l54PXnsARviVKzlmLEiRyVcXPLgvfC4YkPZBffH
+ 6yp3lMpu8UwIWaQmpYoUkmv2Eg1vi0Bj51UtsHNwmMkAgyh1xyfzF+fg/ g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10986"; a="12782912"
+X-IronPort-AV: E=Sophos;i="6.06,165,1705392000"; d="scan'208";a="12782912"
+Received: from fmviesa005.fm.intel.com ([10.60.135.145])
+ by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 16 Feb 2024 09:12:05 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.06,165,1705392000"; 
+   d="scan'208";a="8486686"
+Received: from lkp-server02.sh.intel.com (HELO 3c78fa4d504c) ([10.239.97.151])
+ by fmviesa005.fm.intel.com with ESMTP; 16 Feb 2024 09:11:59 -0800
+Received: from kbuild by 3c78fa4d504c with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1rb1kV-0001UC-29;
+ Fri, 16 Feb 2024 17:11:48 +0000
+Date: Sat, 17 Feb 2024 01:11:05 +0800
+From: kernel test robot <lkp@intel.com>
+To: Mario Limonciello <mario.limonciello@amd.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>
+Cc: Paul Gazzillo <paul@pgazz.com>,
+ Necip Fazil Yildiran <fazilyildiran@gmail.com>,
+ oe-kbuild-all@lists.linux.dev, amd-gfx@lists.freedesktop.org,
+ "open list:USB SUBSYSTEM" <linux-usb@vger.kernel.org>,
+ linux-fbdev@vger.kernel.org, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org,
+ platform-driver-x86@vger.kernel.org, intel-xe@lists.freedesktop.org,
+ linux-renesas-soc@vger.kernel.org,
+ "open list:ACPI" <linux-acpi@vger.kernel.org>,
+ open list <linux-kernel@vger.kernel.org>, Melissa Wen <mwen@igalia.com>,
+ Mark Pearson <mpearson-lenovo@squebb.ca>,
+ Mario Limonciello <mario.limonciello@amd.com>
+Subject: Re: [PATCH v6 1/5] drm: Stop using `select ACPI_VIDEO` in all drivers
+Message-ID: <202402170047.miJMtqIc-lkp@intel.com>
+References: <20240214215756.6530-2-mario.limonciello@amd.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <c13596a5-f672-46e4-8ca6-4f1e449f3267@redhat.com>
-X-Operating-System: Linux phenom 6.6.11-amd64 
+In-Reply-To: <20240214215756.6530-2-mario.limonciello@amd.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,139 +80,131 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Feb 13, 2024 at 06:39:20PM +0100, Danilo Krummrich wrote:
-> On 2/9/24 19:52, Daniel Vetter wrote:
-> > On Fri, Feb 09, 2024 at 06:41:32PM +0100, Danilo Krummrich wrote:
-> > > On 2/6/24 15:03, Daniel Vetter wrote:
-> > > > On Mon, Feb 05, 2024 at 11:00:04PM +0100, Danilo Krummrich wrote:
-> > > > > On 2/5/24 22:08, Dave Airlie wrote:
-> > > > > > On Tue, 6 Feb 2024 at 02:22, Danilo Krummrich <dakr@redhat.com> wrote:
-> > > > > > > 
-> > > > > > > On 1/29/24 02:50, Dave Airlie wrote:
-> > > > > > > > From: Dave Airlie <airlied@redhat.com>
-> > > > > > > > 
-> > > > > > > > This should break the deadlock between the fctx lock and the irq lock.
-> > > > > > > > 
-> > > > > > > > This offloads the processing off the work from the irq into a workqueue.
-> > > > > > > > 
-> > > > > > > > Signed-off-by: Dave Airlie <airlied@redhat.com>
-> > > > > > > 
-> > > > > > > Nouveau's scheduler uses a dedicated wq, hence from this perspective it's
-> > > > > > > safe deferring fence signalling to the kernel global wq. However, I wonder
-> > > > > > > if we could create deadlocks by building dependency chains into other
-> > > > > > > drivers / kernel code that, by chance, makes use of the kernel global wq as
-> > > > > > > well.
-> > > > > > > 
-> > > > > > > Admittedly, even if, it's gonna be extremely unlikely given that
-> > > > > > > WQ_MAX_ACTIVE == 512. But maybe it'd be safer to use a dedicated wq.
-> > > > > > > 
-> > > > > > > Also, do we need to CC stable?
-> > > > > > 
-> > > > > > I pushed this to Linus at the end of last week, since the hangs in 6.7
-> > > > > > take out the complete system and I wanted it in stable.
-> > > > > > 
-> > > > > > It might be safer to use a dedicated wq, is the concern someone is
-> > > > > > waiting on a fence in a workqueue somewhere else so we will never
-> > > > > > signal it?
-> > > > > 
-> > > > > Yes, if some other work is waiting for this fence (or something else in the same
-> > > > > dependency chain) to signal it can prevent executing the work signaling this fence,
-> > > > > in case both are scheduled on the same wq. As mentioned, with the kernel global wq
-> > > > > this would be rather unlikely to lead to an actual stall with WQ_MAX_ACTIVE == 512,
-> > > > > but formally the race condition exists. I guess a malicious attacker could try to
-> > > > > intentionally push jobs directly or indirectly depending on this fence to a driver
-> > > > > which queues them up on a scheduler using the kernel global wq.
-> > > > 
-> > > > I think if you add dma_fence_signalling annotations (aside, there's some
-> > > > patch from iirc Thomas Hellstrom to improve them and cut down on some
-> > > > false positives, but I lost track) then I think you won't get any splats
-> > > > because the wq subsystem assumes that WC_MAX_ACTIVE is close enough to
-> > > > infinity to not matter.
-> > > 
-> > > As mentioned, for the kernel global wq it's 512. (Intentionally) feeding the kernel
-> > > with enough jobs to to provoke a deadlock doesn't seem impossible to me.
-> > > 
-> > > I think it'd be safer to just establish not to use the kernel global wq for executing
-> > > work in the fence signalling critical path.
-> > > 
-> > > We could also run into similar problems with a dedicated wq, e.g. when drivers share
-> > > a wq between drm_gpu_scheduler instances (see [1]), however, I'm not sure we can catch
-> > > that with lockdep.
-> > 
-> > I think if you want to fix it perfectly you'd need to set the max number
-> > of wq to the number of engines (or for dynamic/fw scheduled engines to the
-> > number of context) you have. Or whatever limit to the number of parallel
-> > timelines there is.> I guess this would need a new wq function to
-> > update? drm/sched code could
-> > be able to set that for drivers, so drivers cannot get this wrong.
-> 
-> Not sure I can follow. The scheduler instance might be per context and bind
-> queue. In this case it gets the shared wq passed, but doesn't know how many
-> other scheduler instances share the same one.
+Hi Mario,
 
-Yeah that's why maybe more of that logic should be in the drm/sched code
-instead of drivers just cleverly using what's there ...
+kernel test robot noticed the following build warnings:
 
-> Additionally, there might be drivers not using the DRM scheduler for for bind
-> queues at all (I think Xe does not).
+[auto build test WARNING on drm-misc/drm-misc-next]
+[also build test WARNING on drm-intel/for-linux-next-fixes drm-tip/drm-tip linus/master v6.8-rc4 next-20240216]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-Uh ... maybe we should do this the same across all drivers? But I also
-thought that Xe was flat-out synchronous and only had an out-fence since
-you need a userspace thread in mesa for vk semantics anyway.
+url:    https://github.com/intel-lab-lkp/linux/commits/Mario-Limonciello/drm-Stop-using-select-ACPI_VIDEO-in-all-drivers/20240215-055936
+base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
+patch link:    https://lore.kernel.org/r/20240214215756.6530-2-mario.limonciello%40amd.com
+patch subject: [PATCH v6 1/5] drm: Stop using `select ACPI_VIDEO` in all drivers
+config: alpha-kismet-CONFIG_FB_BACKLIGHT-CONFIG_FB_RIVA-0-0 (https://download.01.org/0day-ci/archive/20240217/202402170047.miJMtqIc-lkp@intel.com/config)
+reproduce: (https://download.01.org/0day-ci/archive/20240217/202402170047.miJMtqIc-lkp@intel.com/reproduce)
 
-If xe hand-rolled a scheduler I'm not going to be very amused.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202402170047.miJMtqIc-lkp@intel.com/
 
-> > If we don't do something like that then I'm not sure there's really much
-> > benefit - instead of carefully timing 512 dma_fence on the global wq you
-> > just need to create a pile of context (at least on intel's guc that's
-> > absolutely no issue) and then careful time them.
-> 
-> Well, that's true. I'd still argue that there is a slight difference. From a
-> drivers isolated perspective using the global kernel wq might be entirely fine,
-> as in this patch. However, in combination with another driver doing the same
-> thing, things can blow up. For the case you illustrated it's at least possible
-> to spot it from a driver's perspective.
-> 
-> > 
-> > I still feel like we have bigger fish to fry ... But might be worth the
-> > effort to at least make the parallel timeline limit a lot more explicit?
-> 
-> I agree, and it'd be great if we can find a solution such bugs can be detected
-> systematically (e.g. through lockdep), but maybe we can start to at least
-> document that we should never use the kernel global wq and where we need to be
-> careful in sharing driver wqs.
-
-Yeah I guess the above two are other reasons why maybe we need a bit more
-structure in scheduler apis instead of just allowing drivers to hand in
-shared wq pointers. Something like a struct drm_sched_domain, which
-contains the wq + a list of drm_sched for it. Would also make stuff like
-reliably stopping the right amount of schedulers in tdr much more robust.
--Sima
-
-> 
-> - Danilo
-> 
-> > 
-> > Cheers, Sima
-> > 
-> > > 
-> > > [1] https://elixir.bootlin.com/linux/v6.8-rc3/source/drivers/gpu/drm/nouveau/nouveau_drm.c#L313
-> > > 
-> > > > 
-> > > > I'm not sure we should care differently, but I guess it'd be good to
-> > > > annotate it all in case the wq subsystem's idea of how much such deadlocks
-> > > > are real changes.
-> > > > 
-> > > > Also Teo is on a mission to get rid of all the global wq flushes, so there
-> > > > should also be no source of deadlocks from that kind of cross-driver
-> > > > dependency. Or at least shouldn't be in the future, I'm not sure it all
-> > > > landed.
-> > > > -Sima
-> > > 
-> > 
-> 
+kismet warnings: (new ones prefixed by >>)
+>> kismet: WARNING: unmet direct dependencies detected for FB_BACKLIGHT when selected by FB_RIVA
+   .config:69:warning: symbol value 'n' invalid for FAT_DEFAULT_CODEPAGE
+   .config:240:warning: symbol value 'n' invalid for SATA_MOBILE_LPM_POLICY
+   .config:307:warning: symbol value 'n' invalid for XEN_MEMORY_HOTPLUG_LIMIT
+   .config:328:warning: symbol value 'n' invalid for PSTORE_BLK_MAX_REASON
+   .config:359:warning: symbol value 'n' invalid for AIC79XX_DEBUG_MASK
+   .config:429:warning: symbol value 'n' invalid for KFENCE_SAMPLE_INTERVAL
+   .config:612:warning: symbol value 'n' invalid for CRYPTO_DEV_QCE_SW_MAX_LEN
+   .config:613:warning: symbol value 'n' invalid for DRM_XE_JOB_TIMEOUT_MIN
+   .config:702:warning: symbol value 'n' invalid for VGA_ARB_MAX_GPUS
+   .config:715:warning: symbol value 'n' invalid for PANEL_LCD_CHARSET
+   .config:789:warning: symbol value 'n' invalid for SND_AC97_POWER_SAVE_DEFAULT
+   .config:793:warning: symbol value 'n' invalid for INPUT_MOUSEDEV_SCREEN_Y
+   .config:811:warning: symbol value 'n' invalid for AIC79XX_CMDS_PER_DEVICE
+   .config:830:warning: symbol value 'n' invalid for DRM_I915_MAX_REQUEST_BUSYWAIT
+   .config:855:warning: symbol value 'n' invalid for SND_AT73C213_TARGET_BITRATE
+   .config:877:warning: symbol value 'n' invalid for PANEL_LCD_PIN_SDA
+   .config:893:warning: symbol value 'n' invalid for DRM_XE_PREEMPT_TIMEOUT_MIN
+   .config:901:warning: symbol value 'n' invalid for NET_EMATCH_STACK
+   .config:903:warning: symbol value 'n' invalid for VMCP_CMA_SIZE
+   .config:1095:warning: symbol value 'n' invalid for USB_GADGET_STORAGE_NUM_BUFFERS
+   .config:1130:warning: symbol value 'n' invalid for RCU_CPU_STALL_TIMEOUT
+   .config:1159:warning: symbol value 'n' invalid for MTDRAM_ERASE_SIZE
+   .config:1238:warning: symbol value 'n' invalid for SERIAL_UARTLITE_NR_UARTS
+   .config:1397:warning: symbol value 'n' invalid for LEGACY_PTY_COUNT
+   .config:1524:warning: symbol value 'n' invalid for PANEL_LCD_PIN_E
+   .config:1528:warning: symbol value 'n' invalid for AIC7XXX_RESET_DELAY_MS
+   .config:1726:warning: symbol value 'n' invalid for IBM_EMAC_POLL_WEIGHT
+   .config:1763:warning: symbol value 'n' invalid for SCSI_MESH_RESET_DELAY_MS
+   .config:1817:warning: symbol value 'n' invalid for DRM_I915_STOP_TIMEOUT
+   .config:2048:warning: symbol value 'n' invalid for KCOV_IRQ_AREA_SIZE
+   .config:2143:warning: symbol value 'n' invalid for RCU_FANOUT_LEAF
+   .config:2237:warning: symbol value 'n' invalid for DRM_XE_TIMESLICE_MAX
+   .config:2290:warning: symbol value 'n' invalid for PANEL_LCD_BWIDTH
+   .config:2523:warning: symbol value 'n' invalid for PANEL_PARPORT
+   .config:2568:warning: symbol value 'n' invalid for SND_SOC_SOF_DEBUG_IPC_FLOOD_TEST_NUM
+   .config:2606:warning: symbol value 'n' invalid for NOUVEAU_DEBUG_DEFAULT
+   .config:2707:warning: symbol value 'n' invalid for AIC79XX_RESET_DELAY_MS
+   .config:2779:warning: symbol value 'n' invalid for SERIAL_ALTERA_UART_BAUDRATE
+   .config:2791:warning: symbol value 'n' invalid for KCSAN_REPORT_ONCE_IN_MS
+   .config:2888:warning: symbol value 'n' invalid for KCSAN_UDELAY_INTERRUPT
+   .config:2910:warning: symbol value 'n' invalid for PANEL_LCD_PIN_BL
+   .config:2934:warning: symbol value 'n' invalid for INITRAMFS_ROOT_GID
+   .config:2968:warning: symbol value 'n' invalid for DUMMY_CONSOLE_ROWS
+   .config:3008:warning: symbol value 'n' invalid for PSTORE_BLK_CONSOLE_SIZE
+   .config:3038:warning: symbol value 'n' invalid for ATM_FORE200E_TX_RETRY
+   .config:3078:warning: symbol value 'n' invalid for FB_OMAP2_DSS_MIN_FCK_PER_PCK
+   .config:3203:warning: symbol value 'n' invalid for BOOKE_WDT_DEFAULT_TIMEOUT
+   .config:3248:warning: symbol value 'n' invalid for MTD_REDBOOT_DIRECTORY_BLOCK
+   .config:3294:warning: symbol value 'n' invalid for KCSAN_UDELAY_TASK
+   .config:3407:warning: symbol value 'n' invalid for MMC_BLOCK_MINORS
+   .config:3455:warning: symbol value 'n' invalid for SCSI_NCR53C8XX_SYNC
+   .config:3570:warning: symbol value 'n' invalid for UCLAMP_BUCKETS_COUNT
+   .config:3636:warning: symbol value 'n' invalid for SERIAL_MCF_BAUDRATE
+   .config:3708:warning: symbol value 'n' invalid for DE2104X_DSL
+   .config:3721:warning: symbol value 'n' invalid for BLK_DEV_RAM_COUNT
+   .config:3787:warning: symbol value 'n' invalid for STACK_MAX_DEFAULT_SIZE_MB
+   .config:3964:warning: symbol value 'n' invalid for IP_VS_SH_TAB_BITS
+   .config:4094:warning: symbol value 'n' invalid for CMA_AREAS
+   .config:4105:warning: symbol value 'n' invalid for USBIP_VHCI_HC_PORTS
+   .config:4149:warning: symbol value 'n' invalid for INPUT_MOUSEDEV_SCREEN_X
+   .config:4235:warning: symbol value 'n' invalid for FTRACE_RECORD_RECURSION_SIZE
+   .config:4264:warning: symbol value 'n' invalid for RIONET_RX_SIZE
+   .config:4416:warning: symbol value 'n' invalid for RADIO_TYPHOON_PORT
+   .config:4524:warning: symbol value 'n' invalid for SERIAL_TXX9_NR_UARTS
+   .config:4565:warning: symbol value 'n' invalid for IBM_EMAC_TXB
+   .config:4948:warning: symbol value 'n' invalid for ARCH_MMAP_RND_BITS
+   .config:4975:warning: symbol value 'n' invalid for IP_VS_MH_TAB_INDEX
+   .config:5029:warning: symbol value 'n' invalid for DRM_I915_FENCE_TIMEOUT
+   .config:5051:warning: symbol value 'n' invalid for TTY_PRINTK_LEVEL
+   .config:5209:warning: symbol value 'n' invalid for MIPS_EJTAG_FDC_KGDB_CHAN
+   .config:5298:warning: symbol value 'n' invalid for KDB_DEFAULT_ENABLE
+   .config:5316:warning: symbol value 'n' invalid for SERIAL_ALTERA_UART_MAXPORTS
+   .config:5323:warning: symbol value 'n' invalid for PANEL_PROFILE
+   .config:5384:warning: symbol value 'n' invalid for PPC_EARLY_DEBUG_EHV_BC_HANDLE
+   .config:5424:warning: symbol value 'n' invalid for PANEL_LCD_PIN_RW
+   .config:5570:warning: symbol value 'n' invalid for CRYPTO_DEV_FSL_CAAM_INTC_TIME_THLD
+   .config:5574:warning: symbol value 'n' invalid for PANEL_LCD_HWIDTH
+   .config:5605:warning: symbol value 'n' invalid for LOCKDEP_CHAINS_BITS
+   .config:5694:warning: symbol value 'n' invalid for DRM_I915_HEARTBEAT_INTERVAL
+   .config:5702:warning: symbol value 'n' invalid for KCSAN_SKIP_WATCH
+   .config:5724:warning: symbol value 'n' invalid for PSTORE_BLK_KMSG_SIZE
+   .config:5929:warning: symbol value 'n' invalid for SERIAL_8250_RUNTIME_UARTS
+   .config:6021:warning: symbol value 'n' invalid for ARCH_MMAP_RND_COMPAT_BITS
+   .config:6127:warning: symbol value 'n' invalid for RCU_BOOST_DELAY
+   .config:6186:warning: symbol value 'n' invalid for RADIO_TRUST_PORT
+   .config:6198:warning: symbol value 'n' invalid for SERIAL_SH_SCI_NR_UARTS
+   .config:6321:warning: symbol value 'n' invalid for VERBOSE_MCHECK_ON
+   .config:6560:warning: symbol value 'n' invalid for CMA_SIZE_PERCENTAGE
+   .config:6580:warning: symbol value 'n' invalid for DRM_XE_PREEMPT_TIMEOUT_MAX
+   .config:6708:warning: symbol value 'n' invalid for DRM_XE_TIMESLICE_MIN
+   .config:6757:warning: symbol value 'n' invalid for DVB_MAX_ADAPTERS
+   .config:6760:warning: symbol value 'n' invalid for SCSI_NCR53C8XX_MAX_TAGS
+   .config:6777:warning: symbol value 'n' invalid for SCSI_SYM53C8XX_DMA_ADDRESSING_MODE
+   .config:7048:warning: symbol value 'n' invalid for SCSI_SYM53C8XX_MAX_TAGS
+   .config:7062:warning: symbol value 'n' invalid for ZSMALLOC_CHAIN_SIZE
+   .config:7140:warning: symbol value 'n' invalid for IBM_EMAC_RXB
+   .config:7148:warning: symbol value 'n' invalid for MTD_UBI_WL_THRESHOLD
+   .config:7167:warning: symbol value 'n' invalid for RIONET_TX_SIZE
+   .config:7172:warning: symbol value 'n' invalid for SERIAL_ARC_NR_PORTS
+   .config:7266:warning: symbol value 'n' invalid for LOCKDEP_BITS
 
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
