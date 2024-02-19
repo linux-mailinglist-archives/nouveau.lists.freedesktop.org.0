@@ -2,61 +2,140 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15B55859886
-	for <lists+nouveau@lfdr.de>; Sun, 18 Feb 2024 19:23:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58991859FB8
+	for <lists+nouveau@lfdr.de>; Mon, 19 Feb 2024 10:31:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BB1BB10E06A;
-	Sun, 18 Feb 2024 18:23:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B2EC010E1FA;
+	Mon, 19 Feb 2024 09:31:07 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="HnG8sN6D";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="lfOkbKCi";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="g1FYU3iW";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="blwaylYH";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="vKF5NHZD";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0CA7710E052;
- Sun, 18 Feb 2024 18:23:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1708280583; x=1739816583;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=b6UNUqskdALPc5YaCrG59ka+8cySp7Diz64kUvr+bXo=;
- b=HnG8sN6DsItrqeVpzRs3dpUXt63WR7JPCFg4bShsL+rWIHuW30+laW88
- 5I902q7YpchIBlHlcEdmVLt91L+PB6mF1C5xy8EDVB4Wj77dtifVO5y0k
- X1eTmVwMTstwrPYDDiXlYvO2hSv28a4BoqQqsL7UQlkrBTlWNVekA9f4+
- nxyHaUeKQJwk/xar0X/iVPdpbMyAPhXTp9v2ne1hNXd0NzbD3whzU8OCY
- 5rk5Hhc3aiYp9pPL1r9W6zCd1sdXVqeNblgG4513oK36MjjEZoNbh/SFH
- qVP4T8yA9OwTIwt/7jOfYx1XFHJzCIIv1V6nHN+YKmXpUqUsrsjK+BdB2 Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10988"; a="19881737"
-X-IronPort-AV: E=Sophos;i="6.06,169,1705392000"; d="scan'208";a="19881737"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
- by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Feb 2024 10:23:01 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.06,169,1705392000"; 
-   d="scan'208";a="8890725"
-Received: from lkp-server02.sh.intel.com (HELO 3c78fa4d504c) ([10.239.97.151])
- by fmviesa003.fm.intel.com with ESMTP; 18 Feb 2024 10:22:57 -0800
-Received: from kbuild by 3c78fa4d504c with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1rbloV-0003EY-0t;
- Sun, 18 Feb 2024 18:22:55 +0000
-Date: Mon, 19 Feb 2024 02:22:19 +0800
-From: kernel test robot <lkp@intel.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>, deller@gmx.de,
- kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com,
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CE2EF10E1F3;
+ Mon, 19 Feb 2024 09:31:05 +0000 (UTC)
+Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:98])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 393342206A;
+ Mon, 19 Feb 2024 09:31:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1708335064; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=y/D66OSEdyzmFopZiKMpHruDnoXXVOF3XH6nd8SJXkQ=;
+ b=lfOkbKCi4ahpqMn+NeVOrzi1OsiafPu9Xy36QJEQlYn3DM3Omk59Vgi+htm7PMrwIEyB42
+ 1VJhr298RqVH06Ubyz6eSHrLM7YLMF332e6cALEP3/r8WGGWSokftgWSoMQJMOqhRNt7AQ
+ z7/0+8bqxK65KJlB8SGF7IW/lQy1nXE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1708335064;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=y/D66OSEdyzmFopZiKMpHruDnoXXVOF3XH6nd8SJXkQ=;
+ b=g1FYU3iWx/6/NotX9cm6OVa9xXjz8/MJqeGLBr7c24b/9F+8265u5CZ3GBYt8pyTEiPn9F
+ cQTyCq1sgY+pcHAw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1708335062; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=y/D66OSEdyzmFopZiKMpHruDnoXXVOF3XH6nd8SJXkQ=;
+ b=blwaylYHeCH2C5R4qFf0n2eJOKCodP93xLcP5FClM09wXP9ER00fpqDK1rw1V9l0rbhTVy
+ lBECg1qCnH0J50J9VoYYlxs6jQGa0879MCs99IB0C54IPLuPuhUdSt3O7IhgFh8YvvS/+X
+ Zd1Ge/vZHwnzCphIRVYVEblZHqtBZYg=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1708335062;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=y/D66OSEdyzmFopZiKMpHruDnoXXVOF3XH6nd8SJXkQ=;
+ b=vKF5NHZD1dp07F/XhgD8zKRTBAD9GeDARvJz4hhD0cCWIp1ycOKx6HLszxOAvsLlYZgEQ2
+ 4Sm8wGGJcMuMDlBA==
+Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id D4E9613585;
+ Mon, 19 Feb 2024 09:31:01 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap2.dmz-prg2.suse.org with ESMTPSA id OnqEMtUf02XBTgAAn2gu4w
+ (envelope-from <tzimmermann@suse.de>); Mon, 19 Feb 2024 09:31:01 +0000
+Message-ID: <4c25b689-ab92-4e84-b54c-e80f511e10c7@suse.de>
+Date: Mon, 19 Feb 2024 10:31:01 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/8] fbdev: Clean up include dependencies in header
+Content-Language: en-US
+To: deller@gmx.de, kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com,
  jani.nikula@linux.intel.com, daniel@ffwll.ch, airlied@gmail.com,
  gregkh@linuxfoundation.org
-Cc: oe-kbuild-all@lists.linux.dev, linux-fbdev@vger.kernel.org,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-staging@lists.linux.dev, Thomas Zimmermann <tzimmermann@suse.de>,
- Jani Nikula <jani.nikula@intel.com>
-Subject: Re: [PATCH v2 3/8] fbdev: Do not include <linux/backlight.h> in header
-Message-ID: <202402190101.UXQ9OLgS-lkp@intel.com>
-References: <20240213084403.20995-4-tzimmermann@suse.de>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240213084403.20995-4-tzimmermann@suse.de>
+Cc: linux-fbdev@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-staging@lists.linux.dev
+References: <20240213084403.20995-1-tzimmermann@suse.de>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <20240213084403.20995-1-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Level: 
+Authentication-Results: smtp-out1.suse.de;
+ dkim=pass header.d=suse.de header.s=susede2_rsa header.b=blwaylYH;
+ dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=vKF5NHZD
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-3.82 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[];
+ R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ XM_UA_NO_VERSION(0.01)[]; FROM_HAS_DN(0.00)[];
+ DWL_DNSWL_MED(-2.00)[suse.de:dkim];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
+ TO_DN_NONE(0.00)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ BAYES_HAM(-0.32)[75.68%];
+ SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:98:from];
+ RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ DKIM_TRACE(0.00)[suse.de:+]; MX_GOOD(-0.01)[];
+ RCPT_COUNT_TWELVE(0.00)[12]; NEURAL_HAM_SHORT(-0.20)[-1.000];
+ FREEMAIL_TO(0.00)[gmx.de,redhat.com,linux.intel.com,ffwll.ch,gmail.com,linuxfoundation.org];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
+ MIME_TRACE(0.00)[0:+]; RCVD_TLS_ALL(0.00)[];
+ MID_RHS_MATCH_FROM(0.00)[]
+X-Spam-Score: -3.82
+X-Rspamd-Queue-Id: 393342206A
+X-Spam-Flag: NO
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,266 +150,42 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Thomas,
+A-b'd by Helge via email
 
-kernel test robot noticed the following build errors:
+Acked-by: Helge Deller <deller@gmx.de>
 
-[auto build test ERROR on staging/staging-testing]
-[also build test ERROR on staging/staging-next staging/staging-linus drm-misc/drm-misc-next linus/master v6.8-rc4 next-20240216]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Thomas-Zimmermann/drm-nouveau-Include-linux-backlight-h/20240213-164639
-base:   staging/staging-testing
-patch link:    https://lore.kernel.org/r/20240213084403.20995-4-tzimmermann%40suse.de
-patch subject: [PATCH v2 3/8] fbdev: Do not include <linux/backlight.h> in header
-config: arm-spitz_defconfig (https://download.01.org/0day-ci/archive/20240219/202402190101.UXQ9OLgS-lkp@intel.com/config)
-compiler: arm-linux-gnueabi-gcc (GCC) 13.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240219/202402190101.UXQ9OLgS-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202402190101.UXQ9OLgS-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   drivers/video/backlight/corgi_lcd.c: In function 'corgi_bl_get_intensity':
->> drivers/video/backlight/corgi_lcd.c:390:33: error: implicit declaration of function 'bl_get_data'; did you mean 'lcd_get_data'? [-Werror=implicit-function-declaration]
-     390 |         struct corgi_lcd *lcd = bl_get_data(bd);
-         |                                 ^~~~~~~~~~~
-         |                                 lcd_get_data
-   drivers/video/backlight/corgi_lcd.c:390:33: warning: initialization of 'struct corgi_lcd *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
-   drivers/video/backlight/corgi_lcd.c: In function 'corgi_bl_update_status':
-   drivers/video/backlight/corgi_lcd.c:422:33: warning: initialization of 'struct corgi_lcd *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
-     422 |         struct corgi_lcd *lcd = bl_get_data(bd);
-         |                                 ^~~~~~~~~~~
->> drivers/video/backlight/corgi_lcd.c:423:25: error: implicit declaration of function 'backlight_get_brightness' [-Werror=implicit-function-declaration]
-     423 |         int intensity = backlight_get_brightness(bd);
-         |                         ^~~~~~~~~~~~~~~~~~~~~~~~
-   drivers/video/backlight/corgi_lcd.c: In function 'corgi_lcd_limit_intensity':
->> drivers/video/backlight/corgi_lcd.c:441:9: error: implicit declaration of function 'backlight_update_status' [-Werror=implicit-function-declaration]
-     441 |         backlight_update_status(the_corgi_lcd->bl_dev);
-         |         ^~~~~~~~~~~~~~~~~~~~~~~
-   drivers/video/backlight/corgi_lcd.c: At top level:
->> drivers/video/backlight/corgi_lcd.c:445:21: error: variable 'corgi_bl_ops' has initializer but incomplete type
-     445 | static const struct backlight_ops corgi_bl_ops = {
-         |                     ^~~~~~~~~~~~~
->> drivers/video/backlight/corgi_lcd.c:446:10: error: 'const struct backlight_ops' has no member named 'get_brightness'
-     446 |         .get_brightness = corgi_bl_get_intensity,
-         |          ^~~~~~~~~~~~~~
-   drivers/video/backlight/corgi_lcd.c:446:27: warning: excess elements in struct initializer
-     446 |         .get_brightness = corgi_bl_get_intensity,
-         |                           ^~~~~~~~~~~~~~~~~~~~~~
-   drivers/video/backlight/corgi_lcd.c:446:27: note: (near initialization for 'corgi_bl_ops')
->> drivers/video/backlight/corgi_lcd.c:447:10: error: 'const struct backlight_ops' has no member named 'update_status'
-     447 |         .update_status  = corgi_bl_update_status,
-         |          ^~~~~~~~~~~~~
-   drivers/video/backlight/corgi_lcd.c:447:27: warning: excess elements in struct initializer
-     447 |         .update_status  = corgi_bl_update_status,
-         |                           ^~~~~~~~~~~~~~~~~~~~~~
-   drivers/video/backlight/corgi_lcd.c:447:27: note: (near initialization for 'corgi_bl_ops')
-   drivers/video/backlight/corgi_lcd.c: In function 'corgi_lcd_probe':
->> drivers/video/backlight/corgi_lcd.c:494:37: error: storage size of 'props' isn't known
-     494 |         struct backlight_properties props;
-         |                                     ^~~~~
->> drivers/video/backlight/corgi_lcd.c:518:34: error: invalid application of 'sizeof' to incomplete type 'struct backlight_properties'
-     518 |         memset(&props, 0, sizeof(struct backlight_properties));
-         |                                  ^~~~~~
->> drivers/video/backlight/corgi_lcd.c:519:22: error: 'BACKLIGHT_RAW' undeclared (first use in this function); did you mean 'FB_BACKLIGHT_MAX'?
-     519 |         props.type = BACKLIGHT_RAW;
-         |                      ^~~~~~~~~~~~~
-         |                      FB_BACKLIGHT_MAX
-   drivers/video/backlight/corgi_lcd.c:519:22: note: each undeclared identifier is reported only once for each function it appears in
->> drivers/video/backlight/corgi_lcd.c:521:23: error: implicit declaration of function 'devm_backlight_device_register'; did you mean 'devm_lcd_device_register'? [-Werror=implicit-function-declaration]
-     521 |         lcd->bl_dev = devm_backlight_device_register(&spi->dev, "corgi_bl",
-         |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         |                       devm_lcd_device_register
->> drivers/video/backlight/corgi_lcd.c:527:20: error: invalid use of undefined type 'struct backlight_device'
-     527 |         lcd->bl_dev->props.brightness = pdata->default_intensity;
-         |                    ^~
-   drivers/video/backlight/corgi_lcd.c:528:20: error: invalid use of undefined type 'struct backlight_device'
-     528 |         lcd->bl_dev->props.power = FB_BLANK_UNBLANK;
-         |                    ^~
-   drivers/video/backlight/corgi_lcd.c:494:37: warning: unused variable 'props' [-Wunused-variable]
-     494 |         struct backlight_properties props;
-         |                                     ^~~~~
-   drivers/video/backlight/corgi_lcd.c: In function 'corgi_lcd_remove':
-   drivers/video/backlight/corgi_lcd.c:549:20: error: invalid use of undefined type 'struct backlight_device'
-     549 |         lcd->bl_dev->props.power = FB_BLANK_UNBLANK;
-         |                    ^~
-   drivers/video/backlight/corgi_lcd.c:550:20: error: invalid use of undefined type 'struct backlight_device'
-     550 |         lcd->bl_dev->props.brightness = 0;
-         |                    ^~
-   drivers/video/backlight/corgi_lcd.c: At top level:
->> drivers/video/backlight/corgi_lcd.c:445:35: error: storage size of 'corgi_bl_ops' isn't known
-     445 | static const struct backlight_ops corgi_bl_ops = {
-         |                                   ^~~~~~~~~~~~
-   cc1: some warnings being treated as errors
-
-
-vim +527 drivers/video/backlight/corgi_lcd.c
-
-b18250a8f66050 Eric Miao        2008-08-29  387  
-b18250a8f66050 Eric Miao        2008-08-29  388  static int corgi_bl_get_intensity(struct backlight_device *bd)
-b18250a8f66050 Eric Miao        2008-08-29  389  {
-4d89c3b38927be Jingoo Han       2013-02-21 @390  	struct corgi_lcd *lcd = bl_get_data(bd);
-b18250a8f66050 Eric Miao        2008-08-29  391  
-b18250a8f66050 Eric Miao        2008-08-29  392  	return lcd->intensity;
-b18250a8f66050 Eric Miao        2008-08-29  393  }
-b18250a8f66050 Eric Miao        2008-08-29  394  
-b18250a8f66050 Eric Miao        2008-08-29  395  static int corgi_bl_set_intensity(struct corgi_lcd *lcd, int intensity)
-b18250a8f66050 Eric Miao        2008-08-29  396  {
-ff7a4c7130c0ad Eric Miao        2008-09-07  397  	int cont;
-ff7a4c7130c0ad Eric Miao        2008-09-07  398  
-b18250a8f66050 Eric Miao        2008-08-29  399  	if (intensity > 0x10)
-b18250a8f66050 Eric Miao        2008-08-29  400  		intensity += 0x10;
-b18250a8f66050 Eric Miao        2008-08-29  401  
-b18250a8f66050 Eric Miao        2008-08-29  402  	corgi_ssp_lcdtg_send(lcd, DUTYCTRL_ADRS, intensity);
-b18250a8f66050 Eric Miao        2008-08-29  403  
-ff7a4c7130c0ad Eric Miao        2008-09-07  404  	/* Bit 5 via GPIO_BACKLIGHT_CONT */
-ee0c8e494cc3c1 Linus Walleij    2020-02-20  405  	cont = !!(intensity & 0x20);
-ff7a4c7130c0ad Eric Miao        2008-09-07  406  
-ee0c8e494cc3c1 Linus Walleij    2020-02-20  407  	if (lcd->backlight_cont)
-ee0c8e494cc3c1 Linus Walleij    2020-02-20  408  		gpiod_set_value_cansleep(lcd->backlight_cont, cont);
-ff7a4c7130c0ad Eric Miao        2008-09-07  409  
-ee0c8e494cc3c1 Linus Walleij    2020-02-20  410  	if (lcd->backlight_on)
-ee0c8e494cc3c1 Linus Walleij    2020-02-20  411  		gpiod_set_value_cansleep(lcd->backlight_on, intensity);
-b18250a8f66050 Eric Miao        2008-08-29  412  
-b18250a8f66050 Eric Miao        2008-08-29  413  	if (lcd->kick_battery)
-b18250a8f66050 Eric Miao        2008-08-29  414  		lcd->kick_battery();
-b18250a8f66050 Eric Miao        2008-08-29  415  
-ff7a4c7130c0ad Eric Miao        2008-09-07  416  	lcd->intensity = intensity;
-b18250a8f66050 Eric Miao        2008-08-29  417  	return 0;
-b18250a8f66050 Eric Miao        2008-08-29  418  }
-b18250a8f66050 Eric Miao        2008-08-29  419  
-b18250a8f66050 Eric Miao        2008-08-29  420  static int corgi_bl_update_status(struct backlight_device *bd)
-b18250a8f66050 Eric Miao        2008-08-29  421  {
-4d89c3b38927be Jingoo Han       2013-02-21  422  	struct corgi_lcd *lcd = bl_get_data(bd);
-51d53e5b06b8e7 Sam Ravnborg     2020-07-19 @423  	int intensity = backlight_get_brightness(bd);
-b18250a8f66050 Eric Miao        2008-08-29  424  
-bfdcaa3b6899bb Eric Miao        2008-08-29  425  	if (corgibl_flags & CORGIBL_SUSPENDED)
-bfdcaa3b6899bb Eric Miao        2008-08-29  426  		intensity = 0;
-716bdf18746471 Pavel Machek     2009-11-06  427  
-716bdf18746471 Pavel Machek     2009-11-06  428  	if ((corgibl_flags & CORGIBL_BATTLOW) && intensity > lcd->limit_mask)
-716bdf18746471 Pavel Machek     2009-11-06  429  		intensity = lcd->limit_mask;
-bfdcaa3b6899bb Eric Miao        2008-08-29  430  
-b18250a8f66050 Eric Miao        2008-08-29  431  	return corgi_bl_set_intensity(lcd, intensity);
-b18250a8f66050 Eric Miao        2008-08-29  432  }
-b18250a8f66050 Eric Miao        2008-08-29  433  
-5cbff9603a77d0 Dmitry Baryshkov 2008-10-28  434  void corgi_lcd_limit_intensity(int limit)
-bfdcaa3b6899bb Eric Miao        2008-08-29  435  {
-bfdcaa3b6899bb Eric Miao        2008-08-29  436  	if (limit)
-bfdcaa3b6899bb Eric Miao        2008-08-29  437  		corgibl_flags |= CORGIBL_BATTLOW;
-bfdcaa3b6899bb Eric Miao        2008-08-29  438  	else
-bfdcaa3b6899bb Eric Miao        2008-08-29  439  		corgibl_flags &= ~CORGIBL_BATTLOW;
-bfdcaa3b6899bb Eric Miao        2008-08-29  440  
-bfdcaa3b6899bb Eric Miao        2008-08-29 @441  	backlight_update_status(the_corgi_lcd->bl_dev);
-bfdcaa3b6899bb Eric Miao        2008-08-29  442  }
-5cbff9603a77d0 Dmitry Baryshkov 2008-10-28  443  EXPORT_SYMBOL(corgi_lcd_limit_intensity);
-bfdcaa3b6899bb Eric Miao        2008-08-29  444  
-9905a43b2d563e Emese Revfy      2009-12-14 @445  static const struct backlight_ops corgi_bl_ops = {
-b18250a8f66050 Eric Miao        2008-08-29 @446  	.get_brightness	= corgi_bl_get_intensity,
-b18250a8f66050 Eric Miao        2008-08-29 @447  	.update_status  = corgi_bl_update_status,
-b18250a8f66050 Eric Miao        2008-08-29  448  };
-b18250a8f66050 Eric Miao        2008-08-29  449  
-bb0747105728fb Jingoo Han       2013-04-29  450  #ifdef CONFIG_PM_SLEEP
-bb0747105728fb Jingoo Han       2013-04-29  451  static int corgi_lcd_suspend(struct device *dev)
-b18250a8f66050 Eric Miao        2008-08-29  452  {
-bb0747105728fb Jingoo Han       2013-04-29  453  	struct corgi_lcd *lcd = dev_get_drvdata(dev);
-b18250a8f66050 Eric Miao        2008-08-29  454  
-bfdcaa3b6899bb Eric Miao        2008-08-29  455  	corgibl_flags |= CORGIBL_SUSPENDED;
-b18250a8f66050 Eric Miao        2008-08-29  456  	corgi_bl_set_intensity(lcd, 0);
-b18250a8f66050 Eric Miao        2008-08-29  457  	corgi_lcd_set_power(lcd->lcd_dev, FB_BLANK_POWERDOWN);
-b18250a8f66050 Eric Miao        2008-08-29  458  	return 0;
-b18250a8f66050 Eric Miao        2008-08-29  459  }
-b18250a8f66050 Eric Miao        2008-08-29  460  
-bb0747105728fb Jingoo Han       2013-04-29  461  static int corgi_lcd_resume(struct device *dev)
-b18250a8f66050 Eric Miao        2008-08-29  462  {
-bb0747105728fb Jingoo Han       2013-04-29  463  	struct corgi_lcd *lcd = dev_get_drvdata(dev);
-b18250a8f66050 Eric Miao        2008-08-29  464  
-bfdcaa3b6899bb Eric Miao        2008-08-29  465  	corgibl_flags &= ~CORGIBL_SUSPENDED;
-b18250a8f66050 Eric Miao        2008-08-29  466  	corgi_lcd_set_power(lcd->lcd_dev, FB_BLANK_UNBLANK);
-b18250a8f66050 Eric Miao        2008-08-29  467  	backlight_update_status(lcd->bl_dev);
-b18250a8f66050 Eric Miao        2008-08-29  468  	return 0;
-b18250a8f66050 Eric Miao        2008-08-29  469  }
-b18250a8f66050 Eric Miao        2008-08-29  470  #endif
-b18250a8f66050 Eric Miao        2008-08-29  471  
-bb0747105728fb Jingoo Han       2013-04-29  472  static SIMPLE_DEV_PM_OPS(corgi_lcd_pm_ops, corgi_lcd_suspend, corgi_lcd_resume);
-bb0747105728fb Jingoo Han       2013-04-29  473  
-ff7a4c7130c0ad Eric Miao        2008-09-07  474  static int setup_gpio_backlight(struct corgi_lcd *lcd,
-ff7a4c7130c0ad Eric Miao        2008-09-07  475  				struct corgi_lcd_platform_data *pdata)
-ff7a4c7130c0ad Eric Miao        2008-09-07  476  {
-ff7a4c7130c0ad Eric Miao        2008-09-07  477  	struct spi_device *spi = lcd->spi_dev;
-ff7a4c7130c0ad Eric Miao        2008-09-07  478  
-ee0c8e494cc3c1 Linus Walleij    2020-02-20  479  	lcd->backlight_on = devm_gpiod_get_optional(&spi->dev,
-ee0c8e494cc3c1 Linus Walleij    2020-02-20  480  						    "BL_ON", GPIOD_OUT_LOW);
-ee0c8e494cc3c1 Linus Walleij    2020-02-20  481  	if (IS_ERR(lcd->backlight_on))
-ee0c8e494cc3c1 Linus Walleij    2020-02-20  482  		return PTR_ERR(lcd->backlight_on);
-ff7a4c7130c0ad Eric Miao        2008-09-07  483  
-ee0c8e494cc3c1 Linus Walleij    2020-02-20  484  	lcd->backlight_cont = devm_gpiod_get_optional(&spi->dev, "BL_CONT",
-ee0c8e494cc3c1 Linus Walleij    2020-02-20  485  						      GPIOD_OUT_LOW);
-ee0c8e494cc3c1 Linus Walleij    2020-02-20  486  	if (IS_ERR(lcd->backlight_cont))
-ee0c8e494cc3c1 Linus Walleij    2020-02-20  487  		return PTR_ERR(lcd->backlight_cont);
-ff7a4c7130c0ad Eric Miao        2008-09-07  488  
-ff7a4c7130c0ad Eric Miao        2008-09-07  489  	return 0;
-ff7a4c7130c0ad Eric Miao        2008-09-07  490  }
-ff7a4c7130c0ad Eric Miao        2008-09-07  491  
-1b9e450de105c1 Bill Pemberton   2012-11-19  492  static int corgi_lcd_probe(struct spi_device *spi)
-b18250a8f66050 Eric Miao        2008-08-29  493  {
-a19a6ee6cad2b2 Matthew Garrett  2010-02-17 @494  	struct backlight_properties props;
-c512794cada491 Jingoo Han       2013-11-12  495  	struct corgi_lcd_platform_data *pdata = dev_get_platdata(&spi->dev);
-b18250a8f66050 Eric Miao        2008-08-29  496  	struct corgi_lcd *lcd;
-b18250a8f66050 Eric Miao        2008-08-29  497  	int ret = 0;
-b18250a8f66050 Eric Miao        2008-08-29  498  
-b18250a8f66050 Eric Miao        2008-08-29  499  	if (pdata == NULL) {
-b18250a8f66050 Eric Miao        2008-08-29  500  		dev_err(&spi->dev, "platform data not available\n");
-b18250a8f66050 Eric Miao        2008-08-29  501  		return -EINVAL;
-b18250a8f66050 Eric Miao        2008-08-29  502  	}
-b18250a8f66050 Eric Miao        2008-08-29  503  
-06c96f189bf944 Jingoo Han       2012-05-29  504  	lcd = devm_kzalloc(&spi->dev, sizeof(struct corgi_lcd), GFP_KERNEL);
-3b20b894d4b342 Jingoo Han       2014-04-03  505  	if (!lcd)
-b18250a8f66050 Eric Miao        2008-08-29  506  		return -ENOMEM;
-b18250a8f66050 Eric Miao        2008-08-29  507  
-b18250a8f66050 Eric Miao        2008-08-29  508  	lcd->spi_dev = spi;
-b18250a8f66050 Eric Miao        2008-08-29  509  
-10645a1d1878cf Jingoo Han       2013-11-12  510  	lcd->lcd_dev = devm_lcd_device_register(&spi->dev, "corgi_lcd",
-10645a1d1878cf Jingoo Han       2013-11-12  511  						&spi->dev, lcd, &corgi_lcd_ops);
-06c96f189bf944 Jingoo Han       2012-05-29  512  	if (IS_ERR(lcd->lcd_dev))
-06c96f189bf944 Jingoo Han       2012-05-29  513  		return PTR_ERR(lcd->lcd_dev);
-06c96f189bf944 Jingoo Han       2012-05-29  514  
-b18250a8f66050 Eric Miao        2008-08-29  515  	lcd->power = FB_BLANK_POWERDOWN;
-b18250a8f66050 Eric Miao        2008-08-29  516  	lcd->mode = (pdata) ? pdata->init_mode : CORGI_LCD_MODE_VGA;
-b18250a8f66050 Eric Miao        2008-08-29  517  
-a19a6ee6cad2b2 Matthew Garrett  2010-02-17 @518  	memset(&props, 0, sizeof(struct backlight_properties));
-bb7ca747f8d624 Matthew Garrett  2011-03-22 @519  	props.type = BACKLIGHT_RAW;
-a19a6ee6cad2b2 Matthew Garrett  2010-02-17  520  	props.max_brightness = pdata->max_intensity;
-10645a1d1878cf Jingoo Han       2013-11-12 @521  	lcd->bl_dev = devm_backlight_device_register(&spi->dev, "corgi_bl",
-10645a1d1878cf Jingoo Han       2013-11-12  522  						&spi->dev, lcd, &corgi_bl_ops,
-10645a1d1878cf Jingoo Han       2013-11-12  523  						&props);
-10645a1d1878cf Jingoo Han       2013-11-12  524  	if (IS_ERR(lcd->bl_dev))
-10645a1d1878cf Jingoo Han       2013-11-12  525  		return PTR_ERR(lcd->bl_dev);
-10645a1d1878cf Jingoo Han       2013-11-12  526  
-b18250a8f66050 Eric Miao        2008-08-29 @527  	lcd->bl_dev->props.brightness = pdata->default_intensity;
-b18250a8f66050 Eric Miao        2008-08-29  528  	lcd->bl_dev->props.power = FB_BLANK_UNBLANK;
-b18250a8f66050 Eric Miao        2008-08-29  529  
-ff7a4c7130c0ad Eric Miao        2008-09-07  530  	ret = setup_gpio_backlight(lcd, pdata);
-ff7a4c7130c0ad Eric Miao        2008-09-07  531  	if (ret)
-10645a1d1878cf Jingoo Han       2013-11-12  532  		return ret;
-ff7a4c7130c0ad Eric Miao        2008-09-07  533  
-b18250a8f66050 Eric Miao        2008-08-29  534  	lcd->kick_battery = pdata->kick_battery;
-b18250a8f66050 Eric Miao        2008-08-29  535  
-9319dfa1e08700 Jingoo Han       2013-02-21  536  	spi_set_drvdata(spi, lcd);
-b18250a8f66050 Eric Miao        2008-08-29  537  	corgi_lcd_set_power(lcd->lcd_dev, FB_BLANK_UNBLANK);
-b18250a8f66050 Eric Miao        2008-08-29  538  	backlight_update_status(lcd->bl_dev);
-bfdcaa3b6899bb Eric Miao        2008-08-29  539  
-bfdcaa3b6899bb Eric Miao        2008-08-29  540  	lcd->limit_mask = pdata->limit_mask;
-bfdcaa3b6899bb Eric Miao        2008-08-29  541  	the_corgi_lcd = lcd;
-b18250a8f66050 Eric Miao        2008-08-29  542  	return 0;
-b18250a8f66050 Eric Miao        2008-08-29  543  }
-b18250a8f66050 Eric Miao        2008-08-29  544  
+Am 13.02.24 um 09:42 schrieb Thomas Zimmermann:
+> Remove unnecessary dependencies in the include statements of the
+> header file <linux/fb.h>. Several files throughout the kernel include
+> the fbdev header, so reducing dependencies positively affects other
+> subsystems as well. Also fix up nouveau and fbtft, which need backlight.h
+> in some their source files.
+>
+> v2:
+> 	* include backlight.h in fbtft (kernel test robot)
+>
+> Thomas Zimmermann (8):
+>    drm/nouveau: Include <linux/backlight.h>
+>    staging/fbtft: Include <linux/backlight.h>
+>    fbdev: Do not include <linux/backlight.h> in header
+>    fbdev: Do not include <linux/fs.h> in header
+>    fbdev: Do not include <linux/notifier.h> in header
+>    fbdev: Do not include <linux/slab.h> in header
+>    fbdev: Clean up forward declarations in header file
+>    fbdev: Clean up include statements in header file
+>
+>   drivers/gpu/drm/nouveau/dispnv50/disp.c |  1 +
+>   drivers/staging/fbtft/fb_ssd1351.c      |  2 ++
+>   include/linux/fb.h                      | 24 +++++++++++++-----------
+>   3 files changed, 16 insertions(+), 11 deletions(-)
+>
 
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstrasse 146, 90461 Nuernberg, Germany
+GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
+HRB 36809 (AG Nuernberg)
+
