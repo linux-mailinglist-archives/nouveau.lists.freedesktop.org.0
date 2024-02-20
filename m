@@ -2,101 +2,122 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 943F385CA49
-	for <lists+nouveau@lfdr.de>; Tue, 20 Feb 2024 22:58:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D98085CA4C
+	for <lists+nouveau@lfdr.de>; Tue, 20 Feb 2024 23:02:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6A9BE10E2CB;
-	Tue, 20 Feb 2024 21:58:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7FD4110E4CF;
+	Tue, 20 Feb 2024 22:02:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="eIEO1BYB";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Mdg1xlyS";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2041.outbound.protection.outlook.com [40.107.92.41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 00D9C10E2CB
- for <nouveau@lists.freedesktop.org>; Tue, 20 Feb 2024 21:58:30 +0000 (UTC)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on2052.outbound.protection.outlook.com [40.107.101.52])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B378B10E4CF
+ for <nouveau@lists.freedesktop.org>; Tue, 20 Feb 2024 22:02:28 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YAWhcmn1BEe/dXYuBVZYKUsR223IhzzW28bhTvCQQxOb/FPcF6b80yDDCIubJBvuu2KDAfq816BV4r98607m5x+LL3+G2Nw4RhWwAsF+YNMgWxOIuir4g+j/ZbL2jKC+MlTq5Mp3wo7cZx9QVESvlmSpqF/LJwSoh83cDmwM22QXEfgnOO7BpR4J1DPpd5FO9dJV/0TfgYnosUgJ5DXesA01uyYTQ7kUbVMFh4mNSi9RaTjMWRvDGfbbw7XFhOcIq7dyV4qMni+GXxRvS/W8/hjxLiAeORZzhV8Ksk51O+TDBfILaVKxJPsjzeptpIXpHFn5bdQNmXNR9aGhLT90UQ==
+ b=WE+YB1k84Uqnhpsq/1niqsPD7h77fZc5gH3IYcKblS4jq5S1FcbGmXedDpJz3FzWBdJsuk1eec4wekc6T3owH82T1YB9Z/tSooEgn3u49d0rSpl8WQlwF+y3H/4/NMmJAHgMrB47uZPZauvD6GeTg+JJy93S/S1q9rNYmmGtmwIE+mRjFmop0/oIJb6695w3+hLE+VZfZ4jOq9GjBJYpTGzILN25VPR8e+9CSctEuJbqNi5yRBnlWFCxMzNdfZjrqAtu60gi5yQaoqFjGwdv4sXzzXeNcrgUchRD7HP04fuG8qxyd0j4X17DP9nRJfSrlp6LFCvnbtIv6KGj1FSQyw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AHZUgRPZE8SluUhDfCzh5esyWSLgjXJ9T1c7MNQsiTQ=;
- b=OxsjUyG9LCCq+Hq2VhpwWVZHaT2hC+JDYDqujqaoJ1PCvo1Jhb0p25VZCX2OgoRVe05xnB8niyV2uZT9HWmBr7EAGXzggAkYtGW/xpACIC/bYkq80S5sAaESG5PwB4ZI5wky26CK5nx9+PdinWLv7NRWO+2xnzNQ5oCQM9wvb36C8+rlsZci1INiGeDi8MvcNgz+AH5F8PqKaAl9e+EOUOLSjXD7Kw/QT/jZ/wMdCy77v4NDjQRqHwV4gxrN3WE+eJpnyMxMfJ3D7P6/Bt56As539RzSTwf35xilnTsTwmnP29aXLlF8IRr1QXPZPlDFGC//8200rOuwB61YMEuUWg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
+ bh=8xXunFE0u59iQjb0UUn8zURkNwQsj6hQ0mOsbbQOBE8=;
+ b=bifeXxD40nMXW9TJUjp1OWBIJcO70bygws79kcIJiqb1n2ophb6t6tl0szZJ0lQw6ViItB2Sb2pfff3leqdHEGN5K/qu+VJLNvP4l0iVPHJGH0tutNHaA/mTSp1NJ0t71wmetRt1qG9JhzA73HakAezgeYtPLEtGquwoWerE8qYsMrqgdE4+VnfqnikF5GZYHvWGxeikMVntK7qWpJq4mS3CIwG/A0da5k4z1WMWbE2SiCE1W/LzJjTxTLRjCnbyIm6dWbm63dawGzRI4tVNjGgE4noyCEjZt/svwgzV8sDSeTIy2arqt6lm7A2I4vO2YU+VgLyzhdbN4+h4kfGrPA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AHZUgRPZE8SluUhDfCzh5esyWSLgjXJ9T1c7MNQsiTQ=;
- b=eIEO1BYBvRCPgWcFviuiyK0Mxd1x0f1vOA/5x62JhXbVyQRqs3WYF+Ug+ZjL/SLnsUOE2V70xaghJDBUmZ47lvg8AZTae13eoFf9FDHQC9/Q4f2CI4EXL66sumtyMxrASsX4VXcAQl+ynOoTbtywv3z49mq9+15mUzChzjL7DYKyrwV8S81vxaDn70sa6G/eXU+AYd3DhRfz5lN74WzwuDLDttXKlowq89YQFzk9eMvv33oyP/w0+ef1KAx2pB40oLhYvmDWE1zqjuSpD1feI3yk0ofgXJhWGqcB/b6Eo2PUNO0uSGfhXjuzfzABCr6dLv0TiFgFSnSFMsdI5Nuhyw==
-Received: from CH5P223CA0012.NAMP223.PROD.OUTLOOK.COM (2603:10b6:610:1f3::26)
- by BL1PR12MB5318.namprd12.prod.outlook.com (2603:10b6:208:31d::20)
+ bh=8xXunFE0u59iQjb0UUn8zURkNwQsj6hQ0mOsbbQOBE8=;
+ b=Mdg1xlySzImlc0+62lz+bCpRlpBid0FZa0bUIxkIXNuUpobdSAuFwRTPyqpOCx3Ye/VUarqTyT2g3AEBnRNS4ElmTu1tjJ6D+mC66gQdVfAU82Mv2QDlV1r9xFjmKnLDlzCQC5Y/sW39BNUyevTVdr8Yt40xBXAyAY4F4XDM5gjLwQHtsNXOsIXbgTCX6GGYCojxmO+MRXESdFnCEs6LELKSEs7gypql2sUEdfkdmykrh3Tr/UOAmD4wmA1bgALF2N3DscZeJRV0yMYEwvPdzzSHIDJCegI3nBiJgsA1ZN/jF+UTansR41fV3p7kYr1fTetpmti9TvJna0P+N/5EHQ==
+Received: from SN7PR12MB8769.namprd12.prod.outlook.com (2603:10b6:806:34b::12)
+ by CH3PR12MB7617.namprd12.prod.outlook.com (2603:10b6:610:140::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.19; Tue, 20 Feb
- 2024 21:58:27 +0000
-Received: from CH1PEPF0000A34A.namprd04.prod.outlook.com
- (2603:10b6:610:1f3:cafe::8c) by CH5P223CA0012.outlook.office365.com
- (2603:10b6:610:1f3::26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.39 via Frontend
- Transport; Tue, 20 Feb 2024 21:58:27 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
- smtp.mailfrom=nvidia.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- CH1PEPF0000A34A.mail.protection.outlook.com (10.167.244.5) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7292.25 via Frontend Transport; Tue, 20 Feb 2024 21:58:27 +0000
-Received: from rnnvmail202.nvidia.com (10.129.68.7) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.41; Tue, 20 Feb
- 2024 13:58:11 -0800
-Received: from rnnvmail201.nvidia.com (10.129.68.8) by rnnvmail202.nvidia.com
- (10.129.68.7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.12; Tue, 20 Feb
- 2024 13:58:11 -0800
-Received: from ttabi.nvidia.com (10.127.8.13) by mail.nvidia.com (10.129.68.8)
- with Microsoft SMTP Server id 15.2.1258.12 via Frontend Transport;
- Tue, 20 Feb 2024 13:58:10 -0800
+ 2024 22:02:26 +0000
+Received: from SN7PR12MB8769.namprd12.prod.outlook.com
+ ([fe80::a969:afd:ee0a:796b]) by SN7PR12MB8769.namprd12.prod.outlook.com
+ ([fe80::a969:afd:ee0a:796b%7]) with mapi id 15.20.7316.018; Tue, 20 Feb 2024
+ 22:02:25 +0000
 From: Timur Tabi <ttabi@nvidia.com>
-To: Dave Airlie <airlied@redhat.com>, Lyude Paul <lyude@redhat.com>, "Danilo
- Krummrich" <dakr@redhat.com>, <nouveau@lists.freedesktop.org>
-Subject: [PATCH] [v4] nouveau: add command-line GSP-RM registry support
-Date: Tue, 20 Feb 2024 15:58:05 -0600
-Message-ID: <20240220215805.3201094-1-ttabi@nvidia.com>
-X-Mailer: git-send-email 2.34.1
+To: "airlied@redhat.com" <airlied@redhat.com>, "nouveau@lists.freedesktop.org"
+ <nouveau@lists.freedesktop.org>, "lyude@redhat.com" <lyude@redhat.com>,
+ "dakr@redhat.com" <dakr@redhat.com>
+Subject: Re: [PATCH] [v4] nouveau: add command-line GSP-RM registry support
+Thread-Topic: [PATCH] [v4] nouveau: add command-line GSP-RM registry support
+Thread-Index: AQHaZEfwiyKT6Zji2U+l3xBb7o9yurETyGmA
+Date: Tue, 20 Feb 2024 22:02:25 +0000
+Message-ID: <e4c1b28742ce18c220332b2621e8a50f7dbd4102.camel@nvidia.com>
+References: <20240220215805.3201094-1-ttabi@nvidia.com>
+In-Reply-To: <20240220215805.3201094-1-ttabi@nvidia.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.44.4-0ubuntu2 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SN7PR12MB8769:EE_|CH3PR12MB7617:EE_
+x-ms-office365-filtering-correlation-id: a70e25c5-3b91-489a-f3c4-08dc325f9f81
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 4FhXT3QViB+WyucDDvg51tCfripYH+GROK3Hex3rM0WB5aWqY1buCjP5U1h8XC3I9sJ8mgBqGfl49dNNfG/AF6bkgf65ri4iR2zkKDCyGm7ohf/73ezRwgS/uhS4Nz9BN1S2K9uhTInY/Q/fpLsFrR13+extIioQqWv9G6cas168L9H4VVKtj/Ed5Qevaw6BE4L9+o15WHlR5czoQTrPur4Ev63mP4iXf5vKc2pCDDgkjMe+JCZxorsbOKdPOkBTVkzjAnnhp+QYouXpMbr51Wp5y5zaiFw1ecd988bxqDPPCdHssr3/4IuZgXRN5TgZ2DoaqUEvY9+vdxLGY33ot7duEe/fTx8+1aKXtIzXH1uJwTQt3xW8R+Ju0IjFg362tCiJF5hhAMuSVvx600EHe2rzU4Fgb+WjmQxo1ki0wHTwNjPXVVSgMThzrtZ4NzirB/G4VttmgW7iC7enVYcg6RCqNRJGHPjZXCrtsMe06Uf3Y+NglHQQDPKprzjltqDH04x6w6CXJF1J/MwwPRtL/KuDILc6UDlvTKChdFMOlTXDuXbowOd5moTB/EdchAqOyY3Jr83SPLmX50Mhld6RPbANlOU0ZIStUyF2Iq4LBzTcyfvaG162gu1rFaAFPQx3
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SN7PR12MB8769.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(38070700009); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?VDdhRzJEa2xwZ3NMZmVZRkhpelBEVEVEL0oxL1pEVFd1d1Z1bVNncElsVnNr?=
+ =?utf-8?B?dUdlbGtVMXhNa05VTU5VVURjSmRRUytxejlSOFNLRStLc2d5RnJTbzZtOXFL?=
+ =?utf-8?B?a3VzcE1wVDhJWXl3b0JpNWhKTmkzSjZ3cm5CK2ZZSHJoWXFXNm9TcWR3OXhC?=
+ =?utf-8?B?WWkrMjJCdDJOaGZ0aE9zRDRhd0FBeFlhNkpHcURjWE15RUpLVFFkRFhrSS8y?=
+ =?utf-8?B?VUgzcXp3RzNmdk1aTDIzY0ZrMmhLalM2YmtzODlmd1RJT2NJNVk2V3ZQV0gz?=
+ =?utf-8?B?b2dpZVNxUVN3TzU5WmRwZW9PcFdCNG1VbWlsaExxZjE2Z1NwdFZiNzFEQ1FH?=
+ =?utf-8?B?VDByRzZEdzgvcDE0a2hVQ0RpaGN2SER1SmhtM0hJK0tnMWtjSlkwbmJmTTNr?=
+ =?utf-8?B?Tmpzd2V1NzJvei9BdE9qVVg2QUsyb1Z3aFk3VW5nSzVmaGFYMkRON05UTXdz?=
+ =?utf-8?B?aVg5Z0R0Uy9wc3JZSHh1Y0dwZEl2cnl2Q2gzQVgwYmwyMHFSRFpobEF0UmZ1?=
+ =?utf-8?B?ck1TUGFBck5jdTZZempBWEJmTWdrYVg0V1JKSWZnMCtkempXUGRleFFHdzBs?=
+ =?utf-8?B?NVN1QVFHcTYrVUlYZjl4Z294WENKdEptcUJVbWp6eUQ4VzNKU0RpVm0xbUJ0?=
+ =?utf-8?B?WkJSalF5dWxvV0dtVnFpRTRjYUtVaTNGSFkzNmxVVlNaYlluN09tcTVCNlhr?=
+ =?utf-8?B?ZGkxUXdqM3BSdXJ4WWpnVkdXRTFHQitJZEgxUUdVNVpJd2V6RWg5eFhkL2Vk?=
+ =?utf-8?B?dVNNYVU3elVkcWpMeDhicVc4TVFiYVVLTnZsb2wzYi9DOEp3b2owMW83cUVS?=
+ =?utf-8?B?UDJiLzdwbGdPQzA2ZSt3amZLa2N3V0xIOFdXcTNsN01Wamk5Z2wxeGVSbnc3?=
+ =?utf-8?B?NERHZGxhaFc5azFVL2RMR2k4MGxuSW5jMks3eU5nOG1WdUxNMDlYOHZuWW1T?=
+ =?utf-8?B?bWxENGR5eUszVUd5VzVpMGo5VGxNei9BSzU2eFlUWXp1amJ0d3pHelhJd1Iw?=
+ =?utf-8?B?UGVtUzBUT0pnWmJzUVFGeTA5WmkzVkNkS0pWaThXaDdtejluZnkxSTdmbnNa?=
+ =?utf-8?B?cDhPYTg1SXdZclZSbGcySzJqWWtGY3dpMFRBbWIxS3l6YTVVWkNUVVg3bDBs?=
+ =?utf-8?B?RDRFaVBBWW5TdnlUaWZ1b1QyVmVIa3FNTGluWmRIdFdZM1JtZFEwcWE2SEdz?=
+ =?utf-8?B?VG9wNHpUcU9PRnhuUVExeEFqS2JjazJLaFk2ODMxMWZyd3RibFRjZG9EeG5M?=
+ =?utf-8?B?a2Q3US9rMklFZlo4ZjdJYXQ4d0hFbVNXMkpPSTZnN29yWkg0K1k0TExKSktJ?=
+ =?utf-8?B?TDkzMmpGK3JydkdiTUV3RDdDekdjMG1rd0JOS3RCU01VWXoyQWUwRk5ZaGxy?=
+ =?utf-8?B?ajN6enRJZjlIOWFpQ3VyVmJuOW9KS0RrQWFYTUZuSE11SlB1NmZ0emhuN3VE?=
+ =?utf-8?B?amJ6bHNHOXdNZU5HVnRYM3Y1d3JSU05Xa3p3OGdGUDFJaCtJWk9NTVAwZlNr?=
+ =?utf-8?B?c3p4SXJhMVcwMTQzeGxUcEdvZ2Mxc1JKd1RmZFQ1cnBWVnBYM2V3bWViK3ZK?=
+ =?utf-8?B?ZnhEQWJXNXl6MTk5dUR3SXBpdW0vR1BueWkzL2tMam5wYzlMRWNoSlEyY3g1?=
+ =?utf-8?B?Vkk2U0o4SjE3NkpFemh1QXZ0TjBWRTVoUXg5QXFxUHpoMCt3YzZ5a05sVVNT?=
+ =?utf-8?B?dy9rMmp0RWYxR29CODFjM0xiejBRcDNBaWJ6eTVwZ1M3ZldPZGl1Zkt2blkz?=
+ =?utf-8?B?MmVZZDllWExoT2xmMHdLUmxvUWpycEM5YWhxcFZKV1dCOEJNSG1qTi9NZ2dp?=
+ =?utf-8?B?aTNsSHd4NzR6N1NaKzVuWFk3c1BqQUlUQzFsSzQ1RlZzNEk2WitGd1dqOHhY?=
+ =?utf-8?B?b1QyanptODVHaEpWL2JNT2tIT29YeXNkUnpyWFF4SmVZdE5CUGd4RjdYbC9h?=
+ =?utf-8?B?RktDTzkydlYvZWcwWTNhNy91WjFwcnlqdHB1UTNIa25DZXNkYWkzZHZOdUxS?=
+ =?utf-8?B?eW54Yjh2alRHNXppcm13cjRhQ1ZTU1hjQktuai81SkFkaHMzcWo2QmgxS21v?=
+ =?utf-8?B?UjJ6K3dtZ3BmRURJaDVvTXlNZjBWRnk4MlNzT2tpWXhtTlFKWDhMYnJGN2FV?=
+ =?utf-8?Q?v0WmodhsNeQ4oqoPSX7kuGby8?=
+Content-Type: multipart/alternative;
+ boundary="_000_e4c1b28742ce18c220332b2621e8a50f7dbd4102camelnvidiacom_"
 MIME-Version: 1.0
-X-NVConfidentiality: public
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-NV-OnPremToCloud: ExternallySecured
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000A34A:EE_|BL1PR12MB5318:EE_
-X-MS-Office365-Filtering-Correlation-Id: dfcedf7c-4046-4ed8-fe6d-08dc325f118c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: CZOVjHxn4q/H+SmebRnk2nwvtm/T93087vxD48tLKoaeYPhjkTowK+Db4uvnJADkQQwBOlU1Uk2D5YzgMTTgMW+gauxUfu6U/E3IZH5kqx7dS4ZuaIZS3OpJ4OAOdPIGTM6aBMubpXZ6WlbYqyz3LrVOspkFiejulZ+4h7frER5xSPKI/h8Q3Oq0fBTEtqtlN0cIFIYUaMhLKa15qm7xS86KFhv0vBWqXTMA45zgqjPzOgbKUto8BqNZ8iV0netj+Rr41rQ/880lg0uahot9mUWAuNZZ7Iuu+0YWkhMgMd7iKxww+086w+tn2bx+9ZqqzLeEnrWju7/ACQYppAh6+iXJIsYqwqW2tBAP7ZNwtis4ohzuyP/p62DgTmUDq0+i6uxLlZw+b8J1fmA6cXmgat9z4TGPDD/46EVsJNsZlLEvO5WyoOhpXnVLQA/c9OekYv18lDF2Hd8/5A/8zH9kdr4+HNAzJxN16ybmNReqpWMB8ZjjH0FE60CGmcfyC/aBxA+VuHK1Qu3pxM4r7NVR7dCfTZKibRAwZgv98/XF98a/WLgESPE6RHTwD0qoCNUUGV39QwZ6F0s9/7u5GoQBLab79iL8AwgSrmRovEepRwKGrFiAe1mGoRQErXXFQG0TivuJvKZ23XlTVCgH3eothjO5AQYg6XLl9BQJhuPjWhs=
-X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230031)(36860700004)(46966006)(40470700004); DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2024 21:58:27.5315 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dfcedf7c-4046-4ed8-fe6d-08dc325f118c
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000A34A.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5318
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8769.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a70e25c5-3b91-489a-f3c4-08dc325f9f81
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Feb 2024 22:02:25.8731 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Hggi6fqxAqVnoD36lDcBZFnywIOs2dSiqSS7Xv1jAU1P9vQOb59d8uBhHV9Hq7WLsl4jdPVllKMN26k/1LAUTQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7617
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -111,457 +132,41 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Add the NVreg_RegistryDwords command line parameter, which allows
-specifying additional registry keys to be sent to GSP-RM.  This
-allows additional configuration, debugging, and experimentation
-with GSP-RM, which uses these keys to alter its behavior.
+--_000_e4c1b28742ce18c220332b2621e8a50f7dbd4102camelnvidiacom_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Note that these keys are passed as-is to GSP-RM, and Nouveau does
-not parse them.  This is in contrast to the Nvidia driver, which may
-parse some of the keys to configure some functionality in concert with
-GSP-RM.  Therefore, any keys which also require action by the driver
-may not function correctly when passed by Nouveau.  Caveat emptor.
+T24gVHVlLCAyMDI0LTAyLTIwIGF0IDE1OjU4IC0wNjAwLCBUaW11ciBUYWJpIHdyb3RlOg0KDQor
+c3RhdGljIGludCBhZGRfcmVnaXN0cnkoc3RydWN0IG52a21fZ3NwICpnc3AsIGNvbnN0IGNoYXIg
+KmtleSwNCg0KKyAgICAgICAgICAgICAgICAgICAgICAgZW51bSByZWdpc3RyeV90eXBlIHR5cGUs
+IGNvbnN0IHZvaWQgKmRhdGEsIHNpemVfdCBsZW5ndGgpDQoNCit7DQoNCisgICAgICAgc3RydWN0
+IHJlZ2lzdHJ5X2xpc3RfZW50cnkgKnJlZzsNCg0KKyAgICAgICBzaXplX3QgbmxlbiA9IHN0cmxl
+bihrZXkpICsgMTsNCg0KKyAgICAgICBzaXplX3QgdmxlbjsgLyogdmFsdWUgbGVuZ3RoLCBub24t
+emVybyBpZiBiaW5hcnkgb3Igc3RyaW5nICovDQoNCisNCg0KKyAgICAgICAvKiBTZXQgYW4gYXJi
+aXRyYXJ5IGxpbWl0IHRvIGF2b2lkIHByb2JsZW1zIHdpdGggYnJva2VuIGNvbW1hbmQgbGluZXMg
+Ki8NCg0KKyAgICAgICBpZiAobmxlbiA+IDY0KQ0KDQorICAgICAgICAgICAgICAgcmV0dXJuIC1F
+RkJJRzsNCg0KT29wcywgSSBmb3Jnb3QgdG8gY2hhbmdlIHRoaXMgdG8gLUVJTlZBTC4NCg==
 
-The name and format of NVreg_RegistryDwords is the same as used by
-the Nvidia driver, to maintain compatibility.
+--_000_e4c1b28742ce18c220332b2621e8a50f7dbd4102camelnvidiacom_
+Content-Type: text/html; charset="utf-8"
+Content-ID: <8B7A43843338964F8BB914D003C64524@namprd12.prod.outlook.com>
+Content-Transfer-Encoding: base64
 
-Signed-off-by: Timur Tabi <ttabi@nvidia.com>
----
- .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |   6 +
- .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 375 ++++++++++++++++--
- 2 files changed, 357 insertions(+), 24 deletions(-)
+PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
+dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjwvaGVhZD4NCjxib2R5Pg0KPGRpdj5PbiBUdWUs
+IDIwMjQtMDItMjAgYXQgMTU6NTggLTA2MDAsIFRpbXVyIFRhYmkgd3JvdGU6PC9kaXY+DQo8Ymxv
+Y2txdW90ZSB0eXBlPSJjaXRlIiBzdHlsZT0ibWFyZ2luOjAgMCAwIC44ZXg7IGJvcmRlci1sZWZ0
+OjJweCAjNzI5ZmNmIHNvbGlkO3BhZGRpbmctbGVmdDoxZXgiPg0KPHByZT4rc3RhdGljIGludCBh
+ZGRfcmVnaXN0cnkoc3RydWN0IG52a21fZ3NwICpnc3AsIGNvbnN0IGNoYXIgKmtleSw8L3ByZT4N
+CjxwcmU+KwkJCWVudW0gcmVnaXN0cnlfdHlwZSB0eXBlLCBjb25zdCB2b2lkICpkYXRhLCBzaXpl
+X3QgbGVuZ3RoKTwvcHJlPg0KPHByZT4rezwvcHJlPg0KPHByZT4rCXN0cnVjdCByZWdpc3RyeV9s
+aXN0X2VudHJ5ICpyZWc7PC9wcmU+DQo8cHJlPisJc2l6ZV90IG5sZW4gPSBzdHJsZW4oa2V5KSAr
+IDE7PC9wcmU+DQo8cHJlPisJc2l6ZV90IHZsZW47IC8qIHZhbHVlIGxlbmd0aCwgbm9uLXplcm8g
+aWYgYmluYXJ5IG9yIHN0cmluZyAqLzwvcHJlPg0KPHByZT4rPC9wcmU+DQo8cHJlPisJLyogU2V0
+IGFuIGFyYml0cmFyeSBsaW1pdCB0byBhdm9pZCBwcm9ibGVtcyB3aXRoIGJyb2tlbiBjb21tYW5k
+IGxpbmVzICovPC9wcmU+DQo8cHJlPisJaWYgKG5sZW4gJmd0OyA2NCk8L3ByZT4NCjxwcmU+KwkJ
+cmV0dXJuIC1FRkJJRzs8L3ByZT4NCjwvYmxvY2txdW90ZT4NCjxkaXY+PGJyPg0KPC9kaXY+DQo8
+ZGl2Pk9vcHMsIEkgZm9yZ290IHRvIGNoYW5nZSB0aGlzIHRvIC1FSU5WQUwuPC9kaXY+DQo8ZGl2
+PjxzcGFuPjwvc3Bhbj48L2Rpdj4NCjwvYm9keT4NCjwvaHRtbD4NCg==
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-index 6f5d376d8fcc..3fbc57b16a05 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-@@ -211,6 +211,12 @@ struct nvkm_gsp {
- 		struct mutex mutex;;
- 		struct idr idr;
- 	} client_id;
-+
-+	/* A linked list of registry items. The registry RPC will be built from it. */
-+	struct list_head registry_list;
-+
-+	/* The size of the registry RPC */
-+	size_t registry_rpc_size;
- };
- 
- static inline bool
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-index 1c46e3f919be..40757a21e150 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-@@ -54,6 +54,8 @@
- #include <nvrm/535.113.01/nvidia/kernel/inc/vgpu/rpc_global_enums.h>
- 
- #include <linux/acpi.h>
-+#include <linux/ctype.h>
-+#include <linux/parser.h>
- 
- #define GSP_MSG_MIN_SIZE GSP_PAGE_SIZE
- #define GSP_MSG_MAX_SIZE GSP_PAGE_MIN_SIZE * 16
-@@ -1082,51 +1084,376 @@ r535_gsp_rpc_unloading_guest_driver(struct nvkm_gsp *gsp, bool suspend)
- 	return nvkm_gsp_rpc_wr(gsp, rpc, true);
- }
- 
-+enum registry_type {
-+	REGISTRY_TABLE_ENTRY_TYPE_DWORD  = 1, /* 32-bit unsigned integer */
-+	REGISTRY_TABLE_ENTRY_TYPE_BINARY = 2, /* Binary blob */
-+	REGISTRY_TABLE_ENTRY_TYPE_STRING = 3, /* Null-terminated string */
-+};
-+
-+/**
-+ * registry_list_entry - linked list member for a registry key/value
-+ * @head: list_head struct
-+ * @type: dword, binary, or string
-+ * @klen: the length of name of the key
-+ * @vlen: the length of the value
-+ * @v.dword: the data, if REGISTRY_TABLE_ENTRY_TYPE_DWORD
-+ * @v.binary: the data, if TYPE_BINARY or TYPE_STRING
-+ * @key: the key name
-+ *
-+ * Every registry key/value is represented internally by this struct.
-+ *
-+ * Type DWORD is a simple 32-bit unsigned integer, and its value is stored in
-+ * v.dword.
-+ *
-+ * Types BINARY and STRING are variable-length binary blobs.  The only real
-+ * difference between BINARY and STRING is that STRING is null-terminated and
-+ * is expected to contain only printable characters.
-+ *
-+ * To avoid having to kmalloc multiple objects, the value for BINARY and
-+ * STRING is appended after the key[] in memory, and v.binary just points to
-+ * that block.
-+ *
-+ * Note: it is technically possible to have multiple keys with the same name
-+ * but different types, but this is not useful since GSP-RM expects keys to
-+ * have only one specific type.
-+ */
-+struct registry_list_entry {
-+	struct list_head head;
-+	enum registry_type type;
-+	size_t klen;
-+	size_t vlen;
-+	union {
-+		u32 dword;	/* TYPE_DWORD */
-+		void *binary;	/* TYPE_BINARY or TYPE_STRING */
-+	} v;
-+	char key[] __counted_by(klen);
-+};
-+
-+/**
-+ * add_registry -- adds a registry entry
-+ * @gsp: gsp pointer
-+ * @key: name of the registry key
-+ * @type: type of data
-+ * @data: pointer to value
-+ * @length: size of data, in bytes
-+ *
-+ * Adds a registry key/value pair to the registry database.
-+ *
-+ * This function collects the registry information in a linked list.  After
-+ * all registry keys have been added, build_registry() is used to create the
-+ * RPC data structure.
-+ *
-+ * registry_rpc_size is a running total of the size of all registry keys.
-+ * It's used to avoid an O(n) calculation of the size when the RPC is built.
-+ *
-+ * Returns 0 on success, or negative error code on error.
-+ */
-+static int add_registry(struct nvkm_gsp *gsp, const char *key,
-+			enum registry_type type, const void *data, size_t length)
-+{
-+	struct registry_list_entry *reg;
-+	size_t nlen = strlen(key) + 1;
-+	size_t vlen; /* value length, non-zero if binary or string */
-+
-+	/* Set an arbitrary limit to avoid problems with broken command lines */
-+	if (nlen > 64)
-+		return -EFBIG;
-+
-+	vlen = (type == REGISTRY_TABLE_ENTRY_TYPE_DWORD) ? 0 : length;
-+
-+	reg = kmalloc(sizeof(struct registry_list_entry) + nlen + vlen, GFP_KERNEL);
-+	if (!reg)
-+		return -ENOMEM;
-+
-+	switch (type) {
-+	case REGISTRY_TABLE_ENTRY_TYPE_DWORD:
-+		reg->v.dword = *(const u32 *)(data);
-+		nvkm_debug(&gsp->subdev, "adding GSP-RM registry '%s=%u'\n",
-+			   key, reg->v.dword);
-+		break;
-+	case REGISTRY_TABLE_ENTRY_TYPE_BINARY:
-+	case REGISTRY_TABLE_ENTRY_TYPE_STRING:
-+		reg->v.binary = (void *)&reg->key + nlen;
-+		memcpy(reg->v.binary, data, length);
-+		vlen = length;
-+		if (type == REGISTRY_TABLE_ENTRY_TYPE_BINARY)
-+			nvkm_debug(&gsp->subdev,
-+				   "adding GSP-RM registry '%s' blob of %zu bytes\n",
-+				   key, length);
-+		else
-+			nvkm_debug(&gsp->subdev,
-+				   "adding GSP-RM registry string '%s=%s'\n",
-+				   key, (char *)reg->v.binary);
-+		break;
-+	default:
-+		nvkm_error(&gsp->subdev, "unrecognized registry type %u for '%s'\n",
-+			   type, key);
-+		kfree(reg);
-+		return -EINVAL;
-+	}
-+
-+	memcpy(reg->key, key, nlen);
-+	reg->klen = nlen;
-+	reg->vlen = length;
-+	reg->type = type;
-+
-+	list_add_tail(&reg->head, &gsp->registry_list);
-+	gsp->registry_rpc_size += sizeof(PACKED_REGISTRY_ENTRY) + nlen + vlen;
-+
-+	return 0;
-+}
-+
-+static int add_registry_num(struct nvkm_gsp *gsp, const char *key, u32 value)
-+{
-+	return add_registry(gsp, key, REGISTRY_TABLE_ENTRY_TYPE_DWORD,
-+			    &value, sizeof(u32));
-+}
-+
-+static int add_registry_string(struct nvkm_gsp *gsp, const char *key, const char *value)
-+{
-+	return add_registry(gsp, key, REGISTRY_TABLE_ENTRY_TYPE_STRING,
-+			    value, strlen(value) + 1);
-+}
-+
-+
-+/**
-+ * build_registry -- create the registry RPC data
-+ * @gsp: gsp pointer
-+ * @registry: pointer to the RPC payload to fill
-+ *
-+ * After all registry key/value pairs have been added, call this function to
-+ * build the RPC.
-+ *
-+ * The registry RPC looks like this:
-+ *
-+ * +-----------------+
-+ * |NvU32 size;      |
-+ * |NvU32 numEntries;|
-+ * +-----------------+
-+ * +---------------------+
-+ * |PACKED_REGISTRY_ENTRY|
-+ * +---------------------+
-+ * |PACKED_REGISTRY_ENTRY|
-+ * +---------------------+
-+ * ... (one copy for each entry)
-+ *
-+ * +----------------------------------------+
-+ * |Null-terminated key (string) for entry 0|
-+ * +----------------------------------------+
-+ * |Binary/string data value for entry 0    | (only if necessary)
-+ * +----------------------------------------+
-+ * |Null-terminated key (string) for entry 1|
-+ * +----------------------------------------+
-+ * |Binary/string data value for entry 1    | (only if necessary)
-+ * +----------------------------------------+
-+ * ... (one copy for each entry)
-+ *
-+ *
-+ * The 'data' field of an entry is either a 32-bit integer (for type DWORD)
-+ * or an offset into the PACKED_REGISTRY_TABLE (for types BINARY and STRING).
-+ *
-+ * All memory allocated by add_registry() is released.
-+ */
-+static void build_registry(struct nvkm_gsp *gsp, PACKED_REGISTRY_TABLE *registry)
-+{
-+	struct registry_list_entry *reg, *n;
-+	size_t str_offset;
-+	unsigned int i = 0;
-+
-+	registry->numEntries = list_count_nodes(&gsp->registry_list);
-+	str_offset = struct_size(registry, entries, registry->numEntries);
-+
-+	list_for_each_entry_safe(reg, n, &gsp->registry_list, head) {
-+		registry->entries[i].type = reg->type;
-+		registry->entries[i].length = reg->klen;
-+
-+		/* Copy the key name to the table */
-+		registry->entries[i].nameOffset = str_offset;
-+		memcpy((void *)registry + str_offset, reg->key, reg->klen);
-+		str_offset += reg->klen;
-+
-+		switch (reg->type) {
-+		case REGISTRY_TABLE_ENTRY_TYPE_DWORD:
-+			registry->entries[i].data = reg->v.dword;
-+			break;
-+		case REGISTRY_TABLE_ENTRY_TYPE_BINARY:
-+		case REGISTRY_TABLE_ENTRY_TYPE_STRING:
-+			/* If the type is binary or string, copy the value */
-+			memcpy((void *)registry + str_offset, reg->v.binary, reg->vlen);
-+			registry->entries[i].data = str_offset;
-+			str_offset += reg->vlen;
-+			break;
-+		default:
-+		}
-+
-+		i++;
-+		list_del(&reg->head);
-+		kfree(reg);
-+	}
-+
-+	/* Double-check that we calculated the sizes correctly */
-+	WARN_ON(gsp->registry_rpc_size != str_offset);
-+
-+	registry->size = gsp->registry_rpc_size;
-+}
-+
-+/**
-+ * clean_registry -- clean up registry memory in case of error
-+ * @gsp: gsp pointer
-+ *
-+ * Call this function to clean up all memory allocated by add_registry()
-+ * in case of error and build_registry() is not called.
-+ */
-+static void clean_registry(struct nvkm_gsp *gsp)
-+{
-+	struct registry_list_entry *reg, *n;
-+
-+	list_for_each_entry_safe(reg, n, &gsp->registry_list, head) {
-+		list_del(&reg->head);
-+		kfree(reg);
-+	}
-+
-+	gsp->registry_rpc_size = sizeof(PACKED_REGISTRY_TABLE);
-+}
-+
-+MODULE_PARM_DESC(NVreg_RegistryDwords,
-+		 "A semicolon-separated list of key=integer pairs of GSP-RM registry keys");
-+static char *NVreg_RegistryDwords;
-+module_param(NVreg_RegistryDwords, charp, 0400);
-+
- /* dword only */
- struct nv_gsp_registry_entries {
- 	const char *name;
- 	u32 value;
- };
- 
-+/**
-+ * r535_registry_entries - required registry entries for GSP-RM
-+ *
-+ * This array lists registry entries that are required for GSP-RM to
-+ * function correctly.
-+ *
-+ * RMSecBusResetEnable - enables PCI secondary bus reset
-+ * RMForcePcieConfigSave - forces GSP-RM to preserve PCI configuration
-+ *   registers on any PCI reset.
-+ */
- static const struct nv_gsp_registry_entries r535_registry_entries[] = {
- 	{ "RMSecBusResetEnable", 1 },
- 	{ "RMForcePcieConfigSave", 1 },
- };
- #define NV_GSP_REG_NUM_ENTRIES ARRAY_SIZE(r535_registry_entries)
- 
-+/**
-+ * strip - strips all characters in 'reject' from 's'
-+ * @s: string to strip
-+ * @reject: string of characters to remove
-+ *
-+ * 's' is modified.
-+ *
-+ * Returns the length of the new string.
-+ */
-+static size_t strip(char *s, const char *reject)
-+{
-+	char *p = s, *p2 = s;
-+	size_t length = 0;
-+	char c;
-+
-+	do {
-+		while ((c = *p2) && strchr(reject, c))
-+			p2++;
-+
-+		*p++ = c = *p2++;
-+		length++;
-+	} while (c);
-+
-+	return length;
-+}
-+
-+/**
-+ * r535_gsp_rpc_set_registry - build registry RPC and call GSP-RM
-+ * @gsp: gsp pointer
-+ *
-+ * The GSP-RM registry is a set of key/value pairs that configure some aspects
-+ * of GSP-RM. The keys are strings, and the values are 32-bit integers.
-+ *
-+ * The registry is built from a combination of a static hard-coded list (see
-+ * above) and entries passed on the driver's command line.
-+ */
- static int
- r535_gsp_rpc_set_registry(struct nvkm_gsp *gsp)
- {
- 	PACKED_REGISTRY_TABLE *rpc;
--	char *strings;
--	int str_offset;
--	int i;
--	size_t rpc_size = struct_size(rpc, entries, NV_GSP_REG_NUM_ENTRIES);
-+	unsigned int i;
-+	int ret;
- 
--	/* add strings + null terminator */
--	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++)
--		rpc_size += strlen(r535_registry_entries[i].name) + 1;
-+	INIT_LIST_HEAD(&gsp->registry_list);
-+	gsp->registry_rpc_size = sizeof(PACKED_REGISTRY_TABLE);
- 
--	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_SET_REGISTRY, rpc_size);
--	if (IS_ERR(rpc))
--		return PTR_ERR(rpc);
-+	/* Add the required registry entries first */
-+	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
-+		ret = add_registry_num(gsp, r535_registry_entries[i].name,
-+				 r535_registry_entries[i].value);
-+		if (ret) {
-+			clean_registry(gsp);
-+			return ret;
-+		}
-+	}
-+
-+	/*
-+	 * The NVreg_RegistryDwords parameter is a string of key=value
-+	 * pairs separated by semicolons. We need to extract and trim each
-+	 * substring, and then parse the substring to extract the key and
-+	 * value.
-+	 */
-+	if (NVreg_RegistryDwords) {
-+		char *p = kstrdup(NVreg_RegistryDwords, GFP_KERNEL);
-+		char *start, *next = p, *equal;
-+		size_t length;
-+
-+		/* Remove any whitespace from the parameter string */
-+		length = strip(p, " \t\n");
-+
-+		while ((start = strsep(&next, ";"))) {
-+			long value;
-+
-+			equal = strchr(start, '=');
-+			if (!equal || (equal == start) || (equal[1] == 0)) {
-+				nvkm_error(&gsp->subdev,
-+					"ignoring invalid registry string '%s'\n", start);
-+				continue;
-+			}
- 
--	rpc->numEntries = NV_GSP_REG_NUM_ENTRIES;
-+			/* Truncate the key=value string to just key */
-+			*equal = 0;
- 
--	str_offset = offsetof(typeof(*rpc), entries[NV_GSP_REG_NUM_ENTRIES]);
--	strings = (char *)&rpc->entries[NV_GSP_REG_NUM_ENTRIES];
--	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
--		int name_len = strlen(r535_registry_entries[i].name) + 1;
--
--		rpc->entries[i].nameOffset = str_offset;
--		rpc->entries[i].type = 1;
--		rpc->entries[i].data = r535_registry_entries[i].value;
--		rpc->entries[i].length = 4;
--		memcpy(strings, r535_registry_entries[i].name, name_len);
--		strings += name_len;
--		str_offset += name_len;
-+			ret = kstrtol(equal + 1, 0, &value);
-+			if (!ret) {
-+				ret = add_registry_num(gsp, start, value);
-+			} else {
-+				/* Not a number, so treat it as a string */
-+				ret = add_registry_string(gsp, start, equal + 1);
-+			}
-+
-+			if (ret) {
-+				nvkm_error(&gsp->subdev,
-+					"ignoring invalid registry key/value '%s=%s'\n",
-+					start, equal + 1);
-+				continue;
-+			}
-+
-+
-+		}
-+
-+		kfree(p);
- 	}
--	rpc->size = str_offset;
-+
-+	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_SET_REGISTRY, gsp->registry_rpc_size);
-+	if (IS_ERR(rpc)) {
-+		clean_registry(gsp);
-+		return PTR_ERR(rpc);
-+	}
-+
-+	build_registry(gsp, rpc);
- 
- 	return nvkm_gsp_rpc_wr(gsp, rpc, false);
- }
--- 
-2.34.1
-
+--_000_e4c1b28742ce18c220332b2621e8a50f7dbd4102camelnvidiacom_--
