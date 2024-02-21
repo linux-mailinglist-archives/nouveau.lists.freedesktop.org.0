@@ -2,53 +2,141 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EC6685D23A
-	for <lists+nouveau@lfdr.de>; Wed, 21 Feb 2024 09:10:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE5DB85D585
+	for <lists+nouveau@lfdr.de>; Wed, 21 Feb 2024 11:29:33 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B7EC310E668;
-	Wed, 21 Feb 2024 08:10:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F191F10E6A6;
+	Wed, 21 Feb 2024 10:29:31 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="RKGXI8r5";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="vgfzViyY";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="ekv0GzAZ";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="vgfzViyY";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="ekv0GzAZ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0359310E9BA;
- Thu, 15 Feb 2024 16:05:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
- s=20170329;
- h=Subject:From:To:MIME-Version:Date:Message-ID:Content-Type:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=F7i2wcZPXzPlISGZ5Rwmm2JMfVHrFuKhNZ+KW9wD2+k=; b=RKGXI8r5Zt/4vWBnoTOtikLYBd
- tUFZAJwddN/u8Mw0uMCpHxPoJS/ozuESe0tzMLRrb4Y0bWJdS/mriDYvFdDk792g7M6747tsqE5qn
- f0vVXpgogDQ9D1z1qUNH8LHZhHOCG1RKOiaoiuhIS6IGQj73J/TaRNVf/vm3JG+x8Dng1Xhh0O5X0
- WtwDJpFRY31Xk1jg0aTHqAhpCa0Sx8+VSvGl+Yc5WzfWSqwN+lsG7dxUQjsHLoCfcSgqT4b8lbnDg
- m0h/KVeLsIIpAxljrdsq83Dp935Jz+9NQXT5GVRkkrGTbCxD4kJYHUOdxYMhVS3Qe+Ibj1bc7GXdV
- uTfLZYZQ==;
-Received: from c-71-59-88-35.hsd1.nj.comcast.net ([71.59.88.35]
- helo=[192.168.1.99]) by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
- id 1raeF7-0007OW-TO; Thu, 15 Feb 2024 17:05:46 +0100
-Content-Type: multipart/alternative;
- boundary="------------gTR4d6Hug0celd0p923byl7c"
-Message-ID: <0efcdfe3-ea9e-43e5-ab07-6d69dca2c04a@igalia.com>
-Date: Thu, 15 Feb 2024 11:05:40 -0500
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 85C5910E536;
+ Wed, 21 Feb 2024 10:29:30 +0000 (UTC)
+Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:98])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 739CD1FB4A;
+ Wed, 21 Feb 2024 10:29:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1708511368; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=4TjGp6KjsshNSG7LSF6ngwAFPLMsqacgy1eInZVMors=;
+ b=vgfzViyYKU7LHH7UPLieXa5jvulwlRR2r63mqSeCerSHJLCGLqZ4GiWnGQWFkCRMFBNdQ2
+ LYBJgEGuFxnCc+P3yCdG4BH5p3FUvFD3JRelFBSbl4btRn999tLbyY6jsowU4KLrEIPiwx
+ +V6RDuYlF273xUEr8hUHMoq5S51QcaY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1708511368;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=4TjGp6KjsshNSG7LSF6ngwAFPLMsqacgy1eInZVMors=;
+ b=ekv0GzAZqViOjE5NUZRPod8zZxYnPiXlONM7vOIhXIzqq7JRKe9afh8TefszYEODhK1e59
+ EH0lABXmRKwWhsCQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1708511368; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=4TjGp6KjsshNSG7LSF6ngwAFPLMsqacgy1eInZVMors=;
+ b=vgfzViyYKU7LHH7UPLieXa5jvulwlRR2r63mqSeCerSHJLCGLqZ4GiWnGQWFkCRMFBNdQ2
+ LYBJgEGuFxnCc+P3yCdG4BH5p3FUvFD3JRelFBSbl4btRn999tLbyY6jsowU4KLrEIPiwx
+ +V6RDuYlF273xUEr8hUHMoq5S51QcaY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1708511368;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=4TjGp6KjsshNSG7LSF6ngwAFPLMsqacgy1eInZVMors=;
+ b=ekv0GzAZqViOjE5NUZRPod8zZxYnPiXlONM7vOIhXIzqq7JRKe9afh8TefszYEODhK1e59
+ EH0lABXmRKwWhsCQ==
+Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id 0F2D5139D1;
+ Wed, 21 Feb 2024 10:29:28 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap2.dmz-prg2.suse.org with ESMTPSA id 5pBWAojQ1WUPFgAAn2gu4w
+ (envelope-from <tzimmermann@suse.de>); Wed, 21 Feb 2024 10:29:28 +0000
+Message-ID: <1e577f18-c6f7-44e7-b50f-720915f257eb@suse.de>
+Date: Wed, 21 Feb 2024 11:29:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/9] backlight/corgi-lcd: Include <linux/backlight.h>
 Content-Language: en-US
-To: events@lists.x.org, xorg-devel@lists.x.org,
- wayland-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- mesa-dev@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- etnaviv@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- libre-soc-dev@lists.libre-soc.org, elections@x.org, members@x.org,
- xorg@lists.freedesktop.org
-From: Christopher Michael <cmichael@igalia.com>
-Subject: 2024 X.Org Board of Directors Elections Nomination period is NOW
-X-Mailman-Approved-At: Wed, 21 Feb 2024 08:10:02 +0000
+To: deller@gmx.de, kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com,
+ jani.nikula@linux.intel.com, daniel@ffwll.ch, airlied@gmail.com,
+ gregkh@linuxfoundation.org, Daniel Thompson <daniel.thompson@linaro.org>,
+ Jingoo Han <jingoohan1@gmail.com>, Lee Jones <lee@kernel.org>
+Cc: linux-fbdev@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-staging@lists.linux.dev
+References: <20240219093941.3684-1-tzimmermann@suse.de>
+ <20240219093941.3684-2-tzimmermann@suse.de>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <20240219093941.3684-2-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: smtp-out2.suse.de;
+ dkim=pass header.d=suse.de header.s=susede2_rsa header.b=vgfzViyY;
+ dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=ekv0GzAZ
+X-Spamd-Result: default: False [-3.21 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[];
+ R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ XM_UA_NO_VERSION(0.01)[]; FROM_HAS_DN(0.00)[];
+ TO_DN_SOME(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
+ SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:98:from];
+ DWL_DNSWL_BLOCKED(0.00)[suse.de:dkim];
+ BAYES_HAM(-2.91)[99.63%]; RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ DKIM_TRACE(0.00)[suse.de:+]; MX_GOOD(-0.01)[];
+ RCPT_COUNT_TWELVE(0.00)[15];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim,suse.de:email];
+ FREEMAIL_TO(0.00)[gmx.de,redhat.com,linux.intel.com,ffwll.ch,gmail.com,linuxfoundation.org,linaro.org,kernel.org];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
+ MIME_TRACE(0.00)[0:+]; RCVD_TLS_ALL(0.00)[];
+ MID_RHS_MATCH_FROM(0.00)[]
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Rspamd-Queue-Id: 739CD1FB4A
+X-Spam-Level: 
+X-Spam-Score: -3.21
+X-Spam-Flag: NO
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,118 +151,36 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
---------------gTR4d6Hug0celd0p923byl7c
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+cc'ing backlight maintainers
 
-We are seeking nominations for candidates for election to the X.Org 
-Foundation Board of Directors. All X.Org Foundation members are eligible 
-for election to the board.
+Am 19.02.24 um 10:37 schrieb Thomas Zimmermann:
+> Resolves the proxy include via <linux/fb.h>, which does not require the
+> backlight header.
+>
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
+>   drivers/video/backlight/corgi_lcd.c | 1 +
+>   1 file changed, 1 insertion(+)
+>
+> diff --git a/drivers/video/backlight/corgi_lcd.c b/drivers/video/backlight/corgi_lcd.c
+> index 0a57033ae31d1..dd765098ad989 100644
+> --- a/drivers/video/backlight/corgi_lcd.c
+> +++ b/drivers/video/backlight/corgi_lcd.c
+> @@ -11,6 +11,7 @@
+>    *	by Eric Miao <eric.miao@marvell.com>
+>    */
+>   
+> +#include <linux/backlight.h>
+>   #include <linux/module.h>
+>   #include <linux/kernel.h>
+>   #include <linux/init.h>
 
-Nominations for the 2024 election are now open and will remain open 
-until 23:59 UTC on 26 February 2024.
+-- 
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstrasse 146, 90461 Nuernberg, Germany
+GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
+HRB 36809 (AG Nuernberg)
 
-The Board consists of directors elected from the membership. Each year, 
-an election is held to bring the total number of directors to eight. The 
-four members receiving the highest vote totals will serve as directors 
-for two year terms.
-
-The directors who received two year terms starting in 2023 were 
-Arkadiusz Hiler, Christopher Michael, Lyude Paul, and Daniel Vetter. 
-They will continue to serve until their term ends in 2024. Current 
-directors whose term expires in 2024 are Emma Anholt, Mark Filion, 
-Ricardo Garcia, and Alyssa Rosenzweig.
-<https://rosenzweig.io/>
-
-A director is expected to participate in the fortnightly IRC meeting to 
-discuss current business and to attend the annual meeting of the X.Org 
-Foundation, which will be held at a location determined in advance by 
-the Board of Directors.
-
-A member may nominate themselves or any other member they feel is 
-qualified. Nominations should be sent to the Election Committee at 
-elections@x.org.
-
-Nominees shall be required to be current members of the X.Org 
-Foundation, and submit a personal statement of up to 200 words that will 
-be provided to prospective voters. The collected statements, along with 
-the statement of contribution to the X.Org Foundation in the member's 
-account page on http://members.x.org, will be made available to all 
-voters to help them make their voting decisions.
-
-Nominations, membership applications or renewals and completed personal 
-statements must be received no later than 23:59 UTC on 26 February 2024.
-
-The slate of candidates will be published 04 March 2024 and candidate 
-Q&A will begin then. The deadline for Xorg membership applications and 
-renewals is 07 March 2024.
-
-
-Cheers,
-
-Christopher Michael, on behalf of the X.Org BoD
-
-
---------------gTR4d6Hug0celd0p923byl7c
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p>We are seeking nominations for candidates for election to the
-      X.Org Foundation Board of Directors. All X.Org Foundation members
-      are eligible for election to the board.</p>
-    <p>Nominations for the 2024 election are now open and will remain
-      open until 23:59 UTC on 26 February 2024.</p>
-    The Board consists of directors elected from the membership. Each
-    year, an election is held to bring the total number of directors to
-    eight. The four members receiving the highest vote totals will serve
-    as directors for two year terms.
-    <p>The directors who received two year terms starting in 2023 were <span
-        class="createlink">Arkadiusz Hiler, </span><span
-        class="createlink">Christopher Michael, </span><span
-        class="createlink">Lyude Paul, and Daniel Vetter</span>. They
-      will continue to serve until their term ends in 2024. Current
-      directors whose term expires in 2024 are <span class="createlink">Emma
-        Anholt, </span><span class="createlink">Mark Filion, </span><span
-        class="createlink">Ricardo Garcia, and Alyssa Rosenzweig.</span><a
-        href="https://rosenzweig.io/"><br>
-      </a></p>
-    <p>A director is expected to participate in the fortnightly IRC
-      meeting to discuss current business and to attend the annual
-      meeting of the X.Org Foundation, which will be held at a location
-      determined in advance by the Board of Directors.</p>
-    <p>A member may nominate themselves or any other member they feel is
-      qualified. Nominations should be sent to the Election Committee at
-      <a class="moz-txt-link-abbreviated" href="mailto:elections@x.org">elections@x.org</a>.<br>
-    </p>
-    <p>Nominees shall be required to be current members of the X.Org
-      Foundation, and submit a personal statement of up to 200 words
-      that will be provided to prospective voters. The collected
-      statements, along with the statement of contribution to the X.Org
-      Foundation in the member's account page on <a class="moz-txt-link-freetext" href="http://members.x.org">http://members.x.org</a>,
-      will be made available to all voters to help them make their
-      voting decisions.</p>
-    <p>Nominations, membership applications or renewals and completed
-      personal statements must be received no later than 23:59 UTC on 26
-      February 2024.</p>
-    <p>The slate of candidates will be published 04 March 2024 and
-      candidate Q&amp;A will begin then. The deadline for Xorg
-      membership applications and renewals is 07 March 2024.</p>
-    <p><br>
-    </p>
-    <p>Cheers,</p>
-    <p>Christopher Michael, on behalf of the X.Org BoD</p>
-    <p><br>
-    </p>
-    <p></p>
-  </body>
-</html>
-
---------------gTR4d6Hug0celd0p923byl7c--
