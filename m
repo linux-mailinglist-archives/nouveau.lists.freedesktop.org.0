@@ -2,60 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA23A861733
-	for <lists+nouveau@lfdr.de>; Fri, 23 Feb 2024 17:12:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E6748618A6
+	for <lists+nouveau@lfdr.de>; Fri, 23 Feb 2024 18:01:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 27A0C10E056;
-	Fri, 23 Feb 2024 16:12:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7148E10EC72;
+	Fri, 23 Feb 2024 17:01:49 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="P0rOPGNK";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 495 seconds by postgrey-1.36 at gabe;
- Fri, 23 Feb 2024 16:12:44 UTC
-Received: from outpost1.zedat.fu-berlin.de (outpost1.zedat.fu-berlin.de
- [130.133.4.66])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2422010E056
- for <nouveau@lists.freedesktop.org>; Fri, 23 Feb 2024 16:12:44 +0000 (UTC)
-Received: from inpost2.zedat.fu-berlin.de ([130.133.4.69])
- by outpost.zedat.fu-berlin.de (Exim 4.97) with esmtps (TLS1.3)
- tls TLS_AES_256_GCM_SHA384
- (envelope-from <glaubitz@zedat.fu-berlin.de>)
- id 1rdY2B-00000002T7v-07Yo; Fri, 23 Feb 2024 17:04:23 +0100
-Received: from p5b13a6ce.dip0.t-ipconnect.de ([91.19.166.206]
- helo=[192.168.178.20]) by inpost2.zedat.fu-berlin.de (Exim 4.97)
- with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (envelope-from <glaubitz@physik.fu-berlin.de>)
- id 1rdY2A-00000002Rcl-3SNp; Fri, 23 Feb 2024 17:04:23 +0100
-Message-ID: <0f2060fcda53ac33fe893a27634f015f6e42bbe8.camel@physik.fu-berlin.de>
-Subject: Re: [linux-next:master] BUILD REGRESSION
- e31185ce00a96232308300008db193416ceb9769
-From: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
-To: Kees Cook <kees@kernel.org>, kernel test robot <lkp@intel.com>, Andrew
- Morton <akpm@linux-foundation.org>
-Cc: Linux Memory Management List <linux-mm@kvack.org>, 
- dri-devel@lists.freedesktop.org, io-uring@vger.kernel.org, 
- kunit-dev@googlegroups.com, linux-arm-kernel@lists.infradead.org, 
- linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org, 
- linux-hardening@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- linux-leds@vger.kernel.org, linux-pm@vger.kernel.org, 
- linux-sound@vger.kernel.org, mhi@lists.linux.dev,
- nouveau@lists.freedesktop.org,  ntfs3@lists.linux.dev
-Date: Fri, 23 Feb 2024 17:04:21 +0100
-In-Reply-To: <3532AACB-176A-4C48-9855-CCD6C97FDE91@kernel.org>
-References: <202402231222.DVB9DC74-lkp@intel.com>
- <3532AACB-176A-4C48-9855-CCD6C97FDE91@kernel.org>
-Autocrypt: addr=glaubitz@physik.fu-berlin.de; prefer-encrypt=mutual;
- keydata=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
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.3 
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B241410EC6E
+ for <nouveau@lists.freedesktop.org>; Fri, 23 Feb 2024 17:01:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1708707706;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=R2IXZz7lpG6kZC2/Ly1sCkxHbaB7sUM8gSbmpgKrg6I=;
+ b=P0rOPGNKMXnke0MjTpuORYOfuhhNUTVVEga1ll/dAXdZTOPrk8Z8CV66MbQzn79SUQCMOZ
+ 7ILIyze0IBh4byVvtpwT+40lSSh5WmoAn1MLC+ZRQ/ozG3x5OSyehufmTiSDb/fhjsOnZ9
+ h2k5i9CKcZuj49pTqVymf+0vShImh8w=
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-380-YUerM9HEMquIPD-SsS4h6A-1; Fri, 23 Feb 2024 12:01:45 -0500
+X-MC-Unique: YUerM9HEMquIPD-SsS4h6A-1
+Received: by mail-ej1-f70.google.com with SMTP id
+ a640c23a62f3a-a2f1d0c3389so85623066b.0
+ for <nouveau@lists.freedesktop.org>; Fri, 23 Feb 2024 09:01:44 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708707703; x=1709312503;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=R2IXZz7lpG6kZC2/Ly1sCkxHbaB7sUM8gSbmpgKrg6I=;
+ b=Tegj5uSdpkW1LxsnKBQKce5OJb0/6D3g4BOosb/XbzDVyF0KC0owxNUm7410Afb+k3
+ XGcO+JDIKybBp2q+gXsRSaI3U+V07O58gbp1q/KNhqqjZzvv8DgIhVMC488UHKsxiq91
+ p/X++ZJofNaCg5jajQYcC1lavjdWvsRxyQOL0UnY1mW6P1GmevyI8Nwo0KIUJtyI/+4u
+ 0RREm2id0NjnFD+i92+AV+5bbHzj2pkpynLeg6x+4+zcxyE8fvBpGM7u8wRJ9YsO9XZK
+ vSoeOf7w2f3Iq4tIk2CRurSTwO4AA5HtRUDxLFXCrYuEwDokybsjulcpjBWGBiLipWAy
+ Y+SQ==
+X-Gm-Message-State: AOJu0YzCobvs+H2UQqZNxgLeaXIivSIz2O1fHwjXzNECJiAr0atDssoe
+ Ln3jk2gr4Slgq1LKV8k/0dd9zl5f5FLA5LG4VyMoKtldrf4W+ailgWo4ChVhtlV+ON/VhvZG+WA
+ pj5dmxpHHAoH5Z9qBJhKLVSF6HcqQyn4OPVh/LpyUKrx6WryY6phu23iSs1TjDrunzNQdcWM=
+X-Received: by 2002:a17:906:3c05:b0:a3f:4596:c3c8 with SMTP id
+ h5-20020a1709063c0500b00a3f4596c3c8mr276709ejg.53.1708707703440; 
+ Fri, 23 Feb 2024 09:01:43 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IECUQLR3iAsaiKhnRk8w2encj+NTogN58f85pbQ8oPNtota/uyWJub6SYoxYdNkwx4+H8FT6w==
+X-Received: by 2002:a17:906:3c05:b0:a3f:4596:c3c8 with SMTP id
+ h5-20020a1709063c0500b00a3f4596c3c8mr276690ejg.53.1708707703100; 
+ Fri, 23 Feb 2024 09:01:43 -0800 (PST)
+Received: from cassiopeiae ([2a02:810d:4b3f:ee94:642:1aff:fe31:a19f])
+ by smtp.gmail.com with ESMTPSA id
+ g18-20020a170906395200b00a3da3152c54sm7007047eje.78.2024.02.23.09.00.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 23 Feb 2024 09:00:39 -0800 (PST)
+Date: Fri, 23 Feb 2024 18:00:23 +0100
+From: Danilo Krummrich <dakr@redhat.com>
+To: Dave Airlie <airlied@gmail.com>
+Cc: nouveau@lists.freedesktop.org, lyude@redhat.com, kherbst@redhat.com,
+ dri-devel@lists.freedesktop.org
+Subject: Re: [PATCH] drm/nouveau: use dedicated wq for fence uevents work
+Message-ID: <ZdjPJ82blpddolwi@cassiopeiae>
+References: <20240222144536.4382-1-dakr@redhat.com>
+ <CAPM=9ty7ALfg6-ebdQdjeVdGgm2dVQYE0+yHeJ8+YCsZvAL+1g@mail.gmail.com>
 MIME-Version: 1.0
-X-Original-Sender: glaubitz@physik.fu-berlin.de
-X-Originating-IP: 91.19.166.206
-X-ZEDAT-Hint: PO
+In-Reply-To: <CAPM=9ty7ALfg6-ebdQdjeVdGgm2dVQYE0+yHeJ8+YCsZvAL+1g@mail.gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,22 +89,133 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 2024-02-23 at 07:46 -0800, Kees Cook wrote:
-> > arch/sh/boot/compressed/../../../../lib/decompress_unxz.c:350:(.text+0x=
-20b4): undefined reference to `__ubsan_handle_out_of_bounds'
-> > sh4-linux-ld: arch/sh/boot/compressed/../../../../lib/xz/xz_dec_lzma2.c=
-:751:(.text+0x904): undefined reference to `__ubsan_handle_out_of_bounds'
->=20
-> This is fixed here and is waiting to land:
-> https://lore.kernel.org/linux-hardening/20240130232717.work.088-kees@kern=
-el.org/
+On Fri, Feb 23, 2024 at 10:14:53AM +1000, Dave Airlie wrote:
+> On Fri, 23 Feb 2024 at 00:45, Danilo Krummrich <dakr@redhat.com> wrote:
+> >
+> > Using the kernel global workqueue to signal fences can lead to
+> > unexpected deadlocks. Some other work (e.g. from a different driver)
+> > could directly or indirectly depend on this fence to be signaled.
+> > However, if the WQ_MAX_ACTIVE limit is reached by waiters, this can
+> > prevent the work signaling the fence from running.
+> >
+> > While this seems fairly unlikely, it's potentially exploitable.
+> 
+> LGTM
+> 
+> Reviewed-by: Dave Airlie <airlied@redhat.com>
+> 
+> probably should go into drm-misc-fixes?
 
-I was unable to reproduce this issue.
+Yes, however, 39126abc5e20 went in through drm-fixes directly it seems, since
+it's not in drm-misc-fixes.
 
-Adrian
+Guess you want me to cherry-pick 39126abc5e20 to drm-misc-fixes rather than take
+this one through drm-fixes as well?
 
---=20
- .''`.  John Paul Adrian Glaubitz
-: :' :  Debian Developer
-`. `'   Physicist
-  `-    GPG: 62FF 8A75 84E0 2956 9546  0006 7426 3B37 F5B5 F913
+> 
+> >
+> > Fixes: 39126abc5e20 ("nouveau: offload fence uevents work to workqueue")
+> > Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+> > ---
+> >  drivers/gpu/drm/nouveau/nouveau_drm.c   | 13 +++++++++++--
+> >  drivers/gpu/drm/nouveau/nouveau_drv.h   |  3 +++
+> >  drivers/gpu/drm/nouveau/nouveau_fence.c |  3 ++-
+> >  drivers/gpu/drm/nouveau/nouveau_fence.h |  2 ++
+> >  4 files changed, 18 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> > index 6f6c31a9937b..6be202081077 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> > @@ -598,9 +598,15 @@ nouveau_drm_device_init(struct drm_device *dev)
+> >                 goto fail_alloc;
+> >         }
+> >
+> > +       drm->fence_wq = alloc_workqueue("nouveau_fence_wq", 0, WQ_MAX_ACTIVE);
+> > +       if (!drm->fence_wq) {
+> > +               ret = -ENOMEM;
+> > +               goto fail_sched_wq;
+> > +       }
+> > +
+> >         ret = nouveau_cli_init(drm, "DRM-master", &drm->master);
+> >         if (ret)
+> > -               goto fail_wq;
+> > +               goto fail_fence_wq;
+> >
+> >         ret = nouveau_cli_init(drm, "DRM", &drm->client);
+> >         if (ret)
+> > @@ -670,7 +676,9 @@ nouveau_drm_device_init(struct drm_device *dev)
+> >         nouveau_cli_fini(&drm->client);
+> >  fail_master:
+> >         nouveau_cli_fini(&drm->master);
+> > -fail_wq:
+> > +fail_fence_wq:
+> > +       destroy_workqueue(drm->fence_wq);
+> > +fail_sched_wq:
+> >         destroy_workqueue(drm->sched_wq);
+> >  fail_alloc:
+> >         nvif_parent_dtor(&drm->parent);
+> > @@ -725,6 +733,7 @@ nouveau_drm_device_fini(struct drm_device *dev)
+> >
+> >         nouveau_cli_fini(&drm->client);
+> >         nouveau_cli_fini(&drm->master);
+> > +       destroy_workqueue(drm->fence_wq);
+> >         destroy_workqueue(drm->sched_wq);
+> >         nvif_parent_dtor(&drm->parent);
+> >         mutex_destroy(&drm->clients_lock);
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> > index 8a6d94c8b163..b43619a213a4 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> > @@ -261,6 +261,9 @@ struct nouveau_drm {
+> >         /* Workqueue used for channel schedulers. */
+> >         struct workqueue_struct *sched_wq;
+> >
+> > +       /* Workqueue used to signal fences. */
+> > +       struct workqueue_struct *fence_wq;
+> > +
+> >         /* context for accelerated drm-internal operations */
+> >         struct nouveau_channel *cechan;
+> >         struct nouveau_channel *channel;
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > index 93f08f9479d8..c3ea3cd933cd 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> > @@ -174,7 +174,7 @@ static int
+> >  nouveau_fence_wait_uevent_handler(struct nvif_event *event, void *repv, u32 repc)
+> >  {
+> >         struct nouveau_fence_chan *fctx = container_of(event, typeof(*fctx), event);
+> > -       schedule_work(&fctx->uevent_work);
+> > +       queue_work(fctx->wq, &fctx->uevent_work);
+> >         return NVIF_EVENT_KEEP;
+> >  }
+> >
+> > @@ -194,6 +194,7 @@ nouveau_fence_context_new(struct nouveau_channel *chan, struct nouveau_fence_cha
+> >         INIT_LIST_HEAD(&fctx->pending);
+> >         spin_lock_init(&fctx->lock);
+> >         fctx->context = chan->drm->runl[chan->runlist].context_base + chan->chid;
+> > +       fctx->wq = chan->drm->fence_wq;
+> >
+> >         if (chan == chan->drm->cechan)
+> >                 strcpy(fctx->name, "copy engine channel");
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.h b/drivers/gpu/drm/nouveau/nouveau_fence.h
+> > index 8bc065acfe35..bc13110bdfa4 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_fence.h
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_fence.h
+> > @@ -44,7 +44,9 @@ struct nouveau_fence_chan {
+> >         u32 context;
+> >         char name[32];
+> >
+> > +       struct workqueue_struct *wq;
+> >         struct work_struct uevent_work;
+> > +
+> >         struct nvif_event event;
+> >         int notify_ref, dead, killed;
+> >  };
+> >
+> > base-commit: 1f4c6f11a557642505e5f403e0dfabbaff9c529a
+> > --
+> > 2.43.0
+> >
+> 
+
