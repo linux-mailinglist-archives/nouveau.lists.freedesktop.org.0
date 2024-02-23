@@ -2,78 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D4BA85FB91
-	for <lists+nouveau@lfdr.de>; Thu, 22 Feb 2024 15:50:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FD96860780
+	for <lists+nouveau@lfdr.de>; Fri, 23 Feb 2024 01:15:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A0DAC10EA28;
-	Thu, 22 Feb 2024 14:50:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EABC210EACD;
+	Fri, 23 Feb 2024 00:15:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="QvXW1b/y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m/zSF5WE";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DC7A310E9E3
- for <nouveau@lists.freedesktop.org>; Thu, 22 Feb 2024 14:50:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1708613402;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=s8TpxZTjZr2d03dGbwChs6T5WLDb0VkPdU8wL2K5D40=;
- b=QvXW1b/yCf9zK2QeCNfqydL5180cRg7pI6+5iqOjnpyMj/F+MH0++39PhY9LCpx09RNjyD
- m658ctO0Lq88TksOnIMzQJ/6JK0G32rgYf3pthQtWrWi58cCKuSPTsM1mnLR4BHgfXQcSF
- rLxFoHY9DbmLLSOUVosINCxdTJsrvio=
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-599-jdye5PMTNrOXQeFZHnIKhw-1; Thu, 22 Feb 2024 09:46:00 -0500
-X-MC-Unique: jdye5PMTNrOXQeFZHnIKhw-1
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-a3bdd99a243so96920866b.0
- for <nouveau@lists.freedesktop.org>; Thu, 22 Feb 2024 06:46:00 -0800 (PST)
+Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com
+ [209.85.167.49])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E923510EAD1;
+ Fri, 23 Feb 2024 00:15:07 +0000 (UTC)
+Received: by mail-lf1-f49.google.com with SMTP id
+ 2adb3069b0e04-512b700c8ebso472688e87.0; 
+ Thu, 22 Feb 2024 16:15:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708647306; x=1709252106; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wbdYVnXWxtvDkIE4QvrbDuoRjpCKlqx/O5kI02G4D/E=;
+ b=m/zSF5WEfxgEwmjWmS6eGQOoj5p+dVLlKC+krYhDfHWKntqUh/4bovZ8DRQ0nbE6Gd
+ 5pWPOJwBhON1K6Q+YmTf+h54Bb5MjC39/abrLxG9ytHkQLiAAvxycBYk92Qb1PXeyKjH
+ aXOeHSZttW50dAar1OJladstNbm8QM3DKqUmOomRRyoRRZ67Pw3usXowT95kvHgxQXlG
+ F+QLTVY1nxUPFukNhyDuFtR0mVhPRh4bD5r/hHZETZ9OmXXO5TNxG7ems5tuuAncO6n0
+ VOclXsyJrfFiQKZWUS1hV+iMtxXmpXAWRjaRuks+aVuknWDl2dW3DCNARgZbIBesQWhE
+ b+TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708613139; x=1709217939;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1708647306; x=1709252106;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=s8TpxZTjZr2d03dGbwChs6T5WLDb0VkPdU8wL2K5D40=;
- b=RHdpFrYPWAIHNSqgzap4u8RGproH5QYov0b/2oTprnoMpwZKIplMucwtNS4oc1W0pp
- kkZvvfsj3ErdZuuz7bCZV4rBzHhUoT+177+cfoyDwTX2b/Jc8EpNO0UIO03mALqqcQhm
- IN2aykmCmlqYBSfICbuLhXJcmCBOOs/iOfCKllsErXQrU3NhzO/B0hKVctat1Xag4k9T
- SrVrC6NJiNLVsv6iCh987DS6pAomjMMO5WGCvwB447IqOabHNGvnSfagIKZoRXijluhg
- kDEaivB9zNvCjEoGOFkpxZnI694MWUxreYueZyNq/hUbOTdl0l1erwKMy2kVhwTitbJu
- 6qAQ==
-X-Gm-Message-State: AOJu0YwXtsHidFtbQxEuwix6bU7ajufHZ8Td8mcSGKjIZKwD6/FsoIxU
- hKlmmVCozpCrds3GxGznWa3Ww4+ucmtfjItD/Z2gjrxGAuQiv4EaxOX2rMtYgJt4Cc0aVfxL1Jw
- gxzEPnAMgzAfEy4QJdSoFGkVfyLTCR2oM6vpjxFhZhwIULdXixIrkE6IN9nArWcnGIpbdCF7IJk
- ZFc+LYImF/krbpO7ztD6iMsjhSmvXGfSQdqz9qrKH4QA==
-X-Received: by 2002:a17:906:1cc1:b0:a3f:54a1:565c with SMTP id
- i1-20020a1709061cc100b00a3f54a1565cmr2074953ejh.27.1708613139356; 
- Thu, 22 Feb 2024 06:45:39 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEcCQEL4wP0waKbuv5CgqlVATS84CJWzgJK1lz6EFrdnGuHBoMTYwtP4milLTxD04B2xPi0gw==
-X-Received: by 2002:a17:906:1cc1:b0:a3f:54a1:565c with SMTP id
- i1-20020a1709061cc100b00a3f54a1565cmr2074929ejh.27.1708613138955; 
- Thu, 22 Feb 2024 06:45:38 -0800 (PST)
-Received: from cassiopeiae.. ([2a02:810d:4b3f:ee94:642:1aff:fe31:a19f])
- by smtp.gmail.com with ESMTPSA id
- hu21-20020a170907a09500b00a3f596aaf9dsm1301706ejc.26.2024.02.22.06.45.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Feb 2024 06:45:38 -0800 (PST)
-From: Danilo Krummrich <dakr@redhat.com>
-To: nouveau@lists.freedesktop.org
-Cc: lyude@redhat.com, kherbst@redhat.com, airlied@gmail.com,
- dri-devel@lists.freedesktop.org, Danilo Krummrich <dakr@redhat.com>
-Subject: [PATCH] drm/nouveau: use dedicated wq for fence uevents work
-Date: Thu, 22 Feb 2024 15:44:29 +0100
-Message-ID: <20240222144536.4382-1-dakr@redhat.com>
-X-Mailer: git-send-email 2.43.0
+ bh=wbdYVnXWxtvDkIE4QvrbDuoRjpCKlqx/O5kI02G4D/E=;
+ b=HKybL9j/nrK5jbbLA2mSyFS4xbItQ57BwBD4Jgi6u5yiXNsMgUeN06ASC1fSdEpY98
+ umYsfkr3Jpdd9Ze5GheY4UW364MY12JOoa9kb1tvVD+ILtL3bEz28Gun583uDMam432r
+ xCd3dCXbds76iAzPktLjGGS3aPKhF454rZbbGR41IGSL8fQaY1hvb24oBGg3HBGNkUI+
+ uBIJZt2L4iLz6DTKza2BxvSFeSZz8zyYlEkm0asUdunvC/k6MykM22iMrnjmdznfWHUV
+ gm765CjT9hOg/FQL5Ou/ecVZ1HYZuYdHXX1O2lRw2Q/5zoQhcGf6aTjex9wUx8R5YEpM
+ MNcg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW2uc8HFWYjVq/TnAbg0tIWCpE30pv2snntIwcuAffaqmnhl6SJ1hEzjlyTnU+kP4XdlLQ5eQUi6JG8K/AeUcgquhOgBcXbfVx+cI8yMzIe
+X-Gm-Message-State: AOJu0YysjgdvgtlC570k5quDvkmWBdiwZzmUUO3ltl9+t4pKn2HhvHbv
+ +DW7oQSBoWVX/paeJtmLCg3zvtWUsyhtFwSqyKbIzL1dzeugWyd6TtnC46Hmps3diEa8IMUrF2S
+ t1mtGc2X88Q17BrmAib1E/8oTvzE=
+X-Google-Smtp-Source: AGHT+IHDMTypQuGruPGCZIikYT3URiuAoz+L+hoOU3MA9akgTu6D+EAqg67te00SpbbudqPb7w6aetdZ9ikf6cayHLk=
+X-Received: by 2002:ac2:4344:0:b0:512:a061:846f with SMTP id
+ o4-20020ac24344000000b00512a061846fmr377646lfl.41.1708647305380; Thu, 22 Feb
+ 2024 16:15:05 -0800 (PST)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
+References: <20240222144536.4382-1-dakr@redhat.com>
+In-Reply-To: <20240222144536.4382-1-dakr@redhat.com>
+From: Dave Airlie <airlied@gmail.com>
+Date: Fri, 23 Feb 2024 10:14:53 +1000
+Message-ID: <CAPM=9ty7ALfg6-ebdQdjeVdGgm2dVQYE0+yHeJ8+YCsZvAL+1g@mail.gmail.com>
+Subject: Re: [PATCH] drm/nouveau: use dedicated wq for fence uevents work
+To: Danilo Krummrich <dakr@redhat.com>
+Cc: nouveau@lists.freedesktop.org, lyude@redhat.com, kherbst@redhat.com, 
+ dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,114 +76,123 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Using the kernel global workqueue to signal fences can lead to
-unexpected deadlocks. Some other work (e.g. from a different driver)
-could directly or indirectly depend on this fence to be signaled.
-However, if the WQ_MAX_ACTIVE limit is reached by waiters, this can
-prevent the work signaling the fence from running.
+On Fri, 23 Feb 2024 at 00:45, Danilo Krummrich <dakr@redhat.com> wrote:
+>
+> Using the kernel global workqueue to signal fences can lead to
+> unexpected deadlocks. Some other work (e.g. from a different driver)
+> could directly or indirectly depend on this fence to be signaled.
+> However, if the WQ_MAX_ACTIVE limit is reached by waiters, this can
+> prevent the work signaling the fence from running.
+>
+> While this seems fairly unlikely, it's potentially exploitable.
 
-While this seems fairly unlikely, it's potentially exploitable.
+LGTM
 
-Fixes: 39126abc5e20 ("nouveau: offload fence uevents work to workqueue")
-Signed-off-by: Danilo Krummrich <dakr@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_drm.c   | 13 +++++++++++--
- drivers/gpu/drm/nouveau/nouveau_drv.h   |  3 +++
- drivers/gpu/drm/nouveau/nouveau_fence.c |  3 ++-
- drivers/gpu/drm/nouveau/nouveau_fence.h |  2 ++
- 4 files changed, 18 insertions(+), 3 deletions(-)
+Reviewed-by: Dave Airlie <airlied@redhat.com>
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-index 6f6c31a9937b..6be202081077 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-@@ -598,9 +598,15 @@ nouveau_drm_device_init(struct drm_device *dev)
- 		goto fail_alloc;
- 	}
- 
-+	drm->fence_wq = alloc_workqueue("nouveau_fence_wq", 0, WQ_MAX_ACTIVE);
-+	if (!drm->fence_wq) {
-+		ret = -ENOMEM;
-+		goto fail_sched_wq;
-+	}
-+
- 	ret = nouveau_cli_init(drm, "DRM-master", &drm->master);
- 	if (ret)
--		goto fail_wq;
-+		goto fail_fence_wq;
- 
- 	ret = nouveau_cli_init(drm, "DRM", &drm->client);
- 	if (ret)
-@@ -670,7 +676,9 @@ nouveau_drm_device_init(struct drm_device *dev)
- 	nouveau_cli_fini(&drm->client);
- fail_master:
- 	nouveau_cli_fini(&drm->master);
--fail_wq:
-+fail_fence_wq:
-+	destroy_workqueue(drm->fence_wq);
-+fail_sched_wq:
- 	destroy_workqueue(drm->sched_wq);
- fail_alloc:
- 	nvif_parent_dtor(&drm->parent);
-@@ -725,6 +733,7 @@ nouveau_drm_device_fini(struct drm_device *dev)
- 
- 	nouveau_cli_fini(&drm->client);
- 	nouveau_cli_fini(&drm->master);
-+	destroy_workqueue(drm->fence_wq);
- 	destroy_workqueue(drm->sched_wq);
- 	nvif_parent_dtor(&drm->parent);
- 	mutex_destroy(&drm->clients_lock);
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
-index 8a6d94c8b163..b43619a213a4 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drv.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-@@ -261,6 +261,9 @@ struct nouveau_drm {
- 	/* Workqueue used for channel schedulers. */
- 	struct workqueue_struct *sched_wq;
- 
-+	/* Workqueue used to signal fences. */
-+	struct workqueue_struct *fence_wq;
-+
- 	/* context for accelerated drm-internal operations */
- 	struct nouveau_channel *cechan;
- 	struct nouveau_channel *channel;
-diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
-index 93f08f9479d8..c3ea3cd933cd 100644
---- a/drivers/gpu/drm/nouveau/nouveau_fence.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
-@@ -174,7 +174,7 @@ static int
- nouveau_fence_wait_uevent_handler(struct nvif_event *event, void *repv, u32 repc)
- {
- 	struct nouveau_fence_chan *fctx = container_of(event, typeof(*fctx), event);
--	schedule_work(&fctx->uevent_work);
-+	queue_work(fctx->wq, &fctx->uevent_work);
- 	return NVIF_EVENT_KEEP;
- }
- 
-@@ -194,6 +194,7 @@ nouveau_fence_context_new(struct nouveau_channel *chan, struct nouveau_fence_cha
- 	INIT_LIST_HEAD(&fctx->pending);
- 	spin_lock_init(&fctx->lock);
- 	fctx->context = chan->drm->runl[chan->runlist].context_base + chan->chid;
-+	fctx->wq = chan->drm->fence_wq;
- 
- 	if (chan == chan->drm->cechan)
- 		strcpy(fctx->name, "copy engine channel");
-diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.h b/drivers/gpu/drm/nouveau/nouveau_fence.h
-index 8bc065acfe35..bc13110bdfa4 100644
---- a/drivers/gpu/drm/nouveau/nouveau_fence.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_fence.h
-@@ -44,7 +44,9 @@ struct nouveau_fence_chan {
- 	u32 context;
- 	char name[32];
- 
-+	struct workqueue_struct *wq;
- 	struct work_struct uevent_work;
-+
- 	struct nvif_event event;
- 	int notify_ref, dead, killed;
- };
+probably should go into drm-misc-fixes?
 
-base-commit: 1f4c6f11a557642505e5f403e0dfabbaff9c529a
--- 
-2.43.0
-
+>
+> Fixes: 39126abc5e20 ("nouveau: offload fence uevents work to workqueue")
+> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_drm.c   | 13 +++++++++++--
+>  drivers/gpu/drm/nouveau/nouveau_drv.h   |  3 +++
+>  drivers/gpu/drm/nouveau/nouveau_fence.c |  3 ++-
+>  drivers/gpu/drm/nouveau/nouveau_fence.h |  2 ++
+>  4 files changed, 18 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> index 6f6c31a9937b..6be202081077 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> @@ -598,9 +598,15 @@ nouveau_drm_device_init(struct drm_device *dev)
+>                 goto fail_alloc;
+>         }
+>
+> +       drm->fence_wq = alloc_workqueue("nouveau_fence_wq", 0, WQ_MAX_ACTIVE);
+> +       if (!drm->fence_wq) {
+> +               ret = -ENOMEM;
+> +               goto fail_sched_wq;
+> +       }
+> +
+>         ret = nouveau_cli_init(drm, "DRM-master", &drm->master);
+>         if (ret)
+> -               goto fail_wq;
+> +               goto fail_fence_wq;
+>
+>         ret = nouveau_cli_init(drm, "DRM", &drm->client);
+>         if (ret)
+> @@ -670,7 +676,9 @@ nouveau_drm_device_init(struct drm_device *dev)
+>         nouveau_cli_fini(&drm->client);
+>  fail_master:
+>         nouveau_cli_fini(&drm->master);
+> -fail_wq:
+> +fail_fence_wq:
+> +       destroy_workqueue(drm->fence_wq);
+> +fail_sched_wq:
+>         destroy_workqueue(drm->sched_wq);
+>  fail_alloc:
+>         nvif_parent_dtor(&drm->parent);
+> @@ -725,6 +733,7 @@ nouveau_drm_device_fini(struct drm_device *dev)
+>
+>         nouveau_cli_fini(&drm->client);
+>         nouveau_cli_fini(&drm->master);
+> +       destroy_workqueue(drm->fence_wq);
+>         destroy_workqueue(drm->sched_wq);
+>         nvif_parent_dtor(&drm->parent);
+>         mutex_destroy(&drm->clients_lock);
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> index 8a6d94c8b163..b43619a213a4 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> @@ -261,6 +261,9 @@ struct nouveau_drm {
+>         /* Workqueue used for channel schedulers. */
+>         struct workqueue_struct *sched_wq;
+>
+> +       /* Workqueue used to signal fences. */
+> +       struct workqueue_struct *fence_wq;
+> +
+>         /* context for accelerated drm-internal operations */
+>         struct nouveau_channel *cechan;
+>         struct nouveau_channel *channel;
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> index 93f08f9479d8..c3ea3cd933cd 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> @@ -174,7 +174,7 @@ static int
+>  nouveau_fence_wait_uevent_handler(struct nvif_event *event, void *repv, u32 repc)
+>  {
+>         struct nouveau_fence_chan *fctx = container_of(event, typeof(*fctx), event);
+> -       schedule_work(&fctx->uevent_work);
+> +       queue_work(fctx->wq, &fctx->uevent_work);
+>         return NVIF_EVENT_KEEP;
+>  }
+>
+> @@ -194,6 +194,7 @@ nouveau_fence_context_new(struct nouveau_channel *chan, struct nouveau_fence_cha
+>         INIT_LIST_HEAD(&fctx->pending);
+>         spin_lock_init(&fctx->lock);
+>         fctx->context = chan->drm->runl[chan->runlist].context_base + chan->chid;
+> +       fctx->wq = chan->drm->fence_wq;
+>
+>         if (chan == chan->drm->cechan)
+>                 strcpy(fctx->name, "copy engine channel");
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.h b/drivers/gpu/drm/nouveau/nouveau_fence.h
+> index 8bc065acfe35..bc13110bdfa4 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_fence.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.h
+> @@ -44,7 +44,9 @@ struct nouveau_fence_chan {
+>         u32 context;
+>         char name[32];
+>
+> +       struct workqueue_struct *wq;
+>         struct work_struct uevent_work;
+> +
+>         struct nvif_event event;
+>         int notify_ref, dead, killed;
+>  };
+>
+> base-commit: 1f4c6f11a557642505e5f403e0dfabbaff9c529a
+> --
+> 2.43.0
+>
