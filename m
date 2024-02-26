@@ -2,57 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 611D186819D
-	for <lists+nouveau@lfdr.de>; Mon, 26 Feb 2024 21:00:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F6308681E1
+	for <lists+nouveau@lfdr.de>; Mon, 26 Feb 2024 21:21:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9B7F510E7CA;
-	Mon, 26 Feb 2024 20:00:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 19A1A10E22C;
+	Mon, 26 Feb 2024 20:21:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="WChO2o//";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="b9HXKquC";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D454A10E03C;
- Mon, 26 Feb 2024 20:00:27 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6728410E22C;
+ Mon, 26 Feb 2024 20:21:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1708977628; x=1740513628;
- h=date:from:to:cc:subject:message-id;
- bh=/EH3F5q1f9nRNybuQ4fC//Sp0wZ24X0rMldM/Njia4A=;
- b=WChO2o//Oz+mPK1uGrvDX3MivhcNVlnO1Re9qOnkYX4bDj4/AzSDdvwF
- DALkG20Tw6DLbDJTfFZjrStYpG1QswIJ6bPvKaUr1lMEBVW4ntllPox39
- xNCBFsIwsQmnM3f9qnvktOfdWPzFZrh5b7Sce+Yq3hkjbbHmCz5b2WFRn
- 6XFQaka0g1dmgW8B1uCCWkp0K02lHzc676FnahPCHoHTaYJCN9oPOViEP
- wqtPf3AqOqT/wMOEyK+sQQ/RH9ftnpYWvikqAfmOX9HLLQBCDZnNL7ZRp
- ZqRterRF1IEZWCy6JubEyP14cgF6EdYCa7GCUGYievWeTUlXXg6igPfEg A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10996"; a="3136219"
+ t=1708978908; x=1740514908;
+ h=message-id:subject:from:to:date:in-reply-to:references:
+ content-transfer-encoding:mime-version;
+ bh=1v9Umv+ao4T/7awH7WpyiCFe0pepbJxaEOygY8Gq2ak=;
+ b=b9HXKquCpV3eil404b/Hhrmb6MQpwbMZ8ux2hs4kMCACTCFL24NPu4lV
+ k3jtolIicdZQlg2yemhfyGifjpCw1zZPc8GYaUIQB3QRWmR/u1VvuCAeH
+ QFaXTeDpxsUWvFkx0/0deGDzfxhfFTPj3ysl4SJ/ZhwOkYK4uYQ4TWfDh
+ EJLjlzFMGQG4iuwVfxmcvtAyflGd+Auzhu1OgSC8WwB/TYLBvu3Ho461M
+ Ja4U5UIJODdLIArFWmtLIXtShKF5ueKJCyr0ZZNbavPYXoh+dYlwswmud
+ AktoEP6lVU+xY9BZsJHyBQHQ9ROg2b5kjGcKGfCDqrmQWIQRRXX6NCTHG g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10996"; a="3220697"
 X-IronPort-AV: E=Sophos;i="6.06,186,1705392000"; 
-   d="scan'208";a="3136219"
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
- by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Feb 2024 12:00:26 -0800
+   d="scan'208";a="3220697"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+ by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 26 Feb 2024 12:21:47 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.06,186,1705392000"; d="scan'208";a="11408942"
-Received: from lkp-server02.sh.intel.com (HELO 3c78fa4d504c) ([10.239.97.151])
- by fmviesa004.fm.intel.com with ESMTP; 26 Feb 2024 12:00:23 -0800
-Received: from kbuild by 3c78fa4d504c with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1reh8s-000AcZ-26;
- Mon, 26 Feb 2024 20:00:20 +0000
-Date: Tue, 27 Feb 2024 03:58:10 +0800
-From: kernel test robot <lkp@intel.com>
-To: Andrew Morton <akpm@linux-foundation.org>
-Cc: Linux Memory Management List <linux-mm@kvack.org>,
- dri-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- io-uring@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-leds@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-pm@vger.kernel.org, linux-sound@vger.kernel.org,
- linux-usb@vger.kernel.org, mhi@lists.linux.dev,
- nouveau@lists.freedesktop.org, ntfs3@lists.linux.dev
-Subject: [linux-next:master] BUILD REGRESSION
- 8552c902efe7ef670b6961fb8885b67961aeb629
-Message-ID: <202402270303.PmvmQrJV-lkp@intel.com>
-User-Agent: s-nail v14.9.24
+X-IronPort-AV: E=Sophos;i="6.06,186,1705392000"; d="scan'208";a="29960428"
+Received: from shunter1-mobl.ger.corp.intel.com (HELO [10.252.3.88])
+ ([10.252.3.88])
+ by fmviesa002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 26 Feb 2024 12:21:45 -0800
+Message-ID: <b99455de655c067a1820b2273e1258bb35f3fbdd.camel@linux.intel.com>
+Subject: Re: [PATCH 1/2] drm/ttm: improve idle/busy handling v4
+From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
+To: Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>, 
+ dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org
+Date: Mon, 26 Feb 2024 21:21:42 +0100
+In-Reply-To: <53178cc5-9a8d-477b-be2b-2f783e8a1aa7@gmail.com>
+References: <20240126140916.1577-1-christian.koenig@amd.com>
+ <20240126140916.1577-2-christian.koenig@amd.com>
+ <ce167d0a18781733eeb4974b92ff5038a5241a70.camel@linux.intel.com>
+ <e59e4c53-7c22-4162-9ef5-cb399383782e@gmail.com>
+ <53178cc5-9a8d-477b-be2b-2f783e8a1aa7@gmail.com>
+Autocrypt: addr=thomas.hellstrom@linux.intel.com; prefer-encrypt=mutual;
+ keydata=mDMEZaWU6xYJKwYBBAHaRw8BAQdAj/We1UBCIrAm9H5t5Z7+elYJowdlhiYE8zUXgxcFz360SFRob21hcyBIZWxsc3Ryw7ZtIChJbnRlbCBMaW51eCBlbWFpbCkgPHRob21hcy5oZWxsc3Ryb21AbGludXguaW50ZWwuY29tPoiTBBMWCgA7FiEEbJFDO8NaBua8diGTuBaTVQrGBr8FAmWllOsCGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgkQuBaTVQrGBr/yQAD/Z1B+Kzy2JTuIy9LsKfC9FJmt1K/4qgaVeZMIKCAxf2UBAJhmZ5jmkDIf6YghfINZlYq6ixyWnOkWMuSLmELwOsgPuDgEZaWU6xIKKwYBBAGXVQEFAQEHQF9v/LNGegctctMWGHvmV/6oKOWWf/vd4MeqoSYTxVBTAwEIB4h4BBgWCgAgFiEEbJFDO8NaBua8diGTuBaTVQrGBr8FAmWllOsCGwwACgkQuBaTVQrGBr/P2QD9Gts6Ee91w3SzOelNjsus/DcCTBb3fRugJoqcfxjKU0gBAKIFVMvVUGbhlEi6EFTZmBZ0QIZEIzOOVfkaIgWelFEH
+Organization: Intel Sweden AB, Registration Number: 556189-6027
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
+User-Agent: Evolution 3.50.3 (3.50.3-1.fc39) 
+MIME-Version: 1.0
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,445 +73,353 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
-branch HEAD: 8552c902efe7ef670b6961fb8885b67961aeb629  Add linux-next specific files for 20240226
+SGksIENocmlzdGlhbgoKT24gRnJpLCAyMDI0LTAyLTIzIGF0IDE1OjMwICswMTAwLCBDaHJpc3Rp
+YW4gS8O2bmlnIHdyb3RlOgo+IEFtIDA2LjAyLjI0IHVtIDEzOjU2IHNjaHJpZWIgQ2hyaXN0aWFu
+IEvDtm5pZzoKPiA+IEFtIDA2LjAyLjI0IHVtIDEzOjUzIHNjaHJpZWIgVGhvbWFzIEhlbGxzdHLD
+tm06Cj4gPiA+IEhpLCBDaHJpc3RpYW4sCj4gPiA+IAo+ID4gPiBPbiBGcmksIDIwMjQtMDEtMjYg
+YXQgMTU6MDkgKzAxMDAsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6Cj4gPiA+ID4gUHJldmlvdXNs
+eSB3ZSB3b3VsZCBuZXZlciB0cnkgdG8gbW92ZSBhIEJPIGludG8gdGhlIHByZWZlcnJlZAo+ID4g
+PiA+IHBsYWNlbWVudHMKPiA+ID4gPiB3aGVuIGl0IGV2ZXIgbGFuZGVkIGluIGEgYnVzeSBwbGFj
+ZW1lbnQgc2luY2UgdGhvc2Ugd2VyZQo+ID4gPiA+IGNvbnNpZGVyZWQKPiA+ID4gPiBjb21wYXRp
+YmxlLgo+ID4gPiA+IAo+ID4gPiA+IFJld29yayB0aGUgd2hvbGUgaGFuZGxpbmcgYW5kIGZpbmFs
+bHkgdW5pZnkgdGhlIGlkbGUgYW5kIGJ1c3kKPiA+ID4gPiBoYW5kbGluZy4KPiA+ID4gPiB0dG1f
+Ym9fdmFsaWRhdGUoKSBpcyBub3cgcmVzcG9uc2libGUgdG8gdHJ5IGlkbGUgcGxhY2VtZW50Cj4g
+PiA+ID4gZmlyc3QgYW5kCj4gPiA+ID4gdGhlbgo+ID4gPiA+IHVzZSB0aGUgYnVzeSBwbGFjZW1l
+bnQgaWYgdGhhdCBkaWRuJ3Qgd29ya2VkLgo+ID4gPiA+IAo+ID4gPiA+IERyYXdiYWNrIGlzIHRo
+YXQgd2Ugbm93IGFsd2F5cyB0cnkgdGhlIGlkbGUgcGxhY2VtZW50IGZpcnN0IGZvcgo+ID4gPiA+
+IGVhY2gKPiA+ID4gPiB2YWxpZGF0aW9uIHdoaWNoIG1pZ2h0IGNhdXNlIHNvbWUgYWRkaXRpb25h
+bCBDUFUgb3ZlcmhlYWQgb24KPiA+ID4gPiBvdmVyY29tbWl0Lgo+ID4gPiA+IAo+ID4gPiA+IHYy
+OiBmaXgga2VybmVsZG9jIHdhcm5pbmcgYW5kIGNvZGluZyBzdHlsZQo+ID4gPiA+IHYzOiB0YWtl
+IGNhcmUgb2YgWEUgYXMgd2VsbAo+ID4gPiA+IHY0OiBrZWVwIHRoZSB0dG1fYm9fbWVtX3NwYWNl
+IGZ1bmN0aW9uYWxpdHkgYXMgaXQgaXMgZm9yIG5vdywKPiA+ID4gPiBvbmx5Cj4gPiA+ID4gYWRk
+Cj4gPiA+ID4gwqDCoMKgwqAgbmV3IGhhbmRsaW5nIGZvciB0dG1fYm9fdmFsaWRhdGUgYXMgc3Vn
+Z2VzdGVkIGJ5IFRob21hcwo+ID4gPiA+IAo+ID4gPiA+IFNpZ25lZC1vZmYtYnk6IENocmlzdGlh
+biBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4KPiA+ID4gPiBSZXZpZXdlZC1ieTog
+WmFjayBSdXNpbiA8emFjay5ydXNpbkBicm9hZGNvbS5jb20+IHYzCj4gPiA+IFNlbmRpbmcgdGhp
+cyB0aHJvdWdoIHhlIENJLCB3aWxsIHRyeSB0byByZXZpZXcgYXNhcC4KPiA+IAo+ID4gVGFrZSB5
+b3VyIHRpbWUuIEF0IHRoZSBtb21lbnQgcGVvcGxlIGFyZSBib21iYXJkaW5nIG1lIHdpdGggd29y
+awo+ID4gYW5kIEkgCj4gPiBoYXZlIG9ubHkgdHdvIGhhbmRzIGFuZCBvbmUgaGVhZCBhcyB3ZWxs
+IDooCj4gCj4gU28gSSd2ZSBkaWdnZWQgbXlzZWxmIG91dCBvZiB0aGF0IGhvbGUgYW5kIHdvdWxk
+IHJhdGhlciBsaWtlIHRvIGdldAo+IHRoaXMgCj4gbmV3IGZlYXR1cmUgaW50byA2LjkuCj4gCj4g
+QW55IHRpbWUgdG8gcmV2aWV3IGl0PyBJIGNhbiBhbHNvIHBsYW4gc29tZSB0aW1lIHRvIHJldmll
+dyB5b3VyIExSVSAKPiBjaGFuZ2VzIG5leHQgd2Vlay4KPiAKPiBUaGFua3MsCj4gQ2hyaXN0aWFu
+LgoKU29ycnkgZm9yIHRoZSBsYXRlIHJlc3BvbnNlLiBXYXMgcGxhbm5pbmcgdG8gcmV2aWV3IGJ1
+dCBzYXcgdGhhdCB0aGVyZQp3YXMgc3RpbGwgYW4geGUgQ0kgZmFpbHVyZS4KCmh0dHBzOi8vaW50
+ZWwtZ2Z4LWNpLjAxLm9yZy90cmVlL2ludGVsLXhlL3hlLXB3LTEyOTU3OXYxL2JhdC1hdHNtLTIv
+aWd0QHhlX2V2aWN0X2Njc0BldmljdC1vdmVyY29tbWl0LXBhcmFsbGVsLW5vZnJlZS1zYW1lZmQu
+aHRtbAoKSSBoYXZlbid0IHJlYWxseSBoYWQgdGltZSB0byBsb29rIGludG8gd2hhdCBtaWdodCBi
+ZSBjYXVzaW5nIHRoaXMsCnRob3VnaC4KCi9UaG9tYXMKCj4gCj4gPiAKPiA+IENocmlzdGlhbi4K
+PiA+IAo+ID4gPiAKPiA+ID4gL1Rob21hcwo+ID4gPiAKPiA+ID4gCj4gPiA+ID4gLS0tCj4gPiA+
+ID4gwqDCoGRyaXZlcnMvZ3B1L2RybS90dG0vdHRtX2JvLmPCoMKgwqDCoMKgwqAgfCAyMzEgKysr
+KysrKysrKysrKy0tLS0tLS0KPiA+ID4gPiAtLS0tLS0tCj4gPiA+ID4gLS0gCj4gPiA+ID4gwqDC
+oGRyaXZlcnMvZ3B1L2RybS90dG0vdHRtX3Jlc291cmNlLmMgfMKgIDE2ICstCj4gPiA+ID4gwqDC
+oGluY2x1ZGUvZHJtL3R0bS90dG1fcmVzb3VyY2UuaMKgwqDCoMKgIHzCoMKgIDMgKy0KPiA+ID4g
+PiDCoMKgMyBmaWxlcyBjaGFuZ2VkLCAxMjEgaW5zZXJ0aW9ucygrKSwgMTI5IGRlbGV0aW9ucygt
+KQo+ID4gPiA+IAo+ID4gPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV9i
+by5jCj4gPiA+ID4gYi9kcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV9iby5jCj4gPiA+ID4gaW5kZXgg
+YmEzZjA5ZTJkN2U2Li5iMTJmNDM1NTQyYTkgMTAwNjQ0Cj4gPiA+ID4gLS0tIGEvZHJpdmVycy9n
+cHUvZHJtL3R0bS90dG1fYm8uYwo+ID4gPiA+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS90dG0vdHRt
+X2JvLmMKPiA+ID4gPiBAQCAtNzI0LDY0ICs3MjQsMzYgQEAgc3RhdGljIGludCB0dG1fYm9fYWRk
+X21vdmVfZmVuY2Uoc3RydWN0Cj4gPiA+ID4gdHRtX2J1ZmZlcl9vYmplY3QgKmJvLAo+ID4gPiA+
+IMKgwqDCoMKgwqAgcmV0dXJuIHJldDsKPiA+ID4gPiDCoMKgfQo+ID4gPiA+IMKgIC0vKgo+ID4g
+PiA+IC0gKiBSZXBlYXRlZGx5IGV2aWN0IG1lbW9yeSBmcm9tIHRoZSBMUlUgZm9yIEBtZW1fdHlw
+ZSB1bnRpbCB3ZQo+ID4gPiA+IGNyZWF0ZSBlbm91Z2gKPiA+ID4gPiAtICogc3BhY2UsIG9yIHdl
+J3ZlIGV2aWN0ZWQgZXZlcnl0aGluZyBhbmQgdGhlcmUgaXNuJ3QgZW5vdWdoCj4gPiA+ID4gc3Bh
+Y2UuCj4gPiA+ID4gLSAqLwo+ID4gPiA+IC1zdGF0aWMgaW50IHR0bV9ib19tZW1fZm9yY2Vfc3Bh
+Y2Uoc3RydWN0IHR0bV9idWZmZXJfb2JqZWN0Cj4gPiA+ID4gKmJvLAo+ID4gPiA+IC3CoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgwqAgY29uc3Qgc3RydWN0IHR0bV9wbGFjZSAqcGxhY2Us
+Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCDCoCBzdHJ1Y3QgdHRtX3Jl
+c291cmNlICoqbWVtLAo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgwqAg
+c3RydWN0IHR0bV9vcGVyYXRpb25fY3R4ICpjdHgpCj4gPiA+ID4gLXsKPiA+ID4gPiAtwqDCoMKg
+IHN0cnVjdCB0dG1fZGV2aWNlICpiZGV2ID0gYm8tPmJkZXY7Cj4gPiA+ID4gLcKgwqDCoCBzdHJ1
+Y3QgdHRtX3Jlc291cmNlX21hbmFnZXIgKm1hbjsKPiA+ID4gPiAtwqDCoMKgIHN0cnVjdCB3d19h
+Y3F1aXJlX2N0eCAqdGlja2V0Owo+ID4gPiA+IC3CoMKgwqAgaW50IHJldDsKPiA+ID4gPiAtCj4g
+PiA+ID4gLcKgwqDCoCBtYW4gPSB0dG1fbWFuYWdlcl90eXBlKGJkZXYsIHBsYWNlLT5tZW1fdHlw
+ZSk7Cj4gPiA+ID4gLcKgwqDCoCB0aWNrZXQgPSBkbWFfcmVzdl9sb2NraW5nX2N0eChiby0+YmFz
+ZS5yZXN2KTsKPiA+ID4gPiAtwqDCoMKgIGRvIHsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgcmV0
+ID0gdHRtX3Jlc291cmNlX2FsbG9jKGJvLCBwbGFjZSwgbWVtKTsKPiA+ID4gPiAtwqDCoMKgwqDC
+oMKgwqAgaWYgKGxpa2VseSghcmV0KSkKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBi
+cmVhazsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgaWYgKHVubGlrZWx5KHJldCAhPSAtRU5PU1BD
+KSkKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gcmV0Owo+ID4gPiA+IC3C
+oMKgwqDCoMKgwqDCoCByZXQgPSB0dG1fbWVtX2V2aWN0X2ZpcnN0KGJkZXYsIG1hbiwgcGxhY2Us
+IGN0eCwKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgwqAg
+dGlja2V0KTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgaWYgKHVubGlrZWx5KHJldCAhPSAwKSkK
+PiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gcmV0Owo+ID4gPiA+IC3CoMKg
+wqAgfSB3aGlsZSAoMSk7Cj4gPiA+ID4gLQo+ID4gPiA+IC3CoMKgwqAgcmV0dXJuIHR0bV9ib19h
+ZGRfbW92ZV9mZW5jZShibywgbWFuLCAqbWVtLCBjdHgtCj4gPiA+ID4gPiBub193YWl0X2dwdSk7
+Cj4gPiA+ID4gLX0KPiA+ID4gPiAtCj4gPiA+ID4gwqDCoC8qKgo+ID4gPiA+IC0gKiB0dG1fYm9f
+bWVtX3NwYWNlCj4gPiA+ID4gKyAqIHR0bV9ib19hbGxvY19yZXNvdXJjZSAtIEFsbG9jYXRlIGJh
+Y2tpbmcgc3RvcmUgZm9yIGEgQk8KPiA+ID4gPiDCoMKgICoKPiA+ID4gPiAtICogQGJvOiBQb2lu
+dGVyIHRvIGEgc3RydWN0IHR0bV9idWZmZXJfb2JqZWN0LiB0aGUgZGF0YSBvZgo+ID4gPiA+IHdo
+aWNoCj4gPiA+ID4gLSAqIHdlIHdhbnQgdG8gYWxsb2NhdGUgc3BhY2UgZm9yLgo+ID4gPiA+IC0g
+KiBAcGxhY2VtZW50OiBQcm9wb3NlZCBuZXcgcGxhY2VtZW50IGZvciB0aGUgYnVmZmVyIG9iamVj
+dC4KPiA+ID4gPiAtICogQG1lbTogQSBzdHJ1Y3QgdHRtX3Jlc291cmNlLgo+ID4gPiA+ICsgKiBA
+Ym86IFBvaW50ZXIgdG8gYSBzdHJ1Y3QgdHRtX2J1ZmZlcl9vYmplY3Qgb2Ygd2hpY2ggd2Ugd2Fu
+dAo+ID4gPiA+IGEKPiA+ID4gPiByZXNvdXJjZSBmb3IKPiA+ID4gPiArICogQHBsYWNlbWVudDog
+UHJvcG9zZWQgbmV3IHBsYWNlbWVudCBmb3IgdGhlIGJ1ZmZlciBvYmplY3QKPiA+ID4gPiDCoMKg
+ICogQGN0eDogaWYgYW5kIGhvdyB0byBzbGVlcCwgbG9jayBidWZmZXJzIGFuZCBhbGxvYyBtZW1v
+cnkKPiA+ID4gPiArICogQGZvcmNlX3NwYWNlOiBJZiB3ZSBzaG91bGQgZXZpY3QgYnVmZmVycyB0
+byBmb3JjZSBzcGFjZQo+ID4gPiA+ICsgKiBAcmVzOiBUaGUgcmVzdWx0aW5nIHN0cnVjdCB0dG1f
+cmVzb3VyY2UuCj4gPiA+ID4gwqDCoCAqCj4gPiA+ID4gLSAqIEFsbG9jYXRlIG1lbW9yeSBzcGFj
+ZSBmb3IgdGhlIGJ1ZmZlciBvYmplY3QgcG9pbnRlZCB0byBieQo+ID4gPiA+IEBibywKPiA+ID4g
+PiB1c2luZwo+ID4gPiA+IC0gKiB0aGUgcGxhY2VtZW50IGZsYWdzIGluIEBwbGFjZW1lbnQsIHBv
+dGVudGlhbGx5IGV2aWN0aW5nCj4gPiA+ID4gb3RoZXIKPiA+ID4gPiBpZGxlIGJ1ZmZlciBvYmpl
+Y3RzLgo+ID4gPiA+IC0gKiBUaGlzIGZ1bmN0aW9uIG1heSBzbGVlcCB3aGlsZSB3YWl0aW5nIGZv
+ciBzcGFjZSB0byBiZWNvbWUKPiA+ID4gPiBhdmFpbGFibGUuCj4gPiA+ID4gKyAqIEFsbG9jYXRl
+cyBhIHJlc291cmNlIGZvciB0aGUgYnVmZmVyIG9iamVjdCBwb2ludGVkIHRvIGJ5Cj4gPiA+ID4g
+QGJvLAo+ID4gPiA+IHVzaW5nIHRoZQo+ID4gPiA+ICsgKiBwbGFjZW1lbnQgZmxhZ3MgaW4gQHBs
+YWNlbWVudCwgcG90ZW50aWFsbHkgZXZpY3Rpbmcgb3RoZXIKPiA+ID4gPiBidWZmZXIKPiA+ID4g
+PiBvYmplY3RzIHdoZW4KPiA+ID4gPiArICogQGZvcmNlX3NwYWNlIGlzIHRydWUuCj4gPiA+ID4g
+KyAqIFRoaXMgZnVuY3Rpb24gbWF5IHNsZWVwIHdoaWxlIHdhaXRpbmcgZm9yIHJlc291cmNlcyB0
+bwo+ID4gPiA+IGJlY29tZQo+ID4gPiA+IGF2YWlsYWJsZS4KPiA+ID4gPiDCoMKgICogUmV0dXJu
+czoKPiA+ID4gPiAtICogLUVCVVNZOiBObyBzcGFjZSBhdmFpbGFibGUgKG9ubHkgaWYgbm9fd2Fp
+dCA9PSAxKS4KPiA+ID4gPiArICogLUVCVVNZOiBObyBzcGFjZSBhdmFpbGFibGUgKG9ubHkgaWYg
+bm9fd2FpdCA9PSB0cnVlKS4KPiA+ID4gPiDCoMKgICogLUVOT1NQQzogQ291bGQgbm90IGFsbG9j
+YXRlIHNwYWNlIGZvciB0aGUgYnVmZmVyIG9iamVjdCwKPiA+ID4gPiBlaXRoZXIKPiA+ID4gPiBk
+dWUgdG8KPiA+ID4gPiDCoMKgICogZnJhZ21lbnRhdGlvbiBvciBjb25jdXJyZW50IGFsbG9jYXRv
+cnMuCj4gPiA+ID4gwqDCoCAqIC1FUkVTVEFSVFNZUzogQW4gaW50ZXJydXB0aWJsZSBzbGVlcCB3
+YXMgaW50ZXJydXB0ZWQgYnkgYQo+ID4gPiA+IHNpZ25hbC4KPiA+ID4gPiDCoMKgICovCj4gPiA+
+ID4gLWludCB0dG1fYm9fbWVtX3NwYWNlKHN0cnVjdCB0dG1fYnVmZmVyX29iamVjdCAqYm8sCj4g
+PiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IHR0bV9wbGFjZW1lbnQgKnBsYWNl
+bWVudCwKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzdHJ1Y3QgdHRtX3Jlc291cmNl
+ICoqbWVtLAo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN0cnVjdCB0dG1fb3BlcmF0
+aW9uX2N0eCAqY3R4KQo+ID4gPiA+ICtzdGF0aWMgaW50IHR0bV9ib19hbGxvY19yZXNvdXJjZShz
+dHJ1Y3QgdHRtX2J1ZmZlcl9vYmplY3QgKmJvLAo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBzdHJ1Y3QgdHRtX3BsYWNlbWVudCAqcGxhY2VtZW50LAo+ID4gPiA+ICvC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzdHJ1Y3QgdHRtX29wZXJhdGlvbl9jdHgg
+KmN0eCwKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYm9vbCBmb3Jj
+ZV9zcGFjZSwKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0
+IHR0bV9yZXNvdXJjZSAqKnJlcykKPiA+ID4gPiDCoMKgewo+ID4gPiA+IMKgwqDCoMKgwqAgc3Ry
+dWN0IHR0bV9kZXZpY2UgKmJkZXYgPSBiby0+YmRldjsKPiA+ID4gPiAtwqDCoMKgIGJvb2wgdHlw
+ZV9mb3VuZCA9IGZhbHNlOwo+ID4gPiA+ICvCoMKgwqAgc3RydWN0IHd3X2FjcXVpcmVfY3R4ICp0
+aWNrZXQ7Cj4gPiA+ID4gwqDCoMKgwqDCoCBpbnQgaSwgcmV0Owo+ID4gPiA+IMKgICvCoMKgwqAg
+dGlja2V0ID0gZG1hX3Jlc3ZfbG9ja2luZ19jdHgoYm8tPmJhc2UucmVzdik7Cj4gPiA+ID4gwqDC
+oMKgwqDCoCByZXQgPSBkbWFfcmVzdl9yZXNlcnZlX2ZlbmNlcyhiby0+YmFzZS5yZXN2LCAxKTsK
+PiA+ID4gPiDCoMKgwqDCoMKgIGlmICh1bmxpa2VseShyZXQpKQo+ID4gPiA+IMKgwqDCoMKgwqDC
+oMKgwqDCoCByZXR1cm4gcmV0Owo+ID4gPiA+IEBAIC03OTAsOTggKzc2Miw3MyBAQCBpbnQgdHRt
+X2JvX21lbV9zcGFjZShzdHJ1Y3QKPiA+ID4gPiB0dG1fYnVmZmVyX29iamVjdAo+ID4gPiA+ICpi
+bywKPiA+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqAgY29uc3Qgc3RydWN0IHR0bV9wbGFjZSAqcGxh
+Y2UgPSAmcGxhY2VtZW50LQo+ID4gPiA+ID4gcGxhY2VtZW50W2ldOwo+ID4gPiA+IMKgwqDCoMKg
+wqDCoMKgwqDCoCBzdHJ1Y3QgdHRtX3Jlc291cmNlX21hbmFnZXIgKm1hbjsKPiA+ID4gPiDCoCAt
+wqDCoMKgwqDCoMKgwqAgaWYgKHBsYWNlLT5mbGFncyAmIFRUTV9QTF9GTEFHX0ZBTExCQUNLKQo+
+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNvbnRpbnVlOwo+ID4gPiA+IC0KPiA+ID4g
+PiDCoMKgwqDCoMKgwqDCoMKgwqAgbWFuID0gdHRtX21hbmFnZXJfdHlwZShiZGV2LCBwbGFjZS0+
+bWVtX3R5cGUpOwo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoIW1hbiB8fCAhdHRtX3Jl
+c291cmNlX21hbmFnZXJfdXNlZChtYW4pKQo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIGNvbnRpbnVlOwo+ID4gPiA+IMKgIC3CoMKgwqDCoMKgwqDCoCB0eXBlX2ZvdW5kID0gdHJ1
+ZTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgcmV0ID0gdHRtX3Jlc291cmNlX2FsbG9jKGJvLCBw
+bGFjZSwgbWVtKTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgaWYgKHJldCA9PSAtRU5PU1BDKQo+
+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoCBpZiAocGxhY2UtPmZsYWdzICYgKGZvcmNlX3NwYWNlID8K
+PiA+ID4gPiBUVE1fUExfRkxBR19ERVNJUkVEIDoKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIMKgwqDCoCBUVE1fUExfRkxBR19GQUxMQkFDSykpCj4gPiA+ID4gK8KgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgY29udGludWU7Cj4gPiA+ID4gKwo+ID4gPiA+ICvCoMKgwqDCoMKg
+wqDCoCBkbyB7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0ID0gdHRtX3Jlc291
+cmNlX2FsbG9jKGJvLCBwbGFjZSwgcmVzKTsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBpZiAodW5saWtlbHkocmV0ICE9IC1FTk9TUEMpKQo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgcmV0dXJuIHJldDsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBpZiAobGlrZWx5KCFyZXQpIHx8ICFmb3JjZV9zcGFjZSkKPiA+ID4gPiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIGJyZWFrOwo+ID4gPiA+ICsKPiA+ID4gPiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCByZXQgPSB0dG1fbWVtX2V2aWN0X2ZpcnN0KGJkZXYsIG1hbiwgcGxhY2UsCj4g
+PiA+ID4gY3R4LAo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIMKgIHRpY2tldCk7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYg
+KHVubGlrZWx5KHJldCA9PSAtRUJVU1kpKQo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgYnJlYWs7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKHVubGlr
+ZWx5KHJldCkpCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4g
+cmV0Owo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoCB9IHdoaWxlICgxKTsKPiA+ID4gPiArwqDCoMKg
+wqDCoMKgwqAgaWYgKHJldCkKPiA+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBjb250
+aW51ZTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgaWYgKHVubGlrZWx5KHJldCkpCj4gPiA+ID4g
+LcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZ290byBlcnJvcjsKPiA+ID4gPiDCoCAtwqDCoMKgwqDC
+oMKgwqAgcmV0ID0gdHRtX2JvX2FkZF9tb3ZlX2ZlbmNlKGJvLCBtYW4sICptZW0sIGN0eC0KPiA+
+ID4gPiA+IG5vX3dhaXRfZ3B1KTsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAgcmV0ID0gdHRtX2Jv
+X2FkZF9tb3ZlX2ZlbmNlKGJvLCBtYW4sICpyZXMsIGN0eC0KPiA+ID4gPiA+IG5vX3dhaXRfZ3B1
+KTsKPiA+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKHVubGlrZWx5KHJldCkpIHsKPiA+ID4g
+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB0dG1fcmVzb3VyY2VfZnJlZShibywgbWVtKTsKPiA+
+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB0dG1fcmVzb3VyY2VfZnJlZShibywgcmVzKTsK
+PiA+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAocmV0ID09IC1FQlVTWSkKPiA+
+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNvbnRpbnVlOwo+ID4gPiA+
+IMKgIC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gZXJyb3I7Cj4gPiA+ID4gK8KgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgcmV0dXJuIHJldDsKPiA+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqAgfQo+
+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gMDsKPiA+ID4gPiDCoMKgwqDCoMKgIH0K
+PiA+ID4gPiDCoCAtwqDCoMKgIGZvciAoaSA9IDA7IGkgPCBwbGFjZW1lbnQtPm51bV9wbGFjZW1l
+bnQ7ICsraSkgewo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoCBjb25zdCBzdHJ1Y3QgdHRtX3BsYWNl
+ICpwbGFjZSA9ICZwbGFjZW1lbnQtCj4gPiA+ID4gPiBwbGFjZW1lbnRbaV07Cj4gPiA+ID4gLcKg
+wqDCoMKgwqDCoMKgIHN0cnVjdCB0dG1fcmVzb3VyY2VfbWFuYWdlciAqbWFuOwo+ID4gPiA+IC0K
+PiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgaWYgKHBsYWNlLT5mbGFncyAmIFRUTV9QTF9GTEFHX0RF
+U0lSRUQpCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgY29udGludWU7Cj4gPiA+ID4g
+LQo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoCBtYW4gPSB0dG1fbWFuYWdlcl90eXBlKGJkZXYsIHBs
+YWNlLT5tZW1fdHlwZSk7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgIGlmICghbWFuIHx8ICF0dG1f
+cmVzb3VyY2VfbWFuYWdlcl91c2VkKG1hbikpCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgY29udGludWU7Cj4gPiA+ID4gLQo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoCB0eXBlX2ZvdW5k
+ID0gdHJ1ZTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgcmV0ID0gdHRtX2JvX21lbV9mb3JjZV9z
+cGFjZShibywgcGxhY2UsIG1lbSwgY3R4KTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgaWYgKGxp
+a2VseSghcmV0KSkKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gMDsKPiA+
+ID4gPiAtCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgIGlmIChyZXQgJiYgcmV0ICE9IC1FQlVTWSkK
+PiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBnb3RvIGVycm9yOwo+ID4gPiA+IC3CoMKg
+wqAgfQo+ID4gPiA+IC0KPiA+ID4gPiAtwqDCoMKgIHJldCA9IC1FTk9TUEM7Cj4gPiA+ID4gLcKg
+wqDCoCBpZiAoIXR5cGVfZm91bmQpIHsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgcHJfZXJyKFRU
+TV9QRlggIk5vIGNvbXBhdGlibGUgbWVtb3J5IHR5cGUgZm91bmRcbiIpOwo+ID4gPiA+IC3CoMKg
+wqDCoMKgwqDCoCByZXQgPSAtRUlOVkFMOwo+ID4gPiA+IC3CoMKgwqAgfQo+ID4gPiA+IC0KPiA+
+ID4gPiAtZXJyb3I6Cj4gPiA+ID4gLcKgwqDCoCByZXR1cm4gcmV0Owo+ID4gPiA+ICvCoMKgwqAg
+cmV0dXJuIC1FTk9TUEM7Cj4gPiA+ID4gwqDCoH0KPiA+ID4gPiAtRVhQT1JUX1NZTUJPTCh0dG1f
+Ym9fbWVtX3NwYWNlKTsKPiA+ID4gPiDCoCAtc3RhdGljIGludCB0dG1fYm9fbW92ZV9idWZmZXIo
+c3RydWN0IHR0bV9idWZmZXJfb2JqZWN0ICpibywKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCDCoMKgwqDCoMKgIHN0cnVjdCB0dG1fcGxhY2VtZW50ICpwbGFjZW1lbnQsCj4gPiA+ID4g
+LcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgwqDCoMKgwqDCoCBzdHJ1Y3QgdHRtX29wZXJhdGlvbl9j
+dHggKmN0eCkKPiA+ID4gPiArLyoKPiA+ID4gPiArICogdHRtX2JvX21lbV9zcGFjZSAtIFdyYXBw
+ZXIgYXJvdW5kIHR0bV9ib19hbGxvY19yZXNvdXJjZQo+ID4gPiA+ICsgKgo+ID4gPiA+ICsgKiBA
+Ym86IFBvaW50ZXIgdG8gYSBzdHJ1Y3QgdHRtX2J1ZmZlcl9vYmplY3Qgb2Ygd2hpY2ggd2Ugd2Fu
+dAo+ID4gPiA+IGEKPiA+ID4gPiByZXNvdXJjZSBmb3IKPiA+ID4gPiArICogQHBsYWNlbWVudDog
+UHJvcG9zZWQgbmV3IHBsYWNlbWVudCBmb3IgdGhlIGJ1ZmZlciBvYmplY3QKPiA+ID4gPiArICog
+QHJlczogVGhlIHJlc3VsdGluZyBzdHJ1Y3QgdHRtX3Jlc291cmNlLgo+ID4gPiA+ICsgKiBAY3R4
+OiBpZiBhbmQgaG93IHRvIHNsZWVwLCBsb2NrIGJ1ZmZlcnMgYW5kIGFsbG9jIG1lbW9yeQo+ID4g
+PiA+ICsgKgo+ID4gPiA+ICsgKiBUcmllcyBib3RoIGlkbGUgYWxsb2NhdGlvbiBhbmQgZm9yY2Vm
+dWxseSBldmljdGlvbiBvZgo+ID4gPiA+IGJ1ZmZlcnMuCj4gPiA+ID4gU2VlCj4gPiA+ID4gKyAq
+IHR0bV9ib19hbGxvY19yZXNvdXJjZSBmb3IgZGV0YWlscy4KPiA+ID4gPiArICovCj4gPiA+ID4g
+K2ludCB0dG1fYm9fbWVtX3NwYWNlKHN0cnVjdCB0dG1fYnVmZmVyX29iamVjdCAqYm8sCj4gPiA+
+ID4gK8KgwqDCoMKgwqDCoMKgIMKgwqDCoMKgIHN0cnVjdCB0dG1fcGxhY2VtZW50ICpwbGFjZW1l
+bnQsCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgIMKgwqDCoMKgIHN0cnVjdCB0dG1fcmVzb3VyY2Ug
+KipyZXMsCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgIMKgwqDCoMKgIHN0cnVjdCB0dG1fb3BlcmF0
+aW9uX2N0eCAqY3R4KQo+ID4gPiA+IMKgwqB7Cj4gPiA+ID4gLcKgwqDCoCBzdHJ1Y3QgdHRtX3Jl
+c291cmNlICptZW07Cj4gPiA+ID4gLcKgwqDCoCBzdHJ1Y3QgdHRtX3BsYWNlIGhvcDsKPiA+ID4g
+PiArwqDCoMKgIGJvb2wgZm9yY2Vfc3BhY2UgPSBmYWxzZTsKPiA+ID4gPiDCoMKgwqDCoMKgIGlu
+dCByZXQ7Cj4gPiA+ID4gwqAgLcKgwqDCoCBkbWFfcmVzdl9hc3NlcnRfaGVsZChiby0+YmFzZS5y
+ZXN2KTsKPiA+ID4gPiArwqDCoMKgIGRvIHsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAgcmV0ID0g
+dHRtX2JvX2FsbG9jX3Jlc291cmNlKGJvLCBwbGFjZW1lbnQsIGN0eCwKPiA+ID4gPiArwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgwqDCoMKgIGZvcmNlX3NwYWNlLCByZXMp
+Owo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoCBmb3JjZV9zcGFjZSA9ICFmb3JjZV9zcGFjZTsKPiA+
+ID4gPiArwqDCoMKgIH0gd2hpbGUgKHJldCA9PSAtRU5PU1BDICYmIGZvcmNlX3NwYWNlKTsKPiA+
+ID4gPiDCoCAtwqDCoMKgIC8qCj4gPiA+ID4gLcKgwqDCoMKgICogRGV0ZXJtaW5lIHdoZXJlIHRv
+IG1vdmUgdGhlIGJ1ZmZlci4KPiA+ID4gPiAtwqDCoMKgwqAgKgo+ID4gPiA+IC3CoMKgwqDCoCAq
+IElmIGRyaXZlciBkZXRlcm1pbmVzIG1vdmUgaXMgZ29pbmcgdG8gbmVlZAo+ID4gPiA+IC3CoMKg
+wqDCoCAqIGFuIGV4dHJhIHN0ZXAgdGhlbiBpdCB3aWxsIHJldHVybiAtRU1VTFRJSE9QCj4gPiA+
+ID4gLcKgwqDCoMKgICogYW5kIHRoZSBidWZmZXIgd2lsbCBiZSBtb3ZlZCB0byB0aGUgdGVtcG9y
+YXJ5Cj4gPiA+ID4gLcKgwqDCoMKgICogc3RvcCBhbmQgdGhlIGRyaXZlciB3aWxsIGJlIGNhbGxl
+ZCB0byBtYWtlCj4gPiA+ID4gLcKgwqDCoMKgICogdGhlIHNlY29uZCBob3AuCj4gPiA+ID4gLcKg
+wqDCoMKgICovCj4gPiA+ID4gLcKgwqDCoCByZXQgPSB0dG1fYm9fbWVtX3NwYWNlKGJvLCBwbGFj
+ZW1lbnQsICZtZW0sIGN0eCk7Cj4gPiA+ID4gLcKgwqDCoCBpZiAocmV0KQo+ID4gPiA+IC3CoMKg
+wqDCoMKgwqDCoCByZXR1cm4gcmV0Owo+ID4gPiA+IC1ib3VuY2U6Cj4gPiA+ID4gLcKgwqDCoCBy
+ZXQgPSB0dG1fYm9faGFuZGxlX21vdmVfbWVtKGJvLCBtZW0sIGZhbHNlLCBjdHgsICZob3ApOwo+
+ID4gPiA+IC3CoMKgwqAgaWYgKHJldCA9PSAtRU1VTFRJSE9QKSB7Cj4gPiA+ID4gLcKgwqDCoMKg
+wqDCoMKgIHJldCA9IHR0bV9ib19ib3VuY2VfdGVtcF9idWZmZXIoYm8sICZtZW0sIGN0eCwKPiA+
+ID4gPiAmaG9wKTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgaWYgKHJldCkKPiA+ID4gPiAtwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCBnb3RvIG91dDsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgLyog
+dHJ5IGFuZCBtb3ZlIHRvIGZpbmFsIHBsYWNlIG5vdy4gKi8KPiA+ID4gPiAtwqDCoMKgwqDCoMKg
+wqAgZ290byBib3VuY2U7Cj4gPiA+ID4gLcKgwqDCoCB9Cj4gPiA+ID4gLW91dDoKPiA+ID4gPiAt
+wqDCoMKgIGlmIChyZXQpCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgIHR0bV9yZXNvdXJjZV9mcmVl
+KGJvLCAmbWVtKTsKPiA+ID4gPiDCoMKgwqDCoMKgIHJldHVybiByZXQ7Cj4gPiA+ID4gwqDCoH0K
+PiA+ID4gPiArRVhQT1JUX1NZTUJPTCh0dG1fYm9fbWVtX3NwYWNlKTsKPiA+ID4gPiDCoCDCoMKg
+LyoqCj4gPiA+ID4gwqDCoCAqIHR0bV9ib192YWxpZGF0ZQo+ID4gPiA+IEBAIC05MDIsNiArODQ5
+LDkgQEAgaW50IHR0bV9ib192YWxpZGF0ZShzdHJ1Y3QKPiA+ID4gPiB0dG1fYnVmZmVyX29iamVj
+dCAqYm8sCj4gPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgIMKgwqDCoCBzdHJ1Y3QgdHRtX3BsYWNl
+bWVudCAqcGxhY2VtZW50LAo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoCDCoMKgwqAgc3RydWN0
+IHR0bV9vcGVyYXRpb25fY3R4ICpjdHgpCj4gPiA+ID4gwqDCoHsKPiA+ID4gPiArwqDCoMKgIHN0
+cnVjdCB0dG1fcmVzb3VyY2UgKnJlczsKPiA+ID4gPiArwqDCoMKgIHN0cnVjdCB0dG1fcGxhY2Ug
+aG9wOwo+ID4gPiA+ICvCoMKgwqAgYm9vbCBmb3JjZV9zcGFjZTsKPiA+ID4gPiDCoMKgwqDCoMKg
+IGludCByZXQ7Cj4gPiA+ID4gwqAgwqDCoMKgwqDCoCBkbWFfcmVzdl9hc3NlcnRfaGVsZChiby0+
+YmFzZS5yZXN2KTsKPiA+ID4gPiBAQCAtOTEyLDIwICs4NjIsNTMgQEAgaW50IHR0bV9ib192YWxp
+ZGF0ZShzdHJ1Y3QKPiA+ID4gPiB0dG1fYnVmZmVyX29iamVjdAo+ID4gPiA+ICpibywKPiA+ID4g
+PiDCoMKgwqDCoMKgIGlmICghcGxhY2VtZW50LT5udW1fcGxhY2VtZW50KQo+ID4gPiA+IMKgwqDC
+oMKgwqDCoMKgwqDCoCByZXR1cm4gdHRtX2JvX3BpcGVsaW5lX2d1dHRpbmcoYm8pOwo+ID4gPiA+
+IMKgIC3CoMKgwqAgLyogQ2hlY2sgd2hldGhlciB3ZSBuZWVkIHRvIG1vdmUgYnVmZmVyLiAqLwo+
+ID4gPiA+IC3CoMKgwqAgaWYgKGJvLT5yZXNvdXJjZSAmJiB0dG1fcmVzb3VyY2VfY29tcGF0aWJs
+ZShiby0+cmVzb3VyY2UsCj4gPiA+ID4gcGxhY2VtZW50KSkKPiA+ID4gPiAtwqDCoMKgwqDCoMKg
+wqAgcmV0dXJuIDA7Cj4gPiA+ID4gK8KgwqDCoCBmb3JjZV9zcGFjZSA9IGZhbHNlOwo+ID4gPiA+
+ICvCoMKgwqAgZG8gewo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoCAvKiBDaGVjayB3aGV0aGVyIHdl
+IG5lZWQgdG8gbW92ZSBidWZmZXIuICovCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgIGlmIChiby0+
+cmVzb3VyY2UgJiYKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAgwqDCoMKgIHR0bV9yZXNvdXJjZV9j
+b21wYXRpYmxlKGJvLT5yZXNvdXJjZSwgcGxhY2VtZW50LAo+ID4gPiA+ICvCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCDCoMKgwqAgZm9yY2Vfc3BhY2UpKQo+ID4gPiA+ICvC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiAwOwo+ID4gPiA+IMKgIC3CoMKgwqAgLyogTW92
+aW5nIG9mIHBpbm5lZCBCT3MgaXMgZm9yYmlkZGVuICovCj4gPiA+ID4gLcKgwqDCoCBpZiAoYm8t
+PnBpbl9jb3VudCkKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgcmV0dXJuIC1FSU5WQUw7Cj4gPiA+
+ID4gK8KgwqDCoMKgwqDCoMKgIC8qIE1vdmluZyBvZiBwaW5uZWQgQk9zIGlzIGZvcmJpZGRlbiAq
+Lwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoCBpZiAoYm8tPnBpbl9jb3VudCkKPiA+ID4gPiArwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVJTlZBTDsKPiA+ID4gPiArCj4gPiA+ID4gK8Kg
+wqDCoMKgwqDCoMKgIC8qCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqAgKiBEZXRlcm1pbmUgd2hl
+cmUgdG8gbW92ZSB0aGUgYnVmZmVyLgo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgICoKPiA+ID4g
+PiArwqDCoMKgwqDCoMKgwqDCoCAqIElmIGRyaXZlciBkZXRlcm1pbmVzIG1vdmUgaXMgZ29pbmcg
+dG8gbmVlZAo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgICogYW4gZXh0cmEgc3RlcCB0aGVuIGl0
+IHdpbGwgcmV0dXJuIC1FTVVMVElIT1AKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoCAqIGFuZCB0
+aGUgYnVmZmVyIHdpbGwgYmUgbW92ZWQgdG8gdGhlIHRlbXBvcmFyeQo+ID4gPiA+ICvCoMKgwqDC
+oMKgwqDCoMKgICogc3RvcCBhbmQgdGhlIGRyaXZlciB3aWxsIGJlIGNhbGxlZCB0byBtYWtlCj4g
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgwqAgKiB0aGUgc2Vjb25kIGhvcC4KPiA+ID4gPiArwqDCoMKg
+wqDCoMKgwqDCoCAqLwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoCByZXQgPSB0dG1fYm9fYWxsb2Nf
+cmVzb3VyY2UoYm8sIHBsYWNlbWVudCwgY3R4LAo+ID4gPiA+IGZvcmNlX3NwYWNlLAo+ID4gPiA+
+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCDCoMKgwqAgJnJlcyk7Cj4g
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgIGZvcmNlX3NwYWNlID0gIWZvcmNlX3NwYWNlOwo+ID4gPiA+
+ICvCoMKgwqDCoMKgwqDCoCBpZiAocmV0ID09IC1FTk9TUEMpCj4gPiA+ID4gK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgY29udGludWU7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgIGlmIChyZXQpCj4g
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIHJldDsKPiA+ID4gPiArCj4gPiA+
+ID4gK2JvdW5jZToKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAgcmV0ID0gdHRtX2JvX2hhbmRsZV9t
+b3ZlX21lbShibywgcmVzLCBmYWxzZSwgY3R4LAo+ID4gPiA+ICZob3ApOwo+ID4gPiA+ICvCoMKg
+wqDCoMKgwqDCoCBpZiAocmV0ID09IC1FTVVMVElIT1ApIHsKPiA+ID4gPiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCByZXQgPSB0dG1fYm9fYm91bmNlX3RlbXBfYnVmZmVyKGJvLCAmcmVzLAo+ID4g
+PiA+IGN0eCwgJmhvcCk7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgLyogdHJ5IGFu
+ZCBtb3ZlIHRvIGZpbmFsIHBsYWNlIG5vdy4gKi8KPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCBpZiAoIXJldCkKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdv
+dG8gYm91bmNlOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoCB9Cj4gPiA+ID4gK8KgwqDCoMKgwqDC
+oMKgIGlmIChyZXQpIHsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB0dG1fcmVzb3Vy
+Y2VfZnJlZShibywgJnJlcyk7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJu
+IHJldDsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAgfQo+ID4gPiA+ICsKPiA+ID4gPiArwqDCoMKg
+IH0gd2hpbGUgKHJldCAmJiBmb3JjZV9zcGFjZSk7Cj4gPiA+ID4gwqAgLcKgwqDCoCByZXQgPSB0
+dG1fYm9fbW92ZV9idWZmZXIoYm8sIHBsYWNlbWVudCwgY3R4KTsKPiA+ID4gPiDCoMKgwqDCoMKg
+IC8qIEZvciBiYWNrd2FyZCBjb21wYXRpYmlsaXR5IHdpdGggdXNlcnNwYWNlICovCj4gPiA+ID4g
+wqDCoMKgwqDCoCBpZiAocmV0ID09IC1FTk9TUEMpCj4gPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKg
+IHJldHVybiAtRU5PTUVNOwo+ID4gPiA+IC3CoMKgwqAgaWYgKHJldCkKPiA+ID4gPiAtwqDCoMKg
+wqDCoMKgwqAgcmV0dXJuIHJldDsKPiA+ID4gPiDCoCDCoMKgwqDCoMKgIC8qCj4gPiA+ID4gwqDC
+oMKgwqDCoMKgICogV2UgbWlnaHQgbmVlZCB0byBhZGQgYSBUVE0uCj4gPiA+ID4gZGlmZiAtLWdp
+dCBhL2RyaXZlcnMvZ3B1L2RybS90dG0vdHRtX3Jlc291cmNlLmMKPiA+ID4gPiBiL2RyaXZlcnMv
+Z3B1L2RybS90dG0vdHRtX3Jlc291cmNlLmMKPiA+ID4gPiBpbmRleCBmYjE0Zjc3MTZjZjguLjY1
+MTU1ZjIwMTNjYSAxMDA2NDQKPiA+ID4gPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV9y
+ZXNvdXJjZS5jCj4gPiA+ID4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3R0bS90dG1fcmVzb3VyY2Uu
+Ywo+ID4gPiA+IEBAIC0yOTUsMTEgKzI5NSwxMyBAQCBib29sIHR0bV9yZXNvdXJjZV9pbnRlcnNl
+Y3RzKHN0cnVjdAo+ID4gPiA+IHR0bV9kZXZpY2UKPiA+ID4gPiAqYmRldiwKPiA+ID4gPiDCoMKg
+ICoKPiA+ID4gPiDCoMKgICogQHJlczogdGhlIHJlc291cmNlIHRvIGNoZWNrCj4gPiA+ID4gwqDC
+oCAqIEBwbGFjZW1lbnQ6IHRoZSBwbGFjZW1lbnQgdG8gY2hlY2sgYWdhaW5zdAo+ID4gPiA+ICsg
+KiBAZXZpY3Rpbmc6IHRydWUgaWYgdGhlIGNhbGxlciBpcyBkb2luZyBldmljdGlvbnMKPiA+ID4g
+PiDCoMKgICoKPiA+ID4gPiDCoMKgICogUmV0dXJucyB0cnVlIGlmIHRoZSBwbGFjZW1lbnQgaXMg
+Y29tcGF0aWJsZS4KPiA+ID4gPiDCoMKgICovCj4gPiA+ID4gwqDCoGJvb2wgdHRtX3Jlc291cmNl
+X2NvbXBhdGlibGUoc3RydWN0IHR0bV9yZXNvdXJjZSAqcmVzLAo+ID4gPiA+IC3CoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIMKgwqDCoMKgIHN0cnVjdCB0dG1fcGxhY2VtZW50ICpwbGFjZW1lbnQpCj4g
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgwqDCoMKgwqAgc3RydWN0IHR0bV9wbGFjZW1l
+bnQgKnBsYWNlbWVudCwKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCDCoMKgwqDCoCBi
+b29sIGV2aWN0aW5nKQo+ID4gPiA+IMKgwqB7Cj4gPiA+ID4gwqDCoMKgwqDCoCBzdHJ1Y3QgdHRt
+X2J1ZmZlcl9vYmplY3QgKmJvID0gcmVzLT5ibzsKPiA+ID4gPiDCoMKgwqDCoMKgIHN0cnVjdCB0
+dG1fZGV2aWNlICpiZGV2ID0gYm8tPmJkZXY7Cj4gPiA+ID4gQEAgLTMxNSwxNCArMzE3LDIwIEBA
+IGJvb2wgdHRtX3Jlc291cmNlX2NvbXBhdGlibGUoc3RydWN0Cj4gPiA+ID4gdHRtX3Jlc291cmNl
+ICpyZXMsCj4gPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChyZXMtPm1lbV90eXBlICE9IHBs
+YWNlLT5tZW1fdHlwZSkKPiA+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBjb250aW51
+ZTsKPiA+ID4gPiDCoCArwqDCoMKgwqDCoMKgwqAgaWYgKHBsYWNlLT5mbGFncyAmIChldmljdGlu
+ZyA/IFRUTV9QTF9GTEFHX0RFU0lSRUQgOgo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgwqDCoMKgIFRUTV9QTF9GTEFHX0ZBTExCQUNLKSkKPiA+ID4gPiArwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBjb250aW51ZTsKPiA+ID4gPiArCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKg
+IGlmIChwbGFjZS0+ZmxhZ3MgJiBUVE1fUExfRkxBR19DT05USUdVT1VTICYmCj4gPiA+ID4gK8Kg
+wqDCoMKgwqDCoMKgIMKgwqDCoCAhKHJlcy0+cGxhY2VtZW50ICYgVFRNX1BMX0ZMQUdfQ09OVElH
+VU9VUykpCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgY29udGludWU7Cj4gPiA+ID4g
+Kwo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoCBtYW4gPSB0dG1fbWFuYWdlcl90eXBlKGJkZXYs
+IHJlcy0+bWVtX3R5cGUpOwo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAobWFuLT5mdW5j
+LT5jb21wYXRpYmxlICYmCj4gPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgIMKgwqDCoCAhbWFuLT5m
+dW5jLT5jb21wYXRpYmxlKG1hbiwgcmVzLCBwbGFjZSwgYm8tCj4gPiA+ID4gPiBiYXNlLnNpemUp
+KQo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNvbnRpbnVlOwo+ID4gPiA+IMKg
+IC3CoMKgwqDCoMKgwqDCoCBpZiAoKCEocGxhY2UtPmZsYWdzICYgVFRNX1BMX0ZMQUdfQ09OVElH
+VU9VUykgfHwKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgwqDCoMKgwqAgKHJlcy0+cGxhY2VtZW50
+ICYgVFRNX1BMX0ZMQUdfQ09OVElHVU9VUykpKQo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIHJldHVybiB0cnVlOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gdHJ1ZTsKPiA+
+ID4gPiDCoMKgwqDCoMKgIH0KPiA+ID4gPiDCoMKgwqDCoMKgIHJldHVybiBmYWxzZTsKPiA+ID4g
+PiDCoMKgfQo+ID4gPiA+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2RybS90dG0vdHRtX3Jlc291cmNl
+LmgKPiA+ID4gPiBiL2luY2x1ZGUvZHJtL3R0bS90dG1fcmVzb3VyY2UuaAo+ID4gPiA+IGluZGV4
+IDFhZmExM2YwYzIyYi4uNzU2MTAyM2RiNDNkIDEwMDY0NAo+ID4gPiA+IC0tLSBhL2luY2x1ZGUv
+ZHJtL3R0bS90dG1fcmVzb3VyY2UuaAo+ID4gPiA+ICsrKyBiL2luY2x1ZGUvZHJtL3R0bS90dG1f
+cmVzb3VyY2UuaAo+ID4gPiA+IEBAIC0zNjYsNyArMzY2LDggQEAgYm9vbCB0dG1fcmVzb3VyY2Vf
+aW50ZXJzZWN0cyhzdHJ1Y3QKPiA+ID4gPiB0dG1fZGV2aWNlCj4gPiA+ID4gKmJkZXYsCj4gPiA+
+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgwqDCoMKgwqAgY29uc3Qgc3RydWN0IHR0bV9w
+bGFjZSAqcGxhY2UsCj4gPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgwqDCoMKgwqAg
+c2l6ZV90IHNpemUpOwo+ID4gPiA+IMKgwqBib29sIHR0bV9yZXNvdXJjZV9jb21wYXRpYmxlKHN0
+cnVjdCB0dG1fcmVzb3VyY2UgKnJlcywKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCDC
+oMKgwqDCoCBzdHJ1Y3QgdHRtX3BsYWNlbWVudCAqcGxhY2VtZW50KTsKPiA+ID4gPiArwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCDCoMKgwqDCoCBzdHJ1Y3QgdHRtX3BsYWNlbWVudCAqcGxhY2VtZW50
+LAo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIMKgwqDCoMKgIGJvb2wgZXZpY3Rpbmcp
+Owo+ID4gPiA+IMKgwqB2b2lkIHR0bV9yZXNvdXJjZV9zZXRfYm8oc3RydWN0IHR0bV9yZXNvdXJj
+ZSAqcmVzLAo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IHR0bV9i
+dWZmZXJfb2JqZWN0ICpibyk7Cj4gPiAKPiAKCg==
 
-Error/Warning reports:
-
-https://lore.kernel.org/oe-kbuild-all/202402261912.yAxZePRG-lkp@intel.com
-
-Error/Warning: (recently discovered and may have been fixed)
-
-drivers/gpu/drm/xe/xe_ggtt.c:78:9: error: implicit declaration of function 'writeq'; did you mean 'writeb'? [-Werror=implicit-function-declaration]
-fs/ubifs/journal.c:369: warning: expecting prototype for wake_up_reservation(). Prototype was for add_or_start_queue() instead
-make[2]: *** kselftest/livepatch/test_modules: No such file or directory.  Stop.
-
-Unverified Error/Warning (likely false positive, please contact us if interested):
-
-{standard input}:1344: Warning: overflow in branch to .L91; converted into longer instruction sequence
-
-Error/Warning ids grouped by kconfigs:
-
-gcc_recent_errors
-|-- arc-allmodconfig
-|   `-- drivers-gpu-drm-xe-xe_ggtt.c:error:implicit-declaration-of-function-writeq
-|-- arm-multi_v7_defconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- arm-tegra_defconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- arm64-randconfig-001-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- arm64-randconfig-002-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- arm64-randconfig-003-20240226
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- csky-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- csky-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- csky-randconfig-002-20240226
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- csky-randconfig-r052-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- i386-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- i386-randconfig-052-20240226
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- i386-randconfig-053-20240226
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- i386-randconfig-054-20240226
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- i386-randconfig-061-20240226
-|   |-- drivers-video-backlight-ktd2801-backlight.c:sparse:sparse:symbol-ktd2801_timing-was-not-declared.-Should-it-be-static
-|   `-- io_uring-io_uring.c:sparse:sparse:cast-to-restricted-io_req_flags_t
-|-- i386-randconfig-141-20240226
-|   |-- drivers-usb-typec-tcpm-tcpm.c-tcpm_pd_svdm()-error:uninitialized-symbol-modep_prime-.
-|   |-- drivers-usb-typec-ucsi-ucsi_acpi.c-ucsi_dell_sync_write()-warn:missing-error-code-ret
-|   `-- mm-page_owner.c-stack_print()-warn:unsigned-nr_entries-is-never-less-than-zero.
-|-- loongarch-defconfig
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- loongarch-randconfig-001-20240226
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- m68k-randconfig-r051-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- m68k-randconfig-r061-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- m68k-randconfig-r111-20240226
-|   |-- drivers-video-backlight-ktd2801-backlight.c:sparse:sparse:symbol-ktd2801_timing-was-not-declared.-Should-it-be-static
-|   |-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|   |-- fs-ntfs3-fslog.c:sparse:sparse:restricted-__le32-degrades-to-integer
-|   |-- io_uring-io_uring.c:sparse:sparse:cast-to-restricted-io_req_flags_t
-|   |-- sound-core-sound_kunit.c:sparse:sparse:incorrect-type-in-argument-(different-base-types)-expected-restricted-snd_pcm_format_t-usertype-format-got-int
-|   `-- sound-core-sound_kunit.c:sparse:sparse:restricted-snd_pcm_format_t-degrades-to-integer
-|-- m68k-randconfig-r121-20240226
-|   |-- fs-ntfs3-fslog.c:sparse:sparse:restricted-__le32-degrades-to-integer
-|   |-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|   |-- io_uring-io_uring.c:sparse:sparse:cast-to-restricted-io_req_flags_t
-|   |-- sound-core-sound_kunit.c:sparse:sparse:incorrect-type-in-argument-(different-base-types)-expected-restricted-snd_pcm_format_t-usertype-format-got-int
-|   `-- sound-core-sound_kunit.c:sparse:sparse:restricted-snd_pcm_format_t-degrades-to-integer
-|-- microblaze-allyesconfig
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- microblaze-randconfig-r064-20240226
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- mips-allyesconfig
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- nios2-allmodconfig
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- nios2-allyesconfig
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- nios2-randconfig-001-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- nios2-randconfig-r112-20240226
-|   |-- drivers-leds-flash-leds-ktd2692.c:sparse:sparse:symbol-ktd2692_timing-was-not-declared.-Should-it-be-static
-|   |-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|   |-- fs-ntfs3-fslog.c:sparse:sparse:restricted-__le32-degrades-to-integer
-|   |-- io_uring-io_uring.c:sparse:sparse:cast-to-restricted-io_req_flags_t
-|   |-- sound-core-sound_kunit.c:sparse:sparse:incorrect-type-in-argument-(different-base-types)-expected-restricted-snd_pcm_format_t-usertype-format-got-int
-|   `-- sound-core-sound_kunit.c:sparse:sparse:restricted-snd_pcm_format_t-degrades-to-integer
-|-- parisc-defconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- parisc64-defconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- powerpc-randconfig-002-20240226
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- powerpc64-randconfig-r123-20240226
-|   |-- drivers-video-backlight-ktd2801-backlight.c:sparse:sparse:symbol-ktd2801_timing-was-not-declared.-Should-it-be-static
-|   |-- fs-ntfs3-fslog.c:sparse:sparse:restricted-__le32-degrades-to-integer
-|   |-- io_uring-io_uring.c:sparse:sparse:cast-to-restricted-io_req_flags_t
-|   |-- kernel-power-energy_model.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-struct-em_perf_state-table-got-struct-em_perf_state-noderef-__rcu
-|   |-- kernel-power-energy_model.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-struct-kref-kref-got-struct-kref-noderef-__rcu
-|   |-- kernel-power-energy_model.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-void-const-objp-got-struct-em_perf_table-noderef-__rcu-assigned-em_table
-|   `-- kernel-power-energy_model.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-em_perf_state-new_ps-got-struct-em_perf_state-noderef-__rcu
-|-- riscv-randconfig-r053-20240226
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- sh-allmodconfig
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- sh-randconfig-001-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- sh-randconfig-r025-20230513
-|   `-- standard-input:Warning:overflow-in-branch-to-.L91-converted-into-longer-instruction-sequence
-|-- sh-randconfig-r113-20240226
-|   |-- drivers-video-backlight-ktd2801-backlight.c:sparse:sparse:symbol-ktd2801_timing-was-not-declared.-Should-it-be-static
-|   |-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|   |-- fs-ntfs3-fslog.c:sparse:sparse:restricted-__le32-degrades-to-integer
-|   `-- io_uring-io_uring.c:sparse:sparse:cast-to-restricted-io_req_flags_t
-|-- sparc-randconfig-002-20240226
-|   |-- (.head.text):relocation-truncated-to-fit:R_SPARC_WDISP22-against-init.text
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- sparc64-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- sparc64-allyesconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- sparc64-randconfig-002-20240226
-|   |-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- um-randconfig-002-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- x86_64-buildonly-randconfig-006-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- x86_64-randconfig-072-20240226
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- x86_64-randconfig-121-20240226
-|   |-- drivers-video-backlight-ktd2801-backlight.c:sparse:sparse:symbol-ktd2801_timing-was-not-declared.-Should-it-be-static
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:cast-to-restricted-__le32
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:cast-to-restricted-__le64
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:restricted-__le32-degrades-to-integer
-|   `-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:restricted-__le64-degrades-to-integer
-|-- x86_64-randconfig-122-20240226
-|   |-- drivers-video-backlight-ktd2801-backlight.c:sparse:sparse:symbol-ktd2801_timing-was-not-declared.-Should-it-be-static
-|   |-- io_uring-io_uring.c:sparse:sparse:cast-to-restricted-io_req_flags_t
-|   |-- sound-core-sound_kunit.c:sparse:sparse:incorrect-type-in-argument-(different-base-types)-expected-restricted-snd_pcm_format_t-usertype-format-got-int
-|   `-- sound-core-sound_kunit.c:sparse:sparse:restricted-snd_pcm_format_t-degrades-to-integer
-|-- x86_64-randconfig-123-20240226
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:cast-to-restricted-__le32
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:cast-to-restricted-__le64
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:restricted-__le32-degrades-to-integer
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:restricted-__le64-degrades-to-integer
-|   `-- io_uring-io_uring.c:sparse:sparse:cast-to-restricted-io_req_flags_t
-|-- x86_64-randconfig-r132-20240226
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:cast-to-restricted-__le32
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:cast-to-restricted-__le64
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:restricted-__le32-degrades-to-integer
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:restricted-__le64-degrades-to-integer
-|   `-- io_uring-io_uring.c:sparse:sparse:cast-to-restricted-io_req_flags_t
-|-- x86_64-randconfig-r133-20240226
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:cast-to-restricted-__le32
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:cast-to-restricted-__le64
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:restricted-__le32-degrades-to-integer
-|   `-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:restricted-__le64-degrades-to-integer
-|-- x86_64-rhel-8.3-bpf
-|   `-- make:kselftest-livepatch-test_modules:No-such-file-or-directory.-Stop.
-|-- xtensa-allyesconfig
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   |-- drivers-gpu-drm-xe-xe_ggtt.c:error:implicit-declaration-of-function-writeq
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-`-- xtensa-randconfig-002-20240226
-    `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-clang_recent_errors
-|-- arm64-randconfig-r054-20240226
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- hexagon-randconfig-002-20240226
-|   |-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- i386-buildonly-randconfig-001-20240226
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- i386-buildonly-randconfig-003-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- i386-buildonly-randconfig-004-20240226
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- i386-buildonly-randconfig-005-20240226
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- i386-buildonly-randconfig-006-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- i386-randconfig-001-20240226
-|   |-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- i386-randconfig-051-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- i386-randconfig-062-20240226
-|   |-- drivers-video-backlight-ktd2801-backlight.c:sparse:sparse:symbol-ktd2801_timing-was-not-declared.-Should-it-be-static
-|   |-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|   |-- fs-ntfs3-fslog.c:sparse:sparse:restricted-__le32-degrades-to-integer
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:cast-to-restricted-__le32
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:cast-to-restricted-__le64
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:restricted-__le32-degrades-to-integer
-|   |-- include-trace-..-..-drivers-bus-mhi-host-trace.h:sparse:sparse:restricted-__le64-degrades-to-integer
-|   `-- io_uring-io_uring.c:sparse:sparse:cast-to-restricted-io_req_flags_t
-|-- i386-randconfig-063-20240226
-|   `-- drivers-video-backlight-ktd2801-backlight.c:sparse:sparse:symbol-ktd2801_timing-was-not-declared.-Should-it-be-static
-|-- powerpc-allyesconfig
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- powerpc-randconfig-003-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- powerpc64-randconfig-001-20240226
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- powerpc64-randconfig-003-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- riscv-allmodconfig
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- riscv-allyesconfig
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- riscv-defconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- s390-randconfig-001-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|-- s390-randconfig-r122-20240226
-|   |-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-|   |-- fs-ntfs3-fslog.c:sparse:sparse:restricted-__le32-degrades-to-integer
-|   |-- io_uring-io_uring.c:sparse:sparse:cast-to-restricted-io_req_flags_t
-|   |-- sound-core-sound_kunit.c:sparse:sparse:incorrect-type-in-argument-(different-base-types)-expected-restricted-snd_pcm_format_t-usertype-format-got-int
-|   `-- sound-core-sound_kunit.c:sparse:sparse:restricted-snd_pcm_format_t-degrades-to-integer
-|-- x86_64-allmodconfig
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- x86_64-allyesconfig
-|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
-|-- x86_64-randconfig-013-20240226
-|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
-|-- x86_64-randconfig-102-20240226
-|   `-- fs-ntfs3-frecord.c:warning:unused-variable-i_size
-`-- x86_64-randconfig-161-20240226
-    |-- mm-page_owner.c-stack_print()-warn:unsigned-nr_entries-is-never-less-than-zero.
-    `-- mm-userfaultfd.c-uffd_move_lock()-error:we-previously-assumed-src_vmap-could-be-null-(see-line-)
-
-elapsed time: 737m
-
-configs tested: 179
-configs skipped: 4
-
-tested configs:
-alpha                             allnoconfig   gcc  
-alpha                            allyesconfig   gcc  
-alpha                               defconfig   gcc  
-arc                              allmodconfig   gcc  
-arc                               allnoconfig   gcc  
-arc                              allyesconfig   gcc  
-arc                          axs103_defconfig   gcc  
-arc                                 defconfig   gcc  
-arc                        nsim_700_defconfig   gcc  
-arc                   randconfig-001-20240226   gcc  
-arc                   randconfig-002-20240226   gcc  
-arm                              allmodconfig   gcc  
-arm                               allnoconfig   clang
-arm                              allyesconfig   gcc  
-arm                          collie_defconfig   gcc  
-arm                                 defconfig   clang
-arm                      footbridge_defconfig   clang
-arm                        multi_v7_defconfig   gcc  
-arm                   randconfig-001-20240226   clang
-arm                   randconfig-002-20240226   clang
-arm                   randconfig-003-20240226   clang
-arm                   randconfig-004-20240226   gcc  
-arm                           sunxi_defconfig   gcc  
-arm                           tegra_defconfig   gcc  
-arm                         wpcm450_defconfig   gcc  
-arm64                            allmodconfig   clang
-arm64                             allnoconfig   gcc  
-arm64                               defconfig   gcc  
-arm64                 randconfig-001-20240226   gcc  
-arm64                 randconfig-002-20240226   gcc  
-arm64                 randconfig-003-20240226   gcc  
-arm64                 randconfig-004-20240226   clang
-csky                             allmodconfig   gcc  
-csky                              allnoconfig   gcc  
-csky                             allyesconfig   gcc  
-csky                                defconfig   gcc  
-csky                  randconfig-001-20240226   gcc  
-csky                  randconfig-002-20240226   gcc  
-hexagon                          allmodconfig   clang
-hexagon                           allnoconfig   clang
-hexagon                          allyesconfig   clang
-hexagon                             defconfig   clang
-hexagon               randconfig-001-20240226   clang
-hexagon               randconfig-002-20240226   clang
-i386                             allmodconfig   gcc  
-i386                              allnoconfig   gcc  
-i386                             allyesconfig   gcc  
-i386         buildonly-randconfig-001-20240226   clang
-i386         buildonly-randconfig-002-20240226   gcc  
-i386         buildonly-randconfig-003-20240226   clang
-i386         buildonly-randconfig-004-20240226   clang
-i386         buildonly-randconfig-005-20240226   clang
-i386         buildonly-randconfig-006-20240226   clang
-i386                                defconfig   clang
-i386                  randconfig-001-20240226   clang
-i386                  randconfig-002-20240226   gcc  
-i386                  randconfig-003-20240226   clang
-i386                  randconfig-004-20240226   gcc  
-i386                  randconfig-005-20240226   clang
-i386                  randconfig-006-20240226   clang
-i386                  randconfig-011-20240226   gcc  
-i386                  randconfig-012-20240226   gcc  
-i386                  randconfig-013-20240226   gcc  
-i386                  randconfig-014-20240226   gcc  
-i386                  randconfig-015-20240226   gcc  
-i386                  randconfig-016-20240226   clang
-loongarch                        allmodconfig   gcc  
-loongarch                         allnoconfig   gcc  
-loongarch                           defconfig   gcc  
-loongarch             randconfig-001-20240226   gcc  
-loongarch             randconfig-002-20240226   gcc  
-m68k                             allmodconfig   gcc  
-m68k                              allnoconfig   gcc  
-m68k                             allyesconfig   gcc  
-m68k                                defconfig   gcc  
-microblaze                       allmodconfig   gcc  
-microblaze                        allnoconfig   gcc  
-microblaze                       allyesconfig   gcc  
-microblaze                          defconfig   gcc  
-mips                              allnoconfig   gcc  
-mips                             allyesconfig   gcc  
-mips                        bcm47xx_defconfig   clang
-mips                      fuloong2e_defconfig   gcc  
-mips                      maltaaprp_defconfig   clang
-nios2                            allmodconfig   gcc  
-nios2                             allnoconfig   gcc  
-nios2                            allyesconfig   gcc  
-nios2                               defconfig   gcc  
-nios2                 randconfig-001-20240226   gcc  
-nios2                 randconfig-002-20240226   gcc  
-openrisc                          allnoconfig   gcc  
-openrisc                         allyesconfig   gcc  
-openrisc                            defconfig   gcc  
-parisc                           allmodconfig   gcc  
-parisc                            allnoconfig   gcc  
-parisc                           allyesconfig   gcc  
-parisc                              defconfig   gcc  
-parisc                randconfig-001-20240226   gcc  
-parisc                randconfig-002-20240226   gcc  
-parisc64                            defconfig   gcc  
-powerpc                          allmodconfig   gcc  
-powerpc                           allnoconfig   gcc  
-powerpc                          allyesconfig   clang
-powerpc                  iss476-smp_defconfig   gcc  
-powerpc               randconfig-001-20240226   clang
-powerpc               randconfig-002-20240226   gcc  
-powerpc               randconfig-003-20240226   clang
-powerpc                     tqm5200_defconfig   gcc  
-powerpc64             randconfig-001-20240226   clang
-powerpc64             randconfig-002-20240226   gcc  
-powerpc64             randconfig-003-20240226   clang
-riscv                            allmodconfig   clang
-riscv                             allnoconfig   gcc  
-riscv                            allyesconfig   clang
-riscv                               defconfig   clang
-riscv                 randconfig-001-20240226   clang
-riscv                 randconfig-002-20240226   clang
-s390                             allmodconfig   clang
-s390                              allnoconfig   clang
-s390                             allyesconfig   gcc  
-s390                                defconfig   clang
-s390                  randconfig-001-20240226   clang
-s390                  randconfig-002-20240226   gcc  
-sh                               allmodconfig   gcc  
-sh                                allnoconfig   gcc  
-sh                               allyesconfig   gcc  
-sh                                  defconfig   gcc  
-sh                          polaris_defconfig   gcc  
-sh                    randconfig-001-20240226   gcc  
-sh                    randconfig-002-20240226   gcc  
-sh                           se7206_defconfig   gcc  
-sparc                            allmodconfig   gcc  
-sparc                             allnoconfig   gcc  
-sparc                               defconfig   gcc  
-sparc64                          allmodconfig   gcc  
-sparc64                          allyesconfig   gcc  
-sparc64                             defconfig   gcc  
-sparc64               randconfig-001-20240226   gcc  
-sparc64               randconfig-002-20240226   gcc  
-um                               allmodconfig   clang
-um                                allnoconfig   clang
-um                               allyesconfig   gcc  
-um                                  defconfig   clang
-um                             i386_defconfig   gcc  
-um                    randconfig-001-20240226   clang
-um                    randconfig-002-20240226   gcc  
-um                           x86_64_defconfig   clang
-x86_64                            allnoconfig   clang
-x86_64                           allyesconfig   clang
-x86_64       buildonly-randconfig-001-20240226   clang
-x86_64       buildonly-randconfig-002-20240226   gcc  
-x86_64       buildonly-randconfig-003-20240226   gcc  
-x86_64       buildonly-randconfig-004-20240226   clang
-x86_64       buildonly-randconfig-005-20240226   gcc  
-x86_64       buildonly-randconfig-006-20240226   gcc  
-x86_64                              defconfig   gcc  
-x86_64                randconfig-001-20240226   gcc  
-x86_64                randconfig-002-20240226   gcc  
-x86_64                randconfig-003-20240226   clang
-x86_64                randconfig-004-20240226   clang
-x86_64                randconfig-005-20240226   clang
-x86_64                randconfig-006-20240226   gcc  
-x86_64                randconfig-011-20240226   clang
-x86_64                randconfig-012-20240226   clang
-x86_64                randconfig-013-20240226   clang
-x86_64                randconfig-014-20240226   clang
-x86_64                randconfig-015-20240226   clang
-x86_64                randconfig-016-20240226   clang
-x86_64                randconfig-071-20240226   clang
-x86_64                randconfig-072-20240226   gcc  
-x86_64                randconfig-073-20240226   gcc  
-x86_64                randconfig-074-20240226   clang
-x86_64                randconfig-075-20240226   gcc  
-x86_64                randconfig-076-20240226   clang
-x86_64                          rhel-8.3-rust   clang
-xtensa                            allnoconfig   gcc  
-xtensa                  cadence_csp_defconfig   gcc  
-xtensa                randconfig-001-20240226   gcc  
-xtensa                randconfig-002-20240226   gcc  
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
