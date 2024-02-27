@@ -2,131 +2,52 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE991869F2E
-	for <lists+nouveau@lfdr.de>; Tue, 27 Feb 2024 19:33:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45AED86A04E
+	for <lists+nouveau@lfdr.de>; Tue, 27 Feb 2024 20:36:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 37E8E10E611;
-	Tue, 27 Feb 2024 18:33:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D7CAF10E98E;
+	Tue, 27 Feb 2024 19:36:12 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="4/2NlhRr";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Mbbtdei5";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2068.outbound.protection.outlook.com [40.107.93.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3E30210E3D8;
- Tue, 27 Feb 2024 18:33:34 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bRDw0hIt9D57YxZC1ygdXvMlFrS4oiUXarVfVz6tFfKtS0HtX3FMpwr1IqpICMjtZGWtUsBLzhfG7pOQy3dW6MiH4c5waru34VPZer/A4dXgoYQcPO6y+mqnBPUXYzJPQz/mwlSkO1uTCQMj9uKE5ytdHBvywysPqGJajrtRf83ohytznC8mDWNdkFiRI0/jv7wJzXRd39CGZNtQ/3mpdyFhV42hLcDChSncfE4BMtPrTftfx/UB7GtkoIxapgIRGOg8QilEuTbEVegZipUgTW5ZdEUNGBPjBT1zuo4sHRaQfTkBgXOED2UNi0KtDHS0332JiVF/9CFV6mZWBfmrRQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cTafJyqYABwni96NENvs6BmdGcvAKY3wkpe1CehqlHo=;
- b=nKg/ybmN6glx6NaNSUuqojRoNG+kBmFrbzbEGoktzvengqcRNpnTKR4ZgjjdW725YDbDYqKIMknIUvosnv8oyx4dSivqmNceDahYJwsLIb2HZ3KnDpCaEtk5ZiA98kNnnWuLXjb1Dkv8tUeTrDoHAeJrPj8+hhB3SLB89ZWziOvvlsTYVTC30A1wF7/94Lv/Y6zHr1Yg7qlZQ9FwnbeUL/9Cb37KvWs/ZUSYSCjr2m8HczQL8twS4p1fnVxEiFYSrnWbw9aewW9gDOnt0+jYH9oQbbSmMpwyP0DBdv9KTYsQzTZ43OjPH90dGkYAwiwFVKSW96+L2W6a2Ttcl15pTA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cTafJyqYABwni96NENvs6BmdGcvAKY3wkpe1CehqlHo=;
- b=4/2NlhRr63Ega71FLqSd3ed7F0uGLLBA+/BLFLprqpycBULGT1cXXQ9q180yRg1e2qwNN/yH64vdQxeRb491F2M//imTH500FN/HZXW08wuek/t1vksnSOAfqJm0FRXUQGqSd064Xog+wCRRAJ+w/bd+OugbrzO4ExaXVILXkz0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by DM6PR12MB4266.namprd12.prod.outlook.com (2603:10b6:5:21a::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.39; Tue, 27 Feb
- 2024 18:33:32 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::f2b6:1034:76e8:f15a]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::f2b6:1034:76e8:f15a%6]) with mapi id 15.20.7316.031; Tue, 27 Feb 2024
- 18:33:31 +0000
-Message-ID: <e3eb2794-b90e-4300-96b4-61f6b45b5518@amd.com>
-Date: Tue, 27 Feb 2024 19:33:21 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/13] drm: Fix reservation locking for pin/unpin and
- console
-Content-Language: en-US
-To: Dmitry Osipenko <dmitry.osipenko@collabora.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch, airlied@gmail.com,
- mripard@kernel.org, maarten.lankhorst@linux.intel.com,
- sumit.semwal@linaro.org, robdclark@gmail.com, quic_abhinavk@quicinc.com,
- dmitry.baryshkov@linaro.org, sean@poorly.run, marijn.suijten@somainline.org,
- suijingfeng@loongson.cn, kherbst@redhat.com, lyude@redhat.com,
- dakr@redhat.com, airlied@redhat.com, kraxel@redhat.com,
- alexander.deucher@amd.com, Xinhui.Pan@amd.com, zack.rusin@broadcom.com,
- bcm-kernel-feedback-list@broadcom.com
-Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org
-References: <20240227113853.8464-1-tzimmermann@suse.de>
- <d854f70b-1d62-4da7-bfbd-2184456d1d25@collabora.com>
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <d854f70b-1d62-4da7-bfbd-2184456d1d25@collabora.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AS4P250CA0010.EURP250.PROD.OUTLOOK.COM
- (2603:10a6:20b:5df::7) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|DM6PR12MB4266:EE_
-X-MS-Office365-Filtering-Correlation-Id: fea19e46-3403-4cd8-b38a-08dc37c2994d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: fYW+uKGWD9gVOrIQCcxDQvisYOqvBKCAMbi24tljOu5AuqVaTQ+CQFEKbQjZ6nb64A0fKmGo6+sX2EqzNXPAS4OEL7kPv5eJnBM2/FNPBzJHO0KeoBPU7sBh/CzmpsnFYhLnMVVkXcXBa+4wRdy5GuXyZXmpsfXlpokRHk2glA/ndYerkELxAT5VF1Ke71g1VMPvsf12k518EXTvf0G3rk6gDhY9yjnFWhnW4fufJ+fxWnEddAtMPCLcNF6VwqS44lr9BO4zqGBliQw3PUMECYqmUBFCjRInYIMwxqa1SFYqtm7ywo39DjZCBlR8Az3RVATOt2cj3Te+XE7zxF6dm6OoF82SjOipuMjNv+6PJ198SkLzB4k3xRBFQFmnc5YLQl5WgvoNfCHpku+nu9kdIuMB1Zc51daHIm+Q0BAMv5qPKzcYWsove6xmb8xsnuuknnf1+IKkvmk3bboQqvkJxzJGCXFPuoKTA1Fi20UEAAeKRkwnkOLaa0mIySSM4z8mLyI7axuBA8d9Tnrjv/EEnc8poJ2Nbjx88aJGGl3vKbxNZsOMYyiAMqGVpmjVzKstZ/4meACSaH/1HHDj98cv9jeWINzjNIjvp39EvjXqXmpC/W7xGA3armrWMIZv+U22PjM5gLJvW612eh4g04mSUvXHlqALSzwOyqgSVVHytdpF3pyKPvOtv3+L9P8FmkkhfGobC020Nl/+g9DIBSB8wA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR12MB5685.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(921011); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TnFYSVJkUTRUNTJpRTIyUTZhQlVnbjJDd0lMY0p1QkVyV0NuYS83MmNWNVBt?=
- =?utf-8?B?SE90MzFMY3RuWnVJMktYeEdXbUpyZVp6T0RJTHovbmJxVzJlbkx1bDRxdDdZ?=
- =?utf-8?B?UHJ5eVlhakFML0xBVW9UY0hxNVVHcXJyZS9OV2ZoMmJkVzYwYUpTclRtVkFX?=
- =?utf-8?B?SHVVQXVVQUY0cGloaGh6Qk9WaWJtWkQ0UkhtLzFvdVV3ekdnNURpZGRRbFJh?=
- =?utf-8?B?YlI0SjdsM0FYMzFQRWloMFBvWGxJL2xKUWNLUnhOTWdva2xWRzEzSEtwRk1I?=
- =?utf-8?B?dHpGVzdNazAyKzZpcENod1NGU1hMVVVsOXhkeks5eS9sTCtQNGhpTXZ2V1ZG?=
- =?utf-8?B?RExtSWlOd0cycWlldGR3WFloVk11ZCtHVnA1YTAwZUk3VTVOZkxuRDUvdmdh?=
- =?utf-8?B?ZkxydEd2Q3JoQmZGaHlvSDZ1Uk9ISDR4R2lreElmQlpGaGJqMmUwZXlJM0Ry?=
- =?utf-8?B?UjcxN3Q2aFBWeE5McjBmcjdVVGwwQzloVGhEZUU2cVVyOWFTMmVHdk5ZcE44?=
- =?utf-8?B?NUpHWnkxaFBKTVZhY0VNQkV4TjhMb2ZsZG4vQ1FqYjhVdC9oS3BBYXRHaUtF?=
- =?utf-8?B?bWMwNnhQWDg5T0pHSC9QMXl0S29jbHBwSEdZZHBvOFEzZWxsSWhpMC9jK25h?=
- =?utf-8?B?VHdmNlZyMlNleXc2Ynhzc3pSQTlxU3lYYldhbXFnUVpuTDFOT1VjeGpaOGFo?=
- =?utf-8?B?bDhlMFJsWVNaZ2dub0t6UEZNNmJOQWIwQUlvcktEcXQ5Nm1SemJ6VzRyUFVH?=
- =?utf-8?B?MEdCeGI0RUp0Y2FPdExhT3BaeWZvRG9uOTYxYUhVK0VORDc2QXpjc0ZPMmpI?=
- =?utf-8?B?Z2doTnE2V3EvOCt3cUVCbmJNQlAxaFBzbm16YmRMcHM1dmdIc1gxQTJ5cnhU?=
- =?utf-8?B?R29ielkyTDFQRWttNEVMUVVHQUVVT0EvdmRiV05GY1BERUM1YW9VZ3lqQXBQ?=
- =?utf-8?B?U3JDWEMyaXRwRE5aNDFKWVBaM0xhZ0kwZFFuTEVJWEIyUHB3UFhsZGdtV0sw?=
- =?utf-8?B?WkNNWXZpbmVSMkVHeG9mYlU4bVpVTXNNYjJDUTNMSDVjTG1DWXBpdFVTWnBr?=
- =?utf-8?B?bXovRzA1R05QMFk0M0VxZTMzek55cWlZTDlnSWphd250OUNQR2pDbCtJVDQx?=
- =?utf-8?B?WUdhY1E2aDFBWmIxbnhOaFc5ZWFJT0I0VFBLTjg0TFJkc0xjT2p4NWRNTTZX?=
- =?utf-8?B?WXpDTjlLR2N5ZXRybnVRbkJaYVVlNWU5ajJpQzdRcXBmMFZtZ05sRkQzdFJn?=
- =?utf-8?B?UW8yT0lGeWFZbU81dUNSWHlOMTZBUlBLQTZNY1VVMUJpZkdlK3RzT0J0OERi?=
- =?utf-8?B?d2RwelplbGF6K0h6V1Y4N0JLYkRTT1lmRTgvcUhZSHIyMjhsekw0VzdIUU9w?=
- =?utf-8?B?VGpVSGNvWTZZci9pTndBcEpaNVQ4Y1B2NGJPWXp6bnBOMXFBbXlpekZsU0pX?=
- =?utf-8?B?aXlDR0V2Mk1lQmxsQk5SV0NTdWRGbHJWcU9ySmEwb1VkUDd1V0lyUEp6VElZ?=
- =?utf-8?B?YTRDYXp6TE9wcGhKNGFxb3hLeWFGallVeE1LZWxVMmpSbXV0QlBqaVVGM1RY?=
- =?utf-8?B?bENGZng1MENYc0JhcjRZTENMYWxOWm8vV0hHd3ZwME9TV1BuQXJobHUxeS9m?=
- =?utf-8?B?NFFwSE1pbmY4cUFUTkFmMTV0blFud3FoOWxGa0RuUWxHQldBQUN6NHBmOXBp?=
- =?utf-8?B?RGlTaU5GMEl3alNtNHRqWmFMZTJ4SmdRVEZ2R1c5WHlnVjg4TjJnY0hNRWF0?=
- =?utf-8?B?RnhiTmJhRWdCWHFEUWExMndna3J6MGlzOG9VZUNFNFRRREhBU0ZmM3RzNHNN?=
- =?utf-8?B?T3cwVkFBeTl5QjFsenRZUGZueExUY09ORXRCUHJOeFNzMnN3eXlPbmgyNW9n?=
- =?utf-8?B?MlRkWElKN1dSRlo3dlFENU1JMGJEOTEzemUxQzM1Y2ZJM0lIc2Qvenc0bHBn?=
- =?utf-8?B?cU5DaVlHeG9rT0pzTHJZaENJcU41cUxncEgrMjZQNHEvbFZjVm1zV2d5MHZN?=
- =?utf-8?B?aHhDcHc5ZGFyaVpRR0krUjkyRzZEUmZvSkhJODhRNm1PMXptUkhpVGIrZFQr?=
- =?utf-8?B?K29sR0dCUkx2amQwS0s0eDRXUVdpOEdERGdQaU15L20xdk53OTFxb3FBdDFh?=
- =?utf-8?Q?tdquSlAUT8Fisa51OEvEuLQo1?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fea19e46-3403-4cd8-b38a-08dc37c2994d
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2024 18:33:31.7823 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oo4dA+57OPmRT8J/Ay3phvzPGSoT++f21wqO6INvPQQmJTzp8Gmrqwt81Zk0jvyy
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4266
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 26ACC10E98E;
+ Tue, 27 Feb 2024 19:36:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1709062572; x=1740598572;
+ h=date:from:to:cc:subject:message-id;
+ bh=t+gq8A6ziXURV723j83efeTzY1oWZAvqFy77PEToBAU=;
+ b=Mbbtdei5QWhx4euVQUSroE8+mYr1UAUVbyvive+yYeh0JqeVeaN5pcMF
+ GFR9nuCF4t2cGVfOWiruiRMPD6wJA0NRyOf76q3X+L865Bv7Ej4xmaUGt
+ 9tbzxkATBnbcrfmV4g/3MtSLmHhlgxE0/J/aBxpKBIyn5SKJwM1RH6v2x
+ MQEDGmcq0jNNqC9sC6OqRU2UfuIjFud1QhqXUpM5Kp1dVu0SZxGxYeGx2
+ Yh7Cr2Rp26qXB5XFfkA0Zu9rQCqcvCObQLt1dJcG/yUCIpbwLhnTzOfrk
+ mku6p0lABwideWerxFrOiMaSS1COtS5G+mVN9mhjQEc+OOD2daMzk2yD5 w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10996"; a="14067735"
+X-IronPort-AV: E=Sophos;i="6.06,188,1705392000"; d="scan'208";a="14067735"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 Feb 2024 11:36:11 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.06,188,1705392000"; d="scan'208";a="11770449"
+Received: from lkp-server02.sh.intel.com (HELO 3c78fa4d504c) ([10.239.97.151])
+ by fmviesa004.fm.intel.com with ESMTP; 27 Feb 2024 11:36:10 -0800
+Received: from kbuild by 3c78fa4d504c with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1rf3FH-000BTb-2U;
+ Tue, 27 Feb 2024 19:36:07 +0000
+Date: Wed, 28 Feb 2024 03:35:56 +0800
+From: kernel test robot <lkp@intel.com>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: Linux Memory Management List <linux-mm@kvack.org>,
+ dri-devel@lists.freedesktop.org, linux-mtd@lists.infradead.org,
+ nouveau@lists.freedesktop.org
+Subject: [linux-next:master] BUILD REGRESSION
+ 22ba90670a51a18c6b36d285fddf92b9887c0bc3
+Message-ID: <202402280351.qFQ2V2tO-lkp@intel.com>
+User-Agent: s-nail v14.9.24
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -141,83 +62,238 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 27.02.24 um 19:14 schrieb Dmitry Osipenko:
-> Hello,
->
-> Thank you for the patches!
->
-> On 2/27/24 13:14, Thomas Zimmermann wrote:
->> Dma-buf locking semantics require the caller of pin and unpin to hold
->> the buffer's reservation lock. Fix DRM to adhere to the specs. This
->> enables to fix the locking in DRM's console emulation. Similar changes
->> for vmap and mmap have been posted at [1][2]
->>
->> Most DRM drivers and memory managers acquire the buffer object's
->> reservation lock within their GEM pin and unpin callbacks. This
->> violates dma-buf locking semantics. We get away with it because PRIME
->> does not provide pin/unpin, but attach/detach, for which the locking
->> semantics is correct.
->>
->> Patches 1 to 8 rework DRM GEM code in various implementations to
->> acquire the reservation lock when entering the pin and unpin callbacks.
->> This prepares them for the next patch. Drivers that are not affected
->> by these patches either don't acquire the reservation lock (amdgpu)
->> or don't need preparation (loongson).
->>
->> Patch 9 moves reservation locking from the GEM pin/unpin callbacks
->> into drm_gem_pin() and drm_gem_unpin(). As PRIME uses these functions
->> internally it still gets the reservation lock.
->>
->> With the updated GEM callbacks, the rest of the patchset fixes the
->> fbdev emulation's buffer locking. Fbdev emulation needs to keep its
->> GEM buffer object inplace while updating its content. This required
->> a implicit pinning and apparently amdgpu didn't do this at all.
->>
->> Patch 10 introduces drm_client_buffer_vmap_local() and _vunmap_local().
->> The former function map a GEM buffer into the kernel's address space
->> with regular vmap operations, but keeps holding the reservation lock.
->> The _vunmap_local() helper undoes the vmap and releases the lock. The
->> updated GEM callbacks make this possible. Between the two calls, the
->> fbdev emulation can update the buffer content without have the buffer
->> moved or evicted. Update fbdev-generic to use vmap_local helpers,
->> which fix amdgpu. The idea of adding a "local vmap" has previously been
->> attempted at [3] in a different form.
->>
->> Patch 11 adds implicit pinning to the DRM client's regular vmap
->> helper so that long-term vmap'ed buffers won't be evicted. This only
->> affects fbdev-dma, but GEM DMA helpers don't require pinning. So
->> there are no practical changes.
->>
->> Patches 12 and 13 remove implicit pinning from the vmap and vunmap
->> operations in gem-vram and qxl. These pin operations are not supposed
->> to be part of vmap code, but were required to keep the buffers in place
->> for fbdev emulation. With the conversion o ffbdev-generic to to
->> vmap_local helpers, that code can finally be removed.
-> Isn't it a common behaviour for all DRM drivers to implicitly pin BO
-> while it's vmapped? I was sure it should be common /o\
+tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
+branch HEAD: 22ba90670a51a18c6b36d285fddf92b9887c0bc3  Add linux-next specific files for 20240227
 
-No, at least amdgpu and radon doesn't pin kmapped BOs and I don't think 
-nouveau does either.
+Error/Warning reports:
 
-> Why would you want to kmap BO that isn't pinned?
+https://lore.kernel.org/oe-kbuild-all/202402271629.7zZU8sCF-lkp@intel.com
 
-The usual use case is to call the ttm kmap function when you need CPU 
-access.
+Error/Warning: (recently discovered and may have been fixed)
 
-When the buffer hasn't moved we can use the cached CPU mapping, if the 
-buffer has moved since the last time or this is the first time that is 
-called we setup a new mapping.
+WARNING: modpost: vmlinux: section mismatch in reference: virtio_fs_init+0x8c (section: .init.text) -> map_benchmark_cleanup (section: .exit.text)
+WARNING: modpost: vmlinux: section mismatch in reference: virtio_fs_init+0xdc (section: .init.text) -> sq_api_exit (section: .exit.text)
 
-> Shouldn't TTM's vmap() be changed to do the pinning?
+Unverified Error/Warning (likely false positive, please contact us if interested):
 
-Absolutely not, no. That would break tons of use cases.
+{standard input}:1474: Error: unknown pseudo-op: `.l141'
 
-Regards,
-Christian.
+Error/Warning ids grouped by kconfigs:
 
->
-> I missed that TTM doesn't pin BO on vmap() and now surprised to see it.
-> It should be a rather serious problem requiring backporting of the
-> fixes, but I don't see the fixes tags on the patches (?)
->
+gcc_recent_errors
+|-- arc-randconfig-001-20240227
+|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
+|-- arm-randconfig-002-20240227
+|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
+|-- arm64-defconfig
+|   |-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
+|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
+|-- i386-buildonly-randconfig-002-20240227
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
+|-- parisc-defconfig
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
+|-- parisc64-defconfig
+|   `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
+|-- sh-buildonly-randconfig-r003-20230528
+|   `-- WARNING:modpost:vmlinux:section-mismatch-in-reference:virtio_fs_init-(section:.init.text)-map_benchmark_cleanup-(section:.exit.text)
+|-- sh-randconfig-r003-20230713
+|   `-- standard-input:Error:unknown-pseudo-op:l141
+`-- sh-randconfig-r004-20220501
+    `-- WARNING:modpost:vmlinux:section-mismatch-in-reference:virtio_fs_init-(section:.init.text)-sq_api_exit-(section:.exit.text)
+clang_recent_errors
+|-- hexagon-allmodconfig
+|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
+|-- hexagon-allyesconfig
+|   `-- fs-ubifs-journal.c:warning:expecting-prototype-for-wake_up_reservation().-Prototype-was-for-add_or_start_queue()-instead
+`-- riscv-defconfig
+    `-- drivers-gpu-drm-nouveau-nvkm-subdev-gsp-r535.c:warning:Function-parameter-or-struct-member-gsp-not-described-in-nvkm_gsp_radix3_sg
 
+elapsed time: 724m
+
+configs tested: 179
+configs skipped: 3
+
+tested configs:
+alpha                             allnoconfig   gcc  
+alpha                            allyesconfig   gcc  
+alpha                               defconfig   gcc  
+arc                              allmodconfig   gcc  
+arc                               allnoconfig   gcc  
+arc                              allyesconfig   gcc  
+arc                                 defconfig   gcc  
+arc                   randconfig-001-20240227   gcc  
+arc                   randconfig-002-20240227   gcc  
+arm                              allmodconfig   gcc  
+arm                               allnoconfig   clang
+arm                              allyesconfig   gcc  
+arm                                 defconfig   clang
+arm                        keystone_defconfig   gcc  
+arm                        multi_v7_defconfig   gcc  
+arm                   randconfig-001-20240227   gcc  
+arm                   randconfig-002-20240227   gcc  
+arm                   randconfig-003-20240227   gcc  
+arm                   randconfig-004-20240227   gcc  
+arm                           tegra_defconfig   gcc  
+arm                    vt8500_v6_v7_defconfig   gcc  
+arm64                            allmodconfig   clang
+arm64                             allnoconfig   gcc  
+arm64                               defconfig   gcc  
+arm64                 randconfig-001-20240227   clang
+arm64                 randconfig-002-20240227   gcc  
+arm64                 randconfig-003-20240227   gcc  
+arm64                 randconfig-004-20240227   gcc  
+csky                             allmodconfig   gcc  
+csky                              allnoconfig   gcc  
+csky                             allyesconfig   gcc  
+csky                                defconfig   gcc  
+csky                  randconfig-001-20240227   gcc  
+csky                  randconfig-002-20240227   gcc  
+hexagon                          allmodconfig   clang
+hexagon                           allnoconfig   clang
+hexagon                          allyesconfig   clang
+hexagon                             defconfig   clang
+hexagon               randconfig-001-20240227   clang
+hexagon               randconfig-002-20240227   clang
+i386                             allmodconfig   gcc  
+i386                              allnoconfig   gcc  
+i386                             allyesconfig   gcc  
+i386         buildonly-randconfig-001-20240227   gcc  
+i386         buildonly-randconfig-002-20240227   gcc  
+i386         buildonly-randconfig-003-20240227   clang
+i386         buildonly-randconfig-004-20240227   gcc  
+i386         buildonly-randconfig-005-20240227   gcc  
+i386         buildonly-randconfig-006-20240227   gcc  
+i386                                defconfig   clang
+i386                  randconfig-001-20240227   gcc  
+i386                  randconfig-002-20240227   gcc  
+i386                  randconfig-003-20240227   clang
+i386                  randconfig-004-20240227   clang
+i386                  randconfig-005-20240227   clang
+i386                  randconfig-006-20240227   gcc  
+i386                  randconfig-011-20240227   clang
+i386                  randconfig-012-20240227   clang
+i386                  randconfig-013-20240227   clang
+i386                  randconfig-014-20240227   clang
+i386                  randconfig-015-20240227   clang
+i386                  randconfig-016-20240227   gcc  
+loongarch                        allmodconfig   gcc  
+loongarch                         allnoconfig   gcc  
+loongarch                           defconfig   gcc  
+loongarch             randconfig-001-20240227   gcc  
+loongarch             randconfig-002-20240227   gcc  
+m68k                             allmodconfig   gcc  
+m68k                              allnoconfig   gcc  
+m68k                             allyesconfig   gcc  
+m68k                         amcore_defconfig   gcc  
+m68k                       bvme6000_defconfig   gcc  
+m68k                                defconfig   gcc  
+microblaze                       allmodconfig   gcc  
+microblaze                        allnoconfig   gcc  
+microblaze                       allyesconfig   gcc  
+microblaze                          defconfig   gcc  
+mips                              allnoconfig   gcc  
+mips                             allyesconfig   gcc  
+mips                       bmips_be_defconfig   gcc  
+mips                           ci20_defconfig   clang
+mips                         cobalt_defconfig   gcc  
+mips                     loongson2k_defconfig   gcc  
+mips                      malta_kvm_defconfig   gcc  
+mips                malta_qemu_32r6_defconfig   gcc  
+mips                           xway_defconfig   clang
+nios2                            allmodconfig   gcc  
+nios2                             allnoconfig   gcc  
+nios2                            allyesconfig   gcc  
+nios2                               defconfig   gcc  
+nios2                 randconfig-001-20240227   gcc  
+nios2                 randconfig-002-20240227   gcc  
+openrisc                          allnoconfig   gcc  
+openrisc                         allyesconfig   gcc  
+openrisc                            defconfig   gcc  
+parisc                           allmodconfig   gcc  
+parisc                            allnoconfig   gcc  
+parisc                           allyesconfig   gcc  
+parisc                              defconfig   gcc  
+parisc                randconfig-001-20240227   gcc  
+parisc                randconfig-002-20240227   gcc  
+parisc64                            defconfig   gcc  
+powerpc                          allmodconfig   gcc  
+powerpc                           allnoconfig   gcc  
+powerpc                          allyesconfig   clang
+powerpc               randconfig-001-20240227   clang
+powerpc               randconfig-002-20240227   gcc  
+powerpc               randconfig-003-20240227   clang
+powerpc                     tqm8548_defconfig   clang
+powerpc64             randconfig-001-20240227   clang
+powerpc64             randconfig-002-20240227   gcc  
+powerpc64             randconfig-003-20240227   gcc  
+riscv                            allmodconfig   clang
+riscv                             allnoconfig   gcc  
+riscv                            allyesconfig   clang
+riscv                               defconfig   clang
+riscv                 randconfig-001-20240227   gcc  
+riscv                 randconfig-002-20240227   clang
+s390                             allmodconfig   clang
+s390                              allnoconfig   clang
+s390                             allyesconfig   gcc  
+s390                                defconfig   clang
+s390                  randconfig-001-20240227   gcc  
+s390                  randconfig-002-20240227   clang
+sh                               allmodconfig   gcc  
+sh                                allnoconfig   gcc  
+sh                               allyesconfig   gcc  
+sh                                  defconfig   gcc  
+sh                    randconfig-001-20240227   gcc  
+sh                    randconfig-002-20240227   gcc  
+sh                           sh2007_defconfig   gcc  
+sh                        sh7757lcr_defconfig   gcc  
+sparc                            allmodconfig   gcc  
+sparc                             allnoconfig   gcc  
+sparc                               defconfig   gcc  
+sparc64                          allmodconfig   gcc  
+sparc64                          allyesconfig   gcc  
+sparc64                             defconfig   gcc  
+sparc64               randconfig-001-20240227   gcc  
+sparc64               randconfig-002-20240227   gcc  
+um                               allmodconfig   clang
+um                                allnoconfig   clang
+um                               allyesconfig   gcc  
+um                                  defconfig   clang
+um                             i386_defconfig   gcc  
+um                    randconfig-001-20240227   clang
+um                    randconfig-002-20240227   clang
+um                           x86_64_defconfig   clang
+x86_64                            allnoconfig   clang
+x86_64                           allyesconfig   clang
+x86_64       buildonly-randconfig-001-20240227   clang
+x86_64       buildonly-randconfig-002-20240227   gcc  
+x86_64       buildonly-randconfig-003-20240227   clang
+x86_64       buildonly-randconfig-004-20240227   clang
+x86_64       buildonly-randconfig-005-20240227   clang
+x86_64       buildonly-randconfig-006-20240227   gcc  
+x86_64                              defconfig   gcc  
+x86_64                randconfig-001-20240227   clang
+x86_64                randconfig-002-20240227   clang
+x86_64                randconfig-003-20240227   gcc  
+x86_64                randconfig-004-20240227   gcc  
+x86_64                randconfig-005-20240227   gcc  
+x86_64                randconfig-006-20240227   gcc  
+x86_64                randconfig-011-20240227   gcc  
+x86_64                randconfig-012-20240227   gcc  
+x86_64                randconfig-013-20240227   clang
+x86_64                randconfig-014-20240227   gcc  
+x86_64                randconfig-015-20240227   gcc  
+x86_64                randconfig-016-20240227   gcc  
+x86_64                randconfig-071-20240227   gcc  
+x86_64                randconfig-072-20240227   clang
+x86_64                randconfig-073-20240227   gcc  
+x86_64                randconfig-074-20240227   clang
+x86_64                randconfig-075-20240227   clang
+x86_64                randconfig-076-20240227   clang
+x86_64                          rhel-8.3-rust   clang
+xtensa                            allnoconfig   gcc  
+xtensa                randconfig-001-20240227   gcc  
+xtensa                randconfig-002-20240227   gcc  
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
