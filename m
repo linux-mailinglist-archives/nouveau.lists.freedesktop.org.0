@@ -2,67 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9AAD86A2B1
-	for <lists+nouveau@lfdr.de>; Tue, 27 Feb 2024 23:41:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DCCEE86A752
+	for <lists+nouveau@lfdr.de>; Wed, 28 Feb 2024 04:47:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4664010E9A1;
-	Tue, 27 Feb 2024 22:40:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AB1F510E3FA;
+	Wed, 28 Feb 2024 03:47:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o5B2yp8b";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="hmbUYBnp";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-f172.google.com (mail-yb1-f172.google.com
- [209.85.219.172])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 329CC10E9A3
- for <nouveau@lists.freedesktop.org>; Tue, 27 Feb 2024 22:40:54 +0000 (UTC)
-Received: by mail-yb1-f172.google.com with SMTP id
- 3f1490d57ef6-dcd9e34430cso5238357276.1
- for <nouveau@lists.freedesktop.org>; Tue, 27 Feb 2024 14:40:54 -0800 (PST)
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com
+ [209.85.128.177])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D4C6810E54F
+ for <nouveau@lists.freedesktop.org>; Wed, 28 Feb 2024 03:47:49 +0000 (UTC)
+Received: by mail-yw1-f177.google.com with SMTP id
+ 00721157ae682-608ccac1899so46335887b3.1
+ for <nouveau@lists.freedesktop.org>; Tue, 27 Feb 2024 19:47:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709073653; x=1709678453; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=l24av5cz46t7M7tI2luq7oGX/wa+cXf3Hc4YW3YHjSo=;
- b=o5B2yp8bTPPwBJzG94mZg7JpvSoXu7PRT2rFC4Mib5Z6Lhp+pPy2GjUvqNfqXrq8eY
- ZPsOxxhl4TTAeVlPUyb/YnwLVYutqps9TWrrwjP2hGVrTUH6S8hDbyN5JlCjIiQhJ5tm
- 06swwgNuEsmzDQhyoIwxMobimo3JP63eVz4ogw+Coyp1GtdRxFxKFseB5V4hK96CgXRX
- ZE6WHBsz7hfBJV5g7BlNu3Z21RjuVTr0aiBf+9k/sGQgB4BcKjls4bW9hwr0gGVM3KSG
- 1hTcY2A/i6wn7M3GPcr0Pym1xJqDUGRatxi7jubURKftc8vJbg2bvpfQgLyDCrYGCA5c
- CNeg==
+ d=broadcom.com; s=google; t=1709092068; x=1709696868;
+ darn=lists.freedesktop.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g/DHH/2GuNtK9+6RCOfdjmOHhlQolPWcSEw0qt7/GJo=;
+ b=hmbUYBnprbe8hKUZS6k0HmThEuwEU7ExHRZroES9OZL5jlqcbZ72HouTmNYrlDpMXA
+ MCTn0zooFQ8JXlvrgO0U1hlMFaJ4ZSmotTOe+3n0UHGBioa/rPzfljAHZyDYDeKrOu5K
+ k3zme458LR7BfNuoD/nB6CYmpmgrg2LqwmqA8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709073653; x=1709678453;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=l24av5cz46t7M7tI2luq7oGX/wa+cXf3Hc4YW3YHjSo=;
- b=siTbFGpr7orKTFk7Yubh6LRfGS/LG7d/hvp6rYmsb0ON2wKjsYYSyp+8AZOz9pIVH3
- bRoTap04omEJHuF/RP1A4ookdafcT/bYjNBAQ2TGgNJBJbvRlN0lQrZzByxLkMUjIKUL
- FDCJMpecRicWQHVmiOpYkucn+F4wvRmlmQ9cunKzFJmUko6T4IfSiHrqRG2h5APzTj7d
- Kllb4SokMXJsyoatkW++XLORe7jkTyu9AaeT3hzd3YHrzBePSpAiv1ttLIWW/SGBrWru
- rxHlHW1y01xnRiUhDMQvc8bXosxH9ZOteAPADU6Sf623CTvLswtUxwdNcxolbEAzmvjD
- KB+A==
+ d=1e100.net; s=20230601; t=1709092068; x=1709696868;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=g/DHH/2GuNtK9+6RCOfdjmOHhlQolPWcSEw0qt7/GJo=;
+ b=hWEwcwjgP1626AHI43zmTgkZFlEN+vIbXn65wzB12j315K1mdrS8oJuuoos8uCJPbH
+ w6vkuiXsx8K8mG8ZQM3QvNbqT7gcEpO2z2ygaB95PvmOWjXt1JiGUdQJYw3xKe6zmR2P
+ 7y3nRx0Vo79KHqfMXY3yi6kFIuvgeuKc2arEbn1Sznnn8Sox6WmKtON+XhbV+Vj6IntR
+ c14/7GQ4BS1xjRQZMfTmMweF5AhLkNaWPCkYjG6kSQt1bMZOYr5S0//ptGQJkdDCD7NH
+ V/nFGEysfq4P1W+IdMRFmYxtVDZZoNkH8unYxN2E5CXe0439IfXaQlqymhy2UfgKbra+
+ BUzA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWozTUO7ii28wRdSEoBJcruvYLkY+7ZFwWKrtjlq+w6fIEIT/UOVRZ1rG2luzeVXBoM5AY+s2zDj/AWJeETyht0JcbcyZCx6mGp2NWZBA==
-X-Gm-Message-State: AOJu0YyMkAgzl66638qRxor0eeanrb9ngt/ig29gsqK2Ti9J8fuPlOTM
- /RLOWDoBir8oJWa1rbwxs642Nc/8EAlRNCmIlpRQhhlmsaKeFBd00T2f842BEoE2hV6zkn8GBYt
- 8lGwvtXR+y8l8wY0M1Pm23wv+EwE9hhlfuEO2mg==
-X-Google-Smtp-Source: AGHT+IF7JmZrAwSzE5u2YUoyhCfxcW6ZoHVqg/vYI0u+8CvfTAGOQdSqPOy0FsY7FSJXpRenAcBfjlKR9Cj3074cOP4=
-X-Received: by 2002:a25:9e8d:0:b0:dcd:5bdb:4aa4 with SMTP id
- p13-20020a259e8d000000b00dcd5bdb4aa4mr830952ybq.51.1709073652982; Tue, 27 Feb
- 2024 14:40:52 -0800 (PST)
+ AJvYcCXIDrsHBrYR4ghw+2EcP85ZtU0vZ9S1tUf72d/f41qRdt522jDitxZ3u1UNweYSf/wbjT5pIJ1c787mVHpc9lHZR7MerxDT0d0MG+1GWA==
+X-Gm-Message-State: AOJu0YzJhVB9/ikM3rod39yex1QJm2/s0j56yAptHbP0Lc6QSYCXxkui
+ SiQQi/x7PRkgbCHtijLZHhR6VXyMIKtBmCmnqgYuahs/qS1wYOG2ypb9CbwcJEBn4gV2TeZvjYr
+ F33vPg1gjMwSAV3ehltNwiGp1akuXBgV0NrZ6
+X-Google-Smtp-Source: AGHT+IEuu5G9/EtkiJuIqK5DEsLbHEiSicOLnCwW2E1hTZ+I5ANhBoRZTZztYsh0saLiizBliAy4AujGNkSwBQUlm8o=
+X-Received: by 2002:a05:690c:f8f:b0:5ff:7cca:a434 with SMTP id
+ df15-20020a05690c0f8f00b005ff7ccaa434mr4528537ywb.51.1709092068238; Tue, 27
+ Feb 2024 19:47:48 -0800 (PST)
 MIME-Version: 1.0
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Date: Wed, 28 Feb 2024 00:40:41 +0200
-Message-ID: <CAA8EJprfbMs_3PnpebhVg=NVrO5zc23cgx=1f4HAKLnT5b9J6Q@mail.gmail.com>
-Subject: DisplayPort: handling of HPD events / link training
-To: "open list:DRM DRIVER FOR MSM ADRENO GPU"
- <dri-devel@lists.freedesktop.org>, 
- amd-gfx list <amd-gfx@lists.freedesktop.org>, nouveau@lists.freedesktop.org, 
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>, 
- freedreno <freedreno@lists.freedesktop.org>
-Cc: Abhinav Kumar <quic_abhinavk@quicinc.com>,
- Kuogee Hsieh <quic_khsieh@quicinc.com>
+References: <20240227113853.8464-1-tzimmermann@suse.de>
+ <20240227113853.8464-9-tzimmermann@suse.de>
+In-Reply-To: <20240227113853.8464-9-tzimmermann@suse.de>
+From: Zack Rusin <zack.rusin@broadcom.com>
+Date: Tue, 27 Feb 2024 22:47:37 -0500
+Message-ID: <CABQX2QP4dCy2nfxXp3tEybtRF1UW_wMAKp1+m=2VA7Lt=C+Vvg@mail.gmail.com>
+Subject: Re: [PATCH 08/13] drm/qxl: Acquire reservation lock in GEM pin/unpin
+ callbacks
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: daniel@ffwll.ch, airlied@gmail.com, mripard@kernel.org, 
+ maarten.lankhorst@linux.intel.com, christian.koenig@amd.com, 
+ sumit.semwal@linaro.org, dmitry.osipenko@collabora.com, robdclark@gmail.com, 
+ quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org, sean@poorly.run, 
+ marijn.suijten@somainline.org, suijingfeng@loongson.cn, kherbst@redhat.com, 
+ lyude@redhat.com, dakr@redhat.com, airlied@redhat.com, kraxel@redhat.com, 
+ alexander.deucher@amd.com, Xinhui.Pan@amd.com, 
+ bcm-kernel-feedback-list@broadcom.com, dri-devel@lists.freedesktop.org, 
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, virtualization@lists.linux.dev, 
+ spice-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,36 +87,57 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello,
+On Tue, Feb 27, 2024 at 6:39=E2=80=AFAM Thomas Zimmermann <tzimmermann@suse=
+.de> wrote:
+>
+> Acquire the reservation lock directly in GEM pin callback. Same for
+> unpin. Prepares for further changes.
+>
+> Dma-buf locking semantics require callers to hold the buffer's
+> reservation lock when invoking the pin and unpin callbacks. Prepare
+> qxl accordingly by pushing locking out of the implementation. A
+> follow-up patch will fix locking for all GEM code at once.
+>
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
+>  drivers/gpu/drm/qxl/qxl_prime.c | 16 ++++++++++++++--
+>  1 file changed, 14 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/qxl/qxl_prime.c b/drivers/gpu/drm/qxl/qxl_pr=
+ime.c
+> index 9169c26357d36..f2646603e12eb 100644
+> --- a/drivers/gpu/drm/qxl/qxl_prime.c
+> +++ b/drivers/gpu/drm/qxl/qxl_prime.c
+> @@ -31,15 +31,27 @@
+>  int qxl_gem_prime_pin(struct drm_gem_object *obj)
+>  {
+>         struct qxl_bo *bo =3D gem_to_qxl_bo(obj);
+> +       int r;
+>
+> -       return qxl_bo_pin(bo);
+> +       r =3D qxl_bo_reserve(bo);
+> +       if (r)
+> +               return r;
+> +       r =3D qxl_bo_pin_locked(bo);
+> +       qxl_bo_unreserve(bo);
+> +
+> +       return r;
+>  }
+>
+>  void qxl_gem_prime_unpin(struct drm_gem_object *obj)
+>  {
+>         struct qxl_bo *bo =3D gem_to_qxl_bo(obj);
+> +       int r;
+>
+> -       qxl_bo_unpin(bo);
+> +       r =3D qxl_bo_reserve(bo);
+> +       if (r)
+> +               return;
+> +       qxl_bo_unpin_locked(bo);
+> +       qxl_bo_unreserve(bo);
+>  }
 
-We are currently looking at checking and/or possibly redesigning the
-way the MSM DRM driver handles the HPD events and link training.
+It looks like gem_prime_pin/unpin is largely the same between a lot of
+drivers now. That might be a nice cleanup in the future.
 
-After a quick glance at the drivers implementing DP support, I noticed
-following main approaches:
-- Perform link training at the atomic_enable time, don't report
-failures (mtk, analogix, zynqmp, tegra, nouveau)
-- Perform link training at the atomic_enable time, report errors using
-link_status property (i915, mhdp8546)
-- Perform link training on the plug event (msm, it8605).
-- Perform link training from the DPMS handler, also calling it from
-the enable callback (AMDGPU, radeon).
-
-It looks like the majority wins and we should move HPD to
-atomic_enable time. Is that assumption correct?
-
-Also two related questions:
-- Is there a plan to actually make use of the link_status property?
-Intel presented it at FOSDEM 2018, but since that time it was not
-picked up by other drivers.
-
-- Is there any plan to create generic DP link training helpers? After
-glancing through the DP drivers there is a lot of similar code in the
-link training functions, with minor differences here and there. And
-it's those minor differences that bug me. It means that drivers might
-respond differently to similar devices. Or that there might be minor
-bugs here and there.
-
--- 
-With best wishes
-Dmitry
+z
