@@ -2,76 +2,140 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1A2986A762
-	for <lists+nouveau@lfdr.de>; Wed, 28 Feb 2024 04:54:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80BDF86A9B5
+	for <lists+nouveau@lfdr.de>; Wed, 28 Feb 2024 09:19:49 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 29BAC10E87B;
-	Wed, 28 Feb 2024 03:54:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 10A5810E111;
+	Wed, 28 Feb 2024 08:19:48 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="ebpbyM0U";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="sznkX2Ob";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="FeybRjlC";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="sznkX2Ob";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="FeybRjlC";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com
- [209.85.128.173])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 227D110E6F4
- for <nouveau@lists.freedesktop.org>; Wed, 28 Feb 2024 03:54:43 +0000 (UTC)
-Received: by mail-yw1-f173.google.com with SMTP id
- 00721157ae682-60908e5fb9eso29573907b3.2
- for <nouveau@lists.freedesktop.org>; Tue, 27 Feb 2024 19:54:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1709092482; x=1709697282;
- darn=lists.freedesktop.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YW4SWbLimQ0VFXlHaJDeVx867JJFVSwL6sDK9ku7RFk=;
- b=ebpbyM0UkXUjCLvqPjAU+grYZaiuRJOqWeAF/1mTO+pc16q7lbf182+jxeKL5Q4YQT
- uKOq1Qz1aP3gsEl8xl7qzMMhHdvaugm/oTOo+/kCiDVfT/JgT8M/+7VgeJv61RyF/MoD
- 3wqe9wQ2A8Axdf59KtLgBc6AzihU3Pj1dVxxA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709092482; x=1709697282;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YW4SWbLimQ0VFXlHaJDeVx867JJFVSwL6sDK9ku7RFk=;
- b=sVUGcGZ5Y7fbHrogXKlj+hRYn/IBE+drtmQ4uRZ6VdBaZ4VMk5N9cgph4stROmT+IT
- VJYcs/LpkADqteduMOn9l0VK4FLvqW0LVmA75Fq29vE9+p7+x7J7w1oRFfLLYgOH2q3r
- D+GhHgMDlK6thhjgj1iLCU+z+Pmj+MyDApVsksYr8qkK9EM1MCYJekt2+AgWeFYmLxmA
- lM9/eFJh7RiEPUuhX/Zh7gi51Ccu68cmCid54m26GjR0FBHQZXJYDwPlX/CJeFYqXJXK
- pK6363eNaMgahp/F8K+e4OhCOnxaBqW4FXIOICyMan/+q6GkMkX0u29BIr0a0AgmpZ4j
- Uj1g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVUODv/RvkVevGZN6jI9aGf6jU5Gcmd0trNq3ep6oXnW4RuGhxU4vLOEIV8JW+IvMBD/z7PlxHS03qjDz1Gi7XMV1N9wdi7S3vAsgqh8w==
-X-Gm-Message-State: AOJu0YxGizSw0tVswgKXCLrwbh4TzlLEh0XCZF2Zh+Ze2YUpSnIi4kVG
- sXkH+zH0V1ueL1/qOWm2pzd/5TfMjIK1I7H+q88srMM2Cc+fEv4rsmcB6jEXfZ88jcks6fDm+8/
- iWQkcPkadRZmxmgO0olj+aMlN1Hiv32NebzYk
-X-Google-Smtp-Source: AGHT+IHEv7+c/ePWhOgKmqYsJ5d3zIAxFqZvYWkNQbw6XfXCc1hvqrNWPlY3OogOg7lOY3gWJjWCq9lA6f1828rRluU=
-X-Received: by 2002:a81:b107:0:b0:607:850e:7583 with SMTP id
- p7-20020a81b107000000b00607850e7583mr3821071ywh.38.1709092482039; Tue, 27 Feb
- 2024 19:54:42 -0800 (PST)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B7E4110E9C6;
+ Wed, 28 Feb 2024 08:19:46 +0000 (UTC)
+Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org [10.150.64.98])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id DEBE41FBEE;
+ Wed, 28 Feb 2024 08:19:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1709108384; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=nWPhJsPQKvrqarNFIej7vxQFJJnKTtYS/cMyoDdZX14=;
+ b=sznkX2Oby5lAFmxQuk2CpsPYxBJkdjoXr7wPsKC5Mh6/Z03DVhYAfAXvcOHgH9CHRMMt6/
+ onhPHoaoLDjYNkwrwAB/zV3J5miquTGKZ0Uu6NKk04tadcJ2r7yUIPUK/fw+vw0AsJcS66
+ lAYwc9NwEB9S87jJz3hjMYarJ/cDL8Q=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1709108384;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=nWPhJsPQKvrqarNFIej7vxQFJJnKTtYS/cMyoDdZX14=;
+ b=FeybRjlChq+XK2b3SMEenBN167kno2njkO76rnY7v1Z+XybGIlQ7vY1wMq3SdoXhGwuhcU
+ uiUDQN5OeA5YDnDA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1709108384; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=nWPhJsPQKvrqarNFIej7vxQFJJnKTtYS/cMyoDdZX14=;
+ b=sznkX2Oby5lAFmxQuk2CpsPYxBJkdjoXr7wPsKC5Mh6/Z03DVhYAfAXvcOHgH9CHRMMt6/
+ onhPHoaoLDjYNkwrwAB/zV3J5miquTGKZ0Uu6NKk04tadcJ2r7yUIPUK/fw+vw0AsJcS66
+ lAYwc9NwEB9S87jJz3hjMYarJ/cDL8Q=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1709108384;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=nWPhJsPQKvrqarNFIej7vxQFJJnKTtYS/cMyoDdZX14=;
+ b=FeybRjlChq+XK2b3SMEenBN167kno2njkO76rnY7v1Z+XybGIlQ7vY1wMq3SdoXhGwuhcU
+ uiUDQN5OeA5YDnDA==
+Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id 2D79213A42;
+ Wed, 28 Feb 2024 08:19:44 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap2.dmz-prg2.suse.org with ESMTPSA id 9xXKCaDs3mXvQAAAn2gu4w
+ (envelope-from <tzimmermann@suse.de>); Wed, 28 Feb 2024 08:19:44 +0000
+Message-ID: <cd01e963-dd4d-4554-9feb-1750f72cc260@suse.de>
+Date: Wed, 28 Feb 2024 09:19:43 +0100
 MIME-Version: 1.0
-References: <20240227113853.8464-1-tzimmermann@suse.de>
-In-Reply-To: <20240227113853.8464-1-tzimmermann@suse.de>
-From: Zack Rusin <zack.rusin@broadcom.com>
-Date: Tue, 27 Feb 2024 22:54:31 -0500
-Message-ID: <CABQX2QMrjqShv0fgYCBzGkVc53DB9NLmh-d2aJMSWg2BfctYXw@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 00/13] drm: Fix reservation locking for pin/unpin and
  console
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: daniel@ffwll.ch, airlied@gmail.com, mripard@kernel.org, 
- maarten.lankhorst@linux.intel.com, christian.koenig@amd.com, 
- sumit.semwal@linaro.org, dmitry.osipenko@collabora.com, robdclark@gmail.com, 
- quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org, sean@poorly.run, 
- marijn.suijten@somainline.org, suijingfeng@loongson.cn, kherbst@redhat.com, 
- lyude@redhat.com, dakr@redhat.com, airlied@redhat.com, kraxel@redhat.com, 
- alexander.deucher@amd.com, Xinhui.Pan@amd.com, 
- bcm-kernel-feedback-list@broadcom.com, dri-devel@lists.freedesktop.org, 
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, virtualization@lists.linux.dev, 
- spice-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: Dmitry Osipenko <dmitry.osipenko@collabora.com>, daniel@ffwll.ch,
+ airlied@gmail.com, mripard@kernel.org, maarten.lankhorst@linux.intel.com,
+ christian.koenig@amd.com, sumit.semwal@linaro.org, robdclark@gmail.com,
+ quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org, sean@poorly.run,
+ marijn.suijten@somainline.org, suijingfeng@loongson.cn, kherbst@redhat.com,
+ lyude@redhat.com, dakr@redhat.com, airlied@redhat.com, kraxel@redhat.com,
+ alexander.deucher@amd.com, Xinhui.Pan@amd.com, zack.rusin@broadcom.com,
+ bcm-kernel-feedback-list@broadcom.com
+Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org
+References: <20240227113853.8464-1-tzimmermann@suse.de>
+ <d854f70b-1d62-4da7-bfbd-2184456d1d25@collabora.com>
+Content-Language: en-US
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <d854f70b-1d62-4da7-bfbd-2184456d1d25@collabora.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: smtp-out2.suse.de;
+	none
+X-Spam-Level: 
+X-Spam-Score: -4.29
+X-Spamd-Result: default: False [-4.29 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; XM_UA_NO_VERSION(0.01)[];
+ FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
+ NEURAL_HAM_LONG(-1.00)[-1.000]; BAYES_HAM(-3.00)[100.00%];
+ RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ NEURAL_HAM_SHORT(-0.20)[-0.999]; RCPT_COUNT_TWELVE(0.00)[29];
+ FREEMAIL_TO(0.00)[collabora.com,ffwll.ch,gmail.com,kernel.org,linux.intel.com,amd.com,linaro.org,quicinc.com,poorly.run,somainline.org,loongson.cn,redhat.com,broadcom.com];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
+ MIME_TRACE(0.00)[0:+]; RCVD_TLS_ALL(0.00)[];
+ MID_RHS_MATCH_FROM(0.00)[]
+X-Spam-Flag: NO
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,114 +150,114 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Feb 27, 2024 at 6:38=E2=80=AFAM Thomas Zimmermann <tzimmermann@suse=
-.de> wrote:
+Hi
+
+Am 27.02.24 um 19:14 schrieb Dmitry Osipenko:
+> Hello,
 >
-> Dma-buf locking semantics require the caller of pin and unpin to hold
-> the buffer's reservation lock. Fix DRM to adhere to the specs. This
-> enables to fix the locking in DRM's console emulation. Similar changes
-> for vmap and mmap have been posted at [1][2]
+> Thank you for the patches!
 >
-> Most DRM drivers and memory managers acquire the buffer object's
-> reservation lock within their GEM pin and unpin callbacks. This
-> violates dma-buf locking semantics. We get away with it because PRIME
-> does not provide pin/unpin, but attach/detach, for which the locking
-> semantics is correct.
+> On 2/27/24 13:14, Thomas Zimmermann wrote:
+>> Dma-buf locking semantics require the caller of pin and unpin to hold
+>> the buffer's reservation lock. Fix DRM to adhere to the specs. This
+>> enables to fix the locking in DRM's console emulation. Similar changes
+>> for vmap and mmap have been posted at [1][2]
+>>
+>> Most DRM drivers and memory managers acquire the buffer object's
+>> reservation lock within their GEM pin and unpin callbacks. This
+>> violates dma-buf locking semantics. We get away with it because PRIME
+>> does not provide pin/unpin, but attach/detach, for which the locking
+>> semantics is correct.
+>>
+>> Patches 1 to 8 rework DRM GEM code in various implementations to
+>> acquire the reservation lock when entering the pin and unpin callbacks.
+>> This prepares them for the next patch. Drivers that are not affected
+>> by these patches either don't acquire the reservation lock (amdgpu)
+>> or don't need preparation (loongson).
+>>
+>> Patch 9 moves reservation locking from the GEM pin/unpin callbacks
+>> into drm_gem_pin() and drm_gem_unpin(). As PRIME uses these functions
+>> internally it still gets the reservation lock.
+>>
+>> With the updated GEM callbacks, the rest of the patchset fixes the
+>> fbdev emulation's buffer locking. Fbdev emulation needs to keep its
+>> GEM buffer object inplace while updating its content. This required
+>> a implicit pinning and apparently amdgpu didn't do this at all.
+>>
+>> Patch 10 introduces drm_client_buffer_vmap_local() and _vunmap_local().
+>> The former function map a GEM buffer into the kernel's address space
+>> with regular vmap operations, but keeps holding the reservation lock.
+>> The _vunmap_local() helper undoes the vmap and releases the lock. The
+>> updated GEM callbacks make this possible. Between the two calls, the
+>> fbdev emulation can update the buffer content without have the buffer
+>> moved or evicted. Update fbdev-generic to use vmap_local helpers,
+>> which fix amdgpu. The idea of adding a "local vmap" has previously been
+>> attempted at [3] in a different form.
+>>
+>> Patch 11 adds implicit pinning to the DRM client's regular vmap
+>> helper so that long-term vmap'ed buffers won't be evicted. This only
+>> affects fbdev-dma, but GEM DMA helpers don't require pinning. So
+>> there are no practical changes.
+>>
+>> Patches 12 and 13 remove implicit pinning from the vmap and vunmap
+>> operations in gem-vram and qxl. These pin operations are not supposed
+>> to be part of vmap code, but were required to keep the buffers in place
+>> for fbdev emulation. With the conversion o ffbdev-generic to to
+>> vmap_local helpers, that code can finally be removed.
+> Isn't it a common behaviour for all DRM drivers to implicitly pin BO
+> while it's vmapped? I was sure it should be common /o\
+
+That's what I originally thought as well, but the intention is for pin 
+and vmap to be distinct operation. So far each driver has been 
+different, as you probably know best from your vmap refactoring. :)
+
 >
-> Patches 1 to 8 rework DRM GEM code in various implementations to
-> acquire the reservation lock when entering the pin and unpin callbacks.
-> This prepares them for the next patch. Drivers that are not affected
-> by these patches either don't acquire the reservation lock (amdgpu)
-> or don't need preparation (loongson).
+> Why would you want to kmap BO that isn't pinned?
+
+Pinning places the buffer object for the GPU. As a side effect, the 
+buffer is then kept in place, which enables vmap. So pinning only makes 
+sense for buffer objects that never move (shmem, dma). That's what patch 
+11 is for.
+
 >
-> Patch 9 moves reservation locking from the GEM pin/unpin callbacks
-> into drm_gem_pin() and drm_gem_unpin(). As PRIME uses these functions
-> internally it still gets the reservation lock.
+> Shouldn't TTM's vmap() be changed to do the pinning?
+
+I don't think so. One problem is that pinning needs a memory area (vram, 
+GTT, system ram, etc) specified, which vmap simply doesn't know about. 
+That has been a problem for fbdev emulation at some point. Our fbdev 
+code tried to pin as part of vmap, but chose the wrong area and suddenly 
+the GPU could not see the buffer object any longer.  So the next best 
+thing for vmap was to pin the buffer object where ever it is currently 
+located. That is what gem-vram and qxl did so far. And of course, the 
+fbdev code needs to unpin and vunmap the buffer object quickly, so that 
+it can be relocated if the GPU needs it.  Hence, the vmap_local 
+interface removes such short-term pinning in favor of holding the 
+reservation lock.
+
 >
-> With the updated GEM callbacks, the rest of the patchset fixes the
-> fbdev emulation's buffer locking. Fbdev emulation needs to keep its
-> GEM buffer object inplace while updating its content. This required
-> a implicit pinning and apparently amdgpu didn't do this at all.
->
-> Patch 10 introduces drm_client_buffer_vmap_local() and _vunmap_local().
-> The former function map a GEM buffer into the kernel's address space
-> with regular vmap operations, but keeps holding the reservation lock.
-> The _vunmap_local() helper undoes the vmap and releases the lock. The
-> updated GEM callbacks make this possible. Between the two calls, the
-> fbdev emulation can update the buffer content without have the buffer
-> moved or evicted. Update fbdev-generic to use vmap_local helpers,
-> which fix amdgpu. The idea of adding a "local vmap" has previously been
-> attempted at [3] in a different form.
->
-> Patch 11 adds implicit pinning to the DRM client's regular vmap
-> helper so that long-term vmap'ed buffers won't be evicted. This only
-> affects fbdev-dma, but GEM DMA helpers don't require pinning. So
-> there are no practical changes.
->
-> Patches 12 and 13 remove implicit pinning from the vmap and vunmap
-> operations in gem-vram and qxl. These pin operations are not supposed
-> to be part of vmap code, but were required to keep the buffers in place
-> for fbdev emulation. With the conversion o ffbdev-generic to to
-> vmap_local helpers, that code can finally be removed.
->
-> Tested with amdgpu, nouveau, radeon, simpledrm and vc4.
->
-> [1] https://patchwork.freedesktop.org/series/106371/
-> [2] https://patchwork.freedesktop.org/series/116001/
-> [3] https://patchwork.freedesktop.org/series/84732/
->
-> Thomas Zimmermann (13):
->   drm/gem-shmem: Acquire reservation lock in GEM pin/unpin callbacks
->   drm/gem-vram: Acquire reservation lock in GEM pin/unpin callbacks
->   drm/msm: Provide msm_gem_get_pages_locked()
->   drm/msm: Acquire reservation lock in GEM pin/unpin callback
->   drm/nouveau: Provide nouveau_bo_{pin,unpin}_locked()
->   drm/nouveau: Acquire reservation lock in GEM pin/unpin callbacks
->   drm/qxl: Provide qxl_bo_{pin,unpin}_locked()
->   drm/qxl: Acquire reservation lock in GEM pin/unpin callbacks
->   drm/gem: Acquire reservation lock in drm_gem_{pin/unpin}()
->   drm/fbdev-generic: Fix locking with drm_client_buffer_vmap_local()
->   drm/client: Pin vmap'ed GEM buffers
->   drm/gem-vram: Do not pin buffer objects for vmap
->   drm/qxl: Do not pin buffer objects for vmap
->
->  drivers/gpu/drm/drm_client.c            |  92 ++++++++++++++++++---
->  drivers/gpu/drm/drm_fbdev_generic.c     |   4 +-
->  drivers/gpu/drm/drm_gem.c               |  34 +++++++-
->  drivers/gpu/drm/drm_gem_shmem_helper.c  |   6 +-
->  drivers/gpu/drm/drm_gem_vram_helper.c   | 101 ++++++++++--------------
->  drivers/gpu/drm/drm_internal.h          |   2 +
->  drivers/gpu/drm/loongson/lsdc_gem.c     |  13 +--
->  drivers/gpu/drm/msm/msm_gem.c           |  20 ++---
->  drivers/gpu/drm/msm/msm_gem.h           |   4 +-
->  drivers/gpu/drm/msm/msm_gem_prime.c     |  20 +++--
->  drivers/gpu/drm/nouveau/nouveau_bo.c    |  43 +++++++---
->  drivers/gpu/drm/nouveau/nouveau_bo.h    |   2 +
->  drivers/gpu/drm/nouveau/nouveau_prime.c |   8 +-
->  drivers/gpu/drm/qxl/qxl_object.c        |  26 +++---
->  drivers/gpu/drm/qxl/qxl_object.h        |   2 +
->  drivers/gpu/drm/qxl/qxl_prime.c         |   4 +-
->  drivers/gpu/drm/radeon/radeon_prime.c   |  11 ---
->  drivers/gpu/drm/vmwgfx/vmwgfx_gem.c     |  25 ++----
->  include/drm/drm_client.h                |  10 +++
->  include/drm/drm_gem.h                   |   3 +
->  include/drm/drm_gem_shmem_helper.h      |   7 +-
->  21 files changed, 265 insertions(+), 172 deletions(-)
->
->
-> base-commit: 7291e2e67dff0ff573900266382c9c9248a7dea5
-> prerequisite-patch-id: bdfa0e6341b30cc9d7647172760b3473007c1216
-> prerequisite-patch-id: bc27ac702099f481890ae2c7c4a9c531f4a62d64
-> prerequisite-patch-id: f5d4bf16dc45334254527c2e31ee21ba4582761c
-> prerequisite-patch-id: 734c87e610747779aa41be12eb9e4c984bdfa743
-> prerequisite-patch-id: 0aa359f6144c4015c140c8a6750be19099c676fb
-> prerequisite-patch-id: c67e5d886a47b7d0266d81100837557fda34cb24
-> prerequisite-patch-id: cbc453ee02fae02af22fbfdce56ab732c7a88c36
-> --
-> 2.43.2
+> I missed that TTM doesn't pin BO on vmap() and now surprised to see it.
+> It should be a rather serious problem requiring backporting of the
+> fixes, but I don't see the fixes tags on the patches (?)
+
+No chance TBH. The old code has worked for years and backporting all 
+this would require your vmap patches at a minimum.
+
+Except maybe for amdgpu. It uses fbdev-generic, which requires pinning, 
+but amdgpu doesn't pin. That looks fishy, but I'm not aware of any bug 
+reports either. I guess, a quick workaround could fix older amdgpu if 
+necessary.
+
+Best regards
+Thomas
+
 >
 
-That's a really nice cleanup! I already gave a r-b for 9/13. For the rest:
-Acked-by: Zack Rusin <zack.rusin@broadcom.com>
+-- 
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstrasse 146, 90461 Nuernberg, Germany
+GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
+HRB 36809 (AG Nuernberg)
 
-z
