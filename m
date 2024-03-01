@@ -2,56 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE54186E027
-	for <lists+nouveau@lfdr.de>; Fri,  1 Mar 2024 12:26:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D9DF86E5EB
+	for <lists+nouveau@lfdr.de>; Fri,  1 Mar 2024 17:44:21 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E97EE10ECA5;
-	Fri,  1 Mar 2024 11:26:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 12B9E10EC4F;
+	Fri,  1 Mar 2024 16:44:20 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="DbdPbgLR";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="2+MCDChq";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6881910E2EA;
- Fri,  1 Mar 2024 11:26:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
- s=20170329;
- h=In-Reply-To:Cc:References:To:Subject:From:MIME-Version:Date:
- Message-ID:Content-Type:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=9zGj0u7K/llTIdI+zCbw5MSt0B627m1u3Gyazm8fnG0=; b=DbdPbgLRFv9Jr4Na/vkh9jkbkh
- a2ZUqeXZMWz+dJI5mVrEl3Flq8+0yDCeOl3aMpafSme5Mn3lxL+H+sU8rxp9vx7EJ3/xhSDwGRCqg
- 7S5tyfohr4TKlza911E06IvGnDJlfUjzTML/AuO4+ykWVRdwpgF6nzkUak7xltmf7eh0KFf3JcFvN
- dSP+Pk+u724DmUDBLm374IABVjo0vffvBoX75YXnZthpGu6Mgu7g89dasIwRD3lPKGnvDJAvkE+C/
- 5fjjP9wxg9OXU9m2Z6iVeS/lPS/pAfTKJK+6kCJF2aLR4Nj7KM5rh7x+CrfwRJv2WpZCA/p9jRh9H
- TttfjN4w==;
-Received: from c-71-59-88-35.hsd1.nj.comcast.net ([71.59.88.35]
- helo=[192.168.1.99]) by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
- id 1rg11b-0051OZ-0a; Fri, 01 Mar 2024 12:25:59 +0100
-Content-Type: multipart/alternative;
- boundary="------------PdOyCBePms0bkn01b4OZdjuV"
-Message-ID: <08f8a967-25e1-4362-be38-3f1b050ec6f2@igalia.com>
-Date: Fri, 1 Mar 2024 06:25:53 -0500
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [46.235.227.194])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 31A6310EB34;
+ Fri,  1 Mar 2024 16:44:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1709311456;
+ bh=g8MDAPa9ELVeta78bCU6vupJUIdfsNOxvkK6Oibr55Q=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=2+MCDChq+ExP6DxPQSfTJIUDZbCwv3b0vuXu4KLe76ogMlJsjF3Pf7dlykMkroSlx
+ AbzWFFQUqsZM5iWgOCDb7NH6MED5S594I/D88HxrPCrtj/LQyXI5I8edwRG3iMW4TD
+ kUwXOhQqBznTo/JR0iCccWzlbGt/g5Rm7W80zu/rvUGdwuaWIDI0zANURZWoAWC7Ng
+ 5sdQXPvmGBLR36YOkV6OYEEGjP85ReLsS+EgdwJFSG1oBR3CWnaYsy3qfMTsp2hhLJ
+ 6ljD9wX/Rd7FxUuiFQnkvrzP6sia1wSZm1+zEo53G3VKfnmev8SHDG1EOzbKNeH5KE
+ y9xxRHtmFddPQ==
+Received: from [100.109.49.129] (cola.collaboradmins.com [195.201.22.229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: dmitry.osipenko)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id CA69837813F2;
+ Fri,  1 Mar 2024 16:44:13 +0000 (UTC)
+Message-ID: <07e10e3f-9e48-4b0d-b320-fffdece23a2c@collabora.com>
+Date: Fri, 1 Mar 2024 19:44:13 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Christopher Michael <cmichael@igalia.com>
-Subject: 2024 X.Org Board of Directors Elections timeline extended, request
- for nominations
-To: events@lists.x.org, xorg-devel@lists.x.org,
- wayland-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- mesa-dev@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- etnaviv@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- libre-soc-dev@lists.libre-soc.org, elections@x.org, members@x.org,
- xorg@lists.freedesktop.org
-References: <0efcdfe3-ea9e-43e5-ab07-6d69dca2c04a@igalia.com>
+Subject: Re: [PATCH 00/13] drm: Fix reservation locking for pin/unpin and
+ console
 Content-Language: en-US
-Cc: board <board@foundation.x.org>
-In-Reply-To: <0efcdfe3-ea9e-43e5-ab07-6d69dca2c04a@igalia.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
+ airlied@gmail.com, mripard@kernel.org, maarten.lankhorst@linux.intel.com,
+ christian.koenig@amd.com, sumit.semwal@linaro.org, robdclark@gmail.com,
+ quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org, sean@poorly.run,
+ marijn.suijten@somainline.org, suijingfeng@loongson.cn, kherbst@redhat.com,
+ lyude@redhat.com, dakr@redhat.com, airlied@redhat.com, kraxel@redhat.com,
+ alexander.deucher@amd.com, Xinhui.Pan@amd.com, zack.rusin@broadcom.com,
+ bcm-kernel-feedback-list@broadcom.com
+Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org
+References: <20240227113853.8464-1-tzimmermann@suse.de>
+ <d854f70b-1d62-4da7-bfbd-2184456d1d25@collabora.com>
+ <cd01e963-dd4d-4554-9feb-1750f72cc260@suse.de>
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+In-Reply-To: <cd01e963-dd4d-4554-9feb-1750f72cc260@suse.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,127 +73,107 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
---------------PdOyCBePms0bkn01b4OZdjuV
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+On 2/28/24 11:19, Thomas Zimmermann wrote:
+> Hi
+> 
+> Am 27.02.24 um 19:14 schrieb Dmitry Osipenko:
+>> Hello,
+>>
+>> Thank you for the patches!
+>>
+>> On 2/27/24 13:14, Thomas Zimmermann wrote:
+>>> Dma-buf locking semantics require the caller of pin and unpin to hold
+>>> the buffer's reservation lock. Fix DRM to adhere to the specs. This
+>>> enables to fix the locking in DRM's console emulation. Similar changes
+>>> for vmap and mmap have been posted at [1][2]
+>>>
+>>> Most DRM drivers and memory managers acquire the buffer object's
+>>> reservation lock within their GEM pin and unpin callbacks. This
+>>> violates dma-buf locking semantics. We get away with it because PRIME
+>>> does not provide pin/unpin, but attach/detach, for which the locking
+>>> semantics is correct.
+>>>
+>>> Patches 1 to 8 rework DRM GEM code in various implementations to
+>>> acquire the reservation lock when entering the pin and unpin callbacks.
+>>> This prepares them for the next patch. Drivers that are not affected
+>>> by these patches either don't acquire the reservation lock (amdgpu)
+>>> or don't need preparation (loongson).
+>>>
+>>> Patch 9 moves reservation locking from the GEM pin/unpin callbacks
+>>> into drm_gem_pin() and drm_gem_unpin(). As PRIME uses these functions
+>>> internally it still gets the reservation lock.
+>>>
+>>> With the updated GEM callbacks, the rest of the patchset fixes the
+>>> fbdev emulation's buffer locking. Fbdev emulation needs to keep its
+>>> GEM buffer object inplace while updating its content. This required
+>>> a implicit pinning and apparently amdgpu didn't do this at all.
+>>>
+>>> Patch 10 introduces drm_client_buffer_vmap_local() and _vunmap_local().
+>>> The former function map a GEM buffer into the kernel's address space
+>>> with regular vmap operations, but keeps holding the reservation lock.
+>>> The _vunmap_local() helper undoes the vmap and releases the lock. The
+>>> updated GEM callbacks make this possible. Between the two calls, the
+>>> fbdev emulation can update the buffer content without have the buffer
+>>> moved or evicted. Update fbdev-generic to use vmap_local helpers,
+>>> which fix amdgpu. The idea of adding a "local vmap" has previously been
+>>> attempted at [3] in a different form.
+>>>
+>>> Patch 11 adds implicit pinning to the DRM client's regular vmap
+>>> helper so that long-term vmap'ed buffers won't be evicted. This only
+>>> affects fbdev-dma, but GEM DMA helpers don't require pinning. So
+>>> there are no practical changes.
+>>>
+>>> Patches 12 and 13 remove implicit pinning from the vmap and vunmap
+>>> operations in gem-vram and qxl. These pin operations are not supposed
+>>> to be part of vmap code, but were required to keep the buffers in place
+>>> for fbdev emulation. With the conversion o ffbdev-generic to to
+>>> vmap_local helpers, that code can finally be removed.
+>> Isn't it a common behaviour for all DRM drivers to implicitly pin BO
+>> while it's vmapped? I was sure it should be common /o\
+> 
+> That's what I originally thought as well, but the intention is for pin
+> and vmap to be distinct operation. So far each driver has been
+> different, as you probably know best from your vmap refactoring. :)
+> 
+>>
+>> Why would you want to kmap BO that isn't pinned?
+> 
+> Pinning places the buffer object for the GPU. As a side effect, the
+> buffer is then kept in place, which enables vmap. So pinning only makes
+> sense for buffer objects that never move (shmem, dma). That's what patch
+> 11 is for.
+> 
+>>
+>> Shouldn't TTM's vmap() be changed to do the pinning?
+> 
+> I don't think so. One problem is that pinning needs a memory area (vram,
+> GTT, system ram, etc) specified, which vmap simply doesn't know about.
+> That has been a problem for fbdev emulation at some point. Our fbdev
+> code tried to pin as part of vmap, but chose the wrong area and suddenly
+> the GPU could not see the buffer object any longer.  So the next best
+> thing for vmap was to pin the buffer object where ever it is currently
+> located. That is what gem-vram and qxl did so far. And of course, the
+> fbdev code needs to unpin and vunmap the buffer object quickly, so that
+> it can be relocated if the GPU needs it.  Hence, the vmap_local
+> interface removes such short-term pinning in favor of holding the
+> reservation lock.
+> 
+>>
+>> I missed that TTM doesn't pin BO on vmap() and now surprised to see it.
+>> It should be a rather serious problem requiring backporting of the
+>> fixes, but I don't see the fixes tags on the patches (?)
+> 
+> No chance TBH. The old code has worked for years and backporting all
+> this would require your vmap patches at a minimum.
+> 
+> Except maybe for amdgpu. It uses fbdev-generic, which requires pinning,
+> but amdgpu doesn't pin. That looks fishy, but I'm not aware of any bug
+> reports either. I guess, a quick workaround could fix older amdgpu if
+> necessary.
 
-We are seeking nominations for candidates for election to the X.org 
-Foundation Board of Directors. However, as we presently do not have 
-enough nominations to start the election - the decision has been made to 
-extend the timeline by 2 weeks. Note this is a fairly regular part of 
-the elections process.
+Thanks! I'll make another pass on the patches on Monday
 
+-- 
+Best regards,
+Dmitry
 
-The new deadline for nominations to the X.org Board of Directors is 
-23:59 UTC on 11 March 2024
-
-
-The Board consists of directors elected from the membership. Each year, 
-an election is held to bring the total number of directors to eight. The 
-four members receiving the highest vote totals will serve as directors 
-for two year terms.
-
-The directors who received two year terms starting in 2023 were 
-Arkadiusz Hiler, Christopher Michael, Lyude Paul, and Daniel Vetter. 
-They will continue to serve until their term ends in 2024. Current 
-directors whose term expires in 2024 are Emma Anholt, Mark Filion, 
-Ricardo Garcia, and Alyssa Rosenzweig.
-<https://rosenzweig.io/>
-
-A director is expected to participate in the fortnightly IRC meeting to 
-discuss current business and to attend the annual meeting of the X.Org 
-Foundation, which will be held at a location determined in advance by 
-the Board of Directors.
-
-A member may nominate themselves or any other member they feel is 
-qualified. Nominations should be sent to the Election Committee at 
-elections@x.org.
-
-Nominees shall be required to be current members of the X.Org 
-Foundation, and submit a personal statement of up to 200 words that will 
-be provided to prospective voters. The collected statements, along with 
-the statement of contribution to the X.Org Foundation in the member's 
-account page on http://members.x.org, will be made available to all 
-voters to help them make their voting decisions.
-
-Nominations and completed personal statements must be received no later 
-than 23:59 UTC on 11 March 2024.
-
-The slate of candidates will be published 18 March 2024 and candidate 
-Q&A will begin then. The deadline for Xorg membership applications and 
-renewals has also been extended 2 weeks and is now 25 March 2024.
-
-
-Cheers,
-
-Christopher Michael, on behalf of the X.Org BoD
-
-
---------------PdOyCBePms0bkn01b4OZdjuV
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p>We are seeking nominations for candidates for election to the
-      X.org Foundation Board of Directors. However, as we presently do
-      not have enough nominations to start the election - the decision
-      has been made to extend the timeline by 2 weeks. Note this is a
-      fairly regular part of the elections process.</p>
-    <p><br>
-    </p>
-    <p>The new deadline for nominations to the X.org Board of Directors
-      is 23:59 UTC on 11 March 2024</p>
-    <br>
-    The Board consists of directors elected from the membership. Each
-    year, an election is held to bring the total number of directors to
-    eight. The four members receiving the highest vote totals will serve
-    as directors for two year terms.
-    <p>The directors who received two year terms starting in 2023 were <span
-        class="createlink">Arkadiusz Hiler, </span><span
-        class="createlink">Christopher Michael, </span><span
-        class="createlink">Lyude Paul, and Daniel Vetter</span>. They
-      will continue to serve until their term ends in 2024. Current
-      directors whose term expires in 2024 are <span class="createlink">Emma
-        Anholt, </span><span class="createlink">Mark Filion, </span><span
-        class="createlink">Ricardo Garcia, and Alyssa Rosenzweig.</span><a
-        href="https://rosenzweig.io/"><br>
-      </a></p>
-    <p>A director is expected to participate in the fortnightly IRC
-      meeting to discuss current business and to attend the annual
-      meeting of the X.Org Foundation, which will be held at a location
-      determined in advance by the Board of Directors.</p>
-    <p>A member may nominate themselves or any other member they feel is
-      qualified. Nominations should be sent to the Election Committee at
-      <a class="moz-txt-link-abbreviated moz-txt-link-freetext"
-        href="mailto:elections@x.org">elections@x.org</a>.<br>
-    </p>
-    <p>Nominees shall be required to be current members of the X.Org
-      Foundation, and submit a personal statement of up to 200 words
-      that will be provided to prospective voters. The collected
-      statements, along with the statement of contribution to the X.Org
-      Foundation in the member's account page on <a
-        class="moz-txt-link-freetext" href="http://members.x.org">http://members.x.org</a>,
-      will be made available to all voters to help them make their
-      voting decisions.</p>
-    <p>Nominations and completed personal statements must be received no
-      later than 23:59 UTC on 11 March 2024.</p>
-    <p>The slate of candidates will be published 18 March 2024 and
-      candidate Q&amp;A will begin then. The deadline for Xorg
-      membership applications and renewals has also been extended 2
-      weeks and is now 25 March 2024.</p>
-    <p><br>
-    </p>
-    <p>Cheers,</p>
-    <p>Christopher Michael, on behalf of the X.Org BoD</p>
-    <p><br>
-    </p>
-  </body>
-</html>
-
---------------PdOyCBePms0bkn01b4OZdjuV--
