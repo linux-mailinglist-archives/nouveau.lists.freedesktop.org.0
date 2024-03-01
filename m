@@ -2,84 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C3B986D6B2
-	for <lists+nouveau@lfdr.de>; Thu, 29 Feb 2024 23:15:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C989586DA4F
+	for <lists+nouveau@lfdr.de>; Fri,  1 Mar 2024 04:42:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D273310E657;
-	Thu, 29 Feb 2024 22:15:48 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="IvzVzhOE";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id BEA0B10EA5B;
+	Fri,  1 Mar 2024 03:42:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 51A4B10E65D
- for <nouveau@lists.freedesktop.org>; Thu, 29 Feb 2024 22:15:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1709244945;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=JxzxylpBcQrFOzJNsTe++esQjoo61/Ju2PmGLlHu4fA=;
- b=IvzVzhOEr9iy7kR1beu4HWwbKaHo4GA4XtVg1RVvzmksQVI3PQAwHOWcrDxucd4yETfLjM
- ZKIkYMDmqpK8SYrbGg2x6ruDAJI3l79V9IX0tLKdH4qKGFdYayQCfr7xdZ138arQvTEkJH
- jsEJwaNNIQYvWp/uzmLI5nbgXzhEDSI=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-623-d4x_7ClgNRaz0tziaDsFWg-1; Thu, 29 Feb 2024 17:15:44 -0500
-X-MC-Unique: d4x_7ClgNRaz0tziaDsFWg-1
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-33dcd5d117fso733710f8f.1
- for <nouveau@lists.freedesktop.org>; Thu, 29 Feb 2024 14:15:44 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709244943; x=1709849743;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JxzxylpBcQrFOzJNsTe++esQjoo61/Ju2PmGLlHu4fA=;
- b=Zh4UqUi4z4fDFX8VREUU0fXSQvk/dq+Xk/+pglUlfllTl7v3/kEVDTKBUgM8YlLiYB
- rNdALInGVWEhV3L+fVWgXXPfI/AUoC08m7mAQieBhCqWbRmBsahDF/D3wO3gEYHCgF6q
- Ka+26oDWJWHDqa84hPP4M/c7qi0tzzK7e6sKvXOA4W8iP2wiwqur14v2oscpAVBBud0I
- BQziLXfZXYrHVASWtiesfC+Ab048A2Gn991L+vH6Q6YslVczjVm3HKK4hajrAAmVuJWn
- a9a/ENbit4VedGPfpc1O6B1xs+gI7zx/8VtouCw9PiQ8Fj5yoVMphQV1bqO8P90e/Bo+
- 4qdQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUReNc1dlFqcWrqknVvwGGqodLMLkCRkjVqNFkar+rVmDpkj5XkIdH//ns1VzMu7pwbIOYl/WfY0Eg0ClvogXCO6GQWIcglf8OTplrqlw==
-X-Gm-Message-State: AOJu0Yw7unSvTlVrOZuD44KWOG+x0wE2iXdteuriVafCOIMKiEtBaAnS
- uhgDVYhT0lsrDa53BEE6rzWPaVBCj810AtLbrVUXHsyy8kXejhpCby7WncmEYxtGKnnvrT3F3zi
- IU1WfMzedQnSXNIArBQtlFG54a2bvbwv/bB+6nDmk9ltK7T58l1+1WjVucoPqXvY=
-X-Received: by 2002:adf:cb8a:0:b0:33d:90c2:c7f4 with SMTP id
- q10-20020adfcb8a000000b0033d90c2c7f4mr287096wrh.14.1709244943312; 
- Thu, 29 Feb 2024 14:15:43 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHcz9vGXGguaieMpWLarYYaVZdAygPksN14G0npU71tonoiQj+m0rH5nPM+eA44z8+uASZcPQ==
-X-Received: by 2002:adf:cb8a:0:b0:33d:90c2:c7f4 with SMTP id
- q10-20020adfcb8a000000b0033d90c2c7f4mr287084wrh.14.1709244942879; 
- Thu, 29 Feb 2024 14:15:42 -0800 (PST)
-Received: from hs01.dakr.org (hs01.dk-develop.de. [2a02:c207:3002:6234::1])
- by smtp.gmail.com with ESMTPSA id
- j3-20020adff003000000b0033e01e397d6sm2821355wro.54.2024.02.29.14.15.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Feb 2024 14:15:42 -0800 (PST)
-Date: Thu, 29 Feb 2024 23:15:37 +0100
-From: Danilo Krummrich <dakr@redhat.com>
-To: Timur Tabi <ttabi@nvidia.com>
-Cc: "airlied@redhat.com" <airlied@redhat.com>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "lyude@redhat.com" <lyude@redhat.com>
-Subject: Re: [PATCH] [v4][RFC] drm/nouveau: expose GSP-RM logging buffers via
- debugfs
-Message-ID: <ZeECCUuvuVetee3s@hs01.dakr.org>
-References: <20240226210245.4022456-1-ttabi@nvidia.com>
- <510003da-0641-4dea-84ee-3b686644583c@redhat.com>
- <53f13b26c43447981668232ff27ce4211c4b6197.camel@nvidia.com>
+Received: from us-smtp-delivery-44.mimecast.com
+ (us-smtp-delivery-44.mimecast.com [207.211.30.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A509210EA58
+ for <nouveau@lists.freedesktop.org>; Fri,  1 Mar 2024 03:42:45 +0000 (UTC)
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-479-qVE-bLeiN_izOndk6cAIJw-1; Thu,
+ 29 Feb 2024 22:42:41 -0500
+X-MC-Unique: qVE-bLeiN_izOndk6cAIJw-1
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 18F773C0F18F;
+ Fri,  1 Mar 2024 03:42:41 +0000 (UTC)
+Received: from dreadlord.lan (unknown [10.64.136.48])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0F3E9492BC6;
+ Fri,  1 Mar 2024 03:42:39 +0000 (UTC)
+From: Dave Airlie <airlied@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Subject: [PATCH 1/2] nouveau: lock the client object tree.
+Date: Fri,  1 Mar 2024 13:42:37 +1000
+Message-ID: <20240301034238.3041715-1-airlied@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <53f13b26c43447981668232ff27ce4211c4b6197.camel@nvidia.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.9
 X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-Mimecast-Originator: gmail.com
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,244 +54,207 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Feb 27, 2024 at 05:27:54PM +0000, Timur Tabi wrote:
-> On Tue, 2024-02-27 at 15:20 +0100, Danilo Krummrich wrote:
-> > Hi Timur,
-> > 
-> > thanks for re-working this patch!
-> > 
-> > On 2/26/24 22:02, Timur Tabi wrote:
-> > > The LOGINIT, LOGINTR, LOGRM, and LOGPMU buffers are circular buffers
-> > > that have printf-like logs from GSP-RM and PMU encoded in them.
-> > > 
-> > > LOGINIT, LOGINTR, and LOGRM are allocated by Nouveau and their DMA
-> > > addresses are passed to GSP-RM during initialization.  The buffers are
-> > > required for GSP-RM to initialize properly.
-> > > 
-> > > LOGPMU is also allocated by Nouveau, but its contents are updated
-> > > when Nouveau receives an NV_VGPU_MSG_EVENT_UCODE_LIBOS_PRINT RPC from
-> > > GSP-RM.  Nouveau then copies the RPC to the buffer.
-> > > 
-> > > The messages are encoded as an array of variable-length structures that
-> > > contain the parameters to an NV_PRINTF call.  The format string and
-> > > parameter count are stored in a special ELF image that contains only
-> > > logging strings.  This image is not currently shipped with the Nvidia
-> > > driver.
-> > > 
-> > > There are two methods to extract the logs.
-> > > 
-> > > OpenRM tries to load the logging ELF, and if present, parses the log
-> > > buffers in real time and outputs the strings to the kernel console.
-> > > 
-> > > Alternatively, and this is the method used by this patch, the buffers
-> > > can be exposed to user space, and a user-space tool (along with the
-> > > logging ELF image) can parse the buffer and dump the logs.
-> > > 
-> > > This method has the advantage that it allows the buffers to be parsed
-> > > even when the logging ELF file is not available to the user.  However,
-> > > it has the disadvantage the debubfs entries need to remain until the
-> > 
-> > Typo in "debugfs".
-> 
-> Thanks.
-> 
-> > 
-> > > driver is unloaded.
-> > > 
-> > > The buffers are exposed via debugfs.  The debugfs entries must be
-> > > created before GSP-RM is started, to ensure that they are available
-> > > during GSP-RM initialization.
-> > 
-> > Generally agree. Just wondering why you are pointing this out
-> > explicitly.
-> 
-> There is so much about GSP-RM initialization that is undocumented that I
-> just like documenting as much as I can.  
-> 
-> Now that I think about, that statement isn't technically true.  If you don't
-> have debugfs at all, GSP-RM will still boot.  I'll delete it.
-> 
-> > What if we'd create them directly after GSP init? Is there anything
-> > subtle to that?
-> 
-> No.  I supposed we could technically create them later, I just don't see an
-> advantage to that.  
-> 
-> > > If GSP-RM fails to initialize, then Nouveau immediately shuts down
-> > > the GSP interface.  This would normally also deallocate the logging
-> > > buffers, thereby preventing the user from capturing the debug logs.
-> > > To avoid this, use the keep-gsp-logging command line parameter.  If
-> > 
-> > "introduce the keep-gsp-logging command line parameter"
-> 
-> Ok.
-> 
-> > > specified, and if at least one logging buffer has contents, then
-> > > Nouveau will migrate these buffers into new debugfs entries that are
-> > > retained until the driver unloads.
-> > > 
-> > > An end-user can capture the logs using the following commands:
-> > > 
-> > >      cp /sys/kernel/debug/dri/<path>/loginit loginit
-> > >      cp /sys/kernel/debug/dri/<path>/logrm logrm
-> > >      cp /sys/kernel/debug/dri/<path>/logintr logintr
-> > >      cp /sys/kernel/debug/dri/<path>/logpmu logpmu
-> > > 
-> > > where <path> is the PCI ID of the GPU (e.g. 0000:65:00.0).
-> > > 
-> > > Since LOGPMU is not needed for normal GSP-RM operation, it is only
-> > > created if debugfs is available.  Otherwise, the
-> > > NV_VGPU_MSG_EVENT_UCODE_LIBOS_PRINT RPCs are ignored.
-> > 
-> > The commit message and some DOC comments contains trailing spaces 
-> > between words.
-> 
-> Ok, I'll review and fix.
-> 
-> > >   
-> > > +/**
-> > > + * nvkm_gsp_log - structure for tracking GSP-RM logging buffers
-> > > + * @head: list head
-> > > + * @shutdown: pointer to function to call to clean up
-> > > + *
-> > > + * One of these is created for each GPU upon GSP shutdown if the
-> > > + * "keep_gsp_logging" command-line parameter is specified.  This is used to
-> > > + * track the alternative debugfs entries for the GSP-RM logs.
-> > > + */
-> > > +struct nvkm_gsp_log {
-> > 
-> > Maybe better to name this structure nvif_log instead and move it to
-> > include/nvif/log.h for consistency. It's not really limited GSP,
-> > although I don't see what else it could ever be used for.
-> 
-> Well, that's why I named it that.  But technically it's not even limited to
-> logging.  It would be nice if the kernel had a general mechanism for
-> callbacks on driver exit, like it does for system shutdown.
-> 
-> I supposed I could create a notifier chain instead.  How about that?
+From: Dave Airlie <airlied@redhat.com>
 
-Not sure if we need to generalize it even more, but I'm fine with that too. I'd
-just want to keep nvif as interface for consistency.
+It appears the client object tree has no locking unless I've missed
+something else. Fix races around adding/removing client objects,
+mostly vram bar mappings.
 
-> 
-> > > +	dir_init = debugfs_create_blob("loginit", 0444, dir, &gsp->blob_init);
-> > > +	if (IS_ERR(dir_init)) {
-> > > +		nvkm_error(&gsp->subdev, "failed to create loginit debugfs entry\n");
-> > > +		goto error;
-> > 
-> > If we hit this, dir_intr and dir_rm are uninitialized.
-> 
-> Thanks!
-> 
-> > >   
-> > > +#ifdef CONFIG_DEBUG_FS
-> > > +
-> > > +/*
-> > > + * If GSP-RM load fails, then the GSP nvkm object will be deleted, the
-> > > + * logging debugfs entries will be deleted, and it will not be possible to
-> > > + * debug the load failure.  The keep_gsp_logging parameter tells Nouveau
-> > > + * to copy the logging buffers to new debugfs entries, and these entries are
-> > > + * retained until the driver unloads.
-> > > + */
-> > > +static bool keep_gsp_logging;
-> > > +module_param(keep_gsp_logging, bool, 0444);
-> > > +MODULE_PARM_DESC(keep_gsp_logging,
-> > > +		 "Migrate the GSP-RM logging debugfs entries upon exit");
-> > 
-> > What if we start supporting multiple firmware versions? I think we
-> > should move this module_param() either into nouveau_drm.c and pipe it
-> > through nvkm_device_ctor() or move to nvkm/engine/device/base.c and add
-> > it to struct nvkm_device there.
-> 
-> I'm not fond of moving GSP-specific code into non-GSP files.
+ 4562.099306] general protection fault, probably for non-canonical address =
+0x6677ed422bceb80c: 0000 [#1] PREEMPT SMP PTI
+[ 4562.099314] CPU: 2 PID: 23171 Comm: deqp-vk Not tainted 6.8.0-rc6+ #27
+[ 4562.099324] Hardware name: Gigabyte Technology Co., Ltd. Z390 I AORUS PR=
+O WIFI/Z390 I AORUS PRO WIFI-CF, BIOS F8 11/05/2021
+[ 4562.099330] RIP: 0010:nvkm_object_search+0x1d/0x70 [nouveau]
+[ 4562.099503] Code: 90 90 90 90 90 90 90 90 90 90 90 90 90 66 0f 1f 00 0f =
+1f 44 00 00 48 89 f8 48 85 f6 74 39 48 8b 87 a0 00 00 00 48 85 c0 74 12 <48=
+> 8b 48 f8 48 39 ce 73 15 48 8b 40 10 48 85 c0 75 ee 48 c7 c0 fe
+[ 4562.099506] RSP: 0000:ffffa94cc420bbf8 EFLAGS: 00010206
+[ 4562.099512] RAX: 6677ed422bceb814 RBX: ffff98108791f400 RCX: ffff9810f26=
+b8f58
+[ 4562.099517] RDX: 0000000000000000 RSI: ffff9810f26b9158 RDI: ffff9810879=
+1f400
+[ 4562.099519] RBP: ffff9810f26b9158 R08: 0000000000000000 R09: 00000000000=
+00000
+[ 4562.099521] R10: ffffa94cc420bc48 R11: 0000000000000001 R12: ffff9810f02=
+a7cc0
+[ 4562.099526] R13: 0000000000000000 R14: 00000000000000ff R15: 00000000000=
+00007
+[ 4562.099528] FS:  00007f629c5017c0(0000) GS:ffff98142c700000(0000) knlGS:=
+0000000000000000
+[ 4562.099534] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 4562.099536] CR2: 00007f629a882000 CR3: 000000017019e004 CR4: 00000000003=
+706f0
+[ 4562.099541] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 00000000000=
+00000
+[ 4562.099542] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 00000000000=
+00400
+[ 4562.099544] Call Trace:
+[ 4562.099555]  <TASK>
+[ 4562.099573]  ? die_addr+0x36/0x90
+[ 4562.099583]  ? exc_general_protection+0x246/0x4a0
+[ 4562.099593]  ? asm_exc_general_protection+0x26/0x30
+[ 4562.099600]  ? nvkm_object_search+0x1d/0x70 [nouveau]
+[ 4562.099730]  nvkm_ioctl+0xa1/0x250 [nouveau]
+[ 4562.099861]  nvif_object_map_handle+0xc8/0x180 [nouveau]
+[ 4562.099986]  nouveau_ttm_io_mem_reserve+0x122/0x270 [nouveau]
+[ 4562.100156]  ? dma_resv_test_signaled+0x26/0xb0
+[ 4562.100163]  ttm_bo_vm_fault_reserved+0x97/0x3c0 [ttm]
+[ 4562.100182]  ? __mutex_unlock_slowpath+0x2a/0x270
+[ 4562.100189]  nouveau_ttm_fault+0x69/0xb0 [nouveau]
+[ 4562.100356]  __do_fault+0x32/0x150
+[ 4562.100362]  do_fault+0x7c/0x560
+[ 4562.100369]  __handle_mm_fault+0x800/0xc10
+[ 4562.100382]  handle_mm_fault+0x17c/0x3e0
+[ 4562.100388]  do_user_addr_fault+0x208/0x860
+[ 4562.100395]  exc_page_fault+0x7f/0x200
+[ 4562.100402]  asm_exc_page_fault+0x26/0x30
+[ 4562.100412] RIP: 0033:0x9b9870
+[ 4562.100419] Code: 85 a8 f7 ff ff 8b 8d 80 f7 ff ff 89 08 e9 18 f2 ff ff =
+0f 1f 84 00 00 00 00 00 44 89 32 e9 90 fa ff ff 0f 1f 84 00 00 00 00 00 <44=
+> 89 32 e9 f8 f1 ff ff 0f 1f 84 00 00 00 00 00 66 44 89 32 e9 e7
+[ 4562.100422] RSP: 002b:00007fff9ba2dc70 EFLAGS: 00010246
+[ 4562.100426] RAX: 0000000000000004 RBX: 000000000dd65e10 RCX: 000000fff00=
+00000
+[ 4562.100428] RDX: 00007f629a882000 RSI: 00007f629a882000 RDI: 00000000000=
+00066
+[ 4562.100432] RBP: 00007fff9ba2e570 R08: 0000000000000000 R09: 0000000123d=
+df000
+[ 4562.100434] R10: 0000000000000001 R11: 0000000000000246 R12: 000000007ff=
+fffff
+[ 4562.100436] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000000=
+00000
+[ 4562.100446]  </TASK>
+[ 4562.100448] Modules linked in: nf_conntrack_netbios_ns nf_conntrack_broa=
+dcast nft_fib_inet nft_fib_ipv4 nft_fib_ipv6 nft_fib nft_reject_inet nf_rej=
+ect_ipv4 nf_reject_ipv6 nft_reject nft_ct nft_chain_nat nf_nat nf_conntrack=
+ nf_defrag_ipv6 nf_defrag_ipv4 ip_set nf_tables libcrc32c nfnetlink cmac bn=
+ep sunrpc iwlmvm intel_rapl_msr intel_rapl_common snd_sof_pci_intel_cnl x86=
+_pkg_temp_thermal intel_powerclamp snd_sof_intel_hda_common mac80211 corete=
+mp snd_soc_acpi_intel_match kvm_intel snd_soc_acpi snd_soc_hdac_hda snd_sof=
+_pci snd_sof_xtensa_dsp snd_sof_intel_hda_mlink snd_sof_intel_hda snd_sof k=
+vm snd_sof_utils snd_soc_core snd_hda_codec_realtek libarc4 snd_hda_codec_g=
+eneric snd_compress snd_hda_ext_core vfat fat snd_hda_intel snd_intel_dspcf=
+g irqbypass iwlwifi snd_hda_codec snd_hwdep snd_hda_core btusb btrtl mei_hd=
+cp iTCO_wdt rapl mei_pxp btintel snd_seq iTCO_vendor_support btbcm snd_seq_=
+device intel_cstate bluetooth snd_pcm cfg80211 intel_wmi_thunderbolt wmi_bm=
+of intel_uncore snd_timer mei_me snd ecdh_generic i2c_i801
+[ 4562.100541]  ecc mei i2c_smbus soundcore rfkill intel_pch_thermal acpi_p=
+ad zram nouveau drm_ttm_helper ttm gpu_sched i2c_algo_bit drm_gpuvm drm_exe=
+c mxm_wmi drm_display_helper drm_kms_helper drm crct10dif_pclmul crc32_pclm=
+ul nvme e1000e crc32c_intel nvme_core ghash_clmulni_intel video wmi pinctrl=
+_cannonlake ip6_tables ip_tables fuse
+[ 4562.100616] ---[ end trace 0000000000000000 ]---
 
-I'm not worried too much about that. In fact, I even prefer having module params
-in a single place, wrap them in a global structure such that it can be easily
-distributed throughout the module. However, that's not what Nouveau does.
+Signed-off-by: Dave Airlie <airlied@redhat.com>
+Cc: stable@vger.kernel.org
+---
+ .../drm/nouveau/include/nvkm/core/client.h    |  1 +
+ drivers/gpu/drm/nouveau/nvkm/core/client.c    |  1 +
+ drivers/gpu/drm/nouveau/nvkm/core/object.c    | 21 +++++++++++++++----
+ 3 files changed, 19 insertions(+), 4 deletions(-)
 
-> 
-> I don't see how supporting multiple versions would change things.  I'm
-> assuming you're talking about having the driver support r535 and r550, for
-> example.  In that case, if an r550 gsp.bin is present, then the driver will
-> use that for all GPUs instead of r535.  The command-line parameter would
-> apply to all GPUs anyway.
-
-We might need a r550.c then, since we'd need to deal with the different header
-files if we don't have an abstraction layer yet. However, that's a huge rework
-either way. So, I'm fine keeping it here and move it once needed.
-
-> 
-> Also keep in mind that this option is much safer than in the original
-> version of my patch.  In fact, I was debating changing the code so that, if
-> it detects that GSP-RM failed to initialize, then automatically migrate the
-> debugfs entries, no command-line option needed.
-> 
-> > > +// FIXME: This should be in a header file
-> > > +extern struct list_head gsp_logs;
-> > 
-> > What about include/nvif/log.h? :-)
-> 
-> Sure.
-> 
-> > > +struct r535_gsp_log {
-> > 
-> > Guess we need this abstraction, since we expect that a different
-> > firmware version might change the available log buffers?
-> 
-> Yes, that was my thinking.  We have changed the buffers before, and I think
-> we might change them again.  
-> 
-> > > +/**
-> > > + * is_empty - return true if the logging buffer was never written to
-> > > + * @b: blob wrapper with ->data field pointing to logging buffer
-> > > + *
-> > > + * The first 64-bit field of loginit, and logintr, and logrm is the 'put'
-> > > + * pointer, and it is initialized to 0.  If the pointer is still 0 when
-> > > + * GSP-RM is shut down, that means that it was never written do, so it
-> > > + * can be ignored.
-> > > + *
-> > > + * This test also works for logpmu, even though it doesn't have a put pointer.
-> > > + */
-> > > +static bool is_empty(struct debugfs_blob_wrapper *b)
-> > > +{
-> > > +	uint64_t *put = b->data;
-> > 
-> > Better use u64.
-> 
-> Ok
-> 
-> > 
-> > > +	/* Find the 'dri' root debugfs entry. Every GPU has a dentry under it */
-> > > +	root = debugfs_lookup("dri", NULL);
-> > > +	if (IS_ERR(root)) {
-> > > +		/* No debugfs, or no root dentry for DRM */
-> > 
-> > Maybe print a warning as well?
-> 
-> Sure.
-> 
-> > > +	/* Create a new debugfs root. It has the same name as the old one */
-> > > +	dir = debugfs_create_dir(dev_name(dev), root);
-> > > +	dput(root);
-> > > +	if (IS_ERR(dir)) {
-> > > +		nvkm_error(&gsp->subdev,
-> > > +			"failed to create %s debugfs entry\n", dev_name(dev));
-> > > +		return;
-> > > +	}
-> > > +
-> > > +	log = devm_kzalloc(dev, sizeof(*log), GFP_KERNEL);
-> > 
-> > What if the PCI device is removed before the module is removed?
-> 
-> Ah, for some reason I had it in my head that devm was attached to the
-> driver, not the device.  Which is dumb, because it literally takes a struct
-> device *.
-> 
-> > I think we should just free it in nouveau_drm_exit(). As long as
-> > we keep the convention that struct nvif_log is the first member we 
-> > should be fine. Otherwise we could also just add ::free() callback,
-> > like we have ::shutdown(), which seems to be safer.
-> 
-> Ok, I'll try to come up with something.
-> > 
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/client.h b/drivers/g=
+pu/drm/nouveau/include/nvkm/core/client.h
+index 0d9fc741a719..932c9fd0b2d8 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/core/client.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/core/client.h
+@@ -11,6 +11,7 @@ struct nvkm_client {
+ =09u32 debug;
+=20
+ =09struct rb_root objroot;
++=09spinlock_t obj_lock;
+=20
+ =09void *data;
+ =09int (*event)(u64 token, void *argv, u32 argc);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/core/client.c b/drivers/gpu/drm/n=
+ouveau/nvkm/core/client.c
+index ebdeb8eb9e77..c55662937ab2 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/core/client.c
++++ b/drivers/gpu/drm/nouveau/nvkm/core/client.c
+@@ -180,6 +180,7 @@ nvkm_client_new(const char *name, u64 device, const cha=
+r *cfg, const char *dbg,
+ =09client->device =3D device;
+ =09client->debug =3D nvkm_dbgopt(dbg, "CLIENT");
+ =09client->objroot =3D RB_ROOT;
++=09spin_lock_init(&client->obj_lock);
+ =09client->event =3D event;
+ =09INIT_LIST_HEAD(&client->umem);
+ =09spin_lock_init(&client->lock);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/core/object.c b/drivers/gpu/drm/n=
+ouveau/nvkm/core/object.c
+index 7c554c14e884..5dffb969fc38 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/core/object.c
++++ b/drivers/gpu/drm/nouveau/nvkm/core/object.c
+@@ -30,8 +30,9 @@ nvkm_object_search(struct nvkm_client *client, u64 handle=
+,
+ =09=09   const struct nvkm_object_func *func)
+ {
+ =09struct nvkm_object *object;
+-
++=09unsigned long flags;
+ =09if (handle) {
++=09=09spin_lock_irqsave(&client->obj_lock, flags);
+ =09=09struct rb_node *node =3D client->objroot.rb_node;
+ =09=09while (node) {
+ =09=09=09object =3D rb_entry(node, typeof(*object), node);
+@@ -40,9 +41,12 @@ nvkm_object_search(struct nvkm_client *client, u64 handl=
+e,
+ =09=09=09else
+ =09=09=09if (handle > object->object)
+ =09=09=09=09node =3D node->rb_right;
+-=09=09=09else
++=09=09=09else {
++=09=09=09=09spin_unlock_irqrestore(&client->obj_lock, flags);
+ =09=09=09=09goto done;
++=09=09=09}
+ =09=09}
++=09=09spin_unlock_irqrestore(&client->obj_lock, flags);
+ =09=09return ERR_PTR(-ENOENT);
+ =09} else {
+ =09=09object =3D &client->object;
+@@ -57,16 +61,22 @@ nvkm_object_search(struct nvkm_client *client, u64 hand=
+le,
+ void
+ nvkm_object_remove(struct nvkm_object *object)
+ {
++=09unsigned long flags;
++=09spin_lock_irqsave(&object->client->obj_lock, flags);
+ =09if (!RB_EMPTY_NODE(&object->node))
+ =09=09rb_erase(&object->node, &object->client->objroot);
++=09spin_unlock_irqrestore(&object->client->obj_lock, flags);
+ }
+=20
+ bool
+ nvkm_object_insert(struct nvkm_object *object)
+ {
+-=09struct rb_node **ptr =3D &object->client->objroot.rb_node;
++=09struct rb_node **ptr;
+ =09struct rb_node *parent =3D NULL;
++=09unsigned long flags;
+=20
++=09spin_lock_irqsave(&object->client->obj_lock, flags);
++=09ptr =3D &object->client->objroot.rb_node;
+ =09while (*ptr) {
+ =09=09struct nvkm_object *this =3D rb_entry(*ptr, typeof(*this), node);
+ =09=09parent =3D *ptr;
+@@ -75,12 +85,15 @@ nvkm_object_insert(struct nvkm_object *object)
+ =09=09else
+ =09=09if (object->object > this->object)
+ =09=09=09ptr =3D &parent->rb_right;
+-=09=09else
++=09=09else {
++=09=09=09spin_unlock_irqrestore(&object->client->obj_lock, flags);
+ =09=09=09return false;
++=09=09}
+ =09}
+=20
+ =09rb_link_node(&object->node, parent, ptr);
+ =09rb_insert_color(&object->node, &object->client->objroot);
++=09spin_unlock_irqrestore(&object->client->obj_lock, flags);
+ =09return true;
+ }
+=20
+--=20
+2.43.2
 
