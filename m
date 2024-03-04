@@ -2,57 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC3CD86F8C1
-	for <lists+nouveau@lfdr.de>; Mon,  4 Mar 2024 04:03:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 77709870102
+	for <lists+nouveau@lfdr.de>; Mon,  4 Mar 2024 13:15:09 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 153F810FB25;
-	Mon,  4 Mar 2024 03:03:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E145111209C;
+	Mon,  4 Mar 2024 12:15:07 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UksjCd1W";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="QIoKzumz";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D1B2810FB25;
- Mon,  4 Mar 2024 03:03:11 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id B665A602FA;
- Mon,  4 Mar 2024 03:03:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A7ABC433F1;
- Mon,  4 Mar 2024 03:03:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1709521390;
- bh=qw4NTha07yO8OXxY5DryR/Df1qykKh7rgNuoMQa8woU=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=UksjCd1WShioQl1ydEQDIgqJiksNETrmUKTvjQBRCQBOInBP/57XAAFJPytnzwVEo
- +8aStMsnvcisREJBGp64iiGyu3KlIOpmsaJ199tWX7dwLkP4dkmSC8vcxisH7k96CW
- sKsHSmJILvZZWS5zERBxfB26wRWzRRcan2QrTitBYELLktmA6N9K1idaLKd+8YULTm
- s4EGQ3C9uJ+/do+glf9/c+8IVeoEhdP3ZCNHObhgIS345JS+PKzdkY9G0vvRI0DVqr
- b6HmjR5zvV/snYlfAWpj0X499/DmZ4Y852th/urXAlgwOhlQ3GXeyIw1uq/hzTqrcO
- oXApG1vC+M0lQ==
-Received: by mail-ej1-f48.google.com with SMTP id
- a640c23a62f3a-a4554d4cb62so36277566b.2; 
- Sun, 03 Mar 2024 19:03:10 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCV9/+hKVUEo6svaGj1SeU0zRWSXSot2c/PZWGFV1zxsqnkx3n/cLeE4dlLseprRb0N2/US+jg1tbzSQSGRbfdmpyseRsQbQXHUUPfEVWHQj
-X-Gm-Message-State: AOJu0Yx9A23+kTZj7XNU3+TIR63XDGckjL9klxVTLnUuEmWq4GaA0Tw5
- Y3CHCQbfAo6nWrS4t/RdbOzb9z/40npC8E8MqcvCfG+cNznN2VzJ6Z5Za6mUnhyubRlRRLKDtKj
- /IHo2+MCaVx8EI+sm13rVrgzm+Js=
-X-Google-Smtp-Source: AGHT+IGfA7qFClRnZaa3hlQIfQnVKwgKJc+HOwvSJacvX1L7QULKO9WaR9WuKWvGawC2lOPW65eHH4op77JHipLOnis=
-X-Received: by 2002:a17:906:a18d:b0:a3e:7a8f:27dc with SMTP id
- s13-20020a170906a18d00b00a3e7a8f27dcmr5133135ejy.49.1709521388851; Sun, 03
- Mar 2024 19:03:08 -0800 (PST)
-MIME-Version: 1.0
-References: <20240303081330.61091-1-duoming@zju.edu.cn>
-In-Reply-To: <20240303081330.61091-1-duoming@zju.edu.cn>
-From: Timur Tabi <timur@kernel.org>
-Date: Sun, 3 Mar 2024 21:02:32 -0600
-X-Gmail-Original-Message-ID: <CAOZdJXUebAScPBjJdCbdzzA_Hmotk11bd7MvLLxe+pqS5-upHQ@mail.gmail.com>
-Message-ID: <CAOZdJXUebAScPBjJdCbdzzA_Hmotk11bd7MvLLxe+pqS5-upHQ@mail.gmail.com>
-Subject: Re: [PATCH] nouveau/dmem: handle kcalloc() allocation failure
-To: Duoming Zhou <duoming@zju.edu.cn>
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8208611209B;
+ Mon,  4 Mar 2024 12:15:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1709554507; x=1741090507;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version:content-transfer-encoding;
+ bh=NOBPUIRjTkKdzyBxvXMtqy/Bmk6fNoVtdIUaHOWNOtw=;
+ b=QIoKzumzVcOP3Qoh05KU58BzEvmFEcYqJAvTVcn4L4AvCKMR/fM7uKFx
+ WX42rDKcORZLx3w/v2H1ncqXviF0eGzduOi6DVCWY32pGnioYS2AflsAY
+ qaxIO9HKw/0z/QczRXi/hTbH5u9LEa6yxMwNXQJosNSbo9VQLOXS7ipOQ
+ xeYoYd2vAbW/8YfLyAC2r3FXFCEihe3YjDCP6GTR0LCULbxtX7gdrRExa
+ AExN2tgF7yN5dipGlpbu0Y5L6G410W5YnwD40I/9ryp86r5TFc8sC+p8G
+ SvE0IB0ZoEzj0dG339cV5WsUdhjYH0Aj4T/lI0JpshlSCtaXzryo20ZD6 w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11002"; a="4619192"
+X-IronPort-AV: E=Sophos;i="6.06,203,1705392000"; 
+   d="scan'208";a="4619192"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+ by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Mar 2024 04:15:06 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.06,203,1705392000"; 
+   d="scan'208";a="9158028"
+Received: from syakovle-mobl1.ger.corp.intel.com (HELO localhost)
+ ([10.252.51.3])
+ by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Mar 2024 04:15:04 -0800
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: Timur Tabi <timur@kernel.org>, Duoming Zhou <duoming@zju.edu.cn>
 Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH] nouveau/dmem: handle kcalloc() allocation failure
+In-Reply-To: <CAOZdJXUebAScPBjJdCbdzzA_Hmotk11bd7MvLLxe+pqS5-upHQ@mail.gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20240303081330.61091-1-duoming@zju.edu.cn>
+ <CAOZdJXUebAScPBjJdCbdzzA_Hmotk11bd7MvLLxe+pqS5-upHQ@mail.gmail.com>
+Date: Mon, 04 Mar 2024 14:14:52 +0200
+Message-ID: <87y1ay42ir.fsf@intel.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -68,15 +67,29 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Mar 3, 2024 at 4:46=E2=80=AFAM Duoming Zhou <duoming@zju.edu.cn> wr=
-ote:
+On Sun, 03 Mar 2024, Timur Tabi <timur@kernel.org> wrote:
+> On Sun, Mar 3, 2024 at 4:46=E2=80=AFAM Duoming Zhou <duoming@zju.edu.cn> =
+wrote:
+>>
+>> The kcalloc() in nouveau_dmem_evict_chunk() will return null if
+>> the physical memory has run out. As a result, if we dereference
+>> src_pfns, dst_pfns or dma_addrs, the null pointer dereference bugs
+>> will happen.
+>>
+>> This patch uses stack variables to replace the kcalloc().
 >
-> The kcalloc() in nouveau_dmem_evict_chunk() will return null if
-> the physical memory has run out. As a result, if we dereference
-> src_pfns, dst_pfns or dma_addrs, the null pointer dereference bugs
-> will happen.
->
-> This patch uses stack variables to replace the kcalloc().
+> Won't this blow the stack?  And why not just test the return value of
+> kcalloc?
 
-Won't this blow the stack?  And why not just test the return value of kcall=
-oc?
+VLAs should not be used in the kernel anymore. Building this results in
+a warning due to -Wvla. See 0bb95f80a38f ("Makefile: Globally enable VLA
+warning").
+
+Error checking and propagation is the way to go.
+
+
+BR,
+Jani.
+
+--=20
+Jani Nikula, Intel
