@@ -2,83 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A946870625
-	for <lists+nouveau@lfdr.de>; Mon,  4 Mar 2024 16:49:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8E878707D9
+	for <lists+nouveau@lfdr.de>; Mon,  4 Mar 2024 18:02:38 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F0C7310FD01;
-	Mon,  4 Mar 2024 15:49:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 504CA11236D;
+	Mon,  4 Mar 2024 17:02:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="MDiuqeuw";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="HbE5ApGq";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BA77310FD01
- for <nouveau@lists.freedesktop.org>; Mon,  4 Mar 2024 15:49:17 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CEA31112373
+ for <nouveau@lists.freedesktop.org>; Mon,  4 Mar 2024 17:02:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1709567356;
+ s=mimecast20190719; t=1709571751;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=rCw3c90XnhxEV+CpZlYVgHOD3Zlc8j0qRMz6sruVUkE=;
- b=MDiuqeuwOSTj0Sm7oInCzaf5/W7rC4epOXe44mOrztrg9Kl/+Q4nF1wt1wmzu1RGxaQ+EP
- 0mNBV+2sa0y1dFhZzPxAqxeQyHwtHzGPZj7Ueg0iQiiBMpLedMP6ap+BklEvQ3VkCH19HK
- H2g4mFcMLpViEDvnV7WfFsXQDUhQmbo=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding;
+ bh=bRb2G3rGVCWNmjR6j8Y0jK9sd42QWUsDe6AfIQJkqsw=;
+ b=HbE5ApGqKrdsuLOzcJfCNgayDvXXbARPpZ3HBBarXwa85++Y+7thYinmw8o4ZsB6h3SJ4I
+ HiBKqSuA/TktqudALJUkzB/Oi+p8tCxNv8KFaB2+2LXu1FZoQyfd+DB0ch/oPvLMSn3/Ve
+ i4wchnG/yqQbSI+hhTbp9GyFxeVSz1w=
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-18-aw0NhBLLNfOtMXXagW-igQ-1; Mon, 04 Mar 2024 10:49:15 -0500
-X-MC-Unique: aw0NhBLLNfOtMXXagW-igQ-1
-Received: by mail-ej1-f71.google.com with SMTP id
- a640c23a62f3a-a44d9c0809cso107214766b.2
- for <nouveau@lists.freedesktop.org>; Mon, 04 Mar 2024 07:49:14 -0800 (PST)
+ us-mta-421-q4Vt8EJ2P6eedIMHZRm1Tg-1; Mon, 04 Mar 2024 12:02:27 -0500
+X-MC-Unique: q4Vt8EJ2P6eedIMHZRm1Tg-1
+Received: by mail-ej1-f69.google.com with SMTP id
+ a640c23a62f3a-a4531df8727so44658466b.2
+ for <nouveau@lists.freedesktop.org>; Mon, 04 Mar 2024 09:02:27 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709567353; x=1710172153;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1709571746; x=1710176546;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=unNsmKMp5dPtDNOZfGBaTP3v76hvdoxYwZuVv2IEA5I=;
- b=FgIye1PzXgiHzb+CoaNvmQpie06RvwGyrVACLFCzMKwKtP8XyL1x8R1AQ/RDawaKn5
- A2KRaxPHOHtf/gXT15bMOgCg2AzEaNpwfMd9R9xNvbawXvbfLR5XDfP5J6hiP0QRSAXE
- sk8ZXgg2K9LZPJ8qY9qCvBiaiF9yLalD3MXCY4QyILhEIs3XWPyNjakCcV5uDfscckPS
- XoO/jaiYmic+xMCkzZqDdzvJZ72Gf5HiHLxjEugFGCweLlcT4KaboGvRN4uKNxvQT+Qq
- RMKHIywCOmBDjZZZ+WX+15Hw2NdleBdU8f79dC88DM3T+pRBtHwXfxtLrNnyKsxk+566
- qSDA==
-X-Gm-Message-State: AOJu0Yygo0WK9r3fw3uRK/17Hg/pT2x1Nm4hOPFmQQImc9gaB0DJzne+
- E2PRImVMd85smeoU0kSoOCcGiIVuaZwt4TsBLBHUbAMa5EWLet3LUsgluC0G9pZtnOgS9/tOkH+
- Ki4c0oD/3U0uv/t+HYbqzsPOa20ScWFlwL9kIwdwpKac2RmFe5dzaRaC/d8ALwl2p8f4Rbcg=
-X-Received: by 2002:a17:906:cf88:b0:a45:373:d0a with SMTP id
- um8-20020a170906cf8800b00a4503730d0amr3690344ejb.32.1709567353548; 
- Mon, 04 Mar 2024 07:49:13 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFFiDf3e85T/K1m0/Oov6e6UHvNo7SW2WmjahwDPOP8WD7cLBwt5jA66bngeS5YzcoxV87kNg==
-X-Received: by 2002:a17:906:cf88:b0:a45:373:d0a with SMTP id
- um8-20020a170906cf8800b00a4503730d0amr3690336ejb.32.1709567353184; 
- Mon, 04 Mar 2024 07:49:13 -0800 (PST)
-Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
- ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
+ bh=bRb2G3rGVCWNmjR6j8Y0jK9sd42QWUsDe6AfIQJkqsw=;
+ b=XHwuC+CWwkJHBYgm4eZCgTEcg4iNaC9OV5MVBursPTtBb0v2BAGG/H+7f6BNJCaMuZ
+ WO1hoQH7uVtLdpiIQTSyqca58Zk9gXuOhBMbVgxpLy/uOCbAAahekOswTlcjXu/1RK5w
+ jZexWJqunbuokxLCo4SenxwofgPB3fnIa6M4w7Ig+USyTt03sB6rHGmsh5nwNpIcCgGK
+ 4LNQj+8Z8x59MkRh5RRIzc3M8Zffwm7bpc8nvdw5++Zc3yaFohN/bRf3ExOoQhBHpYKi
+ KVET0z8iNEiw2S5wdJszxBF6pbm+oQ5H43jm6JmR8Ks7qFoVnahJBM37e+FBfpCHVCVv
+ o9/A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWfW+f+4H0LBXcPxen9QwHECpGgs1sxgzw4xiRPFMFzhIhnsD1Y6D0JsmDv0pRqToh7nvV41AGuXvwao0B9c7lHXj5wOwdx5Uxd/8s6lA==
+X-Gm-Message-State: AOJu0YxxTofQhtqLSrR9dvGPh6AsSLdChGhrqP4HHPkRSmewey1px8lU
+ AtsORXiZ1q5kBEgmu/rksJbCcPS+tinyGLqy17AdCXeXjV71WBWZQKomz6pj/QXLHLCxSnFdkb5
+ OYip/R/gNaI+VJRBfmrGROTHSqTxHU8W6FC/bYii8q4ILvi5YPEcGdjMW/OGENv0=
+X-Received: by 2002:a17:906:34d7:b0:a45:29f3:6cc9 with SMTP id
+ h23-20020a17090634d700b00a4529f36cc9mr2924245ejb.20.1709571746335; 
+ Mon, 04 Mar 2024 09:02:26 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGEXK6MgN54UtOiHFSF4R6S0QqKf3vQjkdthql3Vdr45tKN/JnSK4chUqihHQ930YEbFsgjVA==
+X-Received: by 2002:a17:906:34d7:b0:a45:29f3:6cc9 with SMTP id
+ h23-20020a17090634d700b00a4529f36cc9mr2924219ejb.20.1709571745935; 
+ Mon, 04 Mar 2024 09:02:25 -0800 (PST)
+Received: from altair.. ([2a02:810d:4b3f:ee94:642:1aff:fe31:a15c])
  by smtp.gmail.com with ESMTPSA id
- bj9-20020a170906b04900b00a4547925e3asm1306226ejb.141.2024.03.04.07.49.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Mar 2024 07:49:12 -0800 (PST)
-Message-ID: <f844c57d-b6a9-491c-8ce3-84dab247146c@redhat.com>
-Date: Mon, 4 Mar 2024 16:49:11 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] nouveau: lock the client object tree.
-To: Dave Airlie <airlied@gmail.com>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-References: <20240301034238.3041715-1-airlied@gmail.com>
+ gl11-20020a170906e0cb00b00a448fab02easm3913637ejb.37.2024.03.04.09.02.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Mar 2024 09:02:25 -0800 (PST)
 From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <20240301034238.3041715-1-airlied@gmail.com>
+To: stable@vger.kernel.org,
+	nouveau@lists.freedesktop.org
+Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ Danilo Krummrich <dakr@redhat.com>, Karol Herbst <kherbst@redhat.com>
+Subject: [PATCH stable v6.7] drm/nouveau: don't fini scheduler before entity
+ flush
+Date: Mon,  4 Mar 2024 18:01:46 +0100
+Message-ID: <20240304170158.4206-1-dakr@redhat.com>
+X-Mailer: git-send-email 2.44.0
+MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,163 +91,164 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gMy8xLzI0IDA0OjQyLCBEYXZlIEFpcmxpZSB3cm90ZToNCj4gRnJvbTogRGF2ZSBBaXJsaWUg
-PGFpcmxpZWRAcmVkaGF0LmNvbT4NCj4gDQo+IEl0IGFwcGVhcnMgdGhlIGNsaWVudCBvYmplY3Qg
-dHJlZSBoYXMgbm8gbG9ja2luZyB1bmxlc3MgSSd2ZSBtaXNzZWQNCj4gc29tZXRoaW5nIGVsc2Uu
-IEZpeCByYWNlcyBhcm91bmQgYWRkaW5nL3JlbW92aW5nIGNsaWVudCBvYmplY3RzLA0KPiBtb3N0
-bHkgdnJhbSBiYXIgbWFwcGluZ3MuDQo+IA0KPiAgIDQ1NjIuMDk5MzA2XSBnZW5lcmFsIHByb3Rl
-Y3Rpb24gZmF1bHQsIHByb2JhYmx5IGZvciBub24tY2Fub25pY2FsIGFkZHJlc3MgMHg2Njc3ZWQ0
-MjJiY2ViODBjOiAwMDAwIFsjMV0gUFJFRU1QVCBTTVAgUFRJDQo+IFsgNDU2Mi4wOTkzMTRdIENQ
-VTogMiBQSUQ6IDIzMTcxIENvbW06IGRlcXAtdmsgTm90IHRhaW50ZWQgNi44LjAtcmM2KyAjMjcN
-Cj4gWyA0NTYyLjA5OTMyNF0gSGFyZHdhcmUgbmFtZTogR2lnYWJ5dGUgVGVjaG5vbG9neSBDby4s
-IEx0ZC4gWjM5MCBJIEFPUlVTIFBSTyBXSUZJL1ozOTAgSSBBT1JVUyBQUk8gV0lGSS1DRiwgQklP
-UyBGOCAxMS8wNS8yMDIxDQo+IFsgNDU2Mi4wOTkzMzBdIFJJUDogMDAxMDpudmttX29iamVjdF9z
-ZWFyY2grMHgxZC8weDcwIFtub3V2ZWF1XQ0KPiBbIDQ1NjIuMDk5NTAzXSBDb2RlOiA5MCA5MCA5
-MCA5MCA5MCA5MCA5MCA5MCA5MCA5MCA5MCA5MCA5MCA2NiAwZiAxZiAwMCAwZiAxZiA0NCAwMCAw
-MCA0OCA4OSBmOCA0OCA4NSBmNiA3NCAzOSA0OCA4YiA4NyBhMCAwMCAwMCAwMCA0OCA4NSBjMCA3
-NCAxMiA8NDg+IDhiIDQ4IGY4IDQ4IDM5IGNlIDczIDE1IDQ4IDhiIDQwIDEwIDQ4IDg1IGMwIDc1
-IGVlIDQ4IGM3IGMwIGZlDQo+IFsgNDU2Mi4wOTk1MDZdIFJTUDogMDAwMDpmZmZmYTk0Y2M0MjBi
-YmY4IEVGTEFHUzogMDAwMTAyMDYNCj4gWyA0NTYyLjA5OTUxMl0gUkFYOiA2Njc3ZWQ0MjJiY2Vi
-ODE0IFJCWDogZmZmZjk4MTA4NzkxZjQwMCBSQ1g6IGZmZmY5ODEwZjI2YjhmNTgNCj4gWyA0NTYy
-LjA5OTUxN10gUkRYOiAwMDAwMDAwMDAwMDAwMDAwIFJTSTogZmZmZjk4MTBmMjZiOTE1OCBSREk6
-IGZmZmY5ODEwODc5MWY0MDANCj4gWyA0NTYyLjA5OTUxOV0gUkJQOiBmZmZmOTgxMGYyNmI5MTU4
-IFIwODogMDAwMDAwMDAwMDAwMDAwMCBSMDk6IDAwMDAwMDAwMDAwMDAwMDANCj4gWyA0NTYyLjA5
-OTUyMV0gUjEwOiBmZmZmYTk0Y2M0MjBiYzQ4IFIxMTogMDAwMDAwMDAwMDAwMDAwMSBSMTI6IGZm
-ZmY5ODEwZjAyYTdjYzANCj4gWyA0NTYyLjA5OTUyNl0gUjEzOiAwMDAwMDAwMDAwMDAwMDAwIFIx
-NDogMDAwMDAwMDAwMDAwMDBmZiBSMTU6IDAwMDAwMDAwMDAwMDAwMDcNCj4gWyA0NTYyLjA5OTUy
-OF0gRlM6ICAwMDAwN2Y2MjljNTAxN2MwKDAwMDApIEdTOmZmZmY5ODE0MmM3MDAwMDAoMDAwMCkg
-a25sR1M6MDAwMDAwMDAwMDAwMDAwMA0KPiBbIDQ1NjIuMDk5NTM0XSBDUzogIDAwMTAgRFM6IDAw
-MDAgRVM6IDAwMDAgQ1IwOiAwMDAwMDAwMDgwMDUwMDMzDQo+IFsgNDU2Mi4wOTk1MzZdIENSMjog
-MDAwMDdmNjI5YTg4MjAwMCBDUjM6IDAwMDAwMDAxNzAxOWUwMDQgQ1I0OiAwMDAwMDAwMDAwMzcw
-NmYwDQo+IFsgNDU2Mi4wOTk1NDFdIERSMDogMDAwMDAwMDAwMDAwMDAwMCBEUjE6IDAwMDAwMDAw
-MDAwMDAwMDAgRFIyOiAwMDAwMDAwMDAwMDAwMDAwDQo+IFsgNDU2Mi4wOTk1NDJdIERSMzogMDAw
-MDAwMDAwMDAwMDAwMCBEUjY6IDAwMDAwMDAwZmZmZTBmZjAgRFI3OiAwMDAwMDAwMDAwMDAwNDAw
-DQo+IFsgNDU2Mi4wOTk1NDRdIENhbGwgVHJhY2U6DQo+IFsgNDU2Mi4wOTk1NTVdICA8VEFTSz4N
-Cj4gWyA0NTYyLjA5OTU3M10gID8gZGllX2FkZHIrMHgzNi8weDkwDQo+IFsgNDU2Mi4wOTk1ODNd
-ICA/IGV4Y19nZW5lcmFsX3Byb3RlY3Rpb24rMHgyNDYvMHg0YTANCj4gWyA0NTYyLjA5OTU5M10g
-ID8gYXNtX2V4Y19nZW5lcmFsX3Byb3RlY3Rpb24rMHgyNi8weDMwDQo+IFsgNDU2Mi4wOTk2MDBd
-ICA/IG52a21fb2JqZWN0X3NlYXJjaCsweDFkLzB4NzAgW25vdXZlYXVdDQo+IFsgNDU2Mi4wOTk3
-MzBdICBudmttX2lvY3RsKzB4YTEvMHgyNTAgW25vdXZlYXVdDQo+IFsgNDU2Mi4wOTk4NjFdICBu
-dmlmX29iamVjdF9tYXBfaGFuZGxlKzB4YzgvMHgxODAgW25vdXZlYXVdDQo+IFsgNDU2Mi4wOTk5
-ODZdICBub3V2ZWF1X3R0bV9pb19tZW1fcmVzZXJ2ZSsweDEyMi8weDI3MCBbbm91dmVhdV0NCj4g
-WyA0NTYyLjEwMDE1Nl0gID8gZG1hX3Jlc3ZfdGVzdF9zaWduYWxlZCsweDI2LzB4YjANCj4gWyA0
-NTYyLjEwMDE2M10gIHR0bV9ib192bV9mYXVsdF9yZXNlcnZlZCsweDk3LzB4M2MwIFt0dG1dDQo+
-IFsgNDU2Mi4xMDAxODJdICA/IF9fbXV0ZXhfdW5sb2NrX3Nsb3dwYXRoKzB4MmEvMHgyNzANCj4g
-WyA0NTYyLjEwMDE4OV0gIG5vdXZlYXVfdHRtX2ZhdWx0KzB4NjkvMHhiMCBbbm91dmVhdV0NCj4g
-WyA0NTYyLjEwMDM1Nl0gIF9fZG9fZmF1bHQrMHgzMi8weDE1MA0KPiBbIDQ1NjIuMTAwMzYyXSAg
-ZG9fZmF1bHQrMHg3Yy8weDU2MA0KPiBbIDQ1NjIuMTAwMzY5XSAgX19oYW5kbGVfbW1fZmF1bHQr
-MHg4MDAvMHhjMTANCj4gWyA0NTYyLjEwMDM4Ml0gIGhhbmRsZV9tbV9mYXVsdCsweDE3Yy8weDNl
-MA0KPiBbIDQ1NjIuMTAwMzg4XSAgZG9fdXNlcl9hZGRyX2ZhdWx0KzB4MjA4LzB4ODYwDQo+IFsg
-NDU2Mi4xMDAzOTVdICBleGNfcGFnZV9mYXVsdCsweDdmLzB4MjAwDQo+IFsgNDU2Mi4xMDA0MDJd
-ICBhc21fZXhjX3BhZ2VfZmF1bHQrMHgyNi8weDMwDQo+IFsgNDU2Mi4xMDA0MTJdIFJJUDogMDAz
-MzoweDliOTg3MA0KPiBbIDQ1NjIuMTAwNDE5XSBDb2RlOiA4NSBhOCBmNyBmZiBmZiA4YiA4ZCA4
-MCBmNyBmZiBmZiA4OSAwOCBlOSAxOCBmMiBmZiBmZiAwZiAxZiA4NCAwMCAwMCAwMCAwMCAwMCA0
-NCA4OSAzMiBlOSA5MCBmYSBmZiBmZiAwZiAxZiA4NCAwMCAwMCAwMCAwMCAwMCA8NDQ+IDg5IDMy
-IGU5IGY4IGYxIGZmIGZmIDBmIDFmIDg0IDAwIDAwIDAwIDAwIDAwIDY2IDQ0IDg5IDMyIGU5IGU3
-DQo+IFsgNDU2Mi4xMDA0MjJdIFJTUDogMDAyYjowMDAwN2ZmZjliYTJkYzcwIEVGTEFHUzogMDAw
-MTAyNDYNCj4gWyA0NTYyLjEwMDQyNl0gUkFYOiAwMDAwMDAwMDAwMDAwMDA0IFJCWDogMDAwMDAw
-MDAwZGQ2NWUxMCBSQ1g6IDAwMDAwMGZmZjAwMDAwMDANCj4gWyA0NTYyLjEwMDQyOF0gUkRYOiAw
-MDAwN2Y2MjlhODgyMDAwIFJTSTogMDAwMDdmNjI5YTg4MjAwMCBSREk6IDAwMDAwMDAwMDAwMDAw
-NjYNCj4gWyA0NTYyLjEwMDQzMl0gUkJQOiAwMDAwN2ZmZjliYTJlNTcwIFIwODogMDAwMDAwMDAw
-MDAwMDAwMCBSMDk6IDAwMDAwMDAxMjNkZGYwMDANCj4gWyA0NTYyLjEwMDQzNF0gUjEwOiAwMDAw
-MDAwMDAwMDAwMDAxIFIxMTogMDAwMDAwMDAwMDAwMDI0NiBSMTI6IDAwMDAwMDAwN2ZmZmZmZmYN
-Cj4gWyA0NTYyLjEwMDQzNl0gUjEzOiAwMDAwMDAwMDAwMDAwMDAwIFIxNDogMDAwMDAwMDAwMDAw
-MDAwMCBSMTU6IDAwMDAwMDAwMDAwMDAwMDANCj4gWyA0NTYyLjEwMDQ0Nl0gIDwvVEFTSz4NCj4g
-WyA0NTYyLjEwMDQ0OF0gTW9kdWxlcyBsaW5rZWQgaW46IG5mX2Nvbm50cmFja19uZXRiaW9zX25z
-IG5mX2Nvbm50cmFja19icm9hZGNhc3QgbmZ0X2ZpYl9pbmV0IG5mdF9maWJfaXB2NCBuZnRfZmli
-X2lwdjYgbmZ0X2ZpYiBuZnRfcmVqZWN0X2luZXQgbmZfcmVqZWN0X2lwdjQgbmZfcmVqZWN0X2lw
-djYgbmZ0X3JlamVjdCBuZnRfY3QgbmZ0X2NoYWluX25hdCBuZl9uYXQgbmZfY29ubnRyYWNrIG5m
-X2RlZnJhZ19pcHY2IG5mX2RlZnJhZ19pcHY0IGlwX3NldCBuZl90YWJsZXMgbGliY3JjMzJjIG5m
-bmV0bGluayBjbWFjIGJuZXAgc3VucnBjIGl3bG12bSBpbnRlbF9yYXBsX21zciBpbnRlbF9yYXBs
-X2NvbW1vbiBzbmRfc29mX3BjaV9pbnRlbF9jbmwgeDg2X3BrZ190ZW1wX3RoZXJtYWwgaW50ZWxf
-cG93ZXJjbGFtcCBzbmRfc29mX2ludGVsX2hkYV9jb21tb24gbWFjODAyMTEgY29yZXRlbXAgc25k
-X3NvY19hY3BpX2ludGVsX21hdGNoIGt2bV9pbnRlbCBzbmRfc29jX2FjcGkgc25kX3NvY19oZGFj
-X2hkYSBzbmRfc29mX3BjaSBzbmRfc29mX3h0ZW5zYV9kc3Agc25kX3NvZl9pbnRlbF9oZGFfbWxp
-bmsgc25kX3NvZl9pbnRlbF9oZGEgc25kX3NvZiBrdm0gc25kX3NvZl91dGlscyBzbmRfc29jX2Nv
-cmUgc25kX2hkYV9jb2RlY19yZWFsdGVrIGxpYmFyYzQgc25kX2hkYV9jb2RlY19nZW5lcmljIHNu
-ZF9jb21wcmVzcyBzbmRfaGRhX2V4dF9jb3JlIHZmYXQgZmF0IHNuZF9oZGFfaW50ZWwgc25kX2lu
-dGVsX2RzcGNmZyBpcnFieXBhc3MgaXdsd2lmaSBzbmRfaGRhX2NvZGVjIHNuZF9od2RlcCBzbmRf
-aGRhX2NvcmUgYnR1c2IgYnRydGwgbWVpX2hkY3AgaVRDT193ZHQgcmFwbCBtZWlfcHhwIGJ0aW50
-ZWwgc25kX3NlcSBpVENPX3ZlbmRvcl9zdXBwb3J0IGJ0YmNtIHNuZF9zZXFfZGV2aWNlIGludGVs
-X2NzdGF0ZSBibHVldG9vdGggc25kX3BjbSBjZmc4MDIxMSBpbnRlbF93bWlfdGh1bmRlcmJvbHQg
-d21pX2Jtb2YgaW50ZWxfdW5jb3JlIHNuZF90aW1lciBtZWlfbWUgc25kIGVjZGhfZ2VuZXJpYyBp
-MmNfaTgwMQ0KPiBbIDQ1NjIuMTAwNTQxXSAgZWNjIG1laSBpMmNfc21idXMgc291bmRjb3JlIHJm
-a2lsbCBpbnRlbF9wY2hfdGhlcm1hbCBhY3BpX3BhZCB6cmFtIG5vdXZlYXUgZHJtX3R0bV9oZWxw
-ZXIgdHRtIGdwdV9zY2hlZCBpMmNfYWxnb19iaXQgZHJtX2dwdXZtIGRybV9leGVjIG14bV93bWkg
-ZHJtX2Rpc3BsYXlfaGVscGVyIGRybV9rbXNfaGVscGVyIGRybSBjcmN0MTBkaWZfcGNsbXVsIGNy
-YzMyX3BjbG11bCBudm1lIGUxMDAwZSBjcmMzMmNfaW50ZWwgbnZtZV9jb3JlIGdoYXNoX2NsbXVs
-bmlfaW50ZWwgdmlkZW8gd21pIHBpbmN0cmxfY2Fubm9ubGFrZSBpcDZfdGFibGVzIGlwX3RhYmxl
-cyBmdXNlDQo+IFsgNDU2Mi4xMDA2MTZdIC0tLVsgZW5kIHRyYWNlIDAwMDAwMDAwMDAwMDAwMDAg
-XS0tLQ0KPiANCj4gU2lnbmVkLW9mZi1ieTogRGF2ZSBBaXJsaWUgPGFpcmxpZWRAcmVkaGF0LmNv
-bT4NCj4gQ2M6IHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmcNCj4gLS0tDQo+ICAgLi4uL2RybS9ub3V2
-ZWF1L2luY2x1ZGUvbnZrbS9jb3JlL2NsaWVudC5oICAgIHwgIDEgKw0KPiAgIGRyaXZlcnMvZ3B1
-L2RybS9ub3V2ZWF1L252a20vY29yZS9jbGllbnQuYyAgICB8ICAxICsNCj4gICBkcml2ZXJzL2dw
-dS9kcm0vbm91dmVhdS9udmttL2NvcmUvb2JqZWN0LmMgICAgfCAyMSArKysrKysrKysrKysrKyst
-LS0tDQo+ICAgMyBmaWxlcyBjaGFuZ2VkLCAxOSBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygt
-KQ0KPiANCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2luY2x1ZGUvbnZr
-bS9jb3JlL2NsaWVudC5oIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvaW5jbHVkZS9udmttL2Nv
-cmUvY2xpZW50LmgNCj4gaW5kZXggMGQ5ZmM3NDFhNzE5Li45MzJjOWZkMGIyZDggMTAwNjQ0DQo+
-IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2luY2x1ZGUvbnZrbS9jb3JlL2NsaWVudC5o
-DQo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2luY2x1ZGUvbnZrbS9jb3JlL2NsaWVu
-dC5oDQo+IEBAIC0xMSw2ICsxMSw3IEBAIHN0cnVjdCBudmttX2NsaWVudCB7DQo+ICAgCXUzMiBk
-ZWJ1ZzsNCj4gICANCj4gICAJc3RydWN0IHJiX3Jvb3Qgb2Jqcm9vdDsNCj4gKwlzcGlubG9ja190
-IG9ial9sb2NrOw0KPiAgIA0KPiAgIAl2b2lkICpkYXRhOw0KPiAgIAlpbnQgKCpldmVudCkodTY0
-IHRva2VuLCB2b2lkICphcmd2LCB1MzIgYXJnYyk7DQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dw
-dS9kcm0vbm91dmVhdS9udmttL2NvcmUvY2xpZW50LmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVh
-dS9udmttL2NvcmUvY2xpZW50LmMNCj4gaW5kZXggZWJkZWI4ZWI5ZTc3Li5jNTU2NjI5MzdhYjIg
-MTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vY29yZS9jbGllbnQu
-Yw0KPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2NvcmUvY2xpZW50LmMNCj4g
-QEAgLTE4MCw2ICsxODAsNyBAQCBudmttX2NsaWVudF9uZXcoY29uc3QgY2hhciAqbmFtZSwgdTY0
-IGRldmljZSwgY29uc3QgY2hhciAqY2ZnLCBjb25zdCBjaGFyICpkYmcsDQo+ICAgCWNsaWVudC0+
-ZGV2aWNlID0gZGV2aWNlOw0KPiAgIAljbGllbnQtPmRlYnVnID0gbnZrbV9kYmdvcHQoZGJnLCAi
-Q0xJRU5UIik7DQo+ICAgCWNsaWVudC0+b2Jqcm9vdCA9IFJCX1JPT1Q7DQo+ICsJc3Bpbl9sb2Nr
-X2luaXQoJmNsaWVudC0+b2JqX2xvY2spOw0KPiAgIAljbGllbnQtPmV2ZW50ID0gZXZlbnQ7DQo+
-ICAgCUlOSVRfTElTVF9IRUFEKCZjbGllbnQtPnVtZW0pOw0KPiAgIAlzcGluX2xvY2tfaW5pdCgm
-Y2xpZW50LT5sb2NrKTsNCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252
-a20vY29yZS9vYmplY3QuYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vY29yZS9vYmpl
-Y3QuYw0KPiBpbmRleCA3YzU1NGMxNGU4ODQuLjVkZmZiOTY5ZmMzOCAxMDA2NDQNCj4gLS0tIGEv
-ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9jb3JlL29iamVjdC5jDQo+ICsrKyBiL2RyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L252a20vY29yZS9vYmplY3QuYw0KPiBAQCAtMzAsOCArMzAsOSBA
-QCBudmttX29iamVjdF9zZWFyY2goc3RydWN0IG52a21fY2xpZW50ICpjbGllbnQsIHU2NCBoYW5k
-bGUsDQo+ICAgCQkgICBjb25zdCBzdHJ1Y3QgbnZrbV9vYmplY3RfZnVuYyAqZnVuYykNCj4gICB7
-DQo+ICAgCXN0cnVjdCBudmttX29iamVjdCAqb2JqZWN0Ow0KPiAtDQo+ICsJdW5zaWduZWQgbG9u
-ZyBmbGFnczsNCj4gICAJaWYgKGhhbmRsZSkgew0KPiArCQlzcGluX2xvY2tfaXJxc2F2ZSgmY2xp
-ZW50LT5vYmpfbG9jaywgZmxhZ3MpOw0KPiAgIAkJc3RydWN0IHJiX25vZGUgKm5vZGUgPSBjbGll
-bnQtPm9ianJvb3QucmJfbm9kZTsNCj4gICAJCXdoaWxlIChub2RlKSB7DQo+ICAgCQkJb2JqZWN0
-ID0gcmJfZW50cnkobm9kZSwgdHlwZW9mKCpvYmplY3QpLCBub2RlKTsNCj4gQEAgLTQwLDkgKzQx
-LDEyIEBAIG52a21fb2JqZWN0X3NlYXJjaChzdHJ1Y3QgbnZrbV9jbGllbnQgKmNsaWVudCwgdTY0
-IGhhbmRsZSwNCj4gICAJCQllbHNlDQo+ICAgCQkJaWYgKGhhbmRsZSA+IG9iamVjdC0+b2JqZWN0
-KQ0KPiAgIAkJCQlub2RlID0gbm9kZS0+cmJfcmlnaHQ7DQo+IC0JCQllbHNlDQo+ICsJCQllbHNl
-IHsNCg0KTWlzc2luZyBicmFjZXMgZm9yIHRoZSBwcmVjZWRpbmcgaWYgYmxvY2tzLg0KDQo+ICsJ
-CQkJc3Bpbl91bmxvY2tfaXJxcmVzdG9yZSgmY2xpZW50LT5vYmpfbG9jaywgZmxhZ3MpOw0KPiAg
-IAkJCQlnb3RvIGRvbmU7DQo+ICsJCQl9DQo+ICAgCQl9DQo+ICsJCXNwaW5fdW5sb2NrX2lycXJl
-c3RvcmUoJmNsaWVudC0+b2JqX2xvY2ssIGZsYWdzKTsNCj4gICAJCXJldHVybiBFUlJfUFRSKC1F
-Tk9FTlQpOw0KPiAgIAl9IGVsc2Ugew0KPiAgIAkJb2JqZWN0ID0gJmNsaWVudC0+b2JqZWN0Ow0K
-PiBAQCAtNTcsMTYgKzYxLDIyIEBAIG52a21fb2JqZWN0X3NlYXJjaChzdHJ1Y3QgbnZrbV9jbGll
-bnQgKmNsaWVudCwgdTY0IGhhbmRsZSwNCj4gICB2b2lkDQo+ICAgbnZrbV9vYmplY3RfcmVtb3Zl
-KHN0cnVjdCBudmttX29iamVjdCAqb2JqZWN0KQ0KPiAgIHsNCj4gKwl1bnNpZ25lZCBsb25nIGZs
-YWdzOw0KDQpjaGVja3BhdGNoLnBsIGFza3MgZm9yIGEgYmxhbmsgbGluZSBoZXJlLg0KDQo+ICsJ
-c3Bpbl9sb2NrX2lycXNhdmUoJm9iamVjdC0+Y2xpZW50LT5vYmpfbG9jaywgZmxhZ3MpOw0KPiAg
-IAlpZiAoIVJCX0VNUFRZX05PREUoJm9iamVjdC0+bm9kZSkpDQo+ICAgCQlyYl9lcmFzZSgmb2Jq
-ZWN0LT5ub2RlLCAmb2JqZWN0LT5jbGllbnQtPm9ianJvb3QpOw0KPiArCXNwaW5fdW5sb2NrX2ly
-cXJlc3RvcmUoJm9iamVjdC0+Y2xpZW50LT5vYmpfbG9jaywgZmxhZ3MpOw0KPiAgIH0NCj4gICAN
-Cj4gICBib29sDQo+ICAgbnZrbV9vYmplY3RfaW5zZXJ0KHN0cnVjdCBudmttX29iamVjdCAqb2Jq
-ZWN0KQ0KPiAgIHsNCj4gLQlzdHJ1Y3QgcmJfbm9kZSAqKnB0ciA9ICZvYmplY3QtPmNsaWVudC0+
-b2Jqcm9vdC5yYl9ub2RlOw0KPiArCXN0cnVjdCByYl9ub2RlICoqcHRyOw0KPiAgIAlzdHJ1Y3Qg
-cmJfbm9kZSAqcGFyZW50ID0gTlVMTDsNCj4gKwl1bnNpZ25lZCBsb25nIGZsYWdzOw0KPiAgIA0K
-PiArCXNwaW5fbG9ja19pcnFzYXZlKCZvYmplY3QtPmNsaWVudC0+b2JqX2xvY2ssIGZsYWdzKTsN
-Cj4gKwlwdHIgPSAmb2JqZWN0LT5jbGllbnQtPm9ianJvb3QucmJfbm9kZTsNCj4gICAJd2hpbGUg
-KCpwdHIpIHsNCj4gICAJCXN0cnVjdCBudmttX29iamVjdCAqdGhpcyA9IHJiX2VudHJ5KCpwdHIs
-IHR5cGVvZigqdGhpcyksIG5vZGUpOw0KPiAgIAkJcGFyZW50ID0gKnB0cjsNCj4gQEAgLTc1LDEy
-ICs4NSwxNSBAQCBudmttX29iamVjdF9pbnNlcnQoc3RydWN0IG52a21fb2JqZWN0ICpvYmplY3Qp
-DQo+ICAgCQllbHNlDQo+ICAgCQlpZiAob2JqZWN0LT5vYmplY3QgPiB0aGlzLT5vYmplY3QpDQo+
-ICAgCQkJcHRyID0gJnBhcmVudC0+cmJfcmlnaHQ7DQo+IC0JCWVsc2UNCj4gKwkJZWxzZSB7DQoN
-Ck1pc3NpbmcgYnJhY2VzIGZvciB0aGUgcHJlY2VkaW5nIGlmIGJsb2Nrcy4NCg0KQ2FuIGZpeCB0
-aG9zZSB3aGVuIGFwcGx5aW5nIHRoZSBwYXRjaCBpZiB5b3Ugd2FudD8NCg0KPiArCQkJc3Bpbl91
-bmxvY2tfaXJxcmVzdG9yZSgmb2JqZWN0LT5jbGllbnQtPm9ial9sb2NrLCBmbGFncyk7DQo+ICAg
-CQkJcmV0dXJuIGZhbHNlOw0KPiArCQl9DQo+ICAgCX0NCj4gICANCj4gICAJcmJfbGlua19ub2Rl
-KCZvYmplY3QtPm5vZGUsIHBhcmVudCwgcHRyKTsNCj4gICAJcmJfaW5zZXJ0X2NvbG9yKCZvYmpl
-Y3QtPm5vZGUsICZvYmplY3QtPmNsaWVudC0+b2Jqcm9vdCk7DQo+ICsJc3Bpbl91bmxvY2tfaXJx
-cmVzdG9yZSgmb2JqZWN0LT5jbGllbnQtPm9ial9sb2NrLCBmbGFncyk7DQo+ICAgCXJldHVybiB0
-cnVlOw0KPiAgIH0NCj4gICANCg==
+This bug is present in v6.7 only, since the scheduler design has been
+re-worked in v6.8.
+
+Client scheduler entities must be flushed before an associated GPU
+scheduler is teared down. Otherwise the entitiy might still hold a
+pointer to the scheduler's runqueue which is freed at scheduler tear
+down already.
+
+[  305.224293] ==================================================================
+[  305.224297] BUG: KASAN: slab-use-after-free in drm_sched_entity_flush+0x6c4/0x7b0 [gpu_sched]
+[  305.224310] Read of size 8 at addr ffff8881440a8f48 by task rmmod/4436
+
+[  305.224317] CPU: 10 PID: 4436 Comm: rmmod Tainted: G     U             6.7.6-100.fc38.x86_64+debug #1
+[  305.224321] Hardware name: Dell Inc. Precision 7550/01PXFR, BIOS 1.27.0 11/08/2023
+[  305.224324] Call Trace:
+[  305.224327]  <TASK>
+[  305.224329]  dump_stack_lvl+0x76/0xd0
+[  305.224336]  print_report+0xcf/0x670
+[  305.224342]  ? drm_sched_entity_flush+0x6c4/0x7b0 [gpu_sched]
+[  305.224352]  ? __virt_addr_valid+0x215/0x410
+[  305.224359]  ? drm_sched_entity_flush+0x6c4/0x7b0 [gpu_sched]
+[  305.224368]  kasan_report+0xa6/0xe0
+[  305.224373]  ? drm_sched_entity_flush+0x6c4/0x7b0 [gpu_sched]
+[  305.224385]  drm_sched_entity_flush+0x6c4/0x7b0 [gpu_sched]
+[  305.224395]  ? __pfx_drm_sched_entity_flush+0x10/0x10 [gpu_sched]
+[  305.224406]  ? rcu_is_watching+0x15/0xb0
+[  305.224413]  drm_sched_entity_destroy+0x17/0x20 [gpu_sched]
+[  305.224422]  nouveau_cli_fini+0x6c/0x120 [nouveau]
+[  305.224658]  nouveau_drm_device_fini+0x2ac/0x490 [nouveau]
+[  305.224871]  nouveau_drm_remove+0x18e/0x220 [nouveau]
+[  305.225082]  ? __pfx_nouveau_drm_remove+0x10/0x10 [nouveau]
+[  305.225290]  ? rcu_is_watching+0x15/0xb0
+[  305.225295]  ? _raw_spin_unlock_irqrestore+0x66/0x80
+[  305.225299]  ? trace_hardirqs_on+0x16/0x100
+[  305.225304]  ? _raw_spin_unlock_irqrestore+0x4f/0x80
+[  305.225310]  pci_device_remove+0xa3/0x1d0
+[  305.225316]  device_release_driver_internal+0x379/0x540
+[  305.225322]  driver_detach+0xc5/0x180
+[  305.225327]  bus_remove_driver+0x11e/0x2a0
+[  305.225333]  pci_unregister_driver+0x2a/0x250
+[  305.225339]  nouveau_drm_exit+0x1f/0x970 [nouveau]
+[  305.225548]  __do_sys_delete_module+0x350/0x580
+[  305.225554]  ? __pfx___do_sys_delete_module+0x10/0x10
+[  305.225562]  ? syscall_enter_from_user_mode+0x26/0x90
+[  305.225567]  ? rcu_is_watching+0x15/0xb0
+[  305.225571]  ? syscall_enter_from_user_mode+0x26/0x90
+[  305.225575]  ? trace_hardirqs_on+0x16/0x100
+[  305.225580]  do_syscall_64+0x61/0xe0
+[  305.225584]  ? rcu_is_watching+0x15/0xb0
+[  305.225587]  ? syscall_exit_to_user_mode+0x1f/0x50
+[  305.225592]  ? trace_hardirqs_on_prepare+0xe3/0x100
+[  305.225596]  ? do_syscall_64+0x70/0xe0
+[  305.225600]  ? trace_hardirqs_on_prepare+0xe3/0x100
+[  305.225604]  entry_SYSCALL_64_after_hwframe+0x6e/0x76
+[  305.225609] RIP: 0033:0x7f6148f3592b
+[  305.225650] Code: 73 01 c3 48 8b 0d dd 04 0c 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 b0 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d ad 04 0c 00 f7 d8 64 89 01 48
+[  305.225653] RSP: 002b:00007ffe89986f08 EFLAGS: 00000206 ORIG_RAX: 00000000000000b0
+[  305.225659] RAX: ffffffffffffffda RBX: 000055cbb036e900 RCX: 00007f6148f3592b
+[  305.225662] RDX: 0000000000000000 RSI: 0000000000000800 RDI: 000055cbb036e968
+[  305.225664] RBP: 00007ffe89986f30 R08: 1999999999999999 R09: 0000000000000000
+[  305.225667] R10: 00007f6148fa6ac0 R11: 0000000000000206 R12: 0000000000000000
+[  305.225670] R13: 00007ffe89987190 R14: 000055cbb036e900 R15: 0000000000000000
+[  305.225678]  </TASK>
+
+[  305.225683] Allocated by task 484:
+[  305.225685]  kasan_save_stack+0x33/0x60
+[  305.225690]  kasan_set_track+0x25/0x30
+[  305.225693]  __kasan_kmalloc+0x8f/0xa0
+[  305.225696]  drm_sched_init+0x3c7/0xce0 [gpu_sched]
+[  305.225705]  nouveau_sched_init+0xd2/0x110 [nouveau]
+[  305.225913]  nouveau_drm_device_init+0x130/0x3290 [nouveau]
+[  305.226121]  nouveau_drm_probe+0x1ab/0x6b0 [nouveau]
+[  305.226329]  local_pci_probe+0xda/0x190
+[  305.226333]  pci_device_probe+0x23a/0x780
+[  305.226337]  really_probe+0x3df/0xb80
+[  305.226341]  __driver_probe_device+0x18c/0x450
+[  305.226345]  driver_probe_device+0x4a/0x120
+[  305.226348]  __driver_attach+0x1e5/0x4a0
+[  305.226351]  bus_for_each_dev+0x106/0x190
+[  305.226355]  bus_add_driver+0x2a1/0x570
+[  305.226358]  driver_register+0x134/0x460
+[  305.226361]  do_one_initcall+0xd3/0x430
+[  305.226366]  do_init_module+0x238/0x770
+[  305.226370]  load_module+0x5581/0x6f10
+[  305.226374]  __do_sys_init_module+0x1f2/0x220
+[  305.226377]  do_syscall_64+0x61/0xe0
+[  305.226381]  entry_SYSCALL_64_after_hwframe+0x6e/0x76
+
+[  305.226387] Freed by task 4436:
+[  305.226389]  kasan_save_stack+0x33/0x60
+[  305.226392]  kasan_set_track+0x25/0x30
+[  305.226396]  kasan_save_free_info+0x2b/0x50
+[  305.226399]  __kasan_slab_free+0x10b/0x1a0
+[  305.226402]  slab_free_freelist_hook+0x12b/0x1e0
+[  305.226406]  __kmem_cache_free+0xd4/0x1d0
+[  305.226410]  drm_sched_fini+0x178/0x320 [gpu_sched]
+[  305.226418]  nouveau_drm_device_fini+0x2a0/0x490 [nouveau]
+[  305.226624]  nouveau_drm_remove+0x18e/0x220 [nouveau]
+[  305.226832]  pci_device_remove+0xa3/0x1d0
+[  305.226836]  device_release_driver_internal+0x379/0x540
+[  305.226840]  driver_detach+0xc5/0x180
+[  305.226843]  bus_remove_driver+0x11e/0x2a0
+[  305.226847]  pci_unregister_driver+0x2a/0x250
+[  305.226850]  nouveau_drm_exit+0x1f/0x970 [nouveau]
+[  305.227056]  __do_sys_delete_module+0x350/0x580
+[  305.227060]  do_syscall_64+0x61/0xe0
+[  305.227064]  entry_SYSCALL_64_after_hwframe+0x6e/0x76
+
+[  305.227070] The buggy address belongs to the object at ffff8881440a8f00
+                which belongs to the cache kmalloc-128 of size 128
+[  305.227073] The buggy address is located 72 bytes inside of
+                freed 128-byte region [ffff8881440a8f00, ffff8881440a8f80)
+
+[  305.227078] The buggy address belongs to the physical page:
+[  305.227081] page:00000000627efa0a refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x1440a8
+[  305.227085] head:00000000627efa0a order:1 entire_mapcount:0 nr_pages_mapped:0 pincount:0
+[  305.227088] flags: 0x17ffffc0000840(slab|head|node=0|zone=2|lastcpupid=0x1fffff)
+[  305.227093] page_type: 0xffffffff()
+[  305.227097] raw: 0017ffffc0000840 ffff8881000428c0 ffffea0005b33500 dead000000000002
+[  305.227100] raw: 0000000000000000 0000000000200020 00000001ffffffff 0000000000000000
+[  305.227102] page dumped because: kasan: bad access detected
+
+[  305.227106] Memory state around the buggy address:
+[  305.227109]  ffff8881440a8e00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[  305.227112]  ffff8881440a8e80: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+[  305.227114] >ffff8881440a8f00: fa fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+[  305.227117]                                               ^
+[  305.227120]  ffff8881440a8f80: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+[  305.227122]  ffff8881440a9000: 00 00 00 00 00 00 00 00 00 00 00 00 00 fc fc fc
+[  305.227125] ==================================================================
+
+Cc: <stable@vger.kernel.org> # v6.7 only
+Reported-by: Karol Herbst <kherbst@redhat.com>
+Closes: https://gist.githubusercontent.com/karolherbst/a20eb0f937a06ed6aabe2ac2ca3d11b5/raw/9cd8b1dc5894872d0eeebbee3dd0fdd28bb576bc/gistfile1.txt
+Fixes: b88baab82871 ("drm/nouveau: implement new VM_BIND uAPI")
+Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_drm.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+index 50589f982d1a..75545da9d1e9 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_drm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+@@ -708,10 +708,11 @@ nouveau_drm_device_fini(struct drm_device *dev)
+ 	}
+ 	mutex_unlock(&drm->clients_lock);
+ 
+-	nouveau_sched_fini(drm);
+-
+ 	nouveau_cli_fini(&drm->client);
+ 	nouveau_cli_fini(&drm->master);
++
++	nouveau_sched_fini(drm);
++
+ 	nvif_parent_dtor(&drm->parent);
+ 	mutex_destroy(&drm->clients_lock);
+ 	kfree(drm);
+-- 
+2.44.0
 
