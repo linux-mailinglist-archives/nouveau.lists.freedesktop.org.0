@@ -2,82 +2,84 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A9D3872068
-	for <lists+nouveau@lfdr.de>; Tue,  5 Mar 2024 14:39:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FC86872077
+	for <lists+nouveau@lfdr.de>; Tue,  5 Mar 2024 14:40:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C46C3112AFA;
-	Tue,  5 Mar 2024 13:39:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9BC11112AFC;
+	Tue,  5 Mar 2024 13:40:57 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="O6HrI93Q";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="NfSz9unA";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 375F310E1A4
- for <nouveau@lists.freedesktop.org>; Tue,  5 Mar 2024 13:38:59 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 16465112AFC
+ for <nouveau@lists.freedesktop.org>; Tue,  5 Mar 2024 13:40:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1709645938;
+ s=mimecast20190719; t=1709646056;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=11CPXNNF150pfEUFPWGbUJ1IKwl89RXoTZySYxmoYV8=;
- b=O6HrI93QwkG7/JiaZ2bi4bjyOJPS52JpflvpeTqaD56nILjD/Jg3ZfkH0HmLMRDM1p6aF1
- 9eoXYEd+yfLavfOSYplOVSxUiOXNp985V5W2aPo5gLShtGuRcmlBzM/5RqoZQlUlDf/nIl
- tNq1W5VnWYdLA9d6aP3w4+LCMZFUtBg=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=VZnEToW5t7As1au0rwMSuY1nkYFxsgpWnFlldMYKeW4=;
+ b=NfSz9unA4rAFpOn6BKEJDJZr1FD++oHTDWHVF+QM2X9NAXp6STMUHGNA5mvTkmh4sEUE4l
+ E+JigwEdch4OCjxzOu3+BweJFFTMfxXyratlioisbn8XSwsFAe+EHryXgINmNf4bZDgwPY
+ gmJlRKyWcfNZHjv3ouitvya/UJ09YyY=
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
+ [209.85.215.199]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-646-AT80gf2fNZqrtlAe9SWzEQ-1; Tue, 05 Mar 2024 08:38:56 -0500
-X-MC-Unique: AT80gf2fNZqrtlAe9SWzEQ-1
-Received: by mail-ej1-f71.google.com with SMTP id
- a640c23a62f3a-a436a38bf5bso68387466b.1
- for <nouveau@lists.freedesktop.org>; Tue, 05 Mar 2024 05:38:56 -0800 (PST)
+ us-mta-652-dQvFNk3EODyCz1jtswL05Q-1; Tue, 05 Mar 2024 08:40:54 -0500
+X-MC-Unique: dQvFNk3EODyCz1jtswL05Q-1
+Received: by mail-pg1-f199.google.com with SMTP id
+ 41be03b00d2f7-5dca5c631ffso5436180a12.2
+ for <nouveau@lists.freedesktop.org>; Tue, 05 Mar 2024 05:40:54 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709645935; x=1710250735;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=11CPXNNF150pfEUFPWGbUJ1IKwl89RXoTZySYxmoYV8=;
- b=gP1UdmpGjlDy7IYhR4ikm/tjP7YhX8VCbNLd5ZT1TBc0ZIwlAfPq8e0+EPEEhX5vTF
- 1UTiJ+XRm0yltnNsXTkTOsAjyis97F5WRh+seTYTLfJkuCPDOSjP9G3eH9u41+4nQhNp
- dPcVRh5Xh1ZUR2cmTL78s3faSqPag8oyJVh+wWp/A5R0hUpRbDc1Hmg0uFYXmKrHOecr
- gMSVjJDXFp88V+uxVNVp8rl2SBSWln9DCmibkOw2sK0hPpJ/GkxeBLiF+knlgtKbWqqu
- 9BmHhImXE/8KI3u6DuCieaH0rtiSkY2qoY2ehOtXxDndVXJpmNS/waPalU74O/vu8T2u
- ZiTA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV4hyJF5uzLTSob44NX17OoHxAbvFHf5eXRhOgU2ObAhT+kHN4g084BY/Vx48zwQqXD1/VG5xKxVxBRPJH147wYY7klp4PS6j2VBF9q1g==
-X-Gm-Message-State: AOJu0YxmUGI3oMJbmYi0sPDZsaqPjE17/WemGZkKBdt4yzOTjWzsnMRX
- IfS/URfP/6lYkFVOrPCbh9cqucSU93Vlx/DnZPxQby/FAOW0cnxB0Lk/dOTmQFm6l3MP2hghtOh
- OQ3712qqxH7tfVcMS9OWxEWOD2hmfDxwaA7l5BbRoyHMavycsMQtwRMSB6/xldw8=
-X-Received: by 2002:a17:907:a68b:b0:a3f:161b:cc13 with SMTP id
- vv11-20020a170907a68b00b00a3f161bcc13mr402051ejc.7.1709645935544; 
- Tue, 05 Mar 2024 05:38:55 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEGf3/3KYPfk68CgY/nW360g4A9tp+KNIVj9PFBRcH+lHdipruHA8YbSsz9ZbASe2wCJh5jOw==
-X-Received: by 2002:a17:907:a68b:b0:a3f:161b:cc13 with SMTP id
- vv11-20020a170907a68b00b00a3f161bcc13mr402031ejc.7.1709645935129; 
- Tue, 05 Mar 2024 05:38:55 -0800 (PST)
-Received: from kherbst.pingu ([77.20.15.65]) by smtp.gmail.com with ESMTPSA id
- wk16-20020a170907055000b00a4532d289edsm2641326ejb.116.2024.03.05.05.38.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Mar 2024 05:38:54 -0800 (PST)
-From: Karol Herbst <kherbst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Cc: Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@redhat.com>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- Karol Herbst <kherbst@redhat.com>
-Subject: [PATCH v2 2/2] drm/nouveau: move more missing UAPI bits
-Date: Tue,  5 Mar 2024 14:38:53 +0100
-Message-ID: <20240305133853.2214268-2-kherbst@redhat.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240305133853.2214268-1-kherbst@redhat.com>
-References: <20240305133853.2214268-1-kherbst@redhat.com>
+ d=1e100.net; s=20230601; t=1709646054; x=1710250854;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VZnEToW5t7As1au0rwMSuY1nkYFxsgpWnFlldMYKeW4=;
+ b=ZUI8Qwd7BZr3ybaNlDNRvmTwGBxmlYrFnVcoaWY1I6QTNhyayISYEEeUWbQDYmgrMp
+ db8bbZ9m9fteQlU9AcC6sQUiGxy8b1btpDS0TAms5yQTeH9nQXISS+AL3KrJUBaolKvy
+ zCwv3H3gy043iSkuy+8ZsJKFxxtj9DvEcqOFhomNTkCNNxWhD+f3I6Zs1rREOzRYLaQl
+ PCsmb/GclGw2CCM44q0WIfObDdyGCdDQWfMvsbHVu0gAkAXykkc8wZrR4OE/ahFgpwu2
+ jY/vEtFeAy8a/+N/3DKfaIemUiIfL8Q0xGvy85/5TKCyE9LMCxSAFULFfL3XvH6s2wUu
+ 4FxQ==
+X-Gm-Message-State: AOJu0Ywvfsc9TZY5M+yb/VDoRRrlD7gzf9eO91f2T373/c3rlmARBk6l
+ AAHPZXfN+Lb3TY3ml0emjX1HYX4agJhiNdRWyD234ucAg7GoHJKT2fN1d3z+WKTBITFObCzyKH+
+ Q3Uw5gwG8CC6tQ27LRs8Z3NlyBQapuY68gBzEiYiHcO1Lvodv3So3djyWULZ2goQ=
+X-Received: by 2002:a05:6a20:cea4:b0:1a1:45b8:bba4 with SMTP id
+ if36-20020a056a20cea400b001a145b8bba4mr1537446pzb.37.1709646054009; 
+ Tue, 05 Mar 2024 05:40:54 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHZZ9bEhXrO6qofCmunP2PwITI7ouZsIJbjodQXvB3Cecr0rJmvJ+jNDD8uikp00KYqrjuu6g==
+X-Received: by 2002:a05:6a20:cea4:b0:1a1:45b8:bba4 with SMTP id
+ if36-20020a056a20cea400b001a145b8bba4mr1537431pzb.37.1709646053643; 
+ Tue, 05 Mar 2024 05:40:53 -0800 (PST)
+Received: from [10.200.68.248] (nat-pool-muc-u.redhat.com. [149.14.88.27])
+ by smtp.gmail.com with ESMTPSA id
+ a13-20020aa78e8d000000b006e558416202sm9236593pfr.148.2024.03.05.05.40.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 Mar 2024 05:40:53 -0800 (PST)
+Message-ID: <fbe9453d-53c5-44d1-a478-2496c5928603@redhat.com>
+Date: Tue, 5 Mar 2024 14:40:43 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] nouveau/dmem: handle kcalloc() allocation failure
+To: Duoming Zhou <duoming@zju.edu.cn>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ daniel@ffwll.ch, airlied@gmail.com, lyude@redhat.com, kherbst@redhat.com,
+ linux-kernel@vger.kernel.org
+References: <20240303075312.56349-1-duoming@zju.edu.cn>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <20240303075312.56349-1-duoming@zju.edu.cn>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,113 +94,63 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Those are already de-facto UAPI, so let's just move it into the uapi
-header.
+Hi Duoming,
 
-Signed-off-by: Karol Herbst <kherbst@redhat.com>
-Reviewed-by: Lyude Paul <lyude@redhat.com>
-Reviewed-by: Danilo Krummrich <dakr@redhat.com>
-Link: https://patchwork.freedesktop.org/patch/msgid/20240304183157.1587152-2-kherbst@redhat.com
----
- drivers/gpu/drm/nouveau/nouveau_abi16.c | 20 +++++++++++++++-----
- drivers/gpu/drm/nouveau/nouveau_abi16.h | 12 ------------
- include/uapi/drm/nouveau_drm.h          | 22 ++++++++++++++++++++++
- 3 files changed, 37 insertions(+), 17 deletions(-)
+On 3/3/24 08:53, Duoming Zhou wrote:
+> The kcalloc() in nouveau_dmem_evict_chunk() will return null if
+> the physical memory has run out. As a result, if we dereference
+> src_pfns, dst_pfns or dma_addrs, the null pointer dereference bugs
+> will happen.
+> 
+> This patch uses stack variables to replace the kcalloc().
+> 
+> Fixes: 249881232e14 ("nouveau/dmem: evict device private memory during release")
+> Signed-off-by: Duoming Zhou <duoming@zju.edu.cn>
+> ---
+>   drivers/gpu/drm/nouveau/nouveau_dmem.c | 13 +++++--------
+>   1 file changed, 5 insertions(+), 8 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> index 12feecf71e7..9a578262c6d 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> @@ -374,13 +374,13 @@ static void
+>   nouveau_dmem_evict_chunk(struct nouveau_dmem_chunk *chunk)
+>   {
+>   	unsigned long i, npages = range_len(&chunk->pagemap.range) >> PAGE_SHIFT;
+> -	unsigned long *src_pfns, *dst_pfns;
+> -	dma_addr_t *dma_addrs;
+> +	unsigned long src_pfns[npages], dst_pfns[npages];
+> +	dma_addr_t dma_addrs[npages];
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-index cd14f993bdd1b..92f9127b284ac 100644
---- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-@@ -312,11 +312,21 @@ nouveau_abi16_ioctl_channel_alloc(ABI16_IOCTL_ARGS)
- 	if (device->info.family >= NV_DEVICE_INFO_V0_KEPLER) {
- 		if (init->fb_ctxdma_handle == ~0) {
- 			switch (init->tt_ctxdma_handle) {
--			case 0x01: engine = NV_DEVICE_HOST_RUNLIST_ENGINES_GR    ; break;
--			case 0x02: engine = NV_DEVICE_HOST_RUNLIST_ENGINES_MSPDEC; break;
--			case 0x04: engine = NV_DEVICE_HOST_RUNLIST_ENGINES_MSPPP ; break;
--			case 0x08: engine = NV_DEVICE_HOST_RUNLIST_ENGINES_MSVLD ; break;
--			case 0x30: engine = NV_DEVICE_HOST_RUNLIST_ENGINES_CE    ; break;
-+			case NOUVEAU_FIFO_ENGINE_GR:
-+				engine = NV_DEVICE_HOST_RUNLIST_ENGINES_GR;
-+				break;
-+			case NOUVEAU_FIFO_ENGINE_VP:
-+				engine = NV_DEVICE_HOST_RUNLIST_ENGINES_MSPDEC;
-+				break;
-+			case NOUVEAU_FIFO_ENGINE_PPP:
-+				engine = NV_DEVICE_HOST_RUNLIST_ENGINES_MSPPP;
-+				break;
-+			case NOUVEAU_FIFO_ENGINE_BSP:
-+				engine = NV_DEVICE_HOST_RUNLIST_ENGINES_MSVLD;
-+				break;
-+			case NOUVEAU_FIFO_ENGINE_CE:
-+				engine = NV_DEVICE_HOST_RUNLIST_ENGINES_CE;
-+				break;
- 			default:
- 				return nouveau_abi16_put(abi16, -ENOSYS);
- 			}
-diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.h b/drivers/gpu/drm/nouveau/nouveau_abi16.h
-index 11c8c4a80079b..661b901d8ecc9 100644
---- a/drivers/gpu/drm/nouveau/nouveau_abi16.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_abi16.h
-@@ -50,18 +50,6 @@ struct drm_nouveau_grobj_alloc {
- 	int      class;
- };
- 
--struct drm_nouveau_notifierobj_alloc {
--	uint32_t channel;
--	uint32_t handle;
--	uint32_t size;
--	uint32_t offset;
--};
--
--struct drm_nouveau_gpuobj_free {
--	int      channel;
--	uint32_t handle;
--};
--
- struct drm_nouveau_setparam {
- 	uint64_t param;
- 	uint64_t value;
-diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_drm.h
-index 77d7ff0d5b110..5404d4cfff4c2 100644
---- a/include/uapi/drm/nouveau_drm.h
-+++ b/include/uapi/drm/nouveau_drm.h
-@@ -73,6 +73,16 @@ struct drm_nouveau_getparam {
- 	__u64 value;
- };
- 
-+/*
-+ * Those are used to support selecting the main engine used on Kepler.
-+ * This goes into drm_nouveau_channel_alloc::tt_ctxdma_handle
-+ */
-+#define NOUVEAU_FIFO_ENGINE_GR  0x01
-+#define NOUVEAU_FIFO_ENGINE_VP  0x02
-+#define NOUVEAU_FIFO_ENGINE_PPP 0x04
-+#define NOUVEAU_FIFO_ENGINE_BSP 0x08
-+#define NOUVEAU_FIFO_ENGINE_CE  0x30
-+
- struct drm_nouveau_channel_alloc {
- 	__u32     fb_ctxdma_handle;
- 	__u32     tt_ctxdma_handle;
-@@ -95,6 +105,18 @@ struct drm_nouveau_channel_free {
- 	__s32 channel;
- };
- 
-+struct drm_nouveau_notifierobj_alloc {
-+	__u32 channel;
-+	__u32 handle;
-+	__u32 size;
-+	__u32 offset;
-+};
-+
-+struct drm_nouveau_gpuobj_free {
-+	__s32 channel;
-+	__u32 handle;
-+};
-+
- #define NOUVEAU_GEM_DOMAIN_CPU       (1 << 0)
- #define NOUVEAU_GEM_DOMAIN_VRAM      (1 << 1)
- #define NOUVEAU_GEM_DOMAIN_GART      (1 << 2)
--- 
-2.44.0
+Please don't use variable length arrays, this can potentially blow up
+the stack.
+
+As a fix I think we should allocate with __GFP_NOFAIL instead.
+
+- Danilo
+
+>   	struct nouveau_fence *fence;
+>   
+> -	src_pfns = kcalloc(npages, sizeof(*src_pfns), GFP_KERNEL);
+> -	dst_pfns = kcalloc(npages, sizeof(*dst_pfns), GFP_KERNEL);
+> -	dma_addrs = kcalloc(npages, sizeof(*dma_addrs), GFP_KERNEL);
+> +	memset(src_pfns, 0, npages);
+> +	memset(dst_pfns, 0, npages);
+> +	memset(dma_addrs, 0, npages);
+>   
+>   	migrate_device_range(src_pfns, chunk->pagemap.range.start >> PAGE_SHIFT,
+>   			npages);
+> @@ -406,11 +406,8 @@ nouveau_dmem_evict_chunk(struct nouveau_dmem_chunk *chunk)
+>   	migrate_device_pages(src_pfns, dst_pfns, npages);
+>   	nouveau_dmem_fence_done(&fence);
+>   	migrate_device_finalize(src_pfns, dst_pfns, npages);
+> -	kfree(src_pfns);
+> -	kfree(dst_pfns);
+>   	for (i = 0; i < npages; i++)
+>   		dma_unmap_page(chunk->drm->dev->dev, dma_addrs[i], PAGE_SIZE, DMA_BIDIRECTIONAL);
+> -	kfree(dma_addrs);
+>   }
+>   
+>   void
 
