@@ -2,126 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F7F48726BC
-	for <lists+nouveau@lfdr.de>; Tue,  5 Mar 2024 19:39:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B8A58729E1
+	for <lists+nouveau@lfdr.de>; Tue,  5 Mar 2024 22:59:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 12F0C10F79B;
-	Tue,  5 Mar 2024 18:39:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2FD42112D12;
+	Tue,  5 Mar 2024 21:59:07 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="intW3G7N";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="eK71pGBZ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2073.outbound.protection.outlook.com [40.107.94.73])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9B0F910F3CF;
- Tue,  5 Mar 2024 18:39:52 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=KbeD+d0bxXesHChETdrJFyyv8XZe8g+addV4WFb+Nl9OOEJq9NCSsA7DoKUHmM5fgLmfgl5256Mry86Qb8n3QGrU2YxEV/elvq9XaeAYzNQcAi5kXEaKp6msKLH9yDM7tcX6BLi++JAtfxEpcZxiMnpbmFiXWLkLZLoZOr63Ms2VN5zZLo1PRtlx9VFf2Wajy15+loumYOcYIEIu8a/zPWN6UCHRP2sM3yN2wTfeHIRAzH2MaCJHbjzq6vhvg3eN4nro7WeoKJpZljvucoiXyL9Ao5q4JRVmbBjPWRWjtVf7SSV8yZxjrk8pd3Ti0bygwKIp7J07ZsgntWfNRvfo8w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tCiWSFDfv24dXyyUJUUM+lL+IuXu7upiYEPmP5PHpa8=;
- b=ci2F1g3N/kIg+MMeO6TWBO/kAhydyesxW3IezlzfSoCLl6eG3wYpwvn0ZmBK+SuIKOfZgOa7eX6XKzw/m2CBJW7JTcIb0gDSFYfSemDOjeNIb95/wacUgjPKSy3CwflllOruPedc8hJ2ZfQIlzMvmRWjVWG01QV7DsSX9b3fHk3A5oZiUaSfH5zKTySbqygqB9ds8E1o71vPLsgmfMcvs3yUiVhWqeoOFipQ26aG4ipD9Xmj3K4UhclbRoJbcetkQDOoreZobrXQ9UbSvjlJgsbZiUouC1frEO/o32XXTwDLtfJUUxVZtuodMXjroUsOswSzXfB5Ihyc4vMHjuoznw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tCiWSFDfv24dXyyUJUUM+lL+IuXu7upiYEPmP5PHpa8=;
- b=intW3G7NzWr1Y3Nk46QjHaw7qEFueq0T8KWygOsT/gRx2ju55wcaOc3y6cMawHHNWFP6yNWWmsDpvXt8bE9zzMOIU6mItrv5cozDQzE+HSDGBCeoBvE8mBx6D2urEyV9F1/cVOozzUKnFo/GJlt0GgnkgBrVSgEQrQljaF+dLyBiGtA1gIwe42kswt2RLAkL7XZdajMBPwyWFpPoZAC1g+uCssHz6WXwfIJkkT1SbH52BljXU+4ZjMTgW1xUD9CDxyszcP6Ukdx8fMEMivN2aXSdE2Yfrlbh7Sim8/aJ7mtmyOPqYFnXHMTJT8aj8LIwMaWCQz/iG/qO2GBQXoWlXQ==
-Received: from SN7PR12MB8769.namprd12.prod.outlook.com (2603:10b6:806:34b::12)
- by SA3PR12MB9091.namprd12.prod.outlook.com (2603:10b6:806:395::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.39; Tue, 5 Mar
- 2024 18:39:49 +0000
-Received: from SN7PR12MB8769.namprd12.prod.outlook.com
- ([fe80::5971:c817:90dd:4fe6]) by SN7PR12MB8769.namprd12.prod.outlook.com
- ([fe80::5971:c817:90dd:4fe6%5]) with mapi id 15.20.7339.035; Tue, 5 Mar 2024
- 18:39:49 +0000
-From: Timur Tabi <ttabi@nvidia.com>
-To: "airlied@redhat.com" <airlied@redhat.com>, "akpm@linux-foundation.org"
- <akpm@linux-foundation.org>
-CC: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
-Subject: Re: [linux-next:master] BUILD REGRESSION
- 11afac187274a6177a7ac82997f8691c0f469e41
-Thread-Topic: [linux-next:master] BUILD REGRESSION
- 11afac187274a6177a7ac82997f8691c0f469e41
-Thread-Index: AQHabykUrJG0RYvtDUCmXGbXfSqBmbEpeq+A
-Date: Tue, 5 Mar 2024 18:39:49 +0000
-Message-ID: <99f96c0399b473efe5f0c1c2cf4064ccc09870a4.camel@nvidia.com>
-References: <202403060216.deurYF3s-lkp@intel.com>
-In-Reply-To: <202403060216.deurYF3s-lkp@intel.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.44.4-0ubuntu2 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SN7PR12MB8769:EE_|SA3PR12MB9091:EE_
-x-ms-office365-filtering-correlation-id: b9881b02-9523-448c-1306-08dc3d43a3a8
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: c5KTKiB3Tes22q/ZY/JmKGLXLIKzqIu5B0O9Jm7RKQ4AFtOpsxMTK6gslXJ8epO0+SJzvBzDKDu9et9FF7tH9mzLGg0HU6gWhATo9N8qtmq2ZQcd6ONIF4zi53e3zUDU+J0Gk16YGmCqmZiOXuP6xpEsO69JDCs8xsrNVQ4vkzpWZxkY2zP8nEhRmliHcOC555MbXrmsCAcneMwxUVP7dCtaA8sputlHaU2jtzUsx7AfbY0gsIhh2o/4FN/BaI9ZSe+dUDOw1pfIF3Iq79agyYZkD6XTJQMVQ9MIAaZAEYyfI2+XoigegN9i7TJoOZjDv8Q+PEFWLxT4B+s4Y846BGdTEejoGXCkizv8TTUM83wn8rEJfMdm+7X8ymA82E207DnS2A260j+rsbeh2kznliZwpftoJyPBF+JdlQJriD796qSO20KPshVM5HlIKHT6jgiiBqkhjIWBZdL+A0hjRbtK36WpAKQL3bwgl3iy2fofi2UQjcZzvhvE9IzoWMolrRSG7JOvWjHi7ZGTPGUH5uP8XYl6g0DmwJ6Yib1PbhPIxoRghxO9hgQZRyhYl8OmUpoIljJup5tw+Hhjqj8OMPsi6swWKIzXXPFz/aWM8XXh7xGxtyg4Z/Zs2LUD82H9DHUVVyTlY3mbKqCF3wVeZrCRWeGXxHIWTRHk+B2u4CJWOEiGRoIUMsJIYKCkwcKL4ColvwclgLrn3sevVdvGSg==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN7PR12MB8769.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(38070700009); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?NmZ6ZTMyaE5MUVZQL0Y1RXZ5eFEwWGR6dFpMYnlCYkt4UEFJWFhqUjRxMDRM?=
- =?utf-8?B?S0hTd3RkOXR4VUJydSt5RUFCRllzakVDS20rWEdJNXprN291Q1hpNDRKSXBa?=
- =?utf-8?B?ZTNtemVsMS9LM3R4WUtFSlZWcEhsbFJRS3ZleTVnZ0c5M1FmYllUUjltSjZS?=
- =?utf-8?B?OE56RUp1ZmhCMklXeHJONnR0b0xiNVU5c0xXOXFCSXUrVnl5RUZHSGM0NTJY?=
- =?utf-8?B?SWI2OFpNY2FDNTdlSzREMHhPbTdHd1NGdlpHR2xmdllkR1FrZFpTdUdldWdW?=
- =?utf-8?B?T3NwbUNmc2VQZFFwcHBHK2M0by94VDJjUkdrVVZSQXUzWExFdG15ZWVwNyto?=
- =?utf-8?B?U0ZSSEFuWUl1Q3pvSUlvSTNIQ0puVGVQNXJ4L3A2T3RjMFFUcExIYWZjNHRm?=
- =?utf-8?B?MDNyTktQWlVRTDlIbSs0b2o1QktXYjJLeTFkUW1tLzd2UTRnc1RoWkk1TjRv?=
- =?utf-8?B?b3U1NXlEdnlYNXkxck1Td2xSeXM1emRQYlQrdGZndzM1czlPYi9uenhyNnBq?=
- =?utf-8?B?SjhaSzB4WnhBUDBVL0FkRDR3LzVLRmoxQWlDTE16VGxYRW1LNmpvdjd2K1NS?=
- =?utf-8?B?SlVzRk03V3dCc1VmRVhpL0owKzlSYllIY3NHWUtIUDQ0Tyt6aXlLdGF5allM?=
- =?utf-8?B?b2xCSXk1YWZraVo2UE91d004N0czY2FGRlhDWmFvT2JnemhoRHk3ZkJTQyt2?=
- =?utf-8?B?T3NRcVgrZ3VJRU80c2lFbVFNRG5JYjRnckhjd2xONXJCVmZPWWlvWUhkZTEr?=
- =?utf-8?B?UGtISGRuY25udXlQN0d2L1ozRWVvUGNJQTRTNEYxSXFqdzI4QndtbVByS3ZP?=
- =?utf-8?B?c25rVDZEa0tpTjVXV2paZE9rZkdnbFFTcE4rTUUrZlo4eUpiU2h4dytjWm5t?=
- =?utf-8?B?RmIrT0FYOCtFU2E3bHgxZzVjdXpPWFNyWnVvSnlzQ1MyMUtDelNDcXFMcy82?=
- =?utf-8?B?OWQvWUJ0c2d5OGVkdEFhMjcvaFhVNzV5K3ZkekNPNitINWVCR2l5WGZEQjFq?=
- =?utf-8?B?Z0k0eXJ2NHVUZ1QwOWNkUTJPTmFOZFhVR2hNeU42SGJGNEFIcVMwOGNaTXZ3?=
- =?utf-8?B?cXN6YVJhSjNVblRHSW1yN01mV1MxczNlRjNtc1VHN3A2VzVRMkptRFdVa2xN?=
- =?utf-8?B?RytoN1JZRDN4KzY4cWVEKzNHeFZEQkxOem5mRkRWUEdlRUt5NGZQN2xMcHl4?=
- =?utf-8?B?bWRmZk43aEtHeFFjVE1nMlNoM1NNbThFQTFGYTJOMlU0SHBXNyt0azRDNTZm?=
- =?utf-8?B?NHBxRm5OVHZ1bUZOQ3F1WFRsaExwS3ZhSTJWakVuYUJycll6dVJ1Mm92eTF2?=
- =?utf-8?B?aUhuTEhwcFo1VU5FSjVlWlV0UnJPWlE1OXBuOWFLQlBLMFNsZDhJQVQ2SkdI?=
- =?utf-8?B?ZHBTZ1c2alRXb29jNk9RKytXVWUxSUlLKzZsa1NHbGVaUi9QTVZjclRNYWEy?=
- =?utf-8?B?a3gvYUg4ZklnZ0VLQUFLM2FTWEN2Tk90ZjhCaVNTdFZJdEErRi9QR25rZDVH?=
- =?utf-8?B?bnA1aDdQTnF6anl4THFBVHgydXZBZHl4YXVDN3Fhb3N1L25GNThSRVFIMGhE?=
- =?utf-8?B?TFBJb0tRZW90WWY5SUExVnAvR3dqMEhwWkZsMVhhNzR6MnVSYk1GWW44NlBj?=
- =?utf-8?B?emFrTDlKdGR4QmRuSFBnTkRoVWk0ZjE2T01lK0RCTE01NnoxTG1iWkdRTlZ4?=
- =?utf-8?B?WFQ4eCtVeC9kSFd5Y2RRRFhSNnFDaTc3UTBCTmlnV0FRbTZDTVlNNjc3RWpi?=
- =?utf-8?B?QlZQVlk5d0RJRDhVVnRWWHRwR1d6VnNqc0NoSTZXSVFKY1BpSHdzM0FhRjhq?=
- =?utf-8?B?dm5NS2JScXRXY0svYzBLbjdWdlE5dlE1WmJBbzRkVFFoTjRXbStvSDJpR3Nm?=
- =?utf-8?B?bG9iamFuTyt3U1UzdWN4amhvN25jUGc0R3ROM1ZpazNjL0hQM2FqSVJlNVRZ?=
- =?utf-8?B?SGUyNUNSVG91THA3L0NGc3pZREFrMkdPa29iczVYZW5zY2ZPeksxeEVsdU52?=
- =?utf-8?B?ZVllM1lFV2ZXcy9JWkkyM1BzZVVlbTZrakx0QytoMlRzejZXL3hLWEtWVThk?=
- =?utf-8?B?dFZseTd1SllsSXVRV3pmeExKbHRPaDlHS0ZpTklRRE1pT1lZVTlzdUZwVXBk?=
- =?utf-8?Q?l9eTPFTDkFS2S6qTurLeMRuqI?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <F29E4776D2DC164DBE1569C5680575FF@namprd12.prod.outlook.com>
-Content-Transfer-Encoding: base64
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [46.235.227.194])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4FCD0112D11;
+ Tue,  5 Mar 2024 21:59:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1709675943;
+ bh=Pi6T1W5bDFqqI2XXQ+4KYgY88rVQ95Vyl3n/fcXtOEo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=eK71pGBZ6Cz51o8qikvWm9K+PhISQRoVeIfPrE1JiwaG7q1A3dZgkjtiTAbgZgp4B
+ m69Q9A106Ja++jlIoMXxTtnhwo2cpnaGCPXX+0rOsMd7edcefjvG+OthSgVAm0YG+f
+ 84likditwTT7tx9UMns7EZBUfNHVdaIggZo1SEbHhX2IVe3jHtEaJO1DB/Xtbr53Hk
+ BCF2Q3TBsTYA3Lh7WSssBcx882ZZbaRRWyKc6XKmxYGQjlL0JzyxoACxfQkGzlgTS5
+ NfyWcJb5SAZclkjKZJdvPiySMBpD7/0op+jwvAnR0C3GCqBiyzqwaht8c3ZJeFNSQ6
+ nfSnf4FKoD2aw==
+Received: from [100.109.49.129] (cola.collaboradmins.com [195.201.22.229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: dmitry.osipenko)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 64017378149B;
+ Tue,  5 Mar 2024 21:59:01 +0000 (UTC)
+Message-ID: <c844b72e-6c4e-4c99-8e7f-b9c62f63209d@collabora.com>
+Date: Wed, 6 Mar 2024 00:58:58 +0300
 MIME-Version: 1.0
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8769.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b9881b02-9523-448c-1306-08dc3d43a3a8
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Mar 2024 18:39:49.7506 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: aaLxSpJkUetHw9NYzqcekP5Fsr1IpdMUu2RrfBWW4iipleyRWaRY1Eag3NlihohQWTFh9YUInvIQGFZDqOSWFQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB9091
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/13] drm: Fix reservation locking for pin/unpin and
+ console
+Content-Language: en-US
+To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
+ airlied@gmail.com, mripard@kernel.org, maarten.lankhorst@linux.intel.com,
+ christian.koenig@amd.com, sumit.semwal@linaro.org, robdclark@gmail.com,
+ quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org, sean@poorly.run,
+ marijn.suijten@somainline.org, suijingfeng@loongson.cn, kherbst@redhat.com,
+ lyude@redhat.com, dakr@redhat.com, airlied@redhat.com, kraxel@redhat.com,
+ alexander.deucher@amd.com, Xinhui.Pan@amd.com, zack.rusin@broadcom.com,
+ bcm-kernel-feedback-list@broadcom.com
+Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org
+References: <20240227113853.8464-1-tzimmermann@suse.de>
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+In-Reply-To: <20240227113853.8464-1-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -136,10 +71,82 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gV2VkLCAyMDI0LTAzLTA2IGF0IDAyOjE0ICswODAwLCBrZXJuZWwgdGVzdCByb2JvdCB3cm90
-ZToNCj4gPiDCoMKgIHwtLSBkcml2ZXJzLWdwdS1kcm0tbm91dmVhdS1udmttLXN1YmRldi1nc3At
-cjUzNS5jOndhcm5pbmc6RnVuY3Rpb24tDQo+ID4gcGFyYW1ldGVyLW9yLXN0cnVjdC1tZW1iZXIt
-Z3NwLW5vdC1kZXNjcmliZWQtaW4tbnZrbV9nc3BfcmFkaXgzX3NnDQoNCkNvdWxkIHNvbWVvbmUg
-cGxlYXNlIGFwcGx5DQpodHRwczovL2xvcmUua2VybmVsLm9yZy9ub3V2ZWF1LzIwMjQwMjEwMDAy
-OTAwLjE0ODk4Mi0xLXR0YWJpQG52aWRpYS5jb20vVC8NCnRvIGZpbmFsbHkgc3RvcCB0aGVzZSB3
-YXJuaW5ncz8gIFRoYW5rcw0KDQo=
+On 2/27/24 13:14, Thomas Zimmermann wrote:
+> Dma-buf locking semantics require the caller of pin and unpin to hold
+> the buffer's reservation lock. Fix DRM to adhere to the specs. This
+> enables to fix the locking in DRM's console emulation. Similar changes
+> for vmap and mmap have been posted at [1][2]
+> 
+> Most DRM drivers and memory managers acquire the buffer object's
+> reservation lock within their GEM pin and unpin callbacks. This
+> violates dma-buf locking semantics. We get away with it because PRIME
+> does not provide pin/unpin, but attach/detach, for which the locking
+> semantics is correct.
+> 
+> Patches 1 to 8 rework DRM GEM code in various implementations to
+> acquire the reservation lock when entering the pin and unpin callbacks.
+> This prepares them for the next patch. Drivers that are not affected
+> by these patches either don't acquire the reservation lock (amdgpu)
+> or don't need preparation (loongson).
+> 
+> Patch 9 moves reservation locking from the GEM pin/unpin callbacks
+> into drm_gem_pin() and drm_gem_unpin(). As PRIME uses these functions
+> internally it still gets the reservation lock.
+> 
+> With the updated GEM callbacks, the rest of the patchset fixes the
+> fbdev emulation's buffer locking. Fbdev emulation needs to keep its
+> GEM buffer object inplace while updating its content. This required
+> a implicit pinning and apparently amdgpu didn't do this at all.
+> 
+> Patch 10 introduces drm_client_buffer_vmap_local() and _vunmap_local().
+> The former function map a GEM buffer into the kernel's address space
+> with regular vmap operations, but keeps holding the reservation lock.
+> The _vunmap_local() helper undoes the vmap and releases the lock. The
+> updated GEM callbacks make this possible. Between the two calls, the
+> fbdev emulation can update the buffer content without have the buffer
+> moved or evicted. Update fbdev-generic to use vmap_local helpers,
+> which fix amdgpu. The idea of adding a "local vmap" has previously been
+> attempted at [3] in a different form.
+> 
+> Patch 11 adds implicit pinning to the DRM client's regular vmap
+> helper so that long-term vmap'ed buffers won't be evicted. This only
+> affects fbdev-dma, but GEM DMA helpers don't require pinning. So
+> there are no practical changes.
+> 
+> Patches 12 and 13 remove implicit pinning from the vmap and vunmap
+> operations in gem-vram and qxl. These pin operations are not supposed
+> to be part of vmap code, but were required to keep the buffers in place
+> for fbdev emulation. With the conversion o ffbdev-generic to to
+> vmap_local helpers, that code can finally be removed.
+> 
+> Tested with amdgpu, nouveau, radeon, simpledrm and vc4.
+> 
+> [1] https://patchwork.freedesktop.org/series/106371/
+> [2] https://patchwork.freedesktop.org/series/116001/
+> [3] https://patchwork.freedesktop.org/series/84732/
+> 
+> Thomas Zimmermann (13):
+>   drm/gem-shmem: Acquire reservation lock in GEM pin/unpin callbacks
+>   drm/gem-vram: Acquire reservation lock in GEM pin/unpin callbacks
+>   drm/msm: Provide msm_gem_get_pages_locked()
+>   drm/msm: Acquire reservation lock in GEM pin/unpin callback
+>   drm/nouveau: Provide nouveau_bo_{pin,unpin}_locked()
+>   drm/nouveau: Acquire reservation lock in GEM pin/unpin callbacks
+>   drm/qxl: Provide qxl_bo_{pin,unpin}_locked()
+>   drm/qxl: Acquire reservation lock in GEM pin/unpin callbacks
+>   drm/gem: Acquire reservation lock in drm_gem_{pin/unpin}()
+>   drm/fbdev-generic: Fix locking with drm_client_buffer_vmap_local()
+>   drm/client: Pin vmap'ed GEM buffers
+>   drm/gem-vram: Do not pin buffer objects for vmap
+>   drm/qxl: Do not pin buffer objects for vmap
+
+The patches look good. I gave them fbtest on virtio-gpu, no problems
+spotted.
+
+Reviewed-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+Tested-by: Dmitry Osipenko <dmitry.osipenko@collabora.com> # virtio-gpu
+
+-- 
+Best regards,
+Dmitry
+
