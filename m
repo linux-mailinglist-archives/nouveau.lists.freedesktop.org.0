@@ -2,49 +2,141 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD3DD880E99
-	for <lists+nouveau@lfdr.de>; Wed, 20 Mar 2024 10:31:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6918B873990
+	for <lists+nouveau@lfdr.de>; Wed,  6 Mar 2024 15:45:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6484710E6D2;
-	Wed, 20 Mar 2024 09:31:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 29CB5113245;
+	Wed,  6 Mar 2024 14:44:59 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="Z6bm1Dkf";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="KBfRhPNj";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="Z6bm1Dkf";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="KBfRhPNj";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from zg8tmty3ljk5ljewns4xndka.icoremail.net
- (zg8tmty3ljk5ljewns4xndka.icoremail.net [167.99.105.149])
- by gabe.freedesktop.org (Postfix) with ESMTP id 28975112EC9;
- Wed,  6 Mar 2024 05:01:29 +0000 (UTC)
-Received: from ubuntu.localdomain (unknown [218.12.17.6])
- by mail-app2 (Coremail) with SMTP id by_KCgBnq6qR+OdltmLGAg--.52750S2;
- Wed, 06 Mar 2024 13:01:15 +0800 (CST)
-From: Duoming Zhou <duoming@zju.edu.cn>
-To: nouveau@lists.freedesktop.org
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- daniel@ffwll.ch, airlied@gmail.com, dakr@redhat.com, lyude@redhat.com,
- kherbst@redhat.com, timur@kernel.org, jani.nikula@linux.intel.com,
- Duoming Zhou <duoming@zju.edu.cn>
-Subject: [PATCH v3] nouveau/dmem: handle kcalloc() allocation failure
-Date: Wed,  6 Mar 2024 13:01:04 +0800
-Message-Id: <20240306050104.11259-1-duoming@zju.edu.cn>
-X-Mailer: git-send-email 2.17.1
-X-CM-TRANSID: by_KCgBnq6qR+OdltmLGAg--.52750S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7trW5Cr1ruw4DCr4fKF4fGrg_yoW8KrW3pF
- WxGr1jyr47t3WjvryxKF48CF13Can8Jay8Ka9Fvr9I9Fs5XFyxCw42yFyUWayFvr13CrWI
- qr4kta4avFWjqwUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9Y14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
- JVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
- CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
- 2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
- W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
- Y2ka0xkIwI1lc7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x
- 0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2
- zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF
- 4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWU
- CwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCT
- nIWIevJa73UjIFyTuYvjfUonmRUUUUU
-X-CM-SenderInfo: qssqjiasttq6lmxovvfxof0/1tbiAwMLAWXnadMBYgBgsx
-X-Mailman-Approved-At: Wed, 20 Mar 2024 09:31:27 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 165D410F19D;
+ Wed,  6 Mar 2024 14:44:57 +0000 (UTC)
+Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org [10.150.64.98])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 6A1366B508;
+ Wed,  6 Mar 2024 14:44:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1709736295; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=gNozcRck7HD1pz36B+cb3AEI5BDD6Vqr5+Fs9ZciyZc=;
+ b=Z6bm1Dkf1AO/315BvC8m+fjvHW6W5O+amhr2HIlMBVld1r+LsBq3S4kNg9vNRpyNYB9sby
+ 8T1qqWKWbsF7Sl7pp3mh81uRYTliDwp0m4Sx88cGtJkqzeT9xUuAbMlzbnq9XdyKnu+bq0
+ ZZ0uPwfOWQ1YhzuPdsRrzsiN52myXtE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1709736295;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=gNozcRck7HD1pz36B+cb3AEI5BDD6Vqr5+Fs9ZciyZc=;
+ b=KBfRhPNj4plBaJ2be6qT/TIC17q/Uh4tuEjRqusi79TjI+T+V+u52QbTsodC3ffWMFgjOj
+ ATy2rYVoA8gm/JAQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1709736295; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=gNozcRck7HD1pz36B+cb3AEI5BDD6Vqr5+Fs9ZciyZc=;
+ b=Z6bm1Dkf1AO/315BvC8m+fjvHW6W5O+amhr2HIlMBVld1r+LsBq3S4kNg9vNRpyNYB9sby
+ 8T1qqWKWbsF7Sl7pp3mh81uRYTliDwp0m4Sx88cGtJkqzeT9xUuAbMlzbnq9XdyKnu+bq0
+ ZZ0uPwfOWQ1YhzuPdsRrzsiN52myXtE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1709736295;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=gNozcRck7HD1pz36B+cb3AEI5BDD6Vqr5+Fs9ZciyZc=;
+ b=KBfRhPNj4plBaJ2be6qT/TIC17q/Uh4tuEjRqusi79TjI+T+V+u52QbTsodC3ffWMFgjOj
+ ATy2rYVoA8gm/JAQ==
+Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id B44231377D;
+ Wed,  6 Mar 2024 14:44:54 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap2.dmz-prg2.suse.org with ESMTPSA id nQyvKmaB6GWDbwAAn2gu4w
+ (envelope-from <tzimmermann@suse.de>); Wed, 06 Mar 2024 14:44:54 +0000
+Message-ID: <bf149016-5077-4220-b473-d2808d064c5d@suse.de>
+Date: Wed, 6 Mar 2024 15:44:54 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/13] drm: Fix reservation locking for pin/unpin and
+ console
+Content-Language: en-US
+To: Dmitry Osipenko <dmitry.osipenko@collabora.com>, daniel@ffwll.ch,
+ airlied@gmail.com, mripard@kernel.org, maarten.lankhorst@linux.intel.com,
+ christian.koenig@amd.com, sumit.semwal@linaro.org, robdclark@gmail.com,
+ quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org, sean@poorly.run,
+ marijn.suijten@somainline.org, suijingfeng@loongson.cn, kherbst@redhat.com,
+ lyude@redhat.com, dakr@redhat.com, airlied@redhat.com, kraxel@redhat.com,
+ alexander.deucher@amd.com, Xinhui.Pan@amd.com, zack.rusin@broadcom.com,
+ bcm-kernel-feedback-list@broadcom.com
+Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org
+References: <20240227113853.8464-1-tzimmermann@suse.de>
+ <c844b72e-6c4e-4c99-8e7f-b9c62f63209d@collabora.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <c844b72e-6c4e-4c99-8e7f-b9c62f63209d@collabora.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: smtp-out1.suse.de;
+	none
+X-Spam-Level: 
+X-Spam-Score: -4.28
+X-Spamd-Result: default: False [-4.28 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; XM_UA_NO_VERSION(0.01)[];
+ FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
+ NEURAL_HAM_LONG(-1.00)[-1.000]; BAYES_HAM(-3.00)[100.00%];
+ R_RATELIMIT(0.00)[to_ip_from(RLqs7qcp4g99ribr8z1n9xsc8a)];
+ RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ NEURAL_HAM_SHORT(-0.19)[-0.962]; RCPT_COUNT_TWELVE(0.00)[29];
+ FREEMAIL_TO(0.00)[collabora.com,ffwll.ch,gmail.com,kernel.org,linux.intel.com,amd.com,linaro.org,quicinc.com,poorly.run,somainline.org,loongson.cn,redhat.com,broadcom.com];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
+ MIME_TRACE(0.00)[0:+]; RCVD_TLS_ALL(0.00)[];
+ MID_RHS_MATCH_FROM(0.00)[]
+X-Spam-Flag: NO
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,61 +151,97 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The kcalloc() in nouveau_dmem_evict_chunk() will return null if
-the physical memory has run out. As a result, if we dereference
-src_pfns, dst_pfns or dma_addrs, the null pointer dereference bugs
-will happen.
+Hi
 
-Moreover, the GPU is going away. If the kcalloc() fails, we could not
-evict all pages mapping a chunk. So this patch adds a __GFP_NOFAIL
-flag in kcalloc().
+Am 05.03.24 um 22:58 schrieb Dmitry Osipenko:
+> On 2/27/24 13:14, Thomas Zimmermann wrote:
+>> Dma-buf locking semantics require the caller of pin and unpin to hold
+>> the buffer's reservation lock. Fix DRM to adhere to the specs. This
+>> enables to fix the locking in DRM's console emulation. Similar changes
+>> for vmap and mmap have been posted at [1][2]
+>>
+>> Most DRM drivers and memory managers acquire the buffer object's
+>> reservation lock within their GEM pin and unpin callbacks. This
+>> violates dma-buf locking semantics. We get away with it because PRIME
+>> does not provide pin/unpin, but attach/detach, for which the locking
+>> semantics is correct.
+>>
+>> Patches 1 to 8 rework DRM GEM code in various implementations to
+>> acquire the reservation lock when entering the pin and unpin callbacks.
+>> This prepares them for the next patch. Drivers that are not affected
+>> by these patches either don't acquire the reservation lock (amdgpu)
+>> or don't need preparation (loongson).
+>>
+>> Patch 9 moves reservation locking from the GEM pin/unpin callbacks
+>> into drm_gem_pin() and drm_gem_unpin(). As PRIME uses these functions
+>> internally it still gets the reservation lock.
+>>
+>> With the updated GEM callbacks, the rest of the patchset fixes the
+>> fbdev emulation's buffer locking. Fbdev emulation needs to keep its
+>> GEM buffer object inplace while updating its content. This required
+>> a implicit pinning and apparently amdgpu didn't do this at all.
+>>
+>> Patch 10 introduces drm_client_buffer_vmap_local() and _vunmap_local().
+>> The former function map a GEM buffer into the kernel's address space
+>> with regular vmap operations, but keeps holding the reservation lock.
+>> The _vunmap_local() helper undoes the vmap and releases the lock. The
+>> updated GEM callbacks make this possible. Between the two calls, the
+>> fbdev emulation can update the buffer content without have the buffer
+>> moved or evicted. Update fbdev-generic to use vmap_local helpers,
+>> which fix amdgpu. The idea of adding a "local vmap" has previously been
+>> attempted at [3] in a different form.
+>>
+>> Patch 11 adds implicit pinning to the DRM client's regular vmap
+>> helper so that long-term vmap'ed buffers won't be evicted. This only
+>> affects fbdev-dma, but GEM DMA helpers don't require pinning. So
+>> there are no practical changes.
+>>
+>> Patches 12 and 13 remove implicit pinning from the vmap and vunmap
+>> operations in gem-vram and qxl. These pin operations are not supposed
+>> to be part of vmap code, but were required to keep the buffers in place
+>> for fbdev emulation. With the conversion o ffbdev-generic to to
+>> vmap_local helpers, that code can finally be removed.
+>>
+>> Tested with amdgpu, nouveau, radeon, simpledrm and vc4.
+>>
+>> [1] https://patchwork.freedesktop.org/series/106371/
+>> [2] https://patchwork.freedesktop.org/series/116001/
+>> [3] https://patchwork.freedesktop.org/series/84732/
+>>
+>> Thomas Zimmermann (13):
+>>    drm/gem-shmem: Acquire reservation lock in GEM pin/unpin callbacks
+>>    drm/gem-vram: Acquire reservation lock in GEM pin/unpin callbacks
+>>    drm/msm: Provide msm_gem_get_pages_locked()
+>>    drm/msm: Acquire reservation lock in GEM pin/unpin callback
+>>    drm/nouveau: Provide nouveau_bo_{pin,unpin}_locked()
+>>    drm/nouveau: Acquire reservation lock in GEM pin/unpin callbacks
+>>    drm/qxl: Provide qxl_bo_{pin,unpin}_locked()
+>>    drm/qxl: Acquire reservation lock in GEM pin/unpin callbacks
+>>    drm/gem: Acquire reservation lock in drm_gem_{pin/unpin}()
+>>    drm/fbdev-generic: Fix locking with drm_client_buffer_vmap_local()
+>>    drm/client: Pin vmap'ed GEM buffers
+>>    drm/gem-vram: Do not pin buffer objects for vmap
+>>    drm/qxl: Do not pin buffer objects for vmap
+> The patches look good. I gave them fbtest on virtio-gpu, no problems
+> spotted.
+>
+> Reviewed-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+> Tested-by: Dmitry Osipenko <dmitry.osipenko@collabora.com> # virtio-gpu
 
-Finally, as there is no need to have physically contiguous memory,
-this patch switches kcalloc() to kvcalloc() in order to avoid
-failing allocations.
+Great, thanks a lot. If no other reviews come in, I'll land the patchset 
+within the next days.
 
-Fixes: 249881232e14 ("nouveau/dmem: evict device private memory during release")
-Suggested-by: Danilo Krummrich <dakr@redhat.com>
-Signed-off-by: Duoming Zhou <duoming@zju.edu.cn>
----
-Changes in v3:
-  - Switch kcalloc() to kvcalloc().
+Best regards
+Thomas
 
- drivers/gpu/drm/nouveau/nouveau_dmem.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+>
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-index 12feecf71e7..6fb65b01d77 100644
---- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-@@ -378,9 +378,9 @@ nouveau_dmem_evict_chunk(struct nouveau_dmem_chunk *chunk)
- 	dma_addr_t *dma_addrs;
- 	struct nouveau_fence *fence;
- 
--	src_pfns = kcalloc(npages, sizeof(*src_pfns), GFP_KERNEL);
--	dst_pfns = kcalloc(npages, sizeof(*dst_pfns), GFP_KERNEL);
--	dma_addrs = kcalloc(npages, sizeof(*dma_addrs), GFP_KERNEL);
-+	src_pfns = kvcalloc(npages, sizeof(*src_pfns), GFP_KERNEL | __GFP_NOFAIL);
-+	dst_pfns = kvcalloc(npages, sizeof(*dst_pfns), GFP_KERNEL | __GFP_NOFAIL);
-+	dma_addrs = kvcalloc(npages, sizeof(*dma_addrs), GFP_KERNEL | __GFP_NOFAIL);
- 
- 	migrate_device_range(src_pfns, chunk->pagemap.range.start >> PAGE_SHIFT,
- 			npages);
-@@ -406,11 +406,11 @@ nouveau_dmem_evict_chunk(struct nouveau_dmem_chunk *chunk)
- 	migrate_device_pages(src_pfns, dst_pfns, npages);
- 	nouveau_dmem_fence_done(&fence);
- 	migrate_device_finalize(src_pfns, dst_pfns, npages);
--	kfree(src_pfns);
--	kfree(dst_pfns);
-+	kvfree(src_pfns);
-+	kvfree(dst_pfns);
- 	for (i = 0; i < npages; i++)
- 		dma_unmap_page(chunk->drm->dev->dev, dma_addrs[i], PAGE_SIZE, DMA_BIDIRECTIONAL);
--	kfree(dma_addrs);
-+	kvfree(dma_addrs);
- }
- 
- void
 -- 
-2.17.1
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstrasse 146, 90461 Nuernberg, Germany
+GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
+HRB 36809 (AG Nuernberg)
 
