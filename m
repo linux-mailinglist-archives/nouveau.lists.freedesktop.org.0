@@ -2,59 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3686F878AE7
-	for <lists+nouveau@lfdr.de>; Mon, 11 Mar 2024 23:46:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DBE7187B62E
+	for <lists+nouveau@lfdr.de>; Thu, 14 Mar 2024 02:45:33 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A3063112CE6;
-	Mon, 11 Mar 2024 22:46:44 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="HqhuOUUr";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0568E10E99D;
+	Thu, 14 Mar 2024 01:45:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 587 seconds by postgrey-1.36 at gabe;
- Mon, 11 Mar 2024 22:46:43 UTC
-Received: from out-170.mta1.migadu.com (out-170.mta1.migadu.com
- [95.215.58.170])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8D7E9112CE8
- for <nouveau@lists.freedesktop.org>; Mon, 11 Mar 2024 22:46:43 +0000 (UTC)
-Message-ID: <83e2d77c-d12b-4f4f-a759-8e97fd86eff5@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1710196614;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=kUQPkht64sWX7JVV8v7D7kaGK+/xr09KYmGxuaLQzAo=;
- b=HqhuOUUrijOnMo8iwXnOShESjlO2ucwqsLA1yJ3Ss3rkH6Yd1JmhQ4kEi35gjRlnEl+W5y
- WbO5+7os9DpccK6BVJft3mXh5wSgShvrwfDcOXvh0m84UdqUgJQjPU/E7xJsQIpKyNC+zm
- tIAJuScW36ApYLQ4wf4CbL+4aD0kEj4=
-Date: Tue, 12 Mar 2024 06:36:31 +0800
+Received: from us-smtp-delivery-44.mimecast.com
+ (us-smtp-delivery-44.mimecast.com [205.139.111.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3FE6010E99D
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Mar 2024 01:45:29 +0000 (UTC)
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-482-QWl8yqlGOp2WSlimDf4IBw-1; Wed,
+ 13 Mar 2024 21:45:25 -0400
+X-MC-Unique: QWl8yqlGOp2WSlimDf4IBw-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4B1D838157BC;
+ Thu, 14 Mar 2024 01:45:25 +0000 (UTC)
+Received: from dreadlord.redhat.com (unknown [10.64.136.106])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 3330D492BD0;
+ Thu, 14 Mar 2024 01:45:22 +0000 (UTC)
+From: Dave Airlie <airlied@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Cc: dakr@redhat.com,
+	nouveau@lists.freedesktop.org
+Subject: [PATCH] nouveau/gsp: don't check devinit disable on GSP.
+Date: Thu, 14 Mar 2024 11:45:21 +1000
+Message-ID: <20240314014521.2695233-1-airlied@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [10/13] drm/fbdev-generic: Fix locking with
- drm_client_buffer_vmap_local()
-Content-Language: en-US
-To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
- airlied@gmail.com, mripard@kernel.org, maarten.lankhorst@linux.intel.com,
- christian.koenig@amd.com, sumit.semwal@linaro.org,
- dmitry.osipenko@collabora.com, robdclark@gmail.com,
- quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org, sean@poorly.run,
- marijn.suijten@somainline.org, kherbst@redhat.com, lyude@redhat.com,
- dakr@redhat.com, airlied@redhat.com, kraxel@redhat.com,
- alexander.deucher@amd.com, Xinhui.Pan@amd.com, zack.rusin@broadcom.com,
- bcm-kernel-feedback-list@broadcom.com
-Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org
-References: <20240227113853.8464-11-tzimmermann@suse.de>
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Sui Jingfeng <sui.jingfeng@linux.dev>
-In-Reply-To: <20240227113853.8464-11-tzimmermann@suse.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Migadu-Flow: FLOW_OUT
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.10
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: gmail.com
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,147 +55,33 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+From: Dave Airlie <airlied@redhat.com>
 
+GSP should be handling this and I can see no evidence in opengpu
+driver that this register should be touched.
 
-On 2024/2/27 18:14, Thomas Zimmermann wrote:
-> Temporarily lock the fbdev buffer object during updates to prevent
-> memory managers from evicting/moving the buffer. Moving a buffer
-> object while update its content results in undefined behaviour.
->
-> Fbdev-generic updates its buffer object from a shadow buffer. Gem-shmem
-> and gem-dma helpers do not move buffer objects, so they are safe to be
-> used with fbdev-generic. Gem-vram and qxl are based on TTM, but pin
-> buffer objects are part of the vmap operation. So both are also safe
-> to be used with fbdev-generic.
->
-> Amdgpu and nouveau do not pin or lock the buffer object during an
-> update. Their TTM-based memory management could move the buffer object
-> while the update is ongoing.
->
-> The new vmap_local and vunmap_local helpers hold the buffer object's
-> reservation lock during the buffer update. This prevents moving the
-> buffer object on all memory managers.
->
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> ---
->   drivers/gpu/drm/drm_client.c        | 68 +++++++++++++++++++++++++----
->   drivers/gpu/drm/drm_fbdev_generic.c |  4 +-
->   drivers/gpu/drm/drm_gem.c           | 12 +++++
->   include/drm/drm_client.h            | 10 +++++
->   include/drm/drm_gem.h               |  3 ++
->   5 files changed, 87 insertions(+), 10 deletions(-)
->
-> diff --git a/drivers/gpu/drm/drm_client.c b/drivers/gpu/drm/drm_client.c
-> index 9403b3f576f7b..2cc81831236b5 100644
-> --- a/drivers/gpu/drm/drm_client.c
-> +++ b/drivers/gpu/drm/drm_client.c
-> @@ -304,6 +304,66 @@ drm_client_buffer_create(struct drm_client_dev *client, u32 width, u32 height,
->   	return ERR_PTR(ret);
->   }
->   
-> +/**
-> + * drm_client_buffer_vmap_local - Map DRM client buffer into address space
-> + * @buffer: DRM client buffer
-> + * @map_copy: Returns the mapped memory's address
-> + *
-> + * This function maps a client buffer into kernel address space. If the
-> + * buffer is already mapped, it returns the existing mapping's address.
-> + *
-> + * Client buffer mappings are not ref'counted. Each call to
-> + * drm_client_buffer_vmap_local() should be closely followed by a call to
-> + * drm_client_buffer_vunmap_local(). See drm_client_buffer_vmap() for
-> + * long-term mappings.
-> + *
-> + * The returned address is a copy of the internal value. In contrast to
-> + * other vmap interfaces, you don't need it for the client's vunmap
-> + * function. So you can modify it at will during blit and draw operations.
-> + *
-> + * Returns:
-> + *	0 on success, or a negative errno code otherwise.
-> + */
-> +int drm_client_buffer_vmap_local(struct drm_client_buffer *buffer,
-> +				 struct iosys_map *map_copy)
-> +{
-> +	struct drm_gem_object *gem = buffer->gem;
-> +	struct iosys_map *map = &buffer->map;
-> +	int ret;
-> +
-> +	drm_gem_lock(gem);
-> +
-> +	ret = drm_gem_vmap(gem, map);
-> +	if (ret)
-> +		goto err_drm_gem_vmap_unlocked;
-> +	*map_copy = *map;
-> +
-> +	return 0;
-> +
-> +err_drm_gem_vmap_unlocked:
-> +	drm_gem_unlock(gem);
-> +	return 0;
-> +}
-> +EXPORT_SYMBOL(drm_client_buffer_vmap_local);
-> +
-> +/**
-> + * drm_client_buffer_vunmap_local - Unmap DRM client buffer
-> + * @buffer: DRM client buffer
-> + *
-> + * This function removes a client buffer's memory mapping established
-> + * with drm_client_buffer_vunmap_local(). Calling this function is only
-> + * required by clients that manage their buffer mappings by themselves.
-> + */
-> +void drm_client_buffer_vunmap_local(struct drm_client_buffer *buffer)
-> +{
-> +	struct drm_gem_object *gem = buffer->gem;
-> +	struct iosys_map *map = &buffer->map;
-> +
-> +	drm_gem_vunmap(gem, map);
-> +	drm_gem_unlock(gem);
-> +}
-> +EXPORT_SYMBOL(drm_client_buffer_vunmap_local);
-> +
->   /**
->    * drm_client_buffer_vmap - Map DRM client buffer into address space
->    * @buffer: DRM client buffer
-> @@ -331,14 +391,6 @@ drm_client_buffer_vmap(struct drm_client_buffer *buffer,
->   	struct iosys_map *map = &buffer->map;
->   	int ret;
->   
-> -	/*
-> -	 * FIXME: The dependency on GEM here isn't required, we could
-> -	 * convert the driver handle to a dma-buf instead and use the
-> -	 * backend-agnostic dma-buf vmap support instead. This would
-> -	 * require that the handle2fd prime ioctl is reworked to pull the
-> -	 * fd_install step out of the driver backend hooks, to make that
-> -	 * final step optional for internal users.
-> -	 */
->   	ret = drm_gem_vmap_unlocked(buffer->gem, map);
->   	if (ret)
->   		return ret;
-> diff --git a/drivers/gpu/drm/drm_fbdev_generic.c b/drivers/gpu/drm/drm_fbdev_generic.c
-> index d647d89764cb9..be357f926faec 100644
-> --- a/drivers/gpu/drm/drm_fbdev_generic.c
-> +++ b/drivers/gpu/drm/drm_fbdev_generic.c
-> @@ -197,14 +197,14 @@ static int drm_fbdev_generic_damage_blit(struct drm_fb_helper *fb_helper,
->   	 */
->   	mutex_lock(&fb_helper->lock);
->   
-> -	ret = drm_client_buffer_vmap(buffer, &map);
-> +	ret = drm_client_buffer_vmap_local(buffer, &map);
->   	if (ret)
->   		goto out;
->   
->   	dst = map;
+Fixed acceleration on 2080 Ti GPUs.
 
-Then, please remove the local variable 'dst' (struct iosys_map) at here.
-As you said, the returned iosys_map is another copy of the original backup,
-we can play with this local variable at will, there no need to duplicate
-another time again.
+Fixes: 15740541e8f0 ("drm/nouveau/devinit/tu102-: prepare for GSP-RM")
 
-I have modified and tested with fbdev generic, no problem. With this trivial
-issue resolved. For fbdev-generic:
+Signed-off-by: Dave Airlie <airlied@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-
-Acked-by: Sui Jingfeng <sui.jingfeng@linux.dev>
-
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c b/drivers/g=
+pu/drm/nouveau/nvkm/subdev/devinit/r535.c
+index 666eb93b1742..11b4c9c274a1 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c
+@@ -41,7 +41,6 @@ r535_devinit_new(const struct nvkm_devinit_func *hw,
+=20
+ =09rm->dtor =3D r535_devinit_dtor;
+ =09rm->post =3D hw->post;
+-=09rm->disable =3D hw->disable;
+=20
+ =09ret =3D nv50_devinit_new_(rm, device, type, inst, pdevinit);
+ =09if (ret)
+--=20
+2.43.2
 
