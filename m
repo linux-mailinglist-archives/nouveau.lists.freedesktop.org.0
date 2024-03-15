@@ -2,45 +2,73 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBE7187B62E
-	for <lists+nouveau@lfdr.de>; Thu, 14 Mar 2024 02:45:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 247EA87CA6C
+	for <lists+nouveau@lfdr.de>; Fri, 15 Mar 2024 10:09:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0568E10E99D;
-	Thu, 14 Mar 2024 01:45:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A40D711204E;
+	Fri, 15 Mar 2024 09:09:34 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KY1alzzU";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [205.139.111.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3FE6010E99D
- for <nouveau@lists.freedesktop.org>; Thu, 14 Mar 2024 01:45:29 +0000 (UTC)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-482-QWl8yqlGOp2WSlimDf4IBw-1; Wed,
- 13 Mar 2024 21:45:25 -0400
-X-MC-Unique: QWl8yqlGOp2WSlimDf4IBw-1
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4B1D838157BC;
- Thu, 14 Mar 2024 01:45:25 +0000 (UTC)
-Received: from dreadlord.redhat.com (unknown [10.64.136.106])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3330D492BD0;
- Thu, 14 Mar 2024 01:45:22 +0000 (UTC)
-From: Dave Airlie <airlied@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Cc: dakr@redhat.com,
-	nouveau@lists.freedesktop.org
-Subject: [PATCH] nouveau/gsp: don't check devinit disable on GSP.
-Date: Thu, 14 Mar 2024 11:45:21 +1000
-Message-ID: <20240314014521.2695233-1-airlied@gmail.com>
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
+ [209.85.128.52])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1D07F11204E;
+ Fri, 15 Mar 2024 09:09:33 +0000 (UTC)
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-414025406d7so1204635e9.2; 
+ Fri, 15 Mar 2024 02:09:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710493771; x=1711098571; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rGxpqeVYITmqsu8ISYbdggA8wEernvQ3qM2whpST9xA=;
+ b=KY1alzzU9Sxpef7sbq38DwdJVWUsuQeUuBLBpATLeGn5Zb3JkHNkQqmtM2yOohlXti
+ NvUZQx02u/mI84HP492KJIKHFzc5K4JTMyLNkQMyTgBcOFgvlMNGdrP5wA/XdlQffVN+
+ G1LnYfG4BG1xz/rYcJnSSwDHSRJhn7uUMW7ImoQde56J3rzpomT/hNhmsBudZ7rkW+cV
+ Z2JkdpDxm+kWSDQ54GWwVjQYNial72+1KRxLMn5vLD9C4Xmx6lPhbdp8/r6FAOhM8zvU
+ PdYpjomoVkUk4KGJp6XXAAZYDtclZ/53DcgARwIlaJFVJGADdlJZTmeTESvJifWgbqxa
+ 1fkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710493771; x=1711098571;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rGxpqeVYITmqsu8ISYbdggA8wEernvQ3qM2whpST9xA=;
+ b=ZVSUsVudnPsxPoLiIEBqdwWPOEKVVz1jS703K4EvrxfXuuNALcPrywk+g9ijt4kXZE
+ VWRBFe/lBBe2OFvNoIU41YeDBFUno4kn8Hvk1jvfX5bHX/wpQ8gCvZhx5xoM8YTke4UP
+ Fc3ZYHRJFrXZHvqKBKxOmlcrDUiQbqC6o0BcE9ruofbCiXi1+t9czIByjB2qsdCYeem8
+ xu6XCXRzk6EaFKwXN99iY/JyllQMlaAMrTJAopUdbzbsHYvpzHYfjFVL+YeNRHaeB3hp
+ JVYl9mw8PUl+T9shmlFhAsyWSTyX7pv8MYXBflU1r1Ttey9iTwaazQiMjShcjNA52cE/
+ ZFiQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWLw49EyK0EoD81Cp8WReCNmi1AS1wZJUD9yZniFkfaHyi5b0pkiA3GaUf/tDDzPOeH6m01mqhIK9kqIeRPuA2wmWkrj4Hzt9FmN4fuijkjDRDnmEEl74v1jbuLDBjkSr+rMAt0iVQF/vK863Ww6Q==
+X-Gm-Message-State: AOJu0Yxq7z5EaOxl5ZMPWgSpSJJzJgftJZesBcX9F2X8Ao+WI0W313I5
+ F6rtFuvMI3bqBA/hV879AZ7b4XtYW4XURzY5mpZ7uJdSe21xUaxt
+X-Google-Smtp-Source: AGHT+IH4hfq7wKhnrhc38RUmnv/6x309HrRcxXSHxhQRObiDiRWGWskNZ5S1CEfcYDXBUw1fO9QhWA==
+X-Received: by 2002:a05:600c:4f07:b0:413:1139:3bec with SMTP id
+ l7-20020a05600c4f0700b0041311393becmr2890485wmq.35.1710493771112; 
+ Fri, 15 Mar 2024 02:09:31 -0700 (PDT)
+Received: from localhost (cpc154979-craw9-2-0-cust193.16-3.cable.virginm.net.
+ [80.193.200.194]) by smtp.gmail.com with ESMTPSA id
+ bi10-20020a05600c3d8a00b00414009768b0sm1499649wmb.33.2024.03.15.02.09.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Mar 2024 02:09:30 -0700 (PDT)
+From: Colin Ian King <colin.i.king@gmail.com>
+To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Cc: kernel-janitors@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH][next] drm/nouveau/gr/gf100: Remove second semicolon
+Date: Fri, 15 Mar 2024 09:09:30 +0000
+Message-Id: <20240315090930.2429958-1-colin.i.king@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.10
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: gmail.com
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,33 +83,27 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
+There is a statement with two semicolons. Remove the second one, it
+is redundant.
 
-GSP should be handling this and I can see no evidence in opengpu
-driver that this register should be touched.
-
-Fixed acceleration on 2080 Ti GPUs.
-
-Fixes: 15740541e8f0 ("drm/nouveau/devinit/tu102-: prepare for GSP-RM")
-
-Signed-off-by: Dave Airlie <airlied@redhat.com>
+Signed-off-by: Colin Ian King <colin.i.king@gmail.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c b/drivers/g=
-pu/drm/nouveau/nvkm/subdev/devinit/r535.c
-index 666eb93b1742..11b4c9c274a1 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c
-@@ -41,7 +41,6 @@ r535_devinit_new(const struct nvkm_devinit_func *hw,
-=20
- =09rm->dtor =3D r535_devinit_dtor;
- =09rm->post =3D hw->post;
--=09rm->disable =3D hw->disable;
-=20
- =09ret =3D nv50_devinit_new_(rm, device, type, inst, pdevinit);
- =09if (ret)
---=20
-2.43.2
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
+index 986e8d547c94..060c74a80eb1 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
+@@ -420,7 +420,7 @@ gf100_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
+ 			return ret;
+ 	} else {
+ 		ret = nvkm_memory_map(gr->attrib_cb, 0, chan->vmm, chan->attrib_cb,
+-				      &args, sizeof(args));;
++				      &args, sizeof(args));
+ 		if (ret)
+ 			return ret;
+ 	}
+-- 
+2.39.2
 
