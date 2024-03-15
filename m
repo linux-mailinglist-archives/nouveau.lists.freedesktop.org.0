@@ -2,73 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 247EA87CA6C
-	for <lists+nouveau@lfdr.de>; Fri, 15 Mar 2024 10:09:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A04087D615
+	for <lists+nouveau@lfdr.de>; Fri, 15 Mar 2024 22:21:20 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A40D711204E;
-	Fri, 15 Mar 2024 09:09:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AE5C1112568;
+	Fri, 15 Mar 2024 21:21:17 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KY1alzzU";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="OBFtGEYF";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
- [209.85.128.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1D07F11204E;
- Fri, 15 Mar 2024 09:09:33 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-414025406d7so1204635e9.2; 
- Fri, 15 Mar 2024 02:09:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710493771; x=1711098571; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=rGxpqeVYITmqsu8ISYbdggA8wEernvQ3qM2whpST9xA=;
- b=KY1alzzU9Sxpef7sbq38DwdJVWUsuQeUuBLBpATLeGn5Zb3JkHNkQqmtM2yOohlXti
- NvUZQx02u/mI84HP492KJIKHFzc5K4JTMyLNkQMyTgBcOFgvlMNGdrP5wA/XdlQffVN+
- G1LnYfG4BG1xz/rYcJnSSwDHSRJhn7uUMW7ImoQde56J3rzpomT/hNhmsBudZ7rkW+cV
- Z2JkdpDxm+kWSDQ54GWwVjQYNial72+1KRxLMn5vLD9C4Xmx6lPhbdp8/r6FAOhM8zvU
- PdYpjomoVkUk4KGJp6XXAAZYDtclZ/53DcgARwIlaJFVJGADdlJZTmeTESvJifWgbqxa
- 1fkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710493771; x=1711098571;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rGxpqeVYITmqsu8ISYbdggA8wEernvQ3qM2whpST9xA=;
- b=ZVSUsVudnPsxPoLiIEBqdwWPOEKVVz1jS703K4EvrxfXuuNALcPrywk+g9ijt4kXZE
- VWRBFe/lBBe2OFvNoIU41YeDBFUno4kn8Hvk1jvfX5bHX/wpQ8gCvZhx5xoM8YTke4UP
- Fc3ZYHRJFrXZHvqKBKxOmlcrDUiQbqC6o0BcE9ruofbCiXi1+t9czIByjB2qsdCYeem8
- xu6XCXRzk6EaFKwXN99iY/JyllQMlaAMrTJAopUdbzbsHYvpzHYfjFVL+YeNRHaeB3hp
- JVYl9mw8PUl+T9shmlFhAsyWSTyX7pv8MYXBflU1r1Ttey9iTwaazQiMjShcjNA52cE/
- ZFiQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWLw49EyK0EoD81Cp8WReCNmi1AS1wZJUD9yZniFkfaHyi5b0pkiA3GaUf/tDDzPOeH6m01mqhIK9kqIeRPuA2wmWkrj4Hzt9FmN4fuijkjDRDnmEEl74v1jbuLDBjkSr+rMAt0iVQF/vK863Ww6Q==
-X-Gm-Message-State: AOJu0Yxq7z5EaOxl5ZMPWgSpSJJzJgftJZesBcX9F2X8Ao+WI0W313I5
- F6rtFuvMI3bqBA/hV879AZ7b4XtYW4XURzY5mpZ7uJdSe21xUaxt
-X-Google-Smtp-Source: AGHT+IH4hfq7wKhnrhc38RUmnv/6x309HrRcxXSHxhQRObiDiRWGWskNZ5S1CEfcYDXBUw1fO9QhWA==
-X-Received: by 2002:a05:600c:4f07:b0:413:1139:3bec with SMTP id
- l7-20020a05600c4f0700b0041311393becmr2890485wmq.35.1710493771112; 
- Fri, 15 Mar 2024 02:09:31 -0700 (PDT)
-Received: from localhost (cpc154979-craw9-2-0-cust193.16-3.cable.virginm.net.
- [80.193.200.194]) by smtp.gmail.com with ESMTPSA id
- bi10-20020a05600c3d8a00b00414009768b0sm1499649wmb.33.2024.03.15.02.09.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 02:09:30 -0700 (PDT)
-From: Colin Ian King <colin.i.king@gmail.com>
-To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Cc: kernel-janitors@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH][next] drm/nouveau/gr/gf100: Remove second semicolon
-Date: Fri, 15 Mar 2024 09:09:30 +0000
-Message-Id: <20240315090930.2429958-1-colin.i.king@gmail.com>
-X-Mailer: git-send-email 2.39.2
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 60BCA112568
+ for <nouveau@lists.freedesktop.org>; Fri, 15 Mar 2024 21:21:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1710537675;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=uWWH3DahxJ2nBN/Bu4D0efrmCV07cU3Ea/yIHo4hP08=;
+ b=OBFtGEYFqEsnzG6pMPQ+vW5EAPkgTZWswxWqdSuxZo3Kfps+C76RMkVXnynKFZStnXCoXQ
+ PiudZdDOtsXzBpT75ZBTuaiSsoyRblOYwedzmXZIgZcSzcKF4n0GGwOJag7XzW+f3Zrx0C
+ Rf1TBbvHqmzO1cVnobCmiPkMPVHS6vk=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-251-eCBD3m3rN-CyA72eU5p7kg-1; Fri, 15 Mar 2024 17:21:11 -0400
+X-MC-Unique: eCBD3m3rN-CyA72eU5p7kg-1
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 71F6B8007A4;
+ Fri, 15 Mar 2024 21:21:11 +0000 (UTC)
+Received: from emerald.redhat.com (unknown [10.22.8.58])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B20AC492BC6;
+ Fri, 15 Mar 2024 21:21:09 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: dri-devel@lists.freedesktop.org,
+	nouveau@lists.freedesktop.org
+Cc: Karol Herbst <kherbst@redhat.com>, Danilo Krummrich <dakr@redhat.com>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Dave Airlie <airlied@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-kernel@vger.kernel.org (open list)
+Subject: [PATCH] drm/nouveau/dp: Fix incorrect return code in
+ r535_dp_aux_xfer()
+Date: Fri, 15 Mar 2024 17:20:56 -0400
+Message-ID: <20240315212104.776936-1-lyude@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.9
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,27 +68,39 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-There is a statement with two semicolons. Remove the second one, it
-is redundant.
+I've recently been seeing some unexplained GSP errors on my RTX 6000 from
+failed aux transactions:
 
-Signed-off-by: Colin Ian King <colin.i.king@gmail.com>
+  [  132.915867] nouveau 0000:1f:00.0: gsp: cli:0xc1d00002 obj:0x00730000
+  ctrl cmd:0x00731341 failed: 0x0000ffff
+
+While the cause of these is not yet clear, these messages made me notice
+that the aux transactions causing these transactions were succeeding - not
+failing. As it turns out, this is because we're currently not returning the
+correct variable when r535_dp_aux_xfer() hits an error - causing us to
+never propagate GSP errors for failed aux transactions to userspace.
+
+So, let's fix that.
+
+Fixes: 4ae3a20102b2 ("nouveau/gsp: don't free ctrl messages on errors")
+Signed-off-by: Lyude Paul <lyude@redhat.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
-index 986e8d547c94..060c74a80eb1 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
-@@ -420,7 +420,7 @@ gf100_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
- 			return ret;
- 	} else {
- 		ret = nvkm_memory_map(gr->attrib_cb, 0, chan->vmm, chan->attrib_cb,
--				      &args, sizeof(args));;
-+				      &args, sizeof(args));
- 		if (ret)
- 			return ret;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
+index 6a0a4d3b8902d..027867c2a8c5b 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
+@@ -1080,7 +1080,7 @@ r535_dp_aux_xfer(struct nvkm_outp *outp, u8 type, u32 addr, u8 *data, u8 *psize)
+ 	ret = nvkm_gsp_rm_ctrl_push(&disp->rm.objcom, &ctrl, sizeof(*ctrl));
+ 	if (ret) {
+ 		nvkm_gsp_rm_ctrl_done(&disp->rm.objcom, ctrl);
+-		return PTR_ERR(ctrl);
++		return ret;
  	}
+ 
+ 	memcpy(data, ctrl->data, size);
 -- 
-2.39.2
+2.43.0
 
