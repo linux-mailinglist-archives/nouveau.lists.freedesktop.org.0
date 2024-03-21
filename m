@@ -2,87 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41651885CD3
-	for <lists+nouveau@lfdr.de>; Thu, 21 Mar 2024 17:00:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54B69886090
+	for <lists+nouveau@lfdr.de>; Thu, 21 Mar 2024 19:32:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8C01810ED24;
-	Thu, 21 Mar 2024 16:00:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AAF4210E0B9;
+	Thu, 21 Mar 2024 18:32:53 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="MvnyzV5S";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gCQOf9k7";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5C47310ED52
- for <nouveau@lists.freedesktop.org>; Thu, 21 Mar 2024 16:00:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1711036836;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=pA4bDQzJgQc55/Q1qXyy9IrKql1wmAKmErZ20EpE948=;
- b=MvnyzV5SdN9lOVMz5YdJQP14Jd5nBYSNXqYO0hQTopm4nZhu1hXE1mPeqk8uuQ8WX5WjXM
- PjORDEQByXI4sL5NqVO0lmS1862iORT0e7gv7wt/R4emLjAXou2WFCZu0g7mFRfjn7mjq+
- t85SGbZ5CsbmCDHS8elr/Da/h/KGbmo=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-670-YtC7lqfkMQa0jzmfui33iw-1; Thu, 21 Mar 2024 12:00:34 -0400
-X-MC-Unique: YtC7lqfkMQa0jzmfui33iw-1
-Received: by mail-ej1-f71.google.com with SMTP id
- a640c23a62f3a-a4715d8c761so46244166b.1
- for <nouveau@lists.freedesktop.org>; Thu, 21 Mar 2024 09:00:34 -0700 (PDT)
+Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com
+ [209.85.210.49])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9E9B710E0B9
+ for <nouveau@lists.freedesktop.org>; Thu, 21 Mar 2024 18:32:52 +0000 (UTC)
+Received: by mail-ot1-f49.google.com with SMTP id
+ 46e09a7af769-6e69ae0ff44so660748a34.1
+ for <nouveau@lists.freedesktop.org>; Thu, 21 Mar 2024 11:32:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711045971; x=1711650771; darn=lists.freedesktop.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=b10padQ2v8pKpPq+tT6VRz4ejQZi8GjjOf90d45LEkU=;
+ b=gCQOf9k7p/BjOEBfIKlJ/S+MIMEQeRrV9MZlB6+6seNV1B3Ah/YgsHnRZG4N4L/C4N
+ y7/5AohqpcuOrTkQr9xNUuZ1QVv0cGfzAYonyPkOE1WQTig5TqPdb8MlmO0u5R8m3AU5
+ AXZYnEn2XZVvUOeOsLlSSRsx8ZRMQqIkC3lvrCl8uzcJxZwBDWbuVzl9uxCVdZJFT/TX
+ /QhdFD7rJg2BBHVryRFG1lZtUAlNyUmW4nvf1wQiZLQbPEPvS0lMzXRhrwYV0BukXdBn
+ plaben3qZbuEJkVjCVK9rIbr+Z+inRfBBgapoPwQyzFuMP/I4BGpwve2cQr4a6Mf9wDe
+ xXAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711036833; x=1711641633;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pA4bDQzJgQc55/Q1qXyy9IrKql1wmAKmErZ20EpE948=;
- b=eswdBVp0g4fErH5WaRfl5XKhMUVomq4bqeR//t6MKtx1/r5MzjmLAhtF41a29cpN7g
- oqdbRW/tTulwTMqGXKx6XhwJklYDIVLS1ur88KDOgjmMP/UtJnPHS2XSKhRWbW4yqNca
- ilLlT8H2h4J6NhCtq3rYWGNotnNvbEDobDODQrYDFF3TdMWe3+1MQ7l+uJ+XhEmIBzH+
- dnRPuH3C5ijVEn6jVCH/0lq1pN7cKVGLZkmLs6lADeOWGmrOQQeLWTjIfDJ04B2qaP3P
- I7rNtwE9tvUWHZbuk+BJVAJjxc55rFy5PzsizGmhLNeyyP2TansxSGK4+TI9OqPZcpKW
- WKaA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVNuqSbwlQxtLZvbfoLc1OUzho74fM+X2zDw13KpNt1t8IgTl2kx4BxPiF5PYppJZRHogTB0OeZIYoydX7TyJWoLkKlqNwB3/g8aCvREw==
-X-Gm-Message-State: AOJu0YwLaG60//vhSEABPB2IjFXT0sdlRwT3bkqipP41hYmO4Xx6Ssmt
- HFFiLzDaXOxIEdJNuT8Kh2QBv7Z3gGA9UsihalRei56adGEnqhlY3mUV950q3JekKVBSOGTd4uq
- VYffXAEU86VR0vOoF3FmMSi4TU6FZ6SKqdCR4jGcAQnzIbHFjpvjKHUgqUTGIP5I=
-X-Received: by 2002:a17:906:2349:b0:a47:e62:4d72 with SMTP id
- m9-20020a170906234900b00a470e624d72mr1440099eja.15.1711036833380; 
- Thu, 21 Mar 2024 09:00:33 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGCl5KuLjS7xRKsaXBzYt1KO2iysY/Flvmf0e9AVJsMtbx+ck9FXPfY3IJWXYYE7zJIka1LBw==
-X-Received: by 2002:a17:906:2349:b0:a47:e62:4d72 with SMTP id
- m9-20020a170906234900b00a470e624d72mr1440084eja.15.1711036833062; 
- Thu, 21 Mar 2024 09:00:33 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
- ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
- by smtp.gmail.com with ESMTPSA id
- f6-20020a1709062c4600b00a469604c464sm55774ejh.160.2024.03.21.09.00.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Mar 2024 09:00:32 -0700 (PDT)
-Message-ID: <250692ec-db4a-4e2a-b473-31b0a88035dd@redhat.com>
-Date: Thu, 21 Mar 2024 17:00:29 +0100
+ d=1e100.net; s=20230601; t=1711045971; x=1711650771;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=b10padQ2v8pKpPq+tT6VRz4ejQZi8GjjOf90d45LEkU=;
+ b=ZTUERWTuXbkmWK8jHAoLa1o+aFl++CFCIc56gJXRpppo7aspLHVUm9E3PDfsSnJ4yw
+ CISGdiR+fGJ+EQM+5M1IClDU4HBiAiumbetwcR2KP4r8BU9VoHHgyJo4yE86nsDy8RhS
+ pAiu86ZtUOPfs968RG7/lExeV+smehvsDQvWHFCY3jampNZ01pjT89E9FQFi4bWBl9ga
+ PDxUdxmRHnQr9BTiYW4fJjr6xIOvwvVF2v3aTbiARzxi1SHGknJBdlqdmMvGShS+qBrA
+ DVimh2LYIUJr44MjITaVcZ/mcX+sEuCW0pm/rpY/voYhXihjOSHS85SSSpjX/ttNdH1p
+ qM5g==
+X-Gm-Message-State: AOJu0YwhyINuGT9IOt4nWZrMWPWVS6JmrYplelXHSrhSXUBEFmduG45T
+ 6lGx64CzyyvLld7OqdlUXcsToKKlYnl+d1F4jMyEIeMXpvBp4rCU8LzRhxUkwkiNGXNDxmyve4w
+ 3LR4x1Vb6obUZXRFWyViB3stkr6X2jd0lCvE=
+X-Google-Smtp-Source: AGHT+IHpDwlZSXONG32sqw3HZM0PN2iR3PHm4XXUw5v15yq0rwhCCXJTQR4NYBQEMvmAo3/ECryusvsqcDkk1meNRMc=
+X-Received: by 2002:a05:6870:f69f:b0:21f:b7d2:b8a1 with SMTP id
+ el31-20020a056870f69f00b0021fb7d2b8a1mr36294oab.21.1711045970535; Thu, 21 Mar
+ 2024 11:32:50 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] [v4] nouveau: add command-line GSP-RM registry support
-To: Timur Tabi <ttabi@nvidia.com>, "airlied@redhat.com" <airlied@redhat.com>, 
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "lyude@redhat.com" <lyude@redhat.com>
-References: <20240220215805.3201094-1-ttabi@nvidia.com>
- <7eb28bbf-76aa-4f97-b426-f0d87c4d2d7a@redhat.com>
- <6b4a8006471041a96d41f10010c7b192a69ab620.camel@nvidia.com>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <6b4a8006471041a96d41f10010c7b192a69ab620.camel@nvidia.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Ojus Chugh <ojuschugh@gmail.com>
+Date: Fri, 22 Mar 2024 00:02:39 +0530
+Message-ID: <CAES57QUyupWEPGify23HXTPmU24DHUCNhyvXkHv9CUJraR78-Q@mail.gmail.com>
+Subject: Regarding X.Org Endless Vacation of Code (EVoC)-Ojus Chugh
+To: nouveau@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="00000000000044ae5106142feff1"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -97,33 +69,146 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 3/21/24 00:27, Timur Tabi wrote:
-> On Mon, 2024-03-04 at 13:57 +0100, Danilo Krummrich wrote:
->>
->> Thanks for sending a new version of the patch.
->>
->> Please make sure that for future patches you include a changelog, such that
->> it's easier for reviewers to keep track of what has changed.
-> 
-> Will do.
-> 
->>>    .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |   6 +
->>>    .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 375 ++++++++++++++++--
->>>    2 files changed, 357 insertions(+), 24 deletions(-)
->>
->> There are a few issues pointed out by checkpatch.pl, that I think should be fixed.
-> 
-> checkpatch showed me nothing:
-> 
-> $ scripts/checkpatch.pl 0001-v4-nouveau-add-command-line-GSP-RM-registry-
-> support.patch
-> total: 0 errors, 0 warnings, 420 lines checked
-> 
-> 0001-v4-nouveau-add-command-line-GSP-RM-registry-support.patch has no
-> obvious style problems and is ready for submission.
+--00000000000044ae5106142feff1
+Content-Type: text/plain; charset="UTF-8"
 
-I used '--strict'. I think we should get the kmalloc(), the blank lines and the
-alignment ones fixed.
+Hello Everyone,
 
-- Danilo
+Greetings!
 
+I hope you are doing well.
+
+I am Ojus, a final-year IT student. Recently, I discovered EVoC as an
+open-source enthusiast, and I'm deeply interested in participating in this
+program. However, I am new to this and am looking for a mentor to guide me
+through EVoC for a project related to nouveau. I would appreciate any ideas
+or projects for this program, as I am open to learning new skills and
+facing new challenges.
+
+Here is my GitHub ID: https://github.com/ojuschugh1
+
+Could you please guide me on the next steps? I am eager to work under my
+mentor's guidance. I would appreciate it if anyone could become my mentor
+and assist me in this endeavor.
+
+Thank you in advance for your assistance :D
+
+I eagerly await your response. I hope I can be of help to someone in any
+way ;)
+
+Thanks for your help and consideration.
+
+Kind Regards,
+
+Ojus Chugh
+
+--00000000000044ae5106142feff1
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><div dir=3D"auto"><span style=3D"font-size:1rem;font-style:normal;font=
+-variant-caps:normal;font-weight:400;letter-spacing:normal;text-align:start=
+;text-indent:0px;text-transform:none;white-space:normal;word-spacing:1px;te=
+xt-decoration:none;color:rgb(13,13,13);font-family:S=C3=B6hne,ui-sans-serif=
+,system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,Ubuntu,Cantarell,&quot=
+;Noto Sans&quot;,sans-serif,&quot;Helvetica Neue&quot;,Arial,&quot;Apple Co=
+lor Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quo=
+t;Noto Color Emoji&quot;">Hello Everyone,</span><p style=3D"font-size:1rem;=
+font-style:normal;font-variant-caps:normal;font-weight:400;letter-spacing:n=
+ormal;text-align:start;text-indent:0px;text-transform:none;white-space:norm=
+al;word-spacing:1px;text-decoration:none;border:0px solid rgb(227,227,227);=
+box-sizing:border-box;margin:1.25em 0px;color:rgb(13,13,13);font-family:S=
+=C3=B6hne,ui-sans-serif,system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto=
+,Ubuntu,Cantarell,&quot;Noto Sans&quot;,sans-serif,&quot;Helvetica Neue&quo=
+t;,Arial,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Seg=
+oe UI Symbol&quot;,&quot;Noto Color Emoji&quot;">Greetings!</p><p style=3D"=
+font-size:1rem;font-style:normal;font-variant-caps:normal;font-weight:400;l=
+etter-spacing:normal;text-align:start;text-indent:0px;text-transform:none;w=
+hite-space:normal;word-spacing:1px;text-decoration:none;border:0px solid rg=
+b(227,227,227);box-sizing:border-box;margin:1.25em 0px;color:rgb(13,13,13);=
+font-family:S=C3=B6hne,ui-sans-serif,system-ui,-apple-system,&quot;Segoe UI=
+&quot;,Roboto,Ubuntu,Cantarell,&quot;Noto Sans&quot;,sans-serif,&quot;Helve=
+tica Neue&quot;,Arial,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&qu=
+ot;,&quot;Segoe UI Symbol&quot;,&quot;Noto Color Emoji&quot;">I hope you ar=
+e doing well.</p><p style=3D"font-size:1rem;font-style:normal;font-variant-=
+caps:normal;font-weight:400;letter-spacing:normal;text-align:start;text-ind=
+ent:0px;text-transform:none;white-space:normal;word-spacing:1px;text-decora=
+tion:none;border:0px solid rgb(227,227,227);box-sizing:border-box;margin:1.=
+25em 0px;color:rgb(13,13,13);font-family:S=C3=B6hne,ui-sans-serif,system-ui=
+,-apple-system,&quot;Segoe UI&quot;,Roboto,Ubuntu,Cantarell,&quot;Noto Sans=
+&quot;,sans-serif,&quot;Helvetica Neue&quot;,Arial,&quot;Apple Color Emoji&=
+quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quot;Noto Col=
+or Emoji&quot;" dir=3D"auto">I am Ojus, a final-year IT student. Recently, =
+I discovered EVoC as an open-source enthusiast, and I&#39;m deeply interest=
+ed in participating in this program. However, I am new to this and am looki=
+ng for a mentor to guide me through EVoC for a project related to nouveau. =
+I would appreciate any ideas or projects for this program, as I am open to =
+learning new skills and facing new challenges.</p><p style=3D"font-size:1re=
+m;font-style:normal;font-variant-caps:normal;font-weight:400;letter-spacing=
+:normal;text-align:start;text-indent:0px;text-transform:none;white-space:no=
+rmal;word-spacing:1px;text-decoration:none;border:0px solid rgb(227,227,227=
+);box-sizing:border-box;margin:1.25em 0px;color:rgb(13,13,13);font-family:S=
+=C3=B6hne,ui-sans-serif,system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto=
+,Ubuntu,Cantarell,&quot;Noto Sans&quot;,sans-serif,&quot;Helvetica Neue&quo=
+t;,Arial,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Seg=
+oe UI Symbol&quot;,&quot;Noto Color Emoji&quot;">Here is my GitHub ID:=C2=
+=A0<a href=3D"https://github.com/ojuschugh1" style=3D"color:rgb(66,133,244)=
+;border:0px solid rgb(227,227,227);box-sizing:border-box;text-decoration:no=
+ne;font-size:1rem" target=3D"_blank">https://github.com/ojuschugh1</a></p><=
+p style=3D"font-size:1rem;font-style:normal;font-variant-caps:normal;font-w=
+eight:400;letter-spacing:normal;text-align:start;text-indent:0px;text-trans=
+form:none;white-space:normal;word-spacing:1px;text-decoration:none;border:0=
+px solid rgb(227,227,227);box-sizing:border-box;margin:1.25em 0px;color:rgb=
+(13,13,13);font-family:S=C3=B6hne,ui-sans-serif,system-ui,-apple-system,&qu=
+ot;Segoe UI&quot;,Roboto,Ubuntu,Cantarell,&quot;Noto Sans&quot;,sans-serif,=
+&quot;Helvetica Neue&quot;,Arial,&quot;Apple Color Emoji&quot;,&quot;Segoe =
+UI Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quot;Noto Color Emoji&quot;">Co=
+uld you please guide me on the next steps? I am eager to work under my ment=
+or&#39;s guidance. I would appreciate it if anyone could become my mentor a=
+nd assist me in this endeavor.</p><p style=3D"font-size:1rem;font-style:nor=
+mal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;text-ali=
+gn:start;text-indent:0px;text-transform:none;white-space:normal;word-spacin=
+g:1px;text-decoration:none;border:0px solid rgb(227,227,227);box-sizing:bor=
+der-box;margin:1.25em 0px;color:rgb(13,13,13);font-family:S=C3=B6hne,ui-san=
+s-serif,system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,Ubuntu,Cantarel=
+l,&quot;Noto Sans&quot;,sans-serif,&quot;Helvetica Neue&quot;,Arial,&quot;A=
+pple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quo=
+t;,&quot;Noto Color Emoji&quot;">Thank you in advance for your assistance :=
+D</p><p style=3D"font-size:1rem;font-style:normal;font-variant-caps:normal;=
+font-weight:400;letter-spacing:normal;text-align:start;text-indent:0px;text=
+-transform:none;white-space:normal;word-spacing:1px;text-decoration:none;bo=
+rder:0px solid rgb(227,227,227);box-sizing:border-box;margin:1.25em 0px;col=
+or:rgb(13,13,13);font-family:S=C3=B6hne,ui-sans-serif,system-ui,-apple-syst=
+em,&quot;Segoe UI&quot;,Roboto,Ubuntu,Cantarell,&quot;Noto Sans&quot;,sans-=
+serif,&quot;Helvetica Neue&quot;,Arial,&quot;Apple Color Emoji&quot;,&quot;=
+Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quot;Noto Color Emoji&quo=
+t;">I eagerly await your response. I hope I can be of help to someone in an=
+y way ;)</p><p style=3D"font-size:1rem;font-style:normal;font-variant-caps:=
+normal;font-weight:400;letter-spacing:normal;text-align:start;text-indent:0=
+px;text-transform:none;white-space:normal;word-spacing:1px;text-decoration:=
+none;border:0px solid rgb(227,227,227);box-sizing:border-box;margin:1.25em =
+0px;color:rgb(13,13,13);font-family:S=C3=B6hne,ui-sans-serif,system-ui,-app=
+le-system,&quot;Segoe UI&quot;,Roboto,Ubuntu,Cantarell,&quot;Noto Sans&quot=
+;,sans-serif,&quot;Helvetica Neue&quot;,Arial,&quot;Apple Color Emoji&quot;=
+,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;,&quot;Noto Color Em=
+oji&quot;">Thanks for your help and consideration.</p><p style=3D"font-size=
+:1rem;font-style:normal;font-variant-caps:normal;font-weight:400;letter-spa=
+cing:normal;text-align:start;text-indent:0px;text-transform:none;white-spac=
+e:normal;word-spacing:1px;text-decoration:none;border:0px solid rgb(227,227=
+,227);box-sizing:border-box;margin:1.25em 0px;color:rgb(13,13,13);font-fami=
+ly:S=C3=B6hne,ui-sans-serif,system-ui,-apple-system,&quot;Segoe UI&quot;,Ro=
+boto,Ubuntu,Cantarell,&quot;Noto Sans&quot;,sans-serif,&quot;Helvetica Neue=
+&quot;,Arial,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot=
+;Segoe UI Symbol&quot;,&quot;Noto Color Emoji&quot;">Kind Regards,=C2=A0</p=
+></div></div><div><div dir=3D"auto"><p style=3D"font-size:1rem;font-style:n=
+ormal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;text-a=
+lign:start;text-indent:0px;text-transform:none;white-space:normal;word-spac=
+ing:1px;text-decoration:none;border:0px solid rgb(227,227,227);box-sizing:b=
+order-box;margin:1.25em 0px;color:rgb(13,13,13);font-family:S=C3=B6hne,ui-s=
+ans-serif,system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,Ubuntu,Cantar=
+ell,&quot;Noto Sans&quot;,sans-serif,&quot;Helvetica Neue&quot;,Arial,&quot=
+;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&q=
+uot;,&quot;Noto Color Emoji&quot;" dir=3D"auto">Ojus Chugh</p></div>
+</div>
+
+--00000000000044ae5106142feff1--
