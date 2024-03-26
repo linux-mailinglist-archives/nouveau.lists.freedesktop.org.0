@@ -2,54 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD8BE88773D
-	for <lists+nouveau@lfdr.de>; Sat, 23 Mar 2024 07:39:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87F5D88C599
+	for <lists+nouveau@lfdr.de>; Tue, 26 Mar 2024 15:48:02 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 232A0112B25;
-	Sat, 23 Mar 2024 06:39:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8507210EB30;
+	Tue, 26 Mar 2024 14:47:58 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=nppct.ru header.i=@nppct.ru header.b="HxbItX1E";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="E4BQDDTk";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.nppct.ru (mail.nppct.ru [195.133.245.4])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A1F3B112B25
- for <nouveau@lists.freedesktop.org>; Sat, 23 Mar 2024 06:39:42 +0000 (UTC)
-Received: from mail.nppct.ru (localhost [127.0.0.1])
- by mail.nppct.ru (Postfix) with ESMTP id 9065C1C14EC
- for <nouveau@lists.freedesktop.org>; Sat, 23 Mar 2024 09:39:38 +0300 (MSK)
-Authentication-Results: mail.nppct.ru (amavisd-new); dkim=pass (1024-bit key)
- reason="pass (just generated,
- assumed good)" header.d=nppct.ru
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nppct.ru; h=
- content-transfer-encoding:mime-version:x-mailer:message-id:date
- :date:subject:subject:to:from:from; s=dkim; t=1711175978; x=
- 1712039979; bh=8Ru1KtR1m4ULexCA5WK3GVpaEyvcpR5jkF1JflcEVtQ=; b=H
- xbItX1E7eNLuKU8HAcFtn+KjHLExvv1PNbmvQsMs6QYFmAHym9arCs/tsIfjOV4Q
- mLFdht/gwHOCPfz2vdyignBhtag/DWqVquG+TqaMgNHkhklD01R2NrFsLN4Fz+GE
- UEY3BFvx5IB1rTa5XiH+zEC+xYn9Hy/YvQyhBY6UJI=
-X-Virus-Scanned: Debian amavisd-new at mail.nppct.ru
-Received: from mail.nppct.ru ([127.0.0.1])
- by mail.nppct.ru (mail.nppct.ru [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id 7k4NWNwFIrHz for <nouveau@lists.freedesktop.org>;
- Sat, 23 Mar 2024 09:39:38 +0300 (MSK)
-Received: from localhost.localdomain (mail.dev-ai-melanoma.ru
- [185.130.227.204])
- by mail.nppct.ru (Postfix) with ESMTPSA id 1C6961C11FE;
- Sat, 23 Mar 2024 09:39:35 +0300 (MSK)
-From: Andrey Shumilin <shum.sdl@nppct.ru>
-To: Karol Herbst <kherbst@redhat.com>
-Cc: Andrey Shumilin <shum.sdl@nppct.ru>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- khoroshilov@ispras.ru, ykarpov@ispras.ru, vmerzlyakov@ispras.ru,
- vefanov@ispras.ru
-Subject: [PATCH] therm.c: Adding an array index check before accessing an
- element.
-Date: Sat, 23 Mar 2024 09:39:33 +0300
-Message-Id: <20240323063933.665695-1-shum.sdl@nppct.ru>
-X-Mailer: git-send-email 2.30.2
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AF52010EA60;
+ Tue, 26 Mar 2024 14:47:56 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 9ACA36124E;
+ Tue, 26 Mar 2024 14:47:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C54DC433F1;
+ Tue, 26 Mar 2024 14:47:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1711464475;
+ bh=2VRodtLYji0E2iO14KF37hDwen2VjVMAvwAcrcgPpT4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=E4BQDDTkgrdwdIkmMvielkRpTAsqHIEG3dNSrY21fnxwoLYvLOoCje+XGKi0Q6+lb
+ vXFNIViLU9NTXcLVTR3XwdRIIouf6xWYpzwnmHI2t5ZxiCoyK5CtJGLAMaMQhP4GqM
+ LFJItP61E8WSzWQOgV3iidHNLT5C63yxLkS/wCtha2CzziKBhSzJgJ8mdUJnDc4MsM
+ mHMWnrCmz0M9BMr26mXQL/Ot8TdiiiLpbc7Z6ykNI9wEj4r4WuyvPMGjqE0R7U0B4a
+ JYlh8463XR1dZ+1yi/iNsx2NnACkLOIgc70LBf5p2SbJ28JbOOieq3jHp29R//i1VX
+ XyBZZot1G0W0w==
+From: Arnd Bergmann <arnd@kernel.org>
+To: linux-kbuild@vger.kernel.org, Masahiro Yamada <masahiroy@kernel.org>,
+ Nathan Chancellor <nathan@kernel.org>
+Cc: Nicolas Schier <nicolas@fjasle.eu>, Arnd Bergmann <arnd@arndb.de>,
+ Bill Metzenthen <billm@melbpc.org.au>,
+ Thomas Gleixner <tglx@linutronix.de>, x86@kernel.org,
+ Damien Le Moal <dlemoal@kernel.org>, Jean Delvare <jdelvare@suse.com>,
+ Harry Wentland <harry.wentland@amd.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Sergey Shtylyov <s.shtylyov@omp.ru>, Jakub Kicinski <kuba@kernel.org>,
+ Sudip Mukherjee <sudipm.mukherjee@gmail.com>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>,
+ "Manoj N. Kumar" <manoj@linux.ibm.com>,
+ "Martin K. Petersen" <martin.petersen@oracle.com>,
+ Alexei Starovoitov <ast@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
+ Luis Chamberlain <mcgrof@kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Greg Kroah-Hartman <gregkh@suse.de>, linux-kernel@vger.kernel.org,
+ linux-ide@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ netdev@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-scsi@vger.kernel.org,
+ bpf@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+ linux-modules@vger.kernel.org, linux-mm@kvack.org, llvm@lists.linux.dev
+Subject: [PATCH 00/12] kbuild: enable some -Wextra warnings by default
+Date: Tue, 26 Mar 2024 15:47:15 +0100
+Message-Id: <20240326144741.3094687-1-arnd@kernel.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -66,29 +75,106 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-It is possible to access an element at index -1 if at the
-first iteration of the loop the result of switch is equal to 0x25
-Added variable checking.
+From: Arnd Bergmann <arnd@arndb.de>
 
-Found by Linux Verification Center (linuxtesting.org) with SVACE.
-Signed-off-by: Andrey Shumilin <shum.sdl@nppct.ru>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/bios/therm.c | 2 ++
- 1 file changed, 2 insertions(+)
+This is a follow-up on a couple of patch series I sent in the past,
+enabling -Wextra (aside from stuff that is explicitly disabled),
+-Wcast-function-pointer-strict and -Wrestrict.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/therm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/therm.c
-index 5babc5a7c7d5..78387053f214 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/therm.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/therm.c
-@@ -180,6 +180,8 @@ nvbios_therm_fan_parse(struct nvkm_bios *bios, struct nvbios_therm_fan *fan)
- 			cur_trip->fan_duty = duty_lut[(value & 0xf000) >> 12];
- 			break;
- 		case 0x25:
-+			if (fan->nr_fan_trip == 0)
-+				fan->nr_fan_trip++;
- 			cur_trip = &fan->trip[fan->nr_fan_trip - 1];
- 			cur_trip->fan_duty = value;
- 			break;
+I have tested these on 'defconfig' and 'allmodconfig' builds across
+all architectures, as well as many 'randconfig' builds on x86, arm and
+arm64. It would be nice to have all the Makefile.extrawarn changes in
+v6.10, hopefully with the driver fixes going in before that through
+the respective subsystem trees.
+
+     Arnd
+
+Arnd Bergmann (12):
+  kbuild: make -Woverride-init warnings more consistent
+  [v3] parport: mfc3: avoid empty-body warning
+  kbuild: turn on -Wextra by default
+  kbuild: remove redundant extra warning flags
+  firmware: dmi-id: add a release callback function
+  nouveau: fix function cast warning
+  cxlflash: fix function pointer cast warnings
+  x86: math-emu: fix function cast warnings
+  kbuild: enable -Wcast-function-type-strict unconditionally
+  sata: sx4: fix pdc20621_get_from_dimm() on 64-bit
+  [v4] kallsyms: rework symbol lookup return codes
+  kbuild: turn on -Wrestrict by default
+
+ arch/x86/math-emu/fpu_etc.c                   |  9 +++--
+ arch/x86/math-emu/fpu_trig.c                  |  6 ++--
+ arch/x86/math-emu/reg_constant.c              |  7 +++-
+ drivers/ata/sata_sx4.c                        |  6 ++--
+ drivers/firmware/dmi-id.c                     |  7 +++-
+ .../gpu/drm/amd/display/dc/dce110/Makefile    |  2 +-
+ .../gpu/drm/amd/display/dc/dce112/Makefile    |  2 +-
+ .../gpu/drm/amd/display/dc/dce120/Makefile    |  2 +-
+ drivers/gpu/drm/amd/display/dc/dce60/Makefile |  2 +-
+ drivers/gpu/drm/amd/display/dc/dce80/Makefile |  2 +-
+ drivers/gpu/drm/i915/Makefile                 |  6 ++--
+ .../drm/nouveau/nvkm/subdev/bios/shadowof.c   |  7 +++-
+ drivers/gpu/drm/xe/Makefile                   |  4 +--
+ drivers/net/ethernet/renesas/sh_eth.c         |  2 +-
+ drivers/parport/parport_mfc3.c                |  3 +-
+ drivers/pinctrl/aspeed/Makefile               |  2 +-
+ drivers/scsi/cxlflash/lunmgt.c                |  4 +--
+ drivers/scsi/cxlflash/main.c                  | 14 ++++----
+ drivers/scsi/cxlflash/superpipe.c             | 34 +++++++++----------
+ drivers/scsi/cxlflash/superpipe.h             | 11 +++---
+ drivers/scsi/cxlflash/vlun.c                  |  7 ++--
+ fs/proc/Makefile                              |  2 +-
+ include/linux/filter.h                        | 14 ++++----
+ include/linux/ftrace.h                        |  6 ++--
+ include/linux/module.h                        | 14 ++++----
+ kernel/bpf/Makefile                           |  2 +-
+ kernel/bpf/core.c                             |  7 ++--
+ kernel/kallsyms.c                             | 23 +++++++------
+ kernel/module/kallsyms.c                      | 26 +++++++-------
+ kernel/trace/ftrace.c                         | 13 +++----
+ mm/Makefile                                   |  3 +-
+ scripts/Makefile.extrawarn                    | 33 ++++--------------
+ 32 files changed, 134 insertions(+), 148 deletions(-)
+
 -- 
-2.30.2
+2.39.2
 
+Cc: Bill Metzenthen <billm@melbpc.org.au>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: x86@kernel.org
+Cc: Damien Le Moal <dlemoal@kernel.org>
+Cc: Jean Delvare <jdelvare@suse.com>
+Cc: Harry Wentland <harry.wentland@amd.com>
+Cc: Jani Nikula <jani.nikula@linux.intel.com>
+Cc: Sergey Shtylyov <s.shtylyov@omp.ru>
+Cc: Jakub Kicinski <kuba@kernel.org>
+Cc: Sudip Mukherjee <sudipm.mukherjee@gmail.com>
+Cc: Andrew Jeffery <andrew@codeconstruct.com.au>
+Cc: "Manoj N. Kumar" <manoj@linux.ibm.com>
+Cc: "Martin K. Petersen" <martin.petersen@oracle.com>
+Cc: Alexei Starovoitov <ast@kernel.org>
+Cc: Steven Rostedt <rostedt@goodmis.org>
+Cc: Luis Chamberlain <mcgrof@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Masahiro Yamada <masahiroy@kernel.org>
+Cc: Nathan Chancellor <nathan@kernel.org>
+Cc: Nicolas Schier <nicolas@fjasle.eu>
+Cc: Greg Kroah-Hartman <gregkh@suse.de>
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-ide@vger.kernel.org
+Cc: amd-gfx@lists.freedesktop.org
+Cc: dri-devel@lists.freedesktop.org
+Cc: intel-gfx@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Cc: intel-xe@lists.freedesktop.org
+Cc: netdev@vger.kernel.org
+Cc: linux-renesas-soc@vger.kernel.org
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: linux-scsi@vger.kernel.org
+Cc: bpf@vger.kernel.org
+Cc: linux-trace-kernel@vger.kernel.org
+Cc: linux-modules@vger.kernel.org
+Cc: linux-mm@kvack.org
+Cc: linux-kbuild@vger.kernel.org
+Cc: llvm@lists.linux.dev
