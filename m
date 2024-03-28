@@ -2,46 +2,89 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B703088F571
-	for <lists+nouveau@lfdr.de>; Thu, 28 Mar 2024 03:44:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C193890687
+	for <lists+nouveau@lfdr.de>; Thu, 28 Mar 2024 18:01:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 24E3C1122CD;
-	Thu, 28 Mar 2024 02:44:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 574B110ED39;
+	Thu, 28 Mar 2024 17:01:03 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="VvCtkAZK";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [207.211.30.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3BC941122CD
- for <nouveau@lists.freedesktop.org>; Thu, 28 Mar 2024 02:44:06 +0000 (UTC)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-311-pkKsdljEOhO2MzRCG2Gzlg-1; Wed,
- 27 Mar 2024 22:44:02 -0400
-X-MC-Unique: pkKsdljEOhO2MzRCG2Gzlg-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
- [10.11.54.7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 811A83CBD4E0;
- Thu, 28 Mar 2024 02:44:02 +0000 (UTC)
-Received: from dreadlord.redhat.com (unknown [10.64.136.26])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2AC8A1C060D0;
- Thu, 28 Mar 2024 02:43:59 +0000 (UTC)
-From: Dave Airlie <airlied@gmail.com>
-To: dri-devel@lists.freedesktop.org,
-	nouveau@lists.freedesktop.org
-Cc: Dave Airlie <airlied@redhat.com>,
-	Danilo Krummrich <dakr@redhat.com>
-Subject: [PATCH] nouveau/uvmm: fix addr/range calcs for remap operations
-Date: Thu, 28 Mar 2024 12:43:16 +1000
-Message-ID: <20240328024317.2041851-1-airlied@gmail.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2FB1F10ED39
+ for <nouveau@lists.freedesktop.org>; Thu, 28 Mar 2024 17:01:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1711645261;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=qd6vtGEjaeTzV1f2AcS0milHcb/EgWIylwqRgm6gjBE=;
+ b=VvCtkAZKnJm232jezyYiVbojwMJ+lWN6nfb5TDihSDlwhY9TQZT9v87m7df888gQWvhMlN
+ Ue4DQjamgpTJFrgTuYX/HReIvh2J1R2+k93sHcZXXoC6N3+Vel/EFQXypWSlCdnuIq8alO
+ TdlFYwvsKMr2C/XkAo2fVSL1Dd+QOwo=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-107-nvSlb6CkPJim1ohf28Y2lg-1; Thu, 28 Mar 2024 13:00:58 -0400
+X-MC-Unique: nvSlb6CkPJim1ohf28Y2lg-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-4140225e68aso5599865e9.1
+ for <nouveau@lists.freedesktop.org>; Thu, 28 Mar 2024 10:00:58 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711645257; x=1712250057;
+ h=content-transfer-encoding:in-reply-to:organization:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qd6vtGEjaeTzV1f2AcS0milHcb/EgWIylwqRgm6gjBE=;
+ b=gvZSTSbSzXkpCBRLzwbphvdIy5zxeopeZcRWEzPW5OVPnBhTsJxOwbi3q6N0t3FS6I
+ vt56QjZHaAvcyRnMwy6ifAo2lDzU+q2ubtTETJFifKqme9E5CP+JMTM8+Fvw7JyPFsiN
+ a1hfd/SYrhhyEi9PhDmw5/+98skUAdyrqMHp3MQGP0KBX7SqCiLWRGCqpNnY8UJzn35N
+ KKz14OTEswPNEszgWI3GjPHPCMcIjHmZ/xnR8Pmz6k6HARqczemkgrEvz7mwpRZgzhur
+ ojNxIM2xmvmfsV9O6B8Ap1e5WCkE6wwsQdrytTWcXDTnbRzRN8rXAmGT+3b+yRhDbXtO
+ hZQw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVzaWqln6nwhMU5cMOsCsHauDYJTOdz5t9OofwPYG28RmPV42QkXhLJn4tyEKMQQM/7J+YYEBoPw+e93I2QW6qj+z3Je3PDUiQfJ5Kcnw==
+X-Gm-Message-State: AOJu0YyHQd2FxlfRkIUe+dxGzDs3zltVr8bFpjY4229g1KV5a/N+Mt1N
+ 3UTe/FoTxd6YGAF3Ok4EMxUmWABN3DVTqZ8bqY7ozFbV8LPsuLOVrnY38rxUscosUGliPYVM0fc
+ R5U3ePauCVBkASxmKIj+Z+DSH0/mdgU4deq7DcpYyqS+jujBkONNpPkZMik+uOhU=
+X-Received: by 2002:a05:600c:1546:b0:414:c5:8503 with SMTP id
+ f6-20020a05600c154600b0041400c58503mr2315134wmg.38.1711645257245; 
+ Thu, 28 Mar 2024 10:00:57 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEMU1YeDRsoWUWg166ruOHtocc/arSMbGoFCV9vPwHpC+elMIiA2PAku43lcB8JHeDBeeyjlg==
+X-Received: by 2002:a05:600c:1546:b0:414:c5:8503 with SMTP id
+ f6-20020a05600c154600b0041400c58503mr2315108wmg.38.1711645256913; 
+ Thu, 28 Mar 2024 10:00:56 -0700 (PDT)
+Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
+ ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
+ by smtp.gmail.com with ESMTPSA id
+ n18-20020a05600c4f9200b004148c3685ffsm2893798wmq.3.2024.03.28.10.00.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 28 Mar 2024 10:00:56 -0700 (PDT)
+Message-ID: <a3eda30d-920b-4913-a207-a475d490115b@redhat.com>
+Date: Thu, 28 Mar 2024 18:00:54 +0100
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.7
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH][next] drm/nouveau/gr/gf100: Remove second semicolon
+To: Colin Ian King <colin.i.king@gmail.com>, Karol Herbst
+ <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
+Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20240315090930.2429958-1-colin.i.king@gmail.com>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <20240315090930.2429958-1-colin.i.king@gmail.com>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: gmail.com
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,56 +99,29 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
+On 3/15/24 10:09, Colin Ian King wrote:
+> There is a statement with two semicolons. Remove the second one, it
+> is redundant.
+> 
+> Signed-off-by: Colin Ian King <colin.i.king@gmail.com>
 
-dEQP-VK.sparse_resources.image_rebind.2d_array.r64i.128_128_8
-was causing a remap operation like the below.
+Applied, thanks!
 
-op_remap: prev: 0000003fffed0000 00000000000f0000 00000000a5abd18a 00000000=
-00000000
-op_remap: next:
-op_remap: unmap: 0000003fffed0000 0000000000100000 0
-op_map: map: 0000003ffffc0000 0000000000010000 000000005b1ba33c 00000000000=
-e0000
-
-This was resulting in an unmap operation from 0x3fffed0000+0xf0000, 0x10000=
-0
-which was corrupting the pagetables and oopsing the kernel.
-
-Fixes the prev + unmap range calcs to use start/end and map back to addr/ra=
-nge.
-
-Signed-off-by: Dave Airlie <airlied@redhat.com>
-Fixes: b88baab82871 ("drm/nouveau: implement new VM_BIND uAPI")
-Cc: Danilo Krummrich <dakr@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_uvmm.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouve=
-au/nouveau_uvmm.c
-index 9675ef25b16d..87bce1a9d073 100644
---- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-@@ -813,15 +813,15 @@ op_remap(struct drm_gpuva_op_remap *r,
- =09struct drm_gpuva_op_unmap *u =3D r->unmap;
- =09struct nouveau_uvma *uvma =3D uvma_from_va(u->va);
- =09u64 addr =3D uvma->va.va.addr;
--=09u64 range =3D uvma->va.va.range;
-+=09u64 end =3D uvma->va.va.addr + uvma->va.va.range;
-=20
- =09if (r->prev)
- =09=09addr =3D r->prev->va.addr + r->prev->va.range;
-=20
- =09if (r->next)
--=09=09range =3D r->next->va.addr - addr;
-+=09=09end =3D r->next->va.addr;
-=20
--=09op_unmap_range(u, addr, range);
-+=09op_unmap_range(u, addr, end - addr);
- }
-=20
- static int
---=20
-2.43.2
+> ---
+>   drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
+> index 986e8d547c94..060c74a80eb1 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
+> @@ -420,7 +420,7 @@ gf100_gr_chan_new(struct nvkm_gr *base, struct nvkm_chan *fifoch,
+>   			return ret;
+>   	} else {
+>   		ret = nvkm_memory_map(gr->attrib_cb, 0, chan->vmm, chan->attrib_cb,
+> -				      &args, sizeof(args));;
+> +				      &args, sizeof(args));
+>   		if (ret)
+>   			return ret;
+>   	}
 
