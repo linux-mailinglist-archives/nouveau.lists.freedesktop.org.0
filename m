@@ -2,103 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B7908922DA
-	for <lists+nouveau@lfdr.de>; Fri, 29 Mar 2024 18:38:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58B7E892B8A
+	for <lists+nouveau@lfdr.de>; Sat, 30 Mar 2024 15:12:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 243FF112803;
-	Fri, 29 Mar 2024 17:38:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 767AD10E4E5;
+	Sat, 30 Mar 2024 14:12:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="hNRg1UI+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JD0oqpQF";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 691B3112803;
- Fri, 29 Mar 2024 17:38:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1711733929; x=1743269929;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=2hBaQawS2DQq+hSZa4nEoohpdH7i4ouzg4+WFmp/jBs=;
- b=hNRg1UI+eVZNDxxXYiftHMg5kKw2lf6aeGsAveGIJM77CcaflDKkgWkq
- gr2hCh+elJKUrzaKgUAriy9eUArACJHS4AkSToyOATmEi3c/xJMqUfgxI
- AYL8ThfGDUXyibZU7fI0XyPew9T3sYaEtd2p4yKig8P+TNZ5l03BE/wxe
- ppmE5Z67HI7mGzpw9GzwcAzCH/IAneJr06KTNqSK9oxlVsPeH5F40PLGt
- bd4fmEZtPqa+TRaRfTdajHlQLqvqphEjqbz/5MC8qs2gmy+SA4ky3bpGD
- aMqAdDHhBAu+zUD3D1QXsJxSpPKks5/7X3Fk3mAeTM1c4vNcao8pGq9ht A==;
-X-CSE-ConnectionGUID: P3zD8xdyTb6rVdwNn0nM2w==
-X-CSE-MsgGUID: yDAZj9W7SBaqDv/jm27RZA==
-X-IronPort-AV: E=McAfee;i="6600,9927,11028"; a="29413581"
-X-IronPort-AV: E=Sophos;i="6.07,165,1708416000"; d="scan'208";a="29413581"
-Received: from orviesa008.jf.intel.com ([10.64.159.148])
- by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 29 Mar 2024 10:38:46 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.07,165,1708416000"; d="scan'208";a="17669687"
-Received: from unknown (HELO intel.com) ([10.247.118.231])
- by orviesa008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 29 Mar 2024 10:38:17 -0700
-Date: Fri, 29 Mar 2024 18:38:10 +0100
-From: Andi Shyti <andi.shyti@linux.intel.com>
-To: Easwar Hariharan <eahariha@linux.microsoft.com>
-Cc: Andi Shyti <andi.shyti@linux.intel.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- Christian =?iso-8859-15?Q?K=F6nig?= <christian.koenig@amd.com>,
- "Pan, Xinhui" <Xinhui.Pan@amd.com>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>,
- Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>, Evan Quan <evan.quan@amd.com>,
- Hawking Zhang <Hawking.Zhang@amd.com>,
- Candice Li <candice.li@amd.com>, Ran Sun <sunran001@208suo.com>,
- Alexander Richards <electrodeyt@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Heiner Kallweit <hkallweit1@gmail.com>,
- Hamza Mahfooz <hamza.mahfooz@amd.com>,
- Ruan Jinjie <ruanjinjie@huawei.com>, Alan Liu <haoping.liu@amd.com>,
- Aurabindo Pillai <aurabindo.pillai@amd.com>,
- Wayne Lin <wayne.lin@amd.com>, Samson Tam <samson.tam@amd.com>,
- Alvin Lee <alvin.lee2@amd.com>, Charlene Liu <charlene.liu@amd.com>,
- Sohaib Nadeem <sohaib.nadeem@amd.com>, Lewis Huang <lewis.huang@amd.com>,
- Tom Chung <chiahsuan.chung@amd.com>,
- Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
- Meenakshikumar Somasundaram <meenakshikumar.somasundaram@amd.com>,
- George Shen <george.shen@amd.com>, Aric Cyr <aric.cyr@amd.com>,
- Jun Lei <jun.lei@amd.com>,
- Nicholas Kazlauskas <nicholas.kazlauskas@amd.com>,
- Qingqing Zhuo <Qingqing.Zhuo@amd.com>,
- Dillon Varone <dillon.varone@amd.com>, Le Ma <Le.Ma@amd.com>,
- Lijo Lazar <lijo.lazar@amd.com>, Asad kamal <asad.kamal@amd.com>,
- Kenneth Feng <kenneth.feng@amd.com>, Ma Jun <Jun.Ma2@amd.com>,
- Mario Limonciello <mario.limonciello@amd.com>,
- Yang Wang <kevinyang.wang@amd.com>, Darren Powell <darren.powell@amd.com>,
- Yifan Zhang <yifan1.zhang@amd.com>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
- "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>,
- Wolfram Sang <wsa+renesas@sang-engineering.com>,
- "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
- <intel-gfx@lists.freedesktop.org>, 
- "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
- <intel-xe@lists.freedesktop.org>, 
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, 
- "open list:I2C SUBSYSTEM HOST DRIVERS" <linux-i2c@vger.kernel.org>,
- "open list:BTTV VIDEO4LINUX DRIVER" <linux-media@vger.kernel.org>,
- "open list:FRAMEBUFFER LAYER" <linux-fbdev@vger.kernel.org>,
- Andi Shyti <andi.shyti@kernel.org>
-Subject: Re: [PATCH v0 02/14] drm/amdgpu,drm/radeon: Make I2C terminology
- more inclusive
-Message-ID: <Zgb8gieDzZtZmg2q@ashyti-mobl2.lan>
-References: <20240329170038.3863998-1-eahariha@linux.microsoft.com>
- <20240329170038.3863998-3-eahariha@linux.microsoft.com>
- <Zgb3VYsgLjhJ2HKs@ashyti-mobl2.lan>
- <ceeaafe1-49d5-4602-8251-eed63a1be2b6@linux.microsoft.com>
+Received: from mail-oo1-f53.google.com (mail-oo1-f53.google.com
+ [209.85.161.53])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A1E6210E484
+ for <nouveau@lists.freedesktop.org>; Sat, 30 Mar 2024 14:12:07 +0000 (UTC)
+Received: by mail-oo1-f53.google.com with SMTP id
+ 006d021491bc7-5a4f7a648dbso1657832eaf.3
+ for <nouveau@lists.freedesktop.org>; Sat, 30 Mar 2024 07:12:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1711807926; x=1712412726;
+ darn=lists.freedesktop.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5R0+AkTWI8QZwkAahS3FDyHG9j7KXHmvm4QW/s+hHfA=;
+ b=JD0oqpQFuQRY2Gyaye5Z7iGI5yQg1uS4MewdW5ya6k3bFU27dKa3R8vFKy5Kn9S/Er
+ YxECMj80DvXxclqKUQDJ72TtG3nGrBwzx4vPIyE/kvk0EhED7n2IaB8pt7s4Uz4Wk7mB
+ sfyuLMr6eY5o+xK7/ia3ycGm/WOE3JGuBZplU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711807926; x=1712412726;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5R0+AkTWI8QZwkAahS3FDyHG9j7KXHmvm4QW/s+hHfA=;
+ b=QZjXaN6jmHne9+/kbeS10KdeD5+4QjcWVtKyUnXknuBFzjaFG2P5zebJTwOvRWi+6j
+ ozR//cSH0ffij8hd8hGyIuK8ZG+VyCBvZFgaVYMNIgwPX/UBXAUXtaEPCyqERbk97qhQ
+ NkWNw2fpo9rl8/wX5NQTWakxSAsM/htj6WiQSU2RMdoS+QjPTgFL9bgdGqcxo5Hr/z/D
+ XaB5XM8CYy1n4irY6uqR5YLbwdKeVtIAlsKdcaiFGtKTlcThf6njHzvPZHNBhiyem5pL
+ M4YJSV4NJsGVMXe3Tc9cq02ab6kuLsWMf+yn00EIfVm/F4fsvEX+wR12Ac+sf3pIEWXt
+ vfAg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVuVaTqAgRlbIDj7t8cH42FGdv1NOkeaXR/ZmIktVbhw9gRyOfPo3rXrQjbtLZ3ve3AtZYJfFTJA4ANaYey6ciPQox21PjKv4V5g7Yzcw==
+X-Gm-Message-State: AOJu0Yy2sGFip3t/Pa3+7AIzIr6O9gi9xdCUgoz1+XIMLhzRoyZ1McdC
+ gZJ+iPKnGk3mZJ3aMaaiJpHQI60RyZ3OZtdILILYYVx3qqbafyguXa0aNMWHaA==
+X-Google-Smtp-Source: AGHT+IEJtzUzuRZgSZPHVHwVuvYRyBRpL8kDmcK5MecWGpcsJm7ruAhRPpLIlgMAXixtWQGCSKy74g==
+X-Received: by 2002:a05:6359:4121:b0:178:6c79:6ccf with SMTP id
+ kh33-20020a056359412100b001786c796ccfmr5950622rwc.17.1711807926336; 
+ Sat, 30 Mar 2024 07:12:06 -0700 (PDT)
+Received: from www.outflux.net ([198.0.35.241])
+ by smtp.gmail.com with ESMTPSA id
+ w22-20020a63fb56000000b005dc4b562f6csm4607931pgj.3.2024.03.30.07.12.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 30 Mar 2024 07:12:05 -0700 (PDT)
+From: Kees Cook <keescook@chromium.org>
+To: Karol Herbst <kherbst@redhat.com>
+Cc: Kees Cook <keescook@chromium.org>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Timur Tabi <ttabi@nvidia.com>,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>, linux-kernel@vger.kernel.org,
+ linux-hardening@vger.kernel.org
+Subject: [PATCH] nouveau/gsp: Avoid addressing beyond end of rpc->entries
+Date: Sat, 30 Mar 2024 07:12:03 -0700
+Message-Id: <20240330141159.work.063-kees@kernel.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ceeaafe1-49d5-4602-8251-eed63a1be2b6@linux.microsoft.com>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2226; i=keescook@chromium.org; 
+ h=from:subject:message-id;
+ bh=72NlypCU3m1Ai+nlWdQqXQ/FhzgDGtzVMmXe9FDsnK0=; 
+ b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBmCB2zFC4lHA+jf2TBWjM1ztczWQiNIUhah6PlJ
+ NpV613q9s6JAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCZggdswAKCRCJcvTf3G3A
+ Ju46D/41X6YPEmbiOsUB+J4DpwOnPKKcWsCj004G4gCAGXDcM6V+h7frx+gzNYT4Rf8x4XsR+Jr
+ rQie9X4uNZp2UqZjv6FoMoJ/4Fns8PwbjLF+l0gB/Fb9vnxXhMacWym6B8w+PswdMS16W9pSaen
+ F5Zs8+sTbvHAaRXn3iZCPYx6ui3LhmHpqy/e7+pHVKnrj4FCMPmAuZYvV4anVze9FSq+nPmoFVe
+ 4z1zpNbj5Nty9xbyRYWwhQNfAB8YuZpgDUGoG1p2AdiphqV77NP//zHYPcHsfgP+y0JIz/5BUxR
+ Lp65/01z/jPpJyAivKhVM2pvS3aEM7N8bTOuAaM+rtB1V3deWraWkypkkJSwRAtdxUTiXrnbr3Q
+ zK1KtBGo7BRK6DVc03milid8NDHuHnIwNJM3w+/h3ePn0NlvlmBD9bJLoAajAl/hlrYTzTAak2Z
+ VHzHA0SQ2Vhn9Etuq2ipHNQhNVT3u8txxcSJCBr6Q6RBWkaeHS+IXH4DIwvKkwbcmc2SZ7BehHC
+ gecHXXvfcvmvsbcNQnJHTKr0dZmjQsZkf7YPzVfhrYvzU33RIoADtfHAmcVTQXZsVqXFZq5PRjO
+ 3LC4+FeijavF4l/RRJPr3Btg3mW8DmycJkmfTy3BiYHrt1lxWF488MN0zrq3NdSq2+JfZ8KkBrh
+ pVR23AZ tcRpXu8A==
+X-Developer-Key: i=keescook@chromium.org; a=openpgp;
+ fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -113,50 +100,53 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+Using the end of rpc->entries[] for addressing runs into both compile-time
+and run-time detection of accessing beyond the end of the array. Use the
+base pointer instead, since was allocated with the additional bytes for
+storing the strings. Avoids the following warning in future GCC releases
+with support for __counted_by:
 
-On Fri, Mar 29, 2024 at 10:28:14AM -0700, Easwar Hariharan wrote:
-> On 3/29/2024 10:16 AM, Andi Shyti wrote:
-> > Hi Easwar,
-> > 
-> > On Fri, Mar 29, 2024 at 05:00:26PM +0000, Easwar Hariharan wrote:
-> >> I2C v7, SMBus 3.2, and I3C specifications have replaced "master/slave"
-> > 
-> > I don't understand why we forget that i3c is 1.1.1 :-)
-> 
-> That's because it's a copy-paste error from Wolfram's cover letter. :) I'll update
-> next go-around.
+In function 'fortify_memcpy_chk',
+    inlined from 'r535_gsp_rpc_set_registry' at ../drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1123:3:
+../include/linux/fortify-string.h:553:25: error: call to '__write_overflow_field' declared with attribute warning: detected write beyond size of field (1st parameter); maybe use struct_group()? [-Werror=attribute-warning]
+  553 |                         __write_overflow_field(p_size_field, size);
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-not a binding comment, though. Just for completeness, because we
-are giving the version to the i2c and smbus, but not i3c.
+for this code:
 
-> >> with more appropriate terms. Inspired by and following on to Wolfram's
-> >> series to fix drivers/i2c/[1], fix the terminology for users of
-> >> I2C_ALGOBIT bitbanging interface, now that the approved verbiage exists
-> >> in the specification.
-> > 
-> > The specification talks about:
-> > 
-> >  - master -> controller
-> >  - slave -> target (and not client)
-> > 
-> > But both you and Wolfram have used client. I'd like to reach
-> > some more consistency here.
-> 
-> I had the impression that remote targets (i.e external to the device) were to be called clients,
-> e.g. the QSFP FRUs in drivers/infiniband, and internal ones targets.
-> I chose the terminology according to that understanding, but now I can't find where I got that
-> information.
+	strings = (char *)&rpc->entries[NV_GSP_REG_NUM_ENTRIES];
+	...
+                memcpy(strings, r535_registry_entries[i].name, name_len);
 
-The word "client" does not even appear in the documentation (only
-one instance in the i3c document), so that the change is not
-related to the document as stated in the commit log. Unless, of
-course, I am missing something.
+Signed-off-by: Kees Cook <keescook@chromium.org>
+---
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Danilo Krummrich <dakr@redhat.com>
+Cc: David Airlie <airlied@gmail.com>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Timur Tabi <ttabi@nvidia.com>
+Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I'm OK with choosing a "customized" naming, but we need to reach
-an agreement.
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+index 9994cbd6f1c4..9858c1438aa7 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+@@ -1112,7 +1112,7 @@ r535_gsp_rpc_set_registry(struct nvkm_gsp *gsp)
+ 	rpc->numEntries = NV_GSP_REG_NUM_ENTRIES;
+ 
+ 	str_offset = offsetof(typeof(*rpc), entries[NV_GSP_REG_NUM_ENTRIES]);
+-	strings = (char *)&rpc->entries[NV_GSP_REG_NUM_ENTRIES];
++	strings = (char *)rpc + str_offset;
+ 	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
+ 		int name_len = strlen(r535_registry_entries[i].name) + 1;
+ 
+-- 
+2.34.1
 
-I raised the same question to Wolfram.
-
-Thanks,
-Andi
