@@ -2,53 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E35728A38C4
-	for <lists+nouveau@lfdr.de>; Sat, 13 Apr 2024 01:09:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD33D8A38BC
+	for <lists+nouveau@lfdr.de>; Sat, 13 Apr 2024 01:09:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 80B5310F92C;
-	Fri, 12 Apr 2024 23:09:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E877710F921;
+	Fri, 12 Apr 2024 23:09:11 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=msys.ch header.i=@msys.ch header.b="MhDXmoaE";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="l55a3AM4";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 328 seconds by postgrey-1.36 at gabe;
- Sun, 31 Mar 2024 16:53:26 UTC
-Received: from mx.msys.ch (hq.msys.ch [46.175.8.8])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A546710EC6B;
- Sun, 31 Mar 2024 16:53:26 +0000 (UTC)
-Content-Type: text/plain; charset=utf-8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=msys.ch; s=dkim;
- t=1711903675;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NaN+o+c6PopybeUgoomEUf/7EPalUAG6zQAbhrx7NpU=;
- b=MhDXmoaEPeUrgIT+8/JBR485GwX7FWwF4cRfth/ZeMYkzyYw14tK+w4HXP65bB+Dws9uC8
- zKt1nABzvkTCtGS8uV2hbixfT5QNARywXej4AvW26XoPPes74NPNln9Ek7EyauEX5zrzoY
- cAZZ12BHyGMb4gE+sJZr111hW1o/a4w=
-Authentication-Results: mx.msys.ch;
-	auth=pass smtp.mailfrom=marc@msys.ch
-Content-Transfer-Encoding: quoted-printable
-From: Marc Balmer <marc@msys.ch>
-Mime-Version: 1.0
-Subject: Re: 2024 X.Org Foundation Membership deadline for voting in the
- election
-Date: Sun, 31 Mar 2024 18:47:43 +0200
-Message-Id: <0A85708F-4DEA-4967-B135-9C1FCB2BDB41@msys.ch>
-References: <0a816356c382e4377953bba256e1275c779b220d.camel@igalia.com>
-Cc: events@lists.x.org, xorg-devel@lists.x.org,
- wayland-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- mesa-dev@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- etnaviv@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- libre-soc-dev@lists.libre-soc.org, elections@x.org, members@x.org,
- xorg@lists.freedesktop.org
-In-Reply-To: <0a816356c382e4377953bba256e1275c779b220d.camel@igalia.com>
-To: Ricardo Garcia <rgarcia@igalia.com>
-X-Spamd-Bar: --
-X-Mailman-Approved-At: Fri, 12 Apr 2024 23:09:09 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9917310F3DB;
+ Tue,  2 Apr 2024 08:29:58 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id E84AF60F81;
+ Tue,  2 Apr 2024 08:29:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0A6A2C43394;
+ Tue,  2 Apr 2024 08:29:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1712046597;
+ bh=KLiOyU5gxLUsegc5eE8/HwQZQ1rmvicDU4hOpKd3aeo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=l55a3AM46XbBh4JItwGhAxKslyWIKIYKui6nTuLqnelnvoCzqlpqOBF855wp5JiYA
+ Yowmji/9KFQKT7t3FXrheQWOfrZKhf4TXyansdGzhWv+JZ0NKjtP2vXTecC/0VBNXb
+ iyeRoNhrs0sqvkO3VW5XtNeqcA6vj8bE4n+Bku10Paa7Sw2yozjgMMQor1qpvpJeni
+ NYcWL13S4L1UDvWSpOd96u0uvRmBx+otENbremo5gbkAPR5nG4KtoKeteSAikD4VQo
+ aHJSXR2CScq7H9dhwpbQ9dZeGJASNTbz3sbft5dih+eH9O18+aPLDPwjNCJ64V3l+M
+ Jnld7gjc+HRxA==
+Date: Tue, 2 Apr 2024 09:29:51 +0100
+From: Simon Horman <horms@kernel.org>
+To: Easwar Hariharan <eahariha@linux.microsoft.com>
+Cc: Edward Cree <ecree.xilinx@gmail.com>,
+ Martin Habets <habetsm.xilinx@gmail.com>,
+ "David S. Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ "open list:SFC NETWORK DRIVER" <netdev@vger.kernel.org>,
+ "open list:SFC NETWORK DRIVER" <linux-net-drivers@amd.com>,
+ open list <linux-kernel@vger.kernel.org>,
+ Wolfram Sang <wsa+renesas@sang-engineering.com>,
+ "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
+ "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
+ <intel-gfx@lists.freedesktop.org>, 
+ "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
+ <intel-xe@lists.freedesktop.org>, 
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>, 
+ "open list:I2C SUBSYSTEM HOST DRIVERS" <linux-i2c@vger.kernel.org>,
+ "open list:BTTV VIDEO4LINUX DRIVER" <linux-media@vger.kernel.org>,
+ "open list:FRAMEBUFFER LAYER" <linux-fbdev@vger.kernel.org>
+Subject: Re: [PATCH v0 10/14] sfc: falcon: Make I2C terminology more inclusive
+Message-ID: <20240402082951.GG26556@kernel.org>
+References: <20240329170038.3863998-1-eahariha@linux.microsoft.com>
+ <20240329170038.3863998-11-eahariha@linux.microsoft.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240329170038.3863998-11-eahariha@linux.microsoft.com>
+X-Mailman-Approved-At: Fri, 12 Apr 2024 23:09:06 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,33 +76,18 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-How often will you send this spam again?
+On Fri, Mar 29, 2024 at 05:00:34PM +0000, Easwar Hariharan wrote:
+> I2C v7, SMBus 3.2, and I3C specifications have replaced "master/slave"
+> with more appropriate terms. Inspired by and following on to Wolfram's
+> series to fix drivers/i2c/[1], fix the terminology for users of
+> I2C_ALGOBIT bitbanging interface, now that the approved verbiage exists
+> in the specification.
+> 
+> Compile tested, no functionality changes intended
+> 
+> [1]: https://lore.kernel.org/all/20240322132619.6389-1-wsa+renesas@sang-engineering.com/
+> 
+> Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
 
-> Am 31.03.2024 um 18:46 schrieb Ricardo Garcia <rgarcia@igalia.com>:
->=20
-> =EF=BB=BFThis is a reminder that the membership renewal period ends in 2 d=
-ays,
-> and elections will start after that. Please register as an X.Org
-> Foundation member to be able to vote in the upcoming elections. Thanks!
->=20
-> -Ricardo Garcia, on behalf of the X.Org elections committee.
->=20
->> On Tue, 2024-03-26 at 11:42 -0400, Christopher Michael wrote:
->> The 2024 X.Org Foundation membership renewal period has been extended
->> one additional week and elections will start the following week on 01
->> April 2024.
->>=20
->> Please note that only current members can vote in the upcoming election,
->> and that the deadline for new memberships or renewals to vote in the
->> upcoming election is 01 April 2024 at 23:59 UTC.
->>=20
->> If you are interested in joining the X.Org Foundation or in renewing
->> your membership, please visit the membership system site at:
->> https://members.x.org/
->>=20
->> Christopher Michael, on behalf of the X.Org elections committee
->>=20
->>=20
->>=20
->=20
+Reviewed-by: Simon Horman <horms@kernel.org>
 
