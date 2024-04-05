@@ -2,59 +2,73 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4834D899233
-	for <lists+nouveau@lfdr.de>; Fri,  5 Apr 2024 01:37:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 015A0899AAA
+	for <lists+nouveau@lfdr.de>; Fri,  5 Apr 2024 12:25:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 25129113674;
-	Thu,  4 Apr 2024 23:37:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 01979113AD4;
+	Fri,  5 Apr 2024 10:25:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="DEC9fZsa";
+	dkim=pass (2048-bit key; secure) header.d=sang-engineering.com header.i=@sang-engineering.com header.b="TbhXudkY";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9B8AF113674
- for <nouveau@lists.freedesktop.org>; Thu,  4 Apr 2024 23:37:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1712273867;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=UH0SdUkY0Y7wcvIlBfPcVRXDNk9BBU7t+uEZjzSWyug=;
- b=DEC9fZsauJ8oyelStoap9ti2AD9SaojEDaugCckUOX0YcnxxxMl7iHK4yP7j+QSGOU30BX
- z7SvKh9xBfOcU28bag8ydwkZBdoP3bpUw4OPQvGbluQfa4939mDaMFp5kBLdaWktOz76x3
- KCGfzAE9genOMD8tEJIZU7yBN+bXpXI=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-638-EqSQlcGjNlGdio4Ofq0TTQ-1; Thu,
- 04 Apr 2024 19:37:42 -0400
-X-MC-Unique: EqSQlcGjNlGdio4Ofq0TTQ-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 610D33C0219B;
- Thu,  4 Apr 2024 23:37:42 +0000 (UTC)
-Received: from chopper.lyude.net (unknown [10.22.8.53])
- by smtp.corp.redhat.com (Postfix) with ESMTP id BB34D10E4B;
- Thu,  4 Apr 2024 23:37:41 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org
-Cc: Karol Herbst <kherbst@redhat.com>, Danilo Krummrich <dakr@redhat.com>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH 2/2] drm/nouveau/dp: Don't probe eDP ports twice harder
-Date: Thu,  4 Apr 2024 19:35:54 -0400
-Message-ID: <20240404233736.7946-3-lyude@redhat.com>
-In-Reply-To: <20240404233736.7946-1-lyude@redhat.com>
-References: <20240404233736.7946-1-lyude@redhat.com>
+X-Greylist: delayed 400 seconds by postgrey-1.36 at gabe;
+ Fri, 05 Apr 2024 10:25:20 UTC
+Received: from mail.zeus03.de (www.zeus03.de [194.117.254.33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 38A45113AD4
+ for <nouveau@lists.freedesktop.org>; Fri,  5 Apr 2024 10:25:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ sang-engineering.com; h=date:from:to:cc:subject:message-id
+ :references:mime-version:content-type:in-reply-to; s=k1; bh=XRZ/
+ 7f9TpBVm+EqkcIlzKupPDZE9c/6S0MGx+T9aWhU=; b=TbhXudkYnme5n6iHh1a7
+ RBdhDu2GT6+9PAy8ABhR4DJ4AFeu9vn7KF9NnItdIjxg3lODlyxOWMQzmHvBjUuV
+ 6C2iJlxx9lPXa2C8k2zkTkCSAQ80w4ipFFE24BRkYFzXyEK7FP0vMNw5j1O2wMwt
+ rY3DTBf3ZIZFcTyDbCkD+x2BtRIlE2QfpykSPGqfi0fAa4E69G+hgGGV7l0hOuGb
+ eRpF0U2crVKhUWxUBjAZhcKkAmkgy6/e5eOeLvTbIQriGrx9zqcvXZvr+o3oYemF
+ ZV3lsTAHA9m7SGPcs05kwS6QKI/86ISnt7+jeteV6CxjkYrq8U88Su9gL7GEhrTR
+ qA==
+Received: (qmail 4072572 invoked from network); 5 Apr 2024 12:18:37 +0200
+Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted,
+ authenticated); 5 Apr 2024 12:18:37 +0200
+X-UD-Smtp-Session: l3s3148p1@a0Brx1YVfIUgAwDPXwEGAANOsN0UmmrN
+Date: Fri, 5 Apr 2024 12:18:37 +0200
+From: Wolfram Sang <wsa+renesas@sang-engineering.com>
+To: Easwar Hariharan <eahariha@linux.microsoft.com>
+Cc: "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>, 
+ open list <linux-kernel@vger.kernel.org>, 
+ "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
+ <intel-gfx@lists.freedesktop.org>, 
+ "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
+ <intel-xe@lists.freedesktop.org>, 
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>, 
+ "open list:I2C SUBSYSTEM HOST DRIVERS" <linux-i2c@vger.kernel.org>, 
+ "open list:BTTV VIDEO4LINUX DRIVER" <linux-media@vger.kernel.org>,
+ "open list:FRAMEBUFFER LAYER" <linux-fbdev@vger.kernel.org>
+Subject: Re: [PATCH v0 00/14] Make I2C terminology more inclusive for I2C
+ Algobit and consumers
+Message-ID: <ffumcagmzdstcf3qcn3f26555pnu7i6azjppciyd4zvcoit7pv@vu262tsfnqyr>
+Mail-Followup-To: Wolfram Sang <wsa+renesas@sang-engineering.com>, 
+ Easwar Hariharan <eahariha@linux.microsoft.com>, 
+ "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>, 
+ open list <linux-kernel@vger.kernel.org>, 
+ "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
+ <intel-gfx@lists.freedesktop.org>, 
+ "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
+ <intel-xe@lists.freedesktop.org>, 
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>, 
+ "open list:I2C SUBSYSTEM HOST DRIVERS" <linux-i2c@vger.kernel.org>, 
+ "open list:BTTV VIDEO4LINUX DRIVER" <linux-media@vger.kernel.org>,
+ "open list:FRAMEBUFFER LAYER" <linux-fbdev@vger.kernel.org>
+References: <20240329170038.3863998-1-eahariha@linux.microsoft.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.5
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="wrrai2fidezv42rs"
+Content-Disposition: inline
+In-Reply-To: <20240329170038.3863998-1-eahariha@linux.microsoft.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,48 +83,70 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I didn't pay close enough attention the last time I tried to fix this
-problem - while we currently do correctly take care to make sure we don't
-probe a connected eDP port more then once, we don't do the same thing for
-eDP ports we found to be disconnected.
 
-So, fix this and make sure we only ever probe eDP ports once and then leave
-them at that connector state forever (since without HPD, it's not going to
-change on its own anyway). This should get rid of the last few GSP errors
-getting spit out during runtime suspend and resume on some machines, as we
-tried to reprobe eDP ports in response to ACPI hotplug probe events.
+--wrrai2fidezv42rs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_dp.c | 14 +++++++++-----
- 1 file changed, 9 insertions(+), 5 deletions(-)
+Hello Easwar,
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_dp.c b/drivers/gpu/drm/nouveau/nouveau_dp.c
-index 8b1be7dd64ebe..8b27d372e86da 100644
---- a/drivers/gpu/drm/nouveau/nouveau_dp.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_dp.c
-@@ -225,12 +225,16 @@ nouveau_dp_detect(struct nouveau_connector *nv_connector,
- 	u8 *dpcd = nv_encoder->dp.dpcd;
- 	int ret = NOUVEAU_DP_NONE, hpd;
- 
--	/* If we've already read the DPCD on an eDP device, we don't need to
--	 * reread it as it won't change
-+	/* eDP ports don't support hotplugging - so there's no point in probing eDP ports unless we
-+	 * haven't probed them once before.
- 	 */
--	if (connector->connector_type == DRM_MODE_CONNECTOR_eDP &&
--	    dpcd[DP_DPCD_REV] != 0)
--		return NOUVEAU_DP_SST;
-+	if (connector->connector_type == DRM_MODE_CONNECTOR_eDP) {
-+		if (connector->status == connector_status_connected) {
-+			return NOUVEAU_DP_SST;
-+		} else if (connector->status == connector_status_disconnected) {
-+			return NOUVEAU_DP_NONE;
-+		}
-+	}
- 
- 	// Ensure that the aux bus is enabled for probing
- 	drm_dp_dpcd_set_powered(&nv_connector->aux, true);
--- 
-2.44.0
+On Fri, Mar 29, 2024 at 05:00:24PM +0000, Easwar Hariharan wrote:
+> I2C v7, SMBus 3.2, and I3C specifications have replaced "master/slave"
+> with more appropriate terms. Inspired by and following on to Wolfram's
+> series to fix drivers/i2c/[1], fix the terminology for users of the
+> I2C_ALGOBIT bitbanging interface, now that the approved verbiage exists
+> in the specification.
 
+I really appreciate that you want to assist in this task to improve the
+I2C core. I do. I am afraid, however, that you took the second step
+before the first one, though. As I mentioned in my original cover
+letter, this is not only about renaming but also improving the I2C API
+(splitting up header files...). So, drivers are not a priority right
+now. They can be better fixed once the core is ready.
+
+It is true that I changed quite some controller drivers within the i2c
+realm. I did this to gain experience. As you also noticed quite some
+questions came up. We need to agree on answers first. And once we are
+happy with the answers we found, then IMO we can go outside of the i2c
+realm and send patches to other subsystems referencing agreed
+precedence. I intentionally did not go outside i2c yet. Since your
+patches are already there, you probably want to foster them until they
+are ready for inclusion. Yet, regarding further patches, my suggestion
+is to wait until the core is ready. That might take a while, though.
+However, there is enough to discuss until the core is ready. So, your
+collaboration there is highly appreciated!
+
+> The last patch updating the .master_xfer method to .xfer depends on
+> patch 1 of Wolfram's series below, but the series is otherwise
+> independent. It may make sense for the last patch to go in with
+
+Please drop the last patch from this series. It will nicely remove the
+dependency. Also, like above, I first want to gain experience with i2c
+before going to other subsystems. That was intended.
+
+All the best and happy hacking,
+
+   Wolfram
+
+
+--wrrai2fidezv42rs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmYPz/kACgkQFA3kzBSg
+Kbb2khAArgkbDpks50YTmBYCaMaPYcuR0VEc60/+z8tRAlS4IKaYIXzw2LEXG7Lz
+vJE8MMcWs6lGZjapOyfhFrB/U9Zu8Ffpg1qataFG3ZnRZG6BYb8i2cCTCwK9h4Vk
+KfijUXjmqXMGKRcaUcIYL/IxYZYRP0Y9yYGfBibDtxV7hnMakp6+XXbfM8FVCj1g
+iW3ORBfLYR32dJxnI4unFt15e2aXFDQkJDLqBJ4WGynGPaGr0lmfQpWQDP2aYlN0
+Dyormc+6tCEOAN6PBG0cssZbMUj4ABQYOxxNhQ8hP6gAqkMuqqC1+nHAH3PNQjkf
+VHMYFPogE0LGrCOOVKzgeU3QIfF9MABirrNB8bx+K3tl1te0EWse1u4CXIKrmBZ7
+VS1fVRMUdS25YnzNM5cfZQTGv2JxgebrXUqN1bneFpKmISO66p2hF3/8lsaPO8Rw
+6QOTRpcHay1sESrreLn9gAj/NeddgU7XhI3oGqk6PQyYQrE5LbTh0wuZil02rwjJ
+ea29MTkK7muy5fQT9dDHOk38fjG0jk48Oyk5NBVMboeLKlvPy6OTiXG6Z1lifGga
+xZe0cBBoH5gHPY6ZIVh4HaHfbmzt5jGIpzf8Sx9E9n03K6Njewqu+Wxm24AMr/OR
+79BvBK0rlCVMmck+ZJiW969Q/G9JKFieQnUDqHlMc5nIAHMB0Lw=
+=T3F5
+-----END PGP SIGNATURE-----
+
+--wrrai2fidezv42rs--
