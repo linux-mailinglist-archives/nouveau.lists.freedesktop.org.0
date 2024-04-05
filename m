@@ -2,86 +2,87 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E0DA89A2A2
-	for <lists+nouveau@lfdr.de>; Fri,  5 Apr 2024 18:37:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A743089A2A7
+	for <lists+nouveau@lfdr.de>; Fri,  5 Apr 2024 18:38:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A203F10EC62;
-	Fri,  5 Apr 2024 16:37:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 560D910ED30;
+	Fri,  5 Apr 2024 16:38:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Y3LrAovs";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ZwPihPv9";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5F5B010E2BF
- for <nouveau@lists.freedesktop.org>; Fri,  5 Apr 2024 16:37:37 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D916910E2BF
+ for <nouveau@lists.freedesktop.org>; Fri,  5 Apr 2024 16:38:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1712335056;
+ s=mimecast20190719; t=1712335084;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HhqXEsjcQfRnbT+Watd5B6B0qa6OPofOH0VzzxL2RKw=;
- b=Y3LrAovsOPV8ceN6G3k/bRjiRE/UVG5PDBJLfLJ2tMNZAS28KX3h32uoCsXth2H0o/Nn0D
- KCFPy5w7nkerGypf7chfvGP/goGxdOHhRWYfIgsQxc1c5PTwqrVze+MAvgrcPBE090rQNK
- TD5KbStem9MaiGuJAViXAv5oTkJtvTA=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=fkF4QSWzhf6Nw/44NW74bQyP4bUB/6PnvqawpC9bEv4=;
+ b=ZwPihPv9b9sG+lUpWT4jwVX/vJxtUy54geqivvwef/0TqcWJQVMokSeuykQf6/+KL/4yzq
+ vbkfR1srU+NHnLL9SnguHw7KVh7LowDuP9WHxjo5Ufi7ej8/7pGOUoSVrFl4/aopBEXB+C
+ Rww50hg8IWLoVYfvsIIWIpprbiflwBc=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-265-I65iGpOlMNKvfYOPDkhPvg-1; Fri, 05 Apr 2024 12:37:32 -0400
-X-MC-Unique: I65iGpOlMNKvfYOPDkhPvg-1
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4162b93067dso9198355e9.3
- for <nouveau@lists.freedesktop.org>; Fri, 05 Apr 2024 09:37:32 -0700 (PDT)
+ us-mta-3-LXM42mTZO6mSdJ6MDSHqeA-1; Fri, 05 Apr 2024 12:38:00 -0400
+X-MC-Unique: LXM42mTZO6mSdJ6MDSHqeA-1
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-343d1d16d9fso778065f8f.1
+ for <nouveau@lists.freedesktop.org>; Fri, 05 Apr 2024 09:38:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712335051; x=1712939851;
+ d=1e100.net; s=20230601; t=1712335079; x=1712939879;
  h=content-transfer-encoding:in-reply-to:organization:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HhqXEsjcQfRnbT+Watd5B6B0qa6OPofOH0VzzxL2RKw=;
- b=gI+l8UhVg2L126jdMI2CSvpLCO6vWJhXqHcB6Os5UooGW9Q7PGGyjijHUMpPL/asSF
- 2VbGZsvwNH8eljLpQi40vMc1noYviXfZ/BCAyS04/bc4sEjV8T3Q7J3pxRxc4Pxs7Bnq
- +KYhxcoObV9jkydo8Pxr8loaXpTWqq9KN0i0nYcdA2cye86G68esbIjzcgOJAxxYq/gW
- qY49bWEZ4kHZ7UKhufq4hJynnrsXpIvK+F+AWgUFHGz8KBNwypmfh2w4IqvtBxE53n/n
- 5Fes97Ox7HD1LJ+aeBf1TBR6uEO4l05eC3jol1yhuQdwD80AzE4Jbg+sioj3MYMr4yjv
- w7TQ==
+ bh=fkF4QSWzhf6Nw/44NW74bQyP4bUB/6PnvqawpC9bEv4=;
+ b=PmktHtFRiUaSKZ5X8un40b835yWgiPaf2YVEHFD4uJWxnDlRlgewYOWk55nYXYN4mC
+ 0u+JTT0zNZFEvE6CX9bFMZo0zSTIKP1YjEuUIhJp+q1PUocmqQnLR9LbGdZ56nTU3n6u
+ xva2pN8o1is/as6Sm1dyz7FALNueM4d5pPED0nRoIzIurYHMGsag9nSu8ePlBIVLmt1b
+ Enr3neyvm5/kqVhThNRVB47EyStbsIeEPb4rpUp/AJHbt9CHeoHeDVoAx+bP0tJeJZoR
+ wRYWbjYZZMf1qByilEqhT9wH4KtdY2bzbJHJI++7iKd7ChGlyr1LKUk1mOy08+nP6pZL
+ EmHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWo5zAaYe4x8qIZ22OulirMAF7jMQgTHKrDC/8d+zKkWWJRSa6Ysrhtk0W2q12uSePcmZSUC+tq0D6YPh19cysDPeqlcACsWPqwpX7raA==
-X-Gm-Message-State: AOJu0YxPc/ropxcZLJG6mbG3bYA8AjIBySjlwgWD0ukpAf5YtAuV5IBC
- OdiNlfBgWlahBL/F0nIq3qcFAX83N4+OF+7kZRUgVyPJPug8aDnQMK1mfjhLzCrhs19LkKHwkPT
- 1rOdcFK0XvvUXV+fis/7rIeG4X1yrmeVoAAPT8JNsqFmi0moXGh2zGBDPBUhl56A=
-X-Received: by 2002:a05:600c:4510:b0:414:767e:6e76 with SMTP id
- t16-20020a05600c451000b00414767e6e76mr1596286wmo.21.1712335051633; 
- Fri, 05 Apr 2024 09:37:31 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEDPCc0VTMBhL7MNqvTz5tlRMoWQPFY1L2zr/0sqh9d3YOQmi5yQiu02UsFqppTmlfZ8bZ/Jg==
-X-Received: by 2002:a05:600c:4510:b0:414:767e:6e76 with SMTP id
- t16-20020a05600c451000b00414767e6e76mr1596272wmo.21.1712335051297; 
- Fri, 05 Apr 2024 09:37:31 -0700 (PDT)
+ AJvYcCV79DsTPYI9HEnyFdE25phmuJu92C34b0QpnT4C/Qg1i2WLvgXk4djt++kK35Eo2G24gZwFUzA5RqL9/9Q84rA3Xo/iWMy/5RFeqOHcJQ==
+X-Gm-Message-State: AOJu0Yz1GbOk/nHldxHdtlf7BVw+mnmokH3MwUAHuslwQ/Jx5FJgefwK
+ 3knb4Y1rj10c/QjFUPOMXaabSo4zN93KB3lFUwAynmIUzNHjAo0GGbXQLAsjtzr5V93VFnePXWk
+ mvD3DuuYIhbOoo4zkRE96f6DIvqiljR6uqkQ80gaU7Fh+srvb7uiVBCynsj6whhw=
+X-Received: by 2002:adf:e849:0:b0:343:e031:69b8 with SMTP id
+ d9-20020adfe849000000b00343e03169b8mr1687192wrn.41.1712335079582; 
+ Fri, 05 Apr 2024 09:37:59 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHZ46bQriV6ycJFTO0VuNynMncgm9/Re4exnqTKKZrOf8MmqZKAujsFuh4iSK3zn2MXU1fy4Q==
+X-Received: by 2002:adf:e849:0:b0:343:e031:69b8 with SMTP id
+ d9-20020adfe849000000b00343e03169b8mr1687176wrn.41.1712335079306; 
+ Fri, 05 Apr 2024 09:37:59 -0700 (PDT)
 Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
  ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
  by smtp.gmail.com with ESMTPSA id
- v13-20020a05600c444d00b00416306c17basm2328956wmn.14.2024.04.05.09.37.28
+ q8-20020adfea08000000b00341c6440c36sm2409149wrm.74.2024.04.05.09.37.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Apr 2024 09:37:29 -0700 (PDT)
-Message-ID: <593a8479-741a-44de-a52c-8d34810bfb3e@redhat.com>
-Date: Fri, 5 Apr 2024 18:37:26 +0200
+ Fri, 05 Apr 2024 09:37:58 -0700 (PDT)
+Message-ID: <cefb67c2-f5f5-4b54-8ed6-a9cab3718ff5@redhat.com>
+Date: Fri, 5 Apr 2024 18:37:57 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] nouveau/gsp: Avoid addressing beyond end of rpc->entries
-To: Kees Cook <keescook@chromium.org>
-Cc: Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
- Ben Skeggs <bskeggs@redhat.com>, Timur Tabi <ttabi@nvidia.com>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, linux-kernel@vger.kernel.org,
- linux-hardening@vger.kernel.org, Karol Herbst <kherbst@redhat.com>
-References: <20240330141159.work.063-kees@kernel.org>
+Subject: Re: [PATCH] [v2] nouveau: fix function cast warning
+To: Arnd Bergmann <arnd@kernel.org>
+Cc: Arnd Bergmann <arnd@arndb.de>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <ndesaulniers@google.com>, Bill Wendling
+ <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ llvm@lists.linux.dev, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>
+References: <20240404160234.2923554-1-arnd@kernel.org>
 From: Danilo Krummrich <dakr@redhat.com>
 Organization: RedHat
-In-Reply-To: <20240330141159.work.063-kees@kernel.org>
+In-Reply-To: <20240404160234.2923554-1-arnd@kernel.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -101,55 +102,48 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 3/30/24 15:12, Kees Cook wrote:
-> Using the end of rpc->entries[] for addressing runs into both compile-time
-> and run-time detection of accessing beyond the end of the array. Use the
-> base pointer instead, since was allocated with the additional bytes for
-> storing the strings. Avoids the following warning in future GCC releases
-> with support for __counted_by:
+On 4/4/24 18:02, Arnd Bergmann wrote:
+> From: Arnd Bergmann <arnd@arndb.de>
 > 
-> In function 'fortify_memcpy_chk',
->      inlined from 'r535_gsp_rpc_set_registry' at ../drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1123:3:
-> ../include/linux/fortify-string.h:553:25: error: call to '__write_overflow_field' declared with attribute warning: detected write beyond size of field (1st parameter); maybe use struct_group()? [-Werror=attribute-warning]
->    553 |                         __write_overflow_field(p_size_field, size);
->        |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> Calling a function through an incompatible pointer type causes breaks
+> kcfi, so clang warns about the assignment:
 > 
-> for this code:
+> drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowof.c:73:10: error: cast from 'void (*)(const void *)' to 'void (*)(void *)' converts to incompatible function type [-Werror,-Wcast-function-type-strict]
+>     73 |         .fini = (void(*)(void *))kfree,
 > 
-> 	strings = (char *)&rpc->entries[NV_GSP_REG_NUM_ENTRIES];
-> 	...
->                  memcpy(strings, r535_registry_entries[i].name, name_len);
+> Avoid this with a trivial wrapper.
 > 
-> Signed-off-by: Kees Cook <keescook@chromium.org>
+> Fixes: c39f472e9f14 ("drm/nouveau: remove symlinks, move core/ to nvkm/ (no code changes)")
+> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
 
 Applied to drm-misc-fixes, thanks!
 
 > ---
-> Cc: Karol Herbst <kherbst@redhat.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: Danilo Krummrich <dakr@redhat.com>
-> Cc: David Airlie <airlied@gmail.com>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: Dave Airlie <airlied@redhat.com>
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> Cc: Timur Tabi <ttabi@nvidia.com>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: nouveau@lists.freedesktop.org
+> v2: avoid 'return kfree()' expression returning a void
 > ---
->   drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowof.c | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> index 9994cbd6f1c4..9858c1438aa7 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
-> @@ -1112,7 +1112,7 @@ r535_gsp_rpc_set_registry(struct nvkm_gsp *gsp)
->   	rpc->numEntries = NV_GSP_REG_NUM_ENTRIES;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowof.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowof.c
+> index 4bf486b57101..cb05f7f48a98 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowof.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowof.c
+> @@ -66,11 +66,16 @@ of_init(struct nvkm_bios *bios, const char *name)
+>   	return ERR_PTR(-EINVAL);
+>   }
 >   
->   	str_offset = offsetof(typeof(*rpc), entries[NV_GSP_REG_NUM_ENTRIES]);
-> -	strings = (char *)&rpc->entries[NV_GSP_REG_NUM_ENTRIES];
-> +	strings = (char *)rpc + str_offset;
->   	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
->   		int name_len = strlen(r535_registry_entries[i].name) + 1;
->   
+> +static void of_fini(void *p)
+> +{
+> +	kfree(p);
+> +}
+> +
+>   const struct nvbios_source
+>   nvbios_of = {
+>   	.name = "OpenFirmware",
+>   	.init = of_init,
+> -	.fini = (void(*)(void *))kfree,
+> +	.fini = of_fini,
+>   	.read = of_read,
+>   	.size = of_size,
+>   	.rw = false,
 
