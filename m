@@ -2,92 +2,109 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A743089A2A7
-	for <lists+nouveau@lfdr.de>; Fri,  5 Apr 2024 18:38:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25BB789A441
+	for <lists+nouveau@lfdr.de>; Fri,  5 Apr 2024 20:37:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 560D910ED30;
-	Fri,  5 Apr 2024 16:38:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A9BB3113CB0;
+	Fri,  5 Apr 2024 18:37:03 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ZwPihPv9";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="bkmLIHuX";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D916910E2BF
- for <nouveau@lists.freedesktop.org>; Fri,  5 Apr 2024 16:38:04 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6DA05113CAC
+ for <nouveau@lists.freedesktop.org>; Fri,  5 Apr 2024 18:36:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1712335084;
+ s=mimecast20190719; t=1712342218;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=fkF4QSWzhf6Nw/44NW74bQyP4bUB/6PnvqawpC9bEv4=;
- b=ZwPihPv9b9sG+lUpWT4jwVX/vJxtUy54geqivvwef/0TqcWJQVMokSeuykQf6/+KL/4yzq
- vbkfR1srU+NHnLL9SnguHw7KVh7LowDuP9WHxjo5Ufi7ej8/7pGOUoSVrFl4/aopBEXB+C
- Rww50hg8IWLoVYfvsIIWIpprbiflwBc=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=qvKsrMsm5amCXrkHqNf0dwZRvuZponfYbk9G0oYCwa0=;
+ b=bkmLIHuXHWylDHV3WzY3VGR5Ih99VfMb+b8oggnFECST0sWagWeL3urNqjAQnlyCm3vXDX
+ ZoBeOGp94qADvpKVLLeifSWsvCVUerTo2AgPjTob6VX+GN24b+LkzUOJdLXyRJZjmpVloP
+ eov2PjZSdAnpLKnFLcb1Sup67WKkt2E=
+Received: from mail-ot1-f70.google.com (mail-ot1-f70.google.com
+ [209.85.210.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-3-LXM42mTZO6mSdJ6MDSHqeA-1; Fri, 05 Apr 2024 12:38:00 -0400
-X-MC-Unique: LXM42mTZO6mSdJ6MDSHqeA-1
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-343d1d16d9fso778065f8f.1
- for <nouveau@lists.freedesktop.org>; Fri, 05 Apr 2024 09:38:00 -0700 (PDT)
+ us-mta-393-_S_7_10EPeqVVFQfDgU42A-1; Fri, 05 Apr 2024 14:36:57 -0400
+X-MC-Unique: _S_7_10EPeqVVFQfDgU42A-1
+Received: by mail-ot1-f70.google.com with SMTP id
+ 46e09a7af769-6e45f6273a2so1525569a34.1
+ for <nouveau@lists.freedesktop.org>; Fri, 05 Apr 2024 11:36:57 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712335079; x=1712939879;
- h=content-transfer-encoding:in-reply-to:organization:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fkF4QSWzhf6Nw/44NW74bQyP4bUB/6PnvqawpC9bEv4=;
- b=PmktHtFRiUaSKZ5X8un40b835yWgiPaf2YVEHFD4uJWxnDlRlgewYOWk55nYXYN4mC
- 0u+JTT0zNZFEvE6CX9bFMZo0zSTIKP1YjEuUIhJp+q1PUocmqQnLR9LbGdZ56nTU3n6u
- xva2pN8o1is/as6Sm1dyz7FALNueM4d5pPED0nRoIzIurYHMGsag9nSu8ePlBIVLmt1b
- Enr3neyvm5/kqVhThNRVB47EyStbsIeEPb4rpUp/AJHbt9CHeoHeDVoAx+bP0tJeJZoR
- wRYWbjYZZMf1qByilEqhT9wH4KtdY2bzbJHJI++7iKd7ChGlyr1LKUk1mOy08+nP6pZL
- EmHg==
+ d=1e100.net; s=20230601; t=1712342216; x=1712947016;
+ h=mime-version:user-agent:content-transfer-encoding:organization
+ :autocrypt:references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=qvKsrMsm5amCXrkHqNf0dwZRvuZponfYbk9G0oYCwa0=;
+ b=fFTB4nDFAsVKgHevaawm8MHbsyzTOn1xUJ1Wq45ZEgr9e0b3m3r8E49cfEhyRRRRSx
+ yds5bGKCQzhWzuhgsBBgE7XxjNUOszIcyQxVSsd+dREUqqLP8p8V+Ksod0NqhGT7FmG4
+ 0Wyk3on140IF/WpYHVWwfq2KXbE9P65jVrOwCGxTw08zdYIbUyGFQYVr2cSO5YU2Jlmz
+ FMYlarRaJN+cR6Rdg605eFh8Wzq9AkBS6Jh1TSAX5frDlsp3yzb7Al/6Xdz2ZtyzMbl0
+ sIv/bnzGDgQ5SbsgJ3UaP1hzZ7av/mqccfn8tDbl8ImGy3atBrVptI3CyPZ1XtHcZgpU
+ RYRg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV79DsTPYI9HEnyFdE25phmuJu92C34b0QpnT4C/Qg1i2WLvgXk4djt++kK35Eo2G24gZwFUzA5RqL9/9Q84rA3Xo/iWMy/5RFeqOHcJQ==
-X-Gm-Message-State: AOJu0Yz1GbOk/nHldxHdtlf7BVw+mnmokH3MwUAHuslwQ/Jx5FJgefwK
- 3knb4Y1rj10c/QjFUPOMXaabSo4zN93KB3lFUwAynmIUzNHjAo0GGbXQLAsjtzr5V93VFnePXWk
- mvD3DuuYIhbOoo4zkRE96f6DIvqiljR6uqkQ80gaU7Fh+srvb7uiVBCynsj6whhw=
-X-Received: by 2002:adf:e849:0:b0:343:e031:69b8 with SMTP id
- d9-20020adfe849000000b00343e03169b8mr1687192wrn.41.1712335079582; 
- Fri, 05 Apr 2024 09:37:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHZ46bQriV6ycJFTO0VuNynMncgm9/Re4exnqTKKZrOf8MmqZKAujsFuh4iSK3zn2MXU1fy4Q==
-X-Received: by 2002:adf:e849:0:b0:343:e031:69b8 with SMTP id
- d9-20020adfe849000000b00343e03169b8mr1687176wrn.41.1712335079306; 
- Fri, 05 Apr 2024 09:37:59 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
- ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
+ AJvYcCVRhS7+66DYxqCdhmyq7gGnl+0HQZFBRSysCTWbbEFW8DzRMQ3794g9LUeXYrAn0s/eSbj/0A/5r5GaxGUw2G8KOqLjMUorft3xeQQE1g==
+X-Gm-Message-State: AOJu0YyFg8by58uXqooVL769UVgODisHgIXPR/r+7h9gHfRzqQFu+DLH
+ 1q8lhFFZMhM5LvT1HZJc3fcPyHuCq5kbjfdp3SS3Aj+764VxC8OwLcmawKtrPtr9Qqo1ShAHI8N
+ Ux6tz1Byla01uO/BVSz2XsdS81NCztwOqMCl4xcKL/TWhnAiuiu0QItcMp22iFSA=
+X-Received: by 2002:a9d:6755:0:b0:6e9:e829:2c77 with SMTP id
+ w21-20020a9d6755000000b006e9e8292c77mr2188598otm.27.1712342216614; 
+ Fri, 05 Apr 2024 11:36:56 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFt+D771XMHHFySTD83Ks6yYhCqZ6qH+nHPbjpQmLbCiVM6E3jPPssFvgzLpd4PouzY8zRNoQ==
+X-Received: by 2002:a9d:6755:0:b0:6e9:e829:2c77 with SMTP id
+ w21-20020a9d6755000000b006e9e8292c77mr2188569otm.27.1712342216298; 
+ Fri, 05 Apr 2024 11:36:56 -0700 (PDT)
+Received: from ?IPv6:2600:4040:5c6c:a300::789? ([2600:4040:5c6c:a300::789])
  by smtp.gmail.com with ESMTPSA id
- q8-20020adfea08000000b00341c6440c36sm2409149wrm.74.2024.04.05.09.37.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Apr 2024 09:37:58 -0700 (PDT)
-Message-ID: <cefb67c2-f5f5-4b54-8ed6-a9cab3718ff5@redhat.com>
-Date: Fri, 5 Apr 2024 18:37:57 +0200
+ qr2-20020a05620a390200b00789e2805f85sm854603qkn.21.2024.04.05.11.36.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Apr 2024 11:36:55 -0700 (PDT)
+Message-ID: <190fda6f12aa77170631fb12e505779ce33d1c64.camel@redhat.com>
+Subject: Re: [PATCH v0 13/14] drm/nouveau: Make I2C terminology more inclusive
+From: Lyude Paul <lyude@redhat.com>
+To: Easwar Hariharan <eahariha@linux.microsoft.com>, Danilo Krummrich
+ <dakr@redhat.com>, Karol Herbst <kherbst@redhat.com>, David Airlie
+ <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, "open list:DRM DRIVER
+ FOR NVIDIA GEFORCE/QUADRO GPUS" <dri-devel@lists.freedesktop.org>, "open
+ list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>, open list <linux-kernel@vger.kernel.org>
+Cc: Wolfram Sang <wsa+renesas@sang-engineering.com>, "open list:RADEON and
+ AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>, "open list:INTEL DRM
+ DISPLAY FOR XE AND I915 DRIVERS" <intel-gfx@lists.freedesktop.org>, "open
+ list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
+ <intel-xe@lists.freedesktop.org>, "open list:I2C SUBSYSTEM HOST DRIVERS"
+ <linux-i2c@vger.kernel.org>, "open list:BTTV VIDEO4LINUX DRIVER"
+ <linux-media@vger.kernel.org>, "open list:FRAMEBUFFER LAYER"
+ <linux-fbdev@vger.kernel.org>
+Date: Fri, 05 Apr 2024 14:36:54 -0400
+In-Reply-To: <e6b04b76-c695-47b4-9432-f2316e174585@linux.microsoft.com>
+References: <20240329170038.3863998-1-eahariha@linux.microsoft.com>
+ <20240329170038.3863998-14-eahariha@linux.microsoft.com>
+ <4dc6fb16-3d85-4a7f-85f9-ed249da0df1a@redhat.com>
+ <e6b04b76-c695-47b4-9432-f2316e174585@linux.microsoft.com>
+Autocrypt: addr=lyude@redhat.com; prefer-encrypt=mutual;
+ keydata=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
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.50.4 (3.50.4-1.fc39)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] [v2] nouveau: fix function cast warning
-To: Arnd Bergmann <arnd@kernel.org>
-Cc: Arnd Bergmann <arnd@arndb.de>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <ndesaulniers@google.com>, Bill Wendling
- <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
- Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- llvm@lists.linux.dev, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>
-References: <20240404160234.2923554-1-arnd@kernel.org>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <20240404160234.2923554-1-arnd@kernel.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -102,48 +119,23 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 4/4/24 18:02, Arnd Bergmann wrote:
-> From: Arnd Bergmann <arnd@arndb.de>
-> 
-> Calling a function through an incompatible pointer type causes breaks
-> kcfi, so clang warns about the assignment:
-> 
-> drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowof.c:73:10: error: cast from 'void (*)(const void *)' to 'void (*)(void *)' converts to incompatible function type [-Werror,-Wcast-function-type-strict]
->     73 |         .fini = (void(*)(void *))kfree,
-> 
-> Avoid this with a trivial wrapper.
-> 
-> Fixes: c39f472e9f14 ("drm/nouveau: remove symlinks, move core/ to nvkm/ (no code changes)")
-> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+On Fri, 2024-04-05 at 09:30 -0700, Easwar Hariharan wrote:
+>=20
+> Thanks for the review, and for the appetite to go further! So we are
+> on the same page, you would prefer
+> renaming to controller/target like the feedback on other drm drivers
+> (i915, gma500, radeon)?
 
-Applied to drm-misc-fixes, thanks!
+FWIW I'm in support of this as well! As long as we make sure it gets
+renamed everywhere :)
 
-> ---
-> v2: avoid 'return kfree()' expression returning a void
-> ---
->   drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowof.c | 7 ++++++-
->   1 file changed, 6 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowof.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowof.c
-> index 4bf486b57101..cb05f7f48a98 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowof.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowof.c
-> @@ -66,11 +66,16 @@ of_init(struct nvkm_bios *bios, const char *name)
->   	return ERR_PTR(-EINVAL);
->   }
->   
-> +static void of_fini(void *p)
-> +{
-> +	kfree(p);
-> +}
-> +
->   const struct nvbios_source
->   nvbios_of = {
->   	.name = "OpenFirmware",
->   	.init = of_init,
-> -	.fini = (void(*)(void *))kfree,
-> +	.fini = of_fini,
->   	.read = of_read,
->   	.size = of_size,
->   	.rw = false,
+>=20
+> Thanks,
+> Easwar
+>=20
+
+--=20
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
