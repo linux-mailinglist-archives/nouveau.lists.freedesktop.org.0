@@ -2,77 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3D7D8A38C6
-	for <lists+nouveau@lfdr.de>; Sat, 13 Apr 2024 01:09:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CC3B8A38C0
+	for <lists+nouveau@lfdr.de>; Sat, 13 Apr 2024 01:09:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B437110F931;
-	Fri, 12 Apr 2024 23:09:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EF04310F928;
+	Fri, 12 Apr 2024 23:09:13 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="VifUXvR5";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="DvATwmVZ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
- [209.85.128.49])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 93AC710EB8F;
- Fri,  5 Apr 2024 15:41:15 +0000 (UTC)
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-4162f7ea50cso6399805e9.3; 
- Fri, 05 Apr 2024 08:41:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712331674; x=1712936474; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vWae/TQVR4lDMRxTHKpFB8Vkf/PIFo/hlHy1KJVttno=;
- b=VifUXvR5xab+VNxBPzVH1apw0GqirSUqXD0sW3jSflJBrW/2p25OiPqBq1PbwzARcS
- Ymc3xY1B4epIghvMYz0JnoF3GOdI4dBc94WOnwcLClR8Q1TgBwyByIxv+gcDMqirJs4w
- 0pgb/hI4/xotFmFfedNgpr9TuZ6kDxeQz1JZ9fCFGTZzwsw2cah14pJWttC48nSMNIHl
- FRgK5n6W/Cec1MOAciuJIsjKp+qB7pWSqmQKocVI0s7smR5delKR9OoQFYR+6159yOBo
- 8lIBXTU13JXaesECFVWQUq1nBOLT5rpu20GP23nPWnCIldT3XZd7+OqGdfi2wpIQynpb
- df4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712331674; x=1712936474;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vWae/TQVR4lDMRxTHKpFB8Vkf/PIFo/hlHy1KJVttno=;
- b=h60hl/zBR5uFjL1ebOYuYURoA8NB5+0fW/s+Y5XMnNkKyqhgzxv8w4Qeg/1qMSrHU7
- HT6/JuLx0bNpHAgr10dG2gNbi2wV1SHnrPogSrI1xhV1Ay9M75y3LLMByqiW4uITXBTI
- FlQTmIkvTrcS4ibTUxR/H+2vl+916NT7celmRYZ6ab3AKBmnSnahiTJD2wiXAbZCocIM
- jMuW3OrVecBoX6xm3SCwaZIEr5tecoaJQQC9RFhtTJQcIvcLjUN/nf/UCuF3HZJSPWP9
- OwfN46qUeTVPzbhP8yTdyT6jYNVrkoM1KHL9t8su1er0h49/IOqOB70B3XYcEBq+2mZp
- r1qQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWudLql74iYGov2MbtDDP5IscQfKF32dEKNBDhc4qfDg5wd4t5u2pulf5VVBq96TbXYcKi4GtC0GYSLm6/awharU4ey9CeEQOptTTUyPtS3GDudmx6L91izC7BctwjrneAJltFSG9aUgR4zO5CFCJKnUHdl2gRbLXiprRIL+y66GFJrw1xjbhE5cmi1xpkx94TgEP3vKLkWtAhJ9GXomDAL6/5j2/pdpyvH/9vdyeLuHz8UFTw/j+zQ3kQrhILQVVDfKVMfBMDGF6xaj70Ymq/WLJlq5lVxDB2vllW5miJCUvbCDwPI60W3vLfiAJExzYhZhjl3Xos2sMXxfMbIJ/QTcAcUcYI68cXpIr8=
-X-Gm-Message-State: AOJu0YyHJwq2DT2IFV+MfrA6O5v/mo9EbIP7oj8EQugjUizIKqDxcp0f
- 3omusJV61gqUP1SHVI0YTTLAoow9HSB4eb8dHq3mydAFDYRS/GqehUMF5kqhZwN6UHPIqEauFuQ
- MzyuSbUHpTvajRExWRLd0welb/Fo=
-X-Google-Smtp-Source: AGHT+IEH9WiGdwQmFDR3UUpRkcaEXiGYsc+rbm05qeGkTnAd0VuAIEH5g2EodOENEkeRm+TdhthkOlf3f027HucPkCY=
-X-Received: by 2002:a05:600c:19cd:b0:416:2bef:ce81 with SMTP id
- u13-20020a05600c19cd00b004162befce81mr1484706wmq.1.1712331657141; Fri, 05 Apr
- 2024 08:40:57 -0700 (PDT)
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 7EBB410E782;
+ Fri,  5 Apr 2024 16:30:15 +0000 (UTC)
+Received: from [100.64.217.16] (unknown [20.29.225.195])
+ by linux.microsoft.com (Postfix) with ESMTPSA id 6099820E98B9;
+ Fri,  5 Apr 2024 09:30:14 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 6099820E98B9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+ s=default; t=1712334614;
+ bh=w130JaeBPpS+L9M4QU8ZQXXwRcANcq5ZUO69X1bKRmU=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=DvATwmVZCnu2mWeOkHNjSOn3NP+uGroDac1iSpu2wd+v3d//PQw85B2Bdx0Po6Lvd
+ ZjMGVuaZ73P4XTz+rG7byN35W0KUrpl5gZ3alXfZ8frHGqOGX4PxPO84VA9eudZIJk
+ 732o/mFjv1LuWV0m4a0o7Gs9Fy/VV5ERgAzWEo3E=
+Message-ID: <e6b04b76-c695-47b4-9432-f2316e174585@linux.microsoft.com>
+Date: Fri, 5 Apr 2024 09:30:13 -0700
 MIME-Version: 1.0
-References: <202404052349.lQch9J7G-lkp@intel.com>
-In-Reply-To: <202404052349.lQch9J7G-lkp@intel.com>
-From: Alexei Starovoitov <alexei.starovoitov@gmail.com>
-Date: Fri, 5 Apr 2024 08:40:45 -0700
-Message-ID: <CAADnVQJXq1bSe20FgBN=BL1E5d8qOfLv_Ettq+724h5QfRuuKg@mail.gmail.com>
-Subject: Re: [linux-next:master] BUILD REGRESSION
- 8568bb2ccc278f344e6ac44af6ed010a90aa88dc
-To: kernel test robot <lkp@intel.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>, 
- Linux Memory Management List <linux-mm@kvack.org>,
- amd-gfx list <amd-gfx@lists.freedesktop.org>, 
- bpf <bpf@vger.kernel.org>, dri-devel@lists.freedesktop.org, 
- freedreno@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
- intel-xe@lists.freedesktop.org, lima@lists.freedesktop.org, 
- linux-arch <linux-arch@vger.kernel.org>, linux-arm-msm@vger.kernel.org, 
- linux-gpio@vger.kernel.org, linux-i2c@vger.kernel.org, 
- linux-pwm@vger.kernel.org, Linux-Renesas <linux-renesas-soc@vger.kernel.org>, 
- nouveau@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v0 13/14] drm/nouveau: Make I2C terminology more inclusive
+To: Danilo Krummrich <dakr@redhat.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <dri-devel@lists.freedesktop.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>, open list <linux-kernel@vger.kernel.org>
+Cc: Wolfram Sang <wsa+renesas@sang-engineering.com>,
+ "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
+ <intel-gfx@lists.freedesktop.org>,
+ "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
+ <intel-xe@lists.freedesktop.org>,
+ "open list:I2C SUBSYSTEM HOST DRIVERS" <linux-i2c@vger.kernel.org>,
+ "open list:BTTV VIDEO4LINUX DRIVER" <linux-media@vger.kernel.org>,
+ "open list:FRAMEBUFFER LAYER" <linux-fbdev@vger.kernel.org>
+References: <20240329170038.3863998-1-eahariha@linux.microsoft.com>
+ <20240329170038.3863998-14-eahariha@linux.microsoft.com>
+ <4dc6fb16-3d85-4a7f-85f9-ed249da0df1a@redhat.com>
+Content-Language: en-CA
+From: Easwar Hariharan <eahariha@linux.microsoft.com>
+In-Reply-To: <4dc6fb16-3d85-4a7f-85f9-ed249da0df1a@redhat.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 12 Apr 2024 23:09:09 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -88,48 +70,59 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Apr 5, 2024 at 8:37=E2=80=AFAM kernel test robot <lkp@intel.com> wr=
-ote:
->
-> tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-n=
-ext.git master
-> branch HEAD: 8568bb2ccc278f344e6ac44af6ed010a90aa88dc  Add linux-next spe=
-cific files for 20240405
->
-> Error/Warning reports:
->
-> https://lore.kernel.org/oe-kbuild-all/202404051333.7und7PPW-lkp@intel.com
-> https://lore.kernel.org/oe-kbuild-all/202404051423.eiaXLwhX-lkp@intel.com
-> https://lore.kernel.org/oe-kbuild-all/202404051659.aawUkGUQ-lkp@intel.com
-> https://lore.kernel.org/oe-kbuild-all/202404052022.Cwf2ilBp-lkp@intel.com
->
-> Error/Warning: (recently discovered and may have been fixed)
->
-> aarch64-linux-ld: kernel/bpf/verifier.c:20223:(.text+0xdbb4): undefined r=
-eference to `__SCK__perf_snapshot_branch_stack'
-> aarch64-linux-ld: verifier.c:(.text+0x17c3c): undefined reference to `__S=
-CK__perf_snapshot_branch_stack'
-> drivers/i2c/busses/i2c-i801.c:1407:(.text+0x1d2ef4a): undefined reference=
- to `i2c_root_adapter'
-> kernel/bpf/verifier.c:20223:(.text+0xdba4): dangerous relocation: unsuppo=
-rted relocation
-> loongarch64-linux-ld: kernel/bpf/verifier.c:20223:(.text+0xa818): undefin=
-ed reference to `__SCK__perf_snapshot_branch_stack'
-> loongarch64-linux-ld: verifier.c:(.text+0xa964): undefined reference to `=
-__SCK__perf_snapshot_branch_stack'
-> mips64el-linux-ld: verifier.c:(.text.do_misc_fixups+0xd9c): undefined ref=
-erence to `__SCK__perf_snapshot_branch_stack'
-> riscv32-linux-ld: section .data LMA [00369000,00907967] overlaps section =
-.text LMA [0007899c,01a6a6af]
-> s390-linux-ld: verifier.c:(.text+0x13038): undefined reference to `__SCK_=
-_perf_snapshot_branch_stack'
-> verifier.c:(.text+0x17c14): relocation truncated to fit: R_AARCH64_ADR_PR=
-EL_PG_HI21 against undefined symbol `__SCK__perf_snapshot_branch_stack'
-> verifier.c:(.text+0xa960): undefined reference to `__SCK__perf_snapshot_b=
-ranch_stack'
-> verifier.c:(.text+0xadd0): dangerous relocation: unsupported relocation
-> verifier.c:(.text.do_misc_fixups+0xd98): undefined reference to `__SCK__p=
-erf_snapshot_branch_stack'
+On 4/5/2024 9:15 AM, Danilo Krummrich wrote:
+> Hi Easwar,
+> 
+> On 3/29/24 18:00, Easwar Hariharan wrote:
+>> I2C v7, SMBus 3.2, and I3C specifications have replaced "master/slave"
+>> with more appropriate terms. Inspired by and following on to Wolfram's
+>> series to fix drivers/i2c/[1], fix the terminology for users of
+>> I2C_ALGOBIT bitbanging interface, now that the approved verbiage exists
+>> in the specification.
+>>
+>> Compile tested, no functionality changes intended
+>>
+>> [1]: https://lore.kernel.org/all/20240322132619.6389-1-wsa+renesas@sang-engineering.com/
+>>
+>> Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
+>> ---
+>>   drivers/gpu/drm/nouveau/dispnv04/dfp.c             | 14 +++++++-------
+>>   .../gpu/drm/nouveau/include/nvkm/subdev/bios/dcb.h |  2 +-
+>>   drivers/gpu/drm/nouveau/nouveau_bios.c             |  4 ++--
+>>   3 files changed, 10 insertions(+), 10 deletions(-)
+>>
+>> diff --git a/drivers/gpu/drm/nouveau/dispnv04/dfp.c b/drivers/gpu/drm/nouveau/dispnv04/dfp.c
+>> index d5b129dc623b..65b791006b19 100644
+>> --- a/drivers/gpu/drm/nouveau/dispnv04/dfp.c
+>> +++ b/drivers/gpu/drm/nouveau/dispnv04/dfp.c
+>> @@ -149,7 +149,7 @@ void nv04_dfp_update_fp_control(struct drm_encoder *encoder, int mode)
+>>       }
+>>   }
+>>   -static struct drm_encoder *get_tmds_slave(struct drm_encoder *encoder)
+>> +static struct drm_encoder *get_tmds_client(struct drm_encoder *encoder)
+>>   {
+>>       struct drm_device *dev = encoder->dev;
+>>       struct dcb_output *dcb = nouveau_encoder(encoder)->dcb;
+>> @@ -172,7 +172,7 @@ static struct drm_encoder *get_tmds_slave(struct drm_encoder *encoder)
+>>           struct dcb_output *slave_dcb = nouveau_encoder(slave)->dcb;
+>>             if (slave_dcb->type == DCB_OUTPUT_TMDS && get_slave_funcs(slave) &&
+>> -            slave_dcb->tmdsconf.slave_addr == dcb->tmdsconf.slave_addr)
+>> +            slave_dcb->tmdsconf.client_addr == dcb->tmdsconf.client_addr)
+>>               return slave;
+> 
+> While, personally, I think master/slave was well suiting for the device relationship
+> on those busses, I think that if we change it up to conform with the change in
+> specification, we should make sure to update drivers consistently.
+> 
+> We should make sure to also change the names of the sourrounding structures and variable
+> names, otherwise we just make this code harder to read.
+> 
+> - Danilo
+> 
 
-Fixed in bpf-next with commit:
-https://lore.kernel.org/all/20240405142637.577046-1-arnd@kernel.org/
+Thanks for the review, and for the appetite to go further! So we are on the same page, you would prefer
+renaming to controller/target like the feedback on other drm drivers (i915, gma500, radeon)?
+
+Thanks,
+Easwar
+
