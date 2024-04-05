@@ -2,90 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25BB789A441
-	for <lists+nouveau@lfdr.de>; Fri,  5 Apr 2024 20:37:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A015789A564
+	for <lists+nouveau@lfdr.de>; Fri,  5 Apr 2024 22:06:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A9BB3113CB0;
-	Fri,  5 Apr 2024 18:37:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 28A0210E8A0;
+	Fri,  5 Apr 2024 20:06:03 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="bkmLIHuX";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="SNc2Io0l";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6DA05113CAC
- for <nouveau@lists.freedesktop.org>; Fri,  5 Apr 2024 18:36:59 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1039910E88A
+ for <nouveau@lists.freedesktop.org>; Fri,  5 Apr 2024 20:06:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1712342218;
+ s=mimecast20190719; t=1712347559;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=qvKsrMsm5amCXrkHqNf0dwZRvuZponfYbk9G0oYCwa0=;
- b=bkmLIHuXHWylDHV3WzY3VGR5Ih99VfMb+b8oggnFECST0sWagWeL3urNqjAQnlyCm3vXDX
- ZoBeOGp94qADvpKVLLeifSWsvCVUerTo2AgPjTob6VX+GN24b+LkzUOJdLXyRJZjmpVloP
- eov2PjZSdAnpLKnFLcb1Sup67WKkt2E=
-Received: from mail-ot1-f70.google.com (mail-ot1-f70.google.com
- [209.85.210.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=G1i3/UPBhpKu1rRDJe0K0DL9B377GF4bq65uCFcMFj0=;
+ b=SNc2Io0l39/ABBMfFw0jf92fTzSFka834zE+HLDuOi8oogv6e5p4Ub3oqSXMDDCPcULisV
+ mh/XAMe9vCc2oQcEeTwXGTuJxCQ4FcGRJlYlCsNsSqtZcnBPBwBNUv4rNXBsfwSCRgzKoX
+ u+Cf6jeQyhDOFAB2f1lJajvrvu2FJzU=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-393-_S_7_10EPeqVVFQfDgU42A-1; Fri, 05 Apr 2024 14:36:57 -0400
-X-MC-Unique: _S_7_10EPeqVVFQfDgU42A-1
-Received: by mail-ot1-f70.google.com with SMTP id
- 46e09a7af769-6e45f6273a2so1525569a34.1
- for <nouveau@lists.freedesktop.org>; Fri, 05 Apr 2024 11:36:57 -0700 (PDT)
+ us-mta-538-RTZTVD7_OkWCUUdKZkRhpw-1; Fri, 05 Apr 2024 16:05:57 -0400
+X-MC-Unique: RTZTVD7_OkWCUUdKZkRhpw-1
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-699491b3932so5342136d6.2
+ for <nouveau@lists.freedesktop.org>; Fri, 05 Apr 2024 13:05:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712342216; x=1712947016;
+ d=1e100.net; s=20230601; t=1712347556; x=1712952356;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :autocrypt:references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qvKsrMsm5amCXrkHqNf0dwZRvuZponfYbk9G0oYCwa0=;
- b=fFTB4nDFAsVKgHevaawm8MHbsyzTOn1xUJ1Wq45ZEgr9e0b3m3r8E49cfEhyRRRRSx
- yds5bGKCQzhWzuhgsBBgE7XxjNUOszIcyQxVSsd+dREUqqLP8p8V+Ksod0NqhGT7FmG4
- 0Wyk3on140IF/WpYHVWwfq2KXbE9P65jVrOwCGxTw08zdYIbUyGFQYVr2cSO5YU2Jlmz
- FMYlarRaJN+cR6Rdg605eFh8Wzq9AkBS6Jh1TSAX5frDlsp3yzb7Al/6Xdz2ZtyzMbl0
- sIv/bnzGDgQ5SbsgJ3UaP1hzZ7av/mqccfn8tDbl8ImGy3atBrVptI3CyPZ1XtHcZgpU
- RYRg==
+ bh=LQPR8cQsAWIk8v5bAbPLYAAkL3bLLoRC33NWFZgcXWg=;
+ b=vse0WMKol3L8W24W2CG28nM+Iixy/Co6N9BQCTBpttVRvnTq00fxk9yYnoguvS3fJ8
+ C1fdRdy2i8btMEC0JvS6NW2ib5FsbQtfCq8jokcNlqZBes6OzMNDc2Tnqtc/YlfS/67Y
+ porsUb+CRF+Tk8Asgmtmji6d+bicnXrbwnLiM++iJ8CCz7++rouRpR2FzoJq4xqWGh6D
+ XdUtbJR8s0CshmqSmSj2ejQ9A7v83jl/8T2NgJFmTUCYuufd7Y7O3SA/RcE/AkjCznE+
+ muOCIduOVO8dtGFYQsr9BARInAYp8Sp1VnPy0wj6GEUq/PxCj/iXGDSBbC2zKXpI6QZa
+ NY+g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVRhS7+66DYxqCdhmyq7gGnl+0HQZFBRSysCTWbbEFW8DzRMQ3794g9LUeXYrAn0s/eSbj/0A/5r5GaxGUw2G8KOqLjMUorft3xeQQE1g==
-X-Gm-Message-State: AOJu0YyFg8by58uXqooVL769UVgODisHgIXPR/r+7h9gHfRzqQFu+DLH
- 1q8lhFFZMhM5LvT1HZJc3fcPyHuCq5kbjfdp3SS3Aj+764VxC8OwLcmawKtrPtr9Qqo1ShAHI8N
- Ux6tz1Byla01uO/BVSz2XsdS81NCztwOqMCl4xcKL/TWhnAiuiu0QItcMp22iFSA=
-X-Received: by 2002:a9d:6755:0:b0:6e9:e829:2c77 with SMTP id
- w21-20020a9d6755000000b006e9e8292c77mr2188598otm.27.1712342216614; 
- Fri, 05 Apr 2024 11:36:56 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFt+D771XMHHFySTD83Ks6yYhCqZ6qH+nHPbjpQmLbCiVM6E3jPPssFvgzLpd4PouzY8zRNoQ==
-X-Received: by 2002:a9d:6755:0:b0:6e9:e829:2c77 with SMTP id
- w21-20020a9d6755000000b006e9e8292c77mr2188569otm.27.1712342216298; 
- Fri, 05 Apr 2024 11:36:56 -0700 (PDT)
+ AJvYcCWkgeDWzcinSrJd1DmLnI4RMDd3Mh8H30UFShCutpl2YJYceGQvLd3/NytTqdOrcDpKHavuZDKN4mPok7kgzCUqnUPQ8rjyvIeRyfEIBg==
+X-Gm-Message-State: AOJu0YzI0cQasqhaXfV4aRLK4wocRKb8kgiEQtlI7RTiRJuYFvMhsZ/E
+ Kl+o7RiuVpje9apPNSbD4mmKAL5JOEEgYhzhhXLghiX9sj4shL0FLzpiPTq9SNeAWolsaVo3PtW
+ 2h46i36b0zT3Tw9HbwKVK4XrKkQEPVWIw0hvGBc2642MZI8bpn6QHYETqRC/flIc=
+X-Received: by 2002:a05:6214:19c4:b0:699:2886:edae with SMTP id
+ j4-20020a05621419c400b006992886edaemr2886853qvc.55.1712347556564; 
+ Fri, 05 Apr 2024 13:05:56 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH5eGch6dNEmAc8MwWgrOSCnmtpD4Hu+37ldgdM5VaOh9+abEcHU5DXNrdRIiMriqSuT1gmeg==
+X-Received: by 2002:a05:6214:19c4:b0:699:2886:edae with SMTP id
+ j4-20020a05621419c400b006992886edaemr2886833qvc.55.1712347556278; 
+ Fri, 05 Apr 2024 13:05:56 -0700 (PDT)
 Received: from ?IPv6:2600:4040:5c6c:a300::789? ([2600:4040:5c6c:a300::789])
  by smtp.gmail.com with ESMTPSA id
- qr2-20020a05620a390200b00789e2805f85sm854603qkn.21.2024.04.05.11.36.54
+ du12-20020a05621409ac00b006967ba7f1adsm882394qvb.96.2024.04.05.13.05.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Apr 2024 11:36:55 -0700 (PDT)
-Message-ID: <190fda6f12aa77170631fb12e505779ce33d1c64.camel@redhat.com>
-Subject: Re: [PATCH v0 13/14] drm/nouveau: Make I2C terminology more inclusive
+ Fri, 05 Apr 2024 13:05:55 -0700 (PDT)
+Message-ID: <11096e558e67f2fea2aee976c70a19af1b7c212b.camel@redhat.com>
+Subject: Re: [PATCH] drm: nv04: Add check to avoid out of bounds access
 From: Lyude Paul <lyude@redhat.com>
-To: Easwar Hariharan <eahariha@linux.microsoft.com>, Danilo Krummrich
- <dakr@redhat.com>, Karol Herbst <kherbst@redhat.com>, David Airlie
- <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, "open list:DRM DRIVER
- FOR NVIDIA GEFORCE/QUADRO GPUS" <dri-devel@lists.freedesktop.org>, "open
- list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, open list <linux-kernel@vger.kernel.org>
-Cc: Wolfram Sang <wsa+renesas@sang-engineering.com>, "open list:RADEON and
- AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>, "open list:INTEL DRM
- DISPLAY FOR XE AND I915 DRIVERS" <intel-gfx@lists.freedesktop.org>, "open
- list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
- <intel-xe@lists.freedesktop.org>, "open list:I2C SUBSYSTEM HOST DRIVERS"
- <linux-i2c@vger.kernel.org>, "open list:BTTV VIDEO4LINUX DRIVER"
- <linux-media@vger.kernel.org>, "open list:FRAMEBUFFER LAYER"
- <linux-fbdev@vger.kernel.org>
-Date: Fri, 05 Apr 2024 14:36:54 -0400
-In-Reply-To: <e6b04b76-c695-47b4-9432-f2316e174585@linux.microsoft.com>
-References: <20240329170038.3863998-1-eahariha@linux.microsoft.com>
- <20240329170038.3863998-14-eahariha@linux.microsoft.com>
- <4dc6fb16-3d85-4a7f-85f9-ed249da0df1a@redhat.com>
- <e6b04b76-c695-47b4-9432-f2316e174585@linux.microsoft.com>
+To: Danilo Krummrich <dakr@redhat.com>, Mikhail Kobuk <m.kobuk@ispras.ru>, 
+ Karol Herbst <kherbst@redhat.com>
+Cc: David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, 
+ Francisco Jerez <currojerez@riseup.net>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org,  linux-kernel@vger.kernel.org,
+ lvc-project@linuxtesting.org, Fedor Pchelkin <pchelkin@ispras.ru>, Alexey
+ Khoroshilov <khoroshilov@ispras.ru>
+Date: Fri, 05 Apr 2024 16:05:54 -0400
+In-Reply-To: <c3253f8a-e654-4016-b0c6-d92703107c48@redhat.com>
+References: <20240331064552.6112-1-m.kobuk@ispras.ru>
+ <c3253f8a-e654-4016-b0c6-d92703107c48@redhat.com>
 Autocrypt: addr=lyude@redhat.com; prefer-encrypt=mutual;
  keydata=mQINBFfk58MBEADeGfHLiTy6fhMmRMyRFfbUMo5CTzt9yqwmz72SUi1IRX7Qvq7ZTVNDCCDTYKt809dgl4xtUxSJJqgdljHSL5US3G72P9j9O5h0vT+XM9NavEXhNc48WzZt98opuCX23e36saPLkVFY5TrC1PZsc16swjnjUWQdIblh5IOBko9yIvyJlqmApfLYAQoY+srYIFMxGBkcsv5nMrRflFlk5djg6Lyo8ogGCSRyNK4ja3lrX8niyHb90xTZWYEcn9o38xzOjpxEjVWny4QeEZBGGEvqHN5Z2Ek/tXd4qNn44CGlzQk1CWJoE36TRvZAlqoUZ4m2+9YkBxILbgCxIg344OvZTLme+NraMINV014uURN/LO/dyCY14jOzAo3vgCzyNHrS/4XDs3nlE33TG/YL+luwPW85NWtg8N6Lsq46Y6T94lYCY+N7rrdzCQkHWBXPUA8uGkzDO5zShkKt+qQr11Ww4xvYPr93TwseKtSEI6pyOS+iFmjOLseaxw2ml7ZCRNEKJFxxbxFQNP72aumm+9U8SFnL8TVlERr8HjlAY/5l3SMM91OkQ82xCRZAJl3ff2JMaYAixn5JXY1rZL1dd3DyZ8pdgfKey1QNq5M82eJOhecggOs5LBdqDkpN3Bi9hw+VW23jYmZ40shFEbUqlaShkYb8hlBlrDwLV/tRb9pdzQARAQABtB1MeXVkZSBQYXVsIDxjcGF1bEByZWRoYXQuY29tPokCNwQTAQgAIQUCV+TnwwIbAwULCQgHAgYVCAkKCwIEFgIDAQIeAQIXgAAKCRDFRp+4dY+cK9L7D/9MoGlkMAalilfkOv4NhXWbyYXN6Hi1UqeV7/6GRvkcVtAA+Txc+LfhxCgBzH422Q9nyhC3YKvccDLblJ9pk0YbX75vKWGk5ERJjpNyoACHJ6/yO
  3VsXg/IMVKZKhJQv/6XkWIRd2PmIfdS9y7w9KwMsEXVktFiAFlvI5C1j
@@ -119,19 +110,86 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 2024-04-05 at 09:30 -0700, Easwar Hariharan wrote:
+On Fri, 2024-04-05 at 17:53 +0200, Danilo Krummrich wrote:
+> On 3/31/24 08:45, Mikhail Kobuk wrote:
+> > Output Resource (dcb->or) value is not guaranteed to be non-zero
+> > (i.e.
+> > in drivers/gpu/drm/nouveau/nouveau_bios.c, in
+> > 'fabricate_dcb_encoder_table()'
+> > 'dcb->or' is assigned value '0' in call to
+> > 'fabricate_dcb_output()').
 >=20
-> Thanks for the review, and for the appetite to go further! So we are
-> on the same page, you would prefer
-> renaming to controller/target like the feedback on other drm drivers
-> (i915, gma500, radeon)?
+> I don't really know much about the semantics of this code.
+>=20
+> Looking at fabricate_dcb_output() though I wonder if the intention
+> was to assign
+> BIT(or) to entry->or.
+>=20
+> @Lyude, can you help here?
 
-FWIW I'm in support of this as well! As long as we make sure it gets
-renamed everywhere :)
+This code is definitely a bit before my time as well - but I think
+you're completely correct. Especially considering this bit I found in
+nouveau_bios.h:
+
+enum nouveau_or {
+=09DCB_OUTPUT_A =3D (1 << 0),
+=09DCB_OUTPUT_B =3D (1 << 1),
+=09DCB_OUTPUT_C =3D (1 << 2)
+};
+
 
 >=20
-> Thanks,
-> Easwar
+> Otherwise, for parsing the DCB entries, it seems that the bound
+> checks are
+> happening in olddcb_outp_foreach() [1].
+>=20
+> [1]
+> https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/nouveau/no=
+uveau_bios.c#L1331
+>=20
+> >=20
+> > Add check to validate 'dcb->or' before it's used.
+> >=20
+> > Found by Linux Verification Center (linuxtesting.org) with SVACE.
+> >=20
+> > Fixes: 2e5702aff395 ("drm/nouveau: fabricate DCB encoder table for
+> > iMac G4")
+> > Signed-off-by: Mikhail Kobuk <m.kobuk@ispras.ru>
+> > ---
+> > =C2=A0 drivers/gpu/drm/nouveau/dispnv04/dac.c | 4 ++--
+> > =C2=A0 1 file changed, 2 insertions(+), 2 deletions(-)
+> >=20
+> > diff --git a/drivers/gpu/drm/nouveau/dispnv04/dac.c
+> > b/drivers/gpu/drm/nouveau/dispnv04/dac.c
+> > index d6b8e0cce2ac..0c8d4fc95ff3 100644
+> > --- a/drivers/gpu/drm/nouveau/dispnv04/dac.c
+> > +++ b/drivers/gpu/drm/nouveau/dispnv04/dac.c
+> > @@ -428,7 +428,7 @@ void nv04_dac_update_dacclk(struct drm_encoder
+> > *encoder, bool enable)
+> > =C2=A0=C2=A0=09struct drm_device *dev =3D encoder->dev;
+> > =C2=A0=C2=A0=09struct dcb_output *dcb =3D nouveau_encoder(encoder)->dcb=
+;
+> > =C2=A0=20
+> > -=09if (nv_gf4_disp_arch(dev)) {
+> > +=09if (nv_gf4_disp_arch(dev) && ffs(dcb->or)) {
+> > =C2=A0=C2=A0=09=09uint32_t *dac_users =3D &nv04_display(dev)-
+> > >dac_users[ffs(dcb->or) - 1];
+> > =C2=A0=C2=A0=09=09int dacclk_off =3D NV_PRAMDAC_DACCLK +
+> > nv04_dac_output_offset(encoder);
+> > =C2=A0=C2=A0=09=09uint32_t dacclk =3D NVReadRAMDAC(dev, 0,
+> > dacclk_off);
+> > @@ -453,7 +453,7 @@ bool nv04_dac_in_use(struct drm_encoder
+> > *encoder)
+> > =C2=A0=C2=A0=09struct drm_device *dev =3D encoder->dev;
+> > =C2=A0=C2=A0=09struct dcb_output *dcb =3D nouveau_encoder(encoder)->dcb=
+;
+> > =C2=A0=20
+> > -=09return nv_gf4_disp_arch(encoder->dev) &&
+> > +=09return nv_gf4_disp_arch(encoder->dev) && ffs(dcb->or) &&
+> > =C2=A0=C2=A0=09=09(nv04_display(dev)->dac_users[ffs(dcb->or) - 1] &
+> > ~(1 << dcb->index));
+> > =C2=A0 }
+> > =C2=A0=20
 >=20
 
 --=20
