@@ -2,48 +2,39 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDBD88A38C3
-	for <lists+nouveau@lfdr.de>; Sat, 13 Apr 2024 01:09:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E46A689B362
+	for <lists+nouveau@lfdr.de>; Sun,  7 Apr 2024 19:50:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4321D10F92E;
-	Fri, 12 Apr 2024 23:09:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CE02110FB76;
+	Sun,  7 Apr 2024 17:50:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="SsYhQ30R";
+	dkim=pass (2048-bit key; secure) header.d=sang-engineering.com header.i=@sang-engineering.com header.b="I8rcFXs8";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D0AF510FA6D;
- Sun,  7 Apr 2024 08:49:41 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 76F7ECE0303;
- Sun,  7 Apr 2024 08:49:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B894CC433F1;
- Sun,  7 Apr 2024 08:49:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1712479777;
- bh=9GexqZRzYwWDDWeEy+/lg6I4B9teFNss+7Iws8stJWo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=SsYhQ30RiNQ08UMek5dA4CNyvVWLNNLOpkEsyduifmK1Tj4XpLRA7LVTj2YkBDZXm
- N7VzP2/DszZcWNJWdLmA2CqdSWEXTAzNUlTq/TSjEANRYJ434Df6+129CUqRDVP7DN
- eBOQTNlDk9lZRGjvjHo3mMxetTDsvzrvfl8qiJ2t5enPne6X3kTA5g9tJCFUIAEElV
- d1W9EScb9v5p2WyGdUSWR27nfRbEus4VWc/L5Dn5ww2OmyxQpNBk77r/x9HroCKCu8
- HJrvhoBs1p93fhFJek+k3PGtGkmy8k13ooNYdNqrwGRCebsszSc95EsJ0gTn4Z5ycQ
- tOkkQIJjbsJxQ==
-Date: Sun, 7 Apr 2024 09:49:29 +0100
-From: Simon Horman <horms@kernel.org>
+Received: from mail.zeus03.de (www.zeus03.de [194.117.254.33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4B0E210FB79
+ for <nouveau@lists.freedesktop.org>; Sun,  7 Apr 2024 17:50:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ sang-engineering.com; h=date:from:to:cc:subject:message-id
+ :references:mime-version:content-type:in-reply-to; s=k1; bh=4t2Y
+ Q/qy30jidZ7O24IB3uqzEABMi7K+pNMZ6EvQcas=; b=I8rcFXs8Ya99YYGwKQjv
+ BDixyZfMkAM0HErrUX9O+UN9Cl4QLLoj+1+tW9ghHFlZcZLg19vMflJtIBWr6mWI
+ kiREuEovpji1/WrfPNyyxzK+loDURCBXJYw+OqS0f5b7x/XJw2SkAD3LRrOpJ5T6
+ T0JwU2yacMK0fgWJzl8kuPxknxooMbcY0LcPQsVNdLuBpf1Lnq1jdSlIfvMEfSAE
+ STnGfKR202alQDncdL3TVlC5VPbqov6TNPuwo0CLHEtm3j9qvg4XBx392N8pPGLG
+ 5D6FQEzlzMX8kvu28JTDoA2tgyNWbZmW6r2OsRZBr5oP4flPBJMXUjGFHhLf8d2Y
+ 6w==
+Received: (qmail 538382 invoked from network); 7 Apr 2024 19:50:45 +0200
+Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted,
+ authenticated); 7 Apr 2024 19:50:45 +0200
+X-UD-Smtp-Session: l3s3148p1@Dli0U4UVEoUgAQnoAF4/ADroH6KhJW9n
+Date: Sun, 7 Apr 2024 19:50:39 +0200
+From: Wolfram Sang <wsa+renesas@sang-engineering.com>
 To: Easwar Hariharan <eahariha@linux.microsoft.com>
-Cc: Edward Cree <ecree.xilinx@gmail.com>,
- Martin Habets <habetsm.xilinx@gmail.com>,
- "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- "open list:SFC NETWORK DRIVER" <netdev@vger.kernel.org>,
- "open list:SFC NETWORK DRIVER" <linux-net-drivers@amd.com>,
- open list <linux-kernel@vger.kernel.org>,
- Wolfram Sang <wsa+renesas@sang-engineering.com>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+Cc: "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>, 
  "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
+ open list <linux-kernel@vger.kernel.org>,
  "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
  <intel-gfx@lists.freedesktop.org>, 
  "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
@@ -53,17 +44,31 @@ Cc: Edward Cree <ecree.xilinx@gmail.com>,
  "open list:I2C SUBSYSTEM HOST DRIVERS" <linux-i2c@vger.kernel.org>,
  "open list:BTTV VIDEO4LINUX DRIVER" <linux-media@vger.kernel.org>,
  "open list:FRAMEBUFFER LAYER" <linux-fbdev@vger.kernel.org>
-Subject: Re: [PATCH v0 10/14] sfc: falcon: Make I2C terminology more inclusive
-Message-ID: <20240407084929.GX26556@kernel.org>
+Subject: Re: [PATCH v0 00/14] Make I2C terminology more inclusive for I2C
+ Algobit and consumers
+Message-ID: <20240407175039.za3eg7la7i2jwvun@kunai>
+Mail-Followup-To: Wolfram Sang <wsa+renesas@sang-engineering.com>,
+ Easwar Hariharan <eahariha@linux.microsoft.com>,
+ "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
+ <intel-gfx@lists.freedesktop.org>, 
+ "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
+ <intel-xe@lists.freedesktop.org>, 
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>, 
+ "open list:I2C SUBSYSTEM HOST DRIVERS" <linux-i2c@vger.kernel.org>,
+ "open list:BTTV VIDEO4LINUX DRIVER" <linux-media@vger.kernel.org>,
+ "open list:FRAMEBUFFER LAYER" <linux-fbdev@vger.kernel.org>
 References: <20240329170038.3863998-1-eahariha@linux.microsoft.com>
- <20240329170038.3863998-11-eahariha@linux.microsoft.com>
- <20240402082951.GG26556@kernel.org>
- <cd983b4d-70dc-47b8-96cd-55bba39eb892@linux.microsoft.com>
+ <ffumcagmzdstcf3qcn3f26555pnu7i6azjppciyd4zvcoit7pv@vu262tsfnqyr>
+ <3bd8d2f6-dfe1-479f-bff1-f2921b1940ed@linux.microsoft.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="otbz5n53lv3dv44g"
 Content-Disposition: inline
-In-Reply-To: <cd983b4d-70dc-47b8-96cd-55bba39eb892@linux.microsoft.com>
-X-Mailman-Approved-At: Fri, 12 Apr 2024 23:09:06 +0000
+In-Reply-To: <3bd8d2f6-dfe1-479f-bff1-f2921b1940ed@linux.microsoft.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,28 +83,62 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Apr 04, 2024 at 12:17:26PM -0700, Easwar Hariharan wrote:
-> On 4/2/2024 1:29 AM, Simon Horman wrote:
-> > On Fri, Mar 29, 2024 at 05:00:34PM +0000, Easwar Hariharan wrote:
-> >> I2C v7, SMBus 3.2, and I3C specifications have replaced "master/slave"
-> >> with more appropriate terms. Inspired by and following on to Wolfram's
-> >> series to fix drivers/i2c/[1], fix the terminology for users of
-> >> I2C_ALGOBIT bitbanging interface, now that the approved verbiage exists
-> >> in the specification.
-> >>
-> >> Compile tested, no functionality changes intended
-> >>
-> >> [1]: https://lore.kernel.org/all/20240322132619.6389-1-wsa+renesas@sang-engineering.com/
-> >>
-> >> Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
-> > 
-> > Reviewed-by: Simon Horman <horms@kernel.org>
-> 
-> 
-> Thank you, Simon, for reviewing. I believe that we are settling on controller/target
-> terminology from feedback on the other drivers in this series. Would you want to re-review
-> v1 with that change, or should I add you R-B in v1 despite the change?
 
-Thanks for asking,
+--otbz5n53lv3dv44g
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-either way is fine by me.
+Hi Easwar,
+
+> Sorry, got excited. :) There were drivers I'd been part of that I specifi=
+cally
+> wanted to fixup, but then the scope grew to other users of algobit.
+
+Well, you got some positive feedback, so that is good.
+
+> > It is true that I changed quite some controller drivers within the i2c
+> > realm. I did this to gain experience. As you also noticed quite some
+> > questions came up. We need to agree on answers first. And once we are
+> > happy with the answers we found, then IMO we can go outside of the i2c
+> > realm and send patches to other subsystems referencing agreed
+> > precedence. I intentionally did not go outside i2c yet. Since your
+> > patches are already there, you probably want to foster them until they
+> > are ready for inclusion.
+>=20
+> Sorry, I don't quite follow what you mean by foster in this context. Are
+> you asking me to hold off on merging the series, or to follow through on
+> getting it merged?
+
+I think they are your patches, so this is up to you to decide. With
+"foster", I meant you keep working on them until everyone is happy. I
+haven't looked at the drivers you modify. I can't tell if they can be
+converted right away or if they use a lot of I2C API calls, so that it
+makes sense to wait until the core is converted. I trust you to decide
+this.
+
+Happy hacking,
+
+   Wolfram
+
+--otbz5n53lv3dv44g
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmYS3OoACgkQFA3kzBSg
+KbYf7g/+KaVes7wupe7nkKcoPIanoG7cxHpUDAmN7oUnNvo+ohAUMW4QQArNIm2s
+5XNlfsu3X6VylCN8OD2kzHwBeAv706tbSViyjCtxmeVKAaXEh7/WMAfKBkrcDZMr
+RCcbCz3DiLj7jX+r4iaSebNE3FBuLX6seWUJgN0vF0M+RvsS5uQhsmUd4+cUHBo3
+pMk38vgS7Q3H47QRW64JJRKsKT3N5S8NMoYZKGDMt8omF6hnkvgJ9W0TnvenD6Q9
+QTMZur4Z25/gnF3Ds2WS4R4Y0VNo6EFludz5hNNg56DuMF9ErhUkGeixAYIgRJG2
+6YxZ1f003gWC3SgXuw91vD32QNJoR49DTaE4AnRhSx/EFK7zvwMoA7jOj7xx43i1
+xUPEpGjI4K68E32JP9wLj/rvjAW7REQyA+nKVaO7O6vbKVihpdMr/HgMq/UE3sIK
+CpMJ1Czfd56FUKE38vNihyL4V70O9iqMMiJmGd0gTQZ+WLYootZU9u68kQeMDah7
+2bbZnQzBSDy/xGzVdfrozrUkvAqd0Lo9qIJcCxTqMSrC7QWBGLkQXMOTWivlCRe7
+TtE5kBO4N4deizuNFwQEnoBpM9RCV+P/Jxd9EXHbQ8uwVWC2xU0QAJdWJwjicO5x
+Qmmz2/i/uKhU6Xwi82t8aASq+Lyc/L5LLwBDymYh51o1dRG3mVM=
+=V5fB
+-----END PGP SIGNATURE-----
+
+--otbz5n53lv3dv44g--
