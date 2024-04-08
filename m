@@ -2,73 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E46A689B362
-	for <lists+nouveau@lfdr.de>; Sun,  7 Apr 2024 19:50:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45F1989B7CB
+	for <lists+nouveau@lfdr.de>; Mon,  8 Apr 2024 08:43:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CE02110FB76;
-	Sun,  7 Apr 2024 17:50:51 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=sang-engineering.com header.i=@sang-engineering.com header.b="I8rcFXs8";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id F28E710F9F0;
+	Mon,  8 Apr 2024 06:43:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.zeus03.de (www.zeus03.de [194.117.254.33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4B0E210FB79
- for <nouveau@lists.freedesktop.org>; Sun,  7 Apr 2024 17:50:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- sang-engineering.com; h=date:from:to:cc:subject:message-id
- :references:mime-version:content-type:in-reply-to; s=k1; bh=4t2Y
- Q/qy30jidZ7O24IB3uqzEABMi7K+pNMZ6EvQcas=; b=I8rcFXs8Ya99YYGwKQjv
- BDixyZfMkAM0HErrUX9O+UN9Cl4QLLoj+1+tW9ghHFlZcZLg19vMflJtIBWr6mWI
- kiREuEovpji1/WrfPNyyxzK+loDURCBXJYw+OqS0f5b7x/XJw2SkAD3LRrOpJ5T6
- T0JwU2yacMK0fgWJzl8kuPxknxooMbcY0LcPQsVNdLuBpf1Lnq1jdSlIfvMEfSAE
- STnGfKR202alQDncdL3TVlC5VPbqov6TNPuwo0CLHEtm3j9qvg4XBx392N8pPGLG
- 5D6FQEzlzMX8kvu28JTDoA2tgyNWbZmW6r2OsRZBr5oP4flPBJMXUjGFHhLf8d2Y
- 6w==
-Received: (qmail 538382 invoked from network); 7 Apr 2024 19:50:45 +0200
-Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted,
- authenticated); 7 Apr 2024 19:50:45 +0200
-X-UD-Smtp-Session: l3s3148p1@Dli0U4UVEoUgAQnoAF4/ADroH6KhJW9n
-Date: Sun, 7 Apr 2024 19:50:39 +0200
-From: Wolfram Sang <wsa+renesas@sang-engineering.com>
-To: Easwar Hariharan <eahariha@linux.microsoft.com>
-Cc: "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>, 
- "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>,
- "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
- <intel-gfx@lists.freedesktop.org>, 
- "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
- <intel-xe@lists.freedesktop.org>, 
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, 
- "open list:I2C SUBSYSTEM HOST DRIVERS" <linux-i2c@vger.kernel.org>,
- "open list:BTTV VIDEO4LINUX DRIVER" <linux-media@vger.kernel.org>,
- "open list:FRAMEBUFFER LAYER" <linux-fbdev@vger.kernel.org>
-Subject: Re: [PATCH v0 00/14] Make I2C terminology more inclusive for I2C
- Algobit and consumers
-Message-ID: <20240407175039.za3eg7la7i2jwvun@kunai>
-Mail-Followup-To: Wolfram Sang <wsa+renesas@sang-engineering.com>,
- Easwar Hariharan <eahariha@linux.microsoft.com>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
- "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>,
- "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
- <intel-gfx@lists.freedesktop.org>, 
- "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
- <intel-xe@lists.freedesktop.org>, 
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, 
- "open list:I2C SUBSYSTEM HOST DRIVERS" <linux-i2c@vger.kernel.org>,
- "open list:BTTV VIDEO4LINUX DRIVER" <linux-media@vger.kernel.org>,
- "open list:FRAMEBUFFER LAYER" <linux-fbdev@vger.kernel.org>
-References: <20240329170038.3863998-1-eahariha@linux.microsoft.com>
- <ffumcagmzdstcf3qcn3f26555pnu7i6azjppciyd4zvcoit7pv@vu262tsfnqyr>
- <3bd8d2f6-dfe1-479f-bff1-f2921b1940ed@linux.microsoft.com>
+Received: from us-smtp-delivery-44.mimecast.com
+ (us-smtp-delivery-44.mimecast.com [207.211.30.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 840A2112145
+ for <nouveau@lists.freedesktop.org>; Mon,  8 Apr 2024 06:43:10 +0000 (UTC)
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-591-U-eJ-QBXN_OmDCw0hOp7bA-1; Mon,
+ 08 Apr 2024 02:43:06 -0400
+X-MC-Unique: U-eJ-QBXN_OmDCw0hOp7bA-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9939929AC004;
+ Mon,  8 Apr 2024 06:43:06 +0000 (UTC)
+Received: from dreadlord.redhat.com (unknown [10.64.136.26])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 944D240B4979;
+ Mon,  8 Apr 2024 06:43:05 +0000 (UTC)
+From: Dave Airlie <airlied@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Subject: [PATCH] nouveau: fix devinit paths to only handle display on GSP.
+Date: Mon,  8 Apr 2024 16:42:43 +1000
+Message-ID: <20240408064243.2219527-1-airlied@gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="otbz5n53lv3dv44g"
-Content-Disposition: inline
-In-Reply-To: <3bd8d2f6-dfe1-479f-bff1-f2921b1940ed@linux.microsoft.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: gmail.com
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,62 +54,66 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+This reverts:
+nouveau/gsp: don't check devinit disable on GSP.
+and applies a further fix.
 
---otbz5n53lv3dv44g
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+It turns out the open gpu driver, checks this register, but only for displa=
+y.
 
-Hi Easwar,
+Match that behaviour and only disable displays on turings.
 
-> Sorry, got excited. :) There were drivers I'd been part of that I specifi=
-cally
-> wanted to fixup, but then the scope grew to other users of algobit.
+Fixes: 5d4e8ae6e57b ("nouveau/gsp: don't check devinit disable on GSP.")
+Signed-off-by: Dave Airlie <airlied@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gm107.c | 12 ++++++++----
+ drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c  |  1 +
+ 2 files changed, 9 insertions(+), 4 deletions(-)
 
-Well, you got some positive feedback, so that is good.
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gm107.c b/drivers/=
+gpu/drm/nouveau/nvkm/subdev/devinit/gm107.c
+index 7bcbc4895ec2..271bfa038f5b 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gm107.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/gm107.c
+@@ -25,6 +25,7 @@
+=20
+ #include <subdev/bios.h>
+ #include <subdev/bios/init.h>
++#include <subdev/gsp.h>
+=20
+ void
+ gm107_devinit_disable(struct nvkm_devinit *init)
+@@ -33,10 +34,13 @@ gm107_devinit_disable(struct nvkm_devinit *init)
+ =09u32 r021c00 =3D nvkm_rd32(device, 0x021c00);
+ =09u32 r021c04 =3D nvkm_rd32(device, 0x021c04);
+=20
+-=09if (r021c00 & 0x00000001)
+-=09=09nvkm_subdev_disable(device, NVKM_ENGINE_CE, 0);
+-=09if (r021c00 & 0x00000004)
+-=09=09nvkm_subdev_disable(device, NVKM_ENGINE_CE, 2);
++=09/* gsp only wants to enable/disable display */
++=09if (!nvkm_gsp_rm(device->gsp)) {
++=09=09if (r021c00 & 0x00000001)
++=09=09=09nvkm_subdev_disable(device, NVKM_ENGINE_CE, 0);
++=09=09if (r021c00 & 0x00000004)
++=09=09=09nvkm_subdev_disable(device, NVKM_ENGINE_CE, 2);
++=09}
+ =09if (r021c04 & 0x00000001)
+ =09=09nvkm_subdev_disable(device, NVKM_ENGINE_DISP, 0);
+ }
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c b/drivers/g=
+pu/drm/nouveau/nvkm/subdev/devinit/r535.c
+index 11b4c9c274a1..666eb93b1742 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/r535.c
+@@ -41,6 +41,7 @@ r535_devinit_new(const struct nvkm_devinit_func *hw,
+=20
+ =09rm->dtor =3D r535_devinit_dtor;
+ =09rm->post =3D hw->post;
++=09rm->disable =3D hw->disable;
+=20
+ =09ret =3D nv50_devinit_new_(rm, device, type, inst, pdevinit);
+ =09if (ret)
+--=20
+2.44.0
 
-> > It is true that I changed quite some controller drivers within the i2c
-> > realm. I did this to gain experience. As you also noticed quite some
-> > questions came up. We need to agree on answers first. And once we are
-> > happy with the answers we found, then IMO we can go outside of the i2c
-> > realm and send patches to other subsystems referencing agreed
-> > precedence. I intentionally did not go outside i2c yet. Since your
-> > patches are already there, you probably want to foster them until they
-> > are ready for inclusion.
->=20
-> Sorry, I don't quite follow what you mean by foster in this context. Are
-> you asking me to hold off on merging the series, or to follow through on
-> getting it merged?
-
-I think they are your patches, so this is up to you to decide. With
-"foster", I meant you keep working on them until everyone is happy. I
-haven't looked at the drivers you modify. I can't tell if they can be
-converted right away or if they use a lot of I2C API calls, so that it
-makes sense to wait until the core is converted. I trust you to decide
-this.
-
-Happy hacking,
-
-   Wolfram
-
---otbz5n53lv3dv44g
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmYS3OoACgkQFA3kzBSg
-KbYf7g/+KaVes7wupe7nkKcoPIanoG7cxHpUDAmN7oUnNvo+ohAUMW4QQArNIm2s
-5XNlfsu3X6VylCN8OD2kzHwBeAv706tbSViyjCtxmeVKAaXEh7/WMAfKBkrcDZMr
-RCcbCz3DiLj7jX+r4iaSebNE3FBuLX6seWUJgN0vF0M+RvsS5uQhsmUd4+cUHBo3
-pMk38vgS7Q3H47QRW64JJRKsKT3N5S8NMoYZKGDMt8omF6hnkvgJ9W0TnvenD6Q9
-QTMZur4Z25/gnF3Ds2WS4R4Y0VNo6EFludz5hNNg56DuMF9ErhUkGeixAYIgRJG2
-6YxZ1f003gWC3SgXuw91vD32QNJoR49DTaE4AnRhSx/EFK7zvwMoA7jOj7xx43i1
-xUPEpGjI4K68E32JP9wLj/rvjAW7REQyA+nKVaO7O6vbKVihpdMr/HgMq/UE3sIK
-CpMJ1Czfd56FUKE38vNihyL4V70O9iqMMiJmGd0gTQZ+WLYootZU9u68kQeMDah7
-2bbZnQzBSDy/xGzVdfrozrUkvAqd0Lo9qIJcCxTqMSrC7QWBGLkQXMOTWivlCRe7
-TtE5kBO4N4deizuNFwQEnoBpM9RCV+P/Jxd9EXHbQ8uwVWC2xU0QAJdWJwjicO5x
-Qmmz2/i/uKhU6Xwi82t8aASq+Lyc/L5LLwBDymYh51o1dRG3mVM=
-=V5fB
------END PGP SIGNATURE-----
-
---otbz5n53lv3dv44g--
