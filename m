@@ -2,68 +2,102 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86BBB89E3AC
-	for <lists+nouveau@lfdr.de>; Tue,  9 Apr 2024 21:37:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 59E8389E603
+	for <lists+nouveau@lfdr.de>; Wed, 10 Apr 2024 01:18:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 222A3112F1B;
-	Tue,  9 Apr 2024 19:37:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3165B10FAA0;
+	Tue,  9 Apr 2024 23:18:39 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QuUkHDqk";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="rVHpTPiy";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com
- [209.85.208.45])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1F16B112F13;
- Tue,  9 Apr 2024 19:37:28 +0000 (UTC)
-Received: by mail-ed1-f45.google.com with SMTP id
- 4fb4d7f45d1cf-56e1bbdb362so7358031a12.1; 
- Tue, 09 Apr 2024 12:37:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712691446; x=1713296246; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7QqV/MOJXotuQuCA0iZMxi0RbdJ1ro9852N1B/Dikp8=;
- b=QuUkHDqkIUTUevLjHo4MPOgssTPWhe6O1AEO1I2cDO2gJeP05RRCs8V7SGSHtELPBS
- J987UZWa9JHIo+/if4kCvz1ZJhJGETkPXHpRtFK2rTn64riHrTQWtHrHbzdNrRMxtp5D
- fRt1x2pTWFWCDjqCsB2QDqJ7JBWm0K3Mr8xuzAgx114MOTZKz0tKn+vl3C0ZFu6Z535R
- 5k/OMJyWV/bIBti1oqG7hbIG67RS/IDVQLtr6WlnPq36mG9HACK41B0xu1OYGb6kDG5p
- fqhpBOTOCD9kccNG8IcV8Oun3B8Ag5UR782tYaFy8WW+ZqC+z0hSTl6g0CurxcdPAFYD
- +t9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712691446; x=1713296246;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7QqV/MOJXotuQuCA0iZMxi0RbdJ1ro9852N1B/Dikp8=;
- b=U5sC0alBXN/e1BxTTlqqv1G3mbX9rB5u69RlXTMgQBraAWkkflZ+0/qzftbjOoDUkz
- z9rCzSBA1GIOTbmQu6InCmxJZm8VCThGxKDss2FlsLK56skOrXB68LvJDj2HVzLHj8FS
- HStkVfkEVJFRzwqL+zqHrDFuioZntuQvxocepjKCMhHELEfvHirz1WBbtsashJQdamcR
- yTDJ1845wG8pgxlpw2x6FunhoKrFR9d/UnfAwG1hUmtnJgxlg1F05EB8w8vqq+osvV3M
- 7AwbAIZeSr0/1DXWIzZrSUc9UQw/UJY9nmmuJhSGfI5qd6QgSwleWz87bFXD35T4CVXh
- jt2w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXJY8yUoShJTcY9ebUrVCFmjyKq4gSNrI18AZ8GQqHrDp5jVomVFrYdk0UkFBlavVA/ML2hjf5j9O+pZg8B8sQEiW+UzHvMmCVDR/NihvvwT5wjixYa7EhogkmX+DB1sMBLFPmtgvBSKG3U+4eaow==
-X-Gm-Message-State: AOJu0YwqV1B+gR1fnBinyjHfyz3PZzjlmaNKfTaTE/DtxDW3WFkraw7J
- IFCjqUcp6tw75L5S3QXYhRWPCQvcUcj2EToC/L3t8Rnvw3+3OhQaYR5QzUVbej59I/sJudq52d/
- c34V5A1cByGYb3Yyld3VCVlNJn7I=
-X-Google-Smtp-Source: AGHT+IFp5FIZNztbvSpyFUDHU0w1CVbITorUyRf5lQ1BLWJGUEbfMviAptRArA67cxLJTyJ/vIdIzF75wju3XDxdh7c=
-X-Received: by 2002:a17:906:45a:b0:a47:34b2:ca4b with SMTP id
- e26-20020a170906045a00b00a4734b2ca4bmr300274eja.50.1712691445992; Tue, 09 Apr
- 2024 12:37:25 -0700 (PDT)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2064.outbound.protection.outlook.com [40.107.236.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AFE2A10FAA0
+ for <nouveau@lists.freedesktop.org>; Tue,  9 Apr 2024 23:18:37 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=FAiZlqdGa+9ikrpMM007YTHHzJEPVkFgwsxYdeIYR4Km4c9F17lJyYTS/0l6HOdpRVSwaqzomgsWKJBivqcgJXhn0wgGdGRqJBcHpEh89axQvbddBt+MhLR6DLDYl98hg2tV0gAKlwVMYmmBD1m2VXkYJgB7/YT2PC3+/bVSdBOnSAVEv3IIEvMpIh0aRV4Im5Zc3MjbLpVktuRAAEizuVTejAmVqd24ZvrjBjfdXq2NvoCvQpyeuo5I+aqXJi5K68fW3degVWrxxrVe2HYDPmbWkDyPr26zPBsIi0vpX35S6rVLFbUTuYzK9YHAiW1wadzP5V/HLKUrYzluguBJ9Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mPj4Gt2a5EOJ7zrDxlTVgVNrHbak/nJwxC9lgVjCKPY=;
+ b=E9ZORCr4VP6X/eMZxlLaHM6cX1kduYitw41cBwjqa01iGRbiWHsywWaS5taloiAQAEODCGi1UP6FJTL+8gHO61+Hrm9likubN6llYjTr8Y7WXKxpMHvucLB+GK8mi7imfM0NHE6VjMGgNL39rWr7Idajl/dFBaO8YkDnngM0Z2zHPwo/3Ob9mq7MB/0L5wIEZZqdlUCNFOJVaN9f1flasO/6vMNqkZ9KQyve/1Q46Aw81GyMUuTL9gPli08q3KkDEsZ4zdzCUU5CEixlCvpN8TVBUH4m3VxoDSc8LebT4CXMu+0BT5l+j30ekr+INP0qsD8rVBipjsAzaRcTF2i5pQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mPj4Gt2a5EOJ7zrDxlTVgVNrHbak/nJwxC9lgVjCKPY=;
+ b=rVHpTPiyKlkRz8Xhe8Y/Tzv9YnW6yQFKHPrM4SptaIy3NBi1ithCpiKfk7VTgeJ6U1k9Xng8/sxky13JbGTouaBhhgj+XjMNCBOsViOpSDhOso2F+/CRqffDWDjHoHeoL8S+GkKFr7SN3Mn6d6igzSv9ZcJMUc5sgJLNX8pLx2HD6V8/CftipS/jKMn5CwiSrxMOIbBqy8wB2Ufcs2aHXvlbuzbxk1ULouMiPtYcK6LVSKhb+gTcJhv02uO7l6Ro5ct4ioDXsM0ZN16VYPF2fnunv4qT3f7QzaKxWnzmMr99ddnHLEcTcwmzyo5olYZokMlpH1fNeBdzuwBIhU6uMw==
+Received: from SA1P222CA0018.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:22c::18)
+ by CY8PR12MB7313.namprd12.prod.outlook.com (2603:10b6:930:53::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Tue, 9 Apr
+ 2024 23:18:34 +0000
+Received: from SA2PEPF000015CB.namprd03.prod.outlook.com
+ (2603:10b6:806:22c:cafe::c0) by SA1P222CA0018.outlook.office365.com
+ (2603:10b6:806:22c::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.36 via Frontend
+ Transport; Tue, 9 Apr 2024 23:18:34 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ SA2PEPF000015CB.mail.protection.outlook.com (10.167.241.201) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7452.22 via Frontend Transport; Tue, 9 Apr 2024 23:18:34 +0000
+Received: from rnnvmail203.nvidia.com (10.129.68.9) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.41; Tue, 9 Apr 2024
+ 16:18:18 -0700
+Received: from rnnvmail202.nvidia.com (10.129.68.7) by rnnvmail203.nvidia.com
+ (10.129.68.9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.12; Tue, 9 Apr
+ 2024 16:18:18 -0700
+Received: from ttabi.nvidia.com (10.127.8.13) by mail.nvidia.com (10.129.68.7)
+ with Microsoft SMTP Server id 15.2.1258.12 via Frontend Transport;
+ Tue, 9 Apr 2024 16:18:17 -0700
+From: Timur Tabi <ttabi@nvidia.com>
+To: Danilo Krummrich <dakr@redhat.com>, Dave Airlie <airlied@redhat.com>,
+ <nouveau@lists.freedesktop.org>, Lyude Paul <lyude@redhat.com>
+Subject: [PATCH] [v5] nouveau: add command-line GSP-RM registry support
+Date: Tue, 9 Apr 2024 18:15:52 -0500
+Message-ID: <20240409231552.2557643-1-ttabi@nvidia.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240409003401.2224446-1-airlied@gmail.com>
- <fcfb16a3a4bc53d4ac1724ab5649ee792977260f.camel@lynxeye.de>
- <36664f8f-0e6a-48a9-b9f9-7a6775007486@dakr.org>
-In-Reply-To: <36664f8f-0e6a-48a9-b9f9-7a6775007486@dakr.org>
-From: Dave Airlie <airlied@gmail.com>
-Date: Wed, 10 Apr 2024 05:37:14 +1000
-Message-ID: <CAPM=9tyvjaDA1kv2RcBLpaBZa8QXgefBR9p-r3UsAwCq9CKNZQ@mail.gmail.com>
-Subject: Re: [PATCH] nouveau: fix instmem race condition around ptr stores
-To: Danilo Krummrich <me@dakr.org>
-Cc: Lucas Stach <dev@lynxeye.de>, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
+X-NVConfidentiality: public
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF000015CB:EE_|CY8PR12MB7313:EE_
+X-MS-Office365-Filtering-Correlation-Id: 21d8b873-4925-4bd3-63a7-08dc58eb60d2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: yxDqonApsXKL+hAtB899WZYcmmACL1WobyMbfMuYFK61AvenR4R6b/l9n7A0Xlhq9i60Y2HACY+DEilu7+OccvP5B1sLLiI7mlBvyUmqcUURBaKNsO4vD2BqBsIrMu0jr2wjHNQmGWYdIx2WQEBD4ShNmC3w5RIh1HkS64zYhRkPRc8S9x//w0o6NhhiVbgKXrfu7ruDjyuia5YbpOOalSQaEbnSgXOYQ/i0UGvltp4ofMQCrlzHavyDb65bON9usejH/zMKk5i3XuZOwvOz5REqBGrkEZGHyyZczDDaayiYV/ZaV0zlm7ooivJ0oPr8Ry4/dQaaAyG2QhZG9aHCyYnu+RCAUKsCR9olJ8nTs5j9UlYDSN1n3+J8mGYb30XzI5IgrRkS2zVLMQIzQ/ANk7SNE1cXEhalVB5qa+pLJgMB26e5yW4H2/dVcHSz2f7Lk48Qb8ZoOkD0jWXxu9Rb3k3a5KKLJquVUb80i9NMLe+QNnZpAJq4bENk6JYnOK53G4v7KkyTd3+pXIHS0boMccHllyRI5BSTAQZ0YcBQ/9dGpo3onlOF+1ZUztw4kPW1yYppW0EOfU/X6O8sKisFamykN9eF6lhbwZHOqm3P35etbckgKvPNBU3PBNOMptfTMxUL54NLYnCuazqjcUW0d8xYQKKYI/SR/BF5cpF6rjo+yOnN2OM3upIWKXwn3qlEMR2fwNC5KtQCFEOGKks1G+Yx7/6XhmpH3BB7SkBEFlA/te3m1g6BGsnizB1P7qsj
+X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
+ SFS:(13230031)(82310400014)(376005)(36860700004)(1800799015); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2024 23:18:34.3164 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 21d8b873-4925-4bd3-63a7-08dc58eb60d2
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF000015CB.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7313
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,96 +112,450 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 9 Apr 2024 at 21:33, Danilo Krummrich <me@dakr.org> wrote:
->
-> On 4/9/24 10:27, Lucas Stach wrote:
-> > Am Dienstag, dem 09.04.2024 um 10:34 +1000 schrieb Dave Airlie:
-> >> From: Dave Airlie <airlied@redhat.com>
-> >>
-> >> Running a lot of VK CTS in parallel against nouveau, once every
-> >> few hours you might see something like this crash.
-> >>
-> >> BUG: kernel NULL pointer dereference, address: 0000000000000008
-> >> PGD 8000000114e6e067 P4D 8000000114e6e067 PUD 109046067 PMD 0
-> >> Oops: 0000 [#1] PREEMPT SMP PTI
-> >> CPU: 7 PID: 53891 Comm: deqp-vk Not tainted 6.8.0-rc6+ #27
-> >> Hardware name: Gigabyte Technology Co., Ltd. Z390 I AORUS PRO WIFI/Z390 I AORUS PRO WIFI-CF, BIOS F8 11/05/2021
-> >> RIP: 0010:gp100_vmm_pgt_mem+0xe3/0x180 [nouveau]
-> >> Code: c7 48 01 c8 49 89 45 58 85 d2 0f 84 95 00 00 00 41 0f b7 46 12 49 8b 7e 08 89 da 42 8d 2c f8 48 8b 47 08 41 83 c7 01 48 89 ee <48> 8b 40 08 ff d0 0f 1f 00 49 8b 7e 08 48 89 d9 48 8d 75 04 48 c1
-> >> RSP: 0000:ffffac20c5857838 EFLAGS: 00010202
-> >> RAX: 0000000000000000 RBX: 00000000004d8001 RCX: 0000000000000001
-> >> RDX: 00000000004d8001 RSI: 00000000000006d8 RDI: ffffa07afe332180
-> >> RBP: 00000000000006d8 R08: ffffac20c5857ad0 R09: 0000000000ffff10
-> >> R10: 0000000000000001 R11: ffffa07af27e2de0 R12: 000000000000001c
-> >> R13: ffffac20c5857ad0 R14: ffffa07a96fe9040 R15: 000000000000001c
-> >> FS:  00007fe395eed7c0(0000) GS:ffffa07e2c980000(0000) knlGS:0000000000000000
-> >> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> >> CR2: 0000000000000008 CR3: 000000011febe001 CR4: 00000000003706f0
-> >> DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-> >> DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-> >> Call Trace:
-> >>
-> >> ...
-> >>
-> >>   ? gp100_vmm_pgt_mem+0xe3/0x180 [nouveau]
-> >>   ? gp100_vmm_pgt_mem+0x37/0x180 [nouveau]
-> >>   nvkm_vmm_iter+0x351/0xa20 [nouveau]
-> >>   ? __pfx_nvkm_vmm_ref_ptes+0x10/0x10 [nouveau]
-> >>   ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
-> >>   ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
-> >>   ? __lock_acquire+0x3ed/0x2170
-> >>   ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
-> >>   nvkm_vmm_ptes_get_map+0xc2/0x100 [nouveau]
-> >>   ? __pfx_nvkm_vmm_ref_ptes+0x10/0x10 [nouveau]
-> >>   ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
-> >>   nvkm_vmm_map_locked+0x224/0x3a0 [nouveau]
-> >>
-> >> Adding any sort of useful debug usually makes it go away, so I hand
-> >> wrote the function in a line, and debugged the asm.
-> >>
-> >> Every so often pt->memory->ptrs is NULL. This ptrs ptr is set in
-> >> the nv50_instobj_acquire called from nvkm_kmap.
-> >>
-> >> If Thread A and Thread B both get to nv50_instobj_acquire around
-> >> the same time, and Thread A hits the refcount_set line, and in
-> >> lockstep thread B succeeds at refcount_inc_not_zero, there is a
-> >> chance the ptrs value won't have been stored since refcount_set
-> >> is unordered. Force a memory barrier here, I picked smp_mb, since
-> >> we want it on all CPUs and it's write followed by a read.
->
-> Good catch!
->
-> >>
-> >> Cc: linux-stable
-> >> Signed-off-by: Dave Airlie <airlied@redhat.com>
-> >> ---
-> >>   drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c | 3 +++
-> >>   1 file changed, 3 insertions(+)
-> >>
-> >> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
-> >> index a7f3fc342d87..cbacc7b11f8c 100644
-> >> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
-> >> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
-> >> @@ -250,6 +250,9 @@ nv50_instobj_acquire(struct nvkm_memory *memory)
-> >>                      iobj->base.memory.ptrs = &nv50_instobj_fast;
-> >>              else
-> >>                      iobj->base.memory.ptrs = &nv50_instobj_slow;
-> >> +            /* barrier to ensure ptrs is written before another thread
-> >> +               does refcount_inc_not_zero successfully. */
-> >> +            smp_mb();
-> >
-> > Doesn't this miss the corresponding smp_rmb after
-> > refcount_inc_not_zero? Without it a sufficiently speculating CPU might
-> > still hoist the NULL ptr load across the refcount increase.
->
-> Agree, also think this one could be smp_wmb() only.
->
-> I also think it's reasonable to keep "the fast path refcount_inc_not_zero
-> that doesn't take the lock", since the scope for this being potentially racy
-> is limited to this function only.
+Add the NVreg_RegistryDwords command line parameter, which allows
+specifying additional registry keys to be sent to GSP-RM.  This
+allows additional configuration, debugging, and experimentation
+with GSP-RM, which uses these keys to alter its behavior.
 
-I've been retesting with just barrier() here, since this seems at
-least to be compiler related, but probably the smp_rmb/smp_wmb combo
-is the safest answer across arches.
+Note that these keys are passed as-is to GSP-RM, and Nouveau does
+not parse them.  This is in contrast to the Nvidia driver, which may
+parse some of the keys to configure some functionality in concert with
+GSP-RM.  Therefore, any keys which also require action by the driver
+may not function correctly when passed by Nouveau.  Caveat emptor.
 
-Dave.
+The name and format of NVreg_RegistryDwords is the same as used by
+the Nvidia driver, to maintain compatibility.
+
+Signed-off-by: Timur Tabi <ttabi@nvidia.com>
+---
+v5:
+Add REGISTRY_MAX_KEY_LENGTH
+registry_list_entry.key is now char[64] instead of char *
+use strnlen instead of strlen
+removed some debug printks
+fixed most checkpatch complaints
+rebased to drm-fixes
+
+ .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |   6 +
+ .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 360 ++++++++++++++++--
+ 2 files changed, 342 insertions(+), 24 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+index 6f5d376d8fcc..3fbc57b16a05 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+@@ -211,6 +211,12 @@ struct nvkm_gsp {
+ 		struct mutex mutex;;
+ 		struct idr idr;
+ 	} client_id;
++
++	/* A linked list of registry items. The registry RPC will be built from it. */
++	struct list_head registry_list;
++
++	/* The size of the registry RPC */
++	size_t registry_rpc_size;
+ };
+ 
+ static inline bool
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+index 9858c1438aa7..981ddd0fb1e7 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+@@ -54,6 +54,8 @@
+ #include <nvrm/535.113.01/nvidia/kernel/inc/vgpu/rpc_global_enums.h>
+ 
+ #include <linux/acpi.h>
++#include <linux/ctype.h>
++#include <linux/parser.h>
+ 
+ #define GSP_MSG_MIN_SIZE GSP_PAGE_SIZE
+ #define GSP_MSG_MAX_SIZE GSP_PAGE_MIN_SIZE * 16
+@@ -1080,51 +1082,361 @@ r535_gsp_rpc_unloading_guest_driver(struct nvkm_gsp *gsp, bool suspend)
+ 	return nvkm_gsp_rpc_wr(gsp, rpc, true);
+ }
+ 
++enum registry_type {
++	REGISTRY_TABLE_ENTRY_TYPE_DWORD  = 1, /* 32-bit unsigned integer */
++	REGISTRY_TABLE_ENTRY_TYPE_BINARY = 2, /* Binary blob */
++	REGISTRY_TABLE_ENTRY_TYPE_STRING = 3, /* Null-terminated string */
++};
++
++/* An arbitrary limit to the length of a registry key */
++#define REGISTRY_MAX_KEY_LENGTH		64
++
++/**
++ * registry_list_entry - linked list member for a registry key/value
++ * @head: list_head struct
++ * @type: dword, binary, or string
++ * @klen: the length of name of the key
++ * @vlen: the length of the value
++ * @v.dword: the data, if REGISTRY_TABLE_ENTRY_TYPE_DWORD
++ * @v.binary: the data, if TYPE_BINARY or TYPE_STRING
++ * @key: the key name
++ *
++ * Every registry key/value is represented internally by this struct.
++ *
++ * Type DWORD is a simple 32-bit unsigned integer, and its value is stored in
++ * v.dword.
++ *
++ * Types BINARY and STRING are variable-length binary blobs.  The only real
++ * difference between BINARY and STRING is that STRING is null-terminated and
++ * is expected to contain only printable characters.
++ *
++ * To avoid having to kmalloc multiple objects, the value for BINARY and
++ * STRING is appended after the key[] in memory, and v.binary just points to
++ * that block.
++ *
++ * Note: it is technically possible to have multiple keys with the same name
++ * but different types, but this is not useful since GSP-RM expects keys to
++ * have only one specific type.
++ */
++struct registry_list_entry {
++	struct list_head head;
++	enum registry_type type;
++	size_t klen;
++	size_t vlen;
++	char key[REGISTRY_MAX_KEY_LENGTH] __counted_by(klen);
++	u32 dword;				/* TYPE_DWORD */
++	u8 binary[] __counted_by(vlen);	/* TYPE_BINARY or TYPE_STRING */
++};
++
++/**
++ * add_registry -- adds a registry entry
++ * @gsp: gsp pointer
++ * @key: name of the registry key
++ * @type: type of data
++ * @data: pointer to value
++ * @length: size of data, in bytes
++ *
++ * Adds a registry key/value pair to the registry database.
++ *
++ * This function collects the registry information in a linked list.  After
++ * all registry keys have been added, build_registry() is used to create the
++ * RPC data structure.
++ *
++ * registry_rpc_size is a running total of the size of all registry keys.
++ * It's used to avoid an O(n) calculation of the size when the RPC is built.
++ *
++ * Returns 0 on success, or negative error code on error.
++ */
++static int add_registry(struct nvkm_gsp *gsp, const char *key,
++			enum registry_type type, const void *data, size_t length)
++{
++	struct registry_list_entry *reg;
++	size_t nlen = strnlen(key, REGISTRY_MAX_KEY_LENGTH) + 1;
++	size_t vlen; /* value length, non-zero if binary or string */
++
++	if (nlen > REGISTRY_MAX_KEY_LENGTH)
++		return -EFBIG;
++
++	vlen = (type == REGISTRY_TABLE_ENTRY_TYPE_DWORD) ? 0 : length;
++
++	reg = kmalloc(sizeof(*reg) + vlen, GFP_KERNEL);
++	if (!reg)
++		return -ENOMEM;
++
++	switch (type) {
++	case REGISTRY_TABLE_ENTRY_TYPE_DWORD:
++		reg->dword = *(const u32 *)(data);
++		break;
++	case REGISTRY_TABLE_ENTRY_TYPE_BINARY:
++	case REGISTRY_TABLE_ENTRY_TYPE_STRING:
++		memcpy(reg->binary, data, length);
++		break;
++	default:
++		nvkm_error(&gsp->subdev, "unrecognized registry type %u for '%s'\n",
++			   type, key);
++		kfree(reg);
++		return -EINVAL;
++	}
++
++	memcpy(reg->key, key, nlen);
++	reg->klen = nlen;
++	reg->vlen = length;
++	reg->type = type;
++
++	list_add_tail(&reg->head, &gsp->registry_list);
++	gsp->registry_rpc_size += sizeof(PACKED_REGISTRY_ENTRY) + nlen + vlen;
++
++	return 0;
++}
++
++static int add_registry_num(struct nvkm_gsp *gsp, const char *key, u32 value)
++{
++	return add_registry(gsp, key, REGISTRY_TABLE_ENTRY_TYPE_DWORD,
++			    &value, sizeof(u32));
++}
++
++static int add_registry_string(struct nvkm_gsp *gsp, const char *key, const char *value)
++{
++	return add_registry(gsp, key, REGISTRY_TABLE_ENTRY_TYPE_STRING,
++			    value, strlen(value) + 1);
++}
++
++/**
++ * build_registry -- create the registry RPC data
++ * @gsp: gsp pointer
++ * @registry: pointer to the RPC payload to fill
++ *
++ * After all registry key/value pairs have been added, call this function to
++ * build the RPC.
++ *
++ * The registry RPC looks like this:
++ *
++ * +-----------------+
++ * |NvU32 size;      |
++ * |NvU32 numEntries;|
++ * +-----------------+
++ * +---------------------+
++ * |PACKED_REGISTRY_ENTRY|
++ * +---------------------+
++ * |PACKED_REGISTRY_ENTRY|
++ * +---------------------+
++ * ... (one copy for each entry)
++ *
++ * +----------------------------------------+
++ * |Null-terminated key (string) for entry 0|
++ * +----------------------------------------+
++ * |Binary/string data value for entry 0    | (only if necessary)
++ * +----------------------------------------+
++ * |Null-terminated key (string) for entry 1|
++ * +----------------------------------------+
++ * |Binary/string data value for entry 1    | (only if necessary)
++ * +----------------------------------------+
++ * ... (one copy for each entry)
++ *
++ *
++ * The 'data' field of an entry is either a 32-bit integer (for type DWORD)
++ * or an offset into the PACKED_REGISTRY_TABLE (for types BINARY and STRING).
++ *
++ * All memory allocated by add_registry() is released.
++ */
++static void build_registry(struct nvkm_gsp *gsp, PACKED_REGISTRY_TABLE *registry)
++{
++	struct registry_list_entry *reg, *n;
++	size_t str_offset;
++	unsigned int i = 0;
++
++	registry->numEntries = list_count_nodes(&gsp->registry_list);
++	str_offset = struct_size(registry, entries, registry->numEntries);
++
++	list_for_each_entry_safe(reg, n, &gsp->registry_list, head) {
++		registry->entries[i].type = reg->type;
++		registry->entries[i].length = reg->klen;
++
++		/* Append the key name to the table */
++		registry->entries[i].nameOffset = str_offset;
++		memcpy((void *)registry + str_offset, reg->key, reg->klen);
++		str_offset += reg->klen;
++
++		switch (reg->type) {
++		case REGISTRY_TABLE_ENTRY_TYPE_DWORD:
++			registry->entries[i].data = reg->dword;
++			break;
++		case REGISTRY_TABLE_ENTRY_TYPE_BINARY:
++		case REGISTRY_TABLE_ENTRY_TYPE_STRING:
++			/* If the type is binary or string, also append the value */
++			memcpy((void *)registry + str_offset, reg->binary, reg->vlen);
++			registry->entries[i].data = str_offset;
++			str_offset += reg->vlen;
++			break;
++		default:
++		}
++
++		i++;
++		list_del(&reg->head);
++		kfree(reg);
++	}
++
++	/* Double-check that we calculated the sizes correctly */
++	WARN_ON(gsp->registry_rpc_size != str_offset);
++
++	registry->size = gsp->registry_rpc_size;
++}
++
++/**
++ * clean_registry -- clean up registry memory in case of error
++ * @gsp: gsp pointer
++ *
++ * Call this function to clean up all memory allocated by add_registry()
++ * in case of error and build_registry() is not called.
++ */
++static void clean_registry(struct nvkm_gsp *gsp)
++{
++	struct registry_list_entry *reg, *n;
++
++	list_for_each_entry_safe(reg, n, &gsp->registry_list, head) {
++		list_del(&reg->head);
++		kfree(reg);
++	}
++
++	gsp->registry_rpc_size = sizeof(PACKED_REGISTRY_TABLE);
++}
++
++MODULE_PARM_DESC(NVreg_RegistryDwords,
++		 "A semicolon-separated list of key=integer pairs of GSP-RM registry keys");
++static char *NVreg_RegistryDwords;
++module_param(NVreg_RegistryDwords, charp, 0400);
++
+ /* dword only */
+ struct nv_gsp_registry_entries {
+ 	const char *name;
+ 	u32 value;
+ };
+ 
++/**
++ * r535_registry_entries - required registry entries for GSP-RM
++ *
++ * This array lists registry entries that are required for GSP-RM to
++ * function correctly.
++ *
++ * RMSecBusResetEnable - enables PCI secondary bus reset
++ * RMForcePcieConfigSave - forces GSP-RM to preserve PCI configuration
++ *   registers on any PCI reset.
++ */
+ static const struct nv_gsp_registry_entries r535_registry_entries[] = {
+ 	{ "RMSecBusResetEnable", 1 },
+ 	{ "RMForcePcieConfigSave", 1 },
+ };
+ #define NV_GSP_REG_NUM_ENTRIES ARRAY_SIZE(r535_registry_entries)
+ 
++/**
++ * strip - strips all characters in 'reject' from 's'
++ * @s: string to strip
++ * @reject: string of characters to remove
++ *
++ * 's' is modified.
++ *
++ * Returns the length of the new string.
++ */
++static size_t strip(char *s, const char *reject)
++{
++	char *p = s, *p2 = s;
++	size_t length = 0;
++	char c;
++
++	do {
++		while ((c = *p2) && strchr(reject, c))
++			p2++;
++
++		*p++ = c = *p2++;
++		length++;
++	} while (c);
++
++	return length;
++}
++
++/**
++ * r535_gsp_rpc_set_registry - build registry RPC and call GSP-RM
++ * @gsp: gsp pointer
++ *
++ * The GSP-RM registry is a set of key/value pairs that configure some aspects
++ * of GSP-RM. The keys are strings, and the values are 32-bit integers.
++ *
++ * The registry is built from a combination of a static hard-coded list (see
++ * above) and entries passed on the driver's command line.
++ */
+ static int
+ r535_gsp_rpc_set_registry(struct nvkm_gsp *gsp)
+ {
+ 	PACKED_REGISTRY_TABLE *rpc;
+-	char *strings;
+-	int str_offset;
+-	int i;
+-	size_t rpc_size = struct_size(rpc, entries, NV_GSP_REG_NUM_ENTRIES);
++	unsigned int i;
++	int ret;
+ 
+-	/* add strings + null terminator */
+-	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++)
+-		rpc_size += strlen(r535_registry_entries[i].name) + 1;
++	INIT_LIST_HEAD(&gsp->registry_list);
++	gsp->registry_rpc_size = sizeof(PACKED_REGISTRY_TABLE);
+ 
+-	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_SET_REGISTRY, rpc_size);
+-	if (IS_ERR(rpc))
+-		return PTR_ERR(rpc);
++	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
++		ret = add_registry_num(gsp, r535_registry_entries[i].name,
++				       r535_registry_entries[i].value);
++		if (ret) {
++			clean_registry(gsp);
++			return ret;
++		}
++	}
+ 
+-	rpc->numEntries = NV_GSP_REG_NUM_ENTRIES;
++	/*
++	 * The NVreg_RegistryDwords parameter is a string of key=value
++	 * pairs separated by semicolons. We need to extract and trim each
++	 * substring, and then parse the substring to extract the key and
++	 * value.
++	 */
++	if (NVreg_RegistryDwords) {
++		char *p = kstrdup(NVreg_RegistryDwords, GFP_KERNEL);
++		char *start, *next = p, *equal;
++		size_t length;
++
++		/* Remove any whitespace from the parameter string */
++		length = strip(p, " \t\n");
++
++		while ((start = strsep(&next, ";"))) {
++			long value;
++
++			equal = strchr(start, '=');
++			if (!equal || equal == start || equal[1] == 0) {
++				nvkm_error(&gsp->subdev,
++					   "ignoring invalid registry string '%s'\n",
++					   start);
++				continue;
++			}
+ 
+-	str_offset = offsetof(typeof(*rpc), entries[NV_GSP_REG_NUM_ENTRIES]);
+-	strings = (char *)rpc + str_offset;
+-	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
+-		int name_len = strlen(r535_registry_entries[i].name) + 1;
+-
+-		rpc->entries[i].nameOffset = str_offset;
+-		rpc->entries[i].type = 1;
+-		rpc->entries[i].data = r535_registry_entries[i].value;
+-		rpc->entries[i].length = 4;
+-		memcpy(strings, r535_registry_entries[i].name, name_len);
+-		strings += name_len;
+-		str_offset += name_len;
++			/* Truncate the key=value string to just key */
++			*equal = 0;
++
++			ret = kstrtol(equal + 1, 0, &value);
++			if (!ret) {
++				ret = add_registry_num(gsp, start, value);
++			} else {
++				/* Not a number, so treat it as a string */
++				ret = add_registry_string(gsp, start, equal + 1);
++			}
++
++			if (ret) {
++				nvkm_error(&gsp->subdev,
++					   "ignoring invalid registry key/value '%s=%s'\n",
++					   start, equal + 1);
++				continue;
++			}
++		}
++
++		kfree(p);
+ 	}
+-	rpc->size = str_offset;
++
++	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_SET_REGISTRY, gsp->registry_rpc_size);
++	if (IS_ERR(rpc)) {
++		clean_registry(gsp);
++		return PTR_ERR(rpc);
++	}
++
++	build_registry(gsp, rpc);
+ 
+ 	return nvkm_gsp_rpc_wr(gsp, rpc, false);
+ }
+-- 
+2.34.1
+
