@@ -2,62 +2,39 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF40589D2C0
-	for <lists+nouveau@lfdr.de>; Tue,  9 Apr 2024 08:56:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4629D89D494
+	for <lists+nouveau@lfdr.de>; Tue,  9 Apr 2024 10:36:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E91E61127CD;
-	Tue,  9 Apr 2024 06:56:15 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="NbcnfOTE";
-	dkim=pass (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="qtk77lFA";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 99C94112BAE;
+	Tue,  9 Apr 2024 08:36:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 398 seconds by postgrey-1.36 at gabe;
- Tue, 09 Apr 2024 06:56:13 UTC
-Received: from mail.kernel-space.org (mail.kernel-space.org [195.201.34.187])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 879211127CD
- for <nouveau@lists.freedesktop.org>; Tue,  9 Apr 2024 06:56:12 +0000 (UTC)
-Received: from kernel-space.org (localhost [127.0.0.1])
- by kernel-space.org (OpenSMTPD) with ESMTP id 871f8dbb;
- Tue, 9 Apr 2024 06:49:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=from
- :to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding; s=s1; bh=oAGS8rcuwRlL/nTk+kByirAne3s
- =; b=NbcnfOTEwNDEtx1HHsCKcRdt9VXrQR87A3oSDi5vyh8BBRrZR/byxLJ6e54
- KX4Sr9dpH/zOKgm+hpC3aGjyvn7KabAjr3u3d2tJSDN21DQ6PyXA0w7h6kviQ8Ml
- T8O7TZfld1XNkzYedTNQDZOP40w2A27/SYQwdUrUI/BFtdFI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=from:to
- :cc:subject:date:message-id:mime-version
- :content-transfer-encoding; q=dns; s=s1; b=uqn5CqoLXSGzdsoMHBxiA
- UV2ah19emr5mFJgAQU03CesMRMpJ75Dj9q7XpEv4lv6NYPU7ZDTkGXuQFfLx3LSE
- eiWdmcsjJhO/JHcMUl2ywLm1aRNrsZ1g/9d9q/fIm+PPX8B2i/XiHrY5+Ma3Cv7Z
- 5iK/Fmif93B5DnD+o5H7V0=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=s1; t=1712645373;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=V4OPancPGXm0rmhobjyoKx5ofm8GtP00Jheia9SNrnQ=;
- b=qtk77lFAC2wwxVC6tp86hsz4wseAuOmisdvv2EzmjWSMr/6shbXYBPwEG75Kwj/UTL7h9z
- gCU6rSTnUnA7bCv4qI26+TG9tqX5Reb8qkvjFoWYkxwsa3jRv65Zqt8F5YnseD/GH4ecab
- LS7OSsRAPjZ0Jnnt29SzAQHn5Tmpe7A=
-Received: from localhost.localdomain
- (host-87-8-237-241.retail.telecomitalia.it [87.8.237.241])
- by kernel-space.org (OpenSMTPD) with ESMTPSA id 4a4a364a
- (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Tue, 9 Apr 2024 06:49:33 +0000 (UTC)
-From: Angelo Dureghello <angelo@kernel-space.org>
-To: kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com,
- nouveau@lists.freedesktop.org
-Cc: drm-devel@lists.freedesktop.org,
- Angelo Dureghello <angelo@kernel-space.org>
-Subject: [PATCH] drm/nouveau/disp: add backlight for ada lovelace
-Date: Tue,  9 Apr 2024 08:48:28 +0200
-Message-ID: <20240409064828.2862053-1-angelo@kernel-space.org>
-X-Mailer: git-send-email 2.44.0
+X-Greylist: delayed 506 seconds by postgrey-1.36 at gabe;
+ Tue, 09 Apr 2024 08:36:54 UTC
+Received: from lynxeye.de (ns.lynxeye.de [87.118.118.114])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 581A8112BAE;
+ Tue,  9 Apr 2024 08:36:54 +0000 (UTC)
+Received: by lynxeye.de (Postfix, from userid 501)
+ id D12B2E74071; Tue,  9 Apr 2024 10:27:56 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on lynxeye.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=3.0 tests=ALL_TRUSTED,BAYES_00
+ autolearn=ham version=3.3.1
+Received: from [192.168.178.22] (a89-183-193-114.net-htp.de [89.183.193.114])
+ by lynxeye.de (Postfix) with ESMTPSA id 45C4DE74067;
+ Tue,  9 Apr 2024 10:27:55 +0200 (CEST)
+Message-ID: <fcfb16a3a4bc53d4ac1724ab5649ee792977260f.camel@lynxeye.de>
+Subject: Re: [PATCH] nouveau: fix instmem race condition around ptr stores
+From: Lucas Stach <dev@lynxeye.de>
+To: Dave Airlie <airlied@gmail.com>, dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Date: Tue, 09 Apr 2024 10:27:54 +0200
+In-Reply-To: <20240409003401.2224446-1-airlied@gmail.com>
+References: <20240409003401.2224446-1-airlied@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.48.4 (3.48.4-1.fc38) 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,112 +49,86 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Add working backlight for "ada lovelace" missing case.
+Am Dienstag, dem 09.04.2024 um 10:34 +1000 schrieb Dave Airlie:
+> From: Dave Airlie <airlied@redhat.com>
+>=20
+> Running a lot of VK CTS in parallel against nouveau, once every
+> few hours you might see something like this crash.
+>=20
+> BUG: kernel NULL pointer dereference, address: 0000000000000008
+> PGD 8000000114e6e067 P4D 8000000114e6e067 PUD 109046067 PMD 0
+> Oops: 0000 [#1] PREEMPT SMP PTI
+> CPU: 7 PID: 53891 Comm: deqp-vk Not tainted 6.8.0-rc6+ #27
+> Hardware name: Gigabyte Technology Co., Ltd. Z390 I AORUS PRO WIFI/Z390 I=
+ AORUS PRO WIFI-CF, BIOS F8 11/05/2021
+> RIP: 0010:gp100_vmm_pgt_mem+0xe3/0x180 [nouveau]
+> Code: c7 48 01 c8 49 89 45 58 85 d2 0f 84 95 00 00 00 41 0f b7 46 12 49 8=
+b 7e 08 89 da 42 8d 2c f8 48 8b 47 08 41 83 c7 01 48 89 ee <48> 8b 40 08 ff=
+ d0 0f 1f 00 49 8b 7e 08 48 89 d9 48 8d 75 04 48 c1
+> RSP: 0000:ffffac20c5857838 EFLAGS: 00010202
+> RAX: 0000000000000000 RBX: 00000000004d8001 RCX: 0000000000000001
+> RDX: 00000000004d8001 RSI: 00000000000006d8 RDI: ffffa07afe332180
+> RBP: 00000000000006d8 R08: ffffac20c5857ad0 R09: 0000000000ffff10
+> R10: 0000000000000001 R11: ffffa07af27e2de0 R12: 000000000000001c
+> R13: ffffac20c5857ad0 R14: ffffa07a96fe9040 R15: 000000000000001c
+> FS:  00007fe395eed7c0(0000) GS:ffffa07e2c980000(0000) knlGS:0000000000000=
+000
+> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> CR2: 0000000000000008 CR3: 000000011febe001 CR4: 00000000003706f0
+> DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+> DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+> Call Trace:
+>=20
+> ...
+>=20
+>  ? gp100_vmm_pgt_mem+0xe3/0x180 [nouveau]
+>  ? gp100_vmm_pgt_mem+0x37/0x180 [nouveau]
+>  nvkm_vmm_iter+0x351/0xa20 [nouveau]
+>  ? __pfx_nvkm_vmm_ref_ptes+0x10/0x10 [nouveau]
+>  ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
+>  ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
+>  ? __lock_acquire+0x3ed/0x2170
+>  ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
+>  nvkm_vmm_ptes_get_map+0xc2/0x100 [nouveau]
+>  ? __pfx_nvkm_vmm_ref_ptes+0x10/0x10 [nouveau]
+>  ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
+>  nvkm_vmm_map_locked+0x224/0x3a0 [nouveau]
+>=20
+> Adding any sort of useful debug usually makes it go away, so I hand
+> wrote the function in a line, and debugged the asm.
+>=20
+> Every so often pt->memory->ptrs is NULL. This ptrs ptr is set in
+> the nv50_instobj_acquire called from nvkm_kmap.
+>=20
+> If Thread A and Thread B both get to nv50_instobj_acquire around
+> the same time, and Thread A hits the refcount_set line, and in
+> lockstep thread B succeeds at refcount_inc_not_zero, there is a
+> chance the ptrs value won't have been stored since refcount_set
+> is unordered. Force a memory barrier here, I picked smp_mb, since
+> we want it on all CPUs and it's write followed by a read.
+>=20
+> Cc: linux-stable
+> Signed-off-by: Dave Airlie <airlied@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c | 3 +++
+>  1 file changed, 3 insertions(+)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c b/drivers=
+/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
+> index a7f3fc342d87..cbacc7b11f8c 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
+> @@ -250,6 +250,9 @@ nv50_instobj_acquire(struct nvkm_memory *memory)
+>  			iobj->base.memory.ptrs =3D &nv50_instobj_fast;
+>  		else
+>  			iobj->base.memory.ptrs =3D &nv50_instobj_slow;
+> +		/* barrier to ensure ptrs is written before another thread
+> +		   does refcount_inc_not_zero successfully. */
+> +		smp_mb();
 
-The nvif method is actually not working for this chipset so
-used the drm apis. Also, by dpcd, drm layer is calculating a
-max brightness of 255, but to get a real correct max brightnes
-the maximum must be multiplied by a factor of 16.
+Doesn't this miss the corresponding smp_rmb after
+refcount_inc_not_zero? Without it a sufficiently speculating CPU might
+still hoist the NULL ptr load across the refcount increase.
 
-Tested to work properly in Legion Lenovo Pro 5
-
-Lenovo Legion 5 Pro 16ARX8
-Bios ver LPCN49WW
-	 LPEC49WW
-SN PF4T63AZ
-Nvidia RTX4060 MaxQ/Mobile rev a1 (ADA LOVELACE AD107M)
-AMD Ryzen 9 7945HX + Radeon
-
-and wayland.
-
-Signed-off-by: Angelo Dureghello <angelo@kernel-space.org>
----
- drivers/gpu/drm/display/drm_dp_helper.c     |  2 +
- drivers/gpu/drm/nouveau/nouveau_backlight.c | 51 +++++++++++++++++++++
- 2 files changed, 53 insertions(+)
-
-diff --git a/drivers/gpu/drm/display/drm_dp_helper.c b/drivers/gpu/drm/display/drm_dp_helper.c
-index 266826eac4a7..50a41af6550c 100644
---- a/drivers/gpu/drm/display/drm_dp_helper.c
-+++ b/drivers/gpu/drm/display/drm_dp_helper.c
-@@ -3767,6 +3767,8 @@ drm_edp_backlight_probe_max(struct drm_dp_aux *aux, struct drm_edp_backlight_inf
- 		return -ENODEV;
- 	}
- 
-+	printk("%s() pn %d\n", __func__, pn);
-+
- 	pn &= DP_EDP_PWMGEN_BIT_COUNT_MASK;
- 	bl->max = (1 << pn) - 1;
- 	if (!driver_pwm_freq_hz)
-diff --git a/drivers/gpu/drm/nouveau/nouveau_backlight.c b/drivers/gpu/drm/nouveau/nouveau_backlight.c
-index d47442125fa1..1e080f6fa902 100644
---- a/drivers/gpu/drm/nouveau/nouveau_backlight.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_backlight.c
-@@ -286,6 +286,53 @@ nv50_backlight_init(struct nouveau_backlight *bl,
- 	return 0;
- }
- 
-+static int
-+nv19x_backlight_init(struct nouveau_backlight *bl,
-+		     struct nouveau_connector *nv_conn,
-+		     struct nouveau_encoder *nv_encoder,
-+		     struct backlight_properties *props,
-+		     const struct backlight_ops **ops)
-+{
-+	int ret;
-+	u16 current_level;
-+	u8 edp_dpcd[EDP_DISPLAY_CTL_CAP_SIZE];
-+	u8 current_mode;
-+	struct nouveau_drm *drm = nouveau_drm(nv_encoder->base.base.dev);
-+
-+	/* nvif path seems not working on ADA, using drm */
-+	if (nv_conn->type == DCB_CONNECTOR_eDP) {
-+
-+		ret = drm_dp_dpcd_read(&nv_conn->aux, DP_EDP_DPCD_REV, edp_dpcd,
-+				       EDP_DISPLAY_CTL_CAP_SIZE);
-+		if (ret < 0)
-+			return ret;
-+		if (!drm_edp_backlight_supported(edp_dpcd))
-+			return -ENODEV;
-+
-+		ret = drm_edp_backlight_init(&nv_conn->aux, &bl->edp_info, 0, edp_dpcd,
-+					 &current_level, &current_mode);
-+		if (ret < 0)
-+			return ret;
-+
-+		ret = drm_edp_backlight_enable(&nv_conn->aux, &bl->edp_info, current_level);
-+		if (ret < 0) {
-+			NV_ERROR(drm, "Failed to enable backlight on %s: %d\n",
-+				 nv_conn->base.name, ret);
-+			return ret;
-+		}
-+
-+		*ops = &nv50_edp_bl_ops;
-+		/* drm max factor must be multiplied by 16 */
-+		props->max_brightness = bl->edp_info.max << 4;
-+		props->brightness = current_level;
-+		bl->uses_dpcd = true;
-+
-+		return 0;
-+	}
-+
-+	return -ENODEV;
-+}
-+
- int
- nouveau_backlight_init(struct drm_connector *connector)
- {
-@@ -332,6 +379,10 @@ nouveau_backlight_init(struct drm_connector *connector)
- 		ret = nv50_backlight_init(bl, nouveau_connector(connector),
- 					  nv_encoder, &props, &ops);
- 		break;
-+	case NV_DEVICE_INFO_V0_ADA:
-+		ret = nv19x_backlight_init(bl, nouveau_connector(connector),
-+					   nv_encoder, &props, &ops);
-+		break;
- 	default:
- 		ret = 0;
- 		goto fail_alloc;
--- 
-2.44.0
-
+Regards,
+Lucas
