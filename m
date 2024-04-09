@@ -2,44 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C931289CF75
-	for <lists+nouveau@lfdr.de>; Tue,  9 Apr 2024 02:34:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9567C89D0C3
+	for <lists+nouveau@lfdr.de>; Tue,  9 Apr 2024 05:12:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E524B10F9CD;
-	Tue,  9 Apr 2024 00:34:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A13A4112A7F;
+	Tue,  9 Apr 2024 03:12:19 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LuKd96JV";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [207.211.30.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B875910F9CD
- for <nouveau@lists.freedesktop.org>; Tue,  9 Apr 2024 00:34:28 +0000 (UTC)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-297-l4A8sei7OSGg7CdFT0AVMg-1; Mon,
- 08 Apr 2024 20:34:24 -0400
-X-MC-Unique: l4A8sei7OSGg7CdFT0AVMg-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 674BE1C02142;
- Tue,  9 Apr 2024 00:34:24 +0000 (UTC)
-Received: from dreadlord.redhat.com (unknown [10.64.136.26])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 62F724094DC0;
- Tue,  9 Apr 2024 00:34:23 +0000 (UTC)
-From: Dave Airlie <airlied@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org
-Subject: [PATCH] nouveau: fix instmem race condition around ptr stores
-Date: Tue,  9 Apr 2024 10:34:01 +1000
-Message-ID: <20240409003401.2224446-1-airlied@gmail.com>
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com
+ [209.85.218.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 52A9C112A7F;
+ Tue,  9 Apr 2024 03:12:17 +0000 (UTC)
+Received: by mail-ej1-f43.google.com with SMTP id
+ a640c23a62f3a-a51e368c6dcso103452166b.3; 
+ Mon, 08 Apr 2024 20:12:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1712632335; x=1713237135; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=HfIc3j5LNpDb58SAiElVvB8ifg5oy/Xtc2rHJbWd48c=;
+ b=LuKd96JVbDJ9kN8AO3bNQNW62RFE8/Po/bfi6Ux1fNeJTS/TSprsN7tdFfXgy51/i7
+ kpo+AEAJjIzADEilm2aBBAg+ttYSdhn+mGMR2ZCRKOn0dyXC2atY2nfvrN7KmEkQ+isO
+ emjg6NEKfc18EQE6ZlDvCAi2WMPkJ0z8OXW4BAVx3xTvLabjwoWWrEyxKbSElW65g0bX
+ mywGsu75I/hqAFG20r/J8aOUxGeiDuoxALekQKB7H49nb5+I218uM7SymOokXtk/hUsm
+ JFe9DUgFbri+QjW/LIawLyxm7WdiUcw2XvAruprHEjT1CcqVmrDXK0dTumOaATfOZKRu
+ dCpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712632335; x=1713237135;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HfIc3j5LNpDb58SAiElVvB8ifg5oy/Xtc2rHJbWd48c=;
+ b=DWtL1riV0l4ab/0pm6v3xP3KoBwGwjm/GgUaq8MfsSskTrZJnMRDdNuPKnS1q/sOLi
+ 85CK5q8vHu2Diiwv427W+xeYH01epV8OrLAVfRxoioo1o2q4TsoQv81b6kdLtdVlOOXy
+ c4vFH8l3Jd+5socVqLZ+hbTMjAF5yBBhJKtwhf1PurPNCoSCnZRSwvM5OxpU6+YJKf8O
+ USkdt6ciAEJaxNbfkJc1pfOI/kuzbUXXj/cF3Go8Zb4qRrlULET0/3z9dBVO/q+Fwo9f
+ 2ypN2M8+vX7wGHy/CcoxgFocGPo5Toj+eQxsoN7LwwexOmmieSJZB/DhhNzJibi+a3yI
+ K59Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWZck5RcDpmRKIHi+7+qsU/h3gCVxZAKFMsLcy0dqgfAtpQi4CidTSESmuaLbFtTUUDIpH0OSebmXY062iGyaPZFoq5c6boeUemtzRUlg==
+X-Gm-Message-State: AOJu0Yy8Fe7mijRaXxYlS8z31hixqpxgdCwWUUN1b6DnuZPr7Zan1979
+ Z6iiLiBKMaq//YNdJV0RB7QIOTGEZbUb06wAsT3h6eFucm3H9QziKuthy4rqX0j/uHKOJoH0U7y
+ 18JakgLN6AoktZeOeVHlRA3ugLXM=
+X-Google-Smtp-Source: AGHT+IH4cKNUlITRUeh3HVMEyRrubMDaM2MkzDKh2Lgrqv7hGyNqSd2/5RCB3H4qXgr1+eGArZaHPg2VpWILE4MUNxI=
+X-Received: by 2002:a17:907:96a8:b0:a51:8656:326f with SMTP id
+ hd40-20020a17090796a800b00a518656326fmr9180108ejc.74.1712632335225; Mon, 08
+ Apr 2024 20:12:15 -0700 (PDT)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: gmail.com
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
+References: <20240408064243.2219527-1-airlied@gmail.com>
+ <b7f005a5bc22cff08509ce75f8eee7925047e8ae.camel@nvidia.com>
+In-Reply-To: <b7f005a5bc22cff08509ce75f8eee7925047e8ae.camel@nvidia.com>
+From: Dave Airlie <airlied@gmail.com>
+Date: Tue, 9 Apr 2024 13:12:02 +1000
+Message-ID: <CAPM=9twzNqHeLKXaQL8RtSWD-Z1zvsyrqCgNhsd35cVFB38qFQ@mail.gmail.com>
+Subject: Re: [PATCH] nouveau: fix devinit paths to only handle display on GSP.
+To: Timur Tabi <ttabi@nvidia.com>
+Cc: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, 
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,84 +77,22 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
+On Mon, 8 Apr 2024 at 23:05, Timur Tabi <ttabi@nvidia.com> wrote:
+>
+> On Mon, 2024-04-08 at 16:42 +1000, Dave Airlie wrote:
+> > This reverts:
+> > nouveau/gsp: don't check devinit disable on GSP.
+> > and applies a further fix.
+> >
+> > It turns out the open gpu driver, checks this register, but only for
+> > display.
+> >
+> > Match that behaviour and only disable displays on turings.
+>
+> Why only on Turings?
 
-Running a lot of VK CTS in parallel against nouveau, once every
-few hours you might see something like this crash.
+The only is for disabling displays, not for the turings. The ampere
+devinit path only handle displays, it never tries to disable other
+engines so should be fine.
 
-BUG: kernel NULL pointer dereference, address: 0000000000000008
-PGD 8000000114e6e067 P4D 8000000114e6e067 PUD 109046067 PMD 0
-Oops: 0000 [#1] PREEMPT SMP PTI
-CPU: 7 PID: 53891 Comm: deqp-vk Not tainted 6.8.0-rc6+ #27
-Hardware name: Gigabyte Technology Co., Ltd. Z390 I AORUS PRO WIFI/Z390 I A=
-ORUS PRO WIFI-CF, BIOS F8 11/05/2021
-RIP: 0010:gp100_vmm_pgt_mem+0xe3/0x180 [nouveau]
-Code: c7 48 01 c8 49 89 45 58 85 d2 0f 84 95 00 00 00 41 0f b7 46 12 49 8b =
-7e 08 89 da 42 8d 2c f8 48 8b 47 08 41 83 c7 01 48 89 ee <48> 8b 40 08 ff d=
-0 0f 1f 00 49 8b 7e 08 48 89 d9 48 8d 75 04 48 c1
-RSP: 0000:ffffac20c5857838 EFLAGS: 00010202
-RAX: 0000000000000000 RBX: 00000000004d8001 RCX: 0000000000000001
-RDX: 00000000004d8001 RSI: 00000000000006d8 RDI: ffffa07afe332180
-RBP: 00000000000006d8 R08: ffffac20c5857ad0 R09: 0000000000ffff10
-R10: 0000000000000001 R11: ffffa07af27e2de0 R12: 000000000000001c
-R13: ffffac20c5857ad0 R14: ffffa07a96fe9040 R15: 000000000000001c
-FS:  00007fe395eed7c0(0000) GS:ffffa07e2c980000(0000) knlGS:000000000000000=
-0
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 0000000000000008 CR3: 000000011febe001 CR4: 00000000003706f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
-
-...
-
- ? gp100_vmm_pgt_mem+0xe3/0x180 [nouveau]
- ? gp100_vmm_pgt_mem+0x37/0x180 [nouveau]
- nvkm_vmm_iter+0x351/0xa20 [nouveau]
- ? __pfx_nvkm_vmm_ref_ptes+0x10/0x10 [nouveau]
- ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
- ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
- ? __lock_acquire+0x3ed/0x2170
- ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
- nvkm_vmm_ptes_get_map+0xc2/0x100 [nouveau]
- ? __pfx_nvkm_vmm_ref_ptes+0x10/0x10 [nouveau]
- ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
- nvkm_vmm_map_locked+0x224/0x3a0 [nouveau]
-
-Adding any sort of useful debug usually makes it go away, so I hand
-wrote the function in a line, and debugged the asm.
-
-Every so often pt->memory->ptrs is NULL. This ptrs ptr is set in
-the nv50_instobj_acquire called from nvkm_kmap.
-
-If Thread A and Thread B both get to nv50_instobj_acquire around
-the same time, and Thread A hits the refcount_set line, and in
-lockstep thread B succeeds at refcount_inc_not_zero, there is a
-chance the ptrs value won't have been stored since refcount_set
-is unordered. Force a memory barrier here, I picked smp_mb, since
-we want it on all CPUs and it's write followed by a read.
-
-Cc: linux-stable
-Signed-off-by: Dave Airlie <airlied@redhat.com>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c b/drivers/g=
-pu/drm/nouveau/nvkm/subdev/instmem/nv50.c
-index a7f3fc342d87..cbacc7b11f8c 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
-@@ -250,6 +250,9 @@ nv50_instobj_acquire(struct nvkm_memory *memory)
- =09=09=09iobj->base.memory.ptrs =3D &nv50_instobj_fast;
- =09=09else
- =09=09=09iobj->base.memory.ptrs =3D &nv50_instobj_slow;
-+=09=09/* barrier to ensure ptrs is written before another thread
-+=09=09   does refcount_inc_not_zero successfully. */
-+=09=09smp_mb();
- =09=09refcount_set(&iobj->maps, 1);
- =09}
-=20
---=20
-2.43.2
-
+Dave.
