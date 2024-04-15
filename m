@@ -2,28 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B14548A4B17
-	for <lists+nouveau@lfdr.de>; Mon, 15 Apr 2024 11:06:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 68C848A4C00
+	for <lists+nouveau@lfdr.de>; Mon, 15 Apr 2024 11:54:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0054F1123C6;
-	Mon, 15 Apr 2024 09:06:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 05A8110EC39;
+	Mon, 15 Apr 2024 09:54:00 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="CMuWnzLQ";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hs01.dakr.org (hs01.dk-develop.de [173.249.23.66])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C31E31123C6;
- Mon, 15 Apr 2024 09:06:35 +0000 (UTC)
-Message-ID: <b3121ea0-b0b1-4688-a533-7e19f6838c54@dakr.org>
-Date: Mon, 15 Apr 2024 11:06:24 +0200
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B7C91112415
+ for <nouveau@lists.freedesktop.org>; Mon, 15 Apr 2024 09:53:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1713174837;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=MTLrUg07ow5Ck/K3yim82eoap2P3OjY+HLnepVqu0oc=;
+ b=CMuWnzLQLSFl/Q4vaSAxWE5Duqp4AbC8QyBP8uPue3plP79pIH+Zx0Hp2zC5slpeZhB+kY
+ r+udWCabAYHajRByMG0bBPU3oeYbxdKP7XdefL8rzws/Qpk7GrZRLpQax908LklPX27MyT
+ IRO5d+5ohOrcum38VX0vj5sTFU56aDc=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-14-7KJwaYGUPM-bBZjQX6p0dQ-1; Mon, 15 Apr 2024 05:53:56 -0400
+X-MC-Unique: 7KJwaYGUPM-bBZjQX6p0dQ-1
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2d84af71cddso21873981fa.0
+ for <nouveau@lists.freedesktop.org>; Mon, 15 Apr 2024 02:53:56 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713174834; x=1713779634;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MTLrUg07ow5Ck/K3yim82eoap2P3OjY+HLnepVqu0oc=;
+ b=DZc5X38US8r7qjiIJV1Fyi7nDYDz9rer+K9Jk9sdScUIJe7bbSwAO9XzbgSqCo2FSe
+ zvY0mGZOyKqPEcottUTrkubN2c7aDjcogcFN9JObAqsXd26dPEIleu/XERCplWr86W/K
+ 1jANrQTcj5SDDUYJVsupsTeujW2wG/6gQQSHzGsKt69XVzdYcAsqpGJP91K7/22QhQbQ
+ 3F6g2vHEHz+7XFpKdZBwULwlBiPYfzuy+TmhLm8NQX2Udau10MRIBpcwblU/GB9vs74P
+ YOIVs3iCjmFwPziNqvio4/FI+OpW2jANAGtjG0o22CZGfP/F3MgK11IEOry5AVxFUx6A
+ lkUw==
+X-Gm-Message-State: AOJu0YxMJnxrgnqIo0r4HBrKK/Tojunk5nJ/SwqnMJ5q3t2AYAuz2zsp
+ kukxiKOVkAt/KsT8Dvvs1Eyq8+Ujn0Tnw/RQf8O526F6eP7yWJ5F9v+d8Ssyw7d+LnwXhg06EUg
+ 9dshMZ46a7TpO4MD1GQfsh/EiGaUpDS6rDSJj/SJuK870AV6o4u2c7zjAm/Kh+wbi5RbyX4JIcS
+ rYBm1NEdDlqJBdfoHsFKcV24nUw0vJ9S1aBj7WEm0QGg==
+X-Received: by 2002:a05:651c:208:b0:2da:8f63:edff with SMTP id
+ y8-20020a05651c020800b002da8f63edffmr674077ljn.24.1713174834547; 
+ Mon, 15 Apr 2024 02:53:54 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGeAsDSgFIN3nIWyP9pX2W4sJPAAR18UI4c/eRiW8zjEwkep/MwHMMCNd3bEgrNSW5QQ3YVsg==
+X-Received: by 2002:a05:651c:208:b0:2da:8f63:edff with SMTP id
+ y8-20020a05651c020800b002da8f63edffmr674061ljn.24.1713174834091; 
+ Mon, 15 Apr 2024 02:53:54 -0700 (PDT)
+Received: from cassiopeiae.. ([2a02:810d:4b3f:ee94:642:1aff:fe31:a19f])
+ by smtp.gmail.com with ESMTPSA id
+ q12-20020a05600c46cc00b00416e2c8b290sm18632522wmo.1.2024.04.15.02.53.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Apr 2024 02:53:53 -0700 (PDT)
+From: Danilo Krummrich <dakr@redhat.com>
+To: nouveau@lists.freedesktop.org
+Cc: dri-devel@lists.freedesktop.org,
+	Danilo Krummrich <dakr@redhat.com>
+Subject: [PATCH] drm/nouveau: fix duplicate pointer to struct drm_device
+Date: Mon, 15 Apr 2024 11:53:49 +0200
+Message-ID: <20240415095351.119072-1-dakr@redhat.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-Subject: Re: [PATCH] nouveau: fix instmem race condition around ptr stores
-To: Dave Airlie <airlied@gmail.com>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-References: <20240411011510.2546857-1-airlied@gmail.com>
-Content-Language: en-US
-From: Danilo Krummrich <me@dakr.org>
-In-Reply-To: <20240411011510.2546857-1-airlied@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -38,94 +88,37 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 4/11/24 03:15, Dave Airlie wrote:
-> From: Dave Airlie <airlied@redhat.com>
-> 
-> Running a lot of VK CTS in parallel against nouveau, once every
-> few hours you might see something like this crash.
-> 
-> BUG: kernel NULL pointer dereference, address: 0000000000000008
-> PGD 8000000114e6e067 P4D 8000000114e6e067 PUD 109046067 PMD 0
-> Oops: 0000 [#1] PREEMPT SMP PTI
-> CPU: 7 PID: 53891 Comm: deqp-vk Not tainted 6.8.0-rc6+ #27
-> Hardware name: Gigabyte Technology Co., Ltd. Z390 I AORUS PRO WIFI/Z390 I AORUS PRO WIFI-CF, BIOS F8 11/05/2021
-> RIP: 0010:gp100_vmm_pgt_mem+0xe3/0x180 [nouveau]
-> Code: c7 48 01 c8 49 89 45 58 85 d2 0f 84 95 00 00 00 41 0f b7 46 12 49 8b 7e 08 89 da 42 8d 2c f8 48 8b 47 08 41 83 c7 01 48 89 ee <48> 8b 40 08 ff d0 0f 1f 00 49 8b 7e 08 48 89 d9 48 8d 75 04 48 c1
-> RSP: 0000:ffffac20c5857838 EFLAGS: 00010202
-> RAX: 0000000000000000 RBX: 00000000004d8001 RCX: 0000000000000001
-> RDX: 00000000004d8001 RSI: 00000000000006d8 RDI: ffffa07afe332180
-> RBP: 00000000000006d8 R08: ffffac20c5857ad0 R09: 0000000000ffff10
-> R10: 0000000000000001 R11: ffffa07af27e2de0 R12: 000000000000001c
-> R13: ffffac20c5857ad0 R14: ffffa07a96fe9040 R15: 000000000000001c
-> FS:  00007fe395eed7c0(0000) GS:ffffa07e2c980000(0000) knlGS:0000000000000000
-> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> CR2: 0000000000000008 CR3: 000000011febe001 CR4: 00000000003706f0
-> DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-> DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-> Call Trace:
-> 
-> ...
-> 
->   ? gp100_vmm_pgt_mem+0xe3/0x180 [nouveau]
->   ? gp100_vmm_pgt_mem+0x37/0x180 [nouveau]
->   nvkm_vmm_iter+0x351/0xa20 [nouveau]
->   ? __pfx_nvkm_vmm_ref_ptes+0x10/0x10 [nouveau]
->   ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
->   ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
->   ? __lock_acquire+0x3ed/0x2170
->   ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
->   nvkm_vmm_ptes_get_map+0xc2/0x100 [nouveau]
->   ? __pfx_nvkm_vmm_ref_ptes+0x10/0x10 [nouveau]
->   ? __pfx_gp100_vmm_pgt_mem+0x10/0x10 [nouveau]
->   nvkm_vmm_map_locked+0x224/0x3a0 [nouveau]
-> 
-> Adding any sort of useful debug usually makes it go away, so I hand
-> wrote the function in a line, and debugged the asm.
-> 
-> Every so often pt->memory->ptrs is NULL. This ptrs ptr is set in
-> the nv50_instobj_acquire called from nvkm_kmap.
-> 
-> If Thread A and Thread B both get to nv50_instobj_acquire around
-> the same time, and Thread A hits the refcount_set line, and in
-> lockstep thread B succeeds at refcount_inc_not_zero, there is a
-> chance the ptrs value won't have been stored since refcount_set
-> is unordered. Force a memory barrier here, I picked smp_mb, since
-> we want it on all CPUs and it's write followed by a read.
-> 
-> v2: use paired smp_rmb/smp_wmb.
-> 
-> Cc: linux-stable
-> Signed-off-by: Dave Airlie <airlied@redhat.com>
+nouveau_uvmm_ioctl_vm_init() already has a pointer to struct drm_device,
+no need to derive another one from struct drm_file.
 
-Added a "Fixes:" tag and applied to drm-misc-fixes.
+Fixes: 266f7618e761 ("drm/nouveau: separately allocate struct nouveau_uvmm")
+Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_uvmm.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-> ---
->   drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c | 7 ++++++-
->   1 file changed, 6 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
-> index a7f3fc342d87..dd5b5a17ece0 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/instmem/nv50.c
-> @@ -222,8 +222,11 @@ nv50_instobj_acquire(struct nvkm_memory *memory)
->   	void __iomem *map = NULL;
->   
->   	/* Already mapped? */
-> -	if (refcount_inc_not_zero(&iobj->maps))
-> +	if (refcount_inc_not_zero(&iobj->maps)) {
-> +		/* read barrier match the wmb on refcount set */
-> +		smp_rmb();
->   		return iobj->map;
-> +	}
->   
->   	/* Take the lock, and re-check that another thread hasn't
->   	 * already mapped the object in the meantime.
-> @@ -250,6 +253,8 @@ nv50_instobj_acquire(struct nvkm_memory *memory)
->   			iobj->base.memory.ptrs = &nv50_instobj_fast;
->   		else
->   			iobj->base.memory.ptrs = &nv50_instobj_slow;
-> +		/* barrier to ensure the ptrs are written before refcount is set */
-> +		smp_wmb();
->   		refcount_set(&iobj->maps, 1);
->   	}
->   
+diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+index 0a0a11dc9ec0..929afd5bc773 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
+@@ -1812,13 +1812,12 @@ static const struct drm_gpuvm_ops gpuvm_ops = {
+ };
+ 
+ int
+-nouveau_uvmm_ioctl_vm_init(struct drm_device *dev,
++nouveau_uvmm_ioctl_vm_init(struct drm_device *drm,
+ 			   void *data,
+ 			   struct drm_file *file_priv)
+ {
+ 	struct nouveau_uvmm *uvmm;
+ 	struct nouveau_cli *cli = nouveau_cli(file_priv);
+-	struct drm_device *drm = cli->drm->dev;
+ 	struct drm_gem_object *r_obj;
+ 	struct drm_nouveau_vm_init *init = data;
+ 	u64 kernel_managed_end;
+
+base-commit: a57e191ebbaa0363dbf352cc37447c2230573e29
+prerequisite-patch-id: 2d453c82161ab6a188caae12e558e8c8d6c1a450
+-- 
+2.44.0
+
