@@ -2,72 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68C848A4C00
-	for <lists+nouveau@lfdr.de>; Mon, 15 Apr 2024 11:54:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BE378A4C03
+	for <lists+nouveau@lfdr.de>; Mon, 15 Apr 2024 11:54:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 05A8110EC39;
-	Mon, 15 Apr 2024 09:54:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BEF2411241B;
+	Mon, 15 Apr 2024 09:54:40 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="CMuWnzLQ";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="UR5aWAAT";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B7C91112415
- for <nouveau@lists.freedesktop.org>; Mon, 15 Apr 2024 09:53:58 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2BADC11241B
+ for <nouveau@lists.freedesktop.org>; Mon, 15 Apr 2024 09:54:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1713174837;
+ s=mimecast20190719; t=1713174879;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding;
- bh=MTLrUg07ow5Ck/K3yim82eoap2P3OjY+HLnepVqu0oc=;
- b=CMuWnzLQLSFl/Q4vaSAxWE5Duqp4AbC8QyBP8uPue3plP79pIH+Zx0Hp2zC5slpeZhB+kY
- r+udWCabAYHajRByMG0bBPU3oeYbxdKP7XdefL8rzws/Qpk7GrZRLpQax908LklPX27MyT
- IRO5d+5ohOrcum38VX0vj5sTFU56aDc=
-Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
- [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=mTxuoeIhHTx2QQNfpc8pvir1olgvTkja6Q/oXHH7tBY=;
+ b=UR5aWAATZhZy5P4kVuUy91yySaFjhtdaHZHMeJ4DMqPh2LfGFgQrCXMKFu0VzrOVzo6N2l
+ yb1RvWLs6jzzyXtclGq09C5fyEV7eXk32qi5xe0p/Nbyy5ZVoBQ/s6juwM8aM1N43761lj
+ qb2nPY1Lt+uvO9CXeEwKL7xvjwzWfaY=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-14-7KJwaYGUPM-bBZjQX6p0dQ-1; Mon, 15 Apr 2024 05:53:56 -0400
-X-MC-Unique: 7KJwaYGUPM-bBZjQX6p0dQ-1
-Received: by mail-lj1-f200.google.com with SMTP id
- 38308e7fff4ca-2d84af71cddso21873981fa.0
- for <nouveau@lists.freedesktop.org>; Mon, 15 Apr 2024 02:53:56 -0700 (PDT)
+ us-mta-180-GqdyNh5eN_-kShB1sdKITg-1; Mon, 15 Apr 2024 05:54:38 -0400
+X-MC-Unique: GqdyNh5eN_-kShB1sdKITg-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-417cf901ab4so11798855e9.1
+ for <nouveau@lists.freedesktop.org>; Mon, 15 Apr 2024 02:54:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713174834; x=1713779634;
+ d=1e100.net; s=20230601; t=1713174876; x=1713779676;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MTLrUg07ow5Ck/K3yim82eoap2P3OjY+HLnepVqu0oc=;
- b=DZc5X38US8r7qjiIJV1Fyi7nDYDz9rer+K9Jk9sdScUIJe7bbSwAO9XzbgSqCo2FSe
- zvY0mGZOyKqPEcottUTrkubN2c7aDjcogcFN9JObAqsXd26dPEIleu/XERCplWr86W/K
- 1jANrQTcj5SDDUYJVsupsTeujW2wG/6gQQSHzGsKt69XVzdYcAsqpGJP91K7/22QhQbQ
- 3F6g2vHEHz+7XFpKdZBwULwlBiPYfzuy+TmhLm8NQX2Udau10MRIBpcwblU/GB9vs74P
- YOIVs3iCjmFwPziNqvio4/FI+OpW2jANAGtjG0o22CZGfP/F3MgK11IEOry5AVxFUx6A
- lkUw==
-X-Gm-Message-State: AOJu0YxMJnxrgnqIo0r4HBrKK/Tojunk5nJ/SwqnMJ5q3t2AYAuz2zsp
- kukxiKOVkAt/KsT8Dvvs1Eyq8+Ujn0Tnw/RQf8O526F6eP7yWJ5F9v+d8Ssyw7d+LnwXhg06EUg
- 9dshMZ46a7TpO4MD1GQfsh/EiGaUpDS6rDSJj/SJuK870AV6o4u2c7zjAm/Kh+wbi5RbyX4JIcS
- rYBm1NEdDlqJBdfoHsFKcV24nUw0vJ9S1aBj7WEm0QGg==
-X-Received: by 2002:a05:651c:208:b0:2da:8f63:edff with SMTP id
- y8-20020a05651c020800b002da8f63edffmr674077ljn.24.1713174834547; 
- Mon, 15 Apr 2024 02:53:54 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGeAsDSgFIN3nIWyP9pX2W4sJPAAR18UI4c/eRiW8zjEwkep/MwHMMCNd3bEgrNSW5QQ3YVsg==
-X-Received: by 2002:a05:651c:208:b0:2da:8f63:edff with SMTP id
- y8-20020a05651c020800b002da8f63edffmr674061ljn.24.1713174834091; 
- Mon, 15 Apr 2024 02:53:54 -0700 (PDT)
+ bh=mTxuoeIhHTx2QQNfpc8pvir1olgvTkja6Q/oXHH7tBY=;
+ b=IXqRDVHVcGnOZHhQTjgdbNkWuUVigH1kQcCDjC/ezOBlkjfnVsmYV2qkIiZ0lWoCjO
+ ZKGg++N1zLrqzKg/gSdt2DZOMY+wKRr2OCOIE9Kur9u8ro1UBvZIDefkxHxdz5gV5tGI
+ Gauw3wvRwOS+0h8qy+d5q1yoyPCkRPQGtLacRJNYtjIGCYi8p44Md24++O1vESjqV9Dn
+ Cgdb9G46qT2v0tdxM3rSNM+lFIibC5hZJvRUY1f8ra5LW9IqrSH9ZU1rmXp0ZBCcqQ6g
+ x4lfcZUeFbquXEmZuXW4xxJ6/dIQDFjyUKnidrbsBRU3fH7vEaXSw/2qp8n6HWGyKeuJ
+ JE1w==
+X-Gm-Message-State: AOJu0Yw89gHJoXk6XM95NqZzwoHTtlzwEt0gjschoyQBlald2GhoWbFw
+ p+IVwrCHtKEGtjPo0MTvO9uuALau2Qv90bX8DgoUzm3VWD4HqBS/DmHJv16ZQguoydvJhAjnokg
+ esYxbmUC+/BLtUsSFk0JEOvxhEn6gsohWMobyQbD4B28ohSbCNOoFHMVEirz5Bhdf2w08LCjLrD
+ yKOzS25whTufSWuAgqRMqAAEjgm5Va8hMQRUhmzVOiAA==
+X-Received: by 2002:a05:600c:470f:b0:418:41a7:d032 with SMTP id
+ v15-20020a05600c470f00b0041841a7d032mr2258406wmo.13.1713174876384; 
+ Mon, 15 Apr 2024 02:54:36 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHAAxJVV7Ft7s08BNgaBvjuZ9SxAETqhJ/ICh3d9nFWtVy7rpmTVhzTNsyKEVAnTGtuoAH6kA==
+X-Received: by 2002:a05:600c:470f:b0:418:41a7:d032 with SMTP id
+ v15-20020a05600c470f00b0041841a7d032mr2258390wmo.13.1713174876000; 
+ Mon, 15 Apr 2024 02:54:36 -0700 (PDT)
 Received: from cassiopeiae.. ([2a02:810d:4b3f:ee94:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- q12-20020a05600c46cc00b00416e2c8b290sm18632522wmo.1.2024.04.15.02.53.53
+ k37-20020a05600c1ca500b004187450e4cesm1379392wms.29.2024.04.15.02.54.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Apr 2024 02:53:53 -0700 (PDT)
+ Mon, 15 Apr 2024 02:54:35 -0700 (PDT)
 From: Danilo Krummrich <dakr@redhat.com>
 To: nouveau@lists.freedesktop.org
 Cc: dri-devel@lists.freedesktop.org,
 	Danilo Krummrich <dakr@redhat.com>
-Subject: [PATCH] drm/nouveau: fix duplicate pointer to struct drm_device
-Date: Mon, 15 Apr 2024 11:53:49 +0200
-Message-ID: <20240415095351.119072-1-dakr@redhat.com>
+Subject: [PATCH] drm/nouveau: use vmemdup_array_user() in u_memcpya()
+Date: Mon, 15 Apr 2024 11:54:09 +0200
+Message-ID: <20240415095433.119163-1-dakr@redhat.com>
 X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
@@ -88,37 +88,33 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-nouveau_uvmm_ioctl_vm_init() already has a pointer to struct drm_device,
-no need to derive another one from struct drm_file.
+Now that we have vmemdup_array_user(), make use of it.
 
-Fixes: 266f7618e761 ("drm/nouveau: separately allocate struct nouveau_uvmm")
 Signed-off-by: Danilo Krummrich <dakr@redhat.com>
 ---
- drivers/gpu/drm/nouveau/nouveau_uvmm.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ drivers/gpu/drm/nouveau/nouveau_drv.h | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-index 0a0a11dc9ec0..929afd5bc773 100644
---- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-@@ -1812,13 +1812,12 @@ static const struct drm_gpuvm_ops gpuvm_ops = {
- };
- 
- int
--nouveau_uvmm_ioctl_vm_init(struct drm_device *dev,
-+nouveau_uvmm_ioctl_vm_init(struct drm_device *drm,
- 			   void *data,
- 			   struct drm_file *file_priv)
+diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
+index e239c6bf4afa..2038d60958e3 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_drv.h
++++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
+@@ -190,11 +190,8 @@ static inline void *
+ u_memcpya(uint64_t user, unsigned int nmemb, unsigned int size)
  {
- 	struct nouveau_uvmm *uvmm;
- 	struct nouveau_cli *cli = nouveau_cli(file_priv);
--	struct drm_device *drm = cli->drm->dev;
- 	struct drm_gem_object *r_obj;
- 	struct drm_nouveau_vm_init *init = data;
- 	u64 kernel_managed_end;
+ 	void __user *userptr = u64_to_user_ptr(user);
+-	size_t bytes;
+ 
+-	if (unlikely(check_mul_overflow(nmemb, size, &bytes)))
+-		return ERR_PTR(-EOVERFLOW);
+-	return vmemdup_user(userptr, bytes);
++	return vmemdup_array_user(userptr, nmemb, size);
+ }
+ 
+ #include <nvif/object.h>
 
 base-commit: a57e191ebbaa0363dbf352cc37447c2230573e29
-prerequisite-patch-id: 2d453c82161ab6a188caae12e558e8c8d6c1a450
+prerequisite-patch-id: d18b2d6615c58084a7027f4f1d9b51bd3f9dd83f
 -- 
 2.44.0
 
