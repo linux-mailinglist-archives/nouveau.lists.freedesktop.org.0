@@ -2,27 +2,27 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FE3A8A78CF
-	for <lists+nouveau@lfdr.de>; Wed, 17 Apr 2024 01:41:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1F778A78CC
+	for <lists+nouveau@lfdr.de>; Wed, 17 Apr 2024 01:41:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9D4A9112F4B;
-	Tue, 16 Apr 2024 23:41:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 15D04112F47;
+	Tue, 16 Apr 2024 23:41:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="lEK/yCQm";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="r3f35v3m";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2088.outbound.protection.outlook.com [40.107.223.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CE022112F48
- for <nouveau@lists.freedesktop.org>; Tue, 16 Apr 2024 23:41:33 +0000 (UTC)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2072.outbound.protection.outlook.com [40.107.94.72])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D640D112F43
+ for <nouveau@lists.freedesktop.org>; Tue, 16 Apr 2024 23:41:31 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nQHn+oZqjPG3bqXZAeSSJDqRY19/badLopBZo4fXLlqN8JI13UlD19Q+Bs1QNnROf5SgZWhLPBCDUr3VoNp6OGpSGQiduh2UYCW5z1BltK838GYb5+iJuKSNDbRKEvk89lzUvK/9MalXGG4izMHGphvFL5kzYVXaiVApNph42C1nM19PJJYkBdWld0Rkdd8zySAw3o63RHtpn7ixcuRi1GLUjetShH+a+EU32wmrNke5/t+D6A9YwS2gDzUxlIwZm4tSl9qzLheiXpSP6rv6zoOb2Y6BaVhJvZmeLH8Nyz2ggH65JjoZWmnIxt2CInmK4Q2lG9ZHgFSywnlJFASK0A==
+ b=TK/vU2N0Y6gJJpleoF24zP+XBziizFg3Fw4u8rO2FSlVc6sZj1H8xsmjNCcvMUpQWyVenLDoXTl+srDbi2qimxq6fLNbs4NoAYue/dgPYxmdQWYNz2sGDH+dHoAOv9sWMEFXzpjq2aUfUwZ/0sWp3NgUDQt6IQwkR7NdcFIN7eKFzpz+33uh1O8ukPAWG7viaTV9kJJQvGE9pPNd2ku2/lF/mnIwhTbv4qvKV01Mv0VA7F/tE4N30tfnoRnOJzfM5EwzhbnHUS8/ps/9x/enoyRkkcUmWF40rTB/xtNLUDqJEqOAHlu1JO4E9a+v7mhubDKDo8dvEsQkGxwL3lSoHA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vJGkrErL9MQWpDtIaEg6kppvpq0jMpjzGoQbKO7Furs=;
- b=TDPqLmekIU84vQpsQH5+96H+xSwJL1KTIOyoUHptIM9mUV8E6KD1+nWPlRHHwWEawM6Ip/lqzzNRxfJpbfx7FecCJ6eofLnyB4LaaaTWlmW8+bRZc05xOIaxt/SOgsgw9wmG50gcNL2JzWKx4aQyMXzTm2/nRxOYYaUhMd5NhI0+pdYDvmfNuT7dOuLq+sWp/lV7k5fGelx74PCa9UgZH98Kg6PsXTOYu35n7XjdjnxUwf4sP5SdYvwW9ZDhC4b/LAk7aSDCDBOxhmkBUWgGgndE3m1N4SvvniQJnJJa1Z4s0R4uvtzQEQVCD5747ZFOqCkVyUqDFKA2bAVOFa/CAg==
+ bh=234vLjXca16FVv7dOUnQZkUdjavwTwkDIiqxNog9IfM=;
+ b=QQAXACJ7jb4ljONwQtwFYWZYhfajiK4cenXYtHR0ioRk3lTK3MBj68YiFQLHTjEtLz46I+93vgdVVWjZ29rm8XMskry3ArdblOL9mes3J+XW1tqvuiYQze0u21f6Is1Ylr+peadMIHXoPWnBT5QMnKZOtr/ZhYs/cCytjDc4aJ1wB4c6dF1UA5+6fwGQbGNZHE46BXrrItUe9Z6n9bEIA7JxfjKmp8hD2OkGmok/tjr5uRa1mKUyeX8WZS7P6wqQRoOVSjxs7zrN9FNskejoKr6IE2sZyc0BhviXc48Q+QIuplcMpA1zT9MhamHhex4PcNFkLxHFD6WwDo9R+CX4Xw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.117.160) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
@@ -30,18 +30,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vJGkrErL9MQWpDtIaEg6kppvpq0jMpjzGoQbKO7Furs=;
- b=lEK/yCQmRZFnQHVmG5UhPwt7t/F8oWUEti5b0x3oYUwzplGSqj2t1Nli6SDqvvQSNl+xFjBIO3USKLwM8obNQ2ir5wFXbGiqESwRbIN4Ta2lZzrhdH3Yu1QlgGEbnYNtvk9QXcnvgZWeucOBaPu20y3rKnveAbfTujOhkDS+zgUhqTCR9PBsfwk82M0FLMUAa9GY7+KJafFMgvPC8UsEe5j+gZoVZpuTuwgPRAVTTcFJwZumock8Wh0FI187+bo8/t7QtO/7GLbCXsBSHC7mdmzDmEuOqRmNdATJaEi5BpsVa8a3hj6gMCs7C5dQqzR3FVDi+aTNIfY8PJzoeVp5CA==
-Received: from BN9PR03CA0662.namprd03.prod.outlook.com (2603:10b6:408:10e::7)
- by CH3PR12MB8235.namprd12.prod.outlook.com (2603:10b6:610:120::17)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=234vLjXca16FVv7dOUnQZkUdjavwTwkDIiqxNog9IfM=;
+ b=r3f35v3m0x/opNSLZ3gmUWAy33McCMjmZlY3Itkh39Nrrgnc1DXjxZIloQC/tNNBQYjgXphCqDN8aQUph2xSYmFCD/6Y+NEfzIVNJaTyXb3GyPmfOmXQMCqI4vk+clrdqgAvtrDrhMRxRg57J9cDLGmm56A2jdacqjaXlL5navC3XXT4omKoMq4Su/6N/tDvqY43YxC0ojGHHoaMqvslNbryO5b9aBhM71ULvy/ycQqnlSQE8dBLtWFE3fioOHem+7xogOe7u/7DAGZn46HyrQ9yAHZ3m+nwrbLsFO04gFyynihOcY+4omofYKvWrXZUF+ujCevTs54POft2gqqXRw==
+Received: from BN9PR03CA0481.namprd03.prod.outlook.com (2603:10b6:408:130::6)
+ by DM4PR12MB6424.namprd12.prod.outlook.com (2603:10b6:8:be::16) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.50; Tue, 16 Apr
  2024 23:41:29 +0000
-Received: from BN3PEPF0000B077.namprd04.prod.outlook.com
- (2603:10b6:408:10e:cafe::42) by BN9PR03CA0662.outlook.office365.com
- (2603:10b6:408:10e::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.34 via Frontend
- Transport; Tue, 16 Apr 2024 23:41:28 +0000
+Received: from BN3PEPF0000B071.namprd04.prod.outlook.com
+ (2603:10b6:408:130:cafe::7f) by BN9PR03CA0481.outlook.office365.com
+ (2603:10b6:408:130::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.32 via Frontend
+ Transport; Tue, 16 Apr 2024 23:41:29 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
@@ -50,23 +50,23 @@ Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
  216.228.117.160 as permitted sender) receiver=protection.outlook.com;
  client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
 Received: from mail.nvidia.com (216.228.117.160) by
- BN3PEPF0000B077.mail.protection.outlook.com (10.167.243.122) with Microsoft
+ BN3PEPF0000B071.mail.protection.outlook.com (10.167.243.116) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7452.22 via Frontend Transport; Tue, 16 Apr 2024 23:41:28 +0000
+ 15.20.7452.22 via Frontend Transport; Tue, 16 Apr 2024 23:41:29 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
  (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.41; Tue, 16 Apr
- 2024 16:41:12 -0700
+ 2024 16:41:13 -0700
 Received: from fedora.mshome.net (10.126.231.35) by rnnvmail201.nvidia.com
  (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.12; Tue, 16 Apr
- 2024 16:41:11 -0700
+ 2024 16:41:12 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: Ben Skeggs <bskeggs@nvidia.com>
-Subject: [PATCH 036/156] drm/nouveau/nvif: remove device rd/wr
-Date: Wed, 17 Apr 2024 09:38:02 +1000
-Message-ID: <20240416234002.19509-37-bskeggs@nvidia.com>
+Subject: [PATCH 037/156] drm/nouveau/nvif: remove disp chan rd/wr
+Date: Wed, 17 Apr 2024 09:38:03 +1000
+Message-ID: <20240416234002.19509-38-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240416234002.19509-1-bskeggs@nvidia.com>
 References: <20240416234002.19509-1-bskeggs@nvidia.com>
@@ -78,26 +78,26 @@ X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B077:EE_|CH3PR12MB8235:EE_
-X-MS-Office365-Filtering-Correlation-Id: 853ae2f7-1cd0-4be9-5ece-08dc5e6ebcf4
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B071:EE_|DM4PR12MB6424:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8ba7d5ef-1e02-4f89-9398-08dc5e6ebd4a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: RcQU52TCrhE9aQxAWV0A83UmBNW4hzmQ9vpjSQ4rfgurFvgXyr3vn+kHWHD7AEeMDLGh1SHuFQ/Mg3k5qdwp9c4f2XBqOofbM9FdmVzM4z4YK+UKyoQl6hve2K4D6zwtZ2t9l+VG3fLKIp5t0rYr9KnAEWfh3W3mIcFCiSo+RRykAVKbMh/v8f7Le9GbeohUEiBADr6iZeYxuX4DiaXAWI6dgDd5VP7ifOsynayhpufGKwVfQbEYIxWE3WBEc4vX223DyXWTO+YAUWvqJiPyxx8ILNKna+Q7lGxFh7PukQMhXRHFBkoPYKZiivv05hgUIhxYyMQpiX7tcmir5MEZws4DciHYjtJ/llIzVZca3ZLm5arRexebtXDunor58FijNGY36/srkzFpdIUkM3mijo9EBDW3lrzJdw1EU5646MRA5JCgNaVc9B//+8M8otL7iYTHBFBsOpvVWL8kHc53MEsnfsEcXFWnwx4ao3dsjouExKKtpT6szoUp0rld/abfJ3243KQ9UWjYioxTlM11A2tKPrtqw1xJcbI/YS5AvQWqf/byJD08sk8U4aIvZerFQRrhOg3n/lCEZ7vlSRhdWj6uDbAWhxo8J3x5TcQUagB1VgzIeuRGIAgPbUjWmP+7LChKxHXCfWxwbeFxG+skiigKTNc8Wsb16wyGDBPzfr32abN0+WBbggoCK8krMlFFTO+sO+RjmSsnV9hBJs43ELb+q0BnDrlVjSYKEBBHMrKhG78DvsBsJQ89NQxiXPRJ
+X-Microsoft-Antispam-Message-Info: kVBW3ftKsVloKXyfKVDoS7cjr7ZIheCIJ+9V129QiDXsB+EHRgvzriiDyJwlGJh6qp77Y7gDPk3dvQkqdvTNVUH8+EIvFuvQ5Qh8Ne4ZO9VD12/4Uk7NlBYdSbSlxiFde3Vo324oydCSjT/EBR4z3qVMv8wdDCOu5fGjMKntiJ2Uy3c5oYWXytpq4xWZwWhA+NSNBCEDRMNk71Q15r1X/RM2It83aojfa+nxByiACzNP0dIMtgvuml22M4qK+m2oD9V1JSD4pE08ZjLfnYl+QwLjnZW0P/IamqhzzWALeApHpNvUcmdn3MYo+EpAkXVaOly0PqKvBcWnj/pioMLUG491odvL9s/LxgLL6hupd9/XZhSubS9fmjlut27IYClPI1/zBGRMcPUuqI0Jiu5kee7wN2Dp0tylFrBcjhb+b3d8BjaRIGLb1A7YwoZjy3d4YWmMCaKsyq+cCs1G0+6sB6TKOoZ+SFS3nG9G/RgtJoLx1vO+zNuMGhiZqK4aBT8r/LuruVq3WyU78dAoK7ECriYJlg0YHnbYqcVVKuCfQK9GMKa3VPXlyBQwKqf+ht/SHInl7T8L/gdZ1PsgI7r1kdMd0NanBXRZUrwbZnKOS+hDeGhOH4u3DFYMqkNb0uIVOibRkz1NudRsbL/jsaCnDrp4mhIIUbXLP/eI2fdarUTT6LDVW6wdjrKhz4gZpFXA+k7Fznp00zuoJRxqyiGDs1ttq/UwsyRzu1aP4spo5Kxmu2Z1N19d/heGCriyUCkg
 X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
- SFS:(13230031)(1800799015)(36860700004)(376005)(82310400014); DIR:OUT;
+ SFS:(13230031)(82310400014)(36860700004)(1800799015)(376005); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2024 23:41:28.6812 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 853ae2f7-1cd0-4be9-5ece-08dc5e6ebcf4
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2024 23:41:29.2931 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8ba7d5ef-1e02-4f89-9398-08dc5e6ebd4a
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B077.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B071.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8235
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6424
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -112,75 +112,260 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-- device is always mapped now, these are unneeded
+- require display channel allocations to use map() instead
 
 Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 ---
- .../drm/nouveau/include/nvkm/core/object.h    |  8 ---
- drivers/gpu/drm/nouveau/nvkm/core/ioctl.c     | 10 ----
- drivers/gpu/drm/nouveau/nvkm/core/object.c    | 32 -----------
- drivers/gpu/drm/nouveau/nvkm/core/oproxy.c    | 28 ----------
- drivers/gpu/drm/nouveau/nvkm/device/user.c    | 54 -------------------
- 5 files changed, 132 deletions(-)
+ drivers/gpu/drm/nouveau/dispnv50/disp.c       |  7 ++-
+ drivers/gpu/drm/nouveau/include/nvif/ioctl.h  | 20 --------
+ drivers/gpu/drm/nouveau/include/nvif/object.h | 17 ++-----
+ .../drm/nouveau/include/nvkm/core/object.h    |  4 --
+ drivers/gpu/drm/nouveau/nvif/object.c         | 37 --------------
+ drivers/gpu/drm/nouveau/nvkm/core/ioctl.c     | 49 +------------------
+ drivers/gpu/drm/nouveau/nvkm/core/object.c    | 16 ------
+ drivers/gpu/drm/nouveau/nvkm/core/oproxy.c    | 14 ------
+ .../gpu/drm/nouveau/nvkm/engine/disp/chan.c   | 24 ---------
+ 9 files changed, 10 insertions(+), 178 deletions(-)
 
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+index 31b46a62b501..4508c24720e2 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+@@ -93,8 +93,11 @@ nv50_chan_create(struct nvif_device *device, struct nvif_object *disp,
+ 				ret = nvif_object_ctor(disp, "kmsChan", 0,
+ 						       oclass[0], data, size,
+ 						       &chan->user);
+-				if (ret == 0)
+-					nvif_object_map(&chan->user, NULL, 0);
++				if (ret == 0) {
++					ret = nvif_object_map(&chan->user, NULL, 0);
++					if (ret)
++						nvif_object_dtor(&chan->user);
++				}
+ 				nvif_object_sclass_put(&sclass);
+ 				return ret;
+ 			}
+diff --git a/drivers/gpu/drm/nouveau/include/nvif/ioctl.h b/drivers/gpu/drm/nouveau/include/nvif/ioctl.h
+index 1e74245621e0..e825c8a1d9ca 100644
+--- a/drivers/gpu/drm/nouveau/include/nvif/ioctl.h
++++ b/drivers/gpu/drm/nouveau/include/nvif/ioctl.h
+@@ -8,8 +8,6 @@ struct nvif_ioctl_v0 {
+ #define NVIF_IOCTL_V0_NEW                                                  0x02
+ #define NVIF_IOCTL_V0_DEL                                                  0x03
+ #define NVIF_IOCTL_V0_MTHD                                                 0x04
+-#define NVIF_IOCTL_V0_RD                                                   0x05
+-#define NVIF_IOCTL_V0_WR                                                   0x06
+ #define NVIF_IOCTL_V0_MAP                                                  0x07
+ #define NVIF_IOCTL_V0_UNMAP                                                0x08
+ 	__u8  type;
+@@ -60,24 +58,6 @@ struct nvif_ioctl_mthd_v0 {
+ 	__u8  data[];		/* method data (class.h) */
+ };
+ 
+-struct nvif_ioctl_rd_v0 {
+-	/* nvif_ioctl ... */
+-	__u8  version;
+-	__u8  size;
+-	__u8  pad02[2];
+-	__u32 data;
+-	__u64 addr;
+-};
+-
+-struct nvif_ioctl_wr_v0 {
+-	/* nvif_ioctl ... */
+-	__u8  version;
+-	__u8  size;
+-	__u8  pad02[2];
+-	__u32 data;
+-	__u64 addr;
+-};
+-
+ struct nvif_ioctl_map_v0 {
+ 	/* nvif_ioctl ... */
+ 	__u8  version;
+diff --git a/drivers/gpu/drm/nouveau/include/nvif/object.h b/drivers/gpu/drm/nouveau/include/nvif/object.h
+index 478cbb8f2dfe..8d205b6af46a 100644
+--- a/drivers/gpu/drm/nouveau/include/nvif/object.h
++++ b/drivers/gpu/drm/nouveau/include/nvif/object.h
+@@ -34,8 +34,6 @@ void nvif_object_dtor(struct nvif_object *);
+ int  nvif_object_ioctl(struct nvif_object *, void *, u32, void **);
+ int  nvif_object_sclass_get(struct nvif_object *, struct nvif_sclass **);
+ void nvif_object_sclass_put(struct nvif_sclass **);
+-u32  nvif_object_rd(struct nvif_object *, int, u64);
+-void nvif_object_wr(struct nvif_object *, int, u64, u32);
+ int  nvif_object_mthd(struct nvif_object *, u32, void *, u32);
+ int  nvif_object_map_handle(struct nvif_object *, void *, u32,
+ 			    u64 *handle, u64 *length);
+@@ -47,20 +45,11 @@ void nvif_object_unmap(struct nvif_object *);
+ #define nvif_object(a) (a)->object
+ 
+ #define nvif_rd(a,f,b,c) ({                                                    \
+-	struct nvif_object *_object = (a);                                     \
+-	u32 _data;                                                             \
+-	if (likely(_object->map.ptr))                                          \
+-		_data = f((u8 __iomem *)_object->map.ptr + (c));               \
+-	else                                                                   \
+-		_data = nvif_object_rd(_object, (b), (c));                     \
++	u32 _data = f((u8 __iomem *)(a)->map.ptr + (c));                       \
+ 	_data;                                                                 \
+ })
+ #define nvif_wr(a,f,b,c,d) ({                                                  \
+-	struct nvif_object *_object = (a);                                     \
+-	if (likely(_object->map.ptr))                                          \
+-		f((d), (u8 __iomem *)_object->map.ptr + (c));                  \
+-	else                                                                   \
+-		nvif_object_wr(_object, (b), (c), (d));                        \
++	f((d), (u8 __iomem *)(a)->map.ptr + (c));                              \
+ })
+ #define nvif_rd08(a,b) ({ ((u8)nvif_rd((a), ioread8, 1, (b))); })
+ #define nvif_rd16(a,b) ({ ((u16)nvif_rd((a), ioread16_native, 2, (b))); })
+@@ -69,7 +58,7 @@ void nvif_object_unmap(struct nvif_object *);
+ #define nvif_wr16(a,b,c) nvif_wr((a), iowrite16_native, 2, (b), (u16)(c))
+ #define nvif_wr32(a,b,c) nvif_wr((a), iowrite32_native, 4, (b), (u32)(c))
+ #define nvif_mask(a,b,c,d) ({                                                  \
+-	struct nvif_object *__object = (a);                                    \
++	typeof(a) __object = (a);                                              \
+ 	u32 _addr = (b), _data = nvif_rd32(__object, _addr);                   \
+ 	nvif_wr32(__object, _addr, (_data & ~(c)) | (d));                      \
+ 	_data;                                                                 \
 diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/object.h b/drivers/gpu/drm/nouveau/include/nvkm/core/object.h
-index d4f1c964ba31..c91abac44bd6 100644
+index c91abac44bd6..10107ef3ca49 100644
 --- a/drivers/gpu/drm/nouveau/include/nvkm/core/object.h
 +++ b/drivers/gpu/drm/nouveau/include/nvkm/core/object.h
-@@ -33,11 +33,7 @@ struct nvkm_object_func {
+@@ -33,8 +33,6 @@ struct nvkm_object_func {
  	int (*map)(struct nvkm_object *, void *argv, u32 argc,
  		   enum nvkm_object_map *, u64 *addr, u64 *size);
  	int (*unmap)(struct nvkm_object *);
--	int (*rd08)(struct nvkm_object *, u64 addr, u8 *data);
--	int (*rd16)(struct nvkm_object *, u64 addr, u16 *data);
- 	int (*rd32)(struct nvkm_object *, u64 addr, u32 *data);
--	int (*wr08)(struct nvkm_object *, u64 addr, u8 data);
--	int (*wr16)(struct nvkm_object *, u64 addr, u16 data);
- 	int (*wr32)(struct nvkm_object *, u64 addr, u32 data);
+-	int (*rd32)(struct nvkm_object *, u64 addr, u32 *data);
+-	int (*wr32)(struct nvkm_object *, u64 addr, u32 data);
  	int (*bind)(struct nvkm_object *, struct nvkm_gpuobj *, int align,
  		    struct nvkm_gpuobj **);
-@@ -61,11 +57,7 @@ int nvkm_object_ntfy(struct nvkm_object *, u32 mthd, struct nvkm_event **);
+ 	int (*sclass)(struct nvkm_object *, int index, struct nvkm_oclass *);
+@@ -57,8 +55,6 @@ int nvkm_object_ntfy(struct nvkm_object *, u32 mthd, struct nvkm_event **);
  int nvkm_object_map(struct nvkm_object *, void *argv, u32 argc,
  		    enum nvkm_object_map *, u64 *addr, u64 *size);
  int nvkm_object_unmap(struct nvkm_object *);
--int nvkm_object_rd08(struct nvkm_object *, u64 addr, u8  *data);
--int nvkm_object_rd16(struct nvkm_object *, u64 addr, u16 *data);
- int nvkm_object_rd32(struct nvkm_object *, u64 addr, u32 *data);
--int nvkm_object_wr08(struct nvkm_object *, u64 addr, u8   data);
--int nvkm_object_wr16(struct nvkm_object *, u64 addr, u16  data);
- int nvkm_object_wr32(struct nvkm_object *, u64 addr, u32  data);
+-int nvkm_object_rd32(struct nvkm_object *, u64 addr, u32 *data);
+-int nvkm_object_wr32(struct nvkm_object *, u64 addr, u32  data);
  int nvkm_object_bind(struct nvkm_object *, struct nvkm_gpuobj *, int align,
  		     struct nvkm_gpuobj **);
+ 
+diff --git a/drivers/gpu/drm/nouveau/nvif/object.c b/drivers/gpu/drm/nouveau/nvif/object.c
+index 2b3e05197846..8a2a7bfec2f8 100644
+--- a/drivers/gpu/drm/nouveau/nvif/object.c
++++ b/drivers/gpu/drm/nouveau/nvif/object.c
+@@ -97,43 +97,6 @@ nvif_object_sclass_get(struct nvif_object *object, struct nvif_sclass **psclass)
+ 	return ret;
+ }
+ 
+-u32
+-nvif_object_rd(struct nvif_object *object, int size, u64 addr)
+-{
+-	struct {
+-		struct nvif_ioctl_v0 ioctl;
+-		struct nvif_ioctl_rd_v0 rd;
+-	} args = {
+-		.ioctl.type = NVIF_IOCTL_V0_RD,
+-		.rd.size = size,
+-		.rd.addr = addr,
+-	};
+-	int ret = nvif_object_ioctl(object, &args, sizeof(args), NULL);
+-	if (ret) {
+-		/*XXX: warn? */
+-		return 0;
+-	}
+-	return args.rd.data;
+-}
+-
+-void
+-nvif_object_wr(struct nvif_object *object, int size, u64 addr, u32 data)
+-{
+-	struct {
+-		struct nvif_ioctl_v0 ioctl;
+-		struct nvif_ioctl_wr_v0 wr;
+-	} args = {
+-		.ioctl.type = NVIF_IOCTL_V0_WR,
+-		.wr.size = size,
+-		.wr.addr = addr,
+-		.wr.data = data,
+-	};
+-	int ret = nvif_object_ioctl(object, &args, sizeof(args), NULL);
+-	if (ret) {
+-		/*XXX: warn? */
+-	}
+-}
+-
+ int
+ nvif_object_mthd(struct nvif_object *object, u32 mthd, void *data, u32 size)
+ {
 diff --git a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-index 584fc43c0d75..95e9537e1d7c 100644
+index 95e9537e1d7c..45051a1249da 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-@@ -206,14 +206,6 @@ nvkm_ioctl_rd(struct nvkm_client *client,
- 		nvif_ioctl(object, "rd vers %d size %d addr %016llx\n",
- 			   args->v0.version, args->v0.size, args->v0.addr);
- 		switch (args->v0.size) {
--		case 1:
--			ret = nvkm_object_rd08(object, args->v0.addr, &v.b08);
--			args->v0.data = v.b08;
+@@ -191,59 +191,14 @@ static int
+ nvkm_ioctl_rd(struct nvkm_client *client,
+ 	      struct nvkm_object *object, void *data, u32 size)
+ {
+-	union {
+-		struct nvif_ioctl_rd_v0 v0;
+-	} *args = data;
+-	union {
+-		u8  b08;
+-		u16 b16;
+-		u32 b32;
+-	} v;
+-	int ret = -ENOSYS;
+-
+-	nvif_ioctl(object, "rd size %d\n", size);
+-	if (!(ret = nvif_unpack(ret, &data, &size, args->v0, 0, 0, false))) {
+-		nvif_ioctl(object, "rd vers %d size %d addr %016llx\n",
+-			   args->v0.version, args->v0.size, args->v0.addr);
+-		switch (args->v0.size) {
+-		case 4:
+-			ret = nvkm_object_rd32(object, args->v0.addr, &v.b32);
+-			args->v0.data = v.b32;
 -			break;
--		case 2:
--			ret = nvkm_object_rd16(object, args->v0.addr, &v.b16);
--			args->v0.data = v.b16;
+-		default:
+-			ret = -EINVAL;
 -			break;
- 		case 4:
- 			ret = nvkm_object_rd32(object, args->v0.addr, &v.b32);
- 			args->v0.data = v.b32;
-@@ -246,8 +238,6 @@ nvkm_ioctl_wr(struct nvkm_client *client,
- 		return ret;
+-		}
+-	}
+-
+-	return ret;
++	return -ENOSYS;
+ }
  
- 	switch (args->v0.size) {
--	case 1: return nvkm_object_wr08(object, args->v0.addr, args->v0.data);
--	case 2: return nvkm_object_wr16(object, args->v0.addr, args->v0.data);
- 	case 4: return nvkm_object_wr32(object, args->v0.addr, args->v0.data);
- 	default:
- 		break;
+ static int
+ nvkm_ioctl_wr(struct nvkm_client *client,
+ 	      struct nvkm_object *object, void *data, u32 size)
+ {
+-	union {
+-		struct nvif_ioctl_wr_v0 v0;
+-	} *args = data;
+-	int ret = -ENOSYS;
+-
+-	nvif_ioctl(object, "wr size %d\n", size);
+-	if (!(ret = nvif_unpack(ret, &data, &size, args->v0, 0, 0, false))) {
+-		nvif_ioctl(object,
+-			   "wr vers %d size %d addr %016llx data %08x\n",
+-			   args->v0.version, args->v0.size, args->v0.addr,
+-			   args->v0.data);
+-	} else
+-		return ret;
+-
+-	switch (args->v0.size) {
+-	case 4: return nvkm_object_wr32(object, args->v0.addr, args->v0.data);
+-	default:
+-		break;
+-	}
+-
+-	return -EINVAL;
++	return -ENOSYS;
+ }
+ 
+ static int
 diff --git a/drivers/gpu/drm/nouveau/nvkm/core/object.c b/drivers/gpu/drm/nouveau/nvkm/core/object.c
-index 580b8c7f25af..913c3bae51f7 100644
+index 913c3bae51f7..390c265cf8af 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/core/object.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/core/object.c
 @@ -132,22 +132,6 @@ nvkm_object_unmap(struct nvkm_object *object)
@@ -188,172 +373,98 @@ index 580b8c7f25af..913c3bae51f7 100644
  }
  
 -int
--nvkm_object_rd08(struct nvkm_object *object, u64 addr, u8 *data)
+-nvkm_object_rd32(struct nvkm_object *object, u64 addr, u32 *data)
 -{
--	if (likely(object->func->rd08))
--		return object->func->rd08(object, addr, data);
+-	if (likely(object->func->rd32))
+-		return object->func->rd32(object, addr, data);
 -	return -ENODEV;
 -}
 -
 -int
--nvkm_object_rd16(struct nvkm_object *object, u64 addr, u16 *data)
+-nvkm_object_wr32(struct nvkm_object *object, u64 addr, u32 data)
 -{
--	if (likely(object->func->rd16))
--		return object->func->rd16(object, addr, data);
+-	if (likely(object->func->wr32))
+-		return object->func->wr32(object, addr, data);
 -	return -ENODEV;
 -}
 -
  int
- nvkm_object_rd32(struct nvkm_object *object, u64 addr, u32 *data)
- {
-@@ -156,22 +140,6 @@ nvkm_object_rd32(struct nvkm_object *object, u64 addr, u32 *data)
- 	return -ENODEV;
- }
- 
--int
--nvkm_object_wr08(struct nvkm_object *object, u64 addr, u8 data)
--{
--	if (likely(object->func->wr08))
--		return object->func->wr08(object, addr, data);
--	return -ENODEV;
--}
--
--int
--nvkm_object_wr16(struct nvkm_object *object, u64 addr, u16 data)
--{
--	if (likely(object->func->wr16))
--		return object->func->wr16(object, addr, data);
--	return -ENODEV;
--}
--
- int
- nvkm_object_wr32(struct nvkm_object *object, u64 addr, u32 data)
- {
+ nvkm_object_bind(struct nvkm_object *object, struct nvkm_gpuobj *gpuobj,
+ 		 int align, struct nvkm_gpuobj **pgpuobj)
 diff --git a/drivers/gpu/drm/nouveau/nvkm/core/oproxy.c b/drivers/gpu/drm/nouveau/nvkm/core/oproxy.c
-index 3385528da650..afc10ec256a7 100644
+index afc10ec256a7..5db80d1780f0 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/core/oproxy.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/core/oproxy.c
-@@ -55,36 +55,12 @@ nvkm_oproxy_unmap(struct nvkm_object *object)
+@@ -55,18 +55,6 @@ nvkm_oproxy_unmap(struct nvkm_object *object)
  	return nvkm_object_unmap(oproxy->object);
  }
  
 -static int
--nvkm_oproxy_rd08(struct nvkm_object *object, u64 addr, u8 *data)
+-nvkm_oproxy_rd32(struct nvkm_object *object, u64 addr, u32 *data)
 -{
--	return nvkm_object_rd08(nvkm_oproxy(object)->object, addr, data);
+-	return nvkm_object_rd32(nvkm_oproxy(object)->object, addr, data);
 -}
 -
 -static int
--nvkm_oproxy_rd16(struct nvkm_object *object, u64 addr, u16 *data)
+-nvkm_oproxy_wr32(struct nvkm_object *object, u64 addr, u32 data)
 -{
--	return nvkm_object_rd16(nvkm_oproxy(object)->object, addr, data);
+-	return nvkm_object_wr32(nvkm_oproxy(object)->object, addr, data);
 -}
 -
  static int
- nvkm_oproxy_rd32(struct nvkm_object *object, u64 addr, u32 *data)
- {
- 	return nvkm_object_rd32(nvkm_oproxy(object)->object, addr, data);
- }
- 
--static int
--nvkm_oproxy_wr08(struct nvkm_object *object, u64 addr, u8 data)
--{
--	return nvkm_object_wr08(nvkm_oproxy(object)->object, addr, data);
--}
--
--static int
--nvkm_oproxy_wr16(struct nvkm_object *object, u64 addr, u16 data)
--{
--	return nvkm_object_wr16(nvkm_oproxy(object)->object, addr, data);
--}
--
- static int
- nvkm_oproxy_wr32(struct nvkm_object *object, u64 addr, u32 data)
- {
-@@ -197,11 +173,7 @@ nvkm_oproxy_func = {
+ nvkm_oproxy_bind(struct nvkm_object *object, struct nvkm_gpuobj *parent,
+ 		 int align, struct nvkm_gpuobj **pgpuobj)
+@@ -173,8 +161,6 @@ nvkm_oproxy_func = {
  	.ntfy = nvkm_oproxy_ntfy,
  	.map = nvkm_oproxy_map,
  	.unmap = nvkm_oproxy_unmap,
--	.rd08 = nvkm_oproxy_rd08,
--	.rd16 = nvkm_oproxy_rd16,
- 	.rd32 = nvkm_oproxy_rd32,
--	.wr08 = nvkm_oproxy_wr08,
--	.wr16 = nvkm_oproxy_wr16,
- 	.wr32 = nvkm_oproxy_wr32,
+-	.rd32 = nvkm_oproxy_rd32,
+-	.wr32 = nvkm_oproxy_wr32,
  	.bind = nvkm_oproxy_bind,
  	.sclass = nvkm_oproxy_sclass,
-diff --git a/drivers/gpu/drm/nouveau/nvkm/device/user.c b/drivers/gpu/drm/nouveau/nvkm/device/user.c
-index 65bd6712bce2..d7f75b3a43c8 100644
---- a/drivers/gpu/drm/nouveau/nvkm/device/user.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/device/user.c
-@@ -202,54 +202,6 @@ nvkm_udevice_mthd(struct nvkm_object *object, u32 mthd, void *data, u32 size)
- 	return -EINVAL;
- }
+ 	.uevent = nvkm_oproxy_uevent,
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.c
+index d5e18daed79f..4e43ee383c34 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/chan.c
+@@ -26,28 +26,6 @@
+ 
+ #include <nvif/if0014.h>
  
 -static int
--nvkm_udevice_rd08(struct nvkm_object *object, u64 addr, u8 *data)
+-nvkm_disp_chan_rd32(struct nvkm_object *object, u64 addr, u32 *data)
 -{
--	struct nvkm_udevice *udev = nvkm_udevice(object);
--	*data = nvkm_rd08(udev->device, addr);
+-	struct nvkm_disp_chan *chan = nvkm_disp_chan(object);
+-	struct nvkm_device *device = chan->disp->engine.subdev.device;
+-	u64 size, base = chan->func->user(chan, &size);
+-
+-	*data = nvkm_rd32(device, base + addr);
 -	return 0;
 -}
 -
 -static int
--nvkm_udevice_rd16(struct nvkm_object *object, u64 addr, u16 *data)
+-nvkm_disp_chan_wr32(struct nvkm_object *object, u64 addr, u32 data)
 -{
--	struct nvkm_udevice *udev = nvkm_udevice(object);
--	*data = nvkm_rd16(udev->device, addr);
--	return 0;
--}
+-	struct nvkm_disp_chan *chan = nvkm_disp_chan(object);
+-	struct nvkm_device *device = chan->disp->engine.subdev.device;
+-	u64 size, base = chan->func->user(chan, &size);
 -
--static int
--nvkm_udevice_rd32(struct nvkm_object *object, u64 addr, u32 *data)
--{
--	struct nvkm_udevice *udev = nvkm_udevice(object);
--	*data = nvkm_rd32(udev->device, addr);
--	return 0;
--}
--
--static int
--nvkm_udevice_wr08(struct nvkm_object *object, u64 addr, u8 data)
--{
--	struct nvkm_udevice *udev = nvkm_udevice(object);
--	nvkm_wr08(udev->device, addr, data);
--	return 0;
--}
--
--static int
--nvkm_udevice_wr16(struct nvkm_object *object, u64 addr, u16 data)
--{
--	struct nvkm_udevice *udev = nvkm_udevice(object);
--	nvkm_wr16(udev->device, addr, data);
--	return 0;
--}
--
--static int
--nvkm_udevice_wr32(struct nvkm_object *object, u64 addr, u32 data)
--{
--	struct nvkm_udevice *udev = nvkm_udevice(object);
--	nvkm_wr32(udev->device, addr, data);
+-	nvkm_wr32(device, base + addr, data);
 -	return 0;
 -}
 -
  static int
- nvkm_udevice_map(struct nvkm_object *object, void *argv, u32 argc,
- 		 enum nvkm_object_map *type, u64 *addr, u64 *size)
-@@ -362,12 +314,6 @@ nvkm_udevice = {
- 	.fini = nvkm_udevice_fini,
- 	.mthd = nvkm_udevice_mthd,
- 	.map = nvkm_udevice_map,
--	.rd08 = nvkm_udevice_rd08,
--	.rd16 = nvkm_udevice_rd16,
--	.rd32 = nvkm_udevice_rd32,
--	.wr08 = nvkm_udevice_wr08,
--	.wr16 = nvkm_udevice_wr16,
--	.wr32 = nvkm_udevice_wr32,
- 	.sclass = nvkm_udevice_child_get,
- };
- 
+ nvkm_disp_chan_ntfy(struct nvkm_object *object, u32 type, struct nvkm_event **pevent)
+ {
+@@ -188,8 +166,6 @@ nvkm_disp_chan = {
+ 	.dtor = nvkm_disp_chan_dtor,
+ 	.init = nvkm_disp_chan_init,
+ 	.fini = nvkm_disp_chan_fini,
+-	.rd32 = nvkm_disp_chan_rd32,
+-	.wr32 = nvkm_disp_chan_wr32,
+ 	.ntfy = nvkm_disp_chan_ntfy,
+ 	.map = nvkm_disp_chan_map,
+ 	.sclass = nvkm_disp_chan_child_get,
 -- 
 2.41.0
 
