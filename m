@@ -2,71 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2911D8A78EC
-	for <lists+nouveau@lfdr.de>; Wed, 17 Apr 2024 01:42:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 783E98A78EF
+	for <lists+nouveau@lfdr.de>; Wed, 17 Apr 2024 01:42:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3D63F112F65;
-	Tue, 16 Apr 2024 23:42:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 00145112F64;
+	Tue, 16 Apr 2024 23:42:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="SqEYk4gq";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="imJgNX48";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2084.outbound.protection.outlook.com [40.107.244.84])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 36B18112F66
- for <nouveau@lists.freedesktop.org>; Tue, 16 Apr 2024 23:42:02 +0000 (UTC)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2066.outbound.protection.outlook.com [40.107.243.66])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A0FD8112F5E
+ for <nouveau@lists.freedesktop.org>; Tue, 16 Apr 2024 23:42:03 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=S9xn3dRbz9LlETZ4aMFP7qqmRw9ib8qIXT1CH4S42FtcTOI17l48v0NdurjKy5MgjxeTQIylOBM/dk8le7vPcuDJN9884SnG97HfVzIjXXrc2rKFUIV7QPk/6PJT4nZdG1QHYMljmfpUsX4aAsboD43AMXt6DECgdp5KPFDYoKkTJGwHSCGWaY9/Of0w7cbI7HKDHvXT950deeO6t0JE/wwP7PXr64hInDQs8dDlXR9/Xpr9zvj2uLcQylQpdsTL+6UWUlwQnSYrArWSIQ2WLZwR/i6P6GcuvwXQP66w1zqeDq5tn8X4dvRM5X6IyctzwqEiKkVO7oX9O/+rA4WYkQ==
+ b=DuOCqOFwcxpxTSuqaewlXLgUs7VpSZsl8HolaYD+xhBoJQugdKGOmtAB6P3hVrUIsIKygVerxQoVgRqkgTKLwpbFPrsHN4B3riiGPCn3vsFgkPgF65dhWOPdiehuqBE/ush/ycG6xEMnPCKI2E7+I41Jp2ISqWSGlMViO38UzyxVbedjGtCDP+TZv5h3XmeASBzbTGdVsotBsXJtcWnXAC/cJd6j5eygnrc21tluDvXAtbtCI1sH9XIFAjfyuWTZsE0uG98UfpgxIlH/Ii9TrF/WPgihUbW1DkAzoHuhdP/H7BdM4yPWmDjpW2T9Z9N35WwprHoRXF4keAFBY7rmUw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+HE/X8+AYoSOUqgy2/XNz/OgUJsZzO+zIWTJFd7p47M=;
- b=D4L2Nw8G+0d3JBdrRe+m7im3YiVzvYmKLIxGFaC4JKqOo5uOuqLy/G4fpTPnDGRpnT0rIuTO3XTh9d30oOCqAp17Da+VTYTGf80Pkrg80k98JcKfzL/o1fgkVvXD7IISQmtINlRcNGpWQfFL3YjNXHz7NSLwnI0IZvVOQYCkpaOnih3YfnADnxvIuoreSzrAWpJTQRILR6rJ7bD7d3MBexI+8zi2/Irm/LTQHTy3EunGgP1cXjGr4CIVTMxzU0YZtXGykW/8KcZ5euHz9zWLjO1m0zcHw1EELJtbXyPDm86ye7UwmjVntKHQUzIfbH7aqkftU+euoxFj2iJE4G7wBA==
+ bh=MSXNa6VBxbl+lPBAQcrK8Hc/i/pbsRfgG4wVexNOtdQ=;
+ b=T/24mqpNWsjpfTkBY4SYQYV1w/AMMnDYvXORabZgUE5cM+FFcgCAJ28YBLWWi6p2ck23l2Io3WntSYrhYMhzmlbR6RwqzatB3LT5szEzWVnO4wjN0b2xouQ4OLREiyQ4RgRqg/ibK/ZdfqijW95C3zfRm4uoQSyc3Fxcuj4nGdV0SXblbsfhpJlAb8dKBlShN95RmvRGegKNOlDKKKxT/4tpqEvAEH/BwypR7a94QsRkYBiMga3EG2S03+HxeO0EPmlp1m5FwLs6Unf62QJs17itHFWh1E2ViGzCRuD2lohAHHzuji/n/2anBulcSlZX1qzUxOzK+i505H8t58G21A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
+ 216.228.117.160) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
  header.from=nvidia.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+HE/X8+AYoSOUqgy2/XNz/OgUJsZzO+zIWTJFd7p47M=;
- b=SqEYk4gqvt0UPrtuOLjegrttzAPoUWHtaePRn9DAREQKYOYWc4IAjw+UdXCza5jJDkkx+wxU1dpPMvqp/2902HA6xFz9TzzheoOyeqzuGuBFUb8K/QGg88eu0TGZUWkol1y7BpJDrJblV/C88jmBAbBmHChv8sQyf0z9indOvDgP+fp1zOrzzWaP31YHhwVXhyEsCWl7RHLGl9N1lNENcTongZCiP/xvtbodJODsfVDs4F1+O84w5IxDTcErt0iknUpBm56qMpyZWhKJPV8ZRxNjstWOU93nQI8XZI7hxkBFIqapKWeqUp8++e1GaGOaFGacVngwFQWIPpRZK7upaA==
-Received: from DM6PR02CA0064.namprd02.prod.outlook.com (2603:10b6:5:177::41)
- by MN0PR12MB6101.namprd12.prod.outlook.com (2603:10b6:208:3cb::10) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=MSXNa6VBxbl+lPBAQcrK8Hc/i/pbsRfgG4wVexNOtdQ=;
+ b=imJgNX48bbnBb55jaax+toOOIqQmdnAdsw2ySgWcWzMz/0uZ0J1Fl6a4rD3sWHZZUh3uqYJWg2RDvPzlMAFRo77qs5Ghe/TMm87bYCjUcdL3WqA3EgTcYidmxKePDfjlmQ5GC9IZckG2hr+XBbnFK8ITpw5T9Hmqpj0vgVodxo7BdmhwfsBrIBZf5dQ0qgRmKytNDQ1H5tP6tbPmFAgAB9U6Idvmb0Hkh1wDT0yyBb26NitLMoD/ueAbh4fg3QcJb70Y6/WOeNGjCFWtL3uOTEhxE6WwjBRc2Trszve+lnZ5Zg3MpLQbEp5/boHfocp5Ua70ZYLNTUhePZ1jq3Pptw==
+Received: from CH5P222CA0019.NAMP222.PROD.OUTLOOK.COM (2603:10b6:610:1ee::20)
+ by CH3PR12MB9283.namprd12.prod.outlook.com (2603:10b6:610:1cd::22)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.50; Tue, 16 Apr
- 2024 23:41:57 +0000
-Received: from DS2PEPF0000343F.namprd02.prod.outlook.com
- (2603:10b6:5:177:cafe::cd) by DM6PR02CA0064.outlook.office365.com
- (2603:10b6:5:177::41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.34 via Frontend
- Transport; Tue, 16 Apr 2024 23:41:56 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ 2024 23:42:01 +0000
+Received: from CH2PEPF0000013D.namprd02.prod.outlook.com
+ (2603:10b6:610:1ee:cafe::9d) by CH5P222CA0019.outlook.office365.com
+ (2603:10b6:610:1ee::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7495.23 via Frontend
+ Transport; Tue, 16 Apr 2024 23:42:01 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- DS2PEPF0000343F.mail.protection.outlook.com (10.167.18.42) with Microsoft
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ CH2PEPF0000013D.mail.protection.outlook.com (10.167.244.69) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7452.22 via Frontend Transport; Tue, 16 Apr 2024 23:41:56 +0000
+ 15.20.7452.22 via Frontend Transport; Tue, 16 Apr 2024 23:42:01 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.41; Tue, 16 Apr
- 2024 16:41:39 -0700
+ 2024 16:41:40 -0700
 Received: from fedora.mshome.net (10.126.231.35) by rnnvmail201.nvidia.com
  (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.12; Tue, 16 Apr
- 2024 16:41:38 -0700
+ 2024 16:41:39 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: Ben Skeggs <bskeggs@nvidia.com>
-Subject: [PATCH 060/156] drm/nouveau/nvif: rework "new driver" api
-Date: Wed, 17 Apr 2024 09:38:26 +1000
-Message-ID: <20240416234002.19509-61-bskeggs@nvidia.com>
+Subject: [PATCH 061/156] drm/nouveau/nvkm: remove device list
+Date: Wed, 17 Apr 2024 09:38:27 +1000
+Message-ID: <20240416234002.19509-62-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240416234002.19509-1-bskeggs@nvidia.com>
 References: <20240416234002.19509-1-bskeggs@nvidia.com>
@@ -78,26 +78,26 @@ X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF0000343F:EE_|MN0PR12MB6101:EE_
-X-MS-Office365-Filtering-Correlation-Id: 018cdcf0-c5c9-4160-1e83-08dc5e6ecd9c
+X-MS-TrafficTypeDiagnostic: CH2PEPF0000013D:EE_|CH3PR12MB9283:EE_
+X-MS-Office365-Filtering-Correlation-Id: 54bfbd70-d706-40e6-d8b1-08dc5e6ed050
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: /F3lVfKe4qkXSRw1RC51JCfUH05ulvoSPYxbHSKDPgD9A6jXdY2KRdSf4vsq784CBkwCIfdVJuD+l+Ig4a7qFwA49VL3+bweJt5PnN/zJJzKcUfvuyy6AdAdRju1GLOg9ROE2nlUie+IVF+czMHeWcTE/kMzOSwgNRHqpV5pUh1PUjA2oUTrZHwN6iaY20/6VzhdlWEFz6Xi0p4FZivuC1HE+cwtmhL0VHt1i/jiFubEHF+ilYZnwiRh5D5UlgN1hraVkwKhdy3XpSVITon0dCK7pT6ACnBUllzAoeJIBtxUnApUvhGuj0XxNFwlY5RhOVoHBoFLpKAbf7W2gZqi1iS9flQgQmSeOTIy8EvZI9cizBsdrOx6JGjP8O7WoMPBpij+lom2PjyPezDxbu0/nRKdOB7ok4PMLQZvgIemlxLw/MwtTqVh48dlWAI6JFjlCUCOG/uc0roU2I5dnwRlgo3Hr83h3UuOC5b49OSDvDW4DDgH5dD/juWgAqa4zb8I85vHyinVm9xxvN7FHOvZaf6MmPAT7jQTOJA02N4nVdnIYUymcErP6KwyMEMOrC3L34WueHglbzgteByFB5EsoaKqKFxCB14gl6fC2gxnF2wocvGIhghXv4Yoxtc1Ju9X5EcNoRfCSnxTY1tvtObAA4Mf8BIZCWNK2jEvIsqU8QXFimbxaU0R82qp412MqpaCg3xrfpQy5s/UKR9L/7Q0zZuZNK6x8zsvQBjXnhRMPmZGl+wC8+TNPr+1HO7GIwEv
-X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230031)(1800799015)(376005)(82310400014)(36860700004); DIR:OUT;
+X-Microsoft-Antispam-Message-Info: co5HpNgLSnf+dabku44vWl8tUC4FXQ2WXtJHms/wIiQ9srb3GWXVFDsTxrWEskEA1dg8dI2FVi6/DOkrtbTEMXlhD5x1/TEBztbOSbT91+2ShM1AphkxBmo2Tr/ufcp3IeRQTBK1PNr+L1pp1JdXmH2Jeu1xucU8TVGcWfSEkXK49KwtLSX0WpiIXCVBlCllQZO06vcbRFN/0DhSQEv2mx3gP5vbSYTXzVodnU0y22B4iYpjxud2rhmcnmS+PsTs40oLxgAGrFGozTXD9B0ZTjJ/BpL8rYEUz/Bgf6kIEgF3g/0dO4ZcQesgd3zeP77fbkALfgKiYnlOgg7kbxrmAaVcvx3rsINSfkaUsCLL7JhH0g6R6zReEZlDZVjUS9crebaDFRTPPiL6C2J51AR1HmBbNki+Mf09IN+TF/lXuRtZx+W/V0ijx+vUaxELyCyaxF61kKLAtylALd0j6p+ZIlIZl9C9O7Qn+3CiFt8AE9xDJkH2cqX7T0C06Rny5syMrNvfJkv/O9lY0WPHYFFtYrUgO6vb0wIhhNYGskmldc1LgzoCqcrL0BbqMIbnOLVp/pWKEoiLVi50I4G0Ts4yeu7llCJUhSPT7o6kYVWGQHs1owc111iPuWCsmkFXByd4eYTqzv+HB7iNu4rg+qcyb7jXZJlaiN1gRXOJtKS8IosalM2uyGeTtTE1Y9b/uZ7eqMWLPWz1eonPWsyDgAc9a/YO26EtggEZEbZa/R2RvuegGL3On8fxlcaq6J5qLw9W
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230031)(36860700004)(376005)(82310400014)(1800799015); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2024 23:41:56.7335 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 018cdcf0-c5c9-4160-1e83-08dc5e6ecd9c
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2024 23:42:01.2578 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 54bfbd70-d706-40e6-d8b1-08dc5e6ed050
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF0000343F.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000013D.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6101
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9283
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -112,448 +112,117 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-- cleans up init of first nvkm client ("driver")
+- now unused
 
 Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 ---
- drivers/gpu/drm/nouveau/include/nvif/client.h |  3 ++
- drivers/gpu/drm/nouveau/include/nvif/driver.h | 11 +++--
- .../gpu/drm/nouveau/include/nvif/driverif.h   | 15 ++++---
- .../drm/nouveau/include/nvkm/core/client.h    | 10 +++--
- .../drm/nouveau/include/nvkm/core/driver.h    |  9 ++++
- .../gpu/drm/nouveau/include/nvkm/core/os.h    |  1 +
- drivers/gpu/drm/nouveau/nouveau_drm.c         |  9 +++-
- drivers/gpu/drm/nouveau/nvif/client.c         | 14 ++++--
- drivers/gpu/drm/nouveau/nvif/driver.c         | 22 +++++-----
- drivers/gpu/drm/nouveau/nvif/object.c         |  6 +--
- drivers/gpu/drm/nouveau/nvkm/core/client.c    | 24 ++++++++---
- drivers/gpu/drm/nouveau/nvkm/core/driver.c    | 43 +++++++++++--------
- drivers/gpu/drm/nouveau/nvkm/device/user.c    |  6 +--
- 13 files changed, 112 insertions(+), 61 deletions(-)
- create mode 100644 drivers/gpu/drm/nouveau/include/nvkm/core/driver.h
+ .../drm/nouveau/include/nvkm/core/device.h    |  3 --
+ drivers/gpu/drm/nouveau/nvkm/device/base.c    | 34 -------------------
+ 2 files changed, 37 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvif/client.h b/drivers/gpu/drm/nouveau/include/nvif/client.h
-index 87dc55f8bde6..f8e4e25d6e86 100644
---- a/drivers/gpu/drm/nouveau/include/nvif/client.h
-+++ b/drivers/gpu/drm/nouveau/include/nvif/client.h
-@@ -5,7 +5,10 @@
- #include <nvif/object.h>
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/device.h b/drivers/gpu/drm/nouveau/include/nvkm/core/device.h
+index 46afb877a296..efe1a0048328 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/core/device.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/core/device.h
+@@ -22,7 +22,6 @@ struct nvkm_device {
+ 	const char *cfgopt;
+ 	const char *dbgopt;
  
- struct nvif_client {
-+	const struct nvif_client_impl *impl;
-+	struct nvif_client_priv *priv;
- 	struct nvif_object object;
-+
- 	const struct nvif_driver *driver;
+-	struct list_head head;
+ 	struct mutex mutex;
+ 	int refcount;
+ 
+@@ -108,8 +107,6 @@ struct nvkm_device_chip {
+ #undef NVKM_LAYOUT_ONCE
  };
  
-diff --git a/drivers/gpu/drm/nouveau/include/nvif/driver.h b/drivers/gpu/drm/nouveau/include/nvif/driver.h
-index c31fc66a4765..8ca210b0bca6 100644
---- a/drivers/gpu/drm/nouveau/include/nvif/driver.h
-+++ b/drivers/gpu/drm/nouveau/include/nvif/driver.h
-@@ -2,10 +2,13 @@
- #ifndef __NVIF_DRIVER_H__
- #define __NVIF_DRIVER_H__
- #include <nvif/os.h>
-+struct nvif_parent;
-+struct nvif_driver;
-+struct nvif_client_impl;
-+struct nvif_client_priv;
- struct nvif_client;
- 
--int nvif_driver_init(const char *drv, const char *cfg, const char *dbg,
--		     const char *name, u64 device, struct nvif_client *);
+-struct nvkm_device *nvkm_device_find(u64 name);
 -
--extern const struct nvif_driver nvif_driver_nvkm;
-+void nvif_driver_ctor(struct nvif_parent *, const struct nvif_driver *, const char *name,
-+		      const struct nvif_client_impl *, struct nvif_client_priv *,
-+		      struct nvif_client *);
- #endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvif/driverif.h b/drivers/gpu/drm/nouveau/include/nvif/driverif.h
-index c5018452d372..655bd389044d 100644
---- a/drivers/gpu/drm/nouveau/include/nvif/driverif.h
-+++ b/drivers/gpu/drm/nouveau/include/nvif/driverif.h
-@@ -1,15 +1,18 @@
- /* SPDX-License-Identifier: MIT */
- #ifndef __NVIF_DRIVERIF_H__
- #define __NVIF_DRIVERIF_H__
-+struct nvif_client_priv;
+ /* privileged register interface accessor macros */
+ #define nvkm_rd08(d,a) ioread8((d)->pri + (a))
+ #define nvkm_rd16(d,a) ioread16_native((d)->pri + (a))
+diff --git a/drivers/gpu/drm/nouveau/nvkm/device/base.c b/drivers/gpu/drm/nouveau/nvkm/device/base.c
+index 3ce42de55aa9..036106ed09a5 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/device/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/device/base.c
+@@ -29,30 +29,6 @@
+ #include <subdev/bios.h>
+ #include <subdev/therm.h>
  
- struct nvif_driver {
- 	const char *name;
--	int (*init)(const char *name, u64 device, const char *cfg,
--		    const char *dbg, void **priv);
--	int (*suspend)(void *priv);
--	int (*resume)(void *priv);
-+	int (*suspend)(struct nvif_client_priv *);
-+	int (*resume)(struct nvif_client_priv *);
- 	int (*ioctl)(void *priv, void *data, u32 size, void **hack);
--	void __iomem *(*map)(void *priv, u64 handle, u32 size);
--	void (*unmap)(void *priv, void __iomem *ptr, u32 size);
-+	void __iomem *(*map)(struct nvif_client_priv *, u64 handle, u32 size);
-+	void (*unmap)(struct nvif_client_priv *, void __iomem *ptr, u32 size);
-+};
-+
-+struct nvif_client_impl {
-+	void (*del)(struct nvif_client_priv *);
- };
- #endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/client.h b/drivers/gpu/drm/nouveau/include/nvkm/core/client.h
-index f7f195d87838..e35aea7a751f 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/core/client.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/core/client.h
-@@ -3,10 +3,12 @@
- #define __NVKM_CLIENT_H__
- #include <core/object.h>
- 
-+#include <nvif/driverif.h>
-+
- struct nvkm_client {
- 	struct nvkm_object object;
- 	char name[32];
--	u64 device;
-+	struct nvkm_device *device;
- 	u32 debug;
- 
- 	struct rb_root objroot;
-@@ -16,8 +18,10 @@ struct nvkm_client {
- 	int (*event)(u64 token, void *argv, u32 argc);
- };
- 
--int  nvkm_client_new(const char *name, u64 device, const char *cfg, const char *dbg,
--		     int (*)(u64, void *, u32), struct nvkm_client **);
-+int nvkm_client_new(const char *name, struct nvkm_device *, int (*event)(u64, void *, u32),
-+		    struct nvif_client_priv **);
-+
-+extern const struct nvif_client_impl nvkm_client_impl;
- 
- /* logging for client-facing objects */
- #define nvif_printk(o,l,p,f,a...) do {                                         \
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/driver.h b/drivers/gpu/drm/nouveau/include/nvkm/core/driver.h
-new file mode 100644
-index 000000000000..8ad2278e700a
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/core/driver.h
-@@ -0,0 +1,9 @@
-+/* SPDX-License-Identifier: MIT */
-+#ifndef __NVKM_DRIVER_H__
-+#define __NVKM_DRIVER_H__
-+#include <nvif/driverif.h>
-+struct nvkm_device;
-+
-+int nvkm_driver_ctor(struct nvkm_device *, const struct nvif_driver **,
-+		     const struct nvif_client_impl **, struct nvif_client_priv **);
-+#endif
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/os.h b/drivers/gpu/drm/nouveau/include/nvkm/core/os.h
-index 668338d7bda3..9d16413239d4 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/core/os.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/core/os.h
-@@ -32,4 +32,5 @@ nvkm_blob_dtor(struct nvkm_blob *blob)
- 	for (p = nvkm_list_find(p, (h), m, (c)); p; p = nvkm_list_find_next(p, (h), m, (c)))
- 
- #define nvkm_uevent nvif_event_priv
-+#define nvkm_client nvif_client_priv
- #endif
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-index 9c6df2ba52d5..d793afd929c9 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-@@ -37,6 +37,7 @@
- #include <drm/drm_ioctl.h>
- #include <drm/drm_vblank.h>
- 
-+#include <core/driver.h>
- #include <core/gpuobj.h>
- #include <core/option.h>
- #include <core/pci.h>
-@@ -567,6 +568,9 @@ nouveau_drm_device_init(struct drm_device *dev, struct nvkm_device *nvkm)
- 		{}
- 	};
- 	struct nouveau_drm *drm;
-+	const struct nvif_driver *driver;
-+	const struct nvif_client_impl *impl;
-+	struct nvif_client_priv *priv;
- 	int ret;
- 
- 	if (!(drm = kzalloc(sizeof(*drm), GFP_KERNEL)))
-@@ -580,11 +584,12 @@ nouveau_drm_device_init(struct drm_device *dev, struct nvkm_device *nvkm)
- 	mutex_init(&drm->client_mutex);
- 	drm->_client.object.parent = &drm->parent;
- 
--	ret = nvif_driver_init(NULL, nouveau_config, nouveau_debug, "drm", nouveau_name(dev),
--			       &drm->_client);
-+	ret = nvkm_driver_ctor(drm->nvkm, &driver, &impl, &priv);
- 	if (ret)
- 		goto fail_alloc;
- 
-+	nvif_driver_ctor(&drm->parent, driver, "drm", impl, priv, &drm->_client);
-+
- 	ret = nvif_device_ctor(&drm->_client, "drmDevice", &drm->device);
- 	if (ret) {
- 		NV_ERROR(drm, "Device allocation failed: %d\n", ret);
-diff --git a/drivers/gpu/drm/nouveau/nvif/client.c b/drivers/gpu/drm/nouveau/nvif/client.c
-index c0f93f4df2bb..4c4a856ab861 100644
---- a/drivers/gpu/drm/nouveau/nvif/client.c
-+++ b/drivers/gpu/drm/nouveau/nvif/client.c
-@@ -33,19 +33,27 @@
- int
- nvif_client_suspend(struct nvif_client *client)
- {
--	return client->driver->suspend(client->object.priv);
-+	return client->driver->suspend(client->priv);
- }
- 
- int
- nvif_client_resume(struct nvif_client *client)
- {
--	return client->driver->resume(client->object.priv);
-+	return client->driver->resume(client->priv);
- }
- 
- void
- nvif_client_dtor(struct nvif_client *client)
- {
--	nvif_object_dtor(&client->object);
-+	if (!client->impl) {
-+		nvif_object_dtor(&client->object);
-+		client->driver = NULL;
-+		return;
-+	}
-+
-+	client->impl->del(client->priv);
-+	client->impl = NULL;
-+	client->object.client = NULL;
- 	client->driver = NULL;
- }
- 
-diff --git a/drivers/gpu/drm/nouveau/nvif/driver.c b/drivers/gpu/drm/nouveau/nvif/driver.c
-index 4548ed35c31e..95515f2023f4 100644
---- a/drivers/gpu/drm/nouveau/nvif/driver.c
-+++ b/drivers/gpu/drm/nouveau/nvif/driver.c
-@@ -25,17 +25,17 @@
- #include <nvif/driverif.h>
- #include <nvif/client.h>
- 
--int
--nvif_driver_init(const char *drv, const char *cfg, const char *dbg,
--		 const char *name, u64 device, struct nvif_client *client)
-+void
-+nvif_driver_ctor(struct nvif_parent *parent, const struct nvif_driver *driver, const char *name,
-+		 const struct nvif_client_impl *impl, struct nvif_client_priv *priv,
-+		 struct nvif_client *client)
- {
--	int ret;
-+	client->object.parent = parent;
-+	client->object.client = client;
- 
--	client->driver = &nvif_driver_nvkm;
+-static DEFINE_MUTEX(nv_devices_mutex);
+-static LIST_HEAD(nv_devices);
 -
--	ret = client->driver->init(name, device, cfg, dbg, &client->object.priv);
--	if (ret)
--		return ret;
--
--	return nvif_client_ctor(client, name, device, client);
-+	nvif_object_ctor(&client->object, name ?: "nvifDriver", 0, 0, &client->object);
-+	client->object.priv = priv;
-+	client->driver = driver;
-+	client->impl = impl;
-+	client->priv = priv;
- }
-diff --git a/drivers/gpu/drm/nouveau/nvif/object.c b/drivers/gpu/drm/nouveau/nvif/object.c
-index a71e000ada91..f172f632979b 100644
---- a/drivers/gpu/drm/nouveau/nvif/object.c
-+++ b/drivers/gpu/drm/nouveau/nvif/object.c
-@@ -169,8 +169,8 @@ nvif_object_unmap(struct nvif_object *object)
- 	struct nvif_client *client = object->client;
- 	if (object->map.ptr) {
- 		if (object->map.size) {
--			client->driver->unmap(client, object->map.ptr,
--						      object->map.size);
-+			client->driver->unmap(client->object.priv, object->map.ptr,
-+								   object->map.size);
- 			object->map.size = 0;
- 		}
- 		object->map.ptr = NULL;
-@@ -186,7 +186,7 @@ nvif_object_map(struct nvif_object *object, void *argv, u32 argc)
- 	int ret = nvif_object_map_handle(object, argv, argc, &handle, &length);
- 	if (ret >= 0) {
- 		if (ret) {
--			object->map.ptr = client->driver->map(client,
-+			object->map.ptr = client->driver->map(client->object.priv,
- 							      handle,
- 							      length);
- 			if (ret = -ENOMEM, object->map.ptr) {
-diff --git a/drivers/gpu/drm/nouveau/nvkm/core/client.c b/drivers/gpu/drm/nouveau/nvkm/core/client.c
-index 7dc425e67dd4..fa8d0795805e 100644
---- a/drivers/gpu/drm/nouveau/nvkm/core/client.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/core/client.c
-@@ -26,6 +26,7 @@
- #include <core/option.h>
- 
- #include <nvif/class.h>
-+#include <nvif/driverif.h>
- #include <nvif/event.h>
- #include <nvif/if0000.h>
- #include <nvif/unpack.h>
-@@ -42,8 +43,8 @@ nvkm_uclient_new(const struct nvkm_oclass *oclass, void *argv, u32 argc,
- 
- 	if (!(ret = nvif_unpack(ret, &argv, &argc, args->v0, 0, 0, false))){
- 		args->v0.name[sizeof(args->v0.name) - 1] = 0;
--		ret = nvkm_client_new(args->v0.name, args->v0.device, NULL,
--				      NULL, oclass->client->event, &client);
-+		ret = nvkm_client_new(args->v0.name, oclass->client->device,
-+				      oclass->client->event, &client);
- 		if (ret)
- 			return ret;
- 	} else
-@@ -65,6 +66,19 @@ nvkm_uclient_sclass = {
- 	.ctor = nvkm_uclient_new,
- };
- 
-+static void
-+nvkm_client_del(struct nvif_client_priv *client)
-+{
-+	struct nvkm_object *object = &client->object;
-+
-+	nvkm_object_del(&object);
-+}
-+
-+const struct nvif_client_impl
-+nvkm_client_impl = {
-+	.del = nvkm_client_del,
-+};
-+
- static int
- nvkm_client_child_new(const struct nvkm_oclass *oclass,
- 		      void *data, u32 size, struct nvkm_object **pobject)
-@@ -103,8 +117,8 @@ nvkm_client = {
- };
- 
- int
--nvkm_client_new(const char *name, u64 device, const char *cfg, const char *dbg,
--		int (*event)(u64, void *, u32), struct nvkm_client **pclient)
-+nvkm_client_new(const char *name, struct nvkm_device *device, int (*event)(u64, void *, u32),
-+		struct nvif_client_priv **pclient)
- {
- 	struct nvkm_oclass oclass = { .base = nvkm_uclient_sclass };
- 	struct nvkm_client *client;
-@@ -116,7 +130,7 @@ nvkm_client_new(const char *name, u64 device, const char *cfg, const char *dbg,
- 	nvkm_object_ctor(&nvkm_client, &oclass, &client->object);
- 	snprintf(client->name, sizeof(client->name), "%s", name);
- 	client->device = device;
--	client->debug = nvkm_dbgopt(dbg, "CLIENT");
-+	client->debug = NV_DBG_ERROR;
- 	client->objroot = RB_ROOT;
- 	spin_lock_init(&client->obj_lock);
- 	client->event = event;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/core/driver.c b/drivers/gpu/drm/nouveau/nvkm/core/driver.c
-index 0777b9af0656..ea00b8724f24 100644
---- a/drivers/gpu/drm/nouveau/nvkm/core/driver.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/core/driver.c
-@@ -25,8 +25,8 @@
- /*******************************************************************************
-  * NVIF client driver - NVKM directly linked
-  ******************************************************************************/
--
- #include <core/client.h>
-+#include <core/driver.h>
- #include <core/event.h>
- #include <core/ioctl.h>
- 
-@@ -34,13 +34,13 @@
- #include <nvif/event.h>
- 
- static void
--nvkm_driver_unmap(void *priv, void __iomem *ptr, u32 size)
-+nvkm_driver_unmap(struct nvif_client_priv *client, void __iomem *ptr, u32 size)
- {
- 	iounmap(ptr);
- }
- 
- static void __iomem *
--nvkm_driver_map(void *priv, u64 handle, u32 size)
-+nvkm_driver_map(struct nvif_client_priv *client, u64 handle, u32 size)
- {
- 	return ioremap(handle, size);
- }
-@@ -52,18 +52,14 @@ nvkm_driver_ioctl(void *priv, void *data, u32 size, void **hack)
- }
- 
- static int
--nvkm_driver_resume(void *priv)
-+nvkm_driver_resume(struct nvif_client_priv *client)
- {
--	struct nvkm_client *client = priv;
--
- 	return nvkm_object_init(&client->object);
- }
- 
- static int
--nvkm_driver_suspend(void *priv)
-+nvkm_driver_suspend(struct nvif_client_priv *client)
- {
--	struct nvkm_client *client = priv;
--
- 	return nvkm_object_fini(&client->object, true);
- }
- 
-@@ -79,20 +75,29 @@ nvkm_driver_event(u64 token, void *repv, u32 repc)
- 	return NVKM_EVENT_DROP;
- }
- 
--static int
--nvkm_driver_init(const char *name, u64 device, const char *cfg, const char *dbg, void **ppriv)
+-static struct nvkm_device *
+-nvkm_device_find_locked(u64 handle)
 -{
--	return nvkm_client_new(name, device, cfg, dbg, nvkm_driver_event,
--			       (struct nvkm_client **)ppriv);
+-	struct nvkm_device *device;
+-	list_for_each_entry(device, &nv_devices, head) {
+-		if (device->handle == handle)
+-			return device;
+-	}
+-	return NULL;
 -}
 -
--const struct nvif_driver
--nvif_driver_nvkm = {
-+static const struct nvif_driver
-+nvkm_driver = {
- 	.name = "nvkm",
--	.init = nvkm_driver_init,
- 	.suspend = nvkm_driver_suspend,
- 	.resume = nvkm_driver_resume,
- 	.ioctl = nvkm_driver_ioctl,
- 	.map = nvkm_driver_map,
- 	.unmap = nvkm_driver_unmap,
- };
-+
-+int
-+nvkm_driver_ctor(struct nvkm_device *device, const struct nvif_driver **pdrv,
-+		 const struct nvif_client_impl **pimpl, struct nvif_client_priv **ppriv)
-+{
-+	struct nvif_client_priv *client;
-+	int ret;
-+
-+	ret = nvkm_client_new("driver", device, nvkm_driver_event, &client);
-+	if (ret)
-+		return ret;
-+
-+	*pdrv = &nvkm_driver;
-+	*pimpl = &nvkm_client_impl;
-+	*ppriv = client;
-+	return 0;
-+}
-diff --git a/drivers/gpu/drm/nouveau/nvkm/device/user.c b/drivers/gpu/drm/nouveau/nvkm/device/user.c
-index af5aa9e1e5ea..b30b2e1c590a 100644
---- a/drivers/gpu/drm/nouveau/nvkm/device/user.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/device/user.c
-@@ -330,11 +330,7 @@ nvkm_udevice_new(const struct nvkm_oclass *oclass, void *data, u32 size,
- 	nvkm_object_ctor(&nvkm_udevice, oclass, &udev->object);
- 	*pobject = &udev->object;
- 
--	/* find the device that matches what the client requested */
--	udev->device = nvkm_device_find(client->device);
--	if (!udev->device)
--		return -ENODEV;
+-struct nvkm_device *
+-nvkm_device_find(u64 handle)
+-{
+-	struct nvkm_device *device;
+-	mutex_lock(&nv_devices_mutex);
+-	device = nvkm_device_find_locked(handle);
+-	mutex_unlock(&nv_devices_mutex);
+-	return device;
+-}
 -
-+	udev->device = client->device;
- 	return 0;
- }
+ static const struct nvkm_device_chip
+ nv4_chipset = {
+ 	.name = "NV04",
+@@ -2946,8 +2922,6 @@ nvkm_device_del(struct nvkm_device **pdevice)
+ 	struct nvkm_device *device = *pdevice;
+ 	struct nvkm_subdev *subdev, *subtmp;
+ 	if (device) {
+-		mutex_lock(&nv_devices_mutex);
+-
+ 		nvkm_intr_dtor(device);
  
+ 		list_for_each_entry_safe_reverse(subdev, subtmp, &device->subdev, head)
+@@ -2955,11 +2929,9 @@ nvkm_device_del(struct nvkm_device **pdevice)
+ 
+ 		if (device->pri)
+ 			iounmap(device->pri);
+-		list_del(&device->head);
+ 
+ 		if (device->func->dtor)
+ 			*pdevice = device->func->dtor(device);
+-		mutex_unlock(&nv_devices_mutex);
+ 
+ 		kfree(*pdevice);
+ 		*pdevice = NULL;
+@@ -3010,10 +2982,6 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
+ 	int ret = -EEXIST, j;
+ 	unsigned chipset;
+ 
+-	mutex_lock(&nv_devices_mutex);
+-	if (nvkm_device_find_locked(handle))
+-		goto done;
+-
+ 	device->func = func;
+ 	device->quirk = quirk;
+ 	device->dev = dev;
+@@ -3022,7 +2990,6 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
+ 	device->cfgopt = cfg;
+ 	device->dbgopt = dbg;
+ 	device->name = name;
+-	list_add_tail(&device->head, &nv_devices);
+ 	device->debug = nvkm_dbgopt(device->dbgopt, "device");
+ 	INIT_LIST_HEAD(&device->subdev);
+ 
+@@ -3305,6 +3272,5 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
+ 		iounmap(device->pri);
+ 		device->pri = NULL;
+ 	}
+-	mutex_unlock(&nv_devices_mutex);
+ 	return ret;
+ }
 -- 
 2.41.0
 
