@@ -2,71 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 017DE8A793C
-	for <lists+nouveau@lfdr.de>; Wed, 17 Apr 2024 01:43:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65B368A7949
+	for <lists+nouveau@lfdr.de>; Wed, 17 Apr 2024 01:43:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 82981112FDE;
-	Tue, 16 Apr 2024 23:43:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B1FDD112FF6;
+	Tue, 16 Apr 2024 23:43:56 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="S1Utrtum";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="gDTvNKRY";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2042.outbound.protection.outlook.com [40.107.93.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6B94C112FDD
- for <nouveau@lists.freedesktop.org>; Tue, 16 Apr 2024 23:43:37 +0000 (UTC)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2081.outbound.protection.outlook.com [40.107.243.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4C662112FEF
+ for <nouveau@lists.freedesktop.org>; Tue, 16 Apr 2024 23:43:53 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lGVc1cALovA2H+8o59Ax6MtVQ9/71vZBzthLoiN2C6pGR0p7NafsM2RS81Qo0dVObAnb8VgOOPQF1Xapx9JNC7s02QzL4bUGP68MldXvmC65r/+j8qmWUIevCSIoNhyUWm/ibqgty0b5t53vIdXtk7MXvmt6Gmca0Tlg1YdNSHX7wo7Ph5yZP4HUKCbRHY2ANlTPxZDBYsdYyd0SRfCZGFnEkiVuLlxd3BVKFgf0d6NhJbju1Jr84j1742XyOwyBRL79OqCoT7fgDbzzQyWmwBvh+o2VysTA7n4afMOqEeUnoZkpg0L4GPcbYmY5I2KeE+FWL+C/SLZ0iw5CMwhxjQ==
+ b=fXRvxIybKJGQWsetCmgKqhejy8SRTr8/uAjov2gDd/ZkVvO+fbqTMFb4du/PXo3My8EEMQz6fiUZgEMSk9CjM4n/L9raf/Har/H0Db35kI/GnA7XsEONx145S+380cSWqGlQBTY10Sjh/itcHQR1+qQFGQfj9Dia2sffZvayVErEDs+9As/3wjIJmxLapM1hqYmH0GlRyX7r3BA4KNzGEJ2f/JVuZoRsoeVNYGkBWUx+Zx/NQxM4n0KMFIfTHEzblIemwL6ldq6x0E1WI+vcj043ok1DcA/LubsVeXylISufD2eD9ROwDdwVVIhp119stOM8CPcrdzl+UtJAU6Aoug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1NacdPtQJF3UJYMTny9SJVt3u+x3fop+69OHDA5V4t4=;
- b=F81VcQeGQwAwUQe8JZXwWTq2NqPX1LY6ng6b7Dfh8Zo9XCTLDOQ6kwVUZextlElpDEnbdcXl0UBOHouCR+x82NSdDAyRLoUKytu/WKhuTNQzAOBmIKjNpk1KQ0ILA3VNe2YOyS3PgaMbl6H+RuvHS37Sl6S8FV1e/zSf3zdhoUXeZ7szfjs5wQmH92W2AqWCw41VBOvTKuYPiod63ptzJo4Ero6ymQb1uhwA5ytNMroB7gvCcqlD/qWL1AnPPxL2JwQyj1CSGeeQBj0hT6qc4Ay32uhluaiTySXNLa9PNFjsKpZ0ajsiBwOsHbPHAasR4VJCUiy1doGsY4hX6vcCyw==
+ bh=iXDM4AcmsYygvujo9B+q3PpNk2K8BLkUYkZiLbyvmO4=;
+ b=Y+VcERsSA1c4WnhPQj4wqoxA2k0NBwrZ7NTZEPMFP+2dPc4Z01nplt4C7Ahc7ylq/xN/jyiTFCQOGowcuT2gYiOcUPQamdWVA+0ADt0JcJkx+zlXHeTbvpExV9zOuzWEEbnVLXEwOm+xGfcGXS2wqnlR2NlYbH+TpJx/fShHI9CzQ6sH8tMb3duNfVrGeWj9nm6PhxDDF2qgPAPY4HmuasVDwsQ/4JBMNwDE1P9d/KGKsh5gLqrVbwiOaOKDeGm860C5JAACCeCW4nFuEZqf5nvEdRKgrH93NngnY9quRbk42mAQrhVUqREi1qPr2n9wUlF2lDpU1gMCWx5Weet6Fw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
+ 216.228.117.160) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
  header.from=nvidia.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1NacdPtQJF3UJYMTny9SJVt3u+x3fop+69OHDA5V4t4=;
- b=S1UtrtumTHR7bWXHQfwOdRXKLVK4XLkNGbmwBLV47bW9PPPqA3Ro7lHa46K5ubi3syBhshHIESLSo2Yirb6EdVePWlVrrdaZi8hSvJjzLrRPV7soao00jN4p+blIrln0KYX+FxJF/fNWmgWlP3hyUAt6WHSbkNW9slh3wpDFGSLzlINkMvvbpiTd8gEg5L7l3dymBp1NRWhexvqb/KXw7i0XsfRlVRV1wy3eaBf9h6lwY9pHYqqraqdXqirv/B1FSlw93EI5NypnF5SGxjJLyrggNmmtNHYeZCzbYKhjDAb8wq77rFZe9pYn3B/V9wQK/cSlLh0MFF2oJ3+71HoZ+Q==
-Received: from CH0PR03CA0402.namprd03.prod.outlook.com (2603:10b6:610:11b::23)
- by DM4PR12MB7742.namprd12.prod.outlook.com (2603:10b6:8:102::18) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=iXDM4AcmsYygvujo9B+q3PpNk2K8BLkUYkZiLbyvmO4=;
+ b=gDTvNKRYBXdXQ9A/S64cPdCwDWe/C3M4Xtvmf9LJpQrmsWjUbpHCtcggY2ySHUenmdTH6vButOYzzcUAEeaRX8O24eK1EszhcGbhcSdgN5d+/JqEMZLRwgtngNRDNMnUD3S8nJH77iC1uBIu59J2y+r4naa/yCSNaIivUp4c8CL/GhJTewZlT9An2TxunGHK5L1KmND+QuUzkKW4kDMca8jVhboQYoWVjZYc0RZuCRb06Kin7acclx1YL6jhFYU+oMX19w3NLFGQJi+v+tTBvHAt+PrNtYQkQ4O2UWMJopueQRNtVcb+fK0pNcyF+S5ViO6Y1xfqjBn/UFVo5/45BQ==
+Received: from CH2PR16CA0018.namprd16.prod.outlook.com (2603:10b6:610:50::28)
+ by SJ2PR12MB8719.namprd12.prod.outlook.com (2603:10b6:a03:543::7)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.50; Tue, 16 Apr
- 2024 23:43:35 +0000
-Received: from DS2PEPF0000343C.namprd02.prod.outlook.com
- (2603:10b6:610:11b:cafe::19) by CH0PR03CA0402.outlook.office365.com
- (2603:10b6:610:11b::23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.34 via Frontend
- Transport; Tue, 16 Apr 2024 23:43:34 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ 2024 23:43:49 +0000
+Received: from CH2PEPF00000140.namprd02.prod.outlook.com
+ (2603:10b6:610:50:cafe::2) by CH2PR16CA0018.outlook.office365.com
+ (2603:10b6:610:50::28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.33 via Frontend
+ Transport; Tue, 16 Apr 2024 23:43:48 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- DS2PEPF0000343C.mail.protection.outlook.com (10.167.18.39) with Microsoft
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ CH2PEPF00000140.mail.protection.outlook.com (10.167.244.72) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7452.22 via Frontend Transport; Tue, 16 Apr 2024 23:43:34 +0000
+ 15.20.7452.22 via Frontend Transport; Tue, 16 Apr 2024 23:43:48 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.41; Tue, 16 Apr
  2024 16:43:20 -0700
 Received: from fedora.mshome.net (10.126.231.35) by rnnvmail201.nvidia.com
  (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.12; Tue, 16 Apr
- 2024 16:43:18 -0700
+ 2024 16:43:19 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: Ben Skeggs <bskeggs@nvidia.com>
-Subject: [PATCH 148/156] drm/nouveau/nvif: rework engobj "new event" api
-Date: Wed, 17 Apr 2024 09:39:54 +1000
-Message-ID: <20240416234002.19509-149-bskeggs@nvidia.com>
+Subject: [PATCH 149/156] drm/nouveau/nvif: remove engobj from object rb
+Date: Wed, 17 Apr 2024 09:39:55 +1000
+Message-ID: <20240416234002.19509-150-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240416234002.19509-1-bskeggs@nvidia.com>
 References: <20240416234002.19509-1-bskeggs@nvidia.com>
@@ -78,26 +78,26 @@ X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF0000343C:EE_|DM4PR12MB7742:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1a4030ca-e319-449f-e41e-08dc5e6f07f8
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000140:EE_|SJ2PR12MB8719:EE_
+X-MS-Office365-Filtering-Correlation-Id: 09256c12-5ea5-4a26-66c8-08dc5e6f1035
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: LaLWeDqQ14I/GJViqKBt00uNnPI9XbPmN2CUPi2ORGPrzq0aZhrMkFI1VsA9W1fZVsNFVeJsjCeIcP+mUzpRi9UBofYxkoVEB8Qzugg/y5W1yy4iiin2wMnbco//AxeZL3GbVzNyZyj/9dALbgb4+519/VALnqTZ1twaw2WcdIRNPPf10aHzgl08cRec8TRIqA5yItmDyc4Q0ySPf+zt57ddcAKR2B1l6nmyyzRG3urct5zJwsKsn68rA7SivhRcwgJZ33RsSxE0XBHt1oQjvtDRAH7BmxLaqjJlxQxY4JAx6fc3PmVKU+y3XKDsELL78mArwSuEaobEELRY+uTrndLPzbZ5m9EgEOlsHnd1a+iWcSNwSphewvI5sn6ymMCinMHeQNgnLr91JzWEpDJPgIvtuXniwGudAS0NfVcOOjd7Dqt29DXrj+SiI+JfMfU2fNBZJNtxLhtzY76R+2vtdUY3e7Wqhr9TO/E14hamOYjdpcHWffTvxJVDgJACDtdr6wPgGiOM9akaWu4aye/fpq6isTWE5hf5B0B9NPTK8jjw4JCtaczJ4wbdhmXB4co4pW4wyZ4zIanlA9i3atvZqwbMuHDPUdr/sQDEAEoCZhQl30su7h3Uu1A6qYiuejsq1Y/M/IbeuW0v6Y7y48WwnlWLOaaUTvXUfNWZspWvbcCEjd0HX4KT+56I9Gd2gzntDEfSJRp+f0pcVSNxwgfncfruWEt2wKhBrVi9030XjbKNxoJdg+cTS5BOSU8kk9S+
-X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230031)(36860700004)(376005)(82310400014)(1800799015); DIR:OUT;
+X-Microsoft-Antispam-Message-Info: 8wAaGuckztWlf7peqgOmuL8vl2EbSN1jblVdn85mpgOi8X6+eYbjPJpARf5lHz/Zwq3FmHAd9tCMLY6MyedYVMme5dV6LBelsaQeIa1QsZ2l7ofLUlGZksA3+wKu35k6pO1XDgc9XQ80IZ2fMRgT4AUWhOdXkf404z+3JkSuPvwIIcFwZn78egZk1rsCzi+F36Y3MrREYJIgfbvxloKpj3t9FgQL474cB+trlBLYtYC0a/bpEneivRdm903pODBtTk2JHnD5B7kRvDIszmMaJWhEImdVY2WfifRriz6xj7nokyFUVk0K2KDQgrX0iKWVaGgZDgeyIb5tWzUeo6YRrF5LrtXOGYDQbziJvAlW6FgyGAs7T4SmZLnkbZtkZGRoDCLf4BsWpUYEGy8NgkjL83DxxrMQ/jrn+/tQKg5jhy8MWvldKVtZ8Q7bs+qdJlQsytb5EpREe4J3PwfHIWrnSfJqYsY6R5ZFHEzOp/f0YHEhwHeJ4ieGVFIHyDzprlqbiiK7Kz/ZW9PIRnWRXf02mirwy2MVb5BSrRJykEewKKKB+EcAuMQw1O04DOcAnMxHcOcFpD+xmxKHPAmI5vYqf/1PRPKBeAYhpK2T+Bj6q+jz3F31D3ZMaJEDrjVe4hIXhw1Bx9t98hRCJBUMBO2pclpm6On29jBzrKxYwI9luVpmeUhVVqjni7bol/nz/CRcLHP4n8kNkK0FLDsQrbN/NKTORklJIvUbEIqTiUGXfyoFM8ZkmnARgZbmTOjCHmUq
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230031)(36860700004)(1800799015)(376005)(82310400014); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2024 23:43:34.6181 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1a4030ca-e319-449f-e41e-08dc5e6f07f8
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2024 23:43:48.4521 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 09256c12-5ea5-4a26-66c8-08dc5e6f1035
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF0000343C.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF00000140.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7742
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8719
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -112,581 +112,666 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-- transition from "ioctl" interface
+- no more users
 
 Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 ---
- drivers/gpu/drm/nouveau/dispnv04/disp.c       |  8 ++-
- .../gpu/drm/nouveau/include/nvif/driverif.h   |  5 ++
- drivers/gpu/drm/nouveau/include/nvif/event.h  | 21 +------
- drivers/gpu/drm/nouveau/include/nvif/if000e.h | 26 --------
- drivers/gpu/drm/nouveau/include/nvif/object.h |  3 -
- .../gpu/drm/nouveau/include/nvkm/core/event.h |  1 -
- .../drm/nouveau/include/nvkm/core/object.h    |  6 +-
- .../gpu/drm/nouveau/include/nvkm/core/os.h    |  1 -
- drivers/gpu/drm/nouveau/nvif/event.c          | 46 +-------------
- drivers/gpu/drm/nouveau/nvif/object.c         | 29 ---------
- drivers/gpu/drm/nouveau/nvkm/core/ioctl.c     | 32 +---------
- drivers/gpu/drm/nouveau/nvkm/core/oproxy.c    | 13 ----
- drivers/gpu/drm/nouveau/nvkm/core/uevent.c    | 62 -------------------
- .../gpu/drm/nouveau/nvkm/engine/fifo/uchan.c  | 13 ++++
- drivers/gpu/drm/nouveau/nvkm/engine/sw/nvsw.c | 14 ++---
- 15 files changed, 36 insertions(+), 244 deletions(-)
- delete mode 100644 drivers/gpu/drm/nouveau/include/nvif/if000e.h
+ .../gpu/drm/nouveau/include/nvif/driverif.h   |   4 +-
+ drivers/gpu/drm/nouveau/include/nvif/object.h |  13 +-
+ .../drm/nouveau/include/nvkm/core/client.h    |   1 -
+ .../gpu/drm/nouveau/include/nvkm/core/ioctl.h |   8 -
+ .../drm/nouveau/include/nvkm/core/object.h    |   8 -
+ drivers/gpu/drm/nouveau/nvif/chan.c           |   2 +-
+ drivers/gpu/drm/nouveau/nvif/client.c         |   1 -
+ drivers/gpu/drm/nouveau/nvif/driver.c         |   1 -
+ drivers/gpu/drm/nouveau/nvif/object.c         |  78 +------
+ drivers/gpu/drm/nouveau/nvkm/core/Kbuild      |   1 -
+ drivers/gpu/drm/nouveau/nvkm/core/driver.c    |   8 -
+ drivers/gpu/drm/nouveau/nvkm/core/ioctl.c     | 196 ------------------
+ drivers/gpu/drm/nouveau/nvkm/core/object.c    |  92 --------
+ .../gpu/drm/nouveau/nvkm/engine/fifo/uchan.c  |   7 +-
+ 14 files changed, 8 insertions(+), 412 deletions(-)
+ delete mode 100644 drivers/gpu/drm/nouveau/include/nvkm/core/ioctl.h
+ delete mode 100644 drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv04/disp.c b/drivers/gpu/drm/nouveau/dispnv04/disp.c
-index 3e10ba2ed20f..3d564512b0f6 100644
---- a/drivers/gpu/drm/nouveau/dispnv04/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv04/disp.c
-@@ -236,10 +236,14 @@ nv04_display_create(struct drm_device *dev)
- 
- 	/* Request page flip completion event. */
- 	if (drm->channel) {
--		ret = nvif_event_ctor(&drm->channel->nvsw.object, "kmsFlip", 0, nv04_flip_complete,
--				      true, NULL, 0, &disp->flip);
-+		ret = drm->channel->nvsw.impl->event.new(drm->channel->nvsw.priv,
-+							 nvif_handle(&disp->flip.object),
-+							 &disp->flip.impl, &disp->flip.priv);
- 		if (ret)
- 			return ret;
-+
-+		nvif_event_ctor(&drm->channel->nvsw.object, "kmsFlip", 0, nv04_flip_complete,
-+				&disp->flip);
- 	}
- 
- 	nouveau_hw_save_vga_fonts(dev, 1);
 diff --git a/drivers/gpu/drm/nouveau/include/nvif/driverif.h b/drivers/gpu/drm/nouveau/include/nvif/driverif.h
-index d8a30af9eae7..244024c19206 100644
+index 244024c19206..04d488eb3ad5 100644
 --- a/drivers/gpu/drm/nouveau/include/nvif/driverif.h
 +++ b/drivers/gpu/drm/nouveau/include/nvif/driverif.h
-@@ -435,6 +435,11 @@ struct nvif_disp_impl {
- struct nvif_engobj_impl {
- 	void (*del)(struct nvif_engobj_priv *);
- 	int (*mthd)(struct nvif_engobj_priv *, u32 mthd, void *argv, u32 argc);
-+
-+	struct {
-+		int (*new)(struct nvif_engobj_priv *, u64 token,
-+			   const struct nvif_event_impl **, struct nvif_event_priv **);
-+	} event;
+@@ -27,7 +27,6 @@ struct nvif_driver {
+ 	const char *name;
+ 	int (*suspend)(struct nvif_client_priv *);
+ 	int (*resume)(struct nvif_client_priv *);
+-	int (*ioctl)(void *priv, void *data, u32 size, void **hack);
+ 	void __iomem *(*map)(struct nvif_client_priv *, u64 handle, u32 size);
+ 	void (*unmap)(struct nvif_client_priv *, void __iomem *ptr, u32 size);
+ };
+@@ -474,8 +473,7 @@ struct nvif_chan_impl {
+ 
+ 	struct {
+ 		int (*new)(struct nvif_chan_priv *, u32 handle, u8 engi, s32 oclass,
+-			   const struct nvif_engobj_impl **, struct nvif_engobj_priv **,
+-			   u64 object);
++			   const struct nvif_engobj_impl **, struct nvif_engobj_priv **);
+ 	} engobj;
  };
  
- struct nvif_chan_impl {
-diff --git a/drivers/gpu/drm/nouveau/include/nvif/event.h b/drivers/gpu/drm/nouveau/include/nvif/event.h
-index 338082bdc67c..42c2d0b5f66b 100644
---- a/drivers/gpu/drm/nouveau/include/nvif/event.h
-+++ b/drivers/gpu/drm/nouveau/include/nvif/event.h
-@@ -2,7 +2,6 @@
- #ifndef __NVIF_EVENT_H__
- #define __NVIF_EVENT_H__
- #include <nvif/object.h>
--#include <nvif/if000e.h>
- struct nvif_event;
- 
- #define NVIF_EVENT_KEEP 0
-@@ -23,30 +22,14 @@ nvif_event_constructed(struct nvif_event *event)
- 	return nvif_object_constructed(&event->object);
- }
- 
--int nvif_event_ctor_(struct nvif_object *, const char *, u32, nvif_event_func, bool,
--		     struct nvif_event_v0 *, u32, bool, struct nvif_event *);
--
--static inline int
--nvif_event_ctor_0(struct nvif_object *parent, const char *name, u32 handle, nvif_event_func func,
--		  bool wait, struct nvif_event_v0 *args, u32 argc, struct nvif_event *event)
--{
--	return nvif_event_ctor_(parent, name, handle, func, wait, args, argc, true, event);
--}
--
- static inline void
--nvif_event_ctor_1(struct nvif_object *parent, const char *name, u32 handle,
--		  nvif_event_func func, struct nvif_event *event)
-+nvif_event_ctor(struct nvif_object *parent, const char *name, u32 handle,
-+		nvif_event_func func, struct nvif_event *event)
- {
- 	nvif_object_ctor(parent, name ?: "nvifEvent", handle, 0, &event->object);
- 	event->func = func;
- }
- 
--#define nvif_event_ctor__(A,B,C,D,E,F,G,H,IMPL,...) IMPL
--#define nvif_event_ctor(A...) nvif_event_ctor__(A, nvif_event_ctor_0, \
--						   nvif_event_ctor__, \
--						   nvif_event_ctor__, \
--						   nvif_event_ctor_1)(A)
--
- void nvif_event_dtor(struct nvif_event *);
- int nvif_event_allow(struct nvif_event *);
- int nvif_event_block(struct nvif_event *);
-diff --git a/drivers/gpu/drm/nouveau/include/nvif/if000e.h b/drivers/gpu/drm/nouveau/include/nvif/if000e.h
-deleted file mode 100644
-index 90a936cb1766..000000000000
---- a/drivers/gpu/drm/nouveau/include/nvif/if000e.h
-+++ /dev/null
-@@ -1,26 +0,0 @@
--/* SPDX-License-Identifier: MIT */
--#ifndef __NVIF_IF000E_H__
--#define __NVIF_IF000E_H__
--
--union nvif_event_args {
--	struct nvif_event_v0 {
--		__u8 version;
--		__u8 wait;
--		__u8 pad02[6];
--		__u8 data[];
--	} v0;
--};
--
--#define NVIF_EVENT_V0_ALLOW 0x00
--#define NVIF_EVENT_V0_BLOCK 0x01
--
--union nvif_event_allow_args {
--	struct nvif_event_allow_vn {
--	} vn;
--};
--
--union nvif_event_block_args {
--	struct nvif_event_block_vn {
--	} vn;
--};
--#endif
 diff --git a/drivers/gpu/drm/nouveau/include/nvif/object.h b/drivers/gpu/drm/nouveau/include/nvif/object.h
-index 56308333ef86..98a8bba8f0ee 100644
+index 98a8bba8f0ee..94722ded1d68 100644
 --- a/drivers/gpu/drm/nouveau/include/nvif/object.h
 +++ b/drivers/gpu/drm/nouveau/include/nvif/object.h
-@@ -40,7 +40,6 @@ void nvif_object_ctor_1(struct nvif_object *parent, const char *name, u32 handle
+@@ -28,18 +28,9 @@ nvif_object_constructed(struct nvif_object *object)
+ 	return object->client != NULL;
+ }
  
+-int nvif_object_ctor_0(struct nvif_object *, const char *name, u32 handle,
+-		       s32 oclass, void *, u32, struct nvif_object *);
+-void nvif_object_ctor_1(struct nvif_object *parent, const char *name, u32 handle, s32 oclass,
+-			struct nvif_object *);
+-
+-#define nvif_object_ctor_(A,B,C,D,E,F,G,IMPL,...) IMPL
+-#define nvif_object_ctor(A...) nvif_object_ctor_(A, nvif_object_ctor_0, \
+-						    nvif_object_ctor__, \
+-						    nvif_object_ctor_1)(A)
+-
++void nvif_object_ctor(struct nvif_object *parent, const char *name, u32 handle, s32 oclass,
++		      struct nvif_object *);
  void nvif_object_dtor(struct nvif_object *);
- int  nvif_object_ioctl(struct nvif_object *, void *, u32, void **);
--int  nvif_object_mthd(struct nvif_object *, u32, void *, u32);
+-int  nvif_object_ioctl(struct nvif_object *, void *, u32, void **);
  int nvif_object_map_cpu(struct nvif_object *, const struct nvif_mapinfo *, struct nvif_map *);
  int nvif_object_unmap_cpu(struct nvif_map *);
  
-@@ -67,8 +66,6 @@ int nvif_object_unmap_cpu(struct nvif_map *);
- 	_data;                                                                 \
- })
- 
--#define nvif_mthd(a,b,c,d) nvif_object_mthd((a), (b), (c), (d))
--
- #define NVIF_RD32_(p,o,dr)   nvif_rd32((p), (o) + (dr))
- #define NVIF_WR32_(p,o,dr,f) nvif_wr32((p), (o) + (dr), (f))
- #define NVIF_RD32(p,A...) DRF_RD(NVIF_RD32_,                  (p), 0, ##A)
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/event.h b/drivers/gpu/drm/nouveau/include/nvkm/core/event.h
-index f31f0f30732a..76e05c8da979 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/core/event.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/core/event.h
-@@ -76,7 +76,6 @@ struct nvif_event_priv;
- int nvkm_uevent_new_(struct nvkm_object *parent, u64 handle, struct nvkm_event *event,
- 		     bool wait, int id, u32 bits, nvkm_uevent_func,
- 		     const struct nvif_event_impl **, struct nvif_event_priv **);
--int nvkm_uevent_new(const struct nvkm_oclass *, void *argv, u32 argc, struct nvkm_object **);
- int nvkm_uevent_add(struct nvif_event_priv *, struct nvkm_event *, int id, u32 bits,
- 		    nvkm_uevent_func);
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/client.h b/drivers/gpu/drm/nouveau/include/nvkm/core/client.h
+index e35aea7a751f..21d75783c258 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/core/client.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/core/client.h
+@@ -36,5 +36,4 @@ extern const struct nvif_client_impl nvkm_client_impl;
+ #define nvif_debug(o,f,a...) nvif_printk((o), DEBUG, INFO, f, ##a)
+ #define nvif_trace(o,f,a...) nvif_printk((o), TRACE, INFO, f, ##a)
+ #define nvif_info(o,f,a...)  nvif_printk((o),  INFO, INFO, f, ##a)
+-#define nvif_ioctl(o,f,a...) nvif_trace((o), "ioctl: "f, ##a)
  #endif
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/ioctl.h b/drivers/gpu/drm/nouveau/include/nvkm/core/ioctl.h
+deleted file mode 100644
+index f52918a43246..000000000000
+--- a/drivers/gpu/drm/nouveau/include/nvkm/core/ioctl.h
++++ /dev/null
+@@ -1,8 +0,0 @@
+-/* SPDX-License-Identifier: MIT */
+-#ifndef __NVKM_IOCTL_H__
+-#define __NVKM_IOCTL_H__
+-#include <core/os.h>
+-struct nvkm_client;
+-
+-int nvkm_ioctl(struct nvkm_client *, void *, u32, void **);
+-#endif
 diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/object.h b/drivers/gpu/drm/nouveau/include/nvkm/core/object.h
-index 69972b0836e4..de8bf1cc95d8 100644
+index de8bf1cc95d8..18d56fd3de72 100644
 --- a/drivers/gpu/drm/nouveau/include/nvkm/core/object.h
 +++ b/drivers/gpu/drm/nouveau/include/nvkm/core/object.h
-@@ -4,7 +4,8 @@
- #include <core/oclass.h>
- struct nvkm_event;
- struct nvkm_gpuobj;
--struct nvkm_uevent;
-+struct nvif_event_impl;
-+struct nvif_event_priv;
- 
- struct nvkm_object {
- 	const struct nvkm_object_func *func;
-@@ -28,7 +29,8 @@ struct nvkm_object_func {
- 	int (*bind)(struct nvkm_object *, struct nvkm_gpuobj *, int align,
- 		    struct nvkm_gpuobj **);
- 	int (*sclass)(struct nvkm_object *, int index, struct nvkm_oclass *);
--	int (*uevent)(struct nvkm_object *, void *argv, u32 argc, struct nvkm_uevent *);
-+	int (*uevent)(struct nvkm_object *, u64 token,
-+		      const struct nvif_event_impl **, struct nvif_event_priv **);
+@@ -17,7 +17,6 @@ struct nvkm_object {
+ 	struct list_head head;
+ 	struct list_head tree;
+ 	u64 object;
+-	struct rb_node node;
  };
  
- void nvkm_object_ctor(const struct nvkm_object_func *,
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/os.h b/drivers/gpu/drm/nouveau/include/nvkm/core/os.h
-index 9d16413239d4..056f182d9b0b 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/core/os.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/core/os.h
-@@ -31,6 +31,5 @@ nvkm_blob_dtor(struct nvkm_blob *blob)
- #define nvkm_list_foreach(p,h,m,c)                                                           \
- 	for (p = nvkm_list_find(p, (h), m, (c)); p; p = nvkm_list_find_next(p, (h), m, (c)))
+ struct nvkm_object_func {
+@@ -50,17 +49,10 @@ int nvkm_object_bind(struct nvkm_object *, struct nvkm_gpuobj *, int align,
+ 		     struct nvkm_gpuobj **);
  
--#define nvkm_uevent nvif_event_priv
- #define nvkm_client nvif_client_priv
- #endif
-diff --git a/drivers/gpu/drm/nouveau/nvif/event.c b/drivers/gpu/drm/nouveau/nvif/event.c
-index 5b8ec641703b..2974ec8e13af 100644
---- a/drivers/gpu/drm/nouveau/nvif/event.c
-+++ b/drivers/gpu/drm/nouveau/nvif/event.c
-@@ -23,20 +23,11 @@
- #include <nvif/driverif.h>
- #include <nvif/printf.h>
+ void nvkm_object_link_(struct nvif_client_priv *, struct nvkm_object *parent, struct nvkm_object *);
+-int nvkm_object_link_rb(struct nvif_client_priv *, struct nvkm_object *parent, u64 handle,
+-		        struct nvkm_object *);
  
--#include <nvif/class.h>
--#include <nvif/if000e.h>
--
- int
- nvif_event_block(struct nvif_event *event)
+ static inline void
+ nvkm_object_link(struct nvkm_object *parent, struct nvkm_object *object)
  {
- 	int ret;
- 
--	if (!event->impl && nvif_event_constructed(event)) {
--		int ret = nvif_mthd(&event->object, NVIF_EVENT_V0_BLOCK, NULL, 0);
--		NVIF_ERRON(ret, &event->object, "[BLOCK]");
--		return ret;
--	}
--
- 	if (!event->impl)
- 		return 0;
- 
-@@ -50,12 +41,6 @@ nvif_event_allow(struct nvif_event *event)
- {
- 	int ret;
- 
--	if (!event->impl && nvif_event_constructed(event)) {
--		int ret = nvif_mthd(&event->object, NVIF_EVENT_V0_ALLOW, NULL, 0);
--		NVIF_ERRON(ret, &event->object, "[ALLOW]");
--		return ret;
--	}
--
- 	if (!event->impl)
- 		return 0;
- 
-@@ -67,38 +52,9 @@ nvif_event_allow(struct nvif_event *event)
- void
- nvif_event_dtor(struct nvif_event *event)
- {
--	if (!event->impl) {
--		nvif_object_dtor(&event->object);
-+	if (!event->impl)
- 		return;
--	}
- 
- 	event->impl->del(event->priv);
- 	event->impl = NULL;
+ 	nvkm_object_link_(parent->client, parent, object);
  }
 -
--int
--nvif_event_ctor_(struct nvif_object *parent, const char *name, u32 handle, nvif_event_func func,
--		 bool wait, struct nvif_event_v0 *args, u32 argc, bool warn,
--		 struct nvif_event *event)
--{
--	struct nvif_event_v0 _args;
--	int ret;
--
--	if (!args) {
--		args = &_args;
--		argc = sizeof(_args);
--	}
--
--	args->version = 0;
--	args->wait = wait;
--
--	ret = nvif_object_ctor(parent, name ?: "nvifEvent", handle,
--			       NVIF_CLASS_EVENT, args, argc, &event->object);
--	NVIF_ERRON(ret && warn, parent, "[NEW EVENT wait:%d size:%zd]",
--		   args->wait, argc - sizeof(*args));
--	if (ret)
--		return ret;
--
--	event->func = func;
--	return 0;
--}
+-bool nvkm_object_insert(struct nvkm_object *);
+-void nvkm_object_remove(struct nvkm_object *);
+-struct nvkm_object *nvkm_object_search(struct nvkm_client *, u64 object,
+-				       const struct nvkm_object_func *);
+ #endif
+diff --git a/drivers/gpu/drm/nouveau/nvif/chan.c b/drivers/gpu/drm/nouveau/nvif/chan.c
+index ff4485ed0e89..79c40bb2cbb6 100644
+--- a/drivers/gpu/drm/nouveau/nvif/chan.c
++++ b/drivers/gpu/drm/nouveau/nvif/chan.c
+@@ -66,7 +66,7 @@ nvif_engobj_ctor(struct nvif_chan *chan, const char *name, u32 handle, s32 oclas
+ 		return ret;
+ 
+ 	ret = chan->impl->engobj.new(chan->priv, handle, engi, oclass, &engobj->impl,
+-				     &engobj->priv, nvif_handle(&engobj->object));
++				     &engobj->priv);
+ 	NVIF_ERRON(ret, &chan->object, "[NEW engobj handle:%08x oclass:%08x]", handle, oclass);
+ 	if (ret)
+ 		return ret;
+diff --git a/drivers/gpu/drm/nouveau/nvif/client.c b/drivers/gpu/drm/nouveau/nvif/client.c
+index 6b3c7b28b212..2a66b23c9d1d 100644
+--- a/drivers/gpu/drm/nouveau/nvif/client.c
++++ b/drivers/gpu/drm/nouveau/nvif/client.c
+@@ -60,7 +60,6 @@ nvif_client_ctor(struct nvif_client *parent, const char *name, struct nvif_clien
+ 		return ret;
+ 
+ 	nvif_object_ctor(&parent->object, name ?: "nvifClient", 0, 0, &client->object);
+-	client->object.priv = client->priv;
+ 	client->driver = parent->driver;
+ 	return 0;
+ }
+diff --git a/drivers/gpu/drm/nouveau/nvif/driver.c b/drivers/gpu/drm/nouveau/nvif/driver.c
+index 95515f2023f4..54263ff7c7e6 100644
+--- a/drivers/gpu/drm/nouveau/nvif/driver.c
++++ b/drivers/gpu/drm/nouveau/nvif/driver.c
+@@ -34,7 +34,6 @@ nvif_driver_ctor(struct nvif_parent *parent, const struct nvif_driver *driver, c
+ 	client->object.client = client;
+ 
+ 	nvif_object_ctor(&client->object, name ?: "nvifDriver", 0, 0, &client->object);
+-	client->object.priv = priv;
+ 	client->driver = driver;
+ 	client->impl = impl;
+ 	client->priv = priv;
 diff --git a/drivers/gpu/drm/nouveau/nvif/object.c b/drivers/gpu/drm/nouveau/nvif/object.c
-index 9887241c5200..3379580463e6 100644
+index 3379580463e6..6044634f20b8 100644
 --- a/drivers/gpu/drm/nouveau/nvif/object.c
 +++ b/drivers/gpu/drm/nouveau/nvif/object.c
-@@ -46,35 +46,6 @@ nvif_object_ioctl(struct nvif_object *object, void *data, u32 size, void **hack)
- 	return client->driver->ioctl(client->object.priv, data, size, hack);
+@@ -25,26 +25,6 @@
+ #include <nvif/object.h>
+ #include <nvif/client.h>
+ #include <nvif/driverif.h>
+-#include <nvif/ioctl.h>
+-
+-int
+-nvif_object_ioctl(struct nvif_object *object, void *data, u32 size, void **hack)
+-{
+-	struct nvif_client *client = object->client;
+-	union {
+-		struct nvif_ioctl_v0 v0;
+-	} *args = data;
+-
+-	if (size >= sizeof(*args) && args->v0.version == 0) {
+-		if (object != &client->object)
+-			args->v0.object = nvif_handle(object);
+-		else
+-			args->v0.object = 0;
+-	} else
+-		return -ENOSYS;
+-
+-	return client->driver->ioctl(client->object.priv, data, size, hack);
+-}
+ 
+ int
+ nvif_object_unmap_cpu(struct nvif_map *map)
+@@ -95,23 +75,15 @@ nvif_object_map_cpu(struct nvif_object *object,
+ void
+ nvif_object_dtor(struct nvif_object *object)
+ {
+-	struct {
+-		struct nvif_ioctl_v0 ioctl;
+-		struct nvif_ioctl_del del;
+-	} args = {
+-		.ioctl.type = NVIF_IOCTL_V0_DEL,
+-	};
+-
+ 	if (!nvif_object_constructed(object))
+ 		return;
+ 
+-	nvif_object_ioctl(object, &args, sizeof(args), NULL);
+ 	object->client = NULL;
  }
  
+ void
+-nvif_object_ctor_1(struct nvif_object *parent, const char *name, u32 handle, s32 oclass,
+-		   struct nvif_object *object)
++nvif_object_ctor(struct nvif_object *parent, const char *name, u32 handle, s32 oclass,
++		 struct nvif_object *object)
+ {
+ 	object->parent = parent->parent;
+ 	object->client = parent->client;
+@@ -122,49 +94,3 @@ nvif_object_ctor_1(struct nvif_object *parent, const char *name, u32 handle, s32
+ 	object->map.ptr = NULL;
+ 	object->map.size = 0;
+ }
+-
 -int
--nvif_object_mthd(struct nvif_object *object, u32 mthd, void *data, u32 size)
+-nvif_object_ctor_0(struct nvif_object *parent, const char *name, u32 handle,
+-		   s32 oclass, void *data, u32 size, struct nvif_object *object)
 -{
 -	struct {
 -		struct nvif_ioctl_v0 ioctl;
--		struct nvif_ioctl_mthd_v0 mthd;
+-		struct nvif_ioctl_new_v0 new;
 -	} *args;
--	u8 stack[128];
--	int ret;
+-	int ret = 0;
 -
--	if (sizeof(*args) + size > sizeof(stack)) {
--		if (!(args = kmalloc(sizeof(*args) + size, GFP_KERNEL)))
+-	object->client = NULL;
+-	object->name = name ? name : "nvifObject";
+-	object->handle = handle;
+-	object->oclass = oclass;
+-	object->map.ptr = NULL;
+-	object->map.size = 0;
+-
+-	if (parent) {
+-		if (!(args = kmalloc(sizeof(*args) + size, GFP_KERNEL))) {
+-			nvif_object_dtor(object);
 -			return -ENOMEM;
--	} else {
--		args = (void *)stack;
--	}
--	args->ioctl.version = 0;
--	args->ioctl.type = NVIF_IOCTL_V0_MTHD;
--	args->mthd.version = 0;
--	args->mthd.method = mthd;
+-		}
 -
--	memcpy(args->mthd.data, data, size);
--	ret = nvif_object_ioctl(object, args, sizeof(*args) + size, NULL);
--	memcpy(data, args->mthd.data, size);
--	if (args != (void *)stack)
+-		object->parent = parent->parent;
+-
+-		args->ioctl.version = 0;
+-		args->ioctl.type = NVIF_IOCTL_V0_NEW;
+-		args->new.version = 0;
+-		args->new.object = nvif_handle(object);
+-		args->new.handle = handle;
+-		args->new.oclass = oclass;
+-
+-		memcpy(args->new.data, data, size);
+-		ret = nvif_object_ioctl(parent, args, sizeof(*args) + size,
+-					&object->priv);
+-		memcpy(data, args->new.data, size);
 -		kfree(args);
+-		if (ret == 0)
+-			object->client = parent->client;
+-	}
+-
+-	if (ret)
+-		nvif_object_dtor(object);
 -	return ret;
 -}
--
- int
- nvif_object_unmap_cpu(struct nvif_map *map)
- {
-diff --git a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-index b34ed158aa63..50e9a6d51c05 100644
---- a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-@@ -24,7 +24,6 @@
- #include <core/ioctl.h>
+diff --git a/drivers/gpu/drm/nouveau/nvkm/core/Kbuild b/drivers/gpu/drm/nouveau/nvkm/core/Kbuild
+index 7d111a5481d3..50ff041ecdf0 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/core/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/core/Kbuild
+@@ -7,7 +7,6 @@ nvkm-y += nvkm/core/event.o
+ nvkm-y += nvkm/core/firmware.o
+ nvkm-y += nvkm/core/gpuobj.o
+ nvkm-y += nvkm/core/intr.o
+-nvkm-y += nvkm/core/ioctl.o
+ nvkm-y += nvkm/core/memory.o
+ nvkm-y += nvkm/core/mm.o
+ nvkm-y += nvkm/core/object.o
+diff --git a/drivers/gpu/drm/nouveau/nvkm/core/driver.c b/drivers/gpu/drm/nouveau/nvkm/core/driver.c
+index ea00b8724f24..37d7fa8f9760 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/core/driver.c
++++ b/drivers/gpu/drm/nouveau/nvkm/core/driver.c
+@@ -28,7 +28,6 @@
  #include <core/client.h>
- #include <core/engine.h>
--#include <core/event.h>
+ #include <core/driver.h>
+ #include <core/event.h>
+-#include <core/ioctl.h>
  
- #include <nvif/unpack.h>
- #include <nvif/ioctl.h>
-@@ -41,15 +40,6 @@ nvkm_ioctl_nop(struct nvkm_client *client,
- static int
- nvkm_ioctl_sclass_(struct nvkm_object *object, int index, struct nvkm_oclass *oclass)
- {
--	if ( object->func->uevent &&
--	    !object->func->uevent(object, NULL, 0, NULL) && index-- == 0) {
--		oclass->ctor = nvkm_uevent_new;
--		oclass->base.minver = 0;
--		oclass->base.maxver = 0;
--		oclass->base.oclass = NVIF_CLASS_EVENT;
--		return 0;
--	}
--
- 	if (object->func->sclass)
- 		return object->func->sclass(object, index, oclass);
- 
-@@ -82,7 +72,7 @@ nvkm_ioctl_new(struct nvkm_client *client,
- 	} else
- 		return ret;
- 
--	if (!parent->func->sclass && !parent->func->uevent) {
-+	if (!parent->func->sclass) {
- 		nvif_ioctl(parent, "cannot have children\n");
- 		return -EINVAL;
- 	}
-@@ -142,25 +132,6 @@ nvkm_ioctl_del(struct nvkm_client *client,
- 	return ret ? ret : 1;
+ #include <nvif/driverif.h>
+ #include <nvif/event.h>
+@@ -45,12 +44,6 @@ nvkm_driver_map(struct nvif_client_priv *client, u64 handle, u32 size)
+ 	return ioremap(handle, size);
  }
  
 -static int
--nvkm_ioctl_mthd(struct nvkm_client *client,
--		struct nvkm_object *object, void *data, u32 size)
+-nvkm_driver_ioctl(void *priv, void *data, u32 size, void **hack)
+-{
+-	return nvkm_ioctl(priv, data, size, hack);
+-}
+-
+ static int
+ nvkm_driver_resume(struct nvif_client_priv *client)
+ {
+@@ -80,7 +73,6 @@ nvkm_driver = {
+ 	.name = "nvkm",
+ 	.suspend = nvkm_driver_suspend,
+ 	.resume = nvkm_driver_resume,
+-	.ioctl = nvkm_driver_ioctl,
+ 	.map = nvkm_driver_map,
+ 	.unmap = nvkm_driver_unmap,
+ };
+diff --git a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+deleted file mode 100644
+index 50e9a6d51c05..000000000000
+--- a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
++++ /dev/null
+@@ -1,196 +0,0 @@
+-/*
+- * Copyright 2014 Red Hat Inc.
+- *
+- * Permission is hereby granted, free of charge, to any person obtaining a
+- * copy of this software and associated documentation files (the "Software"),
+- * to deal in the Software without restriction, including without limitation
+- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+- * and/or sell copies of the Software, and to permit persons to whom the
+- * Software is furnished to do so, subject to the following conditions:
+- *
+- * The above copyright notice and this permission notice shall be included in
+- * all copies or substantial portions of the Software.
+- *
+- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+- * THE COPYRIGHT HOLDER(S) OR AUTHOR(S) BE LIABLE FOR ANY CLAIM, DAMAGES OR
+- * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+- * OTHER DEALINGS IN THE SOFTWARE.
+- *
+- * Authors: Ben Skeggs <bskeggs@redhat.com>
+- */
+-#include <core/ioctl.h>
+-#include <core/client.h>
+-#include <core/engine.h>
+-
+-#include <nvif/unpack.h>
+-#include <nvif/ioctl.h>
+-
+-static int
+-nvkm_ioctl_nop(struct nvkm_client *client,
+-	       struct nvkm_object *object, void *data, u32 size)
+-{
+-	return -ENOSYS;
+-}
+-
+-#include <nvif/class.h>
+-
+-static int
+-nvkm_ioctl_sclass_(struct nvkm_object *object, int index, struct nvkm_oclass *oclass)
+-{
+-	if (object->func->sclass)
+-		return object->func->sclass(object, index, oclass);
+-
+-	return -ENOSYS;
+-}
+-
+-static int
+-nvkm_ioctl_sclass(struct nvkm_client *client,
+-		  struct nvkm_object *object, void *data, u32 size)
+-{
+-	return -ENODEV;
+-}
+-
+-static int
+-nvkm_ioctl_new(struct nvkm_client *client,
+-	       struct nvkm_object *parent, void *data, u32 size)
 -{
 -	union {
--		struct nvif_ioctl_mthd_v0 v0;
+-		struct nvif_ioctl_new_v0 v0;
+-	} *args = data;
+-	struct nvkm_object *object = NULL;
+-	struct nvkm_oclass oclass;
+-	int ret = -ENOSYS, i = 0;
+-
+-	nvif_ioctl(parent, "new size %d\n", size);
+-	if (!(ret = nvif_unpack(ret, &data, &size, args->v0, 0, 0, true))) {
+-		nvif_ioctl(parent, "new vers %d handle %08x class %08x object %016llx\n",
+-			   args->v0.version, args->v0.handle, args->v0.oclass,
+-			   args->v0.object);
+-	} else
+-		return ret;
+-
+-	if (!parent->func->sclass) {
+-		nvif_ioctl(parent, "cannot have children\n");
+-		return -EINVAL;
+-	}
+-
+-	do {
+-		memset(&oclass, 0x00, sizeof(oclass));
+-		oclass.handle = args->v0.handle;
+-		oclass.object = args->v0.object;
+-		oclass.client = client;
+-		oclass.parent = parent;
+-		ret = nvkm_ioctl_sclass_(parent, i++, &oclass);
+-		if (ret)
+-			return ret;
+-	} while (oclass.base.oclass != args->v0.oclass);
+-
+-	if (oclass.engine) {
+-		oclass.engine = nvkm_engine_ref(oclass.engine);
+-		if (IS_ERR(oclass.engine))
+-			return PTR_ERR(oclass.engine);
+-	}
+-
+-	ret = oclass.ctor(&oclass, data, size, &object);
+-	nvkm_engine_unref(&oclass.engine);
+-	if (ret == 0) {
+-		ret = nvkm_object_init(object);
+-		if (ret == 0) {
+-			list_add_tail(&object->head, &parent->tree);
+-			if (nvkm_object_insert(object)) {
+-				client->data = object;
+-				return 0;
+-			}
+-			ret = -EEXIST;
+-		}
+-		nvkm_object_fini(object, false);
+-	}
+-
+-	nvkm_object_del(&object);
+-	return ret;
+-}
+-
+-static int
+-nvkm_ioctl_del(struct nvkm_client *client,
+-	       struct nvkm_object *object, void *data, u32 size)
+-{
+-	union {
+-		struct nvif_ioctl_del none;
 -	} *args = data;
 -	int ret = -ENOSYS;
 -
--	nvif_ioctl(object, "mthd size %d\n", size);
--	if (!(ret = nvif_unpack(ret, &data, &size, args->v0, 0, 0, true))) {
--		nvif_ioctl(object, "mthd vers %d mthd %02x\n",
--			   args->v0.version, args->v0.method);
--		ret = nvkm_object_mthd(object, args->v0.method, data, size);
+-	nvif_ioctl(object, "delete size %d\n", size);
+-	if (!(ret = nvif_unvers(ret, &data, &size, args->none))) {
+-		nvif_ioctl(object, "delete\n");
+-		nvkm_object_fini(object, false);
+-		nvkm_object_del(&object);
+-	}
+-
+-	return ret ? ret : 1;
+-}
+-
+-static struct {
+-	int version;
+-	int (*func)(struct nvkm_client *, struct nvkm_object *, void *, u32);
+-}
+-nvkm_ioctl_v0[] = {
+-	{ 0x00, nvkm_ioctl_nop },
+-	{ 0x00, nvkm_ioctl_sclass },
+-	{ 0x00, nvkm_ioctl_new },
+-	{ 0x00, nvkm_ioctl_del },
+-};
+-
+-static int
+-nvkm_ioctl_path(struct nvkm_client *client, u64 handle, u32 type,
+-		void *data, u32 size)
+-{
+-	struct nvkm_object *object;
+-	int ret;
+-
+-	object = nvkm_object_search(client, handle, NULL);
+-	if (IS_ERR(object)) {
+-		nvif_ioctl(&client->object, "object not found\n");
+-		return PTR_ERR(object);
+-	}
+-
+-	if (ret = -EINVAL, type < ARRAY_SIZE(nvkm_ioctl_v0)) {
+-		if (nvkm_ioctl_v0[type].version == 0)
+-			ret = nvkm_ioctl_v0[type].func(client, object, data, size);
 -	}
 -
 -	return ret;
 -}
 -
- static struct {
- 	int version;
- 	int (*func)(struct nvkm_client *, struct nvkm_object *, void *, u32);
-@@ -170,7 +141,6 @@ nvkm_ioctl_v0[] = {
- 	{ 0x00, nvkm_ioctl_sclass },
- 	{ 0x00, nvkm_ioctl_new },
- 	{ 0x00, nvkm_ioctl_del },
--	{ 0x00, nvkm_ioctl_mthd },
- };
- 
- static int
-diff --git a/drivers/gpu/drm/nouveau/nvkm/core/oproxy.c b/drivers/gpu/drm/nouveau/nvkm/core/oproxy.c
-index 690131104d7b..890532836c03 100644
---- a/drivers/gpu/drm/nouveau/nvkm/core/oproxy.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/core/oproxy.c
-@@ -55,18 +55,6 @@ nvkm_oproxy_sclass(struct nvkm_object *object, int index,
- 	return oproxy->object->func->sclass(oproxy->object, index, oclass);
- }
- 
--static int
--nvkm_oproxy_uevent(struct nvkm_object *object, void *argv, u32 argc,
--		   struct nvkm_uevent *uevent)
+-int
+-nvkm_ioctl(struct nvkm_client *client, void *data, u32 size, void **hack)
 -{
--	struct nvkm_oproxy *oproxy = nvkm_oproxy(object);
+-	struct nvkm_object *object = &client->object;
+-	union {
+-		struct nvif_ioctl_v0 v0;
+-	} *args = data;
+-	int ret = -ENOSYS;
 -
--	if (!oproxy->object->func->uevent)
--		return -ENOSYS;
+-	nvif_ioctl(object, "size %d\n", size);
 -
--	return oproxy->object->func->uevent(oproxy->object, argv, argc, uevent);
--}
--
- static int
- nvkm_oproxy_fini(struct nvkm_object *object, bool suspend)
- {
-@@ -142,7 +130,6 @@ nvkm_oproxy_func = {
- 	.ntfy = nvkm_oproxy_ntfy,
- 	.bind = nvkm_oproxy_bind,
- 	.sclass = nvkm_oproxy_sclass,
--	.uevent = nvkm_oproxy_uevent,
- };
- 
- void
-diff --git a/drivers/gpu/drm/nouveau/nvkm/core/uevent.c b/drivers/gpu/drm/nouveau/nvkm/core/uevent.c
-index d922eebb689c..365e41134f3d 100644
---- a/drivers/gpu/drm/nouveau/nvkm/core/uevent.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/core/uevent.c
-@@ -23,7 +23,6 @@
- #include <core/client.h>
- 
- #include <nvif/driverif.h>
--#include <nvif/if000e.h>
- 
- struct nvif_event_priv {
- 	struct nvkm_object object;
-@@ -35,43 +34,6 @@ struct nvif_event_priv {
- 	atomic_t allowed;
- };
- 
--static int
--nvkm_uevent_mthd_block(struct nvkm_uevent *uevent, union nvif_event_block_args *args, u32 argc)
--{
--	if (argc != sizeof(args->vn))
--		return -ENOSYS;
--
--	nvkm_event_ntfy_block(&uevent->ntfy);
--	atomic_set(&uevent->allowed, 0);
--	return 0;
--}
--
--static int
--nvkm_uevent_mthd_allow(struct nvkm_uevent *uevent, union nvif_event_allow_args *args, u32 argc)
--{
--	if (argc != sizeof(args->vn))
--		return -ENOSYS;
--
--	nvkm_event_ntfy_allow(&uevent->ntfy);
--	atomic_set(&uevent->allowed, 1);
--	return 0;
--}
--
--static int
--nvkm_uevent_mthd(struct nvkm_object *object, u32 mthd, void *argv, u32 argc)
--{
--	struct nvif_event_priv *uevent = container_of(object, typeof(*uevent), object);
--
--	switch (mthd) {
--	case NVIF_EVENT_V0_ALLOW: return nvkm_uevent_mthd_allow(uevent, argv, argc);
--	case NVIF_EVENT_V0_BLOCK: return nvkm_uevent_mthd_block(uevent, argv, argc);
--	default:
--		break;
+-	if (!(ret = nvif_unpack(ret, &data, &size, args->v0, 0, 0, true))) {
+-		nvif_ioctl(object,
+-			   "vers %d type %02x object %016llx owner %02x\n",
+-			   args->v0.version, args->v0.type, args->v0.object,
+-			   args->v0.owner);
+-		ret = nvkm_ioctl_path(client, args->v0.object, args->v0.type,
+-				      data, size);
 -	}
 -
--	return -EINVAL;
+-	if (ret != 1) {
+-		nvif_ioctl(object, "return %d\n", ret);
+-		if (hack) {
+-			*hack = client->data;
+-			client->data = NULL;
+-		}
+-	}
+-
+-	return ret;
+-}
+diff --git a/drivers/gpu/drm/nouveau/nvkm/core/object.c b/drivers/gpu/drm/nouveau/nvkm/core/object.c
+index 8ad1aff9b8c7..5645dd51abd5 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/core/object.c
++++ b/drivers/gpu/drm/nouveau/nvkm/core/object.c
+@@ -25,79 +25,6 @@
+ #include <core/client.h>
+ #include <core/engine.h>
+ 
+-struct nvkm_object *
+-nvkm_object_search(struct nvkm_client *client, u64 handle,
+-		   const struct nvkm_object_func *func)
+-{
+-	struct nvkm_object *object;
+-	unsigned long flags;
+-
+-	if (handle) {
+-		spin_lock_irqsave(&client->obj_lock, flags);
+-		struct rb_node *node = client->objroot.rb_node;
+-		while (node) {
+-			object = rb_entry(node, typeof(*object), node);
+-			if (handle < object->object)
+-				node = node->rb_left;
+-			else
+-			if (handle > object->object)
+-				node = node->rb_right;
+-			else {
+-				spin_unlock_irqrestore(&client->obj_lock, flags);
+-				goto done;
+-			}
+-		}
+-		spin_unlock_irqrestore(&client->obj_lock, flags);
+-		return ERR_PTR(-ENOENT);
+-	} else {
+-		object = &client->object;
+-	}
+-
+-done:
+-	if (unlikely(func && object->func != func))
+-		return ERR_PTR(-EINVAL);
+-	return object;
 -}
 -
- static int
- nvkm_uevent_block(struct nvif_event_priv *uevent)
- {
-@@ -138,7 +100,6 @@ nvkm_uevent = {
- 	.dtor = nvkm_uevent_dtor,
- 	.init = nvkm_uevent_init,
- 	.fini = nvkm_uevent_fini,
--	.mthd = nvkm_uevent_mthd,
- };
- 
- static int
-@@ -165,29 +126,6 @@ nvkm_uevent_add(struct nvif_event_priv *uevent, struct nvkm_event *event, int id
- 	return 0;
- }
- 
--int
--nvkm_uevent_new(const struct nvkm_oclass *oclass, void *argv, u32 argc,
--		struct nvkm_object **pobject)
+-void
+-nvkm_object_remove(struct nvkm_object *object)
 -{
--	struct nvkm_object *parent = oclass->parent;
--	struct nvif_event_priv *uevent;
--	union nvif_event_args *args = argv;
+-	unsigned long flags;
 -
--	if (argc < sizeof(args->v0) || args->v0.version != 0)
--		return -ENOSYS;
+-	spin_lock_irqsave(&object->client->obj_lock, flags);
+-	if (!RB_EMPTY_NODE(&object->node))
+-		rb_erase(&object->node, &object->client->objroot);
+-	spin_unlock_irqrestore(&object->client->obj_lock, flags);
+-}
 -
--	if (!(uevent = kzalloc(sizeof(*uevent), GFP_KERNEL)))
--		return -ENOMEM;
--	*pobject = &uevent->object;
+-bool
+-nvkm_object_insert(struct nvkm_object *object)
+-{
+-	struct rb_node **ptr;
+-	struct rb_node *parent = NULL;
+-	unsigned long flags;
 -
--	nvkm_object_ctor(&nvkm_uevent, oclass, &uevent->object);
--	uevent->parent = parent;
--	uevent->func = NULL;
--	uevent->wait = args->v0.wait;
--	uevent->ntfy.event = NULL;
--	return parent->func->uevent(parent, &args->v0.data, argc - sizeof(args->v0), uevent);
+-	spin_lock_irqsave(&object->client->obj_lock, flags);
+-	ptr = &object->client->objroot.rb_node;
+-	while (*ptr) {
+-		struct nvkm_object *this = rb_entry(*ptr, typeof(*this), node);
+-		parent = *ptr;
+-		if (object->object < this->object) {
+-			ptr = &parent->rb_left;
+-		} else if (object->object > this->object) {
+-			ptr = &parent->rb_right;
+-		} else {
+-			spin_unlock_irqrestore(&object->client->obj_lock, flags);
+-			return false;
+-		}
+-	}
+-
+-	rb_link_node(&object->node, parent, ptr);
+-	rb_insert_color(&object->node, &object->client->objroot);
+-	spin_unlock_irqrestore(&object->client->obj_lock, flags);
+-	return true;
 -}
 -
  int
- nvkm_uevent_new_(struct nvkm_object *parent, u64 handle, struct nvkm_event *event,
- 		 bool wait, int id, u32 bits, nvkm_uevent_func func,
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/uchan.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/uchan.c
-index 6682245e4928..281994235c5f 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/uchan.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/uchan.c
-@@ -46,6 +46,18 @@ struct nvkm_uobj {
- 	int hash;
- };
- 
-+static int
-+nvkm_uchan_object_event_new(struct nvif_engobj_priv *priv, u64 token,
-+			    const struct nvif_event_impl **pimpl, struct nvif_event_priv **ppriv)
-+{
-+	struct nvkm_uobj *uobj = (void *)priv;
-+
-+	if (!uobj->oproxy.object->func->uevent)
-+		return -ENODEV;
-+
-+	return uobj->oproxy.object->func->uevent(uobj->oproxy.object, token, pimpl, ppriv);
-+}
-+
- static int
- nvkm_uchan_object_mthd(struct nvif_engobj_priv *priv, u32 mthd, void *argv, u32 argc)
+ nvkm_object_mthd(struct nvkm_object *object, u32 mthd, void *data, u32 size)
  {
-@@ -68,6 +80,7 @@ static const struct nvif_engobj_impl
- nvkm_uchan_object_impl = {
- 	.del = nvkm_uchan_object_del,
- 	.mthd = nvkm_uchan_object_mthd,
-+	.event.new = nvkm_uchan_object_event_new,
- };
+@@ -232,7 +159,6 @@ nvkm_object_del(struct nvkm_object **pobject)
  
- static int
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/sw/nvsw.c b/drivers/gpu/drm/nouveau/nvkm/engine/sw/nvsw.c
-index f5affa1c8f34..6786882b5f7f 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/sw/nvsw.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/sw/nvsw.c
-@@ -27,17 +27,11 @@
- #include <nvif/if0004.h>
+ 	if (object && !WARN_ON(!object->func)) {
+ 		*pobject = nvkm_object_dtor(object);
+-		nvkm_object_remove(object);
  
- static int
--nvkm_nvsw_uevent(struct nvkm_object *object, void *argv, u32 argc, struct nvkm_uevent *uevent)
-+nvkm_nvsw_uevent(struct nvkm_object *object, u64 token,
-+		 const struct nvif_event_impl **pimpl, struct nvif_event_priv **ppriv)
- {
--	union nv04_nvsw_event_args *args = argv;
--
--	if (!uevent)
--		return 0;
--	if (argc != sizeof(args->vn))
--		return -ENOSYS;
--
--	return nvkm_uevent_add(uevent, &nvkm_nvsw(object)->chan->event, 0,
--			       NVKM_SW_CHAN_EVENT_PAGE_FLIP, NULL);
-+	return nvkm_uevent_new_(object, token, &nvkm_nvsw(object)->chan->event, true, 0,
-+				NVKM_SW_CHAN_EVENT_PAGE_FLIP, NULL, pimpl, ppriv);
+ 		spin_lock_irq(&object->client->obj_lock);
+ 		list_del(&object->head);
+@@ -255,7 +181,6 @@ nvkm_object_ctor(const struct nvkm_object_func *func,
+ 	object->object = oclass->object;
+ 	INIT_LIST_HEAD(&object->head);
+ 	INIT_LIST_HEAD(&object->tree);
+-	RB_CLEAR_NODE(&object->node);
+ 	WARN_ON(IS_ERR(object->engine));
  }
  
+@@ -296,20 +221,3 @@ nvkm_object_link_(struct nvif_client_priv *client, struct nvkm_object *parent,
+ 	list_add_tail(&object->head, &parent->tree);
+ 	spin_unlock_irq(&client->obj_lock);
+ }
+-
+-int
+-nvkm_object_link_rb(struct nvif_client_priv *client, struct nvkm_object *parent, u64 handle,
+-		    struct nvkm_object *object)
+-{
+-	nvkm_object_link_(client, parent, object);
+-
+-	object->object = handle;
+-
+-	if (!nvkm_object_insert(object)) {
+-		nvkm_object_fini(object, false);
+-		nvkm_object_del(&object);
+-		return -EEXIST;
+-	}
+-
+-	return 0;
+-}
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/uchan.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/uchan.c
+index 281994235c5f..e691853000fb 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/uchan.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/uchan.c
+@@ -214,8 +214,7 @@ nvkm_uchan_object_new(const struct nvkm_oclass *oclass, void *argv, u32 argc,
+ 
  static int
+ nvkm_uchan_engobj_new(struct nvif_chan_priv *uchan, u32 handle, u8 engi, s32 oclass,
+-		      const struct nvif_engobj_impl **pimpl, struct nvif_engobj_priv **ppriv,
+-		      u64 _handle)
++		      const struct nvif_engobj_impl **pimpl, struct nvif_engobj_priv **ppriv)
+ {
+ 	struct nvkm_chan *chan = uchan->chan;
+ 	struct nvkm_runl *runl = chan->cgrp->runl;
+@@ -285,9 +284,7 @@ nvkm_uchan_engobj_new(struct nvif_chan_priv *uchan, u32 handle, u8 engi, s32 ocl
+ 	*pimpl = &nvkm_uchan_object_impl;
+ 	*ppriv = (void *)container_of(object, struct nvkm_uobj, oproxy.base);
+ 
+-	ret = nvkm_object_link_rb(uchan->object.client, &uchan->object, _handle, object);
+-	if (ret)
+-		nvkm_object_fini(object, false);
++	nvkm_object_link(&uchan->object, object);
+ 
+ done:
+ 	if (ret)
 -- 
 2.41.0
 
