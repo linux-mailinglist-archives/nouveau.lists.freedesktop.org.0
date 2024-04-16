@@ -2,71 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30AE18A7915
-	for <lists+nouveau@lfdr.de>; Wed, 17 Apr 2024 01:42:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 550708A7913
+	for <lists+nouveau@lfdr.de>; Wed, 17 Apr 2024 01:42:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 79368112FA0;
-	Tue, 16 Apr 2024 23:42:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D757F112F66;
+	Tue, 16 Apr 2024 23:42:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="HIDt3KEL";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="VZufIFtI";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2041.outbound.protection.outlook.com [40.107.94.41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3B73A112F9E
- for <nouveau@lists.freedesktop.org>; Tue, 16 Apr 2024 23:42:52 +0000 (UTC)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2059.outbound.protection.outlook.com [40.107.236.59])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EDF46112F9A
+ for <nouveau@lists.freedesktop.org>; Tue, 16 Apr 2024 23:42:47 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ncEup2i79Fq7uhf7gzMeZ+H9+RY03arnh6cdGb6r2opIgIGJd21ykQqKlzuSGQnnliqQ3XBDoXKaV1qwLvHhDAawNgYnMstMuB9ocGsingKUojT6RQbWUFULQmwoIRlwhzEaDlOpwpUonS1ME61bFUvMv6ITKzXD+NFasDpbpn+sCXrJctIsPKZLLVB6gpvh/TTAjLTbLdiKuoPU88fGjyQv8MzkLJR50xY9hrA98d9o9NVxRPXfUI2c46YTXGggeoDezRZ3C4QNi7dBZfZHrEDOHdT0lYX7waYh8iw00b2NJDDiZnUQBhvU8dF/gzZGV8flaKVg3GVwDGtPu1TEEA==
+ b=KM6pmEk/rPUcbo6+cfUvoRIGhViO/puz3ndAn6Ojt85O7mx7IpKYzI+0bcQ7COqIopj31NmWS+952SQrEXjpHIoRwBQpGpHLy1JHRA5Qxu4vJZJSy277yiT1EHkNvujua4tu0+P6myAbNmH4EPJ84vcchN19xlXJILCBOlV8nPSC7JRezRTOn1ZUjY2ud9fzopj9e1j/yPTfvX5HmJXrcjGQ24k9Fy+fNQYfolgkwlgAmPb61vjK0M/1eLHr/DCsYyWAamFAQ2VcEGqkVlhAxMJMXUZSQHI3v5wHyAh5BKSgh3bgK25UHiFiyULElSCsjm8w4qLAaHX2sa1kE1vUSg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oi28mYABK7Gx+jei/zhyvKv00mOy8d1hFSgbDK9Tlpg=;
- b=WdsQbdMTa+MY3zvQy/aeP4PcpRNk/bvUHAEUlA7W2tRXm4syDFNRTG6o2+o6wjObxADgtqTdohqnMKb7VmJmC2QlIqOj8NTv/g8fxNt74B/6nbhrR89u3c9dynsBo/bk2q0Qsw5UbpXAX7P4eVWRm8XFEvdyi6QvxSOt1bxbahsJ9d8NnCxCAHiRQgFj9BKsMHUJp81q0Sm1S45YtnXB39zQU91C2zMZhFcNfeNdRRgSfRZlbjGs2uLZvSXIRpIwc98urmvWdBb05wwIXxSSQai195Om1OwDqqIg5KBfTGkpxw2uHAz/89vR5KO9sqRXXbktSx8Y55fCT3KQ5yHsKw==
+ bh=5pJU2/vg5S4U+AUK7UVKYVCU++bq4rq/xp/ryHWYC6c=;
+ b=Myo8mmKWEtloqeLzNLNJTF9p4wLmWqYw82pXFLtbpvZauTJE5ZBcmNaOjOsNjHdTo6xXQ9LIjfqcvHlOCrqjOqz8yXtQ6tIuE81LYsTtDzITLS+DZHHKnE7UR44O76JBBNLHFfHwWWo3AvkPpL+YB08TnRLyZONFWqBSijMWgYdrcqzy6nKL60zAJQy/BDOaPKxwcbH5uAw7RJDQMC7UPjroMdGiISv2pMSxx9Q4LbI3Tuko7Om0xi7PggpdOKIpv3xNiUbEFmvOPE40pQ9KMiI2bix48PZGQq5PDAKbTTh/U8C5uaA/LjF7QhTvfBg0p23K/Rl6AfxPNVX43A5J7g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=lists.freedesktop.org
+ 216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
  header.from=nvidia.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oi28mYABK7Gx+jei/zhyvKv00mOy8d1hFSgbDK9Tlpg=;
- b=HIDt3KELdyAI4eW9gq03CQyejrLw2U3PIdNouGN3aO4c5zOu6vR3t5Y84cE4IcnSeJ5pojPHPXeTR+rf/HJNIa2roGgGjzYVYSB5E/K+PdxvYh1/qXaEYXXuzw1xu8V8zg69j+ubOM0l261tJ3gxF8TLvdEoDEkooztdjIs5yCORUxDciLoH0Jw1tgHb+lgrRa3ww4fIf4QCAbV7fHYCqzeBkPvfQJTHJGjmfQ/ChK84F4Y+CUcNr09jl/QA8R123/HXALX5saRnLk2n34o4oWfFa3dgGRxihYNOeOqI6EZHpZQA+XJQmNuGe5Bdl/KQEvIUn5dVJVILg9OQTLTHkQ==
-Received: from DS7PR03CA0063.namprd03.prod.outlook.com (2603:10b6:5:3bb::8) by
- BL3PR12MB9051.namprd12.prod.outlook.com (2603:10b6:208:3ba::6) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7452.50; Tue, 16 Apr 2024 23:42:47 +0000
-Received: from CH2PEPF0000013C.namprd02.prod.outlook.com
- (2603:10b6:5:3bb:cafe::f9) by DS7PR03CA0063.outlook.office365.com
- (2603:10b6:5:3bb::8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.33 via Frontend
- Transport; Tue, 16 Apr 2024 23:42:46 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
+ bh=5pJU2/vg5S4U+AUK7UVKYVCU++bq4rq/xp/ryHWYC6c=;
+ b=VZufIFtIPsfCt9OykTqjD4JR6QHMycySyA9sIKHj5PxLmYlqb85MbKaH5R/aa5/3GcSdPd1W7mmrmgeZ6DxGiRHNtFkMkn9bbi4aWwBAiEU2gRHH+QSjGhWlko26sA+0whkYfQaCZWlIvQcVvc2KaHAS6BZdpnr2S8aDKwZ3NYbooL0I2rID8y9aI9Brm+unGbip9mv+8L9d9MDZcWw7GNQu2CSNAykUiG3rm0irb8O3RTbHPB9LiHfBWM4fdJHjS8DUGUyzvcVevnbxURcovkTwu+F9PULU1lGu1pRoVOyuhWhxgfrddjEGze1o6Et0XV+wgBlGsyLBCD9wVsR+zA==
+Received: from CH0PR13CA0037.namprd13.prod.outlook.com (2603:10b6:610:b2::12)
+ by CY5PR12MB6058.namprd12.prod.outlook.com (2603:10b6:930:2d::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.50; Tue, 16 Apr
+ 2024 23:42:45 +0000
+Received: from DS2PEPF00003439.namprd02.prod.outlook.com
+ (2603:10b6:610:b2:cafe::53) by CH0PR13CA0037.outlook.office365.com
+ (2603:10b6:610:b2::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7495.17 via Frontend
+ Transport; Tue, 16 Apr 2024 23:42:45 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- CH2PEPF0000013C.mail.protection.outlook.com (10.167.244.73) with Microsoft
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ DS2PEPF00003439.mail.protection.outlook.com (10.167.18.36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7452.22 via Frontend Transport; Tue, 16 Apr 2024 23:42:46 +0000
+ 15.20.7452.22 via Frontend Transport; Tue, 16 Apr 2024 23:42:45 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.41; Tue, 16 Apr
- 2024 16:42:25 -0700
+ 2024 16:42:26 -0700
 Received: from fedora.mshome.net (10.126.231.35) by rnnvmail201.nvidia.com
  (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.12; Tue, 16 Apr
- 2024 16:42:24 -0700
+ 2024 16:42:25 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: Ben Skeggs <bskeggs@nvidia.com>
-Subject: [PATCH 100/156] drm/nouveau/nvif: rework disp "sclass" api
-Date: Wed, 17 Apr 2024 09:39:06 +1000
-Message-ID: <20240416234002.19509-101-bskeggs@nvidia.com>
+Subject: [PATCH 101/156] drm/nouveau/nvif: rework disp "new caps" api
+Date: Wed, 17 Apr 2024 09:39:07 +1000
+Message-ID: <20240416234002.19509-102-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240416234002.19509-1-bskeggs@nvidia.com>
 References: <20240416234002.19509-1-bskeggs@nvidia.com>
@@ -78,26 +78,26 @@ X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF0000013C:EE_|BL3PR12MB9051:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3d739e35-d857-43cd-4304-08dc5e6eeb51
+X-MS-TrafficTypeDiagnostic: DS2PEPF00003439:EE_|CY5PR12MB6058:EE_
+X-MS-Office365-Filtering-Correlation-Id: 540d9f60-a83e-4c0c-720b-08dc5e6eea75
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: AXKJZQlCV87whhTmbPMTMseoRYVK9bmXS/zojUL5igfAuV4pwXdFqW2Ank0HaEBjYk+jQW0i6nna5zGwbL0tKsow6eqPqxv5p+4NGqqcdR1RmwJDWTTgcuQ1S/K5jk+FkLW/cKULSZw3uE6gO48Ux9VRacscFIioXZJRy0eq+YSBpJ/VAEISVasjMsLjeEV8GSnB3R0/+moV5R7FCAayXnQeOOLP40gKQTvRex7ZfjREQ2I1zTn3+mhhTpTy5NJPAarAscqPuNQp79i2VJSXtSbQVqbqfQX28sJsCmQYzvY8x0PO1w85Z0WpWZtc0B/pZRUiUU53w7ggJ14KTc4SDfGqgGmeXlyHBPNVJ9k3THmBpU/H3fQ8zPfSWMl4mUIvLZNb/L9SOp4xVfOoLgfRYi70WXhUACEWu72Q5B+AFw/3gNhvCpFW9PdD6R6lbi/iwJlFEckvx8opdTAXeO66vUHGkq2MKzdSygMSIxW8mJoXHArWcAgDmidHQbCi7fSGe87RVKF6fh7/omKz53vUrq2uAnSv/2NfYug3W9Dx+36qddEJOTRQlkA+QXGSkqZr4ptUBAY71smlFlBANm0xE2g9LP2pUeBs+cSKA1xgUzr8PtW+RalQW0Ic402L5FfZguoTRDJVpJg6abAN2UALAxpZcOWJrZUxkYF07+XJQgjCXNCeLxV/RRLQPgo0aE33JhNYz7Sj0/CBt4US7i+asHko1tMBTXLvJZy9qXvEaPyJe6+ByeX1tAZzVnrOB8gm
-X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
- SFS:(13230031)(82310400014)(36860700004)(1800799015)(376005); DIR:OUT;
+X-Microsoft-Antispam-Message-Info: oum5a2/Sh4yZiviAgU0MHDd8/PnvQxsDyUgKUgLYgPWRfDzWlvB//LOZF9I0KDfdkwnmbdhZxmQd8Nw0Ec1aPofMgFEI3eajimwGdrSmIyLE8z6LMCyopS3kanh7+vKuefu8lS68tjszhyFEJATXMCFDkBYdGbiFcE4CzsRkjWCfXCLYPEGZRrt3em8geBG9wFsdo8O2cPbfXHSFHJPbEVLAQF+JgtSXj5gtIfTWvSdGKPA3tgbugdqjlRgZeAkIdvkJdKv7H5K7P8F+NHV8ZhrL+7xlvLzBRkEPHqkdxMCxA0TzAbHtKceHcVp7hLXO6DNtZZHiMoNc20dKDdKBPcif6ittnsIK0uCX393kLiBYpvzBmT/mUAvYKpDJ9hMGSBOB+Vl8W6Tvrz6/s8lI3k3eRqtVNw2h+kBOG0hz5v5WtNRqGla6ZlUkqwKWc8Rq+4uQ46xvvTjdBZ7tKT0F1ZukKIUn/J+Jg+DZPdhnsZOq8GFKr9qG4QpETLKBU2hltHv9Zx0PmhJTrySkquWQlgwWTjZNng1+tThe+EY+878TYjZGSf1zkLy2VRySh6o7DrPq7Ar+KIswRgcWjkc9QykMk8ATPPgJM0IS9djxvB6NE0N0E8l2EhgKfpdClTO2riMSEIJ7dCIpPhV99vhl4Mi3AVe2/odfZSnyw82OkIVuBYFAdEXe/gQhlrfCL0wMTruY/jwrOY0bAlVmApCIHstb/6Cw8UjMaroWbrTg475scH+ZufJcXOxPmk1N7m3z
+X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
+ SFS:(13230031)(1800799015)(82310400014)(376005)(36860700004); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2024 23:42:46.5590 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3d739e35-d857-43cd-4304-08dc5e6eeb51
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2024 23:42:45.1184 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 540d9f60-a83e-4c0c-720b-08dc5e6eea75
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000013C.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003439.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR12MB9051
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6058
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -116,462 +116,458 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 ---
- drivers/gpu/drm/nouveau/dispnv50/base.c       | 33 +++++--------
- drivers/gpu/drm/nouveau/dispnv50/core.c       | 49 ++++++++-----------
- drivers/gpu/drm/nouveau/dispnv50/curs.c       | 35 ++++++-------
- drivers/gpu/drm/nouveau/dispnv50/oimm.c       | 29 +++++------
- drivers/gpu/drm/nouveau/dispnv50/ovly.c       | 32 +++++-------
- drivers/gpu/drm/nouveau/dispnv50/wimm.c       | 25 ++++------
- drivers/gpu/drm/nouveau/dispnv50/wndw.c       | 27 ++++------
- .../gpu/drm/nouveau/include/nvif/driverif.h   | 18 +++++++
- drivers/gpu/drm/nouveau/include/nvif/object.h | 29 -----------
- .../gpu/drm/nouveau/nvkm/engine/disp/udisp.c  | 20 ++++++++
- 10 files changed, 129 insertions(+), 168 deletions(-)
+ drivers/gpu/drm/nouveau/dispnv50/corec37d.c   | 11 +--
+ drivers/gpu/drm/nouveau/dispnv50/disp.c       |  3 +-
+ drivers/gpu/drm/nouveau/dispnv50/disp.h       |  2 +-
+ drivers/gpu/drm/nouveau/include/nvif/disp.h   | 11 +++
+ .../gpu/drm/nouveau/include/nvif/driverif.h   |  8 +++
+ drivers/gpu/drm/nouveau/nvif/disp.c           | 32 +++++++++
+ .../gpu/drm/nouveau/nvkm/engine/disp/Kbuild   |  1 +
+ .../gpu/drm/nouveau/nvkm/engine/disp/ad102.c  |  2 +-
+ .../gpu/drm/nouveau/nvkm/engine/disp/ga102.c  |  2 +-
+ .../gpu/drm/nouveau/nvkm/engine/disp/gv100.c  | 42 ++---------
+ .../gpu/drm/nouveau/nvkm/engine/disp/priv.h   |  5 +-
+ .../gpu/drm/nouveau/nvkm/engine/disp/tu102.c  |  2 +-
+ .../gpu/drm/nouveau/nvkm/engine/disp/ucaps.c  | 70 +++++++++++++++++++
+ .../gpu/drm/nouveau/nvkm/engine/disp/ucaps.h  |  9 +++
+ .../gpu/drm/nouveau/nvkm/engine/disp/udisp.c  | 23 ++++--
+ 15 files changed, 161 insertions(+), 62 deletions(-)
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/ucaps.c
+ create mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/disp/ucaps.h
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/base.c b/drivers/gpu/drm/nouveau/dispnv50/base.c
-index 7c752acf2b48..db0b42c6243e 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/base.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/base.c
-@@ -26,28 +26,21 @@
- int
- nv50_base_new(struct nouveau_drm *drm, int head, struct nv50_wndw **pwndw)
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/corec37d.c b/drivers/gpu/drm/nouveau/dispnv50/corec37d.c
+index 9525fd30c8fc..60535526ac89 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/corec37d.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/corec37d.c
+@@ -104,8 +104,7 @@ int corec37d_caps_init(struct nouveau_drm *drm, struct nv50_disp *disp)
  {
--	struct {
--		s32 oclass;
--		int version;
--		int (*new)(struct nouveau_drm *, int, s32, struct nv50_wndw **);
--	} bases[] = {
--		{ GK110_DISP_BASE_CHANNEL_DMA, 0, base917c_new },
--		{ GK104_DISP_BASE_CHANNEL_DMA, 0, base917c_new },
--		{ GF110_DISP_BASE_CHANNEL_DMA, 0, base907c_new },
--		{ GT214_DISP_BASE_CHANNEL_DMA, 0, base827c_new },
--		{ GT200_DISP_BASE_CHANNEL_DMA, 0, base827c_new },
--		{   G82_DISP_BASE_CHANNEL_DMA, 0, base827c_new },
--		{  NV50_DISP_BASE_CHANNEL_DMA, 0, base507c_new },
--		{}
--	};
--	struct nv50_disp *disp = nv50_disp(drm->dev);
--	int cid;
-+	int (*ctor)(struct nouveau_drm *, int, s32, struct nv50_wndw **);
-+	struct nvif_disp *disp = nv50_disp(drm->dev)->disp;
- 
--	cid = nvif_mclass(&disp->disp->object, bases);
--	if (cid < 0) {
-+	switch (disp->impl->chan.base.oclass) {
-+	case GK110_DISP_BASE_CHANNEL_DMA: ctor = base917c_new; break;
-+	case GK104_DISP_BASE_CHANNEL_DMA: ctor = base917c_new; break;
-+	case GF110_DISP_BASE_CHANNEL_DMA: ctor = base907c_new; break;
-+	case GT214_DISP_BASE_CHANNEL_DMA: ctor = base827c_new; break;
-+	case GT200_DISP_BASE_CHANNEL_DMA: ctor = base827c_new; break;
-+	case   G82_DISP_BASE_CHANNEL_DMA: ctor = base827c_new; break;
-+	case  NV50_DISP_BASE_CHANNEL_DMA: ctor = base507c_new; break;
-+	default:
- 		NV_ERROR(drm, "No supported base class\n");
--		return cid;
-+		return -ENODEV;
- 	}
- 
--	return bases[cid].new(drm, head, bases[cid].oclass, pwndw);
-+	return ctor(drm, head, disp->impl->chan.base.oclass, pwndw);
- }
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/core.c b/drivers/gpu/drm/nouveau/dispnv50/core.c
-index a9c3e53ef909..7d5438355715 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/core.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/core.c
-@@ -43,41 +43,34 @@ nv50_core_del(struct nv50_core **pcore)
- int
- nv50_core_new(struct nouveau_drm *drm, struct nv50_core **pcore)
- {
--	struct {
--		s32 oclass;
--		int version;
--		int (*new)(struct nouveau_drm *, s32, struct nv50_core **);
--	} cores[] = {
--		{ AD102_DISP_CORE_CHANNEL_DMA, 0, corec57d_new },
--		{ GA102_DISP_CORE_CHANNEL_DMA, 0, corec57d_new },
--		{ TU102_DISP_CORE_CHANNEL_DMA, 0, corec57d_new },
--		{ GV100_DISP_CORE_CHANNEL_DMA, 0, corec37d_new },
--		{ GP102_DISP_CORE_CHANNEL_DMA, 0, core917d_new },
--		{ GP100_DISP_CORE_CHANNEL_DMA, 0, core917d_new },
--		{ GM200_DISP_CORE_CHANNEL_DMA, 0, core917d_new },
--		{ GM107_DISP_CORE_CHANNEL_DMA, 0, core917d_new },
--		{ GK110_DISP_CORE_CHANNEL_DMA, 0, core917d_new },
--		{ GK104_DISP_CORE_CHANNEL_DMA, 0, core917d_new },
--		{ GF110_DISP_CORE_CHANNEL_DMA, 0, core907d_new },
--		{ GT214_DISP_CORE_CHANNEL_DMA, 0, core827d_new },
--		{ GT206_DISP_CORE_CHANNEL_DMA, 0, core827d_new },
--		{ GT200_DISP_CORE_CHANNEL_DMA, 0, core827d_new },
--		{   G82_DISP_CORE_CHANNEL_DMA, 0, core827d_new },
--		{  NV50_DISP_CORE_CHANNEL_DMA, 0, core507d_new },
--		{}
--	};
-+	int (*ctor)(struct nouveau_drm *, s32, struct nv50_core **);
- 	struct nv50_disp *disp = nv50_disp(drm->dev);
- 	struct nv50_core *core;
--	int cid;
  	int ret;
  
--	cid = nvif_mclass(&disp->disp->object, cores);
--	if (cid < 0) {
-+	switch (disp->disp->impl->chan.core.oclass) {
-+	case AD102_DISP_CORE_CHANNEL_DMA: ctor = corec57d_new; break;
-+	case GA102_DISP_CORE_CHANNEL_DMA: ctor = corec57d_new; break;
-+	case TU102_DISP_CORE_CHANNEL_DMA: ctor = corec57d_new; break;
-+	case GV100_DISP_CORE_CHANNEL_DMA: ctor = corec37d_new; break;
-+	case GP102_DISP_CORE_CHANNEL_DMA: ctor = core917d_new; break;
-+	case GP100_DISP_CORE_CHANNEL_DMA: ctor = core917d_new; break;
-+	case GM200_DISP_CORE_CHANNEL_DMA: ctor = core917d_new; break;
-+	case GM107_DISP_CORE_CHANNEL_DMA: ctor = core917d_new; break;
-+	case GK110_DISP_CORE_CHANNEL_DMA: ctor = core917d_new; break;
-+	case GK104_DISP_CORE_CHANNEL_DMA: ctor = core917d_new; break;
-+	case GF110_DISP_CORE_CHANNEL_DMA: ctor = core907d_new; break;
-+	case GT214_DISP_CORE_CHANNEL_DMA: ctor = core827d_new; break;
-+	case GT206_DISP_CORE_CHANNEL_DMA: ctor = core827d_new; break;
-+	case GT200_DISP_CORE_CHANNEL_DMA: ctor = core827d_new; break;
-+	case   G82_DISP_CORE_CHANNEL_DMA: ctor = core827d_new; break;
-+	case  NV50_DISP_CORE_CHANNEL_DMA: ctor = core507d_new; break;
-+	default:
- 		NV_ERROR(drm, "No supported core channel class\n");
--		return cid;
-+		return -ENODEV;
- 	}
- 
--	ret = cores[cid].new(drm, cores[cid].oclass, &core);
-+	ret = ctor(drm, disp->disp->impl->chan.core.oclass, &core);
- 	*pcore = core;
- 	if (ret)
+-	ret = nvif_object_ctor(&disp->disp->object, "dispCaps", 0,
+-			       GV100_DISP_CAPS, NULL, 0, &disp->caps);
++	ret = nvif_disp_caps_ctor(disp->disp, "dispCaps", &disp->caps);
+ 	if (ret) {
+ 		NV_ERROR(drm,
+ 			 "Failed to init notifier caps region: %d\n",
+@@ -113,14 +112,6 @@ int corec37d_caps_init(struct nouveau_drm *drm, struct nv50_disp *disp)
  		return ret;
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/curs.c b/drivers/gpu/drm/nouveau/dispnv50/curs.c
-index 31d8b2e4791d..8d1026c6baec 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/curs.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/curs.c
-@@ -26,29 +26,22 @@
- int
- nv50_curs_new(struct nouveau_drm *drm, int head, struct nv50_wndw **pwndw)
- {
--	struct {
--		s32 oclass;
--		int version;
--		int (*new)(struct nouveau_drm *, int, s32, struct nv50_wndw **);
--	} curses[] = {
--		{ GA102_DISP_CURSOR, 0, cursc37a_new },
--		{ TU102_DISP_CURSOR, 0, cursc37a_new },
--		{ GV100_DISP_CURSOR, 0, cursc37a_new },
--		{ GK104_DISP_CURSOR, 0, curs907a_new },
--		{ GF110_DISP_CURSOR, 0, curs907a_new },
--		{ GT214_DISP_CURSOR, 0, curs507a_new },
--		{   G82_DISP_CURSOR, 0, curs507a_new },
--		{  NV50_DISP_CURSOR, 0, curs507a_new },
--		{}
--	};
--	struct nv50_disp *disp = nv50_disp(drm->dev);
--	int cid;
-+	int (*ctor)(struct nouveau_drm *, int, s32, struct nv50_wndw **);
-+	struct nvif_disp *disp = nv50_disp(drm->dev)->disp;
- 
--	cid = nvif_mclass(&disp->disp->object, curses);
--	if (cid < 0) {
-+	switch (disp->impl->chan.curs.oclass) {
-+	case GA102_DISP_CURSOR: ctor = cursc37a_new; break;
-+	case TU102_DISP_CURSOR: ctor = cursc37a_new; break;
-+	case GV100_DISP_CURSOR: ctor = cursc37a_new; break;
-+	case GK104_DISP_CURSOR: ctor = curs907a_new; break;
-+	case GF110_DISP_CURSOR: ctor = curs907a_new; break;
-+	case GT214_DISP_CURSOR: ctor = curs507a_new; break;
-+	case   G82_DISP_CURSOR: ctor = curs507a_new; break;
-+	case  NV50_DISP_CURSOR: ctor = curs507a_new; break;
-+	default:
- 		NV_ERROR(drm, "No supported cursor immediate class\n");
--		return cid;
-+		return -ENODEV;
  	}
  
--	return curses[cid].new(drm, head, curses[cid].oclass, pwndw);
-+	return ctor(drm, head, disp->impl->chan.curs.oclass, pwndw);
+-	ret = nvif_object_map(&disp->caps, NULL, 0);
+-	if (ret) {
+-		NV_ERROR(drm,
+-			 "Failed to map notifier caps region: %d\n",
+-			 ret);
+-		return ret;
+-	}
+-
+ 	return 0;
  }
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/oimm.c b/drivers/gpu/drm/nouveau/dispnv50/oimm.c
-index 2a2841d344c8..4a06cd293cb5 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/oimm.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/oimm.c
-@@ -26,26 +26,19 @@
- int
- nv50_oimm_init(struct nouveau_drm *drm, struct nv50_wndw *wndw)
- {
--	static const struct {
--		s32 oclass;
--		int version;
--		int (*init)(struct nouveau_drm *, s32, struct nv50_wndw *);
--	} oimms[] = {
--		{ GK104_DISP_OVERLAY, 0, oimm507b_init },
--		{ GF110_DISP_OVERLAY, 0, oimm507b_init },
--		{ GT214_DISP_OVERLAY, 0, oimm507b_init },
--		{   G82_DISP_OVERLAY, 0, oimm507b_init },
--		{  NV50_DISP_OVERLAY, 0, oimm507b_init },
--		{}
--	};
--	struct nv50_disp *disp = nv50_disp(drm->dev);
--	int cid;
-+	int (*ctor)(struct nouveau_drm *, s32, struct nv50_wndw *);
-+	struct nvif_disp *disp = nv50_disp(drm->dev)->disp;
  
--	cid = nvif_mclass(&disp->disp->object, oimms);
--	if (cid < 0) {
-+	switch (disp->impl->chan.oimm.oclass) {
-+	case GK104_DISP_OVERLAY: ctor = oimm507b_init; break;
-+	case GF110_DISP_OVERLAY: ctor = oimm507b_init; break;
-+	case GT214_DISP_OVERLAY: ctor = oimm507b_init; break;
-+	case   G82_DISP_OVERLAY: ctor = oimm507b_init; break;
-+	case  NV50_DISP_OVERLAY: ctor = oimm507b_init; break;
-+	default:
- 		NV_ERROR(drm, "No supported overlay immediate class\n");
--		return cid;
-+		return -ENODEV;
- 	}
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+index b89a8f4ee506..802dccace624 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+@@ -2788,8 +2788,7 @@ nv50_display_destroy(struct drm_device *dev)
  
--	return oimms[cid].init(drm, oimms[cid].oclass, wndw);
-+	return ctor(drm, disp->impl->chan.oimm.oclass, wndw);
- }
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/ovly.c b/drivers/gpu/drm/nouveau/dispnv50/ovly.c
-index 90c246d47604..029c86a53c1f 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/ovly.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/ovly.c
-@@ -27,29 +27,23 @@
- int
- nv50_ovly_new(struct nouveau_drm *drm, int head, struct nv50_wndw **pwndw)
- {
--	static const struct {
--		s32 oclass;
--		int version;
--		int (*new)(struct nouveau_drm *, int, s32, struct nv50_wndw **);
--	} ovlys[] = {
--		{ GK104_DISP_OVERLAY_CONTROL_DMA, 0, ovly917e_new },
--		{ GF110_DISP_OVERLAY_CONTROL_DMA, 0, ovly907e_new },
--		{ GT214_DISP_OVERLAY_CHANNEL_DMA, 0, ovly827e_new },
--		{ GT200_DISP_OVERLAY_CHANNEL_DMA, 0, ovly827e_new },
--		{   G82_DISP_OVERLAY_CHANNEL_DMA, 0, ovly827e_new },
--		{  NV50_DISP_OVERLAY_CHANNEL_DMA, 0, ovly507e_new },
--		{}
--	};
--	struct nv50_disp *disp = nv50_disp(drm->dev);
--	int cid, ret;
-+	int (*ctor)(struct nouveau_drm *, int, s32, struct nv50_wndw **);
-+	struct nvif_disp *disp = nv50_disp(drm->dev)->disp;
-+	int ret;
+ 	nv50_audio_component_fini(nouveau_drm(dev));
  
--	cid = nvif_mclass(&disp->disp->object, ovlys);
--	if (cid < 0) {
-+	switch (disp->impl->chan.ovly.oclass) {
-+	case GK104_DISP_OVERLAY_CONTROL_DMA: ctor = ovly917e_new; break;
-+	case GF110_DISP_OVERLAY_CONTROL_DMA: ctor = ovly907e_new; break;
-+	case GT214_DISP_OVERLAY_CHANNEL_DMA: ctor = ovly827e_new; break;
-+	case GT200_DISP_OVERLAY_CHANNEL_DMA: ctor = ovly827e_new; break;
-+	case   G82_DISP_OVERLAY_CHANNEL_DMA: ctor = ovly827e_new; break;
-+	case  NV50_DISP_OVERLAY_CHANNEL_DMA: ctor = ovly507e_new; break;
-+	default:
- 		NV_ERROR(drm, "No supported overlay class\n");
--		return cid;
-+		return -ENODEV;
- 	}
+-	nvif_object_unmap(&disp->caps);
+-	nvif_object_dtor(&disp->caps);
++	nvif_disp_caps_dtor(&disp->caps);
+ 	nv50_core_del(&disp->core);
  
--	ret = ovlys[cid].new(drm, head, ovlys[cid].oclass, pwndw);
-+	ret = ctor(drm, head, disp->impl->chan.ovly.oclass, pwndw);
- 	if (ret)
- 		return ret;
+ 	nouveau_bo_unmap(disp->sync);
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.h b/drivers/gpu/drm/nouveau/dispnv50/disp.h
+index 9485f8c90cac..39aaa385cd6a 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.h
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.h
+@@ -12,7 +12,7 @@ struct nouveau_encoder;
+ struct nv50_disp {
+ 	struct nvif_disp *disp;
+ 	struct nv50_core *core;
+-	struct nvif_object caps;
++	struct nvif_disp_caps caps;
  
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/wimm.c b/drivers/gpu/drm/nouveau/dispnv50/wimm.c
-index 566fbddfc8d7..c94830cf07cb 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/wimm.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/wimm.c
-@@ -26,24 +26,17 @@
- int
- nv50_wimm_init(struct nouveau_drm *drm, struct nv50_wndw *wndw)
- {
--	struct {
--		s32 oclass;
--		int version;
--		int (*init)(struct nouveau_drm *, s32, struct nv50_wndw *);
--	} wimms[] = {
--		{ GA102_DISP_WINDOW_IMM_CHANNEL_DMA, 0, wimmc37b_init },
--		{ TU102_DISP_WINDOW_IMM_CHANNEL_DMA, 0, wimmc37b_init },
--		{ GV100_DISP_WINDOW_IMM_CHANNEL_DMA, 0, wimmc37b_init },
--		{}
--	};
--	struct nv50_disp *disp = nv50_disp(drm->dev);
--	int cid;
-+	int (*ctor)(struct nouveau_drm *, s32, struct nv50_wndw *);
-+	struct nvif_disp *disp = nv50_disp(drm->dev)->disp;
+ #define NV50_DISP_SYNC(c, o)                                ((c) * 0x040 + (o))
+ #define NV50_DISP_CORE_NTFY                       NV50_DISP_SYNC(0      , 0x00)
+diff --git a/drivers/gpu/drm/nouveau/include/nvif/disp.h b/drivers/gpu/drm/nouveau/include/nvif/disp.h
+index 06f56cc63893..b41ff8c091b1 100644
+--- a/drivers/gpu/drm/nouveau/include/nvif/disp.h
++++ b/drivers/gpu/drm/nouveau/include/nvif/disp.h
+@@ -17,4 +17,15 @@ struct nvif_disp {
  
--	cid = nvif_mclass(&disp->disp->object, wimms);
--	if (cid < 0) {
-+	switch (disp->impl->chan.wimm.oclass) {
-+	case GA102_DISP_WINDOW_IMM_CHANNEL_DMA: ctor = wimmc37b_init; break;
-+	case TU102_DISP_WINDOW_IMM_CHANNEL_DMA: ctor = wimmc37b_init; break;
-+	case GV100_DISP_WINDOW_IMM_CHANNEL_DMA: ctor = wimmc37b_init; break;
-+	default:
- 		NV_ERROR(drm, "No supported window immediate class\n");
--		return cid;
-+		return -ENODEV;
- 	}
- 
--	return wimms[cid].init(drm, wimms[cid].oclass, wndw);
-+	return ctor(drm, disp->impl->chan.wimm.oclass, wndw);
- }
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-index 19606755daf5..6fb6d2252e15 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-@@ -810,27 +810,20 @@ int
- nv50_wndw_new(struct nouveau_drm *drm, enum drm_plane_type type, int index,
- 	      struct nv50_wndw **pwndw)
- {
--	struct {
--		s32 oclass;
--		int version;
--		int (*new)(struct nouveau_drm *, enum drm_plane_type,
--			   int, s32, struct nv50_wndw **);
--	} wndws[] = {
--		{ GA102_DISP_WINDOW_CHANNEL_DMA, 0, wndwc67e_new },
--		{ TU102_DISP_WINDOW_CHANNEL_DMA, 0, wndwc57e_new },
--		{ GV100_DISP_WINDOW_CHANNEL_DMA, 0, wndwc37e_new },
--		{}
--	};
--	struct nv50_disp *disp = nv50_disp(drm->dev);
--	int cid, ret;
-+	int (*ctor)(struct nouveau_drm *, enum drm_plane_type, int, s32, struct nv50_wndw **);
-+	struct nvif_disp *disp = nv50_disp(drm->dev)->disp;
-+	int ret;
- 
--	cid = nvif_mclass(&disp->disp->object, wndws);
--	if (cid < 0) {
-+	switch (disp->impl->chan.wndw.oclass) {
-+	case GA102_DISP_WINDOW_CHANNEL_DMA: ctor = wndwc67e_new; break;
-+	case TU102_DISP_WINDOW_CHANNEL_DMA: ctor = wndwc57e_new; break;
-+	case GV100_DISP_WINDOW_CHANNEL_DMA: ctor = wndwc37e_new; break;
-+	default:
- 		NV_ERROR(drm, "No supported window class\n");
--		return cid;
-+		return -ENODEV;
- 	}
- 
--	ret = wndws[cid].new(drm, type, index, wndws[cid].oclass, pwndw);
-+	ret = ctor(drm, type, index, disp->impl->chan.wndw.oclass, pwndw);
- 	if (ret)
- 		return ret;
- 
+ int nvif_disp_ctor(struct nvif_device *, const char *name, struct nvif_disp *);
+ void nvif_disp_dtor(struct nvif_disp *);
++
++struct nvif_disp_caps {
++	const struct nvif_disp_caps_impl *impl;
++	struct nvif_disp_caps_priv *priv;
++
++	struct nvif_object object;
++	struct nvif_map map;
++};
++
++int nvif_disp_caps_ctor(struct nvif_disp *, const char *name, struct nvif_disp_caps *);
++void nvif_disp_caps_dtor(struct nvif_disp_caps *);
+ #endif
 diff --git a/drivers/gpu/drm/nouveau/include/nvif/driverif.h b/drivers/gpu/drm/nouveau/include/nvif/driverif.h
-index e479e8114605..f96638ce4b12 100644
+index f96638ce4b12..412b2dff3a74 100644
 --- a/drivers/gpu/drm/nouveau/include/nvif/driverif.h
 +++ b/drivers/gpu/drm/nouveau/include/nvif/driverif.h
-@@ -220,6 +220,10 @@ struct nvif_faultbuf_impl {
+@@ -11,6 +11,7 @@ struct nvif_mem_priv;
+ struct nvif_vmm_priv;
+ struct nvif_faultbuf_priv;
+ struct nvif_disp_priv;
++struct nvif_disp_caps_priv;
+ 
+ struct nvif_driver {
+ 	const char *name;
+@@ -217,11 +218,18 @@ struct nvif_faultbuf_impl {
+ 	} event;
+ };
+ 
++struct nvif_disp_caps_impl {
++	void (*del)(struct nvif_disp_caps_priv *);
++	struct nvif_mapinfo map;
++};
++
  struct nvif_disp_impl {
  	void (*del)(struct nvif_disp_priv *);
  
-+	struct {
-+		u32 oclass;
-+	} caps;
-+
  	struct {
- 		u32 mask;
- 	} conn;
-@@ -231,6 +235,20 @@ struct nvif_disp_impl {
+ 		u32 oclass;
++		int (*new)(struct nvif_disp_priv *,
++			   const struct nvif_disp_caps_impl **, struct nvif_disp_caps_priv **);
+ 	} caps;
+ 
  	struct {
- 		u32 mask;
- 	} head;
+diff --git a/drivers/gpu/drm/nouveau/nvif/disp.c b/drivers/gpu/drm/nouveau/nvif/disp.c
+index f3c425daf7d5..d2824e4d29f8 100644
+--- a/drivers/gpu/drm/nouveau/nvif/disp.c
++++ b/drivers/gpu/drm/nouveau/nvif/disp.c
+@@ -25,6 +25,38 @@
+ 
+ #include <nvif/class.h>
+ 
++void
++nvif_disp_caps_dtor(struct nvif_disp_caps *caps)
++{
++	if (!caps->impl)
++		return;
 +
-+	struct {
-+		struct nvif_disp_impl_core {
-+			s32 oclass;
-+		} core;
++	nvif_object_unmap_cpu(&caps->map);
 +
-+		struct nvif_disp_impl_dmac {
-+			s32 oclass;
-+		} base, ovly, wndw, wimm;
++	caps->impl->del(caps->priv);
++	caps->impl = NULL;
++}
 +
-+		struct nvif_disp_impl_pioc {
-+			s32 oclass;
-+		} curs, oimm;
-+	} chan;
++int
++nvif_disp_caps_ctor(struct nvif_disp *disp, const char *name, struct nvif_disp_caps *caps)
++{
++	const u32 oclass = disp->impl->caps.oclass;
++	int ret;
++
++	ret = disp->impl->caps.new(disp->priv, &caps->impl, &caps->priv);
++	NVIF_ERRON(ret, &disp->object, "[NEW caps%04x]", oclass);
++	if (ret)
++		return ret;
++
++	nvif_object_ctor(&disp->object, name ?: "nvifDispCaps", 0, oclass, &caps->object);
++
++	ret = nvif_object_map_cpu(&caps->object, &caps->impl->map, &caps->map);
++	if (ret)
++		nvif_disp_caps_dtor(caps);
++
++	return ret;
++}
++
+ void
+ nvif_disp_dtor(struct nvif_disp *disp)
+ {
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild b/drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild
+index e346e924fee8..f0856423af91 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/Kbuild
+@@ -32,6 +32,7 @@ nvkm-y += nvkm/engine/disp/ad102.o
+ nvkm-y += nvkm/engine/disp/r535.o
+ 
+ nvkm-y += nvkm/engine/disp/udisp.o
++nvkm-y += nvkm/engine/disp/ucaps.o
+ nvkm-y += nvkm/engine/disp/uconn.o
+ nvkm-y += nvkm/engine/disp/uoutp.o
+ nvkm-y += nvkm/engine/disp/uhead.o
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/ad102.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ad102.c
+index f818828e3f04..190aa0303fd3 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/ad102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ad102.c
+@@ -32,7 +32,7 @@ ad102_disp = {
+ 	.ramht_size = 0x2000,
+ 	.user = {
+ 		.root = { AD102_DISP },
+-		.caps = { GV100_DISP_CAPS                  ,  gv100_disp_caps_new },
++		.caps = { GV100_DISP_CAPS                  ,  gv100_disp_caps },
+ 		.curs = { GA102_DISP_CURSOR                , &gv100_disp_curs },
+ 		.wimm = { GA102_DISP_WINDOW_IMM_CHANNEL_DMA, &gv100_disp_wimm },
+ 		.core = { AD102_DISP_CORE_CHANNEL_DMA      , &gv100_disp_core },
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/ga102.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ga102.c
+index c6b77e4d08a0..7712e6a5caac 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/ga102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ga102.c
+@@ -135,7 +135,7 @@ ga102_disp = {
+ 	.ramht_size = 0x2000,
+ 	.user = {
+ 		.root = { GA102_DISP },
+-		.caps = { GV100_DISP_CAPS                  ,  gv100_disp_caps_new },
++		.caps = { GV100_DISP_CAPS                  ,  gv100_disp_caps },
+ 		.curs = { GA102_DISP_CURSOR                , &gv100_disp_curs },
+ 		.wimm = { GA102_DISP_WINDOW_IMM_CHANNEL_DMA, &gv100_disp_wimm },
+ 		.core = { GA102_DISP_CORE_CHANNEL_DMA      , &gv100_disp_core },
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
+index 7876241e10e7..81ebec100d93 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/gv100.c
+@@ -791,45 +791,13 @@ gv100_disp_core = {
+ 	.mthd = &gv100_disp_core_mthd,
  };
  
- struct nvif_device_impl {
-diff --git a/drivers/gpu/drm/nouveau/include/nvif/object.h b/drivers/gpu/drm/nouveau/include/nvif/object.h
-index 819ae1c9729d..10a8f3e1ea81 100644
---- a/drivers/gpu/drm/nouveau/include/nvif/object.h
-+++ b/drivers/gpu/drm/nouveau/include/nvif/object.h
-@@ -82,35 +82,6 @@ void nvif_object_unmap(struct nvif_object *);
- 
- #define nvif_mthd(a,b,c,d) nvif_object_mthd((a), (b), (c), (d))
- 
--struct nvif_mclass {
--	s32 oclass;
--	int version;
+-#define gv100_disp_caps(p) container_of((p), struct gv100_disp_caps, object)
+-
+-struct gv100_disp_caps {
+-	struct nvkm_object object;
+-	struct nvkm_disp *disp;
 -};
 -
--#define nvif_mclass(o,m) ({                                                    \
--	struct nvif_object *object = (o);                                      \
--	struct nvif_sclass *sclass;                                            \
--	typeof(m[0]) *mclass = (m);                                            \
--	int ret = -ENODEV;                                                     \
--	int cnt, i, j;                                                         \
--                                                                               \
--	cnt = nvif_object_sclass_get(object, &sclass);                         \
--	if (cnt >= 0) {                                                        \
--		for (i = 0; ret < 0 && mclass[i].oclass; i++) {                \
--			for (j = 0; j < cnt; j++) {                            \
--				if (mclass[i].oclass  == sclass[j].oclass &&   \
--				    mclass[i].version >= sclass[j].minver &&   \
--				    mclass[i].version <= sclass[j].maxver) {   \
--					ret = i;                               \
--					break;                                 \
--				}                                              \
--			}                                                      \
--		}                                                              \
--		nvif_object_sclass_put(&sclass);                               \
--	}                                                                      \
--	ret;                                                                   \
--})
+-static int
+-gv100_disp_caps_map(struct nvkm_object *object, void *argv, u32 argc,
+-		    enum nvkm_object_map *type, u64 *addr, u64 *size)
++void
++gv100_disp_caps(struct nvkm_disp *disp, u64 *addr, u64 *size)
+ {
+-	struct gv100_disp_caps *caps = gv100_disp_caps(object);
+-	struct nvkm_device *device = caps->disp->engine.subdev.device;
+-	*type = NVKM_OBJECT_MAP_IO;
++	struct nvkm_device *device = disp->engine.subdev.device;
++
+ 	*addr = 0x640000 + device->func->resource_addr(device, 0);
+ 	*size = 0x1000;
+-	return 0;
+-}
 -
- #define NVIF_RD32_(p,o,dr)   nvif_rd32((p), (o) + (dr))
- #define NVIF_WR32_(p,o,dr,f) nvif_wr32((p), (o) + (dr), (f))
- #define NVIF_RD32(p,A...) DRF_RD(NVIF_RD32_,                  (p), 0, ##A)
+-static const struct nvkm_object_func
+-gv100_disp_caps = {
+-	.map = gv100_disp_caps_map,
+-};
+-
+-#include "udisp.h"
+-int
+-gv100_disp_caps_new(const struct nvkm_oclass *oclass, void *argv, u32 argc,
+-		    struct nvkm_object **pobject)
+-{
+-	struct nvkm_disp *disp = container_of(oclass->parent, struct nvif_disp_priv, object)->disp;
+-	struct gv100_disp_caps *caps;
+-
+-	if (!(caps = kzalloc(sizeof(*caps), GFP_KERNEL)))
+-		return -ENOMEM;
+-	*pobject = &caps->object;
+-
+-	nvkm_object_ctor(&gv100_disp_caps, oclass, &caps->object);
+-	caps->disp = disp;
+-	return 0;
+ }
+ 
+ void
+@@ -1238,7 +1206,7 @@ gv100_disp = {
+ 	.ramht_size = 0x2000,
+ 	.user = {
+ 		.root = { GV100_DISP },
+-		.caps = { GV100_DISP_CAPS                  ,  gv100_disp_caps_new },
++		.caps = { GV100_DISP_CAPS                  ,  gv100_disp_caps },
+ 		.curs = { GV100_DISP_CURSOR                , &gv100_disp_curs },
+ 		.wimm = { GV100_DISP_WINDOW_IMM_CHANNEL_DMA, &gv100_disp_wimm },
+ 		.core = { GV100_DISP_CORE_CHANNEL_DMA      , &gv100_disp_core },
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/priv.h b/drivers/gpu/drm/nouveau/nvkm/engine/disp/priv.h
+index 324a7971a0eb..822c4ffe5a38 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/priv.h
+@@ -42,8 +42,7 @@ struct nvkm_disp_func {
+ 
+ 		struct {
+ 			s32 oclass;
+-			int (*ctor)(const struct nvkm_oclass *, void *argv, u32 argc,
+-				    struct nvkm_object **);
++			void (*addr)(struct nvkm_disp *, u64 *addr, u64 *size);
+ 		} caps;
+ 
+ 		struct nvkm_disp_func_chan {
+@@ -76,7 +75,7 @@ void gv100_disp_fini(struct nvkm_disp *, bool suspend);
+ void gv100_disp_intr(struct nvkm_disp *);
+ void gv100_disp_super(struct work_struct *);
+ int gv100_disp_wndw_cnt(struct nvkm_disp *, unsigned long *);
+-int gv100_disp_caps_new(const struct nvkm_oclass *, void *, u32, struct nvkm_object **);
++void gv100_disp_caps(struct nvkm_disp *, u64 *addr, u64 *size);
+ 
+ int tu102_disp_init(struct nvkm_disp *);
+ 
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/tu102.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/tu102.c
+index 21b945a88823..6d0806da18ef 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/tu102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/tu102.c
+@@ -221,7 +221,7 @@ tu102_disp = {
+ 	.ramht_size = 0x2000,
+ 	.user = {
+ 		.root = { TU102_DISP },
+-		.caps = { GV100_DISP_CAPS                  ,  gv100_disp_caps_new },
++		.caps = { GV100_DISP_CAPS                  ,  gv100_disp_caps },
+ 		.curs = { TU102_DISP_CURSOR                , &gv100_disp_curs },
+ 		.wimm = { TU102_DISP_WINDOW_IMM_CHANNEL_DMA, &gv100_disp_wimm },
+ 		.core = { TU102_DISP_CORE_CHANNEL_DMA      , &gv100_disp_core },
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/ucaps.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ucaps.c
+new file mode 100644
+index 000000000000..2f22a88cb97b
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ucaps.c
+@@ -0,0 +1,70 @@
++/*
++ * Copyright (c) 2024, NVIDIA CORPORATION. All rights reserved.
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ */
++#include "ucaps.h"
++
++struct nvif_disp_caps_priv {
++	struct nvkm_object object;
++	struct nvkm_disp *disp;
++
++	struct nvif_disp_caps_impl impl;
++};
++
++static void
++nvkm_ucaps_del(struct nvif_disp_caps_priv *ucaps)
++{
++	struct nvkm_object *object = &ucaps->object;
++
++	nvkm_object_del(&object);
++}
++
++static const struct nvif_disp_caps_impl
++nvkm_ucaps_impl = {
++	.del = nvkm_ucaps_del,
++};
++
++static const struct nvkm_object_func
++nvkm_ucaps = {
++};
++
++int
++nvkm_ucaps_new(struct nvkm_disp *disp, const struct nvif_disp_caps_impl **pimpl,
++	       struct nvif_disp_caps_priv **ppriv, struct nvkm_object **pobject)
++{
++	struct nvif_disp_caps_priv *ucaps;
++
++	ucaps = kzalloc(sizeof(*ucaps), GFP_KERNEL);
++	if (!ucaps)
++		return -ENOMEM;
++	*pobject = &ucaps->object;
++
++	nvkm_object_ctor(&nvkm_ucaps, &(struct nvkm_oclass) {}, &ucaps->object);
++	ucaps->disp = disp;
++	ucaps->impl = nvkm_ucaps_impl;
++
++	ucaps->impl.map.type = NVIF_MAP_IO;
++	disp->func->user.caps.addr(disp, &ucaps->impl.map.handle, &ucaps->impl.map.length);
++
++	*pimpl = &ucaps->impl;
++	*ppriv = ucaps;
++	*pobject = &ucaps->object;
++	return 0;
++}
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/ucaps.h b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ucaps.h
+new file mode 100644
+index 000000000000..690a92930363
+--- /dev/null
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/ucaps.h
+@@ -0,0 +1,9 @@
++/* SPDX-License-Identifier: MIT */
++#ifndef __NVKM_UCAPS_H__
++#define __NVKM_UCAPS_H__
++#include "priv.h"
++#include <nvif/driverif.h>
++
++int nvkm_ucaps_new(struct nvkm_disp *, const struct nvif_disp_caps_impl **,
++		   struct nvif_disp_caps_priv **, struct nvkm_object **);
++#endif
 diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/udisp.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/udisp.c
-index 06e465edf3e9..fd8590514c7e 100644
+index fd8590514c7e..cef8427cca91 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/udisp.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/udisp.c
-@@ -171,6 +171,10 @@ nvkm_udisp_new(struct nvkm_device *device, const struct nvif_disp_impl **pimpl,
- 	udisp->disp = disp;
- 	udisp->impl = nvkm_udisp_impl;
+@@ -20,6 +20,7 @@
+  * OTHER DEALINGS IN THE SOFTWARE.
+  */
+ #include "udisp.h"
++#include "ucaps.h"
+ #include "chan.h"
+ #include "conn.h"
+ #include "head.h"
+@@ -50,12 +51,6 @@ nvkm_udisp_sclass(struct nvkm_object *object, int index, struct nvkm_oclass *scl
+ 		return 0;
+ 	}
  
-+	if (disp->func->user.caps.oclass) {
-+		udisp->impl.caps.oclass = disp->func->user.caps.oclass;
-+	}
+-	if (disp->func->user.caps.oclass && index-- == 0) {
+-		sclass->base = (struct nvkm_sclass) { -1, -1, disp->func->user.caps.oclass };
+-		sclass->ctor = disp->func->user.caps.ctor;
+-		return 0;
+-	}
+-
+ 	if (disp->func->user.core.oclass && index-- == 0) {
+ 		sclass->base = (struct nvkm_sclass) { 0, 0, disp->func->user.core.oclass };
+ 		sclass->ctor = nvkm_disp_core_new;
+@@ -101,6 +96,21 @@ nvkm_udisp_sclass(struct nvkm_object *object, int index, struct nvkm_oclass *scl
+ 	return -EINVAL;
+ }
+ 
++static int
++nvkm_udisp_caps_new(struct nvif_disp_priv *udisp,
++		    const struct nvif_disp_caps_impl **pimpl, struct nvif_disp_caps_priv **ppriv)
++{
++	struct nvkm_object *object;
++	int ret;
 +
++	ret = nvkm_ucaps_new(udisp->disp, pimpl, ppriv, &object);
++	if (ret)
++		return ret;
++
++	nvkm_object_link(&udisp->object, object);
++	return 0;
++}
++
+ static void
+ nvkm_udisp_del(struct nvif_disp_priv *udisp)
+ {
+@@ -173,6 +183,7 @@ nvkm_udisp_new(struct nvkm_device *device, const struct nvif_disp_impl **pimpl,
+ 
+ 	if (disp->func->user.caps.oclass) {
+ 		udisp->impl.caps.oclass = disp->func->user.caps.oclass;
++		udisp->impl.caps.new = nvkm_udisp_caps_new;
+ 	}
+ 
  	list_for_each_entry(conn, &disp->conns, head)
- 		udisp->impl.conn.mask |= BIT(conn->index);
- 
-@@ -180,6 +184,22 @@ nvkm_udisp_new(struct nvkm_device *device, const struct nvif_disp_impl **pimpl,
- 	list_for_each_entry(head, &disp->heads, head)
- 		udisp->impl.head.mask |= BIT(head->id);
- 
-+	if (disp->func->user.core.oclass) {
-+		udisp->impl.chan.core.oclass = disp->func->user.core.oclass;
-+		udisp->impl.chan.curs.oclass = disp->func->user.curs.oclass;
-+
-+		if (!disp->func->user.wndw.oclass) {
-+			/* EVO */
-+			udisp->impl.chan.base.oclass = disp->func->user.base.oclass;
-+			udisp->impl.chan.ovly.oclass = disp->func->user.ovly.oclass;
-+			udisp->impl.chan.oimm.oclass = disp->func->user.oimm.oclass;
-+		} else {
-+			/* NVDisplay (GV100-) */
-+			udisp->impl.chan.wndw.oclass = disp->func->user.wndw.oclass;
-+			udisp->impl.chan.wimm.oclass = disp->func->user.wimm.oclass;
-+		}
-+	}
-+
- 	*pimpl = &udisp->impl;
- 	*ppriv = udisp;
- 	*pobject = &udisp->object;
 -- 
 2.41.0
 
