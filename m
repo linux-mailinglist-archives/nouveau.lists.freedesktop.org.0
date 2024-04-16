@@ -2,27 +2,27 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5D8A8A78B8
-	for <lists+nouveau@lfdr.de>; Wed, 17 Apr 2024 01:41:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA2C18A78BC
+	for <lists+nouveau@lfdr.de>; Wed, 17 Apr 2024 01:41:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 314CB112F30;
-	Tue, 16 Apr 2024 23:41:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 516DF112F32;
+	Tue, 16 Apr 2024 23:41:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="iOcRlJgJ";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="K3RL9jAg";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on2072.outbound.protection.outlook.com [40.107.96.72])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0F2A0112F2E
- for <nouveau@lists.freedesktop.org>; Tue, 16 Apr 2024 23:41:12 +0000 (UTC)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2061.outbound.protection.outlook.com [40.107.236.61])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BEDE5112F34
+ for <nouveau@lists.freedesktop.org>; Tue, 16 Apr 2024 23:41:16 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EswQFOw97uAz5W1jw2ZEhZpqCWD+SuE/haOu/koMC2VYbqNR/UM4fyIqA4V355drBPAgc//0/j1uYkZzieRL7uMUyg2FSbMdMcM/zlZEYr1jo0VhYNMEJsxcuE0Ix066aV9qhISTwjbme8ZhdEXhooxg2Z2n+e0hOn2pjI9XVaVn3Xl3XK03AMU8UfDmcl6aOkNO6t2tqqXtRBwP1hkfcm42b7gte3kp3WOaHsek5nX3aCxzpYSe8P5AJJwPpUqv5+BTWUCk40rB//HGgwS7cGIsboZlKwqRAR3XYDV6ZXdA9W4+VbgqOq8M2unwsiq8bQ+oKdf9G/iogoP9XteeIQ==
+ b=V37z6rBHCup56o+01C/oq+/ld9RFyKUmGsszCI3K17sfPIogfBHE6xgzmbiVAjlCgxRto7w1ZWK5tejqA5dj9BF631LDMy4GBqiAL7jC4mQM9oymfrt+551pVSMOqzRsgzcS7IoGoL18YcdAUk3u76AHyIRtIZs2VDdZAkHFBj2SJ+ZFThzmr3YHcb3aRCbp0uOb/Mq8KpZ+Ru2qFd40JTtRlSIwLXsQ7wYaX+Vt+2yEOKZ2la1CEOj+dsFFuTaLJTY6jR0jzosmSAGBcQ5T8sJoxcC79y1IiyIOtVJa6/3IaO6R+S56O4cDiBsXdCPBGwbcpB0q8iE3PwAQyjXY2Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sz3MO28cQpv/Jng1aWp3F72QarD8mfSI8NTKbjpNWns=;
- b=kUoYO+0T9HdBPqpOyLEKNVgxe1WCZpTPGA1J7SRoCyDlgpWjgphb8rm8vXDNfwBHWsl5LGnteff9hQf3ECG5JQvKzbb3uN9v8DylamDFAfuZl/MoyC1Ogga5gLdis9JDUQGl1dWJItDFNudwt9hCzYziYNn7F2VQ9MID+2bQ/o639MnU5Imt6DTlVPPqfs31ETPZFVGV6HEAKacUWRGkiOlL4Yd/kzNYby7l484b8h69OLYHrn2iBRxpW2v2ytLGxcxZIqNHGp1l++BRtJ3vrM4tar9wFVIoB3vm3FwF1b3ZqieZoi95WtA4dKq2ALDF2qJ6P3/4Tm78OB20SNHT+A==
+ bh=CQPyYikvNbukXwo2gVPZQKngmpSWGRpjMuHTtBTetKA=;
+ b=Fe/CsDbd19t0cqlEBTAx6SNl2RvkBbZFmd3aooxCAPAjjMgZwxNBVnaS/2mG0O1A8c1sr8ODJyi+wfS5QOmAQRwYPidaLBlfr0iPPgQ6RYoi5yiECu4nEBoajF7TAhjMPj1KKyGe7slANDAJKvxFEiAnvz0C7FDk2rztt8ncOrByyNOX/fbacnGusn69elc5BjZ7H3MiKL9aI+Jt9E9jH5I+nGebR6SSH0XLeLsZFhhwVZYH0ebtrJx3BMt9QlMVHXv7g8Qq+aJB56h6BHjyQ48tCzcEx/R9k/lEgIb8YKvw3jMmmf6Y/H5mk1yjhrr64ivkAYOhsPp4PFouClOwTA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
@@ -30,16 +30,16 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sz3MO28cQpv/Jng1aWp3F72QarD8mfSI8NTKbjpNWns=;
- b=iOcRlJgJO3Om5Ul+OR6DG6jAIntKT1/rgaPNjRa9RoVnZQntvc3ufnw+6yyv3vr03qeeBg23Uktclh8oMKC7O8kP8R1qR8LOQMcFFujwSWSU+PpUO3unGD4uSbGHrZ+OPKB9I0S/4oQGsMPg4QerWqqdrU97gjhCp1IJx+tgwRUYwH61GaIaXeZ1NKZToGd93Wo3MbONJVH/angcrkr6Vjxp2NuJYRHFt6W9hr3/2v/n+NI/07i1Xz8WVyhBtumihuinKw3kK46RMlCKJGnEjHexKGzNAYRVT5/m708yDJi7IiHNXQzHwWcaxRjQ8TOFZeWt6eXwrB39EuE93POTYA==
-Received: from CH0PR04CA0011.namprd04.prod.outlook.com (2603:10b6:610:76::16)
- by SA0PR12MB4463.namprd12.prod.outlook.com (2603:10b6:806:92::14)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=CQPyYikvNbukXwo2gVPZQKngmpSWGRpjMuHTtBTetKA=;
+ b=K3RL9jAg3K5Vqu7GcZghnjXcBWo+2wsoFkG5IknsXDXYTQERKbb1ljMO/o3wJyGh75E5PKa5SElJFrbmhmyCRPxtRN1r7mT8h9Bl4WrVA0OQ0v5F19HFLEonWR3fmE8MWdLRQUvQ3RZGShQU4jgRl60Pe1qtK517Bui87bv1rlaVYs6+QXWipSlGbrrdIMfwEkLWsnnVtZWEcqUhravzsXcwpF0HivbGcQeyvWz8rTKx9RFkKsGxPeansuvG2QAphLMO4O6UQq2uu7BCjegsPvH2Ypuv4dfHViyoA+m4OrTklBPp7R/Px2s2R/e5wAk3SNlbPN7L9Hp8IUGsyD8bNQ==
+Received: from CH0PR04CA0002.namprd04.prod.outlook.com (2603:10b6:610:76::7)
+ by IA0PR12MB7553.namprd12.prod.outlook.com (2603:10b6:208:43f::18) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.50; Tue, 16 Apr
- 2024 23:41:10 +0000
+ 2024 23:41:11 +0000
 Received: from DS2PEPF0000343D.namprd02.prod.outlook.com
- (2603:10b6:610:76:cafe::21) by CH0PR04CA0011.outlook.office365.com
- (2603:10b6:610:76::16) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10b6:610:76:cafe::6e) by CH0PR04CA0002.outlook.office365.com
+ (2603:10b6:610:76::7) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.34 via Frontend
  Transport; Tue, 16 Apr 2024 23:41:10 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
@@ -56,18 +56,18 @@ Received: from mail.nvidia.com (216.228.117.161) by
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
  (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.41; Tue, 16 Apr
- 2024 16:40:53 -0700
+ 2024 16:40:55 -0700
 Received: from fedora.mshome.net (10.126.231.35) by rnnvmail201.nvidia.com
  (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.12; Tue, 16 Apr
- 2024 16:40:52 -0700
+ 2024 16:40:53 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: Ben Skeggs <bskeggs@nvidia.com>
-Subject: [PATCH 020/156] drm/nouveau/kms: move hw ring tracking vars into
- nvif_push
-Date: Wed, 17 Apr 2024 09:37:46 +1000
-Message-ID: <20240416234002.19509-21-bskeggs@nvidia.com>
+Subject: [PATCH 021/156] drm/nouveau/kms: move dmac sync/vram ctxdmas to
+ core+wndws
+Date: Wed, 17 Apr 2024 09:37:47 +1000
+Message-ID: <20240416234002.19509-22-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240416234002.19509-1-bskeggs@nvidia.com>
 References: <20240416234002.19509-1-bskeggs@nvidia.com>
@@ -79,26 +79,26 @@ X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF0000343D:EE_|SA0PR12MB4463:EE_
-X-MS-Office365-Filtering-Correlation-Id: bc21fc38-903e-487d-8070-08dc5e6eb1d1
+X-MS-TrafficTypeDiagnostic: DS2PEPF0000343D:EE_|IA0PR12MB7553:EE_
+X-MS-Office365-Filtering-Correlation-Id: 817ee9f2-6284-446c-a302-08dc5e6eb235
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: WfOxMRj20UaxBXJVMoWJd7r6S49/Y/oIRzHtJgWSCdpLTcgfc6KcdIHeAOZwid2LnTgi9YFY2BEFoxLHfgChKy7vHZnBL26+Qs13mLbWyYvNFl51BdZY8OCrsF5/4UTvQatGSbR9vmOQe0ctgr1beQ83A9aXvfHMlukU+fd7mfjBLKNDY7N0U7f0z8/p8SxYXoXls3U6+HJ9G3Rr1SfLccNlmmGEZkXidE3x9XvGrdlXU4XB7MjB2gWxANvQAWVEaLlu/BCVrUVCmDKSDZsTayPpPdpEPJRvt6N/O2vZdSv1lXjI08i94m7i2D1UjbomIYs9V3/qFAeD25edQ4hR8SAswVZAh2GrgqIZY6PiRwDyh2rMdY1qC+pAQb2+MwNap7f7x86EAC4g3IZk4zWyH7f7p8phPi3kM+6lOWtCj+Xb6mU1XZWDx1/R79zEGLwWGOdFupFoCOq+dpYUX6Xeowgu3pe+lQAgWkr1DQ/Qsq70A9sfq+KP5zl8Y0InvyEkvhpgIwXCtz/kz4P1xHNK1BbANr9lRncl1okX0/E88nZH54QVStCPmo8d1C5c/f91ImSYoCjHKvpkVczeYoqriwSxNCtJm58K+nnlE4l6IiUxEeF5eF2PtlDlBnY1yNkqhHtSBBHs1VOQeIwHB+il4Fg1bMh4o5aWYIeQIDsI71aTAxa70EBrncDrCUsaJDZu89Si/NMQeCrMyH3Xfi7hoQy4zVBBl4eS+OUScxSbMIPzY11yj4EcoeBQuqpj+jGY
+X-Microsoft-Antispam-Message-Info: lpRDiSv6A5DygQtc14xTq9t/AKPLOrpmzUaXpoz4vlpUiHEDi0pFsNB7xDmatWh912KaoXxZXcJHjrG3QZ3VZEA4dZNPkbPd92M7yiBxYFJMO+JGTfrpxKLFeKWALHcnEv5SWSHl1scn9r5LQQDoDVqN3rn62mqkF6EJ3nUoDiKJQwKxZtN3UOD7Kx5+GIt65dRLJ2O3DwZRAXkevdVX9jnLvNTZBxtx+TwCdef8srGrqHXMuGtqOKZuY94q/eKH8IE0S+j5WPwLPNSdUlGK5CXAaGqRf6W9h7TCMttn0tah1MWJt/PZe5dhfyJjrMGvdzY7cdF/6UWxSdBjMCCofBnbtSxrPeC1TgpCGlC5N/5LAjgZ9NAfXktWGbzgo9wcXCkWCPTlEjpJt683Hh9+MP1351ljXy9lXmR+4A5457ZZSZxfbujiQIXlmu7u2RrDAsmcEYL3ghZchH3bLVYXk6/2REnyqNd5NUdSJmTQSCh05W0wqJaWObuB7aLqmqVAdDZTzGK0l45r6NggD5hBYXSkNg/ff9zX3ZM+GCffMYmPFWUqBZh/IeWax1D21knoJ3G4+rb9nluWzbEJkEPPzsKa92n4kSOsVdZgOJA6ocv1+LhlcZQo876ZGKGqGGe0l0cXC1WkeOXTe0otyfui20jMbNjdhx6iIXqJ9EZIXn5k2VycXUtg3qxGVvPxqHIBjmz5fzgRN8sMfqSyHz5vhFYPKOqzgD9SbO3Cx3G2rTJQ9fujtNR/RhuXCybGiB14
 X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230031)(376005)(1800799015)(82310400014)(36860700004); DIR:OUT;
+ SFS:(13230031)(1800799015)(82310400014)(376005)(36860700004); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2024 23:41:10.1072 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: bc21fc38-903e-487d-8070-08dc5e6eb1d1
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2024 23:41:10.7478 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 817ee9f2-6284-446c-a302-08dc5e6eb235
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
  Helo=[mail.nvidia.com]
 X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF0000343D.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4463
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7553
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -113,171 +113,438 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-- will help later in the series where display channel apis are modified
+- will help later in the series where display channels apis are modified
 
 Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 ---
- drivers/gpu/drm/nouveau/dispnv50/disp.c     | 35 +++++++++++----------
- drivers/gpu/drm/nouveau/dispnv50/disp.h     |  4 ---
- drivers/gpu/drm/nouveau/include/nvif/push.h | 12 +++++--
- 3 files changed, 28 insertions(+), 23 deletions(-)
+ drivers/gpu/drm/nouveau/dispnv50/base507c.c |  4 +-
+ drivers/gpu/drm/nouveau/dispnv50/core.c     | 39 ++++++++++++++++-
+ drivers/gpu/drm/nouveau/dispnv50/core.h     |  4 ++
+ drivers/gpu/drm/nouveau/dispnv50/core507d.c |  2 +-
+ drivers/gpu/drm/nouveau/dispnv50/corec37d.c |  2 +-
+ drivers/gpu/drm/nouveau/dispnv50/corec57d.c |  2 +-
+ drivers/gpu/drm/nouveau/dispnv50/curs507a.c |  6 +--
+ drivers/gpu/drm/nouveau/dispnv50/disp.c     | 27 ------------
+ drivers/gpu/drm/nouveau/dispnv50/disp.h     |  3 --
+ drivers/gpu/drm/nouveau/dispnv50/head.c     |  2 +-
+ drivers/gpu/drm/nouveau/dispnv50/head507d.c |  2 +-
+ drivers/gpu/drm/nouveau/dispnv50/ovly507e.c |  4 +-
+ drivers/gpu/drm/nouveau/dispnv50/wndw.c     | 46 +++++++++++++++++++--
+ drivers/gpu/drm/nouveau/dispnv50/wndw.h     |  6 ++-
+ drivers/gpu/drm/nouveau/dispnv50/wndwc37e.c |  4 +-
+ 15 files changed, 104 insertions(+), 49 deletions(-)
 
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/base507c.c b/drivers/gpu/drm/nouveau/dispnv50/base507c.c
+index a431f6c5f6fa..0b6fb663d78e 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/base507c.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/base507c.c
+@@ -311,7 +311,7 @@ base507c_new_(const struct nv50_wndw_func *func, const u32 *format,
+ 	struct nv50_wndw *wndw;
+ 	int ret;
+ 
+-	ret = nv50_wndw_new_(func, drm->dev, DRM_PLANE_TYPE_PRIMARY,
++	ret = nv50_wndw_prep(func, drm->dev, DRM_PLANE_TYPE_PRIMARY,
+ 			     "base", head, format, BIT(head),
+ 			     NV50_DISP_INTERLOCK_BASE, interlock_data, &wndw);
+ 	if (*pwndw = wndw, ret)
+@@ -328,7 +328,7 @@ base507c_new_(const struct nv50_wndw_func *func, const u32 *format,
+ 	wndw->ntfy = NV50_DISP_BASE_NTFY(wndw->id);
+ 	wndw->sema = NV50_DISP_BASE_SEM0(wndw->id);
+ 	wndw->data = 0x00000000;
+-	return 0;
++	return nv50_wndw_ctor(wndw);
+ }
+ 
+ int
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/core.c b/drivers/gpu/drm/nouveau/dispnv50/core.c
+index f045515696cb..1864f3e3bbc3 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/core.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/core.c
+@@ -20,14 +20,20 @@
+  * OTHER DEALINGS IN THE SOFTWARE.
+  */
+ #include "core.h"
++#include "handles.h"
++
++#include "nouveau_bo.h"
+ 
+ #include <nvif/class.h>
++#include <nvif/cl0002.h>
+ 
+ void
+ nv50_core_del(struct nv50_core **pcore)
+ {
+ 	struct nv50_core *core = *pcore;
+ 	if (core) {
++		nvif_object_dtor(&core->sync);
++		nvif_object_dtor(&core->vram);
+ 		nv50_dmac_destroy(&core->chan);
+ 		kfree(*pcore);
+ 		*pcore = NULL;
+@@ -61,7 +67,9 @@ nv50_core_new(struct nouveau_drm *drm, struct nv50_core **pcore)
+ 		{}
+ 	};
+ 	struct nv50_disp *disp = nv50_disp(drm->dev);
++	struct nv50_core *core;
+ 	int cid;
++	int ret;
+ 
+ 	cid = nvif_mclass(&disp->disp->object, cores);
+ 	if (cid < 0) {
+@@ -69,5 +77,34 @@ nv50_core_new(struct nouveau_drm *drm, struct nv50_core **pcore)
+ 		return cid;
+ 	}
+ 
+-	return cores[cid].new(drm, cores[cid].oclass, pcore);
++	ret = cores[cid].new(drm, cores[cid].oclass, &core);
++	*pcore = core;
++	if (ret)
++		return ret;
++
++	ret = nvif_object_ctor(&core->chan.base.user, "kmsCoreSyncCtxdma", NV50_DISP_HANDLE_SYNCBUF,
++			       NV_DMA_IN_MEMORY,
++			       &(struct nv_dma_v0) {
++					.target = NV_DMA_V0_TARGET_VRAM,
++					.access = NV_DMA_V0_ACCESS_RDWR,
++					.start = disp->sync->offset + 0x0000,
++					.limit = disp->sync->offset + 0x0fff,
++			       }, sizeof(struct nv_dma_v0),
++			       &core->sync);
++	if (ret)
++		return ret;
++
++	ret = nvif_object_ctor(&core->chan.base.user, "kmsCoreVramCtxdma", NV50_DISP_HANDLE_VRAM,
++			       NV_DMA_IN_MEMORY,
++			       &(struct nv_dma_v0) {
++					.target = NV_DMA_V0_TARGET_VRAM,
++					.access = NV_DMA_V0_ACCESS_RDWR,
++					.start = 0,
++					.limit = drm->device.info.ram_user - 1,
++			       }, sizeof(struct nv_dma_v0),
++			       &core->vram);
++	if (ret)
++		return ret;
++
++	return 0;
+ }
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/core.h b/drivers/gpu/drm/nouveau/dispnv50/core.h
+index f75088186fba..a967c66dc7a2 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/core.h
++++ b/drivers/gpu/drm/nouveau/dispnv50/core.h
+@@ -8,6 +8,10 @@
+ struct nv50_core {
+ 	const struct nv50_core_func *func;
+ 	struct nv50_dmac chan;
++
++	struct nvif_object vram;
++	struct nvif_object sync;
++
+ 	bool assign_windows;
+ };
+ 
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/core507d.c b/drivers/gpu/drm/nouveau/dispnv50/core507d.c
+index ce2cb78bbdd3..c6eee88ae99a 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/core507d.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/core507d.c
+@@ -136,7 +136,7 @@ core507d_init(struct nv50_core *core)
+ 	if ((ret = PUSH_WAIT(push, 2)))
+ 		return ret;
+ 
+-	PUSH_MTHD(push, NV507D, SET_CONTEXT_DMA_NOTIFIER, core->chan.sync.handle);
++	PUSH_MTHD(push, NV507D, SET_CONTEXT_DMA_NOTIFIER, core->sync.handle);
+ 	return PUSH_KICK(push);
+ }
+ 
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/corec37d.c b/drivers/gpu/drm/nouveau/dispnv50/corec37d.c
+index 7f637b8830be..9525fd30c8fc 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/corec37d.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/corec37d.c
+@@ -134,7 +134,7 @@ corec37d_init(struct nv50_core *core)
+ 	if ((ret = PUSH_WAIT(push, 2 + windows * 5)))
+ 		return ret;
+ 
+-	PUSH_MTHD(push, NVC37D, SET_CONTEXT_DMA_NOTIFIER, core->chan.sync.handle);
++	PUSH_MTHD(push, NVC37D, SET_CONTEXT_DMA_NOTIFIER, core->sync.handle);
+ 
+ 	for (i = 0; i < windows; i++) {
+ 		PUSH_MTHD(push, NVC37D, WINDOW_SET_WINDOW_FORMAT_USAGE_BOUNDS(i),
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/corec57d.c b/drivers/gpu/drm/nouveau/dispnv50/corec57d.c
+index 421d0d57e1d8..485892c2e775 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/corec57d.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/corec57d.c
+@@ -36,7 +36,7 @@ corec57d_init(struct nv50_core *core)
+ 	if ((ret = PUSH_WAIT(push, 2 + windows * 5)))
+ 		return ret;
+ 
+-	PUSH_MTHD(push, NVC57D, SET_CONTEXT_DMA_NOTIFIER, core->chan.sync.handle);
++	PUSH_MTHD(push, NVC57D, SET_CONTEXT_DMA_NOTIFIER, core->sync.handle);
+ 
+ 	for (i = 0; i < windows; i++) {
+ 		PUSH_MTHD(push, NVC57D, WINDOW_SET_WINDOW_FORMAT_USAGE_BOUNDS(i),
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/curs507a.c b/drivers/gpu/drm/nouveau/dispnv50/curs507a.c
+index a95ee5dcc2e3..7292d1554dba 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/curs507a.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/curs507a.c
+@@ -78,7 +78,7 @@ static void
+ curs507a_prepare(struct nv50_wndw *wndw, struct nv50_head_atom *asyh,
+ 		 struct nv50_wndw_atom *asyw)
+ {
+-	u32 handle = nv50_disp(wndw->plane.dev)->core->chan.vram.handle;
++	u32 handle = nv50_disp(wndw->plane.dev)->core->vram.handle;
+ 	u32 offset = asyw->image.offset[0];
+ 	if (asyh->curs.handle != handle || asyh->curs.offset != offset) {
+ 		asyh->curs.handle = handle;
+@@ -177,7 +177,7 @@ curs507a_new_(const struct nv50_wimm_func *func, struct nouveau_drm *drm,
+ 	struct nv50_wndw *wndw;
+ 	int ret;
+ 
+-	ret = nv50_wndw_new_(&curs507a_wndw, drm->dev, DRM_PLANE_TYPE_CURSOR,
++	ret = nv50_wndw_prep(&curs507a_wndw, drm->dev, DRM_PLANE_TYPE_CURSOR,
+ 			     "curs", head, curs507a_format, BIT(head),
+ 			     NV50_DISP_INTERLOCK_CURS, interlock_data, &wndw);
+ 	if (*pwndw = wndw, ret)
+@@ -193,7 +193,7 @@ curs507a_new_(const struct nv50_wimm_func *func, struct nouveau_drm *drm,
+ 	nvif_object_map(&wndw->wimm.base.user, NULL, 0);
+ 	wndw->immd = func;
+ 	wndw->ctxdma.parent = NULL;
+-	return 0;
++	return nv50_wndw_ctor(wndw);
+ }
+ 
+ int
 diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index b64b283f8e9c..125c33ee251a 100644
+index 125c33ee251a..31b46a62b501 100644
 --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
 +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -132,8 +132,8 @@ nv50_dmac_kick(struct nvif_push *push)
+@@ -119,9 +119,6 @@ nv50_chan_destroy(struct nv50_chan *chan)
+ void
+ nv50_dmac_destroy(struct nv50_dmac *dmac)
  {
- 	struct nv50_dmac *dmac = container_of(push, typeof(*dmac), push);
+-	nvif_object_dtor(&dmac->vram);
+-	nvif_object_dtor(&dmac->sync);
+-
+ 	nv50_chan_destroy(&dmac->base);
  
--	dmac->cur = push->cur - (u32 __iomem *)dmac->push.mem.object.map.ptr;
--	if (dmac->put != dmac->cur) {
-+	push->hw.cur = push->cur - (u32 __iomem *)dmac->push.mem.object.map.ptr;
-+	if (push->hw.put != push->hw.cur) {
- 		/* Push buffer fetches are not coherent with BAR1, we need to ensure
- 		 * writes have been flushed right through to VRAM before writing PUT.
- 		 */
-@@ -146,8 +146,8 @@ nv50_dmac_kick(struct nvif_push *push)
- 			);
- 		}
+ 	nvif_mem_dtor(&dmac->push.mem);
+@@ -280,30 +277,6 @@ nv50_dmac_create(struct nouveau_drm *drm,
+ 	if (syncbuf < 0)
+ 		return 0;
  
--		NVIF_WV32(&dmac->base.user, NV507C, PUT, PTR, dmac->cur);
--		dmac->put = dmac->cur;
-+		NVIF_WV32(&dmac->base.user, NV507C, PUT, PTR, push->hw.cur);
-+		push->hw.put = push->hw.cur;
- 	}
- 
- 	push->bgn = push->cur;
-@@ -156,22 +156,25 @@ nv50_dmac_kick(struct nvif_push *push)
- static int
- nv50_dmac_free(struct nv50_dmac *dmac)
- {
-+	struct nvif_push *push = &dmac->push;
- 	u32 get = NVIF_RV32(&dmac->base.user, NV507C, GET, PTR);
--	if (get > dmac->cur) /* NVIDIA stay 5 away from GET, do the same. */
--		return get - dmac->cur - 5;
--	return dmac->max - dmac->cur;
-+	if (get > push->hw.cur) /* NVIDIA stay 5 away from GET, do the same. */
-+		return get - push->hw.cur - 5;
-+	return push->hw.max - push->hw.cur;
+-	ret = nvif_object_ctor(&dmac->base.user, "kmsSyncCtxDma", NV50_DISP_HANDLE_SYNCBUF,
+-			       NV_DMA_IN_MEMORY,
+-			       &(struct nv_dma_v0) {
+-					.target = NV_DMA_V0_TARGET_VRAM,
+-					.access = NV_DMA_V0_ACCESS_RDWR,
+-					.start = syncbuf + 0x0000,
+-					.limit = syncbuf + 0x0fff,
+-			       }, sizeof(struct nv_dma_v0),
+-			       &dmac->sync);
+-	if (ret)
+-		return ret;
+-
+-	ret = nvif_object_ctor(&dmac->base.user, "kmsVramCtxDma", NV50_DISP_HANDLE_VRAM,
+-			       NV_DMA_IN_MEMORY,
+-			       &(struct nv_dma_v0) {
+-					.target = NV_DMA_V0_TARGET_VRAM,
+-					.access = NV_DMA_V0_ACCESS_RDWR,
+-					.start = 0,
+-					.limit = device->info.ram_user - 1,
+-			       }, sizeof(struct nv_dma_v0),
+-			       &dmac->vram);
+-	if (ret)
+-		return ret;
+-
+ 	return ret;
  }
- 
- static int
- nv50_dmac_wind(struct nv50_dmac *dmac)
- {
-+	struct nvif_push *push = &dmac->push;
-+
- 	/* Wait for GET to depart from the beginning of the push buffer to
- 	 * prevent writing PUT == GET, which would be ignored by HW.
- 	 */
- 	u32 get = NVIF_RV32(&dmac->base.user, NV507C, GET, PTR);
- 	if (get == 0) {
- 		/* Corner-case, HW idle, but non-committed work pending. */
--		if (dmac->put == 0)
-+		if (push->hw.put == 0)
- 			nv50_dmac_kick(&dmac->push);
- 
- 		if (nvif_msec(dmac->base.device, 2000,
-@@ -182,7 +185,7 @@ nv50_dmac_wind(struct nv50_dmac *dmac)
- 	}
- 
- 	PUSH_RSVD(&dmac->push, PUSH_JUMP(&dmac->push, 0));
--	dmac->cur = 0;
-+	push->hw.cur = 0;
- 	return 0;
- }
- 
-@@ -192,17 +195,17 @@ nv50_dmac_wait(struct nvif_push *push, u32 size)
- 	struct nv50_dmac *dmac = container_of(push, typeof(*dmac), push);
- 	int free;
- 
--	if (WARN_ON(size > dmac->max))
-+	if (WARN_ON(size > push->hw.max))
- 		return -EINVAL;
- 
--	dmac->cur = push->cur - (u32 __iomem *)dmac->push.mem.object.map.ptr;
--	if (dmac->cur + size >= dmac->max) {
-+	push->hw.cur = push->cur - (u32 __iomem *)dmac->push.mem.object.map.ptr;
-+	if (push->hw.cur + size >= push->hw.max) {
- 		int ret = nv50_dmac_wind(dmac);
- 		if (ret)
- 			return ret;
- 
- 		push->cur = dmac->push.mem.object.map.ptr;
--		push->cur = push->cur + dmac->cur;
-+		push->cur = push->cur + push->hw.cur;
- 		nv50_dmac_kick(push);
- 	}
- 
-@@ -215,7 +218,7 @@ nv50_dmac_wait(struct nvif_push *push, u32 size)
- 	}
- 
- 	push->bgn = dmac->push.mem.object.map.ptr;
--	push->bgn = push->bgn + dmac->cur;
-+	push->bgn = push->bgn + push->hw.cur;
- 	push->cur = push->bgn;
- 	push->end = push->cur + free;
- 	return 0;
-@@ -259,13 +262,13 @@ nv50_dmac_create(struct nouveau_drm *drm,
- 	dmac->push.bgn = dmac->push.mem.object.map.ptr;
- 	dmac->push.cur = dmac->push.bgn;
- 	dmac->push.end = dmac->push.bgn;
--	dmac->max = 0x1000/4 - 1;
-+	dmac->push.hw.max = 0x1000/4 - 1;
- 
- 	/* EVO channels are affected by a HW bug where the last 12 DWORDs
- 	 * of the push buffer aren't able to be used safely.
- 	 */
- 	if (disp->oclass < GV100_DISP)
--		dmac->max -= 12;
-+		dmac->push.hw.max -= 12;
- 
- 	args->pushbuf = nvif_handle(&dmac->push.mem.object);
  
 diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.h b/drivers/gpu/drm/nouveau/dispnv50/disp.h
-index 15f9242b72ac..a7a01ae77ff4 100644
+index a7a01ae77ff4..9485f8c90cac 100644
 --- a/drivers/gpu/drm/nouveau/dispnv50/disp.h
 +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.h
-@@ -66,10 +66,6 @@ struct nv50_dmac {
+@@ -63,9 +63,6 @@ struct nv50_dmac {
+ 	struct nv50_chan base;
  
- 	struct nvif_object sync;
- 	struct nvif_object vram;
+ 	struct nvif_push push;
 -
--	u32 cur;
--	u32 put;
--	u32 max;
+-	struct nvif_object sync;
+-	struct nvif_object vram;
  };
  
  struct nv50_outp_atom {
-diff --git a/drivers/gpu/drm/nouveau/include/nvif/push.h b/drivers/gpu/drm/nouveau/include/nvif/push.h
-index 6d3a8a3d2087..b88024ef6cc0 100644
---- a/drivers/gpu/drm/nouveau/include/nvif/push.h
-+++ b/drivers/gpu/drm/nouveau/include/nvif/push.h
-@@ -27,15 +27,21 @@
- #include <nvhw/drf.h>
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
+index 83355dbc15ee..007857ac8542 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/head.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
+@@ -274,7 +274,7 @@ nv50_head_atomic_check_lut(struct nv50_head *head,
+ 			  size, crtc->base.id, crtc->name);
+ 		return -EINVAL;
+ 	}
+-	asyh->olut.handle = disp->core->chan.vram.handle;
++	asyh->olut.handle = disp->core->vram.handle;
+ 	asyh->olut.buffer = !asyh->olut.buffer;
  
- struct nvif_push {
--	int (*wait)(struct nvif_push *push, u32 size);
--	void (*kick)(struct nvif_push *push);
--
- 	struct nvif_mem mem;
+ 	return 0;
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/head507d.c b/drivers/gpu/drm/nouveau/dispnv50/head507d.c
+index 7fa1e0279d7d..634f6166f38d 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/head507d.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/head507d.c
+@@ -265,7 +265,7 @@ head507d_core_calc(struct nv50_head *head, struct nv50_head_atom *asyh)
+ 		asyh->core.w = asyh->state.mode.hdisplay;
+ 		asyh->core.h = asyh->state.mode.vdisplay;
+ 	}
+-	asyh->core.handle = disp->core->chan.vram.handle;
++	asyh->core.handle = disp->core->vram.handle;
+ 	asyh->core.offset = 0;
+ 	asyh->core.format = NV507D_HEAD_SET_PARAMS_FORMAT_A8R8G8B8;
+ 	asyh->core.kind = NV507D_HEAD_SET_PARAMS_KIND_KIND_PITCH;
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/ovly507e.c b/drivers/gpu/drm/nouveau/dispnv50/ovly507e.c
+index 654e506f8431..4e109c5b5a1b 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/ovly507e.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/ovly507e.c
+@@ -152,7 +152,7 @@ ovly507e_new_(const struct nv50_wndw_func *func, const u32 *format,
+ 	struct nv50_wndw *wndw;
+ 	int ret;
  
-+	struct {
-+		u32 cur;
-+		u32 put;
-+		u32 max;
-+	} hw;
+-	ret = nv50_wndw_new_(func, drm->dev, DRM_PLANE_TYPE_OVERLAY,
++	ret = nv50_wndw_prep(func, drm->dev, DRM_PLANE_TYPE_OVERLAY,
+ 			     "ovly", head, format, BIT(head),
+ 			     NV50_DISP_INTERLOCK_OVLY, interlock_data,
+ 			     &wndw);
+@@ -170,7 +170,7 @@ ovly507e_new_(const struct nv50_wndw_func *func, const u32 *format,
+ 	wndw->ntfy = NV50_DISP_OVLY_NTFY(wndw->id);
+ 	wndw->sema = NV50_DISP_OVLY_SEM0(wndw->id);
+ 	wndw->data = 0x00000000;
+-	return 0;
++	return nv50_wndw_ctor(wndw);
+ }
+ 
+ int
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+index 7a2cceaee6e9..1dbf0e73b5de 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+@@ -181,7 +181,7 @@ nv50_wndw_ntfy_enable(struct nv50_wndw *wndw, struct nv50_wndw_atom *asyw)
+ {
+ 	struct nv50_disp *disp = nv50_disp(wndw->plane.dev);
+ 
+-	asyw->ntfy.handle = wndw->wndw.sync.handle;
++	asyw->ntfy.handle = wndw->sync.handle;
+ 	asyw->ntfy.offset = wndw->ntfy;
+ 	asyw->ntfy.awaken = false;
+ 	asyw->set.ntfy = true;
+@@ -406,7 +406,7 @@ nv50_wndw_atomic_check_lut(struct nv50_wndw *wndw,
+ 	memset(&asyw->xlut, 0x00, sizeof(asyw->xlut));
+ 	if ((asyw->ilut = wndw->func->ilut ? ilut : NULL)) {
+ 		wndw->func->ilut(wndw, asyw, drm_color_lut_size(ilut));
+-		asyw->xlut.handle = wndw->wndw.vram.handle;
++		asyw->xlut.handle = wndw->vram.handle;
+ 		asyw->xlut.i.buffer = !asyw->xlut.i.buffer;
+ 		asyw->set.xlut = true;
+ 	} else {
+@@ -645,6 +645,9 @@ nv50_wndw_destroy(struct drm_plane *plane)
+ 	}
+ 
+ 	nv50_dmac_destroy(&wndw->wimm);
 +
- 	u32 *bgn;
- 	u32 *cur;
- 	u32 *seg;
- 	u32 *end;
-+
-+	int (*wait)(struct nvif_push *push, u32 size);
-+	void (*kick)(struct nvif_push *push);
++	nvif_object_dtor(&wndw->vram);
++	nvif_object_dtor(&wndw->sync);
+ 	nv50_dmac_destroy(&wndw->wndw);
+ 
+ 	nv50_lut_fini(&wndw->ilut);
+@@ -693,7 +696,44 @@ static const u64 nv50_cursor_format_modifiers[] = {
  };
  
- static inline __must_check int
+ int
+-nv50_wndw_new_(const struct nv50_wndw_func *func, struct drm_device *dev,
++nv50_wndw_ctor(struct nv50_wndw *wndw)
++{
++	struct nouveau_drm *drm = nouveau_drm(wndw->plane.dev);
++	struct nv50_disp *disp = nv50_disp(wndw->plane.dev);
++	int ret;
++
++	if (!nvif_object_constructed(&wndw->wndw.base.user))
++		return 0;
++
++	ret = nvif_object_ctor(&wndw->wndw.base.user, "kmsWndwSyncCtxDma", NV50_DISP_HANDLE_SYNCBUF,
++			       NV_DMA_IN_MEMORY,
++			       &(struct nv_dma_v0) {
++					.target = NV_DMA_V0_TARGET_VRAM,
++					.access = NV_DMA_V0_ACCESS_RDWR,
++					.start = disp->sync->offset + 0x0000,
++					.limit = disp->sync->offset + 0x0fff,
++			       }, sizeof(struct nv_dma_v0),
++			       &wndw->sync);
++	if (ret)
++		return ret;
++
++	ret = nvif_object_ctor(&wndw->wndw.base.user, "kmsWndwVramCtxDma", NV50_DISP_HANDLE_VRAM,
++			       NV_DMA_IN_MEMORY,
++			       &(struct nv_dma_v0) {
++					.target = NV_DMA_V0_TARGET_VRAM,
++					.access = NV_DMA_V0_ACCESS_RDWR,
++					.start = 0,
++					.limit = drm->device.info.ram_user - 1,
++			       }, sizeof(struct nv_dma_v0),
++			       &wndw->vram);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++int
++nv50_wndw_prep(const struct nv50_wndw_func *func, struct drm_device *dev,
+ 	       enum drm_plane_type type, const char *name, int index,
+ 	       const u32 *format, u32 heads,
+ 	       enum nv50_disp_interlock_type interlock_type, u32 interlock_data,
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.h b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
+index 76a6ae5d5652..66a06e20a6a0 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/wndw.h
++++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.h
+@@ -28,16 +28,20 @@ struct nv50_wndw {
+ 	struct nv50_dmac wndw;
+ 	struct nv50_dmac wimm;
+ 
++	struct nvif_object vram;
++	struct nvif_object sync;
++
+ 	u16 ntfy;
+ 	u16 sema;
+ 	u32 data;
+ };
+ 
+-int nv50_wndw_new_(const struct nv50_wndw_func *, struct drm_device *,
++int nv50_wndw_prep(const struct nv50_wndw_func *, struct drm_device *,
+ 		   enum drm_plane_type, const char *name, int index,
+ 		   const u32 *format, u32 heads,
+ 		   enum nv50_disp_interlock_type, u32 interlock_data,
+ 		   struct nv50_wndw **);
++int nv50_wndw_ctor(struct nv50_wndw *);
+ void nv50_wndw_flush_set(struct nv50_wndw *, u32 *interlock,
+ 			 struct nv50_wndw_atom *);
+ void nv50_wndw_flush_clr(struct nv50_wndw *, u32 *interlock, bool flush,
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndwc37e.c b/drivers/gpu/drm/nouveau/dispnv50/wndwc37e.c
+index 50a7b97d37a2..5029dfd98443 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/wndwc37e.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/wndwc37e.c
+@@ -357,7 +357,7 @@ wndwc37e_new_(const struct nv50_wndw_func *func, struct nouveau_drm *drm,
+ 	struct nv50_wndw *wndw;
+ 	int ret;
+ 
+-	ret = nv50_wndw_new_(func, drm->dev, type, "wndw", index,
++	ret = nv50_wndw_prep(func, drm->dev, type, "wndw", index,
+ 			     wndwc37e_format, heads, NV50_DISP_INTERLOCK_WNDW,
+ 			     BIT(index), &wndw);
+ 	if (*pwndw = wndw, ret)
+@@ -374,7 +374,7 @@ wndwc37e_new_(const struct nv50_wndw_func *func, struct nouveau_drm *drm,
+ 	wndw->ntfy = NV50_DISP_WNDW_NTFY(wndw->id);
+ 	wndw->sema = NV50_DISP_WNDW_SEM0(wndw->id);
+ 	wndw->data = 0x00000000;
+-	return 0;
++	return nv50_wndw_ctor(wndw);
+ }
+ 
+ int
 -- 
 2.41.0
 
