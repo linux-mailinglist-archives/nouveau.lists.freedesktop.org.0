@@ -2,64 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 901998A7B44
-	for <lists+nouveau@lfdr.de>; Wed, 17 Apr 2024 06:15:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06EF68A7BEF
+	for <lists+nouveau@lfdr.de>; Wed, 17 Apr 2024 07:40:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 82D4B1130DF;
-	Wed, 17 Apr 2024 04:15:45 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fHC2Yamh";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0E7A7113174;
+	Wed, 17 Apr 2024 05:40:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com
- [209.85.208.48])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 30BF01130DF
- for <nouveau@lists.freedesktop.org>; Wed, 17 Apr 2024 04:15:44 +0000 (UTC)
-Received: by mail-ed1-f48.google.com with SMTP id
- 4fb4d7f45d1cf-56e56ee8d5cso6694805a12.2
- for <nouveau@lists.freedesktop.org>; Tue, 16 Apr 2024 21:15:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713327342; x=1713932142; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nUB4g5sijNmBMpDOpb0wBkjwbbVyQkxsCplWSUK9DPQ=;
- b=fHC2YamhwPCVOSQ9wK4fRfPhEyCFE+y921DZsgDBafG/uTKm2kr4TFvESChDqxfD5W
- 5HastCymS6/V0EZh4CwihXG4syVuKF8GTpXtNh858XP++lVVna63XtQBccdNq2jmVMp7
- Hf/piD6uRXHyffG0/aSC3TxtEgX9WCBO9YGFmPGY+e+bh3xUepYqcPwBGkuuhPvJRs3N
- Ys7HmsALWKbn+48Qo56fMBe7S0SbG+WTbLKOBHI1I/b3eOOkSuyKAaZVbThEFSnyTpR1
- B31e5fi0N7grkqXd2O/IBBq9NJ8sSKAaMJhE6LV+pzl/D3CAkDQogalftrdkLavyteCy
- tpOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713327342; x=1713932142;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nUB4g5sijNmBMpDOpb0wBkjwbbVyQkxsCplWSUK9DPQ=;
- b=h74OllePbjT2T+CIQTMxmJIXi/1O/HCbXL941+fDw0pDgTfNUyPzANPn+PCE0cvOGj
- CRX3qr3+5q8UfNuGrGl8twyyGBvenDGXaxv98tzoUzWib5+/OO++yLxF8rl2k5m8TYAy
- bNPP6JdOqDI3ged/mLJyuK4ucqcTNWujV7imhfkYABehx8T/1Hx5PuUDxERWTKI96s7C
- HztqZWrOj/4O2MK5GymnVOaP8vQbhdxDYg0t0z0HDtYXJnK/AhVNc8qD8gA2xQ7aONtl
- UGxnqa7Pj4PEeXuvNUkkZ98leEGYCI3VWGqK5z75hZdWXTS2gxOZuvFWqZghNQS9nyy2
- EdUg==
-X-Gm-Message-State: AOJu0YySTfC7ALr8ultQvU6wedk0szNehW4ou/5BorDZOCreD/Xk0yGj
- GCreUt/eHdfYF9hZD+e7Fsxqj/Jw36KiX/qfo9T1NfjfAgzrBpjtITV4OkMJFC6voCSWFZO8Ovb
- WDbaei1RSWPoPn6SCy/EWlG8Rl3s=
-X-Google-Smtp-Source: AGHT+IGCmwYQm3tlomRw7mbCMmjzfHwK6DjeufPY1pcRqUMjVDJeCCVoZTdnoYaHwJjHUtx+YVCMGKfy0v9ZOANa0gs=
-X-Received: by 2002:a17:907:983:b0:a52:19cb:fb48 with SMTP id
- bf3-20020a170907098300b00a5219cbfb48mr11329559ejc.77.1713327342051; Tue, 16
- Apr 2024 21:15:42 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240416234002.19509-1-bskeggs@nvidia.com>
-In-Reply-To: <20240416234002.19509-1-bskeggs@nvidia.com>
+Received: from us-smtp-delivery-44.mimecast.com
+ (us-smtp-delivery-44.mimecast.com [205.139.111.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4DEB3113175
+ for <nouveau@lists.freedesktop.org>; Wed, 17 Apr 2024 05:40:43 +0000 (UTC)
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-654-ydoKEAtIPTS-JvCA_0Di7g-1; Wed,
+ 17 Apr 2024 01:40:39 -0400
+X-MC-Unique: ydoKEAtIPTS-JvCA_0Di7g-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 3047828EC114;
+ Wed, 17 Apr 2024 05:40:39 +0000 (UTC)
+Received: from dreadlord.redhat.com (unknown [10.64.136.67])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 27D102166B31;
+ Wed, 17 Apr 2024 05:40:37 +0000 (UTC)
 From: Dave Airlie <airlied@gmail.com>
-Date: Wed, 17 Apr 2024 14:15:29 +1000
-Message-ID: <CAPM=9tyW=YuDQrRwrYK_ayuvEnp+9irTuze=MP-zkowm3CFJ9A@mail.gmail.com>
-Subject: Re: [PATCH 000/156] drm/nouveau: replace "ioctl" interface between
- drm/nvkm
-To: Ben Skeggs <bskeggs@nvidia.com>
+To: dri-devel@lists.freedesktop.org
 Cc: nouveau@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
+Subject: [PATCH] nouveau: rip out busy fence waits
+Date: Wed, 17 Apr 2024 15:40:32 +1000
+Message-ID: <20240417054032.3145721-1-airlied@gmail.com>
+MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: gmail.com
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,53 +54,144 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 17 Apr 2024 at 10:57, Ben Skeggs <bskeggs@nvidia.com> wrote:
->
-> This is a series of cleanups that I intended on doing after posting
-> the initial GSP-RM support several months ago, and have now had the
-> opportunity to work on again.
->
-> The main intention here is to replace the ioctl-like interface that
-> sits between NVKM and the nouveau DRM driver with more direct calls,
-> to reduce the call-chain complexity (and overhead).
->
-> This is achieved by having NVKM return structs of info and function
-> pointers specific to each class, along with an opaque pointer to its
-> private data.  These are stored in the NVIF structs and used to call
-> directly into an implementation without handle lookups and multiple
-> layers of indirection.
->
-> There's room for further cleanups and API changes from here, but for
-> now most of the API usage is exactly as it was before, as the series
-> has gotten quite large enough already.
->
-> The first part of the series starts out by cleaning up some of the
-> interfaces within the DRM driver, and reimplementing the subset of
-> "ioctl" interfaces needed by userspace directly.
->
-> A number of unused interfaces/function args are then removed so that
-> they don't need to be ported, and some initial renames/preparations
-> are made to the NVKM's user object implementations so that diffs of
-> the next set of patches are more straightforward to read.
->
-> I then go through each class in turn, starting from the root of the
-> object tree (client), and working up from there.  The object ctors/
-> dtors are ported first, followed by sclass/map/etc, followed by the
-> class's methods, and then repeating the process with each of their
-> children.
->
-> Objects remain accessible with the "ioctl" interface throughout the
-> changes (until their last use, after which they're removed from the
-> object rb entirely) to allow each change to be done independently.
->
-> After all classes have been ported, some final cleanups are made to
-> the DRM driver to complete the series.
+From: Dave Airlie <airlied@redhat.com>
 
-Welcome back!
+I'm pretty sure this optimisation is actually not a great idea,
+and is racy with other things waiting for fences.
 
-Do you have a git tree with this in it, since I think at least patch
-25 got stuck in moderation.
+Just nuke it, there should be no need to do fence waits in a
+busy CPU loop.
 
-Have you tested nouveau GL and nvk on top of this?
+Signed-off-by: Dave Airlie <airlied@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_bo.c    |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_chan.c  |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_dmem.c  |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_fence.c | 30 +------------------------
+ drivers/gpu/drm/nouveau/nouveau_fence.h |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_gem.c   |  2 +-
+ 6 files changed, 6 insertions(+), 34 deletions(-)
 
-Dave.
+diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau=
+/nouveau_bo.c
+index 8a30f5a0525b..a4e8f625fce6 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_bo.c
++++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+@@ -902,7 +902,7 @@ nouveau_bo_move_m2mf(struct ttm_buffer_object *bo, int =
+evict,
+ =09 * Without this the operation can timeout and we'll fallback to a
+ =09 * software copy, which might take several minutes to finish.
+ =09 */
+-=09nouveau_fence_wait(fence, false, false);
++=09nouveau_fence_wait(fence, false);
+ =09ret =3D ttm_bo_move_accel_cleanup(bo, &fence->base, evict, false,
+ =09=09=09=09=09new_reg);
+ =09nouveau_fence_unref(&fence);
+diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.c b/drivers/gpu/drm/nouve=
+au/nouveau_chan.c
+index 7c97b2886807..66fca95c10c7 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_chan.c
++++ b/drivers/gpu/drm/nouveau/nouveau_chan.c
+@@ -72,7 +72,7 @@ nouveau_channel_idle(struct nouveau_channel *chan)
+=20
+ =09=09ret =3D nouveau_fence_new(&fence, chan);
+ =09=09if (!ret) {
+-=09=09=09ret =3D nouveau_fence_wait(fence, false, false);
++=09=09=09ret =3D nouveau_fence_wait(fence, false);
+ =09=09=09nouveau_fence_unref(&fence);
+ =09=09}
+=20
+diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouve=
+au/nouveau_dmem.c
+index 12feecf71e75..033a09cd3c8f 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+@@ -128,7 +128,7 @@ static void nouveau_dmem_page_free(struct page *page)
+ static void nouveau_dmem_fence_done(struct nouveau_fence **fence)
+ {
+ =09if (fence) {
+-=09=09nouveau_fence_wait(*fence, true, false);
++=09=09nouveau_fence_wait(*fence, false);
+ =09=09nouveau_fence_unref(fence);
+ =09} else {
+ =09=09/*
+diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouv=
+eau/nouveau_fence.c
+index c3ea3cd933cd..8de941379324 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_fence.c
++++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+@@ -312,39 +312,11 @@ nouveau_fence_wait_legacy(struct dma_fence *f, bool i=
+ntr, long wait)
+ =09return timeout - t;
+ }
+=20
+-static int
+-nouveau_fence_wait_busy(struct nouveau_fence *fence, bool intr)
+-{
+-=09int ret =3D 0;
+-
+-=09while (!nouveau_fence_done(fence)) {
+-=09=09if (time_after_eq(jiffies, fence->timeout)) {
+-=09=09=09ret =3D -EBUSY;
+-=09=09=09break;
+-=09=09}
+-
+-=09=09__set_current_state(intr ?
+-=09=09=09=09    TASK_INTERRUPTIBLE :
+-=09=09=09=09    TASK_UNINTERRUPTIBLE);
+-
+-=09=09if (intr && signal_pending(current)) {
+-=09=09=09ret =3D -ERESTARTSYS;
+-=09=09=09break;
+-=09=09}
+-=09}
+-
+-=09__set_current_state(TASK_RUNNING);
+-=09return ret;
+-}
+-
+ int
+-nouveau_fence_wait(struct nouveau_fence *fence, bool lazy, bool intr)
++nouveau_fence_wait(struct nouveau_fence *fence, bool intr)
+ {
+ =09long ret;
+=20
+-=09if (!lazy)
+-=09=09return nouveau_fence_wait_busy(fence, intr);
+-
+ =09ret =3D dma_fence_wait_timeout(&fence->base, intr, 15 * HZ);
+ =09if (ret < 0)
+ =09=09return ret;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.h b/drivers/gpu/drm/nouv=
+eau/nouveau_fence.h
+index bc13110bdfa4..88213014b675 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_fence.h
++++ b/drivers/gpu/drm/nouveau/nouveau_fence.h
+@@ -23,7 +23,7 @@ void nouveau_fence_unref(struct nouveau_fence **);
+=20
+ int  nouveau_fence_emit(struct nouveau_fence *);
+ bool nouveau_fence_done(struct nouveau_fence *);
+-int  nouveau_fence_wait(struct nouveau_fence *, bool lazy, bool intr);
++int  nouveau_fence_wait(struct nouveau_fence *, bool intr);
+ int  nouveau_fence_sync(struct nouveau_bo *, struct nouveau_channel *, boo=
+l exclusive, bool intr);
+=20
+ struct nouveau_fence_chan {
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouvea=
+u/nouveau_gem.c
+index 49c2bcbef129..f715e381da69 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+@@ -928,7 +928,7 @@ nouveau_gem_ioctl_pushbuf(struct drm_device *dev, void =
+*data,
+ =09}
+=20
+ =09if (sync) {
+-=09=09if (!(ret =3D nouveau_fence_wait(fence, false, false))) {
++=09=09if (!(ret =3D nouveau_fence_wait(fence, false))) {
+ =09=09=09if ((ret =3D dma_fence_get_status(&fence->base)) =3D=3D 1)
+ =09=09=09=09ret =3D 0;
+ =09=09}
+--=20
+2.43.2
+
