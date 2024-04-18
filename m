@@ -2,83 +2,89 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C4858AB177
-	for <lists+nouveau@lfdr.de>; Fri, 19 Apr 2024 17:14:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DBBD08AB17C
+	for <lists+nouveau@lfdr.de>; Fri, 19 Apr 2024 17:14:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 36F7C10EDE5;
-	Fri, 19 Apr 2024 15:14:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6096910ECE4;
+	Fri, 19 Apr 2024 15:14:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="i5jhU3LW";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="cNzzDmy5";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4242D112A5D
- for <nouveau@lists.freedesktop.org>; Thu, 18 Apr 2024 12:03:42 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 6C62861812
- for <nouveau@lists.freedesktop.org>; Thu, 18 Apr 2024 12:03:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBAFCC4AF07
- for <nouveau@lists.freedesktop.org>; Thu, 18 Apr 2024 12:03:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1713441820;
- bh=r2swbwDECTWdtUz+XmC0t1zlrH6/BlEEQ0yzqhw5RYw=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=i5jhU3LWp0t91vkTkI61PaaClQVQf1ClY+NDxUxNPe/d0haXmxm+EHNol5QVwLiKz
- 6Rp3pJ1l1bClkwSLQVnXYwFVzh3ultCqjVNqmg2GKFGW/HDeRaSeaQEsx+P/DluWU9
- 0vwxRT/bjDulrbpLEedwmeh7elSKxGQedh438xwKPO5EJe5dFKVvPqT/JtbeuJ3CC9
- 2nzcSM5ij7A4O31zjkOpKvzceSu4+aVPUt3+4X02Pn7gKJAl52kk3/nn8UcEkE+Y4x
- /qplSXeVwkqoaDRPrF+p9P3D35n9WYTNCScfgZVL1GLNyVNG4Y42jFyphwQ6N9g70k
- DNxZ7tveIDFmg==
-Received: by mail-pf1-f170.google.com with SMTP id
- d2e1a72fcca58-6ed112c64beso722259b3a.1
- for <nouveau@lists.freedesktop.org>; Thu, 18 Apr 2024 05:03:40 -0700 (PDT)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7CE67113D7D
+ for <nouveau@lists.freedesktop.org>; Thu, 18 Apr 2024 15:57:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1713455828;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=1QJEYygCVTsULC0mi7TKmP3A4itm6IE9WFV9vLvE/W0=;
+ b=cNzzDmy5VKzDwf0mOTwhLco5SJf/j7pRXWLIeYe3HYr40AurGdmgknNSTJGxcGy73Q24Ii
+ pzrCDMfDKCs+3cccqzfgOJBwxBfMm9L8sT63u2L2Ea0ODWssZSC50buVluFByrZ+7JXTqt
+ cFmGZiMwXnyTRiTOJN7p3n8GWZ8iI9o=
+Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
+ [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-428-9pxpofpcPq2M-Df-YByANQ-1; Thu, 18 Apr 2024 11:57:06 -0400
+X-MC-Unique: 9pxpofpcPq2M-Df-YByANQ-1
+Received: by mail-lf1-f69.google.com with SMTP id
+ 2adb3069b0e04-516c97ddcd8so885077e87.2
+ for <nouveau@lists.freedesktop.org>; Thu, 18 Apr 2024 08:57:06 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713455824; x=1714060624;
+ h=content-transfer-encoding:in-reply-to:organization:from:cc
+ :content-language:references:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1QJEYygCVTsULC0mi7TKmP3A4itm6IE9WFV9vLvE/W0=;
+ b=pLGatw1m/Y8lZq84obvO3a2/khJmpGX+unOQO7+WTa2hx3DOj3vi9BkCE6DAcl57E6
+ WdSoyOujzmWPV9REFS1tmTn3FlLohVJQyJBOavyNIiUuR1+i4wxki/t1Bh3xGDflW26s
+ jKcyQiOhShMBfzx6CqVL/mlpN8EvSCtQ0fdvKpjjlRS97CBUys//uakMqkFBGCAULOxm
+ VqJQEzvqB5e0ledmbUHCEuFsYBIBlyzrAoTvEsqpKdDsBS5LzcMvrOpWTBCffH1bsq0n
+ 2h0yFsv80/BW6JTYeRNVcb1O5qWHEuI71lVuczQaDe57CefGEjMRkGDdNYUeI5IiFgKM
+ cvHA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWBc2wRc8sSLtu6TBDXFvfzHrAQanDIZgb9RD3+kijPBdNtsfmgTSlKTJrt/6oFaOMnlcMEEITwqxc/VBQJAf0Cjm2JXDDqVr8x3FS8Ww==
-X-Gm-Message-State: AOJu0YyztzgxBBMHVsUlwpsSmZ1/bEeaYuEO2grILxSGHRCDZoE3kfZv
- xsxRQ/oMV4J6Hq5c6Hfrg560nliz/aKviJjMUQzrhRNjie0OFMkPanioaCWC+vtytI8C66ctMj0
- N8BqdCHLskxtYs/EDDrBtL/51OfQcipHvnSvI2w==
-X-Google-Smtp-Source: AGHT+IE0+JMFDfmxqGHEbh42knbEXsffqFwTIY3xEPg4+Wy6rHs1NL+TvFgyt2Ug5jDgRYO71ILwWhp6C9vsDZp4S48=
-X-Received: by 2002:a25:a063:0:b0:dcc:f2a4:153e with SMTP id
- x90-20020a25a063000000b00dccf2a4153emr2351747ybh.46.1713441799631; Thu, 18
- Apr 2024 05:03:19 -0700 (PDT)
+ AJvYcCVRlkxDC8ZIQD2wxIGDi+Csk2v4BMhyUyDRsaEMp0Pd5yciHIHwIAdMbHxAbl1gYE3KiCzxf46ugdOROaHXxifHAFXSK9PgzfEH16nzaQ==
+X-Gm-Message-State: AOJu0Yw+qiZr/7L2NA9YphcZHgXkKQBsUVrxOYib1P4q8I/E3wfkgxIo
+ yCXmTlFc8R/VvL6n2s04+9yY6fW84afQUcAoPN/rPEbEMwolvLVhCSh8vAerooLjqO+yqA2V0xU
+ Xd5ZKDk6X60l2C89hTAorznar+EnaWe+d3E8NVi1uSaoMgUe0xen4X3WLvO9mIvo=
+X-Received: by 2002:a2e:9b11:0:b0:2d8:45fe:191d with SMTP id
+ u17-20020a2e9b11000000b002d845fe191dmr1714761lji.25.1713455824474; 
+ Thu, 18 Apr 2024 08:57:04 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGzJITjmwhXeoP1YeWTUqt62pJyaP9YwEWEmvZjosrWv2IaVu7Y0ZK4OzsNs4Rn8Gdo7xeNJw==
+X-Received: by 2002:a2e:9b11:0:b0:2d8:45fe:191d with SMTP id
+ u17-20020a2e9b11000000b002d845fe191dmr1714739lji.25.1713455823942; 
+ Thu, 18 Apr 2024 08:57:03 -0700 (PDT)
+Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
+ ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
+ by smtp.gmail.com with ESMTPSA id
+ o12-20020a05600c4fcc00b00418a6d62ad0sm6938356wmq.34.2024.04.18.08.57.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 18 Apr 2024 08:57:03 -0700 (PDT)
+Message-ID: <15c854bf-874f-4806-81e1-bbd404970ff0@redhat.com>
+Date: Thu, 18 Apr 2024 17:57:02 +0200
 MIME-Version: 1.0
-References: <20240418101247.2642864-1-jani.nikula@intel.com>
-In-Reply-To: <20240418101247.2642864-1-jani.nikula@intel.com>
-From: Robert Foss <rfoss@kernel.org>
-Date: Thu, 18 Apr 2024 14:03:08 +0200
-X-Gmail-Original-Message-ID: <CAN6tsi5PEc+KOQV9zNLZ_3c-8XyjEtx8+EkSHkB8epu4N_aMZg@mail.gmail.com>
-Message-ID: <CAN6tsi5PEc+KOQV9zNLZ_3c-8XyjEtx8+EkSHkB8epu4N_aMZg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] drm/print: drop include debugfs.h and include
- where needed
-To: Jani Nikula <jani.nikula@intel.com>
-Cc: dri-devel@lists.freedesktop.org, Andrzej Hajda <andrzej.hajda@intel.com>, 
- Maxime Ripard <mripard@kernel.org>,
- Jacek Lawrynowicz <jacek.lawrynowicz@linux.intel.com>, 
- Stanislaw Gruszka <stanislaw.gruszka@linux.intel.com>,
- Oded Gabbay <ogabbay@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Jonas Karlman <jonas@kwiboo.se>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] [v7] nouveau: add command-line GSP-RM registry support
+To: Dave Airlie <airlied@redhat.com>, "daniel@ffwll.ch" <daniel@ffwll.ch>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, 
- Jani Nikula <jani.nikula@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, 
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Tvrtko Ursulin <tursulin@ursulin.net>, 
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
- Danilo Krummrich <dakr@redhat.com>, Alex Deucher <alexander.deucher@amd.com>, 
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
- "Pan, Xinhui" <Xinhui.Pan@amd.com>, Huang Rui <ray.huang@amd.com>, 
- Zack Rusin <zack.rusin@broadcom.com>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
- intel-gfx@lists.freedesktop.org, 
- intel-xe@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- amd-gfx@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ "mripard@kernel.org" <mripard@kernel.org>,
+ "tzimmermann@suse.de" <tzimmermann@suse.de>
+References: <20240417215317.3490856-1-ttabi@nvidia.com>
+Cc: Timur Tabi <ttabi@nvidia.com>, Lyude Paul <lyude@redhat.com>,
+ bskeggs@nvidia.com, nouveau@lists.freedesktop.org
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <20240417215317.3490856-1-ttabi@nvidia.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Fri, 19 Apr 2024 15:14:15 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -94,404 +100,454 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hey Jani,
+Hi,
 
-Thanks for doing this cleanup.
+this patch targets drm-misc-next but depends on commit 838ae9f45c4e ("nouveau/gsp:
+Avoid addressing beyond end of rpc->entries") which is only in drm-misc-fixes.
 
-On Thu, Apr 18, 2024 at 12:13=E2=80=AFPM Jani Nikula <jani.nikula@intel.com=
-> wrote:
->
-> Surprisingly many places depend on debugfs.h to be included via
-> drm_print.h. Fix them.
->
-> v2: Also fix ivpu and vmwgfx
->
-> Reviewed-by: Andrzej Hajda <andrzej.hajda@intel.com>
-> Acked-by: Maxime Ripard <mripard@kernel.org>
-> Link: https://patchwork.freedesktop.org/patch/msgid/20240410141434.157908=
--1-jani.nikula@intel.com
-> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
->
+Please let me know if you want to backmerge directly, let me hold the patch back
+until or anything else.
+
+- Danilo
+
+On 4/17/24 23:53, Timur Tabi wrote:
+> Add the NVreg_RegistryDwords command line parameter, which allows
+> specifying additional registry keys to be sent to GSP-RM.  This
+> allows additional configuration, debugging, and experimentation
+> with GSP-RM, which uses these keys to alter its behavior.
+> 
+> Note that these keys are passed as-is to GSP-RM, and Nouveau does
+> not parse them.  This is in contrast to the Nvidia driver, which may
+> parse some of the keys to configure some functionality in concert with
+> GSP-RM.  Therefore, any keys which also require action by the driver
+> may not function correctly when passed by Nouveau.  Caveat emptor.
+> 
+> The name and format of NVreg_RegistryDwords is the same as used by
+> the Nvidia driver, to maintain compatibility.
+> 
+> Signed-off-by: Timur Tabi <ttabi@nvidia.com>
 > ---
->
-> Cc: Jacek Lawrynowicz <jacek.lawrynowicz@linux.intel.com>
-> Cc: Stanislaw Gruszka <stanislaw.gruszka@linux.intel.com>
-> Cc: Oded Gabbay <ogabbay@kernel.org>
-> Cc: Andrzej Hajda <andrzej.hajda@intel.com>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Robert Foss <rfoss@kernel.org>
-> Cc: Laurent Pinchart <Laurent.pinchart@ideasonboard.com>
-> Cc: Jonas Karlman <jonas@kwiboo.se>
-> Cc: Jernej Skrabec <jernej.skrabec@gmail.com>
-> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-> Cc: Maxime Ripard <mripard@kernel.org>
-> Cc: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: David Airlie <airlied@gmail.com>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: Jani Nikula <jani.nikula@linux.intel.com>
-> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-> Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
-> Cc: Tvrtko Ursulin <tursulin@ursulin.net>
-> Cc: Karol Herbst <kherbst@redhat.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: Danilo Krummrich <dakr@redhat.com>
-> Cc: Alex Deucher <alexander.deucher@amd.com>
-> Cc: "Christian K=C3=B6nig" <christian.koenig@amd.com>
-> Cc: "Pan, Xinhui" <Xinhui.Pan@amd.com>
-> Cc: Huang Rui <ray.huang@amd.com>
-> Cc: Zack Rusin <zack.rusin@broadcom.com>
-> Cc: Broadcom internal kernel review list <bcm-kernel-feedback-list@broadc=
-om.com>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: intel-gfx@lists.freedesktop.org
-> Cc: intel-xe@lists.freedesktop.org
-> Cc: nouveau@lists.freedesktop.org
-> Cc: amd-gfx@lists.freedesktop.org
-> ---
->  drivers/accel/ivpu/ivpu_debugfs.c        | 2 ++
->  drivers/gpu/drm/bridge/panel.c           | 2 ++
->  drivers/gpu/drm/drm_print.c              | 6 +++---
->  drivers/gpu/drm/i915/display/intel_dmc.c | 1 +
->  drivers/gpu/drm/nouveau/dispnv50/crc.c   | 2 ++
->  drivers/gpu/drm/radeon/r100.c            | 1 +
->  drivers/gpu/drm/radeon/r300.c            | 1 +
->  drivers/gpu/drm/radeon/r420.c            | 1 +
->  drivers/gpu/drm/radeon/r600.c            | 3 ++-
->  drivers/gpu/drm/radeon/radeon_fence.c    | 1 +
->  drivers/gpu/drm/radeon/radeon_gem.c      | 1 +
->  drivers/gpu/drm/radeon/radeon_ib.c       | 2 ++
->  drivers/gpu/drm/radeon/radeon_pm.c       | 1 +
->  drivers/gpu/drm/radeon/radeon_ring.c     | 2 ++
->  drivers/gpu/drm/radeon/radeon_ttm.c      | 1 +
->  drivers/gpu/drm/radeon/rs400.c           | 1 +
->  drivers/gpu/drm/radeon/rv515.c           | 1 +
->  drivers/gpu/drm/ttm/ttm_device.c         | 1 +
->  drivers/gpu/drm/ttm/ttm_resource.c       | 3 ++-
->  drivers/gpu/drm/ttm/ttm_tt.c             | 5 +++--
->  drivers/gpu/drm/vmwgfx/vmwgfx_gem.c      | 2 ++
->  include/drm/drm_print.h                  | 2 +-
->  22 files changed, 34 insertions(+), 8 deletions(-)
->
-> diff --git a/drivers/accel/ivpu/ivpu_debugfs.c b/drivers/accel/ivpu/ivpu_=
-debugfs.c
-> index d09d29775b3f..e07e447d08d1 100644
-> --- a/drivers/accel/ivpu/ivpu_debugfs.c
-> +++ b/drivers/accel/ivpu/ivpu_debugfs.c
-> @@ -3,6 +3,8 @@
->   * Copyright (C) 2020-2023 Intel Corporation
->   */
->
-> +#include <linux/debugfs.h>
+> v7:
+>    rebase onto drm-misc-next
+>    rename vlen to alloc_size
+> 
+>   .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |   6 +
+>   .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 355 ++++++++++++++++--
+>   2 files changed, 337 insertions(+), 24 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+> index 6f5d376d8fcc..3fbc57b16a05 100644
+> --- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+> +++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+> @@ -211,6 +211,12 @@ struct nvkm_gsp {
+>   		struct mutex mutex;;
+>   		struct idr idr;
+>   	} client_id;
 > +
->  #include <drm/drm_debugfs.h>
->  #include <drm/drm_file.h>
->  #include <drm/drm_print.h>
-> diff --git a/drivers/gpu/drm/bridge/panel.c b/drivers/gpu/drm/bridge/pane=
-l.c
-> index 7f41525f7a6e..32506524d9a2 100644
-> --- a/drivers/gpu/drm/bridge/panel.c
-> +++ b/drivers/gpu/drm/bridge/panel.c
-> @@ -4,6 +4,8 @@
->   * Copyright (C) 2017 Broadcom
->   */
->
-> +#include <linux/debugfs.h>
+> +	/* A linked list of registry items. The registry RPC will be built from it. */
+> +	struct list_head registry_list;
 > +
->  #include <drm/drm_atomic_helper.h>
->  #include <drm/drm_bridge.h>
->  #include <drm/drm_connector.h>
-> diff --git a/drivers/gpu/drm/drm_print.c b/drivers/gpu/drm/drm_print.c
-> index 699b7dbffd7b..cf2efb44722c 100644
-> --- a/drivers/gpu/drm/drm_print.c
-> +++ b/drivers/gpu/drm/drm_print.c
-> @@ -23,13 +23,13 @@
->   * Rob Clark <robdclark@gmail.com>
->   */
->
-> -#include <linux/stdarg.h>
+> +	/* The size of the registry RPC */
+> +	size_t registry_rpc_size;
+>   };
+>   
+>   static inline bool
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> index 9858c1438aa7..1b5d5b02c640 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> @@ -54,6 +54,8 @@
+>   #include <nvrm/535.113.01/nvidia/kernel/inc/vgpu/rpc_global_enums.h>
+>   
+>   #include <linux/acpi.h>
+> +#include <linux/ctype.h>
+> +#include <linux/parser.h>
+>   
+>   #define GSP_MSG_MIN_SIZE GSP_PAGE_SIZE
+>   #define GSP_MSG_MAX_SIZE GSP_PAGE_MIN_SIZE * 16
+> @@ -1080,51 +1082,356 @@ r535_gsp_rpc_unloading_guest_driver(struct nvkm_gsp *gsp, bool suspend)
+>   	return nvkm_gsp_rpc_wr(gsp, rpc, true);
+>   }
+>   
+> +enum registry_type {
+> +	REGISTRY_TABLE_ENTRY_TYPE_DWORD  = 1, /* 32-bit unsigned integer */
+> +	REGISTRY_TABLE_ENTRY_TYPE_BINARY = 2, /* Binary blob */
+> +	REGISTRY_TABLE_ENTRY_TYPE_STRING = 3, /* Null-terminated string */
+> +};
+> +
+> +/* An arbitrary limit to the length of a registry key */
+> +#define REGISTRY_MAX_KEY_LENGTH		64
+> +
+> +/**
+> + * registry_list_entry - linked list member for a registry key/value
+> + * @head: list_head struct
+> + * @type: dword, binary, or string
+> + * @klen: the length of name of the key
+> + * @vlen: the length of the value
+> + * @key: the key name
+> + * @dword: the data, if REGISTRY_TABLE_ENTRY_TYPE_DWORD
+> + * @binary: the data, if TYPE_BINARY or TYPE_STRING
+> + *
+> + * Every registry key/value is represented internally by this struct.
+> + *
+> + * Type DWORD is a simple 32-bit unsigned integer, and its value is stored in
+> + * @dword.
+> + *
+> + * Types BINARY and STRING are variable-length binary blobs.  The only real
+> + * difference between BINARY and STRING is that STRING is null-terminated and
+> + * is expected to contain only printable characters.
+> + *
+> + * Note: it is technically possible to have multiple keys with the same name
+> + * but different types, but this is not useful since GSP-RM expects keys to
+> + * have only one specific type.
+> + */
+> +struct registry_list_entry {
+> +	struct list_head head;
+> +	enum registry_type type;
+> +	size_t klen;
+> +	char key[REGISTRY_MAX_KEY_LENGTH];
+> +	size_t vlen;
+> +	u32 dword;			/* TYPE_DWORD */
+> +	u8 binary[] __counted_by(vlen);	/* TYPE_BINARY or TYPE_STRING */
+> +};
+> +
+> +/**
+> + * add_registry -- adds a registry entry
+> + * @gsp: gsp pointer
+> + * @key: name of the registry key
+> + * @type: type of data
+> + * @data: pointer to value
+> + * @length: size of data, in bytes
+> + *
+> + * Adds a registry key/value pair to the registry database.
+> + *
+> + * This function collects the registry information in a linked list.  After
+> + * all registry keys have been added, build_registry() is used to create the
+> + * RPC data structure.
+> + *
+> + * registry_rpc_size is a running total of the size of all registry keys.
+> + * It's used to avoid an O(n) calculation of the size when the RPC is built.
+> + *
+> + * Returns 0 on success, or negative error code on error.
+> + */
+> +static int add_registry(struct nvkm_gsp *gsp, const char *key,
+> +			enum registry_type type, const void *data, size_t length)
+> +{
+> +	struct registry_list_entry *reg;
+> +	const size_t nlen = strnlen(key, REGISTRY_MAX_KEY_LENGTH) + 1;
+> +	size_t alloc_size; /* extra bytes to alloc for binary or string value */
+> +
+> +	if (nlen > REGISTRY_MAX_KEY_LENGTH)
+> +		return -EINVAL;
+> +
+> +	alloc_size = (type == REGISTRY_TABLE_ENTRY_TYPE_DWORD) ? 0 : length;
+> +
+> +	reg = kmalloc(sizeof(*reg) + alloc_size, GFP_KERNEL);
+> +	if (!reg)
+> +		return -ENOMEM;
+> +
+> +	switch (type) {
+> +	case REGISTRY_TABLE_ENTRY_TYPE_DWORD:
+> +		reg->dword = *(const u32 *)(data);
+> +		break;
+> +	case REGISTRY_TABLE_ENTRY_TYPE_BINARY:
+> +	case REGISTRY_TABLE_ENTRY_TYPE_STRING:
+> +		memcpy(reg->binary, data, alloc_size);
+> +		break;
+> +	default:
+> +		nvkm_error(&gsp->subdev, "unrecognized registry type %u for '%s'\n",
+> +			   type, key);
+> +		kfree(reg);
+> +		return -EINVAL;
+> +	}
+> +
+> +	memcpy(reg->key, key, nlen);
+> +	reg->klen = nlen;
+> +	reg->vlen = length;
+> +	reg->type = type;
+> +
+> +	list_add_tail(&reg->head, &gsp->registry_list);
+> +	gsp->registry_rpc_size += sizeof(PACKED_REGISTRY_ENTRY) + nlen + alloc_size;
+> +
+> +	return 0;
+> +}
+> +
+> +static int add_registry_num(struct nvkm_gsp *gsp, const char *key, u32 value)
+> +{
+> +	return add_registry(gsp, key, REGISTRY_TABLE_ENTRY_TYPE_DWORD,
+> +			    &value, sizeof(u32));
+> +}
+> +
+> +static int add_registry_string(struct nvkm_gsp *gsp, const char *key, const char *value)
+> +{
+> +	return add_registry(gsp, key, REGISTRY_TABLE_ENTRY_TYPE_STRING,
+> +			    value, strlen(value) + 1);
+> +}
+> +
+> +/**
+> + * build_registry -- create the registry RPC data
+> + * @gsp: gsp pointer
+> + * @registry: pointer to the RPC payload to fill
+> + *
+> + * After all registry key/value pairs have been added, call this function to
+> + * build the RPC.
+> + *
+> + * The registry RPC looks like this:
+> + *
+> + * +-----------------+
+> + * |NvU32 size;      |
+> + * |NvU32 numEntries;|
+> + * +-----------------+
+> + * +----------------------------------------+
+> + * |PACKED_REGISTRY_ENTRY                   |
+> + * +----------------------------------------+
+> + * |Null-terminated key (string) for entry 0|
+> + * +----------------------------------------+
+> + * |Binary/string data value for entry 0    | (only if necessary)
+> + * +----------------------------------------+
+> + *
+> + * +----------------------------------------+
+> + * |PACKED_REGISTRY_ENTRY                   |
+> + * +----------------------------------------+
+> + * |Null-terminated key (string) for entry 1|
+> + * +----------------------------------------+
+> + * |Binary/string data value for entry 1    | (only if necessary)
+> + * +----------------------------------------+
+> + * ... (and so on, one copy for each entry)
+> + *
+> + *
+> + * The 'data' field of an entry is either a 32-bit integer (for type DWORD)
+> + * or an offset into the PACKED_REGISTRY_TABLE (for types BINARY and STRING).
+> + *
+> + * All memory allocated by add_registry() is released.
+> + */
+> +static void build_registry(struct nvkm_gsp *gsp, PACKED_REGISTRY_TABLE *registry)
+> +{
+> +	struct registry_list_entry *reg, *n;
+> +	size_t str_offset;
+> +	unsigned int i = 0;
+> +
+> +	registry->numEntries = list_count_nodes(&gsp->registry_list);
+> +	str_offset = struct_size(registry, entries, registry->numEntries);
+> +
+> +	list_for_each_entry_safe(reg, n, &gsp->registry_list, head) {
+> +		registry->entries[i].type = reg->type;
+> +		registry->entries[i].length = reg->vlen;
+> +
+> +		/* Append the key name to the table */
+> +		registry->entries[i].nameOffset = str_offset;
+> +		memcpy((void *)registry + str_offset, reg->key, reg->klen);
+> +		str_offset += reg->klen;
+> +
+> +		switch (reg->type) {
+> +		case REGISTRY_TABLE_ENTRY_TYPE_DWORD:
+> +			registry->entries[i].data = reg->dword;
+> +			break;
+> +		case REGISTRY_TABLE_ENTRY_TYPE_BINARY:
+> +		case REGISTRY_TABLE_ENTRY_TYPE_STRING:
+> +			/* If the type is binary or string, also append the value */
+> +			memcpy((void *)registry + str_offset, reg->binary, reg->vlen);
+> +			registry->entries[i].data = str_offset;
+> +			str_offset += reg->vlen;
+> +			break;
+> +		default:
+> +		}
+> +
+> +		i++;
+> +		list_del(&reg->head);
+> +		kfree(reg);
+> +	}
+> +
+> +	/* Double-check that we calculated the sizes correctly */
+> +	WARN_ON(gsp->registry_rpc_size != str_offset);
+> +
+> +	registry->size = gsp->registry_rpc_size;
+> +}
+> +
+> +/**
+> + * clean_registry -- clean up registry memory in case of error
+> + * @gsp: gsp pointer
+> + *
+> + * Call this function to clean up all memory allocated by add_registry()
+> + * in case of error and build_registry() is not called.
+> + */
+> +static void clean_registry(struct nvkm_gsp *gsp)
+> +{
+> +	struct registry_list_entry *reg, *n;
+> +
+> +	list_for_each_entry_safe(reg, n, &gsp->registry_list, head) {
+> +		list_del(&reg->head);
+> +		kfree(reg);
+> +	}
+> +
+> +	gsp->registry_rpc_size = sizeof(PACKED_REGISTRY_TABLE);
+> +}
+> +
+> +MODULE_PARM_DESC(NVreg_RegistryDwords,
+> +		 "A semicolon-separated list of key=integer pairs of GSP-RM registry keys");
+> +static char *NVreg_RegistryDwords;
+> +module_param(NVreg_RegistryDwords, charp, 0400);
+> +
+>   /* dword only */
+>   struct nv_gsp_registry_entries {
+>   	const char *name;
+>   	u32 value;
+>   };
+>   
+> +/**
+> + * r535_registry_entries - required registry entries for GSP-RM
+> + *
+> + * This array lists registry entries that are required for GSP-RM to
+> + * function correctly.
+> + *
+> + * RMSecBusResetEnable - enables PCI secondary bus reset
+> + * RMForcePcieConfigSave - forces GSP-RM to preserve PCI configuration
+> + *   registers on any PCI reset.
+> + */
+>   static const struct nv_gsp_registry_entries r535_registry_entries[] = {
+>   	{ "RMSecBusResetEnable", 1 },
+>   	{ "RMForcePcieConfigSave", 1 },
+>   };
+>   #define NV_GSP_REG_NUM_ENTRIES ARRAY_SIZE(r535_registry_entries)
+>   
+> +/**
+> + * strip - strips all characters in 'reject' from 's'
+> + * @s: string to strip
+> + * @reject: string of characters to remove
+> + *
+> + * 's' is modified.
+> + *
+> + * Returns the length of the new string.
+> + */
+> +static size_t strip(char *s, const char *reject)
+> +{
+> +	char *p = s, *p2 = s;
+> +	size_t length = 0;
+> +	char c;
+> +
+> +	do {
+> +		while ((c = *p2) && strchr(reject, c))
+> +			p2++;
+> +
+> +		*p++ = c = *p2++;
+> +		length++;
+> +	} while (c);
+> +
+> +	return length;
+> +}
+> +
+> +/**
+> + * r535_gsp_rpc_set_registry - build registry RPC and call GSP-RM
+> + * @gsp: gsp pointer
+> + *
+> + * The GSP-RM registry is a set of key/value pairs that configure some aspects
+> + * of GSP-RM. The keys are strings, and the values are 32-bit integers.
+> + *
+> + * The registry is built from a combination of a static hard-coded list (see
+> + * above) and entries passed on the driver's command line.
+> + */
+>   static int
+>   r535_gsp_rpc_set_registry(struct nvkm_gsp *gsp)
+>   {
+>   	PACKED_REGISTRY_TABLE *rpc;
+> -	char *strings;
+> -	int str_offset;
+> -	int i;
+> -	size_t rpc_size = struct_size(rpc, entries, NV_GSP_REG_NUM_ENTRIES);
+> +	unsigned int i;
+> +	int ret;
+>   
+> -	/* add strings + null terminator */
+> -	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++)
+> -		rpc_size += strlen(r535_registry_entries[i].name) + 1;
+> +	INIT_LIST_HEAD(&gsp->registry_list);
+> +	gsp->registry_rpc_size = sizeof(PACKED_REGISTRY_TABLE);
+>   
+> -	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_SET_REGISTRY, rpc_size);
+> -	if (IS_ERR(rpc))
+> -		return PTR_ERR(rpc);
+> +	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
+> +		ret = add_registry_num(gsp, r535_registry_entries[i].name,
+> +				       r535_registry_entries[i].value);
+> +		if (ret) {
+> +			clean_registry(gsp);
+> +			return ret;
+> +		}
+> +	}
+>   
+> -	rpc->numEntries = NV_GSP_REG_NUM_ENTRIES;
+> +	/*
+> +	 * The NVreg_RegistryDwords parameter is a string of key=value
+> +	 * pairs separated by semicolons. We need to extract and trim each
+> +	 * substring, and then parse the substring to extract the key and
+> +	 * value.
+> +	 */
+> +	if (NVreg_RegistryDwords) {
+> +		char *p = kstrdup(NVreg_RegistryDwords, GFP_KERNEL);
+> +		char *start, *next = p, *equal;
+> +		size_t length;
+> +
+> +		/* Remove any whitespace from the parameter string */
+> +		length = strip(p, " \t\n");
+> +
+> +		while ((start = strsep(&next, ";"))) {
+> +			long value;
+> +
+> +			equal = strchr(start, '=');
+> +			if (!equal || equal == start || equal[1] == 0) {
+> +				nvkm_error(&gsp->subdev,
+> +					   "ignoring invalid registry string '%s'\n",
+> +					   start);
+> +				continue;
+> +			}
+>   
+> -	str_offset = offsetof(typeof(*rpc), entries[NV_GSP_REG_NUM_ENTRIES]);
+> -	strings = (char *)rpc + str_offset;
+> -	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
+> -		int name_len = strlen(r535_registry_entries[i].name) + 1;
 > -
-> +#include <linux/debugfs.h>
-> +#include <linux/dynamic_debug.h>
->  #include <linux/io.h>
->  #include <linux/moduleparam.h>
->  #include <linux/seq_file.h>
->  #include <linux/slab.h>
-> -#include <linux/dynamic_debug.h>
-> +#include <linux/stdarg.h>
->
->  #include <drm/drm.h>
->  #include <drm/drm_drv.h>
-> diff --git a/drivers/gpu/drm/i915/display/intel_dmc.c b/drivers/gpu/drm/i=
-915/display/intel_dmc.c
-> index a34ff3383fd3..370d61c7e342 100644
-> --- a/drivers/gpu/drm/i915/display/intel_dmc.c
-> +++ b/drivers/gpu/drm/i915/display/intel_dmc.c
-> @@ -22,6 +22,7 @@
->   *
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/firmware.h>
->
->  #include "i915_drv.h"
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/crc.c b/drivers/gpu/drm/nou=
-veau/dispnv50/crc.c
-> index 9c942fbd836d..5936b6b3b15d 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/crc.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/crc.c
-> @@ -1,5 +1,7 @@
->  // SPDX-License-Identifier: MIT
-> +#include <linux/debugfs.h>
->  #include <linux/string.h>
+> -		rpc->entries[i].nameOffset = str_offset;
+> -		rpc->entries[i].type = 1;
+> -		rpc->entries[i].data = r535_registry_entries[i].value;
+> -		rpc->entries[i].length = 4;
+> -		memcpy(strings, r535_registry_entries[i].name, name_len);
+> -		strings += name_len;
+> -		str_offset += name_len;
+> +			/* Truncate the key=value string to just key */
+> +			*equal = 0;
 > +
->  #include <drm/drm_crtc.h>
->  #include <drm/drm_atomic_helper.h>
->  #include <drm/drm_vblank.h>
-> diff --git a/drivers/gpu/drm/radeon/r100.c b/drivers/gpu/drm/radeon/r100.=
-c
-> index 86b8b770af19..0b1e19345f43 100644
-> --- a/drivers/gpu/drm/radeon/r100.c
-> +++ b/drivers/gpu/drm/radeon/r100.c
-> @@ -26,6 +26,7 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/firmware.h>
->  #include <linux/module.h>
->  #include <linux/pci.h>
-> diff --git a/drivers/gpu/drm/radeon/r300.c b/drivers/gpu/drm/radeon/r300.=
-c
-> index 25201b9a5aae..1620f534f55f 100644
-> --- a/drivers/gpu/drm/radeon/r300.c
-> +++ b/drivers/gpu/drm/radeon/r300.c
-> @@ -26,6 +26,7 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/pci.h>
->  #include <linux/seq_file.h>
->  #include <linux/slab.h>
-> diff --git a/drivers/gpu/drm/radeon/r420.c b/drivers/gpu/drm/radeon/r420.=
-c
-> index eae8a6389f5e..a979662eaa73 100644
-> --- a/drivers/gpu/drm/radeon/r420.c
-> +++ b/drivers/gpu/drm/radeon/r420.c
-> @@ -26,6 +26,7 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/pci.h>
->  #include <linux/seq_file.h>
->  #include <linux/slab.h>
-> diff --git a/drivers/gpu/drm/radeon/r600.c b/drivers/gpu/drm/radeon/r600.=
-c
-> index b5e97d95a19f..087d41e370fd 100644
-> --- a/drivers/gpu/drm/radeon/r600.c
-> +++ b/drivers/gpu/drm/radeon/r600.c
-> @@ -26,11 +26,12 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/firmware.h>
->  #include <linux/module.h>
->  #include <linux/pci.h>
-> -#include <linux/slab.h>
->  #include <linux/seq_file.h>
-> +#include <linux/slab.h>
->
->  #include <drm/drm_device.h>
->  #include <drm/drm_vblank.h>
-> diff --git a/drivers/gpu/drm/radeon/radeon_fence.c b/drivers/gpu/drm/rade=
-on/radeon_fence.c
-> index 9ebe4a0b9a6c..4fb780d96f32 100644
-> --- a/drivers/gpu/drm/radeon/radeon_fence.c
-> +++ b/drivers/gpu/drm/radeon/radeon_fence.c
-> @@ -30,6 +30,7 @@
->   */
->
->  #include <linux/atomic.h>
-> +#include <linux/debugfs.h>
->  #include <linux/firmware.h>
->  #include <linux/kref.h>
->  #include <linux/sched/signal.h>
-> diff --git a/drivers/gpu/drm/radeon/radeon_gem.c b/drivers/gpu/drm/radeon=
-/radeon_gem.c
-> index 3fec3acdaf28..2ef201a072f1 100644
-> --- a/drivers/gpu/drm/radeon/radeon_gem.c
-> +++ b/drivers/gpu/drm/radeon/radeon_gem.c
-> @@ -26,6 +26,7 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/iosys-map.h>
->  #include <linux/pci.h>
->
-> diff --git a/drivers/gpu/drm/radeon/radeon_ib.c b/drivers/gpu/drm/radeon/=
-radeon_ib.c
-> index fb9ecf5dbe2b..63d914f3414d 100644
-> --- a/drivers/gpu/drm/radeon/radeon_ib.c
-> +++ b/drivers/gpu/drm/radeon/radeon_ib.c
-> @@ -27,6 +27,8 @@
->   *          Christian K=C3=B6nig
->   */
->
-> +#include <linux/debugfs.h>
+> +			ret = kstrtol(equal + 1, 0, &value);
+> +			if (!ret) {
+> +				ret = add_registry_num(gsp, start, value);
+> +			} else {
+> +				/* Not a number, so treat it as a string */
+> +				ret = add_registry_string(gsp, start, equal + 1);
+> +			}
 > +
->  #include <drm/drm_file.h>
->
->  #include "radeon.h"
-> diff --git a/drivers/gpu/drm/radeon/radeon_pm.c b/drivers/gpu/drm/radeon/=
-radeon_pm.c
-> index 4482c8c5f5ce..2d9d9f46f243 100644
-> --- a/drivers/gpu/drm/radeon/radeon_pm.c
-> +++ b/drivers/gpu/drm/radeon/radeon_pm.c
-> @@ -21,6 +21,7 @@
->   *          Alex Deucher <alexdeucher@gmail.com>
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/hwmon-sysfs.h>
->  #include <linux/hwmon.h>
->  #include <linux/pci.h>
-> diff --git a/drivers/gpu/drm/radeon/radeon_ring.c b/drivers/gpu/drm/radeo=
-n/radeon_ring.c
-> index 38048593bb4a..8d1d458286a8 100644
-> --- a/drivers/gpu/drm/radeon/radeon_ring.c
-> +++ b/drivers/gpu/drm/radeon/radeon_ring.c
-> @@ -27,6 +27,8 @@
->   *          Christian K=C3=B6nig
->   */
->
-> +#include <linux/debugfs.h>
+> +			if (ret) {
+> +				nvkm_error(&gsp->subdev,
+> +					   "ignoring invalid registry key/value '%s=%s'\n",
+> +					   start, equal + 1);
+> +				continue;
+> +			}
+> +		}
 > +
->  #include <drm/drm_device.h>
->  #include <drm/drm_file.h>
->
-> diff --git a/drivers/gpu/drm/radeon/radeon_ttm.c b/drivers/gpu/drm/radeon=
-/radeon_ttm.c
-> index 2078b0000e22..5c65b6dfb99a 100644
-> --- a/drivers/gpu/drm/radeon/radeon_ttm.c
-> +++ b/drivers/gpu/drm/radeon/radeon_ttm.c
-> @@ -30,6 +30,7 @@
->   *    Dave Airlie
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/dma-mapping.h>
->  #include <linux/pagemap.h>
->  #include <linux/pci.h>
-> diff --git a/drivers/gpu/drm/radeon/rs400.c b/drivers/gpu/drm/radeon/rs40=
-0.c
-> index d7f552d441ab..d4d1501e6576 100644
-> --- a/drivers/gpu/drm/radeon/rs400.c
-> +++ b/drivers/gpu/drm/radeon/rs400.c
-> @@ -26,6 +26,7 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/seq_file.h>
->  #include <linux/slab.h>
->
-> diff --git a/drivers/gpu/drm/radeon/rv515.c b/drivers/gpu/drm/radeon/rv51=
-5.c
-> index 79709d26d983..bbc6ccabf788 100644
-> --- a/drivers/gpu/drm/radeon/rv515.c
-> +++ b/drivers/gpu/drm/radeon/rv515.c
-> @@ -26,6 +26,7 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/seq_file.h>
->  #include <linux/slab.h>
->
-> diff --git a/drivers/gpu/drm/ttm/ttm_device.c b/drivers/gpu/drm/ttm/ttm_d=
-evice.c
-> index 76027960054f..434cf0258000 100644
-> --- a/drivers/gpu/drm/ttm/ttm_device.c
-> +++ b/drivers/gpu/drm/ttm/ttm_device.c
-> @@ -27,6 +27,7 @@
->
->  #define pr_fmt(fmt) "[TTM DEVICE] " fmt
->
-> +#include <linux/debugfs.h>
->  #include <linux/mm.h>
->
->  #include <drm/ttm/ttm_bo.h>
-> diff --git a/drivers/gpu/drm/ttm/ttm_resource.c b/drivers/gpu/drm/ttm/ttm=
-_resource.c
-> index be8d286513f9..4a66b851b67d 100644
-> --- a/drivers/gpu/drm/ttm/ttm_resource.c
-> +++ b/drivers/gpu/drm/ttm/ttm_resource.c
-> @@ -22,8 +22,9 @@
->   * Authors: Christian K=C3=B6nig
->   */
->
-> -#include <linux/iosys-map.h>
-> +#include <linux/debugfs.h>
->  #include <linux/io-mapping.h>
-> +#include <linux/iosys-map.h>
->  #include <linux/scatterlist.h>
->
->  #include <drm/ttm/ttm_bo.h>
-> diff --git a/drivers/gpu/drm/ttm/ttm_tt.c b/drivers/gpu/drm/ttm/ttm_tt.c
-> index 578a7c37f00b..474fe7aad2a0 100644
-> --- a/drivers/gpu/drm/ttm/ttm_tt.c
-> +++ b/drivers/gpu/drm/ttm/ttm_tt.c
-> @@ -32,10 +32,11 @@
->  #define pr_fmt(fmt) "[TTM] " fmt
->
->  #include <linux/cc_platform.h>
-> -#include <linux/sched.h>
-> -#include <linux/shmem_fs.h>
-> +#include <linux/debugfs.h>
->  #include <linux/file.h>
->  #include <linux/module.h>
-> +#include <linux/sched.h>
-> +#include <linux/shmem_fs.h>
->  #include <drm/drm_cache.h>
->  #include <drm/drm_device.h>
->  #include <drm/drm_util.h>
-> diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c b/drivers/gpu/drm/vmwgfx=
-/vmwgfx_gem.c
-> index 2132a8ad8c0c..07185c108218 100644
-> --- a/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c
-> +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c
-> @@ -30,6 +30,8 @@
->  #include "drm/drm_prime.h"
->  #include "drm/drm_gem_ttm_helper.h"
->
-> +#include <linux/debugfs.h>
+> +		kfree(p);
+>   	}
+> -	rpc->size = str_offset;
 > +
->  static void vmw_gem_object_free(struct drm_gem_object *gobj)
->  {
->         struct ttm_buffer_object *bo =3D drm_gem_ttm_of_gem(gobj);
-> diff --git a/include/drm/drm_print.h b/include/drm/drm_print.h
-> index 9cc473e5d353..561c3b96b6fd 100644
-> --- a/include/drm/drm_print.h
-> +++ b/include/drm/drm_print.h
-> @@ -30,11 +30,11 @@
->  #include <linux/printk.h>
->  #include <linux/seq_file.h>
->  #include <linux/device.h>
-> -#include <linux/debugfs.h>
->  #include <linux/dynamic_debug.h>
->
->  #include <drm/drm.h>
->
-> +struct debugfs_regset32;
->  struct drm_device;
->
->  /* Do *not* use outside of drm_print.[ch]! */
-> --
-> 2.39.2
->
+> +	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_SET_REGISTRY, gsp->registry_rpc_size);
+> +	if (IS_ERR(rpc)) {
+> +		clean_registry(gsp);
+> +		return PTR_ERR(rpc);
+> +	}
+> +
+> +	build_registry(gsp, rpc);
+>   
+>   	return nvkm_gsp_rpc_wr(gsp, rpc, false);
+>   }
+> 
+> base-commit: f7ad2ce5fd89ab5d146da8f486a310746df5dc9e
+> prerequisite-patch-id: 9bb653b6a53dcba4171d653e24a242461374f9fe
+> prerequisite-patch-id: 7093a9db84053e43f6f278bf1d159a25d14ceebf
 
-I'm seeing build errors for drivers/gpu/drm/bridge/ite-it6505.c, is
-this expected?
