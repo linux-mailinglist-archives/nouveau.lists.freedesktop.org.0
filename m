@@ -2,34 +2,34 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 676908AE445
-	for <lists+nouveau@lfdr.de>; Tue, 23 Apr 2024 13:40:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 76A088AE44C
+	for <lists+nouveau@lfdr.de>; Tue, 23 Apr 2024 13:40:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 16F47113314;
-	Tue, 23 Apr 2024 11:40:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 082F4113315;
+	Tue, 23 Apr 2024 11:40:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="bdRfV9fp";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LYU5M9AK";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3D2F3113314;
- Tue, 23 Apr 2024 11:40:23 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CCFE5113318;
+ Tue, 23 Apr 2024 11:40:49 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 2A75DCE0D9B;
- Tue, 23 Apr 2024 11:40:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 281C5C32783;
- Tue, 23 Apr 2024 11:40:19 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4022060ADA;
+ Tue, 23 Apr 2024 11:40:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7170C2BD11;
+ Tue, 23 Apr 2024 11:40:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1713872420;
- bh=rT1aHSFbmk8TcPG89gLfrewCUWPTuWYquSEwnudsayg=;
+ s=k20201202; t=1713872448;
+ bh=nq+kPSKYllN1RkHpJFSoPYEfPtGdlTgw8sdi/a8uZXE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=bdRfV9fpWRG43epBQL8QG/b3XqG+w8sGH5SlxiD6A368j8GiwCA1HyFCZdrzyK08L
- 2Ryjhru56QvWq2X5TMLskbJ0uCa1N8E5pCn9rHjf3Munpd1PcXZjB8Ietep85soSa+
- D8VZDMA83yuD6hHfXQnM4KJ85ubObrmrpc2OylVkePATQ7Shc6cEBmgkqtZO/xV0pW
- Wz48kAcJnAoHEKDSSaDqvof7Qfx/JtccZy8lYHIY001wWlDTfMOTwJoxiG6Cp3UJaX
- kXCpTi4HwEgFCzwZ11dQAtqQImwQmuMzT/iwWVDb0mNo6OMNbxzyJTToHFHESKno6U
- 3H2zNRRPIoLvg==
+ b=LYU5M9AKJhptCCF7P/sc1RtTxA0PeYibb34Sxxc6nv/ddbVhcIoAz9psKtoirz2Xr
+ J9RojiTbacsGd/Z3eyn3NurZ0lNtEQzifTXEUuhY8ezxFVuRghPYZnvUswOB+Q6i25
+ p4T/mlr02nUbzwQTdIIwTZroYUM8N0jUBcNBx8S8kMr1v2NszbHdk+F7QdWXyP28k/
+ LzMtg9jnx3K3yHe9FVxgfXgTotmpjZKPeJdknls+X8aF0zed2iv38BnFvRgiXf0QeL
+ ncMMgt6zRV7hPf4ZuiEW5kH0VSGyLlMtD7IoUTSObDsSr8DGD3M4ZJs4gSZxKdLave
+ nXA2SrIh6AXSw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -37,17 +37,17 @@ Cc: Lyude Paul <lyude@redhat.com>, Dave Airlie <airlied@redhat.com>,
  Sasha Levin <sashal@kernel.org>, kherbst@redhat.com, dakr@redhat.com,
  airlied@gmail.com, daniel@ffwll.ch, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
-Subject: [PATCH AUTOSEL 6.8 12/18] drm/nouveau/dp: Don't probe eDP ports twice
+Subject: [PATCH AUTOSEL 6.6 11/16] drm/nouveau/dp: Don't probe eDP ports twice
  harder
-Date: Tue, 23 Apr 2024 07:01:08 -0400
-Message-ID: <20240423110118.1652940-12-sashal@kernel.org>
+Date: Tue, 23 Apr 2024 07:01:44 -0400
+Message-ID: <20240423110151.1658546-11-sashal@kernel.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240423110118.1652940-1-sashal@kernel.org>
-References: <20240423110118.1652940-1-sashal@kernel.org>
+In-Reply-To: <20240423110151.1658546-1-sashal@kernel.org>
+References: <20240423110151.1658546-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.8.7
+X-stable-base: Linux 6.6.28
 Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -88,10 +88,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 8 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nouveau_dp.c b/drivers/gpu/drm/nouveau/nouveau_dp.c
-index 7de7707ec6a89..3f72bc38bd2c4 100644
+index 6a4980b2d4d4e..bf2ae67b03d94 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_dp.c
 +++ b/drivers/gpu/drm/nouveau/nouveau_dp.c
-@@ -225,12 +225,15 @@ nouveau_dp_detect(struct nouveau_connector *nv_connector,
+@@ -108,12 +108,15 @@ nouveau_dp_detect(struct nouveau_connector *nv_connector,
  	u8 *dpcd = nv_encoder->dp.dpcd;
  	int ret = NOUVEAU_DP_NONE, hpd;
  
