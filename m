@@ -2,90 +2,84 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D84A58B205F
-	for <lists+nouveau@lfdr.de>; Thu, 25 Apr 2024 13:37:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 282928B2271
+	for <lists+nouveau@lfdr.de>; Thu, 25 Apr 2024 15:23:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 588C511A3B8;
-	Thu, 25 Apr 2024 11:37:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C579910F3F9;
+	Thu, 25 Apr 2024 13:23:03 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="sWJcviQv";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Gr9Gu4RI";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0395711A3C4
- for <nouveau@lists.freedesktop.org>; Thu, 25 Apr 2024 11:37:22 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id E4BD2CE1A08
- for <nouveau@lists.freedesktop.org>; Thu, 25 Apr 2024 11:37:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D759C32786
- for <nouveau@lists.freedesktop.org>; Thu, 25 Apr 2024 11:37:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1714045038;
- bh=04ZZrhki7rm8fIvYzPnun4Ob5mdYALT1VDibxGYrjI4=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=sWJcviQvpZUShFskLUdfXp9SkdzUy7YGZiY72wjFNjOBNFdYrmtXK2nQIyrshzf61
- E1msJnqKvcLZVXsWGhaKgWaIsw7d5xC/gPulA6bAqsiuwdv3V543gRVzOkCmdVe/pW
- 3SMHfdYkqSe2vpAVSgAlUR6+4GT6JMOXwouIG7E/DyNcYtfj9b3LGJpOvelgjZmwPY
- NebaoTfZAYVgu0CJ1hPZXBlwSH5Du7CEtD6WR5RJu/IVfg7RCOZUxnK2mbF7zQS/ul
- 2lVjyw9pacqbnZd3dsSw1zBG+SH+XUgEoQI+zCJka9HmIUQOkmCRqsYUXJ05KpCILT
- 0bNWw3BGCXQMw==
-Received: by mail-qv1-f51.google.com with SMTP id
- 6a1803df08f44-69b9365e584so15385066d6.1
- for <nouveau@lists.freedesktop.org>; Thu, 25 Apr 2024 04:37:18 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCVBNO02HwtfllLwlZ9WtFF3oyELf7JIB9slQXOpgz9OcbeY6RX9oi/OVSTy05rX0XRx3BdzR+9+VDQock8Y7yGbmsSLKAqQx20s+C/lYQ==
-X-Gm-Message-State: AOJu0YzztU8mMpw8PuD+Sly7safZkCeUOuKarwanuPMg/D7aslGE7Pbo
- dqoNDhRYuWkHVQ4sRkckS0ZzvNF4rMyiNK83a4F0Ht4a2qUBii97cYKFfpxQ7qfI4a6nOcaWO+4
- pMhZ3Rzk7CVjnhcD3kp9jzUVgZIRYpiETRxz5Hg==
-X-Google-Smtp-Source: AGHT+IGuw6PIRmWLIfWrkf5dDv5YzpHXbZic9qJ7hexXwbCiJetOlrvLTH7Xqti7ICr77TwHib5HF+hy8/iedLopUhw=
-X-Received: by 2002:a05:6902:983:b0:dc6:d258:c694 with SMTP id
- bv3-20020a056902098300b00dc6d258c694mr1879933ybb.19.1714045017450; Thu, 25
- Apr 2024 04:36:57 -0700 (PDT)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 53F6A10F3F9
+ for <nouveau@lists.freedesktop.org>; Thu, 25 Apr 2024 13:23:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1714051381;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=6GqUJ17MX7fSPNWta9hkm0XjwS874MvPFbznWeyEucU=;
+ b=Gr9Gu4RIPyWxVMjiGAduFGAisk1fzIDoI9VuMVS2zIsLUUMg3J0v6z2wJTIvsJQvYGkxhp
+ dqf0kpcTCTMfAvcRqa2ZOd9j2P5LwKWg+27dMFWABA9PHWwtZw3jVVxp/CLQt3eP8y5LWR
+ sUoHJj4W2mhzFcDdM4HVcxbZLJmuP4k=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-595-FSbX3s_4PYeiopJ_kBqBaA-1; Thu, 25 Apr 2024 09:22:59 -0400
+X-MC-Unique: FSbX3s_4PYeiopJ_kBqBaA-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-418f8271081so4177435e9.3
+ for <nouveau@lists.freedesktop.org>; Thu, 25 Apr 2024 06:22:59 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714051378; x=1714656178;
+ h=content-transfer-encoding:in-reply-to:cc:organization:from
+ :content-language:references:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6GqUJ17MX7fSPNWta9hkm0XjwS874MvPFbznWeyEucU=;
+ b=lTPGxabLjqRdb6jwZQPSesSq+vQuA7yXK2X+V0v/Z8eCXhlsEbpuMS+7hw6w9uiuhd
+ 05imxkOWbQ+p8/QnvY9Cbha8gpOmLVqSaDwKy8O9XfeJQhqK+Zjilp81WREOmSZ847GD
+ M1MkNJ6asa1XdG1C/qD0HVBAYoSvwpL/iC6V77dgGbszQWcmAGP2mxr9NKRPhVfQOL5y
+ BydnsD2xStTU8VM61c6vXPtGw0thIQhhRssnCqO6xWC7vsZln2/8uEQlRJHoHqFrmocR
+ C7AG9N0kALHhbaS1Gv4do9rMuABON5QEAwht6Vp8B03LtCxQsF9kInue7/a5WqeTFkcM
+ zO7g==
+X-Gm-Message-State: AOJu0YyhhcFBFK/OTTIsaDD54wBSCbEIus/v2zD3ECEtrsbMsXWNP/in
+ IVuesL2W25zbkc/Jzo9igzsLzsaRKkasVxI5FCfRnW77AygYSSi5ZkzGFqhHwfsKdyvnSoTLpF0
+ 8vNtRMMcC7br/WJ86EwoiuetWXOMSzAhPHv8OjewxInKbkwR/BIfL8z4yc6meUlI=
+X-Received: by 2002:a05:600c:4fc4:b0:418:f991:8ad3 with SMTP id
+ o4-20020a05600c4fc400b00418f9918ad3mr4737244wmq.41.1714051378089; 
+ Thu, 25 Apr 2024 06:22:58 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGp9uZwNKMR+Lec4WQ00QFiKlunosNmFDDJdWixmUbf0lfiYUMjh37ayp8XLg8lizynMeuLcw==
+X-Received: by 2002:a05:600c:4fc4:b0:418:f991:8ad3 with SMTP id
+ o4-20020a05600c4fc400b00418f9918ad3mr4737223wmq.41.1714051377693; 
+ Thu, 25 Apr 2024 06:22:57 -0700 (PDT)
+Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
+ ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
+ by smtp.gmail.com with ESMTPSA id
+ f17-20020a05600c4e9100b004182b87aaacsm27540051wmq.14.2024.04.25.06.22.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 25 Apr 2024 06:22:57 -0700 (PDT)
+Message-ID: <162ef3c0-1d7b-4220-a21f-b0008657f8a5@redhat.com>
+Date: Thu, 25 Apr 2024 15:22:56 +0200
 MIME-Version: 1.0
-References: <20240422121011.4133236-1-jani.nikula@intel.com>
-In-Reply-To: <20240422121011.4133236-1-jani.nikula@intel.com>
-From: Robert Foss <rfoss@kernel.org>
-Date: Thu, 25 Apr 2024 13:36:46 +0200
-X-Gmail-Original-Message-ID: <CAN6tsi5JOZCdc9=pKvhc0m+Mf8mXixekc2Vq=jWZe=SpfWEdjA@mail.gmail.com>
-Message-ID: <CAN6tsi5JOZCdc9=pKvhc0m+Mf8mXixekc2Vq=jWZe=SpfWEdjA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] drm/print: drop include debugfs.h and include where
- needed
-To: Jani Nikula <jani.nikula@intel.com>
-Cc: dri-devel@lists.freedesktop.org, Andrzej Hajda <andrzej.hajda@intel.com>, 
- Maxime Ripard <mripard@kernel.org>,
- Jacek Lawrynowicz <jacek.lawrynowicz@linux.intel.com>, 
- Stanislaw Gruszka <stanislaw.gruszka@linux.intel.com>,
- Oded Gabbay <ogabbay@kernel.org>, 
- Russell King <linux@armlinux.org.uk>, David Airlie <airlied@gmail.com>, 
- Daniel Vetter <daniel@ffwll.ch>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Jonas Karlman <jonas@kwiboo.se>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, 
- Jani Nikula <jani.nikula@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, 
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Tvrtko Ursulin <tursulin@ursulin.net>, 
- Frank Binns <frank.binns@imgtec.com>, Matt Coster <matt.coster@imgtec.com>, 
- Rob Clark <robdclark@gmail.com>, Abhinav Kumar <quic_abhinavk@quicinc.com>, 
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>,
- Karol Herbst <kherbst@redhat.com>, 
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@redhat.com>, 
- Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
- "Pan, Xinhui" <Xinhui.Pan@amd.com>, Alain Volmat <alain.volmat@foss.st.com>, 
- Huang Rui <ray.huang@amd.com>, Zack Rusin <zack.rusin@broadcom.com>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- Lucas De Marchi <lucas.demarchi@intel.com>, 
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] [v7] nouveau: add command-line GSP-RM registry support
+To: Timur Tabi <ttabi@nvidia.com>
+References: <20240417215317.3490856-1-ttabi@nvidia.com>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+Cc: nouveau@lists.freedesktop.org, Lyude Paul <lyude@redhat.com>,
+ Dave Airlie <airlied@redhat.com>, bskeggs@nvidia.com
+In-Reply-To: <20240417215317.3490856-1-ttabi@nvidia.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,544 +94,137 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Apr 22, 2024 at 2:10=E2=80=AFPM Jani Nikula <jani.nikula@intel.com>=
- wrote:
->
-> Surprisingly many places depend on debugfs.h to be included via
-> drm_print.h. Fix them.
->
-> v3: Also fix armada, ite-it6505, imagination, msm, sti, vc4, and xe
->
-> v2: Also fix ivpu and vmwgfx
->
-> Reviewed-by: Andrzej Hajda <andrzej.hajda@intel.com>
-> Acked-by: Maxime Ripard <mripard@kernel.org>
-> Link: https://patchwork.freedesktop.org/patch/msgid/20240410141434.157908=
--1-jani.nikula@intel.com
-> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
->
-> ---
->
-> Cc: Jacek Lawrynowicz <jacek.lawrynowicz@linux.intel.com>
-> Cc: Stanislaw Gruszka <stanislaw.gruszka@linux.intel.com>
-> Cc: Oded Gabbay <ogabbay@kernel.org>
-> Cc: Russell King <linux@armlinux.org.uk>
-> Cc: David Airlie <airlied@gmail.com>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: Andrzej Hajda <andrzej.hajda@intel.com>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Robert Foss <rfoss@kernel.org>
-> Cc: Laurent Pinchart <Laurent.pinchart@ideasonboard.com>
-> Cc: Jonas Karlman <jonas@kwiboo.se>
-> Cc: Jernej Skrabec <jernej.skrabec@gmail.com>
-> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-> Cc: Maxime Ripard <mripard@kernel.org>
-> Cc: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Jani Nikula <jani.nikula@linux.intel.com>
-> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-> Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
-> Cc: Tvrtko Ursulin <tursulin@ursulin.net>
-> Cc: Frank Binns <frank.binns@imgtec.com>
-> Cc: Matt Coster <matt.coster@imgtec.com>
-> Cc: Rob Clark <robdclark@gmail.com>
-> Cc: Abhinav Kumar <quic_abhinavk@quicinc.com>
-> Cc: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> Cc: Sean Paul <sean@poorly.run>
-> Cc: Marijn Suijten <marijn.suijten@somainline.org>
-> Cc: Karol Herbst <kherbst@redhat.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: Danilo Krummrich <dakr@redhat.com>
-> Cc: Alex Deucher <alexander.deucher@amd.com>
-> Cc: "Christian K=C3=B6nig" <christian.koenig@amd.com>
-> Cc: "Pan, Xinhui" <Xinhui.Pan@amd.com>
-> Cc: Alain Volmat <alain.volmat@foss.st.com>
-> Cc: Huang Rui <ray.huang@amd.com>
-> Cc: Zack Rusin <zack.rusin@broadcom.com>
-> Cc: Broadcom internal kernel review list <bcm-kernel-feedback-list@broadc=
-om.com>
-> Cc: Lucas De Marchi <lucas.demarchi@intel.com>
-> Cc: "Thomas Hellstr=C3=B6m" <thomas.hellstrom@linux.intel.com>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: intel-gfx@lists.freedesktop.org
-> Cc: intel-xe@lists.freedesktop.org
-> Cc: linux-arm-msm@vger.kernel.org
-> Cc: freedreno@lists.freedesktop.org
-> Cc: nouveau@lists.freedesktop.org
-> Cc: amd-gfx@lists.freedesktop.org
-> ---
->  drivers/accel/ivpu/ivpu_debugfs.c           | 2 ++
->  drivers/gpu/drm/armada/armada_debugfs.c     | 1 +
->  drivers/gpu/drm/bridge/ite-it6505.c         | 1 +
->  drivers/gpu/drm/bridge/panel.c              | 2 ++
->  drivers/gpu/drm/drm_print.c                 | 6 +++---
->  drivers/gpu/drm/i915/display/intel_dmc.c    | 1 +
->  drivers/gpu/drm/imagination/pvr_fw_trace.c  | 1 +
->  drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.c | 2 ++
->  drivers/gpu/drm/nouveau/dispnv50/crc.c      | 2 ++
->  drivers/gpu/drm/radeon/r100.c               | 1 +
->  drivers/gpu/drm/radeon/r300.c               | 1 +
->  drivers/gpu/drm/radeon/r420.c               | 1 +
->  drivers/gpu/drm/radeon/r600.c               | 3 ++-
->  drivers/gpu/drm/radeon/radeon_fence.c       | 1 +
->  drivers/gpu/drm/radeon/radeon_gem.c         | 1 +
->  drivers/gpu/drm/radeon/radeon_ib.c          | 2 ++
->  drivers/gpu/drm/radeon/radeon_pm.c          | 1 +
->  drivers/gpu/drm/radeon/radeon_ring.c        | 2 ++
->  drivers/gpu/drm/radeon/radeon_ttm.c         | 1 +
->  drivers/gpu/drm/radeon/rs400.c              | 1 +
->  drivers/gpu/drm/radeon/rv515.c              | 1 +
->  drivers/gpu/drm/sti/sti_drv.c               | 1 +
->  drivers/gpu/drm/ttm/ttm_device.c            | 1 +
->  drivers/gpu/drm/ttm/ttm_resource.c          | 3 ++-
->  drivers/gpu/drm/ttm/ttm_tt.c                | 5 +++--
->  drivers/gpu/drm/vc4/vc4_drv.h               | 1 +
->  drivers/gpu/drm/vmwgfx/vmwgfx_gem.c         | 2 ++
->  drivers/gpu/drm/xe/xe_debugfs.c             | 1 +
->  drivers/gpu/drm/xe/xe_gt_debugfs.c          | 2 ++
->  drivers/gpu/drm/xe/xe_uc_debugfs.c          | 2 ++
->  include/drm/drm_print.h                     | 2 +-
->  31 files changed, 46 insertions(+), 8 deletions(-)
->
-> diff --git a/drivers/accel/ivpu/ivpu_debugfs.c b/drivers/accel/ivpu/ivpu_=
-debugfs.c
-> index d09d29775b3f..e07e447d08d1 100644
-> --- a/drivers/accel/ivpu/ivpu_debugfs.c
-> +++ b/drivers/accel/ivpu/ivpu_debugfs.c
-> @@ -3,6 +3,8 @@
->   * Copyright (C) 2020-2023 Intel Corporation
->   */
->
-> +#include <linux/debugfs.h>
-> +
->  #include <drm/drm_debugfs.h>
->  #include <drm/drm_file.h>
->  #include <drm/drm_print.h>
-> diff --git a/drivers/gpu/drm/armada/armada_debugfs.c b/drivers/gpu/drm/ar=
-mada/armada_debugfs.c
-> index 29f4b52e3c8d..a763349dd89f 100644
-> --- a/drivers/gpu/drm/armada/armada_debugfs.c
-> +++ b/drivers/gpu/drm/armada/armada_debugfs.c
-> @@ -5,6 +5,7 @@
->   */
->
->  #include <linux/ctype.h>
-> +#include <linux/debugfs.h>
->  #include <linux/module.h>
->  #include <linux/seq_file.h>
->  #include <linux/uaccess.h>
-> diff --git a/drivers/gpu/drm/bridge/ite-it6505.c b/drivers/gpu/drm/bridge=
-/ite-it6505.c
-> index 27334173e911..3f68c82888c2 100644
-> --- a/drivers/gpu/drm/bridge/ite-it6505.c
-> +++ b/drivers/gpu/drm/bridge/ite-it6505.c
-> @@ -3,6 +3,7 @@
->   * Copyright (c) 2020, The Linux Foundation. All rights reserved.
->   */
->  #include <linux/bits.h>
-> +#include <linux/debugfs.h>
->  #include <linux/delay.h>
->  #include <linux/device.h>
->  #include <linux/err.h>
-> diff --git a/drivers/gpu/drm/bridge/panel.c b/drivers/gpu/drm/bridge/pane=
-l.c
-> index 7f41525f7a6e..32506524d9a2 100644
-> --- a/drivers/gpu/drm/bridge/panel.c
-> +++ b/drivers/gpu/drm/bridge/panel.c
-> @@ -4,6 +4,8 @@
->   * Copyright (C) 2017 Broadcom
->   */
->
-> +#include <linux/debugfs.h>
-> +
->  #include <drm/drm_atomic_helper.h>
->  #include <drm/drm_bridge.h>
->  #include <drm/drm_connector.h>
-> diff --git a/drivers/gpu/drm/drm_print.c b/drivers/gpu/drm/drm_print.c
-> index 699b7dbffd7b..cf2efb44722c 100644
-> --- a/drivers/gpu/drm/drm_print.c
-> +++ b/drivers/gpu/drm/drm_print.c
-> @@ -23,13 +23,13 @@
->   * Rob Clark <robdclark@gmail.com>
->   */
->
-> -#include <linux/stdarg.h>
-> -
-> +#include <linux/debugfs.h>
-> +#include <linux/dynamic_debug.h>
->  #include <linux/io.h>
->  #include <linux/moduleparam.h>
->  #include <linux/seq_file.h>
->  #include <linux/slab.h>
-> -#include <linux/dynamic_debug.h>
-> +#include <linux/stdarg.h>
->
->  #include <drm/drm.h>
->  #include <drm/drm_drv.h>
-> diff --git a/drivers/gpu/drm/i915/display/intel_dmc.c b/drivers/gpu/drm/i=
-915/display/intel_dmc.c
-> index 3697a02b51b6..09346afd1f0e 100644
-> --- a/drivers/gpu/drm/i915/display/intel_dmc.c
-> +++ b/drivers/gpu/drm/i915/display/intel_dmc.c
-> @@ -22,6 +22,7 @@
->   *
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/firmware.h>
->
->  #include "i915_drv.h"
-> diff --git a/drivers/gpu/drm/imagination/pvr_fw_trace.c b/drivers/gpu/drm=
-/imagination/pvr_fw_trace.c
-> index 31199e45b72e..73707daa4e52 100644
-> --- a/drivers/gpu/drm/imagination/pvr_fw_trace.c
-> +++ b/drivers/gpu/drm/imagination/pvr_fw_trace.c
-> @@ -12,6 +12,7 @@
->
->  #include <linux/build_bug.h>
->  #include <linux/dcache.h>
-> +#include <linux/debugfs.h>
->  #include <linux/sysfs.h>
->  #include <linux/types.h>
->
-> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.c b/drivers/gpu/dr=
-m/msm/disp/dpu1/dpu_hw_sspp.c
-> index 0bf8a83e8df3..8586f2761782 100644
-> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.c
-> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp.c
-> @@ -2,6 +2,8 @@
->  /* Copyright (c) 2015-2018, The Linux Foundation. All rights reserved.
->   */
->
-> +#include <linux/debugfs.h>
-> +
->  #include "dpu_hwio.h"
->  #include "dpu_hw_catalog.h"
->  #include "dpu_hw_lm.h"
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/crc.c b/drivers/gpu/drm/nou=
-veau/dispnv50/crc.c
-> index 9c942fbd836d..5936b6b3b15d 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/crc.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/crc.c
-> @@ -1,5 +1,7 @@
->  // SPDX-License-Identifier: MIT
-> +#include <linux/debugfs.h>
->  #include <linux/string.h>
-> +
->  #include <drm/drm_crtc.h>
->  #include <drm/drm_atomic_helper.h>
->  #include <drm/drm_vblank.h>
-> diff --git a/drivers/gpu/drm/radeon/r100.c b/drivers/gpu/drm/radeon/r100.=
-c
-> index 86b8b770af19..0b1e19345f43 100644
-> --- a/drivers/gpu/drm/radeon/r100.c
-> +++ b/drivers/gpu/drm/radeon/r100.c
-> @@ -26,6 +26,7 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/firmware.h>
->  #include <linux/module.h>
->  #include <linux/pci.h>
-> diff --git a/drivers/gpu/drm/radeon/r300.c b/drivers/gpu/drm/radeon/r300.=
-c
-> index 25201b9a5aae..1620f534f55f 100644
-> --- a/drivers/gpu/drm/radeon/r300.c
-> +++ b/drivers/gpu/drm/radeon/r300.c
-> @@ -26,6 +26,7 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/pci.h>
->  #include <linux/seq_file.h>
->  #include <linux/slab.h>
-> diff --git a/drivers/gpu/drm/radeon/r420.c b/drivers/gpu/drm/radeon/r420.=
-c
-> index eae8a6389f5e..a979662eaa73 100644
-> --- a/drivers/gpu/drm/radeon/r420.c
-> +++ b/drivers/gpu/drm/radeon/r420.c
-> @@ -26,6 +26,7 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/pci.h>
->  #include <linux/seq_file.h>
->  #include <linux/slab.h>
-> diff --git a/drivers/gpu/drm/radeon/r600.c b/drivers/gpu/drm/radeon/r600.=
-c
-> index b5e97d95a19f..087d41e370fd 100644
-> --- a/drivers/gpu/drm/radeon/r600.c
-> +++ b/drivers/gpu/drm/radeon/r600.c
-> @@ -26,11 +26,12 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/firmware.h>
->  #include <linux/module.h>
->  #include <linux/pci.h>
-> -#include <linux/slab.h>
->  #include <linux/seq_file.h>
-> +#include <linux/slab.h>
->
->  #include <drm/drm_device.h>
->  #include <drm/drm_vblank.h>
-> diff --git a/drivers/gpu/drm/radeon/radeon_fence.c b/drivers/gpu/drm/rade=
-on/radeon_fence.c
-> index 9ebe4a0b9a6c..4fb780d96f32 100644
-> --- a/drivers/gpu/drm/radeon/radeon_fence.c
-> +++ b/drivers/gpu/drm/radeon/radeon_fence.c
-> @@ -30,6 +30,7 @@
->   */
->
->  #include <linux/atomic.h>
-> +#include <linux/debugfs.h>
->  #include <linux/firmware.h>
->  #include <linux/kref.h>
->  #include <linux/sched/signal.h>
-> diff --git a/drivers/gpu/drm/radeon/radeon_gem.c b/drivers/gpu/drm/radeon=
-/radeon_gem.c
-> index 3fec3acdaf28..2ef201a072f1 100644
-> --- a/drivers/gpu/drm/radeon/radeon_gem.c
-> +++ b/drivers/gpu/drm/radeon/radeon_gem.c
-> @@ -26,6 +26,7 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/iosys-map.h>
->  #include <linux/pci.h>
->
-> diff --git a/drivers/gpu/drm/radeon/radeon_ib.c b/drivers/gpu/drm/radeon/=
-radeon_ib.c
-> index fb9ecf5dbe2b..63d914f3414d 100644
-> --- a/drivers/gpu/drm/radeon/radeon_ib.c
-> +++ b/drivers/gpu/drm/radeon/radeon_ib.c
-> @@ -27,6 +27,8 @@
->   *          Christian K=C3=B6nig
->   */
->
-> +#include <linux/debugfs.h>
-> +
->  #include <drm/drm_file.h>
->
->  #include "radeon.h"
-> diff --git a/drivers/gpu/drm/radeon/radeon_pm.c b/drivers/gpu/drm/radeon/=
-radeon_pm.c
-> index 4482c8c5f5ce..2d9d9f46f243 100644
-> --- a/drivers/gpu/drm/radeon/radeon_pm.c
-> +++ b/drivers/gpu/drm/radeon/radeon_pm.c
-> @@ -21,6 +21,7 @@
->   *          Alex Deucher <alexdeucher@gmail.com>
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/hwmon-sysfs.h>
->  #include <linux/hwmon.h>
->  #include <linux/pci.h>
-> diff --git a/drivers/gpu/drm/radeon/radeon_ring.c b/drivers/gpu/drm/radeo=
-n/radeon_ring.c
-> index 38048593bb4a..8d1d458286a8 100644
-> --- a/drivers/gpu/drm/radeon/radeon_ring.c
-> +++ b/drivers/gpu/drm/radeon/radeon_ring.c
-> @@ -27,6 +27,8 @@
->   *          Christian K=C3=B6nig
->   */
->
-> +#include <linux/debugfs.h>
-> +
->  #include <drm/drm_device.h>
->  #include <drm/drm_file.h>
->
-> diff --git a/drivers/gpu/drm/radeon/radeon_ttm.c b/drivers/gpu/drm/radeon=
-/radeon_ttm.c
-> index 2078b0000e22..5c65b6dfb99a 100644
-> --- a/drivers/gpu/drm/radeon/radeon_ttm.c
-> +++ b/drivers/gpu/drm/radeon/radeon_ttm.c
-> @@ -30,6 +30,7 @@
->   *    Dave Airlie
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/dma-mapping.h>
->  #include <linux/pagemap.h>
->  #include <linux/pci.h>
-> diff --git a/drivers/gpu/drm/radeon/rs400.c b/drivers/gpu/drm/radeon/rs40=
-0.c
-> index d7f552d441ab..d4d1501e6576 100644
-> --- a/drivers/gpu/drm/radeon/rs400.c
-> +++ b/drivers/gpu/drm/radeon/rs400.c
-> @@ -26,6 +26,7 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/seq_file.h>
->  #include <linux/slab.h>
->
-> diff --git a/drivers/gpu/drm/radeon/rv515.c b/drivers/gpu/drm/radeon/rv51=
-5.c
-> index 79709d26d983..bbc6ccabf788 100644
-> --- a/drivers/gpu/drm/radeon/rv515.c
-> +++ b/drivers/gpu/drm/radeon/rv515.c
-> @@ -26,6 +26,7 @@
->   *          Jerome Glisse
->   */
->
-> +#include <linux/debugfs.h>
->  #include <linux/seq_file.h>
->  #include <linux/slab.h>
->
-> diff --git a/drivers/gpu/drm/sti/sti_drv.c b/drivers/gpu/drm/sti/sti_drv.=
-c
-> index 4bab93c4fefd..1799c12babf5 100644
-> --- a/drivers/gpu/drm/sti/sti_drv.c
-> +++ b/drivers/gpu/drm/sti/sti_drv.c
-> @@ -5,6 +5,7 @@
->   */
->
->  #include <linux/component.h>
-> +#include <linux/debugfs.h>
->  #include <linux/dma-mapping.h>
->  #include <linux/kernel.h>
->  #include <linux/module.h>
-> diff --git a/drivers/gpu/drm/ttm/ttm_device.c b/drivers/gpu/drm/ttm/ttm_d=
-evice.c
-> index 76027960054f..434cf0258000 100644
-> --- a/drivers/gpu/drm/ttm/ttm_device.c
-> +++ b/drivers/gpu/drm/ttm/ttm_device.c
-> @@ -27,6 +27,7 @@
->
->  #define pr_fmt(fmt) "[TTM DEVICE] " fmt
->
-> +#include <linux/debugfs.h>
->  #include <linux/mm.h>
->
->  #include <drm/ttm/ttm_bo.h>
-> diff --git a/drivers/gpu/drm/ttm/ttm_resource.c b/drivers/gpu/drm/ttm/ttm=
-_resource.c
-> index be8d286513f9..4a66b851b67d 100644
-> --- a/drivers/gpu/drm/ttm/ttm_resource.c
-> +++ b/drivers/gpu/drm/ttm/ttm_resource.c
-> @@ -22,8 +22,9 @@
->   * Authors: Christian K=C3=B6nig
->   */
->
-> -#include <linux/iosys-map.h>
-> +#include <linux/debugfs.h>
->  #include <linux/io-mapping.h>
-> +#include <linux/iosys-map.h>
->  #include <linux/scatterlist.h>
->
->  #include <drm/ttm/ttm_bo.h>
-> diff --git a/drivers/gpu/drm/ttm/ttm_tt.c b/drivers/gpu/drm/ttm/ttm_tt.c
-> index 578a7c37f00b..474fe7aad2a0 100644
-> --- a/drivers/gpu/drm/ttm/ttm_tt.c
-> +++ b/drivers/gpu/drm/ttm/ttm_tt.c
-> @@ -32,10 +32,11 @@
->  #define pr_fmt(fmt) "[TTM] " fmt
->
->  #include <linux/cc_platform.h>
-> -#include <linux/sched.h>
-> -#include <linux/shmem_fs.h>
-> +#include <linux/debugfs.h>
->  #include <linux/file.h>
->  #include <linux/module.h>
-> +#include <linux/sched.h>
-> +#include <linux/shmem_fs.h>
->  #include <drm/drm_cache.h>
->  #include <drm/drm_device.h>
->  #include <drm/drm_util.h>
-> diff --git a/drivers/gpu/drm/vc4/vc4_drv.h b/drivers/gpu/drm/vc4/vc4_drv.=
-h
-> index ab61e96e7e14..08e29fa82563 100644
-> --- a/drivers/gpu/drm/vc4/vc4_drv.h
-> +++ b/drivers/gpu/drm/vc4/vc4_drv.h
-> @@ -5,6 +5,7 @@
->  #ifndef _VC4_DRV_H_
->  #define _VC4_DRV_H_
->
-> +#include <linux/debugfs.h>
->  #include <linux/delay.h>
->  #include <linux/of.h>
->  #include <linux/refcount.h>
-> diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c b/drivers/gpu/drm/vmwgfx=
-/vmwgfx_gem.c
-> index 2132a8ad8c0c..07185c108218 100644
-> --- a/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c
-> +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c
-> @@ -30,6 +30,8 @@
->  #include "drm/drm_prime.h"
->  #include "drm/drm_gem_ttm_helper.h"
->
-> +#include <linux/debugfs.h>
-> +
->  static void vmw_gem_object_free(struct drm_gem_object *gobj)
->  {
->         struct ttm_buffer_object *bo =3D drm_gem_ttm_of_gem(gobj);
-> diff --git a/drivers/gpu/drm/xe/xe_debugfs.c b/drivers/gpu/drm/xe/xe_debu=
-gfs.c
-> index c9b30dbdc14d..0b7aebaae843 100644
-> --- a/drivers/gpu/drm/xe/xe_debugfs.c
-> +++ b/drivers/gpu/drm/xe/xe_debugfs.c
-> @@ -5,6 +5,7 @@
->
->  #include "xe_debugfs.h"
->
-> +#include <linux/debugfs.h>
->  #include <linux/string_helpers.h>
->
->  #include <drm/drm_debugfs.h>
-> diff --git a/drivers/gpu/drm/xe/xe_gt_debugfs.c b/drivers/gpu/drm/xe/xe_g=
-t_debugfs.c
-> index ff7f4cf52fa9..8cf0b2625efc 100644
-> --- a/drivers/gpu/drm/xe/xe_gt_debugfs.c
-> +++ b/drivers/gpu/drm/xe/xe_gt_debugfs.c
-> @@ -5,6 +5,8 @@
->
->  #include "xe_gt_debugfs.h"
->
-> +#include <linux/debugfs.h>
-> +
->  #include <drm/drm_debugfs.h>
->  #include <drm/drm_managed.h>
->
-> diff --git a/drivers/gpu/drm/xe/xe_uc_debugfs.c b/drivers/gpu/drm/xe/xe_u=
-c_debugfs.c
-> index 0a39ec5a6e99..78eb8db73791 100644
-> --- a/drivers/gpu/drm/xe/xe_uc_debugfs.c
-> +++ b/drivers/gpu/drm/xe/xe_uc_debugfs.c
-> @@ -3,6 +3,8 @@
->   * Copyright =C2=A9 2022 Intel Corporation
->   */
->
-> +#include <linux/debugfs.h>
-> +
->  #include <drm/drm_debugfs.h>
->
->  #include "xe_gt.h"
-> diff --git a/include/drm/drm_print.h b/include/drm/drm_print.h
-> index 9cc473e5d353..561c3b96b6fd 100644
-> --- a/include/drm/drm_print.h
-> +++ b/include/drm/drm_print.h
-> @@ -30,11 +30,11 @@
->  #include <linux/printk.h>
->  #include <linux/seq_file.h>
->  #include <linux/device.h>
-> -#include <linux/debugfs.h>
->  #include <linux/dynamic_debug.h>
->
->  #include <drm/drm.h>
->
-> +struct debugfs_regset32;
->  struct drm_device;
->
->  /* Do *not* use outside of drm_print.[ch]! */
-> --
-> 2.39.2
->
->
+On 4/17/24 23:53, Timur Tabi wrote:
 
-Acked-by: Robert Foss <rfoss@kernel.org> #drm/bridge
+<snip>
+
+> +
+> +/**
+> + * r535_gsp_rpc_set_registry - build registry RPC and call GSP-RM
+> + * @gsp: gsp pointer
+> + *
+> + * The GSP-RM registry is a set of key/value pairs that configure some aspects
+> + * of GSP-RM. The keys are strings, and the values are 32-bit integers.
+> + *
+> + * The registry is built from a combination of a static hard-coded list (see
+> + * above) and entries passed on the driver's command line.
+> + */
+>   static int
+>   r535_gsp_rpc_set_registry(struct nvkm_gsp *gsp)
+>   {
+>   	PACKED_REGISTRY_TABLE *rpc;
+> -	char *strings;
+> -	int str_offset;
+> -	int i;
+> -	size_t rpc_size = struct_size(rpc, entries, NV_GSP_REG_NUM_ENTRIES);
+> +	unsigned int i;
+> +	int ret;
+>   
+> -	/* add strings + null terminator */
+> -	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++)
+> -		rpc_size += strlen(r535_registry_entries[i].name) + 1;
+> +	INIT_LIST_HEAD(&gsp->registry_list);
+> +	gsp->registry_rpc_size = sizeof(PACKED_REGISTRY_TABLE);
+>   
+> -	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_SET_REGISTRY, rpc_size);
+> -	if (IS_ERR(rpc))
+> -		return PTR_ERR(rpc);
+> +	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
+> +		ret = add_registry_num(gsp, r535_registry_entries[i].name,
+> +				       r535_registry_entries[i].value);
+> +		if (ret) {
+> +			clean_registry(gsp);
+> +			return ret;
+> +		}
+> +	}
+>   
+> -	rpc->numEntries = NV_GSP_REG_NUM_ENTRIES;
+> +	/*
+> +	 * The NVreg_RegistryDwords parameter is a string of key=value
+> +	 * pairs separated by semicolons. We need to extract and trim each
+> +	 * substring, and then parse the substring to extract the key and
+> +	 * value.
+> +	 */
+> +	if (NVreg_RegistryDwords) {
+> +		char *p = kstrdup(NVreg_RegistryDwords, GFP_KERNEL);
+> +		char *start, *next = p, *equal;
+> +		size_t length;
+> +
+> +		/* Remove any whitespace from the parameter string */
+> +		length = strip(p, " \t\n");
+
+With that, I see the following warning compiling this patch.
+
+warning: variable ‘length’ set but not used [-Wunused-but-set-variable]
+
+Did you intend to use the length for anything?
+
+Also, looking at the warning made me aware of 'p' potentially being NULL.
+
+If you agree, I can fix the warning and add the corresponding NULL check when
+applying the patch.
+
+- Danilo
+
+> +
+> +		while ((start = strsep(&next, ";"))) {
+> +			long value;
+> +
+> +			equal = strchr(start, '=');
+> +			if (!equal || equal == start || equal[1] == 0) {
+> +				nvkm_error(&gsp->subdev,
+> +					   "ignoring invalid registry string '%s'\n",
+> +					   start);
+> +				continue;
+> +			}
+>   
+> -	str_offset = offsetof(typeof(*rpc), entries[NV_GSP_REG_NUM_ENTRIES]);
+> -	strings = (char *)rpc + str_offset;
+> -	for (i = 0; i < NV_GSP_REG_NUM_ENTRIES; i++) {
+> -		int name_len = strlen(r535_registry_entries[i].name) + 1;
+> -
+> -		rpc->entries[i].nameOffset = str_offset;
+> -		rpc->entries[i].type = 1;
+> -		rpc->entries[i].data = r535_registry_entries[i].value;
+> -		rpc->entries[i].length = 4;
+> -		memcpy(strings, r535_registry_entries[i].name, name_len);
+> -		strings += name_len;
+> -		str_offset += name_len;
+> +			/* Truncate the key=value string to just key */
+> +			*equal = 0;
+> +
+> +			ret = kstrtol(equal + 1, 0, &value);
+> +			if (!ret) {
+> +				ret = add_registry_num(gsp, start, value);
+> +			} else {
+> +				/* Not a number, so treat it as a string */
+> +				ret = add_registry_string(gsp, start, equal + 1);
+> +			}
+> +
+> +			if (ret) {
+> +				nvkm_error(&gsp->subdev,
+> +					   "ignoring invalid registry key/value '%s=%s'\n",
+> +					   start, equal + 1);
+> +				continue;
+> +			}
+> +		}
+> +
+> +		kfree(p);
+>   	}
+> -	rpc->size = str_offset;
+> +
+> +	rpc = nvkm_gsp_rpc_get(gsp, NV_VGPU_MSG_FUNCTION_SET_REGISTRY, gsp->registry_rpc_size);
+> +	if (IS_ERR(rpc)) {
+> +		clean_registry(gsp);
+> +		return PTR_ERR(rpc);
+> +	}
+> +
+> +	build_registry(gsp, rpc);
+>   
+>   	return nvkm_gsp_rpc_wr(gsp, rpc, false);
+>   }
+> 
+> base-commit: f7ad2ce5fd89ab5d146da8f486a310746df5dc9e
+> prerequisite-patch-id: 9bb653b6a53dcba4171d653e24a242461374f9fe
+> prerequisite-patch-id: 7093a9db84053e43f6f278bf1d159a25d14ceebf
+
