@@ -2,155 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F8768B26A4
-	for <lists+nouveau@lfdr.de>; Thu, 25 Apr 2024 18:38:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0EC48B3BD7
+	for <lists+nouveau@lfdr.de>; Fri, 26 Apr 2024 17:42:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F35AD11A629;
-	Thu, 25 Apr 2024 16:38:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DCB3E1124D1;
+	Fri, 26 Apr 2024 15:42:04 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="V90cwGFh";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="WaEvhNNX";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on2068.outbound.protection.outlook.com [40.107.100.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 14A7F11A61C
- for <nouveau@lists.freedesktop.org>; Thu, 25 Apr 2024 16:38:23 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jRF6akI6OTmiyaqfUPGOISdYCG0RVJ2vXBDnD12xKNIFJxNYasd5FHxM3tgo00DnQqL7CZUCM5w7OeboS5w7R1rg0CZihdY1WVciNAYKipvVBLPuweJ9hnt9kzppt24SHOcH7uXJf/6j38R1YqDEis4I6QbnJWICJ53m9ZgwLxhX+dGxym1g2B8SBq2yBf8fMZShwYb3tsLaHricQwYQuwAKM9w40r8fosg37+Jb+92XsUj0teO8LqZD/YrAm6MSZUXEy6nxunYjx/+hqzsNevKmgiVzEX++iUCxBAU2mJ9Vm8IlUJ1eD8tdwUZPAp7kyVAs7U9WZ58KOOqT+t36ZA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JELUhax2xoFfy4Yyv33uGAKj5/qdtxAQXXpjIQqbixY=;
- b=IuH8KGdRo3iHRbyH3M5O3iXG3e28OedXCKQ81isPIDA3J4L47N1pyJR/QpTB0rYThEDQ96aTkBJyHTDKJvyWFmlQ9GvbCZPCf9J6NQtyWC5woInRGLkeOhVmEArtFtkpPPk6m2QpyDFddSbvPk7QIxKMsqS0vnA7AnFSuOkKVSULrQdxoPY3g0La5J+T1VAkZ+HbC090rXahJBpatp2xgBn9d6LB/6/cAm/PTNudCVF/RUyLxwzSVVkykGbKaR6NnA18FT+J6wvRShubzzI2CBKca7YVx4iwMg2YYEH0T87Zi0nf0dIV2aDCKoimMYu4a1mxH5XYpUnNCR98V5rCUA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JELUhax2xoFfy4Yyv33uGAKj5/qdtxAQXXpjIQqbixY=;
- b=V90cwGFhELIiFil8XPtoySlhQEaonoD4zVTWLj0rIQ8IqMRaPa6P7iGogzqFjMGwmVzOW/EMluSdtUreRBbdp7lVi+rwv2D/b0xJ1ErS9kl5/u/XYAFZFWeDvuQZE+cPBuQZpx23jdcEp+W9jbko+I0QzjjX0IhNYEs8J+Uy9pdPhyT76A3FVQnC/46EhNzIOJs2iTAroNvd++1SZ8KVUxQ/qvMvmmRXXtFj/q52dRH/tIMdMzHrUGNcbeaaELA9GSYXl6vuSg+rORH++YFgJx2nERs0UkCgU+Ydt7J3o0864nMXwWcJ3zzMa7Iv6sc/NO66+zdpNzDqmQK235uZdg==
-Received: from SN7PR12MB8769.namprd12.prod.outlook.com (2603:10b6:806:34b::12)
- by DS7PR12MB8202.namprd12.prod.outlook.com (2603:10b6:8:e1::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7519.22; Thu, 25 Apr
- 2024 16:38:20 +0000
-Received: from SN7PR12MB8769.namprd12.prod.outlook.com
- ([fe80::ac4b:38c3:29cd:519]) by SN7PR12MB8769.namprd12.prod.outlook.com
- ([fe80::ac4b:38c3:29cd:519%3]) with mapi id 15.20.7472.044; Thu, 25 Apr 2024
- 16:38:19 +0000
-From: Timur Tabi <ttabi@nvidia.com>
-To: "dakr@redhat.com" <dakr@redhat.com>
-CC: "airlied@redhat.com" <airlied@redhat.com>, "nouveau@lists.freedesktop.org"
- <nouveau@lists.freedesktop.org>, "lyude@redhat.com" <lyude@redhat.com>, Ben
- Skeggs <bskeggs@nvidia.com>
-Subject: Re: [PATCH] [v7] nouveau: add command-line GSP-RM registry support
-Thread-Topic: [PATCH] [v7] nouveau: add command-line GSP-RM registry support
-Thread-Index: AQHakRG5UhwazQBxDEyKQ4bLCZjfrLF5BToAgAA2l4A=
-Date: Thu, 25 Apr 2024 16:38:19 +0000
-Message-ID: <913052ca6c0988db1bab293cfae38529251b4594.camel@nvidia.com>
-References: <20240417215317.3490856-1-ttabi@nvidia.com>
- <162ef3c0-1d7b-4220-a21f-b0008657f8a5@redhat.com>
-In-Reply-To: <162ef3c0-1d7b-4220-a21f-b0008657f8a5@redhat.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.44.4-0ubuntu2 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SN7PR12MB8769:EE_|DS7PR12MB8202:EE_
-x-ms-office365-filtering-correlation-id: 7f601481-a4d6-4a40-9b56-08dc65461da6
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230031|1800799015|366007|376005|38070700009;
-x-microsoft-antispam-message-info: =?utf-8?B?Rk8yLzM4K1htREQzT21NNFEvTmh0Q3hIVTlJbzhIZUpRa21zVU4rei9FeDh5?=
- =?utf-8?B?NXJOWDN5YmVnVzV5QkZiTk5YeGxDWW1GTkF5d3F0cXgyTWVENWxPTWtseHE4?=
- =?utf-8?B?bnRTZUVKL1IrdHVqWEZDcDlOSHY3cWNSeHhGZ0FOR1M3RjNDQ2FQYXZRYzVm?=
- =?utf-8?B?aXBZR0VBeEJYa3hDdzZHOXFhUkt5S2FmcUJuWklaeWdDa2haSTllc2pOS09N?=
- =?utf-8?B?bWNFY0d3MUs1a096Z3A1citoR1FBZnAyY2tRaWx6bGVEcnU3dkJJamVjb3ND?=
- =?utf-8?B?TUpiZkFNci9qUnNnR3c3bVByUmF3OTFQUW9PWFY3dVFMYmk1WE53N1hYcDZE?=
- =?utf-8?B?L0FKTFhXbTlYa0VYNm45SHpUb2xValppWENIa1A3bWsxUG1jcWc3WVRnN0lS?=
- =?utf-8?B?Qi9IMGQyVFM5VFhESllGK1NiQjNGQlJHQlMyWXNSbjh2SEZWNkQ2Z21IRE04?=
- =?utf-8?B?WkZDSi9Bb2lobnB0dTlCb2ExMTZNTkZ1ZnkwTytoRDliVzhkbS9MUkQ0dlFR?=
- =?utf-8?B?Q1FMYTdrbEY4T21OMlVKajJVS3NEeTNaYUtXY09XUEJyYld6N0QzcHJRbTh3?=
- =?utf-8?B?dzM3TVovNXkxcW9pNkt0bUtwRFh3eXlNMmxCTHNGVUZDUzhBYnMzQ1FMYjFl?=
- =?utf-8?B?UmJBTksxQ0drYUd3TXJOVGJ4TXE0dVFxYm1FbytrV2RmTElRTmova1BjL0hM?=
- =?utf-8?B?KzdtY0ltU2xvTU40eG9pWkdFSE1sV3RUb3o2WWI0dkNCRUE5amdwMFNLeWZv?=
- =?utf-8?B?c2IyZHFsdk44eHU0VFA5MjRIRDJUdlpOaGJzVFV5cXp1MTN6TnlNQ255VnJW?=
- =?utf-8?B?QkNGanczY0RPQ3k4QWpqT1poSWJqeVJmNnBNSjFrVk83cW9wS0QvSG91cUda?=
- =?utf-8?B?Qjc4RnhUVTVud2hFeEE2dkt3bEk4a0N4MkY2TksrU3VNVWhLRUN3Vkw5SUdz?=
- =?utf-8?B?WTdqWHNYVDFIeXFzeTZUaXhyN3BJaFNoV1NTcDZYVFVLcGZ6VmRUSFhWWGFp?=
- =?utf-8?B?aC9rTGo3ZVpNYStQQXhZMG8zdFdxOXZOZWpvQkhCcXpvajB4bm1BeGk1REVW?=
- =?utf-8?B?UnFvTGlUOG81SGpxbkdZTm5GVWxOTUZWTzlxczFxTU9BbzI1WHlCcjF1Q3JV?=
- =?utf-8?B?YjBOL1JkVStYLy9Kbm54Q0lrU2FieDZvSXBxMDJCamlLUDF0dUxNV3R1N3VB?=
- =?utf-8?B?VFpRRXNyM2g1YjhpRTBtY09RdFA2T2xyVndBeTFSQ29nNncrZ3NrY0FtQllZ?=
- =?utf-8?B?dmxaN3RsditrcE54U0pRczMxa3RaQjM2b2NlVzZ1bWkydU05UkZ2emp4VGNn?=
- =?utf-8?B?ZVlFVGNJV0M5a05NKytiK0pST2cxQmFuV3paRHI2Q1dhcUJ2dXNnZGVhVVh4?=
- =?utf-8?B?K2tIdDVGQ1lJWlkxVnpKSmkzR1hBcmNMcE9kTVgxZklOMEx6VkwzQW16ajRU?=
- =?utf-8?B?OTQ0U2RBR2hIeSthNXZqRndxaEN4am56dWdUeE1LN3UwTmVzQ1Z6L29XTUFH?=
- =?utf-8?B?QVFPUGhpTCtLZ0NtOXhNMURjaWJyK1hPa0JOM2hRV2Q1czc3TFFibGVydE1K?=
- =?utf-8?B?VmNOMEJkblZBRXJJRjdNZEFySWF3ZmI0MlN5SUZLd3JqLy9PeVJpWXd5MlVo?=
- =?utf-8?B?OUtWMWFPSUxqWWd1eHR6QWNTc2VHNDhUNnVJT0xnK3hRN1BQNk81TUNyaENG?=
- =?utf-8?B?bXFRNkx0cE9lbkp0cURiaTJEckJjU0pvbnU5ZWFJeFBsaFNtM0hxT244OXQr?=
- =?utf-8?B?ZWd6ZDN6amxURFpyTG5RQWNBanQxWmtzNG9BRmlNKzdONER6ZjBFTXVXL0pw?=
- =?utf-8?B?V1BjUXFEb2wvSHdkNVZQdz09?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN7PR12MB8769.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(1800799015)(366007)(376005)(38070700009); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?WU1iVjdPK2tnSVpvNm9GWEVjYzJBWkY5bXYwbno5M29KWjdjZ2tkMklhVkZQ?=
- =?utf-8?B?MHJPNWdzZFZqMXZkMEw3NUFweW1oZGtqbXEyM1M5Sm5pQ1JjbDFqNmg0NGFT?=
- =?utf-8?B?TE42VU1oTEJBTFcyTFZodzEyNnhraDd6SkpnOEwyZEFXTSsyZFg2cEVGYm43?=
- =?utf-8?B?RW9EOXgrbEtnQkJsVjlSWnlKY3Z1Rkk0OWp5TS8rOFVKK2VJKzY2NTFKc0xs?=
- =?utf-8?B?U21uVnhiQ2VzZUFlUjh6N3dod2FIS2lhb2xuNVhNdGtpbERwWlJMVFZ6L0JI?=
- =?utf-8?B?OThQOFBzclUrY3lRTldsYWQzYnVHUTN5V2tCZ2w3SEVGQTFYMkYzRlpTTERG?=
- =?utf-8?B?Q09VZURvL3hiQWxKU01rdHVWUUw4WW5aMDJ6LzZMNzBJWmFndmdmWkJnQ2Jz?=
- =?utf-8?B?WnJoQVZxYzhjNlliS3ExRGdxbDVLenk2ekJHQlhleGRzRnFSanlaV01PSkY2?=
- =?utf-8?B?aVBPN2xHNkU1NjNNUnFPQTFodWhpcHQ3TVJFbS80U0NYNTNHT1dmbHhsa1Q5?=
- =?utf-8?B?bFJxNEhNRTJUTFRXMVZobHlVUFZBbWdScWRJdlJUMmFneVdzM0dlZ1dBOVpi?=
- =?utf-8?B?azZLaVVvTFMyVkFpRG9MTFcxOXZuQXUwb25aVkxLVXN4R0FQZkRTcWh6TDFS?=
- =?utf-8?B?ZXJRU1F3VkRlM1hzRWVlM0cwd2hNR0hzeFFjaWVXYS9tb2lGaFpKR3RvUldR?=
- =?utf-8?B?NnJGYmpYT3BrWE9HeElsWkZyZDZKdTVROHpyOTk1azBwb3ErYXFtdzFXRHN2?=
- =?utf-8?B?aENHcUdvbkFvVUtZWElwbDB4b3dHUHZzSzdYb1BvYXZKZTM5WDZSK09peTRS?=
- =?utf-8?B?STNNQlUxZmhpZXlsamFmWVI3ck1rcFJGM3V4VzBhbzB4K0hFVEt4aUhTdXVr?=
- =?utf-8?B?NmRxSG5HSFE0Mzc1WVVCUXdUby9NNFZLRDZxVUV6cGYxUWJvRytkUnJyOUdm?=
- =?utf-8?B?TXJ0VEx4WlJvT2VDTUErckZmdXVteXZsVzR2b2ljL3FCZndBNlV2bWhWOTdE?=
- =?utf-8?B?dHB3L3JLUWlialBNQjltMnU2ZzNWS0JsUVVOMi9yRGlKTjRta25iYmVhbmhm?=
- =?utf-8?B?MGNnMlppOWk2azliVVpSeEdaY09ZTGI0REZ3cDlTQlY0czJHblphVWRrWDB2?=
- =?utf-8?B?eWJDTEVvVFFIZTdjVVJVWlNYUnlLWWxDMXZsYWlUa1JHdnZIQXhNREx3Nitt?=
- =?utf-8?B?NTFhNWlEdjUra0NpclBNTGFsblQ2TXZmKzZIOUlNd21nYWNKT3pjNEw3QU1q?=
- =?utf-8?B?Mk5Ecml0RFFyRGFnenRBNmFpTGUxZXY3d2JEOGw4blA2a0cwY1hENENYV1o2?=
- =?utf-8?B?Ty91QXEyNUovVzZFTHhWYXB2T2JwOWJpc3pLdVQwL1VsRnF1U1k0cm5CNlkv?=
- =?utf-8?B?a21BZEo3dmRHdk5ZR1NJdEpIS1ZicVF5MUtyMlFmR0lyRC9wblpPYWxDNXJl?=
- =?utf-8?B?MHYrUUdMR2JoS2NKVHpQOERkVTYxakxha0pmc3ovU3pFbEx5eVpHcGpCbm1i?=
- =?utf-8?B?aisxbTJZdlh4UGg5bTcyb0ZFMXJqd0VweGwvakJXRU9pRnI1QUo2K0VSVG5r?=
- =?utf-8?B?RElZdU1VcmtvNTV3U1Z4K290N1RCc3RzZ0huSXAyS1BsY2tKWlRYOTNYUnBE?=
- =?utf-8?B?ZGVJb25qbVplOGNwZEdwNlpjWUpVb0xrdmdMSER3L0w4UjhVTTE4ZVBCdVQ5?=
- =?utf-8?B?K0JTN016Y29aVFhTRTZBZUV1aXZOQkx3Tmw4eTNrcmNBMFBYalRSOFZmUVlP?=
- =?utf-8?B?anpnQXZpRWlSbjBKK3o1cW11VmhQdXp3aUEwR3NrNHBDVTVuL0NMb2NteUNl?=
- =?utf-8?B?MHpFRnF5NFpRSFB2b1l4aUtlUVVka3p5RnJIWDdOeTN3ZkdpYzBaNU44bkta?=
- =?utf-8?B?c084OW5reGJ5QUwrWmh5QUZwV2NBQThKakl2VXBQYkJ0VVNZRzgwMXJRU1hF?=
- =?utf-8?B?bktPdkZhM2MwV3NWekI5TXlYS3FEcU4zSjNSbHpvdTdiL2ZTL01RbUw1UjJ4?=
- =?utf-8?B?ZE9ENER0Q1krK0ZURWJKY3hFb3lraWFUZkpEem83RjVxK0lPYkNlejJ5N1dK?=
- =?utf-8?B?dlZXTXhlVUo5aHZDMklLenJYL2ZNdTJSS3NOSmQ3MGNZQzdPQTFCL3dmRmto?=
- =?utf-8?Q?j3+nEIdjLfsYO/lacLXYNDOt7?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <95DB8142F746AF45BF963FF6D1CF8F6F@namprd12.prod.outlook.com>
-Content-Transfer-Encoding: base64
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 81EC31124D1
+ for <nouveau@lists.freedesktop.org>; Fri, 26 Apr 2024 15:42:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1714146122;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=7VnGZicWFW/d+/1fPpNzYRf/LnrOSTnWU9XlyME7agc=;
+ b=WaEvhNNXIeadYP0/GSmQIL28ydeqMTk0EjsJ9JIcPZwjX+7J0RRYO3Ld4QypAA7xn+BwYC
+ 5sILRhMKVlZMp2PdiL6ZwnDOgQieyJFq9I+16aO/3HzJWgrS3q1xC9TcmAuzxUd3n+KKpB
+ YtXoqIL9kWnuWU78QUqHJ/MqhHH/tDY=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-269-dZOs051oNW2hkGqkS1G_6g-1; Fri, 26 Apr 2024 11:41:59 -0400
+X-MC-Unique: dZOs051oNW2hkGqkS1G_6g-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 54EF318065AA;
+ Fri, 26 Apr 2024 15:41:59 +0000 (UTC)
+Received: from chopper.lyude.net (unknown [10.22.8.17])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 138C651BF;
+ Fri, 26 Apr 2024 15:41:58 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: nouveau@lists.freedesktop.org
+Cc: dri-devel@lists.freedesktop.org, Karol Herbst <kherbst@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Justin Stitt <justinstitt@google.com>,
+ Kees Cook <keescook@chromium.org>, linux-kernel@vger.kernel.org (open list)
+Subject: [PATCH 1/2] drm/nouveau/firmware: Fix SG_DEBUG error with
+ nvkm_firmware_ctor()
+Date: Fri, 26 Apr 2024 11:41:28 -0400
+Message-ID: <20240426154138.64643-1-lyude@redhat.com>
 MIME-Version: 1.0
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8769.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7f601481-a4d6-4a40-9b56-08dc65461da6
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Apr 2024 16:38:19.9181 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 8MHG28bezhzKwsFSKk4BQJ4317Yzy72Ff46poju3Nbw1yuq+kxwO6i9Oh2QfQEtxRxrH+pJih/ISEP5xRFgPpA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB8202
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.5
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -165,19 +68,149 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVGh1LCAyMDI0LTA0LTI1IGF0IDE1OjIyICswMjAwLCBEYW5pbG8gS3J1bW1yaWNoIHdyb3Rl
-Og0KPiA+ICsJCXNpemVfdCBsZW5ndGg7DQo+ID4gKw0KPiA+ICsJCS8qIFJlbW92ZSBhbnkgd2hp
-dGVzcGFjZSBmcm9tIHRoZSBwYXJhbWV0ZXIgc3RyaW5nICovDQo+ID4gKwkJbGVuZ3RoID0gc3Ry
-aXAocCwgIiBcdFxuIik7DQo+IA0KPiBXaXRoIHRoYXQsIEkgc2VlIHRoZSBmb2xsb3dpbmcgd2Fy
-bmluZyBjb21waWxpbmcgdGhpcyBwYXRjaC4NCj4gDQo+IHdhcm5pbmc6IHZhcmlhYmxlIOKAmGxl
-bmd0aOKAmSBzZXQgYnV0IG5vdCB1c2VkIFstV3VudXNlZC1idXQtc2V0LXZhcmlhYmxlXQ0KPiAN
-Cj4gRGlkIHlvdSBpbnRlbmQgdG8gdXNlIHRoZSBsZW5ndGggZm9yIGFueXRoaW5nPw0KDQpObywg
-YW5kIEkgY291bGQgaGF2ZSBzd29ybiBJIGZpeGVkIHRoYXQgYmVmb3JlIHNlbmRpbmcgb3V0IHY3
-LiAgSSB0aGluayBJDQpvcmlnaW5hbGx5IGludGVuZGVkICdsZW5ndGgnIHRvIGRldGVybWluZSB3
-aGVuIEkgZmluaXNoZWQgcGFyc2luZyB0aGUNCnN0cmluZy4NCg0KPiBBbHNvLCBsb29raW5nIGF0
-IHRoZSB3YXJuaW5nIG1hZGUgbWUgYXdhcmUgb2YgJ3AnIHBvdGVudGlhbGx5IGJlaW5nIE5VTEwu
-DQo+IA0KPiBJZiB5b3UgYWdyZWUsIEkgY2FuIGZpeCB0aGUgd2FybmluZyBhbmQgYWRkIHRoZSBj
-b3JyZXNwb25kaW5nIE5VTEwgY2hlY2sNCj4gd2hlbg0KPiBhcHBseWluZyB0aGUgcGF0Y2guDQoN
-ClllcywgdGhhdCB3b3VsZCBiZSBncmVhdC4gIFlvdSBjYW4ganVzdCBkZWxldGUgJ2xlbmd0aCcu
-ICBUaGUgTlVMTCBjaGVjayBmb3INCidwJyBzaG91bGQgY2FsbCBjbGVhbl9yZWdpc3RyeSgpIGJl
-Zm9yZSByZXR1cm5pbmcgLUVOT01FTS4NCg0KVGhhbmtzIGZvciBjYXRjaGluZyB0aGlzLg0K
+Currently, enabling SG_DEBUG in the kernel will cause nouveau to hit a
+BUG() on startup:
+
+  kernel BUG at include/linux/scatterlist.h:187!
+  invalid opcode: 0000 [#1] PREEMPT SMP NOPTI
+  CPU: 7 PID: 930 Comm: (udev-worker) Not tainted 6.9.0-rc3Lyude-Test+ #30
+  Hardware name: MSI MS-7A39/A320M GAMING PRO (MS-7A39), BIOS 1.I0 01/22/2019
+  RIP: 0010:sg_init_one+0x85/0xa0
+  Code: 69 88 32 01 83 e1 03 f6 c3 03 75 20 a8 01 75 1e 48 09 cb 41 89 54
+  24 08 49 89 1c 24 41 89 6c 24 0c 5b 5d 41 5c e9 7b b9 88 00 <0f> 0b 0f 0b
+  0f 0b 48 8b 05 5e 46 9a 01 eb b2 66 66 2e 0f 1f 84 00
+  RSP: 0018:ffffa776017bf6a0 EFLAGS: 00010246
+  RAX: 0000000000000000 RBX: ffffa77600d87000 RCX: 000000000000002b
+  RDX: 0000000000000001 RSI: 0000000000000000 RDI: ffffa77680d87000
+  RBP: 000000000000e000 R08: 0000000000000000 R09: 0000000000000000
+  R10: ffff98f4c46aa508 R11: 0000000000000000 R12: ffff98f4c46aa508
+  R13: ffff98f4c46aa008 R14: ffffa77600d4a000 R15: ffffa77600d4a018
+  FS:  00007feeb5aae980(0000) GS:ffff98f5c4dc0000(0000) knlGS:0000000000000000
+  CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+  CR2: 00007f22cb9a4520 CR3: 00000001043ba000 CR4: 00000000003506f0
+  Call Trace:
+   <TASK>
+   ? die+0x36/0x90
+   ? do_trap+0xdd/0x100
+   ? sg_init_one+0x85/0xa0
+   ? do_error_trap+0x65/0x80
+   ? sg_init_one+0x85/0xa0
+   ? exc_invalid_op+0x50/0x70
+   ? sg_init_one+0x85/0xa0
+   ? asm_exc_invalid_op+0x1a/0x20
+   ? sg_init_one+0x85/0xa0
+   nvkm_firmware_ctor+0x14a/0x250 [nouveau]
+   nvkm_falcon_fw_ctor+0x42/0x70 [nouveau]
+   ga102_gsp_booter_ctor+0xb4/0x1a0 [nouveau]
+   r535_gsp_oneinit+0xb3/0x15f0 [nouveau]
+   ? srso_return_thunk+0x5/0x5f
+   ? srso_return_thunk+0x5/0x5f
+   ? nvkm_udevice_new+0x95/0x140 [nouveau]
+   ? srso_return_thunk+0x5/0x5f
+   ? srso_return_thunk+0x5/0x5f
+   ? ktime_get+0x47/0xb0
+   ? srso_return_thunk+0x5/0x5f
+   nvkm_subdev_oneinit_+0x4f/0x120 [nouveau]
+   nvkm_subdev_init_+0x39/0x140 [nouveau]
+   ? srso_return_thunk+0x5/0x5f
+   nvkm_subdev_init+0x44/0x90 [nouveau]
+   nvkm_device_init+0x166/0x2e0 [nouveau]
+   nvkm_udevice_init+0x47/0x70 [nouveau]
+   nvkm_object_init+0x41/0x1c0 [nouveau]
+   nvkm_ioctl_new+0x16a/0x290 [nouveau]
+   ? __pfx_nvkm_client_child_new+0x10/0x10 [nouveau]
+   ? __pfx_nvkm_udevice_new+0x10/0x10 [nouveau]
+   nvkm_ioctl+0x126/0x290 [nouveau]
+   nvif_object_ctor+0x112/0x190 [nouveau]
+   nvif_device_ctor+0x23/0x60 [nouveau]
+   nouveau_cli_init+0x164/0x640 [nouveau]
+   nouveau_drm_device_init+0x97/0x9e0 [nouveau]
+   ? srso_return_thunk+0x5/0x5f
+   ? pci_update_current_state+0x72/0xb0
+   ? srso_return_thunk+0x5/0x5f
+   nouveau_drm_probe+0x12c/0x280 [nouveau]
+   ? srso_return_thunk+0x5/0x5f
+   local_pci_probe+0x45/0xa0
+   pci_device_probe+0xc7/0x270
+   really_probe+0xe6/0x3a0
+   __driver_probe_device+0x87/0x160
+   driver_probe_device+0x1f/0xc0
+   __driver_attach+0xec/0x1f0
+   ? __pfx___driver_attach+0x10/0x10
+   bus_for_each_dev+0x88/0xd0
+   bus_add_driver+0x116/0x220
+   driver_register+0x59/0x100
+   ? __pfx_nouveau_drm_init+0x10/0x10 [nouveau]
+   do_one_initcall+0x5b/0x320
+   do_init_module+0x60/0x250
+   init_module_from_file+0x86/0xc0
+   idempotent_init_module+0x120/0x2b0
+   __x64_sys_finit_module+0x5e/0xb0
+   do_syscall_64+0x83/0x160
+   ? srso_return_thunk+0x5/0x5f
+   entry_SYSCALL_64_after_hwframe+0x71/0x79
+  RIP: 0033:0x7feeb5cc20cd
+  Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89
+  f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0
+  ff ff 73 01 c3 48 8b 0d 1b cd 0c 00 f7 d8 64 89 01 48
+  RSP: 002b:00007ffcf220b2c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
+  RAX: ffffffffffffffda RBX: 000055fdd2916aa0 RCX: 00007feeb5cc20cd
+  RDX: 0000000000000000 RSI: 000055fdd29161e0 RDI: 0000000000000035
+  RBP: 00007ffcf220b380 R08: 00007feeb5d8fb20 R09: 00007ffcf220b310
+  R10: 000055fdd2909dc0 R11: 0000000000000246 R12: 000055fdd29161e0
+  R13: 0000000000020000 R14: 000055fdd29203e0 R15: 000055fdd2909d80
+   </TASK>
+
+We hit this because when initializing firmware of type
+NVKM_FIRMWARE_IMG_DMA we allocate coherent memory and then attempt to
+include that coherent memory in a scatterlist. What we actually mean to do
+here though is to pass a CPU-allocated memory address, since that's the
+only thing that would make sense to put in the scatterlist.
+
+Signed-off-by: Lyude Paul <lyude@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/core/firmware.c | 19 ++++++++++++-------
+ 1 file changed, 12 insertions(+), 7 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/core/firmware.c b/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
+index adc60b25f8e6c..141b0a513bf52 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
++++ b/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
+@@ -205,7 +205,9 @@ nvkm_firmware_dtor(struct nvkm_firmware *fw)
+ 		break;
+ 	case NVKM_FIRMWARE_IMG_DMA:
+ 		nvkm_memory_unref(&memory);
+-		dma_free_coherent(fw->device->dev, sg_dma_len(&fw->mem.sgl), fw->img, fw->phys);
++		dma_unmap_single(fw->device->dev, fw->phys, sg_dma_len(&fw->mem.sgl),
++				 DMA_TO_DEVICE);
++		kfree(fw->img);
+ 		break;
+ 	case NVKM_FIRMWARE_IMG_SGT:
+ 		nvkm_memory_unref(&memory);
+@@ -235,14 +237,17 @@ nvkm_firmware_ctor(const struct nvkm_firmware_func *func, const char *name,
+ 		fw->img = kmemdup(src, fw->len, GFP_KERNEL);
+ 		break;
+ 	case NVKM_FIRMWARE_IMG_DMA: {
+-		dma_addr_t addr;
+-
+ 		len = ALIGN(fw->len, PAGE_SIZE);
+ 
+-		fw->img = dma_alloc_coherent(fw->device->dev, len, &addr, GFP_KERNEL);
+-		if (fw->img) {
+-			memcpy(fw->img, src, fw->len);
+-			fw->phys = addr;
++		fw->img = kmalloc(len, GFP_KERNEL);
++		if (!fw->img)
++			return -ENOMEM;
++
++		memcpy(fw->img, src, fw->len);
++		fw->phys = dma_map_single(fw->device->dev, fw->img, len, DMA_TO_DEVICE);
++		if (dma_mapping_error(fw->device->dev, fw->phys)) {
++			kfree(fw->img);
++			return -EFAULT;
+ 		}
+ 
+ 		sg_init_one(&fw->mem.sgl, fw->img, len);
+-- 
+2.44.0
+
