@@ -2,87 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 010F98B60B2
-	for <lists+nouveau@lfdr.de>; Mon, 29 Apr 2024 19:54:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C7B48B6108
+	for <lists+nouveau@lfdr.de>; Mon, 29 Apr 2024 20:23:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 81BB910EB98;
-	Mon, 29 Apr 2024 17:54:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E4C1110E8F9;
+	Mon, 29 Apr 2024 18:23:39 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="gyglX9dJ";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Nangxenf";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 18E0A10F027
- for <nouveau@lists.freedesktop.org>; Mon, 29 Apr 2024 17:54:30 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F1EAF10E8F9
+ for <nouveau@lists.freedesktop.org>; Mon, 29 Apr 2024 18:23:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1714413269;
+ s=mimecast20190719; t=1714415017;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ype1v6kiFfmsjABNIIcOV532jtXMQZ0jQQvVfGIFAzE=;
- b=gyglX9dJkzcK6zMo83l4PB4hWjI0oPyLy3UdsDgemywczWPn0/TuOBCbRdfCOOcLqIzTic
- LrbKOnS9MVfcY+N+wYVxrgY31NRCoIJcmp3iTWXDrXueFGPHqSeARXOob6QWvfk58hzsJw
- +Kk3fGHU4zqkLGXjXjVyQPZWTiNJKGo=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=eTG0DWcIKhOPZB10b2MCjJIKwbv6KWLnkqIzMUFMrUA=;
+ b=NangxenfVhkCThnMWKBri8xm+RTUVbgypIMEKIK+nS+0se3Z61Fc+8J+g2Pb8GvGuomJoC
+ B4Qd16OTjEHxgBc5nMxY9OtAbqs1QCqE81thjaPuc6ck/f/fFrWw7fYgIsX1LSnkEwPe7/
+ vm/BQEmrLJftL/UlM1Z2jC49g6L8c4s=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-34-unWOx3RZNsiC-0yaqhur8A-1; Mon, 29 Apr 2024 13:54:28 -0400
-X-MC-Unique: unWOx3RZNsiC-0yaqhur8A-1
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-790f55f69a7so177409285a.0
- for <nouveau@lists.freedesktop.org>; Mon, 29 Apr 2024 10:54:28 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714413268; x=1715018068;
- h=mime-version:user-agent:content-transfer-encoding:organization
- :references:in-reply-to:date:cc:to:from:subject:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ype1v6kiFfmsjABNIIcOV532jtXMQZ0jQQvVfGIFAzE=;
- b=bWi4FnOX+wiDcxfCEUFc4CQnfYNLT/o1yHmb7ipBhP2QDHC8aPGtkI/6oe6B0YszSz
- 0MWeK6f3frjq8dGUrDpZ3ms8lHUVN978u/MfaQn/axmHxhH3pvUeWG762N50o6fnrkzg
- GqGUtuYxuaUV2VKAZMuV80ri9sylg7KYbNxlPfgxC3HevQKn1JB4IGjcNKpGjaJ7R2ut
- fUff8wF4pcgDsALMergpQtUukyQssSuDe+iJpnTEMF+1An2fN5KID6ZEyp40wVEfgHG2
- HgfvSOv0Y2oY7bJP/B0Sn5gzQwiFvHz2mRwu8JEmG3Ca7VOOjpuZ+mhORHFqw2Pve95J
- aWBQ==
-X-Gm-Message-State: AOJu0YzdT/Q3hlWyB0xLNqmrX0djKYlUL1iPhQHP93+wzBRICTDW37E9
- 21gQ/POdLvFCYoT9UP7kXhHt3K8HUGgmf9G7xfQBRnivtjQmurxQZZkVCBhjGpeHrsBAoBnesnZ
- JMcEBs1Kv6U1EHF30HQXeq5EALNmQuZRbDPmCe4g43EK8iiZot8pjgBgU7SPuhks=
-X-Received: by 2002:a05:620a:4045:b0:790:c01a:2c20 with SMTP id
- i5-20020a05620a404500b00790c01a2c20mr288989qko.74.1714413267791; 
- Mon, 29 Apr 2024 10:54:27 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH4ju2zz7vG7FCZK0OPUJOhir1BIvHKqGWTvYWM2+TupK/mAQcQx7+iEqSQG0BoImvyK7vcNA==
-X-Received: by 2002:a05:620a:4045:b0:790:c01a:2c20 with SMTP id
- i5-20020a05620a404500b00790c01a2c20mr288962qko.74.1714413267417; 
- Mon, 29 Apr 2024 10:54:27 -0700 (PDT)
-Received: from chopper.lyude.net ([2600:4040:5c6c:a300::789])
- by smtp.gmail.com with ESMTPSA id
- h6-20020a05620a13e600b0078f044ff474sm10696246qkl.35.2024.04.29.10.54.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Apr 2024 10:54:26 -0700 (PDT)
-Message-ID: <ba3e7914e816f893bdba9aebe045f9af04ed85a6.camel@redhat.com>
-Subject: Re: [PATCH 2/2] drm/nouveau/gsp: Use the sg allocator for level 2
- of radix3
+ us-mta-483-dg13UQiVOfWHyy_-JCIpBg-1; Mon, 29 Apr 2024 14:23:31 -0400
+X-MC-Unique: dg13UQiVOfWHyy_-JCIpBg-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id EDE508EE067;
+ Mon, 29 Apr 2024 18:23:30 +0000 (UTC)
+Received: from chopper.lyude.net (unknown [10.22.9.159])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id C913E1121312;
+ Mon, 29 Apr 2024 18:23:29 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
-To: Dave Airlie <airlied@gmail.com>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org, Karol
- Herbst <kherbst@redhat.com>, Danilo Krummrich <dakr@redhat.com>, Daniel
- Vetter <daniel@ffwll.ch>,  Dave Airlie <airlied@redhat.com>, Ben Skeggs
- <bskeggs@redhat.com>, Timur Tabi <ttabi@nvidia.com>, Dan Carpenter
- <dan.carpenter@linaro.org>, open list <linux-kernel@vger.kernel.org>
-Date: Mon, 29 Apr 2024 13:54:25 -0400
-In-Reply-To: <CAPM=9txB5Zhyyno-GLD_JShV-GZd8hgYVh=Ok=Skmzs=eTi64A@mail.gmail.com>
+To: nouveau@lists.freedesktop.org
+Cc: dri-devel@lists.freedesktop.org, Karol Herbst <kherbst@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Justin Stitt <justinstitt@google.com>,
+ Dave Airlie <airlied@redhat.com>, Kees Cook <keescook@chromium.org>,
+ Ben Skeggs <bskeggs@redhat.com>, linux-kernel@vger.kernel.org (open list)
+Subject: [PATCH v2 1/2] drm/nouveau/firmware: Fix SG_DEBUG error with
+ nvkm_firmware_ctor()
+Date: Mon, 29 Apr 2024 14:23:08 -0400
+Message-ID: <20240429182318.189668-1-lyude@redhat.com>
+In-Reply-To: <20240426154138.64643-1-lyude@redhat.com>
 References: <20240426154138.64643-1-lyude@redhat.com>
- <20240426154138.64643-2-lyude@redhat.com>
- <CAPM=9txB5Zhyyno-GLD_JShV-GZd8hgYVh=Ok=Skmzs=eTi64A@mail.gmail.com>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.52.1 (3.52.1-1.fc40)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.3
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -97,89 +71,153 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, 2024-04-29 at 16:03 +1000, Dave Airlie wrote:
-> > Currently, this can result in runtime PM issues on systems where
-> > memory
-> > Luckily, we don't actually need to allocate coherent memory for the
-> > page
-> > table thanks to being able to pass the GPU a radix3 page table for
-> > suspend/resume data. So, let's rewrite nvkm_gsp_radix3_sg() to use
-> > the sg
-> > allocator for level 2. We continue using coherent allocations for
-> > lvl0 and
-> > 1, since they only take a single page.
-> >=20
-> > Signed-off-by: Lyude Paul <lyude@redhat.com>
-> > Cc: stable@vger.kernel.org
-> > ---
-> > =C2=A0.../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |=C2=A0 4 +-
-> > =C2=A0.../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c=C2=A0=C2=A0=C2=A0 | 71=
- ++++++++++++---
-> > ----
-> > =C2=A02 files changed, 47 insertions(+), 28 deletions(-)
-> >=20
-> > diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> > b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> > index 6f5d376d8fcc1..a11d16a16c3b2 100644
-> > --- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> > +++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-> > @@ -15,7 +15,9 @@ struct nvkm_gsp_mem {
-> > =C2=A0};
-> >=20
-> > =C2=A0struct nvkm_gsp_radix3 {
-> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct nvkm_gsp_mem mem[3];
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct nvkm_gsp_mem lvl0;
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct nvkm_gsp_mem lvl1;
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct sg_table lvl2;
->=20
-> This looks great, could we go a step further and combine lvl0 and
-> lvl1
-> into a 2 page allocation, I thought we could combine lvl0/lvl1 into a
-> 2 page alloc, but that actually might be a bad idea under memory
-> pressure.
+Currently, enabling SG_DEBUG in the kernel will cause nouveau to hit a
+BUG() on startup:
 
-I'm not sure I understand :P, do we want to go for that or not? TBH -
-I'm not sure there's any hardware reason we wouldn't be able to do the
-whole radix3 table as an sg allocation with two additional memory pages
-added on for level 0 and 1 - since both of those can only be the size
-of a single page anyway it probably doesn't make much of a difference.
+  kernel BUG at include/linux/scatterlist.h:187!
+  invalid opcode: 0000 [#1] PREEMPT SMP NOPTI
+  CPU: 7 PID: 930 Comm: (udev-worker) Not tainted 6.9.0-rc3Lyude-Test+ #30
+  Hardware name: MSI MS-7A39/A320M GAMING PRO (MS-7A39), BIOS 1.I0 01/22/2019
+  RIP: 0010:sg_init_one+0x85/0xa0
+  Code: 69 88 32 01 83 e1 03 f6 c3 03 75 20 a8 01 75 1e 48 09 cb 41 89 54
+  24 08 49 89 1c 24 41 89 6c 24 0c 5b 5d 41 5c e9 7b b9 88 00 <0f> 0b 0f 0b
+  0f 0b 48 8b 05 5e 46 9a 01 eb b2 66 66 2e 0f 1f 84 00
+  RSP: 0018:ffffa776017bf6a0 EFLAGS: 00010246
+  RAX: 0000000000000000 RBX: ffffa77600d87000 RCX: 000000000000002b
+  RDX: 0000000000000001 RSI: 0000000000000000 RDI: ffffa77680d87000
+  RBP: 000000000000e000 R08: 0000000000000000 R09: 0000000000000000
+  R10: ffff98f4c46aa508 R11: 0000000000000000 R12: ffff98f4c46aa508
+  R13: ffff98f4c46aa008 R14: ffffa77600d4a000 R15: ffffa77600d4a018
+  FS:  00007feeb5aae980(0000) GS:ffff98f5c4dc0000(0000) knlGS:0000000000000000
+  CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+  CR2: 00007f22cb9a4520 CR3: 00000001043ba000 CR4: 00000000003506f0
+  Call Trace:
+   <TASK>
+   ? die+0x36/0x90
+   ? do_trap+0xdd/0x100
+   ? sg_init_one+0x85/0xa0
+   ? do_error_trap+0x65/0x80
+   ? sg_init_one+0x85/0xa0
+   ? exc_invalid_op+0x50/0x70
+   ? sg_init_one+0x85/0xa0
+   ? asm_exc_invalid_op+0x1a/0x20
+   ? sg_init_one+0x85/0xa0
+   nvkm_firmware_ctor+0x14a/0x250 [nouveau]
+   nvkm_falcon_fw_ctor+0x42/0x70 [nouveau]
+   ga102_gsp_booter_ctor+0xb4/0x1a0 [nouveau]
+   r535_gsp_oneinit+0xb3/0x15f0 [nouveau]
+   ? srso_return_thunk+0x5/0x5f
+   ? srso_return_thunk+0x5/0x5f
+   ? nvkm_udevice_new+0x95/0x140 [nouveau]
+   ? srso_return_thunk+0x5/0x5f
+   ? srso_return_thunk+0x5/0x5f
+   ? ktime_get+0x47/0xb0
+   ? srso_return_thunk+0x5/0x5f
+   nvkm_subdev_oneinit_+0x4f/0x120 [nouveau]
+   nvkm_subdev_init_+0x39/0x140 [nouveau]
+   ? srso_return_thunk+0x5/0x5f
+   nvkm_subdev_init+0x44/0x90 [nouveau]
+   nvkm_device_init+0x166/0x2e0 [nouveau]
+   nvkm_udevice_init+0x47/0x70 [nouveau]
+   nvkm_object_init+0x41/0x1c0 [nouveau]
+   nvkm_ioctl_new+0x16a/0x290 [nouveau]
+   ? __pfx_nvkm_client_child_new+0x10/0x10 [nouveau]
+   ? __pfx_nvkm_udevice_new+0x10/0x10 [nouveau]
+   nvkm_ioctl+0x126/0x290 [nouveau]
+   nvif_object_ctor+0x112/0x190 [nouveau]
+   nvif_device_ctor+0x23/0x60 [nouveau]
+   nouveau_cli_init+0x164/0x640 [nouveau]
+   nouveau_drm_device_init+0x97/0x9e0 [nouveau]
+   ? srso_return_thunk+0x5/0x5f
+   ? pci_update_current_state+0x72/0xb0
+   ? srso_return_thunk+0x5/0x5f
+   nouveau_drm_probe+0x12c/0x280 [nouveau]
+   ? srso_return_thunk+0x5/0x5f
+   local_pci_probe+0x45/0xa0
+   pci_device_probe+0xc7/0x270
+   really_probe+0xe6/0x3a0
+   __driver_probe_device+0x87/0x160
+   driver_probe_device+0x1f/0xc0
+   __driver_attach+0xec/0x1f0
+   ? __pfx___driver_attach+0x10/0x10
+   bus_for_each_dev+0x88/0xd0
+   bus_add_driver+0x116/0x220
+   driver_register+0x59/0x100
+   ? __pfx_nouveau_drm_init+0x10/0x10 [nouveau]
+   do_one_initcall+0x5b/0x320
+   do_init_module+0x60/0x250
+   init_module_from_file+0x86/0xc0
+   idempotent_init_module+0x120/0x2b0
+   __x64_sys_finit_module+0x5e/0xb0
+   do_syscall_64+0x83/0x160
+   ? srso_return_thunk+0x5/0x5f
+   entry_SYSCALL_64_after_hwframe+0x71/0x79
+  RIP: 0033:0x7feeb5cc20cd
+  Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89
+  f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0
+  ff ff 73 01 c3 48 8b 0d 1b cd 0c 00 f7 d8 64 89 01 48
+  RSP: 002b:00007ffcf220b2c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
+  RAX: ffffffffffffffda RBX: 000055fdd2916aa0 RCX: 00007feeb5cc20cd
+  RDX: 0000000000000000 RSI: 000055fdd29161e0 RDI: 0000000000000035
+  RBP: 00007ffcf220b380 R08: 00007feeb5d8fb20 R09: 00007ffcf220b310
+  R10: 000055fdd2909dc0 R11: 0000000000000246 R12: 000055fdd29161e0
+  R13: 0000000000020000 R14: 000055fdd29203e0 R15: 000055fdd2909d80
+   </TASK>
 
-The main reason I didn't end up doing that though is because it would
-make the codepath in nvkm_radix3_sg() a lot uglier.=C2=A0We need the virtua=
-l
-addresses of level 0-2's first/only pages to populate them, and we also
-need the DMA addresses of level 1-2. There isn't an iterator that lets
-you go through both DMA/virtual addresses as far as I can tell - and
-even if there was we'd start having to keep track of when we reach the
-end of a page in the loop and make sure that we always set pte to the
-address of the third sg page on the first iteration of the loop. IMO,
-scatterlist could definitely benefit from having an iterator that does
-both and can be stepped through both in and out of for loop macros
-(like Iterator in rust).
+We hit this when trying to initialize firmware of type
+NVKM_FIRMWARE_IMG_DMA because we allocate our memory with
+dma_alloc_coherent, and DMA allocations can't be turned back into memory
+pages - which a scatterlist needs in order to map them.
 
-So - it's definitely possible, but considering:
+So, fix this by allocating the memory with vmalloc instead().
 
- * nvkm_gsp_mem isn't a very big struct
- * We're only allocating a single page for level 0 and 1, so at least
-   according to the advice I got from Sima this should be a safe amount
-   to allocate coherently under memory pressure.
- * It's just a lot easier code-wise having direct address to the
-   DMA/virt addresses for the first two levels
+V2:
+* Fixup explanation as the prior one was bogus
 
-I decided to stay with nvkm_gsp_mem_ctor() for the first two pages and
-just use nvkm_gsp_sg() for the rest. I can definitely convert the whole
-thing to using nvkm_gsp_sg() if we really want though - but I don't
-think it'll give us much benefit.
+Signed-off-by: Lyude Paul <lyude@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/core/firmware.c | 19 ++++++++++++-------
+ 1 file changed, 12 insertions(+), 7 deletions(-)
 
-I'll send out the new version of the patch without these changes and a
-fix for one of the issues with this patch I already mentioned to Timur,
-just let me know what you end up deciding and I can revise the patch if
-you want.
-
->=20
-> Dave.
->=20
-
---=20
-Cheers, Lyude Paul (she/her) Software Engineer at Red Hat
+diff --git a/drivers/gpu/drm/nouveau/nvkm/core/firmware.c b/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
+index adc60b25f8e6c..141b0a513bf52 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
++++ b/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
+@@ -205,7 +205,9 @@ nvkm_firmware_dtor(struct nvkm_firmware *fw)
+ 		break;
+ 	case NVKM_FIRMWARE_IMG_DMA:
+ 		nvkm_memory_unref(&memory);
+-		dma_free_coherent(fw->device->dev, sg_dma_len(&fw->mem.sgl), fw->img, fw->phys);
++		dma_unmap_single(fw->device->dev, fw->phys, sg_dma_len(&fw->mem.sgl),
++				 DMA_TO_DEVICE);
++		kfree(fw->img);
+ 		break;
+ 	case NVKM_FIRMWARE_IMG_SGT:
+ 		nvkm_memory_unref(&memory);
+@@ -235,14 +237,17 @@ nvkm_firmware_ctor(const struct nvkm_firmware_func *func, const char *name,
+ 		fw->img = kmemdup(src, fw->len, GFP_KERNEL);
+ 		break;
+ 	case NVKM_FIRMWARE_IMG_DMA: {
+-		dma_addr_t addr;
+-
+ 		len = ALIGN(fw->len, PAGE_SIZE);
+ 
+-		fw->img = dma_alloc_coherent(fw->device->dev, len, &addr, GFP_KERNEL);
+-		if (fw->img) {
+-			memcpy(fw->img, src, fw->len);
+-			fw->phys = addr;
++		fw->img = kmalloc(len, GFP_KERNEL);
++		if (!fw->img)
++			return -ENOMEM;
++
++		memcpy(fw->img, src, fw->len);
++		fw->phys = dma_map_single(fw->device->dev, fw->img, len, DMA_TO_DEVICE);
++		if (dma_mapping_error(fw->device->dev, fw->phys)) {
++			kfree(fw->img);
++			return -EFAULT;
+ 		}
+ 
+ 		sg_init_one(&fw->mem.sgl, fw->img, len);
+-- 
+2.44.0
 
