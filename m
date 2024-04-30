@@ -2,69 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D31BCBA93F
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64DD6CBA8FD
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:17:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6D8F810E750;
-	Sat, 13 Dec 2025 12:40:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 274EB10E426;
+	Sat, 13 Dec 2025 12:17:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=linaro.org header.i=@linaro.org header.b="YUuixz4O";
+	dkim=permerror (0-bit key) header.d=intel.com header.i=@intel.com header.b="azQe1gde";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oo1-f48.google.com (mail-oo1-f48.google.com
- [209.85.161.48])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 22D68112CF6
- for <nouveau@lists.freedesktop.org>; Mon, 29 Apr 2024 15:07:06 +0000 (UTC)
-Received: by mail-oo1-f48.google.com with SMTP id
- 006d021491bc7-5af3cda139fso2240078eaf.1
- for <nouveau@lists.freedesktop.org>; Mon, 29 Apr 2024 08:07:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714403225; x=1715008025; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Kq/mDhjDx0haJOXMYO5ieP1vWAdfCIwGNjDIS1vV1ns=;
- b=YUuixz4O9dM7zFbPsY47P84rtLzbQdMERf7L5VIwsYAnhTfSNMpkF+bHJC+XVsE+xG
- P8vwqFf0Pxz1b47vOuPSeCcp9nTx05UpPCWWjR8HBfVx2fwHKR/6ZW15L6uc0u29OxJV
- zDi4u0NfxL40MgE6KZRsg72070YmHH3iMEkyDCZuz50TpypTzYh7dw3vFuwG80/iVkEU
- wudAI3qIP+yNjuKIzDtmL+PyzbNHS/SdE9xWqWYMB900QQ+H+UDsc9+5xjBYcYwjZrSa
- Zm7t2qIhGFEm30PEfksS2dw91HH66HZ2KC8UHn/HsP3iqcOxo4ztUW7w4y8jcj8s0M2U
- c3PA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714403225; x=1715008025;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Kq/mDhjDx0haJOXMYO5ieP1vWAdfCIwGNjDIS1vV1ns=;
- b=GmvglvgAr8e7TfGFwc8xQi3Oa4RbSsLhQ0zheeFdT6Xu8+Ux8KON2DHFo95kVkM5wM
- Z+kTXWcZA99+ZpvCRWnbnCDxlCw3ka1xB0F4r549OnV6c3Oy5+NFiIgIt/MEuoJE/fkb
- 2rz4F7wJDkiFEyzC1ybel9qn4FW0s8EjA+WG9W7ubIsY1j4QFJJS2In2gImWghCV8A7F
- FEM/i7XeFFsVnWqQEZIpvVnE83yO1guUJJ6M9n05O36HC6oR61ZHIzf9MSDirFrNMZFw
- GXr+GxOroiXapVXcjVV+WHZVQG/5bLP5SXZnYo/cd6lAyTSuyPaudtr2uPi9fwCk7GPX
- mPxQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVCKOqIPcLj3wDTk43Z95RDZqPa8A65RxLWxnYUNsrkwD6AkFG0uPzBrkZmwfXLdnHmuicD9mv82puO3lZkt4r7MfJqx1bxPRvjm4ehOQ==
-X-Gm-Message-State: AOJu0YyCr39NA9slbMB1tHqX+iyHvoyToSVV0lbf1Eruz+zQH3vLq34p
- jze5qUQIvDtoETVef92/jeEtEQbE86yH00HD8ezAcMkoB5FWuQtpGicuyT4LtqdM6JWeSeNYteF
- FEiD1P/VktVvg3WPK6GiWuBY/XQCa6FLX0okS8A==
-X-Google-Smtp-Source: AGHT+IGi7klXrfkLGYDk0bH46vsiOhdwy/HLQn/JmrZKyHF7xJC4yozyKeAYx8uVrhCWOCacbYNZwg87iwhAtb2HZSs=
-X-Received: by 2002:a05:6358:5d91:b0:186:3fcb:8da9 with SMTP id
- s17-20020a0563585d9100b001863fcb8da9mr11016997rwm.21.1714403224770; Mon, 29
- Apr 2024 08:07:04 -0700 (PDT)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2D47010E4D9;
+ Tue, 30 Apr 2024 13:24:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1714483482; x=1746019482;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=11X3wEMQbR/b7C50eaFbyjqplYHvHzwuI/0HIjyuc9Y=;
+ b=azQe1gdeysjLqkqxZkYon/spLqcUGuP+MxawkNezUvJG+J6mXieGuhUl
+ eWYlRlr8r44WlSjrsGru8loONZlm6UAhJrg2MDV29ZNXvJP39mltFY95k
+ 55YtqD4QssnZ3onZK/M06spLrU8qvXLkCxnmKsTVOKt2CAUIqDtrydbtI
+ eF6rJGZrqeKM4DXAv+zHXi2MlLkWoIjZdXyRxgix7sXbriKuJIoZ/JjyF
+ HeqDidJhnZGD6Tm0dKZ3m9Y2SqrpMrY4tVuYqRdpeEQplr4T3H8CiiDEk
+ JDLlIE7aVEAvkGNhUJ+Z2sYybxlo8Y9gme+ELuQzSyy7D/NDPkwoaA3mU Q==;
+X-CSE-ConnectionGUID: 8wd136OXSWi0g0QXmYWXhg==
+X-CSE-MsgGUID: DwsbaLsQREu+2hxrPNwoqA==
+X-IronPort-AV: E=McAfee;i="6600,9927,11060"; a="27638678"
+X-IronPort-AV: E=Sophos;i="6.07,242,1708416000"; d="scan'208";a="27638678"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+ by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Apr 2024 06:24:38 -0700
+X-CSE-ConnectionGUID: YX4Wz8PzSy2+Y0ETSgzmJQ==
+X-CSE-MsgGUID: 9WnaRiHxRVW2zfs+VqbDFA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.07,242,1708416000"; d="scan'208";a="26328991"
+Received: from dut-2a59.iind.intel.com ([10.190.239.113])
+ by orviesa010.jf.intel.com with ESMTP; 30 Apr 2024 06:24:35 -0700
+From: Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>
+To: nouveau@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org
+Cc: ttabi@nvidia.com, lucas.demarchi@intel.com, dakr@redhat.com,
+ airlied@redhat.com, lyude@redhat.com, bskeggs@nvidia.com
+Subject: [PATCH] nouveau: Add missing break statement
+Date: Tue, 30 Apr 2024 18:48:40 +0530
+Message-Id: <20240430131840.742924-1-chaitanya.kumar.borah@intel.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-From: Naresh Kamboju <naresh.kamboju@linaro.org>
-Date: Mon, 29 Apr 2024 20:36:53 +0530
-Message-ID: <CA+G9fYu7Ug0K8h9QJT0WbtWh_LL9Juc+VC0WMU_Z_vSSPDNymg@mail.gmail.com>
-Subject: nouveau: r535.c:1266:3: error: label at end of compound statement
- default: with gcc-8
-To: open list <linux-kernel@vger.kernel.org>, 
- Linux ARM <linux-arm-kernel@lists.infradead.org>, lkft-triage@lists.linaro.org,
- Linux Regressions <regressions@lists.linux.dev>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
-Cc: Timur Tabi <ttabi@nvidia.com>, Danilo Krummrich <dakr@redhat.com>,
- Arnd Bergmann <arnd@arndb.de>, Dan Carpenter <dan.carpenter@linaro.org>,
- Anders Roxell <anders.roxell@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:46 +0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:17:00 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,48 +67,38 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Following build warnings / errors noticed on Linux next-20240429 tag on the
-arm64, arm and riscv with gcc-8 and gcc-13 builds pass.
+Add the missing break statement that causes the following build error
 
-Reported-by: Linux Kernel Functional Testing <lkft@linaro.org>
+	  CC [M]  drivers/gpu/drm/i915/display/intel_display_device.o
+	../drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c: In function ‘build_registry’:
+	../drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1266:3: error: label at end of compound statement
+	1266 |   default:
+	      |   ^~~~~~~
+	  CC [M]  drivers/gpu/drm/amd/amdgpu/gfx_v10_0.o
+	  HDRTEST drivers/gpu/drm/xe/compat-i915-headers/i915_reg.h
+	  CC [M]  drivers/gpu/drm/amd/amdgpu/imu_v11_0.o
+	make[7]: *** [../scripts/Makefile.build:244: drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.o] Error 1
+	make[7]: *** Waiting for unfinished jobs....
 
-Commit id:
- b58a0bc904ff nouveau: add command-line GSP-RM registry support
+Fixes: b58a0bc904ff ("nouveau: add command-line GSP-RM registry support")
+Closes: https://lore.kernel.org/all/913052ca6c0988db1bab293cfae38529251b4594.camel@nvidia.com/T/#m3c9acebac754f2e74a85b76c858c093bb1aacaf0
+Signed-off-by: Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Buids:
---
-  gcc-8-arm64-defconfig - Fail
-  gcc-8-arm-defconfig - Fail
-  gcc-8-riscv-defconfig - Fail
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+index 0b46db5c77b8..63619512e7f6 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+@@ -1264,6 +1264,7 @@ static void build_registry(struct nvkm_gsp *gsp, PACKED_REGISTRY_TABLE *registry
+ 			str_offset += reg->vlen;
+ 			break;
+ 		default:
++			break;
+ 		}
+ 
+ 		i++;
+-- 
+2.25.1
 
-Build log:
-----
-drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c: In function 'build_registry':
-drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c:1266:3: error: label at
-end of compound statement
-   default:
-   ^~~~~~~
-make[7]: *** [scripts/Makefile.build:244:
-drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.o] Error 1
-
-metadata:
-  git_describe: next-20240429
-  git_repo: https://gitlab.com/Linaro/lkft/mirrors/next/linux-next
-  git_short_log: b0a2c79c6f35 ("Add linux-next specific files for 20240429")
-  arch: arm64, arm, riscv
-  toolchain: gcc-8
-
-Steps to reproduce:
-----
-# tuxmake --runtime podman --target-arch arm64 --toolchain gcc-8
---kconfig defconfig
-
-Links:
- - https://storage.tuxsuite.com/public/linaro/lkft/builds/2flcoOuqVJfhTvX4AOYsWMd5hqe/
- - https://qa-reports.linaro.org/lkft/linux-next-master/build/next-20240429/testrun/23704376/suite/build/test/gcc-8-defconfig/history/
- - https://qa-reports.linaro.org/lkft/linux-next-master/build/next-20240429/testrun/23705756/suite/build/test/gcc-8-defconfig/details/
-
-
---
-Linaro LKFT
-https://lkft.linaro.org
