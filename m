@@ -2,56 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BABACCBA979
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BDFA5CBA973
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:20 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 364AE10E9E7;
-	Sat, 13 Dec 2025 12:40:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D8EB410E9A9;
+	Sat, 13 Dec 2025 12:40:55 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=danm.net header.i=@danm.net header.b="ZmkTZQBL";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=danm.net header.i=@danm.net header.b="QROozGPc";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 349 seconds by postgrey-1.36 at gabe;
- Mon, 06 May 2024 18:29:26 UTC
-Received: from ci74p00im-qukt09081701.me.com (ci74p00im-qukt09081701.me.com
- [17.57.156.6])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9400910E6BB
- for <nouveau@lists.freedesktop.org>; Mon,  6 May 2024 18:29:26 +0000 (UTC)
+X-Greylist: delayed 490 seconds by postgrey-1.36 at gabe;
+ Mon, 06 May 2024 19:07:24 UTC
+Received: from mr85p00im-ztdg06011901.me.com (mr85p00im-ztdg06011901.me.com
+ [17.58.23.198])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 619AE10FF56
+ for <nouveau@lists.freedesktop.org>; Mon,  6 May 2024 19:07:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=danm.net; s=sig1;
- t=1715019816; bh=k+qzt2+1Ia9zMIU6NU5FMS2XCDvlIMA5wroIBSQ6VMg=;
+ t=1715021953; bh=5IIESbR3d7PDTj2PZkx/M3SXR6EBw4Yas+xIOzHKpLQ=;
  h=From:To:Subject:Date:Message-ID:MIME-Version;
- b=ZmkTZQBLK7+7+ble07oCEGknBzkFqgnEPgM5kh2sb6pBDGjAi1YHaSIqXL/+E3lQU
- /qHlWq+cm5NFlwM81t2noUDAbxcGcjdqK8RseIXIecxEcPOBOkNC7haqe0m4T2yvdO
- ppMQ1URbR0FNo83htwM9pc8f9pZXzus/2EeNiz0rqL8dYsZMslpEr55uPyhc4JlEDG
- wkEQxjjm/wiTq7gKnw8yHU3HCBFwnspjz420Z5znybc+7Bz22wNw5aNIP8RVpKyXpT
- ral6ePCH86Sh4I64ZxtlkDFHmu/0P5sN9YcN/VyvNX1IzuS8ug+EuwnAVHPT6vR8s9
- kZazWFBrS9F1Q==
-Received: from hitch.danm.net (ci77p00im-dlb-asmtp-mailmevip.me.com
- [17.57.156.26])
- by ci74p00im-qukt09081701.me.com (Postfix) with ESMTPSA id 74F7A46C044E;
- Mon,  6 May 2024 18:23:34 +0000 (UTC)
+ b=QROozGPcQ1BDbPD4y28JbBRKN8LWKB27xIcPMiaIEh+VN6WaolzSOcdjbnDSIukAL
+ t6vMVFJukvGFtLxk8qgKXEeAgaTPfGZoGgBi+TcXLL8hJq/SDyCx2N+uLjwbwkSgmT
+ QnER8wQqp//NHU/DPf//zMscGt/buGwifowkoi5xdc2irEjFK8Lz4PP4Zzgn9aYmRF
+ ZzQCPbI3zsqY/itae2MjQ9r2LIJDSKEf03n+whJHakELkm4ejMtPRK501D1pqXwhnF
+ DvCMxnbYiigPoKJnM3GkcG8XFZXpbKHhv0uuvc3mQmXxCMxVLZFjHeZwgw0EI5RMwj
+ YNKT6MShzmirQ==
+Received: from hitch.danm.net (mr38p00im-dlb-asmtp-mailmevip.me.com
+ [17.57.152.18])
+ by mr85p00im-ztdg06011901.me.com (Postfix) with ESMTPSA id 47DD61349F79;
+ Mon,  6 May 2024 18:59:12 +0000 (UTC)
 From: Dan Moulding <dan@danm.net>
-To: nouveau@lists.freedesktop.org
-Cc: kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com, airlied@redhat.com,
- stable@vger.kernel.org, dan@danm.net
-Subject: [REGRESSION] v6.9-rc7: nouveau: init failed, no display output from
- kernel; successfully bisected
-Date: Mon,  6 May 2024 12:23:31 -0600
-Message-ID: <20240506182331.8076-1-dan@danm.net>
+To: dan@danm.net
+Cc: airlied@redhat.com, dakr@redhat.com, kherbst@redhat.com, lyude@redhat.com,
+ nouveau@lists.freedesktop.org, stable@vger.kernel.org,
+ regressions@lists.linux.dev
+Subject: Re: [REGRESSION] v6.9-rc7: nouveau: init failed, no display output
+ from kernel; successfully bisected
+Date: Mon,  6 May 2024 12:59:10 -0600
+Message-ID: <20240506185910.17917-1-dan@danm.net>
 X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20240506182331.8076-1-dan@danm.net>
+References: <20240506182331.8076-1-dan@danm.net>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: Wz54LpTPKS3QRQ1x9J7c7q5aezbmJrMd
-X-Proofpoint-ORIG-GUID: Wz54LpTPKS3QRQ1x9J7c7q5aezbmJrMd
+X-Proofpoint-ORIG-GUID: a1gJzvlb2jdxZFrF5r8DGOtd09gwGmcs
+X-Proofpoint-GUID: a1gJzvlb2jdxZFrF5r8DGOtd09gwGmcs
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.11.176.26
  definitions=2024-05-06_13,2024-05-06_02,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- clxscore=1030
- malwarescore=0 phishscore=0 adultscore=0 suspectscore=0 bulkscore=0
- mlxscore=0 mlxlogscore=844 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2308100000 definitions=main-2405060132
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
+ mlxscore=0 suspectscore=0
+ spamscore=0 bulkscore=0 malwarescore=0 adultscore=0 clxscore=1030
+ mlxlogscore=563 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2405060137
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -67,34 +70,7 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-After upgrading to rc7 from rc6 on a system with NVIDIA GP104 using
-the nouveau driver, I get no display output from the kernel (only the
-output from GRUB shows on the primary display). Nonetheless, I was
-able to SSH to the system and get the kernel log from dmesg. I found
-errors from nouveau in it. Grepping it for nouveau gives me this:
+CC'ing regressions list and looping in regzbot (both of which I
+accidentally left out in my initial regression report).
 
-[    0.367379] nouveau 0000:01:00.0: NVIDIA GP104 (134000a1)
-[    0.474499] nouveau 0000:01:00.0: bios: version 86.04.50.80.13
-[    0.474620] nouveau 0000:01:00.0: pmu: firmware unavailable
-[    0.474977] nouveau 0000:01:00.0: fb: 8192 MiB GDDR5
-[    0.484371] nouveau 0000:01:00.0: sec2(acr): mbox 00000001 00000000
-[    0.484377] nouveau 0000:01:00.0: sec2(acr):load: boot failed: -5
-[    0.484379] nouveau 0000:01:00.0: acr: init failed, -5
-[    0.484466] nouveau 0000:01:00.0: init failed with -5
-[    0.484468] nouveau: DRM-master:00000000:00000080: init failed with -5
-[    0.484470] nouveau 0000:01:00.0: DRM-master: Device allocation failed: -5
-[    0.485078] nouveau 0000:01:00.0: probe with driver nouveau failed with error -50
-
-I bisected between v6.9-rc6 and v6.9-rc7 and that identified commit
-52a6947bf576 ("drm/nouveau/firmware: Fix SG_DEBUG error with
-nvkm_firmware_ctor()") as the first bad commit. I then rebuilt
-v6.9-rc7 with just that commit reverted and the problem does not
-occur.
-
-Please let me know if there are any additional details I can provide
-that would be helpful, or if I should reproduce the failure with
-additional debugging options enabled, etc.
-
-Cheers,
-
--- Dan
+#regzbot introduced: 52a6947bf576
