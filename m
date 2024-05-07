@@ -2,46 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 440198BD1DE
-	for <lists+nouveau@lfdr.de>; Mon,  6 May 2024 17:54:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D99A98BEB59
+	for <lists+nouveau@lfdr.de>; Tue,  7 May 2024 20:16:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C8905112177;
-	Mon,  6 May 2024 15:54:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EE8DD1125A2;
+	Tue,  7 May 2024 18:16:19 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="mvrt3j3G";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="DzBShiH1";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by gabe.freedesktop.org (Postfix) with ESMTP id E7E8C10F0F9;
- Mon,  6 May 2024 15:54:48 +0000 (UTC)
-Received: from [100.65.96.57] (unknown [20.236.10.66])
- by linux.microsoft.com (Postfix) with ESMTPSA id 63A2E20B2C82;
- Mon,  6 May 2024 08:54:47 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 63A2E20B2C82
+ by gabe.freedesktop.org (Postfix) with ESMTP id 31C48112598;
+ Tue,  7 May 2024 18:16:18 +0000 (UTC)
+Received: from [192.168.49.54] (c-73-118-245-227.hsd1.wa.comcast.net
+ [73.118.245.227])
+ by linux.microsoft.com (Postfix) with ESMTPSA id 62C1B20B2C82;
+ Tue,  7 May 2024 11:16:16 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 62C1B20B2C82
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1715010888;
- bh=sn+I7ADMPSvGvZYIULHrdfmxmoEt29gcieDFLNGehhA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=mvrt3j3GirQyL+zNWSUJPrkb94vYe3gRE3gFwpfF/00niIyl3fc+VRb5f4AxuoW6y
- kfky6VeELzBpCgzxTreaammrgxgd2SDXZvPOj7nLeVxJzxzGqiRR6ErGuzVari+m/L
- Ad5PQJ1lUdbhal6K44JEvCMsC3zo/UFAAL0Irirc=
-Message-ID: <82f5b8e3-45c4-4b59-bc96-4cee2b122e9a@linux.microsoft.com>
-Date: Mon, 6 May 2024 08:54:47 -0700
+ s=default; t=1715105777;
+ bh=PBRGTo20ufCiYvX5W3y8n5KQS3c/rPiOhM35HSOsaRQ=;
+ h=Date:Subject:Cc:References:From:To:In-Reply-To:From;
+ b=DzBShiH152LXFot+KucPmQbM03mnN+laHxZysZ8V2qQxlMhZsTtUKqypgwJBIJvdJ
+ n4Dz3w5CxX9vwpxTmKdIir2/VI20bIqZRRAfX/Mkdm6k/UIvMPkOxKqoliWGntbNPc
+ Ks6+pWYVRh/88H64gqZiZ1m1bIkwqOD3hIiBq8OM=
+Message-ID: <0a6d4fa9-169f-425b-93d6-04314c617090@linux.microsoft.com>
+Date: Tue, 7 May 2024 11:16:15 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 10/12] sfc: falcon: Make I2C terminology more inclusive
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: Edward Cree <ecree.xilinx@gmail.com>,
- Martin Habets <habetsm.xilinx@gmail.com>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
- "open list:SFC NETWORK DRIVER" <netdev@vger.kernel.org>,
- "open list:SFC NETWORK DRIVER" <linux-net-drivers@amd.com>,
- open list <linux-kernel@vger.kernel.org>,
- Wolfram Sang <wsa+renesas@sang-engineering.com>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
- "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
+Subject: Re: [PATCH v2 01/12] drm/amdgpu, drm/radeon: Make I2C terminology
+ more inclusive
+Cc: Wolfram Sang <wsa+renesas@sang-engineering.com>,
  "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
  <intel-gfx@lists.freedesktop.org>,
  "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
@@ -50,13 +42,42 @@ Cc: Edward Cree <ecree.xilinx@gmail.com>,
  <nouveau@lists.freedesktop.org>,
  "open list:I2C SUBSYSTEM HOST DRIVERS" <linux-i2c@vger.kernel.org>,
  "open list:BTTV VIDEO4LINUX DRIVER" <linux-media@vger.kernel.org>,
- "open list:FRAMEBUFFER LAYER" <linux-fbdev@vger.kernel.org>
-References: <20240430173812.1423757-1-eahariha@linux.microsoft.com>
- <20240430173812.1423757-11-eahariha@linux.microsoft.com>
- <20240503151300.0f202c30@kernel.org>
+ "open list:FRAMEBUFFER LAYER" <linux-fbdev@vger.kernel.org>,
+ "Pan, Xinhui" <Xinhui.Pan@amd.com>, Harry Wentland <harry.wentland@amd.com>,
+ Leo Li <sunpeng.li@amd.com>, Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
+ Evan Quan <evan.quan@amd.com>, Hawking Zhang <Hawking.Zhang@amd.com>,
+ Candice Li <candice.li@amd.com>, Ran Sun <sunran001@208suo.com>,
+ Alexander Richards <electrodeyt@gmail.com>, Wolfram Sang <wsa@kernel.org>,
+ Andi Shyti <andi.shyti@linux.intel.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Heiko Stuebner <heiko@sntech.de>, Heiner Kallweit <hkallweit1@gmail.com>,
+ Hamza Mahfooz <hamza.mahfooz@amd.com>, Ruan Jinjie <ruanjinjie@huawei.com>,
+ Aurabindo Pillai <aurabindo.pillai@amd.com>, Wayne Lin <wayne.lin@amd.com>,
+ Samson Tam <samson.tam@amd.com>, Alvin Lee <alvin.lee2@amd.com>,
+ Sohaib Nadeem <sohaib.nadeem@amd.com>, Charlene Liu <charlene.liu@amd.com>,
+ Tom Chung <chiahsuan.chung@amd.com>, Alan Liu <haoping.liu@amd.com>,
+ Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
+ Meenakshikumar Somasundaram <meenakshikumar.somasundaram@amd.com>,
+ George Shen <george.shen@amd.com>, Aric Cyr <aric.cyr@amd.com>,
+ Nicholas Kazlauskas <nicholas.kazlauskas@amd.com>,
+ Qingqing Zhuo <Qingqing.Zhuo@amd.com>, Dillon Varone
+ <dillon.varone@amd.com>, Lijo Lazar <lijo.lazar@amd.com>,
+ Asad kamal <asad.kamal@amd.com>, Kenneth Feng <kenneth.feng@amd.com>,
+ Ma Jun <Jun.Ma2@amd.com>, Darren Powell <darren.powell@amd.com>,
+ Yang Wang <kevinyang.wang@amd.com>,
+ Mario Limonciello <mario.limonciello@amd.com>,
+ Yifan Zhang <yifan1.zhang@amd.com>, Le Ma <Le.Ma@amd.com>,
+ "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ open list <linux-kernel@vger.kernel.org>
+References: <20240503181333.2336999-1-eahariha@linux.microsoft.com>
+ <20240503181333.2336999-2-eahariha@linux.microsoft.com>
 Content-Language: en-CA
 From: Easwar Hariharan <eahariha@linux.microsoft.com>
-In-Reply-To: <20240503151300.0f202c30@kernel.org>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>
+In-Reply-To: <20240503181333.2336999-2-eahariha@linux.microsoft.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -73,24 +94,59 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 5/3/2024 3:13 PM, Jakub Kicinski wrote:
-> On Tue, 30 Apr 2024 17:38:09 +0000 Easwar Hariharan wrote:
->> I2C v7, SMBus 3.2, and I3C 1.1.1 specifications have replaced "master/slave"
->> with more appropriate terms. Inspired by and following on to Wolfram's
->> series to fix drivers/i2c/[1], fix the terminology for users of
->> I2C_ALGOBIT bitbanging interface, now that the approved verbiage exists
->> in the specification.
->>
->> Compile tested, no functionality changes intended
+On 5/3/2024 11:13 AM, Easwar Hariharan wrote:
+> I2C v7, SMBus 3.2, and I3C 1.1.1 specifications have replaced "master/slave"
+> with more appropriate terms. Inspired by and following on to Wolfram's
+> series to fix drivers/i2c/[1], fix the terminology for users of
+> I2C_ALGOBIT bitbanging interface, now that the approved verbiage exists
+> in the specification.
 > 
-> FWIW we're assuming someone (Wolfram?) will take all of these,
-> instead of area maintainers picking them individually.
-> Please let us know if that's incorrect.
+> Compile tested, no functionality changes intended
+> 
+> [1]: https://lore.kernel.org/all/20240322132619.6389-1-wsa+renesas@sang-engineering.com/
+> 
+> Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
+> ---
+>  .../gpu/drm/amd/amdgpu/amdgpu_atomfirmware.c  |  8 +++---
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_i2c.c       | 10 +++----
+>  drivers/gpu/drm/amd/amdgpu/atombios_i2c.c     |  8 +++---
+>  drivers/gpu/drm/amd/amdgpu/atombios_i2c.h     |  2 +-
+>  drivers/gpu/drm/amd/amdgpu/smu_v11_0_i2c.c    | 20 ++++++-------
+>  .../gpu/drm/amd/display/dc/bios/bios_parser.c |  2 +-
+>  .../drm/amd/display/dc/bios/bios_parser2.c    |  2 +-
+>  .../drm/amd/display/dc/core/dc_link_exports.c |  4 +--
+>  drivers/gpu/drm/amd/display/dc/dc.h           |  2 +-
+>  drivers/gpu/drm/amd/display/dc/dce/dce_i2c.c  |  4 +--
+>  .../display/include/grph_object_ctrl_defs.h   |  2 +-
+>  drivers/gpu/drm/amd/include/atombios.h        |  2 +-
+>  drivers/gpu/drm/amd/include/atomfirmware.h    | 26 ++++++++---------
+>  .../powerplay/hwmgr/vega20_processpptables.c  |  4 +--
+>  .../amd/pm/powerplay/inc/smu11_driver_if.h    |  2 +-
+>  .../inc/pmfw_if/smu11_driver_if_arcturus.h    |  2 +-
+>  .../inc/pmfw_if/smu11_driver_if_navi10.h      |  2 +-
+>  .../pmfw_if/smu11_driver_if_sienna_cichlid.h  |  2 +-
+>  .../inc/pmfw_if/smu13_driver_if_aldebaran.h   |  2 +-
+>  .../inc/pmfw_if/smu13_driver_if_v13_0_0.h     |  2 +-
+>  .../inc/pmfw_if/smu13_driver_if_v13_0_7.h     |  2 +-
+>  .../gpu/drm/amd/pm/swsmu/smu11/arcturus_ppt.c |  4 +--
+>  .../amd/pm/swsmu/smu11/sienna_cichlid_ppt.c   |  8 +++---
+>  drivers/gpu/drm/radeon/atombios.h             | 16 +++++------
+>  drivers/gpu/drm/radeon/atombios_i2c.c         |  4 +--
+>  drivers/gpu/drm/radeon/radeon_combios.c       | 28 +++++++++----------
+>  drivers/gpu/drm/radeon/radeon_i2c.c           | 10 +++----
+>  drivers/gpu/drm/radeon/radeon_mode.h          |  6 ++--
+>  28 files changed, 93 insertions(+), 93 deletions(-)
+>
 
-I think, based on the trend in the v2 conversation[1], that's correct. If maintainers of
-other areas disagree, please chime in.
+<snip>
+
+Hello Christian, Daniel, David, others,
+
+Could you re-review v2 since the feedback provided in v0 [1] has now been addressed? I can send v3 with
+all other feedback and signoffs from the other maintainers incorporated when I have something for amdgpu 
+and radeon.
 
 Thanks,
 Easwar
 
-[1] https://lore.kernel.org/all/20240503181333.2336999-1-eahariha@linux.microsoft.com/
+[1] https://lore.kernel.org/all/53f3afba-4759-4ea1-b408-8a929b26280c@amd.com/
