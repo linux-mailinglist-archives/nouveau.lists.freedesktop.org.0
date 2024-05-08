@@ -2,112 +2,68 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B06818C0611
-	for <lists+nouveau@lfdr.de>; Wed,  8 May 2024 23:12:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F61D8C0787
+	for <lists+nouveau@lfdr.de>; Thu,  9 May 2024 01:10:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BA4F9112994;
-	Wed,  8 May 2024 21:12:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1A7A311325D;
+	Wed,  8 May 2024 23:10:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LkpFwnSa";
+	dkim=pass (2048-bit key; unprotected) header.d=gfxstrand-net.20230601.gappssmtp.com header.i=@gfxstrand-net.20230601.gappssmtp.com header.b="BZv/L40z";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
- [209.85.214.176])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E705D10F70E;
- Wed,  8 May 2024 21:12:39 +0000 (UTC)
-Received: by mail-pl1-f176.google.com with SMTP id
- d9443c01a7336-1ed41eb3382so1032635ad.0; 
- Wed, 08 May 2024 14:12:39 -0700 (PDT)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com
+ [209.85.218.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 88FBD112A4F
+ for <nouveau@lists.freedesktop.org>; Wed,  8 May 2024 23:10:06 +0000 (UTC)
+Received: by mail-ej1-f51.google.com with SMTP id
+ a640c23a62f3a-a59c0a6415fso64578366b.1
+ for <nouveau@lists.freedesktop.org>; Wed, 08 May 2024 16:10:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715202759; x=1715807559; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pZrJFIbLTxTYrbPISz2hMEePGMl55QlS4SmkJ5sghxc=;
- b=LkpFwnSar0R81RifQoYT8suCEgUQySymb7FwhX6znUiPuF3FzIRDLpUT78BQj2aODp
- b8X3FMlqdz6NihPEN9W8CBKHNGtNVGuv7PuXKGqZIe7nlPVJCE+w+145YJlAFIqU18jn
- pOsoTlEcaA+0DhC49Hb/vCZ8YhuGtsBoI6gd/NLTR5Pw5ybqZLdCDBcjMq1bv5NU9JuH
- jULlo8FQLXMTHI2gVrQqxs7TQArrF5XB3u/X57hXfo2SznKFF5edQAPC42/kXgP1A1UI
- UfgucPuW9ib/GO2NYa61mZ4iGHpM0FC6fsqPmip/XMdOt9jBYD4RPBAI0G//HA6CIjUf
- O6pg==
+ d=gfxstrand-net.20230601.gappssmtp.com; s=20230601; t=1715209805; x=1715814605;
+ darn=lists.freedesktop.org; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=L7h/LLjAhtUKsGcFMQEShp70Fa7v2+0gdvzYPKKzz8g=;
+ b=BZv/L40zjYhKdd+iKjCiscinWwqiXarlSBgdRD2GMu9HSFOMMbGqZC+iBI3/zXF53+
+ lPHFreEbVTeMQ59nAnP57YsWB+F+eihfqmnVTJO6cUdKclwSSkkGavNWv8ronSyMpqWA
+ NaXvQQsrmBswPcr82Y8h9RN0tEZ/g3XAHUk72YvoTKFk/AklFNWbgeRvU/jv6ec1GuaC
+ 7rlVhmsjiam0YCNQWIJcDhryfw3uD02fK7O2ul5BkS0jrk23I+ZeB4H+jra1oRuUjCtJ
+ KnXHX4XMeP+num4Bcx3FlK74KMGIp+231UWj2pmV9ZjQz+EgOn3kRqkGgFr6JtEKvkUA
+ bKcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715202759; x=1715807559;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pZrJFIbLTxTYrbPISz2hMEePGMl55QlS4SmkJ5sghxc=;
- b=vY9TVLoo8XcIU5O2RiZRCBtw6j9lQe2Rq9DSPC4MpdGcYPSXNAJ7L3o1h3s5MY6k7C
- TAJMLPNPjeFI99KTHHdgFOHPyrHpEz5StJXyFXAft+ixaRVBcRCzQSg5BdySiV0skuvy
- zxKsqcv+09pcBJdEVnkXBsUGna+W77SCRDctW3dzaV52xXgnF69ApzsjFKwnV+wz4ZAe
- X7b3hK0WB80cIibkeB2M4dTGKs3xAE9I0MmAUEn5UbzMZz6akxQbgS63KP0Pen7OEYWf
- 70ZyTRCM3vjOkZ0pEdtJh640uox2PilwAolMG9cKZe+D7OH/+BXY3fO6mhlKB249oo4a
- EHJw==
+ d=1e100.net; s=20230601; t=1715209805; x=1715814605;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=L7h/LLjAhtUKsGcFMQEShp70Fa7v2+0gdvzYPKKzz8g=;
+ b=DajEkZmscskzDcHw7pWAMAuLwHwpw4qezqnaUgIHxWZ64XJsy2swCm7u+XXcVgt8pb
+ Z9HuqE9U9sMoHuRyoYdc6GReCDQE0S4VPS9B4gdbCRPzqSpTuq7Ve/8rV9aX1ZrcsPEk
+ 6H9QBsJsg3U0QOr5ylMNoGT8NZW3UubZsvvEc/X+5L6uPgCU1ROJJb4cEa01IRxyT79E
+ nfzjgk6EWOC2C3aV3CqQyYsQPpaL0h020/9GPMwsp041mylulSPmszzHsWsYcLQi4fuQ
+ rmdcVWZkvnhnz0FQloCwnOmesWqIRcTqyVptFWzhhpCQmmN0wCZk8RUpkWMG6o4CTFte
+ n1aw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWL0aCs9AhXOxia3a0crXz6q1JlxJUKUv6Pqyx2946+NGm5DkHA+Uz89LhBOupBomuoaD2yeJYykdaOkgj94YgSPkqKBZ52s7zsJwyh96DUb1+imi1s/DTetS6/ljFN8Vf/TThT9YgR1pfcNvy011sheXl8bPHTvAXvz4N0DG0bVtORyR8HDWIshXaW1LX269TF87SX8czRJIJhi1XmSWmZvUbV7ea0uIFQvrH+UFojfskvILP5GEFUY3KW6zQcURHEmDJGRWtp50wVTryc3Q==
-X-Gm-Message-State: AOJu0Yxzs+DBEu5JTBWg1Z/tytBU4GtRw0yRS8XjcDpCmuHiZStdOU7A
- ifzJ91E42oe5MNGW3gK28w6xK/PkOJ1+6/WyO0LOm1HcMPZrOPN+nyxOkAXnXU0/7dtxbRmTz3a
- smFXbVQi+i+lLl3OUvgV/tAczpesbGaWj
-X-Google-Smtp-Source: AGHT+IHxDh3V7MlhtBOeSZmaUOUREgbpbUX+stT5ktTHA7M8CkQTRfPTcAkO7AsXwTWHGXOdozSH9iqT5gOxtlkl7Mw=
-X-Received: by 2002:a17:902:b110:b0:1e4:b4f5:5cfa with SMTP id
- d9443c01a7336-1eeb03a05d3mr37380885ad.27.1715202759142; Wed, 08 May 2024
- 14:12:39 -0700 (PDT)
+ AJvYcCWkowqy/RckBQ2AoRyLFrClH6jG9mvkMFdM39hMu1amoWloFUKjwp8QiSkiRw5B80KtuJUcKMwhiwWtlagkrCeAyAUU28sH8FhhbjDcNA==
+X-Gm-Message-State: AOJu0Yz0jHnnioZJOFZHdzDmjkHW3Az/pKxd1MC+RGRTKYAz7JA2pKjj
+ ugcxqKwDxMBG5Jrf7SrOPyewHIJf88/aBGTV/TdGZx+kjj3o6iVeTJSB8HTjIoCHwx37gayDeYm
+ /6pTqBS84J1qef6Pl/V84XdrIveijwmEln3HD8Z1U8sSGrlC0
+X-Google-Smtp-Source: AGHT+IHsyqqvQqXypKQlDBlSjCWPnNJkUonWEkNimtmnlBo0wg9zfFgGS4fGdYgZoXKpR9cq+1NFpiJSVWjgSRPJ3GA=
+X-Received: by 2002:a50:8ac8:0:b0:572:9b20:fa with SMTP id
+ 4fb4d7f45d1cf-5731da6b2d5mr2813802a12.33.1715209804360; 
+ Wed, 08 May 2024 16:10:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240503181333.2336999-1-eahariha@linux.microsoft.com>
- <20240503181333.2336999-2-eahariha@linux.microsoft.com>
- <0a6d4fa9-169f-425b-93d6-04314c617090@linux.microsoft.com>
- <CADnq5_NpxPM-FTcCchdBMRng=6xdM03s93XEX2_8fx44MRVYag@mail.gmail.com>
- <2654ad6e-66b7-4698-94da-892cc9d0802c@linux.microsoft.com>
-In-Reply-To: <2654ad6e-66b7-4698-94da-892cc9d0802c@linux.microsoft.com>
-From: Alex Deucher <alexdeucher@gmail.com>
-Date: Wed, 8 May 2024 17:12:26 -0400
-Message-ID: <CADnq5_PAr6GHEBuStcJ6KVBS+mg64koqJwTDcz+7UcaEy_P_qA@mail.gmail.com>
-Subject: Re: [PATCH v2 01/12] drm/amdgpu, drm/radeon: Make I2C terminology
- more inclusive
-To: Easwar Hariharan <eahariha@linux.microsoft.com>
-Cc: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>, 
- Wolfram Sang <wsa+renesas@sang-engineering.com>, 
- "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
- <intel-gfx@lists.freedesktop.org>, 
- "open list:INTEL DRM DISPLAY FOR XE AND I915 DRIVERS"
- <intel-xe@lists.freedesktop.org>, 
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, 
- "open list:I2C SUBSYSTEM HOST DRIVERS" <linux-i2c@vger.kernel.org>, 
- "open list:BTTV VIDEO4LINUX DRIVER" <linux-media@vger.kernel.org>, 
- "open list:FRAMEBUFFER LAYER" <linux-fbdev@vger.kernel.org>, "Pan,
- Xinhui" <Xinhui.Pan@amd.com>, 
- Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, 
- Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>, Evan Quan <evan.quan@amd.com>, 
- Hawking Zhang <Hawking.Zhang@amd.com>, Candice Li <candice.li@amd.com>, 
- Ran Sun <sunran001@208suo.com>, Alexander Richards <electrodeyt@gmail.com>, 
- Wolfram Sang <wsa@kernel.org>, Andi Shyti <andi.shyti@linux.intel.com>, 
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Heiko Stuebner <heiko@sntech.de>, 
- Heiner Kallweit <hkallweit1@gmail.com>, Hamza Mahfooz <hamza.mahfooz@amd.com>, 
- Ruan Jinjie <ruanjinjie@huawei.com>,
- Aurabindo Pillai <aurabindo.pillai@amd.com>, 
- Wayne Lin <wayne.lin@amd.com>, Samson Tam <samson.tam@amd.com>,
- Alvin Lee <alvin.lee2@amd.com>, 
- Sohaib Nadeem <sohaib.nadeem@amd.com>, Charlene Liu <charlene.liu@amd.com>, 
- Tom Chung <chiahsuan.chung@amd.com>, Alan Liu <haoping.liu@amd.com>, 
- Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>, 
- Meenakshikumar Somasundaram <meenakshikumar.somasundaram@amd.com>,
- George Shen <george.shen@amd.com>, 
- Aric Cyr <aric.cyr@amd.com>, Nicholas Kazlauskas <nicholas.kazlauskas@amd.com>,
- Qingqing Zhuo <Qingqing.Zhuo@amd.com>, Dillon Varone <dillon.varone@amd.com>, 
- Lijo Lazar <lijo.lazar@amd.com>, Asad kamal <asad.kamal@amd.com>, 
- Kenneth Feng <kenneth.feng@amd.com>, Ma Jun <Jun.Ma2@amd.com>, 
- Darren Powell <darren.powell@amd.com>, Yang Wang <kevinyang.wang@amd.com>, 
- Mario Limonciello <mario.limonciello@amd.com>,
- Yifan Zhang <yifan1.zhang@amd.com>, Le Ma <Le.Ma@amd.com>, 
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>, 
- "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
- Alex Deucher <alexander.deucher@amd.com>, 
- open list <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20240508230624.7598-1-mohamedahmedegypt2001@gmail.com>
+In-Reply-To: <20240508230624.7598-1-mohamedahmedegypt2001@gmail.com>
+From: Faith Ekstrand <faith@gfxstrand.net>
+Date: Wed, 8 May 2024 18:09:52 -0500
+Message-ID: <CAOFGe96aGP=kkyCr+Fy-N4_uXNLb-raLARLG7GMiicfyAkhn-w@mail.gmail.com>
+Subject: Re: [PATCH v3] drm/nouveau: use tile_mode and pte_kind for VM_BIND bo
+ allocations
+To: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
+Cc: dri-devel@lists.freedesktop.org, airlied@redhat.com, 
+ nouveau@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="0000000000001ac80b0617f96742"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -122,104 +78,342 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, May 8, 2024 at 4:12=E2=80=AFPM Easwar Hariharan
-<eahariha@linux.microsoft.com> wrote:
->
-> On 5/8/2024 7:53 AM, Alex Deucher wrote:
-> > On Tue, May 7, 2024 at 2:32=E2=80=AFPM Easwar Hariharan
-> > <eahariha@linux.microsoft.com> wrote:
-> >>
-> >> On 5/3/2024 11:13 AM, Easwar Hariharan wrote:
-> >>> I2C v7, SMBus 3.2, and I3C 1.1.1 specifications have replaced "master=
-/slave"
-> >>> with more appropriate terms. Inspired by and following on to Wolfram'=
-s
-> >>> series to fix drivers/i2c/[1], fix the terminology for users of
-> >>> I2C_ALGOBIT bitbanging interface, now that the approved verbiage exis=
-ts
-> >>> in the specification.
-> >>>
-> >>> Compile tested, no functionality changes intended
-> >>>
-> >>> [1]: https://lore.kernel.org/all/20240322132619.6389-1-wsa+renesas@sa=
-ng-engineering.com/
-> >>>
-> >>> Signed-off-by: Easwar Hariharan <eahariha@linux.microsoft.com>
-> >>> ---
-> >>>  .../gpu/drm/amd/amdgpu/amdgpu_atomfirmware.c  |  8 +++---
-> >>>  drivers/gpu/drm/amd/amdgpu/amdgpu_i2c.c       | 10 +++----
-> >>>  drivers/gpu/drm/amd/amdgpu/atombios_i2c.c     |  8 +++---
-> >>>  drivers/gpu/drm/amd/amdgpu/atombios_i2c.h     |  2 +-
-> >>>  drivers/gpu/drm/amd/amdgpu/smu_v11_0_i2c.c    | 20 ++++++-------
-> >>>  .../gpu/drm/amd/display/dc/bios/bios_parser.c |  2 +-
-> >>>  .../drm/amd/display/dc/bios/bios_parser2.c    |  2 +-
-> >>>  .../drm/amd/display/dc/core/dc_link_exports.c |  4 +--
-> >>>  drivers/gpu/drm/amd/display/dc/dc.h           |  2 +-
-> >>>  drivers/gpu/drm/amd/display/dc/dce/dce_i2c.c  |  4 +--
-> >>>  .../display/include/grph_object_ctrl_defs.h   |  2 +-
-> >>>  drivers/gpu/drm/amd/include/atombios.h        |  2 +-
-> >>>  drivers/gpu/drm/amd/include/atomfirmware.h    | 26 ++++++++---------
-> >>>  .../powerplay/hwmgr/vega20_processpptables.c  |  4 +--
-> >>>  .../amd/pm/powerplay/inc/smu11_driver_if.h    |  2 +-
-> >>>  .../inc/pmfw_if/smu11_driver_if_arcturus.h    |  2 +-
-> >>>  .../inc/pmfw_if/smu11_driver_if_navi10.h      |  2 +-
-> >>>  .../pmfw_if/smu11_driver_if_sienna_cichlid.h  |  2 +-
-> >>>  .../inc/pmfw_if/smu13_driver_if_aldebaran.h   |  2 +-
-> >>>  .../inc/pmfw_if/smu13_driver_if_v13_0_0.h     |  2 +-
-> >>>  .../inc/pmfw_if/smu13_driver_if_v13_0_7.h     |  2 +-
-> >>>  .../gpu/drm/amd/pm/swsmu/smu11/arcturus_ppt.c |  4 +--
-> >>>  .../amd/pm/swsmu/smu11/sienna_cichlid_ppt.c   |  8 +++---
-> >>>  drivers/gpu/drm/radeon/atombios.h             | 16 +++++------
-> >>>  drivers/gpu/drm/radeon/atombios_i2c.c         |  4 +--
-> >>>  drivers/gpu/drm/radeon/radeon_combios.c       | 28 +++++++++--------=
---
-> >>>  drivers/gpu/drm/radeon/radeon_i2c.c           | 10 +++----
-> >>>  drivers/gpu/drm/radeon/radeon_mode.h          |  6 ++--
-> >>>  28 files changed, 93 insertions(+), 93 deletions(-)
-> >>>
-> >>
-> >> <snip>
-> >>
-> >> Hello Christian, Daniel, David, others,
-> >>
-> >> Could you re-review v2 since the feedback provided in v0 [1] has now b=
-een addressed? I can send v3 with
-> >> all other feedback and signoffs from the other maintainers incorporate=
-d when I have something for amdgpu
-> >> and radeon.
-> >
-> > This seems like a lot of churn.  Additionally, a bunch of these
-> > headers are shared with other OSes, so it's possible some of the
-> > changes may end up getting reverted accidently when we sync up or we
-> > may add new headers in new code with the old nomenclature and then
-> > we'd need to make sure to adjust it to make sure everything was
-> > aligned again.  I would just as soon leave things as is, but I'm open
-> > to acking them if there is a strong desire to update things.
-> >
-> > Alex
->
-> The way I see it, this is a small downpayment on the debt we have built u=
-p so far. Internship
-> programs like LF Outreachy to get more underrepresented groups involved i=
-n open source are trying to
-> change the open source community culture to be more inclusive, but simult=
-aneously rely on the culture
-> being welcoming enough as well.
->
-> I do see the challenge involved in preserving the changes and ensuring no=
- new code is added with
-> outdated nomenclature (but see [1]), but culture changes one person at a =
-time, and I'd encourage the community
-> to do the work needed so we can move past our (mostly) inadvertent role i=
-n perpetuating it.
->
-> That's my 2c (or your sub-unit currency of choice).
+--0000000000001ac80b0617f96742
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Fair enough.
-Acked-by: Aex Deucher <alexander.deucher@amd.com>
+On Wed, May 8, 2024 at 6:06=E2=80=AFPM Mohamed Ahmed <
+mohamedahmedegypt2001@gmail.com> wrote:
 
+> Allows PTE kind and tile mode on BO create with VM_BIND,
+> and adds a GETPARAM to indicate this change. This is needed to support
+> modifiers in NVK and ensure correctness when dealing with the nouveau
+> GL driver.
 >
-> Easwar
+> The userspace modifiers implementation this is for can be found here:
+> https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/28843
 >
-> [1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/co=
-mmit/?id=3D49decddd39e5f6132ccd7d9fdc3d7c470b0061bb
+> Fixes: b88baab82871 ("drm/nouveau: implement new VM_BIND uAPI")
+> Signed-off-by: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_abi16.c |  3 ++
+>  drivers/gpu/drm/nouveau/nouveau_bo.c    | 45 +++++++++++--------------
+>  include/uapi/drm/nouveau_drm.h          |  7 ++++
+>  3 files changed, 30 insertions(+), 25 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> index 80f74ee0f..47e53e17b 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> @@ -272,6 +272,9 @@ nouveau_abi16_ioctl_getparam(ABI16_IOCTL_ARGS)
+>                 getparam->value =3D
+> (u64)ttm_resource_manager_usage(vram_mgr);
+>                 break;
+>         }
+> +       case NOUVEAU_GETPARAM_HAS_VMA_TILEMODE:
+> +               getparam->value =3D 1;
+> +               break;
+>         default:
+>                 NV_PRINTK(dbg, cli, "unknown parameter %lld\n",
+> getparam->param);
+>                 return -EINVAL;
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> index db8cbf615..583c962ef 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> @@ -241,28 +241,29 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size=
+,
+> int *align, u32 domain,
+>         }
+>
+>         nvbo->contig =3D !(tile_flags & NOUVEAU_GEM_TILE_NONCONTIG);
+> -       if (!nouveau_cli_uvmm(cli) || internal) {
+> -               /* for BO noVM allocs, don't assign kinds */
+> -               if (cli->device.info.family >=3D NV_DEVICE_INFO_V0_FERMI)=
+ {
+> -                       nvbo->kind =3D (tile_flags & 0x0000ff00) >> 8;
+> -                       if (!nvif_mmu_kind_valid(mmu, nvbo->kind)) {
+> -                               kfree(nvbo);
+> -                               return ERR_PTR(-EINVAL);
+> -                       }
+>
+> -                       nvbo->comp =3D mmu->kind[nvbo->kind] !=3D nvbo->k=
+ind;
+> -               } else if (cli->device.info.family >=3D
+> NV_DEVICE_INFO_V0_TESLA) {
+> -                       nvbo->kind =3D (tile_flags & 0x00007f00) >> 8;
+> -                       nvbo->comp =3D (tile_flags & 0x00030000) >> 16;
+> -                       if (!nvif_mmu_kind_valid(mmu, nvbo->kind)) {
+> -                               kfree(nvbo);
+> -                               return ERR_PTR(-EINVAL);
+> -                       }
+> -               } else {
+> -                       nvbo->zeta =3D (tile_flags & 0x00000007);
+> +       /* for BO allocs, don't assign kinds */
+>
+
+I think this comment is stale. We're now assigning them in both cases.
+
+
+> +       if (cli->device.info.family >=3D NV_DEVICE_INFO_V0_FERMI) {
+> +               nvbo->kind =3D (tile_flags & 0x0000ff00) >> 8;
+> +               if (!nvif_mmu_kind_valid(mmu, nvbo->kind)) {
+> +                       kfree(nvbo);
+> +                       return ERR_PTR(-EINVAL);
+> +               }
+> +
+> +               nvbo->comp =3D mmu->kind[nvbo->kind] !=3D nvbo->kind;
+> +       } else if (cli->device.info.family >=3D NV_DEVICE_INFO_V0_TESLA) =
+{
+> +               nvbo->kind =3D (tile_flags & 0x00007f00) >> 8;
+> +               nvbo->comp =3D (tile_flags & 0x00030000) >> 16;
+> +               if (!nvif_mmu_kind_valid(mmu, nvbo->kind)) {
+> +                       kfree(nvbo);
+> +                       return ERR_PTR(-EINVAL);
+>                 }
+> -               nvbo->mode =3D tile_mode;
+> +       } else {
+> +               nvbo->zeta =3D (tile_flags & 0x00000007);
+> +       }
+> +       nvbo->mode =3D tile_mode;
+>
+> +       if (!nouveau_cli_uvmm(cli) || internal) {
+>                 /* Determine the desirable target GPU page size for the
+> buffer. */
+>                 for (i =3D 0; i < vmm->page_nr; i++) {
+>                         /* Because we cannot currently allow VMM maps to
+> fail
+> @@ -304,12 +305,6 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size,
+> int *align, u32 domain,
+>                 }
+>                 nvbo->page =3D vmm->page[pi].shift;
+>         } else {
+> -               /* reject other tile flags when in VM mode. */
+> -               if (tile_mode)
+> -                       return ERR_PTR(-EINVAL);
+> -               if (tile_flags & ~NOUVEAU_GEM_TILE_NONCONTIG)
+> -                       return ERR_PTR(-EINVAL);
+> -
+>                 /* Determine the desirable target GPU page size for the
+> buffer. */
+>                 for (i =3D 0; i < vmm->page_nr; i++) {
+>                         /* Because we cannot currently allow VMM maps to
+> fail
+> diff --git a/include/uapi/drm/nouveau_drm.h
+> b/include/uapi/drm/nouveau_drm.h
+> index cd84227f1..5402f77ee 100644
+> --- a/include/uapi/drm/nouveau_drm.h
+> +++ b/include/uapi/drm/nouveau_drm.h
+> @@ -68,6 +68,13 @@ extern "C" {
+>   */
+>  #define NOUVEAU_GETPARAM_VRAM_USED 19
+>
+> +/*
+> + * NOUVEAU_GETPARAM_HAS_VMA_TILEMODE
+> + *
+> + * Query whether tile mode and PTE kind are accepted with VM allocs or
+> not.
+> + */
+> +#define NOUVEAU_GETPARAM_HAS_VMA_TILEMODE 20
+> +
+>  struct drm_nouveau_getparam {
+>         __u64 param;
+>         __u64 value;
+> --
+> 2.44.0
+>
+>
+
+--0000000000001ac80b0617f96742
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
+_attr">On Wed, May 8, 2024 at 6:06=E2=80=AFPM Mohamed Ahmed &lt;<a href=3D"=
+mailto:mohamedahmedegypt2001@gmail.com">mohamedahmedegypt2001@gmail.com</a>=
+&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
+0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Allo=
+ws PTE kind and tile mode on BO create with VM_BIND,<br>
+and adds a GETPARAM to indicate this change. This is needed to support<br>
+modifiers in NVK and ensure correctness when dealing with the nouveau<br>
+GL driver.<br>
+<br>
+The userspace modifiers implementation this is for can be found here:<br>
+<a href=3D"https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/28843"=
+ rel=3D"noreferrer" target=3D"_blank">https://gitlab.freedesktop.org/mesa/m=
+esa/-/merge_requests/28843</a><br>
+<br>
+Fixes: b88baab82871 (&quot;drm/nouveau: implement new VM_BIND uAPI&quot;)<b=
+r>
+Signed-off-by: Mohamed Ahmed &lt;<a href=3D"mailto:mohamedahmedegypt2001@gm=
+ail.com" target=3D"_blank">mohamedahmedegypt2001@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0drivers/gpu/drm/nouveau/nouveau_abi16.c |=C2=A0 3 ++<br>
+=C2=A0drivers/gpu/drm/nouveau/nouveau_bo.c=C2=A0 =C2=A0 | 45 +++++++++++---=
+-----------<br>
+=C2=A0include/uapi/drm/nouveau_drm.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=
+=A0 7 ++++<br>
+=C2=A03 files changed, 30 insertions(+), 25 deletions(-)<br>
+<br>
+diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouv=
+eau/nouveau_abi16.c<br>
+index 80f74ee0f..47e53e17b 100644<br>
+--- a/drivers/gpu/drm/nouveau/nouveau_abi16.c<br>
++++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c<br>
+@@ -272,6 +272,9 @@ nouveau_abi16_ioctl_getparam(ABI16_IOCTL_ARGS)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 getparam-&gt;value =
+=3D (u64)ttm_resource_manager_usage(vram_mgr);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0case NOUVEAU_GETPARAM_HAS_VMA_TILEMODE:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0getparam-&gt;value =
+=3D 1;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 default:<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 NV_PRINTK(dbg, cli,=
+ &quot;unknown parameter %lld\n&quot;, getparam-&gt;param);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return -EINVAL;<br>
+diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau=
+/nouveau_bo.c<br>
+index db8cbf615..583c962ef 100644<br>
+--- a/drivers/gpu/drm/nouveau/nouveau_bo.c<br>
++++ b/drivers/gpu/drm/nouveau/nouveau_bo.c<br>
+@@ -241,28 +241,29 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size, =
+int *align, u32 domain,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 nvbo-&gt;contig =3D !(tile_flags &amp; NOUVEAU_=
+GEM_TILE_NONCONTIG);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0if (!nouveau_cli_uvmm(cli) || internal) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* for BO noVM allo=
+cs, don&#39;t assign kinds */<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (cli-&gt;device.=
+info.family &gt;=3D NV_DEVICE_INFO_V0_FERMI) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0nvbo-&gt;kind =3D (tile_flags &amp; 0x0000ff00) &gt;&gt; 8;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0if (!nvif_mmu_kind_valid(mmu, nvbo-&gt;kind)) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0kfree(nvbo);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return ERR_PTR(-EINVAL);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0}<br>
+<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0nvbo-&gt;comp =3D mmu-&gt;kind[nvbo-&gt;kind] !=3D nvbo-&gt;kind;=
+<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0} else if (cli-&gt;=
+device.info.family &gt;=3D NV_DEVICE_INFO_V0_TESLA) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0nvbo-&gt;kind =3D (tile_flags &amp; 0x00007f00) &gt;&gt; 8;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0nvbo-&gt;comp =3D (tile_flags &amp; 0x00030000) &gt;&gt; 16;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0if (!nvif_mmu_kind_valid(mmu, nvbo-&gt;kind)) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0kfree(nvbo);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return ERR_PTR(-EINVAL);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0}<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0} else {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0nvbo-&gt;zeta =3D (tile_flags &amp; 0x00000007);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0/* for BO allocs, don&#39;t assign kinds */<br>=
+</blockquote><div><br></div><div>I think this comment is stale. We&#39;re n=
+ow assigning them in both cases.<br></div><div>=C2=A0</div><blockquote clas=
+s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
+gb(204,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 =C2=A0 =C2=A0if (cli-&gt;device.info.family &gt;=3D NV_DEVIC=
+E_INFO_V0_FERMI) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0nvbo-&gt;kind =3D (=
+tile_flags &amp; 0x0000ff00) &gt;&gt; 8;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (!nvif_mmu_kind_=
+valid(mmu, nvbo-&gt;kind)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0kfree(nvbo);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0return ERR_PTR(-EINVAL);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
++<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0nvbo-&gt;comp =3D m=
+mu-&gt;kind[nvbo-&gt;kind] !=3D nvbo-&gt;kind;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0} else if (cli-&gt;device.info.family &gt;=3D N=
+V_DEVICE_INFO_V0_TESLA) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0nvbo-&gt;kind =3D (=
+tile_flags &amp; 0x00007f00) &gt;&gt; 8;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0nvbo-&gt;comp =3D (=
+tile_flags &amp; 0x00030000) &gt;&gt; 16;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (!nvif_mmu_kind_=
+valid(mmu, nvbo-&gt;kind)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0kfree(nvbo);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0return ERR_PTR(-EINVAL);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0nvbo-&gt;mode =3D t=
+ile_mode;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0} else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0nvbo-&gt;zeta =3D (=
+tile_flags &amp; 0x00000007);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0nvbo-&gt;mode =3D tile_mode;<br>
+<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0if (!nouveau_cli_uvmm(cli) || internal) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Determine the de=
+sirable target GPU page size for the buffer. */<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 for (i =3D 0; i &lt=
+; vmm-&gt;page_nr; i++) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 /* Because we cannot currently allow VMM maps to fail<br>
+@@ -304,12 +305,6 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size, i=
+nt *align, u32 domain,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 nvbo-&gt;page =3D v=
+mm-&gt;page[pi].shift;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* reject other til=
+e flags when in VM mode. */<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (tile_mode)<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0return ERR_PTR(-EINVAL);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (tile_flags &amp=
+; ~NOUVEAU_GEM_TILE_NONCONTIG)<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0return ERR_PTR(-EINVAL);<br>
+-<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Determine the de=
+sirable target GPU page size for the buffer. */<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 for (i =3D 0; i &lt=
+; vmm-&gt;page_nr; i++) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 /* Because we cannot currently allow VMM maps to fail<br>
+diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_drm.=
+h<br>
+index cd84227f1..5402f77ee 100644<br>
+--- a/include/uapi/drm/nouveau_drm.h<br>
++++ b/include/uapi/drm/nouveau_drm.h<br>
+@@ -68,6 +68,13 @@ extern &quot;C&quot; {<br>
+=C2=A0 */<br>
+=C2=A0#define NOUVEAU_GETPARAM_VRAM_USED 19<br>
+<br>
++/*<br>
++ * NOUVEAU_GETPARAM_HAS_VMA_TILEMODE<br>
++ *<br>
++ * Query whether tile mode and PTE kind are accepted with VM allocs or not=
+.<br>
++ */<br>
++#define NOUVEAU_GETPARAM_HAS_VMA_TILEMODE 20<br>
++<br>
+=C2=A0struct drm_nouveau_getparam {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 __u64 param;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 __u64 value;<br>
+-- <br>
+2.44.0<br>
+<br>
+</blockquote></div></div>
+
+--0000000000001ac80b0617f96742--
