@@ -2,67 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8E07BBF63C
-	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:49:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EA3CBBF64E
+	for <lists+nouveau@lfdr.de>; Mon, 06 Oct 2025 22:49:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 92D8A10E4BC;
-	Mon,  6 Oct 2025 20:49:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 09FDE10E5D6;
+	Mon,  6 Oct 2025 20:49:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="lwDjWqSz";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="JGvZJILJ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com
- [209.85.208.175])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1C0851131FF;
- Wed,  8 May 2024 23:06:51 +0000 (UTC)
-Received: by mail-lj1-f175.google.com with SMTP id
- 38308e7fff4ca-2df848f9325so3154061fa.1; 
- Wed, 08 May 2024 16:06:50 -0700 (PDT)
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
+ [209.85.128.41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0055210F41F;
+ Thu,  9 May 2024 20:44:27 +0000 (UTC)
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-41b9dff6be8so10303085e9.3; 
+ Thu, 09 May 2024 13:44:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715209609; x=1715814409; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1715287466; x=1715892266; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=nhxtaEbxipmWI1uIiVmUb0n+4XQE2lW/tiI1yKzWmUM=;
- b=lwDjWqSzidnSDu45mRaTKn29yTL4d8QsUErBSluepO9sWyyT8jd/cw9fPu08hj56Vp
- GnDZWPITwR/09jhc8Uqz8G8A2jnh37HC7UuBxb/R/OzTOdmHnu3IFO093y1i3+rC/wx6
- NwAkSszwZxL/7nMyp7LtEk/ssY7o1/+2ily6NpzFIRWM0LRxMj9F7IMeZKNalTUpTsKF
- vvZglVaQTKOj/I1Z4RHkJY3gB0poZS18ZENWUDqw33c6/hYCQWAXNDRh7ZJ3HW+8mQI8
- ArAY0KuU/XGFzeomtW1oeGvXw9hTTMDuEaMXTYQHC1D9vAQEz7egzoOtHU3Kp30kMSyX
- cKyg==
+ bh=TFnrhs8qbyMrXLDs1SkHJ+Oc5VBjQBEfIG44vO26wpU=;
+ b=JGvZJILJRPWUxNL4epCdRC+CUc8fDGzWikEsHje6WperN0OKadWLbdTlN5dUjqkxmd
+ 6QjdJctVsfnDxawKfszF2nkHBJ2QFZ8EMSXNSkLvkbDg0TE9ByohXIaAskTfMgoJNkqN
+ fvAchpXoD9LSIX1TE1ew/zBtxUChKZEvJH4acexlnvp2MoHgi/NRsB3+/V5B+XNeIih2
+ q+lMDYPgf5QfK+DzooioJuEG0+tvKMXPR7Mu928xs9hoicuT/oT+OMHlJ/yjbvJQCPZH
+ JbuGXsYEtTYblM7F4BTi9vrFICeHsAT5ie/w47UxjYrOY++Ps/k9WMZinJnS1obT+10o
+ Ku6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715209609; x=1715814409;
+ d=1e100.net; s=20230601; t=1715287466; x=1715892266;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nhxtaEbxipmWI1uIiVmUb0n+4XQE2lW/tiI1yKzWmUM=;
- b=hJ6dPmSogUvABMG67JwXMVkRsaWtMoTAzIaiLIe6t6M6Eh+jLdPDLyPH9A5df+/OzA
- LJ44xF03FBarkJAQbjlBUxKltWRfZXvRIcuvuZKO4QWEk6/lqnTgwSPb4CrCsP0QfnD2
- ZFm0eLnnaF1Q5jm80d6q/+NKm6QS+Bqi5d/hxnmvuhdN/53Y/bbKpEKV95zbKNIhPpWV
- xGCYwzrkcoQVyCgukc2vfLOBkzqjYK3LZU2HRuha8oUhkj5NqjrUcBrrCajQeIVmpZ8h
- XTdCRHR697pQ6K8+BjrM6eYKdKChdjARTLbYAl0wZk4KU8fALQdxiYjf3U5ZPgJsHj8E
- 2GLw==
+ bh=TFnrhs8qbyMrXLDs1SkHJ+Oc5VBjQBEfIG44vO26wpU=;
+ b=Tj/h5v/jEq+Dr5a/JsCnKhlSLn2I+x9LCt/MgFzbguzCffyPguuDGRw1fVGRQEDiCO
+ glQ6AQExrcJtQdLJc2t18gcwyIqplUVcvWfLRNy98E8GZfZwdR/qvHJpT6LM12mYpEcw
+ fJKD3vaso+/x2Br/ujoW/NMkvxVLz0T3vhmnYc334C4qxOqDmLATewzxq55y+1wFRWbu
+ 88ytiUaax0Dw2kPPuxE1U2k1xgDtRV/tFjTS2EUf+fOELsmbCXn9EMMhlQ5br0eb4pP1
+ I9pKVKLlmzwsId0IMnYzZbMeFiO675A53Js5QO5kSH7sRptKp96MJr1kFteAxhS7Ohuq
+ aXkA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW7l8HbVlqLEU9XKOvS6kyziicqoSm6kp3ZAtV609sWfj28dlCcxZiNsixGTRndwlzZEe5pApyhzGB+9K75Ikkw+k2zbKUeVpdN+okqLA==
-X-Gm-Message-State: AOJu0YyODd+4RNVqSYUt7RStViLUDhTGZDeSWP+o/k7L3QoypOQkrB+q
- /vZ8c8XdDknaAQwnuV9uC2x0wbXPyH3OcUzR7LJCb5tUKtl1sQZoqWfJaQ==
-X-Google-Smtp-Source: AGHT+IHvYw2kSLwhFXkAbOmJn0GTlgrmpEwuDWSlfPY2hTQ0Ywhj8GORLL3dMq7Gw0YSum0VEjTR4g==
-X-Received: by 2002:a2e:b790:0:b0:2e2:466b:1a51 with SMTP id
- 38308e7fff4ca-2e4475a0ecemr25694721fa.37.1715209608556; 
- Wed, 08 May 2024 16:06:48 -0700 (PDT)
+ AJvYcCUUptc4tktW3MFoTfkCqr2xi8vf7leqUQgnbQrXQXuAgT64eHUCK12vLaxMKRZN5AS9OKrep030sQ2qM0f3OpQSEcjELV46LIFm3zcqkA==
+X-Gm-Message-State: AOJu0YzzBuyIaMwytNKrAusBmWdAqaqOu2kFzddzbbxDEuRGPBgxZMdA
+ LXbCc8B94htio8+UV2WhY1IcA1NvhKJNbs7qgiVOVH5YS+WM4uMi50IPOQ==
+X-Google-Smtp-Source: AGHT+IGZfwfqgivNWtzN84BpDnUlXhiU2EVaWxcXnrcYGGgHTGeX5et2PfomBGJTXXugANG+a18y5g==
+X-Received: by 2002:a05:600c:3b86:b0:41a:a521:9699 with SMTP id
+ 5b1f17b1804b1-41fea93a0edmr5853025e9.4.1715287465411; 
+ Thu, 09 May 2024 13:44:25 -0700 (PDT)
 Received: from fedora.domain.name ([156.200.207.193])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-41f87d2045asm37630585e9.27.2024.05.08.16.06.47
+ 5b1f17b1804b1-41fe518a8fasm14662785e9.33.2024.05.09.13.44.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 May 2024 16:06:48 -0700 (PDT)
+ Thu, 09 May 2024 13:44:25 -0700 (PDT)
 From: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
 To: dri-devel@lists.freedesktop.org
 Cc: airlied@redhat.com, nouveau@lists.freedesktop.org,
  Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
-Subject: [PATCH v3] drm/nouveau: use tile_mode and pte_kind for VM_BIND bo
+Subject: [PATCH v4] drm/nouveau: use tile_mode and pte_kind for VM_BIND bo
  allocations
-Date: Thu,  9 May 2024 02:06:24 +0300
-Message-ID: <20240508230624.7598-1-mohamedahmedegypt2001@gmail.com>
+Date: Thu,  9 May 2024 23:43:52 +0300
+Message-ID: <20240509204352.7597-1-mohamedahmedegypt2001@gmail.com>
 X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -87,15 +87,15 @@ modifiers in NVK and ensure correctness when dealing with the nouveau
 GL driver.
 
 The userspace modifiers implementation this is for can be found here:
-https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/28843
+https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/24795
 
 Fixes: b88baab82871 ("drm/nouveau: implement new VM_BIND uAPI")
 Signed-off-by: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
 ---
  drivers/gpu/drm/nouveau/nouveau_abi16.c |  3 ++
- drivers/gpu/drm/nouveau/nouveau_bo.c    | 45 +++++++++++--------------
+ drivers/gpu/drm/nouveau/nouveau_bo.c    | 44 +++++++++++--------------
  include/uapi/drm/nouveau_drm.h          |  7 ++++
- 3 files changed, 30 insertions(+), 25 deletions(-)
+ 3 files changed, 29 insertions(+), 25 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouveau/nouveau_abi16.c
 index 80f74ee0f..47e53e17b 100644
@@ -112,10 +112,10 @@ index 80f74ee0f..47e53e17b 100644
  		NV_PRINTK(dbg, cli, "unknown parameter %lld\n", getparam->param);
  		return -EINVAL;
 diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
-index db8cbf615..583c962ef 100644
+index db8cbf615..186add400 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
 +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
-@@ -241,28 +241,29 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size, int *align, u32 domain,
+@@ -241,28 +241,28 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size, int *align, u32 domain,
  	}
  
  	nvbo->contig = !(tile_flags & NOUVEAU_GEM_TILE_NONCONTIG);
@@ -138,7 +138,6 @@ index db8cbf615..583c962ef 100644
 -			}
 -		} else {
 -			nvbo->zeta = (tile_flags & 0x00000007);
-+	/* for BO allocs, don't assign kinds */
 +	if (cli->device.info.family >= NV_DEVICE_INFO_V0_FERMI) {
 +		nvbo->kind = (tile_flags & 0x0000ff00) >> 8;
 +		if (!nvif_mmu_kind_valid(mmu, nvbo->kind)) {
@@ -164,7 +163,7 @@ index db8cbf615..583c962ef 100644
  		/* Determine the desirable target GPU page size for the buffer. */
  		for (i = 0; i < vmm->page_nr; i++) {
  			/* Because we cannot currently allow VMM maps to fail
-@@ -304,12 +305,6 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size, int *align, u32 domain,
+@@ -304,12 +304,6 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size, int *align, u32 domain,
  		}
  		nvbo->page = vmm->page[pi].shift;
  	} else {
