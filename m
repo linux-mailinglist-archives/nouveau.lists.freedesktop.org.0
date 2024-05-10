@@ -2,80 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01F618C1821
-	for <lists+nouveau@lfdr.de>; Thu,  9 May 2024 23:11:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F1328C2753
+	for <lists+nouveau@lfdr.de>; Fri, 10 May 2024 17:08:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7339810F472;
-	Thu,  9 May 2024 21:11:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E644110E354;
+	Fri, 10 May 2024 15:08:21 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Y+7TxKDg";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="eymKtFXA";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 179D710F472
- for <nouveau@lists.freedesktop.org>; Thu,  9 May 2024 21:11:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1715289113;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=2kHA6/aeevN+iRF1+w07RanccRf9FAorS/DmVI5C2io=;
- b=Y+7TxKDgv8qw3I8lvDKXO8Iln3gIG/lczq0DvfG0QwfYC6a+qoa21+OqyiHeT85SePdNms
- x/cWcHYjXnhEJ70o9h7DJb8F9R3VGe90tCMnlO5wCyUhwgKgczUih80/HPqS464FA3kA5d
- 3jQ/6RXqKP2W3v9WuCgX3ejsWrbRMmY=
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-279-wiQUpdgOMYOkSFvFqiCmyQ-1; Thu, 09 May 2024 17:11:52 -0400
-X-MC-Unique: wiQUpdgOMYOkSFvFqiCmyQ-1
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-6f4739ba7dcso910574b3a.0
- for <nouveau@lists.freedesktop.org>; Thu, 09 May 2024 14:11:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715289111; x=1715893911;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2kHA6/aeevN+iRF1+w07RanccRf9FAorS/DmVI5C2io=;
- b=dmU0QVNpuqTbeLpYJVOxdShglkUGuTAJ/cOdRGk2eon88TcrZ31Za6+yWrVaJMIcK5
- NeE7EJ6i2atMckEiJtycUziX3q7kr8rzSnuArv5jK24D8vc6pOrbbYKO9U1ug1LmqcAN
- P15uHTVYzLFhTBO/OYC2SvD06aNU2BBstu3eqspTIAus0HeWtLwJSAi5Pu8Ih+DWcTPd
- 4oy7MnVtboJVVg8o3fR+5/+ENufDMTxQjtdbASIP0NlG7blJV3KCrc727EmQh/TOjn2M
- N+IFdvl21USpsyN5it7J8g3RTVI4CTMkTC9FbyhBlxE8nRLdojtK5r0qEnD6WrzezW7k
- 8MYQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXhr6Ym/EaJRGRjm6WQqUGXiKlI8yeojLe+fU36XxJsr565R6QFYEouZ1NR+obQKyDBgek1Pe7yyc+KvswtX/jj+8pcTwfoEM6XMeZbsg==
-X-Gm-Message-State: AOJu0YzKG7XHHLJuFKrt5gux9qUayHbrjJL0EujSDGE0mZajGV/mvJUC
- as6iY6a+JmDLcc80LlESqq7lVmB5KmJbTuAiTvzEXHnrIaFRmB0L76NBilkRX/05oG7BdUeyILl
- XoEKFZOOgfVUgt6pw/QZzSX/TfBhCdghjxn17gUiDvwCcIv2JMAMvsZtr4VSp1WMJD6PLsAgCfn
- IEHVV+Z2vWB7Fjkoes5DaAk1U2P4vyDqWdk7Lm0A==
-X-Received: by 2002:a05:6a00:9285:b0:6e6:98bf:7b62 with SMTP id
- d2e1a72fcca58-6f4e02ac4cdmr745596b3a.8.1715289111133; 
- Thu, 09 May 2024 14:11:51 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFOeAuLy32ezsJj2r1M7Hca10qZlE0XUfZZcm6MULvRBLOnlB/aFauj8MDw1aUvDiKiKEQTpiYrLQJPHEHvMxs=
-X-Received: by 2002:a05:6a00:9285:b0:6e6:98bf:7b62 with SMTP id
- d2e1a72fcca58-6f4e02ac4cdmr745574b3a.8.1715289110746; Thu, 09 May 2024
- 14:11:50 -0700 (PDT)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 23A8410E056;
+ Fri, 10 May 2024 15:08:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1715353700; x=1746889700;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=FKhPcO9l3KyUktfNaUk9yHDhUM0ozVpqmgz3Ue6lRwA=;
+ b=eymKtFXA1nfPK1Al+fG/zz297iGKnPX3Zn83+9/hR5sh58FnsiKgCMjt
+ LrAhvW+4ewm2h+rAMIEG8iUZWclZC1Q9Cvr1LiAIv2V8eMQ/WwTTXQjbs
+ KPzyiK2lcgGiha2McrB9SqerDgh1S4qcMpHYvySYPUsc+XMcnamSBZQOz
+ Lj+w71p2abCRuzgPvOncl4OVNIjyG+KQY6DyPLHoEsfnFBUGpEs/FtoqG
+ bdxZsI5507i9p4Sdew5zgXiu5+h7sc4zds8zC8CAJ7Pd98jOC2Nkf/C9u
+ xm8/PKayOJkGCB4Y090DR99KLYHdH5QAhITE208PiPqhjJ9s6pPxQKmCx g==;
+X-CSE-ConnectionGUID: bvd9aZj+QzGNffkRFLKemA==
+X-CSE-MsgGUID: B1wYHQSzRVy3RNrNyQrXCw==
+X-IronPort-AV: E=McAfee;i="6600,9927,11068"; a="22009771"
+X-IronPort-AV: E=Sophos;i="6.08,151,1712646000"; d="scan'208";a="22009771"
+Received: from orviesa008.jf.intel.com ([10.64.159.148])
+ by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 May 2024 08:08:19 -0700
+X-CSE-ConnectionGUID: Imbt5EvDSsC45bUeRHW/RA==
+X-CSE-MsgGUID: gyD4QCM7RReTOdI1nniHeQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.08,151,1712646000"; d="scan'208";a="30204287"
+Received: from ettammin-desk.ger.corp.intel.com (HELO localhost)
+ ([10.245.246.180])
+ by orviesa008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 May 2024 08:08:18 -0700
+From: Jani Nikula <jani.nikula@intel.com>
+To: dri-devel@lists.freedesktop.org
+Cc: amd-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, jani.nikula@intel.com
+Subject: [RESEND 0/6] drm, nouveau/radeon/amdpgu: edid_blob_ptr cleanups
+Date: Fri, 10 May 2024 18:08:07 +0300
+Message-Id: <cover.1715353572.git.jani.nikula@intel.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20240506182331.8076-1-dan@danm.net>
- <ba0bc464-a06a-4c54-945a-202dca2c4e49@leemhuis.info>
-In-Reply-To: <ba0bc464-a06a-4c54-945a-202dca2c4e49@leemhuis.info>
-From: David Airlie <airlied@redhat.com>
-Date: Fri, 10 May 2024 07:11:39 +1000
-Message-ID: <CAMwc25pJqmNwpRvD3-Ahf66_XB9yFMxhSvU=M4vBMdhVSYS3PQ@mail.gmail.com>
-Subject: Re: [REGRESSION] v6.9-rc7: nouveau: init failed, no display output
- from kernel; successfully bisected
-To: Linux regressions mailing list <regressions@lists.linux.dev>
-Cc: lyude@redhat.com, kherbst@redhat.com, dakr@redhat.com, 
- stable@vger.kernel.org, Dan Moulding <dan@danm.net>,
- nouveau@lists.freedesktop.org
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,43 +68,43 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, May 9, 2024 at 8:31=E2=80=AFPM Linux regression tracking (Thorsten
-Leemhuis) <regressions@leemhuis.info> wrote:
->
-> On 06.05.24 20:23, Dan Moulding wrote:
-> > After upgrading to rc7 from rc6 on a system with NVIDIA GP104 using
-> > the nouveau driver, I get no display output from the kernel (only the
-> > output from GRUB shows on the primary display). Nonetheless, I was
-> > able to SSH to the system and get the kernel log from dmesg. I found
-> > errors from nouveau in it. Grepping it for nouveau gives me this:
-> >
-> > [    0.367379] nouveau 0000:01:00.0: NVIDIA GP104 (134000a1)
-> > [    0.474499] nouveau 0000:01:00.0: bios: version 86.04.50.80.13
-> > [    0.474620] nouveau 0000:01:00.0: pmu: firmware unavailable
-> > [    0.474977] nouveau 0000:01:00.0: fb: 8192 MiB GDDR5
-> > [    0.484371] nouveau 0000:01:00.0: sec2(acr): mbox 00000001 00000000
-> > [    0.484377] nouveau 0000:01:00.0: sec2(acr):load: boot failed: -5
-> > [    0.484379] nouveau 0000:01:00.0: acr: init failed, -5
-> > [    0.484466] nouveau 0000:01:00.0: init failed with -5
-> > [    0.484468] nouveau: DRM-master:00000000:00000080: init failed with =
--5
-> > [    0.484470] nouveau 0000:01:00.0: DRM-master: Device allocation fail=
-ed: -5
-> > [    0.485078] nouveau 0000:01:00.0: probe with driver nouveau failed w=
-ith error -50
-> >
-> > I bisected between v6.9-rc6 and v6.9-rc7 and that identified commit
-> > 52a6947bf576 ("drm/nouveau/firmware: Fix SG_DEBUG error with
-> > nvkm_firmware_ctor()") as the first bad commit.
->
-> Lyude, that's a commit of yours.
->
-> Given that 6.9 is due a quick question: I assume there is no easy fix
-> for this in sight? Or is a quick revert something that might be
-> appropriate to prevent this from entering 6.9?
+I've sent this some moths ago, let's try again...
 
-I'll take a look today and see if I can reproduce it and revert it if neede=
-d.
+BR,
+Jani.
 
-Dave.
+Jani Nikula (6):
+  drm/nouveau: convert to using is_hdmi and has_audio from display info
+  drm/radeon: convert to using is_hdmi and has_audio from display info
+  drm/radeon: remove radeon_connector_edid() and stop using
+    edid_blob_ptr
+  drm/amdgpu: remove amdgpu_connector_edid() and stop using
+    edid_blob_ptr
+  drm/edid: add a helper for EDID sysfs property show
+  drm/connector: update edid_blob_ptr documentation
+
+ .../gpu/drm/amd/amdgpu/amdgpu_connectors.c    | 16 ---------
+ .../gpu/drm/amd/amdgpu/amdgpu_connectors.h    |  1 -
+ drivers/gpu/drm/amd/amdgpu/dce_v10_0.c        |  4 +--
+ drivers/gpu/drm/amd/amdgpu/dce_v11_0.c        |  4 +--
+ drivers/gpu/drm/amd/amdgpu/dce_v6_0.c         |  4 +--
+ drivers/gpu/drm/amd/amdgpu/dce_v8_0.c         |  4 +--
+ drivers/gpu/drm/drm_crtc_internal.h           |  2 ++
+ drivers/gpu/drm/drm_edid.c                    | 33 +++++++++++++++++++
+ drivers/gpu/drm/drm_sysfs.c                   | 24 ++------------
+ drivers/gpu/drm/nouveau/dispnv50/disp.c       |  8 ++---
+ drivers/gpu/drm/nouveau/dispnv50/head.c       |  8 +----
+ drivers/gpu/drm/nouveau/nouveau_connector.c   |  2 +-
+ drivers/gpu/drm/radeon/atombios_encoders.c    | 10 +++---
+ drivers/gpu/drm/radeon/evergreen_hdmi.c       |  5 ++-
+ drivers/gpu/drm/radeon/radeon_audio.c         | 13 ++++----
+ drivers/gpu/drm/radeon/radeon_connectors.c    | 27 ++++-----------
+ drivers/gpu/drm/radeon/radeon_display.c       |  2 +-
+ drivers/gpu/drm/radeon/radeon_encoders.c      |  4 +--
+ drivers/gpu/drm/radeon/radeon_mode.h          |  2 --
+ include/drm/drm_connector.h                   |  6 +++-
+ 20 files changed, 79 insertions(+), 100 deletions(-)
+
+-- 
+2.39.2
 
