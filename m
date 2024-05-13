@@ -2,60 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BEE28C3E10
-	for <lists+nouveau@lfdr.de>; Mon, 13 May 2024 11:24:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CAAFA8C4089
+	for <lists+nouveau@lfdr.de>; Mon, 13 May 2024 14:18:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0D8A510E597;
-	Mon, 13 May 2024 09:24:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8070210E72B;
+	Mon, 13 May 2024 12:18:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="JGA9LnWh";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="aqcoCq1Y";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3B9DD10E558;
- Mon, 13 May 2024 09:24:30 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AAE7D10E24A;
+ Mon, 13 May 2024 12:18:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1715592270; x=1747128270;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=J5cAD1c2dKYqVqNzS7rC6uInUn5qXdgtIdX9/3QDl08=;
- b=JGA9LnWhUBwBytmOXMVPu8WVGpHVeqSRisA3dReIfNhFQ0vZy9o+/c41
- 9sm5n7z2kOuKuz0wi/uRE0EDVO3D98Rs1kB7Tjqa7svQJ1EKQHmUWeDOo
- 2ba0g2j2/HfLGcsUx+RXvpGj31wIXEM0fU+secoQ4zx5EsV84IoDhpzpG
- OinGavnMy42Iqs46wk/m/2RTfzdV+0pwdcBdDmhAiZKS9Yz2H5G7pEET2
- kdym1Fk2hy0U+wffQA3jaSpCzO0/Cxt9qjNnX9LmXFcHzUTBFtkPG0NCR
- yI5WDwa9XFmJb/Jd17NLQdXT3YT2fhRjuI0yOLKGR45XwlDQM6rTQvAvv A==;
-X-CSE-ConnectionGUID: VpzMWZ2rRYCCiwoHVGL66g==
-X-CSE-MsgGUID: pR6O9acLSdaj+Dnx48o8jA==
-X-IronPort-AV: E=McAfee;i="6600,9927,11071"; a="11339126"
-X-IronPort-AV: E=Sophos;i="6.08,158,1712646000"; d="scan'208";a="11339126"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
- by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 May 2024 02:24:29 -0700
-X-CSE-ConnectionGUID: joNydMbdRNu7zZAnZp8+8A==
-X-CSE-MsgGUID: jw73td0CQkKXUpdFJwDqWA==
+ t=1715602701; x=1747138701;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version:content-transfer-encoding;
+ bh=OrLOdhd20Ww2EGzQMmlcnwLGgqvEGB5twHwF2grXkmY=;
+ b=aqcoCq1YEKss7e7ttYAotDBuJBtaSJaqQ+B4eOGvDU4SbtvrU+iGv105
+ U61gYn5e2XBXCFbtvJYzlcFbi4I0mFHppBW6HyfVx4Ys58ZX0LYmvac12
+ AMohDvYGJ7xdIKuZJ+lv148hLV6LKp1wH5XkPUQBWzblrjfyWcZRkJvqk
+ zXE2kf3kyi3Pv2aXH19+iNHgzhU1KIExxMjS1JJbi3kc8dIqq/4JveHdA
+ pB7Etnl5RkW4t+opzP+QjUo3wbmTCsPnT7xzfWMAmnbRNEDfjVgQ3cKyO
+ eC7N1x2ECHc8L+4mp3fle/EpV8Ta+j0izMKA6h0sDXmYwBYEGcb+GriN0 g==;
+X-CSE-ConnectionGUID: MQmaicq7TOq0r7FC4F09+g==
+X-CSE-MsgGUID: cew5/9T5RH6yBhAM2HrEqw==
+X-IronPort-AV: E=McAfee;i="6600,9927,11071"; a="29022753"
+X-IronPort-AV: E=Sophos;i="6.08,158,1712646000"; d="scan'208";a="29022753"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 13 May 2024 05:18:12 -0700
+X-CSE-ConnectionGUID: UiHs0f4tRlK4JOMklVbdgg==
+X-CSE-MsgGUID: TBJF+nUzRw6nsyWPIgfIKQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,158,1712646000"; d="scan'208";a="34789983"
-Received: from lkp-server01.sh.intel.com (HELO f8b243fe6e68) ([10.239.97.150])
- by fmviesa003.fm.intel.com with ESMTP; 13 May 2024 02:24:15 -0700
-Received: from kbuild by f8b243fe6e68 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1s6Rum-0009p5-2A;
- Mon, 13 May 2024 09:24:12 +0000
-Date: Mon, 13 May 2024 17:23:20 +0800
-From: kernel test robot <lkp@intel.com>
-To: Dave Airlie <airlied@gmail.com>, dri-devel@lists.freedesktop.org
-Cc: oe-kbuild-all@lists.linux.dev, nouveau@lists.freedesktop.org,
- dakr@redhat.com
-Subject: Re: [PATCH] nouveau/firmware: using dma non-coherent interfaces for
- fw loading.
-Message-ID: <202405131724.YtoCSRmy-lkp@intel.com>
-References: <20240513064350.1050994-1-airlied@gmail.com>
+X-IronPort-AV: E=Sophos;i="6.08,158,1712646000"; d="scan'208";a="34877366"
+Received: from fdefranc-mobl3.ger.corp.intel.com (HELO localhost)
+ ([10.245.246.7])
+ by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 13 May 2024 05:18:08 -0700
+From: Jani Nikula <jani.nikula@intel.com>
+To: Lyude Paul <lyude@redhat.com>, dri-devel@lists.freedesktop.org
+Cc: amd-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, Karol Herbst <kherbst@redhat.com>, Danilo
+ Krummrich <dakr@redhat.com>
+Subject: Re: [RESEND 1/6] drm/nouveau: convert to using is_hdmi and
+ has_audio from display info
+In-Reply-To: <b23e6de23a1c1d997fa5e9e9bef8c88672774d01.camel@redhat.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <cover.1715353572.git.jani.nikula@intel.com>
+ <aa45875200705205ae101c409fc2bba03b631a5e.1715353572.git.jani.nikula@intel.com>
+ <b23e6de23a1c1d997fa5e9e9bef8c88672774d01.camel@redhat.com>
+Date: Mon, 13 May 2024 15:18:06 +0300
+Message-ID: <87v83hewht.fsf@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240513064350.1050994-1-airlied@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,72 +73,142 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Dave,
+On Fri, 10 May 2024, Lyude Paul <lyude@redhat.com> wrote:
+> Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-kernel test robot noticed the following build errors:
+Thanks, how do you want to handle merging this?
 
-[auto build test ERROR on drm-misc/drm-misc-next]
-[also build test ERROR on linus/master v6.9 next-20240513]
-[cannot apply to drm-tip/drm-tip]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Dave-Airlie/nouveau-firmware-using-dma-non-coherent-interfaces-for-fw-loading/20240513-144435
-base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
-patch link:    https://lore.kernel.org/r/20240513064350.1050994-1-airlied%40gmail.com
-patch subject: [PATCH] nouveau/firmware: using dma non-coherent interfaces for fw loading.
-config: parisc-defconfig (https://download.01.org/0day-ci/archive/20240513/202405131724.YtoCSRmy-lkp@intel.com/config)
-compiler: hppa-linux-gcc (GCC) 13.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240513/202405131724.YtoCSRmy-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202405131724.YtoCSRmy-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   drivers/gpu/drm/nouveau/nvkm/core/firmware.c: In function 'nvkm_firmware_ctor':
->> drivers/gpu/drm/nouveau/nvkm/core/firmware.c:242:54: error: passing argument 3 of 'dma_alloc_noncoherent' from incompatible pointer type [-Werror=incompatible-pointer-types]
-     242 |                                                 len, &fw->phys,
-         |                                                      ^~~~~~~~~
-         |                                                      |
-         |                                                      u64 * {aka long long unsigned int *}
-   In file included from include/linux/pci.h:2693,
-                    from drivers/gpu/drm/nouveau/include/nvif/os.h:8,
-                    from drivers/gpu/drm/nouveau/include/nvkm/core/os.h:4,
-                    from drivers/gpu/drm/nouveau/include/nvkm/core/oclass.h:3,
-                    from drivers/gpu/drm/nouveau/include/nvkm/core/device.h:4,
-                    from drivers/gpu/drm/nouveau/nvkm/core/firmware.c:22:
-   include/linux/dma-mapping.h:321:29: note: expected 'dma_addr_t *' {aka 'unsigned int *'} but argument is of type 'u64 *' {aka 'long long unsigned int *'}
-     321 |                 dma_addr_t *dma_handle, enum dma_data_direction dir, gfp_t gfp)
-         |                 ~~~~~~~~~~~~^~~~~~~~~~
-   cc1: some warnings being treated as errors
+BR,
+Jani.
 
 
-vim +/dma_alloc_noncoherent +242 drivers/gpu/drm/nouveau/nvkm/core/firmware.c
+>
+> On Fri, 2024-05-10 at 18:08 +0300, Jani Nikula wrote:
+>> Prefer the parsed results for is_hdmi and has_audio in display info
+>> over
+>> calling drm_detect_hdmi_monitor() and drm_detect_monitor_audio(),
+>> respectively.
+>>=20
+>> Conveniently, this also removes the need to use edid_blob_ptr.
+>>=20
+>> v2: Reverse a backwards if condition (Ilia)
+>>=20
+>> Cc: Karol Herbst <kherbst@redhat.com>
+>> Cc: Lyude Paul <lyude@redhat.com>
+>> Cc: Danilo Krummrich <dakr@redhat.com>
+>> Cc: nouveau@lists.freedesktop.org
+>> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+>> ---
+>> =C2=A0drivers/gpu/drm/nouveau/dispnv50/disp.c=C2=A0=C2=A0=C2=A0=C2=A0 | =
+8 ++++----
+>> =C2=A0drivers/gpu/drm/nouveau/dispnv50/head.c=C2=A0=C2=A0=C2=A0=C2=A0 | =
+8 +-------
+>> =C2=A0drivers/gpu/drm/nouveau/nouveau_connector.c | 2 +-
+>> =C2=A03 files changed, 6 insertions(+), 12 deletions(-)
+>>=20
+>> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+>> b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+>> index 0c3d88ad0b0e..168c27213287 100644
+>> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+>> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+>> @@ -751,7 +751,7 @@ nv50_audio_enable(struct drm_encoder *encoder,
+>> struct nouveau_crtc *nv_crtc,
+>> =C2=A0	struct nouveau_encoder *nv_encoder =3D
+>> nouveau_encoder(encoder);
+>> =C2=A0	struct nvif_outp *outp =3D &nv_encoder->outp;
+>> =C2=A0
+>> -	if (!nv50_audio_supported(encoder) ||
+>> !drm_detect_monitor_audio(nv_connector->edid))
+>> +	if (!nv50_audio_supported(encoder) || !nv_connector-
+>> >base.display_info.has_audio)
+>> =C2=A0		return;
+>> =C2=A0
+>> =C2=A0	mutex_lock(&drm->audio.lock);
+>> @@ -1765,7 +1765,7 @@ nv50_sor_atomic_enable(struct drm_encoder
+>> *encoder, struct drm_atomic_state *sta
+>> =C2=A0	if ((disp->disp->object.oclass =3D=3D GT214_DISP ||
+>> =C2=A0	=C2=A0=C2=A0=C2=A0=C2=A0 disp->disp->object.oclass >=3D GF110_DIS=
+P) &&
+>> =C2=A0	=C2=A0=C2=A0=C2=A0 nv_encoder->dcb->type !=3D DCB_OUTPUT_LVDS &&
+>> -	=C2=A0=C2=A0=C2=A0 drm_detect_monitor_audio(nv_connector->edid))
+>> +	=C2=A0=C2=A0=C2=A0 nv_connector->base.display_info.has_audio)
+>> =C2=A0		hda =3D true;
+>> =C2=A0
+>> =C2=A0	if (!nvif_outp_acquired(outp))
+>> @@ -1774,7 +1774,7 @@ nv50_sor_atomic_enable(struct drm_encoder
+>> *encoder, struct drm_atomic_state *sta
+>> =C2=A0	switch (nv_encoder->dcb->type) {
+>> =C2=A0	case DCB_OUTPUT_TMDS:
+>> =C2=A0		if (disp->disp->object.oclass !=3D NV50_DISP &&
+>> -		=C2=A0=C2=A0=C2=A0 drm_detect_hdmi_monitor(nv_connector->edid))
+>> +		=C2=A0=C2=A0=C2=A0 nv_connector->base.display_info.is_hdmi)
+>> =C2=A0			nv50_hdmi_enable(encoder, nv_crtc,
+>> nv_connector, state, mode, hda);
+>> =C2=A0
+>> =C2=A0		if (nv_encoder->outp.or.link & 1) {
+>> @@ -1787,7 +1787,7 @@ nv50_sor_atomic_enable(struct drm_encoder
+>> *encoder, struct drm_atomic_state *sta
+>> =C2=A0			 */
+>> =C2=A0			if (mode->clock >=3D 165000 &&
+>> =C2=A0			=C2=A0=C2=A0=C2=A0 nv_encoder->dcb->duallink_possible &&
+>> -			=C2=A0=C2=A0=C2=A0 !drm_detect_hdmi_monitor(nv_connector-
+>> >edid))
+>> +			=C2=A0=C2=A0=C2=A0 !nv_connector-
+>> >base.display_info.is_hdmi)
+>> =C2=A0				proto =3D
+>> NV507D_SOR_SET_CONTROL_PROTOCOL_DUAL_TMDS;
+>> =C2=A0		} else {
+>> =C2=A0			proto =3D
+>> NV507D_SOR_SET_CONTROL_PROTOCOL_SINGLE_TMDS_B;
+>> diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c
+>> b/drivers/gpu/drm/nouveau/dispnv50/head.c
+>> index 83355dbc15ee..d7c74cc43ba5 100644
+>> --- a/drivers/gpu/drm/nouveau/dispnv50/head.c
+>> +++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
+>> @@ -127,14 +127,8 @@ nv50_head_atomic_check_view(struct
+>> nv50_head_atom *armh,
+>> =C2=A0	struct drm_display_mode *omode =3D &asyh->state.adjusted_mode;
+>> =C2=A0	struct drm_display_mode *umode =3D &asyh->state.mode;
+>> =C2=A0	int mode =3D asyc->scaler.mode;
+>> -	struct edid *edid;
+>> =C2=A0	int umode_vdisplay, omode_hdisplay, omode_vdisplay;
+>> =C2=A0
+>> -	if (connector->edid_blob_ptr)
+>> -		edid =3D (struct edid *)connector->edid_blob_ptr-
+>> >data;
+>> -	else
+>> -		edid =3D NULL;
+>> -
+>> =C2=A0	if (!asyc->scaler.full) {
+>> =C2=A0		if (mode =3D=3D DRM_MODE_SCALE_NONE)
+>> =C2=A0			omode =3D umode;
+>> @@ -162,7 +156,7 @@ nv50_head_atomic_check_view(struct nv50_head_atom
+>> *armh,
+>> =C2=A0	 */
+>> =C2=A0	if ((asyc->scaler.underscan.mode =3D=3D UNDERSCAN_ON ||
+>> =C2=A0	=C2=A0=C2=A0=C2=A0 (asyc->scaler.underscan.mode =3D=3D UNDERSCAN_=
+AUTO &&
+>> -	=C2=A0=C2=A0=C2=A0=C2=A0 drm_detect_hdmi_monitor(edid)))) {
+>> +	=C2=A0=C2=A0=C2=A0=C2=A0 connector->display_info.is_hdmi))) {
+>> =C2=A0		u32 bX =3D asyc->scaler.underscan.hborder;
+>> =C2=A0		u32 bY =3D asyc->scaler.underscan.vborder;
+>> =C2=A0		u32 r =3D (asyh->view.oH << 19) / asyh->view.oW;
+>> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c
+>> b/drivers/gpu/drm/nouveau/nouveau_connector.c
+>> index 856b3ef5edb8..938832a6af15 100644
+>> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
+>> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+>> @@ -1034,7 +1034,7 @@ get_tmds_link_bandwidth(struct drm_connector
+>> *connector)
+>> =C2=A0	unsigned duallink_scale =3D
+>> =C2=A0		nouveau_duallink && nv_encoder->dcb-
+>> >duallink_possible ? 2 : 1;
+>> =C2=A0
+>> -	if (drm_detect_hdmi_monitor(nv_connector->edid)) {
+>> +	if (nv_connector->base.display_info.is_hdmi) {
+>> =C2=A0		info =3D &nv_connector->base.display_info;
+>> =C2=A0		duallink_scale =3D 1;
+>> =C2=A0	}
 
-   224	
-   225	int
-   226	nvkm_firmware_ctor(const struct nvkm_firmware_func *func, const char *name,
-   227			   struct nvkm_device *device, const void *src, int len, struct nvkm_firmware *fw)
-   228	{
-   229		fw->func = func;
-   230		fw->name = name;
-   231		fw->device = device;
-   232		fw->len = len;
-   233	
-   234		switch (fw->func->type) {
-   235		case NVKM_FIRMWARE_IMG_RAM:
-   236			fw->img = kmemdup(src, fw->len, GFP_KERNEL);
-   237			break;
-   238		case NVKM_FIRMWARE_IMG_DMA: {
-   239			len = ALIGN(fw->len, PAGE_SIZE);
-   240	
-   241			fw->img = dma_alloc_noncoherent(fw->device->dev,
- > 242							len, &fw->phys,
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+--=20
+Jani Nikula, Intel
