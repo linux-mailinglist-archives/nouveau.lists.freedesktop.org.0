@@ -2,46 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D17A8C3B8E
-	for <lists+nouveau@lfdr.de>; Mon, 13 May 2024 08:44:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BEE28C3E10
+	for <lists+nouveau@lfdr.de>; Mon, 13 May 2024 11:24:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CA50A10E2B1;
-	Mon, 13 May 2024 06:43:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0D8A510E597;
+	Mon, 13 May 2024 09:24:32 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="JGA9LnWh";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [205.139.111.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3E1BA10E2B1
- for <nouveau@lists.freedesktop.org>; Mon, 13 May 2024 06:43:57 +0000 (UTC)
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-294-cZ3FIbBDNZquWXQme0Idgw-1; Mon,
- 13 May 2024 02:43:53 -0400
-X-MC-Unique: cZ3FIbBDNZquWXQme0Idgw-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
- [10.11.54.6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id AC85529AA2C3;
- Mon, 13 May 2024 06:43:53 +0000 (UTC)
-Received: from dreadlord.redhat.com (unknown [10.64.136.49])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 39A55200B4DB;
- Mon, 13 May 2024 06:43:51 +0000 (UTC)
-From: Dave Airlie <airlied@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org,
-	dakr@redhat.com
-Subject: [PATCH] nouveau/firmware: using dma non-coherent interfaces for fw
- loading.
-Date: Mon, 13 May 2024 16:43:50 +1000
-Message-ID: <20240513064350.1050994-1-airlied@gmail.com>
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3B9DD10E558;
+ Mon, 13 May 2024 09:24:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1715592270; x=1747128270;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=J5cAD1c2dKYqVqNzS7rC6uInUn5qXdgtIdX9/3QDl08=;
+ b=JGA9LnWhUBwBytmOXMVPu8WVGpHVeqSRisA3dReIfNhFQ0vZy9o+/c41
+ 9sm5n7z2kOuKuz0wi/uRE0EDVO3D98Rs1kB7Tjqa7svQJ1EKQHmUWeDOo
+ 2ba0g2j2/HfLGcsUx+RXvpGj31wIXEM0fU+secoQ4zx5EsV84IoDhpzpG
+ OinGavnMy42Iqs46wk/m/2RTfzdV+0pwdcBdDmhAiZKS9Yz2H5G7pEET2
+ kdym1Fk2hy0U+wffQA3jaSpCzO0/Cxt9qjNnX9LmXFcHzUTBFtkPG0NCR
+ yI5WDwa9XFmJb/Jd17NLQdXT3YT2fhRjuI0yOLKGR45XwlDQM6rTQvAvv A==;
+X-CSE-ConnectionGUID: VpzMWZ2rRYCCiwoHVGL66g==
+X-CSE-MsgGUID: pR6O9acLSdaj+Dnx48o8jA==
+X-IronPort-AV: E=McAfee;i="6600,9927,11071"; a="11339126"
+X-IronPort-AV: E=Sophos;i="6.08,158,1712646000"; d="scan'208";a="11339126"
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+ by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 13 May 2024 02:24:29 -0700
+X-CSE-ConnectionGUID: joNydMbdRNu7zZAnZp8+8A==
+X-CSE-MsgGUID: jw73td0CQkKXUpdFJwDqWA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.08,158,1712646000"; d="scan'208";a="34789983"
+Received: from lkp-server01.sh.intel.com (HELO f8b243fe6e68) ([10.239.97.150])
+ by fmviesa003.fm.intel.com with ESMTP; 13 May 2024 02:24:15 -0700
+Received: from kbuild by f8b243fe6e68 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1s6Rum-0009p5-2A;
+ Mon, 13 May 2024 09:24:12 +0000
+Date: Mon, 13 May 2024 17:23:20 +0800
+From: kernel test robot <lkp@intel.com>
+To: Dave Airlie <airlied@gmail.com>, dri-devel@lists.freedesktop.org
+Cc: oe-kbuild-all@lists.linux.dev, nouveau@lists.freedesktop.org,
+ dakr@redhat.com
+Subject: Re: [PATCH] nouveau/firmware: using dma non-coherent interfaces for
+ fw loading.
+Message-ID: <202405131724.YtoCSRmy-lkp@intel.com>
+References: <20240513064350.1050994-1-airlied@gmail.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: gmail.com
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240513064350.1050994-1-airlied@gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,118 +70,72 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
+Hi Dave,
 
-Currently, enabling SG_DEBUG in the kernel will cause nouveau to hit a
-BUG() on startup, when the iommu is enabled:
+kernel test robot noticed the following build errors:
 
-kernel BUG at include/linux/scatterlist.h:187!
-invalid opcode: 0000 [#1] PREEMPT SMP NOPTI
-CPU: 7 PID: 930 Comm: (udev-worker) Not tainted 6.9.0-rc3Lyude-Test+ #30
-Hardware name: MSI MS-7A39/A320M GAMING PRO (MS-7A39), BIOS 1.I0 01/22/2019
-RIP: 0010:sg_init_one+0x85/0xa0
-Code: 69 88 32 01 83 e1 03 f6 c3 03 75 20 a8 01 75 1e 48 09 cb 41 89 54
-24 08 49 89 1c 24 41 89 6c 24 0c 5b 5d 41 5c e9 7b b9 88 00 <0f> 0b 0f 0b
-0f 0b 48 8b 05 5e 46 9a 01 eb b2 66 66 2e 0f 1f 84 00
-RSP: 0018:ffffa776017bf6a0 EFLAGS: 00010246
-RAX: 0000000000000000 RBX: ffffa77600d87000 RCX: 000000000000002b
-RDX: 0000000000000001 RSI: 0000000000000000 RDI: ffffa77680d87000
-RBP: 000000000000e000 R08: 0000000000000000 R09: 0000000000000000
-R10: ffff98f4c46aa508 R11: 0000000000000000 R12: ffff98f4c46aa508
-R13: ffff98f4c46aa008 R14: ffffa77600d4a000 R15: ffffa77600d4a018
-FS:  00007feeb5aae980(0000) GS:ffff98f5c4dc0000(0000) knlGS:000000000000000=
-0
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007f22cb9a4520 CR3: 00000001043ba000 CR4: 00000000003506f0
-Call Trace:
- <TASK>
- ? die+0x36/0x90
- ? do_trap+0xdd/0x100
- ? sg_init_one+0x85/0xa0
- ? do_error_trap+0x65/0x80
- ? sg_init_one+0x85/0xa0
- ? exc_invalid_op+0x50/0x70
- ? sg_init_one+0x85/0xa0
- ? asm_exc_invalid_op+0x1a/0x20
- ? sg_init_one+0x85/0xa0
- nvkm_firmware_ctor+0x14a/0x250 [nouveau]
- nvkm_falcon_fw_ctor+0x42/0x70 [nouveau]
- ga102_gsp_booter_ctor+0xb4/0x1a0 [nouveau]
- r535_gsp_oneinit+0xb3/0x15f0 [nouveau]
- ? srso_return_thunk+0x5/0x5f
- ? srso_return_thunk+0x5/0x5f
- ? nvkm_udevice_new+0x95/0x140 [nouveau]
- ? srso_return_thunk+0x5/0x5f
- ? srso_return_thunk+0x5/0x5f
- ? ktime_get+0x47/0xb0
+[auto build test ERROR on drm-misc/drm-misc-next]
+[also build test ERROR on linus/master v6.9 next-20240513]
+[cannot apply to drm-tip/drm-tip]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-Fix this by using the non-coherent allocator instead, I think there
-might be a better answer to this, but it involve ripping up some of
-APIs using sg lists.
+url:    https://github.com/intel-lab-lkp/linux/commits/Dave-Airlie/nouveau-firmware-using-dma-non-coherent-interfaces-for-fw-loading/20240513-144435
+base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
+patch link:    https://lore.kernel.org/r/20240513064350.1050994-1-airlied%40gmail.com
+patch subject: [PATCH] nouveau/firmware: using dma non-coherent interfaces for fw loading.
+config: parisc-defconfig (https://download.01.org/0day-ci/archive/20240513/202405131724.YtoCSRmy-lkp@intel.com/config)
+compiler: hppa-linux-gcc (GCC) 13.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240513/202405131724.YtoCSRmy-lkp@intel.com/reproduce)
 
-Signed-off-by: Dave Airlie <airlied@redhat.com>
-Cc: stable@vger.kernel.org
----
- drivers/gpu/drm/nouveau/nvkm/core/firmware.c | 11 ++++++-----
- drivers/gpu/drm/nouveau/nvkm/falcon/fw.c     |  6 ++++++
- 2 files changed, 12 insertions(+), 5 deletions(-)
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202405131724.YtoCSRmy-lkp@intel.com/
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/core/firmware.c b/drivers/gpu/drm=
-/nouveau/nvkm/core/firmware.c
-index adc60b25f8e6..c9bee980777c 100644
---- a/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
-@@ -205,7 +205,8 @@ nvkm_firmware_dtor(struct nvkm_firmware *fw)
- =09=09break;
- =09case NVKM_FIRMWARE_IMG_DMA:
- =09=09nvkm_memory_unref(&memory);
--=09=09dma_free_coherent(fw->device->dev, sg_dma_len(&fw->mem.sgl), fw->img=
-, fw->phys);
-+=09=09dma_free_noncoherent(fw->device->dev, sg_dma_len(&fw->mem.sgl),
-+=09=09=09=09     fw->img, fw->phys, DMA_TO_DEVICE);
- =09=09break;
- =09case NVKM_FIRMWARE_IMG_SGT:
- =09=09nvkm_memory_unref(&memory);
-@@ -235,14 +236,14 @@ nvkm_firmware_ctor(const struct nvkm_firmware_func *f=
-unc, const char *name,
- =09=09fw->img =3D kmemdup(src, fw->len, GFP_KERNEL);
- =09=09break;
- =09case NVKM_FIRMWARE_IMG_DMA: {
--=09=09dma_addr_t addr;
--
- =09=09len =3D ALIGN(fw->len, PAGE_SIZE);
-=20
--=09=09fw->img =3D dma_alloc_coherent(fw->device->dev, len, &addr, GFP_KERN=
-EL);
-+=09=09fw->img =3D dma_alloc_noncoherent(fw->device->dev,
-+=09=09=09=09=09=09len, &fw->phys,
-+=09=09=09=09=09=09DMA_TO_DEVICE,
-+=09=09=09=09=09=09GFP_KERNEL);
- =09=09if (fw->img) {
- =09=09=09memcpy(fw->img, src, fw->len);
--=09=09=09fw->phys =3D addr;
- =09=09}
-=20
- =09=09sg_init_one(&fw->mem.sgl, fw->img, len);
-diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/fw.c b/drivers/gpu/drm/nou=
-veau/nvkm/falcon/fw.c
-index 80a480b12174..a1c8545f1249 100644
---- a/drivers/gpu/drm/nouveau/nvkm/falcon/fw.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/falcon/fw.c
-@@ -89,6 +89,12 @@ nvkm_falcon_fw_boot(struct nvkm_falcon_fw *fw, struct nv=
-km_subdev *user,
- =09=09nvkm_falcon_fw_dtor_sigs(fw);
- =09}
-=20
-+=09/* after last write to the img, sync dma mappings */
-+=09dma_sync_single_for_device(fw->fw.device->dev,
-+=09=09=09=09   fw->fw.phys,
-+=09=09=09=09   sg_dma_len(&fw->fw.mem.sgl),
-+=09=09=09=09   DMA_TO_DEVICE);
-+
- =09FLCNFW_DBG(fw, "resetting");
- =09fw->func->reset(fw);
-=20
---=20
-2.43.2
+All errors (new ones prefixed by >>):
 
+   drivers/gpu/drm/nouveau/nvkm/core/firmware.c: In function 'nvkm_firmware_ctor':
+>> drivers/gpu/drm/nouveau/nvkm/core/firmware.c:242:54: error: passing argument 3 of 'dma_alloc_noncoherent' from incompatible pointer type [-Werror=incompatible-pointer-types]
+     242 |                                                 len, &fw->phys,
+         |                                                      ^~~~~~~~~
+         |                                                      |
+         |                                                      u64 * {aka long long unsigned int *}
+   In file included from include/linux/pci.h:2693,
+                    from drivers/gpu/drm/nouveau/include/nvif/os.h:8,
+                    from drivers/gpu/drm/nouveau/include/nvkm/core/os.h:4,
+                    from drivers/gpu/drm/nouveau/include/nvkm/core/oclass.h:3,
+                    from drivers/gpu/drm/nouveau/include/nvkm/core/device.h:4,
+                    from drivers/gpu/drm/nouveau/nvkm/core/firmware.c:22:
+   include/linux/dma-mapping.h:321:29: note: expected 'dma_addr_t *' {aka 'unsigned int *'} but argument is of type 'u64 *' {aka 'long long unsigned int *'}
+     321 |                 dma_addr_t *dma_handle, enum dma_data_direction dir, gfp_t gfp)
+         |                 ~~~~~~~~~~~~^~~~~~~~~~
+   cc1: some warnings being treated as errors
+
+
+vim +/dma_alloc_noncoherent +242 drivers/gpu/drm/nouveau/nvkm/core/firmware.c
+
+   224	
+   225	int
+   226	nvkm_firmware_ctor(const struct nvkm_firmware_func *func, const char *name,
+   227			   struct nvkm_device *device, const void *src, int len, struct nvkm_firmware *fw)
+   228	{
+   229		fw->func = func;
+   230		fw->name = name;
+   231		fw->device = device;
+   232		fw->len = len;
+   233	
+   234		switch (fw->func->type) {
+   235		case NVKM_FIRMWARE_IMG_RAM:
+   236			fw->img = kmemdup(src, fw->len, GFP_KERNEL);
+   237			break;
+   238		case NVKM_FIRMWARE_IMG_DMA: {
+   239			len = ALIGN(fw->len, PAGE_SIZE);
+   240	
+   241			fw->img = dma_alloc_noncoherent(fw->device->dev,
+ > 242							len, &fw->phys,
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
