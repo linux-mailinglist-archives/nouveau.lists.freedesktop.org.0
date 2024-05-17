@@ -2,48 +2,104 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDAA78C5F50
-	for <lists+nouveau@lfdr.de>; Wed, 15 May 2024 05:02:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CAA48C8542
+	for <lists+nouveau@lfdr.de>; Fri, 17 May 2024 13:08:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 31E1F10E177;
-	Wed, 15 May 2024 03:02:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BF70810E09D;
+	Fri, 17 May 2024 11:08:44 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="ug+QWuxz";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="YMhnYf3l";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="ug+QWuxz";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="YMhnYf3l";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 366 seconds by postgrey-1.36 at gabe;
- Wed, 15 May 2024 03:02:07 UTC
-Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [207.211.30.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 65E5910E177
- for <nouveau@lists.freedesktop.org>; Wed, 15 May 2024 03:02:07 +0000 (UTC)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-223-9ONzL3uLPC-C5qeCSVMneQ-1; Tue, 14 May 2024 22:55:51 -0400
-X-MC-Unique: 9ONzL3uLPC-C5qeCSVMneQ-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 752E610E04D;
+ Fri, 17 May 2024 11:08:43 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5457080021D;
- Wed, 15 May 2024 02:55:51 +0000 (UTC)
-Received: from dreadlord.redhat.com (unknown [10.64.136.49])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9DD12C15BB9;
- Wed, 15 May 2024 02:55:49 +0000 (UTC)
-From: Dave Airlie <airlied@gmail.com>
-To: dri-devel@lists.freedesktop.org,
-	nouveau@lists.freedesktop.org
-Cc: Dave Airlie <airlied@redhat.com>,
-	Danilo Krummrich <dakr@redhat.com>
-Subject: [PATCH] nouveau: set placement to original placement on uvmm validate.
-Date: Wed, 15 May 2024 12:55:41 +1000
-Message-ID: <20240515025542.2156774-1-airlied@gmail.com>
+ by smtp-out1.suse.de (Postfix) with ESMTPS id AC899373D0;
+ Fri, 17 May 2024 11:08:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1715944121; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=c5LlRjQBevN4JNCzX14mVk5q4A++6+lt5wmFe61+x2A=;
+ b=ug+QWuxz8bAvv8CykkL5/KKcOubZjLeQVi9bm/gbxMn0Q2XvYs0Lx8M7eCqCGjkeLoztfu
+ 6sFodax4PMlup1Uo3quoSnuWlWhNL1v5SX1N6ZN1t2ZhEOPAg5Hjj/yzKN2jgqt2+UGujV
+ xMaLjokQtivnj9gK3C/oGsLECYgXJw8=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1715944121;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=c5LlRjQBevN4JNCzX14mVk5q4A++6+lt5wmFe61+x2A=;
+ b=YMhnYf3lWkLNLr8RHyRFHOK6oOgNPXkcH3a9N7Cs7Ur/mU3vhmmBfXi+yBAAp1nJ2Chn0B
+ olb026Judvyzf2Bg==
+Authentication-Results: smtp-out1.suse.de;
+ dkim=pass header.d=suse.de header.s=susede2_rsa header.b=ug+QWuxz;
+ dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=YMhnYf3l
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1715944121; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=c5LlRjQBevN4JNCzX14mVk5q4A++6+lt5wmFe61+x2A=;
+ b=ug+QWuxz8bAvv8CykkL5/KKcOubZjLeQVi9bm/gbxMn0Q2XvYs0Lx8M7eCqCGjkeLoztfu
+ 6sFodax4PMlup1Uo3quoSnuWlWhNL1v5SX1N6ZN1t2ZhEOPAg5Hjj/yzKN2jgqt2+UGujV
+ xMaLjokQtivnj9gK3C/oGsLECYgXJw8=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1715944121;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=c5LlRjQBevN4JNCzX14mVk5q4A++6+lt5wmFe61+x2A=;
+ b=YMhnYf3lWkLNLr8RHyRFHOK6oOgNPXkcH3a9N7Cs7Ur/mU3vhmmBfXi+yBAAp1nJ2Chn0B
+ olb026Judvyzf2Bg==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7895413991;
+ Fri, 17 May 2024 11:08:41 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id wEHRG7k6R2Z/UwAAD6G6ig
+ (envelope-from <tiwai@suse.de>); Fri, 17 May 2024 11:08:41 +0000
+From: Takashi Iwai <tiwai@suse.de>
+To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>
+Cc: Ben Skeggs <bskeggs@nvidia.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
+Subject: [PATCH] drm/nouveau/disp: Fix missing backlight control on Macbook 5,
+ 1
+Date: Fri, 17 May 2024 13:07:27 +0200
+Message-ID: <20240517110853.8481-1-tiwai@suse.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: gmail.com
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=WINDOWS-1252; x-default=true
+Content-Transfer-Encoding: 8bit
+X-Spam-Flag: NO
+X-Spam-Score: -5.01
+X-Rspamd-Action: no action
+X-Rspamd-Queue-Id: AC899373D0
+X-Spam-Level: 
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-5.01 / 50.00]; BAYES_HAM(-3.00)[99.99%];
+ DWL_DNSWL_MED(-2.00)[suse.de:dkim];
+ NEURAL_HAM_LONG(-1.00)[-1.000]; MID_CONTAINS_FROM(1.00)[];
+ R_MISSING_CHARSET(0.50)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
+ R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ MIME_GOOD(-0.10)[text/plain]; MX_GOOD(-0.01)[]; ARC_NA(0.00)[];
+ FROM_HAS_DN(0.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:url,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.de:dkim,suse.de:email];
+ MIME_TRACE(0.00)[0:+]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ TO_DN_SOME(0.00)[];
+ RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
+ FUZZY_BLOCKED(0.00)[rspamd.com]; RCVD_COUNT_TWO(0.00)[2];
+ RCVD_TLS_ALL(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ FROM_EQ_ENVFROM(0.00)[]; RCPT_COUNT_FIVE(0.00)[6];
+ DKIM_TRACE(0.00)[suse.de:+]
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,37 +114,34 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Dave Airlie <airlied@redhat.com>
+Macbook 5,1 with MCP79 lost its backlight control since the recent
+change for supporting GFP-RM; it rewrote the whole nv50 backlight
+control code and each display engine is supposed to have an entry for
+IOR bl callback, but it didn't cover mcp77.
 
-When a buffer is evicted for memory pressure or TTM evict all,
-the placement is set to the eviction domain, this means the
-buffer never gets revalidated on the next exec to the correct domain.
+This patch adds the missing bl entry initialization for mcp77 display
+engine to recover the backlight control.
 
-I think this should be fine to use the initial domain from the
-object creation, as least with VM_BIND this won't change after
-init so this should be the correct answer.
-
-Fixes: b88baab82871 ("drm/nouveau: implement new VM_BIND uAPI")
-Cc: Danilo Krummrich <dakr@redhat.com>
-Signed-off-by: Dave Airlie <airlied@redhat.com>
+Fixes: 2274ce7e3681 ("drm/nouveau/disp: add output backlight control methods")
+Cc: <stable@vger.kernel.org>
+Link: https://bugzilla.suse.com/show_bug.cgi?id=1223838
+Signed-off-by: Takashi Iwai <tiwai@suse.de>
 ---
- drivers/gpu/drm/nouveau/nouveau_uvmm.c | 1 +
+ drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_uvmm.c b/drivers/gpu/drm/nouve=
-au/nouveau_uvmm.c
-index ee02cd833c5e..84a36fe7c37d 100644
---- a/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_uvmm.c
-@@ -1803,6 +1803,7 @@ nouveau_uvmm_bo_validate(struct drm_gpuvm_bo *vm_bo, =
-struct drm_exec *exec)
- {
- =09struct nouveau_bo *nvbo =3D nouveau_gem_object(vm_bo->obj);
-=20
-+=09nouveau_bo_placement_set(nvbo, nvbo->valid_domains, 0);
- =09return nouveau_bo_validate(nvbo, true, false);
- }
-=20
---=20
-2.45.0
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c
+index 841e3b69fcaf..5a0c9b8a79f3 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c
+@@ -31,6 +31,7 @@ mcp77_sor = {
+ 	.state = g94_sor_state,
+ 	.power = nv50_sor_power,
+ 	.clock = nv50_sor_clock,
++	.bl = &nv50_sor_bl,
+ 	.hdmi = &g84_sor_hdmi,
+ 	.dp = &g94_sor_dp,
+ };
+-- 
+2.43.0
 
