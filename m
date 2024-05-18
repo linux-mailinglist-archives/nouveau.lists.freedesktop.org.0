@@ -2,104 +2,76 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CAA48C8542
-	for <lists+nouveau@lfdr.de>; Fri, 17 May 2024 13:08:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A01C78C9171
+	for <lists+nouveau@lfdr.de>; Sat, 18 May 2024 16:37:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BF70810E09D;
-	Fri, 17 May 2024 11:08:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 339318933E;
+	Sat, 18 May 2024 14:37:49 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="ug+QWuxz";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="YMhnYf3l";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="ug+QWuxz";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="YMhnYf3l";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L/BSrDZu";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 752E610E04D;
- Fri, 17 May 2024 11:08:43 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id AC899373D0;
- Fri, 17 May 2024 11:08:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1715944121; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=c5LlRjQBevN4JNCzX14mVk5q4A++6+lt5wmFe61+x2A=;
- b=ug+QWuxz8bAvv8CykkL5/KKcOubZjLeQVi9bm/gbxMn0Q2XvYs0Lx8M7eCqCGjkeLoztfu
- 6sFodax4PMlup1Uo3quoSnuWlWhNL1v5SX1N6ZN1t2ZhEOPAg5Hjj/yzKN2jgqt2+UGujV
- xMaLjokQtivnj9gK3C/oGsLECYgXJw8=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1715944121;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=c5LlRjQBevN4JNCzX14mVk5q4A++6+lt5wmFe61+x2A=;
- b=YMhnYf3lWkLNLr8RHyRFHOK6oOgNPXkcH3a9N7Cs7Ur/mU3vhmmBfXi+yBAAp1nJ2Chn0B
- olb026Judvyzf2Bg==
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=ug+QWuxz;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=YMhnYf3l
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1715944121; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=c5LlRjQBevN4JNCzX14mVk5q4A++6+lt5wmFe61+x2A=;
- b=ug+QWuxz8bAvv8CykkL5/KKcOubZjLeQVi9bm/gbxMn0Q2XvYs0Lx8M7eCqCGjkeLoztfu
- 6sFodax4PMlup1Uo3quoSnuWlWhNL1v5SX1N6ZN1t2ZhEOPAg5Hjj/yzKN2jgqt2+UGujV
- xMaLjokQtivnj9gK3C/oGsLECYgXJw8=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1715944121;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=c5LlRjQBevN4JNCzX14mVk5q4A++6+lt5wmFe61+x2A=;
- b=YMhnYf3lWkLNLr8RHyRFHOK6oOgNPXkcH3a9N7Cs7Ur/mU3vhmmBfXi+yBAAp1nJ2Chn0B
- olb026Judvyzf2Bg==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7895413991;
- Fri, 17 May 2024 11:08:41 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id wEHRG7k6R2Z/UwAAD6G6ig
- (envelope-from <tiwai@suse.de>); Fri, 17 May 2024 11:08:41 +0000
-From: Takashi Iwai <tiwai@suse.de>
-To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>
-Cc: Ben Skeggs <bskeggs@nvidia.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-Subject: [PATCH] drm/nouveau/disp: Fix missing backlight control on Macbook 5,
- 1
-Date: Fri, 17 May 2024 13:07:27 +0200
-Message-ID: <20240517110853.8481-1-tiwai@suse.de>
-X-Mailer: git-send-email 2.43.0
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
+ [209.85.214.180])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6414B8933E;
+ Sat, 18 May 2024 14:37:47 +0000 (UTC)
+Received: by mail-pl1-f180.google.com with SMTP id
+ d9443c01a7336-1ec486198b6so32984275ad.1; 
+ Sat, 18 May 2024 07:37:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716043066; x=1716647866; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
+ bh=FKsSBBFxiA0ly77raLTlMP1yScB2JsDo1G9Qw1p73GY=;
+ b=L/BSrDZuCzaTgQ/Quh97V30u8OglPp6ZUwKWO/b5GchaeGvQlvmabe63o2VSwxyexb
+ QfafyWuA1sQIRojmnNdtoJsRrQWR8cWRlLVHCy96DpW7THm8PZHtTmGAsCqfd9IW4yS9
+ txKvOBrSYNI3HH9aDN6m8chLDgc6TfYPyu5uM4buU2pSY3BTXAlOlG06PFfApxI4JtT9
+ hcc7/Ikccdc0yp6QSonufbLiUFm3EODKG92cb2oQsfaTppwq0jC94pSswZnFkebSk92w
+ GTU9fYVnjOesscmTMpqhPOO5RrSWwTtRsgR/UYIL7SSu/oNPdvX0lxhgB5V/YWnjvXa8
+ EElw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716043066; x=1716647866;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FKsSBBFxiA0ly77raLTlMP1yScB2JsDo1G9Qw1p73GY=;
+ b=gsMHyiojxtfUZ1F+theFx1UMhFPbe/XtSlpXex2DuDPJNBHjt+82YK/iN7Y+W5UQLZ
+ kMXGoqcYCQWNw4DzOqz42Yyj9MtFzZDvLd0Ghx8zt+r+GZZ16cO9BQDWI3sbtyP7BOkq
+ GrNaTrSIjAKtpjkCvrTrR+dpioZWBhofm0vW21HF+4zNZQOMOEOO/et0fuzquq/gzKzf
+ /vKSx9wO/UAtMvKaN0fnDRa1vYhlbVGIamxqHtclNSlXY0/il7A1dHPoBCMiyriBNCHR
+ FkPN16/Lr9+FyVkyJuTuBdya20giGCfPFbBr9E/rBNSSbu96zNnQ0owCoB9Gv62MbsQ4
+ IbQA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWImGEobSduX+9BPyMLcCj+5GijBUI4DS6W4UmDOoiQ6kW1JqLa/ZBokkbA3IxZrU2itWbTGnR3qN5Lj1U2kiC7fpELmKxYGoe5IGKO7M6gCa3ZMbQVJkiKiuDT8MmCbC19wnLiX48NVmI+A8+WAA==
+X-Gm-Message-State: AOJu0Ywu6O87228qGPJ6iOXJt3jM5IGGQpbrVTAH/NoUnGryGAducuDE
+ ewd9xQZwwbYP5+9neCp3NkPf+2feLhJUtgCTlnQSCURZWraWbx2f
+X-Google-Smtp-Source: AGHT+IEU3d5YrWonxdjaRa3pMlUejZK6T/8P9yb9msWLq7aHGLOolYZGTo5U9Gm+a0ELvmk9ix2KMA==
+X-Received: by 2002:a17:902:ecd2:b0:1e3:cf2b:7151 with SMTP id
+ d9443c01a7336-1ef441a6e2cmr283064855ad.59.1716043066561; 
+ Sat, 18 May 2024 07:37:46 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1ef0bbde9d7sm178417435ad.106.2024.05.18.07.37.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 18 May 2024 07:37:45 -0700 (PDT)
+From: Guenter Roeck <linux@roeck-us.net>
+To: David Airlie <airlied@gmail.com>
+Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ Guenter Roeck <linux@roeck-us.net>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Jani Nikula <jani.nikula@intel.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Danilo Krummrich <dakr@redhat.com>, Maxime Ripard <mripard@kernel.org>
+Subject: [PATCH] drm/nouveau/nvif: Avoid build error due to potential integer
+ overflows
+Date: Sat, 18 May 2024 07:37:43 -0700
+Message-Id: <20240518143743.313872-1-linux@roeck-us.net>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spam-Flag: NO
-X-Spam-Score: -5.01
-X-Rspamd-Action: no action
-X-Rspamd-Queue-Id: AC899373D0
-X-Spam-Level: 
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-5.01 / 50.00]; BAYES_HAM(-3.00)[99.99%];
- DWL_DNSWL_MED(-2.00)[suse.de:dkim];
- NEURAL_HAM_LONG(-1.00)[-1.000]; MID_CONTAINS_FROM(1.00)[];
- R_MISSING_CHARSET(0.50)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- MIME_GOOD(-0.10)[text/plain]; MX_GOOD(-0.01)[]; ARC_NA(0.00)[];
- FROM_HAS_DN(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:url,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.de:dkim,suse.de:email];
- MIME_TRACE(0.00)[0:+]; RCVD_VIA_SMTP_AUTH(0.00)[];
- TO_DN_SOME(0.00)[];
- RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
- FUZZY_BLOCKED(0.00)[rspamd.com]; RCVD_COUNT_TWO(0.00)[2];
- RCVD_TLS_ALL(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_EQ_ENVFROM(0.00)[]; RCPT_COUNT_FIVE(0.00)[6];
- DKIM_TRACE(0.00)[suse.de:+]
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -114,34 +86,70 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Macbook 5,1 with MCP79 lost its backlight control since the recent
-change for supporting GFP-RM; it rewrote the whole nv50 backlight
-control code and each display engine is supposed to have an entry for
-IOR bl callback, but it didn't cover mcp77.
+Trying to build parisc:allmodconfig with gcc 12.x or later results
+in the following build error.
 
-This patch adds the missing bl entry initialization for mcp77 display
-engine to recover the backlight control.
+drivers/gpu/drm/nouveau/nvif/object.c: In function 'nvif_object_mthd':
+drivers/gpu/drm/nouveau/nvif/object.c:161:9: error:
+	'memcpy' accessing 4294967264 or more bytes at offsets 0 and 32 overlaps 6442450881 bytes at offset -2147483617 [-Werror=restrict]
+  161 |         memcpy(data, args->mthd.data, size);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+drivers/gpu/drm/nouveau/nvif/object.c: In function 'nvif_object_ctor':
+drivers/gpu/drm/nouveau/nvif/object.c:298:17: error:
+	'memcpy' accessing 4294967240 or more bytes at offsets 0 and 56 overlaps 6442450833 bytes at offset -2147483593 [-Werror=restrict]
+  298 |                 memcpy(data, args->new.data, size);
 
-Fixes: 2274ce7e3681 ("drm/nouveau/disp: add output backlight control methods")
-Cc: <stable@vger.kernel.org>
-Link: https://bugzilla.suse.com/show_bug.cgi?id=1223838
-Signed-off-by: Takashi Iwai <tiwai@suse.de>
+gcc assumes that 'sizeof(*args) + size' can overflow, which would result
+in the problem.
+
+The problem is not new, only it is now no longer a warning but an error since W=1
+has been enabled for the drm subsystem and since Werror is enabled for test builds.
+
+Rearrange arithmetic and add extra size checks to avoid the overflow.
+
+Fixes: a61ddb4393ad ("drm: enable (most) W=1 warnings by default across the subsystem")
+Cc: Javier Martinez Canillas <javierm@redhat.com>
+Cc: Jani Nikula <jani.nikula@intel.com>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: Danilo Krummrich <dakr@redhat.com>
+Cc: Maxime Ripard <mripard@kernel.org>
+Signed-off-by: Guenter Roeck <linux@roeck-us.net>
 ---
- drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c | 1 +
- 1 file changed, 1 insertion(+)
+checkpatch complains about the line length in the description and the (pre-existing)
+assignlemts in if conditions, but I did not want to split lines in the description
+or rearrange the code further.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c
-index 841e3b69fcaf..5a0c9b8a79f3 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/mcp77.c
-@@ -31,6 +31,7 @@ mcp77_sor = {
- 	.state = g94_sor_state,
- 	.power = nv50_sor_power,
- 	.clock = nv50_sor_clock,
-+	.bl = &nv50_sor_bl,
- 	.hdmi = &g84_sor_hdmi,
- 	.dp = &g94_sor_dp,
- };
+I don't know why I only see the problem with parisc builds (at least so far).
+
+ drivers/gpu/drm/nouveau/nvif/object.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvif/object.c b/drivers/gpu/drm/nouveau/nvif/object.c
+index 4d1aaee8fe15..baf623a48874 100644
+--- a/drivers/gpu/drm/nouveau/nvif/object.c
++++ b/drivers/gpu/drm/nouveau/nvif/object.c
+@@ -145,8 +145,9 @@ nvif_object_mthd(struct nvif_object *object, u32 mthd, void *data, u32 size)
+ 	u8 stack[128];
+ 	int ret;
+ 
+-	if (sizeof(*args) + size > sizeof(stack)) {
+-		if (!(args = kmalloc(sizeof(*args) + size, GFP_KERNEL)))
++	if (size > sizeof(stack) - sizeof(*args)) {
++		if (size > INT_MAX ||
++		    !(args = kmalloc(sizeof(*args) + size, GFP_KERNEL)))
+ 			return -ENOMEM;
+ 	} else {
+ 		args = (void *)stack;
+@@ -276,7 +277,8 @@ nvif_object_ctor(struct nvif_object *parent, const char *name, u32 handle,
+ 	object->map.size = 0;
+ 
+ 	if (parent) {
+-		if (!(args = kmalloc(sizeof(*args) + size, GFP_KERNEL))) {
++		if (size > INT_MAX ||
++		    !(args = kmalloc(sizeof(*args) + size, GFP_KERNEL))) {
+ 			nvif_object_dtor(object);
+ 			return -ENOMEM;
+ 		}
 -- 
-2.43.0
+2.39.2
 
