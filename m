@@ -2,67 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E36D8CA140
-	for <lists+nouveau@lfdr.de>; Mon, 20 May 2024 19:24:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 280588CA142
+	for <lists+nouveau@lfdr.de>; Mon, 20 May 2024 19:24:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4784310E3E1;
-	Mon, 20 May 2024 17:24:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7C96310E3CE;
+	Mon, 20 May 2024 17:24:38 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="VMa9a54K";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="WttHfd28";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 24EF310E3E1
- for <nouveau@lists.freedesktop.org>; Mon, 20 May 2024 17:24:29 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2ED7610E412
+ for <nouveau@lists.freedesktop.org>; Mon, 20 May 2024 17:24:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1716225868;
+ s=mimecast20190719; t=1716225873;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Ieml4cQgLdOB6f1Tq+rgmDncA9spVWDVEosV1A4OpmA=;
- b=VMa9a54KHUgnVRB6PN4btHUbhbk0zGBRcRJHwiOIiDNPsiJ2Pu0H61LhS6m1S0vpGlaxnV
- zTLBmPjFewa8F6EZihw05eGDKTQAz23rVSMer703vljGn97Lx35QjKKVFKgjRXjjx3Q815
- +AQu02+eX46zMvkxCOMNyXy9IKogIsU=
-Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
- [209.85.208.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=5P5B+YM/OjD534xio0dIE5yHPWEzGnlxEKEl3OyNZXU=;
+ b=WttHfd28pSJKc0k2PDRhK4G13cTpmaZ5jDlGzYaPa7DnD5w8cjh1YJcEG/XCVITkjrIn6I
+ e1xiAHXj9IMfXdYo7TW9IYd3nHlgBnsgPYkDvJQEW8JJimZF6YeflqZ3iv6oc/KdcOD9nt
+ 9tVjw20FcfAUByBKM7TeHIKaDADBNLg=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-237-hdSqp91tMYq7HRdnBolasg-1; Mon, 20 May 2024 13:24:27 -0400
-X-MC-Unique: hdSqp91tMYq7HRdnBolasg-1
-Received: by mail-lj1-f199.google.com with SMTP id
- 38308e7fff4ca-2e716db6f7bso16074631fa.2
- for <nouveau@lists.freedesktop.org>; Mon, 20 May 2024 10:24:26 -0700 (PDT)
+ us-mta-516-sZqDe4yaMy6ZoAkX4nG2Zw-1; Mon, 20 May 2024 13:24:30 -0400
+X-MC-Unique: sZqDe4yaMy6ZoAkX4nG2Zw-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-41dc9c831acso60683185e9.0
+ for <nouveau@lists.freedesktop.org>; Mon, 20 May 2024 10:24:30 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716225865; x=1716830665;
+ d=1e100.net; s=20230601; t=1716225870; x=1716830670;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ieml4cQgLdOB6f1Tq+rgmDncA9spVWDVEosV1A4OpmA=;
- b=pm1e4yt5OXrt2RgAmuQNNEAZvJLbT3IFlyi7M9Kdd9F3cq0tykGvN4BpjJOwEqvp6W
- wyX9QrPw8dStNITZ+H4F1CPyNzfSLTGyF9QN9c9f99pLeQogPh4yhpvvhDVZomIeaEX4
- bbh+GtPqJTWKi7mYpwXZuJT3xdGeC6QVJdtPP1diSVXn/PTuBzZIlSvDnD35y6eIU5Ki
- 6lN79muB7WLAZ5FRE/AX4zyXThCtIyCMPR/Li2WmUTwAK2GZl4cYFNRDaTba8YCx60H+
- EQ67LGpH6PQYCJ21Pzd/VliOnfgvLrVnUpwWUiFQatv+eomNd6T+4J8YGgEEYjallhFn
- 1nxw==
+ bh=5P5B+YM/OjD534xio0dIE5yHPWEzGnlxEKEl3OyNZXU=;
+ b=a7ciJjZ70aPC8MTCbCiZYr+5CqXNEmQPmrbjEyZENvn053wVXA/yCdmyBj9YUlmZeP
+ 7cnyIOIe9WHmCg+OBUmKuPwrINefokG2FzZrUzWeZUMirUg0zDlnyf7W6NvH0iMOnDsk
+ UU54ZMkdcdGZylQ530hq2hqmHgJhD0E/PkHvFHN/zAb7JEKGKMFA4pWdXHFsFQAt8LQl
+ lNp4HB09jLbe/4ivNu3L1lNTv5O9rLJ86/0gHp5XBooXe0gPEIi08zq3enOEcu7W/HHr
+ a9+YTDfibKA+YZWrsPnNbjICipMgivZEFArCMy8t2DuvJ+Be9U2hdPZDYMeGYpn1LHL+
+ rpzQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUSOl7dCbbXY7s7gJ7mIt7JSPzgBt3usitM3sfkb0ZFHvKJn4Bh0fsQnxH0wTzWSQoFbq+QO9cVHsn9E21YXdBmT6KZaSEk+G0VwYTphg==
-X-Gm-Message-State: AOJu0YxmPe3flUtiM569gekCiKX98PqP/WFCqvK7QGXHP9sa4vsBFUx5
- htttMYEWXgcSw71krscCquRXLj452bbIbV2qddp/wCfZyGWErYW5P0ZQV0LIO45LF+5Z+m2S91x
- 6ERTCdIMTUdjeZnfDenlLiVQT9WwllPvJv6eBOPNPOWoIAJn8MG8wP9wBfIEHX5w=
-X-Received: by 2002:a2e:8654:0:b0:2e5:6add:e863 with SMTP id
- 38308e7fff4ca-2e714547d3emr54063681fa.53.1716225865723; 
- Mon, 20 May 2024 10:24:25 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEMpsCQkOJtvD6AnOHOUhRrq0Egu+U6M7/zg6S8BPHCPo8n8IiM12UdEpbE9vwd95n/xh9GOQ==
-X-Received: by 2002:a2e:8654:0:b0:2e5:6add:e863 with SMTP id
- 38308e7fff4ca-2e714547d3emr54063441fa.53.1716225865309; 
- Mon, 20 May 2024 10:24:25 -0700 (PDT)
+ AJvYcCV/XD+1+RNWdo6hBU5EMyT6LSNSvLJvAhhQj+gMgCZDAD9uTv9Pg379a3PS+DpZpBaSNcArpZtXkinVfQfxFkTxOMTbjLuD3uPSaoGVGw==
+X-Gm-Message-State: AOJu0YyqnHDCglI+OdhohXk321ROQubtDdVMightx+olW6xWktZUn+kR
+ ykkAMzp9E89gpCmVlp3ptOJZ3Pfo4ZYacI4zTgDnkYdcvRG1/+2t5/LP1ZXFsVDcRfGHnBOIOOY
+ CWEvbbnZzl6oYKzHmgrUEkWsOa0I7yYkAodvsUQ1NCp3F9eOjbZ4YN70Ero3c3GQ=
+X-Received: by 2002:a05:600c:5101:b0:419:f4d6:463b with SMTP id
+ 5b1f17b1804b1-420e1a301f8mr50659925e9.14.1716225869695; 
+ Mon, 20 May 2024 10:24:29 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFD66DGPVTzcTg/uKLOomBnDurKshNpwlQP73J4t42qg3pUB6/sWqwv/uKUk7zNux5Kw2TyTw==
+X-Received: by 2002:a05:600c:5101:b0:419:f4d6:463b with SMTP id
+ 5b1f17b1804b1-420e1a301f8mr50659645e9.14.1716225869295; 
+ Mon, 20 May 2024 10:24:29 -0700 (PDT)
 Received: from cassiopeiae.. ([2a02:810d:4b3f:ee94:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-41f87b2653bsm462686635e9.4.2024.05.20.10.24.23
+ 5b1f17b1804b1-41fccce24cdsm431781365e9.15.2024.05.20.10.24.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 May 2024 10:24:24 -0700 (PDT)
+ Mon, 20 May 2024 10:24:28 -0700 (PDT)
 From: Danilo Krummrich <dakr@redhat.com>
 To: maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
  airlied@gmail.com, daniel@ffwll.ch, ojeda@kernel.org,
@@ -73,9 +73,9 @@ To: maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
  lyude@redhat.com, gregkh@linuxfoundation.org
 Cc: rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org, Danilo Krummrich <dakr@redhat.com>
-Subject: [RFC PATCH 4/8] rust: drm: implement `AsRef` for DRM device
-Date: Mon, 20 May 2024 19:24:16 +0200
-Message-ID: <20240520172422.181763-1-dakr@redhat.com>
+Subject: [RFC PATCH 5/8] rust: drm: file: Add File abstraction
+Date: Mon, 20 May 2024 19:24:17 +0200
+Message-ID: <20240520172422.181763-2-dakr@redhat.com>
 X-Mailer: git-send-email 2.45.1
 In-Reply-To: <20240520172059.181256-1-dakr@redhat.com>
 References: <20240520172059.181256-1-dakr@redhat.com>
@@ -98,33 +98,189 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Implement `AsRef<device::Device>` for `drm::device::Device` such that
-`dev_*` print macros can be used conveniently.
+From: Asahi Lina <lina@asahilina.net>
 
+A DRM File is the DRM counterpart to a kernel file structure,
+representing an open DRM file descriptor. Add a Rust abstraction to
+allow drivers to implement their own File types that implement the
+DriverFile trait.
+
+Signed-off-by: Asahi Lina <lina@asahilina.net>
 Signed-off-by: Danilo Krummrich <dakr@redhat.com>
 ---
- rust/kernel/drm/device.rs | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ rust/bindings/bindings_helper.h |   1 +
+ rust/kernel/drm/drv.rs          |   7 +-
+ rust/kernel/drm/file.rs         | 113 ++++++++++++++++++++++++++++++++
+ rust/kernel/drm/mod.rs          |   1 +
+ 4 files changed, 120 insertions(+), 2 deletions(-)
+ create mode 100644 rust/kernel/drm/file.rs
 
-diff --git a/rust/kernel/drm/device.rs b/rust/kernel/drm/device.rs
-index f72bab8dd42d..aef947893dab 100644
---- a/rust/kernel/drm/device.rs
-+++ b/rust/kernel/drm/device.rs
-@@ -79,6 +79,14 @@ unsafe fn dec_ref(obj: NonNull<Self>) {
-     }
- }
+diff --git a/rust/bindings/bindings_helper.h b/rust/bindings/bindings_helper.h
+index 831fbfe03a47..c591811ccb67 100644
+--- a/rust/bindings/bindings_helper.h
++++ b/rust/bindings/bindings_helper.h
+@@ -8,6 +8,7 @@
  
-+impl<T: drm::drv::Driver> AsRef<device::Device> for Device<T> {
-+    fn as_ref(&self) -> &device::Device {
-+        // SAFETY: `bindings::drm_device::dev` is valid as long as the DRM device itself is valid,
-+        // which is guaranteed by the type invariant.
-+        unsafe { device::Device::as_ref((*self.as_raw()).dev) }
+ #include <drm/drm_device.h>
+ #include <drm/drm_drv.h>
++#include <drm/drm_file.h>
+ #include <drm/drm_ioctl.h>
+ #include <kunit/test.h>
+ #include <linux/errname.h>
+diff --git a/rust/kernel/drm/drv.rs b/rust/kernel/drm/drv.rs
+index 5dd8f3f8df7c..c5a63663ea21 100644
+--- a/rust/kernel/drm/drv.rs
++++ b/rust/kernel/drm/drv.rs
+@@ -131,6 +131,9 @@ pub trait Driver {
+     /// Should be either `drm::gem::Object<T>` or `drm::gem::shmem::Object<T>`.
+     type Object: AllocImpl;
+ 
++    /// The type used to represent a DRM File (client)
++    type File: drm::file::DriverFile;
++
+     /// Driver metadata
+     const INFO: DriverInfo;
+ 
+@@ -200,8 +203,8 @@ macro_rules! drm_device_register {
+ impl<T: Driver> Registration<T> {
+     const VTABLE: bindings::drm_driver = drm_legacy_fields! {
+         load: None,
+-        open: None, // TODO: File abstraction
+-        postclose: None, // TODO: File abstraction
++        open: Some(drm::file::open_callback::<T::File>),
++        postclose: Some(drm::file::postclose_callback::<T::File>),
+         lastclose: None,
+         unload: None,
+         release: None,
+diff --git a/rust/kernel/drm/file.rs b/rust/kernel/drm/file.rs
+new file mode 100644
+index 000000000000..a25b8c61f4ee
+--- /dev/null
++++ b/rust/kernel/drm/file.rs
+@@ -0,0 +1,113 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++
++//! DRM File objects.
++//!
++//! C header: [`include/linux/drm/drm_file.h`](../../../../include/linux/drm/drm_file.h)
++
++use crate::{bindings, drm, error::Result};
++use alloc::boxed::Box;
++use core::marker::PhantomData;
++use core::pin::Pin;
++
++/// Trait that must be implemented by DRM drivers to represent a DRM File (a client instance).
++pub trait DriverFile {
++    /// The parent `Driver` implementation for this `DriverFile`.
++    type Driver: drm::drv::Driver;
++
++    /// Open a new file (called when a client opens the DRM device).
++    fn open(device: &drm::device::Device<Self::Driver>) -> Result<Pin<Box<Self>>>;
++}
++
++/// An open DRM File.
++///
++/// # Invariants
++/// `raw` is a valid pointer to a `drm_file` struct.
++#[repr(transparent)]
++pub struct File<T: DriverFile> {
++    raw: *mut bindings::drm_file,
++    _p: PhantomData<T>,
++}
++
++pub(super) unsafe extern "C" fn open_callback<T: DriverFile>(
++    raw_dev: *mut bindings::drm_device,
++    raw_file: *mut bindings::drm_file,
++) -> core::ffi::c_int {
++    let drm = unsafe { drm::device::Device::borrow(raw_dev) };
++    // SAFETY: This reference won't escape this function
++    let file = unsafe { &mut *raw_file };
++
++    let inner = match T::open(drm) {
++        Err(e) => {
++            return e.to_errno();
++        }
++        Ok(i) => i,
++    };
++
++    // SAFETY: This pointer is treated as pinned, and the Drop guarantee is upheld below.
++    file.driver_priv = Box::into_raw(unsafe { Pin::into_inner_unchecked(inner) }) as *mut _;
++
++    0
++}
++
++pub(super) unsafe extern "C" fn postclose_callback<T: DriverFile>(
++    _dev: *mut bindings::drm_device,
++    raw_file: *mut bindings::drm_file,
++) {
++    // SAFETY: This reference won't escape this function
++    let file = unsafe { &*raw_file };
++
++    // Drop the DriverFile
++    unsafe {
++        let _ = Box::from_raw(file.driver_priv as *mut T);
++    };
++}
++
++impl<T: DriverFile> File<T> {
++    // Not intended to be called externally, except via declare_drm_ioctls!()
++    #[doc(hidden)]
++    pub unsafe fn from_raw(raw_file: *mut bindings::drm_file) -> File<T> {
++        File {
++            raw: raw_file,
++            _p: PhantomData,
++        }
++    }
++
++    #[allow(dead_code)]
++    /// Return the raw pointer to the underlying `drm_file`.
++    pub(super) fn raw(&self) -> *const bindings::drm_file {
++        self.raw
++    }
++
++    /// Return an immutable reference to the raw `drm_file` structure.
++    pub(super) fn file(&self) -> &bindings::drm_file {
++        unsafe { &*self.raw }
++    }
++
++    /// Return a pinned reference to the driver file structure.
++    pub fn inner(&self) -> Pin<&T> {
++        unsafe { Pin::new_unchecked(&*(self.file().driver_priv as *const T)) }
 +    }
 +}
 +
- // SAFETY: `Device` only holds a pointer to a C device, which is safe to be used from any thread.
- unsafe impl<T: drm::drv::Driver> Send for Device<T> {}
++impl<T: DriverFile> crate::private::Sealed for File<T> {}
++
++/// Generic trait to allow users that don't care about driver specifics to accept any File<T>.
++///
++/// # Safety
++/// Must only be implemented for File<T> and return the pointer, following the normal invariants
++/// of that type.
++pub unsafe trait GenericFile: crate::private::Sealed {
++    /// Returns the raw const pointer to the `struct drm_file`
++    fn raw(&self) -> *const bindings::drm_file;
++    /// Returns the raw mut pointer to the `struct drm_file`
++    fn raw_mut(&mut self) -> *mut bindings::drm_file;
++}
++
++unsafe impl<T: DriverFile> GenericFile for File<T> {
++    fn raw(&self) -> *const bindings::drm_file {
++        self.raw
++    }
++    fn raw_mut(&mut self) -> *mut bindings::drm_file {
++        self.raw
++    }
++}
+diff --git a/rust/kernel/drm/mod.rs b/rust/kernel/drm/mod.rs
+index 69376b3c6db9..a767942d0b52 100644
+--- a/rust/kernel/drm/mod.rs
++++ b/rust/kernel/drm/mod.rs
+@@ -4,4 +4,5 @@
  
+ pub mod device;
+ pub mod drv;
++pub mod file;
+ pub mod ioctl;
 -- 
 2.45.1
 
