@@ -2,47 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B35E98CAD53
-	for <lists+nouveau@lfdr.de>; Tue, 21 May 2024 13:27:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E96BB8CAD63
+	for <lists+nouveau@lfdr.de>; Tue, 21 May 2024 13:30:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0280610EB63;
-	Tue, 21 May 2024 11:27:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 93E9F10E8A7;
+	Tue, 21 May 2024 11:30:27 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="iB/pLLJp";
+	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="J9c57whk";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04olkn2048.outbound.protection.outlook.com [40.92.73.48])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E55A710EB63;
- Tue, 21 May 2024 11:27:34 +0000 (UTC)
+ (mail-he1eur04olkn2064.outbound.protection.outlook.com [40.92.73.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E843E10E8A7;
+ Tue, 21 May 2024 11:30:09 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VSuwL7RipsQSDDQxMCibu5lcjqdKeTZ1Xe82AL9Zh6pcCHEzO9Ehn1dd2uM7Gp4puMc6ayCHEG4ZPPszcAx4QggaNmS72OBsLd4VqpoHg327s4X3GS/t+2jhv3cmXZN2v+9AwFELKcWjmFTqQNJluNx+nhdAAYGTx0Ox8o/AN51w3Y9nNieWo2Jd31bWj4xn4+tOlkb32ftICanbqqmee6mVaWAF3pTvUJH5Bd21AOr+EtquANhhvj+IxS8tWRFHbF3XMZM0tSXSijXJ4UvTVPUapeQW9YqtziNF5k5LMD+0nT37EXXlILCwP0n+jonMc1L6NvDhOO6Lu3hmuUQYQA==
+ b=ZVgyoYb6H+fiA/7vYrNnNIvLHzmHjElWJOemqEX5ruZx3ynfX54gO4s7y3Y2K04Y6jU+D+FSSaQDs+keW7/TPVxta/J22hNZEvkFndM+ftEoA5s13HpTBqKQNjve8EYmaFLdAzZjHyvDbkD9Npn8BQdx8NQHefTcTQ4CXs3z0IvrTr8TCCnmAxw9eI+Rt1KJ7EWWDk9ex52A6QulneqchBlREAXPZGWpsy+kW3ap1QNjdtqcYJoDXIYizxmuoPTPjb93hZpmDQZHU7AQkczI8wrgGL5yHzmDMB6JMCsZpg1/6VAIky8VsIloRvKExQB/Z34RAyjPKbPN0V3XzNhW+Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7X5W9CAOVt4dYzOG/QOEZMq5DYZBneWzq3qIHfWciig=;
- b=P7YcB95JNXT+PyZTfp4d9wdq7qBFVxrfvEQA7M1yMoEi94bgbMXbe5eLrb/qBU+qePMeiOma6iK1XNGVxQgpirceHft0Jl3TWob6jD0606X+lzOLOgc1515AJaDSP9sICm/Ij0qhsEbXDH9VoB5mcwF/zYOFlgBc2A6bwlVEHLv45kANZtADgQodu1iItQOUhuDsUaRwYPoXzojSk9kgj1VL5eSCaH3SEwJ8HUzbDS+pIglWmmIdE5Y0osQPdWkBqcrd6TGMYuTbpJflH+vD2qfHpl11MP8y8qOJXBK9AZKeUjxuAvAHy+14GO5v2Bswn3AS7kKn1G7kRRUu1WXiuA==
+ bh=nDDQXoGKrogCEZrlFrFQmo7lmQpvCa/4eZSAVfPbWHo=;
+ b=WTDc8ZI3SdwLQoGgEP6Wmh6UgUPeI0HKqtyjMAfUnPRRe/tXgwnLi4lbSL7ufM+tlZLCgUAeR4+c0apFZKJNoCpMP5M9h/m6j3K4IxKqHn05W/TNyuHKlU51vNF4PoCRKMhhKeiiAaBLEXFfyRTy3W4aQBimluyxpgiIHY4y0dxnGVwoTUFLY+Ks7lZgILRrItQsL3hYoPUVPIj5c93ZY09Nz7ZdBIVE9Ro+shdTOtWFXslJrqCZ+UqXvqJ1ZduU6cBOSyQf9It0zvQIOmkb/+gctZX0DWXeoRtKm5hrkQeVy4SLxDfvwMhg67wXIO+t7jP8DHnv0YgbQ3BUqFw53g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7X5W9CAOVt4dYzOG/QOEZMq5DYZBneWzq3qIHfWciig=;
- b=iB/pLLJp8e5Q8O2MSQc/NSMll2EiMQEzApjSR7bqLUiYtnuYIebVECv14+pDLi4iSGspyGvJYiNJpvnseh+TzV3x2vZBvMQtvHk/etXzREPKsyVhPr9TOegLM2SZhwqLwyuds7heV7DDKIQthSAfhRyZyJ0roIVdwp6x/tzo70Aa7CVeoIl+s/w5Kw7utQ6TS+18KQnIvvzntgXJlq8dud4mwF3lWk+J3QtP/MSINUc2ZDA2ryoMUykq0omkMfqoddJUrru18cfTEMI8EyvjLq90lI24+eSjWs8XNR1voCYolVlIIkFnqnpi6WgWMjiFcV8GD5TOQJNxWe4gsra08Q==
+ bh=nDDQXoGKrogCEZrlFrFQmo7lmQpvCa/4eZSAVfPbWHo=;
+ b=J9c57whkrDeppjJ24DvbL3e848XYEpycmFIXJa4lWt5fWeOQ2rt6PPfkYVeTqF+02IkAykpvlehRzR1+EEFtYb/9+AJldIMP+ZUF8kbW3n7u61raIqEQiCyhrCwQ2xyzEDG4/QfBMoqx8SeO/0xTYRtjfYMTBQqbbh5xKkoatSgGWwN0e9QziiT+UxQZMAfFoaITL8rD+AwFC6xK+p/nII1PHbv9LSXimvTDOb5Nd66Nh+jYaVqAQBeEIsQuCCtwd9651vAGe0mWXLFgXo5fKM7sPTC9mv7rIi7j4BCTLPsKbRyVKMyXyYDwMKvmntxgIagkurc55fhzqXmoqBXS0g==
 Received: from DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:4ae::7)
  by GV1PR10MB7980.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:81::6) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.35; Tue, 21 May
- 2024 11:27:31 +0000
+ 2024 11:30:05 +0000
 Received: from DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::64e4:38c6:256:36f1]) by DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::64e4:38c6:256:36f1%3]) with mapi id 15.20.7587.028; Tue, 21 May 2024
- 11:27:31 +0000
-Content-Type: multipart/alternative;
- boundary="------------M0WOimC9FEyeJOj55xNmETf0"
-Message-ID: <DUZPR10MB8267C756D00F1AFAEA87D1708EEA2@DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM>
-Date: Tue, 21 May 2024 13:27:28 +0200
+ 11:30:05 +0000
+Message-ID: <DUZPR10MB8267047D1C4EB689FB63BABB8EEA2@DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM>
+Date: Tue, 21 May 2024 13:30:03 +0200
 User-Agent: Mozilla Thunderbird
 Subject: Re: [Nouveau] Kernel problem with multiseat on one card - Wil be more
  than one window manager on one card
@@ -61,54 +59,55 @@ References: <AM7PR10MB39235DD53D163910E88FDB938E82A@AM7PR10MB3923.EURPRD10.PROD.
  <DUZPR10MB8267520A4F44DA38339969A78E93A@DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM>
 Content-Language: nl
 In-Reply-To: <DUZPR10MB8267520A4F44DA38339969A78E93A@DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM>
-X-TMN: [u+HU9o+ul3od1aLEZvCZY3gCcPTdRWxH]
-X-ClientProxiedBy: AM0PR10CA0069.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:208:15::22) To DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-TMN: [FjiKRKomemXX1FGc+gNr/qdOw+JegCoM]
+X-ClientProxiedBy: AS4P189CA0009.EURP189.PROD.OUTLOOK.COM
+ (2603:10a6:20b:5d7::13) To DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:10:4ae::7)
-X-Microsoft-Original-Message-ID: <e86e2115-3215-41e6-afb1-95400b0a18eb@hotmail.com>
+X-Microsoft-Original-Message-ID: <571bdf11-07ad-435b-bdac-60c4740be713@hotmail.com>
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DUZPR10MB8267:EE_|GV1PR10MB7980:EE_
-X-MS-Office365-Filtering-Correlation-Id: f1dabd38-7f0a-4a18-a0b7-08dc798900c3
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|461199019|3412199016|440099019|3430499023; 
-X-Microsoft-Antispam-Message-Info: OGVbKa3lPZ4COHNkDkgAt6zJCmDbxcJXcotJn1WaBcx+dxOdCTwQiPqyHGjpdY5R8ji1ClV+H0iU9hdCijnIduerq3NguX6mVN/lUWNhmDokzunUl07OZyG8jAiUFWAVH0gilf7ymnaOzIMmSrX/WjpsUNhPehnitXvnXDf6FKu96FZUMA1I7PyOUBAGcLfLy59A9baddNSQA+JS/QacVyB2aOMtbsm7PB+1np+JCrniqNxdzIpK6uDRaLS6FVPANU2yPE9C8jKw/rJk7n7dzqAuTjfzN3UWzXCxdYLc0d19KinVD7kK9uqRku7K26v8pU476pgt2wO8ak/l9TOLoJFhPtii2oljvX/A4yCWF2SzBiBz+JsKWgFB/VxVb/neRr74VaU0fLstJSYydHx2k3a3QSwdVSR/F9kMJIYrsNBeI5Pm5k26ho5ZIgKO+IYIwRhpX1Th1Wa6GrUw98nFEoGqpFV5XXW5g3w50Id9laCUulebgWs7R/EWIbHVKYm8pj56nLz4xZfRac3YTvR3nm7gLG4vYVsx/qACbW8Fi1V6BOmd3eZM7Xz225N3KivE
+X-MS-Office365-Filtering-Correlation-Id: 2daba15e-a899-4d66-b82f-08dc79895c9a
+X-Microsoft-Antispam: BCL:0;ARA:14566002|461199019|3412199016|440099019;
+X-Microsoft-Antispam-Message-Info: Odzty7/IHdkh+J/A3Zmc/JCKxglwbX0My0T2RWGN5YkyZmeQvGHU9XV1tblStho4K+eXxb1LzLBLZP0/P0oFDBIPotSFh/03DP4a34E8rQgp3WwciHENO1ZgO6UySOcd2IkE5Q5KQtXy4lpP7CcmENdkkZrqTakfdoLf9UBBQnsSbI1D0VY/0n0CtwAnO9qyc7pA8avggTn8+aJDDYYw6ewrv+8x/0D9NkaDKTeU3gXy6hY+paD5M7EFRo+PTHavRmQO8nPO+Ewz08ERtDjOji32FOd6xW27eNgxj6N/4fNbIlhM0s+3nLvbcCBCeW8+qBhcZ4XDccaTstV4j04Z8tIvpGht9yCDZoAXeL83Jwujggj5iCAbUYRvw21FcNMPhbAhy2qAORRtK62k67M5znJQFimv3aNGAok97PV8OrGUWsTYtwj3gz7OY6f/OFz64o+TqumEGNyMlS1TMIEFuFQXkObiQBMMORS2nkqzQeCnBJM3V8jVJkPH6lt1GyrDEr+1A25uDWNXYKifD45oXmVQ6Y0uP4IhwMY133xTqKnvt+F2DsNTu3+cM3/JS1kM
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U2ZEdDJ6NHI3MU8xNlVQeWw0SU53VHhQelhqQkdPWnJsd2hENlVnZ3lwNG5x?=
- =?utf-8?B?RDNTRnlFTDFUeFQ2N0dhKzl0SXllTHlyRWY3TUIzUHgra2dSazNGUmM1aDBQ?=
- =?utf-8?B?cVp3amhJVi8yOXFrdTBMZXlTT3B4WUdicktNbStob2tLV3FZK09PemF3ZUlV?=
- =?utf-8?B?YWdiMVgzYXpCUE9xMkxtcXhOMDduRXFxR3Bnd2p3elpncmVtODNoTE9JckxJ?=
- =?utf-8?B?ZHlvT0RCL3JmTlVqNTBSdXNZS0hPOXM3RFBEOGxXRTJudFpVWWhGaG5ER1Fn?=
- =?utf-8?B?d2lRWjFvbjdSaUViUGZDYjV6Q3YzYjFTQmh2SFY5QjVzZGo2UW13SndOWU15?=
- =?utf-8?B?NjA2QklBVk9ueTNFMjZoajBYNUQyQlJnb0dDd2FRcnhicjJXVjd6dE5HcTg3?=
- =?utf-8?B?Tnpzajkwb0xLKytZbjBWNEV3Nld0OHRDVk1LNlhzZjk4SmF0VVNjYmI3U1RJ?=
- =?utf-8?B?b21ma2l5TkVKUVZ0TkNJejlMejQ1RXNmL3dpcmJITUpQbE9YUUtSNzY0MEZ6?=
- =?utf-8?B?RlRlZFVFQWthSEk0c3BJSzVaSjVXR2Z0VDNOZXdCd21LU044SEkwdlN4Nzlv?=
- =?utf-8?B?ZFFsN25pdFdxK3p6dmpuTmUwS0pzU3ZrUXdqVE9OUklLTHMzSWhNaW43UnVQ?=
- =?utf-8?B?N0g4MCtITHorMzJsL1RGQTRSUitCY3dURmRML3poM3FreUc5N3FhdW9lQmRt?=
- =?utf-8?B?OFp2amZxV0o4MkJkaDN6ZFhHaWtPNGZSdThSZkZIOTZpSS8xV0ZiMjcySG5u?=
- =?utf-8?B?aVVycHVxN1VudnByN09jdHN4ZlJPS3l4UDVuMjgrZGFraHJUbk1HS1MveUdj?=
- =?utf-8?B?MWVXOGVHSFdmbENaZzg1RWJaenJmVU1TZ3VZNmorYm9TR2xBMzkzTy9jcUNi?=
- =?utf-8?B?NGN2UFhPRTJZUTNwTUZ4WTNmWE5TUmNPWkEybjZKd0xNc3RBNWZ4ZjJGUzZQ?=
- =?utf-8?B?Y3VmQ1VVbnBvZzNYcFJiQXV6MzlHQWFyK3JhTGkxbFMzZVJWQ1huNU85c2lU?=
- =?utf-8?B?ZlFsTkZPaUs2UzZrUEk4ZVlqdElDTjlISGxGYk5tbEtrT2c0M1BiV0c3NElV?=
- =?utf-8?B?SUFZOWw2Mjl4YzN2dXBoUXNNeHFucndzWSs4K2kxZExuVzgrSTRSb3MxdFhW?=
- =?utf-8?B?cVpsZllSTUZjVmtwRllmZGlGd04zYnFtUW5MY29pcHB4Zm8ySkdFYXY5Qm1G?=
- =?utf-8?B?L0phNk9saTdhU3JwRmF6YnZpQllVNWlFM0FZdTdrYndGeXRkSFRkZ1VYUWUw?=
- =?utf-8?B?ZXhoWThZbVZ5dnNJaFhyaHdQdkxrNk9nN01jY2tiUlVxc1Nwbmw2NE01cjVJ?=
- =?utf-8?B?MVRxZTNJeVR5R1lKVHE5aU5tUnMzT0ZGVVE2dUJodHZrZXdpaHdBS0kzaW81?=
- =?utf-8?B?WG9xRmR1NnVFTlM5VWxESGFUZTBNNzQxQ3NJaFRQMERjWGRlMXZ2RTV5dVZh?=
- =?utf-8?B?R1JDVEN6aFBZbi9mR1poMjhocG1pcE9jc0x4R08yN3VsaUN1WU5xalQxTm5O?=
- =?utf-8?B?Uk81eDZpR0RQU3p1NFpMWEtEeklEOTBxN2FMak9xeWRzSmVvQTc0VG5TbFBl?=
- =?utf-8?B?TkV4K0t0b214RzlzYXlaSzRqWTBVcTZzaFk4VFN6SmNGL1lIYk9HSnJqRXFM?=
- =?utf-8?B?V1dSN2F1cjk5OEJYaEN5RlFCWU9mRjhBejRzV0RScHlScU9aWmxtZXRuWUpT?=
- =?utf-8?Q?S/W5pu5wCnbylq4fUxu3?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K0VLTTBOT1JEeWk0a0krNmJhK0E5bjdPQmd5dTRhZnJlSkI5RFh4VW04V25N?=
+ =?utf-8?B?bjJRc1hCR04xT2FxM01BVy9BcEZraUU2VzA3T2NVSUI5Ujc4Kzc0TTQxKzVh?=
+ =?utf-8?B?MzJKMGRxN0U5cUlqaDg3a0pXTEJodmpHUG1wbS84Rm5DSkoyRHdLMzNhOEpB?=
+ =?utf-8?B?QVlSZHhrOWVRMkl4ZHdIZmlUeFo5Q0hsVmkyVmNLeUdJdFQ4UXc4Y2ZCV2xR?=
+ =?utf-8?B?TGRScytsK2pRWkljWC9NdDhZMitwSDB1VVgwTy9DUXJPcmRVdGtVblQ2ZHNr?=
+ =?utf-8?B?bTg3djRvekEyZDhTd3JvSXRxQ1FHTzdpaVJiUXVkNzZSL2libmhSTlI4SE1q?=
+ =?utf-8?B?TkE0eG5XMC8zem9HMmRHVFhRaW84d3VmM0ZSaEVjRXVib294M3Jka2FnU0lL?=
+ =?utf-8?B?NjZaQUU3cWN5aVBEMzdBN3o5Z28xSGo2UG1JWERTY2FFMGRsWjZiM1BpTXBL?=
+ =?utf-8?B?NDRSZmlNWm5Bemk0UWw0RGI4YTVmSlk4TTRkV25IdlNOZ3c0Skw4VGtjQ0Fv?=
+ =?utf-8?B?Yk1ZRFZVVlVXVnV4STRHNjluYXEycGtBMzdnc1UxQmJ3bndzYmxvWWdOTUNz?=
+ =?utf-8?B?RndoV3JOQ0p2OHdDbVhaRFJJMG9RYnNzVjA5am1OOVUzZkFtc24yMldId1pC?=
+ =?utf-8?B?a0ZSaUljRkczZDYrbWlYd3JKR2ZOa1gyYlN1bkwwd0NrOVpzakwzd3cvYXI1?=
+ =?utf-8?B?SThLcHBmbWdObnAwbnZKRGN1bTMzbWxMdmRBSG9aaUpWZC84U0pWR09xMGR3?=
+ =?utf-8?B?b21MQW5oUW9jYlJxYnA3UU96NVVjSGw1S1M3WXFPOGRoYmZPOTdZR1JtcnVN?=
+ =?utf-8?B?M0RjTnNVRE9KMEJia05LSnVkb0pNZkJRbUZiYjBmYm02QThvczFjWXo0RkV0?=
+ =?utf-8?B?WnNnWjJxaUR0ZGtYd05QWkxFWnM0cDFqVjJOM1JIdXVYV2tmYUJUYm10eDNl?=
+ =?utf-8?B?OTFsK2VWTno4alFTTEJ6Y1UrcVZNamMwQlZld0VZVE00dnc2LzY4U29TdElW?=
+ =?utf-8?B?K2FnMmJCNGZ0Ym05TUJ6bXFaUjRNeHg5SFJiYkxHZFo1bFlJbVRXNWozNngy?=
+ =?utf-8?B?ZEZsQVU4L1YxVmYxTENYTENSNHc0ZEFuTndGTGROTCtmcHA0QTZnekhXd0tX?=
+ =?utf-8?B?d3dCK1N2UE8rTjBLVEljSEhUdmR6aHVCYS8wWkNPREVCSE5ocHFuaW9abEht?=
+ =?utf-8?B?bHhlRkJ6N0dFVHRTOHdzcjE5czZ3MkFrTU5Ed1dmQ0Qvc0EvMFRMQmdkRkRZ?=
+ =?utf-8?B?Z0phYjlpQUdEYTllODVpSE9qNTlUSDkwSXh3MDlFbDgwaWl2THN4RnlvY2p3?=
+ =?utf-8?B?VGU5dUl0ZGFJREVxN1lKWlVhcWZvaStMRWljOWxZOG5DNVB1Yy9wVFpnUkxn?=
+ =?utf-8?B?STJuUjliSDRncVpJTm9XcDlRMm1Edk5LZW5XWCtYVjVlOUVHakZXT25raU5a?=
+ =?utf-8?B?M2h1M1FoaTRCalpqTFdqQm1ZeUNrNERUT3BiR3FsMnBvQnNLUmk1QWcrMm9s?=
+ =?utf-8?B?QjcvdlJjcDdlZGV4WlJma2xPN0tMR215R013VTg5OHcyZHJDTEt6V0tqMVF5?=
+ =?utf-8?B?NW45a1J5a2FySUMvMTdnZlNCbUdWUVpTUzlhME14WXRHNFpRLzJCRktoKzVE?=
+ =?utf-8?B?cHNhT1Uwa3FwWVdQMGFSVytGSDh3Y1BRbTlCbUc3RkoweFFVRVh2RFBwdnRi?=
+ =?utf-8?Q?xyiSVB6+teOf1V/8QTq5?=
 X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-6b909.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: f1dabd38-7f0a-4a18-a0b7-08dc798900c3
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2daba15e-a899-4d66-b82f-08dc79895c9a
 X-MS-Exchange-CrossTenant-AuthSource: DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2024 11:27:31.5952 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2024 11:30:05.2729 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
@@ -127,10 +126,6 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---------------M0WOimC9FEyeJOj55xNmETf0
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
 In the meantime I have contacted everyone who could have something to do 
 with it:
 Kernel groups
@@ -148,7 +143,6 @@ card at the same time.Indeed, to use it, several users need access to
 the graphics card at the same time.
 Can this simultaneous access be allowed by the kernel after all?
 Or can the kernel be adjusted so that this would be possible?
-
 
 
 Op 15/12/2023 om 10:59 schreef Gert Vanhaerents:
@@ -209,137 +203,3 @@ Op 15/12/2023 om 10:59 schreef Gert Vanhaerents:
 >
 >
 
---------------M0WOimC9FEyeJOj55xNmETf0
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-<!DOCTYPE html><html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <span class="HwtZe" lang="en"><span class="jCAhz ChMk0b"><span class="ryNqvb">In the meantime I have contacted everyone who
-          could have something to do with it:</span></span><span class="jCAhz"><span class="ryNqvb">
-          <br>
-        </span></span><span class="jCAhz ChMk0b"><span class="ryNqvb">Kernel
-          groups</span></span><span class="jCAhz"><span class="ryNqvb">
-        </span></span><span class="jCAhz ChMk0b"><span class="ryNqvb"><br>
-          System D</span></span><span class="jCAhz"><span class="ryNqvb">
-          <br>
-        </span></span><span class="jCAhz ChMk0b"><span class="ryNqvb">Nvidia</span></span></span><br>
-    <br>
-    And gues:&nbsp; <span class="HwtZe" lang="en"><span class="jCAhz ChMk0b"><span class="ryNqvb">Everyone says it's not their fault.<br>
-          <br>
-        </span></span></span><span class="HwtZe" lang="en"><span class="jCAhz ChMk0b"><span class="ryNqvb">But we don't give up.
-          Linux is such a beautiful and solid system.</span></span> <span class="jCAhz ChMk0b"><span class="ryNqvb">Why would it work with
-          Windows and not Linux?</span></span></span><br>
-    <span class="HwtZe" lang="en"><span class="jCAhz ChMk0b"><span class="ryNqvb"><br>
-        </span></span></span><span class="HwtZe" lang="en"><span class="jCAhz ChMk0b"><span class="ryNqvb">Our analysis has now
-          discovered that the problem does indeed come from the kernel.</span></span>
-      <span class="jCAhz ChMk0b"><span class="ryNqvb">The kernel does
-          not allow several users to access a graphics card at the same
-          time.</span></span><span class="jCAhz"><span class="ryNqvb">
-        </span></span><span class="jCAhz ChMk0b"><span class="ryNqvb">Indeed,
-          to use it, several users need access to the graphics card at
-          the same time.</span></span><span class="jCAhz"><span class="ryNqvb">
-          <br>
-        </span></span></span><span class="HwtZe" lang="en"><span class="jCAhz ChMk0b"><span class="ryNqvb">Can this simultaneous
-          access be allowed by the kernel after all?</span></span> <span class="jCAhz ChMk0b"><span class="ryNqvb"><br>
-          Or can the kernel be adjusted so that this would be possible?<br>
-          <br>
-          <br>
-        </span></span></span><br>
-    <div class="moz-cite-prefix">Op 15/12/2023 om 10:59 schreef Gert
-      Vanhaerents:<br>
-    </div>
-    <blockquote type="cite" cite="mid:DUZPR10MB8267520A4F44DA38339969A78E93A@DUZPR10MB8267.EURPRD10.PROD.OUTLOOK.COM">
-      <br>
-      Op 4/12/2023 om 15:11 schreef Timur Tabi:
-      <br>
-      <blockquote type="cite">On Mon, 2023-12-04 at 09:51 +0100, Gert
-        Vanhaerents wrote:
-        <br>
-        <blockquote type="cite">OK&nbsp; i will report it to nvidia. But with
-          the nouveau drivers it's also not
-          <br>
-          working. Are you sure it's not a kernel problem?
-          <br>
-          Because according to systemd it would be a kernel problem.&nbsp;
-          (personaly i am
-          <br>
-          also thinking it's a driver problem)
-          <br>
-        </blockquote>
-        Unfortunately, it's not easy for Nouveau to debug problems with
-        GSP-RM.
-        <br>
-        However, if the problem exists in the proprietary driver, then
-        Nvidia could
-        <br>
-        fix it.&nbsp; That would then lead to a new version of OpenRM that
-        Nouveau could
-        <br>
-        use.
-        <br>
-      </blockquote>
-      <br>
-      I have contacted Nvidia and now i can see the outputs such like
-      this:
-      <br>
-      <br>
-      ─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0
-      <br>
-      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; │ [MASTER] drm:card0
-      <br>
-      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; │
-├─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-DVI-D-1<br>
-      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; │ │ [MASTER] drm:card0-DVI-D-1
-      <br>
-      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; │
-├─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-HDMI-A-1<br>
-      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; │ │ [MASTER] drm:card0-HDMI-A-1
-      <br>
-      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; │
-└─/sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-VGA-1<br>
-      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; │&nbsp;&nbsp; [MASTER] drm:card0-VGA-1
-      <br>
-      <br>
-      But the problem is now the same of with the Nouveau driver. When
-      you do this:
-      <br>
-      <br>
-      loginctl attach seat1
-      /sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/drm/card0/card0-VGA-1
-      <br>
-      <br>
-      For the seat1 (the VGA d-sub output for seat1 and the other HDMI
-      output for seat0) and of course the mouse and keyboard.
-      <br>
-      <br>
-      When you do this, all the graphics outputs are on the second seat
-      (seat1) and not anymore on the first seat. So i need to move only
-      the VGA output to seat1 and not all the outputs.
-      <br>
-      <br>
-      <br>
-      The problem is that linux can not start 2 or more window managers
-      on one card (even if you don't need a multiseat, but use only one
-      mouse and keyboard).
-      <br>
-      <br>
-      So how can i fix that i can use more than one window manager on
-      one physical graphics card? (without Xephyr or something because
-      they are to outdated and works not good).
-      <br>
-      <br>
-      I have tried with: Linux Mint, Ubuntu and Debian all the same
-      problem.
-      <br>
-      <br>
-      <br>
-      <br>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------M0WOimC9FEyeJOj55xNmETf0--
