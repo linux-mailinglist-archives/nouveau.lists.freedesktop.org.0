@@ -2,141 +2,138 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4A6D988842
-	for <lists+nouveau@lfdr.de>; Fri, 27 Sep 2024 17:27:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF5489897AA
+	for <lists+nouveau@lfdr.de>; Sun, 29 Sep 2024 23:29:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AEAD210ECD3;
-	Fri, 27 Sep 2024 15:27:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7865B10E1B8;
+	Sun, 29 Sep 2024 21:28:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="jDW0Zb0t";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="eUBkMohU";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2043.outbound.protection.outlook.com [40.107.92.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D650410ECD3
- for <nouveau@lists.freedesktop.org>; Fri, 27 Sep 2024 15:27:28 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QSJBhxZRtEjERq11AG+h3fWzXkEfMNBmInvKdUeOhIb40ft/GWmSzkYCd4ahSxHt5ClbgbieVYxa09ZpXbU9imTfoARtk8rFxPb7WjJXEaWSeipFMk6aC6KS21hOcIwS1tQh4JcW7R34yOy8r7OrRQzRh6cD4tS/mB3AWEognYpcojinGFfE5UL/Nn5e5p3PY6RrsN3bRLX/snnJwJ6fNLBg+HRoRWxQJxKUHf2+L+CdrGhnohFHfB5BzEiVYtovY4gNWMHZHsqpddzy9bfS7S5Ri80eV5biOCHBbPaUYR16KBQ8AcSTYgtKutMw752H9jv0eyyY+6AYylYfyCiu+A==
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2074.outbound.protection.outlook.com [40.107.223.74])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0458810E149;
+ Tue, 21 May 2024 05:32:59 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=PCDMQ09/bvfUbGlQbR1PZTZt7wTMIqiaSA52FYXIgPh9X9xdfwXB0JJAVtXWX+6thI+tLvFi5T/W+7hBdLVtiaApJ3e3STrhJtjB1ZYFwCV38Zgn9CVkuZCIbU6sDipes5PMFiufnndN09XBSnBxWYM5EyY/YhL0YS9ZpFa0eOauL1ryJVbRAyjumy8Glfw25feOKtTZ97nnJdZN+Jb4btTeD8e39x1pl6n0Q7IP3fBRp9ayGtiun/cABEax018/GnVrghO7u1fmmmgnmPntp8FTl7f0YQsR39/zWfgGowU38CsOLky6dA5+Cg57kBHXrVVhuLhKKxPz6NVadvD1Kw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
+ s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3pTdnrBYGUYHeR177lcdcDy1mE3mLolYvUp+szHMqF8=;
- b=x9BHPxDmIx2Zb1tkrfsuZDMev6+rhPfmh/lvvWecEl1Q0BIMR1/ZLKOZOHar+lXNbGftof/XFzKEmO8KaK+xnOuGwkGpc8tRmO1rsuOXxIPPioSpY4KpPxjwiGHMLwXOyDwPEaJTdtlCMIQ7fc2h2QR/zjRgCbJ/G0BRUTK9qISZ9QqiJ2lfHBB62xFiIiqcfTmwZb8+4gwytN0yIQMING/CSaT+jmKdVC5rkSIztU1mXjSLNdUtP5+64sfHpWzRc9w5id/V+6Qo22/Y2b27FpV+N5fATLMah6w77gOHahV8kJ0piTgklF9ydR3FwMkPyOTG9rsbQRxX4ChFFx9Z9Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
+ bh=Pstbe91UcByHUI2rX6yclJjmfZwRKdxBJLtJ+KsLJic=;
+ b=DpW9ouly1oAl55dFsUQwwE/n3iGLskrAxZApdTE/3P9yAaUrtWEqJ2pmOYbUnc/QNM0OxxsMfdEYCTdu3LbS2ZUazXZFlSXyBz4vmeRIPF+54ehslsJf1k+6fAVJUBFxgEc31i77pZEOAUh0U2mURK+aBikTrqD06Y9xMRYeKjQ8JBTZAVGM9WMvMlAvjczmWD3QxuY98DlG+xybvEwuSWO+pPqLtuHEUUOQmiEViZzTB1HToIhTJ/MWVxnqnaKHbsLTFh+YbQk/Z+Q8Ezzf6wbvpiq5YqLoZyRrlBZ2x9OPI5qKjWK5CJUfYI9xHAbFwoleVROnMWZa1VIBS54YLQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.160) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3pTdnrBYGUYHeR177lcdcDy1mE3mLolYvUp+szHMqF8=;
- b=jDW0Zb0tYSfECfbg19NysjEBnjrdG5zUPbWsKV1/S8HUi9yTSkzmWv7PAQVIkUVonXOqp3xTjlOHKbjU1DhHNdSQOGWUhg3dJdRb7M5SMnY/tuub/QGyQkdIpfmklyDBq4gyAGClrnyOwehC3T/UOs01Z1l/jFk9ysYW6eGaTXVzAeFTlbJOCnxYMNi4/ezsy62DloKVC+QgKFysNooDbbEbJaGQ6lImZYfsWip++T4ClYeBrotv1qyQ5R8YKXqr6+QxK49Jcmi2OFD36X4agbeMn4Pm+aqhgDUj6vk7fHRsbhLGJX209M9z1krju5Y2yeE+4qVCFroTaiBUZe3oyA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
- by PH7PR12MB5901.namprd12.prod.outlook.com (2603:10b6:510:1d5::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.28; Fri, 27 Sep
- 2024 15:27:25 +0000
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732%4]) with mapi id 15.20.7982.022; Fri, 27 Sep 2024
- 15:27:25 +0000
-Date: Fri, 27 Sep 2024 12:27:24 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Danilo Krummrich <dakr@kernel.org>
-Cc: Greg KH <gregkh@linuxfoundation.org>, Zhi Wang <zhiw@nvidia.com>,
- kvm@vger.kernel.org, nouveau@lists.freedesktop.org,
- alex.williamson@redhat.com, kevin.tian@intel.com, airlied@gmail.com,
- daniel@ffwll.ch, acurrid@nvidia.com, cjia@nvidia.com,
- smitra@nvidia.com, ankita@nvidia.com, aniketa@nvidia.com,
- kwankhede@nvidia.com, targupta@nvidia.com, zhiwang@kernel.org
-Subject: Re: [RFC 00/29] Introduce NVIDIA GPU Virtualization (vGPU) Support
-Message-ID: <20240927152724.GC4568@nvidia.com>
-References: <20240922124951.1946072-1-zhiw@nvidia.com>
- <ZvErg51xH32b8iW6@pollux> <20240923150140.GB9417@nvidia.com>
- <2024092614-fossil-bagful-1d59@gregkh>
- <20240926124239.GX9417@nvidia.com>
- <2024092619-unglazed-actress-0a0f@gregkh>
- <20240926144057.GZ9417@nvidia.com>
- <ZvXjcPOCVUSlALZZ@pollux.localdomain>
- <20240927125115.GZ9417@nvidia.com> <Zva_qP2B4rndSiCw@pollux>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Zva_qP2B4rndSiCw@pollux>
-X-ClientProxiedBy: MN2PR02CA0027.namprd02.prod.outlook.com
- (2603:10b6:208:fc::40) To CH3PR12MB8659.namprd12.prod.outlook.com
- (2603:10b6:610:17c::13)
+ bh=Pstbe91UcByHUI2rX6yclJjmfZwRKdxBJLtJ+KsLJic=;
+ b=eUBkMohU9ktXT6HK5cXLm8UaY6BEbDBCLhH/cEnkTGHwcGrmuXJOvCqfBuu/WdOx3Ec+h2GDE2bc7v53tND4TGoyKqcS8Po1YP4B4UcA67pWBWhYwJaEWbxisjvigp6+voDYatm5QGJ36fInW8PTO8VVZangrPYAqWVUXCls3ACWwOyy8E8j9f5E0UXKjRl1yPMYJv/MnVTPsDCDvQcmebWpEsw5CjPCA19+cesg7lgdgm/J1Dev0kngD8DqZ0K4QGSg+FYVTtK3HVOSr7i+22SPSL6Vr+KKdjscHJOn08iON2ZBp0tSxVUVamKIKNxf0YPmnKQikdwHGXz83hXj/A==
+Received: from SA9P221CA0028.NAMP221.PROD.OUTLOOK.COM (2603:10b6:806:25::33)
+ by CY8PR12MB7609.namprd12.prod.outlook.com (2603:10b6:930:99::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.35; Tue, 21 May
+ 2024 05:32:57 +0000
+Received: from SA2PEPF00001509.namprd04.prod.outlook.com
+ (2603:10b6:806:25:cafe::44) by SA9P221CA0028.outlook.office365.com
+ (2603:10b6:806:25::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7587.36 via Frontend
+ Transport; Tue, 21 May 2024 05:32:56 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ SA2PEPF00001509.mail.protection.outlook.com (10.167.242.41) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7611.14 via Frontend Transport; Tue, 21 May 2024 05:32:56 +0000
+Received: from rnnvmail202.nvidia.com (10.129.68.7) by mail.nvidia.com
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 20 May
+ 2024 22:32:39 -0700
+Received: from rnnvmail205.nvidia.com (10.129.68.10) by rnnvmail202.nvidia.com
+ (10.129.68.7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 20 May
+ 2024 22:32:39 -0700
+Received: from localhost (10.127.8.10) by mail.nvidia.com (10.129.68.10) with
+ Microsoft SMTP Server id 15.2.1544.4 via Frontend Transport;
+ Mon, 20 May 2024 22:32:34 -0700
+Date: Tue, 21 May 2024 08:32:31 +0300
+From: Zhi Wang <zhiw@nvidia.com>
+To: Danilo Krummrich <dakr@redhat.com>
+CC: <maarten.lankhorst@linux.intel.com>, <mripard@kernel.org>,
+ <tzimmermann@suse.de>, <airlied@gmail.com>, <daniel@ffwll.ch>,
+ <ojeda@kernel.org>, <alex.gaynor@gmail.com>, <wedsonaf@gmail.com>,
+ <boqun.feng@gmail.com>, <gary@garyguo.net>, <bjorn3_gh@protonmail.com>,
+ <benno.lossin@proton.me>, <a.hindborg@samsung.com>, <aliceryhl@google.com>,
+ <fujita.tomonori@gmail.com>, <lina@asahilina.net>, <pstanner@redhat.com>,
+ <ajanulgu@redhat.com>, <lyude@redhat.com>, <gregkh@linuxfoundation.org>,
+ <rust-for-linux@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+ <nouveau@lists.freedesktop.org>
+Subject: Re: [RFC PATCH 7/8] rust: add firmware abstractions
+Message-ID: <20240521083231.000074c2.zhiw@nvidia.com>
+In-Reply-To: <20240520172422.181763-4-dakr@redhat.com>
+References: <20240520172059.181256-1-dakr@redhat.com>
+ <20240520172422.181763-4-dakr@redhat.com>
+Organization: NVIDIA
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.38; x86_64-w64-mingw32)
 MIME-Version: 1.0
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|PH7PR12MB5901:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1f0576e9-f661-4c28-85ce-08dcdf08e3b6
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001509:EE_|CY8PR12MB7609:EE_
+X-MS-Office365-Filtering-Correlation-Id: 108f9c62-773c-4c96-87fe-08dc79577861
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?zwHOrhwV3gjz2lXNXYsniVHjgZkkyVYzydCHtXwOdIrxeUk9CI/El41l6Afe?=
- =?us-ascii?Q?E+7lGToJKZ5TFFxyymc03ujvDDCnk132Oj8N7nw1v9VngOlwhC29WU61VBg/?=
- =?us-ascii?Q?Hcsh2t9T1xMWwZJadwQtLarJwFM1c1u09C/mMkumUsYBSi1F3OVtrrzou/VB?=
- =?us-ascii?Q?uv/POcchqgta3AhnNG1yv98Sj4iKyz9/K7q2BBTLp217BkL1AdyodDLiL9Wg?=
- =?us-ascii?Q?k4+v0MAaVY1PMcfAus9RuzvcjJsZl5xyEkZ7LEw5OF6xBCmzaSRv2CPgysPx?=
- =?us-ascii?Q?ZVX5fCIo16g7phhqWn8HcY5bcgOjI4zyzLb8eD5xULkQt2cmM9HejgiOmzqr?=
- =?us-ascii?Q?WXcXppIsfBGrjud2EjYHSu4IbefiD8Epjo6WVoUJjer3FwossjQoGFDPsu4O?=
- =?us-ascii?Q?h/yeC4bY9oy7o6jNwOw9lzxeW+CHjgKIgyx0xLEMJO28wf23nLLMvw8cOB5q?=
- =?us-ascii?Q?gaFXRHGpdGqS0nHc3s6m9AB6/fbLQ/gerandsRb1nVqSiT1UFvA1evKfm9mX?=
- =?us-ascii?Q?c9sOWf8xxw2ByXE9D1eWEb1xp4fSB/IG0tsIJq1eX6tmjt/nvwmOST+kIgWr?=
- =?us-ascii?Q?xu4qbwTbsSfnC4kMlzuV5bySkPzvhLIC66EvRfHNgPocAthliAr1SkgRaCVm?=
- =?us-ascii?Q?K1Qndg9oazziE8+2Q3U8AVm+WZaHOIlFwCdp24FV8j28tLR0UIWl/tD1NLHQ?=
- =?us-ascii?Q?NXJpWW2OFp12KSlJ3aNe8rSmGp8ZNg1/X5GqpuOuFFivHqYVA0Gz156LsNY1?=
- =?us-ascii?Q?VJ5ruNAGaw1hMurJ5mgOqJ2r1ywYCTVobb/EJtIhQjrDzAU96CimdfPFnXRp?=
- =?us-ascii?Q?cfIwnlgXVcyrPzG1IWnuNvJvdqEGLPxQcVenwJoT0TO+O9SkS8IDTQb5gP7t?=
- =?us-ascii?Q?yfqNaMty7ik8eS+rPc4Jg2o6VG/tgPElx4DU/UTzTCVlABKCgIUvXOpd/WAB?=
- =?us-ascii?Q?dhvqWjmmPg8qL6s20Cw0XxXeFW7vGbBvNJmlHQYj+QySUdrFPI79pSWtcISk?=
- =?us-ascii?Q?LfB+IZOl9H4aOr0lR05FgMnSuywPgICWlEaW9885SIbbUy4808uD6bOoP4hW?=
- =?us-ascii?Q?mcWQM0JBfuyxyDMkwCzMdU16DKHmbRkx0s0hjc/QvzjDB3KioP5MffuCxhPy?=
- =?us-ascii?Q?4mlajpjJ705xqlP1ifOWK3EpAkjhIbcRvbJkvrA6Vm6Z2qtbt/pwew9vOjAw?=
- =?us-ascii?Q?bLztxpjZGFYs/BiTkSXo5N7OqwUOd+Su8ZxkfkDB9SEJzpenbzkirCtuofKP?=
- =?us-ascii?Q?iy46d5leYzr+5TJnmVbP+Acwdr/vlDL3lfHaOUvABA=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH3PR12MB8659.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?nt+XWEhapZxEY7u/f4AxumGxWMZMa/P7RFWQnzs5J5bx5Q1PELBCv6zQaDUH?=
- =?us-ascii?Q?TN8M+uJGNKHE3MkW0e4K87JScZefwPPB4y4vtKI3r/w7sRcms3/W5ywxX/rO?=
- =?us-ascii?Q?GfzfsxLObdYMVq1rLb6ICe6DS4XanYPQAth1TpGcaTC6ENwBg4j9RJzzlkC3?=
- =?us-ascii?Q?g1ow3YTshiaIGt5UrnKlxs8QaWy8dtcojtuGlDDFliYFG6iF3wh9z6sl66hs?=
- =?us-ascii?Q?nOPjUNcL5pn4VQrUmjhQp5B42y8iDlo3aytHGBbZul96C4IK0MbAnikRcdAc?=
- =?us-ascii?Q?Q178KWMwbXyJq5FnTxopO/JYzUvn9IVwPiSN/9GzlYlE2plpxFloBEXm8yJ0?=
- =?us-ascii?Q?hHd3cnWpfYMkKzSsnqtCSqM5iN2A1hoKqzdcpeeOyKQbLghv0nresc/DvBnx?=
- =?us-ascii?Q?BbByEvb+en6wdA9YWBb9K2ykCBbJrm5M+pMHG/CIb3BSitcvUr3/Ll5hfwBC?=
- =?us-ascii?Q?0N8OstFewm1hwrWZ3B+kj9hhJJlnzD+OOARPhd2XPjBX2RTD5fb2brQn2C4F?=
- =?us-ascii?Q?egJImW/ECxwOCBCLXoI5jpkL+3JgE9gLsXc9yvTtAfAOY9L3vsLuomjmT2ea?=
- =?us-ascii?Q?4eQrZnYJRSGOyupX73Kiii2FiqSJUITsgS+9zJbkSvrpGVAM7aBgSoeghJc5?=
- =?us-ascii?Q?Rr8m+9xe7Y77xW0JuJVkvcIoPScIxBgWh2C/jGFKeL0PFAfUSMd9jOvAzTxs?=
- =?us-ascii?Q?FT7WFhOXmnGf9wPkpJapPwJ+oNTfpBiLNQ9SNXM95Tis/kc7I9yEzo2fnvvF?=
- =?us-ascii?Q?gnrzoit97UbJv42SEon4LxvIOii8iCBNMPN7/NtpvFOmHt3xs6mfJ3u6ZGje?=
- =?us-ascii?Q?Tm61bW8NdjBm6ZUZDdAAv4Fhbhv8AwGN084l2x9dMyHuFqZmiFfIrPXgpLR3?=
- =?us-ascii?Q?U5ocQ9U5gyJoH99l8VXs+Zcp6pvwbqg++bZP7Lbu7dNKfhF2ERbMZWCEaQ9Y?=
- =?us-ascii?Q?nAP78OfOpjD9/mnP2r7rVXi7YXLevd9ELtlPLH207cu6IaC1UrrVdXjC1u70?=
- =?us-ascii?Q?wx7sJ+NaiTAzM1cdMh/X0GA2Lhl5URdCOHdQXGmHPZ4zy3bYBMDvhBvtfLCY?=
- =?us-ascii?Q?j3aN6AkNsQ7yfTOcTfuKcHhFom7vgeQDGtRqy9FsjBKgLSPB51qXzm03ANvh?=
- =?us-ascii?Q?CVvcJ8hXgjFdtrVo+iAJknR0A3P4NHjwA4rvvKn8a2KjOiyWS1Xt8ugktjNs?=
- =?us-ascii?Q?oKTtS7bcII+ayORAHD7E4iOBbEBpzaTHZF1P6IQiyL8sNqLggxQlyZ6qcTd0?=
- =?us-ascii?Q?IRNRJ0OOPs/eB41N0NYnB/7milzn+SKuubZkPfYAEEdRYosppeqNWtMtZpPW?=
- =?us-ascii?Q?uqsru2zu5rMEUl261TGY4kPuIIbZN2LLRPkcH9sNi0WCH9fGq1vTlM/RwQGu?=
- =?us-ascii?Q?+FuuLaijPTE47pUKsFKpDcYbG4/D92E2v/+Gs8LzT1GQzpY3t1N8Piwx6Qub?=
- =?us-ascii?Q?IfTBhbNj0vym/7YoQf3Ihd46h2KIKqkkO5Oq/+2uXMKjdar/8qcWyJYEv6tJ?=
- =?us-ascii?Q?31jexfhVCx/PpxUUMy6syNh3IxX+pttZ/NmLGRgGKBhLYc0BBG/CXiK8YHNV?=
- =?us-ascii?Q?DE9MbqQL663nSM/qFJs=3D?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230031|7416005|1800799015|82310400017|376005|36860700004; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?A4r8yspaop0dvsSthELRqxU5FVqnBXolMFBAFY3tav3QD7iVWJdgmoV14QDL?=
+ =?us-ascii?Q?7bTV0/s8nEBL+nnDF62NL2m9p2bXXY28RxeCRktzQ0kofZf6KG6lnbl+Z7C/?=
+ =?us-ascii?Q?ZEfbMme/Y0DEJGJ6TboZ/FcUaIYetH46SrCbU+oqjelgE/lGmxuke3BPtd2D?=
+ =?us-ascii?Q?lzz+xaSCeOsQkjcwEbLB8Em2Fr15Z/jYJdRy83nui4BBTQx9v0c+e7Zsdt9d?=
+ =?us-ascii?Q?D/48BAtbAYbd1ekckPOrEF3Skf6ha/5Iylx62xJqVAysd1W1FAh5H+lKX/e/?=
+ =?us-ascii?Q?z5+Pd3Ui1XvqQ5nIuzKAEO1xmPt7h5zoNvd/lBqU8r3ZuzLn4kVITFPhxPf6?=
+ =?us-ascii?Q?QB2EjguguZAhyDApnW9lXM46b/dv3nmf641DidtFAPRrhqwt6M+gbOWeOHvi?=
+ =?us-ascii?Q?nbuGTtVdDAEi5WVgMkE7Nu2xS5+ZfDnLQqETVeoMgP9lh1FxTdr942AH1OE5?=
+ =?us-ascii?Q?KsBgNBNhxpE1ZsHXYr/7InRz1w16sFc7+EtyZuxpsm0EPCFvWYWvZ+sLJCQg?=
+ =?us-ascii?Q?Ksl6PEMSupC0Q/4OxwpS9F1wDUqcBrgwD21Av5v7St8mL8v5cYLbTyls4bxE?=
+ =?us-ascii?Q?RW7az9Yf+L2KZ8EqbDiq5moxrGjNacBacz69VEZS6OP2zxqh9ZYxqE2NDk2r?=
+ =?us-ascii?Q?4Kmk3UtaceErYYWtuuBrqz07jblNpAvIMrIAaxDh3DW8L208iL8Ou79Ess6p?=
+ =?us-ascii?Q?blrkQ1xs6cuqaO33Xqb8YvwTMSPLapJooJl9hBpG+jaKZVUl2UHl5l9NUuWR?=
+ =?us-ascii?Q?xT8t0PA4R9rL4JknVJd7O7IPYR9xoc8btg1pVHhoc08sP5Xomib8+VicQ2mm?=
+ =?us-ascii?Q?VyVNg85WOzLYVjUFkLoyYk6NPyI2eWvNo5wisy4cmhwjtVd+ht3MbQNyhF+U?=
+ =?us-ascii?Q?jWD8g1ZQtaYRWEGUZQbBIix3OikDN+scnNBssnWpcePkrP5qopHdvU7vHt5f?=
+ =?us-ascii?Q?fjXNtLk1uT5RnnrRIZsJE3Kw0+JAsWVzTTYompwHJqXHGAmdlYt84Ac8Hujs?=
+ =?us-ascii?Q?DEUd8b/nrECaw6+xOjEOVymWlVjh/UmVGoIg3zcqmSHDsGMe1SWvEQIaXUD6?=
+ =?us-ascii?Q?HsNy2H2gQHsn89b6DiJ9lNPMs/PekWOfvW9y0qHUNWoqtOLLr5IOuRUYRwex?=
+ =?us-ascii?Q?YZWYVCXqLwRdyZKmXTij2MNoR36ZzRn/uTlECNbYXXKMvUruXovvACA4Nldh?=
+ =?us-ascii?Q?LQycJooeW7q42EVN2wpF1PMdxkh0nFcEdPNBiBuHjhV09/9AAeE58umQE5vB?=
+ =?us-ascii?Q?VN1pBk6PkckJfQnetZXIyi/Pg82kky5gekz9uZEYQb77F4uCLewkKVMmGMiy?=
+ =?us-ascii?Q?muD53h+ZteGlwCUeiZceVrc3IegIL55uQXPOswc2iTmdyT9GaGK6+zkChCAT?=
+ =?us-ascii?Q?l9030p0=3D?=
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230031)(7416005)(1800799015)(82310400017)(376005)(36860700004); DIR:OUT;
+ SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1f0576e9-f661-4c28-85ce-08dcdf08e3b6
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2024 15:27:25.4890 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2024 05:32:56.7134 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 108f9c62-773c-4c96-87fe-08dc79577861
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Ym6H9LI9hr8wLq4M7pxCNLkiGnuG78xf36Pjn/X6uywS/bIZgyXqH4FftBqxr1wD
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5901
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001509.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7609
+X-Mailman-Approved-At: Sun, 29 Sep 2024 21:28:50 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -151,44 +148,150 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Sep 27, 2024 at 04:22:32PM +0200, Danilo Krummrich wrote:
-> > When you say things like this it comes across as though you are
-> > implying there are two tiers to the community. Ie those that set the
-> > strategy and those that don't.
+On Mon, 20 May 2024 19:24:19 +0200
+Danilo Krummrich <dakr@redhat.com> wrote:
+
+> Add an abstraction around the kernels firmware API to request firmware
+> images. The abstraction provides functions to access the firmware
+> buffer and / or copy it to a new buffer allocated with a given
+> allocator backend.
 > 
-> This isn't true, I just ask you to consider the goals that have been set
-> already, because we have been working on this already.
 
-Why do keep saying I haven't?
+Was playing with firmware extractions based on this patch.
+Unfortunately I ended up with a lot of pointer operations, unsafe
+statements.
 
-I have no intention of becoming involved in your project or
-nouveau. My only interest here is to get an agreement that we can get
-a VFIO driver (to improve the VFIO subsystem and community!) in the
-near term on top of in-tree nouveau.
+As we know many vendors have a C headers for the definitions of the
+firwmare content, the driver extract the data by applying a struct
+pointer on it.
 
-> > > But, we have to agree on a long term strategy and work towards the corresponding
-> > > goals *together*.
-> > 
-> > I think we went over all the options already. IMHO the right one is
-> > for nova and vfio to share some kind of core driver. The choice of
-> > Rust for nova complicates planning this, but it doesn't mean anyone is
-> > saying no to it.
+But in rust, I feel it would nice that we can also have a common
+firmware extractor for drivers, that can wrap the pointer operations,
+take a list of the firmware struct members that converted from C headers
+as the input, offer the driver some common ABI methods to query them.
+Maybe that would ease the pain a lot.
+
+Thanks,
+Zhi.
+
+> The firmware is released once the abstraction is dropped.
 > 
-> This is the problem, you're many steps ahead.
+> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+> ---
+>  rust/bindings/bindings_helper.h |  1 +
+>  rust/kernel/firmware.rs         | 74
+> +++++++++++++++++++++++++++++++++ rust/kernel/lib.rs              |
+> 1 + 3 files changed, 76 insertions(+)
+>  create mode 100644 rust/kernel/firmware.rs
 > 
-> You should start with understanding why we want the core driver to be in Rust.
-> You then can raise your concerns about it and then we can discuss them and see
-> if we can find solutions / consensus.
+> diff --git a/rust/bindings/bindings_helper.h
+> b/rust/bindings/bindings_helper.h index b245db8d5a87..e4ffc47da5ec
+> 100644 --- a/rust/bindings/bindings_helper.h
+> +++ b/rust/bindings/bindings_helper.h
+> @@ -14,6 +14,7 @@
+>  #include <kunit/test.h>
+>  #include <linux/errname.h>
+>  #include <linux/ethtool.h>
+> +#include <linux/firmware.h>
+>  #include <linux/jiffies.h>
+>  #include <linux/mdio.h>
+>  #include <linux/pci.h>
+> diff --git a/rust/kernel/firmware.rs b/rust/kernel/firmware.rs
+> new file mode 100644
+> index 000000000000..700504fb3c9c
+> --- /dev/null
+> +++ b/rust/kernel/firmware.rs
+> @@ -0,0 +1,74 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +//! Firmware abstraction
+> +//!
+> +//! C header:
+> [`include/linux/firmware.h`](../../../../include/linux/firmware.h") +
+> +use crate::{bindings, device::Device, error::Error, error::Result,
+> str::CStr, types::Opaque}; +
+> +/// Abstraction around a C firmware struct.
+> +///
+> +/// This is a simple abstraction around the C firmware API. Just
+> like with the C API, firmware can +/// be requested. Once requested
+> the abstraction provides direct access to the firmware buffer as +///
+> `&[u8]`. Alternatively, the firmware can be copied to a new buffer
+> using `Firmware::copy`. The +/// firmware is released once
+> [`Firmware`] is dropped. +/// +/// # Examples
+> +///
+> +/// ```
+> +/// let fw = Firmware::request("path/to/firmware.bin",
+> dev.as_ref())?; +/// driver_load_firmware(fw.data());
+> +/// ```
+> +pub struct Firmware(Opaque<*const bindings::firmware>);
+> +
+> +impl Firmware {
+> +    /// Send a firmware request and wait for it. See also
+> `bindings::request_firmware`.
+> +    pub fn request(name: &CStr, dev: &Device) -> Result<Self> {
+> +        let fw = Opaque::uninit();
+> +
+> +        let ret = unsafe { bindings::request_firmware(fw.get(),
+> name.as_char_ptr(), dev.as_raw()) };
+> +        if ret != 0 {
+> +            return Err(Error::from_errno(ret));
+> +        }
+> +
+> +        Ok(Firmware(fw))
+> +    }
+> +
+> +    /// Send a request for an optional fw module. See also
+> `bindings::request_firmware_nowarn`.
+> +    pub fn request_nowarn(name: &CStr, dev: &Device) -> Result<Self>
+> {
+> +        let fw = Opaque::uninit();
+> +
+> +        let ret = unsafe {
+> +            bindings::firmware_request_nowarn(fw.get(),
+> name.as_char_ptr(), dev.as_raw())
+> +        };
+> +        if ret != 0 {
+> +            return Err(Error::from_errno(ret));
+> +        }
+> +
+> +        Ok(Firmware(fw))
+> +    }
+> +
+> +    /// Returns the size of the requested firmware in bytes.
+> +    pub fn size(&self) -> usize {
+> +        unsafe { (*(*self.0.get())).size }
+> +    }
+> +
+> +    /// Returns the requested firmware as `&[u8]`.
+> +    pub fn data(&self) -> &[u8] {
+> +        unsafe {
+> core::slice::from_raw_parts((*(*self.0.get())).data, self.size()) }
+> +    }
+> +}
+> +
+> +impl Drop for Firmware {
+> +    fn drop(&mut self) {
+> +        unsafe { bindings::release_firmware(*self.0.get()) };
+> +    }
+> +}
+> +
+> +// SAFETY: `Firmware` only holds a pointer to a C firmware struct,
+> which is safe to be used from any +// thread.
+> +unsafe impl Send for Firmware {}
+> +
+> +// SAFETY: `Firmware` only holds a pointer to a C firmware struct,
+> references to which are safe to +// be used from any thread.
+> +unsafe impl Sync for Firmware {}
+> diff --git a/rust/kernel/lib.rs b/rust/kernel/lib.rs
+> index 6415968ee3b8..ed97d131661a 100644
+> --- a/rust/kernel/lib.rs
+> +++ b/rust/kernel/lib.rs
+> @@ -35,6 +35,7 @@
+>  #[cfg(CONFIG_DRM = "y")]
+>  pub mod drm;
+>  pub mod error;
+> +pub mod firmware;
+>  pub mod init;
+>  pub mod ioctl;
+>  #[cfg(CONFIG_KUNIT)]
 
-I don't want to debate with you about Nova. It is too far in the
-future, and it doesn't intersect with anything I am doing.
-
-> But you're not even considering it, and instead start with a counter proposal.
-> This isn't acceptable to me.
-
-I'm even agreeing to a transition into a core driver in Rust, someday,
-when the full community can agree it is the right time.
-
-What more do you want from me?
-
-Jason
