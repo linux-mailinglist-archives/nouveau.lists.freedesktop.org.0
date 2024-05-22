@@ -2,79 +2,80 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B247CBAB3C
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D7F5CBA991
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:25 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9E89C10EACF;
-	Sat, 13 Dec 2025 12:41:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A857F10E9DD;
+	Sat, 13 Dec 2025 12:40:56 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="IlKyqGEQ";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="J6rn49bX";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
- [209.85.210.170])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EA61310E358;
- Tue, 21 May 2024 23:53:53 +0000 (UTC)
-Received: by mail-pf1-f170.google.com with SMTP id
- d2e1a72fcca58-6f44e47238fso34843b3a.1; 
- Tue, 21 May 2024 16:53:53 -0700 (PDT)
+Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com
+ [209.85.210.46])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 78BF410E0A0;
+ Wed, 22 May 2024 23:15:21 +0000 (UTC)
+Received: by mail-ot1-f46.google.com with SMTP id
+ 46e09a7af769-6f0e2544f6bso213906a34.3; 
+ Wed, 22 May 2024 16:15:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716335633; x=1716940433; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1716419720; x=1717024520; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to:from
  :subject:cc:to:message-id:date:from:to:cc:subject:date:message-id
- :reply-to; bh=3DaQiKjnAD9KHri/cIxiGqQpOy5cgH7zfvkMt74Lem4=;
- b=IlKyqGEQc/WJbKHJVD5GxXjd8lIGQJUp0r7xR/cUUP4OvOUpEVpzaFrcNwjji97uC4
- EGxFFQOuesIz5/VK2JM9h1qRTwTbrLNA3RuAKHKf/tIr1KTKoOMiV75FaEI7/A9GRaAO
- Yb6x7JkquG3sT/B3J2ii06DM7JKGnvNfSnp3NC7cXaAR2vB3Swrm4UIFvfc60GM0OM2F
- hHBHRfqCIXO/LtkxtJhTf+1cd7XVUF8G/J94d7Z10anuOYbUCq26bEJk//ZjAR1uSvim
- F+YiSqJe1KP4pxT7rHlUb0xvM0iYTnVkHwgBVokswikuKA6JuRNBtj1cQzak284Fff0g
- MuyQ==
+ :reply-to; bh=Ir2XqinlUrPpaQlopq6pGICD8nECQfQb9VlUJ47Cml4=;
+ b=J6rn49bX7cEOXk0OgPJEPa3XA3nt+xZA5OSiyirMdDnwkQNvMuUDT/QgT9FBb0Gd/A
+ Ee9nkW3QzvpOZhxys3uUcghzJDqO7dbIk0syvJWlKylk6Qdm7krsa4xGnYWi7oTWeIse
+ xVOqdknF0KFTslfc6wlo3I9oPBHLTXc+gUVUkc37W5Z9Kk7WKmwFw7KNdWNHbndVkt6H
+ mTevg22FEMBbGMId0NmUZh1cqzo3zyxcz3Bc/8Y76Zr/16hmxTN8UbTedRWpARZZ55IU
+ gjildVMv8v7ebt1aFNTDKBAAMSm3mlkZ0w2XgvNKM+Chzx6wKdzuLUPiWaIftEGS2O+t
+ 2O4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716335633; x=1716940433;
+ d=1e100.net; s=20230601; t=1716419720; x=1717024520;
  h=content-transfer-encoding:mime-version:references:in-reply-to:from
  :subject:cc:to:message-id:date:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=3DaQiKjnAD9KHri/cIxiGqQpOy5cgH7zfvkMt74Lem4=;
- b=YlQNKrDcWGsvRIsrg/s6ManwLlZOI/SAI92ycIaOP9KyMzDlYda0igV3h8TpTUH6lw
- pmZvVAX5o+3ylj/oK3meurFaPPre6eQC0gPJe5eOGadGG7ML0kusmct58Q1MZggt1RUv
- c2FxANiR3PMmb4k+hKqtq3iYYtvvRBXucFLwOt/Yg4RRMwOayWfoL7Ql7obsLgmkmdH2
- n/KWRjOM2ZD3wxKnMRDfGnunPQrwJum+mRe5bwTyY7JSfwSR7dW7MAZHoAsGKmSe4och
- rsF0UTOONq90s+LYKxxHi63tdrz5ZK47sZB6rm2579o7hxuOjFov4WCmL9KMpkD9taCA
- cOVg==
+ bh=Ir2XqinlUrPpaQlopq6pGICD8nECQfQb9VlUJ47Cml4=;
+ b=fuCA+RLgn0nTP45xPKcO7yhec48JtSjrTmzT2qnIqFkcQXD+5q13egUfPKyNiFzLq4
+ pVh9uF51p8IUJEdbgZ+DrfGJ+roc6CYWFyvEno+1xEhQdfRA5J8+amXCAtxQB/0GnS2Q
+ oARwX5hm7+JgK7Ty+GiMoO/yUozQNENXuf7BsIpl9G5OKMwhksu/daKwFsmDgEw2LEqt
+ ngTSNGm90DP73PYdGzs4fgfmwsR5OEptD9IbwMLJOqFL6UDGcieA8zT6nBfjIIfWd4HA
+ y5X9xyl/M9JYabXl0K4IlaSSwj3h+AASPo6di08+uem7vwoLQ2/i6ewHhS6SBJGKYK6M
+ Z9wQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVST+FxL4OrgvYDpzlGlMufpdyCY4vk/JdeudUQpyhDDsjL/O/9Nxa+riAgvGrRF8VOfWE9jYscENGdVTBbvhkl/sNajf5a81sFfioFRwY6C/7IzSBz1sSwDqx7bfoBispZkW/DT1M5bPq1eivQtA==
-X-Gm-Message-State: AOJu0YzCiURfNEe62BJW45ePyHeo1cDxivkZaozkxzTtRjYwkYnlSFLN
- h8kF/BpBwBH7wYpH8vFKvp7AmoJL27UoROiLKsklXGuTVpeFuT7d
-X-Google-Smtp-Source: AGHT+IEOOeLZlnYhzFqWE1WSa9IQ7YVO/q2usBXpvoQ8sXnxMguFBGZNx49vZsh8HCbkbAEl+ckjRg==
-X-Received: by 2002:a05:6a00:2d87:b0:6f4:d050:4113 with SMTP id
- d2e1a72fcca58-6f6d61e2faamr425621b3a.3.1716335633096; 
- Tue, 21 May 2024 16:53:53 -0700 (PDT)
+ AJvYcCV8TeE434TTm3e+3Zar7LUMPYEDrbETCFr27iQAv0sQyZTUL9IR9k3kpKyNX7sbGoXc4iv4lq9STf+m5t92vk1JgP7pcwrBuqp3y5O5eUET8Qj3m7dlrPPpaYW1lKvqG4XHOm+0soygePiivFOt1A==
+X-Gm-Message-State: AOJu0YyB9/XgENz9+pYwfIKxmuZXjojfXZObf7WEd56u+Fdc6C32mipX
+ +X+hHJGxib5tAgn0iayiqCq9F2eSiTlTM3V55UUEY/oip76FyNqh
+X-Google-Smtp-Source: AGHT+IEg0tD1wihn+c8EcE3GfwFZJ9P0oCxBgIaw/cJq+yGvGb5ZmoLis9eA4mwP5hlUp53Vcp3WSg==
+X-Received: by 2002:a05:6358:2921:b0:192:82da:43df with SMTP id
+ e5c5f4694b2df-19791b7d6d6mr377565255d.1.1716419720266; 
+ Wed, 22 May 2024 16:15:20 -0700 (PDT)
 Received: from localhost (p5261226-ipxg23801hodogaya.kanagawa.ocn.ne.jp.
  [180.15.241.226]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-6f4d2a828acsm21266408b3a.49.2024.05.21.16.53.48
+ d2e1a72fcca58-6f4d2a66557sm22855335b3a.44.2024.05.22.16.15.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 May 2024 16:53:52 -0700 (PDT)
-Date: Wed, 22 May 2024 08:53:34 +0900 (JST)
-Message-Id: <20240522.085334.1009573112046880609.fujita.tomonori@gmail.com>
-To: dakr@redhat.com
-Cc: maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ Wed, 22 May 2024 16:15:19 -0700 (PDT)
+Date: Thu, 23 May 2024 08:15:13 +0900 (JST)
+Message-Id: <20240523.081513.81513679981916366.fujita.tomonori@gmail.com>
+To: pstanner@redhat.com
+Cc: fujita.tomonori@gmail.com, dakr@redhat.com,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
  tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch, ojeda@kernel.org,
  alex.gaynor@gmail.com, wedsonaf@gmail.com, boqun.feng@gmail.com,
  gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
- a.hindborg@samsung.com, aliceryhl@google.com, fujita.tomonori@gmail.com,
- lina@asahilina.net, pstanner@redhat.com, ajanulgu@redhat.com,
- lyude@redhat.com, gregkh@linuxfoundation.org,
+ a.hindborg@samsung.com, aliceryhl@google.com, lina@asahilina.net,
+ ajanulgu@redhat.com, lyude@redhat.com, gregkh@linuxfoundation.org,
  rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
 Subject: Re: [RFC PATCH 7/8] rust: add firmware abstractions
 From: FUJITA Tomonori <fujita.tomonori@gmail.com>
-In-Reply-To: <20240520172422.181763-4-dakr@redhat.com>
-References: <20240520172059.181256-1-dakr@redhat.com>
- <20240520172422.181763-4-dakr@redhat.com>
+In-Reply-To: <35fef820ed6e67f2203e78735fc9e15248436221.camel@redhat.com>
+References: <20240520172422.181763-4-dakr@redhat.com>
+ <20240522.085334.1009573112046880609.fujita.tomonori@gmail.com>
+ <35fef820ed6e67f2203e78735fc9e15248436221.camel@redhat.com>
 Mime-Version: 1.0
-Content-Type: Text/Plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Content-Type: Text/Plain; charset=utf-8
+Content-Transfer-Encoding: base64
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -90,66 +91,34 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
-Thanks for working on the firmware API!
-
-On Mon, 20 May 2024 19:24:19 +0200
-Danilo Krummrich <dakr@redhat.com> wrote:
-
-> Add an abstraction around the kernels firmware API to request firmware
-> images. The abstraction provides functions to access the firmware
-> buffer and / or copy it to a new buffer allocated with a given allocator
-> backend.
-> 
-> The firmware is released once the abstraction is dropped.
-> 
-> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
-> ---
->  rust/bindings/bindings_helper.h |  1 +
->  rust/kernel/firmware.rs         | 74 +++++++++++++++++++++++++++++++++
->  rust/kernel/lib.rs              |  1 +
->  3 files changed, 76 insertions(+)
->  create mode 100644 rust/kernel/firmware.rs
-> 
-> diff --git a/rust/bindings/bindings_helper.h b/rust/bindings/bindings_helper.h
-> index b245db8d5a87..e4ffc47da5ec 100644
-> --- a/rust/bindings/bindings_helper.h
-> +++ b/rust/bindings/bindings_helper.h
-> @@ -14,6 +14,7 @@
->  #include <kunit/test.h>
->  #include <linux/errname.h>
->  #include <linux/ethtool.h>
-> +#include <linux/firmware.h>
->  #include <linux/jiffies.h>
->  #include <linux/mdio.h>
->  #include <linux/pci.h>
-> diff --git a/rust/kernel/firmware.rs b/rust/kernel/firmware.rs
-> new file mode 100644
-> index 000000000000..700504fb3c9c
-> --- /dev/null
-> +++ b/rust/kernel/firmware.rs
-> @@ -0,0 +1,74 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +//! Firmware abstraction
-> +//!
-> +//! C header: [`include/linux/firmware.h`](../../../../include/linux/firmware.h")
-> +
-> +use crate::{bindings, device::Device, error::Error, error::Result, str::CStr, types::Opaque};
-> +
-> +/// Abstraction around a C firmware struct.
-> +///
-> +/// This is a simple abstraction around the C firmware API. Just like with the C API, firmware can
-> +/// be requested. Once requested the abstraction provides direct access to the firmware buffer as
-> +/// `&[u8]`. Alternatively, the firmware can be copied to a new buffer using `Firmware::copy`. The
-> +/// firmware is released once [`Firmware`] is dropped.
-> +///
-> +/// # Examples
-> +///
-> +/// ```
-> +/// let fw = Firmware::request("path/to/firmware.bin", dev.as_ref())?;
-> +/// driver_load_firmware(fw.data());
-> +/// ```
-> +pub struct Firmware(Opaque<*const bindings::firmware>);
-
-Wrapping a raw pointer is not the intended use of Qpaque type?
+SGksDQoNCk9uIFdlZCwgMjIgTWF5IDIwMjQgMDk6Mzc6MzAgKzAyMDANClBoaWxpcHAgU3Rhbm5l
+ciA8cHN0YW5uZXJAcmVkaGF0LmNvbT4gd3JvdGU6DQoNCj4+ID4gKy8vLyBBYnN0cmFjdGlvbiBh
+cm91bmQgYSBDIGZpcm13YXJlIHN0cnVjdC4NCj4+ID4gKy8vLw0KPj4gPiArLy8vIFRoaXMgaXMg
+YSBzaW1wbGUgYWJzdHJhY3Rpb24gYXJvdW5kIHRoZSBDIGZpcm13YXJlIEFQSS4gSnVzdA0KPj4g
+PiBsaWtlIHdpdGggdGhlIEMgQVBJLCBmaXJtd2FyZSBjYW4NCj4+ID4gKy8vLyBiZSByZXF1ZXN0
+ZWQuIE9uY2UgcmVxdWVzdGVkIHRoZSBhYnN0cmFjdGlvbiBwcm92aWRlcyBkaXJlY3QNCj4+ID4g
+YWNjZXNzIHRvIHRoZSBmaXJtd2FyZSBidWZmZXIgYXMNCj4+ID4gKy8vLyBgJlt1OF1gLiBBbHRl
+cm5hdGl2ZWx5LCB0aGUgZmlybXdhcmUgY2FuIGJlIGNvcGllZCB0byBhIG5ldw0KPj4gPiBidWZm
+ZXIgdXNpbmcgYEZpcm13YXJlOjpjb3B5YC4gVGhlDQo+PiA+ICsvLy8gZmlybXdhcmUgaXMgcmVs
+ZWFzZWQgb25jZSBbYEZpcm13YXJlYF0gaXMgZHJvcHBlZC4NCj4+ID4gKy8vLw0KPj4gPiArLy8v
+ICMgRXhhbXBsZXMNCj4+ID4gKy8vLw0KPj4gPiArLy8vIGBgYA0KPj4gPiArLy8vIGxldCBmdyA9
+IEZpcm13YXJlOjpyZXF1ZXN0KCJwYXRoL3RvL2Zpcm13YXJlLmJpbiIsDQo+PiA+IGRldi5hc19y
+ZWYoKSk/Ow0KPj4gPiArLy8vIGRyaXZlcl9sb2FkX2Zpcm13YXJlKGZ3LmRhdGEoKSk7DQo+PiA+
+ICsvLy8gYGBgDQo+PiA+ICtwdWIgc3RydWN0IEZpcm13YXJlKE9wYXF1ZTwqY29uc3QgYmluZGlu
+Z3M6OmZpcm13YXJlPik7DQo+PiANCj4+IFdyYXBwaW5nIGEgcmF3IHBvaW50ZXIgaXMgbm90IHRo
+ZSBpbnRlbmRlZCB1c2Ugb2YgUXBhcXVlIHR5cGU/DQo+PiANCj4gDQo+IFdoYXQgaXMgdGhlIGlu
+dGVuZGVkIHVzZT8NCj4gQXMgSSBzZWUgaXQsIGFsbCB1c2VzIHdyYXBwIHNvbWUgYmluZGluZzo6
+KiDigJMgYnV0IGEgcmF3cG9pbnRlciB0byBhDQo+IGJpbmRpbmcgc2hvdWxkbid0IGJlIHdyYXBw
+ZWQgYnkgaXQ/DQoNCklmIEkgdW5kZXJzdGFuZCBjb3JyZWN0bHksIGl0J3MgZm9yIGVtYmVkZGlu
+ZyBDJ3Mgc3RydWN0IGluIFJ1c3Qncw0Kc3RydWN0IChhcyBhbGwgdGhlIHVzYWdlIGluIHRoZSB0
+cmVlIGRvKS4gSXQgZ2l2ZXMgdGhlIHRyaWNrcyBmb3INCmluaXRpYWxpemF0aW9uIGFuZCBhIHBv
+aW50ZXIgdG8gdGhlIGVtYmVkZGVkIG9iamVjdC4NCg0KVGhlIEMncyBmaXJtd2FyZSBBUEkgZ2l2
+ZXMgYSBwb2ludGVyIHRvIGFuIGluaXRpYWxpemVkIG9iamVjdCBzbyBubw0KcmVhc29uIHRvIHVz
+ZSBPcGFxdWUuDQoNCldpdGggc3VjaCBDIEFQSSwgUnVzdCdzIHN0cnVjdCBzaW1wbHkgdXNlcyBy
+YXcgcG9pbnRlcnMgaW4gb2xkIHJ1c3QNCmJyYW5jaC4gRm9yIGV4YW1wbGUsDQoNCmh0dHBzOi8v
+Z2l0aHViLmNvbS9SdXN0LWZvci1MaW51eC9saW51eC9ibG9iL3J1c3QvcnVzdC9rZXJuZWwvY2hy
+ZGV2LnJzI0wyOA0KDQpzdHJ1Y3QgQ2RldigqbXV0IGJpbmRpbmdzOjpjZGV2KTsNCg0KDQpBbm90
+aGVyIGNob2ljZSB0aGF0IEkga25vdyBpcyBOb25OdWxsOg0KDQpodHRwczovL2xvcmUua2VybmVs
+Lm9yZy9sa21sLzIwMjQwNDE1LWFsaWNlLW1tLXY1LTQtNmY1NWU0ZDhlZjUxQGdvb2dsZS5jb20v
+DQoNCnB1YiBzdHJ1Y3QgUGFnZSB7DQogICAgcGFnZTogTm9uTnVsbDxiaW5kaW5nczo6cGFnZT4s
+DQp9DQo=
