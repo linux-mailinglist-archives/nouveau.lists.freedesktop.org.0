@@ -2,66 +2,73 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37C5E8CD92C
-	for <lists+nouveau@lfdr.de>; Thu, 23 May 2024 19:32:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CE688CD9A9
+	for <lists+nouveau@lfdr.de>; Thu, 23 May 2024 20:07:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A94CE10F163;
-	Thu, 23 May 2024 17:32:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D825610F1E4;
+	Thu, 23 May 2024 18:07:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Y7cERT8h";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b1u6Fhc6";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C730F10F15D;
- Thu, 23 May 2024 17:32:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1716485539; x=1748021539;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=uNcIGozZvpEAmR27nhSWVo+xVUOftbExVLTNqebYqjs=;
- b=Y7cERT8hlFtX2hSiosTNRpFm2AGf9kLU3RoYCmQeACxUKgCxEBpycFTO
- pSxAS9jJY5V3cjovLTbthsgRxfTKZqJLD72shKQjDnrt1zL/7Drwgl4Da
- uv9bO2N6OIy7b+4Mytv0C8Nix3e+ezZPnSm/XJRXZ65c4LEOnY/8oDqYW
- C/sIgx9qzPBomwHdky3HWHombE9GiHMUMumd1BWcvE35UVWev1uhJN7PN
- dYjeJFvR/1l/J/6j9vYj/iuklg4nRnPfm7jPxt9nWzzTeMDGCcsU+gHNY
- 6mDZc9UwjQddiBFqJYrWOFfraJ7dEfTyePtn7AoHD9nrg0dTpa9l4amKG Q==;
-X-CSE-ConnectionGUID: WQyqDWnzScSx6wP6AMB74Q==
-X-CSE-MsgGUID: 1zXkpeYoSli9nya6K/W65A==
-X-IronPort-AV: E=McAfee;i="6600,9927,11081"; a="12673172"
-X-IronPort-AV: E=Sophos;i="6.08,183,1712646000"; d="scan'208";a="12673172"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
- by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 May 2024 10:32:15 -0700
-X-CSE-ConnectionGUID: xt+TKiz4TyavmPMvRJ7mUQ==
-X-CSE-MsgGUID: 9Eeg2aYeSdigM9bHUEo3oA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,183,1712646000"; d="scan'208";a="33712668"
-Received: from stinkpipe.fi.intel.com (HELO stinkbox) ([10.237.72.74])
- by fmviesa008.fm.intel.com with SMTP; 23 May 2024 10:32:11 -0700
-Received: by stinkbox (sSMTP sendmail emulation);
- Thu, 23 May 2024 20:32:11 +0300
-Date: Thu, 23 May 2024 20:32:11 +0300
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Jani Nikula <jani.nikula@intel.com>
-Cc: dri-devel@lists.freedesktop.org, imx@lists.linux.dev,
- nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- Philipp Zabel <p.zabel@pengutronix.de>, Shawn Guo <shawnguo@kernel.org>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>
-Subject: Re: [PATCH 3/4] drm/imx: fix -Wformat-truncation warning in
- imx_ldb_probe()
-Message-ID: <Zk99m4i82XnQPeKQ@intel.com>
-References: <cover.1716479340.git.jani.nikula@intel.com>
- <c257c4174743f35bafee8492ec60e1d2734450cf.1716479340.git.jani.nikula@intel.com>
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com
+ [209.85.214.171])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4DDAB10F1E0;
+ Thu, 23 May 2024 18:07:22 +0000 (UTC)
+Received: by mail-pl1-f171.google.com with SMTP id
+ d9443c01a7336-1ec92e355bfso26512015ad.3; 
+ Thu, 23 May 2024 11:07:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716487642; x=1717092442; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JFvamzZglehHBEolPcL4rA0lvGrignK3Mpdrws3oBZY=;
+ b=b1u6Fhc6z8i8oSmJhIM/0yGNjvEg9ZOTF5t9O6DAxUKqJR3OrZifj8ch91fty2i3ay
+ 8Alz60hXF1xI48riy4sd5Aqr+0bPvqKrpi7rHRNhgtgDYmIjU2QZttTGuvDmN3tw2Ukt
+ PEhzzgk3UxAHcmCF2xM66Wqis/Jq90diqJZbNPdHvlrkjqnVd45uczEOjkQHamd88RAU
+ mFqook9MRpkr4gsbxJmIPb/Jwd/Jji9DMAMqP7CUi+hBCn/YEN60+ZSd4MkazWnn2Xk/
+ fl3z+t+3QGB4d0Hv+6jNwTeC/Jm+mlo0L3xCeTJk5jiKP92acbGs7b36p23qlJg6foEJ
+ bstw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716487642; x=1717092442;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JFvamzZglehHBEolPcL4rA0lvGrignK3Mpdrws3oBZY=;
+ b=SJuTRmcrgH2xOI063DBlFVoQYjYygMU0k1Tmc2NeHUfqEymOJXso2CozrP8N52lHPy
+ O+gxLA2MWnl26ltfq8qjZbNYYDIckKKU2Z24uqLATLvHcMul9yGhteaRL5a9xcBnAEQu
+ 1+qmfrVUKjIUlnGphG4+bSqwDVp8ZTftBAHqVM2bvDGm6rMUxJfgUBDq7o3JUXdCOXrA
+ vz87uqONEBIrgUQ1BvwRkk/OjZzBgq0bjMnc0pH/AZo4/V8bmeEUnAIOFvgZ9ThQtiNv
+ FJDe0IgnhiVx0c+fR7blmQdB0LNYzJaK3ex1v3ofzn1ez4TbIQi4zdetHnUHVeV56O3z
+ hgUg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXRzQtqpuDL0PJV921Jns/fVvLAQJur/0eaN3eS4bXBRimcuurVtaJ3CnEGEDMlYy2YeHPDGAy9um+nNdWsNYOMqCh6mx8qS4L6ed7QeXMOgEQfNySal61SLws0uyTxawRd8eAt8MtKLqNPfYU=
+X-Gm-Message-State: AOJu0Ywz65+Hk0AtIxgb17XvM5jzjvPLQXNzn/ggkJKcJz0Sgy65xbc6
+ 1STGH4ARKrXHJEKq4hhq5psxzG+2w4Xvb0ND8UkXgGtjiUHkCar2VeGDFO37CFMtZqq0dUNGIYi
+ 27wFKk1vIlwU6Q/gegnjj3tv/3Aw=
+X-Google-Smtp-Source: AGHT+IHW5lnRSRg4PCHbuQEIiRJQV3sSxY1XjBl+l0OmlWGBWLh6ELSgenhRJyncHAlp7WNyAce/8AdoA6d3i3/47I8=
+X-Received: by 2002:a17:902:ec8a:b0:1f3:356a:a300 with SMTP id
+ d9443c01a7336-1f44872bbccmr1422585ad.24.1716487641700; Thu, 23 May 2024
+ 11:07:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <c257c4174743f35bafee8492ec60e1d2734450cf.1716479340.git.jani.nikula@intel.com>
-X-Patchwork-Hint: comment
+References: <cover.1716479340.git.jani.nikula@intel.com>
+ <4b9ca4a1bd8e77f2d9b912b4af5d4fbdec13e801.1716479340.git.jani.nikula@intel.com>
+In-Reply-To: <4b9ca4a1bd8e77f2d9b912b4af5d4fbdec13e801.1716479340.git.jani.nikula@intel.com>
+From: Alex Deucher <alexdeucher@gmail.com>
+Date: Thu, 23 May 2024 14:07:08 -0400
+Message-ID: <CADnq5_MDPH-WxpucjQpKsCAk8mKa75upbcGN3KJo_dqKts4kTg@mail.gmail.com>
+Subject: Re: [PATCH 1/4] drm/amdgpu: fix -Wformat-truncation warning in
+ amdgpu_gfx_kiq_init_ring()
+To: Jani Nikula <jani.nikula@intel.com>
+Cc: dri-devel@lists.freedesktop.org, imx@lists.linux.dev, 
+ nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org, 
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+ Pan Xinhui <Xinhui.Pan@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,58 +83,77 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, May 23, 2024 at 06:51:08PM +0300, Jani Nikula wrote:
+On Thu, May 23, 2024 at 11:51=E2=80=AFAM Jani Nikula <jani.nikula@intel.com=
+> wrote:
+>
 > Enabling -Wformat-truncation yields the following warning:
-> 
-> ../drivers/gpu/drm/imx/ipuv3/imx-ldb.c: In function ‘imx_ldb_probe’:
-> ../drivers/gpu/drm/imx/ipuv3/imx-ldb.c:658:57: error: ‘_sel’ directive output may be truncated writing 4 bytes into a region of size between 3 and 13 [-Werror=format-truncation=]
->   658 |                 snprintf(clkname, sizeof(clkname), "di%d_sel", i);
->       |                                                         ^~~~
-> ../drivers/gpu/drm/imx/ipuv3/imx-ldb.c:658:17: note: ‘snprintf’ output between 8 and 18 bytes into a destination of size 16
->   658 |                 snprintf(clkname, sizeof(clkname), "di%d_sel", i);
->       |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If only the compiler could count to three...
-
-> 
+>
+> ../drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c: In function =E2=80=98amdgpu_g=
+fx_kiq_init_ring=E2=80=99:
+> ../drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c:332:61: error: =E2=80=98%d=E2=
+=80=99 directive output may be truncated writing between 1 and 10 bytes int=
+o a region of size between 0 and 8 [-Werror=3Dformat-truncation=3D]
+>   332 |         snprintf(ring->name, sizeof(ring->name), "kiq_%d.%d.%d.%d=
+",
+>       |                                                             ^~
+> ../drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c:332:50: note: directive argume=
+nt in the range [0, 2147483647]
+>   332 |         snprintf(ring->name, sizeof(ring->name), "kiq_%d.%d.%d.%d=
+",
+>       |                                                  ^~~~~~~~~~~~~~~~=
+~
+> ../drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c:332:9: note: =E2=80=98snprintf=
+=E2=80=99 output between 12 and 41 bytes into a destination of size 16
+>   332 |         snprintf(ring->name, sizeof(ring->name), "kiq_%d.%d.%d.%d=
+",
+>       |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~~
+>   333 |                  xcc_id, ring->me, ring->pipe, ring->queue);
+>       |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>
 > Silence the warning by checking the snprintf() return value.
-> 
-> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
-> 
-> ---
-> 
-> Cc: Philipp Zabel <p.zabel@pengutronix.de>
-> Cc: Shawn Guo <shawnguo@kernel.org>
-> Cc: Sascha Hauer <s.hauer@pengutronix.de>
-> Cc: Pengutronix Kernel Team <kernel@pengutronix.de>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: imx@lists.linux.dev
-> ---
->  drivers/gpu/drm/imx/ipuv3/imx-ldb.c | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/imx/ipuv3/imx-ldb.c b/drivers/gpu/drm/imx/ipuv3/imx-ldb.c
-> index 71d70194fcbd..46f779fe60ee 100644
-> --- a/drivers/gpu/drm/imx/ipuv3/imx-ldb.c
-> +++ b/drivers/gpu/drm/imx/ipuv3/imx-ldb.c
-> @@ -654,8 +654,12 @@ static int imx_ldb_probe(struct platform_device *pdev)
->  	 */
->  	for (i = 0; i < 4; i++) {
->  		char clkname[16];
-> +		int len;
-> +
-> +		len = snprintf(clkname, sizeof(clkname), "di%d_sel", i);
-> +		if (len >= sizeof(clkname))
-> +			dev_err(dev, "clkname truncated\n");
->  
-> -		snprintf(clkname, sizeof(clkname), "di%d_sel", i);
->  		imx_ldb->clk_sel[i] = devm_clk_get(imx_ldb->dev, clkname);
->  		if (IS_ERR(imx_ldb->clk_sel[i])) {
->  			ret = PTR_ERR(imx_ldb->clk_sel[i]);
-> -- 
-> 2.39.2
+>
 
--- 
-Ville Syrjälä
-Intel
+Already fixed with this patch:
+https://patchwork.freedesktop.org/patch/594864/
+
+Thanks,
+
+Alex
+
+> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+>
+> ---
+>
+> Cc: Alex Deucher <alexander.deucher@amd.com>
+> Cc: "Christian K=C3=B6nig" <christian.koenig@amd.com>
+> Cc: Pan Xinhui <Xinhui.Pan@amd.com>
+> Cc: amd-gfx@lists.freedesktop.org
+> Cc: dri-devel@lists.freedesktop.org
+> ---
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c b/drivers/gpu/drm/am=
+d/amdgpu/amdgpu_gfx.c
+> index 1d955652f3ba..92744d0d2c10 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_gfx.c
+> @@ -329,8 +329,10 @@ int amdgpu_gfx_kiq_init_ring(struct amdgpu_device *a=
+dev, int xcc_id)
+>
+>         ring->eop_gpu_addr =3D kiq->eop_gpu_addr;
+>         ring->no_scheduler =3D true;
+> -       snprintf(ring->name, sizeof(ring->name), "kiq_%d.%d.%d.%d",
+> -                xcc_id, ring->me, ring->pipe, ring->queue);
+> +       r =3D snprintf(ring->name, sizeof(ring->name), "kiq_%d.%d.%d.%d",
+> +                    xcc_id, ring->me, ring->pipe, ring->queue);
+> +       if (r >=3D sizeof(ring->name))
+> +               dev_warn(adev->dev, "kiq ring name truncated\n");
+>         r =3D amdgpu_ring_init(adev, ring, 1024, irq, AMDGPU_CP_KIQ_IRQ_D=
+RIVER0,
+>                              AMDGPU_RING_PRIO_DEFAULT, NULL);
+>         if (r)
+> --
+> 2.39.2
+>
