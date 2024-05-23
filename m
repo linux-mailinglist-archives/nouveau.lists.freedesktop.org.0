@@ -2,81 +2,114 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D7F5CBA991
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0F8BCBA918
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:17:41 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A857F10E9DD;
-	Sat, 13 Dec 2025 12:40:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 85D2510E434;
+	Sat, 13 Dec 2025 12:17:40 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="J6rn49bX";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="YWAg08qW";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com
- [209.85.210.46])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 78BF410E0A0;
- Wed, 22 May 2024 23:15:21 +0000 (UTC)
-Received: by mail-ot1-f46.google.com with SMTP id
- 46e09a7af769-6f0e2544f6bso213906a34.3; 
- Wed, 22 May 2024 16:15:21 -0700 (PDT)
+Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com
+ [209.85.128.175])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E727110ECCA;
+ Thu, 23 May 2024 02:48:57 +0000 (UTC)
+Received: by mail-yw1-f175.google.com with SMTP id
+ 00721157ae682-61af74a010aso17376887b3.0; 
+ Wed, 22 May 2024 19:48:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716419720; x=1717024520; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to:from
- :subject:cc:to:message-id:date:from:to:cc:subject:date:message-id
- :reply-to; bh=Ir2XqinlUrPpaQlopq6pGICD8nECQfQb9VlUJ47Cml4=;
- b=J6rn49bX7cEOXk0OgPJEPa3XA3nt+xZA5OSiyirMdDnwkQNvMuUDT/QgT9FBb0Gd/A
- Ee9nkW3QzvpOZhxys3uUcghzJDqO7dbIk0syvJWlKylk6Qdm7krsa4xGnYWi7oTWeIse
- xVOqdknF0KFTslfc6wlo3I9oPBHLTXc+gUVUkc37W5Z9Kk7WKmwFw7KNdWNHbndVkt6H
- mTevg22FEMBbGMId0NmUZh1cqzo3zyxcz3Bc/8Y76Zr/16hmxTN8UbTedRWpARZZ55IU
- gjildVMv8v7ebt1aFNTDKBAAMSm3mlkZ0w2XgvNKM+Chzx6wKdzuLUPiWaIftEGS2O+t
- 2O4w==
+ d=gmail.com; s=20230601; t=1716432537; x=1717037337; darn=lists.freedesktop.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :feedback-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=TJvI5ka+7JgZUuM9P+5dJkLsAfZT/399LMPF7VVV6Qw=;
+ b=YWAg08qWoeRdBD/dNzOvuIGdMjjN6X4teY1Z3TPnkyvdiCSWDlt/ux7j7oQ+qIHDCZ
+ QE2cd1uao5PqYiE4Lq6mqiNWL77ky0Xtb0B3mTlBM5MtQX+sckp7rMk32z4he5gpmjIU
+ cORfvzHBBeboYuFC6VRyCNrC5FKMvNayrckunnDWvOw39S0ZuP77OMK6QhMjc8bqLHHJ
+ xyhGaZBnxomRhV9H8JZCcFCb4h2z2R+y9JxZTGh8S17Kk34pVNrBW1/ThQHQcId7M0Ob
+ qF2ZkhggTZjoRGsX1cAdgQsjd8cNx17Mi1rMjhjZ/z3o8QCDXMzN+Iol0PoRg/vrDd2c
+ DmjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716419720; x=1717024520;
- h=content-transfer-encoding:mime-version:references:in-reply-to:from
- :subject:cc:to:message-id:date:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Ir2XqinlUrPpaQlopq6pGICD8nECQfQb9VlUJ47Cml4=;
- b=fuCA+RLgn0nTP45xPKcO7yhec48JtSjrTmzT2qnIqFkcQXD+5q13egUfPKyNiFzLq4
- pVh9uF51p8IUJEdbgZ+DrfGJ+roc6CYWFyvEno+1xEhQdfRA5J8+amXCAtxQB/0GnS2Q
- oARwX5hm7+JgK7Ty+GiMoO/yUozQNENXuf7BsIpl9G5OKMwhksu/daKwFsmDgEw2LEqt
- ngTSNGm90DP73PYdGzs4fgfmwsR5OEptD9IbwMLJOqFL6UDGcieA8zT6nBfjIIfWd4HA
- y5X9xyl/M9JYabXl0K4IlaSSwj3h+AASPo6di08+uem7vwoLQ2/i6ewHhS6SBJGKYK6M
- Z9wQ==
+ d=1e100.net; s=20230601; t=1716432537; x=1717037337;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :feedback-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TJvI5ka+7JgZUuM9P+5dJkLsAfZT/399LMPF7VVV6Qw=;
+ b=CCsZlpsQs9aiEdHl6Rk5JGsn1uhFv6BZan/2Fjc+PC5y9C5l6FFUqAreDxsMlhFZeZ
+ GeNKuqRjmhzoGuDyAoNoTog8uDzS1t1I8tsD1XBJ7J8I1frUq1JsRW3sFTju3uv2D08k
+ Sk1SeOEYrrnW1MJHGiMU2gcmJgORX9/PU+gTvZ2c8XSF7Kn+SudtiUCN5NTO22PENMRS
+ k1H1XfYLPkn8TtNcLTSeCvORdtOGUn4UHMlAvtRt75CZCaKd3vySh6c3stHpcEdsNdCI
+ n9nUqXmq4r0qEQ+ioWnEmBk7BAXe7A8v9E/knurSttQgp66Ocyu8T3V9fvSHeAwF1QqR
+ 0Pyg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV8TeE434TTm3e+3Zar7LUMPYEDrbETCFr27iQAv0sQyZTUL9IR9k3kpKyNX7sbGoXc4iv4lq9STf+m5t92vk1JgP7pcwrBuqp3y5O5eUET8Qj3m7dlrPPpaYW1lKvqG4XHOm+0soygePiivFOt1A==
-X-Gm-Message-State: AOJu0YyB9/XgENz9+pYwfIKxmuZXjojfXZObf7WEd56u+Fdc6C32mipX
- +X+hHJGxib5tAgn0iayiqCq9F2eSiTlTM3V55UUEY/oip76FyNqh
-X-Google-Smtp-Source: AGHT+IEg0tD1wihn+c8EcE3GfwFZJ9P0oCxBgIaw/cJq+yGvGb5ZmoLis9eA4mwP5hlUp53Vcp3WSg==
-X-Received: by 2002:a05:6358:2921:b0:192:82da:43df with SMTP id
- e5c5f4694b2df-19791b7d6d6mr377565255d.1.1716419720266; 
- Wed, 22 May 2024 16:15:20 -0700 (PDT)
-Received: from localhost (p5261226-ipxg23801hodogaya.kanagawa.ocn.ne.jp.
- [180.15.241.226]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-6f4d2a66557sm22855335b3a.44.2024.05.22.16.15.15
+ AJvYcCX5ZQLGAtvXfwUkr+kP6U5cOuh4c+aiK6rG1jTPy3sAhL4fXmL4qRHhb0p0jyryGLW0LqspZiIS+xlbQqUDfl4D0pZysfpUKWnGmRkYXn+lUwSAcnsigwPn42BMD2J8t6g2LbFGxyp5xmp0zTg9Pw==
+X-Gm-Message-State: AOJu0Yxw1K1WCzUkIo468okM3VcZ/ShWQDFTMOTX6ezL3ygxRQx7ckEm
+ NhjYBwmA/cAIjrvj5n8MSAoEzLKgUUB4yYltvoL5hpRsjKFdzDNq
+X-Google-Smtp-Source: AGHT+IH0dxdXbgmC4rYlR/hwUOO+Wp8dfkUpjfFuvGBklHjUOcOUKupWE7JhBWZ/Fbp+d7zv5g0sWA==
+X-Received: by 2002:a05:690c:660c:b0:627:88fc:61e4 with SMTP id
+ 00721157ae682-627e46c77a6mr47090767b3.1.1716432536685; 
+ Wed, 22 May 2024 19:48:56 -0700 (PDT)
+Received: from fauth2-smtp.messagingengine.com
+ (fauth2-smtp.messagingengine.com. [103.168.172.201])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6ab9335edf3sm486806d6.54.2024.05.22.19.48.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 May 2024 16:15:19 -0700 (PDT)
-Date: Thu, 23 May 2024 08:15:13 +0900 (JST)
-Message-Id: <20240523.081513.81513679981916366.fujita.tomonori@gmail.com>
-To: pstanner@redhat.com
-Cc: fujita.tomonori@gmail.com, dakr@redhat.com,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch, ojeda@kernel.org,
- alex.gaynor@gmail.com, wedsonaf@gmail.com, boqun.feng@gmail.com,
- gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
- a.hindborg@samsung.com, aliceryhl@google.com, lina@asahilina.net,
- ajanulgu@redhat.com, lyude@redhat.com, gregkh@linuxfoundation.org,
+ Wed, 22 May 2024 19:48:56 -0700 (PDT)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailfauth.nyi.internal (Postfix) with ESMTP id 5D3BB1200043;
+ Wed, 22 May 2024 22:48:55 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute5.internal (MEProxy); Wed, 22 May 2024 22:48:55 -0400
+X-ME-Sender: <xms:l65OZr9JgWgOPevW5yJppccZOOcaKoF1y1Q-zOeEZOswlQ-KqF7COw>
+ <xme:l65OZnscWI1OsvTggyuLZVJO_Bncv7ufzMNE5V3hj-DMKkUJf0KNMJLGKWdnpDbTf
+ f1Llj0I-VdnK9fASA>
+X-ME-Received: <xmr:l65OZpD63joYbDlA02gOpBHu68Z8AqYCVeGfdTJcU5aXuCrkC93E0IM-2w>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrvdeihedgiedvucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepfffhvfevuffkfhggtggugfgjsehtkeertddttdejnecuhfhrohhmpeeuohhq
+ uhhnucfhvghnghcuoegsohhquhhnrdhfvghnghesghhmrghilhdrtghomheqnecuggftrf
+ grthhtvghrnhepveffgedtgfetvdfgudfhgfehgffgveevvdelkefhjeeiudffkefhhfdv
+ heeljeefnecuffhomhgrihhnpehgihhthhhusgdrtghomhdptghhrhguvghvrdhrshdpkh
+ gvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghi
+ lhhfrhhomhepsghoqhhunhdomhgvshhmthhprghuthhhphgvrhhsohhnrghlihhthidqie
+ elvdeghedtieegqddujeejkeehheehvddqsghoqhhunhdrfhgvnhhgpeepghhmrghilhdr
+ tghomhesfhhigihmvgdrnhgrmhgv
+X-ME-Proxy: <xmx:l65OZnd7sYcwsq4EahySDVP_rcHk5LbPyZCq3gVR9UPROv5R8kxsEA>
+ <xmx:l65OZgNAdnvMAm4YjgLWf2ArjzaV4-wkunlqPk7laIC3sP2UbPJumw>
+ <xmx:l65OZpmPhuz8l8B2xc5bBebr2iev-w4i7F-whjk-ZadLf6TOxiFOjQ>
+ <xmx:l65OZqsr-BuwfODBOdojAbsWIzKP4m-LGWgduDHqXUdk4bT6XG6DYA>
+ <xmx:l65OZqsGO3Q7ks2k17BChTc3GSPOdJHTB9Od0O7mkbGZCU-g6zbTQKVf>
+Feedback-ID: iad51458e:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 22 May 2024 22:48:54 -0400 (EDT)
+Date: Wed, 22 May 2024 19:48:53 -0700
+From: Boqun Feng <boqun.feng@gmail.com>
+To: FUJITA Tomonori <fujita.tomonori@gmail.com>
+Cc: pstanner@redhat.com, dakr@redhat.com, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com,
+ daniel@ffwll.ch, ojeda@kernel.org, alex.gaynor@gmail.com,
+ wedsonaf@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com,
+ benno.lossin@proton.me, a.hindborg@samsung.com,
+ aliceryhl@google.com, lina@asahilina.net, ajanulgu@redhat.com,
+ lyude@redhat.com, gregkh@linuxfoundation.org,
  rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
 Subject: Re: [RFC PATCH 7/8] rust: add firmware abstractions
-From: FUJITA Tomonori <fujita.tomonori@gmail.com>
-In-Reply-To: <35fef820ed6e67f2203e78735fc9e15248436221.camel@redhat.com>
+Message-ID: <Zk6ulWF72cbp14O3@Boquns-Mac-mini.home>
 References: <20240520172422.181763-4-dakr@redhat.com>
  <20240522.085334.1009573112046880609.fujita.tomonori@gmail.com>
  <35fef820ed6e67f2203e78735fc9e15248436221.camel@redhat.com>
-Mime-Version: 1.0
-Content-Type: Text/Plain; charset=utf-8
-Content-Transfer-Encoding: base64
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
+ <20240523.081513.81513679981916366.fujita.tomonori@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20240523.081513.81513679981916366.fujita.tomonori@gmail.com>
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:17:01 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,34 +124,81 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGksDQoNCk9uIFdlZCwgMjIgTWF5IDIwMjQgMDk6Mzc6MzAgKzAyMDANClBoaWxpcHAgU3Rhbm5l
-ciA8cHN0YW5uZXJAcmVkaGF0LmNvbT4gd3JvdGU6DQoNCj4+ID4gKy8vLyBBYnN0cmFjdGlvbiBh
-cm91bmQgYSBDIGZpcm13YXJlIHN0cnVjdC4NCj4+ID4gKy8vLw0KPj4gPiArLy8vIFRoaXMgaXMg
-YSBzaW1wbGUgYWJzdHJhY3Rpb24gYXJvdW5kIHRoZSBDIGZpcm13YXJlIEFQSS4gSnVzdA0KPj4g
-PiBsaWtlIHdpdGggdGhlIEMgQVBJLCBmaXJtd2FyZSBjYW4NCj4+ID4gKy8vLyBiZSByZXF1ZXN0
-ZWQuIE9uY2UgcmVxdWVzdGVkIHRoZSBhYnN0cmFjdGlvbiBwcm92aWRlcyBkaXJlY3QNCj4+ID4g
-YWNjZXNzIHRvIHRoZSBmaXJtd2FyZSBidWZmZXIgYXMNCj4+ID4gKy8vLyBgJlt1OF1gLiBBbHRl
-cm5hdGl2ZWx5LCB0aGUgZmlybXdhcmUgY2FuIGJlIGNvcGllZCB0byBhIG5ldw0KPj4gPiBidWZm
-ZXIgdXNpbmcgYEZpcm13YXJlOjpjb3B5YC4gVGhlDQo+PiA+ICsvLy8gZmlybXdhcmUgaXMgcmVs
-ZWFzZWQgb25jZSBbYEZpcm13YXJlYF0gaXMgZHJvcHBlZC4NCj4+ID4gKy8vLw0KPj4gPiArLy8v
-ICMgRXhhbXBsZXMNCj4+ID4gKy8vLw0KPj4gPiArLy8vIGBgYA0KPj4gPiArLy8vIGxldCBmdyA9
-IEZpcm13YXJlOjpyZXF1ZXN0KCJwYXRoL3RvL2Zpcm13YXJlLmJpbiIsDQo+PiA+IGRldi5hc19y
-ZWYoKSk/Ow0KPj4gPiArLy8vIGRyaXZlcl9sb2FkX2Zpcm13YXJlKGZ3LmRhdGEoKSk7DQo+PiA+
-ICsvLy8gYGBgDQo+PiA+ICtwdWIgc3RydWN0IEZpcm13YXJlKE9wYXF1ZTwqY29uc3QgYmluZGlu
-Z3M6OmZpcm13YXJlPik7DQo+PiANCj4+IFdyYXBwaW5nIGEgcmF3IHBvaW50ZXIgaXMgbm90IHRo
-ZSBpbnRlbmRlZCB1c2Ugb2YgUXBhcXVlIHR5cGU/DQo+PiANCj4gDQo+IFdoYXQgaXMgdGhlIGlu
-dGVuZGVkIHVzZT8NCj4gQXMgSSBzZWUgaXQsIGFsbCB1c2VzIHdyYXBwIHNvbWUgYmluZGluZzo6
-KiDigJMgYnV0IGEgcmF3cG9pbnRlciB0byBhDQo+IGJpbmRpbmcgc2hvdWxkbid0IGJlIHdyYXBw
-ZWQgYnkgaXQ/DQoNCklmIEkgdW5kZXJzdGFuZCBjb3JyZWN0bHksIGl0J3MgZm9yIGVtYmVkZGlu
-ZyBDJ3Mgc3RydWN0IGluIFJ1c3Qncw0Kc3RydWN0IChhcyBhbGwgdGhlIHVzYWdlIGluIHRoZSB0
-cmVlIGRvKS4gSXQgZ2l2ZXMgdGhlIHRyaWNrcyBmb3INCmluaXRpYWxpemF0aW9uIGFuZCBhIHBv
-aW50ZXIgdG8gdGhlIGVtYmVkZGVkIG9iamVjdC4NCg0KVGhlIEMncyBmaXJtd2FyZSBBUEkgZ2l2
-ZXMgYSBwb2ludGVyIHRvIGFuIGluaXRpYWxpemVkIG9iamVjdCBzbyBubw0KcmVhc29uIHRvIHVz
-ZSBPcGFxdWUuDQoNCldpdGggc3VjaCBDIEFQSSwgUnVzdCdzIHN0cnVjdCBzaW1wbHkgdXNlcyBy
-YXcgcG9pbnRlcnMgaW4gb2xkIHJ1c3QNCmJyYW5jaC4gRm9yIGV4YW1wbGUsDQoNCmh0dHBzOi8v
-Z2l0aHViLmNvbS9SdXN0LWZvci1MaW51eC9saW51eC9ibG9iL3J1c3QvcnVzdC9rZXJuZWwvY2hy
-ZGV2LnJzI0wyOA0KDQpzdHJ1Y3QgQ2RldigqbXV0IGJpbmRpbmdzOjpjZGV2KTsNCg0KDQpBbm90
-aGVyIGNob2ljZSB0aGF0IEkga25vdyBpcyBOb25OdWxsOg0KDQpodHRwczovL2xvcmUua2VybmVs
-Lm9yZy9sa21sLzIwMjQwNDE1LWFsaWNlLW1tLXY1LTQtNmY1NWU0ZDhlZjUxQGdvb2dsZS5jb20v
-DQoNCnB1YiBzdHJ1Y3QgUGFnZSB7DQogICAgcGFnZTogTm9uTnVsbDxiaW5kaW5nczo6cGFnZT4s
-DQp9DQo=
+On Thu, May 23, 2024 at 08:15:13AM +0900, FUJITA Tomonori wrote:
+> Hi,
+> 
+> On Wed, 22 May 2024 09:37:30 +0200
+> Philipp Stanner <pstanner@redhat.com> wrote:
+> 
+> >> > +/// Abstraction around a C firmware struct.
+> >> > +///
+> >> > +/// This is a simple abstraction around the C firmware API. Just
+> >> > like with the C API, firmware can
+> >> > +/// be requested. Once requested the abstraction provides direct
+> >> > access to the firmware buffer as
+> >> > +/// `&[u8]`. Alternatively, the firmware can be copied to a new
+> >> > buffer using `Firmware::copy`. The
+> >> > +/// firmware is released once [`Firmware`] is dropped.
+> >> > +///
+> >> > +/// # Examples
+> >> > +///
+> >> > +/// ```
+> >> > +/// let fw = Firmware::request("path/to/firmware.bin",
+> >> > dev.as_ref())?;
+> >> > +/// driver_load_firmware(fw.data());
+> >> > +/// ```
+> >> > +pub struct Firmware(Opaque<*const bindings::firmware>);
+> >> 
+> >> Wrapping a raw pointer is not the intended use of Qpaque type?
+> >> 
+> > 
+> > What is the intended use?
+> > As I see it, all uses wrapp some binding::* – but a rawpointer to a
+> > binding shouldn't be wrapped by it?
+> 
+
+Thank you Tomo for calling this out!
+
+And yes, using `Opaque` on a pointer is weird. A `Opaque<T>` is
+`UnsafeCell<MayUninit<T>>`, `UnsafeCell` means the inner `T` may be
+accessed by C code at anytime, and `MayUninit` means that the inner `T`
+may not be properly initialized by the C code. So as the doc says:
+
+	This is meant to be used with FFI objects that are never
+	interpreted by Rust code.
+
+that is, Rust code should never create a `&T` or `&mut T`, it should
+only be accessed with `Opaque::get()` or its friends (i.e. accessing it
+via a raw pointer), much like a black box to Rust code in some sense.
+
+Hence putting `Opaque` on a raw pointer is not what you want to do.
+
+> If I understand correctly, it's for embedding C's struct in Rust's
+> struct (as all the usage in the tree do). It gives the tricks for
+> initialization and a pointer to the embedded object.
+> 
+> The C's firmware API gives a pointer to an initialized object so no
+> reason to use Opaque.
+> 
+> With such C API, Rust's struct simply uses raw pointers in old rust
+> branch. For example,
+> 
+> https://github.com/Rust-for-Linux/linux/blob/rust/rust/kernel/chrdev.rs#L28
+> 
+> struct Cdev(*mut bindings::cdev);
+> 
+> 
+> Another choice that I know is NonNull:
+> 
+> https://lore.kernel.org/lkml/20240415-alice-mm-v5-4-6f55e4d8ef51@google.com/
+> 
+> pub struct Page {
+>     page: NonNull<bindings::page>,
+> }
+
+Both are reasonable for temporary use, although, we could generify the
+"wrapping on pointer which owns the underlying object" in the future.
+
+Regards,
+Boqun
+
