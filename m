@@ -2,60 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 460ED8CE308
-	for <lists+nouveau@lfdr.de>; Fri, 24 May 2024 11:09:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB9298CE47B
+	for <lists+nouveau@lfdr.de>; Fri, 24 May 2024 12:54:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 85AB910E223;
-	Fri, 24 May 2024 09:09:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 40A3D10E54F;
+	Fri, 24 May 2024 10:54:44 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="jDYlct/e";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="RdJSiHoC";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E62D410E12F;
- Fri, 24 May 2024 09:08:58 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 64BD010E54F;
+ Fri, 24 May 2024 10:54:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1716541739; x=1748077739;
- h=from:to:cc:subject:in-reply-to:references:date:
- message-id:mime-version;
- bh=xe/mCiADKWKoHmV7LHdspv3GXZyRbUw0F1g2MLd8RMc=;
- b=jDYlct/eBi4ri8B6r/Q1T3KLF+8tXOgx9RhqpY/WPOSGvuedWg60sUW+
- hgb5v/OuXzl3h0HVqCzjJw+I5ThGgVDF8SE2J9UR9rU7ZrGj4uR14sPfN
- ZJNUhma5KfuTLWR7mq+fJarV2chUx0qQZup1JPcIZWIx3KDJoh4r8Qxdu
- 1Z/WT3CrYfMZieeKsxJJLhCL63D4pYMl5y7TkjENsEp/OnU5NBkeTUXLz
- BldoJWopaSep2pb38+m7v8bE6KDaXarAEitec5hezKKvDjLV0fu3hft6d
- 7h9XMuqxKkxggIiu1L5B8RtsWvuOHTzKOtzL1EPZU3OBEF2urh7lWBEI0 A==;
-X-CSE-ConnectionGUID: i2qW+KZ5RMmPW0P8VUyc8w==
-X-CSE-MsgGUID: iVM9ZqA/SLyCgGn1TErqYA==
-X-IronPort-AV: E=McAfee;i="6600,9927,11081"; a="16737376"
-X-IronPort-AV: E=Sophos;i="6.08,185,1712646000"; d="scan'208";a="16737376"
-Received: from fmviesa010.fm.intel.com ([10.60.135.150])
+ t=1716548083; x=1748084083;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=KoHqKLRDPnBBCvL3w50t/8EsHh2TwjanfPFNYjfowwo=;
+ b=RdJSiHoCivGmBjPfNh6+wm5zRwVpnav4OddchxTVX5rDtJD6gYd+1BCc
+ fn6nybQolaZWFC4EkfuUSrrkdNKtCriGB1nUTJLlwcrGWsIiRvi5+EcBd
+ tQcjHWcx5AY9NKu/CqkwtAEzlQ7SEHxJx6AdALgm1wsGz56EHWVXwZHuN
+ X2/6vvCFZhvx1IEvcC3U4eSfj5ZioK+jwVy8xWhclM8fWWHBVpoVdG1E6
+ ZBXxguSvwkyr5ZOhwX5hX+53VrgtQt2di9xs1jzIUfBYKmLLNejKcxShw
+ hVDb9iZdj4fXGc13/4FOgUOincOK8RQNbnsfNDqTxBjgMjOhYz+/OmNTK w==;
+X-CSE-ConnectionGUID: 9KmDBRqwTsG+2d3/eAN6cw==
+X-CSE-MsgGUID: 1K1vsxqtTFa/kFnr46YycA==
+X-IronPort-AV: E=McAfee;i="6600,9927,11081"; a="16748598"
+X-IronPort-AV: E=Sophos;i="6.08,185,1712646000"; d="scan'208";a="16748598"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 24 May 2024 02:08:59 -0700
-X-CSE-ConnectionGUID: pZZKcbw2Scq9QlM7prupww==
-X-CSE-MsgGUID: qLyhjg0QRQW4/K9BALCm5Q==
+ 24 May 2024 03:54:42 -0700
+X-CSE-ConnectionGUID: Vy5zMACkTb6iMNXG+CDPMQ==
+X-CSE-MsgGUID: WucLlfcHTLqDGU7fOPGOnQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,185,1712646000"; d="scan'208";a="34066966"
-Received: from bergbenj-mobl1.ger.corp.intel.com (HELO localhost)
- ([10.245.246.108])
- by fmviesa010-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 24 May 2024 02:08:55 -0700
-From: Jani Nikula <jani.nikula@intel.com>
-To: Sam Ravnborg <sam@ravnborg.org>
-Cc: dri-devel@lists.freedesktop.org, imx@lists.linux.dev,
- nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org
-Subject: Re: [PATCH 4/4] drm: enable -Wformat-truncation across the subsystem
-In-Reply-To: <20240523184128.GA523806@ravnborg.org>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <cover.1716479340.git.jani.nikula@intel.com>
- <719debc351075abc36b2573266bfd4d963361e40.1716479340.git.jani.nikula@intel.com>
- <20240523184128.GA523806@ravnborg.org>
-Date: Fri, 24 May 2024 12:08:50 +0300
-Message-ID: <87ed9ro9ul.fsf@intel.com>
+X-IronPort-AV: E=Sophos;i="6.08,185,1712646000"; d="scan'208";a="34076873"
+Received: from unknown (HELO 0610945e7d16) ([10.239.97.151])
+ by fmviesa009.fm.intel.com with ESMTP; 24 May 2024 03:54:38 -0700
+Received: from kbuild by 0610945e7d16 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1sASZG-00050o-0n;
+ Fri, 24 May 2024 10:54:34 +0000
+Date: Fri, 24 May 2024 18:53:13 +0800
+From: kernel test robot <lkp@intel.com>
+To: Jocelyn Falempe <jfalempe@redhat.com>, dri-devel@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>, nouveau@lists.freedesktop.org
+Cc: oe-kbuild-all@lists.linux.dev, Jocelyn Falempe <jfalempe@redhat.com>
+Subject: Re: [PATCH 5/5] drm/nouveau: Add drm_panic support for nv50+
+Message-ID: <202405241832.ETpErbon-lkp@intel.com>
+References: <20240523130955.428233-6-jfalempe@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240523130955.428233-6-jfalempe@redhat.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,61 +74,75 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 23 May 2024, Sam Ravnborg <sam@ravnborg.org> wrote:
-> Hi Jani,
->
-> On Thu, May 23, 2024 at 06:51:09PM +0300, Jani Nikula wrote:
->> With the -Wformat-truncation warnings fixed, finish the job started in
->> commit a61ddb4393ad ("drm: enable (most) W=1 warnings by default across
->> the subsystem"), and enable that warning too.
->> 
->> Signed-off-by: Jani Nikula <jani.nikula@intel.com>
->
-> When it is enabled for all of drm then the explicit assignments here
-> could be dropped I think:
->
-> drivers/gpu/drm/i915/Makefile:subdir-ccflags-y += $(call cc-option, -Wformat-truncation)
-> drivers/gpu/drm/xe/Makefile:subdir-ccflags-y += $(call cc-option, -Wformat-truncation)
->
-> Just a drive-by comment, I know this patch was mostly for the bots.
+Hi Jocelyn,
 
-Additionally, I didn't want to create any conflicts with [1]. There's no
-harm in having the duplication.
+kernel test robot noticed the following build warnings:
 
-BR,
-Jani.
+[auto build test WARNING on 484436ec5c2bffe8f346a09ae1cbc4cbf5e50005]
 
-[1] https://lore.kernel.org/r/cover.1716471145.git.jani.nikula@intel.com
+url:    https://github.com/intel-lab-lkp/linux/commits/Jocelyn-Falempe/drm-panic-Add-ABGR2101010-support/20240523-211335
+base:   484436ec5c2bffe8f346a09ae1cbc4cbf5e50005
+patch link:    https://lore.kernel.org/r/20240523130955.428233-6-jfalempe%40redhat.com
+patch subject: [PATCH 5/5] drm/nouveau: Add drm_panic support for nv50+
+config: x86_64-randconfig-r113-20240524 (https://download.01.org/0day-ci/archive/20240524/202405241832.ETpErbon-lkp@intel.com/config)
+compiler: clang version 18.1.5 (https://github.com/llvm/llvm-project 617a15a9eac96088ae5e9134248d8236e34b91b1)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240524/202405241832.ETpErbon-lkp@intel.com/reproduce)
 
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202405241832.ETpErbon-lkp@intel.com/
 
->
-> 	Sam
->
->> 
->> ---
->> 
->> Gut feeling says there are more issues, and my configs just don't catch
->> them all, but let's see what the build bots have to say. ;)
->> ---
->>  drivers/gpu/drm/Makefile | 3 +--
->>  1 file changed, 1 insertion(+), 2 deletions(-)
->> 
->> diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
->> index 68cc9258ffc4..644613dbedda 100644
->> --- a/drivers/gpu/drm/Makefile
->> +++ b/drivers/gpu/drm/Makefile
->> @@ -16,8 +16,7 @@ subdir-ccflags-y += $(call cc-option, -Wunused-but-set-variable)
->>  subdir-ccflags-y += $(call cc-option, -Wunused-const-variable)
->>  subdir-ccflags-y += $(call cc-option, -Wpacked-not-aligned)
->>  subdir-ccflags-y += $(call cc-option, -Wformat-overflow)
->> -# FIXME: fix -Wformat-truncation warnings and uncomment
->> -#subdir-ccflags-y += $(call cc-option, -Wformat-truncation)
->> +subdir-ccflags-y += $(call cc-option, -Wformat-truncation)
->>  subdir-ccflags-y += $(call cc-option, -Wstringop-truncation)
->>  # The following turn off the warnings enabled by -Wextra
->>  ifeq ($(findstring 2, $(KBUILD_EXTRA_WARN)),)
->> -- 
->> 2.39.2
+sparse warnings: (new ones prefixed by >>)
+>> drivers/gpu/drm/nouveau/dispnv50/wndw.c:675:66: sparse: sparse: incorrect type in argument 2 (different address spaces) @@     expected void [noderef] __iomem *vaddr_iomem @@     got void *virtual @@
+   drivers/gpu/drm/nouveau/dispnv50/wndw.c:675:66: sparse:     expected void [noderef] __iomem *vaddr_iomem
+   drivers/gpu/drm/nouveau/dispnv50/wndw.c:675:66: sparse:     got void *virtual
+   drivers/gpu/drm/nouveau/dispnv50/wndw.c: note: in included file (through include/linux/timer.h, include/linux/workqueue.h, drivers/gpu/drm/nouveau/dispnv50/disp.h, ...):
+   include/linux/list.h:83:21: sparse: sparse: self-comparison always evaluates to true
+
+vim +675 drivers/gpu/drm/nouveau/dispnv50/wndw.c
+
+   652	
+   653	static int
+   654	nv50_wndw_get_scanout_buffer(struct drm_plane *plane, struct drm_scanout_buffer *sb)
+   655	{
+   656		struct drm_framebuffer *fb;
+   657		struct nouveau_bo *nvbo;
+   658	
+   659		if (!plane->state || !plane->state->fb)
+   660			return -EINVAL;
+   661	
+   662		fb = plane->state->fb;
+   663		nvbo = nouveau_gem_object(fb->obj[0]);
+   664	
+   665		/* Don't support compressed format, or multiplane yet */
+   666		if (nvbo->comp || fb->format->num_planes != 1)
+   667			return -EOPNOTSUPP;
+   668	
+   669		if (nouveau_bo_map(nvbo)) {
+   670			pr_warn("nouveau bo map failed, panic won't be displayed\n");
+   671			return -ENOMEM;
+   672		}
+   673	
+   674		if (nvbo->kmap.bo_kmap_type & TTM_BO_MAP_IOMEM_MASK)
+ > 675			iosys_map_set_vaddr_iomem(&sb->map[0], nvbo->kmap.virtual);
+   676		else
+   677			iosys_map_set_vaddr(&sb->map[0], nvbo->kmap.virtual);
+   678	
+   679		sb->height = fb->height;
+   680		sb->width = fb->width;
+   681		sb->pitch[0] = fb->pitches[0];
+   682		sb->format = fb->format;
+   683	
+   684		/* If tiling is enabled, use the set_pixel() to display correctly */
+   685		if (fb->modifier & 0xf) {
+   686			sb->private = (void *) fb;
+   687			sb->set_pixel = nv50_set_pixel;
+   688		}
+   689		return 0;
+   690	}
+   691	
 
 -- 
-Jani Nikula, Intel
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
