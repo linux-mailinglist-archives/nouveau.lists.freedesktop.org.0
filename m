@@ -2,77 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A528BCBA97F
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B2DCCBABB9
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5822110E9EA;
-	Sat, 13 Dec 2025 12:40:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E288610EA73;
+	Sat, 13 Dec 2025 12:41:05 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Hut2Vcta";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="CZSQeSGz";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
- [209.85.215.175])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7BD4A10E193;
- Tue, 28 May 2024 10:18:12 +0000 (UTC)
-Received: by mail-pg1-f175.google.com with SMTP id
- 41be03b00d2f7-64f12fc9661so32324a12.3; 
- Tue, 28 May 2024 03:18:12 -0700 (PDT)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
+ [209.85.216.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 43538112124;
+ Tue, 28 May 2024 11:01:44 +0000 (UTC)
+Received: by mail-pj1-f42.google.com with SMTP id
+ 98e67ed59e1d1-2bde882ab2bso131209a91.3; 
+ Tue, 28 May 2024 04:01:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716891492; x=1717496292; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1716894103; x=1717498903; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to:from
  :subject:cc:to:message-id:date:from:to:cc:subject:date:message-id
- :reply-to; bh=4oKjidjiVG3iD+sGVPZRpxklkmgxpuRK74mDLt2GwZ0=;
- b=Hut2VctaYlfZv9qtb34va80EolWKTiqFGlnLPlqogNBm/nISbVkOqndxyO0+qKCNBU
- o+GwQPGJ9rE4gRZlhCzm+cXXvhxLR6Bc1SmUx8SK4xnEjGBtNEiXiqoHZH/FLNEA1vkT
- ut7D1WZaf62oTHziiKI92PDVWP6e+WQ9aLA7TPItaqrsQR7iHZ15pw6FmIeTHLHeBg/i
- 1ZIHHWEd56chB2wDYiS+Cy/DrmOV7YrbZrmXygXou8xoISbw9WlJl8Pf/PBmiU1dKK2P
- OHfeqN/oSMQb7TKC+TMsHt0AUIRN1t1Usx4OCqKNzLeAfWynkcm96jvNWtSpPid9P/Kl
- t0Lg==
+ :reply-to; bh=iiu6Rm5CIFCk4QRomYxhTqrZVCrSfLMD8/o2TBnR/WU=;
+ b=CZSQeSGzuodYnd6jpZyIzKFnAJY/4DTu4fr3GkhqYdn4G5UHW91671OuuAoGh4hYIa
+ pix3sv9yj1KL4lMORR6liyKvQfYH7m5FikOVyog5wjix4fbWg52OY6R8dlsWnDesH39b
+ 1RwenV57AY5xgIhkM2SrrWk8xq19Pofc4VpS4ZbG+ttAcZg0Ju9NNLKsQfUH+iYb6JV5
+ Wa1lsQAdoP140+M3h+gtjcVneu83m9ElOmWyAPtG2KvKGz1Ng484OP3uofH07yFGedTG
+ mHyU42j3GeAk0Z4ei/+VsPeU0OnUuvD4urQiCXSl6vXRUSTe87J56tYA1Uuv+hPfIkHk
+ g4RA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716891492; x=1717496292;
+ d=1e100.net; s=20230601; t=1716894103; x=1717498903;
  h=content-transfer-encoding:mime-version:references:in-reply-to:from
  :subject:cc:to:message-id:date:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=4oKjidjiVG3iD+sGVPZRpxklkmgxpuRK74mDLt2GwZ0=;
- b=sJfEbveaCHI/OuXy9SYpXOeayr4NYgPoAUZO0dUiCjQTiBi1Psmu23mHNY9XFMRDzA
- aJeydAWhI6T6W/uarFg1efM3ajFZLWSuON6GNMUUEPKyZvpKlvU1U7eKrnLOpm28rfYr
- RfZPsc++r1LMNG+MVgyNtjBIYbB5PgAlb+vZA0wVUOuqzYTDoz2bw+tJ+9uEOFHFqx7E
- S0YW5w+c90qN/UWiOKcgJj0qO7tUZ15iyCai9oMjJiX4bqxPg1Y3Gkkg/RwQy7E2vzE7
- Alu02LJh24Ukf2GA3SRZWdHrPi2aCDTy1ihlzFMhFQdQRobpp4nmkAzB0sBZospulCrU
- HaSw==
+ bh=iiu6Rm5CIFCk4QRomYxhTqrZVCrSfLMD8/o2TBnR/WU=;
+ b=Am0x8PMMA4mxjXT27bFudTDB5AaSIBgbbI6u8x+2PUsd40T2baEyd19jtnWmt35Qvi
+ kYGOiBnwXljjwz8+yESL9QPD9I+0w/lGxGTKH/57CniekXvJH/56jHC+CHF8OmM46jpM
+ 2XD80i6rQFlx1s7n0+b6KNBdpv2x59vvG5AAUlNEXl7dwrrssPCL2y++8uM77e0jIEwg
+ Uy5m2ua7UfNy2CNGjFAin+OVcgh99yk29w0f5vAXksyKfNZr5sNmeu2qcmU/LYCVIekD
+ 0MFmxuSNFqQpI8Uf4NchOXGFnEbeEh0ub30KGxJ46KNnRvlMs/fKRvlBJIexF1lnQZK1
+ JxSg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWOu6M6dsh9sXZcU23Znpyss6bHRNvRSFkwsV/z4hFlyrPB5pmTsMlujZ90B9WnUaQFTdvjq9BoFRj/Vn0bOYfSlnBGQMajL3egn4rLHfVXExoO5E8DnR1PjNsgcAMGDwwEdwGn/bYNF7WiMqJHPQ==
-X-Gm-Message-State: AOJu0YxWtTifIfmFLjxMAvren1gG7eo82WE6CDA5rWMX1zmskcDasCZ4
- AgyVZGGpCcyPtQm2vx0TPKWNrwiEyATvtOUaYi9hiqltc6kP0rcp
-X-Google-Smtp-Source: AGHT+IEELOe5mgelYMSGmtxG+kL4UbvP8a3LHl0DXgrfdRShMJFiYY7EESOCugBH7JHSw6S2HnBW3Q==
-X-Received: by 2002:a05:6a20:9759:b0:1af:ce9c:6421 with SMTP id
- adf61e73a8af0-1b212b6f694mr10944170637.0.1716891491764; 
- Tue, 28 May 2024 03:18:11 -0700 (PDT)
+ AJvYcCXP08fQWcU/cPtqCnuIJrH6S9w/wDgn5HG3VWlh/sPxD7g2PO+NMxbVgCMeS6CE5PnnCtdAJ1/mQosxTICTkvlic/gb0RAl5/hcVqCJE53Iws05d0sUW1cwj/a9whQBPlJpp/j1A04AX5pTFbkurg==
+X-Gm-Message-State: AOJu0Ywrlm+1YEogD18k7nb7gAvYZ5m8fgMbHy/9V/FGWV/PkOmaY0jZ
+ U5GTMDgV6m7uXVNQ0gAI8Si8V8xA64VVp04CU+Voqo6KCHzZ8/xi
+X-Google-Smtp-Source: AGHT+IHK5eumprqwAuUfIcVd4VaPDiipzyGfVLdzZ2wsfbiHrJjeTv0bZYczA03Xit3eWLGqqN68hg==
+X-Received: by 2002:a17:902:db08:b0:1f4:8ca4:411f with SMTP id
+ d9443c01a7336-1f48ca44187mr62400315ad.6.1716894103380; 
+ Tue, 28 May 2024 04:01:43 -0700 (PDT)
 Received: from localhost (p5261226-ipxg23801hodogaya.kanagawa.ocn.ne.jp.
  [180.15.241.226]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-6f8fcfe64ebsm6140939b3a.156.2024.05.28.03.18.06
+ d9443c01a7336-1f44c7afcf5sm77259205ad.87.2024.05.28.04.01.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 03:18:11 -0700 (PDT)
-Date: Tue, 28 May 2024 19:17:54 +0900 (JST)
-Message-Id: <20240528.191754.1306229738730927340.fujita.tomonori@gmail.com>
-To: zhiw@nvidia.com
-Cc: dakr@redhat.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch, ojeda@kernel.org,
- alex.gaynor@gmail.com, wedsonaf@gmail.com, boqun.feng@gmail.com,
- gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
- a.hindborg@samsung.com, aliceryhl@google.com, fujita.tomonori@gmail.com,
- lina@asahilina.net, pstanner@redhat.com, ajanulgu@redhat.com,
- lyude@redhat.com, gregkh@linuxfoundation.org,
+ Tue, 28 May 2024 04:01:43 -0700 (PDT)
+Date: Tue, 28 May 2024 20:01:26 +0900 (JST)
+Message-Id: <20240528.200126.99248529380429957.fujita.tomonori@gmail.com>
+To: dakr@redhat.com
+Cc: fujita.tomonori@gmail.com, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com,
+ daniel@ffwll.ch, ojeda@kernel.org, alex.gaynor@gmail.com,
+ wedsonaf@gmail.com, boqun.feng@gmail.com, gary@garyguo.net,
+ bjorn3_gh@protonmail.com, benno.lossin@proton.me, a.hindborg@samsung.com,
+ aliceryhl@google.com, lina@asahilina.net, pstanner@redhat.com,
+ ajanulgu@redhat.com, lyude@redhat.com, gregkh@linuxfoundation.org,
  rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
 Subject: Re: [RFC PATCH 7/8] rust: add firmware abstractions
 From: FUJITA Tomonori <fujita.tomonori@gmail.com>
-In-Reply-To: <fd5dbd42-24b7-422b-bc0b-393347b3fdca@nvidia.com>
-References: <20240521083231.000074c2.zhiw@nvidia.com>
- <ZlTcnYNff2EDQJdj@pollux.localdomain>
- <fd5dbd42-24b7-422b-bc0b-393347b3fdca@nvidia.com>
+In-Reply-To: <ZlTdh/eQAIhxNn9e@pollux.localdomain>
+References: <20240520172422.181763-4-dakr@redhat.com>
+ <20240522.085334.1009573112046880609.fujita.tomonori@gmail.com>
+ <ZlTdh/eQAIhxNn9e@pollux.localdomain>
 Mime-Version: 1.0
 Content-Type: Text/Plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -91,56 +91,33 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+On Mon, 27 May 2024 21:22:47 +0200
+Danilo Krummrich <dakr@redhat.com> wrote:
 
-On Tue, 28 May 2024 08:40:20 +0000
-Zhi Wang <zhiw@nvidia.com> wrote:
-
-> On 27/05/2024 22.18, Danilo Krummrich wrote:
->> External email: Use caution opening links or attachments
+>> > +/// Abstraction around a C firmware struct.
+>> > +///
+>> > +/// This is a simple abstraction around the C firmware API. Just like with the C API, firmware can
+>> > +/// be requested. Once requested the abstraction provides direct access to the firmware buffer as
+>> > +/// `&[u8]`. Alternatively, the firmware can be copied to a new buffer using `Firmware::copy`. The
+>> > +/// firmware is released once [`Firmware`] is dropped.
+>> > +///
+>> > +/// # Examples
+>> > +///
+>> > +/// ```
+>> > +/// let fw = Firmware::request("path/to/firmware.bin", dev.as_ref())?;
+>> > +/// driver_load_firmware(fw.data());
+>> > +/// ```
+>> > +pub struct Firmware(Opaque<*const bindings::firmware>);
 >> 
->> 
->> On Tue, May 21, 2024 at 08:32:31AM +0300, Zhi Wang wrote:
->>> On Mon, 20 May 2024 19:24:19 +0200
->>> Danilo Krummrich <dakr@redhat.com> wrote:
->>>
->>>> Add an abstraction around the kernels firmware API to request firmware
->>>> images. The abstraction provides functions to access the firmware
->>>> buffer and / or copy it to a new buffer allocated with a given
->>>> allocator backend.
->>>>
->>>
->>> Was playing with firmware extractions based on this patch.
->>> Unfortunately I ended up with a lot of pointer operations, unsafe
->>> statements.
->>>
->>> As we know many vendors have a C headers for the definitions of the
->>> firwmare content, the driver extract the data by applying a struct
->>> pointer on it.
->>>
->>> But in rust, I feel it would nice that we can also have a common
->>> firmware extractor for drivers, that can wrap the pointer operations,
->>> take a list of the firmware struct members that converted from C headers
->>> as the input, offer the driver some common ABI methods to query them.
->>> Maybe that would ease the pain a lot.
->> 
->> So, you mean some abstraction that takes a list of types, offsets in the
->> firmware and a reference to the firmware itself and provides references to the
->> corresponding objects?
->> 
->> I agree it might be helpful to have some common infrastructure for this, but the
->> operations on it would still be unsafe, since ultimately it involves
->> dereferencing pointers.
+>> Wrapping a raw pointer is not the intended use of Qpaque type?
 >> 
 > 
-> I think the goal is to 1) concentrate the "unsafe" operations in a 
-> abstraction so the driver doesn't have to write explanation of unsafe 
-> operations here and there, improve the readability of the driver that 
-> interacts with vendor-firmware buffer. 2) ease the driver maintenance 
-> burden.
-> 
-> Some solutions I saw in different projects written in rust for 
-> de-referencing a per-defined struct:
+> Indeed, will fix this in v2 and use NonNull instead. I'll also offload most of
+> the boilerplate in the 'request' functions to some common 'request_internal' one.
 
-Aren't there other abstractions that require that functionality, not
-just the firmware abstractions?
+You might need to add 'Invariants' comment on Firmware struct.
+
+BTW, what merge window are you aiming for? As I wrote before, I have a
+driver that needs the firmware abstractions (the minimum device
+abstractions is enough; Device::as_raw() and as_ref()). So the sooner,
+the better for me.
