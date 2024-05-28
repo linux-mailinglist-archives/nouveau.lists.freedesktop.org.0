@@ -2,66 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31860CBAB3F
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A528BCBA97F
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:22 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9E8F710EAD0;
-	Sat, 13 Dec 2025 12:41:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5822110E9EA;
+	Sat, 13 Dec 2025 12:40:56 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="G9bewuQ2";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Hut2Vcta";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D97B910E70C
- for <nouveau@lists.freedesktop.org>; Thu, 23 May 2024 13:10:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1716469824;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=UXRCwx+E+u1r2Sus3Bp63droaYHql8aXfa0HRrPvOzs=;
- b=G9bewuQ2uhx5x6JAI+ZbLhnxAUcmI2n4s0iuPVaOuwoiP39+cXITTBYGCI+KmrsPrDBRGy
- zsiwwVU8ddMiAljq+Eau9zVIXAG7GJ7j924PztA3eidvAfOBxIiYeFVhz726oM4LPDrUtO
- rAfNVTFB+WjC56u8fCGwUSqB3LxcMkc=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-284-8umOvisXOBGRITZzEVrq8g-1; Thu, 23 May 2024 09:10:22 -0400
-X-MC-Unique: 8umOvisXOBGRITZzEVrq8g-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 7846180028D;
- Thu, 23 May 2024 13:10:20 +0000 (UTC)
-Received: from hydra.redhat.com (unknown [10.39.192.217])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B9743C15BF6;
- Thu, 23 May 2024 13:10:18 +0000 (UTC)
-From: Jocelyn Falempe <jfalempe@redhat.com>
-To: dri-devel@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@redhat.com>,
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
+ [209.85.215.175])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7BD4A10E193;
+ Tue, 28 May 2024 10:18:12 +0000 (UTC)
+Received: by mail-pg1-f175.google.com with SMTP id
+ 41be03b00d2f7-64f12fc9661so32324a12.3; 
+ Tue, 28 May 2024 03:18:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716891492; x=1717496292; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to:from
+ :subject:cc:to:message-id:date:from:to:cc:subject:date:message-id
+ :reply-to; bh=4oKjidjiVG3iD+sGVPZRpxklkmgxpuRK74mDLt2GwZ0=;
+ b=Hut2VctaYlfZv9qtb34va80EolWKTiqFGlnLPlqogNBm/nISbVkOqndxyO0+qKCNBU
+ o+GwQPGJ9rE4gRZlhCzm+cXXvhxLR6Bc1SmUx8SK4xnEjGBtNEiXiqoHZH/FLNEA1vkT
+ ut7D1WZaf62oTHziiKI92PDVWP6e+WQ9aLA7TPItaqrsQR7iHZ15pw6FmIeTHLHeBg/i
+ 1ZIHHWEd56chB2wDYiS+Cy/DrmOV7YrbZrmXygXou8xoISbw9WlJl8Pf/PBmiU1dKK2P
+ OHfeqN/oSMQb7TKC+TMsHt0AUIRN1t1Usx4OCqKNzLeAfWynkcm96jvNWtSpPid9P/Kl
+ t0Lg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716891492; x=1717496292;
+ h=content-transfer-encoding:mime-version:references:in-reply-to:from
+ :subject:cc:to:message-id:date:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=4oKjidjiVG3iD+sGVPZRpxklkmgxpuRK74mDLt2GwZ0=;
+ b=sJfEbveaCHI/OuXy9SYpXOeayr4NYgPoAUZO0dUiCjQTiBi1Psmu23mHNY9XFMRDzA
+ aJeydAWhI6T6W/uarFg1efM3ajFZLWSuON6GNMUUEPKyZvpKlvU1U7eKrnLOpm28rfYr
+ RfZPsc++r1LMNG+MVgyNtjBIYbB5PgAlb+vZA0wVUOuqzYTDoz2bw+tJ+9uEOFHFqx7E
+ S0YW5w+c90qN/UWiOKcgJj0qO7tUZ15iyCai9oMjJiX4bqxPg1Y3Gkkg/RwQy7E2vzE7
+ Alu02LJh24Ukf2GA3SRZWdHrPi2aCDTy1ihlzFMhFQdQRobpp4nmkAzB0sBZospulCrU
+ HaSw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWOu6M6dsh9sXZcU23Znpyss6bHRNvRSFkwsV/z4hFlyrPB5pmTsMlujZ90B9WnUaQFTdvjq9BoFRj/Vn0bOYfSlnBGQMajL3egn4rLHfVXExoO5E8DnR1PjNsgcAMGDwwEdwGn/bYNF7WiMqJHPQ==
+X-Gm-Message-State: AOJu0YxWtTifIfmFLjxMAvren1gG7eo82WE6CDA5rWMX1zmskcDasCZ4
+ AgyVZGGpCcyPtQm2vx0TPKWNrwiEyATvtOUaYi9hiqltc6kP0rcp
+X-Google-Smtp-Source: AGHT+IEELOe5mgelYMSGmtxG+kL4UbvP8a3LHl0DXgrfdRShMJFiYY7EESOCugBH7JHSw6S2HnBW3Q==
+X-Received: by 2002:a05:6a20:9759:b0:1af:ce9c:6421 with SMTP id
+ adf61e73a8af0-1b212b6f694mr10944170637.0.1716891491764; 
+ Tue, 28 May 2024 03:18:11 -0700 (PDT)
+Received: from localhost (p5261226-ipxg23801hodogaya.kanagawa.ocn.ne.jp.
+ [180.15.241.226]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-6f8fcfe64ebsm6140939b3a.156.2024.05.28.03.18.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 May 2024 03:18:11 -0700 (PDT)
+Date: Tue, 28 May 2024 19:17:54 +0900 (JST)
+Message-Id: <20240528.191754.1306229738730927340.fujita.tomonori@gmail.com>
+To: zhiw@nvidia.com
+Cc: dakr@redhat.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch, ojeda@kernel.org,
+ alex.gaynor@gmail.com, wedsonaf@gmail.com, boqun.feng@gmail.com,
+ gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
+ a.hindborg@samsung.com, aliceryhl@google.com, fujita.tomonori@gmail.com,
+ lina@asahilina.net, pstanner@redhat.com, ajanulgu@redhat.com,
+ lyude@redhat.com, gregkh@linuxfoundation.org,
+ rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
-Cc: Jocelyn Falempe <jfalempe@redhat.com>
-Subject: [PATCH 5/5] drm/nouveau: Add drm_panic support for nv50+
-Date: Thu, 23 May 2024 15:00:38 +0200
-Message-ID: <20240523130955.428233-6-jfalempe@redhat.com>
-In-Reply-To: <20240523130955.428233-1-jfalempe@redhat.com>
-References: <20240523130955.428233-1-jfalempe@redhat.com>
-MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.8
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:50 +0000
+Subject: Re: [RFC PATCH 7/8] rust: add firmware abstractions
+From: FUJITA Tomonori <fujita.tomonori@gmail.com>
+In-Reply-To: <fd5dbd42-24b7-422b-bc0b-393347b3fdca@nvidia.com>
+References: <20240521083231.000074c2.zhiw@nvidia.com>
+ <ZlTcnYNff2EDQJdj@pollux.localdomain>
+ <fd5dbd42-24b7-422b-bc0b-393347b3fdca@nvidia.com>
+Mime-Version: 1.0
+Content-Type: Text/Plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:51 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,181 +91,56 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Add drm_panic support, for nv50+ cards.
-It's enough to get the panic screen while running Gnome/Wayland on a
-GTX 1650.
-It doesn't support multi-plane or compressed format.
-Support for other formats and older cards will come later.
-Tiling is only tested on GTX1650, and might be wrong for other cards.
+Hi,
 
-Signed-off-by: Jocelyn Falempe <jfalempe@redhat.com>
----
- drivers/gpu/drm/nouveau/dispnv50/wndw.c | 127 +++++++++++++++++++++++-
- 1 file changed, 125 insertions(+), 2 deletions(-)
+On Tue, 28 May 2024 08:40:20 +0000
+Zhi Wang <zhiw@nvidia.com> wrote:
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-index 7a2cceaee6e9..dd7aafb9198a 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-@@ -30,11 +30,16 @@
- #include <nvhw/class/cl507e.h>
- #include <nvhw/class/clc37e.h>
- 
-+#include <linux/iosys-map.h>
-+
- #include <drm/drm_atomic.h>
- #include <drm/drm_atomic_helper.h>
- #include <drm/drm_blend.h>
--#include <drm/drm_gem_atomic_helper.h>
- #include <drm/drm_fourcc.h>
-+#include <drm/drm_framebuffer.h>
-+#include <drm/drm_gem_atomic_helper.h>
-+#include <drm/drm_panic.h>
-+#include <drm/ttm/ttm_bo.h>
- 
- #include "nouveau_bo.h"
- #include "nouveau_gem.h"
-@@ -577,6 +582,113 @@ nv50_wndw_prepare_fb(struct drm_plane *plane, struct drm_plane_state *state)
- 	return 0;
- }
- 
-+/* Values found on GTX1650 */
-+/* blocks level 0, 4x4 pixels */
-+#define BL0_W 4
-+/* blocks level 1, 8x8 pixels */
-+#define BL1_W 8
-+/* blocks level 2, Group of Bytes? 16x128 pixels */
-+#define BL2_W 16
-+
-+/* get the offset in bytes inside the framebuffer, after taking tiling into account */
-+static unsigned int nv50_get_tiled_offset(struct drm_scanout_buffer *sb, unsigned int gobs,
-+					  unsigned int x, unsigned int y, unsigned int px_width)
-+{
-+	u32 blk2_x, blk2_y, bl2sz;
-+	u32 blk1_x, blk1_y, bl1sz;
-+	u32 blk0_x, blk0_y, bl0sz;
-+	u32 nblk2w, bl2_h, off;
-+
-+	/* fixme - block2 height depends of the "Group of Bytes" value */
-+	bl2_h = BL1_W * gobs;
-+
-+	bl0sz = BL0_W * BL0_W * px_width;
-+	bl1sz = BL1_W * BL1_W * px_width;
-+	bl2sz = BL2_W * bl2_h * px_width;
-+
-+	/* block level 2 coordinate */
-+	blk2_x = x / BL2_W;
-+	blk2_y = y / bl2_h;
-+
-+	x = x % BL2_W;
-+	y = y % bl2_h;
-+
-+	/* block level 1 coordinate */
-+	blk1_x = x / BL1_W;
-+	blk1_y = y / BL1_W;
-+
-+	x = x % BL1_W;
-+	y = y % BL1_W;
-+
-+	/* block level 0 coordinate */
-+	blk0_x = x / BL0_W;
-+	blk0_y = y / BL0_W;
-+
-+	x = x % BL0_W;
-+	y = y % BL0_W;
-+
-+	nblk2w = DIV_ROUND_UP(sb->width, BL2_W);
-+
-+	off = ((blk2_y * nblk2w) + blk2_x) * bl2sz;
-+	off += ((blk1_y * 2) + blk1_x) * bl1sz;
-+	off += (blk0_y * 2 + blk0_x) * bl0sz;
-+	off += (x + y * BL0_W) * px_width;
-+
-+	return off;
-+}
-+
-+static void nv50_set_pixel(struct drm_scanout_buffer *sb, unsigned int x, unsigned int y, u32 color)
-+{
-+	struct drm_framebuffer *fb = sb->private;
-+	unsigned int off;
-+	/* According to DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D documentation,
-+	 * the last 4 bits of modifier is log2(height) of each block, in GOBs
-+	 */
-+	unsigned int gobs = 1 << (fb->modifier & 0xf);
-+
-+	off = nv50_get_tiled_offset(sb, gobs, x, y, sb->format->cpp[0]);
-+	iosys_map_wr(&sb->map[0], off, u32, color);
-+}
-+
-+static int
-+nv50_wndw_get_scanout_buffer(struct drm_plane *plane, struct drm_scanout_buffer *sb)
-+{
-+	struct drm_framebuffer *fb;
-+	struct nouveau_bo *nvbo;
-+
-+	if (!plane->state || !plane->state->fb)
-+		return -EINVAL;
-+
-+	fb = plane->state->fb;
-+	nvbo = nouveau_gem_object(fb->obj[0]);
-+
-+	/* Don't support compressed format, or multiplane yet */
-+	if (nvbo->comp || fb->format->num_planes != 1)
-+		return -EOPNOTSUPP;
-+
-+	if (nouveau_bo_map(nvbo)) {
-+		pr_warn("nouveau bo map failed, panic won't be displayed\n");
-+		return -ENOMEM;
-+	}
-+
-+	if (nvbo->kmap.bo_kmap_type & TTM_BO_MAP_IOMEM_MASK)
-+		iosys_map_set_vaddr_iomem(&sb->map[0], nvbo->kmap.virtual);
-+	else
-+		iosys_map_set_vaddr(&sb->map[0], nvbo->kmap.virtual);
-+
-+	sb->height = fb->height;
-+	sb->width = fb->width;
-+	sb->pitch[0] = fb->pitches[0];
-+	sb->format = fb->format;
-+
-+	/* If tiling is enabled, use the set_pixel() to display correctly */
-+	if (fb->modifier & 0xf) {
-+		sb->private = (void *) fb;
-+		sb->set_pixel = nv50_set_pixel;
-+	}
-+	return 0;
-+}
-+
- static const struct drm_plane_helper_funcs
- nv50_wndw_helper = {
- 	.prepare_fb = nv50_wndw_prepare_fb,
-@@ -584,6 +696,14 @@ nv50_wndw_helper = {
- 	.atomic_check = nv50_wndw_atomic_check,
- };
- 
-+static const struct drm_plane_helper_funcs
-+nv50_wndw_primary_helper = {
-+	.prepare_fb = nv50_wndw_prepare_fb,
-+	.cleanup_fb = nv50_wndw_cleanup_fb,
-+	.atomic_check = nv50_wndw_atomic_check,
-+	.get_scanout_buffer = nv50_wndw_get_scanout_buffer,
-+};
-+
- static void
- nv50_wndw_atomic_destroy_state(struct drm_plane *plane,
- 			       struct drm_plane_state *state)
-@@ -732,7 +852,10 @@ nv50_wndw_new_(const struct nv50_wndw_func *func, struct drm_device *dev,
- 		return ret;
- 	}
- 
--	drm_plane_helper_add(&wndw->plane, &nv50_wndw_helper);
-+	if (type == DRM_PLANE_TYPE_PRIMARY)
-+		drm_plane_helper_add(&wndw->plane, &nv50_wndw_primary_helper);
-+	else
-+		drm_plane_helper_add(&wndw->plane, &nv50_wndw_helper);
- 
- 	if (wndw->func->ilut) {
- 		ret = nv50_lut_init(disp, mmu, &wndw->ilut);
--- 
-2.45.0
+> On 27/05/2024 22.18, Danilo Krummrich wrote:
+>> External email: Use caution opening links or attachments
+>> 
+>> 
+>> On Tue, May 21, 2024 at 08:32:31AM +0300, Zhi Wang wrote:
+>>> On Mon, 20 May 2024 19:24:19 +0200
+>>> Danilo Krummrich <dakr@redhat.com> wrote:
+>>>
+>>>> Add an abstraction around the kernels firmware API to request firmware
+>>>> images. The abstraction provides functions to access the firmware
+>>>> buffer and / or copy it to a new buffer allocated with a given
+>>>> allocator backend.
+>>>>
+>>>
+>>> Was playing with firmware extractions based on this patch.
+>>> Unfortunately I ended up with a lot of pointer operations, unsafe
+>>> statements.
+>>>
+>>> As we know many vendors have a C headers for the definitions of the
+>>> firwmare content, the driver extract the data by applying a struct
+>>> pointer on it.
+>>>
+>>> But in rust, I feel it would nice that we can also have a common
+>>> firmware extractor for drivers, that can wrap the pointer operations,
+>>> take a list of the firmware struct members that converted from C headers
+>>> as the input, offer the driver some common ABI methods to query them.
+>>> Maybe that would ease the pain a lot.
+>> 
+>> So, you mean some abstraction that takes a list of types, offsets in the
+>> firmware and a reference to the firmware itself and provides references to the
+>> corresponding objects?
+>> 
+>> I agree it might be helpful to have some common infrastructure for this, but the
+>> operations on it would still be unsafe, since ultimately it involves
+>> dereferencing pointers.
+>> 
+> 
+> I think the goal is to 1) concentrate the "unsafe" operations in a 
+> abstraction so the driver doesn't have to write explanation of unsafe 
+> operations here and there, improve the readability of the driver that 
+> interacts with vendor-firmware buffer. 2) ease the driver maintenance 
+> burden.
+> 
+> Some solutions I saw in different projects written in rust for 
+> de-referencing a per-defined struct:
 
+Aren't there other abstractions that require that functionality, not
+just the firmware abstractions?
