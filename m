@@ -2,48 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD337CBABD1
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D191CBAB65
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:58 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0511410EB21;
-	Sat, 13 Dec 2025 12:41:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 00B3710EADE;
+	Sat, 13 Dec 2025 12:41:04 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="EswRUQok";
+	dkim=pass (2048-bit key; unprotected) header.d=treblig.org header.i=@treblig.org header.b="d/I1cH1f";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out.freemail.hu (fmfe14.freemail.hu [46.107.16.207])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 392C610E33B;
- Mon,  3 Jun 2024 09:16:08 +0000 (UTC)
-Received: from fizweb.elte.hu (fizweb.elte.hu [157.181.183.248])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp.freemail.hu (Postfix) with ESMTPSA id 4Vt7Pd3jnlz18V;
- Mon,  3 Jun 2024 11:16:05 +0200 (CEST)
-From: egyszeregy@freemail.hu
-To: bskeggs@nvidia.com, kherbst@redhat.com, lyude@redhat.com,
- airlied@gmail.com, daniel@ffwll.ch, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Cc: =?UTF-8?q?Benjamin=20Sz=C5=91ke?= <egyszeregy@freemail.hu>
-Subject: [PATCH] drm/nouveau/i2c: rename aux.c and aux.h to auxch.c and auxch.h
-Date: Mon,  3 Jun 2024 11:15:58 +0200
-Message-ID: <20240603091558.35672-1-egyszeregy@freemail.hu>
-X-Mailer: git-send-email 2.43.0
+Received: from mx.treblig.org (mx.treblig.org [46.235.229.95])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 17AD810E267;
+ Mon,  3 Jun 2024 17:30:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
+ ; s=bytemarkmx;
+ h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
+ :Subject; bh=N1rA3ay0tZG+PPeHYHe8unqz8YmRW6XYkHVM0lfB4Dw=; b=d/I1cH1fk5K56xrJ
+ nJHlCjeC/Gt73oh4PlPiL3mfaYyOMq4eUTIJy6ZVuYB0zxtn/SGyPd39jH2VUhEsqNxzeNuOdGWaW
+ NMS8WAATQNy4apezaQHsCPsHD3U0QvpHGLfhgI1mvhu+hkM33TALSVtwl74ZL0R2GmDTj3QMijweG
+ Yrxm3q3Jjd2LqRBgxUIbKXYLOU0eJMaFG0s5njtZjgiS16KO5fNhxeuYVkPKkdCRIbS7d9C4e8aSk
+ L/Ob5zua3j1qmS8RRJP7cS5KNxPw/hF+V0Tzg1XMTMHZ6l+1s+xI0LPdp1Vl8/Lz3s4SbZnIi3rzv
+ zw49hFDcVq8D9Hz7Pw==;
+Received: from dg by mx.treblig.org with local (Exim 4.96)
+ (envelope-from <dg@treblig.org>) id 1sEBVz-003zuI-0j;
+ Mon, 03 Jun 2024 17:30:35 +0000
+Date: Mon, 3 Jun 2024 17:30:35 +0000
+From: "Dr. David Alan Gilbert" <linux@treblig.org>
+To: kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com
+Cc: bskeggs@redhat.com, daniel@ffwll.ch, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/6] drm/nouveau: remove unused struct 'init_exec'
+Message-ID: <Zl39u4zOif2Sw4Sa@gallifrey>
+References: <20240517232617.230767-1-linux@treblig.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1717406166; 
- s=20181004; d=freemail.hu;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
- l=6337; bh=rijsPYYSbzi73ZsjnyWe6jiHuk3OCHTuD8vMOf/445U=;
- b=EswRUQokcslT1G+LQHyFiWcRQDM6iHCHBCJnkI5ThJ9yuZXovaAM4OGKMTKeIy8N
- ZS7ZaMhyPrJjAwxVMfcz9vqbuWjY5IlsIJuM0bbFLubPWXpZZU1DIx1NK5nmXhFatsd
- u5OOgr+zZzXXuLadvS4ijLtyGtUW81X6xwTqH0Qxn61igzSmqcm6Gz3utPGl8Hhmxb5
- 7C2zK07XLbmeZSUmT9TfRGo4jGyxH6WSHnWlWtBeJ13c8j8ejdg3X+kO8HwugiNGyLD
- jnlF2xpRJa1Teyu3z2yj5jK1QQfg2WuYa5+XCzb/EH+A16hkqSk7If1DOszoavcHFhl
- fPls79YWXg==
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:52 +0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+In-Reply-To: <20240517232617.230767-1-linux@treblig.org>
+X-Chocolate: 70 percent or better cocoa solids preferably
+X-Operating-System: Linux/6.1.0-21-amd64 (x86_64)
+X-Uptime: 17:29:59 up 26 days, 4:44, 1 user, load average: 0.00, 0.00, 0.00
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:46 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,167 +58,44 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Benjamin Szőke <egyszeregy@freemail.hu>
+* linux@treblig.org (linux@treblig.org) wrote:
+> From: "Dr. David Alan Gilbert" <linux@treblig.org>
+> 
+> 'init_exec' is unused since
+> commit cb75d97e9c77 ("drm/nouveau: implement devinit subdev, and new
+> init table parser")
+> Remove it.
+> 
+> Signed-off-by: Dr. David Alan Gilbert <linux@treblig.org>
 
-The goal is to clean-up Linux repository from AUX file names, because
-the use of such file names is prohibited on other operating systems
-such as Windows, so the Linux repository cannot be cloned and
-edited on them.
+Ping.
 
-Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild             | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c          | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.c => auxch.c} | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.h => auxch.h} | 0
- drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c           | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c         | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c         | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c             | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c           | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c         | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c         | 2 +-
- 11 files changed, 10 insertions(+), 10 deletions(-)
- rename drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.c => auxch.c} (99%)
- rename drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.h => auxch.h} (100%)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild
-index 819703913a00..2c551bdc9bc9 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild
-@@ -25,7 +25,7 @@ nvkm-y += nvkm/subdev/i2c/busnv50.o
- nvkm-y += nvkm/subdev/i2c/busgf119.o
- nvkm-y += nvkm/subdev/i2c/bit.o
- 
--nvkm-y += nvkm/subdev/i2c/aux.o
-+nvkm-y += nvkm/subdev/i2c/auxch.o
- nvkm-y += nvkm/subdev/i2c/auxg94.o
- nvkm-y += nvkm/subdev/i2c/auxgf119.o
- nvkm-y += nvkm/subdev/i2c/auxgm200.o
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
-index dd391809fef7..6c76e5e14b75 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
-@@ -24,7 +24,7 @@
- #define anx9805_pad(p) container_of((p), struct anx9805_pad, base)
- #define anx9805_bus(p) container_of((p), struct anx9805_bus, base)
- #define anx9805_aux(p) container_of((p), struct anx9805_aux, base)
--#include "aux.h"
-+#include "auxch.h"
- #include "bus.h"
- 
- struct anx9805_pad {
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxch.c
-similarity index 99%
-rename from drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxch.c
-index d063d0dc13c5..fafc634acbf6 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxch.c
-@@ -24,7 +24,7 @@
- 
- #include <linux/string_helpers.h>
- 
--#include "aux.h"
-+#include "auxch.h"
- #include "pad.h"
- 
- static int
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.h b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxch.h
-similarity index 100%
-rename from drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.h
-rename to drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxch.h
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
-index 47068f6f9c55..854bb4b5fdb4 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
-@@ -22,7 +22,7 @@
-  * Authors: Ben Skeggs <bskeggs@redhat.com>
-  */
- #define g94_i2c_aux(p) container_of((p), struct g94_i2c_aux, base)
--#include "aux.h"
-+#include "auxch.h"
- 
- struct g94_i2c_aux {
- 	struct nvkm_i2c_aux base;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
-index dab40cd8fe3a..c17d5647cb99 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
-@@ -19,7 +19,7 @@
-  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  * OTHER DEALINGS IN THE SOFTWARE.
-  */
--#include "aux.h"
-+#include "auxch.h"
- 
- static const struct nvkm_i2c_aux_func
- gf119_i2c_aux = {
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
-index 8bd1d442e465..3c5005e3b330 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
-@@ -22,7 +22,7 @@
-  * Authors: Ben Skeggs <bskeggs@redhat.com>
-  */
- #define gm200_i2c_aux(p) container_of((p), struct gm200_i2c_aux, base)
--#include "aux.h"
-+#include "auxch.h"
- 
- struct gm200_i2c_aux {
- 	struct nvkm_i2c_aux base;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
-index 976539de4220..ab86e11e7780 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
-@@ -22,7 +22,7 @@
-  * Authors: Ben Skeggs
-  */
- #include "priv.h"
--#include "aux.h"
-+#include "auxch.h"
- #include "bus.h"
- #include "pad.h"
- 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
-index 5904bc5f2d2a..cc26cd677917 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
-@@ -22,7 +22,7 @@
-  * Authors: Ben Skeggs
-  */
- #include "pad.h"
--#include "aux.h"
-+#include "auxch.h"
- #include "bus.h"
- 
- void
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
-index 3bc4d0310076..1797c6c65979 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
-@@ -22,7 +22,7 @@
-  * Authors: Ben Skeggs
-  */
- #include "pad.h"
--#include "aux.h"
-+#include "auxch.h"
- #include "bus.h"
- 
- static const struct nvkm_i2c_pad_func
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
-index 7d417f6a816e..5afc1bf8e798 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
-@@ -22,7 +22,7 @@
-  * Authors: Ben Skeggs
-  */
- #include "pad.h"
--#include "aux.h"
-+#include "auxch.h"
- #include "bus.h"
- 
- static void
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_bios.c | 5 -----
+>  1 file changed, 5 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_bios.c b/drivers/gpu/drm/nouveau/nouveau_bios.c
+> index 79cfab53f80e..8c3c1f1e01c5 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_bios.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_bios.c
+> @@ -43,11 +43,6 @@
+>  #define BIOSLOG(sip, fmt, arg...) NV_DEBUG(sip->dev, fmt, ##arg)
+>  #define LOG_OLD_VALUE(x)
+>  
+> -struct init_exec {
+> -	bool execute;
+> -	bool repeat;
+> -};
+> -
+>  static bool nv_cksum(const uint8_t *data, unsigned int length)
+>  {
+>  	/*
+> -- 
+> 2.45.1
+> 
 -- 
-2.43.0
-
+ -----Open up your eyes, open up your mind, open up your code -------   
+/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
+\        dave @ treblig.org |                               | In Hex /
+ \ _________________________|_____ http://www.treblig.org   |_______/
