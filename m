@@ -2,140 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D55F28D7926
-	for <lists+nouveau@lfdr.de>; Mon,  3 Jun 2024 01:33:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 56BD48D7CC5
+	for <lists+nouveau@lfdr.de>; Mon,  3 Jun 2024 09:51:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C3DF910E08F;
-	Sun,  2 Jun 2024 23:33:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B134310E234;
+	Mon,  3 Jun 2024 07:51:13 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="AjzjguVv";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="LrZpM6Vp";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2073.outbound.protection.outlook.com [40.107.92.73])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E3FAE10E043;
- Sun,  2 Jun 2024 23:32:52 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SV/rS3RRq2QUG3W5o+9LjTJf9/GcqL90rzQbcirPFCSGyX0GvoySRQCQJLFWKhOMlpXaX95kF1IPWvvD+0ia8utTmI4s2ya6Yg+3bw7+e7GY7CZYCyobGisIhTEPspEc1Vm1sDkB/JtExb2F9cQN8D/me+8r+T2m0s4CIqQRQDA1OJUWz/xy8oY/pjSRd1LaufytmJg1b/grXYvBBU8B4VlGjxbw9hJ71q/KHWRSwaNkpLg+No4ztKaCXmgkkxcjslaK2DZwmSVjPKn5Al20IoZW7q+5VtnIOkGQEcvs50CpDTYV0idbh2zfdtaNW2z48d1eHx5OH/kFi8/9oTM7Ag==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vcmkX+/6FgGQrexWsfsFsqFoCaMjIeWwhBhrUnNiuiY=;
- b=YOhXF4ai3AAbFgcoU/rLyX+IIIRjDuCX8ZZUdva8NTDbSB7WfTBpPXy0/Y6rB0Wzc6MMJCbFgqJvdRZiiBQndEw6IaAdm5w3Je6MhIuzbYYAQ+3NXsBBzGPU0JHYaH+KlzHLOpr1bYPum9H65js/bs/d2Yhd4hLeuKA95BkQn2+zc4Zr/cWrsZ+jIiG9HsoNNR3THAZGRc0jQCdL0mGU1cj2twI4gpZpfyUknbuGmFz443sRNGAUaGhZ4HNEPtkuepjaHwF3Rn5aQyy7s3/fCVQGjNmCdR9CA+4pUEdgK9gLfrqw9I7vfn4H3nW0ALYOKHg+715SCtqWgtL2EAHCIw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=freemail.hu smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vcmkX+/6FgGQrexWsfsFsqFoCaMjIeWwhBhrUnNiuiY=;
- b=AjzjguVvXJBgVMc0AXLj/D4i5tUoFV1RIHkQDt897g9X8NPynvTbj4LMyr+OAQmQSkZ6lkpesWVolghPs5Z1/FQVrXLef5B0uS3PvFrRVXiJT/snHUV0w68fiQTarbIq4RVzrrQqKp6v+E8jIvRlqw8970m9hz8xyzHRjm/I5SVMQhR7qPBWn4s5qv2pH2Uh6ItNxmt4KpL6l8Tx29mD9fHoOFxGdH4o3DFVRI68hgSKgzAq6tG2I+wV9AWUU/phv+H7gF/I29uaV6DWUA8w9dHRCZqvo3DqYecmZKh8eiWKDvHsRH/d3V9nTrl7nGbNQmQZqGx3PhlPSXQGx5n2kg==
-Received: from BN0PR04CA0085.namprd04.prod.outlook.com (2603:10b6:408:ea::30)
- by IA0PR12MB8981.namprd12.prod.outlook.com (2603:10b6:208:484::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.21; Sun, 2 Jun
- 2024 23:32:47 +0000
-Received: from BN1PEPF00004688.namprd05.prod.outlook.com
- (2603:10b6:408:ea:cafe::8a) by BN0PR04CA0085.outlook.office365.com
- (2603:10b6:408:ea::30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.28 via Frontend
- Transport; Sun, 2 Jun 2024 23:32:47 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- BN1PEPF00004688.mail.protection.outlook.com (10.167.243.133) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7633.15 via Frontend Transport; Sun, 2 Jun 2024 23:32:46 +0000
-Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Sun, 2 Jun 2024
- 16:32:29 -0700
-Received: from [172.27.35.123] (10.126.230.35) by rnnvmail201.nvidia.com
- (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Sun, 2 Jun 2024
- 16:32:27 -0700
-Message-ID: <54f8d8ce-c6bf-442e-9c17-99ef28b3959d@nvidia.com>
-Date: Mon, 3 Jun 2024 09:32:25 +1000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A1DC510E234
+ for <nouveau@lists.freedesktop.org>; Mon,  3 Jun 2024 07:51:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1717401069;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZM/qlijRGY09CL6SCWZrPLW5sIErx5xRvS0RDt3tq4s=;
+ b=LrZpM6VpY4PHd0TLie30HMbpNB9Vu/obCqwijUfxy2ck6W6M/I+kkanloh5vFp+qNm3f0N
+ BOLPK6KGxT0lL5GEF/aJeXJoo+M+iWyVfFXVE8FQcqaQ1iFJarw1Q5tHfWE4KZhrsHSzKF
+ hfjva8kuO+GGJEk0rminhpajYcMLzK4=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-333-tQAyGoBcM_6MvnE5TsMbjw-1; Mon, 03 Jun 2024 03:51:08 -0400
+X-MC-Unique: tQAyGoBcM_6MvnE5TsMbjw-1
+Received: by mail-ed1-f69.google.com with SMTP id
+ 4fb4d7f45d1cf-57a3bc0ed15so77453a12.1
+ for <nouveau@lists.freedesktop.org>; Mon, 03 Jun 2024 00:51:08 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717401067; x=1718005867;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZM/qlijRGY09CL6SCWZrPLW5sIErx5xRvS0RDt3tq4s=;
+ b=u2E0OmxgONo2Y6y/hY/7/Lzwu6c6tNt0NbroRrAQLaU8TfnAzW61WNxbqhzV7WAeTd
+ w/R1SnKwtR+fXCkwtN9t9Xq27+V3yQk0RsNClguyZUltskgGpH59ARklSdF1PEurJYYg
+ AvxSqIRLwOe6v1g/14iXro6XuYfWJKR4diXPfsCb9dmDbZ2XBHh3DONjyJz/s1Hgb+4a
+ ptC8pK/AU4SgcBFf15CRxw3lY/ofSs3cLDSv/C4kMSyY5c86z0OrAnSpHW0QJgMRPxAl
+ q3jWW6ptmMkggQYnAFtxuWsGpA+dW8wy5xvrc8WodlVc7qFS4K8jU/PhMuwR4p/rnTz8
+ OmTg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXUsVvDZPfhDVkXHfM1qZTOKD7XpKbhkZQbiTtwut74sb7iW6Fq7qpgequbBkQ/LoCPyvY21lFkOX2qWpE4UcK2VsYlL5i3sr3VEZMPSA==
+X-Gm-Message-State: AOJu0YwiDL8xDjEccSQOJsGLR7Xh0O3DRKP1Ug+AG4pszdgSNtLby+sy
+ yVBElHDHzlWuxaJu6O/naRVCoSz7t2qGMgWr/pz7iJI7EtXsmniTD+XlR8y+a+HYgMIrwXXncdI
+ Iv1fJ+1Uom9tFxlqHQsWwRcBWwP2tr56Eft8ObJmSJrjbPGlLNgw0fiDDL2GLZqQrDs+VRD53Wu
+ ofDQpHGALzbG/Cc9EO8DUM1MjPevbXusyZaO3tHQ==
+X-Received: by 2002:a50:8e59:0:b0:57a:22aa:51b1 with SMTP id
+ 4fb4d7f45d1cf-57a3644a33dmr5150143a12.2.1717401067127; 
+ Mon, 03 Jun 2024 00:51:07 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHZwivxrSkC/S9Da55sUj850dmd7xFFbsWspH20JfHFqw8jW0FbWF7DUPXO/ifDroooMLXoN/Rm9331EW5vTKk=
+X-Received: by 2002:a50:8e59:0:b0:57a:22aa:51b1 with SMTP id
+ 4fb4d7f45d1cf-57a3644a33dmr5150127a12.2.1717401066459; Mon, 03 Jun 2024
+ 00:51:06 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+References: <20240601212247.54786-1-egyszeregy@freemail.hu>
+ <CACO55tvW7zDRt=ka0w5D8drbJiZFqMFmx=n=PttAjubZJ5zX2Q@mail.gmail.com>
+ <bec5f516-211d-4c6e-9204-311d1e31532a@freemail.hu>
+In-Reply-To: <bec5f516-211d-4c6e-9204-311d1e31532a@freemail.hu>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Mon, 3 Jun 2024 09:50:29 +0200
+Message-ID: <CACO55tuOQxQ=BuDj34SXGREE4numtRDFzJY4Qj_Fr0rrLj4ang@mail.gmail.com>
 Subject: Re: [PATCH] drm/nouveau/i2c: rename aux.c and aux.h to nvkm_i2c_aux.c
  and nvkm_i2c_aux.h
-To: =?UTF-8?Q?Sz=C5=91ke_Benjamin?= <egyszeregy@freemail.hu>,
- <kherbst@redhat.com>, <lyude@redhat.com>, <airlied@gmail.com>,
- <daniel@ffwll.ch>, <dri-devel@lists.freedesktop.org>,
- <nouveau@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
-References: <20240601212247.54786-1-egyszeregy@freemail.hu>
- <233ba844-7964-42ad-8962-95c371e402be@nvidia.com>
- <d8366db0-ceeb-44c5-bef3-8cffb9d74860@freemail.hu>
-Content-Language: en-US
-From: Ben Skeggs <bskeggs@nvidia.com>
-In-Reply-To: <d8366db0-ceeb-44c5-bef3-8cffb9d74860@freemail.hu>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.126.230.35]
-X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
- rnnvmail201.nvidia.com (10.129.68.8)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004688:EE_|IA0PR12MB8981:EE_
-X-MS-Office365-Filtering-Correlation-Id: 87db9574-93e4-4e43-1406-08dc835c4f27
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230031|82310400017|376005|1800799015|36860700004; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VlNjTjZ0ZEd6MlZBKytHYy85bkxielZJdjBpeTZGQTVqN3NNSm85UURUeE5a?=
- =?utf-8?B?QU9mZDBYS0oycDFxQVJPaEtzbGoyMEJ6S3RxWlVCNjF2Q284VGRTZXptcjBU?=
- =?utf-8?B?N3htQzJlSnFZa3BjbDdhcnVWc2l2ZW80ZzNqejZ0SlZXV0c0elgxR2daUUJK?=
- =?utf-8?B?MXQ0bWFqbEI4emtWamM5NXZQeWtsUzVPaHZ3OTVvWmtmNEhMYU95M2hCQm05?=
- =?utf-8?B?eitXUEpxaE0zeEs1YWMzN1R1dklWN1ZSd3MyelNERXIzaFBQVDJYWlRkeUkz?=
- =?utf-8?B?WEZJcG5zTG9ucGNXRjFQTVlrNDJQNFN1REZ1WE8yb1U5dU5Ld0pqZGkvc2Vi?=
- =?utf-8?B?T2Z2VkNHNlJETHUyUGdRSUJKOTBXYThxWDlBdkhObGVyZkdUTVVkampHR01u?=
- =?utf-8?B?TUhZay9iMDlUWUNBa2tOYmlUcVpKY0Qwenc1ei96dkMyUWJ1SUFXeU02cEtP?=
- =?utf-8?B?ME1MSWpiazVlbmNKLy80UWhtU2RWRGZZVHlsbmxidStjRzJqWGhsZGdjbkpM?=
- =?utf-8?B?ZWNCM2wzVGROSndBZmxySWFDL016YzQ3SjRpM3dVNDBOMnhiZDFNMUswQzlN?=
- =?utf-8?B?ZG1iZWZPRVlQSWh0VFhUYllCZXhJMTFLNUJvVm9aalkzUnM4OHU3VmxIalYv?=
- =?utf-8?B?cXdpanAwU2pSRjdkWG1zR3AyM2Y4WC9ER094RHZqUmprQ1RRMkE0QjZQR2s2?=
- =?utf-8?B?djhtblZKYWo1RlNxclVVVS94Y1E2WnErZHpmTE1KYjJKbDhqT3N6UTV2d1FO?=
- =?utf-8?B?T0VSeS80RnU4SkF3MlRTajBoTkhYVjJGeElub1RTYVlISWtweE1uL2RQa2xG?=
- =?utf-8?B?YlJuZDdPOWM5S09OVHV5ZGNyZWdtTm4yc2l4RzlLMkdkY1dJenNGZ1JqRzhQ?=
- =?utf-8?B?N0k2Q1F4OXhqQWRqWndLcUt5UW9mbXRBam9EN0V6anJCakVoTExLbE9LY3Iy?=
- =?utf-8?B?SzdqelhUSWJHemxTZTY2ZFA3TmhzWCticTY5Q1MwTDVlckxQQlM3d0RvQ0x5?=
- =?utf-8?B?SVhDTjI2eEt3Tzd1cXNYaGNZVWd2VHRhVHJVVlFzSFZJd1E2MDFIS3pneUxa?=
- =?utf-8?B?YjBOUjVRYzRsTGZYL3RXUG1DOXZCU1ExcmZadFhzYVZQaXczU1VlRDNtUFNN?=
- =?utf-8?B?bnYyb1ZwelJ5V0NTMTBnRXF1Zk80cUt6TE1uVG5JOVRJdFpuZEFnU0ROZWtv?=
- =?utf-8?B?RjVRWXJwMnJpL1FKdTg4RU0wT3lPM1FDUmw5eEd4Rk13L29ueFBJZlFnZEVt?=
- =?utf-8?B?bDlOQ281YTZBVFFtbFFyZHFuVitjdFh1WGFJellLQVRNaHptSHZ2SW1rMTlv?=
- =?utf-8?B?ZkxhbENSL0QwblZYOHo2WjJHUEhBMk83aXNtM3lndjY5ZVQyUTJFMXdWbG9Y?=
- =?utf-8?B?cGxKS0pjWTJqbHUyUmplSFREVDZUejAxRnJndU5jZGE4a1hoMytUZDBtVVZX?=
- =?utf-8?B?cDd6MzJiQi9xQU1zY2JsSm5QRjN2RmFBUUMvMzRIODJURTNUem84MVA5dHZ5?=
- =?utf-8?B?dmptNXdCYm5SZUNZVnRtdzNKWWhlaGRlLzdDSnNiL3JVVGsyS2Y3ek5ZL0p3?=
- =?utf-8?B?aXZ5N2RFSFBITTU3bGVPdTFtakxQTUQrcmp5VENtdTVESjZwdVRCTnplNjk5?=
- =?utf-8?B?bVJObEZqcEF2cHBzQUd6dlV0bkFvVVFlVUVOYzlRWlBoS05uTWgweUVJSFoy?=
- =?utf-8?B?OGxIU1R1M1ZyakM3bEtCSE9nZGFDL05EcGlBSG5MS0tabncrSnlTU0NReXoz?=
- =?utf-8?B?aUlqbUpuRXRwaVVjbitaWVErcldRVm4xamlFWjZHci9FTDNERTFoRENQOVFo?=
- =?utf-8?B?Q2pZVHd3NG9XSWwvRHpCYVRHL2JpT0duWERzYXJtOFlMMDNRSUZiWVhkWEtS?=
- =?utf-8?Q?fO79Rbo6rxa+4?=
-X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
- SFS:(13230031)(82310400017)(376005)(1800799015)(36860700004); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2024 23:32:46.5927 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 87db9574-93e4-4e43-1406-08dc835c4f27
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004688.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8981
+To: =?UTF-8?Q?Sz=C5=91ke_Benjamin?= <egyszeregy@freemail.hu>
+Cc: bskeggs@redhat.com, lyude@redhat.com, airlied@gmail.com, daniel@ffwll.ch, 
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -150,192 +91,318 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 3/6/24 09:27, Szőke Benjamin wrote:
+On Sun, Jun 2, 2024 at 1:01=E2=80=AFAM Sz=C5=91ke Benjamin <egyszeregy@free=
+mail.hu> wrote:
+>
+>         s=3D20181004; d=3Dfreemail.hu;
+>         h=3DMessage-ID:Date:MIME-Version:Subject:To:Cc:References:From:In=
+-Reply-To:Content-Type:Content-Transfer-Encoding;
+>         l=3D8472; bh=3Diw0a2TUtlt0KIetu+spJR9WLW1F3MPSfBbxxiBBkhDM=3D;
+>         b=3D1oSo+wfGjIoAfhgzfBaxNDoTN0TmXW/jadL52HL5ZAyzWMk15XqSBLjBkAd//=
+Bh9
+>         u1d+ypo+idz4sTys/CYP5oS8lb8fepRTYBFboPsOAnbHQg6tR0QizBnjyYGq1iMYD=
+02
+>         GmZWamFVQ/I9kT0XMOMhoKNp1jmr3tFr0iaoS+PqyGv5aNFi6tmiFSJT5fnNaf8/B=
+ct
+>         XgidaouR1QSqrB6vgHDUjd13+165V+RoCh/CflqZroE132r01M9mxZU5bk4M4uMO3=
+8l
+>         HwZjS8YTSOmTA49PcLYbh+hr+e+GVFHP+X1wgmd/93wqlySRgqM7N1fh84jucg03I=
+MS
+>         D/tvbePTzg=3D=3D
+> Content-Transfer-Encoding: quoted-printable
+>
+> 2024. 06. 02. 0:12 keltez=3DC3=3DA9ssel, Karol Herbst =3DC3=3DADrta:
+> > On Sat, Jun 1, 2024 at 11:33=3DE2=3D80=3DAFPM <egyszeregy@freemail.hu> =
+wrote:
+> >>
+> >>          s=3D3D20181004; d=3D3Dfreemail.hu;
+> >>          h=3D3DFrom:To:Cc:Subject:Date:Message-ID:MIME-Version:Content=
+-T=3D
+> ype:Content-Transfer-Encoding;
+> >>          l=3D3D6462; bh=3D3DCnHSqkRX34kqCWN2/oPtvm9wm8HJCe8QhPwQypdpi3=
+w=3D3D=3D
+> ;
+> >>          b=3D3DJDlDB9yOQDBY7EDnRMrt8qYnWfH8J/LKYKb90434FH1tuOL04za+3TX=
+XS=3D
+> bU0uvs0
+> >>          hWYDYjpbob4XGgUcd1s+lCkerOgDwkpWJWKFW8N5j6WENAKdR/hWJgcma2JED=
+=3D
+> DotXZ0
+> >>          cisYRrLsQBfjyKkBWw0qv/5PDe7vliytix5oP2piBPJC+uR3pN8OKck/+zLBG=
+=3D
+> lJY4za
+> >>          qywwOiMNzHAdyOJT5kCg0yd+k186Oa1jX93iCpiRk5mxJQqJJcAxfW8rYbKRX=
+=3D
+> i5QQTl
+> >>          SymDGdZ72wK5PkHxGgpZ9qXZtFV3eH4+95xNzpoPowMkXFkBy1uMClZzxv1oB=
+=3D
+> mRo8o6
+> >>          CXPcfsWUsQ=3D3D=3D3D
+> >> Content-Transfer-Encoding: quoted-printable
+> >>
+> >> From: Benjamin Sz=3D3DC5=3D3D91ke <egyszeregy@freemail.hu>
+> >>
+> >> The goal is to clean-up Linux repository from AUX file names, because
+> >> the use of such file names is prohibited on other operating systems
+> >> such as Windows, so the Linux repository cannot be cloned and
+> >> edited on them.
+> >>
+> >=3D20
+> > something went horribly wrong with encoding so the patch is pretty much=
+=3D
+>  invalid.
+> >=3D20
+> >> Signed-off-by: Benjamin Sz=3D3DC5=3D3D91ke <egyszeregy@freemail.hu>
+> >> ---
+> >>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild                  | 2 =
+=3D
+> +-
+> >>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c               | 2 =
+=3D
+> +-
+> >>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c                | 2 =
+=3D
+> +-
+> >>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c              | 2 =
+=3D
+> +-
+> >>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c              | 2 =
+=3D
+> +-
+> >>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c                  | 2 =
+=3D
+> +-
+> >>   .../gpu/drm/nouveau/nvkm/subdev/i2c/{aux.c =3D3D3D> nvkm_i2c_aux.c} =
+  =3D
+> | 2 +-
+> >>   .../gpu/drm/nouveau/nvkm/subdev/i2c/{aux.h =3D3D3D> nvkm_i2c_aux.h} =
+  =3D
+> | 0
+> >>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c                | 2 =
+=3D
+> +-
+> >>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c              | 2 =
+=3D
+> +-
+> >>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c              | 2 =
+=3D
+> +-
+> >>   11 files changed, 10 insertions(+), 10 deletions(-)
+> >>   rename drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.c =3D3D3D> nvkm_=
+i2=3D
+> c_aux.=3D3D
+> >> c} (99%)
+> >>   rename drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.h =3D3D3D> nvkm_=
+i2=3D
+> c_aux.=3D3D
+> >> h} (100%)
+> >>
+> >> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild b/drivers/=
+=3D
+> gpu=3D3D
+> >> /drm/nouveau/nvkm/subdev/i2c/Kbuild
+> >> index 819703913a00..c488dfce4392 100644
+> >> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild
+> >> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild
+> >> @@ -25,7 +25,7 @@ nvkm-y +=3D3D3D nvkm/subdev/i2c/busnv50.o
+> >>   nvkm-y +=3D3D3D nvkm/subdev/i2c/busgf119.o
+> >>   nvkm-y +=3D3D3D nvkm/subdev/i2c/bit.o
+> >> =3D3D20
+> >> -nvkm-y +=3D3D3D nvkm/subdev/i2c/aux.o
+> >> +nvkm-y +=3D3D3D nvkm/subdev/i2c/nvkm_i2c_aux.o
+> >>   nvkm-y +=3D3D3D nvkm/subdev/i2c/auxg94.o
+> >>   nvkm-y +=3D3D3D nvkm/subdev/i2c/auxgf119.o
+> >>   nvkm-y +=3D3D3D nvkm/subdev/i2c/auxgm200.o
+> >> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c b/drive=
+=3D
+> rs/=3D3D
+> >> gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
+> >> index dd391809fef7..30bf84e77db9 100644
+> >> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
+> >> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
+> >> @@ -24,7 +24,7 @@
+> >>   #define anx9805_pad(p) container_of((p), struct anx9805_pad, base)
+> >>   #define anx9805_bus(p) container_of((p), struct anx9805_bus, base)
+> >>   #define anx9805_aux(p) container_of((p), struct anx9805_aux, base)
+> >> -#include "aux.h"
+> >> +#include "nvkm_i2c_aux.h"
+> >>   #include "bus.h"
+> >> =3D3D20
+> >>   struct anx9805_pad {
+> >> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c b/driver=
+=3D
+> s/g=3D3D
+> >> pu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
+> >> index 47068f6f9c55..9e07ba444ca8 100644
+> >> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
+> >> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
+> >> @@ -22,7 +22,7 @@
+> >>    * Authors: Ben Skeggs <bskeggs@redhat.com>
+> >>    */
+> >>   #define g94_i2c_aux(p) container_of((p), struct g94_i2c_aux, base)
+> >> -#include "aux.h"
+> >> +#include "nvkm_i2c_aux.h"
+> >> =3D3D20
+> >>   struct g94_i2c_aux {
+> >>          struct nvkm_i2c_aux base;
+> >> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c b/driv=
+=3D
+> ers=3D3D
+> >> /gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
+> >> index dab40cd8fe3a..8709b728c38b 100644
+> >> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
+> >> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
+> >> @@ -19,7 +19,7 @@
+> >>    * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE US=
+=3D
+> E OR
+> >>    * OTHER DEALINGS IN THE SOFTWARE.
+> >>    */
+> >> -#include "aux.h"
+> >> +#include "nvkm_i2c_aux.h"
+> >> =3D3D20
+> >>   static const struct nvkm_i2c_aux_func
+> >>   gf119_i2c_aux =3D3D3D {
+> >> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c b/driv=
+=3D
+> ers=3D3D
+> >> /gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
+> >> index 8bd1d442e465..f40c5709d217 100644
+> >> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
+> >> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
+> >> @@ -22,7 +22,7 @@
+> >>    * Authors: Ben Skeggs <bskeggs@redhat.com>
+> >>    */
+> >>   #define gm200_i2c_aux(p) container_of((p), struct gm200_i2c_aux, bas=
+=3D
+> e)
+> >> -#include "aux.h"
+> >> +#include "nvkm_i2c_aux.h"
+> >> =3D3D20
+> >>   struct gm200_i2c_aux {
+> >>          struct nvkm_i2c_aux base;
+> >> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c b/drivers/=
+=3D
+> gpu=3D3D
+> >> /drm/nouveau/nvkm/subdev/i2c/base.c
+> >> index 976539de4220..736275f0c774 100644
+> >> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
+> >> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
+> >> @@ -22,7 +22,7 @@
+> >>    * Authors: Ben Skeggs
+> >>    */
+> >>   #include "priv.h"
+> >> -#include "aux.h"
+> >> +#include "nvkm_i2c_aux.h"
+> >>   #include "bus.h"
+> >>   #include "pad.h"
+> >> =3D3D20
+> >> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c b/drivers/g=
+=3D
+> pu/=3D3D
+> >> drm/nouveau/nvkm/subdev/i2c/nvkm_i2c_aux.c
+> >> similarity index 99%
+> >> rename from drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c
+> >> rename to drivers/gpu/drm/nouveau/nvkm/subdev/i2c/nvkm_i2c_aux.c
+> >> index d063d0dc13c5..6b76df02c63a 100644
+> >> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c
+> >> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/nvkm_i2c_aux.c
+> >> @@ -24,7 +24,7 @@
+> >> =3D3D20
+> >>   #include <linux/string_helpers.h>
+> >> =3D3D20
+> >> -#include "aux.h"
+> >> +#include "nvkm_i2c_aux.h"
+> >>   #include "pad.h"
+> >> =3D3D20
+> >>   static int
+> >> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.h b/drivers/g=
+=3D
+> pu/=3D3D
+> >> drm/nouveau/nvkm/subdev/i2c/nvkm_i2c_aux.h
+> >> similarity index 100%
+> >> rename from drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.h
+> >> rename to drivers/gpu/drm/nouveau/nvkm/subdev/i2c/nvkm_i2c_aux.h
+> >> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c b/driver=
+=3D
+> s/g=3D3D
+> >> pu/drm/nouveau/nvkm/subdev/i2c/padg94.c
+> >> index 5904bc5f2d2a..e9c55a57c878 100644
+> >> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
+> >> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
+> >> @@ -22,7 +22,7 @@
+> >>    * Authors: Ben Skeggs
+> >>    */
+> >>   #include "pad.h"
+> >> -#include "aux.h"
+> >> +#include "nvkm_i2c_aux.h"
+> >>   #include "bus.h"
+> >> =3D3D20
+> >>   void
+> >> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c b/driv=
+=3D
+> ers=3D3D
+> >> /gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
+> >> index 3bc4d0310076..1af64e25d838 100644
+> >> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
+> >> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
+> >> @@ -22,7 +22,7 @@
+> >>    * Authors: Ben Skeggs
+> >>    */
+> >>   #include "pad.h"
+> >> -#include "aux.h"
+> >> +#include "nvkm_i2c_aux.h"
+> >>   #include "bus.h"
+> >> =3D3D20
+> >>   static const struct nvkm_i2c_pad_func
+> >> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c b/driv=
+=3D
+> ers=3D3D
+> >> /gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
+> >> index 7d417f6a816e..997a5a2146c4 100644
+> >> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
+> >> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
+> >> @@ -22,7 +22,7 @@
+> >>    * Authors: Ben Skeggs
+> >>    */
+> >>   #include "pad.h"
+> >> -#include "aux.h"
+> >> +#include "nvkm_i2c_aux.h"
+> >>   #include "bus.h"
+> >> =3D3D20
+> >>   static void
+> >> --=3D3D20
+> >> 2.43.0
+> >>
+> >=3D20
+>
+> Hi,
+>
+> This patched is totally fine and visible in "linux-kernel@vger.kernel.org=
+=3D
+> " list=3D20
+> page, so it should not be invalid. Please check your e-mail client SW and=
+=3D
+>  fix=3D20
+> your settings.
+>
+> https://lore.kernel.org/lkml/20240601212247.54786-1-egyszeregy@freemail.h=
+=3D
+> u/
+> https://lore.kernel.org/lkml/20240601212247.54786-1-egyszeregy@freemail.h=
+=3D
+> u/raw
+>
+> kernel test robot used it for a build test successfully, so it has to be =
+=3D
+> a valid=3D20
+> patch.
+> https://github.com/intel-lab-lkp/linux/commits/egyszeregy-freemail-hu/drm=
+=3D
+> -nouveau-i2c-rename-aux-c-and-aux-h-to-nvkm_i2c_aux-c-and-nvkm_i2c_aux-h/=
+=3D
+> 20240602-053530
+>
 
-> 2024. 06. 03. 0:08 keltezéssel, Ben Skeggs írta:
->> On 2/6/24 07:22, egyszeregy@freemail.hu wrote:
->>
->>> From: Benjamin Szőke <egyszeregy@freemail.hu>
->>>
->>> The goal is to clean-up Linux repository from AUX file names, because
->>> the use of such file names is prohibited on other operating systems
->>> such as Windows, so the Linux repository cannot be cloned and
->>> edited on them.
->>>
->>> Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
->>> ---
->>> drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild | 2 +-
->>> drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c | 2 +-
->>> drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c | 2 +-
->>> drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c | 2 +-
->>> drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c | 2 +-
->>> drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c | 2 +-
->>>   .../gpu/drm/nouveau/nvkm/subdev/i2c/{aux.c => nvkm_i2c_aux.c}   | 
->>> 2 +-
->>>   .../gpu/drm/nouveau/nvkm/subdev/i2c/{aux.h => nvkm_i2c_aux.h}   | 0
->>> drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c | 2 +-
->>> drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c | 2 +-
->>> drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c | 2 +-
->>>   11 files changed, 10 insertions(+), 10 deletions(-)
->>>   rename drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.c => 
->>> nvkm_i2c_aux.c} (99%)
->>>   rename drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.h => 
->>> nvkm_i2c_aux.h} (100%)
->>
->> NACK on this rename.  No other part of NVKM uses filenames like this. 
->> If anything, auxch.[ch] would be a better choice.
->>
->> Ben.
->
-> Do you mean it would be better to rename them in the following way?
->
-> rename drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.c => auxc.c}
-> rename drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.h => auxh.h}
+oh indeed. Looks like a client problem then. Sorry for the noise.
 
-Not quite.  "aux" refers to DP "AUX CHannels", so, auxch.c and auxch.h 
-are OK names.
-
-
->
->
->>
->>>
->>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild 
->>> b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild
->>> index 819703913a00..c488dfce4392 100644
->>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild
->>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild
->>> @@ -25,7 +25,7 @@ nvkm-y += nvkm/subdev/i2c/busnv50.o
->>>   nvkm-y += nvkm/subdev/i2c/busgf119.o
->>>   nvkm-y += nvkm/subdev/i2c/bit.o
->>> -nvkm-y += nvkm/subdev/i2c/aux.o
->>> +nvkm-y += nvkm/subdev/i2c/nvkm_i2c_aux.o
->>>   nvkm-y += nvkm/subdev/i2c/auxg94.o
->>>   nvkm-y += nvkm/subdev/i2c/auxgf119.o
->>>   nvkm-y += nvkm/subdev/i2c/auxgm200.o
->>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c 
->>> b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
->>> index dd391809fef7..30bf84e77db9 100644
->>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
->>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
->>> @@ -24,7 +24,7 @@
->>>   #define anx9805_pad(p) container_of((p), struct anx9805_pad, base)
->>>   #define anx9805_bus(p) container_of((p), struct anx9805_bus, base)
->>>   #define anx9805_aux(p) container_of((p), struct anx9805_aux, base)
->>> -#include "aux.h"
->>> +#include "nvkm_i2c_aux.h"
->>>   #include "bus.h"
->>>   struct anx9805_pad {
->>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c 
->>> b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
->>> index 47068f6f9c55..9e07ba444ca8 100644
->>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
->>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
->>> @@ -22,7 +22,7 @@
->>>    * Authors: Ben Skeggs <bskeggs@redhat.com>
->>>    */
->>>   #define g94_i2c_aux(p) container_of((p), struct g94_i2c_aux, base)
->>> -#include "aux.h"
->>> +#include "nvkm_i2c_aux.h"
->>>   struct g94_i2c_aux {
->>>       struct nvkm_i2c_aux base;
->>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c 
->>> b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
->>> index dab40cd8fe3a..8709b728c38b 100644
->>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
->>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
->>> @@ -19,7 +19,7 @@
->>>    * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE 
->>> USE OR
->>>    * OTHER DEALINGS IN THE SOFTWARE.
->>>    */
->>> -#include "aux.h"
->>> +#include "nvkm_i2c_aux.h"
->>>   static const struct nvkm_i2c_aux_func
->>>   gf119_i2c_aux = {
->>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c 
->>> b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
->>> index 8bd1d442e465..f40c5709d217 100644
->>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
->>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
->>> @@ -22,7 +22,7 @@
->>>    * Authors: Ben Skeggs <bskeggs@redhat.com>
->>>    */
->>>   #define gm200_i2c_aux(p) container_of((p), struct gm200_i2c_aux, 
->>> base)
->>> -#include "aux.h"
->>> +#include "nvkm_i2c_aux.h"
->>>   struct gm200_i2c_aux {
->>>       struct nvkm_i2c_aux base;
->>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c 
->>> b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
->>> index 976539de4220..736275f0c774 100644
->>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
->>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
->>> @@ -22,7 +22,7 @@
->>>    * Authors: Ben Skeggs
->>>    */
->>>   #include "priv.h"
->>> -#include "aux.h"
->>> +#include "nvkm_i2c_aux.h"
->>>   #include "bus.h"
->>>   #include "pad.h"
->>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c 
->>> b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/nvkm_i2c_aux.c
->>> similarity index 99%
->>> rename from drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c
->>> rename to drivers/gpu/drm/nouveau/nvkm/subdev/i2c/nvkm_i2c_aux.c
->>> index d063d0dc13c5..6b76df02c63a 100644
->>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c
->>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/nvkm_i2c_aux.c
->>> @@ -24,7 +24,7 @@
->>>   #include <linux/string_helpers.h>
->>> -#include "aux.h"
->>> +#include "nvkm_i2c_aux.h"
->>>   #include "pad.h"
->>>   static int
->>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.h 
->>> b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/nvkm_i2c_aux.h
->>> similarity index 100%
->>> rename from drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.h
->>> rename to drivers/gpu/drm/nouveau/nvkm/subdev/i2c/nvkm_i2c_aux.h
->>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c 
->>> b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
->>> index 5904bc5f2d2a..e9c55a57c878 100644
->>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
->>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
->>> @@ -22,7 +22,7 @@
->>>    * Authors: Ben Skeggs
->>>    */
->>>   #include "pad.h"
->>> -#include "aux.h"
->>> +#include "nvkm_i2c_aux.h"
->>>   #include "bus.h"
->>>   void
->>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c 
->>> b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
->>> index 3bc4d0310076..1af64e25d838 100644
->>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
->>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
->>> @@ -22,7 +22,7 @@
->>>    * Authors: Ben Skeggs
->>>    */
->>>   #include "pad.h"
->>> -#include "aux.h"
->>> +#include "nvkm_i2c_aux.h"
->>>   #include "bus.h"
->>>   static const struct nvkm_i2c_pad_func
->>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c 
->>> b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
->>> index 7d417f6a816e..997a5a2146c4 100644
->>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
->>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
->>> @@ -22,7 +22,7 @@
->>>    * Authors: Ben Skeggs
->>>    */
->>>   #include "pad.h"
->>> -#include "aux.h"
->>> +#include "nvkm_i2c_aux.h"
->>>   #include "bus.h"
->>>   static void
->
