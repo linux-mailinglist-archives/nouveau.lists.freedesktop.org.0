@@ -2,79 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E26A28FB087
-	for <lists+nouveau@lfdr.de>; Tue,  4 Jun 2024 12:53:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5046F8FB0E4
+	for <lists+nouveau@lfdr.de>; Tue,  4 Jun 2024 13:16:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6986D10E451;
-	Tue,  4 Jun 2024 10:53:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D398A10E457;
+	Tue,  4 Jun 2024 11:16:34 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="UzrL2JvV";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Lnfd0JGp";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EF05210E452
- for <nouveau@lists.freedesktop.org>; Tue,  4 Jun 2024 10:53:49 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 986F510E457
+ for <nouveau@lists.freedesktop.org>; Tue,  4 Jun 2024 11:16:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1717498428;
+ s=mimecast20190719; t=1717499791;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3n731lZEmsuMv2Jb/pe8kLZmFsTylP7q48pqpRihJU8=;
- b=UzrL2JvVgGUKp2GWIAaer4e2pzhE2oi6A0h4QWmD1/My7//reIJGqVFrvr47K+YyQ6zTX1
- wnmlTGUKUqI3iBb96/vGOOCMTGkR/ITjFfC8mnC5KFF3fmVU6dVITFVbidBSyeJ7aDEzXP
- nH5F6tgSLAQWSFaIZyPGuEHie+5/VvQ=
-Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
- [209.85.208.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=FSJln0T154xham7MKjreTRHjVWgOaKN+ybtldhqmgTo=;
+ b=Lnfd0JGpPIPxVRNmz+tCYw1CpsSZIJxKr1JU74VAq+0a5LYfdae5UW9KI/E8Oae/iCjxSm
+ fudI3zYSa+qE5aFPxZKdEmK1DnY/+yJShzDFnbAChdWZHSIf63SPdCLTOBtZJTAzh4On0Z
+ nn7ZQ0cFwkIDnOSswyx+8qRHiPfZ7Rs=
+Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
+ [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-533-zlXSvVUTNS6Pq4imD8cqVA-1; Tue, 04 Jun 2024 06:53:46 -0400
-X-MC-Unique: zlXSvVUTNS6Pq4imD8cqVA-1
-Received: by mail-lj1-f199.google.com with SMTP id
- 38308e7fff4ca-2eaa77740deso7270811fa.0
- for <nouveau@lists.freedesktop.org>; Tue, 04 Jun 2024 03:53:46 -0700 (PDT)
+ us-mta-265-c70FvsVvOtWjsPX5_Ch-qA-1; Tue, 04 Jun 2024 07:16:29 -0400
+X-MC-Unique: c70FvsVvOtWjsPX5_Ch-qA-1
+Received: by mail-lj1-f198.google.com with SMTP id
+ 38308e7fff4ca-2eaa43ba959so19587171fa.3
+ for <nouveau@lists.freedesktop.org>; Tue, 04 Jun 2024 04:16:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717498424; x=1718103224;
- h=content-transfer-encoding:in-reply-to:organization:from:cc
+ d=1e100.net; s=20230601; t=1717499788; x=1718104588;
+ h=content-transfer-encoding:in-reply-to:organization:cc:from
  :content-language:references:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3n731lZEmsuMv2Jb/pe8kLZmFsTylP7q48pqpRihJU8=;
- b=qFHXEiZexqfNswhkt/b+0Aw8hsMagBpG0LbNmRPfIpkI7aCgyD1gz0FSJK7dKYhTCv
- b2iISBJu2XXEDhJ0UOYEjzzHL17ApKktHmzdZdk0k6ozrjqKEMi+ngzor3cTVetebAkU
- 9ZBHX+MFQM9MyfLVfPasoAaxGaWD2x/3WgWMKv7bhwRs7zaXE+ZlogJajUxPRgxf0uka
- 7p/hBNHiyd5ZDLtyP39SrgP/DLO27h/+SG1xAT6iUxio5ZW+6Ql8jqMUAYk1VZPWptB6
- KvbXmwmBrRc/nHDu5nuk3gGL/aDVwWfVmiJjmI3zwesACr8q6Indu/YCfH96Y8tw/iQU
- quyQ==
-X-Gm-Message-State: AOJu0Yzl2pY2q4DwPYabIKMk8D2dsY5NQmLF9xvEW3jrqpmMeyIiQqNO
- 3lo/LwTLoRvYX+ZYZP612P9HvRW6DcT0QYLki/jscs+GkxWPkZH3MidHW4SrsUXCj3cFSb5M7mv
- Pt2aec216XgN1N8wDPsfZ/ksDLjPIkidCnH/6gkPahl2qpGD0+5+sDk0dWNMJU9GSMBhGhgQ=
-X-Received: by 2002:a2e:8e7c:0:b0:2e9:841a:814d with SMTP id
- 38308e7fff4ca-2ea950e9c37mr75207201fa.21.1717498424601; 
- Tue, 04 Jun 2024 03:53:44 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEiSZtt2QlVhaVo+PNwX3Mb+L9B4iZAxIqPgR9l1xuI8DmZX+wjh7aLDz0J/Z08s6QjvkcZrQ==
-X-Received: by 2002:a2e:8e7c:0:b0:2e9:841a:814d with SMTP id
- 38308e7fff4ca-2ea950e9c37mr75207071fa.21.1717498424152; 
- Tue, 04 Jun 2024 03:53:44 -0700 (PDT)
+ bh=FSJln0T154xham7MKjreTRHjVWgOaKN+ybtldhqmgTo=;
+ b=xLDVjhH4NTlpHxL3+z31ycIaYSFgKGjaL2z4nUY+mxlL6D98ZJN7GzBwhyuigStaAT
+ rseJULbdVlWMljWk6FqyNhPDyFYxD13Cm4bcqmNc9M0YkLHnHNqjK/AVnkH1C1RlwRFM
+ Ii1EHO3OsQVEjqm7jIJCdz9F/3ulkJJsGeW0Oj1pYAIRs/J0awaCuenA99Zc+UY/B9Mh
+ qUxG4yhNydliuTJNrwQaPGpn9pbxy7ZM9vaOCwJfaBRKyhMgy5A/+0Yzxv3zGKb7XHX/
+ bSK4jQ7iDJwmtA/4xzTc6qcmNj2FPgpAdjM4Q2OrkvsivbmxiuFXNUHVziflsw/x9dvr
+ bVoQ==
+X-Gm-Message-State: AOJu0Yyojwa835ikMewgr4UHDiZRpTgzmtcV2SJPgwK6FFPyAP8Uskug
+ uMWWxdI6Vk0fZtvYBTJUW/zlPij6GoKTW2evGRZojP5QXYRO6qwvVsIbEpQWXMR32/A23vrLS4A
+ Rll3sCJXw3AaFV/LQQXtz7GdzeSRDz9Ba05OH3TWtKHAWwn3DWudtNeraLTqQ9Bc=
+X-Received: by 2002:a2e:bea5:0:b0:2e2:b61:aa97 with SMTP id
+ 38308e7fff4ca-2ea951d66e7mr92785161fa.48.1717499788223; 
+ Tue, 04 Jun 2024 04:16:28 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEulSu6FFj7UWNGYjSX4v4nX6aOADiNyM5XT0/DaFilRK2erE4vuZ5xI5mFi42cxLeHn1U6qg==
+X-Received: by 2002:a2e:bea5:0:b0:2e2:b61:aa97 with SMTP id
+ 38308e7fff4ca-2ea951d66e7mr92784971fa.48.1717499787594; 
+ Tue, 04 Jun 2024 04:16:27 -0700 (PDT)
 Received: from [10.32.64.131] (nat-pool-muc-t.redhat.com. [149.14.88.26])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42138682bd7sm102109345e9.46.2024.06.04.03.53.43
+ 5b1f17b1804b1-4213a74f6dcsm86289755e9.18.2024.06.04.04.16.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Jun 2024 03:53:43 -0700 (PDT)
-Message-ID: <440c7463-4611-411a-9270-d41712e5875a@redhat.com>
-Date: Tue, 4 Jun 2024 12:53:42 +0200
+ Tue, 04 Jun 2024 04:16:26 -0700 (PDT)
+Message-ID: <c7d69224-72c6-4340-9511-961bd0a6b202@redhat.com>
+Date: Tue, 4 Jun 2024 13:16:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/34] drm/nouveau: move allocation of root client out of
- nouveau_cli_init()
+Subject: Re: [PATCH 05/34] drm/nouveau: handle limited nvif ioctl in abi16
 To: Ben Skeggs <bskeggs@nvidia.com>
 References: <20240527141959.59193-1-bskeggs@nvidia.com>
- <20240527141959.59193-4-bskeggs@nvidia.com>
-Cc: nouveau@lists.freedesktop.org
+ <20240527141959.59193-6-bskeggs@nvidia.com>
 From: Danilo Krummrich <dakr@redhat.com>
+Cc: nouveau@lists.freedesktop.org
 Organization: RedHat
-In-Reply-To: <20240527141959.59193-4-bskeggs@nvidia.com>
+In-Reply-To: <20240527141959.59193-6-bskeggs@nvidia.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -95,92 +94,657 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On 5/27/24 16:19, Ben Skeggs wrote:
-> drm->master isn't really a nouveau_cli, and is mostly just used to get
-> at an nvif_mmu object to implement a hack around issues with the ioctl
-> interface to nvkm.
+> nouveau_usif.c was already stripped right back a couple of years ago,
+> limiting what userspace could do with it, and now I'd like to remove
+> the nvkm side of these interfaces entirely, in order to make it less
+> of a nightmare to add/change internal APIs in the future.
 > 
-> Later patches in this series will allocate nvif_device/mmu objects in
-> nouveau_drm directly, removing the need for master.
+> Unfortunately.  Userspace uses some of this.
 > 
-> Another patch series will remove the need for the above-mentioned hack
-> entirely.
-
-How does this patch improve the situation for removing the master 
-instance later on?
-
+> Fortunately, userspace only ever ended up using a fraction of the APIs,
+> so I've reimplemented those in a more direct manner, and return -EINVAL
+> to userspace for everything else.
 > 
 > Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 > ---
->   drivers/gpu/drm/nouveau/nouveau_drm.c | 23 +++++++++++++++--------
->   1 file changed, 15 insertions(+), 8 deletions(-)
+>   drivers/gpu/drm/nouveau/Kbuild          |   1 -
+>   drivers/gpu/drm/nouveau/nouveau_abi16.c | 277 ++++++++++++++++++++----
+>   drivers/gpu/drm/nouveau/nouveau_abi16.h |   3 +-
+>   drivers/gpu/drm/nouveau/nouveau_drm.c   |   5 +-
+>   drivers/gpu/drm/nouveau/nouveau_nvif.c  |   1 -
+>   drivers/gpu/drm/nouveau/nouveau_usif.c  | 194 -----------------
+>   drivers/gpu/drm/nouveau/nouveau_usif.h  |  10 -
+>   7 files changed, 242 insertions(+), 249 deletions(-)
+>   delete mode 100644 drivers/gpu/drm/nouveau/nouveau_usif.c
+>   delete mode 100644 drivers/gpu/drm/nouveau/nouveau_usif.h
 > 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> index e6ed68dcef78..25b9c3b19bc0 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> @@ -209,9 +209,11 @@ nouveau_cli_fini(struct nouveau_cli *cli)
->   	nouveau_vmm_fini(&cli->vmm);
->   	nvif_mmu_dtor(&cli->mmu);
->   	nvif_device_dtor(&cli->device);
-> -	mutex_lock(&cli->drm->master.lock);
-> -	nvif_client_dtor(&cli->base);
-> -	mutex_unlock(&cli->drm->master.lock);
-> +	if (cli != &cli->drm->master) {
-> +		mutex_lock(&cli->drm->master.lock);
-> +		nvif_client_dtor(&cli->base);
-> +		mutex_unlock(&cli->drm->master.lock);
-> +	}
+> diff --git a/drivers/gpu/drm/nouveau/Kbuild b/drivers/gpu/drm/nouveau/Kbuild
+> index cf6b3a80c0c8..c3223ec97aff 100644
+> --- a/drivers/gpu/drm/nouveau/Kbuild
+> +++ b/drivers/gpu/drm/nouveau/Kbuild
+> @@ -27,7 +27,6 @@ nouveau-$(CONFIG_COMPAT) += nouveau_ioc32.o
+>   nouveau-$(CONFIG_LEDS_CLASS) += nouveau_led.o
+>   nouveau-y += nouveau_nvif.o
+>   nouveau-$(CONFIG_NOUVEAU_PLATFORM_DRIVER) += nouveau_platform.o
+> -nouveau-y += nouveau_usif.o # userspace <-> nvif
+>   nouveau-y += nouveau_vga.o
+>   
+>   # DRM - memory management
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> index d5fda5e3a4f2..aac923b3cb89 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> @@ -52,6 +52,7 @@ nouveau_abi16(struct drm_file *file_priv)
+>   
+>   			abi16->cli = cli;
+>   			INIT_LIST_HEAD(&abi16->channels);
+> +			INIT_LIST_HEAD(&abi16->objects);
+>   
+>   			/* allocate device object targeting client's default
+>   			 * device (ie. the one that belongs to the fd it
+> @@ -88,6 +89,61 @@ nouveau_abi16_put(struct nouveau_abi16 *abi16, int ret)
+>   	return ret;
 >   }
 >   
->   static int
-> @@ -253,10 +255,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
->   	INIT_LIST_HEAD(&cli->worker);
->   	mutex_init(&cli->lock);
->   
-> -	if (cli == &drm->master) {
-> -		ret = nvif_driver_init(NULL, nouveau_config, nouveau_debug,
-> -				       cli->name, device, &cli->base);
-> -	} else {
-> +	if (cli != &drm->master) {
->   		mutex_lock(&drm->master.lock);
->   		ret = nvif_client_ctor(&drm->master.base, cli->name, device,
->   				       &cli->base);
-> @@ -593,11 +592,16 @@ nouveau_drm_device_init(struct drm_device *dev, struct nvkm_device *nvkm)
->   	nvif_parent_ctor(&nouveau_parent, &drm->parent);
->   	drm->master.base.object.parent = &drm->parent;
->   
-> +	ret = nvif_driver_init(NULL, nouveau_config, nouveau_debug, "drm",
-> +			       nouveau_name(dev), &drm->master.base);
-> +	if (ret)
-> +		goto fail_alloc;
+> +struct nouveau_abi16_obj {
 
-Why move it above alloc_workqueue()?
+Can you please add some documentation on the semantical meaning of this
+structure...
+
+> +	enum nouveau_abi16_obj_type {
+
+...and this enum?
+
+> +		DEVICE,
+> +		ENGOBJ,
+> +	} type;
+> +	u64 object;
+> +
+> +	union {
+> +		struct {
+> +			struct nvif_object object;
+> +		} engobj;
+> +	};
+
+What do we need the anonymous union and struct for?
 
 > +
->   	drm->sched_wq = alloc_workqueue("nouveau_sched_wq_shared", 0,
->   					WQ_MAX_ACTIVE);
->   	if (!drm->sched_wq) {
->   		ret = -ENOMEM;
-> -		goto fail_alloc;
-> +		goto fail_nvif;
->   	}
+> +	struct list_head head;
+
+I'd probably add a comment that this list is / must be protected by the
+client mutex, which implicitly happens though nouveau_abi16_{get,put}().
+
+> +};
+> +
+> +static struct nouveau_abi16_obj *
+> +nouveau_abi16_obj_find(struct nouveau_abi16 *abi16, u64 object)
+> +{
+> +	struct nouveau_abi16_obj *obj;
+> +
+> +	list_for_each_entry(obj, &abi16->objects, head) {
+> +		if (obj->object == object)
+> +			return obj;
+> +	}
+> +
+> +	return NULL;
+> +}
+> +
+> +static void
+> +nouveau_abi16_obj_del(struct nouveau_abi16_obj *obj)
+> +{
+> +	list_del(&obj->head);
+> +	kfree(obj);
+> +}
+> +
+> +static struct nouveau_abi16_obj *
+> +nouveau_abi16_obj_new(struct nouveau_abi16 *abi16, enum nouveau_abi16_obj_type type, u64 object)
+> +{
+> +	struct nouveau_abi16_obj *obj;
+> +
+> +	obj = nouveau_abi16_obj_find(abi16, object);
+> +	if (obj)
+> +		return ERR_PTR(-EEXIST);
+> +
+> +	obj = kzalloc(sizeof(*obj), GFP_KERNEL);
+> +	if (!obj)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	obj->type = type;
+> +	obj->object = object;
+> +	list_add_tail(&obj->head, &abi16->objects);
+> +	return obj;
+> +}
+> +
+>   s32
+>   nouveau_abi16_swclass(struct nouveau_drm *drm)
+>   {
+> @@ -167,6 +223,12 @@ nouveau_abi16_fini(struct nouveau_abi16 *abi16)
+>   {
+>   	struct nouveau_cli *cli = abi16->cli;
+>   	struct nouveau_abi16_chan *chan, *temp;
+> +	struct nouveau_abi16_obj *obj, *tmp;
+> +
+> +	/* cleanup objects */
+> +	list_for_each_entry_safe(obj, tmp, &abi16->objects, head) {
+> +		nouveau_abi16_obj_del(obj);
+> +	}
 >   
->   	ret = nouveau_cli_init(drm, "DRM-master", &drm->master);
-> @@ -674,6 +678,8 @@ nouveau_drm_device_init(struct drm_device *dev, struct nvkm_device *nvkm)
->   	nouveau_cli_fini(&drm->master);
->   fail_wq:
->   	destroy_workqueue(drm->sched_wq);
-> +fail_nvif:
-> +	nvif_client_dtor(&drm->master.base);
->   fail_alloc:
->   	nvif_parent_dtor(&drm->parent);
->   	kfree(drm);
-> @@ -728,6 +734,7 @@ nouveau_drm_device_fini(struct drm_device *dev)
->   	nouveau_cli_fini(&drm->client);
->   	nouveau_cli_fini(&drm->master);
->   	destroy_workqueue(drm->sched_wq);
-> +	nvif_client_dtor(&drm->master.base);
->   	nvif_parent_dtor(&drm->parent);
->   	mutex_destroy(&drm->clients_lock);
->   	kfree(drm);
+>   	/* cleanup channels */
+>   	list_for_each_entry_safe(chan, temp, &abi16->channels, head) {
+> @@ -455,44 +517,6 @@ nouveau_abi16_chan(struct nouveau_abi16 *abi16, int channel)
+>   	return NULL;
+>   }
+>   
+> -int
+> -nouveau_abi16_usif(struct drm_file *file_priv, void *data, u32 size)
+> -{
+> -	union {
+> -		struct nvif_ioctl_v0 v0;
+> -	} *args = data;
+> -	struct nouveau_abi16_chan *chan;
+> -	struct nouveau_abi16 *abi16;
+> -	int ret = -ENOSYS;
+> -
+> -	if (!(ret = nvif_unpack(ret, &data, &size, args->v0, 0, 0, true))) {
+> -		switch (args->v0.type) {
+> -		case NVIF_IOCTL_V0_NEW:
+> -		case NVIF_IOCTL_V0_MTHD:
+> -		case NVIF_IOCTL_V0_SCLASS:
+> -			break;
+> -		default:
+> -			return -EACCES;
+> -		}
+> -	} else
+> -		return ret;
+> -
+> -	if (!(abi16 = nouveau_abi16(file_priv)))
+> -		return -ENOMEM;
+> -
+> -	if (args->v0.token != ~0ULL) {
+> -		if (!(chan = nouveau_abi16_chan(abi16, args->v0.token)))
+> -			return -EINVAL;
+> -		args->v0.object = nvif_handle(&chan->chan->user);
+> -		args->v0.owner  = NVIF_IOCTL_V0_OWNER_ANY;
+> -		return 0;
+> -	}
+> -
+> -	args->v0.object = nvif_handle(&abi16->device.object);
+> -	args->v0.owner  = NVIF_IOCTL_V0_OWNER_ANY;
+> -	return 0;
+> -}
+> -
+>   int
+>   nouveau_abi16_ioctl_channel_free(ABI16_IOCTL_ARGS)
+>   {
+> @@ -702,3 +726,180 @@ nouveau_abi16_ioctl_gpuobj_free(ABI16_IOCTL_ARGS)
+>   
+>   	return nouveau_abi16_put(abi16, ret);
+>   }
+> +
+> +static int
+> +nouveau_abi16_ioctl_mthd(struct nouveau_abi16 *abi16, struct nvif_ioctl_v0 *ioctl, u32 argc)
+> +{
+> +	struct nouveau_cli *cli = abi16->cli;
+> +	struct nvif_ioctl_mthd_v0 *args;
+> +	struct nouveau_abi16_obj *obj;
+> +	struct nv_device_info_v0 *info;
+> +
+> +	if (ioctl->route || argc < sizeof(*args))
+> +		return -EINVAL;
+> +	args = (void *)ioctl->data;
+> +	argc -= sizeof(*args);
+> +
+> +	obj = nouveau_abi16_obj_find(abi16, ioctl->object);
+> +	if (!obj || obj->type != DEVICE)
+> +		return -EINVAL;
+> +
+> +	if (args->method != NV_DEVICE_V0_INFO ||
+> +	    argc != sizeof(*info))
+> +		return -EINVAL;
+> +
+> +	info = (void *)args->data;
+> +	if (info->version != 0x00)
+> +		return -EINVAL;
+> +
+> +	info = &cli->device.info;
+> +	memcpy(args->data, info, sizeof(*info));
+> +	return 0;
+> +}
+> +
+> +static int
+> +nouveau_abi16_ioctl_del(struct nouveau_abi16 *abi16, struct nvif_ioctl_v0 *ioctl, u32 argc)
+> +{
+> +	struct nouveau_abi16_obj *obj;
+> +
+> +	if (ioctl->route || argc)
+> +		return -EINVAL;
+> +
+> +	obj = nouveau_abi16_obj_find(abi16, ioctl->object);
+> +	if (obj)
+> +		nouveau_abi16_obj_del(obj);
+> +
+> +	return 0;
+> +}
+> +
+> +static int
+> +nouveau_abi16_ioctl_new(struct nouveau_abi16 *abi16, struct nvif_ioctl_v0 *ioctl, u32 argc)
+> +{
+> +	struct nvif_ioctl_new_v0 *args;
+> +	struct nouveau_abi16_chan *chan;
+> +	struct nouveau_abi16_obj *obj;
+> +	int ret;
+> +
+> +	if (argc < sizeof(*args))
+> +		return -EINVAL;
+> +	args = (void *)ioctl->data;
+> +	argc -= sizeof(*args);
+> +
+> +	if (args->version != 0)
+> +		return -EINVAL;
+> +
+> +	if (!ioctl->route) {
+> +		if (ioctl->object || args->oclass != NV_DEVICE)
+> +			return -EINVAL;
+> +
+> +		obj = nouveau_abi16_obj_new(abi16, DEVICE, args->object);
+> +		if (IS_ERR(obj))
+> +			return PTR_ERR(obj);
+> +
+> +		return 0;
+> +	}
+> +
+> +	chan = nouveau_abi16_chan(abi16, ioctl->token);
+> +	if (!chan)
+> +		return -EINVAL;
+> +
+> +	obj = nouveau_abi16_obj_new(abi16, ENGOBJ, args->object);
+> +	if (IS_ERR(obj))
+> +		return PTR_ERR(obj);
+> +
+> +	ret = nvif_object_ctor(&chan->chan->user, "abi16EngObj", args->handle, args->oclass,
+> +			       NULL, 0, &obj->engobj.object);
+> +	if (ret)
+> +		nouveau_abi16_obj_del(obj);
+> +
+> +	return ret;
+> +}
+> +
+> +static int
+> +nouveau_abi16_ioctl_sclass(struct nouveau_abi16 *abi16, struct nvif_ioctl_v0 *ioctl, u32 argc)
+> +{
+> +	struct nvif_ioctl_sclass_v0 *args;
+> +	struct nouveau_abi16_chan *chan;
+> +	struct nvif_sclass *sclass;
+> +	int ret;
+> +
+> +	if (!ioctl->route || argc < sizeof(*args))
+> +		return -EINVAL;
+> +	args = (void *)ioctl->data;
+> +	argc -= sizeof(*args);
+> +
+> +	if (argc != args->count * sizeof(args->oclass[0]))
+> +		return -EINVAL;
+> +
+> +	chan = nouveau_abi16_chan(abi16, ioctl->token);
+> +	if (!chan)
+> +		return -EINVAL;
+> +
+> +	ret = nvif_object_sclass_get(&chan->chan->user, &sclass);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	for (int i = 0; i < min_t(u8, args->count, ret); i++) {
+> +		args->oclass[i].oclass = sclass[i].oclass;
+> +		args->oclass[i].minver = sclass[i].minver;
+> +		args->oclass[i].maxver = sclass[i].maxver;
+> +	}
+> +	args->count = ret;
+> +
+> +	nvif_object_sclass_put(&sclass);
+> +	return 0;
+> +}
+> +
+> +int
+> +nouveau_abi16_ioctl(struct drm_file *filp, void __user *user, u32 size)
+> +{
+> +	struct nvif_ioctl_v0 *ioctl;
+> +	struct nouveau_abi16 *abi16;
+> +	u32 argc = size;
+> +	int ret;
+> +
+> +	if (argc < sizeof(*ioctl))
+> +		return -EINVAL;
+> +	argc -= sizeof(*ioctl);
+> +
+> +	ioctl = kmalloc(size, GFP_KERNEL);
+> +	if (!ioctl)
+> +		return -ENOMEM;
+> +
+> +	ret = -EFAULT;
+> +	if (copy_from_user(ioctl, user, size))
+> +		goto done_free;
+> +
+> +	if (ioctl->version != 0x00 ||
+> +	    (ioctl->route && ioctl->route != 0xff)) {
+> +		ret = -EINVAL;
+> +		goto done_free;
+> +	}
+> +
+> +	abi16 = nouveau_abi16_get(filp);
+> +	if (unlikely(!abi16)) {
+> +		ret = -ENOMEM;
+> +		goto done_free;
+> +	}
+> +
+> +	switch (ioctl->type) {
+> +	case NVIF_IOCTL_V0_SCLASS: ret = nouveau_abi16_ioctl_sclass(abi16, ioctl, argc); break;
+> +	case NVIF_IOCTL_V0_NEW   : ret = nouveau_abi16_ioctl_new   (abi16, ioctl, argc); break;
+> +	case NVIF_IOCTL_V0_DEL   : ret = nouveau_abi16_ioctl_del   (abi16, ioctl, argc); break;
+> +	case NVIF_IOCTL_V0_MTHD  : ret = nouveau_abi16_ioctl_mthd  (abi16, ioctl, argc); break;
+> +	default:
+> +		ret = -EINVAL;
+> +		break;
+> +	}
+> +
+> +	nouveau_abi16_put(abi16, 0);
+> +
+> +	if (ret == 0) {
+
+NIT: Not a strong preference, but could just write:
+
+if (!nouveau_abi16_put(abi16, ret)) {
+
+> +		if (copy_to_user(user, ioctl, size))
+> +			ret = -EFAULT;
+> +	}
+> +
+> +done_free:
+> +	kfree(ioctl);
+> +	return ret;
+> +}
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.h b/drivers/gpu/drm/nouveau/nouveau_abi16.h
+> index 0a9121e63143..75a883a44e04 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.h
+> @@ -34,13 +34,14 @@ struct nouveau_abi16 {
+>   	struct nvif_device device;
+>   	struct list_head channels;
+>   	u64 handles;
+> +	struct list_head objects;
+>   };
+>   
+>   struct nouveau_abi16 *nouveau_abi16_get(struct drm_file *);
+>   int  nouveau_abi16_put(struct nouveau_abi16 *, int);
+>   void nouveau_abi16_fini(struct nouveau_abi16 *);
+>   s32  nouveau_abi16_swclass(struct nouveau_drm *);
+> -int  nouveau_abi16_usif(struct drm_file *, void *data, u32 size);
+> +int nouveau_abi16_ioctl(struct drm_file *, void __user *user, u32 size);
+>   
+>   #define NOUVEAU_GEM_DOMAIN_VRAM      (1 << 1)
+>   #define NOUVEAU_GEM_DOMAIN_GART      (1 << 2)
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> index 25b9c3b19bc0..e1a7475db430 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> @@ -63,7 +63,6 @@
+>   #include "nouveau_abi16.h"
+>   #include "nouveau_fence.h"
+>   #include "nouveau_debugfs.h"
+> -#include "nouveau_usif.h"
+>   #include "nouveau_connector.h"
+>   #include "nouveau_platform.h"
+>   #include "nouveau_svm.h"
+> @@ -200,7 +199,6 @@ nouveau_cli_fini(struct nouveau_cli *cli)
+>   	flush_work(&cli->work);
+>   	WARN_ON(!list_empty(&cli->worker));
+>   
+> -	usif_client_fini(cli);
+>   	if (cli->sched)
+>   		nouveau_sched_destroy(&cli->sched);
+>   	if (uvmm)
+> @@ -249,7 +247,6 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
+>   	snprintf(cli->name, sizeof(cli->name), "%s", sname);
+>   	cli->drm = drm;
+>   	mutex_init(&cli->mutex);
+> -	usif_client_init(cli);
+>   
+>   	INIT_WORK(&cli->work, nouveau_cli_work);
+>   	INIT_LIST_HEAD(&cli->worker);
+> @@ -1246,7 +1243,7 @@ nouveau_drm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+>   
+>   	switch (_IOC_NR(cmd) - DRM_COMMAND_BASE) {
+>   	case DRM_NOUVEAU_NVIF:
+> -		ret = usif_ioctl(filp, (void __user *)arg, _IOC_SIZE(cmd));
+> +		ret = nouveau_abi16_ioctl(filp, (void __user *)arg, _IOC_SIZE(cmd));
+>   		break;
+>   	default:
+>   		ret = drm_ioctl(file, cmd, arg);
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_nvif.c b/drivers/gpu/drm/nouveau/nouveau_nvif.c
+> index 1d49ebdfd5dc..9a7e3f64b79f 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_nvif.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_nvif.c
+> @@ -35,7 +35,6 @@
+>   #include <nvif/ioctl.h>
+>   
+>   #include "nouveau_drv.h"
+> -#include "nouveau_usif.h"
+>   
+>   static void
+>   nvkm_client_unmap(void *priv, void __iomem *ptr, u32 size)
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_usif.c b/drivers/gpu/drm/nouveau/nouveau_usif.c
+> deleted file mode 100644
+> index 002d1479ba89..000000000000
+> --- a/drivers/gpu/drm/nouveau/nouveau_usif.c
+> +++ /dev/null
+> @@ -1,194 +0,0 @@
+> -/*
+> - * Copyright 2014 Red Hat Inc.
+> - *
+> - * Permission is hereby granted, free of charge, to any person obtaining a
+> - * copy of this software and associated documentation files (the "Software"),
+> - * to deal in the Software without restriction, including without limitation
+> - * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+> - * and/or sell copies of the Software, and to permit persons to whom the
+> - * Software is furnished to do so, subject to the following conditions:
+> - *
+> - * The above copyright notice and this permission notice shall be included in
+> - * all copies or substantial portions of the Software.
+> - *
+> - * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> - * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> - * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+> - * THE COPYRIGHT HOLDER(S) OR AUTHOR(S) BE LIABLE FOR ANY CLAIM, DAMAGES OR
+> - * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+> - * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+> - * OTHER DEALINGS IN THE SOFTWARE.
+> - *
+> - * Authors: Ben Skeggs <bskeggs@redhat.com>
+> - */
+> -
+> -#include "nouveau_drv.h"
+> -#include "nouveau_usif.h"
+> -#include "nouveau_abi16.h"
+> -
+> -#include <nvif/unpack.h>
+> -#include <nvif/client.h>
+> -#include <nvif/ioctl.h>
+> -
+> -#include <nvif/class.h>
+> -#include <nvif/cl0080.h>
+> -
+> -struct usif_object {
+> -	struct list_head head;
+> -	u8  route;
+> -	u64 token;
+> -};
+> -
+> -static void
+> -usif_object_dtor(struct usif_object *object)
+> -{
+> -	list_del(&object->head);
+> -	kfree(object);
+> -}
+> -
+> -static int
+> -usif_object_new(struct drm_file *f, void *data, u32 size, void *argv, u32 argc, bool parent_abi16)
+> -{
+> -	struct nouveau_cli *cli = nouveau_cli(f);
+> -	struct nvif_client *client = &cli->base;
+> -	union {
+> -		struct nvif_ioctl_new_v0 v0;
+> -	} *args = data;
+> -	struct usif_object *object;
+> -	int ret = -ENOSYS;
+> -
+> -	if ((ret = nvif_unpack(ret, &data, &size, args->v0, 0, 0, true)))
+> -		return ret;
+> -
+> -	switch (args->v0.oclass) {
+> -	case NV_DMA_FROM_MEMORY:
+> -	case NV_DMA_TO_MEMORY:
+> -	case NV_DMA_IN_MEMORY:
+> -		return -EINVAL;
+> -	case NV_DEVICE: {
+> -		union {
+> -			struct nv_device_v0 v0;
+> -		} *args = data;
+> -
+> -		if ((ret = nvif_unpack(ret, &data, &size, args->v0, 0, 0, false)))
+> -			return ret;
+> -
+> -		args->v0.priv = false;
+> -		break;
+> -	}
+> -	default:
+> -		if (!parent_abi16)
+> -			return -EINVAL;
+> -		break;
+> -	}
+> -
+> -	if (!(object = kmalloc(sizeof(*object), GFP_KERNEL)))
+> -		return -ENOMEM;
+> -	list_add(&object->head, &cli->objects);
+> -
+> -	object->route = args->v0.route;
+> -	object->token = args->v0.token;
+> -	args->v0.route = NVDRM_OBJECT_USIF;
+> -	args->v0.token = (unsigned long)(void *)object;
+> -	ret = nvif_client_ioctl(client, argv, argc);
+> -	if (ret) {
+> -		usif_object_dtor(object);
+> -		return ret;
+> -	}
+> -
+> -	args->v0.token = object->token;
+> -	args->v0.route = object->route;
+> -	return 0;
+> -}
+> -
+> -int
+> -usif_ioctl(struct drm_file *filp, void __user *user, u32 argc)
+> -{
+> -	struct nouveau_cli *cli = nouveau_cli(filp);
+> -	struct nvif_client *client = &cli->base;
+> -	void *data = kmalloc(argc, GFP_KERNEL);
+> -	u32   size = argc;
+> -	union {
+> -		struct nvif_ioctl_v0 v0;
+> -	} *argv = data;
+> -	struct usif_object *object;
+> -	bool abi16 = false;
+> -	u8 owner;
+> -	int ret;
+> -
+> -	if (ret = -ENOMEM, !argv)
+> -		goto done;
+> -	if (ret = -EFAULT, copy_from_user(argv, user, size))
+> -		goto done;
+> -
+> -	if (!(ret = nvif_unpack(-ENOSYS, &data, &size, argv->v0, 0, 0, true))) {
+> -		/* block access to objects not created via this interface */
+> -		owner = argv->v0.owner;
+> -		if (argv->v0.object == 0ULL &&
+> -		    argv->v0.type != NVIF_IOCTL_V0_DEL)
+> -			argv->v0.owner = NVDRM_OBJECT_ANY; /* except client */
+> -		else
+> -			argv->v0.owner = NVDRM_OBJECT_USIF;
+> -	} else
+> -		goto done;
+> -
+> -	/* USIF slightly abuses some return-only ioctl members in order
+> -	 * to provide interoperability with the older ABI16 objects
+> -	 */
+> -	mutex_lock(&cli->mutex);
+> -	if (argv->v0.route) {
+> -		if (ret = -EINVAL, argv->v0.route == 0xff)
+> -			ret = nouveau_abi16_usif(filp, argv, argc);
+> -		if (ret) {
+> -			mutex_unlock(&cli->mutex);
+> -			goto done;
+> -		}
+> -
+> -		abi16 = true;
+> -	}
+> -
+> -	switch (argv->v0.type) {
+> -	case NVIF_IOCTL_V0_NEW:
+> -		ret = usif_object_new(filp, data, size, argv, argc, abi16);
+> -		break;
+> -	default:
+> -		ret = nvif_client_ioctl(client, argv, argc);
+> -		break;
+> -	}
+> -	if (argv->v0.route == NVDRM_OBJECT_USIF) {
+> -		object = (void *)(unsigned long)argv->v0.token;
+> -		argv->v0.route = object->route;
+> -		argv->v0.token = object->token;
+> -		if (ret == 0 && argv->v0.type == NVIF_IOCTL_V0_DEL) {
+> -			list_del(&object->head);
+> -			kfree(object);
+> -		}
+> -	} else {
+> -		argv->v0.route = NVIF_IOCTL_V0_ROUTE_HIDDEN;
+> -		argv->v0.token = 0;
+> -	}
+> -	argv->v0.owner = owner;
+> -	mutex_unlock(&cli->mutex);
+> -
+> -	if (copy_to_user(user, argv, argc))
+> -		ret = -EFAULT;
+> -done:
+> -	kfree(argv);
+> -	return ret;
+> -}
+> -
+> -void
+> -usif_client_fini(struct nouveau_cli *cli)
+> -{
+> -	struct usif_object *object, *otemp;
+> -
+> -	list_for_each_entry_safe(object, otemp, &cli->objects, head) {
+> -		usif_object_dtor(object);
+> -	}
+> -}
+> -
+> -void
+> -usif_client_init(struct nouveau_cli *cli)
+> -{
+> -	INIT_LIST_HEAD(&cli->objects);
+> -}
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_usif.h b/drivers/gpu/drm/nouveau/nouveau_usif.h
+> deleted file mode 100644
+> index dc90d4a9d0d9..000000000000
+> --- a/drivers/gpu/drm/nouveau/nouveau_usif.h
+> +++ /dev/null
+> @@ -1,10 +0,0 @@
+> -/* SPDX-License-Identifier: MIT */
+> -#ifndef __NOUVEAU_USIF_H__
+> -#define __NOUVEAU_USIF_H__
+> -
+> -void usif_client_init(struct nouveau_cli *);
+> -void usif_client_fini(struct nouveau_cli *);
+> -int  usif_ioctl(struct drm_file *, void __user *, u32);
+> -int  usif_notify(const void *, u32, const void *, u32);
+> -
+> -#endif
 
