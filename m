@@ -2,79 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 885AA8FAFBF
-	for <lists+nouveau@lfdr.de>; Tue,  4 Jun 2024 12:20:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E26A28FB087
+	for <lists+nouveau@lfdr.de>; Tue,  4 Jun 2024 12:53:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0597910E407;
-	Tue,  4 Jun 2024 10:20:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6986D10E451;
+	Tue,  4 Jun 2024 10:53:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="NTRqDD2U";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="UzrL2JvV";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 673B110E407
- for <nouveau@lists.freedesktop.org>; Tue,  4 Jun 2024 10:20:26 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EF05210E452
+ for <nouveau@lists.freedesktop.org>; Tue,  4 Jun 2024 10:53:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1717496425;
+ s=mimecast20190719; t=1717498428;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=fGeeKgYU6rkn2OXAYfrJvAaOBlgojp5nTaR7J9U6cY4=;
- b=NTRqDD2Uczvyo/ZsiBqHdvTXpIu28dtoRFoeqz+VtzemkTaRljSDuXBZMF2atRMUTdoPr1
- APrkNaLmBI4xgG+VAtkSxdOMzBsRiKqs0tbCiwdyrwXiXqCjIJuE86QO1VxYKznYVPBz4C
- tNwdHcnzFt9MISOcybb5CPn+Q+lBMDk=
-Received: from mail-oi1-f197.google.com (mail-oi1-f197.google.com
- [209.85.167.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=3n731lZEmsuMv2Jb/pe8kLZmFsTylP7q48pqpRihJU8=;
+ b=UzrL2JvVgGUKp2GWIAaer4e2pzhE2oi6A0h4QWmD1/My7//reIJGqVFrvr47K+YyQ6zTX1
+ wnmlTGUKUqI3iBb96/vGOOCMTGkR/ITjFfC8mnC5KFF3fmVU6dVITFVbidBSyeJ7aDEzXP
+ nH5F6tgSLAQWSFaIZyPGuEHie+5/VvQ=
+Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
+ [209.85.208.199]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-593-PsmU0D6cNY6HtSvjQna6sQ-1; Tue, 04 Jun 2024 06:20:24 -0400
-X-MC-Unique: PsmU0D6cNY6HtSvjQna6sQ-1
-Received: by mail-oi1-f197.google.com with SMTP id
- 5614622812f47-3d1de7d29d9so1011336b6e.2
- for <nouveau@lists.freedesktop.org>; Tue, 04 Jun 2024 03:20:23 -0700 (PDT)
+ us-mta-533-zlXSvVUTNS6Pq4imD8cqVA-1; Tue, 04 Jun 2024 06:53:46 -0400
+X-MC-Unique: zlXSvVUTNS6Pq4imD8cqVA-1
+Received: by mail-lj1-f199.google.com with SMTP id
+ 38308e7fff4ca-2eaa77740deso7270811fa.0
+ for <nouveau@lists.freedesktop.org>; Tue, 04 Jun 2024 03:53:46 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717496423; x=1718101223;
- h=content-transfer-encoding:in-reply-to:organization:cc:from
+ d=1e100.net; s=20230601; t=1717498424; x=1718103224;
+ h=content-transfer-encoding:in-reply-to:organization:from:cc
  :content-language:references:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=fGeeKgYU6rkn2OXAYfrJvAaOBlgojp5nTaR7J9U6cY4=;
- b=jhDppdfPed2wEtQSjMI8N9cpRaVxYUjEHModS9WJIxhO3EgTCIWqcovpHm1iAkte8X
- PLYWkZgcskFmyVMxd1fmGuORwOfxv6eZ3O2eY1LPMAoWSIr5m+OAxY1SblB5/qXkgFqA
- mZQSg7Jw2o8Aj70Z7ievWpGJI8xroa859yBKwzjnIq5vXScqn2MTocIcCBHvHOtt3VTI
- XG0W+F3y82Eb6/1kyPYjX/1G8gJc2zFToE1ri3sgKGNx/JWgWGizGb9511oXgJUok73u
- doe8DuOAkAR1kH7OrdTOvuyRDf8R4EtnJLeKKFDs01KB3NLg0CvJq7KKDGUf8uqWOE8Z
- XUVg==
-X-Gm-Message-State: AOJu0YyDtYHX2dt3oNuRWC+NjFqiJo3o1DAGrZArvE26O46vjVLQoSoe
- O+pYtWV2MqzWFSBf7renOAMRxwptEz1BreZ+s/qUUgHW0TLnwoKR9o5wYjiAJBybkCAo5tMi2O0
- GeuFyWY9pD2N3ztEgkCygzXVepitsugGH+gzmmxfYfqcbarCQoPhzvuuqBYnel3k=
-X-Received: by 2002:a05:6808:200e:b0:3c9:6e4f:eeec with SMTP id
- 5614622812f47-3d1e35b9bebmr15216387b6e.37.1717496423248; 
- Tue, 04 Jun 2024 03:20:23 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IG7b1NEfWuSdjph1A3AnzmaFnY4z0KlpzRje8XWKH/C5RLwuwVSQNAl1J0KMtXuIANnqEywQA==
-X-Received: by 2002:a05:6808:200e:b0:3c9:6e4f:eeec with SMTP id
- 5614622812f47-3d1e35b9bebmr15216366b6e.37.1717496422763; 
- Tue, 04 Jun 2024 03:20:22 -0700 (PDT)
+ bh=3n731lZEmsuMv2Jb/pe8kLZmFsTylP7q48pqpRihJU8=;
+ b=qFHXEiZexqfNswhkt/b+0Aw8hsMagBpG0LbNmRPfIpkI7aCgyD1gz0FSJK7dKYhTCv
+ b2iISBJu2XXEDhJ0UOYEjzzHL17ApKktHmzdZdk0k6ozrjqKEMi+ngzor3cTVetebAkU
+ 9ZBHX+MFQM9MyfLVfPasoAaxGaWD2x/3WgWMKv7bhwRs7zaXE+ZlogJajUxPRgxf0uka
+ 7p/hBNHiyd5ZDLtyP39SrgP/DLO27h/+SG1xAT6iUxio5ZW+6Ql8jqMUAYk1VZPWptB6
+ KvbXmwmBrRc/nHDu5nuk3gGL/aDVwWfVmiJjmI3zwesACr8q6Indu/YCfH96Y8tw/iQU
+ quyQ==
+X-Gm-Message-State: AOJu0Yzl2pY2q4DwPYabIKMk8D2dsY5NQmLF9xvEW3jrqpmMeyIiQqNO
+ 3lo/LwTLoRvYX+ZYZP612P9HvRW6DcT0QYLki/jscs+GkxWPkZH3MidHW4SrsUXCj3cFSb5M7mv
+ Pt2aec216XgN1N8wDPsfZ/ksDLjPIkidCnH/6gkPahl2qpGD0+5+sDk0dWNMJU9GSMBhGhgQ=
+X-Received: by 2002:a2e:8e7c:0:b0:2e9:841a:814d with SMTP id
+ 38308e7fff4ca-2ea950e9c37mr75207201fa.21.1717498424601; 
+ Tue, 04 Jun 2024 03:53:44 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEiSZtt2QlVhaVo+PNwX3Mb+L9B4iZAxIqPgR9l1xuI8DmZX+wjh7aLDz0J/Z08s6QjvkcZrQ==
+X-Received: by 2002:a2e:8e7c:0:b0:2e9:841a:814d with SMTP id
+ 38308e7fff4ca-2ea950e9c37mr75207071fa.21.1717498424152; 
+ Tue, 04 Jun 2024 03:53:44 -0700 (PDT)
 Received: from [10.32.64.131] (nat-pool-muc-t.redhat.com. [149.14.88.26])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-44009a2902csm27372401cf.38.2024.06.04.03.20.21
+ 5b1f17b1804b1-42138682bd7sm102109345e9.46.2024.06.04.03.53.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Jun 2024 03:20:22 -0700 (PDT)
-Message-ID: <56280b42-52b2-4233-b38f-b4864ea65633@redhat.com>
-Date: Tue, 4 Jun 2024 12:20:20 +0200
+ Tue, 04 Jun 2024 03:53:43 -0700 (PDT)
+Message-ID: <440c7463-4611-411a-9270-d41712e5875a@redhat.com>
+Date: Tue, 4 Jun 2024 12:53:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/34] drm/nouveau: store nvkm_device pointer in
- nouveau_drm
+Subject: Re: [PATCH 03/34] drm/nouveau: move allocation of root client out of
+ nouveau_cli_init()
 To: Ben Skeggs <bskeggs@nvidia.com>
 References: <20240527141959.59193-1-bskeggs@nvidia.com>
- <20240527141959.59193-3-bskeggs@nvidia.com>
-From: Danilo Krummrich <dakr@redhat.com>
+ <20240527141959.59193-4-bskeggs@nvidia.com>
 Cc: nouveau@lists.freedesktop.org
+From: Danilo Krummrich <dakr@redhat.com>
 Organization: RedHat
-In-Reply-To: <20240527141959.59193-3-bskeggs@nvidia.com>
+In-Reply-To: <20240527141959.59193-4-bskeggs@nvidia.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -95,99 +95,92 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On 5/27/24 16:19, Ben Skeggs wrote:
-> There's various different places in the drm code that get at the
-> nvkm_device via various creative (and not very type-safe) means.
+> drm->master isn't really a nouveau_cli, and is mostly just used to get
+> at an nvif_mmu object to implement a hack around issues with the ioctl
+> interface to nvkm.
 > 
-> One of those being via nvif_device.object.priv.
+> Later patches in this series will allocate nvif_device/mmu objects in
+> nouveau_drm directly, removing the need for master.
 > 
-> Another patch series is going to entirely remove the ioctl-like
-> interfaces beween the drm code and nvkm, and that field will no
-> longer exist.
-> 
-> This provides a safer replacement for accessing the nvkm_device,
-> and will used more in upcoming patches to cleanup other cases.
+> Another patch series will remove the need for the above-mentioned hack
+> entirely.
+
+How does this patch improve the situation for removing the master 
+instance later on?
+
 > 
 > Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 > ---
->   drivers/gpu/drm/nouveau/nouveau_drm.c | 13 +++++--------
->   drivers/gpu/drm/nouveau/nouveau_drv.h |  1 +
->   2 files changed, 6 insertions(+), 8 deletions(-)
+>   drivers/gpu/drm/nouveau/nouveau_drm.c | 23 +++++++++++++++--------
+>   1 file changed, 15 insertions(+), 8 deletions(-)
 > 
 > diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> index c37798b507ea..e6ed68dcef78 100644
+> index e6ed68dcef78..25b9c3b19bc0 100644
 > --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
 > +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> @@ -579,7 +579,7 @@ nouveau_parent = {
->   };
+> @@ -209,9 +209,11 @@ nouveau_cli_fini(struct nouveau_cli *cli)
+>   	nouveau_vmm_fini(&cli->vmm);
+>   	nvif_mmu_dtor(&cli->mmu);
+>   	nvif_device_dtor(&cli->device);
+> -	mutex_lock(&cli->drm->master.lock);
+> -	nvif_client_dtor(&cli->base);
+> -	mutex_unlock(&cli->drm->master.lock);
+> +	if (cli != &cli->drm->master) {
+> +		mutex_lock(&cli->drm->master.lock);
+> +		nvif_client_dtor(&cli->base);
+> +		mutex_unlock(&cli->drm->master.lock);
+> +	}
+>   }
 >   
 >   static int
-> -nouveau_drm_device_init(struct drm_device *dev)
-> +nouveau_drm_device_init(struct drm_device *dev, struct nvkm_device *nvkm)
->   {
->   	struct nouveau_drm *drm;
->   	int ret;
-> @@ -588,6 +588,7 @@ nouveau_drm_device_init(struct drm_device *dev)
->   		return -ENOMEM;
->   	dev->dev_private = drm;
->   	drm->dev = dev;
-> +	drm->nvkm = nvkm;
+> @@ -253,10 +255,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
+>   	INIT_LIST_HEAD(&cli->worker);
+>   	mutex_init(&cli->lock);
 >   
+> -	if (cli == &drm->master) {
+> -		ret = nvif_driver_init(NULL, nouveau_config, nouveau_debug,
+> -				       cli->name, device, &cli->base);
+> -	} else {
+> +	if (cli != &drm->master) {
+>   		mutex_lock(&drm->master.lock);
+>   		ret = nvif_client_ctor(&drm->master.base, cli->name, device,
+>   				       &cli->base);
+> @@ -593,11 +592,16 @@ nouveau_drm_device_init(struct drm_device *dev, struct nvkm_device *nvkm)
 >   	nvif_parent_ctor(&nouveau_parent, &drm->parent);
 >   	drm->master.base.object.parent = &drm->parent;
-> @@ -830,7 +831,7 @@ static int nouveau_drm_probe(struct pci_dev *pdev,
 >   
->   	pci_set_drvdata(pdev, drm_dev);
->   
-> -	ret = nouveau_drm_device_init(drm_dev);
-> +	ret = nouveau_drm_device_init(drm_dev, device);
+> +	ret = nvif_driver_init(NULL, nouveau_config, nouveau_debug, "drm",
+> +			       nouveau_name(dev), &drm->master.base);
+> +	if (ret)
+> +		goto fail_alloc;
 
-NIT (and actually not directly related to this patch): It seems that we
-randomly switch between 'dev', 'drm_dev' for struct drm_device and
-'device', 'nvkm' for nvkm_device. Since this is a cleanup series, mind
-adding a patch to get this straight?
+Why move it above alloc_workqueue()?
 
->   	if (ret)
->   		goto fail_pci;
->   
-> @@ -861,14 +862,10 @@ void
->   nouveau_drm_device_remove(struct drm_device *dev)
->   {
->   	struct nouveau_drm *drm = nouveau_drm(dev);
-> -	struct nvkm_client *client;
-> -	struct nvkm_device *device;
-> +	struct nvkm_device *device = drm->nvkm;
->   
->   	drm_dev_unplug(dev);
->   
-> -	client = nvxx_client(&drm->client.base);
-> -	device = nvkm_device_find(client->device);
-> -
->   	nouveau_drm_device_fini(dev);
->   	drm_dev_put(dev);
->   	nvkm_device_del(&device);
-> @@ -1376,7 +1373,7 @@ nouveau_platform_device_create(const struct nvkm_device_tegra_func *func,
->   		goto err_free;
+> +
+>   	drm->sched_wq = alloc_workqueue("nouveau_sched_wq_shared", 0,
+>   					WQ_MAX_ACTIVE);
+>   	if (!drm->sched_wq) {
+>   		ret = -ENOMEM;
+> -		goto fail_alloc;
+> +		goto fail_nvif;
 >   	}
 >   
-> -	err = nouveau_drm_device_init(drm);
-> +	err = nouveau_drm_device_init(drm, *pdevice);
-
-Same here, 'pdev' for struct platform_device and 'pdevice' for a ** to a
-struct nvkm_device seems confusing.
-
->   	if (err)
->   		goto err_put;
->   
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
-> index e239c6bf4afa..b711e994407b 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-> @@ -201,6 +201,7 @@ u_memcpya(uint64_t user, unsigned int nmemb, unsigned int size)
->   #include <nvif/parent.h>
->   
->   struct nouveau_drm {
-> +	struct nvkm_device *nvkm;
->   	struct nvif_parent parent;
->   	struct nouveau_cli master;
->   	struct nouveau_cli client;
+>   	ret = nouveau_cli_init(drm, "DRM-master", &drm->master);
+> @@ -674,6 +678,8 @@ nouveau_drm_device_init(struct drm_device *dev, struct nvkm_device *nvkm)
+>   	nouveau_cli_fini(&drm->master);
+>   fail_wq:
+>   	destroy_workqueue(drm->sched_wq);
+> +fail_nvif:
+> +	nvif_client_dtor(&drm->master.base);
+>   fail_alloc:
+>   	nvif_parent_dtor(&drm->parent);
+>   	kfree(drm);
+> @@ -728,6 +734,7 @@ nouveau_drm_device_fini(struct drm_device *dev)
+>   	nouveau_cli_fini(&drm->client);
+>   	nouveau_cli_fini(&drm->master);
+>   	destroy_workqueue(drm->sched_wq);
+> +	nvif_client_dtor(&drm->master.base);
+>   	nvif_parent_dtor(&drm->parent);
+>   	mutex_destroy(&drm->clients_lock);
+>   	kfree(drm);
 
