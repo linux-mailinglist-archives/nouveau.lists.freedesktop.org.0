@@ -2,78 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B1D08FAF98
-	for <lists+nouveau@lfdr.de>; Tue,  4 Jun 2024 12:11:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 885AA8FAFBF
+	for <lists+nouveau@lfdr.de>; Tue,  4 Jun 2024 12:20:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 54BFC10E359;
-	Tue,  4 Jun 2024 10:11:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0597910E407;
+	Tue,  4 Jun 2024 10:20:28 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="XVcYSQip";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="NTRqDD2U";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F3B9610E359
- for <nouveau@lists.freedesktop.org>; Tue,  4 Jun 2024 10:11:50 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 673B110E407
+ for <nouveau@lists.freedesktop.org>; Tue,  4 Jun 2024 10:20:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1717495909;
+ s=mimecast20190719; t=1717496425;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6zXc7Xuywbp0GOgab5UNFDGxnA/A6NFjL1N2D7zTX/w=;
- b=XVcYSQipxpPSFQhZ2djnsRI6m689KTFG/N0sBSVPWDdjspJLUqW74gUjXHxWH+hzUaqX6M
- kK64SEM67pxmq5H9VK/PZuwGQYo6gyLfYCTdVXNlzQISpTcIWaNJ4AY/j/ZVDIafPduEgb
- 96Gc3w0/Rj1xJrcyVuJLCoPz60WSfk0=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=fGeeKgYU6rkn2OXAYfrJvAaOBlgojp5nTaR7J9U6cY4=;
+ b=NTRqDD2Uczvyo/ZsiBqHdvTXpIu28dtoRFoeqz+VtzemkTaRljSDuXBZMF2atRMUTdoPr1
+ APrkNaLmBI4xgG+VAtkSxdOMzBsRiKqs0tbCiwdyrwXiXqCjIJuE86QO1VxYKznYVPBz4C
+ tNwdHcnzFt9MISOcybb5CPn+Q+lBMDk=
+Received: from mail-oi1-f197.google.com (mail-oi1-f197.google.com
+ [209.85.167.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-635-byfNNtzwOi2VWY7fw1ihjA-1; Tue, 04 Jun 2024 06:11:48 -0400
-X-MC-Unique: byfNNtzwOi2VWY7fw1ihjA-1
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-42138d5d766so7527545e9.1
- for <nouveau@lists.freedesktop.org>; Tue, 04 Jun 2024 03:11:48 -0700 (PDT)
+ us-mta-593-PsmU0D6cNY6HtSvjQna6sQ-1; Tue, 04 Jun 2024 06:20:24 -0400
+X-MC-Unique: PsmU0D6cNY6HtSvjQna6sQ-1
+Received: by mail-oi1-f197.google.com with SMTP id
+ 5614622812f47-3d1de7d29d9so1011336b6e.2
+ for <nouveau@lists.freedesktop.org>; Tue, 04 Jun 2024 03:20:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717495907; x=1718100707;
- h=content-transfer-encoding:in-reply-to:organization:from:cc
+ d=1e100.net; s=20230601; t=1717496423; x=1718101223;
+ h=content-transfer-encoding:in-reply-to:organization:cc:from
  :content-language:references:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6zXc7Xuywbp0GOgab5UNFDGxnA/A6NFjL1N2D7zTX/w=;
- b=urh657soOLJaNmqzglVrc9ONt6np+XKMs5k71okN1al/MI1m1vs/+aGVynrV6rAm56
- js/cAN8k43IrKwQWd+mH5yrQS8GVMC4GhLFjpT8oJcK8959w5m2txBZanaa1+NEVjq8W
- ahtuNxQGAgedJoWxJ51mnIPu/I7wSIfSwvwSYwZMFsIJRzVtcUmeKQGncFgQTh9FHwRQ
- ZUSdQDC74llXIdwtGvnpXyaRGAeEhMcq9JZyQHehH64ZXFxm5ue8n09/mj9NQ1pilciu
- x8siox+HGAps5OHIEGo5YCCuT5kNLiQFUXYbehHUrFZwvtqfn0iluI2c6zDT7CyUlAmF
- 0MlQ==
-X-Gm-Message-State: AOJu0YwfdeR0qReCgsFEHvSIGJUYL+qObwwpkiobDIC0JurTygLMvyD2
- zVvOwPK2dpPivqIGyknBTmWC8Cr5ZP9zxGKTjl1rs40WWx2gBeQ8qER238qFDjxBQ7YRAuRU+Ci
- J0XjNSAVuY3joYk3gsRiYlJfhZzwObFWI+P/ffpRItKnLoiCfakwEUKcDykURfX8=
-X-Received: by 2002:adf:fc4e:0:b0:354:f82c:78b0 with SMTP id
- ffacd0b85a97d-35e0f35be56mr7021397f8f.70.1717495907516; 
- Tue, 04 Jun 2024 03:11:47 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFrotA0MQwqoC0UVsRP5TbnHbeFgXQjwlK0IqOh3O57vFMsUCM5nwxkpYAKb+5iSnaabPnwxA==
-X-Received: by 2002:adf:fc4e:0:b0:354:f82c:78b0 with SMTP id
- ffacd0b85a97d-35e0f35be56mr7021384f8f.70.1717495907080; 
- Tue, 04 Jun 2024 03:11:47 -0700 (PDT)
+ bh=fGeeKgYU6rkn2OXAYfrJvAaOBlgojp5nTaR7J9U6cY4=;
+ b=jhDppdfPed2wEtQSjMI8N9cpRaVxYUjEHModS9WJIxhO3EgTCIWqcovpHm1iAkte8X
+ PLYWkZgcskFmyVMxd1fmGuORwOfxv6eZ3O2eY1LPMAoWSIr5m+OAxY1SblB5/qXkgFqA
+ mZQSg7Jw2o8Aj70Z7ievWpGJI8xroa859yBKwzjnIq5vXScqn2MTocIcCBHvHOtt3VTI
+ XG0W+F3y82Eb6/1kyPYjX/1G8gJc2zFToE1ri3sgKGNx/JWgWGizGb9511oXgJUok73u
+ doe8DuOAkAR1kH7OrdTOvuyRDf8R4EtnJLeKKFDs01KB3NLg0CvJq7KKDGUf8uqWOE8Z
+ XUVg==
+X-Gm-Message-State: AOJu0YyDtYHX2dt3oNuRWC+NjFqiJo3o1DAGrZArvE26O46vjVLQoSoe
+ O+pYtWV2MqzWFSBf7renOAMRxwptEz1BreZ+s/qUUgHW0TLnwoKR9o5wYjiAJBybkCAo5tMi2O0
+ GeuFyWY9pD2N3ztEgkCygzXVepitsugGH+gzmmxfYfqcbarCQoPhzvuuqBYnel3k=
+X-Received: by 2002:a05:6808:200e:b0:3c9:6e4f:eeec with SMTP id
+ 5614622812f47-3d1e35b9bebmr15216387b6e.37.1717496423248; 
+ Tue, 04 Jun 2024 03:20:23 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG7b1NEfWuSdjph1A3AnzmaFnY4z0KlpzRje8XWKH/C5RLwuwVSQNAl1J0KMtXuIANnqEywQA==
+X-Received: by 2002:a05:6808:200e:b0:3c9:6e4f:eeec with SMTP id
+ 5614622812f47-3d1e35b9bebmr15216366b6e.37.1717496422763; 
+ Tue, 04 Jun 2024 03:20:22 -0700 (PDT)
 Received: from [10.32.64.131] (nat-pool-muc-t.redhat.com. [149.14.88.26])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-35dd064afd8sm11014740f8f.95.2024.06.04.03.11.46
+ d75a77b69052e-44009a2902csm27372401cf.38.2024.06.04.03.20.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Jun 2024 03:11:46 -0700 (PDT)
-Message-ID: <1ca96b14-1a18-4e6d-bbd2-954538aaa48b@redhat.com>
-Date: Tue, 4 Jun 2024 12:11:45 +0200
+ Tue, 04 Jun 2024 03:20:22 -0700 (PDT)
+Message-ID: <56280b42-52b2-4233-b38f-b4864ea65633@redhat.com>
+Date: Tue, 4 Jun 2024 12:20:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/34] drm/nouveau: create pci device once
+Subject: Re: [PATCH 02/34] drm/nouveau: store nvkm_device pointer in
+ nouveau_drm
 To: Ben Skeggs <bskeggs@nvidia.com>
 References: <20240527141959.59193-1-bskeggs@nvidia.com>
- <20240527141959.59193-2-bskeggs@nvidia.com>
-Cc: nouveau@lists.freedesktop.org
+ <20240527141959.59193-3-bskeggs@nvidia.com>
 From: Danilo Krummrich <dakr@redhat.com>
+Cc: nouveau@lists.freedesktop.org
 Organization: RedHat
-In-Reply-To: <20240527141959.59193-2-bskeggs@nvidia.com>
+In-Reply-To: <20240527141959.59193-3-bskeggs@nvidia.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -94,47 +95,99 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On 5/27/24 16:19, Ben Skeggs wrote:
-> HW isn't touched anymore (aside from detection) until the first
-> nvif_device has been allocated, so we no longer need a separate
-> probe-only step before kicking efifb (etc) off the HW.
+> There's various different places in the drm code that get at the
+> nvkm_device via various creative (and not very type-safe) means.
+> 
+> One of those being via nvif_device.object.priv.
+> 
+> Another patch series is going to entirely remove the ioctl-like
+> interfaces beween the drm code and nvkm, and that field will no
+> longer exist.
+> 
+> This provides a safer replacement for accessing the nvkm_device,
+> and will used more in upcoming patches to cleanup other cases.
 > 
 > Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 > ---
->   drivers/gpu/drm/nouveau/nouveau_drm.c | 11 ++---------
->   1 file changed, 2 insertions(+), 9 deletions(-)
+>   drivers/gpu/drm/nouveau/nouveau_drm.c | 13 +++++--------
+>   drivers/gpu/drm/nouveau/nouveau_drv.h |  1 +
+>   2 files changed, 6 insertions(+), 8 deletions(-)
 > 
 > diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> index a58c31089613..c37798b507ea 100644
+> index c37798b507ea..e6ed68dcef78 100644
 > --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
 > +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> @@ -803,23 +803,16 @@ static int nouveau_drm_probe(struct pci_dev *pdev,
->   	/* We need to check that the chipset is supported before booting
->   	 * fbdev off the hardware, as there's no way to put it back.
->   	 */
-> -	ret = nvkm_device_pci_new(pdev, nouveau_config, "error",
-> -				  true, false, 0, &device);
-> +	ret = nvkm_device_pci_new(pdev, nouveau_config, nouveau_debug,
-> +				  true, true, ~0ULL, &device);
+> @@ -579,7 +579,7 @@ nouveau_parent = {
+>   };
+>   
+>   static int
+> -nouveau_drm_device_init(struct drm_device *dev)
+> +nouveau_drm_device_init(struct drm_device *dev, struct nvkm_device *nvkm)
+>   {
+>   	struct nouveau_drm *drm;
+>   	int ret;
+> @@ -588,6 +588,7 @@ nouveau_drm_device_init(struct drm_device *dev)
+>   		return -ENOMEM;
+>   	dev->dev_private = drm;
+>   	drm->dev = dev;
+> +	drm->nvkm = nvkm;
+>   
+>   	nvif_parent_ctor(&nouveau_parent, &drm->parent);
+>   	drm->master.base.object.parent = &drm->parent;
+> @@ -830,7 +831,7 @@ static int nouveau_drm_probe(struct pci_dev *pdev,
+>   
+>   	pci_set_drvdata(pdev, drm_dev);
+>   
+> -	ret = nouveau_drm_device_init(drm_dev);
+> +	ret = nouveau_drm_device_init(drm_dev, device);
 
-Looks like we don't need the 'detect' and 'mmio' arguments (anymore),
-can we remove them?
+NIT (and actually not directly related to this patch): It seems that we
+randomly switch between 'dev', 'drm_dev' for struct drm_device and
+'device', 'nvkm' for nvkm_device. Since this is a cleanup series, mind
+adding a patch to get this straight?
 
 >   	if (ret)
->   		return ret;
+>   		goto fail_pci;
 >   
-> -	nvkm_device_del(&device);
+> @@ -861,14 +862,10 @@ void
+>   nouveau_drm_device_remove(struct drm_device *dev)
+>   {
+>   	struct nouveau_drm *drm = nouveau_drm(dev);
+> -	struct nvkm_client *client;
+> -	struct nvkm_device *device;
+> +	struct nvkm_device *device = drm->nvkm;
+>   
+>   	drm_dev_unplug(dev);
+>   
+> -	client = nvxx_client(&drm->client.base);
+> -	device = nvkm_device_find(client->device);
 > -
->   	/* Remove conflicting drivers (vesafb, efifb etc). */
->   	ret = drm_aperture_remove_conflicting_pci_framebuffers(pdev, &driver_pci);
->   	if (ret)
->   		return ret;
+>   	nouveau_drm_device_fini(dev);
+>   	drm_dev_put(dev);
+>   	nvkm_device_del(&device);
+> @@ -1376,7 +1373,7 @@ nouveau_platform_device_create(const struct nvkm_device_tegra_func *func,
+>   		goto err_free;
+>   	}
 >   
-> -	ret = nvkm_device_pci_new(pdev, nouveau_config, nouveau_debug,
-> -				  true, true, ~0ULL, &device);
-> -	if (ret)
-> -		return ret;
-> -
->   	pci_set_master(pdev);
+> -	err = nouveau_drm_device_init(drm);
+> +	err = nouveau_drm_device_init(drm, *pdevice);
+
+Same here, 'pdev' for struct platform_device and 'pdevice' for a ** to a
+struct nvkm_device seems confusing.
+
+>   	if (err)
+>   		goto err_put;
 >   
->   	if (nouveau_atomic)
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> index e239c6bf4afa..b711e994407b 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> @@ -201,6 +201,7 @@ u_memcpya(uint64_t user, unsigned int nmemb, unsigned int size)
+>   #include <nvif/parent.h>
+>   
+>   struct nouveau_drm {
+> +	struct nvkm_device *nvkm;
+>   	struct nvif_parent parent;
+>   	struct nouveau_cli master;
+>   	struct nouveau_cli client;
 
