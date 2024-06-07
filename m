@@ -2,74 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1224A2B7F6
-	for <lists+nouveau@lfdr.de>; Fri,  7 Feb 2025 02:37:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E200A2B7F4
+	for <lists+nouveau@lfdr.de>; Fri,  7 Feb 2025 02:37:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8F53110E9D8;
-	Fri,  7 Feb 2025 01:37:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4B81910E9D3;
+	Fri,  7 Feb 2025 01:37:12 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="m53EpN/F";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="ICmDu/YN";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
- [209.85.214.169])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4F8B410F844;
- Tue, 28 May 2024 21:54:53 +0000 (UTC)
-Received: by mail-pl1-f169.google.com with SMTP id
- d9443c01a7336-1f347e8f6acso849625ad.1; 
- Tue, 28 May 2024 14:54:53 -0700 (PDT)
+Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com
+ [209.85.210.47])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B5F4210E06D;
+ Fri,  7 Jun 2024 16:52:33 +0000 (UTC)
+Received: by mail-ot1-f47.google.com with SMTP id
+ 46e09a7af769-6f96064f38cso27394a34.0; 
+ Fri, 07 Jun 2024 09:52:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1716933292; x=1717538092; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KzIu37DqkkW+Cz1sVAEbgQDsbfYiYv2kMR+B6yEhDS0=;
- b=m53EpN/Fl5kceh/GbyNkieExB1NR5CNQNTez8QHlIQvsfpBViCTkui98BcF89vr3ME
- LGv2Pu+XrDS0pvFNyP0Zl+h7UJeFupMT7zlU8x8cYr0gVGaBGi4xWx+t8xpWNDxhCViz
- v5OCIi0xwcMJCSXamG8++ahVCwFx7Fun3ec90/2uR44QbvX+fQI/KkZd6JiD/841v8ZN
- WtMn5emIxyNPP34DNB5CoBRju2Ojilr2tMH+M4JuU3/JEm+Puqh/PA/ch9UO62bjEGCw
- XqsJeZbffM4VyksJhV9obdmE9nY79be56DML8KGj3pGb33yUSSpQyHM7b3+CWqKlc98j
- d26w==
+ d=gmail.com; s=20230601; t=1717779152; x=1718383952; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=d9oBCOvPN+myCQtEdlIKkY65EngGca25XZLlE9lZXnA=;
+ b=ICmDu/YNjk+zWX0UUX8T5cP+oc4GuBhEU4hVUxcqL3fth2yMeJHn7bRiqe3NmKd0Gm
+ DPa6Xz3T5WGdBF44Yxzdb+hG/uNrsM8rFt49AlqSCdmO8R84xVKKvcDMwAjB7kbJmYE2
+ Bz8aJDfJo+Pnb9S87veoHGBVZAf7KKtPta9+EWlC6Y8JC6asEQHHd6gxwiYQwdm7hsKS
+ I2d3EceOWOHTtL8/L6uMmDsSwtG/6X7ySmq+tRAWE+/2ZlZIUFu9/HZ2uZi7VUApuGVg
+ A9sMpfpx4W5+uxwyKXgWlKgW+1EgEzTNthDoeQzCZEczIJA307CzwmvNVZZvpnnjZ7+F
+ /EGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716933292; x=1717538092;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KzIu37DqkkW+Cz1sVAEbgQDsbfYiYv2kMR+B6yEhDS0=;
- b=N8+ociCkn/1wF7Np0jmcOz7ygfuhfvRLN1z7FyySMr3xXEu5ZdAdDvdecYhsZo0XOY
- NLHwwum98bm4gRP6VsGqh6yG6RHW+B2T0WVfFEQ/hYvTdj/CyL6uvR2YCx7V4a9lGJfk
- RsScZ+mzysUZnXV2yH0G6buDBa7/kXG9itSC4vECrPIANb6DPATx2oxtvs8+/COUdUV7
- hp9QSgtLTXFM0X7dHbn8rJp6X1OctHQhh206NwQaIjMR165ysw0WpjkldgatbaT71kjQ
- umUUwer2dCYC8NngUfge/p4yAjtn1Nza+IVj8765R/zsK+TNfE5dHi2LQ3H6xty0ALwK
- 451g==
+ d=1e100.net; s=20230601; t=1717779152; x=1718383952;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=d9oBCOvPN+myCQtEdlIKkY65EngGca25XZLlE9lZXnA=;
+ b=O5w/3jdui4L9TnH8x02NG9/mibvrMGqVj7SbijPMYJhPQFHvMEaNu38/owauuBy5wZ
+ /3rsCV9oEEb8olyjc/EWHAaV9WO8tw/IVyJwUvPtQgFojeSNQ1pset7jZyEhuTqRTsy1
+ 4VoWDgwkNYne2DjauiY+0mLmBrpvHTdJ85VIHCZgLidyZB77FSzsXf+pAG6eH6+7IFYN
+ h0Rl9ZeldIV9Ja5iYTtXrM8T5ZAMrFo6Tjc0xQwL2eLHjnVbxIQQeCDnN+EntWVgcE0a
+ KwnzhLps9Ugbb7pdDMPnq96/D/imOlTHG6Vvq0QMXercHeWZU7e+MHB6JZB3chT3b7BV
+ W9sw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWCQsYA+xNvz7un9hEM8C3OzziVEPDC00jNKD5AvwTXSghlX3TSBrRn+qYA1m2wLeRx4Pkjh+TqsjVWm71l28ZUUTJYjDQgtlv3+ARB0FOeuSqXA1NnutPEY2i0VXtHjkB3t6ohs+H0upkQqdMeYQ==
-X-Gm-Message-State: AOJu0YzMfvS1UhfuEFMeKa/IIbHzBHyDZzXJ875hbUAca1abwyzyI9UW
- 3JWI7fl71JPUY8F+gy5FIxCHl9suTEXtvpG5kfWY0RuYOVnT1T3o
-X-Google-Smtp-Source: AGHT+IHcgJCvLsBRskDkUaDAWfOlyZcYlxZHzOY7xZdSR9m1gVY7jRLbD0C+mCcacgZ/89vJZUaWeQ==
-X-Received: by 2002:a17:902:db11:b0:1f4:5ad1:b659 with SMTP id
- d9443c01a7336-1f45ad1c3ecmr132940195ad.3.1716933292537; 
- Tue, 28 May 2024 14:54:52 -0700 (PDT)
-Received: from anarsoul-xps15.lan ([2604:3d08:7780:1ca9::398])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f4bcf3a0besm27586795ad.306.2024.05.28.14.54.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 14:54:52 -0700 (PDT)
-From: Vasily Khoruzhick <anarsoul@gmail.com>
-To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
- Jani Nikula <jani.nikula@intel.com>, Wayne Lin <Wayne.Lin@amd.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-Cc: Vasily Khoruzhick <anarsoul@gmail.com>
-Subject: [PATCH] drm/nouveau: don't attempt to schedule hpd_work on headless
- cards
-Date: Tue, 28 May 2024 14:52:43 -0700
-Message-ID: <20240528215344.2442-1-anarsoul@gmail.com>
-X-Mailer: git-send-email 2.45.1
+ AJvYcCXdj3gmsOavpDIIuRwS4q8qsvCStvv/HBZSeQwR0Pz08DrIcoa0dWO+8S+gdOPZJ6MRR5WtKRusBOcuK7CuChL1uUh1tl6kCtC4XTqfPQV1grHVcQa52cLlht0WYNsaNDXCIuXf//AfT9yExlQWbA==
+X-Gm-Message-State: AOJu0Yzw0626fypF+2AbFwlzV9jjRIYxCnsQefgg1yEzryWdLdhcYkAL
+ WK+ASvrY4iWxA09irj2RgFpitY0/MWrWcH5M8Sb2cG5bo8trNczJkIO34srrrpGys9QMos0lQl8
+ riQsPlniaa4WoTPQZQY1yvgXnsR4=
+X-Google-Smtp-Source: AGHT+IEDD2D/77JuggPksgMH8B6CmEL8dBhYEJyZEJL7LHJun60lv2Kkvnb8DAxx4zJzT5b+XQbIZfxuZXVX9RlQt3g=
+X-Received: by 2002:a05:6871:20b:b0:250:702f:8bab with SMTP id
+ 586e51a60fabf-254649487e9mr3022741fac.3.1717779152521; Fri, 07 Jun 2024
+ 09:52:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240528215344.2442-1-anarsoul@gmail.com>
+ <d388ebb2-fdef-400f-a62e-67352385effd@nvidia.com>
+ <CAPM=9txUt=vRyO=ozZNHhreb3Lsn6Pjtm=Na=NfU-D-pmnyxOw@mail.gmail.com>
+In-Reply-To: <CAPM=9txUt=vRyO=ozZNHhreb3Lsn6Pjtm=Na=NfU-D-pmnyxOw@mail.gmail.com>
+From: Vasily Khoruzhick <anarsoul@gmail.com>
+Date: Fri, 7 Jun 2024 09:52:06 -0700
+Message-ID: <CA+E=qVe+H93bqJ=o-zVKj8UaRsnj8jbi1E2t+Mbmq9aLecKtnQ@mail.gmail.com>
+Subject: Re: [PATCH] drm/nouveau: don't attempt to schedule hpd_work on
+ headless cards
+To: Dave Airlie <airlied@gmail.com>
+Cc: Ben Skeggs <bskeggs@nvidia.com>, dri-devel@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Fri, 07 Feb 2025 01:37:08 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -85,118 +82,73 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-If the card doesn't have display hardware, hpd_work and hpd_lock are
-left uninitialized which causes BUG when attempting to schedule hpd_work
-on runtime PM resume.
+On Thu, Jun 6, 2024 at 6:37=E2=80=AFPM Dave Airlie <airlied@gmail.com> wrot=
+e:
+>
+> readding original poster
 
-Fix it by adding headless flag to DRM and skip any hpd if it's set.
+Thanks, Dave!
 
-Fixes: ae1aadb1eb8d ("nouveau: don't fail driver load if no display hw present.")
-Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/337
-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
----
- drivers/gpu/drm/nouveau/dispnv04/disp.c     |  2 +-
- drivers/gpu/drm/nouveau/dispnv50/disp.c     |  2 +-
- drivers/gpu/drm/nouveau/nouveau_connector.c |  3 +++
- drivers/gpu/drm/nouveau/nouveau_display.c   | 11 ++++++++++-
- drivers/gpu/drm/nouveau/nouveau_drv.h       |  1 +
- 5 files changed, 16 insertions(+), 3 deletions(-)
+Ben, please keep me on CC, since I'm not subscribed to either nouveau
+or dri-devel mailing lists.
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv04/disp.c b/drivers/gpu/drm/nouveau/dispnv04/disp.c
-index 13705c5f1497..4b7497a8755c 100644
---- a/drivers/gpu/drm/nouveau/dispnv04/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv04/disp.c
-@@ -68,7 +68,7 @@ nv04_display_fini(struct drm_device *dev, bool runtime, bool suspend)
- 	if (nv_two_heads(dev))
- 		NVWriteCRTC(dev, 1, NV_PCRTC_INTR_EN_0, 0);
- 
--	if (!runtime)
-+	if (!runtime && !drm->headless)
- 		cancel_work_sync(&drm->hpd_work);
- 
- 	if (!suspend)
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 88728a0b2c25..674dc567e179 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -2680,7 +2680,7 @@ nv50_display_fini(struct drm_device *dev, bool runtime, bool suspend)
- 			nv50_mstm_fini(nouveau_encoder(encoder));
- 	}
- 
--	if (!runtime)
-+	if (!runtime && !drm->headless)
- 		cancel_work_sync(&drm->hpd_work);
- }
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
-index 856b3ef5edb8..b315a2ef5b28 100644
---- a/drivers/gpu/drm/nouveau/nouveau_connector.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
-@@ -1190,6 +1190,9 @@ nouveau_connector_hpd(struct nouveau_connector *nv_connector, u64 bits)
- 	u32 mask = drm_connector_mask(&nv_connector->base);
- 	unsigned long flags;
- 
-+	if (drm->headless)
-+		return;
-+
- 	spin_lock_irqsave(&drm->hpd_lock, flags);
- 	if (!(drm->hpd_pending & mask)) {
- 		nv_connector->hpd_pending |= bits;
-diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-index aed5d5b51b43..1961ef665e97 100644
---- a/drivers/gpu/drm/nouveau/nouveau_display.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-@@ -450,6 +450,9 @@ nouveau_display_hpd_resume(struct drm_device *dev)
- {
- 	struct nouveau_drm *drm = nouveau_drm(dev);
- 
-+	if (drm->headless)
-+		return;
-+
- 	spin_lock_irq(&drm->hpd_lock);
- 	drm->hpd_pending = ~0;
- 	spin_unlock_irq(&drm->hpd_lock);
-@@ -468,6 +471,11 @@ nouveau_display_hpd_work(struct work_struct *work)
- 	int changed = 0;
- 	struct drm_connector *first_changed_connector = NULL;
- 
-+	WARN_ON_ONCE(drm->headless);
-+
-+	if (drm->headless)
-+		return;
-+
- 	pm_runtime_get_sync(dev->dev);
- 
- 	spin_lock_irq(&drm->hpd_lock);
-@@ -635,7 +643,7 @@ nouveau_display_fini(struct drm_device *dev, bool suspend, bool runtime)
- 	}
- 	drm_connector_list_iter_end(&conn_iter);
- 
--	if (!runtime)
-+	if (!runtime && !drm->headless)
- 		cancel_work_sync(&drm->hpd_work);
- 
- 	drm_kms_helper_poll_disable(dev);
-@@ -729,6 +737,7 @@ nouveau_display_create(struct drm_device *dev)
- 		/* no display hw */
- 		if (ret == -ENODEV) {
- 			ret = 0;
-+			drm->headless = true;
- 			goto disp_create_err;
- 		}
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
-index e239c6bf4afa..25fca98a20bc 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drv.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-@@ -276,6 +276,7 @@ struct nouveau_drm {
- 	/* modesetting */
- 	struct nvbios vbios;
- 	struct nouveau_display *display;
-+	bool headless;
- 	struct work_struct hpd_work;
- 	spinlock_t hpd_lock;
- 	u32 hpd_pending;
--- 
-2.45.1
+> On Wed, 29 May 2024 at 09:57, Ben Skeggs <bskeggs@nvidia.com> wrote:
 
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gp=
+u/drm/nouveau/nouveau_connector.c
+> > > index 856b3ef5edb8..b315a2ef5b28 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> > > @@ -1190,6 +1190,9 @@ nouveau_connector_hpd(struct nouveau_connector =
+*nv_connector, u64 bits)
+> > >       u32 mask =3D drm_connector_mask(&nv_connector->base);
+> > >       unsigned long flags;
+> > >
+> > > +     if (drm->headless)
+> > > +             return;
+> > > +
+> >
+> > You shouldn't need this change, the function can't be called if there's
+> > no display.
+
+You are right. I added it for extra safety in case if the code changes
+in future and it somehow gets called, but I don't have a strong
+preference, so I can drop it in v2.
+
+> >
+> > >       spin_lock_irqsave(&drm->hpd_lock, flags);
+> > >       if (!(drm->hpd_pending & mask)) {
+> > >               nv_connector->hpd_pending |=3D bits;
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/=
+drm/nouveau/nouveau_display.c
+> > > index aed5d5b51b43..1961ef665e97 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_display.c
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+> > > @@ -450,6 +450,9 @@ nouveau_display_hpd_resume(struct drm_device *dev=
+)
+> > >   {
+> > >       struct nouveau_drm *drm =3D nouveau_drm(dev);
+> > >
+> > > +     if (drm->headless)
+> > > +             return;
+> > > +
+> > >       spin_lock_irq(&drm->hpd_lock);
+> > >       drm->hpd_pending =3D ~0;
+> > >       spin_unlock_irq(&drm->hpd_lock);
+> > > @@ -468,6 +471,11 @@ nouveau_display_hpd_work(struct work_struct *wor=
+k)
+> > >       int changed =3D 0;
+> > >       struct drm_connector *first_changed_connector =3D NULL;
+> > >
+> > > +     WARN_ON_ONCE(drm->headless);
+> > > +
+> > > +     if (drm->headless)
+> > > +             return;
+> > > +
+> >
+> > Same here.
+
+Same comment, I'll drop it for v2.
+
+Regards,
+Vasily
