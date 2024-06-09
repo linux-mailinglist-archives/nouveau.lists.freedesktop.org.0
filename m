@@ -2,81 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5504ECBAE36
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 418BDCBADB5
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:45:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8037110EBEF;
-	Sat, 13 Dec 2025 12:42:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0224510EAF5;
+	Sat, 13 Dec 2025 12:41:36 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Jm8umP5n";
+	dkim=temperror (0-bit key; unprotected) header.d=asahilina.net header.i=@asahilina.net header.b="MKTLYKrO";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
- [209.85.215.181])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3A7A010E0E8;
- Fri,  7 Jun 2024 23:28:28 +0000 (UTC)
-Received: by mail-pg1-f181.google.com with SMTP id
- 41be03b00d2f7-6dccc583e89so298431a12.1; 
- Fri, 07 Jun 2024 16:28:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717802907; x=1718407707; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to:from
- :subject:cc:to:message-id:date:from:to:cc:subject:date:message-id
- :reply-to; bh=FCpSnT/Z3gu96TW6Bi5jW20jSUnyH6/NiGyW/o29kp4=;
- b=Jm8umP5nj0MIgI0JNrCdyj3m65ptYxQhg36kJIqWt/XeNWJ6l3uIDYtHsAfIsWfU3N
- ccOdkAxZLTsjy5Xvcrm4C+BMmGmVoRqNpYxU8+IeoPbRo9WSZI3K2OKcYaGcIvwEgPsM
- LeTP2rStyf/yyVz3QvaLNTDZ7k5NS58ugr0bXJ+ikDOa34T4rYuii5N+txV1rT6kcQQX
- DEj6BFdwiieZJKONcN/9hzcJdp0g7fwDx3YVXG93XAoJPmWAwb/+iEObUVluFQkK13xD
- xDva6X6BzhFRuW6k3fYR/vGqEl5EHBv9QU+sxixqFneg+KzM4KBN6iULB8HBGbBmhN03
- pRRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717802907; x=1718407707;
- h=content-transfer-encoding:mime-version:references:in-reply-to:from
- :subject:cc:to:message-id:date:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=FCpSnT/Z3gu96TW6Bi5jW20jSUnyH6/NiGyW/o29kp4=;
- b=MJWy3utY+ZGA16KuP3GaE4BMzR3RZqGWee+trSpr6RJzK6DowIkeZWtufUuhBwZ6j6
- 6UbdfkrBZ8O3Q32m/i8krEwXKAHW/SN3BWTpMXdV/+fgtFEHGjB/cAF5Qbh7sC4MOVx3
- l3jYfbsfD3m0Cyci+u+MexRhJ6T0Bc23DKuTMBBoKo3KILNS/kz17+tXHihHvd7Zt6qq
- JMPmTw7hc7CJt/d0imBGBs0WQ3zxMdr51KxLIE5M3iJeFt47Rw0eForAYD08PrwfQgCp
- TiYvuqzPZum6JaQTXsldCTysFo2GDzef9JDaEQsq84nat4GgcFzR+23BtNN2yNPvk+R9
- Q+qA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXlSHsQzj0RAX+Tig5ygAQ4NfvO/lnE1qYndwD8y7HKWarzbM0hfqHT8B7jCZsoGCAsa6MtYzHGBDKELM/lxYowdT9T8FJYtHOujYOnbkA/EaVjt/1CO9yfhYJ0YDKTXy+a9r1d+gVBpmWv5NkvIg==
-X-Gm-Message-State: AOJu0Yz/kxFRzkxsXZoFlQfifXR0DRbxHm3Vr5N/CTfsnJhdhctdVPn9
- 8dxSpmRyZXkUG+K/4dUpkkSdeWVtAPJba6w50IDFePJfOW9F6mt+
-X-Google-Smtp-Source: AGHT+IHKqP8BpJ3GvlWBCtH9BHSef3p/eg8WyNZ0fLmpTYYkVZFK8lROhnr7aPwhZgNBRJIsfeTjWA==
-X-Received: by 2002:a17:903:2308:b0:1f6:ee76:1b35 with SMTP id
- d9443c01a7336-1f6ee762403mr9866665ad.5.1717802907232; 
- Fri, 07 Jun 2024 16:28:27 -0700 (PDT)
-Received: from localhost (p5261226-ipxg23801hodogaya.kanagawa.ocn.ne.jp.
- [180.15.241.226]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f6bd75f157sm40102215ad.18.2024.06.07.16.28.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Jun 2024 16:28:26 -0700 (PDT)
-Date: Sat, 08 Jun 2024 08:28:06 +0900 (JST)
-Message-Id: <20240608.082806.872238171846642664.fujita.tomonori@gmail.com>
-To: dakr@redhat.com
-Cc: gregkh@linuxfoundation.org, fujita.tomonori@gmail.com,
- wedsonaf@gmail.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+X-Greylist: delayed 340 seconds by postgrey-1.36 at gabe;
+ Sun, 09 Jun 2024 05:21:52 UTC
+Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 381C410E04F;
+ Sun,  9 Jun 2024 05:21:51 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: lina@asahilina.net)
+ by mail.marcansoft.com (Postfix) with ESMTPSA id BF26342617;
+ Sun,  9 Jun 2024 05:16:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=asahilina.net;
+ s=default; t=1717910167;
+ bh=Q1UPsINbFsF/krHvhKS9VhOJNdX4dv8c3DHiOLZvWI4=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=MKTLYKrOSsm/45Zu8zlMpg5cHCCmtUYs78RXDFx+vbnpC2vwRmE6sX9PpFFsV2ck3
+ cYE2oMwAkWRzkzrraGCNNombTT/oB7o0lBw5GrSrzRdSiOqiA+8INQHGce+tmOrLAp
+ PBQ+tx3uAUELizkifvD7TFXoGUVge95JggmnhYG6qYeMJ7Qf56ZXAEx5tSzpU9QIJO
+ yd2/RXSyP8q3zcici48sSQXRWYiL9qqjB7yJz9ARtiqpZnMBlR1jlj5FW99UAbnJFu
+ pwKqmNSXjZzsO2th3PcGvuP3qtK2EAqWBMQiu+JmkOS92IZDwCCRQ2YQ3c1qh/U9tt
+ 0ILhGRf4fJSgA==
+Message-ID: <641bda93-35f3-429e-b627-a9485505b6bf@asahilina.net>
+Date: Sun, 9 Jun 2024 14:15:57 +0900
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 3/8] rust: drm: Add Device and Driver abstractions
+To: Rob Herring <robh@kernel.org>, Danilo Krummrich <dakr@redhat.com>
+Cc: maarten.lankhorst@linux.intel.com, mripard@kernel.org,
  tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch, ojeda@kernel.org,
- alex.gaynor@gmail.com, boqun.feng@gmail.com, gary@garyguo.net,
- bjorn3_gh@protonmail.com, benno.lossin@proton.me, a.hindborg@samsung.com,
- aliceryhl@google.com, lina@asahilina.net, pstanner@redhat.com,
- ajanulgu@redhat.com, lyude@redhat.com, rust-for-linux@vger.kernel.org,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- mcgrof@kernel.org, russ.weight@linux.dev
-Subject: Re: [RFC PATCH 7/8] rust: add firmware abstractions
-From: FUJITA Tomonori <fujita.tomonori@gmail.com>
-In-Reply-To: <ZmNJpQbTtFUPOkAJ@cassiopeiae>
-References: <ZmMMMyi3uXTFtIae@cassiopeiae>
- <2024060745-palatable-dragging-32d1@gregkh>
- <ZmNJpQbTtFUPOkAJ@cassiopeiae>
-Mime-Version: 1.0
-Content-Type: Text/Plain; charset=us-ascii
+ alex.gaynor@gmail.com, wedsonaf@gmail.com, boqun.feng@gmail.com,
+ gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
+ a.hindborg@samsung.com, aliceryhl@google.com, fujita.tomonori@gmail.com,
+ pstanner@redhat.com, ajanulgu@redhat.com, lyude@redhat.com,
+ gregkh@linuxfoundation.org, rust-for-linux@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+References: <20240520172059.181256-1-dakr@redhat.com>
+ <20240520172059.181256-4-dakr@redhat.com>
+ <20240521212333.GA731457-robh@kernel.org>
+Content-Language: en-US
+From: Asahi Lina <lina@asahilina.net>
+In-Reply-To: <20240521212333.GA731457-robh@kernel.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:52 +0000
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:42 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,30 +71,99 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 7 Jun 2024 19:55:49 +0200
-Danilo Krummrich <dakr@redhat.com> wrote:
 
-> On Fri, Jun 07, 2024 at 05:41:11PM +0200, Greg KH wrote:
->> On Fri, Jun 07, 2024 at 03:33:39PM +0200, Danilo Krummrich wrote:
->> > On Fri, Jun 07, 2024 at 02:36:50PM +0200, Greg KH wrote:
->> > > Anyway, that's all hand-wavy right now, sorry, to get back to the point
->> > > here, again, let's take this, which will allow the firmware bindings to
->> > > be resubmitted and hopefully accepted, and we can move forward from
->> > > there to "real" things like a USB or PCI or even platform device and
->> > > driver binding stuff.
->> > 
->> > In order to continue I propose to send out the following series:
->> > 
->> > 1) minimal device and firmware abstractions only
->> 
->> Sounds good.
+
+On 5/22/24 6:23 AM, Rob Herring wrote:
+> On Mon, May 20, 2024 at 07:20:50PM +0200, Danilo Krummrich wrote:
+>> From: Asahi Lina <lina@asahilina.net>
+>>
+>> Add abstractions for DRM drivers and devices. These go together in one
+>> commit since both are fairly tightly coupled types.
+>>
+>> A few things have been stubbed out, to be implemented as further bits of
+>> the DRM subsystem are introduced.
+>>
+>> Signed-off-by: Asahi Lina <lina@asahilina.net>
+>> Co-developed-by: Danilo Krummrich <dakr@redhat.com>
+>> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+>> ---
+>>  rust/bindings/bindings_helper.h |   2 +
+>>  rust/kernel/drm/device.rs       |  87 +++++++++
+>>  rust/kernel/drm/drv.rs          | 318 ++++++++++++++++++++++++++++++++
+>>  rust/kernel/drm/mod.rs          |   2 +
+>>  4 files changed, 409 insertions(+)
+>>  create mode 100644 rust/kernel/drm/device.rs
+>>  create mode 100644 rust/kernel/drm/drv.rs
 > 
-> Just a heads-up, I'll probably send this one quite a bit earlier than the other
-> two to make sure to unblock Fujita on their PHY driver.
+> [...]
+> 
+>> diff --git a/rust/kernel/drm/drv.rs b/rust/kernel/drm/drv.rs
+>> new file mode 100644
+>> index 000000000000..5dd8f3f8df7c
+>> --- /dev/null
+>> +++ b/rust/kernel/drm/drv.rs
+>> @@ -0,0 +1,318 @@
+>> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+>> +
+>> +//! DRM driver core.
+>> +//!
+>> +//! C header: [`include/linux/drm/drm_drv.h`](../../../../include/linux/drm/drm_drv.h)
+>> +
+>> +use crate::{
+>> +    alloc::flags::*,
+>> +    bindings, device, drm,
+>> +    error::code::*,
+>> +    error::{Error, Result},
+>> +    prelude::*,
+>> +    private::Sealed,
+>> +    str::CStr,
+>> +    types::{ARef, ForeignOwnable},
+>> +    ThisModule,
+>> +};
+>> +use core::{
+>> +    marker::{PhantomData, PhantomPinned},
+>> +    pin::Pin,
+>> +};
+>> +use macros::vtable;
+>> +
+>> +/// Driver use the GEM memory manager. This should be set for all modern drivers.
+>> +pub const FEAT_GEM: u32 = bindings::drm_driver_feature_DRIVER_GEM;
+>> +/// Driver supports mode setting interfaces (KMS).
+>> +pub const FEAT_MODESET: u32 = bindings::drm_driver_feature_DRIVER_MODESET;
+>> +/// Driver supports dedicated render nodes.
+>> +pub const FEAT_RENDER: u32 = bindings::drm_driver_feature_DRIVER_RENDER;
+>> +/// Driver supports the full atomic modesetting userspace API.
+>> +///
+>> +/// Drivers which only use atomic internally, but do not support the full userspace API (e.g. not
+>> +/// all properties converted to atomic, or multi-plane updates are not guaranteed to be tear-free)
+>> +/// should not set this flag.
+>> +pub const FEAT_ATOMIC: u32 = bindings::drm_driver_feature_DRIVER_ATOMIC;
+>> +/// Driver supports DRM sync objects for explicit synchronization of command submission.
+>> +pub const FEAT_SYNCOBJ: u32 = bindings::drm_driver_feature_DRIVER_SYNCOBJ;
+>> +/// Driver supports the timeline flavor of DRM sync objects for explicit synchronization of command
+>> +/// submission.
+>> +pub const FEAT_SYNCOBJ_TIMELINE: u32 = bindings::drm_driver_feature_DRIVER_SYNCOBJ_TIMELINE;
+> 
+> This is missing an entry for DRIVER_GEM_GPUVA. And some others perhaps. 
+> I suppose some are legacy which won't be needed any time soon if ever. 
+> Not sure if you intend for this to be complete, or you are just adding 
+> what you are using? Only FEAT_GEM is used by nova ATM.
+> 
 
-Please. The sooner, the better. I need to send the PHY driver with
-these patchse to netdev.
+This was developed before DRIVER_GEM_GPUVA existed ^^
 
-I'm not sure what the above "minimal device" means. If you send the
-original patch again instead of the patch that Greg already approved
-and the discussion continues, then I proceed with the approved patch.
+I have this in my branch since I'm using the GPUVA manager now. Danilo,
+what tree are you using for this submission? It would be good to
+coordinate this and try to keep the WIP branches from diverging too much...
+
+That said, I don't think there's reason to support all features unless
+we expect new drivers to actually use them. The goal of the abstractions
+is to serve the drivers that will use them, and to evolve together with
+them and any newer drivers, not to attempt to be feature-complete from
+the get go (it's very difficult to evaluate an abstraction if it has no
+users!). In general my approach when writing them was to abstract what I
+need and add "obvious" extra trivial features that didn't require much
+thought even if I wasn't using them, but otherwise not attempt to
+comprehensively cover everything.
+
+~~ Lina
