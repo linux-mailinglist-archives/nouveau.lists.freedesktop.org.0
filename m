@@ -2,87 +2,86 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C265F901655
-	for <lists+nouveau@lfdr.de>; Sun,  9 Jun 2024 16:18:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 34F7390227B
+	for <lists+nouveau@lfdr.de>; Mon, 10 Jun 2024 15:13:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2C17610E04A;
-	Sun,  9 Jun 2024 14:18:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 48B4510E2CE;
+	Mon, 10 Jun 2024 13:13:40 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="aH7eJ7TG";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="LHWwsdGE";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 986EA10E078
- for <nouveau@lists.freedesktop.org>; Sun,  9 Jun 2024 14:18:20 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BE51810E332
+ for <nouveau@lists.freedesktop.org>; Mon, 10 Jun 2024 13:13:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1717942699;
+ s=mimecast20190719; t=1718025216;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=cMyIMuZIV0J4WT/bbuPywT6mF+m6iBHlzM2Be2NV7Fg=;
- b=aH7eJ7TGMwjekjAUhFK9xuioVVMb/dEmxlUkPtncPl1BbnzTJHiLneyUl5lY8eVtROL8iA
- i+of4eCxV0wDPMPNJIW3I8GipoJTDTkSI5/1Ky86pYNJaZ7DjRbMAgokI1sBbxgxlDFrvs
- TA11uKDLG4GyHq4G/tH+GLUMHFdv+q4=
-Received: from mail-ot1-f71.google.com (mail-ot1-f71.google.com
- [209.85.210.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=IrUlnMBlplzCA703kxl5+n8EFJwNGZ15Zmnn7aVwqoE=;
+ b=LHWwsdGEBMWfvXO8s/dvF5COy34Vd6r91GulkaBXFx402Z6yrLTbIag3Vtr4JHBiLeoP0n
+ KkYRrM1oqCqknWSt+dNDPGrt/1muxxLM9MfGW+P8PlG5IO+urH4LxBUEIfGDY759rryczC
+ pAbMyzpIGduG40Sjx6uCPnvPfsUm+jU=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-626-kSdT-CgzPuyZjk9WZxI2vQ-1; Sun, 09 Jun 2024 10:18:16 -0400
-X-MC-Unique: kSdT-CgzPuyZjk9WZxI2vQ-1
-Received: by mail-ot1-f71.google.com with SMTP id
- 46e09a7af769-6f9b0989f50so269966a34.1
- for <nouveau@lists.freedesktop.org>; Sun, 09 Jun 2024 07:18:16 -0700 (PDT)
+ us-mta-479-TLRTK616MUaBdO76FLnVuQ-1; Mon, 10 Jun 2024 09:13:34 -0400
+X-MC-Unique: TLRTK616MUaBdO76FLnVuQ-1
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-3580f213373so2580239f8f.3
+ for <nouveau@lists.freedesktop.org>; Mon, 10 Jun 2024 06:13:34 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717942696; x=1718547496;
+ d=1e100.net; s=20230601; t=1718025214; x=1718630014;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cMyIMuZIV0J4WT/bbuPywT6mF+m6iBHlzM2Be2NV7Fg=;
- b=Eaj5kwNGTHK3uaxFKJ9EfvSJIriH4EpKEbveZGi2EEgLc5ekr3oA3YKS3CXYJ9oLzc
- zH46wFWo6zrme31nm+Fo2Pk9Wi1RAfQl5mWaeIqCVZoo4JoKkR8YavZfaTTf2v4W0wLt
- d7cTCsGS0hr8PLl1nk65b2VTXe2ro1Zc97EyPK7/ZTLLD3PEgWwHAPgsc3/v+zWaPthO
- ISZwLGoeK4XQaneUlltt1HqxQfY6W/8itcz6Nx3ftoJKXkqRejYnFEEyyDxnnH7HkUPe
- yRSBfHNXPk7J/mD69db0HTSKrlzMKOpxsvnnX8fXzVTsuR0/kRSwjPGb5ybRVrB77LDV
- e5iw==
+ bh=IrUlnMBlplzCA703kxl5+n8EFJwNGZ15Zmnn7aVwqoE=;
+ b=vX8oCqJqTBApusPPJJ8vrorNLoLUyRl1Xu1yK68ap34m3jqTIg0kD1nG0b/zq+dAhT
+ b45eRaPIEWGbeV1B4qbVhH05NmUMOy4MdnKOshkK6Xq2JaD75LrPjzxbgmPVnSq+YX4h
+ vdDBB72Y5LOSGjxIRple+R0mWG270mIj5s9e05yMZs/lHVbdmXC0Bi+fLomMVfI3wzca
+ 3O8DX/+y76jcCsnHN0woXwX46c0iByAp8amk1R9aDYl88hOaHbUq05JSyTZcl1yFsQdl
+ 23xBjl5C0WWjxADNpAzHzZmLBPwoc4FkV3gZLXjlSZDWmHOhDrtYmNOoZXDuhtrDOQX6
+ 0FTw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUOaBOgrzzCkS+RHuP5XIiDcsZEPOvqaGUFV9U0gt3F6VYRDnc+fox5gyxUp5ZzIhwZQpkePM/fL/RG5ESLyufONIH2xb3nXWnZctaj7g==
-X-Gm-Message-State: AOJu0YwPqtdxEqKaswldSMFBAoJ1evE63eKUx2LJILhT+1nOpiaFwatL
- 5yHeJB/fbLQ3DUGyjii3YRRL0BtqEXBbKC0GbRaVPl2h5XKEQasr0BrcAcbOXJUCtZQDLEV77j0
- cRO1QfVkzkt9jciKKupMZnV9zuW+FY4/DC63140QppNL742sEiKU+cpizjwZTVTE=
-X-Received: by 2002:a05:6830:1306:b0:6f9:b071:28c6 with SMTP id
- 46e09a7af769-6f9b07129eamr776360a34.18.1717942696057; 
- Sun, 09 Jun 2024 07:18:16 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFEgFJzPhPL9AfxoVR1rmqk6GbXBxcYfuvjBNWJrBUiacSd3hziDK5FPsK0p/sHN42elFxnZg==
-X-Received: by 2002:a05:6830:1306:b0:6f9:b071:28c6 with SMTP id
- 46e09a7af769-6f9b07129eamr776339a34.18.1717942695725; 
- Sun, 09 Jun 2024 07:18:15 -0700 (PDT)
-Received: from pollux.localdomain ([2a02:810d:4b3f:ee94:34d8:5ea8:12d:c9ae])
+ AJvYcCUPCIoi+RNJmwmvU4k+2DWlojuUv6GIFx/21knMMRPrOhauoBsL0I6UsPaF660wy13Fd4imTNAtbEzUTVjLX4nSuoIaEzOHUAgulGNFJA==
+X-Gm-Message-State: AOJu0YyhQq3HJEHfANdl3eYo5GKb4ttPn3QL74sNzMpM3KaPaEFDlZBo
+ kKCYp1Q6KSZCOhlS6BzY+6pF8KFUPwDdJ0FritE0sL3S17IBrbjYBV5KsaTdIfuU+UTAmG9kEKz
+ KQadAtV7b2UsK6TLh8KFE5nC8j2kRtMzFpV91Fk44rWcLMoEPCrOe7z4IqNMaw/8=
+X-Received: by 2002:a5d:4583:0:b0:35f:296e:4130 with SMTP id
+ ffacd0b85a97d-35f296e47a4mr616293f8f.51.1718025213789; 
+ Mon, 10 Jun 2024 06:13:33 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEAhD4ZJw9Bi6tM7YL8PTv0XBgcF2TZ2fQnBusYpunX8Pj9IYg7YkjOK/PnV1JA0O8Mqvp52w==
+X-Received: by 2002:a5d:4583:0:b0:35f:296e:4130 with SMTP id
+ ffacd0b85a97d-35f296e47a4mr616279f8f.51.1718025213460; 
+ Mon, 10 Jun 2024 06:13:33 -0700 (PDT)
+Received: from pollux ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-6f97eb7c200sm513850a34.20.2024.06.09.07.18.11
+ ffacd0b85a97d-35f23c67e70sm2905168f8f.33.2024.06.10.06.13.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Jun 2024 07:18:15 -0700 (PDT)
-Date: Sun, 9 Jun 2024 16:18:09 +0200
+ Mon, 10 Jun 2024 06:13:32 -0700 (PDT)
+Date: Mon, 10 Jun 2024 15:13:30 +0200
 From: Danilo Krummrich <dakr@redhat.com>
-To: Asahi Lina <lina@asahilina.net>
-Cc: Rob Herring <robh@kernel.org>, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com,
- daniel@ffwll.ch, ojeda@kernel.org, alex.gaynor@gmail.com,
- wedsonaf@gmail.com, boqun.feng@gmail.com, gary@garyguo.net,
- bjorn3_gh@protonmail.com, benno.lossin@proton.me,
- a.hindborg@samsung.com, aliceryhl@google.com,
- fujita.tomonori@gmail.com, pstanner@redhat.com, ajanulgu@redhat.com,
- lyude@redhat.com, gregkh@linuxfoundation.org,
+To: FUJITA Tomonori <fujita.tomonori@gmail.com>
+Cc: gregkh@linuxfoundation.org, wedsonaf@gmail.com,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch,
+ ojeda@kernel.org, alex.gaynor@gmail.com, boqun.feng@gmail.com,
+ gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
+ a.hindborg@samsung.com, aliceryhl@google.com, lina@asahilina.net,
+ pstanner@redhat.com, ajanulgu@redhat.com, lyude@redhat.com,
  rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-Subject: Re: [RFC PATCH 3/8] rust: drm: Add Device and Driver abstractions
-Message-ID: <ZmW5oT7knQh9nKeD@pollux.localdomain>
-References: <20240520172059.181256-1-dakr@redhat.com>
- <20240520172059.181256-4-dakr@redhat.com>
- <20240521212333.GA731457-robh@kernel.org>
- <641bda93-35f3-429e-b627-a9485505b6bf@asahilina.net>
+ nouveau@lists.freedesktop.org, mcgrof@kernel.org, russ.weight@linux.dev
+Subject: Re: [RFC PATCH 7/8] rust: add firmware abstractions
+Message-ID: <Zmb7-jUfxkNd0tJ9@pollux>
+References: <ZmMMMyi3uXTFtIae@cassiopeiae>
+ <2024060745-palatable-dragging-32d1@gregkh>
+ <ZmNJpQbTtFUPOkAJ@cassiopeiae>
+ <20240608.082806.872238171846642664.fujita.tomonori@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <641bda93-35f3-429e-b627-a9485505b6bf@asahilina.net>
+In-Reply-To: <20240608.082806.872238171846642664.fujita.tomonori@gmail.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=us-ascii
@@ -101,87 +100,64 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Lina,
-
-Welcome back!
-
-On Sun, Jun 09, 2024 at 02:15:57PM +0900, Asahi Lina wrote:
+On Sat, Jun 08, 2024 at 08:28:06AM +0900, FUJITA Tomonori wrote:
+> On Fri, 7 Jun 2024 19:55:49 +0200
+> Danilo Krummrich <dakr@redhat.com> wrote:
 > 
-> 
-> On 5/22/24 6:23 AM, Rob Herring wrote:
-> > On Mon, May 20, 2024 at 07:20:50PM +0200, Danilo Krummrich wrote:
-> >> From: Asahi Lina <lina@asahilina.net>
-> > This is missing an entry for DRIVER_GEM_GPUVA. And some others perhaps. 
-> > I suppose some are legacy which won't be needed any time soon if ever. 
-> > Not sure if you intend for this to be complete, or you are just adding 
-> > what you are using? Only FEAT_GEM is used by nova ATM.
+> > On Fri, Jun 07, 2024 at 05:41:11PM +0200, Greg KH wrote:
+> >> On Fri, Jun 07, 2024 at 03:33:39PM +0200, Danilo Krummrich wrote:
+> >> > On Fri, Jun 07, 2024 at 02:36:50PM +0200, Greg KH wrote:
+> >> > > Anyway, that's all hand-wavy right now, sorry, to get back to the point
+> >> > > here, again, let's take this, which will allow the firmware bindings to
+> >> > > be resubmitted and hopefully accepted, and we can move forward from
+> >> > > there to "real" things like a USB or PCI or even platform device and
+> >> > > driver binding stuff.
+> >> > 
+> >> > In order to continue I propose to send out the following series:
+> >> > 
+> >> > 1) minimal device and firmware abstractions only
+> >> 
+> >> Sounds good.
 > > 
+> > Just a heads-up, I'll probably send this one quite a bit earlier than the other
+> > two to make sure to unblock Fujita on their PHY driver.
 > 
-> This was developed before DRIVER_GEM_GPUVA existed ^^
-> 
-> I have this in my branch since I'm using the GPUVA manager now. Danilo,
-> what tree are you using for this submission? It would be good to
-> coordinate this and try to keep the WIP branches from diverging too much...
+> Please. The sooner, the better. I need to send the PHY driver with
+> these patchse to netdev.
 
-Trying to prevent things from diverging was one of my main objectives when I
-started those efforts a couple of month ago (I also sent you a mail for that
-purpose back then).
+Why do you want to send those patches to netdev?
 
-I am maintaining a couple of branches:
+I think nothing prevents you from sending your PHY driver to netdev. Just add a
+note to your series that it depends on those two patches.
 
-In the RfL repository [1]:
-
-  - staging/rust-device [2] (Device / driver, devres infrastructure)
-  - staging/dev [3] (common branch containing all the Rust infrastructure I'm
-    currently upstreaming, including PCI and firmware abstractions)
-
-In the drm-misc repository [4]:
-  - topic/rust-drm [5] (all the DRM abstractions)
-
-In the Nova repository [6]
-  - nova-next [7] (the Nova stub driver making use of everything)
-
-I regularly rebase those branches and keep them up to date with improvements and
-feedback from the mailing list.
-
-The device / driver and PCI abstractions are getting most of my attention
-currently, but there are some recent changes (besides some minor ones) on the
-DRM abstractions I plan to send in a v2 as well:
-
-- static const allocation of driver and fops structures
-- rework of the `Registration` type to use `Devres` and combine the new() and
-  register() methods to register in new() already
-
-There is also some more information regarding those branches in the cover
-letters of the series and the links included there.
-
-[1] https://github.com/Rust-for-Linux/linux
-[2] https://github.com/Rust-for-Linux/linux/tree/staging/rust-device
-[3] https://github.com/Rust-for-Linux/linux/tree/staging/dev
-[4] https://gitlab.freedesktop.org/drm/misc/kernel
-[5] https://gitlab.freedesktop.org/drm/misc/kernel/-/tree/topic/rust-drm
-[6] https://gitlab.freedesktop.org/drm/nova
-[7] https://gitlab.freedesktop.org/drm/nova/-/tree/nova-next
+How and through which trees things are merged in the end can be figured out by
+the corresponding maintainers in the end.
 
 > 
-> That said, I don't think there's reason to support all features unless
-> we expect new drivers to actually use them. The goal of the abstractions
-> is to serve the drivers that will use them, and to evolve together with
-> them and any newer drivers, not to attempt to be feature-complete from
-> the get go (it's very difficult to evaluate an abstraction if it has no
-> users!). In general my approach when writing them was to abstract what I
-> need and add "obvious" extra trivial features that didn't require much
-> thought even if I wasn't using them, but otherwise not attempt to
-> comprehensively cover everything.
+> I'm not sure what the above "minimal device" means. If you send the
+> original patch again instead of the patch that Greg already approved
+> and the discussion continues, then I proceed with the approved patch.
+> 
 
-Fully agree, I think the point here only was whether we want to list all the
-feature flags in the abstraction already. Which I think is something we can do.
-However, I'm also find with only listing the ones we actually use and keep
-adding further ones subsequently. It just shouldn't be random.
+I'm honestly getting a bit tired of this...
+
+1) I fundamentally disagree that it's a good thing to fork off patches that are
+   actively discussed and reviewed on the mailing list with the objective to
+   bypass the discussion and the review process. Especially without agreement of
+   all involved parties.
+
+2) It's at least questionable to claim that your forked-off patch can be
+   considered to be "approved".
+
+3) I really try to help and already confirmed to send out a separate series with
+   only the patches you need as well to accelerate things for you.
+
+If you really want to help with that, you are very welcome to get involved in
+the discussion and review process. If you don't want to, that is fine too. But
+please stop adding confusion to those series by forking off patches.
+
+Besides that, I also don't appreciate your attitude, trying to put some kind of
+"ultimatum" on me.
 
 - Danilo
-
-> 
-> ~~ Lina
-> 
 
