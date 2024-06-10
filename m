@@ -2,27 +2,27 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B50E902A6D
-	for <lists+nouveau@lfdr.de>; Mon, 10 Jun 2024 23:11:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72F0A902A77
+	for <lists+nouveau@lfdr.de>; Mon, 10 Jun 2024 23:12:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9A21410E38A;
-	Mon, 10 Jun 2024 21:11:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A46CA10E28C;
+	Mon, 10 Jun 2024 21:12:44 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="iJEVVXEK";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="l4eAKpFu";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2066.outbound.protection.outlook.com [40.107.244.66])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AAA9410E38A
- for <nouveau@lists.freedesktop.org>; Mon, 10 Jun 2024 21:11:01 +0000 (UTC)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2080.outbound.protection.outlook.com [40.107.243.80])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 97EE710E420
+ for <nouveau@lists.freedesktop.org>; Mon, 10 Jun 2024 21:12:42 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dWSD3kS0IylABNzmnYpJmWloBcRL+CsCX1GqOUXM54cdEbszsAF/3K2Xy6sdkCZyrOr7WnZqSxAbfruNC486vs50UYUwqhVm1E/UcCuZPhUAZdT9YKZRtEfPa8Iz96RJY7KOshuwzAeU1PqJzbOGzGYmUftbpiFCAJ0mTiPQnna6aXCHsF6D1uAyNw0JcaHQn00drlTLitNuI1nKT/3EIS+MG1baf+eXRgZd2MpP6GfybXPU2EyyNDI3sMaatNlOVGRDKj8OCLC0U4/ytlBZ6JRCZTY5qUXcVgLCNEZCQuwPJOOxU1fBuOHxLtaobcc/V/uJFrkZ7e75nL2s4eX7Lg==
+ b=UdGQiliGmNEwJbveXPMncYkoii6ghqfOEWpjp7a1hxsPHriPmOnhh4Pk7XHqt7A+xxycGEzj4/b1ekaGUvm3RBcu0yb/R5HRWmVg6kJAOO/t7vsneVtMC2X32n13R3AcouxFQda9i4UH/SDsSph2wIsvI7husaGOhgEydNn3UqkCvqDvedC+SGIcW3qUP+QkSUqJxLhte1WB1FFag9IIf+eR5/2L3tiBP/usz7trAYx0RViU7UpWzjcJmxH9ZinLOj9fTRoNEvly3RCGK2tlrr4qiNH8K7SsY3H6fdDxvwQhiaa3yE8BSy5XwBhNZisTvallqUEEwHOMF9/G0RvUTQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BuljIPRoY5OpZ+blXajU6pibgd2UaGhNk3xTArgbVLU=;
- b=N2h16rTJXGPxvYskxjNILrgVkW+0a4jQxr6H1Yz7R1iK0Wm0idJdRtfGJANXQe8AvaaEk/g4M69tXRheUVU8UuBG67WF+S0qeWrEPWvI62KW/1Ie6qixB2TSrEXOstuJGuOKAPnwhqDA+7SG1Tlea+oYSaCs8vfln3dIoi+il9h/foczPe49AgQ0kMBdj0uPV3n0ydOfQOKxpwgIRRLm0BtxgkiH3bxDvENdTvtcEVLi0Lql8HSPtgZRpJhjjoGd1avUl9huP2aMPuDUA8qQc/fBEnxn5PfFOr831HgA7DluelciwGKamq79VmhTd0s+zy1qMVY19Ic0dvygQ7+Pqg==
+ bh=KglC8obNmuCOf5tYM3vsShrnG5RmKsPup/6hCmizZ+w=;
+ b=ZAvKHBnKhx9OAqo5FJJwuzdUROVvcG///PPXwpLSamtwNU4qXu8CMBJXWLWH1D/d7MHOdgkcuzWBTktSHeN5zHx6zULrg4stzoZ+d4FjnvBefkbqAaLrRf+JLCOd9+/HLwtXThrQ1zAMP/b4TH5TKMyAWTiXwHkqkyhg0wEuP1YUcVgzUpr7RgxFtiOG+c5YbFVSP5nO5qROVTO+507dOTgwDo+DROjpusaNbQVyZ5fA6XYtGkGqiMg99Ypb3F9tAr58la6LLSkxx3oztlqzD3kpOwwRp+oT6X6DwM3kdICbWYHW/VjbVy4y5T86Ni0WABFRb/qlToxFzffy+ZnN+g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.117.161) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
  dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
@@ -30,18 +30,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BuljIPRoY5OpZ+blXajU6pibgd2UaGhNk3xTArgbVLU=;
- b=iJEVVXEK6oXG29W6p7rYT+F8h5dTLQlbGNUulmlDjPv+IKcYuqknmqKHi/2T3VjS+5m5hSp4SYy0HNll+AC4d4UkVb2BmrMcmAOQ9xK1uOziZ1csoS5LjKX2WcS7KvAKV5+ezYwcmRfD/8pl02luv1zNLF8V9NpbMZs7MFsH2ca8wlEP8MjcAVdztxVbp3JogkyBJ+dl4z4DzWoY2NKfPHbmYhFJHo0KlSETtj7Dr4Dk6S2xOJB8JHFPLFarwA+m67PKmU5ETcxQFzoPzj6BVYNokFIhU7FHiki/WtOPksz7LwCs9mm9nUbqW4NTPRK+ddzM9UhorgZKJe/Ugmp5AA==
-Received: from SJ2PR07CA0011.namprd07.prod.outlook.com (2603:10b6:a03:505::20)
- by DM6PR12MB4449.namprd12.prod.outlook.com (2603:10b6:5:2a5::9) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=KglC8obNmuCOf5tYM3vsShrnG5RmKsPup/6hCmizZ+w=;
+ b=l4eAKpFuzb4fBF37KYXGUc1oVWayriMNclsaReAZJq1xVcvnFoosQ9Qg5M3wnhcrqQWzi1x16R0KeXPmEO6Izx+a4O3UPQRCXQafzl2rHsAaFpgIx4UFY33asVVyaWpRoPIyA5HFAF+JMcu3A2Mq0pAAG4kdbf4U7Ct5Vgv/BR2w8Oxa/09VLj87Is3iL8mQTi0dGW3uR7osE/sbJddQBoLJVd10p7BQ/Gd8HaKOIT6Q070/rLtpiiJF5Li+pWHonLQV8h8Ni0FsUwBBY0A5X1XvnNfT4LnD3GZfcxHptq2/9F9ycLh1RaVt13DSJt3b/K8Ijk0crWh6ApJhLpKvmQ==
+Received: from BYAPR05CA0005.namprd05.prod.outlook.com (2603:10b6:a03:c0::18)
+ by SJ1PR12MB6290.namprd12.prod.outlook.com (2603:10b6:a03:457::22)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.36; Mon, 10 Jun
- 2024 21:10:56 +0000
-Received: from MWH0EPF000989E9.namprd02.prod.outlook.com
- (2603:10b6:a03:505:cafe::59) by SJ2PR07CA0011.outlook.office365.com
- (2603:10b6:a03:505::20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7656.25 via Frontend
- Transport; Mon, 10 Jun 2024 21:10:56 +0000
+ 2024 21:12:38 +0000
+Received: from MWH0EPF000989EA.namprd02.prod.outlook.com
+ (2603:10b6:a03:c0:cafe::2c) by BYAPR05CA0005.outlook.office365.com
+ (2603:10b6:a03:c0::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.16 via Frontend
+ Transport; Mon, 10 Jun 2024 21:12:38 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
@@ -50,30 +50,31 @@ Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
  216.228.117.161 as permitted sender) receiver=protection.outlook.com;
  client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
 Received: from mail.nvidia.com (216.228.117.161) by
- MWH0EPF000989E9.mail.protection.outlook.com (10.167.241.136) with Microsoft
+ MWH0EPF000989EA.mail.protection.outlook.com (10.167.241.137) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7677.15 via Frontend Transport; Mon, 10 Jun 2024 21:10:55 +0000
+ 15.20.7677.15 via Frontend Transport; Mon, 10 Jun 2024 21:12:37 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
  (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 10 Jun
- 2024 14:10:40 -0700
+ 2024 14:12:25 -0700
 Received: from [172.27.35.123] (10.126.231.35) by rnnvmail201.nvidia.com
  (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 10 Jun
- 2024 14:10:39 -0700
-Message-ID: <8507b3f4-cc87-4e5c-8863-6f18eb9b77b7@nvidia.com>
-Date: Mon, 10 Jun 2024 18:06:22 +1000
+ 2024 14:12:24 -0700
+Message-ID: <eda0f36b-d148-48c8-b1cf-a9a73f9283a7@nvidia.com>
+Date: Mon, 10 Jun 2024 18:08:16 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 05/34] drm/nouveau: handle limited nvif ioctl in abi16
+Subject: Re: [PATCH 08/34] drm/nouveau/nvkm: remove detect/mmio/subdev_mask
+ from device args
 To: Danilo Krummrich <dakr@redhat.com>
 CC: <nouveau@lists.freedesktop.org>
 References: <20240527141959.59193-1-bskeggs@nvidia.com>
- <20240527141959.59193-6-bskeggs@nvidia.com>
- <c7d69224-72c6-4340-9511-961bd0a6b202@redhat.com>
+ <20240527141959.59193-9-bskeggs@nvidia.com>
+ <7c9462ac-6a8d-4982-8a91-5e4bdf46e099@redhat.com>
 Content-Language: en-US
 From: Ben Skeggs <bskeggs@nvidia.com>
-In-Reply-To: <c7d69224-72c6-4340-9511-961bd0a6b202@redhat.com>
+In-Reply-To: <7c9462ac-6a8d-4982-8a91-5e4bdf46e099@redhat.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.126.231.35]
@@ -81,58 +82,58 @@ X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000989E9:EE_|DM6PR12MB4449:EE_
-X-MS-Office365-Filtering-Correlation-Id: 77fa779e-31ef-4ae3-0a52-08dc8991d19b
+X-MS-TrafficTypeDiagnostic: MWH0EPF000989EA:EE_|SJ1PR12MB6290:EE_
+X-MS-Office365-Filtering-Correlation-Id: 43c66e11-c973-4c78-f80a-08dc89920e79
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230031|82310400017|376005|36860700004|1800799015; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MURQbDFGNjJmMFJPTVZHRVZIYVhCSXMrcERyZlQ0RlBvOWY5MXRwWng5YS83?=
- =?utf-8?B?UmVtaUE2VkY3SlRDTVlkajV1K3pHU1ZuOFNTay9lWjB1TTQ0NEx2R1d0SUdy?=
- =?utf-8?B?Y3NRWHluWG1rZG9Id2RSSnBBL0RKWkQ2K0VaTUZVemd3d242bWJmRngwOVF2?=
- =?utf-8?B?L0J1bVJsSEgvTm5TaGxDRHpnZ3JkOFFsTjVoVVc4WmROWS9MOWZvQ010UTVW?=
- =?utf-8?B?Y0tyWWVMSEhnZUxQQ28vcGxET0RobURSVDZzMXdKNlQ2SitlRURRWm53UlVZ?=
- =?utf-8?B?NEdtYjAzT2RkYXA4VmdJQUI0S1pMK2tPZFd6U0ViZmxVcnM2T0NNbzdiYi9m?=
- =?utf-8?B?NmhFRTRSOW1HdytIM3NFVE52cHpWQkZ6YUxjRjQwamZXSGFxQWZydWN4MlFx?=
- =?utf-8?B?czZhOXVxOUhBSGVUSmhpdC9mL3dETUdrcGUrRHo0dzRiT0RzcXN2WDFRYTBE?=
- =?utf-8?B?cDJIVXNSQzFFQ3NWTjh4VnFOUmNBeFpmMFRKeUt3eHdQc3o5K1YvNVBVWTYz?=
- =?utf-8?B?ZWExUitXNkJMU2tIOTNvTGF0a3RhZ1A3NzM5YW9VdHdFT2VWemtRaWdzVUtw?=
- =?utf-8?B?WEhxeDA5Y0tLR2JJZThMZGRPN1VaSTYrdDZnbjY1SFpKcGVVUUxVM3VRWXg1?=
- =?utf-8?B?NXJlNGhvNXZCQUpsQ1p2SGcyK3B5Z0o4T1NYR2c2ZUxSSzBaSTlzbFBSMDVq?=
- =?utf-8?B?eW1XK2VKMXJUWTZsb0VPUzFSR0FpTExJM3FGeG5GM21EcHFTVEpBUWlkeURI?=
- =?utf-8?B?NW9qaW53SWZtNFA3ZTFMcUJNQjBuQzhobTgxUWt3bVQrQ010QXJIU0R2SzMy?=
- =?utf-8?B?VEx4dTV0c0pvQnlXWUtzd2MrdDZJSVlFSWNwa2IrR1l6bXFHWEQyY3Nyam9C?=
- =?utf-8?B?NXRzZzJ5Zm9xL3VTWnFuZ0pDK0d6QXkxc3FldTZiQVdYL0NxVVExb1J1S0cv?=
- =?utf-8?B?VTZtcFNnS1N0MjhENlptSHlUZFkyWnErYkxXUStiZnhzei82a2RkNi83d2NZ?=
- =?utf-8?B?NHFBTFc5c2c0UHlzSzF6RVo5MnU1NEY1OGpPcFh0UUxDUG1wZWFsell2Qkxk?=
- =?utf-8?B?QkM2RURNdWYra2RFYUJkOHk5WTJDRHJZcEVDSEdkMVBwVnJSVmY4QzJsZXdi?=
- =?utf-8?B?djlKL2c2VGQ2Kys3UUxjR01tSGx4Zk1UZkRaL0ozaGRYSUFKbURxQm85ZUxa?=
- =?utf-8?B?N2ltUzRRcC9nK2NrZ3g1TXBtRzhkVk5YaFI0b3h5SC9XTmdabXBoNWVuNVMy?=
- =?utf-8?B?TURqZ3A1UGN6QmNKVXJtSyt2MGViYXpqb3pOcXhSeXEyN0ZSVXhJbEJDVkZM?=
- =?utf-8?B?eDRRWTk3TXY1VmpKYkdRYSsyaXdIRWdMOUZkd3MwM2hoa25VOHU3R291Mm5H?=
- =?utf-8?B?eW5XQld2UWxGS2ZieU9EZlptbi83TlZHWVN1bk9UeHE5aXY1SHZENmdyaFFv?=
- =?utf-8?B?WWVIU0dnOUhVUklQV1l5R2ZmSmo1VW5EenZPMm9PUUxFWjNXanQwR05zSnE2?=
- =?utf-8?B?NkMyWXcvb1lRdTJwWkl2SmphK0t6S3JOTjNHVUR4a0J5NzJETEVnRkNVZ2t0?=
- =?utf-8?B?VFlSVEQwclQycVFsN1c3VlUrUktvc0ZhbkNYWE1HNWd1OGF6eVFFUVJTaUpE?=
- =?utf-8?B?VE1tR3FwZWJ4UnVCVlh1U0VaSDltS0xJZmF2cm5ORlJDTVgzRzRhY2ZaUm1O?=
- =?utf-8?B?SjF2NkZvU1lvd1FjcWhrSW1uckxSUVZHSmhYcng3WWNiMmEwenNYa09aTEdQ?=
- =?utf-8?B?Zktqc1VnaGQ4TnMzc3BadWpzN1M3cTE1eVo1Ny94QkhGbU1mcHJmb3NlVGlE?=
- =?utf-8?B?cG10QU9DTnBDNVRsRzFzWmVhVUNTUlpwazVoZnRWcU9FcFJGY2x3WTRnVU93?=
- =?utf-8?B?NVc1TnN4d1BVRXlzc2xXdHhBRFhBUVJHbDB5RlRjUnFQRmc9PQ==?=
+ ARA:13230031|36860700004|1800799015|376005|82310400017; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?amJSS3U0K0Nka3pESzBtRWU2V2taeUc5bWtZb3B1MzdrU2w2WVd4ckZDc0JN?=
+ =?utf-8?B?a2E2cS90UlhQdndBYkxUT1B4YVZpcTFtWG5BWmFHNzNSejRsY2crTWVKaEZ4?=
+ =?utf-8?B?Zzh6a2dFbE5pSW5jOGxDa09zYWJnTkNNYkpXTjl2czRWNHNJUTl5dXcwcmlB?=
+ =?utf-8?B?dmNLQjZIV29jSW1aQUMvNEhMa0h3WXNHeTNjOGxoaDJ5SlV1RDEwRGJIVDNk?=
+ =?utf-8?B?Qk5pZ1pKL2RKbmZXM1hEWHhhdi9mSDZpSkh6ZlBnNDJVRGlmOGNIcmhyTGZv?=
+ =?utf-8?B?THo0RDNRbVRJckE1MlBNNUFhN2hDNTg0Z3NDMENrTy9IWWpiQ29jeGUyaks2?=
+ =?utf-8?B?Yjl5c05MWDVGdnNUcW9pQnRIS05OejBTTWhMc1M1WkhkYllyOTZzazc0K0xU?=
+ =?utf-8?B?aXdzRCt1RDFxSzkvMWdCWVA1MDJWZ2puRmR3djFzcDhYV0o3OU1mc3pmVGZa?=
+ =?utf-8?B?Q0UvUndNRXlZU0dHd0ptN3JBOUg5VUFYREpKNWNVYkV0R1JCSzBpckxQRlEy?=
+ =?utf-8?B?U0VtakkzMGJ3eG1uZGJrbTdqZHFwYlZ0ZjZwK2pwblBVbUFBN2o5cHV3MUNW?=
+ =?utf-8?B?ZmFRVUZEU2l1dTVRV2MwVDFEQWl0T0lHeDJJcm1oNTA4VHZzbDB2cmlTbldi?=
+ =?utf-8?B?aW9pVjZXdEdNOEo5Q1J6YVVxSVNadDczYllrU3d2M0t6Nml2aks5d0lMOTJl?=
+ =?utf-8?B?RmduN3N1VlZGazNra3dKN0VrS0o0dUl1YVo4TFZNdGhtNVFveXpxTGJUVzgz?=
+ =?utf-8?B?VE4yeHE3MGxxTHN6dG9nL0pvSS9hNTRYRFA2c2FrV2tIUWgzOEx4RUhveEkr?=
+ =?utf-8?B?R2dXaUp1bng0cHB4ZEF4R3BzMmZMNnZReE53ZnRmbEMweDZhUXJRZkZmSDRt?=
+ =?utf-8?B?VkFKSGppck1ITHBkbm5WWDczNWFBTi9pSTQwYnZDTTJmZTk4VnJIVWE1bll2?=
+ =?utf-8?B?UitNaURRVmNpZWR4STIvdk9RRTZHVW9OK0p1N1k1a2h3aVRIbGVmbmhxRSt2?=
+ =?utf-8?B?WFNvby96OHBMbU83QkV2c21CandUNm4yTW5uYmJPcXZnM056dU54dDVsdTBl?=
+ =?utf-8?B?RnpHRjlQbkRyZmJYUHBYTkFzYzQ1eVNtYnFkb1JGYVNXejlOZ0FKWjVheHFG?=
+ =?utf-8?B?aERGdUhIVmZ1Mm4yb21ENm5ncFNUdWlVQUNqY0xpdDJzVzFVMHRscW5PZnho?=
+ =?utf-8?B?RWhGNXdNam5NVEFtZWswaTU0T2JOMHZCL3E1ZStVenEzR1BYSFk0TkxQeGQ5?=
+ =?utf-8?B?UmRqY2NCWlAwQjB4Y1c3S1J3NFZVenBzajFSN3FhTjdpMDhtb05IcTVVajVi?=
+ =?utf-8?B?SE1ycExZYzhrcVZISTNkYUErOW9sRTlrbFdwdVYwL2c5R051UmdJTnZNM0px?=
+ =?utf-8?B?dEhCdGVWR1hWMHlGMVhaTmpwa285UndYU0EzZXRwSGJHOE93WC9TN3pnc2Jm?=
+ =?utf-8?B?ZFNNRExOUXFCZldYcm5aZmZIanlMRTgxRzVEZWZNSnNGYjMybnJwK3FKY014?=
+ =?utf-8?B?Lys3eUhlTnNJbkRtS2F3bUIzN05raW5xUm5MNFlwd3BsTG5wcEJ4NVFNNGhL?=
+ =?utf-8?B?ME55Z0VFaG40c3J1QlpNRkxNNTdzRHllM2VBNGFtSDN0Y3JudGJ6dXo1R281?=
+ =?utf-8?B?SDZMOE10NktraXdwYVpVdWZvNUIzN1hoM1hLeUFYdzRaaHA4R0NoaEpsNHJK?=
+ =?utf-8?B?ZHUxRkFaaXpTbmU2SEFLUmNSUWhSV2NGc2ZoWTNzbzNmUVZrckxNUmNnM1do?=
+ =?utf-8?B?NExYdGRmaW1XN3JjbTQrSXo0ajIxeGNMRVBwWmdMZUM0RzNtNXlDazVWYXBj?=
+ =?utf-8?B?dk5tVkF5S2JNT2o3QisrS3I4cmRXMkxNZFMyRVY5ZEFhRVhUdWJkekd5dDZL?=
+ =?utf-8?B?M2ViYkVjK0syMncvN3JSOVl6T3J6RjUyRHVmWVNLTzFSamc9PQ==?=
 X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230031)(82310400017)(376005)(36860700004)(1800799015); DIR:OUT;
+ SFS:(13230031)(36860700004)(1800799015)(376005)(82310400017); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2024 21:10:55.8848 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 77fa779e-31ef-4ae3-0a52-08dc8991d19b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2024 21:12:37.9935 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 43c66e11-c973-4c78-f80a-08dc89920e79
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000989E9.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000989EA.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4449
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6290
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -147,700 +148,644 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 4/6/24 21:16, Danilo Krummrich wrote:
+On 4/6/24 22:24, Danilo Krummrich wrote:
 
 > On 5/27/24 16:19, Ben Skeggs wrote:
->> nouveau_usif.c was already stripped right back a couple of years ago,
->> limiting what userspace could do with it, and now I'd like to remove
->> the nvkm side of these interfaces entirely, in order to make it less
->> of a nightmare to add/change internal APIs in the future.
->>
->> Unfortunately.  Userspace uses some of this.
->>
->> Fortunately, userspace only ever ended up using a fraction of the APIs,
->> so I've reimplemented those in a more direct manner, and return -EINVAL
->> to userspace for everything else.
+>> All callers now pass "detect=true, mmio=true, subdev_mask=~0ULL",
+>> so remove the function arguments, and associated code.
 >>
 >> Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 >> ---
->>   drivers/gpu/drm/nouveau/Kbuild          |   1 -
->>   drivers/gpu/drm/nouveau/nouveau_abi16.c | 277 ++++++++++++++++++++----
->>   drivers/gpu/drm/nouveau/nouveau_abi16.h |   3 +-
->>   drivers/gpu/drm/nouveau/nouveau_drm.c   |   5 +-
->>   drivers/gpu/drm/nouveau/nouveau_nvif.c  |   1 -
->>   drivers/gpu/drm/nouveau/nouveau_usif.c  | 194 -----------------
->>   drivers/gpu/drm/nouveau/nouveau_usif.h  |  10 -
->>   7 files changed, 242 insertions(+), 249 deletions(-)
->>   delete mode 100644 drivers/gpu/drm/nouveau/nouveau_usif.c
->>   delete mode 100644 drivers/gpu/drm/nouveau/nouveau_usif.h
+>>   .../gpu/drm/nouveau/include/nvkm/core/pci.h   |   1 -
+>>   .../gpu/drm/nouveau/include/nvkm/core/tegra.h |   1 -
+>>   drivers/gpu/drm/nouveau/nouveau_drm.c         |   6 +-
+>>   .../gpu/drm/nouveau/nvkm/engine/device/base.c | 422 +++++++++---------
+>>   .../gpu/drm/nouveau/nvkm/engine/device/pci.c  |   4 +-
+>>   .../gpu/drm/nouveau/nvkm/engine/device/priv.h |   1 -
+>>   .../drm/nouveau/nvkm/engine/device/tegra.c    |   5 +-
+>>   7 files changed, 209 insertions(+), 231 deletions(-)
 >>
->> diff --git a/drivers/gpu/drm/nouveau/Kbuild 
->> b/drivers/gpu/drm/nouveau/Kbuild
->> index cf6b3a80c0c8..c3223ec97aff 100644
->> --- a/drivers/gpu/drm/nouveau/Kbuild
->> +++ b/drivers/gpu/drm/nouveau/Kbuild
->> @@ -27,7 +27,6 @@ nouveau-$(CONFIG_COMPAT) += nouveau_ioc32.o
->>   nouveau-$(CONFIG_LEDS_CLASS) += nouveau_led.o
->>   nouveau-y += nouveau_nvif.o
->>   nouveau-$(CONFIG_NOUVEAU_PLATFORM_DRIVER) += nouveau_platform.o
->> -nouveau-y += nouveau_usif.o # userspace <-> nvif
->>   nouveau-y += nouveau_vga.o
->>     # DRM - memory management
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c 
->> b/drivers/gpu/drm/nouveau/nouveau_abi16.c
->> index d5fda5e3a4f2..aac923b3cb89 100644
->> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
->> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
->> @@ -52,6 +52,7 @@ nouveau_abi16(struct drm_file *file_priv)
->>                 abi16->cli = cli;
->>               INIT_LIST_HEAD(&abi16->channels);
->> +            INIT_LIST_HEAD(&abi16->objects);
->>                 /* allocate device object targeting client's default
->>                * device (ie. the one that belongs to the fd it
->> @@ -88,6 +89,61 @@ nouveau_abi16_put(struct nouveau_abi16 *abi16, int 
->> ret)
->>       return ret;
->>   }
->>   +struct nouveau_abi16_obj {
->
-> Can you please add some documentation on the semantical meaning of this
-> structure...
-
-I added a line above the declaration.
-
-
->
->> +    enum nouveau_abi16_obj_type {
->
-> ...and this enum?
->
->> +        DEVICE,
->> +        ENGOBJ,
->> +    } type;
->> +    u64 object;
->> +
->> +    union {
->> +        struct {
->> +            struct nvif_object object;
->> +        } engobj;
->> +    };
->
-> What do we need the anonymous union and struct for?
-
-I was trying to make it obvious the field only applied if type == 
-ENGOBJ.  Given that nvif_ioctl isn't likely to be extended, with the 
-next series removing it, I've just collapsed the union+struct into the 
-parent struct.
-
-
->
->> +
->> +    struct list_head head;
->
-> I'd probably add a comment that this list is / must be protected by the
-> client mutex, which implicitly happens though nouveau_abi16_{get,put}().
-
-Done.
-
-
->
->> +};
->> +
->> +static struct nouveau_abi16_obj *
->> +nouveau_abi16_obj_find(struct nouveau_abi16 *abi16, u64 object)
->> +{
->> +    struct nouveau_abi16_obj *obj;
->> +
->> +    list_for_each_entry(obj, &abi16->objects, head) {
->> +        if (obj->object == object)
->> +            return obj;
->> +    }
->> +
->> +    return NULL;
->> +}
->> +
->> +static void
->> +nouveau_abi16_obj_del(struct nouveau_abi16_obj *obj)
->> +{
->> +    list_del(&obj->head);
->> +    kfree(obj);
->> +}
->> +
->> +static struct nouveau_abi16_obj *
->> +nouveau_abi16_obj_new(struct nouveau_abi16 *abi16, enum 
->> nouveau_abi16_obj_type type, u64 object)
->> +{
->> +    struct nouveau_abi16_obj *obj;
->> +
->> +    obj = nouveau_abi16_obj_find(abi16, object);
->> +    if (obj)
->> +        return ERR_PTR(-EEXIST);
->> +
->> +    obj = kzalloc(sizeof(*obj), GFP_KERNEL);
->> +    if (!obj)
->> +        return ERR_PTR(-ENOMEM);
->> +
->> +    obj->type = type;
->> +    obj->object = object;
->> +    list_add_tail(&obj->head, &abi16->objects);
->> +    return obj;
->> +}
->> +
->>   s32
->>   nouveau_abi16_swclass(struct nouveau_drm *drm)
->>   {
->> @@ -167,6 +223,12 @@ nouveau_abi16_fini(struct nouveau_abi16 *abi16)
->>   {
->>       struct nouveau_cli *cli = abi16->cli;
->>       struct nouveau_abi16_chan *chan, *temp;
->> +    struct nouveau_abi16_obj *obj, *tmp;
->> +
->> +    /* cleanup objects */
->> +    list_for_each_entry_safe(obj, tmp, &abi16->objects, head) {
->> +        nouveau_abi16_obj_del(obj);
->> +    }
->>         /* cleanup channels */
->>       list_for_each_entry_safe(chan, temp, &abi16->channels, head) {
->> @@ -455,44 +517,6 @@ nouveau_abi16_chan(struct nouveau_abi16 *abi16, 
->> int channel)
->>       return NULL;
->>   }
->>   -int
->> -nouveau_abi16_usif(struct drm_file *file_priv, void *data, u32 size)
->> -{
->> -    union {
->> -        struct nvif_ioctl_v0 v0;
->> -    } *args = data;
->> -    struct nouveau_abi16_chan *chan;
->> -    struct nouveau_abi16 *abi16;
->> -    int ret = -ENOSYS;
->> -
->> -    if (!(ret = nvif_unpack(ret, &data, &size, args->v0, 0, 0, 
->> true))) {
->> -        switch (args->v0.type) {
->> -        case NVIF_IOCTL_V0_NEW:
->> -        case NVIF_IOCTL_V0_MTHD:
->> -        case NVIF_IOCTL_V0_SCLASS:
->> -            break;
->> -        default:
->> -            return -EACCES;
->> -        }
->> -    } else
->> -        return ret;
->> -
->> -    if (!(abi16 = nouveau_abi16(file_priv)))
->> -        return -ENOMEM;
->> -
->> -    if (args->v0.token != ~0ULL) {
->> -        if (!(chan = nouveau_abi16_chan(abi16, args->v0.token)))
->> -            return -EINVAL;
->> -        args->v0.object = nvif_handle(&chan->chan->user);
->> -        args->v0.owner  = NVIF_IOCTL_V0_OWNER_ANY;
->> -        return 0;
->> -    }
->> -
->> -    args->v0.object = nvif_handle(&abi16->device.object);
->> -    args->v0.owner  = NVIF_IOCTL_V0_OWNER_ANY;
->> -    return 0;
->> -}
->> -
->>   int
->>   nouveau_abi16_ioctl_channel_free(ABI16_IOCTL_ARGS)
->>   {
->> @@ -702,3 +726,180 @@ nouveau_abi16_ioctl_gpuobj_free(ABI16_IOCTL_ARGS)
->>         return nouveau_abi16_put(abi16, ret);
->>   }
->> +
->> +static int
->> +nouveau_abi16_ioctl_mthd(struct nouveau_abi16 *abi16, struct 
->> nvif_ioctl_v0 *ioctl, u32 argc)
->> +{
->> +    struct nouveau_cli *cli = abi16->cli;
->> +    struct nvif_ioctl_mthd_v0 *args;
->> +    struct nouveau_abi16_obj *obj;
->> +    struct nv_device_info_v0 *info;
->> +
->> +    if (ioctl->route || argc < sizeof(*args))
->> +        return -EINVAL;
->> +    args = (void *)ioctl->data;
->> +    argc -= sizeof(*args);
->> +
->> +    obj = nouveau_abi16_obj_find(abi16, ioctl->object);
->> +    if (!obj || obj->type != DEVICE)
->> +        return -EINVAL;
->> +
->> +    if (args->method != NV_DEVICE_V0_INFO ||
->> +        argc != sizeof(*info))
->> +        return -EINVAL;
->> +
->> +    info = (void *)args->data;
->> +    if (info->version != 0x00)
->> +        return -EINVAL;
->> +
->> +    info = &cli->device.info;
->> +    memcpy(args->data, info, sizeof(*info));
->> +    return 0;
->> +}
->> +
->> +static int
->> +nouveau_abi16_ioctl_del(struct nouveau_abi16 *abi16, struct 
->> nvif_ioctl_v0 *ioctl, u32 argc)
->> +{
->> +    struct nouveau_abi16_obj *obj;
->> +
->> +    if (ioctl->route || argc)
->> +        return -EINVAL;
->> +
->> +    obj = nouveau_abi16_obj_find(abi16, ioctl->object);
->> +    if (obj)
->> +        nouveau_abi16_obj_del(obj);
->> +
->> +    return 0;
->> +}
->> +
->> +static int
->> +nouveau_abi16_ioctl_new(struct nouveau_abi16 *abi16, struct 
->> nvif_ioctl_v0 *ioctl, u32 argc)
->> +{
->> +    struct nvif_ioctl_new_v0 *args;
->> +    struct nouveau_abi16_chan *chan;
->> +    struct nouveau_abi16_obj *obj;
->> +    int ret;
->> +
->> +    if (argc < sizeof(*args))
->> +        return -EINVAL;
->> +    args = (void *)ioctl->data;
->> +    argc -= sizeof(*args);
->> +
->> +    if (args->version != 0)
->> +        return -EINVAL;
->> +
->> +    if (!ioctl->route) {
->> +        if (ioctl->object || args->oclass != NV_DEVICE)
->> +            return -EINVAL;
->> +
->> +        obj = nouveau_abi16_obj_new(abi16, DEVICE, args->object);
->> +        if (IS_ERR(obj))
->> +            return PTR_ERR(obj);
->> +
->> +        return 0;
->> +    }
->> +
->> +    chan = nouveau_abi16_chan(abi16, ioctl->token);
->> +    if (!chan)
->> +        return -EINVAL;
->> +
->> +    obj = nouveau_abi16_obj_new(abi16, ENGOBJ, args->object);
->> +    if (IS_ERR(obj))
->> +        return PTR_ERR(obj);
->> +
->> +    ret = nvif_object_ctor(&chan->chan->user, "abi16EngObj", 
->> args->handle, args->oclass,
->> +                   NULL, 0, &obj->engobj.object);
->> +    if (ret)
->> +        nouveau_abi16_obj_del(obj);
->> +
->> +    return ret;
->> +}
->> +
->> +static int
->> +nouveau_abi16_ioctl_sclass(struct nouveau_abi16 *abi16, struct 
->> nvif_ioctl_v0 *ioctl, u32 argc)
->> +{
->> +    struct nvif_ioctl_sclass_v0 *args;
->> +    struct nouveau_abi16_chan *chan;
->> +    struct nvif_sclass *sclass;
->> +    int ret;
->> +
->> +    if (!ioctl->route || argc < sizeof(*args))
->> +        return -EINVAL;
->> +    args = (void *)ioctl->data;
->> +    argc -= sizeof(*args);
->> +
->> +    if (argc != args->count * sizeof(args->oclass[0]))
->> +        return -EINVAL;
->> +
->> +    chan = nouveau_abi16_chan(abi16, ioctl->token);
->> +    if (!chan)
->> +        return -EINVAL;
->> +
->> +    ret = nvif_object_sclass_get(&chan->chan->user, &sclass);
->> +    if (ret < 0)
->> +        return ret;
->> +
->> +    for (int i = 0; i < min_t(u8, args->count, ret); i++) {
->> +        args->oclass[i].oclass = sclass[i].oclass;
->> +        args->oclass[i].minver = sclass[i].minver;
->> +        args->oclass[i].maxver = sclass[i].maxver;
->> +    }
->> +    args->count = ret;
->> +
->> +    nvif_object_sclass_put(&sclass);
->> +    return 0;
->> +}
->> +
->> +int
->> +nouveau_abi16_ioctl(struct drm_file *filp, void __user *user, u32 size)
->> +{
->> +    struct nvif_ioctl_v0 *ioctl;
->> +    struct nouveau_abi16 *abi16;
->> +    u32 argc = size;
->> +    int ret;
->> +
->> +    if (argc < sizeof(*ioctl))
->> +        return -EINVAL;
->> +    argc -= sizeof(*ioctl);
->> +
->> +    ioctl = kmalloc(size, GFP_KERNEL);
->> +    if (!ioctl)
->> +        return -ENOMEM;
->> +
->> +    ret = -EFAULT;
->> +    if (copy_from_user(ioctl, user, size))
->> +        goto done_free;
->> +
->> +    if (ioctl->version != 0x00 ||
->> +        (ioctl->route && ioctl->route != 0xff)) {
->> +        ret = -EINVAL;
->> +        goto done_free;
->> +    }
->> +
->> +    abi16 = nouveau_abi16_get(filp);
->> +    if (unlikely(!abi16)) {
->> +        ret = -ENOMEM;
->> +        goto done_free;
->> +    }
->> +
->> +    switch (ioctl->type) {
->> +    case NVIF_IOCTL_V0_SCLASS: ret = 
->> nouveau_abi16_ioctl_sclass(abi16, ioctl, argc); break;
->> +    case NVIF_IOCTL_V0_NEW   : ret = nouveau_abi16_ioctl_new (abi16, 
->> ioctl, argc); break;
->> +    case NVIF_IOCTL_V0_DEL   : ret = nouveau_abi16_ioctl_del (abi16, 
->> ioctl, argc); break;
->> +    case NVIF_IOCTL_V0_MTHD  : ret = nouveau_abi16_ioctl_mthd 
->> (abi16, ioctl, argc); break;
->> +    default:
->> +        ret = -EINVAL;
->> +        break;
->> +    }
->> +
->> +    nouveau_abi16_put(abi16, 0);
->> +
->> +    if (ret == 0) {
->
-> NIT: Not a strong preference, but could just write:
->
-> if (!nouveau_abi16_put(abi16, ret)) {
->
->> +        if (copy_to_user(user, ioctl, size))
->> +            ret = -EFAULT;
->> +    }
->> +
->> +done_free:
->> +    kfree(ioctl);
->> +    return ret;
->> +}
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.h 
->> b/drivers/gpu/drm/nouveau/nouveau_abi16.h
->> index 0a9121e63143..75a883a44e04 100644
->> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.h
->> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.h
->> @@ -34,13 +34,14 @@ struct nouveau_abi16 {
->>       struct nvif_device device;
->>       struct list_head channels;
->>       u64 handles;
->> +    struct list_head objects;
+>> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/pci.h 
+>> b/drivers/gpu/drm/nouveau/include/nvkm/core/pci.h
+>> index b4b5df3e1610..7444c4d59e09 100644
+>> --- a/drivers/gpu/drm/nouveau/include/nvkm/core/pci.h
+>> +++ b/drivers/gpu/drm/nouveau/include/nvkm/core/pci.h
+>> @@ -10,6 +10,5 @@ struct nvkm_device_pci {
 >>   };
->>     struct nouveau_abi16 *nouveau_abi16_get(struct drm_file *);
->>   int  nouveau_abi16_put(struct nouveau_abi16 *, int);
->>   void nouveau_abi16_fini(struct nouveau_abi16 *);
->>   s32  nouveau_abi16_swclass(struct nouveau_drm *);
->> -int  nouveau_abi16_usif(struct drm_file *, void *data, u32 size);
->> +int nouveau_abi16_ioctl(struct drm_file *, void __user *user, u32 
->> size);
->>     #define NOUVEAU_GEM_DOMAIN_VRAM      (1 << 1)
->>   #define NOUVEAU_GEM_DOMAIN_GART      (1 << 2)
+>>     int nvkm_device_pci_new(struct pci_dev *, const char *cfg, const 
+>> char *dbg,
+>> -            bool detect, bool mmio, u64 subdev_mask,
+>>               struct nvkm_device **);
+>>   #endif
+>> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/tegra.h 
+>> b/drivers/gpu/drm/nouveau/include/nvkm/core/tegra.h
+>> index ccee53d4e4ec..22f74fc88cd7 100644
+>> --- a/drivers/gpu/drm/nouveau/include/nvkm/core/tegra.h
+>> +++ b/drivers/gpu/drm/nouveau/include/nvkm/core/tegra.h
+>> @@ -51,6 +51,5 @@ struct nvkm_device_tegra_func {
+>>   int nvkm_device_tegra_new(const struct nvkm_device_tegra_func *,
+>>                 struct platform_device *,
+>>                 const char *cfg, const char *dbg,
+>> -              bool detect, bool mmio, u64 subdev_mask,
+>>                 struct nvkm_device **);
+>>   #endif
 >> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c 
 >> b/drivers/gpu/drm/nouveau/nouveau_drm.c
->> index 25b9c3b19bc0..e1a7475db430 100644
+>> index e1a7475db430..ce40a0100264 100644
 >> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
 >> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
->> @@ -63,7 +63,6 @@
->>   #include "nouveau_abi16.h"
->>   #include "nouveau_fence.h"
->>   #include "nouveau_debugfs.h"
->> -#include "nouveau_usif.h"
->>   #include "nouveau_connector.h"
->>   #include "nouveau_platform.h"
->>   #include "nouveau_svm.h"
->> @@ -200,7 +199,6 @@ nouveau_cli_fini(struct nouveau_cli *cli)
->>       flush_work(&cli->work);
->>       WARN_ON(!list_empty(&cli->worker));
->>   -    usif_client_fini(cli);
->>       if (cli->sched)
->>           nouveau_sched_destroy(&cli->sched);
->>       if (uvmm)
->> @@ -249,7 +247,6 @@ nouveau_cli_init(struct nouveau_drm *drm, const 
->> char *sname,
->>       snprintf(cli->name, sizeof(cli->name), "%s", sname);
->>       cli->drm = drm;
->>       mutex_init(&cli->mutex);
->> -    usif_client_init(cli);
->>         INIT_WORK(&cli->work, nouveau_cli_work);
->>       INIT_LIST_HEAD(&cli->worker);
->> @@ -1246,7 +1243,7 @@ nouveau_drm_ioctl(struct file *file, unsigned 
->> int cmd, unsigned long arg)
->>         switch (_IOC_NR(cmd) - DRM_COMMAND_BASE) {
->>       case DRM_NOUVEAU_NVIF:
->> -        ret = usif_ioctl(filp, (void __user *)arg, _IOC_SIZE(cmd));
->> +        ret = nouveau_abi16_ioctl(filp, (void __user *)arg, 
->> _IOC_SIZE(cmd));
->>           break;
->>       default:
->>           ret = drm_ioctl(file, cmd, arg);
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_nvif.c 
->> b/drivers/gpu/drm/nouveau/nouveau_nvif.c
->> index 1d49ebdfd5dc..9a7e3f64b79f 100644
->> --- a/drivers/gpu/drm/nouveau/nouveau_nvif.c
->> +++ b/drivers/gpu/drm/nouveau/nouveau_nvif.c
->> @@ -35,7 +35,6 @@
->>   #include <nvif/ioctl.h>
->>     #include "nouveau_drv.h"
->> -#include "nouveau_usif.h"
->>     static void
->>   nvkm_client_unmap(void *priv, void __iomem *ptr, u32 size)
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_usif.c 
->> b/drivers/gpu/drm/nouveau/nouveau_usif.c
->> deleted file mode 100644
->> index 002d1479ba89..000000000000
->> --- a/drivers/gpu/drm/nouveau/nouveau_usif.c
->> +++ /dev/null
->> @@ -1,194 +0,0 @@
->> -/*
->> - * Copyright 2014 Red Hat Inc.
->> - *
->> - * Permission is hereby granted, free of charge, to any person 
->> obtaining a
->> - * copy of this software and associated documentation files (the 
->> "Software"),
->> - * to deal in the Software without restriction, including without 
->> limitation
->> - * the rights to use, copy, modify, merge, publish, distribute, 
->> sublicense,
->> - * and/or sell copies of the Software, and to permit persons to whom 
->> the
->> - * Software is furnished to do so, subject to the following conditions:
->> - *
->> - * The above copyright notice and this permission notice shall be 
->> included in
->> - * all copies or substantial portions of the Software.
->> - *
->> - * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
->> EXPRESS OR
->> - * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
->> MERCHANTABILITY,
->> - * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO 
->> EVENT SHALL
->> - * THE COPYRIGHT HOLDER(S) OR AUTHOR(S) BE LIABLE FOR ANY CLAIM, 
->> DAMAGES OR
->> - * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
->> OTHERWISE,
->> - * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE 
->> USE OR
->> - * OTHER DEALINGS IN THE SOFTWARE.
->> - *
->> - * Authors: Ben Skeggs <bskeggs@redhat.com>
->> - */
->> -
->> -#include "nouveau_drv.h"
->> -#include "nouveau_usif.h"
->> -#include "nouveau_abi16.h"
->> -
->> -#include <nvif/unpack.h>
->> -#include <nvif/client.h>
->> -#include <nvif/ioctl.h>
->> -
->> -#include <nvif/class.h>
->> -#include <nvif/cl0080.h>
->> -
->> -struct usif_object {
->> -    struct list_head head;
->> -    u8  route;
->> -    u64 token;
+>> @@ -808,8 +808,7 @@ static int nouveau_drm_probe(struct pci_dev *pdev,
+>>       /* We need to check that the chipset is supported before booting
+>>        * fbdev off the hardware, as there's no way to put it back.
+>>        */
+>> -    ret = nvkm_device_pci_new(pdev, nouveau_config, nouveau_debug,
+>> -                  true, true, ~0ULL, &device);
+>> +    ret = nvkm_device_pci_new(pdev, nouveau_config, nouveau_debug, 
+>> &device);
+>>       if (ret)
+>>           return ret;
+>>   @@ -1366,8 +1365,7 @@ nouveau_platform_device_create(const struct 
+>> nvkm_device_tegra_func *func,
+>>       struct drm_device *drm;
+>>       int err;
+>>   -    err = nvkm_device_tegra_new(func, pdev, nouveau_config, 
+>> nouveau_debug,
+>> -                    true, true, ~0ULL, pdevice);
+>> +    err = nvkm_device_tegra_new(func, pdev, nouveau_config, 
+>> nouveau_debug, pdevice);
+>>       if (err)
+>>           goto err_free;
+>>   diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c 
+>> b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
+>> index 31ed3da32fe7..006f01e93b9b 100644
+>> --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
+>> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
+>> @@ -67,12 +67,6 @@ nvkm_device_list(u64 *name, int size)
+>>       return nr;
+>>   }
+>>   -static const struct nvkm_device_chip
+>> -null_chipset = {
+>> -    .name = "NULL",
+>> -    .bios     = { 0x00000001, nvkm_bios_new },
 >> -};
 >> -
->> -static void
->> -usif_object_dtor(struct usif_object *object)
->> -{
->> -    list_del(&object->head);
->> -    kfree(object);
->> -}
->> -
->> -static int
->> -usif_object_new(struct drm_file *f, void *data, u32 size, void 
->> *argv, u32 argc, bool parent_abi16)
->> -{
->> -    struct nouveau_cli *cli = nouveau_cli(f);
->> -    struct nvif_client *client = &cli->base;
->> -    union {
->> -        struct nvif_ioctl_new_v0 v0;
->> -    } *args = data;
->> -    struct usif_object *object;
->> -    int ret = -ENOSYS;
->> -
->> -    if ((ret = nvif_unpack(ret, &data, &size, args->v0, 0, 0, true)))
->> -        return ret;
->> -
->> -    switch (args->v0.oclass) {
->> -    case NV_DMA_FROM_MEMORY:
->> -    case NV_DMA_TO_MEMORY:
->> -    case NV_DMA_IN_MEMORY:
->> -        return -EINVAL;
->> -    case NV_DEVICE: {
->> -        union {
->> -            struct nv_device_v0 v0;
->> -        } *args = data;
->> -
->> -        if ((ret = nvif_unpack(ret, &data, &size, args->v0, 0, 0, 
->> false)))
->> -            return ret;
->> -
->> -        args->v0.priv = false;
->> -        break;
->> -    }
->> -    default:
->> -        if (!parent_abi16)
->> -            return -EINVAL;
->> -        break;
->> -    }
->> -
->> -    if (!(object = kmalloc(sizeof(*object), GFP_KERNEL)))
->> -        return -ENOMEM;
->> -    list_add(&object->head, &cli->objects);
->> -
->> -    object->route = args->v0.route;
->> -    object->token = args->v0.token;
->> -    args->v0.route = NVDRM_OBJECT_USIF;
->> -    args->v0.token = (unsigned long)(void *)object;
->> -    ret = nvif_client_ioctl(client, argv, argc);
->> -    if (ret) {
->> -        usif_object_dtor(object);
->> -        return ret;
->> -    }
->> -
->> -    args->v0.token = object->token;
->> -    args->v0.route = object->route;
->> -    return 0;
->> -}
->> -
->> -int
->> -usif_ioctl(struct drm_file *filp, void __user *user, u32 argc)
->> -{
->> -    struct nouveau_cli *cli = nouveau_cli(filp);
->> -    struct nvif_client *client = &cli->base;
->> -    void *data = kmalloc(argc, GFP_KERNEL);
->> -    u32   size = argc;
->> -    union {
->> -        struct nvif_ioctl_v0 v0;
->> -    } *argv = data;
->> -    struct usif_object *object;
->> -    bool abi16 = false;
->> -    u8 owner;
->> -    int ret;
->> -
->> -    if (ret = -ENOMEM, !argv)
->> -        goto done;
->> -    if (ret = -EFAULT, copy_from_user(argv, user, size))
->> -        goto done;
->> -
->> -    if (!(ret = nvif_unpack(-ENOSYS, &data, &size, argv->v0, 0, 0, 
->> true))) {
->> -        /* block access to objects not created via this interface */
->> -        owner = argv->v0.owner;
->> -        if (argv->v0.object == 0ULL &&
->> -            argv->v0.type != NVIF_IOCTL_V0_DEL)
->> -            argv->v0.owner = NVDRM_OBJECT_ANY; /* except client */
->> -        else
->> -            argv->v0.owner = NVDRM_OBJECT_USIF;
->> -    } else
->> -        goto done;
->> -
->> -    /* USIF slightly abuses some return-only ioctl members in order
->> -     * to provide interoperability with the older ABI16 objects
->> -     */
->> -    mutex_lock(&cli->mutex);
->> -    if (argv->v0.route) {
->> -        if (ret = -EINVAL, argv->v0.route == 0xff)
->> -            ret = nouveau_abi16_usif(filp, argv, argc);
->> -        if (ret) {
->> -            mutex_unlock(&cli->mutex);
+>>   static const struct nvkm_device_chip
+>>   nv4_chipset = {
+>>       .name = "NV04",
+>> @@ -3104,7 +3098,6 @@ nvkm_device_ctor(const struct nvkm_device_func 
+>> *func,
+>>            const struct nvkm_device_quirk *quirk,
+>>            struct device *dev, enum nvkm_device_type type, u64 handle,
+>>            const char *name, const char *cfg, const char *dbg,
+>> -         bool detect, bool mmio, u64 subdev_mask,
+>>            struct nvkm_device *device)
+>>   {
+>>       struct nvkm_subdev *subdev;
+>> @@ -3132,233 +3125,228 @@ nvkm_device_ctor(const struct 
+>> nvkm_device_func *func,
+>>       mmio_base = device->func->resource_addr(device, 0);
+>>       mmio_size = device->func->resource_size(device, 0);
+>>   -    if (detect || mmio) {
+>> -        device->pri = ioremap(mmio_base, mmio_size);
+>> -        if (device->pri == NULL) {
+>> -            nvdev_error(device, "unable to map PRI\n");
+>> -            ret = -ENOMEM;
 >> -            goto done;
 >> -        }
+>> +    device->pri = ioremap(mmio_base, mmio_size);
+>> +    if (device->pri == NULL) {
+>> +        nvdev_error(device, "unable to map PRI\n");
+>> +        ret = -ENOMEM;
+>> +        goto done;
+>>       }
+>>         /* identify the chipset, and determine classes of 
+>> subdev/engines */
+>> -    if (detect) {
+>> -        /* switch mmio to cpu's native endianness */
+>> -        if (!nvkm_device_endianness(device)) {
+>> -            nvdev_error(device,
+>> -                    "Couldn't switch GPU to CPUs endianness\n");
+>> -            ret = -ENOSYS;
+>> -            goto done;
+>> -        }
+>>   -        boot0 = nvkm_rd32(device, 0x000000);
 >> -
->> -        abi16 = true;
->> -    }
+>> -        /* chipset can be overridden for devel/testing purposes */
+>> -        chipset = nvkm_longopt(device->cfgopt, "NvChipset", 0);
+>> -        if (chipset) {
+>> -            u32 override_boot0;
 >> -
->> -    switch (argv->v0.type) {
->> -    case NVIF_IOCTL_V0_NEW:
->> -        ret = usif_object_new(filp, data, size, argv, argc, abi16);
->> -        break;
->> -    default:
->> -        ret = nvif_client_ioctl(client, argv, argc);
->> -        break;
->> -    }
->> -    if (argv->v0.route == NVDRM_OBJECT_USIF) {
->> -        object = (void *)(unsigned long)argv->v0.token;
->> -        argv->v0.route = object->route;
->> -        argv->v0.token = object->token;
->> -        if (ret == 0 && argv->v0.type == NVIF_IOCTL_V0_DEL) {
->> -            list_del(&object->head);
->> -            kfree(object);
+>> -            if (chipset >= 0x10) {
+>> -                override_boot0  = ((chipset & 0x1ff) << 20);
+>> -                override_boot0 |= 0x000000a1;
+>> -            } else {
+>> -                if (chipset != 0x04)
+>> -                    override_boot0 = 0x20104000;
+>> -                else
+>> -                    override_boot0 = 0x20004000;
+>> -            }
+>> +    /* switch mmio to cpu's native endianness */
+>> +    if (!nvkm_device_endianness(device)) {
+>> +        nvdev_error(device,
+>> +                "Couldn't switch GPU to CPUs endianness\n");
+>> +        ret = -ENOSYS;
+>> +        goto done;
+>> +    }
+>>   -            nvdev_warn(device, "CHIPSET OVERRIDE: %08x -> %08x\n",
+>> -                   boot0, override_boot0);
+>> -            boot0 = override_boot0;
+>> -        }
+>> +    boot0 = nvkm_rd32(device, 0x000000);
+>>   -        /* determine chipset and derive architecture from it */
+>> -        if ((boot0 & 0x1f000000) > 0) {
+>> -            device->chipset = (boot0 & 0x1ff00000) >> 20;
+>> -            device->chiprev = (boot0 & 0x000000ff);
+>> -            switch (device->chipset & 0x1f0) {
+>> -            case 0x010: {
+>> -                if (0x461 & (1 << (device->chipset & 0xf)))
+>> -                    device->card_type = NV_10;
+>> -                else
+>> -                    device->card_type = NV_11;
+>> -                device->chiprev = 0x00;
+>> -                break;
+>> -            }
+>> -            case 0x020: device->card_type = NV_20; break;
+>> -            case 0x030: device->card_type = NV_30; break;
+>> -            case 0x040:
+>> -            case 0x060: device->card_type = NV_40; break;
+>> -            case 0x050:
+>> -            case 0x080:
+>> -            case 0x090:
+>> -            case 0x0a0: device->card_type = NV_50; break;
+>> -            case 0x0c0:
+>> -            case 0x0d0: device->card_type = NV_C0; break;
+>> -            case 0x0e0:
+>> -            case 0x0f0:
+>> -            case 0x100: device->card_type = NV_E0; break;
+>> -            case 0x110:
+>> -            case 0x120: device->card_type = GM100; break;
+>> -            case 0x130: device->card_type = GP100; break;
+>> -            case 0x140: device->card_type = GV100; break;
+>> -            case 0x160: device->card_type = TU100; break;
+>> -            case 0x170: device->card_type = GA100; break;
+>> -            case 0x190: device->card_type = AD100; break;
+>> -            default:
+>> -                break;
+>> -            }
+>> -        } else
+>> -        if ((boot0 & 0xff00fff0) == 0x20004000) {
+>> -            if (boot0 & 0x00f00000)
+>> -                device->chipset = 0x05;
+>> +    /* chipset can be overridden for devel/testing purposes */
+>> +    chipset = nvkm_longopt(device->cfgopt, "NvChipset", 0);
+>> +    if (chipset) {
+>> +        u32 override_boot0;
+>> +
+>> +        if (chipset >= 0x10) {
+>> +            override_boot0  = ((chipset & 0x1ff) << 20);
+>> +            override_boot0 |= 0x000000a1;
+>> +        } else {
+>> +            if (chipset != 0x04)
+>> +                override_boot0 = 0x20104000;
+>>               else
+>> -                device->chipset = 0x04;
+>> -            device->card_type = NV_04;
+>> +                override_boot0 = 0x20004000;
+>>           }
+>>   -        switch (device->chipset) {
+>> -        case 0x004: device->chip = &nv4_chipset; break;
+>> -        case 0x005: device->chip = &nv5_chipset; break;
+>> -        case 0x010: device->chip = &nv10_chipset; break;
+>> -        case 0x011: device->chip = &nv11_chipset; break;
+>> -        case 0x015: device->chip = &nv15_chipset; break;
+>> -        case 0x017: device->chip = &nv17_chipset; break;
+>> -        case 0x018: device->chip = &nv18_chipset; break;
+>> -        case 0x01a: device->chip = &nv1a_chipset; break;
+>> -        case 0x01f: device->chip = &nv1f_chipset; break;
+>> -        case 0x020: device->chip = &nv20_chipset; break;
+>> -        case 0x025: device->chip = &nv25_chipset; break;
+>> -        case 0x028: device->chip = &nv28_chipset; break;
+>> -        case 0x02a: device->chip = &nv2a_chipset; break;
+>> -        case 0x030: device->chip = &nv30_chipset; break;
+>> -        case 0x031: device->chip = &nv31_chipset; break;
+>> -        case 0x034: device->chip = &nv34_chipset; break;
+>> -        case 0x035: device->chip = &nv35_chipset; break;
+>> -        case 0x036: device->chip = &nv36_chipset; break;
+>> -        case 0x040: device->chip = &nv40_chipset; break;
+>> -        case 0x041: device->chip = &nv41_chipset; break;
+>> -        case 0x042: device->chip = &nv42_chipset; break;
+>> -        case 0x043: device->chip = &nv43_chipset; break;
+>> -        case 0x044: device->chip = &nv44_chipset; break;
+>> -        case 0x045: device->chip = &nv45_chipset; break;
+>> -        case 0x046: device->chip = &nv46_chipset; break;
+>> -        case 0x047: device->chip = &nv47_chipset; break;
+>> -        case 0x049: device->chip = &nv49_chipset; break;
+>> -        case 0x04a: device->chip = &nv4a_chipset; break;
+>> -        case 0x04b: device->chip = &nv4b_chipset; break;
+>> -        case 0x04c: device->chip = &nv4c_chipset; break;
+>> -        case 0x04e: device->chip = &nv4e_chipset; break;
+>> -        case 0x050: device->chip = &nv50_chipset; break;
+>> -        case 0x063: device->chip = &nv63_chipset; break;
+>> -        case 0x067: device->chip = &nv67_chipset; break;
+>> -        case 0x068: device->chip = &nv68_chipset; break;
+>> -        case 0x084: device->chip = &nv84_chipset; break;
+>> -        case 0x086: device->chip = &nv86_chipset; break;
+>> -        case 0x092: device->chip = &nv92_chipset; break;
+>> -        case 0x094: device->chip = &nv94_chipset; break;
+>> -        case 0x096: device->chip = &nv96_chipset; break;
+>> -        case 0x098: device->chip = &nv98_chipset; break;
+>> -        case 0x0a0: device->chip = &nva0_chipset; break;
+>> -        case 0x0a3: device->chip = &nva3_chipset; break;
+>> -        case 0x0a5: device->chip = &nva5_chipset; break;
+>> -        case 0x0a8: device->chip = &nva8_chipset; break;
+>> -        case 0x0aa: device->chip = &nvaa_chipset; break;
+>> -        case 0x0ac: device->chip = &nvac_chipset; break;
+>> -        case 0x0af: device->chip = &nvaf_chipset; break;
+>> -        case 0x0c0: device->chip = &nvc0_chipset; break;
+>> -        case 0x0c1: device->chip = &nvc1_chipset; break;
+>> -        case 0x0c3: device->chip = &nvc3_chipset; break;
+>> -        case 0x0c4: device->chip = &nvc4_chipset; break;
+>> -        case 0x0c8: device->chip = &nvc8_chipset; break;
+>> -        case 0x0ce: device->chip = &nvce_chipset; break;
+>> -        case 0x0cf: device->chip = &nvcf_chipset; break;
+>> -        case 0x0d7: device->chip = &nvd7_chipset; break;
+>> -        case 0x0d9: device->chip = &nvd9_chipset; break;
+>> -        case 0x0e4: device->chip = &nve4_chipset; break;
+>> -        case 0x0e6: device->chip = &nve6_chipset; break;
+>> -        case 0x0e7: device->chip = &nve7_chipset; break;
+>> -        case 0x0ea: device->chip = &nvea_chipset; break;
+>> -        case 0x0f0: device->chip = &nvf0_chipset; break;
+>> -        case 0x0f1: device->chip = &nvf1_chipset; break;
+>> -        case 0x106: device->chip = &nv106_chipset; break;
+>> -        case 0x108: device->chip = &nv108_chipset; break;
+>> -        case 0x117: device->chip = &nv117_chipset; break;
+>> -        case 0x118: device->chip = &nv118_chipset; break;
+>> -        case 0x120: device->chip = &nv120_chipset; break;
+>> -        case 0x124: device->chip = &nv124_chipset; break;
+>> -        case 0x126: device->chip = &nv126_chipset; break;
+>> -        case 0x12b: device->chip = &nv12b_chipset; break;
+>> -        case 0x130: device->chip = &nv130_chipset; break;
+>> -        case 0x132: device->chip = &nv132_chipset; break;
+>> -        case 0x134: device->chip = &nv134_chipset; break;
+>> -        case 0x136: device->chip = &nv136_chipset; break;
+>> -        case 0x137: device->chip = &nv137_chipset; break;
+>> -        case 0x138: device->chip = &nv138_chipset; break;
+>> -        case 0x13b: device->chip = &nv13b_chipset; break;
+>> -        case 0x140: device->chip = &nv140_chipset; break;
+>> -        case 0x162: device->chip = &nv162_chipset; break;
+>> -        case 0x164: device->chip = &nv164_chipset; break;
+>> -        case 0x166: device->chip = &nv166_chipset; break;
+>> -        case 0x167: device->chip = &nv167_chipset; break;
+>> -        case 0x168: device->chip = &nv168_chipset; break;
+>> -        case 0x172: device->chip = &nv172_chipset; break;
+>> -        case 0x173: device->chip = &nv173_chipset; break;
+>> -        case 0x174: device->chip = &nv174_chipset; break;
+>> -        case 0x176: device->chip = &nv176_chipset; break;
+>> -        case 0x177: device->chip = &nv177_chipset; break;
+>> -        case 0x192: device->chip = &nv192_chipset; break;
+>> -        case 0x193: device->chip = &nv193_chipset; break;
+>> -        case 0x194: device->chip = &nv194_chipset; break;
+>> -        case 0x196: device->chip = &nv196_chipset; break;
+>> -        case 0x197: device->chip = &nv197_chipset; break;
+>> -        default:
+>> -            if (nvkm_boolopt(device->cfgopt, 
+>> "NvEnableUnsupportedChipsets", false)) {
+>> -                switch (device->chipset) {
+>> -                case 0x170: device->chip = &nv170_chipset; break;
+>> -                default:
+>> -                    break;
+>> -                }
+>> -            }
+>> +        nvdev_warn(device, "CHIPSET OVERRIDE: %08x -> %08x\n",
+>> +               boot0, override_boot0);
+>> +        boot0 = override_boot0;
+>> +    }
+>>   -            if (!device->chip) {
+>> -                nvdev_error(device, "unknown chipset (%08x)\n", boot0);
+>> -                ret = -ENODEV;
+>> -                goto done;
+>> -            }
+>> +    /* determine chipset and derive architecture from it */
+>> +    if ((boot0 & 0x1f000000) > 0) {
+>> +        device->chipset = (boot0 & 0x1ff00000) >> 20;
+>> +        device->chiprev = (boot0 & 0x000000ff);
+>> +        switch (device->chipset & 0x1f0) {
+>> +        case 0x010: {
+>> +            if (0x461 & (1 << (device->chipset & 0xf)))
+>> +                device->card_type = NV_10;
+>> +            else
+>> +                device->card_type = NV_11;
+>> +            device->chiprev = 0x00;
+>>               break;
+>>           }
+>> +        case 0x020: device->card_type = NV_20; break;
+>> +        case 0x030: device->card_type = NV_30; break;
+>> +        case 0x040:
+>> +        case 0x060: device->card_type = NV_40; break;
+>> +        case 0x050:
+>> +        case 0x080:
+>> +        case 0x090:
+>> +        case 0x0a0: device->card_type = NV_50; break;
+>> +        case 0x0c0:
+>> +        case 0x0d0: device->card_type = NV_C0; break;
+>> +        case 0x0e0:
+>> +        case 0x0f0:
+>> +        case 0x100: device->card_type = NV_E0; break;
+>> +        case 0x110:
+>> +        case 0x120: device->card_type = GM100; break;
+>> +        case 0x130: device->card_type = GP100; break;
+>> +        case 0x140: device->card_type = GV100; break;
+>> +        case 0x160: device->card_type = TU100; break;
+>> +        case 0x170: device->card_type = GA100; break;
+>> +        case 0x190: device->card_type = AD100; break;
+>> +        default:
+>> +            break;
+>> +        }
+>> +    } else
+>> +    if ((boot0 & 0xff00fff0) == 0x20004000) {
+>> +        if (boot0 & 0x00f00000)
+>> +            device->chipset = 0x05;
+>> +        else
+>> +            device->chipset = 0x04;
+>> +        device->card_type = NV_04;
+>> +    }
+>
+> Not directly related to this patch, but can we get some description and
+> / or defines for magics where it makes sense? :-)
+>
+>>   -        nvdev_info(device, "NVIDIA %s (%08x)\n",
+>> -               device->chip->name, boot0);
+>> +    switch (device->chipset) {
+>> +    case 0x004: device->chip = &nv4_chipset; break;
+>> +    case 0x005: device->chip = &nv5_chipset; break;
+>> +    case 0x010: device->chip = &nv10_chipset; break;
+>> +    case 0x011: device->chip = &nv11_chipset; break;
+>> +    case 0x015: device->chip = &nv15_chipset; break;
+>> +    case 0x017: device->chip = &nv17_chipset; break;
+>> +    case 0x018: device->chip = &nv18_chipset; break;
+>> +    case 0x01a: device->chip = &nv1a_chipset; break;
+>> +    case 0x01f: device->chip = &nv1f_chipset; break;
+>> +    case 0x020: device->chip = &nv20_chipset; break;
+>> +    case 0x025: device->chip = &nv25_chipset; break;
+>> +    case 0x028: device->chip = &nv28_chipset; break;
+>> +    case 0x02a: device->chip = &nv2a_chipset; break;
+>> +    case 0x030: device->chip = &nv30_chipset; break;
+>> +    case 0x031: device->chip = &nv31_chipset; break;
+>> +    case 0x034: device->chip = &nv34_chipset; break;
+>> +    case 0x035: device->chip = &nv35_chipset; break;
+>> +    case 0x036: device->chip = &nv36_chipset; break;
+>> +    case 0x040: device->chip = &nv40_chipset; break;
+>> +    case 0x041: device->chip = &nv41_chipset; break;
+>> +    case 0x042: device->chip = &nv42_chipset; break;
+>> +    case 0x043: device->chip = &nv43_chipset; break;
+>> +    case 0x044: device->chip = &nv44_chipset; break;
+>> +    case 0x045: device->chip = &nv45_chipset; break;
+>> +    case 0x046: device->chip = &nv46_chipset; break;
+>> +    case 0x047: device->chip = &nv47_chipset; break;
+>> +    case 0x049: device->chip = &nv49_chipset; break;
+>> +    case 0x04a: device->chip = &nv4a_chipset; break;
+>> +    case 0x04b: device->chip = &nv4b_chipset; break;
+>> +    case 0x04c: device->chip = &nv4c_chipset; break;
+>> +    case 0x04e: device->chip = &nv4e_chipset; break;
+>> +    case 0x050: device->chip = &nv50_chipset; break;
+>> +    case 0x063: device->chip = &nv63_chipset; break;
+>> +    case 0x067: device->chip = &nv67_chipset; break;
+>> +    case 0x068: device->chip = &nv68_chipset; break;
+>> +    case 0x084: device->chip = &nv84_chipset; break;
+>> +    case 0x086: device->chip = &nv86_chipset; break;
+>> +    case 0x092: device->chip = &nv92_chipset; break;
+>> +    case 0x094: device->chip = &nv94_chipset; break;
+>> +    case 0x096: device->chip = &nv96_chipset; break;
+>> +    case 0x098: device->chip = &nv98_chipset; break;
+>> +    case 0x0a0: device->chip = &nva0_chipset; break;
+>> +    case 0x0a3: device->chip = &nva3_chipset; break;
+>> +    case 0x0a5: device->chip = &nva5_chipset; break;
+>> +    case 0x0a8: device->chip = &nva8_chipset; break;
+>> +    case 0x0aa: device->chip = &nvaa_chipset; break;
+>> +    case 0x0ac: device->chip = &nvac_chipset; break;
+>> +    case 0x0af: device->chip = &nvaf_chipset; break;
+>> +    case 0x0c0: device->chip = &nvc0_chipset; break;
+>> +    case 0x0c1: device->chip = &nvc1_chipset; break;
+>> +    case 0x0c3: device->chip = &nvc3_chipset; break;
+>> +    case 0x0c4: device->chip = &nvc4_chipset; break;
+>> +    case 0x0c8: device->chip = &nvc8_chipset; break;
+>> +    case 0x0ce: device->chip = &nvce_chipset; break;
+>> +    case 0x0cf: device->chip = &nvcf_chipset; break;
+>> +    case 0x0d7: device->chip = &nvd7_chipset; break;
+>> +    case 0x0d9: device->chip = &nvd9_chipset; break;
+>> +    case 0x0e4: device->chip = &nve4_chipset; break;
+>> +    case 0x0e6: device->chip = &nve6_chipset; break;
+>> +    case 0x0e7: device->chip = &nve7_chipset; break;
+>> +    case 0x0ea: device->chip = &nvea_chipset; break;
+>> +    case 0x0f0: device->chip = &nvf0_chipset; break;
+>> +    case 0x0f1: device->chip = &nvf1_chipset; break;
+>> +    case 0x106: device->chip = &nv106_chipset; break;
+>> +    case 0x108: device->chip = &nv108_chipset; break;
+>> +    case 0x117: device->chip = &nv117_chipset; break;
+>> +    case 0x118: device->chip = &nv118_chipset; break;
+>> +    case 0x120: device->chip = &nv120_chipset; break;
+>> +    case 0x124: device->chip = &nv124_chipset; break;
+>> +    case 0x126: device->chip = &nv126_chipset; break;
+>> +    case 0x12b: device->chip = &nv12b_chipset; break;
+>> +    case 0x130: device->chip = &nv130_chipset; break;
+>> +    case 0x132: device->chip = &nv132_chipset; break;
+>> +    case 0x134: device->chip = &nv134_chipset; break;
+>> +    case 0x136: device->chip = &nv136_chipset; break;
+>> +    case 0x137: device->chip = &nv137_chipset; break;
+>> +    case 0x138: device->chip = &nv138_chipset; break;
+>> +    case 0x13b: device->chip = &nv13b_chipset; break;
+>> +    case 0x140: device->chip = &nv140_chipset; break;
+>> +    case 0x162: device->chip = &nv162_chipset; break;
+>> +    case 0x164: device->chip = &nv164_chipset; break;
+>> +    case 0x166: device->chip = &nv166_chipset; break;
+>> +    case 0x167: device->chip = &nv167_chipset; break;
+>> +    case 0x168: device->chip = &nv168_chipset; break;
+>> +    case 0x172: device->chip = &nv172_chipset; break;
+>> +    case 0x173: device->chip = &nv173_chipset; break;
+>> +    case 0x174: device->chip = &nv174_chipset; break;
+>> +    case 0x176: device->chip = &nv176_chipset; break;
+>> +    case 0x177: device->chip = &nv177_chipset; break;
+>> +    case 0x192: device->chip = &nv192_chipset; break;
+>> +    case 0x193: device->chip = &nv193_chipset; break;
+>> +    case 0x194: device->chip = &nv194_chipset; break;
+>> +    case 0x196: device->chip = &nv196_chipset; break;
+>> +    case 0x197: device->chip = &nv197_chipset; break;
+>> +    default:
+>> +        if (nvkm_boolopt(device->cfgopt, 
+>> "NvEnableUnsupportedChipsets", false)) {
+>> +            switch (device->chipset) {
+>> +            case 0x170: device->chip = &nv170_chipset; break;
+>> +            default:
+>> +                break;
+>> +            }
+>> +        }
+>>   -        /* vGPU detection */
+>> -        boot1 = nvkm_rd32(device, 0x0000004);
+>> -        if (device->card_type >= TU100 && (boot1 & 0x00030000)) {
+>> -            nvdev_info(device, "vGPUs are not supported\n");
+>> +        if (!device->chip) {
+>> +            nvdev_error(device, "unknown chipset (%08x)\n", boot0);
+>>               ret = -ENODEV;
+>>               goto done;
+>>           }
+>> +        break;
+>> +    }
+>>   -        /* read strapping information */
+>> -        strap = nvkm_rd32(device, 0x101000);
+>> +    nvdev_info(device, "NVIDIA %s (%08x)\n",
+>> +           device->chip->name, boot0);
+>>   -        /* determine frequency of timing crystal */
+>> -        if ( device->card_type <= NV_10 || device->chipset < 0x17 ||
+>> -            (device->chipset >= 0x20 && device->chipset < 0x25))
+>> -            strap &= 0x00000040;
+>> -        else
+>> -            strap &= 0x00400040;
+>> +    /* vGPU detection */
+>> +    boot1 = nvkm_rd32(device, 0x0000004);
+>> +    if (device->card_type >= TU100 && (boot1 & 0x00030000)) {
+>> +        nvdev_info(device, "vGPUs are not supported\n");
+>> +        ret = -ENODEV;
+>> +        goto done;
+>> +    }
+>>   -        switch (strap) {
+>> -        case 0x00000000: device->crystal = 13500; break;
+>> -        case 0x00000040: device->crystal = 14318; break;
+>> -        case 0x00400000: device->crystal = 27000; break;
+>> -        case 0x00400040: device->crystal = 25000; break;
 >> -        }
 >> -    } else {
->> -        argv->v0.route = NVIF_IOCTL_V0_ROUTE_HIDDEN;
->> -        argv->v0.token = 0;
->> -    }
->> -    argv->v0.owner = owner;
->> -    mutex_unlock(&cli->mutex);
->> -
->> -    if (copy_to_user(user, argv, argc))
->> -        ret = -EFAULT;
->> -done:
->> -    kfree(argv);
->> -    return ret;
->> -}
->> -
->> -void
->> -usif_client_fini(struct nouveau_cli *cli)
->> -{
->> -    struct usif_object *object, *otemp;
->> -
->> -    list_for_each_entry_safe(object, otemp, &cli->objects, head) {
->> -        usif_object_dtor(object);
->> -    }
->> -}
->> -
->> -void
->> -usif_client_init(struct nouveau_cli *cli)
->> -{
->> -    INIT_LIST_HEAD(&cli->objects);
->> -}
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_usif.h 
->> b/drivers/gpu/drm/nouveau/nouveau_usif.h
->> deleted file mode 100644
->> index dc90d4a9d0d9..000000000000
->> --- a/drivers/gpu/drm/nouveau/nouveau_usif.h
->> +++ /dev/null
->> @@ -1,10 +0,0 @@
->> -/* SPDX-License-Identifier: MIT */
->> -#ifndef __NOUVEAU_USIF_H__
->> -#define __NOUVEAU_USIF_H__
->> -
->> -void usif_client_init(struct nouveau_cli *);
->> -void usif_client_fini(struct nouveau_cli *);
->> -int  usif_ioctl(struct drm_file *, void __user *, u32);
->> -int  usif_notify(const void *, u32, const void *, u32);
->> -
->> -#endif
+>> -        device->chip = &null_chipset;
+>> +    /* read strapping information */
+>> +    strap = nvkm_rd32(device, 0x101000);
+>> +
+>> +    /* determine frequency of timing crystal */
+>> +    if ( device->card_type <= NV_10 || device->chipset < 0x17 ||
+>> +        (device->chipset >= 0x20 && device->chipset < 0x25))
+>> +        strap &= 0x00000040;
+>> +    else
+>> +        strap &= 0x00400040;
+>> +
+>> +    switch (strap) {
+>> +    case 0x00000000: device->crystal = 13500; break;
+>> +    case 0x00000040: device->crystal = 14318; break;
+>> +    case 0x00400000: device->crystal = 27000; break;
+>> +    case 0x00400040: device->crystal = 25000; break;
+>>       }
+>>         if (!device->name)
+>> @@ -3368,7 +3356,7 @@ nvkm_device_ctor(const struct nvkm_device_func 
+>> *func,
+>>       nvkm_intr_ctor(device);
+>>     #define NVKM_LAYOUT_ONCE(type,data,ptr) \
+>> -    if (device->chip->ptr.inst && (subdev_mask & (BIT_ULL(type)))) 
+>> {                     \
+>> +    if (device->chip->ptr.inst) 
+>> {                                                        \
+>>           WARN_ON(device->chip->ptr.inst != 
+>> 0x00000001);                               \
+>>           ret = device->chip->ptr.ctor(device, (type), -1, 
+>> &device->ptr);              \
+>>           subdev = nvkm_device_subdev(device, (type), 
+>> 0);                              \
+>> @@ -3387,7 +3375,7 @@ nvkm_device_ctor(const struct nvkm_device_func 
+>> *func,
+>>   #define NVKM_LAYOUT_INST(type,data,ptr,cnt) \
+>>       WARN_ON(device->chip->ptr.inst & ~((1 << 
+>> ARRAY_SIZE(device->ptr)) - 1));             \
+>>       for (j = 0; device->chip->ptr.inst && j < 
+>> ARRAY_SIZE(device->ptr); j++) {            \
+>> -        if ((device->chip->ptr.inst & BIT(j)) && (subdev_mask & 
+>> BIT_ULL(type))) {    \
+>> +        if (device->chip->ptr.inst & BIT(j)) 
+>> {                                       \
+>>               ret = device->chip->ptr.ctor(device, (type), (j), 
+>> &device->ptr[j]);  \
+>>               subdev = nvkm_device_subdev(device, (type), 
+>> (j));                    \
+>>               if (ret) 
+>> {                                                           \
+>> @@ -3409,7 +3397,7 @@ nvkm_device_ctor(const struct nvkm_device_func 
+>> *func,
+>>         ret = nvkm_intr_install(device);
+>>   done:
+>> -    if (device->pri && (!mmio || ret)) {
+>> +    if (ret && device->pri) {
+>>           iounmap(device->pri);
+>
+> Now that we don't have the 'detect' case anymore, can't we use
+> devm_ioremap() instead?
+
+Probably.  But I'd like to keep this patch to just doing one thing, and 
+it'd (hopefully) be a simple change someone could make separately.
+
+
+>
+>>           device->pri = NULL;
+>>       }
+>> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/pci.c 
+>> b/drivers/gpu/drm/nouveau/nvkm/engine/device/pci.c
+>> index abccb2bb68a6..3ff6436007fa 100644
+>> --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/pci.c
+>> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/pci.c
+>> @@ -1626,7 +1626,6 @@ nvkm_device_pci_func = {
+>>     int
+>>   nvkm_device_pci_new(struct pci_dev *pci_dev, const char *cfg, const 
+>> char *dbg,
+>> -            bool detect, bool mmio, u64 subdev_mask,
+>>               struct nvkm_device **pdevice)
+>>   {
+>>       const struct nvkm_device_quirk *quirk = NULL;
+>> @@ -1680,8 +1679,7 @@ nvkm_device_pci_new(struct pci_dev *pci_dev, 
+>> const char *cfg, const char *dbg,
+>>                       pci_dev->bus->number << 16 |
+>>                       PCI_SLOT(pci_dev->devfn) << 8 |
+>>                       PCI_FUNC(pci_dev->devfn), name,
+>> -                   cfg, dbg, detect, mmio, subdev_mask,
+>> -                   &pdev->device);
+>> +                   cfg, dbg, &pdev->device);
+>>         if (ret)
+>>           return ret;
+>> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/priv.h 
+>> b/drivers/gpu/drm/nouveau/nvkm/engine/device/priv.h
+>> index bf3176bec18a..c182d9c3e4fa 100644
+>> --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/priv.h
+>> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/priv.h
+>> @@ -56,7 +56,6 @@ int  nvkm_device_ctor(const struct nvkm_device_func *,
+>>                 const struct nvkm_device_quirk *,
+>>                 struct device *, enum nvkm_device_type, u64 handle,
+>>                 const char *name, const char *cfg, const char *dbg,
+>> -              bool detect, bool mmio, u64 subdev_mask,
+>>                 struct nvkm_device *);
+>>   int  nvkm_device_init(struct nvkm_device *);
+>>   int  nvkm_device_fini(struct nvkm_device *, bool suspend);
+>> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c 
+>> b/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
+>> index 87caa4a72921..d1c294f00665 100644
+>> --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
+>> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
+>> @@ -237,7 +237,6 @@ int
+>>   nvkm_device_tegra_new(const struct nvkm_device_tegra_func *func,
+>>                 struct platform_device *pdev,
+>>                 const char *cfg, const char *dbg,
+>> -              bool detect, bool mmio, u64 subdev_mask,
+>>                 struct nvkm_device **pdevice)
+>>   {
+>>       struct nvkm_device_tegra *tdev;
+>> @@ -311,8 +310,7 @@ nvkm_device_tegra_new(const struct 
+>> nvkm_device_tegra_func *func,
+>>       tdev->gpu_speedo_id = tegra_sku_info.gpu_speedo_id;
+>>       ret = nvkm_device_ctor(&nvkm_device_tegra_func, NULL, &pdev->dev,
+>>                      NVKM_DEVICE_TEGRA, pdev->id, NULL,
+>> -                   cfg, dbg, detect, mmio, subdev_mask,
+>> -                   &tdev->device);
+>> +                   cfg, dbg, &tdev->device);
+>>       if (ret)
+>>           goto powerdown;
+>>   @@ -333,7 +331,6 @@ int
+>>   nvkm_device_tegra_new(const struct nvkm_device_tegra_func *func,
+>>                 struct platform_device *pdev,
+>>                 const char *cfg, const char *dbg,
+>> -              bool detect, bool mmio, u64 subdev_mask,
+>>                 struct nvkm_device **pdevice)
+>>   {
+>>       return -ENOSYS;
 >
