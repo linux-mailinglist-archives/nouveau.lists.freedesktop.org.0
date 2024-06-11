@@ -2,89 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49BE590386D
-	for <lists+nouveau@lfdr.de>; Tue, 11 Jun 2024 12:09:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 391C3904066
+	for <lists+nouveau@lfdr.de>; Tue, 11 Jun 2024 17:46:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C129C10E4A6;
-	Tue, 11 Jun 2024 10:09:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4188C10E681;
+	Tue, 11 Jun 2024 15:46:54 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="e1NRlnBM";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VibAaU87";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 064A210E57B
- for <nouveau@lists.freedesktop.org>; Tue, 11 Jun 2024 10:09:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1718100586;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=v9ktNk7k/0aYvyjCtpqZ6+hDDn8yBM6jUxeDl6eCn5c=;
- b=e1NRlnBMH3sVkry0ab9ogNLmEFQQnW5R+Kh2NrwYnAlzLt2YkNjliO1H41E6seN3CSCHW/
- fZqrr+enz0/8CjBrNtfjsITp2ANulaXEq6b4AN5hIG+xie8wfN0SAqvwlqsoDZqLkFHA3+
- NQS0U3JNufFRWJcXZFlc5gsdxY3lUGs=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-661-ctxQoRhIORGqR1S1anckjA-1; Tue, 11 Jun 2024 06:09:44 -0400
-X-MC-Unique: ctxQoRhIORGqR1S1anckjA-1
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-35f09eab759so3021077f8f.1
- for <nouveau@lists.freedesktop.org>; Tue, 11 Jun 2024 03:09:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718100583; x=1718705383;
- h=content-transfer-encoding:in-reply-to:organization:from:cc
- :content-language:references:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=v9ktNk7k/0aYvyjCtpqZ6+hDDn8yBM6jUxeDl6eCn5c=;
- b=F7kuiFEiog4MHjaukq2o+mvXjm/D8c0O5OzbLVA49sWEQNGC7Qfws+DtKnl+QNibwU
- DTIzif5kMgH+zFhLgUTMZ9TULtLOHehUf+COvKPOuUB2N64BgVZbQCMudcCwCEc1XRQV
- e9qf41ryKLgRffytTlvQeO+Fmydh9pkuhhhtqKozrj7kQJGxEO9MPZ0RB/9sfjtBdg1n
- 2oH16e1Vp/QKKu00mp2s776lVaeCWD9kOOWP2+FpyfAMpI9uIN+Xb/4DofcxIGeDPrE9
- AeDaCpy9xGABsLaVM9yb0OPknmLa9jR4MmytwcXUDCVgH9g/9FGb5ygt1h+k47Vywsq1
- 3+eQ==
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6C0B910E681;
+ Tue, 11 Jun 2024 15:46:52 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4680160F00;
+ Tue, 11 Jun 2024 15:46:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5B30C4AF53;
+ Tue, 11 Jun 2024 15:46:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1718120810;
+ bh=7Q8EYfT2yYWno5JvwY7yHxi7BODOc8t+N4Cv0BJ3y1A=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=VibAaU877OJhw/xWEQarGFauNAaLoPTRm7kiONSpmK7Vwz81evoQ49TbMAcoVYWtm
+ k93F2BSHQPO+kfOGitb6sWUHlwRryanMq229pYZycRSwAt6ImbbhNF3R56qotaBu5R
+ JFQ9+74k7X7Wl4HoBJLsp/HE/iCfIyW6uLWZCgMxCH0wfe6GyJOMcKZm0sZr9Ilkgm
+ juPzhGQTu6X4XGaiREouJveo/Ue0YZ+JiVx79ptJwlBWaNrNaxNKo5Xzms0HpbGx7w
+ i/Yvbk5DqEt6bjvO08/BAzW235cjKD+JtRDQsoBht2eItJ7buvmF3kSk5ACYYfJJZU
+ PWQtcbIpMRfZA==
+Received: by mail-lf1-f53.google.com with SMTP id
+ 2adb3069b0e04-52c819f6146so1600891e87.1; 
+ Tue, 11 Jun 2024 08:46:50 -0700 (PDT)
 X-Forwarded-Encrypted: i=1;
- AJvYcCVsehPqnQJav8KYIa+EcaAddQ5nPksTf7sMo7Rq23eSwanQNPdOmaJz2M6EH9BOQMsJJpQBJ8IqxDDmg1ebC/m9MAAqZ1sZjZCHoIXyaA==
-X-Gm-Message-State: AOJu0YwqPDnMSPZJr2WiAcdJnbWe7KAfD3L/uesYl+rAowWKXQd0KTOS
- lok6ffuntKEQn/fOZbwHf51xVN7rJDI5T0n3ZUSPMrtcoLGsMQmRAwfqrOjv9k/nYTCjpvycuBo
- vDfUyWuQ1i2NQgmlmwfefihuJQMq+Nsd2SV/p7bxu2xMAW6T9gPG82RrEzmqyJIc=
-X-Received: by 2002:a5d:688d:0:b0:35f:247e:fbc3 with SMTP id
- ffacd0b85a97d-35f247efe8fmr4059094f8f.3.1718100583503; 
- Tue, 11 Jun 2024 03:09:43 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHwdqlVHaTXmPpsCH9dotUi8Rrqghxxaa3Jv+kO9Q6WH/zO2gBDxubgEw4/R1c1/SBZJ5eJUA==
-X-Received: by 2002:a5d:688d:0:b0:35f:247e:fbc3 with SMTP id
- ffacd0b85a97d-35f247efe8fmr4059077f8f.3.1718100583155; 
- Tue, 11 Jun 2024 03:09:43 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
- ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-35f228cbfb8sm5659345f8f.57.2024.06.11.03.09.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Jun 2024 03:09:42 -0700 (PDT)
-Message-ID: <48e7872e-64df-49b8-ac2e-0a45db556069@redhat.com>
-Date: Tue, 11 Jun 2024 12:09:41 +0200
+ AJvYcCX9xy+232qV4vY8+0+qnUv1svGLvTiPGoyjagcaqXd9ltRzCdiJLRlv2cBbA5qEliGTsQkqGmzCGEDXdAnKsGp0C0VScO34gFYMlL/FVRZPV42+XwBh4DdPB6YeXzbaRGrCSes+5QsB+ZGDMNsrqg==
+X-Gm-Message-State: AOJu0YzrR4SaLWl3iQ2sjm2T66jvroGVl2q8rA1s0Me/+qNKhQQkjvlR
+ ya2z8hQQL/2drazCd9A7zs9zJtjoqOsAF/gmuIuhUdCTMYSFS4Q0GQh2tfzVJtWb8wj/9SfzIXt
+ 3dNWr61WLZ9Z7/obQwMjN37xGUg==
+X-Google-Smtp-Source: AGHT+IFx3kwL+4lnpKgK+dz83tXodIju037np6QGjras/ITiUXQ5EcTtwkbuGjNnLsANd4GB8aIL9jlXqg1ID9iFlKE=
+X-Received: by 2002:ac2:4bcd:0:b0:52c:78fa:453 with SMTP id
+ 2adb3069b0e04-52c78fa05a5mr7404319e87.19.1718120809006; Tue, 11 Jun 2024
+ 08:46:49 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] drm/nouveau: don't attempt to schedule hpd_work on
- headless cards
-To: Vasily Khoruzhick <anarsoul@gmail.com>
-References: <20240607221032.25918-1-anarsoul@gmail.com>
-Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Ben Skeggs <bskeggs@nvidia.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <20240607221032.25918-1-anarsoul@gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240520172059.181256-1-dakr@redhat.com>
+ <20240520172059.181256-4-dakr@redhat.com>
+ <20240521212333.GA731457-robh@kernel.org>
+ <641bda93-35f3-429e-b627-a9485505b6bf@asahilina.net>
+In-Reply-To: <641bda93-35f3-429e-b627-a9485505b6bf@asahilina.net>
+From: Rob Herring <robh@kernel.org>
+Date: Tue, 11 Jun 2024 09:46:35 -0600
+X-Gmail-Original-Message-ID: <CAL_JsqLtGxyEymhuzb6HW85sunppYkKri9YsRpL31paVsB55zA@mail.gmail.com>
+Message-ID: <CAL_JsqLtGxyEymhuzb6HW85sunppYkKri9YsRpL31paVsB55zA@mail.gmail.com>
+Subject: Re: [RFC PATCH 3/8] rust: drm: Add Device and Driver abstractions
+To: Asahi Lina <lina@asahilina.net>
+Cc: Danilo Krummrich <dakr@redhat.com>, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, 
+ tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch, ojeda@kernel.org, 
+ alex.gaynor@gmail.com, wedsonaf@gmail.com, boqun.feng@gmail.com, 
+ gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me, 
+ a.hindborg@samsung.com, aliceryhl@google.com, fujita.tomonori@gmail.com, 
+ pstanner@redhat.com, ajanulgu@redhat.com, lyude@redhat.com, 
+ gregkh@linuxfoundation.org, rust-for-linux@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,96 +79,124 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 6/8/24 00:09, Vasily Khoruzhick wrote:
-> If the card doesn't have display hardware, hpd_work and hpd_lock are
-> left uninitialized which causes BUG when attempting to schedule hpd_work
-> on runtime PM resume.
-> 
-> Fix it by adding headless flag to DRM and skip any hpd if it's set.
-> 
-> Fixes: ae1aadb1eb8d ("nouveau: don't fail driver load if no display hw present.")
-> Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/337
-> Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+On Sat, Jun 8, 2024 at 11:16=E2=80=AFPM Asahi Lina <lina@asahilina.net> wro=
+te:
+>
+>
+>
+> On 5/22/24 6:23 AM, Rob Herring wrote:
+> > On Mon, May 20, 2024 at 07:20:50PM +0200, Danilo Krummrich wrote:
+> >> From: Asahi Lina <lina@asahilina.net>
+> >>
+> >> Add abstractions for DRM drivers and devices. These go together in one
+> >> commit since both are fairly tightly coupled types.
+> >>
+> >> A few things have been stubbed out, to be implemented as further bits =
+of
+> >> the DRM subsystem are introduced.
+> >>
+> >> Signed-off-by: Asahi Lina <lina@asahilina.net>
+> >> Co-developed-by: Danilo Krummrich <dakr@redhat.com>
+> >> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+> >> ---
+> >>  rust/bindings/bindings_helper.h |   2 +
+> >>  rust/kernel/drm/device.rs       |  87 +++++++++
+> >>  rust/kernel/drm/drv.rs          | 318 +++++++++++++++++++++++++++++++=
++
+> >>  rust/kernel/drm/mod.rs          |   2 +
+> >>  4 files changed, 409 insertions(+)
+> >>  create mode 100644 rust/kernel/drm/device.rs
+> >>  create mode 100644 rust/kernel/drm/drv.rs
+> >
+> > [...]
+> >
+> >> diff --git a/rust/kernel/drm/drv.rs b/rust/kernel/drm/drv.rs
+> >> new file mode 100644
+> >> index 000000000000..5dd8f3f8df7c
+> >> --- /dev/null
+> >> +++ b/rust/kernel/drm/drv.rs
+> >> @@ -0,0 +1,318 @@
+> >> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> >> +
+> >> +//! DRM driver core.
+> >> +//!
+> >> +//! C header: [`include/linux/drm/drm_drv.h`](../../../../include/lin=
+ux/drm/drm_drv.h)
+> >> +
+> >> +use crate::{
+> >> +    alloc::flags::*,
+> >> +    bindings, device, drm,
+> >> +    error::code::*,
+> >> +    error::{Error, Result},
+> >> +    prelude::*,
+> >> +    private::Sealed,
+> >> +    str::CStr,
+> >> +    types::{ARef, ForeignOwnable},
+> >> +    ThisModule,
+> >> +};
+> >> +use core::{
+> >> +    marker::{PhantomData, PhantomPinned},
+> >> +    pin::Pin,
+> >> +};
+> >> +use macros::vtable;
+> >> +
+> >> +/// Driver use the GEM memory manager. This should be set for all mod=
+ern drivers.
+> >> +pub const FEAT_GEM: u32 =3D bindings::drm_driver_feature_DRIVER_GEM;
+> >> +/// Driver supports mode setting interfaces (KMS).
+> >> +pub const FEAT_MODESET: u32 =3D bindings::drm_driver_feature_DRIVER_M=
+ODESET;
+> >> +/// Driver supports dedicated render nodes.
+> >> +pub const FEAT_RENDER: u32 =3D bindings::drm_driver_feature_DRIVER_RE=
+NDER;
+> >> +/// Driver supports the full atomic modesetting userspace API.
+> >> +///
+> >> +/// Drivers which only use atomic internally, but do not support the =
+full userspace API (e.g. not
+> >> +/// all properties converted to atomic, or multi-plane updates are no=
+t guaranteed to be tear-free)
+> >> +/// should not set this flag.
+> >> +pub const FEAT_ATOMIC: u32 =3D bindings::drm_driver_feature_DRIVER_AT=
+OMIC;
+> >> +/// Driver supports DRM sync objects for explicit synchronization of =
+command submission.
+> >> +pub const FEAT_SYNCOBJ: u32 =3D bindings::drm_driver_feature_DRIVER_S=
+YNCOBJ;
+> >> +/// Driver supports the timeline flavor of DRM sync objects for expli=
+cit synchronization of command
+> >> +/// submission.
+> >> +pub const FEAT_SYNCOBJ_TIMELINE: u32 =3D bindings::drm_driver_feature=
+_DRIVER_SYNCOBJ_TIMELINE;
+> >
+> > This is missing an entry for DRIVER_GEM_GPUVA. And some others perhaps.
+> > I suppose some are legacy which won't be needed any time soon if ever.
+> > Not sure if you intend for this to be complete, or you are just adding
+> > what you are using? Only FEAT_GEM is used by nova ATM.
+> >
+>
+> This was developed before DRIVER_GEM_GPUVA existed ^^
+>
+> I have this in my branch since I'm using the GPUVA manager now.
 
-Applied to drm-misc-fixes, thanks!
+TBC, I'm using it as well, not just providing drive-by comments. I'm
+starting to look at converting panthor to rust.
 
-> ---
-> v2: drop extra checks in nouveau_display_hpd_work() and
-> nouveau_connector_hpd()
-> 
->   drivers/gpu/drm/nouveau/dispnv04/disp.c   | 2 +-
->   drivers/gpu/drm/nouveau/dispnv50/disp.c   | 2 +-
->   drivers/gpu/drm/nouveau/nouveau_display.c | 6 +++++-
->   drivers/gpu/drm/nouveau/nouveau_drv.h     | 1 +
->   4 files changed, 8 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/dispnv04/disp.c b/drivers/gpu/drm/nouveau/dispnv04/disp.c
-> index 13705c5f1497..4b7497a8755c 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv04/disp.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv04/disp.c
-> @@ -68,7 +68,7 @@ nv04_display_fini(struct drm_device *dev, bool runtime, bool suspend)
->   	if (nv_two_heads(dev))
->   		NVWriteCRTC(dev, 1, NV_PCRTC_INTR_EN_0, 0);
->   
-> -	if (!runtime)
-> +	if (!runtime && !drm->headless)
->   		cancel_work_sync(&drm->hpd_work);
->   
->   	if (!suspend)
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> index 88728a0b2c25..674dc567e179 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> @@ -2680,7 +2680,7 @@ nv50_display_fini(struct drm_device *dev, bool runtime, bool suspend)
->   			nv50_mstm_fini(nouveau_encoder(encoder));
->   	}
->   
-> -	if (!runtime)
-> +	if (!runtime && !drm->headless)
->   		cancel_work_sync(&drm->hpd_work);
->   }
->   
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-> index aed5d5b51b43..d4725a968827 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-> @@ -450,6 +450,9 @@ nouveau_display_hpd_resume(struct drm_device *dev)
->   {
->   	struct nouveau_drm *drm = nouveau_drm(dev);
->   
-> +	if (drm->headless)
-> +		return;
-> +
->   	spin_lock_irq(&drm->hpd_lock);
->   	drm->hpd_pending = ~0;
->   	spin_unlock_irq(&drm->hpd_lock);
-> @@ -635,7 +638,7 @@ nouveau_display_fini(struct drm_device *dev, bool suspend, bool runtime)
->   	}
->   	drm_connector_list_iter_end(&conn_iter);
->   
-> -	if (!runtime)
-> +	if (!runtime && !drm->headless)
->   		cancel_work_sync(&drm->hpd_work);
->   
->   	drm_kms_helper_poll_disable(dev);
-> @@ -729,6 +732,7 @@ nouveau_display_create(struct drm_device *dev)
->   		/* no display hw */
->   		if (ret == -ENODEV) {
->   			ret = 0;
-> +			drm->headless = true;
->   			goto disp_create_err;
->   		}
->   
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
-> index e239c6bf4afa..25fca98a20bc 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-> @@ -276,6 +276,7 @@ struct nouveau_drm {
->   	/* modesetting */
->   	struct nvbios vbios;
->   	struct nouveau_display *display;
-> +	bool headless;
->   	struct work_struct hpd_work;
->   	spinlock_t hpd_lock;
->   	u32 hpd_pending;
+> Danilo,
+> what tree are you using for this submission? It would be good to
+> coordinate this and try to keep the WIP branches from diverging too much.=
+..
 
+Yes, please!
+
+Besides asahi of course, there's several people[1][2][3] using the
+platform and DT abstractions and we're all rebasing those. I'd
+volunteer to maintain, but I don't know rust well enough yet to even
+be dangerous... :)
+
+Rob
+
+[1] https://lore.kernel.org/all/cover.1717750631.git.viresh.kumar@linaro.or=
+g/
+[2] https://lore.kernel.org/all/20240322221305.1403600-1-lyude@redhat.com/
+[3] https://lore.kernel.org/all/CAPFo5VLoYGq_OgC5dqcueTyymuSCsLpjasLZnKO1jp=
+Y6gV7s2g@mail.gmail.com/
