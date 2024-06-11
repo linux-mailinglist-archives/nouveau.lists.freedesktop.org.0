@@ -2,138 +2,87 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2B61902A7B
-	for <lists+nouveau@lfdr.de>; Mon, 10 Jun 2024 23:16:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C7B5903850
+	for <lists+nouveau@lfdr.de>; Tue, 11 Jun 2024 12:02:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E429610E4FD;
-	Mon, 10 Jun 2024 21:16:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 80D2A10E305;
+	Tue, 11 Jun 2024 10:02:21 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="rZd0IemW";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="EkAi0XCZ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2084.outbound.protection.outlook.com [40.107.237.84])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AC99410E4FD;
- Mon, 10 Jun 2024 21:16:37 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kn2LAs0OQ9OyeEOlCcZViX+vimdYJTYKX24sxwkhepQzlBDDDPoomzHrh8RR8J3F04v1S7JhzQxk/PPLnfYVWwxQmmqi2h43i6ciG4g6p1wKZrs0ZY2rqTxog3DzwOlq+Qrt0LlBTBHIVwCyf4ev1SXbezJ/JVLD290X+sd4nn4MO6F2xDz4hSAG9TUJNUc/rTOySJ5qKxM2P6czTrJs9FOmWqeG69EMBZGzG53H/Ax6q1pGz2bMBNsSYsHRRWZFqbhLzoqHhAAw/loolCgNzh58/IslzrgyiFCZ7ZaPfgKILFaZnyHtVQ10eP1yzSsQlxtbdEevYCKQRvhGAhKKSg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PIdD0verI51peCSSSR41NFySCSjyDJHGMVk8xPInoVw=;
- b=eWb7gXTd/zXeuM54/xkQnFUNimjl1Wvl5yBc0V4CemeYG6bABrpYvZfdB+xB6lWyyC9lI6t0fe6fsKts7yQPb2RGsNzrNOPSdST3onPVB46CZiGF9eUsroyYHh8GnJK0LFR3NYZnxcMqXbbNCEC3pYzLisW/Fd9R2ONpKWqUyBihUBQMNvr7iHOsUwkbCE3eU56BQYkTpKHYf/jm4wQ/s9Wt+1/GpQo3ZzrC0EWG0tI9wB654vEU1y6tRKbbm64zZ5Rj+zPb7rNjfdxYSDM7d3JNeg+EDF9PTbinOtqFy383TMydlh5i4cCylrdvZWvY+BxFgdTi0CrxZrjHh4Visw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=gmail.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PIdD0verI51peCSSSR41NFySCSjyDJHGMVk8xPInoVw=;
- b=rZd0IemWSLpxih/UHe1MGb/QNSZoLvEc62i2oZmtP8RYenBwJPnF5d1x1TIe34UgQaYwNe+02a5xCdR/N1TyV699DrgwkD+/7eYbQDKGvCuPkNVhaK5EOGPSVPLUS1nFfI1Ai9Oewrkz/mAYKg43CTduhSjdo4DuWwVgIPg11TYUtPO2yXMo2xex0wY6Xao27eU9Mmp1VdCzdsgX/bCbc0bVoPrfS1mesatHDhe7mFqKz0mxOj46fgndxOZ1RDHeIFnSWdTy2DfiE/FXcZxmat6c9lXvxhBGN40GIQCE44f3KQzUkClMggphi23NAvBYWfNEm39M5La5v/3cH4qjQQ==
-Received: from BL1PR13CA0322.namprd13.prod.outlook.com (2603:10b6:208:2c1::27)
- by SA1PR12MB5613.namprd12.prod.outlook.com (2603:10b6:806:22b::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.36; Mon, 10 Jun
- 2024 21:16:33 +0000
-Received: from BN2PEPF000044A7.namprd04.prod.outlook.com
- (2603:10b6:208:2c1:cafe::f0) by BL1PR13CA0322.outlook.office365.com
- (2603:10b6:208:2c1::27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.16 via Frontend
- Transport; Mon, 10 Jun 2024 21:16:33 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
- smtp.mailfrom=nvidia.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- BN2PEPF000044A7.mail.protection.outlook.com (10.167.243.101) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7677.15 via Frontend Transport; Mon, 10 Jun 2024 21:16:32 +0000
-Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 10 Jun
- 2024 14:16:09 -0700
-Received: from [172.27.35.123] (10.126.231.35) by rnnvmail201.nvidia.com
- (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 10 Jun
- 2024 14:16:07 -0700
-Message-ID: <1804c53f-f30e-4a34-9be2-b4c9f9f681b4@nvidia.com>
-Date: Mon, 10 Jun 2024 18:12:07 +1000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 27DB110E22A
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jun 2024 10:02:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1718100133;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ybrwft53atk6SF7ZUqNAnkZ2feuXIglpHBR+lKADkBw=;
+ b=EkAi0XCZz8HkCGQYuiCRnd8kOo+6nJXtlyD/7ql5k7GqTWkHuB7gP8wab6xVJkv8DC2A19
+ vah18IM5n/mUCFdVhpod6S0UKRTws7p5aLYywkekm9PldBmq0vA9Rl+X+G1LTxgFcjD4ZE
+ qUamNLHOEttxfUgHRhW7Bo3H1GONZOw=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-410-b-W7su16OvGzT4H8XAFdFw-1; Tue, 11 Jun 2024 06:02:11 -0400
+X-MC-Unique: b-W7su16OvGzT4H8XAFdFw-1
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-35f09eab759so3017223f8f.1
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jun 2024 03:02:11 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718100130; x=1718704930;
+ h=content-transfer-encoding:in-reply-to:organization:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ybrwft53atk6SF7ZUqNAnkZ2feuXIglpHBR+lKADkBw=;
+ b=TURfrS6sUEDac5gkRfPRmhD1shhU8aSnTR1yhByTX7JW1dwkjusLbK7pK2cPV9B3fY
+ xtvzmovGAt+0Red2/BZdqm36YAyIZJguiVhPNzfsITfq50VWSATHVoyJr2ys7ohzWgFT
+ Y6RS4Hn0pQGN384mb+K8hxw0QwZ6KS1WxCzdb7ck7HOjD/AsuecqL66tin/mznGXaaO6
+ 6V1IduSA7p/B4lb2imK/OrRXy6BZ1GQ+OPG9RMqOAaB2XgDblcyLIvOBLl6STy5tFGJL
+ 8nbDVcw/bXH8BE29bQofEQuyiRsDNzRqFfsxSAcdcxlg8mePhL1MRgwt3IHYUrP04h85
+ VulA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUOmGHylaPyFRi2asfMZ0GydrhMbl+AZuiHtQgbZIqsDSxwA7tqVJNDfEbYah5gQ9y/bVTywL4Yahh8hY42mGKLJcgJP1OSr+ySCn4iSw==
+X-Gm-Message-State: AOJu0YwTvJAbCzhD0TxFBdv6DQ/QuPWucDzBhA2Q2iH4dX2mlKgAUojm
+ EJbXRKGt659xQmNiKCKeLkJq7CtGLIEh97nMeNMPAxWbF/T9yROEWExqTK7eBxQYTAPQaPP2lZ2
+ QqAI5VwwMjWOdB4ZP+UO7dXKonjC6KEjETjwA3PPvpjhPJKvvN5x05un9qaBr0Og=
+X-Received: by 2002:adf:e3c5:0:b0:35f:1f06:3d9d with SMTP id
+ ffacd0b85a97d-35f1f063df7mr5752579f8f.70.1718100130587; 
+ Tue, 11 Jun 2024 03:02:10 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFKZL98uEunjHgV1dVr0GvsBw6dhzSAWM/mji33SSRAXlWoRbiGLGcShOXcwnVxfeWG9h8t4g==
+X-Received: by 2002:adf:e3c5:0:b0:35f:1f06:3d9d with SMTP id
+ ffacd0b85a97d-35f1f063df7mr5752550f8f.70.1718100130173; 
+ Tue, 11 Jun 2024 03:02:10 -0700 (PDT)
+Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
+ ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-35ef5e991c9sm13431003f8f.70.2024.06.11.03.02.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 Jun 2024 03:02:09 -0700 (PDT)
+Message-ID: <de79f41d-3a9b-4f15-b270-246af8b4c5b0@redhat.com>
+Date: Tue, 11 Jun 2024 12:02:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] drm/nouveau: don't attempt to schedule hpd_work on
- headless cards
-To: Vasily Khoruzhick <anarsoul@gmail.com>, Karol Herbst <kherbst@redhat.com>, 
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@redhat.com>, "David
- Airlie" <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>
-References: <20240607221032.25918-1-anarsoul@gmail.com>
+Subject: Re: [PATCH 2/6] drm/nouveau: remove unused struct 'init_exec'
+To: linux@treblig.org
+Cc: daniel@ffwll.ch, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ kherbst@redhat.com, lyude@redhat.com
+References: <20240517232617.230767-1-linux@treblig.org>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <20240517232617.230767-1-linux@treblig.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-From: Ben Skeggs <bskeggs@nvidia.com>
-In-Reply-To: <20240607221032.25918-1-anarsoul@gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.126.231.35]
-X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
- rnnvmail201.nvidia.com (10.129.68.8)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044A7:EE_|SA1PR12MB5613:EE_
-X-MS-Office365-Filtering-Correlation-Id: a0b0f5c0-b650-4c17-3c5f-08dc89929a97
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230031|82310400017|36860700004|376005|1800799015; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eWhsMGEzTUxTVGFqY2dtcGU5V3BucFN6eXlCaTFiczVFYzR4NFRRTEk4amZj?=
- =?utf-8?B?enlPMnFtRUc3OXg1QWRhWkgrVUE4blZsdGxjY1RyVlNUYlZHR0k3K25GajFD?=
- =?utf-8?B?ZktwTnNEUXlOOTNTdW9OdEQxSnp6MVZsZlc0cEJGNzFhM0l3N21nYmZHRGFz?=
- =?utf-8?B?UlRsM1lHL0cvY2pyWDhmK0JpZ1MvQ0ZpTFhqcFd2UnE3MnhURjc4VFowNkd5?=
- =?utf-8?B?Nlg0ei9tSExyMHJheTR0Wk1YVEpnSDdldWpQZXNzTHhLNVdwTCt6SG9WVXRv?=
- =?utf-8?B?UXltV0ROSDE1dk84eGVWTHh0QSs0Z3ZOYXNnVkRYeWhyVm5WVXl6T2lBeVVp?=
- =?utf-8?B?dFpFOEhvdTJYQXBZMHpacHlDQVExd25sZ2pIRlVDT2o0YURHbEYxeUg4bG1S?=
- =?utf-8?B?UnUzWEJxRzduZ0hOYzQ3MmVxb3d6TWdmUTUrRTlFR09ZLzlhWFhYYUlMMUxD?=
- =?utf-8?B?SXhaZTZjVlRWVVBwRjcwQks2WXljNllVQ2lZNzVnRjhHWFdEczV3eXhJTlF3?=
- =?utf-8?B?Q3pjR3VFNE1uUy8rUTU0aElwMEpiTWt4bEhsVlFVSHVpbXVvUnViSlNTWkZu?=
- =?utf-8?B?SHVBQytRWVFFVkt3UHNCTjZBVHBkK1FxZ2JOZVVhV2JuQ1dnc0Y0SWRvcEF1?=
- =?utf-8?B?VEdOaytLQkhzc01hQk5WYU9EMThqakpsV2RkYkpJamJCVjUyQXJrMlQyc25l?=
- =?utf-8?B?MWtqdW1HREpEcEhpL0ltSUd6dEVUYWdMYTYyak1MK0t3N3c3VFR0SFdlOGRM?=
- =?utf-8?B?R1FVWmFyVVFTWEVBbnVldkJOSmMvN3duc0dnMnBEc3kxSW9PL2kvT0V2UVR2?=
- =?utf-8?B?UHpmZGRCblBPbFZPNFlsRDJ1SmNjbVRSaWdjOVYrcWxzRW5oZEc5cVJiY2kw?=
- =?utf-8?B?TW1qRCswNGl6RHk2bmovOFF0NHo5TkRQdTg3QlE5V05qL3dibEFtUEhock1y?=
- =?utf-8?B?WWJPOWg5SmQ4cXNaaEJTNE4wNDNtOXdMUEc2ZmxSd04rblhpQUZ6RU5PSjNv?=
- =?utf-8?B?K1dNcEFZVUtlWW1iR0pLYmdXcTB2cHF4M0FoSTlsYkVNVXVGak1oMlhxanBJ?=
- =?utf-8?B?N1MybDVLWmxVM1c2R2w4OVVmM25GeEtmeUdLU1FwRlBBaGFkRFdmeVN1S0I0?=
- =?utf-8?B?WnMyTHVjOVBCSU1YNUVKVGxxSnlZRjNZeWtLd3lNZGZvRVNRZ3Q2YnAxeGdv?=
- =?utf-8?B?VmVVOVVtZTE4dFNKTTFXa0pSbXNVbGREUHk2MytzZ2YzVzZkcUpJKzZVdVA2?=
- =?utf-8?B?cXFocVBueXI3d2JEMnF5U2RVcG8wR08vdytPR05IdlRUeHZtejFMQjNscjU3?=
- =?utf-8?B?L2VtOHVtcTA1OStSSEtUdFhqbmN3TVB4RUd1QmloVDZYMHo0cE83N0wrSWxE?=
- =?utf-8?B?dDFxNUd4b3o3NVNJYU1zcHY3MncvNXdndTF1NHI1ZzNGMkFnNUxySzNZOTV0?=
- =?utf-8?B?dVhNRXRlallqNnFDczNsK0lDVHVseWJyeXhaYW1UTzNnamJWMUI3NmZDVFcv?=
- =?utf-8?B?MjNORHpJYmtrNW1FQ3Fjc1lPanorMWc2K3o0NHEzamVRcjd4d0puSk5MMTdM?=
- =?utf-8?B?OENadkhxazVXU1RqSGx0eXJiVjdJdnNWRGs2VjJSR0xzd2pWdE9wRG9XWXYw?=
- =?utf-8?B?ak5XZXQ2VDg0RUR4cmlKbU9uNnZVWUI3b3NWT002bVNINzdQSEdjODFOd1hZ?=
- =?utf-8?B?YytITzJ1bitacjQ3cDZGdGhqZXM4ejJGemw4WWdYd0RHOVE2RUk1bkJ5Wmpr?=
- =?utf-8?B?emFzT2FaVUhFSVZjUjFzNmJzN3NGRmtRUTF0VHlpTThMd0V5TWhXbzVjMmtU?=
- =?utf-8?B?c2dVUEo0L2JOMzd3L0ZFUmtWR0svcDJpTmlOZExjVHdBeGVSS0ZHSTM5STBn?=
- =?utf-8?B?eEZ5Y2h4MzNucnR2bWh3R0dCZWhRY0dOTHplM1RGMFZQYVE9PQ==?=
-X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230031)(82310400017)(36860700004)(376005)(1800799015); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2024 21:16:32.9413 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a0b0f5c0-b650-4c17-3c5f-08dc89929a97
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A7.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB5613
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -148,97 +97,40 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 8/6/24 08:09, Vasily Khoruzhick wrote:
+On 5/18/24 01:26, linux@treblig.org wrote:
+> From: "Dr. David Alan Gilbert" <linux@treblig.org>
+> 
+> 'init_exec' is unused since
+> commit cb75d97e9c77 ("drm/nouveau: implement devinit subdev, and new
+> init table parser")
+> Remove it.
+> 
+> Signed-off-by: Dr. David Alan Gilbert <linux@treblig.org>
 
-> If the card doesn't have display hardware, hpd_work and hpd_lock are
-> left uninitialized which causes BUG when attempting to schedule hpd_work
-> on runtime PM resume.
->
-> Fix it by adding headless flag to DRM and skip any hpd if it's set.
->
-> Fixes: ae1aadb1eb8d ("nouveau: don't fail driver load if no display hw present.")
-> Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/337
-> Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+Acked-by: Danilo Krummrich <dakr@redhat.com>
 
-Reviewed-by: Ben Skeggs <bskeggs@nvidia.com>
+To which series does this patch belong? Need me to apply it?
 
+- Danilo
 
 > ---
-> v2: drop extra checks in nouveau_display_hpd_work() and
-> nouveau_connector_hpd()
->
->   drivers/gpu/drm/nouveau/dispnv04/disp.c   | 2 +-
->   drivers/gpu/drm/nouveau/dispnv50/disp.c   | 2 +-
->   drivers/gpu/drm/nouveau/nouveau_display.c | 6 +++++-
->   drivers/gpu/drm/nouveau/nouveau_drv.h     | 1 +
->   4 files changed, 8 insertions(+), 3 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/dispnv04/disp.c b/drivers/gpu/drm/nouveau/dispnv04/disp.c
-> index 13705c5f1497..4b7497a8755c 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv04/disp.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv04/disp.c
-> @@ -68,7 +68,7 @@ nv04_display_fini(struct drm_device *dev, bool runtime, bool suspend)
->   	if (nv_two_heads(dev))
->   		NVWriteCRTC(dev, 1, NV_PCRTC_INTR_EN_0, 0);
+>   drivers/gpu/drm/nouveau/nouveau_bios.c | 5 -----
+>   1 file changed, 5 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_bios.c b/drivers/gpu/drm/nouveau/nouveau_bios.c
+> index 79cfab53f80e..8c3c1f1e01c5 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_bios.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_bios.c
+> @@ -43,11 +43,6 @@
+>   #define BIOSLOG(sip, fmt, arg...) NV_DEBUG(sip->dev, fmt, ##arg)
+>   #define LOG_OLD_VALUE(x)
 >   
-> -	if (!runtime)
-> +	if (!runtime && !drm->headless)
->   		cancel_work_sync(&drm->hpd_work);
->   
->   	if (!suspend)
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> index 88728a0b2c25..674dc567e179 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> @@ -2680,7 +2680,7 @@ nv50_display_fini(struct drm_device *dev, bool runtime, bool suspend)
->   			nv50_mstm_fini(nouveau_encoder(encoder));
->   	}
->   
-> -	if (!runtime)
-> +	if (!runtime && !drm->headless)
->   		cancel_work_sync(&drm->hpd_work);
->   }
->   
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-> index aed5d5b51b43..d4725a968827 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-> @@ -450,6 +450,9 @@ nouveau_display_hpd_resume(struct drm_device *dev)
+> -struct init_exec {
+> -	bool execute;
+> -	bool repeat;
+> -};
+> -
+>   static bool nv_cksum(const uint8_t *data, unsigned int length)
 >   {
->   	struct nouveau_drm *drm = nouveau_drm(dev);
->   
-> +	if (drm->headless)
-> +		return;
-> +
->   	spin_lock_irq(&drm->hpd_lock);
->   	drm->hpd_pending = ~0;
->   	spin_unlock_irq(&drm->hpd_lock);
-> @@ -635,7 +638,7 @@ nouveau_display_fini(struct drm_device *dev, bool suspend, bool runtime)
->   	}
->   	drm_connector_list_iter_end(&conn_iter);
->   
-> -	if (!runtime)
-> +	if (!runtime && !drm->headless)
->   		cancel_work_sync(&drm->hpd_work);
->   
->   	drm_kms_helper_poll_disable(dev);
-> @@ -729,6 +732,7 @@ nouveau_display_create(struct drm_device *dev)
->   		/* no display hw */
->   		if (ret == -ENODEV) {
->   			ret = 0;
-> +			drm->headless = true;
->   			goto disp_create_err;
->   		}
->   
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
-> index e239c6bf4afa..25fca98a20bc 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-> @@ -276,6 +276,7 @@ struct nouveau_drm {
->   	/* modesetting */
->   	struct nvbios vbios;
->   	struct nouveau_display *display;
-> +	bool headless;
->   	struct work_struct hpd_work;
->   	spinlock_t hpd_lock;
->   	u32 hpd_pending;
+>   	/*
+
