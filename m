@@ -2,69 +2,89 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 391C3904066
-	for <lists+nouveau@lfdr.de>; Tue, 11 Jun 2024 17:46:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 75F5B90463D
+	for <lists+nouveau@lfdr.de>; Tue, 11 Jun 2024 23:24:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4188C10E681;
-	Tue, 11 Jun 2024 15:46:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5D51E10E14A;
+	Tue, 11 Jun 2024 21:24:41 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VibAaU87";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="R7AtoAJp";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6C0B910E681;
- Tue, 11 Jun 2024 15:46:52 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4680160F00;
- Tue, 11 Jun 2024 15:46:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5B30C4AF53;
- Tue, 11 Jun 2024 15:46:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1718120810;
- bh=7Q8EYfT2yYWno5JvwY7yHxi7BODOc8t+N4Cv0BJ3y1A=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=VibAaU877OJhw/xWEQarGFauNAaLoPTRm7kiONSpmK7Vwz81evoQ49TbMAcoVYWtm
- k93F2BSHQPO+kfOGitb6sWUHlwRryanMq229pYZycRSwAt6ImbbhNF3R56qotaBu5R
- JFQ9+74k7X7Wl4HoBJLsp/HE/iCfIyW6uLWZCgMxCH0wfe6GyJOMcKZm0sZr9Ilkgm
- juPzhGQTu6X4XGaiREouJveo/Ue0YZ+JiVx79ptJwlBWaNrNaxNKo5Xzms0HpbGx7w
- i/Yvbk5DqEt6bjvO08/BAzW235cjKD+JtRDQsoBht2eItJ7buvmF3kSk5ACYYfJJZU
- PWQtcbIpMRfZA==
-Received: by mail-lf1-f53.google.com with SMTP id
- 2adb3069b0e04-52c819f6146so1600891e87.1; 
- Tue, 11 Jun 2024 08:46:50 -0700 (PDT)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BD50510E0FD
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jun 2024 21:24:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1718141074;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Kwi6qR7i5j222N4J5ge6XLRF/OTcTMPoCLriE5Gui2Q=;
+ b=R7AtoAJpSenTPJ5TY7oPZxtHp0x/leaNGZUFZHWzeChjiUym7u+/cUejCMNsH77QQzbHbM
+ FGF/kYNUNPEv0tiW+R71x5+TIHMj4S6l7YP6FMKsm6mIVSFCgcisgQBqY9kfdGtF+vBmnu
+ 66KS8QVgP3ZjXG9D6D6qXcGhKFtTX34=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-611-_orHoGTTNc-AIrqI-30DBg-1; Tue, 11 Jun 2024 17:24:31 -0400
+X-MC-Unique: _orHoGTTNc-AIrqI-30DBg-1
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-35f1fcd3bbcso1704211f8f.0
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jun 2024 14:24:31 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718141070; x=1718745870;
+ h=content-transfer-encoding:in-reply-to:organization:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Kwi6qR7i5j222N4J5ge6XLRF/OTcTMPoCLriE5Gui2Q=;
+ b=WKD6Q9V9reGal/KtkwxK2z3gXKI7yd3yNzJIXeCX+IRD8/WFMYw/XCdj3UWpa9f4VZ
+ 9iXxvFqYVfRt5zYiXxQywuI3BocXG/DU5A28w0Bi23CC2QF2ppV4rwyWhBmti2THMuii
+ BLEUeEzFfYdA4X1JZCYJ2vmgS9ihEKmFEQS9NHqOSl6BNWsAGi8OIlemEOXj8UCU1678
+ P+vZ5wp46C0Ew4ru2Z6zeYGjNPCOjrgsJ7s6/4gC+XKngS7RjWuOLqMPj4Z/kZy+Sn3H
+ 9WEjogP87wkHri/7QrhlNKscL/x7aSQqMrEV4usyzOG9BUUGIjMyVArdzovs20HHq0ID
+ DSWg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX9xy+232qV4vY8+0+qnUv1svGLvTiPGoyjagcaqXd9ltRzCdiJLRlv2cBbA5qEliGTsQkqGmzCGEDXdAnKsGp0C0VScO34gFYMlL/FVRZPV42+XwBh4DdPB6YeXzbaRGrCSes+5QsB+ZGDMNsrqg==
-X-Gm-Message-State: AOJu0YzrR4SaLWl3iQ2sjm2T66jvroGVl2q8rA1s0Me/+qNKhQQkjvlR
- ya2z8hQQL/2drazCd9A7zs9zJtjoqOsAF/gmuIuhUdCTMYSFS4Q0GQh2tfzVJtWb8wj/9SfzIXt
- 3dNWr61WLZ9Z7/obQwMjN37xGUg==
-X-Google-Smtp-Source: AGHT+IFx3kwL+4lnpKgK+dz83tXodIju037np6QGjras/ITiUXQ5EcTtwkbuGjNnLsANd4GB8aIL9jlXqg1ID9iFlKE=
-X-Received: by 2002:ac2:4bcd:0:b0:52c:78fa:453 with SMTP id
- 2adb3069b0e04-52c78fa05a5mr7404319e87.19.1718120809006; Tue, 11 Jun 2024
- 08:46:49 -0700 (PDT)
+ AJvYcCW9QYc7odZci1Jqfd/vP72YfBUmLEtXqVfuh7u9BrKLAZxhHj88r1kuHLIjblZJAgM0jRu6Jnzik0ZBImk1iUe0Ntef43HQBuzY4u8IGQ==
+X-Gm-Message-State: AOJu0YwVCD6/ylQ9V3NzRPuBPgTQviUDNVtBKOe28/jsQdQlBDymuFqG
+ sckWuyTeX3WgV+1CHCvBBm+MH6IRGSlR/p3VutC8tEmbHkEi5+PcdbKKGv1CQQeEk9KG/cFmrxF
+ 1Hk0voHISkTH5hExiqdRTr8UQRsUrXrtqBo2RcEGuIdupI9YtU8T8NQmVf63PeVU=
+X-Received: by 2002:adf:ee0d:0:b0:35f:1f80:1fa8 with SMTP id
+ ffacd0b85a97d-35f1f802197mr5672717f8f.34.1718141069990; 
+ Tue, 11 Jun 2024 14:24:29 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEHBBTWZibR1MV4vH2a0NLkyidmwyfZ12S/ifHe7Sk/bckt//fu9s+WNF25Hd6AqZ58+o6TGA==
+X-Received: by 2002:adf:ee0d:0:b0:35f:1f80:1fa8 with SMTP id
+ ffacd0b85a97d-35f1f802197mr5672705f8f.34.1718141069543; 
+ Tue, 11 Jun 2024 14:24:29 -0700 (PDT)
+Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
+ ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-35f2c3fd63fsm3019565f8f.51.2024.06.11.14.24.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 Jun 2024 14:24:28 -0700 (PDT)
+Message-ID: <37402257-fbcb-449a-82a7-4acf878bb09d@redhat.com>
+Date: Tue, 11 Jun 2024 23:24:27 +0200
 MIME-Version: 1.0
-References: <20240520172059.181256-1-dakr@redhat.com>
- <20240520172059.181256-4-dakr@redhat.com>
- <20240521212333.GA731457-robh@kernel.org>
- <641bda93-35f3-429e-b627-a9485505b6bf@asahilina.net>
-In-Reply-To: <641bda93-35f3-429e-b627-a9485505b6bf@asahilina.net>
-From: Rob Herring <robh@kernel.org>
-Date: Tue, 11 Jun 2024 09:46:35 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqLtGxyEymhuzb6HW85sunppYkKri9YsRpL31paVsB55zA@mail.gmail.com>
-Message-ID: <CAL_JsqLtGxyEymhuzb6HW85sunppYkKri9YsRpL31paVsB55zA@mail.gmail.com>
-Subject: Re: [RFC PATCH 3/8] rust: drm: Add Device and Driver abstractions
-To: Asahi Lina <lina@asahilina.net>
-Cc: Danilo Krummrich <dakr@redhat.com>, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, 
- tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch, ojeda@kernel.org, 
- alex.gaynor@gmail.com, wedsonaf@gmail.com, boqun.feng@gmail.com, 
- gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me, 
- a.hindborg@samsung.com, aliceryhl@google.com, fujita.tomonori@gmail.com, 
- pstanner@redhat.com, ajanulgu@redhat.com, lyude@redhat.com, 
- gregkh@linuxfoundation.org, rust-for-linux@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/6] drm/nouveau: remove unused struct 'init_exec'
+To: "Dr. David Alan Gilbert" <linux@treblig.org>
+Cc: daniel@ffwll.ch, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ kherbst@redhat.com, lyude@redhat.com
+References: <20240517232617.230767-1-linux@treblig.org>
+ <de79f41d-3a9b-4f15-b270-246af8b4c5b0@redhat.com>
+ <Zmgo8leSWpsjVVBS@gallifrey>
+From: Danilo Krummrich <dakr@redhat.com>
+Organization: RedHat
+In-Reply-To: <Zmgo8leSWpsjVVBS@gallifrey>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,124 +99,56 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Jun 8, 2024 at 11:16=E2=80=AFPM Asahi Lina <lina@asahilina.net> wro=
-te:
->
->
->
-> On 5/22/24 6:23 AM, Rob Herring wrote:
-> > On Mon, May 20, 2024 at 07:20:50PM +0200, Danilo Krummrich wrote:
-> >> From: Asahi Lina <lina@asahilina.net>
-> >>
-> >> Add abstractions for DRM drivers and devices. These go together in one
-> >> commit since both are fairly tightly coupled types.
-> >>
-> >> A few things have been stubbed out, to be implemented as further bits =
-of
-> >> the DRM subsystem are introduced.
-> >>
-> >> Signed-off-by: Asahi Lina <lina@asahilina.net>
-> >> Co-developed-by: Danilo Krummrich <dakr@redhat.com>
-> >> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
-> >> ---
-> >>  rust/bindings/bindings_helper.h |   2 +
-> >>  rust/kernel/drm/device.rs       |  87 +++++++++
-> >>  rust/kernel/drm/drv.rs          | 318 +++++++++++++++++++++++++++++++=
-+
-> >>  rust/kernel/drm/mod.rs          |   2 +
-> >>  4 files changed, 409 insertions(+)
-> >>  create mode 100644 rust/kernel/drm/device.rs
-> >>  create mode 100644 rust/kernel/drm/drv.rs
-> >
-> > [...]
-> >
-> >> diff --git a/rust/kernel/drm/drv.rs b/rust/kernel/drm/drv.rs
-> >> new file mode 100644
-> >> index 000000000000..5dd8f3f8df7c
-> >> --- /dev/null
-> >> +++ b/rust/kernel/drm/drv.rs
-> >> @@ -0,0 +1,318 @@
-> >> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> >> +
-> >> +//! DRM driver core.
-> >> +//!
-> >> +//! C header: [`include/linux/drm/drm_drv.h`](../../../../include/lin=
-ux/drm/drm_drv.h)
-> >> +
-> >> +use crate::{
-> >> +    alloc::flags::*,
-> >> +    bindings, device, drm,
-> >> +    error::code::*,
-> >> +    error::{Error, Result},
-> >> +    prelude::*,
-> >> +    private::Sealed,
-> >> +    str::CStr,
-> >> +    types::{ARef, ForeignOwnable},
-> >> +    ThisModule,
-> >> +};
-> >> +use core::{
-> >> +    marker::{PhantomData, PhantomPinned},
-> >> +    pin::Pin,
-> >> +};
-> >> +use macros::vtable;
-> >> +
-> >> +/// Driver use the GEM memory manager. This should be set for all mod=
-ern drivers.
-> >> +pub const FEAT_GEM: u32 =3D bindings::drm_driver_feature_DRIVER_GEM;
-> >> +/// Driver supports mode setting interfaces (KMS).
-> >> +pub const FEAT_MODESET: u32 =3D bindings::drm_driver_feature_DRIVER_M=
-ODESET;
-> >> +/// Driver supports dedicated render nodes.
-> >> +pub const FEAT_RENDER: u32 =3D bindings::drm_driver_feature_DRIVER_RE=
-NDER;
-> >> +/// Driver supports the full atomic modesetting userspace API.
-> >> +///
-> >> +/// Drivers which only use atomic internally, but do not support the =
-full userspace API (e.g. not
-> >> +/// all properties converted to atomic, or multi-plane updates are no=
-t guaranteed to be tear-free)
-> >> +/// should not set this flag.
-> >> +pub const FEAT_ATOMIC: u32 =3D bindings::drm_driver_feature_DRIVER_AT=
-OMIC;
-> >> +/// Driver supports DRM sync objects for explicit synchronization of =
-command submission.
-> >> +pub const FEAT_SYNCOBJ: u32 =3D bindings::drm_driver_feature_DRIVER_S=
-YNCOBJ;
-> >> +/// Driver supports the timeline flavor of DRM sync objects for expli=
-cit synchronization of command
-> >> +/// submission.
-> >> +pub const FEAT_SYNCOBJ_TIMELINE: u32 =3D bindings::drm_driver_feature=
-_DRIVER_SYNCOBJ_TIMELINE;
-> >
-> > This is missing an entry for DRIVER_GEM_GPUVA. And some others perhaps.
-> > I suppose some are legacy which won't be needed any time soon if ever.
-> > Not sure if you intend for this to be complete, or you are just adding
-> > what you are using? Only FEAT_GEM is used by nova ATM.
-> >
->
-> This was developed before DRIVER_GEM_GPUVA existed ^^
->
-> I have this in my branch since I'm using the GPUVA manager now.
+On 6/11/24 12:37, Dr. David Alan Gilbert wrote:
+> * Danilo Krummrich (dakr@redhat.com) wrote:
+>> On 5/18/24 01:26, linux@treblig.org wrote:
+>>> From: "Dr. David Alan Gilbert" <linux@treblig.org>
+>>>
+>>> 'init_exec' is unused since
+>>> commit cb75d97e9c77 ("drm/nouveau: implement devinit subdev, and new
+>>> init table parser")
+>>> Remove it.
+>>>
+>>> Signed-off-by: Dr. David Alan Gilbert <linux@treblig.org>
+>>
+>> Acked-by: Danilo Krummrich <dakr@redhat.com>
+>>
+>> To which series does this patch belong?
+> 
+> Actually all of them were independent patches on drm
+> some of which are all in, so it can be taken by itself.
+> 
+>> Need me to apply it?
+> 
+> Yes please!
 
-TBC, I'm using it as well, not just providing drive-by comments. I'm
-starting to look at converting panthor to rust.
+Applied to drm-misc-fixes, thanks!
 
-> Danilo,
-> what tree are you using for this submission? It would be good to
-> coordinate this and try to keep the WIP branches from diverging too much.=
-..
+> 
+> Thanks,
+> 
+> Dave
+> 
+>> - Danilo
+>>
+>>> ---
+>>>    drivers/gpu/drm/nouveau/nouveau_bios.c | 5 -----
+>>>    1 file changed, 5 deletions(-)
+>>>
+>>> diff --git a/drivers/gpu/drm/nouveau/nouveau_bios.c b/drivers/gpu/drm/nouveau/nouveau_bios.c
+>>> index 79cfab53f80e..8c3c1f1e01c5 100644
+>>> --- a/drivers/gpu/drm/nouveau/nouveau_bios.c
+>>> +++ b/drivers/gpu/drm/nouveau/nouveau_bios.c
+>>> @@ -43,11 +43,6 @@
+>>>    #define BIOSLOG(sip, fmt, arg...) NV_DEBUG(sip->dev, fmt, ##arg)
+>>>    #define LOG_OLD_VALUE(x)
+>>> -struct init_exec {
+>>> -	bool execute;
+>>> -	bool repeat;
+>>> -};
+>>> -
+>>>    static bool nv_cksum(const uint8_t *data, unsigned int length)
+>>>    {
+>>>    	/*
+>>
 
-Yes, please!
-
-Besides asahi of course, there's several people[1][2][3] using the
-platform and DT abstractions and we're all rebasing those. I'd
-volunteer to maintain, but I don't know rust well enough yet to even
-be dangerous... :)
-
-Rob
-
-[1] https://lore.kernel.org/all/cover.1717750631.git.viresh.kumar@linaro.or=
-g/
-[2] https://lore.kernel.org/all/20240322221305.1403600-1-lyude@redhat.com/
-[3] https://lore.kernel.org/all/CAPFo5VLoYGq_OgC5dqcueTyymuSCsLpjasLZnKO1jp=
-Y6gV7s2g@mail.gmail.com/
