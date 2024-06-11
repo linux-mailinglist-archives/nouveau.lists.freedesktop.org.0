@@ -2,82 +2,84 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C7B5903850
-	for <lists+nouveau@lfdr.de>; Tue, 11 Jun 2024 12:02:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 49BE590386D
+	for <lists+nouveau@lfdr.de>; Tue, 11 Jun 2024 12:09:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 80D2A10E305;
-	Tue, 11 Jun 2024 10:02:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C129C10E4A6;
+	Tue, 11 Jun 2024 10:09:48 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="EkAi0XCZ";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="e1NRlnBM";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 27DB110E22A
- for <nouveau@lists.freedesktop.org>; Tue, 11 Jun 2024 10:02:14 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 064A210E57B
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jun 2024 10:09:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1718100133;
+ s=mimecast20190719; t=1718100586;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ybrwft53atk6SF7ZUqNAnkZ2feuXIglpHBR+lKADkBw=;
- b=EkAi0XCZz8HkCGQYuiCRnd8kOo+6nJXtlyD/7ql5k7GqTWkHuB7gP8wab6xVJkv8DC2A19
- vah18IM5n/mUCFdVhpod6S0UKRTws7p5aLYywkekm9PldBmq0vA9Rl+X+G1LTxgFcjD4ZE
- qUamNLHOEttxfUgHRhW7Bo3H1GONZOw=
+ bh=v9ktNk7k/0aYvyjCtpqZ6+hDDn8yBM6jUxeDl6eCn5c=;
+ b=e1NRlnBMH3sVkry0ab9ogNLmEFQQnW5R+Kh2NrwYnAlzLt2YkNjliO1H41E6seN3CSCHW/
+ fZqrr+enz0/8CjBrNtfjsITp2ANulaXEq6b4AN5hIG+xie8wfN0SAqvwlqsoDZqLkFHA3+
+ NQS0U3JNufFRWJcXZFlc5gsdxY3lUGs=
 Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
  [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-410-b-W7su16OvGzT4H8XAFdFw-1; Tue, 11 Jun 2024 06:02:11 -0400
-X-MC-Unique: b-W7su16OvGzT4H8XAFdFw-1
+ us-mta-661-ctxQoRhIORGqR1S1anckjA-1; Tue, 11 Jun 2024 06:09:44 -0400
+X-MC-Unique: ctxQoRhIORGqR1S1anckjA-1
 Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-35f09eab759so3017223f8f.1
- for <nouveau@lists.freedesktop.org>; Tue, 11 Jun 2024 03:02:11 -0700 (PDT)
+ ffacd0b85a97d-35f09eab759so3021077f8f.1
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jun 2024 03:09:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718100130; x=1718704930;
- h=content-transfer-encoding:in-reply-to:organization:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ybrwft53atk6SF7ZUqNAnkZ2feuXIglpHBR+lKADkBw=;
- b=TURfrS6sUEDac5gkRfPRmhD1shhU8aSnTR1yhByTX7JW1dwkjusLbK7pK2cPV9B3fY
- xtvzmovGAt+0Red2/BZdqm36YAyIZJguiVhPNzfsITfq50VWSATHVoyJr2ys7ohzWgFT
- Y6RS4Hn0pQGN384mb+K8hxw0QwZ6KS1WxCzdb7ck7HOjD/AsuecqL66tin/mznGXaaO6
- 6V1IduSA7p/B4lb2imK/OrRXy6BZ1GQ+OPG9RMqOAaB2XgDblcyLIvOBLl6STy5tFGJL
- 8nbDVcw/bXH8BE29bQofEQuyiRsDNzRqFfsxSAcdcxlg8mePhL1MRgwt3IHYUrP04h85
- VulA==
+ d=1e100.net; s=20230601; t=1718100583; x=1718705383;
+ h=content-transfer-encoding:in-reply-to:organization:from:cc
+ :content-language:references:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=v9ktNk7k/0aYvyjCtpqZ6+hDDn8yBM6jUxeDl6eCn5c=;
+ b=F7kuiFEiog4MHjaukq2o+mvXjm/D8c0O5OzbLVA49sWEQNGC7Qfws+DtKnl+QNibwU
+ DTIzif5kMgH+zFhLgUTMZ9TULtLOHehUf+COvKPOuUB2N64BgVZbQCMudcCwCEc1XRQV
+ e9qf41ryKLgRffytTlvQeO+Fmydh9pkuhhhtqKozrj7kQJGxEO9MPZ0RB/9sfjtBdg1n
+ 2oH16e1Vp/QKKu00mp2s776lVaeCWD9kOOWP2+FpyfAMpI9uIN+Xb/4DofcxIGeDPrE9
+ AeDaCpy9xGABsLaVM9yb0OPknmLa9jR4MmytwcXUDCVgH9g/9FGb5ygt1h+k47Vywsq1
+ 3+eQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUOmGHylaPyFRi2asfMZ0GydrhMbl+AZuiHtQgbZIqsDSxwA7tqVJNDfEbYah5gQ9y/bVTywL4Yahh8hY42mGKLJcgJP1OSr+ySCn4iSw==
-X-Gm-Message-State: AOJu0YwTvJAbCzhD0TxFBdv6DQ/QuPWucDzBhA2Q2iH4dX2mlKgAUojm
- EJbXRKGt659xQmNiKCKeLkJq7CtGLIEh97nMeNMPAxWbF/T9yROEWExqTK7eBxQYTAPQaPP2lZ2
- QqAI5VwwMjWOdB4ZP+UO7dXKonjC6KEjETjwA3PPvpjhPJKvvN5x05un9qaBr0Og=
-X-Received: by 2002:adf:e3c5:0:b0:35f:1f06:3d9d with SMTP id
- ffacd0b85a97d-35f1f063df7mr5752579f8f.70.1718100130587; 
- Tue, 11 Jun 2024 03:02:10 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFKZL98uEunjHgV1dVr0GvsBw6dhzSAWM/mji33SSRAXlWoRbiGLGcShOXcwnVxfeWG9h8t4g==
-X-Received: by 2002:adf:e3c5:0:b0:35f:1f06:3d9d with SMTP id
- ffacd0b85a97d-35f1f063df7mr5752550f8f.70.1718100130173; 
- Tue, 11 Jun 2024 03:02:10 -0700 (PDT)
+ AJvYcCVsehPqnQJav8KYIa+EcaAddQ5nPksTf7sMo7Rq23eSwanQNPdOmaJz2M6EH9BOQMsJJpQBJ8IqxDDmg1ebC/m9MAAqZ1sZjZCHoIXyaA==
+X-Gm-Message-State: AOJu0YwqPDnMSPZJr2WiAcdJnbWe7KAfD3L/uesYl+rAowWKXQd0KTOS
+ lok6ffuntKEQn/fOZbwHf51xVN7rJDI5T0n3ZUSPMrtcoLGsMQmRAwfqrOjv9k/nYTCjpvycuBo
+ vDfUyWuQ1i2NQgmlmwfefihuJQMq+Nsd2SV/p7bxu2xMAW6T9gPG82RrEzmqyJIc=
+X-Received: by 2002:a5d:688d:0:b0:35f:247e:fbc3 with SMTP id
+ ffacd0b85a97d-35f247efe8fmr4059094f8f.3.1718100583503; 
+ Tue, 11 Jun 2024 03:09:43 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHwdqlVHaTXmPpsCH9dotUi8Rrqghxxaa3Jv+kO9Q6WH/zO2gBDxubgEw4/R1c1/SBZJ5eJUA==
+X-Received: by 2002:a5d:688d:0:b0:35f:247e:fbc3 with SMTP id
+ ffacd0b85a97d-35f247efe8fmr4059077f8f.3.1718100583155; 
+ Tue, 11 Jun 2024 03:09:43 -0700 (PDT)
 Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
  ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-35ef5e991c9sm13431003f8f.70.2024.06.11.03.02.08
+ ffacd0b85a97d-35f228cbfb8sm5659345f8f.57.2024.06.11.03.09.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Jun 2024 03:02:09 -0700 (PDT)
-Message-ID: <de79f41d-3a9b-4f15-b270-246af8b4c5b0@redhat.com>
-Date: Tue, 11 Jun 2024 12:02:07 +0200
+ Tue, 11 Jun 2024 03:09:42 -0700 (PDT)
+Message-ID: <48e7872e-64df-49b8-ac2e-0a45db556069@redhat.com>
+Date: Tue, 11 Jun 2024 12:09:41 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] drm/nouveau: remove unused struct 'init_exec'
-To: linux@treblig.org
-Cc: daniel@ffwll.ch, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- kherbst@redhat.com, lyude@redhat.com
-References: <20240517232617.230767-1-linux@treblig.org>
+Subject: Re: [PATCH v2] drm/nouveau: don't attempt to schedule hpd_work on
+ headless cards
+To: Vasily Khoruzhick <anarsoul@gmail.com>
+References: <20240607221032.25918-1-anarsoul@gmail.com>
+Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Ben Skeggs <bskeggs@nvidia.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
 From: Danilo Krummrich <dakr@redhat.com>
 Organization: RedHat
-In-Reply-To: <20240517232617.230767-1-linux@treblig.org>
+In-Reply-To: <20240607221032.25918-1-anarsoul@gmail.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -97,40 +99,96 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 5/18/24 01:26, linux@treblig.org wrote:
-> From: "Dr. David Alan Gilbert" <linux@treblig.org>
+On 6/8/24 00:09, Vasily Khoruzhick wrote:
+> If the card doesn't have display hardware, hpd_work and hpd_lock are
+> left uninitialized which causes BUG when attempting to schedule hpd_work
+> on runtime PM resume.
 > 
-> 'init_exec' is unused since
-> commit cb75d97e9c77 ("drm/nouveau: implement devinit subdev, and new
-> init table parser")
-> Remove it.
+> Fix it by adding headless flag to DRM and skip any hpd if it's set.
 > 
-> Signed-off-by: Dr. David Alan Gilbert <linux@treblig.org>
+> Fixes: ae1aadb1eb8d ("nouveau: don't fail driver load if no display hw present.")
+> Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/337
+> Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
 
-Acked-by: Danilo Krummrich <dakr@redhat.com>
-
-To which series does this patch belong? Need me to apply it?
-
-- Danilo
+Applied to drm-misc-fixes, thanks!
 
 > ---
->   drivers/gpu/drm/nouveau/nouveau_bios.c | 5 -----
->   1 file changed, 5 deletions(-)
+> v2: drop extra checks in nouveau_display_hpd_work() and
+> nouveau_connector_hpd()
 > 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_bios.c b/drivers/gpu/drm/nouveau/nouveau_bios.c
-> index 79cfab53f80e..8c3c1f1e01c5 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_bios.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_bios.c
-> @@ -43,11 +43,6 @@
->   #define BIOSLOG(sip, fmt, arg...) NV_DEBUG(sip->dev, fmt, ##arg)
->   #define LOG_OLD_VALUE(x)
+>   drivers/gpu/drm/nouveau/dispnv04/disp.c   | 2 +-
+>   drivers/gpu/drm/nouveau/dispnv50/disp.c   | 2 +-
+>   drivers/gpu/drm/nouveau/nouveau_display.c | 6 +++++-
+>   drivers/gpu/drm/nouveau/nouveau_drv.h     | 1 +
+>   4 files changed, 8 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/disp.c b/drivers/gpu/drm/nouveau/dispnv04/disp.c
+> index 13705c5f1497..4b7497a8755c 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv04/disp.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/disp.c
+> @@ -68,7 +68,7 @@ nv04_display_fini(struct drm_device *dev, bool runtime, bool suspend)
+>   	if (nv_two_heads(dev))
+>   		NVWriteCRTC(dev, 1, NV_PCRTC_INTR_EN_0, 0);
 >   
-> -struct init_exec {
-> -	bool execute;
-> -	bool repeat;
-> -};
-> -
->   static bool nv_cksum(const uint8_t *data, unsigned int length)
+> -	if (!runtime)
+> +	if (!runtime && !drm->headless)
+>   		cancel_work_sync(&drm->hpd_work);
+>   
+>   	if (!suspend)
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> index 88728a0b2c25..674dc567e179 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> @@ -2680,7 +2680,7 @@ nv50_display_fini(struct drm_device *dev, bool runtime, bool suspend)
+>   			nv50_mstm_fini(nouveau_encoder(encoder));
+>   	}
+>   
+> -	if (!runtime)
+> +	if (!runtime && !drm->headless)
+>   		cancel_work_sync(&drm->hpd_work);
+>   }
+>   
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
+> index aed5d5b51b43..d4725a968827 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+> @@ -450,6 +450,9 @@ nouveau_display_hpd_resume(struct drm_device *dev)
 >   {
->   	/*
+>   	struct nouveau_drm *drm = nouveau_drm(dev);
+>   
+> +	if (drm->headless)
+> +		return;
+> +
+>   	spin_lock_irq(&drm->hpd_lock);
+>   	drm->hpd_pending = ~0;
+>   	spin_unlock_irq(&drm->hpd_lock);
+> @@ -635,7 +638,7 @@ nouveau_display_fini(struct drm_device *dev, bool suspend, bool runtime)
+>   	}
+>   	drm_connector_list_iter_end(&conn_iter);
+>   
+> -	if (!runtime)
+> +	if (!runtime && !drm->headless)
+>   		cancel_work_sync(&drm->hpd_work);
+>   
+>   	drm_kms_helper_poll_disable(dev);
+> @@ -729,6 +732,7 @@ nouveau_display_create(struct drm_device *dev)
+>   		/* no display hw */
+>   		if (ret == -ENODEV) {
+>   			ret = 0;
+> +			drm->headless = true;
+>   			goto disp_create_err;
+>   		}
+>   
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> index e239c6bf4afa..25fca98a20bc 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> @@ -276,6 +276,7 @@ struct nouveau_drm {
+>   	/* modesetting */
+>   	struct nvbios vbios;
+>   	struct nouveau_display *display;
+> +	bool headless;
+>   	struct work_struct hpd_work;
+>   	spinlock_t hpd_lock;
+>   	u32 hpd_pending;
 
