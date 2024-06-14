@@ -2,68 +2,68 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D243DC871E6
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:47:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9944AC871CB
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:47:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A15FD10E4A8;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3F1A210E48F;
 	Tue, 25 Nov 2025 20:47:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="HphKi76d";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="T/LCp9jL";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 03AB410EDC2;
- Fri, 14 Jun 2024 15:36:52 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5DE1C10E0EA;
+ Fri, 14 Jun 2024 19:38:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
  s=20170329;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=5+/vSUsusZJjzOquaKR+Lnhfb4Xwzp1gKdxtTXFkte4=; b=HphKi76dzy1FbzwUKfH6CQJ7e9
- 4mqbYGd9nU4R3tBwtUrovH2GkVix+0iSEhvFBd40Lr8bS8vkA72/q67NbP3Ot7Yemm+Z/a5xMme1C
- qITfmbryXx7/kTXo1YxGdeP+9nhjIcSnyPB4Zxw83m+yTA1jXdPk8v1dglA/+0SyL+7bKC1+AVB9k
- vGs/ekPSfrWSFK5VX5mV5eTm0rHSadoLSRJStK4grNwSAw/WQGBRircf770WKBBZ4DeyzM7otygcA
- OoC8jWi8e161CCUiP5da/omkaJA43Z0fAw4XWCqgAbJzWeXWwy1yJvSXKD7v0XRnF4nwmu76n/Qbo
- nj7ZGO9Q==;
-Received: from [179.118.191.115] (helo=localhost.localdomain)
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=G3US0s9AhbQW+KZXBzdRBe9+d9S85YJD8W6IE7z1fBA=; b=T/LCp9jLHrYdd3c+tDD2hJZ6vE
+ hfmV5L7VdybRhnWv6XcvT+GC8YYy4q/0+rQWpuQ/z51tGuJSD9DtRNGqjt6mIVvfJwnMuODuJIapp
+ gWrqE13N35HevWJjGE/HVyUsVG9CbCzja2IGECPK97e8ALWcYgUPW2oMA/DfOwmkjV9WJmddgG94f
+ zVLgg1CgBvBxZ7e8ysRRRtsraMkbUH8Q/yciScnbHh0nsMMT6ohFD5+6JiFc86fPlVz4pZ3VpK77F
+ ZPi2CyyzlLCs/J+PgG9oc/WdgbWCPvvlbbXdgfYHomdOJFU+vnSxupySJFyd/x+NbT68J4Vz2OAWY
+ a9k66X+Q==;
+Received: from [179.118.191.115] (helo=[192.168.15.100])
  by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1sI8yv-003B8v-CW; Fri, 14 Jun 2024 17:36:49 +0200
-From: =?UTF-8?q?Andr=C3=A9=20Almeida?= <andrealmeid@igalia.com>
-To: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
+ id 1sICkD-003Fy9-IJ; Fri, 14 Jun 2024 21:37:53 +0200
+Message-ID: <ea501920-7319-46f4-98ca-cea412abf8a9@igalia.com>
+Date: Fri, 14 Jun 2024 16:37:41 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 0/8] drm: Support per-plane async flip configuration
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org
-Cc: kernel-dev@igalia.com, Melissa Wen <mwen@igalia.com>,
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ kernel-dev@igalia.com, Melissa Wen <mwen@igalia.com>,
  alexander.deucher@amd.com, christian.koenig@amd.com,
  Simon Ser <contact@emersion.fr>, Pekka Paalanen <ppaalanen@gmail.com>,
  daniel@ffwll.ch, Daniel Stone <daniel@fooishbar.org>,
- =?UTF-8?q?=27Marek=20Ol=C5=A1=C3=A1k=27?= <maraeo@gmail.com>,
+ =?UTF-8?B?J01hcmVrIE9sxaHDoWsn?= <maraeo@gmail.com>,
  Dave Airlie <airlied@gmail.com>, ville.syrjala@linux.intel.com,
  Xaver Hugl <xaver.hugl@gmail.com>, Joshua Ashton <joshua@froggi.es>,
- =?UTF-8?q?Michel=20D=C3=A4nzer?= <michel.daenzer@mailbox.org>,
+ =?UTF-8?Q?Michel_D=C3=A4nzer?= <michel.daenzer@mailbox.org>,
  Sam Ravnborg <sam@ravnborg.org>, Boris Brezillon <bbrezillon@kernel.org>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
  Nicolas Ferre <nicolas.ferre@microchip.com>,
  Alexandre Belloni <alexandre.belloni@bootlin.com>,
  Claudiu Beznea <claudiu.beznea@tuxon.dev>,
  Jani Nikula <jani.nikula@linux.intel.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>,
- =?UTF-8?q?Andr=C3=A9=20Almeida?= <andrealmeid@igalia.com>
-Subject: [PATCH v6 8/8] drm/amdgpu: Make it possible to async flip overlay
- planes
-Date: Fri, 14 Jun 2024 12:35:35 -0300
-Message-ID: <20240614153535.351689-9-andrealmeid@igalia.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240614153535.351689-1-andrealmeid@igalia.com>
+ Lyude Paul <lyude@redhat.com>
 References: <20240614153535.351689-1-andrealmeid@igalia.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+ <lxfxqbax6azdpeamwm2qqv2tulgxrb7y3qzb4ir4myt6x5sqez@imd3yd5mbk7u>
+Content-Language: en-US
+From: =?UTF-8?Q?Andr=C3=A9_Almeida?= <andrealmeid@igalia.com>
+In-Reply-To: <lxfxqbax6azdpeamwm2qqv2tulgxrb7y3qzb4ir4myt6x5sqez@imd3yd5mbk7u>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:22 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -80,26 +80,62 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-amdgpu can handle async flips on overlay planes, so mark it as true
-during the plane initialization.
+Hi Dmitry,
 
-Signed-off-by: André Almeida <andrealmeid@igalia.com>
----
- drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_plane.c | 1 +
- 1 file changed, 1 insertion(+)
+Em 14/06/2024 14:32, Dmitry Baryshkov escreveu:
+> On Fri, Jun 14, 2024 at 12:35:27PM GMT, André Almeida wrote:
+>> AMD hardware can do async flips with overlay planes, but currently there's no
+>> easy way to enable that in DRM. To solve that, this patchset creates a new
+>> drm_plane field, bool async_flip, that allows drivers to choose which plane can
+>> or cannot do async flips. This is latter used on drm_atomic_set_property when
+>> users want to do async flips.
+>>
+>> Patch 1 allows async commits with IN_FENCE_ID in any driver.
+>>
+>> Patches 2 to 7 have no function change. As per current code, every driver that
+>> allows async page flips using the atomic API, allows doing it only in the
+>> primary plane. Those patches then enable it for every driver.
+>>
+>> Patch 8 finally enables async flip on overlay planes for amdgpu.
+>>
+>> Changes from v5:
+>> - Instead of enabling plane->async_flip in the common code, move it to driver
+>> code.
+>> - Enable primary plane async flip on every driver
+>> https://lore.kernel.org/dri-devel/20240612193713.167448-1-andrealmeid@igalia.com/
+>>
+>> André Almeida (8):
+>>    drm/atomic: Allow userspace to use explicit sync with atomic async
+>>      flips
+>>    drm: Support per-plane async flip configuration
+>>    drm/amdgpu: Enable async flips on the primary plane
+>>    drm: atmel-hlcdc: Enable async flips on the primary plane
+>>    drm/i915: Enable async flips on the primary plane
+>>    drm/nouveau: Enable async flips on the primary plane
+>>    drm/vc4: Enable async flips on the primary plane
+>>    drm/amdgpu: Make it possible to async flip overlay planes
+>>
+>>   drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_plane.c | 2 ++
+>>   drivers/gpu/drm/atmel-hlcdc/atmel_hlcdc_plane.c         | 3 +++
+>>   drivers/gpu/drm/drm_atomic_uapi.c                       | 8 +++++---
+>>   drivers/gpu/drm/i915/display/i9xx_plane.c               | 3 +++
+>>   drivers/gpu/drm/nouveau/dispnv04/crtc.c                 | 4 ++++
+>>   drivers/gpu/drm/nouveau/dispnv50/wndw.c                 | 4 ++++
+>>   drivers/gpu/drm/vc4/vc4_plane.c                         | 4 +++-
+> 
+> The main question is why only these drivers were updated.
+> 
 
-diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_plane.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_plane.c
-index 0c126c5609d3..7d508d816f0d 100644
---- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_plane.c
-+++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_plane.c
-@@ -1709,6 +1709,7 @@ int amdgpu_dm_plane_init(struct amdgpu_display_manager *dm,
- 	} else if (plane->type == DRM_PLANE_TYPE_OVERLAY) {
- 		unsigned int zpos = 1 + drm_plane_index(plane);
- 		drm_plane_create_zpos_property(plane, zpos, 1, 254);
-+		plane->async_flip = true;
- 	} else if (plane->type == DRM_PLANE_TYPE_CURSOR) {
- 		drm_plane_create_zpos_immutable_property(plane, 255);
- 	}
--- 
-2.45.2
+According to `git grep async_page_flip`, only those drivers supports 
+async page flip. The only corner case is radeon, that does supports 
+async but doesn't support planes.
 
+Do you know any other driver that should be updated to?
+
+>>   include/drm/drm_plane.h                                 | 5 +++++
+>>   8 files changed, 29 insertions(+), 4 deletions(-)
+>>
+>> -- 
+>> 2.45.2
+>>
+> 
