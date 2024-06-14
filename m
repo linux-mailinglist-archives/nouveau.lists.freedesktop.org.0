@@ -2,50 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00736CBA9EA
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 819E2C871B3
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:47:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5A12610E9EE;
-	Sat, 13 Dec 2025 12:40:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F2CBC10E48B;
+	Tue, 25 Nov 2025 20:47:32 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=treblig.org header.i=@treblig.org header.b="Xae1nHkV";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="oCqhgpcJ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx.treblig.org (mx.treblig.org [46.235.229.95])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4FD7D10E58E;
- Tue, 11 Jun 2024 10:37:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
- ; s=bytemarkmx;
- h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
- :Subject; bh=RJEjwUTNqxARRNi+A8Omlry3cWQer/5aK7szXPhq1oE=; b=Xae1nHkVIBr4AJjv
- Tg/tcKEZ3do6YJRnY/vmjK6quHsH4TrVpocgmXHoOnW3d5KRWVRGisngBN7bX3Yb4c5x/QrzqpFW8
- XIIBYG49XKCAoDk7Z2SSu70R+ENQ2DsJohrS6abpCdnZqMhdNRvLwMuXS1kqdyMo3CyyEXz8GTURO
- yLBD8Ye+7BMxjEFcEQpgNdXXGNvO+mcmf5NE+/HgzJR+nBlfMqTPfNNDv96VnkQSyvM7kJEP3F669
- tjqAZ1eRsttZvlBt4jY/2rF+inQMJTBzRIbxswrwsAxAJOYTdYMOHabK3JrJwxlNV6JI6hZUiKL/o
- BS0er4lRBbAZCqGL1A==;
-Received: from dg by mx.treblig.org with local (Exim 4.96)
- (envelope-from <dg@treblig.org>) id 1sGysk-005X9R-13;
- Tue, 11 Jun 2024 10:37:38 +0000
-Date: Tue, 11 Jun 2024 10:37:38 +0000
-From: "Dr. David Alan Gilbert" <linux@treblig.org>
-To: Danilo Krummrich <dakr@redhat.com>
-Cc: daniel@ffwll.ch, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- kherbst@redhat.com, lyude@redhat.com
-Subject: Re: [PATCH 2/6] drm/nouveau: remove unused struct 'init_exec'
-Message-ID: <Zmgo8leSWpsjVVBS@gallifrey>
-References: <20240517232617.230767-1-linux@treblig.org>
- <de79f41d-3a9b-4f15-b270-246af8b4c5b0@redhat.com>
+Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9439510ED9B;
+ Fri, 14 Jun 2024 15:35:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
+ s=20170329;
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=LmgvFS549yo/YJvBvlKRwZA43KduQg2X1Xw5E+iXCqk=; b=oCqhgpcJY25QyoVWX+uB03kyG2
+ /ZKPtyUgAi+WRtJpJbSAk0Z8S+juSoNehw0j1cMQHQusZN4oWiE9eVpoM3ptOxGy3PQHvW6imEZVk
+ ZXFRl9I8/HCKYWPbhWggebBI1GbsZU42PN4F53sCx6P5no9VliYDpbY0CiKuOrP/c2dtAHW1NhJb0
+ qGqbxOJ2GbJX3WrWAyLSgmy0/Mj63yzynYCzaRD9QvrXiOP+mYzrHbgcc9O80zRAn7y4oWaUwtgQK
+ KzwWD4d4fJ1SMm/VdD7KaTvbe3nWyRimrT60THmDJWDh2XjbxL6ZhkjG7hqp3poSga0GdOaUFRz+3
+ kE6URfiA==;
+Received: from [179.118.191.115] (helo=localhost.localdomain)
+ by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1sI8xu-003B8v-DG; Fri, 14 Jun 2024 17:35:46 +0200
+From: =?UTF-8?q?Andr=C3=A9=20Almeida?= <andrealmeid@igalia.com>
+To: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org
+Cc: kernel-dev@igalia.com, Melissa Wen <mwen@igalia.com>,
+ alexander.deucher@amd.com, christian.koenig@amd.com,
+ Simon Ser <contact@emersion.fr>, Pekka Paalanen <ppaalanen@gmail.com>,
+ daniel@ffwll.ch, Daniel Stone <daniel@fooishbar.org>,
+ =?UTF-8?q?=27Marek=20Ol=C5=A1=C3=A1k=27?= <maraeo@gmail.com>,
+ Dave Airlie <airlied@gmail.com>, ville.syrjala@linux.intel.com,
+ Xaver Hugl <xaver.hugl@gmail.com>, Joshua Ashton <joshua@froggi.es>,
+ =?UTF-8?q?Michel=20D=C3=A4nzer?= <michel.daenzer@mailbox.org>,
+ Sam Ravnborg <sam@ravnborg.org>, Boris Brezillon <bbrezillon@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Nicolas Ferre <nicolas.ferre@microchip.com>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>,
+ Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>,
+ =?UTF-8?q?Andr=C3=A9=20Almeida?= <andrealmeid@igalia.com>
+Subject: [PATCH v6 0/8] drm: Support per-plane async flip configuration
+Date: Fri, 14 Jun 2024 12:35:27 -0300
+Message-ID: <20240614153535.351689-1-andrealmeid@igalia.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-In-Reply-To: <de79f41d-3a9b-4f15-b270-246af8b4c5b0@redhat.com>
-X-Chocolate: 70 percent or better cocoa solids preferably
-X-Operating-System: Linux/6.1.0-21-amd64 (x86_64)
-X-Uptime: 10:36:34 up 33 days, 21:50, 1 user, load average: 0.07, 0.02, 0.00
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:46 +0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:22 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,56 +77,47 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-* Danilo Krummrich (dakr@redhat.com) wrote:
-> On 5/18/24 01:26, linux@treblig.org wrote:
-> > From: "Dr. David Alan Gilbert" <linux@treblig.org>
-> > 
-> > 'init_exec' is unused since
-> > commit cb75d97e9c77 ("drm/nouveau: implement devinit subdev, and new
-> > init table parser")
-> > Remove it.
-> > 
-> > Signed-off-by: Dr. David Alan Gilbert <linux@treblig.org>
-> 
-> Acked-by: Danilo Krummrich <dakr@redhat.com>
-> 
-> To which series does this patch belong?
+AMD hardware can do async flips with overlay planes, but currently there's no
+easy way to enable that in DRM. To solve that, this patchset creates a new
+drm_plane field, bool async_flip, that allows drivers to choose which plane can
+or cannot do async flips. This is latter used on drm_atomic_set_property when
+users want to do async flips.
 
-Actually all of them were independent patches on drm
-some of which are all in, so it can be taken by itself.
+Patch 1 allows async commits with IN_FENCE_ID in any driver.
 
-> Need me to apply it?
+Patches 2 to 7 have no function change. As per current code, every driver that
+allows async page flips using the atomic API, allows doing it only in the
+primary plane. Those patches then enable it for every driver.
 
-Yes please!
+Patch 8 finally enables async flip on overlay planes for amdgpu.
 
-Thanks,
+Changes from v5:
+- Instead of enabling plane->async_flip in the common code, move it to driver
+code.
+- Enable primary plane async flip on every driver
+https://lore.kernel.org/dri-devel/20240612193713.167448-1-andrealmeid@igalia.com/
 
-Dave
+André Almeida (8):
+  drm/atomic: Allow userspace to use explicit sync with atomic async
+    flips
+  drm: Support per-plane async flip configuration
+  drm/amdgpu: Enable async flips on the primary plane
+  drm: atmel-hlcdc: Enable async flips on the primary plane
+  drm/i915: Enable async flips on the primary plane
+  drm/nouveau: Enable async flips on the primary plane
+  drm/vc4: Enable async flips on the primary plane
+  drm/amdgpu: Make it possible to async flip overlay planes
 
-> - Danilo
-> 
-> > ---
-> >   drivers/gpu/drm/nouveau/nouveau_bios.c | 5 -----
-> >   1 file changed, 5 deletions(-)
-> > 
-> > diff --git a/drivers/gpu/drm/nouveau/nouveau_bios.c b/drivers/gpu/drm/nouveau/nouveau_bios.c
-> > index 79cfab53f80e..8c3c1f1e01c5 100644
-> > --- a/drivers/gpu/drm/nouveau/nouveau_bios.c
-> > +++ b/drivers/gpu/drm/nouveau/nouveau_bios.c
-> > @@ -43,11 +43,6 @@
-> >   #define BIOSLOG(sip, fmt, arg...) NV_DEBUG(sip->dev, fmt, ##arg)
-> >   #define LOG_OLD_VALUE(x)
-> > -struct init_exec {
-> > -	bool execute;
-> > -	bool repeat;
-> > -};
-> > -
-> >   static bool nv_cksum(const uint8_t *data, unsigned int length)
-> >   {
-> >   	/*
-> 
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_plane.c | 2 ++
+ drivers/gpu/drm/atmel-hlcdc/atmel_hlcdc_plane.c         | 3 +++
+ drivers/gpu/drm/drm_atomic_uapi.c                       | 8 +++++---
+ drivers/gpu/drm/i915/display/i9xx_plane.c               | 3 +++
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c                 | 4 ++++
+ drivers/gpu/drm/nouveau/dispnv50/wndw.c                 | 4 ++++
+ drivers/gpu/drm/vc4/vc4_plane.c                         | 4 +++-
+ include/drm/drm_plane.h                                 | 5 +++++
+ 8 files changed, 29 insertions(+), 4 deletions(-)
+
 -- 
- -----Open up your eyes, open up your mind, open up your code -------   
-/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
-\        dave @ treblig.org |                               | In Hex /
- \ _________________________|_____ http://www.treblig.org   |_______/
+2.45.2
+
