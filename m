@@ -2,191 +2,134 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32E049092AB
-	for <lists+nouveau@lfdr.de>; Fri, 14 Jun 2024 21:01:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86BE890A1A3
+	for <lists+nouveau@lfdr.de>; Mon, 17 Jun 2024 03:11:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8FA9810EE39;
-	Fri, 14 Jun 2024 19:01:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2715D10E10F;
+	Mon, 17 Jun 2024 01:11:27 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Y1PIMXdb";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="PN/omwI+";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 93C6710E1DD;
- Fri, 14 Jun 2024 19:01:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1718391691; x=1749927691;
- h=date:from:to:cc:subject:message-id:references:
- content-transfer-encoding:in-reply-to:mime-version;
- bh=MiB0Se7Y7dPePCQA6MrPmqXRG2frfi/YZvDbbns5tB8=;
- b=Y1PIMXdbFM+nS6SyYqmUqkS1yB7TPBc3G2h9lK5cFOK62Ue50u1vxov/
- 79ncvo9Bf4bQo42IsT7OpBum62dfc5/36GcQXjw6w6wsBN/QCBtk/eHVN
- causv1WC2OgJvYZGxuJf06otM/ViO/7/m+orzP+e8P4y54YkwEYrMnVQD
- f7O47SfvExRoJKbawTiEJgm+I8072KgLhodgbSHmcJrRBk0BOdfCgNih3
- 5/1bbjcqpyKWC/cEBq4xkwK4zkrTKfoP1pDmBSoSUWn1npuYI0JXu2BtO
- GyJeyqXvBFzJRVtjOS7E90y5EpQ8rf+vk1OdE7WUpXaY9BQm+OjxebWZ8 g==;
-X-CSE-ConnectionGUID: nILRtfReQhCRlsWvDy0iRQ==
-X-CSE-MsgGUID: f+EZrKQdTpqtcWhVu5OB2A==
-X-IronPort-AV: E=McAfee;i="6700,10204,11103"; a="37818852"
-X-IronPort-AV: E=Sophos;i="6.08,238,1712646000"; d="scan'208";a="37818852"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
- by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Jun 2024 12:00:59 -0700
-X-CSE-ConnectionGUID: N5eQA/sYRVGtjbpTITYN8w==
-X-CSE-MsgGUID: YMYH6ubmRPOWzXGf0/qUmQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,238,1712646000"; d="scan'208";a="40694139"
-Received: from orsmsx602.amr.corp.intel.com ([10.22.229.15])
- by fmviesa009.fm.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
- 14 Jun 2024 12:00:58 -0700
-Received: from orsmsx611.amr.corp.intel.com (10.22.229.24) by
- ORSMSX602.amr.corp.intel.com (10.22.229.15) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Fri, 14 Jun 2024 12:00:57 -0700
-Received: from orsmsx603.amr.corp.intel.com (10.22.229.16) by
- ORSMSX611.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Fri, 14 Jun 2024 12:00:57 -0700
-Received: from ORSEDG601.ED.cps.intel.com (10.7.248.6) by
- orsmsx603.amr.corp.intel.com (10.22.229.16) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39 via Frontend Transport; Fri, 14 Jun 2024 12:00:57 -0700
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (104.47.59.168)
- by edgegateway.intel.com (134.134.137.102) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.39; Fri, 14 Jun 2024 12:00:57 -0700
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2066.outbound.protection.outlook.com [40.107.93.66])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 27AF010E0EF;
+ Mon, 17 Jun 2024 01:11:25 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=W15JrLhDRy9riOXKHVdoAfesOzroHgGqL5+hWhnInlrYCttBA6CDxTccCxBfzp+sYaMfp2ZldzGC8L49gZqCeIKuBhLIYAI16lOh8NfDYu6cnR8ICOwI47D1ERZ4QcvbgU+QQ226G8OB1VBrHtZAz5tOCHnmIZszCbazk1pbk7n1UBbBk3uftCDkWXIlxUVGF20qTEcxobnmN5Z1A0uEzr83opbxQUOf2QjaPMBmrQMhPMIUNLWFeP9uQiHXxKQhUtDA5SkumJb0MIxZgqr780YpOquwd+UCueonkTUA/gaUVE644GMl3bnr437jMteC/95Om7/bp1iBTy2o24ldYw==
+ b=K0LYj7ydn3arbwwsOEz4d+K4rrTgdFKb6tzo1tRLs8XR19OMnotc/leX2pGz4kL/oa/MF9r6REJIXYe3FUbZ6TzxUyBJyH79bd1p+a+VScjaqdxbwMuM8UdqTpcaiu18WXg4oaIR6nzkRI9sA0mD2YxRAA1uy+QUXyT1ORb4VohulGAA+r9bktJLTLMf5N0EjtRDqWAU83y1F/OUyWYw8i7jNgyBCGzrwjitCLA0lIx7RbvaQbyGClV+nLc7wJy93awRzQ8EdA0/M6dlPHI0pXRbkRwHkHWKBlBow/3G2sn1/AkiZuVvtKM7kzgzQc6edHDLwm24SlGyfUwZodOhlw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oy6z+WdgHQ5+5+EGV9x5UP1EKVPAG1fpeQFKy8Xh3yk=;
- b=ePxdd1JjAzuD0KofSWFC8mQrqFX3V/UMf42w7V1x2QdU7zzvTkkRJfrR4pavrgRbYrbh9BfkvNxrHoXwutNqpKZ8eHK3FZvQC8TMoRA89nn2WXczPx5rDlzn6Yd08FHacKR+tiaVK5mKSuMn+YVAYD4ws+bWtRiSS/dit28dqcMOo6Hajqu//ecSDmGZNv23ycON4nDBVovoVUXUg4Thb5PiOCiWWKSrKG5+iRGxZx5qt7zS+y+ThkHrI2/5tlEKKXPyORgBsA2XoP4b6tfUhT5WdvjcWbRfeixCz/1dvRBk7MVMbt8aAIyQS3EL8nT9oHue1xzTdNjvRI9UIqI9ug==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-Received: from BYAPR11MB2854.namprd11.prod.outlook.com (2603:10b6:a02:c9::12)
- by PH8PR11MB6753.namprd11.prod.outlook.com (2603:10b6:510:1c8::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.26; Fri, 14 Jun
- 2024 19:00:55 +0000
-Received: from BYAPR11MB2854.namprd11.prod.outlook.com
- ([fe80::8a98:4745:7147:ed42]) by BYAPR11MB2854.namprd11.prod.outlook.com
- ([fe80::8a98:4745:7147:ed42%5]) with mapi id 15.20.7677.024; Fri, 14 Jun 2024
- 19:00:55 +0000
-Date: Fri, 14 Jun 2024 15:00:48 -0400
-From: Rodrigo Vivi <rodrigo.vivi@intel.com>
-To: =?iso-8859-1?Q?Andr=E9?= Almeida <andrealmeid@igalia.com>, Ville
- =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@intel.com>,
- <naveen1.kumar@intel.com>, <vandita.kulkarni@intel.com>
-CC: <dri-devel@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>,
- <linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
- <nouveau@lists.freedesktop.org>, <intel-gfx@lists.freedesktop.org>,
- <kernel-dev@igalia.com>, Melissa Wen <mwen@igalia.com>,
- <alexander.deucher@amd.com>, <christian.koenig@amd.com>, Simon Ser
- <contact@emersion.fr>, Pekka Paalanen <ppaalanen@gmail.com>,
- <daniel@ffwll.ch>, Daniel Stone <daniel@fooishbar.org>, 'Marek
- =?utf-8?B?T2zFocOhayc=?= <maraeo@gmail.com>, Dave Airlie <airlied@gmail.com>, 
- <ville.syrjala@linux.intel.com>, Xaver Hugl <xaver.hugl@gmail.com>, "Joshua
- Ashton" <joshua@froggi.es>, Michel =?iso-8859-1?Q?D=E4nzer?=
- <michel.daenzer@mailbox.org>, Sam Ravnborg <sam@ravnborg.org>, "Boris
- Brezillon" <bbrezillon@kernel.org>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, Nicolas Ferre
- <nicolas.ferre@microchip.com>, Alexandre Belloni
- <alexandre.belloni@bootlin.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>,
- Jani Nikula <jani.nikula@linux.intel.com>, Karol Herbst <kherbst@redhat.com>, 
- Lyude Paul <lyude@redhat.com>
-Subject: Re: [PATCH v6 5/8] drm/i915: Enable async flips on the primary plane
-Message-ID: <ZmyTYPTVKM2-iaaN@intel.com>
-References: <20240614153535.351689-1-andrealmeid@igalia.com>
- <20240614153535.351689-6-andrealmeid@igalia.com>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240614153535.351689-6-andrealmeid@igalia.com>
-X-ClientProxiedBy: SJ0PR05CA0191.namprd05.prod.outlook.com
- (2603:10b6:a03:330::16) To BYAPR11MB2854.namprd11.prod.outlook.com
- (2603:10b6:a02:c9::12)
+ bh=MS7cfRBeblmuVxXWBdxZx7YukBwk6GvnD5nl+eNww5w=;
+ b=eyQLWutfEbCeTfR1IGCJ7yPd/QJeQ1aidWEKvbyZ1c37m/2w2/MMzVzO+q24u4CUXmhWfH0tXZke2Jc7ev10eNOrRZF1IuRnrUdQa1CUZs5RCWGQivEuN5Wbg4X1nRGlb1QGEaCg48BHof8E7XQQbFMX+oWJ8pLfLTRYl02CD7sZ+ZZEy+ehfPHQ8IT0WXAUru9t8p7BB31HKWGdvhuwbxaHpw54mO3tjzvIVuH/y0pYh85m2AGGuDqPF5mI6T9L1DEInKZ1V8185CBmwVSQHjjtr88LawBzai9k3ImVIzwH5udJpPvkdeJ8euo/DgnU85mt7ky/LgYxlcUdN9COVA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.160) smtp.rcpttodomain=gmail.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MS7cfRBeblmuVxXWBdxZx7YukBwk6GvnD5nl+eNww5w=;
+ b=PN/omwI+8ywUmZIBlrzRQBestOLL359bX+aEQYNusgZnaiUz6TLb8FSTkwOLffZyJuP6sb5UaTuaR9mkAGu7YnkSAtaIUums0xBi+QsEWLiFJqrWwL+vZj0ZpbFQf+BkJPcYzjideJzHNPOBT48pqm2jjY7Omm4Io/+k23yMSUPUmB9v9hVHl/ru7gLUWwDZczWD7I2f4u/H3Y7aCplSBllgf0VhYfnOyQz2lQhTCpywRo4dROJrZOjMbjFPyn2iLyWgKZpw2g6UqwnTAVnlXxs5UeLoKkZrQ3nFVlhmC9zuW9eADxzYauhQAM8CYnhMx7aoba9xjvMMsobyK+S6xw==
+Received: from BYAPR01CA0019.prod.exchangelabs.com (2603:10b6:a02:80::32) by
+ CH0PR12MB8580.namprd12.prod.outlook.com (2603:10b6:610:192::6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7677.29; Mon, 17 Jun 2024 01:11:19 +0000
+Received: from SJ5PEPF000001EA.namprd05.prod.outlook.com
+ (2603:10b6:a02:80:cafe::87) by BYAPR01CA0019.outlook.office365.com
+ (2603:10b6:a02:80::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.26 via Frontend
+ Transport; Mon, 17 Jun 2024 01:11:19 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ SJ5PEPF000001EA.mail.protection.outlook.com (10.167.242.198) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7677.15 via Frontend Transport; Mon, 17 Jun 2024 01:11:19 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Sun, 16 Jun
+ 2024 18:11:07 -0700
+Received: from [172.20.75.190] (10.126.231.35) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Sun, 16 Jun
+ 2024 18:11:06 -0700
+Message-ID: <ec7d1a66-e694-43f4-b1c8-612be023561e@nvidia.com>
+Date: Mon, 17 Jun 2024 11:11:04 +1000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] nouveau: rip out busy fence waits
+To: Dave Airlie <airlied@gmail.com>, <dri-devel@lists.freedesktop.org>
+CC: <nouveau@lists.freedesktop.org>
+References: <20240417054032.3145721-1-airlied@gmail.com>
+Content-Language: en-US
+From: Ben Skeggs <bskeggs@nvidia.com>
+In-Reply-To: <20240417054032.3145721-1-airlied@gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.126.231.35]
+X-ClientProxiedBy: rnnvmail201.nvidia.com (10.129.68.8) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR11MB2854:EE_|PH8PR11MB6753:EE_
-X-MS-Office365-Filtering-Correlation-Id: 66879827-de10-4ecd-cf14-08dc8ca45170
-X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EA:EE_|CH0PR12MB8580:EE_
+X-MS-Office365-Filtering-Correlation-Id: 18cfb5f4-2f99-4e8a-fe71-08dc8e6a6515
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230037|366013|7416011|376011|1800799021;
-X-Microsoft-Antispam-Message-Info: =?iso-8859-1?Q?q0RukBeeVCS1I0q1RIGHcSuqouo4brfZnSOhk700Jtn+qr8aeIom0gAqQi?=
- =?iso-8859-1?Q?PQCLeciUUIlssJejEFa2t25S6TTgeFwzZ8fYdyW31N2kxOFC4TxKdrmG6x?=
- =?iso-8859-1?Q?6oEMa9bt8KmymXfc+2NcIibbrq5Kz4406ud3PO99iaQt67bynNLO4AXVNI?=
- =?iso-8859-1?Q?1EHxpALfBmpNUkiHrg7IeK6qyEDqFLB3UtwST8jtXWLdoRhnQh++jI4IKt?=
- =?iso-8859-1?Q?/Z0SjJTD5ESmV7O7Q1jyJTv0rSbopwIKD49GiKZxLeVI55xgjCSpSO127k?=
- =?iso-8859-1?Q?d90JPzXSu0o6ueYxAkKqrWbsfMvBOBZevhWEh6PNN4R8XkcpdViI+oXSPH?=
- =?iso-8859-1?Q?T1yRQKNVsRjiUFs8CS6+Gya73pew+CYEjNTcPEACS72lZUCYcS/qWUA9Zn?=
- =?iso-8859-1?Q?djukBnRpeFtoOjpg+9Cyclytws6f4mJtBMDvaEWnrF6J+yELRUf51Dpiwf?=
- =?iso-8859-1?Q?g7xZ9A//tATJOo7SeH64iTFmtWCWgxCV5KRbsOo7NCP7+WlOZkzoM7NrZP?=
- =?iso-8859-1?Q?oPJpwpoGXI7GXnhyDLxTDTXkmH6IrOc/noxR0X7cJ44pROu5XY6Pw4NNSL?=
- =?iso-8859-1?Q?Xnf3Rju+hSRgIyKarSjBEybEFunEfSTT8B88Q/04kD7XNkSW/yxB7Kk/Fp?=
- =?iso-8859-1?Q?4JIz1eDoxymthgwrBMncyGyl4AnDV0etf9rhAu0lf4N7uv9noZl/C4/6SD?=
- =?iso-8859-1?Q?M1wiHMB99lPdUmicprwVogmD8JZzUJE6HYg/wh+yCiujNXX/CHW3PwvjkM?=
- =?iso-8859-1?Q?iWO/exFWu7tyQW0uIk3lLff3WKg/PvNSrYF7gAHqNBPTDgFs6bmw9z6XAd?=
- =?iso-8859-1?Q?GmxOilSQiQtdEFUcuSEEXR5ReNsTCe5dfbddKty/PkL+ezmzU5hiCZ9Sl/?=
- =?iso-8859-1?Q?awQqXRoFjGeZxguvAXx81Z8xl+qyxdYje4EfJhpk7dMPdggss2qV+s2n5s?=
- =?iso-8859-1?Q?JBYKuv+8veRYf/hgH3rLuWoDF7DPBrUa8AHjHjzoRb8FaJPnrQ4/fFprI/?=
- =?iso-8859-1?Q?g5ALMk1rkvmoK/mVyt1FKKFjfKFsRbz7msNp8oRSoaZInR7kel4btvb6nB?=
- =?iso-8859-1?Q?OxFKhQ1cExulj7WtVKRgGdDMl30h90qrU9wpVdiYt6FVJmNdT0aTSPtkm6?=
- =?iso-8859-1?Q?nPF624ClexjI081OERldHZ/pSzCjaxEdc1dqF38Nqa/F3wlvVMfIkGFFQk?=
- =?iso-8859-1?Q?xsKXCU8H/AbhAfDy1x8yPK3oikYw9kUndQ38Fk5230TEtgr1ts7iwwcc2H?=
- =?iso-8859-1?Q?sFX8lwnEyqHrZB3HEyBk4eUm/Shg8Odg0b7rTWH7y3R0sj5IPBPnkVnqqB?=
- =?iso-8859-1?Q?bnfsbnnqW8I03rjkrZaECOCi2A4imzRA+ubZw4r6fthGt23iJ5pJmyEZWj?=
- =?iso-8859-1?Q?gW0C7XPQw4?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR11MB2854.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230037)(366013)(7416011)(376011)(1800799021); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?U2vPvixsM3jUid6CxzOmPz8k3DELRHgmFh0C7wTACjF1auKxKvtQ6SDrWr?=
- =?iso-8859-1?Q?hv5JuLGU7I81QzCJBwx7ntbOywxBaEBbXbLABvSntAJarPCGT8aJc9RLTo?=
- =?iso-8859-1?Q?/zauqM2a4XmWkH/WYynAMilYh3tI2udh73f6X8NTuEguojdy+AQeTKMrAl?=
- =?iso-8859-1?Q?hXjyUxlyZAh6fWlJhJr4gCykfE8WYgo/XJ94+E9s/noVnIzWinadv/E2wI?=
- =?iso-8859-1?Q?nlVMOerWm/xhyX5Ij+GNjUo37DAGoH3qvUawKTj5pS+muVXiyJDrcpAW03?=
- =?iso-8859-1?Q?oCb2WelwWWG41Bh5rnbwSbNDKaZ6ogf/gzXuzRRhcochH17d0Wet917IMw?=
- =?iso-8859-1?Q?Q61WV1ATVpVw8+f3mZdobvq1CDOYPnwX/YXjjLJaQbGrdL/ZrwPgyasKKn?=
- =?iso-8859-1?Q?fRNnvgbXaMiD8dUXYxhgYup6bk89QzKAOwCrojLuvZolddrbDOjwWn6Nnw?=
- =?iso-8859-1?Q?IlBFZE6AxhMyThTJwroBfp2B5Gx2iZ/vSeVWDy1ow7O2URaF7EURBAa4wA?=
- =?iso-8859-1?Q?Ij93KuxJm4SxgxrLJcrDWZIUqSPTBd8p60Xkes0G7I9n854RgyRSZs5+p2?=
- =?iso-8859-1?Q?C1OfKoxII0K76F6lOKe5me4P+Th/Jv/MvT1tBPjq2tJ6ka+05082BVGDhv?=
- =?iso-8859-1?Q?bTNlEA/i/Tjpi381C/qQvBaP9llkUqzOjVj21tcvOZg9AFMMqLCL56w8UY?=
- =?iso-8859-1?Q?OsKXW6s58yfDBgOx3B4Sy8KNuyd18gj6YkyhAxA5tiNCLJFYP3GbSj8g2d?=
- =?iso-8859-1?Q?f1A0H37YPCOLRCOi4HBST4jzP2GrHaDYZWCrFni+SgjRYtaboivkveN9Nr?=
- =?iso-8859-1?Q?BIxzQOZXoRZdSfo6ixrCop5WGLE7AxT1estocP5dFccRhOzwOV3kO91jGu?=
- =?iso-8859-1?Q?8pU2ga8JFIYt6P1wEWokbUdvHuILzJzTyqDIocRB06FUfs3Dd56F8VkPrY?=
- =?iso-8859-1?Q?AbNXjYBR0Fgq7Fv0lBNNCC4JpeIK/TG/IcCkklulEnbzVpEbceRjegcwOy?=
- =?iso-8859-1?Q?sBrC7NFv/wO6qLFuT75EVchGtb6j13v8ZYep7UGk1HW8U9Fz/za3Ej1eYk?=
- =?iso-8859-1?Q?BEq69AINU1zQ0EQW3z6wGmsX5ZNMWZ+lRTQh94QRNf2fret3Dl6olpiLfI?=
- =?iso-8859-1?Q?LydA14Ucdv9HWwFcf1Eu7FVhXKgYNir0PRK6JiCUrtempVljspW9a1Aa8X?=
- =?iso-8859-1?Q?lHH7j+0D8QBHBL8JyGUWFpqD/u1+RHjfSxg+B0joOd4lttARXT3gdq8xcw?=
- =?iso-8859-1?Q?l5C25KUqNVXXXtrQBScW1EKaX41ZFxbFovziqKKeKZ0HKD9tkJHUfKLt+W?=
- =?iso-8859-1?Q?4x7PAy6itjXvguGfBmyHn/ubNZerOsGjXZE1YvGy5eeiQozpBiL7AfdzO5?=
- =?iso-8859-1?Q?FXqNOmmbnRsDhPk5hCvJNVQs1FahexCxEoAWT5+KmTX3Jp0qEU1WPenjdc?=
- =?iso-8859-1?Q?4yn4obGVsc9PBnobR6U5TaRiyCnhKk4hUSNWZ2yt27ss8Lru9ydd8QnHMC?=
- =?iso-8859-1?Q?FMQ8Ju3wMs2vXC3QPvkb2sygOpn15eSmgkw5VYME+QQ/PtrZvJHKdzZWpg?=
- =?iso-8859-1?Q?I1GsU/j3hUrapRtjIQcYvmG1S6O8X89wVXva/y7Dy3Zh4ggz6ohbOt6cVV?=
- =?iso-8859-1?Q?I/wyoi10RFrBVHD7azQP+bajtmklx4Jf5c0S1TUMk5JAsu9D2Cu7s+zw?=
- =?iso-8859-1?Q?=3D=3D?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 66879827-de10-4ecd-cf14-08dc8ca45170
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR11MB2854.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jun 2024 19:00:55.1751 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XDeOSjj3qBT7Pz9YOR9rtuEvX9J9Vh/CFhHfdRjn8twBK4p2UqxXYcoN+LTucNSznvpNYTKLWAomZfx2uHwU4A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR11MB6753
-X-OriginatorOrg: intel.com
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230037|376011|36860700010|82310400023|1800799021; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?aDMwb3FxMms5bm8ybWNaRlQ0MUs1dHlKWEhOK3ZSSW8xUEJ4dE8wV3RZQTUw?=
+ =?utf-8?B?ZjRqUFZuaFpOOVBmWXFkdmJ2T2htQVJsb0Q3YUVOaWJFV2ZScWFCSkh1Tmk4?=
+ =?utf-8?B?SHR1bFBjNm1JUStnK3JlMzJ2MXNEbWZvNkFqTGovUk1kMVJDd21DRFNkSzZn?=
+ =?utf-8?B?dE9IZjBCaHRra25LeEI2VUhGOGJ5QUR0V0dWTlByRHZFUUNCaEFIczNMWnkv?=
+ =?utf-8?B?S0MzUy9tWnZFc3NMbzVFaGc1N24weTczT3ZteTh6dlphRU9KUU9sMzhpYVhS?=
+ =?utf-8?B?VHVkWjJLNStWcTRGc3VNT0tMOTRJeVlCQXZGL0EzQ1hWSFlPZHR4OFVMS2NI?=
+ =?utf-8?B?b2hnTlRkYUFCK09iM0NwN0JTcnpQRFhBK0ZFeEFWbE5xaTMvYlhIdW8vZkR3?=
+ =?utf-8?B?enlQUGc2T2pveEp5enpFWEY4TUFUanNGRWtVbFkyY2M3OG9KWW42bjkzaVRa?=
+ =?utf-8?B?d1NvL3dsMTNKZkhaT2dvS2xUdFRybXFuQWdLZkkvcGd0a0ZQZ1ZTTlhyYXcx?=
+ =?utf-8?B?M2d6V1dGM09QQjF2S1lOUWhuSnJtUlRrYVczajVPZTI2SHQwZDl6QTgwMk1r?=
+ =?utf-8?B?cG9udGFRNDNMTXBBelNjWldHZmVQcExOMTBhWVY4QktPRjltUUhZTENPZm1k?=
+ =?utf-8?B?VWc5NTcyNGNVT1p4THpHR2h0WHFwSXB3anZmQkMzSVlnUVo4aGxib2JXYXp1?=
+ =?utf-8?B?aEN3eXZRUm5RcXRzL1QwemNBcWVsdVJjT3g4Rk9UblRzcGY0UUZ4R0pQTmVl?=
+ =?utf-8?B?czZic2FxMWZUSUFyZ2lyU3daRGU2bmpkZlZ0VmZkdi80WmQ0N0pZdGZsWmRC?=
+ =?utf-8?B?RzJxSUpoSGhMcFFWZFJoTEtuQ1ZhTGIvTHRGd0RTcy9tS0ZZOXVvekNZY2h1?=
+ =?utf-8?B?bUpqNFlLNUVlcUlveE5aR2tleTZHKzZjK294T2JhYVVkM3pvQ1o1T1A5c1V2?=
+ =?utf-8?B?UVN5OGdrSEVrY1pLNkF0dFp1UnNJMEpxQ2I5UEpUZE5MWkk1YnVnR2tSM0J6?=
+ =?utf-8?B?TW5ob2pUMEJFa0E2N1p0d2ZyMW44OW9YSndpRkdTc3lSNWVsd0ovYUVFem82?=
+ =?utf-8?B?S25ZWjd3Ym1BT2UzNmxiai9PTTVSM2dEN0VPL2xOS1AvTnRPVEVvUXRoL3hk?=
+ =?utf-8?B?YnVtT3l3ZGpzSGFQMjRPMUZLbCs3M3Qwd3dqL3JjdllNTjBmTWgyUFFTbklW?=
+ =?utf-8?B?OVdvdG55TTR6cVdwcjUwUGFGS3Jqc3dKRUVkUkVaT1RJVXJrNjltZTNGNW1R?=
+ =?utf-8?B?eEFzenpxMndzRlFJR3preFBWVlJqSGpwelhEL3dyT3hVZW0wSS9LZHFBU0s4?=
+ =?utf-8?B?TlRqWFNDeFFVZ2t0eGs3SUs2TW83RnFlNnF6V3R0YXpZUXZZTk9HMTJPaVdP?=
+ =?utf-8?B?S29XRnE0RzJPVFRYYVM2SUN1cGFmRW5VdTFzeHZNTDJ5TDBuVkhTK1dxRTJJ?=
+ =?utf-8?B?M3lwVnUvTUxFOHN4ZzdxYmM5YmNXUWwwejFFbm1mM1U4cDBmZ0tjb3pQcysv?=
+ =?utf-8?B?bWV1UTRURGg3a1E1WDZUS3dlQitVNHhwLzRFYWYxRlU5NGVxQXU2d1RycEpo?=
+ =?utf-8?B?UWlucUgxYkZnYTY4R2lZUUFPTkF4ejRwVUxZOWpQZVE4NG5KcXlJTXNSZWFh?=
+ =?utf-8?B?M2NkSGlNeUpteDE5aS80cGN4a0Ezc3BCWnBVSGF4QlE1QTl6SkhFcFViWllx?=
+ =?utf-8?B?SXZObnJvRFpSRTJ5aVFEZ29STHlIUW4rdXNUOE9FbTVhenRiK2RNak9HbkZx?=
+ =?utf-8?B?bDZEWWZISGhhSVVNUXdObUFQL3dQMFVzbWliUi82T0VBdStJeSsydWg1elNm?=
+ =?utf-8?B?NnFtN0trWGtUMlE1Y2Z0WEZSbUoxK0RKY0E0NGwwZFRGWTZiVHdnT2wyYnVY?=
+ =?utf-8?B?cUg1N0F0aFRWbmVJb1dMUCt4alBCeVUxUzVqUXgyL2pTd3c9PQ==?=
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230037)(376011)(36860700010)(82310400023)(1800799021); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2024 01:11:19.2135 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 18cfb5f4-2f99-4e8a-fe71-08dc8e6a6515
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001EA.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB8580
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -201,40 +144,143 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jun 14, 2024 at 12:35:32PM -0300, André Almeida wrote:
-> This driver can perfom async flips on primary planes, so enable it.
-> 
+On 17/4/24 15:40, Dave Airlie wrote:
 
-Cc: Ville Syrjälä <ville.syrjala@linux.intel.com>
-Cc: Naveen Kumar <naveen1.kumar@intel.com>
-c: Vandita Kulkarni <vandita.kulkarni@intel.com>
+> External email: Use caution opening links or attachments
+>
+>
+> From: Dave Airlie <airlied@redhat.com>
+>
+> I'm pretty sure this optimisation is actually not a great idea,
+> and is racy with other things waiting for fences.
+>
+> Just nuke it, there should be no need to do fence waits in a
+> busy CPU loop.
+>
+> Signed-off-by: Dave Airlie <airlied@redhat.com>
 
-> Signed-off-by: André Almeida <andrealmeid@igalia.com>
+Reviewed-by: Ben Skeggs <bskeggs@nvidia.com>
+
+
 > ---
->  drivers/gpu/drm/i915/display/i9xx_plane.c | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/drivers/gpu/drm/i915/display/i9xx_plane.c b/drivers/gpu/drm/i915/display/i9xx_plane.c
-> index 0279c8aabdd1..0142beef20dc 100644
-> --- a/drivers/gpu/drm/i915/display/i9xx_plane.c
-> +++ b/drivers/gpu/drm/i915/display/i9xx_plane.c
-> @@ -931,6 +931,9 @@ intel_primary_plane_create(struct drm_i915_private *dev_priv, enum pipe pipe)
->  
->  	intel_plane_helper_add(plane);
->  
-> +	if (plane->async_flip)
-> +		plane->base.async_flip = true;
-
-I believe this is not enough and besides this we would also need to have
-in the:
-skl_universal_plane_create[2447] plane->async_flip = skl_plane_async_flip;
-
-at: drivers/gpu/drm/i915/display/skl_universal_plane.c
-
-> +
->  	return plane;
->  
->  fail:
-> -- 
-> 2.45.2
-> 
+>   drivers/gpu/drm/nouveau/nouveau_bo.c    |  2 +-
+>   drivers/gpu/drm/nouveau/nouveau_chan.c  |  2 +-
+>   drivers/gpu/drm/nouveau/nouveau_dmem.c  |  2 +-
+>   drivers/gpu/drm/nouveau/nouveau_fence.c | 30 +------------------------
+>   drivers/gpu/drm/nouveau/nouveau_fence.h |  2 +-
+>   drivers/gpu/drm/nouveau/nouveau_gem.c   |  2 +-
+>   6 files changed, 6 insertions(+), 34 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> index 8a30f5a0525b..a4e8f625fce6 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> @@ -902,7 +902,7 @@ nouveau_bo_move_m2mf(struct ttm_buffer_object *bo, int evict,
+>           * Without this the operation can timeout and we'll fallback to a
+>           * software copy, which might take several minutes to finish.
+>           */
+> -       nouveau_fence_wait(fence, false, false);
+> +       nouveau_fence_wait(fence, false);
+>          ret = ttm_bo_move_accel_cleanup(bo, &fence->base, evict, false,
+>                                          new_reg);
+>          nouveau_fence_unref(&fence);
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.c b/drivers/gpu/drm/nouveau/nouveau_chan.c
+> index 7c97b2886807..66fca95c10c7 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_chan.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_chan.c
+> @@ -72,7 +72,7 @@ nouveau_channel_idle(struct nouveau_channel *chan)
+>
+>                  ret = nouveau_fence_new(&fence, chan);
+>                  if (!ret) {
+> -                       ret = nouveau_fence_wait(fence, false, false);
+> +                       ret = nouveau_fence_wait(fence, false);
+>                          nouveau_fence_unref(&fence);
+>                  }
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> index 12feecf71e75..033a09cd3c8f 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> @@ -128,7 +128,7 @@ static void nouveau_dmem_page_free(struct page *page)
+>   static void nouveau_dmem_fence_done(struct nouveau_fence **fence)
+>   {
+>          if (fence) {
+> -               nouveau_fence_wait(*fence, true, false);
+> +               nouveau_fence_wait(*fence, false);
+>                  nouveau_fence_unref(fence);
+>          } else {
+>                  /*
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> index c3ea3cd933cd..8de941379324 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> @@ -312,39 +312,11 @@ nouveau_fence_wait_legacy(struct dma_fence *f, bool intr, long wait)
+>          return timeout - t;
+>   }
+>
+> -static int
+> -nouveau_fence_wait_busy(struct nouveau_fence *fence, bool intr)
+> -{
+> -       int ret = 0;
+> -
+> -       while (!nouveau_fence_done(fence)) {
+> -               if (time_after_eq(jiffies, fence->timeout)) {
+> -                       ret = -EBUSY;
+> -                       break;
+> -               }
+> -
+> -               __set_current_state(intr ?
+> -                                   TASK_INTERRUPTIBLE :
+> -                                   TASK_UNINTERRUPTIBLE);
+> -
+> -               if (intr && signal_pending(current)) {
+> -                       ret = -ERESTARTSYS;
+> -                       break;
+> -               }
+> -       }
+> -
+> -       __set_current_state(TASK_RUNNING);
+> -       return ret;
+> -}
+> -
+>   int
+> -nouveau_fence_wait(struct nouveau_fence *fence, bool lazy, bool intr)
+> +nouveau_fence_wait(struct nouveau_fence *fence, bool intr)
+>   {
+>          long ret;
+>
+> -       if (!lazy)
+> -               return nouveau_fence_wait_busy(fence, intr);
+> -
+>          ret = dma_fence_wait_timeout(&fence->base, intr, 15 * HZ);
+>          if (ret < 0)
+>                  return ret;
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.h b/drivers/gpu/drm/nouveau/nouveau_fence.h
+> index bc13110bdfa4..88213014b675 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_fence.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.h
+> @@ -23,7 +23,7 @@ void nouveau_fence_unref(struct nouveau_fence **);
+>
+>   int  nouveau_fence_emit(struct nouveau_fence *);
+>   bool nouveau_fence_done(struct nouveau_fence *);
+> -int  nouveau_fence_wait(struct nouveau_fence *, bool lazy, bool intr);
+> +int  nouveau_fence_wait(struct nouveau_fence *, bool intr);
+>   int  nouveau_fence_sync(struct nouveau_bo *, struct nouveau_channel *, bool exclusive, bool intr);
+>
+>   struct nouveau_fence_chan {
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> index 49c2bcbef129..f715e381da69 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_gem.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> @@ -928,7 +928,7 @@ nouveau_gem_ioctl_pushbuf(struct drm_device *dev, void *data,
+>          }
+>
+>          if (sync) {
+> -               if (!(ret = nouveau_fence_wait(fence, false, false))) {
+> +               if (!(ret = nouveau_fence_wait(fence, false))) {
+>                          if ((ret = dma_fence_get_status(&fence->base)) == 1)
+>                                  ret = 0;
+>                  }
+> --
+> 2.43.2
+>
