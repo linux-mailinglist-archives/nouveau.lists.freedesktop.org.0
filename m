@@ -2,73 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EE4D90B815
-	for <lists+nouveau@lfdr.de>; Mon, 17 Jun 2024 19:31:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CAC1090B86F
+	for <lists+nouveau@lfdr.de>; Mon, 17 Jun 2024 19:48:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1D2BC10E478;
-	Mon, 17 Jun 2024 17:31:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 91FF010E47D;
+	Mon, 17 Jun 2024 17:48:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="PuSSyQKH";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="daJqNTzG";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5990810E478
- for <nouveau@lists.freedesktop.org>; Mon, 17 Jun 2024 17:31:05 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9352710E47D
+ for <nouveau@lists.freedesktop.org>; Mon, 17 Jun 2024 17:48:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1718645464;
+ s=mimecast20190719; t=1718646528;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=juqpYUpSamtTNsW6q/swUfH8SfdpZV3yTBIEFOu9PiI=;
- b=PuSSyQKHVbxrSKXlvI9EJEd104OLbIp7Joc7XnahLIAe3mZYwCWnwuODaGl4HavP1i2AX4
- VtPCQjLZiHw1DNR0mxdfbbYm0RWm4/W2ku0hp7dO8d+X5hvYwDzGg8bfiya2zrGSH8nZwQ
- nTM5NspXhV3O74EgG7mG+8rLACpMydc=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=VWwWGuYYpy1Zyv2/cJDM32Xhne0vp4u1M4bIgV9w6DQ=;
+ b=daJqNTzGuZfsAMBbt6fyUOPXYwCxLVe2nPGjsRh7xx2QXXRGqIhl31JGMmSUc8KvjdohLo
+ yma+mKibQc1FWLET/80T2AF8Yojn1w0uer3fjX8lN+nRzkpW3wWVrx2qUwtgQldPpYsOhi
+ Zkyu8uN5To4nBFWoWbqum8JLigkGHpM=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-487-30lBzNe2Mr2H2vYY_3UMmg-1; Mon, 17 Jun 2024 13:31:02 -0400
-X-MC-Unique: 30lBzNe2Mr2H2vYY_3UMmg-1
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4217f941ca8so29329225e9.1
- for <nouveau@lists.freedesktop.org>; Mon, 17 Jun 2024 10:31:02 -0700 (PDT)
+ us-mta-61-djMMMUW8OE6P43oIeObwVQ-1; Mon, 17 Jun 2024 13:48:47 -0400
+X-MC-Unique: djMMMUW8OE6P43oIeObwVQ-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-42117a61bccso33568105e9.0
+ for <nouveau@lists.freedesktop.org>; Mon, 17 Jun 2024 10:48:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718645461; x=1719250261;
+ d=1e100.net; s=20230601; t=1718646526; x=1719251326;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=juqpYUpSamtTNsW6q/swUfH8SfdpZV3yTBIEFOu9PiI=;
- b=vIQbF1i7J7HADbKIj4Z5uucc3meYyTbOm4jn0Hu+AKTVoCADV5ojdkDLjJE110a35V
- v85M0vTXgcwS4SttdOZrDIi6mTe08It6kB85BtCWK9YeYSYzJ3+OVe5Ji89VqcDFiAFn
- G8CEu4MPeOlMSr0S1u+ztoMqqEMPr9BFAi5pEjS6Ru1nFfLFcX8LVj0bfrvzhR8b1EBW
- RjvOl7uZgcXDZbDvLNzWEs7yQhZY2hDxs8ASibBmliSG92Z8htF4IZIRLSUcdXWM8mnj
- LL1xuQsauLJ/mh3UQPDNFtubg0nuv0y14B5shqtGn613SliQXWRiLImbxR9ASkE3fj+H
- cqlw==
-X-Gm-Message-State: AOJu0YyE2HN8eqRj+/pgab+t+c/kJCrK34gK40iDQeeLr4m6Rqfr60RW
- 8WhO+mBDcDK7+8ihB0pl9kZjBkvzNwi2LPdSQWZF3dsWtTYucEb9qhYAjaULeIxVv0ezu/L2giw
- iZ9M0b5dbb/DehQBA7QPvzIu3qrZaksK+xcr1LUmU8Js0nFkCXh5d36oVQf8XcOE9L3817tE=
-X-Received: by 2002:a05:600c:3107:b0:423:499:a1ce with SMTP id
- 5b1f17b1804b1-42304d934c4mr95550055e9.32.1718645461402; 
- Mon, 17 Jun 2024 10:31:01 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEuuUn6lZP3Cco1EFviVROxS7UNMzaF09QHLto0t/V4C1c4w3DijZqzlYQjGhO6a4+LZhg46Q==
-X-Received: by 2002:a05:600c:3107:b0:423:499:a1ce with SMTP id
- 5b1f17b1804b1-42304d934c4mr95549875e9.32.1718645461013; 
- Mon, 17 Jun 2024 10:31:01 -0700 (PDT)
+ bh=VWwWGuYYpy1Zyv2/cJDM32Xhne0vp4u1M4bIgV9w6DQ=;
+ b=RYIY15WBqIV5TKBdP7m5J0v54U3cbS8YnLN/rY4aG8CtutXLY6JpnNI62ydsi8lc5S
+ Nfw148/Mh4g7TgeaUc6DWoIvljYqYvNsuOpZJA8M8msDQfD8Mpx085QxhfPWEfRzdk5S
+ mIlLlzTEWdgKgSxuXkPFss+ML+/DIZ85TIOn4VzzreV152X25lgTrRReDDolXphDuky8
+ 7oD78oHW2JOtOjApTuIpcIcmNASNpOfy0TS8TVl2h8/4aJRj0QHJkEkWxV65GTCn9SpM
+ vvrYL2uxgdzzUbzyXn9lazJR7xm06Tb3vpM64HVSVy7kbv1Xf+9d5fcxksRO3AGnDibW
+ +EWQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX3cmQiS4Fba3dMP0UFr2NeVpVqy1HmpLkJK44a0a4vMB1M+a9tjbICD9qvbTTQZ0HIdtGNg/NJEKlfnMnwpKWl3jzkl7D6iovti9npfw==
+X-Gm-Message-State: AOJu0YyxLopm49+nelBIGWvvG5x0grj/jKDrhn8o6nO8wGjZyJaKg8sx
+ oXBViIMbnkoPn0tQaT+fGG+o/dNW8T412HMcIogtZsK+rjsV6dpoqpF9CpG5kDBw1FLHRbl2V6c
+ D7IbWXKx1W4rr3Ch1Dn5N2keFbZThgOGqF9Bd5l7QnzjDPo0QJaupkULkDj1c7EPY1rh+7UU=
+X-Received: by 2002:a05:600c:4fcc:b0:422:1163:44aa with SMTP id
+ 5b1f17b1804b1-42304823251mr92305705e9.4.1718646525877; 
+ Mon, 17 Jun 2024 10:48:45 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFNM2bzbAbXDc822PBTbWYT01ojAmibnMInZnzxXcxs/onBldp5JyZRSqFGqLQ9GSPKv0WQFg==
+X-Received: by 2002:a05:600c:4fcc:b0:422:1163:44aa with SMTP id
+ 5b1f17b1804b1-42304823251mr92305585e9.4.1718646525505; 
+ Mon, 17 Jun 2024 10:48:45 -0700 (PDT)
 Received: from cassiopeiae ([2a02:810d:4b3f:ee94:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42286eef9c1sm202576595e9.7.2024.06.17.10.30.59
+ 5b1f17b1804b1-422f6419e38sm167763705e9.39.2024.06.17.10.48.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Jun 2024 10:31:00 -0700 (PDT)
-Date: Mon, 17 Jun 2024 19:30:58 +0200
+ Mon, 17 Jun 2024 10:48:45 -0700 (PDT)
+Date: Mon, 17 Jun 2024 19:48:43 +0200
 From: Danilo Krummrich <dakr@redhat.com>
-To: Ben Skeggs <bskeggs@nvidia.com>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Subject: Re: [RFC] GPU driver with separate "core" and "DRM" modules
-Message-ID: <ZnBy0jOshdyyLmkL@cassiopeiae>
-References: <20240613170211.88779-1-bskeggs@nvidia.com>
+To: Timur Tabi <ttabi@nvidia.com>
+Cc: David Airlie <airlied@gmail.com>, bskeggs@nvidia.com,
+ nouveau@lists.freedesktop.org
+Subject: Re: [PATCH 1/2] [v2] drm/nouveau: retain device pointer in
+ nvkm_gsp_mem object
+Message-ID: <ZnB2-3UIAq-aTLpG@cassiopeiae>
+References: <20240612235253.1624004-1-ttabi@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <20240613170211.88779-1-bskeggs@nvidia.com>
+In-Reply-To: <20240612235253.1624004-1-ttabi@nvidia.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=us-ascii
@@ -87,113 +91,150 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jun 14, 2024 at 03:02:09AM +1000, Ben Skeggs wrote:
-> NVIDIA has been exploring ways to better support the effort for an
-> upstream kernel mode driver for GPUs that are capable of running GSP-RM
-> firmware, since the introduction[1] to Nova.
+On Wed, Jun 12, 2024 at 06:52:52PM -0500, Timur Tabi wrote:
+> Store the struct device pointer used to allocate the DMA buffer in
+> the nvkm_gsp_mem object.  This allows nvkm_gsp_mem_dtor() to release
+> the buffer without needing the nvkm_gsp.  This is needed so that
+> we can retain DMA buffers even after the nvkm_gsp object is deleted.
 > 
-> Use cases have been identified for which separating the core GPU
-> programming out of the full DRM driver stack is a strong requirement
-> from our key customers.
+> Signed-off-by: Timur Tabi <ttabi@nvidia.com>
+> ---
+> v2: rebased to drm-misc-next
 > 
-> An upstreamed NVIDIA GPU driver should be able to support current and
-> emerging customer use cases for vGPU hosts.  NVIDIA's vGPU deployments
-> to date do not support compute or graphics functionality within the
-> hypervisor host, and have no dependency on the Linux graphics subsystem,
-> instead implementing the minimal functionality required to run vGPU
-> guest VMs.
+>  .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |  1 +
+>  .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 36 ++++++++++---------
+>  2 files changed, 20 insertions(+), 17 deletions(-)
 > 
-> For security-sensitive environments such as cloud infrastructure, it's
-> important to continue support for running a minimal footprint vGPU host
-> driver in a stripped-down / barebones kernel environment.
-> 
-> This can be achieved by supporting both VFIO and DRM drivers as clients
-> of a core driver, without requiring a full-fledged DRM driver (or the
-> DRM subsystem itself) to be built into the host kernel.
-> 
-> A core driver would be responsible for booting and communicating with
-> GSP-RM, enumeration of HW configuration, shared/partitioned resource
-> management, exception handling, and event dispatch.
-> 
-> The DRM driver would do all the standard things a DRM driver does, and
-> implement GPU memory management (TTM/HMM), KMS, command submission etc,
-> as well as providing UAPI for userspace clients.  These features would
-> be implemented using HW resources allocated from a core driver, rather
-> than the DRM driver being directly responsible for HW programming.
-> 
-> As Nouveau's KMD is already split (in the logical sense) along similar
-> lines, we're using it here for the purposes of this RFC to demonstrate
-> the feasibility of such an architecture, and open it up for discussion.
+> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+> index 9e6f39912368..a45a4ad843b9 100644
+> --- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+> +++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+> @@ -9,6 +9,7 @@
+>  #define GSP_PAGE_SIZE  BIT(GSP_PAGE_SHIFT)
+>  
+>  struct nvkm_gsp_mem {
+> +	struct device *dev;
+>  	size_t size;
+>  	void *data;
+>  	dma_addr_t addr;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> index cf58f9da9139..bbab6d452aa2 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> @@ -1000,7 +1000,7 @@ r535_gsp_rpc_get_gsp_static_info(struct nvkm_gsp *gsp)
+>  }
+>  
+>  static void
+> -nvkm_gsp_mem_dtor(struct nvkm_gsp *gsp, struct nvkm_gsp_mem *mem)
+> +nvkm_gsp_mem_dtor(struct nvkm_gsp_mem *mem)
+>  {
+>  	if (mem->data) {
+>  		/*
+> @@ -1009,7 +1009,7 @@ nvkm_gsp_mem_dtor(struct nvkm_gsp *gsp, struct nvkm_gsp_mem *mem)
+>  		 */
+>  		memset(mem->data, 0xFF, mem->size);
+>  
+> -		dma_free_coherent(gsp->subdev.device->dev, mem->size, mem->data, mem->addr);
+> +		dma_free_coherent(mem->dev, mem->size, mem->data, mem->addr);
+>  		memset(mem, 0, sizeof(*mem));
+>  	}
+>  }
+> @@ -1017,11 +1017,13 @@ nvkm_gsp_mem_dtor(struct nvkm_gsp *gsp, struct nvkm_gsp_mem *mem)
+>  static int
+>  nvkm_gsp_mem_ctor(struct nvkm_gsp *gsp, size_t size, struct nvkm_gsp_mem *mem)
+>  {
+> -	mem->size = size;
+>  	mem->data = dma_alloc_coherent(gsp->subdev.device->dev, size, &mem->addr, GFP_KERNEL);
+>  	if (WARN_ON(!mem->data))
+>  		return -ENOMEM;
+>  
+> +	mem->size = size;
+> +	mem->dev = gsp->subdev.device->dev;
 
-Generally, I think that approach is reasonable and I like it. There's only a few
-concerns I have for now.
+If this can potentially out-live the drivers remove() callback, we have to take
+a device reference here and drop it in nvkm_gsp_mem_dtor().
 
-We've already had (and still have) quite a few difficulties due to this split in
-Nouveau. Especially when it comes to VMM and handling page tables. There are
-cases where the locking architecture must be closely aligned with the upper
-layers, i.e. the (VM_BIND) uAPI.
+	mem->dev = get_device(gsp->subdev.device->dev);
 
-Having a separate (local) locking architecture doesn't work out well in this
-case due to the implications of dealing with dma_fences and their signalling
-paths.
-
-Unfortunately, we can't even argue that we solved this problem in Nouveau. I
-think it's fair to say that we found ways (without rewriting / restructuring a
-lot of the VMM code to use a more global locking architecture) to make it work
-in practice, but surely there are still conditions that (at least theoretically)
-can lock things up.
-
-I'm not saying that it's impossible to work this out, but having a strong
-separation is likely to make those things quite a bit more difficult.
-
-On the other hand this is a problem we might have to deal with either way, it
-shouldn't matter too much having separate modules for VFIO and the GPU core.
-
-Besides that, do we expect semantical changes in the firmware that can
-potentially propagate up in the following sense?
-
-[GSP firmware -> Host GPU core driver -> VFIO driver -> Guest GPU core driver]
-
-If so, how do we deal with those? In the context of ensuring compatibility, can
-we ensure this can't lead to increasing maintainance and testing effort over
-time?
-
-- Danilo
-
+> +
+>  	return 0;
+>  }
+>  
+> @@ -1054,8 +1056,8 @@ r535_gsp_postinit(struct nvkm_gsp *gsp)
+>  	nvkm_wr32(device, 0x110004, 0x00000040);
+>  
+>  	/* Release the DMA buffers that were needed only for boot and init */
+> -	nvkm_gsp_mem_dtor(gsp, &gsp->boot.fw);
+> -	nvkm_gsp_mem_dtor(gsp, &gsp->libos);
+> +	nvkm_gsp_mem_dtor(&gsp->boot.fw);
+> +	nvkm_gsp_mem_dtor(&gsp->libos);
+>  
+>  	return ret;
+>  }
+> @@ -2234,8 +2236,8 @@ static void
+>  nvkm_gsp_radix3_dtor(struct nvkm_gsp *gsp, struct nvkm_gsp_radix3 *rx3)
+>  {
+>  	nvkm_gsp_sg_free(gsp->subdev.device, &rx3->lvl2);
+> -	nvkm_gsp_mem_dtor(gsp, &rx3->lvl1);
+> -	nvkm_gsp_mem_dtor(gsp, &rx3->lvl0);
+> +	nvkm_gsp_mem_dtor(&rx3->lvl1);
+> +	nvkm_gsp_mem_dtor(&rx3->lvl0);
+>  }
+>  
+>  /**
+> @@ -2323,9 +2325,9 @@ nvkm_gsp_radix3_sg(struct nvkm_gsp *gsp, struct sg_table *sgt, u64 size,
+>  
+>  	if (ret) {
+>  lvl2_fail:
+> -		nvkm_gsp_mem_dtor(gsp, &rx3->lvl1);
+> +		nvkm_gsp_mem_dtor(&rx3->lvl1);
+>  lvl1_fail:
+> -		nvkm_gsp_mem_dtor(gsp, &rx3->lvl0);
+> +		nvkm_gsp_mem_dtor(&rx3->lvl0);
+>  	}
+>  
+>  	return ret;
+> @@ -2417,7 +2419,7 @@ r535_gsp_init(struct nvkm_gsp *gsp)
+>  
+>  done:
+>  	if (gsp->sr.meta.data) {
+> -		nvkm_gsp_mem_dtor(gsp, &gsp->sr.meta);
+> +		nvkm_gsp_mem_dtor(&gsp->sr.meta);
+>  		nvkm_gsp_radix3_dtor(gsp, &gsp->sr.radix3);
+>  		nvkm_gsp_sg_free(gsp->subdev.device, &gsp->sr.sgt);
+>  		return ret;
+> @@ -2498,7 +2500,7 @@ r535_gsp_dtor(struct nvkm_gsp *gsp)
+>  	mutex_destroy(&gsp->client_id.mutex);
+>  
+>  	nvkm_gsp_radix3_dtor(gsp, &gsp->radix3);
+> -	nvkm_gsp_mem_dtor(gsp, &gsp->sig);
+> +	nvkm_gsp_mem_dtor(&gsp->sig);
+>  	nvkm_firmware_dtor(&gsp->fw);
+>  
+>  	nvkm_falcon_fw_dtor(&gsp->booter.unload);
+> @@ -2509,12 +2511,12 @@ r535_gsp_dtor(struct nvkm_gsp *gsp)
+>  
+>  	r535_gsp_dtor_fws(gsp);
+>  
+> -	nvkm_gsp_mem_dtor(gsp, &gsp->rmargs);
+> -	nvkm_gsp_mem_dtor(gsp, &gsp->wpr_meta);
+> -	nvkm_gsp_mem_dtor(gsp, &gsp->shm.mem);
+> -	nvkm_gsp_mem_dtor(gsp, &gsp->loginit);
+> -	nvkm_gsp_mem_dtor(gsp, &gsp->logintr);
+> -	nvkm_gsp_mem_dtor(gsp, &gsp->logrm);
+> +	nvkm_gsp_mem_dtor(&gsp->rmargs);
+> +	nvkm_gsp_mem_dtor(&gsp->wpr_meta);
+> +	nvkm_gsp_mem_dtor(&gsp->shm.mem);
+> +	nvkm_gsp_mem_dtor(&gsp->loginit);
+> +	nvkm_gsp_mem_dtor(&gsp->logintr);
+> +	nvkm_gsp_mem_dtor(&gsp->logrm);
+>  }
+>  
+>  int
 > 
-> A link[2] to a tree containing the patches is below.
-> 
-> [1] https://lore.kernel.org/all/3ed356488c9b0ca93845501425d427309f4cf616.camel@redhat.com/
-> [2] https://gitlab.freedesktop.org/bskeggs/nouveau/-/tree/00.03-module
-> 
-> *** BLURB HERE ***
-> 
-> Ben Skeggs (2):
->   drm/nouveau/nvkm: export symbols needed by the drm driver
->   drm/nouveau/nvkm: separate out into nvkm.ko
-> 
->  drivers/gpu/drm/nouveau/Kbuild                      |  4 ++--
->  drivers/gpu/drm/nouveau/include/nvkm/core/module.h  |  3 ---
->  drivers/gpu/drm/nouveau/nouveau_drm.c               | 10 +---------
->  drivers/gpu/drm/nouveau/nvkm/core/driver.c          |  1 +
->  drivers/gpu/drm/nouveau/nvkm/core/gpuobj.c          |  2 ++
->  drivers/gpu/drm/nouveau/nvkm/core/mm.c              |  4 ++++
->  drivers/gpu/drm/nouveau/nvkm/device/acpi.c          |  1 +
->  drivers/gpu/drm/nouveau/nvkm/engine/gr/base.c       |  1 +
->  drivers/gpu/drm/nouveau/nvkm/module.c               |  8 ++++++--
->  drivers/gpu/drm/nouveau/nvkm/subdev/bios/init.c     |  1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/bios/pll.c      |  1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/fb/base.c       |  3 +++
->  drivers/gpu/drm/nouveau/nvkm/subdev/gpio/base.c     |  3 +++
->  drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c      |  2 ++
->  drivers/gpu/drm/nouveau/nvkm/subdev/i2c/bus.c       |  1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c |  1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/therm/base.c    |  1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/therm/fan.c     |  1 +
->  drivers/gpu/drm/nouveau/nvkm/subdev/volt/base.c     |  1 +
->  19 files changed, 33 insertions(+), 16 deletions(-)
-> 
+> base-commit: a13aaf157467e694a3824d81304106b58d4c20d6
+> prerequisite-patch-id: 1428f57d0b137672ec09da08e76c5d3069b35432
 > -- 
-> 2.44.0
+> 2.34.1
 > 
 
