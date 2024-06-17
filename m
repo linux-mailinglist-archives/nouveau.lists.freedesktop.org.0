@@ -2,135 +2,82 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6391390BAB6
-	for <lists+nouveau@lfdr.de>; Mon, 17 Jun 2024 21:19:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8138490BB72
+	for <lists+nouveau@lfdr.de>; Mon, 17 Jun 2024 21:54:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D5D9410E4C8;
-	Mon, 17 Jun 2024 19:19:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0EBC610E4D4;
+	Mon, 17 Jun 2024 19:54:34 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="rfBsYV2t";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="LPiQrvx0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2084.outbound.protection.outlook.com [40.107.237.84])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9F84310E4BE;
- Mon, 17 Jun 2024 19:19:51 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=j7gM4haSmryG/i2DQBk01fe+yYYhoeCPS2jS0/erBUT2vTD6HFxFQ+zMXRq2b8HTb9JZsuI435DIEPmIh7J2J9nKyUkCapH1iLc+z/FhWhGA0WfvZ1mPQJVVuFNx+yExNtMR0XF7J7qL3mHXdiJuZv4JMoOUopZNu07J1Ub8tGfTBw8G18Khoy7qS0KpA7ddxxnG7wHLgrMVulXfFz3CMYLXTQTJkyfUSALE7bmWJz4R2m9DVYtjeN6y5CgWRuS7gtaqcxFnXtRQGBlDE3KQkE1PWy9kEBLOkzHT797zyXLJwp+828xPsemp3mMqYn1Mhm10VpHtPQqeDs+fDzMF8A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=942VZbPat/xT1X+bUKP3E2D33SMAGYD62Le0kcT89d4=;
- b=nN1MrWitAg4A01QmyLxhX/WdfhpRyMBOpcc0IGH5ZbrkfKG/qk6wfhWIjgcxLmrND1bzuxm51mVKYlILvbC7vMPI+l+hlOAnIBdlC68/ShfV96y3p+dJetBcWAB29RAIc0QnSfVKVOc/TSw+tRnUDv/WUJP1nq1DR4juAmIWs2AEXEDkah2JbJ7rHJhPkr6DCaqgoefXqdSOfSytBJs6a+2eX6V9qtbRc3kx1/r8ljtJWUQBSrn3WvF9h0+C54tRPRStgxsp0afng2UovPqc1mZe9fZ78Rl45W9HJVhPZGvUQehSDJZeWyW7QGSz3Yw3Pvd5htELIE/vCN4gc7yLcA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=942VZbPat/xT1X+bUKP3E2D33SMAGYD62Le0kcT89d4=;
- b=rfBsYV2tstrrH/MFu/aHlKRJ/mUxWSYHDa4MHbrk/R+kJx8XezW2j99kVnE82Ar9Vkcuz+ZXzy6ahz2CyQ/qNDKteDzC0/T+gTgKPi8dj0N5pVlEAkGOkX7tOHsPR5vdCbpjOPor5Y5H2mpM5pCXup0eHOhNaTe8V0fwZ9io+Cp5vjK8anSrkwK+MYlVhFmJxmLJwdYHx6opkWoa5Jn+AXZ3eh7gNn9R0f0A6wvfgJ0O8coLrePlyTc58ZO+Yk1zUOH8SrGHiL6POeeJ9ErJLwdjKeyv9j7va/nrjp4z93m1ySqth4TKvsX0mf6REWs5z0vz2TreXntfl26WP84tnw==
-Received: from BN9PR03CA0047.namprd03.prod.outlook.com (2603:10b6:408:fb::22)
- by DM6PR12MB4484.namprd12.prod.outlook.com (2603:10b6:5:28f::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.31; Mon, 17 Jun
- 2024 19:19:45 +0000
-Received: from BN3PEPF0000B070.namprd21.prod.outlook.com
- (2603:10b6:408:fb:cafe::96) by BN9PR03CA0047.outlook.office365.com
- (2603:10b6:408:fb::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.30 via Frontend
- Transport; Mon, 17 Jun 2024 19:19:45 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- BN3PEPF0000B070.mail.protection.outlook.com (10.167.243.75) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7719.0 via Frontend Transport; Mon, 17 Jun 2024 19:19:44 +0000
-Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 17 Jun
- 2024 12:19:29 -0700
-Received: from [172.20.75.190] (10.126.231.35) by rnnvmail201.nvidia.com
- (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 17 Jun
- 2024 12:19:28 -0700
-Message-ID: <c1b1a7ec-7fe2-4bae-a505-320ac978db95@nvidia.com>
-Date: Tue, 18 Jun 2024 05:01:09 +1000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CF0E810E4D4
+ for <nouveau@lists.freedesktop.org>; Mon, 17 Jun 2024 19:54:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1718654070;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=QiFuOQZKjtkMF3QUZF6+ldHxfCSkiR5sRzCz1ELUBqQ=;
+ b=LPiQrvx0Kj6T5uI6X6Fq3nkB7a4xM58ftT85LO3F0qXEjlC01DrUZyZ4WcxhlSKIipLI+r
+ PhVrq9kFzlSivuFOuASgIIeQn5ELatE/FjUIRrOSoWGKYwGiNgquX+DKCv19NYNdWt/pDJ
+ gzkfKsmTCfxo1X/0jdQ5KVWV51O4Pv8=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-562-t3GPDBFGOsGsQZLFQoBADQ-1; Mon, 17 Jun 2024 15:54:28 -0400
+X-MC-Unique: t3GPDBFGOsGsQZLFQoBADQ-1
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-421179fd82bso30903295e9.1
+ for <nouveau@lists.freedesktop.org>; Mon, 17 Jun 2024 12:54:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718654067; x=1719258867;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QiFuOQZKjtkMF3QUZF6+ldHxfCSkiR5sRzCz1ELUBqQ=;
+ b=vNURHDRztL8Ffqn/FfqtjxvVzrdlDPdi9wE/TeyaLoXzaMT5yx2k1HF5a9eZsnKgFJ
+ ebqm7qQZVXQqrBO5SPLROArIYyMM+qvMpLSNbcM/S4eKpAzF7LtURyfVCYaa+w37em/7
+ 55pGGkO6AExCFJLZq3CjLLiXl+wtFzAY+nMmTE6ip8d/0Zl6G+ePD3+lFVwcGIRzwPeF
+ 7ShpDHWtg+ptqBAuFG3+KsEjF2Ofmp4ZLt5URxg072ITx2I0RRhT/jQwyChQxoGXdGNV
+ sPkckMLIFfjdwROqvwBEtE3cz/RMDrYvDwLYtcvef420bXppT9AbDkCpnmWB6OYeTWCf
+ MQlw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXumgLWPSQM0aq0zFJO4plnRzd9AfEuh54gIF8aLt3gBojGMVjNhlvRQsLzmcCJIVFbVBcKCtSMAhxpCE9KPk6a3SKPyqOghHS4g/uXYw==
+X-Gm-Message-State: AOJu0YxxxAOsEslEwdIvrxvtetfReCpGOKW40+EWd9OhrWjLGX4gI+Kc
+ 2PKjt/IfN72vdnpr/y4fw0F/Gb1UX8xWdfI8xV9PfuHdf4/pYhES9Ugzf2b19rMG8fxZJav+2Lf
+ OEiu949LD8ssiaNyu6HN6cCjh/rC9hnsOfa24hXX7A0ensZPvEZflJ4hdHhTNk8s=
+X-Received: by 2002:a7b:ce97:0:b0:423:b6cd:8ea5 with SMTP id
+ 5b1f17b1804b1-423b6cd8fcemr54576595e9.4.1718654067062; 
+ Mon, 17 Jun 2024 12:54:27 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF2mXPJBsdnNRMFatdvsbZfGD4DJKhoKKW+1rw9FO4iwg1s2rx4z0xzOctWI1wa9CDaHKxK0A==
+X-Received: by 2002:a7b:ce97:0:b0:423:b6cd:8ea5 with SMTP id
+ 5b1f17b1804b1-423b6cd8fcemr54576425e9.4.1718654066456; 
+ Mon, 17 Jun 2024 12:54:26 -0700 (PDT)
+Received: from cassiopeiae ([2a02:810d:4b3f:ee94:642:1aff:fe31:a19f])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-422f6419e38sm170431035e9.39.2024.06.17.12.54.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Jun 2024 12:54:25 -0700 (PDT)
+Date: Mon, 17 Jun 2024 21:54:23 +0200
+From: Danilo Krummrich <dakr@redhat.com>
+To: Timur Tabi <ttabi@nvidia.com>
+Cc: David Airlie <airlied@gmail.com>, bskeggs@nvidia.com,
+ nouveau@lists.freedesktop.org
+Subject: Re: [PATCH 2/2] [v5] drm/nouveau: expose GSP-RM logging buffers via
+ debugfs
+Message-ID: <ZnCUb-lWCVlV5x0v@cassiopeiae>
+References: <20240612235253.1624004-1-ttabi@nvidia.com>
+ <20240612235253.1624004-2-ttabi@nvidia.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC] GPU driver with separate "core" and "DRM" modules
-To: Danilo Krummrich <dakr@redhat.com>
-CC: <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>
-References: <20240613170211.88779-1-bskeggs@nvidia.com>
- <ZnBy0jOshdyyLmkL@cassiopeiae>
-Content-Language: en-US
-From: Ben Skeggs <bskeggs@nvidia.com>
-In-Reply-To: <ZnBy0jOshdyyLmkL@cassiopeiae>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.126.231.35]
-X-ClientProxiedBy: rnnvmail201.nvidia.com (10.129.68.8) To
- rnnvmail201.nvidia.com (10.129.68.8)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B070:EE_|DM6PR12MB4484:EE_
-X-MS-Office365-Filtering-Correlation-Id: ab3c3a58-0cfb-4af3-6bf0-08dc8f027257
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230037|376011|36860700010|1800799021|82310400023; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?cmx5Tys3TlErWE1DWkZOUzdNa0wwS2ZwZFV5Qm4xN2s3VmxFZS9NNTJndVdB?=
- =?utf-8?B?NVFCNTl4alp4c0xQZXNTVG5VYmFmeDdrSklId3pLOFU1TXFva1pkVk9hVUlX?=
- =?utf-8?B?UW9QWnNxV1FqY1A5d0RaVmRGYU1vL0xqdS9EVnlCZzJ0QVNzd2llOGVLY2lj?=
- =?utf-8?B?UWlxU2tuRFh5NkY0SUhKbnhxQUROTEI1Nmg0U09yUDJUYldKcVI1dHlNVTlB?=
- =?utf-8?B?bWZRc3REcDJMT3NtTUFTdG1DUWdvVmZEd1RxTGlWWUlISElDK21mVHJhSzhY?=
- =?utf-8?B?RjZUSnhPa0V6U1pGWUNnQzgyM0NPUUVtYUY1NnE1NjJLNFJnMFBsV01YdXRv?=
- =?utf-8?B?a2FPelVPMUNiUmg3R1ZENjVJZTJhdGlITERiVkZFYTdyMmY1S1YyZ0dWSy9z?=
- =?utf-8?B?MjhvVDV4K09UNVRpaENMcWZadEZSL1RLaVZYRXFGY2o4eXZJNDZoWWg5V1pG?=
- =?utf-8?B?QlVwWlJCWllZSkxibGV3UVBSK2Y0WjBpK3pvUlF0bnJ4OFg5U01PWkQvYStx?=
- =?utf-8?B?UmNielFEaTkxTDQweG5Oclp4RVZ2cGJZdHFLRWZCa1Bwem9jOE9mNHlpUU5F?=
- =?utf-8?B?cXk2bitFeFBQT0RyMTJ1V3VZTURpUUpNMllBQURIZktOc21jNEwzZ3d4bmxW?=
- =?utf-8?B?MHpjZjU0V0kzT1gxOHhDdEhockY2MXg2K25sT3dJL05lUTNTTHBFbU9JUk95?=
- =?utf-8?B?bExwOStwc1ByTHZEMmFKUFZiRlA0U3JoUXpvZDVXQWo4QllUdisvdE9RdjlE?=
- =?utf-8?B?alNZTUNvVG5IclFUcldqSng1ZXJBYitOSDBORzVnbm5DQ3VBQWFJWkxveVEv?=
- =?utf-8?B?cHRZYjMyNEJELzNMVGpuREhlTC9TMWNrV0tNTFJxMTRLTURYcUhNSWxKWTJ1?=
- =?utf-8?B?Q0MxaExtZEtDbng5VXRKUEd0amtORno0eFErMG1xVityMEFab0t2bzlmNjd2?=
- =?utf-8?B?K3BWb0kyQnN1VFJMb0ZvakV3YmJIb0F4dHgzdXBlZ3l6Q3FDdGFNL1VTQkpI?=
- =?utf-8?B?M2RrNlVQeCt6SjhOODBzQVhQYlU1T0xTZEtsd3BiUUVxRHZSUndJbW5mS2h0?=
- =?utf-8?B?YzRnVlZ1cHNiT0YrdGNrZTRxR0xqbEJFbldPSnM3RUJDZzl6MGpwcnRDWmNX?=
- =?utf-8?B?emVQdHRSanlWRjNGUkhqL0QxYU9CZ0FsSjdPYVgraU8zcnQ5K3hxc05oYU0v?=
- =?utf-8?B?d0NnWWVNVEZTbnhOUTZKNEJpZGUvRnZrd3M5a3RUTlpDbjF5VXhxYm1tRXBa?=
- =?utf-8?B?S2RWR3lMNGpvV3Y4aXE4WmJDQk5lcTNzODMxOGFKeWRJdld0SG9LaDNIYVht?=
- =?utf-8?B?WC9aSnpEVTgwcTliRzh2Vk1SdFFzd0xSblBzUmhxREs4T25KazRzRmJNVzZy?=
- =?utf-8?B?eVRHZ1lJRXpjRjlrazZtY3ZxM3lrNEhsTDkyeDZKbWp6MXlMbkZCSXFGUDcz?=
- =?utf-8?B?dDdoaEpHZitQRWU2RWlRQk5nVkQvYzZOcFNiRlZNZDljNUQ1b2dOQTMwR3BS?=
- =?utf-8?B?bS81OXpKYWJsNUFDK1VvQ3JtcEFyNVdIVkVlYjBRbnNTVjJhZGJBZGwzRGZq?=
- =?utf-8?B?ekNVU2RlUG9wQ3hqekJjczlxN09XWXRmMlEyaXFyL2J1TTVuSG02MXVtNmJL?=
- =?utf-8?B?WVFsbTUyd0VBV3JuSlZLQnhBWk95eVdhNnlEd2VOY1lleFByd0ZXLzlod3pY?=
- =?utf-8?B?TVlhTDluRXVuRnptQXdZNUZXdTd5ZWE2ZFM1SWpCdzdOcUhjYUpKa0JVa0xl?=
- =?utf-8?B?UXNZUE43UGZrd2hkYVBpL0pNaUJzMFVVbCtMUVErRGZFQ1l1bjRSeVFkS3Q4?=
- =?utf-8?Q?de8xGXf7gzY7DYouozInrICfoDeTvcpgmaLao=3D?=
-X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
- SFS:(13230037)(376011)(36860700010)(1800799021)(82310400023); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2024 19:19:44.8931 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ab3c3a58-0cfb-4af3-6bf0-08dc8f027257
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B070.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4484
+In-Reply-To: <20240612235253.1624004-2-ttabi@nvidia.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -145,137 +92,650 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 18/6/24 03:30, Danilo Krummrich wrote:
+Hi Timur,
 
-> On Fri, Jun 14, 2024 at 03:02:09AM +1000, Ben Skeggs wrote:
->> NVIDIA has been exploring ways to better support the effort for an
->> upstream kernel mode driver for GPUs that are capable of running GSP-RM
->> firmware, since the introduction[1] to Nova.
->>
->> Use cases have been identified for which separating the core GPU
->> programming out of the full DRM driver stack is a strong requirement
->> from our key customers.
->>
->> An upstreamed NVIDIA GPU driver should be able to support current and
->> emerging customer use cases for vGPU hosts.  NVIDIA's vGPU deployments
->> to date do not support compute or graphics functionality within the
->> hypervisor host, and have no dependency on the Linux graphics subsystem,
->> instead implementing the minimal functionality required to run vGPU
->> guest VMs.
->>
->> For security-sensitive environments such as cloud infrastructure, it's
->> important to continue support for running a minimal footprint vGPU host
->> driver in a stripped-down / barebones kernel environment.
->>
->> This can be achieved by supporting both VFIO and DRM drivers as clients
->> of a core driver, without requiring a full-fledged DRM driver (or the
->> DRM subsystem itself) to be built into the host kernel.
->>
->> A core driver would be responsible for booting and communicating with
->> GSP-RM, enumeration of HW configuration, shared/partitioned resource
->> management, exception handling, and event dispatch.
->>
->> The DRM driver would do all the standard things a DRM driver does, and
->> implement GPU memory management (TTM/HMM), KMS, command submission etc,
->> as well as providing UAPI for userspace clients.  These features would
->> be implemented using HW resources allocated from a core driver, rather
->> than the DRM driver being directly responsible for HW programming.
->>
->> As Nouveau's KMD is already split (in the logical sense) along similar
->> lines, we're using it here for the purposes of this RFC to demonstrate
->> the feasibility of such an architecture, and open it up for discussion.
-> Generally, I think that approach is reasonable and I like it. There's only a few
-> concerns I have for now.
->
-> We've already had (and still have) quite a few difficulties due to this split in
-> Nouveau. Especially when it comes to VMM and handling page tables. There are
-> cases where the locking architecture must be closely aligned with the upper
-> layers, i.e. the (VM_BIND) uAPI.
->
-> Having a separate (local) locking architecture doesn't work out well in this
-> case due to the implications of dealing with dma_fences and their signalling
-> paths.
->
-> Unfortunately, we can't even argue that we solved this problem in Nouveau. I
-> think it's fair to say that we found ways (without rewriting / restructuring a
-> lot of the VMM code to use a more global locking architecture) to make it work
-> in practice, but surely there are still conditions that (at least theoretically)
-> can lock things up.
->
-> I'm not saying that it's impossible to work this out, but having a strong
-> separation is likely to make those things quite a bit more difficult.
+thanks for the follow-up on this patch series.
 
-Yeah, I think there's a bit of work ahead to determine where exactly all 
-the pieces should live.  For VMM specifically, I'd be looking more at an 
-architecture where the DRM driver "owns" all the memory remaining after 
-GSP has booted (or was allocated to its VFIO partition) etc, and manages 
-it however it sees fit.  And, rather than calling into the core driver 
-for mapping into a VMM, the DRM driver would allocate its own PDB, 
-inform the core driver of its location, and manage its own page tables 
-directly from there.
+On Wed, Jun 12, 2024 at 06:52:53PM -0500, Timur Tabi wrote:
+> The LOGINIT, LOGINTR, LOGRM, and LOGPMU buffers are circular buffers
+> that have printf-like logs from GSP-RM and PMU encoded in them.
+> 
+> LOGINIT, LOGINTR, and LOGRM are allocated by Nouveau and their DMA
+> addresses are passed to GSP-RM during initialization.  The buffers are
+> required for GSP-RM to initialize properly.
+> 
+> LOGPMU is also allocated by Nouveau, but its contents are updated
+> when Nouveau receives an NV_VGPU_MSG_EVENT_UCODE_LIBOS_PRINT RPC from
+> GSP-RM.  Nouveau then copies the RPC to the buffer.
+> 
+> The messages are encoded as an array of variable-length structures that
+> contain the parameters to an NV_PRINTF call.  The format string and
+> parameter count are stored in a special ELF image that contains only
+> logging strings.  This image is not currently shipped with the Nvidia
+> driver.
+> 
+> There are two methods to extract the logs.
+> 
+> OpenRM tries to load the logging ELF, and if present, parses the log
+> buffers in real time and outputs the strings to the kernel console.
+> 
+> Alternatively, and this is the method used by this patch, the buffers
+> can be exposed to user space, and a user-space tool (along with the
+> logging ELF image) can parse the buffer and dump the logs.
+> 
+> This method has the advantage that it allows the buffers to be parsed
+> even when the logging ELF file is not available to the user.  However,
+> it has the disadvantage the debubfs entries need to remain until the
+> driver is unloaded.
+> 
+> The buffers are exposed via debugfs.  If GSP-RM fails to initialize,
+> then Nouveau immediately shuts down the GSP interface.  This would
+> normally also deallocate the logging buffers, thereby preventing the
+> user from capturing the debug logs.
+> 
+> To avoid this, introduce the keep-gsp-logging command line parameter.
+> If specified, and if at least one logging buffer has content, then
+> Nouveau will migrate these buffers into new debugfs entries that are
+> retained until the driver unloads.
+> 
+> An end-user can capture the logs using the following commands:
+> 
+>     cp /sys/kernel/debug/dri/<path>/loginit loginit
+>     cp /sys/kernel/debug/dri/<path>/logrm logrm
+>     cp /sys/kernel/debug/dri/<path>/logintr logintr
+>     cp /sys/kernel/debug/dri/<path>/logpmu logpmu
+> 
+> where <path> is the PCI ID of the GPU (e.g. 0000:65:00.0).
+> 
+> Since LOGPMU is not needed for normal GSP-RM operation, it is only
+> created if debugfs is available.  Otherwise, the
+> NV_VGPU_MSG_EVENT_UCODE_LIBOS_PRINT RPCs are ignored.
+> 
+> Signed-off-by: Timur Tabi <ttabi@nvidia.com>
+> ---
+> v5:
+> rebased to drm-misc-next
+> repaced nvkm_gsp_log with nvif_log
+> minor rearrangement of some code
+> 
+>  drivers/gpu/drm/nouveau/include/nvif/log.h    |  32 ++
+>  .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |  13 +
+>  drivers/gpu/drm/nouveau/nouveau_drm.c         |  19 +
+>  .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    | 360 +++++++++++++++++-
+>  4 files changed, 423 insertions(+), 1 deletion(-)
+>  create mode 100644 drivers/gpu/drm/nouveau/include/nvif/log.h
+> 
+> diff --git a/drivers/gpu/drm/nouveau/include/nvif/log.h b/drivers/gpu/drm/nouveau/include/nvif/log.h
+> new file mode 100644
+> index 000000000000..c89ba85a701d
+> --- /dev/null
+> +++ b/drivers/gpu/drm/nouveau/include/nvif/log.h
+> @@ -0,0 +1,32 @@
+> +/* SPDX-License-Identifier: MIT */
+> +/* SPDX-FileCopyrightText: Copyright (c) 2024 NVIDIA CORPORATION & AFFILIATES. */
+> +
+> +#ifndef __NVIF_LOG_H__
+> +#define __NVIF_LOG_H__
+> +
+> +/**
+> + * nvif_log - structure for tracking logging buffers
+> + * @head: list head
 
-This is similar to how the interface between NVKM and GSP-RM works now 
-at least.
+What about "@entry: an entry in a list of struct nvif_logs".
 
-I've looked a little bit recently into how to approach fixing this in 
-nouveau, but don't have a solid plan yet.
+> + * @shutdown: pointer to function to call to clean up
 
->
-> On the other hand this is a problem we might have to deal with either way, it
-> shouldn't matter too much having separate modules for VFIO and the GPU core.
->
-> Besides that, do we expect semantical changes in the firmware that can
-> potentially propagate up in the following sense?
->
-> [GSP firmware -> Host GPU core driver -> VFIO driver -> Guest GPU core driver]
->
-> If so, how do we deal with those? In the context of ensuring compatibility, can
-> we ensure this can't lead to increasing maintainance and testing effort over
-> time?
+I'd be a bit more specific and say that this frees all backing resources, such
+as logging buffer, etc.
 
-That's a very good question.  I suspect it's inevitable that those type 
-of changes could flow through from FW updates, and we'll need to come up 
-with a plan for how to deal with them.  In general, it seems like the 
-same kind of problem as with maintaining UAPI compatibility, but I'm not 
-sure if there's any additional considerations for virt.
+> + *
+> + * Structure used to track logging buffers so that they can be cleaned up
+> + * when the driver exits.
+> + */
+> +struct nvif_log {
+> +	struct list_head head;
 
-Ben.
+I suggest to call this 'entry', since that's what it actually represents, and
+entry in a list.
 
->
-> - Danilo
->
->> A link[2] to a tree containing the patches is below.
->>
->> [1] https://lore.kernel.org/all/3ed356488c9b0ca93845501425d427309f4cf616.camel@redhat.com/
->> [2] https://gitlab.freedesktop.org/bskeggs/nouveau/-/tree/00.03-module
->>
->> *** BLURB HERE ***
->>
->> Ben Skeggs (2):
->>    drm/nouveau/nvkm: export symbols needed by the drm driver
->>    drm/nouveau/nvkm: separate out into nvkm.ko
->>
->>   drivers/gpu/drm/nouveau/Kbuild                      |  4 ++--
->>   drivers/gpu/drm/nouveau/include/nvkm/core/module.h  |  3 ---
->>   drivers/gpu/drm/nouveau/nouveau_drm.c               | 10 +---------
->>   drivers/gpu/drm/nouveau/nvkm/core/driver.c          |  1 +
->>   drivers/gpu/drm/nouveau/nvkm/core/gpuobj.c          |  2 ++
->>   drivers/gpu/drm/nouveau/nvkm/core/mm.c              |  4 ++++
->>   drivers/gpu/drm/nouveau/nvkm/device/acpi.c          |  1 +
->>   drivers/gpu/drm/nouveau/nvkm/engine/gr/base.c       |  1 +
->>   drivers/gpu/drm/nouveau/nvkm/module.c               |  8 ++++++--
->>   drivers/gpu/drm/nouveau/nvkm/subdev/bios/init.c     |  1 +
->>   drivers/gpu/drm/nouveau/nvkm/subdev/bios/pll.c      |  1 +
->>   drivers/gpu/drm/nouveau/nvkm/subdev/fb/base.c       |  3 +++
->>   drivers/gpu/drm/nouveau/nvkm/subdev/gpio/base.c     |  3 +++
->>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c      |  2 ++
->>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/bus.c       |  1 +
->>   drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c |  1 +
->>   drivers/gpu/drm/nouveau/nvkm/subdev/therm/base.c    |  1 +
->>   drivers/gpu/drm/nouveau/nvkm/subdev/therm/fan.c     |  1 +
->>   drivers/gpu/drm/nouveau/nvkm/subdev/volt/base.c     |  1 +
->>   19 files changed, 33 insertions(+), 16 deletions(-)
->>
->> -- 
->> 2.44.0
->>
+> +	void (*shutdown)(struct nvif_log *log);
+> +};
+> +
+> +#ifdef CONFIG_DEBUG_FS
+> +/**
+> + * gsp_logs - list of nvif_log GSP-RM logging buffers
+> + *
+> + * Head pointer to a a list of nvif_log buffers that is created for each GPU
+> + * upon GSP shutdown if the "keep_gsp_logging" command-line parameter is
+> + * specified.  This is used to track the alternative debugfs entries for the
+> + * GSP-RM logs.
+> + */
+> +extern struct list_head gsp_logs;
+
+Better wrap this in a struct nvif_logs (or similar) and pass this down through
+nvkm_device_pci_new() / nvkm_device_tegra_new() instead of relying on sharing
+a global.
+
+> +#endif
+> +
+> +#endif
+> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+> index a45a4ad843b9..836443fd5659 100644
+> --- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+> +++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
+> @@ -5,6 +5,8 @@
+>  #include <core/falcon.h>
+>  #include <core/firmware.h>
+>  
+> +#include <linux/debugfs.h>
+> +
+>  #define GSP_PAGE_SHIFT 12
+>  #define GSP_PAGE_SIZE  BIT(GSP_PAGE_SHIFT)
+>  
+> @@ -220,6 +222,17 @@ struct nvkm_gsp {
+>  
+>  	/* The size of the registry RPC */
+>  	size_t registry_rpc_size;
+> +
+> +#ifdef CONFIG_DEBUG_FS
+> +	/*
+> +	 * Logging buffers in debugfs.  The wrapper objects need to remain
+> +	 * in memory until the dentry is deleted.
+> +	 */
+> +	struct debugfs_blob_wrapper blob_init;
+> +	struct debugfs_blob_wrapper blob_intr;
+> +	struct debugfs_blob_wrapper blob_rm;
+> +	struct debugfs_blob_wrapper blob_pmu;
+> +#endif
+>  };
+>  
+>  static inline bool
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> index a58c31089613..3d0fa1f64872 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> @@ -46,6 +46,7 @@
+>  #include <nvif/fifo.h>
+>  #include <nvif/push006c.h>
+>  #include <nvif/user.h>
+> +#include <nvif/log.h>
+>  
+>  #include <nvif/class.h>
+>  #include <nvif/cl0002.h>
+> @@ -113,6 +114,13 @@ static struct drm_driver driver_stub;
+>  static struct drm_driver driver_pci;
+>  static struct drm_driver driver_platform;
+>  
+> +#ifdef CONFIG_DEBUG_FS
+> +/**
+> + * gsp_logs - list of GSP debugfs logging buffers
+> + */
+> +LIST_HEAD(gsp_logs);
+
+Better wrap this in a NVIF_LOGS_DECLARE() macro.
+
+> +#endif
+> +
+>  static u64
+>  nouveau_pci_name(struct pci_dev *pdev)
+>  {
+> @@ -1446,6 +1454,17 @@ nouveau_drm_exit(void)
+>  #endif
+>  	if (IS_ENABLED(CONFIG_DRM_NOUVEAU_SVM))
+>  		mmu_notifier_synchronize();
+> +
+> +#ifdef CONFIG_DEBUG_FS
+> +	if (!list_empty(&gsp_logs)) {
+> +		struct nvif_log *log, *n;
+> +
+> +		list_for_each_entry_safe(log, n, &gsp_logs, head) {
+> +			/* shutdown() should also delete the log entry */
+> +			log->shutdown(log);
+> +		}
+> +	}
+> +#endif
+
+Please move this to include/nvif/log.h as nvif_log_shutdown().
+
+>  }
+>  
+>  module_init(nouveau_drm_init);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> index bbab6d452aa2..51ac66031b06 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
+> @@ -26,6 +26,8 @@
+>  #include <subdev/vfn.h>
+>  #include <engine/fifo/chan.h>
+>  #include <engine/sec2.h>
+> +#include <drm/drm_device.h>
+> +#include <nvif/log.h>
+>  
+>  #include <nvfw/fw.h>
+>  
+> @@ -2062,6 +2064,169 @@ r535_gsp_rmargs_init(struct nvkm_gsp *gsp, bool resume)
+>  	return 0;
+>  }
+>  
+> +#ifdef CONFIG_DEBUG_FS
+> +
+> +/*
+> + * If GSP-RM load fails, then the GSP nvkm object will be deleted, the
+> + * logging debugfs entries will be deleted, and it will not be possible to
+> + * debug the load failure.  The keep_gsp_logging parameter tells Nouveau
+> + * to copy the logging buffers to new debugfs entries, and these entries are
+> + * retained until the driver unloads.
+> + */
+> +static bool keep_gsp_logging;
+> +module_param(keep_gsp_logging, bool, 0444);
+> +MODULE_PARM_DESC(keep_gsp_logging,
+> +		 "Migrate the GSP-RM logging debugfs entries upon exit");
+> +
+> +#define NV_GSP_MSG_EVENT_UCODE_LIBOS_CLASS_PMU		0xf3d722
+> +
+> +/**
+> + * r535_gsp_msg_libos_print - capture log message from the PMU
+> + * @priv: gsp pointer
+> + * @fn: function number (ignored)
+> + * @repv: pointer to libos print RPC
+> + * @repc: message size
+> + *
+> + * See _kgspRpcUcodeLibosPrint
+
+What is this reference?
+
+> + */
+> +static int r535_gsp_msg_libos_print(void *priv, u32 fn, void *repv, u32 repc)
+> +{
+> +	struct nvkm_gsp *gsp = priv;
+> +	struct nvkm_subdev *subdev = &gsp->subdev;
+> +	struct {
+> +		u32 ucodeEngDesc;
+> +		u32 libosPrintBufSize;
+> +		u8 libosPrintBuf[];
+
+Why are those camelCase? Please use snake_case instead.
+
+Also, please add a few notes on the fields GSP returns to us here. Admittedly,
+two of those seem rather obvious - a log buffer and a size - but maybe we can
+write down whether there is some maximum or minimum size? Can we get called with
+a zero-size buffer?
+
+What about 'ucodeEngDesc'? This one seems to behave more like a register value,
+can we document the "register layout" for this one?
+
+> +	} *rpc = repv;
+> +	unsigned int class = rpc->ucodeEngDesc >> 8;
+> +
+> +	nvkm_debug(subdev, "received libos print from class 0x%x for %u bytes\n",
+> +		   class, rpc->libosPrintBufSize);
+> +
+> +	if (class != NV_GSP_MSG_EVENT_UCODE_LIBOS_CLASS_PMU) {
+> +		nvkm_warn(subdev,
+> +			  "received libos print from unknown class 0x%x\n",
+> +			  class);
+> +		return -ENOMSG;
+> +	}
+> +
+> +	if (rpc->libosPrintBufSize > GSP_PAGE_SIZE) {
+> +		nvkm_error(subdev, "libos print is too large (%u bytes)\n",
+> +			   rpc->libosPrintBufSize);
+> +		return -E2BIG;
+> +	}
+> +
+> +	memcpy(gsp->blob_pmu.data, rpc->libosPrintBuf, rpc->libosPrintBufSize);
+> +
+> +	return 0;
+> +}
+> +
+> +/**
+> + * r535_gsp_libos_debugfs_init - create logging debugfs entries
+> + * @gsp: gsp pointer
+> + *
+> + * Create the debugfs entries.  This exposes the log buffers to
+> + * userspace so that an external tool can parse it.
+> + *
+> + * The 'logpmu' contains exception dumps from the PMU. It is written via an
+> + * RPC sent from GSP-RM and must be only 4KB.  We create it here because it's
+> + * only useful if there is a debugfs entry to expose it.  If we get the PMU
+> + * logging RPC and there is no debugfs entry, the RPC is just ignored.
+> + *
+> + * The blob_init, blob_rm, and blob_pmu objects can't be transient
+> + * because debugfs_create_blob doesn't copy them.
+> + *
+> + * NOTE: OpenRM loads the logging elf image and prints the log messages
+> + * in real-time. We may add that capability in the future, but that
+> + * requires loading an ELF images that are not distributed with the driver,
+> + * and adding the parsing code to Nouveau.
+> + *
+> + * Ideally, this should be part of nouveau_debugfs_init(), but that function
+> + * is called too late.  We really want to create these debugfs entries before
+> + * r535_gsp_booter_load() is called, so that if GSP-RM fails to initialize,
+> + * there could still be a log to capture.
+> + */
+> +static void r535_gsp_libos_debugfs_init(struct nvkm_gsp *gsp)
+> +{
+> +	struct dentry *dir, *dir_init;
+> +	struct dentry *dir_intr = NULL, *dir_rm = NULL, *dir_pmu = NULL;
+> +	struct device *dev = gsp->subdev.device->dev;
+> +
+> +	/* Each GPU has a subdir based on its device name, so find it */
+> +	struct drm_device *drm_dev = dev_get_drvdata(dev);
+> +
+> +	if (!drm_dev || !drm_dev->debugfs_root) {
+> +		nvkm_error(&gsp->subdev, "could not find debugfs path\n");
+> +		return;
+> +	}
+> +
+> +	dir = drm_dev->debugfs_root;
+> +
+> +	gsp->blob_init.data = gsp->loginit.data;
+> +	gsp->blob_init.size = gsp->loginit.size;
+> +	gsp->blob_intr.data = gsp->logintr.data;
+> +	gsp->blob_intr.size = gsp->logintr.size;
+> +	gsp->blob_rm.data = gsp->logrm.data;
+> +	gsp->blob_rm.size = gsp->logrm.size;
+> +
+> +	dir_init = debugfs_create_blob("loginit", 0444, dir, &gsp->blob_init);
+> +	if (IS_ERR(dir_init)) {
+> +		nvkm_error(&gsp->subdev, "failed to create loginit debugfs entry\n");
+> +		goto error;
+> +	}
+> +
+> +	dir_intr = debugfs_create_blob("logintr", 0444, dir, &gsp->blob_intr);
+> +	if (IS_ERR(dir_intr)) {
+> +		nvkm_error(&gsp->subdev, "failed to create logintr debugfs entry\n");
+> +		goto error;
+> +	}
+> +
+> +	dir_rm = debugfs_create_blob("logrm", 0444, dir, &gsp->blob_rm);
+> +	if (IS_ERR(dir_rm)) {
+> +		nvkm_error(&gsp->subdev, "failed to create logrm debugfs entry\n");
+> +		goto error;
+> +	}
+> +
+> +	/*
+> +	 * Since the PMU buffer is copied from an RPC, it doesn't need to be
+> +	 * a DMA buffer.
+> +	 */
+> +	gsp->blob_pmu.size = GSP_PAGE_SIZE;
+> +	gsp->blob_pmu.data = kzalloc(gsp->blob_pmu.size, GFP_KERNEL);
+> +	if (!gsp->blob_pmu.data)
+> +		goto error;
+> +
+> +	dir_pmu = debugfs_create_blob("logpmu", 0444, dir, &gsp->blob_pmu);
+> +	if (IS_ERR(dir_pmu)) {
+> +		nvkm_error(&gsp->subdev, "failed to create logpmu debugfs entry\n");
+> +		kfree(gsp->blob_pmu.data);
+> +		goto error;
+> +	}
+> +
+> +	i_size_write(d_inode(dir_init), gsp->blob_init.size);
+> +	i_size_write(d_inode(dir_intr), gsp->blob_intr.size);
+> +	i_size_write(d_inode(dir_rm), gsp->blob_rm.size);
+> +	i_size_write(d_inode(dir_pmu), gsp->blob_pmu.size);
+> +
+> +	r535_gsp_msg_ntfy_add(gsp, 0x0000100C, r535_gsp_msg_libos_print, gsp);
+
+Please, don't add random magic values. Add a useful explanation instead that
+also new contributors are able to make sense of.
+
+> +
+> +	nvkm_debug(&gsp->subdev, "created debugfs GSP-RM logging entries\n");
+> +
+> +	if (keep_gsp_logging) {
+> +		nvkm_warn(&gsp->subdev,
+> +			  "logging buffers will be retained on failure\n");
+> +	}
+> +
+> +	return;
+> +
+> +error:
+> +	debugfs_remove(dir_init);
+> +	debugfs_remove(dir_intr);
+> +	debugfs_remove(dir_rm);
+> +}
+> +
+> +#endif
+> +
+>  static inline u64
+>  r535_gsp_libos_id8(const char *name)
+>  {
+> @@ -2112,7 +2277,11 @@ static void create_pte_array(u64 *ptes, dma_addr_t addr, size_t size)
+>   * written to directly by GSP-RM and can be any multiple of GSP_PAGE_SIZE.
+>   *
+>   * The physical address map for the log buffer is stored in the buffer
+> - * itself, starting with offset 1. Offset 0 contains the "put" pointer.
+> + * itself, starting with offset 1. Offset 0 contains the "put" pointer (pp).
+> + * Initially, pp is equal to 0.  If the buffer has valid logging data in it,
+> + * then pp points to index into the buffer where the next logging entry will
+> + * be written.  Therefore, the logging data is valid if:
+> + *   1 <= pp < sizeof(buffer)/sizeof(u64)
+>   *
+>   * The GSP only understands 4K pages (GSP_PAGE_SIZE), so even if the kernel is
+>   * configured for a larger page size (e.g. 64K pages), we need to give
+> @@ -2183,6 +2352,11 @@ r535_gsp_libos_init(struct nvkm_gsp *gsp)
+>  	args[3].size = gsp->rmargs.size;
+>  	args[3].kind = LIBOS_MEMORY_REGION_CONTIGUOUS;
+>  	args[3].loc  = LIBOS_MEMORY_REGION_LOC_SYSMEM;
+> +
+> +#ifdef CONFIG_DEBUG_FS
+> +	r535_gsp_libos_debugfs_init(gsp);
+> +#endif
+> +
+>  	return 0;
+>  }
+>  
+> @@ -2493,6 +2667,182 @@ r535_gsp_dtor_fws(struct nvkm_gsp *gsp)
+>  	gsp->fws.rm = NULL;
+>  }
+>  
+> +#ifdef CONFIG_DEBUG_FS
+> +
+> +struct r535_gsp_log {
+> +	struct nvif_log log;
+> +
+> +	/*
+> +	 * Logging buffers in debugfs.  The wrapper objects need to remain
+> +	 * in memory until the dentry is deleted.
+> +	 */
+> +	struct dentry *debugfs_logging_dir;
+> +	struct debugfs_blob_wrapper blob_init;
+> +	struct debugfs_blob_wrapper blob_intr;
+> +	struct debugfs_blob_wrapper blob_rm;
+> +	struct debugfs_blob_wrapper blob_pmu;
+> +};
+> +
+> +/**
+> + * r535_debugfs_shutdown - delete GSP-RM logging buffers for one GPU
+> + * @_log: nvif_log struct for this GPU
+> + *
+> + * Called when the driver is shutting down, to clean up the retained GSP-RM
+> + * logging buffers.
+> + */
+> +static void r535_debugfs_shutdown(struct nvif_log *_log)
+> +{
+> +	struct r535_gsp_log *log = container_of(_log, struct r535_gsp_log, log);
+> +
+> +	debugfs_remove(log->debugfs_logging_dir);
+> +
+> +	kfree(log->blob_init.data);
+> +	kfree(log->blob_intr.data);
+> +	kfree(log->blob_rm.data);
+> +	kfree(log->blob_pmu.data);
+> +
+> +	/* We also need to delete the list object */
+> +	kfree(log);
+> +}
+> +
+> +/**
+> + * is_empty - return true if the logging buffer was never written to
+> + * @b: blob wrapper with ->data field pointing to logging buffer
+> + *
+> + * The first 64-bit field of loginit, and logintr, and logrm is the 'put'
+> + * pointer, and it is initialized to 0.  If the pointer is still 0 when
+
+Double space. Also, what would 'put' point to in case it's non-zero? Is it a
+pointer actually, or is it just some kind of counter?
+
+> + * GSP-RM is shut down, that means that it was never written do, so it
+
+"written to"
+
+> + * can be ignored.
+> + *
+> + * This test also works for logpmu, even though it doesn't have a put pointer.
+> + */
+> +static bool is_empty(struct debugfs_blob_wrapper *b)
+> +{
+> +	u64 *put = b->data;
+> +
+> +	return *put == 0;
+> +}
+> +
+> +static int r535_gsp_copy_log(struct dentry *parent,
+> +			     const char *name,
+> +			     struct debugfs_blob_wrapper *s,
+> +			     struct debugfs_blob_wrapper *d)
+> +{
+> +	struct dentry *dir;
+> +
+> +	/* If the buffer is empty, just skip it. */
+> +	if (is_empty(s))
+> +		return 0;
+> +
+> +	d->data = kmemdup(s->data, s->size, GFP_KERNEL);
+> +	if (!d->data)
+> +		return -ENOMEM;
+> +
+> +	d->size = s->size;
+> +	dir = debugfs_create_blob(name, 0444, parent, d);
+> +	if (IS_ERR(dir)) {
+> +		kfree(d->data);
+> +		memset(d, 0, sizeof(*d));
+> +		return PTR_ERR(dir);
+> +	}
+> +
+> +	i_size_write(d_inode(dir), d->size);
+> +
+> +	return 0;
+> +}
+> +
+> +/**
+> + * r535_gsp_retain_logging - copy logging buffers to new debugfs root
+> + * @gsp: gsp pointer
+> + *
+> + * If keep_gsp_logging is enabled, then we want to preserve the GSP-RM logging
+> + * buffers and their debugfs entries, but all those objects would normally
+> + * deleted if GSP-RM fails to load.  So we create a new debugfs root, allocate
+> + * new buffers, then and copy contents of the logging buffers to them.
+> + *
+> + * These buffers and dentries are not associated with nvkm_gsp and will be
+> + * retained until the driver unloads.
+> + */
+> +static void r535_gsp_retain_logging(struct nvkm_gsp *gsp)
+> +{
+> +	struct device *dev = gsp->subdev.device->dev;
+> +	struct dentry *root, *dir;
+> +	struct r535_gsp_log *log;
+> +	int ret;
+> +
+> +	/* If we were told not to keep logs, then don't. */
+> +	if (!keep_gsp_logging)
+> +		return;
+> +
+> +	/* Check to make sure at least one buffer has data. */
+> +	if (is_empty(&gsp->blob_init) && is_empty(&gsp->blob_intr) &&
+> +	    is_empty(&gsp->blob_rm) && is_empty(&gsp->blob_rm)) {
+> +		nvkm_warn(&gsp->subdev, "all logging buffers are empty\n");
+> +		return;
+> +	}
+> +
+> +	/* Find the 'dri' root debugfs entry. Every GPU has a dentry under it */
+> +	root = debugfs_lookup("dri", NULL);
+> +	if (IS_ERR(root)) {
+> +		/* No debugfs, or no root dentry for DRM */
+> +		nvkm_warn(&gsp->subdev, "could not find debugfs dri root\n");
+> +		return;
+> +	}
+> +
+> +	/* Create a new debugfs root. It has the same name as the old one */
+> +	dir = debugfs_create_dir(dev_name(dev), root);
+> +	dput(root);
+> +	if (IS_ERR(dir)) {
+> +		nvkm_error(&gsp->subdev,
+> +			   "failed to create %s debugfs entry\n", dev_name(dev));
+> +		return;
+> +	}
+> +
+> +	log = kzalloc(sizeof(*log), GFP_KERNEL);
+> +	if (!log) {
+> +		debugfs_remove(dir);
+> +		return;
+> +	}
+> +
+> +	ret = r535_gsp_copy_log(dir, "loginit", &gsp->blob_init, &log->blob_init);
+> +	if (ret)
+> +		goto error;
+> +
+> +	ret = r535_gsp_copy_log(dir, "logintr", &gsp->blob_intr, &log->blob_intr);
+> +	if (ret)
+> +		goto error;
+> +
+> +	ret = r535_gsp_copy_log(dir, "logrm", &gsp->blob_rm, &log->blob_rm);
+> +	if (ret)
+> +		goto error;
+> +
+> +	ret = r535_gsp_copy_log(dir, "logpmu", &gsp->blob_pmu, &log->blob_pmu);
+> +	if (ret)
+> +		goto error;
+> +
+> +	log->debugfs_logging_dir = dir;
+> +	log->log.shutdown = r535_debugfs_shutdown;
+> +	list_add(&log->log.head, &gsp_logs);
+> +
+> +	nvkm_warn(&gsp->subdev,
+> +		  "logging buffers migrated to /sys/kernel/debug/dri/%s\n",
+> +		  dev_name(dev));
+> +
+> +	return;
+> +
+> +error:
+> +	nvkm_warn(&gsp->subdev, "failed to migrate logging buffers\n");
+> +
+> +	debugfs_remove(log->debugfs_logging_dir);
+> +	kfree(log->blob_init.data);
+> +	kfree(log->blob_intr.data);
+> +	kfree(log->blob_rm.data);
+> +	kfree(log->blob_pmu.data);
+> +	kfree(log);
+> +}
+> +
+> +#endif
+> +
+>  void
+>  r535_gsp_dtor(struct nvkm_gsp *gsp)
+>  {
+> @@ -2514,6 +2864,14 @@ r535_gsp_dtor(struct nvkm_gsp *gsp)
+>  	nvkm_gsp_mem_dtor(&gsp->rmargs);
+>  	nvkm_gsp_mem_dtor(&gsp->wpr_meta);
+>  	nvkm_gsp_mem_dtor(&gsp->shm.mem);
+> +
+> +#ifdef CONFIG_DEBUG_FS
+> +	r535_gsp_retain_logging(gsp);
+> +
+> +	kfree(gsp->blob_pmu.data);
+> +	gsp->blob_pmu.data = NULL;
+
+Please move this to r535_gsp_libos_debugfs_fini() to make it a bit more obvious
+why this needs to be cleaned up here.
+
+> +#endif
+> +
+>  	nvkm_gsp_mem_dtor(&gsp->loginit);
+>  	nvkm_gsp_mem_dtor(&gsp->logintr);
+>  	nvkm_gsp_mem_dtor(&gsp->logrm);
+> -- 
+> 2.34.1
+> 
+
