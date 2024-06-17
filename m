@@ -2,88 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80D0290B565
-	for <lists+nouveau@lfdr.de>; Mon, 17 Jun 2024 17:55:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8EE4D90B815
+	for <lists+nouveau@lfdr.de>; Mon, 17 Jun 2024 19:31:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B758D10E44B;
-	Mon, 17 Jun 2024 15:55:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1D2BC10E478;
+	Mon, 17 Jun 2024 17:31:07 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Sl1Sb+GA";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="PuSSyQKH";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6269510E453
- for <nouveau@lists.freedesktop.org>; Mon, 17 Jun 2024 15:55:39 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5990810E478
+ for <nouveau@lists.freedesktop.org>; Mon, 17 Jun 2024 17:31:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1718639738;
+ s=mimecast20190719; t=1718645464;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Qmb8gUny6Zpgr7K8KEYWVXXhXU3OWlH3oKm/5lLTDS8=;
- b=Sl1Sb+GAj34IwWArz/vhWg+mMfngLdgoVK+rZyI5opZsZz4yPdadFHFpZYECD5TG3iaACN
- 6sd04nd1WiNlZFhybC35ikr487rHXMVr5AX3jhU/ZXdRIdhHkGM+QV6jhdA8G1Tdp1f8ZR
- cX/m0w7h8elqwxtLB5ho3YjlQwViaqA=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=juqpYUpSamtTNsW6q/swUfH8SfdpZV3yTBIEFOu9PiI=;
+ b=PuSSyQKHVbxrSKXlvI9EJEd104OLbIp7Joc7XnahLIAe3mZYwCWnwuODaGl4HavP1i2AX4
+ VtPCQjLZiHw1DNR0mxdfbbYm0RWm4/W2ku0hp7dO8d+X5hvYwDzGg8bfiya2zrGSH8nZwQ
+ nTM5NspXhV3O74EgG7mG+8rLACpMydc=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-442-bBGP5sv5MbKRbvgQL-h7ug-1; Mon, 17 Jun 2024 11:55:37 -0400
-X-MC-Unique: bBGP5sv5MbKRbvgQL-h7ug-1
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-35f123fb9deso2999342f8f.1
- for <nouveau@lists.freedesktop.org>; Mon, 17 Jun 2024 08:55:36 -0700 (PDT)
+ us-mta-487-30lBzNe2Mr2H2vYY_3UMmg-1; Mon, 17 Jun 2024 13:31:02 -0400
+X-MC-Unique: 30lBzNe2Mr2H2vYY_3UMmg-1
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-4217f941ca8so29329225e9.1
+ for <nouveau@lists.freedesktop.org>; Mon, 17 Jun 2024 10:31:02 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718639736; x=1719244536;
- h=content-transfer-encoding:in-reply-to:organization:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1718645461; x=1719250261;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Qmb8gUny6Zpgr7K8KEYWVXXhXU3OWlH3oKm/5lLTDS8=;
- b=AlDTmTL8j6c4cTVEGpvqlCqFdHU6ktyBPoHsg5FYC5JRvD5i36RZ6TlwrJNf2wHYph
- dpY4mCVSsJ2GyVH3ynk8nqFIueEisHd4WjpE0LkCCvI8t9kjn0bIz0UuEQU1Y8JBnG17
- YNOyCoJhTzzojTbEl7NnvX7oS9vdQlnIsb9M0hCgJnFBjPZit+r2iSyGyknrM/P68iht
- bgi/59KYPI4jCEkBXHhUiwdHvYmTe8lW91nogXt1jpkDgx//UWKKHLAbAlRjp2r6hIZ+
- m3S/hyPjkW6sT9h32MpwhMosDNqBLOchIzNgraDlDifeCNSIVO+NiGHRukw50MMIFwNF
- j3Tg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVtfJxKymy8hNb9UPjSYe5bQmxHfyZb4PYeywEbYN1tC/IFYplzPx80lokWU1B3OGbuhtIvBBa0Y7U9wihZIwHPYNYrv9sZ2ptVc6Wlsg==
-X-Gm-Message-State: AOJu0YzwLy6LBLu1WRkoBie8bIcd08OOe2MTWTn40NHi4IH80+7Q5q8k
- PUYovzYPHaYr1bSdMwo40/gp0A4f66quAXFMTYkajamXpSH4Q+DMlWKwIyNxkMPJOL4KLJ5EEGL
- Ug0cnIu93t1rely6tSGsp4E5akE32K3/xAcUYFlW41DxVxRmbIwmnUCOZUK1/oeI=
-X-Received: by 2002:a05:600c:4ed2:b0:421:7983:f1c4 with SMTP id
- 5b1f17b1804b1-42304822952mr78837495e9.6.1718639735981; 
- Mon, 17 Jun 2024 08:55:35 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGG2HBjQR/zaDHDGvKUJDd9tDwyIlWmvB+O3V20u9Yfc0HFIdhjMf6sutXTwVwI4ehzNmpWbg==
-X-Received: by 2002:a05:600c:4ed2:b0:421:7983:f1c4 with SMTP id
- 5b1f17b1804b1-42304822952mr78837335e9.6.1718639735666; 
- Mon, 17 Jun 2024 08:55:35 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
- ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
+ bh=juqpYUpSamtTNsW6q/swUfH8SfdpZV3yTBIEFOu9PiI=;
+ b=vIQbF1i7J7HADbKIj4Z5uucc3meYyTbOm4jn0Hu+AKTVoCADV5ojdkDLjJE110a35V
+ v85M0vTXgcwS4SttdOZrDIi6mTe08It6kB85BtCWK9YeYSYzJ3+OVe5Ji89VqcDFiAFn
+ G8CEu4MPeOlMSr0S1u+ztoMqqEMPr9BFAi5pEjS6Ru1nFfLFcX8LVj0bfrvzhR8b1EBW
+ RjvOl7uZgcXDZbDvLNzWEs7yQhZY2hDxs8ASibBmliSG92Z8htF4IZIRLSUcdXWM8mnj
+ LL1xuQsauLJ/mh3UQPDNFtubg0nuv0y14B5shqtGn613SliQXWRiLImbxR9ASkE3fj+H
+ cqlw==
+X-Gm-Message-State: AOJu0YyE2HN8eqRj+/pgab+t+c/kJCrK34gK40iDQeeLr4m6Rqfr60RW
+ 8WhO+mBDcDK7+8ihB0pl9kZjBkvzNwi2LPdSQWZF3dsWtTYucEb9qhYAjaULeIxVv0ezu/L2giw
+ iZ9M0b5dbb/DehQBA7QPvzIu3qrZaksK+xcr1LUmU8Js0nFkCXh5d36oVQf8XcOE9L3817tE=
+X-Received: by 2002:a05:600c:3107:b0:423:499:a1ce with SMTP id
+ 5b1f17b1804b1-42304d934c4mr95550055e9.32.1718645461402; 
+ Mon, 17 Jun 2024 10:31:01 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEuuUn6lZP3Cco1EFviVROxS7UNMzaF09QHLto0t/V4C1c4w3DijZqzlYQjGhO6a4+LZhg46Q==
+X-Received: by 2002:a05:600c:3107:b0:423:499:a1ce with SMTP id
+ 5b1f17b1804b1-42304d934c4mr95549875e9.32.1718645461013; 
+ Mon, 17 Jun 2024 10:31:01 -0700 (PDT)
+Received: from cassiopeiae ([2a02:810d:4b3f:ee94:642:1aff:fe31:a19f])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-422f5f33bdasm164871085e9.8.2024.06.17.08.55.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Jun 2024 08:55:35 -0700 (PDT)
-Message-ID: <a61d9781-7c6e-46b8-ab1b-cf4fc1c76ba3@redhat.com>
-Date: Mon, 17 Jun 2024 17:55:33 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] drm/nouveau: Use kmemdup_array() instead of kmemdup()
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: Lyude Paul <lyude@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- kernel-janitors@vger.kernel.org, Karol Herbst <kherbst@redhat.com>
-References: <a3e8cecc-77dd-4a4a-bb12-c1d6759d3efb@moroto.mountain>
+ 5b1f17b1804b1-42286eef9c1sm202576595e9.7.2024.06.17.10.30.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Jun 2024 10:31:00 -0700 (PDT)
+Date: Mon, 17 Jun 2024 19:30:58 +0200
 From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <a3e8cecc-77dd-4a4a-bb12-c1d6759d3efb@moroto.mountain>
+To: Ben Skeggs <bskeggs@nvidia.com>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Subject: Re: [RFC] GPU driver with separate "core" and "DRM" modules
+Message-ID: <ZnBy0jOshdyyLmkL@cassiopeiae>
+References: <20240613170211.88779-1-bskeggs@nvidia.com>
+MIME-Version: 1.0
+In-Reply-To: <20240613170211.88779-1-bskeggs@nvidia.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,71 +87,113 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 6/17/24 11:33, Dan Carpenter wrote:
-> Use kmemdup_array() because we're allocating an array.
+On Fri, Jun 14, 2024 at 03:02:09AM +1000, Ben Skeggs wrote:
+> NVIDIA has been exploring ways to better support the effort for an
+> upstream kernel mode driver for GPUs that are capable of running GSP-RM
+> firmware, since the introduction[1] to Nova.
 > 
-> The main difference between kmemdup() and kmemdup_array() is that the
-> kmemdup_array() function has integer overflow checking built it.  The
-> "args->in_sync.count" variable is a u32 so integer overflows would only
-> be a concern on 32bit systems.  Fortunately, however, the u_memcpya()
-> function has integer overflow checking which means that it is not an
-> issue.
+> Use cases have been identified for which separating the core GPU
+> programming out of the full DRM driver stack is a strong requirement
+> from our key customers.
 > 
-> Still using kmemdup_array() is more appropriate and makes auditing the
-> code easier.
+> An upstreamed NVIDIA GPU driver should be able to support current and
+> emerging customer use cases for vGPU hosts.  NVIDIA's vGPU deployments
+> to date do not support compute or graphics functionality within the
+> hypervisor host, and have no dependency on the Linux graphics subsystem,
+> instead implementing the minimal functionality required to run vGPU
+> guest VMs.
+> 
+> For security-sensitive environments such as cloud infrastructure, it's
+> important to continue support for running a minimal footprint vGPU host
+> driver in a stripped-down / barebones kernel environment.
+> 
+> This can be achieved by supporting both VFIO and DRM drivers as clients
+> of a core driver, without requiring a full-fledged DRM driver (or the
+> DRM subsystem itself) to be built into the host kernel.
+> 
+> A core driver would be responsible for booting and communicating with
+> GSP-RM, enumeration of HW configuration, shared/partitioned resource
+> management, exception handling, and event dispatch.
+> 
+> The DRM driver would do all the standard things a DRM driver does, and
+> implement GPU memory management (TTM/HMM), KMS, command submission etc,
+> as well as providing UAPI for userspace clients.  These features would
+> be implemented using HW resources allocated from a core driver, rather
+> than the DRM driver being directly responsible for HW programming.
+> 
+> As Nouveau's KMD is already split (in the logical sense) along similar
+> lines, we're using it here for the purposes of this RFC to demonstrate
+> the feasibility of such an architecture, and open it up for discussion.
 
-Indeed, we shouldn't rely on the previous check here, good catch.
+Generally, I think that approach is reasonable and I like it. There's only a few
+concerns I have for now.
+
+We've already had (and still have) quite a few difficulties due to this split in
+Nouveau. Especially when it comes to VMM and handling page tables. There are
+cases where the locking architecture must be closely aligned with the upper
+layers, i.e. the (VM_BIND) uAPI.
+
+Having a separate (local) locking architecture doesn't work out well in this
+case due to the implications of dealing with dma_fences and their signalling
+paths.
+
+Unfortunately, we can't even argue that we solved this problem in Nouveau. I
+think it's fair to say that we found ways (without rewriting / restructuring a
+lot of the VMM code to use a more global locking architecture) to make it work
+in practice, but surely there are still conditions that (at least theoretically)
+can lock things up.
+
+I'm not saying that it's impossible to work this out, but having a strong
+separation is likely to make those things quite a bit more difficult.
+
+On the other hand this is a problem we might have to deal with either way, it
+shouldn't matter too much having separate modules for VFIO and the GPU core.
+
+Besides that, do we expect semantical changes in the firmware that can
+potentially propagate up in the following sense?
+
+[GSP firmware -> Host GPU core driver -> VFIO driver -> Guest GPU core driver]
+
+If so, how do we deal with those? In the context of ensuring compatibility, can
+we ensure this can't lead to increasing maintainance and testing effort over
+time?
+
+- Danilo
 
 > 
-> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
-> ---
->   drivers/gpu/drm/nouveau/nouveau_sched.c | 16 ++++++++--------
->   1 file changed, 8 insertions(+), 8 deletions(-)
+> A link[2] to a tree containing the patches is below.
 > 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
-> index 32fa2e273965..53d8b0584a56 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_sched.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-> @@ -45,10 +45,10 @@ nouveau_job_init(struct nouveau_job *job,
->   		if (job->sync)
->   			return -EINVAL;
->   
-> -		job->in_sync.data = kmemdup(args->in_sync.s,
-> -					 sizeof(*args->in_sync.s) *
-> -					 args->in_sync.count,
-> -					 GFP_KERNEL);
-> +		job->in_sync.data = kmemdup_array(args->in_sync.s,
-> +					args->in_sync.count,
-> +					sizeof(*args->in_sync.s),
-> +					GFP_KERNEL);
->   		if (!job->in_sync.data)
->   			return -ENOMEM;
-
-Not sure if this is what we want for kmemdup_array(). It just saturates the
-size. This doesn't prevent accessing the array out of bounds later on. I mean,
-it's rather unlikely to get such a huge amount of physically contiguous memory
-anyways, but wouldn't it be cleaner to let kmemdup_array() return
-ERR_PTR(-EOVERFLOW) on overflow, just like memdup_array_user()[1]?
-
-AFAICS, there's just two users of kmemdup_array(), hence it should be an easy
-change. :-)
-
-[1] https://elixir.bootlin.com/linux/latest/source/include/linux/string.h#L30
-
->   	}
-> @@ -60,10 +60,10 @@ nouveau_job_init(struct nouveau_job *job,
->   			goto err_free_in_sync;
->   		}
->   
-> -		job->out_sync.data = kmemdup(args->out_sync.s,
-> -					  sizeof(*args->out_sync.s) *
-> -					  args->out_sync.count,
-> -					  GFP_KERNEL);
-> +		job->out_sync.data = kmemdup_array(args->out_sync.s,
-> +					args->out_sync.count,
-> +					sizeof(*args->out_sync.s),
-> +					GFP_KERNEL);
->   		if (!job->out_sync.data) {
->   			ret = -ENOMEM;
->   			goto err_free_in_sync;
+> [1] https://lore.kernel.org/all/3ed356488c9b0ca93845501425d427309f4cf616.camel@redhat.com/
+> [2] https://gitlab.freedesktop.org/bskeggs/nouveau/-/tree/00.03-module
+> 
+> *** BLURB HERE ***
+> 
+> Ben Skeggs (2):
+>   drm/nouveau/nvkm: export symbols needed by the drm driver
+>   drm/nouveau/nvkm: separate out into nvkm.ko
+> 
+>  drivers/gpu/drm/nouveau/Kbuild                      |  4 ++--
+>  drivers/gpu/drm/nouveau/include/nvkm/core/module.h  |  3 ---
+>  drivers/gpu/drm/nouveau/nouveau_drm.c               | 10 +---------
+>  drivers/gpu/drm/nouveau/nvkm/core/driver.c          |  1 +
+>  drivers/gpu/drm/nouveau/nvkm/core/gpuobj.c          |  2 ++
+>  drivers/gpu/drm/nouveau/nvkm/core/mm.c              |  4 ++++
+>  drivers/gpu/drm/nouveau/nvkm/device/acpi.c          |  1 +
+>  drivers/gpu/drm/nouveau/nvkm/engine/gr/base.c       |  1 +
+>  drivers/gpu/drm/nouveau/nvkm/module.c               |  8 ++++++--
+>  drivers/gpu/drm/nouveau/nvkm/subdev/bios/init.c     |  1 +
+>  drivers/gpu/drm/nouveau/nvkm/subdev/bios/pll.c      |  1 +
+>  drivers/gpu/drm/nouveau/nvkm/subdev/fb/base.c       |  3 +++
+>  drivers/gpu/drm/nouveau/nvkm/subdev/gpio/base.c     |  3 +++
+>  drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c      |  2 ++
+>  drivers/gpu/drm/nouveau/nvkm/subdev/i2c/bus.c       |  1 +
+>  drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c |  1 +
+>  drivers/gpu/drm/nouveau/nvkm/subdev/therm/base.c    |  1 +
+>  drivers/gpu/drm/nouveau/nvkm/subdev/therm/fan.c     |  1 +
+>  drivers/gpu/drm/nouveau/nvkm/subdev/volt/base.c     |  1 +
+>  19 files changed, 33 insertions(+), 16 deletions(-)
+> 
+> -- 
+> 2.44.0
+> 
 
