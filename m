@@ -2,19 +2,19 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C51D6C87262
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:48:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E650C871C8
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:47:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AFF7C10E4D7;
-	Tue, 25 Nov 2025 20:47:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DF13710E480;
+	Tue, 25 Nov 2025 20:47:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="Kjh5TorH";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="SHrBazZ9";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1E29B10E710;
- Tue, 18 Jun 2024 16:18:29 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0EF0610E790;
+ Tue, 18 Jun 2024 20:45:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
  s=20170329;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
@@ -22,24 +22,24 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YJvIf2DDEFs4F7cl6mRoHHDrlRyogLF3aAA6llHTpMM=; b=Kjh5TorHWywtTOKU3DR8seE9DT
- J1P6eLTtgK4qTlj1CMVS13+GAY70esJ3ef2HogKsoiqh3fri7T5xblTJ/6SecVCjcr0bF/SjgDtju
- mxpYCRqVNrSUd8SSb6v3+tn/mh1qzT/vKLbemhu3EWRPIz37DRBDDYNopMWKboku066wF+ZC7lBNH
- /AHAcfHPHXVhRQfCBcsGUxBlUTKyi06lubS4wwy70jCElT81E0XG/+099c4XI1INCXVveu/9F0r0K
- iGa6noh+fZQ0JkimLwpUbtwmoYweHKBhmvzpkKar/2LYRsAfAk+5LzuHq/IW5d5vvZew3yNanZZKG
- b4isgE7A==;
-Received: from [177.172.122.99] (helo=[192.168.15.100])
+ bh=NILpwn3nKSsVCdGL6dYtaZa5d4B531Bu8ZLW1v15jDk=; b=SHrBazZ9Oht6tUv5yhC8XwkKK+
+ Z7JGsPM+a/7GhYejyrGhkwh1ot8052qYKHbHdeAkexjOrRzTD2mDHV/Ka4jW4lh+M7h1vR28IeMKZ
+ fOiGepg1UK257Qtl3xf32caYoywveRgUvs0jhCsTeztWXILLhVYruj6GYOwiQ8ohGKrlvHkrQFK7w
+ I4NDd3vq+4e0dcJrL8KwxUBibvRDXO0WLUTBe19G3cbrAPfPqNnErWSjrY/40V2b48xWXFyHsHwx1
+ k8Qnx6eIpMpWPpQ5gVtRaXAYhWid/hHIqsJMext0a5RysOgffmuK9Ji9l3RfzxeWo8KAWk7aFgUK4
+ RDb7CAjg==;
+Received: from [179.193.2.197] (helo=[192.168.15.100])
  by fanzine2.igalia.com with esmtpsa 
  (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
- id 1sJbXI-004na1-TW; Tue, 18 Jun 2024 18:18:21 +0200
-Message-ID: <fc67b552-6f61-4f30-9e34-dd6b2364d155@igalia.com>
-Date: Tue, 18 Jun 2024 13:18:10 -0300
+ id 1sJfhi-004sjC-0i; Tue, 18 Jun 2024 22:45:22 +0200
+Message-ID: <92595a28-fcc3-4a5e-bfcb-bd25aca603b9@igalia.com>
+Date: Tue, 18 Jun 2024 17:45:12 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v7 2/9] drm: Support per-plane async flip configuration
-To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Jani Nikula <jani.nikula@linux.intel.com>
-Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: Jani Nikula <jani.nikula@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
  nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  kernel-dev@igalia.com, Melissa Wen <mwen@igalia.com>,
@@ -61,9 +61,11 @@ Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
 References: <20240618030024.500532-1-andrealmeid@igalia.com>
  <20240618030024.500532-3-andrealmeid@igalia.com> <878qz2h9pp.fsf@intel.com>
  <CAA8EJpqM4iaG3PKM5c0Op7Y7c1SRDrOCk_oOnwG8YfdCxC8w6g@mail.gmail.com>
+ <fc67b552-6f61-4f30-9e34-dd6b2364d155@igalia.com>
+ <aflfggx2dc2p3y2a76yecjgmahozmbpnkk2qpekrnkpvviih6i@g2uuxeubozbo>
 Content-Language: en-US
 From: =?UTF-8?Q?Andr=C3=A9_Almeida?= <andrealmeid@igalia.com>
-In-Reply-To: <CAA8EJpqM4iaG3PKM5c0Op7Y7c1SRDrOCk_oOnwG8YfdCxC8w6g@mail.gmail.com>
+In-Reply-To: <aflfggx2dc2p3y2a76yecjgmahozmbpnkk2qpekrnkpvviih6i@g2uuxeubozbo>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:22 +0000
@@ -81,55 +83,91 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Em 18/06/2024 07:07, Dmitry Baryshkov escreveu:
-> On Tue, 18 Jun 2024 at 12:38, Jani Nikula <jani.nikula@linux.intel.com> wrote:
->>
->> On Tue, 18 Jun 2024, André Almeida <andrealmeid@igalia.com> wrote:
->>> Drivers have different capabilities on what plane types they can or
->>> cannot perform async flips. Create a plane::async_flip field so each
->>> driver can choose which planes they allow doing async flips.
+Em 18/06/2024 14:43, Dmitry Baryshkov escreveu:
+> On Tue, Jun 18, 2024 at 01:18:10PM GMT, André Almeida wrote:
+>> Em 18/06/2024 07:07, Dmitry Baryshkov escreveu:
+>>> On Tue, 18 Jun 2024 at 12:38, Jani Nikula <jani.nikula@linux.intel.com> wrote:
+>>>>
+>>>> On Tue, 18 Jun 2024, André Almeida <andrealmeid@igalia.com> wrote:
+>>>>> Drivers have different capabilities on what plane types they can or
+>>>>> cannot perform async flips. Create a plane::async_flip field so each
+>>>>> driver can choose which planes they allow doing async flips.
+>>>>>
+>>>>> Signed-off-by: André Almeida <andrealmeid@igalia.com>
+>>>>> ---
+>>>>>    include/drm/drm_plane.h | 5 +++++
+>>>>>    1 file changed, 5 insertions(+)
+>>>>>
+>>>>> diff --git a/include/drm/drm_plane.h b/include/drm/drm_plane.h
+>>>>> index 9507542121fa..0bebc72af5c3 100644
+>>>>> --- a/include/drm/drm_plane.h
+>>>>> +++ b/include/drm/drm_plane.h
+>>>>> @@ -786,6 +786,11 @@ struct drm_plane {
+>>>>>          * @kmsg_panic: Used to register a panic notifier for this plane
+>>>>>          */
+>>>>>         struct kmsg_dumper kmsg_panic;
+>>>>> +
+>>>>> +     /**
+>>>>> +      * @async_flip: indicates if a plane can do async flips
+>>>>> +      */
+>>>>
+>>>> When is it okay to set or change the value of this member?
+>>>>
+>>>> If you don't document it, people will find creative uses for this.
 >>>
->>> Signed-off-by: André Almeida <andrealmeid@igalia.com>
->>> ---
->>>   include/drm/drm_plane.h | 5 +++++
->>>   1 file changed, 5 insertions(+)
+>>> Maybe it's better to have a callback instead of a static field? This
+>>> way it becomes clear that it's only relevant at the time of the
+>>> atomic_check().
 >>>
->>> diff --git a/include/drm/drm_plane.h b/include/drm/drm_plane.h
->>> index 9507542121fa..0bebc72af5c3 100644
->>> --- a/include/drm/drm_plane.h
->>> +++ b/include/drm/drm_plane.h
->>> @@ -786,6 +786,11 @@ struct drm_plane {
->>>         * @kmsg_panic: Used to register a panic notifier for this plane
->>>         */
->>>        struct kmsg_dumper kmsg_panic;
->>> +
->>> +     /**
->>> +      * @async_flip: indicates if a plane can do async flips
->>> +      */
 >>
->> When is it okay to set or change the value of this member?
+>> So we would have something like bool (*async_flip) for struct
+>> drm_plane_funcs I suppose. Then each driver will implement this function and
+>> check on runtime if it should flip or not, right?
 >>
->> If you don't document it, people will find creative uses for this.
+>> I agree that it makes more clear, but as far as I can see this is not
+>> something that is subject to being changed at runtime at all, so it seems a
+>> bit overkill to me to encapsulate a static information like that. I prefer
+>> to improve the documentation on the struct member to see if this solves the
+>> problem. What do you think of the following comment:
 > 
-> Maybe it's better to have a callback instead of a static field? This
-> way it becomes clear that it's only relevant at the time of the
-> atomic_check().
+> It looks like I keep on mixing async_flips as handled via the
+> DRM_MODE_PAGE_FLIP_ASYNC and the plane flips that are governed by
+> .atomic_async_check / .atomic_async_update / drm_atomic_helper_check()
+> and which end up being used just for legacy cursor updates.
+> 
+> So, yes, those are two different code paths, but with your changes I
+> think it becomes even easier to get confused between
+> atomic_async_check() and .async_flip member.
 > 
 
-So we would have something like bool (*async_flip) for struct 
-drm_plane_funcs I suppose. Then each driver will implement this function 
-and check on runtime if it should flip or not, right?
+I see, now that I read about atomic_async_check(), it got me confused as 
+well :)
 
-I agree that it makes more clear, but as far as I can see this is not 
-something that is subject to being changed at runtime at all, so it 
-seems a bit overkill to me to encapsulate a static information like 
-that. I prefer to improve the documentation on the struct member to see 
-if this solves the problem. What do you think of the following comment:
+I see that drivers define atomic_async_check() to tell DRM whether or 
+not such plane is able to do async flips... just like I'm trying to do 
+here. amdgpu implementation for that function is almost the opposite of 
+the restrictions that I've implemented in this patchset:
 
-/**
-  * @async_flip: indicates if a plane can perform async flips. The
-  * driver should set this true only for planes that the hardware
-  * supports flipping asynchronously. It may not be changed during
-  * runtime. This field is checked inside drm_mode_atomic_ioctl() to
-  * allow only the correct planes to go with DRM_MODE_PAGE_FLIP_ASYNC.
-  */
+int amdgpu_dm_plane_atomic_async_check(...) {
+	/* Only support async updates on cursor planes. */
+	if (plane->type != DRM_PLANE_TYPE_CURSOR)
+		return -EINVAL;
+
+	return 0;
+}
+
+Anyway, I'll try to see if the legacy cursor path might be incorporated 
+somehow in the DRM_MODE_PAGE_FLIP_ASYNC path, or to come up with 
+something that makes them more distinguishable.
+
+Thanks!
+
+> 
+>> /**
+>>   * @async_flip: indicates if a plane can perform async flips. The
+>>   * driver should set this true only for planes that the hardware
+>>   * supports flipping asynchronously. It may not be changed during
+>>   * runtime. This field is checked inside drm_mode_atomic_ioctl() to
+>>   * allow only the correct planes to go with DRM_MODE_PAGE_FLIP_ASYNC.
+>>   */
+> 
