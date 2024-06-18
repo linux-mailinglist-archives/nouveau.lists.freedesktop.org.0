@@ -2,74 +2,80 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECD4B90C556
-	for <lists+nouveau@lfdr.de>; Tue, 18 Jun 2024 11:31:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F05D90C56D
+	for <lists+nouveau@lfdr.de>; Tue, 18 Jun 2024 11:38:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5BCBA10E5FF;
-	Tue, 18 Jun 2024 09:31:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CE03810E610;
+	Tue, 18 Jun 2024 09:38:42 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="KpXn9f1h";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="jdTAddo5";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
- [209.85.221.53])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E6E9410E601
- for <nouveau@lists.freedesktop.org>; Tue, 18 Jun 2024 09:31:14 +0000 (UTC)
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-35904026d72so476039f8f.3
- for <nouveau@lists.freedesktop.org>; Tue, 18 Jun 2024 02:31:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google; t=1718703073; x=1719307873; darn=lists.freedesktop.org; 
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=AjCqaadfaUUjMeT7paTPDvr56RvpDbYR++opJ2dRPII=;
- b=KpXn9f1hOi2Yojsn+6wbP12eXdrENy0XM0bwJpZkCK0t7YbPbaVgHJyJ1wBiBEhSrI
- zPiCehTxS08gccRLzqWDWVBrKtsd2zJ20RnEtaq4f4VqM+uGU6fKJ/td+BWb07kCXzJe
- U/MlYIWZ5i/VD/2/sMAPhiQr7xH/EQeEiEM8w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718703073; x=1719307873;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=AjCqaadfaUUjMeT7paTPDvr56RvpDbYR++opJ2dRPII=;
- b=P8tYKKxU2g+FYxNfqOmUG9Vtu4QcK9bBLxpvlIXmJAIkMPWisFzQ41mfT5kz3Sm7bt
- QrdfOkgPzcAyqcKdy+4NF/ewGurDMS83rXonKf73hwcAFoJxNHo8uPGkEofTifSzmQBr
- ZrjagGZ8XpuDhawi9Yzadh6KiJcvPwIWCRACuga4vThfHsq/uYN6aVo329ebsEWV9UqT
- 7F5yCkKWcwGLatUsQKec5byoelGUmjXDfoq/zCOL3thxOxqAzm99XfAuX5wgHNaEOQcf
- 8zbQW3RW1KKobzDMfgucYE0Ch1QbMAf6JCDiMVRQsaihfd0+YzwhUTcDcH4iO8LRcMGI
- LrEQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWUy4qzt2I/jg2DIPQW5dEBs+/06APTV9wsHSLZPeGpYTiqDjQLNAk+eMjEzKrvEYDLkAYTQcA2sCc9MP+uixvUm5BYht9r39XThPdY2A==
-X-Gm-Message-State: AOJu0YxqMPlfX7UhFE2pYU7HwRbCW/yBIHXG1Mqtdevc4CSLZwQ24DZT
- TAY/1Yc8y42Z0s0+UEBLHXLTBAAQg/cRWivMoOcZbaTbzYt1/435CVY5AYyBUI2xYF2TYb5Y5kf
- 5
-X-Google-Smtp-Source: AGHT+IHZKdFICWmVVUU27o03WaTapDIDPXbCjPM2F84jp87bVbeAoOl97/4FoHYkjs5nURGnZskBDw==
-X-Received: by 2002:a05:600c:1d1b:b0:421:74d4:f32c with SMTP id
- 5b1f17b1804b1-42304d7f7b9mr89538005e9.1.1718703072978; 
- Tue, 18 Jun 2024 02:31:12 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-422874de618sm222337225e9.37.2024.06.18.02.31.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 02:31:12 -0700 (PDT)
-Date: Tue, 18 Jun 2024 11:31:10 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Ben Skeggs <bskeggs@nvidia.com>
-Cc: Daniel Vetter <daniel@ffwll.ch>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
-Subject: Re: [RFC] GPU driver with separate "core" and "DRM" modules
-Message-ID: <ZnFT3u9S-qf8M5Bf@phenom.ffwll.local>
-References: <20240613170211.88779-1-bskeggs@nvidia.com>
- <ZnBARgjk-83NXC5S@phenom.ffwll.local>
- <f5dc9d9e-23ac-4dec-a76a-c2a44ae158f4@nvidia.com>
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 093B010E607;
+ Tue, 18 Jun 2024 09:38:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1718703520; x=1750239520;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version:content-transfer-encoding;
+ bh=QenCB3euq69QSB//DNTS+Hjnrm1i70bry2vnqFA0Xns=;
+ b=jdTAddo5r9wk4ihplKkCPVsKLpjzLIF8enlC3fXWtbd78LSWIW/lWruP
+ l940wLds9UHU+8syqnDE6S0GPk85xLexobd68NPVeTgFj71XlbjBZHCTh
+ NitWfzj7AlCNwU/ez/R0FhIlEKgs88k6O7Jqadmt9M5JBi4DGeZBFtZgp
+ U3Rr9zfwmW6uwwYBLHMJHL//Eztdh3epIqE7Yg+Kdj+lKfGRZSXTHeXe2
+ QeNynxLVLy9BpB1nfCLef9psRBjUyB+vq5Yzo9Dtn/gyRTQuqeBVGsza4
+ CSht8xoZfjPaoy97/j0ChmDlid8OBv2WrZekPfk7Zxv+MefFey/5t8RbX Q==;
+X-CSE-ConnectionGUID: JZ6PkSu/Tli1IY3GeHEPXQ==
+X-CSE-MsgGUID: aTHy11FCQXGA3UktqvWX8A==
+X-IronPort-AV: E=McAfee;i="6700,10204,11106"; a="40973750"
+X-IronPort-AV: E=Sophos;i="6.08,247,1712646000"; d="scan'208";a="40973750"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+ by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 Jun 2024 02:38:39 -0700
+X-CSE-ConnectionGUID: 8q3IjEVeRvOFZ8qUIH04zg==
+X-CSE-MsgGUID: w6BdYPq0TguAHoQ8bDknCg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.08,247,1712646000"; d="scan'208";a="64724227"
+Received: from bergbenj-mobl1.ger.corp.intel.com (HELO localhost)
+ ([10.245.246.176])
+ by fmviesa002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 Jun 2024 02:38:29 -0700
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: =?utf-8?Q?Andr=C3=A9?= Almeida <andrealmeid@igalia.com>,
+ dri-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, Dmitry Baryshkov
+ <dmitry.baryshkov@linaro.org>
+Cc: kernel-dev@igalia.com, Melissa Wen <mwen@igalia.com>,
+ alexander.deucher@amd.com, christian.koenig@amd.com, Simon Ser
+ <contact@emersion.fr>, Pekka Paalanen <ppaalanen@gmail.com>,
+ daniel@ffwll.ch, Daniel Stone <daniel@fooishbar.org>, 'Marek
+ =?utf-8?B?T2zFocOhayc=?=
+ <maraeo@gmail.com>, Dave Airlie <airlied@gmail.com>,
+ ville.syrjala@linux.intel.com, Xaver Hugl <xaver.hugl@gmail.com>, Joshua
+ Ashton <joshua@froggi.es>, Michel =?utf-8?Q?D=C3=A4nzer?=
+ <michel.daenzer@mailbox.org>, Sam
+ Ravnborg <sam@ravnborg.org>, Boris Brezillon <bbrezillon@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
+ <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Nicolas
+ Ferre <nicolas.ferre@microchip.com>, Alexandre Belloni
+ <alexandre.belloni@bootlin.com>, Claudiu Beznea
+ <claudiu.beznea@tuxon.dev>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Karol
+ Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, =?utf-8?Q?And?=
+ =?utf-8?Q?r=C3=A9?= Almeida <andrealmeid@igalia.com>
+Subject: Re: [PATCH v7 2/9] drm: Support per-plane async flip configuration
+In-Reply-To: <20240618030024.500532-3-andrealmeid@igalia.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20240618030024.500532-1-andrealmeid@igalia.com>
+ <20240618030024.500532-3-andrealmeid@igalia.com>
+Date: Tue, 18 Jun 2024 12:38:26 +0300
+Message-ID: <878qz2h9pp.fsf@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <f5dc9d9e-23ac-4dec-a76a-c2a44ae158f4@nvidia.com>
-X-Operating-System: Linux phenom 6.8.9-amd64 
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,112 +90,41 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Jun 18, 2024 at 04:23:17AM +1000, Ben Skeggs wrote:
-> On 17/6/24 23:55, Daniel Vetter wrote:
-> 
-> > On Fri, Jun 14, 2024 at 03:02:09AM +1000, Ben Skeggs wrote:
-> > > NVIDIA has been exploring ways to better support the effort for an
-> > > upstream kernel mode driver for GPUs that are capable of running GSP-RM
-> > > firmware, since the introduction[1] to Nova.
-> > > 
-> > > Use cases have been identified for which separating the core GPU
-> > > programming out of the full DRM driver stack is a strong requirement
-> > > from our key customers.
-> > > 
-> > > An upstreamed NVIDIA GPU driver should be able to support current and
-> > > emerging customer use cases for vGPU hosts.  NVIDIA's vGPU deployments
-> > > to date do not support compute or graphics functionality within the
-> > > hypervisor host, and have no dependency on the Linux graphics subsystem,
-> > > instead implementing the minimal functionality required to run vGPU
-> > > guest VMs.
-> > > 
-> > > For security-sensitive environments such as cloud infrastructure, it's
-> > > important to continue support for running a minimal footprint vGPU host
-> > > driver in a stripped-down / barebones kernel environment.
-> > > 
-> > > This can be achieved by supporting both VFIO and DRM drivers as clients
-> > > of a core driver, without requiring a full-fledged DRM driver (or the
-> > > DRM subsystem itself) to be built into the host kernel.
-> > > 
-> > > A core driver would be responsible for booting and communicating with
-> > > GSP-RM, enumeration of HW configuration, shared/partitioned resource
-> > > management, exception handling, and event dispatch.
-> > > 
-> > > The DRM driver would do all the standard things a DRM driver does, and
-> > > implement GPU memory management (TTM/HMM), KMS, command submission etc,
-> > > as well as providing UAPI for userspace clients.  These features would
-> > > be implemented using HW resources allocated from a core driver, rather
-> > > than the DRM driver being directly responsible for HW programming.
-> > > 
-> > > As Nouveau's KMD is already split (in the logical sense) along similar
-> > > lines, we're using it here for the purposes of this RFC to demonstrate
-> > > the feasibility of such an architecture, and open it up for discussion.
-> > Sounds reasonable.
-> > 
-> > Only bikeshed I have to add is that the blessed way (according to the cool
-> > kernel maintainers at least or something) to structure this is using
-> > auxbus. Definitely when you end up with more than one driver binding to
-> > the core (like maybe some system management interface thing, or perhaps a
-> > special compute-only kernel driver).
-> > 
-> > https://dri.freedesktop.org/docs/drm/driver-api/auxiliary_bus.html
-> 
-> Hey!
-> 
-> Yes indeed.  I sent this[1] series at the same time, which was initially
-> written to so that nouveau.ko would still get auto-loaded alongside nvkm.ko.
-> 
-> Ben.
-> 
-> 
-> [1] https://lists.freedesktop.org/archives/nouveau/2024-June/044861.html
+On Tue, 18 Jun 2024, Andr=C3=A9 Almeida <andrealmeid@igalia.com> wrote:
+> Drivers have different capabilities on what plane types they can or
+> cannot perform async flips. Create a plane::async_flip field so each
+> driver can choose which planes they allow doing async flips.
+>
+> Signed-off-by: Andr=C3=A9 Almeida <andrealmeid@igalia.com>
+> ---
+>  include/drm/drm_plane.h | 5 +++++
+>  1 file changed, 5 insertions(+)
+>
+> diff --git a/include/drm/drm_plane.h b/include/drm/drm_plane.h
+> index 9507542121fa..0bebc72af5c3 100644
+> --- a/include/drm/drm_plane.h
+> +++ b/include/drm/drm_plane.h
+> @@ -786,6 +786,11 @@ struct drm_plane {
+>  	 * @kmsg_panic: Used to register a panic notifier for this plane
+>  	 */
+>  	struct kmsg_dumper kmsg_panic;
+> +
+> +	/**
+> +	 * @async_flip: indicates if a plane can do async flips
+> +	 */
 
-Oh I missed that you've already typed up the aux bus conversion somewhere.
-I guess just land it all :-)
--Sima
+When is it okay to set or change the value of this member?
 
-> 
-> 
-> > 
-> > Cheers, Sima
-> > 
-> > > A link[2] to a tree containing the patches is below.
-> > > 
-> > > [1] https://lore.kernel.org/all/3ed356488c9b0ca93845501425d427309f4cf616.camel@redhat.com/
-> > > [2] https://gitlab.freedesktop.org/bskeggs/nouveau/-/tree/00.03-module
-> > > 
-> > > *** BLURB HERE ***
-> > > 
-> > > Ben Skeggs (2):
-> > >    drm/nouveau/nvkm: export symbols needed by the drm driver
-> > >    drm/nouveau/nvkm: separate out into nvkm.ko
-> > > 
-> > >   drivers/gpu/drm/nouveau/Kbuild                      |  4 ++--
-> > >   drivers/gpu/drm/nouveau/include/nvkm/core/module.h  |  3 ---
-> > >   drivers/gpu/drm/nouveau/nouveau_drm.c               | 10 +---------
-> > >   drivers/gpu/drm/nouveau/nvkm/core/driver.c          |  1 +
-> > >   drivers/gpu/drm/nouveau/nvkm/core/gpuobj.c          |  2 ++
-> > >   drivers/gpu/drm/nouveau/nvkm/core/mm.c              |  4 ++++
-> > >   drivers/gpu/drm/nouveau/nvkm/device/acpi.c          |  1 +
-> > >   drivers/gpu/drm/nouveau/nvkm/engine/gr/base.c       |  1 +
-> > >   drivers/gpu/drm/nouveau/nvkm/module.c               |  8 ++++++--
-> > >   drivers/gpu/drm/nouveau/nvkm/subdev/bios/init.c     |  1 +
-> > >   drivers/gpu/drm/nouveau/nvkm/subdev/bios/pll.c      |  1 +
-> > >   drivers/gpu/drm/nouveau/nvkm/subdev/fb/base.c       |  3 +++
-> > >   drivers/gpu/drm/nouveau/nvkm/subdev/gpio/base.c     |  3 +++
-> > >   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c      |  2 ++
-> > >   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/bus.c       |  1 +
-> > >   drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c |  1 +
-> > >   drivers/gpu/drm/nouveau/nvkm/subdev/therm/base.c    |  1 +
-> > >   drivers/gpu/drm/nouveau/nvkm/subdev/therm/fan.c     |  1 +
-> > >   drivers/gpu/drm/nouveau/nvkm/subdev/volt/base.c     |  1 +
-> > >   19 files changed, 33 insertions(+), 16 deletions(-)
-> > > 
-> > > -- 
-> > > 2.44.0
-> > > 
+If you don't document it, people will find creative uses for this.
 
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+BR,
+Jani.
+
+
+> +	bool async_flip;
+>  };
+>=20=20
+>  #define obj_to_plane(x) container_of(x, struct drm_plane, base)
+
+--=20
+Jani Nikula, Intel
