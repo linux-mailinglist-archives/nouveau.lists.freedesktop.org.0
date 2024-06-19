@@ -2,73 +2,80 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E650C871C8
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:47:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27AA1CBAC7F
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DF13710E480;
-	Tue, 25 Nov 2025 20:47:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D4E8610EAC2;
+	Sat, 13 Dec 2025 12:41:08 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="SHrBazZ9";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="cFFqLOfv";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0EF0610E790;
- Tue, 18 Jun 2024 20:45:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
- s=20170329;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NILpwn3nKSsVCdGL6dYtaZa5d4B531Bu8ZLW1v15jDk=; b=SHrBazZ9Oht6tUv5yhC8XwkKK+
- Z7JGsPM+a/7GhYejyrGhkwh1ot8052qYKHbHdeAkexjOrRzTD2mDHV/Ka4jW4lh+M7h1vR28IeMKZ
- fOiGepg1UK257Qtl3xf32caYoywveRgUvs0jhCsTeztWXILLhVYruj6GYOwiQ8ohGKrlvHkrQFK7w
- I4NDd3vq+4e0dcJrL8KwxUBibvRDXO0WLUTBe19G3cbrAPfPqNnErWSjrY/40V2b48xWXFyHsHwx1
- k8Qnx6eIpMpWPpQ5gVtRaXAYhWid/hHIqsJMext0a5RysOgffmuK9Ji9l3RfzxeWo8KAWk7aFgUK4
- RDb7CAjg==;
-Received: from [179.193.2.197] (helo=[192.168.15.100])
- by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
- id 1sJfhi-004sjC-0i; Tue, 18 Jun 2024 22:45:22 +0200
-Message-ID: <92595a28-fcc3-4a5e-bfcb-bd25aca603b9@igalia.com>
-Date: Tue, 18 Jun 2024 17:45:12 -0300
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 099E810ED74;
+ Wed, 19 Jun 2024 18:26:54 +0000 (UTC)
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45JEw3Nm025061;
+ Wed, 19 Jun 2024 18:26:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ JATlb9CSfXVF9/tchTt64JGPel3o+cysxTNpcdLTY58=; b=cFFqLOfvlR5r+nbk
+ Prc/+9JsNBGIT6hR2knBQGrxmnys9QcvSuNImliSfWEW8ZJGFAf2TAySmxo3bpqM
+ qU4a1hLsbyfQDvIttp5ZljYGIXCccpJdfTNgSZw3fOthKQfyjfQ1j0kWb7u7rHxc
+ /E2DdBY404xuTr9yeydt/Qs7RkBdBIYZLPVKL+Ft5tNg55SFWuiRt5vHn4oP4oO6
+ Za+io6MB7+/9KFb3kuModlufTktK7IUjzHqb8K8fzxJqEeWF8tN6u65YJP8ZOCdb
+ du1sMzwtnn/oZwTck5NNx/p8kg1luFT8+fWM/PQAbZnuOHKtGcvH2uNTXkEWEyu6
+ iSDp/A==
+Received: from nalasppmta02.qualcomm.com (Global_NAT1.qualcomm.com
+ [129.46.96.20])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3yv1j90ebc-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 19 Jun 2024 18:26:53 +0000 (GMT)
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com
+ [10.47.209.196])
+ by NALASPPMTA02.qualcomm.com (8.17.1.19/8.17.1.19) with ESMTPS id
+ 45JIQqN8032573
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 19 Jun 2024 18:26:52 GMT
+Received: from [10.81.24.74] (10.49.16.6) by nalasex01a.na.qualcomm.com
+ (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Wed, 19 Jun
+ 2024 11:26:52 -0700
+Message-ID: <a8ab46d9-8845-4635-9742-11525dd843b0@quicinc.com>
+Date: Wed, 19 Jun 2024 11:26:51 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 2/9] drm: Support per-plane async flip configuration
-To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Cc: Jani Nikula <jani.nikula@linux.intel.com>,
- dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- kernel-dev@igalia.com, Melissa Wen <mwen@igalia.com>,
- alexander.deucher@amd.com, christian.koenig@amd.com,
- Simon Ser <contact@emersion.fr>, Pekka Paalanen <ppaalanen@gmail.com>,
- daniel@ffwll.ch, Daniel Stone <daniel@fooishbar.org>,
- =?UTF-8?B?TWFyZWsgT2zFocOhaw==?= <maraeo@gmail.com>,
- Dave Airlie <airlied@gmail.com>, ville.syrjala@linux.intel.com,
- Xaver Hugl <xaver.hugl@gmail.com>, Joshua Ashton <joshua@froggi.es>,
- =?UTF-8?Q?Michel_D=C3=A4nzer?= <michel.daenzer@mailbox.org>,
- Sam Ravnborg <sam@ravnborg.org>, Boris Brezillon <bbrezillon@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Nicolas Ferre <nicolas.ferre@microchip.com>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>,
- Claudiu Beznea <claudiu.beznea@tuxon.dev>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>
-References: <20240618030024.500532-1-andrealmeid@igalia.com>
- <20240618030024.500532-3-andrealmeid@igalia.com> <878qz2h9pp.fsf@intel.com>
- <CAA8EJpqM4iaG3PKM5c0Op7Y7c1SRDrOCk_oOnwG8YfdCxC8w6g@mail.gmail.com>
- <fc67b552-6f61-4f30-9e34-dd6b2364d155@igalia.com>
- <aflfggx2dc2p3y2a76yecjgmahozmbpnkk2qpekrnkpvviih6i@g2uuxeubozbo>
+Subject: Re: [PATCH 2/2] drm/nouveau/nvkm: separate out into nvkm.ko
+To: Ben Skeggs <bskeggs@nvidia.com>, <nouveau@lists.freedesktop.org>,
+ <dri-devel@lists.freedesktop.org>
+References: <20240613170211.88779-1-bskeggs@nvidia.com>
+ <20240613170211.88779-3-bskeggs@nvidia.com>
 Content-Language: en-US
-From: =?UTF-8?Q?Andr=C3=A9_Almeida?= <andrealmeid@igalia.com>
-In-Reply-To: <aflfggx2dc2p3y2a76yecjgmahozmbpnkk2qpekrnkpvviih6i@g2uuxeubozbo>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:22 +0000
+From: Jeff Johnson <quic_jjohnson@quicinc.com>
+In-Reply-To: <20240613170211.88779-3-bskeggs@nvidia.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.49.16.6]
+X-ClientProxiedBy: nalasex01a.na.qualcomm.com (10.47.209.196) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-ORIG-GUID: QbsYZvfLszFS-bn6wpMjIjS45RjP20-4
+X-Proofpoint-GUID: QbsYZvfLszFS-bn6wpMjIjS45RjP20-4
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-19_02,2024-06-19_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0
+ impostorscore=0 bulkscore=0 suspectscore=0 mlxlogscore=836
+ lowpriorityscore=0 priorityscore=1501 phishscore=0 mlxscore=0 adultscore=0
+ clxscore=1011 spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2405170001 definitions=main-2406190139
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:45 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,91 +90,13 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Em 18/06/2024 14:43, Dmitry Baryshkov escreveu:
-> On Tue, Jun 18, 2024 at 01:18:10PM GMT, André Almeida wrote:
->> Em 18/06/2024 07:07, Dmitry Baryshkov escreveu:
->>> On Tue, 18 Jun 2024 at 12:38, Jani Nikula <jani.nikula@linux.intel.com> wrote:
->>>>
->>>> On Tue, 18 Jun 2024, André Almeida <andrealmeid@igalia.com> wrote:
->>>>> Drivers have different capabilities on what plane types they can or
->>>>> cannot perform async flips. Create a plane::async_flip field so each
->>>>> driver can choose which planes they allow doing async flips.
->>>>>
->>>>> Signed-off-by: André Almeida <andrealmeid@igalia.com>
->>>>> ---
->>>>>    include/drm/drm_plane.h | 5 +++++
->>>>>    1 file changed, 5 insertions(+)
->>>>>
->>>>> diff --git a/include/drm/drm_plane.h b/include/drm/drm_plane.h
->>>>> index 9507542121fa..0bebc72af5c3 100644
->>>>> --- a/include/drm/drm_plane.h
->>>>> +++ b/include/drm/drm_plane.h
->>>>> @@ -786,6 +786,11 @@ struct drm_plane {
->>>>>          * @kmsg_panic: Used to register a panic notifier for this plane
->>>>>          */
->>>>>         struct kmsg_dumper kmsg_panic;
->>>>> +
->>>>> +     /**
->>>>> +      * @async_flip: indicates if a plane can do async flips
->>>>> +      */
->>>>
->>>> When is it okay to set or change the value of this member?
->>>>
->>>> If you don't document it, people will find creative uses for this.
->>>
->>> Maybe it's better to have a callback instead of a static field? This
->>> way it becomes clear that it's only relevant at the time of the
->>> atomic_check().
->>>
->>
->> So we would have something like bool (*async_flip) for struct
->> drm_plane_funcs I suppose. Then each driver will implement this function and
->> check on runtime if it should flip or not, right?
->>
->> I agree that it makes more clear, but as far as I can see this is not
->> something that is subject to being changed at runtime at all, so it seems a
->> bit overkill to me to encapsulate a static information like that. I prefer
->> to improve the documentation on the struct member to see if this solves the
->> problem. What do you think of the following comment:
-> 
-> It looks like I keep on mixing async_flips as handled via the
-> DRM_MODE_PAGE_FLIP_ASYNC and the plane flips that are governed by
-> .atomic_async_check / .atomic_async_update / drm_atomic_helper_check()
-> and which end up being used just for legacy cursor updates.
-> 
-> So, yes, those are two different code paths, but with your changes I
-> think it becomes even easier to get confused between
-> atomic_async_check() and .async_flip member.
-> 
+On 6/13/24 10:02, Ben Skeggs wrote:
+> Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
+...
+> +
+> +MODULE_LICENSE("GPL and additional rights");
+> +module_init(nvkm_init);
+> +module_exit(nvkm_exit);
 
-I see, now that I read about atomic_async_check(), it got me confused as 
-well :)
+missing MODULE_DESCRIPTION() which will cause a warning with make W=1
 
-I see that drivers define atomic_async_check() to tell DRM whether or 
-not such plane is able to do async flips... just like I'm trying to do 
-here. amdgpu implementation for that function is almost the opposite of 
-the restrictions that I've implemented in this patchset:
-
-int amdgpu_dm_plane_atomic_async_check(...) {
-	/* Only support async updates on cursor planes. */
-	if (plane->type != DRM_PLANE_TYPE_CURSOR)
-		return -EINVAL;
-
-	return 0;
-}
-
-Anyway, I'll try to see if the legacy cursor path might be incorporated 
-somehow in the DRM_MODE_PAGE_FLIP_ASYNC path, or to come up with 
-something that makes them more distinguishable.
-
-Thanks!
-
-> 
->> /**
->>   * @async_flip: indicates if a plane can perform async flips. The
->>   * driver should set this true only for planes that the hardware
->>   * supports flipping asynchronously. It may not be changed during
->>   * runtime. This field is checked inside drm_mode_atomic_ioctl() to
->>   * allow only the correct planes to go with DRM_MODE_PAGE_FLIP_ASYNC.
->>   */
-> 
