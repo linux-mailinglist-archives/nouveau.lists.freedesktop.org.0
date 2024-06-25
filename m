@@ -2,80 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27AA1CBAC7F
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B095DCBA9CB
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D4E8610EAC2;
-	Sat, 13 Dec 2025 12:41:08 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="cFFqLOfv";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id BCEAD10EA19;
+	Sat, 13 Dec 2025 12:40:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 099E810ED74;
- Wed, 19 Jun 2024 18:26:54 +0000 (UTC)
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45JEw3Nm025061;
- Wed, 19 Jun 2024 18:26:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- JATlb9CSfXVF9/tchTt64JGPel3o+cysxTNpcdLTY58=; b=cFFqLOfvlR5r+nbk
- Prc/+9JsNBGIT6hR2knBQGrxmnys9QcvSuNImliSfWEW8ZJGFAf2TAySmxo3bpqM
- qU4a1hLsbyfQDvIttp5ZljYGIXCccpJdfTNgSZw3fOthKQfyjfQ1j0kWb7u7rHxc
- /E2DdBY404xuTr9yeydt/Qs7RkBdBIYZLPVKL+Ft5tNg55SFWuiRt5vHn4oP4oO6
- Za+io6MB7+/9KFb3kuModlufTktK7IUjzHqb8K8fzxJqEeWF8tN6u65YJP8ZOCdb
- du1sMzwtnn/oZwTck5NNx/p8kg1luFT8+fWM/PQAbZnuOHKtGcvH2uNTXkEWEyu6
- iSDp/A==
-Received: from nalasppmta02.qualcomm.com (Global_NAT1.qualcomm.com
- [129.46.96.20])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3yv1j90ebc-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 19 Jun 2024 18:26:53 +0000 (GMT)
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com
- [10.47.209.196])
- by NALASPPMTA02.qualcomm.com (8.17.1.19/8.17.1.19) with ESMTPS id
- 45JIQqN8032573
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 19 Jun 2024 18:26:52 GMT
-Received: from [10.81.24.74] (10.49.16.6) by nalasex01a.na.qualcomm.com
- (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Wed, 19 Jun
- 2024 11:26:52 -0700
-Message-ID: <a8ab46d9-8845-4635-9742-11525dd843b0@quicinc.com>
-Date: Wed, 19 Jun 2024 11:26:51 -0700
+X-Greylist: delayed 443 seconds by postgrey-1.36 at gabe;
+ Tue, 25 Jun 2024 08:18:21 UTC
+Received: from cstnet.cn (smtp21.cstnet.cn [159.226.251.21])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4BE6210E5E2
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Jun 2024 08:18:21 +0000 (UTC)
+Received: from icess-ProLiant-DL380-Gen10.. (unknown [183.174.60.14])
+ by APP-01 (Coremail) with SMTP id qwCowACXnRmDe3pmfYGhDA--.39238S2;
+ Tue, 25 Jun 2024 16:10:52 +0800 (CST)
+From: Ma Ke <make24@iscas.ac.cn>
+To: kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com, airlied@gmail.com,
+ daniel@ffwll.ch, make24@iscas.ac.cn
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Subject: [PATCH] drm/nouveau/dispnv04: fix null pointer dereference in
+ nv17_tv_get_hd_modes
+Date: Tue, 25 Jun 2024 16:10:29 +0800
+Message-Id: <20240625081029.2619437-1-make24@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] drm/nouveau/nvkm: separate out into nvkm.ko
-To: Ben Skeggs <bskeggs@nvidia.com>, <nouveau@lists.freedesktop.org>,
- <dri-devel@lists.freedesktop.org>
-References: <20240613170211.88779-1-bskeggs@nvidia.com>
- <20240613170211.88779-3-bskeggs@nvidia.com>
-Content-Language: en-US
-From: Jeff Johnson <quic_jjohnson@quicinc.com>
-In-Reply-To: <20240613170211.88779-3-bskeggs@nvidia.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.49.16.6]
-X-ClientProxiedBy: nalasex01a.na.qualcomm.com (10.47.209.196) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-ORIG-GUID: QbsYZvfLszFS-bn6wpMjIjS45RjP20-4
-X-Proofpoint-GUID: QbsYZvfLszFS-bn6wpMjIjS45RjP20-4
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-19_02,2024-06-19_01,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0
- impostorscore=0 bulkscore=0 suspectscore=0 mlxlogscore=836
- lowpriorityscore=0 priorityscore=1501 phishscore=0 mlxscore=0 adultscore=0
- clxscore=1011 spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2405170001 definitions=main-2406190139
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:45 +0000
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: qwCowACXnRmDe3pmfYGhDA--.39238S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7Cr4DAw4DGrykGFWxAr43Wrg_yoW8JFWDpF
+ 4xGFyYvrnrJF97K3W0y3WDWFWY9a1vkFZ7C34ak39I93ZYyr1qqryUAry3Wry7JFy5GF13
+ trnxtFyqgr18Cr7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9Y14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWUWVWUuwAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVWxJr
+ 0_GcWlnxkEFVAIw20F6cxK64vIFxWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xv
+ F2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r
+ 4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I
+ 648v4I1lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x
+ 0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2
+ zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF
+ 4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWU
+ CwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCT
+ nIWIevJa73UjIFyTuYvjfUOlksUUUUU
+X-Originating-IP: [183.174.60.14]
+X-CM-SenderInfo: ppdnvj2u6l2u1dvotugofq/
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,13 +63,39 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 6/13/24 10:02, Ben Skeggs wrote:
-> Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
-...
-> +
-> +MODULE_LICENSE("GPL and additional rights");
-> +module_init(nvkm_init);
-> +module_exit(nvkm_exit);
+In nv17_tv_get_hd_modes(), the return value of drm_mode_duplicate() is
+assigned to mode, which will lead to a possible NULL pointer dereference
+on failure of drm_mode_duplicate(). The same applies to drm_cvt_mode().
+Add a check to avoid null pointer dereference.
 
-missing MODULE_DESCRIPTION() which will cause a warning with make W=1
+Cc: stable@vger.kernel.org
+Signed-off-by: Ma Ke <make24@iscas.ac.cn>
+---
+ drivers/gpu/drm/nouveau/dispnv04/tvnv17.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+index 670c9739e5e1..9c3dc9a5bb46 100644
+--- a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
++++ b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+@@ -258,6 +258,8 @@ static int nv17_tv_get_hd_modes(struct drm_encoder *encoder,
+ 		if (modes[i].hdisplay == output_mode->hdisplay &&
+ 		    modes[i].vdisplay == output_mode->vdisplay) {
+ 			mode = drm_mode_duplicate(encoder->dev, output_mode);
++			if (!mode)
++				continue;
+ 			mode->type |= DRM_MODE_TYPE_PREFERRED;
+ 
+ 		} else {
+@@ -265,6 +267,8 @@ static int nv17_tv_get_hd_modes(struct drm_encoder *encoder,
+ 					    modes[i].vdisplay, 60, false,
+ 					    (output_mode->flags &
+ 					     DRM_MODE_FLAG_INTERLACE), false);
++			if (!mode)
++				continue;
+ 		}
+ 
+ 		/* CVT modes are sometimes unsuitable... */
+-- 
+2.25.1
 
