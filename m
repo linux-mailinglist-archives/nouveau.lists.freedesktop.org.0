@@ -2,71 +2,85 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF6E4916A82
-	for <lists+nouveau@lfdr.de>; Tue, 25 Jun 2024 16:34:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C18399170ED
+	for <lists+nouveau@lfdr.de>; Tue, 25 Jun 2024 21:11:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1E12510E67F;
-	Tue, 25 Jun 2024 14:34:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5FEF510E714;
+	Tue, 25 Jun 2024 19:11:19 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=web.de header.i=markus.elfring@web.de header.b="u7Fr9UsU";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="NIKw4Pvw";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.web.de (mout.web.de [212.227.17.12])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A609910E31D;
- Tue, 25 Jun 2024 14:34:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
- s=s29768273; t=1719326060; x=1719930860; i=markus.elfring@web.de;
- bh=4hqmfo5ctGH968xUb+z+rr8LiHMCJOdB3zcu6j3LRIo=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:References:
- Subject:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- cc:content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=u7Fr9UsU3M+6VBd5zDYTpRGJhqFvgvzY4YrzX23C5I6Lgp0KbH8vx9cc2MKyZNCp
- dkzT37MWVnNmUEpcdL076Ok7w7LDZVochztC4Ty3iBgmpD70AP8+ZXC9RpH6uPqu+
- D+6Yk7PbqPZQPeUtuCCRyq7FJDub299czeluVijqPMelRaeXRE+zYx0obeXQiPA9B
- G6Pz5Xb1GnoHDYG71clPNaeyEb/HfpC8u8yaGsv20FSeyqlEVKg+E49m7YzwEuSBJ
- N3N4vo+0W6jFwDHR07KswcvJrxnwHdRHEkOiRn2s8TWg6NC3gw8SYEIjmcviicgh1
- 1JHYofBhbeDOo8I7bQ==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [192.168.178.21] ([94.31.85.95]) by smtp.web.de (mrweb105
- [213.165.67.124]) with ESMTPSA (Nemesis) id 1Mkmzl-1sl2f63wn1-00fa6K; Tue, 25
- Jun 2024 16:34:20 +0200
-Message-ID: <c7969a4e-61aa-479f-89c8-0373e84c43be@web.de>
-Date: Tue, 25 Jun 2024 16:34:17 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Ma Ke <make24@iscas.ac.cn>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
- Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>
-Cc: stable@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>
-References: <20240625081029.2619437-1-make24@iscas.ac.cn>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AA8CE10E208
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Jun 2024 19:11:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1719342676;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=J6Dr7XzQihg9MSKxY6pbB34NIR1CD8eMrbVwTROvnJc=;
+ b=NIKw4Pvw6s03cb6+7rrtukxtVTZ8EwhyzTrv/ckriJUA2qMNfeWp3OB3jG2UQ7pWl33eSB
+ OXjB06GQzokCXTVQLV0bVZIuDqbC/+vacJ0IYbXfGa+iYF1vLaEfjcn9qyty/hmNUNag9T
+ ft/xjLX4sYQBUHBy+VZRBQ/I1VCki14=
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-528-1TSNNWZyMqqglDsgR0GwhQ-1; Tue, 25 Jun 2024 15:11:15 -0400
+X-MC-Unique: 1TSNNWZyMqqglDsgR0GwhQ-1
+Received: by mail-qv1-f70.google.com with SMTP id
+ 6a1803df08f44-6b057a9690bso86134986d6.2
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Jun 2024 12:11:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719342675; x=1719947475;
+ h=mime-version:user-agent:content-transfer-encoding:organization
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ifx89QbqNTvqNTqVFeOnhXLP0jmM+ngsCZbnU659x1A=;
+ b=dRMy79QeuMecCJdLpdZh+go9aHvwFLFl5l+2VHbXh84Jqhkr1+pYq8quazNJnvCMpN
+ P480VStomV+JU3LPvdm+oq6k+Pv69IJsNXgop5mKfG5FMiIY1lPBWQOC1TXZE9DTisma
+ E/y2je8AJsqtcPjJ1K5TF7piGnHUdlgYa60LN+YRqSEU6vqYxZ9kN6V7fyiJct2Wtvv5
+ uBt6Xl58LhvUwThYjOLgG9NTk95wT9gGg+x2dQTn/4mtHkvwfApXRxGRxC0FJHhSEWVO
+ E4etq0OXn2fWSC1I9lj07pC4MkDcW2GYGzbBJnVHmqJNiYiCS2S/xN7ZrgRE8nqKECQj
+ VpIA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWcIES6WM/sxT2cAL/4MdW59nKqPfmbw9/SSUkW1AaQxdSDBbjkX9K8aIw/21ZGI/J4Y/kpCi3JiqQxwGjEYAJVT0fhDSvrUYRd1k00ng==
+X-Gm-Message-State: AOJu0Yz3SNibzFQjQE0/sLNWquP82qnUurDrxiZpXBJBsl/lwpIpFIDB
+ WMPQAFXX4MJDjqpER/jxQ4pUf0ulcVwuYCpbWJ00EIfZQL55Z49dtzLQOIKPF+0Z06HBGxbU1YP
+ cW+UA9uzgzpR9Fl5w1GIFGYczHbvVSAaJjpXQeo7KeyT+Ct6UExDzV//C2uu8ruI=
+X-Received: by 2002:a0c:ac4c:0:b0:6b5:101d:201 with SMTP id
+ 6a1803df08f44-6b53bbd2640mr88923826d6.39.1719342674659; 
+ Tue, 25 Jun 2024 12:11:14 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH6Jt3WC0d7hZup1taiuXs6wrI0vbXesfenzHXw1GMzzA+zIlNjhXPp/ZyUSjSvtzxHI6BjjQ==
+X-Received: by 2002:a0c:ac4c:0:b0:6b5:101d:201 with SMTP id
+ 6a1803df08f44-6b53bbd2640mr88923626d6.39.1719342674299; 
+ Tue, 25 Jun 2024 12:11:14 -0700 (PDT)
+Received: from chopper.lyude.net ([2600:4040:5c4c:a000::789])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6b51ef54a9bsm47185826d6.112.2024.06.25.12.11.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Jun 2024 12:11:13 -0700 (PDT)
+Message-ID: <2020b1333c0f0be49648b81ebc4b55f3abe0a2cd.camel@redhat.com>
 Subject: Re: [PATCH] drm/nouveau/dispnv04: fix null pointer dereference in
- nv17_tv_get_hd_modes
-Content-Language: en-GB
-From: Markus Elfring <Markus.Elfring@web.de>
-In-Reply-To: <20240625081029.2619437-1-make24@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8
+ nv17_tv_get_ld_modes
+From: Lyude Paul <lyude@redhat.com>
+To: Ma Ke <make24@iscas.ac.cn>, kherbst@redhat.com, dakr@redhat.com, 
+ airlied@gmail.com, daniel@ffwll.ch
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Date: Tue, 25 Jun 2024 15:11:12 -0400
+In-Reply-To: <20240625081828.2620794-1-make24@iscas.ac.cn>
+References: <20240625081828.2620794-1-make24@iscas.ac.cn>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.52.2 (3.52.2-1.fc40)
+MIME-Version: 1.0
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:w+lKWxONvobVkG1JBjQ5wfxpvmogK7zfC3one7JxNJttL0yxtRT
- 2X3FNzQnbkxaLdb0QHQefzMbPsBUfPIZBpc17M3CtJkoxYSpCVRop7sRcgsds0cCrzG16JL
- 45sBtaD4ZQLCbci57s7tU6j4/EnczQZ9ldF89yqCNo7uLR/WEgR67k03y/u/VqbI+aIUgaR
- XzVzJnh9Z66x/b49M7tAg==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:trJvbE4vUhE=;eCQIKaNK/fS/KPnXOL1hOZwQ4wD
- 515WonsX5Vk7h9q7pmgwOtGWyFaCet7T6v+AZVm5PSUfqS7y6d3fAHfcUS7T4r0spc4lKcpPk
- wP2fRFk2qJIOfx3XYpHaUj1Un55DWZNBHbFcly+meblXwapr4wX2U2JdVDWOmlLIXIg7Wuwcu
- OWcjYmRKmZMrwUadiNtgncjLPE7cGJxQYexPcACsLCFeHoOnwcji81IVi6rKJ5DrMXlWMrKJU
- /tby3YQp5CgALY1vqtPIALu/vMtiLKVLsAJAVFHTpvBby15EaKO8hMCjtrMdnu9v8dBVIIizZ
- iVLSmdGiqTL6p36JQCxIw8O837C5lxTeIBeE09mAt/dZEuQvBC67JVyvS4z2IBozGt4Az9wIT
- 96RnxFazx5gaUlwa18DAS5UzJHqyrJxO7b867L3j5ysvCwFR9e10MIZemuHeYXwqUKoEj4K/f
- qP2DZhspPlq+Fs2CM+SG18tOdJdJ2vFnbXgDKguPRZUfVCT0C1wHmQi+iBO6k0uEUWOuPo7/v
- OLezWGdUCdUoebLnlGPp3DIORuJvVtYwnDzZe/lQGxOepiZvVSwTRsf2DC7Cm0QtlMcp7l+4X
- 8ofuF+uAqVlGK6h+HP3vXCxbBk1QB6lPnnRNeJbxSRXvQUCvfv3BJLmLzvHkVIiqZEowcJL29
- b8ER3rE931Lxr9INbkCj/QBJnDKCzqjiNS283Sq3pQRYCkTY1kWUbNYH1EDY4gGOGK7d6mmd5
- eSJ5B++ussY1vK6rfYjT4/El97/sTzSyq0aoJozgYil1SzQyTSgSj77jBEaWoRrHf9pl+nNuO
- CiRyhbn/PlOyELAV9EH2hhAa999Bw4yCLh6PEAK5a/8no=
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,31 +95,39 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-> In nv17_tv_get_hd_modes(), the return value of drm_mode_duplicate() is
-> assigned to mode, which will lead to a possible NULL pointer dereference
-> on failure of drm_mode_duplicate(). The same applies to drm_cvt_mode().
-> Add a check to avoid null pointer dereference.
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-Can a wording approach (like the following) be a better change description=
-?
-
-  A null pointer is stored in the local variable =E2=80=9Cmode=E2=80=9D af=
-ter a call
-  of the function =E2=80=9Cdrm_cvt_mode=E2=80=9D or =E2=80=9Cdrm_mode_dupl=
-icate=E2=80=9D failed.
-  This pointer was used in subsequent statements where an undesirable
-  dereference will be performed then.
-  Thus add corresponding return value checks.
-
-
+On Tue, 2024-06-25 at 16:18 +0800, Ma Ke wrote:
+> In nv17_tv_get_ld_modes(), the return value of drm_mode_duplicate()
+> is
+> assigned to mode, which will lead to a possible NULL pointer
+> dereference
+> on failure of drm_mode_duplicate(). Add a check to avoid npd.
+>=20
 > Cc: stable@vger.kernel.org
+> Signed-off-by: Ma Ke <make24@iscas.ac.cn>
+> ---
+> =C2=A0drivers/gpu/drm/nouveau/dispnv04/tvnv17.c | 2 ++
+> =C2=A01 file changed, 2 insertions(+)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+> b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+> index 670c9739e5e1..4a08e61f3336 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+> @@ -209,6 +209,8 @@ static int nv17_tv_get_ld_modes(struct
+> drm_encoder *encoder,
+> =C2=A0=09=09struct drm_display_mode *mode;
+> =C2=A0
+> =C2=A0=09=09mode =3D drm_mode_duplicate(encoder->dev, tv_mode);
+> +=09=09if (!mode)
+> +=09=09=09continue;
+> =C2=A0
+> =C2=A0=09=09mode->clock =3D tv_norm->tv_enc_mode.vrefresh *
+> =C2=A0=09=09=09mode->htotal / 1000 *
 
-Would you like to add the tag =E2=80=9CFixes=E2=80=9D accordingly?
+--=20
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
-
-How do you think about to use a summary phrase like
-=E2=80=9CPrevent null pointer dereferences in nv17_tv_get_hd_modes()=E2=80=
-=9D?
-
-Regards,
-Markus
