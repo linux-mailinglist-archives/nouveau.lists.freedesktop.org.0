@@ -2,85 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA07891C539
-	for <lists+nouveau@lfdr.de>; Fri, 28 Jun 2024 19:54:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9343F91C5FA
+	for <lists+nouveau@lfdr.de>; Fri, 28 Jun 2024 20:43:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C290A10ECE2;
-	Fri, 28 Jun 2024 17:54:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D1F8810ECFC;
+	Fri, 28 Jun 2024 18:43:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="fdvNWfAs";
+	dkim=pass (2048-bit key; secure) header.d=web.de header.i=markus.elfring@web.de header.b="gOE6ZzD8";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6C04B10ECE1
- for <nouveau@lists.freedesktop.org>; Fri, 28 Jun 2024 17:54:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1719597295;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=iJtGhUgvUDUBCNqCRXiCweWqh3UEoqmmn+2NlVqrfuI=;
- b=fdvNWfAsButfc5JFMYgRMWt8Av3uXku6KtHGrmhiQH5suLcB16a0/Dq6ni+nICLGTodMcy
- HYliUSbD1F2Wv7k/oap4fFFLJ7hrhbLECKIwrGInJ2a4mK99VELtEZFdj9DAIpmrmpwGK2
- 1qhHE+gRxyW3G1U3oKkzqaJE+xZXYbE=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-142-zui7YlQ3NYekNZxI-dtZ3w-1; Fri, 28 Jun 2024 13:54:54 -0400
-X-MC-Unique: zui7YlQ3NYekNZxI-dtZ3w-1
-Received: by mail-qt1-f197.google.com with SMTP id
- d75a77b69052e-44645ec39d4so11855251cf.1
- for <nouveau@lists.freedesktop.org>; Fri, 28 Jun 2024 10:54:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719597293; x=1720202093;
- h=mime-version:user-agent:content-transfer-encoding:organization
- :references:in-reply-to:date:cc:to:from:subject:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TB1YvVhQLn/H70Rr+uFCjpzP9CQR7nQAEPIty/GMlrU=;
- b=T6kUenODBVjhonD3fwWwhusW9EYUMvXSU8ctocn65Pc6k0J3ikCVlIdDeG/E6p+4Xn
- i6VGUtF1RsgkmzksYcd2n5ubBNCzKD/qL/q5X09T3RgfcDh40ZoCzekPRSxcN70/D70K
- AZIV0jevWG6bkPjY071mnskXDR+EJOajVHtANydRqr42s3K7+5qdKM5RO2VIgzw4AoJt
- pSKDJhlDcYyUvmSbXf7RE5lyJHp2UXgycgLuOfgq4p1hXDWkguME/w9BaGwmqMot4kV1
- AJ0WWwugvbZDmdnGDov5hKafxufB5Esjd2JojEH+znplSuHxXCP4d3u0QNmPGRhrYoWO
- VWDw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX/7BzZn8WTyjjp5xl1d69hob9XeNytGO7LXuvt1QrsZU22diry88qpI/6Q6DbvpOHHn8wuZIp2XlhgfHgQqGQqxmlCaz65F08uqGvWKw==
-X-Gm-Message-State: AOJu0Yyqss9nTHdnmep6FOK3k8ksqaAldAjg0yyPGsKmRlpHRQh65Wwe
- /sC4O96oUlrJ+uMp3/nlQbiPmnii90dIMieMC8Gma7P1MmPRXcwA/tj9yygKsSGaT+6S71ALmks
- ZLev8QUz6e1G711IYlP2tifAIVGotalrYBVie4SARsF6kbfcE7usrNvfYvgMyGhA=
-X-Received: by 2002:ac8:5a15:0:b0:43d:e4c8:8059 with SMTP id
- d75a77b69052e-444d92335aamr216984631cf.38.1719597292938; 
- Fri, 28 Jun 2024 10:54:52 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHliaKczNq59esZ7bbqWZZwIg7BK0Qk7e2Vg6tc6pE8nfO36/kFIUgUN4o6+qKPkamp6yxIxA==
-X-Received: by 2002:ac8:5a15:0:b0:43d:e4c8:8059 with SMTP id
- d75a77b69052e-444d92335aamr216984461cf.38.1719597292583; 
- Fri, 28 Jun 2024 10:54:52 -0700 (PDT)
-Received: from chopper.lyude.net ([2600:4040:5c4c:a000::789])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-44651428177sm9074601cf.40.2024.06.28.10.54.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Jun 2024 10:54:52 -0700 (PDT)
-Message-ID: <c7f963fa69a8bff65c54dbacad4c890ce26f57a4.camel@redhat.com>
-Subject: Re: [PATCH v2] drm/nouveau: fix null pointer dereference in
- nouveau_connector_get_modes
-From: Lyude Paul <lyude@redhat.com>
-To: Ma Ke <make24@iscas.ac.cn>, kherbst@redhat.com, dakr@redhat.com, 
- airlied@gmail.com, daniel@ffwll.ch, airlied@redhat.com, bskeggs@redhat.com
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org
-Date: Fri, 28 Jun 2024 13:54:51 -0400
-In-Reply-To: <20240627022732.2978601-1-make24@iscas.ac.cn>
-References: <20240627022732.2978601-1-make24@iscas.ac.cn>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.52.2 (3.52.2-1.fc40)
+Received: from mout.web.de (mout.web.de [212.227.17.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BCE0C10ECFB;
+ Fri, 28 Jun 2024 18:43:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+ s=s29768273; t=1719600173; x=1720204973; i=markus.elfring@web.de;
+ bh=8kLvuMEKGAQyx6cCtZ+QA/+5maKkTMNiGRPBdMABdqU=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=gOE6ZzD8J+wqX9HjXsnxngvxbfKfQDJSMN1B5vqGqN8glDHH5e613E8jTqeSpqyI
+ zhAjOn78zJCZlKCBIortA+tT29V46BeqHZ167JJ4CcCb+kr+kEpKPnCHhSZWw/WHJ
+ W6Eg/GMjch8C5yUbAk7J5pZlyUMOR8GuAxU4lRfVMk5+K4C0rbW9QaDoHoypf/UDU
+ elRxkfnKZCbYvHI9z6ZgKKgjSAEdgeEeFBPdAgFkP+DmnJML4R4+xlHgM8oY2W/9B
+ kbeFKt59ND/RGhE9B4d/r7KmR9AuM/ZnmTRNJqD3mGBzeBMmY2WlJSt48uF4AoWsp
+ hwt05fS7wFgy3zUluw==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from [192.168.178.21] ([94.31.91.95]) by smtp.web.de (mrweb105
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 1N2BHw-1sSSnL1o0k-00wyOJ; Fri, 28
+ Jun 2024 20:42:53 +0200
+Message-ID: <a91bbb5f-8980-420b-b465-97691203347e@web.de>
+Date: Fri, 28 Jun 2024 20:42:50 +0200
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [v3] drm/nouveau: fix null pointer dereference in
+ nouveau_connector_get_modes
+To: Lyude Paul <lyude@redhat.com>, Ma Ke <make24@iscas.ac.cn>,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Daniel Vetter <daniel@ffwll.ch>, Danilo Krummrich <dakr@redhat.com>,
+ Dave Airlie <airlied@redhat.com>, Karol Herbst <kherbst@redhat.com>
+Cc: stable@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+ David Airlie <airlied@gmail.com>,
+ Jonathan Cameron <Jonathan.Cameron@Huawei.com>,
+ Julia Lawall <julia.lawall@inria.fr>
+References: <20240627074204.3023776-1-make24@iscas.ac.cn>
+ <d0bef439-5e1d-4ce0-9a24-da74ddc29755@web.de>
+ <790dbe8aee621b58ec0ef8d029106cb1c1830a31.camel@redhat.com>
+Content-Language: en-GB
+From: Markus Elfring <Markus.Elfring@web.de>
+In-Reply-To: <790dbe8aee621b58ec0ef8d029106cb1c1830a31.camel@redhat.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Provags-ID: V03:K1:PIL72wbX7r9QZ/mWZLwKF7K8YC1+hNv2EH5ZjPvIhLoaNH3QPtb
+ L0VAS7M7j07sfJZ/F2MWvpWAIYJTVzjB2x9tAU2pio8nGAcnftuaTTEErc0GHDci0TO1ChN
+ w3ov5KWvo/DVz3Bi36FPjwsBvfxfbTcMYBVx2h52SSNf2UIj9lDszwyw/AxB2i0YQzaZdQm
+ fRKP3/stIlvW1CE7tGTiw==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:pweuqzOFyZE=;Tgc+8iwH3HQUokQiNbFoAlSoTjM
+ TPqxWWxXB9kukXsacDcZZQRwO6QLIf63UpfXR9PhK3NVUkI8UUpl42ABm+AfcX1qi8D7jeKNK
+ hVR6ESGiYP6oL9MlAy4IeRCLQ5Fjuk/44pO5mmjNy3GqhRz/hJybqXd/eEnAMwRENsJ8swmTb
+ AudSqXJtUManOQZD/eCqQEHy6Fv8od0Q8MPoBW9FENgahpZLAsxTM01TNIrZ9JTmW96Xe5JGt
+ 1W5KsbX7HAOZO278O+qjq9CIVo+p7tqiVoBPiYyCbNg0geKnu10yHJFZQM5m/Z5Z73ulekfhH
+ qyEz4iYi15gxBAEy0Rr+g2e8DsmaXiU8SHDy7scZB0w4j0kdAXO5lD1n6Z6zX2U9Gku8hKWSQ
+ LtglatLo2GJb6fZhOXNfx5aFtFYzGREe00oEEWeE2T8m5gAGlstVbPbQRD5dTAarCLaQrTL6c
+ Q0oMHEzovXXnkEuoj5a8j6qnSu1Qn6RQRa/DLARNk0wn/37Fi2mxBp/zsYImhCQf+2xxcRTT+
+ ohVvx2vb4JV0PiHdIOeIJmW7+YsZbRsmhqAxg/K3OqE62TVXGWreLuKIpA5V4GYWKYpwJVEsg
+ RlsAGIzNM0BT84HQwDf+ArLo34CL5TOkxRzXg0d+Zbrbpwou18p5OpDDXe145/Tz1qDfmWPd5
+ bUnLLOGt9RtDtHOInG1sZKrrLYrRV5xKkyTGXsJVNC3ZsmSjPgQAEJ6AHxGfWmo0pV3zx/hct
+ 60bQ3TPjeKghL8yKkL4FO1TrCMiE7Jf80xr7Jtrw62Uif5PqvysTUnRyDRk0bC0BrRZDelI1L
+ EoJ0Q8uvOPxCha6jnUR0jjS/CH7OFCe1KHPrCaUrOJ9JY=
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,46 +87,22 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reviewed-by: Lyude Paul <lyude@redhat.com>
+> (...I doubt I'll get a response from Markus,
 
-Will push this upstream in just a moment, thanks!
+Why?
 
-On Thu, 2024-06-27 at 10:27 +0800, Ma Ke wrote:
-> In nouveau_connector_get_modes(), the return value of
-> drm_mode_duplicate()
-> is assigned to mode, which will lead to a possible NULL pointer
-> dereference on failure of drm_mode_duplicate(). Add a check to avoid
-> npd.
->=20
-> Fixes: 6ee738610f41 ("drm/nouveau: Add DRM driver for NVIDIA GPUs")
-> Signed-off-by: Ma Ke <make24@iscas.ac.cn>
-> ---
-> Changes in v2:
-> - modified the patch according to suggestions.
-> ---
-> =C2=A0drivers/gpu/drm/nouveau/nouveau_connector.c | 3 +++
-> =C2=A01 file changed, 3 insertions(+)
->=20
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c
-> b/drivers/gpu/drm/nouveau/nouveau_connector.c
-> index 856b3ef5edb8..0c71d761d378 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
-> @@ -1001,6 +1001,9 @@ nouveau_connector_get_modes(struct
-> drm_connector *connector)
-> =C2=A0=09=09struct drm_display_mode *mode;
-> =C2=A0
-> =C2=A0=09=09mode =3D drm_mode_duplicate(dev, nv_connector-
-> >native_mode);
-> +=09=09if (!mode)
-> +=09=09=09return 0;
-> +
-> =C2=A0=09=09drm_mode_probed_add(connector, mode);
-> =C2=A0=09=09ret =3D 1;
-> =C2=A0=09}
 
---=20
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+>                                              but I certainly want to
+> make sure they are a bot
 
+Can I ever adjust your views into more desirable directions
+(as it occasionally happened with other contributors)?
+
+
+>                          and not an actual person before removing them
+
+I hope still that affected development discussions can become
+more constructive again.
+
+Regards,
+Markus
