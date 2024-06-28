@@ -2,52 +2,89 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EF8F91B77A
-	for <lists+nouveau@lfdr.de>; Fri, 28 Jun 2024 09:03:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FF0191C52F
+	for <lists+nouveau@lfdr.de>; Fri, 28 Jun 2024 19:49:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8E66110E11F;
-	Fri, 28 Jun 2024 07:02:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 17E0310ECE6;
+	Fri, 28 Jun 2024 17:49:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=ellerman.id.au header.i=@ellerman.id.au header.b="pNnAviyq";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="VyFxAtF0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3231C88647
- for <nouveau@lists.freedesktop.org>; Fri, 28 Jun 2024 07:02:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ellerman.id.au;
- s=201909; t=1719558171;
- bh=yKAZtPM5GEr7CZjyMumaDPYIdeEdVpmcv/sFYuGOa9Q=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=pNnAviyq9uqhUftQyMYSIpMi22zRA/e2RLe2mk9dsbBulBptFighU+2xzZhq57gN4
- W8OHDxJFhAozwDw9+r+KGMRvHmaBzqQ5wv/saWrhEZrSMY7vNOHytT29zPfM17nKsA
- j/wF2y89PcCRCzBZeMvVvi6ofDNLtmKxmpFR9QR1yxuxnDNHXBIB2UU8+KumhVa1MG
- zHu8Ww8Fm1TIpYRBTNoBEuHRTYf6MHs+VZveXwM/fsmdMgoL94c5+Wcqn6K3Mm/Zme
- DRx6CypwoAKrLlnVrNXssY7rU/lzEcYngKoMJ7sauDbdNypraPrNybVkum3rD7EQtb
- KXBRZe+7BCJXg==
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4W9RGK5Rg0z4w2N;
- Fri, 28 Jun 2024 17:02:49 +1000 (AEST)
-From: Michael Ellerman <mpe@ellerman.id.au>
-To: Jialong Yang <jialong.yang@shingroup.cn>, Nicholas Piggin
- <npiggin@gmail.com>, Christophe Leroy <christophe.leroy@csgroup.eu>,
- "Naveen N. Rao" <naveen.n.rao@linux.ibm.com>
-Cc: luming.yu@shingroup.cn, shenghui.qu@shingroup.cn, Jialong Yang
- <jialong.yang@shingroup.cn>, linuxppc-dev@lists.ozlabs.org,
- linux-kernel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>, Masami
- Hiramatsu <mhiramat@kernel.org>, Karol Herbst <karolherbst@gmail.com>,
- Pekka Paalanen <ppaalanen@gmail.com>, nouveau@lists.freedesktop.org
-Subject: Re: [PATCH v1 1/2] powerpc/mmiotrace: Add MMIO Tracing tool for
- PowerPC
-In-Reply-To: <2bf90acf7d29641ba6643934ff8dbba897dbd2d9.1718873074.git.jialong.yang@shingroup.cn>
-References: <2bf90acf7d29641ba6643934ff8dbba897dbd2d9.1718873074.git.jialong.yang@shingroup.cn>
-Date: Fri, 28 Jun 2024 17:02:48 +1000
-Message-ID: <87h6ddlfc7.fsf@mail.lhotse>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 819E610ECF0
+ for <nouveau@lists.freedesktop.org>; Fri, 28 Jun 2024 17:49:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1719596955;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=TAd485aghXUIWa3RvWf2lTA7jc9MG6PA9b0qtG0r2DY=;
+ b=VyFxAtF0vTrLzbo9uVL/TwYJBVlP+7hG4eYgfwHAdJuJA4W5Ommf17FJrmNa4DAZvIyjSy
+ HaD9DgHlo9jplgXFwjk+5VERJ+zcFeO183DU4qOytcu9KH5OhneXTrtXwqmMyaH+gHpjfN
+ BV4NzpN0jjlJfCTOWJCaw9PYZzvVKng=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-425-8B6y6RnbMrWtv46NCGCtOQ-1; Fri, 28 Jun 2024 13:49:12 -0400
+X-MC-Unique: 8B6y6RnbMrWtv46NCGCtOQ-1
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-6b50c903a87so12402556d6.0
+ for <nouveau@lists.freedesktop.org>; Fri, 28 Jun 2024 10:49:12 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719596952; x=1720201752;
+ h=mime-version:user-agent:content-transfer-encoding:organization
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=TAd485aghXUIWa3RvWf2lTA7jc9MG6PA9b0qtG0r2DY=;
+ b=xKgu/SuNVy6PySTEHKYt3fJg5oV0T5WgIVeFKfaYIYhI7XhYl/0bcUg/PshIeUtImq
+ QWrzBpatQFO+YP4eyMvbElEQpqbBdjZEFXK8MudXc1Gx/dQLJwC8iEgK1IR+IJsT1BoI
+ jJVvWD1Dqr4G7qgOUkU4wNGDyyOvXk0ACEdEFclBABJus4AAzjpt8fq/JRYMrELxxObb
+ 5FGfOvl27L6bZJ+9sBEkWr3f8eOIBQUTzN6QqZz+bNKkdULES3p+sc12JtDGxwjQHW8f
+ nYYlna+8XVGb+oXvqOHpZjwWx2HLGDZhUQgte6UK8NKk2/HEr6FTgBAISQY+c5Ix1qvp
+ SUwg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWUM3t01BmV+xfzGwiXXUSfSQOXiBOi8/TGLeAaS/IoTH3yB9EHqakNSY5E4sb5sCCA/q9H/B1NPMj60uNtinXTHnToiUTb8ia4/c1L2A==
+X-Gm-Message-State: AOJu0YwCStOAC02KW01BCIVDabgyWmCNxUlrbml8mqYkneBrJ10l8Qss
+ iIj28w8pDU8+E8gtxi0jhDubI7hgtzw4fmWtq8blVHKu2CQq/gtgMOuX0NLflZ4zcoZY8HMez7u
+ xE9cK+fQFcPva2ECSMQNfY4Bx/V0CezLBhtxNi8aYzRqLQMUw4qWfkffGe0J0l6g=
+X-Received: by 2002:ad4:4082:0:b0:6b0:76f1:8639 with SMTP id
+ 6a1803df08f44-6b540aaa739mr160298636d6.42.1719596952196; 
+ Fri, 28 Jun 2024 10:49:12 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFD6uWQmG4g/igtbloLZSfV+o6cXp2Ckk4uZLpiMQfw5WzwRbofwx6QnvQrMRlxIyNBmHOHyQ==
+X-Received: by 2002:ad4:4082:0:b0:6b0:76f1:8639 with SMTP id
+ 6a1803df08f44-6b540aaa739mr160298396d6.42.1719596951873; 
+ Fri, 28 Jun 2024 10:49:11 -0700 (PDT)
+Received: from chopper.lyude.net ([2600:4040:5c4c:a000::789])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6b59e627242sm9625366d6.130.2024.06.28.10.49.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Jun 2024 10:49:11 -0700 (PDT)
+Message-ID: <790dbe8aee621b58ec0ef8d029106cb1c1830a31.camel@redhat.com>
+Subject: Re: [PATCH v3] drm/nouveau: fix null pointer dereference in
+ nouveau_connector_get_modes
+From: Lyude Paul <lyude@redhat.com>
+To: Markus Elfring <Markus.Elfring@web.de>, Ma Ke <make24@iscas.ac.cn>, 
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org, Ben Skeggs
+ <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>, Danilo Krummrich
+ <dakr@redhat.com>, Dave Airlie <airlied@redhat.com>, Karol Herbst
+ <kherbst@redhat.com>
+Cc: stable@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>, David
+ Airlie <airlied@gmail.com>
+Date: Fri, 28 Jun 2024 13:49:10 -0400
+In-Reply-To: <d0bef439-5e1d-4ce0-9a24-da74ddc29755@web.de>
+References: <20240627074204.3023776-1-make24@iscas.ac.cn>
+ <d0bef439-5e1d-4ce0-9a24-da74ddc29755@web.de>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.52.2 (3.52.2-1.fc40)
 MIME-Version: 1.0
-Content-Type: text/plain
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,43 +99,58 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Jialong Yang <jialong.yang@shingroup.cn> writes:
-> mmiotrace is a useful tool to trace MMIO accesses. Nowadays, it only
-> supported on x86 and x86_64 platforms.
+Ma Ke - I assume you already know but you can just ignore this message
+from Markus as it is just spam. Sorry about the trouble!
 
-I've never used mmiotrace, and don't know it well.
+Markus, you've already been asked by Greg so I will ask a bit more
+sternly in case there is actually a person on the other end: you've
+already been asked to stop by Greg and are being ignored by multiple
+kernel maintainers. If I keep seeing messages like this from you I will
+assume you are a bot and I will block your email from both DRI related
+mailing lists (nouveau and dri-devel) accordingly. You've done this 3
+times now.
 
-I'm not necessarily opposed to merging it, but AFAIK it was mostly used
-for reverse engineering proprietary drivers, where the driver itself
-couldn't be easily instrumented. Is that what you're using it for?
+(...I doubt I'll get a response from Markus, but I certainly want to
+make sure they are a bot and not an actual person before removing them
+:)
 
-For drivers where we have the source wouldn't it be easier to just use
-tracepoints in the MMIO accessors?
+On Thu, 2024-06-27 at 11:02 +0200, Markus Elfring wrote:
+> > In nouveau_connector_get_modes(), the return value of
+> > drm_mode_duplicate()
+> > is assigned to mode, which will lead to a possible NULL pointer
+> > dereference on failure of drm_mode_duplicate(). Add a check to
+> > avoid npd.
+>=20
+> A) Can a wording approach (like the following) be a better change
+> description?
+>=20
+> =C2=A0=C2=A0 A null pointer is stored in the local variable =E2=80=9Cmode=
+=E2=80=9D after a call
+> =C2=A0=C2=A0 of the function =E2=80=9Cdrm_mode_duplicate=E2=80=9D failed.=
+ This pointer was
+> passed to
+> =C2=A0=C2=A0 a subsequent call of the function =E2=80=9Cdrm_mode_probed_a=
+dd=E2=80=9D where an
+> undesirable
+> =C2=A0=C2=A0 dereference will be performed then.
+> =C2=A0=C2=A0 Thus add a corresponding return value check.
+>=20
+>=20
+> B) How do you think about to append parentheses to the function name
+> =C2=A0=C2=A0 in the summary phrase?
+>=20
+>=20
+> C) How do you think about to put similar results from static source
+> code
+> =C2=A0=C2=A0 analyses into corresponding patch series?
+>=20
+>=20
+> Regards,
+> Markus
+>=20
 
-Is it still in-use/maintained on the x86 side?
+--=20
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
-> Here is a support for powerpc.
-> The manual is located at Documentation/trace/mmiotrace.rst which means
-> I have not changed user API. People will be easy to use it.
-> Almost all files are copied from x86/mm, there are only some
-> differences from hardware and architectures software.
->
-> LINK: https://lore.kernel.org/lkml/20080127195536.50809974@daedalus.pq.iki.fi/
->
-> Signed-off-by: Jialong Yang <jialong.yang@shingroup.cn>
-> ---
->  arch/powerpc/Kconfig.debug       |   3 +
->  arch/powerpc/mm/Makefile         |   1 +
->  arch/powerpc/mm/kmmio.c          | 649 +++++++++++++++++++++++++++++++
->  arch/powerpc/mm/mmio-mod.c       | 414 ++++++++++++++++++++
->  arch/powerpc/mm/mmiotrace_arch.c | 149 +++++++
->  arch/powerpc/mm/mmiotrace_arch.h |  25 ++
->  arch/powerpc/mm/pf_in.c          | 185 +++++++++
->  arch/powerpc/mm/pf_in.h          |  33 ++
->  8 files changed, 1459 insertions(+)
-  
-At a glance most of that code could be shared between arches. I don't
-think I can merge that as-is, without some attempt to split the generic
-parts out.
-
-cheers
