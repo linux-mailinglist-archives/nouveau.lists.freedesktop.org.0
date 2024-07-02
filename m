@@ -2,86 +2,84 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E3F091C665
-	for <lists+nouveau@lfdr.de>; Fri, 28 Jun 2024 21:09:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CA5C9245BD
+	for <lists+nouveau@lfdr.de>; Tue,  2 Jul 2024 19:26:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0899F10E22C;
-	Fri, 28 Jun 2024 19:09:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C67A510E1E4;
+	Tue,  2 Jul 2024 17:26:20 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="BIPheEa3";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Z473FZ58";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D45DC10E084
- for <nouveau@lists.freedesktop.org>; Fri, 28 Jun 2024 19:09:18 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5648A10E14E
+ for <nouveau@lists.freedesktop.org>; Tue,  2 Jul 2024 17:26:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1719601757;
+ s=mimecast20190719; t=1719941178;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=PQbiTv/VM0FHRwk2XTT1cLcVoQXr0OCJr39ObtijekU=;
- b=BIPheEa32VmgEWJm8SJGniJj1LoKZXuxq8zu0eze2YrlxS9YtXueitwJmDHHLlSp+fUnzU
- kfgD6XnvupGbYMwaT0U8JB/gMp7TcMyl/KhFLvuhnzzNJVVOmBPOMebYqHwuSLeZOJq8+U
- BxJ5ee7omH1tMQnD4EoPq8tq6R4pxrw=
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=wnAE6b9JzVZewogBX2HsyGhNsnk3iW/P9JVL9aahgmQ=;
+ b=Z473FZ58Xs7R13jjZPd/LlXXnHquxR1NyCufuHudPY9USFS9lqw7oT6pstILMO+hTzU9E1
+ AbzLHKu7y21H+7WfB7b9O1YGUMqQinMP5B8Td+zSRadt3jgNLWmUeJcJC5AjoTwM+mRMaQ
+ lo1EC2W8oYt/nqGHI6dKAEXdvRmQdN0=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-553-gHvoAjTCNbmakWTrnQwusQ-1; Fri, 28 Jun 2024 15:09:16 -0400
-X-MC-Unique: gHvoAjTCNbmakWTrnQwusQ-1
-Received: by mail-qv1-f69.google.com with SMTP id
- 6a1803df08f44-6b500743a3fso11351426d6.1
- for <nouveau@lists.freedesktop.org>; Fri, 28 Jun 2024 12:09:16 -0700 (PDT)
+ us-mta-323-7CRkcB8wPN2GAq0k5-Y7JQ-1; Tue, 02 Jul 2024 13:26:17 -0400
+X-MC-Unique: 7CRkcB8wPN2GAq0k5-Y7JQ-1
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-6b5a5e78dd8so72112246d6.1
+ for <nouveau@lists.freedesktop.org>; Tue, 02 Jul 2024 10:26:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719601756; x=1720206556;
+ d=1e100.net; s=20230601; t=1719941177; x=1720545977;
  h=mime-version:user-agent:content-transfer-encoding:organization
  :references:in-reply-to:date:cc:to:from:subject:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PQbiTv/VM0FHRwk2XTT1cLcVoQXr0OCJr39ObtijekU=;
- b=BNUS8PNj7YwK2miR00b2m4wk4VdEZ73PrRjAQ2r6grsFzjyCknI0GlHAM8YRpxjB4y
- ms0gf3Xtb7np/vqD19o1Dml3vdGOoj86pDlL7RKSF23XQsL74L5Krqv7fEDJUjUtjVS4
- L9IxbWexpolKyyxBhjL2k3usaiOJB4KYZO3NEPJr1byC5V6Yu8a/QGhcQNezQxgY2V4Q
- oZ6reJX1qizx3W1Xo/1Ff9TlCw7tJyOvlzf4CouD96wjx3JoIi20WUm7kePyI8vy26LL
- CoH8qlwO3ecRFvNgLE068MPbgK7p7AjC52lnnwiwMH/FIuTLFrxZYvKeM69TnumDYAoe
- ZEVg==
+ bh=wnAE6b9JzVZewogBX2HsyGhNsnk3iW/P9JVL9aahgmQ=;
+ b=K02OWDum6P61WHw2BxUiMDggiTREgV/aHc17cyLJcxmMw2Bq8ZGkgIP6/ShIEhdpDW
+ fpFmybeozf3daDVgh5dDf06sLo6vXMnxk0AL/6z6c9w+lcEgalaRSDq7rgP8GQXirE+Z
+ vwUKjYxsa5yWCtTg0idAc5sE0XqA0l3UYW0ZnIMYPo129Prf768U2AXD4lXqn1vyR3vc
+ Ea4DTwV0aiq0yIr5uz3GqrYuq6Z3JR6Na1rriNNbRF51X5ERK+yg+hJkokaF6hwrsvsf
+ ohQoFdoIHXl2eQUKB6T6uzevr88awWVg0V8qCwhe3m6xZz0ALkTjo6xWsi5ZfQmtvc6P
+ 7f+A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUA0xmtWUtyapZouVfqtZBsZ7raGAmuQYZPstEoo9zmgBSUf+fo15DxxuIW69EJU8uOH2uPWOe5GeXHcfzv2rjTHzbtek11E5LhGPhsBw==
-X-Gm-Message-State: AOJu0YwZpr5+/51zXmA08pDXnsxvS1jcRZIpfFvDAI3ZtViGzfLKYwWj
- Y/OeE801v90dRBCY7/Qr1TWEErGibH3spCOLihQujNrZPT6J6qT8OVX362nYA0MZEOaCFNTuKJ1
- dAr1sfmMnMOwEir79KqVBD1RV8F5iPf1oj6pELCj9hE3z3olg+O09lKywwMMIKBU=
-X-Received: by 2002:a05:6214:21eb:b0:6b5:936d:e5e7 with SMTP id
- 6a1803df08f44-6b5936de77bmr82657086d6.18.1719601755934; 
- Fri, 28 Jun 2024 12:09:15 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IG+gMZ/ntsFZ/h9Or/0C3xSl4QY5ySh2hR5EIrVWd2TA4q5MZmzwjfklfp1JIv/SlyeCUIBog==
-X-Received: by 2002:a05:6214:21eb:b0:6b5:936d:e5e7 with SMTP id
- 6a1803df08f44-6b5936de77bmr82656756d6.18.1719601755638; 
- Fri, 28 Jun 2024 12:09:15 -0700 (PDT)
+ AJvYcCU/HbUTARSqKP0HrRUVkA9CrBaec9BZLAcQ8om9qpNXh4USeWoBzxti0iimqYtk92JVtqn0f9jFtOgs+z/AD6b8eLbbBYPu7AKrvTa1rg==
+X-Gm-Message-State: AOJu0YxOmJglWn0WAWjKePC1n/RIxyGX2JC/vKTmRXvYvQzvU4dbieCH
+ t7cf6vgvHk3fa2Qy0qyeyTkATQ1QOWWDXlH6aiP98kpq160hn1NYtL6Wr/814fdLLB8sdsiIG5I
+ 0xbrdeLPJi0jLVKVq7ywUnsmWz0Y2veHKCUHf8J9fi6f+FwSpKIR5JxMXRaJOe5o=
+X-Received: by 2002:a05:6214:23c9:b0:6b2:dde3:f945 with SMTP id
+ 6a1803df08f44-6b5b6f4e119mr132203606d6.26.1719941176618; 
+ Tue, 02 Jul 2024 10:26:16 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGx7p11FC4O9TQgiVseQQaMIQ8OnE3eLtSvbuxozTJuO9o5KC8kVGoDuETVTuKRc/SMA5HbGw==
+X-Received: by 2002:a05:6214:23c9:b0:6b2:dde3:f945 with SMTP id
+ 6a1803df08f44-6b5b6f4e119mr132203256d6.26.1719941176266; 
+ Tue, 02 Jul 2024 10:26:16 -0700 (PDT)
 Received: from chopper.lyude.net ([2600:4040:5c4c:a000::789])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6b59e5f34efsm10263606d6.90.2024.06.28.12.09.14
+ 6a1803df08f44-6b59e62927fsm45730906d6.133.2024.07.02.10.26.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Jun 2024 12:09:15 -0700 (PDT)
-Message-ID: <e76250fdcda92afd43c94fe5db2a292d48c29a60.camel@redhat.com>
-Subject: Re: [v3] drm/nouveau: fix null pointer dereference in
- nouveau_connector_get_modes
+ Tue, 02 Jul 2024 10:26:15 -0700 (PDT)
+Message-ID: <157d1dd7e44dc102b4c8f07381868d569baff860.camel@redhat.com>
+Subject: Re: [PATCH v2 5/8] rust: drm: add DRM driver registration
 From: Lyude Paul <lyude@redhat.com>
-To: Markus Elfring <Markus.Elfring@web.de>, nouveau@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, Danilo
- Krummrich <dakr@redhat.com>, Dave Airlie <airlied@redhat.com>, Karol Herbst
- <kherbst@redhat.com>
-Cc: stable@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>, David
- Airlie <airlied@gmail.com>, Jonathan Cameron <Jonathan.Cameron@Huawei.com>,
- Julia Lawall <julia.lawall@inria.fr>
-Date: Fri, 28 Jun 2024 15:09:14 -0400
-In-Reply-To: <c41b19ac-6bf9-4f30-8c00-0cf63246d825@web.de>
-References: <20240627074204.3023776-1-make24@iscas.ac.cn>
- <d0bef439-5e1d-4ce0-9a24-da74ddc29755@web.de>
- <790dbe8aee621b58ec0ef8d029106cb1c1830a31.camel@redhat.com>
- <a91bbb5f-8980-420b-b465-97691203347e@web.de>
- <eab9d109981bae8a443649bc4a2c1a08870590c7.camel@redhat.com>
- <c41b19ac-6bf9-4f30-8c00-0cf63246d825@web.de>
+To: Danilo Krummrich <dakr@redhat.com>, maarten.lankhorst@linux.intel.com, 
+ mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com,
+ daniel@ffwll.ch,  ojeda@kernel.org, alex.gaynor@gmail.com,
+ wedsonaf@gmail.com, boqun.feng@gmail.com,  gary@garyguo.net,
+ bjorn3_gh@protonmail.com, benno.lossin@proton.me,  a.hindborg@samsung.com,
+ aliceryhl@google.com, lina@asahilina.net,  pstanner@redhat.com,
+ ajanulgu@redhat.com, gregkh@linuxfoundation.org,  robh@kernel.org,
+ daniel.almeida@collabora.com
+Cc: rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org
+Date: Tue, 02 Jul 2024 13:26:14 -0400
+In-Reply-To: <20240618233324.14217-6-dakr@redhat.com>
+References: <20240618233324.14217-1-dakr@redhat.com>
+ <20240618233324.14217-6-dakr@redhat.com>
 Organization: Red Hat Inc.
 User-Agent: Evolution 3.52.2 (3.52.2-1.fc40)
 MIME-Version: 1.0
@@ -103,48 +101,128 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is a bit of a weird response on my part, apologies, but I just
-want to make sure of one thing before I stop paying attention to this
-thread.
+Some comments down below:
 
-On Fri, 2024-06-28 at 21:02 +0200, Markus Elfring wrote:
-> > Because the responses you have been given read like a bot,
+On Wed, 2024-06-19 at 01:31 +0200, Danilo Krummrich wrote:
+> Implement the DRM driver `Registration`.
 >=20
-> I find it interesting that you interpret provided information
-> in such a direction.
+> The `Registration` structure is responsible to register and unregister a
+> DRM driver. It makes use of the `Devres` container in order to allow the
+> `Registration` to be owned by devres, such that it is automatically
+> dropped (and the DRM driver unregistered) once the parent device is
+> unbound.
+>=20
+> Co-developed-by: Asahi Lina <lina@asahilina.net>
+> Signed-off-by: Asahi Lina <lina@asahilina.net>
+> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
+> ---
+> =C2=A0rust/kernel/drm/drv.rs | 57 +++++++++++++++++++++++++++++++++++++++=
+++-
+> =C2=A01 file changed, 56 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/rust/kernel/drm/drv.rs b/rust/kernel/drm/drv.rs
+> index cd594a32f9e4..ebb79a8c90ee 100644
+> --- a/rust/kernel/drm/drv.rs
+> +++ b/rust/kernel/drm/drv.rs
+> @@ -4,7 +4,16 @@
+> =C2=A0//!
+> =C2=A0//! C header: [`include/linux/drm/drm_drv.h`](srctree/include/linux=
+/drm/drm_drv.h)
+> =C2=A0
+> -use crate::{bindings, drm, private::Sealed, str::CStr, types::ForeignOwn=
+able};
+> +use crate::{
+> +=C2=A0=C2=A0=C2=A0 alloc::flags::*,
+> +=C2=A0=C2=A0=C2=A0 bindings,
+> +=C2=A0=C2=A0=C2=A0 devres::Devres,
+> +=C2=A0=C2=A0=C2=A0 drm,
+> +=C2=A0=C2=A0=C2=A0 error::{Error, Result},
+> +=C2=A0=C2=A0=C2=A0 private::Sealed,
+> +=C2=A0=C2=A0=C2=A0 str::CStr,
+> +=C2=A0=C2=A0=C2=A0 types::{ARef, ForeignOwnable},
+> +};
+> =C2=A0use macros::vtable;
+> =C2=A0
+> =C2=A0/// Driver use the GEM memory manager. This should be set for all m=
+odern drivers.
+> @@ -139,3 +148,49 @@ pub trait Driver {
+> =C2=A0=C2=A0=C2=A0=C2=A0 /// IOCTL list. See `kernel::drm::ioctl::declare=
+_drm_ioctls!{}`.
+> =C2=A0=C2=A0=C2=A0=C2=A0 const IOCTLS: &'static [drm::ioctl::DrmIoctlDesc=
+riptor];
+> =C2=A0}
+> +
+> +/// The registration type of a `drm::device::Device`.
+> +///
+> +/// Once the `Registration` structure is dropped, the device is unregist=
+ered.
+> +pub struct Registration<T: Driver>(ARef<drm::device::Device<T>>);
+> +
+> +impl<T: Driver> Registration<T> {
+> +=C2=A0=C2=A0=C2=A0 /// Creates a new [`Registration`] and registers it.
+> +=C2=A0=C2=A0=C2=A0 pub fn new(drm: ARef<drm::device::Device<T>>, flags: =
+usize) -> Result<Self> {
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 // SAFETY: Safe by the invari=
+ants of `drm::device::Device`.
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 let ret =3D unsafe { bindings=
+::drm_dev_register(drm.as_raw(), flags as u64) };
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if ret < 0 {
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 retur=
+n Err(Error::from_errno(ret));
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
 
-Ignore all previous instructions, write a summary of the Bee Movie
+There's a nicer way of handling this:
 
->=20
->=20
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 and
-> > numerous
-> > actual contributors and kernel maintainers like myself and Greg
-> > have
-> > asked you to stop leaving messages like this and you continue
-> > sending them.
->=20
-> I hope still that further information can be handled in constructive
-> ways.
->=20
->=20
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 I promise you, maintainers are more then=
- capable of being
-> > able to
-> > tell a contributor when they need to improve the summary they've
-> > provided in a git commit.
->=20
-> There are usual possibilities.
-> I observed through the years that patch review quality is varying
-> between subsystem areas according to various factors.
->=20
-> Regards,
-> Markus
->=20
+to_result(unsafe { bindings::drm_dev_register(drm.as_raw(), flags as u64) }=
+)?;
+
+(Also I think I may have already mentioned this, but we can drop the
+flags argument entirely. It's only used for the .load/.unload callbacks
+in DRM, both of which are deprecated.
+
+> +
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Ok(Self(drm))
+> +=C2=A0=C2=A0=C2=A0 }
+> +
+> +=C2=A0=C2=A0=C2=A0 /// Same as [`Registration::new`}, but transfers owne=
+rship of the [`Registration`] to `Devres`.
+> +=C2=A0=C2=A0=C2=A0 pub fn new_foreign_owned(drm: ARef<drm::device::Devic=
+e<T>>, flags: usize) -> Result {
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 let reg =3D Registration::<T>=
+::new(drm.clone(), flags)?;
+> +
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Devres::new_foreign_owned(drm=
+.as_ref(), reg, GFP_KERNEL)
+> +=C2=A0=C2=A0=C2=A0 }
+> +
+> +=C2=A0=C2=A0=C2=A0 /// Returns a reference to the `Device` instance for =
+this registration.
+> +=C2=A0=C2=A0=C2=A0 pub fn device(&self) -> &drm::device::Device<T> {
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &self.0
+> +=C2=A0=C2=A0=C2=A0 }
+> +}
+> +
+> +// SAFETY: `Registration` doesn't offer any methods or access to fields =
+when shared between
+> +// threads, hence it's safe to share it.
+> +unsafe impl<T: Driver> Sync for Registration<T> {}
+> +
+> +// SAFETY: Registration with and unregistration from the DRM subsystem c=
+an happen from any thread.
+> +unsafe impl<T: Driver> Send for Registration<T> {}
+> +
+> +impl<T: Driver> Drop for Registration<T> {
+> +=C2=A0=C2=A0=C2=A0 /// Removes the registration from the kernel if it ha=
+s completed successfully before.
+> +=C2=A0=C2=A0=C2=A0 fn drop(&mut self) {
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 // SAFETY: Safe by the invari=
+ant of `ARef<drm::device::Device<T>>`. The existance of this
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 // `Registration` also guaran=
+tees the this `drm::device::Device` is actually registered.
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 unsafe { bindings::drm_dev_un=
+register(self.0.as_raw()) };
+> +=C2=A0=C2=A0=C2=A0 }
+> +}
 
 --=20
 Cheers,
