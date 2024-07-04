@@ -2,72 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4951292AD63
-	for <lists+nouveau@lfdr.de>; Tue,  9 Jul 2024 02:55:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4209C92AD67
+	for <lists+nouveau@lfdr.de>; Tue,  9 Jul 2024 02:55:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D973A10E46D;
-	Tue,  9 Jul 2024 00:55:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C81E410E474;
+	Tue,  9 Jul 2024 00:55:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="JeIsRYyI";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="kBXzwc5+";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2050.outbound.protection.outlook.com [40.107.223.50])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A37D210E450
- for <nouveau@lists.freedesktop.org>; Tue,  9 Jul 2024 00:55:41 +0000 (UTC)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2068.outbound.protection.outlook.com [40.107.93.68])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CD6F910E470
+ for <nouveau@lists.freedesktop.org>; Tue,  9 Jul 2024 00:55:49 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AWrUKOiEW6EQovdUAqeOPCFfIZVYGo9WhEkmztyvp8cwOtJil5VTb4/wGrsNVCH8Xf8KX4Rf6b6hfS51xgAI0+K9HIJdLQTfcQ4SjYoBrGH+Ao5Bf603R+SuF/c4MP1xoKiKEHnT5MF5cL/mLmFYn1csQazrrWXl9Qmy2I+ISeH6ExKHdTuFYxRv79wSZDbpy4/OOSZA/Ir3FfI5oC5u49YIkMcu5+Za2WRILCR7U5YePartr8/0EETy31Dhij1yOJO6jBH3VM9Hp6ZKLBP+RVRoE3Imbfa7m7MosK8d/lsHWkt2MduHmHbAUxVvdqqMt55pctcW45V+biP2Z3fqCA==
+ b=ieEwq2rp61q1u5D1JLtVlMdGHv3V7Wmilwyg51JW01ODFDpuRq2ld74ARPYiCoMNZ3tpRu3s2qQdfTBkDDJEXl/l7VRLzdBJIof6S9P2SLzdJsfR6A+d6uqBdXyC2ThyJZCfejo1+bLVKn7EIJFx94UZCYTZzoEFwQq1/vne+FTD+QzeZRSrgJoXhw/bCCSNPjx/oTjPUItT1VCXd1cEskkzpEsvP4/t2Wk5Tmea9bSLigO7UdgUa2hNqlSy3lb2Cps6J66LJG4IPclc7CamiHIFZIlwO6aAWcr+fPQHKYSUPHkkWz3sVztC1yIBHaYR8JVdMyOIJ6f6Nt99CsD2JQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e0IlDpDhAVO0NwDssxAddT0uN9C/3PRRK6a7R11O1ns=;
- b=Pnx6gV3cmiTxXnemo4Yjk1DCKxPqOXQ06/0off/yeEQu/6o+oCKi5g4Gvq9LLk4F0bUDlzUot4u5kkAl1N2grwqefi9XOvJVJGNTQDaQwmcOxSbhHtyl2aO8kBmJw5M/7Yra1TxmoBh6cJnuEl1lSENb9b5XBb5Vy3v9qOaI5uNlkDilnccbMcetC7/HQ3lZ/ucWFruokvbNj28iBkJb/Peeva2IvStxpj1PLqBli5lja4bJXscBlA69lp0J9YPxi+3XtXpDMK7WCgnWWkLc5LGwTtlVUWmhEJDyYtJNPSHFhCA3S5uVewzi3165JJ8vD5S93+H4KpwLitVN5mT+ww==
+ bh=O7Yyw6Ii7tkE83UGMn3l5fKlHsfZHHlEwCMuAnBU98A=;
+ b=HMiw+KuBmUxxDVb104Ud7ohSaBwEhV38xB4QdFjsDajHHmqXydLH9AQWQfuDypR5PCwKI+FOVbaZ41mORIPYXXzRL1uz2r9udND2XrT9wUkH21nwbPhTma8sNrzuzGjPcL6wpEFtHcSXZ9Ul+l35QfM3GyZsjfq368FTUXXWY9sE1kDBCeVFD1eBk5/zs6ubc43JDnuryu4UA2M25N5OlrslXZxfbdCHWHyWSzfpdwUgrRP1e94Xbwjq91n2uuYEMpdt//s3c7NlInVPcIpQ6D8Vuu/pMOykc+Zx1kVDcb8P404JJsXHVegFi0hlRYFeyk15YhKUunWQyhhlPEycXw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=lists.freedesktop.org
+ 216.228.117.160) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
  header.from=nvidia.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e0IlDpDhAVO0NwDssxAddT0uN9C/3PRRK6a7R11O1ns=;
- b=JeIsRYyIAKGrG++JPSF+rAD3lNCc6jGDv+L/Mn/bHGFaQ+R2tlMAWbsDoDvDFKvEPtvI5wRSoPdDzEeuGOPTNo+HMVDojDMcG6nMHZzjY8ZtEvc3pr77YwVo/Prasa9qfGKcfH5uul6sgY7mcJfUhre65YRiRPQDHpUUyr8RA6oKHZQlio0T8DLZRTvCZrCMfyICU0RrqoZLNmUU3Ig7pWpqZWtLGvRbk8jGSlO2Ml1pZKUDv8Z2XQ/SSv4ISYSoGm576noOWGPfEMtzAdUNYwywaBd58pIusU5xVigpUkfBVJwqM3sIbKmRCcTBjbeMKDvRDted1vpEy1VSlF8oIA==
-Received: from CH2PR14CA0017.namprd14.prod.outlook.com (2603:10b6:610:60::27)
- by CH2PR12MB4327.namprd12.prod.outlook.com (2603:10b6:610:7d::13)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=O7Yyw6Ii7tkE83UGMn3l5fKlHsfZHHlEwCMuAnBU98A=;
+ b=kBXzwc5+013A3nc0cyvYl2a5ydnmoMuPBySBM5isq0bNZTMmyh17cLsbMnSdrJFEomuMUtqFpG0jPoW6QyXXQ1BiC49w0gFhuun69mITx9wl+B2CvczPRKIWmA0sT+yW8dPppIzzF4iEujGInJkliM/qdfBQL9CUF925fKK/4jLfAh51lgZLkH+hAo/PrbxGsvMYOTgM2tPHgshJn6AUU0v/QfQavoT7EvQ0jhLyKcROq8ifs0/s3qU3UWxiytPW1V2fHiO//gxHT8SMbKHz0uR53BMA8SPKu+HAn3JpJ0GQ+MtLpah5bFqUs39gW+IgUdOVey9gEiNo3NiTQj+RiQ==
+Received: from CY5P221CA0010.NAMP221.PROD.OUTLOOK.COM (2603:10b6:930:b::31) by
+ LV2PR12MB5869.namprd12.prod.outlook.com (2603:10b6:408:176::16) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.35; Tue, 9 Jul
- 2024 00:55:39 +0000
-Received: from CH1PEPF0000AD82.namprd04.prod.outlook.com
- (2603:10b6:610:60:cafe::1a) by CH2PR14CA0017.outlook.office365.com
- (2603:10b6:610:60::27) with Microsoft SMTP Server (version=TLS1_2,
+ 2024 00:55:44 +0000
+Received: from CY4PEPF0000E9D4.namprd03.prod.outlook.com
+ (2603:10b6:930:b:cafe::fa) by CY5P221CA0010.outlook.office365.com
+ (2603:10b6:930:b::31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.36 via Frontend
- Transport; Tue, 9 Jul 2024 00:55:39 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ Transport; Tue, 9 Jul 2024 00:55:43 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- CH1PEPF0000AD82.mail.protection.outlook.com (10.167.244.91) with Microsoft
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ CY4PEPF0000E9D4.mail.protection.outlook.com (10.167.241.139) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7762.17 via Frontend Transport; Tue, 9 Jul 2024 00:55:38 +0000
+ 15.20.7762.17 via Frontend Transport; Tue, 9 Jul 2024 00:55:43 +0000
 Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 8 Jul 2024
- 17:55:27 -0700
+ 17:55:29 -0700
 Received: from fedora.mshome.net (10.126.230.35) by rnnvmail201.nvidia.com
  (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Mon, 8 Jul 2024
- 17:55:26 -0700
+ 17:55:27 -0700
 From: Ben Skeggs <bskeggs@nvidia.com>
 To: <nouveau@lists.freedesktop.org>
 CC: Ben Skeggs <bskeggs@nvidia.com>
-Subject: [PATCH v2 30/37] drm/nouveau: pass drm to nv50_dmac_create(),
- rather than device+disp
-Date: Fri, 5 Jul 2024 04:37:14 +1000
-Message-ID: <20240704183721.25778-31-bskeggs@nvidia.com>
+Subject: [PATCH v2 31/37] drm/nouveau: pass cli to nouveau_channel_new()
+ instead of drm+device
+Date: Fri, 5 Jul 2024 04:37:15 +1000
+Message-ID: <20240704183721.25778-32-bskeggs@nvidia.com>
 X-Mailer: git-send-email 2.45.1
 In-Reply-To: <20240704183721.25778-1-bskeggs@nvidia.com>
 References: <20240704183721.25778-1-bskeggs@nvidia.com>
@@ -79,51 +79,51 @@ X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
  rnnvmail201.nvidia.com (10.129.68.8)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD82:EE_|CH2PR12MB4327:EE_
-X-MS-Office365-Filtering-Correlation-Id: f047d922-f700-4352-812b-08dc9fb1d9bc
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D4:EE_|LV2PR12MB5869:EE_
+X-MS-Office365-Filtering-Correlation-Id: e3c20046-9298-4287-24df-08dc9fb1dc58
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?nTo2CHd0Pbu68hmWQXCxG0aw8jtiAZsvmYJmDz6UAd1kyMs/+BlRaZUg2K0l?=
- =?us-ascii?Q?TnfIJ5fTdIkkxmL2uMLm6kek6ikP8AhqZmYF2o9IMskxcTO+zn0VP5qZ1c1j?=
- =?us-ascii?Q?VNTr+ZorT7xh7PWyJ8QDiSSzH4xoA88jFD4koAh4bsKaQjP8Ug2k6rhQroPR?=
- =?us-ascii?Q?hWhzD1fNMgRZFui3QrBbxJ+UpEINbA5aRoRLAVrrS4H00iDVEyjDyR94s/rp?=
- =?us-ascii?Q?lzruUqle5tTsjgUMw92bxKoQUJ8jfVESLrVGaoOWadcJQi+lMzdW9TOOyg3L?=
- =?us-ascii?Q?frtZkCRW3o/dM392l97YB511QJhwJ6TC+1fpI4xqhkuoBdP8mz/HJ2Oolhze?=
- =?us-ascii?Q?07kjy778QgwA2sf0hWoRNR4Jc874TAVR8T+frgEMrnXRPOotUzoS3IJnScRJ?=
- =?us-ascii?Q?NRnbNj/00kpCe/s7CZVqhPiV5hzHdghyHJTtmW3EiFKbcyyQILdsq6+jq77v?=
- =?us-ascii?Q?CIurKgWtogG5Wtg5EyDdEZFjnh3OKtEiQsNzD2vEvcr34XZiP0tgTvolBOGT?=
- =?us-ascii?Q?Hy0kFDN1D9bgl0uJYMi2J5UWXMho1vn0DWHJZT2DATBcRoVNLtE52nmN/Us1?=
- =?us-ascii?Q?WYfWpZOgLqoVwWWKQTQ8gwXufa6EyTLMj/Rh3O/GtbbKgpjoU6ZshdMIv8LO?=
- =?us-ascii?Q?lxWVn5YkkNER9Jp9LhAt/9la8ux6QTPTsSYdBoRqJEZ1KO0OQ38l3SqjqWGu?=
- =?us-ascii?Q?vYqOUzmE2Wyg2zvh3mWPoKLEZU5OPjcQcYnbeoGC0OpBPc5XH7Hu0bPGbbOs?=
- =?us-ascii?Q?/iySgOJr+k2RZHqTdNUl1DJS2F7u2FKby5PycLLz9y3oLKHINSsAHOtHD85n?=
- =?us-ascii?Q?UFmewUpy+jzPqykAGJACQD78OoAR+50JbPatHa5lCdN3lziH4HhgrrZFLi34?=
- =?us-ascii?Q?3cpkFkkAsk1ojta7Y01ZjuDFuUA72FfW7r4BhTcllSpbnz8YMHWVn5Tm2nGE?=
- =?us-ascii?Q?a93FAw/fKSAfjCqUeYj6tVosi00/TRFp2hAwjiGtJxqwQSubRokz+nbzLQAB?=
- =?us-ascii?Q?fY6o4A3uOE7IVIoMlKflmYHzS9ylFE1BL8YpErsAGgdBw6wOUnQ8Ou/thtkO?=
- =?us-ascii?Q?fp7Hhmw3dLyUzdhbcf0hykt7onsbCDNWjerELXG7RzPaANrPlng9ZHijkoIN?=
- =?us-ascii?Q?84IePAMolNA7PKpRyOH+089lEVMTna2UVsCX4ROi55ZRrWAHGytx7uXTkscX?=
- =?us-ascii?Q?TaKwSYxnN7eLoJh1K/4jRe88vjzGzrfJM+hyPoHqLuW8zjSMbQsgOT92eBn3?=
- =?us-ascii?Q?6us2XHP0s/Lz9Qe2emVgV3C2ivD3j2ZC4hA8flaIiX4scQg6Y5bJxExeGOfB?=
- =?us-ascii?Q?uznfwe/VDthzFhGOG/lo9akygLFSY76JCYX1jfec48eXHKdrXtbify2Cu6bM?=
- =?us-ascii?Q?pKzXhTiL78AkUs7Bmj2BO5bwaUmMMr7YLaEy5sbkEHwQrcYxYPxXkfIEoRwO?=
- =?us-ascii?Q?OdND3uT03Lbq7otCLKzk4ylHeyCy4vGO?=
-X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
+ ARA:13230040|376014|82310400026|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?zaoN/H9APs0L5YhADu4gYsQtzQ3KWEGn4+YkjagCxovJGD08zsDhN7uoZsaz?=
+ =?us-ascii?Q?xKcgD92Nnx3IIPOMGOzPfPJjfpPM4EKqOhUWUrPmcrSsHZeXciiXM7VVqEp/?=
+ =?us-ascii?Q?oHZwaBVYcLlr/yvoTN7vQJacD0RWtU9IGdO3tjoSwb/MsbkR/fJOBm9BqqX2?=
+ =?us-ascii?Q?7DxCbSRfncg03qyIz+meSwjA1AUUuibIOsx3H2xe2L7mwjzZiIUeeR+SSIQp?=
+ =?us-ascii?Q?9cAvr4RP2FJQLVc/4uWhFZYbKWk0ueo70A1PnJGd4e9CodL4lHjpRqdzj5J2?=
+ =?us-ascii?Q?OvLy891E9/bkvg6Zjq4AvXaeq9RWF5ab6xi9zSgi7NMyTdOeHQrMLwwodab/?=
+ =?us-ascii?Q?A8fxwz+t05vnT+ptfi4VoUbw7FMO6qlmqqH08bMh7ZINGSDrRXaGym8b5i/N?=
+ =?us-ascii?Q?7ltKOscWOt9WCUrZ/8brNOKuWCpRm6ZYQiftQwD7Ybx92wOghP7FXtHHKnpt?=
+ =?us-ascii?Q?Z6IG/GZcwWKyx/sG17NjquswndP77HusMEv6NSdi6861h3IJF57ZztaB2VRo?=
+ =?us-ascii?Q?ZPL4eJl+Y6BOQub9e0wmFPgPq+dQ8wKK8s0mGb42grArSWtkhBAal4AKqpZ3?=
+ =?us-ascii?Q?amA8i3xr2U2mSENz1DvHp2Zu+HcKbUa9e0WXmqhykK/6Hsg8S6de6wpDcSsn?=
+ =?us-ascii?Q?0FSJlSYVtejG16zqvpSeiRPjVAZLU45Go3ZuT5sg3j9k87FNS4nz4cM8iO9u?=
+ =?us-ascii?Q?M08MNXHCH2pSMVMYX03IRafvvd4SlB80obMuDlr0IzTmpP7be//7d0K8M+Cm?=
+ =?us-ascii?Q?u4L3fa4Wq9PgtHdRoPGzIsfJj7xRL6IabspYNNPBHjtv0VMSpd0jQeXN1sGF?=
+ =?us-ascii?Q?vMgT2N1gnhYuFtEwVIBlUJl9SKwMs1PD9ZRIM44ianQpEFNJNpDFOnXMXgoW?=
+ =?us-ascii?Q?X7pxkmxCTia78hc2Hzgb9IXvyRTzrRw5CA3L+l7WYwO58DaLgTD4UitMS6t1?=
+ =?us-ascii?Q?pe8IEiSPJmWRMkdT/sTK07mwpIlX7x5WE4p5hu/6swCYgZd0Mumaeyn3k/JM?=
+ =?us-ascii?Q?lAe6Lt3ximVeEMHwmOp/Ilrg8N7xeunJpgQyRH+Uxw544taUZqXrB27NNJBM?=
+ =?us-ascii?Q?Dh9dAwB4Lm/zRYgZBrhkWrBa0I5LW5yrBXJQBejQ4Ewpb7GtSxpmZZAXys5G?=
+ =?us-ascii?Q?W7fAtfYauE1V807oRXbokuBNM6hSZtOzUSCHiz99pKxnsWUBj1vJSRSrLR8y?=
+ =?us-ascii?Q?EjWqd6NEGGRam+s9QTy2F9d/TJKmk8mIHIqyGaYcFQ0kKc0OEDXkm9zzgt9p?=
+ =?us-ascii?Q?AmmVR+XFka4dFFEJp4tbGbWQyLpq2EeNJbUk+x4aTy7vdpRCzFiz5K2pIgSs?=
+ =?us-ascii?Q?YptCduv6nNzm55fhxGeKUEnAtIlWlHi1mPkLb0MU8HqiHkvzl+xskq0L9BdD?=
+ =?us-ascii?Q?e51hxQ9K4ImzZMWpkqpLGEa5W2G2cQ40qFOYD30Au0OLYseeqeEy0TUHISOf?=
+ =?us-ascii?Q?lZ22KCbz6InYWgyrkeQWU6rUAAl7cy2g?=
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2024 00:55:38.8461 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f047d922-f700-4352-812b-08dc9fb1d9bc
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2024 00:55:43.3622 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e3c20046-9298-4287-24df-08dc9fb1dc58
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD82.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D4.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4327
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5869
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -138,137 +138,188 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Both of these are stored in nouveau_drm already.
+Both of these are stored in nouveau_cli already, and also allows the
+removal of some void casts.
 
 Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 ---
- drivers/gpu/drm/nouveau/dispnv50/base507c.c | 3 +--
- drivers/gpu/drm/nouveau/dispnv50/core507d.c | 2 +-
- drivers/gpu/drm/nouveau/dispnv50/disp.c     | 8 ++++----
- drivers/gpu/drm/nouveau/dispnv50/disp.h     | 2 +-
- drivers/gpu/drm/nouveau/dispnv50/ovly507e.c | 2 +-
- drivers/gpu/drm/nouveau/dispnv50/wimmc37b.c | 3 +--
- drivers/gpu/drm/nouveau/dispnv50/wndwc37e.c | 2 +-
- 7 files changed, 10 insertions(+), 12 deletions(-)
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_abi16.c |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_bo.c    |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_chan.c  | 21 +++++++++++----------
+ drivers/gpu/drm/nouveau/nouveau_chan.h  |  3 ++-
+ drivers/gpu/drm/nouveau/nouveau_drm.c   |  4 ++--
+ 6 files changed, 18 insertions(+), 16 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/base507c.c b/drivers/gpu/drm/nouveau/dispnv50/base507c.c
-index 70c62b861276..e36a473f2075 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/base507c.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/base507c.c
-@@ -307,7 +307,6 @@ base507c_new_(const struct nv50_wndw_func *func, const u32 *format,
- 	struct nvif_disp_chan_v0 args = {
- 		.id = head,
- 	};
--	struct nouveau_display *disp = nouveau_display(drm->dev);
- 	struct nv50_disp *disp50 = nv50_disp(drm->dev);
- 	struct nv50_wndw *wndw;
+diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+index e5067d5a4801..41fd6e339221 100644
+--- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
++++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+@@ -1157,7 +1157,7 @@ nv04_crtc_page_flip(struct drm_crtc *crtc, struct drm_framebuffer *fb,
+ 	chan = drm->channel;
+ 	if (!chan)
+ 		return -ENODEV;
+-	cli = (void *)chan->user.client;
++	cli = chan->cli;
+ 	push = chan->chan.push;
+ 
+ 	s = kzalloc(sizeof(*s), GFP_KERNEL);
+diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+index 5d74c36a4ca5..4239f7bedc32 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
++++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+@@ -396,7 +396,7 @@ nouveau_abi16_ioctl_channel_alloc(ABI16_IOCTL_ARGS)
+ 	list_add(&chan->head, &abi16->channels);
+ 
+ 	/* create channel object and initialise dma and fence management */
+-	ret = nouveau_channel_new(drm, device, false, runm, init->fb_ctxdma_handle,
++	ret = nouveau_channel_new(cli, false, runm, init->fb_ctxdma_handle,
+ 				  init->tt_ctxdma_handle, &chan->chan);
+ 	if (ret)
+ 		goto done;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+index 6631d85ea749..745b7d7503f7 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_bo.c
++++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+@@ -859,7 +859,7 @@ nouveau_bo_move_m2mf(struct ttm_buffer_object *bo, int evict,
+ {
+ 	struct nouveau_drm *drm = nouveau_bdev(bo->bdev);
+ 	struct nouveau_channel *chan = drm->ttm.chan;
+-	struct nouveau_cli *cli = (void *)chan->user.client;
++	struct nouveau_cli *cli = chan->cli;
+ 	struct nouveau_fence *fence;
  	int ret;
-@@ -318,7 +317,7 @@ base507c_new_(const struct nv50_wndw_func *func, const u32 *format,
- 	if (*pwndw = wndw, ret)
- 		return ret;
  
--	ret = nv50_dmac_create(&drm->client.device, &disp->disp.object,
-+	ret = nv50_dmac_create(drm,
- 			       &oclass, head, &args, sizeof(args),
- 			       disp50->sync->offset, &wndw->wndw);
- 	if (ret) {
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/core507d.c b/drivers/gpu/drm/nouveau/dispnv50/core507d.c
-index e5bb5ca950c8..85845e3dc7ba 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/core507d.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/core507d.c
-@@ -166,7 +166,7 @@ core507d_new_(const struct nv50_core_func *func, struct nouveau_drm *drm,
- 		return -ENOMEM;
- 	core->func = func;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.c b/drivers/gpu/drm/nouveau/nouveau_chan.c
+index 0105d4704c3a..e5c0d8526e46 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_chan.c
++++ b/drivers/gpu/drm/nouveau/nouveau_chan.c
+@@ -52,7 +52,7 @@ static int
+ nouveau_channel_killed(struct nvif_event *event, void *repv, u32 repc)
+ {
+ 	struct nouveau_channel *chan = container_of(event, typeof(*chan), kill);
+-	struct nouveau_cli *cli = (void *)chan->user.client;
++	struct nouveau_cli *cli = chan->cli;
  
--	ret = nv50_dmac_create(&drm->client.device, &disp->disp->object,
-+	ret = nv50_dmac_create(drm,
- 			       &oclass, 0, &args, sizeof(args),
- 			       disp->sync->offset, &core->chan);
- 	if (ret) {
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 80803346b620..deed18876c7d 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -229,11 +229,12 @@ static int nv50_dmac_vram_pushbuf = -1;
- module_param_named(kms_vram_pushbuf, nv50_dmac_vram_pushbuf, int, 0400);
+ 	NV_PRINTK(warn, cli, "channel %d killed!\n", chan->chid);
  
- int
--nv50_dmac_create(struct nvif_device *device, struct nvif_object *disp,
-+nv50_dmac_create(struct nouveau_drm *drm,
- 		 const s32 *oclass, u8 head, void *data, u32 size, s64 syncbuf,
- 		 struct nv50_dmac *dmac)
+@@ -66,7 +66,7 @@ int
+ nouveau_channel_idle(struct nouveau_channel *chan)
+ {
+ 	if (likely(chan && chan->fence && !atomic_read(&chan->killed))) {
+-		struct nouveau_cli *cli = (void *)chan->user.client;
++		struct nouveau_cli *cli = chan->cli;
+ 		struct nouveau_fence *fence = NULL;
+ 		int ret;
+ 
+@@ -142,10 +142,11 @@ nouveau_channel_wait(struct nvif_push *push, u32 size)
+ }
+ 
+ static int
+-nouveau_channel_prep(struct nouveau_drm *drm, struct nvif_device *device,
++nouveau_channel_prep(struct nouveau_cli *cli,
+ 		     u32 size, struct nouveau_channel **pchan)
  {
 -	struct nouveau_cli *cli = (void *)device->object.client;
-+	struct nvif_device *device = &drm->device;
-+	struct nvif_object *disp = &drm->display->disp.object;
- 	struct nvif_disp_chan_v0 *args = data;
- 	u8 type = NVIF_MEM_COHERENT;
- 	int ret;
-@@ -253,8 +254,7 @@ nv50_dmac_create(struct nvif_device *device, struct nvif_object *disp,
- 	    (nv50_dmac_vram_pushbuf < 0 && device->info.family == NV_DEVICE_INFO_V0_PASCAL))
- 		type |= NVIF_MEM_VRAM;
++	struct nouveau_drm *drm = cli->drm;
++	struct nvif_device *device = &cli->device;
+ 	struct nv_dma_v0 args = {};
+ 	struct nouveau_channel *chan;
+ 	u32 target;
+@@ -155,6 +156,7 @@ nouveau_channel_prep(struct nouveau_drm *drm, struct nvif_device *device,
+ 	if (!chan)
+ 		return -ENOMEM;
  
--	ret = nvif_mem_ctor_map(&cli->mmu, "kmsChanPush", type, 0x1000,
--				&dmac->_push.mem);
-+	ret = nvif_mem_ctor_map(&drm->mmu, "kmsChanPush", type, 0x1000, &dmac->_push.mem);
++	chan->cli = cli;
+ 	chan->device = device;
+ 	chan->drm = drm;
+ 	chan->vmm = nouveau_cli_vmm(cli);
+@@ -253,7 +255,7 @@ nouveau_channel_prep(struct nouveau_drm *drm, struct nvif_device *device,
+ }
+ 
+ static int
+-nouveau_channel_ctor(struct nouveau_drm *drm, struct nvif_device *device, bool priv, u64 runm,
++nouveau_channel_ctor(struct nouveau_cli *cli, bool priv, u64 runm,
+ 		     struct nouveau_channel **pchan)
+ {
+ 	const struct nvif_mclass hosts[] = {
+@@ -278,7 +280,7 @@ nouveau_channel_ctor(struct nouveau_drm *drm, struct nvif_device *device, bool p
+ 		struct nvif_chan_v0 chan;
+ 		char name[TASK_COMM_LEN+16];
+ 	} args;
+-	struct nouveau_cli *cli = (void *)device->object.client;
++	struct nvif_device *device = &cli->device;
+ 	struct nouveau_channel *chan;
+ 	const u64 plength = 0x10000;
+ 	const u64 ioffset = plength;
+@@ -297,7 +299,7 @@ nouveau_channel_ctor(struct nouveau_drm *drm, struct nvif_device *device, bool p
+ 		size = ioffset + ilength;
+ 
+ 	/* allocate dma push buffer */
+-	ret = nouveau_channel_prep(drm, device, size, &chan);
++	ret = nouveau_channel_prep(cli, size, &chan);
+ 	*pchan = chan;
  	if (ret)
  		return ret;
+@@ -492,13 +494,12 @@ nouveau_channel_init(struct nouveau_channel *chan, u32 vram, u32 gart)
+ }
  
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.h b/drivers/gpu/drm/nouveau/dispnv50/disp.h
-index 5508a7cfd492..da3add95f354 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.h
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.h
-@@ -95,7 +95,7 @@ struct nv50_outp_atom {
- 	} set, clr;
- };
- 
--int nv50_dmac_create(struct nvif_device *device, struct nvif_object *disp,
-+int nv50_dmac_create(struct nouveau_drm *,
- 		     const s32 *oclass, u8 head, void *data, u32 size,
- 		     s64 syncbuf, struct nv50_dmac *dmac);
- void nv50_dmac_destroy(struct nv50_dmac *);
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/ovly507e.c b/drivers/gpu/drm/nouveau/dispnv50/ovly507e.c
-index 797c1e4e0eaa..73fcfb27c32c 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/ovly507e.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/ovly507e.c
-@@ -159,7 +159,7 @@ ovly507e_new_(const struct nv50_wndw_func *func, const u32 *format,
- 	if (*pwndw = wndw, ret)
- 		return ret;
- 
--	ret = nv50_dmac_create(&drm->client.device, &disp->disp->object,
-+	ret = nv50_dmac_create(drm,
- 			       &oclass, 0, &args, sizeof(args),
- 			       disp->sync->offset, &wndw->wndw);
- 	if (ret) {
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/wimmc37b.c b/drivers/gpu/drm/nouveau/dispnv50/wimmc37b.c
-index ee76b091d4ef..8cb5b79bacbf 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/wimmc37b.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/wimmc37b.c
-@@ -71,10 +71,9 @@ wimmc37b_init_(const struct nv50_wimm_func *func, struct nouveau_drm *drm,
- 	struct nvif_disp_chan_v0 args = {
- 		.id = wndw->id,
- 	};
--	struct nv50_disp *disp = nv50_disp(drm->dev);
+ int
+-nouveau_channel_new(struct nouveau_drm *drm, struct nvif_device *device,
++nouveau_channel_new(struct nouveau_cli *cli,
+ 		    bool priv, u64 runm, u32 vram, u32 gart, struct nouveau_channel **pchan)
+ {
+-	struct nouveau_cli *cli = (void *)device->object.client;
  	int ret;
  
--	ret = nv50_dmac_create(&drm->client.device, &disp->disp->object,
-+	ret = nv50_dmac_create(drm,
- 			       &oclass, 0, &args, sizeof(args), -1,
- 			       &wndw->wimm);
+-	ret = nouveau_channel_ctor(drm, device, priv, runm, pchan);
++	ret = nouveau_channel_ctor(cli, priv, runm, pchan);
  	if (ret) {
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndwc37e.c b/drivers/gpu/drm/nouveau/dispnv50/wndwc37e.c
-index b3deea5aca58..caf40977f455 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/wndwc37e.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/wndwc37e.c
-@@ -363,7 +363,7 @@ wndwc37e_new_(const struct nv50_wndw_func *func, struct nouveau_drm *drm,
- 	if (*pwndw = wndw, ret)
+ 		NV_PRINTK(dbg, cli, "channel create, %d\n", ret);
  		return ret;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.h b/drivers/gpu/drm/nouveau/nouveau_chan.h
+index 5de2ef4e98c2..260febd634ee 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_chan.h
++++ b/drivers/gpu/drm/nouveau/nouveau_chan.h
+@@ -12,6 +12,7 @@ struct nouveau_channel {
+ 		struct nvif_push *push;
+ 	} chan;
  
--	ret = nv50_dmac_create(&drm->client.device, &disp->disp->object,
-+	ret = nv50_dmac_create(drm,
- 			       &oclass, 0, &args, sizeof(args),
- 			       disp->sync->offset, &wndw->wndw);
++	struct nouveau_cli *cli;
+ 	struct nvif_device *device;
+ 	struct nouveau_drm *drm;
+ 	struct nouveau_vmm *vmm;
+@@ -62,7 +63,7 @@ struct nouveau_channel {
+ int nouveau_channels_init(struct nouveau_drm *);
+ void nouveau_channels_fini(struct nouveau_drm *);
+ 
+-int  nouveau_channel_new(struct nouveau_drm *, struct nvif_device *, bool priv, u64 runm,
++int  nouveau_channel_new(struct nouveau_cli *, bool priv, u64 runm,
+ 			 u32 vram, u32 gart, struct nouveau_channel **);
+ void nouveau_channel_del(struct nouveau_channel **);
+ int  nouveau_channel_idle(struct nouveau_channel *);
+diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+index 07748cfab233..c6c9a528783a 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_drm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+@@ -335,7 +335,7 @@ nouveau_accel_ce_init(struct nouveau_drm *drm)
+ 		return;
+ 	}
+ 
+-	ret = nouveau_channel_new(drm, device, false, runm, NvDmaFB, NvDmaTT, &drm->cechan);
++	ret = nouveau_channel_new(&drm->client, false, runm, NvDmaFB, NvDmaTT, &drm->cechan);
+ 	if (ret)
+ 		NV_ERROR(drm, "failed to create ce channel, %d\n", ret);
+ }
+@@ -363,7 +363,7 @@ nouveau_accel_gr_init(struct nouveau_drm *drm)
+ 		return;
+ 	}
+ 
+-	ret = nouveau_channel_new(drm, device, false, runm, NvDmaFB, NvDmaTT, &drm->channel);
++	ret = nouveau_channel_new(&drm->client, false, runm, NvDmaFB, NvDmaTT, &drm->channel);
  	if (ret) {
+ 		NV_ERROR(drm, "failed to create kernel channel, %d\n", ret);
+ 		nouveau_accel_gr_fini(drm);
 -- 
 2.45.1
 
