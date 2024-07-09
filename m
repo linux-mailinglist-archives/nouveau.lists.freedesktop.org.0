@@ -2,75 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2897592BE79
-	for <lists+nouveau@lfdr.de>; Tue,  9 Jul 2024 17:33:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C23A692BE87
+	for <lists+nouveau@lfdr.de>; Tue,  9 Jul 2024 17:36:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2E61E10E5A3;
-	Tue,  9 Jul 2024 15:33:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 76C2210E5DD;
+	Tue,  9 Jul 2024 15:36:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="NTacrcZc";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ItXn4n5q";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CDF1B10E5A3
- for <nouveau@lists.freedesktop.org>; Tue,  9 Jul 2024 15:33:12 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CEDD410E5DD
+ for <nouveau@lists.freedesktop.org>; Tue,  9 Jul 2024 15:36:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1720539191;
+ s=mimecast20190719; t=1720539372;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=7/h3lrRQmAT3KOaYdsF1Zsx8pGGzzrUKa9UTkf0nBGI=;
- b=NTacrcZc8Ymx5Pr/1F73DsDZ1whnC3tedxVW97+pF5Y/2bdF04Y5teneI7dWJBr46AVN2X
- g2UR9oCb5sAuwfyONJEPXAsYCsO12PhDlO+OYoJYQsshAilEw/SY2bXhSN4JXOvj5tCqnW
- BLKkBVTIVm3gxi9TfMT0N8tDdBzCYDA=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=fOzKOqZqhRLSlTz57aVs6YwBrFQwkQOB0uqxRMl+U9E=;
+ b=ItXn4n5qKj4TqA6RKtf+kYDPoeKCCwUEotnFTvAQEE2nkEaxUBCvLVaQbpLJ/AN16HxmcW
+ T6Vrw5Me8wdGFL2lsEw8E6SNBxPPyHs/715Z4pJ+xat99rC8kGgP+C8hODajz53arQmMiL
+ xjWdg80vjUN+q5vnx59dZxC46321tSE=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-673-wGuuI3J6PxKEXI6D18fOsw-1; Tue, 09 Jul 2024 11:33:10 -0400
-X-MC-Unique: wGuuI3J6PxKEXI6D18fOsw-1
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-3679ed08797so3666037f8f.0
- for <nouveau@lists.freedesktop.org>; Tue, 09 Jul 2024 08:33:09 -0700 (PDT)
+ us-mta-634--6CaLJ1fNIa7nc5uGEUOuQ-1; Tue, 09 Jul 2024 11:36:11 -0400
+X-MC-Unique: -6CaLJ1fNIa7nc5uGEUOuQ-1
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-3678f403afaso3094455f8f.0
+ for <nouveau@lists.freedesktop.org>; Tue, 09 Jul 2024 08:36:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720539188; x=1721143988;
+ d=1e100.net; s=20230601; t=1720539370; x=1721144170;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7/h3lrRQmAT3KOaYdsF1Zsx8pGGzzrUKa9UTkf0nBGI=;
- b=Dr0iJBkGXQ+4JJmYRM2h99dgzj1Q7TMKIoFbR94Vish2+2L9hSxk4c2Byk47jGjk0n
- dpqtlJqQ03cbTQYZJkmX7O3RT5GJ5+fVfvh+8ZKnP+y4NYK8cj2ozZvKmjOUlXF3WHTg
- OTq7dLB+aQIXpr4OkV7FVV8DVTfp43u1ef9+7R7jkXquHQMEn91bGBMbkq+ThP2nt0lz
- c7wWrjs5uJ1JH9iopGbtb+VdHWRrW8Z/V/n0DXoxyfYE0/muil/dWn3RMloSuUJ32Snd
- G+OGij5B1kY5pbqHHsUUi4X5R81PPtsZR2VKWUANUlHQm8wqXl4zqyoC7fyUfz8H6J/I
- uenA==
-X-Gm-Message-State: AOJu0Yz3Y0uy+xPnjzhPeKV79BDyWyqE/I0VL6bQ2PpKAuGlKhqcPfAn
- 2U9zYDx8JeL9SVF7Ls2KMrIkVMxNLVm5AMaD98CFFzjaypjGaS+ZTLm2sLCTLSkc+WdZjG1aNB8
- r/OhEgD1Spm2zoXRB++EHh3Hi5HyovmE/fbjhME9goZujcdW9PwbXHJ8AQs5Os8MQpztXcYI=
-X-Received: by 2002:a5d:64e1:0:b0:367:973c:aa7b with SMTP id
- ffacd0b85a97d-367cea4600amr2731889f8f.2.1720539188640; 
- Tue, 09 Jul 2024 08:33:08 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFDkU1zmLB/Z7eQGv2/Byw6UvnueR1PQKS+48d8QoWF6xowvk9/Y+pyXOBU3az7y6EbbXZeDA==
-X-Received: by 2002:a5d:64e1:0:b0:367:973c:aa7b with SMTP id
- ffacd0b85a97d-367cea4600amr2731873f8f.2.1720539188246; 
- Tue, 09 Jul 2024 08:33:08 -0700 (PDT)
+ bh=fOzKOqZqhRLSlTz57aVs6YwBrFQwkQOB0uqxRMl+U9E=;
+ b=VHIB+tu/JZ+Tg4iGvsGTlkCs2etOMGOyl//+2x0X1YOIQhb/z2Fnqid79bNdWEXY9c
+ 40Eze2a97SAsgeQX6JDkZT7f7qBnB3TNT08UqZzA+baXMJFX5oK28kWocnpBl7fHexI1
+ nokbcJgob/0kVoroviLavtOAYyy9ZQCewiTwNwxiIh2759/aGgrkTJGJOHVFwipXe19m
+ gsim8ehqnPh9EsLPMjzWbv2AL7u/tuNGf0n06DaXmMrTxAlwHefYhxEcJTt594mlUDUN
+ 67GqIeBVago3hAJQCvJQbL4vVnvKNbdHKnIt9LTBn9IrjbDZBicIe1+jTvG/la0pEJ26
+ ncig==
+X-Gm-Message-State: AOJu0YxwRb4q/Stj3mnnFQMDdByBFiq/vfuJySPrlwcmff6kvQSuvDhh
+ MMeyFK4+BEizhoDRZBqLGHcaxgM7jad5kfxKY7i4Zie5Xangb+1JaUGBU9vhGpPShGkZWolnW4v
+ G/xYtsyZXArePkkhI7b8itplV2r+YI/QAOxuIpYsGz6aGQ49UJVGQkmyAhxlFZqc=
+X-Received: by 2002:a5d:6a51:0:b0:367:88c1:6bad with SMTP id
+ ffacd0b85a97d-367cead8f70mr1911534f8f.58.1720539370358; 
+ Tue, 09 Jul 2024 08:36:10 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEhnEvDTdqoCG2gIMh95ESs3EYuMGox38fSwtT6Z/izsAg3tOcZGL3fhZ3dFXvA3OPeVhGnqw==
+X-Received: by 2002:a5d:6a51:0:b0:367:88c1:6bad with SMTP id
+ ffacd0b85a97d-367cead8f70mr1911520f8f.58.1720539369963; 
+ Tue, 09 Jul 2024 08:36:09 -0700 (PDT)
 Received: from pollux ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-367cdfa07dasm2862184f8f.87.2024.07.09.08.33.07
+ ffacd0b85a97d-367cde89133sm2906675f8f.54.2024.07.09.08.36.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jul 2024 08:33:07 -0700 (PDT)
-Date: Tue, 9 Jul 2024 17:33:06 +0200
+ Tue, 09 Jul 2024 08:36:09 -0700 (PDT)
+Date: Tue, 9 Jul 2024 17:36:07 +0200
 From: Danilo Krummrich <dakr@redhat.com>
 To: Ben Skeggs <bskeggs@nvidia.com>
 Cc: nouveau@lists.freedesktop.org
-Subject: Re: [PATCH v2 06/37] drm/nouveau: move allocation of root client out
- of nouveau_cli_init()
-Message-ID: <Zo1YMjbL5ax8deYL@pollux>
+Subject: Re: [PATCH v2 07/37] drm/nouveau: add nouveau_cli to nouveau_abi16
+Message-ID: <Zo1Y52zhttYzPRXj@pollux>
 References: <20240704183721.25778-1-bskeggs@nvidia.com>
- <20240704183721.25778-7-bskeggs@nvidia.com>
+ <20240704183721.25778-8-bskeggs@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <20240704183721.25778-7-bskeggs@nvidia.com>
+In-Reply-To: <20240704183721.25778-8-bskeggs@nvidia.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=us-ascii
@@ -89,159 +88,81 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jul 05, 2024 at 04:36:50AM +1000, Ben Skeggs wrote:
-> drm->master isn't really a nouveau_cli, and is mostly just used to get
-> at an nvif_mmu object to implement a hack around issues with the ioctl
-> interface to nvkm.
-> 
-> Later patches in this series will allocate nvif_device/mmu objects in
-> nouveau_drm directly, removing the need for master.
+On Fri, Jul 05, 2024 at 04:36:51AM +1000, Ben Skeggs wrote:
+> Removes some dubious void casts.
 
-Please don't use future tense.
+Please use the imperative form:
 
-> 
-> Another patch series will remove the need for the above-mentioned hack
-> entirely.
+"Store a pointer to struct nouveau_cli in struct nouveau_abi16 to avoid some
+dubious void casts."
 
-Do you have those patches already?
-
-> 
-> The only other member of drm->master that's needed is the nvif_client,
-> and is a dependency of device/mmu.  So the first step is to move its
-> allocation out of code handling nouveau_cli init.
-> 
-> v2:
-> - modified slightly due to the addition of tegra/pci cleanup patches
 > 
 > Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 > ---
->  drivers/gpu/drm/nouveau/nouveau_drm.c | 46 ++++++++++++++-------------
->  1 file changed, 24 insertions(+), 22 deletions(-)
+>  drivers/gpu/drm/nouveau/nouveau_abi16.c | 9 +++++----
+>  drivers/gpu/drm/nouveau/nouveau_abi16.h | 1 +
+>  2 files changed, 6 insertions(+), 4 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> index 140e27af0d64..a942d2c03d44 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> @@ -129,12 +129,12 @@ nouveau_platform_name(struct platform_device *platformdev)
->  }
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> index d56909071de6..ac50c300d2eb 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
+> @@ -50,6 +50,7 @@ nouveau_abi16(struct drm_file *file_priv)
+>  				.device = ~0ULL,
+>  			};
 >  
->  static u64
-> -nouveau_name(struct drm_device *dev)
-> +nouveau_name(struct device *dev)
+> +			abi16->cli = cli;
+>  			INIT_LIST_HEAD(&abi16->channels);
+>  
+>  			/* allocate device object targeting client's default
+> @@ -82,7 +83,7 @@ nouveau_abi16_get(struct drm_file *file_priv)
+>  int
+>  nouveau_abi16_put(struct nouveau_abi16 *abi16, int ret)
 >  {
-> -	if (dev_is_pci(dev->dev))
-> -		return nouveau_pci_name(to_pci_dev(dev->dev));
-> +	if (dev_is_pci(dev))
-> +		return nouveau_pci_name(to_pci_dev(dev));
->  	else
-> -		return nouveau_platform_name(to_platform_device(dev->dev));
-> +		return nouveau_platform_name(to_platform_device(dev));
-
-This looks like it should be a separate patch.
-
->  }
->  
->  static inline bool
-> @@ -209,9 +209,11 @@ nouveau_cli_fini(struct nouveau_cli *cli)
->  	nouveau_vmm_fini(&cli->vmm);
->  	nvif_mmu_dtor(&cli->mmu);
->  	nvif_device_dtor(&cli->device);
-> -	mutex_lock(&cli->drm->master.lock);
-> -	nvif_client_dtor(&cli->base);
-> -	mutex_unlock(&cli->drm->master.lock);
-> +	if (cli != &cli->drm->master) {
-> +		mutex_lock(&cli->drm->master.lock);
-> +		nvif_client_dtor(&cli->base);
-> +		mutex_unlock(&cli->drm->master.lock);
-> +	}
->  }
->  
->  static int
-> @@ -241,7 +243,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
->  		{ NVIF_CLASS_VMM_NV04 , -1 },
->  		{}
->  	};
-> -	u64 device = nouveau_name(drm->dev);
-> +	u64 device = nouveau_name(drm->dev->dev);
->  	int ret;
->  
->  	snprintf(cli->name, sizeof(cli->name), "%s", sname);
-> @@ -253,10 +255,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
->  	INIT_LIST_HEAD(&cli->worker);
->  	mutex_init(&cli->lock);
->  
-> -	if (cli == &drm->master) {
-> -		ret = nvif_driver_init(NULL, nouveau_config, nouveau_debug,
-> -				       cli->name, device, &cli->base);
-> -	} else {
-> +	if (cli != &drm->master) {
->  		mutex_lock(&drm->master.lock);
->  		ret = nvif_client_ctor(&drm->master.base, cli->name, device,
->  				       &cli->base);
-> @@ -626,7 +625,6 @@ nouveau_drm_device_fini(struct nouveau_drm *drm)
->  	nouveau_cli_fini(&drm->client);
->  	nouveau_cli_fini(&drm->master);
->  	destroy_workqueue(drm->sched_wq);
-> -	nvif_parent_dtor(&drm->parent);
->  	mutex_destroy(&drm->clients_lock);
->  }
->  
-> @@ -636,15 +634,10 @@ nouveau_drm_device_init(struct nouveau_drm *drm)
->  	struct drm_device *dev = drm->dev;
->  	int ret;
->  
-> -	nvif_parent_ctor(&nouveau_parent, &drm->parent);
-> -	drm->master.base.object.parent = &drm->parent;
-
-Moving this to nouveau_drm_device_new(), plus the resulting changes in error
-handling, don't seem to be related to this commit either.
-
-> -
->  	drm->sched_wq = alloc_workqueue("nouveau_sched_wq_shared", 0,
->  					WQ_MAX_ACTIVE);
-> -	if (!drm->sched_wq) {
-> -		ret = -ENOMEM;
-> -		goto fail_alloc;
-> -	}
-> +	if (!drm->sched_wq)
-> +		return -ENOMEM;
->  
->  	ret = nouveau_cli_init(drm, "DRM-master", &drm->master);
->  	if (ret)
-> @@ -726,8 +719,6 @@ nouveau_drm_device_init(struct nouveau_drm *drm)
->  	nouveau_cli_fini(&drm->master);
->  fail_wq:
->  	destroy_workqueue(drm->sched_wq);
-> -fail_alloc:
-> -	nvif_parent_dtor(&drm->parent);
+> -	struct nouveau_cli *cli = (void *)abi16->device.object.client;
+> +	struct nouveau_cli *cli = abi16->cli;
+>  	mutex_unlock(&cli->mutex);
 >  	return ret;
 >  }
+> @@ -164,7 +165,7 @@ nouveau_abi16_chan_fini(struct nouveau_abi16 *abi16,
+>  void
+>  nouveau_abi16_fini(struct nouveau_abi16 *abi16)
+>  {
+> -	struct nouveau_cli *cli = (void *)abi16->device.object.client;
+> +	struct nouveau_cli *cli = abi16->cli;
+>  	struct nouveau_abi16_chan *chan, *temp;
 >  
-> @@ -737,6 +728,9 @@ nouveau_drm_device_del(struct nouveau_drm *drm)
->  	if (drm->dev)
->  		drm_dev_put(drm->dev);
+>  	/* cleanup channels */
+> @@ -529,7 +530,7 @@ nouveau_abi16_ioctl_grobj_alloc(ABI16_IOCTL_ARGS)
 >  
-> +	nvif_client_dtor(&drm->master.base);
-> +	nvif_parent_dtor(&drm->parent);
-> +
->  	kfree(drm);
->  }
+>  	if (init->handle == ~0)
+>  		return nouveau_abi16_put(abi16, -EINVAL);
+> -	client = abi16->device.object.client;
+> +	client = &abi16->cli->base;
 >  
-> @@ -753,6 +747,14 @@ nouveau_drm_device_new(const struct drm_driver *drm_driver, struct device *paren
+>  	chan = nouveau_abi16_chan(abi16, init->channel);
+>  	if (!chan)
+> @@ -623,7 +624,7 @@ nouveau_abi16_ioctl_notifierobj_alloc(ABI16_IOCTL_ARGS)
+>  	/* completely unnecessary for these chipsets... */
+>  	if (unlikely(device->info.family >= NV_DEVICE_INFO_V0_FERMI))
+>  		return nouveau_abi16_put(abi16, -EINVAL);
+> -	client = abi16->device.object.client;
+> +	client = &abi16->cli->base;
 >  
->  	drm->nvkm = device;
+>  	chan = nouveau_abi16_chan(abi16, info->channel);
+>  	if (!chan)
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.h b/drivers/gpu/drm/nouveau/nouveau_abi16.h
+> index 661b901d8ecc..0a9121e63143 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.h
+> @@ -30,6 +30,7 @@ struct nouveau_abi16_chan {
+>  };
 >  
-> +	nvif_parent_ctor(&nouveau_parent, &drm->parent);
-> +	drm->master.base.object.parent = &drm->parent;
-> +
-> +	ret = nvif_driver_init(NULL, nouveau_config, nouveau_debug, "drm",
-> +			       nouveau_name(parent), &drm->master.base);
-> +	if (ret)
-> +		goto done;
-> +
->  	drm->dev = drm_dev_alloc(drm_driver, parent);
->  	if (IS_ERR(drm->dev)) {
->  		ret = PTR_ERR(drm->dev);
+>  struct nouveau_abi16 {
+> +	struct nouveau_cli *cli;
+>  	struct nvif_device device;
+>  	struct list_head channels;
+>  	u64 handles;
 > -- 
 > 2.45.1
 > 
