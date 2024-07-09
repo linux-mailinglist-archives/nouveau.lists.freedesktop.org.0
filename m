@@ -2,74 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E319D92BF6D
-	for <lists+nouveau@lfdr.de>; Tue,  9 Jul 2024 18:14:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B5EE92BF7C
+	for <lists+nouveau@lfdr.de>; Tue,  9 Jul 2024 18:16:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ED5C510E088;
-	Tue,  9 Jul 2024 16:14:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D040E10E5EC;
+	Tue,  9 Jul 2024 16:16:27 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="OtGRauTu";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ZymBEVyi";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 01F8810E088
- for <nouveau@lists.freedesktop.org>; Tue,  9 Jul 2024 16:14:50 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F3D3710E5EB
+ for <nouveau@lists.freedesktop.org>; Tue,  9 Jul 2024 16:16:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1720541690;
+ s=mimecast20190719; t=1720541785;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=SGw2QhibXd0se/kuqgy+Y99Qu0VySRQvb3r3EwzUcvc=;
- b=OtGRauTuYbYrNwFaqz0fXP0TachOB2pdD66Wu21uP33PC/DA4Q5PVaPgMRv1fwh5gf6B6c
- 8s2khJzJDk9bqadD39Dc7tRaByeyuEc/kHKVT0mkOPZhHTY7bViEN7o1RXBjchLHYppwFm
- qdxGOGTQYK/MKqxnvaTtDu3HxzzCTM0=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=A0EigjiW95SIm/QXHkuw24IKYLooBBWzwLu51wed9Uo=;
+ b=ZymBEVyi0BcQdOugOMEpmlsf9GqDZVG7BF6HEyORIbWgziK7mdlVqJm+GWcC9Ns0I6kgGI
+ zVumSKHjktQw2n9aVGCvqvPt6Oa91G6TCop1m1UTcXGoBMP9Ivb42IvkUfb5LHlY+KSJS4
+ 1SKliT8uTlAOtIqLkzgzoUwiZh4N/D4=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-101-bMVMeASQPuy55w7ifiWXFw-1; Tue, 09 Jul 2024 12:14:48 -0400
-X-MC-Unique: bMVMeASQPuy55w7ifiWXFw-1
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-367af2cd5f3so2277812f8f.0
- for <nouveau@lists.freedesktop.org>; Tue, 09 Jul 2024 09:14:47 -0700 (PDT)
+ us-mta-539-ROYUqyPqNMOWk1cDEk6tYA-1; Tue, 09 Jul 2024 12:16:23 -0400
+X-MC-Unique: ROYUqyPqNMOWk1cDEk6tYA-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4265b751469so18711405e9.1
+ for <nouveau@lists.freedesktop.org>; Tue, 09 Jul 2024 09:16:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720541686; x=1721146486;
+ d=1e100.net; s=20230601; t=1720541782; x=1721146582;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SGw2QhibXd0se/kuqgy+Y99Qu0VySRQvb3r3EwzUcvc=;
- b=m7ObuRZ/WCR+wjbsFY5UvtBcMu1iSRBpjUrj+sqZAV6D6CH6Ph0+w22BjKhxi0iVxh
- ex8ZZlGCXjRAuY6S81zFHHyrkRzejphZ5lWswio7mRLD+h77pWPiPdpvx3PGFxMpbgV3
- rRUokkwgse5YjeeKVcMiWl5dW/NOwuc/xLody9yPcnjRjeepVKspH3B8eew8FsDhuYQk
- UOyR+ABXGyQeV5At6e8vJqK5Jh6u7j4YorEfci8PBJ/rt9il4JX5wgrC2qIMlEXfZt4i
- ScE+z/w80H9mmtbrbmvt2M47KVitJugCJZBeFomdNFNyd8ikNl0ED7OjDpuxaxu5M8bU
- QENg==
-X-Gm-Message-State: AOJu0YygFtMAJxvP3gDcjLECPj5dcvP2xzXBDXkEu9z5LpP+/8G064xR
- k/T1l3ZA21Ra+T2qmdEIrMHkXpYUzZpG3zv7SjWmYE2t1gAF20zJgRMzwwmce01mLcZp5Ev9Hpy
- 7z2hmzoYT+bTa3moet9WXwmI6VZKrCNxOas6Lz8C7rNGRb0ux4sVNj9RYT91RZJ61CgWbtMM=
-X-Received: by 2002:a05:6000:1888:b0:367:8fee:443b with SMTP id
- ffacd0b85a97d-367cea96744mr2313540f8f.41.1720541686557; 
- Tue, 09 Jul 2024 09:14:46 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEeH60nGdH6RkIweCznBjdK7pRvS4skeScVNEDrm0H6hH4YlvAGA2LJjgjTjgQ+wQUSZjvqtw==
-X-Received: by 2002:a05:6000:1888:b0:367:8fee:443b with SMTP id
- ffacd0b85a97d-367cea96744mr2313526f8f.41.1720541686190; 
- Tue, 09 Jul 2024 09:14:46 -0700 (PDT)
+ bh=A0EigjiW95SIm/QXHkuw24IKYLooBBWzwLu51wed9Uo=;
+ b=sS7R582DsE56pvwdajOqxE2XmlRC4vObj7nfyyID5Vyc8XQUqW015iZE0DwAJ5XBMZ
+ 7pK0MCqbUwasscGyIpxIlrkJxElKSzj2e2uglFb8OM1TZrxLVyQ5oRWjJdtGFQSvpD4R
+ 2U3tde5oW+GBBt+3s6bga8J4jjGwm7llxnTo3ebRukVaA7yk/O/5NcFDdC4QUbjZcjUT
+ 4AKfjl9b+8cVLyMeU6OS/aYyhfiXl4KZ5Suc/7piESXFlyZSAprKweuQ3wyroKKuAnj1
+ oRA/xPU8rlIC0Z01YM+R9ta2mr2KrV1aMTT0lRHyYL0naFvRfq1Ke2/gLf8BgXdZmCwP
+ FO8w==
+X-Gm-Message-State: AOJu0YznEODAYLotkWltSkEMYU/7KjkJ+vrH1u710Vsr01Fb6jjSa2FC
+ /OAZevlavlXQLiH9hoxK0PN4Lj1uT8cl5oav9nI/PIgdxc7UykWrCBFi9Pfio+jMRsMyWWGVKG6
+ AbzdqbTM6SsfXHjE7oZuidUI/ak4X15TEgbKFbyrCV9FSzlXppBQjoc8C6nmAoVRQN5Z/19A=
+X-Received: by 2002:a05:600c:424a:b0:426:6f0e:8ba4 with SMTP id
+ 5b1f17b1804b1-426722ccc5cmr24695565e9.8.1720541781752; 
+ Tue, 09 Jul 2024 09:16:21 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGa4+skZ94XUL92G/hlfA1WHi1qBEbTzUBxu1xeBUgsrUS1/T4idRBaZNlxxbuOy4rlAdPwMg==
+X-Received: by 2002:a05:600c:424a:b0:426:6f0e:8ba4 with SMTP id
+ 5b1f17b1804b1-426722ccc5cmr24695425e9.8.1720541781360; 
+ Tue, 09 Jul 2024 09:16:21 -0700 (PDT)
 Received: from pollux ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-367cdfab199sm2961716f8f.106.2024.07.09.09.14.45
+ 5b1f17b1804b1-4266ac156easm83921305e9.38.2024.07.09.09.16.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jul 2024 09:14:45 -0700 (PDT)
-Date: Tue, 9 Jul 2024 18:14:44 +0200
+ Tue, 09 Jul 2024 09:16:21 -0700 (PDT)
+Date: Tue, 9 Jul 2024 18:16:19 +0200
 From: Danilo Krummrich <dakr@redhat.com>
 To: Ben Skeggs <bskeggs@nvidia.com>
 Cc: nouveau@lists.freedesktop.org
-Subject: Re: [PATCH v2 16/37] drm/nouveau/nvif: remove nvxx_object()
-Message-ID: <Zo1h9HPwojB5tkPN@pollux>
+Subject: Re: [PATCH v2 19/37] drm/nouveau/nvif: remove client device arg
+Message-ID: <Zo1iUyGtc75J54fr@pollux>
 References: <20240704183721.25778-1-bskeggs@nvidia.com>
- <20240704183721.25778-17-bskeggs@nvidia.com>
+ <20240704183721.25778-20-bskeggs@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <20240704183721.25778-17-bskeggs@nvidia.com>
+In-Reply-To: <20240704183721.25778-20-bskeggs@nvidia.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=us-ascii
@@ -88,101 +88,115 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jul 05, 2024 at 04:37:00AM +1000, Ben Skeggs wrote:
-> This hasn't been used in a while.
+On Fri, Jul 05, 2024 at 04:37:03AM +1000, Ben Skeggs wrote:
+> This was once used by userspace tools (with nvkm built as a library), as
+> a way to select a "default device".
 > 
-> Moves some io accessors to another include at the same time to
+> The DRM code doesn't need this at all as clients only have access to a
+> single device already, so the value can be inherited from its parent.
 
-Please don't just say something was moves somewhere, say where it was moved to.
-
-> fix a compile issue that resulted from <nvkm/core/object.h> no
-> longer being included.
-
-Saying "resulted" instead of "results" here sounds a bit like a previous commit
-introduced the issue, but it's actually this one. Please use present tense.
+"so inherit the value from its parent."
 
 > 
 > Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 > ---
->  drivers/gpu/drm/nouveau/include/nvif/object.h |  7 -------
->  drivers/gpu/drm/nouveau/include/nvif/os.h     | 19 +++++++++++++++++++
->  .../gpu/drm/nouveau/include/nvkm/core/os.h    | 19 -------------------
->  3 files changed, 19 insertions(+), 26 deletions(-)
+>  drivers/gpu/drm/nouveau/include/nvif/client.h | 3 +--
+>  drivers/gpu/drm/nouveau/include/nvif/if0000.h | 1 -
+>  drivers/gpu/drm/nouveau/nouveau_drm.c         | 4 +---
+>  drivers/gpu/drm/nouveau/nvif/client.c         | 5 ++---
+>  drivers/gpu/drm/nouveau/nvif/driver.c         | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/core/client.c    | 2 +-
+>  6 files changed, 6 insertions(+), 11 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/nouveau/include/nvif/object.h b/drivers/gpu/drm/nouveau/include/nvif/object.h
-> index f52399caee82..478cbb8f2dfe 100644
-> --- a/drivers/gpu/drm/nouveau/include/nvif/object.h
-> +++ b/drivers/gpu/drm/nouveau/include/nvif/object.h
-> @@ -134,11 +134,4 @@ struct nvif_mclass {
->  #define NVIF_MR32(p,A...) DRF_MR(NVIF_RD32_, NVIF_WR32_, u32, (p), 0, ##A)
->  #define NVIF_MV32(p,A...) DRF_MV(NVIF_RD32_, NVIF_WR32_, u32, (p), 0, ##A)
->  #define NVIF_MD32(p,A...) DRF_MD(NVIF_RD32_, NVIF_WR32_, u32, (p), 0, ##A)
-> -
-> -/*XXX*/
-> -#include <core/object.h>
-> -#define nvxx_object(a) ({                                                      \
-> -	struct nvif_object *_object = (a);                                     \
-> -	(struct nvkm_object *)_object->priv;                                   \
-> -})
->  #endif
-> diff --git a/drivers/gpu/drm/nouveau/include/nvif/os.h b/drivers/gpu/drm/nouveau/include/nvif/os.h
-> index 429d0106c123..a2eaf3929ac3 100644
-> --- a/drivers/gpu/drm/nouveau/include/nvif/os.h
-> +++ b/drivers/gpu/drm/nouveau/include/nvif/os.h
-> @@ -34,4 +34,23 @@
+> diff --git a/drivers/gpu/drm/nouveau/include/nvif/client.h b/drivers/gpu/drm/nouveau/include/nvif/client.h
+> index 5210007d7669..2c8e9bec3f79 100644
+> --- a/drivers/gpu/drm/nouveau/include/nvif/client.h
+> +++ b/drivers/gpu/drm/nouveau/include/nvif/client.h
+> @@ -10,8 +10,7 @@ struct nvif_client {
+>  	u64 version;
+>  };
 >  
->  #include <soc/tegra/fuse.h>
->  #include <soc/tegra/pmc.h>
-> +
-> +#ifdef __BIG_ENDIAN
-> +#define ioread16_native ioread16be
-> +#define iowrite16_native iowrite16be
-> +#define ioread32_native  ioread32be
-> +#define iowrite32_native iowrite32be
-> +#else
-> +#define ioread16_native ioread16
-> +#define iowrite16_native iowrite16
-> +#define ioread32_native  ioread32
-> +#define iowrite32_native iowrite32
-> +#endif
-> +
-> +#define iowrite64_native(v,p) do {                                             \
-> +	u32 __iomem *_p = (u32 __iomem *)(p);                                  \
-> +	u64 _v = (v);                                                          \
-> +	iowrite32_native(lower_32_bits(_v), &_p[0]);                           \
-> +	iowrite32_native(upper_32_bits(_v), &_p[1]);                           \
-> +} while(0)
->  #endif
-> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/os.h b/drivers/gpu/drm/nouveau/include/nvkm/core/os.h
-> index 3fd5c007a663..9b05612e6490 100644
-> --- a/drivers/gpu/drm/nouveau/include/nvkm/core/os.h
-> +++ b/drivers/gpu/drm/nouveau/include/nvkm/core/os.h
-> @@ -3,25 +3,6 @@
->  #define __NVKM_OS_H__
->  #include <nvif/os.h>
+> -int  nvif_client_ctor(struct nvif_client *parent, const char *name, u64 device,
+> -		      struct nvif_client *);
+> +int  nvif_client_ctor(struct nvif_client *parent, const char *name, struct nvif_client *);
+>  void nvif_client_dtor(struct nvif_client *);
+>  int  nvif_client_ioctl(struct nvif_client *, void *, u32);
+>  int  nvif_client_suspend(struct nvif_client *);
+> diff --git a/drivers/gpu/drm/nouveau/include/nvif/if0000.h b/drivers/gpu/drm/nouveau/include/nvif/if0000.h
+> index f7b8f8f48760..a93f91d56a09 100644
+> --- a/drivers/gpu/drm/nouveau/include/nvif/if0000.h
+> +++ b/drivers/gpu/drm/nouveau/include/nvif/if0000.h
+> @@ -5,7 +5,6 @@
+>  struct nvif_client_v0 {
+>  	__u8  version;
+>  	__u8  pad01[7];
+> -	__u64 device;
+>  	char  name[32];
+>  };
 >  
-> -#ifdef __BIG_ENDIAN
-> -#define ioread16_native ioread16be
-> -#define iowrite16_native iowrite16be
-> -#define ioread32_native  ioread32be
-> -#define iowrite32_native iowrite32be
-> -#else
-> -#define ioread16_native ioread16
-> -#define iowrite16_native iowrite16
-> -#define ioread32_native  ioread32
-> -#define iowrite32_native iowrite32
-> -#endif
-> -
-> -#define iowrite64_native(v,p) do {                                             \
-> -	u32 __iomem *_p = (u32 __iomem *)(p);				       \
-> -	u64 _v = (v);							       \
-> -	iowrite32_native(lower_32_bits(_v), &_p[0]);			       \
-> -	iowrite32_native(upper_32_bits(_v), &_p[1]);			       \
-> -} while(0)
-> -
->  struct nvkm_blob {
->  	void *data;
->  	u32 size;
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> index e0e1fcfcab1e..8951a0805239 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> @@ -241,7 +241,6 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
+>  		{ NVIF_CLASS_VMM_NV04 , -1 },
+>  		{}
+>  	};
+> -	u64 device = nouveau_name(drm->dev->dev);
+>  	int ret;
+>  
+>  	snprintf(cli->name, sizeof(cli->name), "%s", sname);
+> @@ -254,8 +253,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
+>  
+>  	if (cli != &drm->master) {
+>  		mutex_lock(&drm->master.lock);
+> -		ret = nvif_client_ctor(&drm->master.base, cli->name, device,
+> -				       &cli->base);
+> +		ret = nvif_client_ctor(&drm->master.base, cli->name, &cli->base);
+>  		mutex_unlock(&drm->master.lock);
+>  	}
+>  	if (ret) {
+> diff --git a/drivers/gpu/drm/nouveau/nvif/client.c b/drivers/gpu/drm/nouveau/nvif/client.c
+> index 85ad5091e8e2..bbfc80fcff43 100644
+> --- a/drivers/gpu/drm/nouveau/nvif/client.c
+> +++ b/drivers/gpu/drm/nouveau/nvif/client.c
+> @@ -55,10 +55,9 @@ nvif_client_dtor(struct nvif_client *client)
+>  }
+>  
+>  int
+> -nvif_client_ctor(struct nvif_client *parent, const char *name, u64 device,
+> -		 struct nvif_client *client)
+> +nvif_client_ctor(struct nvif_client *parent, const char *name, struct nvif_client *client)
+>  {
+> -	struct nvif_client_v0 args = { .device = device };
+> +	struct nvif_client_v0 args = {};
+>  	struct {
+>  		struct nvif_ioctl_v0 ioctl;
+>  		struct nvif_ioctl_nop_v0 nop;
+> diff --git a/drivers/gpu/drm/nouveau/nvif/driver.c b/drivers/gpu/drm/nouveau/nvif/driver.c
+> index acb708df2559..78706e97a6a2 100644
+> --- a/drivers/gpu/drm/nouveau/nvif/driver.c
+> +++ b/drivers/gpu/drm/nouveau/nvif/driver.c
+> @@ -36,5 +36,5 @@ nvif_driver_init(const char *drv, const char *cfg, const char *dbg,
+>  	if (ret)
+>  		return ret;
+>  
+> -	return nvif_client_ctor(client, name, device, client);
+> +	return nvif_client_ctor(client, name, client);
+>  }
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/core/client.c b/drivers/gpu/drm/nouveau/nvkm/core/client.c
+> index 95cbb5b682f2..6baa3a4fa0a4 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/core/client.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/core/client.c
+> @@ -42,7 +42,7 @@ nvkm_uclient_new(const struct nvkm_oclass *oclass, void *argv, u32 argc,
+>  
+>  	if (!(ret = nvif_unpack(ret, &argv, &argc, args->v0, 0, 0, false))){
+>  		args->v0.name[sizeof(args->v0.name) - 1] = 0;
+> -		ret = nvkm_client_new(args->v0.name, args->v0.device, NULL,
+> +		ret = nvkm_client_new(args->v0.name, oclass->client->device, NULL,
+>  				      NULL, oclass->client->event, &client);
+>  		if (ret)
+>  			return ret;
 > -- 
 > 2.45.1
 > 
