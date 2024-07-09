@@ -2,74 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4C0092C051
-	for <lists+nouveau@lfdr.de>; Tue,  9 Jul 2024 18:35:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84D1F92C081
+	for <lists+nouveau@lfdr.de>; Tue,  9 Jul 2024 18:38:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 82F0C10E609;
-	Tue,  9 Jul 2024 16:35:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AC40410E608;
+	Tue,  9 Jul 2024 16:38:52 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="UOBP2BMX";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="GhpYHKj8";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9701810E5FA
- for <nouveau@lists.freedesktop.org>; Tue,  9 Jul 2024 16:35:03 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9EAF910E608
+ for <nouveau@lists.freedesktop.org>; Tue,  9 Jul 2024 16:38:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1720542902;
+ s=mimecast20190719; t=1720543130;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=YC7LUzij0vW3euNx55JR0BHrDdrhu+yigROvo7eG7uc=;
- b=UOBP2BMXtjz0Z6aYAQrT5HYT9rDB0nKqooMPMld6YA/VhEJfNAJQSWwoLu6Ft6NeFo5SM+
- WvytPplx7M0/RMYTKshz+/x/ox6Hrvu1SYCzc6nAOhV+3velEeVOuxrGnLLXqx+CV+eQRf
- h9d5qvTypv1Zl9OJFL2s3Mp1jW2ubBA=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=+y5ex2ZHIYJdSAq+QwDoJNdOKOJs8B0ptQp6BS03afw=;
+ b=GhpYHKj8EsOJWst/PzGrNUbJI7xS+2Eox54UnhpU03QyXVJzgi7BFreSm8nS69M2vf3mAv
+ qW/zFc+cdRnTQoGDSRZoEz91URPb1Z42Q/ppjVIwxD/ugb8YGIpQDeDIBVhxGJTMZvAfbl
+ 30F/gfoMX9FPO24GZyq8cfAdQoquvpo=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-362-_B6DxPDbP8Gt4GEj7KRr2A-1; Tue, 09 Jul 2024 12:35:01 -0400
-X-MC-Unique: _B6DxPDbP8Gt4GEj7KRr2A-1
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-42667e82901so16619155e9.2
- for <nouveau@lists.freedesktop.org>; Tue, 09 Jul 2024 09:35:01 -0700 (PDT)
+ us-mta-393-KR6xSF4BNOCxwFyJKN7byg-1; Tue, 09 Jul 2024 12:38:49 -0400
+X-MC-Unique: KR6xSF4BNOCxwFyJKN7byg-1
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-36795e2ce86so3048729f8f.0
+ for <nouveau@lists.freedesktop.org>; Tue, 09 Jul 2024 09:38:49 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720542899; x=1721147699;
+ d=1e100.net; s=20230601; t=1720543128; x=1721147928;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YC7LUzij0vW3euNx55JR0BHrDdrhu+yigROvo7eG7uc=;
- b=Q9EXVVKn6/qzArE6xmP7fWV0B/gn57nwYm8xThvH+8w/EwMXfGpBfvlulypA1rDcTy
- 1dZQmdpHGaqXvqU9GqCnC9g7c7RMi8QXsF1nCl5jNrFmG425GaM5db0/4h4ZrB40tYN4
- SJJSuHSvaVW9SOICVCBAg/336jdBiAw1Py3jro3LdeU/P+A6+JzSEYj0DCGd7UUIw2Oh
- wfs+fgVk8HSCwpmSTjqB/TyzbhZuhGHSnfCu3S2ehZH7NulTNuikl/s5q7fqHn3T5xe5
- ZjAj6NFb/ZcQGNvzYx/lQOoVkeToQTJ2mLuJZdEXGNzjj/GDPcC+5G6x7YJcxgjY1c4A
- zT8g==
-X-Gm-Message-State: AOJu0YzFPz0y2Gh648blpf+Gvyhzby8BlnVPihH62zNH3RiXshbRxb75
- 535CN55y2X4HJIV7tsCLgNzGT/vB8Nlf27WgtJhLAA/z4Knk1Q20TGLY1hUSGbw2ZXJy6hdXVWK
- rDxo+stTdKttIumOYiEYAOzydmgl3to5AzLfSdB3JpZTfLw8snwpsdq5nZPsEtPFpbmnDMz8=
-X-Received: by 2002:a5d:4589:0:b0:367:95d2:4ec0 with SMTP id
- ffacd0b85a97d-367cead925emr2172459f8f.62.1720542899404; 
- Tue, 09 Jul 2024 09:34:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGxcgRBvk5lzZkO9QO3p9aY18SboLu55898LcGIDsmhZEuz4ko1vVSnBxi7kK9VhHHUnk5IZA==
-X-Received: by 2002:a5d:4589:0:b0:367:95d2:4ec0 with SMTP id
- ffacd0b85a97d-367cead925emr2172449f8f.62.1720542899031; 
- Tue, 09 Jul 2024 09:34:59 -0700 (PDT)
+ bh=+y5ex2ZHIYJdSAq+QwDoJNdOKOJs8B0ptQp6BS03afw=;
+ b=SuFtE1rEjxMjdUWtA5d/pUW9ho50A5WPyo9kWe2kBYkbUNLm+97QRkfLol5eHcoX5g
+ BxYE/Ib6+8YWcKrFppOnulmL2wvE+0oHIVRw10LddvVhqffQGW932Jmr7P2qe18e3A/C
+ Jm9+JQdzq8x7lPSuu3Jx03wUN9HLQDQoGaH2+KO1SmqN7gT2301jKTiz7h3W8DAnKP32
+ kxHG67XCX9He2dyS9ITsf64oayGBiUAG7IWzEwU81aEWd0n+EwpkT86xz1Eex3JIpY4z
+ n0FKiFzQYktfgw9/tIhROBFCi0vlqCTuRlsOxxdNnJnIkUFr+zsy6SrCgZEat0Ff8StS
+ 4F7g==
+X-Gm-Message-State: AOJu0YxCJJl3wpaWFWv6EOYWNBQi9dxpTx9ImGd95cx8wZ9FQL4WrDBE
+ 0mHVndoCGsY/RZXnyU6JgBzbtkPsE44M4oBxXnSgdWgXPkLjLrF32K8VPuKrudPdwM9Wb2J4iUj
+ wSuhR7nvvCATHn2E78h85z3F3mDqC6S3DdsnuhyjuI1TlgU+N27yEL3uF3Ix5gel325mfU/U=
+X-Received: by 2002:adf:f743:0:b0:367:9718:5792 with SMTP id
+ ffacd0b85a97d-367cea7377cmr2098950f8f.18.1720543127806; 
+ Tue, 09 Jul 2024 09:38:47 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFaXQz9C1MUsyT+lH06GXOSDdQ+Sb+tXsxNgTnFb4duYStD224r3gy5PwjcNTVCAZl+DN6aLQ==
+X-Received: by 2002:adf:f743:0:b0:367:9718:5792 with SMTP id
+ ffacd0b85a97d-367cea7377cmr2098943f8f.18.1720543127383; 
+ Tue, 09 Jul 2024 09:38:47 -0700 (PDT)
 Received: from pollux ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-367cde84660sm3006733f8f.25.2024.07.09.09.34.58
+ ffacd0b85a97d-367cdfab141sm2992292f8f.96.2024.07.09.09.38.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jul 2024 09:34:58 -0700 (PDT)
-Date: Tue, 9 Jul 2024 18:34:56 +0200
+ Tue, 09 Jul 2024 09:38:46 -0700 (PDT)
+Date: Tue, 9 Jul 2024 18:38:45 +0200
 From: Danilo Krummrich <dakr@redhat.com>
 To: Ben Skeggs <bskeggs@nvidia.com>
 Cc: nouveau@lists.freedesktop.org
-Subject: Re: [PATCH v2 28/37] drm/nouveau: add nvif_mmu to nouveau_drm
-Message-ID: <Zo1msLvf2Vfz90Mb@pollux>
+Subject: Re: [PATCH v2 34/37] drm/nouveau: remove master
+Message-ID: <Zo1nlfrtZjPtHC6V@pollux>
 References: <20240704183721.25778-1-bskeggs@nvidia.com>
- <20240704183721.25778-29-bskeggs@nvidia.com>
+ <20240704183721.25778-35-bskeggs@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <20240704183721.25778-29-bskeggs@nvidia.com>
+In-Reply-To: <20240704183721.25778-35-bskeggs@nvidia.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=us-ascii
@@ -88,159 +88,205 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jul 05, 2024 at 04:37:12AM +1000, Ben Skeggs wrote:
-> This allocates a new nvif_mmu in nouveau_drm, and uses it for TTM
-> backend memory allocations instead of nouveau_drm.master.mmu,
-> which will be removed in a later commit.
+On Fri, Jul 05, 2024 at 04:37:18AM +1000, Ben Skeggs wrote:
+> The only remaining nouveau_drm.master struct member that's being used is
+> the mutex that protects its object tree.  Move that into nouveau_drm and
+> remove nouveau_drm.master entirely.
+> 
+> Another patch series will make it possible to also remove the mutex, but
+> it's still required for the moment.
 
-It would be good to make clear that this is part of a couple of commits that aim
-at removing nouveau_drm::master.
-
-Also, can we get all related commits a bit closer to each other?
+It would be good to also mention what we're left with to protect and how we get
+rid of that later on.
 
 > 
 > Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 > ---
->  drivers/gpu/drm/nouveau/nouveau_drm.c | 35 ++++++++++++++++-----------
->  drivers/gpu/drm/nouveau/nouveau_drv.h |  1 +
+>  drivers/gpu/drm/nouveau/nouveau_drm.c | 39 +++++++++++----------------
+>  drivers/gpu/drm/nouveau/nouveau_drv.h |  3 ++-
 >  drivers/gpu/drm/nouveau/nouveau_mem.c | 12 ++++-----
->  3 files changed, 28 insertions(+), 20 deletions(-)
+>  3 files changed, 23 insertions(+), 31 deletions(-)
 > 
 > diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> index 5ff116bcbabf..07748cfab233 100644
+> index c6c9a528783a..85214d35fd5d 100644
 > --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
 > +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> @@ -227,13 +227,6 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
->  		{}
->  	};
->  	static const struct nvif_mclass
-> -	mmus[] = {
-> -		{ NVIF_CLASS_MMU_GF100, -1 },
-> -		{ NVIF_CLASS_MMU_NV50 , -1 },
-> -		{ NVIF_CLASS_MMU_NV04 , -1 },
-> -		{}
-> -	};
-> -	static const struct nvif_mclass
->  	vmms[] = {
->  		{ NVIF_CLASS_VMM_GP100, -1 },
->  		{ NVIF_CLASS_VMM_GM200, -1 },
-> @@ -270,13 +263,7 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
->  
->  	cli->device.object.map.ptr = drm->device.object.map.ptr;
->  
-> -	ret = nvif_mclass(&cli->device.object, mmus);
-> -	if (ret < 0) {
-> -		NV_PRINTK(err, cli, "No supported MMU class\n");
-> -		goto done;
+> @@ -208,11 +208,9 @@ nouveau_cli_fini(struct nouveau_cli *cli)
+>  	nvif_mmu_dtor(&cli->mmu);
+>  	cli->device.object.map.ptr = NULL;
+>  	nvif_device_dtor(&cli->device);
+> -	if (cli != &cli->drm->master) {
+> -		mutex_lock(&cli->drm->master.lock);
+> -		nvif_client_dtor(&cli->base);
+> -		mutex_unlock(&cli->drm->master.lock);
 > -	}
-> -
-> -	ret = nvif_mmu_ctor(&cli->device.object, "drmMmu", mmus[ret].oclass,
-> +	ret = nvif_mmu_ctor(&cli->device.object, "drmMmu", drm->mmu.object.oclass,
->  			    &cli->mmu);
+> +	mutex_lock(&cli->drm->client_mutex);
+> +	nvif_client_dtor(&cli->base);
+> +	mutex_unlock(&cli->drm->client_mutex);
+>  }
+>  
+>  static int
+> @@ -245,11 +243,9 @@ nouveau_cli_init(struct nouveau_drm *drm, const char *sname,
+>  	INIT_LIST_HEAD(&cli->worker);
+>  	mutex_init(&cli->lock);
+>  
+> -	if (cli != &drm->master) {
+> -		mutex_lock(&drm->master.lock);
+> -		ret = nvif_client_ctor(&drm->master.base, cli->name, &cli->base);
+> -		mutex_unlock(&drm->master.lock);
+> -	}
+> +	mutex_lock(&drm->client_mutex);
+> +	ret = nvif_client_ctor(&drm->_client, cli->name, &cli->base);
+> +	mutex_unlock(&drm->client_mutex);
 >  	if (ret) {
->  		NV_PRINTK(err, cli, "MMU allocation failed: %d\n", ret);
-> @@ -717,6 +704,7 @@ nouveau_drm_device_del(struct nouveau_drm *drm)
->  	if (drm->dev)
->  		drm_dev_put(drm->dev);
->  
-> +	nvif_mmu_dtor(&drm->mmu);
->  	nvif_device_dtor(&drm->device);
->  	nvif_client_dtor(&drm->master.base);
->  	nvif_parent_dtor(&drm->parent);
-> @@ -728,6 +716,13 @@ static struct nouveau_drm *
->  nouveau_drm_device_new(const struct drm_driver *drm_driver, struct device *parent,
->  		       struct nvkm_device *device)
->  {
-> +	static const struct nvif_mclass
-> +	mmus[] = {
-> +		{ NVIF_CLASS_MMU_GF100, -1 },
-> +		{ NVIF_CLASS_MMU_NV50 , -1 },
-> +		{ NVIF_CLASS_MMU_NV04 , -1 },
-> +		{}
-> +	};
->  	struct nouveau_drm *drm;
->  	int ret;
->  
-> @@ -757,6 +752,18 @@ nouveau_drm_device_new(const struct drm_driver *drm_driver, struct device *paren
+>  		NV_PRINTK(err, cli, "Client allocation failed: %d\n", ret);
 >  		goto done;
+> @@ -602,7 +598,6 @@ nouveau_drm_device_fini(struct nouveau_drm *drm)
+>  	mutex_unlock(&drm->clients_lock);
+>  
+>  	nouveau_cli_fini(&drm->client);
+> -	nouveau_cli_fini(&drm->master);
+>  	destroy_workqueue(drm->sched_wq);
+>  	mutex_destroy(&drm->clients_lock);
+>  }
+> @@ -618,13 +613,9 @@ nouveau_drm_device_init(struct nouveau_drm *drm)
+>  	if (!drm->sched_wq)
+>  		return -ENOMEM;
+>  
+> -	ret = nouveau_cli_init(drm, "DRM-master", &drm->master);
+> -	if (ret)
+> -		goto fail_wq;
+> -
+>  	ret = nouveau_cli_init(drm, "DRM", &drm->client);
+>  	if (ret)
+> -		goto fail_master;
+> +		goto fail_wq;
+>  
+>  	INIT_LIST_HEAD(&drm->clients);
+>  	mutex_init(&drm->clients_lock);
+> @@ -691,8 +682,6 @@ nouveau_drm_device_init(struct nouveau_drm *drm)
+>  fail_ttm:
+>  	nouveau_vga_fini(drm);
+>  	nouveau_cli_fini(&drm->client);
+> -fail_master:
+> -	nouveau_cli_fini(&drm->master);
+>  fail_wq:
+>  	destroy_workqueue(drm->sched_wq);
+>  	return ret;
+> @@ -706,9 +695,10 @@ nouveau_drm_device_del(struct nouveau_drm *drm)
+>  
+>  	nvif_mmu_dtor(&drm->mmu);
+>  	nvif_device_dtor(&drm->device);
+> -	nvif_client_dtor(&drm->master.base);
+> +	nvif_client_dtor(&drm->_client);
+>  	nvif_parent_dtor(&drm->parent);
+>  
+> +	mutex_destroy(&drm->client_mutex);
+>  	kfree(drm);
+>  }
+>  
+> @@ -733,14 +723,15 @@ nouveau_drm_device_new(const struct drm_driver *drm_driver, struct device *paren
+>  	drm->nvkm = device;
+>  
+>  	nvif_parent_ctor(&nouveau_parent, &drm->parent);
+> -	drm->master.base.object.parent = &drm->parent;
+> +	mutex_init(&drm->client_mutex);
+> +	drm->_client.object.parent = &drm->parent;
+>  
+>  	ret = nvif_driver_init(NULL, nouveau_config, nouveau_debug, "drm",
+> -			       nouveau_name(parent), &drm->master.base);
+> +			       nouveau_name(parent), &drm->_client);
+>  	if (ret)
+>  		goto done;
+>  
+> -	ret = nvif_device_ctor(&drm->master.base, "drmDevice", &drm->device);
+> +	ret = nvif_device_ctor(&drm->_client, "drmDevice", &drm->device);
+>  	if (ret) {
+>  		NV_ERROR(drm, "Device allocation failed: %d\n", ret);
+>  		goto done;
+> @@ -966,7 +957,7 @@ nouveau_do_suspend(struct nouveau_drm *drm, bool runtime)
 >  	}
 >  
-> +	ret = nvif_mclass(&drm->device.object, mmus);
-> +	if (ret < 0) {
-> +		NV_ERROR(drm, "No supported MMU class\n");
-> +		goto done;
-> +	}
-> +
-> +	ret = nvif_mmu_ctor(&drm->device.object, "drmMmu", mmus[ret].oclass, &drm->mmu);
-> +	if (ret) {
-> +		NV_ERROR(drm, "MMU allocation failed: %d\n", ret);
-> +		goto done;
-> +	}
-> +
->  	drm->dev = drm_dev_alloc(drm_driver, parent);
->  	if (IS_ERR(drm->dev)) {
->  		ret = PTR_ERR(drm->dev);
+>  	NV_DEBUG(drm, "suspending object tree...\n");
+> -	ret = nvif_client_suspend(&drm->master.base);
+> +	ret = nvif_client_suspend(&drm->_client);
+>  	if (ret)
+>  		goto fail_client;
+>  
+> @@ -991,7 +982,7 @@ nouveau_do_resume(struct nouveau_drm *drm, bool runtime)
+>  	int ret = 0;
+>  
+>  	NV_DEBUG(drm, "resuming object tree...\n");
+> -	ret = nvif_client_resume(&drm->master.base);
+> +	ret = nvif_client_resume(&drm->_client);
+>  	if (ret) {
+>  		NV_ERROR(drm, "Client resume failed with error: %d\n", ret);
+>  		return ret;
 > diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
-> index a9e0a63c772e..2535a50b99f3 100644
+> index 2535a50b99f3..630463668a76 100644
 > --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
 > +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-> @@ -204,6 +204,7 @@ struct nouveau_drm {
+> @@ -203,10 +203,11 @@ u_memcpya(uint64_t user, unsigned int nmemb, unsigned int size)
+>  struct nouveau_drm {
 >  	struct nvkm_device *nvkm;
 >  	struct nvif_parent parent;
+> +	struct mutex client_mutex;
+> +	struct nvif_client _client;
 >  	struct nvif_device device;
-> +	struct nvif_mmu mmu;
+>  	struct nvif_mmu mmu;
 >  
->  	struct nouveau_cli master;
+> -	struct nouveau_cli master;
 >  	struct nouveau_cli client;
+>  	struct drm_device *dev;
+>  
 > diff --git a/drivers/gpu/drm/nouveau/nouveau_mem.c b/drivers/gpu/drm/nouveau/nouveau_mem.c
-> index 25f31d5169e5..67f93cf753ba 100644
+> index b112b62dca3c..fac92fdbf9cc 100644
 > --- a/drivers/gpu/drm/nouveau/nouveau_mem.c
 > +++ b/drivers/gpu/drm/nouveau/nouveau_mem.c
-> @@ -91,7 +91,7 @@ nouveau_mem_host(struct ttm_resource *reg, struct ttm_tt *tt)
->  	struct nouveau_mem *mem = nouveau_mem(reg);
->  	struct nouveau_cli *cli = mem->cli;
->  	struct nouveau_drm *drm = cli->drm;
-> -	struct nvif_mmu *mmu = &cli->mmu;
-> +	struct nvif_mmu *mmu = &drm->mmu;
->  	struct nvif_mem_ram_v0 args = {};
->  	u8 type;
->  	int ret;
-> @@ -115,7 +115,7 @@ nouveau_mem_host(struct ttm_resource *reg, struct ttm_tt *tt)
+> @@ -80,9 +80,9 @@ nouveau_mem_fini(struct nouveau_mem *mem)
+>  {
+>  	nvif_vmm_put(&mem->drm->client.vmm.vmm, &mem->vma[1]);
+>  	nvif_vmm_put(&mem->drm->client.vmm.vmm, &mem->vma[0]);
+> -	mutex_lock(&mem->drm->master.lock);
+> +	mutex_lock(&mem->drm->client_mutex);
+>  	nvif_mem_dtor(&mem->mem);
+> -	mutex_unlock(&mem->drm->master.lock);
+> +	mutex_unlock(&mem->drm->client_mutex);
+>  }
+>  
+>  int
+> @@ -113,11 +113,11 @@ nouveau_mem_host(struct ttm_resource *reg, struct ttm_tt *tt)
+>  	else
 >  		args.dma = tt->dma_address;
 >  
->  	mutex_lock(&drm->master.lock);
-> -	ret = nvif_mem_ctor_type(mmu, "ttmHostMem", cli->mem->oclass, type, PAGE_SHIFT,
-> +	ret = nvif_mem_ctor_type(mmu, "ttmHostMem", mmu->mem, type, PAGE_SHIFT,
+> -	mutex_lock(&drm->master.lock);
+> +	mutex_lock(&drm->client_mutex);
+>  	ret = nvif_mem_ctor_type(mmu, "ttmHostMem", mmu->mem, type, PAGE_SHIFT,
 >  				 reg->size,
 >  				 &args, sizeof(args), &mem->mem);
->  	mutex_unlock(&drm->master.lock);
-> @@ -128,14 +128,14 @@ nouveau_mem_vram(struct ttm_resource *reg, bool contig, u8 page)
->  	struct nouveau_mem *mem = nouveau_mem(reg);
->  	struct nouveau_cli *cli = mem->cli;
->  	struct nouveau_drm *drm = cli->drm;
-> -	struct nvif_mmu *mmu = &cli->mmu;
-> +	struct nvif_mmu *mmu = &drm->mmu;
+> -	mutex_unlock(&drm->master.lock);
+> +	mutex_unlock(&drm->client_mutex);
+>  	return ret;
+>  }
+>  
+> @@ -130,7 +130,7 @@ nouveau_mem_vram(struct ttm_resource *reg, bool contig, u8 page)
 >  	u64 size = ALIGN(reg->size, 1 << page);
 >  	int ret;
 >  
->  	mutex_lock(&drm->master.lock);
-> -	switch (cli->mem->oclass) {
-> +	switch (mmu->mem) {
+> -	mutex_lock(&drm->master.lock);
+> +	mutex_lock(&drm->client_mutex);
+>  	switch (mmu->mem) {
 >  	case NVIF_CLASS_MEM_GF100:
-> -		ret = nvif_mem_ctor_type(mmu, "ttmVram", cli->mem->oclass,
-> +		ret = nvif_mem_ctor_type(mmu, "ttmVram", mmu->mem,
->  					 drm->ttm.type_vram, page, size,
->  					 &(struct gf100_mem_v0) {
->  						.contig = contig,
-> @@ -143,7 +143,7 @@ nouveau_mem_vram(struct ttm_resource *reg, bool contig, u8 page)
->  					 &mem->mem);
+>  		ret = nvif_mem_ctor_type(mmu, "ttmVram", mmu->mem,
+> @@ -154,7 +154,7 @@ nouveau_mem_vram(struct ttm_resource *reg, bool contig, u8 page)
+>  		WARN_ON(1);
 >  		break;
->  	case NVIF_CLASS_MEM_NV50:
-> -		ret = nvif_mem_ctor_type(mmu, "ttmVram", cli->mem->oclass,
-> +		ret = nvif_mem_ctor_type(mmu, "ttmVram", mmu->mem,
->  					 drm->ttm.type_vram, page, size,
->  					 &(struct nv50_mem_v0) {
->  						.bankswz = mmu->kind[mem->kind] == 2,
+>  	}
+> -	mutex_unlock(&drm->master.lock);
+> +	mutex_unlock(&drm->client_mutex);
+>  
+>  	reg->start = mem->mem.addr >> PAGE_SHIFT;
+>  	return ret;
 > -- 
 > 2.45.1
 > 
