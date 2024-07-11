@@ -2,47 +2,88 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D55DACBA9BC
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8860CBABEC
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7A3DF10EA0D;
-	Sat, 13 Dec 2025 12:40:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3826E10EA0C;
+	Sat, 13 Dec 2025 12:41:06 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="LyvdAvB6";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from bg5.exmail.qq.com (bg5.exmail.qq.com [43.154.209.5])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 21BFC10E1B7
- for <nouveau@lists.freedesktop.org>; Fri, 28 Jun 2024 08:23:15 +0000 (UTC)
-X-QQ-mid: bizesmtp77t1719562896t2sg8m4v
-X-QQ-Originating-IP: wW6Te52tLfIZhGbAIwW7ZTTx5j6Cem2c75vdERYyR2A=
-Received: from [198.18.0.1] ( [223.112.234.130])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Fri, 28 Jun 2024 16:21:34 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 16955004016337450842
-Message-ID: <2CCFA0BD64E5F2E0+e4c7fc43-47b1-4788-a7d2-44f6a33cff66@shingroup.cn>
-Date: Fri, 28 Jun 2024 16:21:34 +0800
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A823D10E2CB
+ for <nouveau@lists.freedesktop.org>; Thu, 11 Jul 2024 18:50:56 +0000 (UTC)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 46BDBB79008745;
+ Thu, 11 Jul 2024 18:50:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ kU90E4EzVBWO/hKTiAhZwsQuZeXFe5mA7pm/NB52++4=; b=LyvdAvB69X0Qxu62
+ junCU9WNF95j6PGc4lnNgi8FX3jSKak3iir60Aml2bwB3t9SJ8NDBYMhuvs4xCee
+ UrB9NRj3uaoal6opPY2Wx/KSVJLGoI3EQt1lxgEDq0gbtNHh0gEByHz6m+TM0aGd
+ b8E9/DVo4PkeB1T5SeOEXYJkvIoKEvIFtPjYRecEwJMtr/qBUkoZ0jcfnCnhWimt
+ lBt3LpeHkPpepkak+TNYG8j3wWHXyBYXHzoGmT0EY42+6TGYila/cEwNYKaDozNA
+ F5LgrxXOoaalWuNe/cshohy41tihpOrH3PFzfQ5wlgUWmxUOwIQ38K6ZwTz1MCTC
+ 7+YCQQ==
+Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com
+ [129.46.96.20])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 406x51dg84-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 11 Jul 2024 18:50:26 +0000 (GMT)
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com
+ [10.47.209.196])
+ by NALASPPMTA01.qualcomm.com (8.17.1.19/8.17.1.19) with ESMTPS id
+ 46BIoL0E024082
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 11 Jul 2024 18:50:21 GMT
+Received: from [10.81.24.74] (10.49.16.6) by nalasex01a.na.qualcomm.com
+ (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Thu, 11 Jul
+ 2024 11:50:20 -0700
+Message-ID: <b1f79d00-80bc-4beb-8d49-6e626b79b97c@quicinc.com>
+Date: Thu, 11 Jul 2024 11:50:12 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/2] powerpc/mmiotrace: Add MMIO Tracing tool for
- PowerPC
-To: Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin
- <npiggin@gmail.com>, Christophe Leroy <christophe.leroy@csgroup.eu>,
- "Naveen N. Rao" <naveen.n.rao@linux.ibm.com>
-Cc: luming.yu@shingroup.cn, shenghui.qu@shingroup.cn,
- linuxppc-dev@lists.ozlabs.org, linux-kernel@vger.kernel.org,
- Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu
- <mhiramat@kernel.org>, Karol Herbst <karolherbst@gmail.com>,
- Pekka Paalanen <ppaalanen@gmail.com>, nouveau@lists.freedesktop.org
-References: <2bf90acf7d29641ba6643934ff8dbba897dbd2d9.1718873074.git.jialong.yang@shingroup.cn>
- <87h6ddlfc7.fsf@mail.lhotse>
-From: =?UTF-8?B?WWFuZyBKaWFsb25nIOadqOS9s+m+mQ==?= <jialong.yang@shingroup.cn>
-In-Reply-To: <87h6ddlfc7.fsf@mail.lhotse>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtp:shingroup.cn:qybglogicsvrgz:qybglogicsvrgz8a-0
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:44 +0000
+Subject: Re: [PATCH] x86/mm: add testmmiotrace MODULE_DESCRIPTION()
+To: Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu
+ <mhiramat@kernel.org>, Karol Herbst <karolherbst@gmail.com>, Pekka Paalanen
+ <ppaalanen@gmail.com>, Dave Hansen <dave.hansen@linux.intel.com>, Andy
+ Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Thomas
+ Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav
+ Petkov <bp@alien8.de>, <x86@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue
+ <alexandre.torgue@foss.st.com>
+CC: <linux-kernel@vger.kernel.org>, <nouveau@lists.freedesktop.org>,
+ <linux-stm32@st-md-mailman.stormreply.com>,
+ <linux-arm-kernel@lists.infradead.org>
+References: <20240515-testmmiotrace-md-v1-1-10919a8b2842@quicinc.com>
+Content-Language: en-US
+From: Jeff Johnson <quic_jjohnson@quicinc.com>
+In-Reply-To: <20240515-testmmiotrace-md-v1-1-10919a8b2842@quicinc.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.49.16.6]
+X-ClientProxiedBy: nalasex01a.na.qualcomm.com (10.47.209.196) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-GUID: TVytbWzRQGN5Kw_RiD9K3gyN9tJ4nIXH
+X-Proofpoint-ORIG-GUID: TVytbWzRQGN5Kw_RiD9K3gyN9tJ4nIXH
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-07-11_14,2024-07-11_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 adultscore=0
+ suspectscore=0 impostorscore=0 mlxlogscore=999 mlxscore=0 bulkscore=0
+ priorityscore=1501 malwarescore=0 lowpriorityscore=0 phishscore=0
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2406140001 definitions=main-2407110130
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:45 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,98 +98,34 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On 5/15/24 17:06, Jeff Johnson wrote:
+> Fix the following 'make W=1' warning:
+> 
+> WARNING: modpost: missing MODULE_DESCRIPTION() in arch/x86/mm/testmmiotrace.o
+> 
+> Signed-off-by: Jeff Johnson <quic_jjohnson@quicinc.com>
+> ---
+>   arch/x86/mm/testmmiotrace.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/arch/x86/mm/testmmiotrace.c b/arch/x86/mm/testmmiotrace.c
+> index bda73cb7a044..ae295659ca14 100644
+> --- a/arch/x86/mm/testmmiotrace.c
+> +++ b/arch/x86/mm/testmmiotrace.c
+> @@ -144,3 +144,4 @@ static void __exit cleanup(void)
+>   module_init(init);
+>   module_exit(cleanup);
+>   MODULE_LICENSE("GPL");
+> +MODULE_DESCRIPTION("Test module for mmiotrace");
+> 
+> ---
+> base-commit: 8c06da67d0bd3139a97f301b4aa9c482b9d4f29e
+> change-id: 20240515-testmmiotrace-md-c6050c66a517
 
-在 2024/6/28 15:02, Michael Ellerman 写道:
-> Jialong Yang <jialong.yang@shingroup.cn> writes:
->> mmiotrace is a useful tool to trace MMIO accesses. Nowadays, it only
->> supported on x86 and x86_64 platforms.
-> I've never used mmiotrace, and don't know it well.
->
-> I'm not necessarily opposed to merging it, but AFAIK it was mostly used
-> for reverse engineering proprietary drivers, where the driver itself
-> couldn't be easily instrumented. Is that what you're using it for?
+I don't see this in linux-next yet so following up to see if anything 
+else is needed to get this merged.
 
-Yes. Just like you think. We have used it for network stack debug in 
-ppc64le.
+I'm hoping to have these warnings fixed tree-wide in 6.11.
 
-
->
-> For drivers where we have the source wouldn't it be easier to just use
-> tracepoints in the MMIO accessors?
-
-
-Tracepoints need pre-defined. And in some big driver, it's not easy to 
-overwrite
-
-all points where access registers in io area. And tracepoint is C 
-function level filter.
-
-mmiotrace is similar to set tracepoints in writel/readl... But it can do 
-deeperly.
-
-mmiotrace is a asm level filter tool. It doesn't care what have done in 
-C level. It will
-
-only find what have done by asm, such as stw(store word)/lw(load word),  
-just like standing
-
-in the view of device.
-
-
->
-> Is it still in-use/maintained on the x86 side?
-
-
-Here is some core file patches number in x86:
-
-|      | mmio_mod.c | kmmio.c | pf_in.* | testmmiotrace.c |
-|------+------------+---------+---------+-----------------|
-| 2022 |               1 |            3 | |                  |
-| 2021 |               2 |            1 |               |         |
-| 2020 |               4 |            4 | |               1 |
-| 2019 |               2 |            1 |            1 |               4 |
-| 2018 |                  |            2 |               |          |
-| 2017 |               2 |            2 | |               1 |
-| 2016 |               1 |            2 |            1 |        |
-| 2014 |                  |            1 |               |          |
-| 2013 |               1 |               |               |          |
-| 2012 |               1 |               | |                  |
-| 2011 |               3 |               |            1 |         |
-| 2010 |               1 |            3 |            2 |               1 |
-| 2009 |               4 |          19 | |               3 |
-| 2008 |             13 |            5 |            2 |               3 |
-
->
->> Here is a support for powerpc.
->> The manual is located at Documentation/trace/mmiotrace.rst which means
->> I have not changed user API. People will be easy to use it.
->> Almost all files are copied from x86/mm, there are only some
->> differences from hardware and architectures software.
->>
->> LINK: https://lore.kernel.org/lkml/20080127195536.50809974@daedalus.pq.iki.fi/
->>
->> Signed-off-by: Jialong Yang <jialong.yang@shingroup.cn>
->> ---
->>   arch/powerpc/Kconfig.debug       |   3 +
->>   arch/powerpc/mm/Makefile         |   1 +
->>   arch/powerpc/mm/kmmio.c          | 649 +++++++++++++++++++++++++++++++
->>   arch/powerpc/mm/mmio-mod.c       | 414 ++++++++++++++++++++
->>   arch/powerpc/mm/mmiotrace_arch.c | 149 +++++++
->>   arch/powerpc/mm/mmiotrace_arch.h |  25 ++
->>   arch/powerpc/mm/pf_in.c          | 185 +++++++++
->>   arch/powerpc/mm/pf_in.h          |  33 ++
->>   8 files changed, 1459 insertions(+)
->    
-> At a glance most of that code could be shared between arches. I don't
-> think I can merge that as-is, without some attempt to split the generic
-> parts out.
-
-
-Right.
-
-I just copy them from arch/x86/mm. There are many code not arch specific.
-
-
-> cheers
->
+/jeff
 
