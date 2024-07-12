@@ -2,83 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D46F592F581
-	for <lists+nouveau@lfdr.de>; Fri, 12 Jul 2024 08:26:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EDF4192FA45
+	for <lists+nouveau@lfdr.de>; Fri, 12 Jul 2024 14:28:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6EAF710EBFC;
-	Fri, 12 Jul 2024 06:26:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9D75610ECED;
+	Fri, 12 Jul 2024 12:28:10 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="HO40hdj0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hZkgAFqT";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B5C5810EBFA
- for <nouveau@lists.freedesktop.org>; Fri, 12 Jul 2024 06:26:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1720765591;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=9a5IayKbXBKJrNi/QMZz5s0Prw5V2adYI5z3/V5xH40=;
- b=HO40hdj0O6HWp2q00Miqd7U+BfyQeedhm6RSt71HtgeM9br4V9SEBejpdzOApUDg3V0e80
- 9Q5YwNO+g1t27aJAhUC8NAhgyUqGL5gncV6x19X6seehd+EfdGouq/a7P7kgrTximgm499
- z0U5LwJ0xg6+dItc46crKbrxqzxJDIE=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-77--sV2NA2kNrOnY75mp5OTDQ-1; Fri, 12 Jul 2024 02:26:28 -0400
-X-MC-Unique: -sV2NA2kNrOnY75mp5OTDQ-1
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4266fcb3166so730625e9.2
- for <nouveau@lists.freedesktop.org>; Thu, 11 Jul 2024 23:26:28 -0700 (PDT)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com
+ [209.85.208.47])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3006510ECED
+ for <nouveau@lists.freedesktop.org>; Fri, 12 Jul 2024 12:28:10 +0000 (UTC)
+Received: by mail-ed1-f47.google.com with SMTP id
+ 4fb4d7f45d1cf-58c2e5e8649so4544811a12.1
+ for <nouveau@lists.freedesktop.org>; Fri, 12 Jul 2024 05:28:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1720787288; x=1721392088; darn=lists.freedesktop.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=7mdwrgChLjt237aeGZdoYoch5wUUhOyHuVEarZ9v0kU=;
+ b=hZkgAFqTZR7aEl7FDr3skvN7Rl9irkz5qbLVcaOK0lZC+J0vqByPzmFkogQi8qur9A
+ xCPDvFjzNvdJNoPQIQU6rjJfKEWf92Xf3607aHopuFe9MqAok2HLvBCXDbnqtBIKqUKR
+ Jk+5EBYwnJkjatUAlOI3h/8neMS6M1ckg7Yv0U4fIeccGOaTk7ISinCvpppgI3MMEgcV
+ qlvrWm5TrRThD7SjEaKPsaMAq8Yi0BtvqvDmOAiiqGpXn4Ycwc6RYts/lRUGAyXD5gwP
+ h/nX1rNoDUszqWuyjrNa1QHhp7RGuA/xZopGlR4zQ79t+BWaQc3X5BrTDNrFBRjO+BHk
+ k3BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720765587; x=1721370387;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9a5IayKbXBKJrNi/QMZz5s0Prw5V2adYI5z3/V5xH40=;
- b=jH9qHy4tFPQ/qtHndCBFodQF4raAy9GUtfYMQhWL0pVOnqJWjYkcbbdXE83nkooL2h
- jVQNQHCNumOtAIqWTvbon5+DISvp/QVwPAk1z0rVX3o611we0spqCQYQ2Uz25H9mVg8V
- 9lEiDHjD/TUw6lj+sbWJe3al55iAokBqX2JhiVh7doLOB41uR713JKPaFd4B9rYeUQqk
- 51otU0kzB/ZWRLkMQc3p042/3+YOVpR7IG8ebivMtOxzyuxUEoCDPZTw5dOdBeAywbWe
- dSYKAcMUIh5dU0rIbhzHRX72SspvnFSuWFSM/vuYwaSGI/eu6kb+d9R8ji/eIFhxgLU4
- 7V0Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUCig3VkX7yc/24QZ9sR0JJDkOE9dfI+zJktJglTn4oebgw8c5l7b1BYPz5kX7z78cBvJjj8TriKIEbkGN9ho5uY/v6Tl+p5YdmNTSwnA==
-X-Gm-Message-State: AOJu0YwVzy0WHka/w7fEtcnXN4jgJs9sanAHUUwB2yRT/r0QjXH+Ihzj
- 5pvrJHuKNdtyPh4oZpYn+ZM3oKrBM/NTCb6UktuzsYadDirPztdGA8xhr/sjX8k056k2LgRP9HA
- aSz02H9u7gzMRRTmSpNY6TeDsta7P4YKd7UqxN17ZPKyq9sydjH/hyUGVQrC1ZaM=
-X-Received: by 2002:a5d:64cb:0:b0:362:1322:affc with SMTP id
- ffacd0b85a97d-367ceac1af6mr7196233f8f.5.1720765587435; 
- Thu, 11 Jul 2024 23:26:27 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFKURcKatRXBWbit8UsmQ0Qm94LXmqPcy3DdNqKx6medY7O8ZyGlJX5YS/xZ14HpSQcyTLjgg==
-X-Received: by 2002:a5d:64cb:0:b0:362:1322:affc with SMTP id
- ffacd0b85a97d-367ceac1af6mr7196220f8f.5.1720765587025; 
- Thu, 11 Jul 2024 23:26:27 -0700 (PDT)
-Received: from pstanner-thinkpadt14sgen1.fritz.box
- (200116b82df8b300fbf278adc06b342f.dip.versatel-1u1.de.
- [2001:16b8:2df8:b300:fbf2:78ad:c06b:342f])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-367cde891a3sm9322535f8f.61.2024.07.11.23.26.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jul 2024 23:26:26 -0700 (PDT)
-From: Philipp Stanner <pstanner@redhat.com>
-To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Philipp Stanner <pstanner@redhat.com>
-Subject: [PATCH v2] drm/nouveau: Improve variable names in nouveau_sched_init()
-Date: Fri, 12 Jul 2024 08:26:18 +0200
-Message-ID: <20240712062618.8057-1-pstanner@redhat.com>
-X-Mailer: git-send-email 2.45.0
+ d=1e100.net; s=20230601; t=1720787288; x=1721392088;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7mdwrgChLjt237aeGZdoYoch5wUUhOyHuVEarZ9v0kU=;
+ b=jYN/di9AH+DTQryiPG6x7397iGM4VRu4pCR3Wl+vCyLHDvwXkfe09UugKn5YlJ6GvN
+ hSO7MRSJxuaaIcDaXwElIih0fZEbtMM/PNVm6AnLuw4RZo+5Y9RCUG5ypkIXEEQ2OqK/
+ o66QQuLh/TDUTAq/gVHhnO6AJWqv3sKx+Xl9fLRoxMACBsfl8jbva8hi+8jbUSlCL3qg
+ YSSuzlikOdoCBZhA7m/QTf4xD9JiZQKUBBi9KhjgftQSKWjuKeDHBf5YxoSD1+FI9Dqx
+ jS8KhK3dV33nupMYNWWOy6wDILNwk8ZEBqDsgTPC+FvB+lJ3wsE5TF0+Zz1bxLw2Jf63
+ y9ew==
+X-Gm-Message-State: AOJu0Yy2TEiKPW4k4SU6gVHjnQOsC06Cxt3d2jpXz73CTKQDfsHCRyO1
+ wf+MItEGR0cglFosSDRbrrkpnUr3lJDdXHP3ce/qrqm0BEE4fk+HxF5Jkt2CwR2YEWwxI3246nk
+ DeFKYIEkM1nggaTRQrIIU1OddUJPcUzMMw0c=
+X-Google-Smtp-Source: AGHT+IHqE1Edi1TGwh4vP2ba5W42BwDXnIM2Bl/IMKK0Z9gSeQy0sRtWgXsXtMrlocdzsTGsB2jrRKJEagZFalar9rU=
+X-Received: by 2002:a05:6402:50cc:b0:585:9e73:8ac6 with SMTP id
+ 4fb4d7f45d1cf-59964ac31f1mr2077536a12.16.1720787287908; Fri, 12 Jul 2024
+ 05:28:07 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
+From: Tiaan Wessels <tiaanwessels@gmail.com>
+Date: Fri, 12 Jul 2024 12:27:56 +0000
+Message-ID: <CALGm=8H4fUBVb+=aBpN-BMbwBY4_+cc68fcJbJ4e0ok-uKRcNw@mail.gmail.com>
+Subject: RHEL9.2 Desktop Freeze
+To: nouveau@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="00000000000007ad96061d0c03fb"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,46 +69,50 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-nouveau_sched_init() uses the function drm_sched_init(). The latter
-function has parameters called "hang_limit" and "timeout" in its API
-documentation.
+--00000000000007ad96061d0c03fb
+Content-Type: text/plain; charset="UTF-8"
 
-nouveau_sched_init(), however, defines a variable called
-"job_hang_limit" which is passed to drm_sched_init()'s "timeout"
-parameter. The actual "hang_limit" parameter is directly set to 0.
+Hi,
+I have some HP Z2's running RedHat EL9.2 with NVIDIA Corporation TU117GL
+[T1000 8GB] (rev a1) in them. I use the Nouveau driver instead of the
+proprietary one. I get it that these workstations freeze at times to the
+extent that no keyboard or mouse input works and display output is stalled.
+When this happens I've sometimes observed spin lock errors in the logs in
+the vicinity of the time when this happens. I've tried sticking my head in
+the sand and disabled spin lock detection in the kernel at boot with no
+avail. It still freezes, only there is no more spin lock related logs.
+The logs that i do get at the time are thousands of:
+Jul  8 14:22:28 termcli3 kernel: nouveau 0000:01:00.0: fifo: PBDMA0:
+80000000 [] ch 2 00003f50 e3b6a00a
+holding on for a couple of minutes and then thousands of
+Jul  8 14:25:38 termcli3 systemd-journald[272688]: Missed 2 kernel messages
+Jul  8 14:25:38 termcli3 kernel: nouveau 0000:01:00.0: fifo: PBDMA0:
+80000000 [] ch 2 00003f50 e3b6a00a
+and from thereon i need to power cycle to get out of it
+Is this perhaps a known problem ?
+Thanks
 
-Rename "job_hang_limit" to "timeout".
+--00000000000007ad96061d0c03fb
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Philipp Stanner <pstanner@redhat.com>
----
-Changes in v2:
-- Remove variable "hang_limit". (Danilo)
----
- drivers/gpu/drm/nouveau/nouveau_sched.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr">Hi,<div=
+>I have some HP Z2&#39;s running RedHat EL9.2 with NVIDIA Corporation TU117=
+GL [T1000 8GB] (rev a1) in them. I use the Nouveau driver instead of the pr=
+oprietary one. I get it that these workstations freeze at times to the exte=
+nt that no keyboard or mouse input works and display output is stalled. Whe=
+n this happens I&#39;ve sometimes observed spin lock errors in the logs in =
+the vicinity of the time when this happens. I&#39;ve tried sticking my head=
+ in the sand and disabled spin lock detection in the kernel at boot with no=
+ avail. It still freezes, only there is no more spin lock related logs.</di=
+v><div>The logs that i do get at the time are thousands of:</div><div><div>=
+Jul=C2=A0 8 14:22:28 termcli3 kernel: nouveau 0000:01:00.0: fifo: PBDMA0: 8=
+0000000 [] ch 2 00003f50 e3b6a00a</div></div><div>holding on for a couple o=
+f minutes and then thousands of</div><div><div>Jul=C2=A0 8 14:25:38 termcli=
+3 systemd-journald[272688]: Missed 2 kernel messages</div><div>Jul=C2=A0 8 =
+14:25:38 termcli3 kernel: nouveau 0000:01:00.0: fifo: PBDMA0: 80000000 [] c=
+h 2 00003f50 e3b6a00a</div></div><div>and from thereon i need to power cycl=
+e to get out of it</div><div>Is this perhaps a known problem ?</div><div>Th=
+anks</div><div><br></div><div><br></div></div></div></div></div>
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
-index 32fa2e273965..ba4139288a6d 100644
---- a/drivers/gpu/drm/nouveau/nouveau_sched.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-@@ -404,7 +404,7 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
- {
- 	struct drm_gpu_scheduler *drm_sched = &sched->base;
- 	struct drm_sched_entity *entity = &sched->entity;
--	long job_hang_limit = msecs_to_jiffies(NOUVEAU_SCHED_JOB_TIMEOUT_MS);
-+	const long timeout = msecs_to_jiffies(NOUVEAU_SCHED_JOB_TIMEOUT_MS);
- 	int ret;
- 
- 	if (!wq) {
-@@ -418,7 +418,7 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
- 
- 	ret = drm_sched_init(drm_sched, &nouveau_sched_ops, wq,
- 			     NOUVEAU_SCHED_PRIORITY_COUNT,
--			     credit_limit, 0, job_hang_limit,
-+			     credit_limit, 0, timeout,
- 			     NULL, NULL, "nouveau_sched", drm->dev->dev);
- 	if (ret)
- 		goto fail_wq;
--- 
-2.45.0
-
+--00000000000007ad96061d0c03fb--
