@@ -2,57 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CFAC930DA3
-	for <lists+nouveau@lfdr.de>; Mon, 15 Jul 2024 07:35:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 387E093136E
+	for <lists+nouveau@lfdr.de>; Mon, 15 Jul 2024 13:49:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CF7BD10E22A;
-	Mon, 15 Jul 2024 05:35:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4E88710E34E;
+	Mon, 15 Jul 2024 11:49:40 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="iy2UdCZH";
+	dkim=pass (2048-bit key; secure) header.d=web.de header.i=markus.elfring@web.de header.b="O3wLl1VU";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B9CC010E178
- for <nouveau@lists.freedesktop.org>; Mon, 15 Jul 2024 05:35:23 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id DE943CE0B28;
- Mon, 15 Jul 2024 05:35:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5407FC4AF0C;
- Mon, 15 Jul 2024 05:35:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1721021720;
- bh=23WVQytlsylhbvxlQYuds0lP2VtzWIhTTgtqfdPH29o=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=iy2UdCZHqRcCdoKcJTRLMDVSnkjG+Xex9X8HTKKJYHrjK8RHNBUnRu0DFbYVgx3Gc
- xERkEqqR+hutyEkvQkWM8YaBb/6823P8dEOQubX4aMDiHn97+/yjrKKqpqaVb/6zNa
- RDDOhpe9OZ2tJrpcFDRjjwynZ3jeQGCvKCz8pJuQ=
-Date: Mon, 15 Jul 2024 07:35:16 +0200
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: Jeff Johnson <quic_jjohnson@quicinc.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>,
- Russell King <linux@armlinux.org.uk>,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- kernel-janitors@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-stm32@st-md-mailman.stormreply.com,
- Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
- Stephen Boyd <sboyd@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
- Masami Hiramatsu <mhiramat@kernel.org>,
- Karol Herbst <karolherbst@gmail.com>, Pekka Paalanen <ppaalanen@gmail.com>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>,
- Thomas Gleixner <tglx@linutronix.de>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>
-Subject: Re: MODULE_DESCRIPTION() patches with no maintainer action
-Message-ID: <2024071518-ridden-election-8118@gregkh>
-References: <2d168cf9-e456-4262-b276-95e992b8eac7@quicinc.com>
+Received: from mout.web.de (mout.web.de [212.227.17.12])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D4A4510E34A;
+ Mon, 15 Jul 2024 11:48:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+ s=s29768273; t=1721044105; x=1721648905; i=markus.elfring@web.de;
+ bh=YrYnfXpy81C1jpVdx1iEDBRM93/KVFVJhrGxbIs42Zo=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=O3wLl1VUF7LITZD1j70BEvsYV49fx/ujqG+DDVpDYes8HrJvUXO9AzWakaFw613B
+ DrJhLF9c2kcXfa1ML4WjXHXssOHuT4sJCtlIY4CzM0VadjwOMixpHgh45GneNF3z7
+ zFldOJ6+TYHjK+LGlz0BGrta8ltOalQxQN6VLSHPdcmOXWc6Dx0Jg1qAkN3grgyiG
+ aiipCJwA83GUcOTKccu5sQixE5uokFz3LM+WFyjgi+G7t1bJ/MbtUoN0TkHymnjbV
+ WCsUGzOaGUhrmEVo8Y4y4BROeQH6nApMkU+xJpzSFjytyku91HvoVhlL6cXfStC8l
+ qLy6c3vndXnifZasMw==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from [192.168.178.21] ([94.31.82.95]) by smtp.web.de (mrweb105
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 1MzTLO-1s7Y7N2tOq-00r5Y2; Mon, 15
+ Jul 2024 13:48:25 +0200
+Message-ID: <cb21950b-286b-4630-9052-cff9e7e56337@web.de>
+Date: Mon, 15 Jul 2024 13:48:22 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2d168cf9-e456-4262-b276-95e992b8eac7@quicinc.com>
+User-Agent: Mozilla Thunderbird
+To: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ kernel-janitors@vger.kernel.org,
+ Christophe Jaillet <christophe.jaillet@wanadoo.fr>,
+ Daniel Vetter <daniel@ffwll.ch>, Danilo Krummrich <dakr@redhat.com>,
+ David Airlie <airlied@gmail.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>
+Content-Language: en-GB
+Cc: LKML <linux-kernel@vger.kernel.org>
+From: Markus Elfring <Markus.Elfring@web.de>
+Subject: [PATCH] drm/nouveau/debugfs: Simplify character output in
+ nouveau_debugfs_vbios_image()
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:71gomZOBeHsXTuuGCpKsfKlHuOH458fHULk6qYyu8eYyRHEy6wg
+ vxu79FguCXSArnOkasdaTOv+hNaMNrALYc4QlU5uT+/sl7qPLC4gHFGZkGt7LB9/4vc1+EQ
+ OGojZV0bf1SSPdsA+bzDjf0TCKn7tY9FpoBuDypjHKZpzOwR6qWxHEdWZrisg06jk0Ywm4F
+ kGsFCja0s75FSjAvjjJxQ==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:zd36QuBqUeY=;DvV/O/HVJgTm6NgAelVqBD1ToEh
+ 1P17qaHVy+oOo1j7GgyIj/vWn/mFdkifai8yneCRsSE7DKGPT+G6FGyTkM5A3zZODdBOlu93Y
+ FD3shkGp90AxoqYvRwH8loeMX1mA2OPusxqv6AntsgvqWnVty4nOsH38gNBa1Tx8ZBhsbtgCb
+ LjdCI0qh12c2dLW5WGa8nuJfoFg4i2IR9MM62/byjibMNHv6IzTHgLdMiR91QVMib+Dg6NduG
+ ezH4qGwWbRVKbCG+MrBd7pbvx4GqRY6IYrw/79BIE1cg24OTaexRN7hXd/9EpwZo4tUKebFAp
+ ut1Pk/pOu7MntiCR1we6TzBVdvILKB8TKWN6osU2Adz4oqmJpPZBB1TswKW83gHT32rr53Mgd
+ Z9OtpuYem3VqacI/Z5S8u3V5SS3ti8SmGPtw4AiHwYtwrkvlNTVd6IHiWchik2Y+RLK7WL3zf
+ 15dxIN5PlILxJk4w813upUQncxFtJO7xKD9q5y5foYtN7TFi4t+rfmwtOnkaOLQ09Xot3wBYp
+ m9T3ZDiO5d2T6lKaBf8ulYIdCIFT+SuuWSkypcXdkV4eKo16hNtyU1wsBZhuYQ/iFN8A7IGDo
+ UZihD49sVxp7XR30Dgjy5/CO5lQX+wfMLTBbAcb3k3DudlUQK1U9HMrZixKP6EwtZzO8r+BmB
+ z5KrTTTZGbw+b/EfKCjJdnSvdku05VnBOTx0abVwQ5DoM0HfJ2+vIafTuEcihysaUjR5zgNcI
+ 9UvFNUKkSD5jl7gTKQE+DNh8wOrQEn8RnlFyHEqfEHED8MgetzIh01SE0ifbaG1idnOAruYO4
+ 239kA1LUUEoiOl/ZFJVNHFCw==
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,33 +81,36 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Jul 14, 2024 at 02:46:19PM -0700, Jeff Johnson wrote:
-> Andrew & Greg,
-> 
-> I hate to bother you with such mundane patches, but the following have been
-> posted for a while without any maintainer or reviewer comment or action, and
-> they have not yet landed in linux-next.
-> 
-> What is the path forward to have these MODULE_DESCRIPTION() warnings fixed?
-> 
-> arch/arm/probes/kprobes/
-> https://lore.kernel.org/all/20240622-md-arm-arch-arm-probes-kprobes-v1-1-0832bd6e45db@quicinc.com/
-> 
-> arch/x86/mm/
-> https://lore.kernel.org/all/20240515-testmmiotrace-md-v1-1-10919a8b2842@quicinc.com/
-> 
-> drivers/spmi/
-> https://lore.kernel.org/all/20240609-md-drivers-spmi-v1-1-f1d5b24e7a66@quicinc.com/
-> 
-> (note that beyond these 3 patches I still have an additional 13 patches which
-> need to land in order to fix these warnings tree-wide, but those 13 patches
-> have had recent maintainer or reviewer action so I'm not seeking your help at
-> this time).
+From: Markus Elfring <elfring@users.sourceforge.net>
+Date: Mon, 15 Jul 2024 13:36:54 +0200
 
-After -rc1 is out, resend them all as a series and cc: the right people
-and either me or Andrew can pick them up then and get them merged in
-before -final is released.
+Single characters should be put into a sequence.
+Thus use the corresponding function =E2=80=9Cseq_putc=E2=80=9D for one sel=
+ected call.
 
-thanks,
+This issue was transformed by using the Coccinelle software.
 
-greg k-h
+Suggested-by: Christophe Jaillet <christophe.jaillet@wanadoo.fr>
+Signed-off-by: Markus Elfring <elfring@users.sourceforge.net>
+=2D--
+ drivers/gpu/drm/nouveau/nouveau_debugfs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/n=
+ouveau/nouveau_debugfs.c
+index e83db051e851..931b62097366 100644
+=2D-- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
++++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
+@@ -42,7 +42,7 @@ nouveau_debugfs_vbios_image(struct seq_file *m, void *da=
+ta)
+ 	int i;
+
+ 	for (i =3D 0; i < drm->vbios.length; i++)
+-		seq_printf(m, "%c", drm->vbios.data[i]);
++		seq_putc(m, drm->vbios.data[i]);
+ 	return 0;
+ }
+
+=2D-
+2.45.2
+
