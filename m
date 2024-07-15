@@ -2,89 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75E2692FFE4
-	for <lists+nouveau@lfdr.de>; Fri, 12 Jul 2024 19:39:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CFAC930DA3
+	for <lists+nouveau@lfdr.de>; Mon, 15 Jul 2024 07:35:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AE80610ED7E;
-	Fri, 12 Jul 2024 17:39:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CF7BD10E22A;
+	Mon, 15 Jul 2024 05:35:31 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="QDx8eHBH";
+	dkim=pass (1024-bit key; unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="iy2UdCZH";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 197A310ED7E
- for <nouveau@lists.freedesktop.org>; Fri, 12 Jul 2024 17:39:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1720805942;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=sipNUbj7qIymRT+79qbVwcgrJBEdFVUgDof1TAUYRzU=;
- b=QDx8eHBHcg+MHUcpY2FnSG8Rz/NsNr9GJ5/47/GMavQ6097+RUazOE8p2wjQ+lTFH0Xs2S
- WzQ9zqKxc6rZrkjTAxIb6gMo+CpbXI9mlPbOmrCrTzLtoeurQSZlLba5s+G+d9R37Pz5zS
- YtdeDoEVi5shmQmvGZBH124ZJx4gy1Q=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-623-2NVUUlWQPbCnEDXlnm_ksw-1; Fri, 12 Jul 2024 13:38:58 -0400
-X-MC-Unique: 2NVUUlWQPbCnEDXlnm_ksw-1
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4265b751469so17501715e9.1
- for <nouveau@lists.freedesktop.org>; Fri, 12 Jul 2024 10:38:58 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720805937; x=1721410737;
- h=content-transfer-encoding:in-reply-to:organization:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sipNUbj7qIymRT+79qbVwcgrJBEdFVUgDof1TAUYRzU=;
- b=RFjhPigGipYifX7Uai3XKsTsdg5c+B7ZoKmtJZj2GPLOby5fnqmOoPm8JVP2ReUzSG
- O+aQSCjfHPz9MF6vDae+55t7qUr2pJs7MHUr1QF6EXlB/95ivL3yLaujqfZjdox240i6
- g8Cz0g6K63aTU8P3QHfnwItjs4xnvFPat/YE2idNHRs8JaVIt45nTrbxQM0YCHtVNSiS
- IAw6nEsvkj2+gF+T484Iu2KZBHqg2zojEZd25GYaK/yjUPuY7/3zSTPF+xNl0VAxyJJR
- Q5n8E0HWTMdiEd4iUE2Q4aYgSiyjI18cyxiPzE2UUPW1xlcW5zTqupzSHnjx+cayiY8q
- IyDQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXZRR7BdOCuXVCf6NOePDSFpeNs2kJxjx7qElOjZitAKadYUA7AdfhwpbP07wYjQ5fDL3YHqc1BZQLH6WMHfl6s1CJLoqzEiqoaKGFvqg==
-X-Gm-Message-State: AOJu0YxGLI9JvBlm5GJfCob4jHknafcwY9X3AqbrSJ6qPLcwWZS9aphd
- P5Qou8I0h2KQWT6L1kYoYFf9/bklyICHuoonu+Y5ddYO4uleGerIqH64Z4wetyM7Kp3WkwnS1CB
- +VckJW2t8BEO1KA6Ok3hvWQ3mWZYkFAz2ka3pw8HfJ8hS6gLScLQ9X4+JVHrU14A=
-X-Received: by 2002:a05:600c:4613:b0:426:526f:4a1f with SMTP id
- 5b1f17b1804b1-4279daf2585mr30621085e9.16.1720805937772; 
- Fri, 12 Jul 2024 10:38:57 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGwxyB3tY2Z4sxPaWpQBWCpnq//rThRXFxa0CLe10n5BDi1DzzpSy6RoH9nNF6GDL7AeQz3Ow==
-X-Received: by 2002:a05:600c:4613:b0:426:526f:4a1f with SMTP id
- 5b1f17b1804b1-4279daf2585mr30620885e9.16.1720805937464; 
- Fri, 12 Jul 2024 10:38:57 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:4b3f:ee94:abf:b8ff:feee:998b?
- ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-367cde890f6sm10676030f8f.53.2024.07.12.10.38.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 12 Jul 2024 10:38:56 -0700 (PDT)
-Message-ID: <6c5ba940-8e18-4b4f-9e30-5608b228ec8b@redhat.com>
-Date: Fri, 12 Jul 2024 19:38:54 +0200
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B9CC010E178
+ for <nouveau@lists.freedesktop.org>; Mon, 15 Jul 2024 05:35:23 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id DE943CE0B28;
+ Mon, 15 Jul 2024 05:35:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5407FC4AF0C;
+ Mon, 15 Jul 2024 05:35:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1721021720;
+ bh=23WVQytlsylhbvxlQYuds0lP2VtzWIhTTgtqfdPH29o=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=iy2UdCZHqRcCdoKcJTRLMDVSnkjG+Xex9X8HTKKJYHrjK8RHNBUnRu0DFbYVgx3Gc
+ xERkEqqR+hutyEkvQkWM8YaBb/6823P8dEOQubX4aMDiHn97+/yjrKKqpqaVb/6zNa
+ RDDOhpe9OZ2tJrpcFDRjjwynZ3jeQGCvKCz8pJuQ=
+Date: Mon, 15 Jul 2024 07:35:16 +0200
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Jeff Johnson <quic_jjohnson@quicinc.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>,
+ Russell King <linux@armlinux.org.uk>,
+ linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+ kernel-janitors@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-stm32@st-md-mailman.stormreply.com,
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+ Stephen Boyd <sboyd@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ Karol Herbst <karolherbst@gmail.com>, Pekka Paalanen <ppaalanen@gmail.com>,
+ Dave Hansen <dave.hansen@linux.intel.com>,
+ Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>,
+ Thomas Gleixner <tglx@linutronix.de>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>
+Subject: Re: MODULE_DESCRIPTION() patches with no maintainer action
+Message-ID: <2024071518-ridden-election-8118@gregkh>
+References: <2d168cf9-e456-4262-b276-95e992b8eac7@quicinc.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] drm/nouveau: Improve variable names in
- nouveau_sched_init()
-To: Philipp Stanner <pstanner@redhat.com>
-Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-References: <20240712062618.8057-1-pstanner@redhat.com>
-From: Danilo Krummrich <dakr@redhat.com>
-Organization: RedHat
-In-Reply-To: <20240712062618.8057-1-pstanner@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2d168cf9-e456-4262-b276-95e992b8eac7@quicinc.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,48 +67,33 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 7/12/24 8:26 AM, Philipp Stanner wrote:
-> nouveau_sched_init() uses the function drm_sched_init(). The latter
-> function has parameters called "hang_limit" and "timeout" in its API
-> documentation.
+On Sun, Jul 14, 2024 at 02:46:19PM -0700, Jeff Johnson wrote:
+> Andrew & Greg,
 > 
-> nouveau_sched_init(), however, defines a variable called
-> "job_hang_limit" which is passed to drm_sched_init()'s "timeout"
-> parameter. The actual "hang_limit" parameter is directly set to 0.
+> I hate to bother you with such mundane patches, but the following have been
+> posted for a while without any maintainer or reviewer comment or action, and
+> they have not yet landed in linux-next.
 > 
-> Rename "job_hang_limit" to "timeout".
+> What is the path forward to have these MODULE_DESCRIPTION() warnings fixed?
 > 
-> Signed-off-by: Philipp Stanner <pstanner@redhat.com>
+> arch/arm/probes/kprobes/
+> https://lore.kernel.org/all/20240622-md-arm-arch-arm-probes-kprobes-v1-1-0832bd6e45db@quicinc.com/
+> 
+> arch/x86/mm/
+> https://lore.kernel.org/all/20240515-testmmiotrace-md-v1-1-10919a8b2842@quicinc.com/
+> 
+> drivers/spmi/
+> https://lore.kernel.org/all/20240609-md-drivers-spmi-v1-1-f1d5b24e7a66@quicinc.com/
+> 
+> (note that beyond these 3 patches I still have an additional 13 patches which
+> need to land in order to fix these warnings tree-wide, but those 13 patches
+> have had recent maintainer or reviewer action so I'm not seeking your help at
+> this time).
 
-Applied to drm-misc-next, thanks!
+After -rc1 is out, resend them all as a series and cc: the right people
+and either me or Andrew can pick them up then and get them merged in
+before -final is released.
 
-> ---
-> Changes in v2:
-> - Remove variable "hang_limit". (Danilo)
-> ---
->   drivers/gpu/drm/nouveau/nouveau_sched.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_sched.c b/drivers/gpu/drm/nouveau/nouveau_sched.c
-> index 32fa2e273965..ba4139288a6d 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_sched.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_sched.c
-> @@ -404,7 +404,7 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
->   {
->   	struct drm_gpu_scheduler *drm_sched = &sched->base;
->   	struct drm_sched_entity *entity = &sched->entity;
-> -	long job_hang_limit = msecs_to_jiffies(NOUVEAU_SCHED_JOB_TIMEOUT_MS);
-> +	const long timeout = msecs_to_jiffies(NOUVEAU_SCHED_JOB_TIMEOUT_MS);
->   	int ret;
->   
->   	if (!wq) {
-> @@ -418,7 +418,7 @@ nouveau_sched_init(struct nouveau_sched *sched, struct nouveau_drm *drm,
->   
->   	ret = drm_sched_init(drm_sched, &nouveau_sched_ops, wq,
->   			     NOUVEAU_SCHED_PRIORITY_COUNT,
-> -			     credit_limit, 0, job_hang_limit,
-> +			     credit_limit, 0, timeout,
->   			     NULL, NULL, "nouveau_sched", drm->dev->dev);
->   	if (ret)
->   		goto fail_wq;
+thanks,
 
+greg k-h
