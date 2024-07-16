@@ -2,72 +2,135 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0010932E6C
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jul 2024 18:35:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45AA8932E90
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jul 2024 18:48:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 674DB10E7D7;
-	Tue, 16 Jul 2024 16:35:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8215C10E7E9;
+	Tue, 16 Jul 2024 16:48:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="theRsoRD";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="dOO0VQIA";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="A0RM8EKV";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="g97zCAf0";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="Y67ofQx6";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com
- [209.85.219.176])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5D41610E7D4
- for <nouveau@lists.freedesktop.org>; Tue, 16 Jul 2024 16:35:42 +0000 (UTC)
-Received: by mail-yb1-f176.google.com with SMTP id
- 3f1490d57ef6-dfe43dca3bfso5880510276.0
- for <nouveau@lists.freedesktop.org>; Tue, 16 Jul 2024 09:35:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721147741; x=1721752541; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=34oPXxwUhO+NH/fduZHAOpDo2yc0Dac2FG6FOEu8FG0=;
- b=theRsoRDFEC+OTG3OUBYDi4RWs3XsrChef4ZO8g7gLbK3QmpAm55wF/W6V8ZoM/bL5
- b1auriWtjs1ewOlYJDXT3hfzm+VvhGiex42nVXuv0yEXAbqQ8owIP19J4M4xv5Xe+jPq
- RaKdn6YlvAE9M2OEi3pncJZWDpwctVD4JVyp9JXoyYIn0+YaXSQAGAD7bWu1VLgDXBQM
- 1cz3D93AjSjvy31JbJx1yoEvpUky1Eu2XJkF7t4R5M3SwXtHvHyHshUikO9hQPU6R3bd
- qeIvTiMV+WhglU/n1BKYZODeQtjE2C0iPBobIBIUGFBYLoS9WZCAnxDCp424P7XxvvAQ
- 3JAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721147741; x=1721752541;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=34oPXxwUhO+NH/fduZHAOpDo2yc0Dac2FG6FOEu8FG0=;
- b=VIAAlHoTB1BC8W5VPx+VU3YDfZjpvG4umNGT56UUA1KHU5RP5WHff0pS5lbXv/1X6a
- P32yB64N2CRn3YQDnaQ/hI1UlOEFJy3nGfDg+wpZTavLNlgi9vJ3gojI7hz6kGplXw7U
- rx2XWpvzATguv2Z8Dyh7+FrIHlQ779+QuAs6bQOdRFpMk3DbHEY9uC0zUNzr7ldfnCU/
- ivxKEbDAVWC7mka5hmsmbi5lWOqPinQKh+pVYCxCDl9SzCBdrBHGJMBWJHIPbBu+le6A
- KpCNRofsQSS4lPXjPQ8oi7z7mqFESMabasfe71fuaDK9zcmgnG87l2Ei2GNqM6nybLQi
- e3uw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVEVywd2i5/ECLXuOEpyvuyvWHLcXim89WhfugLD/HVSHw/0E3sLjYuDhQQcrCI27cDLrBxsW4e/2ODoAf9mRl2mfVRockhSybuQdFiTw==
-X-Gm-Message-State: AOJu0YzIAu36wsh4A9AX+bb2SYY6RbqpzJ/xPhku/1v6CPQLRqcx7PE+
- FgENCTTJ2SPZtAqh9xtJ+0NrOejQ1rw9whcFzGSEwLxoW391yGMA2QXrhnd6VdSSO3Vt6iJvvGA
- +H5GnR7Y3zevT1ObjbvlefZlHGk0Vz8nsm5b6Rw==
-X-Google-Smtp-Source: AGHT+IEnIAYeAeq7hqAfRb3BsofJtAOi/bF6/p/RLUOXV2Z8f4Y68QWTBl8HnA/niZH1mJfbe7NjdvQYlDEhmgv9k1o=
-X-Received: by 2002:a05:6902:2510:b0:e05:b9bf:4e58 with SMTP id
- 3f1490d57ef6-e05d5dfb1d4mr2951145276.25.1721147741099; Tue, 16 Jul 2024
- 09:35:41 -0700 (PDT)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4D1A310E7F0;
+ Tue, 16 Jul 2024 16:48:16 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 85C5E1F8C5;
+ Tue, 16 Jul 2024 16:48:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1721148494; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=6R8OFc3AH/hYFUgfJt7prorsyoPHKzDmBeiYlyMP278=;
+ b=dOO0VQIA8jpstFxjqxeT3WyrBkSw6Fc2YVnifXIBGVkIOOUV9Uh4Mz3QKKIM938thxp8k1
+ hzBOd1M+d32M1IWUIYk8kdHEmLUzNyQw71a0PfjEknABSo/EJxsaHxygzNvT0TECGmewua
+ Hmv8rd32NT5LWZEkNnxutFO6Nz2oXrg=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1721148494;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=6R8OFc3AH/hYFUgfJt7prorsyoPHKzDmBeiYlyMP278=;
+ b=A0RM8EKVXu8aNRvDtVNor0gVHDbjl/g9XCjb2j6JUbKAFp8FQWaruFboroU0ajyOsp9v4b
+ Z843vrSVt8G5nTAQ==
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1721148493; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=6R8OFc3AH/hYFUgfJt7prorsyoPHKzDmBeiYlyMP278=;
+ b=g97zCAf0swXlQVwRecw5oFZcJp90c4vSy7MJSCiAKuBnPWRM809wrJGVEW18tqc0F5NVCq
+ QF/N9nSdr0DQiOBl0PXpE/Goh52FmO8782eNB6ObYq1puVPDMsHE8zAvBOxsDb1J3Pb65P
+ x2yw2qhFxbJ8zz27xsOL+7dC6i+65To=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1721148493;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=6R8OFc3AH/hYFUgfJt7prorsyoPHKzDmBeiYlyMP278=;
+ b=Y67ofQx6tyud5Ej+A50rCh+7Lm6mmyL9RWbClWSCXYeZpySXMtwWVygAISiXsfpRpHIpYz
+ 52LUbHgZ6kwN6FBw==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 4B462136E5;
+ Tue, 16 Jul 2024 16:48:13 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id 3h4CEU2klmbGKgAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Tue, 16 Jul 2024 16:48:13 +0000
+Message-ID: <e924c624-8664-4739-84c5-8229325f78ce@suse.de>
+Date: Tue, 16 Jul 2024 18:48:12 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: DisplayPort: handling of HPD events / link training
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: "open list:DRM DRIVER FOR MSM ADRENO GPU"
+ <dri-devel@lists.freedesktop.org>,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>, nouveau@lists.freedesktop.org,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ freedreno <freedreno@lists.freedesktop.org>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Kuogee Hsieh <quic_khsieh@quicinc.com>
 References: <CAA8EJprfbMs_3PnpebhVg=NVrO5zc23cgx=1f4HAKLnT5b9J6Q@mail.gmail.com>
  <d3be8832-a6f2-496e-ac2e-9b29cae9f8f2@suse.de>
-In-Reply-To: <d3be8832-a6f2-496e-ac2e-9b29cae9f8f2@suse.de>
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Date: Tue, 16 Jul 2024 19:35:29 +0300
-Message-ID: <CAA8EJprA3aXHex4ctSE+ChhhWVLLdcXtppsadrNYbnHWi+gKLQ@mail.gmail.com>
-Subject: Re: DisplayPort: handling of HPD events / link training
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: "open list:DRM DRIVER FOR MSM ADRENO GPU"
- <dri-devel@lists.freedesktop.org>, 
- amd-gfx list <amd-gfx@lists.freedesktop.org>, nouveau@lists.freedesktop.org, 
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>, 
- freedreno <freedreno@lists.freedesktop.org>,
- Abhinav Kumar <quic_abhinavk@quicinc.com>, 
- Kuogee Hsieh <quic_khsieh@quicinc.com>
-Content-Type: text/plain; charset="UTF-8"
+ <CAA8EJprA3aXHex4ctSE+ChhhWVLLdcXtppsadrNYbnHWi+gKLQ@mail.gmail.com>
+Content-Language: en-US
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <CAA8EJprA3aXHex4ctSE+ChhhWVLLdcXtppsadrNYbnHWi+gKLQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-4.29 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ XM_UA_NO_VERSION(0.01)[]; RCPT_COUNT_SEVEN(0.00)[8];
+ MIME_TRACE(0.00)[0:+]; ARC_NA(0.00)[];
+ MID_RHS_MATCH_FROM(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ RCVD_TLS_ALL(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_HAS_DN(0.00)[];
+ TO_DN_SOME(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,imap1.dmz-prg2.suse.org:helo]
+X-Spam-Flag: NO
+X-Spam-Score: -4.29
+X-Spam-Level: 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,72 +145,89 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 16 Jul 2024 at 18:58, Thomas Zimmermann <tzimmermann@suse.de> wrote:
->
-> Hi
->
-> Am 27.02.24 um 23:40 schrieb Dmitry Baryshkov:
-> > Hello,
-> >
-> > We are currently looking at checking and/or possibly redesigning the
-> > way the MSM DRM driver handles the HPD events and link training.
-> >
-> > After a quick glance at the drivers implementing DP support, I noticed
-> > following main approaches:
-> > - Perform link training at the atomic_enable time, don't report
-> > failures (mtk, analogix, zynqmp, tegra, nouveau)
-> > - Perform link training at the atomic_enable time, report errors using
-> > link_status property (i915, mhdp8546)
-> > - Perform link training on the plug event (msm, it8605).
-> > - Perform link training from the DPMS handler, also calling it from
-> > the enable callback (AMDGPU, radeon).
-> >
-> > It looks like the majority wins and we should move HPD to
-> > atomic_enable time. Is that assumption correct?
->
-> Did you ever receive an answer to this question? I currently investigate
-> ast's DP code, which does link training as part of detecting the
-> connector state (in detect_ctx). But most other drivers do this in
-> atomic_enable. I wonder if ast should follow.
+Hi
 
-Short answer: yes, the only proper place to do it is atomic_enable().
+Am 16.07.24 um 18:35 schrieb Dmitry Baryshkov:
+> On Tue, 16 Jul 2024 at 18:58, Thomas Zimmermann <tzimmermann@suse.de> wrote:
+>> Hi
+>>
+>> Am 27.02.24 um 23:40 schrieb Dmitry Baryshkov:
+>>> Hello,
+>>>
+>>> We are currently looking at checking and/or possibly redesigning the
+>>> way the MSM DRM driver handles the HPD events and link training.
+>>>
+>>> After a quick glance at the drivers implementing DP support, I noticed
+>>> following main approaches:
+>>> - Perform link training at the atomic_enable time, don't report
+>>> failures (mtk, analogix, zynqmp, tegra, nouveau)
+>>> - Perform link training at the atomic_enable time, report errors using
+>>> link_status property (i915, mhdp8546)
+>>> - Perform link training on the plug event (msm, it8605).
+>>> - Perform link training from the DPMS handler, also calling it from
+>>> the enable callback (AMDGPU, radeon).
+>>>
+>>> It looks like the majority wins and we should move HPD to
+>>> atomic_enable time. Is that assumption correct?
+>> Did you ever receive an answer to this question? I currently investigate
+>> ast's DP code, which does link training as part of detecting the
+>> connector state (in detect_ctx). But most other drivers do this in
+>> atomic_enable. I wonder if ast should follow.
+> Short answer: yes, the only proper place to do it is atomic_enable().
 
-Long answer: I don't see a way to retrigger link training in ast_dp.c
-Without such change you are just shifting things around. The
-end-result of moving link-training to atomic_enable() is that each
-enable can trigger link training, possibly lowering the link rate,
-etc. if link training is just a status bit from the firmware that we
-don't control, it doesn't make real-real sense to move it.
+Thanks.
 
 >
-> Best regards
-> Thomas
->
-> >
-> > Also two related questions:
-> > - Is there a plan to actually make use of the link_status property?
-> > Intel presented it at FOSDEM 2018, but since that time it was not
-> > picked up by other drivers.
-> >
-> > - Is there any plan to create generic DP link training helpers? After
-> > glancing through the DP drivers there is a lot of similar code in the
-> > link training functions, with minor differences here and there. And
-> > it's those minor differences that bug me. It means that drivers might
-> > respond differently to similar devices. Or that there might be minor
-> > bugs here and there.
-> >
->
-> --
-> --
-> Thomas Zimmermann
-> Graphics Driver Developer
-> SUSE Software Solutions Germany GmbH
-> Frankenstrasse 146, 90461 Nuernberg, Germany
-> GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
-> HRB 36809 (AG Nuernberg)
->
+> Long answer: I don't see a way to retrigger link training in ast_dp.c
+> Without such change you are just shifting things around. The
+> end-result of moving link-training to atomic_enable() is that each
+> enable can trigger link training, possibly lowering the link rate,
+> etc. if link training is just a status bit from the firmware that we
+> don't control, it doesn't make real-real sense to move it.
 
+I have to think about what to do. People tend to copy existing drivers, 
+which alone might be a good argument for using atomic_enable. The link 
+training is indeed just a flag that is set by the firmware. I think it's 
+possible to re-trigger training by powering the port down and up again. 
+atomic_enable could likely do that. The hardware is also somewhat buggy 
+and not fully standard conformant.
+
+Best regards
+Thomas
+
+>
+>> Best regards
+>> Thomas
+>>
+>>> Also two related questions:
+>>> - Is there a plan to actually make use of the link_status property?
+>>> Intel presented it at FOSDEM 2018, but since that time it was not
+>>> picked up by other drivers.
+>>>
+>>> - Is there any plan to create generic DP link training helpers? After
+>>> glancing through the DP drivers there is a lot of similar code in the
+>>> link training functions, with minor differences here and there. And
+>>> it's those minor differences that bug me. It means that drivers might
+>>> respond differently to similar devices. Or that there might be minor
+>>> bugs here and there.
+>>>
+>> --
+>> --
+>> Thomas Zimmermann
+>> Graphics Driver Developer
+>> SUSE Software Solutions Germany GmbH
+>> Frankenstrasse 146, 90461 Nuernberg, Germany
+>> GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
+>> HRB 36809 (AG Nuernberg)
+>>
+>
 
 -- 
-With best wishes
-Dmitry
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstrasse 146, 90461 Nuernberg, Germany
+GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
+HRB 36809 (AG Nuernberg)
+
