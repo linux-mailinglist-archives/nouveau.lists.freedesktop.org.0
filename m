@@ -2,49 +2,94 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3238DCBAEE6
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:46:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07971CBAD19
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 80CF310EC43;
-	Sat, 13 Dec 2025 12:42:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C368F10EA44;
+	Sat, 13 Dec 2025 12:41:28 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Y2qQU8t5";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="LYyJO9nj";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 209E310EA4F;
- Thu, 18 Jul 2024 17:00:18 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 7E50561B5F;
- Thu, 18 Jul 2024 17:00:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B171EC4AF0C;
- Thu, 18 Jul 2024 17:00:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1721322017;
- bh=o6LFR2CG1I/Zl0paV4qR4nPROnNStuPxPR6YczJjRlA=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Y2qQU8t5Fz7hlCal5Tt7RsaFPxGLuc7+oUreIwavdsKKx/gd4+wkRdcxmhfW2qYhM
- Fwam+qBjLoJGwjn1ox8OR6nmEPNrNbnbixWhAYldo8veWKMr9ROqFyY20EhIONqOxo
- 9BOXoOC3aKoWB2HrkXdpzXUOihi4GSewLvUxR1NueDyWrpyf+LoEiTX+6sWpsgz7I9
- 22HGVj4U4ADk1WB0qoJLqhj1tD+vDVFXqzBof/UUd/lIODqVOiHFmRy9e4cBbeXDAq
- rJ0BUQBggo35R4HCSLP4n/rcd500T1cJ6k1+Dc2ASjhJk+Wqzlt/+6wZTh7XFWfL21
- I1wlrY/4B05hA==
-From: Danilo Krummrich <dakr@kernel.org>
-To: lyude@redhat.com,
-	airlied@redhat.com,
-	christian.koenig@amd.com
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- Danilo Krummrich <dakr@kernel.org>
-Subject: [PATCH 3/3] drm/nouveau: use GEM references instead of TTMs
-Date: Thu, 18 Jul 2024 18:58:48 +0200
-Message-ID: <20240718165959.3983-4-dakr@kernel.org>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240718165959.3983-1-dakr@kernel.org>
-References: <20240718165959.3983-1-dakr@kernel.org>
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DDA1610EC33
+ for <nouveau@lists.freedesktop.org>; Fri, 19 Jul 2024 14:01:26 +0000 (UTC)
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 46JCVfr5002454;
+ Fri, 19 Jul 2024 14:00:34 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 0iOXd/KnUcqhuwFmJpV0aD60W+/rKAO1g0GIgi7G9dU=; b=LYyJO9njjal2idWQ
+ pHOhc9v48Y3mFXXbo69osK52dhN/D2QEB1m6pC0VT4I8cWFE6izJVlgjMwNnXolR
+ ukdcCv907hcFc3z5BaSFy2wnlJpSuGYRw4Zt5qMUJhnOF3k0Ds/1r/rAEu3sMBaR
+ milE/AgVpodAQ976/mWxTO9CfzNtOrQiai5WaOGn08hjuBVDuDDa8bKhY6RgDjRz
+ p0UGJ/xbZv/pSTN8VVHBMVXj7UhG3xtqyRdt6RhNvIdiwv66z5tvUIMNbRA+R7RN
+ FdN5SwAgonLbrA6yAjkBbAsg38Q2rnC1O4iKS7dmylnlLecD8O8nA19F7zuFDW9u
+ j62hpw==
+Received: from nalasppmta05.qualcomm.com (Global_NAT1.qualcomm.com
+ [129.46.96.20])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 40fe94sm9p-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 19 Jul 2024 14:00:33 +0000 (GMT)
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com
+ [10.47.209.196])
+ by NALASPPMTA05.qualcomm.com (8.17.1.19/8.17.1.19) with ESMTPS id
+ 46JE0J7r027068
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 19 Jul 2024 14:00:19 GMT
+Received: from [10.48.247.102] (10.49.16.6) by nalasex01a.na.qualcomm.com
+ (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Fri, 19 Jul
+ 2024 07:00:18 -0700
+Message-ID: <55341a0d-b07b-4f25-be45-dd0b352315aa@quicinc.com>
+Date: Fri, 19 Jul 2024 07:00:17 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:49 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: MODULE_DESCRIPTION() patches with no maintainer action
+Content-Language: en-US
+To: Arnd Bergmann <arnd@arndb.de>, Andrew Morton <akpm@linux-foundation.org>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+CC: Russell King <linux@armlinux.org.uk>,
+ <linux-arm-kernel@lists.infradead.org>, <linux-kernel@vger.kernel.org>,
+ <kernel-janitors@vger.kernel.org>, "nouveau@lists.freedesktop.org"
+ <nouveau@lists.freedesktop.org>,
+ <linux-stm32@st-md-mailman.stormreply.com>,
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Stephen Boyd
+ <sboyd@kernel.org>, Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu
+ <mhiramat@kernel.org>, Karol Herbst <karolherbst@gmail.com>, Pekka Paalanen
+ <ppaalanen@gmail.com>, Dave Hansen <dave.hansen@linux.intel.com>, Andy
+ Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Thomas
+ Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav
+ Petkov <bp@alien8.de>, <x86@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue
+ <alexandre.torgue@foss.st.com>
+References: <2d168cf9-e456-4262-b276-95e992b8eac7@quicinc.com>
+ <bdac7f10-4c65-4be2-952b-aed1af04e2c9@app.fastmail.com>
+From: Jeff Johnson <quic_jjohnson@quicinc.com>
+In-Reply-To: <bdac7f10-4c65-4be2-952b-aed1af04e2c9@app.fastmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.49.16.6]
+X-ClientProxiedBy: nalasex01a.na.qualcomm.com (10.47.209.196) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-GUID: sg1Ff6mAFYU0BUKqF12MoFAl9ng0bFVC
+X-Proofpoint-ORIG-GUID: sg1Ff6mAFYU0BUKqF12MoFAl9ng0bFVC
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-07-19_06,2024-07-18_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0
+ mlxlogscore=999 lowpriorityscore=0 bulkscore=0 spamscore=0 impostorscore=0
+ adultscore=0 malwarescore=0 clxscore=1011 phishscore=0 mlxscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2407110000 definitions=main-2407190107
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:45 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,263 +104,98 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-TTM wants to get rid of the duplicate refcounting of the embedded GEM
-object and its own reference count.
+On 7/19/2024 3:51 AM, Arnd Bergmann wrote:
+> On Sun, Jul 14, 2024, at 23:46, Jeff Johnson wrote:
+>> Andrew & Greg,
+>>
+>> I hate to bother you with such mundane patches, but the following have been
+>> posted for a while without any maintainer or reviewer comment or action, and
+>> they have not yet landed in linux-next.
+>>
+>> What is the path forward to have these MODULE_DESCRIPTION() warnings fixed?
+>>
+>> arch/arm/probes/kprobes/
+>> https://lore.kernel.org/all/20240622-md-arm-arch-arm-probes-kprobes-v1-1-0832bd6e45db@quicinc.com/
+>>
+>> arch/x86/mm/
+>> https://lore.kernel.org/all/20240515-testmmiotrace-md-v1-1-10919a8b2842@quicinc.com/
+>>
+>> drivers/spmi/
+>> https://lore.kernel.org/all/20240609-md-drivers-spmi-v1-1-f1d5b24e7a66@quicinc.com/
+>>
+>> (note that beyond these 3 patches I still have an additional 13 patches which
+>> need to land in order to fix these warnings tree-wide, but those 13 patches
+>> have had recent maintainer or reviewer action so I'm not seeking your help at
+>> this time).
+> 
+> Hi Jeff,
+> 
+> For completeness, this is a patch that I have in my local
+> test tree now after I addressed the build issues for all
+> randconfig builds on arm, arm64 and x86.
+> 
+> I assume you already a version of most of these,
+> but please have a look in case there are some still
+> missing.
 
-Hence, use of GEM object references where possible.
+You have found and fixed some that I didn't encounter with make allmodconfig
+builds. I do have a list of ones for further analysis that I created by
+looking for files with a MODULE_LICENSE but not a MODULE_DESCRIPTION, and the
+ones I haven't yet fixed are on that list, but I'm very happy for you to
+submit your fixes.
 
-Also get rid of nouveau_bo_ref() and replace it with nouveau_bo_fini(),
-which drops the initial reference we get from initializing a ttm_bo.
+Details follow:
 
-Signed-off-by: Danilo Krummrich <dakr@kernel.org>
----
- drivers/gpu/drm/nouveau/dispnv04/crtc.c | 43 ++++++++++++++++++-------
- drivers/gpu/drm/nouveau/dispnv50/disp.c |  4 +--
- drivers/gpu/drm/nouveau/nouveau_bo.h    | 21 ++----------
- drivers/gpu/drm/nouveau/nouveau_chan.c  |  2 +-
- drivers/gpu/drm/nouveau/nouveau_dmem.c  |  4 +--
- drivers/gpu/drm/nouveau/nv10_fence.c    |  2 +-
- drivers/gpu/drm/nouveau/nv17_fence.c    |  2 +-
- drivers/gpu/drm/nouveau/nv50_fence.c    |  2 +-
- drivers/gpu/drm/nouveau/nv84_fence.c    |  4 +--
- 9 files changed, 44 insertions(+), 40 deletions(-)
+>  arch/arm/lib/xor-neon.c                         | 1 +
+https://lore.kernel.org/all/20240711-md-arm-arch-arm-lib-v2-1-ab08653dc106@quicinc.com/
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
-index 4310ad71870b..438e3ec6e1ca 100644
---- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
-+++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
-@@ -617,9 +617,15 @@ nv_crtc_swap_fbs(struct drm_crtc *crtc, struct drm_framebuffer *old_fb)
- 
- 	ret = nouveau_bo_pin(nvbo, NOUVEAU_GEM_DOMAIN_VRAM, false);
- 	if (ret == 0) {
--		if (disp->image[nv_crtc->index])
--			nouveau_bo_unpin(disp->image[nv_crtc->index]);
--		nouveau_bo_ref(nvbo, &disp->image[nv_crtc->index]);
-+		if (disp->image[nv_crtc->index]) {
-+			struct nouveau_bo *bo = disp->image[nv_crtc->index];
-+
-+			nouveau_bo_unpin(bo);
-+			drm_gem_object_put(&bo->bo.base);
-+		}
-+
-+		drm_gem_object_get(&nvbo->bo.base);
-+		disp->image[nv_crtc->index] = nvbo;
- 	}
- 
- 	return ret;
-@@ -754,13 +760,17 @@ static void nv_crtc_destroy(struct drm_crtc *crtc)
- 
- 	drm_crtc_cleanup(crtc);
- 
--	if (disp->image[nv_crtc->index])
--		nouveau_bo_unpin(disp->image[nv_crtc->index]);
--	nouveau_bo_ref(NULL, &disp->image[nv_crtc->index]);
-+	if (disp->image[nv_crtc->index]) {
-+		struct nouveau_bo *bo = disp->image[nv_crtc->index];
-+
-+		nouveau_bo_unpin(bo);
-+		drm_gem_object_put(&bo->bo.base);
-+		disp->image[nv_crtc->index] = NULL;
-+	}
- 
- 	nouveau_bo_unmap(nv_crtc->cursor.nvbo);
- 	nouveau_bo_unpin(nv_crtc->cursor.nvbo);
--	nouveau_bo_ref(NULL, &nv_crtc->cursor.nvbo);
-+	nouveau_bo_fini(nv_crtc->cursor.nvbo);
- 	nvif_event_dtor(&nv_crtc->vblank);
- 	nvif_head_dtor(&nv_crtc->head);
- 	kfree(nv_crtc);
-@@ -794,9 +804,14 @@ nv_crtc_disable(struct drm_crtc *crtc)
- {
- 	struct nv04_display *disp = nv04_display(crtc->dev);
- 	struct nouveau_crtc *nv_crtc = nouveau_crtc(crtc);
--	if (disp->image[nv_crtc->index])
--		nouveau_bo_unpin(disp->image[nv_crtc->index]);
--	nouveau_bo_ref(NULL, &disp->image[nv_crtc->index]);
-+
-+	if (disp->image[nv_crtc->index]) {
-+		struct nouveau_bo *bo = disp->image[nv_crtc->index];
-+
-+		nouveau_bo_unpin(bo);
-+		drm_gem_object_put(&bo->bo.base);
-+		disp->image[nv_crtc->index] = NULL;
-+	}
- }
- 
- static int
-@@ -1210,7 +1225,11 @@ nv04_crtc_page_flip(struct drm_crtc *crtc, struct drm_framebuffer *fb,
- 		PUSH_NVSQ(push, NV05F, 0x0130, 0);
- 	}
- 
--	nouveau_bo_ref(new_bo, &dispnv04->image[head]);
-+	if (dispnv04->image[head])
-+		drm_gem_object_put(&dispnv04->image[head]->bo.base);
-+
-+	drm_gem_object_get(&new_bo->bo.base);
-+	dispnv04->image[head] = new_bo;
- 
- 	ret = nv04_page_flip_emit(chan, old_bo, new_bo, s, &fence);
- 	if (ret)
-@@ -1329,7 +1348,7 @@ nv04_crtc_create(struct drm_device *dev, int crtc_num)
- 				nouveau_bo_unpin(nv_crtc->cursor.nvbo);
- 		}
- 		if (ret)
--			nouveau_bo_ref(NULL, &nv_crtc->cursor.nvbo);
-+			nouveau_bo_fini(nv_crtc->cursor.nvbo);
- 	}
- 
- 	nv04_cursor_init(nv_crtc);
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index ac9657d7e92d..6d20d3c68fa7 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -2819,7 +2819,7 @@ nv50_display_destroy(struct drm_device *dev)
- 	nouveau_bo_unmap(disp->sync);
- 	if (disp->sync)
- 		nouveau_bo_unpin(disp->sync);
--	nouveau_bo_ref(NULL, &disp->sync);
-+	nouveau_bo_fini(disp->sync);
- 
- 	nouveau_display(dev)->priv = NULL;
- 	kfree(disp);
-@@ -2862,7 +2862,7 @@ nv50_display_create(struct drm_device *dev)
- 				nouveau_bo_unpin(disp->sync);
- 		}
- 		if (ret)
--			nouveau_bo_ref(NULL, &disp->sync);
-+			nouveau_bo_fini(disp->sync);
- 	}
- 
- 	if (ret)
-diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.h b/drivers/gpu/drm/nouveau/nouveau_bo.h
-index 3b8dfbb621da..596a63a50a20 100644
---- a/drivers/gpu/drm/nouveau/nouveau_bo.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_bo.h
-@@ -53,25 +53,10 @@ nouveau_bo(struct ttm_buffer_object *bo)
- 	return container_of(bo, struct nouveau_bo, bo);
- }
- 
--static inline int
--nouveau_bo_ref(struct nouveau_bo *ref, struct nouveau_bo **pnvbo)
-+static inline void
-+nouveau_bo_fini(struct nouveau_bo *bo)
- {
--	struct nouveau_bo *prev;
--
--	if (!pnvbo)
--		return -EINVAL;
--	prev = *pnvbo;
--
--	if (ref) {
--		ttm_bo_get(&ref->bo);
--		*pnvbo = nouveau_bo(&ref->bo);
--	} else {
--		*pnvbo = NULL;
--	}
--	if (prev)
--		ttm_bo_put(&prev->bo);
--
--	return 0;
-+	ttm_bo_put(&bo->bo);
- }
- 
- extern struct ttm_device_funcs nouveau_bo_driver;
-diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.c b/drivers/gpu/drm/nouveau/nouveau_chan.c
-index 66fca95c10c7..f568ea251e3b 100644
---- a/drivers/gpu/drm/nouveau/nouveau_chan.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_chan.c
-@@ -110,7 +110,7 @@ nouveau_channel_del(struct nouveau_channel **pchan)
- 		nouveau_bo_unmap(chan->push.buffer);
- 		if (chan->push.buffer && chan->push.buffer->bo.pin_count)
- 			nouveau_bo_unpin(chan->push.buffer);
--		nouveau_bo_ref(NULL, &chan->push.buffer);
-+		nouveau_bo_fini(chan->push.buffer);
- 		kfree(chan);
- 	}
- 	*pchan = NULL;
-diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-index 6719353e2e13..7b3b8f4630a2 100644
---- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-@@ -294,7 +294,7 @@ nouveau_dmem_chunk_alloc(struct nouveau_drm *drm, struct page **ppage)
- out_bo_unpin:
- 	nouveau_bo_unpin(chunk->bo);
- out_bo_free:
--	nouveau_bo_ref(NULL, &chunk->bo);
-+	nouveau_bo_fini(chunk->bo);
- out_release:
- 	release_mem_region(chunk->pagemap.range.start, range_len(&chunk->pagemap.range));
- out_free:
-@@ -426,7 +426,7 @@ nouveau_dmem_fini(struct nouveau_drm *drm)
- 	list_for_each_entry_safe(chunk, tmp, &drm->dmem->chunks, list) {
- 		nouveau_dmem_evict_chunk(chunk);
- 		nouveau_bo_unpin(chunk->bo);
--		nouveau_bo_ref(NULL, &chunk->bo);
-+		nouveau_bo_fini(chunk->bo);
- 		WARN_ON(chunk->callocated);
- 		list_del(&chunk->list);
- 		memunmap_pages(&chunk->pagemap);
-diff --git a/drivers/gpu/drm/nouveau/nv10_fence.c b/drivers/gpu/drm/nouveau/nv10_fence.c
-index c6a0db5b9e21..1a53b8b80467 100644
---- a/drivers/gpu/drm/nouveau/nv10_fence.c
-+++ b/drivers/gpu/drm/nouveau/nv10_fence.c
-@@ -88,7 +88,7 @@ nv10_fence_destroy(struct nouveau_drm *drm)
- 	nouveau_bo_unmap(priv->bo);
- 	if (priv->bo)
- 		nouveau_bo_unpin(priv->bo);
--	nouveau_bo_ref(NULL, &priv->bo);
-+	nouveau_bo_fini(priv->bo);
- 	drm->fence = NULL;
- 	kfree(priv);
- }
-diff --git a/drivers/gpu/drm/nouveau/nv17_fence.c b/drivers/gpu/drm/nouveau/nv17_fence.c
-index 07c2e0878c24..2c99f2c1ddcd 100644
---- a/drivers/gpu/drm/nouveau/nv17_fence.c
-+++ b/drivers/gpu/drm/nouveau/nv17_fence.c
-@@ -141,7 +141,7 @@ nv17_fence_create(struct nouveau_drm *drm)
- 				nouveau_bo_unpin(priv->bo);
- 		}
- 		if (ret)
--			nouveau_bo_ref(NULL, &priv->bo);
-+			nouveau_bo_fini(priv->bo);
- 	}
- 
- 	if (ret) {
-diff --git a/drivers/gpu/drm/nouveau/nv50_fence.c b/drivers/gpu/drm/nouveau/nv50_fence.c
-index ea1e1f480bfe..6fa18f9d26b6 100644
---- a/drivers/gpu/drm/nouveau/nv50_fence.c
-+++ b/drivers/gpu/drm/nouveau/nv50_fence.c
-@@ -92,7 +92,7 @@ nv50_fence_create(struct nouveau_drm *drm)
- 				nouveau_bo_unpin(priv->bo);
- 		}
- 		if (ret)
--			nouveau_bo_ref(NULL, &priv->bo);
-+			nouveau_bo_fini(priv->bo);
- 	}
- 
- 	if (ret) {
-diff --git a/drivers/gpu/drm/nouveau/nv84_fence.c b/drivers/gpu/drm/nouveau/nv84_fence.c
-index 812b8c62eeba..9ce4c2d60fe3 100644
---- a/drivers/gpu/drm/nouveau/nv84_fence.c
-+++ b/drivers/gpu/drm/nouveau/nv84_fence.c
-@@ -188,7 +188,7 @@ nv84_fence_destroy(struct nouveau_drm *drm)
- 	nouveau_bo_unmap(priv->bo);
- 	if (priv->bo)
- 		nouveau_bo_unpin(priv->bo);
--	nouveau_bo_ref(NULL, &priv->bo);
-+	nouveau_bo_fini(priv->bo);
- 	drm->fence = NULL;
- 	kfree(priv);
- }
-@@ -232,7 +232,7 @@ nv84_fence_create(struct nouveau_drm *drm)
- 				nouveau_bo_unpin(priv->bo);
- 		}
- 		if (ret)
--			nouveau_bo_ref(NULL, &priv->bo);
-+			nouveau_bo_fini(priv->bo);
- 	}
- 
- 	if (ret)
--- 
-2.45.2
+>  arch/x86/mm/testmmiotrace.c                     | 1 +
+https://lore.kernel.org/all/20240515-testmmiotrace-md-v1-1-10919a8b2842@quicinc.com/
+
+>  drivers/fpga/tests/fpga-bridge-test.c           | 1 +
+>  drivers/fpga/tests/fpga-mgr-test.c              | 1 +
+>  drivers/fpga/tests/fpga-region-test.c           | 1 +
+I do not have a patch for these three
+
+>  drivers/fsi/fsi-core.c                          | 1 +
+>  drivers/fsi/fsi-master-aspeed.c                 | 2 ++
+>  drivers/fsi/fsi-master-ast-cf.c                 | 1 +
+>  drivers/fsi/fsi-master-gpio.c                   | 1 +
+>  drivers/fsi/fsi-master-hub.c                    | 1 +
+>  drivers/fsi/fsi-scom.c                          | 1 +
+https://lore.kernel.org/all/20240605-md-drivers-fsi-v1-1-fefc82d81b12@quicinc.com/
+
+>  drivers/xen/xenbus/xenbus_probe_frontend.c      | 1 +
+I do not have a patch for this one
+
+>  fs/adfs/super.c                                 | 2 ++
+https://lore.kernel.org/all/20240523-md-adfs-v1-1-364268e38370@quicinc.com/
+
+>  fs/exportfs/expfs.c                             | 1 +
+I do not have a patch for this one
+
+>  kernel/locking/test-ww_mutex.c                  | 1 +
+https://lore.kernel.org/all/20240528-md-test-ww_mutex-v2-1-a2a19e920b12@quicinc.com/
+
+>  lib/asn1_decoder.c                              | 1 +
+>  lib/slub_kunit.c                                | 1 +
+>  lib/ucs2_string.c                               | 1 +
+>  lib/zlib_inflate/inflate_syms.c                 | 1 +
+I do not have a patch for these four
+
+>  mm/kasan/kasan_test.c                           | 1 +
+>  mm/kasan/kasan_test_module.c                    | 1 +
+I do not have a patch for these two
+
+>  samples/livepatch/livepatch-callbacks-busymod.c | 1 +
+>  samples/livepatch/livepatch-callbacks-demo.c    | 1 +
+>  samples/livepatch/livepatch-callbacks-mod.c     | 1 +
+>  samples/livepatch/livepatch-sample.c            | 1 +
+>  samples/livepatch/livepatch-shadow-fix1.c       | 1 +
+>  samples/livepatch/livepatch-shadow-fix2.c       | 1 +
+I do not have a patch for these six
+
+>  security/apparmor/policy_unpack_test.c          | 1 +
+https://lore.kernel.org/all/20240529-md-apparmor_policy_unpack_test-v1-1-9efc582078c4@quicinc.com/
+
 
