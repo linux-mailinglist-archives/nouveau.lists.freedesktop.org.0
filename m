@@ -2,77 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7B9493779F
-	for <lists+nouveau@lfdr.de>; Fri, 19 Jul 2024 14:12:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 062609377BF
+	for <lists+nouveau@lfdr.de>; Fri, 19 Jul 2024 14:28:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 20F8910EBFE;
-	Fri, 19 Jul 2024 12:12:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7D43110EBFF;
+	Fri, 19 Jul 2024 12:28:47 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="T1xMNSml";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="eNw2uIKg";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E1EE810EBFE
- for <nouveau@lists.freedesktop.org>; Fri, 19 Jul 2024 12:12:48 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5B1A310E040
+ for <nouveau@lists.freedesktop.org>; Fri, 19 Jul 2024 12:28:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1721391168;
+ s=mimecast20190719; t=1721392125;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ixAExVKRdmWVBov0vFHIgy1lZ3fzzTrw3UCsqNXVNxA=;
- b=T1xMNSmlCy1cTQapd0FZwCFrXfBz20vQRyhfGmpZGffSpDPRhskFGxNFP1Rr0wBwXuGM/W
- cbaCk/ZmGAnToHWZXLB1V/jnw4Ko9arsHIrpxGw2Bru1T0GclhTjR6rehKZw2OTHT1zoJ2
- axEuHhSwxNpow8zA+Zx4h9Dq6Ns5rw8=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=Y7n/Fb/Qyl3wpDBXugz/p+j5/bxJZvnFnud1J5+8n1g=;
+ b=eNw2uIKgljbPlc8/wdALnnUvMrezi6yGk76iAU0yCHqJk1WJ3/qPwbO9FC2r+OTnY2/4/v
+ TOlT4cTGcSTWerrzMw3zGckGjUREa7MPNn4XSj+/wWgbjJQljB25X8ieyotKrx0TXNLMoO
+ Ul0JtKmd/skDF5rm0a8Pjy8uCPppE0g=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-7-h7TxB-JpPXmZFah9D0GO0g-1; Fri, 19 Jul 2024 08:12:46 -0400
-X-MC-Unique: h7TxB-JpPXmZFah9D0GO0g-1
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-42726545762so10484065e9.3
- for <nouveau@lists.freedesktop.org>; Fri, 19 Jul 2024 05:12:46 -0700 (PDT)
+ us-mta-21-KRNApp5IN_2Ax8RCIpMxqQ-1; Fri, 19 Jul 2024 08:28:42 -0400
+X-MC-Unique: KRNApp5IN_2Ax8RCIpMxqQ-1
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-3687529b63fso624050f8f.2
+ for <nouveau@lists.freedesktop.org>; Fri, 19 Jul 2024 05:28:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721391165; x=1721995965;
+ d=1e100.net; s=20230601; t=1721392121; x=1721996921;
  h=in-reply-to:content-transfer-encoding:content-disposition
  :mime-version:references:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ixAExVKRdmWVBov0vFHIgy1lZ3fzzTrw3UCsqNXVNxA=;
- b=LfkDn9TZSBhshN+s62UaHUOqFypXllHeIjtNtvUxLqxGtu9JnKi8Jtt6/rZk8ua0fg
- jf1aS8Yyr+zqdOHXHmY2r16RSjJOIpGmlDa3P2dmnkoQKxSxBwAEwz05Ov9AnUA4y2b3
- XK3ApTRFGY+DSlMNwfwSn/FbipkfX1q0gsG5jibqgEOR/lhT3ZTNAmU0X/nUdLQffsu/
- 0ClqayquBTjkmchfPg+mUUCZ/W+32e4GrpWOvP83jRpkEj9za0rQEVd9AI+tCqY112tv
- RduZ9sqwuqI1sS5aIOfPkeiWS3CF+PEIkCSFj/bD5rcBcBiA1dBHLFqTiAFOX9rxhtPH
- m65Q==
-X-Gm-Message-State: AOJu0YxQ/akxU6MWpcQmFsQj91aKQ+nHvGv5mbKnDM69FV49ptng3JeM
- 57DUe6IO8a/bgcrpUTEfJM4ASj3yl9shYV+rBx+01pclwNiY9Psr+axwSn69ejOnr+TfO4Bz6Du
- 7YA4yJfML7PI6XiyEukJhTa5nA2e7uAUC3bebuZgr6nbZ3yj7ArOs2X1H66NeBUs=
-X-Received: by 2002:a5d:5441:0:b0:368:37d5:3f2e with SMTP id
- ffacd0b85a97d-36837d53fdcmr4509119f8f.32.1721391165341; 
- Fri, 19 Jul 2024 05:12:45 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFATcwyX9W83TLMvIavjX2eS7PzVI06cAhHQ/3M7KXcBAaSPgMPmwlkzowewQsg8hmvfYQTZg==
-X-Received: by 2002:a5d:5441:0:b0:368:37d5:3f2e with SMTP id
- ffacd0b85a97d-36837d53fdcmr4509100f8f.32.1721391164787; 
- Fri, 19 Jul 2024 05:12:44 -0700 (PDT)
+ bh=Y7n/Fb/Qyl3wpDBXugz/p+j5/bxJZvnFnud1J5+8n1g=;
+ b=CCW9vDV7TexiVvWs+6L1jilG6SDzLflf3fw5KCy0UeJ531zkYoLO0m/xqL+KUd764Q
+ MKUz2FcRun9V9dmwip/Ymy30aH76FfhFgqd996rXC7EADH5/GoL7/6JOfaC9WwrMvwee
+ ugXjfTiBpbZM5hKtRhfn1wfm2R0zxBLQjnIuCS8hPIp9F3Grgq7bR6ZJOQuAVjcftGLm
+ 2donRKWJo0gbKi0tiKttm+2kqZdDvQsJpV8QPaEW/vl4hE/KTOfw3uDvzlH9/FKGo6Kx
+ V++T6cmcm2rmdNI/mBEOs7Z7EBScOhsB8GTOUmUkX6VX9BLkOgrvlo1p0K5uPPtS+X3U
+ tRng==
+X-Gm-Message-State: AOJu0YzOKCtZYGyvclhDDX3HO5i9n8Sq7de9pAXmP2/pP1eiU49OG61n
+ b8rqEiqWYoa43+5caau3qn5UltS3IiZFx1dQ7FPGU4lvDh3AfoN7pNTH8mLXm7AnQsrOpyi256k
+ e4hrVDhIRZzVj5qwMyq34QMZm17Y4MIYsGGQliIsVtOGHvYoZOyJ12ikspC9np65+FkBixtc=
+X-Received: by 2002:a05:6000:e49:b0:368:4e38:790c with SMTP id
+ ffacd0b85a97d-3684e3879ccmr3136192f8f.14.1721392120553; 
+ Fri, 19 Jul 2024 05:28:40 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IErQggNrtob6OKjZMW9xMLivq54swYgkcABHqWPqef5rQQz0JweAoUam89OYfweSV2z1dDZuA==
+X-Received: by 2002:a05:6000:e49:b0:368:4e38:790c with SMTP id
+ ffacd0b85a97d-3684e3879ccmr3136178f8f.14.1721392119970; 
+ Fri, 19 Jul 2024 05:28:39 -0700 (PDT)
 Received: from pollux ([2a02:810d:4b3f:ee94:abf:b8ff:feee:998b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d2a8d8a8sm50753975e9.36.2024.07.19.05.12.43
+ ffacd0b85a97d-368785c58e7sm1518045f8f.0.2024.07.19.05.28.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jul 2024 05:12:44 -0700 (PDT)
-Date: Fri, 19 Jul 2024 14:12:42 +0200
+ Fri, 19 Jul 2024 05:28:39 -0700 (PDT)
+Date: Fri, 19 Jul 2024 14:28:37 +0200
 From: Danilo Krummrich <dakr@redhat.com>
 To: Ben Skeggs <bskeggs@nvidia.com>
 Cc: nouveau@lists.freedesktop.org
-Subject: Re: [PATCH v2 15/37] drm/nouveau/nvif: remove route/token
-Message-ID: <ZppYOmWfup8lwC3L@pollux>
+Subject: Re: [PATCH v2 27/37] drm/nouveau: move nvxx_* definitions to
+ nouveau_drv.h
+Message-ID: <Zppb9T40lRoYCS4v@pollux>
 References: <20240704183721.25778-1-bskeggs@nvidia.com>
- <20240704183721.25778-16-bskeggs@nvidia.com>
- <Zo1hKGEajZJLzeAy@pollux>
- <839e9000-aa4e-4879-aa0d-6c17fd19699c@nvidia.com>
+ <20240704183721.25778-28-bskeggs@nvidia.com>
+ <Zo1lzHnx54GT3M1D@pollux>
+ <58b5742f-36f5-4108-8a47-a52f3f0ba298@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <839e9000-aa4e-4879-aa0d-6c17fd19699c@nvidia.com>
+In-Reply-To: <58b5742f-36f5-4108-8a47-a52f3f0ba298@nvidia.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=iso-8859-1
@@ -92,249 +93,661 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jul 18, 2024 at 05:52:44PM +1000, Ben Skeggs wrote:
-> On 10/7/24 02:11, Danilo Krummrich wrote:
+On Thu, Jul 18, 2024 at 05:58:20PM +1000, Ben Skeggs wrote:
+> On 10/7/24 02:31, Danilo Krummrich wrote:
 > 
-> > On Fri, Jul 05, 2024 at 04:36:59AM +1000, Ben Skeggs wrote:
-> > > These were a cludge used to prevent userspace's nvif ioctl from
-> > > accessing objects created by the kernel for the same client.
+> > On Fri, Jul 05, 2024 at 04:37:11AM +1000, Ben Skeggs wrote:
+> > > These are some dodgy "convenience" macros for the DRM driver to peek
+> > > into NVKM state.  They're still used in a few places, but don't belong
+> > > in nvif/device.h in any case.
 > > > 
-> > > That interface was removed in a previous patch, so these are no
-> > > longer useful for anything.
-> > It would probably be good to move this patch directly after the one it depends
-> > on.
-> 
-> Is this really necessary?  The ordering of this series is already incredibly
-> fragile, with a bunch of chicken/egg situations that were tough to
-> untangle.  Moreover, I don't see what real value it adds at this point.
-
-Not for this series, but in general. If such large series are required, having
-directly related ones close to each other, makes it way easier to review.
-
-> 
-> > 
+> > > Move them to nouveau_drv.h, and modify callers to pass a nouveau_drm
+> > > instead of an nvif_device.
+> > > 
+> > > v2:
+> > > - use drm->nvkm pointer for nvxx_*() macros, removing some void*
+> > > 
 > > > Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
 > > > ---
-> > >   drivers/gpu/drm/nouveau/include/nvif/client.h |  1 -
-> > >   .../drm/nouveau/include/nvkm/core/object.h    |  2 --
-> > >   .../drm/nouveau/include/nvkm/core/oclass.h    |  2 --
-> > >   drivers/gpu/drm/nouveau/nouveau_abi16.c       |  8 --------
-> > >   drivers/gpu/drm/nouveau/nvif/client.c         |  1 -
-> > >   drivers/gpu/drm/nouveau/nvif/object.c         |  3 ---
-> > >   drivers/gpu/drm/nouveau/nvkm/core/client.c    |  2 --
-> > >   drivers/gpu/drm/nouveau/nvkm/core/ioctl.c     | 19 ++++---------------
-> > >   drivers/gpu/drm/nouveau/nvkm/core/object.c    |  2 --
-> > >   drivers/gpu/drm/nouveau/nvkm/core/uevent.c    |  4 ++--
-> > >   10 files changed, 6 insertions(+), 38 deletions(-)
+> > >   drivers/gpu/drm/nouveau/dispnv04/crtc.c       |  4 +-
+> > >   drivers/gpu/drm/nouveau/dispnv04/dac.c        |  2 +-
+> > >   drivers/gpu/drm/nouveau/dispnv04/dfp.c        |  2 +-
+> > >   drivers/gpu/drm/nouveau/dispnv04/disp.c       |  2 +-
+> > >   drivers/gpu/drm/nouveau/dispnv04/disp.h       |  2 +-
+> > >   drivers/gpu/drm/nouveau/dispnv04/hw.c         |  9 ++--
+> > >   drivers/gpu/drm/nouveau/dispnv04/tvnv04.c     |  4 +-
+> > >   drivers/gpu/drm/nouveau/dispnv04/tvnv17.c     |  6 +--
+> > >   drivers/gpu/drm/nouveau/dispnv50/disp.c       |  6 +--
+> > >   drivers/gpu/drm/nouveau/include/nvif/device.h | 33 -------------
+> > >   drivers/gpu/drm/nouveau/include/nvif/object.h |  2 +-
+> > >   drivers/gpu/drm/nouveau/nouveau_abi16.c       |  4 +-
+> > >   drivers/gpu/drm/nouveau/nouveau_bios.c        |  4 +-
+> > >   drivers/gpu/drm/nouveau/nouveau_bios.h        |  1 +
+> > >   drivers/gpu/drm/nouveau/nouveau_bo.c          |  8 ++--
+> > >   drivers/gpu/drm/nouveau/nouveau_chan.c        |  3 +-
+> > >   drivers/gpu/drm/nouveau/nouveau_drm.c         |  3 +-
+> > >   drivers/gpu/drm/nouveau/nouveau_drv.h         | 27 +++++++++++
+> > >   drivers/gpu/drm/nouveau/nouveau_hwmon.c       | 46 +++++++++----------
+> > >   drivers/gpu/drm/nouveau/nouveau_led.c         |  2 +-
+> > >   drivers/gpu/drm/nouveau/nouveau_ttm.c         |  4 +-
+> > >   21 files changed, 83 insertions(+), 91 deletions(-)
 > > > 
-> > > diff --git a/drivers/gpu/drm/nouveau/include/nvif/client.h b/drivers/gpu/drm/nouveau/include/nvif/client.h
-> > > index 5d9395e651b6..64b033222c56 100644
-> > > --- a/drivers/gpu/drm/nouveau/include/nvif/client.h
-> > > +++ b/drivers/gpu/drm/nouveau/include/nvif/client.h
-> > > @@ -8,7 +8,6 @@ struct nvif_client {
-> > >   	struct nvif_object object;
-> > >   	const struct nvif_driver *driver;
-> > >   	u64 version;
-> > > -	u8 route;
-> > >   };
-> > >   int  nvif_client_ctor(struct nvif_client *parent, const char *name, u64 device,
-> > > diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/object.h b/drivers/gpu/drm/nouveau/include/nvkm/core/object.h
-> > > index ed1f66360782..d4f1c964ba31 100644
-> > > --- a/drivers/gpu/drm/nouveau/include/nvkm/core/object.h
-> > > +++ b/drivers/gpu/drm/nouveau/include/nvkm/core/object.h
-> > > @@ -15,8 +15,6 @@ struct nvkm_object {
-> > >   	struct list_head head;
-> > >   	struct list_head tree;
-> > > -	u8  route;
-> > > -	u64 token;
-> > >   	u64 object;
-> > >   	struct rb_node node;
-> > >   };
-> > > diff --git a/drivers/gpu/drm/nouveau/include/nvkm/core/oclass.h b/drivers/gpu/drm/nouveau/include/nvkm/core/oclass.h
-> > > index 8e1b945d38f3..cad05f0e7948 100644
-> > > --- a/drivers/gpu/drm/nouveau/include/nvkm/core/oclass.h
-> > > +++ b/drivers/gpu/drm/nouveau/include/nvkm/core/oclass.h
-> > > @@ -21,8 +21,6 @@ struct nvkm_oclass {
-> > >   	const void *priv;
-> > >   	const void *engn;
+> > > diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+> > > index 4310ad71870b..e5067d5a4801 100644
+> > > --- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+> > > +++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+> > > @@ -118,8 +118,8 @@ static void nv_crtc_calc_state_ext(struct drm_crtc *crtc, struct drm_display_mod
+> > >   {
+> > >   	struct drm_device *dev = crtc->dev;
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_bios *bios = nvxx_bios(&drm->client.device);
+> > > -	struct nvkm_clk *clk = nvxx_clk(&drm->client.device);
+> > > +	struct nvkm_bios *bios = nvxx_bios(drm);
+> > > +	struct nvkm_clk *clk = nvxx_clk(drm);
+> > >   	struct nouveau_crtc *nv_crtc = nouveau_crtc(crtc);
+> > >   	struct nv04_mode_state *state = &nv04_display(dev)->mode_reg;
+> > >   	struct nv04_crtc_reg *regp = &state->crtc_reg[nv_crtc->index];
+> > > diff --git a/drivers/gpu/drm/nouveau/dispnv04/dac.c b/drivers/gpu/drm/nouveau/dispnv04/dac.c
+> > > index d6b8e0cce2ac..2e12bf136607 100644
+> > > --- a/drivers/gpu/drm/nouveau/dispnv04/dac.c
+> > > +++ b/drivers/gpu/drm/nouveau/dispnv04/dac.c
+> > > @@ -237,7 +237,7 @@ uint32_t nv17_dac_sample_load(struct drm_encoder *encoder)
+> > >   	struct drm_device *dev = encoder->dev;
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > >   	struct nvif_object *device = &nouveau_drm(dev)->client.device.object;
+> > > -	struct nvkm_gpio *gpio = nvxx_gpio(&drm->client.device);
+> > > +	struct nvkm_gpio *gpio = nvxx_gpio(drm);
+> > >   	struct dcb_output *dcb = nouveau_encoder(encoder)->dcb;
+> > >   	uint32_t sample, testval, regoffset = nv04_dac_output_offset(encoder);
+> > >   	uint32_t saved_powerctrl_2 = 0, saved_powerctrl_4 = 0, saved_routput,
+> > > diff --git a/drivers/gpu/drm/nouveau/dispnv04/dfp.c b/drivers/gpu/drm/nouveau/dispnv04/dfp.c
+> > > index d5b129dc623b..504c421aa176 100644
+> > > --- a/drivers/gpu/drm/nouveau/dispnv04/dfp.c
+> > > +++ b/drivers/gpu/drm/nouveau/dispnv04/dfp.c
+> > > @@ -626,7 +626,7 @@ static void nv04_tmds_slave_init(struct drm_encoder *encoder)
+> > >   	struct drm_device *dev = encoder->dev;
+> > >   	struct dcb_output *dcb = nouveau_encoder(encoder)->dcb;
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_i2c *i2c = nvxx_i2c(&drm->client.device);
+> > > +	struct nvkm_i2c *i2c = nvxx_i2c(drm);
+> > >   	struct nvkm_i2c_bus *bus = nvkm_i2c_bus_find(i2c, NVKM_I2C_BUS_PRI);
+> > >   	struct nvkm_i2c_bus_probe info[] = {
+> > >   		{
+> > > diff --git a/drivers/gpu/drm/nouveau/dispnv04/disp.c b/drivers/gpu/drm/nouveau/dispnv04/disp.c
+> > > index e8b27bb135e7..e563a160571a 100644
+> > > --- a/drivers/gpu/drm/nouveau/dispnv04/disp.c
+> > > +++ b/drivers/gpu/drm/nouveau/dispnv04/disp.c
+> > > @@ -211,7 +211,7 @@ int
+> > >   nv04_display_create(struct drm_device *dev)
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_i2c *i2c = nvxx_i2c(&drm->client.device);
+> > > +	struct nvkm_i2c *i2c = nvxx_i2c(drm);
+> > >   	struct dcb_table *dcb = &drm->vbios.dcb;
+> > >   	struct drm_connector *connector, *ct;
+> > >   	struct drm_encoder *encoder;
+> > > diff --git a/drivers/gpu/drm/nouveau/dispnv04/disp.h b/drivers/gpu/drm/nouveau/dispnv04/disp.h
+> > > index 11a6663758ec..85ec0f534392 100644
+> > > --- a/drivers/gpu/drm/nouveau/dispnv04/disp.h
+> > > +++ b/drivers/gpu/drm/nouveau/dispnv04/disp.h
+> > > @@ -176,7 +176,7 @@ static inline void
+> > >   nouveau_bios_run_init_table(struct drm_device *dev, u16 table,
+> > >   			    struct dcb_output *outp, int crtc)
+> > >   {
+> > > -	nvbios_init(&nvxx_bios(&nouveau_drm(dev)->client.device)->subdev, table,
+> > > +	nvbios_init(&nvxx_bios(nouveau_drm(dev))->subdev, table,
+> > >   		init.outp = outp;
+> > >   		init.head = crtc;
+> > >   	);
+> > > diff --git a/drivers/gpu/drm/nouveau/dispnv04/hw.c b/drivers/gpu/drm/nouveau/dispnv04/hw.c
+> > > index f7d35657aa64..8b376f9c8746 100644
+> > > --- a/drivers/gpu/drm/nouveau/dispnv04/hw.c
+> > > +++ b/drivers/gpu/drm/nouveau/dispnv04/hw.c
+> > > @@ -166,7 +166,7 @@ nouveau_hw_get_pllvals(struct drm_device *dev, enum nvbios_pll_type plltype,
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > >   	struct nvif_object *device = &drm->client.device.object;
+> > > -	struct nvkm_bios *bios = nvxx_bios(&drm->client.device);
+> > > +	struct nvkm_bios *bios = nvxx_bios(drm);
+> > >   	uint32_t reg1, pll1, pll2 = 0;
+> > >   	struct nvbios_pll pll_lim;
+> > >   	int ret;
+> > > @@ -258,9 +258,8 @@ nouveau_hw_fix_bad_vpll(struct drm_device *dev, int head)
+> > >   	 */
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvif_device *device = &drm->client.device;
+> > > -	struct nvkm_clk *clk = nvxx_clk(device);
+> > > -	struct nvkm_bios *bios = nvxx_bios(device);
+> > > +	struct nvkm_clk *clk = nvxx_clk(drm);
+> > > +	struct nvkm_bios *bios = nvxx_bios(drm);
+> > >   	struct nvbios_pll pll_lim;
+> > >   	struct nvkm_pll_vals pv;
+> > >   	enum nvbios_pll_type pll = head ? PLL_VPLL1 : PLL_VPLL0;
+> > > @@ -470,7 +469,7 @@ nv_load_state_ramdac(struct drm_device *dev, int head,
+> > >   		     struct nv04_mode_state *state)
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_clk *clk = nvxx_clk(&drm->client.device);
+> > > +	struct nvkm_clk *clk = nvxx_clk(drm);
+> > >   	struct nv04_crtc_reg *regp = &state->crtc_reg[head];
+> > >   	uint32_t pllreg = head ? NV_RAMDAC_VPLL2 : NV_PRAMDAC_VPLL_COEFF;
+> > >   	int i;
+> > > diff --git a/drivers/gpu/drm/nouveau/dispnv04/tvnv04.c b/drivers/gpu/drm/nouveau/dispnv04/tvnv04.c
+> > > index de3ea731d6e6..d3014027a812 100644
+> > > --- a/drivers/gpu/drm/nouveau/dispnv04/tvnv04.c
+> > > +++ b/drivers/gpu/drm/nouveau/dispnv04/tvnv04.c
+> > > @@ -53,7 +53,7 @@ static struct nvkm_i2c_bus_probe nv04_tv_encoder_info[] = {
+> > >   int nv04_tv_identify(struct drm_device *dev, int i2c_index)
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_i2c *i2c = nvxx_i2c(&drm->client.device);
+> > > +	struct nvkm_i2c *i2c = nvxx_i2c(drm);
+> > >   	struct nvkm_i2c_bus *bus = nvkm_i2c_bus_find(i2c, i2c_index);
+> > >   	if (bus) {
+> > >   		return nvkm_i2c_bus_probe(bus, "TV encoder",
+> > > @@ -205,7 +205,7 @@ nv04_tv_create(struct drm_connector *connector, struct dcb_output *entry)
+> > >   	struct drm_encoder *encoder;
+> > >   	struct drm_device *dev = connector->dev;
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_i2c *i2c = nvxx_i2c(&drm->client.device);
+> > > +	struct nvkm_i2c *i2c = nvxx_i2c(drm);
+> > >   	struct nvkm_i2c_bus *bus = nvkm_i2c_bus_find(i2c, entry->i2c_index);
+> > >   	int type, ret;
+> > > diff --git a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+> > > index 670c9739e5e1..c11f58033018 100644
+> > > --- a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+> > > +++ b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+> > > @@ -47,7 +47,7 @@ static uint32_t nv42_tv_sample_load(struct drm_encoder *encoder)
+> > >   {
+> > >   	struct drm_device *dev = encoder->dev;
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_gpio *gpio = nvxx_gpio(&drm->client.device);
+> > > +	struct nvkm_gpio *gpio = nvxx_gpio(drm);
+> > >   	uint32_t testval, regoffset = nv04_dac_output_offset(encoder);
+> > >   	uint32_t gpio0, gpio1, fp_htotal, fp_hsync_start, fp_hsync_end,
+> > >   		fp_control, test_ctrl, dacclk, ctv_14, ctv_1c, ctv_6c;
+> > > @@ -131,7 +131,7 @@ static bool
+> > >   get_tv_detect_quirks(struct drm_device *dev, uint32_t *pin_mask)
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_device *device = nvxx_device(&drm->client.device);
+> > > +	struct nvkm_device *device = nvxx_device(drm);
+> > >   	if (device->quirk && device->quirk->tv_pin_mask) {
+> > >   		*pin_mask = device->quirk->tv_pin_mask;
+> > > @@ -363,7 +363,7 @@ static void  nv17_tv_dpms(struct drm_encoder *encoder, int mode)
+> > >   {
+> > >   	struct drm_device *dev = encoder->dev;
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_gpio *gpio = nvxx_gpio(&drm->client.device);
+> > > +	struct nvkm_gpio *gpio = nvxx_gpio(drm);
+> > >   	struct nv17_tv_state *regs = &to_tv_enc(encoder)->state;
+> > >   	struct nv17_tv_norm_params *tv_norm = get_tv_norm(encoder);
+> > > diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> > > index 42375f757d7c..80803346b620 100644
+> > > --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> > > +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> > > @@ -561,7 +561,7 @@ nv50_dac_create(struct nouveau_encoder *nv_encoder)
+> > >   {
+> > >   	struct drm_connector *connector = &nv_encoder->conn->base;
+> > >   	struct nouveau_drm *drm = nouveau_drm(connector->dev);
+> > > -	struct nvkm_i2c *i2c = nvxx_i2c(&drm->client.device);
+> > > +	struct nvkm_i2c *i2c = nvxx_i2c(drm);
+> > >   	struct nvkm_i2c_bus *bus;
+> > >   	struct drm_encoder *encoder;
+> > >   	struct dcb_output *dcbe = nv_encoder->dcb;
+> > > @@ -1884,7 +1884,7 @@ nv50_sor_create(struct nouveau_encoder *nv_encoder)
+> > >   	struct drm_connector *connector = &nv_encoder->conn->base;
+> > >   	struct nouveau_connector *nv_connector = nouveau_connector(connector);
+> > >   	struct nouveau_drm *drm = nouveau_drm(connector->dev);
+> > > -	struct nvkm_i2c *i2c = nvxx_i2c(&drm->client.device);
+> > > +	struct nvkm_i2c *i2c = nvxx_i2c(drm);
+> > >   	struct drm_encoder *encoder;
+> > >   	struct dcb_output *dcbe = nv_encoder->dcb;
+> > >   	struct nv50_disp *disp = nv50_disp(connector->dev);
+> > > @@ -2051,7 +2051,7 @@ nv50_pior_create(struct nouveau_encoder *nv_encoder)
+> > >   	struct drm_device *dev = connector->dev;
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > >   	struct nv50_disp *disp = nv50_disp(dev);
+> > > -	struct nvkm_i2c *i2c = nvxx_i2c(&drm->client.device);
+> > > +	struct nvkm_i2c *i2c = nvxx_i2c(drm);
+> > >   	struct nvkm_i2c_bus *bus = NULL;
+> > >   	struct nvkm_i2c_aux *aux = NULL;
+> > >   	struct i2c_adapter *ddc;
+> > > diff --git a/drivers/gpu/drm/nouveau/include/nvif/device.h b/drivers/gpu/drm/nouveau/include/nvif/device.h
+> > > index fec76f4733a4..7877a2a79da9 100644
+> > > --- a/drivers/gpu/drm/nouveau/include/nvif/device.h
+> > > +++ b/drivers/gpu/drm/nouveau/include/nvif/device.h
+> > > @@ -22,37 +22,4 @@ int  nvif_device_ctor(struct nvif_client *, const char *name, struct nvif_device
+> > >   void nvif_device_dtor(struct nvif_device *);
+> > >   int  nvif_device_map(struct nvif_device *);
+> > >   u64  nvif_device_time(struct nvif_device *);
+> > > -
+> > > -/*XXX*/
+> > > -#include <subdev/bios.h>
+> > > -#include <subdev/fb.h>
+> > > -#include <subdev/bar.h>
+> > > -#include <subdev/gpio.h>
+> > > -#include <subdev/clk.h>
+> > > -#include <subdev/i2c.h>
+> > > -#include <subdev/timer.h>
+> > > -#include <subdev/therm.h>
+> > > -#include <subdev/pci.h>
+> > > -
+> > > -#define nvxx_device(a) ({                                                      \
+> > > -	struct nvif_device *_device = (a);                                     \
+> > > -	struct {                                                               \
+> > > -		struct nvkm_object object;                                     \
+> > > -		struct nvkm_device *device;                                    \
+> > > -	} *_udevice = _device->object.priv;                                    \
+> > > -	_udevice->device;                                                      \
+> > > -})
+> > > -#define nvxx_bios(a) nvxx_device(a)->bios
+> > > -#define nvxx_fb(a) nvxx_device(a)->fb
+> > > -#define nvxx_gpio(a) nvxx_device(a)->gpio
+> > > -#define nvxx_clk(a) nvxx_device(a)->clk
+> > > -#define nvxx_i2c(a) nvxx_device(a)->i2c
+> > > -#define nvxx_iccsense(a) nvxx_device(a)->iccsense
+> > > -#define nvxx_therm(a) nvxx_device(a)->therm
+> > > -#define nvxx_volt(a) nvxx_device(a)->volt
+> > > -
+> > > -#include <engine/fifo.h>
+> > > -#include <engine/gr.h>
+> > > -
+> > > -#define nvxx_gr(a) nvxx_device(a)->gr
+> > >   #endif
+> > > diff --git a/drivers/gpu/drm/nouveau/include/nvif/object.h b/drivers/gpu/drm/nouveau/include/nvif/object.h
+> > > index 8d205b6af46a..3534b241cad9 100644
+> > > --- a/drivers/gpu/drm/nouveau/include/nvif/object.h
+> > > +++ b/drivers/gpu/drm/nouveau/include/nvif/object.h
+> > > @@ -15,7 +15,7 @@ struct nvif_object {
+> > >   	const char *name;
 > > >   	u32 handle;
-> > > -	u8  route;
-> > > -	u64 token;
-> > >   	u64 object;
-> > >   	struct nvkm_client *client;
-> > >   	struct nvkm_object *parent;
+> > >   	s32 oclass;
+> > > -	void *priv; /*XXX: hack */
+> > > +	void *priv;
+> > >   	struct {
+> > >   		void __iomem *ptr;
+> > >   		u64 size;
 > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-> > > index 6f0548e57f9e..704977530b6b 100644
+> > > index 704977530b6b..5d74c36a4ca5 100644
 > > > --- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
 > > > +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-> > > @@ -521,7 +521,6 @@ nouveau_abi16_ioctl_grobj_alloc(ABI16_IOCTL_ARGS)
-> > >   	struct nouveau_abi16 *abi16 = nouveau_abi16_get(file_priv);
-> > >   	struct nouveau_abi16_chan *chan;
-> > >   	struct nouveau_abi16_ntfy *ntfy;
-> > > -	struct nvif_client *client;
-> > >   	struct nvif_sclass *sclass;
-> > >   	s32 oclass = 0;
-> > >   	int ret, i;
-> > > @@ -531,7 +530,6 @@ nouveau_abi16_ioctl_grobj_alloc(ABI16_IOCTL_ARGS)
-> > >   	if (init->handle == ~0)
-> > >   		return nouveau_abi16_put(abi16, -EINVAL);
-> > > -	client = &abi16->cli->base;
-> > >   	chan = nouveau_abi16_chan(abi16, init->channel);
-> > >   	if (!chan)
-> > > @@ -596,10 +594,8 @@ nouveau_abi16_ioctl_grobj_alloc(ABI16_IOCTL_ARGS)
-> > >   	list_add(&ntfy->head, &chan->notifiers);
-> > > -	client->route = NVDRM_OBJECT_ABI16;
-> > >   	ret = nvif_object_ctor(&chan->chan->user, "abi16EngObj", init->handle,
-> > >   			       oclass, NULL, 0, &ntfy->object);
-> > > -	client->route = NVDRM_OBJECT_NVIF;
-> > >   	if (ret)
-> > >   		nouveau_abi16_ntfy_fini(chan, ntfy);
-> > > @@ -615,7 +611,6 @@ nouveau_abi16_ioctl_notifierobj_alloc(ABI16_IOCTL_ARGS)
-> > >   	struct nouveau_abi16_chan *chan;
-> > >   	struct nouveau_abi16_ntfy *ntfy;
-> > >   	struct nvif_device *device;
-> > > -	struct nvif_client *client;
-> > >   	struct nv_dma_v0 args = {};
-> > >   	int ret;
-> > > @@ -626,7 +621,6 @@ nouveau_abi16_ioctl_notifierobj_alloc(ABI16_IOCTL_ARGS)
-> > >   	/* completely unnecessary for these chipsets... */
-> > >   	if (unlikely(device->info.family >= NV_DEVICE_INFO_V0_FERMI))
-> > >   		return nouveau_abi16_put(abi16, -EINVAL);
-> > > -	client = &abi16->cli->base;
-> > >   	chan = nouveau_abi16_chan(abi16, info->channel);
-> > >   	if (!chan)
-> > > @@ -663,11 +657,9 @@ nouveau_abi16_ioctl_notifierobj_alloc(ABI16_IOCTL_ARGS)
-> > >   		args.limit += chan->ntfy->offset;
-> > >   	}
-> > > -	client->route = NVDRM_OBJECT_ABI16;
-> > >   	ret = nvif_object_ctor(&chan->chan->user, "abi16Ntfy", info->handle,
-> > >   			       NV_DMA_IN_MEMORY, &args, sizeof(args),
-> > >   			       &ntfy->object);
-> > > -	client->route = NVDRM_OBJECT_NVIF;
-> > >   	if (ret)
-> > >   		goto done;
-> > > diff --git a/drivers/gpu/drm/nouveau/nvif/client.c b/drivers/gpu/drm/nouveau/nvif/client.c
-> > > index 3a27245f467f..cd5439b73ac7 100644
-> > > --- a/drivers/gpu/drm/nouveau/nvif/client.c
-> > > +++ b/drivers/gpu/drm/nouveau/nvif/client.c
-> > > @@ -79,7 +79,6 @@ nvif_client_ctor(struct nvif_client *parent, const char *name, u64 device,
-> > >   	client->object.client = client;
-> > >   	client->object.handle = ~0;
-> > > -	client->route = NVIF_IOCTL_V0_ROUTE_NVIF;
-> > >   	client->driver = parent->driver;
-> > >   	if (ret == 0) {
-> > > diff --git a/drivers/gpu/drm/nouveau/nvif/object.c b/drivers/gpu/drm/nouveau/nvif/object.c
-> > > index 4d1aaee8fe15..2b3e05197846 100644
-> > > --- a/drivers/gpu/drm/nouveau/nvif/object.c
-> > > +++ b/drivers/gpu/drm/nouveau/nvif/object.c
-> > > @@ -40,7 +40,6 @@ nvif_object_ioctl(struct nvif_object *object, void *data, u32 size, void **hack)
-> > >   			args->v0.object = nvif_handle(object);
-> > >   		else
-> > >   			args->v0.object = 0;
-> > > -		args->v0.owner = NVIF_IOCTL_V0_OWNER_ANY;
-> > >   	} else
-> > >   		return -ENOSYS;
-> > > @@ -286,8 +285,6 @@ nvif_object_ctor(struct nvif_object *parent, const char *name, u32 handle,
-> > >   		args->ioctl.version = 0;
-> > >   		args->ioctl.type = NVIF_IOCTL_V0_NEW;
-> > >   		args->new.version = 0;
-> > > -		args->new.route = parent->client->route;
-> > > -		args->new.token = nvif_handle(object);
-> > >   		args->new.object = nvif_handle(object);
-> > >   		args->new.handle = handle;
-> > >   		args->new.oclass = oclass;
-> > > diff --git a/drivers/gpu/drm/nouveau/nvkm/core/client.c b/drivers/gpu/drm/nouveau/nvkm/core/client.c
-> > > index 48416c5039a1..95cbb5b682f2 100644
-> > > --- a/drivers/gpu/drm/nouveau/nvkm/core/client.c
-> > > +++ b/drivers/gpu/drm/nouveau/nvkm/core/client.c
-> > > @@ -51,8 +51,6 @@ nvkm_uclient_new(const struct nvkm_oclass *oclass, void *argv, u32 argc,
-> > >   	client->object.client = oclass->client;
-> > >   	client->object.handle = oclass->handle;
-> > > -	client->object.route  = oclass->route;
-> > > -	client->object.token  = oclass->token;
-> > >   	client->object.object = oclass->object;
-> > >   	client->debug = oclass->client->debug;
-> > >   	*pobject = &client->object;
-> > > diff --git a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-> > > index 0b33287e43a7..39d5c9700867 100644
-> > > --- a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-> > > +++ b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-> > > @@ -112,10 +112,9 @@ nvkm_ioctl_new(struct nvkm_client *client,
-> > >   	nvif_ioctl(parent, "new size %d\n", size);
-> > >   	if (!(ret = nvif_unpack(ret, &data, &size, args->v0, 0, 0, true))) {
-> > > -		nvif_ioctl(parent, "new vers %d handle %08x class %08x "
-> > > -				   "route %02x token %llx object %016llx\n",
-> > > +		nvif_ioctl(parent, "new vers %d handle %08x class %08x object %016llx\n",
-> > >   			   args->v0.version, args->v0.handle, args->v0.oclass,
-> > > -			   args->v0.route, args->v0.token, args->v0.object);
-> > > +			   args->v0.object);
-> > >   	} else
-> > >   		return ret;
-> > > @@ -127,8 +126,6 @@ nvkm_ioctl_new(struct nvkm_client *client,
-> > >   	do {
-> > >   		memset(&oclass, 0x00, sizeof(oclass));
-> > >   		oclass.handle = args->v0.handle;
-> > > -		oclass.route  = args->v0.route;
-> > > -		oclass.token  = args->v0.token;
-> > >   		oclass.object = args->v0.object;
-> > >   		oclass.client = client;
-> > >   		oclass.parent = parent;
-> > > @@ -331,7 +328,7 @@ nvkm_ioctl_v0[] = {
-> > >   static int
-> > >   nvkm_ioctl_path(struct nvkm_client *client, u64 handle, u32 type,
-> > > -		void *data, u32 size, u8 owner, u8 *route, u64 *token)
-> > > +		void *data, u32 size)
+> > > @@ -240,8 +240,8 @@ nouveau_abi16_ioctl_getparam(ABI16_IOCTL_ARGS)
+> > >   	struct nouveau_cli *cli = nouveau_cli(file_priv);
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > >   	struct nvif_device *device = &drm->client.device;
+> > > -	struct nvkm_device *nvkm_device = nvxx_device(&drm->client.device);
+> > > -	struct nvkm_gr *gr = nvxx_gr(device);
+> > > +	struct nvkm_device *nvkm_device = nvxx_device(drm);
+> > > +	struct nvkm_gr *gr = nvxx_gr(drm);
+> > >   	struct drm_nouveau_getparam *getparam = data;
+> > >   	struct pci_dev *pdev = to_pci_dev(dev->dev);
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_bios.c b/drivers/gpu/drm/nouveau/nouveau_bios.c
+> > > index 79cfab53f80e..a8da6492efd3 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_bios.c
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_bios.c
+> > > @@ -2020,7 +2020,7 @@ uint8_t *nouveau_bios_embedded_edid(struct drm_device *dev)
+> > >   static bool NVInitVBIOS(struct drm_device *dev)
 > > >   {
-> > >   	struct nvkm_object *object;
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_bios *bios = nvxx_bios(&drm->client.device);
+> > > +	struct nvkm_bios *bios = nvxx_bios(drm);
+> > >   	struct nvbios *legacy = &drm->vbios;
+> > >   	memset(legacy, 0, sizeof(struct nvbios));
+> > > @@ -2091,7 +2091,7 @@ nouveau_bios_init(struct drm_device *dev)
+> > >   	/* only relevant for PCI devices */
+> > >   	if (!dev_is_pci(dev->dev) ||
+> > > -	    nvkm_gsp_rm(nvxx_device(&drm->client.device)->gsp))
+> > > +	    nvkm_gsp_rm(nvxx_device(drm)->gsp))
+> > >   		return 0;
+> > >   	if (!NVInitVBIOS(dev))
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_bios.h b/drivers/gpu/drm/nouveau/nouveau_bios.h
+> > > index 18eb061ccafb..62b5f5889041 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_bios.h
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_bios.h
+> > > @@ -48,6 +48,7 @@ struct bit_entry {
+> > >   int bit_table(struct drm_device *, u8 id, struct bit_entry *);
+> > > +#include <subdev/bios.h>
+> > >   #include <subdev/bios/dcb.h>
+> > >   #include <subdev/bios/conn.h>
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > > index 0712d0b15170..6631d85ea749 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > > @@ -58,7 +58,7 @@ nv10_bo_update_tile_region(struct drm_device *dev, struct nouveau_drm_tile *reg,
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > >   	int i = reg - drm->tile.reg;
+> > > -	struct nvkm_fb *fb = nvxx_fb(&drm->client.device);
+> > > +	struct nvkm_fb *fb = nvxx_fb(drm);
+> > >   	struct nvkm_fb_tile *tile = &fb->tile.region[i];
+> > >   	nouveau_fence_unref(&reg->fence);
+> > > @@ -109,7 +109,7 @@ nv10_bo_set_tiling(struct drm_device *dev, u32 addr,
+> > >   		   u32 size, u32 pitch, u32 zeta)
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_fb *fb = nvxx_fb(&drm->client.device);
+> > > +	struct nvkm_fb *fb = nvxx_fb(drm);
+> > >   	struct nouveau_drm_tile *tile, *found = NULL;
+> > >   	int i;
+> > > @@ -1171,7 +1171,7 @@ static int
+> > >   nouveau_ttm_io_mem_reserve(struct ttm_device *bdev, struct ttm_resource *reg)
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_bdev(bdev);
+> > > -	struct nvkm_device *device = nvxx_device(&drm->client.device);
+> > > +	struct nvkm_device *device = nvxx_device(drm);
+> > >   	struct nouveau_mem *mem = nouveau_mem(reg);
+> > >   	struct nvif_mmu *mmu = &drm->client.mmu;
 > > >   	int ret;
-> > > @@ -342,13 +339,6 @@ nvkm_ioctl_path(struct nvkm_client *client, u64 handle, u32 type,
-> > >   		return PTR_ERR(object);
-> > >   	}
-> > > -	if (owner != NVIF_IOCTL_V0_OWNER_ANY && owner != object->route) {
-> > > -		nvif_ioctl(&client->object, "route != owner\n");
-> > > -		return -EACCES;
-> > > -	}
-> > > -	*route = object->route;
-> > > -	*token = object->token;
-> > > -
-> > >   	if (ret = -EINVAL, type < ARRAY_SIZE(nvkm_ioctl_v0)) {
-> > >   		if (nvkm_ioctl_v0[type].version == 0)
-> > >   			ret = nvkm_ioctl_v0[type].func(client, object, data, size);
-> > > @@ -374,8 +364,7 @@ nvkm_ioctl(struct nvkm_client *client, void *data, u32 size, void **hack)
-> > >   			   args->v0.version, args->v0.type, args->v0.object,
-> > >   			   args->v0.owner);
-> > >   		ret = nvkm_ioctl_path(client, args->v0.object, args->v0.type,
-> > > -				      data, size, args->v0.owner,
-> > > -				      &args->v0.route, &args->v0.token);
-> > > +				      data, size);
-> > >   	}
-> > >   	if (ret != 1) {
-> > > diff --git a/drivers/gpu/drm/nouveau/nvkm/core/object.c b/drivers/gpu/drm/nouveau/nvkm/core/object.c
-> > > index aea3ba72027a..580b8c7f25af 100644
-> > > --- a/drivers/gpu/drm/nouveau/nvkm/core/object.c
-> > > +++ b/drivers/gpu/drm/nouveau/nvkm/core/object.c
-> > > @@ -313,8 +313,6 @@ nvkm_object_ctor(const struct nvkm_object_func *func,
-> > >   	object->engine = nvkm_engine_ref(oclass->engine);
-> > >   	object->oclass = oclass->base.oclass;
-> > >   	object->handle = oclass->handle;
-> > > -	object->route  = oclass->route;
-> > > -	object->token  = oclass->token;
-> > >   	object->object = oclass->object;
-> > >   	INIT_LIST_HEAD(&object->head);
-> > >   	INIT_LIST_HEAD(&object->tree);
-> > > diff --git a/drivers/gpu/drm/nouveau/nvkm/core/uevent.c b/drivers/gpu/drm/nouveau/nvkm/core/uevent.c
-> > > index ba9d9edaec75..cc254c390a57 100644
-> > > --- a/drivers/gpu/drm/nouveau/nvkm/core/uevent.c
-> > > +++ b/drivers/gpu/drm/nouveau/nvkm/core/uevent.c
-> > > @@ -116,9 +116,9 @@ nvkm_uevent_ntfy(struct nvkm_event_ntfy *ntfy, u32 bits)
-> > >   	struct nvkm_client *client = uevent->object.client;
-> > >   	if (uevent->func)
-> > > -		return uevent->func(uevent->parent, uevent->object.token, bits);
-> > > +		return uevent->func(uevent->parent, uevent->object.object, bits);
-> > > -	return client->event(uevent->object.token, NULL, 0);
-> > > +	return client->event(uevent->object.object, NULL, 0);
-> > >   }
+> > > @@ -1291,7 +1291,7 @@ vm_fault_t nouveau_ttm_fault_reserve_notify(struct ttm_buffer_object *bo)
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_bdev(bo->bdev);
+> > >   	struct nouveau_bo *nvbo = nouveau_bo(bo);
+> > > -	struct nvkm_device *device = nvxx_device(&drm->client.device);
+> > > +	struct nvkm_device *device = nvxx_device(drm);
+> > >   	u32 mappable = device->func->resource_size(device, 1) >> PAGE_SHIFT;
+> > >   	int i, ret;
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.c b/drivers/gpu/drm/nouveau/nouveau_chan.c
+> > > index ce04c40e6f8f..0105d4704c3a 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_chan.c
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_chan.c
+> > > @@ -218,8 +218,7 @@ nouveau_channel_prep(struct nouveau_drm *drm, struct nvif_device *device,
+> > >   			 */
+> > >   			args.target = NV_DMA_V0_TARGET_PCI;
+> > >   			args.access = NV_DMA_V0_ACCESS_RDWR;
+> > > -			args.start = nvxx_device(device)->func->
+> > > -				resource_addr(nvxx_device(device), 1);
+> > > +			args.start = nvxx_device(drm)->func->resource_addr(nvxx_device(drm), 1);
+> > >   			args.limit = args.start + device->info.ram_user - 1;
+> > >   		} else {
+> > >   			args.target = NV_DMA_V0_TARGET_VRAM;
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> > > index 936eb32fc8c4..5ff116bcbabf 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> > > @@ -424,8 +424,7 @@ nouveau_accel_gr_init(struct nouveau_drm *drm)
+> > >   	 * any GPU where it's possible we'll end up using M2MF for BO moves.
+> > >   	 */
+> > >   	if (device->info.family < NV_DEVICE_INFO_V0_FERMI) {
+> > > -		ret = nvkm_gpuobj_new(nvxx_device(device), 32, 0, false, NULL,
+> > > -				      &drm->notify);
+> > > +		ret = nvkm_gpuobj_new(nvxx_device(drm), 32, 0, false, NULL, &drm->notify);
+> > >   		if (ret) {
+> > >   			NV_ERROR(drm, "failed to allocate notifier, %d\n", ret);
+> > >   			nouveau_accel_gr_fini(drm);
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> > > index 80ffe15ba76b..a9e0a63c772e 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> > > @@ -360,4 +360,31 @@ void nouveau_drm_device_remove(struct nouveau_drm *);
+> > >   extern int nouveau_modeset;
+> > > +/*XXX*/
+> > What is the message of this here?
+> This is moved over from its old location.
+
+Just to clarify, because I think it came across this way in a few other patches.
+I try to avoid putting a question, when I actually look for an action. So, when
+I ask a question, no need to assume that I want something changed. :)
+
+> > 
+> > > +#include <subdev/bios.h>
+> > > +#include <subdev/fb.h>
+> > > +#include <subdev/gpio.h>
+> > > +#include <subdev/clk.h>
+> > > +#include <subdev/i2c.h>
+> > > +#include <subdev/timer.h>
+> > > +#include <subdev/therm.h>
+> > > +
+> > > +static inline struct nvkm_device *
+> > > +nvxx_device(struct nouveau_drm *drm)
+> > > +{
+> > > +	return drm->nvkm;
+> > > +}
+> > > +
+> > > +#define nvxx_bios(a) nvxx_device(a)->bios
+> > > +#define nvxx_fb(a) nvxx_device(a)->fb
+> > > +#define nvxx_gpio(a) nvxx_device(a)->gpio
+> > > +#define nvxx_clk(a) nvxx_device(a)->clk
+> > > +#define nvxx_i2c(a) nvxx_device(a)->i2c
+> > > +#define nvxx_iccsense(a) nvxx_device(a)->iccsense
+> > > +#define nvxx_therm(a) nvxx_device(a)->therm
+> > > +#define nvxx_volt(a) nvxx_device(a)->volt
+> > Why the "nvxx" prefix? Why not just "nvkm"?
+> 
+> Because these aren't supposed to be used, and exist for the few locations
+> that never got proper NVIF.  I've added info to the commit with some further
+> explanation.
+
+Thanks for adding it, looks good!
+
+One question regarding that, you write:
+
+"Outside of the current use, these should not be relied on, and proper
+interfaces implemented instead."
+
+What would a "proper" interface for those offer us / improve? And if the answer
+is nothing, why do we consider using nvkm_ structures directly a hack?
+
+> 
+> I've updated the branch on gitlab for this, and your commit message
+> nitpicks.
+> 
+> > 
+> > > +
+> > > +#include <engine/gr.h>
+> > > +
+> > > +#define nvxx_gr(a) nvxx_device(a)->gr
+> > >   #endif
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_hwmon.c b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+> > > index db30a4c2cd4d..5c07a9ee8b77 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+> > > @@ -52,7 +52,7 @@ nouveau_hwmon_temp1_auto_point1_temp(struct device *d,
+> > >   {
+> > >   	struct drm_device *dev = dev_get_drvdata(d);
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	return sysfs_emit(buf, "%d\n",
+> > >   			  therm->attr_get(therm, NVKM_THERM_ATTR_THRS_FAN_BOOST) * 1000);
+> > > @@ -64,7 +64,7 @@ nouveau_hwmon_set_temp1_auto_point1_temp(struct device *d,
+> > >   {
+> > >   	struct drm_device *dev = dev_get_drvdata(d);
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	long value;
+> > >   	if (kstrtol(buf, 10, &value))
+> > > @@ -85,7 +85,7 @@ nouveau_hwmon_temp1_auto_point1_temp_hyst(struct device *d,
+> > >   {
+> > >   	struct drm_device *dev = dev_get_drvdata(d);
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	return sysfs_emit(buf, "%d\n",
+> > >   			  therm->attr_get(therm, NVKM_THERM_ATTR_THRS_FAN_BOOST_HYST) * 1000);
+> > > @@ -97,7 +97,7 @@ nouveau_hwmon_set_temp1_auto_point1_temp_hyst(struct device *d,
+> > >   {
+> > >   	struct drm_device *dev = dev_get_drvdata(d);
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	long value;
+> > >   	if (kstrtol(buf, 10, &value))
+> > > @@ -118,7 +118,7 @@ nouveau_hwmon_get_pwm1_max(struct device *d,
+> > >   {
+> > >   	struct drm_device *dev = dev_get_drvdata(d);
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	int ret;
+> > >   	ret = therm->attr_get(therm, NVKM_THERM_ATTR_FAN_MAX_DUTY);
+> > > @@ -134,7 +134,7 @@ nouveau_hwmon_get_pwm1_min(struct device *d,
+> > >   {
+> > >   	struct drm_device *dev = dev_get_drvdata(d);
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	int ret;
+> > >   	ret = therm->attr_get(therm, NVKM_THERM_ATTR_FAN_MIN_DUTY);
+> > > @@ -150,7 +150,7 @@ nouveau_hwmon_set_pwm1_min(struct device *d, struct device_attribute *a,
+> > >   {
+> > >   	struct drm_device *dev = dev_get_drvdata(d);
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	long value;
+> > >   	int ret;
+> > > @@ -173,7 +173,7 @@ nouveau_hwmon_set_pwm1_max(struct device *d, struct device_attribute *a,
+> > >   {
+> > >   	struct drm_device *dev = dev_get_drvdata(d);
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	long value;
+> > >   	int ret;
+> > > @@ -247,7 +247,7 @@ static umode_t
+> > >   nouveau_power_is_visible(const void *data, u32 attr, int channel)
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_drm((struct drm_device *)data);
+> > > -	struct nvkm_iccsense *iccsense = nvxx_iccsense(&drm->client.device);
+> > > +	struct nvkm_iccsense *iccsense = nvxx_iccsense(drm);
+> > >   	if (!iccsense || !iccsense->data_valid || list_empty(&iccsense->rails))
+> > >   		return 0;
+> > > @@ -272,7 +272,7 @@ static umode_t
+> > >   nouveau_temp_is_visible(const void *data, u32 attr, int channel)
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_drm((struct drm_device *)data);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	if (!therm || !therm->attr_get || nvkm_therm_temp_get(therm) < 0)
+> > >   		return 0;
+> > > @@ -296,7 +296,7 @@ static umode_t
+> > >   nouveau_pwm_is_visible(const void *data, u32 attr, int channel)
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_drm((struct drm_device *)data);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	if (!therm || !therm->attr_get || !therm->fan_get ||
+> > >   	    therm->fan_get(therm) < 0)
+> > > @@ -315,7 +315,7 @@ static umode_t
+> > >   nouveau_input_is_visible(const void *data, u32 attr, int channel)
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_drm((struct drm_device *)data);
+> > > -	struct nvkm_volt *volt = nvxx_volt(&drm->client.device);
+> > > +	struct nvkm_volt *volt = nvxx_volt(drm);
+> > >   	if (!volt || nvkm_volt_get(volt) < 0)
+> > >   		return 0;
+> > > @@ -335,7 +335,7 @@ static umode_t
+> > >   nouveau_fan_is_visible(const void *data, u32 attr, int channel)
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_drm((struct drm_device *)data);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	if (!therm || !therm->attr_get || nvkm_therm_fan_sense(therm) < 0)
+> > >   		return 0;
+> > > @@ -367,7 +367,7 @@ nouveau_temp_read(struct device *dev, u32 attr, int channel, long *val)
+> > >   {
+> > >   	struct drm_device *drm_dev = dev_get_drvdata(dev);
+> > >   	struct nouveau_drm *drm = nouveau_drm(drm_dev);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	int ret;
+> > >   	if (!therm || !therm->attr_get)
+> > > @@ -416,7 +416,7 @@ nouveau_fan_read(struct device *dev, u32 attr, int channel, long *val)
+> > >   {
+> > >   	struct drm_device *drm_dev = dev_get_drvdata(dev);
+> > >   	struct nouveau_drm *drm = nouveau_drm(drm_dev);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	if (!therm)
+> > >   		return -EOPNOTSUPP;
+> > > @@ -439,7 +439,7 @@ nouveau_in_read(struct device *dev, u32 attr, int channel, long *val)
+> > >   {
+> > >   	struct drm_device *drm_dev = dev_get_drvdata(dev);
+> > >   	struct nouveau_drm *drm = nouveau_drm(drm_dev);
+> > > -	struct nvkm_volt *volt = nvxx_volt(&drm->client.device);
+> > > +	struct nvkm_volt *volt = nvxx_volt(drm);
+> > >   	int ret;
+> > >   	if (!volt)
+> > > @@ -470,7 +470,7 @@ nouveau_pwm_read(struct device *dev, u32 attr, int channel, long *val)
+> > >   {
+> > >   	struct drm_device *drm_dev = dev_get_drvdata(dev);
+> > >   	struct nouveau_drm *drm = nouveau_drm(drm_dev);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	if (!therm || !therm->attr_get || !therm->fan_get)
+> > >   		return -EOPNOTSUPP;
+> > > @@ -496,7 +496,7 @@ nouveau_power_read(struct device *dev, u32 attr, int channel, long *val)
+> > >   {
+> > >   	struct drm_device *drm_dev = dev_get_drvdata(dev);
+> > >   	struct nouveau_drm *drm = nouveau_drm(drm_dev);
+> > > -	struct nvkm_iccsense *iccsense = nvxx_iccsense(&drm->client.device);
+> > > +	struct nvkm_iccsense *iccsense = nvxx_iccsense(drm);
+> > >   	if (!iccsense)
+> > >   		return -EOPNOTSUPP;
+> > > @@ -525,7 +525,7 @@ nouveau_temp_write(struct device *dev, u32 attr, int channel, long val)
+> > >   {
+> > >   	struct drm_device *drm_dev = dev_get_drvdata(dev);
+> > >   	struct nouveau_drm *drm = nouveau_drm(drm_dev);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	if (!therm || !therm->attr_set)
+> > >   		return -EOPNOTSUPP;
+> > > @@ -559,7 +559,7 @@ nouveau_pwm_write(struct device *dev, u32 attr, int channel, long val)
+> > >   {
+> > >   	struct drm_device *drm_dev = dev_get_drvdata(dev);
+> > >   	struct nouveau_drm *drm = nouveau_drm(drm_dev);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > >   	if (!therm || !therm->attr_set)
+> > >   		return -EOPNOTSUPP;
+> > > @@ -664,9 +664,9 @@ nouveau_hwmon_init(struct drm_device *dev)
+> > >   {
+> > >   #if defined(CONFIG_HWMON) || (defined(MODULE) && defined(CONFIG_HWMON_MODULE))
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_iccsense *iccsense = nvxx_iccsense(&drm->client.device);
+> > > -	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+> > > -	struct nvkm_volt *volt = nvxx_volt(&drm->client.device);
+> > > +	struct nvkm_iccsense *iccsense = nvxx_iccsense(drm);
+> > > +	struct nvkm_therm *therm = nvxx_therm(drm);
+> > > +	struct nvkm_volt *volt = nvxx_volt(drm);
+> > >   	const struct attribute_group *special_groups[N_ATTR_GROUPS];
+> > >   	struct nouveau_hwmon *hwmon;
+> > >   	struct device *hwmon_dev;
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_led.c b/drivers/gpu/drm/nouveau/nouveau_led.c
+> > > index 2c5e0628da12..ac950518a820 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_led.c
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_led.c
+> > > @@ -78,7 +78,7 @@ int
+> > >   nouveau_led_init(struct drm_device *dev)
+> > >   {
+> > >   	struct nouveau_drm *drm = nouveau_drm(dev);
+> > > -	struct nvkm_gpio *gpio = nvxx_gpio(&drm->client.device);
+> > > +	struct nvkm_gpio *gpio = nvxx_gpio(drm);
+> > >   	struct dcb_gpio_func logo_led;
+> > >   	int ret;
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_ttm.c b/drivers/gpu/drm/nouveau/nouveau_ttm.c
+> > > index 486f39f31a38..53553819bcac 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_ttm.c
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_ttm.c
+> > > @@ -261,7 +261,7 @@ nouveau_ttm_fini_gtt(struct nouveau_drm *drm)
 > > >   int
+> > >   nouveau_ttm_init(struct nouveau_drm *drm)
+> > >   {
+> > > -	struct nvkm_device *device = nvxx_device(&drm->client.device);
+> > > +	struct nvkm_device *device = nvxx_device(drm);
+> > >   	struct nvkm_pci *pci = device->pci;
+> > >   	struct nvif_mmu *mmu = &drm->client.mmu;
+> > >   	struct drm_device *dev = drm->dev;
+> > > @@ -348,7 +348,7 @@ nouveau_ttm_init(struct nouveau_drm *drm)
+> > >   void
+> > >   nouveau_ttm_fini(struct nouveau_drm *drm)
+> > >   {
+> > > -	struct nvkm_device *device = nvxx_device(&drm->client.device);
+> > > +	struct nvkm_device *device = nvxx_device(drm);
+> > >   	nouveau_ttm_fini_vram(drm);
+> > >   	nouveau_ttm_fini_gtt(drm);
 > > > -- 
 > > > 2.45.1
 > > > 
