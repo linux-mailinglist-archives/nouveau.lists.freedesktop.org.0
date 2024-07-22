@@ -2,59 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF330938F56
-	for <lists+nouveau@lfdr.de>; Mon, 22 Jul 2024 14:49:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6090F93914A
+	for <lists+nouveau@lfdr.de>; Mon, 22 Jul 2024 17:04:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BDF8210E4F9;
-	Mon, 22 Jul 2024 12:49:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0124210E084;
+	Mon, 22 Jul 2024 15:04:10 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fk4MH6Yz";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="Q8bPjgDO";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com
- [209.85.208.169])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4C92C10E4F9
- for <nouveau@lists.freedesktop.org>; Mon, 22 Jul 2024 12:49:34 +0000 (UTC)
-Received: by mail-lj1-f169.google.com with SMTP id
- 38308e7fff4ca-2ebe40673e8so53594931fa.3
- for <nouveau@lists.freedesktop.org>; Mon, 22 Jul 2024 05:49:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721652571; x=1722257371; darn=lists.freedesktop.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=rMYxYfDHsREZWmzcWtthkMXssMqKIrg/yp6D/+yQfco=;
- b=fk4MH6YzfwZZIU+ss5xaIbyP60VoHcJrpTt1r6UjIEswghUonFb3N4XlIx+M07TknW
- i3gEOQMCBnrIYOdMHeMQcaqop1KBm4IJk9EMNoJ3dcrjSOq26uPa22KhQ5Hr2S2EHSm9
- py+6d3pMvvADCeRzyMUu0UPtI/DjrN0Itcayody85bSovxeD8ZoOqE53LvflYcOlCZkn
- 4mg93v3KZhLA2v1POQPQcrfe0KBUVOSVNFLtg3mD7IsRxrWxJGworT6eUgNhwhBA8MED
- gaVP+7nAx5RMblgvXYUquXfRlp8/l6ymxZO+GSRFT4H3V3oiH3P2A3m5k6RkYBsFMyZJ
- GwWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721652571; x=1722257371;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=rMYxYfDHsREZWmzcWtthkMXssMqKIrg/yp6D/+yQfco=;
- b=QUFmVZIVW7DtBRJiuaP+VF6MAf1OwJ+1jnJzmDqxlQ2dudwmQsdgSZE7yPNpMposvM
- t4kR6ZlbRt1zT9aYgdTbbHD3GtQQvOHEhq/5+ZVRSD+0Bhbxjteu15rc9VB8IZFDP9UW
- 3wHmhOigy4N7wiyhDS/4NH7J5d5Ch57jsFGzfbudQbj4CkotMcOj46sRXYGX2X1MWPVg
- eKGjavjXV9f8D7tVaphNp9+sFcv4lpu2ZWvQhkePR5q9dLY0X1g7jZxTqtis3rVGVtYv
- +AHzc8IW3o+yptuGqx6tEYbC8ogJ9Fgbbt6z+yutThpDOlELzqTkN4h3DPx7Lq0skdZd
- FRIg==
-X-Gm-Message-State: AOJu0YzI1dQCg2hyuXd9+Bf5A4kYi33RfR1kI+ndLjy7tqDuhfRylBwl
- mGoH5VNATRqZRMRS/0crO+4q0cTI/y2AmKw5Y60kiOTvlDbnibPI6sJ3/p0cBIJRkkWZ4AcA9un
- RofXVM/l+pb6f1UbnT5OD2zfLDiS5jzJj
-X-Google-Smtp-Source: AGHT+IFzJJuqW0fRZzfqmnsySQuGw1Rzmr6M947xhjbCxorK0AOHclCENnUY+tRFG6NGtj37NJfSQ+/Jl+uR+wlODec=
-X-Received: by 2002:a05:6512:1047:b0:52e:767a:ada7 with SMTP id
- 2adb3069b0e04-52efb7ef644mr4026600e87.50.1721652559489; Mon, 22 Jul 2024
- 05:49:19 -0700 (PDT)
-MIME-Version: 1.0
-From: Doru Iorgulescu <doru.iorgulescu1@gmail.com>
-Date: Mon, 22 Jul 2024 15:49:07 +0300
-Message-ID: <CA+39qUhft16EDSeapEt4HNSaaUqk=+qs=-2NT0s+CwiJS_1+DA@mail.gmail.com>
-Subject: https://bugzilla.kernel.org/show_bug.cgi?id=219082
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [46.235.227.194])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9554F10E084
+ for <nouveau@lists.freedesktop.org>; Mon, 22 Jul 2024 15:04:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1721660646;
+ bh=94V2FOBhQb+tZMxWV3mDiMf6SrdiLsoT8QBihrvghmc=;
+ h=Subject:From:To:Date:From;
+ b=Q8bPjgDOdKECRxyeRX7N5x753Hdj1QngTQC9WEFytsgmgr8suW3z5cmIERtp/luDm
+ Mon/TyFL3yljgIaoklbfSN0kyhSlFKXAiRtX2zNUSOq3w8TO23q9LUqMRvZa+sefpd
+ BiM9VlWYlByoHnLJOao+VJ/LIOCiN3k6zXEMGDXY7O44wxDh/jYx8V5iQKra88pr8A
+ r8VMYkS+MZM66ytXkTCzbEKBI5FSRBn8JdbvCa1KU057+ie7U13qLu0Wg604PX865e
+ HepIIdiuh1Xn/pKCi/3d04hC8XBGpoA4bB5aVROyqXefBg//CwCGlk0e14MxELHbsG
+ LqAIZ4t416l0w==
+Received: from [100.127.186.53] (cola.collaboradmins.com [195.201.22.229])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested) (Authenticated sender: mfilion)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 0F3BF378001E
+ for <nouveau@lists.freedesktop.org>; Mon, 22 Jul 2024 15:04:05 +0000 (UTC)
+Message-ID: <7cbfdf938d250c6577f461e4765743cb20758c12.camel@collabora.com>
+Subject: Reminder - The Call for Proposals is open for XDC 2024!
+From: Mark Filion <mark.filion@collabora.com>
 To: nouveau@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="0000000000003c34c5061dd57918"
+Date: Mon, 22 Jul 2024 11:04:04 -0400
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.3 (3.52.3-1.fc40) 
+MIME-Version: 1.0
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,21 +55,33 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---0000000000003c34c5061dd57918
-Content-Type: text/plain; charset="UTF-8"
+Hello!
 
-Please resolve this bug
-https://bugzilla.kernel.org/show_bug.cgi?id=219082
-Thank you very mutch
+Reminder -=C2=A0The CfP is now open for talks, workshops=C2=A0and demos at =
+XDC
+2024. The deadline for submissions is Monday, 12 August 2024.
 
---0000000000003c34c5061dd57918
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+https://indico.freedesktop.org/event/6/abstracts/
 
-<div dir=3D"ltr"><div>Please resolve this bug</div><div><span class=3D"gmai=
-l-im"><a href=3D"https://bugzilla.kernel.org/show_bug.cgi?id=3D219082" rel=
-=3D"noreferrer" target=3D"_blank">https://bugzilla.kernel.org/show_bug.cgi?=
-id=3D219082</a><br></span></div><div><span class=3D"gmail-im">Thank you ver=
-y mutch<br></span></div></div>
+While any serious proposal will be gratefully=C2=A0considered, topics of
+interest to X.Org and freedesktop.org developers are encouraged. The
+program focus is on new development, ongoing challenges and anything
+else that will spark discussions among attendees in the hallway track.
 
---0000000000003c34c5061dd57918--
+We are open to talks across all layers of the graphics stack, from the
+kernel to desktop environments / graphical applications and about how
+to make things better for the developers who build them. Head to the
+CfP page to learn more!
+=C2=A0=C2=A0=C2=A0
+As usual, the conference is free of charge and open to the general
+public. If you plan on attending, please make sure to register as early
+as possible!
+
+And don't forget, you can follow us on Mastodon for all the latest
+updates and to stay connected:
+
+=C2=A0=C2=A0=C2=A0=C2=A0https://floss.social/@XOrgDevConf
+
+Best,
+
+Mark
