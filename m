@@ -2,75 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D65893A455
-	for <lists+nouveau@lfdr.de>; Tue, 23 Jul 2024 18:24:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF1F393A4B3
+	for <lists+nouveau@lfdr.de>; Tue, 23 Jul 2024 19:07:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CDE2910E607;
-	Tue, 23 Jul 2024 16:24:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 706BB10E60B;
+	Tue, 23 Jul 2024 17:07:20 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=web.de header.i=markus.elfring@web.de header.b="SVz+ftKM";
+	dkim=pass (2048-bit key; unprotected) header.d=wanadoo.fr header.i=@wanadoo.fr header.b="EtBACXaa";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.web.de (mout.web.de [212.227.17.12])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F40BC10E5CD;
- Tue, 23 Jul 2024 16:24:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
- s=s29768273; t=1721751834; x=1722356634; i=markus.elfring@web.de;
- bh=qymtKMtz222jAh8w4pdYipiKugHqbVrcpK6zWOslD9o=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=SVz+ftKMA1p/t+X22mO6CGdbI5mgddVSIvF9SlSHynOpQYipuB3WN7xgJJ3LwrJp
- McAPbA/86ZFD0wdneJ4JpYAc4d3O16PnMq58ux7074XjgdTfcPoOj7wFWG+Yz51a9
- +nV36WTO/XxBDjfXjw4VvklWpaRlbBqWfDrbUSMg4KA6YJX1OkLUXV5ojMe7/fK2j
- H+i8dhgscbdV9rqS0f9E58kvJen/cXdhpwWK7L4Fx0cIpMhVFq27W2y3hwNaTvCdk
- tp39M4ABxPkPLZ7lp03RcXGZyIKh2YBzNYVgdKhsvKdqC3XG1iuAGb8BbL9kbyGne
- o9gf90jpYdPsdG/gTg==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [192.168.178.21] ([94.31.89.95]) by smtp.web.de (mrweb105
- [213.165.67.124]) with ESMTPSA (Nemesis) id 1M6HFy-1sPfWc1Oa8-006swF; Tue, 23
- Jul 2024 18:23:54 +0200
-Message-ID: <6636ae61-c112-48bb-acbd-89cc972cd282@web.de>
-Date: Tue, 23 Jul 2024 18:23:51 +0200
+X-Greylist: delayed 558 seconds by postgrey-1.36 at gabe;
+ Tue, 23 Jul 2024 17:07:18 UTC
+Received: from smtp.smtpout.orange.fr (smtp-19.smtpout.orange.fr
+ [80.12.242.19])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B166210E60B
+ for <nouveau@lists.freedesktop.org>; Tue, 23 Jul 2024 17:07:18 +0000 (UTC)
+Received: from [192.168.1.37] ([90.11.132.44]) by smtp.orange.fr with ESMTPA
+ id WIpesiVSDHEYLWIpesUchI; Tue, 23 Jul 2024 18:57:58 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wanadoo.fr;
+ s=t20230301; t=1721753878;
+ bh=wj1wQJ9iiYsLZlo+kf2XG8doY7xq5pewUkzs5OpTqGI=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From;
+ b=EtBACXaa2Vx7+SKDm7UwEu3ODg7UqXeU2xebyYaXckB1JFQFOCvaRZxGS6nuOHxG+
+ wKhulQoAihHrfQhkJpSAWXJRnGscNN8ZgedU4IjbZXmUOUG4UDeNS7bV47evexknvu
+ FpniogTkbPYjH0tiKqDiwjTUaYB5av/uAnNP2XDM97BxLzYSBhtkszyry4eaVBi5XB
+ O6V7VYIk9CiUu8p7K9wRt/ROg3OpSFou7+UA0mxPay5sIXyPrGHbam39i3/2S2H4CI
+ cBOZdfnGBLCWcuVH7m3YbNhcVwJO6eSS8NuS0aHGRzRwAvgN7npKh3U3ItToB5IGxi
+ dHZQmbAPI47dw==
+X-ME-Helo: [192.168.1.37]
+X-ME-Auth: bWFyaW9uLmphaWxsZXRAd2FuYWRvby5mcg==
+X-ME-Date: Tue, 23 Jul 2024 18:57:58 +0200
+X-ME-IP: 90.11.132.44
+Message-ID: <147bde68-2b66-4e0c-890d-30571a99eee1@wanadoo.fr>
+Date: Tue, 23 Jul 2024 18:57:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2] drm/nouveau/debugfs: Optimise data output in
+Subject: Re: [PATCH] drm/nouveau/debugfs: Simplify character output in
  nouveau_debugfs_vbios_image()
-To: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- kernel-janitors@vger.kernel.org,
- Christophe Jaillet <christophe.jaillet@wanadoo.fr>,
- Daniel Vetter <daniel@ffwll.ch>, Danilo Krummrich <dakr@redhat.com>,
- David Airlie <airlied@gmail.com>, Ilia Mirkin <imirkin@alum.mit.edu>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>
-Cc: LKML <linux-kernel@vger.kernel.org>
+To: Ilia Mirkin <imirkin@alum.mit.edu>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ kernel-janitors@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
+ Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ LKML <linux-kernel@vger.kernel.org>, Markus Elfring <Markus.Elfring@web.de>
 References: <cb21950b-286b-4630-9052-cff9e7e56337@web.de>
  <CAKb7Uvj513trzg9bVGrjcQ8CfO4anCq7e9mgbD0eZKh=zNLy=Q@mail.gmail.com>
-Content-Language: en-GB
-From: Markus Elfring <Markus.Elfring@web.de>
+Content-Language: en-US, fr-FR
+From: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
 In-Reply-To: <CAKb7Uvj513trzg9bVGrjcQ8CfO4anCq7e9mgbD0eZKh=zNLy=Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:D5gHgzHG2snm2BneY/9rLIoyvAfRyLG0YCgE7dLY6aEjYK/sCWV
- BAJoEkOLPp0iEK/s/ispbissMxojf+heWcDa3/WiFzxH322ODTJ8Xvpf//OiysvviRJjbkD
- iO7nIhjEYBCiSFKPG7Jf6p+JgGRoOf3X6FKVum6FdoGrOmOH3zdL/qLEq3M8Fbhrr9/T6wN
- CW5piHriygaQ8l97JcAUw==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:gKS3DF7q8Ws=;R7HXf9nAL7DNpFKsU/CZ+krqeZW
- BnGcqW5XayKOACBusGleO+x5tXpL4fjtGOzuYAMSmlqrtnqyEpcbHP45H7eoKB3szdllx8ZK7
- P4GZQ+Y5Rkcg6vN6TULBEQgfPYJvJ8x74s3vKSz/mAXcpdmR/kMIFE1wjY+vFFDSiRMBlm/1N
- Wl0dgqfJh6kexe2NEwFVz9A5CzAIuL4xrYXA4BeUY4mqi5UUgAqMTgNYCjKF1lJGFeiBVvP9X
- xpiMyhkz7UxvLnVqoHdOPBXTKAzzO4LswfHYsn075IbmvTLl73Qm2mc0kVjijfw0L1EK2A6zW
- 1lhfT3Bh7tQoTs28jkuDtFl7PGl4U3s5INPVuygDxAi/hhH/8uBC0HdjIUKYIWC93VH15i0Da
- 6pGU3rJDvG+kmQHTR9hZGAei8/7hhgRBnnrrv+3OvEuZCrcDyHMaWvXsbpKpj14xl+JbgpnPv
- g02GjaF+1K9Gq02f0ZRZzhWdWtPbYiMMJqkfp622/29/nwtyMIG55uz9QjA7LESd/C7NhXEUu
- ueATWwVsMsO8/IHFaLn8l9DT6MZbnjE9fU4KkcDFZ2s4QhCpCVTY2q/RLEg81+7iGp2LEPOoc
- uwhlzPsY1UqgevV8WyraS2ebg03JrwxuTEwLybrhls4T76VKiIujkjuxvoaE1YToE02ul1BqY
- Ram54Ygwm2VOUJ823QhYhi1n1+FdKxqdwGk8ijrqPozbMvLxK9Gqm0713b2T3W+Srpz/abdGK
- DLOrXQPhpab+rGPe2esuuBDXOe4Xrv95IK+H9sYnywMy1unUCjzF0jaJ2l+3keiEm9qzdMhsX
- 8280gCybOWCHtArAdFqLqrMA==
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,49 +67,70 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Markus Elfring <elfring@users.sourceforge.net>
-Date: Tue, 23 Jul 2024 18:08:15 +0200
+Le 15/07/2024 à 15:15, Ilia Mirkin a écrit :
+> On Mon, Jul 15, 2024 at 7:49 AM Markus Elfring <Markus.Elfring@web.de> wrote:
+>>
+>> From: Markus Elfring <elfring@users.sourceforge.net>
+>> Date: Mon, 15 Jul 2024 13:36:54 +0200
+>>
+>> Single characters should be put into a sequence.
+>> Thus use the corresponding function “seq_putc” for one selected call.
+>>
+>> This issue was transformed by using the Coccinelle software.
+>>
+>> Suggested-by: Christophe Jaillet <christophe.jaillet@wanadoo.fr>
+>> Signed-off-by: Markus Elfring <elfring@users.sourceforge.net>
+>> ---
+>>   drivers/gpu/drm/nouveau/nouveau_debugfs.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
+>> index e83db051e851..931b62097366 100644
+>> --- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
+>> +++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
+>> @@ -42,7 +42,7 @@ nouveau_debugfs_vbios_image(struct seq_file *m, void *data)
+>>          int i;
+>>
+>>          for (i = 0; i < drm->vbios.length; i++)
+>> -               seq_printf(m, "%c", drm->vbios.data[i]);
+>> +               seq_putc(m, drm->vbios.data[i]);
+> 
+> Is there some reason this whole thing isn't just
+> 
+> seq_write(m, drm->vbios.data, drm->vbios.length)
 
-Some characters should be put into a sequence.
+Hi,
 
-* Thus print all data by the corresponding function =E2=80=9Cseq_write=E2=
-=80=9D at once.
+I don't know if my answer is relevant or not here but:
+	for () seq_putc();	==> will fill 'm' with everything that fits in
+and
+	seq_write()		==> is all or nothing. So if 'm' is too small, then 
+nothing will be appended.
 
-* Return also the value from this function call.
+I've not looked at the calling tree, but I would expect 'm' to be able 
+to have PAGE_SIZE chars, so most probably 4096.
 
-* Omit a local variable which became redundant with this refactoring.
+And having gpu + "vbios.rom", I would expect it to be bigger than 4096.
+
+If I'm correct, then changing for seq_write() would just show... nothing.
 
 
-This issue was detected by using the Coccinelle software.
+I don't know if it can happen., but testing should be easy enough to 
+figure it out.
 
-Signed-off-by: Markus Elfring <elfring@users.sourceforge.net>
-=2D--
+just my 2c.
 
-V2:
-A patch review suggestion from Ilia Mirkin was integrated.
+CJ
 
- drivers/gpu/drm/nouveau/nouveau_debugfs.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/n=
-ouveau/nouveau_debugfs.c
-index e83db051e851..980cff265060 100644
-=2D-- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-@@ -39,11 +39,8 @@ nouveau_debugfs_vbios_image(struct seq_file *m, void *d=
-ata)
- {
- 	struct drm_info_node *node =3D (struct drm_info_node *) m->private;
- 	struct nouveau_drm *drm =3D nouveau_drm(node->minor->dev);
--	int i;
 
--	for (i =3D 0; i < drm->vbios.length; i++)
--		seq_printf(m, "%c", drm->vbios.data[i]);
--	return 0;
-+	return seq_write(m, drm->vbios.data, drm->vbios.length);
- }
-
- static int
-=2D-
-2.45.2
+> 
+>>          return 0;
+>>   }
+>>
+>> --
+>> 2.45.2
+>>
+> 
+> 
 
