@@ -2,52 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 299D7CBAC8B
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A61D3CBAABC
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:20 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2825710EAB5;
-	Sat, 13 Dec 2025 12:41:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5373610E9FD;
+	Sat, 13 Dec 2025 12:41:01 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LBc2/Das";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CvAyf0pm";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4CDBE10E104
- for <nouveau@lists.freedesktop.org>; Fri, 26 Jul 2024 15:41:10 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D177410E82E
+ for <nouveau@lists.freedesktop.org>; Sat, 27 Jul 2024 01:58:46 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 909776181E;
- Fri, 26 Jul 2024 15:41:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C8AEC32782;
- Fri, 26 Jul 2024 15:41:08 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 1BE4B6172E;
+ Sat, 27 Jul 2024 01:58:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C411C32782;
+ Sat, 27 Jul 2024 01:58:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1722008469;
- bh=LMzbVZA4QYawYf4BRRlbZ4n/Y3AGIuAifB0ECz0TYWk=;
+ s=k20201202; t=1722045525;
+ bh=QWkpOyQ8skDBYJJuo1q56u4T3/WsmyzpazhCLyqKVyo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=LBc2/DasYPuibayilf6QlhnErzKO11OVZA6Cj6XW5Zh1XYv1H9ou/JyO2aufIJWar
- YM8RKJ5XFYhWe0/yZzZyYt3/mZiOSTfI39iBtRxAKlyGNCke0G5yz8oSnJO1ptp5/l
- 0oX+wMTkDQzyffJbyfV3aTFILTsdxWEuRUrZ8bS2KHWeO+FFKnUbVLfRxl3HJ/nruO
- l7M8CuvHClUyl7hm/UtbXlsQp7//3PBOQkrxTk0sTFmYDMssP34ftyO/C/cY5asYKI
- CpYdPSfcQ+A162eBwKklspKpy4IcjWpUwi8Sq9lH7m+2TiVbNoYh0L+QFvFzCxRNdj
- ZtuHxIFUiuLZw==
-Date: Fri, 26 Jul 2024 17:41:05 +0200
+ b=CvAyf0pmfrTbkFRkCmWKcYEnRjAbeag+cHWOzeQXjBfnX8E7B8723dOKkjnqq8gWI
+ QRNZgHxUsM6hL2LbO0raYbbwI2gFOMWKy9yXhZdNeGMCBQKVq9whck2b9sxXJDZaNi
+ Rm4i9A1Dn72WwVTlrB5Rh2FWqVTGL9d0Rbszu9dZgF8roD/BfOrrbaRGvQP1jbD8QX
+ xWGwiTaCk9+tVkUmTmWOvMgItHsSmsRohkrWUw1BwgVPHn0Ha6MVg0AwzD98cG0hx7
+ V4GbI0hg8LUVm6jL1RQLeA5dUMGOy0vbn2Tc5kiKcSdlHvdWNA0wZBUER4HxZU3aLB
+ V8eAZQAX0LFkA==
+Date: Sat, 27 Jul 2024 03:58:41 +0200
 From: Danilo Krummrich <dakr@kernel.org>
 To: Ben Skeggs <bskeggs@nvidia.com>
 Cc: nouveau@lists.freedesktop.org
-Subject: Re: [PATCH v2 02/37] drm/nouveau: handle pci/tegra drm_dev_{alloc,
- register} from common code
-Message-ID: <ZqPDkZ2t5MjXX4Sx@cassiopeiae>
-References: <20240704183721.25778-1-bskeggs@nvidia.com>
- <20240704183721.25778-3-bskeggs@nvidia.com>
- <Zo1UP-aapSyf2Rnj@pollux>
- <e67e0c36-5c21-4f37-b489-78ec45298c4e@nvidia.com>
- <ZppJuiWfgfkEKeCH@pollux>
- <9760d7df-dfbf-478e-9b0e-ddc7768b8de1@nvidia.com>
+Subject: Re: [PATCH v3 00/37] drm/nouveau: misc. cleanups and removal of
+ unused apis
+Message-ID: <ZqRUUavTiEUdi62f@cassiopeiae>
+References: <20240726043828.58966-1-bskeggs@nvidia.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <9760d7df-dfbf-478e-9b0e-ddc7768b8de1@nvidia.com>
+In-Reply-To: <20240726043828.58966-1-bskeggs@nvidia.com>
 X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:50 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -63,99 +57,225 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jul 26, 2024 at 02:27:53PM +1000, Ben Skeggs wrote:
-> > > > > +
-> > > > > +static struct nouveau_drm *
-> > > > > +nouveau_drm_device_new(const struct drm_driver *drm_driver, struct device *parent,
-> > > > > +		       struct nvkm_device *device)
-> > > > > +{
-> > > > > +	struct nouveau_drm *drm;
-> > > > > +	int ret;
-> > > > > +
-> > > > > +	drm = kzalloc(sizeof(*drm), GFP_KERNEL);
-> > > > > +	if (!drm)
-> > > > > +		return ERR_PTR(-ENOMEM);
-> > > > > +
-> > > > > +	drm->dev = drm_dev_alloc(drm_driver, parent);
-> > > > Since you're reworking this anyways, can we switch to devm_drm_dev_alloc()?
-> > > > 
-> > > > This also gets us rid of nouveau_drm_device_del().
-> > > No, we can't.  I originally had this change as a cleanup patch in the series
-> > > I posted implementing aux bus support.  However it turns out that in order
-> > > to avoid breaking udev etc, we can't use the aux device as parent of the drm
-> > Can you please expand a bit on what was breaking?
+On Fri, Jul 26, 2024 at 02:37:51PM +1000, Ben Skeggs wrote:
+> This series is a smaller subset of the prior series I posted, that aimed
+> to remove the ioctl layer between NVKM and the nouveau DRM driver.
 > 
-> Sorry, I meant to say PRIME, not udev.  The device selection logic ties the
-> DRM device back to its sysfs node, and doesn't understand the auxiliary
-> bus.  So, if nouveau were to use its auxiliary device as parent of the DRM
-> device, PRIME breaks.
+> Whilst this series doesn't go the full way, it aims to remove a bunch of
+> internal APIs that aren't useful anymore so they don't have to be ported,
+> and to cleanup a few paths in the DRM driver that have suffered from bit-
+> rot over the years to ensure it's safe to remove the ioctl layer next.
+> 
+> There's more details of the specific changes in the relevant commits.
+> 
+> A git tree is available at [1], and the remaining commits that were in
+> the prior series, but not this one, are available at [2].
+> 
+> v2:
+> - prepended a couple of patches that begin to cleanup pci vs tegra
+>   paths, addressing some comments about variable naming, more in a
+>   future series
+> - rebased on current drm-misc-next
+> - other changes mentioned in their relevant commits
+> v3:
+> - remove unnecessary change to nouveau_name()
+> - reword some commit messages/comments
+> 
+> [1] https://gitlab.freedesktop.org/bskeggs/nouveau/-/tree/00.00-cleanup
+> [2] https://gitlab.freedesktop.org/bskeggs/nouveau/-/tree/00.01-remove-ioctl
 
-The Vulkan device selector stuff looks like it should mostly work.
-
-However, I guess you refer to the loader stuff in Mesa that uses
-drmGetDevices2() from libdrm? This stuff indeed whitelists busses it accepts to
-report DRM device from:
-
-	{ "/pci", DRM_BUS_PCI },
-	{ "/usb", DRM_BUS_USB },
-	{ "/platform", DRM_BUS_PLATFORM },
-	{ "/spi", DRM_BUS_PLATFORM },
-	{ "/host1x", DRM_BUS_HOST1X },
-	{ "/virtio", DRM_BUS_VIRTIO },
-
-Not a big deal to just add it for a new driver, but obviously we can't just do
-this for an existing one.
-
-> Fortunately it didn't turn out to be necessary, and we
-> can happily probe() against the auxiliary device and still use the PCI
-> device as the DRM device's parent.
-
-At a first glance, I guess this should work. But, before we introduce
-workarounds like this one and add even more complexity, I wonder what's the
-benefit of doing this for Nouveau in the first place? I think we agreed to this
-split for Nova, for the reasons discussed in [1].
-
-[1] https://lore.kernel.org/dri-devel/20240613170211.88779-1-bskeggs@nvidia.com/
+Applied to drm-misc-next, thanks!
 
 > 
-> > 
-> > > device and instead have to continue passing the pci/platform device as we do
-> > > now.
-> > > 
-> > > Using devm_drm_dev_alloc() with the pci device as parent would tie the
-> > > lifetime of the drm device to the pci device, which is owned by nvkm (after
-> > How does this tie the lifetime of the drm device to the pci device? It's the
-> > other way around, the drm device takes a reference of its parent (i.e. the pci
-> > device).
-> > 
-> > I don't think there's anything wrong with that.
+> Ben Skeggs (37):
+>   drm/nouveau: move nouveau_drm_device_fini() above init()
+>   drm/nouveau: handle pci/tegra drm_dev_{alloc,register} from common
+>     code
+>   drm/nouveau: replace drm_device* with nouveau_drm* as dev drvdata
+>   drm/nouveau: create pci device once
+>   drm/nouveau: store nvkm_device pointer in nouveau_drm
+>   drm/nouveau: move allocation of root client out of nouveau_cli_init()
+>   drm/nouveau: add nouveau_cli to nouveau_abi16
+>   drm/nouveau: handle limited nvif ioctl in abi16
+>   drm/nouveau: remove abi16->device
+>   drm/nouveau: remove abi16->handles
+>   drm/nouveau/nvkm: remove detect/mmio/subdev_mask from device args
+>   drm/nouveau/nvkm: remove perfmon
+>   drm/nouveau/nvkm: remove nvkm_client_search()
+>   drm/nouveau/nvif: remove support for userspace backends
+>   drm/nouveau/nvif: remove route/token
+>   drm/nouveau/nvif: remove nvxx_object()
+>   drm/nouveau/nvif: remove nvxx_client()
+>   drm/nouveau/nvif: remove driver keep/fini
+>   drm/nouveau/nvif: remove client device arg
+>   drm/nouveau/nvif: remove client version
+>   drm/nouveau/nvif: remove client devlist
+>   drm/nouveau/nvif: remove client fini
+>   drm/nouveau/nvif: remove device args
+>   drm/nouveau: always map device
+>   drm/nouveau/nvif: remove device rd/wr
+>   drm/nouveau/nvif: remove disp chan rd/wr
+>   drm/nouveau: move nvxx_* definitions to nouveau_drv.h
+>   drm/nouveau: add nvif_mmu to nouveau_drm
+>   drm/nouveau: pass drm to nouveau_mem_new(), instead of cli
+>   drm/nouveau: pass drm to nv50_dmac_create(), rather than device+disp
+>   drm/nouveau: pass cli to nouveau_channel_new() instead of drm+device
+>   drm/nouveau: remove nouveau_chan.device
+>   drm/nouveau: remove chan->drm
+>   drm/nouveau: remove master
+>   drm/nouveau: remove push pointer from nouveau_channel
+>   drm/nouveau/kms: remove a few unused struct members and fn decls
+>   drm/nouveau/kms: remove push pointer from nv50_dmac
 > 
-> My understanding is that devres will cleanup allocations when the driver
-> detaches from the device.
-
-Right, I think I took that too literally.
-
-The lifetime of the DRM device (or more precisely one of its references) is
-bound to the binding between the parent device and its corresponding driver.
-
-But the lifetime of the parent device itself is bound to the DRM device.
-
-So, yes this doesn't work, and proves the point that initializing the DRM device
-with the parent's parent is just a workaround.
-
-> With the auxdev changes, it's *NVKM* that's
-> attached to the PCI device, not the DRM driver (which is attached to an
-> auxiliary device instead).
+>  drivers/gpu/drm/nouveau/Kbuild                |   1 -
+>  drivers/gpu/drm/nouveau/dispnv04/crtc.c       |  14 +-
+>  drivers/gpu/drm/nouveau/dispnv04/dac.c        |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv04/dfp.c        |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv04/disp.c       |   7 +-
+>  drivers/gpu/drm/nouveau/dispnv04/disp.h       |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv04/hw.c         |   9 +-
+>  drivers/gpu/drm/nouveau/dispnv04/tvnv04.c     |   4 +-
+>  drivers/gpu/drm/nouveau/dispnv04/tvnv17.c     |   6 +-
+>  drivers/gpu/drm/nouveau/dispnv50/base507c.c   |  21 +-
+>  drivers/gpu/drm/nouveau/dispnv50/base827c.c   |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/base907c.c   |  10 +-
+>  drivers/gpu/drm/nouveau/dispnv50/core507d.c   |   8 +-
+>  drivers/gpu/drm/nouveau/dispnv50/corec37d.c   |   6 +-
+>  drivers/gpu/drm/nouveau/dispnv50/corec57d.c   |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/crc907d.c    |   4 +-
+>  drivers/gpu/drm/nouveau/dispnv50/crcc37d.c    |   4 +-
+>  drivers/gpu/drm/nouveau/dispnv50/crcc57d.c    |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/dac507d.c    |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/dac907d.c    |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/disp.c       |  74 +-
+>  drivers/gpu/drm/nouveau/dispnv50/disp.h       |  14 +-
+>  drivers/gpu/drm/nouveau/dispnv50/head507d.c   |  24 +-
+>  drivers/gpu/drm/nouveau/dispnv50/head827d.c   |  10 +-
+>  drivers/gpu/drm/nouveau/dispnv50/head907d.c   |  26 +-
+>  drivers/gpu/drm/nouveau/dispnv50/head917d.c   |   6 +-
+>  drivers/gpu/drm/nouveau/dispnv50/headc37d.c   |  18 +-
+>  drivers/gpu/drm/nouveau/dispnv50/headc57d.c   |  12 +-
+>  drivers/gpu/drm/nouveau/dispnv50/ovly507e.c   |   6 +-
+>  drivers/gpu/drm/nouveau/dispnv50/ovly827e.c   |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/ovly907e.c   |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/pior507d.c   |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/sor507d.c    |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/sor907d.c    |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/sorc37d.c    |   2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/wimmc37b.c   |   7 +-
+>  drivers/gpu/drm/nouveau/dispnv50/wndwc37e.c   |  24 +-
+>  drivers/gpu/drm/nouveau/dispnv50/wndwc57e.c   |  10 +-
+>  drivers/gpu/drm/nouveau/dispnv50/wndwc67e.c   |   2 +-
+>  drivers/gpu/drm/nouveau/include/nvif/cl0080.h |   7 -
+>  drivers/gpu/drm/nouveau/include/nvif/class.h  |   3 -
+>  drivers/gpu/drm/nouveau/include/nvif/client.h |  11 +-
+>  drivers/gpu/drm/nouveau/include/nvif/device.h |  37 +-
+>  drivers/gpu/drm/nouveau/include/nvif/driver.h |   5 -
+>  drivers/gpu/drm/nouveau/include/nvif/if0000.h |  10 -
+>  drivers/gpu/drm/nouveau/include/nvif/if0002.h |  39 -
+>  drivers/gpu/drm/nouveau/include/nvif/if0003.h |  34 -
+>  drivers/gpu/drm/nouveau/include/nvif/ioctl.h  |  27 -
+>  drivers/gpu/drm/nouveau/include/nvif/object.h |  24 +-
+>  drivers/gpu/drm/nouveau/include/nvif/os.h     |  19 +
+>  .../drm/nouveau/include/nvkm/core/client.h    |   1 -
+>  .../drm/nouveau/include/nvkm/core/device.h    |   1 -
+>  .../drm/nouveau/include/nvkm/core/layout.h    |   1 -
+>  .../drm/nouveau/include/nvkm/core/object.h    |  14 -
+>  .../drm/nouveau/include/nvkm/core/oclass.h    |   2 -
+>  .../gpu/drm/nouveau/include/nvkm/core/os.h    |  19 -
+>  .../gpu/drm/nouveau/include/nvkm/core/pci.h   |   1 -
+>  .../gpu/drm/nouveau/include/nvkm/core/tegra.h |   1 -
+>  .../gpu/drm/nouveau/include/nvkm/engine/pm.h  |  29 -
+>  drivers/gpu/drm/nouveau/nouveau_abi16.c       | 330 +++++--
+>  drivers/gpu/drm/nouveau/nouveau_abi16.h       |   6 +-
+>  drivers/gpu/drm/nouveau/nouveau_bios.c        |   4 +-
+>  drivers/gpu/drm/nouveau/nouveau_bios.h        |   1 +
+>  drivers/gpu/drm/nouveau/nouveau_bo.c          |  10 +-
+>  drivers/gpu/drm/nouveau/nouveau_bo0039.c      |   6 +-
+>  drivers/gpu/drm/nouveau/nouveau_bo5039.c      |   6 +-
+>  drivers/gpu/drm/nouveau/nouveau_bo74c1.c      |   2 +-
+>  drivers/gpu/drm/nouveau/nouveau_bo85b5.c      |   2 +-
+>  drivers/gpu/drm/nouveau/nouveau_bo9039.c      |   4 +-
+>  drivers/gpu/drm/nouveau/nouveau_bo90b5.c      |   2 +-
+>  drivers/gpu/drm/nouveau/nouveau_boa0b5.c      |   4 +-
+>  drivers/gpu/drm/nouveau/nouveau_chan.c        |  96 +-
+>  drivers/gpu/drm/nouveau/nouveau_chan.h        |   8 +-
+>  drivers/gpu/drm/nouveau/nouveau_display.c     |   4 +-
+>  drivers/gpu/drm/nouveau/nouveau_display.h     |   2 +-
+>  drivers/gpu/drm/nouveau/nouveau_dma.c         |   2 +-
+>  drivers/gpu/drm/nouveau/nouveau_dmem.c        |   4 +-
+>  drivers/gpu/drm/nouveau/nouveau_drm.c         | 387 ++++----
+>  drivers/gpu/drm/nouveau/nouveau_drv.h         |  61 +-
+>  drivers/gpu/drm/nouveau/nouveau_fence.c       |  17 +-
+>  drivers/gpu/drm/nouveau/nouveau_gem.c         |  21 +-
+>  drivers/gpu/drm/nouveau/nouveau_hwmon.c       |  46 +-
+>  drivers/gpu/drm/nouveau/nouveau_led.c         |   2 +-
+>  drivers/gpu/drm/nouveau/nouveau_mem.c         |  38 +-
+>  drivers/gpu/drm/nouveau/nouveau_mem.h         |   4 +-
+>  drivers/gpu/drm/nouveau/nouveau_nvif.c        |   2 -
+>  drivers/gpu/drm/nouveau/nouveau_platform.c    |  11 +-
+>  drivers/gpu/drm/nouveau/nouveau_sgdma.c       |   2 +-
+>  drivers/gpu/drm/nouveau/nouveau_ttm.c         |  12 +-
+>  drivers/gpu/drm/nouveau/nouveau_usif.c        | 194 ----
+>  drivers/gpu/drm/nouveau/nouveau_usif.h        |  10 -
+>  drivers/gpu/drm/nouveau/nouveau_vga.c         |  14 +-
+>  drivers/gpu/drm/nouveau/nv04_fence.c          |   2 +-
+>  drivers/gpu/drm/nouveau/nv10_fence.c          |   2 +-
+>  drivers/gpu/drm/nouveau/nv17_fence.c          |  10 +-
+>  drivers/gpu/drm/nouveau/nv50_fence.c          |   2 +-
+>  drivers/gpu/drm/nouveau/nv84_fence.c          |  12 +-
+>  drivers/gpu/drm/nouveau/nvc0_fence.c          |   4 +-
+>  drivers/gpu/drm/nouveau/nvif/client.c         |  32 +-
+>  drivers/gpu/drm/nouveau/nvif/device.c         |  15 +-
+>  drivers/gpu/drm/nouveau/nvif/driver.c         |  32 +-
+>  drivers/gpu/drm/nouveau/nvif/object.c         |  40 -
+>  drivers/gpu/drm/nouveau/nvkm/core/client.c    |  64 +-
+>  drivers/gpu/drm/nouveau/nvkm/core/ioctl.c     |  91 +-
+>  drivers/gpu/drm/nouveau/nvkm/core/object.c    |  50 -
+>  drivers/gpu/drm/nouveau/nvkm/core/oproxy.c    |  42 -
+>  drivers/gpu/drm/nouveau/nvkm/core/uevent.c    |   4 +-
+>  drivers/gpu/drm/nouveau/nvkm/engine/Kbuild    |   1 -
+>  .../gpu/drm/nouveau/nvkm/engine/device/base.c | 479 +++++-----
+>  .../gpu/drm/nouveau/nvkm/engine/device/pci.c  |   4 +-
+>  .../gpu/drm/nouveau/nvkm/engine/device/priv.h |   2 -
+>  .../drm/nouveau/nvkm/engine/device/tegra.c    |   5 +-
+>  .../gpu/drm/nouveau/nvkm/engine/device/user.c |  93 +-
+>  .../gpu/drm/nouveau/nvkm/engine/disp/chan.c   |  24 -
+>  drivers/gpu/drm/nouveau/nvkm/engine/pm/Kbuild |  11 -
+>  drivers/gpu/drm/nouveau/nvkm/engine/pm/base.c | 867 ------------------
+>  drivers/gpu/drm/nouveau/nvkm/engine/pm/g84.c  | 165 ----
+>  .../gpu/drm/nouveau/nvkm/engine/pm/gf100.c    | 243 -----
+>  .../gpu/drm/nouveau/nvkm/engine/pm/gf100.h    |  20 -
+>  .../gpu/drm/nouveau/nvkm/engine/pm/gf108.c    |  66 --
+>  .../gpu/drm/nouveau/nvkm/engine/pm/gf117.c    |  80 --
+>  .../gpu/drm/nouveau/nvkm/engine/pm/gk104.c    | 184 ----
+>  .../gpu/drm/nouveau/nvkm/engine/pm/gt200.c    | 157 ----
+>  .../gpu/drm/nouveau/nvkm/engine/pm/gt215.c    | 138 ---
+>  drivers/gpu/drm/nouveau/nvkm/engine/pm/nv40.c | 123 ---
+>  drivers/gpu/drm/nouveau/nvkm/engine/pm/nv40.h |  15 -
+>  drivers/gpu/drm/nouveau/nvkm/engine/pm/nv50.c | 175 ----
+>  drivers/gpu/drm/nouveau/nvkm/engine/pm/priv.h | 105 ---
+>  128 files changed, 1119 insertions(+), 4194 deletions(-)
+>  delete mode 100644 drivers/gpu/drm/nouveau/include/nvif/if0002.h
+>  delete mode 100644 drivers/gpu/drm/nouveau/include/nvif/if0003.h
+>  delete mode 100644 drivers/gpu/drm/nouveau/include/nvkm/engine/pm.h
+>  delete mode 100644 drivers/gpu/drm/nouveau/nouveau_usif.c
+>  delete mode 100644 drivers/gpu/drm/nouveau/nouveau_usif.h
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/Kbuild
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/base.c
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/g84.c
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/gf100.c
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/gf100.h
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/gf108.c
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/gf117.c
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/gk104.c
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/gt200.c
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/gt215.c
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/nv40.c
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/nv40.h
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/nv50.c
+>  delete mode 100644 drivers/gpu/drm/nouveau/nvkm/engine/pm/priv.h
 > 
-> This means that the devm_drm_dev_init_release() won't be called when the DRM
-> driver detaches from its auxiliary device as it should, but when NVKM
-> detaches from the PCI device, which isn't the most obvious and could lead to
-> confusion.
+> -- 
+> 2.45.1
 > 
-> It also entirely blows up in the split module case as nouveau.ko is unloaded
-> already by the time NVKM detaches and drm_dev_put() gets called.
-> 
-> > 
-> > > the auxdev series).  We could look at changing devm_drm_dev_alloc() of
-> > > course, but I think that's best left until later.
-> > I don't think that this is necessary.
