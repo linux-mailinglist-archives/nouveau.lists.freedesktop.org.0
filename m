@@ -2,73 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0978693E9B5
-	for <lists+nouveau@lfdr.de>; Sun, 28 Jul 2024 23:34:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B752093EA1C
+	for <lists+nouveau@lfdr.de>; Mon, 29 Jul 2024 01:05:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CE6A210E030;
-	Sun, 28 Jul 2024 21:34:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A3D1810E00E;
+	Sun, 28 Jul 2024 23:04:58 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="dqbpFhpv";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="W4FEjUeR";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B540410E030
- for <nouveau@lists.freedesktop.org>; Sun, 28 Jul 2024 21:34:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1722202461;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=WDjRDdxJvUgyjNllUOSRPG7PWMivs21epBW052uXsQk=;
- b=dqbpFhpv+rCgkcqNg+kFMMnzY/c+R5AP4O1gRkHTmlXM1aC45tL4pWmggR5z5tn3xZxyx/
- ZJpHxWW+bPadNX1DhVIOOzBldpP90gi+tBAZOO0SIAZU0ZDxnbaluxkGK4X7eGC0FB4MjI
- 68XJLN8LkFdlIosFmZ71lh52TSoi19U=
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-456-LUJ-ms9GP6qP79jtvFfEKw-1; Sun, 28 Jul 2024 17:34:19 -0400
-X-MC-Unique: LUJ-ms9GP6qP79jtvFfEKw-1
-Received: by mail-ed1-f72.google.com with SMTP id
- 4fb4d7f45d1cf-5af9df8ef73so2862126a12.1
- for <nouveau@lists.freedesktop.org>; Sun, 28 Jul 2024 14:34:19 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722202458; x=1722807258;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WDjRDdxJvUgyjNllUOSRPG7PWMivs21epBW052uXsQk=;
- b=anIx28TApbOKm9hCGY4TNGO9a2etPio/HeuXG9qsU4iRKoNXwZwt6Ls3MsT44FCxJG
- 1uATy4g4cgJv96Uf4xb0bPQvmpPYfVpepHnw8iFHYOOkn0glUY+kPDejKVKuUC7eL1H2
- zRNYADEEbWpj2KzT+oLR9zIZ5uP/dJlU+OHs5tF71j1RKJBvY8X6vGvw++47S4VDo445
- QX/3dbKmCMHzbNwG8vijKpDDRYLyQpFBMz9Dx5RaQeEdC0VhwGM5qqH3DpQ1HBc9g8Qg
- +3ijJT8USIILGWrxH+prQ2mMPSvMqy5On8f6UNoP3zqSGrJWMgyfwQ3MtTPxa32wHxN5
- GsoQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVumt1STXnPfk9olRh/MF1qA/7MUxn8p+nPxSfU3fX/FpcVoPVmQUuOSravpndKuGa0S6UdH45bFjT/NWNrQUM89GkWs2Mg2eoJybnd8w==
-X-Gm-Message-State: AOJu0YyDtGhCntiLkHT3DyLlfY69fFdhE6S/bIvZcNX0BnFmcTJzaBZa
- DbzpALT7SjhpJhoEPdsqdROVV1bBnO2hZ92FPdoLEtFyPhN21fXyNbVKK1HM9htSZNBvtws34cR
- LUNHHSrDVp9fCWr7aljpqLZKmICRBNjBzd0P6tNwP3S8Ii9bAAV9tvdyDkLqNPBZ1e+3HBOU=
-X-Received: by 2002:a50:9e66:0:b0:5af:5538:e03e with SMTP id
- 4fb4d7f45d1cf-5b017787918mr5541707a12.9.1722202457816; 
- Sun, 28 Jul 2024 14:34:17 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGlrhgsckcZ/1k+Fni2/7VNMn1yQRdmmrh77wErdlWWuBzh5jD3hD7UZ/IKQ/7JFJmdsS3ghw==
-X-Received: by 2002:a50:9e66:0:b0:5af:5538:e03e with SMTP id
- 4fb4d7f45d1cf-5b017787918mr5541695a12.9.1722202457201; 
- Sun, 28 Jul 2024 14:34:17 -0700 (PDT)
-Received: from pollux.localdomain ([2a02:810d:4b3f:ee94:1880:4e6c:1065:fb6a])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5ac63b59cb0sm4836024a12.45.2024.07.28.14.34.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 28 Jul 2024 14:34:16 -0700 (PDT)
-Date: Sun, 28 Jul 2024 23:34:14 +0200
-From: Danilo Krummrich <dakr@redhat.com>
-To: Jason Gunthorpe <jgg@nvidia.com>
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2045.outbound.protection.outlook.com [40.107.220.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 54C4910E00E
+ for <nouveau@lists.freedesktop.org>; Sun, 28 Jul 2024 23:04:57 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=fWCTaTl/tutm2yzvFsVOagKfgLtCENP2v9T54TgmxA3NWaFr6kKMH6pMXn07G4/9dz0OkuZCxnYZ+rHh5BCprlSrM37YNb40Yp/4dCggju6jwoFg6HFtZlbzXKHthqeg8QZWl2Ukz95tNmJ3olev01fV+jymqyBmyItIegpyBR+OmACMjGsX9oSTA1oyxjrfnaLbPLd7gyWdMGutk7LYdDpaq3qsUHQtpm+WUPJWPngf2Lz8IRytQJCp6kJXIEEYizKn/GSVdQXM/wlQU6OCyJ2A5mQu3rnsp1USfHu2/Nuf8a0WJWmXSG4cSNPa9vy+sjCUIUNmBv/WzhvsBQkXUA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=l6OSHo4gbPZk0lpW616leDC7VRI4yRI+VoAHukrE608=;
+ b=mQGVfLnRZC2lMj+1xVaN0vK4nlHokR/TuuVooO75RTdLQqhGwHXHcubthOQE8UX+SRQT/y2vOZKJg1oBrU5PTXXJHRs352B0rJPEsWp6ljLB/wPtxzn8nYhuKS7iAAty5RaR0JOYAL32CZP2OLpArseStJxocYCLZuV1jMrlSUs9OO8FNGo8Ik8Fj1e/rbb6v1n+IfYWtuF4ZnT0RRDdaLflc0/1RVcNGYgt9Um1wEjfoFOfHH+CJEC3w3c+UXq7blkpD6jmsgVjwCWbu6sClY33UFxWf2niJJOYqhy/PW6EhzkBQMqW4p22RyuwCepHe4uz9R6XK5ng++clL7zm1g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=l6OSHo4gbPZk0lpW616leDC7VRI4yRI+VoAHukrE608=;
+ b=W4FEjUeRzHrCP9QdX3m6SGpPpjWYElO97QyPBrzgT/JYLxRv2iNp1UY7Hqz7GqdM+uMb2lPzfEx4hbbZ8sf0K0sSkrARgsWf7t88Impg+jh9e43pVU/GrWaibVzkXvuwJ7dlnKvQAI8Vky/R1T21pux5pCV7ORVJw2FhwvZJdtMmHNk+0UjAMrriVOvTNBb5PMdEtoqDCPmK+/oPkAgoNG3slsmKfNlMthpqdGpX7p5mK4glwzheEcKxQH+g8MB1mPIEIDyCwWBAhp9ueLGDs9bXPRFuf30AR+OxmGBPCTiIMtbLIreMgv2WBLuJli2kh3OMhf/5j3jJRJSOmWvowg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from DM6PR12MB3849.namprd12.prod.outlook.com (2603:10b6:5:1c7::26)
+ by IA0PR12MB8696.namprd12.prod.outlook.com (2603:10b6:208:48f::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7807.23; Sun, 28 Jul
+ 2024 23:04:53 +0000
+Received: from DM6PR12MB3849.namprd12.prod.outlook.com
+ ([fe80::c296:774b:a5fc:965e]) by DM6PR12MB3849.namprd12.prod.outlook.com
+ ([fe80::c296:774b:a5fc:965e%4]) with mapi id 15.20.7807.026; Sun, 28 Jul 2024
+ 23:04:53 +0000
+Date: Sun, 28 Jul 2024 20:04:52 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Danilo Krummrich <dakr@redhat.com>
 Cc: Ben Skeggs <bskeggs@nvidia.com>, nouveau@lists.freedesktop.org
 Subject: Re: [PATCH v2 02/37] drm/nouveau: handle pci/tegra drm_dev_{alloc,
  register} from common code
-Message-ID: <Zqa5VovShzF1lGC2@pollux.localdomain>
+Message-ID: <20240728230452.GZ3371438@nvidia.com>
 References: <20240704183721.25778-1-bskeggs@nvidia.com>
  <20240704183721.25778-3-bskeggs@nvidia.com>
  <Zo1UP-aapSyf2Rnj@pollux>
@@ -78,12 +58,84 @@ References: <20240704183721.25778-1-bskeggs@nvidia.com>
  <ZqPDkZ2t5MjXX4Sx@cassiopeiae>
  <a6b13446-d903-4a94-9afc-ce04b41d5dbf@nvidia.com>
  <20240728181308.GA3043865@nvidia.com>
-MIME-Version: 1.0
-In-Reply-To: <20240728181308.GA3043865@nvidia.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+ <Zqa5VovShzF1lGC2@pollux.localdomain>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+In-Reply-To: <Zqa5VovShzF1lGC2@pollux.localdomain>
+X-ClientProxiedBy: BL1PR13CA0082.namprd13.prod.outlook.com
+ (2603:10b6:208:2b8::27) To DM6PR12MB3849.namprd12.prod.outlook.com
+ (2603:10b6:5:1c7::26)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6PR12MB3849:EE_|IA0PR12MB8696:EE_
+X-MS-Office365-Filtering-Correlation-Id: ef109fe4-2517-486a-0c09-08dcaf59b0bc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?re0cM67uzA/kuJHyPDsTXFq9YtUMLCLG44hKUKR33A6xFVRKmpQD+OGgvF/t?=
+ =?us-ascii?Q?ZMWeZTb3yGRv5d3yPGEPFItglOvlv8uJtFousl7HPdMzpmKryBMsGwAkS/9o?=
+ =?us-ascii?Q?60v7zUc+qpZd7sN7hsBglix8a/l73pVK5vmCCINYaI9xjYr0NsVvgjxLoCKT?=
+ =?us-ascii?Q?eSPpVD3y4BzK/GjzOakYbLSy8bws/0ZtffbUk6i0LdseTZ5c3xcCOcQyrnSj?=
+ =?us-ascii?Q?IqgEjOYwmmaWeP2BVLgbITjC3e9nDi67E4fmI0dlojwymbl5jTCOBG4mveK2?=
+ =?us-ascii?Q?T3Ux/ZLcktuTaSItj6pSjHLqVmBn65IvYYC9bT/3phvCakXj9u7PNVwIDeKC?=
+ =?us-ascii?Q?motH0Afpk4PYVIOtB7B5Gxa047pvPMpy0fY007J1J3ZQaupwvq96E9kj9qdX?=
+ =?us-ascii?Q?kg25XxDBAt8S/MjohKvdnxpHO346CQHPC/ee6XADFkZbNLk5dOLjNZxScPOg?=
+ =?us-ascii?Q?Jwi+nebbVjXmtfyvJApzQnQj9e9cwoyx2vVjcytsDc6C60PNNDPyTij6mCEu?=
+ =?us-ascii?Q?ECX/1ebB9b1SGBjhSFS+MLCjpgEk6/USU7vFnh4jqoP2Jp9ZMKMF3ORa0aoi?=
+ =?us-ascii?Q?rdcRDRuGhe0mhqv19/HzAIPyDs+/J8RzHO3rTC5tjrf5vJVT1BGdwYl4Nyvp?=
+ =?us-ascii?Q?yEY+/p6egeTtMEravjdSHN4tQxYNr+C3kr5W2DzyPOBgkQrZXfYscAoQy1AI?=
+ =?us-ascii?Q?BBiuHSCdecN7xseMVoDPHhVDItNvkCruD2K0zOU6jKCbgV9aIgLIcDZbRf1u?=
+ =?us-ascii?Q?wMSK2rUwpC84JwX6PocbIfLnvbDxEHlZnxoj4LAVwTK4OxsKTgnyNjeDvM7Y?=
+ =?us-ascii?Q?W6fsziN4fKY/e9gmcDXYfRavt2HyRh42sl7lTA3NGSdF8B42bUy8s0++mAuF?=
+ =?us-ascii?Q?9+EIbJfeGpYjWatRJ0FXsxUbS1v7k+YI06p+CFyLKeKoKVbOdiYIOZ7PHyUa?=
+ =?us-ascii?Q?f+phsCXC1x1j7HTn9KzfjPyw+wv9jlSFudAzFeihuthpBkUFHNn78uNj5Yz5?=
+ =?us-ascii?Q?fQzU2JDMLyNE/b3YcZ9tGtM+MC5VXCwFo2CAyii7SwzaGeH8h3MAc7fw9RVc?=
+ =?us-ascii?Q?QtN5Uh+6pyV6QT387nti7gl/IxR6+4ux8sDjbwLRRHrnlBSx7ji+Sx7Bt+k4?=
+ =?us-ascii?Q?mxAMx1Ceplmdw+cF+VBsutEbF1gVOPyHlVWHnvilNLfbR5K9T5q5hXUj+341?=
+ =?us-ascii?Q?Qk0PyBoO4yROjgn8IhFBrf2xrxtc9nNNxtLU1qho81zp6SGUrAjSOUKnsd8r?=
+ =?us-ascii?Q?c62Ktc0QBBgmi9lO3BaaB8Al4HQ6kTDzy2evnAzwYw9ZVuRSerVv3c6nj9r/?=
+ =?us-ascii?Q?uGc+KIK7tB8Rh3jo1hDt0KrrxP6XZEITHYPN0uDVfW0Owg=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM6PR12MB3849.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5+42FNMewbrZtBKMA4pkJbPlaiu85TaCQfv/YNpzyxhRGhO9AgX08ebOKPTx?=
+ =?us-ascii?Q?yyNJYcjng8g31U1xqz8enqT+9sFPhTiTTrfvSLsDHl2c3kmLjyRuznPCKreZ?=
+ =?us-ascii?Q?qPOlmukjQ2Yu7xIJxrnJPhUKX8UsinHy/pgAY37X0KkvAffZW/lKkxCTROzN?=
+ =?us-ascii?Q?U7dZYRNzcdDdzyqZeGj+YUvmg0qf059vSXCf2afsRDsXBg5SwbVMigPgP6iy?=
+ =?us-ascii?Q?n6uwGa6dmV/m5AssAhHphplEC5wk1tSTC91OUQSSdONExm30W3oVelNDT6Wv?=
+ =?us-ascii?Q?QXSuKEqkC+KM+wlqg+ivTcojF4p05dk2ohAOulK3ZlsbOGwPVgG8kDuaUO4i?=
+ =?us-ascii?Q?bTn9yws55kN7WbKknel9hNMQVOSeeec7VhIb0g29FoA7im08EYntB1QE/Sli?=
+ =?us-ascii?Q?gcogQKFLYiwtxcQg0lRsaElMTduP7rCCZml2+4ugzCw7MRffrrdGs9D9cGYm?=
+ =?us-ascii?Q?cw31wnaiUQlryQ5epQ7S9sHdtZbvO78kxRuTbVAK2tDILDefCER2SRTxZGSE?=
+ =?us-ascii?Q?wZjCv1yXSAlC5PXvbK/qhViZHpf7Nib7VWieuUl95B87ibFD+fHt0XEaZED+?=
+ =?us-ascii?Q?ll60fNFpUVbJVJwHoEND0AfkhxpBK8TnPw782hJ0pEUb9xSt6fj5u28G6Yi6?=
+ =?us-ascii?Q?xsqAuu4ci9feUsBJYw0d4rjxKNkIWRj6GPufijieIqjTv3a5hSnwuxSdShtx?=
+ =?us-ascii?Q?VzUed/se8xMgXV2LWOOylxu3HcmkSipmAJIGqTtzUZmhXTo0hpWO5CAXzYic?=
+ =?us-ascii?Q?9xccY11zNQeynMK24QIihkVpAOdO7vRt3P78bycAgJ4f9HYDhp7UyuxtqrXs?=
+ =?us-ascii?Q?MJ65rnuBadhpw+74QDWWB+HD1+tpV6+UKTkXnMAxc6pn7jMY06qnq6FIb791?=
+ =?us-ascii?Q?lAn88/KDE+H+A1a2EGm43pBdYp49Ap44uf8cIb+lGoPR2cMrWkhB5j33NZWw?=
+ =?us-ascii?Q?rmVT9o54P/gV4g4m6WL9d2SPwqI9aRxss4xZkWnYUiMj8w2AXrZ+SCsQ7gMk?=
+ =?us-ascii?Q?oyl+mSRJJBR2FCAXkjubiIUCOIh1tZS7ErMI7jpCUD24WYfU9FhcWGK4oV7U?=
+ =?us-ascii?Q?PfAYlxunGV0CZMuoplzDVM7kWPMHvd9yT5TTK17+SL/qA1gLfDa41xaJQnX0?=
+ =?us-ascii?Q?wwEp0IJW/cQ7dLRRWHbA0/Su4cD6Wu4FYzZ25X8hKmwtgit8XJuau+c9Z3c4?=
+ =?us-ascii?Q?u5sHvGuPIhYlxo5ZMBF3SQcgHIN4DIgXufo8tKCBBxEP7Gw/n50MO1G6NrAZ?=
+ =?us-ascii?Q?nbr5cbEzdXcDiKHImr/Iz0C9KOSzGh1aAVj6/E1NnxLi8J67XQKmeAhO3Q+G?=
+ =?us-ascii?Q?9xXp2D/J9Op0ZsFWz4ChS0+gsCIcXEJhgU9YcMSLbasvYE9q9ZhF+rSHY/5N?=
+ =?us-ascii?Q?vj44Cip1pspd92Su8fFmgkIdFbdnqCqIUO5Zh610JIS9T9g6PfTk5dlbMiZh?=
+ =?us-ascii?Q?vFmmaE9w8PvLsmnFJBXrcZbsIend3kpRu9pnHVjCXSa/f8xwoS8Ki/ZTQ7WM?=
+ =?us-ascii?Q?QjneZFIieVLTIDfqAFm/16B9emgDYKzvqJUy5rZh12Shd0NUUta3zxBzaXfN?=
+ =?us-ascii?Q?Abdbm8VMs6E0RPW/BCs=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ef109fe4-2517-486a-0c09-08dcaf59b0bc
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3849.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2024 23:04:53.2858 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: V+V0D7GUpYsDIVXNQVzZYMIgVGG/TZuNBppBdXJNOu3fc0BBFlYJNYxVW92oyE6g
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8696
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,67 +150,39 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Jul 28, 2024 at 03:13:08PM -0300, Jason Gunthorpe wrote:
-> On Fri, Jul 26, 2024 at 11:07:19PM +1000, Ben Skeggs wrote:
-> 
-> > > Right, I think I took that too literally.
-> > > 
-> > > The lifetime of the DRM device (or more precisely one of its references) is
-> > > bound to the binding between the parent device and its corresponding driver.
-> > > 
-> > > But the lifetime of the parent device itself is bound to the DRM device.
-> > > 
-> > > So, yes this doesn't work, and proves the point that initializing the DRM device
-> > > with the parent's parent is just a workaround.
-> > 
-> > You're greatly overstating the "complexity" that's added here. It's a minor
-> > inconvenience that doesn't require much code at all to implement, and is
-> > essentially irrelevant outside of module load/unload.
-> > 
-> > I agree it's not ideal, and userspace should gain auxiliary bus support
-> > before a new driver implements a similar architecture, but it's really not
-> > that big a deal.
-> 
-> Ben asked me to share what other places are doing this stuff.
-> 
-> To recap, when converting a legacy driver into an aux split we've
-> found in several places that there is existing userspace that has
-> hardwired certain sysfs paths. ie an assumption that an infiniband
-> device appears under the sys/../pci/ directory.
-> 
-> Argubaly this userspace is not in good shape, but we have to preserve
-> it.
-> 
-> So the approach is to make the sysfs visible elements tied to the
-> original sysfs location (ie the pci device) and continue to use aux
-> otherwise for discovery, probing and tying subsystems together.
-> 
-> Obviously you have to be careful about the difference between the
-> sysfs parent (for owning a subordinate struct device, sysfs files,
-> etc) and the probe time parent (for owning devres, and other tasks)
+On Sun, Jul 28, 2024 at 11:34:14PM +0200, Danilo Krummrich wrote:
+> On Sun, Jul 28, 2024 at 03:13:08PM -0300, Jason Gunthorpe wrote:
 
-I think we're on the same page with all that. As clarified in [1], that's not a
-big concern, I was referring to the changes required to integrate the auxbus
-stuff.
+> I think we're on the same page with all that. As clarified in [1], that's not a
+> big concern, I was referring to the changes required to integrate the auxbus
+> stuff.
 
-[1] https://lore.kernel.org/nouveau/ZqRTY1GjPE6CZqL3@pollux.localdomain/
+Well, I see this thread having the realization that things are not
+setup proeprly to use devres. To be fair devres creates almost as many
+bugs as it solves :\ cleanup.h is possibly a better option for most
+simple things and harder to misuse...
 
+> > normal (though most subsystems would call that unregister, not put)
 > 
-> We've been fortunate enough that subsystems so far have had a clean
-> enough setup that this is easy enough to do. It sounds like DRM is the
-> same if it just requires calling  a put in .remove() - that is pretty
+> A DRM device is reference counted and can out-live the driver, hence the
+> drm_dev_put() call in .remove(). There is also a special drm_dev_unplug()
+> function, which does not only unregister the DRM device, but also sets a guard
+> to be able prevent HW accesses after the HW is accessible anymore.
 
-Yes, I already mentioned that that DRM devices should still work with this
-workaround.
+Every subsystem has a refcounted object, struct device is inherently
+refcounted. You call the thing driver calls during .remove()
+'unregister' because it is special. Once it returns the subsystem has
+to promise no more code is running in driver callbacks and the driver
+is permitted to start destroying anything it might need to use when
+processing any callbacks.
 
-> normal (though most subsystems would call that unregister, not put)
+This is really tricky and people routinely misunderstand the
+requirements and get this wrong. The consequence is UAF problems in
+obscure cases with unbind races (that few actually care about), but
+getting it right starts with labeling things properly :)
 
-A DRM device is reference counted and can out-live the driver, hence the
-drm_dev_put() call in .remove(). There is also a special drm_dev_unplug()
-function, which does not only unregister the DRM device, but also sets a guard
-to be able prevent HW accesses after the HW is accessible anymore.
+We went through this long ago in RDMA because someone actually had a
+usecase of live driver unbind, making that work reliably under a full
+active work load took some thoughtfulness.
 
-> 
-> Jason
-> 
-
+Jason
