@@ -2,42 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5650FCBABCB
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3C8ECBACA0
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9522410EB11;
-	Sat, 13 Dec 2025 12:41:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8888110EAA7;
+	Sat, 13 Dec 2025 12:41:09 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="AnjlNmbB";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="gE7m1eTi";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 38C5410E073
- for <nouveau@lists.freedesktop.org>; Tue, 30 Jul 2024 14:44:59 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E92E810E073
+ for <nouveau@lists.freedesktop.org>; Tue, 30 Jul 2024 14:44:29 +0000 (UTC)
 Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 46U8uoVk029471;
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 46U8v0fb029572;
  Tue, 30 Jul 2024 14:43:25 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- wH7k78DzN2skaTkUYf38VIuxftVRI/yXdAfH8Liu0sc=; b=AnjlNmbB/TepJ/TB
- 1vvmb8F21rr7eo4d4iYO5LyeaSMvDsI7AfD06SojfJkvu4BpvK6eKdSLi0PUzOJC
- NFJrydV+w+n+7pSGCYSThwJP7Zy8eCvV2E7GdTiVgPd0LqF00dF/JII24K0xjGLb
- rZthQxtbqT+mOMvPXZYw0tU7O8mFwhzAA/nyHgpzKyteKcYoeKhbfXxHRI/ygV5m
- Br23DLx21qfN2GUxu/tTPEn2BoyfylH0RbazBLRKwXXVdFGCv7lpRe3MkNYFidB1
- 2Ygd0sPVxsLXBalgR8ii2yTV/xw7aExHxGEfArceZqS7QU7pnGzE5FvecXEpjTNF
- /b2qrg==
-Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com
+ l/pN3Orktibi2Gx1TE8d0CGoiC4jjvEU3fPqJwbBNB8=; b=gE7m1eTiqLRqrVMm
+ u6uewvmNoudUNhSl7Lckvaa4rciwaYkuwoL7WsF+9+ch5/SDxLks2+9kwres0+s2
+ qLEoJjfnASkjSsUd3f4FgPWjqC8Cv70k+2MfF5J06VORF2fveT0RCZ3xlGoDzgGP
+ OXGWkI4tQ9zOIrbQ/aMunwsqHwDqrHx5AQ2pjGMDKacR5nXgqE8XwwHb9YGYbO31
+ N4wdt4ayQKmFbUjtR1RfD5b0gwY5I2fb05c8eAPA7tuQv/+SzUCRN4ciq1iDTFI2
+ US40tLyRytR4tXHWyTCZyLV2DFlQxMMLTBrGLmZMQxLEr4PZB0+gmNJsHCxgHH/x
+ bYpmnQ==
+Received: from nalasppmta04.qualcomm.com (Global_NAT1.qualcomm.com
  [129.46.96.20])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 40pw4411vf-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 40pw4411vh-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 30 Jul 2024 14:43:24 +0000 (GMT)
+ Tue, 30 Jul 2024 14:43:25 +0000 (GMT)
 Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com
  [10.47.209.196])
- by NALASPPMTA01.qualcomm.com (8.17.1.19/8.17.1.19) with ESMTPS id
- 46UEhNwu016075
+ by NALASPPMTA04.qualcomm.com (8.17.1.19/8.17.1.19) with ESMTPS id
+ 46UEhNvw031087
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Tue, 30 Jul 2024 14:43:23 GMT
 Received: from [169.254.0.1] (10.49.16.6) by nalasex01a.na.qualcomm.com
@@ -45,12 +45,12 @@ Received: from [169.254.0.1] (10.49.16.6) by nalasex01a.na.qualcomm.com
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Tue, 30 Jul
  2024 07:43:23 -0700
 From: Jeff Johnson <quic_jjohnson@quicinc.com>
-Date: Tue, 30 Jul 2024 07:43:20 -0700
-Subject: [PATCH 3/5] cpufreq: powerpc: add missing MODULE_DESCRIPTION() macros
+Date: Tue, 30 Jul 2024 07:43:21 -0700
+Subject: [PATCH 4/5] fsi: add missing MODULE_DESCRIPTION() macros
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20240730-module_description_orphans-v1-3-7094088076c8@quicinc.com>
+Message-ID: <20240730-module_description_orphans-v1-4-7094088076c8@quicinc.com>
 References: <20240730-module_description_orphans-v1-0-7094088076c8@quicinc.com>
 In-Reply-To: <20240730-module_description_orphans-v1-0-7094088076c8@quicinc.com>
 To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Andrew Morton
@@ -85,8 +85,8 @@ X-ClientProxiedBy: nalasex01a.na.qualcomm.com (10.47.209.196) To
 X-QCInternal: smtphost
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
  signatures=585085
-X-Proofpoint-GUID: 2umuwhp08lL3Mx5heA5nQNob1WBmBzpV
-X-Proofpoint-ORIG-GUID: 2umuwhp08lL3Mx5heA5nQNob1WBmBzpV
+X-Proofpoint-GUID: oE1-ugv7m5vwi_BkglOwMxdiOFX5wijr
+X-Proofpoint-ORIG-GUID: oE1-ugv7m5vwi_BkglOwMxdiOFX5wijr
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
  definitions=2024-07-30_12,2024-07-30_01,2024-05-17_01
@@ -111,82 +111,99 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-With ARCH=powerpc, make allmodconfig && make W=1 C=1 reports:
-WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/cpufreq/ppc-cbe-cpufreq.o
-WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/cpufreq/powernv-cpufreq.o
+make allmodconfig && make W=1 C=1 reports:
+WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/fsi/fsi-core.o
+WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/fsi/fsi-master-hub.o
+WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/fsi/fsi-master-aspeed.o
+WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/fsi/fsi-master-gpio.o
+WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/fsi/fsi-master-ast-cf.o
+WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/fsi/fsi-scom.o
 
-Add the missing invocation of the MODULE_DESCRIPTION() macro to all
-files which have a MODULE_LICENSE().
+Add the missing invocations of the MODULE_DESCRIPTION() macro, and fix the
+copy/paste of the module description comment in fsi-master-ast-cf.c.
 
-This includes three additional files which, although they did not
-produce a warning with the powerpc allmodconfig configuration, may
-cause this warning with specific options enabled in the kernel
-configuration.
-
-Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
-Acked-by: Michael Ellerman <mpe@ellerman.id.au>
+Reviewed-by: Eddie James <eajames@linux.ibm.com>
 Signed-off-by: Jeff Johnson <quic_jjohnson@quicinc.com>
 ---
- drivers/cpufreq/maple-cpufreq.c   | 1 +
- drivers/cpufreq/pasemi-cpufreq.c  | 1 +
- drivers/cpufreq/pmac64-cpufreq.c  | 1 +
- drivers/cpufreq/powernv-cpufreq.c | 1 +
- drivers/cpufreq/ppc_cbe_cpufreq.c | 1 +
- 5 files changed, 5 insertions(+)
+ drivers/fsi/fsi-core.c          | 1 +
+ drivers/fsi/fsi-master-aspeed.c | 1 +
+ drivers/fsi/fsi-master-ast-cf.c | 3 ++-
+ drivers/fsi/fsi-master-gpio.c   | 1 +
+ drivers/fsi/fsi-master-hub.c    | 1 +
+ drivers/fsi/fsi-scom.c          | 1 +
+ 6 files changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/cpufreq/maple-cpufreq.c b/drivers/cpufreq/maple-cpufreq.c
-index f9306410a07f..690da85c4865 100644
---- a/drivers/cpufreq/maple-cpufreq.c
-+++ b/drivers/cpufreq/maple-cpufreq.c
-@@ -238,4 +238,5 @@ static int __init maple_cpufreq_init(void)
- module_init(maple_cpufreq_init);
- 
- 
-+MODULE_DESCRIPTION("cpufreq driver for Maple 970FX/970MP boards");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/cpufreq/pasemi-cpufreq.c b/drivers/cpufreq/pasemi-cpufreq.c
-index ee925b53b6b9..5fc9cb480516 100644
---- a/drivers/cpufreq/pasemi-cpufreq.c
-+++ b/drivers/cpufreq/pasemi-cpufreq.c
-@@ -269,5 +269,6 @@ static void __exit pas_cpufreq_exit(void)
- module_init(pas_cpufreq_init);
- module_exit(pas_cpufreq_exit);
- 
-+MODULE_DESCRIPTION("cpufreq driver for PA Semi PWRficient");
- MODULE_LICENSE("GPL");
- MODULE_AUTHOR("Egor Martovetsky <egor@pasemi.com>, Olof Johansson <olof@lixom.net>");
-diff --git a/drivers/cpufreq/pmac64-cpufreq.c b/drivers/cpufreq/pmac64-cpufreq.c
-index 2cd2b06849a2..9d3fe36075f8 100644
---- a/drivers/cpufreq/pmac64-cpufreq.c
-+++ b/drivers/cpufreq/pmac64-cpufreq.c
-@@ -671,4 +671,5 @@ static int __init g5_cpufreq_init(void)
- module_init(g5_cpufreq_init);
- 
- 
-+MODULE_DESCRIPTION("cpufreq driver for SMU & 970FX based G5 Macs");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/cpufreq/powernv-cpufreq.c b/drivers/cpufreq/powernv-cpufreq.c
-index 50c62929f7ca..bc55723b4d87 100644
---- a/drivers/cpufreq/powernv-cpufreq.c
-+++ b/drivers/cpufreq/powernv-cpufreq.c
-@@ -1160,5 +1160,6 @@ static void __exit powernv_cpufreq_exit(void)
+diff --git a/drivers/fsi/fsi-core.c b/drivers/fsi/fsi-core.c
+index 46ac5a8beab7..e2e1e9df6115 100644
+--- a/drivers/fsi/fsi-core.c
++++ b/drivers/fsi/fsi-core.c
+@@ -1444,5 +1444,6 @@ static void fsi_exit(void)
  }
- module_exit(powernv_cpufreq_exit);
- 
-+MODULE_DESCRIPTION("cpufreq driver for IBM/OpenPOWER powernv systems");
+ module_exit(fsi_exit);
+ module_param(discard_errors, int, 0664);
++MODULE_DESCRIPTION("FSI core driver");
  MODULE_LICENSE("GPL");
- MODULE_AUTHOR("Vaidyanathan Srinivasan <svaidy at linux.vnet.ibm.com>");
-diff --git a/drivers/cpufreq/ppc_cbe_cpufreq.c b/drivers/cpufreq/ppc_cbe_cpufreq.c
-index 5ee4c7bfdcc5..98595b3ea13f 100644
---- a/drivers/cpufreq/ppc_cbe_cpufreq.c
-+++ b/drivers/cpufreq/ppc_cbe_cpufreq.c
-@@ -168,5 +168,6 @@ static void __exit cbe_cpufreq_exit(void)
- module_init(cbe_cpufreq_init);
- module_exit(cbe_cpufreq_exit);
+ MODULE_PARM_DESC(discard_errors, "Don't invoke error handling on bus accesses");
+diff --git a/drivers/fsi/fsi-master-aspeed.c b/drivers/fsi/fsi-master-aspeed.c
+index b0b624c3717b..6f5e1bdf7e40 100644
+--- a/drivers/fsi/fsi-master-aspeed.c
++++ b/drivers/fsi/fsi-master-aspeed.c
+@@ -670,4 +670,5 @@ static struct platform_driver fsi_master_aspeed_driver = {
+ };
  
-+MODULE_DESCRIPTION("cpufreq driver for Cell BE processors");
+ module_platform_driver(fsi_master_aspeed_driver);
++MODULE_DESCRIPTION("FSI master driver for AST2600");
  MODULE_LICENSE("GPL");
- MODULE_AUTHOR("Christian Krafft <krafft@de.ibm.com>");
+diff --git a/drivers/fsi/fsi-master-ast-cf.c b/drivers/fsi/fsi-master-ast-cf.c
+index f8c776ce1b56..a4c37ff8edd6 100644
+--- a/drivers/fsi/fsi-master-ast-cf.c
++++ b/drivers/fsi/fsi-master-ast-cf.c
+@@ -1,7 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ // Copyright 2018 IBM Corp
+ /*
+- * A FSI master controller, using a simple GPIO bit-banging interface
++ * A FSI master based on Aspeed ColdFire coprocessor
+  */
+ 
+ #include <linux/crc4.h>
+@@ -1438,5 +1438,6 @@ static struct platform_driver fsi_master_acf = {
+ };
+ 
+ module_platform_driver(fsi_master_acf);
++MODULE_DESCRIPTION("A FSI master based on Aspeed ColdFire coprocessor");
+ MODULE_LICENSE("GPL");
+ MODULE_FIRMWARE(FW_FILE_NAME);
+diff --git a/drivers/fsi/fsi-master-gpio.c b/drivers/fsi/fsi-master-gpio.c
+index 10fc344b6b22..f761344f4873 100644
+--- a/drivers/fsi/fsi-master-gpio.c
++++ b/drivers/fsi/fsi-master-gpio.c
+@@ -892,4 +892,5 @@ static struct platform_driver fsi_master_gpio_driver = {
+ };
+ 
+ module_platform_driver(fsi_master_gpio_driver);
++MODULE_DESCRIPTION("A FSI master controller, using a simple GPIO bit-banging interface");
+ MODULE_LICENSE("GPL");
+diff --git a/drivers/fsi/fsi-master-hub.c b/drivers/fsi/fsi-master-hub.c
+index 6d8b6e8854e5..6568fed7db3c 100644
+--- a/drivers/fsi/fsi-master-hub.c
++++ b/drivers/fsi/fsi-master-hub.c
+@@ -295,4 +295,5 @@ static struct fsi_driver hub_master_driver = {
+ };
+ 
+ module_fsi_driver(hub_master_driver);
++MODULE_DESCRIPTION("FSI hub master driver");
+ MODULE_LICENSE("GPL");
+diff --git a/drivers/fsi/fsi-scom.c b/drivers/fsi/fsi-scom.c
+index 61dbda9dbe2b..411ddc018cd8 100644
+--- a/drivers/fsi/fsi-scom.c
++++ b/drivers/fsi/fsi-scom.c
+@@ -625,4 +625,5 @@ static void scom_exit(void)
+ 
+ module_init(scom_init);
+ module_exit(scom_exit);
++MODULE_DESCRIPTION("SCOM FSI Client device driver");
+ MODULE_LICENSE("GPL");
 
 -- 
 2.42.0
