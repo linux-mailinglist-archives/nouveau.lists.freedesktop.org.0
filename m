@@ -2,32 +2,32 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 929AE9422C7
-	for <lists+nouveau@lfdr.de>; Wed, 31 Jul 2024 00:25:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F9689422C8
+	for <lists+nouveau@lfdr.de>; Wed, 31 Jul 2024 00:25:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 231B310E305;
-	Tue, 30 Jul 2024 22:25:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 594E410E507;
+	Tue, 30 Jul 2024 22:25:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="i/Vr31CA";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="gn2Iq3ui";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 133A910E305
- for <nouveau@lists.freedesktop.org>; Tue, 30 Jul 2024 22:25:17 +0000 (UTC)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 050BC10E587
+ for <nouveau@lists.freedesktop.org>; Tue, 30 Jul 2024 22:25:22 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 679B362118;
- Tue, 30 Jul 2024 22:25:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2723CC32782;
- Tue, 30 Jul 2024 22:25:16 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 24E14CE125C;
+ Tue, 30 Jul 2024 22:25:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5FF2EC32782;
+ Tue, 30 Jul 2024 22:25:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
- s=korg; t=1722378316;
- bh=uBUZeQiNOQ+B0d10Mqnd3d8m385KrJCGYsMgxGoodis=;
+ s=korg; t=1722378318;
+ bh=9iTUqsAHi8/Ts9XqYULxjqGMqXRdgfCRAZda/dpn9dY=;
  h=Date:To:From:Subject:From;
- b=i/Vr31CA5FIWUkbnN6yJUNgX+xlNDQzoQOxPg5gyv9X5itIJRA1zIS+1pNFZakvG2
- Aan1mgL7v/aksbvlfGgY+tuIFCPUSz658eWClDXXbu5Gvi29iao0vkEHqCEtB/8qX0
- VnpriTQWINiDoSVDT6bjH09oOtvHJNx25kHznBbQ=
-Date: Tue, 30 Jul 2024 15:25:15 -0700
+ b=gn2Iq3uiTXN3yWjZ2pY07Rk+UmfkGqaNCplJklw9f2ozzq1HcvM5vCniLlsf/JEsX
+ UJ0fu2uC/iL3Ag/1mhhqN4XIRDjwewGTFZqY+mksoIYC/goODG9ZxSFUe8ORfRpq7c
+ k2iHqGk1XggeS8d6yCXswXWdUhkagHFWL3QG9T7M=
+Date: Tue, 30 Jul 2024 15:25:17 -0700
 To: mm-commits@vger.kernel.org, will@kernel.org, viresh.kumar@linaro.org,
  tglx@linutronix.de, rostedt@goodmis.org, rafael@kernel.org,
  ppaalanen@gmail.com, peterz@infradead.org, npiggin@gmail.com,
@@ -41,9 +41,9 @@ To: mm-commits@vger.kernel.org, will@kernel.org, viresh.kumar@linaro.org,
  alexandre.torgue@foss.st.com, quic_jjohnson@quicinc.com,
  akpm@linux-foundation.org
 From: Andrew Morton <akpm@linux-foundation.org>
-Subject: + x86-mm-add-testmmiotrace-module_description.patch added to
- mm-nonmm-unstable branch
-Message-Id: <20240730222516.2723CC32782@smtp.kernel.org>
+Subject: + cpufreq-powerpc-add-missing-module_description-macros.patch added
+ to mm-nonmm-unstable branch
+Message-Id: <20240730222518.5FF2EC32782@smtp.kernel.org>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,12 +60,12 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
 The patch titled
-     Subject: x86/mm: add testmmiotrace MODULE_DESCRIPTION()
+     Subject: cpufreq: powerpc: add missing MODULE_DESCRIPTION() macros
 has been added to the -mm mm-nonmm-unstable branch.  Its filename is
-     x86-mm-add-testmmiotrace-module_description.patch
+     cpufreq-powerpc-add-missing-module_description-macros.patch
 
 This patch will shortly appear at
-     https://git.kernel.org/pub/scm/linux/kernel/git/akpm/25-new.git/tree/patches/x86-mm-add-testmmiotrace-module_description.patch
+     https://git.kernel.org/pub/scm/linux/kernel/git/akpm/25-new.git/tree/patches/cpufreq-powerpc-add-missing-module_description-macros.patch
 
 This patch will later appear in the mm-nonmm-unstable branch at
     git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
@@ -84,15 +84,24 @@ and is updated there every 2-3 working days
 
 ------------------------------------------------------
 From: Jeff Johnson <quic_jjohnson@quicinc.com>
-Subject: x86/mm: add testmmiotrace MODULE_DESCRIPTION()
-Date: Tue, 30 Jul 2024 07:43:19 -0700
+Subject: cpufreq: powerpc: add missing MODULE_DESCRIPTION() macros
+Date: Tue, 30 Jul 2024 07:43:20 -0700
 
-Fix the following 'make W=1' warning:
+With ARCH=powerpc, make allmodconfig && make W=1 C=1 reports:
+WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/cpufreq/ppc-cbe-cpufreq.o
+WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/cpufreq/powernv-cpufreq.o
 
-WARNING: modpost: missing MODULE_DESCRIPTION() in arch/x86/mm/testmmiotrace.o
+Add the missing invocation of the MODULE_DESCRIPTION() macro to all files
+which have a MODULE_LICENSE().
 
-Link: https://lkml.kernel.org/r/20240730-module_description_orphans-v1-2-7094088076c8@quicinc.com
+This includes three additional files which, although they did not produce
+a warning with the powerpc allmodconfig configuration, may cause this
+warning with specific options enabled in the kernel configuration.
+
+Link: https://lkml.kernel.org/r/20240730-module_description_orphans-v1-3-7094088076c8@quicinc.com
 Signed-off-by: Jeff Johnson <quic_jjohnson@quicinc.com>
+Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
+Acked-by: Michael Ellerman <mpe@ellerman.id.au>
 Cc: Alexandre Torgue <alexandre.torgue@foss.st.com>
 Cc: Alistar Popple <alistair@popple.id.au>
 Cc: Andrew Jeffery <andrew@codeconstruct.com.au>
@@ -111,7 +120,6 @@ Cc: Joel Stanley <joel@jms.id.au>
 Cc: Karol Herbst <karolherbst@gmail.com>
 Cc: Masami Hiramatsu <mhiramat@kernel.org>
 Cc: Maxime Coquelin <mcoquelin.stm32@gmail.com>
-Cc: Michael Ellerman <mpe@ellerman.id.au>
 Cc: Naveen N Rao <naveen@kernel.org>
 Cc: Nicholas Piggin <npiggin@gmail.com>
 Cc: Nouveau <nouveau@lists.freedesktop.org>
@@ -121,22 +129,61 @@ Cc: Rafael J. Wysocki <rafael@kernel.org>
 Cc: Russell King <linux@armlinux.org.uk>
 Cc: Steven Rostedt (Google) <rostedt@goodmis.org>
 Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Viresh Kumar <viresh.kumar@linaro.org>
 Cc: Waiman Long <longman@redhat.com>
 Cc: Will Deacon <will@kernel.org>
 Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
 ---
 
- arch/x86/mm/testmmiotrace.c |    1 +
- 1 file changed, 1 insertion(+)
+ drivers/cpufreq/maple-cpufreq.c   |    1 +
+ drivers/cpufreq/pasemi-cpufreq.c  |    1 +
+ drivers/cpufreq/pmac64-cpufreq.c  |    1 +
+ drivers/cpufreq/powernv-cpufreq.c |    1 +
+ drivers/cpufreq/ppc_cbe_cpufreq.c |    1 +
+ 5 files changed, 5 insertions(+)
 
---- a/arch/x86/mm/testmmiotrace.c~x86-mm-add-testmmiotrace-module_description
-+++ a/arch/x86/mm/testmmiotrace.c
-@@ -144,3 +144,4 @@ static void __exit cleanup(void)
- module_init(init);
- module_exit(cleanup);
+--- a/drivers/cpufreq/maple-cpufreq.c~cpufreq-powerpc-add-missing-module_description-macros
++++ a/drivers/cpufreq/maple-cpufreq.c
+@@ -238,4 +238,5 @@ bail_noprops:
+ module_init(maple_cpufreq_init);
+ 
+ 
++MODULE_DESCRIPTION("cpufreq driver for Maple 970FX/970MP boards");
  MODULE_LICENSE("GPL");
-+MODULE_DESCRIPTION("Test module for mmiotrace");
+--- a/drivers/cpufreq/pasemi-cpufreq.c~cpufreq-powerpc-add-missing-module_description-macros
++++ a/drivers/cpufreq/pasemi-cpufreq.c
+@@ -269,5 +269,6 @@ static void __exit pas_cpufreq_exit(void
+ module_init(pas_cpufreq_init);
+ module_exit(pas_cpufreq_exit);
+ 
++MODULE_DESCRIPTION("cpufreq driver for PA Semi PWRficient");
+ MODULE_LICENSE("GPL");
+ MODULE_AUTHOR("Egor Martovetsky <egor@pasemi.com>, Olof Johansson <olof@lixom.net>");
+--- a/drivers/cpufreq/pmac64-cpufreq.c~cpufreq-powerpc-add-missing-module_description-macros
++++ a/drivers/cpufreq/pmac64-cpufreq.c
+@@ -671,4 +671,5 @@ static int __init g5_cpufreq_init(void)
+ module_init(g5_cpufreq_init);
+ 
+ 
++MODULE_DESCRIPTION("cpufreq driver for SMU & 970FX based G5 Macs");
+ MODULE_LICENSE("GPL");
+--- a/drivers/cpufreq/powernv-cpufreq.c~cpufreq-powerpc-add-missing-module_description-macros
++++ a/drivers/cpufreq/powernv-cpufreq.c
+@@ -1160,5 +1160,6 @@ static void __exit powernv_cpufreq_exit(
+ }
+ module_exit(powernv_cpufreq_exit);
+ 
++MODULE_DESCRIPTION("cpufreq driver for IBM/OpenPOWER powernv systems");
+ MODULE_LICENSE("GPL");
+ MODULE_AUTHOR("Vaidyanathan Srinivasan <svaidy at linux.vnet.ibm.com>");
+--- a/drivers/cpufreq/ppc_cbe_cpufreq.c~cpufreq-powerpc-add-missing-module_description-macros
++++ a/drivers/cpufreq/ppc_cbe_cpufreq.c
+@@ -168,5 +168,6 @@ static void __exit cbe_cpufreq_exit(void
+ module_init(cbe_cpufreq_init);
+ module_exit(cbe_cpufreq_exit);
+ 
++MODULE_DESCRIPTION("cpufreq driver for Cell BE processors");
+ MODULE_LICENSE("GPL");
+ MODULE_AUTHOR("Christian Krafft <krafft@de.ibm.com>");
 _
 
 Patches currently in -mm which might be from quic_jjohnson@quicinc.com are
