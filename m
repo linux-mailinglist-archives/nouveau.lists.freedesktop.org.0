@@ -2,48 +2,52 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1104A9422CF
-	for <lists+nouveau@lfdr.de>; Wed, 31 Jul 2024 00:25:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF1DB94327B
+	for <lists+nouveau@lfdr.de>; Wed, 31 Jul 2024 16:54:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BA8A510E35A;
-	Tue, 30 Jul 2024 22:25:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7121B10E63C;
+	Wed, 31 Jul 2024 14:54:07 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="xxdL98+v";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dYuMT6jt";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2E52F10E59A
- for <nouveau@lists.freedesktop.org>; Tue, 30 Jul 2024 22:25:29 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9245210E63C
+ for <nouveau@lists.freedesktop.org>; Wed, 31 Jul 2024 14:54:06 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id EE2F9CE10CA;
- Tue, 30 Jul 2024 22:25:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 317F5C4AF0B;
- Tue, 30 Jul 2024 22:25:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
- s=korg; t=1722378326;
- bh=CAXc59kovpfAyb1WoSdQ1pSUWTz66MK9TMoxGDU1Pfc=;
- h=Date:To:From:Subject:From;
- b=xxdL98+v3c+LcXnEdSp8lSYKVMYkEwqd6ZlT10/pu6+N2VPgTHXQg428EZbLtU/nu
- g9yipl/Pgr+YlqJuthqQgZuNTkhwLZlMfHgyU3FWjxuKkPeqxjryCI6eek4lasa1OE
- o70Mp7lWQ8M98RYARv7zHuMvfGw2WMlUgD1Ydklc=
-Date: Tue, 30 Jul 2024 15:25:25 -0700
-To: mm-commits@vger.kernel.org, will@kernel.org, viresh.kumar@linaro.org,
- tglx@linutronix.de, rostedt@goodmis.org, rafael@kernel.org,
- ppaalanen@gmail.com, peterz@infradead.org, npiggin@gmail.com,
- nouveau@lists.freedesktop.org, naveen@kernel.org, mpe@ellerman.id.au,
- mingo@redhat.com, mhiramat@kernel.org, mcoquelin.stm32@gmail.com,
- luto@kernel.org, longman@redhat.com, linux@armlinux.org.uk,
- karolherbst@gmail.com, joel@jms.id.au, jk@ozlabs.org, hpa@zytor.com,
- gregkh@linuxfoundation.org, eajames@linux.ibm.com, dave.hansen@linux.intel.com,
- christophe.leroy@csgroup.eu, bp@alien8.de, boqun.feng@gmail.com, arnd@arndb.de,
- andrew@codeconstruct.com.au, alistair@popple.id.au,
- alexandre.torgue@foss.st.com, quic_jjohnson@quicinc.com,
- akpm@linux-foundation.org
-From: Andrew Morton <akpm@linux-foundation.org>
-Subject: + locking-ww_mutex-test-add-module_description.patch added to
- mm-nonmm-unstable branch
-Message-Id: <20240730222526.317F5C4AF0B@smtp.kernel.org>
+ by dfw.source.kernel.org (Postfix) with ESMTP id D1F586244C;
+ Wed, 31 Jul 2024 14:54:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 49894C116B1;
+ Wed, 31 Jul 2024 14:54:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1722437645;
+ bh=7FlWzFKXl2kEFmcudFOjtNy8I5Xejj6oN0EEBANWZsg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=dYuMT6jtGWi2E8C9F5PVE6Yy1DD/8nWl+f50D3j4Uuyrw2QNW3Wu9ApFHhlYpNCbI
+ xAh2Y1ktZevnUJwWZgLzL0WUjK7tceo4yWRFjutb0jUl5CexofuHaC1RCfI1z/oQab
+ Ep2bLPk6vWLubnPEjq1shfSinWEyNMPh8ktqrFrO92Pg5FVvzoiTmfcf0z+lPIh+Wb
+ OYSULCK0sN0KOLWjS+eUsAp4CCUbKzIbqBquhmu27BA9tg6x6FjDqj7tviHx02KcJg
+ O8DEasp15rKeNZn9rLgQmzUOtBEZmGYTzxZM7UvBgUI+5r4hnenTazo7YmCSEmuBIc
+ VdLgq0fxPjK4A==
+Date: Wed, 31 Jul 2024 16:54:00 +0200
+From: Danilo Krummrich <dakr@kernel.org>
+To: Timur Tabi <ttabi@nvidia.com>
+Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@nvidia.com>, "airlied@gmail.com" <airlied@gmail.com>,
+ "dakr@redhat.com" <dakr@redhat.com>
+Subject: Re: [PATCH 2/2] [v6] drm/nouveau: expose GSP-RM logging buffers via
+ debugfs
+Message-ID: <ZqpQCI75gFZ315r6@pollux>
+References: <20240729230720.1305760-1-ttabi@nvidia.com>
+ <20240729230720.1305760-2-ttabi@nvidia.com>
+ <ZqgyJlXclrP19bNe@cassiopeiae>
+ <80882b5b7726af1a7a861dccb437e9cb0c84370e.camel@nvidia.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <80882b5b7726af1a7a861dccb437e9cb0c84370e.camel@nvidia.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,92 +62,169 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Tue, Jul 30, 2024 at 09:49:15PM +0000, Timur Tabi wrote:
+> > "Driver exit" is a bit of an undefined term, the closest thing is probably
+> > "driver detach" (from a device). In this case I think you actually mean
+> > "module
+> > exit" though.
+> 
+> Yes, I use driver and module interchangeably, but I guess that's not
+> accurate.
 
-The patch titled
-     Subject: locking/ww_mutex/test: add MODULE_DESCRIPTION()
-has been added to the -mm mm-nonmm-unstable branch.  Its filename is
-     locking-ww_mutex-test-add-module_description.patch
+Yes, it's not. They're entirely different things. Technically you don't even
+need a module to register a driver. And within a module you can register N
+drivers, including zero.
 
-This patch will shortly appear at
-     https://git.kernel.org/pub/scm/linux/kernel/git/akpm/25-new.git/tree/patches/locking-ww_mutex-test-add-module_description.patch
+It's just that in the typical application, you register a driver in
+module_init() and unregister it in module_exit().
 
-This patch will later appear in the mm-nonmm-unstable branch at
-    git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+> > > + * backing resources, such as logging buffers.
+> > > + */
+> > > +struct nvif_log {
+> > > +	struct list_head entry;
+> > > +	void (*shutdown)(struct nvif_log *log);
+> > > +};
+> > > +
+> > > +#define NVIF_LOGS_DECLARE(_log) \
+> > > +	struct nvif_log _log = { LIST_HEAD_INIT(_log.entry) }
+> > 
+> > If you declare this as
+> > 
+> > 	#define NVIF_LOGS_DECLARE(_log) \
+> > 		struct nvif_log _log = { LIST_HEAD_INIT(_log.entry), nvif_log_shutdown }
+> > 
+> > and change the signature of nvif_log_shutdown() to
+> > 
+> > 	static inline void nvif_log_shutdown(struct nvif_log *logs)
+> > 
+> > you can just call
+> > 
+> > 	gsp_logs.shutdown(&gsp_logs);
+> > 
+> > in nouveau_drm_exit().
+> > 
+> > Admittedly, maybe a bit too sneaky though. :)
+> 
+> gsp_logs.shutdown(&gsp_logs) -- are you sure you want this?  This is some
+> weird C++ wanna-be code, IMHO.  I don't think this is an improvement.  I'd
+> rather keep it as-is.
 
-Before you just go and hit "reply", please:
-   a) Consider who else should be cc'ed
-   b) Prefer to cc a suitable mailing list as well
-   c) Ideally: find the original patch on the mailing list and do a
-      reply-to-all to that, adding suitable additional cc's
+That's why I wrote "maybe a bit too sneaky". :)
 
-*** Remember to use Documentation/process/submit-checklist.rst when testing your code ***
+I think what I asked for originally in one of the last versions of this patch
+is having both, struct nvif_log (exactly the way you have it) and a separate
+struct nvif_logs:
 
-The -mm tree is included into linux-next via the mm-everything
-branch at git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
-and is updated there every 2-3 working days
+	struct nvif_logs {
+		struct list_head head;
+	};
 
-------------------------------------------------------
-From: Jeff Johnson <quic_jjohnson@quicinc.com>
-Subject: locking/ww_mutex/test: add MODULE_DESCRIPTION()
-Date: Tue, 30 Jul 2024 07:43:22 -0700
+Then you use this in NVIF_LOGS_DECLARE() and nvif_log_shutdown()
 
-Fix the 'make W=1' warning:
-WARNING: modpost: missing MODULE_DESCRIPTION() in kernel/locking/test-ww_mutex.o
+	static inline void nvif_log_shutdown(struct nvif_logs *logs)
 
-Link: https://lkml.kernel.org/r/20240730-module_description_orphans-v1-5-7094088076c8@quicinc.com
-Signed-off-by: Jeff Johnson <quic_jjohnson@quicinc.com>
-Acked-by: Waiman Long <longman@redhat.com>
-Cc: Alexandre Torgue <alexandre.torgue@foss.st.com>
-Cc: Alistar Popple <alistair@popple.id.au>
-Cc: Andrew Jeffery <andrew@codeconstruct.com.au>
-Cc: Andy Lutomirski <luto@kernel.org>
-Cc: Arnd Bergmann <arnd@arndb.de>
-Cc: Boqun Feng <boqun.feng@gmail.com>
-Cc: Borislav Petkov <bp@alien8.de>
-Cc: Christophe Leroy <christophe.leroy@csgroup.eu>
-Cc: Dave Hansen <dave.hansen@linux.intel.com>
-Cc: Eddie James <eajames@linux.ibm.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: "H. Peter Anvin" <hpa@zytor.com>
-Cc: Ingo Molnar <mingo@redhat.com>
-Cc: Jeremy Kerr <jk@ozlabs.org>
-Cc: Joel Stanley <joel@jms.id.au>
-Cc: Karol Herbst <karolherbst@gmail.com>
-Cc: Masami Hiramatsu <mhiramat@kernel.org>
-Cc: Maxime Coquelin <mcoquelin.stm32@gmail.com>
-Cc: Michael Ellerman <mpe@ellerman.id.au>
-Cc: Naveen N Rao <naveen@kernel.org>
-Cc: Nicholas Piggin <npiggin@gmail.com>
-Cc: Nouveau <nouveau@lists.freedesktop.org>
-Cc: Pekka Paalanen <ppaalanen@gmail.com>
-Cc: Peter Zijlstra <peterz@infradead.org>
-Cc: Rafael J. Wysocki <rafael@kernel.org>
-Cc: Russell King <linux@armlinux.org.uk>
-Cc: Steven Rostedt (Google) <rostedt@goodmis.org>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Viresh Kumar <viresh.kumar@linaro.org>
-Cc: Will Deacon <will@kernel.org>
-Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
----
+and in nouveau_drm_exit() you just pass &gsp_logs.
 
- kernel/locking/test-ww_mutex.c |    1 +
- 1 file changed, 1 insertion(+)
+	nvif_log_shutdown(&gsp_logs);
 
---- a/kernel/locking/test-ww_mutex.c~locking-ww_mutex-test-add-module_description
-+++ a/kernel/locking/test-ww_mutex.c
-@@ -697,3 +697,4 @@ module_exit(test_ww_mutex_exit);
- 
- MODULE_LICENSE("GPL");
- MODULE_AUTHOR("Intel Corporation");
-+MODULE_DESCRIPTION("API test facility for ww_mutexes");
-_
+This way things are more type safe, i.e. nvif_log_shutdown() can't be called
+with a random list_head and struct nvif_log::shutdown can't be called with the
+"head instance" of struct struct nvif_log.
 
-Patches currently in -mm which might be from quic_jjohnson@quicinc.com are
+> 
+> > > +/*
+> > > + * GSP-RM uses a pseudo-class mechanism to define of a variety of per-"engine"
+> > > + * data structures, and each engine has a "class ID" genererated by a
+> > > + * pre-processor. This is the class ID for the PMU.
+> > > + */
+> > > +#define NV_GSP_MSG_EVENT_UCODE_LIBOS_CLASS_PMU		0xf3d722
+> > > +
+> > > +/**
+> > > + * rpc_ucode_libos_print_v1E_08 - RPC payload for libos print buffers
+> > 
+> > Is this structure versioned? If so, does it relate to a specific GSP-RM version?
+> 
+> Yes, the structure is versioned, but it's a little weird.  When a new RPC is
+> added, the developer can choose to use any version number that matches the
+> "current" VGPU version or earlier.  src/nvidia/generated/g_rpc-structures.h
+> is generated from a special "def" file, and the developer just chooses
+> whatever number he wants.  Typically, the developer will choose whatever
+> version that VGPU is at when he starts working on the code.  But since this
+> is the first and only version of rpc_ucode_libos_print, he could have chosen
+> v01_00.
+> 
+> So "previous RPC version (if it exists)" < "new RPC version" <= "current
+> VGPU version" at the time the RPC was created/updated.
 
-lib-test_objpool-add-missing-module_description-macro.patch
-crypto-arm-xor-add-missing-module_description-macro.patch
-x86-mm-add-testmmiotrace-module_description.patch
-cpufreq-powerpc-add-missing-module_description-macros.patch
-fsi-add-missing-module_description-macros.patch
-locking-ww_mutex-test-add-module_description.patch
+Pretty interesting, thanks for clarifying! (No need to document it though.)
 
+> > > +static void r535_gsp_retain_logging(struct nvkm_gsp *gsp)
+> > > +{
+> > > +	struct device *dev = gsp->subdev.device->dev;
+> > > +	struct dentry *root, *dir;
+> > > +	struct r535_gsp_log *log;
+> > > +	int ret;
+> > > +
+> > > +	/* If we were told not to keep logs, then don't. */
+> > > +	if (!keep_gsp_logging)
+> > > +		return;
+> > > +
+> > > +	/* Check to make sure at least one buffer has data. */
+> > > +	if (is_empty(&gsp->blob_init) && is_empty(&gsp->blob_intr) &&
+> > > +	    is_empty(&gsp->blob_rm) && is_empty(&gsp->blob_rm)) {
+> > > +		nvkm_warn(&gsp->subdev, "all logging buffers are empty\n");
+> > > +		return;
+> > > +	}
+> > > +
+> > > +	/* Find the 'dri' root debugfs entry. Every GPU has a dentry under it */
+> > > +	root = debugfs_lookup("dri", NULL);
+> > > +	if (IS_ERR(root)) {
+> > 
+> > I don't think this can ever happen. This entry is created in drm_core_init().
+
+Oh, I see how this reads. I think I didn't quite finish the reply. Sorry for the
+confusion.
+
+> 
+> So first, the check is wrong.  It should be "if (!root)".
+
+That's what I meant, it can't be an ERR_PTR.
+
+> 
+> However, I think it can happen.  drm_core_init() does not fail if
+> debugfs_create_dir() fails:
+> 
+> 	drm_debugfs_root = debugfs_create_dir("dri", NULL);
+> 
+> It doesn't even print a warning message.  It just keeps going.  So I think
+> there should be some error checking somewhere.
+
+For DRM probably not, since the ERR_PTR is honored by other debugfs functions
+as described in [1].
+
+> 
+> I tested this, and if drm_core_init() fails to create the dentry, then
+> r535_gsp_retain_logging() will just keep going trying to create debugfs
+> entries, because a root of NULL is actually valid, and the entries are
+> created in /sys/kernel/debug/0000:65:00.0/ instead of
+> /sys/kernel/debug/dri/0000:65:00.0/
+
+This is because debugfs_lookup() doesn't return an ERR_PTR, but NULL. It'd
+probably better go along with what is documented in [1] if debugfs_lookup()
+would return ERR_PTR(-ENOENT) if no entry was found.
+
+(This is where I was heading to in my previous reply.)
+
+> 
+> In fact, I think I found a small bug in dput():
+> 
+> void dput(struct dentry *dentry)
+> {
+> 	if (!dentry)
+> 		return;
+> 
+> This should probably be "if (IS_ERR_OR_NULL(dentry))".
+
+Yes, I agree, good catch.
+
+[1] https://elixir.bootlin.com/linux/v6.10/source/fs/debugfs/inode.c#L586
