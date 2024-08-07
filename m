@@ -2,48 +2,95 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58D379473BD
-	for <lists+nouveau@lfdr.de>; Mon,  5 Aug 2024 05:13:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E37294A323
+	for <lists+nouveau@lfdr.de>; Wed,  7 Aug 2024 10:45:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0669510E104;
-	Mon,  5 Aug 2024 03:13:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 81BEA10E460;
+	Wed,  7 Aug 2024 08:45:45 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="W/NVVsoM";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="GF6gqolE";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="RMLbsNjJ";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="GF6gqolE";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="RMLbsNjJ";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 310C210E104
- for <nouveau@lists.freedesktop.org>; Mon,  5 Aug 2024 03:13:00 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 9B33ACE0959;
- Mon,  5 Aug 2024 03:12:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C7211C32786;
- Mon,  5 Aug 2024 03:12:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
- s=korg; t=1722827576;
- bh=fL6kVrZuUpokxNIXzA+h4iqOL8yD1MEsRZCH+ntcBkw=;
- h=Date:To:From:Subject:From;
- b=W/NVVsoMWgGs/Y4cS6GGqhBNLnlDgL6hcgSy5LUTRM8CB/KRcFfXW7e+WllZMxATR
- DJR6pAhBGCI6lEs638aeOIwvomKzsNj7k2YAva5tZ0w21769r8gq8Csrov1CrVVgx/
- 5Hzh5bLAGN/4E0j1WL0jbUUMcbwiqcU6o2Q9d9dc=
-Date: Sun, 04 Aug 2024 20:12:56 -0700
-To: mm-commits@vger.kernel.org, will@kernel.org, viresh.kumar@linaro.org,
- tglx@linutronix.de, rostedt@goodmis.org, rafael@kernel.org,
- ppaalanen@gmail.com, peterz@infradead.org, npiggin@gmail.com,
- nouveau@lists.freedesktop.org, naveen@kernel.org, mpe@ellerman.id.au,
- mingo@redhat.com, mhiramat@kernel.org, mcoquelin.stm32@gmail.com,
- luto@kernel.org, longman@redhat.com, linux@armlinux.org.uk,
- karolherbst@gmail.com, joel@jms.id.au, jk@ozlabs.org, hpa@zytor.com,
- gregkh@linuxfoundation.org, eajames@linux.ibm.com, dave.hansen@linux.intel.com,
- christophe.leroy@csgroup.eu, bp@alien8.de, boqun.feng@gmail.com, arnd@arndb.de,
- andrew@codeconstruct.com.au, alistair@popple.id.au,
- alexandre.torgue@foss.st.com, quic_jjohnson@quicinc.com,
- akpm@linux-foundation.org
-From: Andrew Morton <akpm@linux-foundation.org>
-Subject: [merged] cpufreq-powerpc-add-missing-module_description-macros.patch
- removed from -mm tree
-Message-Id: <20240805031256.C7211C32786@smtp.kernel.org>
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0A4A910E460;
+ Wed,  7 Aug 2024 08:45:44 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 979A921BFB;
+ Wed,  7 Aug 2024 08:45:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1723020342; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=lPcOjpVLTyJIjAJ1U93pVB3aAWvEfCZ4gdC0G1C2xgE=;
+ b=GF6gqolEqc8uZfDmfHFdFSCeJK5MdLV50cXBhCsVKT14MdC+9ord/6hEQdiNCzxrnhC82H
+ rXtpNL+pUowugiHMNh+qEv9xsnbNB5XscFUWiMSesNq+MjFmBX9N89E4eFXr1yQq3NoblG
+ /JzzT99vqFhQVLBvgj8pwETkklNXVyg=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1723020342;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=lPcOjpVLTyJIjAJ1U93pVB3aAWvEfCZ4gdC0G1C2xgE=;
+ b=RMLbsNjJpI4x5h9/5KZNf8TpvQA4Z5Gar9MT84wEREKlurtTPrnCOhKx+g6WLbGY/OBC6G
+ 7+aLYoYE3LSelKCA==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1723020342; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=lPcOjpVLTyJIjAJ1U93pVB3aAWvEfCZ4gdC0G1C2xgE=;
+ b=GF6gqolEqc8uZfDmfHFdFSCeJK5MdLV50cXBhCsVKT14MdC+9ord/6hEQdiNCzxrnhC82H
+ rXtpNL+pUowugiHMNh+qEv9xsnbNB5XscFUWiMSesNq+MjFmBX9N89E4eFXr1yQq3NoblG
+ /JzzT99vqFhQVLBvgj8pwETkklNXVyg=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1723020342;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=lPcOjpVLTyJIjAJ1U93pVB3aAWvEfCZ4gdC0G1C2xgE=;
+ b=RMLbsNjJpI4x5h9/5KZNf8TpvQA4Z5Gar9MT84wEREKlurtTPrnCOhKx+g6WLbGY/OBC6G
+ 7+aLYoYE3LSelKCA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3E88A13297;
+ Wed,  7 Aug 2024 08:45:42 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id UCLbDTY0s2ZmfQAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Wed, 07 Aug 2024 08:45:42 +0000
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
+ airlied@gmail.com, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com
+Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH 0/8] drm/{amdgpu,nouveau}: Remove old fbdev hooks
+Date: Wed,  7 Aug 2024 10:41:32 +0200
+Message-ID: <20240807084539.304014-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.46.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Spam-Level: 
+X-Spamd-Result: default: False [0.20 / 50.00]; MID_CONTAINS_FROM(1.00)[];
+ NEURAL_HAM_LONG(-1.00)[-1.000]; R_MISSING_CHARSET(0.50)[];
+ NEURAL_HAM_SHORT(-0.20)[-0.999]; MIME_GOOD(-0.10)[text/plain];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; MIME_TRACE(0.00)[0:+];
+ RCPT_COUNT_TWELVE(0.00)[14];
+ FREEMAIL_TO(0.00)[amd.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,redhat.com];
+ ARC_NA(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
+ FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[]; RCVD_TLS_ALL(0.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo];
+ RCVD_COUNT_TWO(0.00)[2]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com]
+X-Spam-Flag: NO
+X-Spam-Score: 0.20
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,122 +105,44 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+After switching all drivers' fbdev emulation to DRM client, the
+old fbdev hooks are now obsolete. Only amgdpu and nouveau still use
+them in a several places. Remove the hooks from the drivers and the
+DRM core.
 
-The quilt patch titled
-     Subject: cpufreq: powerpc: add missing MODULE_DESCRIPTION() macros
-has been removed from the -mm tree.  Its filename was
-     cpufreq-powerpc-add-missing-module_description-macros.patch
+The series would ideally be merged at once via drm-misc-next.
 
-This patch was dropped because it was merged into mainline or a subsystem tree
+Thomas Zimmermann (8):
+  drm/fbdev-helper: Do delayed switcheroo in lastclose helper
+  drm/amdgpu: Do not set struct drm_driver.lastclose
+  drm/nouveau: Do not set struct drm_driver.lastclose
+  drm/nouveau: Do not set struct
+    drm_mode_config_funcs.output_poll_changed
+  drm/nouveau: Implement switcheroo reprobe with
+    drm_client_dev_hotplug()
+  drm/fbdev-helper: Remove drm_fb_helper_output_poll_changed()
+  drm: Remove struct drm_driver.lastclose
+  drm: Remove struct drm_mode_config_funcs.output_poll_changed
 
-------------------------------------------------------
-From: Jeff Johnson <quic_jjohnson@quicinc.com>
-Subject: cpufreq: powerpc: add missing MODULE_DESCRIPTION() macros
-Date: Tue, 30 Jul 2024 07:43:20 -0700
+ drivers/gpu/drm/amd/amdgpu/amdgpu.h       |  1 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c   |  2 --
+ drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c   | 17 -----------
+ drivers/gpu/drm/drm_drv.c                 |  5 ++-
+ drivers/gpu/drm/drm_fb_helper.c           | 37 ++++++-----------------
+ drivers/gpu/drm/drm_file.c                | 35 +++++----------------
+ drivers/gpu/drm/drm_internal.h            |  1 -
+ drivers/gpu/drm/drm_probe_helper.c        | 10 +-----
+ drivers/gpu/drm/nouveau/dispnv50/disp.c   |  1 -
+ drivers/gpu/drm/nouveau/nouveau_display.c |  1 -
+ drivers/gpu/drm/nouveau/nouveau_drm.c     |  1 -
+ drivers/gpu/drm/nouveau/nouveau_vga.c     | 10 ++----
+ drivers/gpu/drm/nouveau/nouveau_vga.h     |  1 -
+ include/drm/drm_client.h                  |  7 +++--
+ include/drm/drm_drv.h                     | 28 -----------------
+ include/drm/drm_fb_helper.h               |  6 ----
+ include/drm/drm_mode_config.h             | 16 ----------
+ 17 files changed, 25 insertions(+), 154 deletions(-)
 
-With ARCH=powerpc, make allmodconfig && make W=1 C=1 reports:
-WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/cpufreq/ppc-cbe-cpufreq.o
-WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/cpufreq/powernv-cpufreq.o
-
-Add the missing invocation of the MODULE_DESCRIPTION() macro to all files
-which have a MODULE_LICENSE().
-
-This includes three additional files which, although they did not produce
-a warning with the powerpc allmodconfig configuration, may cause this
-warning with specific options enabled in the kernel configuration.
-
-Link: https://lkml.kernel.org/r/20240730-module_description_orphans-v1-3-7094088076c8@quicinc.com
-Signed-off-by: Jeff Johnson <quic_jjohnson@quicinc.com>
-Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
-Acked-by: Michael Ellerman <mpe@ellerman.id.au>
-Cc: Alexandre Torgue <alexandre.torgue@foss.st.com>
-Cc: Alistar Popple <alistair@popple.id.au>
-Cc: Andrew Jeffery <andrew@codeconstruct.com.au>
-Cc: Andy Lutomirski <luto@kernel.org>
-Cc: Arnd Bergmann <arnd@arndb.de>
-Cc: Boqun Feng <boqun.feng@gmail.com>
-Cc: Borislav Petkov <bp@alien8.de>
-Cc: Christophe Leroy <christophe.leroy@csgroup.eu>
-Cc: Dave Hansen <dave.hansen@linux.intel.com>
-Cc: Eddie James <eajames@linux.ibm.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: "H. Peter Anvin" <hpa@zytor.com>
-Cc: Ingo Molnar <mingo@redhat.com>
-Cc: Jeremy Kerr <jk@ozlabs.org>
-Cc: Joel Stanley <joel@jms.id.au>
-Cc: Karol Herbst <karolherbst@gmail.com>
-Cc: Masami Hiramatsu <mhiramat@kernel.org>
-Cc: Maxime Coquelin <mcoquelin.stm32@gmail.com>
-Cc: Naveen N Rao <naveen@kernel.org>
-Cc: Nicholas Piggin <npiggin@gmail.com>
-Cc: Nouveau <nouveau@lists.freedesktop.org>
-Cc: Pekka Paalanen <ppaalanen@gmail.com>
-Cc: Peter Zijlstra <peterz@infradead.org>
-Cc: Rafael J. Wysocki <rafael@kernel.org>
-Cc: Russell King <linux@armlinux.org.uk>
-Cc: Steven Rostedt (Google) <rostedt@goodmis.org>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Waiman Long <longman@redhat.com>
-Cc: Will Deacon <will@kernel.org>
-Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
----
-
- drivers/cpufreq/maple-cpufreq.c   |    1 +
- drivers/cpufreq/pasemi-cpufreq.c  |    1 +
- drivers/cpufreq/pmac64-cpufreq.c  |    1 +
- drivers/cpufreq/powernv-cpufreq.c |    1 +
- drivers/cpufreq/ppc_cbe_cpufreq.c |    1 +
- 5 files changed, 5 insertions(+)
-
---- a/drivers/cpufreq/maple-cpufreq.c~cpufreq-powerpc-add-missing-module_description-macros
-+++ a/drivers/cpufreq/maple-cpufreq.c
-@@ -238,4 +238,5 @@ bail_noprops:
- module_init(maple_cpufreq_init);
- 
- 
-+MODULE_DESCRIPTION("cpufreq driver for Maple 970FX/970MP boards");
- MODULE_LICENSE("GPL");
---- a/drivers/cpufreq/pasemi-cpufreq.c~cpufreq-powerpc-add-missing-module_description-macros
-+++ a/drivers/cpufreq/pasemi-cpufreq.c
-@@ -269,5 +269,6 @@ static void __exit pas_cpufreq_exit(void
- module_init(pas_cpufreq_init);
- module_exit(pas_cpufreq_exit);
- 
-+MODULE_DESCRIPTION("cpufreq driver for PA Semi PWRficient");
- MODULE_LICENSE("GPL");
- MODULE_AUTHOR("Egor Martovetsky <egor@pasemi.com>, Olof Johansson <olof@lixom.net>");
---- a/drivers/cpufreq/pmac64-cpufreq.c~cpufreq-powerpc-add-missing-module_description-macros
-+++ a/drivers/cpufreq/pmac64-cpufreq.c
-@@ -671,4 +671,5 @@ static int __init g5_cpufreq_init(void)
- module_init(g5_cpufreq_init);
- 
- 
-+MODULE_DESCRIPTION("cpufreq driver for SMU & 970FX based G5 Macs");
- MODULE_LICENSE("GPL");
---- a/drivers/cpufreq/powernv-cpufreq.c~cpufreq-powerpc-add-missing-module_description-macros
-+++ a/drivers/cpufreq/powernv-cpufreq.c
-@@ -1160,5 +1160,6 @@ static void __exit powernv_cpufreq_exit(
- }
- module_exit(powernv_cpufreq_exit);
- 
-+MODULE_DESCRIPTION("cpufreq driver for IBM/OpenPOWER powernv systems");
- MODULE_LICENSE("GPL");
- MODULE_AUTHOR("Vaidyanathan Srinivasan <svaidy at linux.vnet.ibm.com>");
---- a/drivers/cpufreq/ppc_cbe_cpufreq.c~cpufreq-powerpc-add-missing-module_description-macros
-+++ a/drivers/cpufreq/ppc_cbe_cpufreq.c
-@@ -168,5 +168,6 @@ static void __exit cbe_cpufreq_exit(void
- module_init(cbe_cpufreq_init);
- module_exit(cbe_cpufreq_exit);
- 
-+MODULE_DESCRIPTION("cpufreq driver for Cell BE processors");
- MODULE_LICENSE("GPL");
- MODULE_AUTHOR("Christian Krafft <krafft@de.ibm.com>");
-_
-
-Patches currently in -mm which might be from quic_jjohnson@quicinc.com are
-
-lib-test_objpool-add-missing-module_description-macro.patch
-crypto-arm-xor-add-missing-module_description-macro.patch
-x86-mm-add-testmmiotrace-module_description.patch
-locking-ww_mutex-test-add-module_description.patch
+-- 
+2.46.0
 
