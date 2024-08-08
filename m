@@ -2,107 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B1A594A33A
-	for <lists+nouveau@lfdr.de>; Wed,  7 Aug 2024 10:46:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AF54794B7D1
+	for <lists+nouveau@lfdr.de>; Thu,  8 Aug 2024 09:25:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D33B310E47F;
-	Wed,  7 Aug 2024 08:45:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E7F8610E677;
+	Thu,  8 Aug 2024 07:25:57 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="mA4jZuuQ";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="ZiJBPqzw";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="mA4jZuuQ";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="ZiJBPqzw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iwZOYdL4";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 408F510E466;
- Wed,  7 Aug 2024 08:45:47 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id CB8D21FB90;
- Wed,  7 Aug 2024 08:45:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1723020345; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YGsEaSxnixzB8ZMaOx0qc0Ki/EQVSPO9IKhWAD7O9ig=;
- b=mA4jZuuQT1EiSFpKS20WX2r3bld89k3AwflQBpxGtkXO8ISrUWF7w2aFaveq3gWONaQeO5
- rpjwll3hMWWDSzL3Qfr9ZR+yfUFvYxiPLb/GPF7HDen8oF6HldSayFarDBHd4tzf1n+M5a
- 6Epxtnp26ijSGrXTaU5DVYuw7gfIwcY=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1723020345;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YGsEaSxnixzB8ZMaOx0qc0Ki/EQVSPO9IKhWAD7O9ig=;
- b=ZiJBPqzwJ3xCV8Y9XsojXiOeTaUCmvkRT/qoqopIJF2zYDHLzr5xqjZAyvbpBX3v9V1sHa
- MxwDo1/YRuWmynCg==
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1723020345; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YGsEaSxnixzB8ZMaOx0qc0Ki/EQVSPO9IKhWAD7O9ig=;
- b=mA4jZuuQT1EiSFpKS20WX2r3bld89k3AwflQBpxGtkXO8ISrUWF7w2aFaveq3gWONaQeO5
- rpjwll3hMWWDSzL3Qfr9ZR+yfUFvYxiPLb/GPF7HDen8oF6HldSayFarDBHd4tzf1n+M5a
- 6Epxtnp26ijSGrXTaU5DVYuw7gfIwcY=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1723020345;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YGsEaSxnixzB8ZMaOx0qc0Ki/EQVSPO9IKhWAD7O9ig=;
- b=ZiJBPqzwJ3xCV8Y9XsojXiOeTaUCmvkRT/qoqopIJF2zYDHLzr5xqjZAyvbpBX3v9V1sHa
- MxwDo1/YRuWmynCg==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 6E58A13297;
- Wed,  7 Aug 2024 08:45:45 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id qCSDGTk0s2ZmfQAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Wed, 07 Aug 2024 08:45:45 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
- airlied@gmail.com, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com
-Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 8/8] drm: Remove struct
- drm_mode_config_funcs.output_poll_changed
-Date: Wed,  7 Aug 2024 10:41:40 +0200
-Message-ID: <20240807084539.304014-9-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240807084539.304014-1-tzimmermann@suse.de>
-References: <20240807084539.304014-1-tzimmermann@suse.de>
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
+ [209.85.167.48])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F1A5B892D3
+ for <nouveau@lists.freedesktop.org>; Thu,  8 Aug 2024 07:25:56 +0000 (UTC)
+Received: by mail-lf1-f48.google.com with SMTP id
+ 2adb3069b0e04-52efbb55d24so1072470e87.1
+ for <nouveau@lists.freedesktop.org>; Thu, 08 Aug 2024 00:25:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723101955; x=1723706755; darn=lists.freedesktop.org;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=hNGzsNH/t8Akb4VG9W8tz0cWmhUFTpFrDSlsiKAVghI=;
+ b=iwZOYdL4/WCg7AfSXgVjE82QPzOY9ZSQ87u3JhHmE1+pmpVzJ3O7YxKI+6ULuMWfRi
+ imoxmUdc83E8sVP9SnqI042NZhTfPsPJLdz9LVddQfnrASMZ3CtfeHyQG/Ky9tbhw3Vj
+ 8dwVfaOx9hrRRAkIDPKH1t4EF1c1JNwt8Kt3FdUWgWcZFVXoWdNtWjHXJaidcbDXqU1m
+ JsPSp2hUQCliUURc6s9lf/TaUGlP+pPpFAVG5kMSEvNvbT1BnlWTxypnuWTmKe3x8XZ8
+ PevEs8Le5bchYvwCyLnzbr+ctX3XTkO+ijLHtgw+4Male6weSYKXL+wBoyD5AUm9BkUG
+ 8XUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723101955; x=1723706755;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=hNGzsNH/t8Akb4VG9W8tz0cWmhUFTpFrDSlsiKAVghI=;
+ b=U3acgig/Pgqz+25B2+qUocnLdYQGKSH9TGMEeJKRgJsdoGNVeLufRoRueC1DIHi1x4
+ Bg7J6SeOSEuOvJb1ZfEo+AvXKaQ4CyUfnacRmjhgx87VBlTYpCxdJXg/JM0mSwEk2P4w
+ Wh5FxBVUNwdU22VirUl8T7izknij1cEU76Kv2rXrEQNVNA2XK4QR+D/Q0p2e+2Z8EqAK
+ UW+emUujrKzh72ehBcTV7Od3IJOZtYsdyMXdE2zVdYV9IHecqKDqHQBsY2TvJkcpLGMp
+ K8Rpdrnr40PXzXNBPOv3zZVq5BT+RGVG1bEkQ0C9NGzXw1/bRj5T47rxQBCegqBVs4Zf
+ PZpg==
+X-Gm-Message-State: AOJu0YyLMSkU6BvawAUCjjkih9P0VimBtv4XMWcfdjq3VQ8qUppYkjcc
+ skc2KHnQrNZH1jnPdhqJfe2/gt0208DcEe6Qrn2kpuUyI/WI4Vow8fi5uS3hmjQ=
+X-Google-Smtp-Source: AGHT+IGWsVQeN5UxukKsHwoRTO2H9Z+tyf86VPC12xLF7j/Iqde20bkc1MuEV2hDgzErLhnMkhGClQ==
+X-Received: by 2002:a05:6512:31c4:b0:52c:df8e:a367 with SMTP id
+ 2adb3069b0e04-530e588c543mr899477e87.53.1723101954634; 
+ Thu, 08 Aug 2024 00:25:54 -0700 (PDT)
+Received: from localhost ([196.207.164.177]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7dc9c0c526sm712447866b.69.2024.08.08.00.25.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Aug 2024 00:25:54 -0700 (PDT)
+Date: Thu, 8 Aug 2024 10:25:50 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: nouveau@lists.freedesktop.org
+Subject: [bug report] drm/nouveau: use GEM references instead of TTMs
+Message-ID: <a990574d-1000-4302-9420-780c67c3b85e@stanley.mountain>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Level: 
-X-Spamd-Result: default: False [-3.80 / 50.00]; REPLY(-4.00)[];
- MID_CONTAINS_FROM(1.00)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- R_MISSING_CHARSET(0.50)[]; NEURAL_HAM_SHORT(-0.20)[-0.999];
- MIME_GOOD(-0.10)[text/plain]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- ARC_NA(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- FROM_HAS_DN(0.00)[]; RCPT_COUNT_TWELVE(0.00)[14];
- MIME_TRACE(0.00)[0:+];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,imap1.dmz-prg2.suse.org:helo];
- FROM_EQ_ENVFROM(0.00)[]; RCVD_TLS_ALL(0.00)[];
- RCVD_COUNT_TWO(0.00)[2];
- FREEMAIL_TO(0.00)[amd.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,redhat.com];
- FUZZY_BLOCKED(0.00)[rspamd.com]; TO_DN_SOME(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FREEMAIL_ENVRCPT(0.00)[gmail.com]
-X-Spam-Flag: NO
-X-Spam-Score: -3.80
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -117,80 +74,42 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The output_poll_changed hook in struct drm_mode_config_funcs is
-unused. Remove it. The helper drm_client_dev_hotplug() implements
-the callback's functionality.
+Hello Danilo Krummrich,
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/drm_probe_helper.c | 10 +---------
- include/drm/drm_mode_config.h      | 16 ----------------
- 2 files changed, 1 insertion(+), 25 deletions(-)
+Commit bf32a3a12686 ("drm/nouveau: use GEM references instead of
+TTMs") from Jul 18, 2024 (linux-next), leads to the following Smatch
+static checker warning:
 
-diff --git a/drivers/gpu/drm/drm_probe_helper.c b/drivers/gpu/drm/drm_probe_helper.c
-index 285290067056..92f21764246f 100644
---- a/drivers/gpu/drm/drm_probe_helper.c
-+++ b/drivers/gpu/drm/drm_probe_helper.c
-@@ -714,7 +714,7 @@ EXPORT_SYMBOL(drm_helper_probe_single_connector_modes);
-  * @dev: drm_device whose connector state changed
-  *
-  * This function fires off the uevent for userspace and also calls the
-- * output_poll_changed function, which is most commonly used to inform the fbdev
-+ * client hotplug function, which is most commonly used to inform the fbdev
-  * emulation code and allow it to update the fbcon output configuration.
-  *
-  * Drivers should call this from their hotplug handling code when a change is
-@@ -730,11 +730,7 @@ EXPORT_SYMBOL(drm_helper_probe_single_connector_modes);
-  */
- void drm_kms_helper_hotplug_event(struct drm_device *dev)
- {
--	/* send a uevent + call fbdev */
- 	drm_sysfs_hotplug_event(dev);
--	if (dev->mode_config.funcs->output_poll_changed)
--		dev->mode_config.funcs->output_poll_changed(dev);
--
- 	drm_client_dev_hotplug(dev);
- }
- EXPORT_SYMBOL(drm_kms_helper_hotplug_event);
-@@ -750,11 +746,7 @@ void drm_kms_helper_connector_hotplug_event(struct drm_connector *connector)
- {
- 	struct drm_device *dev = connector->dev;
- 
--	/* send a uevent + call fbdev */
- 	drm_sysfs_connector_hotplug_event(connector);
--	if (dev->mode_config.funcs->output_poll_changed)
--		dev->mode_config.funcs->output_poll_changed(dev);
--
- 	drm_client_dev_hotplug(dev);
- }
- EXPORT_SYMBOL(drm_kms_helper_connector_hotplug_event);
-diff --git a/include/drm/drm_mode_config.h b/include/drm/drm_mode_config.h
-index ab0f167474b1..271765e2e9f2 100644
---- a/include/drm/drm_mode_config.h
-+++ b/include/drm/drm_mode_config.h
-@@ -97,22 +97,6 @@ struct drm_mode_config_funcs {
- 	 */
- 	const struct drm_format_info *(*get_format_info)(const struct drm_mode_fb_cmd2 *mode_cmd);
- 
--	/**
--	 * @output_poll_changed:
--	 *
--	 * Callback used by helpers to inform the driver of output configuration
--	 * changes.
--	 *
--	 * Drivers implementing fbdev emulation use drm_kms_helper_hotplug_event()
--	 * to call this hook to inform the fbdev helper of output changes.
--	 *
--	 * This hook is deprecated, drivers should instead implement fbdev
--	 * support with struct drm_client, which takes care of any necessary
--	 * hotplug event forwarding already without further involvement by
--	 * the driver.
--	 */
--	void (*output_poll_changed)(struct drm_device *dev);
--
- 	/**
- 	 * @mode_valid:
- 	 *
--- 
-2.46.0
+	drivers/gpu/drm/nouveau/dispnv50/disp.c:2818 nv50_display_destroy()
+	error: we previously assumed 'disp->sync' could be null (see line 2816)
 
+drivers/gpu/drm/nouveau/dispnv50/disp.c
+    2804 static void
+    2805 nv50_display_destroy(struct drm_device *dev)
+    2806 {
+    2807         struct nv50_disp *disp = nv50_disp(dev);
+    2808 
+    2809         nv50_audio_component_fini(nouveau_drm(dev));
+    2810 
+    2811         nvif_object_unmap(&disp->caps);
+    2812         nvif_object_dtor(&disp->caps);
+    2813         nv50_core_del(&disp->core);
+    2814 
+    2815         nouveau_bo_unmap(disp->sync);
+    2816         if (disp->sync)
+                     ^^^^^^^^^^
+Check for NULL
+
+    2817                 nouveau_bo_unpin(disp->sync);
+--> 2818         nouveau_bo_fini(disp->sync);
+                                 ^^^^^^^^^^
+Unchecked dereference.  The patch didn't actually introduce this bug, it just
+exposed it to the static checker.
+
+    2819 
+    2820         nouveau_display(dev)->priv = NULL;
+    2821         kfree(disp);
+    2822 }
+
+regards,
+dan carpenter
