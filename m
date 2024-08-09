@@ -2,57 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A27594CCB3
-	for <lists+nouveau@lfdr.de>; Fri,  9 Aug 2024 10:51:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DB9A94CCB8
+	for <lists+nouveau@lfdr.de>; Fri,  9 Aug 2024 10:51:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 48A2F10E87F;
-	Fri,  9 Aug 2024 08:50:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C7A6710E883;
+	Fri,  9 Aug 2024 08:51:31 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="UnPmbTi/";
+	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="ZSxwrhhy";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com
- [209.85.218.41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AC9DD10E87D
- for <nouveau@lists.freedesktop.org>; Fri,  9 Aug 2024 08:50:52 +0000 (UTC)
-Received: by mail-ej1-f41.google.com with SMTP id
- a640c23a62f3a-a7a9be21648so20833266b.0
- for <nouveau@lists.freedesktop.org>; Fri, 09 Aug 2024 01:50:52 -0700 (PDT)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com
+ [209.85.218.47])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BEC4B10E883
+ for <nouveau@lists.freedesktop.org>; Fri,  9 Aug 2024 08:51:30 +0000 (UTC)
+Received: by mail-ej1-f47.google.com with SMTP id
+ a640c23a62f3a-a7abaea2afeso16440566b.3
+ for <nouveau@lists.freedesktop.org>; Fri, 09 Aug 2024 01:51:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google; t=1723193451; x=1723798251; darn=lists.freedesktop.org; 
+ d=ffwll.ch; s=google; t=1723193489; x=1723798289; darn=lists.freedesktop.org; 
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lQRObQqCFZFZYE2PihhMktYKpOnSYLhGhrUknpNXXAI=;
- b=UnPmbTi/T6qh3cqfZ1RCeV+afFtyMSR0UNKFW0LI/2NaKzKs5ZRmjUUFi8DQnp4Ro7
- 86BtIGknpkp/SnplOIacdBqJLB62yVfg6BZ+2Oyok/+NSDcf2WdbqhOlue+YaR7NNFb6
- 0cHjeuRTkEfnvgInrXR18ZMGJr416Dgg/wyAU=
+ bh=Bc3kPPaGk0IbzRHuuxiwDmBjEf16sRrqx5FlMQBJQHQ=;
+ b=ZSxwrhhyyRX7yLaqX/2EvyOMsquYiqFutDDdo2CJKhepObHO/PU5K8MAgHeT4i7uuy
+ seGTyweQkZ6KC5u04LqEYw1HQ4vB5dN9rL93vXUMn/fnuHF6mYY1F3GVMERx3kHZ5eWS
+ wMWG7v3ff/aD5BWAoMgJQsKroUaxqsw0FZ2SE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723193451; x=1723798251;
+ d=1e100.net; s=20230601; t=1723193489; x=1723798289;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lQRObQqCFZFZYE2PihhMktYKpOnSYLhGhrUknpNXXAI=;
- b=vNNq19YiXtEkQqvH0XFNtb4NE+f6gIYJ4Tekjh0CopF0xLh6PbC4e5tzCpmOMDB80m
- L1Uqgg7cY10Iqk/hxBNMoFp1rlgwl2CcYuxxSBJEPpXna2pmBUlv9bYN7vQvEXCg95Mt
- Bf0vP7+fr/yIwU1lrQ+R8lWD1rwhnUZQrsPyblR4H/EQJqDy/qzFDzs1d8KpNuaoxyYn
- TVnuT/8kE6IBro0/Es+DSrA1nsp4y16jjH7EiDGIVgNBFNOK62Kkl8TI0xb6poHdicXB
- 2cRhHvxcHJXuF7MqRvQyGQI/TD2gkPoYhelNOCA5HjQ4Ix+8Q1DsQSfwsohQlruFBg8z
- x7EQ==
+ bh=Bc3kPPaGk0IbzRHuuxiwDmBjEf16sRrqx5FlMQBJQHQ=;
+ b=ONyIMsK4RDnE8EYViKng16G+hDudNnxGCuqXkyIi+pyltlqWAoqMJzZPeC/HdWuwPw
+ 3cfNAmu9HguB5enYV+MHAOwDR99g7pawJjcORfGYMpIhXjeAEeGDEqyXotc72IbQyAVw
+ 0+jonjNhaGf/h1Qmw3zkkxxaAuAHhOJMZ+uK9onilEdNBdAekshbbmHzYgAZyJApiz5h
+ oIp+PJ+iS4TIpV20ySNmyKiG5n4o+Gq9yTCzM+DYivXv0oQGWFloXaQjORdpg97H9y0z
+ lVMLN3zaRBNKIbzHJMxq2K4CX06EVhZ6qrFoJLTgIPXYIBuqnV79vXEL3Fpfegd1svPq
+ juBw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXMp3b3qEpDCP9b6SGotuSI8rw2SU7tj8G4XslOn+xf8C40rPq4HV2PNTLbBPIZP3DqrxyLHftmk9RWeNwpmvfMFTE4NekrzLRLzHztjg==
-X-Gm-Message-State: AOJu0YwmGQBlaxjdDxCRChg83IM5gQxAFwLUSgfMWxOsxp1GCBVQAmYB
- WQ6e9NZ7kI40mkdmQNS1pnOAciCwvYeuxAK/Om3S3TTF8RC4pX+M53+RRMYi8vc=
-X-Google-Smtp-Source: AGHT+IHRygqvDnnywjWcgRJH7u2cR+TWxwLzqYu/6B0OD8g3Hvi3p2zslutluZFIgpQTKdZKkV92Bg==
-X-Received: by 2002:a17:907:3e21:b0:a80:a1b0:12ec with SMTP id
- a640c23a62f3a-a80aa5a3e45mr40641366b.3.1723193450825; 
- Fri, 09 Aug 2024 01:50:50 -0700 (PDT)
+ AJvYcCVmyDSKU+MPCWy9kdHykdT83ymgSsCuBBd35DGNjXS6TPbX/ooUXH4z2zbhcZGPqsszCHTe93Ma@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yxx3OI629FczCKtzWSnHMSiX7wO2PXZbup/AHtlsO8yt2oqRSwP
+ WrbShBfEyuv1hHrQfIjVXhRTOV1S9XyQjRPA8RF2UKHDxlR3gzxIxCSxXdZ5jLY=
+X-Google-Smtp-Source: AGHT+IHyrYScI0WDvWwB61dk4JIRmn/B/cN2/2DPRQX6MXK/PbRwp22bnR1LUpH/J1IQvWLk3eeCDA==
+X-Received: by 2002:a17:907:2cc3:b0:a74:4f23:14ca with SMTP id
+ a640c23a62f3a-a80aa6768dbmr40078166b.7.1723193488816; 
+ Fri, 09 Aug 2024 01:51:28 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9d45418sm820836066b.113.2024.08.09.01.50.49
+ a640c23a62f3a-a7dc9c0cc44sm818474366b.76.2024.08.09.01.51.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Aug 2024 01:50:50 -0700 (PDT)
-Date: Fri, 9 Aug 2024 10:50:48 +0200
+ Fri, 09 Aug 2024 01:51:28 -0700 (PDT)
+Date: Fri, 9 Aug 2024 10:51:26 +0200
 From: Daniel Vetter <daniel.vetter@ffwll.ch>
 To: Thomas Zimmermann <tzimmermann@suse.de>
 Cc: alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
@@ -61,15 +61,15 @@ Cc: alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
  kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com,
  amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
-Subject: Re: [PATCH 6/8] drm/fbdev-helper: Remove
- drm_fb_helper_output_poll_changed()
-Message-ID: <ZrXYaFi60qEdNE4p@phenom.ffwll.local>
+Subject: Re: [PATCH 8/8] drm: Remove struct
+ drm_mode_config_funcs.output_poll_changed
+Message-ID: <ZrXYjvVhm1SXs75N@phenom.ffwll.local>
 References: <20240807084539.304014-1-tzimmermann@suse.de>
- <20240807084539.304014-7-tzimmermann@suse.de>
+ <20240807084539.304014-9-tzimmermann@suse.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240807084539.304014-7-tzimmermann@suse.de>
+In-Reply-To: <20240807084539.304014-9-tzimmermann@suse.de>
 X-Operating-System: Linux phenom 6.9.10-amd64 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -85,72 +85,84 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Aug 07, 2024 at 10:41:38AM +0200, Thomas Zimmermann wrote:
-> The function is unused. Remove it.
+On Wed, Aug 07, 2024 at 10:41:40AM +0200, Thomas Zimmermann wrote:
+> The output_poll_changed hook in struct drm_mode_config_funcs is
+> unused. Remove it. The helper drm_client_dev_hotplug() implements
+> the callback's functionality.
 > 
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 
 Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 
-Without the next patch to remove ->lastclose there's some confusion text
-left in the DOC: section in drm_fb_helper.c, but no point to split that up
-perfectly imo. Was just trying to find it and didn't find it only looking
-at the poll_changed patches ...
--Sima
-
 > ---
->  drivers/gpu/drm/drm_fb_helper.c | 15 ---------------
->  include/drm/drm_fb_helper.h     |  6 ------
->  2 files changed, 21 deletions(-)
+>  drivers/gpu/drm/drm_probe_helper.c | 10 +---------
+>  include/drm/drm_mode_config.h      | 16 ----------------
+>  2 files changed, 1 insertion(+), 25 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-> index f6667dfba8a2..3cafb28236f7 100644
-> --- a/drivers/gpu/drm/drm_fb_helper.c
-> +++ b/drivers/gpu/drm/drm_fb_helper.c
-> @@ -2015,18 +2015,3 @@ void drm_fb_helper_lastclose(struct drm_device *dev)
->  
->  }
->  EXPORT_SYMBOL(drm_fb_helper_lastclose);
-> -
-> -/**
-> - * drm_fb_helper_output_poll_changed - DRM mode config \.output_poll_changed
-> - *                                     helper for fbdev emulation
-> - * @dev: DRM device
-> - *
-> - * This function can be used as the
-> - * &drm_mode_config_funcs.output_poll_changed callback for drivers that only
-> - * need to call drm_fbdev.hotplug_event().
-> - */
-> -void drm_fb_helper_output_poll_changed(struct drm_device *dev)
-> -{
-> -	drm_fb_helper_hotplug_event(dev->fb_helper);
-> -}
-> -EXPORT_SYMBOL(drm_fb_helper_output_poll_changed);
-> diff --git a/include/drm/drm_fb_helper.h b/include/drm/drm_fb_helper.h
-> index 375737fd6c36..699f2790b9ac 100644
-> --- a/include/drm/drm_fb_helper.h
-> +++ b/include/drm/drm_fb_helper.h
-> @@ -271,9 +271,7 @@ int drm_fb_helper_hotplug_event(struct drm_fb_helper *fb_helper);
->  int drm_fb_helper_initial_config(struct drm_fb_helper *fb_helper);
->  int drm_fb_helper_debug_enter(struct fb_info *info);
->  int drm_fb_helper_debug_leave(struct fb_info *info);
-> -
->  void drm_fb_helper_lastclose(struct drm_device *dev);
-> -void drm_fb_helper_output_poll_changed(struct drm_device *dev);
->  #else
->  static inline void drm_fb_helper_prepare(struct drm_device *dev,
->  					 struct drm_fb_helper *helper,
-> @@ -401,10 +399,6 @@ static inline int drm_fb_helper_debug_leave(struct fb_info *info)
->  static inline void drm_fb_helper_lastclose(struct drm_device *dev)
+> diff --git a/drivers/gpu/drm/drm_probe_helper.c b/drivers/gpu/drm/drm_probe_helper.c
+> index 285290067056..92f21764246f 100644
+> --- a/drivers/gpu/drm/drm_probe_helper.c
+> +++ b/drivers/gpu/drm/drm_probe_helper.c
+> @@ -714,7 +714,7 @@ EXPORT_SYMBOL(drm_helper_probe_single_connector_modes);
+>   * @dev: drm_device whose connector state changed
+>   *
+>   * This function fires off the uevent for userspace and also calls the
+> - * output_poll_changed function, which is most commonly used to inform the fbdev
+> + * client hotplug function, which is most commonly used to inform the fbdev
+>   * emulation code and allow it to update the fbcon output configuration.
+>   *
+>   * Drivers should call this from their hotplug handling code when a change is
+> @@ -730,11 +730,7 @@ EXPORT_SYMBOL(drm_helper_probe_single_connector_modes);
+>   */
+>  void drm_kms_helper_hotplug_event(struct drm_device *dev)
 >  {
->  }
+> -	/* send a uevent + call fbdev */
+>  	drm_sysfs_hotplug_event(dev);
+> -	if (dev->mode_config.funcs->output_poll_changed)
+> -		dev->mode_config.funcs->output_poll_changed(dev);
 > -
-> -static inline void drm_fb_helper_output_poll_changed(struct drm_device *dev)
-> -{
-> -}
->  #endif
+>  	drm_client_dev_hotplug(dev);
+>  }
+>  EXPORT_SYMBOL(drm_kms_helper_hotplug_event);
+> @@ -750,11 +746,7 @@ void drm_kms_helper_connector_hotplug_event(struct drm_connector *connector)
+>  {
+>  	struct drm_device *dev = connector->dev;
 >  
->  #endif
+> -	/* send a uevent + call fbdev */
+>  	drm_sysfs_connector_hotplug_event(connector);
+> -	if (dev->mode_config.funcs->output_poll_changed)
+> -		dev->mode_config.funcs->output_poll_changed(dev);
+> -
+>  	drm_client_dev_hotplug(dev);
+>  }
+>  EXPORT_SYMBOL(drm_kms_helper_connector_hotplug_event);
+> diff --git a/include/drm/drm_mode_config.h b/include/drm/drm_mode_config.h
+> index ab0f167474b1..271765e2e9f2 100644
+> --- a/include/drm/drm_mode_config.h
+> +++ b/include/drm/drm_mode_config.h
+> @@ -97,22 +97,6 @@ struct drm_mode_config_funcs {
+>  	 */
+>  	const struct drm_format_info *(*get_format_info)(const struct drm_mode_fb_cmd2 *mode_cmd);
+>  
+> -	/**
+> -	 * @output_poll_changed:
+> -	 *
+> -	 * Callback used by helpers to inform the driver of output configuration
+> -	 * changes.
+> -	 *
+> -	 * Drivers implementing fbdev emulation use drm_kms_helper_hotplug_event()
+> -	 * to call this hook to inform the fbdev helper of output changes.
+> -	 *
+> -	 * This hook is deprecated, drivers should instead implement fbdev
+> -	 * support with struct drm_client, which takes care of any necessary
+> -	 * hotplug event forwarding already without further involvement by
+> -	 * the driver.
+> -	 */
+> -	void (*output_poll_changed)(struct drm_device *dev);
+> -
+>  	/**
+>  	 * @mode_valid:
+>  	 *
 > -- 
 > 2.46.0
 > 
