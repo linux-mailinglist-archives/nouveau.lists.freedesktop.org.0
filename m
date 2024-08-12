@@ -2,57 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0D0F94E9A8
-	for <lists+nouveau@lfdr.de>; Mon, 12 Aug 2024 11:24:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DAB994E9A9
+	for <lists+nouveau@lfdr.de>; Mon, 12 Aug 2024 11:24:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3F58E10E174;
-	Mon, 12 Aug 2024 09:24:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B88AB10E176;
+	Mon, 12 Aug 2024 09:24:44 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="ORC2b1ta";
+	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="OwCWyDN4";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com
- [209.85.208.178])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1E8D310E174
- for <nouveau@lists.freedesktop.org>; Mon, 12 Aug 2024 09:24:33 +0000 (UTC)
-Received: by mail-lj1-f178.google.com with SMTP id
- 38308e7fff4ca-2ef301eabe4so2955551fa.0
- for <nouveau@lists.freedesktop.org>; Mon, 12 Aug 2024 02:24:33 -0700 (PDT)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com
+ [209.85.208.52])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F200B10E180
+ for <nouveau@lists.freedesktop.org>; Mon, 12 Aug 2024 09:24:43 +0000 (UTC)
+Received: by mail-ed1-f52.google.com with SMTP id
+ 4fb4d7f45d1cf-5bd38125fd6so85683a12.0
+ for <nouveau@lists.freedesktop.org>; Mon, 12 Aug 2024 02:24:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google; t=1723454671; x=1724059471; darn=lists.freedesktop.org; 
+ d=ffwll.ch; s=google; t=1723454682; x=1724059482; darn=lists.freedesktop.org; 
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zJwwC7NvxOGNPRdGhNuQnaArLNnaQ9jdbr05HbVMu2U=;
- b=ORC2b1talxqve8Qg67L/j0WSyFQ25x73yAl8ngKsPSgqsOhk+L2JsjWhDbb0Yhzu6w
- 3yIOfwo+9fVRlwIhFrlx1S6c6ntkcK7GoGzk6cyxI9DHW+HHo1DAEzVvgZT3MLIpMP/G
- N+Yl5gnpxiOwzwv/Ih0AQ/xjreWWVEqkuqGfQ=
+ bh=qfDePbACNEJyXkn1NuDBaQVxTKPG+PH9QdgiWTsQFw4=;
+ b=OwCWyDN4QDvPva7MR1CoL1V+5GOJrx5kPRSpK13qw6e2NqNckcJKbwv2y6Rac0Xn9J
+ HbfrfiXg3yP6mZKQB9Gon+4JjLf2SlORzgxWSYq38+UQYaGtk8wF5i8T8uhrn8XIvGSj
+ Sy5ecXYxRSpE/kQyQRwd1EY61rS0LFstlDdkM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723454671; x=1724059471;
+ d=1e100.net; s=20230601; t=1723454682; x=1724059482;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zJwwC7NvxOGNPRdGhNuQnaArLNnaQ9jdbr05HbVMu2U=;
- b=l+PqjX29DG/GdlG+VzGehHO7JQUjJanoqjPQA1YoGua2PcD+liUxtEZuFK0vPYdTZc
- WBkDDq3HoenG9gexnnBpWy3C7j7M/9Tn27MZSp+dJEtMENTVY5c/lX5XfBDIqvutX78i
- Cg48J6gc3pO5Gb8la4UaKwf2DhcXF3/0HPj5ogsSheLFgWN0FrUTEFGFfIH5w60LlwzW
- moRf41KrJs84pqcB0zMgtfbyt0AAhn80spOv74fZAFjonyc2ASYYOLIWOiIUiSLrPVME
- ei0XNtDtWJabRDtqIm6HDTO48jnLmwRHGyaMfwjmSP4bd1+ysqgrnd6zfjcWzNYU0tXM
- FoSQ==
+ bh=qfDePbACNEJyXkn1NuDBaQVxTKPG+PH9QdgiWTsQFw4=;
+ b=At43IIj7/n2nN4LuprfKl6dJwsGm05qukwSonVL7qNQ/dWZ1APq3Oq0dq8HFgnLMIh
+ R16p7Hb2oYKMxNYBNvunmltB8InW4sGLXnfvE0WckvCKGzO4UfgcHN+RImVKGpbqYSu1
+ XXKpxUhMsM4ErwMiEFa5/WsH99sa/w6gNDNFdZ9hoZwW4DWBYwbjPXNd2jlEI1IkgL7w
+ mOQr7PSG57vEQfj4hwZEbnYwyWyk2fHO8ZJPhJoamA1R64JhFF2fCI61WrrkdCZZuguF
+ u0pGQJpAB1wgC8AzarQjGOAMTEjSVXoODwQgFmJRBeCI9aszUC/6oUweqZ71PbrLPDSE
+ 0bUg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWXa1GYMcDrwu+DMEQY3fLUzeEujL5Qe0Il787Fz2oth9iZwVZP14XG/aMUo+MseppMBN0Z0nXZ@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzOXNeIgCb2hB0Mw+eFsd/AeMFxFC8PdoQcKYyUc0l2CbUL8Azh
- UptAoO1IfWS1x73pfUUKTVJMMS8e0HkiQrKAJ39Td34SsgR4Lb/AX5MZgIB9Xws=
-X-Google-Smtp-Source: AGHT+IFIOZStpf2467iNtxAQsVDRYlOTXLEPZ8JwWq8jWhJ0qLTHijtbjmSXUOTaE4pjzbGxfBSY1Q==
-X-Received: by 2002:a05:6512:ac9:b0:52c:def2:d8af with SMTP id
- 2adb3069b0e04-530eea09fc4mr3227266e87.4.1723454670928; 
- Mon, 12 Aug 2024 02:24:30 -0700 (PDT)
+ AJvYcCU4aZQZbzYCnyIzwu7EwV/d7kv5cd4XTDkRwpIe2w+4R0Yf27Hh6BorLgva1DALtVE2VagMhA4m@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yyz2rVo7J8oVYqKOg0kvjdVpP/sExBBy3kfTFVcldqNAwNvq5ky
+ qTu6EH52uu+j4Qj7IrY3CDmQ12OqSo00CYF4exqFixvVcjr2B9nmlUmTFhoeo6s=
+X-Google-Smtp-Source: AGHT+IFflcfI+5IHwTwpaIz9O/DP2+uKDaA2O+8e1r+0AW9GSXVSUe9eIaE5je3jaPNmlMVnVKDTQg==
+X-Received: by 2002:a05:6402:5203:b0:5a1:efd1:ca1e with SMTP id
+ 4fb4d7f45d1cf-5bd0a535968mr4084768a12.2.1723454682034; 
+ Mon, 12 Aug 2024 02:24:42 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a80bb2136f5sm216211466b.179.2024.08.12.02.24.30
+ 4fb4d7f45d1cf-5bd1a5dfeb9sm1958470a12.61.2024.08.12.02.24.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Aug 2024 02:24:30 -0700 (PDT)
-Date: Mon, 12 Aug 2024 11:24:28 +0200
+ Mon, 12 Aug 2024 02:24:41 -0700 (PDT)
+Date: Mon, 12 Aug 2024 11:24:39 +0200
 From: Daniel Vetter <daniel.vetter@ffwll.ch>
 To: Thomas Zimmermann <tzimmermann@suse.de>
 Cc: alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
@@ -61,14 +61,14 @@ Cc: alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
  kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com,
  amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
-Subject: Re: [PATCH v2 2/9] drm/amdgpu: Do not set struct drm_driver.lastclose
-Message-ID: <ZrnUzGX2n6aeEyTr@phenom.ffwll.local>
+Subject: Re: [PATCH v2 3/9] drm/nouveau: Do not set struct drm_driver.lastclose
+Message-ID: <ZrnU16ATX9b3hJAP@phenom.ffwll.local>
 References: <20240812083000.337744-1-tzimmermann@suse.de>
- <20240812083000.337744-3-tzimmermann@suse.de>
+ <20240812083000.337744-4-tzimmermann@suse.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240812083000.337744-3-tzimmermann@suse.de>
+In-Reply-To: <20240812083000.337744-4-tzimmermann@suse.de>
 X-Operating-System: Linux phenom 6.9.10-amd64 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -84,85 +84,63 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Aug 12, 2024 at 10:28:23AM +0200, Thomas Zimmermann wrote:
+On Mon, Aug 12, 2024 at 10:28:24AM +0200, Thomas Zimmermann wrote:
 > Remove the implementation of struct drm_driver.lastclose. The hook
 > was only necessary before in-kernel DRM clients existed, but is now
-> obsolete. The code in amdgpu_driver_lastclose_kms() is performed by
+> obsolete. The code in nouveau_vga_lastclose() is performed by
 > drm_lastclose().
 > 
 > v2:
-> - update commit message
+> - update commit description
 > 
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 
 Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 
 > ---
->  drivers/gpu/drm/amd/amdgpu/amdgpu.h     |  1 -
->  drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c |  2 --
->  drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c | 17 -----------------
->  3 files changed, 20 deletions(-)
+>  drivers/gpu/drm/nouveau/nouveau_drm.c | 1 -
+>  drivers/gpu/drm/nouveau/nouveau_vga.c | 7 -------
+>  drivers/gpu/drm/nouveau/nouveau_vga.h | 1 -
+>  3 files changed, 9 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu.h b/drivers/gpu/drm/amd/amdgpu/amdgpu.h
-> index 137a88b8de45..4baeb6519fda 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu.h
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu.h
-> @@ -1484,7 +1484,6 @@ extern const int amdgpu_max_kms_ioctl;
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> index ac7c60fb14d3..4a9a9b9c3935 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> @@ -1303,7 +1303,6 @@ driver_stub = {
+>  			   DRIVER_RENDER,
+>  	.open = nouveau_drm_open,
+>  	.postclose = nouveau_drm_postclose,
+> -	.lastclose = nouveau_vga_lastclose,
 >  
->  int amdgpu_driver_load_kms(struct amdgpu_device *adev, unsigned long flags);
->  void amdgpu_driver_unload_kms(struct drm_device *dev);
-> -void amdgpu_driver_lastclose_kms(struct drm_device *dev);
->  int amdgpu_driver_open_kms(struct drm_device *dev, struct drm_file *file_priv);
->  void amdgpu_driver_postclose_kms(struct drm_device *dev,
->  				 struct drm_file *file_priv);
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-> index 094498a0964b..5dd39e6c6223 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-> @@ -2953,7 +2953,6 @@ static const struct drm_driver amdgpu_kms_driver = {
->  	    DRIVER_SYNCOBJ_TIMELINE,
->  	.open = amdgpu_driver_open_kms,
->  	.postclose = amdgpu_driver_postclose_kms,
-> -	.lastclose = amdgpu_driver_lastclose_kms,
->  	.ioctls = amdgpu_ioctls_kms,
->  	.num_ioctls = ARRAY_SIZE(amdgpu_ioctls_kms),
->  	.dumb_create = amdgpu_mode_dumb_create,
-> @@ -2980,7 +2979,6 @@ const struct drm_driver amdgpu_partition_driver = {
->  	    DRIVER_SYNCOBJ_TIMELINE,
->  	.open = amdgpu_driver_open_kms,
->  	.postclose = amdgpu_driver_postclose_kms,
-> -	.lastclose = amdgpu_driver_lastclose_kms,
->  	.ioctls = amdgpu_ioctls_kms,
->  	.num_ioctls = ARRAY_SIZE(amdgpu_ioctls_kms),
->  	.dumb_create = amdgpu_mode_dumb_create,
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
-> index 66782be5917b..0a799942343d 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
-> @@ -1269,23 +1269,6 @@ int amdgpu_info_ioctl(struct drm_device *dev, void *data, struct drm_file *filp)
->  	return 0;
+>  #if defined(CONFIG_DEBUG_FS)
+>  	.debugfs_init = nouveau_drm_debugfs_init,
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_vga.c b/drivers/gpu/drm/nouveau/nouveau_vga.c
+> index 2525e08938b3..ee637f1fe03d 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_vga.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_vga.c
+> @@ -127,10 +127,3 @@ nouveau_vga_fini(struct nouveau_drm *drm)
+>  	if (runtime && nouveau_is_v1_dsm() && !nouveau_is_optimus())
+>  		vga_switcheroo_fini_domain_pm_ops(drm->dev->dev);
 >  }
->  
 > -
-> -/*
-> - * Outdated mess for old drm with Xorg being in charge (void function now).
-> - */
-> -/**
-> - * amdgpu_driver_lastclose_kms - drm callback for last close
-> - *
-> - * @dev: drm dev pointer
-> - *
-> - * Switch vga_switcheroo state after last close (all asics).
-> - */
-> -void amdgpu_driver_lastclose_kms(struct drm_device *dev)
+> -
+> -void
+> -nouveau_vga_lastclose(struct drm_device *dev)
 > -{
-> -	drm_fb_helper_lastclose(dev);
 > -	vga_switcheroo_process_delayed_switch();
 > -}
-> -
->  /**
->   * amdgpu_driver_open_kms - drm callback for open
->   *
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_vga.h b/drivers/gpu/drm/nouveau/nouveau_vga.h
+> index 951a83f984dd..63be415d2a44 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_vga.h
+> +++ b/drivers/gpu/drm/nouveau/nouveau_vga.h
+> @@ -4,6 +4,5 @@
+>  
+>  void nouveau_vga_init(struct nouveau_drm *);
+>  void nouveau_vga_fini(struct nouveau_drm *);
+> -void nouveau_vga_lastclose(struct drm_device *dev);
+>  
+>  #endif
 > -- 
 > 2.46.0
 > 
