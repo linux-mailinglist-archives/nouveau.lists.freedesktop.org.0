@@ -2,55 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F58D94F6EF
-	for <lists+nouveau@lfdr.de>; Mon, 12 Aug 2024 20:55:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C79A94F727
+	for <lists+nouveau@lfdr.de>; Mon, 12 Aug 2024 21:05:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6AA2A10E282;
-	Mon, 12 Aug 2024 18:55:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 44BFB10E28B;
+	Mon, 12 Aug 2024 19:05:35 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WXWYqm2O";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OziNeQLq";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D688410E281;
- Mon, 12 Aug 2024 18:55:21 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id C01BACE0E05;
- Mon, 12 Aug 2024 18:55:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 359C8C32782;
- Mon, 12 Aug 2024 18:55:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1723488919;
- bh=e1WTUVGI/s+EmSNaWZsS+kUoc3GQF6WfA19VWmyj2yY=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=WXWYqm2OpmwaRBfR994oRvYkImIrQn734SH1o0lBPrdw5oh/COU2oX/wQJ1SUQs6U
- BI9krouKBQGY8l1CkK0c4+nguMVpjzoaCWWWTRJmVH3HmXdT7w+ypuZt9nWCA9wUSd
- 7wEYFJPRonEL61g3k/gOUC3zokXhFFeSstqQdNwH7lw1zQC0RBe6+B8PS1yqPPU3Uu
- fjPxtPdsm6Wyl+MQbzo+poZ7oU5wZweTmZZW+TMCQSdLtMDtd0Dm0j39Fd23cYQPHQ
- 69Sb5OywmLZ35RNwPjC4C6qMTu2i1xGw0c/YdSZk5KWbmUonHocIpoc2LRJxqJHc9+
- ZBbZE9efGDDNw==
-Message-ID: <b29016ab-b75d-4822-968b-ea54187f76cf@kernel.org>
-Date: Mon, 12 Aug 2024 20:55:14 +0200
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com
+ [209.85.210.171])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8E0BC10E289;
+ Mon, 12 Aug 2024 19:05:34 +0000 (UTC)
+Received: by mail-pf1-f171.google.com with SMTP id
+ d2e1a72fcca58-70d1d6369acso3836281b3a.0; 
+ Mon, 12 Aug 2024 12:05:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1723489534; x=1724094334; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zYzk9ajK0qkvS9HudnEJV1OJXQlLDLt8xYzX5H6+jVY=;
+ b=OziNeQLqWUd1QyY8a6ZVTjzzpxBHGhVfMAI0QJJYieDDL5nEsXhHCb7zubOT9V70QA
+ 0dZ29zPWYErGt1CYv+acgIVYLl0f4YKATi4ASXHkTtFp88+nbIyMVUaKFXuFDyUP3rW9
+ 2JEUN479HJgTIBeV7E913D8hTACb4nD1Xa+FrOASNfPcyQoqxmqcXiHu83GHMoFLJluI
+ kpn41D3I9iuFjaE6rnKEQUP87fq7ldr6ikq4m4W+bAy8PY/mOcP307TeuS4fTLVQznKs
+ iyMB1w7RNc1tPJ0WSXdfyFiV2mchhDZsRK9B1qgRZDC4hgIhs3YmMxpWH3DmUAHW5RSE
+ gXWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723489534; x=1724094334;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zYzk9ajK0qkvS9HudnEJV1OJXQlLDLt8xYzX5H6+jVY=;
+ b=m0n6cjaSuZ49SuPJD661RuR/HcPk9xBc3WI/20R4DZlRPrXlYwm1Ak1nYPWYEBeNsv
+ NVTi3Paj5BNfQxevhZ3FJ4w+ydzpefpZi1hbx4DJBPKKdsDhZOl3n7k4fw974/UFUNjs
+ im94+vUqWCKQtcfTeDeKz+q4CPMez8U3B0VFBQuAb/qbETH1yDEymTTLxCjOnAPlONtC
+ IgZyG6bH6r5qtDuKLWt4/1e1kO4A2kEBLqGUFJpcIFGAibtl1LEc2zEu0wJIFTBAUpga
+ 0kaxiOWEnffxsLG/rOSi4B02BSvchJ7mclHH0vuHujMYzgubYm54JJIQndO2KaRzYSdV
+ d5Eg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXWPrbb/DYXhc/9+kp3MR2VmSqB++9tsguWtCxzniR5NLidRaOd4ldj8NJfUfMTn/BX2E5DuLYjhbM1V+SEaiSwpp10GaHunXw1m+8kQOtlZBtKCLQ+1T+Flx9/JhJ5VM7xGcRGZLBxjfMDX1mXusDRrsMhQZFWLWmITMJ560q8Sq6SIMYuqgTu6VsoH2I=
+X-Gm-Message-State: AOJu0YxeDaHj1YxZCSh3YY0SKeQRXzZyw6gkwi8VsbMXoePskxZgI9vM
+ fan3dn9ZdZysJ25Ioc3XRimrXARHehT6X3mVJGRVslKlwmoYXjOeAflhELqSls5qRxKPq3aMjbt
+ u3h1UQtCA+S2yw6Pe4TCfCe80mXg=
+X-Google-Smtp-Source: AGHT+IH5VhC6U8Qp+4bvBRGJzRnuovDNQCmdWCOZIiIfYBTYRAjIa4lVC2Jz5IR0rcbQXF5yDius11P9O8tM7Bft9yY=
+X-Received: by 2002:a17:902:fc87:b0:1fb:80a3:5826 with SMTP id
+ d9443c01a7336-201cbba9816mr8618925ad.4.1723489533877; Mon, 12 Aug 2024
+ 12:05:33 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/9] drm/nouveau: Implement switcheroo reprobe with
- drm_client_dev_hotplug()
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
- airlied@gmail.com, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, kherbst@redhat.com, lyude@redhat.com,
- amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, Daniel Vetter <daniel.vetter@ffwll.ch>
 References: <20240812083000.337744-1-tzimmermann@suse.de>
- <20240812083000.337744-6-tzimmermann@suse.de>
- <61d77e67-a318-40ea-b904-e8686252b05c@kernel.org>
- <b29c367f-1a46-4ddb-a8c2-a508f2b54b0d@suse.de>
-From: Danilo Krummrich <dakr@kernel.org>
-Content-Language: en-US
-In-Reply-To: <b29c367f-1a46-4ddb-a8c2-a508f2b54b0d@suse.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ <20240812083000.337744-2-tzimmermann@suse.de>
+In-Reply-To: <20240812083000.337744-2-tzimmermann@suse.de>
+From: Alex Deucher <alexdeucher@gmail.com>
+Date: Mon, 12 Aug 2024 15:05:22 -0400
+Message-ID: <CADnq5_MM4h3XSKCHViXbdJPTKPjy0QwSsYixpiXd-Cv4O-w-eg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/9] drm: Do delayed switcheroo in drm_lastclose()
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com, 
+ airlied@gmail.com, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com, 
+ mripard@kernel.org, kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com, 
+ amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,47 +82,70 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 8/12/24 2:34 PM, Thomas Zimmermann wrote:
-> Hi
-> 
-> Am 12.08.24 um 14:17 schrieb Danilo Krummrich:
->> On 8/12/24 10:28 AM, Thomas Zimmermann wrote:
->>> Replace the call to drm_fb_helper_output_poll_changed() with a call
->>> to drm_client_dev_hotplug(). It is equivalent in functionality, but
->>> uses the DRM client infrastructure.
->>>
->>> v2:
->>> - fix commit description
->>>
->>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->>> Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
->>
->> Acked-by: Danilo Krummrich <dakr@kernel.org>
-> 
-> Thanks for the acks. Can I merge the nouveau patches through drm-misc-next?
+On Mon, Aug 12, 2024 at 4:30=E2=80=AFAM Thomas Zimmermann <tzimmermann@suse=
+.de> wrote:
+>
+> Amdgpu and nouveau call vga_switcheroo_process_delayed_switch() from
+> their lastclose callbacks. Call it from drm_lastclose(), so that the
+> driver functions can finally be removed. Only PCI devices with enabled
+> switcheroo do the delayed switching. The call has no effect on other
+> hardware.
+>
+> v2:
+> - move change to drm_lastclose() (Sima)
+> - update docs for vga_switcheroo_process_delayed_switch()
+>
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 
-Sure.
+Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
 
-> 
-> Best regards
-> Thomas
-> 
->>
->>> ---
->>>   drivers/gpu/drm/nouveau/nouveau_vga.c | 3 ++-
->>>   1 file changed, 2 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/drivers/gpu/drm/nouveau/nouveau_vga.c b/drivers/gpu/drm/nouveau/nouveau_vga.c
->>> index ee637f1fe03d..ab4e11dc0b8a 100644
->>> --- a/drivers/gpu/drm/nouveau/nouveau_vga.c
->>> +++ b/drivers/gpu/drm/nouveau/nouveau_vga.c
->>> @@ -58,8 +58,9 @@ static void
->>>   nouveau_switcheroo_reprobe(struct pci_dev *pdev)
->>>   {
->>>       struct nouveau_drm *drm = pci_get_drvdata(pdev);
->>> +    struct drm_device *dev = drm->dev;
->>>   -    drm_fb_helper_output_poll_changed(drm->dev);
->>> +    drm_client_dev_hotplug(dev);
->>>   }
->>>     static bool
-> 
+> ---
+>  drivers/gpu/drm/drm_file.c       | 4 ++++
+>  drivers/gpu/vga/vga_switcheroo.c | 3 +--
+>  2 files changed, 5 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/drm_file.c b/drivers/gpu/drm/drm_file.c
+> index 714e42b05108..513bef816ae9 100644
+> --- a/drivers/gpu/drm/drm_file.c
+> +++ b/drivers/gpu/drm/drm_file.c
+> @@ -38,6 +38,7 @@
+>  #include <linux/pci.h>
+>  #include <linux/poll.h>
+>  #include <linux/slab.h>
+> +#include <linux/vga_switcheroo.h>
+>
+>  #include <drm/drm_client.h>
+>  #include <drm/drm_drv.h>
+> @@ -404,6 +405,9 @@ void drm_lastclose(struct drm_device * dev)
+>         drm_dbg_core(dev, "driver lastclose completed\n");
+>
+>         drm_client_dev_restore(dev);
+> +
+> +       if (dev_is_pci(dev->dev))
+> +               vga_switcheroo_process_delayed_switch();
+>  }
+>
+>  /**
+> diff --git a/drivers/gpu/vga/vga_switcheroo.c b/drivers/gpu/vga/vga_switc=
+heroo.c
+> index 365e6ddbe90f..18f2c92beff8 100644
+> --- a/drivers/gpu/vga/vga_switcheroo.c
+> +++ b/drivers/gpu/vga/vga_switcheroo.c
+> @@ -926,8 +926,7 @@ static void vga_switcheroo_debugfs_init(struct vgasr_=
+priv *priv)
+>  /**
+>   * vga_switcheroo_process_delayed_switch() - helper for delayed switchin=
+g
+>   *
+> - * Process a delayed switch if one is pending. DRM drivers should call t=
+his
+> - * from their ->lastclose callback.
+> + * Process a delayed switch if one is pending.
+>   *
+>   * Return: 0 on success. -EINVAL if no delayed switch is pending, if the=
+ client
+>   * has unregistered in the meantime or if there are other clients blocki=
+ng the
+> --
+> 2.46.0
+>
