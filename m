@@ -2,107 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14E7694E8A9
-	for <lists+nouveau@lfdr.de>; Mon, 12 Aug 2024 10:30:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE35F94E99F
+	for <lists+nouveau@lfdr.de>; Mon, 12 Aug 2024 11:23:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 065F310E167;
-	Mon, 12 Aug 2024 08:30:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1F29510E162;
+	Mon, 12 Aug 2024 09:23:50 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="o6Zm79/o";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="RXwyNH8R";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="o6Zm79/o";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="RXwyNH8R";
+	dkim=pass (1024-bit key; secure) header.d=ffwll.ch header.i=@ffwll.ch header.b="NbM3+Q/c";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7A29210E10F;
- Mon, 12 Aug 2024 08:30:10 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 2128020245;
- Mon, 12 Aug 2024 08:30:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1723451409; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=T63Nsa06BLsiBwDkwyuu5LGJrjtXArT4y5AP/sXfsYI=;
- b=o6Zm79/oSfxaQmJpGIs5yAd1rbCzIfSBG/C1Flw4aBac8qmCed2grnztd1Eu4h7ktciFfM
- vi3TTOKaOFS5HcC3revxad66HVMgAiRv6YXUHnNAKxtSOtTXgNXLAtgX6EzC4xT3b0JsNA
- MSzhrY/4bqqRKm3Syry9TAGGsvfLP/w=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1723451409;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=T63Nsa06BLsiBwDkwyuu5LGJrjtXArT4y5AP/sXfsYI=;
- b=RXwyNH8RXeKeckALOOVkYFmecej3KkRbGxYQs+tjnBeAPFVRBuek3Pjqfva/OGTDQmf0QM
- unvLTU1zgHo9IFDA==
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1723451409; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=T63Nsa06BLsiBwDkwyuu5LGJrjtXArT4y5AP/sXfsYI=;
- b=o6Zm79/oSfxaQmJpGIs5yAd1rbCzIfSBG/C1Flw4aBac8qmCed2grnztd1Eu4h7ktciFfM
- vi3TTOKaOFS5HcC3revxad66HVMgAiRv6YXUHnNAKxtSOtTXgNXLAtgX6EzC4xT3b0JsNA
- MSzhrY/4bqqRKm3Syry9TAGGsvfLP/w=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1723451409;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=T63Nsa06BLsiBwDkwyuu5LGJrjtXArT4y5AP/sXfsYI=;
- b=RXwyNH8RXeKeckALOOVkYFmecej3KkRbGxYQs+tjnBeAPFVRBuek3Pjqfva/OGTDQmf0QM
- unvLTU1zgHo9IFDA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id B87B413A3D;
- Mon, 12 Aug 2024 08:30:08 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id cPTiKxDIuWZpHwAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Mon, 12 Aug 2024 08:30:08 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
- airlied@gmail.com, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com
-Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
- Daniel Vetter <daniel.vetter@ffwll.ch>
-Subject: [PATCH v2 9/9] drm: Remove struct
- drm_mode_config_funcs.output_poll_changed
-Date: Mon, 12 Aug 2024 10:28:30 +0200
-Message-ID: <20240812083000.337744-10-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240812083000.337744-1-tzimmermann@suse.de>
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com
+ [209.85.218.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E869210E125
+ for <nouveau@lists.freedesktop.org>; Mon, 12 Aug 2024 09:23:48 +0000 (UTC)
+Received: by mail-ej1-f43.google.com with SMTP id
+ a640c23a62f3a-a688e726755so48471266b.1
+ for <nouveau@lists.freedesktop.org>; Mon, 12 Aug 2024 02:23:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ffwll.ch; s=google; t=1723454627; x=1724059427; darn=lists.freedesktop.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=QdliwoBicYTW7oIiEkHaSLOzFyeZLdkNCBChomrwU0k=;
+ b=NbM3+Q/cjR18hrWVzBghg59JvvvhK0nY95h8eI809RX1WUIQKHqQb0IMTAoadc3kl+
+ JLLYVfcOIpbCVcYzjrew7kixGMJTuY11JV+7kTyQoXz3vqIuAcQpmXSVqmGfJEMPkgdm
+ 9YNCy9HTfbsIAjQ7bBFRQVRzNgEyK10+030B4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723454627; x=1724059427;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QdliwoBicYTW7oIiEkHaSLOzFyeZLdkNCBChomrwU0k=;
+ b=GsYEltiqifOgJel5p3fuV84CrSS6jJmmWnED4b00AwjRsSJCbjI9+y1WoQXPQYLyrY
+ q0iqsFXTWxwA9z+AVs3ShMUA+Dv2cQB8IMeXwHxuyfOkDIT24rPeqpdK1CtDsErUslxj
+ kNGR+uMz1SfvViBhHh+jmUb6ZyxTsdvQT9dE69ZoPF5755hdcMXbIjbpCoH87WPBrHEa
+ 7TRXueBI32D6xc3yjq5PcHpEcDWgIfO5+i6j2l9FcgiAD+sPgPMCNUkIWGSOTNyGr4mz
+ iaWZOwfp2Ch3j+k/CifHHgMSgsasbF1YX+68ZYJdmxxSVv4I4VRAs8WCyxWhEDmHxA6y
+ nfGw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWIqpU/DmuYL3z2hz1eQlcuclF8FCGQdv+DJgMods6mgV6HNqUPdIMd7EQ801Aiw/wIsTJHFRb58pxkUrQVS8s55ipzqZg36/LFBx4xyw==
+X-Gm-Message-State: AOJu0Yzq+ZkYOZH+5RU2q7FOEvMZtA1qNJ949wkgtIaGuchQVcrNLSIM
+ +kvGzJGdBQhIdnaYlfls9s9g20RgYoDH2pew58dwvEv7aX+9eqPLUzgcg/vuQBU=
+X-Google-Smtp-Source: AGHT+IFzb52e/X0DQjkZlhukRHYFg8Ep5Ss6f9A0BomckYKgO7DfJZH9YerL+hOqxAiB4ZdM31FYDw==
+X-Received: by 2002:a17:907:96a2:b0:a80:a23e:fbf9 with SMTP id
+ a640c23a62f3a-a80aa65f3b5mr376486866b.6.1723454627085; 
+ Mon, 12 Aug 2024 02:23:47 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a80bb0e1355sm213791366b.74.2024.08.12.02.23.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Aug 2024 02:23:46 -0700 (PDT)
+Date: Mon, 12 Aug 2024 11:23:44 +0200
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com,
+ airlied@gmail.com, daniel@ffwll.ch,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ kherbst@redhat.com, lyude@redhat.com, dakr@redhat.com,
+ amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
+Subject: Re: [PATCH v2 1/9] drm: Do delayed switcheroo in drm_lastclose()
+Message-ID: <ZrnUoPuYv0v-yx79@phenom.ffwll.local>
 References: <20240812083000.337744-1-tzimmermann@suse.de>
+ <20240812083000.337744-2-tzimmermann@suse.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Level: 
-X-Spamd-Result: default: False [0.20 / 50.00]; MID_CONTAINS_FROM(1.00)[];
- NEURAL_HAM_LONG(-1.00)[-1.000]; R_MISSING_CHARSET(0.50)[];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- RCVD_VIA_SMTP_AUTH(0.00)[]; MIME_TRACE(0.00)[0:+];
- RCPT_COUNT_TWELVE(0.00)[15];
- FREEMAIL_TO(0.00)[amd.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,redhat.com];
- ARC_NA(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
- FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[]; RCVD_TLS_ALL(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo];
- RCVD_COUNT_TWO(0.00)[2]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com]
-X-Spam-Flag: NO
-X-Spam-Score: 0.20
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240812083000.337744-2-tzimmermann@suse.de>
+X-Operating-System: Linux phenom 6.9.10-amd64 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -117,81 +84,71 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The output_poll_changed hook in struct drm_mode_config_funcs is
-unused. Remove it. The helper drm_client_dev_hotplug() implements
-the callback's functionality.
+On Mon, Aug 12, 2024 at 10:28:22AM +0200, Thomas Zimmermann wrote:
+> Amdgpu and nouveau call vga_switcheroo_process_delayed_switch() from
+> their lastclose callbacks. Call it from drm_lastclose(), so that the
+> driver functions can finally be removed. Only PCI devices with enabled
+> switcheroo do the delayed switching. The call has no effect on other
+> hardware.
+> 
+> v2:
+> - move change to drm_lastclose() (Sima)
+> - update docs for vga_switcheroo_process_delayed_switch()
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+A bit an aside: The entire vgaswitcheroo code is still a midlayer mess,
+where the locking is at the wrong layers resulting in the can_switch check
+potentially being racy. But that's a different can of worms.
+
 Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
----
- drivers/gpu/drm/drm_probe_helper.c | 10 +---------
- include/drm/drm_mode_config.h      | 16 ----------------
- 2 files changed, 1 insertion(+), 25 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_probe_helper.c b/drivers/gpu/drm/drm_probe_helper.c
-index 285290067056..92f21764246f 100644
---- a/drivers/gpu/drm/drm_probe_helper.c
-+++ b/drivers/gpu/drm/drm_probe_helper.c
-@@ -714,7 +714,7 @@ EXPORT_SYMBOL(drm_helper_probe_single_connector_modes);
-  * @dev: drm_device whose connector state changed
-  *
-  * This function fires off the uevent for userspace and also calls the
-- * output_poll_changed function, which is most commonly used to inform the fbdev
-+ * client hotplug function, which is most commonly used to inform the fbdev
-  * emulation code and allow it to update the fbcon output configuration.
-  *
-  * Drivers should call this from their hotplug handling code when a change is
-@@ -730,11 +730,7 @@ EXPORT_SYMBOL(drm_helper_probe_single_connector_modes);
-  */
- void drm_kms_helper_hotplug_event(struct drm_device *dev)
- {
--	/* send a uevent + call fbdev */
- 	drm_sysfs_hotplug_event(dev);
--	if (dev->mode_config.funcs->output_poll_changed)
--		dev->mode_config.funcs->output_poll_changed(dev);
--
- 	drm_client_dev_hotplug(dev);
- }
- EXPORT_SYMBOL(drm_kms_helper_hotplug_event);
-@@ -750,11 +746,7 @@ void drm_kms_helper_connector_hotplug_event(struct drm_connector *connector)
- {
- 	struct drm_device *dev = connector->dev;
- 
--	/* send a uevent + call fbdev */
- 	drm_sysfs_connector_hotplug_event(connector);
--	if (dev->mode_config.funcs->output_poll_changed)
--		dev->mode_config.funcs->output_poll_changed(dev);
--
- 	drm_client_dev_hotplug(dev);
- }
- EXPORT_SYMBOL(drm_kms_helper_connector_hotplug_event);
-diff --git a/include/drm/drm_mode_config.h b/include/drm/drm_mode_config.h
-index ab0f167474b1..271765e2e9f2 100644
---- a/include/drm/drm_mode_config.h
-+++ b/include/drm/drm_mode_config.h
-@@ -97,22 +97,6 @@ struct drm_mode_config_funcs {
- 	 */
- 	const struct drm_format_info *(*get_format_info)(const struct drm_mode_fb_cmd2 *mode_cmd);
- 
--	/**
--	 * @output_poll_changed:
--	 *
--	 * Callback used by helpers to inform the driver of output configuration
--	 * changes.
--	 *
--	 * Drivers implementing fbdev emulation use drm_kms_helper_hotplug_event()
--	 * to call this hook to inform the fbdev helper of output changes.
--	 *
--	 * This hook is deprecated, drivers should instead implement fbdev
--	 * support with struct drm_client, which takes care of any necessary
--	 * hotplug event forwarding already without further involvement by
--	 * the driver.
--	 */
--	void (*output_poll_changed)(struct drm_device *dev);
--
- 	/**
- 	 * @mode_valid:
- 	 *
+> ---
+>  drivers/gpu/drm/drm_file.c       | 4 ++++
+>  drivers/gpu/vga/vga_switcheroo.c | 3 +--
+>  2 files changed, 5 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/drm_file.c b/drivers/gpu/drm/drm_file.c
+> index 714e42b05108..513bef816ae9 100644
+> --- a/drivers/gpu/drm/drm_file.c
+> +++ b/drivers/gpu/drm/drm_file.c
+> @@ -38,6 +38,7 @@
+>  #include <linux/pci.h>
+>  #include <linux/poll.h>
+>  #include <linux/slab.h>
+> +#include <linux/vga_switcheroo.h>
+>  
+>  #include <drm/drm_client.h>
+>  #include <drm/drm_drv.h>
+> @@ -404,6 +405,9 @@ void drm_lastclose(struct drm_device * dev)
+>  	drm_dbg_core(dev, "driver lastclose completed\n");
+>  
+>  	drm_client_dev_restore(dev);
+> +
+> +	if (dev_is_pci(dev->dev))
+> +		vga_switcheroo_process_delayed_switch();
+>  }
+>  
+>  /**
+> diff --git a/drivers/gpu/vga/vga_switcheroo.c b/drivers/gpu/vga/vga_switcheroo.c
+> index 365e6ddbe90f..18f2c92beff8 100644
+> --- a/drivers/gpu/vga/vga_switcheroo.c
+> +++ b/drivers/gpu/vga/vga_switcheroo.c
+> @@ -926,8 +926,7 @@ static void vga_switcheroo_debugfs_init(struct vgasr_priv *priv)
+>  /**
+>   * vga_switcheroo_process_delayed_switch() - helper for delayed switching
+>   *
+> - * Process a delayed switch if one is pending. DRM drivers should call this
+> - * from their ->lastclose callback.
+> + * Process a delayed switch if one is pending.
+>   *
+>   * Return: 0 on success. -EINVAL if no delayed switch is pending, if the client
+>   * has unregistered in the meantime or if there are other clients blocking the
+> -- 
+> 2.46.0
+> 
+
 -- 
-2.46.0
-
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
