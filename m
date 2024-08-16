@@ -2,52 +2,39 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CE9E954B8B
-	for <lists+nouveau@lfdr.de>; Fri, 16 Aug 2024 15:59:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F071D954C15
+	for <lists+nouveau@lfdr.de>; Fri, 16 Aug 2024 16:15:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 52BF610E788;
-	Fri, 16 Aug 2024 13:59:15 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="B9IQyqmh";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 650CB10E7C7;
+	Fri, 16 Aug 2024 14:15:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 13F6510E783;
- Fri, 16 Aug 2024 13:59:14 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 2D3AF62122;
- Fri, 16 Aug 2024 13:59:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E838C32782;
- Fri, 16 Aug 2024 13:59:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1723816752;
- bh=AYjyt3Zr4yYkK8EpDLsOl7+GIl2rfY/yAMJVs4wWqzE=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=B9IQyqmh350p67tFsMJW4RhPtoUf9FqudC5otI9WnV1xa59NqqV1PpqbArYqhOgoj
- EeBRL4DgY8iAU/sPILsxMfXIHc69OZS+vB7CQuFwufeD/Nr/Ux0keuJJsTQ9XCHarv
- arUrZfML86yC/GNemrzAFY549WogD5FQU23OjeQGTIBEax6Cjh0gbPS4dIwEek08QI
- boVM6BlIgQqrHFqLO1oqCXOxxMNRRNk/EzzS23eHD0J2tAJR6HdQxhS9jrAg5uHg24
- 1ULRAyqkNB4IwvVzBev2Vyh96FicfZIUXAeZs6DXysH5/GPG3jvuYUYgVknbuJqFLa
- yx5tetp8tG83A==
-Message-ID: <d2d8ccfc-8b41-4051-a2ea-3908aa21daac@kernel.org>
-Date: Fri, 16 Aug 2024 15:59:07 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 69/86] drm/nouveau: Run DRM default client setup
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 8B9DA10E7C5
+ for <nouveau@lists.freedesktop.org>; Fri, 16 Aug 2024 14:15:32 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2FC04143D
+ for <nouveau@lists.freedesktop.org>; Fri, 16 Aug 2024 07:15:58 -0700 (PDT)
+Received: from e110455-lin.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id F0E9A3F73B
+ for <nouveau@lists.freedesktop.org>; Fri, 16 Aug 2024 07:15:31 -0700 (PDT)
+Date: Fri, 16 Aug 2024 15:15:21 +0100
+From: Liviu Dudau <liviu.dudau@arm.com>
 To: Thomas Zimmermann <tzimmermann@suse.de>
 Cc: daniel@ffwll.ch, airlied@gmail.com, jfalempe@redhat.com,
  javierm@redhat.com, dri-devel@lists.freedesktop.org,
  amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>
+ intel-xe@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Subject: Re: [PATCH 07/86] drm/arm/komeda: Run DRM default client setup
+Message-ID: <Zr9e-XdYo0fH4dCy@e110455-lin.cambridge.arm.com>
 References: <20240816125408.310253-1-tzimmermann@suse.de>
- <20240816125408.310253-70-tzimmermann@suse.de>
-From: Danilo Krummrich <dakr@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20240816125408.310253-70-tzimmermann@suse.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <20240816125408.310253-8-tzimmermann@suse.de>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20240816125408.310253-8-tzimmermann@suse.de>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,56 +49,76 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 8/16/24 2:23 PM, Thomas Zimmermann wrote:
+On Fri, Aug 16, 2024 at 02:22:33PM +0200, Thomas Zimmermann wrote:
 > Call drm_client_setup() to run the kernel's default client setup
 > for DRM. Set fbdev_probe in struct drm_driver, so that the client
 > setup can start the common fbdev client.
 > 
-> The nouveau driver specifies a preferred color mode depending on
-> the available video memory, with a default of 32. Adapt this for
-> the new client interface.
+> The komeda driver specifies a preferred color mode of 32. As this
+> is the default if no format has been given, leave it out entirely.
 > 
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: Liviu Dudau <liviu.dudau@arm.com>
 
-Acked-by: Danilo Krummrich <dakr@kernel.org>
+Acked-by: Liviu Dudau <liviu.dudau@arm.com>
 
-> Cc: Karol Herbst <kherbst@redhat.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: Danilo Krummrich <dakr@redhat.com>
 > ---
->   drivers/gpu/drm/nouveau/nouveau_drm.c | 7 +++++--
->   1 file changed, 5 insertions(+), 2 deletions(-)
+>  drivers/gpu/drm/arm/display/komeda/komeda_drv.c | 4 ++--
+>  drivers/gpu/drm/arm/display/komeda/komeda_kms.c | 2 ++
+>  2 files changed, 4 insertions(+), 2 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> index 4a9a9b9c3935..445ebedf70d6 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> @@ -31,6 +31,7 @@
->   #include <linux/dynamic_debug.h>
->   
->   #include <drm/drm_aperture.h>
+> diff --git a/drivers/gpu/drm/arm/display/komeda/komeda_drv.c b/drivers/gpu/drm/arm/display/komeda/komeda_drv.c
+> index 55c3773befde..6d475bb34002 100644
+> --- a/drivers/gpu/drm/arm/display/komeda/komeda_drv.c
+> +++ b/drivers/gpu/drm/arm/display/komeda/komeda_drv.c
+> @@ -9,7 +9,7 @@
+>  #include <linux/of.h>
+>  #include <linux/platform_device.h>
+>  #include <linux/pm_runtime.h>
+> -#include <drm/drm_fbdev_dma.h>
 > +#include <drm/drm_client_setup.h>
->   #include <drm/drm_drv.h>
->   #include <drm/drm_fbdev_ttm.h>
->   #include <drm/drm_gem_ttm_helper.h>
-> @@ -873,9 +874,9 @@ static int nouveau_drm_probe(struct pci_dev *pdev,
->   		goto fail_pci;
->   
->   	if (drm->client.device.info.ram_size <= 32 * 1024 * 1024)
-> -		drm_fbdev_ttm_setup(drm->dev, 8);
-> +		drm_client_setup(drm->dev, drm_format_info(DRM_FORMAT_C8));
->   	else
-> -		drm_fbdev_ttm_setup(drm->dev, 32);
-> +		drm_client_setup(drm->dev, NULL);
->   
->   	quirk_broken_nv_runpm(pdev);
->   	return 0;
-> @@ -1317,6 +1318,8 @@ driver_stub = {
->   	.dumb_create = nouveau_display_dumb_create,
->   	.dumb_map_offset = drm_gem_ttm_dumb_map_offset,
->   
-> +	DRM_FBDEV_TTM_DRIVER_OPS,
-> +
->   	.name = DRIVER_NAME,
->   	.desc = DRIVER_DESC,
->   #ifdef GIT_REVISION
+>  #include <drm/drm_module.h>
+>  #include <drm/drm_of.h>
+>  #include "komeda_dev.h"
+> @@ -84,7 +84,7 @@ static int komeda_platform_probe(struct platform_device *pdev)
+>  	}
+>  
+>  	dev_set_drvdata(dev, mdrv);
+> -	drm_fbdev_dma_setup(&mdrv->kms->base, 32);
+> +	drm_client_setup(&mdrv->kms->base, NULL);
+>  
+>  	return 0;
+>  
+> diff --git a/drivers/gpu/drm/arm/display/komeda/komeda_kms.c b/drivers/gpu/drm/arm/display/komeda/komeda_kms.c
+> index fe46b0ebefea..f3314261925c 100644
+> --- a/drivers/gpu/drm/arm/display/komeda/komeda_kms.c
+> +++ b/drivers/gpu/drm/arm/display/komeda/komeda_kms.c
+> @@ -9,6 +9,7 @@
+>  #include <drm/drm_atomic.h>
+>  #include <drm/drm_atomic_helper.h>
+>  #include <drm/drm_drv.h>
+> +#include <drm/drm_fbdev_dma.h>
+>  #include <drm/drm_gem_dma_helper.h>
+>  #include <drm/drm_gem_framebuffer_helper.h>
+>  #include <drm/drm_managed.h>
+> @@ -58,6 +59,7 @@ static irqreturn_t komeda_kms_irq_handler(int irq, void *data)
+>  static const struct drm_driver komeda_kms_driver = {
+>  	.driver_features = DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
+>  	DRM_GEM_DMA_DRIVER_OPS_WITH_DUMB_CREATE(komeda_gem_dma_dumb_create),
+> +	DRM_FBDEV_DMA_DRIVER_OPS,
+>  	.fops = &komeda_cma_fops,
+>  	.name = "komeda",
+>  	.desc = "Arm Komeda Display Processor driver",
+> -- 
+> 2.46.0
+> 
+
+-- 
+====================
+| I would like to |
+| fix the world,  |
+| but they're not |
+| giving me the   |
+ \ source code!  /
+  ---------------
+    ¯\_(ツ)_/¯
