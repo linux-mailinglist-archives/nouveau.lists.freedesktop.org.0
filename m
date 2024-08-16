@@ -2,59 +2,65 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E844954A8E
-	for <lists+nouveau@lfdr.de>; Fri, 16 Aug 2024 14:58:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60917954ADE
+	for <lists+nouveau@lfdr.de>; Fri, 16 Aug 2024 15:18:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3170110E7C0;
-	Fri, 16 Aug 2024 12:54:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2B09910E6A8;
+	Fri, 16 Aug 2024 13:18:40 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="jAmji71X";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A17B710E74D;
- Fri, 16 Aug 2024 12:54:42 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 6B797200BB;
- Fri, 16 Aug 2024 12:54:41 +0000 (UTC)
-Authentication-Results: smtp-out2.suse.de;
-	none
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 27F0813ACA;
- Fri, 16 Aug 2024 12:54:41 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id qCVXCBFMv2bdbgAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Fri, 16 Aug 2024 12:54:41 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch, airlied@gmail.com, jfalempe@redhat.com, javierm@redhat.com
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EA20510E6A0;
+ Fri, 16 Aug 2024 13:18:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1723814319; x=1755350319;
+ h=from:to:cc:subject:in-reply-to:references:date:
+ message-id:mime-version;
+ bh=0WXmG62FzuEGQr1rUL+sEKQbL4bo5d7jf/vx3Aamu7M=;
+ b=jAmji71X/E6ac4+LEYitc24novFZNoCkV1Nh2IBwW1cSRTjkIt/Nkd9o
+ hUGJXUtw96zJM4/TnSBtlY2AgfnMC3+gw0gJjeKkKDPrq/ovfyiscX6MA
+ +lqcBhfqABZ1Zb8g5CZF5Wuf5mwL79eX2Hro9xTGZMNyw1Jnym2C2mc5k
+ wrhmlJkUHpLDi1ETHaoqyqe3IaXYicHkqFeFrIx0wLddO6/4ihjyMy2j0
+ M16mpbAcM4wZsg6A9Kc+JVCKIMSmOM8R1WfAPXGP0kvocFE1c/hrANov1
+ 7m5j0JXlyyNQ+HnMaeekJCcyDdmXjbOO+G2+SRGGNc6SEm0lx2QX2rT2a Q==;
+X-CSE-ConnectionGUID: RuyHZdN1Qk2RinW8+rNiLA==
+X-CSE-MsgGUID: JsPcW4rDSvi96OZznieQ+g==
+X-IronPort-AV: E=McAfee;i="6700,10204,11166"; a="39622178"
+X-IronPort-AV: E=Sophos;i="6.10,151,1719903600"; d="scan'208";a="39622178"
+Received: from orviesa007.jf.intel.com ([10.64.159.147])
+ by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 16 Aug 2024 06:18:39 -0700
+X-CSE-ConnectionGUID: B+zdp7TrS1yhC9YXY+JXSA==
+X-CSE-MsgGUID: zcZIEHgWRxis1CNcVRB56Q==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.10,151,1719903600"; d="scan'208";a="60227025"
+Received: from cpetruta-mobl1.ger.corp.intel.com (HELO localhost)
+ ([10.245.246.214])
+ by orviesa007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 16 Aug 2024 06:18:33 -0700
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
+ airlied@gmail.com, jfalempe@redhat.com, javierm@redhat.com
 Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 86/86] drm/fb-helper: Remove struct drm_fb_helper.fb_probe
-Date: Fri, 16 Aug 2024 14:23:52 +0200
-Message-ID: <20240816125408.310253-87-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240816125408.310253-1-tzimmermann@suse.de>
+ nouveau@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Joonas Lahtinen
+ <joonas.lahtinen@linux.intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
+ Lucas De Marchi <lucas.demarchi@intel.com>, Thomas =?utf-8?Q?Hellstr?=
+ =?utf-8?Q?=C3=B6m?= <thomas.hellstrom@linux.intel.com>
+Subject: Re: [PATCH 83/86] drm/{i915,xe}: Run DRM default client setup
+In-Reply-To: <20240816125408.310253-84-tzimmermann@suse.de>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 References: <20240816125408.310253-1-tzimmermann@suse.de>
+ <20240816125408.310253-84-tzimmermann@suse.de>
+Date: Fri, 16 Aug 2024 16:18:27 +0300
+Message-ID: <87cym87gik.fsf@intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Pre-Result: action=no action; module=replies;
- Message is reply to one we originated
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spam-Level: 
-X-Spamd-Result: default: False [-4.00 / 50.00];
-	REPLY(-4.00)[]
-X-Spam-Flag: NO
-X-Spam-Score: -4.00
-X-Rspamd-Queue-Id: 6B797200BB
-X-Rspamd-Action: no action
-X-Rspamd-Pre-Result: action=no action; module=replies;
- Message is reply to one we originated
+Content-Type: text/plain
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,70 +75,42 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The callback fb_probe in struct drm_fb_helper is unused. Remove it.
-New drivers should set struct drm_driver.fbdev_probe instead and call
-drm_client_setup() to instantiate in-kernel DRM clients.
+On Fri, 16 Aug 2024, Thomas Zimmermann <tzimmermann@suse.de> wrote:
+> diff --git a/drivers/gpu/drm/xe/xe_device.c b/drivers/gpu/drm/xe/xe_device.c
+> index 206328387150..7a28396abb25 100644
+> --- a/drivers/gpu/drm/xe/xe_device.c
+> +++ b/drivers/gpu/drm/xe/xe_device.c
+> @@ -17,6 +17,8 @@
+>  #include <drm/drm_print.h>
+>  #include <drm/xe_drm.h>
+>  
+> +#include "intel_fbdev.h"
+> +
+>  #include "display/xe_display.h"
+>  #include "instructions/xe_gpu_commands.h"
+>  #include "regs/xe_gt_regs.h"
+> @@ -267,6 +269,7 @@ static struct drm_driver driver = {
+>  
+>  	.dumb_create = xe_bo_dumb_create,
+>  	.dumb_map_offset = drm_gem_ttm_dumb_map_offset,
+> +	INTEL_FBDEV_DRIVER_OPS,
+>  #ifdef CONFIG_PROC_FS
+>  	.show_fdinfo = xe_drm_client_fdinfo,
+>  #endif
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/drm_fb_helper.c |  8 ++++----
- include/drm/drm_fb_helper.h     | 17 -----------------
- 2 files changed, 4 insertions(+), 21 deletions(-)
+Basically xe_device.c should have close to zero idea about display
+details, and should not include intel_fbdev.h directly.
 
-diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-index 92926cb02dfb..4968676a88a9 100644
---- a/drivers/gpu/drm/drm_fb_helper.c
-+++ b/drivers/gpu/drm/drm_fb_helper.c
-@@ -1625,6 +1625,9 @@ static int drm_fb_helper_single_fb_probe(struct drm_fb_helper *fb_helper)
- 	struct fb_info *info;
- 	int ret;
- 
-+	if (drm_WARN_ON(dev, !dev->driver->fbdev_probe))
-+		return -EINVAL;
-+
- 	ret = drm_fb_helper_find_sizes(fb_helper, &sizes);
- 	if (ret) {
- 		/* First time: disable all crtc's.. */
-@@ -1634,10 +1637,7 @@ static int drm_fb_helper_single_fb_probe(struct drm_fb_helper *fb_helper)
- 	}
- 
- 	/* push down into drivers */
--	if (dev->driver->fbdev_probe)
--		ret = dev->driver->fbdev_probe(fb_helper, &sizes);
--	else
--		ret = (*fb_helper->funcs->fb_probe)(fb_helper, &sizes);
-+	ret = dev->driver->fbdev_probe(fb_helper, &sizes);
- 	if (ret < 0)
- 		return ret;
- 
-diff --git a/include/drm/drm_fb_helper.h b/include/drm/drm_fb_helper.h
-index 3dcb9a60e408..56cf0cae3321 100644
---- a/include/drm/drm_fb_helper.h
-+++ b/include/drm/drm_fb_helper.h
-@@ -69,23 +69,6 @@ struct drm_fb_helper_surface_size {
-  * Driver callbacks used by the fbdev emulation helper library.
-  */
- struct drm_fb_helper_funcs {
--	/**
--	 * @fb_probe:
--	 *
--	 * Driver callback to allocate and initialize the fbdev info structure.
--	 * Furthermore it also needs to allocate the DRM framebuffer used to
--	 * back the fbdev.
--	 *
--	 * This callback is mandatory.
--	 *
--	 * RETURNS:
--	 *
--	 * The driver should return 0 on success and a negative error code on
--	 * failure.
--	 */
--	int (*fb_probe)(struct drm_fb_helper *helper,
--			struct drm_fb_helper_surface_size *sizes);
--
- 	/**
- 	 * @fb_dirty:
- 	 *
+There's a xe_display_driver_set_hooks() call that is the right place to
+set the driver->fbdev_probe hook.
+
+It's a bit of a bummer in the sense that this prevents struct drm_driver
+from being const, but that's how it already is for xe.
+
+
+BR,
+Jani.
+
+
 -- 
-2.46.0
-
+Jani Nikula, Intel
