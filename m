@@ -2,69 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB2F5C87266
-	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:48:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 59EBBCBA9E1
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1F3D310E4BD;
-	Tue, 25 Nov 2025 20:47:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E58D810EA1F;
+	Sat, 13 Dec 2025 12:40:57 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="D45LqLEx";
+	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Z2t12zKa";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 2762 seconds by postgrey-1.36 at gabe;
- Mon, 12 Aug 2024 08:38:54 UTC
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
- by gabe.freedesktop.org (Postfix) with ESMTP id 2362A10E099
- for <nouveau@lists.freedesktop.org>; Mon, 12 Aug 2024 08:38:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
- Message-ID; bh=cf/oDFPh1h7t+vr/sE7Er9gMs7gjh38TKu6Qs3h6YLk=; b=D
- 45LqLExEp5IWUA5Z8fu9VvId/Zb9as0AG1zJy4DsmMaqsD3BL/58cy8bf+47I/V0
- U5sgfQAbnEIef6DR3KHIXGoPzYhgC641CYEye8WiNXWcxMv/XHZudg9demQ6Bza+
- gEA8JBp2XxSWPxPAh2QfL1YgC31sPR3OQckHWGQI5w=
-Received: from andyshrk$163.com ( [58.22.7.114] ) by
- ajax-webmail-wmsvr-40-140 (Coremail) ; Mon, 12 Aug 2024 15:52:04 +0800
- (CST)
-X-Originating-IP: [58.22.7.114]
-Date: Mon, 12 Aug 2024 15:52:04 +0800 (CST)
-From: "Andy Yan" <andyshrk@163.com>
-To: "Lu Baolu" <baolu.lu@linux.intel.com>
-Cc: "Karol Herbst" <kherbst@redhat.com>, "Lyude Paul" <lyude@redhat.com>, 
- "Danilo Krummrich" <dakr@redhat.com>, "David Airlie" <airlied@gmail.com>, 
- "Daniel Vetter" <daniel@ffwll.ch>, 
- "Thierry Reding" <thierry.reding@gmail.com>, 
- "Jonathan Hunter" <jonathanh@nvidia.com>, 
- "Sandy Huang" <hjc@rock-chips.com>, 
- "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>, 
- "Maxime Ripard" <mripard@kernel.org>, 
- "Thomas Zimmermann" <tzimmermann@suse.de>, 
- "Mikko Perttunen" <mperttunen@nvidia.com>, 
- "Joerg Roedel" <joro@8bytes.org>, "Will Deacon" <will@kernel.org>, 
- "Robin Murphy" <robin.murphy@arm.com>, "Jason Gunthorpe" <jgg@ziepe.ca>, 
- "Kevin Tian" <kevin.tian@intel.com>, dri-devel@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, linux-tegra@vger.kernel.org, 
- linux-arm-kernel@lists.infradead.org, 
- linux-rockchip@lists.infradead.org, linux-media@vger.kernel.org, 
- iommu@lists.linux.dev, linux-kernel@vger.kernel.org, 
- "Jason Gunthorpe" <jgg@nvidia.com>
-Subject: Re:[PATCH 2/3] drm/rockchip: Use iommu_paging_domain_alloc()
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20230109(dcb5de15)
- Copyright (c) 2002-2024 www.mailtech.cn 163com
-In-Reply-To: <20240812071034.9443-2-baolu.lu@linux.intel.com>
-References: <20240812071034.9443-1-baolu.lu@linux.intel.com>
- <20240812071034.9443-2-baolu.lu@linux.intel.com>
-X-NTES-SC: AL_Qu2ZAfiftkkp4ieZY+kXn0kXhec2W8Czvvgg34JRP5k0hyXh4w84enhsBWX50cSJNTCNtx+ebhV8+Ol2d45bUprPl6S0Hryyge3eGEHR2scc
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com
+ [209.85.128.170])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D680E10E7F4;
+ Fri, 16 Aug 2024 15:37:07 +0000 (UTC)
+Received: by mail-yw1-f170.google.com with SMTP id
+ 00721157ae682-6b443880945so309247b3.0; 
+ Fri, 16 Aug 2024 08:37:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1723822627; x=1724427427; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tzNM0AA9xntFTf2RXz/yks0bBfTi9noMOikasbHbbu4=;
+ b=Z2t12zKazoaAOVmV93FgdhWEJLRHdDSFGKQf0q3R3Q1Te6X1JwKNcs9k/zSo6g7iuS
+ g00H5cZkghK/ORO/C1d27WZkILVDzFjjFuJCX9jWxHYD72APAFM9CrV6J9IXLng72DI6
+ +EzHcs5F3ETRzEmQU7xS/orYSgtlTFLEDjs68jI4qeZZeEDSUSTqaMBCZIEj5BOLFVwv
+ U+j/wCWjxjMWbhwyXmZinGyzyn53UxmiN9xn/KEE6g2TAaiO1p5B2H8NYLF1Pbw6taqd
+ AltDhbq2Siq+ylEAn4/bKX6efo8k87bG0nAG8opGau2+t6hr7NornCMG9l6Qg5xWgrev
+ HErA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723822627; x=1724427427;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tzNM0AA9xntFTf2RXz/yks0bBfTi9noMOikasbHbbu4=;
+ b=ZXMezvKza1mfGKRxn11pwL2tYz9e3iHPFaQhq1/ANIGS26pxRBnQ4nCLee3Unt+U2/
+ OwyxF1eW0q+uugWSrydS07XUkLGprEWESc/tMFPrSOOJpELkJ/VrjlAW675riCAmBR/2
+ F1pDnnSFK9/fMH8Rs3WQWXobsO9hig5QKXUyB6Lq/W/6wtAG1bXqDUMhMkWTnA5y5Bsv
+ Y6bTFQ5CJb73SMUwABGguzvdgd3PzQkefKSCDYQWdw9M7GFeFWbxyI4/UcFxJkGz3n7M
+ r7nhbhdUm5Hg01d7igXjJU6NJI4lQ7lRmPCi5eilsA2BpXqQFfmbJgiecsvcuh07Pgg4
+ nstQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW/dSsXJMm+BETFTDVxyixHorEJ8rth/+IRFrks34fsEGfKPedDeviNg5M6KnPj8wRI0lzJ5975VTSlUh3Dgi4P5dZx+6hsovUHLKf4nrT+kXCnLYUAOxVctO+m0FCS+FwWYaalfdnKFTsY9gmrf2jsqEb3dltgdUjogvFbEdQ6a1grd584qRIPbPaAbHe7kr9TANA3RvCmIUOyz56E1DltA5DSpjLDyuzfdmxai+ixjDB43yypgb6IRJPLRoPv9iTcUAc7ajd63zmeQKnjCg==
+X-Gm-Message-State: AOJu0Yy3YT7fMMPKoCiRI2+cz7z66b+Xrgm3IUiAm0FHxz2LiQWJemnO
+ n03Ca7qOigRm/YNieC9SpajgboR1lxy7V42M/bGdwN1K+9M7spARAgBxM+Rfx1q/0hozIrvqRtw
+ 8z8FELjk6zlmyPbvkwxjSRVIWYk4=
+X-Google-Smtp-Source: AGHT+IENPTqD3CAvuVgtrBE+LadrBjEy9w12rrQn3kw5b6eR3pYhJO5bQriCQH4X41FgJUosHcVqnrP21MmRdDACkJ0=
+X-Received: by 2002:a05:690c:4e8a:b0:6ad:b01a:9469 with SMTP id
+ 00721157ae682-6b1bc3f877cmr29215657b3.39.1723822626590; Fri, 16 Aug 2024
+ 08:37:06 -0700 (PDT)
 MIME-Version: 1.0
-Message-ID: <7031938c.673c.1914592a773.Coremail.andyshrk@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: _____wD3H9ckv7lmqS4YAA--.648W
-X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/1tbiqRg5XmVOCJXbOwABsB
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
-X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:24 +0000
+References: <20240816125408.310253-1-tzimmermann@suse.de>
+ <20240816125408.310253-56-tzimmermann@suse.de>
+In-Reply-To: <20240816125408.310253-56-tzimmermann@suse.de>
+From: Deepak Rawat <drawat.floss@gmail.com>
+Date: Fri, 16 Aug 2024 08:36:55 -0700
+Message-ID: <CAHFnvW3zK0VsQKzqjncTTuNNenh6Lxr4mf2fqzX+gR1Z9i6yOA@mail.gmail.com>
+Subject: Re: [PATCH 55/86] drm/hyperv_drm: Run DRM default client setup
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: daniel@ffwll.ch, airlied@gmail.com, jfalempe@redhat.com, 
+ javierm@redhat.com, dri-devel@lists.freedesktop.org, 
+ amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
+ intel-xe@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:46 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,32 +82,51 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Ckhp77yMCiAgVGhhbmtzIGZvciB5b3VyIHBhdGNoCgpBdCAyMDI0LTA4LTEyIDE1OjEwOjMzLCAi
-THUgQmFvbHUiIDxiYW9sdS5sdUBsaW51eC5pbnRlbC5jb20+IHdyb3RlOgo+Q29tbWl0IDw0MjFi
-ZTNlZTM2YTQ+ICgiZHJtL3JvY2tjaGlwOiBSZWZhY3RvciBJT01NVSBpbml0aWFsaXNhdGlvbiIp
-IGhhcwo+cmVmYWN0b3JlZCByb2NrY2hpcF9kcm1faW5pdF9pb21tdSgpIHRvIHBhc3MgYSBkZXZp
-Y2UgdGhhdCB0aGUgZG9tYWluIGlzCj5hbGxvY2F0ZWQgZm9yLiBSZXBsYWNlIGlvbW11X2RvbWFp
-bl9hbGxvYygpIHdpdGgKPmlvbW11X3BhZ2luZ19kb21haW5fYWxsb2MoKSB0byByZXRpcmUgdGhl
-IGZvcm1lci4KPgo+U2lnbmVkLW9mZi1ieTogTHUgQmFvbHUgPGJhb2x1Lmx1QGxpbnV4LmludGVs
-LmNvbT4KPlJldmlld2VkLWJ5OiBKYXNvbiBHdW50aG9ycGUgPGpnZ0BudmlkaWEuY29tPgo+TGlu
-azogaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvci8yMDI0MDYxMDA4NTU1NS44ODE5Ny0xOS1iYW9s
-dS5sdUBsaW51eC5pbnRlbC5jb20KICBBY2tlZC1ieTogQW5keSBZYW4gPGFuZHlzaHJrQDE2My5j
-b20+CgoKPi0tLQo+IGRyaXZlcnMvZ3B1L2RybS9yb2NrY2hpcC9yb2NrY2hpcF9kcm1fZHJ2LmMg
-fCAxMCArKysrKysrLS0tCj4gMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKSwgMyBkZWxl
-dGlvbnMoLSkKPgo+ZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9yb2NrY2hpcC9yb2NrY2hp
-cF9kcm1fZHJ2LmMgYi9kcml2ZXJzL2dwdS9kcm0vcm9ja2NoaXAvcm9ja2NoaXBfZHJtX2Rydi5j
-Cj5pbmRleCA0NGQ3NjlkOTIzNGQuLjExZTVkMTBkZTRkNyAxMDA2NDQKPi0tLSBhL2RyaXZlcnMv
-Z3B1L2RybS9yb2NrY2hpcC9yb2NrY2hpcF9kcm1fZHJ2LmMKPisrKyBiL2RyaXZlcnMvZ3B1L2Ry
-bS9yb2NrY2hpcC9yb2NrY2hpcF9kcm1fZHJ2LmMKPkBAIC0xMDMsMTMgKzEwMywxNyBAQCBzdGF0
-aWMgaW50IHJvY2tjaGlwX2RybV9pbml0X2lvbW11KHN0cnVjdCBkcm1fZGV2aWNlICpkcm1fZGV2
-KQo+IAlzdHJ1Y3Qgcm9ja2NoaXBfZHJtX3ByaXZhdGUgKnByaXZhdGUgPSBkcm1fZGV2LT5kZXZf
-cHJpdmF0ZTsKPiAJc3RydWN0IGlvbW11X2RvbWFpbl9nZW9tZXRyeSAqZ2VvbWV0cnk7Cj4gCXU2
-NCBzdGFydCwgZW5kOwo+KwlpbnQgcmV0Owo+IAo+IAlpZiAoSVNfRVJSX09SX05VTEwocHJpdmF0
-ZS0+aW9tbXVfZGV2KSkKPiAJCXJldHVybiAwOwo+IAo+LQlwcml2YXRlLT5kb21haW4gPSBpb21t
-dV9kb21haW5fYWxsb2MocHJpdmF0ZS0+aW9tbXVfZGV2LT5idXMpOwo+LQlpZiAoIXByaXZhdGUt
-PmRvbWFpbikKPi0JCXJldHVybiAtRU5PTUVNOwo+Kwlwcml2YXRlLT5kb21haW4gPSBpb21tdV9w
-YWdpbmdfZG9tYWluX2FsbG9jKHByaXZhdGUtPmlvbW11X2Rldik7Cj4rCWlmIChJU19FUlIocHJp
-dmF0ZS0+ZG9tYWluKSkgewo+KwkJcmV0ID0gUFRSX0VSUihwcml2YXRlLT5kb21haW4pOwo+KwkJ
-cHJpdmF0ZS0+ZG9tYWluID0gTlVMTDsKPisJCXJldHVybiByZXQ7Cj4rCX0KPiAKPiAJZ2VvbWV0
-cnkgPSAmcHJpdmF0ZS0+ZG9tYWluLT5nZW9tZXRyeTsKPiAJc3RhcnQgPSBnZW9tZXRyeS0+YXBl
-cnR1cmVfc3RhcnQ7Cj4tLSAKPjIuMzQuMQo+Cg==
+Reviewed-by: Deepak Rawat <drawat.floss@gmail.com>
+
+On Fri, Aug 16, 2024 at 5:54=E2=80=AFAM Thomas Zimmermann <tzimmermann@suse=
+.de> wrote:
+>
+> Call drm_client_setup() to run the kernel's default client setup
+> for DRM. Set fbdev_probe in struct drm_driver, so that the client
+> setup can start the common fbdev client.
+>
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: Deepak Rawat <drawat.floss@gmail.com>
+> ---
+>  drivers/gpu/drm/hyperv/hyperv_drm_drv.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/hyperv/hyperv_drm_drv.c b/drivers/gpu/drm/hy=
+perv/hyperv_drm_drv.c
+> index ff93e08d5036..3077ce5470f6 100644
+> --- a/drivers/gpu/drm/hyperv/hyperv_drm_drv.c
+> +++ b/drivers/gpu/drm/hyperv/hyperv_drm_drv.c
+> @@ -10,6 +10,7 @@
+>
+>  #include <drm/drm_aperture.h>
+>  #include <drm/drm_atomic_helper.h>
+> +#include <drm/drm_client_setup.h>
+>  #include <drm/drm_drv.h>
+>  #include <drm/drm_fbdev_shmem.h>
+>  #include <drm/drm_gem_shmem_helper.h>
+> @@ -36,6 +37,7 @@ static struct drm_driver hyperv_driver =3D {
+>
+>         .fops            =3D &hv_fops,
+>         DRM_GEM_SHMEM_DRIVER_OPS,
+> +       DRM_FBDEV_SHMEM_DRIVER_OPS,
+>  };
+>
+>  static int hyperv_pci_probe(struct pci_dev *pdev,
+> @@ -149,7 +151,7 @@ static int hyperv_vmbus_probe(struct hv_device *hdev,
+>                 goto err_free_mmio;
+>         }
+>
+> -       drm_fbdev_shmem_setup(dev, 0);
+> +       drm_client_setup(dev, NULL);
+>
+>         return 0;
+>
+> --
+> 2.46.0
+>
