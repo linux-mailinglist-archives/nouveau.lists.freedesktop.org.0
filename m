@@ -2,65 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1482953E4C
-	for <lists+nouveau@lfdr.de>; Fri, 16 Aug 2024 02:29:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83FEE953E72
+	for <lists+nouveau@lfdr.de>; Fri, 16 Aug 2024 02:53:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0488D10E544;
-	Fri, 16 Aug 2024 00:29:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A3D0A10E56A;
+	Fri, 16 Aug 2024 00:53:43 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=meddatainc.com header.i=agents@meddatainc.com header.b="1Gk/UMqE";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cRdO2hMg";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 302 seconds by postgrey-1.36 at gabe;
- Fri, 16 Aug 2024 00:29:40 UTC
-Received: from mout.perfora.net (mout.perfora.net [74.208.4.197])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3921610E544
- for <nouveau@lists.freedesktop.org>; Fri, 16 Aug 2024 00:29:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meddatainc.com;
- s=s1-ionos; t=1723768179; x=1724372979; i=agents@meddatainc.com;
- bh=KR3DYghZZKkgQoF0tGNsPTolw7cWiOHYwwZRmpj21jw=;
- h=X-UI-Sender-Class:Date:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Subject:To:From:Message-ID:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=1Gk/UMqEDQXXgk8KRRDsNNCqnO5LRyC8zCwTfO9Yl31Dyk+UGyK4Dta6t4tiuYBs
- XoX+zsNfqLzI4u4NAez8ZOMm/3JemaEWoT2acN0CahvZBcNG5i6M6PuL8dPmtm8lX
- qtRGlpjQPFFT7l6DOPA8p1hocJe7D1pcwyksBrOTAsvaszLa3ztzR3ghHnjZXlXnT
- WHjyOmuWFA+s1eKr9S3G2SR2O4CIRDwPKW0HV3g90eGZGci7UpSn766p/hF6fQau3
- vSw8aS2Qcz4uVktbrMYQjdPtxl9xrMrcP8FiX0+oVkjk6z3RMK57P/wcNvx89i+Tu
- 4rdPiq2aokPjJWHmIw==
-X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
-Received: from [192.168.104.192] ([96.245.190.98]) by mrelay.perfora.net
- (mreueus003 [74.208.5.2]) with ESMTPSA (Nemesis) id 0LjYVi-1s3D5x1DtA-00jOeV
- for <nouveau@lists.freedesktop.org>; Fri, 16 Aug 2024 02:24:37 +0200
-Date: Thu, 15 Aug 2024 20:24:26 -0400
-User-Agent: K-9 Mail for Android
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C8A1810E567;
+ Fri, 16 Aug 2024 00:53:41 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 2462461BA0;
+ Fri, 16 Aug 2024 00:53:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA49AC32786;
+ Fri, 16 Aug 2024 00:53:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1723769620;
+ bh=UKhRsshcadMpMUroXZC4qZUzo5g1S1EjdSC082Qo6fo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=cRdO2hMgiB8nur34lKZSGxASheEbejGdLHb5W61kGhQwrjI7MUfIQoRqAu03doU3+
+ VsDaghhM/teiyFtekjbIcmnw7gYY/80hfrif6NjHM+k72SJf0HGO7XJfTfC1FXEEet
+ FcoU+0/YYwGgPuqG7T4iklNswi+7qxi2ZjIKmCfDuuh6eRvhlyqvEmhGpmSpskvvLc
+ UBJK3HqJU8TzpOeSmkQJMbOBe/6NiXhTjNFDTh2jQ+TkQVV/WdQ8C/nAy9Kb45UKCe
+ yHEfgAUigaJPAbwm3GW8FI8gKyn2yfAYaUkU/MaDhkBokHfGMNN/szqe5LP06iIKhz
+ owAwE1sK2rdLg==
+Date: Fri, 16 Aug 2024 02:53:37 +0200
+From: Danilo Krummrich <dakr@kernel.org>
+To: Dave Airlie <airlied@gmail.com>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Subject: Re: [PATCH] nouveau/firmware: using dma non-coherent interfaces for
+ fw loading. (v2)
+Message-ID: <Zr6jEY1L0Cv3FIOt@cassiopeiae>
+References: <20240815201923.632803-1-airlied@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Subject: Possible nouveau driver problem?
-To: Nouveau Mailing List <nouveau@lists.freedesktop.org>
-From: H <agents@meddatainc.com>
-Message-ID: <E2CB6BBD-35B1-4359-99F7-BBB0A6E6CA7A@meddatainc.com>
-X-Provags-ID: V03:K1:mwlNA81Ng8vPh4qQwKR0yJ98rpuHKlrguxF1rGPCSPV/5Rxv9Ac
- we9UI1IPEJpIohSENfuJbrEwT/PoctJkkFFyVSGD1jz9lPdU3cFySyx/fqyu3OBQ6Eb+myg
- 1gebNGxIfiUJO+8I0Fq2kTW+KkSYjAno4iXC7JdeeLwR2JwSGt/kZpbkgRBpE4PK1E/28eq
- Vp8xEzf5FxuSTnVy7EbeQ==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:ElFMWeoCvuA=;Cv7Ymajfww8XG6Ko/MZfx/a4hvW
- Z0y+5Bh1IDbikG9lWfi0gR2pzaC52XKVYqCgd0O7gbLHRb3hhvd5wBSpKFlZ40eXU7s7Yl0K6
- Fh+5TPGZErQVcUe7MC9X5G44vKAi+7KwdgBijiQXp+iqikJyiDQPaEOIK27IyE9eHxDcevXNT
- CYTFSQJH8YmXluzelkJ2+7r7d7WBliFqasbFECOfus9lEznkpBNHdCnCC9CqGX0WmcG1d0h3t
- YDLFeBtUGQ8XVh8YP5Y6ymcNJlJsdzciHyAmoHfuogozIsvPpNeE36bLBxX/hmRSkW9WkB0YH
- CwJ/Wxo5bt+3Rprkekx+SzB50DCJn9ZRFQQ1Xr9ECSziLO3wihRrZGgDKaP71y0gpEjKkzk7n
- //n7CaQ4RK0Yi0DIapEJ076zTYf49Ba7UiqcqYTn1pQqlLnjmpG8p31VSBIljyvWW4Rb7Ktdm
- +4Ow0MvD+nDrpf+TzJu8GKurTWLVl0oQznZrOX4XB8mtzAerFBGJVMazTxzWXG7hv5ofBPqMG
- TsrEE7Axfn0dy+tgH65gImZQ6a+GSoae+cWEx3PwV5h/LKAiKmRfY2qyZzEPHS1rPSd/tLrJr
- UwCXsDuig3BG73XM5+ZhpnoYmkgtZXDqFlG6qyKRs9KAQCXwtskVikjtrC6wC3nrEbuMcHnaY
- WB7ulqZZinAuluzsk6xfhm0hhYhu36ph7jFzVG8wmKpOjLETe5S7Nkk5Zsj2FCpHK/6UBo8ri
- yO2w9tjBrABIFhnllhhyYXU/9owGuqDyA==
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240815201923.632803-1-airlied@gmail.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,44 +56,115 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I am running Rocky Linux latest version with the Mate Desktop 1=2E26=2E2 (t=
-he latest version in the EPEL repository) on a Dell Inspiron laptop with a =
-3840 x 2160 display and an external 1920 x 1080 Acer
-monitor connected via HDMI, see output below:
+On Fri, Aug 16, 2024 at 06:19:23AM +1000, Dave Airlie wrote:
+> From: Dave Airlie <airlied@redhat.com>
+> 
+> Currently, enabling SG_DEBUG in the kernel will cause nouveau to hit a
+> BUG() on startup, when the iommu is enabled:
+> 
+> kernel BUG at include/linux/scatterlist.h:187!
+> invalid opcode: 0000 [#1] PREEMPT SMP NOPTI
+> CPU: 7 PID: 930 Comm: (udev-worker) Not tainted 6.9.0-rc3Lyude-Test+ #30
+> Hardware name: MSI MS-7A39/A320M GAMING PRO (MS-7A39), BIOS 1.I0 01/22/2019
+> RIP: 0010:sg_init_one+0x85/0xa0
+> Code: 69 88 32 01 83 e1 03 f6 c3 03 75 20 a8 01 75 1e 48 09 cb 41 89 54
+> 24 08 49 89 1c 24 41 89 6c 24 0c 5b 5d 41 5c e9 7b b9 88 00 <0f> 0b 0f 0b
+> 0f 0b 48 8b 05 5e 46 9a 01 eb b2 66 66 2e 0f 1f 84 00
+> RSP: 0018:ffffa776017bf6a0 EFLAGS: 00010246
+> RAX: 0000000000000000 RBX: ffffa77600d87000 RCX: 000000000000002b
+> RDX: 0000000000000001 RSI: 0000000000000000 RDI: ffffa77680d87000
+> RBP: 000000000000e000 R08: 0000000000000000 R09: 0000000000000000
+> R10: ffff98f4c46aa508 R11: 0000000000000000 R12: ffff98f4c46aa508
+> R13: ffff98f4c46aa008 R14: ffffa77600d4a000 R15: ffffa77600d4a018
+> FS:  00007feeb5aae980(0000) GS:ffff98f5c4dc0000(0000) knlGS:0000000000000000
+> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> CR2: 00007f22cb9a4520 CR3: 00000001043ba000 CR4: 00000000003506f0
+> Call Trace:
+>  <TASK>
+>  ? die+0x36/0x90
+>  ? do_trap+0xdd/0x100
+>  ? sg_init_one+0x85/0xa0
+>  ? do_error_trap+0x65/0x80
+>  ? sg_init_one+0x85/0xa0
+>  ? exc_invalid_op+0x50/0x70
+>  ? sg_init_one+0x85/0xa0
+>  ? asm_exc_invalid_op+0x1a/0x20
+>  ? sg_init_one+0x85/0xa0
+>  nvkm_firmware_ctor+0x14a/0x250 [nouveau]
+>  nvkm_falcon_fw_ctor+0x42/0x70 [nouveau]
+>  ga102_gsp_booter_ctor+0xb4/0x1a0 [nouveau]
+>  r535_gsp_oneinit+0xb3/0x15f0 [nouveau]
+>  ? srso_return_thunk+0x5/0x5f
+>  ? srso_return_thunk+0x5/0x5f
+>  ? nvkm_udevice_new+0x95/0x140 [nouveau]
+>  ? srso_return_thunk+0x5/0x5f
+>  ? srso_return_thunk+0x5/0x5f
+>  ? ktime_get+0x47/0xb0
+> 
+> Fix this by using the non-coherent allocator instead, I think there
+> might be a better answer to this, but it involve ripping up some of
+> APIs using sg lists.
+> 
+> v2: fix build warning
+> 
+> Signed-off-by: Dave Airlie <airlied@redhat.com>
+> Cc: stable@vger.kernel.org
 
-$ inxi --graphics
-Graphics:
-  Device-1: Intel UHD Graphics 620 driver: i915 v: kernel
-  Device-2: NVIDIA GM108M [GeForce 940MX] driver: nouveau v: kernel
-  Device-3: DisplayLink Dell D3100 Docking Station driver: usbfs type: USB
-  Device-4: Realtek Integrated_Webcam_HD driver: uvcvideo type: USB
-  Display: x11 server: X=2EOrg v: 1=2E20=2E11 driver: X: loaded: modesetti=
-ng
-    dri: iris gpu: i915 resolution: 1: 1920x1080~60Hz 2: 3840x2160~60Hz
-  API: OpenGL v: 4=2E6 vendor: intel mesa v: 23=2E3=2E3 renderer: Mesa Int=
-el UHD
-    Graphics 620 (KBL GT2)
+Does this need the following fixes tag?
 
-The problem is that the external display has some issues, whether they are=
- related to the nouveau driver, the Mate Desktop or something else I cannot=
- determine=2E What happens is that although the
-external monitor is indeed using the 1920 x 1080 resolution and dragging a=
- window from the laptop screen to the external screen works, ie=2E, it main=
-tains the "correct" size, then maximizing it makes it
-1/4 of the size of the external monitor display=2E Likewise, the Mate Desk=
-top background repeats partly 4-fold on this monitor, partly 16-fold=2E=2E=
-=2E
+Fixes: 2541626cfb79 ("drm/nouveau/acr: use common falcon HS FW code for ACR FWs")
 
-I also have a Dell docking station, model D3100 and have downloaded the la=
-test DisplayLink driver from github with the hope that I could attach two e=
-xternal Acer monitors to use with the laptop, I
-unable to use xrandr to correctly set the external monitor (I have only tr=
-ied with one so far) to the desired 1920 x 1080 resolution while maintainin=
-g the 3840 x 2160 resolution on the laptop screen=2E
-
-Googling suggests that there might be some issues with xrandr and scaling
-
-Given my description above, could there possibly be a bug in the nouveau d=
-river I am using?
-
-Thanks=2E =20
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/core/firmware.c | 9 ++++++---
+>  drivers/gpu/drm/nouveau/nvkm/falcon/fw.c     | 6 ++++++
+>  2 files changed, 12 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/core/firmware.c b/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
+> index adc60b25f8e6..0af01a0ec601 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
+> @@ -205,7 +205,8 @@ nvkm_firmware_dtor(struct nvkm_firmware *fw)
+>  		break;
+>  	case NVKM_FIRMWARE_IMG_DMA:
+>  		nvkm_memory_unref(&memory);
+> -		dma_free_coherent(fw->device->dev, sg_dma_len(&fw->mem.sgl), fw->img, fw->phys);
+> +		dma_free_noncoherent(fw->device->dev, sg_dma_len(&fw->mem.sgl),
+> +				     fw->img, fw->phys, DMA_TO_DEVICE);
+>  		break;
+>  	case NVKM_FIRMWARE_IMG_SGT:
+>  		nvkm_memory_unref(&memory);
+> @@ -236,10 +237,12 @@ nvkm_firmware_ctor(const struct nvkm_firmware_func *func, const char *name,
+>  		break;
+>  	case NVKM_FIRMWARE_IMG_DMA: {
+>  		dma_addr_t addr;
+> -
+>  		len = ALIGN(fw->len, PAGE_SIZE);
+>  
+> -		fw->img = dma_alloc_coherent(fw->device->dev, len, &addr, GFP_KERNEL);
+> +		fw->img = dma_alloc_noncoherent(fw->device->dev,
+> +						len, &addr,
+> +						DMA_TO_DEVICE,
+> +						GFP_KERNEL);
+>  		if (fw->img) {
+>  			memcpy(fw->img, src, fw->len);
+>  			fw->phys = addr;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/falcon/fw.c b/drivers/gpu/drm/nouveau/nvkm/falcon/fw.c
+> index 80a480b12174..a1c8545f1249 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/falcon/fw.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/falcon/fw.c
+> @@ -89,6 +89,12 @@ nvkm_falcon_fw_boot(struct nvkm_falcon_fw *fw, struct nvkm_subdev *user,
+>  		nvkm_falcon_fw_dtor_sigs(fw);
+>  	}
+>  
+> +	/* after last write to the img, sync dma mappings */
+> +	dma_sync_single_for_device(fw->fw.device->dev,
+> +				   fw->fw.phys,
+> +				   sg_dma_len(&fw->fw.mem.sgl),
+> +				   DMA_TO_DEVICE);
+> +
+>  	FLCNFW_DBG(fw, "resetting");
+>  	fw->func->reset(fw);
+>  
+> -- 
+> 2.46.0
+> 
