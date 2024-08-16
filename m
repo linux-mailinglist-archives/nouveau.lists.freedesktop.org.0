@@ -2,55 +2,52 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F345954BB0
-	for <lists+nouveau@lfdr.de>; Fri, 16 Aug 2024 16:02:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CE9E954B8B
+	for <lists+nouveau@lfdr.de>; Fri, 16 Aug 2024 15:59:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8D3D410E7A4;
-	Fri, 16 Aug 2024 14:02:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 52BF610E788;
+	Fri, 16 Aug 2024 13:59:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="vwlhcw/j";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="B9IQyqmh";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 1678 seconds by postgrey-1.36 at gabe;
- Fri, 16 Aug 2024 14:02:32 UTC
-Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E29C410E7A0;
- Fri, 16 Aug 2024 14:02:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
- s=gloria202408;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6APiPsl1dk8hQTUQIp5bKhxGcpS03CWAMAQchIn+9+A=; b=vwlhcw/j12UiyS4tp3lQKpH1A3
- KHBdt7G5yTSG50550RFm+BIulA4G2eFh/eA/vcFBbBwmlq+2Kx9Qdl/YsMiR1BkFFvHRDN/kg5YYd
- lBb79ICOHR91T9X/LaVainI0wouXePAU8MpMvozCBFlZK7NZGME5qiLS4fPxEqQSQvEMoDlLruzbq
- cwv4U4c1/FlatNReWkKBlNZqfWIGLPEVUbnPXRC+rxwYo3yMULGkA/MZCYdzVWM/OpP2NN6ZmWtNU
- ZqdtR+PBY72bBd7QcG7NdqUESP49CYleEC6NEWkfr22DJTEOYsWkm1nqiTHOSinq/YLJN8BePuPxc
- jRqRLz0A==;
-Received: from i53875a9f.versanet.de ([83.135.90.159] helo=diego.localnet)
- by gloria.sntech.de with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <heiko@sntech.de>)
- id 1sex67-0002U1-4U; Fri, 16 Aug 2024 15:34:31 +0200
-From: Heiko =?ISO-8859-1?Q?St=FCbner?= <heiko@sntech.de>
-To: daniel@ffwll.ch, airlied@gmail.com, jfalempe@redhat.com,
- javierm@redhat.com, Thomas Zimmermann <tzimmermann@suse.de>
-Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
- Sandy Huang <hjc@rock-chips.com>, Andy Yan <andy.yan@rock-chips.com>
-Subject: Re: [PATCH 38/86] drm/rockchip: Run DRM default client setup
-Date: Fri, 16 Aug 2024 15:34:29 +0200
-Message-ID: <2949271.e9J7NaK4W3@diego>
-In-Reply-To: <20240816125408.310253-39-tzimmermann@suse.de>
-References: <20240816125408.310253-1-tzimmermann@suse.de>
- <20240816125408.310253-39-tzimmermann@suse.de>
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 13F6510E783;
+ Fri, 16 Aug 2024 13:59:14 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 2D3AF62122;
+ Fri, 16 Aug 2024 13:59:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E838C32782;
+ Fri, 16 Aug 2024 13:59:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1723816752;
+ bh=AYjyt3Zr4yYkK8EpDLsOl7+GIl2rfY/yAMJVs4wWqzE=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=B9IQyqmh350p67tFsMJW4RhPtoUf9FqudC5otI9WnV1xa59NqqV1PpqbArYqhOgoj
+ EeBRL4DgY8iAU/sPILsxMfXIHc69OZS+vB7CQuFwufeD/Nr/Ux0keuJJsTQ9XCHarv
+ arUrZfML86yC/GNemrzAFY549WogD5FQU23OjeQGTIBEax6Cjh0gbPS4dIwEek08QI
+ boVM6BlIgQqrHFqLO1oqCXOxxMNRRNk/EzzS23eHD0J2tAJR6HdQxhS9jrAg5uHg24
+ 1ULRAyqkNB4IwvVzBev2Vyh96FicfZIUXAeZs6DXysH5/GPG3jvuYUYgVknbuJqFLa
+ yx5tetp8tG83A==
+Message-ID: <d2d8ccfc-8b41-4051-a2ea-3908aa21daac@kernel.org>
+Date: Fri, 16 Aug 2024 15:59:07 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 69/86] drm/nouveau: Run DRM default client setup
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: daniel@ffwll.ch, airlied@gmail.com, jfalempe@redhat.com,
+ javierm@redhat.com, dri-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>
+References: <20240816125408.310253-1-tzimmermann@suse.de>
+ <20240816125408.310253-70-tzimmermann@suse.de>
+From: Danilo Krummrich <dakr@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20240816125408.310253-70-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,59 +62,56 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am Freitag, 16. August 2024, 14:23:04 CEST schrieb Thomas Zimmermann:
+On 8/16/24 2:23 PM, Thomas Zimmermann wrote:
 > Call drm_client_setup() to run the kernel's default client setup
 > for DRM. Set fbdev_probe in struct drm_driver, so that the client
 > setup can start the common fbdev client.
->=20
+> 
+> The nouveau driver specifies a preferred color mode depending on
+> the available video memory, with a default of 32. Adapt this for
+> the new client interface.
+> 
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Sandy Huang <hjc@rock-chips.com>
-> Cc: "Heiko St=FCbner" <heiko@sntech.de>
-> Cc: Andy Yan <andy.yan@rock-chips.com>
 
-I've looked up the whole patchseries and while I can't say overly much
-about the core changes, at least for the Rockchip driver, things look
-like they'll stay the same even after those changes are applied, so
+Acked-by: Danilo Krummrich <dakr@kernel.org>
 
-Acked-by: Heiko Stuebner <heiko@sntech.de>
-
+> Cc: Karol Herbst <kherbst@redhat.com>
+> Cc: Lyude Paul <lyude@redhat.com>
+> Cc: Danilo Krummrich <dakr@redhat.com>
 > ---
->  drivers/gpu/drm/rockchip/rockchip_drm_drv.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->=20
-> diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_drv.c b/drivers/gpu/dr=
-m/rockchip/rockchip_drm_drv.c
-> index 44d769d9234d..83ea6cc8cd21 100644
-> --- a/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
-> +++ b/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
-> @@ -17,6 +17,7 @@
->  #include <linux/iommu.h>
-> =20
->  #include <drm/drm_aperture.h>
+>   drivers/gpu/drm/nouveau/nouveau_drm.c | 7 +++++--
+>   1 file changed, 5 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> index 4a9a9b9c3935..445ebedf70d6 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> @@ -31,6 +31,7 @@
+>   #include <linux/dynamic_debug.h>
+>   
+>   #include <drm/drm_aperture.h>
 > +#include <drm/drm_client_setup.h>
->  #include <drm/drm_drv.h>
->  #include <drm/drm_fbdev_dma.h>
->  #include <drm/drm_gem_dma_helper.h>
-> @@ -191,7 +192,7 @@ static int rockchip_drm_bind(struct device *dev)
->  	if (ret)
->  		goto err_kms_helper_poll_fini;
-> =20
-> -	drm_fbdev_dma_setup(drm_dev, 0);
-> +	drm_client_setup(drm_dev, NULL);
-> =20
->  	return 0;
->  err_kms_helper_poll_fini:
-> @@ -226,6 +227,7 @@ static const struct drm_driver rockchip_drm_driver =
-=3D {
->  	.driver_features	=3D DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC,
->  	.dumb_create		=3D rockchip_gem_dumb_create,
->  	.gem_prime_import_sg_table	=3D rockchip_gem_prime_import_sg_table,
-> +	DRM_FBDEV_DMA_DRIVER_OPS,
->  	.fops			=3D &rockchip_drm_driver_fops,
->  	.name	=3D DRIVER_NAME,
->  	.desc	=3D DRIVER_DESC,
->=20
-
-
-
-
+>   #include <drm/drm_drv.h>
+>   #include <drm/drm_fbdev_ttm.h>
+>   #include <drm/drm_gem_ttm_helper.h>
+> @@ -873,9 +874,9 @@ static int nouveau_drm_probe(struct pci_dev *pdev,
+>   		goto fail_pci;
+>   
+>   	if (drm->client.device.info.ram_size <= 32 * 1024 * 1024)
+> -		drm_fbdev_ttm_setup(drm->dev, 8);
+> +		drm_client_setup(drm->dev, drm_format_info(DRM_FORMAT_C8));
+>   	else
+> -		drm_fbdev_ttm_setup(drm->dev, 32);
+> +		drm_client_setup(drm->dev, NULL);
+>   
+>   	quirk_broken_nv_runpm(pdev);
+>   	return 0;
+> @@ -1317,6 +1318,8 @@ driver_stub = {
+>   	.dumb_create = nouveau_display_dumb_create,
+>   	.dumb_map_offset = drm_gem_ttm_dumb_map_offset,
+>   
+> +	DRM_FBDEV_TTM_DRIVER_OPS,
+> +
+>   	.name = DRIVER_NAME,
+>   	.desc = DRIVER_DESC,
+>   #ifdef GIT_REVISION
