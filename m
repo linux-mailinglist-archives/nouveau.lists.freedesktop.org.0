@@ -2,72 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59EBBCBA9E1
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECD4FCBAB77
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E58D810EA1F;
-	Sat, 13 Dec 2025 12:40:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 30C0F10EAE3;
+	Sat, 13 Dec 2025 12:41:04 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="Z2t12zKa";
+	dkim=pass (1024-bit key; unprotected) header.d=crapouillou.net header.i=@crapouillou.net header.b="ZunYbkwC";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com
- [209.85.128.170])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D680E10E7F4;
- Fri, 16 Aug 2024 15:37:07 +0000 (UTC)
-Received: by mail-yw1-f170.google.com with SMTP id
- 00721157ae682-6b443880945so309247b3.0; 
- Fri, 16 Aug 2024 08:37:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723822627; x=1724427427; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tzNM0AA9xntFTf2RXz/yks0bBfTi9noMOikasbHbbu4=;
- b=Z2t12zKazoaAOVmV93FgdhWEJLRHdDSFGKQf0q3R3Q1Te6X1JwKNcs9k/zSo6g7iuS
- g00H5cZkghK/ORO/C1d27WZkILVDzFjjFuJCX9jWxHYD72APAFM9CrV6J9IXLng72DI6
- +EzHcs5F3ETRzEmQU7xS/orYSgtlTFLEDjs68jI4qeZZeEDSUSTqaMBCZIEj5BOLFVwv
- U+j/wCWjxjMWbhwyXmZinGyzyn53UxmiN9xn/KEE6g2TAaiO1p5B2H8NYLF1Pbw6taqd
- AltDhbq2Siq+ylEAn4/bKX6efo8k87bG0nAG8opGau2+t6hr7NornCMG9l6Qg5xWgrev
- HErA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723822627; x=1724427427;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tzNM0AA9xntFTf2RXz/yks0bBfTi9noMOikasbHbbu4=;
- b=ZXMezvKza1mfGKRxn11pwL2tYz9e3iHPFaQhq1/ANIGS26pxRBnQ4nCLee3Unt+U2/
- OwyxF1eW0q+uugWSrydS07XUkLGprEWESc/tMFPrSOOJpELkJ/VrjlAW675riCAmBR/2
- F1pDnnSFK9/fMH8Rs3WQWXobsO9hig5QKXUyB6Lq/W/6wtAG1bXqDUMhMkWTnA5y5Bsv
- Y6bTFQ5CJb73SMUwABGguzvdgd3PzQkefKSCDYQWdw9M7GFeFWbxyI4/UcFxJkGz3n7M
- r7nhbhdUm5Hg01d7igXjJU6NJI4lQ7lRmPCi5eilsA2BpXqQFfmbJgiecsvcuh07Pgg4
- nstQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/dSsXJMm+BETFTDVxyixHorEJ8rth/+IRFrks34fsEGfKPedDeviNg5M6KnPj8wRI0lzJ5975VTSlUh3Dgi4P5dZx+6hsovUHLKf4nrT+kXCnLYUAOxVctO+m0FCS+FwWYaalfdnKFTsY9gmrf2jsqEb3dltgdUjogvFbEdQ6a1grd584qRIPbPaAbHe7kr9TANA3RvCmIUOyz56E1DltA5DSpjLDyuzfdmxai+ixjDB43yypgb6IRJPLRoPv9iTcUAc7ajd63zmeQKnjCg==
-X-Gm-Message-State: AOJu0Yy3YT7fMMPKoCiRI2+cz7z66b+Xrgm3IUiAm0FHxz2LiQWJemnO
- n03Ca7qOigRm/YNieC9SpajgboR1lxy7V42M/bGdwN1K+9M7spARAgBxM+Rfx1q/0hozIrvqRtw
- 8z8FELjk6zlmyPbvkwxjSRVIWYk4=
-X-Google-Smtp-Source: AGHT+IENPTqD3CAvuVgtrBE+LadrBjEy9w12rrQn3kw5b6eR3pYhJO5bQriCQH4X41FgJUosHcVqnrP21MmRdDACkJ0=
-X-Received: by 2002:a05:690c:4e8a:b0:6ad:b01a:9469 with SMTP id
- 00721157ae682-6b1bc3f877cmr29215657b3.39.1723822626590; Fri, 16 Aug 2024
- 08:37:06 -0700 (PDT)
-MIME-Version: 1.0
+X-Greylist: delayed 508 seconds by postgrey-1.36 at gabe;
+ Sat, 17 Aug 2024 21:02:40 UTC
+Received: from aposti.net (aposti.net [89.234.176.197])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5E7C710E111;
+ Sat, 17 Aug 2024 21:02:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
+ s=mail; t=1723928050;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=WVIEqwFIHNGgAN6qGUvxQku++RkpPwaMRzWZN5sESeY=;
+ b=ZunYbkwC4ZwrSY6CABaaBQwU/7MDq7uN0QkS4Lzl+muHxoGrRHFXa2IorYuFkgCSdpb5Xb
+ H3HqV5OMaUk6PXq3k6H3mzjZRkK9MGKrSUx51tf185UbEpEAk9bYPoWUPvtAAIn+lDhSA4
+ elN3j5urMgWWjBf3iAARhfIkvxWySkk=
+Message-ID: <8e1fbdb1fe4e16b702a23a1eba01f43df6331317.camel@crapouillou.net>
+Subject: Re: [PATCH 22/86] drm/ingenic: Run DRM default client setup
+From: Paul Cercueil <paul@crapouillou.net>
+To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
+ airlied@gmail.com,  jfalempe@redhat.com, javierm@redhat.com
+Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org, 
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org
+Date: Sat, 17 Aug 2024 22:54:07 +0200
+In-Reply-To: <20240816125408.310253-23-tzimmermann@suse.de>
 References: <20240816125408.310253-1-tzimmermann@suse.de>
- <20240816125408.310253-56-tzimmermann@suse.de>
-In-Reply-To: <20240816125408.310253-56-tzimmermann@suse.de>
-From: Deepak Rawat <drawat.floss@gmail.com>
-Date: Fri, 16 Aug 2024 08:36:55 -0700
-Message-ID: <CAHFnvW3zK0VsQKzqjncTTuNNenh6Lxr4mf2fqzX+gR1Z9i6yOA@mail.gmail.com>
-Subject: Re: [PATCH 55/86] drm/hyperv_drm: Run DRM default client setup
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: daniel@ffwll.ch, airlied@gmail.com, jfalempe@redhat.com, 
- javierm@redhat.com, dri-devel@lists.freedesktop.org, 
- amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
- intel-xe@lists.freedesktop.org, nouveau@lists.freedesktop.org
+ <20240816125408.310253-23-tzimmermann@suse.de>
+Autocrypt: addr=paul@crapouillou.net; prefer-encrypt=mutual;
+ keydata=mQENBF0KhcEBCADkfmrzdTOp/gFOMQX0QwKE2WgeCJiHPWkpEuPH81/HB2dpjPZNW03ZM
+ LQfECbbaEkdbN4YnPfXgcc1uBe5mwOAPV1MBlaZcEt4M67iYQwSNrP7maPS3IaQJ18ES8JJ5Uf5Uz
+ FZaUawgH+oipYGW+v31cX6L3k+dGsPRM0Pyo0sQt52fsopNPZ9iag0iY7dGNuKenaEqkYNjwEgTtN
+ z8dt6s3hMpHIKZFL3OhAGi88wF/21isv0zkF4J0wlf9gYUTEEY3Eulx80PTVqGIcHZzfavlWIdzhe
+ +rxHTDGVwseR2Y1WjgFGQ2F+vXetAB8NEeygXee+i9nY5qt9c07m8mzjABEBAAG0JFBhdWwgQ2VyY
+ 3VlaWwgPHBhdWxAY3JhcG91aWxsb3UubmV0PokBTgQTAQoAOBYhBNdHYd8OeCBwpMuVxnPua9InSr
+ 1BBQJdCoXBAhsDBQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEHPua9InSr1BgvIH/0kLyrI3V0f
+ 33a6D3BJwc1grbygPVYGuC5l5eMnAI+rDmLR19E2yvibRpgUc87NmPEQPpbbtAZt8On/2WZoE5OIP
+ dlId/AHNpdgAtGXo0ZX4LGeVPjxjdkbrKVHxbcdcnY+zzaFglpbVSvp76pxqgVg8PgxkAAeeJV+ET
+ 4t0823Gz2HzCL/6JZhvKAEtHVulOWoBh368SYdolp1TSfORWmHzvQiCCCA+j0cMkYVGzIQzEQhX7U
+ rf9N/nhU5/SGLFEi9DcBfXoGzhyQyLXflhJtKm3XGB1K/pPulbKaPcKAl6rIDWPuFpHkSbmZ9r4KF
+ lBwgAhlGy6nqP7O3u7q23hRW5AQ0EXQqFwQEIAMo+MgvYHsyjX3Ja4Oolg1Txzm8woj30ch2nACFC
+ qaO0R/1kLj2VVeLrDyQUOlXx9PD6IQI4M8wy8m0sR4wV2p/g/paw7k65cjzYYLh+FdLNyO7IWYXnd
+ JO+wDPi3aK/YKUYepqlP+QsmaHNYNdXEQDRKqNfJg8t0f5rfzp9ryxd1tCnbV+tG8VHQWiZXNqN70
+ 62DygSNXFUfQ0vZ3J2D4oAcIAEXTymRQ2+hr3Hf7I61KMHWeSkCvCG2decTYsHlw5Erix/jYWqVOt
+ X0roOOLqWkqpQQJWtU+biWrAksmFmCp5fXIg1Nlg39v21xCXBGxJkxyTYuhdWyu1yDQ+LSIUAEQEA
+ AYkBNgQYAQoAIBYhBNdHYd8OeCBwpMuVxnPua9InSr1BBQJdCoXBAhsMAAoJEHPua9InSr1B4wsH/
+ Az767YCT0FSsMNt1jkkdLCBi7nY0GTW+PLP1a4zvVqFMo/vD6uz1ZflVTUAEvcTi3VHYZrlgjcxmc
+ Gu239oruqUS8Qy/xgZBp9KF0NTWQSl1iBfVbIU5VV1vHS6r77W5x0qXgfvAUWOH4gmN3MnF01SH2z
+ McLiaUGF+mcwl15rHbjnT3Nu2399aSE6cep86igfCAyFUOXjYEGlJy+c6UyT+DUylpjQg0nl8MlZ/
+ 7Whg2fAU9+FALIbQYQzGlT4c71SibR9T741jnegHhlmV4WXXUD6roFt54t0MSAFSVxzG8mLcSjR2c
+ LUJ3NIPXixYUSEn3tQhfZj07xIIjWxAYZo=
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:46 +0000
+MIME-Version: 1.0
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,51 +80,60 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reviewed-by: Deepak Rawat <drawat.floss@gmail.com>
+Hi Thomas,
 
-On Fri, Aug 16, 2024 at 5:54=E2=80=AFAM Thomas Zimmermann <tzimmermann@suse=
-.de> wrote:
->
+Le vendredi 16 ao=C3=BBt 2024 =C3=A0 14:22 +0200, Thomas Zimmermann a =C3=
+=A9crit=C2=A0:
 > Call drm_client_setup() to run the kernel's default client setup
 > for DRM. Set fbdev_probe in struct drm_driver, so that the client
 > setup can start the common fbdev client.
->
+>=20
+> The ingenic driver specifies a preferred color mode of 32. As this
+> is the default if no format has been given, leave it out entirely.
+>=20
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Deepak Rawat <drawat.floss@gmail.com>
+> Cc: Paul Cercueil <paul@crapouillou.net>
+
+Acked-by: Paul Cercueil <paul@crapouillou.net>
+
+Cheers,
+-Paul
+
 > ---
->  drivers/gpu/drm/hyperv/hyperv_drm_drv.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/gpu/drm/hyperv/hyperv_drm_drv.c b/drivers/gpu/drm/hy=
-perv/hyperv_drm_drv.c
-> index ff93e08d5036..3077ce5470f6 100644
-> --- a/drivers/gpu/drm/hyperv/hyperv_drm_drv.c
-> +++ b/drivers/gpu/drm/hyperv/hyperv_drm_drv.c
-> @@ -10,6 +10,7 @@
->
->  #include <drm/drm_aperture.h>
->  #include <drm/drm_atomic_helper.h>
+> =C2=A0drivers/gpu/drm/ingenic/ingenic-drm-drv.c | 4 +++-
+> =C2=A01 file changed, 3 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
+> b/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
+> index 39fa291f43dd..056b70b63554 100644
+> --- a/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
+> +++ b/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
+> @@ -24,6 +24,7 @@
+> =C2=A0#include <drm/drm_atomic_helper.h>
+> =C2=A0#include <drm/drm_bridge.h>
+> =C2=A0#include <drm/drm_bridge_connector.h>
 > +#include <drm/drm_client_setup.h>
->  #include <drm/drm_drv.h>
->  #include <drm/drm_fbdev_shmem.h>
->  #include <drm/drm_gem_shmem_helper.h>
-> @@ -36,6 +37,7 @@ static struct drm_driver hyperv_driver =3D {
->
->         .fops            =3D &hv_fops,
->         DRM_GEM_SHMEM_DRIVER_OPS,
-> +       DRM_FBDEV_SHMEM_DRIVER_OPS,
->  };
->
->  static int hyperv_pci_probe(struct pci_dev *pdev,
-> @@ -149,7 +151,7 @@ static int hyperv_vmbus_probe(struct hv_device *hdev,
->                 goto err_free_mmio;
->         }
->
-> -       drm_fbdev_shmem_setup(dev, 0);
-> +       drm_client_setup(dev, NULL);
->
->         return 0;
->
-> --
-> 2.46.0
->
+> =C2=A0#include <drm/drm_color_mgmt.h>
+> =C2=A0#include <drm/drm_crtc.h>
+> =C2=A0#include <drm/drm_damage_helper.h>
+> @@ -960,6 +961,7 @@ static const struct drm_driver
+> ingenic_drm_driver_data =3D {
+> =C2=A0	.fops			=3D &ingenic_drm_fops,
+> =C2=A0	.gem_create_object	=3D ingenic_drm_gem_create_object,
+> =C2=A0	DRM_GEM_DMA_DRIVER_OPS,
+> +	DRM_FBDEV_DMA_DRIVER_OPS,
+> =C2=A0};
+> =C2=A0
+> =C2=A0static const struct drm_plane_funcs ingenic_drm_primary_plane_funcs
+> =3D {
+> @@ -1399,7 +1401,7 @@ static int ingenic_drm_bind(struct device *dev,
+> bool has_components)
+> =C2=A0		goto err_clk_notifier_unregister;
+> =C2=A0	}
+> =C2=A0
+> -	drm_fbdev_dma_setup(drm, 32);
+> +	drm_client_setup(drm, NULL);
+> =C2=A0
+> =C2=A0	return 0;
+> =C2=A0
+
