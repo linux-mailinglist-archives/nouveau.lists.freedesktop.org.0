@@ -2,70 +2,146 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECD4FCBAB77
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:43:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 541EAC8721D
+	for <lists+nouveau@lfdr.de>; Tue, 25 Nov 2025 21:48:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 30C0F10EAE3;
-	Sat, 13 Dec 2025 12:41:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D770A10E4DC;
+	Tue, 25 Nov 2025 20:47:34 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=crapouillou.net header.i=@crapouillou.net header.b="ZunYbkwC";
+	dkim=pass (1024-bit key; unprotected) header.d=bp.renesas.com header.i=@bp.renesas.com header.b="pfvGv1Vs";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 508 seconds by postgrey-1.36 at gabe;
- Sat, 17 Aug 2024 21:02:40 UTC
-Received: from aposti.net (aposti.net [89.234.176.197])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5E7C710E111;
- Sat, 17 Aug 2024 21:02:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
- s=mail; t=1723928050;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=WVIEqwFIHNGgAN6qGUvxQku++RkpPwaMRzWZN5sESeY=;
- b=ZunYbkwC4ZwrSY6CABaaBQwU/7MDq7uN0QkS4Lzl+muHxoGrRHFXa2IorYuFkgCSdpb5Xb
- H3HqV5OMaUk6PXq3k6H3mzjZRkK9MGKrSUx51tf185UbEpEAk9bYPoWUPvtAAIn+lDhSA4
- elN3j5urMgWWjBf3iAARhfIkvxWySkk=
-Message-ID: <8e1fbdb1fe4e16b702a23a1eba01f43df6331317.camel@crapouillou.net>
-Subject: Re: [PATCH 22/86] drm/ingenic: Run DRM default client setup
-From: Paul Cercueil <paul@crapouillou.net>
-To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
- airlied@gmail.com,  jfalempe@redhat.com, javierm@redhat.com
-Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org, 
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org
-Date: Sat, 17 Aug 2024 22:54:07 +0200
-In-Reply-To: <20240816125408.310253-23-tzimmermann@suse.de>
+Received: from OS0P286CU011.outbound.protection.outlook.com
+ (mail-japanwestazon11010046.outbound.protection.outlook.com [52.101.228.46])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E4B1E10E23C;
+ Mon, 19 Aug 2024 09:50:25 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EKlklko0UBK7A7EIJlVfsakLp2Da4ppTyhg6bAmrkxl3AqIqCxqCldR5Rgw+r+FqFZw6eAaXB8mXBY4dhP9NLdwv7XrKOy12nqeER+uPZfy5ZPeOPZtMclKOxxtiPHxK4cJZbfAyhaurSpd24BEY+liaOxhMyUmCWBFsXnjQW/1zevI7/QqWY9CYYubKEWCvMRnZCg2IXmCnWsclxEzi2AVRvZiZvcEl0QdFhyjn0sZhCHCIwU1hQ7DBthulcXlq75uGs5XkyqVIsVKEarjFyDpaLwvk8DGJn8Y/chM7Bsc2KRAlAihsGfK2swTltmkzbL+le2rlwd4h2KuzPSyfJw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=A4jypXCZKPvlO4Hha3P+CtXMXU3AoOm4Z2C01B75AG0=;
+ b=OegwU7N0rdlb7syTCJptvcdNCAASpVhH4+Sm2ChJ29G5uT8CtQ2wWV7JKvYKX8YHAku2iMyKa+Rt1zSVh8ow5F5x0MfHOSyjTjPB6y9/exvX7Gu4JqUPkRIF4/zX7wZhlRhEZQP7uXxNb8dYUd7hr7ceuO1NwNlnbuk6RCsiDZS0hki2cD0jROhERmLnyES9LmhEkTSP+27qRdH3pE+iT1jz2Wm86ABaMNLpb3IVAyfGRY6cwDgb4vhLRoI4+piHTbSrHOGMAs2nvEHVvI7x07e/NahSa+AzALHY3oX/usqWY5mJA+VBb1+yoTEBeEfyGvZ6hixqMal2PAj0SnW4gg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bp.renesas.com; dmarc=pass action=none
+ header.from=bp.renesas.com; dkim=pass header.d=bp.renesas.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bp.renesas.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=A4jypXCZKPvlO4Hha3P+CtXMXU3AoOm4Z2C01B75AG0=;
+ b=pfvGv1Vs3Zqx0UUd/xpAqQGPz+FjBGstMlZ40jPv0BhHBaEF7prtUBNGUi4K+6y4bV/Opw+s88dbwnJmswMGva8hxzs0y9lkCcRSH22/9lDX0EnGyd4SmI5UL1iSXqv7o64FwenNxukWWPpUZ4HFmXpiYU4WmjGd5OPpanlkAaE=
+Received: from TY3PR01MB11346.jpnprd01.prod.outlook.com (2603:1096:400:3d0::7)
+ by OSRPR01MB11773.jpnprd01.prod.outlook.com (2603:1096:604:22d::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7875.21; Mon, 19 Aug
+ 2024 09:50:20 +0000
+Received: from TY3PR01MB11346.jpnprd01.prod.outlook.com
+ ([fe80::86ef:ca98:234d:60e1]) by TY3PR01MB11346.jpnprd01.prod.outlook.com
+ ([fe80::86ef:ca98:234d:60e1%5]) with mapi id 15.20.7875.019; Mon, 19 Aug 2024
+ 09:50:20 +0000
+From: Biju Das <biju.das.jz@bp.renesas.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>, "daniel@ffwll.ch"
+ <daniel@ffwll.ch>, "airlied@gmail.com" <airlied@gmail.com>,
+ "jfalempe@redhat.com" <jfalempe@redhat.com>, "javierm@redhat.com"
+ <javierm@redhat.com>
+CC: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ "intel-xe@lists.freedesktop.org" <intel-xe@lists.freedesktop.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
+Subject: RE: [PATCH 35/86] drm/renesas/rz-du: Run DRM default client setup
+Thread-Topic: [PATCH 35/86] drm/renesas/rz-du: Run DRM default client setup
+Thread-Index: AQHa79tuNZvEXbvPwU6/C6ldf1lFVLIuWm8g
+Date: Mon, 19 Aug 2024 09:50:20 +0000
+Message-ID: <TY3PR01MB11346645399AB4B6F83E59853868C2@TY3PR01MB11346.jpnprd01.prod.outlook.com>
 References: <20240816125408.310253-1-tzimmermann@suse.de>
- <20240816125408.310253-23-tzimmermann@suse.de>
-Autocrypt: addr=paul@crapouillou.net; prefer-encrypt=mutual;
- keydata=mQENBF0KhcEBCADkfmrzdTOp/gFOMQX0QwKE2WgeCJiHPWkpEuPH81/HB2dpjPZNW03ZM
- LQfECbbaEkdbN4YnPfXgcc1uBe5mwOAPV1MBlaZcEt4M67iYQwSNrP7maPS3IaQJ18ES8JJ5Uf5Uz
- FZaUawgH+oipYGW+v31cX6L3k+dGsPRM0Pyo0sQt52fsopNPZ9iag0iY7dGNuKenaEqkYNjwEgTtN
- z8dt6s3hMpHIKZFL3OhAGi88wF/21isv0zkF4J0wlf9gYUTEEY3Eulx80PTVqGIcHZzfavlWIdzhe
- +rxHTDGVwseR2Y1WjgFGQ2F+vXetAB8NEeygXee+i9nY5qt9c07m8mzjABEBAAG0JFBhdWwgQ2VyY
- 3VlaWwgPHBhdWxAY3JhcG91aWxsb3UubmV0PokBTgQTAQoAOBYhBNdHYd8OeCBwpMuVxnPua9InSr
- 1BBQJdCoXBAhsDBQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEHPua9InSr1BgvIH/0kLyrI3V0f
- 33a6D3BJwc1grbygPVYGuC5l5eMnAI+rDmLR19E2yvibRpgUc87NmPEQPpbbtAZt8On/2WZoE5OIP
- dlId/AHNpdgAtGXo0ZX4LGeVPjxjdkbrKVHxbcdcnY+zzaFglpbVSvp76pxqgVg8PgxkAAeeJV+ET
- 4t0823Gz2HzCL/6JZhvKAEtHVulOWoBh368SYdolp1TSfORWmHzvQiCCCA+j0cMkYVGzIQzEQhX7U
- rf9N/nhU5/SGLFEi9DcBfXoGzhyQyLXflhJtKm3XGB1K/pPulbKaPcKAl6rIDWPuFpHkSbmZ9r4KF
- lBwgAhlGy6nqP7O3u7q23hRW5AQ0EXQqFwQEIAMo+MgvYHsyjX3Ja4Oolg1Txzm8woj30ch2nACFC
- qaO0R/1kLj2VVeLrDyQUOlXx9PD6IQI4M8wy8m0sR4wV2p/g/paw7k65cjzYYLh+FdLNyO7IWYXnd
- JO+wDPi3aK/YKUYepqlP+QsmaHNYNdXEQDRKqNfJg8t0f5rfzp9ryxd1tCnbV+tG8VHQWiZXNqN70
- 62DygSNXFUfQ0vZ3J2D4oAcIAEXTymRQ2+hr3Hf7I61KMHWeSkCvCG2decTYsHlw5Erix/jYWqVOt
- X0roOOLqWkqpQQJWtU+biWrAksmFmCp5fXIg1Nlg39v21xCXBGxJkxyTYuhdWyu1yDQ+LSIUAEQEA
- AYkBNgQYAQoAIBYhBNdHYd8OeCBwpMuVxnPua9InSr1BBQJdCoXBAhsMAAoJEHPua9InSr1B4wsH/
- Az767YCT0FSsMNt1jkkdLCBi7nY0GTW+PLP1a4zvVqFMo/vD6uz1ZflVTUAEvcTi3VHYZrlgjcxmc
- Gu239oruqUS8Qy/xgZBp9KF0NTWQSl1iBfVbIU5VV1vHS6r77W5x0qXgfvAUWOH4gmN3MnF01SH2z
- McLiaUGF+mcwl15rHbjnT3Nu2399aSE6cep86igfCAyFUOXjYEGlJy+c6UyT+DUylpjQg0nl8MlZ/
- 7Whg2fAU9+FALIbQYQzGlT4c71SibR9T741jnegHhlmV4WXXUD6roFt54t0MSAFSVxzG8mLcSjR2c
- LUJ3NIPXixYUSEn3tQhfZj07xIIjWxAYZo=
-Content-Type: text/plain; charset="UTF-8"
+ <20240816125408.310253-36-tzimmermann@suse.de>
+In-Reply-To: <20240816125408.310253-36-tzimmermann@suse.de>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bp.renesas.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: TY3PR01MB11346:EE_|OSRPR01MB11773:EE_
+x-ms-office365-filtering-correlation-id: d56d8ee2-79de-487f-b6b1-08dcc03456b9
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|7416014|376014|1800799024|366016|38070700018; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?xz983qP2qmSVorufN5InXMvsze/YzA8qesrYFRcRubiMWyl+DrV899PSTANU?=
+ =?us-ascii?Q?wLbbcZlHs1xBfT4TfadCPnAUYKrP/+emGGHk2dN0ol+uMNAP3TlqRJYX9mNT?=
+ =?us-ascii?Q?mpHVSN2bpXYB2QYV+/0Gz700vrdO5FGxkYUVAMTMbDfvo5EOUYDyOrXSnPvp?=
+ =?us-ascii?Q?WCA3U65+WjZN3iRrPsXGLnzlUrKevsyV+nN1BlXowVDhro8p3Xq0KTlstLAQ?=
+ =?us-ascii?Q?Xjra/MJdfjJJOiUzeR2zSPMa3oYWI1O/Ox8fIWVIsCMGeAigZ+FtFaKGZCn/?=
+ =?us-ascii?Q?iEDmhQIIf8ReBp84GoqSJlC4hB02FtboYWjNiXvZ2fYiem52CdY9nifhBM9E?=
+ =?us-ascii?Q?pXbGhFNuIZO/4CvFCJYUk8NhjPNvYGHTMif840C7PgIKGo8iHpVQ+JKOWDXR?=
+ =?us-ascii?Q?Gt+xRmOZxg7lX7eTIB1j2ZjF26f9ApOnG9nlWIkTgtwmpld36TDjHugUkMWd?=
+ =?us-ascii?Q?avzmOcoTmZNOOZb+XBwOHyizipoIolJrJkkO8muwPmI67Jzm1z3BneDAX96M?=
+ =?us-ascii?Q?wIILq/zfLPat/WgAcQ1be107peTkZahH3lEBLvBQ0CD4sisPLXs10lIiIqg7?=
+ =?us-ascii?Q?Zw6ThUxFKLjPGSn+zpz2es78p0avUs+6oBxbICHjG0e2otyNC7ad8ZUEaFA3?=
+ =?us-ascii?Q?g9GDYY0bO2Wz5iRk+ZML6/aCkOa3idil2m6nS3RAVHnm0dptoQXoRzA1kZiA?=
+ =?us-ascii?Q?Z5AC+EdtbC4VOwEjooo7JjCpwWTvdb9PFiLq1koeomHPlpB+nfWiC6DxGNj/?=
+ =?us-ascii?Q?8iT5Bg7pKBhuySggVr8ya2hU3tW7lusXzF4utdEb5ZjxoMCEuAnsFzwEStew?=
+ =?us-ascii?Q?bFxag1EQOxmMz8aD3GFYUba9dYrRAhfkFvnGZOmnSTJMcBE/CGsa8UTwr0/r?=
+ =?us-ascii?Q?X/KA0hXGbrWGbJYVMs67L4aZmpsnYqamK9LirglKuksjC1YogCQNrOFnya4v?=
+ =?us-ascii?Q?pfZvuWDZIkgzbaj5K9BXoNpkXzyJDJP8pZExW+M4eyyPcTN00JK+SgfZpc7j?=
+ =?us-ascii?Q?s3eRTxxy5Er8CNLfq9MPQM3xaa+DP1xuF7zFj8VmHjO9qecmfxORcSK35OpJ?=
+ =?us-ascii?Q?EYWjBiF9VwDkupMc4axhFgoIvmT++y9v9ro+UCIKX6Zae2WqfESqHWgvuTlU?=
+ =?us-ascii?Q?GdyucVGXYXo+gPX1jdiyK+llI+TndypXDnYGfjjM+AvzM/K4RFU6OgvO5Tjh?=
+ =?us-ascii?Q?QCLOiLVxzjnv+hHD270SW/fjtLIWk2J4QinOgZHL9913cxrT3Nt9wnoXxjjz?=
+ =?us-ascii?Q?Qb4YeoE4HQnmMMMDOCj1PqbBnx/NJKb3nnOGdOZGHiF2YOV5O94rQc7jKMrj?=
+ =?us-ascii?Q?2+3+V7AuNQ7T99djqPslUxaGyA6UBDGHap3mKzsRfTLzDoEPnjXkQTqcn9LR?=
+ =?us-ascii?Q?X668Bwc82+p9IblPh9IsdhdjoAGnh3YEsTzj8SbvQxCNOmCHEw=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TY3PR01MB11346.jpnprd01.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(1800799024)(366016)(38070700018); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?sYXJ9AQ1H5PLXPtyGymLX25fxgGH52EP2kBC3RdF8t7hFluLUhKOcqmC80zp?=
+ =?us-ascii?Q?zh2AcW1l6X3YPPouQ2sbDRnN6X33UeZbJXUGhKZlMFZ75yli7y6kcLCiwBPr?=
+ =?us-ascii?Q?mUwwcxdt+dYQOwvslMimwlg3CO+yxJcM0GE9K3veTDwXwbOQFQSKkrxzKWQz?=
+ =?us-ascii?Q?ERqLGhtKvHqsmmLkuVxbo1o5IFHuCvmCS6nzMspiw23gkMbFSGhDtCUyrAPf?=
+ =?us-ascii?Q?oJ4Qq4xi96XpLTELpKYjbMtX+P99kkctXLPHZh7g7Ho6bstfMkPuvQJcqxny?=
+ =?us-ascii?Q?nwwZrfAxudTT7tfZbs5JIB+1XW2IkU3za8Jc+nYZYp1WzUTCjZS8KaLQK9UA?=
+ =?us-ascii?Q?vJFYKEYjs9+K6S5YSCyihc/qOYIwiY7bvBxfCxdBO9FFEeaX6MJt+gReHf0o?=
+ =?us-ascii?Q?GPtsfbCRum8QuiOdaGlzmZ175k9VivDtthZeyff2Pj8mbWyB8kZtFef3UNe0?=
+ =?us-ascii?Q?vlghyikxkfka0buKA6BP5T5REqYj31pE+Gr7MtyjU/JtSbxmmOqT7PJFYw9b?=
+ =?us-ascii?Q?mJ4whxy4sZzMyb3E1jFqZp6MlFX/b/1B7V1UXG+QMxX2MG5k6y7FFfwzPXCX?=
+ =?us-ascii?Q?axT2ktgXFmI045VhwGX3xawXxB6rlDTNsNuau0N20hZ0sXgZLXuNGQk9+fR1?=
+ =?us-ascii?Q?27dW9NErooSwxF8YEtwBaR1joyoSmll0ehNsI/QXgaXr1B2jRYH3wqy19cDg?=
+ =?us-ascii?Q?41FvX9yc1F+TirAAQEvpFfgMhmeQjg5jw6arl2hEvEH7NKg+MpWAU/vE1ogf?=
+ =?us-ascii?Q?cokQd15mmwvT++81WIMjJP6IWhx5AdIqgUzm/QHOuzlKHMifD4NsSg2xow7M?=
+ =?us-ascii?Q?Hx2XcSunecrwizFC3XIxtd+xe2fIKKYVO6Q08kK3fR7+0fuogK6jNkijuZQj?=
+ =?us-ascii?Q?ekNB5JuzlQr5/hL9X2AP/IS0c3eqoq12z8h7cD7AqdQOTo7XBQYWYFW/9MsN?=
+ =?us-ascii?Q?k77ht6YbGj55GpKC10jbFzNvdLAG1Qilen7K1J6Crt7ZAlkhn3Vl4omyIRfT?=
+ =?us-ascii?Q?w5oW7yzl6v47ouUWp1Mq1vxj0O2zaZLZSVtM7E+Grby3L6esPuFVQmWUph+k?=
+ =?us-ascii?Q?pzHxDXl1sjhfh+A53KmYqEigdgtOTFu1tv7vFXxqR9znLAKrw8p7LXhbMToX?=
+ =?us-ascii?Q?VUxKag9ALkz0u49kKqy6bDxa2DDSRg/vPdC3mB9qcJDE1Dyky/1cH6vdKVox?=
+ =?us-ascii?Q?B03z0t868BS+4sYq+VpptlkmdzXDBfXR36wA4XYSKnFV1I/pMMbxkN7xRPHD?=
+ =?us-ascii?Q?idviPzWDThZhSQxEI/NVWxRd5eW4h8HxRkZQk57hQ3OZSFWuUlyktOzxqx6H?=
+ =?us-ascii?Q?mBzTjST00KOxYum6qE/EsaERRMKDoGzOgOHSi55kJSGMlxNOzGa6Vw5g0hvW?=
+ =?us-ascii?Q?b8B92H5vWZ+nkxgv+4ZhYRHx7U+iGJ3CShT9lqGFNW/DbGkJNtciIkZvjvZd?=
+ =?us-ascii?Q?zvMWlQ1juAHfgt2VzjPR7n3nTVBLLVTO1KWW2BAmRKD/tE4Kbb/hLeQ/lQVS?=
+ =?us-ascii?Q?d7Hf9fdZjawddqH1oSCvMZFFBUFnaT8+4GvSHVKcHQF1VSgFH901RZjBezzO?=
+ =?us-ascii?Q?vmkM/Ghc9FCZSHOdcVRhX445JEBMJ/q03EZUeUbBVLC3qmaAaZkfzE3MSPvE?=
+ =?us-ascii?Q?KA=3D=3D?=
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
+X-OriginatorOrg: bp.renesas.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TY3PR01MB11346.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d56d8ee2-79de-487f-b6b1-08dcc03456b9
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Aug 2024 09:50:20.5523 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 53d82571-da19-47e4-9cb4-625a166a4a2a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: H1Z8ZExI34Rrqs/MtHuF4gR1cheL3pdzk+Xb8B/bpIwI+K7ckcmUtKcX8qK7xZch6wu6cX0lgnNnNLk+6Tq98ofom+UdLNz8us5+HM3I2a8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSRPR01MB11773
+X-Mailman-Approved-At: Tue, 25 Nov 2025 20:47:21 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,60 +156,65 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Thomas,
+Hi Thomas Zimmermann,
 
-Le vendredi 16 ao=C3=BBt 2024 =C3=A0 14:22 +0200, Thomas Zimmermann a =C3=
-=A9crit=C2=A0:
-> Call drm_client_setup() to run the kernel's default client setup
-> for DRM. Set fbdev_probe in struct drm_driver, so that the client
-> setup can start the common fbdev client.
+> -----Original Message-----
+> From: Thomas Zimmermann <tzimmermann@suse.de>
+> Sent: Friday, August 16, 2024 1:23 PM
+> Subject: [PATCH 35/86] drm/renesas/rz-du: Run DRM default client setup
 >=20
-> The ingenic driver specifies a preferred color mode of 32. As this
-> is the default if no format has been given, leave it out entirely.
+> Call drm_client_setup() to run the kernel's default client setup for DRM.=
+ Set fbdev_probe in struct
+> drm_driver, so that the client setup can start the common fbdev client.
+>=20
+> The rz-du driver specifies a preferred color mode of 32. As this is the d=
+efault if no format has been
+> given, leave it out entirely.
 >=20
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Paul Cercueil <paul@crapouillou.net>
+> Cc: Biju Das <biju.das.jz@bp.renesas.com>
 
-Acked-by: Paul Cercueil <paul@crapouillou.net>
+Tested-by: Biju Das <biju.das.jz@bp.renesas.com>
 
 Cheers,
--Paul
+Biju
 
 > ---
-> =C2=A0drivers/gpu/drm/ingenic/ingenic-drm-drv.c | 4 +++-
-> =C2=A01 file changed, 3 insertions(+), 1 deletion(-)
+>  drivers/gpu/drm/renesas/rz-du/rzg2l_du_drv.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 >=20
-> diff --git a/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
-> b/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
-> index 39fa291f43dd..056b70b63554 100644
-> --- a/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
-> +++ b/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
-> @@ -24,6 +24,7 @@
-> =C2=A0#include <drm/drm_atomic_helper.h>
-> =C2=A0#include <drm/drm_bridge.h>
-> =C2=A0#include <drm/drm_bridge_connector.h>
+> diff --git a/drivers/gpu/drm/renesas/rz-du/rzg2l_du_drv.c b/drivers/gpu/d=
+rm/renesas/rz-
+> du/rzg2l_du_drv.c
+> index e5eca8691a33..53f9e1b7fa87 100644
+> --- a/drivers/gpu/drm/renesas/rz-du/rzg2l_du_drv.c
+> +++ b/drivers/gpu/drm/renesas/rz-du/rzg2l_du_drv.c
+> @@ -13,6 +13,7 @@
+>  #include <linux/platform_device.h>
+>=20
+>  #include <drm/drm_atomic_helper.h>
 > +#include <drm/drm_client_setup.h>
-> =C2=A0#include <drm/drm_color_mgmt.h>
-> =C2=A0#include <drm/drm_crtc.h>
-> =C2=A0#include <drm/drm_damage_helper.h>
-> @@ -960,6 +961,7 @@ static const struct drm_driver
-> ingenic_drm_driver_data =3D {
-> =C2=A0	.fops			=3D &ingenic_drm_fops,
-> =C2=A0	.gem_create_object	=3D ingenic_drm_gem_create_object,
-> =C2=A0	DRM_GEM_DMA_DRIVER_OPS,
+>  #include <drm/drm_drv.h>
+>  #include <drm/drm_fbdev_dma.h>
+>  #include <drm/drm_gem_dma_helper.h>
+> @@ -68,6 +69,7 @@ DEFINE_DRM_GEM_DMA_FOPS(rzg2l_du_fops);
+>  static const struct drm_driver rzg2l_du_driver =3D {
+>  	.driver_features	=3D DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
+>  	.dumb_create		=3D rzg2l_du_dumb_create,
 > +	DRM_FBDEV_DMA_DRIVER_OPS,
-> =C2=A0};
-> =C2=A0
-> =C2=A0static const struct drm_plane_funcs ingenic_drm_primary_plane_funcs
-> =3D {
-> @@ -1399,7 +1401,7 @@ static int ingenic_drm_bind(struct device *dev,
-> bool has_components)
-> =C2=A0		goto err_clk_notifier_unregister;
-> =C2=A0	}
-> =C2=A0
-> -	drm_fbdev_dma_setup(drm, 32);
-> +	drm_client_setup(drm, NULL);
-> =C2=A0
-> =C2=A0	return 0;
-> =C2=A0
+>  	.fops			=3D &rzg2l_du_fops,
+>  	.name			=3D "rzg2l-du",
+>  	.desc			=3D "Renesas RZ/G2L Display Unit",
+> @@ -149,7 +151,7 @@ static int rzg2l_du_probe(struct platform_device *pde=
+v)
+>=20
+>  	drm_info(&rcdu->ddev, "Device %s probed\n", dev_name(&pdev->dev));
+>=20
+> -	drm_fbdev_dma_setup(&rcdu->ddev, 32);
+> +	drm_client_setup(&rcdu->ddev, NULL);
+>=20
+>  	return 0;
+>=20
+> --
+> 2.46.0
 
