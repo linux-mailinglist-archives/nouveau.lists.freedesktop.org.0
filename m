@@ -2,81 +2,134 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C20EA95709D
-	for <lists+nouveau@lfdr.de>; Mon, 19 Aug 2024 18:42:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 378A2957F54
+	for <lists+nouveau@lfdr.de>; Tue, 20 Aug 2024 09:22:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7320E10E280;
-	Mon, 19 Aug 2024 16:42:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 74A0810E1AD;
+	Tue, 20 Aug 2024 07:22:41 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="eVbYholp";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="YibhQQl+";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="JRN2rAB8";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="EWB+akhd";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="mOr89Axg";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8A17810E27E
- for <nouveau@lists.freedesktop.org>; Mon, 19 Aug 2024 16:42:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1724085763;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Md3KCJoK6feytlwXA33ydyo8XOfTQqPq8yxw0ziYE7M=;
- b=eVbYholpvaZNYFw+ilaVaR7C0+Hhf8emC8k44KTnbFTeVCNrXS847ATRAgl8f4wOYnXGVL
- 6eegTkHoDwEmEYZCOdalyjJh8KIEj/siqAO0ob1LecYz2kU7KyC40FrJQ7NZWxSapttK/Z
- Cxo4cyk3EFc/w82Deb1TBfwlwNZjX88=
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-110-HwfKyhbyOSCzRapX6ff7kQ-1; Mon, 19 Aug 2024 12:42:42 -0400
-X-MC-Unique: HwfKyhbyOSCzRapX6ff7kQ-1
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-2d3c89669a3so5068920a91.3
- for <nouveau@lists.freedesktop.org>; Mon, 19 Aug 2024 09:42:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724085761; x=1724690561;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Md3KCJoK6feytlwXA33ydyo8XOfTQqPq8yxw0ziYE7M=;
- b=q5SBuSiv5bL98SBwjst0Uq96REltmbX92cxuGN1A/ve9xA+o1qvrNxTmdO90lLt+sy
- 5U+MPsxroKlvPunOtTBB2zDRoHATRbH7dtWZ7g2Oa1E9FS+j89Kw7orrscDPjzMTWj4h
- DFyRNmmxM83EeJL5QQHuvJudrCxMOkchzA6Aa5pzV/yZBQoaov4HV906VM5mWluR8/0A
- IXmo0SJvTHvoJHuBLTrncfVjNlNWFLtkXvhDI8OCubT5uNOTIYlmvmjAjPyXipQRWFD/
- 8CtWZctZDGu7YR4roG6pGqqOd0f3Qm4UNQmtB3/2VxaqmHN7nOmphRDvtTN3IClvG1K1
- m5DQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXZ3MLJ4M/jIZ7saeyx33y1eO4QY8N6JFbClPpf+zoBDU4PzuuBucaXgOtlj23nLiGoUXAmBxmdSHcUPYjrmQMsG/HJ5XBq5gpvf8sFuQ==
-X-Gm-Message-State: AOJu0YwxXTAiEw2gfZqHNdefksdZzCee3yEqcq0HrEa8pVegVtQwFUH8
- 7kZKjhOtuJ+ZENQ6I8kwtN74H12Fy3AR3//F2C2dc+0ArOY/1nIGiTkRm9QAbCXafS5O5NTbGDr
- CkGGRZKLfqsdvrEJaJ43pmQLI/rBE55hmJ4+0UfqxydTt2Dj98T048jbaJU2Xhzw=
-X-Received: by 2002:a17:90a:fe93:b0:2cf:fe5d:ea12 with SMTP id
- 98e67ed59e1d1-2d3dfc7b35bmr13719467a91.24.1724085761049; 
- Mon, 19 Aug 2024 09:42:41 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFsNdEpvtSkAl5rzLqXEcAkgXsVKtNu15fJmALgqr6qS5TBLy4yzi6qcqcR03rEDCVVXij1Uw==
-X-Received: by 2002:a17:90a:fe93:b0:2cf:fe5d:ea12 with SMTP id
- 98e67ed59e1d1-2d3dfc7b35bmr13719449a91.24.1724085760670; 
- Mon, 19 Aug 2024 09:42:40 -0700 (PDT)
-Received: from localhost ([2803:2a00:8:776f:3d96:6be:69c7:46c2])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2d3d32853f9sm8430017a91.30.2024.08.19.09.42.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Aug 2024 09:42:40 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
- airlied@gmail.com, jfalempe@redhat.com
-Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH 59/86] drm/solomon: Run DRM default client setup
-In-Reply-To: <20240816125408.310253-60-tzimmermann@suse.de>
-References: <20240816125408.310253-1-tzimmermann@suse.de>
- <20240816125408.310253-60-tzimmermann@suse.de>
-Date: Mon, 19 Aug 2024 18:42:36 +0200
-Message-ID: <87ikvwa2gz.fsf@minerva.mail-host-address-is-not-set>
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9C71810E11F;
+ Tue, 20 Aug 2024 07:22:39 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id E9A17225A1;
+ Tue, 20 Aug 2024 07:22:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1724138558; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=nxM7gUEPJonsLj0wa0Ff9i77ggfnpBC1XbLXbz5KL5Y=;
+ b=YibhQQl+FZUTi7j25YKgbxVB2ssPdcR0wwq6ahr4YmGz4vJxfO+I89fjbxANXeS2KW3AbK
+ KNJkfxfZtV+pRMl96vmxt+fhKNhJgPuZ8nxabiKglD/QjqNTNOi2wOJoHmOdu+28zlbxF5
+ YPP6/NaE7gkiDAD8iwy51ss9NlgPsHk=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1724138558;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=nxM7gUEPJonsLj0wa0Ff9i77ggfnpBC1XbLXbz5KL5Y=;
+ b=JRN2rAB8q/LZqBm6FKi6w+8RT3fJ4Qef2RVkoom1ONCbTYI3v4XbDE4ddYrxu4Do5amtKy
+ Qqv5pBXyMMqnrgCQ==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1724138556; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=nxM7gUEPJonsLj0wa0Ff9i77ggfnpBC1XbLXbz5KL5Y=;
+ b=EWB+akhdb/GasL3y8Qw6RVjOtNrPMYHtGDFY54m3VKwRBUm/BMBvE0ejoH7SiLP3Cf30uD
+ ScvAXIqHU85DGAvAa1TFCw3OlHeIuLROw4oOXEe8fJD9S5Eqg6f6JJdgXE1qVehY0Q9M5t
+ AE60uikV1KLHiOQ7dNnBSKCQmpZQopk=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1724138556;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=nxM7gUEPJonsLj0wa0Ff9i77ggfnpBC1XbLXbz5KL5Y=;
+ b=mOr89Axgng8lyIZnBpPjjvYPU6N3S2w9uBFkmqSm6hGOKOCzCan7owFnsaQlC936dxH4CS
+ BfWPsod40dpS6cBA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A110C13770;
+ Tue, 20 Aug 2024 07:22:36 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id Dn+DJTxExGYJGQAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Tue, 20 Aug 2024 07:22:36 +0000
+Message-ID: <b82cb17f-4da7-4e7c-ad92-3c7c9abb45ee@suse.de>
+Date: Tue, 20 Aug 2024 09:22:36 +0200
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 04/86] drm: Add client-agnostic setup helper
+To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Cc: daniel@ffwll.ch, airlied@gmail.com, jfalempe@redhat.com,
+ javierm@redhat.com, dri-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, nouveau@lists.freedesktop.org
+References: <20240816125408.310253-1-tzimmermann@suse.de>
+ <20240816125408.310253-5-tzimmermann@suse.de>
+ <20240818200735.GB729@pendragon.ideasonboard.com>
+Content-Language: en-US
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <20240818200735.GB729@pendragon.ideasonboard.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Score: -4.30
+X-Spamd-Result: default: False [-4.30 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ MIME_TRACE(0.00)[0:+]; ARC_NA(0.00)[];
+ TO_MATCH_ENVRCPT_ALL(0.00)[];
+ FREEMAIL_CC(0.00)[ffwll.ch,gmail.com,redhat.com,lists.freedesktop.org];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; RCVD_TLS_ALL(0.00)[];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ TO_DN_SOME(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
+ RCPT_COUNT_SEVEN(0.00)[10]; MID_RHS_MATCH_FROM(0.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:mid, suse.de:email,
+ imap1.dmz-prg2.suse.org:helo, ideasonboard.com:email]
+X-Spam-Flag: NO
+X-Spam-Level: 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,28 +144,162 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Thomas Zimmermann <tzimmermann@suse.de> writes:
+Hi
 
-> Call drm_client_setup() to run the kernel's default client setup
-> for DRM. Set fbdev_probe in struct drm_driver, so that the client
-> setup can start the common fbdev client.
+Am 18.08.24 um 22:07 schrieb Laurent Pinchart:
+> Hi Thomas,
 >
-> The solomon driver specifies a preferred color mode of 32. As this
-> is the default if no format has been given, leave it out entirely.
+> Thank you for the patch.
 >
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Javier Martinez Canillas <javierm@redhat.com>
-> ---
->  drivers/gpu/drm/solomon/ssd130x.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+> On Fri, Aug 16, 2024 at 02:22:30PM +0200, Thomas Zimmermann wrote:
+>> DRM may support multiple in-kernel clients that run as soon as a DRM
+>> driver has been registered. To select the client(s) in a single place,
+>> introduce drm_client_setup().
+>>
+>> Drivers that call the new helper automatically instantiate the kernel's
+>> configured default clients. Only fbdev emulation is currently supported.
+>> Later versions can add support for DRM-based logging, a boot logo or even
+>> a console.
+> I really like the direction this is taking :-)
 >
+>> Some drivers handle the color mode for clients internally. Provide the
+>> helper drm_client_setup_with_color_mode() for them.
+>>
+>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+>> ---
+>>   drivers/gpu/drm/Makefile           |  1 +
+>>   drivers/gpu/drm/drm_client_setup.c | 55 ++++++++++++++++++++++++++++++
+>>   include/drm/drm_client_setup.h     | 12 +++++++
+>>   3 files changed, 68 insertions(+)
+>>   create mode 100644 drivers/gpu/drm/drm_client_setup.c
+>>   create mode 100644 include/drm/drm_client_setup.h
+>>
+>> diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
+>> index 0beb55d028a8..e7fc77d1d573 100644
+>> --- a/drivers/gpu/drm/Makefile
+>> +++ b/drivers/gpu/drm/Makefile
+>> @@ -129,6 +129,7 @@ drm_kms_helper-y := \
+>>   	drm_atomic_helper.o \
+>>   	drm_atomic_state_helper.o \
+>>   	drm_bridge_connector.o \
+>> +	drm_client_setup.o \
+>>   	drm_crtc_helper.o \
+>>   	drm_damage_helper.o \
+>>   	drm_encoder_slave.o \
+>> diff --git a/drivers/gpu/drm/drm_client_setup.c b/drivers/gpu/drm/drm_client_setup.c
+>> new file mode 100644
+>> index 000000000000..2e3315f5c3e2
+>> --- /dev/null
+>> +++ b/drivers/gpu/drm/drm_client_setup.c
+>> @@ -0,0 +1,55 @@
+>> +// SPDX-License-Identifier: MIT
+>> +
+>> +#include <drm/drm_client_setup.h>
+>> +#include <drm/drm_device.h>
+>> +#include <drm/drm_fbdev_client.h>
+>> +#include <drm/drm_fourcc.h>
+>> +#include <drm/drm_print.h>
+>> +
+>> +/**
+>> + * drm_client_setup() - Setup in-kernel DRM clients
+>> + * @dev: DRM device
+>> + * @format: Preferred color format for the device. Use NULL, unless
+> s/color format/pixel format/
 
-Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
+Ah, ok.
+
+>
+>> + *          there is clearly a driver-preferred format.
+>> + *
+>> + * This function sets up the in-kernel DRM clients. Restore, hotplug
+>> + * events and teardown are all taken care of.
+>> + *
+>> + * Drivers should call drm_client_setup() after registering the new
+>> + * DRM device with drm_dev_register(). This function is safe to call
+>> + * even when there are no connectors present. Setup will be retried
+>> + * on the next hotplug event.
+>> + *
+>> + * The clients are destroyed by drm_dev_unregister().
+>> + */
+>> +void drm_client_setup(struct drm_device *dev, const struct drm_format_info *format)
+>> +{
+>> +	int ret;
+>> +
+>> +	if (!format)
+>> +		format = drm_format_info(DRM_FORMAT_XRGB8888);
+>> +
+>> +	ret = drm_fbdev_client_setup(dev, format);
+>> +	if (ret)
+>> +		drm_warn(dev, "Failed to set up DRM client; error %d\n", ret);
+>> +}
+>> +EXPORT_SYMBOL(drm_client_setup);
+>> +
+>> +/**
+>> + * drm_client_setup_with_color_mode() - Setup in-kernel DRM clients for color mode
+>> + * @dev: DRM device
+>> + * @color_mode: Preferred color mode for the device
+>> + *
+>> + * This function sets up the in-kernel DRM clients. It is equivalent
+>> + * to drm_client_setup(), but expects a color mode as second argument.
+>> + *
+>> + * Do not use this function in new drivers. Prefer drm_client_setup() with a
+>> + * format of NULL.
+>> + */
+>> +void drm_client_setup_with_color_mode(struct drm_device *dev, unsigned int color_mode)
+>> +{
+>> +	uint32_t fmt = drm_driver_color_mode_format(dev, color_mode);
+>> +
+>> +	drm_client_setup(dev, drm_format_info(fmt));
+>> +}
+>> +EXPORT_SYMBOL(drm_client_setup_with_color_mode);
+>> diff --git a/include/drm/drm_client_setup.h b/include/drm/drm_client_setup.h
+>> new file mode 100644
+>> index 000000000000..f5fd1fabd4b1
+>> --- /dev/null
+>> +++ b/include/drm/drm_client_setup.h
+>> @@ -0,0 +1,12 @@
+>> +/* SPDX-License-Identifier: MIT */
+>> +
+>> +#ifndef DRM_CLIENT_SETUP_H
+>> +#define DRM_CLIENT_SETUP_H
+>> +
+>> +struct drm_device;
+>> +struct drm_format_info;
+>> +
+>> +void drm_client_setup(struct drm_device *dev, const struct drm_format_info *format);
+>> +void drm_client_setup_with_color_mode(struct drm_device *dev, unsigned int color_mode);
+> This is not common in DRM, so we may not want to introduce it here, but
+> _Generic() gives a nice function overloading syntax:
+>
+> void drm_client_setup_with_format(struct drm_device *dev, const struct drm_format_info *format);
+> void drm_client_setup_with_color_mode(struct drm_device *dev, unsigned int color_mode);
+>
+> #define drm_client_setup_(dev, format_or_color_mode)							 \
+> 	_Generic(format_or_color_mode,									 \
+> 		const struct drm_format_info *: drm_client_setup_with_format(dev, format_or_color_mode), \
+> 		unsigned int: drm_client_setup_with_color_mode(dev, format_or_color_mode)		 \
+> 	)
+>
+> Up to you.
+
+The color format is really a user interface. I'd rather like to remove 
+it from the implementation where possible.
+
+Best regards
+Thomas
+
+>
+> Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
+>
+>> +
+>> +#endif
 
 -- 
-Best regards,
-
-Javier Martinez Canillas
-Core Platforms
-Red Hat
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstrasse 146, 90461 Nuernberg, Germany
+GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
+HRB 36809 (AG Nuernberg)
 
