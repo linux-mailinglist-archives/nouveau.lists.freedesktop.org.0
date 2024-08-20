@@ -2,55 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 496359580F2
-	for <lists+nouveau@lfdr.de>; Tue, 20 Aug 2024 10:29:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B0E30958517
+	for <lists+nouveau@lfdr.de>; Tue, 20 Aug 2024 12:46:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F282410E51D;
-	Tue, 20 Aug 2024 08:29:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 58EED10E728;
+	Tue, 20 Aug 2024 10:46:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=tronnes.org header.i=@tronnes.org header.b="leOTVEC6";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="lhHZx2FI";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp.domeneshop.no (smtp.domeneshop.no [194.63.252.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6A63110E515;
- Tue, 20 Aug 2024 08:29:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
- ; s=ds202312;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:From:Sender:Reply-To:
- Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ytGC/cPv2axqOpYGQV9hvopSGlgOUVWarCK8N1gO5is=; b=l
- eOTVEC6ByAIntO4qJJdHoP/3RDir2C+dhl2P5podAS7z36xaC48rgwaINsUkWsda9DLuhOAat4urK
- KQqZdoy1eyd70ASSkWDQF5ixy+9maDGQBmAOyNL0xReQhPOAGzSZmAXjeJ2sW/V5zEAtjJOejUA1l
- 3OR7CtZ1aLLWoHhdHXayFCG3tAb/4wKNN4UHi6UuPlSWL1IFsXNZ5pzIifzpzeWcSnuMwWzS4v+ii
- KyN6ZeK4jfA60lDo8/V+e2Schd8U3LGO9EX/w0a8H4wPzuuXqnGS9yaG5ChY/JH3Tb7yrfp9X0A68
- vnXz2FCF82dAR7VJ/u4+dQtSOVVby+O3Q==;
-Received: from [2a01:799:962:4900:815f:3dd0:60d8:6458] (port=56532)
- by smtp.domeneshop.no with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <noralf@tronnes.org>) id 1sgKCn-00AxAe-CE;
- Tue, 20 Aug 2024 10:27:05 +0200
-Message-ID: <78fa746b-0951-4183-a4a9-cc1b98bb4ab3@tronnes.org>
-Date: Tue, 20 Aug 2024 10:27:04 +0200
+X-Greylist: delayed 402 seconds by postgrey-1.36 at gabe;
+ Tue, 20 Aug 2024 10:46:31 UTC
+Received: from out-188.mta1.migadu.com (out-188.mta1.migadu.com
+ [95.215.58.188])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8B19B10E730
+ for <nouveau@lists.freedesktop.org>; Tue, 20 Aug 2024 10:46:31 +0000 (UTC)
+Message-ID: <59e832ae-dd0e-4746-ad9c-327b997e992b@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+ t=1724150386;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+J6AUM5BA0XHMhLLUg9xC6LMZgDMWJLm3dx3v9LVjJE=;
+ b=lhHZx2FIP/RCUXZs8p29eG005r9RJMGyeMBgQ8ovBQAz2f8rtIT0wFDvnjR2Flagaf9ZGa
+ s29BHqCl/tgoW2VpLdAJfG418mIvnaeszKp4LYCtGHunZrtwlZqsm68QT+G2wpDRaNp9Kx
+ Y282my+JYqtSdE0sex8AwzrnZs2qxl8=
+Date: Tue, 20 Aug 2024 18:39:29 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 54/86] drm/gud: Run DRM default client setup
+Subject: Re: [82/86] drm/i915: Move custom hotplug code into separate callback
 To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
  airlied@gmail.com, jfalempe@redhat.com, javierm@redhat.com
 Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, noralf@tronnes.org
-References: <20240816125408.310253-1-tzimmermann@suse.de>
- <20240816125408.310253-55-tzimmermann@suse.de>
+ nouveau@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Tvrtko Ursulin <tursulin@ursulin.net>,
+ Lucas De Marchi <lucas.demarchi@intel.com>,
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>
+References: <20240816125408.310253-83-tzimmermann@suse.de>
+ <86a55d3c-930d-4b30-9f05-82dd2966df85@linux.dev>
+ <a48a5538-b4a9-4e01-9930-b1538325b9e3@suse.de>
 Content-Language: en-US
-From: =?UTF-8?Q?Noralf_Tr=C3=B8nnes?= <noralf@tronnes.org>
-In-Reply-To: <20240816125408.310253-55-tzimmermann@suse.de>
-Content-Type: text/plain; charset=UTF-8
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Sui Jingfeng <sui.jingfeng@linux.dev>
+In-Reply-To: <a48a5538-b4a9-4e01-9930-b1538325b9e3@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,15 +67,97 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi,
 
 
-On 8/16/24 14:23, Thomas Zimmermann wrote:
-> Call drm_client_setup() to run the kernel's default client setup
-> for DRM. Set fbdev_probe in struct drm_driver, so that the client
-> setup can start the common fbdev client.
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: "Noralf Trønnes" <noralf@tronnes.org>
-> ---
+On 2024/8/20 15:39, Thomas Zimmermann wrote:
+> Hi
+>
+> Am 19.08.24 um 10:52 schrieb Sui Jingfeng:
+>> Hi, Thomas
+>>
+>>
+>> I love your patch, yet ...
+>>
+>>
+>> On 2024/8/16 20:23, Thomas Zimmermann wrote:
+>>> i915's fbdev contains additional code for hotplugging a display that
+>>> cannot be ported to the common fbdev client. Introduce the callback
+>>> struct drm_fb_helper.fb_hotplug and implement it for i915. The fbdev
+>>> helpers invoke the callback before handing the hotplug event.
+>>>
+>>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+>>> Cc: Jani Nikula <jani.nikula@linux.intel.com>
+>>> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
+>>> Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
+>>> Cc: Tvrtko Ursulin <tursulin@ursulin.net>
+>>> Cc: Lucas De Marchi <lucas.demarchi@intel.com>
+>>> Cc: "Thomas Hellström" <thomas.hellstrom@linux.intel.com>
+>>> ---
+>>>   drivers/gpu/drm/drm_fb_helper.c            |  6 +++
+>>>   drivers/gpu/drm/i915/display/intel_fbdev.c | 43 
+>>> ++++++++++++----------
+>>>   include/drm/drm_fb_helper.h                | 13 +++++++
+>>>   3 files changed, 42 insertions(+), 20 deletions(-)
+>>>
+>>> diff --git a/drivers/gpu/drm/drm_fb_helper.c 
+>>> b/drivers/gpu/drm/drm_fb_helper.c
+>>> index d9e539b0fd1a..92926cb02dfb 100644
+>>> --- a/drivers/gpu/drm/drm_fb_helper.c
+>>> +++ b/drivers/gpu/drm/drm_fb_helper.c
+>>> @@ -1938,6 +1938,12 @@ int drm_fb_helper_hotplug_event(struct 
+>>> drm_fb_helper *fb_helper)
+>>>       if (!drm_fbdev_emulation || !fb_helper)
+>>>           return 0;
+>>>   +    if (fb_helper->funcs->fb_hotplug) {
+>>
+>> We seems need to check the existence on the 'fb_helper->funcs' here,
+>>
+>> For example:
+>>
+>>
+>> if (fb_helper->funcs && fb_helper->funcs->fb_hotplug) {
+>>
+>> Otherwise, it will de-reference NULL pointer.
+>> Can be observed on a trivial driver though,
+>> with no monitor(display) connected.
+>
+> Indeed. That needs to be fixed. Thank you for noting.
+>
 
-Acked-by: Noralf Trønnes <noralf@tronnes.org>
+Thanks for you efforts then.
+
+
+> To give some context:  I was hoping to remove drm_fb_helper_funcs at 
+> some point. 
+
+
+Yeah, too many helper functions may make peoples daze.
+
+
+> fb_probe is now gone with these patches and fb_dirty can certainly be 
+> replaced as well. (I once had prototype patches to do that). 
+
+
+Well, the grammar of "ret = (*fb_helper->funcs->fb_probe)(fb_helper, &sizes);" looks strange, 
+It's lengthy and I observed you have cleaned it up at the last patch. 
+Which also eliminates one pair "if and else" clause, the codes looks 
+more fluent now.
+
+
+> This leaves the new callbacks for 915, for which I don't have a good 
+> alternative solution. So it seems that drm_fb_helper_funcs will only 
+> be used by i915/xe in the long term.
+>
+
+Well, since it is a DRM client now, maybe we could try to drop it into struct drm_driver.
+Just like the '.fbdev_probe' callback, this may help to achieve a 100% DRM-based console/logger IMO.
+
+Besides, a lot of DRM driver instances has the DMA/2D acceleration hardware, promote it
+into drm_driver structure may has the potential to utilize hardware acceleration. Drivers
+will more easily to have custom implementation. I'm not 100% sure if it will only be used
+by i915 in the future.
+
+Best regards,
+Sui
+
