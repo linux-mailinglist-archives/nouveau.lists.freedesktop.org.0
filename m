@@ -2,67 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA609959EA8
-	for <lists+nouveau@lfdr.de>; Wed, 21 Aug 2024 15:29:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D95B959EFC
+	for <lists+nouveau@lfdr.de>; Wed, 21 Aug 2024 15:44:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D730410E60E;
-	Wed, 21 Aug 2024 13:29:44 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=meddatainc.com header.i=agents@meddatainc.com header.b="NODc35Pm";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3A35010E574;
+	Wed, 21 Aug 2024 13:44:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.perfora.net (mout.perfora.net [74.208.4.194])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D585510E60E
- for <nouveau@lists.freedesktop.org>; Wed, 21 Aug 2024 13:29:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meddatainc.com;
- s=s1-ionos; t=1724246980; x=1724851780; i=agents@meddatainc.com;
- bh=cBDy0hsPZkQj345FtGZZaogMdBy/yQ01CJ4Ph7TbdRE=;
- h=X-UI-Sender-Class:Date:In-Reply-To:References:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Subject:To:From:Message-ID:
- cc:content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=NODc35PmN3roL7pqgfJKV0Jj5p3qUOHgffPCGLz32r9XZXxZP4eNZSPLaifh+Cfx
- idwLvLCS/UeNGqJSll5oq2XQNWWEuXb+5XqJuOVoNgeciaLoxbS1lrezQBZtPLyi/
- l4PnyhKH362bmFWGFz141NRHNjKYp6l1f+U85tuSmHapMKN9H3LmtARRpC970+/WE
- 1zivq+uYHpsWpKR+E0fu/YDPTXQ9FqwLZL6gTexSqH82OJRfv0IZ0gpIDtOm2MeLR
- FZu6SsdAHgetjyuCiPsSdE6t9dGLxvhsJvcHDEVdxurCCVqaLIwzLQLj8cJmDnzzH
- AkApVS7Hf7lEFns8bw==
-X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
-Received: from [192.168.1.215] ([71.162.171.44]) by mrelay.perfora.net
- (mreueus004 [74.208.5.2]) with ESMTPSA (Nemesis) id 1Mz9AN-1ruRsW3dgZ-00z5bp
- for <nouveau@lists.freedesktop.org>; Wed, 21 Aug 2024 15:29:40 +0200
-Date: Wed, 21 Aug 2024 09:29:35 -0400
-User-Agent: K-9 Mail for Android
-In-Reply-To: <B2AE2FA5-1D8A-4359-B0D8-F5EC9828A2C9@meddatainc.com>
-References: <E2CB6BBD-35B1-4359-99F7-BBB0A6E6CA7A@meddatainc.com>
- <B2AE2FA5-1D8A-4359-B0D8-F5EC9828A2C9@meddatainc.com>
+Received: from mail-vs1-f54.google.com (mail-vs1-f54.google.com
+ [209.85.217.54])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4089110E574
+ for <nouveau@lists.freedesktop.org>; Wed, 21 Aug 2024 13:44:36 +0000 (UTC)
+Received: by mail-vs1-f54.google.com with SMTP id
+ ada2fe7eead31-498cd1112c3so411999137.0
+ for <nouveau@lists.freedesktop.org>; Wed, 21 Aug 2024 06:44:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724247875; x=1724852675;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3UeCnrBFxZ3E9SFjE+OPHN3Y07IqNnUIZhks/jfsxGg=;
+ b=Jvq40Xn4hUBWkYs43q+PCoqM0pA3a91CTqh2U/YyJLaOvi5jrZ+JZ3hVpdQGRx46kW
+ I8Z8bZ0ZO0p7zkWLN+/YJJN25aF3I5Yi9mPUtD7ZvyEMnyN7a9SawOixudb6RBgtNWmz
+ oUIyzowJzM1MzczOS0RywvqFK42aogh0YWhNWhUGcnzYS+nwTuECwycekzmeOTEOJ2Nm
+ MmhTY0VWL/2VbuCUicJwfNZ5H/31uDD2q8UyTgw1v65ImEI8OHNWQVXdKLzgOVg/vwF3
+ 5Voy6PzFbuDgKH4CRy8we52RIf8N1/LLHd+Yd+wna2MyjuGB9V6e5FJRXaaVxfiZqXgL
+ ufYg==
+X-Gm-Message-State: AOJu0YwWLDWQ4jhBbIdduaAxh3H4IXKo/5WnDuLocxiOwVPLufP/2HIy
+ k3SFn+mHQwIXPU8ZCvW6acTQMnlLyo8FW9l4eR+l1CO0T8SXgS+s26JiCIWY29KjFaPQIX9+us1
+ 2d2CWhp8B5LsZhhoo1bTfVNiSZjY=
+X-Google-Smtp-Source: AGHT+IEsRWwT9L75y8TTg3gti0s2rLoym6h2EPj1ecBSZfQ1RWZl9S6telKIOmM3ddz8Lpm1D3GbzwBEk5B5DgJ93xM=
+X-Received: by 2002:a05:6102:54ac:b0:48f:db1b:1965 with SMTP id
+ ada2fe7eead31-498d2e761f6mr3002358137.5.1724247874884; Wed, 21 Aug 2024
+ 06:44:34 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+References: <E2CB6BBD-35B1-4359-99F7-BBB0A6E6CA7A@meddatainc.com>
+In-Reply-To: <E2CB6BBD-35B1-4359-99F7-BBB0A6E6CA7A@meddatainc.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Wed, 21 Aug 2024 09:44:22 -0400
+Message-ID: <CAKb7UviSxCAA1weVK5kvVWDiroLStgmtPZH2wheYiD1Za8mJ4w@mail.gmail.com>
 Subject: Re: Possible nouveau driver problem?
-To: nouveau@lists.freedesktop.org,
- Nouveau Mailing List <nouveau@lists.freedesktop.org>
-From: H <agents@meddatainc.com>
-Message-ID: <26AD7741-0AA8-4C79-89B8-57C206C634F1@meddatainc.com>
-X-Provags-ID: V03:K1:KKxLqJwVF638UKoH5zcmLDi6+fb6zpoM+KaQ4ovPqum6XEeES5D
- BquS3Zzmeb6dxfEHg8UqkgUTbmer7BTZPXINFBeCUv3JRukRgXP7fk9ya4wy5emivFw7FH1
- GWb6V4jf7b/86ihlc/GWIVV6niUhhX/EaTdp6r8CsvTxi7lSHHY1v2D9gn9g9MPtSlpTNuf
- AbAQHnAiVna7KTbmQUvgQ==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:GWMWrKi/HG4=;EirA22Wx5R8BRZtTtl/yVrB1cZe
- EhUREkGI7kn/tjQqSybZyuF1jOQLz5SmOp38SCgCf1GpaKuF0UywwAUydPWfJnmCPVAARe0cU
- gBJIovoYbvSx/4OBZShMucqHuwZ2YcxTV+ZU5QJ1dZu5nnjUfXYU0BNrkt3zePeHETvOExzoo
- z+OoOMd9i8Zsyxt0+dPyN0g+dT56SdwMEiAvG8GXgyu+SCb/IzBjPw4GXdxHC4hpmJS9E6FSW
- 06DKYGhMtvuuWv1dE/n5AIK2I16EPiL73bHmN/XG7Sro1QWQOg6cvvbsC6HeoDS62fg8O+nod
- ANE3ze4v7tHNIopxTRPx2zssLGzApBArfy1vev5KS4PHxv17qIJrEDmbIyteFXnzZ8nEJ9IbX
- JtiNT8q7nJzIYtZ5LEuf0lweuYZxSvAXKLzNHjmj/ZM28thFNeq9fOJN+aBPHxWXMM34xuOq1
- CJiMgA95eMXAuecdqodynGNmGNNwoO7HxtR8m7dNCC62Pj8RLQcpQbc0rcbv0iL96a36b7oqc
- UgMJ/0JsxpF7T2B41qiyyNIAgPkjfISlvJrUhdSlc7KAITWN8g8l0jBreCRLTI36dTNiOsn/j
- mrGg6Iy8mYPBUjKRAexBGjIeR/4R68OgbfyXbCJFjeDJGNUfLBRlD5+dezyOG1E1wYOJJnIOE
- VTgZJ05FumtdEhS4ODXSVgOjK8gE8Jh9jd+eu2iSXj9E2YKjka7dOl2KpmIfLEZXQwWPKYaMJ
- Un4bZ8pjR1i5BTKnEJcKsoKr7JmxtGigQ==
+To: H <agents@meddatainc.com>
+Cc: Nouveau Mailing List <nouveau@lists.freedesktop.org>
+Content-Type: multipart/alternative; boundary="000000000000166123062031bebd"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,64 +59,128 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On August 17, 2024 3:41:23 PM EDT, H <agents@meddatainc=2Ecom> wrote:
->On August 15, 2024 8:24:26 PM GMT-04:00, H <agents@meddatainc=2Ecom>
->wrote:
->>I am running Rocky Linux latest version with the Mate Desktop 1=2E26=2E2
->>(the latest version in the EPEL repository) on a Dell Inspiron laptop
->>with a 3840 x 2160 display and an external 1920 x 1080 Acer
->>monitor connected via HDMI, see output below:
->>
->>$ inxi --graphics
->>Graphics:
->>  Device-1: Intel UHD Graphics 620 driver: i915 v: kernel
->>  Device-2: NVIDIA GM108M [GeForce 940MX] driver: nouveau v: kernel
->>Device-3: DisplayLink Dell D3100 Docking Station driver: usbfs type:
->>USB
->>  Device-4: Realtek Integrated_Webcam_HD driver: uvcvideo type: USB
->>  Display: x11 server: X=2EOrg v: 1=2E20=2E11 driver: X: loaded: modeset=
-ting
->>    dri: iris gpu: i915 resolution: 1: 1920x1080~60Hz 2:
->3840x2160~60Hz
->>API: OpenGL v: 4=2E6 vendor: intel mesa v: 23=2E3=2E3 renderer: Mesa Int=
-el
->>UHD
->>    Graphics 620 (KBL GT2)
->>
->>The problem is that the external display has some issues, whether they
->>are related to the nouveau driver, the Mate Desktop or something else
->I
->>cannot determine=2E What happens is that although the
->>external monitor is indeed using the 1920 x 1080 resolution and
->>dragging a window from the laptop screen to the external screen works,
->>ie=2E, it maintains the "correct" size, then maximizing it makes it
->>1/4 of the size of the external monitor display=2E Likewise, the Mate
->>Desktop background repeats partly 4-fold on this monitor, partly
->>16-fold=2E=2E=2E
->>
->>I also have a Dell docking station, model D3100 and have downloaded
->the
->>latest DisplayLink driver from github with the hope that I could
->attach
->>two external Acer monitors to use with the laptop, I
->>unable to use xrandr to correctly set the external monitor (I have
->only
->>tried with one so far) to the desired 1920 x 1080 resolution while
->>maintaining the 3840 x 2160 resolution on the laptop screen=2E
->>
->>Googling suggests that there might be some issues with xrandr and
->>scaling
->>
->>Given my description above, could there possibly be a bug in the
->>nouveau driver I am using?
->>
->>Thanks=2E =20
->
->Would be great if someone could opine on the bug I am seeing : whether
->it might be a nouveau bug, xrandr-related bug or possibly Mate Desktop
->related bug? Or some other bug=2E
->
->Thank you=2E
+--000000000000166123062031bebd
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I have not seen anyone comment on my posting below=2E If this is not the a=
-ppropriate forum to raise a potential bug, where should I raise it?
+On Thu, Aug 15, 2024 at 8:29=E2=80=AFPM H <agents@meddatainc.com> wrote:
+
+> I am running Rocky Linux latest version with the Mate Desktop 1.26.2 (the
+> latest version in the EPEL repository) on a Dell Inspiron laptop with a
+> 3840 x 2160 display and an external 1920 x 1080 Acer
+> monitor connected via HDMI, see output below:
+>
+> $ inxi --graphics
+> Graphics:
+>   Device-1: Intel UHD Graphics 620 driver: i915 v: kernel
+>   Device-2: NVIDIA GM108M [GeForce 940MX] driver: nouveau v: kernel
+>   Device-3: DisplayLink Dell D3100 Docking Station driver: usbfs type: US=
+B
+>   Device-4: Realtek Integrated_Webcam_HD driver: uvcvideo type: USB
+>   Display: x11 server: X.Org v: 1.20.11 driver: X: loaded: modesetting
+>     dri: iris gpu: i915 resolution: 1: 1920x1080~60Hz 2: 3840x2160~60Hz
+>   API: OpenGL v: 4.6 vendor: intel mesa v: 23.3.3 renderer: Mesa Intel UH=
+D
+>     Graphics 620 (KBL GT2)
+>
+> The problem is that the external display has some issues, whether they ar=
+e
+> related to the nouveau driver, the Mate Desktop or something else I canno=
+t
+> determine. What happens is that although the
+> external monitor is indeed using the 1920 x 1080 resolution and dragging =
+a
+> window from the laptop screen to the external screen works, ie., it
+> maintains the "correct" size, then maximizing it makes it
+> 1/4 of the size of the external monitor display. Likewise, the Mate
+> Desktop background repeats partly 4-fold on this monitor, partly 16-fold.=
+..
+>
+> I also have a Dell docking station, model D3100 and have downloaded the
+> latest DisplayLink driver from github with the hope that I could attach t=
+wo
+> external Acer monitors to use with the laptop, I
+> unable to use xrandr to correctly set the external monitor (I have only
+> tried with one so far) to the desired 1920 x 1080 resolution while
+> maintaining the 3840 x 2160 resolution on the laptop screen.
+>
+> Googling suggests that there might be some issues with xrandr and scaling
+>
+> Given my description above, could there possibly be a bug in the nouveau
+> driver I am using?
+>
+
+What makes you say that nouveau (or the NVIDIA GPU) is in any way involved
+in your issue?
+
+GM108 is, per my recollection, an accelerator-only GPU. It seems like both
+of your outputs are being driven by the integrated Intel GPU, as is your
+acceleration.
+
+Confirming which device is driving what will go a long way to helping
+understand your issues.
+
+Cheers,
+
+  -ilia
+
+--000000000000166123062031bebd
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Thu, Aug 15, 2024 at 8:29=E2=80=AFPM H=
+ &lt;<a href=3D"mailto:agents@meddatainc.com">agents@meddatainc.com</a>&gt;=
+ wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quot=
+e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
+;padding-left:1ex">I am running Rocky Linux latest version with the Mate De=
+sktop 1.26.2 (the latest version in the EPEL repository) on a Dell Inspiron=
+ laptop with a 3840 x 2160 display and an external 1920 x 1080 Acer<br>
+monitor connected via HDMI, see output below:<br>
+<br>
+$ inxi --graphics<br>
+Graphics:<br>
+=C2=A0 Device-1: Intel UHD Graphics 620 driver: i915 v: kernel<br>
+=C2=A0 Device-2: NVIDIA GM108M [GeForce 940MX] driver: nouveau v: kernel<br=
+>
+=C2=A0 Device-3: DisplayLink Dell D3100 Docking Station driver: usbfs type:=
+ USB<br>
+=C2=A0 Device-4: Realtek Integrated_Webcam_HD driver: uvcvideo type: USB<br=
+>
+=C2=A0 Display: x11 server: X.Org v: 1.20.11 driver: X: loaded: modesetting=
+<br>
+=C2=A0 =C2=A0 dri: iris gpu: i915 resolution: 1: 1920x1080~60Hz 2: 3840x216=
+0~60Hz<br>
+=C2=A0 API: OpenGL v: 4.6 vendor: intel mesa v: 23.3.3 renderer: Mesa Intel=
+ UHD<br>
+=C2=A0 =C2=A0 Graphics 620 (KBL GT2)<br>
+<br>
+The problem is that the external display has some issues, whether they are =
+related to the nouveau driver, the Mate Desktop or something else I cannot =
+determine. What happens is that although the<br>
+external monitor is indeed using the 1920 x 1080 resolution and dragging a =
+window from the laptop screen to the external screen works, ie., it maintai=
+ns the &quot;correct&quot; size, then maximizing it makes it<br>
+1/4 of the size of the external monitor display. Likewise, the Mate Desktop=
+ background repeats partly 4-fold on this monitor, partly 16-fold...<br>
+<br>
+I also have a Dell docking station, model D3100 and have downloaded the lat=
+est DisplayLink driver from github with the hope that I could attach two ex=
+ternal Acer monitors to use with the laptop, I<br>
+unable to use xrandr to correctly set the external monitor (I have only tri=
+ed with one so far) to the desired 1920 x 1080 resolution while maintaining=
+ the 3840 x 2160 resolution on the laptop screen.<br>
+<br>
+Googling suggests that there might be some issues with xrandr and scaling<b=
+r>
+<br>
+Given my description above, could there possibly be a bug in the nouveau dr=
+iver I am using?<br></blockquote><div><br></div><div>What makes you say tha=
+t nouveau (or the NVIDIA GPU) is in any way involved in your issue?</div><d=
+iv><br></div><div>GM108 is, per my recollection, an accelerator-only GPU. I=
+t seems like both of your outputs are being driven by the integrated Intel =
+GPU, as is your acceleration.</div><div><br></div><div>Confirming which dev=
+ice is driving what will go a long way to helping understand your issues.</=
+div><div><br></div><div>Cheers,</div><div><br></div><div>=C2=A0 -ilia</div>=
+</div></div>
+
+--000000000000166123062031bebd--
