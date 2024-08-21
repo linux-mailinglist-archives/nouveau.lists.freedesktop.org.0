@@ -2,49 +2,106 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D95B959EFC
-	for <lists+nouveau@lfdr.de>; Wed, 21 Aug 2024 15:44:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 087BB95A122
+	for <lists+nouveau@lfdr.de>; Wed, 21 Aug 2024 17:13:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3A35010E574;
-	Wed, 21 Aug 2024 13:44:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4242B10E247;
+	Wed, 21 Aug 2024 15:13:43 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Y9a5lU1M";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vs1-f54.google.com (mail-vs1-f54.google.com
- [209.85.217.54])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4089110E574
- for <nouveau@lists.freedesktop.org>; Wed, 21 Aug 2024 13:44:36 +0000 (UTC)
-Received: by mail-vs1-f54.google.com with SMTP id
- ada2fe7eead31-498cd1112c3so411999137.0
- for <nouveau@lists.freedesktop.org>; Wed, 21 Aug 2024 06:44:36 -0700 (PDT)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+ [209.85.221.47])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3A66110E248
+ for <nouveau@lists.freedesktop.org>; Wed, 21 Aug 2024 15:13:42 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-371b098e699so3512653f8f.2
+ for <nouveau@lists.freedesktop.org>; Wed, 21 Aug 2024 08:13:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1724253220; x=1724858020; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=pIR4lqHHFxU3fKIt67SGkiDEFZC8/bXJ+Q/DzVc8pSM=;
+ b=Y9a5lU1MzrenyPPleCGYwOaSKi3fm+/+bGkuWxs2Eqrjg+RRK+Tlu1OnAwip3J236l
+ lWxok8kRnLyyOqqTv7qX2/R6EugH40DaYY/6nEjq/FHR41cdicMwXP+BnebsAWJ3R7Lz
+ a2PM8dRYXE5+5fN0KjLgFsL/V+exeaPYK9geEiT2lUHCQTs1vxQ/vylazJ8mdvD/CVi4
+ Ayw46gFWn6GN2jSZ3JQ0fhWfw/Hqn3s7IdhhOoSLyBo8VXZg0uhQEd4Hz3Ac8fBdavGT
+ TE9v6KMCzdNT2XXJTzw4LgG3To/wElk+D0UQaeoq4qNBPGz0aHynkKxT6laX09w2OF3r
+ rWAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724247875; x=1724852675;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3UeCnrBFxZ3E9SFjE+OPHN3Y07IqNnUIZhks/jfsxGg=;
- b=Jvq40Xn4hUBWkYs43q+PCoqM0pA3a91CTqh2U/YyJLaOvi5jrZ+JZ3hVpdQGRx46kW
- I8Z8bZ0ZO0p7zkWLN+/YJJN25aF3I5Yi9mPUtD7ZvyEMnyN7a9SawOixudb6RBgtNWmz
- oUIyzowJzM1MzczOS0RywvqFK42aogh0YWhNWhUGcnzYS+nwTuECwycekzmeOTEOJ2Nm
- MmhTY0VWL/2VbuCUicJwfNZ5H/31uDD2q8UyTgw1v65ImEI8OHNWQVXdKLzgOVg/vwF3
- 5Voy6PzFbuDgKH4CRy8we52RIf8N1/LLHd+Yd+wna2MyjuGB9V6e5FJRXaaVxfiZqXgL
- ufYg==
-X-Gm-Message-State: AOJu0YwWLDWQ4jhBbIdduaAxh3H4IXKo/5WnDuLocxiOwVPLufP/2HIy
- k3SFn+mHQwIXPU8ZCvW6acTQMnlLyo8FW9l4eR+l1CO0T8SXgS+s26JiCIWY29KjFaPQIX9+us1
- 2d2CWhp8B5LsZhhoo1bTfVNiSZjY=
-X-Google-Smtp-Source: AGHT+IEsRWwT9L75y8TTg3gti0s2rLoym6h2EPj1ecBSZfQ1RWZl9S6telKIOmM3ddz8Lpm1D3GbzwBEk5B5DgJ93xM=
-X-Received: by 2002:a05:6102:54ac:b0:48f:db1b:1965 with SMTP id
- ada2fe7eead31-498d2e761f6mr3002358137.5.1724247874884; Wed, 21 Aug 2024
- 06:44:34 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724253220; x=1724858020;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=pIR4lqHHFxU3fKIt67SGkiDEFZC8/bXJ+Q/DzVc8pSM=;
+ b=VdbbwJfsTvMI2d/YbZvFnaXA08x9SQaFl/h9fbOueYSJb2TIFXLxvKf54Vz7lH+ABB
+ TTsNkXs2kYn4WDYtrk1EkbhGrZk1Q6RQlqI8RAF94QK7y57CXUJhY/H/4EDf5VD7BXy3
+ GUgaPER2F9e63OMs/xztLcrBQEzdig5EgWprJBtFIWu5kv4gKWJQEg8ANp8WKiU2nXqE
+ 7SdDWIoqJj3px36qIwM1vyTJZ5m9qUeEzNzxOvAMlndqb34IhEcPb10by+kKYNntjWLj
+ jmVr4eIW3yM9OWieva4cxiZ7IVT0Gjcy9rdlc3LTkRF5jbJgsTXBiz9dbBV/BzDJEQfy
+ W4gA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUTDzdgATU6vniucCK8W8Nvs2EzklNLWIzH6ZzCeoGba5dQD4SZla3P1NO8qUhA3d+Pr+DvfmXO@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwWp5uHbzdyQobw/zZFUtEG5JJsZ28MoxQk5kjk4I88JwksFMO7
+ wLeMf1o1WJc7N+I2/M+oAsNaNXPprbNRrVenXwpeGolkb9F+qnagIjnyfye6zPo=
+X-Google-Smtp-Source: AGHT+IGMQgJBsrQBoo56iqyJBR19TZtSD3M9DxXHRpIRSOJSFJQRfnQFYlZ74pcNAUTh068m3z+D3g==
+X-Received: by 2002:a5d:548c:0:b0:371:7dfc:5868 with SMTP id
+ ffacd0b85a97d-372fd732256mr2006019f8f.57.1724253219751; 
+ Wed, 21 Aug 2024 08:13:39 -0700 (PDT)
+Received: from ?IPV6:2001:861:d40:6fb0:ac85:2805:6b0e:5197?
+ ([2001:861:d40:6fb0:ac85:2805:6b0e:5197])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-371898498casm15830268f8f.42.2024.08.21.08.13.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 21 Aug 2024 08:13:39 -0700 (PDT)
+Message-ID: <50f0b204-f10a-42b3-9557-4e7f9b2b6d64@linaro.org>
+Date: Wed, 21 Aug 2024 17:13:36 +0200
 MIME-Version: 1.0
-References: <E2CB6BBD-35B1-4359-99F7-BBB0A6E6CA7A@meddatainc.com>
-In-Reply-To: <E2CB6BBD-35B1-4359-99F7-BBB0A6E6CA7A@meddatainc.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Wed, 21 Aug 2024 09:44:22 -0400
-Message-ID: <CAKb7UviSxCAA1weVK5kvVWDiroLStgmtPZH2wheYiD1Za8mJ4w@mail.gmail.com>
-Subject: Re: Possible nouveau driver problem?
-To: H <agents@meddatainc.com>
-Cc: Nouveau Mailing List <nouveau@lists.freedesktop.org>
-Content-Type: multipart/alternative; boundary="000000000000166123062031bebd"
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v2 27/86] drm/meson: Run DRM default client setup
+To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
+ airlied@gmail.com, jfalempe@redhat.com, javierm@redhat.com
+Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, Kevin Hilman <khilman@baylibre.com>,
+ Jerome Brunet <jbrunet@baylibre.com>,
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+References: <20240821130348.73038-1-tzimmermann@suse.de>
+ <20240821130348.73038-28-tzimmermann@suse.de>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20240821130348.73038-28-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,131 +113,55 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---000000000000166123062031bebd
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 21/08/2024 14:59, Thomas Zimmermann wrote:
+> Call drm_client_setup() to run the kernel's default client setup
+> for DRM. Set fbdev_probe in struct drm_driver, so that the client
+> setup can start the common fbdev client.
+> 
+> The meson driver specifies a preferred color mode of 32. As this
+> is the default if no format has been given, leave it out entirely.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Kevin Hilman <khilman@baylibre.com>
+> Cc: Jerome Brunet <jbrunet@baylibre.com>
+> Cc: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+> ---
+>   drivers/gpu/drm/meson/meson_drv.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/meson/meson_drv.c b/drivers/gpu/drm/meson/meson_drv.c
+> index 4bd0baa2a4f5..2f76f48da38d 100644
+> --- a/drivers/gpu/drm/meson/meson_drv.c
+> +++ b/drivers/gpu/drm/meson/meson_drv.c
+> @@ -17,6 +17,7 @@
+>   
+>   #include <drm/drm_aperture.h>
+>   #include <drm/drm_atomic_helper.h>
+> +#include <drm/drm_client_setup.h>
+>   #include <drm/drm_drv.h>
+>   #include <drm/drm_fbdev_dma.h>
+>   #include <drm/drm_gem_dma_helper.h>
+> @@ -98,6 +99,7 @@ static const struct drm_driver meson_driver = {
+>   
+>   	/* DMA Ops */
+>   	DRM_GEM_DMA_DRIVER_OPS_WITH_DUMB_CREATE(meson_dumb_create),
+> +	DRM_FBDEV_DMA_DRIVER_OPS,
+>   
+>   	/* Misc */
+>   	.fops			= &fops,
+> @@ -353,7 +355,7 @@ static int meson_drv_bind_master(struct device *dev, bool has_components)
+>   	if (ret)
+>   		goto uninstall_irq;
+>   
+> -	drm_fbdev_dma_setup(drm, 32);
+> +	drm_client_setup(drm, NULL);
+>   
+>   	return 0;
+>   
 
-On Thu, Aug 15, 2024 at 8:29=E2=80=AFPM H <agents@meddatainc.com> wrote:
-
-> I am running Rocky Linux latest version with the Mate Desktop 1.26.2 (the
-> latest version in the EPEL repository) on a Dell Inspiron laptop with a
-> 3840 x 2160 display and an external 1920 x 1080 Acer
-> monitor connected via HDMI, see output below:
->
-> $ inxi --graphics
-> Graphics:
->   Device-1: Intel UHD Graphics 620 driver: i915 v: kernel
->   Device-2: NVIDIA GM108M [GeForce 940MX] driver: nouveau v: kernel
->   Device-3: DisplayLink Dell D3100 Docking Station driver: usbfs type: US=
-B
->   Device-4: Realtek Integrated_Webcam_HD driver: uvcvideo type: USB
->   Display: x11 server: X.Org v: 1.20.11 driver: X: loaded: modesetting
->     dri: iris gpu: i915 resolution: 1: 1920x1080~60Hz 2: 3840x2160~60Hz
->   API: OpenGL v: 4.6 vendor: intel mesa v: 23.3.3 renderer: Mesa Intel UH=
-D
->     Graphics 620 (KBL GT2)
->
-> The problem is that the external display has some issues, whether they ar=
-e
-> related to the nouveau driver, the Mate Desktop or something else I canno=
-t
-> determine. What happens is that although the
-> external monitor is indeed using the 1920 x 1080 resolution and dragging =
-a
-> window from the laptop screen to the external screen works, ie., it
-> maintains the "correct" size, then maximizing it makes it
-> 1/4 of the size of the external monitor display. Likewise, the Mate
-> Desktop background repeats partly 4-fold on this monitor, partly 16-fold.=
-..
->
-> I also have a Dell docking station, model D3100 and have downloaded the
-> latest DisplayLink driver from github with the hope that I could attach t=
-wo
-> external Acer monitors to use with the laptop, I
-> unable to use xrandr to correctly set the external monitor (I have only
-> tried with one so far) to the desired 1920 x 1080 resolution while
-> maintaining the 3840 x 2160 resolution on the laptop screen.
->
-> Googling suggests that there might be some issues with xrandr and scaling
->
-> Given my description above, could there possibly be a bug in the nouveau
-> driver I am using?
->
-
-What makes you say that nouveau (or the NVIDIA GPU) is in any way involved
-in your issue?
-
-GM108 is, per my recollection, an accelerator-only GPU. It seems like both
-of your outputs are being driven by the integrated Intel GPU, as is your
-acceleration.
-
-Confirming which device is driving what will go a long way to helping
-understand your issues.
-
-Cheers,
-
-  -ilia
-
---000000000000166123062031bebd
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Thu, Aug 15, 2024 at 8:29=E2=80=AFPM H=
- &lt;<a href=3D"mailto:agents@meddatainc.com">agents@meddatainc.com</a>&gt;=
- wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quot=
-e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
-;padding-left:1ex">I am running Rocky Linux latest version with the Mate De=
-sktop 1.26.2 (the latest version in the EPEL repository) on a Dell Inspiron=
- laptop with a 3840 x 2160 display and an external 1920 x 1080 Acer<br>
-monitor connected via HDMI, see output below:<br>
-<br>
-$ inxi --graphics<br>
-Graphics:<br>
-=C2=A0 Device-1: Intel UHD Graphics 620 driver: i915 v: kernel<br>
-=C2=A0 Device-2: NVIDIA GM108M [GeForce 940MX] driver: nouveau v: kernel<br=
->
-=C2=A0 Device-3: DisplayLink Dell D3100 Docking Station driver: usbfs type:=
- USB<br>
-=C2=A0 Device-4: Realtek Integrated_Webcam_HD driver: uvcvideo type: USB<br=
->
-=C2=A0 Display: x11 server: X.Org v: 1.20.11 driver: X: loaded: modesetting=
-<br>
-=C2=A0 =C2=A0 dri: iris gpu: i915 resolution: 1: 1920x1080~60Hz 2: 3840x216=
-0~60Hz<br>
-=C2=A0 API: OpenGL v: 4.6 vendor: intel mesa v: 23.3.3 renderer: Mesa Intel=
- UHD<br>
-=C2=A0 =C2=A0 Graphics 620 (KBL GT2)<br>
-<br>
-The problem is that the external display has some issues, whether they are =
-related to the nouveau driver, the Mate Desktop or something else I cannot =
-determine. What happens is that although the<br>
-external monitor is indeed using the 1920 x 1080 resolution and dragging a =
-window from the laptop screen to the external screen works, ie., it maintai=
-ns the &quot;correct&quot; size, then maximizing it makes it<br>
-1/4 of the size of the external monitor display. Likewise, the Mate Desktop=
- background repeats partly 4-fold on this monitor, partly 16-fold...<br>
-<br>
-I also have a Dell docking station, model D3100 and have downloaded the lat=
-est DisplayLink driver from github with the hope that I could attach two ex=
-ternal Acer monitors to use with the laptop, I<br>
-unable to use xrandr to correctly set the external monitor (I have only tri=
-ed with one so far) to the desired 1920 x 1080 resolution while maintaining=
- the 3840 x 2160 resolution on the laptop screen.<br>
-<br>
-Googling suggests that there might be some issues with xrandr and scaling<b=
-r>
-<br>
-Given my description above, could there possibly be a bug in the nouveau dr=
-iver I am using?<br></blockquote><div><br></div><div>What makes you say tha=
-t nouveau (or the NVIDIA GPU) is in any way involved in your issue?</div><d=
-iv><br></div><div>GM108 is, per my recollection, an accelerator-only GPU. I=
-t seems like both of your outputs are being driven by the integrated Intel =
-GPU, as is your acceleration.</div><div><br></div><div>Confirming which dev=
-ice is driving what will go a long way to helping understand your issues.</=
-div><div><br></div><div>Cheers,</div><div><br></div><div>=C2=A0 -ilia</div>=
-</div></div>
-
---000000000000166123062031bebd--
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
