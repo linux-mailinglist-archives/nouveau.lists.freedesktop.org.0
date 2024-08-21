@@ -2,50 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11BF5CBAD25
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CD91CBAB2D
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 27EDB10EA68;
-	Sat, 13 Dec 2025 12:41:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 180DE10EAC0;
+	Sat, 13 Dec 2025 12:41:03 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=lechnology.com header.i=@lechnology.com header.b="w8jlikg8";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=lechnology.com header.i=@lechnology.com header.b="gIX9zNTp";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 940 seconds by postgrey-1.36 at gabe;
- Wed, 21 Aug 2024 14:03:43 UTC
 Received: from vern.gendns.com (vern.gendns.com [98.142.107.122])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 083F910E5D2;
- Wed, 21 Aug 2024 14:03:42 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 38ACC10E5B4;
+ Wed, 21 Aug 2024 14:14:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=lechnology.com; s=default; h=Content-Transfer-Encoding:Content-Type:
  In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
  :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
  List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lxOLKkIQ7poSz2tJygrDKrikqb7HuPRZ9lURWfUtGTA=; b=w8jlikg86wQ5L5mu0e1wjnbDch
- DHvxJKdVGcNaafC0b+sIFC3m6YupHICgne/2gd8T8t+r72ayQ3QsnifRYEicezhVePf+HVeFuQU2m
- Hckxbf2fpSjfiS6ziZ4px8YcmRQ1abxEQnd142nJEY9HQ1jCsOUbrPUqnJh7ttDfo5JwB+3ZS2fgj
- WkfjYgqZe7PdSDpVal/a7ZZSFFVU2ZOVeqP4R+73ygRpLrNKX3/o9qEUJzMBNFpq6TcPxjSu4+pVq
- /fgsdH7TfZZ1nNBlzbkAou53DAU65WFZyNKqsStGBio5waDGz1XjyK0hL0/0rorZQmk5gdSw1OYZh
- xAt1varw==;
-Received: from ip98-183-112-25.ok.ok.cox.net ([98.183.112.25]:53320
+ bh=lxOLKkIQ7poSz2tJygrDKrikqb7HuPRZ9lURWfUtGTA=; b=gIX9zNTpjlNm7/alldAaT5Q2KM
+ g/N08kS5mW7TvcEkeJA4uXXDuDaMXcNLbZXGCQuaJI9aRNZ1BSFHhUWsmRmD4vci/SkdRP32t5Mno
+ Ghtb1gQbUC3/soEhmbexfcriPlt633DwFb23BepY5xVodLsoYmiGbhnQ0aNKsD1+cDogeTuuT1lUH
+ ilCYwC5dXy4a0bILyS/HLWKb2FFBjezEDYKe3mWPHe2YkCMNOfMugx1r/JlxwoS3VvJ7nosYEbNuI
+ 6XWKSsqpbLrB07eLHVqD8YMlhQEtGYh0KCtv7PX5apoZVzhnnBVBwSULTfK1NGBhdSd1+W3a3/sxX
+ JAP0riwg==;
+Received: from ip98-183-112-25.ok.ok.cox.net ([98.183.112.25]:40834
  helo=[192.168.0.142]) by vern.gendns.com with esmtpsa (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96.2)
- (envelope-from <david@lechnology.com>) id 1sgljE-00029O-2Q;
- Wed, 21 Aug 2024 09:48:13 -0400
-Message-ID: <b447ffe0-c0d8-4d08-b98c-36f3dc251ccf@lechnology.com>
-Date: Wed, 21 Aug 2024 08:48:11 -0500
+ (envelope-from <david@lechnology.com>) id 1sgljW-0002FD-1T;
+ Wed, 21 Aug 2024 09:48:30 -0400
+Message-ID: <ad8bd338-7b43-46f2-bb38-5f7133f3f9de@lechnology.com>
+Date: Wed, 21 Aug 2024 08:48:29 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 44/86] drm/st7586: Run DRM default client setup
+Subject: Re: [PATCH v2 45/86] drm/st7735r: Run DRM default client setup
 To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
  airlied@gmail.com, jfalempe@redhat.com, javierm@redhat.com
 Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
 References: <20240821130348.73038-1-tzimmermann@suse.de>
- <20240821130348.73038-45-tzimmermann@suse.de>
+ <20240821130348.73038-46-tzimmermann@suse.de>
 Content-Language: en-US
 From: David Lechner <david@lechnology.com>
 Autocrypt: addr=david@lechnology.com; keydata=
@@ -90,7 +88,7 @@ Autocrypt: addr=david@lechnology.com; keydata=
  +M4GyTil33pnBXEZp29nh7ev4VJ96sVvnQFzls3motvG+pq/c37Ms1gYayeCzA2iCDuKx6Zk
  ybHg7IzNEduqZQ4bkaBpnEt+vwE3Gg5l4dAUFWAs9qY13nyBANQ282FNctziEHCUJZ/Map6T
  dzHWO6hU1HuvmlwcJSFCOey8yhkt386E6KfVYzrIhwTtabg+DLyMZK40Rop1VcU7Nx0M
-In-Reply-To: <20240821130348.73038-45-tzimmermann@suse.de>
+In-Reply-To: <20240821130348.73038-46-tzimmermann@suse.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-AntiAbuse: This header was added to track abuse,
