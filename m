@@ -2,50 +2,82 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B921ACBACFE
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:44:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA618CBA9FA
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8A1B610EBC0;
-	Sat, 13 Dec 2025 12:41:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3F80410EA26;
+	Sat, 13 Dec 2025 12:40:58 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="KrjXl3sU";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 1029 seconds by postgrey-1.36 at gabe;
- Fri, 30 Aug 2024 01:31:16 UTC
-Received: from szxga04-in.huawei.com (szxga04-in.huawei.com [45.249.212.190])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5710210E13B;
- Fri, 30 Aug 2024 01:31:16 +0000 (UTC)
-Received: from mail.maildlp.com (unknown [172.19.88.214])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4Ww0RG1j5Rz20n8q;
- Fri, 30 Aug 2024 09:09:14 +0800 (CST)
-Received: from kwepemd500012.china.huawei.com (unknown [7.221.188.25])
- by mail.maildlp.com (Postfix) with ESMTPS id 58B521A016C;
- Fri, 30 Aug 2024 09:14:05 +0800 (CST)
-Received: from huawei.com (10.90.53.73) by kwepemd500012.china.huawei.com
- (7.221.188.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Fri, 30 Aug
- 2024 09:14:04 +0800
-From: Li Zetao <lizetao1@huawei.com>
-To: <alexander.deucher@amd.com>, <christian.koenig@amd.com>,
- <Xinhui.Pan@amd.com>, <airlied@gmail.com>, <daniel@ffwll.ch>,
- <kherbst@redhat.com>, <lyude@redhat.com>, <dakr@redhat.com>,
- <felix.kuehling@amd.com>, <zhenguo.yin@amd.com>,
- <srinivasan.shanmugam@amd.com>, <shashank.sharma@amd.com>,
- <Jesse.Zhang@amd.com>
-CC: <lizetao1@huawei.com>, <amd-gfx@lists.freedesktop.org>,
- <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>
-Subject: [PATCH -next 3/3] drm/amdgpu: use clamp() in nvkm_volt_map()
-Date: Fri, 30 Aug 2024 09:22:16 +0800
-Message-ID: <20240830012216.603623-4-lizetao1@huawei.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240830012216.603623-1-lizetao1@huawei.com>
-References: <20240830012216.603623-1-lizetao1@huawei.com>
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 25FC710E128;
+ Fri, 30 Aug 2024 21:27:39 +0000 (UTC)
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 47UGQ3ha010746;
+ Fri, 30 Aug 2024 21:27:37 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ URXtgoOzg0kRPp5oKV2CCPCVBWAJ9izJ0tojBICL6jM=; b=KrjXl3sU1H6OSd0N
+ W7OkHDSirsoQQLE+ss5jsBR0L196UW8bWP/K8H+mtr6zmScmHRtWbj4QJhMT0PkK
+ PUQwKJQY+wdbbR71z2r/v4MlWNuKXLmkhSZggtX5Hhm0k6uLn5Ib8dW+rKdrpOTA
+ MNDJ/9XTZSGHPnE/yI3G6aejickY/elaoF/ES8HHZrjUa/oXFRHzl8vv9WFTIbbt
+ IzUAe8g8NTo31bS6WL7FnyxLIV7vO68mOd6tLKxJrmIgPJ3tocZdP0Cwerbipa9+
+ uX9RY6ee/4OE4rZZuvjL9ofF636jzhCCUoxgMxk8qKa1e9PKiH7dKOCvsUetC5F8
+ zxRrOQ==
+Received: from nasanppmta03.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 419pv0j7pq-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 30 Aug 2024 21:27:36 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA03.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 47ULRZR6030388
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 30 Aug 2024 21:27:35 GMT
+Received: from [10.134.70.212] (10.80.80.8) by nasanex01b.na.qualcomm.com
+ (10.46.141.250) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Fri, 30 Aug
+ 2024 14:27:34 -0700
+Message-ID: <375bafe8-14c7-4d11-ba11-f059804a12c5@quicinc.com>
+Date: Fri, 30 Aug 2024 14:27:34 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.90.53.73]
-X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
- kwepemd500012.china.huawei.com (7.221.188.25)
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:49 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 31/81] drm/panel/ili9341: Run DRM default client setup
+To: Thomas Zimmermann <tzimmermann@suse.de>, <daniel@ffwll.ch>,
+ <airlied@gmail.com>, <jfalempe@redhat.com>, <javierm@redhat.com>
+CC: <dri-devel@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>,
+ <intel-gfx@lists.freedesktop.org>, <intel-xe@lists.freedesktop.org>,
+ <nouveau@lists.freedesktop.org>, Neil Armstrong <neil.armstrong@linaro.org>
+References: <20240830084456.77630-1-tzimmermann@suse.de>
+ <20240830084456.77630-32-tzimmermann@suse.de>
+Content-Language: en-US
+From: Jessica Zhang <quic_jesszhan@quicinc.com>
+In-Reply-To: <20240830084456.77630-32-tzimmermann@suse.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-GUID: nqDuYHJKG79BeCfJ5TRnQeUELgWpx_z9
+X-Proofpoint-ORIG-GUID: nqDuYHJKG79BeCfJ5TRnQeUELgWpx_z9
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-08-30_10,2024-08-30_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 clxscore=1011
+ priorityscore=1501 impostorscore=0 suspectscore=0 lowpriorityscore=0
+ malwarescore=0 spamscore=0 mlxlogscore=999 mlxscore=0 bulkscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2407110000 definitions=main-2408300166
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:45 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,27 +92,53 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-When it needs to get a value within a certain interval, using clamp()
-makes the code easier to understand than min(max()).
 
-Signed-off-by: Li Zetao <lizetao1@huawei.com>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/volt/base.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/volt/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/volt/base.c
-index a17a6dd8d3de..803b98df4858 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/volt/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/volt/base.c
-@@ -142,7 +142,7 @@ nvkm_volt_map(struct nvkm_volt *volt, u8 id, u8 temp)
- 			return -ENODEV;
- 		}
- 
--		result = min(max(result, (s64)info.min), (s64)info.max);
-+		result = clamp(result, (s64)info.min, (s64)info.max);
- 
- 		if (info.link != 0xff) {
- 			int ret = nvkm_volt_map(volt, info.link, temp);
--- 
-2.34.1
+On 8/30/2024 1:40 AM, Thomas Zimmermann wrote:
+> Call drm_client_setup() to run the kernel's default client setup
+> for DRM. Set fbdev_probe in struct drm_driver, so that the client
+> setup can start the common fbdev client.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Jessica Zhang <quic_jesszhan@quicinc.com>
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
+Reviewed-by: Jessica Zhang <quic_jesszhan@quicinc.com>
+
+> ---
+>   drivers/gpu/drm/panel/panel-ilitek-ili9341.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/panel/panel-ilitek-ili9341.c b/drivers/gpu/drm/panel/panel-ilitek-ili9341.c
+> index 1fbc5d433d75..f1266fc41bf7 100644
+> --- a/drivers/gpu/drm/panel/panel-ilitek-ili9341.c
+> +++ b/drivers/gpu/drm/panel/panel-ilitek-ili9341.c
+> @@ -31,6 +31,7 @@
+>   #include <video/mipi_display.h>
+>   
+>   #include <drm/drm_atomic_helper.h>
+> +#include <drm/drm_client_setup.h>
+>   #include <drm/drm_drv.h>
+>   #include <drm/drm_fbdev_dma.h>
+>   #include <drm/drm_gem_atomic_helper.h>
+> @@ -591,6 +592,7 @@ static struct drm_driver ili9341_dbi_driver = {
+>   	.driver_features	= DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
+>   	.fops			= &ili9341_dbi_fops,
+>   	DRM_GEM_DMA_DRIVER_OPS_VMAP,
+> +	DRM_FBDEV_DMA_DRIVER_OPS,
+>   	.debugfs_init		= mipi_dbi_debugfs_init,
+>   	.name			= "ili9341",
+>   	.desc			= "Ilitek ILI9341",
+> @@ -651,7 +653,7 @@ static int ili9341_dbi_probe(struct spi_device *spi, struct gpio_desc *dc,
+>   
+>   	spi_set_drvdata(spi, drm);
+>   
+> -	drm_fbdev_dma_setup(drm, 0);
+> +	drm_client_setup(drm, NULL);
+>   
+>   	return 0;
+>   }
+> -- 
+> 2.46.0
+> 
