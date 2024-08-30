@@ -2,81 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48A6E965CED
-	for <lists+nouveau@lfdr.de>; Fri, 30 Aug 2024 11:32:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 11D09965D46
+	for <lists+nouveau@lfdr.de>; Fri, 30 Aug 2024 11:45:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E93BE10EA27;
-	Fri, 30 Aug 2024 09:32:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6A27E10E9F8;
+	Fri, 30 Aug 2024 09:45:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com
- [209.85.128.177])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7E24F10EA26;
- Fri, 30 Aug 2024 09:32:23 +0000 (UTC)
-Received: by mail-yw1-f177.google.com with SMTP id
- 00721157ae682-6cdae28014dso13269467b3.1; 
- Fri, 30 Aug 2024 02:32:23 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725010342; x=1725615142;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=imgxU4L4plsaBKuyDZ4ep2KNsaM/vp5qwWwnJwPwFlI=;
- b=gLPFR45Wq7Mp/X24mr/hC6114tsOGkjdTeOHyLWkek1sVFE2HvClNezZMKvUYx3WxL
- wqBJi0LOkrWNAz/dg1DBoWthnbWH3fw5Endtlf+tkkIS44GHXOVkqJlBoWE7RIeiJXzk
- JeSuDuccuov1jViifS0aDeIwdTjBNLNNdfHlP2A57NbIES8ePHWZwXtX/143W6nXvJN6
- CotEwOZzVJ65Mv5Nv3j/VWhJS6z5KoC6UBfVwNP0k5OPg6FfO84dzNYDOuCOOg4Qazuw
- fnT2NKWY9U0vbeEi/XtOw+7Z4KmiA5aJJTZQVmXXGYPDy3AvuCPYJhdwP8Oahsb+yLoS
- iwUw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU6AZj7l9JCotS+mBPN/sRbcqKhaNG7/UxJiggyg3GokGFbFOB8r9dfcxxh/iYMkcaqExa/D9oK@lists.freedesktop.org,
- AJvYcCUC3EgByBhTJZ2fUlGeZjgIDlDoOonVXQMCdEKb4Nf6Why9a1MGFCFVqeddr+X3ebBoPvzhOOg3T/k=@lists.freedesktop.org,
- AJvYcCVEA519tq/mZadl9jj+rJ7iiLN3xvCNVRdEOIWjMb1l2h7y/AW14odRhWYpAUylDjPna7AKE/lwigWg@lists.freedesktop.org,
- AJvYcCVWiUfSes7ikIfFxZj/JS7KsC5woC+MbbSr9zi6BQVaWkxmdEBMvq3/wy95Ql7Lm3ZtULKPpk7oYMBd@lists.freedesktop.org,
- AJvYcCVykGZem4Krdl1isnqu2pzGzrcHnvP/44s90b6ezvR+Rc6AJE1erDPFnqGE3RFYPf90l7BrM53iKw==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YyVJY0kQDEsbcabC4vka8MJJavH/GBdZNhCu2R81a3n6KMMKpKE
- XA634TDpDjfPFLyj6Jv4pY1jgkZ1u3hzhjAvUVP5t2B8GEUrJE7qkSy6I/d0
-X-Google-Smtp-Source: AGHT+IHohzc96UO0uZxouFSNhd5eE7y0Vn9MKDyBhB6QmeM+ANwUHtYjtXDZBWkPhKbEChtjTYb8YQ==
-X-Received: by 2002:a05:690c:6a03:b0:622:c892:6ae7 with SMTP id
- 00721157ae682-6d285c15418mr46016007b3.12.1725010341960; 
- Fri, 30 Aug 2024 02:32:21 -0700 (PDT)
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com.
- [209.85.128.169]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6d2d3abe246sm5668037b3.1.2024.08.30.02.32.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 30 Aug 2024 02:32:21 -0700 (PDT)
-Received: by mail-yw1-f169.google.com with SMTP id
- 00721157ae682-6b3afc6cd01so21079687b3.1; 
- Fri, 30 Aug 2024 02:32:21 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCVD2ca9h3Uctx871el7/YN+O6Jc6k234aUMc9OvWs5x+zI6zfIH7955gFw8eUahvcDNBA4kJ9f+jg==@lists.freedesktop.org,
- AJvYcCVbPZP17Q1ryKpmPUpgVknRm6Q48U0T5/RpQTeFFkOXjG8Q4alxyhtehYWfwEG0efE5toltgpH4hV0=@lists.freedesktop.org,
- AJvYcCWVQCNWr4kLN7GUN1yfecby0K+a460eVyBcd14H91uHBn5STDlWitOShT0upDh0eF4E9BNTqkAyuAcA@lists.freedesktop.org,
- AJvYcCX2/hblPf4FjccV/65JsF1FWAAd2qbbg18zhBVU9ouly9VWSd1tWqOInpWLaIR71ngrugHxtQku@lists.freedesktop.org,
- AJvYcCX3ENGsQeVnkl6Hp7+0QtmSU715oFsxoYxzIuYCCj6FDmcbYmwxaM622evNtdKWhOjw4wpd0sn/JjFA@lists.freedesktop.org
-X-Received: by 2002:a05:690c:3704:b0:61a:e979:427e with SMTP id
- 00721157ae682-6d285c0e968mr48290357b3.11.1725010341431; Fri, 30 Aug 2024
- 02:32:21 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240830084456.77630-1-tzimmermann@suse.de>
- <20240830084456.77630-37-tzimmermann@suse.de>
-In-Reply-To: <20240830084456.77630-37-tzimmermann@suse.de>
+Received: from weierstrass.telenet-ops.be (weierstrass.telenet-ops.be
+ [195.130.137.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 13E0010E8E7
+ for <nouveau@lists.freedesktop.org>; Fri, 30 Aug 2024 09:45:24 +0000 (UTC)
+Received: from andre.telenet-ops.be (andre.telenet-ops.be
+ [IPv6:2a02:1800:120:4::f00:15])
+ by weierstrass.telenet-ops.be (Postfix) with ESMTPS id 4WwCtp6nJFz4xchG
+ for <nouveau@lists.freedesktop.org>; Fri, 30 Aug 2024 11:45:22 +0200 (CEST)
+Received: from ramsan.of.borg ([IPv6:2a02:1810:ac12:ed80:f0d5:75e3:232:dfed])
+ by andre.telenet-ops.be with cmsmtp
+ id 69lM2D00L4wyYGe019lMm3; Fri, 30 Aug 2024 11:45:22 +0200
+Received: from geert (helo=localhost)
+ by ramsan.of.borg with local-esmtp (Exim 4.95)
+ (envelope-from <geert@linux-m68k.org>) id 1sjyC1-001KOP-Bj;
+ Fri, 30 Aug 2024 11:45:21 +0200
+Date: Fri, 30 Aug 2024 11:45:21 +0200 (CEST)
 From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Fri, 30 Aug 2024 11:32:09 +0200
-X-Gmail-Original-Message-ID: <CAMuHMdX5cgqOH-X6CZPykPCjKCTg0uVqWQjHozb0Xqy7h5yiBg@mail.gmail.com>
-Message-ID: <CAMuHMdX5cgqOH-X6CZPykPCjKCTg0uVqWQjHozb0Xqy7h5yiBg@mail.gmail.com>
-Subject: Re: [PATCH v3 36/81] drm/renesas/shmobile: Run DRM default client
- setup
 To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: daniel@ffwll.ch, airlied@gmail.com, jfalempe@redhat.com, 
+cc: daniel@ffwll.ch, airlied@gmail.com, jfalempe@redhat.com, 
  javierm@redhat.com, dri-devel@lists.freedesktop.org, 
  amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
  intel-xe@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Geert Uytterhoeven <geert+renesas@glider.be>, 
  Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v3 04/81] drm: Add client-agnostic setup helper
+In-Reply-To: <20240830084456.77630-5-tzimmermann@suse.de>
+Message-ID: <6c78eb72-c555-1fa8-18f9-c1e671a8b12@linux-m68k.org>
+References: <20240830084456.77630-1-tzimmermann@suse.de>
+ <20240830084456.77630-5-tzimmermann@suse.de>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII; format=flowed
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,33 +53,94 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Aug 30, 2024 at 10:45=E2=80=AFAM Thomas Zimmermann <tzimmermann@sus=
-e.de> wrote:
-> Call drm_client_setup_with_fourcc() to run the kernel's default client
-> setup for DRM. Set fbdev_probe in struct drm_driver, so that the client
-> setup can start the common fbdev client.
+ 	Hi Thomas,
+
+On Fri, 30 Aug 2024, Thomas Zimmermann wrote:
+> DRM may support multiple in-kernel clients that run as soon as a DRM
+> driver has been registered. To select the client(s) in a single place,
+> introduce drm_client_setup().
 >
+> Drivers that call the new helper automatically instantiate the kernel's
+> configured default clients. Only fbdev emulation is currently supported.
+> Later versions can add support for DRM-based logging, a boot logo or even
+> a console.
+>
+> Some drivers handle the color mode for clients internally. Provide the
+> helper drm_client_setup_with_color_mode() for them.
+>
+> v3:
+> - fix build error
 > v2:
-> - use drm_client_setup_with_fourcc()
+> - add drm_client_setup_with_fourcc() (Laurent)
+> - push default-format handling into actual clients
 >
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-> Cc: Geert Uytterhoeven <geert+renesas@glider.be>
 > Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
 
-Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
-Tested-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Thanks for your patch!
+
+> --- /dev/null
+> +++ b/drivers/gpu/drm/drm_client_setup.c
+
+> +/**
+> + * drm_client_setup_with_fourcc() - Setup in-kernel DRM clients for color mode
+> + * @dev: DRM device
+> + * @fourcc: Preferred pixel format as 4CC code for the device
+> + *
+> + * This function sets up the in-kernel DRM clients. It is equivalent
+> + * to drm_client_setup(), but expects a 4CC code as second argument.
+> + *
+> + * Do not use this function in new drivers. Prefer drm_client_setup() with a
+> + * format of NULL.
+
+Why? To me this looks like the right function to call on hardware
+that does not support ARGB8888 natively.
+
+BTW, once this series is applied, I plan to check again how to wire up
+native fbcon support for monochrome (DRM_FORMAT_R1) and grayscale
+(DRM_FORMAT_R8), as used by the Solomon driver.
+
+> + */
+> +void drm_client_setup_with_fourcc(struct drm_device *dev, u32 fourcc)
+> +{
+> +	drm_client_setup(dev, drm_format_info(fourcc));
+> +}
+> +EXPORT_SYMBOL(drm_client_setup_with_fourcc);
+> +
+> +/**
+> + * drm_client_setup_with_color_mode() - Setup in-kernel DRM clients for color mode
+> + * @dev: DRM device
+> + * @color_mode: Preferred color mode for the device
+> + *
+> + * This function sets up the in-kernel DRM clients. It is equivalent
+> + * to drm_client_setup(), but expects a color mode as second argument.
+> + *
+> + * Do not use this function in new drivers. Prefer drm_client_setup() with a
+
+
+Yeah, this is definitely not to be used in new drivers, as color_mode is
+ambiguous.
+
+> + * format of NULL.
+
+or drm_client_setup_with_fourcc().
+
+> + */
+> +void drm_client_setup_with_color_mode(struct drm_device *dev, unsigned int color_mode)
+> +{
+> +	u32 fourcc = drm_driver_color_mode_format(dev, color_mode);
+> +
+> +	drm_client_setup_with_fourcc(dev, fourcc);
+> +}
+> +EXPORT_SYMBOL(drm_client_setup_with_color_mode);
 
 Gr{oetje,eeting}s,
 
-                        Geert
+ 						Geert
 
---=20
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k=
-.org
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
 
-In personal conversations with technical people, I call myself a hacker. Bu=
-t
-when I'm talking to journalists I just say "programmer" or something like t=
-hat.
-                                -- Linus Torvalds
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+ 							    -- Linus Torvalds
