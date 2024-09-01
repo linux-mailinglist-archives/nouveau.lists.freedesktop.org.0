@@ -2,73 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5335967663
-	for <lists+nouveau@lfdr.de>; Sun,  1 Sep 2024 14:18:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A10C967C21
+	for <lists+nouveau@lfdr.de>; Sun,  1 Sep 2024 22:32:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B9ECF10E07B;
-	Sun,  1 Sep 2024 12:18:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D726F10E1C7;
+	Sun,  1 Sep 2024 20:32:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="UFkfwSah";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=kapsi.fi header.i=@kapsi.fi header.b="Bid52OYq";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3FA8110E04B;
- Sun,  1 Sep 2024 12:18:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1725193102; x=1756729102;
- h=message-id:date:mime-version:cc:subject:to:references:
- from:in-reply-to:content-transfer-encoding;
- bh=7/QB0KtM8B4HpCGa2zOGQwulKoPIrKDzA21NTiK6nDQ=;
- b=UFkfwSahCpo82B9TyN6nr3qBhq1mfaojlQD5cg/Ui8i5t7ZW1j4iWtJa
- 8p7uiSJyCDLHk6I3z1Ac16MpUJBtkNI9jQNtx0OAlyxD44EXA8bZYsaqN
- UFZc3yavr5awARzSswSO8g/yRJ1NVr5k+vGbm7XbNKURCWgnKUadWHYVs
- h8aA/PyKABwJ0UznIpUfXMcTdjbv1+sY8tgr75N+DEsZGBu/4d4Q0o1Fg
- rgmFEv6PU62+85DYgJJXrbPyEws5nPtS1MtZmJNFoehMrqwr29o6RqTDF
- hseUGXE7dQGQikF+g9TDWqpidQkl5uHT5fSC9nIqSYoIfOVfdYi/cLrpq A==;
-X-CSE-ConnectionGUID: EQztWh0IRb2U7003tlxw6g==
-X-CSE-MsgGUID: SNMvE/nvSWuwBv1RVlRDrg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11181"; a="27655077"
-X-IronPort-AV: E=Sophos;i="6.10,193,1719903600"; d="scan'208";a="27655077"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
- by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Sep 2024 05:18:21 -0700
-X-CSE-ConnectionGUID: g8VwmCVNS2+7h8Z4f5k2qg==
-X-CSE-MsgGUID: AfsLNis4Qr+b2Wrpi+N8nQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,193,1719903600"; d="scan'208";a="64699177"
-Received: from blu2-mobl.ccr.corp.intel.com (HELO [10.124.240.228])
- ([10.124.240.228])
- by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Sep 2024 05:18:14 -0700
-Message-ID: <fd0257de-ce1a-40f3-a0b6-2f0c7dcee896@linux.intel.com>
-Date: Sun, 1 Sep 2024 20:18:11 +0800
+X-Greylist: delayed 3817 seconds by postgrey-1.36 at gabe;
+ Sun, 01 Sep 2024 20:32:31 UTC
+Received: from mail.kapsi.fi (mail-auth.kapsi.fi [91.232.154.24])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2A87710E1C7
+ for <nouveau@lists.freedesktop.org>; Sun,  1 Sep 2024 20:32:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=kapsi.fi;
+ s=20161220; h=References:Cc:To:Subject:Message-ID:From:
+ Content-Transfer-Encoding:Content-Type:Date:MIME-Version:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=spF0Jr7oCMuWWYaBUzIxTaZcwLNlD+eaLp7borKRh1E=; b=Bid52OYqHgAOY7jLDJTSsnohsQ
+ 8HJ/QIhi5h0NUynX9zGzoZSNow4+OW69kkDpBJISynN58L9uchwl5FYnRqu2WkA9jOsBWEU5E/sJN
+ Bm3QNxpGw4AGQRgD1Fw6pxQbxhN8bZTfupp/RVObfDTGovrXqh1egiGL7t3lwNSSiFUUBv9DTTcRi
+ OqzrUfhCzQMVbVax3u5Iv8Kri3uwKiIpA0JR77aSodJFLwvNMw6nl5GNr6Wt6GF8KqIU2k8cQB1En
+ ruC2/k2kcHt2QzK9gnnbQMZ1xNV1QO+Z8CzanFI2jDo9sWOyDvhkJSFw4UBiXrToxNlgtg7Cj1XbF
+ mZJmgTOw==;
+Received: from webng-gw.kapsi.fi ([91.232.154.200] helo=rainloop.kapsi.fi)
+ by mail.kapsi.fi with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <jyri.sarha@iki.fi>) id 1skqFb-00EgmQ-3B;
+ Sun, 01 Sep 2024 22:28:39 +0300
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Cc: baolu.lu@linux.intel.com, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@redhat.com>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Jonathan Hunter <jonathanh@nvidia.com>, Sandy Huang <hjc@rock-chips.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Mikko Perttunen <mperttunen@nvidia.com>, Joerg Roedel <joro@8bytes.org>,
- Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
- Jason Gunthorpe <jgg@ziepe.ca>, Kevin Tian <kevin.tian@intel.com>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-tegra@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-rockchip@lists.infradead.org, linux-media@vger.kernel.org,
- iommu@lists.linux.dev, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 3/3] drm/tegra: Remove call to iommu_domain_alloc()
-To: Thierry Reding <thierry.reding@gmail.com>
-References: <20240812071034.9443-1-baolu.lu@linux.intel.com>
- <20240812071034.9443-3-baolu.lu@linux.intel.com>
- <qyvyd2ftebjlgmzyayfvxsqa64c4wgx7keix3a6eexdspbvawy@a5ffnm5h5tgp>
-Content-Language: en-US
-From: Baolu Lu <baolu.lu@linux.intel.com>
-In-Reply-To: <qyvyd2ftebjlgmzyayfvxsqa64c4wgx7keix3a6eexdspbvawy@a5ffnm5h5tgp>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Date: Sun, 01 Sep 2024 19:28:37 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+From: jyri.sarha@iki.fi
+Message-ID: <765bab893c9859e4f73af2ea65e943dd913ec7f4@iki.fi>
+Subject: Re: [PATCH v3 43/81] drm/tilcdc: Run DRM default client setup
+To: "Thomas Zimmermann" <tzimmermann@suse.de>, daniel@ffwll.ch,
+ airlied@gmail.com, jfalempe@redhat.com, javierm@redhat.com
+Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, "Tomi Valkeinen"
+ <tomi.valkeinen@ideasonboard.com>
+References: undefined <20240830084456.77630-1-tzimmermann@suse.de>
+X-SA-Exim-Connect-IP: 91.232.154.200
+X-SA-Exim-Mail-From: jyri.sarha@iki.fi
+X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,50 +65,63 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2024/8/28 23:27, Thierry Reding wrote:
-> On Mon, Aug 12, 2024 at 03:10:34PM GMT, Lu Baolu wrote:
->> Commit <17de3f5fdd35> ("iommu: Retire bus ops") removes iommu ops from
->> the bus structure. The iommu subsystem no longer relies on bus for
->> operations. So iommu_domain_alloc() interface is no longer relevant.
->>
->> Normally, iommu_paging_domain_alloc() could be a replacement for
->> iommu_domain_alloc() if the caller has the right device for IOMMU API
->> use. Unfortunately, this is not the case for this driver.
->>
->> Iterate the devices on the platform bus and find a suitable device
->> whose device DMA is translated by an IOMMU. Then use this device to
->> allocate an iommu domain. The iommu subsystem prevents domains
->> allocated by one iommu driver from being attached to devices managed
->> by any different iommu driver.
->>
->> Signed-off-by: Lu Baolu<baolu.lu@linux.intel.com>
->> Link:https://lore.kernel.org/r/20240610085555.88197-20-baolu.lu@linux.intel.com
->> ---
->>   drivers/gpu/drm/tegra/drm.c | 34 +++++++++++++++++++++++++---------
->>   1 file changed, 25 insertions(+), 9 deletions(-)
-> Actually I think we can just do something like this:
-> 
-> --- >8 ---
-> diff --git a/drivers/gpu/drm/tegra/drm.c b/drivers/gpu/drm/tegra/drm.c
-> index d9f0728c3afd..d35e411d536b 100644
-> --- a/drivers/gpu/drm/tegra/drm.c
-> +++ b/drivers/gpu/drm/tegra/drm.c
-> @@ -1150,7 +1150,7 @@ static int host1x_drm_probe(struct host1x_device *dev)
->   	}
->   
->   	if (host1x_drm_wants_iommu(dev) && iommu_present(&platform_bus_type)) {
-> -		tegra->domain = iommu_domain_alloc(&platform_bus_type);
-> +		tegra->domain = iommu_paging_domain_alloc(dev->dev.parent);
->   		if (!tegra->domain) {
->   			err = -ENOMEM;
->   			goto free;
-> --- >8 ---
-> 
-> That refers to the physical device that the host1x_device virtual device
-> was instantiated from and is a common parent to all physical devices
-> that are part of the virtual device.
+August 30, 2024 at 11:40 AM, "Thomas Zimmermann" <tzimmermann@suse.de mai=
+lto:tzimmermann@suse.de?to=3D%22Thomas%20Zimmermann%22%20%3Ctzimmermann%4=
+0suse.de%3E > wrote:
 
-Yes, this is really what we want. I will update the patch series later.
+>=20
+>=20Call drm_client_setup_with_color_mode() to run the kernel's default
+> client setup for DRM. Set fbdev_probe in struct drm_driver, so that
+> the client setup can start the common fbdev client.
+>=20
+>=20v3:
+> - add DRM_FBDEV_DMA_DRIVER_OPS macro
+>=20
+>=20Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: Jyri Sarha <jyri.sarha@iki.fi>
+> Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+
+Acked-by: Jyri Sarha <jyri.sarha@iki.fi>
 
 Thanks,
-baolu
+Jyri
+
+> ---
+> drivers/gpu/drm/tilcdc/tilcdc_drv.c | 5 ++++-
+> 1 file changed, 4 insertions(+), 1 deletion(-)
+>=20
+>=20diff --git a/drivers/gpu/drm/tilcdc/tilcdc_drv.c b/drivers/gpu/drm/ti=
+lcdc/tilcdc_drv.c
+> index cd5eefa06060..8c9f3705aa6c 100644
+> --- a/drivers/gpu/drm/tilcdc/tilcdc_drv.c
+> +++ b/drivers/gpu/drm/tilcdc/tilcdc_drv.c
+> @@ -14,6 +14,7 @@
+> #include <linux/pm_runtime.h>
+>=20
+>=20#include <drm/drm_atomic_helper.h>
+> +#include <drm/drm_client_setup.h>
+> #include <drm/drm_debugfs.h>
+> #include <drm/drm_drv.h>
+> #include <drm/drm_fbdev_dma.h>
+> @@ -374,7 +375,8 @@ static int tilcdc_init(const struct drm_driver *ddr=
+v, struct device *dev)
+>  goto init_failed;
+>  priv->is_registered =3D true;
+>=20
+>=20- drm_fbdev_dma_setup(ddev, bpp);
+> + drm_client_setup_with_color_mode(ddev, bpp);
+> +
+>  return 0;
+>=20
+>=20init_failed:
+> @@ -472,6 +474,7 @@ DEFINE_DRM_GEM_DMA_FOPS(fops);
+> static const struct drm_driver tilcdc_driver =3D {
+>  .driver_features =3D DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
+>  DRM_GEM_DMA_DRIVER_OPS,
+> + DRM_FBDEV_DMA_DRIVER_OPS,
+> #ifdef CONFIG_DEBUG_FS
+>  .debugfs_init =3D tilcdc_debugfs_init,
+> #endif
+> --=20
+>=202.46.0
+>
