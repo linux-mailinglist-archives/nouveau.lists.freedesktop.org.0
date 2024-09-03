@@ -2,135 +2,82 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FF6E969C5C
-	for <lists+nouveau@lfdr.de>; Tue,  3 Sep 2024 13:48:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E982969CAA
+	for <lists+nouveau@lfdr.de>; Tue,  3 Sep 2024 14:00:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4498610E4EC;
-	Tue,  3 Sep 2024 11:48:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 24D3E10E4FE;
+	Tue,  3 Sep 2024 12:00:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="DaK345Z5";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="mtf9JHGY";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="DaK345Z5";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="mtf9JHGY";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ivxQwaAI";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1411910E4BB;
- Tue,  3 Sep 2024 11:48:02 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 837F91FCFE;
- Tue,  3 Sep 2024 11:48:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1725364080; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=w0CelnxuKkKTIVN77TblfSES7h9ExR191/gX/ZKWivk=;
- b=DaK345Z5nhUTUv5/RcB+5mY3Y7o6uQU4IB8oghUq/2ZBNn0SxDYVL0Xm58uAv8Euy4GnZ+
- T379x4JQKCp8/tcBlN8GDBaPifqD0AEdOz/xcwK7jTx0Tm3V4GKd7+pOhwqBJGmmuO/2WK
- si8vXbbVRMgX7/p1+4bIKKayZH28lnE=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1725364080;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=w0CelnxuKkKTIVN77TblfSES7h9ExR191/gX/ZKWivk=;
- b=mtf9JHGYkssCYONcI3qk3iIjNRYbefBxMuPUhPVRpjOSM7VLDIaNl7kErCnOjlwCfP9Uea
- ddOHebEnVJxtG0AQ==
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1725364080; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=w0CelnxuKkKTIVN77TblfSES7h9ExR191/gX/ZKWivk=;
- b=DaK345Z5nhUTUv5/RcB+5mY3Y7o6uQU4IB8oghUq/2ZBNn0SxDYVL0Xm58uAv8Euy4GnZ+
- T379x4JQKCp8/tcBlN8GDBaPifqD0AEdOz/xcwK7jTx0Tm3V4GKd7+pOhwqBJGmmuO/2WK
- si8vXbbVRMgX7/p1+4bIKKayZH28lnE=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1725364080;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=w0CelnxuKkKTIVN77TblfSES7h9ExR191/gX/ZKWivk=;
- b=mtf9JHGYkssCYONcI3qk3iIjNRYbefBxMuPUhPVRpjOSM7VLDIaNl7kErCnOjlwCfP9Uea
- ddOHebEnVJxtG0AQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 45F1913A52;
- Tue,  3 Sep 2024 11:48:00 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id XfDPD3D31mZ+JwAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Tue, 03 Sep 2024 11:48:00 +0000
-Message-ID: <598e63fc-8282-4182-a9e4-f91ff399a3a0@suse.de>
-Date: Tue, 3 Sep 2024 13:47:59 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 05/81] drm/fbdev-dma: Support struct
- drm_driver.fbdev_probe
-To: Javier Martinez Canillas <javierm@redhat.com>, daniel@ffwll.ch,
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4EA4F10E515
+ for <nouveau@lists.freedesktop.org>; Tue,  3 Sep 2024 12:00:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1725364830;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Wqkxl9KwjevEu+t1uza2Tm1mz4C/9rJUsakscGOOK3I=;
+ b=ivxQwaAIEPL9uLoxxL+sNKQ3MiEDiM4d9D6q0L3XSXmmRKCiQvG2mHZKuLS6cKZt472pBM
+ Wq+yvY+FoBM4rAA5wrZAkqdnjDhxojP2drEtzrgipMclRG+npiSBXho5oziPfO8uEIiIpR
+ RH+ECSrqdkuFl46g3Jx4gjzzl5UohJI=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-134-k7KrTux9OKehNXkZ_8wFLA-1; Tue, 03 Sep 2024 08:00:28 -0400
+X-MC-Unique: k7KrTux9OKehNXkZ_8wFLA-1
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-374cd315c68so1184478f8f.0
+ for <nouveau@lists.freedesktop.org>; Tue, 03 Sep 2024 05:00:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725364827; x=1725969627;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Wqkxl9KwjevEu+t1uza2Tm1mz4C/9rJUsakscGOOK3I=;
+ b=FuoGe+b/XbqmMW/5utxeDHPikjjdlZzWzfsoGCMMzqrBwcJZ00kmJ0gTwUtoO+8Oww
+ mM0o5Ubs8k12/gL393P1Jno2eylB3fp+/exG7inl6//D4iPz4+euI3LibU+X6d5rrgmu
+ yrFa59qMpr9nLVkBshrQlpUyh7vQvG4O3jH7Tvubtz2/Mq2MWQZ5YY/Dd8CeamSObys2
+ ighf6Gpd7cCIvnUY+xhZb1F1IzRDdVJa55QqATV9Cdd+UlC8uNrTs56I3TN91zpeUJwf
+ PKcV7nqSLt2yR8A22GdXKB/jVAMGIlmDr+VPPxfgYJNVA2ZU1yE02+HkXdQh5ouDVM9O
+ 3f0Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV9cJfv1e0NVG8FPbSouhUuLTjRolIfMIY8+9j1CrYK3bG+kILbYRuWoR921O4+GCPucECL7IkY@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yycwt6W1sdO5U1tAuu2DRBVJ+NwLgO+2AnWur4vr109og1b/kIC
+ JNxL5h95rZKpr/BZ1qqSfyuT07Yrwn8G7JjsBPj4iS9W90Ui74+18IeSvWzELroiZFDWn83P72s
+ paoqxQfN2ZknrEG2fik1obKrzhFoQ4nY27xKCfqFntdap+7P+sGj2V6MeRw10skY=
+X-Received: by 2002:adf:e005:0:b0:367:9088:fecd with SMTP id
+ ffacd0b85a97d-3749b52e4b2mr11567927f8f.7.1725364827054; 
+ Tue, 03 Sep 2024 05:00:27 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHKbVj02CwoguAfZhg3DQHVPX/ENKLjb8+BLnTX8X8+/N0+IHzNka7Y5ll+wgLPRMt/UdLgcA==
+X-Received: by 2002:adf:e005:0:b0:367:9088:fecd with SMTP id
+ ffacd0b85a97d-3749b52e4b2mr11567893f8f.7.1725364826511; 
+ Tue, 03 Sep 2024 05:00:26 -0700 (PDT)
+Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42ba639643esm208275255e9.1.2024.09.03.05.00.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Sep 2024 05:00:26 -0700 (PDT)
+From: Javier Martinez Canillas <javierm@redhat.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
  airlied@gmail.com, jfalempe@redhat.com
 Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
+ nouveau@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>
+Subject: Re: [PATCH v3 52/81] drm/cirrus: Run DRM default client setup
+In-Reply-To: <20240830084456.77630-53-tzimmermann@suse.de>
 References: <20240830084456.77630-1-tzimmermann@suse.de>
- <20240830084456.77630-6-tzimmermann@suse.de>
- <87h6axgfjs.fsf@minerva.mail-host-address-is-not-set>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <87h6axgfjs.fsf@minerva.mail-host-address-is-not-set>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Level: 
-X-Spamd-Result: default: False [-4.30 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- NEURAL_HAM_LONG(-1.00)[-1.000];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- FREEMAIL_TO(0.00)[redhat.com,ffwll.ch,gmail.com];
- RCVD_VIA_SMTP_AUTH(0.00)[]; ARC_NA(0.00)[];
- RCPT_COUNT_SEVEN(0.00)[9]; MIME_TRACE(0.00)[0:+];
- MID_RHS_MATCH_FROM(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
- TO_DN_SOME(0.00)[]; RCVD_TLS_ALL(0.00)[];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
- FUZZY_BLOCKED(0.00)[rspamd.com];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo, suse.de:email,
- suse.de:mid]
-X-Spam-Score: -4.30
-X-Spam-Flag: NO
+ <20240830084456.77630-53-tzimmermann@suse.de>
+Date: Tue, 03 Sep 2024 14:00:25 +0200
+Message-ID: <87ikvddk12.fsf@minerva.mail-host-address-is-not-set>
+MIME-Version: 1.0
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -145,56 +92,31 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi
+Thomas Zimmermann <tzimmermann@suse.de> writes:
 
-Am 03.09.24 um 13:08 schrieb Javier Martinez Canillas:
-> Thomas Zimmermann <tzimmermann@suse.de> writes:
+> Call drm_client_setup() to run the kernel's default client setup
+> for DRM. Set fbdev_probe in struct drm_driver, so that the client
+> setup can start the common fbdev client.
 >
->> Rework fbdev probing to support fbdev_probe in struct drm_driver
->> and reimplement the old fb_probe callback on top of it. Provide an
->> initializer macro for struct drm_driver that sets the callback
->> according to the kernel configuration.
->>
->> This change allows the common fbdev client to run on top of DMA-
->> based DRM drivers.
->>
->> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->> ---
->>   drivers/gpu/drm/drm_fbdev_dma.c | 60 ++++++++++++++++++++-------------
->>   include/drm/drm_fbdev_dma.h     | 12 +++++++
->>   2 files changed, 48 insertions(+), 24 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/drm_fbdev_dma.c b/drivers/gpu/drm/drm_fbdev_dma.c
->> index 7ef5a48c8029..aeccf7f7a522 100644
->> --- a/drivers/gpu/drm/drm_fbdev_dma.c
->> +++ b/drivers/gpu/drm/drm_fbdev_dma.c
->> @@ -86,6 +86,40 @@ static const struct fb_ops drm_fbdev_dma_fb_ops = {
->>   
->>   static int drm_fbdev_dma_helper_fb_probe(struct drm_fb_helper *fb_helper,
->>   					 struct drm_fb_helper_surface_size *sizes)
->> +{
-> static inline for this wrapper maybe ?
-
-It's only called indirectly via drm_fb_helper_funcs.fb_probe. So it 
-needs an address. It well be removed later in the series when all 
-related drivers have been converted.
-
-Best regards
-Thomas
-
+> The cirrus driver requests the same client pixel format as the value
+> stored in struct drm_mode_config.preferred_depth. The fbdev client
+> also looks at this value for the default pixel format. Thus remove
+> the format selection from cirrus.
 >
->> +	return drm_fbdev_dma_driver_fbdev_probe(fb_helper, sizes);
->> +}
->> +
-> Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: Dave Airlie <airlied@redhat.com>
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> ---
+>  drivers/gpu/drm/tiny/cirrus.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 >
+
+Acked-by: Javier Martinez Canillas <javierm@redhat.com>
 
 -- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstrasse 146, 90461 Nuernberg, Germany
-GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
-HRB 36809 (AG Nuernberg)
+Best regards,
+
+Javier Martinez Canillas
+Core Platforms
+Red Hat
 
