@@ -2,73 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7CFCA2B7F5
-	for <lists+nouveau@lfdr.de>; Fri,  7 Feb 2025 02:37:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A51F8A2B84F
+	for <lists+nouveau@lfdr.de>; Fri,  7 Feb 2025 02:44:38 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3068B10E9D4;
-	Fri,  7 Feb 2025 01:37:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0A41010E9F2;
+	Fri,  7 Feb 2025 01:44:37 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=gmail.com header.i=@gmail.com header.b="IVAF0mGr";
+	dkim=permerror (0-bit key) header.d=ffwll.ch header.i=@ffwll.ch header.b="SMvtZCtH";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-io1-f47.google.com (mail-io1-f47.google.com
- [209.85.166.47])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BAEE410E012;
- Fri,  7 Jun 2024 22:11:49 +0000 (UTC)
-Received: by mail-io1-f47.google.com with SMTP id
- ca18e2360f4ac-7e22af6fed5so5780739f.2; 
- Fri, 07 Jun 2024 15:11:49 -0700 (PDT)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+ [209.85.221.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C61F610E413
+ for <nouveau@lists.freedesktop.org>; Tue,  3 Sep 2024 07:32:56 +0000 (UTC)
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-374d29ad8a7so636794f8f.2
+ for <nouveau@lists.freedesktop.org>; Tue, 03 Sep 2024 00:32:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717798308; x=1718403108; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=o3jaei81jj8xUrmWQKSpfLOPLqiUY8YCzCHgaZkL3Ss=;
- b=IVAF0mGrk8Bt1ZLwZMzZJmTbRv1Vn+jXDVY5jcgiIoX396mvVev/m9Cc9PFQvTZOHK
- 2FEyy5vZbCU2PpP5rXRhUXw9SYzmlhxrRJoOjdpq/Lhiq7Ub6bpOos30hwm/XxrrYwJS
- JDbmgeroUWWUGJKGjLw2tGW8IWw+oY4lMO4xVmaAxd0UjP+A2cj4ZdWWFPpnTiAOh9g3
- 75TsKz0P8IaAlGpxuXg+nhxDvVyZDreWaT0AZokYqnDg6ElEEVhMzA9nnRtCEUK4Rdk2
- UI1Uargi/eIqMVmNZUOdAXE6Y5Bx2aSFp42gA39roY8dXNUzMkBj6u2hjLL77luve5sO
- wuPw==
+ d=ffwll.ch; s=google; t=1725348775; x=1725953575; darn=lists.freedesktop.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=jStyz7cF/GRPSLiBq7afoHfr3JzNU62RShSwfRKzITo=;
+ b=SMvtZCtHavOoC37wsT0kwrO0ywLGRn+6pMbDVTEzdA8wn7vKFTM1vabUrGyLio2GeY
+ cBnvo9glEUkvaUsbNgG5zj2+CekxSOYPXy+pRhX7WrcosqoFUaYeuWeS02W4VPdEYjFO
+ nTLJ4i9OMmBWpIhJ/DbJ3C1rOr+4U/tidJsu0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717798308; x=1718403108;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=o3jaei81jj8xUrmWQKSpfLOPLqiUY8YCzCHgaZkL3Ss=;
- b=qdEHmGMWHgVoSTHcUr6TPhtGR+sK0rMzO/Gwr6D1rTcooG4u/bSinmQY0JP5kkWYTW
- wH3kjJ14/YyH4L9YdOaX/qMhguDVg+5lCDbO1Toq+5R7KPoXLTdOzVY9asYseMMaRX+Q
- NdyL6VPzk54tIlZVWEiXDt/kbE018uaHshi77S0TavVR4/2J0SmnrbsGR5uSzolinyMX
- +FPbv/ZUZVMWgBOR7mQYkJXZxrSB5qiSUqEb9r6OoDpLmFgGBQk7OJHZ1FaHETWyUv67
- +IX3B/6Dc6uEJVJRJwrtB3CyLIUNN7Upi9FILnsuSdceNIam/B1TKZroVMgVOwcvuwE1
- ueoQ==
+ d=1e100.net; s=20230601; t=1725348775; x=1725953575;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jStyz7cF/GRPSLiBq7afoHfr3JzNU62RShSwfRKzITo=;
+ b=nmHXnjQrvWMTiPlhPQrarC6oRbfCbsr7V6FE4ZgA+7vPutXg7N7UV6YLbLLUN2GbXx
+ j7KkRVoqC9WS0wksArsxSDEDF9bm/TmAhwXl3hhgAS9T3TQLiw+P6DPlkEiIRtOZ538F
+ HLNeSQhW36FP5ANwkHdQ+1y+7pwHRgPcnGpbAU2/0gR9nc5shK+Dy371hwPvO/DMvikN
+ T1CYqsyWbOAMP8Otf/UlZZEOW27MvmjClYf1PWoWDAvPqr0UVWRGhDy2XmnCGnJk4pzW
+ L91LADkcsGENy2qGvmqsSTsC6IjmYyFgaclBDtAhkxV/ewPzukDhGsA5CYvDaXfdJFoY
+ 71cA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVvM8ccLNgI9bvBwLwu2nK0FvY26WH1yXPJr4oE7DbgFpNjFzhM0HVcA4Sz1tYPabUgwj92isPDEoDzbiLWTdCKOqbD3kst/9AQ14xd5Qx4HWAWQ2gtXfBhsLYDAubT1LLg4/ExEx+FENLYKO7BJg==
-X-Gm-Message-State: AOJu0Yzyu/VHzdr5YFzS4uKvMgBdpo7dJrztm1aXp7YpoPUr94G2rR5v
- ejzebVF8c1d7rW8wjy0mywoBncvYIhVVysr2SX618j6fMpvoFhux
-X-Google-Smtp-Source: AGHT+IEiBcOfSXobqq6vAjMYAgLdx8kDIz1R2uqyhzhEyQKksb63efpVJodqm6bSkTa6En2Bu04cLA==
-X-Received: by 2002:a05:6602:2094:b0:7eb:3aa3:8b02 with SMTP id
- ca18e2360f4ac-7eb5724ac8fmr371097539f.2.1717798308411; 
- Fri, 07 Jun 2024 15:11:48 -0700 (PDT)
-Received: from anarsoul-xps15.lan ([2604:3d08:7780:1ca9::398])
+ AJvYcCW+61S/1XodtwehNPE9EccX0cY/ycd1h/SCGtCYIbKDIjlyTQJRgYhKjv2ch0QnJ/rF4hLS2QUJ@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yx5wsmdQQDVx+yaFfxq/gUlQymNeBSe8vHO92A2CAuGoAxas+ff
+ 5BDtCN6SPDT8iUcjbpjPaICC/cfLkiCGBgeGDnGlXdnK/eCJkjpfQmWbio3Paq8=
+X-Google-Smtp-Source: AGHT+IGgQUY7p0fwPG8ckVOXs6G5z6LEBN/3GIwOhXGelUa0A/UnYm2cH9vzWq0+BrRRjfVRAHkMdQ==
+X-Received: by 2002:adf:fc4d:0:b0:368:3717:10aa with SMTP id
+ ffacd0b85a97d-374c9455425mr3438719f8f.11.1725348774560; 
+ Tue, 03 Sep 2024 00:32:54 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:5485:d4b2:c087:b497])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-6de2221b28asm3238416a12.39.2024.06.07.15.11.47
+ ffacd0b85a97d-374cc75a5fbsm4256548f8f.80.2024.09.03.00.32.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Jun 2024 15:11:47 -0700 (PDT)
-From: Vasily Khoruzhick <anarsoul@gmail.com>
-To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@nvidia.com>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Cc: Vasily Khoruzhick <anarsoul@gmail.com>
-Subject: [PATCH v2] drm/nouveau: don't attempt to schedule hpd_work on
- headless cards
-Date: Fri,  7 Jun 2024 15:09:32 -0700
-Message-ID: <20240607221032.25918-1-anarsoul@gmail.com>
-X-Mailer: git-send-email 2.45.2
+ Tue, 03 Sep 2024 00:32:54 -0700 (PDT)
+Date: Tue, 3 Sep 2024 09:32:51 +0200
+From: Simona Vetter <simona.vetter@ffwll.ch>
+To: Danilo Krummrich <dakr@redhat.com>
+Cc: maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch,
+ ojeda@kernel.org, alex.gaynor@gmail.com, wedsonaf@gmail.com,
+ boqun.feng@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com,
+ benno.lossin@proton.me, a.hindborg@samsung.com,
+ aliceryhl@google.com, lina@asahilina.net, pstanner@redhat.com,
+ ajanulgu@redhat.com, lyude@redhat.com, gregkh@linuxfoundation.org,
+ robh@kernel.org, daniel.almeida@collabora.com,
+ rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
+Subject: Re: [PATCH v2 0/8] DRM Rust abstractions and Nova
+Message-ID: <Zta7o089vlSbfZbq@phenom.ffwll.local>
+References: <20240618233324.14217-1-dakr@redhat.com>
+ <ZtXqYGt3g_YY7RUN@phenom.ffwll.local>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 07 Feb 2025 01:37:08 +0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ZtXqYGt3g_YY7RUN@phenom.ffwll.local>
+X-Operating-System: Linux phenom 6.9.12-amd64 
+X-Mailman-Approved-At: Fri, 07 Feb 2025 01:42:11 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,94 +89,125 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-If the card doesn't have display hardware, hpd_work and hpd_lock are
-left uninitialized which causes BUG when attempting to schedule hpd_work
-on runtime PM resume.
+On Mon, Sep 02, 2024 at 06:40:00PM +0200, Daniel Vetter wrote:
+> On Wed, Jun 19, 2024 at 01:31:36AM +0200, Danilo Krummrich wrote:
+> > This patch series implements some basic DRM Rust abstractions and a stub
+> > implementation of the Nova GPU driver.
+> > 
+> > Nova is intended to be developed upstream, starting out with just a stub driver
+> > to lift some initial required infrastructure upstream. A more detailed
+> > explanation can be found in [1].
+> > 
+> > This patch series is based on the "Device / Driver and PCI Rust abstractions"
+> > series [2].
+> > 
+> > The DRM bits can also be found in [3] and the Nova bits in [4].
+> > 
+> > Changes in v2:
+> > ==============
+> > - split up the DRM device / driver abstractions in three separate commits
+> > - separate `struct drm_device` abstraction in a separte source file more
+> >   cleanly
+> > - switch `struct drm_driver` and `struct file_operations` to 'static const'
+> >   allocations
+> > - implement `Registration::new_foreign_owned` (using `Devres`), such that we
+> >   don't need to keep the `Registration` alive on the Rust side, but
+> >   automatically revoke it on device unbind
+> > - add missing DRM driver features (Rob)
+> > - use `module_pci_driver!` macro in Nova
+> > - use a const sized `pci::Bar` in Nova
+> > - increase the total amount of Documentation, rephrase some safety comments and
+> >   commit messages for less ambiguity
+> > - fix compilation issues with some documentation example
+> > 
+> > [1] https://lore.kernel.org/dri-devel/Zfsj0_tb-0-tNrJy@cassiopeiae/T/#u
+> > [2] Reply to this mail titled "Device / Driver and PCI Rust abstractions".
+> > [3] https://gitlab.freedesktop.org/drm/misc/kernel/-/tree/topic/rust-drm
+> > [4] https://gitlab.freedesktop.org/drm/nova/-/tree/nova-next
+> 
+> Ok finally stopped dragging my feet on this, went through my old comments,
+> looked at stuff again, and wrote some replies.
+> 
+> I think all but the question around type safety for drm_driver->features
+> can be sorted out post-merge, when we have a driver that needs it. The
+> feature flags stuff I think essentially makes the current abstraction
+> unsafe, and you can blow up when constructing a new drm::Device instance
+> if you're creative enough I think.
 
-Fix it by adding headless flag to DRM and skip any hpd if it's set.
+Oh one thing I've forgotten: I think for the subclassing pattern in rust
+there's clear consensus now, at least from my discussion with Lyude on the
+modeset side of things. Well maybe aside from the little issue that rust
+doesn't guarantee uniqueness for static const ops pointers, but apparently
+that's getting addressed. One thing I'd really like us to be consistent at
+though is not just the pattern, but the naming (like RawFoo vs whatever
+else people came up with) of the different struct/traits, so would be
+really good to document that somewhere for drm and make sure we follow it
+in all the gpu related rust bindings. Unless upstream has that already
+(maybe as part of the device/driver binding stuff).
 
-Fixes: ae1aadb1eb8d ("nouveau: don't fail driver load if no display hw present.")
-Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/337
-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
----
-v2: drop extra checks in nouveau_display_hpd_work() and
-nouveau_connector_hpd()
+Cheers, Sima
 
- drivers/gpu/drm/nouveau/dispnv04/disp.c   | 2 +-
- drivers/gpu/drm/nouveau/dispnv50/disp.c   | 2 +-
- drivers/gpu/drm/nouveau/nouveau_display.c | 6 +++++-
- drivers/gpu/drm/nouveau/nouveau_drv.h     | 1 +
- 4 files changed, 8 insertions(+), 3 deletions(-)
+> > Asahi Lina (4):
+> >   rust: drm: ioctl: Add DRM ioctl abstraction
+> >   rust: Add a Sealed trait
+> >   rust: drm: file: Add File abstraction
+> >   rust: drm: gem: Add GEM object abstraction
+> > 
+> > Danilo Krummrich (4):
+> >   rust: drm: add driver abstractions
+> >   rust: drm: add device abstraction
+> >   rust: drm: add DRM driver registration
+> >   nova: add initial driver stub
+> > 
+> >  MAINTAINERS                     |  10 +
+> >  drivers/gpu/drm/Kconfig         |   2 +
+> >  drivers/gpu/drm/Makefile        |   1 +
+> >  drivers/gpu/drm/nova/Kconfig    |  12 +
+> >  drivers/gpu/drm/nova/Makefile   |   3 +
+> >  drivers/gpu/drm/nova/driver.rs  |  85 +++++++
+> >  drivers/gpu/drm/nova/file.rs    |  70 ++++++
+> >  drivers/gpu/drm/nova/gem.rs     |  50 ++++
+> >  drivers/gpu/drm/nova/gpu.rs     | 173 ++++++++++++++
+> >  drivers/gpu/drm/nova/nova.rs    |  18 ++
+> >  include/uapi/drm/nova_drm.h     | 101 ++++++++
+> >  rust/bindings/bindings_helper.h |   5 +
+> >  rust/helpers.c                  |  23 ++
+> >  rust/kernel/drm/device.rs       | 182 ++++++++++++++
+> >  rust/kernel/drm/drv.rs          | 199 ++++++++++++++++
+> >  rust/kernel/drm/file.rs         | 116 +++++++++
+> >  rust/kernel/drm/gem/mod.rs      | 409 ++++++++++++++++++++++++++++++++
+> >  rust/kernel/drm/ioctl.rs        | 153 ++++++++++++
+> >  rust/kernel/drm/mod.rs          |   9 +
+> >  rust/kernel/lib.rs              |   7 +
+> >  rust/uapi/uapi_helper.h         |   2 +
+> >  21 files changed, 1630 insertions(+)
+> >  create mode 100644 drivers/gpu/drm/nova/Kconfig
+> >  create mode 100644 drivers/gpu/drm/nova/Makefile
+> >  create mode 100644 drivers/gpu/drm/nova/driver.rs
+> >  create mode 100644 drivers/gpu/drm/nova/file.rs
+> >  create mode 100644 drivers/gpu/drm/nova/gem.rs
+> >  create mode 100644 drivers/gpu/drm/nova/gpu.rs
+> >  create mode 100644 drivers/gpu/drm/nova/nova.rs
+> >  create mode 100644 include/uapi/drm/nova_drm.h
+> >  create mode 100644 rust/kernel/drm/device.rs
+> >  create mode 100644 rust/kernel/drm/drv.rs
+> >  create mode 100644 rust/kernel/drm/file.rs
+> >  create mode 100644 rust/kernel/drm/gem/mod.rs
+> >  create mode 100644 rust/kernel/drm/ioctl.rs
+> >  create mode 100644 rust/kernel/drm/mod.rs
+> > 
+> > 
+> > base-commit: 6646240d29b11de3177f71ff777d0ae683c32623
+> > -- 
+> > 2.45.1
+> > 
+> 
+> -- 
+> Simona Vetter
+> Software Engineer, Intel Corporation
+> http://blog.ffwll.ch
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv04/disp.c b/drivers/gpu/drm/nouveau/dispnv04/disp.c
-index 13705c5f1497..4b7497a8755c 100644
---- a/drivers/gpu/drm/nouveau/dispnv04/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv04/disp.c
-@@ -68,7 +68,7 @@ nv04_display_fini(struct drm_device *dev, bool runtime, bool suspend)
- 	if (nv_two_heads(dev))
- 		NVWriteCRTC(dev, 1, NV_PCRTC_INTR_EN_0, 0);
- 
--	if (!runtime)
-+	if (!runtime && !drm->headless)
- 		cancel_work_sync(&drm->hpd_work);
- 
- 	if (!suspend)
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 88728a0b2c25..674dc567e179 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -2680,7 +2680,7 @@ nv50_display_fini(struct drm_device *dev, bool runtime, bool suspend)
- 			nv50_mstm_fini(nouveau_encoder(encoder));
- 	}
- 
--	if (!runtime)
-+	if (!runtime && !drm->headless)
- 		cancel_work_sync(&drm->hpd_work);
- }
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-index aed5d5b51b43..d4725a968827 100644
---- a/drivers/gpu/drm/nouveau/nouveau_display.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-@@ -450,6 +450,9 @@ nouveau_display_hpd_resume(struct drm_device *dev)
- {
- 	struct nouveau_drm *drm = nouveau_drm(dev);
- 
-+	if (drm->headless)
-+		return;
-+
- 	spin_lock_irq(&drm->hpd_lock);
- 	drm->hpd_pending = ~0;
- 	spin_unlock_irq(&drm->hpd_lock);
-@@ -635,7 +638,7 @@ nouveau_display_fini(struct drm_device *dev, bool suspend, bool runtime)
- 	}
- 	drm_connector_list_iter_end(&conn_iter);
- 
--	if (!runtime)
-+	if (!runtime && !drm->headless)
- 		cancel_work_sync(&drm->hpd_work);
- 
- 	drm_kms_helper_poll_disable(dev);
-@@ -729,6 +732,7 @@ nouveau_display_create(struct drm_device *dev)
- 		/* no display hw */
- 		if (ret == -ENODEV) {
- 			ret = 0;
-+			drm->headless = true;
- 			goto disp_create_err;
- 		}
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
-index e239c6bf4afa..25fca98a20bc 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drv.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-@@ -276,6 +276,7 @@ struct nouveau_drm {
- 	/* modesetting */
- 	struct nvbios vbios;
- 	struct nouveau_display *display;
-+	bool headless;
- 	struct work_struct hpd_work;
- 	spinlock_t hpd_lock;
- 	u32 hpd_pending;
 -- 
-2.45.2
-
+Simona Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
