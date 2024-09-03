@@ -2,78 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95799969BCB
-	for <lists+nouveau@lfdr.de>; Tue,  3 Sep 2024 13:30:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 554AB969BD3
+	for <lists+nouveau@lfdr.de>; Tue,  3 Sep 2024 13:31:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 213EC10E4D5;
-	Tue,  3 Sep 2024 11:30:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EFA4810E4D8;
+	Tue,  3 Sep 2024 11:31:30 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="hU/UiXTF";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="icA1LDHX";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F2AEE10E4D5
- for <nouveau@lists.freedesktop.org>; Tue,  3 Sep 2024 11:30:44 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0176810E4D8
+ for <nouveau@lists.freedesktop.org>; Tue,  3 Sep 2024 11:31:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1725363044;
+ s=mimecast20190719; t=1725363089;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=+7KjPkZaY6LPM2R/IvEHcw05+p3Okl3omvvBGG6T0MA=;
- b=hU/UiXTFoUOV/r3VTLKJxeVWdEhiWyBjsVYpsjBVhHg7uAgXEVtXMAYMzZfFwSsu4qeJ9Z
- lFFOMWZVGRutRZyzTTTXmCal7s9ruq9m5cpI7GRWOg/wAO7ejHHEIycUWGOMIgZ801C3Gi
- jn7v5E/J2PamqT0z2pqbnf/4l/w7xbs=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=JsgjyVAoZiwX/0plI8r6xhrkXgx4B8n714qF3W8WxEQ=;
+ b=icA1LDHXfDhJPx6egvlxbTUlYG8/aEMOoKtaMxNvlQXo/cYtbKQMNtJrE0e+oXyxoA1KxQ
+ Ixw0erSmT1FjryYBnTbO1B84ey8rzjVnPVM2+b3bYNGw57v8fZSgdUuvpVv4hVrqrprKxT
+ l17kEb4FDQ7IWhZMU7n3aW1ikgyBgCw=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-156-ruvPVvxcN_iy8Db_uzx4jg-1; Tue, 03 Sep 2024 07:30:43 -0400
-X-MC-Unique: ruvPVvxcN_iy8Db_uzx4jg-1
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-42bb5950d1aso59173845e9.2
- for <nouveau@lists.freedesktop.org>; Tue, 03 Sep 2024 04:30:42 -0700 (PDT)
+ us-mta-508-ULLbKS6zPPqYNGsNKrc-wg-1; Tue, 03 Sep 2024 07:31:28 -0400
+X-MC-Unique: ULLbKS6zPPqYNGsNKrc-wg-1
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-42c7936e564so27733785e9.2
+ for <nouveau@lists.freedesktop.org>; Tue, 03 Sep 2024 04:31:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725363042; x=1725967842;
+ d=1e100.net; s=20230601; t=1725363087; x=1725967887;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+7KjPkZaY6LPM2R/IvEHcw05+p3Okl3omvvBGG6T0MA=;
- b=NuU2W3ehoGBlE+dm6U3r2fClMFZeguGaDH/a20nbc/2Wo7XceLatVQQAtK4QyHtEiW
- DIKJwoUwPYmn7ZFG486El4q4geCNfIuGDG1CwYRqTLdSCG3SiE9qn9N0HoFg0t6O2jpQ
- Way1+ENyUeqrnta6XybZ21T6ptv26OAtm0//ZeqTkVX+xBrGPiSyVipTkp4rx6+5B25C
- dMCZwhdq6YBCbgGmYJfNM1578bwNX9Cg6zjwo0m9AoEgvxo0rtgE3yXG0j7Ss2VUKurr
- mVoXnmzfA8Jp0A/Aguf3T4oojeasERngVLSck1FOzEuDioqSYrC28LO3owUuhO8IaeSJ
- A4vw==
+ bh=JsgjyVAoZiwX/0plI8r6xhrkXgx4B8n714qF3W8WxEQ=;
+ b=O9SH1xaf9fFEfwIQKXfXxJzBftTWssv3N0tOHxIEkRxbkqIRLKXgyHs+qg4hxsdFVL
+ B0hhwrdA4VBNy1o7iEcZ+p8DuGLRm99+6HPJxtw43EUEA2j9GvUolaHlQTugYd5hbGPT
+ zlnmjHqzAyok0NNs5MSwoayGD+8Wb/1GnDWc9gm4VrJIU69BLgd33+Et1e64nOO5UO7h
+ uvT7MA/hS7vaqqMseXQUk3TdhvchllkMKJQiXwz1fNlB/WIjaLHNV9mjKr0IASiuqM1w
+ OpkaHtPkez++N6A4qWr49dw38WsxbWNGhunz0isw/dd5DRCNjZZ2RQXhZSg35/Pp64Ez
+ DILA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUkp9T7SPzB8N5VcOgLLWOAIyqQ+bDWg0bZel568+86qwoAIsLpzDsHGsAyXo92P0jLkPAuIrc5@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxCWZMLRKSRLNuj+69ZoPyF4S+7/xLFTqJ09TlNQWuGD0PNowVe
- Vvon2bk7e6m7gufmYuJxmoQHF9DtEjvm4xV/n7Ay4wCIyNncO/tpsIgnlSiVb74RxBr6qyS0L0k
- STW2nDz05JLNNTeQN0xiMgaTBJPmHW/ksk8fJmg+6f6QYwudukzh+2qdLU8SZido=
-X-Received: by 2002:a5d:4fc4:0:b0:374:cafe:c55f with SMTP id
- ffacd0b85a97d-374cafec737mr4142331f8f.20.1725363041820; 
- Tue, 03 Sep 2024 04:30:41 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHaxU5bJuIzUDf8RSjazoPcbW/KJpDG6+5g7d7j21W0xhBI7SOXf/r+/zCa6XdnhnO6fGnIQQ==
-X-Received: by 2002:a5d:4fc4:0:b0:374:cafe:c55f with SMTP id
- ffacd0b85a97d-374cafec737mr4142303f8f.20.1725363041396; 
- Tue, 03 Sep 2024 04:30:41 -0700 (PDT)
+ AJvYcCW7/iXg2YNg8TC1QZZsVvm5zx9FFTfNcFpJwpgXgoNOvHV7T6aliOSIeiT8Z+g07eJzMZr5IKuu@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwgQSUise3Gt6VL3NEChgajtef8OS7ae6X3+VwQsxFGLwiKLnzi
+ m2vx1u97K+WS7tLaphdXJt6knjoRbhjS/KokAoDPZ4MBjQgzTZrrAfG4o3NF2G8PgyJwYKBi1WV
+ 7bgBvVksPxR6tivqcb9akFpe47CdUFeXNxNUImBDbFTjp1p1nwkCH59J+aTNK/Vk=
+X-Received: by 2002:a05:600c:3ca0:b0:426:5e8e:410a with SMTP id
+ 5b1f17b1804b1-42c8810319emr24400925e9.24.1725363086974; 
+ Tue, 03 Sep 2024 04:31:26 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH5maMqjeo2zbQD/i+Rl7OMnLTPEPO4OhEAVhbI0hhGbDze6A2VsY4Z4sxV6OhxoUjaVqcBwg==
+X-Received: by 2002:a05:600c:3ca0:b0:426:5e8e:410a with SMTP id
+ 5b1f17b1804b1-42c8810319emr24400635e9.24.1725363086472; 
+ Tue, 03 Sep 2024 04:31:26 -0700 (PDT)
 Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3749ee4d391sm14089852f8f.3.2024.09.03.04.30.41
+ 5b1f17b1804b1-42bb6e274b6sm168609195e9.33.2024.09.03.04.31.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Sep 2024 04:30:41 -0700 (PDT)
+ Tue, 03 Sep 2024 04:31:26 -0700 (PDT)
 From: Javier Martinez Canillas <javierm@redhat.com>
 To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
  airlied@gmail.com, jfalempe@redhat.com
 Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
  nouveau@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
- Alain Volmat <alain.volmat@foss.st.com>
-Subject: Re: [PATCH v3 39/81] drm/sti: Run DRM default client setup
-In-Reply-To: <20240830084456.77630-40-tzimmermann@suse.de>
+ Maxime Ripard <mripard@kernel.org>, Chen-Yu Tsai <wens@csie.org>, Jernej
+ Skrabec <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>
+Subject: Re: [PATCH v3 41/81] drm/sun4i: Run DRM default client setup
+In-Reply-To: <20240830084456.77630-42-tzimmermann@suse.de>
 References: <20240830084456.77630-1-tzimmermann@suse.de>
- <20240830084456.77630-40-tzimmermann@suse.de>
-Date: Tue, 03 Sep 2024 13:30:40 +0200
-Message-ID: <87zfopdlen.fsf@minerva.mail-host-address-is-not-set>
+ <20240830084456.77630-42-tzimmermann@suse.de>
+Date: Tue, 03 Sep 2024 13:31:25 +0200
+Message-ID: <87wmjtdlde.fsf@minerva.mail-host-address-is-not-set>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
@@ -98,13 +99,16 @@ Thomas Zimmermann <tzimmermann@suse.de> writes:
 > for DRM. Set fbdev_probe in struct drm_driver, so that the client
 > setup can start the common fbdev client.
 >
-> The sti driver specifies a preferred color mode of 32. As this
+> The sun4i driver specifies as preferred color mode of 32. As this
 > is the default if no format has been given, leave it out entirely.
 >
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Alain Volmat <alain.volmat@foss.st.com>
+> Cc: Maxime Ripard <mripard@kernel.org>
+> Cc: Chen-Yu Tsai <wens@csie.org>
+> Cc: Jernej Skrabec <jernej.skrabec@gmail.com>
+> Cc: Samuel Holland <samuel@sholland.org>
 > ---
->  drivers/gpu/drm/sti/sti_drv.c | 4 +++-
+>  drivers/gpu/drm/sun4i/sun4i_drv.c | 4 +++-
 >  1 file changed, 3 insertions(+), 1 deletion(-)
 >
 
