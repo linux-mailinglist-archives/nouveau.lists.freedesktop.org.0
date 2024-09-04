@@ -2,62 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8CEBCBA936
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:40:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 705A4CBA9ED
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B44A410E43F;
-	Sat, 13 Dec 2025 12:40:54 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=temperror (0-bit key; unprotected) header.d=asahilina.net header.i=@asahilina.net header.b="fLhthcsz";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6A45A10EA2E;
+	Sat, 13 Dec 2025 12:40:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 609 seconds by postgrey-1.36 at gabe;
- Tue, 03 Sep 2024 11:14:15 UTC
-Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 417D610E47E;
- Tue,  3 Sep 2024 11:14:15 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: lina@asahilina.net)
- by mail.marcansoft.com (Postfix) with ESMTPSA id 0CED844263;
- Tue,  3 Sep 2024 11:04:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=asahilina.net;
- s=default; t=1725361444;
- bh=ifN1VMj2jAk/kGiuQMWR538EAsvcIunEvngo5/VGvZc=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To;
- b=fLhthcsz9NeyFfvgiWeefc2dkDXpSVV0+MvKe+8/Ww8bsOWSoh87rGmlYHueF16oG
- YD7cL+y96tdPOLVWkxcbugKBm9hUEOFC/K8AlfR1i6GMBTL2qyydYyn9M8u/BfSrPh
- Xb2eEAC71y/U5KyWYyxKHZXNm3sIuexkBHCQobrqWJqYtGW4Q7nPHPTIwQQEpIsrnp
- I3zaR0j7UslF/ENtBQQxDCCTGSPcIhU+B/7wFSzLmQeGDGYKZqBVCMXYUvqr8grepp
- VSI+E+xRnEvD3Cqy6x0jK2KPmDgENeE8Dp6a9i/CEexhG5MlZqm0TXB2bIF/bHKRYr
- dD/5VcUwoep3A==
-Message-ID: <64dd2d32-63e9-4f00-96e7-6c9ecca06a3c@asahilina.net>
-Date: Tue, 3 Sep 2024 20:04:02 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/8] rust: drm: add driver abstractions
-To: Daniel Vetter <daniel.vetter@ffwll.ch>, Danilo Krummrich <dakr@redhat.com>
-Cc: maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch, ojeda@kernel.org,
- alex.gaynor@gmail.com, wedsonaf@gmail.com, boqun.feng@gmail.com,
- gary@garyguo.net, bjorn3_gh@protonmail.com, benno.lossin@proton.me,
- a.hindborg@samsung.com, aliceryhl@google.com, pstanner@redhat.com,
- ajanulgu@redhat.com, lyude@redhat.com, gregkh@linuxfoundation.org,
- robh@kernel.org, daniel.almeida@collabora.com,
- rust-for-linux@vger.kernel.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-References: <20240618233324.14217-1-dakr@redhat.com>
- <20240618233324.14217-4-dakr@redhat.com>
- <ZtXn0hesji0s_45x@phenom.ffwll.local>
-Content-Language: en-US
-From: Asahi Lina <lina@asahilina.net>
-In-Reply-To: <ZtXn0hesji0s_45x@phenom.ffwll.local>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:42 +0000
+Received: from bg5.exmail.qq.com (bg5.exmail.qq.com [43.154.209.5])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DA8C210E6AE
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Sep 2024 07:50:23 +0000 (UTC)
+X-QQ-GoodBg: 2
+X-BAN-DOWNLOAD: 1
+X-BAN-SHARE: 1
+X-QQ-SSF: 0040000000000060
+X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
+X-QQ-XMAILINFO: Nr9+mHXfAFYqb2u4o6mSFCAOExMD1FGLWnwGwcUeX3N6XxGOeVorxTvu
+ EH5tmqwIqoQxeXLeahN9e3t+it338Qt8aMk+PYfV/ANiLXvoDB0WNlkHeHGIa6EIFmrIOdk
+ eq/nBJR3xzdSfazkSml1T+tZ5R9X+0/0PBd1eETCxXYw028pFxKEgK/LE7ti4UiBBgNavKr
+ 3ps3T1vuwURDzw++W4zzoENthW9gtld0V0PqRcJmsM4ln555I34sdkgBKz5l3YI8NOAvYYc
+ H2xQJweTb1F34/dmasDtZ/BJCHLjkwx6YQcp4xvZBua2cRQUQZPfQCOELprY2ugrp6XYW8L
+ B/gCkjyEq1iDv/yZXd8qDpArJM21L6ccoFpuiSGO2nRXgWpEO78FG4C8ByP9VQdw2Xp63sz
+ LVs5q6JQ/DSbstcYne9ybTPUnykGHtPVU0pv8cxlyHIf81fQwEfdNmMVP05gKfu8M8OWS3N
+ aFLRkrC3wtK8lcGJBVuPHS7PjDpZfc+ZNLBmi8WTlPsGOAJSaTyFGevrwBmRjptLh0tzfj6
+ HZHPvpyaa6/RVEoLP4ELDLyBF6rRJW4hNqU3HgRPl++vdUGi/Qg4PlDBwS8wX21cR3Qcjj3
+ GybrycRl26PmOO5w5aj318IqVLHodZm7Tj+cwHkNLNgGZA/38IJUYR8YLbLVfgLXvFac2f5
+ PkTrErM0EVGZZcCRk086GwNNegceITBQ9I2Aw/pOSmZQ8t52R/4w7P8EKqdkWItN7/y9k3+
+ 2/3ehMPm6sc+f0eas5ZBMox3AZFDEvkbDgDYyKSonAtSIARlY/f0X3wLkxehVZoDU/5GYIJ
+ wYjWavWs+nNuX/RHovCvSDcgoRWHQ0VbYh45cQtfasjSrFscDXr4qV7DJjCgk0Osn1wws8C
+ DvkBuIgWmW1WgZA0G7TPAEnN2CUdF9LG
+X-QQ-FEAT: D4aqtcRDiqQpBpTnjIJt3/f21w9WO3enREO5ZSgO7MU=
+X-QQ-BUSINESS-ORIGIN: 2
+X-QQ-Originating-IP: E7inRcGMD3FFQkYdnvBRHVe92HC6Hxe27PpmZrNNZek=
+X-Originating-IP: 180.171.234.62
+X-QQ-STYLE: 
+X-QQ-mid: t6gz5a-0t1725436046t4155309
+From: "=?utf-8?B?6Jme6ZmG6ZOt?=" <luming.yu@shingroup.cn>
+To: "=?utf-8?B?WWFuZyBKaWFsb25nIOadqOS9s+m+mQ==?=" <jialong.yang@shingroup.cn>,
+ "=?utf-8?B?bXBl?=" <mpe@ellerman.id.au>,
+ "=?utf-8?B?bnBpZ2dpbg==?=" <npiggin@gmail.com>,
+ "=?utf-8?B?Y2hyaXN0b3BoZS5sZXJveQ==?=" <christophe.leroy@csgroup.eu>,
+ "=?utf-8?B?TmF2ZWVuIE4uIFJhbw==?=" <naveen.n.rao@linux.ibm.com>
+Cc: "=?utf-8?B?c2hlbmdodWkucXU=?=" <shenghui.qu@shingroup.cn>,
+ "=?utf-8?B?bGludXhwcGMtZGV2?=" <linuxppc-dev@lists.ozlabs.org>,
+ "=?utf-8?B?bGludXgta2VybmVs?=" <linux-kernel@vger.kernel.org>,
+ "=?utf-8?B?U3RldmVuIFJvc3RlZHQ=?=" <rostedt@goodmis.org>,
+ "=?utf-8?B?TWFzYW1pIEhpcmFtYXRzdQ==?=" <mhiramat@kernel.org>,
+ "=?utf-8?B?S2Fyb2wgSGVyYnN0?=" <karolherbst@gmail.com>,
+ "=?utf-8?B?UGVra2EgUGFhbGFuZW4=?=" <ppaalanen@gmail.com>,
+ "=?utf-8?B?bm91dmVhdQ==?=" <nouveau@lists.freedesktop.org>
+Subject: Re: [PATCH v1 1/2] powerpc/mmiotrace: Add MMIO Tracing tool for
+ PowerPC
+Mime-Version: 1.0
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
+Date: Wed, 4 Sep 2024 15:47:25 +0800
+X-Priority: 3
+Message-ID: <tencent_525B0DBF67E67116595BAF23@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+References: <2bf90acf7d29641ba6643934ff8dbba897dbd2d9.1718873074.git.jialong.yang@shingroup.cn>
+ <87h6ddlfc7.fsf@mail.lhotse>
+ <2CCFA0BD64E5F2E0+e4c7fc43-47b1-4788-a7d2-44f6a33cff66@shingroup.cn>
+In-Reply-To: <2CCFA0BD64E5F2E0+e4c7fc43-47b1-4788-a7d2-44f6a33cff66@shingroup.cn>
+X-QQ-ReplyHash: 4089120458
+X-BIZMAIL-ID: 6568626761907018191
+X-QQ-SENDSIZE: 520
+Received: from qq.com (unknown [127.0.0.1]) by smtp.qq.com (ESMTP) with SMTP
+ id ; Wed, 04 Sep 2024 15:47:27 +0800 (CST)
+Feedback-ID: t:shingroup.cn:qybglogicsvrgz:qybglogicsvrgz8a-0
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,249 +88,101 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+SGksDQoNCnRoZSBwYXRjaCBzZXQgYW5kIG1taW8gdHJhY2UgY2FwYWJpbGl0eSBoZWxwZWQg
+dXMgdG8gdHJhY2sgZG93biB0byB0aGUgcm9vdCBjYXVzZSBvZiAgYSBteXN0ZXJpb3VzIEVF
+SCBvbmx5IG9uIHBvd2VybnYgcGxhdGZvcm0NCiB0cmlnZ2VyZWQgYnkgYSB0ZXN0cG1kIGRw
+ZGsgdXNlciBtb2RlIGRyaXZlciAoVUlPKSBieSBjb21wYXJpbmcgdGhlIG1taW8gdHJhY2Ug
+ZnJvbSBVSU8gYW5kIG5hdGl2ZSBrZXJuZWwgZHJpdmVyIGZyb20gdGhlIHNhbWUgbmljLiAN
+CkFuZCB0aGUgcHJvYmxlbSBpcyBzb2x2ZWQgYnkgc3dpdGNoIHRvIFZGSU8gZHJpdmVyIGFz
+IGJhY2tlbmQuDQoNCnRoZSBwcm9ibGVtIGlzIHRoZSBtbWlvdHJhY2UgY291bGQgbm90IGNh
+cHR1cmUgdXNlciBtb2RlIG1taW8gd2hpY2ggSSB0aGluayBpdCBjb3VsZCBiZSBsaW1pdGF0
+aW9uIGJ5IGl0cyBjdXJyZW50IGRlc2lnbi4NCg0Kc28sIEkgdGhpbmsgd2UgY291bGQgdGlk
+eSB1cCB0aGUgcGF0Y2ggYW5kIGRvIHNvbWUgZmVhdHVyZSBlbmhhbmNlbWVudCB0aGVuIHdl
+IGNhbiBzdWJtaXQgYWdhaW4gZm9yIHRoZSBkZWJ1ZyB2YWx1ZSBvZiB0aGUgcGF0Y2guDQpB
+cyBpdCByZWFsbHkgaXMgcGFpbmZ1bCB3aGVuIEVFSCBBL0IgcmVjb3JkIGRvZXNuJ3QgcG9p
+bnQgdG8gYSBjbGVhciByb290IGNhdXNlIG9yIHN1ZmZpZW50IGRldGFpbHMgdGhhdCBjYW4g
+aGVscCB1cyB0byBmaXggIGRyaXZlciBjb2RlIGZvciB0aGUgdW5hbGlnbmVkDQpNTUlPIGZv
+ciBhIDNyZCBwYXJ0eSBuaWMgdmVuZG9yIG9uIHBvd2VybnYgcGxhdGZvcm0uDQogDQpDaGVl
+cnMsDQpMdW1pbmcNCi0tLS0tLS0tLS0tLS0tLS0tLSBPcmlnaW5hbCAtLS0tLS0tLS0tLS0t
+LS0tLS0NCkZyb206ICAiWWFuZyBKaWFsb25nIOadqOS9s+m+mSI8amlhbG9uZy55YW5nQHNo
+aW5ncm91cC5jbj47DQpEYXRlOiAgRnJpLCBKdW4gMjgsIDIwMjQgMDQ6MjEgUE0NClRvOiAg
+Im1wZSI8bXBlQGVsbGVybWFuLmlkLmF1PjsgIm5waWdnaW4iPG5waWdnaW5AZ21haWwuY29t
+PjsgImNocmlzdG9waGUubGVyb3kiPGNocmlzdG9waGUubGVyb3lAY3Nncm91cC5ldT47ICJO
+YXZlZW4gTi4gUmFvIjxuYXZlZW4ubi5yYW9AbGludXguaWJtLmNvbT47IA0KQ2M6ICAi6Jme
+6ZmG6ZOtIjxsdW1pbmcueXVAc2hpbmdyb3VwLmNuPjsgInNoZW5naHVpLnF1IjxzaGVuZ2h1
+aS5xdUBzaGluZ3JvdXAuY24+OyAibGludXhwcGMtZGV2IjxsaW51eHBwYy1kZXZAbGlzdHMu
+b3psYWJzLm9yZz47ICJsaW51eC1rZXJuZWwiPGxpbnV4LWtlcm5lbEB2Z2VyLmtlcm5lbC5v
+cmc+OyAiU3RldmVuIFJvc3RlZHQiPHJvc3RlZHRAZ29vZG1pcy5vcmc+OyAiTWFzYW1pIEhp
+cmFtYXRzdSI8bWhpcmFtYXRAa2VybmVsLm9yZz47ICJLYXJvbCBIZXJic3QiPGthcm9saGVy
+YnN0QGdtYWlsLmNvbT47ICJQZWtrYSBQYWFsYW5lbiI8cHBhYWxhbmVuQGdtYWlsLmNvbT47
+ICJub3V2ZWF1Ijxub3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZz47IA0KU3ViamVjdDog
+IFJlOiBbUEFUQ0ggdjEgMS8yXSBwb3dlcnBjL21taW90cmFjZTogQWRkIE1NSU8gVHJhY2lu
+ZyB0b29sIGZvciBQb3dlclBDDQoNCiANCg0KDQrlnKggMjAyNC82LzI4IDE1OjAyLCBNaWNo
+YWVsIEVsbGVybWFuIOWGmemBkzoNCj4gSmlhbG9uZyBZYW5nIDxqaWFsb25nLnlhbmdAc2hp
+bmdyb3VwLmNuPiB3cml0ZXM6DQo+PiBtbWlvdHJhY2UgaXMgYSB1c2VmdWwgdG9vbCB0byB0
+cmFjZSBNTUlPIGFjY2Vzc2VzLiBOb3dhZGF5cywgaXQgb25seQ0KPj4gc3VwcG9ydGVkIG9u
+IHg4NiBhbmQgeDg2XzY0IHBsYXRmb3Jtcy4NCj4gSSd2ZSBuZXZlciB1c2VkIG1taW90cmFj
+ZSwgYW5kIGRvbid0IGtub3cgaXQgd2VsbC4NCj4NCj4gSSdtIG5vdCBuZWNlc3NhcmlseSBv
+cHBvc2VkIHRvIG1lcmdpbmcgaXQsIGJ1dCBBRkFJSyBpdCB3YXMgbW9zdGx5IHVzZWQNCj4g
+Zm9yIHJldmVyc2UgZW5naW5lZXJpbmcgcHJvcHJpZXRhcnkgZHJpdmVycywgd2hlcmUgdGhl
+IGRyaXZlciBpdHNlbGYNCj4gY291bGRuJ3QgYmUgZWFzaWx5IGluc3RydW1lbnRlZC4gSXMg
+dGhhdCB3aGF0IHlvdSdyZSB1c2luZyBpdCBmb3I/DQoNClllcy4gSnVzdCBsaWtlIHlvdSB0
+aGluay4gV2UgaGF2ZSB1c2VkIGl0IGZvciBuZXR3b3JrIHN0YWNrIGRlYnVnIGluIA0KcHBj
+NjRsZS4NCg0KDQo+DQo+IEZvciBkcml2ZXJzIHdoZXJlIHdlIGhhdmUgdGhlIHNvdXJjZSB3
+b3VsZG4ndCBpdCBiZSBlYXNpZXIgdG8ganVzdCB1c2UNCj4gdHJhY2Vwb2ludHMgaW4gdGhl
+IE1NSU8gYWNjZXNzb3JzPw0KDQoNClRyYWNlcG9pbnRzIG5lZWQgcHJlLWRlZmluZWQuIEFu
+ZCBpbiBzb21lIGJpZyBkcml2ZXIsIGl0J3Mgbm90IGVhc3kgdG8gDQpvdmVyd3JpdGUNCg0K
+YWxsIHBvaW50cyB3aGVyZSBhY2Nlc3MgcmVnaXN0ZXJzIGluIGlvIGFyZWEuIEFuZCB0cmFj
+ZXBvaW50IGlzIEMgDQpmdW5jdGlvbiBsZXZlbCBmaWx0ZXIuDQoNCm1taW90cmFjZSBpcyBz
+aW1pbGFyIHRvIHNldCB0cmFjZXBvaW50cyBpbiB3cml0ZWwvcmVhZGwuLi4gQnV0IGl0IGNh
+biBkbyANCmRlZXBlcmx5Lg0KDQptbWlvdHJhY2UgaXMgYSBhc20gbGV2ZWwgZmlsdGVyIHRv
+b2wuIEl0IGRvZXNuJ3QgY2FyZSB3aGF0IGhhdmUgZG9uZSBpbiANCkMgbGV2ZWwuIEl0IHdp
+bGwNCg0Kb25seSBmaW5kIHdoYXQgaGF2ZSBkb25lIGJ5IGFzbSwgc3VjaCBhcyBzdHcoc3Rv
+cmUgd29yZCkvbHcobG9hZCB3b3JkKSwgIA0KanVzdCBsaWtlIHN0YW5kaW5nDQoNCmluIHRo
+ZSB2aWV3IG9mIGRldmljZS4NCg0KDQo+DQo+IElzIGl0IHN0aWxsIGluLXVzZS9tYWludGFp
+bmVkIG9uIHRoZSB4ODYgc2lkZT8NCg0KDQpIZXJlIGlzIHNvbWUgY29yZSBmaWxlIHBhdGNo
+ZXMgbnVtYmVyIGluIHg4NjoNCg0KfCAgICAgIHwgbW1pb19tb2QuYyB8IGttbWlvLmMgfCBw
+Zl9pbi4qIHwgdGVzdG1taW90cmFjZS5jIHwNCnwtLS0tLS0rLS0tLS0tLS0tLS0tKy0tLS0t
+LS0tLSstLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0tLS18DQp8IDIwMjIgfCAgICAgICAgICAg
+ICAgIDEgfCAgICAgICAgICAgIDMgfCB8ICAgICAgICAgICAgICAgICAgfA0KfCAyMDIxIHwg
+ICAgICAgICAgICAgICAyIHwgICAgICAgICAgICAxIHwgICAgICAgICAgICAgICB8ICAgICAg
+ICAgfA0KfCAyMDIwIHwgICAgICAgICAgICAgICA0IHwgICAgICAgICAgICA0IHwgfCAgICAg
+ICAgICAgICAgIDEgfA0KfCAyMDE5IHwgICAgICAgICAgICAgICAyIHwgICAgICAgICAgICAx
+IHwgICAgICAgICAgICAxIHwgICAgICAgICAgICAgICA0IHwNCnwgMjAxOCB8ICAgICAgICAg
+ICAgICAgICAgfCAgICAgICAgICAgIDIgfCAgICAgICAgICAgICAgIHwgICAgICAgICAgfA0K
+fCAyMDE3IHwgICAgICAgICAgICAgICAyIHwgICAgICAgICAgICAyIHwgfCAgICAgICAgICAg
+ICAgIDEgfA0KfCAyMDE2IHwgICAgICAgICAgICAgICAxIHwgICAgICAgICAgICAyIHwgICAg
+ICAgICAgICAxIHwgICAgICAgIHwNCnwgMjAxNCB8ICAgICAgICAgICAgICAgICAgfCAgICAg
+ICAgICAgIDEgfCAgICAgICAgICAgICAgIHwgICAgICAgICAgfA0KfCAyMDEzIHwgICAgICAg
+ICAgICAgICAxIHwgICAgICAgICAgICAgICB8ICAgICAgICAgICAgICAgfCAgICAgICAgICB8
+DQp8IDIwMTIgfCAgICAgICAgICAgICAgIDEgfCAgICAgICAgICAgICAgIHwgfCAgICAgICAg
+ICAgICAgICAgIHwNCnwgMjAxMSB8ICAgICAgICAgICAgICAgMyB8ICAgICAgICAgICAgICAg
+fCAgICAgICAgICAgIDEgfCAgICAgICAgIHwNCnwgMjAxMCB8ICAgICAgICAgICAgICAgMSB8
+ICAgICAgICAgICAgMyB8ICAgICAgICAgICAgMiB8ICAgICAgICAgICAgICAgMSB8DQp8IDIw
+MDkgfCAgICAgICAgICAgICAgIDQgfCAgICAgICAgICAxOSB8IHwgICAgICAgICAgICAgICAz
+IHwNCnwgMjAwOCB8ICAgICAgICAgICAgIDEzIHwgICAgICAgICAgICA1IHwgICAgICAgICAg
+ICAyIHwgICAgICAgICAgICAgICAzIHwNCg0KPg0KPj4gSGVyZSBpcyBhIHN1cHBvcnQgZm9y
+IHBvd2VycGMuDQo+PiBUaGUgbWFudWFsIGlzIGxvY2F0ZWQgYXQgRG9jdW1lbnRhdGlvbi90
+cmFjZS9tbWlvdHJhY2UucnN0IHdoaWNoIG1lYW5zDQo+PiBJIGhhdmUgbm90IGNoYW5nZWQg
+dXNlciBBUEkuIFBlb3BsZSB3aWxsIGJlIGVhc3kgdG8gdXNlIGl0Lg0KPj4gQWxtb3N0IGFs
+bCBmaWxlcyBhcmUgY29waWVkIGZyb20geDg2L21tLCB0aGVyZSBhcmUgb25seSBzb21lDQo+
+PiBkaWZmZXJlbmNlcyBmcm9tIGhhcmR3YXJlIGFuZCBhcmNoaXRlY3R1cmVzIHNvZnR3YXJl
+Lg0KPj4NCj4+IExJTks6IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2xrbWwvMjAwODAxMjcx
+OTU1MzYuNTA4MDk5NzRAZGFlZGFsdXMucHEuaWtpLmZpLw0KPj4NCj4+IFNpZ25lZC1vZmYt
+Ynk6IEppYWxvbmcgWWFuZyA8amlhbG9uZy55YW5nQHNoaW5ncm91cC5jbj4NCj4+IC0tLQ0K
+Pj4gICBhcmNoL3Bvd2VycGMvS2NvbmZpZy5kZWJ1ZyAgICAgICB8ICAgMyArDQo+PiAgIGFy
+Y2gvcG93ZXJwYy9tbS9NYWtlZmlsZSAgICAgICAgIHwgICAxICsNCj4+ICAgYXJjaC9wb3dl
+cnBjL21tL2ttbWlvLmMgICAgICAgICAgfCA2NDkgKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKw0KPj4gICBhcmNoL3Bvd2VycGMvbW0vbW1pby1tb2QuYyAgICAgICB8IDQxNCAr
+KysrKysrKysrKysrKysrKysrKw0KPj4gICBhcmNoL3Bvd2VycGMvbW0vbW1pb3RyYWNlX2Fy
+Y2guYyB8IDE0OSArKysrKysrDQo+PiAgIGFyY2gvcG93ZXJwYy9tbS9tbWlvdHJhY2VfYXJj
+aC5oIHwgIDI1ICsrDQo+PiAgIGFyY2gvcG93ZXJwYy9tbS9wZl9pbi5jICAgICAgICAgIHwg
+MTg1ICsrKysrKysrKw0KPj4gICBhcmNoL3Bvd2VycGMvbW0vcGZfaW4uaCAgICAgICAgICB8
+ICAzMyArKw0KPj4gICA4IGZpbGVzIGNoYW5nZWQsIDE0NTkgaW5zZXJ0aW9ucygrKQ0KPiAg
+ICANCj4gQXQgYSBnbGFuY2UgbW9zdCBvZiB0aGF0IGNvZGUgY291bGQgYmUgc2hhcmVkIGJl
+dHdlZW4gYXJjaGVzLiBJIGRvbid0DQo+IHRoaW5rIEkgY2FuIG1lcmdlIHRoYXQgYXMtaXMs
+IHdpdGhvdXQgc29tZSBhdHRlbXB0IHRvIHNwbGl0IHRoZSBnZW5lcmljDQo+IHBhcnRzIG91
+dC4NCg0KDQpSaWdodC4NCg0KSSBqdXN0IGNvcHkgdGhlbSBmcm9tIGFyY2gveDg2L21tLiBU
+aGVyZSBhcmUgbWFueSBjb2RlIG5vdCBhcmNoIHNwZWNpZmljLg0KDQoNCj4gY2hlZXJzDQo+
 
 
-On 9/3/24 1:29 AM, Daniel Vetter wrote:
-> On Wed, Jun 19, 2024 at 01:31:39AM +0200, Danilo Krummrich wrote:
->> Implement the DRM driver abstractions.
->>
->> The `Driver` trait provides the interface to the actual driver to fill
->> in the driver specific data, such as the `DriverInfo`, driver features
->> and IOCTLs.
->>
->> Co-developed-by: Asahi Lina <lina@asahilina.net>
->> Signed-off-by: Asahi Lina <lina@asahilina.net>
->> Signed-off-by: Danilo Krummrich <dakr@redhat.com>
->> ---
->>  rust/bindings/bindings_helper.h |   1 +
->>  rust/kernel/drm/drv.rs          | 141 ++++++++++++++++++++++++++++++++
->>  rust/kernel/drm/mod.rs          |   1 +
->>  3 files changed, 143 insertions(+)
->>  create mode 100644 rust/kernel/drm/drv.rs
->>
->> diff --git a/rust/bindings/bindings_helper.h b/rust/bindings/bindings_helper.h
->> index ed25b686748e..dc19cb789536 100644
->> --- a/rust/bindings/bindings_helper.h
->> +++ b/rust/bindings/bindings_helper.h
->> @@ -6,6 +6,7 @@
->>   * Sorted alphabetically.
->>   */
->>  
->> +#include <drm/drm_drv.h>
->>  #include <drm/drm_ioctl.h>
->>  #include <kunit/test.h>
->>  #include <linux/errname.h>
->> diff --git a/rust/kernel/drm/drv.rs b/rust/kernel/drm/drv.rs
->> new file mode 100644
->> index 000000000000..cd594a32f9e4
->> --- /dev/null
->> +++ b/rust/kernel/drm/drv.rs
->> @@ -0,0 +1,141 @@
->> +// SPDX-License-Identifier: GPL-2.0 OR MIT
->> +
->> +//! DRM driver core.
->> +//!
->> +//! C header: [`include/linux/drm/drm_drv.h`](srctree/include/linux/drm/drm_drv.h)
->> +
->> +use crate::{bindings, drm, private::Sealed, str::CStr, types::ForeignOwnable};
->> +use macros::vtable;
->> +
->> +/// Driver use the GEM memory manager. This should be set for all modern drivers.
->> +pub const FEAT_GEM: u32 = bindings::drm_driver_feature_DRIVER_GEM;
->> +/// Driver supports mode setting interfaces (KMS).
->> +pub const FEAT_MODESET: u32 = bindings::drm_driver_feature_DRIVER_MODESET;
->> +/// Driver supports dedicated render nodes.
->> +pub const FEAT_RENDER: u32 = bindings::drm_driver_feature_DRIVER_RENDER;
->> +/// Driver supports the full atomic modesetting userspace API.
->> +///
->> +/// Drivers which only use atomic internally, but do not support the full userspace API (e.g. not
->> +/// all properties converted to atomic, or multi-plane updates are not guaranteed to be tear-free)
->> +/// should not set this flag.
->> +pub const FEAT_ATOMIC: u32 = bindings::drm_driver_feature_DRIVER_ATOMIC;
->> +/// Driver supports DRM sync objects for explicit synchronization of command submission.
->> +pub const FEAT_SYNCOBJ: u32 = bindings::drm_driver_feature_DRIVER_SYNCOBJ;
->> +/// Driver supports the timeline flavor of DRM sync objects for explicit synchronization of command
->> +/// submission.
->> +pub const FEAT_SYNCOBJ_TIMELINE: u32 = bindings::drm_driver_feature_DRIVER_SYNCOBJ_TIMELINE;
->> +/// Driver supports compute acceleration devices. This flag is mutually exclusive with `FEAT_RENDER`
->> +/// and `FEAT_MODESET`. Devices that support both graphics and compute acceleration should be
->> +/// handled by two drivers that are connected using auxiliary bus.
->> +pub const FEAT_COMPUTE_ACCEL: u32 = bindings::drm_driver_feature_DRIVER_COMPUTE_ACCEL;
->> +/// Driver supports user defined GPU VA bindings for GEM objects.
->> +pub const FEAT_GEM_GPUVA: u32 = bindings::drm_driver_feature_DRIVER_GEM_GPUVA;
->> +/// Driver supports and requires cursor hotspot information in the cursor plane (e.g. cursor plane
->> +/// has to actually track the mouse cursor and the clients are required to set hotspot in order for
->> +/// the cursor planes to work correctly).
->> +pub const FEAT_CURSOR_HOTSPOT: u32 = bindings::drm_driver_feature_DRIVER_CURSOR_HOTSPOT;
->> +
->> +/// Information data for a DRM Driver.
->> +pub struct DriverInfo {
->> +    /// Driver major version.
->> +    pub major: i32,
->> +    /// Driver minor version.
->> +    pub minor: i32,
->> +    /// Driver patchlevel version.
->> +    pub patchlevel: i32,
->> +    /// Driver name.
->> +    pub name: &'static CStr,
->> +    /// Driver description.
->> +    pub desc: &'static CStr,
->> +    /// Driver date.
->> +    pub date: &'static CStr,
->> +}
->> +
->> +/// Internal memory management operation set, normally created by memory managers (e.g. GEM).
->> +///
->> +/// See `kernel::drm::gem` and `kernel::drm::gem::shmem`.
->> +pub struct AllocOps {
->> +    pub(crate) gem_create_object: Option<
->> +        unsafe extern "C" fn(
->> +            dev: *mut bindings::drm_device,
->> +            size: usize,
->> +        ) -> *mut bindings::drm_gem_object,
->> +    >,
->> +    pub(crate) prime_handle_to_fd: Option<
->> +        unsafe extern "C" fn(
->> +            dev: *mut bindings::drm_device,
->> +            file_priv: *mut bindings::drm_file,
->> +            handle: u32,
->> +            flags: u32,
->> +            prime_fd: *mut core::ffi::c_int,
->> +        ) -> core::ffi::c_int,
->> +    >,
->> +    pub(crate) prime_fd_to_handle: Option<
->> +        unsafe extern "C" fn(
->> +            dev: *mut bindings::drm_device,
->> +            file_priv: *mut bindings::drm_file,
->> +            prime_fd: core::ffi::c_int,
->> +            handle: *mut u32,
->> +        ) -> core::ffi::c_int,
->> +    >,
->> +    pub(crate) gem_prime_import: Option<
->> +        unsafe extern "C" fn(
->> +            dev: *mut bindings::drm_device,
->> +            dma_buf: *mut bindings::dma_buf,
->> +        ) -> *mut bindings::drm_gem_object,
->> +    >,
->> +    pub(crate) gem_prime_import_sg_table: Option<
->> +        unsafe extern "C" fn(
->> +            dev: *mut bindings::drm_device,
->> +            attach: *mut bindings::dma_buf_attachment,
->> +            sgt: *mut bindings::sg_table,
->> +        ) -> *mut bindings::drm_gem_object,
->> +    >,
->> +    pub(crate) dumb_create: Option<
->> +        unsafe extern "C" fn(
->> +            file_priv: *mut bindings::drm_file,
->> +            dev: *mut bindings::drm_device,
->> +            args: *mut bindings::drm_mode_create_dumb,
->> +        ) -> core::ffi::c_int,
->> +    >,
->> +    pub(crate) dumb_map_offset: Option<
->> +        unsafe extern "C" fn(
->> +            file_priv: *mut bindings::drm_file,
->> +            dev: *mut bindings::drm_device,
->> +            handle: u32,
->> +            offset: *mut u64,
->> +        ) -> core::ffi::c_int,
->> +    >,
->> +}
->> +
->> +/// Trait for memory manager implementations. Implemented internally.
->> +pub trait AllocImpl: Sealed {
->> +    /// The C callback operations for this memory manager.
->> +    const ALLOC_OPS: AllocOps;
->> +}
->> +
->> +/// The DRM `Driver` trait.
->> +///
->> +/// This trait must be implemented by drivers in order to create a `struct drm_device` and `struct
->> +/// drm_driver` to be registered in the DRM subsystem.
->> +#[vtable]
->> +pub trait Driver {
->> +    /// Context data associated with the DRM driver
->> +    ///
->> +    /// Determines the type of the context data passed to each of the methods of the trait.
->> +    type Data: ForeignOwnable + Sync + Send;
->> +
->> +    /// The type used to manage memory for this driver.
->> +    ///
->> +    /// Should be either `drm::gem::Object<T>` or `drm::gem::shmem::Object<T>`.
->> +    type Object: AllocImpl;
-> 
-> Bit similar comment to what I discussed at length with lyude, drivers
-> might have a need for different implementations. But I think from the kms
-> discussions we have solid solution for that, so I think we should be fine.
-> 
->> +
->> +    /// Driver metadata
->> +    const INFO: DriverInfo;
->> +
->> +    /// Feature flags
->> +    const FEATURES: u32;
-> 
-> I think there's a type safety issue here with allowing drivers to muck
-> with these directly. Example:
-> 
-> - If you don't set FEAT_GEM but try to use gem C functions, stuff blows up
->   because the core doesn't call drm_gem_init() in that case.
-> 
-> - For modesetting it's more fun because there mandatory init functions are
->   meant to be called by the driver, in the right sequence, interleaved
->   with other driver setup code for all the right modeset objects. If you
->   get it wrong you go boom.
-
-Same with GEM_GPUVA, I noticed that if you don't set the flag it blows
-up. But the only effect of the flag seems to be some trivial
-initialization in GEM objects (a single INIT_LIST_HEAD)...
-
-> 
-> For the modeset side of things I've dumped a pile of comments on lyude's
-> patches already: Essentially during registration I think we need a special
-> drmKmsDriverInit object or phantom type or so, so that you can proof
-> you're registering kms objects at the right time, with the rust
-> abstraction calling all the other functions around that in the right
-> order.
-> 
-> For gem I think we should flat out not allow non-gem drivers in rust. At
-> least until someone comes up with a need for a non-gem driver.
-
-... so I think we can also just hard-code GPUVM on even if the driver
-doesn't actually make use of the functionality?
-
-I'm not even sure if that feature flag should exist at this point, it's
-probably faster not to check for the feature and just unconditionally
-initialize it even for drivers that don't need it.
-
-> 
-> For some of the values like hotspot cursor support we might need to change
-> the rust abstraction to compute these at runtime driver init, and then set
-> them somewhere in the runtime data structure instead of having them
-> statically sepcified in drm_driver->features.
-> 
-> In general these feature flag are midlayer design and that tends to be
-> bad, rust is just the messenger here.
-> 
-> Cheers, Sima
-> 
-> 
->> +
->> +    /// IOCTL list. See `kernel::drm::ioctl::declare_drm_ioctls!{}`.
->> +    const IOCTLS: &'static [drm::ioctl::DrmIoctlDescriptor];
->> +}
->> diff --git a/rust/kernel/drm/mod.rs b/rust/kernel/drm/mod.rs
->> index 9ec6d7cbcaf3..d987c56b3cec 100644
->> --- a/rust/kernel/drm/mod.rs
->> +++ b/rust/kernel/drm/mod.rs
->> @@ -2,4 +2,5 @@
->>  
->>  //! DRM subsystem abstractions.
->>  
->> +pub mod drv;
->>  pub mod ioctl;
->> -- 
->> 2.45.1
->>
-> 
-
-~~ Lina
