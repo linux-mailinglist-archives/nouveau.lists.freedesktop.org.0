@@ -2,64 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CC6296D366
-	for <lists+nouveau@lfdr.de>; Thu,  5 Sep 2024 11:34:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0061196D6BA
+	for <lists+nouveau@lfdr.de>; Thu,  5 Sep 2024 13:07:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 535A410E840;
-	Thu,  5 Sep 2024 09:33:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D2C6910E861;
+	Thu,  5 Sep 2024 11:07:20 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="e/V2lxpt";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rn+wQ/2+";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3BABC10E840;
- Thu,  5 Sep 2024 09:33:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1725528834; x=1757064834;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=DZ29/FJS9eeMPI/4e/YxqSnsah4g9bujTt1F49R/VRs=;
- b=e/V2lxptSnDWfNKwtpo+yxhqSAbyC7FzS+dWZ11B1KuJZ/yFsBl5lDmf
- qHBXWhau6AwTt0lV5dJfYLvfaT9WgLJTze9A4qqCuXdFxJY3B3/+EoX08
- 3ENmrBZSrzxYH1MStf+086sD28fSA30rfyuM75R3a0vaZz+s+eBcqRtcn
- h4nysTNKMLsxx37oGCMBTV/KvOIXfYjHbvdtm0cofnMdCEGXLVGz4ynDC
- cAyGeIw7MPO5BjdhroUcJrDSjN7wJGDcDyFHGXpqS+KO95piuHeprD2ut
- vg00Gc6fe0UwZ4HjlqS6gmb0LDt0gH+tLXWOlME7l68Vk9OMkqOX5LYRI g==;
-X-CSE-ConnectionGUID: USEpj/uETyCd9wFrhFjvJg==
-X-CSE-MsgGUID: hWaBRgaLRh6CamFXOhrpJg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11185"; a="24391714"
-X-IronPort-AV: E=Sophos;i="6.10,204,1719903600"; d="scan'208";a="24391714"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
- by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Sep 2024 02:33:54 -0700
-X-CSE-ConnectionGUID: IseAvhKQRnCl3r9Dcc7XXw==
-X-CSE-MsgGUID: 4iEs858fT+mWQcuwJZWEJw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,204,1719903600"; d="scan'208";a="96354397"
-Received: from unknown (HELO fedora..) ([10.245.245.247])
- by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Sep 2024 02:33:51 -0700
-From: =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>
-To: intel-xe@lists.freedesktop.org
-Cc: =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- Matthew Brost <matthew.brost@intel.com>, amd-gfx@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- spice-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Zack Rusin <zack.rusin@broadcom.com>,
- bcm-kernel-feedback-list@broadcom.com,
- Sui Jingfeng <suijingfeng@loongson.cn>
-Subject: [PATCH 2/2] drm/ttm: Add a device flag to propagate -ENOSPC on OOM
-Date: Thu,  5 Sep 2024 11:33:22 +0200
-Message-ID: <20240905093322.29786-3-thomas.hellstrom@linux.intel.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240905093322.29786-1-thomas.hellstrom@linux.intel.com>
-References: <20240905093322.29786-1-thomas.hellstrom@linux.intel.com>
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 813CC10E861
+ for <nouveau@lists.freedesktop.org>; Thu,  5 Sep 2024 11:07:19 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 297C85C3F2F;
+ Thu,  5 Sep 2024 11:07:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C4921C4CEC3;
+ Thu,  5 Sep 2024 11:07:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1725534438;
+ bh=hTXEJVQxIhCGvIuYh9OBYWtx1WlHdmLiA/HeifqItAk=;
+ h=Date:Subject:To:References:From:Cc:In-Reply-To:From;
+ b=rn+wQ/2+5+OPb+N8XO++vBXggLtHECpYLRx3cEJVRwJ/7x7TLEo5sOtiZdp6vf6rj
+ 8DykOD5/aDS3s1IKkULkZIrL1cZ+YVv3uMSeQU+OK2D8df14YuEpN+urc+ssPez01Z
+ df/3vsOh+2a9LZfN8lrAt2EkQCmVjrIRtr06fzjaQiu9lWoxMQxtykbm4GdYm4WYgN
+ ert2qHtwjkkoNSJN6O1kPirO5a/nj5e0LNYZjqWIdlYv0YAlH5VE+WdP4szTK0Pf/K
+ GY/AZ3/zXO1bCa/c06Uq1XscsDAEzkmfZzoQOfwkoGXzIcS4rhB1vm3Q4FENlehpzo
+ APvJ5PMX2Vihg==
+Message-ID: <031a620d-50ce-4864-bc55-3c2cf472b2ab@kernel.org>
+Date: Thu, 5 Sep 2024 13:07:14 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] drm/nouveau/fb: restore init() for ramgp102
+To: Ben Skeggs <bskeggs@nvidia.com>
+References: <20240903231631.3398-1-bskeggs@nvidia.com>
+From: Danilo Krummrich <dakr@kernel.org>
+Cc: nouveau@lists.freedesktop.org
+Content-Language: en-US
+In-Reply-To: <20240903231631.3398-1-bskeggs@nvidia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,78 +57,65 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Some graphics APIs differentiate between out-of-graphics-memory and
-out-of-host-memory (system memory). Add a device init flag to
-have -ENOSPC propagated from the resource managers instead of being
-converted to -ENOMEM, to aid driver stacks in determining what
-error code to return or whether corrective action can be taken at
-the driver level.
+Hi Ben,
 
-Cc: Christian König <christian.koenig@amd.com>
-Cc: Matthew Brost <matthew.brost@intel.com>
-Signed-off-by: Thomas Hellström <thomas.hellstrom@linux.intel.com>
----
- drivers/gpu/drm/ttm/ttm_bo.c     |  2 +-
- drivers/gpu/drm/ttm/ttm_device.c |  1 +
- include/drm/ttm/ttm_device.h     | 13 +++++++++++++
- 3 files changed, 15 insertions(+), 1 deletion(-)
+On 9/4/24 1:16 AM, Ben Skeggs wrote:
+> init() was removed from ramgp102 when reworking the memory detection, as
+> it was thought that the code was only necessary when the driver performs
+> mclk changes, which nouveau doesn't support on pascal.
+> 
+> However, it turns out that we still need to execute this on some GPUs to
+> restore settings after DEVINIT, so revert to the original behaviour.
+> 
+> Bug: https://gitlab.freedesktop.org/drm/nouveau/-/issues/319
 
-diff --git a/drivers/gpu/drm/ttm/ttm_bo.c b/drivers/gpu/drm/ttm/ttm_bo.c
-index 320592435252..c4bec2ad301b 100644
---- a/drivers/gpu/drm/ttm/ttm_bo.c
-+++ b/drivers/gpu/drm/ttm/ttm_bo.c
-@@ -835,7 +835,7 @@ int ttm_bo_validate(struct ttm_buffer_object *bo,
- 
- 	/* For backward compatibility with userspace */
- 	if (ret == -ENOSPC)
--		return -ENOMEM;
-+		return bo->bdev->propagate_enospc ? ret : -ENOMEM;
- 
- 	/*
- 	 * We might need to add a TTM.
-diff --git a/drivers/gpu/drm/ttm/ttm_device.c b/drivers/gpu/drm/ttm/ttm_device.c
-index 0c85d10e5e0b..aee9d52d745b 100644
---- a/drivers/gpu/drm/ttm/ttm_device.c
-+++ b/drivers/gpu/drm/ttm/ttm_device.c
-@@ -203,6 +203,7 @@ int ttm_device_init(struct ttm_device *bdev, const struct ttm_device_funcs *func
- 	}
- 
- 	bdev->funcs = funcs;
-+	bdev->propagate_enospc = flags.propagate_enospc;
- 
- 	ttm_sys_man_init(bdev);
- 
-diff --git a/include/drm/ttm/ttm_device.h b/include/drm/ttm/ttm_device.h
-index 1534bd946c78..f9da78bbd925 100644
---- a/include/drm/ttm/ttm_device.h
-+++ b/include/drm/ttm/ttm_device.h
-@@ -266,6 +266,13 @@ struct ttm_device {
- 	 * @wq: Work queue structure for the delayed delete workqueue.
- 	 */
- 	struct workqueue_struct *wq;
-+
-+	/**
-+	 * @propagate_enospc: Whether -ENOSPC should be propagated to the caller after
-+	 * graphics memory allocation failure. If false, this will be converted to
-+	 * -ENOMEM, which is the default behaviour.
-+	 */
-+	bool propagate_enospc;
- };
- 
- int ttm_global_swapout(struct ttm_operation_ctx *ctx, gfp_t gfp_flags);
-@@ -295,6 +302,12 @@ struct ttm_device_init_flags {
- 	u32 use_dma_alloc : 1;
- 	/** @use_dma32: If we should use GFP_DMA32 for device memory allocations. */
- 	u32 use_dma32 : 1;
-+	/**
-+	 * @propagate_enospc: Whether -ENOSPC should be propagated to the caller after
-+	 * graphics memory allocation failure. If false, this will be converted to
-+	 * -ENOMEM, which is the default behaviour.
-+	 */
-+	u32 propagate_enospc : 1;
- };
- 
- int ttm_device_init(struct ttm_device *bdev, const struct ttm_device_funcs *funcs,
--- 
-2.46.0
+Please use 'Closes:' instead and CC stable.
 
+- Danilo
+
+> Fixes: 2c0c15a22fa0 ("drm/nouveau/fb/gp102-ga100: switch to simpler vram size detection method")
+> Signed-off-by: Ben Skeggs <bskeggs@nvidia.com>
+> ---
+>   drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h      | 2 ++
+>   drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c | 2 +-
+>   drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c | 1 +
+>   3 files changed, 4 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h
+> index 50f0c1914f58..4c3f74396579 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ram.h
+> @@ -46,6 +46,8 @@ u32 gm107_ram_probe_fbp(const struct nvkm_ram_func *,
+>   u32 gm200_ram_probe_fbp_amount(const struct nvkm_ram_func *, u32,
+>   			       struct nvkm_device *, int, int *);
+>   
+> +int gp100_ram_init(struct nvkm_ram *);
+> +
+>   /* RAM type-specific MR calculation routines */
+>   int nvkm_sddr2_calc(struct nvkm_ram *);
+>   int nvkm_sddr3_calc(struct nvkm_ram *);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c
+> index 378f6fb70990..8987a21e81d1 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c
+> @@ -27,7 +27,7 @@
+>   #include <subdev/bios/init.h>
+>   #include <subdev/bios/rammap.h>
+>   
+> -static int
+> +int
+>   gp100_ram_init(struct nvkm_ram *ram)
+>   {
+>   	struct nvkm_subdev *subdev = &ram->fb->subdev;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c
+> index 8550f5e47347..b6b6ee59019d 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp102.c
+> @@ -5,6 +5,7 @@
+>   
+>   static const struct nvkm_ram_func
+>   gp102_ram = {
+> +	.init = gp100_ram_init,
+>   };
+>   
+>   int
