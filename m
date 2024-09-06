@@ -2,52 +2,52 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11D5E96E876
-	for <lists+nouveau@lfdr.de>; Fri,  6 Sep 2024 05:56:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E449796E99F
+	for <lists+nouveau@lfdr.de>; Fri,  6 Sep 2024 07:59:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A16F310E96D;
-	Fri,  6 Sep 2024 03:56:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9791E10E187;
+	Fri,  6 Sep 2024 05:59:31 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="ej6PVbNh";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="LXvGjGYj";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 033E010E08F;
- Fri,  6 Sep 2024 03:56:05 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 85A4610E18D;
+ Fri,  6 Sep 2024 05:59:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1725594966; x=1757130966;
+ t=1725602371; x=1757138371;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=AOgep25YPfbArNphRZ3FzjXtGgRBjP2wdNuj5+iyhso=;
- b=ej6PVbNhHWYv53x9OsATjQ5txoXG+gcz2rI+b3B899qEEzlf08fxL+ZY
- I2JOMsPlYIldvEOcb6uveUU59UopgRRUpPpsCuKra7zHNZNwihRmpdyQW
- Rfa0LXX2PcUy/x59ZqDd29ZqcBlcDFbFGlUWDUF+P6HkR3ppY7ACO4Vp9
- CaO3m246JJlqIDwTTkZlUlkssj+nfZs2TSzMhph70MFJeUDUiaMM452Z0
- jtaOZ1MtFGDlYJIPbfuJA0bOaR2Wmzdc4xLLnTDNUKrTgrdZMho8ImmQp
- qogC61TyzdtWqax0PIRT0Z55E+KKQtz/B3meWRy1oWvzGDGud0EeYv2Zj A==;
-X-CSE-ConnectionGUID: eHjCGSN8TneiIoUSSmm5Yg==
-X-CSE-MsgGUID: ZIJLL3MJSaOOPprCF9nE5w==
-X-IronPort-AV: E=McAfee;i="6700,10204,11186"; a="23849521"
-X-IronPort-AV: E=Sophos;i="6.10,206,1719903600"; d="scan'208";a="23849521"
-Received: from orviesa002.jf.intel.com ([10.64.159.142])
- by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Sep 2024 20:56:06 -0700
-X-CSE-ConnectionGUID: 6bbdXEE/QD+NC094Jser1Q==
-X-CSE-MsgGUID: El4D01XXR+m56hRhWBK04w==
+ bh=yMyT0v1kxNbfJq+8ycKl/AKn5rVKTHrtntCjDqG2Jww=;
+ b=LXvGjGYjIgybQz3KJl0IPJHbOLlXbFko/ixDIES8qnf85EH3u0TaZCp9
+ ho/ruOiAIDTVDdeoOPsZhtoz47jfw7xeqTEtk11mZsa5IursoHxj09/a3
+ vMIaBojCLxgAhuriqvt4No6U3LnBe3RU0XvUqy26+1hudH7G0JzaEP+Ae
+ AnJdFtgOOLI81wbleTeRoocQlpIkJbOkBDF0f8LHC18bTeiAl+yYUvWvx
+ QBR8i2FmwNh7TyEjtLmky4dhKqNKoDDatVnxODqaQEXkU/Tur+DRwSu5Y
+ ZCeTRmz/Se6OfR+zn0+Gleo/ZK1Yb4h6FNI9OFQ4iW1BSraHOzfgwS6pb g==;
+X-CSE-ConnectionGUID: V3qCyORGQ/Ci4IBJxEkvTg==
+X-CSE-MsgGUID: GvgoGDhBS2GTynzpInICWA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11186"; a="24150889"
+X-IronPort-AV: E=Sophos;i="6.10,207,1719903600"; d="scan'208";a="24150889"
+Received: from fmviesa010.fm.intel.com ([10.60.135.150])
+ by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 05 Sep 2024 22:59:30 -0700
+X-CSE-ConnectionGUID: 0UIUUh0ZRp+wylHFk4u9bg==
+X-CSE-MsgGUID: gNrrE9nWR56EdWunTgr+ZA==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,206,1719903600"; d="scan'208";a="96548787"
+X-IronPort-AV: E=Sophos;i="6.10,207,1719903600"; d="scan'208";a="66088329"
 Received: from lkp-server01.sh.intel.com (HELO 9c6b1c7d3b50) ([10.239.97.150])
- by orviesa002.jf.intel.com with ESMTP; 05 Sep 2024 20:56:02 -0700
+ by fmviesa010.fm.intel.com with ESMTP; 05 Sep 2024 22:59:27 -0700
 Received: from kbuild by 9c6b1c7d3b50 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1smQ4l-000AaW-24;
- Fri, 06 Sep 2024 03:55:59 +0000
-Date: Fri, 6 Sep 2024 11:55:02 +0800
+ (envelope-from <lkp@intel.com>) id 1smS0C-000AjR-2a;
+ Fri, 06 Sep 2024 05:59:24 +0000
+Date: Fri, 6 Sep 2024 13:58:35 +0800
 From: kernel test robot <lkp@intel.com>
 To: Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
  intel-xe@lists.freedesktop.org
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+Cc: oe-kbuild-all@lists.linux.dev,
  Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
  Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
  amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
@@ -58,7 +58,7 @@ Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
  Matthew Brost <matthew.brost@intel.com>
 Subject: Re: [PATCH 1/2] drm/ttm: Change ttm_device_init to use a struct
  instead of multiple bools
-Message-ID: <202409061145.AtKjpWFJ-lkp@intel.com>
+Message-ID: <202409061330.a2rRYEMl-lkp@intel.com>
 References: <20240905093322.29786-2-thomas.hellstrom@linux.intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
@@ -85,7 +85,7 @@ kernel test robot noticed the following build errors:
 
 [auto build test ERROR on drm-intel/for-linux-next]
 [also build test ERROR on next-20240905]
-[cannot apply to drm-xe/drm-xe-next drm-intel/for-linux-next-fixes drm-tip/drm-tip linus/master v6.11-rc6]
+[cannot apply to drm-xe/drm-xe-next linus/master v6.11-rc6]
 [If your patch is applied to the wrong git tree, kindly drop us a note.
 And when submitting patch, we suggest to use '--base' as documented in
 https://git-scm.com/docs/git-format-patch#_base_tree_information]
@@ -94,37 +94,38 @@ url:    https://github.com/intel-lab-lkp/linux/commits/Thomas-Hellstr-m/drm-ttm-
 base:   git://anongit.freedesktop.org/drm-intel for-linux-next
 patch link:    https://lore.kernel.org/r/20240905093322.29786-2-thomas.hellstrom%40linux.intel.com
 patch subject: [PATCH 1/2] drm/ttm: Change ttm_device_init to use a struct instead of multiple bools
-config: i386-randconfig-002-20240906 (https://download.01.org/0day-ci/archive/20240906/202409061145.AtKjpWFJ-lkp@intel.com/config)
-compiler: clang version 18.1.5 (https://github.com/llvm/llvm-project 617a15a9eac96088ae5e9134248d8236e34b91b1)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240906/202409061145.AtKjpWFJ-lkp@intel.com/reproduce)
+config: i386-randconfig-006-20240906 (https://download.01.org/0day-ci/archive/20240906/202409061330.a2rRYEMl-lkp@intel.com/config)
+compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240906/202409061330.a2rRYEMl-lkp@intel.com/reproduce)
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202409061145.AtKjpWFJ-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202409061330.a2rRYEMl-lkp@intel.com/
 
 All errors (new ones prefixed by >>):
 
->> drivers/gpu/drm/drm_gem_vram_helper.c:981:13: error: too many arguments to function call, expected 6, have 7
-     978 |         ret = ttm_device_init(&vmm->bdev, &bo_driver, dev->dev,
-         |               ~~~~~~~~~~~~~~~
-     979 |                                  dev->anon_inode->i_mapping,
-     980 |                                  dev->vma_offset_manager,
+   drivers/gpu/drm/drm_gem_vram_helper.c: In function 'drm_vram_mm_init':
+>> drivers/gpu/drm/drm_gem_vram_helper.c:981:34: error: incompatible type for argument 6 of 'ttm_device_init'
      981 |                                  false, true);
-         |                                         ^~~~
-   include/drm/ttm/ttm_device.h:300:5: note: 'ttm_device_init' declared here
-     300 | int ttm_device_init(struct ttm_device *bdev, const struct ttm_device_funcs *funcs,
-         |     ^               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     301 |                     struct device *dev, struct address_space *mapping,
-         |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     302 |                     struct drm_vma_offset_manager *vma_manager,
-         |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         |                                  ^~~~~
+         |                                  |
+         |                                  int
+   In file included from include/drm/ttm/ttm_bo.h:39,
+                    from include/drm/drm_gem_ttm_helper.h:10,
+                    from drivers/gpu/drm/drm_gem_vram_helper.c:13:
+   include/drm/ttm/ttm_device.h:303:56: note: expected 'const struct ttm_device_init_flags' but argument is of type 'int'
      303 |                     const struct ttm_device_init_flags flags);
-         |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   1 error generated.
+         |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+>> drivers/gpu/drm/drm_gem_vram_helper.c:978:15: error: too many arguments to function 'ttm_device_init'
+     978 |         ret = ttm_device_init(&vmm->bdev, &bo_driver, dev->dev,
+         |               ^~~~~~~~~~~~~~~
+   include/drm/ttm/ttm_device.h:300:5: note: declared here
+     300 | int ttm_device_init(struct ttm_device *bdev, const struct ttm_device_funcs *funcs,
+         |     ^~~~~~~~~~~~~~~
 
 
-vim +981 drivers/gpu/drm/drm_gem_vram_helper.c
+vim +/ttm_device_init +981 drivers/gpu/drm/drm_gem_vram_helper.c
 
 6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  969  
 c30b225dba01b4 Thomas Zimmermann 2019-09-11  970  static int drm_vram_mm_init(struct drm_vram_mm *vmm, struct drm_device *dev,
@@ -135,7 +136,7 @@ b0e40e0805221d Thomas Zimmermann 2019-09-11  971  			    uint64_t vram_base, siz
 6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  975  	vmm->vram_base = vram_base;
 6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  976  	vmm->vram_size = vram_size;
 6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  977  
-8af8a109b34fa8 Christian König   2020-10-01  978  	ret = ttm_device_init(&vmm->bdev, &bo_driver, dev->dev,
+8af8a109b34fa8 Christian König   2020-10-01 @978  	ret = ttm_device_init(&vmm->bdev, &bo_driver, dev->dev,
 6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  979  				 dev->anon_inode->i_mapping,
 6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  980  				 dev->vma_offset_manager,
 ee5d2a8e549e90 Christian König   2020-10-24 @981  				 false, true);
