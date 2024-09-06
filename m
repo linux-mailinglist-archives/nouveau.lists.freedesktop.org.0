@@ -2,45 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B613396F0E4
-	for <lists+nouveau@lfdr.de>; Fri,  6 Sep 2024 12:04:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B1E196F0E6
+	for <lists+nouveau@lfdr.de>; Fri,  6 Sep 2024 12:05:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 41B5B10E9F1;
-	Fri,  6 Sep 2024 10:04:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CF43810E9F3;
+	Fri,  6 Sep 2024 10:04:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="WqGLAkJi";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="VnngKZCp";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CDA5610E9F1
- for <nouveau@lists.freedesktop.org>; Fri,  6 Sep 2024 10:04:54 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B24D810E9F3
+ for <nouveau@lists.freedesktop.org>; Fri,  6 Sep 2024 10:04:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1725617094;
+ s=mimecast20190719; t=1725617098;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=RkckzlxdfjjN/kA5IYxa8i47ice8GQ1Zej2l2t2KMzI=;
- b=WqGLAkJiCftvedceqLGaTwKUZ0/ApniLckFLdyzu6/UX40CabvsCVOG+GZvcmsbY7QG6xm
- fy70VT+gNtSTgEWrUW7SYCrbkwC/8IFlhKvLBeM1pY2UfeBgCflg7LedXVQD4ma8ZrBuWl
- MnAQ4+YaluSObqBNtSEiVttWs8DRkM0=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=IT1VbSRzaguA73y4XYPdgjFcTK9TaN4nxZNP2aZlwjY=;
+ b=VnngKZCphvWS1H1w6MrIF/m7dzrAMnEjxfpqamIbc7NPDTWJDyEC1O/gSlRGTQDrNS3Hbt
+ CjNUesF6u6K35OARRBeCXx32tnlWGz4TdYjgSG9xQNT1Jp9if+6367x25/2p+0ihm/qeks
+ bk4WvQgP/r/gKak4HoDCHuPTbG7lssg=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-226-Hn7UWgQRNBKS8EGMHV8K6Q-1; Fri,
- 06 Sep 2024 06:04:51 -0400
-X-MC-Unique: Hn7UWgQRNBKS8EGMHV8K6Q-1
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-131-_EOVaQQtONiCfWO4pustJg-1; Fri,
+ 06 Sep 2024 06:04:55 -0400
+X-MC-Unique: _EOVaQQtONiCfWO4pustJg-1
 Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 8B00019560A3; Fri,  6 Sep 2024 10:04:49 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 3405319560BE; Fri,  6 Sep 2024 10:04:53 +0000 (UTC)
 Received: from hydra.redhat.com (unknown [10.39.193.228])
  by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id A4A501956086; Fri,  6 Sep 2024 10:04:45 +0000 (UTC)
+ id 9F102195608A; Fri,  6 Sep 2024 10:04:49 +0000 (UTC)
 From: Jocelyn Falempe <jfalempe@redhat.com>
 To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
  Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
@@ -50,9 +51,11 @@ To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
  Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
 Cc: Jocelyn Falempe <jfalempe@redhat.com>
-Subject: [PATCH v2 0/3] drm/nouveau: Add drm_panic support for nv50+
-Date: Fri,  6 Sep 2024 12:02:59 +0200
-Message-ID: <20240906100434.1171093-1-jfalempe@redhat.com>
+Subject: [PATCH v2 1/3] drm/panic: Add ABGR2101010 support
+Date: Fri,  6 Sep 2024 12:03:00 +0200
+Message-ID: <20240906100434.1171093-2-jfalempe@redhat.com>
+In-Reply-To: <20240906100434.1171093-1-jfalempe@redhat.com>
+References: <20240906100434.1171093-1-jfalempe@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
 X-Mimecast-Spam-Score: 0
@@ -73,38 +76,41 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This series adds basic drm_panic support for nouveau.
-Patches 1-2 Add missing bits in drm_panic (ABGR2101010, private data for set_pixel())
-Patch 3 registers nouveau to drm_panic, and handle tiling.
-I've tested on a GTX1650, while running Gnome/Wayland desktop.
+Add support for ABGR2101010, used by the nouveau driver.
 
-It should work on other nv50+ cards, but I didn't test them.
+Signed-off-by: Jocelyn Falempe <jfalempe@redhat.com>
+---
+ drivers/gpu/drm/drm_panic.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-To test it, you need to build your kernel with CONFIG_DRM_PANIC=y, and run:
-
-echo c > /proc/sysrq-trigger
-
-or you can enable CONFIG_DRM_PANIC_DEBUG and run:
-
-echo 1 > /sys/kernel/debug/dri/0/drm_panic_plane_0
-
-v2:
- * Rebase and drop already merged patches.
- * Rework the tiling algorithm, using "swizzle" to compute the offset
-   inside the block.
-
-Jocelyn Falempe (3):
-  drm/panic: Add ABGR2101010 support
-  drm/panic: add a private pointer to struct drm_scanout_buffer
-  drm/nouveau: Add drm_panic support for nv50+
-
- drivers/gpu/drm/drm_panic.c             |  10 +++
- drivers/gpu/drm/nouveau/dispnv50/wndw.c | 107 +++++++++++++++++++++++-
- include/drm/drm_panic.h                 |   7 ++
- 3 files changed, 122 insertions(+), 2 deletions(-)
-
-
-base-commit: e8653e63e834e4c7de60b81b8b24deb7bdd3bf56
+diff --git a/drivers/gpu/drm/drm_panic.c b/drivers/gpu/drm/drm_panic.c
+index 74412b7bf936..0a9ecc1380d2 100644
+--- a/drivers/gpu/drm/drm_panic.c
++++ b/drivers/gpu/drm/drm_panic.c
+@@ -209,6 +209,14 @@ static u32 convert_xrgb8888_to_argb2101010(u32 pix)
+ 	return GENMASK(31, 30) /* set alpha bits */ | pix | ((pix >> 8) & 0x00300C03);
+ }
+ 
++static u32 convert_xrgb8888_to_abgr2101010(u32 pix)
++{
++	pix = ((pix & 0x00FF0000) >> 14) |
++	      ((pix & 0x0000FF00) << 4) |
++	      ((pix & 0x000000FF) << 22);
++	return GENMASK(31, 30) /* set alpha bits */ | pix | ((pix >> 8) & 0x00300C03);
++}
++
+ /*
+  * convert_from_xrgb8888 - convert one pixel from xrgb8888 to the desired format
+  * @color: input color, in xrgb8888 format
+@@ -242,6 +250,8 @@ static u32 convert_from_xrgb8888(u32 color, u32 format)
+ 		return convert_xrgb8888_to_xrgb2101010(color);
+ 	case DRM_FORMAT_ARGB2101010:
+ 		return convert_xrgb8888_to_argb2101010(color);
++	case DRM_FORMAT_ABGR2101010:
++		return convert_xrgb8888_to_abgr2101010(color);
+ 	default:
+ 		WARN_ONCE(1, "Can't convert to %p4cc\n", &format);
+ 		return 0;
 -- 
 2.46.0
 
