@@ -2,62 +2,62 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60DBC971B96
-	for <lists+nouveau@lfdr.de>; Mon,  9 Sep 2024 15:50:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82536971BA3
+	for <lists+nouveau@lfdr.de>; Mon,  9 Sep 2024 15:50:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7A93A10E586;
-	Mon,  9 Sep 2024 13:50:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 25D5010E592;
+	Mon,  9 Sep 2024 13:50:58 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Zy9b3D4v";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aUGD/tqU";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
- [209.85.128.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3BBA210E586;
- Mon,  9 Sep 2024 13:50:32 +0000 (UTC)
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-42cb5b3c57eso11591265e9.2; 
- Mon, 09 Sep 2024 06:50:32 -0700 (PDT)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+ [209.85.128.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DD29F10E58F;
+ Mon,  9 Sep 2024 13:50:56 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-42cb1e623d1so15610335e9.0; 
+ Mon, 09 Sep 2024 06:50:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725889830; x=1726494630; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1725889855; x=1726494655; darn=lists.freedesktop.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uTmI7FKnXchw996SUeECY59GrYXxeJtGeoLPHxq544M=;
- b=Zy9b3D4vrPdguBzjeynYKFAkg8deFmbUEZbvcFSZ+utT3i568Fu5XqOaJ/srWoWhEv
- kNKwDBsG6LonEBet+t33AvLrvocgJbmQoVGTZYyHj1gwKPW5c711It2pLMIPhlZqe6hP
- rfHe5bG48i4xqYeGGzbZNaKty6mL98wwGubjtixiZtY27QL8Pzt1vse/w3gln0s7JWPr
- qCJXGiuNCnDcw5Csp9qhc0Q1By46l5Qb6h4IxF6Bs59hIB83RYRlelEgCus0vo+B31Bx
- IaHZLJyot1khEQUOfIaVGY6n7pKa56ESI6DetARuK/ClQqZOu6JDiXGp8CK/W4fvE+WJ
- ynNg==
+ bh=lMG5CBAWeO4ejfahNXtDesCRER8MZqFkLGpgD/QrZx0=;
+ b=aUGD/tqUtnMVXcmpRQ4qspmC/s+VGWryh4vPxE/k/HBovOk2250ETxrAmCW8Hy2MxB
+ blX7H84NxDfRNNgxQxp0EFVqzkuV9tsFfCVbIcoWUpQdWuuOOW0n9v7qlC+ohsuEIEQA
+ oAK3s+lBkryUbRcYQNTbBrBmgtqKxBBGPnnUPk0xSJmDqrMQwxSHuoo0A6soVfyM2lm7
+ YGJJPZR3ZU8DTselUNocG2vmx+dxWtdl8v8HALFPye5bkYqTUkpQ3hwfvhZcG6aZ2+Vv
+ dngAZCs2uo78hoSG/hsBVHGt1uZx5cE3pEmGOQe6wthYRHaUKCts0KmUWWHWvm4k7HUF
+ uL4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725889830; x=1726494630;
+ d=1e100.net; s=20230601; t=1725889855; x=1726494655;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uTmI7FKnXchw996SUeECY59GrYXxeJtGeoLPHxq544M=;
- b=FxJbqd22D4MZxnlZQ+lCDtiAxQmYSOd7dEXuk3rN3pOpFarSSAy8UmRS2ApWLiaoQm
- 0dJrHM8IfXQEa/CrdeqrKKLKA82cLC1y/3R76MWPIGwfVbqwxKsC+EVTt1HCncFGqzMI
- B1MupfPWEhf7qTQ5xXW5Jzt82o7SZAEgWoEcOjTdgKTLWy98hkIYDgP77zFkMsBDFhpT
- 3lkXveB86KavoishvNbyq6hq2QOoE25OGvCfqV7FTiq92D6t7Oj90efyGsLb1usjDNiN
- 2+qJVPoRS/ozBbhU9s9qMiC2uWBNvRVEsZlyJfIXoFat3mgV7N2AQnbr3wBWwZ8lQT/u
- By8A==
+ bh=lMG5CBAWeO4ejfahNXtDesCRER8MZqFkLGpgD/QrZx0=;
+ b=XYpUwkZ23tbQgvczFtKMQc9HEQEq5+bgrm8b8YZZLtlaGpoG6XYVP9XYB49FeZXM+l
+ pU9YVFQtrkg202VC8K5zVM5GLhE5uGj1XKMF4SpWyjhcWHCABqzUReWTiYUQMwVYa9gT
+ KLFpWt+zyxhQrkFK7dFqTHZZ2umQfwb/XgT26wtMtgbablOCTaiosGJf8k3ytV0zANOz
+ TXKT0ZBffg/wWmDeVNK3sGn8K1OR9dFTE0nGSCIrsBuliDgE8ggPk/2lK1JB3wAO3akB
+ b4jbm7B2dz4HvCQJNs1CFPvauKzhrkfcUMwPPyQ47NMZj/eOeCJhse+lEA83329nj3Uo
+ SeGw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUva/4mH/kKhbvtg7x6u4316JuxGSpqJnWFNJcG4D/zIf3f9ipu3IqH+nHzQVnJNat05M96G5z69Gs=@lists.freedesktop.org,
- AJvYcCXyxGAINxU1+Am9S19+eQcdGwrZlsGqKeHaJrMfr4qwqw0gN8Nn0a2v8p8TCGdC4XXt/DpY0dU2TQ==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YykOMnjZTNm0QdUdoSNRHl0B7Ni/FzI4DxvrFzlQF0ONYfH7cB9
- sgngIV3A/QAlc4LNZMSTD3dd6W0MD3yx0QWuLR6JB3NeWYnaWXJr
-X-Google-Smtp-Source: AGHT+IFWznISjjxuV7eQKDlaN9b6a4OoZXrdhN32jKOPKPIhtjTxNr0Q41kQYaOLItLh2+izQfDzHw==
-X-Received: by 2002:a05:600c:19ce:b0:42c:aeff:9766 with SMTP id
- 5b1f17b1804b1-42caeff99aamr49332695e9.20.1725889829441; 
- Mon, 09 Sep 2024 06:50:29 -0700 (PDT)
+ AJvYcCXJjppVVQX3HSLYrtu4mrHdh3srzZ9xFCMhZ9oCTaUuYZ44qGIFe5kCQNaIJfZeF56euq8twP8Slr0=@lists.freedesktop.org,
+ AJvYcCXxzlf7ByS1vtsOILVDC1mqu19TogXOz48nI+OcRh4ZAQau6sv+sJtfmSZQ/MDifVkg6l4gaOAmNQ==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzF5niMmA0vPRL+MGdAUySv0n+iNWOcW5AvKIHk0I55AREhu2Rz
+ lv8hvDH+e8YfNIy+WV+cxZ2XxAu93LKczjVy3AHeLV2Smd0htG0n
+X-Google-Smtp-Source: AGHT+IH7gctIpKVybmTJbCiBDVWk+ue5UJ4VaJ0e/g/b1ur+KjZ/0Qi53vCEo48IGD4SKCIPKcrAhw==
+X-Received: by 2002:a05:600c:4692:b0:428:10d7:a4b1 with SMTP id
+ 5b1f17b1804b1-42c9f9d6f06mr85546235e9.25.1725889854108; 
+ Mon, 09 Sep 2024 06:50:54 -0700 (PDT)
 Received: from orome (p200300e41f29d300f22f74fffe1f3a53.dip0.t-ipconnect.de.
  [2003:e4:1f29:d300:f22f:74ff:fe1f:3a53])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42caeb81ac0sm78365275e9.34.2024.09.09.06.50.27
+ 5b1f17b1804b1-42cabd05496sm89431845e9.27.2024.09.09.06.50.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Sep 2024 06:50:28 -0700 (PDT)
-Date: Mon, 9 Sep 2024 15:50:26 +0200
+ Mon, 09 Sep 2024 06:50:53 -0700 (PDT)
+Date: Mon, 9 Sep 2024 15:50:51 +0200
 From: Thierry Reding <thierry.reding@gmail.com>
 To: Lu Baolu <baolu.lu@linux.intel.com>
 Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
@@ -74,15 +74,15 @@ Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
  linux-tegra@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
  linux-rockchip@lists.infradead.org, linux-media@vger.kernel.org,
  iommu@lists.linux.dev, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 3/3] drm/tegra: Use iommu_paging_domain_alloc()
-Message-ID: <7unmvrhiydje2fqcrmj6flbvdbpexujibatpgoqcqevmuhkcgs@pa62yzobzajj>
+Subject: Re: [PATCH v2 1/3] drm/nouveau/tegra: Use iommu_paging_domain_alloc()
+Message-ID: <zpk3oj47djrrrkxpe6airhiaoe7xr3pvxyqotac2jqmhoerg6h@lp5d5ziiq453>
 References: <20240902014700.66095-1-baolu.lu@linux.intel.com>
- <20240902014700.66095-4-baolu.lu@linux.intel.com>
+ <20240902014700.66095-2-baolu.lu@linux.intel.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="sekau6utgzc3r2ki"
+ protocol="application/pgp-signature"; boundary="cbx2ef5ohko5pqdz"
 Content-Disposition: inline
-In-Reply-To: <20240902014700.66095-4-baolu.lu@linux.intel.com>
+In-Reply-To: <20240902014700.66095-2-baolu.lu@linux.intel.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,47 +98,41 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---sekau6utgzc3r2ki
+--cbx2ef5ohko5pqdz
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 02, 2024 at 09:47:00AM GMT, Lu Baolu wrote:
-> Commit <17de3f5fdd35> ("iommu: Retire bus ops") removes iommu ops from
-> the bus structure. The iommu subsystem no longer relies on bus for
-> operations. So iommu_domain_alloc() interface is no longer relevant.
+On Mon, Sep 02, 2024 at 09:46:58AM GMT, Lu Baolu wrote:
+> In nvkm_device_tegra_probe_iommu(), a paging domain is allocated for @dev
+> and attached to it on success. Use iommu_paging_domain_alloc() to make it
+> explicit.
 >=20
-> Replace iommu_domain_alloc() with iommu_paging_domain_alloc() which takes
-> the physical device from which the host1x_device virtual device was
-> instantiated. This physical device is a common parent to all physical
-> devices that are part of the virtual device.
->=20
-> Suggested-by: Thierry Reding <thierry.reding@gmail.com>
 > Signed-off-by: Lu Baolu <baolu.lu@linux.intel.com>
 > ---
->  drivers/gpu/drm/tegra/drm.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+>  drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
 Acked-by: Thierry Reding <treding@nvidia.com>
 
---sekau6utgzc3r2ki
+--cbx2ef5ohko5pqdz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmbe/SIACgkQ3SOs138+
-s6GivQ/+JSKDqhg5e7WkMv/tttd5OTC46SSL0+cobiyQfyKnv+49GXf27ORgQw1S
-aVk1ecp/nPSd0KksxiAd/ZDwulfWcOZSEVKSNhhm8Ju3WrCAZcDoI7wjiOjhNK4U
-o1kbLg2ly3JhXkEhPuyvfW+1pk6rNt/xcqY5NrpW8Fh6/G1K5AJiC6oCEAsS65Ak
-QejXU8T/A6s4jfBOd3O23td1serVya4AAc+wJzKgGcmVsG6ELwWbJSD0rGX+Ai5a
-vO2IGIt5qzeibQIP/ZSOLX0lacV028ZEc0zCK/0tgoLkk/TiMfraIO6Ay3Ok5wdo
-WiLZ/VYBfsxlQO/IqlgI/WbmhwcTReCK+T46GoyFAW6fvS2TP4YQ0JGJsubrxUby
-zk8Bt9oUwJcAq9LotbPSaXgHgrkbUq1Zg4AX53UoZi6n2ClKsMusqx60Z7kbKBTU
-MefEmbsZaQCoY6PdDZPYHehE08YC3d0RlojHdxwrzJM2UHfn9fCtdD5HQJGnpGxi
-tgNrxCPCUNa7EzE0lqRIkDM3QoBaoxAQVf6Q2uI3BG3HPBowuwXXcTayfrKPJEoP
-IVZHM9lH1aEo6B2iT1zE4oXbNS8PFeJPLkzS4XEZk+Ct0ytaBLLoGykSvvk8xE5h
-oSnbslewV6UY1RVPQyOSGA/kxxwOhbB9hd65dQ87qSyKaXwc1u4=
-=K/dz
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmbe/TsACgkQ3SOs138+
+s6HxRhAAo/V2yRjVbLpppk3RuhOIcoErbyCc0GlXoAWEjqyBXH3YkzOVeaKlu8iR
+cexHENRfvc2/AnQ4DZd43yo3DXB4RL06245qE5NmyTSs1/uzrcwHGrIxYLS2M5NV
+GNRWjLVkVVMzZL8+WAVpZlu5Z4EjJiLYWi9ZAeOrK6Pf3KhAKfzNjVALOoLD6V3A
+qMfXYpQc9yx8QnBJ/sVC6Jz11kUgDGMjz68rr3vyFftxvownjajcwpa6NvkEBaUW
+a1vLHY9T4W4qt0df3VhQM2wmidkF5AFhSNRZvELogwVmVOh06W9sXIe1O79CzJ9d
+vnjemWkF3w/d2qqjzSqdktYKDEwECa+f0LiCs0eYgx8btQkevTLqNoZP7f6vKG+5
+ELXTVH2DHYbzMQXMnrN73uyd2WUtAP9JeoE+rcTQXv4jpkLx8JnV7cenBYTgl3Tv
+xibyj23MiXDiPSX+ZQAs0fMJK9L/MSukej9WyuD95WvqadTCO7qG2DmMcklcoAe9
+ZGIXvgwG429t1ttFF6Gd5FfrizP8cQPZAOQ9YgydfSgUrJRIkJJeIO9G3wcJBy4G
+2kElKIFxevKxizhPmyAFJMoJCl4I2Ma/OnfVNFvuaJPhYqqfU38RxF6sV+JuwdWM
+bg9Bp+0RuHrepTbQn4sGrGK3BLWeeiCoEyECMGc3V5BURxImEfo=
+=IgSG
 -----END PGP SIGNATURE-----
 
---sekau6utgzc3r2ki--
+--cbx2ef5ohko5pqdz--
