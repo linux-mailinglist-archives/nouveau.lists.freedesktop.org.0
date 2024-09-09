@@ -2,65 +2,87 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4088971879
-	for <lists+nouveau@lfdr.de>; Mon,  9 Sep 2024 13:43:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60DBC971B96
+	for <lists+nouveau@lfdr.de>; Mon,  9 Sep 2024 15:50:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4662810E3E6;
-	Mon,  9 Sep 2024 11:43:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7A93A10E586;
+	Mon,  9 Sep 2024 13:50:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="k25e9EqL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Zy9b3D4v";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1182210E38D;
- Mon,  9 Sep 2024 11:43:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1725882191; x=1757418191;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=HWz6DwNqd+5/2bPmYUs32Mg3Wp+Dg3BfRh9BQiyBw7M=;
- b=k25e9EqLWZalSOsxT1rJFZ5fjgdH5YupAOrR3f+e79Wk1SWXgU+sTUTg
- RVEabuRGcsvOh7q9BpigI0LpCRv1o5y9RUH6U+RSs5mmEmgn7p1Wf/ElK
- Pa+v85dkZ85sjtZMk3zUKQCt7owgY5mYC67ghWo9M3jv1SqEtnZZRGEQb
- db0Fw/tV2E8ipF8ftpxh3poTYlT6Gepo3nkTjH8UoukkQ/OaaG5x8rgBV
- Dxq4b7c9fvzcgWuMGXB9gz0K7qAgfjyYFmWE6Z10iJMHigayuuOZdnPFb
- zWOd050xorTvcOnxsojGoUSDqYq4HTPkTIuiNH97SHgvhauJRquUzKjvC g==;
-X-CSE-ConnectionGUID: eu53/lNFSWeprc9yaeRwqA==
-X-CSE-MsgGUID: Rd9n7ZfiRdqDjrFa1X9lXQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11189"; a="47095027"
-X-IronPort-AV: E=Sophos;i="6.10,214,1719903600"; d="scan'208";a="47095027"
-Received: from orviesa002.jf.intel.com ([10.64.159.142])
- by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Sep 2024 04:43:10 -0700
-X-CSE-ConnectionGUID: cpTBspiJSJaX7wyfJ5TaMA==
-X-CSE-MsgGUID: GSYguTXPSAqtLbEX6nCCng==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,214,1719903600"; d="scan'208";a="97353623"
-Received: from lkp-server01.sh.intel.com (HELO 9c6b1c7d3b50) ([10.239.97.150])
- by orviesa002.jf.intel.com with ESMTP; 09 Sep 2024 04:43:08 -0700
-Received: from kbuild by 9c6b1c7d3b50 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1sncnR-000EfC-0z;
- Mon, 09 Sep 2024 11:43:05 +0000
-Date: Mon, 9 Sep 2024 19:42:53 +0800
-From: kernel test robot <lkp@intel.com>
-To: Jocelyn Falempe <jfalempe@redhat.com>,
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Cc: oe-kbuild-all@lists.linux.dev, Jocelyn Falempe <jfalempe@redhat.com>
-Subject: Re: [PATCH v2 3/3] drm/nouveau: Add drm_panic support for nv50+
-Message-ID: <202409091805.3PzxoAY6-lkp@intel.com>
-References: <20240906100434.1171093-4-jfalempe@redhat.com>
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
+ [209.85.128.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3BBA210E586;
+ Mon,  9 Sep 2024 13:50:32 +0000 (UTC)
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-42cb5b3c57eso11591265e9.2; 
+ Mon, 09 Sep 2024 06:50:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1725889830; x=1726494630; darn=lists.freedesktop.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=uTmI7FKnXchw996SUeECY59GrYXxeJtGeoLPHxq544M=;
+ b=Zy9b3D4vrPdguBzjeynYKFAkg8deFmbUEZbvcFSZ+utT3i568Fu5XqOaJ/srWoWhEv
+ kNKwDBsG6LonEBet+t33AvLrvocgJbmQoVGTZYyHj1gwKPW5c711It2pLMIPhlZqe6hP
+ rfHe5bG48i4xqYeGGzbZNaKty6mL98wwGubjtixiZtY27QL8Pzt1vse/w3gln0s7JWPr
+ qCJXGiuNCnDcw5Csp9qhc0Q1By46l5Qb6h4IxF6Bs59hIB83RYRlelEgCus0vo+B31Bx
+ IaHZLJyot1khEQUOfIaVGY6n7pKa56ESI6DetARuK/ClQqZOu6JDiXGp8CK/W4fvE+WJ
+ ynNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725889830; x=1726494630;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uTmI7FKnXchw996SUeECY59GrYXxeJtGeoLPHxq544M=;
+ b=FxJbqd22D4MZxnlZQ+lCDtiAxQmYSOd7dEXuk3rN3pOpFarSSAy8UmRS2ApWLiaoQm
+ 0dJrHM8IfXQEa/CrdeqrKKLKA82cLC1y/3R76MWPIGwfVbqwxKsC+EVTt1HCncFGqzMI
+ B1MupfPWEhf7qTQ5xXW5Jzt82o7SZAEgWoEcOjTdgKTLWy98hkIYDgP77zFkMsBDFhpT
+ 3lkXveB86KavoishvNbyq6hq2QOoE25OGvCfqV7FTiq92D6t7Oj90efyGsLb1usjDNiN
+ 2+qJVPoRS/ozBbhU9s9qMiC2uWBNvRVEsZlyJfIXoFat3mgV7N2AQnbr3wBWwZ8lQT/u
+ By8A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUva/4mH/kKhbvtg7x6u4316JuxGSpqJnWFNJcG4D/zIf3f9ipu3IqH+nHzQVnJNat05M96G5z69Gs=@lists.freedesktop.org,
+ AJvYcCXyxGAINxU1+Am9S19+eQcdGwrZlsGqKeHaJrMfr4qwqw0gN8Nn0a2v8p8TCGdC4XXt/DpY0dU2TQ==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YykOMnjZTNm0QdUdoSNRHl0B7Ni/FzI4DxvrFzlQF0ONYfH7cB9
+ sgngIV3A/QAlc4LNZMSTD3dd6W0MD3yx0QWuLR6JB3NeWYnaWXJr
+X-Google-Smtp-Source: AGHT+IFWznISjjxuV7eQKDlaN9b6a4OoZXrdhN32jKOPKPIhtjTxNr0Q41kQYaOLItLh2+izQfDzHw==
+X-Received: by 2002:a05:600c:19ce:b0:42c:aeff:9766 with SMTP id
+ 5b1f17b1804b1-42caeff99aamr49332695e9.20.1725889829441; 
+ Mon, 09 Sep 2024 06:50:29 -0700 (PDT)
+Received: from orome (p200300e41f29d300f22f74fffe1f3a53.dip0.t-ipconnect.de.
+ [2003:e4:1f29:d300:f22f:74ff:fe1f:3a53])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42caeb81ac0sm78365275e9.34.2024.09.09.06.50.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Sep 2024 06:50:28 -0700 (PDT)
+Date: Mon, 9 Sep 2024 15:50:26 +0200
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Lu Baolu <baolu.lu@linux.intel.com>
+Cc: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
+ Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>, 
+ Daniel Vetter <daniel@ffwll.ch>, Jonathan Hunter <jonathanh@nvidia.com>, 
+ Sandy Huang <hjc@rock-chips.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ Mikko Perttunen <mperttunen@nvidia.com>, Joerg Roedel <joro@8bytes.org>,
+ Will Deacon <will@kernel.org>, 
+ Robin Murphy <robin.murphy@arm.com>, Jason Gunthorpe <jgg@ziepe.ca>, 
+ Kevin Tian <kevin.tian@intel.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, 
+ linux-tegra@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-rockchip@lists.infradead.org, linux-media@vger.kernel.org,
+ iommu@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 3/3] drm/tegra: Use iommu_paging_domain_alloc()
+Message-ID: <7unmvrhiydje2fqcrmj6flbvdbpexujibatpgoqcqevmuhkcgs@pa62yzobzajj>
+References: <20240902014700.66095-1-baolu.lu@linux.intel.com>
+ <20240902014700.66095-4-baolu.lu@linux.intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="sekau6utgzc3r2ki"
 Content-Disposition: inline
-In-Reply-To: <20240906100434.1171093-4-jfalempe@redhat.com>
+In-Reply-To: <20240902014700.66095-4-baolu.lu@linux.intel.com>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,77 +97,48 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Jocelyn,
 
-kernel test robot noticed the following build warnings:
+--sekau6utgzc3r2ki
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-[auto build test WARNING on e8653e63e834e4c7de60b81b8b24deb7bdd3bf56]
+On Mon, Sep 02, 2024 at 09:47:00AM GMT, Lu Baolu wrote:
+> Commit <17de3f5fdd35> ("iommu: Retire bus ops") removes iommu ops from
+> the bus structure. The iommu subsystem no longer relies on bus for
+> operations. So iommu_domain_alloc() interface is no longer relevant.
+>=20
+> Replace iommu_domain_alloc() with iommu_paging_domain_alloc() which takes
+> the physical device from which the host1x_device virtual device was
+> instantiated. This physical device is a common parent to all physical
+> devices that are part of the virtual device.
+>=20
+> Suggested-by: Thierry Reding <thierry.reding@gmail.com>
+> Signed-off-by: Lu Baolu <baolu.lu@linux.intel.com>
+> ---
+>  drivers/gpu/drm/tegra/drm.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Jocelyn-Falempe/drm-panic-Add-ABGR2101010-support/20240906-180717
-base:   e8653e63e834e4c7de60b81b8b24deb7bdd3bf56
-patch link:    https://lore.kernel.org/r/20240906100434.1171093-4-jfalempe%40redhat.com
-patch subject: [PATCH v2 3/3] drm/nouveau: Add drm_panic support for nv50+
-config: x86_64-randconfig-121-20240909 (https://download.01.org/0day-ci/archive/20240909/202409091805.3PzxoAY6-lkp@intel.com/config)
-compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240909/202409091805.3PzxoAY6-lkp@intel.com/reproduce)
+Acked-by: Thierry Reding <treding@nvidia.com>
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202409091805.3PzxoAY6-lkp@intel.com/
+--sekau6utgzc3r2ki
+Content-Type: application/pgp-signature; name="signature.asc"
 
-sparse warnings: (new ones prefixed by >>)
->> drivers/gpu/drm/nouveau/dispnv50/wndw.c:651:66: sparse: sparse: incorrect type in argument 2 (different address spaces) @@     expected void [noderef] __iomem *vaddr_iomem @@     got void *virtual @@
-   drivers/gpu/drm/nouveau/dispnv50/wndw.c:651:66: sparse:     expected void [noderef] __iomem *vaddr_iomem
-   drivers/gpu/drm/nouveau/dispnv50/wndw.c:651:66: sparse:     got void *virtual
+-----BEGIN PGP SIGNATURE-----
 
-vim +651 drivers/gpu/drm/nouveau/dispnv50/wndw.c
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmbe/SIACgkQ3SOs138+
+s6GivQ/+JSKDqhg5e7WkMv/tttd5OTC46SSL0+cobiyQfyKnv+49GXf27ORgQw1S
+aVk1ecp/nPSd0KksxiAd/ZDwulfWcOZSEVKSNhhm8Ju3WrCAZcDoI7wjiOjhNK4U
+o1kbLg2ly3JhXkEhPuyvfW+1pk6rNt/xcqY5NrpW8Fh6/G1K5AJiC6oCEAsS65Ak
+QejXU8T/A6s4jfBOd3O23td1serVya4AAc+wJzKgGcmVsG6ELwWbJSD0rGX+Ai5a
+vO2IGIt5qzeibQIP/ZSOLX0lacV028ZEc0zCK/0tgoLkk/TiMfraIO6Ay3Ok5wdo
+WiLZ/VYBfsxlQO/IqlgI/WbmhwcTReCK+T46GoyFAW6fvS2TP4YQ0JGJsubrxUby
+zk8Bt9oUwJcAq9LotbPSaXgHgrkbUq1Zg4AX53UoZi6n2ClKsMusqx60Z7kbKBTU
+MefEmbsZaQCoY6PdDZPYHehE08YC3d0RlojHdxwrzJM2UHfn9fCtdD5HQJGnpGxi
+tgNrxCPCUNa7EzE0lqRIkDM3QoBaoxAQVf6Q2uI3BG3HPBowuwXXcTayfrKPJEoP
+IVZHM9lH1aEo6B2iT1zE4oXbNS8PFeJPLkzS4XEZk+Ct0ytaBLLoGykSvvk8xE5h
+oSnbslewV6UY1RVPQyOSGA/kxxwOhbB9hd65dQ87qSyKaXwc1u4=
+=K/dz
+-----END PGP SIGNATURE-----
 
-   628	
-   629	static int
-   630	nv50_wndw_get_scanout_buffer(struct drm_plane *plane, struct drm_scanout_buffer *sb)
-   631	{
-   632		struct drm_framebuffer *fb;
-   633		struct nouveau_bo *nvbo;
-   634	
-   635		if (!plane->state || !plane->state->fb)
-   636			return -EINVAL;
-   637	
-   638		fb = plane->state->fb;
-   639		nvbo = nouveau_gem_object(fb->obj[0]);
-   640	
-   641		/* Don't support compressed format, or multiplane yet. */
-   642		if (nvbo->comp || fb->format->num_planes != 1)
-   643			return -EOPNOTSUPP;
-   644	
-   645		if (nouveau_bo_map(nvbo)) {
-   646			pr_warn("nouveau bo map failed, panic won't be displayed\n");
-   647			return -ENOMEM;
-   648		}
-   649	
-   650		if (nvbo->kmap.bo_kmap_type & TTM_BO_MAP_IOMEM_MASK)
- > 651			iosys_map_set_vaddr_iomem(&sb->map[0], nvbo->kmap.virtual);
-   652		else
-   653			iosys_map_set_vaddr(&sb->map[0], nvbo->kmap.virtual);
-   654	
-   655		sb->height = fb->height;
-   656		sb->width = fb->width;
-   657		sb->pitch[0] = fb->pitches[0];
-   658		sb->format = fb->format;
-   659	
-   660		/* If tiling is enabled, use the set_pixel() to display correctly.
-   661		 * Only handle 32bits format for now.
-   662		 */
-   663		if (fb->modifier & 0xf) {
-   664			if (fb->format->cpp[0] != 4)
-   665				return -EOPNOTSUPP;
-   666			sb->private = (void *) fb;
-   667			sb->set_pixel = nv50_set_pixel;
-   668		}
-   669		return 0;
-   670	}
-   671	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+--sekau6utgzc3r2ki--
