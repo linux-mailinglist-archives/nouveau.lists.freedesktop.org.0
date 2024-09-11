@@ -2,138 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6E62CBAB15
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A026CBA988
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E201210EA9C;
-	Sat, 13 Dec 2025 12:41:01 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=vivo.com header.i=@vivo.com header.b="q0Mtd8A2";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6003F10E9EB;
+	Sat, 13 Dec 2025 12:40:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from APC01-SG2-obe.outbound.protection.outlook.com
- (mail-sgaapc01on2050.outbound.protection.outlook.com [40.107.215.50])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 317DD10E84F;
- Thu,  5 Sep 2024 10:22:48 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tFl//SkxHEGhH1JUy5JIvCa2WKDHLJwv6vFoOvKJ4te0YU2VwQ54GpDNh868beViyKwytA16uelB8EFSP8LCicKDXUO+vjTckhLC7gRYbCjq45jebWiklASW9F0fj1zlW/bQ41KorU+tUHzs8deGewZQJ0bligLh9HYQrP9ay/yGz7QCpnarSUEi/ytHnLgslO/9HMHvPd7jwNEo09ikHH98wcB8vi85kJQ9i6TilS6HSUOBVXsFFl0hkaoTegRH6S+5eZDip3eMzey5l3wWaxZQjNYwK2JxDY3qcEq4z3oM6vhWgZ8kbaR9By0HMGjowYt+Lny9jwZDAQuH5aNX5A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rEPKNvrGwgQfwdsWCzQOaciZOOWDsFnQkygZIlbvb2w=;
- b=RY/D5KRftE1eQN/tENc2l2RUYfznrb0V8sFs6f9fKJE3xh3lFBv8yBrKYMUoiSJ7A+PJkAhJ2GTva/TUao2p3m8GYKhZFWf7HAe7BjcQEk0y+lVLsfGQ2myPxLP/hwzOccrZQ3MiIcWk3VoiJ9K6qPYWf/O0qBM1NLVG6il7HP5U+D4CXcwmE/h5onLo/OjmgwTW8S4RRF9zE2Ioi1vIQ3Oh4JIp88qtOjSbQ+bA+tZKisgG3+e8qr7p+70MqyoVQWwfqzffiL0C0ocR9bBdNn/iV2EFmjMpgc5PVjXT8az/uWXL/asMJwUIydaJTh50dznVEp0doVGqqq0/bksN3A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rEPKNvrGwgQfwdsWCzQOaciZOOWDsFnQkygZIlbvb2w=;
- b=q0Mtd8A2jnEpgMIT3d2wYJAMVnSKvqNDgfou91HeiBz2es2cQ5oApj9tFCDrjiMhGsQzf+Gwiuz/ayyp06PO8MIAHb2sS4/HgOZ8Cn2CdmGA9Pi4Q9R4+j0rpVsNPzoIYYBZXZrfEXroCB1IbddOjw+e4DgHa0dIoTHt8yj5mDCpn3QSHQ9iYJlcKHLpzz79ZPxocu6+NRbksBPS8XyeNT0I1hnqTL02qviGWrPKmxpRcQ2r45E9Zeqhw2vjlXDHennEQwMolps7X8IpVp9+/l3Zr1/SgqJZaXJiv5qCDr5aCh4vUY0GfEMOZV1T9JAPcWxii2Vni+zPAuDbdLtFgA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from KL1PR0601MB5487.apcprd06.prod.outlook.com
- (2603:1096:820:bf::14) by KL1PR06MB6865.apcprd06.prod.outlook.com
- (2603:1096:820:10d::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.28; Thu, 5 Sep
- 2024 10:22:42 +0000
-Received: from KL1PR0601MB5487.apcprd06.prod.outlook.com
- ([fe80::2129:59e5:6c67:311f]) by KL1PR0601MB5487.apcprd06.prod.outlook.com
- ([fe80::2129:59e5:6c67:311f%7]) with mapi id 15.20.7918.024; Thu, 5 Sep 2024
- 10:22:42 +0000
-From: Chen Yufan <chenyufan@vivo.com>
-To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
- Ben Skeggs <bskeggs@redhat.com>, Chen Yufan <chenyufan@vivo.com>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-Cc: opensource.kernel@vivo.com
-Subject: [PATCH v1] drm/nouveau/nvkm: Convert to use ERR_CAST()
-Date: Thu,  5 Sep 2024 18:20:30 +0800
-Message-Id: <20240905102106.85283-1-chenyufan@vivo.com>
-X-Mailer: git-send-email 2.39.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI2PR02CA0027.apcprd02.prod.outlook.com
- (2603:1096:4:195::14) To KL1PR0601MB5487.apcprd06.prod.outlook.com
- (2603:1096:820:bf::14)
+X-Greylist: delayed 1187 seconds by postgrey-1.36 at gabe;
+ Wed, 11 Sep 2024 01:18:19 UTC
+Received: from dggsgout12.his.huawei.com (dggsgout12.his.huawei.com
+ [45.249.212.56])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 53D2110E9CB
+ for <nouveau@lists.freedesktop.org>; Wed, 11 Sep 2024 01:18:19 +0000 (UTC)
+Received: from mail.maildlp.com (unknown [172.19.163.235])
+ by dggsgout12.his.huawei.com (SkyGuard) with ESMTP id 4X3Mcz0jvNz4f3jR7
+ for <nouveau@lists.freedesktop.org>; Wed, 11 Sep 2024 08:58:11 +0800 (CST)
+Received: from mail02.huawei.com (unknown [10.116.40.128])
+ by mail.maildlp.com (Postfix) with ESMTP id 7C8291A06D7
+ for <nouveau@lists.freedesktop.org>; Wed, 11 Sep 2024 08:58:26 +0800 (CST)
+Received: from localhost.localdomain (unknown [10.67.175.61])
+ by APP4 (Coremail) with SMTP id gCh0CgDXDMkt6+BmskTrAw--.65200S2;
+ Wed, 11 Sep 2024 08:58:26 +0800 (CST)
+From: Zheng Yejian <zhengyejian@huaweicloud.com>
+To: rostedt@goodmis.org, mhiramat@kernel.org, mathieu.desnoyers@efficios.com,
+ karolherbst@gmail.com, ppaalanen@gmail.com
+Cc: linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org, zhengyejian1@huawei.com
+Subject: [PATCH -next] tracing: Remove TRACE_EVENT_FL_FILTERED logic
+Date: Wed, 11 Sep 2024 09:00:26 +0800
+Message-Id: <20240911010026.2302849-1-zhengyejian@huaweicloud.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: KL1PR0601MB5487:EE_|KL1PR06MB6865:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9d45c253-538f-41e8-29fa-08dccd94ad23
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|7416014|52116014|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?E/HLgOVB3RFI3qxHgUcFk+N/LOD/kx8ywYsyE3iJIy/oXSkKfOEwe6cq9u/d?=
- =?us-ascii?Q?zIf2aim0MJ5HEvDIRj7OzMLWjxKacxrmGYDzqOTNptmec6YWtMZbYUJ/HqR1?=
- =?us-ascii?Q?z1Ek9bcBuSZm8kEBx8/GShiBmtXaErRs+RHwiHuAsB44AqwSMkDU9UWB3E82?=
- =?us-ascii?Q?HLF1SBc/RRFywB+G6oP62TyGN7/CFeg33qjBTdWAh/WcxqaPTDrDLQeL3WZI?=
- =?us-ascii?Q?6Lni1xAKW4q+Fl94ll9HUyyz/kXFHdj+lMhrx+CX0fShJCEcuCFpDU0+RoDK?=
- =?us-ascii?Q?oNJAsoJe7q8cpHagTx4hD2l0qobVlAGhfilAU9m6E7D9uZqZsp5Um3qNrLir?=
- =?us-ascii?Q?JYvsD7vyr4ZVTRVea4MLFY9hRRbAXLsmRkZTkUD9MwNxCkPn0ltcSamu5mmX?=
- =?us-ascii?Q?eI1025l8WENqdbPZgEAyBDxpgXOuczUQTh+J3+h3mrqFIBkVXg1l4s8LqiZd?=
- =?us-ascii?Q?BOTA7O0Pfcq8k/Z9Ni4ek6EAwvEzDDXV21EvVIc1utALwUT81oHbWdtbxmHr?=
- =?us-ascii?Q?3rxx6GhNTvoPrUgkBfKfzo7CKt7TBzgS3i3yLnN3iAGFi7ZEkl+ShDeO1Lu/?=
- =?us-ascii?Q?boEDYNR5FAD/9yA+y5lhPRGvnXMoGGAoRLlUAwq0JKUAOgQDVnt5z67hNff2?=
- =?us-ascii?Q?qI1FKmaTqTwi0Omd3iDb3sVuWqfj+v+WrvLEiqja8Maa8Fowg76fH0gdmFQg?=
- =?us-ascii?Q?POfoD7GXq4w10utbZpDHz7P3RckLeXynLYv2fOkkgaMdAq0sL9OPndc17WiO?=
- =?us-ascii?Q?VU4aaPW2bUxJsmuVyaOzeUKGwdNwEkQov8k4NMaMCCSXe7JLLvdmXSDWBD7H?=
- =?us-ascii?Q?JYFM/QsT5NVaYhH4MX5vi5EBMOcAxWXZg38pTgkLJK8wbSG8tRJ+35Sj5Fho?=
- =?us-ascii?Q?+JLBxlF8dVdTeep7DjZyYeYi2UJz+txnUIsBY472FLI9gMQa3lstafG13onU?=
- =?us-ascii?Q?3uRFZo9lOxMkq/1F6Dmq8cbmsGqI4ANT807A3EgV5DrCcSTlRQ6MP9jBUPxO?=
- =?us-ascii?Q?6K8YffknCDS71o42b2E5I/1tYhcgxszlyoK6QgP0KJw6GPhI8SIP7njdGdHH?=
- =?us-ascii?Q?zOm310zefl9njl5aQeGL1fI5H7QvapNOu82skaIiIdhBs48kuMYxxMIYyAgN?=
- =?us-ascii?Q?ImxOdJMY/sV9Oxuh3HZ+rNr5kQlYKDc9Q/+ypAYK31m2NCNh1RRwfkFWldrs?=
- =?us-ascii?Q?AlynOpkbzhi53zeZWQvdLFD5pu29GiLM11MWYFAtaaBghai39ZE72Dzr7ANm?=
- =?us-ascii?Q?ydpfPPIBOzWk8DVfS1+QOSzPp6MSuKfyGlB6f1s14WPGAdwEA/y3LIjj2zPj?=
- =?us-ascii?Q?KUrpreToTewmmLluw5KhwgugtwFO17ZLQ70D21ZwvaFs2bSA+S5Vl9v+r5JH?=
- =?us-ascii?Q?2SWFD+C7yaT6PrLqCOmHmBtiRONYJDLTXwLYrvTpLh/tn5SwWMUk5UuztHkw?=
- =?us-ascii?Q?+i9jn9CJo+g=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:KL1PR0601MB5487.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7416014)(52116014)(921020)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LhieTlWAvuVblEfWjoUrQbR0boAIeokbni4e+ojvHww31bfuOJ/xjKOdaE2H?=
- =?us-ascii?Q?pXb1YwNN3OR3bjSwZ/OpyLnNOw4Ug+I+e1wDO54Iy8CqAezUNjra+xmUF56h?=
- =?us-ascii?Q?az9jyEcjjdDgFRzO1UEUjgzN+9w58T30W+5fZDnzY9wBV/F/ruMAiXw1Cw2v?=
- =?us-ascii?Q?sZxr3OudYZan3ad6nSxx7ZFmgICi9w3o46dYCfDL0jdF+9Ce3iJTY6Xn+OEI?=
- =?us-ascii?Q?IAtfZ8N63r0wL8vw0+A386CcHc1P/nNGYzKVZQRSPiZ6HM7jUQLE0uYYB2No?=
- =?us-ascii?Q?mAE5/ybfJbuzcu6vSXO0fuMvMMVBRl2rNiqkqnJRgGP6Ph5Ja4XpyKDMA3pV?=
- =?us-ascii?Q?DYxKsgyGVL/gMqMsGZsW+IEq2TSGzYFhCt9hbQl6gDDi7yshi0fN8F/TgLrg?=
- =?us-ascii?Q?eEO5EcOPBcHqct4FZyy/GophX6ToI+xkrBeVeWikHfpap1h2bjcSHzT+TN4D?=
- =?us-ascii?Q?A1kwgpsCRuPK+y/Afy1/Fj8BwzLiWsD0bcqOMBvXaygMIJ7Pzoy8tSjsWJyP?=
- =?us-ascii?Q?zg8wsEEM011lRhMUhmxIbLKY0T8YC8bhr7L+UjYDuMEZ3Z71mUj13O9Rg/Fr?=
- =?us-ascii?Q?YTkSAYUDKvMtcXghvQEn4AVUyDks8SZj3qBBRyXzrd1toDw6SY4kEN8ClBqK?=
- =?us-ascii?Q?Cq0SWXqX2eFTtFMA483WoWXcGrANSwYr5CAkmlhqFtTk6iQGv7O9PuSKU6Xf?=
- =?us-ascii?Q?/RrmzrS0RQWUROOiaNnM4x+E8rvNwzJN55E1lcHhIW22XmyD/Lhv5vgtTX+E?=
- =?us-ascii?Q?aQH2RBHRI2B8OBXH2+we7wXDKI07LumQd8AbFWQIWK8YluZbLHWcvD54mOjb?=
- =?us-ascii?Q?Xlu6OhaP3Kdgd9RfCef1gkv6tb9H69ylpG8MBCQSd38OJg9Q4OmZTfac4n5v?=
- =?us-ascii?Q?mL97MXAeVb2Lfp2ENWNZ5gv9EEn2tTfUDIHU2r8u1U2dyFOsZGlKfksAVLNw?=
- =?us-ascii?Q?xZa9C6zBtLKInHgQ3HUJZfz9Fkb6jL9EErDrpiz2XP/QDPqZwG9DuMLuj1RX?=
- =?us-ascii?Q?7dZ2DH7qmgCySL+T7CODw5VyYqkhzAa3lSthM6t/oteBws0a1rXZpbKM2J6U?=
- =?us-ascii?Q?Dd5UadWIGRs8YA8FencNLXsoMGADMGFd+7Gnfw1jeRiez4okP3Cq66KKAmed?=
- =?us-ascii?Q?Q4TCDZiWOeaCMYJjH9HCu1KJx1/ajgA6aPuKePuMbClSdBdkbcXuFr3ug3HE?=
- =?us-ascii?Q?4jrv5t0zlDY1pIvQ88F5ypYRAnIXx53jmXz2c/qAi0/AKp3qmV2NiKhQhgDO?=
- =?us-ascii?Q?Tm/HQ1/GOI01PsfOAsaBXhbnBvfjdyV8LB1JBYSrn7w/dauzwf2vknSdePqH?=
- =?us-ascii?Q?rbmbqaARdSqukXPEdhyyQzW69xaGGh93nFjn49J/TUSa7+F3n2VatTmJ49q6?=
- =?us-ascii?Q?fzsICXAQd0ht54QmrpIvZTLQzdoLac3lQtEzzgc0y4qi2SxT/W+DUUWs7k31?=
- =?us-ascii?Q?sO7JEaOEdd6YBOVIPBXB7fW4H+ptjUH1nAJcoEv+S36UOVR8VprWSqFVxxAv?=
- =?us-ascii?Q?pvEZBDmlm2Ey3IVimYJ9H85XDR/F7ZWqABZgGgkTc31j1j9Rt8ffbhR+0Kg7?=
- =?us-ascii?Q?SE7JrLJkkh8TBONxKBWMHYt8e6gQMomBdtvv9bTp?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d45c253-538f-41e8-29fa-08dccd94ad23
-X-MS-Exchange-CrossTenant-AuthSource: KL1PR0601MB5487.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Sep 2024 10:22:42.5416 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5i7fUO9tLGfW87ZfvlYsgYmtBX0Sz+m+HrRQYAfUFvblQGarBn/xpl8DJDj6TleC5s/4cogXH94NriM1C9yWJw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR06MB6865
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:48 +0000
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: gCh0CgDXDMkt6+BmskTrAw--.65200S2
+X-Coremail-Antispam: 1UD129KBjvAXoW3uw1ktFWfZr43Cry5Kw4UJwb_yoW8Ar1fJo
+ W3X39Yvwn7try8A3y3KayvqFs8Zrn0gr90yr4xtr4DuF1jkw1UZrWxAws0yFn8Xwn0kan8
+ Z3WDJa1DJrs5Ja95n29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+ AaLaJ3UjIYCTnIWjp_UUU5E7kC6x804xWl14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK
+ 8VAvwI8IcIk0rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4
+ AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF
+ 7I0E14v26F4j6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x
+ 0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG
+ 6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFV
+ Cjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JMxkF7I0En4kS14v26r1q6r43MxAIw28IcxkI
+ 7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxV
+ Cjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY
+ 6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6x
+ AIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY
+ 1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxUF1v3UUUUU
+X-CM-SenderInfo: x2kh0w51hmxt3q6k3tpzhluzxrxghudrp/
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:45 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -148,56 +67,435 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Instead of directly casting and returning (void *) pointer, use ERR_CAST
-to explicitly return an error-valued pointer. This makes the error handling
-more explicit and improves code clarity.
+After commit dcb0b5575d24 ("tracing: Remove TRACE_EVENT_FL_USE_CALL_FILTER
+ logic"), no one's going to set the TRACE_EVENT_FL_FILTERED or change the
+call->filter, so remove related logic.
 
-Signed-off-by: Chen Yufan <chenyufan@vivo.com>
+Signed-off-by: Zheng Yejian <zhengyejian@huaweicloud.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c | 2 +-
- drivers/gpu/drm/nouveau/nvkm/engine/dma/user.c  | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c  | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ include/linux/trace_events.h         |  4 ---
+ kernel/trace/trace.c                 | 44 ++++++----------------------
+ kernel/trace/trace.h                 |  4 ---
+ kernel/trace/trace_branch.c          |  4 +--
+ kernel/trace/trace_events.c          |  2 --
+ kernel/trace/trace_functions_graph.c |  8 ++---
+ kernel/trace/trace_hwlat.c           |  4 +--
+ kernel/trace/trace_mmiotrace.c       |  8 ++---
+ kernel/trace/trace_osnoise.c         | 12 ++------
+ kernel/trace/trace_sched_wakeup.c    |  8 ++---
+ 10 files changed, 20 insertions(+), 78 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
-index 027867c2a8c5..266857ace7c7 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/r535.c
-@@ -646,7 +646,7 @@ r535_conn_new(struct nvkm_disp *disp, u32 id)
- 	ctrl = nvkm_gsp_rm_ctrl_get(&disp->rm.objcom,
- 				    NV0073_CTRL_CMD_SPECIFIC_GET_CONNECTOR_DATA, sizeof(*ctrl));
- 	if (IS_ERR(ctrl))
--		return (void *)ctrl;
-+		return ERR_CAST(ctrl);
+diff --git a/include/linux/trace_events.h b/include/linux/trace_events.h
+index 42bedcddd511..f8f2e52653df 100644
+--- a/include/linux/trace_events.h
++++ b/include/linux/trace_events.h
+@@ -326,7 +326,6 @@ void *trace_event_buffer_reserve(struct trace_event_buffer *fbuffer,
+ void trace_event_buffer_commit(struct trace_event_buffer *fbuffer);
  
- 	ctrl->subDeviceInstance = 0;
- 	ctrl->displayId = BIT(id);
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/dma/user.c b/drivers/gpu/drm/nouveau/nvkm/engine/dma/user.c
-index 797131ed7d67..ef02e61dda0c 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/dma/user.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/dma/user.c
-@@ -38,7 +38,7 @@ nvkm_dmaobj_search(struct nvkm_client *client, u64 handle)
+ enum {
+-	TRACE_EVENT_FL_FILTERED_BIT,
+ 	TRACE_EVENT_FL_CAP_ANY_BIT,
+ 	TRACE_EVENT_FL_NO_SET_FILTER_BIT,
+ 	TRACE_EVENT_FL_IGNORE_ENABLE_BIT,
+@@ -341,7 +340,6 @@ enum {
  
- 	object = nvkm_object_search(client, handle, &nvkm_dmaobj_func);
- 	if (IS_ERR(object))
--		return (void *)object;
-+		return ERR_CAST(object);
- 
- 	return nvkm_dmaobj(object);
+ /*
+  * Event flags:
+- *  FILTERED	  - The event has a filter attached
+  *  CAP_ANY	  - Any user can enable for perf
+  *  NO_SET_FILTER - Set when filter has error and is to be ignored
+  *  IGNORE_ENABLE - For trace internal events, do not enable with debugfs file
+@@ -356,7 +354,6 @@ enum {
+  *                   to a tracepoint yet, then it is cleared when it is.
+  */
+ enum {
+-	TRACE_EVENT_FL_FILTERED		= (1 << TRACE_EVENT_FL_FILTERED_BIT),
+ 	TRACE_EVENT_FL_CAP_ANY		= (1 << TRACE_EVENT_FL_CAP_ANY_BIT),
+ 	TRACE_EVENT_FL_NO_SET_FILTER	= (1 << TRACE_EVENT_FL_NO_SET_FILTER_BIT),
+ 	TRACE_EVENT_FL_IGNORE_ENABLE	= (1 << TRACE_EVENT_FL_IGNORE_ENABLE_BIT),
+@@ -381,7 +378,6 @@ struct trace_event_call {
+ 	};
+ 	struct trace_event	event;
+ 	char			*print_fmt;
+-	struct event_filter	*filter;
+ 	/*
+ 	 * Static events can disappear with modules,
+ 	 * where as dynamic ones need their own ref count.
+diff --git a/kernel/trace/trace.c b/kernel/trace/trace.c
+index c390de3a4515..b06f381f1989 100644
+--- a/kernel/trace/trace.c
++++ b/kernel/trace/trace.c
+@@ -570,19 +570,6 @@ int tracing_check_open_get_tr(struct trace_array *tr)
+ 	return 0;
  }
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c
-index cf490ff2b9f1..c45914f30c3d 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/uvmm.c
-@@ -37,7 +37,7 @@ nvkm_uvmm_search(struct nvkm_client *client, u64 handle)
  
- 	object = nvkm_object_search(client, handle, &nvkm_uvmm);
- 	if (IS_ERR(object))
--		return (void *)object;
-+		return ERR_CAST(object);
+-int call_filter_check_discard(struct trace_event_call *call, void *rec,
+-			      struct trace_buffer *buffer,
+-			      struct ring_buffer_event *event)
+-{
+-	if (unlikely(call->flags & TRACE_EVENT_FL_FILTERED) &&
+-	    !filter_match_preds(call->filter, rec)) {
+-		__trace_event_discard_commit(buffer, event);
+-		return 1;
+-	}
+-
+-	return 0;
+-}
+-
+ /**
+  * trace_find_filtered_pid - check if a pid exists in a filtered_pid list
+  * @filtered_pids: The list of pids to check
+@@ -2866,7 +2853,6 @@ void
+ trace_function(struct trace_array *tr, unsigned long ip, unsigned long
+ 	       parent_ip, unsigned int trace_ctx)
+ {
+-	struct trace_event_call *call = &event_function;
+ 	struct trace_buffer *buffer = tr->array_buffer.buffer;
+ 	struct ring_buffer_event *event;
+ 	struct ftrace_entry *entry;
+@@ -2879,11 +2865,9 @@ trace_function(struct trace_array *tr, unsigned long ip, unsigned long
+ 	entry->ip			= ip;
+ 	entry->parent_ip		= parent_ip;
  
- 	return nvkm_vmm_ref(nvkm_uvmm(object)->vmm);
+-	if (!call_filter_check_discard(call, entry, buffer, event)) {
+-		if (static_branch_unlikely(&trace_function_exports_enabled))
+-			ftrace_exports(event, TRACE_EXPORT_FUNCTION);
+-		__buffer_unlock_commit(buffer, event);
+-	}
++	if (static_branch_unlikely(&trace_function_exports_enabled))
++		ftrace_exports(event, TRACE_EXPORT_FUNCTION);
++	__buffer_unlock_commit(buffer, event);
  }
+ 
+ #ifdef CONFIG_STACKTRACE
+@@ -2909,7 +2893,6 @@ static void __ftrace_trace_stack(struct trace_buffer *buffer,
+ 				 unsigned int trace_ctx,
+ 				 int skip, struct pt_regs *regs)
+ {
+-	struct trace_event_call *call = &event_kernel_stack;
+ 	struct ring_buffer_event *event;
+ 	unsigned int size, nr_entries;
+ 	struct ftrace_stack *fstack;
+@@ -2963,8 +2946,7 @@ static void __ftrace_trace_stack(struct trace_buffer *buffer,
+ 	memcpy(&entry->caller, fstack->calls,
+ 	       flex_array_size(entry, caller, nr_entries));
+ 
+-	if (!call_filter_check_discard(call, entry, buffer, event))
+-		__buffer_unlock_commit(buffer, event);
++	__buffer_unlock_commit(buffer, event);
+ 
+  out:
+ 	/* Again, don't let gcc optimize things here */
+@@ -3037,7 +3019,6 @@ static void
+ ftrace_trace_userstack(struct trace_array *tr,
+ 		       struct trace_buffer *buffer, unsigned int trace_ctx)
+ {
+-	struct trace_event_call *call = &event_user_stack;
+ 	struct ring_buffer_event *event;
+ 	struct userstack_entry *entry;
+ 
+@@ -3071,8 +3052,7 @@ ftrace_trace_userstack(struct trace_array *tr,
+ 	memset(&entry->caller, 0, sizeof(entry->caller));
+ 
+ 	stack_trace_save_user(entry->caller, FTRACE_STACK_ENTRIES);
+-	if (!call_filter_check_discard(call, entry, buffer, event))
+-		__buffer_unlock_commit(buffer, event);
++	__buffer_unlock_commit(buffer, event);
+ 
+  out_drop_count:
+ 	__this_cpu_dec(user_stack_count);
+@@ -3241,7 +3221,6 @@ static void trace_printk_start_stop_comm(int enabled)
+  */
+ int trace_vbprintk(unsigned long ip, const char *fmt, va_list args)
+ {
+-	struct trace_event_call *call = &event_bprint;
+ 	struct ring_buffer_event *event;
+ 	struct trace_buffer *buffer;
+ 	struct trace_array *tr = &global_trace;
+@@ -3282,10 +3261,8 @@ int trace_vbprintk(unsigned long ip, const char *fmt, va_list args)
+ 	entry->fmt			= fmt;
+ 
+ 	memcpy(entry->buf, tbuffer, sizeof(u32) * len);
+-	if (!call_filter_check_discard(call, entry, buffer, event)) {
+-		__buffer_unlock_commit(buffer, event);
+-		ftrace_trace_stack(tr, buffer, trace_ctx, 6, NULL);
+-	}
++	__buffer_unlock_commit(buffer, event);
++	ftrace_trace_stack(tr, buffer, trace_ctx, 6, NULL);
+ 
+ out:
+ 	ring_buffer_nest_end(buffer);
+@@ -3305,7 +3282,6 @@ static int
+ __trace_array_vprintk(struct trace_buffer *buffer,
+ 		      unsigned long ip, const char *fmt, va_list args)
+ {
+-	struct trace_event_call *call = &event_print;
+ 	struct ring_buffer_event *event;
+ 	int len = 0, size;
+ 	struct print_entry *entry;
+@@ -3340,10 +3316,8 @@ __trace_array_vprintk(struct trace_buffer *buffer,
+ 	entry->ip = ip;
+ 
+ 	memcpy(&entry->buf, tbuffer, len + 1);
+-	if (!call_filter_check_discard(call, entry, buffer, event)) {
+-		__buffer_unlock_commit(buffer, event);
+-		ftrace_trace_stack(&global_trace, buffer, trace_ctx, 6, NULL);
+-	}
++	__buffer_unlock_commit(buffer, event);
++	ftrace_trace_stack(&global_trace, buffer, trace_ctx, 6, NULL);
+ 
+ out:
+ 	ring_buffer_nest_end(buffer);
+diff --git a/kernel/trace/trace.h b/kernel/trace/trace.h
+index 4f448ab2d1e7..f5883bb85864 100644
+--- a/kernel/trace/trace.h
++++ b/kernel/trace/trace.h
+@@ -1427,10 +1427,6 @@ struct trace_subsystem_dir {
+ 	int				nr_events;
+ };
+ 
+-extern int call_filter_check_discard(struct trace_event_call *call, void *rec,
+-				     struct trace_buffer *buffer,
+-				     struct ring_buffer_event *event);
+-
+ void trace_buffer_unlock_commit_regs(struct trace_array *tr,
+ 				     struct trace_buffer *buffer,
+ 				     struct ring_buffer_event *event,
+diff --git a/kernel/trace/trace_branch.c b/kernel/trace/trace_branch.c
+index e47fdb4c92fb..0f24eca449bf 100644
+--- a/kernel/trace/trace_branch.c
++++ b/kernel/trace/trace_branch.c
+@@ -30,7 +30,6 @@ static struct trace_array *branch_tracer;
+ static void
+ probe_likely_condition(struct ftrace_likely_data *f, int val, int expect)
+ {
+-	struct trace_event_call *call = &event_branch;
+ 	struct trace_array *tr = branch_tracer;
+ 	struct trace_buffer *buffer;
+ 	struct trace_array_cpu *data;
+@@ -82,8 +81,7 @@ probe_likely_condition(struct ftrace_likely_data *f, int val, int expect)
+ 	entry->line = f->data.line;
+ 	entry->correct = val == expect;
+ 
+-	if (!call_filter_check_discard(call, entry, buffer, event))
+-		trace_buffer_unlock_commit_nostack(buffer, event);
++	trace_buffer_unlock_commit_nostack(buffer, event);
+ 
+  out:
+ 	current->trace_recursion &= ~TRACE_BRANCH_BIT;
+diff --git a/kernel/trace/trace_events.c b/kernel/trace/trace_events.c
+index 7266ec2a4eea..77e68efbd43e 100644
+--- a/kernel/trace/trace_events.c
++++ b/kernel/trace/trace_events.c
+@@ -3149,8 +3149,6 @@ static void __trace_remove_event_call(struct trace_event_call *call)
+ {
+ 	event_remove(call);
+ 	trace_destroy_fields(call);
+-	free_event_filter(call->filter);
+-	call->filter = NULL;
+ }
+ 
+ static int probe_remove_event_call(struct trace_event_call *call)
+diff --git a/kernel/trace/trace_functions_graph.c b/kernel/trace/trace_functions_graph.c
+index a569daaac4c4..ab57ec78ca04 100644
+--- a/kernel/trace/trace_functions_graph.c
++++ b/kernel/trace/trace_functions_graph.c
+@@ -102,7 +102,6 @@ int __trace_graph_entry(struct trace_array *tr,
+ 				struct ftrace_graph_ent *trace,
+ 				unsigned int trace_ctx)
+ {
+-	struct trace_event_call *call = &event_funcgraph_entry;
+ 	struct ring_buffer_event *event;
+ 	struct trace_buffer *buffer = tr->array_buffer.buffer;
+ 	struct ftrace_graph_ent_entry *entry;
+@@ -113,8 +112,7 @@ int __trace_graph_entry(struct trace_array *tr,
+ 		return 0;
+ 	entry	= ring_buffer_event_data(event);
+ 	entry->graph_ent			= *trace;
+-	if (!call_filter_check_discard(call, entry, buffer, event))
+-		trace_buffer_unlock_commit_nostack(buffer, event);
++	trace_buffer_unlock_commit_nostack(buffer, event);
+ 
+ 	return 1;
+ }
+@@ -223,7 +221,6 @@ void __trace_graph_return(struct trace_array *tr,
+ 				struct ftrace_graph_ret *trace,
+ 				unsigned int trace_ctx)
+ {
+-	struct trace_event_call *call = &event_funcgraph_exit;
+ 	struct ring_buffer_event *event;
+ 	struct trace_buffer *buffer = tr->array_buffer.buffer;
+ 	struct ftrace_graph_ret_entry *entry;
+@@ -234,8 +231,7 @@ void __trace_graph_return(struct trace_array *tr,
+ 		return;
+ 	entry	= ring_buffer_event_data(event);
+ 	entry->ret				= *trace;
+-	if (!call_filter_check_discard(call, entry, buffer, event))
+-		trace_buffer_unlock_commit_nostack(buffer, event);
++	trace_buffer_unlock_commit_nostack(buffer, event);
+ }
+ 
+ void trace_graph_return(struct ftrace_graph_ret *trace,
+diff --git a/kernel/trace/trace_hwlat.c b/kernel/trace/trace_hwlat.c
+index b791524a6536..fcd5e8c91669 100644
+--- a/kernel/trace/trace_hwlat.c
++++ b/kernel/trace/trace_hwlat.c
+@@ -130,7 +130,6 @@ static bool hwlat_busy;
+ static void trace_hwlat_sample(struct hwlat_sample *sample)
+ {
+ 	struct trace_array *tr = hwlat_trace;
+-	struct trace_event_call *call = &event_hwlat;
+ 	struct trace_buffer *buffer = tr->array_buffer.buffer;
+ 	struct ring_buffer_event *event;
+ 	struct hwlat_entry *entry;
+@@ -148,8 +147,7 @@ static void trace_hwlat_sample(struct hwlat_sample *sample)
+ 	entry->nmi_count		= sample->nmi_count;
+ 	entry->count			= sample->count;
+ 
+-	if (!call_filter_check_discard(call, entry, buffer, event))
+-		trace_buffer_unlock_commit_nostack(buffer, event);
++	trace_buffer_unlock_commit_nostack(buffer, event);
+ }
+ 
+ /* Macros to encapsulate the time capturing infrastructure */
+diff --git a/kernel/trace/trace_mmiotrace.c b/kernel/trace/trace_mmiotrace.c
+index 64e77b513697..ba5858866b2f 100644
+--- a/kernel/trace/trace_mmiotrace.c
++++ b/kernel/trace/trace_mmiotrace.c
+@@ -294,7 +294,6 @@ static void __trace_mmiotrace_rw(struct trace_array *tr,
+ 				struct trace_array_cpu *data,
+ 				struct mmiotrace_rw *rw)
+ {
+-	struct trace_event_call *call = &event_mmiotrace_rw;
+ 	struct trace_buffer *buffer = tr->array_buffer.buffer;
+ 	struct ring_buffer_event *event;
+ 	struct trace_mmiotrace_rw *entry;
+@@ -310,8 +309,7 @@ static void __trace_mmiotrace_rw(struct trace_array *tr,
+ 	entry	= ring_buffer_event_data(event);
+ 	entry->rw			= *rw;
+ 
+-	if (!call_filter_check_discard(call, entry, buffer, event))
+-		trace_buffer_unlock_commit(tr, buffer, event, trace_ctx);
++	trace_buffer_unlock_commit(tr, buffer, event, trace_ctx);
+ }
+ 
+ void mmio_trace_rw(struct mmiotrace_rw *rw)
+@@ -325,7 +323,6 @@ static void __trace_mmiotrace_map(struct trace_array *tr,
+ 				struct trace_array_cpu *data,
+ 				struct mmiotrace_map *map)
+ {
+-	struct trace_event_call *call = &event_mmiotrace_map;
+ 	struct trace_buffer *buffer = tr->array_buffer.buffer;
+ 	struct ring_buffer_event *event;
+ 	struct trace_mmiotrace_map *entry;
+@@ -341,8 +338,7 @@ static void __trace_mmiotrace_map(struct trace_array *tr,
+ 	entry	= ring_buffer_event_data(event);
+ 	entry->map			= *map;
+ 
+-	if (!call_filter_check_discard(call, entry, buffer, event))
+-		trace_buffer_unlock_commit(tr, buffer, event, trace_ctx);
++	trace_buffer_unlock_commit(tr, buffer, event, trace_ctx);
+ }
+ 
+ void mmio_trace_mapping(struct mmiotrace_map *map)
+diff --git a/kernel/trace/trace_osnoise.c b/kernel/trace/trace_osnoise.c
+index 1c11cb7d01ae..029019d2613c 100644
+--- a/kernel/trace/trace_osnoise.c
++++ b/kernel/trace/trace_osnoise.c
+@@ -499,7 +499,6 @@ static void print_osnoise_headers(struct seq_file *s)
+ static void
+ __trace_osnoise_sample(struct osnoise_sample *sample, struct trace_buffer *buffer)
+ {
+-	struct trace_event_call *call = &event_osnoise;
+ 	struct ring_buffer_event *event;
+ 	struct osnoise_entry *entry;
+ 
+@@ -517,8 +516,7 @@ __trace_osnoise_sample(struct osnoise_sample *sample, struct trace_buffer *buffe
+ 	entry->softirq_count	= sample->softirq_count;
+ 	entry->thread_count	= sample->thread_count;
+ 
+-	if (!call_filter_check_discard(call, entry, buffer, event))
+-		trace_buffer_unlock_commit_nostack(buffer, event);
++	trace_buffer_unlock_commit_nostack(buffer, event);
+ }
+ 
+ /*
+@@ -578,7 +576,6 @@ static void print_timerlat_headers(struct seq_file *s)
+ static void
+ __trace_timerlat_sample(struct timerlat_sample *sample, struct trace_buffer *buffer)
+ {
+-	struct trace_event_call *call = &event_osnoise;
+ 	struct ring_buffer_event *event;
+ 	struct timerlat_entry *entry;
+ 
+@@ -591,8 +588,7 @@ __trace_timerlat_sample(struct timerlat_sample *sample, struct trace_buffer *buf
+ 	entry->context			= sample->context;
+ 	entry->timer_latency		= sample->timer_latency;
+ 
+-	if (!call_filter_check_discard(call, entry, buffer, event))
+-		trace_buffer_unlock_commit_nostack(buffer, event);
++	trace_buffer_unlock_commit_nostack(buffer, event);
+ }
+ 
+ /*
+@@ -654,7 +650,6 @@ static void timerlat_save_stack(int skip)
+ static void
+ __timerlat_dump_stack(struct trace_buffer *buffer, struct trace_stack *fstack, unsigned int size)
+ {
+-	struct trace_event_call *call = &event_osnoise;
+ 	struct ring_buffer_event *event;
+ 	struct stack_entry *entry;
+ 
+@@ -668,8 +663,7 @@ __timerlat_dump_stack(struct trace_buffer *buffer, struct trace_stack *fstack, u
+ 	memcpy(&entry->caller, fstack->calls, size);
+ 	entry->size = fstack->nr_entries;
+ 
+-	if (!call_filter_check_discard(call, entry, buffer, event))
+-		trace_buffer_unlock_commit_nostack(buffer, event);
++	trace_buffer_unlock_commit_nostack(buffer, event);
+ }
+ 
+ /*
+diff --git a/kernel/trace/trace_sched_wakeup.c b/kernel/trace/trace_sched_wakeup.c
+index ae2ace5e515a..d6c7f18daa15 100644
+--- a/kernel/trace/trace_sched_wakeup.c
++++ b/kernel/trace/trace_sched_wakeup.c
+@@ -378,7 +378,6 @@ tracing_sched_switch_trace(struct trace_array *tr,
+ 			   struct task_struct *next,
+ 			   unsigned int trace_ctx)
+ {
+-	struct trace_event_call *call = &event_context_switch;
+ 	struct trace_buffer *buffer = tr->array_buffer.buffer;
+ 	struct ring_buffer_event *event;
+ 	struct ctx_switch_entry *entry;
+@@ -396,8 +395,7 @@ tracing_sched_switch_trace(struct trace_array *tr,
+ 	entry->next_state		= task_state_index(next);
+ 	entry->next_cpu	= task_cpu(next);
+ 
+-	if (!call_filter_check_discard(call, entry, buffer, event))
+-		trace_buffer_unlock_commit(tr, buffer, event, trace_ctx);
++	trace_buffer_unlock_commit(tr, buffer, event, trace_ctx);
+ }
+ 
+ static void
+@@ -406,7 +404,6 @@ tracing_sched_wakeup_trace(struct trace_array *tr,
+ 			   struct task_struct *curr,
+ 			   unsigned int trace_ctx)
+ {
+-	struct trace_event_call *call = &event_wakeup;
+ 	struct ring_buffer_event *event;
+ 	struct ctx_switch_entry *entry;
+ 	struct trace_buffer *buffer = tr->array_buffer.buffer;
+@@ -424,8 +421,7 @@ tracing_sched_wakeup_trace(struct trace_array *tr,
+ 	entry->next_state		= task_state_index(wakee);
+ 	entry->next_cpu			= task_cpu(wakee);
+ 
+-	if (!call_filter_check_discard(call, entry, buffer, event))
+-		trace_buffer_unlock_commit(tr, buffer, event, trace_ctx);
++	trace_buffer_unlock_commit(tr, buffer, event, trace_ctx);
+ }
+ 
+ static void notrace
 -- 
-2.39.0
+2.25.1
 
