@@ -2,61 +2,93 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1752C9755B7
-	for <lists+nouveau@lfdr.de>; Wed, 11 Sep 2024 16:39:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AF16976717
+	for <lists+nouveau@lfdr.de>; Thu, 12 Sep 2024 12:58:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A112A10E0B4;
-	Wed, 11 Sep 2024 14:39:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5C96010E8A9;
+	Thu, 12 Sep 2024 10:58:44 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ExjFngwN";
+	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com
- [209.85.210.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C7B5F10E0B4;
- Wed, 11 Sep 2024 14:39:31 +0000 (UTC)
-Received: by mail-ot1-f42.google.com with SMTP id
- 46e09a7af769-70f645a30dcso4562163a34.3; 
- Wed, 11 Sep 2024 07:39:31 -0700 (PDT)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3BBB410E99E
+ for <nouveau@lists.freedesktop.org>; Thu, 12 Sep 2024 10:58:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1726138722;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=8KfxXIJl6sSUrt0oCskygd0emWR47w0CtNjllXkmzZ0=;
+ b=ExjFngwNQP1KQLbhOMQT3M/CettuVzpWFrDzG7WYyZtefYDOZ4GC9ckBWrYby6oPdmcoOf
+ 7liv0syfJgPCOE6YbjkZ17wZa4SyTcCYIKQAZmVOq2o+ZDdIkfodsSOGvpqFvLi+874BMj
+ YGrFBjjnF4aQviBGyQ7Lo897u9aYkGM=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-538-P-wEO29hP9uyETPKqYtN5Q-1; Thu, 12 Sep 2024 06:58:40 -0400
+X-MC-Unique: P-wEO29hP9uyETPKqYtN5Q-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-42cb33e6299so5066385e9.2
+ for <nouveau@lists.freedesktop.org>; Thu, 12 Sep 2024 03:58:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726065571; x=1726670371;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Jh6Z8MEnk8715rYAo3KB0ViNTJYGHgy4p/+qql2rFWw=;
- b=mcVfkSFEjfnSet1y+Z25c6BIFlADSp7Ya71EvANNIM/KyZrpv5266Z5WwObfTv5wg5
- XFk5reI5THzN9KcUFH+ljsEywCIQD7i0ow/F+EZJZaSS0S9acbiT2HEpsksnINAxhNed
- C0IkzvklzJRIFvluH9zDdWqlRHSBw32pDjoUuY3+cATax7EiP17uZlmqPOOFQU6K8XkF
- KTOp0lMTUuAhb95tuxsAzuC/m2/7nI/yzIqm4kwnkvyCx/U2Ytiz5halwfQ+Iv2hlNjG
- C+eQlj1h8Bhx43CRJMTQ3gKygumoaANpOl3038qomQK64amhKobbPpFIu8UNWEm8hLW5
- TsnQ==
+ d=1e100.net; s=20230601; t=1726138719; x=1726743519;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=8KfxXIJl6sSUrt0oCskygd0emWR47w0CtNjllXkmzZ0=;
+ b=DMPZU4SOzk2VTIJ7Udfs0pEXssVZPgGeXUlHxlpnUXurdSfg/3ib5foTkywPCVzKPU
+ Z9DDuUGnPmCxttIrGtu/dbpJwzAfed2H3r2IePpNoUG04fvWzwn4bGo4nRka3QlOnXN/
+ ZoKTwLymUqM0QxuzlLCLlCBCKCeO6qQyFqiLKJCSRUIxmiQqZObQIHjkB9VaDy9Q9IbW
+ I3FQSNtRUiPLhvAS+5a5x1Nk8EQDdFKx2BiC8KLIn+9NGjemF+XaJcvhECOODO8roJQk
+ R1a7pYmQQLgV6HVuCZhVvScX2jNi7etDvys1IFAn77qh88pgjnC+8Oj5VpcB9Hb0Wwa9
+ IKAA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUyxunMiRMwGe7Iv2snU332yV94BoHg8doGvsuA425fkVEITdmHIBfUv/uubsBno235oju7dGhWUU0=@lists.freedesktop.org,
- AJvYcCWtRt92ewXrebXUqLIGVNsWuw3pXUOFZiMQBifQvwvrOn/5f/3SWl8DOyVgrn18FvSaDRgF6ZG6XA==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxbHvG8Q2VFTS9hJx2LuYEl8YaExRrDM9DSn5yYaKsvWYriqGyC
- rgkfueioNXKr3FSKwGvmoOzJ4CmBclOkyi226N/pOEwjrkWG9muXWcq0IwHylWIKkfcZOkls5Vi
- GUnYdIoU6lG2l/FsOu5xeN3mzLRU=
-X-Google-Smtp-Source: AGHT+IF3wpG47CIG8HAng/5k1BoCwGJ5gr1ysnmhW+CYKjd/SXWivdxIHC1anfG9u4eJhD5HjtLRprmYq0Xv951tXuQ=
-X-Received: by 2002:a05:6830:6c8c:b0:710:ecf0:205d with SMTP id
- 46e09a7af769-710ecf0292cmr5578861a34.13.1726065570772; Wed, 11 Sep 2024
- 07:39:30 -0700 (PDT)
+ AJvYcCX3c9/Iu4p2VrAJ7WcsClnfkzaNhCCf8lWqC+F4aM/CJQxyZ5VLv6glOYMeONz1cPHAYYMFOBtB@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YxUbJrTCmZfaYhECwwGtQnWNMjvPxNxwKpaQEQq2kxMbL4i+A0G
+ dq3vJgxhIV02OYmnrtoKdka+gK4QQORHKtALxZjsyuPN8WCnCRUmlYHD0zKSWEwat0blj41yTxa
+ nXN28GXVKE8N/v0vQzGoGcIbkYzMeqGdPnkSr58ZRksZokTlEDl5boOjUSVt/4GI=
+X-Received: by 2002:a05:600c:4709:b0:42c:ac9f:b505 with SMTP id
+ 5b1f17b1804b1-42cdb58e130mr20444435e9.31.1726138718986; 
+ Thu, 12 Sep 2024 03:58:38 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG1kIFj2gZcJpQft3Ip9R95sfyHMqUrmQJsZC95T9uKYSfa2rNf2Foa4QJ4mM6FRnsdjjYg7Q==
+X-Received: by 2002:a05:600c:4709:b0:42c:ac9f:b505 with SMTP id
+ 5b1f17b1804b1-42cdb58e130mr20444125e9.31.1726138718419; 
+ Thu, 12 Sep 2024 03:58:38 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:c:37e0:ced3:55bd:f454:e722?
+ ([2a01:e0a:c:37e0:ced3:55bd:f454:e722])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42cae117aeesm174467035e9.6.2024.09.12.03.58.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Sep 2024 03:58:37 -0700 (PDT)
+Message-ID: <2c97cb8f-94ff-4aa6-be55-c03bcd91cc9f@redhat.com>
+Date: Thu, 12 Sep 2024 12:58:36 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/3] drm/nouveau: Add drm_panic support for nv50+
+To: Ilia Mirkin <imirkin@alum.mit.edu>
+Cc: James Jones <jajones@nvidia.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@redhat.com>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
 References: <20240906100434.1171093-1-jfalempe@redhat.com>
  <20240906100434.1171093-4-jfalempe@redhat.com>
  <CAKb7UviZ_SZyuEV3apP80oEHZZKm4mAY1pSGueSOEswvzwgdkQ@mail.gmail.com>
  <21e44532-7989-43a9-99dd-04461c346be6@nvidia.com>
  <2fb7978b-9d1f-49f1-afe0-f32cc3b6a0c0@redhat.com>
-In-Reply-To: <2fb7978b-9d1f-49f1-afe0-f32cc3b6a0c0@redhat.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Wed, 11 Sep 2024 10:39:19 -0400
-Message-ID: <CAKb7Uvh8x0z00DY_w-16voWwBbm6pRGLLMBKai-M6_8CDLQfGw@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] drm/nouveau: Add drm_panic support for nv50+
-To: Jocelyn Falempe <jfalempe@redhat.com>
-Cc: James Jones <jajones@nvidia.com>, Karol Herbst <kherbst@redhat.com>, 
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@redhat.com>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="00000000000034af6e0621d8f555"
+ <CAKb7Uvh8x0z00DY_w-16voWwBbm6pRGLLMBKai-M6_8CDLQfGw@mail.gmail.com>
+From: Jocelyn Falempe <jfalempe@redhat.com>
+In-Reply-To: <CAKb7Uvh8x0z00DY_w-16voWwBbm6pRGLLMBKai-M6_8CDLQfGw@mail.gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US, fr
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,111 +103,81 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---00000000000034af6e0621d8f555
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 11/09/2024 16:39, Ilia Mirkin wrote:
+> On Wed, Sep 11, 2024 at 10:19 AM Jocelyn Falempe <jfalempe@redhat.com 
+> <mailto:jfalempe@redhat.com>> wrote:
+> 
+>     On 06/09/2024 21:36, James Jones wrote:
+>      > Right, there are 3 iterations of block linear tiling actually.
+>     NV50 does
+>      > support scanout of block linear surfaces. All block-linear-
+>     capable GPUs
+>      > do. The 3 generations are:
+>      >
+>      > NV5x/G8x/GTXXX line: Original block size.
+>      > GFXXX(nvc0 I believe in nouveau terms)-GV100: double the block
+>     height I
+>      > believe.
+>      > GTXXX+: Same block size, but the layout within a block is subtly
+>      > different, at least as visible in CPU mappings.
+>      >
+> 
+>     I'm looking at how to check for specific chip in nouveau, and fix the
+>     tiling for other cards than Turing.
+>     It looks like in most case nouveau uses device->info.chipset, with
+>     hardcoded hex value. so for nvc0+ I should check device-
+>      >info.chipset >=
+>     0xc0 ?
+> 
+>     chipset < c0 : block_height 4, "old layout"
+>     chipset >= c0 : block_height 8, "old layout"
+>     chispet >= ?? : block_height 8, "new layout"
+> 
+>     For testing, I have at hand a GTX1650 (Turing) and an old Geforce
+>     8800GTS (Tesla?), so it's a NV92, and still uses this nv50+ code ?
+> 
+> 
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/ 
+> drivers/gpu/drm/nouveau/nvkm/engine/device/base.c#n2399 <https:// 
+> git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/ 
+> gpu/drm/nouveau/nvkm/engine/device/base.c#n2399>
+> 
+> So probably >= 0x160
+> 
+> There should also be a device->card_type which is an enum that you can 
+> use too, depending on what you have available? Set here:
+> 
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/ 
+> drivers/gpu/drm/nouveau/nvkm/engine/device/base.c#n3177 <https:// 
+> git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/ 
+> gpu/drm/nouveau/nvkm/engine/device/base.c#n3177>
+> 
+> Once you have a patch tested, ideally someone with the hardware should 
+> test on a >= fermi && < turing card.
 
-On Wed, Sep 11, 2024 at 10:19=E2=80=AFAM Jocelyn Falempe <jfalempe@redhat.c=
-om>
-wrote:
+I'm testing on my 8800 GTS.
 
-> On 06/09/2024 21:36, James Jones wrote:
-> > Right, there are 3 iterations of block linear tiling actually. NV50 doe=
-s
-> > support scanout of block linear surfaces. All block-linear-capable GPUs
-> > do. The 3 generations are:
-> >
-> > NV5x/G8x/GTXXX line: Original block size.
-> > GFXXX(nvc0 I believe in nouveau terms)-GV100: double the block height I
-> > believe.
-> > GTXXX+: Same block size, but the layout within a block is subtly
-> > different, at least as visible in CPU mappings.
-> >
->
-> I'm looking at how to check for specific chip in nouveau, and fix the
-> tiling for other cards than Turing.
-> It looks like in most case nouveau uses device->info.chipset, with
-> hardcoded hex value. so for nvc0+ I should check device->info.chipset >=
-=3D
-> 0xc0 ?
->
-> chipset < c0 : block_height 4, "old layout"
-> chipset >=3D c0 : block_height 8, "old layout"
-> chispet >=3D ?? : block_height 8, "new layout"
->
-> For testing, I have at hand a GTX1650 (Turing) and an old Geforce
-> 8800GTS (Tesla?), so it's a NV92, and still uses this nv50+ code ?
->
+The problem I have is that fb->modifier is 0, but the buffer is still 
+tiled. I found there is a nouveau_framebuffer_get_layout() which gives 
+tile_mode and kind, and works on my Tesla.
 
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/dri=
-vers/gpu/drm/nouveau/nvkm/engine/device/base.c#n2399
+So if I understand correctly, if kind != 0, there is tiling, and the 
+block size is 8 * (1 << tile_mode). (and half this on Tesla).
 
-So probably >=3D 0x160
+At least tiling is much easier on Tesla, there is no tiling inside the 
+block. In my test, block size is 4K, 16x64 pixels, tile_mode is 4, and 
+kind is 122.
 
-There should also be a device->card_type which is an enum that you can use
-too, depending on what you have available? Set here:
+I will send a v3 which works on Tesla and Turing soon.
 
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/dri=
-vers/gpu/drm/nouveau/nvkm/engine/device/base.c#n3177
+Thanks for your help.
 
-Once you have a patch tested, ideally someone with the hardware should test
-on a >=3D fermi && < turing card.
+-- 
 
-Hope this helps,
+Jocelyn
 
-  -ilia
+> 
+> Hope this helps,
+> 
+>    -ilia
 
---00000000000034af6e0621d8f555
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Wed, Sep 11, 2024 at 10:19=E2=80=AFAM =
-Jocelyn Falempe &lt;<a href=3D"mailto:jfalempe@redhat.com">jfalempe@redhat.=
-com</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D=
-"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(2=
-04,204,204);padding-left:1ex">On 06/09/2024 21:36, James Jones wrote:<br>
-&gt; Right, there are 3 iterations of block linear tiling actually. NV50 do=
-es <br>
-&gt; support scanout of block linear surfaces. All block-linear-capable GPU=
-s <br>
-&gt; do. The 3 generations are:<br>
-&gt; <br>
-&gt; NV5x/G8x/GTXXX line: Original block size.<br>
-&gt; GFXXX(nvc0 I believe in nouveau terms)-GV100: double the block height =
-I <br>
-&gt; believe.<br>
-&gt; GTXXX+: Same block size, but the layout within a block is subtly <br>
-&gt; different, at least as visible in CPU mappings.<br>
-&gt; <br>
-<br>
-I&#39;m looking at how to check for specific chip in nouveau, and fix the <=
-br>
-tiling for other cards than Turing.<br>
-It looks like in most case nouveau uses device-&gt;info.chipset, with <br>
-hardcoded hex value. so for nvc0+ I should check device-&gt;info.chipset &g=
-t;=3D <br>
-0xc0 ?<br>
-<br>
-chipset &lt; c0 : block_height 4, &quot;old layout&quot;<br>
-chipset &gt;=3D c0 : block_height 8, &quot;old layout&quot;<br>
-chispet &gt;=3D ?? : block_height 8, &quot;new layout&quot;<br>
-<br>
-For testing, I have at hand a GTX1650 (Turing) and an old Geforce <br>
-8800GTS (Tesla?), so it&#39;s a NV92, and still uses this nv50+ code ?<br><=
-/blockquote><div><br></div><div><a href=3D"https://git.kernel.org/pub/scm/l=
-inux/kernel/git/torvalds/linux.git/tree/drivers/gpu/drm/nouveau/nvkm/engine=
-/device/base.c#n2399">https://git.kernel.org/pub/scm/linux/kernel/git/torva=
-lds/linux.git/tree/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c#n2399<=
-/a><br></div><div><br></div><div>So probably &gt;=3D 0x160</div><div><br></=
-div><div>There should also be a device-&gt;card_type which is an enum that =
-you can use too, depending on what you have available? Set here:</div><div>=
-<br></div><div><a href=3D"https://git.kernel.org/pub/scm/linux/kernel/git/t=
-orvalds/linux.git/tree/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c#n3=
-177">https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tre=
-e/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c#n3177</a><br></div><div=
-><br></div><div>Once you have a patch tested, ideally someone with the hard=
-ware should test on a &gt;=3D fermi &amp;&amp; &lt; turing card.</div><div>=
-<br></div><div>Hope this helps,</div><div><br></div><div>=C2=A0 -ilia</div>=
-</div></div>
-
---00000000000034af6e0621d8f555--
