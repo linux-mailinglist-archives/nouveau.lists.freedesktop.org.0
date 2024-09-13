@@ -2,85 +2,88 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90791977979
-	for <lists+nouveau@lfdr.de>; Fri, 13 Sep 2024 09:22:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57104977ACA
+	for <lists+nouveau@lfdr.de>; Fri, 13 Sep 2024 10:16:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0E88110ECA0;
-	Fri, 13 Sep 2024 07:22:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1054310ECB7;
+	Fri, 13 Sep 2024 08:16:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="WpEQ9ISO";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=embeddedor.com header.i=@embeddedor.com header.b="eqFRaqaL";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 47A1E10ECA0
- for <nouveau@lists.freedesktop.org>; Fri, 13 Sep 2024 07:22:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1726212170;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=2ezrAtS0ZVZbGW949ONNYwIZzLcJMYqLxPpzY4tCRl0=;
- b=WpEQ9ISOWwFW/Uw1KQorejBF3l094RUm1VwrlnqvGT0eFHQpj3Nat65SP/jqy/ZH3mlL9j
- QcB+boCgSBru3wpkKaV264w8fx64T/P+w09e8363xCZnZQisBqJxNwkRa+Z1HxRRB3ddou
- 0cnIF6L1vFvVK8nUzcI/kAiBbLtkJDU=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-260-o82C9Hm4PR2rT10iJf6yDw-1; Fri, 13 Sep 2024 03:22:49 -0400
-X-MC-Unique: o82C9Hm4PR2rT10iJf6yDw-1
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-374b69e65e8so816707f8f.0
- for <nouveau@lists.freedesktop.org>; Fri, 13 Sep 2024 00:22:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726212168; x=1726816968;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2ezrAtS0ZVZbGW949ONNYwIZzLcJMYqLxPpzY4tCRl0=;
- b=sR3DHXgyvUJ4XEiPcSuJNtpWG2h6LfcyFS3IfdS/M5gT4Njezf6w8wCj3rn2atLVMt
- hTB410N9fwVIFIV2eABv2VKymSwggTw9GmDn3UaJYOXuQv7eRp/93NGahpio4gZ+MJ0I
- QsELFd0UooSwcWaKUxqltQMQtMo6AHxJPUhZy6x21AAJTFbF/BR2omK+TJrLNiQ2BErE
- EfctLbt9jQg/Ls3KDI3W1qEgC8QfUB84LVZswK/iDyvq9Or5cj9Tf7Zd6kgjidbmz+gx
- 3SDvOk5VGjNTF0p1iA4+UZJ4njuehTd87VPdhez1YpKB7c3Yhcr8ZDS/g6DOK7gyVbVb
- PIJA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVifOH5+UN5IPEzlMfroKoOm2qMtONcfDrxzgNRfrZ8OGONVjsKCaBGevOWjjHVwQyP2Pv+u2k9@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxJjMBZBaaCikpyu1ogdLABdH90pI569rmy3zMtoYFnURUxxPkd
- DDkAH48Dekq9K+HmTFNvGVu/lTtpaNFMfuhxsdQDZkQzAGmYJTIUxv0t2iRd3W19HJpCXAvNO14
- GnqYqhsGDULAybkgrYX8y0EPosUvry+BAXRSORFJhwt4CmCqZ/cJmtgShL9U5Yb8=
-X-Received: by 2002:adf:e28d:0:b0:374:b6f2:5f30 with SMTP id
- ffacd0b85a97d-378c2d1246emr3016531f8f.27.1726212168047; 
- Fri, 13 Sep 2024 00:22:48 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEZMWrlEzJh0WOtOStc18L8IoLgcwnmnI0DTnyObNM8d+Al8nGf4oKzPzWbtBSgLCYnV/aMrw==
-X-Received: by 2002:adf:e28d:0:b0:374:b6f2:5f30 with SMTP id
- ffacd0b85a97d-378c2d1246emr3016512f8f.27.1726212167531; 
- Fri, 13 Sep 2024 00:22:47 -0700 (PDT)
-Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3789567609esm16025263f8f.59.2024.09.13.00.22.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Sep 2024 00:22:47 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Jocelyn Falempe <jfalempe@redhat.com>, Ilia Mirkin
- <imirkin@alum.mit.edu>, James Jones <jajones@nvidia.com>, Karol Herbst
- <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, Danilo Krummrich
- <dakr@redhat.com>, David Airlie <airlied@gmail.com>, Daniel Vetter
- <daniel@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann
- <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-Cc: Jocelyn Falempe <jfalempe@redhat.com>
-Subject: Re: [PATCH v3 1/2] drm/panic: Add ABGR2101010 support
-In-Reply-To: <20240913071036.574782-2-jfalempe@redhat.com>
-References: <20240913071036.574782-1-jfalempe@redhat.com>
- <20240913071036.574782-2-jfalempe@redhat.com>
-Date: Fri, 13 Sep 2024 09:22:46 +0200
-Message-ID: <87h6akyq49.fsf@minerva.mail-host-address-is-not-set>
+X-Greylist: delayed 427 seconds by postgrey-1.36 at gabe;
+ Fri, 13 Sep 2024 08:16:31 UTC
+Received: from omta40.uswest2.a.cloudfilter.net
+ (omta40.uswest2.a.cloudfilter.net [35.89.44.39])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 353C010ECB7
+ for <nouveau@lists.freedesktop.org>; Fri, 13 Sep 2024 08:16:31 +0000 (UTC)
+Received: from eig-obgw-6010a.ext.cloudfilter.net ([10.0.30.248])
+ by cmsmtp with ESMTPS
+ id ovdAsGIGGvH7lp1Mqsu2Lm; Fri, 13 Sep 2024 08:09:24 +0000
+Received: from gator4166.hostgator.com ([108.167.133.22]) by cmsmtp with ESMTPS
+ id p1MpssIuqz2cCp1MpsFeaw; Fri, 13 Sep 2024 08:09:23 +0000
+X-Authority-Analysis: v=2.4 cv=Dd4RqOtW c=1 sm=1 tr=0 ts=66e3f333
+ a=1YbLdUo/zbTtOZ3uB5T3HA==:117 a=rpUMG24A1zG+UrzXDtAMsg==:17
+ a=IkcTkHD0fZMA:10 a=EaEq8P2WXUwA:10 a=7T7KSl7uo7wA:10 a=VwQbUJbxAAAA:8
+ a=1NbDYHN2ElJTStc2awIA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=Xt_RvD8W3m28Mn_h3AK8:22
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=ioUqqHWbZA3ZxtqcF1IJZFQ0PDlv9LdpcpzewA1m3Os=; b=eqFRaqaLU7ofpW1I2KdGDkAT0G
+ 86CwVyJZZA0DQhQ3D+0MTRNIk+P7tQBxWOVf7gxioiPQLlK5yLBb8kn26pVn0oiEM7raxVXb9xLV/
+ oJ2wtveKcWytzcKOn/qY4lwODhdOyyUSJujA9sAAj+NsbbdknhAslTaAnDrQeN7Y+yt+G2nfrCUBb
+ xwbLo4YNFuGVeMU0PT4xtTEwLPSxT/ot2z7WgJYOJ5kmYn8Yzyja965S95psRvpIdaxfMmdto06SY
+ UGduZDn/p6fXNtBAyIKdZ1QOgYMEU0EfY+bnDfEC67ssmTVMtTJut6sxvwEgYhvThnb093TPZBkKa
+ AQRdd36g==;
+Received: from [185.44.53.103] (port=38116 helo=[192.168.1.187])
+ by gator4166.hostgator.com with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96.2)
+ (envelope-from <gustavo@embeddedor.com>) id 1sp1Mo-003kZT-0Q;
+ Fri, 13 Sep 2024 03:09:22 -0500
+Message-ID: <ef5a8e6d-cb97-4872-901c-cf4bbec23be6@embeddedor.com>
+Date: Fri, 13 Sep 2024 10:09:17 +0200
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH][next] drm/nouveau: Avoid -Wflex-array-member-not-at-end
+ warning
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org
+References: <ZsZLFS1CsHkKjw+C@elsanto>
+Content-Language: en-US
+From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
+In-Reply-To: <ZsZLFS1CsHkKjw+C@elsanto>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
+X-AntiAbuse: Original Domain - lists.freedesktop.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - embeddedor.com
+X-BWhitelist: no
+X-Source-IP: 185.44.53.103
+X-Source-L: No
+X-Exim-ID: 1sp1Mo-003kZT-0Q
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: ([192.168.1.187]) [185.44.53.103]:38116
+X-Source-Auth: gustavo@embeddedor.com
+X-Email-Count: 22
+X-Org: HG=hgshared;ORG=hostgator;
+X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
+X-Local-Domain: yes
+X-CMAE-Envelope: MS4xfFLRjw2qHQnMed7hksmocEUQ6/P1qiS6sWKNcopHtgdk1WpAhlFTgE80bRJa8VKRB9CotnQNrlfJvbRt+IYoTyGB2iKW8gnPfMOzMKhx2JUf2SQ2ELw8
+ 9qgqgQqIeU+tA7WyzE1UNc9Amk2mYPRvllUdApYc5iAaMoJm5YAa74UjGqI1DkIqsBKM+O0wDeMAaOvGdobjrWvYB4dvFiSW6hTc0QV4r3XKSzpa4mkSCQh1
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,62 +98,80 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Jocelyn Falempe <jfalempe@redhat.com> writes:
+Hi all,
 
-Hello Jocelyn,
+Friendly ping: who can take this, please? 🙂
 
-> Add support for ABGR2101010, used by the nouveau driver.
->
-> Signed-off-by: Jocelyn Falempe <jfalempe@redhat.com>
+Thanks
+-Gustavo
+
+On 21/08/24 22:16, Gustavo A. R. Silva wrote:
+> Use the `DEFINE_RAW_FLEX()` helper for an on-stack definition of
+> a flexible structure where the size of the flexible-array member
+> is known at compile-time, and refactor the rest of the code,
+> accordingly.
+> 
+> So, with this, fix the following warning:
+> 
+> drivers/gpu/drm/nouveau/dispnv50/disp.c:779:47: warning: structure containing a flexible array member is not at the end of another structure [-Wflex-array-member-not-at-end]
+> 
+> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
 > ---
->  drivers/gpu/drm/drm_panic.c | 10 ++++++++++
->  1 file changed, 10 insertions(+)
->
-> diff --git a/drivers/gpu/drm/drm_panic.c b/drivers/gpu/drm/drm_panic.c
-> index 74412b7bf936..0a9ecc1380d2 100644
-> --- a/drivers/gpu/drm/drm_panic.c
-> +++ b/drivers/gpu/drm/drm_panic.c
-> @@ -209,6 +209,14 @@ static u32 convert_xrgb8888_to_argb2101010(u32 pix)
->  	return GENMASK(31, 30) /* set alpha bits */ | pix | ((pix >> 8) & 0x00300C03);
->  }
->  
-> +static u32 convert_xrgb8888_to_abgr2101010(u32 pix)
-> +{
-> +	pix = ((pix & 0x00FF0000) >> 14) |
-> +	      ((pix & 0x0000FF00) << 4) |
-> +	      ((pix & 0x000000FF) << 22);
-> +	return GENMASK(31, 30) /* set alpha bits */ | pix | ((pix >> 8) & 0x00300C03);
-> +}
-
-Maybe we can move this format conversion helper and the others in the
-driver to drivers/gpu/drm/drm_format_helper.c ?
-
-> +
->  /*
->   * convert_from_xrgb8888 - convert one pixel from xrgb8888 to the desired format
->   * @color: input color, in xrgb8888 format
-> @@ -242,6 +250,8 @@ static u32 convert_from_xrgb8888(u32 color, u32 format)
->  		return convert_xrgb8888_to_xrgb2101010(color);
->  	case DRM_FORMAT_ARGB2101010:
->  		return convert_xrgb8888_to_argb2101010(color);
-> +	case DRM_FORMAT_ABGR2101010:
-> +		return convert_xrgb8888_to_abgr2101010(color);
->  	default:
->  		WARN_ONCE(1, "Can't convert to %p4cc\n", &format);
->  		return 0;
-> -- 
-> 2.46.0
->
-
-
-The patch looks good to me.
-
-Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
-
--- 
-Best regards,
-
-Javier Martinez Canillas
-Core Platforms
-Red Hat
-
+>   drivers/gpu/drm/nouveau/dispnv50/disp.c | 20 +++++++++-----------
+>   1 file changed, 9 insertions(+), 11 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> index eed579a6c858..ddddc69640be 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> @@ -774,11 +774,9 @@ nv50_hdmi_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
+>   	struct drm_hdmi_info *hdmi = &nv_connector->base.display_info.hdmi;
+>   	union hdmi_infoframe infoframe = { 0 };
+>   	const u8 rekey = 56; /* binary driver, and tegra, constant */
+> +	DEFINE_RAW_FLEX(struct nvif_outp_infoframe_v0, args, data, 17);
+> +	const u8 data_len = 17; /* same length as in DEFINE_RAW_FLEX above. */
+>   	u32 max_ac_packet;
+> -	struct {
+> -		struct nvif_outp_infoframe_v0 infoframe;
+> -		u8 data[17];
+> -	} args = { 0 };
+>   	int ret, size;
+>   
+>   	max_ac_packet  = mode->htotal - mode->hdisplay;
+> @@ -815,29 +813,29 @@ nv50_hdmi_enable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc,
+>   		return;
+>   
+>   	/* AVI InfoFrame. */
+> -	args.infoframe.version = 0;
+> -	args.infoframe.head = nv_crtc->index;
+> +	args->version = 0;
+> +	args->head = nv_crtc->index;
+>   
+>   	if (!drm_hdmi_avi_infoframe_from_display_mode(&infoframe.avi, &nv_connector->base, mode)) {
+>   		drm_hdmi_avi_infoframe_quant_range(&infoframe.avi, &nv_connector->base, mode,
+>   						   HDMI_QUANTIZATION_RANGE_FULL);
+>   
+> -		size = hdmi_infoframe_pack(&infoframe, args.data, ARRAY_SIZE(args.data));
+> +		size = hdmi_infoframe_pack(&infoframe, args->data, data_len);
+>   	} else {
+>   		size = 0;
+>   	}
+>   
+> -	nvif_outp_infoframe(&nv_encoder->outp, NVIF_OUTP_INFOFRAME_V0_AVI, &args.infoframe, size);
+> +	nvif_outp_infoframe(&nv_encoder->outp, NVIF_OUTP_INFOFRAME_V0_AVI, args, size);
+>   
+>   	/* Vendor InfoFrame. */
+> -	memset(&args.data, 0, sizeof(args.data));
+> +	memset(args->data, 0, data_len);
+>   	if (!drm_hdmi_vendor_infoframe_from_display_mode(&infoframe.vendor.hdmi,
+>   							 &nv_connector->base, mode))
+> -		size = hdmi_infoframe_pack(&infoframe, args.data, ARRAY_SIZE(args.data));
+> +		size = hdmi_infoframe_pack(&infoframe, args->data, data_len);
+>   	else
+>   		size = 0;
+>   
+> -	nvif_outp_infoframe(&nv_encoder->outp, NVIF_OUTP_INFOFRAME_V0_VSI, &args.infoframe, size);
+> +	nvif_outp_infoframe(&nv_encoder->outp, NVIF_OUTP_INFOFRAME_V0_VSI, args, size);
+>   
+>   	nv_encoder->hdmi.enabled = true;
+>   }
