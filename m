@@ -2,76 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 742C297AFF5
-	for <lists+nouveau@lfdr.de>; Tue, 17 Sep 2024 14:09:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 49EF697DB7F
+	for <lists+nouveau@lfdr.de>; Sat, 21 Sep 2024 04:42:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 50ADC10E46E;
-	Tue, 17 Sep 2024 12:09:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2A77610E308;
+	Sat, 21 Sep 2024 02:42:45 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q3cGUsuS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EMj6IU0O";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
- [209.85.128.45])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9E47D10E059;
- Tue, 17 Sep 2024 12:08:59 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-42cb5b3c57eso54904325e9.2; 
- Tue, 17 Sep 2024 05:08:59 -0700 (PDT)
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com
+ [209.85.216.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7C73610E308
+ for <nouveau@lists.freedesktop.org>; Sat, 21 Sep 2024 02:42:44 +0000 (UTC)
+Received: by mail-pj1-f45.google.com with SMTP id
+ 98e67ed59e1d1-2d86f713557so1865277a91.2
+ for <nouveau@lists.freedesktop.org>; Fri, 20 Sep 2024 19:42:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726574938; x=1727179738; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pH+jWoS8flWyNkqg8Mnuurwbq9hALr+uwaafQVN/R5I=;
- b=Q3cGUsuSYSjNkwRYJ/e7+euj0SjDgoMQTAxc5H13vHHgQfKMSr+e2B+AltXADNPD8m
- 7bjHTZPeB+OGpcTWmIPnioF3cZPssHw1z2BKQ+MkVLGyyhZVNdOlP27o0jc5Dv4rs6kg
- 74Nmr88oJJ8b81TV3m5paeObhjpxVHSnHpPzFbIAyWSzEUETGONITuIKbNfnCTFHOoFB
- CbNgz3W17LaZCEL1gR+GmXYSeuyzZNr4GFykP+j2MH3OkhgUqLEEki4MTfz+/Zu6VUlm
- G4C1K2YgDp6nKu6A6ifAUHJsSEhEIodAxj7uxn8VVqCV9tmmRAIGTidqajVaH7JAa+B2
- OrHQ==
+ d=gmail.com; s=20230601; t=1726886564; x=1727491364; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:subject:from:content-language:to
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=h3iRr46MdhCKy1ndVWwBufftrcbcQExvonxq+jYKqew=;
+ b=EMj6IU0OTCjer6zAVQA/M/Xqk3nO1BKmYCgbj2iJZ6ZHjYVMJuRupcofxF9auPuupM
+ MLdne03lNrHXvCnR8AGn4DgLKbSiN6fiW0rx1PgupDNZ1HE6D1Xn7zy/L7TOzDzyJ0Il
+ 1anFXOpHcrTN3oFL8eMGXe2JJYnhTBIIuNjZAUvUopzCXa2UEDwqBqcjVP4iqz1dyPAh
+ urKzuxDBA20HZxzuU4C05YLquVpRnAbuEyK+HU9pm7LprM9ntxNY4W1e/m8PlUcy58Ps
+ lhDuQk29XDfZA68xmPJrSDkw8H99tpzLKc0ItfY+p40aRId/cmUFXxg/FE5J1RRToOyR
+ KQ/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726574938; x=1727179738;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pH+jWoS8flWyNkqg8Mnuurwbq9hALr+uwaafQVN/R5I=;
- b=avqXXcw1xDFdg3xYtjbf4SbM1tay2JHfm8DmcdRfUvlG1PSv2FC7NcRtIe+1JqKgc7
- C0AB+L6Cs2U4rBJ6JFK7GKLWbtR4VesAkmLHLMSWiMIVEqpvs6MB286rvjCjNBneMoY7
- +l/WcHRnHeNH6TqKSg3Fmb+GAERb60xGIaMZ29F37KTxuw4BDwEY59uboqql/1KC7gKR
- KQr/tM63Xu3YbXq9bdhh2HhnScB2AHBQQsUmBerSMPwv3dIPgao+G4KFITM60RwgGAnn
- kBFR0I4Ix0IW1L+H2ylf8mzoxJ6dc8bEte3ZcCw+qIGUNJDfLYnVSJAqR2gmp8SltpPZ
- y3mw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUZEhQCYYDwK9gITjb4bwxWYRUCn4hXyNlX8ChESUK89WBW0Ud2bmYfxvZ+5ob/h5zYqkX3l0xEKGg=@lists.freedesktop.org,
- AJvYcCV6jXzV1L76aHOCQH8Zn5PBmqTdhaSUtrVInsyBlRKTTMhlACAFWEM1Fv7oa2V2yazh6CViZrftJA==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yxxo0o+/A8IwtkSYRzlU0ARSrNjW9AxlWxWydIp2DjkP1NiJ/w5
- GgtfH+h6yEMGPQ5LJvrTl04nPh1osfnv+C9WfI1TlZ0HYxV4wfkjjR71DHQs
-X-Google-Smtp-Source: AGHT+IFoV/GynBdMrloJuKhB9PFQ2VToiezwKU/krQ84DC9QRRrz4ERZNzhlMoDWpSd71SLM4d6iOQ==
-X-Received: by 2002:a05:600c:1d24:b0:42c:bf79:78f7 with SMTP id
- 5b1f17b1804b1-42cdb591224mr138614105e9.32.1726574937547; 
- Tue, 17 Sep 2024 05:08:57 -0700 (PDT)
-Received: from localhost
- (craw-09-b2-v4wan-169726-cust2117.vm24.cable.virginm.net. [92.238.24.70])
+ d=1e100.net; s=20230601; t=1726886564; x=1727491364;
+ h=content-transfer-encoding:subject:from:content-language:to
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=h3iRr46MdhCKy1ndVWwBufftrcbcQExvonxq+jYKqew=;
+ b=Gs1pxZhzJXaTXcKba4u6HOCIAUU/k4YHEocpgfKiXcoBkw/9OjOXkOs+px55AmdQAG
+ 7JfIZrpUAwiwM3HFZVUHS8lM00pjsPy4epKRDS8F1v3TK5+slI55fo6wb8Rdq9FVNgzB
+ 3dzaqK4OZkMrvT/7n62P1cr14eu4zL0h5ZuOrhfutNEyek0NtNtxKG36Mu05xIVfs/Iv
+ ICXQJCxo+5ghjtEswQGp+Ufbg6czjG4cwmGu97MZBWtja5xI2+wEtazmS7+s2VsptBRE
+ SwzHnqqnfkZDY3LnmTctdH6hztmlvKNuNAwKVtDV8G9gATjEEOdxqJKsdS+J3PZ0OClN
+ exqQ==
+X-Gm-Message-State: AOJu0YyQMPZFup29dSeBkXHdLDA3OX685yHvoHB9l3DF1K2A4k/PNeTB
+ uSaD2F47Q+QoTWsv2OwphKbdjvX/Xjy6ooIBWt3MSdvgatSA0yM0eypU/nDi
+X-Google-Smtp-Source: AGHT+IH5hmZCKO3HxQQ7feHYx/AvwKTT2lefVxc4dn7DYNplnkzMbSjJgyhIC30vHjWmp2jDDDhpRw==
+X-Received: by 2002:a17:90a:e2d7:b0:2d8:898c:3e9b with SMTP id
+ 98e67ed59e1d1-2dd80c960f3mr5414984a91.25.1726886563545; 
+ Fri, 20 Sep 2024 19:42:43 -0700 (PDT)
+Received: from ?IPV6:2406:2d40:4124:a510::539? ([2406:2d40:4124:a510::539])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42da22b8b65sm102132515e9.8.2024.09.17.05.08.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Sep 2024 05:08:56 -0700 (PDT)
-From: Colin Ian King <colin.i.king@gmail.com>
-To: Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
- Danilo Krummrich <dakr@redhat.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
- Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-Cc: kernel-janitors@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH][next] drm/nouveau/gsp: remove extraneous ; after mutex
-Date: Tue, 17 Sep 2024 13:08:56 +0100
-Message-Id: <20240917120856.1877733-1-colin.i.king@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ 98e67ed59e1d1-2dd7f8ca487sm2740687a91.39.2024.09.20.19.42.42
+ for <nouveau@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 20 Sep 2024 19:42:43 -0700 (PDT)
+Message-ID: <db268a78-5e39-4256-975d-ab5959448617@gmail.com>
+Date: Sat, 21 Sep 2024 12:42:40 +1000
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+To: nouveau@lists.freedesktop.org
+Content-Language: en-US
+From: Jack Harrington <jackharro282@gmail.com>
+Subject: Options for xorg.conf supported by driver
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,27 +79,23 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The mutex field has two following semicolons, replace this with just
-one semicolon.
+G'day,
 
-Signed-off-by: Colin Ian King <colin.i.king@gmail.com>
----
- drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I'm configuring my xorg.conf to set my dGPU as the main GPU because my 
+laptop's fans aren't supported and the GPU fan is really important for 
+the thermals. The CPU fan sucks air from the base, and the dGPU fan 
+pushes it out the back.
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-index 9e6f39912368..a2055f2a014a 100644
---- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-+++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-@@ -210,7 +210,7 @@ struct nvkm_gsp {
- 	} *rm;
- 
- 	struct {
--		struct mutex mutex;;
-+		struct mutex mutex;
- 		struct idr idr;
- 	} client_id;
- 
--- 
-2.39.2
+It's an Inspiron 15 7000 which isn't support by i8x as far as I could tell.
+
+So I'm wondering, is there a list of options that nouveau can understand 
+from xorg.conf, in particular something to control switcherooctl like 
+how nvidia has PrimaryGPU?
+
+I want to try out light gaming with nouveau on the 1050Ti before I mess 
+with nvidia again.
+
+Cheers,
+
+Jack Harrington
 
