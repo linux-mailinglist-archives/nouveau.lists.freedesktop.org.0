@@ -2,67 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44869CBAB6B
-	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:42:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA258CBAA06
+	for <lists+nouveau@lfdr.de>; Sat, 13 Dec 2025 13:41:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F3E6610EADD;
-	Sat, 13 Dec 2025 12:41:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 42D9A10EA29;
+	Sat, 13 Dec 2025 12:40:58 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=icloud.com header.i=@icloud.com header.b="okfSpUKp";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="qY1DL1nl";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 447 seconds by postgrey-1.36 at gabe;
- Fri, 13 Sep 2024 11:32:19 UTC
-Received: from pv50p00im-zteg10011501.me.com (pv50p00im-zteg10011501.me.com
- [17.58.6.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5B63710E14A
- for <nouveau@lists.freedesktop.org>; Fri, 13 Sep 2024 11:32:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com;
- s=1a1hai; t=1726226691;
- bh=OjgbjKJ8ePomEEUTsZ+wSrryAAYuLrVcsFsL8h9/F6k=;
- h=Message-ID:Date:MIME-Version:From:Subject:To:Content-Type;
- b=okfSpUKpwnWiJyMnIDFDX+mu5CY551yKgc50UDPEFIG7WQR95y9tjTNiVRQ2brzVf
- bSI0343NNgeEki4OE5JqXY6GhSp/DnnJzo+ktQ7oY87bQSxA1L61qUV1dTCPVpVfm9
- uZca7OPv90lzNUY4mpmTZjOop5um12+LkY+lJw9j7lmyLSU+oOvQ9/bEFbbBi6A+PU
- 64vqYTNZdBPYmynWJ0h+8vPmgRTaWJ3onqKyxgtnRpRD01ezWV00SaA8Y3wp+s3Dtb
- J1ut3DaHv2Tu7coxe6bHvHWI93eyygc73i3zFDLLdGSVmiISvDLMotbx9YhaUGrfG2
- ymClbtspfq8ZQ==
-Received: from [192.168.31.220] (pv50p00im-dlb-asmtp-mailmevip.me.com
- [17.56.9.10])
- by pv50p00im-zteg10011501.me.com (Postfix) with ESMTPSA id 1BBFE4A03E9
- for <nouveau@lists.freedesktop.org>; Fri, 13 Sep 2024 11:24:48 +0000 (UTC)
-Message-ID: <c80b78c2-fb29-4996-bf02-52149c9f3d22@icloud.com>
-Date: Fri, 13 Sep 2024 19:24:45 +0800
+X-Greylist: delayed 397 seconds by postgrey-1.36 at gabe;
+ Mon, 23 Sep 2024 20:25:57 UTC
+Received: from smtp-out.freemail.hu (fmfe01.freemail.hu [46.107.16.194])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 84A3310E2A5;
+ Mon, 23 Sep 2024 20:25:57 +0000 (UTC)
+Received: from [192.168.0.16] (catv-178-48-208-49.catv.fixed.vodafone.hu
+ [178.48.208.49])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.freemail.hu (Postfix) with ESMTPSA id 4XCDq658Pkz6b9;
+ Mon, 23 Sep 2024 22:19:14 +0200 (CEST)
+Message-ID: <114482fe-0d91-4742-8ea1-5eaef8254c45@freemail.hu>
+Date: Mon, 23 Sep 2024 22:18:05 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Kimiblock Moe <kimiblock@icloud.com>
-Subject: Locking GPU frequency on GSP-enabled cards
-To: nouveau@lists.freedesktop.org
-Content-Language: en-US, en-US-large
-Autocrypt: addr=kimiblock@icloud.com; keydata=
- xjMEZceOOxYJKwYBBAHaRw8BAQdAgSthMh6TJIM5zkC5XFh4f9iXS6FHragDj5mat+bMgY/N
- IEtpbWlibG9jayA8a2ltaWJsb2NrQGljbG91ZC5jb20+wpMEExYKADsWIQQN01jB/BRX8rHy
- TqBCp1dTTVQnKAUCZceOOwIbAwULCQgHAgIiAgYVCgkICwIEFgIDAQIeBwIXgAAKCRBCp1dT
- TVQnKCddAQCa4Yf9ZcXLcFLjr6hscb+ajN8eiAIOTD89CB/4o544AwD/dM3jFiYmEYcB4Rbn
- nP+N/WQwFImaqFJ4lmCDnjCjVQ7OOARlx447EgorBgEEAZdVAQUBAQdAAPqggEFwWz66Q52x
- mowSFknTTFEI6bbRktVcNszxASoDAQgHwngEGBYKACAWIQQN01jB/BRX8rHyTqBCp1dTTVQn
- KAUCZceOOwIbDAAKCRBCp1dTTVQnKMH8AQC8tmDpeOoO3t8HxX2y+E/dUAD+SsUARA0dlZHv
- QU9pMAEAlZIGCQcPGBZaIlUtlQLI2rgFo8ncDCUGDv+0l+swCgY=
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------a964SMoLJ0ukmsOEUSy5076d"
-X-Proofpoint-GUID: HRmolHNCpW_9blCthd4az4zAT8qLkMOU
-X-Proofpoint-ORIG-GUID: HRmolHNCpW_9blCthd4az4zAT8qLkMOU
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-13_09,2024-09-13_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- phishscore=0 mlxscore=0
- adultscore=0 bulkscore=0 mlxlogscore=568 suspectscore=0 clxscore=1011
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2308100000 definitions=main-2409130079
-X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:45 +0000
+Subject: Re: [PATCH] drm/nouveau/i2c: rename aux.c and aux.h to auxch.c and
+ auxch.h
+To: bskeggs@nvidia.com, kherbst@redhat.com, lyude@redhat.com,
+ airlied@gmail.com, daniel@ffwll.ch, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
+References: <20240603091558.35672-1-egyszeregy@freemail.hu>
+Content-Language: hu
+From: =?UTF-8?Q?Sz=C5=91ke_Benjamin?= <egyszeregy@freemail.hu>
+In-Reply-To: <20240603091558.35672-1-egyszeregy@freemail.hu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1727122755; 
+ s=20181004; d=freemail.hu;
+ h=Message-ID:Date:MIME-Version:Subject:To:References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ l=6727; bh=sJL9AOsUJH2ovHr5PYMU/rHzKoMeXVYsbJRkD0TaT5E=;
+ b=qY1DL1nlKnhWn0mpbbrefaus7g0fXuyQgL10k8YLW7EoFYdwaqOeDl6O+oQvVNmk
+ SvFiAJ5gdZeuP+2ZqTy3J1GOrOWP4HE77uQ4mJh9vyF3orZv2QtyIksudyXdHHiWwSS
+ IV7i4YkfUElv4+pFlUQ+hMRRXAOiqU/RVo1xBF0MBe/XGM1dt2UOj96u6lDp/vR7KP4
+ Tc7OCbj3h2I+07VEElEunHRpDFgZer+RV3SBLWBjiYBFtuUj3+iMnO/z36DlNJyHAj5
+ fySgG1IiRjIheKlzc5H7ikpMRfchALaeD+t1ayA7CERE4zDvIcBse8S5Oxkxvg7zwIW
+ Elv65cjloA==
+X-Mailman-Approved-At: Sat, 13 Dec 2025 12:40:52 +0000
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,68 +64,168 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------a964SMoLJ0ukmsOEUSy5076d
-Content-Type: multipart/mixed; boundary="------------4YUNKeMnmDg628bSr9QnmpsX";
- protected-headers="v1"
-From: Kimiblock Moe <kimiblock@icloud.com>
-To: nouveau@lists.freedesktop.org
-Message-ID: <c80b78c2-fb29-4996-bf02-52149c9f3d22@icloud.com>
-Subject: Locking GPU frequency on GSP-enabled cards
+2024. 06. 03. 11:15 keltezéssel, egyszeregy@freemail.hu írta:
+> From: Benjamin Szőke <egyszeregy@freemail.hu>
+> 
+> The goal is to clean-up Linux repository from AUX file names, because
+> the use of such file names is prohibited on other operating systems
+> such as Windows, so the Linux repository cannot be cloned and
+> edited on them.
+> 
+> Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
+> ---
+>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild             | 2 +-
+>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c          | 2 +-
+>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.c => auxch.c} | 2 +-
+>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.h => auxch.h} | 0
+>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c           | 2 +-
+>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c         | 2 +-
+>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c         | 2 +-
+>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c             | 2 +-
+>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c           | 2 +-
+>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c         | 2 +-
+>   drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c         | 2 +-
+>   11 files changed, 10 insertions(+), 10 deletions(-)
+>   rename drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.c => auxch.c} (99%)
+>   rename drivers/gpu/drm/nouveau/nvkm/subdev/i2c/{aux.h => auxch.h} (100%)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild
+> index 819703913a00..2c551bdc9bc9 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/Kbuild
+> @@ -25,7 +25,7 @@ nvkm-y += nvkm/subdev/i2c/busnv50.o
+>   nvkm-y += nvkm/subdev/i2c/busgf119.o
+>   nvkm-y += nvkm/subdev/i2c/bit.o
+>   
+> -nvkm-y += nvkm/subdev/i2c/aux.o
+> +nvkm-y += nvkm/subdev/i2c/auxch.o
+>   nvkm-y += nvkm/subdev/i2c/auxg94.o
+>   nvkm-y += nvkm/subdev/i2c/auxgf119.o
+>   nvkm-y += nvkm/subdev/i2c/auxgm200.o
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
+> index dd391809fef7..6c76e5e14b75 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/anx9805.c
+> @@ -24,7 +24,7 @@
+>   #define anx9805_pad(p) container_of((p), struct anx9805_pad, base)
+>   #define anx9805_bus(p) container_of((p), struct anx9805_bus, base)
+>   #define anx9805_aux(p) container_of((p), struct anx9805_aux, base)
+> -#include "aux.h"
+> +#include "auxch.h"
+>   #include "bus.h"
+>   
+>   struct anx9805_pad {
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxch.c
+> similarity index 99%
+> rename from drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c
+> rename to drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxch.c
+> index d063d0dc13c5..fafc634acbf6 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxch.c
+> @@ -24,7 +24,7 @@
+>   
+>   #include <linux/string_helpers.h>
+>   
+> -#include "aux.h"
+> +#include "auxch.h"
+>   #include "pad.h"
+>   
+>   static int
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.h b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxch.h
+> similarity index 100%
+> rename from drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.h
+> rename to drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxch.h
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
+> index 47068f6f9c55..854bb4b5fdb4 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
+> @@ -22,7 +22,7 @@
+>    * Authors: Ben Skeggs <bskeggs@redhat.com>
+>    */
+>   #define g94_i2c_aux(p) container_of((p), struct g94_i2c_aux, base)
+> -#include "aux.h"
+> +#include "auxch.h"
+>   
+>   struct g94_i2c_aux {
+>   	struct nvkm_i2c_aux base;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
+> index dab40cd8fe3a..c17d5647cb99 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgf119.c
+> @@ -19,7 +19,7 @@
+>    * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+>    * OTHER DEALINGS IN THE SOFTWARE.
+>    */
+> -#include "aux.h"
+> +#include "auxch.h"
+>   
+>   static const struct nvkm_i2c_aux_func
+>   gf119_i2c_aux = {
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
+> index 8bd1d442e465..3c5005e3b330 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
+> @@ -22,7 +22,7 @@
+>    * Authors: Ben Skeggs <bskeggs@redhat.com>
+>    */
+>   #define gm200_i2c_aux(p) container_of((p), struct gm200_i2c_aux, base)
+> -#include "aux.h"
+> +#include "auxch.h"
+>   
+>   struct gm200_i2c_aux {
+>   	struct nvkm_i2c_aux base;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
+> index 976539de4220..ab86e11e7780 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/base.c
+> @@ -22,7 +22,7 @@
+>    * Authors: Ben Skeggs
+>    */
+>   #include "priv.h"
+> -#include "aux.h"
+> +#include "auxch.h"
+>   #include "bus.h"
+>   #include "pad.h"
+>   
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
+> index 5904bc5f2d2a..cc26cd677917 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padg94.c
+> @@ -22,7 +22,7 @@
+>    * Authors: Ben Skeggs
+>    */
+>   #include "pad.h"
+> -#include "aux.h"
+> +#include "auxch.h"
+>   #include "bus.h"
+>   
+>   void
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
+> index 3bc4d0310076..1797c6c65979 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgf119.c
+> @@ -22,7 +22,7 @@
+>    * Authors: Ben Skeggs
+>    */
+>   #include "pad.h"
+> -#include "aux.h"
+> +#include "auxch.h"
+>   #include "bus.h"
+>   
+>   static const struct nvkm_i2c_pad_func
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
+> index 7d417f6a816e..5afc1bf8e798 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/padgm200.c
+> @@ -22,7 +22,7 @@
+>    * Authors: Ben Skeggs
+>    */
+>   #include "pad.h"
+> -#include "aux.h"
+> +#include "auxch.h"
+>   #include "bus.h"
+>   
+>   static void
 
---------------4YUNKeMnmDg628bSr9QnmpsX
-Content-Type: multipart/mixed; boundary="------------AVtedLXTrpRv0IphyyheoMWJ"
-
---------------AVtedLXTrpRv0IphyyheoMWJ
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-
-SGksDQoNCkkgYW0gdXNpbmcgYSBsYXB0b3Agd2l0aCA0MCBzZXJpZXMgY2FyZC4gQ3VycmVu
-dGx5IGlmIHRoZSBkaXNjcmV0ZSBHUFUgDQpzaXRzIGlkbGUgZm9yIHNvbWUgdGltZSwgdGhl
-IGRpc3BsYXkgY29ubmVjdGVkIHRvIGl0IHdpbGwgc3RhcnQgdG8gbGFnIA0KYmFkbHkuIFRo
-aXMgcHJvYmxlbSBpcyBhbHNvIHByZXNlbnQgd2hlbiBib3RoIGRpc3BsYXlzIGFyZSBjb25u
-ZWN0ZWQgdG8gDQp0aGUgTlZJRElBIEdQVSBhbmQgdXNpbmcgcHJvcHJpZXRhcnkgZHJpdmVy
-cywgYnV0IGNhbiBiZSBtaXRpZ2F0ZWQgYnkgDQpsb2NraW5nIHRoZSBHUFUgZnJlcXVlbmN5
-IHVzaW5nICJudmlkaWEtc21pIC1sZ2MgMjAwMCw0MDAwMCIuIFRoaXMgc3RvcHMgDQp0aGUg
-ZGlzY3JldGUgR1BVIGZyb20gbG93ZXJpbmcgaXRzIGNsb2NrIHNwZWVkIGFuZCByZXN1bHRz
-IGluIGEgc21vb3RoIA0KZGVza3RvcCBleHBlcmllbmNlLiBJIHdvbmRlciBpZiB0aGlzIGlz
-IHBvc3NpYmxlIHdpdGggbm91dmVhdT8gVGhhbmtzIQ0KDQotLSANCi0tDQpTaW5jZXJlbHks
-DQpLaW1pYmxvY2sNCg0K
---------------AVtedLXTrpRv0IphyyheoMWJ
-Content-Type: application/pgp-keys; name="OpenPGP_0x42A757534D542728.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x42A757534D542728.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-xjMEZceOOxYJKwYBBAHaRw8BAQdAgSthMh6TJIM5zkC5XFh4f9iXS6FHragDj5ma
-t+bMgY/NIEtpbWlibG9jayA8a2ltaWJsb2NrQGljbG91ZC5jb20+wpMEExYKADsW
-IQQN01jB/BRX8rHyTqBCp1dTTVQnKAUCZceOOwIbAwULCQgHAgIiAgYVCgkICwIE
-FgIDAQIeBwIXgAAKCRBCp1dTTVQnKCddAQCa4Yf9ZcXLcFLjr6hscb+ajN8eiAIO
-TD89CB/4o544AwD/dM3jFiYmEYcB4RbnnP+N/WQwFImaqFJ4lmCDnjCjVQ7OOARl
-x447EgorBgEEAZdVAQUBAQdAAPqggEFwWz66Q52xmowSFknTTFEI6bbRktVcNszx
-ASoDAQgHwngEGBYKACAWIQQN01jB/BRX8rHyTqBCp1dTTVQnKAUCZceOOwIbDAAK
-CRBCp1dTTVQnKMH8AQC8tmDpeOoO3t8HxX2y+E/dUAD+SsUARA0dlZHvQU9pMAEA
-lZIGCQcPGBZaIlUtlQLI2rgFo8ncDCUGDv+0l+swCgY=3D
-=3DMBfY
------END PGP PUBLIC KEY BLOCK-----
-
---------------AVtedLXTrpRv0IphyyheoMWJ--
-
---------------4YUNKeMnmDg628bSr9QnmpsX--
-
---------------a964SMoLJ0ukmsOEUSy5076d
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQQN01jB/BRX8rHyTqBCp1dTTVQnKAUCZuQg/QUDAAAAAAAKCRBCp1dTTVQnKBhi
-AQC1kN6nGgqv/3ZjgnfIwK9xdzNQmLcZjmD6Vwcth/jJ5QD9Gaod4JntlgXW+lKFs3Ip2dyRoBDC
-bhOf0vFm/Cz4KQA=
-=Leky
------END PGP SIGNATURE-----
-
---------------a964SMoLJ0ukmsOEUSy5076d--
+@Ben Skeggs
+When it will be merged? Your hints was done and ready in this renaming patch.
