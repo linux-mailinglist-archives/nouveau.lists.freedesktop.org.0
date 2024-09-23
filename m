@@ -2,51 +2,136 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23E5297E7DE
-	for <lists+nouveau@lfdr.de>; Mon, 23 Sep 2024 10:49:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D62D797ED88
+	for <lists+nouveau@lfdr.de>; Mon, 23 Sep 2024 17:01:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 47D4F10E3A9;
-	Mon, 23 Sep 2024 08:49:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D5EDD10E269;
+	Mon, 23 Sep 2024 15:01:46 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HkG+Pbj9";
+	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="f0dlcV/0";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5B60E10E3A9
- for <nouveau@lists.freedesktop.org>; Mon, 23 Sep 2024 08:49:15 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id DC8DF5C54BD;
- Mon, 23 Sep 2024 08:49:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36BA7C4CEC4;
- Mon, 23 Sep 2024 08:49:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1727081354;
- bh=G5/l2TpkIZv9P+0NWjuYkinKltb3gi3HicF6ITQg8Tk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=HkG+Pbj9we6u9RYoL3iTCjayYOPMQ+akFuRbfbGEILlFLojShyrczb3V73I1PYAHj
- 9aPyTugor9cTbpMLbDymsSTt79sQ35kEd/0ZDy0vWfxw0bKJf92+aMoVpo+7vEsXkV
- 2ZQZOldPPWsy+M1KL8xSjf9DmwbEIRX+X4c7Bpdm0ASmYepGFPETL1d6G39ELD5PYG
- xjJwzoJuPtzqcL4JmB/KQn6hBjjCgLD1P8xU/USvbIVMdOkQMsaVEV2K5wqJZ/rO68
- HykrKXux72vxA+hJyqwhS5cviXBLxUaNJ1eKQEjVI97Z8zuFNIjeWYkzmoB1fFdW0e
- pLcLp7MM7QRiQ==
-Date: Mon, 23 Sep 2024 10:49:07 +0200
-From: Danilo Krummrich <dakr@kernel.org>
-To: Zhi Wang <zhiw@nvidia.com>
-Cc: kvm@vger.kernel.org, nouveau@lists.freedesktop.org,
- alex.williamson@redhat.com, kevin.tian@intel.com, jgg@nvidia.com,
- airlied@gmail.com, daniel@ffwll.ch, acurrid@nvidia.com,
- cjia@nvidia.com, smitra@nvidia.com, ankita@nvidia.com,
- aniketa@nvidia.com, kwankhede@nvidia.com, targupta@nvidia.com,
- zhiwang@kernel.org
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on2061.outbound.protection.outlook.com [40.107.101.61])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 60F4410E269
+ for <nouveau@lists.freedesktop.org>; Mon, 23 Sep 2024 15:01:46 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=X2ILA5nJDeqOPMrfMjToePX3GMrTZ2A1zdI2pnSg6u6vBP+FddT4z/Tw2fe3DECj+dBls1IZz+q1Z7/VrU2f2zm5P3rwkpR5E7owrGllaOCwRH2ZJenqej5Qt9RR+SgnBrTSIsHYpZ7sEHU9282kUAJPaSJFGg8cD1bPna8uNSXuJNYIxlkCelMGqQjNekQMvFOe6oOzVdWRl4rulzDNZ8qQ52J4iA/384JRK3ZHl73X6nHS9tCp5rLy9/JCC1jYpXKnkT3z4JOLFlLnsNl7AP3R4hwspjyTduihtTzx3J1F01OIpf/SyBXuGMbf6lEkiu5j7RQVF0OZieZe/qyRYQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=piPxW6lZUqN2q4P9/dxbABJKjTNAmI5xHoRkI6x8/1M=;
+ b=kFYMQkKPM4+vmw4D/lpTLUtO4TQngbPpOPMVDJV+ikw4bIqrYiS99mu2vRUfqg7BzrP5LUjvCW5NMwnJ3vswXx8Rq0DQrn/T9Gat+9+NyeOO/6SX3e0j6dyneuDPZpwqiNDOf1Cdy+ftS0l7hhFH/6/TGYCeXOHrupdr5E3frDgRZ3+MoWewIlnvUhywyM0+e5BBdYGw/CUjJz2gEki0bgxS1XAkPVCNpoCt7z5Ab2j5qkcq3lWqAcqQ1H84r/pcXvdz4Vd5mo2MTnxnfdRYUkz6SdPRIjXl0ODu1XUpXKN2LWqKPgVNKN9GE6yCmj70dGKKv73pKgQQ36KosYLxvw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=piPxW6lZUqN2q4P9/dxbABJKjTNAmI5xHoRkI6x8/1M=;
+ b=f0dlcV/0GY3CxEdVcxmIfdj+z9+aHrSJ0PpB4/bC6SxHYyJR7lubjjTxcQvwasOjBVGaknEWUyldYHD5b5piFXrOh36fn0yPqocejBvrVhVrskzTEQ2BqK0XGN8lwgYmsdOtuI+Azolgj9LuSNk5WPv4dMSetnn5f6qQPbjDBAz5tsD9Y0gmeLnyOLU/4vdizhU2NrrtnfBkArpTQ6+f6lCrJs0oHOGtRXOeYrysKpAG+hrvYd7+AQWZBhVhWsZFZF7eEjssyRAUpWi0Egz3lCgb+v4QtT+6nW+HJ9k+SVDb3+E8Mlf6WP7IWobSaHr5EniyEMJxLlL7GveZlwOiFg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
+ by SJ2PR12MB8720.namprd12.prod.outlook.com (2603:10b6:a03:539::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.25; Mon, 23 Sep
+ 2024 15:01:41 +0000
+Received: from CH3PR12MB8659.namprd12.prod.outlook.com
+ ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
+ ([fe80::6eb6:7d37:7b4b:1732%4]) with mapi id 15.20.7982.022; Mon, 23 Sep 2024
+ 15:01:41 +0000
+Date: Mon, 23 Sep 2024 12:01:40 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Zhi Wang <zhiw@nvidia.com>, kvm@vger.kernel.org,
+ nouveau@lists.freedesktop.org, alex.williamson@redhat.com,
+ kevin.tian@intel.com, airlied@gmail.com, daniel@ffwll.ch,
+ acurrid@nvidia.com, cjia@nvidia.com, smitra@nvidia.com,
+ ankita@nvidia.com, aniketa@nvidia.com, kwankhede@nvidia.com,
+ targupta@nvidia.com, zhiwang@kernel.org
 Subject: Re: [RFC 00/29] Introduce NVIDIA GPU Virtualization (vGPU) Support
-Message-ID: <ZvErg51xH32b8iW6@pollux>
+Message-ID: <20240923150140.GB9417@nvidia.com>
 References: <20240922124951.1946072-1-zhiw@nvidia.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+ <ZvErg51xH32b8iW6@pollux>
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240922124951.1946072-1-zhiw@nvidia.com>
+In-Reply-To: <ZvErg51xH32b8iW6@pollux>
+X-ClientProxiedBy: BN0PR10CA0020.namprd10.prod.outlook.com
+ (2603:10b6:408:143::11) To CH3PR12MB8659.namprd12.prod.outlook.com
+ (2603:10b6:610:17c::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|SJ2PR12MB8720:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2ad14647-8e4a-4f44-6955-08dcdbe0a1cb
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?JTcn4otvl7WGzLuQ2IqZ6Bu5fFRVdxi0947AWilBDx/OaZEGdsPs0g6CEcPM?=
+ =?us-ascii?Q?rlDAWqJkROqp1ApdZcV1CG2EcLKLx9eJLCH7HSHM+GVMVzTggTc63wktRbGK?=
+ =?us-ascii?Q?MmQ2weXvWUULYRe140nt4rq6PI8P5eP/Ydu4DS8lWUC3qVoQ7ICG6LNAZx56?=
+ =?us-ascii?Q?JBsUmynrPDPtmw3wNvo2jRwmmOT6jmALB36jskNHtyxhBYYAnbiPKUzCSFqW?=
+ =?us-ascii?Q?dLxX88FazyqFoWe8PrezK/gav4KoH26WtfdrZfWKjVFyHf+TWpeidKYz/dx8?=
+ =?us-ascii?Q?FCczLtoaVeiTwQvMBzIQa3Ezwp4Sj1d4AhrhrCOfw6fF0T5RPfkJGWHS1e7q?=
+ =?us-ascii?Q?imrQH72PgUZBF+rHz+tpPSvh0L+Uy/RTqk7OVjBEY+UlbYus7rj/B5hQhykG?=
+ =?us-ascii?Q?tgT7Ju8N2G1MomrjxaAMjxI1FjsGm4iOORD8dA+2IAg0wQO2WabyAZ+OytiN?=
+ =?us-ascii?Q?EOYazai+3hOYoq6BRzm7L8n63e1M/cu6/IC49nYeqQ/G2v+wwOv/VqKf7gyV?=
+ =?us-ascii?Q?iQXXDOs3B5iayULiGy5wRRUk+d/iiT2tH8PjaUs20wtjAZqiECOnoDeqkM3I?=
+ =?us-ascii?Q?l86N3XSCheYeH8MpY1/47CJ02gdg+sR2IWgoChGraem+7bYinvi99cRJNb59?=
+ =?us-ascii?Q?3nbwwZgVh0vdSVfdHMUh9yJ8tZSu1TNFaavN4daH8iYnZUraEqxw3ff/t8Ks?=
+ =?us-ascii?Q?a8kHdJ+ALqmk5YpQJYlp1PoqwpAs5VU4bFJ2lqocxwiOlMzrlHnu8YqpKSRg?=
+ =?us-ascii?Q?ipI6LjrccH31X6imUOnE8J6D/7g96fJO/84gla4+ChGTPwzXMOzJhKdtg+U9?=
+ =?us-ascii?Q?56xvc0viKiQI2TLlJ9vUtEUP5gaXT+1hqWvmp6abEB+/xTTOzRELna9Ooju9?=
+ =?us-ascii?Q?UUEqH95T6McpABuSdj19jEQ3R+bHuiiEbA87rSseNYslnC5rzMefshl9y9UP?=
+ =?us-ascii?Q?IpJut49qnQfNqGaibALjPj9geScEK/IDudgRNvFxuvaVT4x5Twd227tRlRY7?=
+ =?us-ascii?Q?aOFFpZ4+qtg+FqLaCO+0/qMkcAqliYc9p723y4ysnj0dR/5fYYalroZJuQNb?=
+ =?us-ascii?Q?CIWr0SQ1Ghn+X5gpFkLM57MNSQC6I/fT01rrc3wYBnCiWmrhcSVhsx2b6jf5?=
+ =?us-ascii?Q?3dJhyDh0v6XsskUyQvVqlHfQhLa/r9sFGKh7BniDVMYT7m+hph5Zv47uK8dZ?=
+ =?us-ascii?Q?Zmn6OiHp3O1jQ+TZlyR6lvifszWvVfuuPr/SsnEGIioZAu6NEca/HIe/+CMn?=
+ =?us-ascii?Q?iLzm8BhhD0C2MJJpZzDLOi/aoJo/a90EBu8LSlf7ZVbPxpIk/UgvoJcFdQkF?=
+ =?us-ascii?Q?cgLIpJNOa0dk6yVoqW5mualjkE5ekpuq1t/+ENUTypbxqQ=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH3PR12MB8659.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?dvr6sx+pWm1bT9ReBbuqiVevKP9Yqbng36FDVi5dy/r7RyxNwLlfHIodIit9?=
+ =?us-ascii?Q?vGfZ4IG5DPiRJGYPgJWWBCtNzQK9eVk41eiRrrX+FtQ3Y+LaO2AjmeqDCrW3?=
+ =?us-ascii?Q?rE0by4b2ER9itJc6ruSV1jlwZjJzwXRaB0LucMrnWA3znkaVFRlIRYbQjO6a?=
+ =?us-ascii?Q?qoy47Be9G9xUfMcT3JkInWCYHGO1WXzPnWJoXDdtjX8Km3bydeTfVjfT953t?=
+ =?us-ascii?Q?3X2ECz8oSctPwRQkMAkiOg4mJqjQ9C4L6Tw9N2P+2KWkT3ypYyQp3tYjlUEK?=
+ =?us-ascii?Q?BvS85oq9IGDk8oo+PFBZxLTJrdyencz4bk14/v0nD7T6TG4Gkffz2zF7xQnk?=
+ =?us-ascii?Q?NF3pNEDVkKWO6vSRJ+8v1NdWFEZuvPq1HBjNBbNd3x5AH9aneRw0Xeg1Za7N?=
+ =?us-ascii?Q?O1/nIcPscq6bOyMUfLEFy1AiZh2Redcu/g5Ol+yfcyTstV9vLKk8bXng+eFu?=
+ =?us-ascii?Q?DLSdF/a6zQeXJygFXud82Mvcvot/sZmCgz2kpcTN/STdt7PxH+AgqVuZuG46?=
+ =?us-ascii?Q?dymJvFHB0xPS80lMAG7KOPluHqsZxgk6uDmE6NCpXFr6sZinYSgkhe7zMw7k?=
+ =?us-ascii?Q?O9prKZPcOAlrfGKvftDLLHtp+PtL+J0tllYPYt/ZHkTieurtyuI7UZOneDDc?=
+ =?us-ascii?Q?02fYeNYlQwXsomQES728diB00XL4RaLNx9NF6hxrzHsUpM9CDXiYNwtgbYAz?=
+ =?us-ascii?Q?ebw309oOjgvXDsY++Wt3xTG8YDGW0xtPMdZgddJcJDSkEa4T/tFGPWcG87yL?=
+ =?us-ascii?Q?9QR1ZjAZEkuvvlp7mcoaZ2jPDrXjidmRN/7KfwGFlER7W4hJSVEkbiihMV+J?=
+ =?us-ascii?Q?Jn4IgwJznXypASEbrFtmMeUTrt8uaIi30mXPt7DL2SCpmUAbAWzK+Q755+Sj?=
+ =?us-ascii?Q?aTk+iAIEHNwekkaGzpfSU3GPDvL70qvHj2gCyIppRkOUTOxpmWz8tHXBnmKV?=
+ =?us-ascii?Q?hQkFzHsF1aCuEgRfr++Ff/M/tOgPUArQd4+aaUHGM8/dBClJ92Zz9OanQ7gl?=
+ =?us-ascii?Q?y/YGCrhDdFM7vf72X+Tgpd30jLDnvtjP0MDNFnOBzw5qywdo0IqueApAlWfp?=
+ =?us-ascii?Q?gbj3zcOlYlISBVoctizmE9sgppOHhrBgVFAyKXALC+kkuTo2c8fmiS5Ozf5P?=
+ =?us-ascii?Q?0uVYNY/aPjwL+lW770ChJfOsl22Zj2k5pCmxfU9h/+v1cPD7+Wtg/5hQAdaJ?=
+ =?us-ascii?Q?jpfm190CXAmNcisIo3YCNloOrvLmBgNzcim2oo+8zqsWYjzvLgUKP9W28KTU?=
+ =?us-ascii?Q?heDcloLzuR7rB2s6BAp+0ayUCHPQgKbPc0WyYkQ9mrHgs2bLu0cnRtB16Itx?=
+ =?us-ascii?Q?6Fz4v/AbEiMN6JrTk4/0jMwC83W4o2R0/V1DVioD2g/m+VV12tsBK60mN+Ir?=
+ =?us-ascii?Q?ct1zL80nelaYH0BgUmCzZ06+BGBw0pCKziCq7z56JlBIwb6d/9b0DtEGr8Mq?=
+ =?us-ascii?Q?7BbHxl9nN5jbCI5iYqNBG1crY2mQLIPCZVuD7Fwy2s8QPrpKWsuKjBH7CbDg?=
+ =?us-ascii?Q?cQqeoPEsRMuT4OIThJ24Ee8c5RdTjdosiYU1OiYIOWqh/7R9ByjOnZC+kpgF?=
+ =?us-ascii?Q?YG4bB/LklQPG/2fo2nU=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2ad14647-8e4a-4f44-6955-08dcdbe0a1cb
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2024 15:01:41.5337 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Y9Z6CHg5YYW3k+zSCaq14odHccjg45/vig0orHW5h6NVfB9XPsbCxm50AD88TOCt
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8720
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,284 +146,32 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Zhi,
+On Mon, Sep 23, 2024 at 10:49:07AM +0200, Danilo Krummrich wrote:
+> > 2. Proposal for upstream
+> > ========================
+> 
+> What is the strategy in the mid / long term with this?
+> 
+> As you know, we're trying to move to Nova and the blockers with the device /
+> driver infrastructure have been resolved and we're able to move forward. Besides
+> that, Dave made great progress on the firmware abstraction side of things.
+> 
+> Is this more of a proof of concept? Do you plan to work on Nova in general and
+> vGPU support for Nova?
 
-Thanks for the very detailed cover letter.
+This is intended to be a real product that customers would use, it is
+not a proof of concept. There is alot of demand for this kind of
+simplified virtualization infrastructure in the host side. The series
+here is the first attempt at making thin host infrastructure and
+Zhi/etc are doing it with an upstream-first approach.
 
-On Sun, Sep 22, 2024 at 05:49:22AM -0700, Zhi Wang wrote:
-> 1. Background
-> =============
-> 
-> NVIDIA vGPU[1] software enables powerful GPU performance for workloads
-> ranging from graphics-rich virtual workstations to data science and AI,
-> enabling IT to leverage the management and security benefits of
-> virtualization as well as the performance of NVIDIA GPUs required for
-> modern workloads. Installed on a physical GPU in a cloud or enterprise
-> data center server, NVIDIA vGPU software creates virtual GPUs that can
-> be shared across multiple virtual machines.
-> 
-> The vGPU architecture[2] can be illustrated as follow:
-> 
->  +--------------------+    +--------------------+ +--------------------+ +--------------------+ 
->  | Hypervisor         |    | Guest VM           | | Guest VM           | | Guest VM           | 
->  |                    |    | +----------------+ | | +----------------+ | | +----------------+ | 
->  | +----------------+ |    | |Applications... | | | |Applications... | | | |Applications... | | 
->  | |  NVIDIA        | |    | +----------------+ | | +----------------+ | | +----------------+ | 
->  | |  Virtual GPU   | |    | +----------------+ | | +----------------+ | | +----------------+ | 
->  | |  Manager       | |    | |  Guest Driver  | | | |  Guest Driver  | | | |  Guest Driver  | | 
->  | +------^---------+ |    | +----------------+ | | +----------------+ | | +----------------+ | 
->  |        |           |    +---------^----------+ +----------^---------+ +----------^---------+ 
->  |        |           |              |                       |                      |           
->  |        |           +--------------+-----------------------+----------------------+---------+ 
->  |        |                          |                       |                      |         | 
->  |        |                          |                       |                      |         | 
->  +--------+--------------------------+-----------------------+----------------------+---------+ 
-> +---------v--------------------------+-----------------------+----------------------+----------+
-> | NVIDIA                  +----------v---------+ +-----------v--------+ +-----------v--------+ |
-> | Physical GPU            |   Virtual GPU      | |   Virtual GPU      | |   Virtual GPU      | |
-> |                         +--------------------+ +--------------------+ +--------------------+ |
-> +----------------------------------------------------------------------------------------------+
-> 
-> Each NVIDIA vGPU is analogous to a conventional GPU, having a fixed amount
-> of GPU framebuffer, and one or more virtual display outputs or "heads".
-> The vGPU’s framebuffer is allocated out of the physical GPU’s framebuffer
-> at the time the vGPU is created, and the vGPU retains exclusive use of
-> that framebuffer until it is destroyed.
-> 
-> The number of physical GPUs that a board has depends on the board. Each
-> physical GPU can support several different types of virtual GPU (vGPU).
-> vGPU types have a fixed amount of frame buffer, number of supported
-> display heads, and maximum resolutions. They are grouped into different
-> series according to the different classes of workload for which they are
-> optimized. Each series is identified by the last letter of the vGPU type
-> name.
-> 
-> NVIDIA vGPU supports Windows and Linux guest VM operating systems. The
-> supported vGPU types depend on the guest VM OS.
-> 
-> 2. Proposal for upstream
-> ========================
+From the VFIO side I would like to see something like this merged in
+nearish future as it would bring a previously out of tree approach to
+be fully intree using our modern infrastructure. This is a big win for
+the VFIO world.
 
-What is the strategy in the mid / long term with this?
+As a commercial product this will be backported extensively to many
+old kernels and that is harder/impossible if it isn't exclusively in
+C. So, I think nova needs to co-exist in some way.
 
-As you know, we're trying to move to Nova and the blockers with the device /
-driver infrastructure have been resolved and we're able to move forward. Besides
-that, Dave made great progress on the firmware abstraction side of things.
-
-Is this more of a proof of concept? Do you plan to work on Nova in general and
-vGPU support for Nova?
-
-> 
-> 2.1 Architecture
-> ----------------
-> 
-> Moving to the upstream, the proposed architecture can be illustrated as followings:
-> 
->                             +--------------------+ +--------------------+ +--------------------+ 
->                             | Linux VM           | | Windows VM         | | Guest VM           | 
->                             | +----------------+ | | +----------------+ | | +----------------+ | 
->                             | |Applications... | | | |Applications... | | | |Applications... | | 
->                             | +----------------+ | | +----------------+ | | +----------------+ | ... 
->                             | +----------------+ | | +----------------+ | | +----------------+ | 
->                             | |  Guest Driver  | | | |  Guest Driver  | | | |  Guest Driver  | | 
->                             | +----------------+ | | +----------------+ | | +----------------+ | 
->                             +---------^----------+ +----------^---------+ +----------^---------+ 
->                                       |                       |                      |           
->                            +--------------------------------------------------------------------+
->                            |+--------------------+ +--------------------+ +--------------------+|
->                            ||       QEMU         | |       QEMU         | |       QEMU         ||
->                            ||                    | |                    | |                    ||
->                            |+--------------------+ +--------------------+ +--------------------+|
->                            +--------------------------------------------------------------------+
->                                       |                       |                      |
-> +-----------------------------------------------------------------------------------------------+
-> |                           +----------------------------------------------------------------+  |
-> |                           |                                VFIO                            |  |
-> |                           |                                                                |  |
-> | +-----------------------+ | +------------------------+  +---------------------------------+|  |
-> | |  Core Driver vGPU     | | |                        |  |                                 ||  |
-> | |       Support        <--->|                       <---->                                ||  |
-> | +-----------------------+ | | NVIDIA vGPU Manager    |  | NVIDIA vGPU VFIO Variant Driver ||  |
-> | |    NVIDIA GPU Core    | | |                        |  |                                 ||  |
-> | |        Driver         | | +------------------------+  +---------------------------------+|  |
-> | +--------^--------------+ +----------------------------------------------------------------+  |
-> |          |                          |                       |                      |          |
-> +-----------------------------------------------------------------------------------------------+
->            |                          |                       |                      |           
-> +----------|--------------------------|-----------------------|----------------------|----------+
-> |          v               +----------v---------+ +-----------v--------+ +-----------v--------+ |
-> |  NVIDIA                  |       PCI VF       | |       PCI VF       | |       PCI VF       | |
-> |  Physical GPU            |                    | |                    | |                    | |
-> |                          |   (Virtual GPU)    | |   (Virtual GPU)    | |    (Virtual GPU)   | |
-> |                          +--------------------+ +--------------------+ +--------------------+ |
-> +-----------------------------------------------------------------------------------------------+
-> 
-> The supported GPU generations will be Ada which come with the supported
-> GPU architecture. Each vGPU is backed by a PCI virtual function.
-> 
-> The NVIDIA vGPU VFIO module together with VFIO sits on VFs, provides
-> extended management and features, e.g. selecting the vGPU types, support
-> live migration and driver warm update.
-> 
-> Like other devices that VFIO supports, VFIO provides the standard
-> userspace APIs for device lifecycle management and advance feature
-> support.
-> 
-> The NVIDIA vGPU manager provides necessary support to the NVIDIA vGPU VFIO
-> variant driver to create/destroy vGPUs, query available vGPU types, select
-> the vGPU type, etc.
-> 
-> On the other side, NVIDIA vGPU manager talks to the NVIDIA GPU core driver,
-> which provide necessary support to reach the HW functions.
-> 
-> 2.2 Requirements to the NVIDIA GPU core driver
-> ----------------------------------------------
-> 
-> The primary use case of CSP and enterprise is a standalone minimal
-> drivers of vGPU manager and other necessary components.
-> 
-> NVIDIA vGPU manager talks to the NVIDIA GPU core driver, which provide
-> necessary support to:
-> 
-> - Load the GSP firmware, boot the GSP, provide commnication channel.
-> - Manage the shared/partitioned HW resources. E.g. reserving FB memory,
->   channels for the vGPU mananger to create vGPUs.
-> - Exception handling. E.g. delivering the GSP events to vGPU manager.
-> - Host event dispatch. E.g. suspend/resume.
-> - Enumerations of HW configuration.
-> 
-> The NVIDIA GPU core driver, which sits on the PCI device interface of
-> NVIDIA GPU, provides support to both DRM driver and the vGPU manager.
-> 
-> In this RFC, the split nouveau GPU driver[3] is used as an example to
-> demostrate the requirements of vGPU manager to the core driver. The
-> nouveau driver is split into nouveau (the DRM driver) and nvkm (the core
-> driver).
-> 
-> 3 Try the RFC patches
-> -----------------------
-> 
-> The RFC supports to create one VM to test the simple GPU workload.
-> 
-> - Host kernel: https://github.com/zhiwang-nvidia/linux/tree/zhi/vgpu-mgr-rfc
-> - Guest driver package: NVIDIA-Linux-x86_64-535.154.05.run [4]
-> 
->   Install guest driver:
->   # export GRID_BUILD=1
->   # ./NVIDIA-Linux-x86_64-535.154.05.run
-> 
-> - Tested platforms: L40.
-> - Tested guest OS: Ubutnu 24.04 LTS.
-> - Supported experience: Linux rich desktop experience with simple 3D
->   workload, e.g. glmark2
-> 
-> 4 Demo
-> ------
-> 
-> A demo video can be found at: https://youtu.be/YwgIvvk-V94
-> 
-> [1] https://www.nvidia.com/en-us/data-center/virtual-solutions/
-> [2] https://docs.nvidia.com/vgpu/17.0/grid-vgpu-user-guide/index.html#architecture-grid-vgpu
-> [3] https://lore.kernel.org/dri-devel/20240613170211.88779-1-bskeggs@nvidia.com/T/
-> [4] https://us.download.nvidia.com/XFree86/Linux-x86_64/535.154.05/NVIDIA-Linux-x86_64-535.154.05.run
-> 
-> Zhi Wang (29):
->   nvkm/vgpu: introduce NVIDIA vGPU support prelude
->   nvkm/vgpu: attach to nvkm as a nvkm client
->   nvkm/vgpu: reserve a larger GSP heap when NVIDIA vGPU is enabled
->   nvkm/vgpu: set the VF partition count when NVIDIA vGPU is enabled
->   nvkm/vgpu: populate GSP_VF_INFO when NVIDIA vGPU is enabled
->   nvkm/vgpu: set RMSetSriovMode when NVIDIA vGPU is enabled
->   nvkm/gsp: add a notify handler for GSP event
->     GPUACCT_PERFMON_UTIL_SAMPLES
->   nvkm/vgpu: get the size VMMU segment from GSP firmware
->   nvkm/vgpu: introduce the reserved channel allocator
->   nvkm/vgpu: introduce interfaces for NVIDIA vGPU VFIO module
->   nvkm/vgpu: introduce GSP RM client alloc and free for vGPU
->   nvkm/vgpu: introduce GSP RM control interface for vGPU
->   nvkm: move chid.h to nvkm/engine.
->   nvkm/vgpu: introduce channel allocation for vGPU
->   nvkm/vgpu: introduce FB memory allocation for vGPU
->   nvkm/vgpu: introduce BAR1 map routines for vGPUs
->   nvkm/vgpu: introduce engine bitmap for vGPU
->   nvkm/vgpu: introduce pci_driver.sriov_configure() in nvkm
->   vfio/vgpu_mgr: introdcue vGPU lifecycle management prelude
->   vfio/vgpu_mgr: allocate GSP RM client for NVIDIA vGPU manager
->   vfio/vgpu_mgr: introduce vGPU type uploading
->   vfio/vgpu_mgr: allocate vGPU FB memory when creating vGPUs
->   vfio/vgpu_mgr: allocate vGPU channels when creating vGPUs
->   vfio/vgpu_mgr: allocate mgmt heap when creating vGPUs
->   vfio/vgpu_mgr: map mgmt heap when creating a vGPU
->   vfio/vgpu_mgr: allocate GSP RM client when creating vGPUs
->   vfio/vgpu_mgr: bootload the new vGPU
->   vfio/vgpu_mgr: introduce vGPU host RPC channel
->   vfio/vgpu_mgr: introduce NVIDIA vGPU VFIO variant driver
-> 
->  .../drm/nouveau/include/nvkm/core/device.h    |   3 +
->  .../drm/nouveau/include/nvkm/engine/chid.h    |  29 +
->  .../gpu/drm/nouveau/include/nvkm/subdev/gsp.h |   1 +
->  .../nouveau/include/nvkm/vgpu_mgr/vgpu_mgr.h  |  45 ++
->  .../nvidia/inc/ctrl/ctrl2080/ctrl2080gpu.h    |  12 +
->  drivers/gpu/drm/nouveau/nvkm/Kbuild           |   1 +
->  drivers/gpu/drm/nouveau/nvkm/device/pci.c     |  33 +-
->  .../gpu/drm/nouveau/nvkm/engine/fifo/chid.c   |  49 +-
->  .../gpu/drm/nouveau/nvkm/engine/fifo/chid.h   |  26 +-
->  .../gpu/drm/nouveau/nvkm/engine/fifo/r535.c   |   3 +
->  .../gpu/drm/nouveau/nvkm/subdev/gsp/r535.c    |  14 +-
->  drivers/gpu/drm/nouveau/nvkm/vgpu_mgr/Kbuild  |   3 +
->  drivers/gpu/drm/nouveau/nvkm/vgpu_mgr/vfio.c  | 302 +++++++++++
->  .../gpu/drm/nouveau/nvkm/vgpu_mgr/vgpu_mgr.c  | 234 ++++++++
->  drivers/vfio/pci/Kconfig                      |   2 +
->  drivers/vfio/pci/Makefile                     |   2 +
->  drivers/vfio/pci/nvidia-vgpu/Kconfig          |  13 +
->  drivers/vfio/pci/nvidia-vgpu/Makefile         |   8 +
->  drivers/vfio/pci/nvidia-vgpu/debug.h          |  18 +
->  .../nvidia/inc/ctrl/ctrl0000/ctrl0000system.h |  30 +
->  .../nvidia/inc/ctrl/ctrl2080/ctrl2080gpu.h    |  33 ++
->  .../ctrl/ctrl2080/ctrl2080vgpumgrinternal.h   | 152 ++++++
->  .../common/sdk/nvidia/inc/ctrl/ctrla081.h     | 109 ++++
->  .../nvrm/common/sdk/nvidia/inc/dev_vgpu_gsp.h | 213 ++++++++
->  .../common/sdk/nvidia/inc/nv_vgpu_types.h     |  51 ++
->  .../common/sdk/vmioplugin/inc/vmioplugin.h    |  26 +
->  .../pci/nvidia-vgpu/include/nvrm/nvtypes.h    |  24 +
->  drivers/vfio/pci/nvidia-vgpu/nvkm.h           |  94 ++++
->  drivers/vfio/pci/nvidia-vgpu/rpc.c            | 242 +++++++++
->  drivers/vfio/pci/nvidia-vgpu/vfio.h           |  43 ++
->  drivers/vfio/pci/nvidia-vgpu/vfio_access.c    | 297 ++++++++++
->  drivers/vfio/pci/nvidia-vgpu/vfio_main.c      | 511 ++++++++++++++++++
->  drivers/vfio/pci/nvidia-vgpu/vgpu.c           | 352 ++++++++++++
->  drivers/vfio/pci/nvidia-vgpu/vgpu_mgr.c       | 144 +++++
->  drivers/vfio/pci/nvidia-vgpu/vgpu_mgr.h       |  89 +++
->  drivers/vfio/pci/nvidia-vgpu/vgpu_types.c     | 466 ++++++++++++++++
->  include/drm/nvkm_vgpu_mgr_vfio.h              |  61 +++
->  37 files changed, 3702 insertions(+), 33 deletions(-)
->  create mode 100644 drivers/gpu/drm/nouveau/include/nvkm/engine/chid.h
->  create mode 100644 drivers/gpu/drm/nouveau/include/nvkm/vgpu_mgr/vgpu_mgr.h
->  create mode 100644 drivers/gpu/drm/nouveau/nvkm/vgpu_mgr/Kbuild
->  create mode 100644 drivers/gpu/drm/nouveau/nvkm/vgpu_mgr/vfio.c
->  create mode 100644 drivers/gpu/drm/nouveau/nvkm/vgpu_mgr/vgpu_mgr.c
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/Kconfig
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/Makefile
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/debug.h
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/include/nvrm/common/sdk/nvidia/inc/ctrl/ctrl0000/ctrl0000system.h
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/include/nvrm/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080gpu.h
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/include/nvrm/common/sdk/nvidia/inc/ctrl/ctrl2080/ctrl2080vgpumgrinternal.h
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/include/nvrm/common/sdk/nvidia/inc/ctrl/ctrla081.h
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/include/nvrm/common/sdk/nvidia/inc/dev_vgpu_gsp.h
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/include/nvrm/common/sdk/nvidia/inc/nv_vgpu_types.h
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/include/nvrm/common/sdk/vmioplugin/inc/vmioplugin.h
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/include/nvrm/nvtypes.h
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/nvkm.h
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/rpc.c
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/vfio.h
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/vfio_access.c
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/vfio_main.c
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/vgpu.c
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/vgpu_mgr.c
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/vgpu_mgr.h
->  create mode 100644 drivers/vfio/pci/nvidia-vgpu/vgpu_types.c
->  create mode 100644 include/drm/nvkm_vgpu_mgr_vfio.h
-> 
-> -- 
-> 2.34.1
-> 
+Jason
