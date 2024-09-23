@@ -2,68 +2,198 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 765C597DF4E
-	for <lists+nouveau@lfdr.de>; Sun, 22 Sep 2024 00:03:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 42FAE97E5F0
+	for <lists+nouveau@lfdr.de>; Mon, 23 Sep 2024 08:22:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5EF5A10E2D7;
-	Sat, 21 Sep 2024 22:02:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E2F4A10E380;
+	Mon, 23 Sep 2024 06:22:39 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Dt81y5xy";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="lFaK+Xcj";
 	dkim-atps=neutral
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
- [209.85.214.173])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2CC6610E2D7
- for <nouveau@lists.freedesktop.org>; Sat, 21 Sep 2024 22:02:58 +0000 (UTC)
-Received: by mail-pl1-f173.google.com with SMTP id
- d9443c01a7336-20570b42f24so34997615ad.1
- for <nouveau@lists.freedesktop.org>; Sat, 21 Sep 2024 15:02:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726956177; x=1727560977; darn=lists.freedesktop.org;
- h=to:date:message-id:subject:mime-version:from
- :content-transfer-encoding:from:to:cc:subject:date:message-id
- :reply-to; bh=JgL9JCjIo0JfbQVLi8+Xl++G0B3p5lOATn1IrJKEss0=;
- b=Dt81y5xyLj04xA/TPw9zaKfLXXp5UjYRFf6xJ5t8o7Q0rGtcOHFJzTJsZkEXrrI0pJ
- 3+8VRy6fRin7HcligIl3o38yf0vFVCztT4KR0XGeGIZeFnzjfpbuhvtjnf4DIxeB/b0d
- WP6wwW6rnoKkkwjELMlIfkuh4tU0dCfoJRMCMoexfMmj8AWl+JddcUZ7GV6PiAoU/v6f
- ToA+xctW3QoBoB5e6//ADeXuZDqrzXkyrw/ScjtMOHnCO8GBRkMq8r6SWxY9/5SuEwYL
- 40WU7iGpTw04aP99LeQFTaml4gmEITZYwr7BeevjGKrRS5/CM4K06FLqdUPL3alxql1P
- tGkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726956177; x=1727560977;
- h=to:date:message-id:subject:mime-version:from
- :content-transfer-encoding:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=JgL9JCjIo0JfbQVLi8+Xl++G0B3p5lOATn1IrJKEss0=;
- b=p9H7ysht5ic+zDaFa4vqEO81YKkMwJYJKdUL2W8CFms5Z5lsV7w5nlA5KtrRPHujcD
- ZH8s5+byq79PPpz6OJzvLAmjzvX9nfOOMBf92Lwd4JEaDBXLFAw8kvuF1TRisUF8a1iZ
- jtuznMUvc/V1wUw4Xr2bPvPot3i/q99feEeL0H1A5MEvVzL9Z2z8mvgJ6jSLKpNYCtZ4
- Q/uPt4LAW4TDl+VVch8TYeS2Qln6ZbH/DVRun4uBaLIshT58sNA3XXiH0cySgJef1Wp+
- eEPCKycNJY2Htwuou7x7ExbYNKBQPyLKQEDe5B0qM+vw+a0KVTXLY5Ov/VFwrjv67wiX
- W/0Q==
-X-Gm-Message-State: AOJu0YwobPD5hHo2pjY0SwfPmAv+s8DdZVSGQDkAAJ19R9+TeeUNXgtj
- un+PjJmxv2DKEn7iou7GlxPWdPVfo0WIhcfCDphCd+aea6qxKIi5+neI5w==
-X-Google-Smtp-Source: AGHT+IGWC+SIKwZxCz50mXKN0XqHW2fmOirv7uaJMDtBUj/aFVBx4TWl9vi7zYq5hGzh9G8q/G3Eug==
-X-Received: by 2002:a17:903:41c6:b0:205:410c:f3c2 with SMTP id
- d9443c01a7336-208d83f056bmr103039695ad.41.1726956177333; 
- Sat, 21 Sep 2024 15:02:57 -0700 (PDT)
-Received: from smtpclient.apple ([2001:8004:27e1:71c9:ad62:88cd:e23b:cbe4])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-207946d64dfsm112622545ad.134.2024.09.21.15.02.56
- for <nouveau@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 21 Sep 2024 15:02:56 -0700 (PDT)
-Content-Type: multipart/alternative;
- boundary=Apple-Mail-AD033388-D027-472F-BD3F-D5A52C70E772
-Content-Transfer-Encoding: 7bit
-From: Jack Harrington <jackharro282@gmail.com>
-Mime-Version: 1.0 (1.0)
-Subject: Re: Options for xorg.conf supported by driver
-Message-Id: <CAA32EA3-A8A4-4243-AC1E-DCCFE71C4E27@gmail.com>
-Date: Sun, 22 Sep 2024 08:02:54 +1000
-To: Nouveau Mailing List <nouveau@lists.freedesktop.org>
-X-Mailer: iPhone Mail (20H19)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F0D7C10E380
+ for <nouveau@lists.freedesktop.org>; Mon, 23 Sep 2024 06:22:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1727072558; x=1758608558;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=Bn0bw4Kj7cgcYcY8hNs8cXUmb865J1y8c53gEFWRtO0=;
+ b=lFaK+XcjYn39ynf0lfJll//UMF5IBqBDY647IwXa0Va7bfBVYQc8p+zs
+ xRyqy2Clj0vlERzvXThFKAbEXNjCTQasM4FFZ8qUSg5xQ6bdB+t8hu/8h
+ l60za1tmajNEU/qj54rXjJ6wTeJM1jWSGO+FrNQ7X9qwjPiymi2TNeiSm
+ mzOew/NkOZb6Z71Miq9CnjZBB5STYA1s/OMDFe6PkbH2LWKscQdGqE98d
+ 56iAT9Tt9+I9V//jtXWUfQNchGIiZpt1z/7ft5jTHhVP6objWDkk6oEuu
+ aMPvLHpS+1x3569pP+u+YcvOegHGsoJk0IQ9N+Ngg26zq8DJM2cA9d8hY g==;
+X-CSE-ConnectionGUID: 5x9EZyw+Rf69UnvJiRexCw==
+X-CSE-MsgGUID: GS/9aLJbSRW3XP3wf/RKsg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11202"; a="43473253"
+X-IronPort-AV: E=Sophos;i="6.10,250,1719903600"; d="scan'208";a="43473253"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+ by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 22 Sep 2024 23:22:38 -0700
+X-CSE-ConnectionGUID: fbloyjesS4qSxLmZSr1QOA==
+X-CSE-MsgGUID: RBskWDs0QPqPMa/ymZPM9Q==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.10,250,1719903600"; d="scan'208";a="70562006"
+Received: from orsmsx601.amr.corp.intel.com ([10.22.229.14])
+ by fmviesa006.fm.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
+ 22 Sep 2024 23:22:37 -0700
+Received: from orsmsx611.amr.corp.intel.com (10.22.229.24) by
+ ORSMSX601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Sun, 22 Sep 2024 23:22:36 -0700
+Received: from orsmsx612.amr.corp.intel.com (10.22.229.25) by
+ ORSMSX611.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Sun, 22 Sep 2024 23:22:36 -0700
+Received: from ORSEDG601.ED.cps.intel.com (10.7.248.6) by
+ orsmsx612.amr.corp.intel.com (10.22.229.25) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39 via Frontend Transport; Sun, 22 Sep 2024 23:22:36 -0700
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (104.47.70.43) by
+ edgegateway.intel.com (134.134.137.102) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.39; Sun, 22 Sep 2024 23:22:35 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=N5D7O7HW4E4+I3gDDuCdu2c4FDvnaFjPMLXB5I057LGbmWZ9UEO9p6WKsfQklbQMbspjCQlGFx6v7N3GW7lOgWKD51NUPlC9blecOp4xy8+ENNRFXrMjK5mYKLzj8RKM+g80zNGz/IvTCvMOd87I2vwFhKvCzwQzQbWGlJ+juRFez5rlc2xdIq/EhahKgwgTD/Cvgpqka6mLdAHzzKiUO0yml5GJH4uoTffbbQTfUVxhBcDkdCBYxxGOzUFT169FerjaG+zh2ZyD89/wvP6rviZd5IJN2+WFg/8xBVoslE2EB/HkmPosIlvsQCzIgO/+0JJ61IQMoqyKalD1HkFlpg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Bn0bw4Kj7cgcYcY8hNs8cXUmb865J1y8c53gEFWRtO0=;
+ b=T3K5iqhNW9aRTOOKSH6nIs2WcXgzYqmehUFkZaZ5GC5p6WJkIpWqmQXcDJWc46cp3jlH+eBRPC535rsXHEaHv1t+mjRDU2VdPG6tZ6AH52ximviNx+73Wn0ktrKyhRXElZMWicMI2RqmD9F+lptnPH3lC2Q9d6R2SaPFUwtdr7QMhsAKZm/LV3hvdIuoVwwkkebVrf9BjyjlKgRjRIA8C8R/quiWU2Y0r5B467qPt7qyME6g5IKb5ATGzqHmy3/txLxO4mZ9Z3gTgMDOfzTOcborQmjZfxuXOTGXAI8DxCEmDo0yw6IAuGWstDEDKbAzg5ppeqkRESY8hzngZTp0Lg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from BN9PR11MB5276.namprd11.prod.outlook.com (2603:10b6:408:135::18)
+ by IA1PR11MB7173.namprd11.prod.outlook.com (2603:10b6:208:41b::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.25; Mon, 23 Sep
+ 2024 06:22:33 +0000
+Received: from BN9PR11MB5276.namprd11.prod.outlook.com
+ ([fe80::b576:d3bd:c8e0:4bc1]) by BN9PR11MB5276.namprd11.prod.outlook.com
+ ([fe80::b576:d3bd:c8e0:4bc1%6]) with mapi id 15.20.7982.022; Mon, 23 Sep 2024
+ 06:22:33 +0000
+From: "Tian, Kevin" <kevin.tian@intel.com>
+To: Zhi Wang <zhiw@nvidia.com>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
+CC: "alex.williamson@redhat.com" <alex.williamson@redhat.com>,
+ "jgg@nvidia.com" <jgg@nvidia.com>, "airlied@gmail.com" <airlied@gmail.com>,
+ "daniel@ffwll.ch" <daniel@ffwll.ch>, "Currid, Andy" <acurrid@nvidia.com>,
+ "cjia@nvidia.com" <cjia@nvidia.com>, "smitra@nvidia.com" <smitra@nvidia.com>, 
+ "ankita@nvidia.com" <ankita@nvidia.com>, "aniketa@nvidia.com"
+ <aniketa@nvidia.com>, "kwankhede@nvidia.com" <kwankhede@nvidia.com>,
+ "targupta@nvidia.com" <targupta@nvidia.com>, "zhiwang@kernel.org"
+ <zhiwang@kernel.org>
+Subject: RE: [RFC 00/29] Introduce NVIDIA GPU Virtualization (vGPU) Support
+Thread-Topic: [RFC 00/29] Introduce NVIDIA GPU Virtualization (vGPU) Support
+Thread-Index: AQHbDO4JkHnxGOPNCU2lsdYB8MwR7bJk5jyQ
+Date: Mon, 23 Sep 2024 06:22:33 +0000
+Message-ID: <BN9PR11MB5276CAEC8170719F5BF4EE228C6F2@BN9PR11MB5276.namprd11.prod.outlook.com>
+References: <20240922124951.1946072-1-zhiw@nvidia.com>
+In-Reply-To: <20240922124951.1946072-1-zhiw@nvidia.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BN9PR11MB5276:EE_|IA1PR11MB7173:EE_
+x-ms-office365-filtering-correlation-id: 999bf004-2f46-43e7-2b9e-08dcdb981c11
+x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|1800799024|7416014|366016|38070700018; 
+x-microsoft-antispam-message-info: =?utf-8?B?L1ZMQjd2bzZQK3FGV2xmMkZyQ0JSYVRPdC9NUEk1YURSd1hMTHp3ek5mbk9n?=
+ =?utf-8?B?K2RrYUpMTVk4WnVlRXNwL01PSlNnNGlRajNaZC9zeE5mQVBETVdJR3JuZ2FI?=
+ =?utf-8?B?azlwSTBGUE56T2FmckFtVmJCYUo0NFFXVDNxK3N6bEpyQVpPWTVqZ1ljUFBU?=
+ =?utf-8?B?bUNvT0dKamhUcGpmMGNpN2RuWk5KYVIzSHF6YjEyeU5SWlIzNWVFQ2dPbm1Y?=
+ =?utf-8?B?Qk1sdDFla0pyWUt0MHBGekJhQlBjalRQWnVCQVhOUkhwTFpKVXNqa0RvbFlU?=
+ =?utf-8?B?REVMWmhBTmNYcXVxaDVUUGYwT3FWVUM3UEs3WFVpbmxUTlFQc2dIMW43dVJC?=
+ =?utf-8?B?Sm10Mm41akc4NEJqV1ROMFBFSmczMjVkK0wyWUFOeEp1QVNpMUJQSTA5MFI2?=
+ =?utf-8?B?bkNpM3RuUTErOEQrd0VRaCtJeUlJMUVEaFJGVkNza25qZzIyYTUyTkhlUEsx?=
+ =?utf-8?B?M0ZPY1QvK3BnMCtOVURvdG5UTlI1QUNVblVMNTVvR0pqdWNUS1JwS3lVaHIw?=
+ =?utf-8?B?T0x2MnY3dWxrQjI2UlBrdGFaQkRUdHFVM1c4SjgrZ2xxdHkvREpCcjFqVm9J?=
+ =?utf-8?B?ZEgySmFDR1Jjd3h1T3p0ckxqblp3QjdYSlhmTjByQzlGQWMwcGdkTVRIaWdI?=
+ =?utf-8?B?dWxqRGlzUmhoS1BiVE1lUFlrQU4xTkZjM2R3b0ZYeUZjQmNXZFdPV3lhcjhR?=
+ =?utf-8?B?VGFwMGRJQ0lhNmxBTGZlWmk5RVFVcndQYzdxL0JJVktDQ0xMTkFpZGpmS0dJ?=
+ =?utf-8?B?cVM1RFFDWTRDQ25sTTFKcm84WFJSNDJxdGVNQlBQVXhlcFN5K0VXalh5Nm94?=
+ =?utf-8?B?b1hXOWp4VStwWXNEald4VGFwSVFydC9ibThoZ1FMVXFwblNjYzdVK2lHL3hW?=
+ =?utf-8?B?MEIxRkUyTEx1YWJWNUQ5bUM4MWhrQlpQcExRMnkvUTlsVDByYUcxS2ppdk9B?=
+ =?utf-8?B?R3crT3ZOQjIxRWxSSTZ6UVVvTmJ1NG1YWmQ2NnhpOHNZWkVqYUx1cGt6b3Z1?=
+ =?utf-8?B?VVJXcU1teWtqdmRQODVhS1lJaHVMQ1ZNZlZPUTN2MVNONzkwYy93N0JZTU5P?=
+ =?utf-8?B?M3ZFWWZVU2ROYW16Y04zVkN4bTFiWE45dS9TWExIbFdNRFppRzd1YVVLSEdJ?=
+ =?utf-8?B?ZFNGOEZHcm5UUnplcVZxaExIUFZoTjhndmZBODNMM2Rqa2t1VWlQbFcwRFI1?=
+ =?utf-8?B?bWhxWlFrZExhTTdpVnRBNWhXWCt0OWs0K1lKTmx2SS9kdW90Y0s1YmFHc2dJ?=
+ =?utf-8?B?OTV6MlhWd1FmOUY3QkZUazJpbWtYUERMYXcra1VZOE9xK2VEMjNyWDhib1Z0?=
+ =?utf-8?B?dnh4RUsrOG8wY1FGYnFUbkhtbWNzcGMxU1dKbFFJL0RLem4xRFR6c2NOcEp4?=
+ =?utf-8?B?bExYQi9YYTg0b09rYXBTN2Z3WVVxMDFzMUxldFVnbEJuK2plL1g4RW9CNFBt?=
+ =?utf-8?B?eXJNWlNZSWdiclJkWlVMaXRCTmd3bDBjRWRveUp2bGo4NDU4bkl2cHNzZDF6?=
+ =?utf-8?B?dTludmxUanlwN0F0VzZkWGNJdmJUZkdHQ1MwUElOT1RjUVJFWENPcm9hejFW?=
+ =?utf-8?B?emZ0bXVteVZWN1RkaHM1M2pjbTU2bU1DSTJadzUrbzBlSTFHRmhnL281SjNn?=
+ =?utf-8?B?Z3Q2YS8zb2Vqb2p6aFlzUTFPQ2hUcWZ5dDk1MXZjd1ZueCtIckxqMVZEU2hE?=
+ =?utf-8?B?RXRiQ2FoUlVkcytiaXBTWGljeXM5Qm93ZGFvQnFiWjJyUnBoR0NsTUNvN2lZ?=
+ =?utf-8?B?WHRlcVZVVklzc2N0V3dIWmI0aWtQckVZcGY0SnJLU050eDl3Um5NdUFRRXZq?=
+ =?utf-8?B?MFpmbGcrcWRONmM1NXVBL0IzVkp2anJiaHdSNXhWaW5BVHhyUlIxMW5mVFNC?=
+ =?utf-8?B?N243ZXNVM0ZqcVlnd1NmZVkzMThLclIwOWREemVVcXhwUUE9PQ==?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BN9PR11MB5276.namprd11.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(7416014)(366016)(38070700018); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Njkrd2hnT0lPQVhaMTNMRGhQc2VyWTUzbjNwbHl0ZUNwV3ZJU29rdmJmUnQ5?=
+ =?utf-8?B?dWlUZEwyaDlKR2MvRk5QRFc2SkpQZXM2dS9OSDhHTXlpTGdwWmYvcnpWdDhp?=
+ =?utf-8?B?ekE5LytaRGdsSEt0dkpXSVFPVlBVc0NqSFNCM0ZDTmFvUE9ZTTBWM1VOOFlT?=
+ =?utf-8?B?VkE3U3RWbkNLb3c1WGRXZjlPTGlQUFlreW9VMkVubzZISmhQdU5LbmphcC82?=
+ =?utf-8?B?SkkwMlF2UThsWUxxREo5QW1qelpoS3BFeGZScWRXN3hQcmliYjMwaklZWkNv?=
+ =?utf-8?B?V1U2cy9UVzQrb3E4eEJkdHFTSWQ4cFJKeXBWSlRsL2x6VlBlbXpQSENZRFVZ?=
+ =?utf-8?B?UmJmWENaRHNXVjd0MGVaNDJxYlNpUHpjNVR2SnBmMFR4aHczVkhPSVg4UDJC?=
+ =?utf-8?B?UHN2M1ZPVHpmWlpGUnhvamRORldaUmRJMi9tbHB6OTVvYXRDN3dVQlFvYzNB?=
+ =?utf-8?B?MVFVaUE1aUpDZmR0OFlhRHJXaXU1bThycThXYTZuWHR4cXIwdFZIRDVzS3l2?=
+ =?utf-8?B?OFM1TE56b0g2ZGc1N3FaRjZuVXNtWjFhNTQyMzR2Mm14NXlkQlRtck56ZTVS?=
+ =?utf-8?B?UHU1VXEvUHp3WTNEMHQyTElINFpDdW16NnhkVmJVeDROeUZtek5KYm5ZdFJl?=
+ =?utf-8?B?dlJ6V0VKUjgxQ0NBak16dXA0MTJnbUJwa3BnTExzdTBFQkh5MjU1dndvWkw4?=
+ =?utf-8?B?bHE0b3VoUEVqSGNMMHZOVHVHMkgwRThXOW50VEZmTXVHLzNUNzNDMGQ5Uita?=
+ =?utf-8?B?NnZ1TGtoQVh4NXRXU0oxaEF1NDQ3ZWJLRmNPbmJuZ2pRbDJUZllvWHZKeGhV?=
+ =?utf-8?B?TGFkVWF3YVFDZ285Rkp0aXFWU2JRU0VHODBLVGlubmY3ZExDSm5QcWR5bXpN?=
+ =?utf-8?B?WmVGdVVIL1k1MGQ2SjRrak9WaXUxQmthTDQ3WUZROVBDZGVtbyttVUY5ZFdT?=
+ =?utf-8?B?eVN3TDUwcFNmSHppL2V6bWVRaEJwQkxVZjBEZnN2eE9rc09IeEp4dndOQlU3?=
+ =?utf-8?B?VmJidER1a01sT2xOV0RCZlVSbjd5TmU2di9XV3Vxdm51bzFUQzIxWUkva01O?=
+ =?utf-8?B?ajRwWmZyaC8wWnJyaFlJUitIZGpZbG5kYjcrYzV4K2Z2T3VaS0FtYllnYkxD?=
+ =?utf-8?B?SDkvWEQvcExmc0NoeCtMSGl5aytlWGt1WXVYbHJZbUJQdU5wdEs5b1NRMFhJ?=
+ =?utf-8?B?ZDg1UndoTUx5cFVmS0NGYTR6KzV2RGY0cWR2a3JXbFVHNjlUVXk3a00yMzdP?=
+ =?utf-8?B?UlJDbHhPZkxsYmFpVytCTzBZNURPRTREVGpEK3YvQUZyZmpIOWx6MGtJaERx?=
+ =?utf-8?B?dFZWUURzRFV0MUZpY0F2M1BkZFQvUzhZT1ZCV0Fsakw3eVd2TzZsdEZuU2pL?=
+ =?utf-8?B?YlFXL1MvK0NQVzNGTEZzVlFuelRqcDJMeit2dDdYaHk0Zzh0cEdCTkxtczk5?=
+ =?utf-8?B?VFZDcTdjSitNMGdiRXdjUFVzL2dKSloyR0twTGxjMitDb1BTdkZxY0ZqUDI3?=
+ =?utf-8?B?eTVHcVNnck1CNDVpWnB5OThJWGJZSjI5TTlwenVEZ3A2SHRqaXRQc290SmRw?=
+ =?utf-8?B?cHk5eWV5T1VYdm9BMjV0WmtiTS85MjRESUozR2U3eHpURHZHSHd4TzZ2WE9u?=
+ =?utf-8?B?aHd5UkRYcjVBK2pTU21wY29RdXFqZWRTcjV6TDVpNnl2bzJ6V1hkNGxGSGZy?=
+ =?utf-8?B?VjI3Ui9xRzQ3cWJhZDFnd29QYWF0aXQ4aE1YU3ZaRnhnQ2g4NklNUnRydGNJ?=
+ =?utf-8?B?YlhCMFhJeHpXNklLOEt6Z3ZGejNTWXJpb095WUVrSVpCcmt3MlNNWWNEUHYv?=
+ =?utf-8?B?bVM4dDdIMXpkcmducUFjSHRMaVV2a2Y3bDNraENsWFh4eXZ0cUhQNkY4bWpj?=
+ =?utf-8?B?ZWI4UU02QmlHNHJrOVdlVmR1QVByV2M3YTR3MHcxdTFrK2R4b01FclhmcGxS?=
+ =?utf-8?B?MGxRaENCeGVUSmsyNlNES1pOSVhkVEd1M1Y2YWFndnA1MWVFemFZTjlaRVVT?=
+ =?utf-8?B?SExhSUVXZk1OK0NBTWxaWERFLzMyM0NuZzkzdXJNZ0RZa2NZU0hiYVRIdkxm?=
+ =?utf-8?B?REhlMHI3bXRySHMxenFQemhEUmJZT0lEVVFVbkJDYUlMbTl6Y1JtdVluSGcz?=
+ =?utf-8?Q?Qq9O3e5NbcmQy2BHmS1132QhU?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BN9PR11MB5276.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 999bf004-2f46-43e7-2b9e-08dcdb981c11
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Sep 2024 06:22:33.2121 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: JzeOIYkawOZmJGZnZacQyMD1DfMwU0XL/pSCeTOtpeljAv7NRbWSIJl9w6Jv/+AcPw9fjXukuyz7x7ejRpvFag==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB7173
+X-OriginatorOrg: intel.com
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,69 +208,21 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---Apple-Mail-AD033388-D027-472F-BD3F-D5A52C70E772
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-
-
-
-G'day,
-
-Thanks for that Ilia! I'll have a look at these options.
-
-By the way, I forgot to mention that I'm running Wayland in GNOME, so I'm no=
-t sure if there's anything to be careful about there?
-
-Cheers,
- Jack Harrington.=
-
---Apple-Mail-AD033388-D027-472F-BD3F-D5A52C70E772
-Content-Type: text/html;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
-utf-8"></head><body dir=3D"auto"><div dir=3D"ltr"><meta http-equiv=3D"conten=
-t-type" content=3D"text/html; charset=3Dutf-8"><div dir=3D"ltr"><meta http-e=
-quiv=3D"content-type" content=3D"text/html; charset=3Dutf-8"><div dir=3D"ltr=
-"><meta http-equiv=3D"content-type" content=3D"text/html; charset=3Dutf-8"><=
-br><br><div dir=3D"ltr"><p style=3D"margin: 0px 0px 7.5px; font-style: norma=
-l; font-variant-caps: normal; font-stretch: normal; font-size: 14px; line-he=
-ight: normal; font-family: Verdana; font-size-adjust: none; font-kerning: au=
-to; font-variant-alternates: normal; font-variant-ligatures: normal; font-va=
-riant-numeric: normal; font-variant-east-asian: normal; font-variant-positio=
-n: normal; font-feature-settings: normal; font-optical-sizing: auto; font-va=
-riation-settings: normal;">G'day,</p><p style=3D"margin: 0px 0px 24px; font-=
-style: normal; font-variant-caps: normal; font-stretch: normal; font-size: 1=
-4px; line-height: normal; font-family: Verdana; font-size-adjust: none; font=
--kerning: auto; font-variant-alternates: normal; font-variant-ligatures: nor=
-mal; font-variant-numeric: normal; font-variant-east-asian: normal; font-var=
-iant-position: normal; font-feature-settings: normal; font-optical-sizing: a=
-uto; font-variation-settings: normal;">Thanks for that Ilia! I'll have a loo=
-k at these options.</p><p style=3D"margin: 0px 0px 24px; font-style: normal;=
- font-variant-caps: normal; font-stretch: normal; font-size: 14px; line-heig=
-ht: normal; font-family: Verdana; font-size-adjust: none; font-kerning: auto=
-; font-variant-alternates: normal; font-variant-ligatures: normal; font-vari=
-ant-numeric: normal; font-variant-east-asian: normal; font-variant-position:=
- normal; font-feature-settings: normal; font-optical-sizing: auto; font-vari=
-ation-settings: normal;">By the way, I forgot to mention that I'm running Wa=
-yland in GNOME, so I'm not sure if there's anything to be careful about ther=
-e?</p><p style=3D"margin: 0px; font-style: normal; font-variant-caps: normal=
-; font-stretch: normal; font-size: 19px; line-height: normal; font-family: G=
-eorgia; font-size-adjust: none; font-kerning: auto; font-variant-alternates:=
- normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-=
-variant-east-asian: normal; font-variant-position: normal; font-feature-sett=
-ings: normal; font-optical-sizing: auto; font-variation-settings: normal;"><=
-span style=3D"font-style: italic;">Cheers,</span></p><p style=3D"margin: 0px=
- 0px 36px; font-style: normal; font-variant-caps: normal; font-stretch: norm=
-al; font-size: 24px; line-height: normal; font-family: Georgia; font-size-ad=
-just: none; font-kerning: auto; font-variant-alternates: normal; font-varian=
-t-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: n=
-ormal; font-variant-position: normal; font-feature-settings: normal; font-op=
-tical-sizing: auto; font-variation-settings: normal;"><span style=3D"font-st=
-yle: italic;">&nbsp;Jack Harrington.</span></p></div></div></div></div></bod=
-y></html>=
-
---Apple-Mail-AD033388-D027-472F-BD3F-D5A52C70E772--
+PiBGcm9tOiBaaGkgV2FuZyA8emhpd0BudmlkaWEuY29tPg0KPiBTZW50OiBTdW5kYXksIFNlcHRl
+bWJlciAyMiwgMjAyNCA4OjQ5IFBNDQo+IA0KWy4uLl0NCj4gDQo+IFRoZSBOVklESUEgdkdQVSBW
+RklPIG1vZHVsZSB0b2dldGhlciB3aXRoIFZGSU8gc2l0cyBvbiBWRnMsIHByb3ZpZGVzDQo+IGV4
+dGVuZGVkIG1hbmFnZW1lbnQgYW5kIGZlYXR1cmVzLCBlLmcuIHNlbGVjdGluZyB0aGUgdkdQVSB0
+eXBlcywgc3VwcG9ydA0KPiBsaXZlIG1pZ3JhdGlvbiBhbmQgZHJpdmVyIHdhcm0gdXBkYXRlLg0K
+PiANCj4gTGlrZSBvdGhlciBkZXZpY2VzIHRoYXQgVkZJTyBzdXBwb3J0cywgVkZJTyBwcm92aWRl
+cyB0aGUgc3RhbmRhcmQNCj4gdXNlcnNwYWNlIEFQSXMgZm9yIGRldmljZSBsaWZlY3ljbGUgbWFu
+YWdlbWVudCBhbmQgYWR2YW5jZSBmZWF0dXJlDQo+IHN1cHBvcnQuDQo+IA0KPiBUaGUgTlZJRElB
+IHZHUFUgbWFuYWdlciBwcm92aWRlcyBuZWNlc3Nhcnkgc3VwcG9ydCB0byB0aGUgTlZJRElBIHZH
+UFUgVkZJTw0KPiB2YXJpYW50IGRyaXZlciB0byBjcmVhdGUvZGVzdHJveSB2R1BVcywgcXVlcnkg
+YXZhaWxhYmxlIHZHUFUgdHlwZXMsIHNlbGVjdA0KPiB0aGUgdkdQVSB0eXBlLCBldGMuDQo+IA0K
+PiBPbiB0aGUgb3RoZXIgc2lkZSwgTlZJRElBIHZHUFUgbWFuYWdlciB0YWxrcyB0byB0aGUgTlZJ
+RElBIEdQVSBjb3JlIGRyaXZlciwNCj4gd2hpY2ggcHJvdmlkZSBuZWNlc3Nhcnkgc3VwcG9ydCB0
+byByZWFjaCB0aGUgSFcgZnVuY3Rpb25zLg0KPiANCg0KSSdtIG5vdCBzdXJlIFZGSU8gaXMgdGhl
+IHJpZ2h0IHBsYWNlIHRvIGhvc3QgdGhlIE5WSURJQSB2R1BVIG1hbmFnZXIuIA0KSXQncyB2ZXJ5
+IE5WSURJQSBzcGVjaWZpYyBhbmQgbmF0dXJhbGx5IGZpdCBpbiB0aGUgUEYgZHJpdmVyLg0KDQpU
+aGUgVkZJTyBzaWRlIHNob3VsZCBmb2N1cyBvbiB3aGF0J3MgbmVjZXNzYXJ5IGZvciBtYW5hZ2lu
+ZyB1c2Vyc3BhY2UNCmFjY2VzcyB0byB0aGUgVkYgaHcsIGkuZS4gcGF0Y2gyOS4NCg==
